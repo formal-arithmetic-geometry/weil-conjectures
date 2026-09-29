@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Defs
 
 /-!
@@ -79,7 +80,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] {s : Scheme.{u}}
+  [Abelian.HasFunctorialFlatResolution A] [DerivedBraiding A] {s : Scheme.{u}}
 
 /-- A correspondence from `(X, K)` to `(Y, L)`: a geometric scheme `C` over the base `s`,
 two legs `c₁ : C ⟶ Y`, `c₂ : C ⟶ X` over `s` — the blueprint's `c = (c₁, c₂) : C ⟶ Y × X`,
@@ -168,6 +169,7 @@ noncomputable def intersectionStr (c : Correspondence aX aY K L)
     (d : Correspondence aY aX L K) : c.intersection d ⟶ s :=
   pullback.fst c.toProd d.toProdSwap ≫ c.str
 
+omit [DerivedBraiding A] in
 /-- The fixed scheme is the pullback of the support map along the diagonal:
 
 ```
@@ -181,21 +183,25 @@ noncomputable def intersectionStr (c : Correspondence aX aY K L)
 is Cartesian, the equaliser of `c₁` and `c₂` being `C ×_{X × X} X`
 (part of blueprint `sk-d-corr`). -/
 lemma isPullback_fixι_toProd (c : Correspondence aX aX K K) :
-    IsPullback c.fixι (c.fixι ≫ c.fst) c.toProd (pullback.diagonal aX) := by
-  have hc : c.fixι ≫ c.fst = c.fixι ≫ c.snd := equalizer.condition _ _
-  have w : c.fixι ≫ c.toProd = (c.fixι ≫ c.fst) ≫ pullback.diagonal aX := by
-    apply pullback.hom_ext <;> simp [toProd, hc]
-  refine IsPullback.of_isLimit (PullbackCone.IsLimit.mk w
-    (fun t ↦ equalizer.lift t.fst ?_) (fun t ↦ equalizer.lift_ι _ _) (fun t ↦ ?_)
-    (fun t m h₁ _ ↦ equalizer.hom_ext (by simpa [fixι] using h₁)))
-  · have h₁ := t.condition =≫ pullback.fst aX aX
-    have h₂ := t.condition =≫ pullback.snd aX aX
-    simp only [Category.assoc, toProd, pullback.lift_fst, pullback.lift_snd,
-      pullback.diagonal_fst, pullback.diagonal_snd] at h₁ h₂
-    rw [h₁, h₂]
-  · have h₁ := t.condition =≫ pullback.fst aX aX
-    simp only [Category.assoc, toProd, pullback.lift_fst, pullback.diagonal_fst] at h₁
-    simp [fixι, h₁]
+    IsPullback c.fixι (c.fixι ≫ c.fst) c.toProd (pullback.diagonal aX) :=
+  isPullback_equalizer_ι_diagonal c.fst c.snd _
+
+omit [DerivedBraiding A] in
+/-- The structure morphism of the intersection support, read through the first projection
+of `Y × X`. -/
+@[reassoc]
+lemma pullback_fst_comp_toProd_comp_fst_comp (c : Correspondence aX aY K L)
+    (d : Correspondence aY aX L K) :
+    pullback.fst c.toProd d.toProdSwap ≫ c.toProd ≫ pullback.fst aY aX ≫ aY =
+      c.intersectionStr d := by
+  simp [intersectionStr, toProd, c.fst_comp]
+
+omit [DerivedBraiding A] in
+/-- The structure morphism of the fixed scheme, read through the support map and the first
+projection of `X × X`. -/
+lemma fixι_comp_toProd_comp_fst_comp (c : Correspondence aX aX K K) :
+    c.fixι ≫ c.toProd ≫ pullback.fst aX aX ≫ aX = c.fixStr := by
+  simp [fixStr, toProd, c.fst_comp]
 
 /-- The coefficient map of `AlgebraicGeometry.ProEtale.Correspondence.ofEnd`: the
 endomorphism `v` read through the comparisons `L(𝟙)^* K ≃ K ≃ 𝟙^! K`. -/

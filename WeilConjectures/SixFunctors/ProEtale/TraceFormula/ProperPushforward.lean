@@ -24,6 +24,9 @@ integral of the trace class.
 - `AlgebraicGeometry.ProEtale.ProperPushforwardDiagram`: a proper pushforward diagram.
 - `AlgebraicGeometry.ProEtale.ProperPushforwardDiagram.fixMap`: the induced map
   `h : Fix(c) ⟶ Fix(b)` on fixed schemes.
+- `AlgebraicGeometry.ProEtale.ProperPushforwardDiagram.pushforwardCoeff`: the pushed
+  coefficient map `[f, g]_! u = δ ∘ Rg_* u ∘ γ`, with `γ = pushforwardCoeffUnit` and
+  `δ = pushforwardCoeffCounit`.
 - `AlgebraicGeometry.ProEtale.ProperPushforwardDiagram.pushforwardCorrespondence`: the
   pushed correspondence `(D, b, [f, g]_! u)` (blueprint `sk-d-proper-pushforward`).
 
@@ -46,12 +49,12 @@ fixed schemes are equalisers and the two leg relations force `g` to carry `Fix(c
 and its two characterising identities are `fixMap_ι` and `fixMap_str`.
 
 The coefficient map `pushforwardCoeff` of `pushforwardCorrespondence` is the composite
-`δ ∘ Rg_* u ∘ γ` of the adjunctions of `Lg^* ⊣ Rg_*`, `Lf^* ⊣ Rf_*`, `Rc_{1!} ⊣ c₁^!` and
+`δ ∘ Rg_* u ∘ γ` of `pushforwardCoeffUnit` (`γ`) and `pushforwardCoeffCounit` (`δ`), built
+from the adjunctions of `Lg^* ⊣ Rg_*`, `Lf^* ⊣ Rf_*`, `Rc_{1!} ⊣ c₁^!` and
 `Rb_{1!} ⊣ b₁^!` with the package fields `properComparison` (for `f` and `g`) and
 `lowerShriekComp`, so it needs `g` proper and `g ≫ b₁` compactifiable; both are fields
 of `ProperPushforwardDiagram`. The trace class of the pushed correspondence needs `Rf_* K`
-in `Dᵇctf`, which the package does not derive (`Dᵇctf` is not assumed closed under
-isomorphisms), so the compatibility theorem takes it as the hypothesis `hK'`.
+in `Dᵇctf`, which is `GeometricOperations.ctf_lowerStar`.
 
 Properness of `h`, which the blueprint deduces from properness of `f` and `g` by factoring
 `h` through `C ×_D Fix(b)`, is taken as an instance hypothesis, as is the compactification
@@ -70,7 +73,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] {s X : Scheme.{u}} {aX : X ⟶ s}
+  [Abelian.HasFunctorialFlatResolution A] [DerivedBraiding A] {s X : Scheme.{u}} {aX : X ⟶ s}
   {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
 
 /-- A *proper pushforward diagram* on an endocorrespondence `(C, c, u)` on `(X, K)`: a
@@ -136,6 +139,7 @@ namespace ProperPushforwardDiagram
 
 variable {c : Correspondence aX aX K K} (P : ProperPushforwardDiagram c)
 
+omit [DerivedBraiding A] in
 @[simp]
 lemma g_comp_str : P.g ≫ P.str = c.str := by
   rw [← P.fst_comp, ← Category.assoc, P.g_fst, Category.assoc, P.f_comp, c.fst_comp]
@@ -149,40 +153,51 @@ noncomputable def fixMap : c.fix ⟶ equalizer P.fst P.snd :=
     rw [Category.assoc, Category.assoc, P.g_fst, P.g_snd, ← Category.assoc, ← Category.assoc,
       h]
 
+omit [DerivedBraiding A] in
 @[simp]
 lemma fixMap_ι : P.fixMap ≫ equalizer.ι P.fst P.snd = c.fixι ≫ P.g :=
   equalizer.lift_ι _ _
 
+omit [DerivedBraiding A] in
 @[simp]
 lemma fixMap_str : P.fixMap ≫ equalizer.ι P.fst P.snd ≫ P.str = c.fixStr := by
   rw [← Category.assoc, fixMap_ι, Category.assoc, P.g_comp_str, Correspondence.fixStr]
 
-/-- The coefficient map `[f, g]_! u = δ ∘ Rg_* u ∘ γ : b₂^* K' ⟶ b₁^! K'` of the pushed
-correspondence, where `K' = Rf_* K`,
+/-- The support map `b = (b₁, b₂) : D ⟶ Y ×_s Y` of the target. -/
+noncomputable def toProd : P.supp ⟶ pullback P.tgtStr P.tgtStr :=
+  pullback.lift P.fst P.snd (P.fst_comp.trans P.snd_comp.symm)
 
-`γ : b₂^* Rf_* K ⟶ Rg_* g^* b₂^* Rf_* K ≃ Rg_* c₂^* f^* Rf_* K ⟶ Rg_* c₂^* K`
+/-- The first half `γ : b₂^* Rf_* K ⟶ Rg_* c₂^* K` of the pushed coefficient map: the
+composite
 
-is the unit of `g^* ⊣ Rg_*` followed by the leg relation and the counit of `f^* ⊣ Rf_*`,
-and `δ : Rg_* c₁^! K ⟶ b₁^! K'` is the exceptional adjoint of
+`b₂^* Rf_* K ⟶ Rg_* g^* b₂^* Rf_* K ≃ Rg_* c₂^* f^* Rf_* K ⟶ Rg_* c₂^* K`
 
-`Rb_{1!} Rg_* c₁^! K ≃ Rf_! Rc_{1!} c₁^! K ⟶ Rf_! K ≃ K'`,
-
-properness identifying `Rg_* = Rg_!` and `Rf_* = Rf_!`. -/
-noncomputable def pushforwardCoeff (G : GeometricOperations A s) :
+of the unit of `g^* ⊣ Rg_*`, the leg relation and the counit of `f^* ⊣ Rf_*`
+(part of blueprint `sk-d-proper-pushforward`). -/
+noncomputable def pushforwardCoeffUnit :
     ((upperStar A P.snd).leftDerivedFunctor).obj
         (((lowerStar A P.f).rightDerivedFunctor).obj K) ⟶
-      (rightDerivedUpperShriek A P.fst).obj
-        (((lowerStar A P.f).rightDerivedFunctor).obj K) :=
-  have : HasCompactification (c.fst ≫ P.f) := P.g_fst ▸ inferInstance
-  -- `γ : b₂^* Rf_* K ⟶ Rg_* c₂^* K`
-  ((derivedUpperStarLowerStarAdjunction A P.g).unit.app _ ≫
+      ((lowerStar A P.g).rightDerivedFunctor).obj
+        (((upperStar A c.snd).leftDerivedFunctor).obj K) :=
+  (derivedUpperStarLowerStarAdjunction A P.g).unit.app _ ≫
     ((lowerStar A P.g).rightDerivedFunctor).map
       (((leftDerivedUpperStarComp A P.g P.snd).symm ≪≫ leftDerivedUpperStarCongr A P.g_snd ≪≫
           leftDerivedUpperStarComp A c.snd P.f).hom.app _ ≫
         ((upperStar A c.snd).leftDerivedFunctor).map
-          ((derivedUpperStarLowerStarAdjunction A P.f).counit.app K))) ≫
-  ((lowerStar A P.g).rightDerivedFunctor).map c.coeff ≫
-  -- `δ : Rg_* c₁^! K ⟶ b₁^! Rf_* K`
+          ((derivedUpperStarLowerStarAdjunction A P.f).counit.app K))
+
+/-- The second half `δ : Rg_* c₁^! K ⟶ b₁^! Rf_* K` of the pushed coefficient map: the
+exceptional adjoint of
+
+`Rb_{1!} Rg_* c₁^! K ≃ Rf_! Rc_{1!} c₁^! K ⟶ Rf_! K ≃ Rf_* K`,
+
+properness identifying `Rg_* = Rg_!` and `Rf_* = Rf_!`
+(part of blueprint `sk-d-proper-pushforward`). -/
+noncomputable def pushforwardCoeffCounit (G : GeometricOperations A s) :
+    ((lowerStar A P.g).rightDerivedFunctor).obj ((rightDerivedUpperShriek A c.fst).obj K) ⟶
+      (rightDerivedUpperShriek A P.fst).obj
+        (((lowerStar A P.f).rightDerivedFunctor).obj K) :=
+  have : HasCompactification (c.fst ≫ P.f) := P.g_fst ▸ inferInstance
   (rightDerivedUpperShriekAdjunction A P.fst).homEquiv _ _
     ((rightDerivedLowerShriek A P.fst).map ((G.properComparison P.g).inv.app _) ≫
       (G.lowerShriekComp P.g P.fst ≪≫ lowerShriekCongr P.g_fst ≪≫
@@ -190,6 +205,17 @@ noncomputable def pushforwardCoeff (G : GeometricOperations A s) :
       (rightDerivedLowerShriek A P.f).map
         ((rightDerivedUpperShriekAdjunction A c.fst).counit.app K) ≫
       (G.properComparison P.f).hom.app K)
+
+/-- The coefficient map `[f, g]_! u = δ ∘ Rg_* u ∘ γ : b₂^* K' ⟶ b₁^! K'` of the pushed
+correspondence, where `K' = Rf_* K`, `γ` is `pushforwardCoeffUnit` and `δ` is
+`pushforwardCoeffCounit` (part of blueprint `sk-d-proper-pushforward`). -/
+noncomputable def pushforwardCoeff (G : GeometricOperations A s) :
+    ((upperStar A P.snd).leftDerivedFunctor).obj
+        (((lowerStar A P.f).rightDerivedFunctor).obj K) ⟶
+      (rightDerivedUpperShriek A P.fst).obj
+        (((lowerStar A P.f).rightDerivedFunctor).obj K) :=
+  P.pushforwardCoeffUnit ≫ ((lowerStar A P.g).rightDerivedFunctor).map c.coeff ≫
+    P.pushforwardCoeffCounit G
 
 /-- The correspondence `(D, b, [f, g]_! u)` obtained by pushing an endocorrespondence
 `(C, c, u)` forward along a proper pushforward diagram: an endocorrespondence on `(Y, K')`
@@ -206,17 +232,23 @@ noncomputable def pushforwardCorrespondence (G : GeometricOperations A s) :
   snd_comp := P.snd_comp
   coeff := P.pushforwardCoeff G
 
+/-- The support map of the pushed correspondence is `P.toProd`, which does not depend on the
+package; so it admits a compactification when `P.toProd` does. -/
+instance hasCompactification_pushforwardCorrespondence_toProd (G : GeometricOperations A s)
+    [HasCompactification P.toProd] : HasCompactification (P.pushforwardCorrespondence G).toProd :=
+  inferInstanceAs (HasCompactification P.toProd)
+
 @[simp]
-lemma fixMap_comp_pushforwardCorrespondence_fixStr (G : GeometricOperations A s) :
+lemma fixMap_comp_pushforwardCorrespondence_fixStr {G : GeometricOperations A s} :
     P.fixMap ≫ (P.pushforwardCorrespondence G).fixStr = c.fixStr :=
   P.fixMap_str
 
 /-- The dualizing complexes of the two fixed schemes agree: the induced map `h` composed
 with the structure morphism of `Fix(b)` is the structure morphism of `Fix(c)`. -/
-lemma dualizing_fixStr (G : GeometricOperations A s) :
+lemma dualizing_fixStr {G : GeometricOperations A s} :
     G.dualizing c.fixStr =
       G.dualizing (P.fixMap ≫ (P.pushforwardCorrespondence G).fixStr) :=
-  congrArg G.dualizing (P.fixMap_comp_pushforwardCorrespondence_fixStr G).symm
+  congrArg G.dualizing P.fixMap_comp_pushforwardCorrespondence_fixStr.symm
 
 end ProperPushforwardDiagram
 
@@ -232,20 +264,15 @@ proper, the induced map `h : Fix(c) ⟶ Fix(b)` on fixed schemes carries the tra
 No properness over `s` of `X`, `Y`, `C` or `D` is required, and neither leg square is
 assumed Cartesian (blueprint: `sk-p-proper`). -/
 theorem borelMoorePushforward_traceClass (G : GeometricOperations A s)
-    (hs : ∃ (k : Type u) (_ : Field k), Nonempty (s ≅ Spec (.of k)))
+    (hs : s.IsSpecOfField)
     [HasCompactification aX] [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
     (hK : G.ctf X K) {c : Correspondence aX aX K K} [HasCompactification c.toProd]
-    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology (pullback aX aX)) A))]
     (P : ProperPushforwardDiagram c) [HasCompactification P.tgtStr] [IsSeparated P.tgtStr]
-    [LocallyOfFiniteType P.tgtStr] [QuasiCompact P.tgtStr]
-    (hK' : G.ctf P.tgt (((lowerStar A P.f).rightDerivedFunctor).obj K))
-    [HasCompactification (P.pushforwardCorrespondence G).toProd]
-    [BraidedCategory
-      (DerivedCategory (Sheaf (Scheme.ProEt.topology (pullback P.tgtStr P.tgtStr)) A))]
+    [LocallyOfFiniteType P.tgtStr] [QuasiCompact P.tgtStr] [HasCompactification P.toProd]
     [HasCompactification P.fixMap] [IsProper P.fixMap] :
     G.borelMoorePushforward P.fixMap (P.pushforwardCorrespondence G).fixStr
-        (G.traceClass c hs hK ≫ eqToHom (P.dualizing_fixStr G)) =
-      G.traceClass (P.pushforwardCorrespondence G) hs hK' :=
+        (G.traceClass c hs hK ≫ eqToHom P.dualizing_fixStr) =
+      G.traceClass (P.pushforwardCorrespondence G) hs (G.ctf_lowerStar P.f hK) :=
   sorry
 
 /-- Proper global trace comparison: for `X` proper over `s`, `K` in `Dᵇctf(X, A)` and an
@@ -258,13 +285,11 @@ categorical trace of the global operator `T_c(u)` on compactly supported cohomol
 This is the proper pushforward compatibility applied to the diagram with `Y = s`, `f = a_X`
 and `g = a_C = a_X ∘ c₂`, followed by the point normalisation of blueprint `sk-p-pairing`
 (blueprint: `sk-c-proper-global`). -/
-theorem trace_globalOperator_eq_integral_traceClass
-    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))]
-    (G : GeometricOperations A s) [HasCompactification aX] [IsProper aX]
-    (hs : ∃ (k : Type u) (_ : Field k), Nonempty (s ≅ Spec (.of k)))
+theorem trace_globalOperator_eq_integral_traceClass (G : GeometricOperations A s)
+    [HasCompactification aX] [IsProper aX]
+    (hs : s.IsSpecOfField)
     (hK : G.ctf X K) (c : Correspondence aX aX K K) [IsProper c.snd]
     [HasCompactification c.str] [HasCompactification c.toProd]
-    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology (pullback aX aX)) A))]
     [HasRightDual ((rightDerivedLowerShriek A aX).obj K)]
     [HasCompactification c.fixStr] [IsProper c.fixStr] :
     MonoidalCategory.trace (Correspondence.globalOperator G c) =

@@ -522,6 +522,31 @@ Thus
  \Hom_{D(F,A)}(A_F,\omega_{F,A})
 \]
 is a natural \(A\)-linear map.
+
+Equivalently, \(\operatorname{Tr}_c(u)=\langle u,1_K\rangle_{\mathrm{LV}}\) is
+the Lefschetz--Verdier pairing of \(u\) against the diagonal identity
+\(1_K\), computed on the cartesian fixed square
+\(F=C\times_{X\times X}X\) itself.  For an opposite pair of
+correspondences \(c:C\to Y\times X\) and \(d:D\to Y\times X\) with
+intersection \(E=C\times_{Y\times X}D\), Kunneth--Verdier duality turns
+\(u\) and \(v\) into classes
+\(\widetilde u:Rc_!A_C\to L\boxtimes D_XK\) and
+\(\widetilde v:Rd_!A_D\to K\boxtimes D_YL\), and the pairing
+\(\langle u,v\rangle_{\mathrm{LV}}:A_E\to\omega_{E,A}\) is adjoint to the
+contraction
+\[
+ Re_!A_E\simeq Rc_!A_C\otimes_A^LRd_!A_D
+ \xrightarrow{\widetilde u\otimes\widetilde v}
+ (L\otimes_A^LD_YL)\boxtimes(K\otimes_A^LD_XK)
+ \xrightarrow{\operatorname{ev}\boxtimes\operatorname{ev}}
+ \omega_{Y,A}\boxtimes\omega_{X,A}\longrightarrow\omega_{Y\times X,A},
+\]
+the first isomorphism coming from the projection formula and exceptional
+base change.  The last map is adjoint under \(Rp_{1!}\dashv Rp_1^!\) to
+\(Rp_{1!}(p_1^*\omega_Y\otimes p_2^*\omega_X)\simeq
+a_Y^*Ra_{X!}\omega_X\otimes\omega_Y\to\omega_Y\), built from the
+projection formula, exceptional base change and the trace
+\(Ra_{X!}\omega_{X,A}\to A\).
 \end{definition}
 
 \begin{definition}[Integration and local term]
@@ -872,19 +897,25 @@ Let \(f:X\to Y\) and \(g:C\to D\) be proper, and let
  c=(c_1,c_2):C\to X\times X,
  \qquad d=(d_1,d_2):D\to Y\times Y
 \]
-satisfy \(d_rg=fc_r\) for \(r=1,2\), with both leg squares cartesian.  For
-\(K\in\Dctf(X,A)\) and
+satisfy \(d_rg=fc_r\) for \(r=1,2\); no leg square need be cartesian.
+For \(K\in\Dctf(X,A)\) and
 \(u:Lc_2^*K\to Rc_1^!K\), define
 \[
 \begin{aligned}
  f_*u:Ld_2^*Rf_*K
- &\xrightarrow{\sim}Rg_*Lc_2^*K
+ &\longrightarrow Rg_*Lc_2^*K
  \xrightarrow{Rg_*u}Rg_*Rc_1^!K
- \xrightarrow{\sim}Rd_1^!Rf_*K.
+ \longrightarrow Rd_1^!Rf_*K.
 \end{aligned}
 \]
-The first isomorphism is proper base change and the last is the proper
-duality exchange isomorphism.  The cartesian data induce a proper map
+The first arrow is the base change morphism
+\(Ld_2^*Rf_*K\to Rg_*Lg^*Ld_2^*Rf_*K\simeq Rg_*Lc_2^*Lf^*Rf_*K\to
+Rg_*Lc_2^*K\), built from the unit of \(Lg^*\dashv Rg_*\) and the counit of
+\(Lf^*\dashv Rf_*\).  The last is adjoint under
+\(Rd_{1!}\dashv Rd_1^!\) to
+\(Rd_{1!}Rg_*Rc_1^!K\simeq Rf_!Rc_{1!}Rc_1^!K\to Rf_!K\simeq Rf_*K\),
+using \(Rg_*\simeq Rg_!\) and \(Rf_*\simeq Rf_!\).  The leg relations
+induce a proper map
 \[
  g_F:F_c:=\Fix(c)\longrightarrow F_d:=\Fix(d).
 \]
@@ -929,7 +960,7 @@ For the proper morphism of correspondences above,
  \operatorname{Tr}_d(f_*u)=(g_F)_*\operatorname{Tr}_c(u)
  \quad\text{in }\Hom_{D(F_d,A)}(A_{F_d},\omega_{F_d,A}).
 \]
-\depends{Proper base change, the proper duality exchange isomorphism,
+\depends{The base change morphism, the exceptional counit,
 projection, and compatibility of fixed-point evaluation with the
 adjunction unit \(A_{F_d}\to Rg_{F*}A_{F_c}\) and the dualizing counit.}
 \end{theorem}

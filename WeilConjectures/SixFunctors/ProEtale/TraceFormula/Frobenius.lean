@@ -73,7 +73,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] {s X Y : Scheme.{u}}
+  [Abelian.HasFunctorialFlatResolution A] [DerivedBraiding A] {s X Y : Scheme.{u}}
 
 /-- A *Weil complex* on a geometric scheme `a_X : X ⟶ s`: a geometric `q`-power Frobenius
 `Φ₁ : X ⟶ X` over `s`, a complex `K` and a *Frobenius coefficient morphism*
@@ -99,14 +99,17 @@ noncomputable def frobeniusIterate (m : ℕ) : X ⟶ X :=
   let Φ : End X := W.frobenius
   Φ ^ m
 
+omit [DerivedBraiding A] in
 @[simp]
 lemma frobeniusIterate_zero : W.frobeniusIterate 0 = 𝟙 X := rfl
 
+omit [DerivedBraiding A] in
 @[simp]
 lemma frobeniusIterate_succ (m : ℕ) :
     W.frobeniusIterate (m + 1) = W.frobenius ≫ W.frobeniusIterate m :=
   (pow_succ (M := End X) W.frobenius m).trans (End.mul_def _ _)
 
+omit [DerivedBraiding A] in
 /-- Every iterate of the Frobenius is a morphism over the base. -/
 @[simp]
 lemma frobeniusIterate_comp (m : ℕ) : W.frobeniusIterate m ≫ aX = aX := by
@@ -144,6 +147,20 @@ when `aX` does. -/
 instance hasCompactification_graph_str [HasCompactification aX] (m : ℕ) :
     HasCompactification (W.graph m).str :=
   inferInstanceAs (HasCompactification aX)
+
+omit [DerivedBraiding A] in
+/-- The support map `(𝟙, Φ_m) : X ⟶ X ×_s X` of the graph `W.graph m` is a section of the
+first projection, hence a closed immersion when `aX` is separated. -/
+instance isClosedImmersion_graph_toProd [IsSeparated aX] (m : ℕ) :
+    IsClosedImmersion (W.graph m).toProd := by
+  have : (W.graph m).toProd = pullback.lift (𝟙 X) (W.frobeniusIterate m) (Category.id_comp _) ≫
+      (pullback.congrHom (W.frobeniusIterate_comp m) rfl).hom := by
+    apply pullback.hom_ext <;> simp [Correspondence.toProd, graph]
+  rw [this]
+  have : IsClosedImmersion
+      (pullback.lift (𝟙 X) (W.frobeniusIterate m) (Category.id_comp (W.frobeniusIterate m ≫ aX))) :=
+    inferInstance
+  infer_instance
 
 end WeilComplex
 

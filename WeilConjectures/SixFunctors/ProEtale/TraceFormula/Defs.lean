@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
@@ -27,6 +28,7 @@ data which this project has not yet built, stated for the pro-étale functors th
 - `AlgebraicGeometry.ProEtale.GeometricCoefficients`: the coefficient stage, carrying
   `Dᵇctf(X, A)`.
 - `AlgebraicGeometry.ProEtale.verdierDual`: the Verdier dual `D_X K = RHom(K, ω_X)`.
+- `AlgebraicGeometry.ProEtale.DerivedBraiding`: a braiding on `D(X, A)` for every scheme `X`.
 - `AlgebraicGeometry.ProEtale.GeometricOperations`: the geometric operation package.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.upperShriekId`,
   `AlgebraicGeometry.ProEtale.GeometricOperations.upperShriekIdIso`,
@@ -38,6 +40,11 @@ data which this project has not yet built, stated for the pro-étale functors th
   isomorphisms of the monoidal structure `upperStarMonoidal` of `Lf^*`.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.dualizingCongr`: transport of `ω` along an
   equality of structure morphisms.
+
+## Main results
+
+- `AlgebraicGeometry.ProEtale.GeometricOperations.ctf_lowerStar`: `Dᵇctf` is stable under
+  `Rf_*` for proper `f`.
 
 ## Implementation notes
 
@@ -59,6 +66,13 @@ than the blueprint's finite ring `𝒪_E/ϖⁿ`; the intended instantiation is
 `A = ModuleCat (𝒪_E/ϖⁿ)`. Constructibility on the pro-étale site is not available, so the
 subcategory `Dᵇctf(X, A) ⊆ D(X, A)` of bounded constructible objects of finite Tor
 amplitude is carried as data by `GeometricCoefficients`.
+
+This project installs a monoidal structure on `D(X, A)` but not yet its braiding. The
+braidings of all the `D(X, A)` are therefore supplied at once by the class `DerivedBraiding`,
+whose instances are global, rather than by a separate instance argument for each scheme, and
+the package requires the monoidal structure `upperStarMonoidal` of every `Lf^*` to be braided
+for them (`upperStarMonoidal_braiding`). So all braidings in the trace formula are the same
+choice, compatible with pullback.
 
 Two limitations of the package as stated.
 
@@ -110,6 +124,8 @@ structure GeometricCoefficients where
   ctf (X : Scheme.{u}) : ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
   /-- `Dᵇctf(X, A)` is a triangulated subcategory of `D(X, A)`. -/
   isTriangulated_ctf (X : Scheme.{u}) : (ctf X).IsTriangulated
+  /-- `Dᵇctf(X, A)` is closed under isomorphisms. -/
+  isClosedUnderIsomorphisms_ctf (X : Scheme.{u}) : (ctf X).IsClosedUnderIsomorphisms
   /-- `Dᵇctf` is stable under `Lf^*`. -/
   ctf_upperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
       (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) (hK : ctf Y K) :
@@ -121,6 +137,21 @@ structure GeometricCoefficients where
 
 instance (G : GeometricCoefficients A) (X : Scheme.{u}) : (G.ctf X).IsTriangulated :=
   G.isTriangulated_ctf X
+
+instance (G : GeometricCoefficients A) (X : Scheme.{u}) : (G.ctf X).IsClosedUnderIsomorphisms :=
+  G.isClosedUnderIsomorphisms_ctf X
+
+/-- A braiding on the derived category `D(X, A)` of the pro-étale site of every scheme `X`.
+This project does not yet construct the braiding induced by that of `A`; the class makes the
+braidings of all the `D(X, A)` one choice, supplied by a global instance. -/
+class DerivedBraiding where
+  /-- the braiding on `D(X, A)`. -/
+  braidedCategory (X : Scheme.{u}) :
+    BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+
+instance [DerivedBraiding A] (X : Scheme.{u}) :
+    BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
+  DerivedBraiding.braidedCategory X
 
 section VerdierDual
 
@@ -135,12 +166,14 @@ noncomputable def verdierDual {X : Scheme.{u}}
 
 end VerdierDual
 
+variable [DerivedBraiding A]
+
 /-- The geometric operation package over a base `s`: the comparison data of the six
 operations that the blueprint fixes, namely the dualizing complex `ω_X = a_X^! A` with its
 composition `f^! ω_Y ≃ ω_X`, the identification `Rf_* = Rf_!` for proper `f`, composition
 of exceptional direct images, `!`-base change, the projection formula, open-immersion
 purity, the closed-immersion unit `1 ≃ Ri^! Ri_*`, the monoidal structure of the
-pullback `Lf^*`, biduality
+pullback `Lf^*`, braided for `DerivedBraiding`, biduality
 `K ≃ D_X D_X K` on `Dᵇctf`, and the Künneth-Verdier isomorphism. The identity isomorphism
 `R(𝟙 X)_! ≃ 𝟭` is tied to `lowerShriekComp` by unit axioms, and `properComparison`,
 `dualizingBase`, `dualizingComp` and the unit of `Lf^*` are tied to the identity
@@ -264,6 +297,12 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   identity isomorphism `L(𝟙 X)^* ≃ 𝟭`. -/
   upperStarUnit_id (X : Scheme.{u}) :
     (upperStarMonoidal (𝟙 X)).εIso.inv = (leftDerivedUpperStarId A X).hom.app (𝟙_ _)
+  /-- the monoidal structure of `Lf^*` is braided: its tensor map commutes with the braidings
+  of `D(Y, A)` and `D(X, A)`. -/
+  upperStarMonoidal_braiding {X Y : Scheme.{u}} (f : X ⟶ Y)
+      (M N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+    ((upperStarMonoidal f).μIso M N).hom ≫ ((upperStar A f).leftDerivedFunctor).map (β_ M N).hom =
+      (β_ _ _).hom ≫ ((upperStarMonoidal f).μIso N M).hom
   /-- the evaluation-adjoint map `K ⟶ D_X D_X K`. -/
   bidualityMap {X : Scheme.{u}} (a : X ⟶ s)
       (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
@@ -277,7 +316,7 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   field `s = Spec k` (blueprint `sk-thm-sf-kunneth-verdier`). It is stated for every
   Cartesian square over `s`, so that both orientations are available on `pullback aY aX`. -/
   kunnethVerdier {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} {pX : Z ⟶ X} {pY : Z ⟶ Y}
-      (hs : ∃ (k : Type u) (_ : Field k), Nonempty (s ≅ Spec (.of k)))
+      (hs : s.IsSpecOfField)
       [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
       [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]
       (sq : IsPullback pX pY aX aY) [HasCompactification pX]
@@ -312,6 +351,13 @@ noncomputable def dualizingCongr {X : Scheme.{u}} {a b : X ⟶ s} (h : a = b) :
 lemma dualizingCongr_rfl {X : Scheme.{u}} {a : X ⟶ s} :
     G.dualizingCongr (rfl : a = a) = Iso.refl _ :=
   rfl
+
+/-- `Dᵇctf` is stable under `Rf_*` for proper `f`: it is stable under `Rf_!`, which is
+`Rf_*` by `properComparison`. -/
+lemma ctf_lowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : G.ctf X K) :
+    G.ctf Y (((lowerStar A f).rightDerivedFunctor).obj K) :=
+  (G.ctf Y).prop_of_iso ((G.properComparison f).app K) (G.ctf_lowerShriek f K hK)
 
 /-- The pullback of the constant sheaf, `Lf^* A_Y ≃ A_X`: the inverse of the unit of the
 monoidal structure `GeometricOperations.upperStarMonoidal` of `Lf^*`. -/

@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 
@@ -13,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 # The Lefschetz-Verdier pairing, trace classes and local terms
 
 For an opposite pair of correspondences `(C, c, u)` from `(X, K)` to `(Y, L)` and
-`(D, d, v)` back, the Kuenneth-Verdier comparison turns the two coefficient maps into
+`(D, d, v)` back, the Künneth-Verdier comparison turns the two coefficient maps into
 sections over the intersection `E(C, D) = C ×_{Y × X} D`, and their contraction is the
 Lefschetz-Verdier pairing `⟨u, v⟩_LV : A_E ⟶ ω_E`, a Borel-Moore section. Pairing against
 the diagonal identity gives the *trace class* of an endocorrespondence, a Borel-Moore
@@ -23,6 +24,8 @@ section on the fixed scheme, and integrating over a clopen piece gives a *local 
 
 - `AlgebraicGeometry.ProEtale.Correspondence.supportedClass`: the class `ũ` on `Y × X` of a
   correspondence.
+- `AlgebraicGeometry.ProEtale.Correspondence.supportedClassSwap`: the class `ṽ` on `Y × X` of
+  an opposite correspondence.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.supportedPairing`: the Lefschetz-Verdier
   pairing `⟨u, v⟩_LV`.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.traceClass`: the trace class `Tr_c(u)`.
@@ -46,11 +49,13 @@ pro-étale functors and the comparison data of the package
   and the inverse of the field `kunnethVerdier`;
 * `GeometricOperations.pairingOfSquare` contracts two such classes using the projection
   formula, `!`-base change, the monoidal structure `upperStarTensor` of the pullback, the
-  Verdier evaluations and `GeometricOperations.dualizingProd : ω_Y ⊠ ω_X ⟶ ω_{Y × X}`, which is
-  built from the trace `Ra_{X!} a_X^! A ⟶ A` rather than from `kunnethVerdier`, whose
-  hypotheses `ω_Y` and `A_X` need not satisfy;
-* `traceClass` is the pairing against the diagonal identity, restricted along the
-  identification `Fix(c) ≃ E(C, X)` of `Correspondence.isPullback_fixι_toProd`;
+  Verdier evaluations and
+  `GeometricOperations.dualizingExteriorProd : ω_Y ⊠ ω_X ⟶ ω_{Y × X}`, which is built from
+  the trace `Ra_{X!} a_X^! A ⟶ A` rather than from `kunnethVerdier`, whose hypotheses `ω_Y`
+  and `A_X` need not satisfy;
+* `traceClass` is `pairingOfSquare` applied to the Cartesian square
+  `Fix(c) = C ×_{X × X} X` of `Correspondence.isPullback_fixι_toProd`, with the class of the
+  diagonal identity, so it lives on `Fix(c)` with no transport step;
 * `localTerm` is the integral of the restriction `GeometricOperations.borelMooreRestrict`.
 
 The Künneth-Verdier field needs a field as base, `X` and `Y` separated of finite type and
@@ -61,8 +66,9 @@ product is very slow, and instantiating the general statement avoids it.
 
 Perfectness is rendered as dualizability, `HasRightDual`, and `tr_A` is
 `CategoryTheory.MonoidalCategory.trace`, taken in `D(s, A)`, whose unit endomorphism ring
-is the coefficient ring. Its braiding is an instance hypothesis: this project installs a
-monoidal structure on a derived category but not yet a braiding.
+is the coefficient ring. The braidings used by `exceptionalMate`, `pairingContraction` and
+`trace` all come from the one instance `DerivedBraiding A`, for which the pullbacks are
+braided monoidal (`GeometricOperations.upperStarMonoidal_braiding`).
 -/
 
 @[expose] public section
@@ -77,7 +83,8 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] {s X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s}
+  [Abelian.HasFunctorialFlatResolution A] [DerivedBraiding A] {s X Y : Scheme.{u}}
+  {aX : X ⟶ s} {aY : Y ⟶ s}
   {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
   {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
 
@@ -106,8 +113,8 @@ section KunnethClass
 variable {Z T X' Y' : Scheme.{u}} {aX' : X' ⟶ s} {aY' : Y' ⟶ s} {pX : Z ⟶ X'} {pY : Z ⟶ Y'}
   [HasCompactification pX] (i : T ⟶ Z) [HasCompactification i] {cX : T ⟶ X'} {cY : T ⟶ Y'}
   [HasCompactification cX] (hX : i ≫ pX = cX) (hY : i ≫ pY = cY)
-  (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X') A))
-  (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y') A))
+  {M : DerivedCategory (Sheaf (Scheme.ProEt.topology X') A)}
+  {N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y') A)}
   (u : ((upperStar A cY).leftDerivedFunctor).obj N ⟶ (rightDerivedUpperShriek A cX).obj M)
 
 /-- The tensor-hom mate `pY^* N ⊗ᴸ Ri_! A_T ⟶ pX^! M` of a coefficient map
@@ -122,8 +129,7 @@ the composite
 of the braiding, the projection formula, the unitor, the composition of pullbacks, `u`, the
 composition of exceptional inverse images and the counit of `Ri_! ⊣ i^!`
 (part of blueprint `sk-d-corr`). -/
-noncomputable def exceptionalMate
-    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A))] :
+noncomputable def exceptionalMate :
     ((upperStar A pY).leftDerivedFunctor).obj N ⊗ (rightDerivedLowerShriek A i).obj (𝟙_ _) ⟶
       (rightDerivedUpperShriek A pX).obj M :=
   have : HasCompactification (i ≫ pX) := hX ▸ inferInstance
@@ -141,15 +147,14 @@ noncomputable def exceptionalMate
 `Z = X' ×_s Y'`: the curried `GeometricOperations.exceptionalMate` of `u`, read through
 the inverse of the Künneth-Verdier isomorphism
 `pX^* M ⊗ᴸ pY^* D N ≃ RHom(pY^* N, pX^! M)` (part of blueprint `sk-d-pairing`). -/
-noncomputable def kunnethClass (hs : ∃ (k : Type u) (_ : Field k), Nonempty (s ≅ Spec (.of k)))
+noncomputable def kunnethClass (hs : s.IsSpecOfField)
     [IsSeparated aX'] [LocallyOfFiniteType aX'] [QuasiCompact aX']
     [IsSeparated aY'] [LocallyOfFiniteType aY'] [QuasiCompact aY']
-    (sq : IsPullback pX pY aX' aY') (hM : G.ctf X' M) (hN : G.ctf Y' N)
-    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A))] :
+    (sq : IsPullback pX pY aX' aY') (hM : G.ctf X' M) (hN : G.ctf Y' N) :
     (rightDerivedLowerShriek A i).obj (𝟙_ _) ⟶
       ((upperStar A pX).leftDerivedFunctor).obj M ⊗
         ((upperStar A pY).leftDerivedFunctor).obj (G.verdierDual aY' N) :=
-  MonoidalClosed.curry (G.exceptionalMate i hX hY M N u) ≫
+  MonoidalClosed.curry (G.exceptionalMate i hX hY u) ≫
     (G.kunnethVerdier hs sq M hM N hN).inv
 
 end KunnethClass
@@ -158,7 +163,6 @@ section Square
 
 variable [HasCompactification aX] {Z : Scheme.{u}} {p₁ : Z ⟶ Y} {p₂ : Z ⟶ X}
   (sq : IsPullback p₁ p₂ aY aX) [HasCompactification p₁] [HasCompactification p₂]
-  [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A))]
 
 /-- The exterior product of the dualizing complexes, `ω_Y ⊠ ω_X ⟶ ω_Z` for a Cartesian square
 `Z = Y ×_s X`: the exceptional adjoint under `Rp₁_! ⊣ p₁^!` of
@@ -170,7 +174,7 @@ variable [HasCompactification aX] {Z : Scheme.{u}} {p₁ : Z ⟶ Y} {p₂ : Z �
 
 built from the projection formula, `!`-base change and the trace `Ra_{X!} a_X^! A ⟶ A`,
 followed by `p₁^! ω_Y ≃ ω_Z` (part of blueprint `sk-d-pairing`). -/
-noncomputable def dualizingProd :
+noncomputable def dualizingExteriorProd :
     ((upperStar A p₁).leftDerivedFunctor).obj (G.dualizing aY) ⊗
         ((upperStar A p₂).leftDerivedFunctor).obj (G.dualizing aX) ⟶
       G.dualizing (p₁ ≫ aY) :=
@@ -211,7 +215,7 @@ noncomputable def pairingContraction :
       (G.upperStarTensor p₂ K (G.verdierDual aX K)).inv) ≫
     (((upperStar A p₁).leftDerivedFunctor).map ((ihom.ev L).app (G.dualizing aY)) ⊗ₘ
       ((upperStar A p₂).leftDerivedFunctor).map ((ihom.ev K).app (G.dualizing aX))) ≫
-    G.dualizingProd sq
+    G.dualizingExteriorProd sq
 
 /-- The pairing of two classes `ũ : Ri_! A_C ⟶ L ⊠ D_X K` and `ṽ : Rj_! A_D ⟶ K ⊠ D_Y L`
 on `Z = Y ×_s X`, a Borel-Moore section on `E = C ×_Z D`: the composite
@@ -232,23 +236,14 @@ noncomputable def pairingOfSquare : G.borelMooreSections (q₁ ≫ i ≫ p₁ �
 
 end Square
 
-variable [HasCompactification aX] [HasCompactification aY]
-
-instance hasCompactification_pullback_fst : HasCompactification (pullback.fst aY aX) :=
-  .of_isPullback (IsPullback.of_hasPullback aY aX).flip
-
-instance hasCompactification_pullback_snd : HasCompactification (pullback.snd aY aX) :=
-  .of_isPullback (IsPullback.of_hasPullback aY aX)
-
 end GeometricOperations
 
 namespace Correspondence
 
 variable (G : GeometricOperations A s) [HasCompactification aX] [HasCompactification aY]
-  (hs : ∃ (k : Type u) (_ : Field k), Nonempty (s ≅ Spec (.of k)))
+  (hs : s.IsSpecOfField)
   [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
   [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]
-  [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology (pullback aY aX)) A))]
 
 /-- The supported class `ũ : Rc_! A_C ⟶ L ⊠ D_X K` on `Y × X` of a correspondence
 `(C, c, u)` from `(X, K)` to `(Y, L)`: the `GeometricOperations.kunnethClass` of `u` along
@@ -258,20 +253,19 @@ noncomputable def supportedClass (c : Correspondence aX aY K L)
     (rightDerivedLowerShriek A c.toProd).obj (𝟙_ _) ⟶
       ((upperStar A (pullback.fst aY aX)).leftDerivedFunctor).obj L ⊗
         ((upperStar A (pullback.snd aY aX)).leftDerivedFunctor).obj (G.verdierDual aX K) :=
-  G.kunnethClass c.toProd (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _) L K c.coeff hs
+  G.kunnethClass c.toProd (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _) c.coeff hs
     (IsPullback.of_hasPullback aY aX) hL hK
 
 /-- The supported class `ṽ : Rd̄_! A_D ⟶ K ⊠ D_Y L` on `Y × X` of an opposite correspondence
 `(D, d, v)` from `(Y, L)` to `(X, K)`: the `GeometricOperations.kunnethClass` of `v` along
 the swapped support map `d̄ : D ⟶ Y × X` (blueprint: `sk-d-pairing`). -/
 noncomputable def supportedClassSwap (d : Correspondence aY aX L K) (hK : G.ctf X K)
-    (hL : G.ctf Y L)
-    [HasCompactification d.toProdSwap] :
+    (hL : G.ctf Y L) [HasCompactification d.toProdSwap] :
     (rightDerivedLowerShriek A d.toProdSwap).obj (𝟙_ _) ⟶
       ((upperStar A (pullback.snd aY aX)).leftDerivedFunctor).obj K ⊗
         ((upperStar A (pullback.fst aY aX)).leftDerivedFunctor).obj (G.verdierDual aY L) :=
-  G.kunnethClass d.toProdSwap (pullback.lift_snd _ _ _) (pullback.lift_fst _ _ _) K L d.coeff
-    hs (IsPullback.of_hasPullback aY aX).flip hK hL
+  G.kunnethClass d.toProdSwap (pullback.lift_snd _ _ _) (pullback.lift_fst _ _ _) d.coeff hs
+    (IsPullback.of_hasPullback aY aX).flip hK hL
 
 end Correspondence
 
@@ -280,7 +274,7 @@ namespace GeometricOperations
 variable (G : GeometricOperations A s) [HasCompactification aX] [HasCompactification aY]
 
 /-- The *Lefschetz-Verdier pairing* of an opposite pair of correspondences: the inverse
-Kuenneth-Verdier maps turn the supported classes of `u` and `v` into
+Künneth-Verdier maps turn the supported classes of `u` and `v` into
 
 `ũ : Rc_! A_C ⟶ L ⊠ D_X K` and `ṽ : Rd̄_! A_D ⟶ K ⊠ D_Y L`
 
@@ -294,49 +288,44 @@ The Künneth-Verdier isomorphism is only available for `X`, `Y` separated of fin
 over a field and `K`, `L` in `Dᵇctf`, hence the hypotheses `hs`, `hK` and `hL`. -/
 noncomputable def supportedPairing (c : Correspondence aX aY K L)
     (d : Correspondence aY aX L K)
-    (hs : ∃ (k : Type u) (_ : Field k), Nonempty (s ≅ Spec (.of k)))
+    (hs : s.IsSpecOfField)
     [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
     [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]
     (hK : G.ctf X K) (hL : G.ctf Y L)
-    [HasCompactification c.toProd] [HasCompactification d.toProdSwap]
-    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology (pullback aY aX)) A))] :
+    [HasCompactification c.toProd] [HasCompactification d.toProdSwap] :
     G.borelMooreSections (c.intersectionStr d) :=
-  have : HasCompactification (pullback.fst c.toProd d.toProdSwap) :=
-    .of_isPullback (IsPullback.of_hasPullback c.toProd d.toProdSwap).flip
   G.pairingOfSquare (IsPullback.of_hasPullback aY aX) c.toProd d.toProdSwap
       (IsPullback.of_hasPullback c.toProd d.toProdSwap)
       (c.supportedClass G hs hK hL) (d.supportedClassSwap G hs hK hL) ≫
-    eqToHom (congrArg G.dualizing (by
-      simp [Correspondence.intersectionStr, Correspondence.toProd, c.fst_comp]))
+    eqToHom (congrArg G.dualizing (c.pullback_fst_comp_toProd_comp_fst_comp d))
 
 /-- The *trace class* `Tr_c(u) : A_F ⟶ ω_F` of an endocorrespondence `(C, c, u)` on
-`(X, K)`, a Borel-Moore section on the fixed scheme `F = Fix(c)`: the supported pairing
-`⟨u, 𝟙 K⟩_LV` against the diagonal identity, transported to `F` along the identification
-`F ≃ E(C, X)` of the fixed scheme with the intersection of `c` and the diagonal
-(`Correspondence.isPullback_fixι_toProd`), as blueprint `sk-d-trace-class` computes it. -/
-noncomputable def traceClass (c : Correspondence aX aX K K)
-    (hs : ∃ (k : Type u) (_ : Field k), Nonempty (s ≅ Spec (.of k)))
+`(X, K)`, a Borel-Moore section on the fixed scheme `F = Fix(c)`: the pairing `⟨u, 𝟙 K⟩_LV`
+against the diagonal identity, computed by `GeometricOperations.pairingOfSquare` on the
+Cartesian square `F = C ×_{X × X} X` of `Correspondence.isPullback_fixι_toProd` itself, so
+that it lives on `F` with no transport step (blueprint: `sk-d-trace-class`). -/
+noncomputable def traceClass (c : Correspondence aX aX K K) (hs : s.IsSpecOfField)
     [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] (hK : G.ctf X K)
-    [HasCompactification c.toProd]
-    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology (pullback aX aX)) A))] :
+    [HasCompactification c.toProd] :
     G.borelMooreSections c.fixStr :=
-  let e : c.fix ≅ c.intersection (Correspondence.ofEnd G aX K (𝟙 K)) :=
-    c.isPullback_fixι_toProd.isoPullback
-  G.borelMooreRestrict e.hom (G.supportedPairing c (Correspondence.ofEnd G aX K (𝟙 K)) hs hK hK) ≫
-    eqToHom (congrArg G.dualizing (by
-      rw [Correspondence.intersectionStr, ← Category.assoc]
-      exact congrArg (· ≫ c.str) c.isPullback_fixι_toProd.isoPullback_hom_fst))
+  have : HasCompactification c.fixι := .of_isPullback c.isPullback_fixι_toProd.flip
+  G.pairingOfSquare (IsPullback.of_hasPullback aX aX) c.toProd
+      (Correspondence.ofEnd G aX K (𝟙 K)).toProdSwap c.isPullback_fixι_toProd
+      (c.supportedClass G hs hK hK)
+      ((Correspondence.ofEnd G aX K (𝟙 K)).supportedClassSwap G hs hK hK) ≫
+    eqToHom (congrArg G.dualizing c.fixι_comp_toProd_comp_fst_comp)
 
 /-- The *local term* `LT_B(α) ∈ A` of a Borel-Moore section `α : A_E ⟶ ω_E` along a clopen
 immersion `j_B : B ⟶ E` with `B` proper over `s`: restrict `α` along `j_B`, identify
 `j_B^* A_E ≃ A_B` and `j_B^* ω_E ≃ ω_B` by open purity and dualizing composition, and
 integrate over `B`. The ambient support `E` need not be proper; at a Frobenius fixed point
-`LT_x̄` means the local term on its reduced clopen point component
-(blueprint: `sk-d-local-term`). -/
+`LT_x̄` means the local term on its reduced clopen point component. Having closed range, `j_B`
+is a closed immersion, so it admits a compactification (blueprint: `sk-d-local-term`). -/
 noncomputable def localTerm {E B : Scheme.{u}} (aE : E ⟶ s) (jB : B ⟶ E)
-    [IsOpenImmersion jB] [HasCompactification jB] (hB : IsClosed (Set.range jB.base))
+    [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
     [HasCompactification (jB ≫ aE)] [IsProper (jB ≫ aE)] (α : G.borelMooreSections aE) :
     End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))) :=
+  have : IsClosedImmersion jB := .of_isOpenImmersion jB hB
   G.integral (jB ≫ aE) (G.borelMooreRestrict jB α)
 
 /-- Point normalization of the pairing: for a perfect `A`-complex `P` on the base point `s`
@@ -347,10 +336,7 @@ categorical trace, `⟨v, 𝟙 P⟩_LV = tr_A(v ∣ P)`.
 The same adjunction calculation identifies the trace class of an endocorrespondence on an
 arbitrary `X`, which is what the proper compatibility theorem uses
 (blueprint: `sk-p-pairing`). -/
-theorem integral_traceClass_eq_trace
-    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))]
-    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology (pullback (𝟙 s) (𝟙 s))) A))]
-    (hs : ∃ (k : Type u) (_ : Field k), Nonempty (s ≅ Spec (.of k)))
+theorem integral_traceClass_eq_trace (hs : s.IsSpecOfField)
     (P : DerivedCategory (Sheaf (Scheme.ProEt.topology s) A)) (hP : G.ctf s P) [HasRightDual P]
     (v : P ⟶ P) :
     G.integral (Correspondence.ofEnd G (𝟙 s) P v).fixStr
@@ -365,8 +351,7 @@ this applies to the Lefschetz-Verdier pairing `α = ⟨u, v⟩_LV`; the empty su
 empty sum `0` (blueprint: `sk-p-local`). -/
 theorem integral_eq_sum_localTerm {E : Scheme.{u}} (aE : E ⟶ s) [HasCompactification aE]
     [IsProper aE] {ι : Type u} [Fintype ι] {B : ι → Scheme.{u}} (j : ∀ i, B i ⟶ E)
-    [∀ i, IsOpenImmersion (j i)] [∀ i, HasCompactification (j i)]
-    [∀ i, HasCompactification (j i ≫ aE)]
+    [∀ i, IsOpenImmersion (j i)] [∀ i, HasCompactification (j i ≫ aE)]
     [∀ i, IsProper (j i ≫ aE)] (hclosed : ∀ i, IsClosed (Set.range (j i).base))
     (hdisj : Pairwise fun i i' ↦ Disjoint (Set.range (j i).base) (Set.range (j i').base))
     (hcover : ⋃ i, Set.range (j i).base = Set.univ)
