@@ -34,7 +34,10 @@ morphism into an affine space over an affine base to be a closed immersion.
 We also record the part of the additive group structure of relative affine space that is used
 elsewhere: the zero section `AlgebraicGeometry.AffineSpace.zeroSection`, the reflection
 `AlgebraicGeometry.AffineSpace.neg` and the standard pairing
-`AlgebraicGeometry.AffineSpace.stdPairing` on `𝔸(n; S) ×_S 𝔸(n; S)`.
+`AlgebraicGeometry.AffineSpace.stdPairing` on `𝔸(n; S) ×_S 𝔸(n; S)`, together with the
+Artin–Schreier map `AlgebraicGeometry.AffineSpace.artinSchreierMap` (`x ↦ x ^ q - x`) and the
+translations `AlgebraicGeometry.AffineSpace.translation`, which leave it invariant in
+characteristic `p` (`AlgebraicGeometry.AffineSpace.translation_comp_artinSchreierMap`).
 
 -/
 
@@ -497,6 +500,77 @@ def stdPairing [Fintype n] : Γ(Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) �
     (Limits.pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)).appTop (coord S i)
 
 end GroupLaw
+
+section ArtinSchreier
+
+variable (n : Type u) (S : Scheme.{u})
+
+/-- The Artin–Schreier map `x ↦ x ^ q - x` of `𝔸(n; S)`, applied coordinatewise. -/
+def artinSchreierMap (q : ℕ) : 𝔸(n; S) ⟶ 𝔸(n; S) :=
+  homOfVector (𝔸(n; S) ↘ S) fun i ↦ coord S i ^ q - coord S i
+
+@[reassoc (attr := simp)]
+lemma artinSchreierMap_over (q : ℕ) : artinSchreierMap n S q ≫ 𝔸(n; S) ↘ S = 𝔸(n; S) ↘ S :=
+  homOfVector_over _ _
+
+@[simp]
+lemma artinSchreierMap_appTop_coord (q : ℕ) (i : n) :
+    (artinSchreierMap n S q).appTop (coord S i) = coord S i ^ q - coord S i :=
+  homOfVector_appTop_coord _ _ _
+
+/-- For `q > 1` the one-dimensional Artin–Schreier map `x ↦ x ^ q - x` is finite: the ring map
+`T ↦ T ^ q - T` makes `𝒪_S[T]` a free module of rank `q` over itself. -/
+lemma isFinite_artinSchreierMap {q : ℕ} (hq : 1 < q) :
+    IsFinite (artinSchreierMap PUnit.{u + 1} S q) :=
+  sorry
+
+variable {n S}
+
+@[reassoc]
+lemma map_comp_artinSchreierMap {T : Scheme.{u}} (f : S ⟶ T) (q : ℕ) :
+    map n f ≫ artinSchreierMap n T q = artinSchreierMap n S q ≫ map n f := by
+  refine hom_ext (by simp) fun i ↦ ?_
+  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, artinSchreierMap_appTop_coord,
+    map_appTop_coord, map_sub, map_pow]
+
+/-- The Artin–Schreier map commutes with base change: over `f : S ⟶ T`, the Artin–Schreier map
+of `𝔸(n; S)` is the base change of that of `𝔸(n; T)`. -/
+lemma isPullback_map_artinSchreierMap {T : Scheme.{u}} (f : S ⟶ T) (q : ℕ) :
+    IsPullback (map n f) (artinSchreierMap n S q) (artinSchreierMap n T q) (map n f) := by
+  refine IsPullback.of_bot ?_ (map_comp_artinSchreierMap f q) (isPullback_map (n := n) f)
+  rw [artinSchreierMap_over, artinSchreierMap_over]
+  exact isPullback_map (n := n) f
+
+/-- The translation `x ↦ x + a` of `𝔸(n; S)` by a vector `a` of global functions on `S`. -/
+def translation (a : n → Γ(S, ⊤)) : 𝔸(n; S) ⟶ 𝔸(n; S) :=
+  homOfVector (𝔸(n; S) ↘ S) fun i ↦ coord S i + (𝔸(n; S) ↘ S).appTop (a i)
+
+@[reassoc (attr := simp)]
+lemma translation_over (a : n → Γ(S, ⊤)) : translation a ≫ 𝔸(n; S) ↘ S = 𝔸(n; S) ↘ S :=
+  homOfVector_over _ _
+
+@[simp]
+lemma translation_appTop_coord (a : n → Γ(S, ⊤)) (i : n) :
+    (translation a).appTop (coord S i) = coord S i + (𝔸(n; S) ↘ S).appTop (a i) :=
+  homOfVector_appTop_coord _ _ _
+
+/-- In characteristic `p`, the Artin–Schreier map `x ↦ x ^ (p ^ m) - x` is invariant under
+translation by a vector `a` with `a ^ (p ^ m) = a`. -/
+@[reassoc (attr := simp)]
+lemma translation_comp_artinSchreierMap {p : ℕ} [Fact p.Prime] (hp : (p : Γ(S, ⊤)) = 0)
+    (m : ℕ) (a : n → Γ(S, ⊤)) (ha : ∀ i, a i ^ p ^ m = a i) :
+    translation a ≫ artinSchreierMap n S (p ^ m) = artinSchreierMap n S (p ^ m) := by
+  refine hom_ext ?_ fun i ↦ ?_
+  · simp
+  · nontriviality Γ(𝔸(n; S), ⊤)
+    have : CharP Γ(𝔸(n; S), ⊤) p := by
+      rw [CharP.charP_iff_prime_eq_zero Fact.out, ← map_natCast (𝔸(n; S) ↘ S).appTop.hom, hp,
+        map_zero]
+    rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, artinSchreierMap_appTop_coord, map_sub,
+      map_pow, translation_appTop_coord, add_pow_char_pow, ← map_pow, ha]
+    ring
+
+end ArtinSchreier
 
 end AffineSpace
 

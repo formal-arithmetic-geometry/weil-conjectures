@@ -116,7 +116,9 @@ Being an Artin–Schreier sheaf, it is lisse of rank one
 noncomputable def fourierKernel [CharP Γ(pullback π π', ⊤) p] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) :
     Sheaf (pullback π π').smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
-  artinSchreierSheaf (pullback π π') Ψ b
+  letI := ZMod.algebra Γ(pullback π π', ⊤) p
+  haveI : Invertible (Fintype.card (ZMod p) : Λ) := by rw [ZMod.card]; assumption
+  artinSchreierSheaf (ZMod p) (pullback π π') Ψ b
 
 /-- For a pairing `b ∈ Γ(V ×_S V', 𝒪)` between two `S`-schemes and a relative dimension `r`,
 the *Fourier–Deligne transform* is
