@@ -44,6 +44,11 @@ functor `f^*` on (étale) sheaves of modules can be obtained by
 instantiating `C` and `D` with the relevant sheaf categories and proving
 the single `PreservesKFlatQuasiIso` statement for `f^*`.
 
+When `D` is monoidal as well, the class `F.PreservesKFlat` says that `F`
+sends K-flat complexes to K-flat complexes. It is not needed to derive `F`,
+but it is what makes the derived functor of an oplax monoidal functor
+oplax monoidal for the derived tensor products.
+
 -/
 
 @[expose] public section
@@ -91,6 +96,34 @@ lemma quasiIso_mapHomologicalComplex_map_of_kFlat [F.PreservesKFlatQuasiIso]
 quasi-isomorphisms between K-flat complexes. -/
 instance (priority := 100) [F.PreservesHomology] : F.PreservesKFlatQuasiIso where
   quasiIso_map _ _ _ := inferInstance
+
+section PreservesKFlat
+
+variable [MonoidalCategory D] [MonoidalPreadditive D]
+  [HasCountableCoproducts D]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+
+/-- An additive functor `F : C ⥤ D` between abelian monoidal categories preserves K-flat
+complexes if applying `F` degreewise to a K-flat cochain complex gives a K-flat cochain
+complex, a complex `K` being K-flat when tensoring with `K` on either side sends
+quasi-isomorphisms to quasi-isomorphisms.
+
+This is the input needed to compare the derived tensor product with the left derived
+functor of `F`: for an oplax monoidal `F`, the comparison
+`LF(K ⊗ᴸ L) ⟶ LF K ⊗ᴸ LF L` is computed on K-flat resolutions `K` and `L`, and this
+requires `F K` and `F L` to be K-flat again. -/
+class PreservesKFlat : Prop where
+  kFlat_map (K : CochainComplex C ℤ) (hK : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat K) :
+    (HomologicalComplex.quasiIso D (.up ℤ)).kFlat ((F.mapHomologicalComplex (.up ℤ)).obj K)
+
+lemma kFlat_mapHomologicalComplex_obj [F.PreservesKFlat] {K : CochainComplex C ℤ}
+    (hK : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat K) :
+    (HomologicalComplex.quasiIso D (.up ℤ)).kFlat ((F.mapHomologicalComplex (.up ℤ)).obj K) :=
+  PreservesKFlat.kFlat_map K hK
+
+end PreservesKFlat
 
 section
 
