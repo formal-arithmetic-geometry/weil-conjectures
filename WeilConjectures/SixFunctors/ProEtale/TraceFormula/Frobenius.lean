@@ -27,6 +27,8 @@ graph correspondences `c_m = (id, Φ_m)` and the global Frobenius operators.
   `F_{x,m} = (φ_m)_x̄` at a point fixed by `Φ_m`.
 - `AlgebraicGeometry.ProEtale.relativeFrobenius`: the relative Frobenius `r_m` of a
   morphism compatible with the Frobenius morphisms of its source and target.
+- `AlgebraicGeometry.ProEtale.GeometricOperations.lowerShriekExchange`: the compact-support
+  exchange `Lg_Y^* Rf_! ⟶ Rf_! Lg_X^*` of a commutative square with proper gap map.
 - `AlgebraicGeometry.ProEtale.WeilComplex.lowerShriekPush`: the `!`-pushforward of a Weil
   complex.
 
@@ -58,6 +60,19 @@ and makes `isFinite_relativeFrobenius` a theorem.
 whereas the blueprint states topological invariance on `Dᵇctf`; the generalisation is the
 expected one on the pro-étale site, and `ctf_leftDerivedUpperStar_obj_iff` restricts it
 back to the coefficient stage.
+
+`WeilComplex.graph` takes the package `G` only for the identification
+`GeometricOperations.upperShriekIdIso : 𝟭 ≅ (𝟙 X)^!`, which comes from the field
+`lowerShriekId : R(𝟙 X)_! ≅ 𝟭`. Constructing `R(𝟙 X)_! ≅ 𝟭` from the trivial
+compactification and the lower-star API would remove that field, and `graph` would no longer
+depend on `G`.
+
+`GeometricOperations.lowerShriekExchange`, and hence the coefficient map of
+`WeilComplex.lowerShriekPush`, uses the fields `baseChange`, `properComparison` and
+`lowerShriekComp` at non-identity morphisms. These are not pinned to the canonical maps nor
+tied to each other (see `WeilConjectures.SixFunctors.ProEtale.TraceFormula.Defs`), so
+rescaling `properComparison r` rescales the Frobenius coefficient of `Rf_! K`. Statements
+about traces of Frobenius on `Rf_! K` need those coherence axioms first.
 -/
 
 @[expose] public section
@@ -113,10 +128,26 @@ lemma frobeniusIterate_comp (m : ℕ) : W.frobeniusIterate m ≫ aX = aX := by
   | zero => simp
   | succ n ih => rw [frobeniusIterate_succ, Category.assoc, ih, W.frobenius_comp]
 
+@[simp]
+lemma frobeniusIterate_one : W.frobeniusIterate 1 = W.frobenius :=
+  pow_one (M := End X) W.frobenius
+
+/-- A point fixed by `Φ₁` is fixed by every iterate `Φ_m`. -/
+lemma comp_frobeniusIterate_of_comp_frobenius {x : s ⟶ X} (hx : x ≫ W.frobenius = x)
+    (m : ℕ) : x ≫ W.frobeniusIterate m = x := by
+  induction m with
+  | zero => simp
+  | succ n ih => rw [frobeniusIterate_succ, ← Category.assoc, hx, ih]
+
 /-- The iterate `φ_m : Φ_m^* K ⟶ K` of the Frobenius coefficient morphism, obtained by
 composing the pulled back copies of `φ` along the composition isomorphisms for `Φ^*`:
-`φ_0` is the identification `L(𝟙 X)^* K ≃ K` and
-`φ_{m+1} : Φ_{m+1}^* K ≃ Φ₁^* Φ_m^* K ──Φ₁^* φ_m──▶ Φ₁^* K ──φ──▶ K`
+`φ_0` is the identification `L(𝟙 X)^* K ≃ K` and `φ_{m+1}` is the composite
+
+```
+  LΦ_{m+1}^* K ──leftDerivedUpperStarCongr (frobeniusIterate_succ m)──▶ L(Φ₁ ≫ Φ_m)^* K
+    ──leftDerivedUpperStarComp Φ₁ Φ_m──▶ LΦ₁^* LΦ_m^* K ──LΦ₁^*.map φ_m──▶ LΦ₁^* K ──φ──▶ K
+```
+
 (part of blueprint `sk-d-weil`). -/
 noncomputable def coeffIterate :
     (m : ℕ) → ((upperStar A (W.frobeniusIterate m)).leftDerivedFunctor).obj W.obj ⟶ W.obj
@@ -126,16 +157,32 @@ noncomputable def coeffIterate :
       (leftDerivedUpperStarComp A W.frobenius (W.frobeniusIterate m)).hom.app W.obj ≫
       ((upperStar A W.frobenius).leftDerivedFunctor).map (coeffIterate m) ≫ W.coeff
 
+/-- The defining equation of `coeffIterate` at `0`: `φ_0` is `L(𝟙 X)^* K ≃ K`. -/
 @[simp]
 lemma coeffIterate_zero : W.coeffIterate 0 = (leftDerivedUpperStarId A X).hom.app W.obj :=
   rfl
 
+/-- The defining recursion of `coeffIterate`: `φ_{m+1} = φ ∘ LΦ₁^* φ_m ∘ comp`. It is not
+`@[simp]`, since unfolding the successor would loop. -/
 lemma coeffIterate_succ (m : ℕ) :
     W.coeffIterate (m + 1) =
       (leftDerivedUpperStarCongr A (W.frobeniusIterate_succ m)).hom.app W.obj ≫
         (leftDerivedUpperStarComp A W.frobenius (W.frobeniusIterate m)).hom.app W.obj ≫
         ((upperStar A W.frobenius).leftDerivedFunctor).map (W.coeffIterate m) ≫ W.coeff :=
   rfl
+
+/-- `φ_1` is `φ`, read through `Φ_1 = Φ₁ ≫ 𝟙 X = Φ₁`. This needs the unit coherence of
+`leftDerivedUpperStarComp` with `leftDerivedUpperStarId`. -/
+lemma coeffIterate_one :
+    W.coeffIterate 1 =
+      (leftDerivedUpperStarCongr A W.frobeniusIterate_one).hom.app W.obj ≫ W.coeff :=
+  sorry
+
+/-- The iterates of an invertible Frobenius coefficient morphism are invertible. -/
+instance isIso_coeffIterate [IsIso W.coeff] (m : ℕ) : IsIso (W.coeffIterate m) := by
+  induction m with
+  | zero => rw [coeffIterate_zero]; infer_instance
+  | succ n ih => rw [coeffIterate_succ]; infer_instance
 
 /-- The coefficient map of the graph correspondence
 `AlgebraicGeometry.ProEtale.WeilComplex.graph`: the iterate `φ_m` read through the
@@ -158,15 +205,20 @@ noncomputable def graph (G : GeometricOperations A s) (m : ℕ) :
   snd_comp := W.frobeniusIterate_comp m
   coeff := W.graphCoeff G m
 
-/-- The structure morphism of the graph `W.graph m` is `aX`, so it admits a compactification
-when `aX` does. -/
+/-- The structure morphism of the graph `W.graph G m` is `aX`, so it admits a
+compactification when `aX` does. -/
 instance hasCompactification_graph_str [HasCompactification aX] (G : GeometricOperations A s)
     (m : ℕ) : HasCompactification (W.graph G m).str :=
   inferInstanceAs (HasCompactification aX)
 
 /-- The geometric-stalk Frobenius `F_{x,m} = (φ_m)_x̄` of a Weil complex at a point
-`x : s ⟶ X` fixed by `Φ_m`: the composite of the comparison
-`Lx^* K ≃ L(x ≫ Φ_m)^* K ≃ Lx^* Φ_m^* K` with `Lx^* φ_m`
+`x : s ⟶ X` fixed by `Φ_m`: the composite
+
+```
+  Lx^* K ──(leftDerivedUpperStarCongr hx).inv──▶ L(x ≫ Φ_m)^* K
+    ──leftDerivedUpperStarComp x Φ_m──▶ Lx^* LΦ_m^* K ──Lx^*.map φ_m──▶ Lx^* K
+```
+
 (part of blueprint `sk-thm-trace-formula`). -/
 noncomputable def stalkFrobenius (m : ℕ) (x : s ⟶ X) (hx : x ≫ W.frobeniusIterate m = x) :
     ((upperStar A x).leftDerivedFunctor).obj W.obj ⟶
@@ -174,6 +226,16 @@ noncomputable def stalkFrobenius (m : ℕ) (x : s ⟶ X) (hx : x ≫ W.frobenius
   (leftDerivedUpperStarCongr A hx).inv.app W.obj ≫
     (leftDerivedUpperStarComp A x (W.frobeniusIterate m)).hom.app W.obj ≫
     ((upperStar A x).leftDerivedFunctor).map (W.coeffIterate m)
+
+/-- At a point `x` fixed by `Φ₁` (a rational point of `X₀`), the stalk Frobenius of `φ_m`
+is the `m`-th power of the stalk Frobenius of `φ`: `F_{x,m} = F_x^m`. This needs the
+associativity and unit coherences of `leftDerivedUpperStarComp`. -/
+lemma stalkFrobenius_eq_pow {x : s ⟶ X} (hx : x ≫ W.frobenius = x) (m : ℕ) :
+    W.stalkFrobenius m x (W.comp_frobeniusIterate_of_comp_frobenius hx m) =
+      let F : End (((upperStar A x).leftDerivedFunctor).obj W.obj) :=
+        W.stalkFrobenius 1 x (W.comp_frobeniusIterate_of_comp_frobenius hx 1)
+      F ^ m :=
+  sorry
 
 end WeilComplex
 
@@ -243,36 +305,80 @@ theorem ctf_leftDerivedUpperStar_obj_iff (G : GeometricCoefficients A) (r : X �
     G.ctf X (((upperStar A r).leftDerivedFunctor).obj K) ↔ G.ctf Y K :=
   sorry
 
+namespace GeometricOperations
+
+/-- The *compact-support exchange* of a commutative square `f ≫ g_Y = g_X ≫ f` whose gap map
+`r = relativeFrobenius f g_X g_Y h : X ⟶ X' = Y ×_{g_Y, Y, f} X` is proper:
+
+```
+   X ──r──→ X' ──f'──→ Y          r ≫ f' = f
+            │          │          r ≫ p = g_X
+           p│          │g_Y
+            ↓          ↓
+            X ───f───→ Y
+```
+
+with `f' = pullback.fst g_Y f` and `p = pullback.snd g_Y f`. It is the natural transformation
+`θ : Lg_Y^* Rf_! ⟶ Rf_! Lg_X^*` with components
+
+```
+  Lg_Y^* Rf_! K ──baseChange sq──▶ Rf'_! Lp^* K
+    ──Rf'_!(unit of Lr^* ⊣ Rr_*)──▶ Rf'_! Rr_* Lr^* Lp^* K
+    ──Rf'_!(properComparison r).inv──▶ Rf'_! Rr_! Lr^* Lp^* K
+    ──lowerShriekComp r f' ≪≫ lowerShriekCongr──▶ Rf_! Lr^* Lp^* K
+    ──Rf_!(leftDerivedUpperStarComp r p ≪≫ leftDerivedUpperStarCongr)──▶ Rf_! Lg_X^* K.
+```
+
+For the Frobenius square of a Weil complex this is the Weil comparison `θ_{f,m}` with
+`g_X = Φ_{X,m}`, `g_Y = Φ_{Y,m}` and `r = r_m`, and it is invertible when `r` is a finite
+universal homeomorphism (`isIso_lowerShriekExchange`) (blueprint: `sk-d-weil-push`). -/
+noncomputable def lowerShriekExchange (G : GeometricOperations A s) (f : X ⟶ Y)
+    [HasCompactification f] (gX : X ⟶ X) (gY : Y ⟶ Y) (h : f ≫ gY = gX ≫ f)
+    [IsProper (relativeFrobenius f gX gY h)] :
+    rightDerivedLowerShriek A f ⋙ (upperStar A gY).leftDerivedFunctor ⟶
+      (upperStar A gX).leftDerivedFunctor ⋙ rightDerivedLowerShriek A f :=
+  let f' := pullback.fst gY f
+  let p := pullback.snd gY f
+  let sq : IsPullback p f' f gY := (IsPullback.of_hasPullback gY f).flip
+  let r := relativeFrobenius f gX gY h
+  have : HasCompactification f' := HasCompactification.of_isPullback sq
+  have : HasCompactification (r ≫ f') := by
+    rw [relativeFrobenius_comp_fst]
+    infer_instance
+  (G.baseChange sq).hom ≫
+    Functor.whiskerRight (Functor.whiskerLeft (upperStar A p).leftDerivedFunctor
+      ((derivedUpperStarLowerStarAdjunction A r).unit ≫
+        Functor.whiskerLeft (upperStar A r).leftDerivedFunctor (G.properComparison r).inv))
+      (rightDerivedLowerShriek A f') ≫
+    Functor.whiskerLeft ((upperStar A p).leftDerivedFunctor ⋙ (upperStar A r).leftDerivedFunctor)
+      (G.lowerShriekComp r f' ≪≫ lowerShriekCongr (relativeFrobenius_comp_fst f gX gY h)).hom ≫
+    Functor.whiskerRight ((leftDerivedUpperStarComp A r p).symm ≪≫
+      leftDerivedUpperStarCongr A (relativeFrobenius_comp_snd f gX gY h)).hom
+      (rightDerivedLowerShriek A f)
+
+/-- Topological invariance makes the compact-support exchange invertible when the gap map is
+a finite universal homeomorphism: then the unit of `Lr^* ⊣ Rr_*` is an isomorphism
+(blueprint: `sk-i-topology`). -/
+instance isIso_lowerShriekExchange (G : GeometricOperations A s) (f : X ⟶ Y)
+    [HasCompactification f] (gX : X ⟶ X) (gY : Y ⟶ Y) (h : f ≫ gY = gX ≫ f)
+    [IsFinite (relativeFrobenius f gX gY h)]
+    [IsUniversalHomeomorphism (relativeFrobenius f gX gY h)] :
+    IsIso (G.lowerShriekExchange f gX gY h) :=
+  sorry
+
+end GeometricOperations
+
 /-- The coefficient map of `AlgebraicGeometry.ProEtale.WeilComplex.lowerShriekPush`: the
-composite `ψ = Rf_! φ ∘ θ_{f,1}` of the Weil comparison
-
-`θ_{f,m} : Φ_{Y,m}^* Rf_! K ≃ Rf'_{m!} p_m^* K ⟶ Rf'_{m!} Rr_{m!} r_m^* p_m^* K ≃
-  Rf_! Φ_{X,m}^* K`,
-
-built from Cartesian `!`-base change for `X'_m` and topological invariance for the relative
-Frobenius `r_m`, with `Rf_! φ`. -/
+composite `ψ = Rf_! φ ∘ θ_{f,1}` of the compact-support exchange
+`θ_{f,1} : LΦ_Y^* Rf_! K ⟶ Rf_! LΦ_X^* K` (`GeometricOperations.lowerShriekExchange` for the
+square `f ≫ Φ_Y = Φ_X ≫ f`) with `Rf_! φ`. Only the case `m = 1` is constructed here. -/
 noncomputable def WeilComplex.lowerShriekPushCoeff {aX : X ⟶ s} (W : WeilComplex (A := A) aX)
     (G : GeometricOperations A s) (f : X ⟶ Y) [HasCompactification f] (frobY : Y ⟶ Y)
-    (h : f ≫ frobY = W.frobenius ≫ f) [IsFinite W.frobenius] [IsFinite frobY] :
+    (h : f ≫ frobY = W.frobenius ≫ f) [IsProper (relativeFrobenius f W.frobenius frobY h)] :
     ((upperStar A frobY).leftDerivedFunctor).obj ((rightDerivedLowerShriek A f).obj W.obj) ⟶
       (rightDerivedLowerShriek A f).obj W.obj :=
-  -- `X'_1 = Y ×_{Φ_Y, Y, f} X`, with `f'_1 = pullback.fst` and `p_1 = pullback.snd`
-  let sq : IsPullback (pullback.snd frobY f) (pullback.fst frobY f) f frobY :=
-    (IsPullback.of_hasPullback frobY f).flip
-  let r := relativeFrobenius f W.frobenius frobY h
-  have : HasCompactification (pullback.fst frobY f) := HasCompactification.of_isPullback sq
-  have : HasCompactification (r ≫ pullback.fst frobY f) :=
-    (relativeFrobenius_comp_fst f W.frobenius frobY h).symm ▸ inferInstance
-  (G.baseChange sq).hom.app W.obj ≫
-    (rightDerivedLowerShriek A (pullback.fst frobY f)).map
-      ((derivedUpperStarLowerStarAdjunction A r).unit.app _ ≫
-        (G.properComparison r).inv.app _) ≫
-    (G.lowerShriekComp r (pullback.fst frobY f) ≪≫
-      lowerShriekCongr (relativeFrobenius_comp_fst f W.frobenius frobY h)).hom.app _ ≫
-    (rightDerivedLowerShriek A f).map
-      (((leftDerivedUpperStarComp A r (pullback.snd frobY f)).symm ≪≫
-        leftDerivedUpperStarCongr A
-          (relativeFrobenius_comp_snd f W.frobenius frobY h)).hom.app W.obj ≫ W.coeff)
+  (G.lowerShriekExchange f W.frobenius frobY h).app W.obj ≫
+    (rightDerivedLowerShriek A f).map W.coeff
 
 /-- The `!`-pushforward of a Weil complex `(K, φ)` along `f : X ⟶ Y` compatible with the
 Frobenius morphisms: the Weil complex `L = Rf_! K` on `Y` with coefficient map
@@ -280,11 +386,23 @@ Frobenius morphisms: the Weil complex `L = Rf_! K` on `Y` with coefficient map
 noncomputable def WeilComplex.lowerShriekPush {aX : X ⟶ s} {aY : Y ⟶ s}
     (W : WeilComplex (A := A) aX) (G : GeometricOperations A s) (f : X ⟶ Y)
     [HasCompactification f] (frobY : Y ⟶ Y) (hY : frobY ≫ aY = aY)
-    (h : f ≫ frobY = W.frobenius ≫ f) [IsFinite W.frobenius] [IsFinite frobY] :
+    (h : f ≫ frobY = W.frobenius ≫ f) [IsProper (relativeFrobenius f W.frobenius frobY h)] :
     WeilComplex (A := A) aY where
   frobenius := frobY
   frobenius_comp := hY
   obj := (rightDerivedLowerShriek A f).obj W.obj
   coeff := W.lowerShriekPushCoeff G f frobY h
+
+/-- The `!`-pushforward of a Weil datum is a Weil datum: when the relative Frobenius is a
+finite universal homeomorphism, `θ_{f,1}` is invertible, so `ψ = Rf_! φ ∘ θ_{f,1}` is
+invertible whenever `φ` is (blueprint: `sk-d-weil-push`). -/
+instance WeilComplex.isIso_lowerShriekPush_coeff {aX : X ⟶ s} {aY : Y ⟶ s}
+    (W : WeilComplex (A := A) aX) (G : GeometricOperations A s) (f : X ⟶ Y)
+    [HasCompactification f] (frobY : Y ⟶ Y) (hY : frobY ≫ aY = aY)
+    (h : f ≫ frobY = W.frobenius ≫ f) [IsFinite (relativeFrobenius f W.frobenius frobY h)]
+    [IsUniversalHomeomorphism (relativeFrobenius f W.frobenius frobY h)] [IsIso W.coeff] :
+    IsIso (W.lowerShriekPush G f frobY hY h).coeff := by
+  dsimp [lowerShriekPush, lowerShriekPushCoeff]
+  infer_instance
 
 end AlgebraicGeometry.ProEtale
