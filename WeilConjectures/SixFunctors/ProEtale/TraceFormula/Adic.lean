@@ -208,7 +208,7 @@ theorem hasProd_inv_alternatingCharpolyRevProd (G : GeometricOperations A s)
     [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))]
     {aX : X ⟶ s} [HasCompactification aX] (W : WeilComplex (A := A) aX) (hW : IsIso W.coeff)
     (hctf : G.ctf X W.obj)
-    [∀ m : ℕ, IsProper (W.graph m).snd] [∀ m : ℕ, HasCompactification (W.graph m).snd]
+    [∀ m : ℕ, IsProper (W.graph m).snd]
     [∀ m : ℕ, Fintype {x : s ⟶ X // x ≫ W.frobeniusIterate m = x}]
     [HasRightDual ((rightDerivedLowerShriek A aX).obj W.obj)]
     [∀ x : s ⟶ X, HasRightDual (((upperStar A x).leftDerivedFunctor).obj W.obj)]

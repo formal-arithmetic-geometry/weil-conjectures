@@ -35,6 +35,9 @@ by sheafification.
 - `AlgebraicGeometry.ProEtale.upperStar`: the pullback `g^*`, given by left Kan extension
   on presheaves followed by sheafification, with scoped notation `(g)^*[A]`.
 - `AlgebraicGeometry.ProEtale.upperStarLowerStarAdjunction`: the adjunction `g^* ⊣ g_*`.
+- `AlgebraicGeometry.ProEtale.lowerStarId` and `AlgebraicGeometry.ProEtale.upperStarId`: the
+  identity isomorphisms `(𝟙 X)_* ≅ 𝟭` and `(𝟙 X)^* ≅ 𝟭`, the latter obtained from the former
+  by uniqueness of left adjoints.
 - `AlgebraicGeometry.ProEtale.lowerStarComp` and
   `AlgebraicGeometry.ProEtale.upperStarComp`: the composition isomorphisms
   `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` and `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`, the latter
@@ -269,6 +272,45 @@ instance ProEtale.preservesHomology_upperStar : (g)^*[A].PreservesHomology := by
 end Adjunction
 
 end Star
+
+section Id
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+variable (X : Scheme.{u})
+
+open ProEtale
+
+/-- The identity isomorphism `(𝟙 X)_* ≅ 𝟭` of the pushforward on pro-étale sheaves: base
+change along `𝟙 X` is the identity functor by `MorphismProperty.Over.pullbackId`. This is
+the pro-étale counterpart of `AlgebraicGeometry.Etale.lowerStarId`. -/
+noncomputable def ProEtale.lowerStarId : (𝟙 X)_*[A] ≅ 𝟭 _ :=
+  Functor.sheafPushforwardContinuousId' (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X) A
+    (Scheme.ProEt.topology X)
+
+/-- The identity isomorphism `(𝟙 X)^* ≅ 𝟭` of the pullback on pro-étale sheaves, obtained
+from `ProEtale.lowerStarId` by uniqueness of left adjoints: both sides are left adjoint to
+`(𝟙 X)_*`. This is the pro-étale counterpart of `AlgebraicGeometry.Etale.upperStarId`. -/
+noncomputable def ProEtale.upperStarId : (𝟙 X)^*[A] ≅ 𝟭 _ :=
+  (conjugateIsoEquiv Adjunction.id (upperStarLowerStarAdjunction A (𝟙 X))).symm
+    (lowerStarId A X).symm
+
+/-- Under the conjugation bijection between the adjunctions `𝟭 ⊣ 𝟭` and `(𝟙 X)^* ⊣ (𝟙 X)_*`,
+the identity isomorphism of the pullback corresponds to the inverse of the identity
+isomorphism of the pushforward:
+
+```
+  (𝟙 X)^* ⊣ (𝟙 X)_*        upperStarId : (𝟙 X)^* ≅ 𝟭
+      ↕ conjugate                  ↦
+      𝟭 ⊣ 𝟭               lowerStarId.symm : 𝟭 ≅ (𝟙 X)_*
+```
+
+This is the pro-étale counterpart of `AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarId`. -/
+lemma ProEtale.conjugateIsoEquiv_upperStarId :
+    conjugateIsoEquiv Adjunction.id (upperStarLowerStarAdjunction A (𝟙 X))
+        (upperStarId A X) = (lowerStarId A X).symm :=
+  Equiv.apply_symm_apply _ _
+
+end Id
 
 section Comp
 

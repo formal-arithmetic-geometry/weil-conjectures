@@ -109,8 +109,8 @@ arbitrary `X`, which is what the proper compatibility theorem uses
 theorem integral_traceClass_eq_trace
     [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))]
     (P : DerivedCategory (Sheaf (Scheme.ProEt.topology s) A)) [HasRightDual P] (v : P ⟶ P) :
-    G.integral (Correspondence.ofEnd (𝟙 s) P v).fixStr
-        (G.traceClass (Correspondence.ofEnd (𝟙 s) P v)) =
+    G.integral (Correspondence.ofEnd G (𝟙 s) P v).fixStr
+        (G.traceClass (Correspondence.ofEnd G (𝟙 s) P v)) =
       MonoidalCategory.trace v :=
   sorry
 

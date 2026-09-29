@@ -57,6 +57,12 @@ the type of the functor is spelled out.
 - `AlgebraicGeometry.ProEtale.leftDerivedUpperStarComp` : the composition isomorphism
   `L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*`.
 
+- `AlgebraicGeometry.ProEtale.leftDerivedUpperStarId` : the identity isomorphism
+  `L(𝟙 X)^* ≅ 𝟭` of the derived pullback.
+
+- `AlgebraicGeometry.ProEtale.leftDerivedUpperStarCongr` : the transport `Lf^* ≅ Lg^*`
+  along an equality `f = g`.
+
 - `AlgebraicGeometry.ProEtale.leftDerivedUpperStarHomologyFunctorIso` : the derived
   pullback commutes with the homology functors, `H^n ⋙ g^* ≅ Lg^* ⋙ H^n`.
 
@@ -222,6 +228,23 @@ noncomputable def leftDerivedUpperStarComp {T S R : Scheme.{u}}
     L((g₁ ≫ g₂)^*[A]) ≅ L((g₂)^*[A]) ⋙ L((g₁)^*[A]) :=
   Functor.leftDerivedFunctorNatIso _ (ProEtale.upperStarComp A g₁ g₂) ≪≫
     Functor.leftDerivedFunctorCompIso (g₂)^*[A] (g₁)^*[A]
+
+/-- The identity isomorphism `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on pro-étale sheaves. -/
+noncomputable def leftDerivedUpperStarId (X : Scheme.{u}) : L((𝟙 X)^*[A]) ≅ 𝟭 _ :=
+  -- the derived functor of `ProEtale.upperStarId`, followed by `L(𝟭) ≅ D(𝟭) ≅ 𝟭`
+  Functor.leftDerivedFunctorNatIso _ (ProEtale.upperStarId A X) ≪≫
+    (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
+
+/-- Transport of the derived pullback along an equality of morphisms: `Lf^* ≅ Lg^*` for
+`f = g`. -/
+noncomputable def leftDerivedUpperStarCongr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
+    L((f)^*[A]) ≅ L((g)^*[A]) :=
+  eqToIso (by rw [h])
+
+@[simp]
+lemma leftDerivedUpperStarCongr_rfl {X Y : Scheme.{u}} {f : X ⟶ Y} :
+    leftDerivedUpperStarCongr A (rfl : f = f) = Iso.refl _ :=
+  rfl
 
 /-- The exactness comparison `H^n ∘ g^* ≅ g^* ∘ H^n`: since the underived pullback `g^*`
 on pro-étale sheaves is exact, applying it to the `n`-th homology sheaf of an object of

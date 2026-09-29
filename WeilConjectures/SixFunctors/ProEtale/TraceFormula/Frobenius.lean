@@ -139,6 +139,12 @@ noncomputable def graph (m : ℕ) : Correspondence aX aX W.obj W.obj where
   snd_comp := W.frobeniusIterate_comp m
   coeff := W.graphCoeff m
 
+/-- The structure morphism of the graph `W.graph m` is `aX`, so it admits a compactification
+when `aX` does. -/
+instance hasCompactification_graph_str [HasCompactification aX] (m : ℕ) :
+    HasCompactification (W.graph m).str :=
+  inferInstanceAs (HasCompactification aX)
+
 end WeilComplex
 
 /-- The *relative Frobenius* `r_m = (f, Φ_{X,m}) : X ⟶ X'_m` of a morphism `f : X ⟶ Y`
