@@ -40,7 +40,10 @@ part of the file). That reusable form is what `𝔾ₐ`, `μₙ` and sheaves of 
 - `AlgebraicGeometry.Scheme.gmSheaf`: the sheaf `𝔾ₘ` of units on the small étale site.
 - `AlgebraicGeometry.Scheme.CohomologicalPicardGroup`: `H¹(X_ét, 𝔾ₘ)`.
 - `AlgebraicGeometry.Scheme.CohomologicalBrauerGroup`: `H²(X_ét, 𝔾ₘ)`.
-- `AlgebraicGeometry.Scheme.upperStarGmSheafIso`: `g^* 𝔾ₘ ≅ 𝔾ₘ`.
+- `AlgebraicGeometry.Scheme.gmSheafToLowerStar`: the map `𝔾ₘ ⟶ g_* 𝔾ₘ` on units.
+- `AlgebraicGeometry.Scheme.gmSheafComparison`: its adjoint `g^* 𝔾ₘ ⟶ 𝔾ₘ`.
+- `AlgebraicGeometry.Scheme.upperStarGmSheafIso`: `g^* 𝔾ₘ ≅ 𝔾ₘ`, whose invertibility
+  (`AlgebraicGeometry.Scheme.isIso_gmSheafComparison`) is `sorry`.
 
 ## Main statements
 
@@ -148,13 +151,47 @@ instance subsingleton_cohomologicalPicardGroup_of_field (K : Type u) [Field K] :
 
 variable {X} {Y : Scheme.{u}}
 
-/-- The pullback of `𝔾ₘ` along an arbitrary morphism of schemes is `𝔾ₘ`: the sheaf `𝔾ₘ` is
-represented by the group scheme `𝔾_{m,X}`, whose formation commutes with base change. This is
-the analogue for `𝔾ₘ` of `AlgebraicGeometry.Scheme.upperStarConstantSheafIso`, and is what
-identifies the target of a pullback map on the cohomology of `𝔾ₘ`. The blueprint block uses
-it silently and has no node for it. The proof is `sorry`. -/
+/-- The map of structure presheaves `Γ(V, 𝒪_V) ⟶ Γ(V ×_Y X, 𝒪)` on the small étale site of
+`Y`, given on an étale `Y`-scheme `V` by the pullback of functions along the first projection
+`V ×_Y X ⟶ V` of the base change of `V` along `g`. -/
+noncomputable def etaleStructurePresheafToBaseChange (g : X ⟶ Y) :
+    Y.etaleStructurePresheaf ⟶
+      (MorphismProperty.Over.pullback @Etale ⊤ g).op ⋙ X.etaleStructurePresheaf where
+  app V := Scheme.Γ.map (Limits.pullback.fst V.unop.hom g).op
+  naturality V W f := by
+    change Scheme.Γ.map f.unop.left.op ≫ Scheme.Γ.map (Limits.pullback.fst W.unop.hom g).op =
+      Scheme.Γ.map (Limits.pullback.fst V.unop.hom g).op ≫ Scheme.Γ.map _
+    simp only [← Functor.map_comp, ← op_comp]
+    congr 2
+    exact (Limits.pullback.lift_fst _ _ _).symm
+
+/-- The map `𝔾ₘ ⟶ g_* 𝔾ₘ` of sheaves on the small étale site of `Y`: on an étale `Y`-scheme
+`V` it is the map on units `Γ(V, 𝒪_V)ˣ ⟶ Γ(V ×_Y X, 𝒪)ˣ` induced by the first projection
+`V ×_Y X ⟶ V`. -/
+noncomputable def gmSheafToLowerStar (g : X ⟶ Y) :
+    Y.gmSheaf ⟶ (Etale.lowerStar AddCommGrpCat.{u + 1} g).obj X.gmSheaf :=
+  ⟨Functor.whiskerRight (etaleStructurePresheafToBaseChange g)
+    (CommRingCat.unitsAddCommGrp ⋙ AddCommGrpCat.uliftFunctor.{u + 1, u})⟩
+
+/-- The comparison map `g^* 𝔾ₘ ⟶ 𝔾ₘ` on the small étale site of `X`: the transpose under the
+adjunction `g^* ⊣ g_*` of `AlgebraicGeometry.Scheme.gmSheafToLowerStar`. -/
+noncomputable def gmSheafComparison (g : X ⟶ Y) :
+    (Etale.upperStar AddCommGrpCat.{u + 1} g).obj Y.gmSheaf ⟶ X.gmSheaf :=
+  ((Etale.upperStarLowerStarAdjunction _ g).homEquiv _ _).symm (gmSheafToLowerStar g)
+
+/-- The comparison map `g^* 𝔾ₘ ⟶ 𝔾ₘ` is an isomorphism: the sheaf `𝔾ₘ` is represented by the
+group scheme `𝔾_{m,X}`, whose formation commutes with base change. The proof is deferred and
+is `sorry`. -/
+instance isIso_gmSheafComparison (g : X ⟶ Y) : IsIso (gmSheafComparison g) :=
+  sorry
+
+/-- The pullback of `𝔾ₘ` along an arbitrary morphism of schemes is `𝔾ₘ`, via the comparison
+map `AlgebraicGeometry.Scheme.gmSheafComparison`. This is the analogue for `𝔾ₘ` of
+`AlgebraicGeometry.Scheme.upperStarConstantSheafIso`, and is what identifies the target of a
+pullback map on the cohomology of `𝔾ₘ`. The blueprint block uses it silently and has no node
+for it. -/
 noncomputable def upperStarGmSheafIso (g : X ⟶ Y) :
     (Etale.upperStar AddCommGrpCat.{u + 1} g).obj Y.gmSheaf ≅ X.gmSheaf :=
-  sorry
+  asIso (gmSheafComparison g)
 
 end AlgebraicGeometry.Scheme
