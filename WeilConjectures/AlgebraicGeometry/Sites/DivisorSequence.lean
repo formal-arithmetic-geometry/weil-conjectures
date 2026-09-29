@@ -155,9 +155,9 @@ noetherian scheme with function field `k(X)`. Then the pullback along the generi
 
 is injective, that is, `Br(X) = H²(X, 𝔾ₘ) ↪ H²(Spec k(X), 𝔾ₘ) = Br(k(X))`; the target is
 identified with the cohomological Brauer group of `k(X)` by
-`AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField`. It follows from the long exact cohomology
-sequence of the divisor sequence together with `H¹(X, i_{x*} ℤ) = 0`. In particular this
-holds for a smooth curve. The proof is `sorry`.
+`AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField`. It follows
+from the long exact cohomology sequence of the divisor sequence together with
+`H¹(X, i_{x*} ℤ) = 0`. In particular this holds for a smooth curve. The proof is `sorry`.
 (blueprint: `lem-sc-brauer-injectivity`) -/
 theorem injective_cohomologyMap_gmSheaf_two [IsNoetherian X] [IsRegular X] :
     Function.Injective (Etale.cohomologyMap X.fromSpecFunctionField X.gmSheaf 2) :=
