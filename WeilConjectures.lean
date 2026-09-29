@@ -348,6 +348,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructur
 public import WeilConjectures.Mathlib.Algebra.Homology.Double
 public import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
