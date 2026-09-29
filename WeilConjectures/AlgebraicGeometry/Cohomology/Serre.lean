@@ -26,11 +26,12 @@ Projective space is the project's relative projective space `ℙ(n; S)`, whose i
 the index type of the *homogeneous* coordinates, so that `ℙᵈ_k` is `ℙ(n; Spec k)` for a type
 `n` with `Nat.card n = d + 1`.
 
-## Implementation notes
+The twisting sheaf `AlgebraicGeometry.ProjectiveSpace.twist` is the pullback along
+`AlgebraicGeometry.ProjectiveSpace.toProjInt` of `AlgebraicGeometry.Proj.twist` of the integral
+model `Proj ℤ[Tᵢ]`, and `AlgebraicGeometry.ProjectiveSpace.twistRestrict` is its pullback to a
+closed subscheme.
 
-The twisting sheaf `AlgebraicGeometry.ProjectiveSpace.twist` is defined in
-`WeilConjectures/AlgebraicGeometry/ProjectiveSpace/Twist.lean` as the pullback of the twisting
-sheaf of the integral model `Proj ℤ[Tᵢ]`.
+## Implementation notes
 
 The symmetric power `Sᵐ(V)` of `V = k^{d+1}` is realised as the degree-`m` homogeneous part
 `MvPolynomial.homogeneousSubmodule n k m` of the polynomial ring in the homogeneous
@@ -111,12 +112,6 @@ end Pn
 
 variable {n} {X : Scheme.{u}} (k : Type u) [Field k]
 
-/-- The restriction `𝒪_X(m)` to a closed subscheme `i : X ⟶ ℙ(n; Spec k)` of the twisting
-sheaf on projective space, i.e. its pullback along `i`. -/
-abbrev ProjectiveSpace.twistRestrict (i : X ⟶ ℙ(n; Spec (.of k))) (m : ℤ) :
-    X.Modules :=
-  (Scheme.Modules.pullback i).obj (ProjectiveSpace.twist n (Spec (.of k)) m)
-
 open scoped AlgebraicGeometry.Scheme.Modules in
 /-- **Serre's theorem B: vanishing after a twist.** Let `X ⊆ ℙᵈ_k` be a closed subscheme, i.e. a
 closed immersion `i : X ⟶ ℙ(n; Spec k)`, and let `ℱ` be a coherent sheaf on `X`. Then
@@ -133,7 +128,7 @@ theorem Scheme.Modules.exists_subsingleton_H_tensor_twist [Finite n]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) F] :
     ∃ m₀ : ℤ, ∀ m ≥ m₀, ∀ q : ℕ, 0 < q →
-      Subsingleton ((F ⊗ₘ ProjectiveSpace.twistRestrict k i m).H q) :=
+      Subsingleton ((F ⊗ₘ ProjectiveSpace.twistRestrict i m).H q) :=
   sorry
 
 open scoped AlgebraicGeometry.Scheme.Modules in
@@ -155,7 +150,7 @@ theorem Scheme.Modules.exists_generatingSections_tensor_twist [Finite n]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) F] :
     ∃ m₀ : ℤ, ∀ m ≥ m₀,
-      Nonempty (SheafOfModules.GeneratingSections (F ⊗ₘ ProjectiveSpace.twistRestrict k i m)) :=
+      Nonempty (SheafOfModules.GeneratingSections (F ⊗ₘ ProjectiveSpace.twistRestrict i m)) :=
   sorry
 
 end AlgebraicGeometry

@@ -6,10 +6,13 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import Mathlib.AlgebraicGeometry.Modules.Presheaf
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 
 /-!
-# Sections of a kernel of `𝒪_X`-modules
+# Sections of a kernel of `𝒪_X`-modules, and the pullback of the structure sheaf
 
 Limits in `X.Modules` are computed section-wise, because evaluation at an open subset
 preserves finite limits (`SheafOfModules.Finite.evaluationPreservesFiniteLimits`). This file
@@ -20,9 +23,13 @@ This is the tool that turns a sheaf of modules defined as a kernel — as the id
 `Scheme.IdealSheafData` is in `WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module` —
 into a computable object.
 
+The file also records that the pullback of the structure sheaf along any morphism of schemes
+is the structure sheaf.
+
 ## Main results
 
 - `AlgebraicGeometry.Scheme.Modules.range_map_kernelι`
+- `AlgebraicGeometry.Scheme.Modules.pullbackObjUnitIso`: `f^* 𝒪_Y ≅ 𝒪_X`.
 -/
 
 @[expose] public section
@@ -75,5 +82,15 @@ instance : Mono ((SheafOfModules.evaluation X.ringCatSheaf (op U)).map (kernel.�
 lemma injective_map_kernelι :
     Function.Injective ((SheafOfModules.evaluation X.ringCatSheaf (op U)).map (kernel.ι f)) :=
   (ModuleCat.mono_iff_injective _).mp inferInstance
+
+/-- The pullback of the structure sheaf along a morphism of schemes is the structure sheaf. -/
+noncomputable def pullbackObjUnitIso {Y : Scheme.{u}} (g : X ⟶ Y) :
+    (Modules.pullback g).obj (SheafOfModules.unit Y.ringCatSheaf) ≅
+      SheafOfModules.unit X.ringCatSheaf :=
+  -- The `IsIso` instance has to be introduced by hand: elaborating `asIso` directly leaves the
+  -- universe metavariables of `pullbackObjUnitToUnit` undetermined when the instance is sought.
+  haveI : IsIso (C := SheafOfModules.{u} X.ringCatSheaf)
+      (SheafOfModules.pullbackObjUnitToUnit g.toRingCatSheafHom) := inferInstance
+  asIso (SheafOfModules.pullbackObjUnitToUnit g.toRingCatSheafHom)
 
 end AlgebraicGeometry.Scheme.Modules

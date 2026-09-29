@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
@@ -44,11 +45,13 @@ homogeneous element is `HomogeneousLocalization.mul_mem_degreePart` applied poin
 - `AlgebraicGeometry.Proj.twistRestrictIso`: on the basic open set `D₊(f)`, multiplication by
   `f` is an isomorphism `𝒪(m) ≅ 𝒪(m + d)`. Together with `unitIsoTwistZero`, this says that
   `𝒪(k * d)` is trivial on `D₊(f)`.
+- `AlgebraicGeometry.Proj.nonempty_restrict_twist_iso_unit`: `𝒪(m)` is trivial on `D₊(f)` for
+  every `m` when `f` has degree `1`.
+- `AlgebraicGeometry.Proj.isInvertible_twist`: `𝒪(m)` is invertible when the `D₊(f)` with `f`
+  of degree `1` cover `Proj 𝒜`.
 
 ## TODO
 
-- Combine `twistRestrictIso` and `unitIsoTwistZero` into an isomorphism `𝒪(m) ≅ 𝒪` on `D₊(f)`
-  whenever `d ∣ m`, i.e. `𝒪(m)` is invertible when `𝒜` is generated in degree `1`.
 - Construct `M~` for an arbitrary graded `A`-module `M` and recover `𝒪(m)` as `(A(m))~`. All
   the proofs in this file go through with `a ∈ 𝒜 i` replaced by `a ∈ M i`.
 - The multiplication `𝒪(m) ⊗ 𝒪(n) ≅ 𝒪(m + n)`.
@@ -420,6 +423,32 @@ def twistRestrictIso :
     (twist 𝒜 m).restrict (Proj.basicOpen 𝒜 f).ι ≅
       (twist 𝒜 (m + d)).restrict (Proj.basicOpen 𝒜 f).ι :=
   asIso ((Scheme.Modules.restrictFunctor (Proj.basicOpen 𝒜 f).ι).map (twistMul m hf))
+
+/-- **`𝒪(m)` is trivial on `D₊(f)`** for a homogeneous element `f` of degree `1`: composing
+`twistRestrictIso` `|m|` times gives `𝒪(m)|_{D₊(f)} ≅ 𝒪(0)|_{D₊(f)}`, and `𝒪(0) ≅ 𝒪`. -/
+lemma nonempty_restrict_twist_iso_unit (hf : f ∈ 𝒜 1) :
+    Nonempty ((twist 𝒜 m).restrict (Proj.basicOpen 𝒜 f).ι ≅ SheafOfModules.unit _) := by
+  have key (m : ℤ) : Nonempty ((twist 𝒜 m).restrict (Proj.basicOpen 𝒜 f).ι ≅
+      (twist 𝒜 0).restrict (Proj.basicOpen 𝒜 f).ι) := by
+    induction m using Int.induction_on with
+    | zero => exact ⟨Iso.refl _⟩
+    | succ k ih => exact ⟨(twistRestrictIso k hf).symm ≪≫ ih.some⟩
+    | pred k ih =>
+      have e := twistRestrictIso (-(k : ℤ) - 1) hf
+      rw [show -(k : ℤ) - 1 + ((1 : ℕ) : ℤ) = -k by omega] at e
+      exact ⟨e ≪≫ ih.some⟩
+  exact ⟨(key m).some ≪≫ (Scheme.Modules.restrictFunctor _).mapIso unitIsoTwistZero.symm ≪≫
+    Scheme.Modules.restrictUnitIso _⟩
+
+variable (𝒜) in
+/-- **`𝒪(m)` is invertible** on `Proj 𝒜` when the basic open sets `D₊(f)` of the homogeneous
+elements `f` of degree `1` cover `Proj 𝒜`, e.g. when `𝒜` is generated in degree `1`. -/
+lemma isInvertible_twist (h : ∀ x : Proj 𝒜, ∃ f ∈ 𝒜 1, x ∈ Proj.basicOpen 𝒜 f) :
+    (twist 𝒜 m).IsInvertible where
+  exists_isoUnit x := by
+    obtain ⟨f, hf, hx⟩ := h x
+    obtain ⟨e⟩ := nonempty_restrict_twist_iso_unit m hf
+    exact ⟨_, hx, ⟨(Scheme.Modules.restrictFunctorIsoPullback _).symm.app _ ≪≫ e⟩⟩
 
 end Proj
 
