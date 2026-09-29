@@ -72,6 +72,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Zero
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
@@ -397,6 +398,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
