@@ -617,6 +617,7 @@ public import WeilConjectures.SixFunctors.OpenClosed.AxiomCensus
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Complex
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
+public import WeilConjectures.SixFunctors.OpenClosed.Derived
 public import WeilConjectures.SixFunctors.OpenClosed.Exact
 public import WeilConjectures.SixFunctors.OpenClosed.Points
 public import WeilConjectures.SixFunctors.OpenClosed.Stalk

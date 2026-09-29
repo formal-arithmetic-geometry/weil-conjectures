@@ -67,6 +67,8 @@ The inclusion `I.subschemeι` is a closed immersion, hence affine, so `V(I)` is 
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeι_specMap_fromSpec`
 - `AlgebraicGeometry.Scheme.Hom.ker_toImage`
+- `AlgebraicGeometry.Scheme.Hom.closedComplement` and
+  `AlgebraicGeometry.Scheme.Hom.range_closedComplement`
 - `AlgebraicGeometry.Scheme.Hom.range_imageι` and `AlgebraicGeometry.Scheme.Hom.surjective_imageι`
 - `AlgebraicGeometry.Scheme.Opens.isIso_morphismRestrict_imageι`
 - `AlgebraicGeometry.Scheme.Opens.isSchemeTheoreticallyDominant_preimage_imageι`
@@ -149,6 +151,31 @@ instance surjective_imageι [QuasiCompact f] [IsDominant f] : Surjective f.image
   ⟨Set.range_eq_univ.mp <| by rw [range_imageι, f.denseRange.closure_range]⟩
 
 end AlgebraicGeometry.Scheme.Hom
+
+namespace AlgebraicGeometry.Scheme.Hom
+
+variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+
+/-- The **closed complement** of an open immersion `j : U ⟶ X`: the reduced closed subscheme
+of `X` supported on the complement of the range of `j`, i.e. the subscheme cut out by the
+vanishing ideal of `(Set.range j)ᶜ`. -/
+noncomputable def closedComplement :
+    (IdealSheafData.vanishingIdeal
+      ⟨(Set.range j.base)ᶜ, j.isOpenEmbedding.isOpen_range.isClosed_compl⟩).subscheme ⟶ X :=
+  IdealSheafData.subschemeι _
+
+instance : IsClosedImmersion j.closedComplement := by
+  unfold closedComplement
+  infer_instance
+
+/-- The closed complement of an open immersion `j` is supported exactly on the complement of
+the range of `j`. -/
+lemma range_closedComplement : Set.range j.closedComplement.base = (Set.range j.base)ᶜ := by
+  simp [closedComplement, IdealSheafData.range_subschemeι,
+    IdealSheafData.coe_support_vanishingIdeal]
+
+end AlgebraicGeometry.Scheme.Hom
+
 
 namespace AlgebraicGeometry.Scheme.Opens
 
