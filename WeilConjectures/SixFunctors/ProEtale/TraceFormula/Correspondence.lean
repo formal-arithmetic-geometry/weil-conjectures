@@ -168,6 +168,35 @@ noncomputable def intersectionStr (c : Correspondence aX aY K L)
     (d : Correspondence aY aX L K) : c.intersection d ⟶ s :=
   pullback.fst c.toProd d.toProdSwap ≫ c.str
 
+/-- The fixed scheme is the pullback of the support map along the diagonal:
+
+```
+  Fix(c) ──fixι──▶ C
+     │             │
+  fixι ≫ c₁        │ c = (c₁, c₂)
+     ▼             ▼
+     X ────Δ_X───▶ X ×_s X
+```
+
+is Cartesian, the equaliser of `c₁` and `c₂` being `C ×_{X × X} X`
+(part of blueprint `sk-d-corr`). -/
+lemma isPullback_fixι_toProd (c : Correspondence aX aX K K) :
+    IsPullback c.fixι (c.fixι ≫ c.fst) c.toProd (pullback.diagonal aX) := by
+  have hc : c.fixι ≫ c.fst = c.fixι ≫ c.snd := equalizer.condition _ _
+  have w : c.fixι ≫ c.toProd = (c.fixι ≫ c.fst) ≫ pullback.diagonal aX := by
+    apply pullback.hom_ext <;> simp [toProd, hc]
+  refine IsPullback.of_isLimit (PullbackCone.IsLimit.mk w
+    (fun t ↦ equalizer.lift t.fst ?_) (fun t ↦ equalizer.lift_ι _ _) (fun t ↦ ?_)
+    (fun t m h₁ _ ↦ equalizer.hom_ext (by simpa [fixι] using h₁)))
+  · have h₁ := t.condition =≫ pullback.fst aX aX
+    have h₂ := t.condition =≫ pullback.snd aX aX
+    simp only [Category.assoc, toProd, pullback.lift_fst, pullback.lift_snd,
+      pullback.diagonal_fst, pullback.diagonal_snd] at h₁ h₂
+    rw [h₁, h₂]
+  · have h₁ := t.condition =≫ pullback.fst aX aX
+    simp only [Category.assoc, toProd, pullback.lift_fst, pullback.diagonal_fst] at h₁
+    simp [fixι, h₁]
+
 /-- The coefficient map of `AlgebraicGeometry.ProEtale.Correspondence.ofEnd`: the
 endomorphism `v` read through the comparisons `L(𝟙)^* K ≃ K ≃ 𝟙^! K`. -/
 noncomputable def ofEndCoeff (G : GeometricOperations A s)

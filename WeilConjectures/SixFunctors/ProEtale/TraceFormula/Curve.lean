@@ -139,14 +139,19 @@ correspondence `c_m = (1, Φ_m)`; purity in relative dimension zero computes the
 there from the pair `(K_x̄, u_x̄)` alone, so if the geometric stalk `K_x̄` vanishes then so
 does the local term `LT_x̄(φ_m)` (blueprint: `sk-i-curve-zero`). -/
 theorem localTerm_traceClass_eq_zero_of_isZero [SmoothOfRelativeDimension 1 aX]
-    (G : GeometricOperations A s) (W : WeilComplex (A := A) aX) (m : ℕ) (hm : 1 ≤ m)
+    (G : GeometricOperations A s)
+    (hs : ∃ (k : Type u) (_ : Field k), Nonempty (s ≅ Spec (.of k))) [HasCompactification aX]
+    [IsSeparated aX] [QuasiCompact aX]
+    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology (pullback aX aX)) A))]
+    (W : WeilComplex (A := A) aX) (hW : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m)
+    [HasCompactification (W.graph m).toProd]
     (x : s ⟶ X) (hx : x ≫ W.frobeniusIterate m = x) (xFix : s ⟶ (W.graph m).fix)
     (hxFix : xFix ≫ (W.graph m).fixι = x) {B : Scheme.{u}} (jB : B ⟶ (W.graph m).fix)
-    [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
+    [IsOpenImmersion jB] [HasCompactification jB] (hB : IsClosed (Set.range jB.base))
     (hBx : Set.range jB.base = Set.range xFix.base)
     [HasCompactification (jB ≫ (W.graph m).fixStr)] [IsProper (jB ≫ (W.graph m).fixStr)]
     (hstalk : IsZero (((upperStar A x).leftDerivedFunctor).obj W.obj)) :
-    G.localTerm (W.graph m).fixStr jB hB (G.traceClass (W.graph m)) = 0 :=
+    G.localTerm (W.graph m).fixStr jB hB (G.traceClass (W.graph m) hs hW) = 0 :=
   sorry
 
 /-- Localization trace additivity: the three coefficient morphisms `φ_m`, `u^Z` and `u^U`
@@ -158,15 +163,24 @@ with `Lc₂^*` and `Rc₁^!`, so triangle compatibility of the Verdier trace cla
 in the group of Borel-Moore sections `A_F ⟶ ω_F` on the fixed scheme `F`
 (blueprint: `sk-i-additivity`). -/
 theorem traceClass_graph_eq_traceClass_add_traceClass [SmoothOfRelativeDimension 1 aX]
-    (G : GeometricOperations A s) (W : WeilComplex (A := A) aX) (m : ℕ) (hm : 1 ≤ m)
+    (G : GeometricOperations A s)
+    (hs : ∃ (k : Type u) (_ : Field k), Nonempty (s ≅ Spec (.of k))) [HasCompactification aX]
+    [IsSeparated aX] [QuasiCompact aX]
+    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology (pullback aX aX)) A))]
+    (W : WeilComplex (A := A) aX) (hW : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m)
+    [HasCompactification (W.graph m).toProd]
     (x : s ⟶ X) (hx : x ≫ W.frobeniusIterate m = x) {Z U : Scheme.{u}} (i : Z ⟶ X)
     (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [HasCompactification j]
     (hi : Set.range i.base = Set.range x.base)
-    (hj : Set.range j.base = (Set.range x.base)ᶜ) :
-    G.traceClass (W.graph m) =
+    (hj : Set.range j.base = (Set.range x.base)ᶜ)
+    (hZ : G.ctf X (W.closedPiece m hm x hx i hi).obj)
+    (hU : G.ctf X (W.openPiece m hm x hx j hj).obj)
+    [HasCompactification ((W.closedPiece m hm x hx i hi).graph m).toProd]
+    [HasCompactification ((W.openPiece m hm x hx j hj).graph m).toProd] :
+    G.traceClass (W.graph m) hs hW =
       Add.add (α := G.borelMooreSections (W.graph m).fixStr)
-        (G.traceClass ((W.closedPiece m hm x hx i hi).graph m))
-        (G.traceClass ((W.openPiece m hm x hx j hj).graph m)) :=
+        (G.traceClass ((W.closedPiece m hm x hx i hi).graph m) hs hZ)
+        (G.traceClass ((W.openPiece m hm x hx j hj).graph m) hs hU) :=
   sorry
 
 /-- Frobenius local terms on smooth curves: the local term of the graph correspondence
@@ -178,7 +192,12 @@ Frobenius on the geometric stalk,
 No local constancy of `K` at `x̄` is assumed (blueprint: `sk-p-frob`). -/
 theorem localTerm_traceClass_eq_trace [SmoothOfRelativeDimension 1 aX]
     [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))]
-    (G : GeometricOperations A s) (W : WeilComplex (A := A) aX) (m : ℕ) (hm : 1 ≤ m)
+    (G : GeometricOperations A s)
+    (hs : ∃ (k : Type u) (_ : Field k), Nonempty (s ≅ Spec (.of k))) [HasCompactification aX]
+    [IsSeparated aX] [QuasiCompact aX]
+    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology (pullback aX aX)) A))]
+    (W : WeilComplex (A := A) aX) (hW : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m)
+    [HasCompactification (W.graph m).toProd]
     (x : s ⟶ X) (hx : x ≫ W.frobeniusIterate m = x)
     [HasRightDual (((upperStar A x).leftDerivedFunctor).obj W.obj)]
     (Fx : ((upperStar A x).leftDerivedFunctor).obj W.obj ⟶
@@ -188,10 +207,10 @@ theorem localTerm_traceClass_eq_trace [SmoothOfRelativeDimension 1 aX]
         (((upperStar A (W.frobeniusIterate m)).leftDerivedFunctor).obj W.obj))
     (hFx : Fx = e.hom ≫ ((upperStar A x).leftDerivedFunctor).map (W.coeffIterate m))
     (xFix : s ⟶ (W.graph m).fix) (hxFix : xFix ≫ (W.graph m).fixι = x) {B : Scheme.{u}}
-    (jB : B ⟶ (W.graph m).fix) [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
-    (hBx : Set.range jB.base = Set.range xFix.base)
+    (jB : B ⟶ (W.graph m).fix) [IsOpenImmersion jB] [HasCompactification jB]
+    (hB : IsClosed (Set.range jB.base)) (hBx : Set.range jB.base = Set.range xFix.base)
     [HasCompactification (jB ≫ (W.graph m).fixStr)] [IsProper (jB ≫ (W.graph m).fixStr)] :
-    G.localTerm (W.graph m).fixStr jB hB (G.traceClass (W.graph m)) =
+    G.localTerm (W.graph m).fixStr jB hB (G.traceClass (W.graph m) hs hW) =
       MonoidalCategory.trace Fx :=
   sorry
 
