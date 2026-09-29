@@ -6,7 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.FourierTransform.Defs
-public import WeilConjectures.FourierTransform.TateTwist
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
@@ -85,10 +85,11 @@ On the affine line, the blueprint's case, this reads `FT_ψ(Λ) ≅ δ₀(-1)[-1
 The character must be **nontrivial**: for `Ψ = 1` the kernel is the constant sheaf and the
 transform of `Λ` is `Λ(-r)[-r]`, supported everywhere.
 (sketch blueprint: `sk-prop-first-formula`) -/
-noncomputable def fourierTransformUnitIso (Ψ : AddChar (ZMod p) Λ) (hΨ : Ψ ≠ 1) :
+noncomputable def fourierTransformUnitIso [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
+    (hΨ : Ψ ≠ 1) :
     (affineFourierTransform Λ n S Ψ).obj (𝟙_ _) ≅
       (shiftFunctor _ (-(Fintype.card n : ℤ))).obj
-        ((tateTwist (ModuleCat.{u + 1} Λ) (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj
+        ((tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj
           (skyscraperZero Λ n S)) :=
   sorry
 

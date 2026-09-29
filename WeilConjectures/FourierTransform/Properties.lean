@@ -6,7 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.FourierTransform.Defs
-public import WeilConjectures.FourierTransform.TateTwist
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 
 /-!
 
@@ -216,10 +216,10 @@ for every `m : ℤ`, naturally in `K`. This is the second clause of the base lin
 proposition, the Tate twist being tensoring with an invertible complex pulled back from the
 base.
 (sketch blueprint: `sk-prop-base-linear`) -/
-noncomputable def fourierTransformTateTwistIso (Ψ : AddChar (ZMod p) Λ)
+noncomputable def fourierTransformTateTwistIso [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r m : ℤ) :
-    tateTwist (ModuleCat.{u + 1} Λ) V m ⋙ fourierTransform Λ π π' Ψ b r ≅
-      fourierTransform Λ π π' Ψ b r ⋙ tateTwist (ModuleCat.{u + 1} Λ) V' m :=
+    tateTwist Λ V m ⋙ fourierTransform Λ π π' Ψ b r ≅
+      fourierTransform Λ π π' Ψ b r ⋙ tateTwist Λ V' m :=
   sorry
 
 end BaseLinear

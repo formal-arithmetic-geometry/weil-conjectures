@@ -5,22 +5,23 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-!
 # The dual of a sheaf of modules on a scheme
 
-Mathlib has no internal hom for `SheafOfModules`, hence no dual `M^∨ = Hom(M, 𝒪_X)`. Serre
-duality and the twist lemma of the Picard-framework block both need it, so
-`AlgebraicGeometry.Scheme.Modules.dual` is declared here as an `opaque` constant, in the same
-style as `AlgebraicGeometry.Scheme.Modules.tensorObj`. Being `opaque` rather than
-`sorry`-bodied it genuinely depends on its argument and introduces no `sorryAx`; but it
-satisfies no equations whatsoever, so **no statement mentioning it can be proved before it is
-replaced by the real construction**.
+For sheaves of modules `M` and `N` on a scheme `X`, `Hom(M, N)` is the internal hom sheaf
+`U ↦ Hom_{𝒪_U}(M|_U, N|_U)`, and the dual of `M` is `M^∨ = Hom(M, 𝒪_X)`.
+
+Both are abbreviations for `SheafOfModules.homObj`, so its API (`SheafOfModules.homObj_val`,
+`SheafOfModules.homObjSectionsEquiv`, `SheafOfModules.homObjMap`, ...) applies directly.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.Modules.dual`: the dual `M^∨` of a sheaf of modules (placeholder).
+- `AlgebraicGeometry.Scheme.Modules.homObj`: the internal hom `Hom(M, N)`.
+- `AlgebraicGeometry.Scheme.Modules.dual`: the dual `M^∨ = Hom(M, 𝒪_X)`, with notation `Mᵛ`.
+- `AlgebraicGeometry.Scheme.Modules.dualMap`: the transpose `Nᵛ ⟶ Mᵛ` of `f : M ⟶ N`.
 -/
 
 @[expose] public section
@@ -33,14 +34,19 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}}
 
-/-- The dual `M^∨ = Hom(M, 𝒪_X)` of a sheaf of modules on a scheme.
+/-- The internal hom `Hom(M, N)` of sheaves of modules on a scheme, the sheaf of modules
+`U ↦ Hom_{𝒪_U}(M|_U, N|_U)`. -/
+noncomputable abbrev homObj (M N : X.Modules) : X.Modules :=
+  SheafOfModules.homObj (R := X.sheaf) M N
 
-Mathlib has no internal hom for `SheafOfModules`, so this is an `opaque` placeholder: it
-satisfies no equations, and no statement mentioning it can be proved before it is replaced by
-the real construction. -/
--- TODO(unify): sk-thm-picard-duality
-opaque dual (M : X.Modules) : X.Modules := M
+/-- The dual `M^∨ = Hom(M, 𝒪_X)` of a sheaf of modules on a scheme. -/
+noncomputable abbrev dual (M : X.Modules) : X.Modules :=
+  homObj M (SheafOfModules.unit _)
 
 @[inherit_doc] scoped postfix:max "ᵛ" => AlgebraicGeometry.Scheme.Modules.dual
+
+/-- The transpose `Nᵛ ⟶ Mᵛ` of a morphism `f : M ⟶ N` of sheaves of modules on a scheme. -/
+noncomputable abbrev dualMap {M N : X.Modules} (f : M ⟶ N) : Nᵛ ⟶ Mᵛ :=
+  SheafOfModules.homObjMap (R := X.sheaf) f (𝟙 _)
 
 end AlgebraicGeometry.Scheme.Modules
