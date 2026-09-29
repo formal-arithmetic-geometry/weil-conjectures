@@ -16,7 +16,7 @@ public import Mathlib.CategoryTheory.Triangulated.Subcategory
 
 /-!
 
-# Derived complete and bounded constructible objects with coefficients in `𝒪_E`
+# Derived complete and constructible objects with coefficients in `𝒪_E`
 
 This file specializes `DerivedCategory.derivedComplete` of
 `WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs` to the coefficient ring of
@@ -61,7 +61,7 @@ that `Shrink 𝒪_E` is a local ring (`PadicAlgCl.isLocalRing_shrink`), so that 
 
 - `DerivedCategory.derivedCompleteIntegral` : the property of an object of `D(X, 𝒪_E)` of being
   derived complete with respect to `𝔪_E`.
-- `DerivedCategory.boundedConstructibleIntegral` : the property of an object `K` of
+- `DerivedCategory.constructibleIntegral` : the property of an object `K` of
   `D(X, 𝒪_E)` of being derived complete with `K ⊗ᴸ_{𝒪_E} 𝒪_E/𝔪_E` having constructible
   homology sheaves and locally finite tor dimension, the derived reduction being the derived
   extension of scalars `DerivedCategory.algebraExtendScalars` of
@@ -139,7 +139,7 @@ noncomputable def AlgebraicGeometry.ProEtale.DerivedCategory.constructibleHomolo
 
 end ConstructibleHomology
 
-section BoundedConstructible
+section Constructible
 
 variable (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type w) [Field E]
   [Algebra E (PadicAlgCl l)] [Small.{u + 1} E]
@@ -151,7 +151,7 @@ variable (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type w) [Field E]
    `DerivedCategory.algebraExtendScalars` along `𝒪_E → 𝒪_E/𝔪_E`, has constructible homology
    sheaves (`ProEtale.DerivedCategory.constructibleHomology`) and locally has finite tor
    dimension (`DerivedCategory.locallyFiniteTorDimension`, [Stacks 08FY]). -/
-noncomputable def DerivedCategory.boundedConstructibleIntegral :
+noncomputable def DerivedCategory.constructibleIntegral :
     ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X)
       (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))))) :=
   derivedCompleteIntegral X l E ⊓ ObjectProperty.inverseImage
@@ -163,4 +163,4 @@ noncomputable def DerivedCategory.boundedConstructibleIntegral :
           maximalIdeal (Shrink.{u + 1} (PadicAlgCl.integers l E))))
     (algebraExtendScalars (Scheme.ProEt.topology X) _ _)
 
-end BoundedConstructible
+end Constructible
