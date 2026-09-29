@@ -5,9 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
 
 /-!
 
@@ -27,12 +25,16 @@ with `f` **proper**, recorded as `sq : IsPullback g' f' f g`. This file states t
 general proper base change theorem in étale cohomology: for every object `K` of the
 bounded below derived category `D⁺(X_ét, Λ)` all of whose cohomology sheaves are torsion
 (`AlgebraicGeometry.Etale.DerivedCategory.Plus.torsionHomology`), the derived
-base-change morphism
+base change map
 
-`BC_sq(K) : Lg^*(Rf_* K) ⟶ Rf'_*(Lg'^* K)`
+`BC_sq(K) : g^*(Rf_* K) ⟶ Rf'_*(g'^* K)`
 
-of `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs` is an isomorphism. No
-hypothesis is imposed on `g`.
+of `WeilConjectures.SixFunctors.BaseChange.Derived` is an isomorphism. No hypothesis is
+imposed on `g`.
+
+The theorem is deduced from the two halves of its proof, the projective-line computation
+and the reduction to it, in
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine`.
 
 Torsion refers to the underlying abelian groups, so the statement contains the two
 classical forms of the theorem at once:
@@ -43,17 +45,28 @@ classical forms of the theorem at once:
 - for `Λ` torsion as an additive group — in particular for the finite rings
   `Λ = ℤ/ℓⁿℤ` of the `ℓ`-adic formalism — every sheaf of `Λ`-modules is torsion, the
   hypothesis is vacuous, and the base-change transformation itself is an isomorphism of
-  functors (`Etale.isIso_baseChange_of_isProper`). The passage between coefficient
-  rings is by restriction of scalars, which is exact, conservative, and compatible with
-  the base-change mates; see `reference.pdf` in this directory.
+  functors (`Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`). The passage
+  between coefficient rings is by restriction of scalars, which is exact, conservative,
+  and compatible with the base change mates; see `reference.pdf` in this directory.
+
+## Implementation notes
+
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs` constructs a second
+transformation `AlgebraicGeometry.Etale.baseChange` of the same type as
+`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`. The two are not identified in this
+repository, and all of the available base change machinery — the pasting lemmas, the
+underived-to-derived bridge, and the finite case — is stated for
+`derivedBaseChangeMapPlus`, which is also the blueprint's `def:weil-pbc-derived-exchange`.
+The statements below therefore use `derivedBaseChangeMapPlus`. Identifying the two, or
+removing one of them, is left to a separate change.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.properBaseChange`: the general proper base change theorem,
-  for a bounded below complex with torsion cohomology.
-- `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`: for a torsion coefficient
-  ring, the base-change transformation of a proper cartesian square is an isomorphism
-  of functors.
+- `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`: the general proper base change
+  theorem, for a bounded below complex with torsion cohomology.
+- `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`: for a
+  torsion coefficient ring, the base change transformation of a proper cartesian square
+  is an isomorphism of functors.
 
 ## References
 
@@ -69,23 +82,13 @@ classical forms of the theorem at once:
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory Abelian
+open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
 open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
-
-/-- `ℤ`-indexed colimits of `Λ`-modules are exact: `ℤ` is a filtered category, and
-`ModuleCat.{u + 1} Λ` is Grothendieck abelian, hence satisfies `AB5` for shapes of size
-`u + 1`; `AB5OfSize_of_univLE` brings that down to the shapes of size `0` in which `ℤ`
-lives. It is not an instance in mathlib because in that generality instance search would
-climb the universes. -/
-instance : HasExactColimitsOfShape ℤ (ModuleCat.{u + 1} Λ) := by
-  have : AB5OfSize.{0, 0} (ModuleCat.{u + 1} Λ) :=
-    AB5OfSize_of_univLE.{0, 0, u + 1, u + 1} (ModuleCat.{u + 1} Λ)
-  infer_instance
 
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
@@ -102,32 +105,35 @@ Y' --g---> Y
 ```
 
 with `f` proper and every bounded below complex `K ∈ D⁺(X_ét, Λ)` all of whose
-cohomology sheaves are torsion, the derived base-change morphism
+cohomology sheaves are torsion, the derived base change map
 
-`BC_sq(K) : Lg^*(Rf_* K) ⟶ Rf'_*(Lg'^* K)`
+`BC_sq(K) : g^*(Rf_* K) ⟶ Rf'_*(g'^* K)`
 
 is an isomorphism in `D⁺(Y'_ét, Λ)`. No hypothesis is imposed on `g`. For `Λ = ℤ` this
 is [SGA 4, Exp. XII, Thm 5.1] and Stacks Project, Tag 0DDE; the case of a general
 coefficient ring follows by restriction of scalars. -/
+@[stacks 0DDE]
 theorem Etale.isIso_baseChange_of_isProper [IsProper f] (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : Etale.DerivedCategory.Plus.torsionHomology Λ X K) :
-    IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
-  sorry
+    IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
+  Etale.hasTorsionBaseChange_of_isProper Λ f sq K hK
 
 /-- **Proper base change as an isomorphism of functors**: if the coefficient ring `Λ` is
 torsion as an additive group — in particular if `Λ` is finite, e.g. `Λ = ℤ/ℓⁿℤ` — then
-for a cartesian square with `f` proper the base-change transformation
+for a cartesian square with `f` proper the base change transformation
 
-`BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*`
+`BC_sq : Rf_* ⋙ g^* ⟶ g'^* ⋙ Rf'_*`
 
 on the bounded below derived categories is an isomorphism: every complex of sheaves of
-`Λ`-modules automatically has torsion cohomology. -/
+`Λ`-modules automatically has torsion cohomology. Equivalently, a proper morphism satisfies
+`AlgebraicGeometry.Etale.IsBaseChangeIso` for torsion coefficients. -/
+@[stacks 095T]
 theorem Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring (hΛ : IsAddTorsion Λ) [IsProper f]
     (sq : IsPullback g' f' f g) :
-    IsIso (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
-  have : ∀ K, IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := fun K ↦
-    Etale.isIso_baseChange_of_isProper Λ sq K
+    IsIso (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
+  have : ∀ K, IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
+    fun K ↦ Etale.isIso_baseChange_of_isProper Λ sq K
       (Etale.DerivedCategory.Plus.torsionHomology_of_isTorsion Λ X hΛ K)
   NatIso.isIso_of_isIso_app _
 

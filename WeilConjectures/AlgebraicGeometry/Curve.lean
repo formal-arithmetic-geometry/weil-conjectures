@@ -8,7 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
-public import WeilConjectures.AlgebraicGeometry.Modules.Pic
+public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
+public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
@@ -22,21 +23,21 @@ space of global differential forms.
 
 The Picard group `Pic(C)` of isomorphism classes of invertible `𝒪_C`-modules is
 `AlgebraicGeometry.Scheme.Pic`, introduced in
-`WeilConjectures.AlgebraicGeometry.Modules.Pic`; on a curve it carries a *degree* map to `ℤ`,
+`WeilConjectures.AlgebraicGeometry.PicardFunctor`; on a curve it carries a *degree* map to `ℤ`,
 whose kernel `Pic⁰(C)` is the subject of the Jacobian.
 
-The pinned Mathlib has neither a sheaf of relative Kähler differentials for schemes nor
-coherent cohomology of an `𝒪_X`-module. Accordingly the cotangent sheaf and the degree map are
-declared here as `opaque` constants: they depend genuinely on their arguments and introduce no
-`sorryAx`, but they satisfy no equations, so no statement about `genus` or `picDegree` can be
-proved before they are replaced.
+The sheaf `Ω¹_{C/K}` is `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`, from
+`WeilConjectures.AlgebraicGeometry.Modules.Differentials`. The pinned Mathlib has no coherent
+cohomology of an `𝒪_X`-module, so the degree map is declared here as an `opaque` constant: it
+depends genuinely on its arguments and introduces no `sorryAx`, but it satisfies no equations,
+so no statement about `picDegree` can be proved before it is replaced.
 
 ## Main definitions
 
 - `AlgebraicGeometry.IsCurve`: a separated morphism of finite type to `Spec K` whose source has
   topological Krull dimension at most one.
-- `AlgebraicGeometry.Scheme.Hom.cotangent`: the sheaf `Ω¹_{X/S}` of relative Kähler
-  differentials of a morphism of schemes (placeholder).
+- `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`: the sheaf `Ω¹_{X/S}` of relative
+  differentials (see `WeilConjectures.AlgebraicGeometry.Modules.Differentials`).
 - `AlgebraicGeometry.Scheme.Hom.genus`: the genus `dim_K Γ(C, Ω¹_{C/K})` of a curve.
 - `AlgebraicGeometry.Scheme.Hom.picDegree`: the degree of an invertible module on a curve
   (placeholder).
@@ -65,15 +66,6 @@ class IsCurve (f : C ⟶ Spec (.of K)) : Prop
   /-- The underlying space of a curve has dimension at most one. -/
   krullDim_le_one : topologicalKrullDim C ≤ 1
 
-/-- The sheaf of relative Kähler differentials `Ω¹_{X/S}` of a morphism of schemes.
-
-Mathlib has no cotangent sheaf of a morphism of schemes yet (only the module of Kähler
-differentials `Ω[S⁄R]` of a ring map), so this is an `opaque` placeholder; it satisfies no
-equations. -/
--- TODO(unify): sk-def-curve
-noncomputable opaque Scheme.Hom.cotangent {X S : Scheme.{u}} (f : X ⟶ S) : X.Modules :=
-  SheafOfModules.unit _
-
 /-- Blueprint `sk-def-curve`: Curves and genus
 
 The *genus* of a smooth proper connected curve `C` over `K` is
@@ -86,8 +78,8 @@ This definition makes sense for an arbitrary morphism `f : C ⟶ Spec K`, but is
 in the intended sense when `f` is a smooth proper connected curve. -/
 noncomputable def Scheme.Hom.genus (f : C ⟶ Spec (.of K)) : ℕ :=
   letI := f.ΓAlgebra
-  letI : Module K Γ(f.cotangent, ⊤) := Module.compHom _ (algebraMap K Γ(C, ⊤))
-  Module.finrank K Γ(f.cotangent, ⊤)
+  letI : Module K Γ(f.relativeDifferentials, ⊤) := Module.compHom _ (algebraMap K Γ(C, ⊤))
+  Module.finrank K Γ(f.relativeDifferentials, ⊤)
 
 /-- The degree of an invertible module on a curve.
 
