@@ -89,6 +89,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Reduction
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Section
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
+public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
 public import WeilConjectures.AnalyticAux
