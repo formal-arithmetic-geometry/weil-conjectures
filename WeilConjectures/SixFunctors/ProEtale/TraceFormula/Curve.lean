@@ -43,19 +43,18 @@ Smoothness of pure dimension one is rendered as
 `x : s ⟶ X` fixed by `Φ_m`, as in the rendering of `X₀(𝐅_{q^m})`, and the closed point
 subscheme and its open complement are hypotheses: the project constructs neither the
 reduced point structure nor open complements. Likewise the clopen component of `x̄` inside
-the fixed scheme, the identification of the stalk of the fixed-point component and the
-endomorphism `F_{x,m}` of the geometric stalk are taken as data. Isolatedness of the fixed
+the fixed scheme is taken as data. Isolatedness of the fixed
 point, which the blueprint derives from the vanishing of the map induced by `Φ_m` on the
 cotangent space, is therefore assumed rather than proved.
 
 Both pieces keep the Frobenius `Φ₁` of `W`. That is what makes the three graph
-correspondences `W.graph m`, `(W.closedPiece …).graph m` and `(W.openPiece …).graph m`
+correspondences `W.graph G m`, `(W.closedPiece …).graph G m` and
+`(W.openPiece …).graph G m`
 share their fixed scheme, so that the additivity statement is a genuine sum of Borel-Moore
 sections on `F = Fix(c_m)` with no transport. Their coefficient morphisms are `!`-base
 change along the Cartesian square relating `Φ` to its restriction and the proper
-pushforward of a stalk map, neither of which the package constructs, so they are `opaque`
-for the reason explained in
-`WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence`.
+pushforward of a stalk map, neither of which the package constructs, so they are `opaque`:
+their types carry the content and no `sorryAx` enters.
 
 The sum in `traceClass_graph_eq_traceClass_add_traceClass` is spelled `Add.add` with an
 explicit type argument. The three types agree definitionally but not syntactically, and
@@ -140,13 +139,13 @@ there from the pair `(K_x̄, u_x̄)` alone, so if the geometric stalk `K_x̄` va
 does the local term `LT_x̄(φ_m)` (blueprint: `sk-i-curve-zero`). -/
 theorem localTerm_traceClass_eq_zero_of_isZero [SmoothOfRelativeDimension 1 aX]
     (G : GeometricOperations A s) (W : WeilComplex (A := A) aX) (m : ℕ) (hm : 1 ≤ m)
-    (x : s ⟶ X) (hx : x ≫ W.frobeniusIterate m = x) (xFix : s ⟶ (W.graph m).fix)
-    (hxFix : xFix ≫ (W.graph m).fixι = x) {B : Scheme.{u}} (jB : B ⟶ (W.graph m).fix)
+    (x : s ⟶ X) (hx : x ≫ W.frobeniusIterate m = x) (xFix : s ⟶ (W.graph G m).fix)
+    (hxFix : xFix ≫ (W.graph G m).fixι = x) {B : Scheme.{u}} (jB : B ⟶ (W.graph G m).fix)
     [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
     (hBx : Set.range jB.base = Set.range xFix.base)
-    [HasCompactification (jB ≫ (W.graph m).fixStr)] [IsProper (jB ≫ (W.graph m).fixStr)]
+    [HasCompactification (jB ≫ (W.graph G m).fixStr)] [IsProper (jB ≫ (W.graph G m).fixStr)]
     (hstalk : IsZero (((upperStar A x).leftDerivedFunctor).obj W.obj)) :
-    G.localTerm (W.graph m).fixStr jB hB (G.traceClass (W.graph m)) = 0 :=
+    G.localTerm (W.graph G m).fixStr jB hB (G.traceClass (W.graph G m)) = 0 :=
   sorry
 
 /-- Localization trace additivity: the three coefficient morphisms `φ_m`, `u^Z` and `u^U`
@@ -163,17 +162,17 @@ theorem traceClass_graph_eq_traceClass_add_traceClass [SmoothOfRelativeDimension
     (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [HasCompactification j]
     (hi : Set.range i.base = Set.range x.base)
     (hj : Set.range j.base = (Set.range x.base)ᶜ) :
-    G.traceClass (W.graph m) =
-      Add.add (α := G.borelMooreSections (W.graph m).fixStr)
-        (G.traceClass ((W.closedPiece m hm x hx i hi).graph m))
-        (G.traceClass ((W.openPiece m hm x hx j hj).graph m)) :=
+    G.traceClass (W.graph G m) =
+      Add.add (α := G.borelMooreSections (W.graph G m).fixStr)
+        (G.traceClass ((W.closedPiece m hm x hx i hi).graph G m))
+        (G.traceClass ((W.openPiece m hm x hx j hj).graph G m)) :=
   sorry
 
 /-- Frobenius local terms on smooth curves: the local term of the graph correspondence
 `c_m = (1, Φ_m)` at a geometric point `x̄` fixed by `Φ_m` is the categorical trace of
 Frobenius on the geometric stalk,
 
-`LT_x̄(φ_m) = tr_A(F_{x,m} ∣ K_x̄)`.
+`LT_x̄(φ_m) = tr_A(F_{x,m} ∣ K_x̄)`, where `F_{x,m}` is `W.stalkFrobenius m x hx`.
 
 No local constancy of `K` at `x̄` is assumed (blueprint: `sk-p-frob`). -/
 theorem localTerm_traceClass_eq_trace [SmoothOfRelativeDimension 1 aX]
@@ -181,18 +180,12 @@ theorem localTerm_traceClass_eq_trace [SmoothOfRelativeDimension 1 aX]
     (G : GeometricOperations A s) (W : WeilComplex (A := A) aX) (m : ℕ) (hm : 1 ≤ m)
     (x : s ⟶ X) (hx : x ≫ W.frobeniusIterate m = x)
     [HasRightDual (((upperStar A x).leftDerivedFunctor).obj W.obj)]
-    (Fx : ((upperStar A x).leftDerivedFunctor).obj W.obj ⟶
-      ((upperStar A x).leftDerivedFunctor).obj W.obj)
-    (e : ((upperStar A x).leftDerivedFunctor).obj W.obj ≅
-      ((upperStar A x).leftDerivedFunctor).obj
-        (((upperStar A (W.frobeniusIterate m)).leftDerivedFunctor).obj W.obj))
-    (hFx : Fx = e.hom ≫ ((upperStar A x).leftDerivedFunctor).map (W.coeffIterate m))
-    (xFix : s ⟶ (W.graph m).fix) (hxFix : xFix ≫ (W.graph m).fixι = x) {B : Scheme.{u}}
-    (jB : B ⟶ (W.graph m).fix) [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
+    (xFix : s ⟶ (W.graph G m).fix) (hxFix : xFix ≫ (W.graph G m).fixι = x) {B : Scheme.{u}}
+    (jB : B ⟶ (W.graph G m).fix) [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
     (hBx : Set.range jB.base = Set.range xFix.base)
-    [HasCompactification (jB ≫ (W.graph m).fixStr)] [IsProper (jB ≫ (W.graph m).fixStr)] :
-    G.localTerm (W.graph m).fixStr jB hB (G.traceClass (W.graph m)) =
-      MonoidalCategory.trace Fx :=
+    [HasCompactification (jB ≫ (W.graph G m).fixStr)] [IsProper (jB ≫ (W.graph G m).fixStr)] :
+    G.localTerm (W.graph G m).fixStr jB hB (G.traceClass (W.graph G m)) =
+      MonoidalCategory.trace (W.stalkFrobenius m x hx) :=
   sorry
 
 end GeometricOperations

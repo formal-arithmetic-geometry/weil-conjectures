@@ -208,7 +208,7 @@ theorem hasProd_inv_alternatingCharpolyRevProd (G : GeometricOperations A s)
     [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))]
     {aX : X ⟶ s} [HasCompactification aX] (W : WeilComplex (A := A) aX) (hW : IsIso W.coeff)
     (hctf : G.ctf X W.obj)
-    [∀ m : ℕ, IsProper (W.graph m).snd]
+    [∀ m : ℕ, IsProper (W.graph G m).snd]
     [∀ m : ℕ, Fintype {x : s ⟶ X // x ≫ W.frobeniusIterate m = x}]
     [HasRightDual ((rightDerivedLowerShriek A aX).obj W.obj)]
     [∀ x : s ⟶ X, HasRightDual (((upperStar A x).leftDerivedFunctor).obj W.obj)]
@@ -223,7 +223,7 @@ theorem hasProd_inv_alternatingCharpolyRevProd (G : GeometricOperations A s)
     [∀ y i, FiniteDimensional Λ (St y i)] (Fst : ∀ y i, Module.End Λ (St y i))
     (θ : End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))) →+* Λ)
     (hHc : ∀ m : ℕ, 1 ≤ m →
-      θ (MonoidalCategory.trace (Correspondence.globalOperator G (W.graph m))) =
+      θ (MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G m))) =
         ∑ i ∈ degs, (i.negOnePow : ℤ) • LinearMap.trace Λ (Hc i) (Fc i ^ m))
     (hSt : ∀ m : ℕ, 1 ≤ m →
       ∑ y : {x : s ⟶ X // x ≫ W.frobeniusIterate m = x},
