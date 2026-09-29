@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.NumberTheory.Padics.Extension
-public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
-public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 
@@ -21,13 +19,13 @@ This file specializes `DerivedCategory.derivedComplete` of
 the integral stage of the `ℓ`-adic formalism: `E` is an extension of `ℚ_ℓ` inside `ℚ̄_ℓ`,
 `𝒪_E` is its ring of integers and `𝔪_E` is the maximal ideal of `𝒪_E`. The site is the
 small pro-étale site `X.ProEt` of a scheme `X`, with the pro-étale topology
-`Scheme.ProEt.topology X`. This file defines the full subcategory
+`Scheme.ProEt.topology X`. This file defines the property of an object of
 
 ```
-  D_comp(X, 𝒪_E)  ⊆  D(X, 𝒪_E) := DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat 𝒪_E))
+  D(X, 𝒪_E) := DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat 𝒪_E))
 ```
 
-of those objects that are derived complete for `𝔪_E`, together with its inclusion functor.
+of being derived complete for `𝔪_E`.
 
 ## The hypotheses on `E`
 
@@ -56,17 +54,13 @@ transported along `PadicAlgCl.shrinkRingEquiv` by `IsAdicComplete.congr_ringEqui
 
 - `DerivedCategory.derivedCompleteIntegral` : the property of an object of `D(X, 𝒪_E)` of being
   derived complete with respect to `𝔪_E`.
-- `DerivedCategoryDerivedCompleteIntegral` : the full subcategory `D_comp(X, 𝒪_E)` of derived
-  complete objects, and `DerivedCategoryDerivedCompleteIntegral.ι` its inclusion into
-  `D(X, 𝒪_E)`.
 
 ## Main results
 
 - `DerivedCategory.isTriangulated_derivedCompleteIntegral` : the derived complete objects form a
-  triangulated subcategory of `D(X, 𝒪_E)` (currently `sorry`), so that `D_comp(X, 𝒪_E)` is
-  an `𝒪_E`-linear triangulated category with `𝒪_E`-linear shift functors.
+  triangulated subcategory of `D(X, 𝒪_E)` (currently `sorry`).
 - `DerivedCategory.derivedCompleteIntegral_iff_isIso_lift` : when `R lim_n (K ⊗ᴸ 𝒪_E/𝔪_Eⁿ)`
-  exists, membership in `D_comp(X, 𝒪_E)` says exactly that the canonical map
+  exists, `K` is derived complete exactly when the canonical map
   `K ⟶ R lim_n (K ⊗ᴸ 𝒪_E/𝔪_Eⁿ)` is an isomorphism.
 
 -/
@@ -92,25 +86,6 @@ noncomputable abbrev DerivedCategory.derivedCompleteIntegral :
       (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))))) :=
   DerivedCategory.derivedComplete (Scheme.ProEt.topology X) (PadicAlgCl.maximalIdealShrink l E)
 
-/-- The category `D_comp(X, 𝒪_E)` of derived complete objects, realized as the full
-subcategory of `D(X, 𝒪_E)` cut out by `DerivedCategory.derivedCompleteIntegral`. This is the
-integral stage of the `ℓ`-adic formalism: the coefficients are the ring of integers `𝒪_E`
-of an extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ = PadicAlgCl l`, and completeness is taken with
-respect to the maximal ideal of `𝒪_E`. -/
-noncomputable def DerivedCategoryDerivedCompleteIntegral : Type _ :=
-  (DerivedCategory.derivedCompleteIntegral X l E).FullSubcategory
-
-noncomputable instance : Category (DerivedCategoryDerivedCompleteIntegral X l E) :=
-  inferInstanceAs <| Category (DerivedCategory.derivedCompleteIntegral X l E).FullSubcategory
-
-/-- The inclusion of `D_comp(X, 𝒪_E)` into the derived category of sheaves of
-`𝒪_E`-modules. -/
-noncomputable def DerivedCategoryDerivedCompleteIntegral.ι :
-    DerivedCategoryDerivedCompleteIntegral X l E ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology X)
-        (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))) :=
-  (DerivedCategory.derivedCompleteIntegral X l E).ι
-
 /-- The derived complete objects of `D(X, 𝒪_E)` form a triangulated subcategory: they
 contain `0` and are stable under shifts and extensions.
 
@@ -119,44 +94,10 @@ instance DerivedCategory.isTriangulated_derivedCompleteIntegral :
     (DerivedCategory.derivedCompleteIntegral X l E).IsTriangulated :=
   sorry
 
-noncomputable instance : Preadditive (DerivedCategoryDerivedCompleteIntegral X l E) :=
-  inferInstanceAs <| Preadditive (DerivedCategory.derivedCompleteIntegral X l E).FullSubcategory
-
-/-- The `Hom` groups of `D_comp(X, 𝒪_E)` are `𝒪_E`-modules, as those of `D(X, 𝒪_E)` are. -/
-noncomputable instance :
-    Linear (Shrink.{u + 1} (PadicAlgCl.integers l E))
-      (DerivedCategoryDerivedCompleteIntegral X l E) :=
-  inferInstanceAs <| Linear (Shrink.{u + 1} (PadicAlgCl.integers l E))
-    (DerivedCategory.derivedCompleteIntegral X l E).FullSubcategory
-
-noncomputable instance : HasZeroObject (DerivedCategoryDerivedCompleteIntegral X l E) :=
-  inferInstanceAs <| HasZeroObject (DerivedCategory.derivedCompleteIntegral X l E).FullSubcategory
-
-noncomputable instance : HasShift (DerivedCategoryDerivedCompleteIntegral X l E) ℤ :=
-  inferInstanceAs <| HasShift (DerivedCategory.derivedCompleteIntegral X l E).FullSubcategory ℤ
-
-instance (n : ℤ) : (shiftFunctor (DerivedCategoryDerivedCompleteIntegral X l E) n).Additive :=
-  inferInstanceAs <|
-    (shiftFunctor (DerivedCategory.derivedCompleteIntegral X l E).FullSubcategory n).Additive
-
-/-- The shift functors of `D_comp(X, 𝒪_E)` are `𝒪_E`-linear, as those of `D(X, 𝒪_E)` are. -/
-instance (n : ℤ) :
-    (shiftFunctor (DerivedCategoryDerivedCompleteIntegral X l E) n).Linear
-      (Shrink.{u + 1} (PadicAlgCl.integers l E)) :=
-  inferInstanceAs <|
-    (shiftFunctor (DerivedCategory.derivedCompleteIntegral X l E).FullSubcategory n).Linear
-      (Shrink.{u + 1} (PadicAlgCl.integers l E))
-
-noncomputable instance : Pretriangulated (DerivedCategoryDerivedCompleteIntegral X l E) :=
-  inferInstanceAs <| Pretriangulated (DerivedCategory.derivedCompleteIntegral X l E).FullSubcategory
-
-instance : IsTriangulated (DerivedCategoryDerivedCompleteIntegral X l E) :=
-  inferInstanceAs <| IsTriangulated (DerivedCategory.derivedCompleteIntegral X l E).FullSubcategory
-
 variable {X l E}
 
-/-- If the limit `R lim_n (K ⊗ᴸ 𝒪_E/𝔪_Eⁿ)` exists, then `K` lies in `D_comp(X, 𝒪_E)`
-precisely when the canonical map `K ⟶ R lim_n (K ⊗ᴸ 𝒪_E/𝔪_Eⁿ)` is an isomorphism. -/
+/-- If the limit `R lim_n (K ⊗ᴸ 𝒪_E/𝔪_Eⁿ)` exists, then `K` is derived complete precisely
+when the canonical map `K ⟶ R lim_n (K ⊗ᴸ 𝒪_E/𝔪_Eⁿ)` is an isomorphism. -/
 lemma DerivedCategory.derivedCompleteIntegral_iff_isIso_lift
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X)
       (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))))
