@@ -120,7 +120,7 @@ lemma W_whiskerLeft (F : PresheafOfModules.{u} (𝓡).obj)
   rw [this]
   exact ((Equiv.bijective_comp _ _).trans (Equiv.comp_bijective _ _)).2 <|
     hg ⟨PresheafOfModules.homObj (R := R.obj) F N.val,
-      PresheafOfModules.isSheaf_homObj _ _ N.isSheaf⟩
+      PresheafOfModules.isSheaf_homObj N.isSheaf⟩
 
 /-- The class of morphisms of presheaves of modules that become isomorphisms after
 sheafification is stable under tensor products. -/

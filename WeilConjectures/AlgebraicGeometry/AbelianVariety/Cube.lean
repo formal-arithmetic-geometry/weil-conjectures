@@ -65,15 +65,16 @@ Let `A` be an abelian variety over a field `K` and let `L` be an invertible `�
 theorem nonempty_iso_cube (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A]
     (L : A.left.Modules) [L.IsInvertible] :
     Nonempty
-      (tensorObj
+      (Scheme.Modules.tensorObj
           (overPullback ((fst (A ⊗ A) A ≫ fst A A) * (fst (A ⊗ A) A ≫ snd A A) *
             snd (A ⊗ A) A) L)
-          (tensorObj (overPullback (fst (A ⊗ A) A ≫ fst A A) L)
-            (tensorObj (overPullback (fst (A ⊗ A) A ≫ snd A A) L)
+          (Scheme.Modules.tensorObj (overPullback (fst (A ⊗ A) A ≫ fst A A) L)
+            (Scheme.Modules.tensorObj (overPullback (fst (A ⊗ A) A ≫ snd A A) L)
               (overPullback (snd (A ⊗ A) A) L))) ≅
-        tensorObj
+        Scheme.Modules.tensorObj
           (overPullback ((fst (A ⊗ A) A ≫ fst A A) * (fst (A ⊗ A) A ≫ snd A A)) L)
-          (tensorObj (overPullback ((fst (A ⊗ A) A ≫ fst A A) * snd (A ⊗ A) A) L)
+          (Scheme.Modules.tensorObj
+            (overPullback ((fst (A ⊗ A) A ≫ fst A A) * snd (A ⊗ A) A) L)
             (overPullback ((fst (A ⊗ A) A ≫ snd A A) * snd (A ⊗ A) A) L))) :=
   sorry
 

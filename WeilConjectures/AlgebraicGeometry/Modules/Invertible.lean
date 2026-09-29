@@ -19,7 +19,8 @@ An `𝒪_X`-module is *invertible* if it is locally isomorphic to `𝒪_X`.
 - The symmetric monoidal category structure on `X.Modules`, from
   `SheafOfModules.monoidalCategory`: the tensor product `M ⊗ N` is the tensor product over
   `𝒪_X`, the sheafification of the tensor product of the underlying presheaves of modules.
-- `AlgebraicGeometry.Scheme.Modules.tensorObj`: the tensor product `M ⊗_{𝒪_X} N`, i.e. `M ⊗ N`.
+- `AlgebraicGeometry.Scheme.Modules.tensorObj`: the tensor product `M ⊗_{𝒪_X} N`, i.e. `M ⊗ N`,
+  with scoped notation `M ⊗ₘ N`.
 - `AlgebraicGeometry.Scheme.Modules.tensorPow`: the tensor power `M^{⊗ n}`.
 - `AlgebraicGeometry.Scheme.Modules.overPullback`: pullback along a morphism of schemes over a
   base.
@@ -60,6 +61,8 @@ It is the tensor product `M ⊗ N` of the monoidal category `X.Modules`. -/
 -- TODO(unify): sk-def-picard-pic
 noncomputable abbrev tensorObj (M N : X.Modules) : X.Modules :=
   M ⊗ N
+
+@[inherit_doc] scoped infixl:70 " ⊗ₘ " => AlgebraicGeometry.Scheme.Modules.tensorObj
 
 /-- Pullback of an `𝒪_B`-module along a morphism `f : A ⟶ B` of schemes over a base `S`. -/
 noncomputable abbrev overPullback {S : Scheme.{u}} {A B : Over S} (f : A ⟶ B)

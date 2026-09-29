@@ -47,13 +47,13 @@ statement of this file about `χ`, `deg` and the genus meaningful.
 
 Ampleness is `AlgebraicGeometry.IsAmple` of
 `WeilConjectures/AlgebraicGeometry/Modules/Ample.lean`, shared with the abelian-variety block.
-The tensor product of sheaves of modules is the monoidal structure on `X.Modules` of
-`WeilConjectures/AlgebraicGeometry/Modules/Invertible.lean`; the dual is the `opaque`
-placeholder of `WeilConjectures/AlgebraicGeometry/Modules/Dual.lean`. The canonical module `ω_X = Ω^n_{X/k}`
-has no placeholder: Serre duality is stated existentially, as the existence of a dualising
-invertible module, which is what is provable before `Ω^n_{X/k}` exists and is strictly stronger
-than a statement about a placeholder. Identifying that module with `Ω^n_{X/k}` is separate
-work.
+The dual `ℱᵛ = Hom(ℱ, 𝒪_X)` of a sheaf of modules is the internal hom of
+`WeilConjectures/AlgebraicGeometry/Modules/Dual.lean`, and the tensor product is the monoidal
+structure on `X.Modules` of `WeilConjectures/AlgebraicGeometry/Modules/Invertible.lean`. The
+canonical module `ω_X = Ω^n_{X/k}` has no placeholder: Serre duality is stated existentially,
+as the existence of a dualising invertible module, which is what is provable before
+`Ω^n_{X/k}` exists and is strictly stronger than a statement about a placeholder. Identifying
+that module with `Ω^n_{X/k}` is separate work.
 
 ## Main definitions
 
@@ -80,6 +80,8 @@ work.
 universe u
 
 open CategoryTheory Limits MonoidalCategory
+
+open scoped AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.Scheme
 

@@ -24,15 +24,19 @@ derived tensor product `- ⊗^L -`.
 Since `MonoidalClosed` only asks for a right adjoint of `X ⊗^L -` for every object `X` of
 `D(C)`, no binary `RHom` bifunctor has to be constructed by hand: the bifunctoriality of the
 internal hom is produced by the closed structure itself. The proof of the instance below is
-therefore organized in the following four steps, which are still to be formalized.
+therefore organized in the following four steps, of which steps 2–4 are still to be
+formalized.
 
-1. **Closedness at the homotopy level.** For cochain complexes `P`, `Y` in `C`, construct the
-   internal hom complex with `(iHom P Y)ⁿ = ∏ p, iHom (P.X p) (Y.X (p + n))` and differential
-   `d f = d_Y ∘ f - (-1)ⁿ • f ∘ d_P` (the products exist since `C` is Grothendieck abelian),
-   together with evaluation and currying, and prove that the resulting tensor-hom bijection
-   `(P ⊗ X ⟶ Y) ≃ (X ⟶ iHom P Y)` is natural and compatible with homotopies, so that it
-   descends to an adjunction `P ⊗ - ⊣ H_P` on `K(C) := HomotopyCategory C (ComplexShape.up ℤ)`.
-   This is the only step involving a substantial new construction.
+1. **Closedness at the homotopy level** (done in
+   `WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom`). For cochain complexes
+   `P`, `Y` in `C`, the internal hom complex `CochainComplex.internalHomObj P Y` has
+   `(iHom P Y)ⁿ = ∏_{p + n = q} iHom (P.X p) (Y.X q)`, with differential
+   `(-1)ᵖ • (f ≫ d_Y - d_P ≫ f)` on the factor indexed by `(p, q)` (the products exist since
+   `C` is Grothendieck abelian). The tensor-hom bijection `(P ⊗ X ⟶ Y) ≃ (X ⟶ iHom P Y)` is
+   plain currying on morphisms of complexes, and currying with the sign `(-1) ^ (p * n)` on
+   cochains of degree `n` commutes with `δ`, so it is compatible with homotopies. This gives
+   `HomotopyCategory.tensorHomAdjunction P : tensorLeft P ⊣ H_P` on
+   `K(C) := HomotopyCategory C (ComplexShape.up ℤ)`, with `H_P = HomotopyCategory.internalHom P`.
 2. **Fixing one variable of the binary derived tensor.** Deduce from the fact that the derived
    tensor product is the binary left derived functor of the tensor product on `K(C)` (the
    `IsLeftDerivedFunctor₂` instance in

@@ -38,8 +38,8 @@ scheme `X : Scheme.{u}` and `M N : X.Modules` all universes are `u`, so `homObj 
 * `PresheafOfModules.homObjEquiv`: the tensor-hom adjunction `(M ⊗ P ⟶ N) ≃ (P ⟶ homObj M N)`,
   natural in `P` (`PresheafOfModules.homObjEquiv_whiskerLeft_comp`).
 
-If `N` is a sheaf, then so is `homObj M N`: see `PresheafOfModules.isSheaf_homObj` in
-`WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom`.
+If `N` is a sheaf, then so is `homObj M N`: this is `PresheafOfModules.isSheaf_homObj` in
+`WeilConjectures/Algebra/Category/ModuleCat/Sheaf/InternalHom.lean`.
 
 ## TODO
 

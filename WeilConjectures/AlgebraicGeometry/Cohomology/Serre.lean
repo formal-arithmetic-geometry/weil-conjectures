@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.LinearAlgebra.Dual.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-!
@@ -150,7 +150,7 @@ theorem Scheme.Modules.exists_subsingleton_H_tensor_twist [Finite n]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) F] :
     ∃ m₀ : ℤ, ∀ m ≥ m₀, ∀ q : ℕ, 0 < q →
-      Subsingleton ((F ⊗ ProjectiveSpace.twistRestrict k i m).H q) :=
+      Subsingleton ((F ⊗ₘ ProjectiveSpace.twistRestrict k i m).H q) :=
   sorry
 
 /-- **Serre's theorem A: global generation after a twist.** Let `X ⊆ ℙᵈ_k` be a closed
@@ -171,7 +171,7 @@ theorem Scheme.Modules.exists_generatingSections_tensor_twist [Finite n]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) F] :
     ∃ m₀ : ℤ, ∀ m ≥ m₀,
-      Nonempty (SheafOfModules.GeneratingSections (F ⊗ ProjectiveSpace.twistRestrict k i m)) :=
+      Nonempty (SheafOfModules.GeneratingSections (F ⊗ₘ ProjectiveSpace.twistRestrict k i m)) :=
   sorry
 
 end AlgebraicGeometry

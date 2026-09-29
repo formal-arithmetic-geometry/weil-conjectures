@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.Grp.Adjunctions
+public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
 
@@ -28,6 +29,7 @@ this is what makes the presheaf of units of a sheaf of rings a sheaf.
 
 - `CommRingCat.units`: the functor `R ↦ Rˣ` from commutative rings to commutative groups.
 - `CommRingCat.unitsAddCommGrp`: the same functor with `Rˣ` written additively.
+- `CommRingCat.unitsAddCommGrpULift`: the same functor followed by a universe lift.
 -/
 
 @[expose] public section
@@ -63,5 +65,10 @@ noncomputable def unitsAddCommGrp : CommRingCat.{u} ⥤ AddCommGrpCat.{u} :=
 
 noncomputable instance : PreservesLimitsOfSize.{v, v'} unitsAddCommGrp.{u} := by
   unfold unitsAddCommGrp; infer_instance
+
+/-- The functor sending a commutative ring to its group of units, written additively and lifted
+to a larger universe: `CommRingCat.unitsAddCommGrp` followed by `AddCommGrpCat.uliftFunctor`. -/
+noncomputable abbrev unitsAddCommGrpULift : CommRingCat.{u} ⥤ AddCommGrpCat.{max u v} :=
+  unitsAddCommGrp ⋙ AddCommGrpCat.uliftFunctor.{v, u}
 
 end CommRingCat
