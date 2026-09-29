@@ -24,6 +24,7 @@ public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.ChangeOfRings
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.ExtendScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization
