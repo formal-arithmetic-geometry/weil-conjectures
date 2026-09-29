@@ -9,8 +9,10 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.ChangeOfRings
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorDimension
 public import WeilConjectures.ConstructibleSheaf.ProEtale
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
 public import WeilConjectures.NumberTheory.Padics.Extension
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 
@@ -66,8 +68,14 @@ that `Shrink 𝒪_E` is a local ring (`PadicAlgCl.isLocalRing_shrink`), so that 
   homology sheaves and locally finite tor dimension, the derived reduction being the derived
   extension of scalars `DerivedCategory.algebraExtendScalars` of
   `WeilConjectures.CategoryTheory.DerivedCategory.ChangeOfRings`.
+- `DerivedCategoryConstructibleIntegral` : the full subcategory `D_cons(X, 𝒪_E)` of
+  constructible objects, an `𝒪_E`-linear triangulated category with `𝒪_E`-linear shift
+  functors, and `DerivedCategoryConstructibleIntegral.ι` its inclusion into `D(X, 𝒪_E)`.
 
 ## Main results
+
+- `DerivedCategory.isTriangulated_constructibleIntegral` : the constructible objects form a
+  triangulated subcategory of `D(X, 𝒪_E)` (currently `sorry`).
 
 - `DerivedCategory.isTriangulated_derivedCompleteIntegral` : the derived complete objects form a
   triangulated subcategory of `D(X, 𝒪_E)` (currently `sorry`).
@@ -162,5 +170,65 @@ noncomputable def DerivedCategory.constructibleIntegral :
         (Shrink.{u + 1} (PadicAlgCl.integers l E) ⧸
           maximalIdeal (Shrink.{u + 1} (PadicAlgCl.integers l E))))
     (algebraExtendScalars (Scheme.ProEt.topology X) _ _)
+
+/-- The constructible objects of `D(X, 𝒪_E)` form a triangulated subcategory: they contain
+`0` and are stable under shifts and extensions.
+
+The proof is currently `sorry`. -/
+instance DerivedCategory.isTriangulated_constructibleIntegral :
+    (DerivedCategory.constructibleIntegral X l E).IsTriangulated :=
+  sorry
+
+/-- The category `D_cons(X, 𝒪_E)` of constructible objects [Stacks 09C1], realized as the
+full subcategory of `D(X, 𝒪_E)` cut out by `DerivedCategory.constructibleIntegral`. This is
+the integral stage of the `ℓ`-adic formalism: the coefficients are the ring of integers
+`𝒪_E` of an extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ = PadicAlgCl l`. -/
+noncomputable def DerivedCategoryConstructibleIntegral : Type _ :=
+  (DerivedCategory.constructibleIntegral X l E).FullSubcategory
+
+noncomputable instance : Category (DerivedCategoryConstructibleIntegral X l E) :=
+  inferInstanceAs <| Category (DerivedCategory.constructibleIntegral X l E).FullSubcategory
+
+/-- The inclusion of `D_cons(X, 𝒪_E)` into the derived category of sheaves of
+`𝒪_E`-modules. -/
+noncomputable def DerivedCategoryConstructibleIntegral.ι :
+    DerivedCategoryConstructibleIntegral X l E ⥤
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X)
+        (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))) :=
+  (DerivedCategory.constructibleIntegral X l E).ι
+
+noncomputable instance : Preadditive (DerivedCategoryConstructibleIntegral X l E) :=
+  inferInstanceAs <| Preadditive (DerivedCategory.constructibleIntegral X l E).FullSubcategory
+
+/-- The `Hom` groups of `D_cons(X, 𝒪_E)` are `𝒪_E`-modules, as those of `D(X, 𝒪_E)` are. -/
+noncomputable instance :
+    Linear (Shrink.{u + 1} (PadicAlgCl.integers l E))
+      (DerivedCategoryConstructibleIntegral X l E) :=
+  inferInstanceAs <| Linear (Shrink.{u + 1} (PadicAlgCl.integers l E))
+    (DerivedCategory.constructibleIntegral X l E).FullSubcategory
+
+noncomputable instance : HasZeroObject (DerivedCategoryConstructibleIntegral X l E) :=
+  inferInstanceAs <| HasZeroObject (DerivedCategory.constructibleIntegral X l E).FullSubcategory
+
+noncomputable instance : HasShift (DerivedCategoryConstructibleIntegral X l E) ℤ :=
+  inferInstanceAs <| HasShift (DerivedCategory.constructibleIntegral X l E).FullSubcategory ℤ
+
+instance (n : ℤ) : (shiftFunctor (DerivedCategoryConstructibleIntegral X l E) n).Additive :=
+  inferInstanceAs <|
+    (shiftFunctor (DerivedCategory.constructibleIntegral X l E).FullSubcategory n).Additive
+
+/-- The shift functors of `D_cons(X, 𝒪_E)` are `𝒪_E`-linear, as those of `D(X, 𝒪_E)` are. -/
+instance (n : ℤ) :
+    (shiftFunctor (DerivedCategoryConstructibleIntegral X l E) n).Linear
+      (Shrink.{u + 1} (PadicAlgCl.integers l E)) :=
+  inferInstanceAs <|
+    (shiftFunctor (DerivedCategory.constructibleIntegral X l E).FullSubcategory n).Linear
+      (Shrink.{u + 1} (PadicAlgCl.integers l E))
+
+noncomputable instance : Pretriangulated (DerivedCategoryConstructibleIntegral X l E) :=
+  inferInstanceAs <| Pretriangulated (DerivedCategory.constructibleIntegral X l E).FullSubcategory
+
+instance : IsTriangulated (DerivedCategoryConstructibleIntegral X l E) :=
+  inferInstanceAs <| IsTriangulated (DerivedCategory.constructibleIntegral X l E).FullSubcategory
 
 end Constructible
