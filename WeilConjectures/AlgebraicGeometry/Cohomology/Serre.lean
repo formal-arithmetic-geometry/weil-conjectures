@@ -30,9 +30,9 @@ the index type of the *homogeneous* coordinates, so that `ℙᵈ_k` is `ℙ(n; S
 
 There is no twisting sheaf anywhere in Mathlib or in the project, so
 `AlgebraicGeometry.ProjectiveSpace.twist` is declared here as an `opaque` constant. Being
-`opaque` rather than `sorry`-bodied it genuinely depends on `m`, so the four cohomology statements below say what
-they should; but it satisfies no equations, so **none of them can be proved before it is
-replaced**. The alternative, quantifying existentially over a family
+`opaque` rather than `sorry`-bodied it genuinely depends on `m`, so the four cohomology
+statements below say what they should; but it satisfies no equations, so **none of them can be
+proved before it is replaced**. The alternative, quantifying existentially over a family
 `𝒪 : ℤ → (ℙ(n; S)).Modules` with `𝒪 0 ≅ 𝒪_X` and the four clauses, would be provable today;
 it is not used here because the twist is also needed by Serre's theorems A and B, which are
 about an arbitrary closed subscheme and would then have to carry the family as a parameter.
