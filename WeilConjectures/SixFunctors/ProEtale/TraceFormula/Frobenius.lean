@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 
 /-!
@@ -22,6 +23,8 @@ graph correspondences `c_m = (id, Φ_m)` and the global Frobenius operators.
 - `AlgebraicGeometry.ProEtale.WeilComplex`: a complex with a Frobenius coefficient
   morphism, together with its iterates `frobeniusIterate`, `coeffIterate` and its graph
   correspondences `WeilComplex.graph`.
+- `AlgebraicGeometry.ProEtale.WeilComplex.stalkFrobenius`: the geometric-stalk Frobenius
+  `F_{x,m} = (φ_m)_x̄` at a point fixed by `Φ_m`.
 - `AlgebraicGeometry.ProEtale.relativeFrobenius`: the relative Frobenius `r_m` of a
   morphism compatible with the Frobenius morphisms of its source and target.
 - `AlgebraicGeometry.ProEtale.WeilComplex.lowerShriekPush`: the `!`-pushforward of a Weil
@@ -45,10 +48,6 @@ universal homeomorphism — appear as hypotheses where they are needed. The `coe
 a plain morphism rather than an isomorphism, so that a `WeilComplex` covers both a Weil
 datum (add `IsIso W.coeff`) and the arbitrary *Frobenius coefficient morphism* that the
 coefficient continuation of the argument needs.
-
-`coeffIterate` and the coefficient maps of `graph` and of `lowerShriekPush` are composites
-of comparison maps that the package only postulates, so they are `opaque` for the reason
-explained in `WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence`.
 
 `isUniversalHomeomorphism_relativeFrobenius` is not proved because the cancellation lemma
 it needs — if `g ≫ f` and `f` are universal homeomorphisms then so is `g` — is missing;
@@ -115,35 +114,66 @@ lemma frobeniusIterate_comp (m : ℕ) : W.frobeniusIterate m ≫ aX = aX := by
   | succ n ih => rw [frobeniusIterate_succ, Category.assoc, ih, W.frobenius_comp]
 
 /-- The iterate `φ_m : Φ_m^* K ⟶ K` of the Frobenius coefficient morphism, obtained by
-composing the pulled back copies of `φ` along the composition isomorphisms for `Φ^*`
+composing the pulled back copies of `φ` along the composition isomorphisms for `Φ^*`:
+`φ_0` is the identification `L(𝟙 X)^* K ≃ K` and
+`φ_{m+1} : Φ_{m+1}^* K ≃ Φ₁^* Φ_m^* K ──Φ₁^* φ_m──▶ Φ₁^* K ──φ──▶ K`
 (part of blueprint `sk-d-weil`). -/
-noncomputable opaque coeffIterate (m : ℕ) :
-    ((upperStar A (W.frobeniusIterate m)).leftDerivedFunctor).obj W.obj ⟶ W.obj := 0
+noncomputable def coeffIterate :
+    (m : ℕ) → ((upperStar A (W.frobeniusIterate m)).leftDerivedFunctor).obj W.obj ⟶ W.obj
+  | 0 => (leftDerivedUpperStarId A X).hom.app W.obj
+  | m + 1 =>
+    (leftDerivedUpperStarCongr A (W.frobeniusIterate_succ m)).hom.app W.obj ≫
+      (leftDerivedUpperStarComp A W.frobenius (W.frobeniusIterate m)).hom.app W.obj ≫
+      ((upperStar A W.frobenius).leftDerivedFunctor).map (coeffIterate m) ≫ W.coeff
+
+@[simp]
+lemma coeffIterate_zero : W.coeffIterate 0 = (leftDerivedUpperStarId A X).hom.app W.obj :=
+  rfl
+
+lemma coeffIterate_succ (m : ℕ) :
+    W.coeffIterate (m + 1) =
+      (leftDerivedUpperStarCongr A (W.frobeniusIterate_succ m)).hom.app W.obj ≫
+        (leftDerivedUpperStarComp A W.frobenius (W.frobeniusIterate m)).hom.app W.obj ≫
+        ((upperStar A W.frobenius).leftDerivedFunctor).map (W.coeffIterate m) ≫ W.coeff :=
+  rfl
 
 /-- The coefficient map of the graph correspondence
 `AlgebraicGeometry.ProEtale.WeilComplex.graph`: the iterate `φ_m` read through the
 comparison `K ≃ 𝟙^! K`. -/
-noncomputable opaque graphCoeff (m : ℕ) :
+noncomputable def graphCoeff (G : GeometricOperations A s) (m : ℕ) :
     ((upperStar A (W.frobeniusIterate m)).leftDerivedFunctor).obj W.obj ⟶
-      (rightDerivedUpperShriek A (𝟙 X)).obj W.obj := 0
+      (rightDerivedUpperShriek A (𝟙 X)).obj W.obj :=
+  W.coeffIterate m ≫ (G.upperShriekIdIso X).hom.app W.obj
 
 /-- The graph correspondence `c_m = (id_X, Φ_m)` of a Weil complex, with coefficient map
 `φ_m`. Its ordinary-pullback leg is `Φ_m` and its exceptional leg is the identity
 (part of blueprint `sk-d-weil`). -/
-noncomputable def graph (m : ℕ) : Correspondence aX aX W.obj W.obj where
+noncomputable def graph (G : GeometricOperations A s) (m : ℕ) :
+    Correspondence aX aX W.obj W.obj where
   supp := X
   str := aX
   fst := 𝟙 X
   snd := W.frobeniusIterate m
   fst_comp := Category.id_comp aX
   snd_comp := W.frobeniusIterate_comp m
-  coeff := W.graphCoeff m
+  coeff := W.graphCoeff G m
 
 /-- The structure morphism of the graph `W.graph m` is `aX`, so it admits a compactification
 when `aX` does. -/
-instance hasCompactification_graph_str [HasCompactification aX] (m : ℕ) :
-    HasCompactification (W.graph m).str :=
+instance hasCompactification_graph_str [HasCompactification aX] (G : GeometricOperations A s)
+    (m : ℕ) : HasCompactification (W.graph G m).str :=
   inferInstanceAs (HasCompactification aX)
+
+/-- The geometric-stalk Frobenius `F_{x,m} = (φ_m)_x̄` of a Weil complex at a point
+`x : s ⟶ X` fixed by `Φ_m`: the composite of the comparison
+`Lx^* K ≃ L(x ≫ Φ_m)^* K ≃ Lx^* Φ_m^* K` with `Lx^* φ_m`
+(part of blueprint `sk-thm-trace-formula`). -/
+noncomputable def stalkFrobenius (m : ℕ) (x : s ⟶ X) (hx : x ≫ W.frobeniusIterate m = x) :
+    ((upperStar A x).leftDerivedFunctor).obj W.obj ⟶
+      ((upperStar A x).leftDerivedFunctor).obj W.obj :=
+  (leftDerivedUpperStarCongr A hx).inv.app W.obj ≫
+    (leftDerivedUpperStarComp A x (W.frobeniusIterate m)).hom.app W.obj ≫
+    ((upperStar A x).leftDerivedFunctor).map (W.coeffIterate m)
 
 end WeilComplex
 
@@ -221,20 +251,40 @@ composite `ψ = Rf_! φ ∘ θ_{f,1}` of the Weil comparison
 
 built from Cartesian `!`-base change for `X'_m` and topological invariance for the relative
 Frobenius `r_m`, with `Rf_! φ`. -/
-noncomputable opaque WeilComplex.lowerShriekPushCoeff {aX : X ⟶ s} (W : WeilComplex (A := A) aX)
-    (f : X ⟶ Y) [HasCompactification f] (frobY : Y ⟶ Y) :
+noncomputable def WeilComplex.lowerShriekPushCoeff {aX : X ⟶ s} (W : WeilComplex (A := A) aX)
+    (G : GeometricOperations A s) (f : X ⟶ Y) [HasCompactification f] (frobY : Y ⟶ Y)
+    (h : f ≫ frobY = W.frobenius ≫ f) [IsFinite W.frobenius] [IsFinite frobY] :
     ((upperStar A frobY).leftDerivedFunctor).obj ((rightDerivedLowerShriek A f).obj W.obj) ⟶
-      (rightDerivedLowerShriek A f).obj W.obj := 0
+      (rightDerivedLowerShriek A f).obj W.obj :=
+  -- `X'_1 = Y ×_{Φ_Y, Y, f} X`, with `f'_1 = pullback.fst` and `p_1 = pullback.snd`
+  let sq : IsPullback (pullback.snd frobY f) (pullback.fst frobY f) f frobY :=
+    (IsPullback.of_hasPullback frobY f).flip
+  let r := relativeFrobenius f W.frobenius frobY h
+  have : HasCompactification (pullback.fst frobY f) := HasCompactification.of_isPullback sq
+  have : HasCompactification (r ≫ pullback.fst frobY f) :=
+    (relativeFrobenius_comp_fst f W.frobenius frobY h).symm ▸ inferInstance
+  (G.baseChange sq).hom.app W.obj ≫
+    (rightDerivedLowerShriek A (pullback.fst frobY f)).map
+      ((derivedUpperStarLowerStarAdjunction A r).unit.app _ ≫
+        (G.properComparison r).inv.app _) ≫
+    (G.lowerShriekComp r (pullback.fst frobY f) ≪≫
+      lowerShriekCongr (relativeFrobenius_comp_fst f W.frobenius frobY h)).hom.app _ ≫
+    (rightDerivedLowerShriek A f).map
+      (((leftDerivedUpperStarComp A r (pullback.snd frobY f)).symm ≪≫
+        leftDerivedUpperStarCongr A
+          (relativeFrobenius_comp_snd f W.frobenius frobY h)).hom.app W.obj ≫ W.coeff)
 
 /-- The `!`-pushforward of a Weil complex `(K, φ)` along `f : X ⟶ Y` compatible with the
 Frobenius morphisms: the Weil complex `L = Rf_! K` on `Y` with coefficient map
 `ψ = Rf_! φ ∘ θ_{f,1}` (blueprint: `sk-d-weil-push`). -/
 noncomputable def WeilComplex.lowerShriekPush {aX : X ⟶ s} {aY : Y ⟶ s}
-    (W : WeilComplex (A := A) aX) (f : X ⟶ Y) [HasCompactification f] (frobY : Y ⟶ Y)
-    (hY : frobY ≫ aY = aY) (h : f ≫ frobY = W.frobenius ≫ f) : WeilComplex (A := A) aY where
+    (W : WeilComplex (A := A) aX) (G : GeometricOperations A s) (f : X ⟶ Y)
+    [HasCompactification f] (frobY : Y ⟶ Y) (hY : frobY ≫ aY = aY)
+    (h : f ≫ frobY = W.frobenius ≫ f) [IsFinite W.frobenius] [IsFinite frobY] :
+    WeilComplex (A := A) aY where
   frobenius := frobY
   frobenius_comp := hY
   obj := (rightDerivedLowerShriek A f).obj W.obj
-  coeff := W.lowerShriekPushCoeff f frobY
+  coeff := W.lowerShriekPushCoeff G f frobY h
 
 end AlgebraicGeometry.ProEtale

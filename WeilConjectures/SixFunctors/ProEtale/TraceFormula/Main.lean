@@ -16,11 +16,6 @@ For a Weil datum `(K, φ)` on the geometric base change `X` of a separated finit
 compactly supported cohomology is the sum of the traces of the local Frobenius operators
 on the geometric stalks at the `𝐅_{q^m}`-rational points.
 
-## Main definitions
-
-- `AlgebraicGeometry.ProEtale.WeilComplex.stalkFrobenius`: the geometric-stalk Frobenius
-  `F_{x,m} = (φ_m)_x̄`.
-
 ## Main results
 
 - `AlgebraicGeometry.ProEtale.trace_globalOperator_eq_trace_add_trace`: additivity of the
@@ -39,10 +34,8 @@ Both traces are the categorical trace of a dualizable — that is, perfect — o
 geometric stalk, and the braiding of `D(s, A)` is an instance hypothesis: this project
 installs a monoidal structure on a derived category but not yet a braiding.
 
-`stalkFrobenius` is a composite of the comparison `Lx^* K ≃ L(x ≫ Φ_m)^* K ≃ Lx^* Φ_m^* K`
-with `Lx^* φ_m`, and the first factor is not available here, so it is `opaque` for the
-reason explained in
-`WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence`.
+The local Frobenius `WeilComplex.stalkFrobenius` is defined in
+`WeilConjectures.SixFunctors.ProEtale.TraceFormula.Frobenius`.
 
 In `trace_globalOperator_eq_trace_add_trace` the restriction of a Weil complex to an open
 or closed piece is not constructed in this project, so the two restricted Weil complexes
@@ -66,15 +59,6 @@ namespace AlgebraicGeometry.ProEtale
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] {s X : Scheme.{u}}
-
-/-- The geometric-stalk Frobenius `F_{x,m} = (φ_m)_x̄` of a Weil complex at a point
-`x : s ⟶ X` fixed by `Φ_m`: the composite of the comparison
-`Lx^* K ≃ L(x ≫ Φ_m)^* K ≃ Lx^* Φ_m^* K` with `Lx^* φ_m`
-(part of blueprint `sk-thm-trace-formula`). -/
-noncomputable opaque WeilComplex.stalkFrobenius {aX : X ⟶ s} (W : WeilComplex (A := A) aX)
-    (m : ℕ) (x : s ⟶ X) (hx : x ≫ W.frobeniusIterate m = x) :
-    ((upperStar A x).leftDerivedFunctor).obj W.obj ⟶
-      ((upperStar A x).leftDerivedFunctor).obj W.obj := 0
 
 /-- Compact trace additivity: for a closed immersion `i : Z ⟶ X` and its open complement
 `j : U ⟶ X`, the Frobenius coefficient morphisms induced on the functorial compact
@@ -108,15 +92,15 @@ theorem trace_globalOperator_eq_trace_add_trace (G : GeometricOperations A s)
     (hicoeff : WZ.coeff ≫ eZ.hom =
       cZ.hom ≫ ((upperStar A i).leftDerivedFunctor).map W.coeff)
     (m : ℕ)
-    [IsProper (W.graph m).snd]
-    [IsProper (WU.graph m).snd]
-    [IsProper (WZ.graph m).snd]
+    [IsProper (W.graph G m).snd]
+    [IsProper (WU.graph G m).snd]
+    [IsProper (WZ.graph G m).snd]
     [HasRightDual ((rightDerivedLowerShriek A aX).obj W.obj)]
     [HasRightDual ((rightDerivedLowerShriek A aU).obj WU.obj)]
     [HasRightDual ((rightDerivedLowerShriek A aZ).obj WZ.obj)] :
-    MonoidalCategory.trace (Correspondence.globalOperator G (W.graph m)) =
-      MonoidalCategory.trace (Correspondence.globalOperator G (WU.graph m)) +
-        MonoidalCategory.trace (Correspondence.globalOperator G (WZ.graph m)) :=
+    MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G m)) =
+      MonoidalCategory.trace (Correspondence.globalOperator G (WU.graph G m)) +
+        MonoidalCategory.trace (Correspondence.globalOperator G (WZ.graph G m)) :=
   sorry
 
 /-- **The finite-coefficient Lefschetz trace formula.** For every Weil datum on a separated
@@ -130,11 +114,11 @@ theorem trace_globalOperator_eq_sum_trace_stalkFrobenius (G : GeometricOperation
     [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))]
     {aX : X ⟶ s} [HasCompactification aX] (W : WeilComplex (A := A) aX)
     (hW : IsIso W.coeff) (hctf : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m)
-    [IsProper (W.graph m).snd]
+    [IsProper (W.graph G m).snd]
     [HasRightDual ((rightDerivedLowerShriek A aX).obj W.obj)]
     [Fintype {x : s ⟶ X // x ≫ W.frobeniusIterate m = x}]
     [∀ x : s ⟶ X, HasRightDual (((upperStar A x).leftDerivedFunctor).obj W.obj)] :
-    MonoidalCategory.trace (Correspondence.globalOperator G (W.graph m)) =
+    MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G m)) =
       ∑ x : {x : s ⟶ X // x ≫ W.frobeniusIterate m = x},
         MonoidalCategory.trace (W.stalkFrobenius m x.1 x.2) :=
   sorry
