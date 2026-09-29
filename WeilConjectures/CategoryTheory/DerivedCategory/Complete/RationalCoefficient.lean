@@ -13,23 +13,23 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationaliz
 # Derived complete objects with coefficients in an `ℓ`-adic field
 
 Let `E` be an extension of `ℚ_ℓ` inside `ℚ̄_ℓ = PadicAlgCl l`, with ring of integers
-`𝒪_E = PadicAlgCl.integers l E`. This file passes from the category `D_comp(J, 𝒪_E)` of
-derived complete objects of the derived category of sheaves of `𝒪_E`-modules on a site
-`(C, J)`
+`𝒪_E = PadicAlgCl.integers l E`. This file passes from the category `D_comp(X, 𝒪_E)` of
+derived complete objects of the derived category of sheaves of `𝒪_E`-modules on the small
+pro-étale site `X.ProEt` of a scheme `X`
 (`WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient`) to the category
-`D_comp(J, E)` with coefficients in `E`.
+`D_comp(X, E)` with coefficients in `E`.
 
 ## Inverting the nonzero elements of `𝒪_E`
 
-`D_comp(J, E)` is the rationalization of
+`D_comp(X, E)` is the rationalization of
 `WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization`,
 
 ```
-  D_comp(J, E)  :=  D_comp(J, 𝒪_E) / (torsion objects),
+  D_comp(X, E)  :=  D_comp(X, 𝒪_E) / (torsion objects),
 ```
 
-the Verdier quotient of `D_comp(J, 𝒪_E)` by the triangulated subcategory of objects killed
-by a nonzero element of `𝒪_E`; equivalently, the localization of `D_comp(J, 𝒪_E)` at the
+the Verdier quotient of `D_comp(X, 𝒪_E)` by the triangulated subcategory of objects killed
+by a nonzero element of `𝒪_E`; equivalently, the localization of `D_comp(X, 𝒪_E)` at the
 morphisms whose mapping cone is killed by a nonzero element of `𝒪_E`. It is a triangulated
 category, and it is `E`-linear because `E` is the fraction field of `𝒪_E`
 (`PadicAlgCl.isFractionRing_shrink`).
@@ -37,12 +37,12 @@ category, and it is `E`-linear because `E` is the fraction field of `𝒪_E`
 When `E` is finite over `ℚ_ℓ`, `𝒪_E` is a discrete valuation ring in which `ℓ` is a nonzero
 element of the maximal ideal, so every nonzero element of `𝒪_E` divides a power of `ℓ`, and
 an object is killed by a nonzero element of `𝒪_E` if and only if it is killed by a power of
-`ℓ`: this is the same category as `D_comp(J, 𝒪_E)[1/ℓ]`, the case `M = Submonoid.powers ℓ`
+`ℓ`: this is the same category as `D_comp(X, 𝒪_E)[1/ℓ]`, the case `M = Submonoid.powers ℓ`
 of the rationalization; inverting all nonzero elements makes the `E`-linear structure come
 directly from `IsFractionRing 𝒪_E E`.
 
-The Verdier quotient needs `D_comp(J, 𝒪_E)` to be triangulated, i.e. the derived complete
-objects to form a triangulated subcategory of `D(J, 𝒪_E)`
+The Verdier quotient needs `D_comp(X, 𝒪_E)` to be triangulated, i.e. the derived complete
+objects to form a triangulated subcategory of `D(X, 𝒪_E)`
 (`DerivedCategory.isTriangulated_derivedCompleteIntegral` in
 `WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient`); this is currently
 `sorry`.
@@ -51,9 +51,9 @@ objects to form a triangulated subcategory of `D(J, 𝒪_E)`
 
 - `PadicAlgCl.algebraShrink`, `PadicAlgCl.isFractionRing_shrink` : `E` is the fraction field
   of the universe `u + 1` copy `Shrink 𝒪_E` of its ring of integers.
-- `DerivedCategoryDerivedCompleteRational` : the triangulated, `E`-linear category `D_comp(J, E)`.
+- `DerivedCategoryDerivedCompleteRational` : the triangulated, `E`-linear category `D_comp(X, E)`.
 - `DerivedCategoryDerivedCompleteRational.fromIntegral` : the localization functor
-  `D_comp(J, 𝒪_E) ⥤ D_comp(J, E)`.
+  `D_comp(X, 𝒪_E) ⥤ D_comp(X, E)`.
 
 -/
 
@@ -61,7 +61,7 @@ objects to form a triangulated subcategory of `D(J, 𝒪_E)`
 
 universe w u
 
-open CategoryTheory Limits
+open AlgebraicGeometry CategoryTheory Limits
 
 section RingOfIntegers
 
@@ -86,28 +86,27 @@ end RingOfIntegers
 
 section ECoefficient
 
-variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-  (J : GrothendieckTopology C) (l : ℕ) [Fact l.Prime] (E : Type w) [Field E]
+variable (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type w) [Field E]
   [Algebra E (PadicAlgCl l)] [Small.{u + 1} E]
 
-/-- The category `D_comp(J, E)` of derived complete objects with coefficients in the
-`ℓ`-adic field `E`: the rationalization of `D_comp(J, 𝒪_E)` at the nonzero elements of
+/-- The category `D_comp(X, E)` of derived complete objects with coefficients in the
+`ℓ`-adic field `E`: the rationalization of `D_comp(X, 𝒪_E)` at the nonzero elements of
 `𝒪_E`, i.e. its Verdier quotient by the objects killed by a nonzero element of `𝒪_E`.
-Since `E = 𝒪_E[1/ℓ]`, this is `D_comp(J, 𝒪_E)[1/ℓ]`. It is triangulated and `E`-linear. -/
+Since `E = 𝒪_E[1/ℓ]`, this is `D_comp(X, 𝒪_E)[1/ℓ]`. It is triangulated and `E`-linear. -/
 @[reducible]
 def DerivedCategoryDerivedCompleteRational : Type _ :=
   Rationalization (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)))
-    (DerivedCategoryDerivedCompleteIntegral J l E)
+    (DerivedCategoryDerivedCompleteIntegral X l E)
 
-/-- The `Hom` groups of `D_comp(J, E)` are `E`-vector spaces. -/
-noncomputable example : Linear E (DerivedCategoryDerivedCompleteRational J l E) := inferInstance
+/-- The `Hom` groups of `D_comp(X, E)` are `E`-vector spaces. -/
+noncomputable example : Linear E (DerivedCategoryDerivedCompleteRational X l E) := inferInstance
 
-example : IsTriangulated (DerivedCategoryDerivedCompleteRational J l E) := inferInstance
+example : IsTriangulated (DerivedCategoryDerivedCompleteRational X l E) := inferInstance
 
-/-- The localization functor `D_comp(J, 𝒪_E) ⥤ D_comp(J, E)`. -/
+/-- The localization functor `D_comp(X, 𝒪_E) ⥤ D_comp(X, E)`. -/
 @[reducible]
 noncomputable def DerivedCategoryDerivedCompleteRational.fromIntegral :
-    DerivedCategoryDerivedCompleteIntegral J l E ⥤ DerivedCategoryDerivedCompleteRational J l E :=
+    DerivedCategoryDerivedCompleteIntegral X l E ⥤ DerivedCategoryDerivedCompleteRational X l E :=
   Rationalization.Q _ _
 
 end ECoefficient
