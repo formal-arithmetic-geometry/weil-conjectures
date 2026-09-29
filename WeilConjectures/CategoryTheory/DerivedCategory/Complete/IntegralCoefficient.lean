@@ -5,27 +5,33 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.ChangeOfRings
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.TorDimension
+public import WeilConjectures.ConstructibleSheaf.ProEtale
 public import WeilConjectures.NumberTheory.Padics.Extension
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 
 /-!
 
-# Derived complete objects with coefficients in the ring of integers of an `ℓ`-adic field
+# Derived complete and bounded constructible objects with coefficients in `𝒪_E`
 
 This file specializes `DerivedCategory.derivedComplete` of
 `WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs` to the coefficient ring of
 the integral stage of the `ℓ`-adic formalism: `E` is an extension of `ℚ_ℓ` inside `ℚ̄_ℓ`,
 `𝒪_E` is its ring of integers and `𝔪_E` is the maximal ideal of `𝒪_E`. The site is the
 small pro-étale site `X.ProEt` of a scheme `X`, with the pro-étale topology
-`Scheme.ProEt.topology X`. This file defines the property of an object of
+`Scheme.ProEt.topology X`. This file defines the properties of an object of
 
 ```
   D(X, 𝒪_E) := DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat 𝒪_E))
 ```
 
-of being derived complete for `𝔪_E`.
+of being derived complete for `𝔪_E`, and of being constructible in the sense of
+[Stacks 09C1]: derived complete, with derived reduction modulo `𝔪_E` having constructible
+homology sheaves and locally finite tor dimension.
 
 ## The hypotheses on `E`
 
@@ -47,13 +53,19 @@ site `X.ProEt` of a `Scheme.{u}` — and its coefficient ring in `Type (u + 1)`.
 lives in an arbitrary universe `Type w` and is assumed `Small.{u + 1}`, so the coefficient ring
 used below is the copy `Shrink.{u + 1} (PadicAlgCl.integers l E)` of `𝒪_E` in `Type (u + 1)`.
 `Shrink` carries the ring structure across (`Shrink.ringEquiv`), so no instance has to be
-replayed by hand; the one fact that does need transporting, `IsAdicComplete`, is
-transported along `PadicAlgCl.shrinkRingEquiv` by `IsAdicComplete.congr_ringEquiv`.
+replayed by hand; the facts that do need transporting along `PadicAlgCl.shrinkRingEquiv` are
+that `Shrink 𝒪_E` is a local ring (`PadicAlgCl.isLocalRing_shrink`), so that `𝔪_E` is its
+`IsLocalRing.maximalIdeal`, and that it is complete for it (`PadicAlgCl.isAdicComplete_shrink`).
 
 ## Main definitions
 
 - `DerivedCategory.derivedCompleteIntegral` : the property of an object of `D(X, 𝒪_E)` of being
   derived complete with respect to `𝔪_E`.
+- `DerivedCategory.boundedConstructibleIntegral` : the property of an object `K` of
+  `D(X, 𝒪_E)` of being derived complete with `K ⊗ᴸ_{𝒪_E} 𝒪_E/𝔪_E` having constructible
+  homology sheaves and locally finite tor dimension, the derived reduction being the derived
+  extension of scalars `DerivedCategory.algebraExtendScalars` of
+  `WeilConjectures.CategoryTheory.DerivedCategory.ChangeOfRings`.
 
 ## Main results
 
@@ -70,7 +82,7 @@ transported along `PadicAlgCl.shrinkRingEquiv` by `IsAdicComplete.congr_ringEqui
 
 universe w u
 
-open AlgebraicGeometry CategoryTheory Limits
+open AlgebraicGeometry CategoryTheory IsLocalRing Limits
 
 section DerivedComplete
 
@@ -84,7 +96,8 @@ reduction maps `K ⟶ K ⊗ᴸ 𝒪_E/𝔪_Eⁿ`, whose point is `K` itself, is 
 noncomputable abbrev DerivedCategory.derivedCompleteIntegral :
     ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X)
       (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))))) :=
-  DerivedCategory.derivedComplete (Scheme.ProEt.topology X) (PadicAlgCl.maximalIdealShrink l E)
+  DerivedCategory.derivedComplete (Scheme.ProEt.topology X)
+    (maximalIdeal (Shrink.{u + 1} (PadicAlgCl.integers l E)))
 
 /-- The derived complete objects of `D(X, 𝒪_E)` form a triangulated subcategory: they
 contain `0` and are stable under shifts and extensions.
@@ -102,11 +115,52 @@ lemma DerivedCategory.derivedCompleteIntegral_iff_isIso_lift
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X)
       (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))))
     [HasLimit (derivedCompletionDiagram (Scheme.ProEt.topology X)
-      (PadicAlgCl.maximalIdealShrink l E) K)] :
+      (maximalIdeal (Shrink.{u + 1} (PadicAlgCl.integers l E))) K)] :
     derivedCompleteIntegral X l E K ↔
       IsIso (limit.lift (derivedCompletionDiagram (Scheme.ProEt.topology X)
-          (PadicAlgCl.maximalIdealShrink l E) K)
-        (derivedCompletionCone (Scheme.ProEt.topology X) (PadicAlgCl.maximalIdealShrink l E) K)) :=
+          (maximalIdeal (Shrink.{u + 1} (PadicAlgCl.integers l E))) K)
+        (derivedCompletionCone (Scheme.ProEt.topology X)
+          (maximalIdeal (Shrink.{u + 1} (PadicAlgCl.integers l E))) K)) :=
   derivedComplete_iff_isIso_lift K
 
 end DerivedComplete
+
+section ConstructibleHomology
+
+variable (Λ : Type (u + 1)) [Ring Λ] (X : Scheme.{u})
+
+/-- An object of the derived category of pro-étale sheaves of `Λ`-modules has constructible
+homology if all its homology sheaves are constructible
+(`AlgebraicGeometry.ProEtale.IsConstructibleSheaf`). This is the pro-étale counterpart of
+`AlgebraicGeometry.Etale.DerivedCategory.constructibleHomology`. -/
+noncomputable def AlgebraicGeometry.ProEtale.DerivedCategory.constructibleHomology :
+    ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) :=
+  fun M ↦ ∀ n : ℤ, ProEtale.IsConstructibleSheaf Λ ((DerivedCategory.homologyFunctor _ n).obj M)
+
+end ConstructibleHomology
+
+section BoundedConstructible
+
+variable (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type w) [Field E]
+  [Algebra E (PadicAlgCl l)] [Small.{u + 1} E]
+
+/-- An object `K` of `D(X, 𝒪_E)` is *constructible* in the sense of [Stacks 09C1] if
+
+1. `K` is derived complete with respect to `𝔪_E` (`DerivedCategory.derivedCompleteIntegral`);
+2. the derived reduction `K ⊗ᴸ_{𝒪_E} 𝒪_E/𝔪_E`, computed by the derived extension of scalars
+   `DerivedCategory.algebraExtendScalars` along `𝒪_E → 𝒪_E/𝔪_E`, has constructible homology
+   sheaves (`ProEtale.DerivedCategory.constructibleHomology`) and locally has finite tor
+   dimension (`DerivedCategory.locallyFiniteTorDimension`, [Stacks 08FY]). -/
+noncomputable def DerivedCategory.boundedConstructibleIntegral :
+    ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X)
+      (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))))) :=
+  derivedCompleteIntegral X l E ⊓ ObjectProperty.inverseImage
+    (ProEtale.DerivedCategory.constructibleHomology
+        (Shrink.{u + 1} (PadicAlgCl.integers l E) ⧸
+          maximalIdeal (Shrink.{u + 1} (PadicAlgCl.integers l E))) X ⊓
+      locallyFiniteTorDimension (Scheme.ProEt.topology X)
+        (Shrink.{u + 1} (PadicAlgCl.integers l E) ⧸
+          maximalIdeal (Shrink.{u + 1} (PadicAlgCl.integers l E))))
+    (algebraExtendScalars (Scheme.ProEt.topology X) _ _)
+
+end BoundedConstructible

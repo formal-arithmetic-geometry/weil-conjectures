@@ -34,8 +34,8 @@ ring `Λ` which is torsion as an additive group — in particular for the finite
 `Λ = ℤ/ℓⁿℤ` of the `ℓ`-adic formalism — every sheaf of `Λ`-modules is torsion
 (`AlgebraicGeometry.Scheme.IsTorsionSheaf.of_isTorsion`).
 
-The design follows `AlgebraicGeometry.Scheme.IsFiniteSheaf` of
-`WeilConjectures.ConstructibleSheaf.Defs` (stalkwise condition at geometric points) and
+The design follows `AlgebraicGeometry.Etale.IsFiniteSheaf` of
+`WeilConjectures.ConstructibleSheaf.Etale` (stalkwise condition at geometric points) and
 `AlgebraicGeometry.Etale.DerivedCategory.constructibleHomology` of
 `WeilConjectures.DerivedCategory.Constructible` (homologywise `ObjectProperty` on a
 derived category).

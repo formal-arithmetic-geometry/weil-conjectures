@@ -40,12 +40,13 @@ the `ℓ`-adic one, and `E` becomes a nonarchimedean local field.
   `PadicAlgCl.valuedOfAlgebra` : the norm, valuation and valued field structure of `E`,
   restricted from `ℚ̄_ℓ`.
 - `PadicAlgCl.integers` : the ring of integers `𝒪_E`.
-- `PadicAlgCl.shrinkRingEquiv` and `PadicAlgCl.maximalIdealShrink` : the identification of
-  `𝒪_E` with its copy `Shrink.{u + 1} 𝒪_E`, and the maximal ideal `𝔪_E` read in that copy.
+- `PadicAlgCl.shrinkRingEquiv` : the identification of `𝒪_E` with its copy
+  `Shrink.{u + 1} 𝒪_E`, which is again a local ring (`PadicAlgCl.isLocalRing_shrink`), with
+  maximal ideal `𝔪_E` read in that copy.
 
 ## Main results
 
-- `PadicAlgCl.isAdicComplete_integers` and `PadicAlgCl.isAdicComplete_maximalIdealShrink` :
+- `PadicAlgCl.isAdicComplete_integers` and `PadicAlgCl.isAdicComplete_shrink` :
   if `E` is finite over `ℚ_ℓ`, then `𝒪_E` and its copy `Shrink 𝒪_E` are `𝔪_E`-adically
   complete.
 
@@ -55,7 +56,7 @@ the `ℓ`-adic one, and `E` becomes a nonarchimedean local field.
 
 universe w u
 
-open NNReal
+open NNReal IsLocalRing
 
 namespace PadicAlgCl
 
@@ -114,11 +115,11 @@ noncomputable def shrinkRingEquiv [Small.{u + 1} E] :
     integers l E ≃+* Shrink.{u + 1} (integers l E) :=
   (Shrink.ringEquiv (integers l E)).symm
 
-/-- The maximal ideal `𝔪_E` of the ring of integers `𝒪_E`, read inside the universe `u + 1`
-copy `Shrink 𝒪_E` along `PadicAlgCl.shrinkRingEquiv`. This is the ideal with respect to which
-the objects of `D(J, 𝒪_E)` are asked to be derived complete. -/
-noncomputable def maximalIdealShrink [Small.{u + 1} E] : Ideal (Shrink.{u + 1} (integers l E)) :=
-  (IsLocalRing.maximalIdeal (integers l E)).map (shrinkRingEquiv l E)
+/-- The universe `u + 1` copy `Shrink 𝒪_E` of the ring of integers is a local ring, as `𝒪_E`
+is. Its maximal ideal is the ideal with respect to which the objects of `D(J, 𝒪_E)` are
+asked to be derived complete. -/
+instance isLocalRing_shrink [Small.{u + 1} E] : IsLocalRing (Shrink.{u + 1} (integers l E)) :=
+  .of_surjective' (shrinkRingEquiv l E).toRingHom (shrinkRingEquiv l E).surjective
 
 section Complete
 
@@ -138,7 +139,7 @@ The proof equips `E` with the valuative relation and the topology restricted fro
 compact, being a finite-dimensional normed space over `ℚ_ℓ`), and transports mathlib's
 `IsAdicComplete 𝓂[E] 𝒪[E]` to `PadicAlgCl.integers l E`. -/
 instance isAdicComplete_integers [FiniteDimensional ℚ_[l] E] :
-    IsAdicComplete (IsLocalRing.maximalIdeal (integers l E)) (integers l E) := by
+    IsAdicComplete (maximalIdeal (integers l E)) (integers l E) := by
   let w := valuationOfAlgebra l E
   let := normedFieldOfAlgebra l E
   have := isUltrametricDist_ofAlgebra l E
@@ -188,15 +189,17 @@ instance isAdicComplete_integers [FiniteDimensional ℚ_[l] E] :
     ext x
     exact (isEquiv (valuation E) w).le_one_iff_le_one
   let e : 𝒪[E] ≃+* integers l E := RingEquiv.subringCongr heq
-  rw [← IsLocalRing.map_ringEquiv_maximalIdeal e]
+  rw [← map_ringEquiv_maximalIdeal e]
   exact (IsAdicComplete.congr_ringEquiv _ e).mpr inferInstance
 
 /-- If `E` is a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, the universe `u + 1` copy of its ring
 of integers is `𝔪_E`-adically complete. Through `Ideal.isLimitQuotPowCone` this says that
 the coefficient ring is the limit of the tower `n ↦ 𝒪_E / 𝔪_Eⁿ` of its reductions. -/
-instance isAdicComplete_maximalIdealShrink [FiniteDimensional ℚ_[l] E] [Small.{u + 1} E] :
-    IsAdicComplete (maximalIdealShrink l E) (Shrink.{u + 1} (integers l E)) :=
-  (IsAdicComplete.congr_ringEquiv _ (shrinkRingEquiv l E)).mpr inferInstance
+instance isAdicComplete_shrink [FiniteDimensional ℚ_[l] E] [Small.{u + 1} E] :
+    IsAdicComplete (maximalIdeal (Shrink.{u + 1} (integers l E)))
+      (Shrink.{u + 1} (integers l E)) := by
+  rw [← map_ringEquiv_maximalIdeal (shrinkRingEquiv l E)]
+  exact (IsAdicComplete.congr_ringEquiv _ (shrinkRingEquiv l E)).mpr inferInstance
 
 end Complete
 

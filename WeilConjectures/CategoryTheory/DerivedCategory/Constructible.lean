@@ -9,21 +9,22 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.Etale
 
 /-!
 
 # The constructible bounded derived category of étale sheaves
 
-For a scheme `X` and a concrete abelian coefficient category `A`, this file defines the
-subcategory `Dᵇc(X, A)` of the derived category
-`DerivedCategory (Sheaf X.smallEtaleTopology A)` of étale sheaves consisting of the
+For a scheme `X` and a ring `Λ`, this file defines the subcategory `Dᵇc(X, Λ)` of the
+derived category `DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat Λ))` of étale
+sheaves of `Λ`-modules consisting of the
 bounded complexes all of whose homology sheaves are constructible
-(`AlgebraicGeometry.Scheme.IsConstructibleSheaf`). Boundedness refers to the canonical
+(`AlgebraicGeometry.Etale.IsConstructibleSheaf`). Boundedness refers to the canonical
 t-structure `DerivedCategory.TStructure.t`.
 
-Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
-concrete Grothendieck abelian category with `Hom`-types in the universe `u + 1`, one above
+Following the convention of the `SixFunctors` folder, the coefficient category is
+`ModuleCat.{u + 1} Λ` for a ring `Λ : Type (u + 1)`, a Grothendieck abelian category with
+`Hom`-types in the universe `u + 1`, one above
 the universe `u` of the base schemes. Nothing beyond that is assumed:
 
 - the left Kan extensions along base change, needed by the pullback `Etale.upperStar`
@@ -45,14 +46,14 @@ the universe `u` of the base schemes. Nothing beyond that is assumed:
 - `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible`: the property of being
   bounded with constructible homology.
 - `AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructible`: the subcategory
-  `Dᵇc( X, A)` cut out by the property above, the constructible bounded derived
+  `Dᵇc( X, Λ)` cut out by the property above, the constructible bounded derived
   category of the `ℓ`-adic formalism.
 
 -/
 
 @[expose] public section
 
-universe u' u
+universe u
 
 open CategoryTheory Limits
 
@@ -60,10 +61,7 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u + 1} A] [Abelian A]
-  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [IsGrothendieckAbelian.{u + 1} A]
+variable (Λ : Type (u + 1)) [Ring Λ]
 
 variable (X : Scheme.{u})
 
@@ -72,9 +70,9 @@ section ConstructibleHomology
 /-- An object of the derived category of étale sheaves has constructible homology if all
 its homology sheaves are constructible. -/
 noncomputable def Etale.DerivedCategory.constructibleHomology :
-    ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
-  fun M ↦ ∀ n : ℤ, IsConstructibleSheaf
-    ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology A) n).obj M)
+    ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
+  fun M ↦ ∀ n : ℤ, Etale.IsConstructibleSheaf Λ
+    ((DerivedCategory.homologyFunctor _ n).obj M)
 
 end ConstructibleHomology
 
@@ -83,28 +81,28 @@ section BoundedConstructible
 /-- An object of the derived category of étale sheaves is bounded constructible if it is
 bounded for the canonical t-structure and all its homology sheaves are constructible. -/
 noncomputable def Etale.DerivedCategory.boundedConstructible :
-    ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
-  DerivedCategory.TStructure.t.bounded ⊓ Etale.DerivedCategory.constructibleHomology A X
+    ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
+  DerivedCategory.TStructure.t.bounded ⊓ Etale.DerivedCategory.constructibleHomology Λ X
 
-/-- The constructible bounded derived category `Dᵇc( X, A)`, realized as the full
+/-- The constructible bounded derived category `Dᵇc( X, Λ)`, realized as the full
 subcategory of bounded complexes with constructible homology in the derived category of
 étale sheaves. -/
 noncomputable def Etale.DerivedCategoryBoundedConstructible : Type _ :=
-  (Etale.DerivedCategory.boundedConstructible A X).FullSubcategory
+  (Etale.DerivedCategory.boundedConstructible Λ X).FullSubcategory
 
-noncomputable instance : Category (Etale.DerivedCategoryBoundedConstructible A X) :=
+noncomputable instance : Category (Etale.DerivedCategoryBoundedConstructible Λ X) :=
   inferInstanceAs <|
-    Category (Etale.DerivedCategory.boundedConstructible A X).FullSubcategory
+    Category (Etale.DerivedCategory.boundedConstructible Λ X).FullSubcategory
 
-/-- The inclusion of `Dᵇc(X, A)` into the derived category of étale sheaves. -/
+/-- The inclusion of `Dᵇc(X, Λ)` into the derived category of étale sheaves. -/
 noncomputable def Etale.DerivedCategoryBoundedConstructible.ι :
-    Etale.DerivedCategoryBoundedConstructible A X ⥤
-      DerivedCategory (Sheaf X.smallEtaleTopology A) :=
-  (Etale.DerivedCategory.boundedConstructible A X).ι
+    Etale.DerivedCategoryBoundedConstructible Λ X ⥤
+      DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+  (Etale.DerivedCategory.boundedConstructible Λ X).ι
 
 @[inherit_doc Etale.DerivedCategoryBoundedConstructible]
-scoped notation "Dᵇc(" X ", " A ")" =>
-  Etale.DerivedCategoryBoundedConstructible A X
+scoped notation "Dᵇc(" X ", " Λ ")" =>
+  Etale.DerivedCategoryBoundedConstructible Λ X
 
 end BoundedConstructible
 
