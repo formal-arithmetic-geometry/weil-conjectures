@@ -660,6 +660,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.Derived.Stability
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
