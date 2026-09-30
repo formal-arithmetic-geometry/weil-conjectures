@@ -58,6 +58,8 @@ universe u' u
 
 open CategoryTheory Limits
 
+open scoped CategoryTheory.Functor
+
 namespace AlgebraicGeometry
 
 open Scheme
@@ -134,7 +136,7 @@ theorem isIso_rightDerivedLowerShriekOfCompactificationComparison
 
 variable [QuasiCompact f]
 
-/-- **The unbounded derived lower shrieks does not depend on the compactification**: for two
+/-- **The unbounded derived lower shriek does not depend on the compactification**: for two
 compactifications `c` and `d` of a quasi-compact morphism `f`, the isomorphism
 `Rf_!(c)[A] ≅ Rf_!(d)[A]` obtained by comparing both with the common refinement
 `Compactification.inf c d`: the comparison along `Compactification.infFst c d` followed by the
