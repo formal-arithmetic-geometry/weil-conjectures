@@ -39,7 +39,7 @@ classical case is `k = ℤ/p`.
   image of `e_Ψ`.
 - `AlgebraicGeometry.Etale.artinSchreierSheafOf`: the Artin–Schreier sheaf `ℒ_{Ψ, f} = f^* ℒ_Ψ`
   of a global function `f` on a `k`-scheme, with its pullback compatibility
-  `AlgebraicGeometry.Etale.upperStarArtinSchreierSheafOfIso`.
+  `AlgebraicGeometry.Etale.artinSchreierSheafOfPullbackIso`.
 - `AlgebraicGeometry.Etale.artinSchreierSheafZMod`: the case `k = ℤ/p`, for a scheme of
   characteristic `p`.
 
@@ -255,7 +255,7 @@ def artinSchreierSheafOf (X : Scheme.{u}) [X.Over (Spec (.of k))] (Ψ : AddChar 
 X' --g--> X --f--> 𝔸¹_k
 ```
 -/
-def upperStarArtinSchreierSheafOfIso {X X' : Scheme.{u}} [X.Over (Spec (.of k))]
+def artinSchreierSheafOfPullbackIso {X X' : Scheme.{u}} [X.Over (Spec (.of k))]
     [X'.Over (Spec (.of k))] (g : X' ⟶ X) [g.IsOver (Spec (.of k))] (Ψ : AddChar k Λ)
     (f : Γ(X, ⊤)) :
     (g)^*[ModuleCat Λ].obj (artinSchreierSheafOf X Ψ f) ≅
