@@ -60,6 +60,12 @@ variable {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
 
 namespace Algebra
 
+@[simp]
+lemma eqToHom_f {F : C ⥤ C} {A₀ A₁ : Algebra F} (h : A₀ = A₁) :
+    (eqToHom h).f = eqToHom (congrArg Algebra.a h) := by
+  subst h
+  rfl
+
 section Map
 
 variable {F : C ⥤ C} {G : D ⥤ D} {L : C ⥤ D}
