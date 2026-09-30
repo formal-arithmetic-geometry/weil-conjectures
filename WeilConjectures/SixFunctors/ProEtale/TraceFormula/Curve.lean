@@ -23,9 +23,12 @@ Frobenius on the geometric stalk `K_x̄`.
 
 ## Main definitions
 
+- `AlgebraicGeometry.ProEtale.WeilComplex.closedPieceCoeff`,
+  `AlgebraicGeometry.ProEtale.WeilComplex.openPieceCoeff`: the coefficient morphisms
+  `u^Z : LΦ_m^* K^Z ⟶ K^Z` and `u^U : LΦ_m^* K^U ⟶ K^U` induced by `φ_m` on the two pieces.
 - `AlgebraicGeometry.ProEtale.WeilComplex.closedPiece`,
   `AlgebraicGeometry.ProEtale.WeilComplex.openPiece`: the two pieces `K^Z` and `K^U` of
-  the localization triangle, as Weil complexes.
+  the localization triangle, as endocorrespondences on the graph `(1, Φ_m)`.
 
 ## Main results
 
@@ -47,14 +50,17 @@ the fixed scheme is taken as data. Isolatedness of the fixed
 point, which the blueprint derives from the vanishing of the map induced by `Φ_m` on the
 cotangent space, is therefore assumed rather than proved.
 
-Both pieces keep the Frobenius `Φ₁` of `W`. That is what makes the three graph
-correspondences `W.graph G m`, `(W.closedPiece …).graph G m` and
-`(W.openPiece …).graph G m`
-share their fixed scheme, so that the additivity statement is a genuine sum of Borel-Moore
-sections on `F = Fix(c_m)` with no transport. Their coefficient morphisms are `!`-base
-change along the Cartesian square relating `Φ` to its restriction and the proper
-pushforward of a stalk map, neither of which the package constructs, so they are `opaque`:
-their types carry the content and no `sorryAx` enters.
+The closed point `Z = {x̄}` is stable under `Φ_m` but in general not under `Φ₁`, so for
+`m > 1` there is no non-zero natural map `LΦ₁^* K^Z ⟶ K^Z`, and the pieces cannot be Weil
+complexes for the Frobenius `Φ₁` of `W`. As in the blueprint, which base changes to
+`𝐅_{q^m}`, `Φ_m` plays the role of the one-step Frobenius: the pieces are
+endocorrespondences on the graph `(1, Φ_m)`, with the same legs as `W.graph G m`. The three
+correspondences therefore literally share their fixed scheme, so that the additivity
+statement is a genuine sum of Borel-Moore sections on `F = Fix(c_m)` with no transport.
+The stability of `Z` and `U` under `Φ_m` is data: a morphism `Φ_Z : Z ⟶ Z` with
+`i ≫ Φ_m = Φ_Z ≫ i`, and a Cartesian square exhibiting `Φ_U : U ⟶ U` as the restriction
+of `Φ_m`. The coefficient morphisms are built from these, from the exceptional base change
+of the package and from the adjunction `Li^* ⊣ Ri_*`.
 
 The trace class needs `a_X` separated, locally of finite type and quasi-compact. The first
 two are instances derived from `HasCompactification aX` (`HasCompactification.isSeparated`
@@ -85,53 +91,112 @@ namespace WeilComplex
 
 variable (W : WeilComplex (A := A) aX)
 
-/-- The coefficient morphism of `AlgebraicGeometry.ProEtale.WeilComplex.closedPiece`: the
-proper pushforward `u^Z = [i, i]_!(F_{x,m})` of the stalk map. -/
-noncomputable opaque closedPieceCoeff {Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
-    ((upperStar A W.frobenius).leftDerivedFunctor).obj
+/-- The coefficient morphism `u^Z : LΦ_m^* K^Z ⟶ K^Z` of the closed piece
+`K^Z = Ri_* Li^* K`, for a closed point `i : Z ⟶ X` stable under `Φ_m` with restriction
+`Φ_Z`: under `Li^* ⊣ Ri_*` it corresponds to the composite
+
+```
+  Li^* LΦ_m^* Ri_* Li^* K ≃ LΦ_Z^* Li^* Ri_* Li^* K ──LΦ_Z^* ε──▶ LΦ_Z^* Li^* K
+    ≃ Li^* LΦ_m^* K ──Li^* φ_m──▶ Li^* K
+```
+
+where the isomorphisms come from `i ≫ Φ_m = Φ_Z ≫ i`. This is the adjunction form of the
+proper pushforward `[i, i]_!(F_{x,m})` of the stalk map (part of blueprint
+`sk-d-curve-pieces`). -/
+noncomputable def closedPieceCoeff (m : ℕ) {Z : Scheme.{u}} (i : Z ⟶ X) (frobZ : Z ⟶ Z)
+    (hZ : i ≫ W.frobeniusIterate m = frobZ ≫ i) :
+    ((upperStar A (W.frobeniusIterate m)).leftDerivedFunctor).obj
         (((lowerStar A i).rightDerivedFunctor).obj
           (((upperStar A i).leftDerivedFunctor).obj W.obj)) ⟶
       ((lowerStar A i).rightDerivedFunctor).obj
-        (((upperStar A i).leftDerivedFunctor).obj W.obj) := 0
+        (((upperStar A i).leftDerivedFunctor).obj W.obj) :=
+  ((derivedUpperStarLowerStarAdjunction A i).homEquiv _ _)
+    (((leftDerivedUpperStarComp A i (W.frobeniusIterate m)).symm ≪≫
+        leftDerivedUpperStarCongr A hZ ≪≫ leftDerivedUpperStarComp A frobZ i).hom.app _ ≫
+      ((upperStar A frobZ).leftDerivedFunctor).map
+        ((derivedUpperStarLowerStarAdjunction A i).counit.app
+          (((upperStar A i).leftDerivedFunctor).obj W.obj)) ≫
+      ((leftDerivedUpperStarComp A frobZ i).symm ≪≫ leftDerivedUpperStarCongr A hZ.symm ≪≫
+        leftDerivedUpperStarComp A i (W.frobeniusIterate m)).hom.app W.obj ≫
+      ((upperStar A i).leftDerivedFunctor).map (W.coeffIterate m))
 
-/-- The coefficient morphism of `AlgebraicGeometry.ProEtale.WeilComplex.openPiece`: the
-composite `Φ^* j_! j^* K ≃ j_! Φ_U^* j^* K --(j_! j^* φ)--> j_! j^* K`, whose first map is
-open `!`-base change for the Cartesian square relating `Φ` and its restriction `Φ_U`. -/
-noncomputable opaque openPieceCoeff {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    [HasCompactification j] :
-    ((upperStar A W.frobenius).leftDerivedFunctor).obj
+/-- The coefficient morphism `u^U : LΦ_m^* K^U ⟶ K^U` of the open piece `K^U = Rj_! Lj^* K`,
+for an open immersion `j : U ⟶ X` and a Cartesian square exhibiting `Φ_U : U ⟶ U` as the
+restriction of `Φ_m`: the composite
+
+```
+  LΦ_m^* Rj_! Lj^* K ≃ Rj_! LΦ_U^* Lj^* K ≃ Rj_! Lj^* LΦ_m^* K
+    ──Rj_! Lj^* φ_m──▶ Rj_! Lj^* K
+```
+
+whose first map is `!`-base change for that square (part of blueprint
+`sk-d-curve-pieces`). -/
+noncomputable def openPieceCoeff (G : GeometricOperations A s) (m : ℕ) {U : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j] [HasCompactification j] (frobU : U ⟶ U)
+    (sq : IsPullback frobU j j (W.frobeniusIterate m)) :
+    ((upperStar A (W.frobeniusIterate m)).leftDerivedFunctor).obj
         ((rightDerivedLowerShriek A j).obj
           (((upperStar A j).leftDerivedFunctor).obj W.obj)) ⟶
       (rightDerivedLowerShriek A j).obj
-        (((upperStar A j).leftDerivedFunctor).obj W.obj) := 0
+        (((upperStar A j).leftDerivedFunctor).obj W.obj) :=
+  (G.baseChange sq).hom.app (((upperStar A j).leftDerivedFunctor).obj W.obj) ≫
+    (rightDerivedLowerShriek A j).map
+      (((leftDerivedUpperStarComp A frobU j).symm ≪≫ leftDerivedUpperStarCongr A sq.w ≪≫
+          leftDerivedUpperStarComp A j (W.frobeniusIterate m)).hom.app W.obj ≫
+        ((upperStar A j).leftDerivedFunctor).map (W.coeffIterate m))
 
-/-- The closed piece `K^Z = Ri_* i^* K` of the localization triangle of a Weil complex on a
-smooth curve at the closed point `i : Z ⟶ X` cut out by a fixed geometric point `x̄`, with
-the Frobenius of `W` and the induced coefficient morphism `u^Z`
+/-- The closed piece `K^Z = Ri_* Li^* K` of the localization triangle of a Weil complex on a
+curve at a closed point `i : Z ⟶ X` stable under `Φ_m`, as an endocorrespondence on the
+graph `(1, Φ_m)` with coefficient map `u^Z` read through `K^Z ≃ 𝟙^! K^Z`
 (part of blueprint `sk-d-curve-pieces`). -/
-noncomputable def closedPiece [SmoothOfRelativeDimension 1 aX] (m : ℕ) (hm : 1 ≤ m)
-    (x : s ⟶ X) (hx : x ≫ W.frobeniusIterate m = x) {Z : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] (hi : Set.range i.base = Set.range x.base) :
-    WeilComplex (A := A) aX where
-  frobenius := W.frobenius
-  frobenius_comp := W.frobenius_comp
-  obj := ((lowerStar A i).rightDerivedFunctor).obj
-    (((upperStar A i).leftDerivedFunctor).obj W.obj)
-  coeff := W.closedPieceCoeff i
+noncomputable def closedPiece (G : GeometricOperations A s) (m : ℕ) {Z : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] (frobZ : Z ⟶ Z)
+    (hZ : i ≫ W.frobeniusIterate m = frobZ ≫ i) :
+    Correspondence aX aX
+      (((lowerStar A i).rightDerivedFunctor).obj (((upperStar A i).leftDerivedFunctor).obj W.obj))
+      (((lowerStar A i).rightDerivedFunctor).obj
+        (((upperStar A i).leftDerivedFunctor).obj W.obj)) where
+  supp := X
+  str := aX
+  fst := 𝟙 X
+  snd := W.frobeniusIterate m
+  fst_comp := Category.id_comp aX
+  snd_comp := W.frobeniusIterate_comp m
+  coeff := W.closedPieceCoeff m i frobZ hZ ≫ (G.upperShriekIdIso X).hom.app _
 
-/-- The open piece `K^U = j_! j^* K` of the localization triangle of a Weil complex on a
-smooth curve along the open complement `j : U ⟶ X` of a fixed geometric point `x̄`, with
-the Frobenius of `W` and the induced coefficient morphism `u^U`
+/-- The open piece `K^U = Rj_! Lj^* K` of the localization triangle of a Weil complex on a
+curve along an open immersion `j : U ⟶ X` stable under `Φ_m`, as an endocorrespondence on
+the graph `(1, Φ_m)` with coefficient map `u^U` read through `K^U ≃ 𝟙^! K^U`
 (part of blueprint `sk-d-curve-pieces`). -/
-noncomputable def openPiece [SmoothOfRelativeDimension 1 aX] (m : ℕ) (hm : 1 ≤ m)
-    (x : s ⟶ X) (hx : x ≫ W.frobeniusIterate m = x) {U : Scheme.{u}} (j : U ⟶ X)
-    [IsOpenImmersion j] [HasCompactification j]
-    (hj : Set.range j.base = (Set.range x.base)ᶜ) :
-    WeilComplex (A := A) aX where
-  frobenius := W.frobenius
-  frobenius_comp := W.frobenius_comp
-  obj := (rightDerivedLowerShriek A j).obj (((upperStar A j).leftDerivedFunctor).obj W.obj)
-  coeff := W.openPieceCoeff j
+noncomputable def openPiece (G : GeometricOperations A s) (m : ℕ) {U : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j] [HasCompactification j] (frobU : U ⟶ U)
+    (sq : IsPullback frobU j j (W.frobeniusIterate m)) :
+    Correspondence aX aX
+      ((rightDerivedLowerShriek A j).obj (((upperStar A j).leftDerivedFunctor).obj W.obj))
+      ((rightDerivedLowerShriek A j).obj (((upperStar A j).leftDerivedFunctor).obj W.obj)) where
+  supp := X
+  str := aX
+  fst := 𝟙 X
+  snd := W.frobeniusIterate m
+  fst_comp := Category.id_comp aX
+  snd_comp := W.frobeniusIterate_comp m
+  coeff := W.openPieceCoeff G m j frobU sq ≫ (G.upperShriekIdIso X).hom.app _
+
+/-- The support map of the closed piece is that of the graph `W.graph G m`, hence a closed
+immersion when `aX` is separated. -/
+instance isClosedImmersion_closedPiece_toProd [IsSeparated aX] (G : GeometricOperations A s)
+    (m : ℕ) {Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (frobZ : Z ⟶ Z)
+    (hZ : i ≫ W.frobeniusIterate m = frobZ ≫ i) :
+    IsClosedImmersion (W.closedPiece G m i frobZ hZ).toProd :=
+  inferInstanceAs (IsClosedImmersion (W.graph G m).toProd)
+
+/-- The support map of the open piece is that of the graph `W.graph G m`, hence a closed
+immersion when `aX` is separated. -/
+instance isClosedImmersion_openPiece_toProd [IsSeparated aX] (G : GeometricOperations A s)
+    (m : ℕ) {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [HasCompactification j]
+    (frobU : U ⟶ U) (sq : IsPullback frobU j j (W.frobeniusIterate m)) :
+    IsClosedImmersion (W.openPiece G m j frobU sq).toProd :=
+  inferInstanceAs (IsClosedImmersion (W.graph G m).toProd)
 
 end WeilComplex
 
@@ -171,12 +236,16 @@ theorem traceClass_graph_eq_traceClass_add_traceClass [SmoothOfRelativeDimension
     (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [HasCompactification j]
     (hi : Set.range i.base = Set.range x.base)
     (hj : Set.range j.base = (Set.range x.base)ᶜ)
-    (hZ : G.ctf X (W.closedPiece m hm x hx i hi).obj)
-    (hU : G.ctf X (W.openPiece m hm x hx j hj).obj) :
+    (frobZ : Z ⟶ Z) (hZ : i ≫ W.frobeniusIterate m = frobZ ≫ i) (frobU : U ⟶ U)
+    (sqU : IsPullback frobU j j (W.frobeniusIterate m))
+    (hKZ : G.ctf X (((lowerStar A i).rightDerivedFunctor).obj
+      (((upperStar A i).leftDerivedFunctor).obj W.obj)))
+    (hKU : G.ctf X ((rightDerivedLowerShriek A j).obj
+      (((upperStar A j).leftDerivedFunctor).obj W.obj))) :
     G.traceClass (W.graph G m) hW =
       Add.add (α := G.borelMooreSections (W.graph G m).fixStr)
-        (G.traceClass ((W.closedPiece m hm x hx i hi).graph G m) hZ)
-        (G.traceClass ((W.openPiece m hm x hx j hj).graph G m) hU) :=
+        (G.traceClass (W.closedPiece G m i frobZ hZ) hKZ)
+        (G.traceClass (W.openPiece G m j frobU sqU) hKU) :=
   sorry
 
 /-- Frobenius local terms on smooth curves: the local term of the graph correspondence
