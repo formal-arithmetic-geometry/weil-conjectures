@@ -126,6 +126,7 @@ public import WeilConjectures.Blowup.QuasiAffineGeneral
 public import WeilConjectures.Blowup.QuasiAffineGeneralReduction
 public import WeilConjectures.Blowup.QuasiDomination
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
@@ -350,11 +351,14 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyP
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.Double
+public import WeilConjectures.Mathlib.Algebra.Homology.Embedding.Extend
 public import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
+public import WeilConjectures.Mathlib.Algebra.Homology.HomologySequence
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
@@ -424,6 +428,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Subobject
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
