@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
+public import Mathlib.LinearAlgebra.Matrix.MvPolynomial
 public import Mathlib.RingTheory.Bialgebra.Convolution
 public import Mathlib.RingTheory.HopfAlgebra.Basic
 public import Mathlib.RingTheory.Localization.Away.AdjoinRoot
@@ -21,8 +22,10 @@ the generic matrix `(x_ij)`. It is a commutative Hopf algebra over `k`: the comu
 and the antipode sends `x_ij` to the `(i, j)` entry of the inverse of the generic matrix.
 
 A `k`-algebra homomorphism `k[x_ij, det⁻¹] → R` is the same as an invertible matrix over `R`:
-`Matrix.GeneralLinearGroup.evalAlgHom g` is evaluation at `g : GL n R`, and it turns matrix
-multiplication into the convolution product (`Matrix.GeneralLinearGroup.evalAlgHom_mul`).
+`Matrix.GeneralLinearGroup.evalAlgHom g` is evaluation at `g : GL n R`, and all three structure
+maps are instances of it. Evaluation turns matrix multiplication into the convolution product,
+so the coordinate ring represents the group functor `R ↦ GL n R`
+(`Matrix.GeneralLinearGroup.algHomMulEquiv`).
 
 ## Main definitions
 
@@ -32,6 +35,8 @@ multiplication into the convolution product (`Matrix.GeneralLinearGroup.evalAlgH
 - `Matrix.GeneralLinearGroup.evalAlgHom`: evaluation at an invertible matrix.
 - `Matrix.GeneralLinearGroup.comulAlgHom`, `counitAlgHom`, `antipodeAlgHom`: the Hopf algebra
   structure maps.
+- `Matrix.GeneralLinearGroup.algHomMulEquiv`: `k`-algebra homomorphisms out of the coordinate ring,
+  with the convolution product, are the invertible matrices.
 
 ## Blueprint
 
@@ -41,22 +46,20 @@ multiplication into the convolution product (`Matrix.GeneralLinearGroup.evalAlgH
 
 @[expose] public section
 
-universe u
-
 open TensorProduct
 
 namespace Matrix.GeneralLinearGroup
 
-variable (n : Type) [Fintype n] [DecidableEq n] (k : Type u) [CommRing k]
+variable (n : Type*) [Fintype n] [DecidableEq n] (k : Type*) [CommRing k]
 
 /-- The generic `n × n` matrix `(x_ij)` over the polynomial ring `k[x_ij]`. -/
-noncomputable def genericMatrix : Matrix n n (MvPolynomial (n × n) k) :=
-  Matrix.of fun i j ↦ MvPolynomial.X (i, j)
+noncomputable abbrev genericMatrix : Matrix n n (MvPolynomial (n × n) k) :=
+  Matrix.mvPolynomialX n n k
 
 /-- The coordinate ring `k[x_ij, det⁻¹]` of the general linear group `GL_n` over `k`: the
 polynomial ring in the matrix entries, localized away from the determinant.
 (blueprint: `sk-d-geometry`) -/
-abbrev CoordinateRing : Type u :=
+abbrev CoordinateRing :=
   Localization.Away (genericMatrix n k).det
 
 /-- The coordinate function `x_ij` on `GL_n`. -/
@@ -77,10 +80,7 @@ theorem algHom_ext {A : Type*} [Semiring A] [Algebra k A] {f g : CoordinateRing 
 theorem isUnit_aeval_det {R : Type*} [CommRing R] [Algebra k R] (g : GL n R) :
     IsUnit ((MvPolynomial.aeval fun p : n × n ↦ (g : Matrix n n R) p.1 p.2)
       (genericMatrix n k).det) := by
-  have : (MvPolynomial.aeval fun p : n × n ↦ (g : Matrix n n R) p.1 p.2).mapMatrix
-      (genericMatrix n k) = g := by
-    ext i j; simp [genericMatrix]
-  rw [AlgHom.map_det, this]
+  rw [AlgHom.map_det, mvPolynomialX_mapMatrix_aeval]
   exact (Matrix.isUnit_iff_isUnit_det _).1 g.isUnit
 
 /-- Evaluation of the coordinate ring of `GL_n` at an invertible matrix `g` over a
@@ -110,35 +110,19 @@ noncomputable def genericUnit : GL n (CoordinateRing n k) :=
 @[simp]
 theorem coe_genericUnit_apply (i j : n) :
     (genericUnit n k : Matrix n n (CoordinateRing n k)) i j = coord n k i j := by
-  simp [genericUnit, genericMatrix, coord]
+  simp [genericUnit, coord]
 
-/-- The determinant of the matrix `(∑ₗ x_il ⊗ x_lj)` is a unit in `A ⊗ A`, where `A` is the
-coordinate ring of `GL_n`. -/
-theorem isUnit_aeval_det_tmul :
-    IsUnit ((MvPolynomial.aeval fun p : n × n ↦
-      ∑ l, coord n k p.1 l ⊗ₜ[k] coord n k l p.2) (genericMatrix n k).det) := by
-  have : (MvPolynomial.aeval fun p : n × n ↦
-      ∑ l, coord n k p.1 l ⊗ₜ[k] coord n k l p.2).mapMatrix (genericMatrix n k) =
-      ↑(map (Algebra.TensorProduct.includeLeft (R := k) (S := k) (A := CoordinateRing n k)
-        (B := CoordinateRing n k)).toRingHom (genericUnit n k) *
-        map (Algebra.TensorProduct.includeRight (R := k) (A := CoordinateRing n k)).toRingHom
-          (genericUnit n k)) := by
-    ext i j
-    simp [genericMatrix, genericUnit, Matrix.mul_apply, coord]
-  rw [AlgHom.map_det, this]
-  exact (Matrix.isUnit_iff_isUnit_det _).1 (Units.isUnit _)
-
-/-- The comultiplication of the coordinate ring of `GL_n`, `x_ij ↦ ∑ₗ x_il ⊗ x_lj`. -/
+/-- The comultiplication of the coordinate ring of `GL_n`, `x_ij ↦ ∑ₗ x_il ⊗ x_lj`: evaluation at
+the product of the two copies of the generic matrix in `A ⊗ A`. -/
 noncomputable def comulAlgHom :
     CoordinateRing n k →ₐ[k] CoordinateRing n k ⊗[k] CoordinateRing n k :=
-  IsLocalization.Away.liftAlgHom (genericMatrix n k).det
-    (f := MvPolynomial.aeval fun p : n × n ↦ ∑ l, coord n k p.1 l ⊗ₜ[k] coord n k l p.2)
-    (isUnit_aeval_det_tmul n k)
+  evalAlgHom (map Algebra.TensorProduct.includeLeftRingHom (genericUnit n k) *
+    map Algebra.TensorProduct.includeRight.toRingHom (genericUnit n k))
 
 @[simp]
 theorem comulAlgHom_coord (i j : n) :
     comulAlgHom n k (coord n k i j) = ∑ l, coord n k i l ⊗ₜ[k] coord n k l j := by
-  simp [comulAlgHom, coord]
+  simp [comulAlgHom, Matrix.mul_apply]
 
 /-- The counit of the coordinate ring of `GL_n`: evaluation at the identity matrix. -/
 noncomputable def counitAlgHom : CoordinateRing n k →ₐ[k] k :=
@@ -171,13 +155,13 @@ theorem comulAlgHom_coassoc :
     Algebra.TensorProduct.assoc_tmul, TensorProduct.tmul_sum]
   exact Finset.sum_comm
 
-theorem counit_comp_comulAlgHom_left :
+theorem map_counitAlgHom_id_comp_comulAlgHom :
     (Algebra.TensorProduct.map (counitAlgHom n k) (.id k _)).comp (comulAlgHom n k) =
       (Algebra.TensorProduct.lid k (CoordinateRing n k)).symm := by
   refine algHom_ext fun i j ↦ ?_
   simp [Matrix.one_apply, TensorProduct.ite_tmul]
 
-theorem counit_comp_comulAlgHom_right :
+theorem map_id_counitAlgHom_comp_comulAlgHom :
     (Algebra.TensorProduct.map (.id k _) (counitAlgHom n k)).comp (comulAlgHom n k) =
       (Algebra.TensorProduct.rid k k (CoordinateRing n k)).symm := by
   refine algHom_ext fun i j ↦ ?_
@@ -187,7 +171,7 @@ theorem counit_comp_comulAlgHom_right :
 multiplication and counit given by evaluation at the identity. -/
 noncomputable instance : Bialgebra k (CoordinateRing n k) :=
   Bialgebra.ofAlgHom (comulAlgHom n k) (counitAlgHom n k) (comulAlgHom_coassoc n k)
-    (counit_comp_comulAlgHom_left n k) (counit_comp_comulAlgHom_right n k)
+    (map_counitAlgHom_id_comp_comulAlgHom n k) (map_id_counitAlgHom_comp_comulAlgHom n k)
 
 @[simp]
 theorem comul_coord (i j : n) :
@@ -199,40 +183,50 @@ theorem counit_coord (i j : n) :
     Coalgebra.counit (R := k) (coord n k i j) = (1 : Matrix n n k) i j :=
   counitAlgHom_coord n k i j
 
-theorem antipode_rTensor_comulAlgHom :
-    (Algebra.TensorProduct.lift (antipodeAlgHom n k) (.id k _) fun _ ↦ Commute.all _).comp
+/-- Two `k`-algebra homomorphisms `f` and `g` out of the coordinate ring of `GL_n`, combined along
+the comultiplication, send `x_ij` to the `(i, j)` entry of the product of the matrices
+`(f(x_ij))` and `(g(x_ij))`. -/
+theorem lift_comul_coord {R : Type*} [CommRing R] [Algebra k R]
+    (f g : CoordinateRing n k →ₐ[k] R) (i j : n) :
+    Algebra.TensorProduct.lift f g (fun _ _ ↦ Commute.all _ _) (Coalgebra.comul (coord n k i j)) =
+      ((genericUnit n k : Matrix n n (CoordinateRing n k)).map f *
+        (genericUnit n k : Matrix n n (CoordinateRing n k)).map g) i j := by
+  simp [Matrix.mul_apply]
+
+/-- The antipode sends the generic matrix to its inverse. -/
+@[simp]
+theorem map_antipodeAlgHom_genericUnit :
+    (genericUnit n k : Matrix n n (CoordinateRing n k)).map (antipodeAlgHom n k) =
+      ((genericUnit n k)⁻¹ : GL n (CoordinateRing n k)) := by
+  ext
+  simp
+
+theorem mul_antipodeAlgHom_rTensor_comulAlgHom :
+    (Algebra.TensorProduct.lift (antipodeAlgHom n k) (.id k _) fun _ _ ↦ Commute.all _ _).comp
       (Bialgebra.comulAlgHom k (CoordinateRing n k)) =
         (Algebra.ofId k _).comp (Bialgebra.counitAlgHom k (CoordinateRing n k)) := by
   refine algHom_ext fun i j ↦ ?_
-  change _ = algebraMap k _ (counitAlgHom n k (coord n k i j))
-  change Algebra.TensorProduct.lift _ _ (fun _ _ ↦ Commute.all _ _)
-    (comulAlgHom n k (coord n k i j)) = _
-  simp only [comulAlgHom_coord, map_sum, Algebra.TensorProduct.lift_tmul, antipodeAlgHom_coord,
-    AlgHom.coe_id, id_eq, counitAlgHom_coord]
-  simp_rw [← coe_genericUnit_apply, ← Matrix.mul_apply, Units.inv_mul]
+  rw [AlgHom.comp_apply, Bialgebra.comulAlgHom_apply, lift_comul_coord, AlgHom.comp_apply,
+    Bialgebra.counitAlgHom_apply, counit_coord]
   simp [Matrix.one_apply]
 
-theorem antipode_lTensor_comulAlgHom :
+theorem mul_antipodeAlgHom_lTensor_comulAlgHom :
     (Algebra.TensorProduct.lift (.id k _) (antipodeAlgHom n k) fun _ _ ↦ Commute.all _ _).comp
       (Bialgebra.comulAlgHom k (CoordinateRing n k)) =
         (Algebra.ofId k _).comp (Bialgebra.counitAlgHom k (CoordinateRing n k)) := by
   refine algHom_ext fun i j ↦ ?_
-  change _ = algebraMap k _ (counitAlgHom n k (coord n k i j))
-  change Algebra.TensorProduct.lift _ _ (fun _ _ ↦ Commute.all _ _)
-    (comulAlgHom n k (coord n k i j)) = _
-  simp only [comulAlgHom_coord, map_sum, Algebra.TensorProduct.lift_tmul, antipodeAlgHom_coord,
-    AlgHom.coe_id, id_eq, counitAlgHom_coord]
-  simp_rw [← coe_genericUnit_apply, ← Matrix.mul_apply, Units.mul_inv]
+  rw [AlgHom.comp_apply, Bialgebra.comulAlgHom_apply, lift_comul_coord, AlgHom.comp_apply,
+    Bialgebra.counitAlgHom_apply, counit_coord]
   simp [Matrix.one_apply]
 
 /-- The coordinate ring of `GL_n` is a commutative Hopf algebra over `k`.
 (blueprint: `sk-d-geometry`) -/
 noncomputable instance : HopfAlgebra k (CoordinateRing n k) :=
-  HopfAlgebra.ofAlgHom (antipodeAlgHom n k) (antipode_rTensor_comulAlgHom n k)
-    (antipode_lTensor_comulAlgHom n k)
+  HopfAlgebra.ofAlgHom (antipodeAlgHom n k) (mul_antipodeAlgHom_rTensor_comulAlgHom n k)
+    (mul_antipodeAlgHom_lTensor_comulAlgHom n k)
 
 /-- The coordinate ring of `GL_n` is a finitely generated `k`-algebra. -/
-instance : Algebra.FiniteType k (CoordinateRing n k) := inferInstance
+example : Algebra.FiniteType k (CoordinateRing n k) := inferInstance
 
 variable {n k}
 
@@ -240,20 +234,44 @@ variable {n k}
 theorem evalAlgHom_mul {R : Type*} [CommRing R] [Algebra k R] (g h : GL n R) :
     WithConv.toConv (evalAlgHom (k := k) (g * h)) =
       WithConv.toConv (evalAlgHom g) * WithConv.toConv (evalAlgHom h) := by
-  rw [AlgHom.convMul_def]
-  congr 1
+  ext1
   refine algHom_ext fun i j ↦ ?_
-  change _ = Algebra.TensorProduct.lmul' k
-    (Algebra.TensorProduct.map _ _ (comulAlgHom n k (coord n k i j)))
-  simp [Matrix.mul_apply]
+  simp [AlgHom.convMul_apply, Matrix.mul_apply]
 
 /-- Evaluation at the identity matrix is the convolution unit. -/
 theorem evalAlgHom_one {R : Type*} [CommRing R] [Algebra k R] :
     WithConv.toConv (evalAlgHom (k := k) (1 : GL n R)) = 1 := by
-  rw [AlgHom.convOne_def]
-  congr 1
+  ext1
   refine algHom_ext fun i j ↦ ?_
-  change _ = algebraMap k R (counitAlgHom n k (coord n k i j))
-  simp [Matrix.one_apply, apply_ite (algebraMap k R)]
+  simp [AlgHom.convOne_apply, Matrix.one_apply, apply_ite (algebraMap k R)]
+
+variable (n k) (R : Type*) [CommRing R] [Algebra k R]
+
+/-- `k`-algebra homomorphisms from the coordinate ring of `GL_n` to `R`, with the convolution
+product, are the invertible `n × n` matrices over `R`: a homomorphism `φ` corresponds to the image
+`(φ(x_ij))` of the generic matrix, and an invertible matrix `g` to evaluation at `g`. -/
+noncomputable def algHomMulEquiv : WithConv (CoordinateRing n k →ₐ[k] R) ≃* GL n R :=
+  MulEquiv.symm
+    { toFun g := WithConv.toConv (evalAlgHom g)
+      invFun φ := map φ.ofConv.toRingHom (genericUnit n k)
+      left_inv g := by
+        ext i j
+        simp
+      right_inv φ := by
+        ext1
+        exact algHom_ext fun i j ↦ by simp
+      map_mul' := evalAlgHom_mul }
+
+variable {n k R}
+
+@[simp]
+theorem algHomMulEquiv_apply (φ : WithConv (CoordinateRing n k →ₐ[k] R)) :
+    algHomMulEquiv n k R φ = map φ.ofConv.toRingHom (genericUnit n k) :=
+  rfl
+
+@[simp]
+theorem algHomMulEquiv_symm_apply (g : GL n R) :
+    (algHomMulEquiv n k R).symm g = WithConv.toConv (evalAlgHom g) :=
+  rfl
 
 end Matrix.GeneralLinearGroup
