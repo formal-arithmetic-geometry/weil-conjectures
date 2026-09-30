@@ -47,11 +47,13 @@ of a closed subgroup are described by ideals of the coordinate ring of `GL_n` in
 - `sk-d-geometry`: matrix algebraic groups as reduced closed subgroups of `GL(V)`, their identity
   component and centre.
 - `sk-i-restriction`: the Zariski closure of a subgroup of `GL n k` is an algebraic group.
+- `sk-p-geometry`: the identity component is a closed subgroup scheme.
 -/
 
 @[expose] public section
 
 open CategoryTheory AlgebraicGeometry WithConv
+open scoped MonObj
 
 namespace Matrix.GeneralLinearGroup
 
@@ -94,12 +96,11 @@ theorem evalAlgHom_eq_zero_of_mem_inv (I : Ideal (CoordinateRing n k)) [I.IsHopf
   rw [← evalAlgHom_comp_antipodeAlgHom, AlgHom.comp_apply]
   exact hg _ (Ideal.IsHopfIdeal.antipode_mem (R := k) ha)
 
-variable (R) in
 /-- The `R`-points of the closed subgroup scheme `V(I)` of `GL_n` cut out by a Hopf ideal `I`: the
 invertible matrices over `R` on which every equation in `I` vanishes.
 (blueprint: `sk-d-geometry`) -/
-noncomputable def zeroLocus (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
-    Subgroup (GL n R) where
+noncomputable def zeroLocus (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] (R : Type*)
+    [CommRing R] [Algebra k R] : Subgroup (GL n R) where
   carrier := {g | ∀ a ∈ I, evalAlgHom g a = 0}
   one_mem' _ ha := evalAlgHom_eq_zero_of_mem_one I ha
   mul_mem' hg hh _ ha := evalAlgHom_eq_zero_of_mem_mul I hg hh ha
@@ -107,11 +108,11 @@ noncomputable def zeroLocus (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
 
 @[simp]
 theorem mem_zeroLocus {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] {g : GL n R} :
-    g ∈ zeroLocus R I ↔ ∀ a ∈ I, evalAlgHom g a = 0 :=
+    g ∈ zeroLocus I R ↔ ∀ a ∈ I, evalAlgHom g a = 0 :=
   Iff.rfl
 
 theorem zeroLocus_anti {I J : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] [J.IsHopfIdeal k]
-    (h : I ≤ J) : zeroLocus R J ≤ zeroLocus R I :=
+    (h : I ≤ J) : zeroLocus J R ≤ zeroLocus I R :=
   fun _ hg a ha ↦ hg a (h ha)
 
 /-- The ideal of equations vanishing on a set `S` of invertible matrices over `k`. For a subgroup
@@ -128,7 +129,7 @@ theorem vanishingIdeal_anti {S T : Set (GL n k)} (h : S ⊆ T) :
   fun _ ha ↦ mem_vanishingIdeal.2 fun g hg ↦ mem_vanishingIdeal.1 ha g (h hg)
 
 theorem le_vanishingIdeal_zeroLocus (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
-    I ≤ vanishingIdeal (zeroLocus k I : Set (GL n k)) :=
+    I ≤ vanishingIdeal (zeroLocus I k : Set (GL n k)) :=
   fun _ ha ↦ mem_vanishingIdeal.2 fun _ hg ↦ hg _ ha
 
 /-- The equation `(g * h)_ij - (h * g)_ij = 0` in the entries of `g`, for a fixed matrix `h`. -/
@@ -165,7 +166,7 @@ instance instIsHopfIdealVanishingIdeal (Γ : Subgroup (GL n k)) :
       (mem_vanishingIdeal.1 ha _ (Γ.inv_mem hg))
 
 theorem subset_zeroLocus_vanishingIdeal (Γ : Subgroup (GL n k)) :
-    Γ ≤ zeroLocus k (vanishingIdeal (Γ : Set (GL n k))) :=
+    Γ ≤ zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k :=
   fun g hg _ ha ↦ mem_vanishingIdeal.1 ha g hg
 
 /-- The `k`-points of the Zariski closure of a subgroup `Γ` lie in `Γ` as soon as `Γ` is cut out by
@@ -173,32 +174,46 @@ some set `J` of equations. -/
 theorem zeroLocus_vanishingIdeal_le {Γ : Subgroup (GL n k)} (J : Set (CoordinateRing n k))
     (hΓ : ∀ g ∈ Γ, ∀ a ∈ J, evalAlgHom g a = 0)
     (hJ : ∀ g : GL n k, (∀ a ∈ J, evalAlgHom g a = 0) → g ∈ Γ) :
-    zeroLocus k (vanishingIdeal (Γ : Set (GL n k))) ≤ Γ :=
+    zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k ≤ Γ :=
   fun g hg ↦ hJ g fun a ha ↦ hg a (mem_vanishingIdeal.2 fun h hh ↦ hΓ h hh a ha)
 
 /-- Over an algebraically closed field, every maximal ideal of the coordinate ring of `GL_n` is the
 ideal of a point. -/
 theorem exists_ker_evalAlgHom_eq [IsAlgClosed k] (m : Ideal (CoordinateRing n k)) [m.IsMaximal] :
     ∃ g : GL n k, RingHom.ker (evalAlgHom g) = m := by
-  sorry
+  let : Field (CoordinateRing n k ⧸ m) := Ideal.Quotient.field m
+  have : Module.Finite k (CoordinateRing n k ⧸ m) := finite_of_finite_type_of_isJacobsonRing k _
+  let φ : CoordinateRing n k →ₐ[k] k :=
+    (IsAlgClosed.lift : (CoordinateRing n k ⧸ m) →ₐ[k] k).comp (Ideal.Quotient.mkₐ k m)
+  refine ⟨algHomMulEquiv n k k (toConv φ), ?_⟩
+  have hφ : evalAlgHom (algHomMulEquiv n k k (toConv φ)) = φ :=
+    congrArg ofConv ((algHomMulEquiv n k k).symm_apply_apply (toConv φ))
+  rw [hφ]
+  ext a
+  simp [φ, RingHom.mem_ker, Ideal.Quotient.eq_zero_iff_mem]
 
 /-- The Nullstellensatz for `GL_n`: over an algebraically closed field, an element vanishing at
 every point where the equations `J` vanish lies in the radical of `J`. -/
 theorem vanishingIdeal_setOf_le_radical [IsAlgClosed k] (J : Ideal (CoordinateRing n k)) :
     vanishingIdeal {g : GL n k | ∀ a ∈ J, evalAlgHom g a = 0} ≤ J.radical := by
-  sorry
+  have : IsJacobsonRing (CoordinateRing n k) := isJacobsonRing_of_finiteType (A := k)
+  intro a ha
+  rw [J.radical_eq_jacobson, Ideal.jacobson, Submodule.mem_sInf]
+  rintro m ⟨hJm, hm⟩
+  obtain ⟨g, rfl⟩ := exists_ker_evalAlgHom_eq m
+  exact mem_vanishingIdeal.1 ha g fun b hb ↦ hJm hb
 
 /-- The Nullstellensatz for closed subgroup schemes of `GL_n`: the ideal of the `k`-points of
 `V(I)` is the radical of `I`. (blueprint: `sk-d-geometry`) -/
 theorem vanishingIdeal_zeroLocus_eq_radical [IsAlgClosed k] (I : Ideal (CoordinateRing n k))
-    [I.IsHopfIdeal k] : vanishingIdeal (zeroLocus k I : Set (GL n k)) = I.radical :=
+    [I.IsHopfIdeal k] : vanishingIdeal (zeroLocus I k : Set (GL n k)) = I.radical :=
   le_antisymm (vanishingIdeal_setOf_le_radical I)
     ((isRadical_vanishingIdeal _).radical_le_iff.2 (le_vanishingIdeal_zeroLocus I))
 
 /-- Over an algebraically closed field, a radical Hopf ideal is the ideal of its `k`-points.
 (blueprint: `sk-d-geometry`) -/
 theorem vanishingIdeal_zeroLocus_le_of_isRadical [IsAlgClosed k] (I : Ideal (CoordinateRing n k))
-    [I.IsHopfIdeal k] (hI : I.IsRadical) : vanishingIdeal (zeroLocus k I : Set (GL n k)) ≤ I :=
+    [I.IsHopfIdeal k] (hI : I.IsRadical) : vanishingIdeal (zeroLocus I k : Set (GL n k)) ≤ I :=
   ((vanishingIdeal_zeroLocus_eq_radical I).trans hI.radical).le
 
 /-- The point of `Spec k[x_ij, det⁻¹]` given by an invertible matrix `g`: the kernel of evaluation
@@ -209,7 +224,7 @@ noncomputable def toPrimeSpectrum (g : GL n k) : PrimeSpectrum (CoordinateRing n
 theorem toPrimeSpectrum_mem_zeroLocus_iff {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k]
     {g : GL n k} :
     toPrimeSpectrum g ∈ PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)) ↔
-      g ∈ zeroLocus k I :=
+      g ∈ zeroLocus I k :=
   Iff.rfl
 
 theorem toPrimeSpectrum_injective :
@@ -245,10 +260,10 @@ instance [IsAlgClosed k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
   sorry
 
 theorem one_mem_zeroLocus_identityComponent [IsAlgClosed k] (I : Ideal (CoordinateRing n k))
-    [I.IsHopfIdeal k] : (1 : GL n k) ∈ zeroLocus k (identityComponent I) := by
+    [I.IsHopfIdeal k] : (1 : GL n k) ∈ zeroLocus (identityComponent I) k := by
   intro a ha
   have h1 : toPrimeSpectrum (1 : GL n k) ∈ PrimeSpectrum.zeroLocus (I : Set _) :=
-    toPrimeSpectrum_mem_zeroLocus_iff.2 (zeroLocus k I).one_mem
+    toPrimeSpectrum_mem_zeroLocus_iff.2 (zeroLocus I k).one_mem
   exact (PrimeSpectrum.mem_vanishingIdeal _ _).1 ha _ (mem_connectedComponentIn h1)
 
 /-- The ideal of the reduced centre `Z(G)` of the closed subgroup scheme `G = V(I)` of `GL_n`: the
@@ -256,7 +271,7 @@ Zariski closure of the matrices of `G(k)` commuting with all of `G(k)`.
 (blueprint: `sk-d-geometry`) -/
 noncomputable def center (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
     Ideal (CoordinateRing n k) :=
-  vanishingIdeal ((zeroLocus k I ⊓ Subgroup.centralizer (zeroLocus k I : Set (GL n k)) :
+  vanishingIdeal ((zeroLocus I k ⊓ Subgroup.centralizer (zeroLocus I k : Set (GL n k)) :
     Subgroup (GL n k)) : Set (GL n k))
 
 instance (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] : (center I).IsHopfIdeal k :=
@@ -266,8 +281,31 @@ instance (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] : (center I).IsHopfI
 `G(k)`. (blueprint: `sk-d-geometry`) -/
 theorem mem_zeroLocus_center_iff (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
     {g : GL n k} :
-    g ∈ zeroLocus k (center I) ↔ g ∈ zeroLocus k I ∧ ∀ h ∈ zeroLocus k I, g * h = h * g := by
-  sorry
+    g ∈ zeroLocus (center I) k ↔ g ∈ zeroLocus I k ∧ ∀ h ∈ zeroLocus I k, g * h = h * g := by
+  let J : Set (CoordinateRing n k) :=
+    I ∪ {c | ∃ h ∈ zeroLocus I k, ∃ i j, c = commutatorEquation h i j}
+  have hΓ : ∀ g ∈ (zeroLocus I k ⊓ Subgroup.centralizer (zeroLocus I k : Set (GL n k)) :
+      Subgroup (GL n k)), ∀ a ∈ J, evalAlgHom g a = 0 := by
+    rintro g ⟨hg, hc⟩ a (ha | ⟨h, hh, i, j, rfl⟩)
+    · exact hg a ha
+    · rw [evalAlgHom_commutatorEquation, ← Units.val_mul, ← Units.val_mul,
+        Subgroup.mem_centralizer_iff.1 hc h hh, sub_self]
+  have hJ : ∀ g : GL n k, (∀ a ∈ J, evalAlgHom g a = 0) →
+      g ∈ (zeroLocus I k ⊓ Subgroup.centralizer (zeroLocus I k : Set (GL n k)) :
+        Subgroup (GL n k)) := by
+    refine fun g hg ↦ ⟨fun a ha ↦ hg a (Or.inl ha),
+      Subgroup.mem_centralizer_iff.2 fun h hh ↦ ?_⟩
+    ext i j
+    have := hg _ (Or.inr ⟨h, hh, i, j, rfl⟩)
+    rw [evalAlgHom_commutatorEquation, sub_eq_zero] at this
+    simpa using this.symm
+  constructor
+  · intro hg
+    obtain ⟨hg, hc⟩ := zeroLocus_vanishingIdeal_le J hΓ hJ hg
+    exact ⟨hg, fun h hh ↦ (Subgroup.mem_centralizer_iff.1 hc h hh).symm⟩
+  · rintro ⟨hg, hc⟩
+    exact subset_zeroLocus_vanishingIdeal _
+      ⟨hg, Subgroup.mem_centralizer_iff.2 fun h hh ↦ (hc h hh).symm⟩
 
 end Field
 
@@ -299,7 +337,9 @@ instance : LocallyOfFiniteType (subgroupScheme I).hom :=
 noncomputable def subgroupSchemeι : subgroupScheme I ⟶ scheme n k :=
   (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mkₐ k I).toRingHom)).asOver (Spec (.of k))
 
-instance : IsMonHom (subgroupSchemeι I) := sorry
+instance : IsMonHom (subgroupSchemeι I) :=
+  inferInstanceAs (IsMonHom ((bialgSpec (.of k)).map
+    (CommBialgCat.ofHom (Bialgebra.Quotient.mkBialgHom (R := k) I)).op).hom)
 
 instance : IsClosedImmersion (subgroupSchemeι I).left :=
   IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
@@ -311,13 +351,42 @@ theorem subgroupSchemeι_comp_injective {X : Over (Spec (.of k))} :
     Function.Injective fun φ : X ⟶ subgroupScheme I ↦ φ ≫ subgroupSchemeι I :=
   fun _ _ h ↦ (cancel_mono _).1 h
 
+theorem mapMulEquiv_comp_subgroupSchemeι {R : Type u} [CommRing R] [Algebra k R]
+    (ψ : WithConv (CoordinateRing n k ⧸ I →ₐ[k] R)) :
+    Spec.mapMulEquiv ψ ≫ subgroupSchemeι I =
+      Spec.mapMulEquiv (toConv (ψ.ofConv.comp (Ideal.Quotient.mkₐ k I))) := by
+  apply Over.OverMorphism.ext
+  simp only [Over.comp_left, Spec.mapMulEquiv, subgroupSchemeι, MulEquiv.coe_mk, Equiv.coe_fn_mk]
+  simp [← Spec.map_comp]
+  rfl
+
 /-- The `R`-points of the closed subgroup scheme `V(I)` are the invertible matrices over `R`
 satisfying the equations in `I`: the identification of `G(R)` with a classical matrix group is a
 theorem, not a definition. (blueprint: `sk-d-geometry`) -/
 theorem range_homMulEquiv_comp (R : Type u) [CommRing R] [Algebra k R] :
     Set.range (fun φ : (Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I ↦
-      homMulEquiv n k R (φ ≫ subgroupSchemeι I)) = zeroLocus R I := by
-  sorry
+      homMulEquiv n k R (φ ≫ subgroupSchemeι I)) = zeroLocus I R := by
+  have key (χ : CoordinateRing n k ⧸ I →ₐ[k] R) :
+      homMulEquiv n k R (Spec.mapMulEquiv (toConv χ) ≫ subgroupSchemeι I) =
+        algHomMulEquiv n k R (toConv (χ.comp (Ideal.Quotient.mkₐ k I))) := by
+    rw [mapMulEquiv_comp_subgroupSchemeι, homMulEquiv, MulEquiv.trans_apply,
+      MulEquiv.symm_apply_apply, ofConv_toConv]
+  have heval (χ : CoordinateRing n k →ₐ[k] R) :
+      evalAlgHom (algHomMulEquiv n k R (toConv χ)) = χ :=
+    congrArg ofConv ((algHomMulEquiv n k R).symm_apply_apply (toConv χ))
+  ext g
+  constructor
+  · rintro ⟨φ, rfl⟩ a ha
+    obtain ⟨χ, rfl⟩ := Spec.mapMulEquiv.surjective φ
+    dsimp only
+    rw [← toConv_ofConv χ, key, heval, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk,
+      Ideal.Quotient.eq_zero_iff_mem.2 ha, map_zero]
+  · intro hg
+    refine ⟨Spec.mapMulEquiv (toConv (Ideal.Quotient.liftₐ I (evalAlgHom g) fun a ha ↦ hg a ha)),
+      ?_⟩
+    dsimp only
+    rw [key]
+    exact (algHomMulEquiv n k R).apply_symm_apply g
 
 end Scheme
 
