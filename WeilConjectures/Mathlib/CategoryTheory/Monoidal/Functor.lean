@@ -6,9 +6,10 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Functor
+public import Mathlib.CategoryTheory.Whiskering
 
 /-!
-# Transport of a lax monoidal structure along a natural isomorphism
+# Complements on lax and oplax monoidal functors
 
 `CategoryTheory.Functor.Monoidal.transport` transports a strong monoidal structure along a
 natural isomorphism of functors. Here we do the same for lax monoidal structures.
@@ -17,6 +18,8 @@ natural isomorphism of functors. Here we do the same for lax monoidal structures
 
 - `CategoryTheory.Functor.LaxMonoidal.transport`: the lax monoidal structure on a functor
   that is isomorphic to a lax monoidal functor.
+- `CategoryTheory.Functor.OplaxMonoidal.δNatTrans`: the comonoidal structure of an oplax
+  monoidal functor, as a natural transformation of bifunctors.
 -/
 
 @[expose] public section
@@ -77,3 +80,21 @@ lemma transport_μ {F G : C ⥤ D} [F.LaxMonoidal] (i : F ≅ G) (X Y : C) :
   rfl
 
 end CategoryTheory.Functor.LaxMonoidal
+
+namespace CategoryTheory.Functor.OplaxMonoidal
+
+open MonoidalCategory
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+  (F : C ⥤ D) [F.OplaxMonoidal]
+
+/-- The comonoidal structure `δ F X Y : F.obj (X ⊗ Y) ⟶ F.obj X ⊗ F.obj Y` of an oplax
+monoidal functor `F : C ⥤ D`, as a natural transformation between bifunctors `C ⥤ C ⥤ D`. -/
+@[simps]
+def δNatTrans :
+    (Functor.postcompose₂.obj F).obj (curriedTensor C) ⟶
+      (((whiskeringLeft₂ D).obj F).obj F).obj (curriedTensor D) where
+  app X₁ := { app X₂ := δ F X₁ X₂ }
+
+end CategoryTheory.Functor.OplaxMonoidal
