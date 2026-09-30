@@ -62,8 +62,8 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
 - The pullback `Etale.upperStar` is defined by left Kan extension along base change
   followed by sheafification. The Kan extensions in question exist for an arbitrary `f`
   without any smallness of the full small étale site, by the instance
-  `CategoryTheory.MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback` of
-  `WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty`: the indexing comma
+  `CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
+  `WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`: the indexing comma
   categories have objects in `Type (u + 1)` and `Hom`-types in `Type u`, and `A` has all
   colimits of size `u + 1`.
 - Sheafification is likewise not assumed here. Restricting a sheaf to a member of an étale
@@ -239,8 +239,8 @@ condition does not depend on this choice.
 
 The left Kan extensions along base change needed by the pullback `Etale.upperStar` are
 provided by the instance
-`CategoryTheory.MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback` of
-`WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty`. Stating
+`CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
+`WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`. Stating
 `IsFiniteLocallyConstantSheaf` needs sheafification for the localizations of the small
 étale sites of the strata; since the stratification is existentially quantified, this has
 to be available for all schemes, which is what the hypothesis

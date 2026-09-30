@@ -48,8 +48,8 @@ Its left adjoint `g^*` is the left Kan extension on presheaves followed by sheaf
   localization functor `MorphismProperty.Over.map ⊤ ‹Etale g›` — and all pointwise left Kan
   extensions along it exist. For a general `g` the pointwise left Kan extensions instead
   exist by essential `u + 1`-smallness of the indexing comma categories,
-  `CategoryTheory.MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback` of
-  `WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty`, with no smallness of
+  `CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
+  `WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`, with no smallness of
   the small étale site itself.
 - `AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar` and
   `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`: the pushforward `g_*` preserves
@@ -176,6 +176,14 @@ lemma Etale.lowerStar_obj_val_obj (G : Sheaf Z.smallEtaleTopology A) (b : Y.Etal
   rfl
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The restriction maps of `g_* G` are those of `G` along the base changes of the morphisms. -/
+lemma Etale.lowerStar_obj_val_map (G : Sheaf Z.smallEtaleTopology A) {b b' : Y.Etale}
+    (φ : b ⟶ b') :
+    ((g)_*[A].obj G).obj.map φ.op =
+      G.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ g).map φ).op :=
+  rfl
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- `g_*` acts on morphisms by whiskering along `(MorphismProperty.Over.pullback @Etale ⊤ g).op`. -/
 lemma Etale.lowerStar_map_hom_app {G G' : Sheaf Z.smallEtaleTopology A} (φ : G ⟶ G')
     (b : Y.Etale) :
@@ -210,8 +218,8 @@ namespace Etale
 /-- The pullback `g^*` along an arbitrary morphism `g : Z ⟶ Y` on sheaves for the small
 étale sites: left Kan extension on presheaves followed by sheafification, left adjoint to
 `Etale.lowerStar`. The Kan extensions are provided by
-`CategoryTheory.MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback` of
-`WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty`, and the sheafification by
+`CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
+`WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`, and the sheafification by
 `CategoryTheory.GrothendieckTopology.hasSheafify_smallEtaleTopology` of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, which is still sorried
 through `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall`. For `g` étale

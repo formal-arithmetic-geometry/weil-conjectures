@@ -52,6 +52,9 @@ This file provides the site-theoretic inputs for the pro-étale six functors of 
 - `AlgebraicGeometry.Scheme.zariskiPrecoverage_le_proetalePrecoverage`: a Zariski open cover
   is a pro-étale covering family. This is what makes the two-open cover of
   `WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper` available.
+- `AlgebraicGeometry.Scheme.toProEt`: the inclusion `ν : X.Etale ⥤ X.ProEt` of the small
+  étale site into the small pro-étale site, which is fully faithful, representably flat and
+  continuous (`AlgebraicGeometry.Scheme.isContinuous_toProEt`).
 
 -/
 
@@ -101,6 +104,14 @@ stable under base change and composition, so no further saturation is needed. -/
 lemma mem_topology_iff {V : X.ProEt} {S : Sieve V} :
     S ∈ topology X V ↔ ∃ R ∈ precoverage X V, R ≤ S.arrows :=
   Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition
+
+variable (X) in
+/-- The pro-étale topology on the small pro-étale site of `X` is the topology restricted from
+the pro-étale topology on the category of schemes over `X` along the forgetful functor. -/
+lemma topology_eq_restrictedTopology :
+    topology X = (ProEt.forget X).restrictedTopology (proetaleTopology.over X) :=
+  MorphismProperty.toGrothendieck_comap_forget_eq_restrictedTopology _
+    proetalePrecoverage_le_precoverage_weaklyEtale
 
 /-! ### Base change -/
 
@@ -288,5 +299,48 @@ noncomputable def isTerminalSectionsOfIsEmpty (G : Sheaf (ProEt.topology X) A) (
 end EmptyObject
 
 end ProEt
+
+/-! ### The inclusion of the small étale site into the small pro-étale site -/
+
+section ToProEt
+
+variable (X : Scheme.{u})
+
+/-- The inclusion `ν : X.Etale ⥤ X.ProEt` of the small étale site into the small pro-étale
+site. -/
+@[simps! obj_toComma map_hom]
+def toProEt : X.Etale ⥤ X.ProEt :=
+  MorphismProperty.Over.changeProp _ etale_le_weaklyEtale le_rfl
+
+/-- The inclusion of the small étale site into the small pro-étale site is full. -/
+instance full_toProEt : (toProEt X).Full :=
+  (MorphismProperty.Comma.fullyFaithfulChangeProp _ _ etale_le_weaklyEtale).full
+
+/-- The inclusion of the small étale site into the small pro-étale site is faithful. -/
+instance faithful_toProEt : (toProEt X).Faithful :=
+  (MorphismProperty.Comma.fullyFaithfulChangeProp _ _ etale_le_weaklyEtale).faithful
+
+/-- The inclusion of the small étale site into the small pro-étale site preserves finite
+limits. -/
+instance preservesFiniteLimits_toProEt : PreservesFiniteLimits (toProEt X) :=
+  MorphismProperty.Over.preservesFiniteLimits_changeProp X etale_le_weaklyEtale
+
+/-- The inclusion of the small étale site into the small pro-étale site is representably
+flat. -/
+instance representablyFlat_toProEt : RepresentablyFlat (toProEt X) :=
+  MorphismProperty.Over.representablyFlat_changeProp X etale_le_weaklyEtale
+
+/-- The inclusion of the small étale site into the small pro-étale site is continuous for
+the étale and pro-étale topologies. -/
+instance isContinuous_toProEt :
+    (toProEt X).IsContinuous (smallEtaleTopology X) (ProEt.topology X) := by
+  -- it preserves compatible families since it is representably flat, and covers since every
+  -- étale covering is a pro-étale covering
+  refine Functor.isContinuous_of_coverPreserving (compatiblePreservingOfFlat _ _) ?_
+  rw [ProEt.topology_eq_restrictedTopology]
+  exact MorphismProperty.Over.coverPreserving_changeProp X etale_le_weaklyEtale
+    etaleTopology_le_proetaleTopology
+
+end ToProEt
 
 end AlgebraicGeometry.Scheme

@@ -26,13 +26,18 @@ The sheaf condition is reduced to étale descent for the structure sheaf: the pr
 the composite
 
 ```
-  X.Etaleᵒᵖ ──etaleStructurePresheaf──▶ CommRingCat ──units──▶ AddCommGrpCat ──uliftFunctor──▶
-    AddCommGrpCat
+  X.Etaleᵒᵖ ──etaleStructurePresheaf──▶ CommRingCat ──unitsAddCommGrpULift──▶ AddCommGrpCat
 ```
 
-and the last two functors preserve limits, so it suffices that `U ↦ Γ(U, 𝒪_U)` is an étale
-sheaf (`AlgebraicGeometry.Scheme.isSheaf_etaleStructurePresheaf`, the one `sorry` of this
-part of the file). That reusable form is what `𝔾ₐ`, `μₙ` and sheaves of `𝒪`-modules need too.
+of the structure presheaf with the functor of units, written additively and lifted a universe.
+The functor of units preserves limits, so it suffices that `U ↦ Γ(U, 𝒪_U)` is an étale sheaf
+(`AlgebraicGeometry.Scheme.isSheaf_etaleStructurePresheaf`, whose proof is `sorry`). That
+reusable form is what `𝔾ₐ`, `μₙ` and sheaves of `𝒪`-modules need too.
+
+For a morphism `g : X ⟶ Y` there is a comparison map `g^* 𝔾ₘ ⟶ 𝔾ₘ`. It is an isomorphism when
+`g` is étale, but not in general: for `k` separably closed and `g : 𝔾_{m,k} ⟶ Spec k`, the
+sheaf `g^* 𝔾ₘ` is constant with global sections `kˣ`, whereas `Γ(𝔾_{m,k}, 𝔾ₘ) = k[t, t⁻¹]ˣ`.
+Pullback maps on the cohomology of `𝔾ₘ` along an arbitrary `g` go through the comparison map.
 
 ## Main definitions
 
@@ -40,7 +45,9 @@ part of the file). That reusable form is what `𝔾ₐ`, `μₙ` and sheaves of 
 - `AlgebraicGeometry.Scheme.gmSheaf`: the sheaf `𝔾ₘ` of units on the small étale site.
 - `AlgebraicGeometry.Scheme.CohomologicalPicardGroup`: `H¹(X_ét, 𝔾ₘ)`.
 - `AlgebraicGeometry.Scheme.CohomologicalBrauerGroup`: `H²(X_ét, 𝔾ₘ)`.
-- `AlgebraicGeometry.Scheme.upperStarGmSheafIso`: `g^* 𝔾ₘ ≅ 𝔾ₘ`.
+- `AlgebraicGeometry.Scheme.gmSheafToLowerStarGmSheaf`: the map `𝔾ₘ ⟶ g_* 𝔾ₘ` on units.
+- `AlgebraicGeometry.Scheme.upperStarGmSheafToGmSheaf`: its adjoint `g^* 𝔾ₘ ⟶ 𝔾ₘ`.
+- `AlgebraicGeometry.Scheme.upperStarGmSheafIso`: `g^* 𝔾ₘ ≅ 𝔾ₘ` for étale `g`.
 
 ## Main statements
 
@@ -48,6 +55,8 @@ part of the file). That reusable form is what `𝔾ₐ`, `μₙ` and sheaves of 
   for the small étale topology. Its proof, étale descent, is `sorry`.
 - `AlgebraicGeometry.Scheme.subsingleton_cohomologicalPicardGroup_of_field`: Hilbert 90 for a
   field, `H¹(Spec K_ét, 𝔾ₘ) = 0`.
+- `AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf`: the comparison map
+  `g^* 𝔾ₘ ⟶ 𝔾ₘ` is an isomorphism for étale `g`. The proof is `sorry`.
 
 ## Blueprint references
 
@@ -89,13 +98,11 @@ theorem isSheaf_etaleStructurePresheaf :
 group of units of `Γ(U, 𝒪_U)`, written additively and lifted to the next universe,
 
 ```
-  X.Etaleᵒᵖ ──etaleStructurePresheaf──▶ CommRingCat ──unitsAddCommGrp──▶ AddCommGrpCat
-    ──uliftFunctor──▶ AddCommGrpCat
+  X.Etaleᵒᵖ ──etaleStructurePresheaf──▶ CommRingCat ──unitsAddCommGrpULift──▶ AddCommGrpCat
 ```
 -/
 noncomputable def gmPresheaf : X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
-  X.etaleStructurePresheaf ⋙
-    (CommRingCat.unitsAddCommGrp ⋙ AddCommGrpCat.uliftFunctor.{u + 1, u})
+  X.etaleStructurePresheaf ⋙ CommRingCat.unitsAddCommGrpULift.{u + 1, u}
 
 /-- The presheaf `𝔾ₘ` is a sheaf for the small étale topology: the group of units and the
 universe lift are right adjoints, hence preserve limits, so the sheaf condition follows from
@@ -148,13 +155,61 @@ instance subsingleton_cohomologicalPicardGroup_of_field (K : Type u) [Field K] :
 
 variable {X} {Y : Scheme.{u}}
 
-/-- The pullback of `𝔾ₘ` along an arbitrary morphism of schemes is `𝔾ₘ`: the sheaf `𝔾ₘ` is
-represented by the group scheme `𝔾_{m,X}`, whose formation commutes with base change. This is
-the analogue for `𝔾ₘ` of `AlgebraicGeometry.Scheme.upperStarConstantSheafIso`, and is what
-identifies the target of a pullback map on the cohomology of `𝔾ₘ`. The blueprint block uses
-it silently and has no node for it. The proof is `sorry`. -/
-noncomputable def upperStarGmSheafIso (g : X ⟶ Y) :
-    (Etale.upperStar AddCommGrpCat.{u + 1} g).obj Y.gmSheaf ≅ X.gmSheaf :=
+/-- The map of structure presheaves `Γ(V, 𝒪_V) ⟶ Γ(V ×_Y X, 𝒪)` on the small étale site of
+`Y`, given on an étale `Y`-scheme `V` by the pullback of functions along the first projection
+`V ×_Y X ⟶ V` of the base change of `V` along `g`. For `f : V ⟶ W` in `Y.Etale` the
+naturality square
+
+```
+  Γ(W, 𝒪) ──(pullback.fst W g)^*──▶ Γ(W ×_Y X, 𝒪)
+     │                                   │
+    f^*                         (pullback.map f)^*
+     ▼                                   ▼
+  Γ(V, 𝒪) ──(pullback.fst V g)^*──▶ Γ(V ×_Y X, 𝒪)
+```
+
+commutes because `pullback.map f ≫ pullback.fst W g = pullback.fst V g ≫ f`. -/
+noncomputable def etaleStructurePresheafToPullback (g : X ⟶ Y) :
+    Y.etaleStructurePresheaf ⟶
+      (MorphismProperty.Over.pullback @Etale ⊤ g).op ⋙ X.etaleStructurePresheaf where
+  app V := Scheme.Γ.map (Limits.pullback.fst V.unop.hom g).op
+  naturality V W f := by
+    change Scheme.Γ.map f.unop.left.op ≫ _ = _ ≫ Scheme.Γ.map _
+    simp only [← Functor.map_comp, ← op_comp]
+    congr 2
+    exact (Limits.pullback.lift_fst _ _ _).symm
+
+/-- The map `𝔾ₘ ⟶ g_* 𝔾ₘ` of sheaves on the small étale site of `Y`: on an étale `Y`-scheme
+`V` it is the map on units `Γ(V, 𝒪_V)ˣ ⟶ Γ(V ×_Y X, 𝒪)ˣ` induced by the first projection
+`V ×_Y X ⟶ V`. -/
+noncomputable def gmSheafToLowerStarGmSheaf (g : X ⟶ Y) :
+    Y.gmSheaf ⟶ (Etale.lowerStar AddCommGrpCat.{u + 1} g).obj X.gmSheaf :=
+  ⟨Functor.whiskerRight (etaleStructurePresheafToPullback g)
+    CommRingCat.unitsAddCommGrpULift.{u + 1, u}⟩
+
+/-- The comparison map `g^* 𝔾ₘ ⟶ 𝔾ₘ` on the small étale site of `X`: the transpose under the
+adjunction `g^* ⊣ g_*` of `AlgebraicGeometry.Scheme.gmSheafToLowerStarGmSheaf`. It is defined
+for every `g`, and is what induces the pullback map
+`H^i(Y, 𝔾ₘ) ⟶ H^i(X, g^* 𝔾ₘ) ⟶ H^i(X, 𝔾ₘ)` on the cohomology of `𝔾ₘ`. -/
+noncomputable def upperStarGmSheafToGmSheaf (g : X ⟶ Y) :
+    (Etale.upperStar AddCommGrpCat.{u + 1} g).obj Y.gmSheaf ⟶ X.gmSheaf :=
+  ((Etale.upperStarLowerStarAdjunction _ g).homEquiv _ _).symm (gmSheafToLowerStarGmSheaf g)
+
+/-- For an étale morphism `g`, the comparison map `g^* 𝔾ₘ ⟶ 𝔾ₘ` is an isomorphism: then `g^*`
+is restriction along the functor `X.Etale ⥤ Y.Etale` composing with `g`, and an étale
+`X`-scheme `U` has the same units `Γ(U, 𝒪_U)ˣ` as an `X`-scheme and as a `Y`-scheme. For a
+general `g` the map is not an isomorphism, see the module docstring. The proof is `sorry`. -/
+theorem isIso_upperStarGmSheafToGmSheaf (g : X ⟶ Y) [Etale g] :
+    IsIso (upperStarGmSheafToGmSheaf g) :=
   sorry
+
+/-- The pullback of `𝔾ₘ` along an étale morphism of schemes is `𝔾ₘ`, via the comparison map
+`AlgebraicGeometry.Scheme.upperStarGmSheafToGmSheaf`. This is the analogue for `𝔾ₘ` of
+`AlgebraicGeometry.Scheme.upperStarConstantSheafIso`, which holds for every morphism; for `𝔾ₘ`
+the étale hypothesis is needed. -/
+noncomputable def upperStarGmSheafIso (g : X ⟶ Y) [Etale g] :
+    (Etale.upperStar AddCommGrpCat.{u + 1} g).obj Y.gmSheaf ≅ X.gmSheaf :=
+  haveI := isIso_upperStarGmSheafToGmSheaf g
+  asIso (upperStarGmSheafToGmSheaf g)
 
 end AlgebraicGeometry.Scheme

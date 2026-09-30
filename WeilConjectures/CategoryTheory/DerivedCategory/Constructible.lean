@@ -32,8 +32,8 @@ the universe `u` of the base schemes. Nothing beyond that is assumed:
 
 - the left Kan extensions along base change, needed by the pullback `Etale.upperStar`
   entering `IsConstructibleSheaf`, come from the instance
-  `CategoryTheory.MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback` of
-  `WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty`;
+  `CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
+  `WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`;
 - the chosen localized category `D(X_ét)` comes from the instance
   `HasDerivedCategory.ofIsGrothendieckAbelian` of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory`, which installs

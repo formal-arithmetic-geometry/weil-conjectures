@@ -9,7 +9,9 @@ public import Mathlib.CategoryTheory.MorphismProperty.CommaSites
 public import Mathlib.CategoryTheory.Sites.CoverPreserving
 
 /-!
-# The localization functor preserves compatible families
+# Continuity properties of functors between slices of a morphism property
+
+## The localization functor preserves compatible families
 
 The localization functor `MorphismProperty.Over.map ⊤ h` along `h : P f`, that is,
 composition with `f : V ⟶ U`, preserves compatible families of elements for *any*
@@ -21,6 +23,13 @@ The proof is the cancellation property `P.HasOfPostcompProperty P` in action: a 
 `f₁ : T' ⟶ (Over.map ⊤ h).obj Y₁` between `P`-schemes over `U` has `P f₁.left`, so the two
 morphisms of a compatibility square over `U` are the images of morphisms of `P`-objects
 over `V`, where the given family is compatible by assumption.
+
+## Change of property preserves covers
+
+For `P ≤ P'` and Grothendieck topologies `J ≤ J'` on `T`, the functor
+`MorphismProperty.Over.changeProp X hPP' le_rfl : P.Over ⊤ X ⥤ P'.Over ⊤ X` preserves covers
+for the topologies restricted from `J.over X` and `J'.over X` along the forgetful functors
+(`CategoryTheory.MorphismProperty.Over.coverPreserving_changeProp`).
 -/
 
 @[expose] public section
@@ -81,5 +90,28 @@ lemma compatiblePreserving_map : CompatiblePreserving.{w} K (MorphismProperty.Ov
     have key := hx g₁' g₂' hg₁ hg₂ hcomm
     rw [hf₁, hf₂, op_comp, op_comp, Functor.map_comp_apply, Functor.map_comp_apply]
     exact congrArg (ℱ.obj.map e.op) key
+
+section ChangeProp
+
+variable {P' : MorphismProperty T} {J J' : GrothendieckTopology T} (X : T)
+  [(Over.forget P ⊤ X).LocallyCoverDense (J.over X)]
+
+omit [P.IsMultiplicative] [P.HasOfPostcompProperty P] in
+/-- For `P ≤ P'` and Grothendieck topologies `J ≤ J'`, the functor
+`P.Over ⊤ X ⥤ P'.Over ⊤ X` preserves covers for the topologies restricted from `J.over X` and
+`J'.over X` along the forgetful functors. -/
+lemma coverPreserving_changeProp (hPP' : P ≤ P') (hJ : J ≤ J') :
+    CoverPreserving ((Over.forget P ⊤ X).restrictedTopology (J.over X))
+      ((Over.forget P' ⊤ X).restrictedTopology (J'.over X))
+      (changeProp X hPP' (le_refl (⊤ : MorphismProperty T))) where
+  cover_preserve {U R} hR := by
+    apply Functor.mem_restrictedTopology_of_functorPushforward_mem
+    -- `changeProp X hPP' le_rfl ⋙ Over.forget P' ⊤ X` is `Over.forget P ⊤ X`
+    rw [← Sieve.functorPushforward_comp]
+    have hR' := Functor.mem_restrictedTopology_iff.mp hR
+    rw [GrothendieckTopology.mem_over_iff] at hR' ⊢
+    exact hJ _ hR'
+
+end ChangeProp
 
 end CategoryTheory.MorphismProperty.Over

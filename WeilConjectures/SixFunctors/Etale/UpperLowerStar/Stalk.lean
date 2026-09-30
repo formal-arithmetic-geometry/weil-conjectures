@@ -63,8 +63,8 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsSepClosed 
   (s : Spec (.of Ω) ⟶ X)
 
 /-- All left Kan extensions of `A`-valued presheaves along the opposite of base change
-`f.Etale` exist. This is the `P = @Etale` case of
-`CategoryTheory.MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback`, restated
+`f.Etale` exist. This is an instance of
+`CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize`, restated
 for `AlgebraicGeometry.Scheme.Hom.Etale`; it is what makes the sheaf pullback along
 `f.Etale` available, hence also the fibre functor on sheaves of the point
 `(pointSmallEtale s).comap f.Etale _`. -/
