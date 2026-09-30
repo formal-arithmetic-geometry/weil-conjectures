@@ -23,6 +23,9 @@ graph correspondences `c_m = (id, Φ_m)` and the global Frobenius operators.
 - `AlgebraicGeometry.ProEtale.WeilComplex`: a complex with a Frobenius coefficient
   morphism, together with its iterates `frobeniusIterate`, `coeffIterate` and its graph
   correspondences `WeilComplex.graph`.
+- `AlgebraicGeometry.ProEtale.WeilComplex.upperStarPullCoeff`: the Frobenius coefficient
+  morphism `Lg^* Lf^* K ⟶ Lf^* K` of the pullback along a morphism `f` intertwining `g` and
+  `Φ_m`.
 - `AlgebraicGeometry.ProEtale.WeilComplex.stalkFrobenius`: the geometric-stalk Frobenius
   `F_{x,m} = (φ_m)_x̄` at a point fixed by `Φ_m`.
 - `AlgebraicGeometry.ProEtale.relativeFrobenius`: the relative Frobenius `r_m` of a
@@ -188,53 +191,14 @@ section Graph
 
 variable [DerivedBraiding A]
 
-/-- The coefficient map of the graph correspondence
-`AlgebraicGeometry.ProEtale.WeilComplex.graph`: the iterate `φ_m` read through the
-comparison `K ≃ 𝟙^! K`. -/
-noncomputable def graphCoeff (G : GeometricOperations A s) (m : ℕ) :
-    ((upperStar A (W.frobeniusIterate m)).leftDerivedFunctor).obj W.obj ⟶
-      (rightDerivedUpperShriek A (𝟙 X)).obj W.obj :=
-  W.coeffIterate m ≫ (G.upperShriekIdIso X).hom.app W.obj
-
 /-- The graph correspondence `c_m = (id_X, Φ_m)` of a Weil complex, with coefficient map
-`φ_m`. Its ordinary-pullback leg is `Φ_m` and its exceptional leg is the identity
-(part of blueprint `sk-d-weil`). -/
-noncomputable def graph (G : GeometricOperations A s) (m : ℕ) :
-    Correspondence aX aX W.obj W.obj where
-  supp := X
-  str := aX
-  fst := 𝟙 X
-  snd := W.frobeniusIterate m
-  fst_comp := Category.id_comp aX
-  snd_comp := W.frobeniusIterate_comp m
-  coeff := W.graphCoeff G m
-
-/-- The structure morphism of the graph `W.graph G m` is `aX`, so it admits a
-compactification when `aX` does. -/
-instance hasCompactification_graph_str [HasCompactification aX] (G : GeometricOperations A s)
-    (m : ℕ) : HasCompactification (W.graph G m).str :=
-  inferInstanceAs (HasCompactification aX)
-
-/-- The support map `(𝟙, Φ_m) : X ⟶ X ×_s X` of the graph `W.graph G m` is the graph
-`X ⟶ X ×_s X` of `Φ_m`, a section of the first projection, followed by the identification
-of `X ×_{Φ_m ≫ a_X, s, a_X} X` with `X ×_s X` along `Φ_m ≫ a_X = a_X`. -/
-lemma graph_toProd_eq (G : GeometricOperations A s) (m : ℕ) :
-    (W.graph G m).toProd =
-      pullback.lift (𝟙 X) (W.frobeniusIterate m) (Category.id_comp (W.frobeniusIterate m ≫ aX)) ≫
-        (pullback.congrHom (W.frobeniusIterate_comp m) rfl).hom := by
-  apply pullback.hom_ext <;> simp [Correspondence.toProd, graph]
-
-/-- The support map `(𝟙, Φ_m) : X ⟶ X ×_s X` of the graph `W.graph G m` is a section of the
-first projection, hence a closed immersion when `aX` is separated. -/
-instance isClosedImmersion_graph_toProd [IsSeparated aX] (G : GeometricOperations A s)
-    (m : ℕ) : IsClosedImmersion (W.graph G m).toProd := by
-  rw [graph_toProd_eq]
-  -- instance search does not find this factor inside the composite, only when it is stated
-  -- on its own
-  have : IsClosedImmersion
-      (pullback.lift (𝟙 X) (W.frobeniusIterate m) (Category.id_comp (W.frobeniusIterate m ≫ aX))) :=
-    inferInstance
-  infer_instance
+`φ_m` read through the comparison `K ≃ 𝟙^! K`: the graph correspondence
+`Correspondence.ofGraph` of `Φ_m`. Its ordinary-pullback leg is `Φ_m` and its exceptional
+leg is the identity (part of blueprint `sk-d-weil`). -/
+noncomputable abbrev graph (G : GeometricOperations A s) (m : ℕ) :
+    Correspondence aX aX W.obj W.obj :=
+  Correspondence.ofGraph G aX (W.frobeniusIterate m) (W.frobeniusIterate_comp m) W.obj
+    (W.coeffIterate m)
 
 end Graph
 
@@ -263,6 +227,38 @@ lemma stalkFrobenius_eq_pow {x : s ⟶ X} (hx : x ≫ W.frobenius = x) (m : ℕ)
         W.stalkFrobenius 1 x (W.comp_frobeniusIterate_of_comp_frobenius hx 1)
       F ^ m :=
   sorry
+
+/-- The Frobenius coefficient morphism of the pullback `Lf^* K` along a morphism
+`f : Y ⟶ X` that intertwines an endomorphism `g : Y ⟶ Y` with `Φ_m`,
+
+```
+  Y ──f──▶ X
+  │g       │Φ_m
+  ▼        ▼
+  Y ──f──▶ X
+```
+
+the composite
+
+```
+  Lg^* Lf^* K ≃ L(g ≫ f)^* K = L(f ≫ Φ_m)^* K ≃ Lf^* LΦ_m^* K ──Lf^* φ_m──▶ Lf^* K
+```
+
+whose first map is the inverse of `leftDerivedUpperStarSquareIso` for the square
+(part of blueprint `sk-d-curve-pieces`). -/
+noncomputable def upperStarPullCoeff (m : ℕ) {f : Y ⟶ X} {g : Y ⟶ Y}
+    (sq : CommSq g f f (W.frobeniusIterate m)) :
+    ((upperStar A g).leftDerivedFunctor).obj (((upperStar A f).leftDerivedFunctor).obj W.obj) ⟶
+      ((upperStar A f).leftDerivedFunctor).obj W.obj :=
+  (leftDerivedUpperStarSquareIso A sq).inv.app W.obj ≫
+    ((upperStar A f).leftDerivedFunctor).map (W.coeffIterate m)
+
+/-- The pullback of an invertible Frobenius coefficient morphism is invertible. -/
+instance isIso_upperStarPullCoeff [IsIso W.coeff] (m : ℕ) {f : Y ⟶ X} {g : Y ⟶ Y}
+    (sq : CommSq g f f (W.frobeniusIterate m)) :
+    IsIso (W.upperStarPullCoeff m sq) := by
+  dsimp [upperStarPullCoeff]
+  infer_instance
 
 end WeilComplex
 

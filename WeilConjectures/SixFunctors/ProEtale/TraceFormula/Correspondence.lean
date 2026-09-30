@@ -37,6 +37,8 @@ forward along a proper morphism, and integrated when `T` is proper over the base
   support `E(C, D) = C ×_{Y × X} D` of an opposite pair.
 - `AlgebraicGeometry.ProEtale.Correspondence.ofEnd`: the diagonal endocorrespondence
   attached to an endomorphism of the coefficient complex.
+- `AlgebraicGeometry.ProEtale.Correspondence.ofGraph`: the graph endocorrespondence `(1, g)`
+  of an `s`-endomorphism `g : X ⟶ X`, with a coefficient map `Lg^* K ⟶ K`.
 - `AlgebraicGeometry.ProEtale.Correspondence.globalOperator`: the global operator
   `T_c(u)` on compactly supported cohomology.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.borelMooreSections`: the Borel-Moore
@@ -298,6 +300,65 @@ instance isProper_fixStr_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s) [IsP
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
     IsProper (ofEnd G aX K v).fixStr :=
   inferInstanceAs (IsProper ((ofEnd G aX K v).fixι ≫ aX))
+
+/-- The graph endocorrespondence `(1, g)` on `(X, K)` of an endomorphism `g : X ⟶ X` over
+`s`: support `X`, exceptional leg `𝟙 X`, ordinary-pullback leg `g`, and coefficient map
+`v : Lg^* K ⟶ K` read through `K ≃ 𝟙^! K`,
+
+```
+            X
+          ↙   ↘
+       𝟙         g              v : Lg^* K ⟶ K ≃ 𝟙^! K
+      ↙           ↘
+     X             X
+```
+
+For `g = 𝟙 X` this is `ofEnd` up to the identification `L(𝟙)^* K ≃ K`
+(part of blueprint `sk-d-corr`). -/
+noncomputable def ofGraph (G : GeometricOperations A s) (aX : X ⟶ s) (g : X ⟶ X)
+    (hg : g ≫ aX = aX) (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (v : ((upperStar A g).leftDerivedFunctor).obj K ⟶ K) :
+    Correspondence aX aX K K where
+  supp := X
+  str := aX
+  fst := 𝟙 X
+  snd := g
+  fst_comp := Category.id_comp aX
+  snd_comp := hg
+  coeff := v ≫ (G.upperShriekIdIso X).hom.app K
+
+/-- The structure morphism of `ofGraph G aX g hg K v` is `aX`, so it admits a
+compactification when `aX` does. -/
+instance hasCompactification_str_ofGraph (G : GeometricOperations A s) (aX : X ⟶ s)
+    [HasCompactification aX] (g : X ⟶ X) (hg : g ≫ aX = aX)
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (v : ((upperStar A g).leftDerivedFunctor).obj K ⟶ K) :
+    HasCompactification (ofGraph G aX g hg K v).str :=
+  inferInstanceAs (HasCompactification aX)
+
+/-- The support map `(𝟙, g) : X ⟶ X ×_s X` of `ofGraph G aX g hg K v` is the graph
+`X ⟶ X ×_s X` of `g`, a section of the first projection, followed by the identification
+of `X ×_{g ≫ a_X, s, a_X} X` with `X ×_s X` along `g ≫ a_X = a_X`. -/
+lemma ofGraph_toProd_eq (G : GeometricOperations A s) (aX : X ⟶ s) (g : X ⟶ X)
+    (hg : g ≫ aX = aX) (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (v : ((upperStar A g).leftDerivedFunctor).obj K ⟶ K) :
+    (ofGraph G aX g hg K v).toProd =
+      pullback.lift (𝟙 X) g (Category.id_comp (g ≫ aX)) ≫ (pullback.congrHom hg rfl).hom := by
+  apply pullback.hom_ext <;> simp [toProd, ofGraph]
+
+/-- The support map `(𝟙, g) : X ⟶ X ×_s X` of `ofGraph G aX g hg K v` is a section of the
+first projection, hence a closed immersion when `aX` is separated. -/
+instance isClosedImmersion_toProd_ofGraph (G : GeometricOperations A s) (aX : X ⟶ s)
+    [IsSeparated aX] (g : X ⟶ X) (hg : g ≫ aX = aX)
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (v : ((upperStar A g).leftDerivedFunctor).obj K ⟶ K) :
+    IsClosedImmersion (ofGraph G aX g hg K v).toProd := by
+  rw [ofGraph_toProd_eq]
+  -- instance search does not find this factor inside the composite, only when it is stated
+  -- on its own
+  have : IsClosedImmersion (pullback.lift (𝟙 X) g (Category.id_comp (g ≫ aX))) :=
+    inferInstance
+  infer_instance
 
 /-- `c₂ ≫ a_X = a_C` admits a compactification when `a_C` does. -/
 instance hasCompactification_snd_comp (c : Correspondence aX aY K L)
