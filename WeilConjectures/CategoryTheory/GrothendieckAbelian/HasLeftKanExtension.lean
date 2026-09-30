@@ -49,20 +49,21 @@ Base change `MorphismProperty.Over.pullback P ⊤ g` along an *arbitrary* morphi
 ```
 
 and has no monomorphism to exploit, so neither the existence of the left Kan extensions
-along its opposite nor their left exactness comes from the combinatorics above. Both are
-the slice-level statements of
-`WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty`, at `P = @Etale` and
-`P = @WeaklyEtale` over `Scheme.{u}`:
+along its opposite nor their left exactness comes from the combinatorics above:
 
-- existence is `MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback`: the
-  indexing comma categories have objects in `Type (u + 1)` and `Hom`-types in `Type u`, so
-  they are essentially `u + 1`-small and `A` has colimits over them. No smallness of the
-  small sites themselves is needed. That instance applies to the small sites as it stands,
-  so nothing is restated for it here;
-- left exactness is `MorphismProperty.Over.preservesFiniteLimits_op_lan_pullback`: base
-  change preserves the finite limits of the slice, hence is representably flat, so the
-  indexing comma categories are filtered and the Kan extension is computed by filtered
-  colimits, which are exact in `A` by AB5. It is restated for each of the two sites below.
+- existence is the general `Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
+  `WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`: the indexing comma
+  categories have objects in `Type (u + 1)` and `Hom`-types in `Type u`, so they are
+  essentially `u + 1`-small and `A` has colimits over them. No smallness of the small sites
+  themselves is needed. That instance applies to the small sites as it stands, so nothing is
+  restated for it here;
+- left exactness is the slice-level statement
+  `MorphismProperty.Over.preservesFiniteLimits_op_lan_pullback` of
+  `WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty`, at `P = @Etale` and
+  `P = @WeaklyEtale` over `Scheme.{u}`: base change preserves the finite limits of the
+  slice, hence is representably flat, so the indexing comma categories are filtered and the
+  Kan extension is computed by filtered colimits, which are exact in `A` by AB5. It is
+  restated for each of the two sites below.
 
 For an étale `g` both are also proved in
 `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs`, and for a weakly étale `g` in

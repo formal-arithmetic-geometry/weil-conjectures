@@ -34,7 +34,7 @@ of coheight one, and `i_{x*} ℤ` is the pushforward of the constant sheaf `ℤ`
 ```
 
 whose target is `H²(Spec k(X)_ét, 𝔾ₘ) = Br(k(X))` by
-`AlgebraicGeometry.Scheme.upperStarGmSheafIso`.
+`AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField`.
 
 ## Main definitions
 
@@ -45,6 +45,8 @@ whose target is `H²(Spec k(X)_ét, 𝔾ₘ) = Br(k(X))` by
 
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField`: the
+  pullback of `𝔾ₘ` along the generic point is `𝔾ₘ`. The proof is `sorry`.
 - `AlgebraicGeometry.Scheme.exists_shortExact_divisorSequence`: the divisor sequence is short
   exact.
 - `AlgebraicGeometry.Scheme.injective_cohomologyMap_gmSheaf_two`: the map
@@ -96,13 +98,23 @@ noncomputable def toGenericGm : X.gmSheaf ⟶ X.genericGm :=
   (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} X.fromSpecFunctionField).unit.app
     X.gmSheaf
 
+/-- The comparison map `i^* 𝔾ₘ ⟶ 𝔾ₘ` along the generic point `i : Spec k(X) ⟶ X` is an
+isomorphism. The morphism `i` is not étale, but both sheaves have stalk `(k(X)ˢᵉᵖ)ˣ` at a
+separable closure of `k(X)`: the strict henselisation of the local ring `𝒪_{X,η} = k(X)` is
+`k(X)ˢᵉᵖ`. The proof is `sorry`. -/
+theorem isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField :
+    IsIso (upperStarGmSheafToGmSheaf X.fromSpecFunctionField) :=
+  sorry
+
 /-- The sheaf `i_* i^* 𝔾ₘ` is the pushforward of the sheaf `𝔾ₘ` of `Spec k(X)`, because the
-pullback of `𝔾ₘ` is `𝔾ₘ` (`AlgebraicGeometry.Scheme.upperStarGmSheafIso`). -/
+pullback of `𝔾ₘ` along the generic point is `𝔾ₘ`
+(`AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField`). -/
 noncomputable def genericGmIso : X.genericGm ≅
     (Etale.lowerStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).obj
       (Spec X.functionField).gmSheaf :=
+  haveI := X.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField
   (Etale.lowerStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).mapIso
-    (upperStarGmSheafIso X.fromSpecFunctionField)
+    (asIso (upperStarGmSheafToGmSheaf X.fromSpecFunctionField))
 
 /-- The étale sheaf `i_{x*} ℤ` on `X`: the pushforward of the constant sheaf `ℤ` along the
 canonical morphism `Spec κ(x) ⟶ X` of a point `x` of `X`. -/
@@ -143,9 +155,9 @@ noetherian scheme with function field `k(X)`. Then the pullback along the generi
 
 is injective, that is, `Br(X) = H²(X, 𝔾ₘ) ↪ H²(Spec k(X), 𝔾ₘ) = Br(k(X))`; the target is
 identified with the cohomological Brauer group of `k(X)` by
-`AlgebraicGeometry.Scheme.upperStarGmSheafIso`. It follows from the long exact cohomology
-sequence of the divisor sequence together with `H¹(X, i_{x*} ℤ) = 0`. In particular this
-holds for a smooth curve. The proof is `sorry`.
+`AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField`. It follows
+from the long exact cohomology sequence of the divisor sequence together with
+`H¹(X, i_{x*} ℤ) = 0`. In particular this holds for a smooth curve. The proof is `sorry`.
 (blueprint: `lem-sc-brauer-injectivity`) -/
 theorem injective_cohomologyMap_gmSheaf_two [IsNoetherian X] [IsRegular X] :
     Function.Injective (Etale.cohomologyMap X.fromSpecFunctionField X.gmSheaf 2) :=
