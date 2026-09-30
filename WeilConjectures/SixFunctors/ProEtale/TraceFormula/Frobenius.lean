@@ -131,10 +131,12 @@ lemma frobeniusIterate_comp (m : ℕ) : W.frobeniusIterate m ≫ aX = aX := by
   | zero => simp
   | succ n ih => rw [frobeniusIterate_succ, Category.assoc, ih, W.frobenius_comp]
 
+omit [DerivedBraiding A] in
 @[simp]
 lemma frobeniusIterate_one : W.frobeniusIterate 1 = W.frobenius :=
   pow_one (M := End X) W.frobenius
 
+omit [DerivedBraiding A] in
 /-- A point fixed by `Φ₁` is fixed by every iterate `Φ_m`. -/
 lemma comp_frobeniusIterate_of_comp_frobenius {x : s ⟶ X} (hx : x ≫ W.frobenius = x)
     (m : ℕ) : x ≫ W.frobeniusIterate m = x := by
@@ -160,11 +162,13 @@ noncomputable def coeffIterate :
       (leftDerivedUpperStarComp A W.frobenius (W.frobeniusIterate m)).hom.app W.obj ≫
       ((upperStar A W.frobenius).leftDerivedFunctor).map (coeffIterate m) ≫ W.coeff
 
+omit [DerivedBraiding A] in
 /-- The defining equation of `coeffIterate` at `0`: `φ_0` is `L(𝟙 X)^* K ≃ K`. -/
 @[simp]
 lemma coeffIterate_zero : W.coeffIterate 0 = (leftDerivedUpperStarId A X).hom.app W.obj :=
   rfl
 
+omit [DerivedBraiding A] in
 /-- The defining recursion of `coeffIterate`: `φ_{m+1} = φ ∘ LΦ₁^* φ_m ∘ comp`. It is not
 `@[simp]`, since unfolding the successor would loop. -/
 lemma coeffIterate_succ (m : ℕ) :
