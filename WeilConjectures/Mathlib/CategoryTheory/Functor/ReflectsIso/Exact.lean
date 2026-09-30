@@ -5,7 +5,9 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 public import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
+public import Mathlib.CategoryTheory.Limits.ExactFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 
 /-!
@@ -28,6 +30,8 @@ the three criteria apply to a pair of functors out of the box.
   zero by every member of the family is zero.
 - `CategoryTheory.JointlyReflectIsomorphisms.epi_of_epi_map`: a morphism sent to an
   epimorphism by every member of the family is an epimorphism.
+- `CategoryTheory.JointlyReflectIsomorphisms.exactFunctor_of_iso`: a functor which becomes
+  exact after a jointly conservative family of exact functors is exact.
 
 -/
 
@@ -89,6 +93,39 @@ lemma epi_of_epi_map (hP : JointlyReflectIsomorphisms F) {X Y : C} (φ : X ⟶ Y
   rw [← π_comp_cokernelComparison φ (F i), cokernel.π_of_epi, zero_comp]
 
 end JointlyReflectIsomorphisms
+
+end
+
+section
+
+variable {C : Type*} [Category* C] [Abelian C] {C' : Type*} [Category* C'] [Abelian C']
+  {I : Type*} {D : I → Type*} [∀ i, Category* (D i)] [∀ i, Abelian (D i)]
+  {D' : I → Type*} [∀ i, Category* (D' i)] [∀ i, Abelian (D' i)]
+  {F : ∀ i, C ⥤ D i} [∀ i, PreservesFiniteLimits (F i)] [∀ i, PreservesFiniteColimits (F i)]
+  {F' : ∀ i, C' ⥤ D' i} [∀ i, PreservesFiniteLimits (F' i)] [∀ i, PreservesFiniteColimits (F' i)]
+
+/-- **A functor which is exact after a jointly conservative family of exact functors is
+exact.** Let `T : C ⥤ C'` be an additive functor such that for every `i` there is a square
+```
+       C ------T-----> C'
+       |               |
+      F i            F' i
+       v               v
+      D i ---T' i---> D' i
+```
+commuting up to an isomorphism `e i : T ⋙ F' i ≅ F i ⋙ T' i`, where the functors `F i` are
+exact, the functors `T' i` are exact and the exact functors `F' i` jointly reflect
+isomorphisms. Then `T` is exact. -/
+lemma JointlyReflectIsomorphisms.exactFunctor_of_iso (hP : JointlyReflectIsomorphisms F')
+    (T : C ⥤ C') [T.Additive] (T' : ∀ i, D i ⥤ D' i) [∀ i, (T' i).Additive]
+    (hT' : ∀ i, exactFunctor _ _ (T' i)) (e : ∀ i, T ⋙ F' i ≅ F i ⋙ T' i) :
+    exactFunctor _ _ T := by
+  refine ((Functor.exact_tfae T).out 1 3).1 fun S hS ↦ (hP.exact_iff _).2 fun i ↦ ?_
+  have : PreservesFiniteLimits (T' i) := (hT' i).1
+  have : PreservesFiniteColimits (T' i) := (hT' i).2
+  exact (ShortComplex.exact_iff_of_iso (ShortComplex.isoMk ((e i).app _) ((e i).app _)
+    ((e i).app _) ((e i).hom.naturality _).symm ((e i).hom.naturality _).symm)).2
+      ((hS.map (F i)).map (T' i))
 
 end
 
