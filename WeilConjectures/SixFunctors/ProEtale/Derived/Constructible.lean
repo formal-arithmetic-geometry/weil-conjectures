@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Comparison
 
 /-!
@@ -25,7 +24,7 @@ functor of `WeilConjectures.SixFunctors.ProEtale.Comparison.Defs`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible`: the essential image of
   `Dᵇc(X_ét, A)` under `D(ν^*)`.
 - `AlgebraicGeometry.ProEtale.DerivedCategoryBoundedConstructible`: the full subcategory
-  `Dᵇc(X, A)` of `D(X_proét)` cut out by this property.
+  `Dᵇc_proét(X, A)` of `D(X_proét)` cut out by this property.
 
 ## Main results
 
@@ -34,9 +33,22 @@ functor of `WeilConjectures.SixFunctors.ProEtale.Comparison.Defs`.
 
 ## Implementation notes
 
-The blueprint (`sk-def-sf-categories`, and the proof of `sk-cor-sf-direct-image-ctf`) uses that
-every bounded constructible pro-étale complex is of étale origin; here this is taken as the
-definition. It avoids a pro-étale notion of constructible sheaf, which is not formalised.
+In the blueprint, a bounded constructible pro-étale complex is defined intrinsically
+(`def-weil-finite-torsion-constructibility`): its homology sheaves are locally constant with
+finite stalks on the strata of a finite stratification. That every such complex is of étale
+origin is the lemma `lem-sf-proetale-constructible-origin`, which holds only at the finite
+coefficient stages `A = A_{E,n}` (it relies on Stacks 09AK, which needs Noetherian torsion
+coefficients). At these stages the blueprint itself adopts the étale-origin reading
+(`def-weil-pbc-proetale-modules`), and this file takes it as the definition, for any `A`. This
+avoids a pro-étale notion of constructible sheaf, which is not formalised.
+
+For `ℓ`-adic coefficients, such as the `O_E` and `E` stages, étale origin is the wrong notion:
+the pro-étale constant sheaf `Ẑ_ℓ = lim ℤ/ℓⁿ` is constructible but is not `ν^*` of the étale
+constant sheaf `ℤ_ℓ`. So `ProEtale.DerivedCategory.boundedConstructible` should only be used at
+the finite stages.
+
+The notation for the pro-étale category is `Dᵇc_proét(X, A)`, so that it does not clash with the
+étale notation `Dᵇc(X, A)`, which is scoped in `AlgebraicGeometry`.
 
 -/
 
@@ -55,7 +67,7 @@ open Scheme
 variable (A : Type u') [Category.{u + 1} A] [Abelian A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
+  [IsGrothendieckAbelian.{u + 1} A]
 
 variable (X : Scheme.{u})
 
@@ -63,24 +75,26 @@ namespace ProEtale
 
 /-- An object of the derived category of pro-étale sheaves is bounded constructible if it is of
 étale origin: isomorphic to `D(ν^*) K'` for a bounded constructible complex `K'` of étale
-sheaves. -/
+sheaves.
+
+This agrees with the intrinsic notion of the blueprint only at the finite coefficient stages
+`A = A_{E,n}` (`lem-sf-proetale-constructible-origin`, `def-weil-pbc-proetale-modules`); for
+`ℓ`-adic coefficients it is strictly smaller. -/
 noncomputable def DerivedCategory.boundedConstructible :
     ObjectProperty (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
   (Etale.DerivedCategory.boundedConstructible A X).map D(ν^*(X)[A])
 
-omit [HasSmallSiteSheafify A] in
 /-- A pro-étale complex is bounded constructible exactly when it is isomorphic to `D(ν^*) K'`
 for a bounded constructible étale complex `K'`. -/
 lemma DerivedCategory.boundedConstructible_iff
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
     DerivedCategory.boundedConstructible A X K ↔
       ∃ K', Etale.DerivedCategory.boundedConstructible A X K' ∧
-        Nonempty (D(ν^*(X)[A]).obj K' ≅ K) := by
-  simp [DerivedCategory.boundedConstructible, ObjectProperty.map]
+        Nonempty (D(ν^*(X)[A]).obj K' ≅ K) :=
+  ObjectProperty.prop_map_iff _ _ _
 
 variable {A X}
 
-omit [HasSmallSiteSheafify A] in
 /-- `D(ν^*)` sends bounded constructible étale complexes to bounded constructible pro-étale
 complexes. -/
 lemma DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj
@@ -98,46 +112,36 @@ instance : (DerivedCategory.boundedConstructible A X).IsClosedUnderIsomorphisms 
 
 variable {A X}
 
-omit [HasSmallSiteSheafify A] in
 /-- A bounded constructible pro-étale complex is bounded for the canonical t-structure: `D(ν^*)`
-commutes with homology, so it preserves homology vanishing outside an interval. -/
+is induced by the exact functor `ν^*`, so it preserves boundedness. -/
 lemma DerivedCategory.boundedConstructible.bounded
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
     (hK : DerivedCategory.boundedConstructible A X K) :
     _root_.DerivedCategory.TStructure.t.bounded K := by
-  obtain ⟨K', hK', ⟨e⟩⟩ := (DerivedCategory.boundedConstructible_iff A X K).1 hK
-  obtain ⟨a, b, ha, hb⟩ :=
-    (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded K').2 hK'.1
-  have hzero : ∀ i, IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj K') →
-      IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj K) := fun i hi ↦
-    ((ν^*(X)[A]).map_isZero hi).of_iso
-      (((_root_.DerivedCategory.homologyFunctor _ i).mapIso e).symm ≪≫
-        ((ν^*(X)[A]).mapDerivedCategoryHomologyFunctorIso i).symm.app K')
-  refine (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded K).1 ⟨a, b, ?_, ?_⟩
-  · exact (_root_.DerivedCategory.isGE_iff K a).2 fun i hi ↦
-      hzero i ((_root_.DerivedCategory.isGE_iff K' a).1 ha i hi)
-  · exact (_root_.DerivedCategory.isLE_iff K b).2 fun i hi ↦
-      hzero i ((_root_.DerivedCategory.isLE_iff K' b).1 hb i hi)
+  obtain ⟨K', hK', ⟨e⟩⟩ := hK
+  exact _root_.DerivedCategory.TStructure.t.bounded.prop_of_iso e
+    ((ν^*(X)[A]).bounded_mapDerivedCategory_obj hK'.1)
 
 variable (A X)
 
-/-- The bounded constructible derived category `Dᵇc(X, A)` of pro-étale sheaves, realized as the
-full subcategory of complexes of étale origin in the derived category of pro-étale sheaves. -/
+/-- The bounded constructible derived category `Dᵇc_proét(X, A)` of pro-étale sheaves, realized
+as the full subcategory of complexes of étale origin in the derived category of pro-étale
+sheaves. -/
 noncomputable def DerivedCategoryBoundedConstructible : Type _ :=
   (DerivedCategory.boundedConstructible A X).FullSubcategory
 
-/-- The category structure on `Dᵇc(X, A)`, inherited from `D(X_proét)`. -/
+/-- The category structure on `Dᵇc_proét(X, A)`, inherited from `D(X_proét)`. -/
 noncomputable instance : Category (DerivedCategoryBoundedConstructible A X) :=
   inferInstanceAs <| Category (DerivedCategory.boundedConstructible A X).FullSubcategory
 
-/-- The inclusion of `Dᵇc(X, A)` into the derived category of pro-étale sheaves. -/
+/-- The inclusion of `Dᵇc_proét(X, A)` into the derived category of pro-étale sheaves. -/
 noncomputable def DerivedCategoryBoundedConstructible.ι :
     DerivedCategoryBoundedConstructible A X ⥤
       _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
   (DerivedCategory.boundedConstructible A X).ι
 
 @[inherit_doc DerivedCategoryBoundedConstructible]
-scoped notation "Dᵇc(" X ", " A ")" => ProEtale.DerivedCategoryBoundedConstructible A X
+scoped notation "Dᵇc_proét(" X ", " A ")" => ProEtale.DerivedCategoryBoundedConstructible A X
 
 end ProEtale
 
