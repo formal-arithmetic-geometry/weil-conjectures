@@ -132,6 +132,16 @@ lemma leftDerived₂_ext (G : D₁ ⥤ D₂ ⥤ H) (γ₁ γ₂ : G ⟶ LF)
   ext ⟨X₁, X₂⟩
   exact congr_app (congr_app hγ X₁) X₂
 
+/-- If `G` is also a left derived functor, of `F'` with counit `β`, then the natural
+transformation `G ⟶ LF` induced by an isomorphism `τ : F' ⟶ F` is an isomorphism. -/
+lemma isIso_leftDerived₂Lift {F' : C₁ ⥤ C₂ ⥤ H}
+    (β : (((whiskeringLeft₂ H).obj L₁).obj L₂).obj G ⟶ F') [G.IsLeftDerivedFunctor₂ β W₁ W₂]
+    (τ : F' ⟶ F) [IsIso τ] :
+    IsIso (leftDerived₂Lift LF α W₁ W₂ G (β ≫ τ)) :=
+  ⟨leftDerived₂Lift G β W₁ W₂ LF (α ≫ CategoryTheory.inv τ),
+    leftDerived₂_ext G β W₁ W₂ G _ _ (by simp),
+    leftDerived₂_ext LF α W₁ W₂ LF _ _ (by simp)⟩
+
 end
 
 variable {LF}

@@ -519,6 +519,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Subobject.FactorThru
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.HasCardinalLT
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Lattice
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
+public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.Data.Set.Image
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
