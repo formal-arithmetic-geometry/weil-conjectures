@@ -228,4 +228,69 @@ end MorphismProperty
 
 end PullbackCoherence
 
+section PullbackMapComparison
+
+variable [P.IsStableUnderComposition] {U' U Z' Z : T} {g' : U' ⟶ U} {j' : U' ⟶ Z'}
+  {j : U ⟶ Z} {g'' : Z' ⟶ Z} (hj : P j) (hj' : P j') [P.HasPullbacksAlong g']
+  [P.IsStableUnderBaseChangeAlong g'] [P.HasPullbacksAlong g'']
+  [P.IsStableUnderBaseChangeAlong g'']
+
+/-- The **Beck–Chevalley comparison** attached to a commutative square `g' ≫ j = j' ≫ g''`
+with `j` and `j'` in `P`
+
+```
+U' --j'--> Z'
+|          |
+g'         g''
+v          v
+U  --j-->  Z
+```
+
+is the natural transformation
+`Over.pullback g' ⋙ Over.map j' ⟶ Over.map j ⋙ Over.pullback g''` of functors
+`P.Over ⊤ U ⥤ P.Over ⊤ Z'`
+
+```
+P.Over ⊤ U --Over.pullback g'--> P.Over ⊤ U'
+    |                                |
+ Over.map j          ⇙          Over.map j'
+    v                                v
+P.Over ⊤ Z --Over.pullback g''--> P.Over ⊤ Z'
+```
+
+sending `T ⟶ U` to the canonical morphism `T ×_U U' ⟶ T ×_Z Z'` over `Z'`. -/
+@[simps! app_left]
+noncomputable def MorphismProperty.Over.pullbackMapComparison (sq : CommSq g' j' j g'') :
+    Over.pullback P ⊤ g' ⋙ Over.map ⊤ hj' ⟶ Over.map ⊤ hj ⋙ Over.pullback P ⊤ g'' where
+  app b := Over.homMk
+    (pullback.lift (f := ((Over.map ⊤ hj).obj b).hom) (g := g'') (pullback.fst b.hom g')
+      (pullback.snd b.hom g' ≫ j') (by simp [pullback.condition_assoc, sq.w]))
+    (by simp) trivial
+  naturality b b' f := by
+    ext
+    apply pullback.hom_ext <;> simp
+
+/-- For a cartesian square, the Beck–Chevalley comparison
+`Over.pullback g' ⋙ Over.map j' ⟶ Over.map j ⋙ Over.pullback g''` is an isomorphism:
+pasting the cartesian square of `T ×_U U'` with the given one identifies `T ×_U U'` with
+`T ×_Z Z'`. -/
+lemma MorphismProperty.Over.isIso_pullbackMapComparison_of_isPullback
+    (hsq : IsPullback g' j' j g'') :
+    IsIso (Over.pullbackMapComparison hj hj' hsq.toCommSq) := by
+  have (b : P.Over ⊤ U) : IsIso ((Over.pullbackMapComparison hj hj' hsq.toCommSq).app b) := by
+    have h : IsPullback (pullback.fst b.hom g') (pullback.snd b.hom g' ≫ j')
+        ((Over.map ⊤ hj).obj b).hom g'' :=
+      (IsPullback.of_hasPullback b.hom g').paste_vert hsq
+    have hleft : ((Over.pullbackMapComparison hj hj' hsq.toCommSq).app b).left =
+        h.isoPullback.hom := by
+      apply pullback.hom_ext
+      · exact (pullback.lift_fst _ _ _).trans (IsPullback.isoPullback_hom_fst h).symm
+      · exact (pullback.lift_snd _ _ _).trans (IsPullback.isoPullback_hom_snd h).symm
+    rw [← isIso_iff_of_reflects_iso _ (Over.forget P ⊤ Z' ⋙ CategoryTheory.Over.forget Z'),
+      Over.forget_comp_forget_map, hleft]
+    infer_instance
+  exact NatIso.isIso_of_isIso_app _
+
+end PullbackMapComparison
+
 end CategoryTheory

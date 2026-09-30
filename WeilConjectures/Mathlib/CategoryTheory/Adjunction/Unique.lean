@@ -43,4 +43,44 @@ lemma conjugateEquiv_leftAdjointUniq_inv (adj₁ : F ⊣ G) (adj₂ : F' ⊣ G) 
     conjugateEquiv adj₁ adj₂ (Adjunction.leftAdjointUniq adj₁ adj₂).inv = 𝟙 G := by
   simp [Adjunction.leftAdjointUniq]
 
+section Mates
+
+variable {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* F]
+  {G : C ⥤ E} {H : D ⥤ F} {L₁ L₁' : C ⥤ D} {R₁ : D ⥤ C} {L₂ L₂' : E ⥤ F} {R₂ : F ⥤ E}
+
+/-- Mates are invariant under replacing the left adjoints by the canonically isomorphic
+ones: if `w` is a 2-square
+
+```
+C ---G---> E
+|          |
+L₁'   ⇙    L₂'
+v          v
+D ---H---> F
+```
+
+and `L₁ ≅ L₁'`, `L₂ ≅ L₂'` are the isomorphisms `Adjunction.leftAdjointUniq` of left
+adjoints of `R₁` resp. `R₂`, then the mate of `w` under `L₁' ⊣ R₁` and `L₂' ⊣ R₂` is the mate
+of the transported 2-square `G ⋙ L₂ ⟶ G ⋙ L₂' ⟶ L₁' ⋙ H ⟶ L₁ ⋙ H` under `L₁ ⊣ R₁` and
+`L₂ ⊣ R₂`. -/
+lemma mateEquiv_leftAdjointUniq (adj₁ : L₁ ⊣ R₁) (adj₁' : L₁' ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    (adj₂' : L₂' ⊣ R₂) (w : TwoSquare G L₁' L₂' H) :
+    mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _
+      (Functor.whiskerLeft G (adj₂.leftAdjointUniq adj₂').hom ≫ w.natTrans ≫
+        Functor.whiskerRight (adj₁.leftAdjointUniq adj₁').inv H)) =
+      mateEquiv adj₁' adj₂' w := by
+  have h : TwoSquare.mk _ _ _ _
+      (Functor.whiskerLeft G (adj₂.leftAdjointUniq adj₂').hom ≫ w.natTrans ≫
+        Functor.whiskerRight (adj₁.leftAdjointUniq adj₁').inv H) =
+      (w.whiskerRight (adj₂.leftAdjointUniq adj₂').hom).whiskerLeft
+        (adj₁.leftAdjointUniq adj₁').inv := by
+    ext
+    simp [TwoSquare.whiskerLeft, TwoSquare.whiskerRight]
+  rw [h, conjugateEquiv_mateEquiv_vcomp _ adj₁' _, mateEquiv_conjugateEquiv_vcomp _ adj₂' _,
+    conjugateEquiv_leftAdjointUniq_inv, conjugateEquiv_leftAdjointUniq_hom]
+  ext
+  simp
+
+end Mates
+
 end CategoryTheory
