@@ -37,6 +37,9 @@ quasi-isomorphisms. As a consequence, if `ι : single₀ X ⟶ I` is a resolutio
 
 ## Main results
 
+* `CategoryTheory.Functor.nonempty_rightDerivedObjIso_homology_of_acyclic`: a resolution
+  `ι : single₀ X ⟶ I` of `X` by `F`-acyclic objects gives `R^q F X ≅ H^q(F I)`.
+
 * `CategoryTheory.ShortComplex.ShortExact.exists_rightDerived_δ_exact`: the long exact sequence
   `R^q F B ⟶ R^q F C ⟶ R^{q+1} F A ⟶ R^{q+1} F B` of a short exact sequence
   `0 ⟶ A ⟶ B ⟶ C ⟶ 0`. This is not proved yet.
@@ -302,11 +305,29 @@ It is `InjectiveResolution.isoRightDerivedObjOfQuasiIso` applied to the lift
       J.ι ╲        ▼
             ╲────▶ J
 ```
-Blueprint `sk-thm-acyclicity`. -/
+-/
 noncomputable def rightDerivedObjIsoOfResolution (hI : ∀ n, F.rightAcyclic (I.X n)) (q : ℕ) :
     (F.rightDerived q).obj X ≅ ((F.mapHomologicalComplex _).obj I).homology q :=
   (injectiveResolution X).isoRightDerivedObjOfQuasiIso F
     (InjectiveResolution.descOfQuasiIso (𝟙 X) _ ι) hI q
+
+include ι in
+/-- **Acyclic resolutions compute right derived functors.** Let `F : C ⥤ D` be a left exact
+additive functor. If `ι : single₀ X ⟶ I` is a resolution `X → I⁰ → I¹ → ⋯` of `X` by
+`F`-acyclic objects, then `R^q F X ≅ H^q(F I)` for all `q`. The proof maps `I` to an injective
+resolution `J` of `X` compatibly with the augmentations
+(`InjectiveResolution.exists_comp_eq_ι_of_quasiIso`) and applies
+`InjectiveResolution.isoRightDerivedObjOfQuasiIso`; an explicit isomorphism is
+`Functor.rightDerivedObjIsoOfResolution`. (blueprint: `sk-thm-acyclicity`) -/
+theorem nonempty_rightDerivedObjIso_homology_of_acyclic (hI : ∀ n, F.rightAcyclic (I.X n))
+    (q : ℕ) :
+    Nonempty ((F.rightDerived q).obj X ≅ ((F.mapHomologicalComplex _).obj I).homology q) := by
+  let J := injectiveResolution X
+  obtain ⟨φ, hφ⟩ := J.exists_comp_eq_ι_of_quasiIso ι
+  have : QuasiIso φ := by
+    have : QuasiIso (ι ≫ φ) := by rw [hφ]; infer_instance
+    exact quasiIso_of_comp_left ι φ
+  exact ⟨J.isoRightDerivedObjOfQuasiIso F φ hI q⟩
 
 end Functor
 
