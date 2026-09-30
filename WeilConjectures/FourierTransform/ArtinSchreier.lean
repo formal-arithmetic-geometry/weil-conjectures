@@ -41,18 +41,20 @@ classical case is `k = ℤ/p`.
   `AlgebraicGeometry.Etale.artinSchreierSheafOfPullbackIso`.
 - `AlgebraicGeometry.Etale.artinSchreierSheafZMod`: the case `k = ℤ/p`, for a scheme of
   characteristic `p`.
-- `AlgebraicGeometry.Etale.artinSchreierSheafZeroIso`: the rigidification `Λ ≅ 0^* ℒ_Ψ`.
-- `AlgebraicGeometry.Etale.artinSchreierSheafAddIso`: `m^* ℒ_Ψ ≅ u₁^* ℒ_Ψ ⊗ u₂^* ℒ_Ψ` on `𝔸²_k`.
-- `AlgebraicGeometry.Etale.artinSchreierSheafOneIso`: `ℒ_1 ≅ Λ`.
-- `AlgebraicGeometry.Etale.artinSchreierSheafMulIso`: `ℒ_Ψ ⊗ ℒ_{Ψ'} ≅ ℒ_{Ψ Ψ'}`.
-- `AlgebraicGeometry.Etale.artinSchreierSheafNegIso` and
-  `AlgebraicGeometry.Etale.artinSchreierSheafInvIso`: the two inversion formulas
-  `ℒ_Ψ ⊗ (-1)^* ℒ_Ψ ≅ Λ` and `ℒ_Ψ ⊗ ℒ_{Ψ⁻¹} ≅ Λ`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isIdempotentElem_artinSchreierIdempotent`: `e_Ψ` is idempotent.
 - `AlgebraicGeometry.Etale.isLocallyConstantSheaf_artinSchreierSheaf`: `ℒ_Ψ` is lisse.
+- `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_zero`: the rigidification
+  `Λ ≅ 0^* ℒ_Ψ`.
+- `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_add`:
+  `m^* ℒ_Ψ ≅ u₁^* ℒ_Ψ ⊗ u₂^* ℒ_Ψ` on `𝔸²_k`.
+- `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_one`: `ℒ_1 ≅ Λ`.
+- `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_mul`: `ℒ_Ψ ⊗ ℒ_{Ψ'} ≅ ℒ_{Ψ Ψ'}`.
+- `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_neg` and
+  `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_inv`: the two inversion formulas
+  `ℒ_Ψ ⊗ (-1)^* ℒ_Ψ ≅ Λ` and `ℒ_Ψ ⊗ ℒ_{Ψ⁻¹} ≅ Λ`.
 
 ## Blueprint
 
@@ -225,28 +227,30 @@ instance isLocallyConstantSheaf_artinSchreierSheafOf (X : Scheme.{u}) [X.Over (S
     Scheme.IsLocallyConstantSheaf (artinSchreierSheafOf X Ψ f) :=
   Scheme.IsLocallyConstantSheaf.upperStar _ _
 
-/-- The rigidification `ε_Ψ : Λ ≅ 0^* ℒ_Ψ` of the Artin–Schreier sheaf along the zero section
-`0 : Spec k ⟶ 𝔸¹_k`.
+/-- The Artin–Schreier sheaf is rigidified along the zero section `0 : Spec k ⟶ 𝔸¹_k`:
+`Λ ≅ 0^* ℒ_Ψ`.
 (sketch blueprint: `sk-lem-as-properties`) -/
-def artinSchreierSheafZeroIso (Ψ : AddChar k Λ) :
-    𝟙_ _ ≅ (AffineSpace.zeroSection PUnit (Spec (.of k)))^*[ModuleCat.{u + 1} Λ].obj
-      (artinSchreierSheaf Ψ) :=
+theorem nonempty_iso_artinSchreierSheaf_zero (Ψ : AddChar k Λ) :
+    Nonempty (𝟙_ _ ≅ (AffineSpace.zeroSection PUnit (Spec (.of k)))^*[ModuleCat.{u + 1} Λ].obj
+      (artinSchreierSheaf Ψ)) :=
   sorry
 
 /-- The Artin–Schreier sheaf turns addition into tensor product: on `𝔸²_k = 𝔸¹_k ×_k 𝔸¹_k`,
 with the addition `m` and the two projections `u₁, u₂`, `m^* ℒ_Ψ ≅ u₁^* ℒ_Ψ ⊗ u₂^* ℒ_Ψ`.
 (sketch blueprint: `sk-lem-as-properties`) -/
-def artinSchreierSheafAddIso (Ψ : AddChar k Λ) :
-    (AffineSpace.add PUnit (Spec (.of k)))^*[ModuleCat.{u + 1} Λ].obj (artinSchreierSheaf Ψ) ≅
+theorem nonempty_iso_artinSchreierSheaf_add (Ψ : AddChar k Λ) :
+    Nonempty ((AffineSpace.add PUnit (Spec (.of k)))^*[ModuleCat.{u + 1} Λ].obj
+        (artinSchreierSheaf Ψ) ≅
       (pullback.fst (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k)))^*[ModuleCat.{u + 1} Λ].obj
           (artinSchreierSheaf Ψ) ⊗
         (pullback.snd (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k)))^*[ModuleCat.{u + 1} Λ].obj
-          (artinSchreierSheaf Ψ) :=
+          (artinSchreierSheaf Ψ)) :=
   sorry
 
 /-- The Artin–Schreier sheaf of the trivial character is the constant sheaf `Λ`.
 (sketch blueprint: `sk-lem-as-properties`) -/
-def artinSchreierSheafOneIso : artinSchreierSheaf (1 : AddChar k Λ) ≅ 𝟙_ _ :=
+theorem nonempty_iso_artinSchreierSheaf_one :
+    Nonempty (artinSchreierSheaf (1 : AddChar k Λ) ≅ 𝟙_ _) :=
   -- the `1`-isotypic component of `(AS_q)_* Λ` is the sheaf of `k`-invariants, which is `Λ`
   -- because `AS_q` is a `k`-torsor
   sorry
@@ -254,27 +258,30 @@ def artinSchreierSheafOneIso : artinSchreierSheaf (1 : AddChar k Λ) ≅ 𝟙_ _
 /-- The Artin–Schreier sheaf turns multiplication of characters into tensor product of
 sheaves, `ℒ_Ψ ⊗ ℒ_{Ψ'} ≅ ℒ_{Ψ Ψ'}`.
 (sketch blueprint: `sk-lem-as-properties`) -/
-def artinSchreierSheafMulIso (Ψ Ψ' : AddChar k Λ) :
-    artinSchreierSheaf Ψ ⊗ artinSchreierSheaf Ψ' ≅ artinSchreierSheaf (Ψ * Ψ') :=
+theorem nonempty_iso_artinSchreierSheaf_mul (Ψ Ψ' : AddChar k Λ) :
+    Nonempty (artinSchreierSheaf Ψ ⊗ artinSchreierSheaf Ψ' ≅ artinSchreierSheaf (Ψ * Ψ')) :=
   -- both sides are isotypic components of the pushforward along the same covering
   sorry
 
 /-- The inverse of `ℒ_Ψ` is `(-1)^* ℒ_Ψ`, the pullback along the reflection `x ↦ -x`. -/
-def artinSchreierSheafNegIso (Ψ : AddChar k Λ) :
-    artinSchreierSheaf Ψ ⊗
+theorem nonempty_iso_artinSchreierSheaf_neg (Ψ : AddChar k Λ) :
+    Nonempty (artinSchreierSheaf Ψ ⊗
         (AffineSpace.neg PUnit (Spec (.of k)))^*[ModuleCat.{u + 1} Λ].obj (artinSchreierSheaf Ψ) ≅
-      𝟙_ _ :=
-  -- pull back `artinSchreierSheafAddIso` along `(1, -1) : 𝔸¹_k ⟶ 𝔸²_k` and use
-  -- `artinSchreierSheafZeroIso`; this needs the compatibility of pullback with tensor products
+      𝟙_ _) :=
+  -- pull back `nonempty_iso_artinSchreierSheaf_add` along `(1, -1) : 𝔸¹_k ⟶ 𝔸²_k` and use
+  -- `nonempty_iso_artinSchreierSheaf_zero`; this needs the compatibility of pullback with tensor
+  -- products
   sorry
 
 /-- The inverse of `ℒ_Ψ` is also `ℒ_{Ψ⁻¹}`; combined with
-`AlgebraicGeometry.Etale.artinSchreierSheafNegIso` this is the identification
+`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_neg` this is the identification
 `(-1)^* ℒ_Ψ ≅ ℒ_{Ψ⁻¹}` used for the kernel of the Fourier transform attached to the inverse
 character. -/
-def artinSchreierSheafInvIso (Ψ : AddChar k Λ) :
-    artinSchreierSheaf Ψ ⊗ artinSchreierSheaf Ψ⁻¹ ≅ 𝟙_ _ :=
-  artinSchreierSheafMulIso Ψ Ψ⁻¹ ≪≫ eqToIso (by rw [mul_inv_cancel]) ≪≫ artinSchreierSheafOneIso
+theorem nonempty_iso_artinSchreierSheaf_inv (Ψ : AddChar k Λ) :
+    Nonempty (artinSchreierSheaf Ψ ⊗ artinSchreierSheaf Ψ⁻¹ ≅ 𝟙_ _) := by
+  obtain ⟨e⟩ := nonempty_iso_artinSchreierSheaf_mul Ψ Ψ⁻¹
+  obtain ⟨e'⟩ := nonempty_iso_artinSchreierSheaf_one (k := k) (Λ := Λ)
+  exact ⟨e ≪≫ eqToIso (by rw [mul_inv_cancel]) ≪≫ e'⟩
 
 end Properties
 
