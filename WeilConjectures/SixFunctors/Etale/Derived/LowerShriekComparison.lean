@@ -72,9 +72,9 @@ D(d.i)_! ⋙ R(d.g)_*
 
 ## Implementation notes
 
-Only the bounded below variant is constructed. The unbounded variant would need both the
-unbounded derived adjunction `Dq^* ⊣ Rq_*` and the unbounded composition isomorphism for
-derived pushforwards, neither of which is available.
+Only the bounded below variant is constructed here. The unbounded variant is
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationComparison`, in
+`WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded`.
 
 That the comparison is an isomorphism is proper base change and is not proved here.
 

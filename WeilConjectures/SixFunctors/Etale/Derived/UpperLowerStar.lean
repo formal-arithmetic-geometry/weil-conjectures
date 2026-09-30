@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
@@ -61,9 +62,11 @@ the type of the functor is spelled out.
   pullback of a sheaf placed in degree `0` is the pullback of the sheaf placed in degree
   `0`.
 
-- `AlgebraicGeometry.Etale.derivedUpperStarLowerStarAdjunction` and
+- `AlgebraicGeometry.Etale.mapDerivedUpperStarLowerStarAdjunction`,
+  `AlgebraicGeometry.Etale.derivedUpperStarLowerStarAdjunction` and
   `AlgebraicGeometry.Etale.derivedUpperStarLowerStarAdjunctionPlus` : the derived
-  adjunctions `L((g)^*[A]) ⊣ R((g)_*[A])` and `D+((g)^*[A]) ⊣ R+((g)_*[A])`.
+  adjunctions `D((g)^*[A]) ⊣ R((g)_*[A])`, `L((g)^*[A]) ⊣ R((g)_*[A])` and
+  `D+((g)^*[A]) ⊣ R+((g)_*[A])`. The first one needs no monoidal structure on `A`.
 
 -/
 
@@ -105,6 +108,17 @@ noncomputable example :
     DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
   R+((g)_*[A])
+
+/-- The pushforward `g_*` preserves K-injective complexes, being right adjoint to the exact
+pullback `g^*`. -/
+instance preservesKInjectiveComplexes_lowerStar : ((g)_*[A]).PreservesKInjectiveComplexes :=
+  (Etale.upperStarLowerStarAdjunction A g).preservesKInjectiveComplexes
+
+/-- The derived adjunction `g^* ⊣ Rg_*` on the unbounded derived categories of étale sheaves,
+where the pullback `g^*`, being exact, is applied levelwise. Unlike
+`Etale.derivedUpperStarLowerStarAdjunction`, it needs no monoidal structure on `A`. -/
+noncomputable def mapDerivedUpperStarLowerStarAdjunction : D((g)^*[A]) ⊣ R((g)_*[A]) :=
+  (Etale.upperStarLowerStarAdjunction A g).mapDerivedCategoryRightDerivedAdjunction
 
 end Etale
 
