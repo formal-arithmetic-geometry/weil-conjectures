@@ -144,6 +144,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
+public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.AcyclicSwallowing
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.CardinalGenerated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.CardinalGeneratedCover
@@ -632,11 +633,13 @@ public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint

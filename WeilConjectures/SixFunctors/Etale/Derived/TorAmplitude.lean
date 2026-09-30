@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
@@ -35,10 +36,12 @@ are typed: the bounded constructible complexes of finite Tor amplitude.
 
 ## Implementation notes
 
-Homology concentration in an interval is not an étale notion and is not defined here: it is
-`DerivedCategory.homologyConcentratedIn` of
+Neither homology concentration in an interval nor Tor amplitude is an étale notion, and neither
+is defined here: they are `DerivedCategory.homologyConcentratedIn` of
 `WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure`, phrased through the
-canonical t-structure so that the t-structure API applies to it.
+canonical t-structure so that the t-structure API applies to it, and
+`DerivedCategory.torAmplitudeIn` of `WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude`,
+for the derived tensor product. The definitions below specialise them to `D(X_ét)`.
 
 The blueprint's second small category `D_c^[a, b](X, A)` is not realised as a category: the
 statements that speak about it — those of
@@ -68,12 +71,9 @@ namespace Etale.DerivedCategory
 
 /-- An object `M` of `D(X_ét)` has *Tor amplitude in `[a, b]`* if for every étale sheaf `F` the
 derived tensor product `M ⊗ᴸ F` has homology concentrated in `[a, b]`. -/
-def torAmplitudeIn (a b : ℤ) :
+abbrev torAmplitudeIn (a b : ℤ) :
     ObjectProperty (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
-  fun M ↦ ∀ F : Sheaf X.smallEtaleTopology A,
-    _root_.DerivedCategory.homologyConcentratedIn a b
-      (((-⊗ᴸ-(X)[A]).obj M).obj
-        ((_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F))
+  _root_.DerivedCategory.torAmplitudeIn _ a b
 
 variable {A X}
 
@@ -81,21 +81,20 @@ variable {A X}
 lemma torAmplitudeIn.mono {a b a' b' : ℤ} (ha : a' ≤ a) (hb : b ≤ b')
     {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hM : torAmplitudeIn A X a b M) : torAmplitudeIn A X a' b' M :=
-  fun F ↦ (hM F).mono ha hb
+  _root_.DerivedCategory.torAmplitudeIn.mono ha hb hM
 
 variable (A X)
 
 /-- An object of `D(X_ét)` has *finite Tor amplitude* if it has Tor amplitude in some
 interval `[a, b]`. -/
-def finiteTorAmplitude :
+abbrev finiteTorAmplitude :
     ObjectProperty (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
-  fun M ↦ ∃ a b : ℤ, torAmplitudeIn A X a b M
+  _root_.DerivedCategory.finiteTorAmplitude _
 
 end Etale.DerivedCategory
 
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [HasSmallSiteSheafify A]
 
 namespace Etale
 
@@ -105,7 +104,6 @@ noncomputable def DerivedCategory.constructibleFiniteTor :
     ObjectProperty (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
   Etale.DerivedCategory.boundedConstructible A X ⊓ Etale.DerivedCategory.finiteTorAmplitude A X
 
-omit [HasSmallSiteSheafify A] in
 lemma DerivedCategory.constructibleFiniteTor_iff
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     DerivedCategory.constructibleFiniteTor A X K ↔
@@ -122,7 +120,6 @@ noncomputable def DerivedCategory.constructibleTorAmplitudeIn (a b : ℤ) :
     _root_.DerivedCategory.homologyConcentratedIn a b ⊓
     Etale.DerivedCategory.torAmplitudeIn A X a b
 
-omit [HasSmallSiteSheafify A] in
 lemma DerivedCategory.constructibleTorAmplitudeIn_iff (a b : ℤ)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     DerivedCategory.constructibleTorAmplitudeIn A X a b K ↔
@@ -133,22 +130,15 @@ lemma DerivedCategory.constructibleTorAmplitudeIn_iff (a b : ℤ)
 
 variable {A X}
 
-omit [HasSmallSiteSheafify A] in
 /-- An object of `D(X_ét)` lies in `Dctf(X, A)` exactly when, for some interval `[a, b]`, it
 is bounded constructible with homology concentrated in `[a, b]` and Tor amplitude in
 `[a, b]`. -/
 lemma DerivedCategory.exists_constructibleTorAmplitudeIn_iff_constructibleFiniteTor
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     (∃ a b : ℤ, DerivedCategory.constructibleTorAmplitudeIn A X a b K) ↔
-      DerivedCategory.constructibleFiniteTor A X K := by
-  constructor
-  · rintro ⟨a, b, ⟨hbc, -⟩, hta⟩
-    exact ⟨hbc, a, b, hta⟩
-  · rintro ⟨hbc, a, b, hta⟩
-    obtain ⟨c, d, hcd⟩ :=
-      (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded K).2 hbc.1
-    exact ⟨min a c, max b d, ⟨hbc, hcd.mono (min_le_right _ _) (le_max_right _ _)⟩,
-      hta.mono (min_le_left _ _) (le_max_left _ _)⟩
+      DerivedCategory.constructibleFiniteTor A X K :=
+  _root_.DerivedCategory.exists_inf_homologyConcentratedIn_inf_torAmplitudeIn_iff
+    (fun _ hK ↦ hK.1) K
 
 variable (A X)
 
@@ -161,7 +151,7 @@ noncomputable def DerivedCategoryFiniteTor : Type _ :=
   (DerivedCategory.constructibleFiniteTor A X).FullSubcategory
 
 noncomputable instance : Category (DerivedCategoryFiniteTor A X) :=
-  inferInstanceAs <| Category (ObjectProperty.FullSubcategory _)
+  inferInstanceAs <| Category (DerivedCategory.constructibleFiniteTor A X).FullSubcategory
 
 /-- The inclusion of `Dctf(X, A)` into the derived category of étale sheaves. -/
 noncomputable def DerivedCategoryFiniteTor.ι :
