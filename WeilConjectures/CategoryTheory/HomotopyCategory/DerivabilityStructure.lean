@@ -82,7 +82,8 @@ abbrev cochainProp : ObjectProperty (CochainComplex A ℤ) :=
 
 /-- The inclusion of the complexes satisfying `cochainProp P`, with the quasi-isomorphisms. -/
 @[simps]
-def T : LocalizerMorphism ((HomologicalComplex.quasiIso A (.up ℤ)).inverseImage (cochainProp P).ι)
+def T : LocalizerMorphism
+    ((HomologicalComplex.quasiIso A (.up ℤ)).inverseImage (cochainProp P).ι)
     (HomologicalComplex.quasiIso A (.up ℤ)) where
   functor := (cochainProp P).ι
   map := by rfl
@@ -107,7 +108,8 @@ abbrev R : LocalizerMorphism (HomologicalComplex.quasiIso A (.up ℤ)) (quasiIso
   map _ _ _ _ := by simpa [quotient_map_mem_quasiIso_iff]
 
 /-- The square of localizer morphisms commutes (definitionally). -/
-def iso : (T P).functor ⋙ (R A).functor ≅ (L P).functor ⋙ (quasiIsoLocalizerMorphism P).functor :=
+def iso :
+    (T P).functor ⋙ (R A).functor ≅ (L P).functor ⋙ (quasiIsoLocalizerMorphism P).functor :=
   Iso.refl _
 
 /-- The homotopy equivalences between complexes satisfying `cochainProp P`. -/

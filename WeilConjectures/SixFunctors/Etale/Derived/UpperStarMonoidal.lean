@@ -31,6 +31,9 @@ left derivability structure by
 - `AlgebraicGeometry.Etale.kFlatUpperStar g`: the K-flat complexes on `Y_ét` whose pullback
   by `g` is K-flat, and `AlgebraicGeometry.Etale.isLeftDerivabilityStructure_kFlatUpperStar`:
   they form a left derivability structure.
+- `AlgebraicGeometry.Etale.derivedTensorLeftDerivedUpperStarCounit` and
+  `AlgebraicGeometry.Etale.leftDerivedUpperStarDerivedTensorCounit`: the counits of the two
+  derived bifunctors below.
 - `AlgebraicGeometry.Etale.isLeftDerivedFunctor₂_derivedTensor_leftDerivedUpperStar`:
   `(K, M) ↦ Lg^*K ⊗ᴸ Lg^*M` is the total left derived functor of `(A, B) ↦ g^*A ⊗ g^*B`.
 - `AlgebraicGeometry.Etale.isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor`:
@@ -84,7 +87,8 @@ lemma kFlatUpperStar_quotient_obj_resolutionFunctor_obj
       ObjectProperty.flat := by
     rintro X ⟨Y, ⟨e⟩⟩
     exact ObjectProperty.prop_of_iso _ e Y.2
-  refine ⟨(HomotopyCategory.kFlat_quotient_obj_iff _).2 (Λ.kFlat_resolutionFunctor_obj hι K), ?_⟩
+  refine ⟨(HomotopyCategory.kFlat_quotient_obj_iff _).2
+    (Λ.kFlat_resolutionFunctor_obj hι K), ?_⟩
   exact (HomotopyCategory.kFlat_quotient_obj_iff _).2
     (kFlat_upperStar_mapHomologicalComplex_obj g
       (Λ.colimitOfShapeFlatResolutionFunctorObj hι K).colimitsOfShape)
@@ -98,6 +102,76 @@ instance isLeftDerivabilityStructure_kFlatUpperStar :
   HomotopyCategory.isLeftDerivabilityStructure_quasiIsoLocalizerMorphism _
     Λ.reduced.resolutionNatTrans (fun _ ↦ inferInstance)
     (kFlatUpperStar_quotient_obj_resolutionFunctor_obj A g Λ.reduced)
+
+section
+
+open DerivedCategory Functor.LaxMonoidal
+
+/-- The counit exhibiting `(K, M) ↦ Lg^*K ⊗ᴸ Lg^*M` as the total left derived functor of
+`(A, B) ↦ g^*A ⊗ g^*B`: the counits of `Lg^*` on both factors, followed by the lax monoidal
+structure of `Qh : K(Z_ét) ⥤ D(Z_ét)`. -/
+noncomputable def derivedTensorLeftDerivedUpperStarCounit :
+    (((Functor.whiskeringLeft₂ _).obj (Qh (C := Sheaf Y.smallEtaleTopology A))).obj Qh).obj
+        ((((Functor.whiskeringLeft₂ _).obj L((g)^*[A])).obj L((g)^*[A])).obj (-⊗ᴸ-(Z)[A])) ⟶
+      (((Functor.whiskeringLeft₂ _).obj ((g)^*[A].mapHomotopyCategory (.up ℤ))).obj
+        ((g)^*[A].mapHomotopyCategory (.up ℤ))).obj
+          ((Functor.postcompose₂.obj Qh).obj (curriedTensor _)) :=
+  (((Functor.whiskeringLeft₂ _).map (g)^*[A].leftDerivedFunctorCounit).app
+      (Qh ⋙ L((g)^*[A]))).app (-⊗ᴸ-(Z)[A]) ≫
+    (((Functor.whiskeringLeft₂ _).obj ((g)^*[A].mapHomotopyCategory (.up ℤ) ⋙ Qh)).map
+      (g)^*[A].leftDerivedFunctorCounit).app (-⊗ᴸ-(Z)[A]) ≫
+    (((Functor.whiskeringLeft₂ _).obj ((g)^*[A].mapHomotopyCategory (.up ℤ))).obj
+        ((g)^*[A].mapHomotopyCategory (.up ℤ))).map (μNatTrans Qh)
+
+/-- The counit exhibiting `(K, M) ↦ Lg^*(K ⊗ᴸ M)` as the total left derived functor of
+`(A, B) ↦ g^*(A ⊗ B)`: `Lg^*` applied to the lax monoidal structure of
+`Qh : K(Y_ét) ⥤ D(Y_ét)`, followed by the counit of `Lg^*`. -/
+noncomputable def leftDerivedUpperStarDerivedTensorCounit :
+    (((Functor.whiskeringLeft₂ _).obj (Qh (C := Sheaf Y.smallEtaleTopology A))).obj Qh).obj
+        ((Functor.postcompose₂.obj L((g)^*[A])).obj (-⊗ᴸ-(Y)[A])) ⟶
+      (Functor.postcompose₂.obj ((g)^*[A].mapHomotopyCategory (.up ℤ) ⋙ Qh)).obj
+        (curriedTensor _) :=
+  (Functor.postcompose₂.obj L((g)^*[A])).map (μNatTrans Qh) ≫
+    (Functor.postcompose₂.map (g)^*[A].leftDerivedFunctorCounit).app (curriedTensor _)
+
+/-- `(K, M) ↦ Lg^*K ⊗ᴸ Lg^*M` is the total left derived functor of `(A, B) ↦ g^*A ⊗ g^*B`
+from `K(Y_ét) × K(Y_ét)` to `D(Z_ét)`. -/
+theorem isLeftDerivedFunctor₂_derivedTensor_leftDerivedUpperStar :
+    ((((Functor.whiskeringLeft₂ _).obj L((g)^*[A])).obj L((g)^*[A])).obj
+      (-⊗ᴸ-(Z)[A])).IsLeftDerivedFunctor₂ (derivedTensorLeftDerivedUpperStarCounit A g)
+        (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
+  refine LocalizerMorphism.isLeftDerivedFunctor₂_of_isLeftDerivabilityStructure
+    (HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g))
+    (HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)) _ (fun X₁ X₂ ↦ ?_)
+  have := isLeftDerivedFunctor₂_derivedTensor A Z
+  have := (MorphismProperty.id_prod_kFlat_derives_curriedTensor
+    (HomotopyCategory.quasiIso (Sheaf Z.smallEtaleTopology A) (.up ℤ))
+      Qh).isIso_of_isLeftDerivabilityStructure (LF := -⊗ᴸ-(Z)[A]) (μNatTrans Qh)
+    (((g)^*[A].mapHomotopyCategory _).obj X₁.obj) ⟨_, X₂.property.2⟩
+  simp only [derivedTensorLeftDerivedUpperStarCounit, NatTrans.comp_app]
+  refine IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' inferInstance ?_)
+  exact this
+
+/-- `(K, M) ↦ Lg^*(K ⊗ᴸ M)` is the total left derived functor of `(A, B) ↦ g^*(A ⊗ B)`
+from `K(Y_ét) × K(Y_ét)` to `D(Z_ét)`. -/
+theorem isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor :
+    ((Functor.postcompose₂.obj L((g)^*[A])).obj (-⊗ᴸ-(Y)[A])).IsLeftDerivedFunctor₂
+      (leftDerivedUpperStarDerivedTensorCounit A g)
+        (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
+  refine LocalizerMorphism.isLeftDerivedFunctor₂_of_isLeftDerivabilityStructure
+    (HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g))
+    (HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)) _ (fun X₁ X₂ ↦ ?_)
+  have := isLeftDerivedFunctor₂_derivedTensor A Y
+  have := (MorphismProperty.id_prod_kFlat_derives_curriedTensor
+    (HomotopyCategory.quasiIso (Sheaf Y.smallEtaleTopology A) (.up ℤ))
+      Qh).isIso_of_isLeftDerivabilityStructure (LF := -⊗ᴸ-(Y)[A]) (μNatTrans Qh) X₁.obj
+        ⟨_, X₂.property.1⟩
+  have : IsIso (((μNatTrans Qh).app X₁.obj).app X₂.obj) := this
+  simp only [leftDerivedUpperStarDerivedTensorCounit, NatTrans.comp_app]
+  refine IsIso.comp_isIso' ?_ inferInstance
+  exact Functor.map_isIso L((g)^*[A]) (((μNatTrans Qh).app X₁.obj).app X₂.obj)
+
+end
 
 end Etale
 
