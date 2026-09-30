@@ -4,6 +4,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
 public import WeilConjectures.Algebra.Homology.InternalHom
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Cube
@@ -351,6 +352,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
 public import WeilConjectures.Mathlib.Algebra.Exact.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
