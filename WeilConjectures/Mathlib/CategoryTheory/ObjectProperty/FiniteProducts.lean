@@ -22,7 +22,8 @@ open Limits
 
 variable {C D : Type*} [Category* C] [Category* D] (P : ObjectProperty C) (F : D ⥤ C)
 
-instance [P.IsClosedUnderFiniteProducts] [PreservesFiniteProducts F] :
+instance IsClosedUnderFiniteProducts.inverseImage [P.IsClosedUnderFiniteProducts]
+    [PreservesFiniteProducts F] :
     (P.inverseImage F).IsClosedUnderFiniteProducts where
   isClosedUnderLimitsOfShape _ _ := inferInstance
 

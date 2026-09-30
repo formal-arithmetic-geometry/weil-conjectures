@@ -149,14 +149,26 @@ section Map
 variable {D : Type u'} [Category.{v'} D] [Preadditive C] [Preadditive D] {F : C ⥤ C}
   {G : D ⥤ D} [F.Additive] [G.Additive] {L : C ⥤ D} [L.Additive]
 
+/-- Transporting algebras along an additive functor `L`, compatibly with additive endofunctors
+`F` and `G`, is additive: on morphisms it is `L.map`. -/
 instance Algebra.additive_mapOfNatTrans (e : L ⋙ G ⟶ F ⋙ L) :
     (Algebra.mapOfNatTrans e).Additive where
   map_add := Algebra.Hom.ext L.map_add
 
+/-- Transporting algebras with invertible structure morphism along an additive functor `L`,
+compatibly with additive endofunctors `F` and `G`, is additive: on underlying morphisms it is
+`L.map`. -/
 instance IsoAlgebra.additive_mapOfNatIso (e : L ⋙ G ≅ F ⋙ L) :
-    (IsoAlgebra.mapOfNatIso e).Additive :=
-  inferInstanceAs ((Algebra.IsIsoStr G).lift (IsoAlgebra.ι F ⋙ Algebra.mapOfNatTrans e.hom)
-    _).Additive
+    (IsoAlgebra.mapOfNatIso e).Additive where
+  map_add := (IsoAlgebra.ι G).map_injective (Algebra.Hom.ext L.map_add)
+
+/-- The transport `IsoAlgebra.mapOfNatIso e`, restricted to full subcategories `P` and `Q` of
+algebras with invertible structure morphism, is additive. -/
+lemma IsoAlgebra.additive_lift_mapOfNatIso {P : ObjectProperty (IsoAlgebra F)}
+    {Q : ObjectProperty (IsoAlgebra G)} (e : L ⋙ G ≅ F ⋙ L)
+    (h : ∀ K : P.FullSubcategory, Q ((IsoAlgebra.mapOfNatIso e).obj K.obj)) :
+    (Q.lift (P.ι ⋙ IsoAlgebra.mapOfNatIso e) h).Additive :=
+  inferInstance
 
 end Map
 

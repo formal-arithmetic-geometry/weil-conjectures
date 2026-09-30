@@ -40,9 +40,10 @@ noncomputable def artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     WeilSheaf k₀ l (affineLine k₀) := sorry
 
 -- TODO(unify): sk-def-ft
-/-- The Fourier–Deligne transform `FT_ψ` from the bounded derived category of Weil complexes
-on the affine line to that of the dual affine line, with Laumon's shift by the relative
-dimension one. -/
+/-- The Fourier–Deligne transform `FT_ψ` from Weil complexes on the affine line to Weil
+complexes on the dual affine line, with Laumon's shift by the relative dimension one. In the
+blueprint it is a triangulated functor between the bounded derived categories of Weil sheaves;
+the provisional `AlgebraicGeometry.WeilComplex` is not triangulated. -/
 noncomputable def fourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) :
     WeilComplex k₀ l (affineLine k₀) ⥤ WeilComplex k₀ l (affineLine k₀) := sorry
 
@@ -51,8 +52,9 @@ instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).Add
 
 -- TODO(unify): sk-thm-inversion
 /-- Fourier inversion: for a nontrivial additive character the Fourier–Deligne transform is an
-equivalence of the bounded derived categories of the two dual lines. Owned by the blueprint
-block `sec-fourier-transform`; see `WeilConjectures.WeilSheaf.Defs`. -/
+equivalence between the categories of Weil complexes on the two dual lines; in the blueprint,
+between their bounded derived categories. Owned by the blueprint block
+`sec-fourier-transform`; see `WeilConjectures.WeilSheaf.Defs`. -/
 theorem isEquivalence_fourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) :
     (fourierTransform (l := l) ψ).IsEquivalence := sorry
 

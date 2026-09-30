@@ -24,7 +24,10 @@ one copy.
 `AlgebraicGeometry.WeilSheaf` and `AlgebraicGeometry.WeilComplex` are defined in
 `WeilConjectures.WeilSheaf.Category`: constructible étale `ℚ̄_ℓ`-sheaves, resp. objects of
 `D(X̄_ét)` with bounded constructible homology, on the geometric fiber `X̄ = X ×_{k₀} k̄`, with
-an isomorphism `Fr_X^* F ≅ F` for the geometric Galois Frobenius `Fr_X`. The notions built on
+an isomorphism `Fr_X^* F ≅ F` for the geometric Galois Frobenius `Fr_X`. These definitions are
+a degenerate scaffold: constructible sheaves of discrete `ℚ̄_ℓ`-modules are zero, so every Weil
+sheaf and every Weil complex is zero, and `WeilComplex` is not triangulated; see the
+implementation notes of `WeilConjectures.WeilSheaf.Category`. The notions built on
 them in `WeilConjectures.WeilSheaf.Stalk`, `WeilConjectures.WeilSheaf.OpenImmersion`,
 `WeilConjectures.WeilSheaf.LowerShriek`, `WeilConjectures.WeilSheaf.Dual` and
 `WeilConjectures.WeilSheaf.Fourier` are still placeholders with `sorry` bodies, each carrying a
@@ -51,7 +54,8 @@ instead, which `FrobeniusModule.IsPureOfWeightOver` names.
 ## Main declarations
 
 - `AlgebraicGeometry.WeilSheaf` and `AlgebraicGeometry.WeilComplex`: the abelian category of
-  constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme and the category of Weil complexes.
+  constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme and the category of Weil complexes, both
+  provisional.
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight`,
   `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost` and `AlgebraicGeometry.WeilSheaf.IsReal`: the
   weight conditions and the reality condition.

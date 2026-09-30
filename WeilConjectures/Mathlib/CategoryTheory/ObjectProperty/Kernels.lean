@@ -25,14 +25,16 @@ open Limits
 variable {C D : Type*} [Category* C] [Category* D] [HasZeroMorphisms C] [HasZeroMorphisms D]
   (P : ObjectProperty C) (F : D ⥤ C) [F.PreservesZeroMorphisms]
 
-instance [P.IsClosedUnderKernels] [PreservesLimitsOfShape WalkingParallelPair F] :
+instance IsClosedUnderKernels.inverseImage [P.IsClosedUnderKernels]
+    [PreservesLimitsOfShape WalkingParallelPair F] :
     (P.inverseImage F).IsClosedUnderKernels where
   kernels_le := by
     rintro _ ⟨f, k, hk, hf⟩
     exact P.prop_of_isLimit_kernelFork
       (KernelFork.isLimitMapConeEquiv k F (isLimitOfPreserves F hk)) hf.1 hf.2
 
-instance [P.IsClosedUnderCokernels] [PreservesColimitsOfShape WalkingParallelPair F] :
+instance IsClosedUnderCokernels.inverseImage [P.IsClosedUnderCokernels]
+    [PreservesColimitsOfShape WalkingParallelPair F] :
     (P.inverseImage F).IsClosedUnderCokernels where
   cokernels_le := by
     rintro _ ⟨f, k, hk, hf⟩

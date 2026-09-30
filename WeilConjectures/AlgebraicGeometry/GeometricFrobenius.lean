@@ -65,6 +65,10 @@ Constructing the comparison isomorphism with `(Fr_{X₀} × 𝟙)^*` — needed 
 trace formula, whose intersection-theoretic side requires the `k̄`-linear endomorphism
 `Fr_{X₀} × 𝟙` — is left as a TODO.
 
+The automorphism `σ` is `Spec` of the ring automorphism `x ↦ x ^ (1 / #k)` of `k̄`, so pulling
+back a function along `g_X = 𝟙 X₀ × σ` applies the geometric Frobenius to its coefficients; this
+is the automorphism `γ_X` of the blueprint, induced by `σ_geom`, and not its inverse.
+
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Hom.geometricFiber`: the geometric fiber
@@ -124,7 +128,17 @@ def geometricFiberToAlgebraicClosure :
   pullback.snd f (Scheme.specAlgebraicClosure k).hom
 
 /-- The defining square of the geometric fiber commutes:
-`p_X ≫ f = a_X ≫ (Spec k̄ ⟶ Spec k)`. -/
+
+```
+        p_X
+    X ──────▶ X₀
+    │          │
+  a_X          f
+    ▼          ▼
+  Spec k̄ ───▶ Spec k
+```
+
+that is `p_X ≫ f = a_X ≫ (Spec k̄ ⟶ Spec k)`. -/
 @[reassoc]
 theorem geometricFiber_condition :
     f.geometricFiberProj ≫ f =
@@ -138,55 +152,78 @@ variable {f} {Y₀ Z₀ : Scheme.{u}} {g : Y₀ ⟶ Spec (.of k)} {e : Z₀ ⟶ 
 def geometricFiberMap (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) : f.geometricFiber ⟶ g.geometricFiber :=
   pullback.map _ _ _ _ φ (𝟙 _) (𝟙 _) (by simp [h]) (by simp)
 
+/-- The base change `φ × 𝟙` lies over `φ`: `(φ × 𝟙) ≫ p_Y = p_X ≫ φ`. -/
 @[reassoc (attr := simp)]
-theorem geometricFiberMap_geometricFiberProj (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) :
+theorem geometricFiberMap_comp_geometricFiberProj (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) :
     geometricFiberMap φ h ≫ g.geometricFiberProj = f.geometricFiberProj ≫ φ :=
   pullback.lift_fst _ _ _
 
+/-- The base change `φ × 𝟙` is a morphism over `k̄`: `(φ × 𝟙) ≫ a_Y = a_X`. -/
 @[reassoc (attr := simp)]
-theorem geometricFiberMap_geometricFiberToAlgebraicClosure (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) :
+theorem geometricFiberMap_comp_geometricFiberToAlgebraicClosure (φ : X₀ ⟶ Y₀)
+    (h : φ ≫ g = f) :
     geometricFiberMap φ h ≫ g.geometricFiberToAlgebraicClosure =
       f.geometricFiberToAlgebraicClosure := by
   simp [geometricFiberMap, geometricFiberToAlgebraicClosure]
 
+/-- The base change of the identity is the identity. -/
 @[simp]
 theorem geometricFiberMap_id : geometricFiberMap (𝟙 X₀) (Category.id_comp f) = 𝟙 _ := by
-  apply pullback.hom_ext <;> simp only [geometricFiberMap, geometricFiber, pullback.lift_fst,
-    pullback.lift_snd, Category.id_comp, Category.comp_id]
+  apply pullback.hom_ext <;> simp [geometricFiberMap, geometricFiber]
 
+/-- Base change to `k̄` is functorial: `(φ ≫ ψ) × 𝟙 = (φ × 𝟙) ≫ (ψ × 𝟙)`. -/
 @[reassoc]
 theorem geometricFiberMap_comp (φ : X₀ ⟶ Y₀) (ψ : Y₀ ⟶ Z₀) (h : φ ≫ g = f) (h' : ψ ≫ e = g) :
     geometricFiberMap (φ ≫ ψ) (by rw [Category.assoc, h', h]) =
       geometricFiberMap φ h ≫ geometricFiberMap ψ h' := by
   apply pullback.hom_ext <;> simp [geometricFiberMap]
 
-/-- The base change square of `φ` to the algebraic closure is Cartesian. -/
+/-- The base change square of `φ` to the algebraic closure is Cartesian:
+
+```
+        φ × 𝟙
+    X ──────────▶ Y
+    │             │
+  p_X           p_Y
+    ▼             ▼
+    X₀ ─────────▶ Y₀
+           φ
+```
+-/
 theorem isPullback_geometricFiberMap (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) :
     IsPullback (geometricFiberMap φ h) f.geometricFiberProj g.geometricFiberProj φ := by
   subst h
   refine IsPullback.of_right (h₁₂ := g.geometricFiberToAlgebraicClosure) (h₂₂ := g)
     (v₁₃ := (Scheme.specAlgebraicClosure k).hom) ?_ (pullback.lift_fst _ _ _)
     (IsPullback.of_hasPullback g _).flip
-  rw [geometricFiberMap_geometricFiberToAlgebraicClosure]
+  rw [geometricFiberMap_comp_geometricFiberToAlgebraicClosure]
   exact (IsPullback.of_hasPullback (φ ≫ g) _).flip
+
+/-- The base change `φ × 𝟙` of a morphism `φ` with a property stable under base change has
+the same property. -/
+theorem geometricFiberMap_of_isStableUnderBaseChange {P : MorphismProperty Scheme.{u}}
+    [P.IsStableUnderBaseChange] (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) (hφ : P φ) :
+    P (geometricFiberMap φ h) :=
+  P.of_isPullback (isPullback_geometricFiberMap φ h).flip hφ
+
+/-! The base change to `k̄` of an open immersion, separated, quasi-compact or locally of finite
+type morphism is again one, these properties being stable under base change. -/
 
 instance (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) [IsOpenImmersion φ] :
     IsOpenImmersion (geometricFiberMap φ h) :=
-  MorphismProperty.of_isPullback (P := @IsOpenImmersion) (isPullback_geometricFiberMap φ h).flip
-    ‹_›
+  geometricFiberMap_of_isStableUnderBaseChange (P := @IsOpenImmersion) φ h ‹_›
 
 instance (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) [IsSeparated φ] :
     IsSeparated (geometricFiberMap φ h) :=
-  MorphismProperty.of_isPullback (P := @IsSeparated) (isPullback_geometricFiberMap φ h).flip ‹_›
+  geometricFiberMap_of_isStableUnderBaseChange (P := @IsSeparated) φ h ‹_›
 
 instance (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) [QuasiCompact φ] :
     QuasiCompact (geometricFiberMap φ h) :=
-  MorphismProperty.of_isPullback (P := @QuasiCompact) (isPullback_geometricFiberMap φ h).flip ‹_›
+  geometricFiberMap_of_isStableUnderBaseChange (P := @QuasiCompact) φ h ‹_›
 
 instance (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) [LocallyOfFiniteType φ] :
     LocallyOfFiniteType (geometricFiberMap φ h) :=
-  MorphismProperty.of_isPullback (P := @LocallyOfFiniteType)
-    (isPullback_geometricFiberMap φ h).flip ‹_›
+  geometricFiberMap_of_isStableUnderBaseChange (P := @LocallyOfFiniteType) φ h ‹_›
 
 end Scheme.Hom
 
@@ -248,7 +285,15 @@ def geometricGaloisFrobenius : f.geometricFiber ≅ f.geometricFiber :=
     (𝟙 (Spec (.of k))) (by simp) (by simp))
 
 /-- The geometric Galois Frobenius of the geometric fiber commutes with the projection to
-the model: `g_X ≫ p_X = p_X`. -/
+the model:
+
+```
+        g_X          p_X
+    X ──────▶ X ──────▶ X₀   =   X ──────▶ X₀
+                                      p_X
+```
+
+that is `g_X ≫ p_X = p_X`. -/
 @[reassoc (attr := simp)]
 theorem geometricGaloisFrobenius_hom_comp_geometricFiberProj :
     f.geometricGaloisFrobenius.hom ≫ f.geometricFiberProj = f.geometricFiberProj := by
@@ -302,7 +347,19 @@ theorem isPullback_geometricGaloisFrobenius :
 variable {f} {Y₀ : Scheme.{u}} {g : Y₀ ⟶ Spec (.of k)}
 
 /-- The base change to `k̄` of a morphism over `k` commutes with the geometric Galois
-Frobenii: `(φ × 𝟙) ≫ g_Y = g_X ≫ (φ × 𝟙)`. -/
+Frobenii:
+
+```
+        φ × 𝟙
+    X ──────────▶ Y
+    │             │
+  g_X           g_Y
+    ▼             ▼
+    X ──────────▶ Y
+        φ × 𝟙
+```
+
+that is `(φ × 𝟙) ≫ g_Y = g_X ≫ (φ × 𝟙)`. -/
 @[reassoc]
 theorem geometricFiberMap_comp_geometricGaloisFrobenius (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) :
     geometricFiberMap φ h ≫ g.geometricGaloisFrobenius.hom =
