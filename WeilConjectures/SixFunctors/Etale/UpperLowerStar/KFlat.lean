@@ -26,8 +26,7 @@ flat sheaves to flat sheaves, by `CategoryTheory.Functor.PreservesFlat`. We reco
 the hypothesis class `AlgebraicGeometry.Etale.UpperStarPreservesFlat A` on the coefficient
 category `A`, and deduce from it that `g^*` sends flat resolutions to K-flat complexes.
 For `A = ModuleCat.{u + 1} Λ`, where flatness can be checked on stalks and `g^*`
-preserves stalks, the instance is in
-`WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat`.
+preserves stalks, the instance is `AlgebraicGeometry.Etale.upperStarPreservesFlat_moduleCat`.
 
 The monoidal structure on étale sheaves used here is the global instance
 `CategoryTheory.GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall`. It is

@@ -173,6 +173,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
+public import WeilConjectures.CategoryTheory.Sites.Point.Flat
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlus
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import WeilConjectures.ClosedPoints
