@@ -14,6 +14,10 @@ public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Compositio
 The class `HomotopyCategory.quasiIso C c` is the intersection over `n` of the inverse images
 of the isomorphisms under the homology functors (`HomotopyCategory.quasiIso_eq_iInf`), hence
 it has the two-out-of-three property (`HomotopyCategory.hasTwoOutOfThreeProperty_quasiIso`).
+
+The quotient functor `C(A) ⥤ K(A)` of an abelian category `A`, as a localizer morphism for
+the quasi-isomorphisms (`HomotopyCategory.quotientLocalizerMorphism`), is a localized
+equivalence.
 -/
 
 @[expose] public section
@@ -36,5 +40,22 @@ lemma quasiIso_eq_iInf : quasiIso C c =
 instance hasTwoOutOfThreeProperty_quasiIso : (quasiIso C c).HasTwoOutOfThreeProperty := by
   rw [quasiIso_eq_iInf]
   infer_instance
+
+/-- The quotient functor `HomologicalComplex C c ⥤ HomotopyCategory C c`, as a localizer
+morphism for the quasi-isomorphisms on both sides. -/
+abbrev quotientLocalizerMorphism :
+    LocalizerMorphism (HomologicalComplex.quasiIso C c) (quasiIso C c) where
+  functor := quotient _ _
+  map _ _ _ _ := by simpa [quotient_map_mem_quasiIso_iff]
+
+variable (A : Type*) [Category A] [Abelian A]
+
+instance : (quotientLocalizerMorphism A (.up ℤ)).IsLocalizedEquivalence := by
+  have : (HomologicalComplex.quasiIso A (.up ℤ)).HasLocalization := .standard _
+  exact LocalizerMorphism.IsLocalizedEquivalence.of_isLocalization_of_isLocalization
+    (quotientLocalizerMorphism A (.up ℤ)) HomologicalComplexUpToQuasiIso.Qh
+
+instance : (quotientLocalizerMorphism A (.up ℤ)).functor.EssSurj :=
+  inferInstanceAs (quotient A (.up ℤ)).EssSurj
 
 end HomotopyCategory
