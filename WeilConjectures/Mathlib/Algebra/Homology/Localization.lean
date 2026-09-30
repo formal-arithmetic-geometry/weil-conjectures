@@ -1,14 +1,19 @@
 /-
-Copyright (c) 2026 Claude. All rights reserved.
+Copyright (c) 2026 Nailin Guan. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
+Authors: Nailin Guan
 -/
 module
 
 public import Mathlib.Algebra.Homology.Localization
+public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Composition
 
 /-!
 # Quasi-isomorphisms in the homotopy category satisfy the two-out-of-three property
+
+The class `HomotopyCategory.quasiIso C c` is the intersection over `n` of the inverse images
+of the isomorphisms under the homology functors (`HomotopyCategory.quasiIso_eq_iInf`), hence
+it has the two-out-of-three property (`HomotopyCategory.hasTwoOutOfThreeProperty_quasiIso`).
 -/
 
 @[expose] public section
@@ -20,16 +25,16 @@ namespace HomotopyCategory
 variable (C : Type*) [Category C] {ι : Type*} (c : ComplexShape ι) [Preadditive C]
   [CategoryWithHomology C]
 
-instance : (quasiIso C c).HasTwoOutOfThreeProperty where
-  of_postcomp f g hg hfg n := by
-    have := hg n
-    have : IsIso ((homologyFunctor C c n).map f ≫ (homologyFunctor C c n).map g) := by
-      simpa only [Functor.map_comp] using hfg n
-    exact IsIso.of_isIso_comp_right _ ((homologyFunctor C c n).map g)
-  of_precomp f g hf hfg n := by
-    have := hf n
-    have : IsIso ((homologyFunctor C c n).map f ≫ (homologyFunctor C c n).map g) := by
-      simpa only [Functor.map_comp] using hfg n
-    exact IsIso.of_isIso_comp_left ((homologyFunctor C c n).map f) _
+/-- A morphism of the homotopy category is a quasi-isomorphism if and only if its image under
+every homology functor is an isomorphism. -/
+lemma quasiIso_eq_iInf : quasiIso C c =
+    ⨅ n, (MorphismProperty.isomorphisms C).inverseImage (homologyFunctor C c n) := by
+  ext X Y f
+  simp [mem_quasiIso_iff, MorphismProperty.iInf_iff]
+
+/-- The quasi-isomorphisms of the homotopy category have the two-out-of-three property. -/
+instance hasTwoOutOfThreeProperty_quasiIso : (quasiIso C c).HasTwoOutOfThreeProperty := by
+  rw [quasiIso_eq_iInf]
+  infer_instance
 
 end HomotopyCategory
