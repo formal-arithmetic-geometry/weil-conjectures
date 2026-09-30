@@ -80,6 +80,15 @@ giving `- ⊗_E ℚ̄_ℓ : D_cons(X, E) ⥤ D(X, ℚ̄_ℓ)`.
   `D_cons(X, 𝒪_E) ⥤ D(X, ℚ̄_ℓ)`.
 - `DerivedCategoryConstructibleRational.extendScalarsQlbar` : the induced functor
   `D_cons(X, E) ⥤ D(X, ℚ̄_ℓ)`.
+- `DerivedCategory.integralExtendScalarsComp`,
+  `DerivedCategory.integralExtendScalarsQlbarComp` : for a tower `E → F → G`, the extension of
+  scalars along `𝒪_E → 𝒪_G` (resp. `𝒪_E → ℚ̄_ℓ`) is the composite of those along
+  `𝒪_E → 𝒪_F` and `𝒪_F → 𝒪_G` (resp. `𝒪_F → ℚ̄_ℓ`), induced by
+  `Sheaf.algebraExtendScalarsComp` through `Functor.mapDerivedCategoryNatIso` and
+  `Functor.mapDerivedCategoryCompIso`.
+- `DerivedCategoryConstructibleIntegral.extendScalarsComp`,
+  `DerivedCategoryConstructibleIntegral.extendScalarsQlbarComp` : their restrictions to
+  `D_cons(X, 𝒪_E)`.
 
 ## Main results
 
@@ -105,7 +114,7 @@ giving `- ⊗_E ℚ̄_ℓ : D_cons(X, E) ⥤ D(X, ℚ̄_ℓ)`.
 
 @[expose] public section
 
-universe w w' u
+universe w w' w'' u
 
 open AlgebraicGeometry CategoryTheory IsLocalRing Limits
 
@@ -464,3 +473,103 @@ noncomputable def DerivedCategoryConstructibleRational.fromIntegralCompExtendSca
   Localization.fac _ _ _
 
 end Qlbar
+
+section Comp
+
+namespace PadicAlgCl
+
+variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl l)]
+  (F : Type w') [Field F] [Algebra F (PadicAlgCl l)] [Algebra E F]
+  [IsScalarTower E F (PadicAlgCl l)]
+  (G : Type w'') [Field G] [Algebra G (PadicAlgCl l)] [Algebra F G] [Algebra E G]
+  [IsScalarTower F G (PadicAlgCl l)] [IsScalarTower E G (PadicAlgCl l)] [IsScalarTower E F G]
+
+/-- The inclusions of rings of integers compose along a tower `E → F → G`. -/
+lemma integersMap_comp :
+    (integersMap l F G).comp (integersMap l E F) = integersMap l E G :=
+  RingHom.ext fun x ↦ Subtype.ext (IsScalarTower.algebraMap_apply E F G x).symm
+
+/-- The inclusion `𝒪_E → ℚ̄_ℓ` factors through `𝒪_F`. -/
+lemma algebraMap_integers_comp_integersMap :
+    (algebraMap (integers l F) (PadicAlgCl l)).comp (integersMap l E F) =
+      algebraMap (integers l E) (PadicAlgCl l) :=
+  RingHom.ext fun x ↦ (IsScalarTower.algebraMap_apply E F (PadicAlgCl l) x).symm
+
+variable [Small.{u + 1} E] [Small.{u + 1} F] [Small.{u + 1} G]
+
+attribute [local instance] algebraShrinkIntegers
+
+/-- The universe `u + 1` copies of the rings of integers of a tower `E → F → G` form a
+scalar tower. -/
+lemma isScalarTower_shrinkIntegers :
+    IsScalarTower (Shrink.{u + 1} (integers l E)) (Shrink.{u + 1} (integers l F))
+      (Shrink.{u + 1} (integers l G)) :=
+  .of_algebraMap_eq fun x ↦ by
+    simp only [RingHom.algebraMap_toAlgebra, RingHom.coe_comp, Function.comp_apply,
+      RingEquiv.toRingHom_eq_coe, RingEquiv.coe_toRingHom, RingEquiv.symm_apply_apply]
+    rw [← integersMap_comp l E F G, RingHom.comp_apply]
+
+/-- The universe `u + 1` copies of `𝒪_E`, `𝒪_F` and `ℚ̄_ℓ` form a scalar tower. -/
+lemma isScalarTower_shrinkIntegers_shrink :
+    IsScalarTower (Shrink.{u + 1} (integers l E)) (Shrink.{u + 1} (integers l F))
+      (Shrink.{u + 1} (PadicAlgCl l)) :=
+  .of_algebraMap_eq fun x ↦ by
+    simp only [RingHom.algebraMap_toAlgebra, RingHom.coe_comp, Function.comp_apply,
+      RingEquiv.toRingHom_eq_coe, RingEquiv.coe_toRingHom, RingEquiv.symm_apply_apply]
+    rw [← algebraMap_integers_comp_integersMap l E F, RingHom.comp_apply]
+
+end PadicAlgCl
+
+variable (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type w) [Field E]
+  [Algebra E (PadicAlgCl l)] [Small.{u + 1} E]
+  (F : Type w') [Field F] [Algebra F (PadicAlgCl l)] [Small.{u + 1} F] [Algebra E F]
+  [IsScalarTower E F (PadicAlgCl l)]
+  (G : Type w'') [Field G] [Algebra G (PadicAlgCl l)] [Small.{u + 1} G] [Algebra F G]
+  [Algebra E G] [IsScalarTower F G (PadicAlgCl l)] [IsScalarTower E G (PadicAlgCl l)]
+  [IsScalarTower E F G]
+
+attribute [local instance] PadicAlgCl.algebraShrinkIntegers
+
+/-- The extension of scalars between rings of integers is compatible with composition along
+a tower `E → F → G`: `- ⊗_{𝒪_E} 𝒪_G ≅ (- ⊗_{𝒪_E} 𝒪_F) ⊗_{𝒪_F} 𝒪_G`, induced by
+`Sheaf.algebraExtendScalarsComp`. -/
+noncomputable def DerivedCategory.integralExtendScalarsComp :
+    integralExtendScalars X l E G ≅ integralExtendScalars X l E F ⋙ integralExtendScalars X l F G :=
+  letI := PadicAlgCl.isScalarTower_shrinkIntegers l E F G
+  Functor.mapDerivedCategoryNatIso (Sheaf.algebraExtendScalarsComp _ _ _ _) ≪≫
+    Functor.mapDerivedCategoryCompIso _ _
+
+/-- The extension of scalars to `ℚ̄_ℓ` is compatible with the extension of scalars between
+rings of integers: `- ⊗_{𝒪_E} ℚ̄_ℓ ≅ (- ⊗_{𝒪_E} 𝒪_F) ⊗_{𝒪_F} ℚ̄_ℓ`, induced by
+`Sheaf.algebraExtendScalarsComp`. -/
+noncomputable def DerivedCategory.integralExtendScalarsQlbarComp :
+    integralExtendScalarsQlbar X l E ≅
+      integralExtendScalars X l E F ⋙ integralExtendScalarsQlbar X l F :=
+  letI := PadicAlgCl.isScalarTower_shrinkIntegers_shrink l E F
+  Functor.mapDerivedCategoryNatIso (Sheaf.algebraExtendScalarsComp _ _ _ _) ≪≫
+    Functor.mapDerivedCategoryCompIso _ _
+
+section Constructible
+
+variable [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)] [FiniteDimensional ℚ_[l] E]
+  [Algebra ℚ_[l] F] [IsScalarTower ℚ_[l] F (PadicAlgCl l)] [FiniteDimensional ℚ_[l] F]
+  [FiniteDimensional E F] [FiniteDimensional F G] [FiniteDimensional E G]
+
+/-- The extension of scalars `D_cons(X, 𝒪_E) ⥤ D_cons(X, 𝒪_G)` is the composite of those
+along `E → F` and `F → G`: `DerivedCategory.integralExtendScalarsComp`, lifted along the
+fully faithful inclusion of `D_cons(X, 𝒪_G)`. -/
+noncomputable def DerivedCategoryConstructibleIntegral.extendScalarsComp :
+    extendScalars X l E G ≅ extendScalars X l E F ⋙ extendScalars X l F G :=
+  ((DerivedCategory.constructibleIntegral X l G).fullyFaithfulι.whiskeringRight _).preimageIso
+    (Functor.isoWhiskerLeft (ι X l E) (DerivedCategory.integralExtendScalarsComp X l E F G))
+
+/-- The extension of scalars `D_cons(X, 𝒪_E) ⥤ D(X, ℚ̄_ℓ)` factors through
+`D_cons(X, 𝒪_F)`: this is `DerivedCategory.integralExtendScalarsQlbarComp` restricted to
+`D_cons(X, 𝒪_E)`. -/
+noncomputable def DerivedCategoryConstructibleIntegral.extendScalarsQlbarComp :
+    extendScalarsQlbar X l E ≅ extendScalars X l E F ⋙ extendScalarsQlbar X l F :=
+  Functor.isoWhiskerLeft (ι X l E) (DerivedCategory.integralExtendScalarsQlbarComp X l E F)
+
+end Constructible
+
+end Comp
