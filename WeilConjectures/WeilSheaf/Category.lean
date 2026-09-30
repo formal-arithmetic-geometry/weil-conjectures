@@ -213,7 +213,7 @@ noncomputable def WeilSheaf.upperStar : WeilSheaf k₀ l Y ⥤ WeilSheaf k₀ l 
       Scheme.IsConstructibleSheaf.upperStar (Scheme.Hom.geometricFiberMap φ (comp_over φ _))
         F.obj.carrier
 
-instance : (WeilSheaf.upperStar (l := l) φ).Additive := by
+instance : (WeilSheaf.upperStar (k₀ := k₀) (l := l) φ).Additive := by
   unfold WeilSheaf.upperStar
   exact @Functor.instAdditiveFullSubcategoryLift _ _ _ _ _ _ _
     (@Functor.instAdditiveComp _ _ _ _ _ _ _ (Functor.fullSubcategoryInclusion_additive _) _ _ _
@@ -250,7 +250,7 @@ noncomputable def WeilComplex.upperStar : WeilComplex k₀ l Y ⥤ WeilComplex k
       Scheme.IsConstructibleSheaf.of_iso
         ((Functor.mapDerivedCategoryHomologyFunctorIso _ n).app K.obj.carrier)⟩
 
-instance : (WeilComplex.upperStar (l := l) φ).Additive := by
+instance : (WeilComplex.upperStar (k₀ := k₀) (l := l) φ).Additive := by
   unfold WeilComplex.upperStar
   exact @Functor.instAdditiveFullSubcategoryLift _ _ _ _ _ _ _
     (@Functor.instAdditiveComp _ _ _ _ _ _ _ (Functor.fullSubcategoryInclusion_additive _) _ _ _
