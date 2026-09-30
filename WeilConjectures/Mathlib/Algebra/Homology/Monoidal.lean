@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
+public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 
 /-!
 # Complements on the tensor product of cochain complexes
@@ -20,7 +20,7 @@ If `G : C ⥤ D` is an additive oplax monoidal functor which preserves the copro
 defining the tensor product of complexes, the comonoidal structure of `G` induces
 a natural transformation `G(K ⊗ L) ⟶ G(K) ⊗ G(L)` of bifunctors on homological complexes
 (`CategoryTheory.Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans`), which is an
-isomorphism when `G` is strong monoidal.
+isomorphism when every `δ G X Y` is an isomorphism.
 -/
 
 @[expose] public section
@@ -112,24 +112,23 @@ variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive 
 
 /-- The comparison `G(K ⊗ L) ⟶ G(K) ⊗ G(L)` for homological complexes `K` and `L`, induced
 by the comonoidal structure `δ` of an additive oplax monoidal functor `G` which preserves the
-coproducts `(K ⊗ L).X n = ∐_{p + q = n} K.X p ⊗ L.X q`: on the summand `G(K.X p ⊗ L.X q)`
-it is `δ G (K.X p) (L.X q)` followed by the inclusion of `G(K.X p) ⊗ G(L.X q)`. -/
+coproducts `(K ⊗ L).X n = ∐_{p + q = n} K.X p ⊗ L.X q`. It is
+`HomologicalComplex.mapBifunctorComparisonNatTrans` applied to `δNatTrans G`: on the summand
+`G(K.X p ⊗ L.X q)` it is given by
+```
+G(K.X p ⊗ L.X q) ──── G(ιTensorObj) ────▶ G((K ⊗ L).X n)
+       │                                       │
+       │ δ G (K.X p) (L.X q)                   │ comparison
+       ▼                                       ▼
+G(K.X p) ⊗ G(L.X q) ─── ιTensorObj ───▶ (G(K) ⊗ G(L)).X n
+```
+-/
 noncomputable def mapHomologicalComplexδNatTrans :
     (Functor.postcompose₂.obj (G.mapHomologicalComplex c)).obj
         (curriedTensor (HomologicalComplex C c)) ⟶
       (((whiskeringLeft₂ _).obj (G.mapHomologicalComplex c)).obj
-        (G.mapHomologicalComplex c)).obj (curriedTensor (HomologicalComplex D c)) where
-  app K :=
-    { app L := mapBifunctorComparison (δNatTrans G) c K L
-      naturality L L' g := by
-        have := mapBifunctorComparison_naturality (δNatTrans G) c (𝟙 K) g
-        rw [Functor.map_id] at this
-        exact this }
-  naturality K K' f := by
-    ext L : 2
-    have := mapBifunctorComparison_naturality (δNatTrans G) c f (𝟙 L)
-    rw [Functor.map_id] at this
-    exact this
+        (G.mapHomologicalComplex c)).obj (curriedTensor (HomologicalComplex D c)) :=
+  mapBifunctorComparisonNatTrans (δNatTrans G) c
 
 @[simp]
 lemma mapHomologicalComplexδNatTrans_app_app (K L : HomologicalComplex C c) :
@@ -138,14 +137,7 @@ lemma mapHomologicalComplexδNatTrans_app_app (K L : HomologicalComplex C c) :
 
 variable [∀ X Y : C, IsIso (δ G X Y)]
 
-instance (K : HomologicalComplex C c) : IsIso ((mapHomologicalComplexδNatTrans c G).app K) := by
-  have (X Y : C) : IsIso (((δNatTrans G).app X).app Y) := inferInstanceAs (IsIso (δ G X Y))
-  have (L : HomologicalComplex C c) :
-      IsIso (((mapHomologicalComplexδNatTrans c G).app K).app L) := by
-    dsimp; infer_instance
-  apply NatIso.isIso_of_isIso_app
-
 instance : IsIso (mapHomologicalComplexδNatTrans c G) :=
-  NatIso.isIso_of_isIso_app _
+  inferInstanceAs (IsIso (mapBifunctorComparisonNatTrans (δNatTrans G) c))
 
 end CategoryTheory.Functor.OplaxMonoidal

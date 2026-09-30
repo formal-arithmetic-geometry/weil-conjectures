@@ -17,8 +17,8 @@ defining the tensor product of homological complexes. The comparison
 (`CategoryTheory.Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans`) descends to
 a natural transformation of bifunctors on homotopy categories
 `CategoryTheory.Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans`, between
-`(K, L) ↦ G(K ⊗ L)` and `(K, L) ↦ G(K) ⊗ G(L)`. It is an isomorphism when `G` is
-strong monoidal.
+`(K, L) ↦ G(K ⊗ L)` and `(K, L) ↦ G(K) ⊗ G(L)`. It is an isomorphism when every
+`δ G X Y` is an isomorphism.
 
 -/
 
@@ -28,7 +28,7 @@ open CategoryTheory Category Limits MonoidalCategory HomologicalComplex
 
 namespace CategoryTheory.Functor.OplaxMonoidal
 
-variable {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
   [MonoidalCategory C] [MonoidalCategory D] [HasZeroObject C] [HasZeroObject D]
   [(curriedTensor C).Additive] [∀ (X₁ : C), ((curriedTensor C).obj X₁).Additive]
   [(curriedTensor D).Additive] [∀ (X₁ : D), ((curriedTensor D).obj X₁).Additive]
@@ -49,45 +49,31 @@ variable {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
   [∀ j, PreservesColimitsOfShape (Discrete (ComplexShape.π c c c ⁻¹' {j})) G]
 
 /-- The comparison `G(K ⊗ L) ⟶ G(K) ⊗ G(L)` in the homotopy category, induced by
-the comonoidal structure `δ` of an additive oplax monoidal functor `G`: it is the image
-in the homotopy category of `mapHomologicalComplexδNatTrans c G`. -/
+the comonoidal structure `δ` of an additive oplax monoidal functor `G`: it is obtained from
+`mapHomologicalComplexδNatTrans c G` by passing to the quotient. -/
 noncomputable def mapHomotopyCategoryδNatTrans :
     (Functor.postcompose₂.obj (G.mapHomotopyCategory c)).obj
         (curriedTensor (HomotopyCategory C c)) ⟶
       (((whiskeringLeft₂ _).obj (G.mapHomotopyCategory c)).obj
-        (G.mapHomotopyCategory c)).obj (curriedTensor (HomotopyCategory D c)) where
-  app K :=
-    { app L := (HomotopyCategory.quotient D c).map
-        (((mapHomologicalComplexδNatTrans c G).app K.as).app L.as)
-      naturality := by
-        rintro L L' ⟨g⟩
-        have := (HomotopyCategory.quotient D c).congr_map
-          (((mapHomologicalComplexδNatTrans c G).app K.as).naturality g)
-        simp only [Functor.map_comp] at this
-        exact this }
-  naturality := by
-    rintro K K' ⟨f⟩
-    ext L
-    have := (HomotopyCategory.quotient D c).congr_map
-      (NatTrans.congr_app ((mapHomologicalComplexδNatTrans c G).naturality f) L.as)
-    rw [NatTrans.comp_app, NatTrans.comp_app, Functor.map_comp, Functor.map_comp] at this
-    exact this
+        (G.mapHomotopyCategory c)).obj (curriedTensor (HomotopyCategory D c)) :=
+  Quotient.natTransLift₂ _ _
+    ((Functor.postcompose₂.obj (HomotopyCategory.quotient D c)).map
+      (mapHomologicalComplexδNatTrans c G))
 
+@[simp]
 lemma mapHomotopyCategoryδNatTrans_app_app (K L : HomologicalComplex C c) :
     ((mapHomotopyCategoryδNatTrans c G).app ((HomotopyCategory.quotient C c).obj K)).app
         ((HomotopyCategory.quotient C c).obj L) =
-      (HomotopyCategory.quotient D c).map (mapBifunctorComparison (δNatTrans G) c K L) :=
+      (HomotopyCategory.quotient D c).map (((mapHomologicalComplexδNatTrans c G).app K).app L) :=
   rfl
 
 variable [∀ X Y : C, IsIso (δ G X Y)]
 
-instance (K : HomotopyCategory C c) : IsIso ((mapHomotopyCategoryδNatTrans c G).app K) := by
-  have (L : HomotopyCategory C c) : IsIso (((mapHomotopyCategoryδNatTrans c G).app K).app L) :=
-    inferInstanceAs (IsIso ((HomotopyCategory.quotient D c).map
-      (((mapHomologicalComplexδNatTrans c G).app K.as).app L.as)))
-  apply NatIso.isIso_of_isIso_app
-
-instance : IsIso (mapHomotopyCategoryδNatTrans c G) :=
-  NatIso.isIso_of_isIso_app _
+instance : IsIso (mapHomotopyCategoryδNatTrans c G) := by
+  have (K L : HomologicalComplex C c) : IsIso ((((Functor.postcompose₂.obj
+      (HomotopyCategory.quotient D c)).map (mapHomologicalComplexδNatTrans c G)).app K).app L) :=
+    Functor.map_isIso (HomotopyCategory.quotient D c)
+      (((mapHomologicalComplexδNatTrans c G).app K).app L)
+  exact Quotient.isIso_natTransLift₂ _ _ _
 
 end CategoryTheory.Functor.OplaxMonoidal
