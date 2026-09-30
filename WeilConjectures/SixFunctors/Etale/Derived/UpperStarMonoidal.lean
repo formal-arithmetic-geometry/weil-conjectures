@@ -109,7 +109,7 @@ is given by the instance `Etale.hasFunctorialFlatResolution_sheaf`. -/
 instance isLeftDerivabilityStructure_kFlatUpperStar [Etale.UpperStarPreservesFlat A] :
     (HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).IsLeftDerivabilityStructure :=
   isLeftDerivabilityStructure_kFlatUpperStar_of_leftResolution A g
-    (‹HasFunctorialFlatResolution (Sheaf Y.smallEtaleTopology A)›.some)
+    (inferInstance : HasFunctorialFlatResolution (Sheaf Y.smallEtaleTopology A)).some
 
 section
 
@@ -194,7 +194,7 @@ theorem isLeftDerivedFunctor₂_derivedTensor_leftDerivedUpperStar
   have := isIso_μNatTrans_Qh_app_app_of_kFlat
     (((g)^*[A].mapHomotopyCategory _).obj X₁.obj) _ X₂.property
   simp only [derivedTensorLeftDerivedUpperStarCounit, NatTrans.comp_app]
-  infer_instance
+  exact IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' inferInstance this)
 
 /-- `(K, M) ↦ Lg^*(K ⊗ᴸ M)` is the total left derived functor of `(A, B) ↦ g^*(A ⊗ B)`
 from `K(Y_ét) × K(Y_ét)` to `D(Z_ét)`. It is computed on pairs of K-flat complexes. -/
@@ -207,7 +207,10 @@ theorem isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor :
     (HomotopyCategory.quasiIso _ (.up ℤ)).localizerMorphismKFlat _ (fun X₁ X₂ ↦ ?_)
   have := isIso_μNatTrans_Qh_app_app_of_kFlat X₁.obj _ X₂.property
   simp only [leftDerivedUpperStarDerivedTensorCounit, NatTrans.comp_app]
-  infer_instance
+  -- Instance search times out on `IsIso (L(g^*).map _)`, since the objects in the goal are
+  -- only defeq to `X₁.obj` and `X₂.obj`; so the morphism is given explicitly.
+  exact IsIso.comp_isIso'
+    (Functor.map_isIso L((g)^*[A]) (((μNatTrans Qh).app X₁.obj).app X₂.obj)) inferInstance
 
 end
 
