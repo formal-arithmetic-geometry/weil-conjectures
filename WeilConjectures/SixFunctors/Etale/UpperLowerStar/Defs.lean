@@ -176,6 +176,14 @@ lemma Etale.lowerStar_obj_val_obj (G : Sheaf Z.smallEtaleTopology A) (b : Y.Etal
   rfl
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The restriction maps of `g_* G` are those of `G` along the base changes of the morphisms. -/
+lemma Etale.lowerStar_obj_val_map (G : Sheaf Z.smallEtaleTopology A) {b b' : Y.Etale}
+    (φ : b ⟶ b') :
+    ((g)_*[A].obj G).obj.map φ.op =
+      G.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ g).map φ).op :=
+  rfl
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- `g_*` acts on morphisms by whiskering along `(MorphismProperty.Over.pullback @Etale ⊤ g).op`. -/
 lemma Etale.lowerStar_map_hom_app {G G' : Sheaf Z.smallEtaleTopology A} (φ : G ⟶ G')
     (b : Y.Etale) :
