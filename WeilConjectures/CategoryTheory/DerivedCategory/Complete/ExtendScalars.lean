@@ -53,6 +53,16 @@ uniquely through the localization `D_cons(X, 𝒪_E) ⥤ D_cons(X, E)`
 (`WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient`), giving the
 extension of scalars `- ⊗_E F : D_cons(X, E) ⥤ D_cons(X, F)`.
 
+## Extension of scalars to `ℚ̄_ℓ`
+
+Similarly, `ℚ̄_ℓ` is a torsion free, hence flat, `𝒪_E`-module, so the extension of scalars
+along `𝒪_E → ℚ̄_ℓ` gives an exact functor `D(X, 𝒪_E) ⥤ D(X, ℚ̄_ℓ)` to the derived category of
+pro-étale sheaves of modules over `ℚ̄_ℓ` with its discrete topology. Restricted to
+`D_cons(X, 𝒪_E)`, it kills the objects killed by a nonzero element of `𝒪_E` (currently
+`sorry`), as these act invertibly on `ℚ̄_ℓ`; so it sends morphisms with torsion mapping cone
+to isomorphisms, and factors uniquely through the localization `D_cons(X, 𝒪_E) ⥤ D_cons(X, E)`,
+giving `- ⊗_E ℚ̄_ℓ : D_cons(X, E) ⥤ D(X, ℚ̄_ℓ)`.
+
 ## Main definitions
 
 - `PadicAlgCl.integersMap` : the inclusion `𝒪_E → 𝒪_F` of rings of integers.
@@ -63,6 +73,13 @@ extension of scalars `- ⊗_E F : D_cons(X, E) ⥤ D_cons(X, F)`.
   `D_cons(X, 𝒪_E) ⥤ D_cons(X, 𝒪_F)` for `F` finite over `E`.
 - `DerivedCategoryConstructibleRational.extendScalars` : the induced functor
   `D_cons(X, E) ⥤ D_cons(X, F)` on the rationalizations, for `F` finite over `E`.
+- `PadicAlgCl.algebraShrinkIntegersShrink` : the algebra structure of `Shrink ℚ̄_ℓ` over
+  `Shrink 𝒪_E`.
+- `DerivedCategory.integralExtendScalarsQlbar` : the functor `D(X, 𝒪_E) ⥤ D(X, ℚ̄_ℓ)`.
+- `DerivedCategoryConstructibleIntegral.extendScalarsQlbar` : its restriction
+  `D_cons(X, 𝒪_E) ⥤ D(X, ℚ̄_ℓ)`.
+- `DerivedCategoryConstructibleRational.extendScalarsQlbar` : the induced functor
+  `D_cons(X, E) ⥤ D(X, ℚ̄_ℓ)`.
 
 ## Main results
 
@@ -78,6 +95,12 @@ extension of scalars `- ⊗_E F : D_cons(X, E) ⥤ D_cons(X, F)`.
   of `𝒪_F` (`sorry`).
 - `DerivedCategoryConstructibleRational.isInvertedBy_extendScalars` : consequently the
   functor inverts, after localization, the morphisms inverted in `D_cons(X, E)`.
+- `PadicAlgCl.flat_algebraMap_shrinkIntegers_shrink` : `Shrink ℚ̄_ℓ` is flat over
+  `Shrink 𝒪_E`.
+- `DerivedCategoryConstructibleIntegral.isZero_extendScalarsQlbar_obj_of_torsion` : the
+  functor `D_cons(X, 𝒪_E) ⥤ D(X, ℚ̄_ℓ)` kills torsion objects (`sorry`).
+- `DerivedCategoryConstructibleRational.isInvertedBy_extendScalarsQlbar` : consequently it
+  inverts the morphisms inverted in `D_cons(X, E)`.
 -/
 
 @[expose] public section
@@ -138,24 +161,29 @@ variable (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type w) [Field E]
 
 attribute [local instance] PadicAlgCl.algebraShrinkIntegers
 
-/-- The extension of scalars of sheaves of modules along the flat `Shrink 𝒪_E → Shrink 𝒪_F`
-is left exact: it is sectionwise left exact by flatness, and sheafification is exact. -/
-instance Sheaf.preservesFiniteLimits_algebraExtendScalars_shrinkIntegers :
-    PreservesFiniteLimits (Sheaf.algebraExtendScalars (Scheme.ProEt.topology X)
-      (Shrink.{u + 1} (PadicAlgCl.integers l E)) (Shrink.{u + 1} (PadicAlgCl.integers l F))) := by
-  have := ModuleCat.preservesFiniteLimits_extendScalars_of_flat.{u + 1}
-    (PadicAlgCl.flat_algebraMap_shrinkIntegers l E F)
-  have : PreservesFiniteLimits (ModuleCat.algebraExtendScalars.{u + 1}
-      (Shrink.{u + 1} (PadicAlgCl.integers l E)) (Shrink.{u + 1} (PadicAlgCl.integers l F))) :=
+/-- The extension of scalars of sheaves of modules along a flat algebra `R → S` is left
+exact: it is sectionwise left exact by flatness, and sheafification is exact. -/
+lemma Sheaf.preservesFiniteLimits_algebraExtendScalars_of_flat (R S : Type (u + 1))
+    [CommRing R] [CommRing S] [Algebra R S] (h : (algebraMap R S).Flat) :
+    PreservesFiniteLimits (Sheaf.algebraExtendScalars (Scheme.ProEt.topology X) R S) := by
+  have := ModuleCat.preservesFiniteLimits_extendScalars_of_flat.{u + 1} h
+  have : PreservesFiniteLimits (ModuleCat.algebraExtendScalars.{u + 1} R S) :=
     preservesFiniteLimits_of_natIso (Adjunction.leftAdjointUniq
       (ModuleCat.extendRestrictScalarsAdj.{u + 1} _)
       (ModuleCat.algebraExtendRestrictScalarsAdj _ _))
   have : PreservesFiniteLimits ((Functor.whiskeringRight X.ProEtᵒᵖ _ _).obj
-      (ModuleCat.algebraExtendScalars.{u + 1}
-        (Shrink.{u + 1} (PadicAlgCl.integers l E)) (Shrink.{u + 1} (PadicAlgCl.integers l F)))) :=
+      (ModuleCat.algebraExtendScalars.{u + 1} R S)) :=
     ⟨fun _ _ _ ↦ inferInstance⟩
   dsimp only [Sheaf.algebraExtendScalars, Sheaf.composeAndSheafify]
   infer_instance
+
+/-- The extension of scalars of sheaves of modules along the flat `Shrink 𝒪_E → Shrink 𝒪_F`
+is left exact. -/
+instance Sheaf.preservesFiniteLimits_algebraExtendScalars_shrinkIntegers :
+    PreservesFiniteLimits (Sheaf.algebraExtendScalars (Scheme.ProEt.topology X)
+      (Shrink.{u + 1} (PadicAlgCl.integers l E)) (Shrink.{u + 1} (PadicAlgCl.integers l F))) :=
+  Sheaf.preservesFiniteLimits_algebraExtendScalars_of_flat X _ _
+    (PadicAlgCl.flat_algebraMap_shrinkIntegers l E F)
 
 /-- The extension of scalars `- ⊗_{𝒪_E} 𝒪_F : D(X, 𝒪_E) ⥤ D(X, 𝒪_F)` on the derived
 categories of pro-étale sheaves of modules over the rings of integers. As `𝒪_F` is flat over
@@ -307,3 +335,132 @@ noncomputable def DerivedCategoryConstructibleRational.fromIntegralCompExtendSca
   Localization.fac _ _ _
 
 end Constructible
+
+section Qlbar
+
+namespace PadicAlgCl
+
+variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl l)]
+
+/-- `ℚ̄_ℓ` is flat over `𝒪_E`: it is a torsion free module over the Bézout domain `𝒪_E`. -/
+lemma flat_algebraMap_integers :
+    (algebraMap (integers l E) (PadicAlgCl l)).Flat := by
+  rw [RingHom.flat_algebraMap_iff, Module.Flat.flat_iff_torsion_eq_bot_of_isBezout,
+    ← Submodule.isTorsionFree_iff_torsion_eq_bot]
+  exact Module.isTorsionFree_iff_algebraMap_injective.mpr
+    ((algebraMap E (PadicAlgCl l)).injective.comp Subtype.val_injective)
+
+/-- The identification of `ℚ̄_ℓ` with its copy `Shrink ℚ̄_ℓ` in the universe `u + 1`. -/
+noncomputable def shrinkRingEquivSelf : PadicAlgCl l ≃+* Shrink.{u + 1} (PadicAlgCl l) :=
+  (Shrink.ringEquiv.{u + 1} (PadicAlgCl l)).symm
+
+variable [Small.{u + 1} E]
+
+/-- The algebra structure of `Shrink ℚ̄_ℓ` over `Shrink 𝒪_E`, transported from the inclusion
+`𝒪_E → ℚ̄_ℓ` along `PadicAlgCl.shrinkRingEquiv` and `PadicAlgCl.shrinkRingEquivSelf`. -/
+noncomputable instance algebraShrinkIntegersShrink :
+    Algebra (Shrink.{u + 1} (integers l E)) (Shrink.{u + 1} (PadicAlgCl l)) :=
+  ((shrinkRingEquivSelf.{u} l).toRingHom.comp
+    ((algebraMap (integers l E) (PadicAlgCl l)).comp
+      (shrinkRingEquiv l E).symm.toRingHom)).toAlgebra
+
+/-- `Shrink ℚ̄_ℓ` is flat over `Shrink 𝒪_E`, as `ℚ̄_ℓ` is over `𝒪_E`. -/
+lemma flat_algebraMap_shrinkIntegers_shrink :
+    (algebraMap (Shrink.{u + 1} (integers l E)) (Shrink.{u + 1} (PadicAlgCl l))).Flat :=
+  ((RingHom.Flat.of_bijective (shrinkRingEquiv l E).symm.bijective).comp
+    (flat_algebraMap_integers l E)).comp
+      (RingHom.Flat.of_bijective (shrinkRingEquivSelf.{u} l).bijective)
+
+end PadicAlgCl
+
+variable (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type w) [Field E]
+  [Algebra E (PadicAlgCl l)] [Small.{u + 1} E]
+
+/-- The extension of scalars of sheaves of modules along the flat `Shrink 𝒪_E → Shrink ℚ̄_ℓ`
+is left exact. -/
+instance Sheaf.preservesFiniteLimits_algebraExtendScalars_shrinkIntegers_shrink :
+    PreservesFiniteLimits (Sheaf.algebraExtendScalars (Scheme.ProEt.topology X)
+      (Shrink.{u + 1} (PadicAlgCl.integers l E)) (Shrink.{u + 1} (PadicAlgCl l))) :=
+  Sheaf.preservesFiniteLimits_algebraExtendScalars_of_flat X _ _
+    (PadicAlgCl.flat_algebraMap_shrinkIntegers_shrink l E)
+
+/-- The extension of scalars `- ⊗_{𝒪_E} ℚ̄_ℓ : D(X, 𝒪_E) ⥤ D(X, ℚ̄_ℓ)` to the derived category
+of pro-étale sheaves of modules over `ℚ̄_ℓ` with its discrete topology. As `ℚ̄_ℓ` is flat over
+`𝒪_E`, the extension of scalars of sheaves is exact, and this is the functor it induces
+levelwise. -/
+noncomputable def DerivedCategory.integralExtendScalarsQlbar :
+    DerivedCategory (Sheaf (Scheme.ProEt.topology X)
+      (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))) ⥤
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X)
+        (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl l)))) :=
+  (Sheaf.algebraExtendScalars (Scheme.ProEt.topology X)
+    (Shrink.{u + 1} (PadicAlgCl.integers l E)) (Shrink.{u + 1} (PadicAlgCl l))).mapDerivedCategory
+
+noncomputable instance : (DerivedCategory.integralExtendScalarsQlbar X l E).CommShift ℤ :=
+  inferInstanceAs <| (Sheaf.algebraExtendScalars (Scheme.ProEt.topology X)
+    (Shrink.{u + 1} (PadicAlgCl.integers l E))
+      (Shrink.{u + 1} (PadicAlgCl l))).mapDerivedCategory.CommShift ℤ
+
+instance : (DerivedCategory.integralExtendScalarsQlbar X l E).IsTriangulated :=
+  inferInstanceAs <| (Sheaf.algebraExtendScalars (Scheme.ProEt.topology X)
+    (Shrink.{u + 1} (PadicAlgCl.integers l E))
+      (Shrink.{u + 1} (PadicAlgCl l))).mapDerivedCategory.IsTriangulated
+
+/-- The extension of scalars `D_cons(X, 𝒪_E) ⥤ D(X, ℚ̄_ℓ)`: the restriction of
+`DerivedCategory.integralExtendScalarsQlbar` to the constructible objects. -/
+noncomputable def DerivedCategoryConstructibleIntegral.extendScalarsQlbar :
+    DerivedCategoryConstructibleIntegral X l E ⥤
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X)
+        (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl l)))) :=
+  DerivedCategoryConstructibleIntegral.ι X l E ⋙ DerivedCategory.integralExtendScalarsQlbar X l E
+
+noncomputable instance :
+    (DerivedCategoryConstructibleIntegral.extendScalarsQlbar X l E).CommShift ℤ :=
+  inferInstanceAs <| (DerivedCategoryConstructibleIntegral.ι X l E ⋙
+    DerivedCategory.integralExtendScalarsQlbar X l E).CommShift ℤ
+
+instance : (DerivedCategoryConstructibleIntegral.extendScalarsQlbar X l E).IsTriangulated :=
+  inferInstanceAs <| (DerivedCategoryConstructibleIntegral.ι X l E ⋙
+    DerivedCategory.integralExtendScalarsQlbar X l E).IsTriangulated
+
+/-- The extension of scalars `D_cons(X, 𝒪_E) ⥤ D(X, ℚ̄_ℓ)` kills the objects killed by a
+nonzero element `m` of `𝒪_E`: `m` acts invertibly on `K ⊗_{𝒪_E} ℚ̄_ℓ`, and by zero. -/
+lemma DerivedCategoryConstructibleIntegral.isZero_extendScalarsQlbar_obj_of_torsion
+    (K : DerivedCategoryConstructibleIntegral X l E)
+    (hK : Rationalization.torsion (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)))
+      (DerivedCategoryConstructibleIntegral X l E) K) :
+    IsZero ((DerivedCategoryConstructibleIntegral.extendScalarsQlbar X l E).obj K) :=
+  sorry
+
+/-- The morphisms of `D_cons(X, 𝒪_E)` inverted in `D_cons(X, E)` are sent to isomorphisms of
+`D(X, ℚ̄_ℓ)` by the extension of scalars: their mapping cones are torsion, hence are sent to
+zero, as the extension of scalars is triangulated. -/
+lemma DerivedCategoryConstructibleRational.isInvertedBy_extendScalarsQlbar :
+    (Rationalization.W (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)))
+        (DerivedCategoryConstructibleIntegral X l E)).IsInvertedBy
+      (DerivedCategoryConstructibleIntegral.extendScalarsQlbar X l E) :=
+  fun _ _ _ ⟨_, _, _, hT, hZ⟩ ↦ (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _
+    ((DerivedCategoryConstructibleIntegral.extendScalarsQlbar X l E).map_distinguished _ hT)).1
+      (DerivedCategoryConstructibleIntegral.isZero_extendScalarsQlbar_obj_of_torsion
+        X l E _ hZ)
+
+/-- The extension of scalars `- ⊗_E ℚ̄_ℓ : D_cons(X, E) ⥤ D(X, ℚ̄_ℓ)`: the functor induced by
+`DerivedCategoryConstructibleIntegral.extendScalarsQlbar`, through the universal property of
+the localization `D_cons(X, 𝒪_E) ⥤ D_cons(X, E)`. -/
+noncomputable def DerivedCategoryConstructibleRational.extendScalarsQlbar :
+    DerivedCategoryConstructibleRational X l E ⥤
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X)
+        (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl l)))) :=
+  Localization.lift (DerivedCategoryConstructibleIntegral.extendScalarsQlbar X l E)
+    (DerivedCategoryConstructibleRational.isInvertedBy_extendScalarsQlbar X l E)
+    (DerivedCategoryConstructibleRational.fromIntegral X l E)
+
+/-- The extension of scalars on `D_cons(X, E)` is compatible with the one on
+`D_cons(X, 𝒪_E)` through the localization functor. -/
+noncomputable def DerivedCategoryConstructibleRational.fromIntegralCompExtendScalarsQlbarIso :
+    DerivedCategoryConstructibleRational.fromIntegral X l E ⋙
+        DerivedCategoryConstructibleRational.extendScalarsQlbar X l E ≅
+      DerivedCategoryConstructibleIntegral.extendScalarsQlbar X l E :=
+  Localization.fac _ _ _
+
+end Qlbar
