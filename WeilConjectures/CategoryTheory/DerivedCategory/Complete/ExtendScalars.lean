@@ -89,6 +89,10 @@ giving `- ⊗_E ℚ̄_ℓ : D_cons(X, E) ⥤ D(X, ℚ̄_ℓ)`.
 - `DerivedCategoryConstructibleIntegral.extendScalarsComp`,
   `DerivedCategoryConstructibleIntegral.extendScalarsQlbarComp` : their restrictions to
   `D_cons(X, 𝒪_E)`.
+- `DerivedCategoryConstructibleRational.extendScalarsComp`,
+  `DerivedCategoryConstructibleRational.extendScalarsQlbarComp` : the corresponding
+  isomorphisms on `D_cons(X, E)`, descended along the localization functor, precomposition
+  with which is fully faithful.
 
 ## Main results
 
@@ -569,6 +573,45 @@ noncomputable def DerivedCategoryConstructibleIntegral.extendScalarsComp :
 noncomputable def DerivedCategoryConstructibleIntegral.extendScalarsQlbarComp :
     extendScalarsQlbar X l E ≅ extendScalars X l E F ⋙ extendScalarsQlbar X l F :=
   Functor.isoWhiskerLeft (ι X l E) (DerivedCategory.integralExtendScalarsQlbarComp X l E F)
+
+/-- The extension of scalars `D_cons(X, E) ⥤ D_cons(X, G)` is the composite of those along
+`E → F` and `F → G`: after precomposition with the localization functor
+`D_cons(X, 𝒪_E) ⥤ D_cons(X, E)`, both sides are identified with
+`DerivedCategoryConstructibleIntegral.extendScalarsComp` followed by the localization functor
+of `D_cons(X, 𝒪_G)`, and precomposition with a localization functor is fully faithful. -/
+noncomputable def DerivedCategoryConstructibleRational.extendScalarsComp :
+    extendScalars X l E G ≅ extendScalars X l E F ⋙ extendScalars X l F G :=
+  (Localization.whiskeringLeftFunctor' (fromIntegral X l E) (Rationalization.W
+    (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)))
+      (DerivedCategoryConstructibleIntegral X l E)) _).preimageIso
+    (fromIntegralCompExtendScalarsIso X l E G ≪≫
+      Functor.isoWhiskerRight (DerivedCategoryConstructibleIntegral.extendScalarsComp X l E F G)
+        (fromIntegral X l G) ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (DerivedCategoryConstructibleIntegral.extendScalars X l E F)
+        (fromIntegralCompExtendScalarsIso X l F G).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (fromIntegralCompExtendScalarsIso X l E F).symm
+        (extendScalars X l F G) ≪≫
+      Functor.associator _ _ _)
+
+/-- The extension of scalars `D_cons(X, E) ⥤ D(X, ℚ̄_ℓ)` factors through `D_cons(X, F)`:
+after precomposition with the localization functor `D_cons(X, 𝒪_E) ⥤ D_cons(X, E)`, both
+sides are identified with `DerivedCategoryConstructibleIntegral.extendScalarsQlbarComp`, and
+precomposition with a localization functor is fully faithful. -/
+noncomputable def DerivedCategoryConstructibleRational.extendScalarsQlbarComp :
+    extendScalarsQlbar X l E ≅ extendScalars X l E F ⋙ extendScalarsQlbar X l F :=
+  (Localization.whiskeringLeftFunctor' (fromIntegral X l E) (Rationalization.W
+    (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)))
+      (DerivedCategoryConstructibleIntegral X l E)) _).preimageIso
+    (fromIntegralCompExtendScalarsQlbarIso X l E ≪≫
+      DerivedCategoryConstructibleIntegral.extendScalarsQlbarComp X l E F ≪≫
+      Functor.isoWhiskerLeft (DerivedCategoryConstructibleIntegral.extendScalars X l E F)
+        (fromIntegralCompExtendScalarsQlbarIso X l F).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (fromIntegralCompExtendScalarsIso X l E F).symm
+        (extendScalarsQlbar X l F) ≪≫
+      Functor.associator _ _ _)
 
 end Constructible
 
