@@ -19,7 +19,8 @@ For a point `Φ` of a site `(C, J)` and `M : A`, the fibre of the constant presh
 of a constant functor over the connected category of elements of the fibre functor. When
 `A` is concrete and `J.W` is the class of locally bijective morphisms, the fibre functor
 inverts the sheafification maps, so the fibre of the constant sheaf at `M` is `M` as well
-(`CategoryTheory.GrothendieckTopology.Point.sheafFiberConstantSheafIso`).
+(`CategoryTheory.GrothendieckTopology.Point.sheafFiberConstantSheafIso`). Both isomorphisms
+are natural in `M`.
 
 -/
 
@@ -43,6 +44,17 @@ noncomputable def presheafFiberConstIso (M : A) :
     Φ.presheafFiber.obj ((Functor.const Cᵒᵖ).obj M) ≅ M :=
   colimit.isoColimitCocone ⟨_, isColimitConstCocone (Φ.fiber.Elements)ᵒᵖ M⟩
 
+/-- Naturality of `CategoryTheory.GrothendieckTopology.Point.presheafFiberConstIso` in `M`. -/
+@[reassoc (attr := simp)]
+lemma presheafFiber_map_const_map_presheafFiberConstIso_hom {M N : A} (f : M ⟶ N) :
+    Φ.presheafFiber.map ((Functor.const Cᵒᵖ).map f) ≫ (Φ.presheafFiberConstIso N).hom =
+      (Φ.presheafFiberConstIso M).hom ≫ f := by
+  refine Φ.presheafFiber_hom_ext fun X x ↦ ?_
+  rw [Φ.toPresheafFiber_naturality_assoc]
+  dsimp [presheafFiberConstIso, toPresheafFiber]
+  erw [colimit.isoColimitCocone_ι_hom, colimit.isoColimitCocone_ι_hom_assoc]
+  exact (Category.comp_id f).trans (Category.id_comp f).symm
+
 variable [HasWeakSheafify J A] {FA : A → A → Type*} {CA : A → Type*}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
   [J.WEqualsLocallyBijective A] [(CategoryTheory.forget A).ReflectsIsomorphisms]
@@ -58,5 +70,19 @@ noncomputable def sheafFiberConstantSheafIso (M : A) :
     Φ.sheafFiber.obj ((constantSheaf J A).obj M) ≅ M :=
   (asIso (Φ.presheafFiber.map (CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj M)))).symm ≪≫
     Φ.presheafFiberConstIso M
+
+/-- Naturality of `CategoryTheory.GrothendieckTopology.Point.sheafFiberConstantSheafIso`
+in `M`: under these isomorphisms, the fibre of `(constantSheaf J A).map f` is `f`. -/
+@[reassoc (attr := simp)]
+lemma sheafFiber_map_constantSheaf_map_sheafFiberConstantSheafIso_hom {M N : A} (f : M ⟶ N) :
+    Φ.sheafFiber.map ((constantSheaf J A).map f) ≫ (Φ.sheafFiberConstantSheafIso N).hom =
+      (Φ.sheafFiberConstantSheafIso M).hom ≫ f := by
+  dsimp [sheafFiberConstantSheafIso, sheafFiber, constantSheaf]
+  symm
+  rw [Category.assoc, IsIso.inv_comp_eq, ← Φ.presheafFiber.map_comp_assoc,
+    show ((presheafToSheaf J A).map ((Functor.const Cᵒᵖ).map f)).hom =
+      CategoryTheory.sheafifyMap J ((Functor.const Cᵒᵖ).map f) from rfl,
+    ← CategoryTheory.toSheafify_naturality, Functor.map_comp_assoc, IsIso.hom_inv_id_assoc,
+    presheafFiber_map_const_map_presheafFiberConstIso_hom]
 
 end CategoryTheory.GrothendieckTopology.Point
