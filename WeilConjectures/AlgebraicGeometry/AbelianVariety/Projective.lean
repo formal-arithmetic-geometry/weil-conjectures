@@ -16,9 +16,12 @@ An abelian variety admits a closed immersion into a projective space over the ba
 carries an ample invertible module, and the symmetrisation `L ⊗ [-1]^* L` of an ample invertible
 module is again ample and is symmetric.
 
-Since `AlgebraicGeometry.IsVeryAmple` is still an `opaque` placeholder (see
-`WeilConjectures.AlgebraicGeometry.Modules.Ample`), none of the statements below can be proved
-before it is replaced by a real construction.
+`AlgebraicGeometry.IsVeryAmple` is a genuine definition, and so is the tensor product
+`AlgebraicGeometry.Scheme.Modules.tensorObj` (see
+`WeilConjectures.AlgebraicGeometry.Modules.Invertible`), through whose tensor powers ampleness is
+phrased. So `IsAbelianVariety.exists_isAmple` follows from
+`IsAbelianVariety.exists_isClosedImmersion_projectiveSpace`, with `M := j^* 𝒪(1)` and the first
+tensor power, together with the identification `M^{⊗ 1} ≅ M`.
 
 ## Main definitions
 

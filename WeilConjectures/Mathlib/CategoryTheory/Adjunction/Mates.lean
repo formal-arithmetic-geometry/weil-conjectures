@@ -28,6 +28,8 @@ and it is the latter that one wants when transporting the coherence of a pseudof
 - `CategoryTheory.conjugateIsoEquiv_isoWhiskerLeft` and
   `CategoryTheory.conjugateIsoEquiv_isoWhiskerRight`: conjugation exchanges left and right
   whiskering.
+- `CategoryTheory.mateEquiv_whiskerBottom`: the mate of a 2-square whiskered at the bottom is
+  the mate whiskered on the left.
 -/
 
 @[expose] public section
@@ -98,5 +100,23 @@ lemma conjugateIsoEquiv_isoWhiskerRight {L₁ L₂ : A ⥤ B} {R₁ R₂ : B ⥤
       Functor.isoWhiskerLeft R (conjugateIsoEquiv adj₁ adj₂ e) := by
   ext : 1
   exact conjugateEquiv_whiskerRight adj₁ adj₂ adj e.hom
+
+/-- Whiskering a 2-square at the bottom corresponds, under `mateEquiv`, to whiskering its mate
+on the left: for a 2-square `w` and `β : H ⟶ H'`
+
+```
+A ---G---> C            B ---R₁---> A
+|          |            |           |
+L₁   ⇙    L₂    ↦      H'    ⇙     G
+v          v            v           v
+B --H'---> D            D ---R₂---> C
+```
+-/
+lemma mateEquiv_whiskerBottom {G : A ⥤ C} {H H' : B ⥤ D} {L₁ : A ⥤ B} {R₁ : B ⥤ A}
+    {L₂ : C ⥤ D} {R₂ : D ⥤ C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (w : TwoSquare G L₁ L₂ H)
+    (β : H ⟶ H') :
+    mateEquiv adj₁ adj₂ (w.whiskerBottom β) = (mateEquiv adj₁ adj₂ w).whiskerLeft β := by
+  ext X
+  simp [mateEquiv, TwoSquare.whiskerBottom, TwoSquare.whiskerLeft, ← Functor.map_comp]
 
 end CategoryTheory

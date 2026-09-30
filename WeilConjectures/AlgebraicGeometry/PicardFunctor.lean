@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 
@@ -61,16 +62,6 @@ namespace AlgebraicGeometry.Scheme
 variable {X Y : Scheme.{u}}
 
 namespace Modules
-
-/-- The pullback of the structure sheaf along a morphism of schemes is the structure sheaf. -/
-noncomputable def pullbackObjUnitIso (f : X ⟶ Y) :
-    (Modules.pullback f).obj (SheafOfModules.unit Y.ringCatSheaf) ≅
-      SheafOfModules.unit X.ringCatSheaf :=
-  -- The `IsIso` instance has to be introduced by hand: elaborating `asIso` directly leaves the
-  -- universe metavariables of `pullbackObjUnitToUnit` undetermined when the instance is sought.
-  haveI : IsIso (C := SheafOfModules.{u} X.ringCatSheaf)
-      (SheafOfModules.pullbackObjUnitToUnit f.toRingCatSheafHom) := inferInstance
-  asIso (SheafOfModules.pullbackObjUnitToUnit f.toRingCatSheafHom)
 
 /-- The restriction of the structure sheaf to an open subset, as a sheaf of modules over
 the localized sheaf of rings, is the unit object. -/
