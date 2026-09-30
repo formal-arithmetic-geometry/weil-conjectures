@@ -231,4 +231,10 @@ noncomputable instance : Pretriangulated (DerivedCategoryConstructibleIntegral X
 instance : IsTriangulated (DerivedCategoryConstructibleIntegral X l E) :=
   inferInstanceAs <| IsTriangulated (DerivedCategory.constructibleIntegral X l E).FullSubcategory
 
+noncomputable instance : (DerivedCategoryConstructibleIntegral.ι X l E).CommShift ℤ :=
+  inferInstanceAs <| (DerivedCategory.constructibleIntegral X l E).ι.CommShift ℤ
+
+instance : (DerivedCategoryConstructibleIntegral.ι X l E).IsTriangulated :=
+  inferInstanceAs <| (DerivedCategory.constructibleIntegral X l E).ι.IsTriangulated
+
 end Constructible

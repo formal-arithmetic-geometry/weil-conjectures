@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Descent
 public import Mathlib.RingTheory.Flat.TorsionFree
 public import Mathlib.RingTheory.RingHom.Flat
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
 
 /-!
 # Extension of scalars between rings of integers of `ℓ`-adic fields
@@ -43,6 +43,16 @@ objects to constructible objects, hence restricts to a functor
 conditions of [Stacks 09C1] are treated in three separate statements, each currently
 `sorry`.
 
+## Rational coefficients
+
+The functor `D_cons(X, 𝒪_E) ⥤ D_cons(X, 𝒪_F)` is triangulated and sends objects killed by a
+nonzero element of `𝒪_E` to objects killed by a nonzero element of `𝒪_F` (currently
+`sorry`), so it sends morphisms with torsion mapping cone to morphisms with torsion mapping
+cone. Hence its composition with the localization `D_cons(X, 𝒪_F) ⥤ D_cons(X, F)` factors
+uniquely through the localization `D_cons(X, 𝒪_E) ⥤ D_cons(X, E)`
+(`WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient`), giving the
+extension of scalars `- ⊗_E F : D_cons(X, E) ⥤ D_cons(X, F)`.
+
 ## Main definitions
 
 - `PadicAlgCl.integersMap` : the inclusion `𝒪_E → 𝒪_F` of rings of integers.
@@ -51,6 +61,8 @@ conditions of [Stacks 09C1] are treated in three separate statements, each curre
 - `DerivedCategory.integralExtendScalars` : the functor `D(X, 𝒪_E) ⥤ D(X, 𝒪_F)`.
 - `DerivedCategoryConstructibleIntegral.extendScalars` : its restriction
   `D_cons(X, 𝒪_E) ⥤ D_cons(X, 𝒪_F)` for `F` finite over `E`.
+- `DerivedCategoryConstructibleRational.extendScalars` : the induced functor
+  `D_cons(X, E) ⥤ D_cons(X, F)` on the rationalizations, for `F` finite over `E`.
 
 ## Main results
 
@@ -61,6 +73,11 @@ conditions of [Stacks 09C1] are treated in three separate statements, each curre
   functor preserves each of the three conditions defining constructible objects (`sorry`).
 - `DerivedCategory.constructibleIntegral_le_inverseImage_integralExtendScalars` : the functor
   preserves constructible objects.
+- `DerivedCategoryConstructibleIntegral.torsion_le_inverseImage_extendScalars` : the functor
+  sends objects killed by a nonzero element of `𝒪_E` to objects killed by a nonzero element
+  of `𝒪_F` (`sorry`).
+- `DerivedCategoryConstructibleRational.isInvertedBy_extendScalars` : consequently the
+  functor inverts, after localization, the morphisms inverted in `D_cons(X, E)`.
 -/
 
 @[expose] public section
@@ -153,6 +170,16 @@ noncomputable def DerivedCategory.integralExtendScalars :
     (Shrink.{u + 1} (PadicAlgCl.integers l E))
       (Shrink.{u + 1} (PadicAlgCl.integers l F))).mapDerivedCategory
 
+noncomputable instance : (DerivedCategory.integralExtendScalars X l E F).CommShift ℤ :=
+  inferInstanceAs <| (Sheaf.algebraExtendScalars (Scheme.ProEt.topology X)
+    (Shrink.{u + 1} (PadicAlgCl.integers l E))
+      (Shrink.{u + 1} (PadicAlgCl.integers l F))).mapDerivedCategory.CommShift ℤ
+
+instance : (DerivedCategory.integralExtendScalars X l E F).IsTriangulated :=
+  inferInstanceAs <| (Sheaf.algebraExtendScalars (Scheme.ProEt.topology X)
+    (Shrink.{u + 1} (PadicAlgCl.integers l E))
+      (Shrink.{u + 1} (PadicAlgCl.integers l F))).mapDerivedCategory.IsTriangulated
+
 end ExtendScalars
 
 section Constructible
@@ -221,5 +248,62 @@ noncomputable def DerivedCategoryConstructibleIntegral.extendScalars :
       DerivedCategory.integralExtendScalars X l E F)
     fun K ↦ DerivedCategory.constructibleIntegral_le_inverseImage_integralExtendScalars
       X l E F _ K.property
+
+noncomputable instance :
+    (DerivedCategoryConstructibleIntegral.extendScalars X l E F).CommShift ℤ :=
+  inferInstanceAs <| (ObjectProperty.lift _ (DerivedCategoryConstructibleIntegral.ι X l E ⋙
+      DerivedCategory.integralExtendScalars X l E F)
+    fun K ↦ DerivedCategory.constructibleIntegral_le_inverseImage_integralExtendScalars
+      X l E F _ K.property).CommShift ℤ
+
+instance : (DerivedCategoryConstructibleIntegral.extendScalars X l E F).IsTriangulated :=
+  inferInstanceAs <| (ObjectProperty.lift _ (DerivedCategoryConstructibleIntegral.ι X l E ⋙
+      DerivedCategory.integralExtendScalars X l E F)
+    fun K ↦ DerivedCategory.constructibleIntegral_le_inverseImage_integralExtendScalars
+      X l E F _ K.property).IsTriangulated
+
+/-- For `F` finite over `E`, the extension of scalars `D_cons(X, 𝒪_E) ⥤ D_cons(X, 𝒪_F)` sends
+objects killed by a nonzero element of `𝒪_E` to objects killed by a nonzero element of `𝒪_F`:
+if `m • 𝟙 K = 0`, then the image of `m` in `𝒪_F`, which is nonzero, kills `K ⊗_{𝒪_E} 𝒪_F`. -/
+lemma DerivedCategoryConstructibleIntegral.torsion_le_inverseImage_extendScalars :
+    Rationalization.torsion (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)))
+        (DerivedCategoryConstructibleIntegral X l E) ≤
+      (Rationalization.torsion (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l F)))
+        (DerivedCategoryConstructibleIntegral X l F)).inverseImage
+        (DerivedCategoryConstructibleIntegral.extendScalars X l E F) :=
+  sorry
+
+/-- For `F` finite over `E`, the morphisms of `D_cons(X, 𝒪_E)` inverted in `D_cons(X, E)` are
+sent to isomorphisms of `D_cons(X, F)` by the extension of scalars followed by the
+localization functor: their mapping cones are torsion, hence so are the mapping cones of
+their images, as the extension of scalars is triangulated and preserves torsion objects. -/
+lemma DerivedCategoryConstructibleRational.isInvertedBy_extendScalars :
+    (Rationalization.W (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)))
+        (DerivedCategoryConstructibleIntegral X l E)).IsInvertedBy
+      (DerivedCategoryConstructibleIntegral.extendScalars X l E F ⋙
+        DerivedCategoryConstructibleRational.fromIntegral X l F) := fun _ _ f hf ↦
+  ObjectProperty.inverseImage_trW_isInverted _ _ _ f
+    (ObjectProperty.trW_monotone
+      (DerivedCategoryConstructibleIntegral.torsion_le_inverseImage_extendScalars X l E F) _ hf)
+
+/-- For `F` finite over `E`, the extension of scalars `D_cons(X, E) ⥤ D_cons(X, F)`: the
+functor induced on the rationalizations by
+`DerivedCategoryConstructibleIntegral.extendScalars`, through the universal property of the
+localization `D_cons(X, 𝒪_E) ⥤ D_cons(X, E)`. -/
+noncomputable def DerivedCategoryConstructibleRational.extendScalars :
+    DerivedCategoryConstructibleRational X l E ⥤ DerivedCategoryConstructibleRational X l F :=
+  Localization.lift (DerivedCategoryConstructibleIntegral.extendScalars X l E F ⋙
+      DerivedCategoryConstructibleRational.fromIntegral X l F)
+    (DerivedCategoryConstructibleRational.isInvertedBy_extendScalars X l E F)
+    (DerivedCategoryConstructibleRational.fromIntegral X l E)
+
+/-- The extension of scalars on `D_cons(X, E)` is compatible with the one on
+`D_cons(X, 𝒪_E)` through the localization functors. -/
+noncomputable def DerivedCategoryConstructibleRational.fromIntegralCompExtendScalarsIso :
+    DerivedCategoryConstructibleRational.fromIntegral X l E ⋙
+        DerivedCategoryConstructibleRational.extendScalars X l E F ≅
+      DerivedCategoryConstructibleIntegral.extendScalars X l E F ⋙
+        DerivedCategoryConstructibleRational.fromIntegral X l F :=
+  Localization.fac _ _ _
 
 end Constructible
