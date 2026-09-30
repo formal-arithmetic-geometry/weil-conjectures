@@ -36,6 +36,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.AlgebraicGeometry.DensePoints
 public import WeilConjectures.AlgebraicGeometry.Descent
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Finite
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
@@ -481,6 +482,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Compositio
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.CategoryTheory.NatIso
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndoFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Presentable.Limits
@@ -634,6 +637,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GeometricFrobenius
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
@@ -682,7 +686,13 @@ public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.Topology.StratificationDense
+public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Defs
+public import WeilConjectures.WeilSheaf.Dual
+public import WeilConjectures.WeilSheaf.Fourier
+public import WeilConjectures.WeilSheaf.LowerShriek
+public import WeilConjectures.WeilSheaf.OpenImmersion
+public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.ZetaFunction.ClassicalFunctionalEquation
