@@ -79,6 +79,13 @@ standard instances, and the restriction of scalars is definitionally Mathlib's
   and the adjunction `CategoryTheory.Sheaf.algebraExtendRestrictScalarsAdj`.
 - `DerivedCategory.algebraExtendScalars`, `DerivedCategory.algebraRestrictScalars` and the
   adjunction `DerivedCategory.algebraExtendRestrictScalarsAdj`.
+- `ModuleCat.algebraRestrictScalarsComp`, `ModuleCat.algebraExtendScalarsComp`,
+  `CategoryTheory.Sheaf.algebraRestrictScalarsComp` and
+  `CategoryTheory.Sheaf.algebraExtendScalarsComp` : for a scalar tower `R → S → T`, the
+  change of scalars along `R → T` is the composite of those along `R → S` and `S → T`. The
+  restriction isomorphisms are Mathlib's `ModuleCat.restrictScalarsComp'` with the
+  composition of ring homomorphisms given by `IsScalarTower.algebraMap_eq`, and the extension
+  isomorphisms are their conjugates along the adjunctions.
 
 ## Sorry
 
@@ -223,6 +230,17 @@ lemma algebraExtendRestrictScalarsAdj_homEquiv_symm_apply_tmul {M : ModuleCat.{v
     ((algebraExtendRestrictScalarsAdj R S).homEquiv M N).symm f (s ⊗ₜ[R] m) = s • (f m : N) :=
   rfl
 
+@[simp]
+lemma algebraExtendRestrictScalarsAdj_unit_app_apply (M : ModuleCat.{v} R) (m : M) :
+    (algebraExtendRestrictScalarsAdj R S).unit.app M m = (1 : S) ⊗ₜ[R] m :=
+  rfl
+
+@[simp]
+lemma algebraExtendRestrictScalarsAdj_counit_app_tmul (N : ModuleCat.{v} S) (s : S)
+    (n : (algebraRestrictScalars R S).obj N) :
+    (algebraExtendRestrictScalarsAdj R S).counit.app N (s ⊗ₜ[R] n) = s • (n : N) :=
+  rfl
+
 variable (R S)
 
 instance : (algebraExtendScalars.{v} R S).IsLeftAdjoint :=
@@ -232,6 +250,52 @@ instance : (algebraRestrictScalars.{v} R S).IsRightAdjoint :=
   (algebraExtendRestrictScalarsAdj R S).isRightAdjoint
 
 end Adjunction
+
+section Comp
+
+variable (T : Type v) [CommRing T] [Algebra S T] [Algebra R T] [IsScalarTower R S T]
+
+/-- For a tower of algebras `R → S → T`, restricting scalars from `T` to `R` is restricting
+from `T` to `S` and then from `S` to `R`. This is Mathlib's `ModuleCat.restrictScalarsComp'`,
+the composition `algebraMap R T = (algebraMap S T).comp (algebraMap R S)` being given by the
+scalar tower. -/
+noncomputable def algebraRestrictScalarsComp :
+    algebraRestrictScalars.{v} R T ≅ algebraRestrictScalars S T ⋙ algebraRestrictScalars R S :=
+  restrictScalarsComp' _ _ _ (IsScalarTower.algebraMap_eq R S T)
+
+variable {R S T} in
+@[simp]
+lemma algebraRestrictScalarsComp_hom_app_apply (N : ModuleCat.{v} T)
+    (n : (algebraRestrictScalars R T).obj N) :
+    (algebraRestrictScalarsComp R S T).hom.app N n = n :=
+  rfl
+
+variable {R S T} in
+@[simp]
+lemma algebraRestrictScalarsComp_inv_app_apply (N : ModuleCat.{v} T)
+    (n : (algebraRestrictScalars R S).obj ((algebraRestrictScalars S T).obj N)) :
+    (algebraRestrictScalarsComp R S T).inv.app N n = n :=
+  rfl
+
+/-- For a tower of algebras `R → S → T`, extending scalars from `R` to `T` is extending from
+`R` to `S` and then from `S` to `T`: the left adjoints of the two sides of
+`ModuleCat.algebraRestrictScalarsComp` are isomorphic. -/
+noncomputable def algebraExtendScalarsComp :
+    algebraExtendScalars.{v} R T ≅ algebraExtendScalars R S ⋙ algebraExtendScalars S T :=
+  (conjugateIsoEquiv ((algebraExtendRestrictScalarsAdj R S).comp
+    (algebraExtendRestrictScalarsAdj S T)) (algebraExtendRestrictScalarsAdj R T)).symm
+      (algebraRestrictScalarsComp R S T).symm
+
+variable {R S T} in
+@[simp]
+lemma algebraExtendScalarsComp_hom_app_tmul (M : ModuleCat.{v} R) (t : T) (m : M) :
+    (algebraExtendScalarsComp R S T).hom.app M (t ⊗ₜ[R] m) = t ⊗ₜ[S] ((1 : S) ⊗ₜ[R] m) := by
+  simp only [algebraExtendScalarsComp, conjugateIsoEquiv, Equiv.coe_fn_symm_mk,
+    conjugateEquiv_symm_apply_app, Adjunction.comp_unit_app]
+  change t • ((1 : T) ⊗ₜ[S] ((1 : S) ⊗ₜ[R] m) : T ⊗[S] (S ⊗[R] M)) = _
+  rw [TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+
+end Comp
 
 end ModuleCat
 
@@ -279,6 +343,32 @@ instance : (algebraRestrictScalars J R S).IsRightAdjoint :=
 (to the coextension of scalars), and which preserves sheafification. -/
 instance : (algebraRestrictScalars J R S).IsLeftAdjoint :=
   sheafCompose_isLeftAdjoint J (ModuleCat.algebraRestrictScalars R S)
+
+section Comp
+
+variable (T : Type (u + 1)) [CommRing T] [Algebra S T] [Algebra R T] [IsScalarTower R S T]
+
+/-- For a tower of algebras `R → S → T`, restricting scalars of sheaves from `T` to `R` is
+restricting from `T` to `S` and then from `S` to `R`: this is
+`ModuleCat.algebraRestrictScalarsComp`, applied sectionwise. -/
+noncomputable def algebraRestrictScalarsComp :
+    algebraRestrictScalars J R T ≅ algebraRestrictScalars J S T ⋙ algebraRestrictScalars J R S
+    where
+  hom := sheafCompose_map J (ModuleCat.algebraRestrictScalarsComp R S T).hom
+  inv := sheafCompose_map J (ModuleCat.algebraRestrictScalarsComp R S T).inv
+  hom_inv_id := by rw [← sheafCompose_comp, Iso.hom_inv_id, sheafCompose_id]; rfl
+  inv_hom_id := by rw [← sheafCompose_comp, Iso.inv_hom_id, sheafCompose_id]; rfl
+
+/-- For a tower of algebras `R → S → T`, extending scalars of sheaves from `R` to `T` is
+extending from `R` to `S` and then from `S` to `T`: the left adjoints of the two sides of
+`Sheaf.algebraRestrictScalarsComp` are isomorphic. -/
+noncomputable def algebraExtendScalarsComp :
+    algebraExtendScalars J R T ≅ algebraExtendScalars J R S ⋙ algebraExtendScalars J S T :=
+  (conjugateIsoEquiv ((algebraExtendRestrictScalarsAdj J R S).comp
+    (algebraExtendRestrictScalarsAdj J S T)) (algebraExtendRestrictScalarsAdj J R T)).symm
+      (algebraRestrictScalarsComp J R S T).symm
+
+end Comp
 
 /-- The restriction of scalars of sheaves is exact. -/
 example : PreservesFiniteLimits (algebraRestrictScalars J R S) := inferInstance
