@@ -17,9 +17,10 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 
 Let `A` be a monoidal Grothendieck abelian coefficient category. This file is the pro-étale
 counterpart of the direct-image part of `WeilConjectures.SixFunctors.Etale.Derived.Stability`:
-for `f : X ⟶ Y` separated of finite type with `dim X ≤ d`, the derived direct image
-`Rf_* : D(X_proét) ⥤ D(Y_proét)` carries `Dctf(X, A)` into `Dctf(Y, A)`, moving the Tor
-amplitude from `[a, b]` to `[a, b + 2d]`.
+for `Y` of finite type over a field `k`, `A` killed by an integer `N` invertible in `k`, and
+`f : X ⟶ Y` separated of finite type, the derived direct image
+`Rf_* : D(X_proét) ⥤ D(Y_proét)` preserves bounded constructibility, and if `dim X ≤ d` it
+moves the Tor amplitude from `[a, b]` to `[a, b + 2d]`.
 
 ## Main statements
 
@@ -34,7 +35,15 @@ The blueprint deduces this corollary from its étale counterpart
 `ν^* K'` for an étale complex `K'`. No such étale-origin hypothesis appears here: bounded
 constructibility on the pro-étale site
 (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible`) is *defined* as étale
-origin.
+origin. This route also needs comparison results for `ν^*` that the repository does not have
+yet: `Rf_* ∘ D(ν^*) ≅ D(ν^*) ∘ Rf_*`, and that `D(ν^*)` preserves and reflects Tor amplitude.
+
+The coefficient category is torsion of order invertible on the base: `N • 𝟙 M = 0` for every
+`M : A`, with `(N : k) ≠ 0`. Without this the statements fail, already for
+`A = ModuleCat (ZMod p)` and the affine line over a separably closed field of characteristic
+`p`, whose `H¹` is infinite by Artin–Schreier theory. Being of finite type over a field is the
+base condition of Deligne's finiteness theorem. These are the finite coefficient stages
+`A_{E,n}` of the blueprint, where étale-origin bounded constructibility is the right notion.
 
 A dimension bound `dim X ≤ d` is `topologicalKrullDim X ≤ (d : WithBot ℕ∞)`, as in the étale
 file.
@@ -62,34 +71,41 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
 
 namespace ProEtale
 
-/-- Blueprint `sk-cor-sf-direct-image-ctf`: The direct image cell on the pro-étale site.
+section DirectImage
 
-Let `f : X ⟶ Y` be separated of finite type with `dim X ≤ d`, and let `K` be a bounded
-constructible complex on `X_proét` of Tor amplitude in `[a, b]`. Then `Rf_* K` is bounded
-constructible on `Y_proét`. No étale-origin hypothesis appears: bounded constructible
-pro-étale complexes are by definition of étale origin. -/
-theorem boundedConstructible_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ)
-    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
+variable {k : Type u} [Field k] (N : ℕ) (hN : (N : k) ≠ 0) (hA : ∀ M : A, N • 𝟙 M = 0)
+  {X Y : Scheme.{u}} (s : Y ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType s] [QuasiCompact s]
+  (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+
+include hN hA s
+
+/-- Blueprint `sk-cor-sf-direct-image-ctf`: Direct image preserves bounded constructibility on
+the pro-étale site.
+
+Let `Y` be of finite type over a field `k`, let `A` be killed by an integer `N` invertible in
+`k`, and let `f : X ⟶ Y` be separated of finite type. If `K` is a bounded constructible complex
+on `X_proét`, then `Rf_* K` is bounded constructible on `Y_proét`. -/
+theorem boundedConstructible_rightDerivedLowerStar
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (hbc : DerivedCategory.boundedConstructible A X K)
-    (hta : DerivedCategory.torAmplitudeIn A X a b K) :
+    (hbc : DerivedCategory.boundedConstructible A X K) :
     DerivedCategory.boundedConstructible A Y ((R((f)_*[A])).obj K) :=
   sorry
 
-/-- Blueprint `sk-cor-sf-direct-image-ctf`: The direct image cell on the pro-étale site.
+/-- Blueprint `sk-cor-sf-direct-image-ctf`: Tor amplitude of the pro-étale direct image.
 
 In the situation of `AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerStar`,
-the direct image `Rf_* K` has Tor amplitude in `[a, b + 2d]`. No étale-origin hypothesis
-appears: bounded constructible pro-étale complexes are by definition of étale origin. -/
-theorem torAmplitudeIn_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f]
-    [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ)
+if `dim X ≤ d` and `K` has Tor amplitude in `[a, b]`, then `Rf_* K` has Tor amplitude in
+`[a, b + 2d]`. The shift `2d` is the uniform vanishing of `Rᵖf_*` above twice the dimension of
+the source, for torsion coefficients of order invertible on the base. -/
+theorem torAmplitudeIn_rightDerivedLowerStar (d : ℕ)
     (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
     (hbc : DerivedCategory.boundedConstructible A X K)
     (hta : DerivedCategory.torAmplitudeIn A X a b K) :
     DerivedCategory.torAmplitudeIn A Y a (b + 2 * (d : ℤ)) ((R((f)_*[A])).obj K) :=
   sorry
+
+end DirectImage
 
 end ProEtale
 

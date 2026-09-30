@@ -42,12 +42,21 @@ counterpart of `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula`.
 The canonical map `PF_{f, K, L}` is not available in this repository, so, as on the étale
 side, the projection formula is recorded as the `Prop`-valued property
 `AlgebraicGeometry.ProEtale.HasProjectionFormula` asserting that the two objects are
-*isomorphic*.
+*isomorphic*. This is a placeholder: it should become the statement that the canonical map is an
+isomorphism, which is also what is needed to compare the formula with the étale one along `ν^*`.
 
 The blueprint's "étale-origin witnesses" for `K` and `L` are built into
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor`, since pro-étale bounded
-constructibility is defined as étale origin. The statement is made for an arbitrary coefficient
-category `A`, which is the blueprint's "at any coefficient stage".
+constructibility is defined as étale origin. For the same reason this notion agrees with the
+blueprint's `Dctf(X_proét, A)` only at the finite coefficient stages; the `𝒪_E`, `E` and
+`ℚ̄_ℓ` stages of `sk-thm-sf-pf-proetale` are not covered by this statement. Accordingly the
+coefficient category is assumed torsion: `N • 𝟙 M = 0` for some `N ≠ 0` and every `M : A`.
+At these stages the torsion projection formula (SGA 4 XVII 5.2.9) holds without the finite Tor
+amplitude assumption; it is kept to match the blueprint's `Dctf` statement.
+
+The blueprint proves this by reduction to the étale torsion projection formula along `ν^*`. That
+needs the étale torsion projection formula and the compatibility of `D(ν^*)` with `Rf_!`, `Lf^*`
+and `⊗ᴸ`, none of which is in the repository yet.
 
 -/
 
@@ -108,12 +117,11 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
 
 /-- Blueprint `sk-thm-sf-pf-proetale`: Projection formula: the pro-étale realization.
 
-For a morphism `f : X ⟶ Y` admitting a compactification, and `K` in `Dctf(X_proét, A)` and
-`L` in `Dctf(Y_proét, A)`, there is an isomorphism `Rf_!(K ⊗ᴸ Lf^* L) ≅ (Rf_! K) ⊗ᴸ L` in
-`D(Y_proét)`. The blueprint's étale-origin witnesses for `K` and `L` are part of
-`DerivedCategory.constructibleFiniteTor`, and the coefficient category `A` is arbitrary, which
-is the blueprint's "at any coefficient stage". -/
-theorem hasProjectionFormula_of_constructibleFiniteTor (f : X ⟶ Y) [HasCompactification f]
+Let `A` be killed by an integer `N ≠ 0`. For a morphism `f : X ⟶ Y` admitting a
+compactification, and `K` in `Dctf(X_proét, A)` and `L` in `Dctf(Y_proét, A)`, there is an
+isomorphism `Rf_!(K ⊗ᴸ Lf^* L) ≅ (Rf_! K) ⊗ᴸ L` in `D(Y_proét)`. -/
+theorem hasProjectionFormula_of_constructibleFiniteTor (N : ℕ) (hN : N ≠ 0)
+    (hA : ∀ M : A, N • 𝟙 M = 0) (f : X ⟶ Y) [HasCompactification f]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
     (hK : DerivedCategory.constructibleFiniteTor A X K)
