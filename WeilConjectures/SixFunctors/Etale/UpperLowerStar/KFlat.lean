@@ -16,9 +16,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 # The pullback `g^*` sends flat resolutions to K-flat complexes
 
 The comparison map `Lg^*(K ⊗ᴸ L) ⟶ Lg^*K ⊗ᴸ Lg^*L` for the derived pullback on étale
-sheaves, which enters the projection formula (`def:exchange-projection`,
-`thm:projection-formula-torsion`), is computed on flat resolutions of `K` and `L`. Its
-construction needs the pullback `g^*` to send these resolutions to K-flat complexes.
+sheaves, which enters the projection formula (`thm:projection-formula-torsion`), is
+computed on flat resolutions of `K` and `L`. Its construction needs the pullback `g^*` to send these resolutions to K-flat complexes.
 
 The flat resolutions are `ℤ`-indexed colimits of bounded above complexes of flat sheaves,
 and `g^*` commutes with colimits, being a left adjoint. So it is enough that `g^*` sends
