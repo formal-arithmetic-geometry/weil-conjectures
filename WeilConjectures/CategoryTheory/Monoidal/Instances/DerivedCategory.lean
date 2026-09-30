@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 
 /-!
 
@@ -28,6 +31,8 @@ local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
 
 variable [HasDerivedCategory.{w} C]
 
+section
+
 variable [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C] [BraidedCategory C]
   [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
 
@@ -43,7 +48,15 @@ instance isLeftDerivedFunctor₂CurriedTensor :
 
 noncomputable instance laxMonoidalQ : (Q (C := C)).LaxMonoidal := inferInstance
 
-noncomputable instance monoidalClosedOfMonoidalClosedBraidedCategorg :
-  MonoidalClosed (DerivedCategory C) := sorry
+end
+
+variable [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C] [BraidedCategory C]
+
+/-- If `C` is braided and has functorial flat resolutions, K-flat complexes form a left
+derivability structure, so `DerivedCategory.monoidalClosed` applies. -/
+noncomputable instance monoidalClosed_of_hasFunctorialFlatResolution
+    [Abelian.HasFunctorialFlatResolution C] :
+    MonoidalClosed (DerivedCategory C) :=
+  monoidalClosed C
 
 end DerivedCategory
