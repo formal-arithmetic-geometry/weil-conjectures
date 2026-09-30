@@ -19,8 +19,8 @@ over a scheme `U : Scheme.{u}` with values in a Grothendieck abelian category `A
 sheafification of `A`-valued presheaves on these sites and on their localizations. These
 sites have objects in `Type (u + 1)` and `Hom`-types in `Type u`, so they are essentially
 `u + 1`-small; sheafification with values in a Grothendieck abelian category of that size
-exists for such sites by the plus-construction (filtered colimits of size `u + 1` are exact
-in `A`), but Mathlib only provides it for *concrete* coefficient categories
+exists for such sites by the transfinite plus construction (filtered colimits of size `u + 1`
+are exact in `A`), but Mathlib only provides it for *concrete* coefficient categories
 (`CategoryTheory.HasSheafify` via `Mathlib/CategoryTheory/Sites/LeftExact.lean`, which needs
 `PreservesLimits (forget A)`).
 
@@ -34,16 +34,14 @@ Mathlib's sheafification (see
 
 ## TODO
 
-The class is scaffolding around a gap in Mathlib, not a permanent part of the API. The
-missing theorem is: *for `A` Grothendieck abelian of size `u + 1` and `(C, J)` a `u + 1`-small
-site, the plus-construction sheafification of `A`-valued presheaves on `(C, J)` exists and is
-left exact.* Indeed the plus-construction is a filtered colimit of matching objects, which
-are limits, so AB5 and completeness of `A` suffice; Mathlib's
-`Mathlib/CategoryTheory/Sites/LeftExact.lean` instead proves left exactness through
-`forget A`, which is why concreteness enters. Once that theorem is available,
-`CategoryTheory.HasSmallSiteSheafify` becomes a consequence of
-`CategoryTheory.IsGrothendieckAbelian` and this class (together with the hypothesis in the
-files that carry it) should be deleted.
+The class is scaffolding, not a permanent part of the API. The theorem it stood in for is now
+proved: for `A` Grothendieck abelian of size `u + 1` and `(C, J)` an essentially
+`u + 1`-small site, sheafification of `A`-valued presheaves on `(C, J)` exists
+(`CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` in
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, through the transfinite plus
+construction). So `CategoryTheory.HasSmallSiteSheafify` is a consequence of
+`CategoryTheory.IsGrothendieckAbelian`, and this class, together with the hypothesis in the
+files that carry it, should be deleted.
 
 ## Main declarations
 
