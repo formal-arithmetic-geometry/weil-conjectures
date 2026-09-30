@@ -5,12 +5,14 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 
-# The pushforward `g_*` is lax symmetric monoidal, the pullback `g^*` is oplax monoidal
+# The pushforward `g_*` is lax symmetric monoidal, the pullback `g^*` is monoidal
 
 For a morphism of schemes `g : Z ⟶ Y` and a braided monoidal coefficient category `A`, the
 pushforward `g_*` on `A`-valued étale sheaves is lax braided. This is the general statement
@@ -22,12 +24,23 @@ with comparison maps `g^*(F ⊗ G) ⟶ g^*F ⊗ g^*G` and `g^*𝟙 ⟶ 𝟙` adj
 `F ⊗ G ⟶ g_*g^*F ⊗ g_*g^*G ⟶ g_*(g^*F ⊗ g^*G)` and to the unit of `g_*`, and the
 adjunction `g^* ⊣ g_*` is monoidal for these structures.
 
+When `A` is moreover closed, `g^*` is strong monoidal: its comparison maps are isomorphisms.
+This is the general statement
+`CategoryTheory.Functor.sheafPullbackConstruction.isIso_δ_sheafPullback` for the pullback
+along a representably flat functor of sites, applied to base change, which preserves finite
+limits. It uses that tensoring in `A` preserves colimits in each variable, being a left adjoint.
+
 ## Main results
 
 - `AlgebraicGeometry.Etale.laxBraided_lowerStar`: the pushforward `g_*` is lax braided.
 - `AlgebraicGeometry.Etale.oplaxMonoidal_upperStar`: the pullback `g^*` is oplax monoidal.
 - `AlgebraicGeometry.Etale.isMonoidal_upperStarLowerStarAdjunction`: the adjunction
   `g^* ⊣ g_*` is monoidal.
+- `AlgebraicGeometry.Etale.isIso_upperStar_δ` and `AlgebraicGeometry.Etale.isIso_upperStar_η`:
+  for closed `A`, the comparison maps `g^*(F ⊗ G) ⟶ g^*F ⊗ g^*G` and `g^*𝟙 ⟶ 𝟙` are
+  isomorphisms.
+- `AlgebraicGeometry.Etale.monoidal_upperStar`: for closed `A`, the pullback `g^*` is strong
+  monoidal.
 
 -/
 
@@ -117,5 +130,35 @@ of the unit `ε : 𝟙 ⟶ g_*𝟙` of the lax monoidal pushforward followed by 
 lemma Etale.upperStar_η :
     η (g)^*[A] = (g)^*[A].map (ε (g)_*[A]) ≫ (adj).counit.app _ := by
   simp [Adjunction.leftAdjointOplaxMonoidal_η, Adjunction.homEquiv_counit]
+
+section Closed
+
+variable [MonoidalClosed A]
+
+open Functor.OplaxMonoidal
+
+/-- For closed `A`, the comparison map `δ : g^*(F ⊗ G) ⟶ g^*F ⊗ g^*G` of the oplax monoidal
+pullback is an isomorphism. This is
+`CategoryTheory.Functor.sheafPullbackConstruction.isIso_δ_sheafPullback` for the base change
+functor, which is representably flat. -/
+instance Etale.isIso_upperStar_δ (F G : Sheaf Y.smallEtaleTopology A) :
+    IsIso (δ (g)^*[A] F G) :=
+  inferInstanceAs (IsIso (δ (Functor.sheafPullbackConstruction.sheafPullback
+    (MorphismProperty.Over.pullback @Etale ⊤ g) A
+    (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)) F G))
+
+/-- For closed `A`, the comparison map `η : g^*𝟙 ⟶ 𝟙` of the oplax monoidal pullback is an
+isomorphism. -/
+instance Etale.isIso_upperStar_η : IsIso (η (g)^*[A]) :=
+  inferInstanceAs (IsIso (η (Functor.sheafPullbackConstruction.sheafPullback
+    (MorphismProperty.Over.pullback @Etale ⊤ g) A
+    (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale))))
+
+/-- For closed `A`, the pullback `g^*` on étale sheaves is strong monoidal, its oplax structure
+`Etale.oplaxMonoidal_upperStar` having invertible comparison maps. -/
+noncomputable instance Etale.monoidal_upperStar : (g)^*[A].Monoidal :=
+  .ofOplaxMonoidal _
+
+end Closed
 
 end AlgebraicGeometry
