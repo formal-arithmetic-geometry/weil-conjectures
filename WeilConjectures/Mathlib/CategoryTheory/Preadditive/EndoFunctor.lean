@@ -37,7 +37,7 @@ namespace CategoryTheory.Endofunctor
 
 open Limits
 
-universe v u
+universe v u v' u'
 
 variable {C : Type u} [Category.{v} C]
 
@@ -143,5 +143,21 @@ instance : PreservesFiniteColimits (forget F) :=
   comp_preservesFiniteColimits (ι F) (Algebra.forget F)
 
 end IsoAlgebra
+
+section Map
+
+variable {D : Type u'} [Category.{v'} D] [Preadditive C] [Preadditive D] {F : C ⥤ C}
+  {G : D ⥤ D} [F.Additive] [G.Additive] {L : C ⥤ D} [L.Additive]
+
+instance Algebra.additive_mapOfNatTrans (e : L ⋙ G ⟶ F ⋙ L) :
+    (Algebra.mapOfNatTrans e).Additive where
+  map_add := Algebra.Hom.ext L.map_add
+
+instance IsoAlgebra.additive_mapOfNatIso (e : L ⋙ G ≅ F ⋙ L) :
+    (IsoAlgebra.mapOfNatIso e).Additive :=
+  inferInstanceAs ((Algebra.IsIsoStr G).lift (IsoAlgebra.ι F ⋙ Algebra.mapOfNatTrans e.hom)
+    _).Additive
+
+end Map
 
 end CategoryTheory.Endofunctor

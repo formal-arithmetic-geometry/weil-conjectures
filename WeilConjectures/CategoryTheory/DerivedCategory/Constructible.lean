@@ -149,6 +149,17 @@ lemma Etale.DerivedCategory.constructibleHomology_eq :
       _root_.DerivedCategory.homologyProperty (Etale.constructibleSheaf A X) :=
   rfl
 
+instance : (Etale.DerivedCategory.boundedConstructible A X).IsClosedUnderIsomorphisms := by
+  rw [Etale.DerivedCategory.boundedConstructible, Etale.DerivedCategory.constructibleHomology_eq]
+  infer_instance
+
+/-- `Dᵇc(X, A)` is stable under the shifts of the derived category; unlike
+`Etale.DerivedCategory.boundedConstructible_isTriangulated` this needs no closure property of
+the constructible sheaves. -/
+instance : (Etale.DerivedCategory.boundedConstructible A X).IsStableUnderShift ℤ := by
+  rw [Etale.DerivedCategory.boundedConstructible, Etale.DerivedCategory.constructibleHomology_eq]
+  infer_instance
+
 variable [(Etale.constructibleSheaf A X).IsClosedUnderKernels]
   [(Etale.constructibleSheaf A X).IsClosedUnderCokernels]
   [(Etale.constructibleSheaf A X).IsClosedUnderExtensions]
@@ -195,6 +206,11 @@ instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderCoke
     exact (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).prop_of_iso
       (IsColimit.coconePointUniqueUpToIso (cokernelIsCokernel f) hk)
       ((Etale.constructibleSheaf_iff _ _ _).mpr (IsConstructibleSheaf.cokernel f))
+
+/-- Constructible sheaves of `Λ`-modules are closed under finite products: a common
+refinement of the stratifications of the factors trivializes the product. -/
+instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderFiniteProducts where
+  isClosedUnderLimitsOfShape _ _ := sorry
 
 end ModuleCat
 
