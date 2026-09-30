@@ -10,7 +10,6 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Coefficients
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.LeftExact
 import WeilConjectures.CategoryTheory.Sites.TransfinitePlusSheaf
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu
 
@@ -22,12 +21,18 @@ Sheafification exists for `A`-valued presheaves on any essentially small site, f
 Grothendieck abelian category `A` with `Hom`-types in the universe `u + 1`, one above the
 universe `u` of the base schemes.
 
-On a *small* site `(C, J)`, with `A` Grothendieck abelian with `Hom`-types in the universe of
-`C` (`CategoryTheory.GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian`), the
-sheafification functor is the transfinite plus construction
+On a *small* site `(C, J)`, sheafification exists for any `A` with `Hom`-types in the universe
+of `C` that is complete, cocomplete, AB5 and has a presentable detector
+(`CategoryTheory.GrothendieckTopology.hasSheafify_of_isDetector`), in particular for
+Grothendieck abelian `A`
+(`CategoryTheory.GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian`).
+The sheafification functor is the transfinite plus construction
 `CategoryTheory.GrothendieckTopology.transfinitePlusSheaf`, iterated along a regular cardinal
-`κ` for which a separator of `A` is `κ`-presentable and `C` has fewer than `κ` arrows. It is
-left exact because each plus step is and filtered colimits in `A` are exact. An essentially
+`κ` for which the detector is `κ`-presentable and `C` has fewer than `κ` arrows. It is left
+exact, since each plus step is left exact and filtered colimits in `A` are exact
+(`CategoryTheory.GrothendieckTopology.preservesFiniteLimits_transfinitePlusSheaf`). So every
+Grothendieck abelian `A` of size `u + 1` has small-site sheafification
+(`CategoryTheory.HasSmallSiteSheafify.of_isGrothendieckAbelian`). An essentially
 small site is equivalent to a small one (`hasSheafify_of_essentiallySmall`), and the small
 étale site, the small pro-étale site and their localizations `J.over V` are essentially small
 in `u + 1`.
@@ -49,26 +54,15 @@ namespace CategoryTheory.GrothendieckTopology
 /-- Sheafification for `A`-valued presheaves on a small site `(C, J)`, for a Grothendieck
 abelian coefficient category `A` whose `Hom`-types live in the universe of `C`.
 
-The sheafification functor is the transfinite plus construction
-`CategoryTheory.GrothendieckTopology.transfinitePlusSheaf`, iterated along a regular cardinal
-`κ` bounding the cardinalities of `Subobject G`, `G ⟶ G` for a separator `G` of `A` (so that
-`G` is `κ`-presentable) and of `Arrow C`. -/
+This is a special case of `CategoryTheory.GrothendieckTopology.hasSheafify_of_isDetector`: a
+Grothendieck abelian category is complete, cocomplete, AB5 and locally presentable
+(`CategoryTheory.IsGrothendieckAbelian.isLocallyPresentable`), and its separator is a
+detector. -/
 theorem hasSheafify_of_isGrothendieckAbelian {C : Type v} [SmallCategory C]
     (J : GrothendieckTopology C) (A : Type u') [Category.{v} A] [Abelian A]
     [IsGrothendieckAbelian.{v} A] :
-    HasSheafify J A := by
-  let G := separator A
-  obtain ⟨κ, hκ, h⟩ := HasCardinalLT.exists_regular_cardinal.{v}
-    (Subobject G ⊕ (G ⟶ G) ⊕ Arrow C)
-  have : Fact κ.IsRegular := ⟨hκ⟩
-  have := IsGrothendieckAbelian.isCardinalPresentable_of_isSeparator (isSeparator_separator A)
-    (h.of_injective _ Sum.inl_injective)
-    (h.of_injective _ (Sum.inr_injective.comp Sum.inl_injective))
-  have hC : HasCardinalLT (Arrow C) κ :=
-    h.of_injective _ (Sum.inr_injective.comp Sum.inr_injective)
-  have : Nonempty κ.ord.ToType := by simpa using hκ.ne_zero
-  have := WellFoundedLT.toOrderBot κ.ord.ToType
-  exact HasSheafify.mk' J A (J.transfinitePlusAdjunction A κ (isSeparator_separator A) hC)
+    HasSheafify J A :=
+  hasSheafify_of_isDetector J A (isSeparator_separator A).isDetector
 
 /-- Sheafification for `A`-valued presheaves on an essentially small site, for a
 Grothendieck abelian coefficient category `A` with `Hom`-types in the universe `u + 1`: the
@@ -83,6 +77,20 @@ instance (priority := high) hasSheafify_of_essentiallySmall (A : Type u')
   have : HasSheafify ((equivSmallModel C).inverse.inducedTopology J) A :=
     hasSheafify_of_isGrothendieckAbelian _ A
   hasSheafifyEssentiallySmallSite J A
+
+end CategoryTheory.GrothendieckTopology
+
+namespace CategoryTheory
+
+/-- A Grothendieck abelian category with `Hom`-types in the universe `u + 1` has small-site
+sheafification. -/
+instance HasSmallSiteSheafify.of_isGrothendieckAbelian (A : Type u') [Category.{u + 1} A]
+    [Abelian A] [IsGrothendieckAbelian.{u + 1} A] : HasSmallSiteSheafify A :=
+  ⟨fun J ↦ GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian J A⟩
+
+end CategoryTheory
+
+namespace CategoryTheory.GrothendieckTopology
 
 /-- Sheafification for `A`-valued presheaves on the small étale site of a scheme: the site
 is essentially small in `u + 1`. -/

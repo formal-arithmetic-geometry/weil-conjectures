@@ -458,6 +458,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasP
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
+public import WeilConjectures.Mathlib.CategoryTheory.Localization.Bousfield
 public import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
