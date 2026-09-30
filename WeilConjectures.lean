@@ -2,6 +2,7 @@ module  -- shake: keep-all --deprecated_module: ignore
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom
 public import WeilConjectures.Algebra.Homology.InternalHom
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
@@ -169,7 +170,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.SerpeSmallObjec
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Subcomplex
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-public import WeilConjectures.CategoryTheory.HomotopyCategory.DerivabilityStructure
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
@@ -437,6 +437,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.CardinalArrow
 public import WeilConjectures.Mathlib.CategoryTheory.Elements
 public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
+public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
