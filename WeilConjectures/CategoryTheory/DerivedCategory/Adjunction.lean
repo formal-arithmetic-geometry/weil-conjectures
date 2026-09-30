@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Localization.Adjunction
 public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
@@ -133,12 +134,9 @@ instance isLeftDerivedFunctor_leftDerivedFunctor_comp_rightDerivedFunctor :
       ((Functor.associator _ _ _).inv ≫
         whiskerRight f.leftDerivedFunctorCounit g.rightDerivedFunctor)
       (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) :=
-  (HomotopyCategory.quasiIso C
-    (ComplexShape.up ℤ)).localizerMorphismKFlat.isLeftDerivedFunctor_of_isLeftDerivabilityStructure
-      _ (fun P ↦ by
-        have := f.derives_kFlat.isIso_of_isLeftDerivedFunctor f.leftDerivedFunctorCounit P
-        exact inferInstanceAs
-          (IsIso (𝟙 _ ≫ g.rightDerivedFunctor.map (f.leftDerivedFunctorCounit.app _))))
+  (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)).localizerMorphismKFlat
+    |>.isLeftDerivedFunctor_comp_of_isLeftDerivabilityStructure _
+      (fun P ↦ f.derives_kFlat.isIso_of_isLeftDerivedFunctor _ P) _
 
 /-- The composition `g.rightDerivedFunctor ⋙ f.leftDerivedFunctor` is the
 right derived functor of `(g.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
@@ -150,14 +148,10 @@ instance isRightDerivedFunctor_rightDerivedFunctor_comp_leftDerivedFunctor :
       (whiskerRight g.rightDerivedFunctorUnit f.leftDerivedFunctor ≫
         (Functor.associator _ _ _).hom)
       (HomotopyCategory.quasiIso D (ComplexShape.up ℤ)) :=
-  (HomotopyCategory.KInjectives.localizerMorphism
-    D).isRightDerivedFunctor_of_isRightDerivabilityStructure
-      _ (fun I ↦ by
-        have := (HomotopyCategory.KInjectives.localizerMorphism_derives
-          (g.mapHomotopyCategory (ComplexShape.up ℤ) ⋙
-            DerivedCategory.Qh)).isIso_of_isRightDerivedFunctor g.rightDerivedFunctorUnit I
-        exact inferInstanceAs
-          (IsIso (f.leftDerivedFunctor.map (g.rightDerivedFunctorUnit.app _) ≫ 𝟙 _)))
+  (HomotopyCategory.KInjectives.localizerMorphism D)
+    |>.isRightDerivedFunctor_comp_of_isRightDerivabilityStructure _
+      (fun I ↦ (HomotopyCategory.KInjectives.localizerMorphism_derives
+        _).isIso_of_isRightDerivedFunctor _ I) _
 
 end Functor
 

@@ -31,6 +31,8 @@ and it is the latter that one wants when transporting the coherence of a pseudof
 - `CategoryTheory.Adjunction.map_unit_app_comp_liftAlgebraStr`: the unit `K ⟶ R (L K)` of an
   adjunction intertwines a structure map `G K ⟶ K` with its lift
   `CategoryTheory.Adjunction.liftAlgebraStr : G (R (L K)) ⟶ R (L K)` along a lift of `G`.
+- `CategoryTheory.mateEquiv_whiskerBottom`: the mate of a 2-square whiskered at the bottom is
+  the mate whiskered on the left.
 -/
 
 @[expose] public section
@@ -141,5 +143,23 @@ instance Adjunction.isIso_liftAlgebraStr (α : G ⋙ L ≅ L ⋙ H) {K : A} (φ 
   infer_instance
 
 end LiftAlgebraStr
+
+/-- Whiskering a 2-square at the bottom corresponds, under `mateEquiv`, to whiskering its mate
+on the left: for a 2-square `w` and `β : H ⟶ H'`
+
+```
+A ---G---> C            B ---R₁---> A
+|          |            |           |
+L₁   ⇙    L₂    ↦      H'    ⇙     G
+v          v            v           v
+B --H'---> D            D ---R₂---> C
+```
+-/
+lemma mateEquiv_whiskerBottom {G : A ⥤ C} {H H' : B ⥤ D} {L₁ : A ⥤ B} {R₁ : B ⥤ A}
+    {L₂ : C ⥤ D} {R₂ : D ⥤ C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (w : TwoSquare G L₁ L₂ H)
+    (β : H ⟶ H') :
+    mateEquiv adj₁ adj₂ (w.whiskerBottom β) = (mateEquiv adj₁ adj₂ w).whiskerLeft β := by
+  ext X
+  simp [mateEquiv, TwoSquare.whiskerBottom, TwoSquare.whiskerLeft, ← Functor.map_comp]
 
 end CategoryTheory

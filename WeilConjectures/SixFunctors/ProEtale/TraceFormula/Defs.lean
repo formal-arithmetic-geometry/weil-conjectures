@@ -27,9 +27,10 @@ data which this project has not yet built, stated for the pro-étale functors th
 
 - `AlgebraicGeometry.ProEtale.GeometricCoefficients`: the coefficient stage, carrying
   `Dᵇctf(X, A)`.
-- `AlgebraicGeometry.ProEtale.verdierDual`: the Verdier dual `D_X K = RHom(K, ω_X)`.
 - `AlgebraicGeometry.ProEtale.DerivedBraiding`: a braiding on `D(X, A)` for every scheme `X`.
 - `AlgebraicGeometry.ProEtale.GeometricOperations`: the geometric operation package.
+- `AlgebraicGeometry.ProEtale.GeometricOperations.verdierDual`: the Verdier dual
+  `D_X K = RHom(K, ω_X)` for the package's dualizing complex `ω_X`.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.upperShriekId`,
   `AlgebraicGeometry.ProEtale.GeometricOperations.upperShriekIdIso`,
   `AlgebraicGeometry.ProEtale.GeometricOperations.upperShriekComp`: the identity and
@@ -162,19 +163,6 @@ class DerivedBraiding where
 instance [DerivedBraiding A] (X : Scheme.{u}) :
     BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
   DerivedBraiding.braidedCategory X
-
-section VerdierDual
-
-variable {A}
-
-/-- The Verdier dual `D_X K = RHom(K, ω)` of `K` with respect to a dualizing complex `ω`
-(part of blueprint `sk-d-six`). -/
-noncomputable def verdierDual {X : Scheme.{u}}
-    (ω K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
-  (ihom K).obj ω
-
-end VerdierDual
 
 variable [DerivedBraiding A]
 
@@ -328,7 +316,7 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   /-- the evaluation-adjoint map `K ⟶ D_X D_X K`. -/
   bidualityMap {X : Scheme.{u}} (a : X ⟶ s)
       (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    K ⟶ verdierDual (dualizing a) (verdierDual (dualizing a) K)
+    K ⟶ (ihom ((ihom K).obj (dualizing a))).obj (dualizing a)
   /-- biduality on `Dᵇctf`: the evaluation-adjoint map `K ⟶ D_X D_X K` is invertible. -/
   isIso_bidualityMap {X : Scheme.{u}} (a : X ⟶ s)
       (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hK : ctf X K) :
@@ -345,7 +333,7 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
       (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hM : ctf X M)
       (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) (hN : ctf Y N) :
     ((upperStar A pX).leftDerivedFunctor).obj M ⊗
-        ((upperStar A pY).leftDerivedFunctor).obj (verdierDual (dualizing aY) N) ≅
+        ((upperStar A pY).leftDerivedFunctor).obj ((ihom N).obj (dualizing aY)) ≅
       (ihom (((upperStar A pY).leftDerivedFunctor).obj N)).obj
         ((rightDerivedUpperShriek A pX).obj M)
 
@@ -357,7 +345,7 @@ noncomputable def GeometricOperations.verdierDual {s : Scheme.{u}}
     (G : GeometricOperations A s) {X : Scheme.{u}} (a : X ⟶ s)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
-  _root_.AlgebraicGeometry.ProEtale.verdierDual (G.dualizing a) K
+  (ihom K).obj (G.dualizing a)
 
 namespace GeometricOperations
 

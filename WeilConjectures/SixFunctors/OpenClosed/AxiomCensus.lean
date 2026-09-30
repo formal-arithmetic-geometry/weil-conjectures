@@ -22,17 +22,12 @@ does the same for the four other statements of the chapter. The checks are run b
 build, so a change in the axiom dependencies beneath these declarations breaks compilation
 rather than going unnoticed.
 
-All six declarations currently report `sorryAx`. It enters through the sheafification and
-left-Kan-extension instances of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify` and
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`
-(`CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` and
-`AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback`), which are sorried and take
-precedence in instance search over the proved
-`CategoryTheory.GrothendieckTopology.hasSheafify_smallGrothendieckTopology` and
-`CategoryTheory.MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback` available
-here. Discharging those two sorries, or re-prioritising the proved instances, makes all six
-censuses sorry-free again.
+All six declarations depend only on the standard axioms `propext`, `Classical.choice` and
+`Quot.sound`. Sheafification in the definition of `AlgebraicGeometry.Etale.upperStar` is
+discharged by the instance `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall`
+of `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, which is proved through
+the transfinite plus construction; these checks guard against a `sorry` re-entering beneath
+the chapter.
 
 Note that the census for the `ModuleCat` specialization also covers the instances used to
 discharge the coefficient hypotheses, which the censuses of the general statements do not.
@@ -74,42 +69,42 @@ theorem Etale.shortExact_openClosedShortComplex_moduleCat (Λ : Type (u + 1)) [R
 
 /--
 info: 'AlgebraicGeometry.Etale.shortExact_openClosedShortComplex_moduleCat' depends on
-  axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+  axioms: [propext, Classical.choice, Quot.sound]
 -/
 #guard_msgs (whitespace := lax) in
 #print axioms AlgebraicGeometry.Etale.shortExact_openClosedShortComplex_moduleCat
 
 /--
 info: 'AlgebraicGeometry.Etale.isZero_upperStar_lowerStar_of_disjoint_range' depends on
-  axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+  axioms: [propext, Classical.choice, Quot.sound]
 -/
 #guard_msgs (whitespace := lax) in
 #print axioms AlgebraicGeometry.Etale.isZero_upperStar_lowerStar_of_disjoint_range
 
 /--
 info: 'AlgebraicGeometry.Etale.isZero_upperStar_openImmersionLowerShriek_of_disjoint_range'
-  depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+  depends on axioms: [propext, Classical.choice, Quot.sound]
 -/
 #guard_msgs (whitespace := lax) in
 #print axioms AlgebraicGeometry.Etale.isZero_upperStar_openImmersionLowerShriek_of_disjoint_range
 
 /--
 info: 'AlgebraicGeometry.Etale.upperStarCompSheafFiberIso' depends on
-  axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+  axioms: [propext, Classical.choice, Quot.sound]
 -/
 #guard_msgs (whitespace := lax) in
 #print axioms AlgebraicGeometry.Etale.upperStarCompSheafFiberIso
 
 /--
 info: 'AlgebraicGeometry.Etale.isIso_upperStarLowerStarAdjunction_counit' depends on
-  axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+  axioms: [propext, Classical.choice, Quot.sound]
 -/
 #guard_msgs (whitespace := lax) in
 #print axioms AlgebraicGeometry.Etale.isIso_upperStarLowerStarAdjunction_counit
 
 /--
 info: 'AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_upperStar' depends on
-  axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+  axioms: [propext, Classical.choice, Quot.sound]
 -/
 #guard_msgs (whitespace := lax) in
 #print axioms AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_upperStar

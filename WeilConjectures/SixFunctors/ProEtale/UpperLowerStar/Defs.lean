@@ -56,9 +56,11 @@ by sheafification.
   `AlgebraicGeometry.ProEtale.hasPointwiseLeftKanExtension_op_overPullback`: for `g` weakly
   étale, the opposite of base change is a left adjoint — base change is right adjoint to
   the localization functor `MorphismProperty.Over.map ⊤ ‹WeaklyEtale g›` — and all pointwise
-  left Kan extensions along it exist. These are proved, not sorried; for a general `g` the
-  corresponding instances are the sorried ones of
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`.
+  left Kan extensions along it exist. For a general `g` the pointwise left Kan extensions
+  instead exist by essential `u + 1`-smallness of the indexing comma categories,
+  `CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
+  `WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`, with no smallness of
+  the small pro-étale site itself.
 - `AlgebraicGeometry.ProEtale.preservesLimitsOfShape_lowerStar` and
   `AlgebraicGeometry.ProEtale.preservesFiniteLimits_lowerStar`: the pushforward `g_*`
   preserves every limit that exists in the coefficient category. This needs no hypothesis
@@ -69,8 +71,7 @@ by sheafification.
   exact, hence exact, being also a left adjoint. In contrast to `g_*` this is not
   automatic: it needs sheafification to be left exact and the left Kan extension along the
   opposite of base change to be so as well. For a weakly étale `g` the latter is proved
-  here, the Kan extension being precomposition with a right adjoint; for a general `g` it
-  is the sorried instance
+  here, the Kan extension being precomposition with a right adjoint; for a general `g` it is
   `AlgebraicGeometry.ProEtale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian`.
 
 ## Implementation notes
@@ -84,11 +85,15 @@ by sheafification.
   `WeaklyEtale g`. This is essential for compactifications, whose structure morphism is
   proper and in general is not weakly étale.
 - Sheafification on the small pro-étale sites and the left Kan extensions along the
-  opposite of base change exist since `A` is Grothendieck abelian and the small pro-étale
-  sites are essentially small; these are the sorried instances of
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify` and
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`. Hence
+  opposite of base change both hold for every Grothendieck abelian `A`, so
   `ProEtale.upperStar` and the adjunction `g^* ⊣ g_*` carry no hypotheses either.
+  Sheafification is
+  `CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology` of
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, still sorried through
+  `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` there, and it does
+  use essential smallness of the site. The Kan extensions are proved and use no smallness
+  of the site at all, only of the indexing comma categories, see
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`.
 
 -/
 
@@ -207,10 +212,13 @@ namespace ProEtale
 
 /-- The pullback `g^*` along an arbitrary morphism `g : Z ⟶ Y` on sheaves for the small
 pro-étale sites: left Kan extension on presheaves followed by sheafification, left adjoint
-to `ProEtale.lowerStar`. The Kan extensions and the sheafification are provided by the
-sorried instances of `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`
-and `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. For `g` weakly étale
-the Kan extension hypothesis is automatic by
+to `ProEtale.lowerStar`. The Kan extensions are provided by
+`CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
+`WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`, and the sheafification by
+`CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology` of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, which is still sorried
+through `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall`. For `g`
+weakly étale the Kan extension hypothesis is automatic by
 `ProEtale.hasPointwiseLeftKanExtension_op_overPullback`, and `g^*` is computed by
 restriction, see `ProEtale.upperStarIsoOpenImmersionRestriction`. -/
 noncomputable def upperStar :
@@ -242,9 +250,9 @@ adjoint: `g^*` is the composite of the inclusion of sheaves into presheaves, whi
 finite limits, the left Kan extension along the opposite of base change, and sheafification,
 which is left exact by `HasSheafify`. The left exactness of the Kan extension is
 `ProEtale.preservesFiniteLimits_op_lan_overPullback` for a weakly étale `g`, and in general
-the sorried `ProEtale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian`,
-the Kan extension being a filtered colimit and filtered colimits in the Grothendieck
-abelian `A` being exact. -/
+`ProEtale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian`, the Kan
+extension being a filtered colimit and filtered colimits in the Grothendieck abelian `A`
+being exact. -/
 instance ProEtale.preservesFiniteLimits_upperStar
     [PreservesFiniteLimits ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).op.lan :
       (Y.ProEtᵒᵖ ⥤ A) ⥤ Z.ProEtᵒᵖ ⥤ A)] :

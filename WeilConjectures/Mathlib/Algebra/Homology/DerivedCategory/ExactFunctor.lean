@@ -9,7 +9,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
 # Functoriality of `mapDerivedCategory`
@@ -24,6 +27,17 @@ For exact functors between abelian categories, the induced functor
 - `CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso`: the commutation
   `H^n(-) ⋙ F ≅ F.mapDerivedCategory ⋙ H^n(-)` with the homology functors, with the
   bounded below variant `CategoryTheory.Functor.mapDerivedCategoryPlusHomologyFunctorIso`.
+- `CategoryTheory.Functor.isZero_mapDerivedCategory_obj`: `F.mapDerivedCategory` kills every
+  object whose homology objects are killed by `F`.
+- `CategoryTheory.Functor.jointlyReflectIsomorphisms_mapDerivedCategory` and
+  `CategoryTheory.Functor.jointlyReflectIsomorphisms_pairFunctor_mapDerivedCategory`: if a
+  family of exact functors jointly reflects isomorphisms, so do the induced functors on
+  derived categories.
+- `CategoryTheory.Functor.isGE_mapDerivedCategory_obj`,
+  `CategoryTheory.Functor.isLE_mapDerivedCategory_obj`,
+  `CategoryTheory.Functor.homologyConcentratedIn_mapDerivedCategory_obj` and
+  `CategoryTheory.Functor.bounded_mapDerivedCategory_obj`: `F.mapDerivedCategory` preserves
+  the bounds of the canonical t-structure.
 - `CategoryTheory.Functor.mapDerivedCategoryPlus`: the restriction of
   `F.mapDerivedCategory` to the bounded below derived categories, with the compatibility
   isomorphism `CategoryTheory.Functor.mapDerivedCategoryPlusCompatibility` and the
@@ -59,6 +73,8 @@ For exact functors between abelian categories, the induced functor
 -/
 
 @[expose] public section
+
+universe v₁ u₁
 
 open CategoryTheory Limits
 
@@ -259,6 +275,47 @@ noncomputable def mapDerivedCategoryHomologyFunctorIso (F : C ⥤ D) [F.Additive
     (F.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor D n)
     (Iso.refl _)
 
+/-- An exact functor `F` kills an object `K` of the derived category as soon as it kills all
+the homology objects of `K`, since `H^n (F K) ≅ F (H^n K)`. -/
+lemma isZero_mapDerivedCategory_obj (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
+    [PreservesFiniteColimits F] (K : DerivedCategory C)
+    (hK : ∀ n : ℤ, IsZero (F.obj ((DerivedCategory.homologyFunctor C n).obj K))) :
+    IsZero (F.mapDerivedCategory.obj K) :=
+  (DerivedCategory.isZero_iff _).2 fun n ↦
+    (hK n).of_iso ((F.mapDerivedCategoryHomologyFunctorIso n).symm.app K)
+
+/-- If a family of exact functors jointly reflects isomorphisms, so does the family of the
+induced functors on derived categories: a morphism is an isomorphism iff it is one on all
+homology objects, and `F.mapDerivedCategory` commutes with homology. -/
+lemma jointlyReflectIsomorphisms_mapDerivedCategory {I : Type*} {D' : I → Type*}
+    [∀ i, Category (D' i)] [∀ i, Abelian (D' i)] [∀ i, HasDerivedCategory (D' i)]
+    {F : ∀ i, C ⥤ D' i} [∀ i, (F i).Additive] [∀ i, PreservesFiniteLimits (F i)]
+    [∀ i, PreservesFiniteColimits (F i)] (hF : JointlyReflectIsomorphisms F) :
+    JointlyReflectIsomorphisms fun i ↦ (F i).mapDerivedCategory where
+  isIso f _ := by
+    rw [DerivedCategory.isIso_iff]
+    intro n
+    exact (hF.isIso_iff _).2 fun i ↦
+      (NatIso.isIso_map_iff ((F i).mapDerivedCategoryHomologyFunctorIso n) f).2
+        (by rw [Functor.comp_map]; infer_instance)
+
+/-- If a pair of exact functors jointly reflects isomorphisms, so does the pair of the
+induced functors on derived categories. This is the `CategoryTheory.pairFunctor` form of
+`CategoryTheory.Functor.jointlyReflectIsomorphisms_mapDerivedCategory`. -/
+lemma jointlyReflectIsomorphisms_pairFunctor_mapDerivedCategory {D₁ D₂ : Type u₁}
+    [Category.{v₁} D₁] [Category.{v₁} D₂] [Abelian D₁] [Abelian D₂]
+    [HasDerivedCategory D₁] [HasDerivedCategory D₂] (F₁ : C ⥤ D₁) (F₂ : C ⥤ D₂)
+    [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+    [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+    (hF : JointlyReflectIsomorphisms (pairFunctor F₁ F₂)) :
+    JointlyReflectIsomorphisms (pairFunctor F₁.mapDerivedCategory F₂.mapDerivedCategory) := by
+  refine jointlyReflectIsomorphisms_pairFunctor _ _ fun K L f h₁ h₂ ↦ ?_
+  rw [DerivedCategory.isIso_iff]
+  intro n
+  refine hF.isIso_of_pairFunctor _ ?_ ?_ <;>
+    exact (NatIso.isIso_map_iff (mapDerivedCategoryHomologyFunctorIso _ n) f).2
+      (by rw [Functor.comp_map]; infer_instance)
+
 section Plus
 
 variable (F : C ⥤ D) [F.Additive]
@@ -276,6 +333,39 @@ lemma isGE_mapDerivedCategory_obj (X : DerivedCategory C) (n : ℤ) [X.IsGE n] :
       ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)) n)
   exact DerivedCategory.TStructure.t.isGE_of_iso
     (F.mapDerivedCategory.mapIso e ≪≫ F.mapDerivedCategoryFactors.app K).symm n
+
+/-- An exact functor between abelian categories sends an object of the derived category
+whose `n`-th homology vanishes to an object whose `n`-th homology vanishes. -/
+lemma isZero_homologyFunctor_mapDerivedCategory_obj {X : DerivedCategory C} {n : ℤ}
+    (hX : IsZero ((DerivedCategory.homologyFunctor C n).obj X)) :
+    IsZero ((DerivedCategory.homologyFunctor D n).obj (F.mapDerivedCategory.obj X)) :=
+  (F.map_isZero hX).of_iso ((F.mapDerivedCategoryHomologyFunctorIso n).symm.app X)
+
+/-- An exact functor between abelian categories preserves bounded above objects of the
+derived categories: an object with homology concentrated in degrees `≤ n` is sent to an
+object with the same property. -/
+lemma isLE_mapDerivedCategory_obj (X : DerivedCategory C) (n : ℤ) [X.IsLE n] :
+    (F.mapDerivedCategory.obj X).IsLE n :=
+  (DerivedCategory.isLE_iff _ n).2 fun i hi ↦
+    F.isZero_homologyFunctor_mapDerivedCategory_obj ((DerivedCategory.isLE_iff X n).1 ‹_› i hi)
+
+/-- An exact functor between abelian categories preserves homology concentration in an
+interval `[a, b]`. -/
+lemma homologyConcentratedIn_mapDerivedCategory_obj {a b : ℤ} {X : DerivedCategory C}
+    (hX : DerivedCategory.homologyConcentratedIn a b X) :
+    DerivedCategory.homologyConcentratedIn a b (F.mapDerivedCategory.obj X) := by
+  obtain ⟨_, _⟩ := (DerivedCategory.homologyConcentratedIn_iff a b X).1 hX
+  exact (DerivedCategory.homologyConcentratedIn_iff a b _).2
+    ⟨F.isGE_mapDerivedCategory_obj X a, F.isLE_mapDerivedCategory_obj X b⟩
+
+/-- An exact functor between abelian categories preserves objects of the derived categories
+that are bounded for the canonical t-structure. -/
+lemma bounded_mapDerivedCategory_obj {X : DerivedCategory C}
+    (hX : DerivedCategory.TStructure.t.bounded X) :
+    DerivedCategory.TStructure.t.bounded (F.mapDerivedCategory.obj X) := by
+  obtain ⟨a, b, hab⟩ := (DerivedCategory.exists_homologyConcentratedIn_iff_bounded X).2 hX
+  exact (DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1
+    ⟨a, b, F.homologyConcentratedIn_mapDerivedCategory_obj hab⟩
 
 /-- The functor induced on the bounded below derived categories by an exact functor
 between abelian categories: the restriction of `F.mapDerivedCategory` to

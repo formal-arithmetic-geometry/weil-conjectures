@@ -67,6 +67,10 @@ The inclusion `I.subschemeι` is a closed immersion, hence affine, so `V(I)` is 
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeι_specMap_fromSpec`
 - `AlgebraicGeometry.Scheme.Hom.ker_toImage`
+- `AlgebraicGeometry.Scheme.Opens.closedComplement` and
+  `AlgebraicGeometry.Scheme.Opens.range_closedComplement`, with the specialisations
+  `AlgebraicGeometry.Scheme.Hom.closedComplement` and
+  `AlgebraicGeometry.Scheme.Hom.range_closedComplement` to the range of an open immersion
 - `AlgebraicGeometry.Scheme.Hom.range_imageι` and `AlgebraicGeometry.Scheme.Hom.surjective_imageι`
 - `AlgebraicGeometry.Scheme.Opens.isIso_morphismRestrict_imageι`
 - `AlgebraicGeometry.Scheme.Opens.isSchemeTheoreticallyDominant_preimage_imageι`
@@ -154,6 +158,21 @@ namespace AlgebraicGeometry.Scheme.Opens
 
 variable {X : Scheme.{u}} (U : X.Opens)
 
+/-- The **closed complement** of an open `U ⊆ X`: the closed subscheme of `X` cut out by the
+vanishing ideal of the closed set `Uᶜ`. -/
+noncomputable def closedComplement :
+    (IdealSheafData.vanishingIdeal ⟨(U : Set X)ᶜ, U.isOpen.isClosed_compl⟩).subscheme ⟶ X :=
+  IdealSheafData.subschemeι _
+
+instance isClosedImmersion_closedComplement : IsClosedImmersion U.closedComplement :=
+  inferInstanceAs (IsClosedImmersion (IdealSheafData.subschemeι _))
+
+/-- The closed complement of an open `U` is supported exactly on the complement of `U`. -/
+@[simp]
+lemma range_closedComplement : Set.range U.closedComplement.base = (U : Set X)ᶜ := by
+  simp [closedComplement, IdealSheafData.range_subschemeι,
+    IdealSheafData.coe_support_vanishingIdeal]
+
 section
 
 variable [QuasiCompact U.ι]
@@ -217,3 +236,19 @@ lemma iInf_preimage_imageι {ι : Type*} [Finite ι] {V : ι → X.Opens} (hV : 
   rw [← U.ι.imageι.preimage_iInf, hV]
 
 end AlgebraicGeometry.Scheme.Opens
+
+namespace AlgebraicGeometry.Scheme.Hom
+
+variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+
+/-- The **closed complement** of an open immersion `j : U ⟶ X`: the closed complement
+`AlgebraicGeometry.Scheme.Opens.closedComplement` of its range. -/
+noncomputable abbrev closedComplement := j.opensRange.closedComplement
+
+/-- The closed complement of an open immersion `j` is supported exactly on the complement of
+the range of `j`. -/
+@[simp]
+lemma range_closedComplement : Set.range j.closedComplement.base = (Set.range j.base)ᶜ := by
+  simp
+
+end AlgebraicGeometry.Scheme.Hom

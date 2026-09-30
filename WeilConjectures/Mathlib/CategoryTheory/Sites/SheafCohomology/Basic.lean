@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.GroupTheory.Torsion
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 
 /-!
@@ -19,6 +20,8 @@ push an `Ext`-class forward along `G` and precompose with the comparison of cons
 
 ## Main definitions
 
+- `CategoryTheory.Sheaf.IsTorsion`: a sheaf of abelian groups all of whose groups of sections
+  are torsion groups.
 - `CategoryTheory.Sheaf.H.mapFunctor`: the map `H F n →+ H (G.obj F) n` on sheaf cohomology
   induced by an exact functor `G` together with an isomorphism `e` between the constant
   sheaf `ℤ` on the target site and the image under `G` of the constant sheaf `ℤ` on the
@@ -39,6 +42,11 @@ universe w' w v' v u' u
 namespace CategoryTheory
 
 open Abelian Limits AddCommGrpCat
+
+/-- A sheaf of abelian groups is *torsion* if all its groups of sections are torsion groups. -/
+def Sheaf.IsTorsion {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+    (F : Sheaf J AddCommGrpCat.{w}) : Prop :=
+  ∀ U, IsAddTorsion (F.obj.obj U)
 
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 variable {D : Type u'} [Category.{v'} D] {K : GrothendieckTopology D}

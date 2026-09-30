@@ -37,8 +37,9 @@ special case of the literal pullback is `Compactification.baseChange`.
 - `AlgebraicGeometry.Compactification.isPullback_of_isPullback`: the open immersion of the
   base changed compactification is a base change of the original open immersion;
 - `AlgebraicGeometry.HasCompactification.of_isPullback`: compactifiability is stable under
-  base change, and `HasCompactification.pullback_fst`, `HasCompactification.pullback_snd`
-  are its instances for the projections of a fibre product;
+  base change, with the two projections of a fibre product as instances
+  (`AlgebraicGeometry.HasCompactification.pullback_snd` and
+  `AlgebraicGeometry.HasCompactification.pullback_fst`);
 - `AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_i_ofIsPullback` and
   `AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_i_baseChange`: along a
   **flat** base change, scheme-theoretic density of the open immersion is preserved;
@@ -162,17 +163,17 @@ theorem HasCompactification.of_isPullback (hsq : IsPullback h u p t) [HasCompact
     HasCompactification u :=
   (Compactification.ofIsPullback hsq (HasCompactification.compactification p)).hasCompactification
 
-/-- The first projection `X ×_S Y ⟶ X` is the base change of `g : Y ⟶ S`, so it admits a
-compactification when `g` does. -/
-instance HasCompactification.pullback_fst {X Y S : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
-    [HasCompactification g] : HasCompactification (pullback.fst f g) :=
-  .of_isPullback (IsPullback.of_hasPullback f g).flip
-
-/-- The second projection `X ×_S Y ⟶ Y` is the base change of `f : X ⟶ S`, so it admits a
-compactification when `f` does. -/
-instance HasCompactification.pullback_snd {X Y S : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
+/-- The second projection of a fibre product is a base change of the first leg of the
+cospan, so it inherits compactifiability. -/
+instance HasCompactification.pullback_snd {X Y Z : Scheme.{u}} (f : X ⟶ Z) (g : Y ⟶ Z)
     [HasCompactification f] : HasCompactification (pullback.snd f g) :=
   .of_isPullback (IsPullback.of_hasPullback f g)
+
+/-- The first projection of a fibre product is a base change of the second leg of the
+cospan, so it inherits compactifiability. -/
+instance HasCompactification.pullback_fst {X Y Z : Scheme.{u}} (f : X ⟶ Z) (g : Y ⟶ Z)
+    [HasCompactification g] : HasCompactification (pullback.fst f g) :=
+  .of_isPullback (IsPullback.of_hasPullback f g).flip
 
 /-! ### Axiom census
 

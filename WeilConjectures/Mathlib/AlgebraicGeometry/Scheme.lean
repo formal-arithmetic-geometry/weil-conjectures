@@ -28,6 +28,17 @@ We also record that a global section whose non-vanishing locus is everything is 
   `appLE` of a composition are in the image of `appLE` of its first factor.
 * `AlgebraicGeometry.Scheme.IsSpecOfField`: the scheme is isomorphic to the spectrum of a
   field, with the instance `AlgebraicGeometry.Scheme.isSpecOfField_Spec` for `Spec k`.
+
+# The inverse image of the structure sheaf
+
+For a morphism of schemes `f : X ⟶ S`:
+
+* `AlgebraicGeometry.Scheme.Hom.pullbackPresheaf`: the presheaf inverse image `f⁻¹𝒪_S`, a
+  presheaf of commutative rings on `X`.
+* `AlgebraicGeometry.Scheme.Hom.pullbackPresheafToPresheaf`: the morphism `f⁻¹𝒪_S ⟶ 𝒪_X`
+  adjoint to `f♯ : 𝒪_S ⟶ f_*𝒪_X`.
+* `AlgebraicGeometry.Scheme.Hom.appLE_eq_pullbackPresheafToPresheaf_app`: `f.appLE U V e` factors
+  through `(f⁻¹𝒪_S)(V)`.
 -/
 
 @[expose] public section
@@ -106,3 +117,46 @@ lemma IsSpecOfField.of_iso {S T : Scheme.{u}} (e : S ≅ T) [T.IsSpecOfField] :
   ⟨⟨k, inferInstance, ⟨e ≪≫ e'⟩⟩⟩
 
 end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme.Hom
+
+variable {X S : Scheme.{u}} (f : X ⟶ S)
+
+/-- The presheaf inverse image `f⁻¹𝒪_S` of the structure sheaf of `S`, a presheaf of
+commutative rings on `X`. -/
+noncomputable abbrev pullbackPresheaf : TopCat.Presheaf CommRingCat.{u} X :=
+  (TopCat.Presheaf.pullback CommRingCat f.base).obj S.presheaf
+
+/-- The morphism `f⁻¹𝒪_S ⟶ 𝒪_X` of presheaves of commutative rings on `X`, the transpose of
+`f♯ : 𝒪_S ⟶ f_*𝒪_X` under the adjunction `f⁻¹ ⊣ f_*`:
+```
+  𝒪_S ──f♯──▶ f_* 𝒪_X          (on S)
+  ─────────────────────
+  f⁻¹𝒪_S ─────▶ 𝒪_X            (on X)
+```
+-/
+noncomputable def pullbackPresheafToPresheaf : f.pullbackPresheaf ⟶ X.presheaf :=
+  ((TopCat.Presheaf.pullbackPushforwardAdjunction CommRingCat f.base).homEquiv _ _).symm f.c
+
+/-- `f♯` is the adjunction unit followed by the pushforward of `f⁻¹𝒪_S ⟶ 𝒪_X`. -/
+@[reassoc (attr := simp)]
+lemma unit_app_comp_pushforward_map_pullbackPresheafToPresheaf :
+    (TopCat.Presheaf.pullbackPushforwardAdjunction CommRingCat f.base).unit.app S.presheaf ≫
+      (TopCat.Presheaf.pushforward CommRingCat f.base).map f.pullbackPresheafToPresheaf = f.c :=
+  (Adjunction.homEquiv_unit _ _ _ _).symm.trans (Equiv.apply_symm_apply _ _)
+
+/-- The map `f.appLE U V e : Γ(S, U) ⟶ Γ(X, V)` factors through `(f⁻¹𝒪_S)(V)`. -/
+lemma appLE_eq_pullbackPresheafToPresheaf_app (U : S.Opens) (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) :
+    f.appLE U V e =
+      ((TopCat.Presheaf.pullbackPushforwardAdjunction CommRingCat f.base).unit.app
+          S.presheaf).app (Opposite.op U) ≫
+        f.pullbackPresheaf.map (homOfLE e).op ≫
+          f.pullbackPresheafToPresheaf.app (Opposite.op V) := by
+  rw [f.pullbackPresheafToPresheaf.naturality, ← Category.assoc]
+  have := NatTrans.congr_app f.unit_app_comp_pushforward_map_pullbackPresheafToPresheaf
+    (Opposite.op U)
+  rw [NatTrans.comp_app] at this
+  erw [this]
+  rfl
+
+end AlgebraicGeometry.Scheme.Hom
