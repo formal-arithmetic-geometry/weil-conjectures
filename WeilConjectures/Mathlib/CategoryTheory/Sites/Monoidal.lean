@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.Monoidal
 public import Mathlib.CategoryTheory.Sites.Pullback
-public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
@@ -38,10 +38,10 @@ When `A` is symmetric this says that `F.sheafPushforwardContinuous A J K` is lax
 monoidal.
 
 Its left adjoint, the pullback `sheafPullbackConstruction.sheafPullback F A J K` (left Kan
-extension along `F.op` followed by sheafification), is therefore oplax monoidal. If `F` is
-representably flat and the tensor product of `A` preserves the colimits of shape
-`CostructuredArrow F.op X` in each variable (for example if `A` is closed), then the pullback
-is strong monoidal. The proof compares the sheaf-level adjunction, precomposed with
+extension along `F.op` followed by sheafification), is therefore oplax monoidal. If the comma
+categories `CostructuredArrow F.op X` are sifted (for example if `F` is representably flat)
+and tensoring in `A` preserves colimits of these shapes (for example if `A` is closed), then
+the pullback is strong monoidal. The proof compares the sheaf-level adjunction, precomposed with
 sheafification, with the composite of the presheaf-level adjunction
 `F.op.lan ⊣ (whiskeringLeft _ _ A).obj F.op` and sheafification: both have right adjoint the
 underlying presheaf of the pushforward, as lax monoidal functors up to a monoidal isomorphism,
@@ -60,10 +60,10 @@ sheafification.
   along a continuous functor of sites is lax braided.
 - `CategoryTheory.Functor.sheafPullbackConstruction.isIso_δ_sheafPullback` and
   `CategoryTheory.Functor.sheafPullbackConstruction.isIso_η_sheafPullback`: the comparison
-  maps of the oplax monoidal pullback along a representably flat continuous functor are
-  isomorphisms.
+  maps of the oplax monoidal pullback are isomorphisms, e.g. along a representably flat
+  continuous functor.
 - `CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackMonoidal`: the pullback of
-  sheaves along a representably flat continuous functor is strong monoidal.
+  sheaves is then strong monoidal.
 -/
 
 
@@ -218,80 +218,50 @@ noncomputable instance sheafPullbackOplaxMonoidal : (sheafPullback F A J K).Opla
   (sheafAdjunctionContinuous F A J K).leftAdjointOplaxMonoidal
 
 /-- The adjunction between the pullback and the pushforward of sheaves is monoidal. -/
-instance isMonoidal_sheafAdjunctionContinuous : (sheafAdjunctionContinuous F A J K).IsMonoidal :=
-  inferInstanceAs (letI := (sheafAdjunctionContinuous F A J K).leftAdjointOplaxMonoidal
-    (sheafAdjunctionContinuous F A J K).IsMonoidal)
+instance isMonoidal_sheafAdjunctionContinuous :
+    (sheafAdjunctionContinuous F A J K).IsMonoidal := by
+  let := (sheafAdjunctionContinuous F A J K).leftAdjointOplaxMonoidal
+  infer_instance
 
-/-- The comparison from the restriction along `F.op` of the underlying presheaf of a sheaf to
-the underlying presheaf of its pushforward: the unit of sheafification followed by the
-isomorphism `sheafToPresheafCompWhiskeringLeftCompPresheafToSheafIso`. Both functors send a
-sheaf `P` to `F.op ⋙ P.obj`, and this is a monoidal isomorphism between them. -/
-noncomputable def sheafToPresheafCompWhiskeringLeftToPushforward :
-    sheafToPresheaf K A ⋙ (whiskeringLeft _ _ A).obj F.op ⟶
+/-- The isomorphism from the restriction along `F.op` of the underlying presheaf of a sheaf to
+the underlying presheaf of its pushforward. Both functors send a sheaf `P` to `F.op ⋙ P.obj`,
+but the lax monoidal structure of the target is transported along
+`sheafToPresheafCompWhiskeringLeftCompPresheafToSheafIso`. At `P` it is
+```
+  F.op ⋙ P.obj ──toSheafify──▶ sheafify (F.op ⋙ P.obj) ──≅──▶ ((F_*) P).obj
+```
+where the first map is invertible since `F.op ⋙ P.obj` is a sheaf, and this is a monoidal
+isomorphism. -/
+noncomputable def sheafToPresheafCompWhiskeringLeftIsoPushforward :
+    sheafToPresheaf K A ⋙ (whiskeringLeft _ _ A).obj F.op ≅
       F.sheafPushforwardContinuous A J K ⋙ sheafToPresheaf J A :=
-  (sheafToPresheaf K A ⋙ (whiskeringLeft _ _ A).obj F.op).rightUnitor.inv ≫
-    whiskerLeft _ (sheafificationAdjunction J A).unit ≫
-    (Functor.associator _ _ _).inv ≫
-    whiskerRight (Functor.associator _ _ _).hom _ ≫
-    whiskerRight (sheafToPresheafCompWhiskeringLeftCompPresheafToSheafIso F A J K).hom _
+  have : IsIso (whiskerLeft (sheafToPresheaf K A ⋙ (whiskeringLeft _ _ A).obj F.op)
+      (sheafificationAdjunction J A).unit) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    exact fun P ↦ isIso_toSheafify J ((F.sheafPushforwardContinuous A J K).obj P).property
+  (sheafToPresheaf K A ⋙ (whiskeringLeft _ _ A).obj F.op).rightUnitor.symm ≪≫
+    asIso (whiskerLeft _ (sheafificationAdjunction J A).unit) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    isoWhiskerRight (Functor.associator _ _ _) _ ≪≫
+    isoWhiskerRight (sheafToPresheafCompWhiskeringLeftCompPresheafToSheafIso F A J K) _
 
-instance : NatTrans.IsMonoidal (sheafToPresheafCompWhiskeringLeftToPushforward F A J K) := by
+instance : NatTrans.IsMonoidal (sheafToPresheafCompWhiskeringLeftIsoPushforward F A J K).hom := by
   have := LaxMonoidal.natTransIsMonoidal_of_transport
     (sheafToPresheafCompWhiskeringLeftCompPresheafToSheafIso F A J K)
-  dsimp only [sheafToPresheafCompWhiskeringLeftToPushforward]
+  dsimp only [sheafToPresheafCompWhiskeringLeftIsoPushforward, Iso.trans_hom, Iso.symm_hom,
+    asIso_hom, isoWhiskerRight_hom]
   infer_instance
 
-instance : IsIso (sheafToPresheafCompWhiskeringLeftToPushforward F A J K) := by
-  rw [NatTrans.isIso_iff_isIso_app]
-  intro P
-  -- the unit of sheafification is an isomorphism on the sheaf `F.op ⋙ P.obj`
-  have : IsIso (toSheafify J (F.op ⋙ P.obj)) :=
-    isIso_toSheafify J ((F.sheafPushforwardContinuous A J K).obj P).property
-  dsimp [sheafToPresheafCompWhiskeringLeftToPushforward]
-  simp only [Category.id_comp]
-  infer_instance
+section Connected
 
-instance : NatTrans.IsMonoidal
-    (asIso (sheafToPresheafCompWhiskeringLeftToPushforward F A J K)).symm.hom :=
-  have : NatTrans.IsMonoidal (asIso (sheafToPresheafCompWhiskeringLeftToPushforward F A J K)).hom :=
-    inferInstanceAs (NatTrans.IsMonoidal (sheafToPresheafCompWhiskeringLeftToPushforward F A J K))
-  inferInstanceAs
-    (NatTrans.IsMonoidal (asIso (sheafToPresheafCompWhiskeringLeftToPushforward F A J K)).inv)
+variable [∀ X : Dᵒᵖ, IsConnected (CostructuredArrow F.op X)]
 
-variable [RepresentablyFlat F]
-  [∀ (X : Dᵒᵖ) (M : A), PreservesColimitsOfShape (CostructuredArrow F.op X) (tensorLeft M)]
-  [∀ (X : Dᵒᵖ) (M : A), PreservesColimitsOfShape (CostructuredArrow F.op X) (tensorRight M)]
-
-/-- The comparison map `δ` of the pullback of sheaves along a representably flat functor is
-an isomorphism on sheafifications of presheaves. The pullback precomposed with sheafification
-is left adjoint to the underlying presheaf of the pushforward, as is left Kan extension along
-`F.op` followed by sheafification, which is strong monoidal. -/
-lemma isIso_δ_sheafPullback_presheafToSheaf_obj (P Q : Cᵒᵖ ⥤ A) :
-    IsIso (δ (sheafPullback F A J K) ((presheafToSheaf J A).obj P)
-      ((presheafToSheaf J A).obj Q)) := by
-  have : IsIso (δ (F.op.lan ⋙ presheafToSheaf K A) P Q) := by
-    rw [comp_δ]
-    infer_instance
-  have := isIso_δ_of_conjugateIso
-    ((sheafificationAdjunction J A).comp (sheafAdjunctionContinuous F A J K))
-    ((F.op.lanAdjunction A).comp (sheafificationAdjunction K A))
-    (asIso (sheafToPresheafCompWhiskeringLeftToPushforward F A J K)).symm P Q
-  rw [comp_δ] at this
-  exact IsIso.of_isIso_comp_left ((sheafPullback F A J K).map (δ (presheafToSheaf J A) P Q)) _
-
-/-- The comparison map `δ : F^*(S ⊗ T) ⟶ F^*S ⊗ F^*T` of the pullback of sheaves along a
-representably flat functor is an isomorphism. -/
-instance isIso_δ_sheafPullback (S T : Sheaf J A) : IsIso (δ (sheafPullback F A J K) S T) := by
-  have := isIso_δ_sheafPullback_presheafToSheaf_obj F A J K S.obj T.obj
-  have h := δ_natural (sheafPullback F A J K) ((sheafificationAdjunction J A).counit.app S)
-    ((sheafificationAdjunction J A).counit.app T)
-  rw [← IsIso.inv_comp_eq] at h
-  change _ = δ _ S T at h
-  rw [← h]
-  exact IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' this inferInstance)
-
-/-- The comparison map `η : F^*𝟙 ⟶ 𝟙` of the pullback of sheaves along a representably flat
-functor is an isomorphism. -/
+/-- The comparison map `η : F^*𝟙 ⟶ 𝟙` of the pullback of sheaves is an isomorphism if the
+comma categories `CostructuredArrow F.op X` are connected, e.g. if `F` is representably flat.
+The pullback precomposed with sheafification and left Kan extension along `F.op` followed by
+sheafification are both left adjoint to the underlying presheaf of the pushforward, and the
+second is strong monoidal. So `η` of the first one is invertible by the conjugate triangle
+`CategoryTheory.conjugateEquiv_symm_app_unit_comp_η`. -/
 instance isIso_η_sheafPullback : IsIso (η (sheafPullback F A J K)) := by
   have : IsIso (η (F.op.lan ⋙ presheafToSheaf K A)) := by
     rw [comp_η]
@@ -299,15 +269,71 @@ instance isIso_η_sheafPullback : IsIso (η (sheafPullback F A J K)) := by
   have := isIso_η_of_conjugateIso
     ((sheafificationAdjunction J A).comp (sheafAdjunctionContinuous F A J K))
     ((F.op.lanAdjunction A).comp (sheafificationAdjunction K A))
-    (asIso (sheafToPresheafCompWhiskeringLeftToPushforward F A J K)).symm
+    (sheafToPresheafCompWhiskeringLeftIsoPushforward F A J K)
   rw [comp_η] at this
   exact IsIso.of_isIso_comp_left ((sheafPullback F A J K).map (η (presheafToSheaf J A))) _
 
-/-- The pullback of sheaves along a representably flat continuous functor is strong monoidal,
-its oplax structure `sheafPullbackOplaxMonoidal` having invertible comparison maps. -/
-@[instance_reducible]
-noncomputable def sheafPullbackMonoidal : (sheafPullback F A J K).Monoidal :=
+end Connected
+
+section Sifted
+
+variable [∀ X : Dᵒᵖ, IsSifted (CostructuredArrow F.op X)]
+  [∀ (X : Dᵒᵖ) (M : A), PreservesColimitsOfShape (CostructuredArrow F.op X) (tensorLeft M)]
+
+/-- The comparison map `δ : F^*(S ⊗ T) ⟶ F^*S ⊗ F^*T` of the pullback of sheaves is an
+isomorphism if the comma categories `CostructuredArrow F.op X` are sifted (e.g. if `F` is
+representably flat) and tensoring in `A` on the left preserves colimits of these shapes; via
+the braiding, so does tensoring on the right.
+
+On sheafifications of presheaves `P`, `Q` this follows, as for `isIso_η_sheafPullback`, from
+the conjugate square `CategoryTheory.conjugateEquiv_symm_app_tensor_comp_δ`, since `δ` is
+invertible for left Kan extension along `F.op` followed by sheafification. For general
+sheaves it follows from the naturality square of `δ` along the counit isomorphisms
+`sheafify S.obj ⟶ S` and `sheafify T.obj ⟶ T`:
+```
+  F^*(sheafify S.obj ⊗ sheafify T.obj) ──δ──▶ F^*(sheafify S.obj) ⊗ F^*(sheafify T.obj)
+              │ F^*(ε_S ⊗ ε_T)                          │ F^*ε_S ⊗ F^*ε_T
+              ▼                                         ▼
+          F^*(S ⊗ T) ─────────────δ─────────────▶ F^*S ⊗ F^*T
+```
+-/
+instance isIso_δ_sheafPullback (S T : Sheaf J A) : IsIso (δ (sheafPullback F A J K) S T) := by
+  have (X : Dᵒᵖ) (M : A) : PreservesColimitsOfShape (CostructuredArrow F.op X) (tensorRight M) :=
+    preservesColimitsOfShape_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
+  have : IsIso (δ (F.op.lan ⋙ presheafToSheaf K A) S.obj T.obj) := by
+    rw [comp_δ]
+    infer_instance
+  have := isIso_δ_of_conjugateIso
+    ((sheafificationAdjunction J A).comp (sheafAdjunctionContinuous F A J K))
+    ((F.op.lanAdjunction A).comp (sheafificationAdjunction K A))
+    (sheafToPresheafCompWhiskeringLeftIsoPushforward F A J K) S.obj T.obj
+  rw [comp_δ] at this
+  have : IsIso (δ (sheafPullback F A J K) ((presheafToSheaf J A).obj S.obj)
+      ((presheafToSheaf J A).obj T.obj)) :=
+    IsIso.of_isIso_comp_left ((sheafPullback F A J K).map (δ (presheafToSheaf J A) S.obj T.obj)) _
+  let εS : (presheafToSheaf J A).obj S.obj ⟶ S := (sheafificationAdjunction J A).counit.app S
+  let εT : (presheafToSheaf J A).obj T.obj ⟶ T := (sheafificationAdjunction J A).counit.app T
+  have : IsIso ((sheafPullback F A J K).map (εS ⊗ₘ εT) ≫ δ (sheafPullback F A J K) S T) := by
+    rw [← δ_natural]
+    infer_instance
+  exact IsIso.of_isIso_comp_left ((sheafPullback F A J K).map (εS ⊗ₘ εT)) _
+
+end Sifted
+
+/-- The pullback of sheaves along a continuous functor `F` is strong monoidal if the comma
+categories `CostructuredArrow F.op X` are sifted (e.g. if `F` is representably flat) and
+tensoring in `A` on the left preserves colimits of these shapes. Its underlying oplax monoidal
+structure is `sheafPullbackOplaxMonoidal`, by definition. -/
+noncomputable instance sheafPullbackMonoidal
+    [∀ X : Dᵒᵖ, IsSifted (CostructuredArrow F.op X)]
+    [∀ (X : Dᵒᵖ) (M : A), PreservesColimitsOfShape (CostructuredArrow F.op X) (tensorLeft M)] :
+    (sheafPullback F A J K).Monoidal :=
   .ofOplaxMonoidal _
+
+example [∀ X : Dᵒᵖ, IsSifted (CostructuredArrow F.op X)]
+    [∀ (X : Dᵒᵖ) (M : A), PreservesColimitsOfShape (CostructuredArrow F.op X) (tensorLeft M)] :
+    (sheafPullbackMonoidal F A J K).toOplaxMonoidal = sheafPullbackOplaxMonoidal F A J K :=
+  rfl
 
 end Functor.sheafPullbackConstruction
 
