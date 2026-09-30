@@ -347,6 +347,7 @@ public import WeilConjectures.Mathlib.Algebra.Exact.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.Double

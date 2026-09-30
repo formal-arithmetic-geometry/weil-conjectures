@@ -9,7 +9,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 
 /-!
 # Functoriality of `mapDerivedCategory`
@@ -24,6 +26,12 @@ For exact functors between abelian categories, the induced functor
 - `CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso`: the commutation
   `H^n(-) ⋙ F ≅ F.mapDerivedCategory ⋙ H^n(-)` with the homology functors, with the
   bounded below variant `CategoryTheory.Functor.mapDerivedCategoryPlusHomologyFunctorIso`.
+- `CategoryTheory.Functor.isZero_mapDerivedCategory_obj`: `F.mapDerivedCategory` kills every
+  object whose homology objects are killed by `F`.
+- `CategoryTheory.Functor.jointlyReflectIsomorphisms_mapDerivedCategory` and
+  `CategoryTheory.Functor.jointlyReflectIsomorphisms_pairFunctor_mapDerivedCategory`: if a
+  family of exact functors jointly reflects isomorphisms, so do the induced functors on
+  derived categories.
 - `CategoryTheory.Functor.mapDerivedCategoryPlus`: the restriction of
   `F.mapDerivedCategory` to the bounded below derived categories, with the compatibility
   isomorphism `CategoryTheory.Functor.mapDerivedCategoryPlusCompatibility` and the
@@ -59,6 +67,8 @@ For exact functors between abelian categories, the induced functor
 -/
 
 @[expose] public section
+
+universe v₁ u₁
 
 open CategoryTheory Limits
 
@@ -258,6 +268,47 @@ noncomputable def mapDerivedCategoryHomologyFunctorIso (F : C ⥤ D) [F.Additive
     (DerivedCategory.homologyFunctor C n ⋙ F)
     (F.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor D n)
     (Iso.refl _)
+
+/-- An exact functor `F` kills an object `K` of the derived category as soon as it kills all
+the homology objects of `K`, since `H^n (F K) ≅ F (H^n K)`. -/
+lemma isZero_mapDerivedCategory_obj (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
+    [PreservesFiniteColimits F] (K : DerivedCategory C)
+    (hK : ∀ n : ℤ, IsZero (F.obj ((DerivedCategory.homologyFunctor C n).obj K))) :
+    IsZero (F.mapDerivedCategory.obj K) :=
+  (DerivedCategory.isZero_iff _).2 fun n ↦
+    (hK n).of_iso ((F.mapDerivedCategoryHomologyFunctorIso n).symm.app K)
+
+/-- If a family of exact functors jointly reflects isomorphisms, so does the family of the
+induced functors on derived categories: a morphism is an isomorphism iff it is one on all
+homology objects, and `F.mapDerivedCategory` commutes with homology. -/
+lemma jointlyReflectIsomorphisms_mapDerivedCategory {I : Type*} {D' : I → Type*}
+    [∀ i, Category (D' i)] [∀ i, Abelian (D' i)] [∀ i, HasDerivedCategory (D' i)]
+    {F : ∀ i, C ⥤ D' i} [∀ i, (F i).Additive] [∀ i, PreservesFiniteLimits (F i)]
+    [∀ i, PreservesFiniteColimits (F i)] (hF : JointlyReflectIsomorphisms F) :
+    JointlyReflectIsomorphisms fun i ↦ (F i).mapDerivedCategory where
+  isIso f _ := by
+    rw [DerivedCategory.isIso_iff]
+    intro n
+    exact (hF.isIso_iff _).2 fun i ↦
+      (NatIso.isIso_map_iff ((F i).mapDerivedCategoryHomologyFunctorIso n) f).2
+        (by rw [Functor.comp_map]; infer_instance)
+
+/-- If a pair of exact functors jointly reflects isomorphisms, so does the pair of the
+induced functors on derived categories. This is the `CategoryTheory.pairFunctor` form of
+`CategoryTheory.Functor.jointlyReflectIsomorphisms_mapDerivedCategory`. -/
+lemma jointlyReflectIsomorphisms_pairFunctor_mapDerivedCategory {D₁ D₂ : Type u₁}
+    [Category.{v₁} D₁] [Category.{v₁} D₂] [Abelian D₁] [Abelian D₂]
+    [HasDerivedCategory D₁] [HasDerivedCategory D₂] (F₁ : C ⥤ D₁) (F₂ : C ⥤ D₂)
+    [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+    [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+    (hF : JointlyReflectIsomorphisms (pairFunctor F₁ F₂)) :
+    JointlyReflectIsomorphisms (pairFunctor F₁.mapDerivedCategory F₂.mapDerivedCategory) := by
+  refine jointlyReflectIsomorphisms_pairFunctor _ _ fun K L f h₁ h₂ ↦ ?_
+  rw [DerivedCategory.isIso_iff]
+  intro n
+  refine hF.isIso_of_pairFunctor _ ?_ ?_ <;>
+    exact (NatIso.isIso_map_iff (mapDerivedCategoryHomologyFunctorIso _ n) f).2
+      (by rw [Functor.comp_map]; infer_instance)
 
 section Plus
 
