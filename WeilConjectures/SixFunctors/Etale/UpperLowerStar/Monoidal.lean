@@ -63,7 +63,11 @@ noncomputable instance Etale.laxBraided_lowerStar : (g)_*[A].LaxBraided := by
   infer_instance
 
 /-- The pullback `g^*` on étale sheaves is oplax monoidal, being left adjoint to the lax
-monoidal pushforward `g_*`. -/
+monoidal pushforward `g_*`.
+
+When `A` is braided and closed, the monoidal structure used here is the global instance
+`CategoryTheory.GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall`, by
+`CategoryTheory.GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall_eq`. -/
 noncomputable instance Etale.oplaxMonoidal_upperStar : (g)^*[A].OplaxMonoidal :=
   (Etale.upperStarLowerStarAdjunction A g).leftAdjointOplaxMonoidal
 
@@ -71,29 +75,47 @@ noncomputable instance Etale.oplaxMonoidal_upperStar : (g)^*[A].OplaxMonoidal :=
 `Etale.oplaxMonoidal_upperStar` on `g^*` and the lax structure `Etale.laxMonoidal_lowerStar`
 on `g_*`. -/
 instance Etale.isMonoidal_upperStarLowerStarAdjunction :
-    (Etale.upperStarLowerStarAdjunction A g).IsMonoidal :=
-  inferInstanceAs
-    (letI := (Etale.upperStarLowerStarAdjunction A g).leftAdjointOplaxMonoidal
-    (Etale.upperStarLowerStarAdjunction A g).IsMonoidal)
+    (Etale.upperStarLowerStarAdjunction A g).IsMonoidal := by
+  let := (Etale.upperStarLowerStarAdjunction A g).leftAdjointOplaxMonoidal
+  infer_instance
+
+set_option hygiene false in
+/-- The adjunction `g^* ⊣ g_*` on étale sheaves. -/
+local notation "adj" => Etale.upperStarLowerStarAdjunction A g
 
 open MonoidalCategory Functor.LaxMonoidal Functor.OplaxMonoidal in
-/-- The comparison map `g^*(F ⊗ G) ⟶ g^*F ⊗ g^*G` of the oplax monoidal pullback `g^*` is
-the pullback of `F ⊗ G ⟶ g_*g^*F ⊗ g_*g^*G ⟶ g_*(g^*F ⊗ g^*G)` followed by the counit. -/
-lemma Etale.upperStar_δ_app (F G : Sheaf Y.smallEtaleTopology A) :
+/-- The comparison map `δ : g^*(F ⊗ G) ⟶ g^*F ⊗ g^*G` of the oplax monoidal pullback `g^*`
+is the pullback of `F ⊗ G ⟶ g_*g^*F ⊗ g_*g^*G ⟶ g_*(g^*F ⊗ g^*G)` followed by the counit
+`ε`, i.e. the following diagram commutes, where `η` is the unit of `g^* ⊣ g_*` and `μ` the
+lax structure of `g_*`:
+```
+  g^*(F ⊗ G) ──g^*(η_F ⊗ η_G)──▶ g^*(g_*g^*F ⊗ g_*g^*G)
+      │                                   │
+    δ │                                   │ g^*(μ)
+      ▼                                   ▼
+  g^*F ⊗ g^*G ◀────────ε────────── g^*g_*(g^*F ⊗ g^*G)
+```
+-/
+lemma Etale.upperStar_δ (F G : Sheaf Y.smallEtaleTopology A) :
     δ (g)^*[A] F G =
-      (g)^*[A].map (((Etale.upperStarLowerStarAdjunction A g).unit.app F ⊗ₘ
-          (Etale.upperStarLowerStarAdjunction A g).unit.app G) ≫ μ (g)_*[A] _ _) ≫
-        (Etale.upperStarLowerStarAdjunction A g).counit.app _ := by
-  change ((Etale.upperStarLowerStarAdjunction A g).homEquiv _ _).symm _ = _
-  rw [Adjunction.homEquiv_counit]
+      (g)^*[A].map (((adj).unit.app F ⊗ₘ (adj).unit.app G) ≫ μ (g)_*[A] _ _) ≫
+        (adj).counit.app _ := by
+  simp [Adjunction.leftAdjointOplaxMonoidal_δ, Adjunction.homEquiv_counit]
 
 open MonoidalCategory Functor.LaxMonoidal Functor.OplaxMonoidal in
-/-- The comparison map `g^*𝟙 ⟶ 𝟙` of the oplax monoidal pullback `g^*` is the pullback of
-the unit `𝟙 ⟶ g_*𝟙` of the lax monoidal pushforward followed by the counit. -/
+/-- The comparison map `η : g^*𝟙 ⟶ 𝟙` of the oplax monoidal pullback `g^*` is the pullback
+of the unit `ε : 𝟙 ⟶ g_*𝟙` of the lax monoidal pushforward followed by the counit of
+`g^* ⊣ g_*`, i.e. the following diagram commutes:
+```
+  g^*𝟙 ──g^*(ε)──▶ g^*g_*𝟙
+     ╲                │
+    η ╲               │ counit
+       ▼              ▼
+              𝟙
+```
+-/
 lemma Etale.upperStar_η :
-    η (g)^*[A] =
-      (g)^*[A].map (ε (g)_*[A]) ≫ (Etale.upperStarLowerStarAdjunction A g).counit.app _ := by
-  change ((Etale.upperStarLowerStarAdjunction A g).homEquiv _ _).symm _ = _
-  rw [Adjunction.homEquiv_counit]
+    η (g)^*[A] = (g)^*[A].map (ε (g)_*[A]) ≫ (adj).counit.app _ := by
+  simp [Adjunction.leftAdjointOplaxMonoidal_η, Adjunction.homEquiv_counit]
 
 end AlgebraicGeometry
