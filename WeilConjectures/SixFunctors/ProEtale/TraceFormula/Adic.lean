@@ -101,7 +101,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] [DerivedBraiding A]
+  [Abelian.HasFunctorialFlatResolution A]
   {B : Type u''} [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
   [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
   [Abelian.HasFunctorialFlatResolution B] {s X : Scheme.{u}}
@@ -125,7 +125,6 @@ theorem nonempty_rightDerivedLowerShriek_comp_iso
     Nonempty (rightDerivedLowerShriek A aX ⋙ Ψ s ≅ Ψ X ⋙ rightDerivedLowerShriek B aX) :=
   sorry
 
-omit [DerivedBraiding A] in
 /-- Finite-level coefficient change for geometric stalks: derived scalar extension
 `- ⊗ᴸ_A B` commutes with the stalk at a geometric point, that is,
 `(K ⊗ᴸ B)_x̄ ≅ K_x̄ ⊗ᴸ B` (blueprint: `sk-p-trace-coeff`). -/
@@ -205,7 +204,8 @@ in `1 + T Λ[[T]]`, the product over the closed points `y` of `X₀` being coeff
 locally finite. This is the Euler-product form of
 `trace_globalOperator_eq_sum_trace_stalkFrobenius`
 (blueprint: `sk-thm-trace-transport`). -/
-theorem hasProd_inv_alternatingCharpolyRevProd (G : GeometricOperations A s)
+theorem hasProd_inv_alternatingCharpolyRevProd [DerivedBraiding A]
+    (G : GeometricOperations A s)
     {aX : X ⟶ s} [HasCompactification aX] (W : WeilComplex (A := A) aX) (hW : IsIso W.coeff)
     (hctf : G.ctf X W.obj)
     [∀ m : ℕ, IsProper (W.graph G m).snd]

@@ -68,11 +68,14 @@ subcategory `Dᵇctf(X, A) ⊆ D(X, A)` of bounded constructible objects of fini
 amplitude is carried as data by `GeometricCoefficients`.
 
 This project installs a monoidal structure on `D(X, A)` but not yet its braiding. The
-braidings of all the `D(X, A)` are therefore supplied at once by the class `DerivedBraiding`,
-whose instances are global, rather than by a separate instance argument for each scheme, and
-the package requires the monoidal structure `upperStarMonoidal` of every `Lf^*` to be braided
-for them (`upperStarMonoidal_braiding`). So all braidings in the trace formula are the same
-choice, compatible with pullback.
+braidings of all the `D(X, A)` are therefore supplied at once by the temporary class
+`DerivedBraiding`, whose instances are global, rather than by a separate instance argument
+for each scheme, and the package requires the monoidal structure `upperStarMonoidal` of
+every `Lf^*` to be braided for them (`upperStarMonoidal_braiding`). So all braidings in the
+trace formula are the same choice, compatible with pullback. The choice is not pinned to the
+Koszul-sign braiding induced from `A`, and the trace statements are only correct for that
+braiding; once it is constructed, `DerivedBraiding` should be removed and
+`upperStarMonoidal_braiding` becomes a theorem.
 
 Two limitations of the package as stated.
 
@@ -143,7 +146,14 @@ instance (G : GeometricCoefficients A) (X : Scheme.{u}) : (G.ctf X).IsClosedUnde
 
 /-- A braiding on the derived category `D(X, A)` of the pro-étale site of every scheme `X`.
 This project does not yet construct the braiding induced by that of `A`; the class makes the
-braidings of all the `D(X, A)` one choice, supplied by a global instance. -/
+braidings of all the `D(X, A)` one choice, supplied by a global instance.
+
+This class is a temporary stand-in. It should be removed once the braiding on `D(X, A)`
+induced from the symmetric structure of `A` (with the Koszul signs on complexes) is
+constructed, and the global instance below may then conflict with that canonical instance.
+The braiding is not constrained: the trace statements of this block are only correct for the
+Koszul-sign braiding, since for another braiding the categorical trace changes (for example
+`dim k[1]` is `-1` only for the Koszul signs). -/
 class DerivedBraiding where
   /-- the braiding on `D(X, A)`. -/
   braidedCategory (X : Scheme.{u}) :
@@ -297,8 +307,20 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   identity isomorphism `L(𝟙 X)^* ≃ 𝟭`. -/
   upperStarUnit_id (X : Scheme.{u}) :
     (upperStarMonoidal (𝟙 X)).εIso.inv = (leftDerivedUpperStarId A X).hom.app (𝟙_ _)
-  /-- the monoidal structure of `Lf^*` is braided: its tensor map commutes with the braidings
-  of `D(Y, A)` and `D(X, A)`. -/
+  /-- the monoidal structure of `Lf^*` is braided: its tensor map `μ` commutes with the
+  braidings `β` of `D(Y, A)` and `D(X, A)`, that is, the square
+
+  ```
+    Lf^* M ⊗ Lf^* N ──μ──▶ Lf^*(M ⊗ N)
+          │                    │
+        β │                    │ Lf^* β
+          ▼                    ▼
+    Lf^* N ⊗ Lf^* M ──μ──▶ Lf^*(N ⊗ M)
+  ```
+
+  commutes. This is the axiom of `Functor.Braided`, stated by hand because
+  `upperStarMonoidal` is a `Functor.CoreMonoidal` rather than a `Functor.Monoidal`
+  instance. -/
   upperStarMonoidal_braiding {X Y : Scheme.{u}} (f : X ⟶ Y)
       (M N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
     ((upperStarMonoidal f).μIso M N).hom ≫ ((upperStar A f).leftDerivedFunctor).map (β_ M N).hom =
@@ -316,7 +338,7 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   field `s = Spec k` (blueprint `sk-thm-sf-kunneth-verdier`). It is stated for every
   Cartesian square over `s`, so that both orientations are available on `pullback aY aX`. -/
   kunnethVerdier {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} {pX : Z ⟶ X} {pY : Z ⟶ Y}
-      (hs : s.IsSpecOfField)
+      [s.IsSpecOfField]
       [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
       [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]
       (sq : IsPullback pX pY aX aY) [HasCompactification pX]

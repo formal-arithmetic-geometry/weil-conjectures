@@ -87,7 +87,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] [DerivedBraiding A] {s X Y : Scheme.{u}}
+  [Abelian.HasFunctorialFlatResolution A] {s X Y : Scheme.{u}}
 
 /-- A *Weil complex* on a geometric scheme `a_X : X ⟶ s`: a geometric `q`-power Frobenius
 `Φ₁ : X ⟶ X` over `s`, a complex `K` and a *Frobenius coefficient morphism*
@@ -113,17 +113,14 @@ noncomputable def frobeniusIterate (m : ℕ) : X ⟶ X :=
   let Φ : End X := W.frobenius
   Φ ^ m
 
-omit [DerivedBraiding A] in
 @[simp]
 lemma frobeniusIterate_zero : W.frobeniusIterate 0 = 𝟙 X := rfl
 
-omit [DerivedBraiding A] in
 @[simp]
 lemma frobeniusIterate_succ (m : ℕ) :
     W.frobeniusIterate (m + 1) = W.frobenius ≫ W.frobeniusIterate m :=
   (pow_succ (M := End X) W.frobenius m).trans (End.mul_def _ _)
 
-omit [DerivedBraiding A] in
 /-- Every iterate of the Frobenius is a morphism over the base. -/
 @[simp]
 lemma frobeniusIterate_comp (m : ℕ) : W.frobeniusIterate m ≫ aX = aX := by
@@ -131,12 +128,10 @@ lemma frobeniusIterate_comp (m : ℕ) : W.frobeniusIterate m ≫ aX = aX := by
   | zero => simp
   | succ n ih => rw [frobeniusIterate_succ, Category.assoc, ih, W.frobenius_comp]
 
-omit [DerivedBraiding A] in
 @[simp]
 lemma frobeniusIterate_one : W.frobeniusIterate 1 = W.frobenius :=
   pow_one (M := End X) W.frobenius
 
-omit [DerivedBraiding A] in
 /-- A point fixed by `Φ₁` is fixed by every iterate `Φ_m`. -/
 lemma comp_frobeniusIterate_of_comp_frobenius {x : s ⟶ X} (hx : x ≫ W.frobenius = x)
     (m : ℕ) : x ≫ W.frobeniusIterate m = x := by
@@ -162,13 +157,11 @@ noncomputable def coeffIterate :
       (leftDerivedUpperStarComp A W.frobenius (W.frobeniusIterate m)).hom.app W.obj ≫
       ((upperStar A W.frobenius).leftDerivedFunctor).map (coeffIterate m) ≫ W.coeff
 
-omit [DerivedBraiding A] in
 /-- The defining equation of `coeffIterate` at `0`: `φ_0` is `L(𝟙 X)^* K ≃ K`. -/
 @[simp]
 lemma coeffIterate_zero : W.coeffIterate 0 = (leftDerivedUpperStarId A X).hom.app W.obj :=
   rfl
 
-omit [DerivedBraiding A] in
 /-- The defining recursion of `coeffIterate`: `φ_{m+1} = φ ∘ LΦ₁^* φ_m ∘ comp`. It is not
 `@[simp]`, since unfolding the successor would loop. -/
 lemma coeffIterate_succ (m : ℕ) :
@@ -190,6 +183,10 @@ instance isIso_coeffIterate [IsIso W.coeff] (m : ℕ) : IsIso (W.coeffIterate m)
   induction m with
   | zero => rw [coeffIterate_zero]; infer_instance
   | succ n ih => rw [coeffIterate_succ]; infer_instance
+
+section Graph
+
+variable [DerivedBraiding A]
 
 /-- The coefficient map of the graph correspondence
 `AlgebraicGeometry.ProEtale.WeilComplex.graph`: the iterate `φ_m` read through the
@@ -218,19 +215,28 @@ instance hasCompactification_graph_str [HasCompactification aX] (G : GeometricOp
     (m : ℕ) : HasCompactification (W.graph G m).str :=
   inferInstanceAs (HasCompactification aX)
 
-omit [DerivedBraiding A] in
+/-- The support map `(𝟙, Φ_m) : X ⟶ X ×_s X` of the graph `W.graph G m` is the graph
+`X ⟶ X ×_s X` of `Φ_m`, a section of the first projection, followed by the identification
+of `X ×_{Φ_m ≫ a_X, s, a_X} X` with `X ×_s X` along `Φ_m ≫ a_X = a_X`. -/
+lemma graph_toProd_eq (G : GeometricOperations A s) (m : ℕ) :
+    (W.graph G m).toProd =
+      pullback.lift (𝟙 X) (W.frobeniusIterate m) (Category.id_comp (W.frobeniusIterate m ≫ aX)) ≫
+        (pullback.congrHom (W.frobeniusIterate_comp m) rfl).hom := by
+  apply pullback.hom_ext <;> simp [Correspondence.toProd, graph]
+
 /-- The support map `(𝟙, Φ_m) : X ⟶ X ×_s X` of the graph `W.graph G m` is a section of the
 first projection, hence a closed immersion when `aX` is separated. -/
 instance isClosedImmersion_graph_toProd [IsSeparated aX] (G : GeometricOperations A s)
     (m : ℕ) : IsClosedImmersion (W.graph G m).toProd := by
-  have : (W.graph G m).toProd = pullback.lift (𝟙 X) (W.frobeniusIterate m) (Category.id_comp _) ≫
-      (pullback.congrHom (W.frobeniusIterate_comp m) rfl).hom := by
-    apply pullback.hom_ext <;> simp [Correspondence.toProd, graph]
-  rw [this]
+  rw [graph_toProd_eq]
+  -- instance search does not find this factor inside the composite, only when it is stated
+  -- on its own
   have : IsClosedImmersion
       (pullback.lift (𝟙 X) (W.frobeniusIterate m) (Category.id_comp (W.frobeniusIterate m ≫ aX))) :=
     inferInstance
   infer_instance
+
+end Graph
 
 /-- The geometric-stalk Frobenius `F_{x,m} = (φ_m)_x̄` of a Weil complex at a point
 `x : s ⟶ X` fixed by `Φ_m`: the composite
@@ -325,6 +331,10 @@ theorem ctf_leftDerivedUpperStar_obj_iff (G : GeometricCoefficients A) (r : X �
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
     G.ctf X (((upperStar A r).leftDerivedFunctor).obj K) ↔ G.ctf Y K :=
   sorry
+
+section
+
+variable [DerivedBraiding A]
 
 namespace GeometricOperations
 
@@ -425,5 +435,7 @@ instance WeilComplex.isIso_lowerShriekPush_coeff {aX : X ⟶ s} {aY : Y ⟶ s}
     IsIso (W.lowerShriekPush G f frobY hY h).coeff := by
   dsimp [lowerShriekPush, lowerShriekPushCoeff]
   infer_instance
+
+end
 
 end AlgebraicGeometry.ProEtale
