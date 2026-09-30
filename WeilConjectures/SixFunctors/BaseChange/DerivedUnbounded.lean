@@ -109,7 +109,7 @@ noncomputable abbrev derivedBaseChangeSquare (sq : CommSq g' f' f g) :
 on the unbounded derived categories of étale sheaves, as a natural transformation
 `Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*`: the mate of the derived square isomorphism
 `AlgebraicGeometry.Etale.derivedSquareUpperStarIso` with respect to the derived adjunctions
-`Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`.
+`Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. This is the exchange map `Ex_*` of `sk-def-sf-exchanges`.
 
 ```
   D(X) --Lg'^*--> D(X')
