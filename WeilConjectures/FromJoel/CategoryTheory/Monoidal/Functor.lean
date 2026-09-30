@@ -9,11 +9,12 @@ public import Mathlib.CategoryTheory.Monoidal.Functor
 public import Mathlib.CategoryTheory.Whiskering
 
 /-!
-# Lax monoidal functors: the tensorator as a natural transformation
+# Lax and oplax monoidal functors: the tensorator as a natural transformation
 
 Supplement to `Mathlib.CategoryTheory.Monoidal.Functor`, migrated from
 the branch `jriou_localization` of Joël Riou's mathlib fork
 (leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
+The dual `Functor.OplaxMonoidal.δNatTrans` for oplax monoidal functors is added here.
 
 -/
 
@@ -46,6 +47,36 @@ noncomputable def μNatTrans :
   app X₁ := { app X₂ := μ F X₁ X₂ }
 
 end
+
+end LaxMonoidal
+
+namespace OplaxMonoidal
+
+variable (F : C ⥤ D) [F.OplaxMonoidal]
+
+set_option backward.defeqAttrib.useBackward true in
+/-- The comonoidal structure `δ F X Y : F.obj (X ⊗ Y) ⟶ F.obj X ⊗ F.obj Y` of an oplax
+monoidal functor `F : C ⥤ D`, as a natural transformation between bifunctors in `C ⥤ C ⥤ D`.
+This is the dual of `Functor.LaxMonoidal.μNatTrans`; for a strong monoidal functor, the
+uncurried version is `Functor.Monoidal.μNatIso`. -/
+@[simps!]
+noncomputable def δNatTrans :
+    (Functor.postcompose₂.obj F).obj (curriedTensor C) ⟶
+      (((whiskeringLeft₂ D).obj F).obj F).obj (curriedTensor D) where
+  app X₁ := { app X₂ := δ F X₁ X₂ }
+
+instance [∀ X Y, IsIso (δ F X Y)] (X Y : C) : IsIso (((δNatTrans F).app X).app Y) :=
+  inferInstanceAs (IsIso (δ F X Y))
+
+instance [∀ X Y, IsIso (δ F X Y)] (X : C) : IsIso ((δNatTrans F).app X) :=
+  NatIso.isIso_of_isIso_app _
+
+instance [∀ X Y, IsIso (δ F X Y)] : IsIso (δNatTrans F) :=
+  NatIso.isIso_of_isIso_app _
+
+end OplaxMonoidal
+
+namespace LaxMonoidal
 
 /-- Transport a lax monoidal structure along an isomorphism of functors. -/
 @[implicit_reducible]

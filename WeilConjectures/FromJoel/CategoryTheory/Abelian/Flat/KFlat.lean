@@ -26,6 +26,8 @@ public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.ShiftSe
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Acyclic
 public import WeilConjectures.FromJoel.CategoryTheory.Localization.Composition
 public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.Retract
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
+public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
 
 /-!
 # Flat objects and K-flat complexes
@@ -373,113 +375,6 @@ variable {A} {C : Type*} [Category C] [Preadditive C] [HasZeroObject C] [HasFini
 
 namespace LeftResolution
 
-namespace kFlatLocalizerSquare
-
-variable (A)
-
-set_option backward.defeqAttrib.useBackward true in
-def L : LocalizerMorphism (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)).WKFlat
-    (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)).WKFlat where
-  functor := ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ HomotopyCategory.quotient _ _)
-    (fun ⟨K, hK⟩ ↦ by
-      dsimp
-      rwa [HomotopyCategory.kFlat_quotient_obj_iff])
-  map := by
-    rintro ⟨K, hK⟩ ⟨L, hL⟩ ⟨f : K ⟶ L⟩ hf
-    simpa [MorphismProperty.WKFlat, HomotopyCategory.quotient_map_mem_quasiIso_iff] using hf
-
-abbrev R : LocalizerMorphism (HomologicalComplex.quasiIso A (ComplexShape.up ℤ))
-    (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) where
-  functor := HomotopyCategory.quotient _ _
-  map _ _ _ _ := by simpa [HomotopyCategory.quotient_map_mem_quasiIso_iff]
-
-noncomputable abbrev T := (HomologicalComplex.quasiIso A (.up ℤ)).localizerMorphismKFlat
-
-noncomputable abbrev B := (HomotopyCategory.quasiIso A (.up ℤ)).localizerMorphismKFlat
-
-def WL : MorphismProperty (HomologicalComplex.quasiIso A (.up ℤ)).KFlat :=
-  (HomologicalComplex.homotopyEquivalences A (.up ℤ)).inverseImage (T A).functor
-
-instance : (L A).functor.EssSurj where
-  mem_essImage := by
-    rintro ⟨K, hK⟩
-    obtain ⟨K, rfl⟩ := K.functor_obj_surjective
-    replace hK := (HomotopyCategory.kFlat_quotient_obj_iff K).1 hK
-    exact ⟨⟨K, hK⟩, ⟨Iso.refl _⟩⟩
-
-instance : (L A).functor.Full where
-  map_surjective {K L} f := by
-    obtain ⟨g, hg⟩ := (HomotopyCategory.quotient _ _).map_surjective f.hom
-    exact ⟨ObjectProperty.homMk g, by cat_disch⟩
-
-noncomputable def iso : (T A).functor ⋙ (R A).functor ≅ (L A).functor ⋙ (B A).functor :=
-  Iso.refl _
-
-set_option backward.defeqAttrib.useBackward true in
-variable {A} in
-lemma kFlat_cylinder (K : CochainComplex A ℤ)
-    (hK : (HomologicalComplex.quasiIso A (.up ℤ)).kFlat K) :
-    (HomologicalComplex.quasiIso A (.up ℤ)).kFlat K.cylinder := by
-  rw [← HomotopyCategory.kFlat_quotient_obj_iff]
-  apply ObjectProperty.ext_of_isTriangulatedClosed₃ _ _
-    (HomotopyCategory.mappingCone_triangleh_distinguished _)
-  · dsimp
-    rwa [HomotopyCategory.kFlat_quotient_obj_iff]
-  · dsimp
-    rw [HomotopyCategory.kFlat_quotient_obj_iff]
-    exact CochainComplex.kFlat_biprod hK hK
-
-open HomologicalComplex
-
-set_option backward.isDefEq.respectTransparency false in
-instance : (L A).functor.IsLocalization (WL A) :=
-  Functor.isLocalization_of_essSurj_of_full_of_exists_cylinders _ _
-    (fun _ _ f hf ↦ by
-      have := (NatIso.isIso_map_iff (iso A) f).1
-        (HomotopyCategory.quotient_inverts_homotopyEquivalences _ _ _ hf)
-      dsimp only [Functor.comp_map] at this
-      apply isIso_of_reflects_iso _ ((B A).functor)) (by
-      rintro ⟨K₁, hK₁⟩ ⟨K₂, hK₂⟩ (f₀ f₁) hf
-      refine ⟨K₁.precylinder.toFullSubcategory (by exact kFlat_cylinder _ hK₁),
-        ?_, ?_⟩
-      · exact Precylinder.LeftHomotopy.fullSubcategoryEquiv.symm
-          { h := cylinder.desc _ _
-                (HomotopyCategory.homotopyOfEq _ _ ((ObjectProperty.ι _).congr_map hf)) }
-      · exact ⟨cylinder.homotopyEquiv K₁ (fun n ↦ ⟨n - 1, by simp⟩), rfl⟩)
-
-instance : (L A).IsLocalizedEquivalence :=
-  (L A).isLocalizedEquivalence_of_isLocalization (WL A)
-    (fun _ _ _ hf ↦ homotopyEquivalences_le_quasiIso _ _ _ hf) (by
-      rintro ⟨K, hK⟩ ⟨L, hL⟩ f hf
-      obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
-      obtain ⟨L, rfl⟩ := HomotopyCategory.quotient_obj_surjective L
-      rw [HomotopyCategory.kFlat_quotient_obj_iff] at hK hL
-      obtain ⟨f, rfl⟩ := ObjectProperty.homMk_surjective f
-      obtain ⟨f, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective f
-      refine ⟨⟨K, hK⟩, ⟨L, hL⟩, ObjectProperty.homMk f, ?_, ⟨Iso.refl _⟩⟩
-      simpa [MorphismProperty.WKFlat, HomotopyCategory.quotient_map_mem_quasiIso_iff] using hf)
-
-instance : (R A).IsLocalizedEquivalence := by
-  have : (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)).HasLocalization := .standard _
-  exact LocalizerMorphism.IsLocalizedEquivalence.of_isLocalization_of_isLocalization (R A)
-    HomologicalComplexUpToQuasiIso.Qh
-
-instance : (R A).functor.EssSurj := by
-  dsimp [R]
-  infer_instance
-
-set_option backward.defeqAttrib.useBackward true in
-instance : TwoSquare.GuitartExact (iso A).inv :=
-  TwoSquare.GuitartExact.quotient_of_nonempty_leftHomotopy (iso A).symm (by
-    rintro ⟨K₁, hK₁⟩ K₂ (f₀ f₁ : K₁ ⟶ K₂) hf
-    refine ⟨K₁.precylinder.toFullSubcategory (by exact kFlat_cylinder K₁ hK₁),
-      ?_, ⟨?_⟩⟩
-    · ext : 1
-      exact HomotopyCategory.eq_of_homotopy _ _ (cylinder.homotopy₀₁ _ (fun n ↦ ⟨n - 1, by simp⟩))
-    · exact { h := cylinder.desc _ _ (HomotopyCategory.homotopyOfEq _ _ hf) })
-
-end kFlatLocalizerSquare
-
 variable [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
@@ -519,10 +414,10 @@ lemma cochainComplex_kFlat_isLeftDerivabilityStructure :
 
 include Λ hι in
 lemma homotopyCategory_kFlat_isLeftDerivabilityStructure :
-    (HomotopyCategory.quasiIso A (.up ℤ)).localizerMorphismKFlat.IsLeftDerivabilityStructure := by
-  have := Λ.cochainComplex_kFlat_isLeftDerivabilityStructure hι
-  exact LocalizerMorphism.isLeftDerivabilityStructure_of_isLocalizedEquivalence
-    (kFlatLocalizerSquare.iso A)
+    (HomotopyCategory.quasiIso A (.up ℤ)).localizerMorphismKFlat.IsLeftDerivabilityStructure :=
+  HomotopyCategory.isLeftDerivabilityStructure_quasiIsoLocalizerMorphism _
+    Λ.resolutionNatTrans (fun _ ↦ inferInstance)
+    (fun K ↦ (HomotopyCategory.kFlat_quotient_obj_iff _).2 (Λ.kFlat_resolutionFunctor_obj hι K))
 
 end LeftResolution
 
@@ -533,16 +428,14 @@ variable [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]
 instance [HasFunctorialFlatResolution A] :
     (HomologicalComplex.quasiIso A (.up ℤ)).localizerMorphismKFlat.IsLeftDerivabilityStructure := by
   let Λ : LeftResolution (ObjectProperty.flat.ι : _ ⥤ A) := Classical.arbitrary _
-  exact Λ.reduced.cochainComplex_kFlat_isLeftDerivabilityStructure (by
-    rintro X ⟨Y, ⟨e⟩⟩
-    exact ObjectProperty.prop_of_iso _ e Y.2)
+  exact Λ.reduced.cochainComplex_kFlat_isLeftDerivabilityStructure
+    ObjectProperty.flat.essImage_ι_le
 
 instance [HasFunctorialFlatResolution A] :
     (HomotopyCategory.quasiIso A (.up ℤ)).localizerMorphismKFlat.IsLeftDerivabilityStructure := by
   let Λ : LeftResolution (ObjectProperty.flat.ι : _ ⥤ A) := Classical.arbitrary _
-  exact Λ.reduced.homotopyCategory_kFlat_isLeftDerivabilityStructure (by
-    rintro X ⟨Y, ⟨e⟩⟩
-    exact ObjectProperty.prop_of_iso _ e Y.2)
+  exact Λ.reduced.homotopyCategory_kFlat_isLeftDerivabilityStructure
+    ObjectProperty.flat.essImage_ι_le
 
 noncomputable example [HasFunctorialFlatResolution A] [HasDerivedCategory A] :
     MonoidalCategory (DerivedCategory A) := inferInstance
