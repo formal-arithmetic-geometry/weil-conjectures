@@ -82,6 +82,8 @@ the comparison of the two derived lower shrieks attached to `c` and to `d`.
 
 - `AlgebraicGeometry.Etale.isIso_overMapPullbackComparison`: the comparison of site
   functors is an isomorphism when the square is cartesian.
+- `AlgebraicGeometry.Etale.mateEquiv_upperStarBaseChange`: the mate of the base change map
+  `q_* ⋙ k^* ⟶ j^*` is the composition isomorphism `j_* ⋙ q_* ≅ k_*`.
 - `AlgebraicGeometry.Etale.upperStarBaseChange_eq`: the base change map defined by the
   counit of `q^* ⊣ q_*` is the one induced by the comparison of site functors.
 - `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekBaseChange`: **base change for the
@@ -123,15 +125,6 @@ instance Etale.isContinuous_overMap {V U : Scheme.{u}} {f : V ⟶ U} (hf : @Etal
     (MorphismProperty.Over.map ⊤ hf).IsContinuous
       (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale) :=
   GrothendieckTopology.isContinuous_overMap_of_le hf le_rfl
-
-/-- The composite of the localization functor along an étale morphism with base change is
-continuous for the small étale topologies. -/
-instance Etale.isContinuous_overMap_comp_overPullback {V U W : Scheme.{u}} {f : V ⟶ U}
-    (hf : @Etale _ _ f) (g : W ⟶ U) :
-    (MorphismProperty.Over.map (P := @Etale) ⊤ hf ⋙
-        MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
-      (V.smallGrothendieckTopology @Etale) (W.smallGrothendieckTopology @Etale) :=
-  Functor.isContinuous_comp _ _ _ (U.smallGrothendieckTopology @Etale) _
 
 variable {X C D : Scheme.{u}} (j : X ⟶ C) [IsOpenImmersion j] (q : C ⟶ D) (k : X ⟶ D)
   [IsOpenImmersion k] (hk : j ≫ q = k)
@@ -252,6 +245,46 @@ noncomputable def Etale.upperStarBaseChange :
     Functor.whiskerRight (Etale.upperStarLowerStarAdjunction A q).counit (j)^*[A] ≫
     (Functor.leftUnitor _).hom
 
+include hk in
+omit [IsOpenImmersion j] [IsOpenImmersion k] in
+/-- The mate of the base change map `q_* ⋙ k^* ⟶ j^*` under the adjunctions `j^* ⊣ j_*` and
+`k^* ⊣ k_*` is the composition isomorphism `j_* ⋙ q_* ≅ k_*` of pushforwards
+
+```
+Sh(X) --j_*--> Sh(C)
+  |              |
+  𝟭      ⇙      q_*
+  v              v
+Sh(X) --k_*--> Sh(D)
+```
+-/
+lemma Etale.mateEquiv_upperStarBaseChange :
+    (mateEquiv (Etale.upperStarLowerStarAdjunction A j) (Etale.upperStarLowerStarAdjunction A k)
+      (TwoSquare.mk ((q)_*[A]) ((j)^*[A]) ((k)^*[A]) (𝟭 _)
+        (Etale.upperStarBaseChange A j q k hk))).natTrans =
+      (Etale.lowerStarComp A j q k hk.symm).hom ≫ (Functor.leftUnitor _).inv := by
+  subst hk
+  have hconj : conjugateEquiv ((Etale.upperStarLowerStarAdjunction A q).comp
+        (Etale.upperStarLowerStarAdjunction A j))
+      (Etale.upperStarLowerStarAdjunction A (j ≫ q)) (Etale.upperStarComp A j q).hom =
+      (Etale.lowerStarComp A j q).hom :=
+    congrArg Iso.hom (Etale.conjugateIsoEquiv_upperStarComp A j q)
+  have hmate : TwoSquare.mk ((q)_*[A]) ((j)^*[A]) ((j ≫ q)^*[A]) (𝟭 _)
+      (Etale.upperStarBaseChange A j q (j ≫ q) rfl) =
+      mateEquiv (Etale.upperStarLowerStarAdjunction A q) Adjunction.id
+        (TwoSquare.mk ((j ≫ q)^*[A]) ((q)^*[A]) (𝟭 _) ((j)^*[A])
+          (Etale.upperStarComp A j q).hom) := by
+    ext F
+    simp [mateEquiv, Etale.upperStarBaseChange]
+  rw [hmate, iterated_mateEquiv_conjugateEquiv]
+  refine NatTrans.ext (funext fun F => ?_)
+  have := congrArg (fun t => NatTrans.app t F) hconj
+  simp only [conjugateEquiv_apply_app, Adjunction.comp_unit_app, Adjunction.comp_counit_app,
+    Functor.comp_obj, Functor.comp_map, Functor.map_comp, Category.assoc, Functor.id_obj,
+    Functor.id_map, Category.comp_id, NatTrans.comp_app,
+    Functor.leftUnitor_inv_app] at this ⊢
+  simpa [Adjunction.id] using this
+
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 include hk in
@@ -306,63 +339,18 @@ lemma Etale.upperStarBaseChange_eq :
     apply pullback.hom_ext
     · apply pullback.hom_ext <;> simp
     · simp
-  have hconj : conjugateEquiv ((Etale.upperStarLowerStarAdjunction A q).comp
-        (Etale.upperStarLowerStarAdjunction A j))
-      (Etale.upperStarLowerStarAdjunction A (j ≫ q)) (Etale.upperStarComp A j q).hom =
-      (Etale.lowerStarComp A j q).hom :=
-    congrArg Iso.hom (Etale.conjugateIsoEquiv_upperStarComp A j q)
-  have hmate : TwoSquare.mk ((q)_*[A]) ((j)^*[A]) ((j ≫ q)^*[A]) (𝟭 _)
-      (Etale.upperStarBaseChange A j q (j ≫ q) rfl) =
-      mateEquiv (Etale.upperStarLowerStarAdjunction A q) Adjunction.id
-        (TwoSquare.mk ((j ≫ q)^*[A]) ((q)^*[A]) (𝟭 _) ((j)^*[A])
-          (Etale.upperStarComp A j q).hom) := by
-    ext F
-    simp [mateEquiv, Etale.upperStarBaseChange]
-  have hA : (mateEquiv (Etale.upperStarLowerStarAdjunction A j)
-      (Etale.upperStarLowerStarAdjunction A (j ≫ q))
-      (TwoSquare.mk ((q)_*[A]) ((j)^*[A]) ((j ≫ q)^*[A]) (𝟭 _)
-        (Etale.upperStarBaseChange A j q (j ≫ q) rfl))).natTrans =
-      (Etale.lowerStarComp A j q).hom ≫ (Functor.leftUnitor _).inv := by
-    rw [hmate, iterated_mateEquiv_conjugateEquiv]
-    refine NatTrans.ext (funext fun F => ?_)
-    have := congrArg (fun t => NatTrans.app t F) hconj
-    simp only [conjugateEquiv_apply_app, Adjunction.comp_unit_app, Adjunction.comp_counit_app,
-      Functor.comp_obj, Functor.comp_map, Functor.map_comp, Category.assoc, Functor.id_obj,
-      Functor.id_map, Category.comp_id, NatTrans.comp_app,
-      Functor.leftUnitor_inv_app] at this ⊢
-    simpa [Adjunction.id] using this
-  have hB : (mateEquiv (Etale.upperStarLowerStarAdjunction A j)
-      (Etale.upperStarLowerStarAdjunction A (j ≫ q))
-      (TwoSquare.mk ((q)_*[A]) ((j)^*[A]) ((j ≫ q)^*[A]) (𝟭 _)
-        (Functor.whiskerLeft (q)_*[A]
-            (Etale.upperStarIsoOpenImmersionRestriction A (j ≫ q)).hom ≫
-          Etale.openImmersionRestrictionBaseChange A j q (j ≫ q) rfl ≫
-          (Etale.upperStarIsoOpenImmersionRestriction A j).inv))).natTrans =
-      (Etale.lowerStarComp A j q).hom ≫ (Functor.leftUnitor _).inv := by
-    have h1 : TwoSquare.mk ((q)_*[A]) ((j)^*[A]) ((j ≫ q)^*[A]) (𝟭 _)
-        (Functor.whiskerLeft (q)_*[A]
-            (Etale.upperStarIsoOpenImmersionRestriction A (j ≫ q)).hom ≫
-          Etale.openImmersionRestrictionBaseChange A j q (j ≫ q) rfl ≫
-          (Etale.upperStarIsoOpenImmersionRestriction A j).inv) =
-        ((TwoSquare.mk ((q)_*[A]) (Etale.openImmersionRestriction A j)
-          (Etale.openImmersionRestriction A (j ≫ q)) (𝟭 _)
-          (Etale.openImmersionRestrictionBaseChange A j q (j ≫ q) rfl)).whiskerRight
-            (Etale.upperStarIsoOpenImmersionRestriction A (j ≫ q)).hom).whiskerLeft
-          (Etale.upperStarIsoOpenImmersionRestriction A j).inv := by
-      ext F
-      simp
-    rw [h1, conjugateEquiv_mateEquiv_vcomp _
-        (Etale.openImmersionRestrictionLowerStarAdjunction A j) _,
-      mateEquiv_conjugateEquiv_vcomp _
-        (Etale.openImmersionRestrictionLowerStarAdjunction A (j ≫ q)) _]
-    simp only [Etale.upperStarIsoOpenImmersionRestriction,
-      Etale.upperStarIsoLocalizationRestriction,
-      Etale.openImmersionRestrictionLowerStarAdjunction] at hsite ⊢
-    rw [conjugateEquiv_leftAdjointUniq_inv, conjugateEquiv_leftAdjointUniq_hom]
-    ext F
-    simp [hsite]
+  have hA := Etale.mateEquiv_upperStarBaseChange A j q (j ≫ q) rfl
+  -- The site description is transported to the pullbacks by `mateEquiv_leftAdjointUniq`.
+  have hB := mateEquiv_leftAdjointUniq (Etale.upperStarLowerStarAdjunction A j)
+    (Etale.openImmersionRestrictionLowerStarAdjunction A j)
+    (Etale.upperStarLowerStarAdjunction A (j ≫ q))
+    (Etale.openImmersionRestrictionLowerStarAdjunction A (j ≫ q))
+    (TwoSquare.mk ((q)_*[A]) (Etale.openImmersionRestriction A j)
+      (Etale.openImmersionRestriction A (j ≫ q)) (𝟭 _)
+      (Etale.openImmersionRestrictionBaseChange A j q (j ≫ q) rfl))
   exact (mateEquiv (Etale.upperStarLowerStarAdjunction A j)
-    (Etale.upperStarLowerStarAdjunction A (j ≫ q))).injective (hA.trans hB.symm)
+    (Etale.upperStarLowerStarAdjunction A (j ≫ q))).injective
+    (hA.trans (hsite.symm.trans (congrArg TwoSquare.natTrans hB).symm))
 
 include hk in
 /-- If the square is cartesian, the base change map `q_* ⋙ k^* ⟶ j^*` is an isomorphism. -/

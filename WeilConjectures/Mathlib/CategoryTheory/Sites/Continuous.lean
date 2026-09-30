@@ -25,6 +25,9 @@ precomposition with `F.op`, corestricted to the sheaf subcategories, and limits 
 are created by `sheafToPresheaf` while limits of presheaves are computed pointwise. Note
 that this does not go through the adjunction `F^* ⊣ F_*`, which needs extra hypotheses
 (existence of the left Kan extensions and of sheafification).
+
+A natural isomorphism of continuous functors induces an isomorphism of the pushforward
+functors (`CategoryTheory.Functor.isIso_sheafPushforwardContinuousNatTrans`).
 -/
 
 @[expose] public section
@@ -86,5 +89,12 @@ instance preservesLimitsOfShape_sheafPushforwardContinuous (E : Type w₁) [Cate
 instance preservesFiniteLimits_sheafPushforwardContinuous [HasFiniteLimits A] :
     PreservesFiniteLimits (F.sheafPushforwardContinuous A J K) where
   preservesFiniteLimits _ := inferInstance
+
+/-- A natural isomorphism of continuous functors induces an isomorphism of the pushforward
+functors on sheaves. -/
+instance isIso_sheafPushforwardContinuousNatTrans {F' : C ⥤ D} [F'.IsContinuous J K]
+    (τ : F ⟶ F') [IsIso τ] :
+    IsIso (Functor.sheafPushforwardContinuousNatTrans τ A J K) :=
+  inferInstanceAs (IsIso (Functor.sheafPushforwardContinuousIso (asIso τ) A J K).inv)
 
 end CategoryTheory.Functor
