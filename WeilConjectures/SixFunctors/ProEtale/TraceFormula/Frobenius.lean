@@ -184,6 +184,10 @@ instance isIso_coeffIterate [IsIso W.coeff] (m : ℕ) : IsIso (W.coeffIterate m)
   | zero => rw [coeffIterate_zero]; infer_instance
   | succ n ih => rw [coeffIterate_succ]; infer_instance
 
+section Graph
+
+variable [DerivedBraiding A]
+
 /-- The coefficient map of the graph correspondence
 `AlgebraicGeometry.ProEtale.WeilComplex.graph`: the iterate `φ_m` read through the
 comparison `K ≃ 𝟙^! K`. -/
@@ -210,6 +214,29 @@ compactification when `aX` does. -/
 instance hasCompactification_graph_str [HasCompactification aX] (G : GeometricOperations A s)
     (m : ℕ) : HasCompactification (W.graph G m).str :=
   inferInstanceAs (HasCompactification aX)
+
+/-- The support map `(𝟙, Φ_m) : X ⟶ X ×_s X` of the graph `W.graph G m` is the graph
+`X ⟶ X ×_s X` of `Φ_m`, a section of the first projection, followed by the identification
+of `X ×_{Φ_m ≫ a_X, s, a_X} X` with `X ×_s X` along `Φ_m ≫ a_X = a_X`. -/
+lemma graph_toProd_eq (G : GeometricOperations A s) (m : ℕ) :
+    (W.graph G m).toProd =
+      pullback.lift (𝟙 X) (W.frobeniusIterate m) (Category.id_comp (W.frobeniusIterate m ≫ aX)) ≫
+        (pullback.congrHom (W.frobeniusIterate_comp m) rfl).hom := by
+  apply pullback.hom_ext <;> simp [Correspondence.toProd, graph]
+
+/-- The support map `(𝟙, Φ_m) : X ⟶ X ×_s X` of the graph `W.graph G m` is a section of the
+first projection, hence a closed immersion when `aX` is separated. -/
+instance isClosedImmersion_graph_toProd [IsSeparated aX] (G : GeometricOperations A s)
+    (m : ℕ) : IsClosedImmersion (W.graph G m).toProd := by
+  rw [graph_toProd_eq]
+  -- instance search does not find this factor inside the composite, only when it is stated
+  -- on its own
+  have : IsClosedImmersion
+      (pullback.lift (𝟙 X) (W.frobeniusIterate m) (Category.id_comp (W.frobeniusIterate m ≫ aX))) :=
+    inferInstance
+  infer_instance
+
+end Graph
 
 /-- The geometric-stalk Frobenius `F_{x,m} = (φ_m)_x̄` of a Weil complex at a point
 `x : s ⟶ X` fixed by `Φ_m`: the composite
@@ -304,6 +331,10 @@ theorem ctf_leftDerivedUpperStar_obj_iff (G : GeometricCoefficients A) (r : X �
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
     G.ctf X (((upperStar A r).leftDerivedFunctor).obj K) ↔ G.ctf Y K :=
   sorry
+
+section
+
+variable [DerivedBraiding A]
 
 namespace GeometricOperations
 
@@ -404,5 +435,7 @@ instance WeilComplex.isIso_lowerShriekPush_coeff {aX : X ⟶ s} {aY : Y ⟶ s}
     IsIso (W.lowerShriekPush G f frobY hY h).coeff := by
   dsimp [lowerShriekPush, lowerShriekPushCoeff]
   infer_instance
+
+end
 
 end AlgebraicGeometry.ProEtale

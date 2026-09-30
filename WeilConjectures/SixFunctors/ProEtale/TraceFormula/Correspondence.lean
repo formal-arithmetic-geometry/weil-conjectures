@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Defs
 
 /-!
@@ -131,7 +134,7 @@ variable {X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s}
   {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
 
 /-- The fixed scheme `Fix(c) = C ×_{X × X, c, Δ_X} X` of an endocorrespondence: the locus
-where the two legs agree, realised as their equaliser (part of blueprint `sk-d-corr`). -/
+where the two legs agree, realised as their equalizer (part of blueprint `sk-d-corr`). -/
 noncomputable def fix (c : Correspondence aX aX K K) : Scheme.{u} :=
   equalizer c.fst c.snd
 
@@ -168,6 +171,56 @@ noncomputable def intersectionStr (c : Correspondence aX aY K L)
     (d : Correspondence aY aX L K) : c.intersection d ⟶ s :=
   pullback.fst c.toProd d.toProdSwap ≫ c.str
 
+/-- The fixed scheme is the pullback of the support map along the diagonal:
+
+```
+  Fix(c) ──fixι──▶ C
+     │             │
+  fixι ≫ c₁        │ c = (c₁, c₂)
+     ▼             ▼
+     X ────Δ_X───▶ X ×_s X
+```
+
+is Cartesian, the equalizer of `c₁` and `c₂` being `C ×_{X × X} X`
+(part of blueprint `sk-d-corr`). -/
+lemma isPullback_fixι_toProd (c : Correspondence aX aX K K) :
+    IsPullback c.fixι (c.fixι ≫ c.fst) c.toProd (pullback.diagonal aX) :=
+  isPullback_equalizer_ι_diagonal c.fst c.snd _
+
+/-- The inclusion `Fix(c) ⟶ C` of the fixed scheme is the base change of the diagonal of
+`aX` along the support map `c : C ⟶ X × X` (`isPullback_fixι_toProd`). The diagonal is a
+closed immersion when `aX` is separated, so `Fix(c) ⟶ C` then admits a compactification. -/
+instance hasCompactification_fixι [IsSeparated aX] (c : Correspondence aX aX K K) :
+    HasCompactification c.fixι :=
+  .of_isPullback c.isPullback_fixι_toProd.flip
+
+/-- The structure morphism of the intersection support `E(C, D)` factors through the first
+projection of `Y × X`: the diagram
+
+```
+  E(C, D) ──pr₁──▶ C ────c────▶ Y ×_s X
+                   │               │
+               a_C │               │ pr₁
+                   ▼               ▼
+                   s ◀────a_Y───── Y
+```
+
+commutes, since `c ≫ pr₁ = c₁` and `c₁ ≫ a_Y = a_C`. -/
+lemma pullback_fst_toProd_fst_comp_eq_intersectionStr (c : Correspondence aX aY K L)
+    (d : Correspondence aY aX L K) :
+    pullback.fst c.toProd d.toProdSwap ≫ c.toProd ≫ pullback.fst aY aX ≫ aY =
+      c.intersectionStr d := by
+  simp [intersectionStr, toProd, c.fst_comp]
+
+/-- The structure morphism of the fixed scheme factors through the support map and the first
+projection of `X × X`: `fixι ≫ c ≫ pr₁ ≫ a_X = a_{Fix(c)}`, since `c ≫ pr₁ = c₁` and
+`c₁ ≫ a_X = a_C`. -/
+lemma fixι_toProd_fst_comp_eq_fixStr (c : Correspondence aX aX K K) :
+    c.fixι ≫ c.toProd ≫ pullback.fst aX aX ≫ aX = c.fixStr := by
+  simp [fixStr, toProd, c.fst_comp]
+
+variable [DerivedBraiding A]
+
 /-- The coefficient map of `AlgebraicGeometry.ProEtale.Correspondence.ofEnd`: the
 endomorphism `v` read through the comparisons `L(𝟙)^* K ≃ K ≃ 𝟙^! K`. -/
 noncomputable def ofEndCoeff (G : GeometricOperations A s)
@@ -198,6 +251,36 @@ noncomputable def ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
   fst_comp := Category.id_comp aX
   snd_comp := Category.id_comp aX
   coeff := ofEndCoeff G K v
+
+/-- The support map of `ofEnd G aX K v` is the diagonal of `aX`. -/
+@[simp]
+lemma ofEnd_toProd (G : GeometricOperations A s) (aX : X ⟶ s)
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
+    (ofEnd G aX K v).toProd = pullback.diagonal aX :=
+  rfl
+
+/-- The swapped support map of `ofEnd G aX K v` is the diagonal of `aX`. -/
+@[simp]
+lemma ofEnd_toProdSwap (G : GeometricOperations A s) (aX : X ⟶ s)
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
+    (ofEnd G aX K v).toProdSwap = pullback.diagonal aX :=
+  rfl
+
+/-- The support map of `ofEnd G aX K v` is the diagonal of `aX`, a closed immersion when
+`aX` is separated, so it admits a compactification. -/
+instance hasCompactification_toProd_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
+    [IsSeparated aX] (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
+    HasCompactification (ofEnd G aX K v).toProd := by
+  rw [ofEnd_toProd]
+  infer_instance
+
+/-- The swapped support map of `ofEnd G aX K v` is the diagonal of `aX`, a closed immersion
+when `aX` is separated, so it admits a compactification. -/
+instance hasCompactification_toProdSwap_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
+    [IsSeparated aX] (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
+    HasCompactification (ofEnd G aX K v).toProdSwap := by
+  rw [ofEnd_toProdSwap]
+  infer_instance
 
 instance isIso_fixι_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
@@ -283,7 +366,7 @@ end Correspondence
 
 namespace GeometricOperations
 
-variable (G : GeometricOperations A s)
+variable [DerivedBraiding A] (G : GeometricOperations A s)
 
 /-- The *Borel-Moore sections* `A_T ⟶ ω_T` of a geometric scheme `a : T ⟶ s`
 (part of blueprint `sk-d-integral`). -/

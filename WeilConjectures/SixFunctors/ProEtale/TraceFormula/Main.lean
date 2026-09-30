@@ -58,7 +58,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] {s X : Scheme.{u}}
+  [Abelian.HasFunctorialFlatResolution A] [DerivedBraiding A] {s X : Scheme.{u}}
 
 /-- Compact trace additivity: for a closed immersion `i : Z ⟶ X` and its open complement
 `j : U ⟶ X`, the Frobenius coefficient morphisms induced on the functorial compact
@@ -69,7 +69,6 @@ localization triangle satisfy
 Invertibility of the coefficient morphism is unnecessary, so the statement is for plain
 `WeilComplex`es (blueprint: `sk-i-global-additivity`). -/
 theorem trace_globalOperator_eq_trace_add_trace (G : GeometricOperations A s)
-    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))]
     {U Z : Scheme.{u}} {aX : X ⟶ s} {aU : U ⟶ s} {aZ : Z ⟶ s}
     [HasCompactification aX] [HasCompactification aU] [HasCompactification aZ]
     (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
@@ -111,7 +110,6 @@ finite type `X₀/𝐅_q` and every `m ≥ 1`,
 the sum running over the `s`-points of `X` fixed by `Φ_m`
 (blueprint: `sk-thm-trace-formula`). -/
 theorem trace_globalOperator_eq_sum_trace_stalkFrobenius (G : GeometricOperations A s)
-    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))]
     {aX : X ⟶ s} [HasCompactification aX] (W : WeilComplex (A := A) aX)
     (hW : IsIso W.coeff) (hctf : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m)
     [IsProper (W.graph G m).snd]

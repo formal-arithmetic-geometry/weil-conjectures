@@ -204,8 +204,8 @@ in `1 + T Λ[[T]]`, the product over the closed points `y` of `X₀` being coeff
 locally finite. This is the Euler-product form of
 `trace_globalOperator_eq_sum_trace_stalkFrobenius`
 (blueprint: `sk-thm-trace-transport`). -/
-theorem hasProd_inv_alternatingCharpolyRevProd (G : GeometricOperations A s)
-    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))]
+theorem hasProd_inv_alternatingCharpolyRevProd [DerivedBraiding A]
+    (G : GeometricOperations A s)
     {aX : X ⟶ s} [HasCompactification aX] (W : WeilComplex (A := A) aX) (hW : IsIso W.coeff)
     (hctf : G.ctf X W.obj)
     [∀ m : ℕ, IsProper (W.graph G m).snd]

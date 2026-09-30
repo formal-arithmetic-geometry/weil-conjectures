@@ -26,6 +26,8 @@ We also record that a global section whose non-vanishing locus is everything is 
   `f : Γ(X, U)`, then `f` is a unit. This is the converse of `Scheme.basicOpen_of_isUnit`.
 * `AlgebraicGeometry.Scheme.Hom.range_appLE_subset_of_comp_eq`: sections in the image of
   `appLE` of a composition are in the image of `appLE` of its first factor.
+* `AlgebraicGeometry.Scheme.IsSpecOfField`: the scheme is isomorphic to the spectrum of a
+  field, with the instance `AlgebraicGeometry.Scheme.isSpecOfField_Spec` for `Spec k`.
 -/
 
 @[expose] public section
@@ -87,5 +89,20 @@ lemma Hom.range_appLE_subset_of_comp_eq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : 
   subst hcomp
   rintro _ ⟨x, rfl⟩
   exact ⟨g.appLE U V e₁ x, by rw [← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE]⟩
+
+/-- A scheme `S` *is the spectrum of a field* if it is isomorphic to `Spec k` for some field
+`k`. -/
+class IsSpecOfField (S : Scheme.{u}) : Prop where
+  exists_iso : ∃ (k : Type u) (_ : Field k), Nonempty (S ≅ Spec (.of k))
+
+/-- The spectrum of a field is the spectrum of a field. -/
+instance isSpecOfField_Spec (k : Type u) [Field k] : (Spec (.of k)).IsSpecOfField :=
+  ⟨⟨k, inferInstance, ⟨Iso.refl _⟩⟩⟩
+
+/-- Being the spectrum of a field is invariant under isomorphism. -/
+lemma IsSpecOfField.of_iso {S T : Scheme.{u}} (e : S ≅ T) [T.IsSpecOfField] :
+    S.IsSpecOfField :=
+  let ⟨k, _, ⟨e'⟩⟩ := IsSpecOfField.exists_iso (S := T)
+  ⟨⟨k, inferInstance, ⟨e ≪≫ e'⟩⟩⟩
 
 end AlgebraicGeometry.Scheme
