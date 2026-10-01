@@ -14,8 +14,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 
 Let `p : X ⟶ Y` be a morphism of schemes. We construct the projection map
 `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)`, natural in `M` in `D(X_ét)` and `L` in `D(Y_ét)`, as the
-specialisation of the general `CategoryTheory.Adjunction.projectionMap` to the adjunction
-`Lp^* ⊣ Rp_*` and the comparison
+specialisation of the general `CategoryTheory.Adjunction.rightAdjointProjectionMap` to the
+adjunction `Lp^* ⊣ Rp_*` and the comparison
 `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison`. Its transpose along
 `Lp^* ⊣ Rp_*` is given by the diagram
 ```
@@ -48,7 +48,7 @@ The results depend on `sorryAx` through `AlgebraicGeometry.Etale.derivedTensor`.
   `IsIso (rightDerivedLowerStarProjectionMap A p)`. The open-immersion half
   `j_!(K ⊗ᴸ j^*L) ≅ j_!K ⊗ᴸ L` of the projection map for `Rf_!` is still missing.
 - The pro-étale and `O_E`/`E`-coefficient projection maps should be obtained in the same way
-  from `CategoryTheory.Adjunction.projectionMap`.
+  from `CategoryTheory.Adjunction.rightAdjointProjectionMap`.
 -/
 
 @[expose] public section
@@ -106,13 +106,13 @@ variable [Etale.UpperStarPreservesFlat A]
 
 /-- The projection map `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` for the derived pushforward along
 `p : X ⟶ Y`, as a natural transformation of bifunctors `D(X_ét) ⥤ D(Y_ét) ⥤ D(Y_ét)`.
-It is `CategoryTheory.Adjunction.projectionMap` for the adjunction
+It is `CategoryTheory.Adjunction.rightAdjointProjectionMap` for the adjunction
 `AlgebraicGeometry.Etale.derivedUpperStarLowerStarAdjunction` and the comparison
 `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison`. -/
 noncomputable def rightDerivedLowerStarProjectionMap :
     derivedTensorRightDerivedLowerStar A p ⟶
       rightDerivedLowerStarDerivedTensorLeftDerivedUpperStar A p :=
-  (derivedUpperStarLowerStarAdjunction A p).projectionMap
+  (derivedUpperStarLowerStarAdjunction A p).rightAdjointProjectionMap
     (leftDerivedUpperStarTensorComparison A p)
 
 /-- The transpose along `Lp^* ⊣ Rp_*` of the projection map
@@ -134,7 +134,7 @@ lemma homEquiv_symm_rightDerivedLowerStarProjectionMap
       ((leftDerivedUpperStarTensorComparison A p).app (R((p)_*[A]).obj M)).app L ≫
         ((-⊗ᴸ-(X)[A]).map ((derivedUpperStarLowerStarAdjunction A p).counit.app M)).app
           (L((p)^*[A]).obj L) :=
-  Adjunction.homEquiv_symm_projectionMap_app_app _ _ M L
+  Adjunction.homEquiv_symm_rightAdjointProjectionMap_app_app _ _ M L
 
 /-- The counit form of
 `AlgebraicGeometry.Etale.homEquiv_symm_rightDerivedLowerStarProjectionMap`: applying `Lp^*`
@@ -149,7 +149,7 @@ lemma map_rightDerivedLowerStarProjectionMap_comp_counit
       ((leftDerivedUpperStarTensorComparison A p).app (R((p)_*[A]).obj M)).app L ≫
         ((-⊗ᴸ-(X)[A]).map ((derivedUpperStarLowerStarAdjunction A p).counit.app M)).app
           (L((p)^*[A]).obj L) :=
-  Adjunction.map_projectionMap_app_app_comp_counit _ _ M L
+  Adjunction.map_rightAdjointProjectionMap_app_app_comp_counit _ _ M L
 
 end Etale
 
