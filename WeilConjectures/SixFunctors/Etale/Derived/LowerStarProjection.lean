@@ -35,6 +35,8 @@ where `ε` is the counit of `AlgebraicGeometry.Etale.derivedUpperStarLowerStarAd
   `D(X_ét) ⥤ D(Y_ét) ⥤ D(Y_ét)`.
 - `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap p`: the projection map, as a
   natural transformation between these bifunctors.
+- `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap_app_app`: its value at `(M, L)`
+  is the transpose of the composite in the diagram above.
 - `AlgebraicGeometry.Etale.homEquiv_symm_rightDerivedLowerStarProjectionMap`: its transpose
   is the composite in the diagram above.
 
@@ -114,6 +116,20 @@ noncomputable def rightDerivedLowerStarProjectionMap :
       rightDerivedLowerStarDerivedTensorLeftDerivedUpperStar A p :=
   (derivedUpperStarLowerStarAdjunction A p).rightAdjointProjectionMap
     (leftDerivedUpperStarTensorComparison A p)
+
+/-- The projection map `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` at `(M, L)` is the transpose along
+`Lp^* ⊣ Rp_*` of the comparison `Lp^*(Rp_*M ⊗ᴸ L) ⟶ Lp^*Rp_*M ⊗ᴸ Lp^*L` followed by
+`ε_M ⊗ᴸ 𝟙`. -/
+@[simp]
+lemma rightDerivedLowerStarProjectionMap_app_app
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    ((rightDerivedLowerStarProjectionMap A p).app M).app L =
+      (derivedUpperStarLowerStarAdjunction A p).homEquiv _ _
+        (((leftDerivedUpperStarTensorComparison A p).app (R((p)_*[A]).obj M)).app L ≫
+          ((-⊗ᴸ-(X)[A]).map ((derivedUpperStarLowerStarAdjunction A p).counit.app M)).app
+            (L((p)^*[A]).obj L)) :=
+  rfl
 
 /-- The transpose along `Lp^* ⊣ Rp_*` of the projection map
 `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` is the composite
