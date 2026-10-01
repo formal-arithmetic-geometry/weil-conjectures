@@ -63,13 +63,13 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
     (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
     [IsDominant j]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l U) (hF : F.IsLisse) (s : C) (hs : IsClosed ({s} : Set C))
-    (hsU : s ∉ Set.range j.base) :
+    (F : WeilSheaf k₀ l U) (hF : F.IsLisse) (s : C.finitePoints)
+    (hsU : s.1 ∉ Set.range j.base) :
     ∃ e : (((WeilSheaf.directImage j).obj F.dual).stalk s).carrier ≃ₗ[PadicAlgCl l]
         Module.Dual (PadicAlgCl l) (((WeilSheaf.higherDirectImage j 1).obj F).stalk s).carrier,
       ∀ a b, e ((((WeilSheaf.directImage j).obj F.dual).stalk s).frobenius a)
           ((((WeilSheaf.higherDirectImage j 1).obj F).stalk s).frobenius b) =
-        (((C ↘ Spec (CommRingCat.of k₀)).residueCard s : PadicAlgCl l)) * e a b := by
+        (((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l)) * e a b := by
   sorry
 
 /-- For a nontrivial additive character `ψ` of `k₀` and a nonzero `a`, the linear Artin–Schreier
