@@ -45,7 +45,7 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
-  [C.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ C) [IsOpenImmersion j]
+  [C.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j]
   [j.IsOver (Spec (CommRingCat.of k₀))] [IsDominant j] [IsAffine C]
   [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
