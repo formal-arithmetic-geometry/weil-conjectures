@@ -37,6 +37,7 @@ public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.AlgebraicGeometry.DensePoints
 public import WeilConjectures.AlgebraicGeometry.Descent
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.ClosedSubgroup
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.ClosedSubgroup.Geometry
@@ -135,6 +136,7 @@ public import WeilConjectures.Blowup.QuasiAffineGeneralReduction
 public import WeilConjectures.Blowup.QuasiDomination
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
@@ -225,6 +227,7 @@ public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.ConstructibleSheaf.Refinement
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
+public import WeilConjectures.ConstructibleSheaf.Zero
 public import WeilConjectures.Convergence
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
@@ -350,6 +353,7 @@ public import WeilConjectures.GroupTheory.TateModule
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Adjunctions
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
@@ -475,6 +479,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Localization.Bousfield
 public import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
@@ -614,6 +619,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.Package
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
@@ -649,6 +655,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GeometricFrobenius
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
