@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Field.ULift
 public import Mathlib.NumberTheory.Padics.Complex
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
@@ -38,10 +39,13 @@ and both notions pull back along morphisms of `k₀`-schemes (`WeilSheaf.upperSt
 ## Main definitions
 
 - `AlgebraicGeometry.WeilCoefficients`: the category of modules over `ℚ̄_ℓ`, lifted to the
-  universe of the étale sites.
+  universe of the étale sites, and `AlgebraicGeometry.WeilCoefficients.toModuleCat`, the
+  underlying `ℚ̄_ℓ`-vector spaces.
 - `AlgebraicGeometry.WeilSheaf` and `AlgebraicGeometry.WeilComplex`: the category of
   constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme and the category of Weil complexes.
 - `AlgebraicGeometry.WeilSheaf.toComplex` and `AlgebraicGeometry.WeilComplex.homologySheaf`.
+- `AlgebraicGeometry.WeilSheaf.frobeniusPowIso`: the iterated Weil structure
+  `φ_m : (Fr_Xᵐ)^* F ≅ F`.
 - `AlgebraicGeometry.WeilSheaf.IsLisse`: the underlying sheaf is locally constant.
 - `AlgebraicGeometry.WeilSheaf.upperStar` and `AlgebraicGeometry.WeilComplex.upperStar`.
 
@@ -81,6 +85,26 @@ open Etale
 /-- The coefficients of Weil sheaves: modules over `ℚ̄_ℓ`, lifted to `Type (u + 1)`. -/
 abbrev WeilCoefficients (l : ℕ) [Fact l.Prime] : Type (u + 2) :=
   ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))
+
+namespace WeilCoefficients
+
+variable (l : ℕ) [Fact l.Prime]
+
+/-- The underlying `ℚ̄_ℓ`-vector space of a module over `ULift ℚ̄_ℓ`, by restriction of scalars
+along `ℚ̄_ℓ ≃ ULift ℚ̄_ℓ`. -/
+noncomputable abbrev toModuleCat :
+    WeilCoefficients.{u} l ⥤ ModuleCat.{u + 1} (PadicAlgCl l) :=
+  ModuleCat.restrictScalars (ULift.ringEquiv (R := PadicAlgCl l)).symm.toRingHom
+
+variable {l}
+
+/-- An isomorphism of modules over `ULift ℚ̄_ℓ` as a `ℚ̄_ℓ`-linear isomorphism of the
+underlying `ℚ̄_ℓ`-vector spaces. -/
+noncomputable def linearEquivOfIso {M N : WeilCoefficients.{u} l} (e : M ≅ N) :
+    (toModuleCat l).obj M ≃ₗ[PadicAlgCl l] (toModuleCat l).obj N :=
+  ((toModuleCat l).mapIso e).toLinearEquiv
+
+end WeilCoefficients
 
 section Frobenius
 
@@ -190,6 +214,25 @@ noncomputable def toComplex : WeilSheaf k₀ l X ⥤ WeilComplex k₀ l X :=
 instance : (toComplex (k₀ := k₀) (l := l) (X := X)).Additive :=
   IsoAlgebra.additive_lift_mapOfNatIso (P := WeilSheaf.objectProperty k₀ l X)
     (Q := WeilComplex.objectProperty k₀ l X) _ _
+
+/-- The iterated Weil structure `φ_m : (Fr_Xᵐ)^* F ≅ F` of a Weil sheaf, the ordered composite
+
+`(Fr_X^{m+1})^* F ≅ Fr_X^* (Fr_Xᵐ)^* F --Fr_X^* φ_m--> Fr_X^* F --φ--> F`
+
+built from `Fr_X^{m+1} = Fr_X ≫ Fr_Xᵐ`, with `φ_0` the identification `𝟙^* F ≅ F`. At a
+geometric point fixed by `Fr_Xᵐ` up to reparametrisation it induces the Frobenius relative to
+`𝔽_{qᵐ}` on the stalk. -/
+noncomputable def frobeniusPowIso (F : WeilSheaf k₀ l X) (m : ℕ) :
+    (Etale.upperStar (WeilCoefficients.{u} l)
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom).obj F.obj.carrier ≅
+        F.obj.carrier :=
+  match m with
+  | 0 => (Etale.upperStarId _ _).app _
+  | m + 1 =>
+    (Etale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom _
+        (by rw [pow_succ, Aut.Aut_mul_def, Iso.trans_hom])).app _ ≪≫
+      (frobeniusPullback k₀ l X).mapIso (F.frobeniusPowIso m) ≪≫ F.obj.str
 
 /-- A Weil sheaf is *lisse* if its underlying étale sheaf is locally constant; it is then
 finite locally constant, being constructible. The blueprint notion, lisse of finite rank for
