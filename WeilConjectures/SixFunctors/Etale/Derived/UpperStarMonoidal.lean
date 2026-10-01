@@ -6,19 +6,24 @@ Authors: Joël Riou, Claude
 module
 
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
 public import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
 public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
+public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 
 /-!
 # The derived pullback and the derived tensor product
 
 Let `g : Z ⟶ Y` be a morphism of schemes. We show that the two bifunctors
-`(K, M) ↦ Lg^*K ⊗ᴸ Lg^*M` and `(K, M) ↦ Lg^*(K ⊗ᴸ M)` from `D(Y_ét)` to `D(Z_ét)` are
+`(K, M) ↦ Lg^*K ⊗ᴸ Lg^*M` and `(K, M) ↦ Lg^*(K ⊗ᴸ M)`, of type
+`D(Y_ét) ⥤ D(Y_ét) ⥤ D(Z_ét)`, are
 the total left derived functors of `(A, B) ↦ g^*A ⊗ g^*B` and `(A, B) ↦ g^*(A ⊗ B)`
-respectively. They will be compared by deriving the oplax monoidal structure of `g^*`.
+respectively. Deriving the oplax monoidal structure of `g^*`, we obtain the comparison
+`Lg^*(K ⊗ᴸ M) ⟶ Lg^*K ⊗ᴸ Lg^*M`, which is an isomorphism since `g^*` is strong monoidal.
 
 Since `g^*` is exact, the counit of `Lg^*` is an isomorphism everywhere, so
 `Lg^*(K ⊗ᴸ M)` is computed with the K-flat left derivability structure on `K(Y_ét)`.
@@ -42,13 +47,27 @@ resolutions when `g^*` preserves flat sheaves, so they form a left derivability 
   `(K, M) ↦ Lg^*K ⊗ᴸ Lg^*M` is the total left derived functor of `(A, B) ↦ g^*A ⊗ g^*B`.
 - `AlgebraicGeometry.Etale.isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor`:
   `(K, M) ↦ Lg^*(K ⊗ᴸ M)` is the total left derived functor of `(A, B) ↦ g^*(A ⊗ B)`.
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison g`: the comparison
+  `Lg^*(K ⊗ᴸ M) ⟶ Lg^*K ⊗ᴸ Lg^*M`, obtained by deriving the oplax monoidal structure of `g^*`
+  with `CategoryTheory.Functor.leftDerived₂NatTrans`.
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorNatIso g`: it is a natural isomorphism,
+  with components `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso g K M`.
+
+The results depend on `sorryAx` through `AlgebraicGeometry.Etale.derivedTensor` and
+`AlgebraicGeometry.Etale.isLeftDerivedFunctor₂_derivedTensor`.
 
 ## TODO
 
-Nothing here is specific to étale sheaves: the same statements hold for an exact functor
-`F` between abelian monoidal categories with functorial flat resolutions, `F` preserving flat
-objects. They should be proved in that generality and specialised here.
-
+- Nothing here is specific to étale sheaves: the same statements hold for an exact functor
+  `F` between abelian monoidal categories with functorial flat resolutions, `F` preserving flat
+  objects. They should be proved in that generality and specialised here. This includes the
+  comparison `leftDerivedUpperStarTensorComparison`, which only uses the oplax monoidal
+  structure of `F`, and `leftDerivedUpperStarTensorNatIso`, which uses that `F` is strong
+  monoidal.
+- The comparison should be the `δ` of an oplax (in fact strong) monoidal structure
+  `Functor.OplaxMonoidal L(g^*)`, together with the unit comparison `Lg^*(𝟙_) ⟶ 𝟙_` and the
+  coherence axioms, with respect to the monoidal structure on derived categories. This needs
+  `-⊗ᴸ-(X)[A]` to agree with the tensor product of that monoidal structure.
 -/
 
 @[expose] public section
@@ -115,14 +134,14 @@ section
 
 open DerivedCategory Functor.LaxMonoidal
 
-/-- The bifunctor `(K, M) ↦ Lg^*K ⊗ᴸ Lg^*M` from `D(Y_ét)` to `D(Z_ét)`. -/
+/-- The bifunctor `(K, M) ↦ Lg^*K ⊗ᴸ Lg^*M`, of type `D(Y_ét) ⥤ D(Y_ét) ⥤ D(Z_ét)`. -/
 noncomputable abbrev derivedTensorLeftDerivedUpperStar :
     DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
         DerivedCategory (Sheaf Z.smallEtaleTopology A) :=
   (((Functor.whiskeringLeft₂ _).obj L((g)^*[A])).obj L((g)^*[A])).obj (-⊗ᴸ-(Z)[A])
 
-/-- The bifunctor `(K, M) ↦ Lg^*(K ⊗ᴸ M)` from `D(Y_ét)` to `D(Z_ét)`. -/
+/-- The bifunctor `(K, M) ↦ Lg^*(K ⊗ᴸ M)`, of type `D(Y_ét) ⥤ D(Y_ét) ⥤ D(Z_ét)`. -/
 noncomputable abbrev leftDerivedUpperStarDerivedTensor :
     DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
@@ -211,6 +230,71 @@ theorem isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor :
   -- only defeq to `X₁.obj` and `X₂.obj`; so the morphism is given explicitly.
   exact IsIso.comp_isIso'
     (Functor.map_isIso L((g)^*[A]) (((μNatTrans Qh).app X₁.obj).app X₂.obj)) inferInstance
+
+end
+
+section
+
+open DerivedCategory Functor.OplaxMonoidal
+
+variable [Etale.UpperStarPreservesFlat A]
+
+attribute [local instance] isLeftDerivedFunctor₂_derivedTensor_leftDerivedUpperStar
+  isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor
+
+/-- The comparison `Lg^*(K ⊗ᴸ M) ⟶ Lg^*K ⊗ᴸ Lg^*M` of bifunctors,
+of type `D(Y_ét) ⥤ D(Y_ét) ⥤ D(Z_ét)`, obtained by deriving the oplax monoidal structure `δ`
+of `g^*`. It is the unique natural transformation such that, for `K, M` in `K(Y_ét)`, the square
+```
+  Lg^*(Qh K ⊗ᴸ Qh M) ──comparison──▶ Lg^*(Qh K) ⊗ᴸ Lg^*(Qh M)
+          │                                    │
+          │ Lg^*(μ Qh) ≫ counit                │ derivedTensorLeftDerivedUpperStarCounit
+          ▼                                    ▼
+   Qh(g^*(K ⊗ M)) ─────────Qh(δ g^*)──────▶ Qh(g^*K ⊗ g^*M)
+```
+commutes, the left vertical arrow being `leftDerivedUpperStarDerivedTensorCounit`. -/
+noncomputable def leftDerivedUpperStarTensorComparison :
+    leftDerivedUpperStarDerivedTensor A g ⟶ derivedTensorLeftDerivedUpperStar A g :=
+  Functor.leftDerived₂NatTrans _ (derivedTensorLeftDerivedUpperStarCounit A g)
+    (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ)) _
+    (leftDerivedUpperStarDerivedTensorCounit A g)
+    (Functor.postcompose₂MapWhiskeringLeft₂ (mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A]) Qh)
+
+/-- The natural isomorphism `Lg^*(K ⊗ᴸ M) ≅ Lg^*K ⊗ᴸ Lg^*M` of bifunctors,
+of type `D(Y_ét) ⥤ D(Y_ét) ⥤ D(Z_ét)`, whose underlying morphism is
+`leftDerivedUpperStarTensorComparison`. -/
+noncomputable def leftDerivedUpperStarTensorNatIso :
+    leftDerivedUpperStarDerivedTensor A g ≅ derivedTensorLeftDerivedUpperStar A g :=
+  -- `δ` is an isomorphism since `g^*` is strong monoidal.
+  Functor.leftDerived₂NatIso _ (derivedTensorLeftDerivedUpperStarCounit A g)
+    (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ)) _
+    (leftDerivedUpperStarDerivedTensorCounit A g)
+    (asIso (Functor.postcompose₂MapWhiskeringLeft₂
+      (mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A]) Qh))
+
+@[simp]
+lemma leftDerivedUpperStarTensorNatIso_hom :
+    (leftDerivedUpperStarTensorNatIso A g).hom = leftDerivedUpperStarTensorComparison A g :=
+  rfl
+
+/-- The comparison `Lg^*(K ⊗ᴸ M) ⟶ Lg^*K ⊗ᴸ Lg^*M` is an isomorphism. -/
+instance isIso_leftDerivedUpperStarTensorComparison :
+    IsIso (leftDerivedUpperStarTensorComparison A g) :=
+  (leftDerivedUpperStarTensorNatIso A g).isIso_hom
+
+/-- The isomorphism `Lg^*(K ⊗ᴸ M) ≅ Lg^*K ⊗ᴸ Lg^*M` in `D(Z_ét)`, for `K, M` in `D(Y_ét)`. -/
+noncomputable def leftDerivedUpperStarTensorIso
+    (K M : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    L((g)^*[A]).obj (((-⊗ᴸ-(Y)[A]).obj K).obj M) ≅
+      ((-⊗ᴸ-(Z)[A]).obj (L((g)^*[A]).obj K)).obj (L((g)^*[A]).obj M) :=
+  ((leftDerivedUpperStarTensorNatIso A g).app K).app M
+
+@[simp]
+lemma leftDerivedUpperStarTensorIso_hom
+    (K M : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    (leftDerivedUpperStarTensorIso A g K M).hom =
+      ((leftDerivedUpperStarTensorComparison A g).app K).app M :=
+  rfl
 
 end
 
