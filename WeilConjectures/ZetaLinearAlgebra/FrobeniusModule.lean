@@ -40,6 +40,7 @@ reversed characteristic polynomial, for an integral weight and with the normaliz
   `FrobeniusModule.IsReal`, the condition that its image under `ι : K →+* ℂ` has real
   coefficients.
 - `FrobeniusModule.tateTwist`: the Tate twist `M(n)`, rescaling the Frobenius by `q ^ (-n)`.
+- `FrobeniusModule.dual`: the dual `M^∨` with the inverse transpose of the Frobenius.
 - `FrobeniusModule.IsPureOfWeight.tateTwist`: the twist by `n` lowers the weight by `2 n`.
 -/
 
@@ -189,5 +190,24 @@ theorem IsPureOfWeight.tateTwist {ι : K →+* ℂ} {q : ℕ} (hq : 0 < q)
   congr 1
   push_cast
   ring
+
+/-- The dual `M^∨ = Hom_K(M, K)` of a Frobenius module, with the inverse transpose
+`f ↦ f ∘ F⁻¹` of the Frobenius `F`, so that the evaluation pairing `M^∨ ⊗ M → K` is
+Frobenius-invariant (`FrobeniusModule.dual_frobenius_apply_frobenius`). -/
+noncomputable def dual (M : FrobeniusModule.{u, v} K) : FrobeniusModule.{max u v, v} K where
+  carrier := Module.Dual K M.carrier
+  frobenius := M.frobenius.symm.dualMap
+
+lemma dual_frobenius_apply (M : FrobeniusModule.{u, v} K) (f : Module.Dual K M.carrier)
+    (x : M.carrier) :
+    (show Module.Dual K M.carrier from M.dual.frobenius f) x = f (M.frobenius.symm x) :=
+  rfl
+
+/-- The evaluation pairing `M^∨ ⊗ M → K` is invariant under the Frobenius. -/
+@[simp]
+lemma dual_frobenius_apply_frobenius (M : FrobeniusModule.{u, v} K)
+    (f : Module.Dual K M.carrier) (x : M.carrier) :
+    (show Module.Dual K M.carrier from M.dual.frobenius f) (M.frobenius x) = f x := by
+  simp [dual_frobenius_apply]
 
 end FrobeniusModule

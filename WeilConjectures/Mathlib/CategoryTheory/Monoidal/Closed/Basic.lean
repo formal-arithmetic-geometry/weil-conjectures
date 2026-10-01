@@ -10,11 +10,17 @@ public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 
 /-!
-# Tensoring with a zero object in a closed monoidal category
+# Zero objects and monoidal equivalences in closed monoidal categories
 
 In a monoidal closed category with zero morphisms, `K ⊗ M` is a zero object if `M` is, since
 `K ⊗ -` is a left adjoint. If the category is moreover braided, the same holds if `K` is a
 zero object.
+
+A monoidal functor `G : C ⥤ D` between monoidal closed categories which is an equivalence
+preserves internal homs: `G [A, B] ≅ [G A, G B]`
+(`CategoryTheory.Functor.Monoidal.ihomIsoOfIsEquivalence`). Both `ihom A ⋙ G` and
+`G ⋙ ihom (G A)` are right adjoints, of `G⁻¹ ⋙ (A ⊗ -)` and of `(G A ⊗ -) ⋙ G⁻¹`, and these
+two left adjoints are isomorphic through the tensorator of `G`.
 -/
 
 @[expose] public section
@@ -36,3 +42,37 @@ lemma isZero_tensorObj_of_isZero_left [BraidedCategory C] {K : C} (hK : IsZero K
   (isZero_tensorObj_of_isZero_right M hK).of_iso (β_ K M)
 
 end CategoryTheory.MonoidalCategory
+
+namespace CategoryTheory.Functor.Monoidal
+
+open MonoidalCategory
+
+variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
+  [MonoidalClosed C] [MonoidalClosed D] (G : C ⥤ D) [G.Monoidal] [G.IsEquivalence]
+
+/-- For a monoidal functor `G` which is an equivalence, the isomorphism
+`(G A ⊗ -) ⋙ G⁻¹ ≅ G⁻¹ ⋙ (A ⊗ -)`, that is `G⁻¹ (G A ⊗ T) ≅ A ⊗ G⁻¹ T`, built from the
+tensorator `G A ⊗ G (G⁻¹ T) ≅ G (A ⊗ G⁻¹ T)`. -/
+noncomputable def tensorLeftCompInvIsoOfIsEquivalence (A : C) :
+    tensorLeft (G.obj A) ⋙ G.inv ≅ G.inv ⋙ tensorLeft A :=
+  isoWhiskerRight G.asEquivalence.counitIso.symm (tensorLeft (G.obj A) ⋙ G.inv) ≪≫
+    isoWhiskerLeft G.inv (isoWhiskerRight (commTensorLeft G A) G.inv) ≪≫
+    isoWhiskerLeft (G.inv ⋙ tensorLeft A) G.asEquivalence.unitIso.symm
+
+/-- A monoidal functor `G` which is an equivalence between monoidal closed categories commutes
+with internal homs: `ihom A ⋙ G ≅ G ⋙ ihom (G A)`. Both sides are right adjoints, of
+`G⁻¹ ⋙ (A ⊗ -)` and of `(G A ⊗ -) ⋙ G⁻¹`, which are isomorphic by
+`CategoryTheory.Functor.Monoidal.tensorLeftCompInvIsoOfIsEquivalence`. -/
+noncomputable def ihomNatIsoOfIsEquivalence (A : C) :
+    ihom A ⋙ G ≅ G ⋙ ihom (G.obj A) :=
+  conjugateIsoEquiv (G.asEquivalence.symm.toAdjunction.comp (ihom.adjunction A))
+    ((ihom.adjunction (G.obj A)).comp G.asEquivalence.symm.toAdjunction)
+    (tensorLeftCompInvIsoOfIsEquivalence G A)
+
+/-- A monoidal functor `G` which is an equivalence between monoidal closed categories preserves
+internal homs: `G [A, B] ≅ [G A, G B]`. -/
+noncomputable def ihomIsoOfIsEquivalence (A B : C) :
+    G.obj ((ihom A).obj B) ≅ (ihom (G.obj A)).obj (G.obj B) :=
+  (ihomNatIsoOfIsEquivalence G A).app B
+
+end CategoryTheory.Functor.Monoidal
