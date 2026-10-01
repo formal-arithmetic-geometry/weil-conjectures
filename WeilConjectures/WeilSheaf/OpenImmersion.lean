@@ -42,14 +42,14 @@ namespace WeilSheaf
 
 open Etale
 
-variable (j : U ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (CommRingCat.of k₀))]
-
 -- TODO(unify): sk-d-real-boundary
 /-- The *ordinary* sheaf direct image `j_*` along an open immersion `j`: the pushforward along
 the base change `j̄ : Ū ⟶ X̄`, with the Weil structure transported along the base change
 isomorphism `Etale.lowerStarGeometricFiberMapCompFrobeniusIso`. Its stalks at the missing
 points are the inertia invariants. -/
-noncomputable def directImage : WeilSheaf k₀ l U ⥤ WeilSheaf k₀ l X :=
+noncomputable def directImage (j : U ⟶ X) [IsOpenImmersion j]
+    [j.IsOver (Spec (CommRingCat.of k₀))] :
+    WeilSheaf k₀ l U ⥤ WeilSheaf k₀ l X :=
   ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ IsoAlgebra.mapOfNatIso
       (Etale.lowerStarGeometricFiberMapCompFrobeniusIso _ j (comp_over j _)))
     fun _ ↦ sorry
@@ -57,25 +57,31 @@ noncomputable def directImage : WeilSheaf k₀ l U ⥤ WeilSheaf k₀ l X :=
 -- TODO(unify): sk-d-real-boundary
 /-- The higher direct image `Rⁱj_*` along an open immersion `j`: the `i`-th cohomology sheaf
 of the derived pushforward `Rj_*` of a Weil sheaf placed in degree zero. -/
-noncomputable def higherDirectImage (i : ℕ) : WeilSheaf k₀ l U ⥤ WeilSheaf k₀ l X :=
+noncomputable def higherDirectImage (j : U ⟶ X) [IsOpenImmersion j]
+    [j.IsOver (Spec (CommRingCat.of k₀))] (i : ℕ) :
+    WeilSheaf k₀ l U ⥤ WeilSheaf k₀ l X :=
   toComplex ⋙ WeilComplex.rightDerivedLowerStar j ⋙ WeilComplex.homologySheaf i
 
 -- TODO(unify): sk-prop-sf-open-closed-triangle
 /-- Extension by zero `j_!` along an open immersion `j`: the extension by zero along the base
 change `j̄ : Ū ⟶ X̄`, with the Weil structure transported along the base change isomorphism
 `Etale.openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso`. -/
-noncomputable def extensionByZero : WeilSheaf k₀ l U ⥤ WeilSheaf k₀ l X :=
+noncomputable def extensionByZero (j : U ⟶ X) [IsOpenImmersion j]
+    [j.IsOver (Spec (CommRingCat.of k₀))] :
+    WeilSheaf k₀ l U ⥤ WeilSheaf k₀ l X :=
   ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ IsoAlgebra.mapOfNatIso
       (Etale.openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso _ j (comp_over j _)))
     fun _ ↦ sorry
 
 -- TODO(unify): sk-prop-sf-open-closed-triangle
-instance : (directImage (k₀ := k₀) (l := l) j).Additive :=
+instance (j : U ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (CommRingCat.of k₀))] :
+    (directImage (k₀ := k₀) (l := l) j).Additive :=
   IsoAlgebra.additive_lift_mapOfNatIso (P := WeilSheaf.objectProperty k₀ l U)
     (Q := WeilSheaf.objectProperty k₀ l X) _ _
 
 -- TODO(unify): sk-prop-sf-open-closed-triangle
-instance : (extensionByZero (k₀ := k₀) (l := l) j).Additive :=
+instance (j : U ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (CommRingCat.of k₀))] :
+    (extensionByZero (k₀ := k₀) (l := l) j).Additive :=
   IsoAlgebra.additive_lift_mapOfNatIso (P := WeilSheaf.objectProperty k₀ l U)
     (Q := WeilSheaf.objectProperty k₀ l X) _ _
 
@@ -95,7 +101,8 @@ complement of `U`:
 Its components are those of the comparison `Etale.openImmersionLowerShriekToLowerStar` along
 the base change `j̄ : Ū ⟶ X̄`.
 -/
-noncomputable def extensionByZeroToDirectImage :
+noncomputable def extensionByZeroToDirectImage (j : U ⟶ X) [IsOpenImmersion j]
+    [j.IsOver (Spec (CommRingCat.of k₀))] :
     extensionByZero (k₀ := k₀) (l := l) j ⟶ directImage j where
   app F := ObjectProperty.homMk (ObjectProperty.homMk
     { f := (Etale.openImmersionLowerShriekToLowerStar _
