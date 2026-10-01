@@ -22,7 +22,10 @@ cokernel of `φ` restrict to the constant sheaves at `ker f` and `coker f` there
 kernels and cokernels of morphisms between finite locally constant sheaves are locally
 constant; their stalks are kernels and cokernels of maps between finite modules, hence
 finite (`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.kernel`,
-`IsFiniteLocallyConstantSheaf.cokernel`).
+`IsFiniteLocallyConstantSheaf.cokernel`). Pulling back to the strata of a common refinement of
+stratifications, kernels, cokernels and direct sums of constructible sheaves of modules are
+constructible (`IsConstructibleSheaf.kernel`, `IsConstructibleSheaf.cokernel`,
+`IsConstructibleSheaf.biprod`).
 (blueprint: `lemma:constructible-hom-constant-locally`, the kernel and cokernel part of
 `lemma:constructible-flc-serre`)
 
@@ -381,6 +384,35 @@ theorem IsConstructibleSheaf.cokernel
   exact IsFiniteLocallyConstantSheaf.of_iso (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
     (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
     (PreservesCokernel.iso (Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)) φ).symm
+
+variable (F G) in
+/-- **The direct sum of two constructible sheaves of modules is constructible**: on the common
+refinement of witnessing stratifications, the pullback of `F ⊞ G` to a stratum is the direct sum
+of two finite locally constant sheaves. (blueprint: `lemma:constructible-flc-biproduct`) -/
+theorem IsConstructibleSheaf.biprod
+    [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F]
+    [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) G] :
+    IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (F ⊞ G) := by
+  obtain ⟨S, hS⟩ := IsConstructibleSheaf.exists_stratification
+    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+    (F := F)
+  obtain ⟨T, hT⟩ := IsConstructibleSheaf.exists_stratification
+    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+    (F := G)
+  refine ⟨S.inter T, fun k ↦ ?_⟩
+  have hF := (S.inter_refines_left T).isFiniteLocallyConstantSheaf_upperStar F hS k
+  have hG := (S.inter_refines_right T).isFiniteLocallyConstantSheaf_upperStar G hT k
+  have := IsFiniteLocallyConstantSheaf.biprod (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+    (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)).obj F)
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)).obj G)
+  exact IsFiniteLocallyConstantSheaf.of_iso (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+    (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+    ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+      ((S.inter T).immersion k)).leftAdjointBiprodIso F G).symm
 
 end Constructible
 
