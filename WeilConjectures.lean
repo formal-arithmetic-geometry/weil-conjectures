@@ -627,6 +627,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplex
+public import WeilConjectures.SixFunctors.Etale.GeometricFrobenius
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChange
@@ -703,6 +704,7 @@ public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.LowerShriek
+public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.ZetaFunction

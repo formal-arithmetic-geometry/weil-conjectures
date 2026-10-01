@@ -120,6 +120,11 @@ where the pullback `g^*`, being exact, is applied levelwise. Unlike
 noncomputable def mapDerivedUpperStarLowerStarAdjunction : D((g)^*[A]) ⊣ R((g)_*[A]) :=
   (Etale.upperStarLowerStarAdjunction A g).mapDerivedCategoryRightDerivedAdjunction
 
+/-- The total right derived pushforward `Rg_*` on the unbounded derived categories of étale
+sheaves is additive, being right adjoint to `D(g^*)`. -/
+instance additive_rightDerivedLowerStar : (R((g)_*[A])).Additive :=
+  (mapDerivedUpperStarLowerStarAdjunction A g).right_adjoint_additive
+
 end Etale
 
 end DerivedLowerStar
