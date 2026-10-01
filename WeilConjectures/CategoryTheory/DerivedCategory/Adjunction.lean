@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Localization.Adjunction
 public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import Mathlib.CategoryTheory.Monad.Adjunction
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -75,6 +76,9 @@ file lifts `adj` through the stages of the derived formalism:
   make the identification of `g.rightDerivedFunctor` with `g.mapDerivedCategory`
   hypothesis-free: it still goes through the K-injective resolutions used to define the
   total right derived functor.
+* `Adjunction.isIso_mapDerivedCategoryAdjunction_unit` and
+  `Adjunction.isIso_mapDerivedCategoryAdjunction_counit`: the unit (respectively counit) of
+  `f.mapDerivedCategory ⊣ g.mapDerivedCategory` is an isomorphism if that of `f ⊣ g` is.
 -/
 
 @[expose] public section
@@ -212,6 +216,40 @@ noncomputable def Adjunction.mapDerivedCategoryAdjunction {f : C ⥤ D} {g : D �
     f.mapDerivedCategory ⊣ g.mapDerivedCategory :=
   (adj.derivedAdjunction.ofNatIsoLeft f.leftDerivedFunctorIsoMapDerivedCategory).ofNatIsoRight
     g.rightDerivedFunctorIsoMapDerivedCategory
+
+/-- The unit of `f.mapDerivedCategory ⊣ g.mapDerivedCategory` is an isomorphism if the unit
+of `f ⊣ g` is. -/
+instance Adjunction.isIso_mapDerivedCategoryAdjunction_unit {f : C ⥤ D} {g : D ⥤ C}
+    (adj : f ⊣ g) [f.Additive] [g.Additive]
+    [PreservesFiniteLimits f] [PreservesFiniteColimits f]
+    [PreservesFiniteLimits g] [PreservesFiniteColimits g] [IsIso adj.unit] :
+    IsIso adj.mapDerivedCategoryAdjunction.unit := by
+  -- `f.mapDerivedCategory ⋙ g.mapDerivedCategory ≅ (f ⋙ g).mapDerivedCategory ≅ 𝟭`, so
+  -- `f.mapDerivedCategory` is fully faithful.
+  have h := adj.mapDerivedCategoryAdjunction.fullyFaithfulLOfCompIsoId
+    ((Functor.mapDerivedCategoryCompIso f g).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (asIso adj.unit).symm ≪≫
+        Functor.mapDerivedCategoryIdIso C)
+  have := h.full
+  have := h.faithful
+  infer_instance
+
+/-- The counit of `f.mapDerivedCategory ⊣ g.mapDerivedCategory` is an isomorphism if the
+counit of `f ⊣ g` is. -/
+instance Adjunction.isIso_mapDerivedCategoryAdjunction_counit {f : C ⥤ D} {g : D ⥤ C}
+    (adj : f ⊣ g) [f.Additive] [g.Additive]
+    [PreservesFiniteLimits f] [PreservesFiniteColimits f]
+    [PreservesFiniteLimits g] [PreservesFiniteColimits g] [IsIso adj.counit] :
+    IsIso adj.mapDerivedCategoryAdjunction.counit := by
+  -- `g.mapDerivedCategory ⋙ f.mapDerivedCategory ≅ (g ⋙ f).mapDerivedCategory ≅ 𝟭`, so
+  -- `g.mapDerivedCategory` is fully faithful.
+  have h := adj.mapDerivedCategoryAdjunction.fullyFaithfulROfCompIsoId
+    ((Functor.mapDerivedCategoryCompIso g f).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (asIso adj.counit) ≪≫
+        Functor.mapDerivedCategoryIdIso D)
+  have := h.full
+  have := h.faithful
+  infer_instance
 
 /-- The bounded below levelwise derived adjunction of an adjoint pair `adj : f ⊣ g` of
 *exact* functors between abelian categories:
