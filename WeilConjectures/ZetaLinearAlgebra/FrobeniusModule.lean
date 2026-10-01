@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.LinearAlgebra.Eigenspace.Basic
+public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 
 /-!
 # Frobenius modules and their weights
@@ -35,6 +36,9 @@ reversed characteristic polynomial, for an integral weight and with the normaliz
   endomorphism and `FrobeniusModule.Equiv` the isomorphisms.
 - `FrobeniusModule.IsPureOfWeight`, `FrobeniusModule.HasWeightsAtMost` and their
   `…Over k` variants, the weight conditions relative to `q` and to `#k`.
+- `FrobeniusModule.localPolynomial`: the polynomial `det (1 - T F)`, and
+  `FrobeniusModule.IsReal`, the condition that its image under `ι : K →+* ℂ` has real
+  coefficients.
 - `FrobeniusModule.tateTwist`: the Tate twist `M(n)`, rescaling the Frobenius by `q ^ (-n)`.
 - `FrobeniusModule.IsPureOfWeight.tateTwist`: the twist by `n` lowers the weight by `2 n`.
 -/
@@ -88,6 +92,17 @@ def HasWeightsAtMost (ι : K →+* ℂ) (q : ℕ) (M : FrobeniusModule.{u, v} K)
 theorem IsPureOfWeight.hasWeightsAtMost {ι : K →+* ℂ} {q : ℕ} {M : FrobeniusModule.{u, v} K}
     {w : ℝ} (h : M.IsPureOfWeight ι q w) : M.HasWeightsAtMost ι q w :=
   fun α hα ↦ (h α hα).le
+
+/-- The local polynomial `det (1 - T F)` of a Frobenius module, the reverse characteristic
+polynomial of its Frobenius `F`. -/
+noncomputable def localPolynomial (M : FrobeniusModule.{u, v} K) : Polynomial K :=
+  M.frobeniusEnd.charpolyRev
+
+/-- `M` is `ι`-*real* if the image under `ι` of its local polynomial `det (1 - T F)` has real
+coefficients; equivalently, if the multiset of complex eigenvalues of `F` is stable under
+complex conjugation. -/
+def IsReal (ι : K →+* ℂ) (M : FrobeniusModule.{u, v} K) : Prop :=
+  ∀ n : ℕ, (starRingEnd ℂ) (ι (M.localPolynomial.coeff n)) = ι (M.localPolynomial.coeff n)
 
 /-- `M` is `ι`-pure of weight `w` *over the field `k`*: purity relative to `q = #k`. This is
 the convention for the geometric Frobenius acting on the cohomology of a `k`-scheme, as opposed
