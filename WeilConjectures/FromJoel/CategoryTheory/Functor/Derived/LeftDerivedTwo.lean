@@ -132,15 +132,62 @@ lemma leftDerived₂_ext (G : D₁ ⥤ D₂ ⥤ H) (γ₁ γ₂ : G ⟶ LF)
   ext ⟨X₁, X₂⟩
   exact congr_app (congr_app hγ X₁) X₂
 
-/-- If `G` is also a left derived functor, of `F'` with counit `β`, then the natural
-transformation `G ⟶ LF` induced by an isomorphism `τ : F' ⟶ F` is an isomorphism. -/
-lemma isIso_leftDerived₂Lift {F' : C₁ ⥤ C₂ ⥤ H}
-    (β : (((whiskeringLeft₂ H).obj L₁).obj L₂).obj G ⟶ F') [G.IsLeftDerivedFunctor₂ β W₁ W₂]
-    (τ : F' ⟶ F) [IsIso τ] :
-    IsIso (leftDerived₂Lift LF α W₁ W₂ G (β ≫ τ)) :=
-  ⟨leftDerived₂Lift G β W₁ W₂ LF (α ≫ CategoryTheory.inv τ),
-    leftDerived₂_ext G β W₁ W₂ G _ _ (by simp),
-    leftDerived₂_ext LF α W₁ W₂ LF _ _ (by simp)⟩
+end
+
+section
+
+variable (LF' LF'' : D₁ ⥤ D₂ ⥤ H) {F' F'' : C₁ ⥤ C₂ ⥤ H}
+  (α' : (((whiskeringLeft₂ H).obj L₁).obj L₂).obj LF' ⟶ F')
+  (α'' : (((whiskeringLeft₂ H).obj L₁).obj L₂).obj LF'' ⟶ F'')
+  [LF.IsLeftDerivedFunctor₂ α W₁ W₂]
+
+/-- The natural transformation `LF' ⟶ LF` of left derived bifunctors that is induced by a
+natural transformation `τ : F' ⟶ F`:
+```
+  LF' ∘ (L₁ × L₂) ──α'──▶ F'
+        │                  │
+        │                  τ
+        ▼                  ▼
+  LF ∘ (L₁ × L₂) ───α──▶ F
+```
+-/
+noncomputable def leftDerived₂NatTrans (τ : F' ⟶ F) : LF' ⟶ LF :=
+  leftDerived₂Lift LF α W₁ W₂ LF' (α' ≫ τ)
+
+@[reassoc (attr := simp)]
+lemma leftDerived₂NatTrans_fac (τ : F' ⟶ F) :
+    (((whiskeringLeft₂ H).obj L₁).obj L₂).map (leftDerived₂NatTrans LF α W₁ W₂ LF' α' τ) ≫ α =
+      α' ≫ τ := by
+  simp [leftDerived₂NatTrans]
+
+@[reassoc (attr := simp)]
+lemma leftDerived₂NatTrans_app_app (τ : F' ⟶ F) (X₁ : C₁) (X₂ : C₂) :
+    ((leftDerived₂NatTrans LF α W₁ W₂ LF' α' τ).app (L₁.obj X₁)).app (L₂.obj X₂) ≫
+        (α.app X₁).app X₂ = (α'.app X₁).app X₂ ≫ (τ.app X₁).app X₂ := by
+  simp [leftDerived₂NatTrans]
+
+@[simp]
+lemma leftDerived₂NatTrans_id :
+    leftDerived₂NatTrans LF α W₁ W₂ LF α (𝟙 F) = 𝟙 LF :=
+  leftDerived₂_ext LF α W₁ W₂ _ _ _ (by simp)
+
+variable [LF'.IsLeftDerivedFunctor₂ α' W₁ W₂]
+
+@[reassoc (attr := simp)]
+lemma leftDerived₂NatTrans_comp (τ' : F'' ⟶ F') (τ : F' ⟶ F) :
+    leftDerived₂NatTrans LF' α' W₁ W₂ LF'' α'' τ' ≫ leftDerived₂NatTrans LF α W₁ W₂ LF' α' τ =
+      leftDerived₂NatTrans LF α W₁ W₂ LF'' α'' (τ' ≫ τ) :=
+  leftDerived₂_ext LF α W₁ W₂ _ _ _ (by simp)
+
+/-- The natural isomorphism `LF' ≅ LF` of left derived bifunctors that is induced by a
+natural isomorphism `τ : F' ≅ F`. -/
+@[simps]
+noncomputable def leftDerived₂NatIso (τ : F' ≅ F) : LF' ≅ LF where
+  hom := leftDerived₂NatTrans LF α W₁ W₂ LF' α' τ.hom
+  inv := leftDerived₂NatTrans LF' α' W₁ W₂ LF α τ.inv
+
+instance (τ : F' ⟶ F) [IsIso τ] : IsIso (leftDerived₂NatTrans LF α W₁ W₂ LF' α' τ) :=
+  (leftDerived₂NatIso LF α W₁ W₂ LF' α' (asIso τ)).isIso_hom
 
 end
 
