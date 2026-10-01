@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.WeilSheaf.Defs
 
 /-!
@@ -20,18 +21,25 @@ conditions on a lisse Weil sheaf on a dense open of the affine line, and the bun
 situation.
 
 The affine line `A₀ = 𝔸¹_{k₀}` is `AlgebraicGeometry.affineLine k₀`, and the dual affine line
-`A'₀` of the Fourier transform is another copy of it.
+`A'₀` of the Fourier transform is another copy of it. It sits in `ℙ¹_{k₀}` through the standard
+chart `AlgebraicGeometry.ProjectiveLine.affineChart`, `x ↦ [x : 1]`, whose complement is the
+point `∞ = [1 : 0]`.
 
 Both conditions are phrased without the geometric fundamental group, which does not exist in
-the repository yet. Geometric constancy asks that the underlying étale sheaf on the geometric
-fiber `U ⊗ k` be constant. Being unramified at infinity asks that the sheaf extend to a lisse
-Weil sheaf on an open neighbourhood of `∞` in `ℙ¹_{k₀}`, for an open immersion `𝔸¹ ↪ ℙ¹` of
-`k₀`-schemes; it is stated existentially, so that no compactification has to be constructed.
+the repository yet. Geometric constancy asks that the underlying étale sheaf be constant on
+every connected open of the geometric fiber `Ū = U ⊗ k̄`. Being unramified at infinity asks
+that the sheaf extend to a lisse Weil sheaf on `U₀ ∪ {∞} ⊆ ℙ¹_{k₀}`.
+
+Both conditions are vacuous for now: every Weil sheaf of the current scaffold is zero (see
+`WeilConjectures.WeilSheaf.Defs`), so every Weil sheaf is geometrically constant, and a Weil
+sheaf on an open `U₀` of `𝔸¹` is unramified at infinity, with `G = 0`, as soon as the open
+`U₀ ∪ {∞}` of `ℙ¹` exists. A downstream result assuming either condition has no more content
+than the scaffold it is stated in.
 
 ## Main declarations
 
-- `AlgebraicGeometry.WeilSheaf.IsGeometricallyConstant`: trivial geometric monodromy.
-- `AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity`: trivial inertia at `∞ ∈ ℙ¹`.
+- `AlgebraicGeometry.WeilSheaf.IsGeometricallyConstant`: constancy on the geometric fiber.
+- `AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity`: extension to a lisse sheaf at `∞ ∈ ℙ¹`.
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen`: a dense open immersion `j : U₀ ↪ 𝔸¹_{k₀}`
   together with a lisse Weil sheaf on `U₀`, with its direct image, its extension by zero, its
   boundary sheaf and its curve perverse middle extension.
@@ -45,49 +53,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-section Over
-
-variable {S P : Scheme.{u}}
-
-/-- The structure of `S`-scheme on an open `V` of an `S`-scheme `P`, through `V ↪ P`. It is not
-an instance, since `V` is also canonically over `P`. -/
-@[implicit_reducible]
-noncomputable def Scheme.Opens.overOfOver (V : P.Opens) (S : Scheme.{u}) [P.Over S] :
-    V.toScheme.Over S :=
-  ⟨V.ι ≫ (P ↘ S)⟩
-
-lemma Scheme.Opens.isOver_ι_overOfOver [P.Over S] (V : P.Opens) :
-    letI := V.overOfOver S
-    V.ι.IsOver S :=
-  letI := V.overOfOver S
-  ⟨rfl⟩
-
-variable {U V : Scheme.{u}} [U.Over S]
-
-/-- The structure of `S`-scheme on the fibre product `U ×_P V` of a morphism `f : U ⟶ P` from an
-`S`-scheme, through its first projection. -/
-@[implicit_reducible]
-noncomputable def Scheme.pullbackOverOfFst (f : U ⟶ P) (g : V ⟶ P) (S : Scheme.{u})
-    [U.Over S] : (Limits.pullback f g).Over S :=
-  ⟨Limits.pullback.fst f g ≫ (U ↘ S)⟩
-
-lemma Scheme.isOver_fst_pullbackOverOfFst (f : U ⟶ P) (g : V ⟶ P) :
-    letI := Scheme.pullbackOverOfFst f g S
-    (Limits.pullback.fst f g).IsOver S :=
-  letI := Scheme.pullbackOverOfFst f g S
-  ⟨rfl⟩
-
-lemma Scheme.isOver_snd_pullbackOverOfFst [P.Over S] [V.Over S] (f : U ⟶ P) (g : V ⟶ P) [f.IsOver S]
-    [g.IsOver S] :
-    letI := Scheme.pullbackOverOfFst f g S
-    (Limits.pullback.snd f g).IsOver S := by
-  let := Scheme.pullbackOverOfFst f g S
-  constructor
-  change _ = Limits.pullback.fst f g ≫ (U ↘ S)
-  rw [← comp_over g S, ← Limits.pullback.condition_assoc, comp_over f S]
-
-end Over
-
 namespace WeilSheaf
 
 section Infinity
@@ -95,34 +60,44 @@ section Infinity
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 
-/-- A Weil sheaf is *geometrically constant* if the geometric fundamental group `π₁(U ⊗ k)`
-acts trivially on it, i.e. if its underlying étale sheaf on the geometric fiber `Ū = U ⊗ k` is
-constant; its Frobenius module may still be nontrivial.
+/-- A Weil sheaf `F` on `U` is *geometrically constant* if its underlying étale sheaf is
+constant on every connected open `V` of the geometric fiber `Ū = U ⊗ k̄`, where `k̄` is an
+algebraic closure of `k₀`; its Frobenius module may still be nontrivial. When the connected
+components of `Ū` are open, for instance when `U` is of finite type over `k₀`, this says that
+`F` is constant on each connected component of `Ū`. For `Ū` connected, as for `U` an open of
+`𝔸¹_{k₀}`, it is the constancy of `F` on `Ū`, which motivates the definition: the geometric
+fundamental group `π₁(Ū)` acts trivially on the stalks of `F`.
 (blueprint: `sk-d-dl-a1-setup`) -/
 def IsGeometricallyConstant (F : WeilSheaf k₀ l U) : Prop :=
-  Sheaf.IsConstant (U ↘ Spec (CommRingCat.of k₀)).geometricFiber.smallEtaleTopology F.obj.carrier
+  ∀ V : (U ↘ Spec (CommRingCat.of k₀)).geometricFiber.Opens, ConnectedSpace V →
+    Sheaf.IsConstant V.toScheme.smallEtaleTopology ((Etale.upperStar _ V.ι).obj F.obj.carrier)
 
-/-- A lisse Weil sheaf `F` on an open `U₀` of the affine line is *unramified at infinity* if the
-inertia group at `∞ ∈ ℙ¹` acts trivially on its geometric generic fibre. We state the equivalent
-condition that `F` extends to a lisse Weil sheaf on an open neighbourhood of `∞` in `ℙ¹`: for
-some open immersion `ι : 𝔸¹ ↪ ℙ¹` of `k₀`-schemes, whose complement is the point `∞`, there are
-an open `V ⊆ ℙ¹` containing `∞` and a lisse Weil sheaf `G` on `V` whose restriction to
-`U₀ ∩ V = U₀ ×_{ℙ¹} V` is isomorphic to that of `F`.
+/-- A lisse Weil sheaf `F` on an open `U₀` of the affine line, embedded by `j : U₀ ↪ 𝔸¹`, is
+*unramified at infinity* if it extends to a lisse Weil sheaf on `U₀ ∪ {∞} ⊆ ℙ¹`. Here `𝔸¹`
+sits in `ℙ¹` through the standard chart `ι = ProjectiveLine.affineChart`, whose complement is
+the point `∞`, and the extension is a lisse Weil sheaf `G` on an open `W ⊆ ℙ¹` with
+`ι.opensRange ⊔ W = ⊤` (that is, `∞ ∈ W`) and `ι⁻¹(W) = U₀`, together with an isomorphism
+`j'^* G ≅ F` along the factorization `j'` of `j ≫ ι` through `W`:
+```
+  U₀ ──j'──▶ W
+  │          │
+  j          W.ι
+  ▼          ▼
+  𝔸¹ ──ι───▶ ℙ¹
+```
+The choice of chart does not matter: two open immersions `𝔸¹ ↪ ℙ¹` of `k₀`-schemes differ by
+a `k₀`-automorphism of `ℙ¹`. This condition is equivalent to the inertia group at `∞` acting
+trivially on the geometric generic fiber of `F`.
 (blueprint: `sk-d-dl-a1-setup`) -/
 def IsUnramifiedAtInfinity (F : WeilSheaf k₀ l U) (j : U ⟶ affineLine k₀) [IsOpenImmersion j]
     [j.IsOver (Spec (CommRingCat.of k₀))] : Prop :=
-  ∃ (ι : affineLine k₀ ⟶ ProjectiveLine (Spec (CommRingCat.of k₀))) (_ : IsOpenImmersion ι)
-    (_ : ι.IsOver (Spec (CommRingCat.of k₀)))
-    (V : (ProjectiveLine (Spec (CommRingCat.of k₀))).Opens),
-    (Set.range ι.base)ᶜ ⊆ V ∧
-      letI := V.overOfOver (Spec (CommRingCat.of k₀))
-      letI := Scheme.pullbackOverOfFst (j ≫ ι) V.ι (Spec (CommRingCat.of k₀))
-      haveI := V.isOver_ι_overOfOver (S := Spec (CommRingCat.of k₀))
-      haveI := Scheme.isOver_fst_pullbackOverOfFst (S := Spec (CommRingCat.of k₀)) (j ≫ ι) V.ι
-      haveI := Scheme.isOver_snd_pullbackOverOfFst (S := Spec (CommRingCat.of k₀)) (j ≫ ι) V.ι
-      ∃ G : WeilSheaf k₀ l V.toScheme, G.IsLisse ∧
-        Nonempty ((WeilSheaf.upperStar (Limits.pullback.snd (j ≫ ι) V.ι)).obj G ≅
-          (WeilSheaf.upperStar (Limits.pullback.fst (j ≫ ι) V.ι)).obj F)
+  let ι := ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))
+  ∃ (W : (ProjectiveLine (Spec (CommRingCat.of k₀))).Opens) (hW : ι ⁻¹ᵁ W = j.opensRange),
+    ι.opensRange ⊔ W = ⊤ ∧ ∃ G : WeilSheaf k₀ l W, G.IsLisse ∧
+      Nonempty ((WeilSheaf.upperStar (IsOpenImmersion.lift W.ι (j ≫ ι) (by
+        rintro _ ⟨x, rfl⟩
+        rw [Scheme.Opens.range_ι]
+        exact (hW ▸ j.mem_opensRange.2 ⟨x, rfl⟩ : j x ∈ ι ⁻¹ᵁ W)))).obj G ≅ F)
 
 end Infinity
 
