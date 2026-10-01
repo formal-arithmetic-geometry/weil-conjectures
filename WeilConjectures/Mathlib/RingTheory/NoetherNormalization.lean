@@ -19,6 +19,13 @@ extension preserves the Krull dimension, `s` is the dimension of the algebra.
 
 - `exists_finite_inj_algHom_mvPolynomial_of_ringKrullDim_eq`
 - `exists_finite_inj_algHom_polynomial_of_ringKrullDim_eq_one`
+- `ringKrullDim_quotient_lt_of_finiteType`: the dimension drops along a proper closed subset of an
+  irreducible affine variety.
+
+## Blueprint
+
+- `sk-i-real-normalization`: Noether normalization.
+- `sk-i-geometry`: dimension drop.
 -/
 
 @[expose] public section
@@ -48,4 +55,12 @@ theorem exists_finite_inj_algHom_polynomial_of_ringKrullDim_eq_one
     (K B : Type*) [Field K] [CommRing B] [Algebra K B] [Algebra.FiniteType K B]
     (hB : ringKrullDim B = 1) :
     ∃ g : Polynomial K →ₐ[K] B, Function.Injective g ∧ g.Finite := by
+  sorry
+
+/-- A proper closed subset of an irreducible affine variety has strictly smaller dimension: for a
+finitely generated domain `A` over a field and a nonzero prime `P` of `A`,
+`dim (A ⧸ P) < dim A`. (blueprint: `sk-i-geometry`) -/
+theorem ringKrullDim_quotient_lt_of_finiteType (k A : Type*) [Field k] [CommRing A] [IsDomain A]
+    [Algebra k A] [Algebra.FiniteType k A] (P : Ideal A) [P.IsPrime] (hP : P ≠ ⊥) :
+    ringKrullDim (A ⧸ P) < ringKrullDim A := by
   sorry

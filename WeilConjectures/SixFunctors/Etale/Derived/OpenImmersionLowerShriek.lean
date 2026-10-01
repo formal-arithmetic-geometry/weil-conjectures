@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 
 /-!
 ## The derived adjunction `j_! ⊣ j^*` along an open immersion
@@ -32,6 +33,9 @@ of `WeilConjectures.CategoryTheory.DerivedCategory.Adjunction`.
 In particular the K-flat and K-injective machinery, and with it the coefficient
 hypotheses of the section `DerivedUpperStar`, are still needed even though the final
 statement mentions only levelwise functors.
+
+Since `j_!` is fully faithful, the unit of the derived adjunction is an isomorphism:
+`Etale.isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_unit`.
 -/
 
 @[expose] public section
@@ -66,6 +70,12 @@ adjunction between the levelwise functors. -/
 noncomputable def Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction :
     D((j)_!open[A]) ⊣ D((j)^*[A]) :=
   (Etale.openImmersionLowerShriekUpperStarAdjunction A j).mapDerivedCategoryAdjunction
+
+/-- The unit of the derived adjunction `D(j_!) ⊣ D(j^*)` along an open immersion is an
+isomorphism, i.e. `D(j^*) D(j_!) K ≅ K` naturally in `K`. -/
+instance Etale.isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_unit :
+    IsIso (Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction A j).unit :=
+  Adjunction.isIso_mapDerivedCategoryAdjunction_unit _
 
 /-- The bounded below version of
 `Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction`: the derived adjunction

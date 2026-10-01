@@ -9,6 +9,7 @@ public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStru
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
 public import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
 public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
@@ -52,6 +53,9 @@ resolutions when `g^*` preserves flat sheaves, so they form a left derivability 
   with `CategoryTheory.Functor.leftDerived₂NatTrans`.
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorNatIso g`: it is a natural isomorphism,
   with components `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso g K M`.
+- `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_left` and
+  `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_right`: `K ⊗ᴸ M` vanishes
+  when `K` or `M` does.
 
 The results depend on `sorryAx` through `AlgebraicGeometry.Etale.derivedTensor` and
 `AlgebraicGeometry.Etale.isLeftDerivedFunctor₂_derivedTensor`.
@@ -198,6 +202,50 @@ lemma isIso_μNatTrans_Qh_app_app_of_kFlat {X : Scheme.{u}}
   exact (MorphismProperty.id_prod_kFlat_derives_curriedTensor
     (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (.up ℤ))
       Qh).isIso_of_isLeftDerivabilityStructure (LF := -⊗ᴸ-(X)[A]) (μNatTrans Qh) K ⟨_, hM⟩
+
+section
+
+open DerivedCategory ZeroObject
+
+variable {A} in
+/-- The derived tensor product `K ⊗ᴸ M` vanishes when `K` does. -/
+lemma isZero_derivedTensor_obj_obj_of_isZero_left {X : Scheme.{u}}
+    {K : DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsZero K)
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    IsZero (((-⊗ᴸ-(X)[A]).obj K).obj M) := by
+  -- Write `M ≅ Qh M₀` with `M₀` K-flat and `K ≅ Qh 0`; then `K ⊗ᴸ M ≅ Qh (0 ⊗ M₀) = 0`.
+  let R : (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A)
+      (.up ℤ)).localizerMorphismKFlat.LeftResolution (Qh.objPreimage M) :=
+    Classical.arbitrary _
+  let eM : Qh.obj R.X₁.obj ≅ M :=
+    Localization.isoOfHom Qh (HomotopyCategory.quasiIso _ (.up ℤ)) R.w R.hw ≪≫
+      Qh.objObjPreimageIso M
+  let Z : HomotopyCategory (Sheaf X.smallEtaleTopology A) (.up ℤ) :=
+    (HomotopyCategory.quotient _ _).obj 0
+  have hZ : IsZero Z := Functor.map_isZero _ (isZero_zero _)
+  have hZM : IsZero (Z ⊗ R.X₁.obj) := by
+    refine IsZero.of_iso ?_
+      (Functor.Monoidal.μIso (HomotopyCategory.quotient _ _) 0 R.X₁.obj.as).symm
+    have h :
+        IsZero ((0 : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) ⊗ R.X₁.obj.as) := by
+      rw [IsZero.iff_id_eq_zero, ← id_whiskerRight, (isZero_zero _).eq_of_src (𝟙 _) 0,
+        MonoidalPreadditive.zero_whiskerRight]
+    exact Functor.map_isZero (HomotopyCategory.quotient _ _) h
+  have := isIso_μNatTrans_Qh_app_app_of_kFlat Z R.X₁.obj R.X₁.property
+  refine (Functor.map_isZero Qh hZM).of_iso ?_
+  exact ((-⊗ᴸ-(X)[A]).mapIso (hK.iso (Functor.map_isZero Qh hZ))).app M ≪≫
+    ((-⊗ᴸ-(X)[A]).obj _).mapIso eM.symm ≪≫
+    asIso (((Functor.LaxMonoidal.μNatTrans Qh).app Z).app R.X₁.obj)
+
+variable {A} in
+/-- The derived tensor product `K ⊗ᴸ M` vanishes when `M` does. -/
+lemma isZero_derivedTensor_obj_obj_of_isZero_right {X : Scheme.{u}}
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    {M : DerivedCategory (Sheaf X.smallEtaleTopology A)} (hM : IsZero M) :
+    IsZero (((-⊗ᴸ-(X)[A]).obj K).obj M) :=
+  MonoidalCategory.isZero_tensorObj_of_isZero_right K hM
+
+end
 
 /-- `(K, M) ↦ Lg^*K ⊗ᴸ Lg^*M` is the total left derived functor of `(A, B) ↦ g^*A ⊗ g^*B`
 from `K(Y_ét) × K(Y_ét)` to `D(Z_ét)`. It is computed on pairs `(K, M)` with `K` K-flat and

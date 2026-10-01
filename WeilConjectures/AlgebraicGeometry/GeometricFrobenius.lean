@@ -31,6 +31,9 @@ over `Spec k`, and the *geometric Galois Frobenius* of the geometric fiber is th
 
 `g_X := 𝟙 X₀ × σ : X ≅ X`.
 
+Both `σ` and `g_X` are elements of the automorphism groups `Aut (Spec k̄)` and `Aut X`, so
+that their iterates are written as powers `σᵐ` and `g_Xᵐ`.
+
 It commutes with the projection to the model, `g_X ≫ p_X = p_X`, and is *semilinear* over
 `k̄`: it does not commute with the structure morphism `a_X` but satisfies
 `g_X ≫ a_X = a_X ≫ σ`, and the resulting Frobenius square
@@ -81,6 +84,8 @@ is the automorphism `γ_X` of the blueprint, induced by `σ_geom`, and not its i
   the geometric Frobenius of the algebraic closure of a finite field.
 - `AlgebraicGeometry.Scheme.Hom.geometricGaloisFrobenius`: the geometric Galois Frobenius
   `g_X = 𝟙 X₀ × σ` of the geometric fiber.
+- `AlgebraicGeometry.Scheme.Hom.geometricFiberPoint`: the geometric point of the geometric
+  fiber over a point `Spec K ⟶ X₀`, for a `k`-embedding `K ↪ k̄`.
 
 ## Main statements
 
@@ -88,6 +93,11 @@ is the automorphism `γ_X` of the blueprint, induced by `σ_geom`, and not its i
   is Cartesian.
 - `AlgebraicGeometry.Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius`: base change
   to `k̄` commutes with the geometric Galois Frobenii.
+- `AlgebraicGeometry.Scheme.Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap`: the
+  square formed by the base change `φ̄` and the geometric Galois Frobenii is cartesian.
+- `AlgebraicGeometry.Scheme.Hom.geometricFiberPoint_comp_geometricGaloisFrobenius_pow`: a
+  geometric point `s` over a point with values in a field with `#k ^ m` elements satisfies
+  `s ≫ g_Xᵐ = σᵐ ≫ s`.
 
 -/
 
@@ -144,6 +154,72 @@ theorem geometricFiber_condition :
     f.geometricFiberProj ≫ f =
       f.geometricFiberToAlgebraicClosure ≫ (Scheme.specAlgebraicClosure k).hom :=
   pullback.condition
+
+/-- Two morphisms into the geometric fiber agree if their composites with the projection
+`p_X` and with the structure morphism `a_X` agree. -/
+@[ext 1100]
+theorem geometricFiber_hom_ext {T : Scheme.{u}} {a b : T ⟶ f.geometricFiber}
+    (h₁ : a ≫ f.geometricFiberProj = b ≫ f.geometricFiberProj)
+    (h₂ : a ≫ f.geometricFiberToAlgebraicClosure = b ≫ f.geometricFiberToAlgebraicClosure) :
+    a = b :=
+  pullback.hom_ext h₁ h₂
+
+/-- The geometric point `s : Spec k̄ ⟶ X = X₀ ×_k k̄` of the geometric fiber lying over a point
+`g : Spec K ⟶ X₀` with values in a field extension `K` of `k`, for a `k`-embedding
+`ι : K ↪ k̄`: the point induced by `Spec ι ≫ g` and the identity of `Spec k̄`,
+
+```
+  Spec k̄ --Spec ι--> Spec K --g--> X₀
+     \                            ^
+      \ s                         | p_X
+       ----------------------> X
+  a_X ∘ s = 𝟙 (Spec k̄)
+```
+-/
+def geometricFiberPoint {K : Type u} [Field K] [Algebra k K] (ι : K →ₐ[k] AlgebraicClosure k)
+    (g : Spec (.of K) ⟶ X₀) (hg : g ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k K))) :
+    Spec (.of (AlgebraicClosure k)) ⟶ f.geometricFiber :=
+  pullback.lift (Spec.map (CommRingCat.ofHom ι.toRingHom) ≫ g) (𝟙 _) (by
+    rw [Category.assoc, hg, ← Spec.map_comp, Category.id_comp]
+    simp only [Scheme.specAlgebraicClosure, Over.mk_hom]
+    congr 1
+    ext a
+    simp)
+
+/-- The geometric point over `g` lies over `g`:
+
+```
+  Spec k̄ ----s----> X
+     |              |
+  Spec ι           p_X
+     v              v
+  Spec K ----g----> X₀
+```
+-/
+@[reassoc (attr := simp)]
+theorem geometricFiberPoint_comp_geometricFiberProj {K : Type u} [Field K] [Algebra k K]
+    (ι : K →ₐ[k] AlgebraicClosure k) (g : Spec (.of K) ⟶ X₀)
+    (hg : g ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k K))) :
+    f.geometricFiberPoint ι g hg ≫ f.geometricFiberProj =
+      Spec.map (CommRingCat.ofHom ι.toRingHom) ≫ g :=
+  pullback.lift_fst _ _ _
+
+/-- The geometric point over `g` is a section of the structure morphism over `k̄`:
+
+```
+  Spec k̄ ----s----> X
+       \            |
+        𝟙          a_X
+          \         v
+           ---> Spec k̄
+```
+-/
+@[reassoc (attr := simp)]
+theorem geometricFiberPoint_comp_geometricFiberToAlgebraicClosure {K : Type u} [Field K]
+    [Algebra k K] (ι : K →ₐ[k] AlgebraicClosure k) (g : Spec (.of K) ⟶ X₀)
+    (hg : g ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k K))) :
+    f.geometricFiberPoint ι g hg ≫ f.geometricFiberToAlgebraicClosure = 𝟙 _ :=
+  pullback.lift_snd _ _ _
 
 variable {f} {Y₀ Z₀ : Scheme.{u}} {g : Y₀ ⟶ Spec (.of k)} {e : Z₀ ⟶ Spec (.of k)}
 
@@ -264,8 +340,7 @@ variable (k : Type u) [Field k] [Finite k]
 closure of a finite field `k`, the image under `Spec` of the ring isomorphism
 `FiniteField.geometricFrobeniusAlgEquivOfAlgebraic`. All Frobenius operators of the Weil
 formalism are built from this single automorphism. -/
-def specGeometricFrobenius :
-    Spec (.of (AlgebraicClosure k)) ≅ Spec (.of (AlgebraicClosure k)) :=
+def specGeometricFrobenius : Aut (Spec (.of (AlgebraicClosure k))) :=
   letI := Fintype.ofFinite k
   Scheme.Spec.mapIso
     (geometricFrobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k)).toRingEquiv.toCommRingCatIso.op
@@ -274,12 +349,49 @@ def specGeometricFrobenius :
 of the geometric Frobenius. This is not a `simp` lemma: the composites of `σ` are
 simplified by `specGeometricFrobenius_hom_comp_specAlgebraicClosure` and by the
 `Scheme.Hom.geometricGaloisFrobenius` lemmas instead. -/
-theorem specGeometricFrobenius_hom :
-    letI := Fintype.ofFinite k
+theorem specGeometricFrobenius_hom [Fintype k] :
     (specGeometricFrobenius k).hom =
       Spec.map (CommRingCat.ofHom
-        (geometricFrobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k)).toRingEquiv.toRingHom) :=
+        (geometricFrobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k)).toRingEquiv.toRingHom) := by
+  obtain rfl : ‹Fintype k› = Fintype.ofFinite k := Subsingleton.elim _ _
   rfl
+
+/-- The `m`-th power of the automorphism `σ` of `Spec k̄` is the image under `Spec` of the
+`m`-th power of the geometric Frobenius. -/
+theorem specGeometricFrobenius_pow_hom [Fintype k] (m : ℕ) :
+    (specGeometricFrobenius k ^ m).hom =
+      Spec.map (CommRingCat.ofHom (geometricFrobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k) ^
+        m).toRingEquiv.toRingHom) := by
+  induction m with
+  | zero => exact (Spec.map_id _).symm
+  | succ m ih =>
+    rw [pow_succ, Aut.Aut_mul_def, Iso.trans_hom, ih, specGeometricFrobenius_hom, ← Spec.map_comp,
+      pow_succ']
+    rfl
+
+/-- The `m`-th power of `σ` fixes the point `Spec k̄ ⟶ Spec E` of any embedding `ι : E ↪ k̄` of
+a field with `#k ^ m` elements:
+
+```
+            σᵐ
+  Spec k̄ ------> Spec k̄
+       \           /
+  Spec ι \       / Spec ι
+           v     v
+           Spec E
+```
+-/
+@[reassoc]
+theorem specGeometricFrobenius_pow_hom_comp_spec_map_of_card_eq {E : Type u} [Field E]
+    [Finite E] (m : ℕ) (hE : Nat.card E = Nat.card k ^ m) (ι : E →+* AlgebraicClosure k) :
+    (specGeometricFrobenius k ^ m).hom ≫ Spec.map (CommRingCat.ofHom ι) =
+      Spec.map (CommRingCat.ofHom ι) := by
+  let := Fintype.ofFinite k
+  rw [specGeometricFrobenius_pow_hom, ← Spec.map_comp]
+  congr 1
+  ext a
+  exact geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_card_eq k _ m
+    (hE.trans (by rw [Nat.card_eq_fintype_card])) ι a
 
 /-- The geometric Frobenius on `Spec k̄` is an automorphism over `Spec k`: the geometric
 Frobenius of the algebraic closure fixes the finite base field pointwise. -/
@@ -306,7 +418,7 @@ commutes with the projection to the model `X₀`
 morphism `a_X` only up to `σ`
 (`geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure`). It is not the
 relative `#k`-power Frobenius of `X` over `k̄`, see the module implementation notes. -/
-def geometricGaloisFrobenius : f.geometricFiber ≅ f.geometricFiber :=
+def geometricGaloisFrobenius : Aut f.geometricFiber :=
   asIso (pullback.map f (Scheme.specAlgebraicClosure k).hom f
     (Scheme.specAlgebraicClosure k).hom (𝟙 X₀) (specGeometricFrobenius k).hom
     (𝟙 (Spec (.of k))) (by simp) (by simp))
@@ -344,6 +456,74 @@ theorem geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure :
     f.geometricGaloisFrobenius.hom ≫ f.geometricFiberToAlgebraicClosure =
       f.geometricFiberToAlgebraicClosure ≫ (specGeometricFrobenius k).hom := by
   simp [geometricGaloisFrobenius, geometricFiberToAlgebraicClosure]
+
+/-- The powers of the geometric Galois Frobenius commute with the projection to the model:
+
+```
+            g_Xᵐ
+    X ----------------> X
+     \                 /
+  p_X \               / p_X
+       v             v
+              X₀
+```
+
+that is `g_Xᵐ ≫ p_X = p_X`. -/
+@[reassoc (attr := simp)]
+theorem geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj (m : ℕ) :
+    (f.geometricGaloisFrobenius ^ m).hom ≫ f.geometricFiberProj = f.geometricFiberProj := by
+  induction m with
+  | zero => exact Category.id_comp _
+  | succ m ih =>
+    rw [pow_succ', Aut.Aut_mul_def, Iso.trans_hom, Category.assoc,
+      geometricGaloisFrobenius_hom_comp_geometricFiberProj, ih]
+
+/-- The powers of the geometric Galois Frobenius are semilinear over the powers of `σ`:
+
+```
+        g_Xᵐ
+  X ---------> X
+  |            |
+a_X          a_X
+  v            v
+Spec k̄ --σᵐ--> Spec k̄
+```
+
+that is `g_Xᵐ ≫ a_X = a_X ≫ σᵐ`. -/
+@[reassoc (attr := simp)]
+theorem geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure (m : ℕ) :
+    (f.geometricGaloisFrobenius ^ m).hom ≫ f.geometricFiberToAlgebraicClosure =
+      f.geometricFiberToAlgebraicClosure ≫ (specGeometricFrobenius k ^ m).hom := by
+  induction m with
+  | zero => exact (Category.id_comp _).trans (Category.comp_id _).symm
+  | succ m ih =>
+    rw [pow_succ', Aut.Aut_mul_def, Iso.trans_hom, Category.assoc,
+      geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure, reassoc_of% ih,
+      pow_succ', Aut.Aut_mul_def, Iso.trans_hom]
+
+/-- A geometric point `s` over a point `g : Spec K ⟶ X₀` with values in a field with `#k ^ m`
+elements is fixed by `g_Xᵐ` up to reparametrisation by `σᵐ`:
+
+```
+             s
+  Spec k̄ -------> X
+    |             |
+   σᵐ           g_Xᵐ
+    v             v
+  Spec k̄ -------> X
+             s
+```
+
+that is `s ≫ g_Xᵐ = σᵐ ≫ s`. -/
+theorem geometricFiberPoint_comp_geometricGaloisFrobenius_pow {K : Type u} [Field K]
+    [Algebra k K] [Finite K] (ι : K →ₐ[k] AlgebraicClosure k) (g : Spec (.of K) ⟶ X₀)
+    (hg : g ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k K))) (m : ℕ)
+    (hK : Nat.card K = Nat.card k ^ m) :
+    f.geometricFiberPoint ι g hg ≫ (f.geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k ^ m).hom ≫ f.geometricFiberPoint ι g hg := by
+  ext
+  · simp [specGeometricFrobenius_pow_hom_comp_spec_map_of_card_eq_assoc k m hK]
+  · simp
 
 /-- The Frobenius square
 
@@ -392,6 +572,43 @@ theorem geometricFiberMap_comp_geometricGaloisFrobenius (φ : X₀ ⟶ Y₀) (h 
     geometricFiberMap φ h ≫ g.geometricGaloisFrobenius.hom =
       f.geometricGaloisFrobenius.hom ≫ geometricFiberMap φ h := by
   apply pullback.hom_ext <;> simp [geometricFiberMap, geometricGaloisFrobenius]
+
+/-- The base change `φ̄ = φ × 𝟙` of a morphism over `k` and the geometric Galois Frobenii form
+a commutative square:
+
+```
+          Fr_X
+     X ────────▶ X
+     │           │
+   φ̄ │           │ φ̄
+     ▼           ▼
+     Y ────────▶ Y
+          Fr_Y
+```
+-/
+theorem commSq_geometricGaloisFrobenius (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) :
+    CommSq f.geometricGaloisFrobenius.hom (geometricFiberMap φ h) (geometricFiberMap φ h)
+      g.geometricGaloisFrobenius.hom :=
+  ⟨(geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm⟩
+
+/-- The square
+
+```
+          Fr_X
+     X ────────▶ X
+     │           │
+   φ̄ │           │ φ̄
+     ▼           ▼
+     Y ────────▶ Y
+          Fr_Y
+```
+
+of the base change `φ̄ = φ × 𝟙` of a morphism over `k` and the geometric Galois Frobenii is
+cartesian, its horizontal maps being isomorphisms. -/
+theorem isPullback_geometricGaloisFrobenius_geometricFiberMap (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) :
+    IsPullback f.geometricGaloisFrobenius.hom (geometricFiberMap φ h) (geometricFiberMap φ h)
+      g.geometricGaloisFrobenius.hom :=
+  .of_horiz_isIso (commSq_geometricGaloisFrobenius φ h)
 
 end Scheme.Hom
 

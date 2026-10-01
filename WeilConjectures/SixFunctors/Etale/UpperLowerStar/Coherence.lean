@@ -273,6 +273,36 @@ lemma Etale.upperStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ 
 
 end Coherence
 
+section IsIso
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
+
+variable {S T : Scheme.{u}} (f : T ⟶ S) [IsIso f]
+
+open Etale
+
+/-- The pullback `f^*` along an isomorphism `f` is an equivalence of categories of étale
+sheaves, with inverse the pullback `(f⁻¹)^*`. -/
+noncomputable def Etale.upperStarEquivalenceOfIsIso :
+    Sheaf S.smallEtaleTopology A ≌ Sheaf T.smallEtaleTopology A :=
+  .mk (f)^*[A] (inv f)^*[A]
+    ((Etale.upperStarId A S).symm ≪≫ Etale.upperStarComp A (inv f) f (𝟙 S) (by simp))
+    ((Etale.upperStarComp A f (inv f) (𝟙 T) (by simp)).symm ≪≫ Etale.upperStarId A T)
+
+/-- The pullback along an isomorphism is an equivalence. Unlike
+`AlgebraicGeometry.Etale.isEquivalence_upperStar` for universal homeomorphisms, this needs
+only the composition and identity isomorphisms of the pullbacks. -/
+instance Etale.isEquivalence_upperStar_of_isIso : ((f)^*[A]).IsEquivalence :=
+  (Etale.upperStarEquivalenceOfIsIso A f).isEquivalence_functor
+
+/-- The pushforward along an isomorphism is an equivalence, being right adjoint to the
+equivalence `f^*`. -/
+instance Etale.isEquivalence_lowerStar_of_isIso : ((f)_*[A]).IsEquivalence :=
+  (Etale.upperStarLowerStarAdjunction A f).isEquivalence_right_of_isEquivalence_left
+
+end IsIso
+
 section Iso
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
