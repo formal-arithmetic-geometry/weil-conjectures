@@ -39,6 +39,8 @@ the inversion of the roots.
 * `LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ`: the characteristic polynomial of an
   endomorphism preserving a submodule is the product of those of the restriction to the submodule
   and of the induced endomorphism of the quotient.
+* `LinearMap.charpoly_eq_one_of_subsingleton`: the characteristic polynomial of an
+  endomorphism of the zero module is `1`.
 * `LinearMap.charpoly_roots_tensorProduct`: the eigenvalues of a tensor product of endomorphisms
   are the pairwise products of the eigenvalues of the factors.
 * `LinearMap.charpoly_roots_exteriorPower`: the eigenvalues of the `s`-th exterior power of an
@@ -73,6 +75,12 @@ theorem charpoly_eq_charpoly_restrict_mul_charpoly_mapQ (f : V →ₗ[R] V) (W :
     (hW : W ≤ W.comap f) :
     f.charpoly = (f.restrict hW).charpoly * (W.mapQ W f hW).charpoly := by
   sorry
+
+/-- The characteristic polynomial of an endomorphism of the zero module is `1`. -/
+theorem charpoly_eq_one_of_subsingleton [Nontrivial R] [Subsingleton V] (f : V →ₗ[R] V) :
+    f.charpoly = 1 :=
+  Polynomial.eq_one_of_monic_natDegree_zero f.charpoly_monic
+    (f.charpoly_natDegree.trans Module.finrank_zero_of_subsingleton)
 
 end CommRing
 

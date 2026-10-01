@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+public import Mathlib.CategoryTheory.Filtered.Final
 public import Mathlib.CategoryTheory.Functor.Flat
 
 /-!
@@ -28,6 +29,10 @@ relevant size.
 `lanEvaluationIsoColim'` is taken verbatim from the `proetale` dependency
 (`Proetale.Topology.Comparison.CohomologyComparison`), which is not otherwise imported here;
 the import direction would be the wrong way round and that file is heavy.
+
+The comma categories `CostructuredArrow L X` of a representably coflat functor `L` are
+filtered, hence sifted (`CategoryTheory.Functor.isSifted_costructuredArrow`). This is what
+makes left Kan extension along `L` strong monoidal (`CategoryTheory.Functor.isIso_lan_δ`).
 
 TODO: upstream `lanEvaluationIsoColim'` to `Mathlib/CategoryTheory/Functor/Flat.lean`,
 deriving Mathlib's `lanEvaluationIsoColim` from it (and renaming: the prime is only kept
@@ -85,6 +90,12 @@ noncomputable def lanEvaluationIsoColim' (F : C ⥤ D) (X : D)
     rw [reassoc_of% h₁, NatTrans.naturality_assoc, ← reassoc_of% h₂, h₁,
       ι_colimMap, Functor.whiskerLeft_app]
     rfl)
+
+/-- The comma categories `CostructuredArrow L X` of a representably coflat functor `L` are
+sifted, being filtered. -/
+instance isSifted_costructuredArrow (L : C ⥤ D) [RepresentablyCoflat L] (X : D) :
+    IsSifted (CostructuredArrow L X) :=
+  IsFiltered.isSifted
 
 end Functor
 

@@ -5,12 +5,14 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 
-# The pushforward `g_*` is lax symmetric monoidal, the pullback `g^*` is oplax monoidal
+# The pushforward `g_*` is lax symmetric monoidal, the pullback `g^*` is monoidal
 
 For a morphism of schemes `g : Z ⟶ Y` and a braided monoidal coefficient category `A`, the
 pushforward `g_*` on `A`-valued étale sheaves is lax braided. This is the general statement
@@ -22,12 +24,25 @@ with comparison maps `g^*(F ⊗ G) ⟶ g^*F ⊗ g^*G` and `g^*𝟙 ⟶ 𝟙` adj
 `F ⊗ G ⟶ g_*g^*F ⊗ g_*g^*G ⟶ g_*(g^*F ⊗ g^*G)` and to the unit of `g_*`, and the
 adjunction `g^* ⊣ g_*` is monoidal for these structures.
 
+The comparison map `g^*𝟙 ⟶ 𝟙` is always an isomorphism. When tensoring in `A` moreover commutes
+with filtered colimits (for example if `A` is closed), `g^*` is strong monoidal. This is the
+general statement `CategoryTheory.Functor.sheafPullbackConstruction.isIso_δ_sheafPullback` for
+the pullback along a functor of sites with filtered comma categories, applied to base change,
+which is representably flat by `CategoryTheory.MorphismProperty.Over.representablyFlat_pullback`.
+
 ## Main results
 
 - `AlgebraicGeometry.Etale.laxBraided_lowerStar`: the pushforward `g_*` is lax braided.
 - `AlgebraicGeometry.Etale.oplaxMonoidal_upperStar`: the pullback `g^*` is oplax monoidal.
 - `AlgebraicGeometry.Etale.isMonoidal_upperStarLowerStarAdjunction`: the adjunction
   `g^* ⊣ g_*` is monoidal.
+- `AlgebraicGeometry.Etale.isIso_upperStar_η`: the comparison map `g^*𝟙 ⟶ 𝟙` is an
+  isomorphism.
+- `AlgebraicGeometry.Etale.isIso_upperStar_δ`: if tensoring in `A` commutes with filtered
+  colimits (e.g. if `A` is closed), the comparison map `g^*(F ⊗ G) ⟶ g^*F ⊗ g^*G` is an
+  isomorphism.
+- `AlgebraicGeometry.Etale.monoidal_upperStar`: under the same hypothesis, the pullback `g^*`
+  is strong monoidal.
 
 -/
 
@@ -117,5 +132,46 @@ of the unit `ε : 𝟙 ⟶ g_*𝟙` of the lax monoidal pushforward followed by 
 lemma Etale.upperStar_η :
     η (g)^*[A] = (g)^*[A].map (ε (g)_*[A]) ≫ (adj).counit.app _ := by
   simp [Adjunction.leftAdjointOplaxMonoidal_η, Adjunction.homEquiv_counit]
+
+open MonoidalCategory Functor.OplaxMonoidal
+
+/-- The comparison map `η : g^*𝟙 ⟶ 𝟙` of the oplax monoidal pullback is an isomorphism. This is
+`CategoryTheory.Functor.sheafPullbackConstruction.isIso_η_sheafPullback` for the base change
+functor, whose comma categories are connected, being filtered: base change is representably
+flat by `CategoryTheory.MorphismProperty.Over.representablyFlat_pullback`. -/
+instance Etale.isIso_upperStar_η : IsIso (η (g)^*[A]) := by
+  unfold Etale.upperStar
+  infer_instance
+
+section FilteredColimits
+
+/- Tensoring in `A` on the left commutes with filtered colimits of the size of the comma
+categories `CostructuredArrow` of base change, e.g. if `A` is closed. Via the braiding, so does
+tensoring on the right. -/
+variable [∀ M : A, PreservesFilteredColimitsOfSize.{u, u + 1} (tensorLeft M)]
+
+/-- If tensoring in `A` commutes with filtered colimits (e.g. if `A` is closed), the comparison
+map `δ : g^*(F ⊗ G) ⟶ g^*F ⊗ g^*G` of the oplax monoidal pullback is an isomorphism. This is
+`CategoryTheory.Functor.sheafPullbackConstruction.isIso_δ_sheafPullback` for the base change
+functor, whose comma categories are filtered since base change is representably flat
+(`CategoryTheory.MorphismProperty.Over.representablyFlat_pullback`). -/
+instance Etale.isIso_upperStar_δ (F G : Sheaf Y.smallEtaleTopology A) :
+    IsIso (δ (g)^*[A] F G) := by
+  unfold Etale.upperStar
+  infer_instance
+
+/-- If tensoring in `A` commutes with filtered colimits (e.g. if `A` is closed), the pullback
+`g^*` on étale sheaves is strong monoidal, its oplax structure being
+`Etale.oplaxMonoidal_upperStar` by definition. -/
+noncomputable instance Etale.monoidal_upperStar : (g)^*[A].Monoidal :=
+  .ofOplaxMonoidal _
+
+example : (Etale.monoidal_upperStar A g).toOplaxMonoidal = Etale.oplaxMonoidal_upperStar A g :=
+  rfl
+
+end FilteredColimits
+
+/-- For closed `A`, the pullback `g^*` on étale sheaves is strong monoidal. -/
+noncomputable example [MonoidalClosed A] : (g)^*[A].Monoidal := inferInstance
 
 end AlgebraicGeometry

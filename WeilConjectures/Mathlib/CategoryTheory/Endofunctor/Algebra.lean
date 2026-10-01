@@ -60,6 +60,12 @@ variable {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
 
 namespace Algebra
 
+@[simp]
+lemma eqToHom_f {F : C ⥤ C} {A₀ A₁ : Algebra F} (h : A₀ = A₁) :
+    (eqToHom h).f = eqToHom (congr_arg (·.a) h) := by
+  cases h
+  rfl
+
 section Map
 
 variable {F : C ⥤ C} {G : D ⥤ D} {L : C ⥤ D}
@@ -106,6 +112,14 @@ def IsIsoStr (F : C ⥤ C) : ObjectProperty (Algebra F) :=
 
 lemma isIsoStr_iff {F : C ⥤ C} (A : Algebra F) : IsIsoStr F A ↔ IsIso A.str :=
   Iff.rfl
+
+/-- Transport along an isomorphism `e` preserves the invertibility of the structure morphism. -/
+lemma isIsoStr_mapOfNatTrans_obj {F : C ⥤ C} {G : D ⥤ D} {L : C ⥤ D}
+    (e : L ⋙ G ⟶ F ⋙ L) [IsIso e] {A : Algebra F}
+    (hA : IsIsoStr F A) : IsIsoStr G ((mapOfNatTrans e).obj A) := by
+  rw [isIsoStr_iff] at hA
+  rw [isIsoStr_iff, mapOfNatTrans_obj_str]
+  infer_instance
 
 end Algebra
 
@@ -252,9 +266,8 @@ G (L a) -------> L (F a) -----> L a
 
 is again an isomorphism. -/
 noncomputable def mapOfNatIso (e : L ⋙ G ≅ F ⋙ L) : IsoAlgebra F ⥤ IsoAlgebra G :=
-  (Algebra.IsIsoStr G).lift (ι F ⋙ Algebra.mapOfNatTrans e.hom) fun K ↦ by
-    change IsIso (e.hom.app K.carrier ≫ L.map K.obj.str)
-    infer_instance
+  (Algebra.IsIsoStr G).lift (ι F ⋙ Algebra.mapOfNatTrans e.hom) fun K ↦
+    Algebra.isIsoStr_mapOfNatTrans_obj e.hom K.property
 
 @[simp]
 lemma mapOfNatIso_obj_carrier (e : L ⋙ G ≅ F ⋙ L) (K : IsoAlgebra F) :

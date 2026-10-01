@@ -72,9 +72,9 @@ D(d.i)_! ⋙ R(d.g)_*
 
 ## Implementation notes
 
-Only the bounded below variant is constructed. The unbounded variant would need both the
-unbounded derived adjunction `Dq^* ⊣ Rq_*` and the unbounded composition isomorphism for
-derived pushforwards, neither of which is available.
+Only the bounded below variant is constructed here. The unbounded variant is
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationComparison`, in
+`WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded`.
 
 That the comparison is an isomorphism is proper base change and is not proved here.
 
@@ -553,14 +553,12 @@ end Etale
 
 /-! ### Axiom census
 
-The comparison `ρ`, its identity law and its composition law depend, beyond the three
-standard axioms `propext`, `Classical.choice` and `Quot.sound`, on `sorryAx`. It enters
-through the sorried sheafification instance
-`CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, and through nothing else:
-that is the only `sorry` in the transitive imports of this file. In particular the derived
-categories these three statements are valued in come from
-`HasDerivedCategory.ofIsGrothendieckAbelian`, which rests on
+The comparison `ρ`, its identity law and its composition law depend only on the three
+standard axioms `propext`, `Classical.choice` and `Quot.sound`. Sheafification enters through
+the instance `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, which is proved through the
+transfinite plus construction. The derived categories these three statements are valued in
+come from `HasDerivedCategory.ofIsGrothendieckAbelian`, which rests on
 `CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian` of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution` and is proved.
 The checks below are run by the build.
@@ -568,21 +566,21 @@ The checks below are run by the build.
 
 /--
 info: 'AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison'
-  depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+  depends on axioms: [propext, Classical.choice, Quot.sound]
 -/
 #guard_msgs (whitespace := lax) in
 #print axioms AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison
 
 /--
 info: 'AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison_id'
-  depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+  depends on axioms: [propext, Classical.choice, Quot.sound]
 -/
 #guard_msgs (whitespace := lax) in
 #print axioms AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison_id
 
 /--
 info: 'AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison_comp'
-  depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+  depends on axioms: [propext, Classical.choice, Quot.sound]
 -/
 #guard_msgs (whitespace := lax) in
 #print axioms AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison_comp

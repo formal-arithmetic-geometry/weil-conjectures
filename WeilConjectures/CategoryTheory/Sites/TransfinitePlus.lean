@@ -112,6 +112,16 @@ lemma transfinitePlusDiagram_map_succ (j : κ.ord.ToType) :
   have := Cardinal.noMaxOrder (Fact.out : κ.IsRegular).aleph0_le
   (J.plusSuccStruct A).iterationFunctor_map_succ j (not_isMax j)
 
+variable [Fact κ.IsRegular] in
+/-- The transition map from a stage to the next, evaluated at a presheaf `P`, is
+`J.toPlus` followed by the identification `(P^{(j)})⁺ ≅ P^{(j+1)}`. -/
+@[reassoc]
+lemma transfinitePlusDiagram_map_succ_app (j : κ.ord.ToType) (P : Cᵒᵖ ⥤ A) :
+    ((J.transfinitePlusDiagram A κ).map (homOfLE (Order.le_succ j))).app P =
+      J.toPlus ((J.transfinitePlusStage A κ j).obj P) ≫
+        (J.transfinitePlusStageSuccIso A κ j).inv.app P :=
+  NatTrans.congr_app (J.transfinitePlusDiagram_map_succ A κ j) P
+
 /-- The cocone exhibiting `J.transfinitePlus A κ` as the colimit of its stages. -/
 noncomputable def transfinitePlusCocone : Cocone (J.transfinitePlusDiagram A κ) :=
   (J.plusSuccStruct A).iterationCocone κ.ord.ToType
