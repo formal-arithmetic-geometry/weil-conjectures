@@ -67,8 +67,13 @@ theorem HasDirectImageWeightBound.comp {X Z Y : Scheme.{u}}
     [Y.Over (Spec (CommRingCat.of k₀))] {f : X ⟶ Z} {g : Z ⟶ Y}
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
     [QuasiCompact f] [g.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated g]
-    [LocallyOfFiniteType g] [QuasiCompact g] [CompactSpace Z] [QuasiSeparatedSpace Z]
-    [CompactSpace Y] [QuasiSeparatedSpace Y]
+    [LocallyOfFiniteType g] [QuasiCompact g]
+    [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
     (hf : HasDirectImageWeightBound k₀ ι f) (hg : HasDirectImageWeightBound k₀ ι g) :
     HasDirectImageWeightBound k₀ ι (f ≫ g) :=
   -- Run the Frobenius-equivariant compact-support Leray spectral sequence
@@ -96,7 +101,10 @@ theorem HasDirectImageWeightBound.of_openClosed {U X Z Y : Scheme.{u}}
     [j.IsOver (Spec (CommRingCat.of k₀))] {i : Z ⟶ X} [IsClosedImmersion i]
     [i.IsOver (Spec (CommRingCat.of k₀))] {f : X ⟶ Y}
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
-    [QuasiCompact f] [CompactSpace Y] [QuasiSeparatedSpace Y]
+    [QuasiCompact f]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
     (hij : IsCompl (Set.range j.base) (Set.range i.base))
     (hU : HasDirectImageWeightBound k₀ ι (j ≫ f))
     (hZ : HasDirectImageWeightBound k₀ ι (i ≫ f)) :
@@ -114,7 +122,9 @@ section QuasiFinite
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
   [IsSeparated f] [LocallyQuasiFinite f] [LocallyOfFiniteType f] [QuasiCompact f]
-  [CompactSpace Y] [QuasiSeparatedSpace Y]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the higher direct images
 with compact support `Rʳf₀!` vanish for `r > 0` (blueprint: `sk-l-dl-general-quasifinite`). -/
