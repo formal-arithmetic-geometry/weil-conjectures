@@ -67,7 +67,7 @@ a constructible Weil sheaf `F` on `X` mixed of weights at most `w`, the sheaf `R
 weights at most `w + r`, for every `r` (blueprint: `sk-thm-dl-general-sheaf`). -/
 theorem hasDirectImageWeightBound_over_finiteField (ι : PadicAlgCl l →+* ℂ) (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    [CompactSpace Y] [QuasiSeparatedSpace Y] [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] : HasDirectImageWeightBound k₀ ι f :=
   sorry
@@ -77,7 +77,7 @@ theorem hasDirectImageWeightBound_over_finiteField (ι : PadicAlgCl l →+* ℂ)
 theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
     {K : WeilComplex k₀ l X} (hK : K.IsMixedOfWeightsAtMost ι w) (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    [CompactSpace Y] [QuasiSeparatedSpace Y] [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] :
     ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w :=
