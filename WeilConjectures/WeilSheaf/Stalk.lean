@@ -65,8 +65,7 @@ form in which the coefficients `AlgebraicGeometry.WeilCoefficients` take stalks.
 `ULift ℚ̄_ℓ` is made a `ℚ̄_ℓ`-module by restriction of scalars
 (`AlgebraicGeometry.WeilCoefficients.Carrier`).
 
-The Frobenius-fixedness `s ≫ Frᵐ = σᵐ ≫ s` of the chosen geometric points and the
-finite-dimensionality of stalks and global sections are recorded as theorems with `sorry`
+The finite-dimensionality of stalks and global sections is recorded as theorems with `sorry`
 proofs. With the present discrete coefficients every Weil sheaf is zero (see
 `WeilConjectures.WeilSheaf.Category`), so the finite-dimensionality statements are true but
 degenerate.
@@ -79,6 +78,73 @@ universe u
 open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry
+
+section SpecFrobenius
+
+variable {k : Type u} [Field k] [Finite k]
+
+/-- Precomposing `m` times with `σ` is precomposing with `Spec` of the `m`-th power of the
+geometric Frobenius of `k̄`. -/
+theorem iterate_specGeometricFrobenius_hom_comp {Y : Scheme.{u}} (m : ℕ)
+    (t : Spec (.of (AlgebraicClosure k)) ⟶ Y) :
+    letI := Fintype.ofFinite k
+    ((specGeometricFrobenius k).hom ≫ ·)^[m] t =
+      Spec.map (CommRingCat.ofHom
+        ((FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k)) ^ m :
+          Gal(AlgebraicClosure k/k)).toRingEquiv.toRingHom) ≫ t := by
+  let := Fintype.ofFinite k
+  induction m generalizing t with
+  | zero =>
+    rw [pow_zero, Function.iterate_zero_apply]
+    change _ = Spec.map (CommRingCat.ofHom (RingHom.id _)) ≫ t
+    simp
+  | succ m ih =>
+    rw [Function.iterate_succ_apply, ih, specGeometricFrobenius_hom, ← Category.assoc,
+      ← Spec.map_comp, pow_succ]
+    rfl
+
+/-- Postcomposing `m` times with `σ` is postcomposing with `Spec` of the `m`-th power of the
+geometric Frobenius of `k̄`. -/
+theorem comp_iterate_specGeometricFrobenius_hom {Y : Scheme.{u}} (m : ℕ)
+    (t : Y ⟶ Spec (.of (AlgebraicClosure k))) :
+    letI := Fintype.ofFinite k
+    (· ≫ (specGeometricFrobenius k).hom)^[m] t =
+      t ≫ Spec.map (CommRingCat.ofHom
+        ((FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k)) ^ m :
+          Gal(AlgebraicClosure k/k)).toRingEquiv.toRingHom) := by
+  let := Fintype.ofFinite k
+  induction m generalizing t with
+  | zero =>
+    rw [pow_zero, Function.iterate_zero_apply]
+    change _ = t ≫ Spec.map (CommRingCat.ofHom (RingHom.id _))
+    simp
+  | succ m ih =>
+    rw [Function.iterate_succ_apply, ih, specGeometricFrobenius_hom, Category.assoc,
+      ← Spec.map_comp, pow_succ']
+    rfl
+
+/-- The `m`-th power of the geometric Frobenius of `k̄` fixes the image of any embedding of a
+field with `qᵐ` elements. -/
+theorem geometricFrobenius_pow_comp_eq {K : Type u} [Field K] [Finite K] (m : ℕ)
+    (hK : Nat.card K = Nat.card k ^ m) (ι : K →+* AlgebraicClosure k) :
+    letI := Fintype.ofFinite k
+    (((FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k)) ^ m :
+      Gal(AlgebraicClosure k/k)).toRingEquiv.toRingHom).comp ι = ι := by
+  let := Fintype.ofFinite k
+  let := Fintype.ofFinite K
+  ext a
+  simp only [RingHom.coe_comp, Function.comp_apply,
+    FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv, inv_pow]
+  change ((FiniteField.frobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k) ^ m)⁻¹) (ι a) = ι a
+  rw [AlgEquiv.aut_inv, AlgEquiv.symm_apply_eq, AlgEquiv.coe_pow,
+    FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate]
+  change ι a = ι a ^ (Fintype.card k ^ m)
+  rw [← map_pow]
+  congr 1
+  rw [← Fintype.card_eq_nat_card, ← Fintype.card_eq_nat_card] at hK
+  rw [← hK, FiniteField.pow_card]
+
+end SpecFrobenius
 
 namespace Scheme.Hom
 
@@ -111,7 +177,66 @@ noncomputable def geometricFiberPointOfFinitePoint (x : X.finitePoints) :
   have : Module.Finite k (X.residueField x.1) := Module.Finite.of_finite
   have : Algebra.IsAlgebraic k (X.residueField x.1) := inferInstance
   f.geometricFiberPoint (K := X.residueField x.1) (X.fromSpecResidueField x.1)
-    (by rw [← f.specMap_residueFieldAlgebraMap x.1])
+    (f.specMap_residueFieldAlgebraMap x.1).symm
+
+variable [Finite k]
+
+/-- The geometric Galois Frobenius commutes with the projection to `X`. -/
+theorem iterate_geometricGaloisFrobenius_comp_geometricFiberProj (m : ℕ)
+    (t : Spec (.of (AlgebraicClosure k)) ⟶ f.geometricFiber) :
+    (· ≫ f.geometricGaloisFrobenius.hom)^[m] t ≫ f.geometricFiberProj =
+      t ≫ f.geometricFiberProj := by
+  induction m generalizing t with
+  | zero => rfl
+  | succ m ih => rw [Function.iterate_succ_apply, ih, Category.assoc,
+      geometricGaloisFrobenius_hom_comp_geometricFiberProj]
+
+/-- The geometric Galois Frobenius acts on the second component of a geometric point by `σ`. -/
+theorem iterate_geometricGaloisFrobenius_comp_geometricFiberToAlgebraicClosure (m : ℕ)
+    (t : Spec (.of (AlgebraicClosure k)) ⟶ f.geometricFiber) :
+    (· ≫ f.geometricGaloisFrobenius.hom)^[m] t ≫ f.geometricFiberToAlgebraicClosure =
+      (· ≫ (specGeometricFrobenius k).hom)^[m] (t ≫ f.geometricFiberToAlgebraicClosure) := by
+  induction m generalizing t with
+  | zero => rfl
+  | succ m ih => rw [Function.iterate_succ_apply, Function.iterate_succ_apply, ih, Category.assoc,
+      geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure, Category.assoc]
+
+omit [Finite k] in
+@[reassoc]
+theorem geometricFiberPoint_comp_geometricFiberProj {K : Type u} [Field K] [Algebra k K]
+    [Algebra.IsAlgebraic k K] (g : Spec (.of K) ⟶ X)
+    (hg : g ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k K))) :
+    f.geometricFiberPoint g hg ≫ f.geometricFiberProj = Spec.map (CommRingCat.ofHom
+      (IsAlgClosed.lift (R := k) (S := K) (M := AlgebraicClosure k)).toRingHom) ≫ g :=
+  pullback.lift_fst _ _ _
+
+omit [Finite k] in
+@[reassoc]
+theorem geometricFiberPoint_comp_geometricFiberToAlgebraicClosure {K : Type u} [Field K]
+    [Algebra k K] [Algebra.IsAlgebraic k K] (g : Spec (.of K) ⟶ X)
+    (hg : g ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k K))) :
+    f.geometricFiberPoint g hg ≫ f.geometricFiberToAlgebraicClosure = 𝟙 _ :=
+  pullback.lift_snd _ _ _
+
+/-- A geometric point over a point with values in a field with `qᵐ` elements is fixed by `Frᵐ`
+up to reparametrisation: `s ≫ Frᵐ = σᵐ ≫ s`. -/
+theorem iterate_geometricGaloisFrobenius_geometricFiberPoint {K : Type u} [Field K] [Algebra k K]
+    [Algebra.IsAlgebraic k K] [Finite K] (m : ℕ) (hK : Nat.card K = Nat.card k ^ m)
+    (g : Spec (.of K) ⟶ X) (hg : g ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k K))) :
+    (· ≫ f.geometricGaloisFrobenius.hom)^[m] (f.geometricFiberPoint g hg) =
+      ((specGeometricFrobenius k).hom ≫ ·)^[m] (f.geometricFiberPoint g hg) := by
+  rw [iterate_specGeometricFrobenius_hom_comp]
+  apply pullback.hom_ext
+  · change _ ≫ f.geometricFiberProj = _ ≫ f.geometricFiberProj
+    rw [iterate_geometricGaloisFrobenius_comp_geometricFiberProj, Category.assoc,
+      geometricFiberPoint_comp_geometricFiberProj, ← Category.assoc, ← Spec.map_comp,
+      ← CommRingCat.ofHom_comp, geometricFrobenius_pow_comp_eq m hK]
+  · change _ ≫ f.geometricFiberToAlgebraicClosure = _ ≫ f.geometricFiberToAlgebraicClosure
+    rw [iterate_geometricGaloisFrobenius_comp_geometricFiberToAlgebraicClosure,
+      comp_iterate_specGeometricFrobenius_hom]
+    simp only [Category.assoc,
+      f.geometricFiberPoint_comp_geometricFiberToAlgebraicClosure g hg, Category.id_comp,
+      Category.comp_id]
 
 end Scheme.Hom
 
@@ -225,7 +350,12 @@ theorem geometricGaloisFrobenius_iterate_geometricFiberPointOfFinitePoint (x : X
         ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x) =
       ((specGeometricFrobenius k₀).hom ≫ ·)^[(X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1]
         ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x) := by
-  sorry
+  let := ((X ↘ Spec (CommRingCat.of k₀)).residueFieldAlgebraMap x.1).toAlgebra
+  have : Finite (X.residueField x.1) := X.mem_finitePoints.1 x.2
+  have : Module.Finite k₀ (X.residueField x.1) := Module.Finite.of_finite
+  exact Scheme.Hom.iterate_geometricGaloisFrobenius_geometricFiberPoint _ _
+    (Module.natCard_eq_pow_finrank (K := k₀) (V := X.residueField x.1)) _
+    ((X ↘ Spec (CommRingCat.of k₀)).specMap_residueFieldAlgebraMap x.1).symm
 
 /-- The geometric point over an `𝔽_{qⁿ}`-rational point is fixed by `Frⁿ` up to
 reparametrisation. -/
@@ -235,7 +365,11 @@ theorem geometricGaloisFrobenius_iterate_geometricFiberPoint (n : ℕ)
         ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPoint x.1 x.2) =
       ((specGeometricFrobenius k₀).hom ≫ ·)^[n]
         ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPoint x.1 x.2) := by
-  sorry
+  rcases eq_or_ne n 0 with rfl | hn
+  · rfl
+  have : Finite (FiniteField.galoisExtension k₀ n) := Module.finite_of_finite k₀
+  exact Scheme.Hom.iterate_geometricGaloisFrobenius_geometricFiberPoint _ _
+    (FiniteField.nat_card_galoisExtension k₀ n hn) _ _
 
 variable (F : WeilSheaf k₀ l X)
 
