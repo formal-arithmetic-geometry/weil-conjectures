@@ -133,6 +133,7 @@ public import WeilConjectures.Blowup.QuasiAffineGeneralReduction
 public import WeilConjectures.Blowup.QuasiDomination
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
@@ -473,6 +474,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Localization.Bousfield
 public import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
