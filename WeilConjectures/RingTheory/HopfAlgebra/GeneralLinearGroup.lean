@@ -274,4 +274,18 @@ theorem algHomMulEquiv_symm_apply (g : GL n R) :
     (algHomMulEquiv n k R).symm g = WithConv.toConv (evalAlgHom g) :=
   rfl
 
+variable {S : Type*} [CommRing S] [Algebra k S]
+
+/-- Evaluation at the image of `g` under an algebra homomorphism `φ : R → S` is evaluation at `g`
+followed by `φ`. -/
+theorem evalAlgHom_map (φ : R →ₐ[k] S) (g : GL n R) :
+    evalAlgHom (k := k) (map φ.toRingHom g) = φ.comp (evalAlgHom g) :=
+  algHom_ext fun i j ↦ by simp
+
+/-- The identification `algHomMulEquiv` is natural in the algebra of values. -/
+theorem map_algHomMulEquiv (φ : R →ₐ[k] S) (ψ : CoordinateRing n k →ₐ[k] R) :
+    map φ.toRingHom (algHomMulEquiv n k R (WithConv.toConv ψ)) =
+      algHomMulEquiv n k S (WithConv.toConv (φ.comp ψ)) :=
+  Units.ext (Matrix.ext fun _ _ ↦ rfl)
+
 end Matrix.GeneralLinearGroup

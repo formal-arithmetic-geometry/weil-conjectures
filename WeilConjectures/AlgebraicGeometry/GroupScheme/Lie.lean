@@ -9,24 +9,26 @@ public import Mathlib.Algebra.DualNumber
 public import Mathlib.AlgebraicGeometry.Group.Affine
 
 /-!
-# The Lie algebra of a group scheme
+# The tangent group of a group scheme
 
-For a group scheme `G` over a field `k`, the Lie algebra `Lie(G)` is the kernel of the reduction
-map `G(k[ε]) → G(k)` on points with values in the dual numbers `k[ε] = k[ε]/(ε²)`: the tangent
-vectors at the identity. Here `G(R)` is the group of morphisms `Spec R ⟶ G` over `Spec k`, a group
-by Mathlib's `Hom.group`. A homomorphism of group schemes `f : G ⟶ H` induces its differential
-`Lie(G) → Lie(H)` by post-composition.
+For a group scheme `G` over a commutative ring `k`, the tangent space `T_1 G` at the identity is
+the kernel of the reduction map `G(k[ε]) → G(k)` on points with values in the dual numbers
+`k[ε] = k[ε]/(ε²)`. Here `G(R)` is the group of morphisms `Spec R ⟶ G` over `Spec k`, a group by
+Mathlib's `Hom.group`, and `R ↦ G(R)` is functorial in `k`-algebra homomorphisms. A homomorphism
+of group schemes `f : G ⟶ H` induces its differential `T_1 G → T_1 H` by post-composition.
 
-The `k`-module structure and the bracket of `Lie(G)` are not constructed for a general group
-scheme; for closed subgroup schemes of `GL_n` they are given concretely in
-`WeilConjectures.AlgebraicGeometry.GroupScheme.ClosedSubgroup.Lie`.
+Only the underlying abelian group of `T_1 G` is constructed here: the `k`-module structure (from
+the scalings `ε ↦ cε` of `k[ε]`) and the Lie bracket of the Lie algebra `Lie(G)` are not. For
+closed subgroup schemes of `GL_n` the Lie algebra is given concretely in
+`WeilConjectures.AlgebraicGeometry.GroupScheme.ClosedSubgroup.Lie`, and identified with the
+tangent group there.
 
 ## Main definitions
 
-- `AlgebraicGeometry.GrpObj.points`: the `R`-points `G(R)` of a group scheme `G` over `k`.
-- `AlgebraicGeometry.GrpObj.dualRestrict`: the reduction map `G(k[ε]) →* G(k)`.
-- `AlgebraicGeometry.GrpObj.lie`: the Lie algebra `Lie(G) = ker(G(k[ε]) → G(k))`.
-- `AlgebraicGeometry.GrpObj.lieMap`: the differential `Lie(G) →* Lie(H)` of a homomorphism.
+- `AlgebraicGeometry.points`: the `R`-points `G(R)` of a scheme `G` over `k`.
+- `AlgebraicGeometry.pointsMap`: the group homomorphism `G(R) →* G(S)` induced by `R →ₐ[k] S`.
+- `AlgebraicGeometry.tangentGroup`: the tangent group `T_1 G = ker(G(k[ε]) → G(k))`.
+- `AlgebraicGeometry.tangentGroupMap`: the differential `T_1 G →* T_1 H` of a homomorphism.
 
 ## Blueprint
 
@@ -43,59 +45,79 @@ open scoped MonObj
 
 namespace AlgebraicGeometry
 
-variable {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G]
+variable {k : Type u} [CommRing k] (G : Over (Spec (.of k)))
 
-/-- The `R`-points `G(R)` of a group scheme `G` over `k`: the morphisms `Spec R ⟶ G` over
-`Spec k`. They form a group by `Hom.group`. -/
-abbrev GrpObj.points (R : Type u) [CommRing R] [Algebra k R] :=
+/-- The `R`-points `G(R)` of a scheme `G` over `k`: the morphisms `Spec R ⟶ G` over `Spec k`. For a
+group scheme `G` they form a group by `Hom.group`. -/
+abbrev points (R : Type u) [CommRing R] [Algebra k R] :=
   (Spec (.of R)).asOver (Spec (.of k)) ⟶ G
 
-/-- The morphism `Spec k ⟶ Spec k[ε]` over `Spec k` given by `ε ↦ 0`. -/
-noncomputable def dualNumberSpecFst :
-    (Spec (.of k)).asOver (Spec (.of k)) ⟶ (Spec (.of (DualNumber k))).asOver (Spec (.of k)) :=
-  (Spec.map (CommRingCat.ofHom (TrivSqZeroExt.fstHom k k k).toRingHom)).asOver (Spec (.of k))
+variable [GrpObj G] {R S : Type u} [CommRing R] [Algebra k R] [CommRing S] [Algebra k S]
 
-/-- The reduction map `G(k[ε]) →* G(k)` induced by `ε ↦ 0`. -/
-noncomputable def GrpObj.dualRestrict : GrpObj.points G (DualNumber k) →* GrpObj.points G k where
-  toFun φ := dualNumberSpecFst ≫ φ
+/-- The group homomorphism `G(R) →* G(S)` induced by a `k`-algebra homomorphism `φ : R → S`:
+precomposition with `Spec φ : Spec S ⟶ Spec R`. -/
+noncomputable def pointsMap (φ : R →ₐ[k] S) : points G R →* points G S where
+  toFun x := (Spec.map (CommRingCat.ofHom φ.toRingHom)).asOver (Spec (.of k)) ≫ x
   map_one' := MonObj.comp_one _
   map_mul' _ _ := MonObj.comp_mul _ _ _
 
-theorem GrpObj.dualRestrict_apply (φ : GrpObj.points G (DualNumber k)) :
-    GrpObj.dualRestrict G φ = dualNumberSpecFst ≫ φ :=
+@[simp]
+theorem pointsMap_apply (φ : R →ₐ[k] S) (x : points G R) :
+    pointsMap G φ x = (Spec.map (CommRingCat.ofHom φ.toRingHom)).asOver (Spec (.of k)) ≫ x :=
   rfl
 
-/-- The Lie algebra `Lie(G) = ker(G(k[ε]) → G(k))` of a group scheme `G` over `k`: the points of
-`G` with values in the dual numbers that reduce to the identity modulo `ε`.
+/-- The tangent group `T_1 G = ker(G(k[ε]) → G(k))` of a group scheme `G` over `k`: the points of
+`G` with values in the dual numbers that reduce to the identity modulo `ε`. It is the underlying
+group of the Lie algebra of `G`; its `k`-module structure and bracket are not constructed here.
 (blueprint: `sk-d-tangent`) -/
-noncomputable def GrpObj.lie : Subgroup (GrpObj.points G (DualNumber k)) :=
-  (GrpObj.dualRestrict G).ker
+noncomputable def tangentGroup : Subgroup (points G (DualNumber k)) :=
+  (pointsMap G (TrivSqZeroExt.fstHom k k k)).ker
 
-theorem GrpObj.mem_lie {φ : GrpObj.points G (DualNumber k)} :
-    φ ∈ GrpObj.lie G ↔ dualNumberSpecFst ≫ φ = 1 :=
+theorem mem_tangentGroup {x : points G (DualNumber k)} :
+    x ∈ tangentGroup G ↔ pointsMap G (TrivSqZeroExt.fstHom k k k) x = 1 :=
   MonoidHom.mem_ker
 
-/-- The group `Lie(G)` is commutative: its group law is the addition of tangent vectors.
+/-- The tangent group is commutative: its group law is the addition of tangent vectors.
+
+Proof sketch (not formalised): over `S = k[ε₁, ε₂]/(ε₁, ε₂)²`, the two maps `k[ε] → S` given by
+`ε ↦ ε₁` and `ε ↦ ε₂` exhibit `S` as the fibre product `k[ε] ×_k k[ε]`. Since `G` is
+representable, `G(S) = G(k[ε]) ×_{G(k)} G(k[ε])`, and both products `XY` and `YX` of two tangent
+vectors are the image of the same point of `G(S)` under the multiplication `ε₁, ε₂ ↦ ε`.
+For closed subgroups of `GL_n` it also follows from
+`Matrix.GeneralLinearGroup.tangentGroupMulEquiv` and `Matrix.GeneralLinearGroup.dualUnit_add`.
 (blueprint: `sk-d-tangent`) -/
-theorem GrpObj.lie_comm (X Y : GrpObj.lie G) : X * Y = Y * X := by
+instance : IsMulCommutative (tangentGroup G) :=
   sorry
 
 variable {G} {H : Over (Spec (.of k))} [GrpObj H]
 
-theorem GrpObj.comp_mem_lie (f : G ⟶ H) [IsMonHom f] {φ : GrpObj.points G (DualNumber k)}
-    (hφ : φ ∈ GrpObj.lie G) : φ ≫ f ∈ GrpObj.lie H := by
-  rw [GrpObj.mem_lie] at hφ ⊢
+/-- A homomorphism of group schemes `f : G ⟶ H` maps tangent vectors to tangent vectors: if
+`φ : Spec k[ε] ⟶ G` reduces to the identity, then so does `φ ≫ f`, since the diagram
+```
+Spec k ──(ε ↦ 0)──▶ Spec k[ε] ──φ──▶ G ──f──▶ H
+   │                                 ▲        ▲
+   └───────────────── 1 ─────────────┘        │
+   └───────────────────── 1 ──────────────────┘
+```
+commutes and `f` maps `1` to `1`. -/
+theorem comp_mem_tangentGroup (f : G ⟶ H) [IsMonHom f] {φ : points G (DualNumber k)}
+    (hφ : φ ∈ tangentGroup G) : φ ≫ f ∈ tangentGroup H := by
+  rw [mem_tangentGroup, pointsMap_apply] at hφ ⊢
   rw [← Category.assoc, hφ, MonObj.one_comp]
 
-/-- The differential `Lie(G) → Lie(H)` of a homomorphism of group schemes `f : G ⟶ H`, given by
-post-composition with `f` on dual-number points. (blueprint: `sk-d-tangent`) -/
-noncomputable def GrpObj.lieMap (f : G ⟶ H) [IsMonHom f] : GrpObj.lie G →* GrpObj.lie H :=
-  ((IsMonHom.monoidHom f _).comp (GrpObj.lie G).subtype).codRestrict (GrpObj.lie H)
-    fun φ ↦ GrpObj.comp_mem_lie f φ.2
+/-- The differential `T_1 G → T_1 H` of a homomorphism of group schemes `f : G ⟶ H`, given by
+post-composition with `f` on dual-number points: it sends `φ` to the composite
+```
+Spec k[ε] ──φ──▶ G ──f──▶ H
+```
+(blueprint: `sk-d-tangent`) -/
+noncomputable def tangentGroupMap (f : G ⟶ H) [IsMonHom f] : tangentGroup G →* tangentGroup H :=
+  ((IsMonHom.monoidHom f _).comp (tangentGroup G).subtype).codRestrict (tangentGroup H)
+    fun φ ↦ comp_mem_tangentGroup f φ.2
 
 @[simp]
-theorem GrpObj.coe_lieMap_apply (f : G ⟶ H) [IsMonHom f] (φ : GrpObj.lie G) :
-    (GrpObj.lieMap f φ : GrpObj.points H (DualNumber k)) = (φ : GrpObj.points G _) ≫ f :=
+theorem coe_tangentGroupMap_apply (f : G ⟶ H) [IsMonHom f] (φ : tangentGroup G) :
+    (tangentGroupMap f φ : points H (DualNumber k)) = (φ : points G _) ≫ f :=
   rfl
 
 end AlgebraicGeometry
