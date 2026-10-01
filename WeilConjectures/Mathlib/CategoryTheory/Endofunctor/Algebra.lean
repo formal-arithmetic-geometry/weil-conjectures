@@ -42,7 +42,8 @@ closed under the limits and colimits that `F` preserves.
 - `CategoryTheory.Endofunctor.IsoAlgebra`: the category of algebras with invertible
   structure morphism, with its structure isomorphism `IsoAlgebra.str`, its forgetful
   functor `IsoAlgebra.forget`, the iterated structure isomorphism
-  `IsoAlgebra.strIterate` and the transport `IsoAlgebra.mapOfNatIso`.
+  `IsoAlgebra.strIterate`, the transport `IsoAlgebra.mapOfNatIso` and its functoriality
+  `IsoAlgebra.mapOfNatIsoHom` in the transporting functor.
 - `CategoryTheory.Endofunctor.Algebra.forgetCreatesLimits`: `Algebra.forget F` creates limits.
 - `CategoryTheory.Endofunctor.Algebra.forgetCreatesColimit`: `Algebra.forget F` creates the
   colimit of a diagram `D` if `F` preserves the colimit of `D ⋙ Algebra.forget F`.
@@ -283,6 +284,33 @@ lemma mapOfNatIso_obj_str (e : L ⋙ G ≅ F ⋙ L) (K : IsoAlgebra F) :
 lemma mapOfNatIso_map_hom_f (e : L ⋙ G ≅ F ⋙ L) {K K' : IsoAlgebra F} (φ : K ⟶ K') :
     ((mapOfNatIso e).map φ).hom.f = L.map φ.hom.f :=
   rfl
+
+/-- A natural transformation `α : L ⟶ L'` compatible with commutation isomorphisms
+`e : L ⋙ G ≅ F ⋙ L` and `e' : L' ⋙ G ≅ F ⋙ L'`, in the sense that the square
+
+```
+           α G
+  G ∘ L ────────▶ G ∘ L'
+    │               │
+  e │               │ e'
+    ▼               ▼
+  L ∘ F ────────▶ L' ∘ F
+           α F
+```
+
+commutes, induces a natural transformation `mapOfNatIso e ⟶ mapOfNatIso e'` with components
+those of `α`. -/
+@[simps]
+noncomputable def mapOfNatIsoHom {L' : C ⥤ D} {e : L ⋙ G ≅ F ⋙ L} {e' : L' ⋙ G ≅ F ⋙ L'}
+    (α : L ⟶ L') (hα : Functor.whiskerRight α G ≫ e'.hom = e.hom ≫ Functor.whiskerLeft F α) :
+    mapOfNatIso e ⟶ mapOfNatIso e' where
+  app K := ObjectProperty.homMk
+    { f := α.app K.carrier
+      h := by
+        have h := congr_app hα K.carrier
+        simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at h
+        simp [mapOfNatIso, reassoc_of% h] }
+  naturality _ _ φ := ObjectProperty.hom_ext _ (Algebra.Hom.ext (α.naturality φ.hom.f))
 
 end Map
 

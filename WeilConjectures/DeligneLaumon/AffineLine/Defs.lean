@@ -76,6 +76,7 @@ structure LisseOnDenseOpen (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) 
   /-- The open immersion `j : U₀ ↪ 𝔸¹_{k₀}`. -/
   j : U ⟶ affineLine k₀
   [isOpenImmersion : IsOpenImmersion j]
+  [quasiCompact : QuasiCompact j]
   [isOver : j.IsOver (Spec (CommRingCat.of k₀))]
   [isDominant : IsDominant j]
   /-- The lisse Weil sheaf on `U₀`. -/
@@ -85,7 +86,7 @@ structure LisseOnDenseOpen (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) 
 
 namespace LisseOnDenseOpen
 
-attribute [instance] overBase isOpenImmersion isOver isDominant
+attribute [instance] overBase isOpenImmersion quasiCompact isOver isDominant
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable (D : LisseOnDenseOpen k₀ l)

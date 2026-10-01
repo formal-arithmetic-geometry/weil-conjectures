@@ -88,6 +88,8 @@ is the automorphism `γ_X` of the blueprint, induced by `σ_geom`, and not its i
   is Cartesian.
 - `AlgebraicGeometry.Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius`: base change
   to `k̄` commutes with the geometric Galois Frobenii.
+- `AlgebraicGeometry.Scheme.Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap`: the
+  square formed by the base change `φ̄` and the geometric Galois Frobenii is cartesian.
 
 -/
 
@@ -365,6 +367,43 @@ theorem geometricFiberMap_comp_geometricGaloisFrobenius (φ : X₀ ⟶ Y₀) (h 
     geometricFiberMap φ h ≫ g.geometricGaloisFrobenius.hom =
       f.geometricGaloisFrobenius.hom ≫ geometricFiberMap φ h := by
   apply pullback.hom_ext <;> simp [geometricFiberMap, geometricGaloisFrobenius]
+
+/-- The base change `φ̄ = φ × 𝟙` of a morphism over `k` and the geometric Galois Frobenii form
+a commutative square:
+
+```
+          Fr_X
+     X ────────▶ X
+     │           │
+   φ̄ │           │ φ̄
+     ▼           ▼
+     Y ────────▶ Y
+          Fr_Y
+```
+-/
+theorem commSq_geometricGaloisFrobenius (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) :
+    CommSq f.geometricGaloisFrobenius.hom (geometricFiberMap φ h) (geometricFiberMap φ h)
+      g.geometricGaloisFrobenius.hom :=
+  ⟨(geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm⟩
+
+/-- The square
+
+```
+          Fr_X
+     X ────────▶ X
+     │           │
+   φ̄ │           │ φ̄
+     ▼           ▼
+     Y ────────▶ Y
+          Fr_Y
+```
+
+of the base change `φ̄ = φ × 𝟙` of a morphism over `k` and the geometric Galois Frobenii is
+cartesian, its horizontal maps being isomorphisms. -/
+theorem isPullback_geometricGaloisFrobenius_geometricFiberMap (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) :
+    IsPullback f.geometricGaloisFrobenius.hom (geometricFiberMap φ h) (geometricFiberMap φ h)
+      g.geometricGaloisFrobenius.hom :=
+  .of_horiz_isIso (commSq_geometricGaloisFrobenius φ h)
 
 end Scheme.Hom
 
