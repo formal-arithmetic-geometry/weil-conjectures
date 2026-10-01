@@ -193,21 +193,26 @@ theorem IsPureOfWeight.tateTwist {ι : K →+* ℂ} {q : ℕ} (hq : 0 < q)
 
 /-- The dual `M^∨ = Hom_K(M, K)` of a Frobenius module, with the inverse transpose
 `f ↦ f ∘ F⁻¹` of the Frobenius `F`, so that the evaluation pairing `M^∨ ⊗ M → K` is
-Frobenius-invariant (`FrobeniusModule.dual_frobenius_apply_frobenius`). -/
+Frobenius-invariant (`FrobeniusModule.dual_frobenius_comp_frobenius`).
+
+The carrier `Module.Dual K M.carrier` lives in universe `max u v`, since the linear maps
+`M → K` involve both the carrier of `M` and the field `K`. -/
 noncomputable def dual (M : FrobeniusModule.{u, v} K) : FrobeniusModule.{max u v, v} K where
   carrier := Module.Dual K M.carrier
   frobenius := M.frobenius.symm.dualMap
 
-lemma dual_frobenius_apply (M : FrobeniusModule.{u, v} K) (f : Module.Dual K M.carrier)
-    (x : M.carrier) :
-    (show Module.Dual K M.carrier from M.dual.frobenius f) x = f (M.frobenius.symm x) :=
+/-- The Frobenius of the dual `M^∨` sends a linear form `f` to `f ∘ F⁻¹`. -/
+@[simp]
+lemma dual_frobenius_apply (M : FrobeniusModule.{u, v} K) (f : Module.Dual K M.carrier) :
+    (M.dual.frobenius f : Module.Dual K M.carrier) = f ∘ₗ M.frobenius.symm.toLinearMap :=
   rfl
 
-/-- The evaluation pairing `M^∨ ⊗ M → K` is invariant under the Frobenius. -/
-@[simp]
-lemma dual_frobenius_apply_frobenius (M : FrobeniusModule.{u, v} K)
-    (f : Module.Dual K M.carrier) (x : M.carrier) :
-    (show Module.Dual K M.carrier from M.dual.frobenius f) (M.frobenius x) = f x := by
-  simp [dual_frobenius_apply]
+/-- The evaluation pairing `M^∨ ⊗ M → K` is invariant under the Frobenius:
+`(F^∨ f) (F x) = f x`. -/
+lemma dual_frobenius_comp_frobenius (M : FrobeniusModule.{u, v} K)
+    (f : Module.Dual K M.carrier) :
+    (M.dual.frobenius f : Module.Dual K M.carrier) ∘ₗ M.frobenius.toLinearMap = f := by
+  ext
+  simp
 
 end FrobeniusModule

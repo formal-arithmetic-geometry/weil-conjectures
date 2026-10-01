@@ -120,6 +120,10 @@ noncomputable abbrev WeilSheaf.frobeniusPullback :
         (WeilCoefficients.{u} l) :=
   ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l]
 
+/-- The pullback `Fr_X^*` along the automorphism `Fr_X` of `X̄` is an equivalence. -/
+instance : (WeilSheaf.frobeniusPullback k₀ l X).IsEquivalence :=
+  Etale.isEquivalence_upperStar _ _
+
 /-- The property of a sheaf `F` on `X̄` with an isomorphism `Fr_X^* F ≅ F` that `F` is
 constructible; it cuts out the Weil sheaves. -/
 noncomputable abbrev WeilSheaf.objectProperty :
