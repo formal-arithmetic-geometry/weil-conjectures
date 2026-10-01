@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 
 In a monoidal closed category with zero morphisms, `K ⊗ M` is a zero object if `M` is, since
 `K ⊗ -` is a left adjoint. If the category is moreover braided, the same holds if `K` is a
-zero object.
+zero object, and the internal hom `[K, B]` out of a zero object `K` is a zero object.
 
 A monoidal functor `G : C ⥤ D` between monoidal closed categories which is an equivalence
 preserves internal homs: `G [A, B] ≅ [G A, G B]`
@@ -40,6 +40,14 @@ lemma isZero_tensorObj_of_isZero_right (K : C) {M : C} (hM : IsZero M) : IsZero 
 lemma isZero_tensorObj_of_isZero_left [BraidedCategory C] {K : C} (hK : IsZero K) (M : C) :
     IsZero (K ⊗ M) :=
   (isZero_tensorObj_of_isZero_right M hK).of_iso (β_ K M)
+
+/-- In a braided monoidal closed category, the internal hom `[K, B]` out of a zero object `K`
+is a zero object: maps `T ⟶ [K, B]` correspond to maps `K ⊗ T ⟶ B` out of a zero object. -/
+lemma isZero_ihom_obj_of_isZero [BraidedCategory C] {K : C} (hK : IsZero K) (B : C) :
+    IsZero ((ihom K).obj B) := by
+  rw [IsZero.iff_id_eq_zero]
+  exact ((ihom.adjunction K).homEquiv _ _).symm.injective
+    ((isZero_tensorObj_of_isZero_left hK _).eq_of_src _ _)
 
 end CategoryTheory.MonoidalCategory
 
