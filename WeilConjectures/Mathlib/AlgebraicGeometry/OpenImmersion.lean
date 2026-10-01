@@ -33,6 +33,8 @@ immersion and whose range is the full inverse image of the range of `m ≫ ψ` e
 The `MorphismProperty.RespectsRight` instance for open immersions of schemes, and the
 emptiness of a fibre product over disjoint opens
 (`AlgebraicGeometry.isEmpty_pullback_of_disjoint_range`).
+The lift of a morphism of `S`-schemes along an open immersion of `S`-schemes is a morphism of
+`S`-schemes (`AlgebraicGeometry.IsOpenImmersion.isOver_lift`).
 -/
 
 @[expose] public section
@@ -247,5 +249,18 @@ lemma isEmpty_pullback_of_disjoint_range {V : Scheme.{u}} (f : V ⟶ X) (j : U �
   exact Set.range_eq_empty_iff.mp hr
 
 end DisjointRange
+
+section LiftOver
+
+variable {S X Y Z : Scheme.{u}} [X.Over S] [Y.Over S] [Z.Over S] (f : X ⟶ Z) (g : Y ⟶ Z)
+  [IsOpenImmersion f] [f.IsOver S] [g.IsOver S]
+
+/-- The lift of a morphism of `S`-schemes along an open immersion of `S`-schemes is a morphism
+of `S`-schemes. -/
+instance IsOpenImmersion.isOver_lift (H : Set.range g ⊆ Set.range f) :
+    (IsOpenImmersion.lift f g H).IsOver S :=
+  ⟨by rw [← comp_over f S, IsOpenImmersion.lift_fac_assoc, comp_over]⟩
+
+end LiftOver
 
 end AlgebraicGeometry
