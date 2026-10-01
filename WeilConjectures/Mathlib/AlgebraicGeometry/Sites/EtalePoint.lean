@@ -70,6 +70,10 @@ of an open of `V`.
 - `AlgebraicGeometry.Scheme.pointSmallEtaleElementsBaseChange`: base change as a functor
   between the categories of elements of the two fibre functors, that is, between the
   categories of pointed étale neighbourhoods of `s ≫ f` in `Y` and of `s` in `X`.
+- `AlgebraicGeometry.Scheme.pointSmallEtaleIsoOfIso`,
+  `AlgebraicGeometry.Scheme.uliftPointSmallEtaleIsoOfIso`: reparametrising a geometric point
+  `s : Spec Ω ⟶ S` by an automorphism `e` of `Spec Ω` does not change the point:
+  `e ≫ s` and `s` are isomorphic points of the small étale site.
 
 ## Main results
 
@@ -405,5 +409,31 @@ theorem initial_pointSmallEtaleElementsBaseChange :
     (fun σ σ' ↦ exists_map_comp_eq_pointSmallEtaleElementsBaseChange i s σ σ')
 
 end ClosedImmersion
+
+section Reparametrization
+
+variable {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+  (e : Spec (.of Ω) ≅ Spec (.of Ω)) (s : Spec (.of Ω) ⟶ S)
+
+/-- The isomorphism of fibre functors underlying
+`AlgebraicGeometry.Scheme.pointSmallEtaleIsoOfIso`: a lift `Spec Ω ⟶ U` of `e ≫ s` is sent to
+the lift `e⁻¹ ≫ (−)` of `s`. -/
+noncomputable def pointSmallEtaleFiberIsoOfIso :
+    (pointSmallEtale (e.hom ≫ s)).fiber ≅ (pointSmallEtale s).fiber :=
+  Functor.isoWhiskerLeft (Etale.forget S)
+    (coyoneda.mapIso (Over.isoMk e.symm).op)
+
+/-- Reparametrising a geometric point `s : Spec Ω ⟶ S` by an automorphism `e` of `Spec Ω`
+gives an isomorphic point of the small étale site: `e ≫ s ≅ s`. -/
+noncomputable def pointSmallEtaleIsoOfIso : pointSmallEtale (e.hom ≫ s) ≅ pointSmallEtale s :=
+  GrothendieckTopology.Point.isoMk (pointSmallEtaleFiberIsoOfIso e s)
+
+/-- The universe-lifted form of `AlgebraicGeometry.Scheme.pointSmallEtaleIsoOfIso`. -/
+noncomputable def uliftPointSmallEtaleIsoOfIso :
+    (pointSmallEtale (e.hom ≫ s)).ulift.{u + 1} ≅ (pointSmallEtale s).ulift.{u + 1} :=
+  GrothendieckTopology.Point.isoMk
+    (Functor.isoWhiskerRight (pointSmallEtaleFiberIsoOfIso e s) uliftFunctor.{u + 1})
+
+end Reparametrization
 
 end AlgebraicGeometry.Scheme
