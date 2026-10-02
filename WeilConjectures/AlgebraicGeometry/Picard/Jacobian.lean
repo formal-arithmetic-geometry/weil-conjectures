@@ -5,12 +5,13 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.DualNumber
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
+public import WeilConjectures.Mathlib.Algebra.DualNumber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # The Jacobian of a smooth projective curve
@@ -54,8 +55,14 @@ Several clauses of the blueprint statements cannot be expressed and are dropped:
 * there is no twisting sheaf `𝒪_X(D)`, so "tensoring with `𝒪_X(dP)` is an isomorphism
   `P^0 ≅ P^d`" is stated as the bare existence of an isomorphism of `k`-schemes.
 * Mathlib has no tangent space of a scheme, so `AlgebraicGeometry.tangentSpaceAt` is defined
-  here through the functor of points, and carries no `k`-vector space structure; the
-  conclusion of `nonempty_tangentSpaceAt_equiv_H_one` is therefore a bijection of types.
+  here through the functor of points. It is given a `k`-vector space structure only at the
+  unit of a group scheme, where it is the kernel `AlgebraicGeometry.tangentSubgroup` of
+  `P(k[ε]) → P(k)` and the addition is the group law. The standard construction instead puts a
+  `k`-vector space structure on the tangent space at any `k`-point of any `k`-scheme, and then
+  identifies its addition with the group law at the unit; that comparison is not formalised.
+  Two facts are left `sorry`: the commutativity of `tangentSubgroup P` and the axiom
+  `(c + d) • v = c • v + d • v`. The instance `Module k (tangentSpaceAt P η[P])`, and with it
+  the statement of `nonempty_tangentSpaceAt_linearEquiv_H_one`, depends on them.
 * Mathlib has no `AbelianVariety` class, so "abelian variety of dimension `g`" is spelled out
   as `CategoryTheory.CommGrpObj` together with `AlgebraicGeometry.IsProper`,
   `AlgebraicGeometry.SmoothOfRelativeDimension g` and
@@ -78,6 +85,8 @@ Several clauses of the blueprint statements cannot be expressed and are dropped:
 - `AlgebraicGeometry.dualNumbersZero`: the `k`-point `ε ↦ 0` of `Spec k[ε]`.
 - `AlgebraicGeometry.tangentSpaceAt`: the tangent space of a `k`-scheme at a `k`-rational point,
   defined through the functor of points.
+- `AlgebraicGeometry.tangentSubgroup`: the tangent space of a group scheme at the unit, as the
+  kernel of `P(k[ε]) → P(k)`; it gives `tangentSpaceAt P η[P]` its `k`-vector space structure.
 - `AlgebraicGeometry.specAlgEquivOver`: a `k`-algebra automorphism of `K` as an automorphism of
   the `k`-scheme `Spec K`.
 
@@ -88,7 +97,7 @@ Several clauses of the blueprint statements cannot be expressed and are dropped:
   `AlgebraicGeometry.nonempty_commGrpObj_of_representableBy` and
   `AlgebraicGeometry.nonempty_iso_of_representableBy`: the degree decomposition of the Picard
   scheme (blueprint `sk-prop-picard-degree-decomposition`).
-- `AlgebraicGeometry.nonempty_tangentSpaceAt_equiv_H_one`: the tangent space of the Jacobian
+- `AlgebraicGeometry.nonempty_tangentSpaceAt_linearEquiv_H_one`: the tangent space of the Jacobian
   (blueprint `sk-prop-picard-jacobian-tangent`).
 - `AlgebraicGeometry.exists_jacobian`: the Jacobian is an abelian variety (blueprint
   `sk-prop-jacobian`).
@@ -236,13 +245,16 @@ noncomputable abbrev dualNumbersOver : Over (Spec (.of k)) :=
 /-- The `k`-rational point `ε ↦ 0` of `Spec k[ε]`, i.e. the closed immersion
 `Spec k ⟶ Spec k[ε]` induced by the `k`-algebra projection `k[ε] → k`. -/
 noncomputable def dualNumbersZero : 𝟙_ (Over (Spec (.of k))) ⟶ dualNumbersOver k :=
-  Over.homMk (Spec.map (CommRingCat.ofHom
-      (TrivSqZeroExt.fstHom k k k : DualNumber k →ₐ[k] k).toRingHom)) (by
-    change Spec.map _ ≫ Spec.map _ = 𝟙 (Spec (CommRingCat.of k))
-    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
-    convert Spec.map_id (CommRingCat.of k) using 2
-    ext x
-    rfl)
+  Over.homMk (Spec.map (CommRingCat.ofHom (TrivSqZeroExt.fstHom k k k : DualNumber k →+* k))) (by
+    simp only [Over.mk_hom, Over.tensorUnit_hom]
+    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, AlgHom.comp_algebraMap]
+    exact Spec.map_id _)
+
+@[simp]
+lemma dualNumbersZero_left :
+    (dualNumbersZero k).left =
+      Spec.map (CommRingCat.ofHom (TrivSqZeroExt.fstHom k k k : DualNumber k →+* k)) :=
+  rfl
 
 variable {k}
 
@@ -254,25 +266,138 @@ functor of points: it is the fibre over `e` of the restriction map
 `k`-rational points of `P` are morphisms from the terminal object `𝟙_ (Over (Spec k))` of the
 category of `k`-schemes, so that the unit `η[G]` of a group scheme `G` is directly a point in
 this sense.  Mathlib has no tangent space of a scheme, so this is a genuine definition rather
-than a reuse; it carries no `k`-vector space structure here. -/
+than a reuse. At the unit of a group scheme it is a `k`-vector space, its addition being the
+group law; see `AlgebraicGeometry.tangentSubgroup`. -/
 def tangentSpaceAt (P : Over (Spec (.of k))) (e : 𝟙_ (Over (Spec (.of k))) ⟶ P) : Type u :=
   {v : dualNumbersOver k ⟶ P // dualNumbersZero k ≫ v = e}
+
+variable (k) in
+/-- The `k`-endomorphism of `Spec k[ε]` induced by the `k`-algebra map `ε ↦ c ε` of the dual
+numbers. It defines the scalar action on tangent spaces. -/
+noncomputable def dualNumbersScale (c : k) : dualNumbersOver k ⟶ dualNumbersOver k :=
+  Over.homMk (Spec.map (CommRingCat.ofHom (DualNumber.scale c : DualNumber k →+* DualNumber k))) (by
+    simp only [Over.mk_hom]
+    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, AlgHom.comp_algebraMap])
+
+@[simp]
+lemma dualNumbersScale_left (c : k) :
+    (dualNumbersScale k c).left =
+      Spec.map (CommRingCat.ofHom (DualNumber.scale c : DualNumber k →+* DualNumber k)) :=
+  rfl
+
+@[reassoc (attr := simp)]
+lemma dualNumbersZero_comp_dualNumbersScale (c : k) :
+    dualNumbersZero k ≫ dualNumbersScale k c = dualNumbersZero k := by
+  ext : 1
+  rw [Over.comp_left, dualNumbersScale_left, dualNumbersZero_left, ← Spec.map_comp,
+    ← CommRingCat.ofHom_comp, ← AlgHom.comp_toRingHom, DualNumber.fstHom_comp_scale]
+
+@[simp]
+lemma dualNumbersScale_one : dualNumbersScale k 1 = 𝟙 _ := by
+  ext : 1
+  rw [dualNumbersScale_left, DualNumber.scale_one, Over.id_left]
+  exact Spec.map_id _
+
+@[reassoc]
+lemma dualNumbersScale_mul (c d : k) :
+    dualNumbersScale k (c * d) = dualNumbersScale k c ≫ dualNumbersScale k d := by
+  ext : 1
+  rw [Over.comp_left, dualNumbersScale_left, dualNumbersScale_left, dualNumbersScale_left,
+    ← Spec.map_comp, ← CommRingCat.ofHom_comp, ← AlgHom.comp_toRingHom, DualNumber.scale_mul]
+
+/-- Scaling by `0` factors through the point `ε ↦ 0`, since `ε ↦ 0` factors as
+`k[ε] → k → k[ε]`. -/
+lemma dualNumbersScale_zero :
+    dualNumbersScale k 0 = CartesianMonoidalCategory.toUnit _ ≫ dualNumbersZero k := by
+  ext : 1
+  rw [Over.comp_left, dualNumbersScale_left, dualNumbersZero_left, Over.toUnit_left]
+  simp only [Over.mk_hom]
+  rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, DualNumber.scale_zero, AlgHom.comp_toRingHom]
+  rfl
+
+section GrpObj
+
+open scoped MonObj
+
+variable (P : Over (Spec (.of k))) [GrpObj P]
+
+/-- The tangent space of a group scheme `P` at the unit, as the kernel of the restriction map
+`P(k[ε]) → P(k)` induced by `ε ↦ 0`, a subgroup of the group `P(k[ε])`. -/
+def tangentSubgroup : Subgroup (dualNumbersOver k ⟶ P) where
+  carrier := {v | dualNumbersZero k ≫ v = η[P]}
+  one_mem' := (MonObj.comp_one _).trans (MonObj.one_eq_one (M := P)).symm
+  mul_mem' {v w} (hv : _ = _) (hw : _ = _) := by
+    rw [Set.mem_ofPred_eq, MonObj.comp_mul, hv, hw, MonObj.one_eq_one, _root_.one_mul]
+  inv_mem' {v} (hv : _ = _) := by
+    rw [Set.mem_ofPred_eq, GrpObj.comp_inv, hv, MonObj.one_eq_one, _root_.inv_one]
+
+/-- The kernel of `P(k[ε]) → P(k)` is commutative, even when `P` is not. -/
+instance : IsMulCommutative (tangentSubgroup P) :=
+  sorry
+
+open scoped IsMulCommutative in
+/-- The tangent space of a group scheme at the unit is the commutative group
+`tangentSubgroup P`, written additively: `v + w` is the group law `⟨v, w⟩ ≫ μ[P]` of
+`P(k[ε])`. -/
+noncomputable instance : AddCommGroup (tangentSpaceAt P η[P]) :=
+  inferInstanceAs (AddCommGroup (Additive (tangentSubgroup P)))
+
+@[simp]
+lemma tangentSpaceAt.val_add (v w : tangentSpaceAt P η[P]) : (v + w).1 = v.1 * w.1 :=
+  rfl
+
+@[simp]
+lemma tangentSpaceAt.val_zero : (0 : tangentSpaceAt P η[P]).1 = 1 :=
+  rfl
+
+@[simp]
+lemma tangentSpaceAt.val_neg (v : tangentSpaceAt P η[P]) : (-v).1 = v.1⁻¹ :=
+  rfl
+
+/-- The scalar action on the tangent space of a group scheme at the unit: `c • v` is `v`
+precomposed with the endomorphism `ε ↦ c ε` of `Spec k[ε]`. -/
+noncomputable instance : SMul k (tangentSpaceAt P η[P]) where
+  smul c v := ⟨dualNumbersScale k c ≫ v.1, by
+    rw [dualNumbersZero_comp_dualNumbersScale_assoc, v.2]⟩
+
+@[simp]
+lemma tangentSpaceAt.val_smul (c : k) (v : tangentSpaceAt P η[P]) :
+    (c • v).1 = dualNumbersScale k c ≫ v.1 :=
+  rfl
+
+/-- The scalar action is additive in the scalar: `(c + d) • v = c • v + d • v`. -/
+theorem tangentSpaceAt.add_smul (c d : k) (v : tangentSpaceAt P η[P]) :
+    (c + d) • v = c • v + d • v :=
+  sorry
+
+/-- The tangent space of a group scheme `P` over `k` at the unit is a `k`-vector space: the
+addition is the group law of `P(k[ε])` and `c • v` is `v` precomposed with `ε ↦ c ε`. -/
+noncomputable instance : Module k (tangentSpaceAt P η[P]) where
+  one_smul v := Subtype.ext (by simp)
+  mul_smul c d v := Subtype.ext (by simp [dualNumbersScale_mul])
+  smul_zero c := Subtype.ext (MonObj.comp_one _)
+  smul_add c v w := Subtype.ext (MonObj.comp_mul _ _ _)
+  add_smul := tangentSpaceAt.add_smul P
+  zero_smul v := Subtype.ext (by
+    rw [tangentSpaceAt.val_smul, dualNumbersScale_zero, Category.assoc, v.2,
+      tangentSpaceAt.val_zero, MonObj.one_eq_one, MonObj.comp_one])
+
+end GrpObj
 
 variable {X : Scheme.{u}} [X.Over (Spec (.of k))]
 
 /-- **The tangent space of the Jacobian.** Let `X` be a smooth projective curve of genus `g`
 over a separably closed field `k` and let `J` be a group scheme over `k` representing the
 degree-zero part `Pic^0_{X/k}` of the Picard functor. Then the tangent space of `J` at the unit
-`η[J]` is in bijection with `H^1(X, 𝒪_X)`, which is a `k`-vector space of dimension `g` by the
+`η[J]` is isomorphic as a `k`-vector space to `H^1(X, 𝒪_X)`, which has dimension `g` by the
 definition of `AlgebraicGeometry.Scheme.genus`.
 
 (blueprint: `sk-prop-picard-jacobian-tangent`) -/
-theorem nonempty_tangentSpaceAt_equiv_H_one [IsSepClosed k]
+theorem nonempty_tangentSpaceAt_linearEquiv_H_one [IsSepClosed k]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] (J : Over (Spec (.of k))) [GrpObj J]
     (hJ : Nonempty ((picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy J)) :
-    Nonempty (tangentSpaceAt J η[J] ≃
-      Modules.H (X := X) (SheafOfModules.unit X.ringCatSheaf) 1) :=
+    Nonempty (tangentSpaceAt J η[J] ≃ₗ[k] (Modules.unit X).H 1) :=
   sorry
 
 end TangentSpace
@@ -298,7 +423,7 @@ over `k`, which represents the degree-zero part `Pic^0_{X/k}` of the Picard func
 set of `k`-rational points is in bijection with `Pic^0(X)`.
 
 The tangent space clause `T_e J ≅ H^1(X, 𝒪_X)` is
-`AlgebraicGeometry.nonempty_tangentSpaceAt_equiv_H_one` and is not repeated here; the
+`AlgebraicGeometry.nonempty_tangentSpaceAt_linearEquiv_H_one` and is not repeated here; the
 base-change clause `J(X_{k'}) = J(X) ×_k k'` for `k ⊆ k'` algebraically closed is omitted, the
 corresponding compatibility over a general base field being part of
 `AlgebraicGeometry.exists_jacobian_descent`.
