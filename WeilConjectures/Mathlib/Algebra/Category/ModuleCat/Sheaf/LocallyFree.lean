@@ -31,7 +31,8 @@ The rank-one case of `SheafOfModules.IsFiniteLocallyFreeOfRank` and
 
 ## Main results
 
-- `SheafOfModules.IsInvertible.of_iso`: invertibility only depends on the isomorphism class.
+- `SheafOfModules.IsInvertible.of_iso` and `SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso`:
+  invertibility and finite local freeness of rank `r` only depend on the isomorphism class.
 - `SheafOfModules.instIsInvertibleUnit`: the unit sheaf `𝒪` is invertible.
 -/
 
@@ -135,6 +136,11 @@ theorem IsFiniteLocallyFreeOfRank.isLocallyFree (M : SheafOfModules.{u} R)
     (r : ℕ) [h : M.IsFiniteLocallyFreeOfRank r] : M.IsLocallyFree :=
   have := h.exists_localGeneratorsData.choose_spec.choose
   ⟨_, this⟩
+
+theorem IsFiniteLocallyFreeOfRank.of_iso {M N : SheafOfModules.{u} R} (e : M ≅ N) {r : ℕ}
+    [h : M.IsFiniteLocallyFreeOfRank r] : N.IsFiniteLocallyFreeOfRank r := by
+  obtain ⟨q, hq, hr⟩ := h.exists_localGeneratorsData
+  exact ⟨q.ofIso e, inferInstance, hr⟩
 
 end
 
