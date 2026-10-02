@@ -52,7 +52,7 @@ equivalence of (D1) is not part of the statements below.
 - `AlgebraicGeometry.bijective_toDescentData_map`,
   `AlgebraicGeometry.exists_isQuasicoherent_toDescentData_iso`,
   `AlgebraicGeometry.isFinitePresentation_of_toDescentData_iso`,
-  `AlgebraicGeometry.isLocallyFree_of_toDescentData_iso` and
+  `AlgebraicGeometry.isFiniteLocallyFreeOfRank_of_toDescentData_iso` and
   `AlgebraicGeometry.isInvertible_of_toDescentData_iso`: (D1), fpqc descent for
   quasi-coherent modules.
 - `AlgebraicGeometry.isSheaf_fpqc_finiteLocallyFreeSubscheme`: (D2), the sheaf condition
@@ -112,15 +112,22 @@ theorem isFinitePresentation_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ 
     (M : T.Modules).IsFinitePresentation :=
   sorry
 
-/-- **Local freeness descends along an fpqc covering.**
+/-- **Finite local freeness of rank `r` descends along an fpqc covering.** A descent datum
+whose components are finite locally free of rank `r` comes from a module on `T` which is
+finite locally free of rank `r`.
+
+The rank is required to be finite: local freeness of infinite rank does not descend along
+fpqc coverings (Stacks, Tag 05VF), whereas a module of finite presentation which is locally
+free after a faithfully flat base change is locally free.
 
 (blueprint: `sk-thm-picard-descent`, part (D1)) -/
-theorem isLocallyFree_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+theorem isFiniteLocallyFreeOfRank_of_toDescentData_iso
+    (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
     (D : modulesPseudofunctor.DescentData g)
     (M : modulesPseudofunctor.obj (.mk (op T)))
-    (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D))
-    (hD : ∀ i, (D.obj i : (T' i).Modules).IsLocallyFree) :
-    (M : T.Modules).IsLocallyFree :=
+    (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D)) (r : ℕ)
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsFiniteLocallyFreeOfRank r) :
+    (M : T.Modules).IsFiniteLocallyFreeOfRank r :=
   sorry
 
 /-- **Invertibility descends along an fpqc covering**: a compatible family of invertible
