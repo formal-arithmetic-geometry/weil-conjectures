@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Group.Affine
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Affine
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
 
 /-!
@@ -39,7 +39,7 @@ algebraically closed field `k` the two agree: the `k`-points of `scheme n k` are
 
 universe u
 
-open CategoryTheory AlgebraicGeometry
+open CategoryTheory AlgebraicGeometry WithConv
 open scoped MonObj
 
 namespace Matrix.GeneralLinearGroup
@@ -65,5 +65,18 @@ groups. (blueprint: `sk-d-geometry`) -/
 noncomputable def homMulEquiv (R : Type u) [CommRing R] [Algebra k R] :
     ((Spec (.of R)).asOver (Spec (.of k)) ⟶ scheme n k) ≃* GL n R :=
   Spec.mapMulEquiv.symm.trans (algHomMulEquiv n k R)
+
+variable {n k} {R S : Type u} [CommRing R] [Algebra k R] [CommRing S] [Algebra k S]
+
+/-- The identification `homMulEquiv` of the points of `GL_n` with invertible matrices is natural
+in the algebra of values: precomposing with `Spec S ⟶ Spec R` maps the entries along `R → S`. -/
+theorem homMulEquiv_specMap_comp (φ : R →ₐ[k] S)
+    (f : (Spec (.of R)).asOver (Spec (.of k)) ⟶ scheme n k) :
+    homMulEquiv n k S ((Spec.map (CommRingCat.ofHom φ.toRingHom)).asOver (Spec (.of k)) ≫ f) =
+      map φ.toRingHom (homMulEquiv n k R f) := by
+  obtain ⟨χ, rfl⟩ := Spec.mapMulEquiv.surjective f
+  simp only [Spec.map_asOver_comp_mapMulEquiv, homMulEquiv, MulEquiv.trans_apply,
+    MulEquiv.symm_apply_apply]
+  rw [← toConv_ofConv χ, map_algHomMulEquiv, ofConv_toConv]
 
 end Matrix.GeneralLinearGroup

@@ -47,9 +47,11 @@ zero enters and which is not stated here.
 ## Blueprint
 
 `Matrix.polyDifferential`, `Matrix.tangentSpace`, `Matrix.tangentSpaceOfSet` and
-`Subgroup.lieAlgebra` implement `sk-d-tangent`; `Subgroup.lie_mem_tangentSpaceOfSet_one`
-implements part of `sk-i-restriction`; `Matrix.invariant_iff_lieAlgebra_invariant` and
-`Matrix.coe_lieAlgebra_centerOf_identityComponent` implement `sk-p-comparison`.
+`Subgroup.lieAlgebra` implement `sk-d-tangent`. The closure of the tangent space under the
+bracket and the group–Lie comparison theorems of this file are superseded, for closed subgroup
+schemes of `GL_n`, by `Matrix.GeneralLinearGroup.dualUnit_bracket_mem`,
+`Matrix.GeneralLinearGroup.invariant_iff_differential_invariant` and
+`Matrix.GeneralLinearGroup.lieAlgebra_center`, which carry the blueprint labels.
 -/
 
 @[expose] public section
@@ -95,8 +97,7 @@ namespace Subgroup
 
 variable (G : Subgroup (GL n k))
 
-/-- The tangent space at `1` of a subgroup of `GL n k` is closed under the commutator bracket.
-(blueprint: `sk-i-restriction`) -/
+/-- The tangent space at `1` of a subgroup of `GL n k` is closed under the commutator bracket. -/
 theorem lie_mem_tangentSpaceOfSet_one {X Y : Matrix n n k}
     (hX : X ∈ Matrix.tangentSpaceOfSet (Units.val '' (G : Set (GL n k))) 1)
     (hY : Y ∈ Matrix.tangentSpaceOfSet (Units.val '' (G : Set (GL n k))) 1) :
@@ -123,8 +124,7 @@ namespace Matrix
 variable [IsAlgClosed k] [CharZero k] (G : Subgroup (GL n k))
 
 /-- For a connected matrix algebraic group `G` a subspace of the defining representation is
-`G`-invariant if and only if it is invariant under `Lie G`.
-(blueprint: `sk-p-comparison`) -/
+`G`-invariant if and only if it is invariant under `Lie G`. -/
 theorem invariant_iff_lieAlgebra_invariant (hG : IsClosed (G : Set (GL n k)))
     (hGconn : IsPreconnected (G : Set (GL n k))) (U : Submodule k (n → k)) :
     (∀ g ∈ G, ∀ v ∈ U, (g : Matrix n n k) *ᵥ v ∈ U) ↔
@@ -132,8 +132,7 @@ theorem invariant_iff_lieAlgebra_invariant (hG : IsClosed (G : Set (GL n k)))
   sorry
 
 /-- For a connected matrix algebraic group `G` the Lie algebra of the identity component of the
-centre of `G` is the centre of `Lie G`.
-(blueprint: `sk-p-comparison`) -/
+centre of `G` is the centre of `Lie G`. -/
 theorem coe_lieAlgebra_centerOf_identityComponent (hG : IsClosed (G : Set (GL n k)))
     (hGconn : IsPreconnected (G : Set (GL n k))) :
     (G.centerOf.identityComponent.lieAlgebra : Set (Matrix n n k)) =
