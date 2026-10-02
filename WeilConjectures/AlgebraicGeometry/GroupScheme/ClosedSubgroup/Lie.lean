@@ -57,6 +57,8 @@ files using the declarations of this file must activate it as well:
 
 - `Matrix.GeneralLinearGroup.dualUnit_add`: differentiating the multiplication of `GL_n` at
   `(1, 1)` gives addition.
+- `Matrix.GeneralLinearGroup.lie_mem_lieAlgebra_of_commutator_le`: if the commutators of `V(I)`
+  lie in `V(J)`, then so do the brackets of their tangent vectors.
 - `Matrix.GeneralLinearGroup.lieAlgebra_identityComponent`,
   `Matrix.GeneralLinearGroup.finrank_lieAlgebra_eq_ringKrullDim`: the Lie algebra only sees the
   identity component and has the dimension of the group (Cartier's theorem).
@@ -82,11 +84,9 @@ namespace Matrix.GeneralLinearGroup
 
 attribute [local instance 100] LieRing.ofAssociativeRing
 
-variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u}
-
 section DualUnit
 
-variable [CommRing k]
+variable {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [CommRing k]
 
 /-- The invertible matrix `1 + εX` over the dual numbers `k[ε]`, with inverse `1 - εX`.
 (blueprint: `sk-d-tangent`) -/
@@ -238,7 +238,8 @@ end DualUnit
 
 section Lie
 
-variable [CommRing k] {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k]
+variable {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [CommRing k]
+  {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k]
 
 theorem dualUnit_add_mem {X Y : Matrix n n k} (hX : dualUnit X ∈ zeroLocus I (DualNumber k))
     (hY : dualUnit Y ∈ zeroLocus I (DualNumber k)) :
@@ -268,6 +269,21 @@ theorem dualUnit_bracket_mem {X Y : Matrix n n k}
   have h := mul_mem (mul_mem (mul_mem hX' hY') (inv_mem hX')) (inv_mem hY')
   rwa [map_dualUnit_commutator epsProd_eps, map_mem_zeroLocus_iff epsProd_injective] at h
 
+/-- If the commutators of `V(I)` lie in `V(J)` on points with values in `k[ε, δ]/(ε², δ²)`, then
+the bracket of two tangent vectors of `V(I)` is a tangent vector of `V(J)`, by the same commutator
+computation as in `dualUnit_bracket_mem`. -/
+theorem dualUnit_bracket_mem_of_commutator_le {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k]
+    (hIJ : ⁅zeroLocus I (DualNumber (DualNumber k)), zeroLocus I (DualNumber (DualNumber k))⁆ ≤
+      zeroLocus J (DualNumber (DualNumber k)))
+    {X Y : Matrix n n k} (hX : dualUnit X ∈ zeroLocus I (DualNumber k))
+    (hY : dualUnit Y ∈ zeroLocus I (DualNumber k)) :
+    dualUnit ⁅X, Y⁆ ∈ zeroLocus J (DualNumber k) := by
+  have h := hIJ (Subgroup.commutator_mem_commutator
+    (map_mem_zeroLocus (S := DualNumber (DualNumber k)) epsLeft hX)
+    (map_mem_zeroLocus (S := DualNumber (DualNumber k)) epsRight hY))
+  rwa [commutatorElement_def, map_dualUnit_commutator epsProd_eps,
+    map_mem_zeroLocus_iff epsProd_injective] at h
+
 variable (I) in
 /-- The Lie algebra `Lie(G) = T_1 G ⊆ gl_n` of the closed subgroup scheme `G = V(I)` of `GL_n`:
 the matrices `X` with `1 + εX ∈ G(k[ε])`, with the commutator bracket `⁅X, Y⁆ = XY - YX`.
@@ -287,6 +303,15 @@ theorem mem_lieAlgebra {X : Matrix n n k} :
 theorem lieAlgebra_anti {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k] (h : I ≤ J) :
     lieAlgebra J ≤ lieAlgebra I :=
   fun _ hX ↦ zeroLocus_anti h hX
+
+/-- If the commutators of `V(I)` lie in `V(J)` on points with values in `k[ε, δ]/(ε², δ²)`, then
+`⁅Lie V(I), Lie V(I)⁆ ⊆ Lie V(J)`. -/
+theorem lie_mem_lieAlgebra_of_commutator_le {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k]
+    (hIJ : ⁅zeroLocus I (DualNumber (DualNumber k)), zeroLocus I (DualNumber (DualNumber k))⁆ ≤
+      zeroLocus J (DualNumber (DualNumber k)))
+    {X Y : Matrix n n k} (hX : X ∈ lieAlgebra I) (hY : Y ∈ lieAlgebra I) :
+    ⁅X, Y⁆ ∈ lieAlgebra J :=
+  dualUnit_bracket_mem_of_commutator_le hIJ hX hY
 
 theorem lieAlgebra_bot : lieAlgebra (⊥ : Ideal (CoordinateRing n k)) = ⊤ := by
   ext X
@@ -319,6 +344,13 @@ theorem conj_mem_lieAlgebra {g : GL n k} (hg : g ∈ zeroLocus I k) {X : Matrix 
   have hg' := map_mem_zeroLocus (Algebra.ofId k (DualNumber k)) hg
   have hg'' := map_mem_zeroLocus (Algebra.ofId k (DualNumber k)) (inv_mem hg)
   exact mul_mem (mul_mem hg' hX) hg''
+
+end Lie
+
+section TangentGroup
+
+variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [CommRing k]
+  {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k]
 
 variable (I) in
 /-- The point `1 + εX` of `V(I)` with values in `k[ε]`, for `X ∈ lieAlgebra I`, as a tangent
@@ -384,11 +416,12 @@ theorem coe_tangentGroupMulEquiv_symm_apply (X : lieAlgebra I) :
       zeroLocusMulEquiv I (DualNumber k) ⟨dualUnit X, X.2⟩ :=
   rfl
 
-end Lie
+end TangentGroup
 
 section Cartier
 
-variable [Field k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
+variable {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [Field k]
+  (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
 
 theorem lieAlgebra_identityComponent_le [IsAlgClosed k] :
     lieAlgebra (identityComponent I) ≤ lieAlgebra I :=
@@ -427,7 +460,8 @@ end Cartier
 
 section RationalHom
 
-variable [CommRing k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
+variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [CommRing k]
+  (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
 
 /-- A rational representation of the closed subgroup scheme `V(I)` of `GL_n` on `k^m`: a
 homomorphism of group schemes `V(I) ⟶ GL_m`, given by the bialgebra homomorphism of coordinate
@@ -567,8 +601,8 @@ end RationalHom
 
 section Comparison
 
-variable [Field k] {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] {m : Type u} [Fintype m]
-  [DecidableEq m]
+variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [Field k]
+  {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] {m : Type u} [Fintype m] [DecidableEq m]
 
 /-- For a reduced `G` over an algebraically closed field, a subspace stable under `G(k)` is stable
 under the points of `G` with values in the dual numbers.

@@ -17,13 +17,6 @@ The general linear group `GL_n` over a commutative ring `k` is the affine group 
 group object in `Over (Spec k)`. Its points with values in a `k`-algebra `R` are the invertible
 `n × n` matrices over `R`, as groups.
 
-This is the scheme-theoretic model of `GL_n`. The point-set model of
-`WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.MatrixGroup` is the group `GL n k` of
-`k`-points with the Zariski topology `Matrix.GeneralLinearGroup.zariskiTopology`. Over an
-algebraically closed field `k` the two agree: the `k`-points of `scheme n k` are `GL n k` by
-`homMulEquiv`, and the regular functions of `Matrix.IsRegularOn` on `GL n k` are the elements of
-`CoordinateRing n k`. This comparison is not formalised here.
-
 ## Main definitions
 
 - `Matrix.GeneralLinearGroup.scheme`: `GL_n` as an affine group scheme of finite type over `k`.

@@ -48,9 +48,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
-public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.MatrixGroup
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy
-public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Tangent
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
