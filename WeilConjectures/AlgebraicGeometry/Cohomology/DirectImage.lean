@@ -71,6 +71,9 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
   `dim_{κ(t)} H^q(X_t, ℱ_t)`.
 - `AlgebraicGeometry.Scheme.Modules.IsFiniteFreeComplex`: a cochain complex of finite free
   modules concentrated in degrees `[0, d]`.
+- `AlgebraicGeometry.Scheme.Modules.perfectLocus` and `perfectLocusOfRank`: the loci `U_i` and
+  `U_{i,r}` of points where the fibre cohomology vanishes outside degree `i` (and has dimension
+  `r` in degree `i`).
 
 ## Main statements
 
@@ -92,9 +95,12 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
   `exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant`: semicontinuity of
   the fibre dimension, and Grauert's theorem over a reduced base.
 - `AlgebraicGeometry.Scheme.Modules.isOpen_setOf_hFiber_le`,
-  `isZero_higherDirectImage_restrict` and
-  `isFiniteLocallyFreeOfRank_higherDirectImage_restrict`: openness of the perfect locus, and
-  the shape of `R f_* ℱ` over it.
+  `isLocallyConstant_domRestrict_hFiber` and `isOpen_perfectLocusOfRank`: openness of the perfect
+  locus, local constancy of the fibre dimension on it, and openness of the rank-`r` locus.
+- `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isPullback`,
+  `isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback` and
+  `range_subset_perfectLocusOfRank_iff`: after any base change into the rank-`r` perfect locus
+  `R f_* ℱ` is finite locally free of rank `r` in degree `i`, and this characterises the locus.
 -/
 
 @[expose] public section
@@ -147,6 +153,17 @@ field. -/
 noncomputable def hFiber (ℱ : X.Modules) (f : X ⟶ T) (q : ℕ) (t : T) : ℕ :=
   letI := f.fiberOverSpecResidueField t
   ((Modules.pullback (f.fiberι t)).obj ℱ).finrankH (T.residueField t) q
+
+/-- The **perfect locus** `U_i` of an `𝒪_X`-module `ℱ` along `f : X ⟶ T` in degree `i`: the set
+of points `t` of `T` at which the fibre cohomology `H^q(X_t, ℱ_t)` vanishes for all `q ≠ i`. -/
+def perfectLocus (ℱ : X.Modules) (f : X ⟶ T) (i : ℕ) : Set T :=
+  {t | ∀ q ≠ i, ℱ.hFiber f q t = 0}
+
+/-- The **rank-`r` perfect locus** `U_{i,r}` of an `𝒪_X`-module `ℱ` along `f : X ⟶ T`: the set of
+points `t` of `T` at which the fibre cohomology `H^q(X_t, ℱ_t)` vanishes for all `q ≠ i` and has
+dimension `r` in degree `i`. -/
+def perfectLocusOfRank (ℱ : X.Modules) (f : X ⟶ T) (i r : ℕ) : Set T :=
+  {t ∈ ℱ.perfectLocus f i | ℱ.hFiber f i t = r}
 
 variable (f : X ⟶ T) (ℱ : X.Modules)
 
@@ -351,41 +368,115 @@ theorem exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant 
   sorry
 
 /-- **Openness of the perfect locus.** With `f : X ⟶ T` proper of finite presentation and `ℱ`
-an `𝒪_X`-module of finite presentation which is flat over `T`, the locus of points `t` of `T`
-at which the fibre cohomology `H^q(X_t, ℱ_t)` vanishes for all `q ≠ i` and has dimension at
+an `𝒪_X`-module of finite presentation which is flat over `T`, the locus `U_{i,≤r}` of points `t`
+of `T` at which the fibre cohomology `H^q(X_t, ℱ_t)` vanishes for all `q ≠ i` and has dimension at
 most `r` in degree `i` is open in `T`.
 
 (blueprint: `sk-thm-picard-perfect`) -/
 theorem isOpen_setOf_hFiber_le (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
-    IsOpen {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t ≤ r} :=
+    IsOpen {t ∈ ℱ.perfectLocus f i | ℱ.hFiber f i t ≤ r} :=
   sorry
 
-/-- **The higher direct images vanish off degree `i` over the perfect locus.** Over an open
-subscheme of `T` on which the fibre cohomology vanishes outside degree `i` and has dimension
-exactly `r` in degree `i`, the higher direct images `R^q f_* ℱ` vanish for `q ≠ i`.
+/-- **The fibre dimension is locally constant on the perfect locus.** On the perfect locus `U_i`
+of points `t` of `T` at which `H^q(X_t, ℱ_t)` vanishes for all `q ≠ i`, the fibre dimension
+`t ↦ dim_{κ(t)} H^i(X_t, ℱ_t)` is locally constant.
 
-Together with
-`AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_higherDirectImage_restrict` this is
-the concrete form of "`R f_* ℱ` is perfect of amplitude `[i, i]`" on that locus, there being no
-derived category of `X.Modules` available.
+Near a point of `U_i`, Nakayama's lemma applied to the bounded complex of finite free modules of
+`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage` makes it
+quasi-isomorphic to a single finite free module placed in degree `i`, whose rank is the fibre
+dimension.
 
 (blueprint: `sk-thm-picard-perfect`) -/
-theorem isZero_higherDirectImage_restrict (hℱ : ℱ.IsFlatOver f) (i r : ℕ) (U : T.Opens)
-    (hU : ↑U ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r})
-    (q : ℕ) (hq : q ≠ i) :
-    IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) :=
+theorem isLocallyConstant_domRestrict_hFiber (hℱ : ℱ.IsFlatOver f) (i : ℕ) :
+    IsLocallyConstant ((ℱ.perfectLocus f i).domRestrict (ℱ.hFiber f i)) :=
   sorry
 
-/-- **The `i`-th higher direct image is finite locally free over the perfect locus.** Over an
-open subscheme of `T` on which the fibre cohomology vanishes outside degree `i` and has
-dimension exactly `r` in degree `i`, the higher direct image `R^i f_* ℱ` is finite locally free
-of rank `r`.
+/-- **Openness of the rank-`r` perfect locus.** The locus `U_{i,r}` of points `t` of `T` at which
+the fibre cohomology `H^q(X_t, ℱ_t)` vanishes for all `q ≠ i` and has dimension exactly `r` in
+degree `i` is open in `T`.
+
+This follows from `AlgebraicGeometry.Scheme.Modules.isOpen_setOf_hFiber_le`, which makes `U_i`
+the union of the open sets `U_{i,≤r}` and hence open, together with
+`AlgebraicGeometry.Scheme.Modules.isLocallyConstant_domRestrict_hFiber`: `U_{i,r}` is the preimage
+of `{r}` under a locally constant function on `U_i`.
 
 (blueprint: `sk-thm-picard-perfect`) -/
-theorem isFiniteLocallyFreeOfRank_higherDirectImage_restrict (hℱ : ℱ.IsFlatOver f) (i r : ℕ)
-    (U : T.Opens)
-    (hU : ↑U ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r}) :
-    (((higherDirectImage f i).obj ℱ).restrict U.ι).IsFiniteLocallyFreeOfRank r :=
+theorem isOpen_perfectLocusOfRank (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
+    IsOpen (ℱ.perfectLocusOfRank f i r) :=
+  sorry
+
+/-- **Vanishing off degree `i` after base change to the perfect locus.** Let `g : T' ⟶ T` have
+image in the perfect locus `U_i` where the fibre cohomology vanishes outside degree `i`, and let
+`f' : X' ⟶ T'` be the base change of `f` along `g`, in the cartesian square `sq`
+```
+X' --g'--> X
+|          |
+f'         f
+v          v
+T' --g---> T
+```
+with `ℱ'` the pullback of `ℱ` to `X'`. Then the higher direct images `R^q f'_* ℱ'` vanish for
+`q ≠ i`.
+
+Taking for `g` the inclusion `U.ι` of an open `U ⊆ U_i` and for `sq` the square
+`(isPullback_morphismRestrict f U).flip`, and combining with
+`AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`, gives
+`R^q f_* ℱ|_U = 0` for `q ≠ i`.
+
+(blueprint: `sk-thm-picard-perfect`) -/
+theorem isZero_higherDirectImage_of_isPullback (hℱ : ℱ.IsFlatOver f) (i : ℕ)
+    {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
+    [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
+    (hg : Set.range g.base ⊆ ℱ.perfectLocus f i) (q : ℕ) (hq : q ≠ i) :
+    IsZero ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) :=
+  sorry
+
+/-- **Local freeness in degree `i` after base change to the perfect locus.** In the situation of
+`AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isPullback`, if the image of `g`
+lies in the rank-`r` perfect locus `U_{i,r}`, then the higher direct image `R^i f'_* ℱ'` is
+finite locally free of rank `r`.
+
+Taking for `g` the inclusion `U.ι` of an open `U ⊆ U_{i,r}` as in
+`AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isPullback` shows that
+`R^i f_* ℱ|_U` is finite locally free of rank `r`.
+
+(blueprint: `sk-thm-picard-perfect`) -/
+theorem isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback (hℱ : ℱ.IsFlatOver f)
+    (i r : ℕ) {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
+    [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
+    (hg : Set.range g.base ⊆ ℱ.perfectLocusOfRank f i r) :
+    ((higherDirectImage f' i).obj ((Modules.pullback g').obj ℱ)).IsFiniteLocallyFreeOfRank r :=
+  sorry
+
+/-- **Functorial characterisation of the rank-`r` perfect locus.** Let `g : T' ⟶ T`, and let
+`f' : X' ⟶ T'` be the base change of `f` along `g`, in the cartesian square `sq`
+```
+X' --g'--> X
+|          |
+f'         f
+v          v
+T' --g---> T
+```
+with `ℱ'` the pullback of `ℱ` to `X'`. Then the image of `g` lies in the rank-`r` perfect locus
+`U_{i,r}` if and only if `R f'_* ℱ'` is a finite locally free module of rank `r` placed in
+degree `i`: the higher direct images `R^q f'_* ℱ'` vanish for `q ≠ i` and `R^i f'_* ℱ'` is
+finite locally free of rank `r`.
+
+The forward direction is `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isPullback`
+together with
+`AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback`. For
+the converse, base change further to the fibre over a point `t'` of `T'`: the right-hand side then
+gives `H^q(X'_{t'}, ℱ'_{t'}) = 0` for `q ≠ i` and `dim H^i(X'_{t'}, ℱ'_{t'}) = r`, and these
+dimensions equal those over `g t'`, since cohomology commutes with the field extension
+`κ(g t') ⟶ κ(t')`.
+
+(blueprint: `sk-thm-picard-perfect`) -/
+theorem range_subset_perfectLocusOfRank_iff (hℱ : ℱ.IsFlatOver f) (i r : ℕ)
+    {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
+    [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g) :
+    Set.range g.base ⊆ ℱ.perfectLocusOfRank f i r ↔
+      (∀ q ≠ i, IsZero ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ))) ∧
+        ((higherDirectImage f' i).obj ((Modules.pullback g').obj ℱ)).IsFiniteLocallyFreeOfRank r :=
   sorry
 
 end Coherence
