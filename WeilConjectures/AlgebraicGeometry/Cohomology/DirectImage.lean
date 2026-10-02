@@ -5,10 +5,12 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.RingTheory.Flat.Basic
@@ -46,6 +48,12 @@ Mathlib has no `IsCoherent` class for sheaves of modules. Over a locally Noether
 coherence is equivalent to being quasi-coherent and of finite presentation, so that is what the
 statements below use; they should be restated with coherence once it exists.
 
+There is no derived category of `X.Modules` with a derived pushforward available, so "`R f_* ℱ`
+is perfect" is stated through an explicit bounded complex of finite free modules whose
+cohomology computes the higher direct images after every base change. Base change of `f` and `ℱ`
+along `g : T' ⟶ T` is spelled out through an explicit pullback square
+`IsPullback g' f' f g` and the pullback `(Modules.pullback g').obj ℱ`.
+
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Modules.higherDirectImage`: the `q`-th higher direct image
@@ -59,9 +67,13 @@ statements below use; they should be restated with coherence once it exists.
 
 - `AlgebraicGeometry.Scheme.Modules.nonempty_sections_higherDirectImage_iso_H`: over an affine
   base, the global sections of `R^q f_* ℱ` are `H^q(X, ℱ)`.
+- `AlgebraicGeometry.Scheme.Modules.exists_finiteFreeComplex_higherDirectImage` and
+  `exists_isZero_higherDirectImage_restrict`: over any base, `R f_* ℱ` is locally given by a
+  bounded complex of finite free modules compatible with base change, and so vanishes locally in
+  large degrees.
 - `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage` and
-  `isZero_higherDirectImage_of_le`: coherence of the higher direct images, and their vanishing
-  in large degrees.
+  `exists_isZero_higherDirectImage`: coherence of the higher direct images over a locally
+  Noetherian base, and their uniform vanishing in large degrees over a quasi-compact base.
 - `AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber` and
   `exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant`: semicontinuity of
   the fibre dimension, and Grauert's theorem over a reduced base.
@@ -69,6 +81,10 @@ statements below use; they should be restated with coherence once it exists.
   `isZero_higherDirectImage_restrict` and
   `isFiniteLocallyFreeOfRank_higherDirectImage_restrict`: openness of the perfect locus, and
   the shape of `R f_* ℱ` over it.
+- `AlgebraicGeometry.Scheme.Modules.isLocallyConstant_hFiber_restrict`,
+  `isOpen_setOf_hFiber_eq` and `range_subset_setOf_hFiber_eq_iff`: local constancy of the fibre
+  dimension on the perfect locus, openness of the rank-`r` locus, and its functorial
+  characterisation through base change.
 -/
 
 @[expose] public section
@@ -142,29 +158,79 @@ section Coherence
 variable [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
   [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation]
 
-/-- **Coherence of the higher direct images.** With `f : X ⟶ T` proper of finite presentation
-and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the higher direct image
-`R^q f_* ℱ` is a coherent `𝒪_T`-module for every `q`; coherence is spelled as quasi-coherence
-together with finite presentation.
+/-- **Local vanishing of the higher direct images in large degrees.** With `f : X ⟶ T` proper
+of finite presentation and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`,
+every point `t` of `T` has an open neighbourhood `U` and a bound `d` with `R^q f_* ℱ|_U = 0` for
+all `q > d`; one can take for `d` a bound on the dimensions of the fibres of `f` over `U`.
+
+The bound is only local on `T`: over `T = ⨆ₙ Spec k` with `X = ⨆ₙ ℙⁿ_k` and `ℱ = 𝒪(-n-1)` on
+the `n`-th piece, `R^n f_* ℱ ≠ 0` for every `n`.
 
 (blueprint: `sk-thm-picard-coherence`) -/
-theorem isFinitePresentation_higherDirectImage (hℱ : ℱ.IsFlatOver f) (q : ℕ) :
+theorem exists_isZero_higherDirectImage_restrict (hℱ : ℱ.IsFlatOver f) (t : T) :
+    ∃ (U : T.Opens) (d : ℕ), t ∈ U ∧
+      ∀ q > d, IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) :=
+  sorry
+
+/-- **Perfectness of the higher direct images, with base change.** With `f : X ⟶ T` proper of
+finite presentation and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, every
+point `t` of `T` has an open neighbourhood `U` over which `R f_* ℱ` is represented by a bounded
+complex `P` of finite free `𝒪_U`-modules whose formation commutes with every base change: the
+cohomology of `P` is `R^q f_* ℱ|_U`, and for every `g : T' ⟶ U` the cohomology of the pullback
+`g^* P` is `R^q f'_* ℱ'`, where `f' : X' ⟶ T'` is the base change of `f` along `g ≫ U.ι` and
+`ℱ'` is the pullback of `ℱ` to `X'`.
+
+Over a Noetherian affine base `P` is Mumford's complex, obtained from the Čech complex of a
+finite affine cover, which is a bounded complex of flat modules by the flatness of `ℱ`; the
+general case reduces to this by Noetherian approximation of `(f, ℱ)`.
+
+(blueprint: `sk-thm-picard-coherence`) -/
+theorem exists_finiteFreeComplex_higherDirectImage (hℱ : ℱ.IsFlatOver f) (t : T) :
+    ∃ (U : T.Opens) (P : CochainComplex U.toScheme.Modules ℤ) (d : ℕ), t ∈ U ∧
+      P.IsStrictlyGE 0 ∧ P.IsStrictlyLE d ∧
+      (∀ n, ∃ r : ℕ, Nonempty (P.X n ≅ SheafOfModules.free (ULift.{u} (Fin r)))) ∧
+      (∀ q : ℕ, Nonempty (P.homology q ≅ ((higherDirectImage f q).obj ℱ).restrict U.ι)) ∧
+      ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
+        [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
+        Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
+          (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) :=
+  sorry
+
+/-- **Coherence of the higher direct images over a locally Noetherian base.** With
+`f : X ⟶ T` proper of finite presentation, `T` locally Noetherian and `ℱ` an `𝒪_X`-module of
+finite presentation which is flat over `T`, the higher direct image `R^q f_* ℱ` is a coherent
+`𝒪_T`-module for every `q`; coherence is spelled as quasi-coherence together with finite
+presentation.
+
+The Noetherian hypothesis cannot be dropped: over `T = Spec (k ⊕ V)` with `V` an
+infinite-dimensional square-zero ideal, a suitable line bundle on `E × T`, for `E` an elliptic
+curve, has a direct image which is not of finite type.
+
+(blueprint: `sk-thm-picard-coherence`) -/
+theorem isFinitePresentation_higherDirectImage [IsLocallyNoetherian T] (hℱ : ℱ.IsFlatOver f)
+    (q : ℕ) :
     ((higherDirectImage f q).obj ℱ).IsQuasicoherent ∧
       ((higherDirectImage f q).obj ℱ).IsFinitePresentation :=
   sorry
 
-/-- **Vanishing of the higher direct images in large degrees.** In the situation of
-`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`, `R^q f_* ℱ = 0` for
-all large `q`.
+/-- **Vanishing of the higher direct images in large degrees over a quasi-compact base.** In the
+situation of `AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_restrict`, if `T`
+is quasi-compact then `R^q f_* ℱ = 0` for all large `q`: finitely many of the neighbourhoods
+given there cover `T`.
 
 (blueprint: `sk-thm-picard-coherence`) -/
-theorem exists_isZero_higherDirectImage (hℱ : ℱ.IsFlatOver f) :
+theorem exists_isZero_higherDirectImage [CompactSpace T] (hℱ : ℱ.IsFlatOver f) :
     ∃ N, ∀ q ≥ N, IsZero ((higherDirectImage f q).obj ℱ) :=
   sorry
 
 /-- **Semicontinuity of the fibre dimension.** With `f : X ⟶ T` proper of finite presentation
 and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the fibre dimension
 `t ↦ dim_{κ(t)} H^q(X_t, ℱ_t)` is upper semicontinuous on `T`.
+
+Locally on `T` the fibre dimension is `dim_{κ(t)} H^q(P ⊗ κ(t))` for the bounded complex `P` of
+finite free modules of
+`AlgebraicGeometry.Scheme.Modules.exists_finiteFreeComplex_higherDirectImage`, and the dimension
+of the cohomology of a complex of finite free modules is upper semicontinuous in the point.
 
 (blueprint: `sk-thm-picard-semicon`) -/
 theorem upperSemicontinuous_hFiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) :
@@ -223,6 +289,71 @@ theorem isFiniteLocallyFreeOfRank_higherDirectImage_restrict (hℱ : ℱ.IsFlatO
     (U : T.Opens)
     (hU : ↑U ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r}) :
     (((higherDirectImage f i).obj ℱ).restrict U.ι).IsFiniteLocallyFreeOfRank r :=
+  sorry
+
+/-- **The fibre dimension is locally constant on the perfect locus.** On the locus
+`U_{i,≤r}` of points `t` of `T` at which `H^q(X_t, ℱ_t)` vanishes for all `q ≠ i` and has
+dimension at most `r` in degree `i`, the fibre dimension `t ↦ dim_{κ(t)} H^i(X_t, ℱ_t)` is
+locally constant.
+
+(blueprint: `sk-thm-picard-perfect`) -/
+theorem isLocallyConstant_hFiber_restrict (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
+    IsLocallyConstant fun t : {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t ≤ r} ↦
+      ℱ.hFiber f i t :=
+  sorry
+
+/-- **Openness of the rank-`r` perfect locus.** The locus `U_{i,r}` of points `t` of `T` at which
+the fibre cohomology `H^q(X_t, ℱ_t)` vanishes for all `q ≠ i` and has dimension exactly `r` in
+degree `i` is open in `T`.
+
+(blueprint: `sk-thm-picard-perfect`) -/
+theorem isOpen_setOf_hFiber_eq (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
+    IsOpen {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r} :=
+  sorry
+
+/-- **Vanishing off degree `i` after base change to the perfect locus.** Let `U` be an open
+subscheme of `T` contained in the locus `U_{i,r}` where the fibre cohomology vanishes outside
+degree `i` and has dimension `r` in degree `i`. For every `g : T' ⟶ U`, with `f' : X' ⟶ T'` the
+base change of `f` along `g ≫ U.ι` and `ℱ'` the pullback of `ℱ` to `X'`, the higher direct
+images `R^q f'_* ℱ'` vanish for `q ≠ i`.
+
+(blueprint: `sk-thm-picard-perfect`) -/
+theorem isZero_higherDirectImage_of_isPullback (hℱ : ℱ.IsFlatOver f) (i r : ℕ) (U : T.Opens)
+    (hU : ↑U ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r})
+    {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
+    [HasInjectiveResolutions X'.Modules] (h : IsPullback g' f' f (g ≫ U.ι)) (q : ℕ)
+    (hq : q ≠ i) :
+    IsZero ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) :=
+  sorry
+
+/-- **Local freeness in degree `i` after base change to the perfect locus.** In the situation of
+`AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isPullback`, the higher direct
+image `R^i f'_* ℱ'` is finite locally free of rank `r`: the base-change maps are isomorphisms
+over `U_{i,r}`.
+
+(blueprint: `sk-thm-picard-perfect`) -/
+theorem isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback (hℱ : ℱ.IsFlatOver f)
+    (i r : ℕ) (U : T.Opens)
+    (hU : ↑U ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r})
+    {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
+    [HasInjectiveResolutions X'.Modules] (h : IsPullback g' f' f (g ≫ U.ι)) :
+    ((higherDirectImage f' i).obj ((Modules.pullback g').obj ℱ)).IsFiniteLocallyFreeOfRank r :=
+  sorry
+
+/-- **Functorial characterisation of the rank-`r` perfect locus.** A morphism `g : T' ⟶ T`
+factors through the locus `U_{i,r}` where the fibre cohomology vanishes outside degree `i` and
+has dimension `r` in degree `i` if and only if, with `f' : X' ⟶ T'` the base change of `f` along
+`g` and `ℱ'` the pullback of `ℱ` to `X'`, the higher direct images `R^q f'_* ℱ'` vanish for
+`q ≠ i` and `R^i f'_* ℱ'` is finite locally free of rank `r`; that is, `R f'_* ℱ'` is a finite
+locally free module of rank `r` placed in degree `i`.
+
+(blueprint: `sk-thm-picard-perfect`) -/
+theorem range_subset_setOf_hFiber_eq_iff (hℱ : ℱ.IsFlatOver f) (i r : ℕ)
+    {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
+    [HasInjectiveResolutions X'.Modules] (h : IsPullback g' f' f g) :
+    Set.range g.base ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r} ↔
+      (∀ q, q ≠ i → IsZero ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ))) ∧
+        ((higherDirectImage f' i).obj ((Modules.pullback g').obj ℱ)).IsFiniteLocallyFreeOfRank r :=
   sorry
 
 end Coherence
