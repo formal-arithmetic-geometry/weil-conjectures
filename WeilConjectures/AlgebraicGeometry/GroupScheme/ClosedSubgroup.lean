@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.GroupTheory.Commutator.Basic
 public import Mathlib.RingTheory.Jacobson.Ring
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
@@ -44,12 +45,16 @@ of a closed subgroup are described by ideals of the coordinate ring of `GL_n` in
   satisfying the equations in `I`.
 - `Matrix.GeneralLinearGroup.vanishingIdeal_zeroLocus_eq_radical`: the Nullstellensatz for `GL_n`
   over an algebraically closed field.
+- `Matrix.GeneralLinearGroup.zeroLocus_vanishingIdeal_le_normalizer`,
+  `Matrix.GeneralLinearGroup.commutator_zeroLocus_vanishingIdeal_le`: Zariski closure preserves
+  normalizing and commutator inclusions between subgroups of `GL n k`.
 
 ## Blueprint
 
 - `sk-d-geometry`: matrix algebraic groups as reduced closed subgroups of `GL(V)`, their identity
   component and centre.
-- `sk-i-restriction`: the Zariski closure of a subgroup of `GL n k` is an algebraic group.
+- `sk-i-restriction`: the Zariski closure of a subgroup of `GL n k` is an algebraic group, and
+  closure preserves normalizing and commutator inclusions.
 - `sk-p-geometry`: the identity component is a closed subgroup scheme.
 -/
 
@@ -207,6 +212,34 @@ theorem zeroLocus_vanishingIdeal_le {Γ : Subgroup (GL n k)} (J : Set (Coordinat
     (hJ : ∀ g : GL n k, (∀ a ∈ J, evalAlgHom g a = 0) → g ∈ Γ) :
     zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k ≤ Γ :=
   fun g hg ↦ hJ g fun a ha ↦ hg a (mem_vanishingIdeal.2 fun h hh ↦ hΓ h hh a ha)
+
+/-- If a subgroup `Γ` of `GL n k` normalizes a subgroup `Δ`, then the Zariski closure of `Γ`
+normalizes the Zariski closure of `Δ`, on `R`-points for every `k`-algebra `R`.
+
+Proof sketch (not formalized): over a field, `Γ × Δ` is schematically dense in the product of the
+closures: if `∑ aᵢ ⊗ bᵢ` vanishes on `Γ × Δ` with the `bᵢ` linearly independent modulo
+`vanishingIdeal Δ`, then every `aᵢ` vanishes on `Γ`. Apply this to the pullback of an equation of
+`Δ` along `(g, h) ↦ g h g⁻¹`. (blueprint: `sk-i-restriction`) -/
+theorem zeroLocus_vanishingIdeal_le_normalizer {Γ Δ : Subgroup (GL n k)}
+    (hΓ : Γ ≤ Subgroup.normalizer (Δ : Set (GL n k)))
+    (R : Type*) [CommRing R] [Algebra k R] :
+    zeroLocus (vanishingIdeal (Γ : Set (GL n k))) R ≤
+      Subgroup.normalizer (zeroLocus (vanishingIdeal (Δ : Set (GL n k))) R : Set (GL n R)) := by
+  sorry
+
+/-- If the commutators of a subgroup `Γ` of `GL n k` lie in a subgroup `Δ`, then the commutators of
+the Zariski closure of `Γ` lie in the Zariski closure of `Δ`, on `R`-points for every `k`-algebra
+`R`.
+
+Proof sketch (not formalized): the schematic density of `Γ × Γ` in the product of two copies of the
+closure of `Γ`, as in `zeroLocus_vanishingIdeal_le_normalizer`, applied to the pullback of an
+equation of `Δ` along `(g, h) ↦ g h g⁻¹ h⁻¹`. (blueprint: `sk-i-restriction`) -/
+theorem commutator_zeroLocus_vanishingIdeal_le {Γ Δ : Subgroup (GL n k)} (hΓ : ⁅Γ, Γ⁆ ≤ Δ)
+    (R : Type*) [CommRing R] [Algebra k R] :
+    ⁅zeroLocus (vanishingIdeal (Γ : Set (GL n k))) R,
+        zeroLocus (vanishingIdeal (Γ : Set (GL n k))) R⁆ ≤
+      zeroLocus (vanishingIdeal (Δ : Set (GL n k))) R := by
+  sorry
 
 /-- Over an algebraically closed field, every maximal ideal of the coordinate ring of `GL_n` is the
 ideal of a point. -/
