@@ -11,8 +11,9 @@ public import Mathlib.Data.Matrix.Mul
 /-!
 # Dual numbers: scaling and matrices
 
-The `R`-algebra endomorphism `ε ↦ cε` of the dual numbers `R[ε]`, and the arithmetic of matrices
-over `R[ε]` whose reduction modulo `ε` is the identity: their `ε`-parts add under multiplication.
+The `R`-algebra endomorphism `ε ↦ cε` of the dual numbers `R[ε]`, which is multiplicative in `c`
+and reduces to the identity modulo `ε`, and the arithmetic of matrices over `R[ε]` whose
+reduction modulo `ε` is the identity: their `ε`-parts add under multiplication.
 -/
 
 @[expose] public section
@@ -32,8 +33,27 @@ theorem scale_inr (c x : R) : scale c (inr x) = inr (c * x) :=
   TrivSqZeroExt.map_inr _ _
 
 @[simp]
+theorem fst_scale (c : R) (x : R[ε]) : (scale c x).fst = x.fst :=
+  TrivSqZeroExt.fst_map _ _
+
+@[simp]
 theorem snd_scale (c : R) (x : R[ε]) : (scale c x).snd = c * x.snd :=
   TrivSqZeroExt.snd_map _ _
+
+@[simp]
+theorem scale_one : scale (1 : R) = AlgHom.id R R[ε] := by
+  ext <;> simp
+
+theorem scale_mul (c d : R) : scale (c * d) = (scale c).comp (scale d) := by
+  ext <;> simp
+
+/-- Scaling by zero is the reduction `R[ε] → R` modulo `ε`, followed by the inclusion. -/
+theorem scale_zero : scale (0 : R) = (Algebra.ofId R R[ε]).comp (fstHom R R R) := by
+  ext <;> simp
+
+@[simp]
+theorem fstHom_comp_scale (c : R) : (fstHom R R R).comp (scale c) = fstHom R R R := by
+  ext; simp
 
 end DualNumber
 

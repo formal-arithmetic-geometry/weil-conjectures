@@ -47,11 +47,17 @@ quasi-coherent ones, which is not an instance of that class.
 Flatness of a sheaf of modules has no name in Mathlib yet, so its preservation under the
 equivalence of (D1) is not part of the statements below.
 
+Local freeness is only claimed to descend for modules of finite presentation: a module which is
+locally free of infinite rank after a faithfully flat base change need not be locally free. A
+module of finite presentation which becomes locally free after such a base change is flat and
+of finite presentation, hence finite locally free.
+
 ## Main statements
 
 - `AlgebraicGeometry.bijective_toDescentData_map`,
   `AlgebraicGeometry.exists_isQuasicoherent_toDescentData_iso`,
   `AlgebraicGeometry.isFinitePresentation_of_toDescentData_iso`,
+  `AlgebraicGeometry.isLocallyFree_of_toDescentData_iso`,
   `AlgebraicGeometry.isFiniteLocallyFreeOfRank_of_toDescentData_iso` and
   `AlgebraicGeometry.isInvertible_of_toDescentData_iso`: (D1), fpqc descent for
   quasi-coherent modules.
@@ -112,13 +118,26 @@ theorem isFinitePresentation_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ 
     (M : T.Modules).IsFinitePresentation :=
   sorry
 
-/-- **Finite local freeness of rank `r` descends along an fpqc covering.** A descent datum
-whose components are finite locally free of rank `r` comes from a module on `T` which is
-finite locally free of rank `r`.
+/-- **Finite local freeness descends along an fpqc covering.** A descent datum whose
+components are of finite presentation and locally free, i.e. finite locally free with a rank
+allowed to vary locally, comes from a module on `T` which is locally free; it is of finite
+presentation by `isFinitePresentation_of_toDescentData_iso`.
 
-The rank is required to be finite: local freeness of infinite rank does not descend along
-fpqc coverings (Stacks, Tag 05VF), whereas a module of finite presentation which is locally
-free after a faithfully flat base change is locally free.
+(blueprint: `sk-thm-picard-descent`, part (D1)) -/
+theorem isLocallyFree_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (D : modulesPseudofunctor.DescentData g)
+    (M : modulesPseudofunctor.obj (.mk (op T)))
+    (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D))
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsFinitePresentation ∧
+      (D.obj i : (T' i).Modules).IsLocallyFree) :
+    (M : T.Modules).IsLocallyFree :=
+  sorry
+
+/-- **Finite local freeness of a fixed rank descends along an fpqc covering.** A descent datum
+whose components are finite locally free of rank `r` comes from a module on `T` which is
+finite locally free of rank `r`. This refines `isLocallyFree_of_toDescentData_iso`: the rank
+of a finite locally free module is locally constant, and can be read off after a faithfully
+flat base change.
 
 (blueprint: `sk-thm-picard-descent`, part (D1)) -/
 theorem isFiniteLocallyFreeOfRank_of_toDescentData_iso

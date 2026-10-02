@@ -156,9 +156,6 @@ classified by a `k`-morphism `h : T ⟶ H` is the pullback of `D` along the indu
          T ─────── h ─────────▶ H ─── p ──▶ Spec k
 ```
 
-The separatedness hypothesis of `isRepresentable_hilbertPresheaf` is part of
-`IsProper f`.
-
 (blueprint: `sk-thm-picard-hilb-curves`, parts (1) and (3)) -/
 theorem hilbertPresheaf_curve_representable [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] (d : ℕ) :
@@ -180,9 +177,6 @@ identity on underlying ideal sheaves, which is the naturality in `k'`.
 `Scheme.Hom.finrank` is junk-valued away from the finite flat case, so the right-hand side
 carries the finiteness and flatness of the projection explicitly.
 
-The separatedness hypothesis of `isRepresentable_hilbertPresheaf` is part of
-`IsProper f`.
-
 (blueprint: `sk-thm-picard-hilb-curves`, part (2)) -/
 theorem hilbertPresheaf_curve_points [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] (d : ℕ) (k' : Type u) [Field k'] [Algebra k k']
@@ -203,9 +197,6 @@ finite presentation of degree `(d₁ + d₂).choose d₁`.
 
 The last clause is what identifies `α`: without it any finite flat morphism of the right degree
 would do, and the descent argument of the blueprint needs to know which morphism it is.
-
-The separatedness hypothesis of `isRepresentable_hilbertPresheaf` is part of
-`IsProper f`.
 
 (blueprint: `sk-thm-picard-hilb-curves`, part (3)) -/
 theorem hilbertPresheaf_curve_add [SmoothOfRelativeDimension 1 f] [IsProper f]

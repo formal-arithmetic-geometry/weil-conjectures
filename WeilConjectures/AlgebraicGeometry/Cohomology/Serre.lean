@@ -46,9 +46,8 @@ agrees with coherence on a noetherian scheme such as a closed subscheme of `ℙ�
 ## Main statements
 
 - `AlgebraicGeometry.ProjectiveSpace.nonempty_H_zero_twist_equiv`,
-  `subsingleton_H_twist_of_ne`, `subsingleton_H_twist_top`,
-  `nonempty_H_twist_top_equiv_dual` and `nonempty_H_zero_twist_equiv_of_card_eq_one` — the
-  cohomology of `𝒪(m)` on `ℙᵈ_k`.
+  `subsingleton_H_twist_of_ne`, `subsingleton_H_twist_top` and
+  `nonempty_H_twist_top_equiv_dual` — the cohomology of `𝒪(m)` on `ℙᵈ_k`.
 - `AlgebraicGeometry.Scheme.Modules.exists_subsingleton_H_tensor_twist` — Serre's theorem B.
 - `AlgebraicGeometry.Scheme.Modules.exists_generatingSections_tensor_twist` — Serre's
   theorem A.
@@ -90,35 +89,24 @@ theorem ProjectiveSpace.subsingleton_H_twist_of_ne (k : Type u) [Field k] [Finit
   sorry
 
 /-- **Vanishing of the top cohomology of the twisting sheaves.**
-`H^d(ℙᵈ_k, 𝒪(m)) = 0` for `m ≥ -d`, when `d ≥ 1`. For `d = 0` the statement is false, since
-`H⁰(Spec k, 𝒪) = k`; that case is `nonempty_H_zero_twist_equiv_of_card_eq_one`.
+`H^d(ℙᵈ_k, 𝒪(m)) = 0` for `m ≥ -d`, when `d ≠ 0`. For `d = 0` the statement is false, since
+`H⁰(Spec k, 𝒪) = k`; that case is `nonempty_H_zero_twist_equiv` with `d = 0`.
 
 (blueprint: `sk-thm-picard-pn`) -/
 theorem ProjectiveSpace.subsingleton_H_twist_top (k : Type u) [Field k] [Finite n] (d : ℕ)
-    (hd : 1 ≤ d) (hn : Nat.card n = d + 1) (m : ℤ) (hm : -(d : ℤ) ≤ m) :
+    (hd : d ≠ 0) (hn : Nat.card n = d + 1) (m : ℤ) (hm : -(d : ℤ) ≤ m) :
     Subsingleton ((ProjectiveSpace.twist n (Spec (.of k)) m).H d) :=
   sorry
 
 /-- **The top cohomology of the twisting sheaves.**
 `H^d(ℙᵈ_k, 𝒪(m)) = S^{-m-d-1}(V)^∨` for `m ≤ -d-1`. Taking `m = -d-1` exhibits `𝒪(-d-1)` as
-the dualising sheaf of `ℙᵈ_k`. This needs `d ≥ 1`; the case `d = 0` is
-`nonempty_H_zero_twist_equiv_of_card_eq_one`.
+the dualising sheaf of `ℙᵈ_k`.
 
 (blueprint: `sk-thm-picard-pn`) -/
 theorem ProjectiveSpace.nonempty_H_twist_top_equiv_dual (k : Type u) [Field k] [Finite n]
-    (d : ℕ) (hd : 1 ≤ d) (hn : Nat.card n = d + 1) (m : ℤ) (hm : m ≤ -(d : ℤ) - 1) :
+    (d : ℕ) (hn : Nat.card n = d + 1) (m : ℤ) (hm : m ≤ -(d : ℤ) - 1) :
     Nonempty ((ProjectiveSpace.twist n (Spec (.of k)) m).H d ≃ₗ[k]
       Module.Dual k (MvPolynomial.homogeneousSubmodule n k (-m - d - 1).toNat)) :=
-  sorry
-
-/-- **The cohomology of the twisting sheaves on `ℙ⁰_k`.** For `d = 0`, i.e. a single homogeneous
-coordinate, `ℙ⁰_k = Spec k` and every twist `𝒪(m)` is trivial, so `H⁰(ℙ⁰_k, 𝒪(m)) = k` for every
-`m : ℤ`. The higher cohomology vanishes by `subsingleton_H_twist_of_ne`.
-
-(blueprint: `sk-thm-picard-pn`) -/
-theorem ProjectiveSpace.nonempty_H_zero_twist_equiv_of_card_eq_one (k : Type u) [Field k]
-    [Finite n] (hn : Nat.card n = 1) (m : ℤ) :
-    Nonempty ((ProjectiveSpace.twist n (Spec (.of k)) m).H 0 ≃ₗ[k] k) :=
   sorry
 
 end Pn
