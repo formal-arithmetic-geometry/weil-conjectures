@@ -26,7 +26,8 @@ a short exact sequence of étale sheaves
 the third map sending a rational function to its divisor. The points of `X⁽¹⁾` are the points
 of coheight one, and `i_{x*} ℤ` is the pushforward of the constant sheaf `ℤ` along
 `Spec κ(x) ⟶ X`. Taking the long exact cohomology sequence and using
-`H¹(X, i_{x*} ℤ) = 0` gives Grothendieck's residue injection
+`H¹(X, i_{x*} ℤ) = 0`, together with the vanishing of `R¹i_* 𝔾ₘ` for the Leray spectral
+sequence of `i`, gives Grothendieck's residue injection
 
 ```
    Spec k(X) ──── i ────▶ X            H²(X_ét, 𝔾ₘ)
@@ -50,7 +51,10 @@ whose target is `H²(Spec k(X)_ét, 𝔾ₘ) = Br(k(X))` by
 - `AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField`: the
   pullback of `𝔾ₘ` along the generic point is `𝔾ₘ`. The proof is `sorry`.
 - `AlgebraicGeometry.Scheme.exists_shortExact_divisorSequence`: the divisor sequence is short
-  exact.
+  exact. The proof is `sorry`.
+- `AlgebraicGeometry.Scheme.subsingleton_H_one_pointConstantInt`: `H¹(X, i_{x*} ℤ) = 0`.
+- `AlgebraicGeometry.Scheme.epi_lowerStar_map_cokernelπ_upperStar_gmSheaf`: `R¹i_* 𝔾ₘ = 0`
+  along the generic point. The proof is `sorry`.
 - `AlgebraicGeometry.Scheme.injective_cohomologyMap_gmSheaf_two`: the map
   `Br(X) = H²(X, 𝔾ₘ) → H²(Spec k(X), 𝔾ₘ) = Br(k(X))` along the generic point is injective.
 
@@ -144,6 +148,7 @@ theorem exists_shortExact_divisorSequence [IsLocallyNoetherian X] [IsRegular X]
       (ShortComplex.mk X.toGenericGm d w).ShortExact :=
   sorry
 
+omit [IsIntegral X] in
 /-- **`H¹` of a point sheaf vanishes.** For a point `x` of `X`, `H¹(X, i_{x*} ℤ) = 0`: the edge
 map of the Leray spectral sequence of `i_x : Spec κ(x) ⟶ X` embeds `H¹(X, i_{x*} ℤ)` into
 `H¹(Spec κ(x), ℤ) = Hom_cont(Gal(κ(x)ˢᵉᵖ/κ(x)), ℤ) = 0`. This is Step 2 of the proof of

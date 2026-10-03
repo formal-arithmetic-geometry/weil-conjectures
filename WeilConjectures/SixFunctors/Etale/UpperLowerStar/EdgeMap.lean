@@ -63,7 +63,8 @@ theorem injective_edgeMap_one (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u +
       Sheaf.H.map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).counit.app G) 1
         (cohomologyMap f _ 1 x) := by
   have : EnoughInjectives (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) := inferInstance
-  have := Adjunction.mapExtCounit_one_injective (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)
+  have := Adjunction.mapExtCounit_one_injective
+    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)
     ((constantSheaf _ AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) G
   intro x y h
   dsimp only at h
@@ -81,7 +82,8 @@ theorem injective_edgeMap_two {G I : Sheaf X.smallEtaleTopology AddCommGrpCat.{u
       Sheaf.H.map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).counit.app G) 2
         (cohomologyMap f _ 2 x) := by
   have : EnoughInjectives (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) := inferInstance
-  have := Adjunction.mapExtCounit_two_injective (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)
+  have := Adjunction.mapExtCounit_two_injective
+    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)
     ((constantSheaf _ AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) ι hι
   intro x y h
   dsimp only at h

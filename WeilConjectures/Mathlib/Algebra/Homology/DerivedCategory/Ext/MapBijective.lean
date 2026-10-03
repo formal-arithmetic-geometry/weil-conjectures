@@ -93,7 +93,8 @@ theorem mapExtCounit_one_injective (A : C) (G : D) :
     inferInstance
   let S := ShortComplex.mk (R.map I.f) (cokernel.π (R.map I.f)) (cokernel.condition _)
   have hS : S.ShortExact := { exact := ShortComplex.exact_cokernel _ }
-  let c : S.X₃ ⟶ R.obj T.X₃ := cokernel.desc _ (R.map T.g) (by rw [← R.map_comp, show I.f ≫ T.g = 0 from T.zero, R.map_zero])
+  let c : S.X₃ ⟶ R.obj T.X₃ := cokernel.desc _ (R.map T.g)
+    (by rw [← R.map_comp, show I.f ≫ T.g = 0 from T.zero, R.map_zero])
   have hc : Mono c := hTR.mono_cokernelDesc
   have hgc : S.g ≫ c = R.map T.g := cokernel.π_desc _ _ _
   let φ : S.map L ⟶ T :=
