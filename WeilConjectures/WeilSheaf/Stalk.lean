@@ -79,9 +79,10 @@ form in which the coefficients `AlgebraicGeometry.WeilCoefficients` take stalks.
 (`AlgebraicGeometry.WeilCoefficients.toModuleCat`).
 
 With the present discrete coefficients every Weil sheaf is zero
-(`AlgebraicGeometry.WeilSheaf.isZero_carrier`, see `WeilConjectures.WeilSheaf.Category`). This
-is how the stalks and the global sections are shown to be finite-dimensional, and it is also
-how the comparison statements of this file are proved: they hold because both sides vanish.
+(`AlgebraicGeometry.WeilSheaf.isZero_carrier` and `AlgebraicGeometry.WeilSheaf.isZero`, see
+`WeilConjectures.WeilSheaf.Category`). This is how the stalks and the global sections are shown
+to be finite-dimensional, and it is also how the comparison statements of this file are proved:
+they hold because both sides vanish.
 They record the properties that the definitions must keep once Weil sheaves are redefined with
 pro-étale coefficients.
 -/
@@ -106,6 +107,14 @@ set_option linter.unusedSectionVars false in
 theorem isZero_carrier : IsZero F.obj.carrier :=
   have : Scheme.IsConstructibleSheaf F.obj.carrier := F.property
   Scheme.IsConstructibleSheaf.isZero F.obj.carrier
+
+/-- A Weil sheaf is zero, its underlying étale sheaf being zero
+(`AlgebraicGeometry.WeilSheaf.isZero_carrier`). -/
+theorem isZero : IsZero F :=
+  ⟨fun _ ↦ ⟨⟨0⟩, fun _ ↦ ObjectProperty.hom_ext _ <| ObjectProperty.hom_ext _ <|
+      Endofunctor.Algebra.Hom.ext <| F.isZero_carrier.eq_of_src _ _⟩,
+    fun _ ↦ ⟨⟨0⟩, fun _ ↦ ObjectProperty.hom_ext _ <| ObjectProperty.hom_ext _ <|
+      Endofunctor.Algebra.Hom.ext <| F.isZero_carrier.eq_of_tgt _ _⟩⟩
 
 section GeometricStalk
 
