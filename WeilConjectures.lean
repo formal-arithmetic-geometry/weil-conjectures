@@ -571,6 +571,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Continuous.Basic
@@ -599,6 +600,7 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
+public import WeilConjectures.Mathlib.RingTheory.LocalProperties.Reduced
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Idempotent
 public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Lemmas
@@ -612,6 +614,8 @@ public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 public import WeilConjectures.Mathlib.RingTheory.RingHom.PurelyInseparable
+public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Chevalley
+public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Noetherian
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
