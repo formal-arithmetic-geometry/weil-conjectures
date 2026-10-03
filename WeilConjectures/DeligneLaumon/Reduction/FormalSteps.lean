@@ -23,11 +23,16 @@ by three formal steps, all of which are stated in this file:
 - it holds outright for separated quasi-finite morphisms, whose compact-support direct image is
   exact and preserves both mixedness and punctual upper weight bounds.
 
+Once it holds for `f`, it passes from sheaves to complexes: `Rf₀!` preserves Weil complexes mixed
+of weights at most `w`, by the hypercohomology spectral sequence.
+
 ## Main statements
 
 - `AlgebraicGeometry.HasDirectImageWeightBound.comp`: blueprint `sk-l-dl-general-composition`.
 - `AlgebraicGeometry.HasDirectImageWeightBound.of_openClosed`: blueprint
   `sk-l-dl-general-excision`.
+- `AlgebraicGeometry.HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek`:
+  blueprint `lem-zl-sheaves-to-complexes`.
 - `AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite`,
   `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite` and
   `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`: blueprint
@@ -116,6 +121,28 @@ theorem HasDirectImageWeightBound.of_openClosed {U X Z Y : Scheme.{u}}
   -- of the base; that form belongs with the base-change statement of `sec-six-functors` and is
   -- not stated here.
   sorry
+
+/-- If the direct-image weight assertion holds for `f : X ⟶ Y`, then `Rf₀!` carries bounded
+constructible Weil complexes mixed of weights at most `w` to complexes mixed of weights at most
+`w` (blueprint: `lem-zl-sheaves-to-complexes`).
+
+The blueprint argument is the hypercohomology spectral sequence
+`E₂^{a,b} = Rᵃf₀!𝓗ᵇ(K) ⇒ 𝓗ᵃ⁺ᵇ(Rf₀!K)`: its `E₂`-terms are mixed of weights at most `w + a + b` by
+the hypothesis, and the abutment is filtered by subquotients of them. With the present
+scaffold `AlgebraicGeometry.WeilComplex` is not triangulated, so this spectral sequence cannot be
+set up; instead every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf.isZero`), so the
+cohomology sheaves of `Rf₀!K` are mixed of every weight. The proof must be redone along the
+spectral sequence once Weil sheaves have pro-étale coefficients. -/
+theorem HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek
+    {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+    {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    (_hf : HasDirectImageWeightBound k₀ ι f) {w : ℝ} {K : WeilComplex k₀ l X}
+    (_hK : K.IsMixedOfWeightsAtMost ι w) :
+    ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w :=
+  fun _ ↦ WeilSheaf.isMixedOfWeightsAtMost_of_isZero (WeilSheaf.isZero _) _
 
 section QuasiFinite
 
