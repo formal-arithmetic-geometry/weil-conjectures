@@ -133,9 +133,48 @@ lemma isUnit_chartBinaryForm_factor (i' : ULift.{u} (Fin (d + 1)))
 
 end ChartBinaryForm
 
+section MulChartBinaryForm
+
+variable {d e : ℕ} {V : Scheme.{u}} (i : ULift.{u} (Fin (d + 1))) (j : ULift.{u} (Fin (e + 1)))
+  (qa : V ⟶ Spec (.of <| Away (homogeneousSubmodule (ULift.{u} (Fin (d + 1)))
+    (ULift.{u} ℤ)) (MvPolynomial.X i)))
+  (qb : V ⟶ Spec (.of <| Away (homogeneousSubmodule (ULift.{u} (Fin (e + 1)))
+    (ULift.{u} ℤ)) (MvPolynomial.X j)))
+
+/-- The coefficients of a product of two `chartBinaryForm`s are natural in the scheme. -/
+lemma appTop_coeff_mul_chartBinaryForm {W : Scheme.{u}} (c : W ⟶ V) (n : ℕ) :
+    c.appTop.hom ((chartBinaryForm i qa * chartBinaryForm j qb).coeff n) =
+      (chartBinaryForm i (c ≫ qa) * chartBinaryForm j (c ≫ qb)).coeff n := by
+  rw [← Polynomial.coeff_map, Polynomial.map_mul, map_chartBinaryForm, map_chartBinaryForm]
+
+/-- Changing the charts multiplies the coefficients of a product of two `chartBinaryForm`s by
+the product of the transition factors. -/
+lemma coeff_mul_chartBinaryForm_eq_mul (i' : ULift.{u} (Fin (d + 1)))
+    (qa' : V ⟶ Spec (.of <| Away (homogeneousSubmodule (ULift.{u} (Fin (d + 1)))
+      (ULift.{u} ℤ)) (MvPolynomial.X i')))
+    (ha : qa ≫ awayι _ (MvPolynomial.X i) (MvPolynomial.X_mem_homogeneousSubmodule_one _ i)
+        Nat.one_pos =
+      qa' ≫ awayι _ (MvPolynomial.X i') (MvPolynomial.X_mem_homogeneousSubmodule_one _ i')
+        Nat.one_pos)
+    (j' : ULift.{u} (Fin (e + 1)))
+    (qb' : V ⟶ Spec (.of <| Away (homogeneousSubmodule (ULift.{u} (Fin (e + 1)))
+      (ULift.{u} ℤ)) (MvPolynomial.X j')))
+    (hb : qb ≫ awayι _ (MvPolynomial.X j) (MvPolynomial.X_mem_homogeneousSubmodule_one _ j)
+        Nat.one_pos =
+      qb' ≫ awayι _ (MvPolynomial.X j') (MvPolynomial.X_mem_homogeneousSubmodule_one _ j')
+        Nat.one_pos) (n : ℕ) :
+    (chartBinaryForm i' qa' * chartBinaryForm j' qb').coeff n =
+      ((Scheme.ΓSpecIso _).inv ≫ qa'.appTop).hom (awayXRatio (ULift.{u} ℤ) i' i) *
+        ((Scheme.ΓSpecIso _).inv ≫ qb'.appTop).hom (awayXRatio (ULift.{u} ℤ) j' j) *
+        (chartBinaryForm i qa * chartBinaryForm j qb).coeff n := by
+  rw [chartBinaryForm_eq_C_mul i qa i' qa' ha, chartBinaryForm_eq_C_mul j qb j' qb' hb,
+    mul_mul_mul_comm, ← Polynomial.C_mul, Polynomial.coeff_C_mul]
+
+end MulChartBinaryForm
+
 variable (d e : ℕ)
 
-set_option quotPrecheck false in
+set_option hygiene false in
 /-- The open cover of `ℙᵈ_ℤ ×_ℤ ℙᵉ_ℤ` by products of standard charts. -/
 local notation "𝒰" d:max e:max =>
   segreCover (ULift.{u} (Fin (d + 1))) (ULift.{u} (Fin (e + 1)))
@@ -189,35 +228,35 @@ lemma mulChartHom_compatible (i i' : ULift.{u} (Fin (d + 1))) (j j' : ULift.{u} 
         (MvPolynomial.X_mem_homogeneousSubmodule_one _ i) Nat.one_pos =
       (p₂ ≫ segreCoverFst i' j') ≫ awayι _ (MvPolynomial.X i')
         (MvPolynomial.X_mem_homogeneousSubmodule_one _ i') Nat.one_pos := by
-    rw [Category.assoc, Category.assoc, segreCoverFst_awayι, segreCoverFst_awayι,
-      ← Category.assoc, ← Category.assoc, hcond]
+    rw [Category.assoc, Category.assoc, segreCoverFst_awayι, segreCoverFst_awayι]
+    exact (reassoc_of% hcond) _
   have hb : (p₁ ≫ segreCoverSnd i j) ≫ awayι _ (MvPolynomial.X j)
         (MvPolynomial.X_mem_homogeneousSubmodule_one _ j) Nat.one_pos =
       (p₂ ≫ segreCoverSnd i' j') ≫ awayι _ (MvPolynomial.X j')
         (MvPolynomial.X_mem_homogeneousSubmodule_one _ j') Nat.one_pos := by
-    rw [Category.assoc, Category.assoc, segreCoverSnd_awayι, segreCoverSnd_awayι,
-      ← Category.assoc, ← Category.assoc, hcond]
+    rw [Category.assoc, Category.assoc, segreCoverSnd_awayι, segreCoverSnd_awayι]
+    exact (reassoc_of% hcond) _
   have hA := isUnit_chartBinaryForm_factor i _ i' _ ha
   have hB := isUnit_chartBinaryForm_factor j _ j' _ hb
   have hvar (k : ULift.{u} (Fin (d + e + 1))) : p₂.appTop.hom (mulChartSection d e i' j' k) =
       ((hA.unit * hB.unit : Γ(_, ⊤)ˣ) : Γ(_, ⊤)) *
         p₁.appTop.hom (mulChartSection d e i j k) := by
-    rw [mulChartSection, mulChartSection, ← Polynomial.coeff_map, ← Polynomial.coeff_map,
-      Polynomial.map_mul, Polynomial.map_mul, map_chartBinaryForm, map_chartBinaryForm,
-      map_chartBinaryForm, map_chartBinaryForm, chartBinaryForm_eq_C_mul i _ i' _ ha,
-      chartBinaryForm_eq_C_mul j _ j' _ hb, mul_mul_mul_comm, ← Polynomial.C_mul,
-      Polynomial.coeff_C_mul, Units.val_mul, IsUnit.unit_spec, IsUnit.unit_spec]
-  simp only [mulChartHom]
-  rw [comp_fromOfGlobalSections _ p₁ _ _ (map_irrelevant_comp_appTop_eq_top _ p₁ _
+    refine (appTop_coeff_mul_chartBinaryForm i' j' _ _ p₂ _).trans
+      ((coeff_mul_chartBinaryForm_eq_mul i j _ _ i' _ ha j' _ hb _).trans ?_)
+    rw [Units.val_mul]
+    exact congrArg₂ (· * ·) (congrArg₂ (· * ·) hA.unit_spec.symm hB.unit_spec.symm)
+      (appTop_coeff_mul_chartBinaryForm i j _ _ p₁ _).symm
+  refine (comp_fromOfGlobalSections _ p₁ _ _ (map_irrelevant_comp_appTop_eq_top _ p₁ _
       (ProjectiveSpace.map_irrelevant_evalSections_eq_top _
-        (span_range_mulChartSection_eq_top d e i j))),
-    comp_fromOfGlobalSections _ p₂ _ _ (map_irrelevant_comp_appTop_eq_top _ p₂ _
+        (span_range_mulChartSection_eq_top d e i j)))).trans
+    (Eq.trans ?_ (comp_fromOfGlobalSections _ p₂ _ _ (map_irrelevant_comp_appTop_eq_top _ p₂ _
       (ProjectiveSpace.map_irrelevant_evalSections_eq_top _
-        (span_range_mulChartSection_eq_top d e i' j')))]
+        (span_range_mulChartSection_eq_top d e i' j')))).symm)
   refine fromOfGlobalSections_eq_of_unit_pow_mul _ (hA.unit * hB.unit) _ _ (fun n a hna ↦ ?_) _ _
-  rw [ProjectiveSpace.comp_evalSections, ProjectiveSpace.comp_evalSections]
-  simp only [hvar]
-  exact ProjectiveSpace.evalSections_const_mul _ _ hna
+  exact (RingHom.congr_fun (ProjectiveSpace.comp_evalSections p₂ _) a).trans
+    ((congrArg (fun s ↦ ProjectiveSpace.evalSections s a) (funext hvar)).trans
+      ((ProjectiveSpace.evalSections_const_mul _ _ hna).trans
+        (congrArg _ (RingHom.congr_fun (ProjectiveSpace.comp_evalSections p₁ _) a).symm)))
 
 /-- **Multiplication of binary forms** `ℙᵈ_ℤ ×_ℤ ℙᵉ_ℤ ⟶ ℙᵈ⁺ᵉ_ℤ` on the integral models,
 sending a pair of points with homogeneous coordinates `(xₐ)`, `(y_b)` to the point with
@@ -250,7 +289,8 @@ def iterToProjInt :
       pullback
         (terminal.from (Proj.projectiveSpaceOverAffine (ULift.{u} (Fin (d + 1))) (ULift.{u} ℤ)))
         (terminal.from (Proj.projectiveSpaceOverAffine (ULift.{u} (Fin (e + 1))) (ULift.{u} ℤ))) :=
-  pullback.lift (ℙ(_; _) ↘ _ ≫ toProjInt _ S) (toProjInt _ _) (terminal.hom_ext _ _)
+  pullback.lift (ℙ(ULift.{u} (Fin (e + 1)); ℙ(ULift.{u} (Fin (d + 1)); S)) ↘ _ ≫
+    toProjInt _ S) (toProjInt _ _) (terminal.hom_ext _ _)
 
 @[reassoc (attr := simp)]
 lemma iterToProjInt_fst :
@@ -270,7 +310,8 @@ homogeneous coordinates `c_k = ∑_{a + b = k} xₐ y_b`. -/
 def mulBinaryForms :
     ℙ(ULift.{u} (Fin (e + 1)); ℙ(ULift.{u} (Fin (d + 1)); S)) ⟶
       ℙ(ULift.{u} (Fin (d + e + 1)); S) :=
-  pullback.lift (ℙ(_; _) ↘ _ ≫ ℙ(_; S) ↘ S) (iterToProjInt d e S ≫ Proj.mulBinaryForms d e)
+  pullback.lift (ℙ(ULift.{u} (Fin (e + 1)); ℙ(ULift.{u} (Fin (d + 1)); S)) ↘ _ ≫
+    ℙ(ULift.{u} (Fin (d + 1)); S) ↘ S) (iterToProjInt d e S ≫ Proj.mulBinaryForms d e)
     (terminal.hom_ext _ _)
 
 /-- Multiplication of binary forms is a morphism over `S`. -/
