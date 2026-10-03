@@ -41,9 +41,6 @@ data which this project has not yet built, stated for the pro-étale functors th
   isomorphisms of the monoidal structure `upperStarMonoidal` of `Lf^*`.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.dualizingCongr`: transport of `ω` along an
   equality of structure morphisms.
-- `AlgebraicGeometry.ProEtale.GeometricOperations.openPurityMap`,
-  `AlgebraicGeometry.ProEtale.GeometricOperations.openPurity`: the canonical map `j^! ⟶ Lj^*`
-  for an open immersion `j` and the purity isomorphism it is.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.bidualityMap`: the evaluation-adjoint map
   `K ⟶ D_X D_X K`.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.kunnethVerdierMap`,
@@ -102,11 +99,14 @@ The Künneth-Verdier comparison is not a free isomorphism either: it is the cano
 the monoidal structure of the pullback, tensor-hom and the `!`-adjunction, and the package
 only asserts that it is invertible (`isIso_kunnethVerdierMap`).
 
-Open-immersion purity and biduality are not free isomorphisms either. For an open immersion
-`j`, `GeometricOperations.openPurityMap : j^! ⟶ Lj^*` is `Lj^*` of the counit of
-`Rj_! ⊣ j^!` read through `Rj_! ⋙ Lj^* ≃ 𝟭`, the `!`-base change along the kernel pair
-`U ×_X U = U` of `j` (`isIso_openPurityMap`); `GeometricOperations.bidualityMap` is the
-tensor-hom adjoint of evaluation (`isIso_bidualityMap`).
+Biduality is not a free isomorphism either: `GeometricOperations.bidualityMap` is the
+tensor-hom adjoint of evaluation, and the package only asserts that it is invertible
+(`isIso_bidualityMap`).
+
+There is no open-purity field. Its only use in the trace formula was the restriction of a
+Borel-Moore section to a clopen piece in the local terms, and the local terms are instead
+built from the canonical idempotent `AlgebraicGeometry.ProEtale.clopenIdempotent` of the
+clopen piece, which uses no package data (`GeometricOperations.localTerm`).
 
 The remaining comparison data are still *not* pinned to canonical maps: `properComparison`
 to the natural transformation `Rf_! ⟶ Rf_*`, and `upperStarMonoidal` to the oplax monoidal
@@ -224,29 +224,13 @@ noncomputable def kunnethVerdierMapOf {X Y Z : Scheme.{u}} {pX : Z ⟶ X} {pY : 
         ((rightDerivedLowerShriek A pX).map (β_ _ _).hom ≫ pf.inv.app (_, M) ≫ (t ▷ M) ≫
           (λ_ M).hom)
 
-/-- The open-purity map `j^! ⟶ Lj^*` for a morphism `j : U ⟶ X`, given an isomorphism
-`τ : Rj_! ⋙ Lj^* ≃ 𝟭`: `Lj^*` of the counit of `Rj_! ⊣ j^!`, read through `τ`,
-
-```
-  j^! ≃ Lj^* Rj_! j^! ──Lj^* ε──▶ Lj^*.
-```
-
-`GeometricOperations.openPurityMap` instantiates it with the `τ` obtained from `!`-base change
-along the kernel pair of an open immersion `j`. -/
-noncomputable def openPurityMapOf {U X : Scheme.{u}} (j : U ⟶ X) [HasCompactification j]
-    (τ : rightDerivedLowerShriek A j ⋙ (upperStar A j).leftDerivedFunctor ≅ 𝟭 _) :
-    rightDerivedUpperShriek A j ⟶ (upperStar A j).leftDerivedFunctor :=
-  (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft _ τ.inv ≫ (Functor.associator _ _ _).inv ≫
-    Functor.whiskerRight (rightDerivedUpperShriekAdjunction A j).counit _ ≫
-    (Functor.leftUnitor _).hom
-
 /-- The geometric operation package over a base `s`: the comparison data of the six
 operations that the blueprint fixes, namely the dualizing complex `ω_X = a_X^! A` with its
 composition `f^! ω_Y ≃ ω_X`, the identification `Rf_* = Rf_!` for proper `f`, composition
 of exceptional direct images, `!`-base change, the projection formula, the monoidal
 structure of the pullback `Lf^*`, braided for `DerivedBraiding`, and the invertibility of
-three canonical maps: the open-purity map `j^! ⟶ Lj^*` of `openPurityMapOf`, the biduality
-map `K ⟶ D_X D_X K` on `Dᵇctf`, and the Künneth-Verdier map `kunnethVerdierMapOf`. The
+two canonical maps: the biduality map `K ⟶ D_X D_X K` on `Dᵇctf`, and the Künneth-Verdier
+map `kunnethVerdierMapOf`. The
 identity isomorphism `R(𝟙 X)_! ≃ 𝟭` is tied to `lowerShriekComp` by unit axioms;
 `properComparison`, `dualizingBase`, `dualizingComp` and the unit of `Lf^*` are tied to the
 identity isomorphisms at `f = 𝟙`; `properComparison` and `dualizingComp`
@@ -415,14 +399,6 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
           ((upperStar A f).leftDerivedFunctor) ⋙
         MonoidalCategory.tensor (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) ⋙
           rightDerivedLowerShriek A f
-  /-- open-immersion purity: for an open immersion `j`, the canonical map `j^! ⟶ Lj^*` of
-  `openPurityMapOf` is invertible. It is built from `!`-base change along the kernel pair
-  `U ×_X U = U` of `j` and the identity isomorphisms `L(𝟙 U)^* ≃ 𝟭` and `R(𝟙 U)_! ≃ 𝟭`. -/
-  isIso_openPurityMap {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-      [HasCompactification j] :
-    IsIso (openPurityMapOf A j (baseChange (IsKernelPair.id_of_mono j) ≪≫
-      Functor.isoWhiskerRight (leftDerivedUpperStarId A U) _ ≪≫ Functor.leftUnitor _ ≪≫
-        lowerShriekId U))
   /-- `Lf^*` is monoidal: the unit `A_X ≃ Lf^* A_Y` and the tensor comparison
   `Lf^* M ⊗ᴸ Lf^* N ≃ Lf^* (M ⊗ᴸ N)`, with their naturality, associativity and unitality. -/
   upperStarMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -494,34 +470,6 @@ noncomputable def GeometricOperations.verdierDual {s : Scheme.{u}}
 namespace GeometricOperations
 
 variable {s : Scheme.{u}} (G : GeometricOperations A s)
-
-/-- The isomorphism `Rj_! ⋙ Lj^* ≃ 𝟭` for an open immersion `j : U ⟶ X`: `!`-base change
-along the kernel pair `U ×_X U = U` of `j` (a monomorphism), followed by the identity
-isomorphisms `L(𝟙 U)^* ≃ 𝟭` and `R(𝟙 U)_! ≃ 𝟭`. -/
-noncomputable def lowerShriekUpperStarOpen {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    [HasCompactification j] :
-    rightDerivedLowerShriek A j ⋙ (upperStar A j).leftDerivedFunctor ≅ 𝟭 _ :=
-  G.baseChange (IsKernelPair.id_of_mono j) ≪≫
-    Functor.isoWhiskerRight (leftDerivedUpperStarId A U) _ ≪≫ Functor.leftUnitor _ ≪≫
-    G.lowerShriekId U
-
-/-- The canonical open-purity map `j^! ⟶ Lj^*` of an open immersion `j`:
-`openPurityMapOf` for `GeometricOperations.lowerShriekUpperStarOpen`. -/
-noncomputable def openPurityMap {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    [HasCompactification j] :
-    rightDerivedUpperShriek A j ⟶ (upperStar A j).leftDerivedFunctor :=
-  openPurityMapOf A j (G.lowerShriekUpperStarOpen j)
-
-instance {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [HasCompactification j] :
-    IsIso (G.openPurityMap j) :=
-  G.isIso_openPurityMap j
-
-/-- Open-immersion purity `j^! ≃ Lj^*` for an open immersion `j`: the canonical map
-`GeometricOperations.openPurityMap`, invertible by the field `isIso_openPurityMap`. -/
-noncomputable def openPurity {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    [HasCompactification j] :
-    rightDerivedUpperShriek A j ≅ (upperStar A j).leftDerivedFunctor :=
-  asIso (G.openPurityMap j)
 
 /-- The evaluation-adjoint map `K ⟶ D_X D_X K`: the tensor-hom adjoint of
 `D_X K ⊗ᴸ K ≃ K ⊗ᴸ D_X K ──ev──▶ ω_X`. -/

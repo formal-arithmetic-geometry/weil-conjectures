@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 
 /-!
@@ -58,7 +59,13 @@ pro-étale functors and the comparison data of the package
   diagonal identity, so it lives on `Fix(c)` with no transport step. Its comparison with
   `supportedPairing c (Correspondence.ofEnd G aX K (𝟙 K))` along `Fix(c) ≅ E(C, X)` is not
   formalised;
-* `localTerm` is the integral of the restriction `GeometricOperations.borelMooreRestrict`.
+* `localTerm` along a clopen `j_B : B ⟶ E` is the integral over `E` of `e_B · α`, where
+  `e_B = AlgebraicGeometry.ProEtale.clopenIdempotent j_B` is the idempotent of `A_E` cut out
+  by `B`. It is built from the adjunctions `Lj^* ⊣ Rj_*` and `j_! ⊣ j^*` alone, so the local
+  terms use no package data beyond that of `GeometricOperations.integral`. This is
+  `∫_B α|_B` in the blueprint's formulation; restricting `α` to `B` itself would need
+  open purity `j^! ≃ Lj^*` and the monoidal unit `Lj^* A_E ≃ A_B`, which are not pinned to
+  canonical maps here.
 
 The Künneth-Verdier isomorphism needs a field as base (the class `Scheme.IsSpecOfField`),
 `X` and `Y` separated of finite type and the coefficients in `Dᵇctf`, so `supportedPairing`
@@ -294,19 +301,16 @@ noncomputable def traceClass [HasCompactification aX] [s.IsSpecOfField] [QuasiCo
     eqToHom (congrArg G.dualizing c.fixι_toProd_fst_comp_eq_fixStr)
 
 /-- The *local term* `LT_B(α) ∈ A` of a Borel-Moore section `α : A_E ⟶ ω_E` along a clopen
-immersion `j_B : B ⟶ E` with `B` proper over `s`: restrict `α` along `j_B`, identify
-`j_B^* A_E ≃ A_B` and `j_B^* ω_E ≃ ω_B` by open purity and dualizing composition, and
-integrate over `B`. The ambient support `E` need not be proper; at a Frobenius fixed point
-`LT_x̄` means the local term on its reduced clopen point component
+immersion `j_B : B ⟶ E`, for `E` proper over `s`: the integral `∫_E e_B · α` of `α` cut down
+by the idempotent `e_B : A_E ⟶ A_E` of the clopen piece `B`
+(`AlgebraicGeometry.ProEtale.clopenIdempotent`), which is `∫_B α|_B`. At a Frobenius fixed
+point `LT_x̄` means the local term on its reduced clopen point component
 (blueprint: `sk-d-local-term`). -/
-noncomputable def localTerm {E B : Scheme.{u}} (aE : E ⟶ s) (jB : B ⟶ E)
-    [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
-    [HasCompactification (jB ≫ aE)] [IsProper (jB ≫ aE)] (α : G.borelMooreSections aE) :
+noncomputable def localTerm {E B : Scheme.{u}} (aE : E ⟶ s) [HasCompactification aE]
+    [IsProper aE] (jB : B ⟶ E) [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
+    (α : G.borelMooreSections aE) :
     End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))) :=
-  -- `j_B` is an open immersion with closed range, hence a closed immersion, so it admits a
-  -- compactification.
-  have : IsClosedImmersion jB := .of_isOpenImmersion jB hB
-  G.integral (jB ≫ aE) (G.borelMooreRestrict jB α)
+  G.integral aE ((clopenIdempotent A jB hB).app (𝟙_ _) ≫ α)
 
 /-- Point normalization of the pairing: for a perfect `A`-complex `P` on the base point `s`
 and an endomorphism `v : P ⟶ P`, regarded as an endocorrespondence with support `s` and
@@ -325,14 +329,13 @@ theorem integral_traceClass_eq_trace [s.IsSpecOfField]
   sorry
 
 /-- Decomposition into local terms: if the support of a Borel-Moore section is a finite
-disjoint union `E = ∐_{β ∈ B} β` of clopen subschemes, each proper over `s`, then the
+disjoint union `E = ∐_{β ∈ B} β` of clopen subschemes and `E` is proper over `s`, then the
 integral of the section is the sum of its local terms, `∫_E α = ∑_β LT_β(α)`. In particular
 this applies to the Lefschetz-Verdier pairing `α = ⟨u, v⟩_LV`; the empty support gives the
 empty sum `0` (blueprint: `sk-p-local`). -/
 theorem integral_eq_sum_localTerm {E : Scheme.{u}} (aE : E ⟶ s) [HasCompactification aE]
     [IsProper aE] {ι : Type u} [Fintype ι] {B : ι → Scheme.{u}} (j : ∀ i, B i ⟶ E)
-    [∀ i, IsOpenImmersion (j i)] [∀ i, HasCompactification (j i ≫ aE)]
-    [∀ i, IsProper (j i ≫ aE)] (hclosed : ∀ i, IsClosed (Set.range (j i).base))
+    [∀ i, IsOpenImmersion (j i)] (hclosed : ∀ i, IsClosed (Set.range (j i).base))
     (hdisj : Pairwise fun i i' ↦ Disjoint (Set.range (j i).base) (Set.range (j i').base))
     (hcover : ⋃ i, Set.range (j i).base = Set.univ)
     (α : G.borelMooreSections aE) :

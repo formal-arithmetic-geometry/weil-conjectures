@@ -113,7 +113,12 @@ omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Monoida
   [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B] in
 /-- Finite-level coefficient change for compactly supported cohomology: derived scalar
 extension `- ⊗ᴸ_A B` commutes with `Ra_{X!}`, that is, `(Ra_{X!} K) ⊗ᴸ B ≅ Ra_{X!}(K ⊗ᴸ B)`
-(blueprint: `sk-p-trace-coeff`). -/
+(blueprint: `sk-p-trace-coeff`).
+
+This is weaker than the blueprint statement: the commutation of `Ψ` with `j_!` for an open
+immersion `j` and with `Rg_*` for a proper `g`, which is the geometric content of
+`sk-p-trace-coeff`, is assumed (`hlowerShriekOpen`, `hlowerStarProper`), and the conclusion
+is only their composite along the chosen compactification `Rf_! = Rg_* ∘ j_!`. -/
 theorem nonempty_rightDerivedLowerShriek_comp_iso
     (Ψ : ∀ Z : Scheme.{u}, DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology Z) B))

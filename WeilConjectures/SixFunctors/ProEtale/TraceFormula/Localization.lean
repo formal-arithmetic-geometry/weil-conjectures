@@ -62,9 +62,8 @@ derived functors and time out, while facts about the generic construction, such 
 compatibility with the unit, are proved once for abstract functors.
 
 The unit `K ⟶ K^Z` intertwines `φ_m` and `u^Z`, which is proved. The analogous statement for
-the counit `K^U ⟶ K` needs the exceptional base change `GeometricOperations.baseChange` to be
-compatible with open purity and the adjunction `Rj_! ⊣ j^!`, which the package does not
-impose, so it is not stated.
+the counit `K^U ⟶ K` needs an open-purity comparison `j^! ≃ Lj^*` compatible with the
+adjunction `Rj_! ⊣ j^!`, which the package does not provide, so it is not stated.
 
 The sum in `traceClass_graph_eq_traceClass_add_traceClass` is spelled `Add.add` with an
 explicit type argument. The three types agree definitionally but not syntactically, and

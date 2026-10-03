@@ -38,7 +38,9 @@ be transversal and the local terms are not the naive ones. The geometric point i
 `x̄` inside the fixed scheme is taken as data, since the project constructs neither the
 reduced point structure nor open complements. Isolatedness of the fixed point, which the
 blueprint derives from the vanishing of the map induced by `Φ_m` on the cotangent space, is
-therefore assumed rather than proved.
+therefore assumed rather than proved. The local term integrates over the whole fixed scheme
+(`GeometricOperations.localTerm`), so the statements assume it proper over `s`, as it is for
+the Frobenius of a separated `X₀` of finite type: `Fix(Φ_m)` is then finite over `s`.
 
 The pieces `K^Z` and `K^U` of the localization triangle at `x̄` and the additivity of the
 trace class along it are stated for an arbitrary closed-open decomposition in
@@ -83,7 +85,7 @@ theorem localTerm_traceClass_eq_zero_of_isZero [SmoothOfRelativeDimension 1 aX]
     (hxFix : xFix ≫ (W.graph G m).fixι = x) {B : Scheme.{u}} (jB : B ⟶ (W.graph G m).fix)
     [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
     (hBx : Set.range jB.base = Set.range xFix.base)
-    [HasCompactification (jB ≫ (W.graph G m).fixStr)] [IsProper (jB ≫ (W.graph G m).fixStr)]
+    [HasCompactification (W.graph G m).fixStr] [IsProper (W.graph G m).fixStr]
     (hstalk : IsZero (((upperStar A x).leftDerivedFunctor).obj W.obj)) :
     G.localTerm (W.graph G m).fixStr jB hB (G.traceClass (W.graph G m) hW) = 0 :=
   sorry
@@ -106,7 +108,7 @@ theorem localTerm_traceClass_eq_trace [SmoothOfRelativeDimension 1 aX]
     (xFix : s ⟶ (W.graph G m).fix) (hxFix : xFix ≫ (W.graph G m).fixι = x) {B : Scheme.{u}}
     (jB : B ⟶ (W.graph G m).fix) [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
     (hBx : Set.range jB.base = Set.range xFix.base)
-    [HasCompactification (jB ≫ (W.graph G m).fixStr)] [IsProper (jB ≫ (W.graph G m).fixStr)] :
+    [HasCompactification (W.graph G m).fixStr] [IsProper (W.graph G m).fixStr] :
     G.localTerm (W.graph G m).fixStr jB hB (G.traceClass (W.graph G m) hW) =
       MonoidalCategory.trace (W.stalkFrobenius m x hx) :=
   sorry

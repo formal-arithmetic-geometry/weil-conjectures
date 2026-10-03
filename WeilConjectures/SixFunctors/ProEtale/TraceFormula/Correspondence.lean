@@ -43,8 +43,6 @@ forward along a proper morphism, and integrated when `T` is proper over the base
   `T_c(u)` on compactly supported cohomology.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.borelMooreSections`: the Borel-Moore
   sections `A_T ⟶ ω_T` of a geometric scheme.
-- `AlgebraicGeometry.ProEtale.GeometricOperations.borelMooreRestrict`: the restriction of a
-  Borel-Moore section along an open immersion.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.borelMoorePushforward`,
   `AlgebraicGeometry.ProEtale.GeometricOperations.integral`: the pushforward and the
   integral of a Borel-Moore section.
@@ -56,7 +54,7 @@ forward along a proper morphism, and integrated when `T` is proper over the base
 
 ## Implementation notes
 
-`globalOperator`, `borelMooreRestrict`, `borelMoorePushforward`, `integral` and the
+`globalOperator`, `borelMoorePushforward`, `integral` and the
 coefficient map of `ofEnd` are defined as composites of the adjunctions of the pro-étale
 functors and the comparison data of the package
 `AlgebraicGeometry.ProEtale.GeometricOperations`:
@@ -65,8 +63,6 @@ functors and the comparison data of the package
   hence the field `lowerShriekId`;
 * `globalOperator` uses the fields `properComparison` and `lowerShriekComp`, transported
   along `c₁ ≫ a_X = a_C = c₂ ≫ a_X` by `rightDerivedLowerShriekCongr`;
-* `borelMooreRestrict` uses `upperStarUnit`, `GeometricOperations.openPurity` (built from the
-  fields `baseChange` and `lowerShriekId`) and the field `dualizingComp`;
 * `borelMoorePushforward` uses the fields `upperStarUnit`, `properComparison` and
   `dualizingComp`, and `integral` is the pushforward along `a_T : T ⟶ s` followed by
   `dualizingBase`.
@@ -434,20 +430,6 @@ variable [DerivedBraiding A] (G : GeometricOperations A s)
 (part of blueprint `sk-d-integral`). -/
 abbrev borelMooreSections {T : Scheme.{u}} (a : T ⟶ s) :=
   𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology T) A)) ⟶ G.dualizing a
-
-/-- The restriction `j^* α : A_B ⟶ ω_B` of a Borel-Moore section `α : A_E ⟶ ω_E` along an
-open immersion `j : B ⟶ E`: the composite
-
-`A_B ≃ Lj^* A_E ⟶ Lj^* ω_E ≃ j^! ω_E ≃ ω_B`
-
-of `GeometricOperations.upperStarUnit`, open-immersion purity and the dualizing
-composition (part of blueprint `sk-d-local-term`). An open immersion need not admit a
-compactification, so `[HasCompactification j]` is a hypothesis: `openPurity` needs it. -/
-noncomputable def borelMooreRestrict {E B : Scheme.{u}} {aE : E ⟶ s} (j : B ⟶ E)
-    [IsOpenImmersion j] [HasCompactification j] (α : G.borelMooreSections aE) :
-    G.borelMooreSections (j ≫ aE) :=
-  (G.upperStarUnit j).inv ≫ ((upperStar A j).leftDerivedFunctor).map α ≫
-    (G.openPurity j).inv.app _ ≫ (G.dualizingComp j aE).hom
 
 /-- The pushforward of a Borel-Moore section `α : A_T ⟶ ω_T` along a proper `h : T ⟶ T'`
 over `s`: the composite
