@@ -42,7 +42,8 @@ closed under the limits and colimits that `F` preserves.
 - `CategoryTheory.Endofunctor.IsoAlgebra`: the category of algebras with invertible
   structure morphism, with its structure isomorphism `IsoAlgebra.str`, its forgetful
   functor `IsoAlgebra.forget`, the iterated structure isomorphism
-  `IsoAlgebra.strIterate` and the transport `IsoAlgebra.mapOfNatIso`.
+  `IsoAlgebra.strIterate`, the transport `IsoAlgebra.mapOfNatIso` and its functoriality
+  `IsoAlgebra.mapOfNatIsoHom` in the transporting functor.
 - `CategoryTheory.Endofunctor.Algebra.forgetCreatesLimits`: `Algebra.forget F` creates limits.
 - `CategoryTheory.Endofunctor.Algebra.forgetCreatesColimit`: `Algebra.forget F` creates the
   colimit of a diagram `D` if `F` preserves the colimit of `D ⋙ Algebra.forget F`.
@@ -59,6 +60,12 @@ universe w w' v v' u u'
 variable {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
 
 namespace Algebra
+
+@[simp]
+lemma eqToHom_f {F : C ⥤ C} {A₀ A₁ : Algebra F} (h : A₀ = A₁) :
+    (eqToHom h).f = eqToHom (congr_arg (·.a) h) := by
+  cases h
+  rfl
 
 section Map
 
@@ -106,6 +113,14 @@ def IsIsoStr (F : C ⥤ C) : ObjectProperty (Algebra F) :=
 
 lemma isIsoStr_iff {F : C ⥤ C} (A : Algebra F) : IsIsoStr F A ↔ IsIso A.str :=
   Iff.rfl
+
+/-- Transport along an isomorphism `e` preserves the invertibility of the structure morphism. -/
+lemma isIsoStr_mapOfNatTrans_obj {F : C ⥤ C} {G : D ⥤ D} {L : C ⥤ D}
+    (e : L ⋙ G ⟶ F ⋙ L) [IsIso e] {A : Algebra F}
+    (hA : IsIsoStr F A) : IsIsoStr G ((mapOfNatTrans e).obj A) := by
+  rw [isIsoStr_iff] at hA
+  rw [isIsoStr_iff, mapOfNatTrans_obj_str]
+  infer_instance
 
 end Algebra
 
@@ -252,9 +267,8 @@ G (L a) -------> L (F a) -----> L a
 
 is again an isomorphism. -/
 noncomputable def mapOfNatIso (e : L ⋙ G ≅ F ⋙ L) : IsoAlgebra F ⥤ IsoAlgebra G :=
-  (Algebra.IsIsoStr G).lift (ι F ⋙ Algebra.mapOfNatTrans e.hom) fun K ↦ by
-    change IsIso (e.hom.app K.carrier ≫ L.map K.obj.str)
-    infer_instance
+  (Algebra.IsIsoStr G).lift (ι F ⋙ Algebra.mapOfNatTrans e.hom) fun K ↦
+    Algebra.isIsoStr_mapOfNatTrans_obj e.hom K.property
 
 @[simp]
 lemma mapOfNatIso_obj_carrier (e : L ⋙ G ≅ F ⋙ L) (K : IsoAlgebra F) :
@@ -270,6 +284,33 @@ lemma mapOfNatIso_obj_str (e : L ⋙ G ≅ F ⋙ L) (K : IsoAlgebra F) :
 lemma mapOfNatIso_map_hom_f (e : L ⋙ G ≅ F ⋙ L) {K K' : IsoAlgebra F} (φ : K ⟶ K') :
     ((mapOfNatIso e).map φ).hom.f = L.map φ.hom.f :=
   rfl
+
+/-- A natural transformation `α : L ⟶ L'` compatible with commutation isomorphisms
+`e : L ⋙ G ≅ F ⋙ L` and `e' : L' ⋙ G ≅ F ⋙ L'`, in the sense that the square
+
+```
+           α G
+  G ∘ L ────────▶ G ∘ L'
+    │               │
+  e │               │ e'
+    ▼               ▼
+  L ∘ F ────────▶ L' ∘ F
+           α F
+```
+
+commutes, induces a natural transformation `mapOfNatIso e ⟶ mapOfNatIso e'` with components
+those of `α`. -/
+@[simps]
+noncomputable def mapOfNatIsoHom {L' : C ⥤ D} {e : L ⋙ G ≅ F ⋙ L} {e' : L' ⋙ G ≅ F ⋙ L'}
+    (α : L ⟶ L') (hα : Functor.whiskerRight α G ≫ e'.hom = e.hom ≫ Functor.whiskerLeft F α) :
+    mapOfNatIso e ⟶ mapOfNatIso e' where
+  app K := ObjectProperty.homMk
+    { f := α.app K.carrier
+      h := by
+        have h := congr_app hα K.carrier
+        simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at h
+        simp [mapOfNatIso, reassoc_of% h] }
+  naturality _ _ φ := ObjectProperty.hom_ext _ (Algebra.Hom.ext (α.naturality φ.hom.f))
 
 end Map
 

@@ -622,3 +622,76 @@ $\beta$ are a counit and a unit, hence natural transformations, so the short
 complex exists already at the level of endofunctors of $\shv{\et X}$ and the
 complex above is its evaluation at $\mathcal F$.
 \end{proof}
+
+\section{The derived category}\label{sec:openclosed-derived}
+
+We write $D(\et Y)$ for the unbounded derived category of $\shv{\et Y}$ and
+$H^n\colon D(\et Y)\to\shv{\et Y}$ for its homology functors.  An exact
+functor $F$ between abelian categories induces a functor $D(F)$ on derived
+categories, applied levelwise, with $H^n\circ D(F)\cong F\circ H^n$.  For a
+morphism $g$ we write $Lg^*$ for the total left derived functor of $g^*$; it is
+isomorphic to $D(g^*)$ because $g^*$ is exact.
+
+\begin{lemma}[Exact functors on derived categories]
+\label{lemma:openclosed-derived-exact-functor}
+\lean{DerivedCategory.isZero_iff,
+      CategoryTheory.Functor.isZero_mapDerivedCategory_obj,
+      CategoryTheory.Functor.jointlyReflectIsomorphisms_mapDerivedCategory,
+      CategoryTheory.Functor.jointlyReflectIsomorphisms_pairFunctor_mapDerivedCategory}
+\leanok
+Let $\mathcal C$ be an abelian category.
+\begin{enumerate}
+\item An object $K$ of $D(\mathcal C)$ is zero if and only if $H^nK=0$ for
+      all $n$.
+\item If $F$ is an exact functor and $F(H^nK)=0$ for all $n$, then
+      $D(F)(K)=0$.
+\item If a family of exact functors $F_k$ jointly reflects isomorphisms, so
+      does the family $D(F_k)$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\leanok
+A morphism of $D(\mathcal C)$ is an isomorphism if and only if it induces
+isomorphisms on all $H^n$.  Applied to $K\to0$ this gives (1).  Since
+$H^n(D(F)(K))\cong F(H^nK)$, (1) gives (2).  For (3), if every $D(F_k)(\varphi)$
+is an isomorphism, then so is every $F_k(H^n\varphi)\cong H^n(D(F_k)(\varphi))$,
+hence so is every $H^n\varphi$, hence so is $\varphi$.
+\end{proof}
+
+\begin{proposition}[Derived open--closed conservativity]
+\label{prop:openclosed-conservative-derived}
+\uses{prop:openclosed-conservative,lemma:openclosed-derived-exact-functor}
+\lean{AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar,
+      AlgebraicGeometry.Etale.isIso_of_isIso_mapDerivedCategoryUpperStar_map,
+      AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_leftDerivedUpperStar,
+      AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_map}
+\leanok
+Let $(j,i)$ be a complementary pair on $X$ and let $\varphi$ be a morphism in
+$D(\et X)$ such that $Lj^*\varphi$ and $Li^*\varphi$ are isomorphisms.  Then
+$\varphi$ is an isomorphism.
+\end{proposition}
+\begin{proof}
+\leanok
+Since $Lg^*\cong D(g^*)$, it suffices to treat $D(j^*)$ and $D(i^*)$.  This is
+\Cref{lemma:openclosed-derived-exact-functor}~(3) applied to the pair
+$(j^*,i^*)$, which jointly reflects isomorphisms by
+\Cref{prop:openclosed-conservative}.
+\end{proof}
+
+\begin{lemma}[$Li^*j_!$ vanishes]
+\label{lemma:openclosed-vanishing-lowerShriek-derived}
+\uses{lemma:openclosed-vanishing-lowerShriek,lemma:openclosed-derived-exact-functor}
+\lean{AlgebraicGeometry.Etale.isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoint_range,
+      AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_obj_mapDerivedCategory_openImmersionLowerShriek_of_disjoint_range}
+\leanok
+Let $j\colon U\to X$ be an open immersion and $i\colon Z\to X$ a morphism whose
+range is disjoint from that of $j$.  Then $Li^*(D(j_!)K)=0$ for every $K$ in
+$D(\et U)$.
+\end{lemma}
+\begin{proof}
+\leanok
+Since $Li^*\cong D(i^*)$, it suffices to show $D(i^*)(D(j_!)K)=0$.  As $j_!$ is
+exact, $H^n(D(j_!)K)\cong j_!(H^nK)$, and $i^*j_!(H^nK)=0$ by
+\Cref{lemma:openclosed-vanishing-lowerShriek}.  Conclude by
+\Cref{lemma:openclosed-derived-exact-functor}~(2).
+\end{proof}

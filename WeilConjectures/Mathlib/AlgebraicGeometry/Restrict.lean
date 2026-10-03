@@ -17,6 +17,8 @@ We record:
   compatible open immersions;
 - `AlgebraicGeometry.mem_opensRange_homOfLE` / `AlgebraicGeometry.homOfLE_preimage_opensRange`
   — membership and preimage formulas for the ranges of inclusions of opens;
+- `AlgebraicGeometry.Scheme.basicOpenUnit` — a global section `b`, as a unit on the basic open
+  `X_b`;
 - `AlgebraicGeometry.Scheme.divBasicOpen` — the quotient `a / b` of two global sections, as a
   section over the basic open `X_b`, where `b` is invertible.
 
@@ -78,6 +80,10 @@ lemma Scheme.isUnit_ι_appTop_basicOpen (b : Γ(X, ⊤)) :
     IsUnit ((X.basicOpen b).ι.appTop b) := by
   refine Scheme.isUnit_of_basicOpen_eq_top _ ?_
   rw [← Scheme.preimage_basicOpen_top, Scheme.Opens.ι_preimage_self]
+
+/-- A global section `b`, restricted to the basic open `X_b`, as a unit there. -/
+noncomputable def Scheme.basicOpenUnit (b : Γ(X, ⊤)) : Γ((X.basicOpen b : Scheme.{u}), ⊤)ˣ :=
+  (X.isUnit_ι_appTop_basicOpen b).unit
 
 /-- The quotient `a / b` of two global sections of `X`, as a section over the basic open
 `X_b`, where `b` becomes invertible. -/

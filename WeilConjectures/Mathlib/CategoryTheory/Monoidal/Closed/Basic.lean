@@ -1,0 +1,179 @@
+/-
+Copyright (c) 2026 Christian Merten. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Christian Merten, Claude
+-/
+module
+
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
+
+/-!
+# Zero objects and internal homs along monoidal functors
+
+In a monoidal closed category with zero morphisms, `K ⊗ M` is a zero object if `M` is, since
+`K ⊗ -` is a left adjoint. If the category is moreover braided, the same holds if `K` is a
+zero object, and the internal hom `[K, B]` out of a zero object `K` is a zero object.
+
+A lax monoidal functor `G : C ⥤ D` between monoidal closed categories has a comparison map
+`G [A, B] ⟶ [G A, G B]` (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), the mate of its
+tensorator. This is the monoidal generalisation of `CategoryTheory.expComparison` asked for in
+the TODO of `Mathlib.CategoryTheory.Monoidal.Closed.Functor`. If `G` is monoidal and an
+equivalence, the comparison map is an isomorphism (`CategoryTheory.Functor.Monoidal.commIhom`);
+compare `CategoryTheory.MonoidalClosed.ofEquiv`, which transports the closed structure along a
+monoidal equivalence.
+-/
+
+@[expose] public section
+
+namespace CategoryTheory.MonoidalCategory
+
+open Limits
+
+variable {C : Type*} [Category* C] [MonoidalCategory C] [MonoidalClosed C] [HasZeroMorphisms C]
+
+/-- In a monoidal closed category, `K ⊗ M` is a zero object if `M` is. -/
+lemma isZero_tensorObj_of_isZero_right (K : C) {M : C} (hM : IsZero M) : IsZero (K ⊗ M) := by
+  rw [IsZero.iff_id_eq_zero]
+  exact ((ihom.adjunction K).homEquiv _ _).injective (hM.eq_of_src _ _)
+
+/-- In a braided monoidal closed category, `K ⊗ M` is a zero object if `K` is. -/
+lemma isZero_tensorObj_of_isZero_left [BraidedCategory C] {K : C} (hK : IsZero K) (M : C) :
+    IsZero (K ⊗ M) :=
+  (isZero_tensorObj_of_isZero_right M hK).of_iso (β_ K M)
+
+/-- In a braided monoidal closed category, the internal hom `[K, B]` out of a zero object `K`
+is a zero object. -/
+lemma isZero_ihom_obj_of_isZero [BraidedCategory C] {K : C} (hK : IsZero K) (B : C) :
+    IsZero ((ihom K).obj B) := by
+  rw [IsZero.iff_id_eq_zero]
+  exact ((ihom.adjunction K).homEquiv _ _).symm.injective
+    ((isZero_tensorObj_of_isZero_left hK _).eq_of_src _ _)
+
+end CategoryTheory.MonoidalCategory
+
+namespace CategoryTheory.Functor
+
+open MonoidalCategory
+
+variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
+  [MonoidalClosed C] [MonoidalClosed D] (G : C ⥤ D)
+
+namespace LaxMonoidal
+
+variable [G.LaxMonoidal]
+
+/-- The tensorator `μ : G A ⊗ G X ⟶ G (A ⊗ X)` of a lax monoidal functor, as a square
+```
+          tensorLeft A
+       C ─────────────▶ C
+       │                │
+      G│       ↗        │G
+       ▼                ▼
+       D ─────────────▶ D
+         tensorLeft (G A)
+```
+-/
+@[simps!]
+def μTwoSquare (A : C) : TwoSquare G (tensorLeft A) (tensorLeft (G.obj A)) G :=
+  .mk _ _ _ _ { app X := μ G A X }
+
+/-- The comparison map `G [A, B] ⟶ [G A, G B]` of a lax monoidal functor between monoidal closed
+categories, as a square
+```
+            ihom A
+       C ─────────────▶ C
+       │                │
+      G│       ↘        │G
+       ▼                ▼
+       D ─────────────▶ D
+          ihom (G A)
+```
+It is the mate of the tensorator `μ : G A ⊗ G X ⟶ G (A ⊗ X)`
+(`CategoryTheory.Functor.LaxMonoidal.μTwoSquare`); for a cartesian closed functor this is
+`CategoryTheory.expComparison`. -/
+def ihomComparison (A : C) : TwoSquare (ihom A) G G (ihom (G.obj A)) :=
+  mateEquiv (ihom.adjunction A) (ihom.adjunction (G.obj A)) (μTwoSquare G A)
+
+/-- The comparison map `G [A, B] ⟶ [G A, G B]` is compatible with evaluation:
+```
+  G A ⊗ G [A, B] ──────▶ G A ⊗ [G A, G B]
+        │                       │
+       μ│                       │ev
+        ▼                       ▼
+  G (A ⊗ [A, B]) ──G ev──▶     G B
+```
+-/
+@[reassoc]
+lemma ihomComparison_ev (A B : C) :
+    G.obj A ◁ (ihomComparison G A).natTrans.app B ≫ (ihom.ev (G.obj A)).app (G.obj B) =
+      μ G A _ ≫ G.map ((ihom.ev A).app B) :=
+  mateEquiv_counit _ _ (μTwoSquare G A) B
+
+/-- The comparison map `G [A, B] ⟶ [G A, G B]` is compatible with coevaluation:
+```
+       G B ──────G coev──────▶ G [A, A ⊗ B]
+        │                           │
+    coev│                           │
+        ▼                           ▼
+  [G A, G A ⊗ G B] ──[G A, μ]──▶ [G A, G (A ⊗ B)]
+```
+-/
+@[reassoc]
+lemma coev_ihomComparison (A B : C) :
+    G.map ((ihom.coev A).app B) ≫ (ihomComparison G A).natTrans.app (A ⊗ B) =
+      (ihom.coev (G.obj A)).app (G.obj B) ≫ (ihom (G.obj A)).map (μ G A B) :=
+  unit_mateEquiv _ _ (μTwoSquare G A) B
+
+end LaxMonoidal
+
+namespace Monoidal
+
+variable [G.Monoidal] [G.IsEquivalence]
+
+instance (A : C) : IsIso (LaxMonoidal.μTwoSquare G A).natTrans :=
+  @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun X ↦ inferInstanceAs (IsIso (LaxMonoidal.μ G A X))
+
+/-- A monoidal functor which is an equivalence preserves internal homs: the comparison map
+`G [A, B] ⟶ [G A, G B]` is an isomorphism. Taking mates once more, along the adjunction
+`G ⊣ G⁻¹`, gives the conjugate of the tensorator, which is an isomorphism; and taking mates along
+adjoint equivalences preserves isomorphisms. -/
+instance (A : C) : IsIso (LaxMonoidal.ihomComparison G A).natTrans := by
+  let adj : G ⊣ G.inv := G.asEquivalence.toAdjunction
+  have h := iterated_mateEquiv_conjugateEquiv (ihom.adjunction A) (ihom.adjunction (G.obj A))
+    adj adj (LaxMonoidal.μTwoSquare G A)
+  have : IsIso (mateEquiv adj adj (LaxMonoidal.ihomComparison G A)).natTrans := by
+    rw [LaxMonoidal.ihomComparison, h]
+    infer_instance
+  have : IsIso adj.unit := inferInstanceAs (IsIso G.asEquivalence.unitIso.hom)
+  have : IsIso adj.counit := inferInstanceAs (IsIso G.asEquivalence.counitIso.hom)
+  rw [← (mateEquiv adj adj).symm_apply_apply (LaxMonoidal.ihomComparison G A)]
+  simp only [mateEquiv_symm_apply]
+  infer_instance
+
+/-- A monoidal functor `G` which is an equivalence between monoidal closed categories commutes
+with internal homs, `G [A, -] ≅ [G A, G -]`:
+```
+            ihom A
+       C ─────────────▶ C
+       │                │
+      G│       ≅        │G
+       ▼                ▼
+       D ─────────────▶ D
+          ihom (G A)
+```
+-/
+noncomputable def commIhom (A : C) : ihom A ⋙ G ≅ G ⋙ ihom (G.obj A) :=
+  asIso (LaxMonoidal.ihomComparison G A).natTrans
+
+/-- A monoidal functor `G` which is an equivalence between monoidal closed categories preserves
+internal homs: `G [A, B] ≅ [G A, G B]`. -/
+@[simps!]
+noncomputable def ihomObjIso (A B : C) :
+    G.obj ((ihom A).obj B) ≅ (ihom (G.obj A)).obj (G.obj B) :=
+  (commIhom G A).app B
+
+end Monoidal
+
+end CategoryTheory.Functor
