@@ -36,6 +36,8 @@ a finite field `κ` with `[κ : k] = d` admits exactly `d` distinct `k`-embeddin
 
 - `AlgebraicGeometry.Scheme.Hom.specMap_residueFieldAlgebraMap`: the geometric
   characterization of `Hom.residueFieldAlgebraMap`.
+- `AlgebraicGeometry.Scheme.Hom.degreeOver_eq_one_of_comp_eq_id`: the image of a section of
+  the structure morphism, a `k`-rational point, has degree one.
 - `AlgebraicGeometry.Scheme.Hom.finite_fieldPoints`: a scheme of finite type over a
   finite field has finitely many points in any finite field extension.
 - `AlgebraicGeometry.Scheme.Hom.finite_setOf_degreeOver_le`: a scheme of finite type
@@ -146,6 +148,47 @@ theorem Hom.finite_fieldPoints [Finite k] (f : X.Hom (Spec (.of k))) (K : Type u
     Finite (f.fieldPoints K) := by
   have : Finite (Spec (.of K) ⟶ X) := finite_hom f K
   exact Finite.of_injective (fun g : f.fieldPoints K ↦ g.1) fun g₁ g₂ h ↦ Subtype.ext h
+
+/-- The embedding `k → κ(x)` of the base field into the residue field of the image `x` of a
+section `s` of the structure morphism is bijective: `x` is a `k`-rational point. -/
+theorem Hom.bijective_residueFieldAlgebraMap_of_comp_eq_id (f : X.Hom (Spec (.of k)))
+    (s : Spec (.of k) ⟶ X) (hs : s ≫ f = 𝟙 _) (p : Spec (.of k)) :
+    Function.Bijective (f.residueFieldAlgebraMap (s.base p)) := by
+  have key : ∀ g : Spec (.of k) ⟶ Spec (.of k), g = 𝟙 _ → Function.Surjective
+      (Hom.residueFieldAlgebraMap g p) := by
+    rintro _ rfl
+    rw [Hom.residueFieldAlgebraMap, CommRingCat.hom_comp, CommRingCat.hom_comp,
+      RingHom.coe_comp, RingHom.coe_comp]
+    refine Function.Surjective.comp (Function.Surjective.comp ?_ ?_) ?_
+    · exact fun y ↦ ⟨y, by simp⟩
+    · exact fun y ↦ ⟨(Spec.residueFieldIso _ _).hom.hom y, by
+        rw [← CommRingCat.comp_apply, Iso.hom_inv_id, CommRingCat.id_apply]⟩
+    · exact (@Ideal.algEquivResidueFieldOfField _ _ _ (PrimeSpectrum.isPrime _)).surjective
+  have h := key (s ≫ f) hs
+  rw [Hom.residueFieldAlgebraMap, Scheme.residueFieldMap_comp] at h
+  refine ⟨RingHom.injective _, fun y ↦ ?_⟩
+  obtain ⟨c, hc⟩ := h (s.residueFieldMap p y)
+  refine ⟨c, (s.residueFieldMap p).hom.injective ?_⟩
+  rw [← hc, Hom.residueFieldAlgebraMap]
+  simp only [CommRingCat.hom_comp, RingHom.comp_apply]
+  rfl
+
+/-- The image of a section of the structure morphism has degree one. -/
+theorem Hom.degreeOver_eq_one_of_comp_eq_id (f : X.Hom (Spec (.of k)))
+    (s : Spec (.of k) ⟶ X) (hs : s ≫ f = 𝟙 _) (p : Spec (.of k)) :
+    f.degreeOver (s.base p) = 1 := by
+  let := (f.residueFieldAlgebraMap (s.base p)).toAlgebra
+  exact (AlgEquiv.ofBijective (Algebra.ofId k _)
+    (f.bijective_residueFieldAlgebraMap_of_comp_eq_id s hs p)).toLinearEquiv.finrank_eq.symm.trans
+      (Module.finrank_self k)
+
+/-- Over a finite field, the image of a section of the structure morphism has finite residue
+field. -/
+theorem Hom.mem_finitePoints_of_comp_eq_id [Finite k] (f : X.Hom (Spec (.of k)))
+    (s : Spec (.of k) ⟶ X) (hs : s ≫ f = 𝟙 _) (p : Spec (.of k)) :
+    s.base p ∈ X.finitePoints :=
+  X.mem_finitePoints.mpr
+    (Finite.of_surjective _ (f.bijective_residueFieldAlgebraMap_of_comp_eq_id s hs p).2)
 
 /-- A morphism `Spec K ⟶ X` built from an embedding of a residue field lies over `k` if
 and only if the embedding is compatible with the base field embeddings. -/
