@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 
@@ -32,6 +33,8 @@ Its left adjoint `g^*` is the left Kan extension on presheaves followed by sheaf
   composition isomorphisms `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` and
   `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`, the latter obtained from the former by uniqueness of
   left adjoints.
+- `AlgebraicGeometry.Etale.lowerStarCompSheafSectionsTerminalIso`: sections over the terminal
+  object are invariant under `g_*`, `(g_* F)(Y) = F(Y ×_Y Z) ≅ F(Z)`.
 
 ## Main results
 
@@ -318,5 +321,21 @@ noncomputable def Etale.upperStarComp (h₁₂ : T ⟶ R := h₁ ≫ h₂)
 end UpperStar
 
 end Comp
+
+section Sections
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+
+/-- Sections over the terminal object are invariant under the pushforward along `g : Z ⟶ Y`:
+`(g_* F)(Y) = F(Y ×_Y Z) ≅ F(Z)`, since base change preserves the terminal object of the small
+étale site. -/
+noncomputable def Etale.lowerStarCompSheafSectionsTerminalIso :
+    Etale.lowerStar A g ⋙ (sheafSections Y.smallEtaleTopology A).obj (op (⊤_ Y.Etale)) ≅
+      (sheafSections Z.smallEtaleTopology A).obj (op (⊤_ Z.Etale)) :=
+  NatIso.ofComponents (fun H ↦ H.obj.mapIso (PreservesTerminal.iso g.Etale).op.symm)
+    (fun α ↦ (α.hom.naturality _).symm)
+
+end Sections
 
 end AlgebraicGeometry

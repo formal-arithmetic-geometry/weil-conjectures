@@ -29,8 +29,8 @@ finiteness theorem
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_padicAlgCl`.
 The higher direct images `Rʳf₀!` of Weil sheaves are the cohomology sheaves of `Rf₀!`.
 
-Compactly supported cohomology is defined from `Rf₀!` in
-`WeilConjectures.WeilSheaf.Cohomology`.
+Compactly supported cohomology is defined in `WeilConjectures.WeilSheaf.Cohomology` from `Rf₀!`
+along the structure morphism `X ⟶ Spec k₀`.
 
 ## Main declarations
 
