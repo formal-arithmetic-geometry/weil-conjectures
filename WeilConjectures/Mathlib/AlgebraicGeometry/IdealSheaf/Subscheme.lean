@@ -5,8 +5,10 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # Complements on the subscheme cut out by an ideal sheaf
@@ -39,11 +41,39 @@ preimage of an affine open of `Y` (`AlgebraicGeometry.Scheme.Hom.toImage_app_inj
 preimages are affine because `f.imageι` is a closed immersion, and they cover the image, so
 the kernel ideal vanishes on a cover by affine opens.
 
+## The scheme-theoretic closure of a dense open subscheme
+
+Let `U` be a dense open subscheme of a scheme `X` whose inclusion is quasi-compact, and let
+`X* := U.ι.image` be the scheme-theoretic image of `U ⟶ X`, the smallest closed subscheme of
+`X` through which `U` factors. Then `X* ⟶ X` is a surjective closed immersion which is an
+isomorphism over `U`, and `U` is a *scheme-theoretically* dense open subscheme of `X*`. This is
+step 2 of the proof of Chow's lemma (blueprint: `lem:chow-scheme-theoretic-closure`): it
+replaces `X` by a scheme in which `U` is scheme-theoretically dense.
+
+Surjectivity holds for the scheme-theoretic image of any dominant quasi-compact morphism, since
+the underlying set of the scheme-theoretic image is the closure of the set-theoretic image
+(`AlgebraicGeometry.Scheme.Hom.range_imageι`). That `X* ⟶ X` is an isomorphism over `U` comes
+from the identification of the open `U ⊆ X*` with the preimage of `U ⊆ X`
+(`AlgebraicGeometry.Scheme.Opens.opensRange_toImage`), and the scheme-theoretic density of `U`
+in `X*` is `AlgebraicGeometry.Scheme.Hom.ker_toImage` transported along that identification.
+
+## The subscheme cut out by an ideal sheaf inherits quasi-compactness and quasi-separatedness
+
+The inclusion `I.subschemeι` is a closed immersion, hence affine, so `V(I)` is quasi-compact
+(resp. quasi-separated) as soon as the ambient scheme is.
+
 ## Main results
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeι_specMap_fromSpec`
 - `AlgebraicGeometry.Scheme.Hom.ker_toImage`
+- `AlgebraicGeometry.Scheme.Opens.closedComplement` and
+  `AlgebraicGeometry.Scheme.Opens.range_closedComplement`, with the specialisations
+  `AlgebraicGeometry.Scheme.Hom.closedComplement` and
+  `AlgebraicGeometry.Scheme.Hom.range_closedComplement` to the range of an open immersion
+- `AlgebraicGeometry.Scheme.Hom.range_imageι` and `AlgebraicGeometry.Scheme.Hom.surjective_imageι`
+- `AlgebraicGeometry.Scheme.Opens.isIso_morphismRestrict_imageι`
+- `AlgebraicGeometry.Scheme.Opens.isSchemeTheoreticallyDominant_preimage_imageι`
 -/
 
 @[expose] public section
@@ -79,6 +109,20 @@ lemma isPullback_subschemeι_specMap_fromSpec {S : CommRingCat.{u}} (φ : Γ(X, 
     (CommRingCat.isPushout_quotient φ (I.ideal U))).paste_horiz
       (I.isPullback_subschemeCover_map U)
 
+instance compactSpace_subscheme [CompactSpace X] : CompactSpace I.subscheme :=
+  QuasiCompact.compactSpace_of_compactSpace I.subschemeι
+
+instance quasiSeparatedSpace_subscheme [QuasiSeparatedSpace X] :
+    QuasiSeparatedSpace I.subscheme :=
+  quasiSeparatedSpace_of_quasiSeparated I.subschemeι
+
+/-- The inclusions of the subschemes attached to equal ideal sheaves agree up to
+`eqToHom`. -/
+lemma eqToHom_comp_subschemeι {I J : X.IdealSheafData} (e : I = J) :
+    eqToHom (congrArg Scheme.IdealSheafData.subscheme e) ≫ J.subschemeι = I.subschemeι := by
+  subst e
+  simp
+
 end AlgebraicGeometry.Scheme.IdealSheafData
 
 namespace AlgebraicGeometry.Scheme.Hom
@@ -95,5 +139,116 @@ lemma ker_toImage [QuasiCompact f] : f.toImage.ker = ⊥ := by
     exact (RingHom.injective_iff_ker_eq_bot _).mp (f.toImage_app_injective V)
 
 instance [QuasiCompact f] : IsSchemeTheoreticallyDominant f.toImage := ⟨f.ker_toImage⟩
+
+/-- The underlying set of the scheme-theoretic image of a quasi-compact morphism is the
+closure of the set-theoretic image. -/
+lemma range_imageι [QuasiCompact f] :
+    Set.range f.imageι = closure (Set.range f) := by
+  rw [IdealSheafData.range_subschemeι, f.support_ker]
+
+/-- The scheme-theoretic image of a dominant quasi-compact morphism is the whole target: the
+closed immersion `f.imageι` is surjective.
+(blueprint: `lem:chow-scheme-theoretic-closure` (1)) -/
+instance surjective_imageι [QuasiCompact f] [IsDominant f] : Surjective f.imageι :=
+  ⟨Set.range_eq_univ.mp <| by rw [range_imageι, f.denseRange.closure_range]⟩
+
+end AlgebraicGeometry.Scheme.Hom
+
+namespace AlgebraicGeometry.Scheme.Opens
+
+variable {X : Scheme.{u}} (U : X.Opens)
+
+/-- The **closed complement** of an open `U ⊆ X`: the closed subscheme of `X` cut out by the
+vanishing ideal of the closed set `Uᶜ`. -/
+noncomputable def closedComplement :
+    (IdealSheafData.vanishingIdeal ⟨(U : Set X)ᶜ, U.isOpen.isClosed_compl⟩).subscheme ⟶ X :=
+  IdealSheafData.subschemeι _
+
+instance isClosedImmersion_closedComplement : IsClosedImmersion U.closedComplement :=
+  inferInstanceAs (IsClosedImmersion (IdealSheafData.subschemeι _))
+
+/-- The closed complement of an open `U` is supported exactly on the complement of `U`. -/
+@[simp]
+lemma range_closedComplement : Set.range U.closedComplement.base = (U : Set X)ᶜ := by
+  simp [closedComplement, IdealSheafData.range_subschemeι,
+    IdealSheafData.coe_support_vanishingIdeal]
+
+section
+
+variable [QuasiCompact U.ι]
+
+/-- The scheme-theoretic closure `X*` of a dense open `U ⊆ X` maps onto `X`.
+(blueprint: `lem:chow-scheme-theoretic-closure` (1)) -/
+lemma surjective_imageι_ι (hU : Dense (U : Set X)) : Surjective U.ι.imageι :=
+  have : IsDominant U.ι := ⟨by rwa [DenseRange, range_ι]⟩
+  inferInstance
+
+/-- The copy of `U` inside the scheme-theoretic image `X*` of `U ⟶ X` is the preimage of `U`:
+the open immersion `U ⟶ X*` has image `X* ∩ U`. -/
+@[simp]
+lemma opensRange_toImage : U.ι.toImage.opensRange = U.ι.imageι ⁻¹ᵁ U := by
+  refine TopologicalSpace.Opens.ext ?_
+  have h : (U : Set X) = U.ι.imageι '' Set.range U.ι.toImage := by
+    rw [← Set.range_comp, ← TopCat.coe_comp, ← Scheme.Hom.comp_base, U.ι.toImage_imageι, range_ι]
+  change Set.range U.ι.toImage = U.ι.imageι ⁻¹' (U : Set X)
+  rw [h, Set.preimage_image_eq _ U.ι.imageι.isClosedEmbedding.injective]
+
+/-- The scheme-theoretic closure `X* ⟶ X` of an open `U ⊆ X` is an isomorphism over `U`.
+(blueprint: `lem:chow-scheme-theoretic-closure` (1)) -/
+instance isIso_morphismRestrict_imageι : IsIso (U.ι.imageι ∣_ U) := by
+  -- `U.ι.toImage` corestricts to an isomorphism `e : U ≅ X* ∩ U`, ...
+  set e := U.ι.toImage.isoOpensRange ≪≫ U.ι.image.isoOfEq (opensRange_toImage U) with he
+  -- ... and `e` is a section of the restriction `X* ∩ U ⟶ U` of `X* ⟶ X`.
+  have hcomp : e.hom ≫ (U.ι.imageι ∣_ U) = 𝟙 _ := by
+    rw [← cancel_mono U.ι, Category.assoc, morphismRestrict_ι, Category.id_comp, he]
+    simp only [Iso.trans_hom, Category.assoc, Scheme.isoOfEq_hom_ι_assoc,
+      Scheme.Hom.isoOpensRange_hom_ι_assoc, Scheme.Hom.toImage_imageι]
+  have : IsIso (e.hom ≫ (U.ι.imageι ∣_ U)) := hcomp ▸ inferInstance
+  exact IsIso.of_isIso_comp_left e.hom _
+
+/-- **`U` is scheme-theoretically dense in its scheme-theoretic closure `X*`**: the inclusion
+of the copy of `U` in `X*` is scheme-theoretically dominant.
+(blueprint: `lem:chow-scheme-theoretic-closure` (2)) -/
+instance isSchemeTheoreticallyDominant_preimage_imageι :
+    IsSchemeTheoreticallyDominant (U.ι.imageι ⁻¹ᵁ U).ι := by
+  rw [← opensRange_toImage U, ← Scheme.Hom.isoOpensRange_inv_comp U.ι.toImage]
+  infer_instance
+
+end
+
+/-- The trace on `X*` of an affine open of `X` is affine, since `X* ⟶ X` is a closed immersion.
+(blueprint: `lem:chow-scheme-theoretic-closure` (3)) -/
+lemma isAffineOpen_preimage_imageι {V : X.Opens} (hV : IsAffineOpen V) :
+    IsAffineOpen (U.ι.imageι ⁻¹ᵁ V) :=
+  hV.preimage U.ι.imageι
+
+/-- The traces on `X*` of an open covering of `X` cover `X*`.
+(blueprint: `lem:chow-scheme-theoretic-closure` (3)) -/
+lemma iSup_preimage_imageι_eq_top {ι : Type*} {V : ι → X.Opens} (hV : ⨆ i, V i = ⊤) :
+    ⨆ i, U.ι.imageι ⁻¹ᵁ V i = ⊤ :=
+  U.ι.imageι.iSup_preimage_eq_top hV
+
+/-- If a finite family of opens of `X` has intersection `U`, then the traces on `X*` of its
+members have intersection the copy of `U` in `X*`.
+(blueprint: `lem:chow-scheme-theoretic-closure` (3)) -/
+lemma iInf_preimage_imageι {ι : Type*} [Finite ι] {V : ι → X.Opens} (hV : ⨅ i, V i = U) :
+    ⨅ i, U.ι.imageι ⁻¹ᵁ V i = U.ι.imageι ⁻¹ᵁ U := by
+  rw [← U.ι.imageι.preimage_iInf, hV]
+
+end AlgebraicGeometry.Scheme.Opens
+
+namespace AlgebraicGeometry.Scheme.Hom
+
+variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+
+/-- The **closed complement** of an open immersion `j : U ⟶ X`: the closed complement
+`AlgebraicGeometry.Scheme.Opens.closedComplement` of its range. -/
+noncomputable abbrev closedComplement := j.opensRange.closedComplement
+
+/-- The closed complement of an open immersion `j` is supported exactly on the complement of
+the range of `j`. -/
+@[simp]
+lemma range_closedComplement : Set.range j.closedComplement.base = (Set.range j.base)ᶜ := by
+  simp
 
 end AlgebraicGeometry.Scheme.Hom

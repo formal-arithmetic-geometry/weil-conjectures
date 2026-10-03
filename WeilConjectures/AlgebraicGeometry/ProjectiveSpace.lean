@@ -25,6 +25,11 @@ Mathlib has no relative projective space to reuse, only the absolute `Proj` of a
 so everything below is new; the integral model itself is
 `Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)`.
 
+Morphisms *into* `ℙ(n; S)` are constructed from families of global sections generating the
+unit ideal in `WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections`, and the standard
+affine charts `standardOpen n S i ≅ 𝔸({j : n // j ≠ i}; S)` are in
+`WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts`.
+
 ## Main definitions
 
 - `AlgebraicGeometry.Proj.projectiveSpaceOverAffine` — the projective space `ℙ^σ_A` over an
@@ -34,11 +39,16 @@ so everything below is new; the integral model itself is
 - `AlgebraicGeometry.ProjectiveSpace` — `ℙ(n; S)` is the projective `n`-space over `S`, with
   structure morphism `ℙ(n; S) ↘ S`.
 - `AlgebraicGeometry.ProjectiveSpace.map` — functoriality of `ℙ(n; S)` in the base `S`.
+- `AlgebraicGeometry.ProjectiveSpace.liftBaseChange` — the morphism `T ⟶ ℙ(n; X)` induced by a
+  morphism `T ⟶ X` and a morphism `T ⟶ ℙ(n; S)` agreeing over `S`.
+- `AlgebraicGeometry.ProjectiveLine` — the projective line `ℙ¹_S = ℙ(ULift (Fin 2); S)`.
 
 ## Main results
 
 - `AlgebraicGeometry.ProjectiveSpace.instIsProper` — for a finite index type, the structure
   morphism `ℙ(n; S) ↘ S` is proper.
+- `AlgebraicGeometry.ProjectiveSpace.isPullback_map` — projective space commutes with base
+  change: for `g : X ⟶ S`, the scheme `ℙ(n; X)` is the base change of `ℙ(n; S)` along `g`.
 
 ## Implementation notes
 
@@ -63,17 +73,15 @@ builds relative `Proj`.
   `AlgebraicGeometry.AffineSpace.SpecIso`. This needs `Proj` to commute with base change,
   which Mathlib does not have, so `Proj.projectiveSpaceOverAffine` and `ProjectiveSpace` are
   for now two unrelated definitions.
-- The standard affine charts of `ℙ(n; S)`, i.e. morphisms `𝔸(n; S) ⟶ ℙ(n ⊕ Unit; S)` glued
-  from `Proj.awayι`. Mathlib has no universal property of `Proj`, so these charts are
-  currently the only way to construct morphisms *into* a projective space, and they are a
-  prerequisite for proving Chow's lemma.
 
 ## Blueprint
 
 `ProjectiveSpace` implements `def:nagata-projective-space-base-change` of the Nagata
 compactification blueprint, which is the base-change substitute for
-`def:nagata-relative-projective-space` described above, and `ProjectiveSpace.instIsProper`
-implements `lemma:nagata-projective-space-base-change-proper`. `Proj.projectiveSpaceOverAffine` is
+`def:nagata-relative-projective-space` described above, `ProjectiveSpace.instIsProper`
+implements `lemma:nagata-projective-space-base-change-proper` and
+`ProjectiveSpace.isPullback_map` implements
+`lemma:nagata-projective-space-base-change-pullback`. `Proj.projectiveSpaceOverAffine` is
 `def:nagata-affine-proj` for a polynomial ring.
 -/
 
@@ -142,6 +150,13 @@ lemma hom_ext {X : Scheme.{u}} {f g : X ⟶ ℙ(n; S)}
     (h₁ : f ≫ ℙ(n; S) ↘ S = g ≫ ℙ(n; S) ↘ S)
     (h₂ : f ≫ toProjInt n S = g ≫ toProjInt n S) : f = g :=
   pullback.hom_ext h₁ h₂
+
+/-- The defining pullback square of `ℙ(n; S)`: it is the base change of the integral model
+`ℙⁿ_ℤ` along the structure morphism of `S`. -/
+lemma isPullback_over_toProjInt :
+    IsPullback (ℙ(n; S) ↘ S) (toProjInt n S) (terminal.from S)
+      (terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ))) :=
+  IsPullback.of_hasPullback _ _
 
 /-- **`ℙ(n; S)` is proper over `S`**: for a finite index type `n`, the structure morphism
 `ℙ(n; S) ↘ S` is proper, being a base change of the proper morphism `ℙⁿ_ℤ ⟶ Spec ℤ`. -/
@@ -224,6 +239,146 @@ lemma map_comp {S S' S'' : Scheme.{u}} (f : S ⟶ S') (g : S' ⟶ S'') :
     map n (f ≫ g) = map n f ≫ map n g := by
   ext1 <;> simp
 
+/-- **Projective space commutes with base change**: for a morphism `g : X ⟶ S`, the square
+
+```
+            map n g
+  ℙ(n; X) ----------> ℙ(n; S)
+     |                   |
+     | ↘                 | ↘
+     ↓                   ↓
+     X ------- g ------> S
+```
+
+is cartesian, i.e. `ℙ(n; X)` is the base change of `ℙ(n; S)` along `g`. Indeed, both squares in
+
+```
+            map n g          toProjInt n S
+  ℙ(n; X) ----------> ℙ(n; S) -------------> ℙⁿ_ℤ
+     |                   |                     |
+     | ↘                 | ↘                   |
+     ↓                   ↓                     ↓
+     X ------- g ------> S --------------> Spec ℤ
+```
+
+are cartesian, and so is the outer rectangle.
+(blueprint: `lemma:nagata-projective-space-base-change-pullback`) -/
+lemma isPullback_map {X S : Scheme.{u}} (g : X ⟶ S) :
+    IsPullback (map n g) (ℙ(n; X) ↘ X) (ℙ(n; S) ↘ S) g := by
+  refine (IsPullback.paste_horiz_iff (isPullback_over_toProjInt n S).flip (map_over n g)).mp ?_
+  rw [map_toProjInt, terminal.comp_from]
+  exact (isPullback_over_toProjInt n X).flip
+
+/-- If `g : X ⟶ S` is proper, so is `map n g : ℙ(n; X) ⟶ ℙ(n; S)`, being the base change of
+`g` along the structure morphism `ℙ(n; S) ↘ S`. -/
+instance isProper_map {X S : Scheme.{u}} (g : X ⟶ S) [IsProper g] : IsProper (map n g) :=
+  MorphismProperty.of_isPullback (isPullback_map n g).flip inferInstance
+
+section LiftBaseChange
+
+variable {n} {X S T : Scheme.{u}} {g : X ⟶ S} (a : T ⟶ X) (b : T ⟶ ℙ(n; S))
+  (w : a ≫ g = b ≫ ℙ(n; S) ↘ S)
+
+/-- A morphism `a : T ⟶ X` and a morphism `b : T ⟶ ℙ(n; S)` agreeing over `S` induce a morphism
+`liftBaseChange a b w : T ⟶ ℙ(n; X)`, the unique one making
+
+```
+        T
+        |  ╲
+        |    ╲  b
+   lift |      ╲
+        ↓        ↘
+     ℙ(n; X) --- map n g ---> ℙ(n; S)
+        |                        |
+        | ↘                      | ↘
+        ↓                        ↓
+        X --------- g ---------> S
+```
+
+commute, the vertical arrow marked `lift` on the left; its composite with `ℙ(n; X) ↘ X` is `a`.
+This is the universal property of `ℙ(n; X)` as the base change of `ℙ(n; S)` along `g`, see
+`AlgebraicGeometry.ProjectiveSpace.isPullback_map`. -/
+def liftBaseChange : T ⟶ ℙ(n; X) :=
+  (isPullback_map n g).lift b a w.symm
+
+/-- `liftBaseChange a b w` is a morphism over `a`:
+
+```
+  T --- liftBaseChange a b w ---> ℙ(n; X)
+      ╲                              |
+        ╲  a                         | ↘
+          ↘                          ↓
+                                     X
+```
+
+commutes. -/
+@[reassoc (attr := simp)]
+lemma liftBaseChange_over : liftBaseChange a b w ≫ ℙ(n; X) ↘ X = a :=
+  (isPullback_map n g).lift_snd _ _ _
+
+/-- `liftBaseChange a b w` recovers `b` after composing with `map n g`:
+
+```
+  T --- liftBaseChange a b w ---> ℙ(n; X)
+      ╲                              |
+        ╲  b                         | map n g
+          ↘                          ↓
+                                  ℙ(n; S)
+```
+
+commutes. -/
+@[reassoc (attr := simp)]
+lemma liftBaseChange_map : liftBaseChange a b w ≫ map n g = b :=
+  (isPullback_map n g).lift_fst _ _ _
+
+/-- `liftBaseChange a b w` is compatible with the maps to the integral model `ℙⁿ_ℤ`:
+
+```
+  T --- liftBaseChange a b w ---> ℙ(n; X)
+      ╲                              |
+        ╲  b                         | toProjInt n X
+          ↘                          ↓
+        ℙ(n; S) --- toProjInt n S --> ℙⁿ_ℤ
+```
+
+commutes. -/
+@[reassoc (attr := simp)]
+lemma liftBaseChange_toProjInt :
+    liftBaseChange a b w ≫ toProjInt n X = b ≫ toProjInt n S := by
+  rw [← map_toProjInt n g, liftBaseChange_map_assoc]
+
+/-- If `g : X ⟶ S` is separated, so is `map n g : ℙ(n; X) ⟶ ℙ(n; S)`, being the base change
+of `g` along the structure morphism `ℙ(n; S) ↘ S`. -/
+instance isSeparated_map [IsSeparated g] : IsSeparated (map n g) :=
+  MorphismProperty.of_isPullback (isPullback_map n g).flip inferInstance
+
+/-- The lift of an immersion `b : T ⟶ ℙ(n; S)` is an immersion, since `liftBaseChange a b w ≫
+map n g = b`. -/
+instance isImmersion_liftBaseChange [IsImmersion b] : IsImmersion (liftBaseChange a b w) :=
+  have : IsImmersion (liftBaseChange a b w ≫ map n g) := by
+    rw [liftBaseChange_map]
+    infer_instance
+  .of_comp _ (map n g)
+
+/-- The lift of a closed immersion `b : T ⟶ ℙ(n; S)` along a separated morphism `g` is a
+closed immersion: `map n g` is separated, being a base change of `g`, and closed immersions
+cancel along separated morphisms. -/
+instance isClosedImmersion_liftBaseChange [IsSeparated g] [IsClosedImmersion b] :
+    IsClosedImmersion (liftBaseChange a b w) :=
+  have : IsClosedImmersion (liftBaseChange a b w ≫ map n g) := by
+    rw [liftBaseChange_map]
+    infer_instance
+  .of_comp _ (map n g)
+
+end LiftBaseChange
+
 end ProjectiveSpace
+
+/-- The **projective line** `ℙ¹_S` over a scheme `S`, with structure morphism
+`ProjectiveLine S ↘ S`. Following `AlgebraicGeometry.ProjectiveSpace`, whose index type is
+that of the *homogeneous* coordinates, this is `ℙ(ULift (Fin 2); S)`. It is an abbreviation,
+so that the instances of `ℙ(n; S)` — the `CanonicallyOver` structure and properness among
+them — apply to it unchanged. -/
+abbrev ProjectiveLine (S : Scheme.{u}) : Scheme.{u} := ℙ(ULift.{u} (Fin 2); S)
 
 end AlgebraicGeometry
