@@ -58,6 +58,12 @@ open Scheme Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
+/-- Étale sheaves of `Λ`-modules have finite biproducts (an abelian category has them; stated
+explicitly since instance search times out on the general route). -/
+noncomputable instance Etale.hasFiniteBiproducts_sheaf_moduleCat (X : Scheme.{u}) :
+    HasFiniteBiproducts (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+  HasFiniteBiproducts.of_hasFiniteProducts
+
 /-- **Constant sheaves on a normal scheme.** Let `Y` be an integral scheme all of whose local
 rings are integrally closed, `g : Spec K ⟶ Y` the inclusion of its generic point and `M` a
 `Λ`-module. Then the unit `M_Y ⟶ g_* g^* M_Y = g_* M_{Spec K}` is an isomorphism; the same
@@ -122,6 +128,31 @@ theorem Etale.exists_isNoetherian_upperStar_iso {U : Scheme.{u}} [CompactSpace U
       IsNoetherian U' ∧ IsConstructibleSheaf C' ∧ Nonempty (((ν)^*[_]).obj C' ≅ C) :=
   sorry
 
+/-- **Pulling back a finite-pushforward embedding.** If `C'` on `U'` embeds into a finite sum
+of pushforwards of constant sheaves along finite, finitely presented morphisms, then so does
+its pullback along any `ν : U ⟶ U'`: pullback is exact, commutes with finite sums, and with
+pushforward along finite morphisms (`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isFinite`),
+and it preserves constant sheaves. -/
+theorem Etale.exists_mono_biproduct_lowerStar_upperStar {U U' : Scheme.{u}} (ν : U ⟶ U')
+    (C' : Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {r : ℕ} (V : Fin r → Scheme.{u})
+    (h : ∀ i, V i ⟶ U') [∀ i, IsFinite (h i)] [∀ i, LocallyOfFinitePresentation (h i)]
+    (M : Fin r → ModuleCat.{u + 1} Λ)
+    (φ : C' ⟶ ⨁ fun i ↦ ((h i)_*[ModuleCat.{u + 1} Λ]).obj
+      ((constantSheaf (V i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))) [Mono φ] :
+    ∃ (V' : Fin r → Scheme.{u}) (h' : ∀ i, V' i ⟶ U) (_ : ∀ i, IsFinite (h' i))
+      (_ : ∀ i, LocallyOfFinitePresentation (h' i))
+      (φ' : ((ν)^*[_]).obj C' ⟶ ⨁ fun i ↦ ((h' i)_*[ModuleCat.{u + 1} Λ]).obj
+        ((constantSheaf (V' i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))), Mono φ' := by
+  let sq (i : Fin r) := IsPullback.of_hasPullback (h i) ν
+  have (i : Fin r) := Etale.isIso_baseChangeMap_of_isFinite (ModuleCat.{u + 1} Λ) (sq i)
+  let e (i : Fin r) := asIso ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) (sq i).toCommSq).app
+    ((constantSheaf (V i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))) ≪≫
+      ((pullback.snd (h i) ν)_*[ModuleCat.{u + 1} Λ]).mapIso
+        ((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) (pullback.fst (h i) ν)).app (M i))
+  refine ⟨fun i ↦ pullback (h i) ν, fun i ↦ pullback.snd (h i) ν, fun _ ↦ inferInstance,
+    fun _ ↦ inferInstance, ((ν)^*[_]).map φ ≫ (((ν)^*[_]).mapBiproduct _).hom ≫
+      (biproduct.mapIso e).hom, inferInstance⟩
+
 end Auxiliary
 
 /-- **Noetherian approximation of the finite-pushforward embedding.** A constructible sheaf
@@ -164,6 +195,10 @@ theorem Etale.exists_mono_biproduct_lowerStar {U : Scheme.{u}} [CompactSpace U]
       (M : Fin r → ModuleCat.{u + 1} Λ) (_ : ∀ i, Finite (M i))
       (φ : C ⟶ ⨁ fun i ↦ ((h i)_*[ModuleCat.{u + 1} Λ]).obj
         ((constantSheaf (V i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))), Mono φ := by
-  sorry
+  obtain ⟨U', ν, C', -, -, ⟨e⟩, r, V, h, hh, hfp, M, hM, φ, hφ⟩ :=
+    Etale.exists_isNoetherian_mono_biproduct_lowerStar Λ C
+  obtain ⟨V', h', hh', hfp', φ', hφ'⟩ :=
+    Etale.exists_mono_biproduct_lowerStar_upperStar Λ ν C' V h M φ
+  exact ⟨r, V', h', hh', hfp', M, hM, e.inv ≫ φ', inferInstance⟩
 
 end AlgebraicGeometry

@@ -45,8 +45,8 @@ There is a connected finite étale `v : V ⟶ U` such that
 * `G` is a direct summand of `v_* v^* G`: the unit `G ⟶ v_* v^* G` of `v^* ⊣ v_*` has a
   retraction (namely `d⁻¹ · tr`, the trace being the sum over the geometric fibres).
 
-The constant sheaf `𝔽_ℓ` is the constant sheaf with value `ULift (ZMod ℓ)` regarded as a
-`ZMod ℓ`-module, so as to live in `ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))`.
+The coefficient field `𝔽_ℓ` is `ULift.{u + 1} (ZMod ℓ)`, following the convention that the
+coefficient ring of `ModuleCat.{u + 1} Λ`-valued étale sheaves lives in `Type (u + 1)`.
 (blueprint: `lemma-weil-pbc-curve-locally-constant-reduction`) -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction {U : Scheme.{u}}
     [IrreducibleSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
@@ -56,16 +56,18 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction {U : S
       (d : ℕ), ¬ ℓ ∣ d ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ U),
         Nat.card (v.GeometricFiber s) = d) ∧
-      (∃ (n : ℕ) (W : ℕ → Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
+      (∃ (n : ℕ)
+        (W : ℕ → Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
         (ι : ∀ i, W i ⟶ W (i + 1)), IsZero (W 0) ∧
         Nonempty (W n ≅ (v)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj G) ∧
         ∀ i < n, Mono (ι i) ∧ Nonempty (cokernel (ι i) ≅
-          (constantSheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
+          (constantSheaf V.smallEtaleTopology
+            (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
             (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))))) ∧
       ∃ r : (v)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj
           ((v)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj G) ⟶ G,
-        (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) v).unit.app G ≫ r =
-          𝟙 G := by
+        (Etale.upperStarLowerStarAdjunction
+          (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) v).unit.app G ≫ r = 𝟙 G := by
   sorry
 
 end AlgebraicGeometry

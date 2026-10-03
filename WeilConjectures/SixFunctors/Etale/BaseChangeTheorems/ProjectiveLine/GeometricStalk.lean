@@ -250,7 +250,12 @@ theorem Etale.isIso_baseChangeHomologyMap_projectiveLine
   let ι : Spec (.of (AlgebraicClosure κt)) ⟶ Spec (.of (AlgebraicClosure κs)) :=
     Spec.map (CommRingCat.ofHom ψ.toRingHom)
   have hι : ι ≫ S.algClosurePoint (g.base t) = T.algClosurePoint t ≫ g := by
-    sorry
+    rw [Scheme.algClosurePoint_eq, Scheme.algClosurePoint_eq, Category.assoc,
+      ← Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField, ← Spec.map_comp_assoc,
+      ← Spec.map_comp_assoc]
+    congr 2
+    ext x
+    exact ψ.commutes x
   obtain ⟨e₁, e₂, h⟩ := Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
     Λ sq (S.algClosurePoint (g.base t)) (T.algClosurePoint t) ι hι
     ⟨g.base t, CommRingCat.ofHom (algebraMap κs (AlgebraicClosure κs)),
@@ -261,7 +266,9 @@ theorem Etale.isIso_baseChangeHomologyMap_projectiveLine
     (ProjectiveSpace.isPullback_map _ ι)
     ((ProjectiveSpace.map _ (S.algClosurePoint (g.base t)))^*[ModuleCat.{u + 1} Λ].obj F) q
   rw [ConcreteCategory.isIso_iff_bijective]
-  sorry
+  convert e₂.symm.bijective.comp (hb.comp e₁.bijective) using 1
+  funext x
+  exact (e₂.symm_apply_apply _).symm.trans (congrArg e₂.symm (h x))
 
 /-- **Injective acyclicity of the projective line**: for every scheme `S`, the projection
 `ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasInjectiveAcyclicity`. For an injective
@@ -271,7 +278,18 @@ exchange morphism `g⁻¹ Rᵠp_* I ⟶ Rᵠf'_* g'⁻¹ I` is an isomorphism
 vanishes too.
 (blueprint: `prop-weil-pbc-projective-line`) -/
 theorem Etale.hasInjectiveAcyclicity_projectiveLine (S : Scheme.{u}) :
-    Etale.HasInjectiveAcyclicity Λ (ProjectiveLine S ↘ S) :=
-  sorry
+    Etale.HasInjectiveAcyclicity Λ (ProjectiveLine S ↘ S) := by
+  intro T X' g f' g' sq I hI _ q hq
+  obtain ⟨n, rfl⟩ := Int.eq_ofNat_of_zero_le hq.le
+  have := hI
+  have := Etale.isIso_baseChangeHomologyMap_projectiveLine Λ sq I n
+  refine IsZero.of_iso ?_ ((DerivedCategory.Plus.homologyFunctor _ n).mapIso
+    (((f')_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.mapIso
+      ((((g')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app I))).symm
+  refine IsZero.of_iso ?_ (asIso (Etale.baseChangeHomologyMap Λ sq n I)).symm
+  refine IsZero.of_iso ?_
+    ((((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso n).app _).symm
+  exact ((g)^*[ModuleCat.{u + 1} Λ]).map_isZero
+    (Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_singleFunctor _ I (q := n) (by lia))
 
 end AlgebraicGeometry

@@ -54,8 +54,8 @@ Spec A/I --> Spec A
 ## References
 
 - Stacks Project, Section 59.91, <https://stacks.math.columbia.edu/tag/0A3S>
-- Stacks Project, Lemma 59.64.? (finite locally constant sheaves),
-  <https://stacks.math.columbia.edu/tag/03RV>
+- Stacks Project, Étale Cohomology, Section "Locally constant sheaves" (finite locally
+  constant sheaves of sets and finite étale schemes)
 -/
 
 @[expose] public section
@@ -100,7 +100,6 @@ is the equivalence between finite étale `T`-schemes and finite locally constant
 sets; in particular an action of a finite group on such a sheaf is the same as an action by
 `T`-automorphisms on the corresponding finite étale scheme.
 (blueprint: `lemma-weil-pbc-finite-locally-constant-etale-equivalence`) -/
-@[stacks 03RV]
 theorem Scheme.finiteEtale_equiv_finiteLocallyConstant (T : Scheme.{u}) :
     (∀ (P : Scheme.{u}) (π : P ⟶ T) [IsFinite π] [Etale π],
       ∃ h : Presheaf.IsSheaf T.smallEtaleTopology (uliftYoneda.{u + 1}.obj (Scheme.Etale.mk π)),

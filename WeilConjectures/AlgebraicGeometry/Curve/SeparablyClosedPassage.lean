@@ -53,8 +53,9 @@ lemma mapExactFunctor_mapExactFunctor (F : C ⥤ D) [F.Additive] [PreservesFinit
       (Ext.eq_zero_of_injective (I := I.J) _) rfl
     rw [Ext.mapExactFunctor_comp, Ext.mapExactFunctor_comp, Ext.mapExactFunctor_comp, hn]
     congr 1
-    rw [Ext.mapExactFunctor_extClass, Ext.mapExactFunctor_extClass]
-    exact Ext.mapExactFunctor_extClass G (hS.map_of_exact F)
+    exact (congrArg (Ext.mapExactFunctor G) (Ext.mapExactFunctor_extClass F hS)).trans
+      ((Ext.mapExactFunctor_extClass G (hS.map_of_exact F)).trans
+        (Ext.mapExactFunctor_extClass (F ⋙ G) hS).symm)
 
 /-- Pushing `Ext`-classes forward along exact functors is natural with respect to natural
 transformations of the functors. -/

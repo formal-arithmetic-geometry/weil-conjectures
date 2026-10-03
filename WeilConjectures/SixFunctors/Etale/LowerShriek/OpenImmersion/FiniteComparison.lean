@@ -198,8 +198,9 @@ lemma Etale.isIso_upperStar_point_map_finiteOpenComparison_app
     rw [← Scheme.Hom.comp_apply, ← sq.w, Scheme.Hom.comp_apply, ← hb,
       ← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, pullback.condition]
   have h₂ : IsZero ((s)^*[A].obj ((vbar)_*[A].obj ((jX)_!open[A].obj G))) :=
-    (Functor.map_isZero (pullback.snd vbar s)_*[A] (Etale.isZero_upperStar_openImmersionLowerShriek_of_disjoint_range A
-      jX (pullback.fst vbar s) hdisj' G)).of_iso
+    (Functor.map_isZero (pullback.snd vbar s)_*[A]
+      (Etale.isZero_upperStar_openImmersionLowerShriek_of_disjoint_range A
+        jX (pullback.fst vbar s) hdisj' G)).of_iso
       (asIso ((Etale.baseChangeMap A hsq.toCommSq).app ((jX)_!open[A].obj G)))
   exact ⟨⟨h₂.to_ _, h₁.eq_of_src _ _, h₂.eq_of_src _ _⟩⟩
 
