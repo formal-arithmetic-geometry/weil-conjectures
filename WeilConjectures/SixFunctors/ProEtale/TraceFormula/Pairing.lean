@@ -46,7 +46,7 @@ pro-étale functors and the comparison data of the package
 
 * `GeometricOperations.kunnethClass` turns a coefficient map into a class on `Y × X`
   through the projection formula, the composition of exceptional inverse images, tensor-hom
-  and the inverse of the field `kunnethVerdier`;
+  and the inverse of the Künneth-Verdier isomorphism `GeometricOperations.kunnethVerdier`;
 * `GeometricOperations.pairingOfSquare` contracts two such classes using the projection
   formula, `!`-base change, the monoidal structure `upperStarTensor` of the pullback, the
   Verdier evaluations and
@@ -60,19 +60,17 @@ pro-étale functors and the comparison data of the package
   formalised;
 * `localTerm` is the integral of the restriction `GeometricOperations.borelMooreRestrict`.
 
-The Künneth-Verdier field needs a field as base (the class `Scheme.IsSpecOfField`), `X` and
-`Y` separated of finite type and the coefficients in `Dᵇctf`, so `supportedPairing` and
-`traceClass` carry those hypotheses. Separatedness and local finite type of `a_X` are
+The Künneth-Verdier isomorphism needs a field as base (the class `Scheme.IsSpecOfField`),
+`X` and `Y` separated of finite type and the coefficients in `Dᵇctf`, so `supportedPairing`
+and `traceClass` carry those hypotheses. Separatedness and local finite type of `a_X` are
 instances derived from `HasCompactification a_X`, so only `QuasiCompact a_X` is added.
 The helpers are stated for an arbitrary Cartesian square rather than for `pullback aY aX`:
 the kernel check of monoidal composites in the derived category of the literal fibre
 product is very slow, and instantiating the general statement avoids it.
 
-The package has no axiom relating `dualizingExteriorProd` to `kunnethVerdier`, nor saying
-that `dualizingExteriorProd` is the Künneth isomorphism `ω_Y ⊠ ω_X ≃ ω_{Y × X}`. The point
-normalisation `integral_traceClass_eq_trace` and the later identities of the pairing need
-such a compatibility, so they may not be provable from the package fields as they stand;
-this is a limitation of the package of the same kind as those recorded in `Defs.lean`.
+`dualizingExteriorProd` and the exceptional trace of `GeometricOperations.kunnethVerdierMap`
+are built from the same package data: `!`-base change, `dualizingIso` and the counit of
+`Ra_! ⊣ a^!`.
 
 Perfectness is rendered as dualizability, `HasRightDual`, and `tr_A` is
 `CategoryTheory.MonoidalCategory.trace`, taken in `D(s, A)`, whose unit endomorphism ring
@@ -142,8 +140,7 @@ noncomputable def exceptionalMate :
 the inverse of the Künneth-Verdier isomorphism
 `pX^* M ⊗ᴸ pY^* D N ≃ RHom(pY^* N, pX^! M)` (part of blueprint `sk-d-pairing`). -/
 noncomputable def kunnethClass [s.IsSpecOfField]
-    [IsSeparated aX'] [LocallyOfFiniteType aX'] [QuasiCompact aX']
-    [IsSeparated aY'] [LocallyOfFiniteType aY'] [QuasiCompact aY']
+    [HasCompactification aX'] [QuasiCompact aX'] [HasCompactification aY'] [QuasiCompact aY']
     (sq : IsPullback pX pY aX' aY') (hM : G.ctf X' M) (hN : G.ctf Y' N) :
     (rightDerivedLowerShriek A i).obj (𝟙_ _) ⟶
       ((upperStar A pX).leftDerivedFunctor).obj M ⊗

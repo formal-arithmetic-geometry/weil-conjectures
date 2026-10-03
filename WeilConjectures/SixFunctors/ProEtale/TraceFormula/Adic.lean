@@ -23,9 +23,8 @@ the shape of an Euler product.
 
 ## Main results
 
-- `AlgebraicGeometry.ProEtale.nonempty_rightDerivedLowerShriek_comp_iso`,
-  `AlgebraicGeometry.ProEtale.nonempty_leftDerivedUpperStar_comp_iso`: compact cohomology
-  and geometric stalks commute with a change of finite coefficients.
+- `AlgebraicGeometry.ProEtale.nonempty_rightDerivedLowerShriek_comp_iso`: compact
+  cohomology commutes with a change of finite coefficients.
 - `AlgebraicGeometry.ProEtale.derivedComplete_limit`,
   `AlgebraicGeometry.ProEtale.nonempty_derivedCompletionDiagram_obj_limit_iso`,
   `AlgebraicGeometry.ProEtale.nonempty_rightDerivedLowerShriek_obj_limit_iso`,
@@ -39,15 +38,16 @@ the shape of an Euler product.
 Derived scalar extension along a map of coefficient *rings* does not exist in this
 project: coefficients are abstract monoidal Grothendieck abelian categories, and the
 functor `- ⊗ᴸ_A B` between the associated derived categories of pro-étale sheaves is part
-of the six-operations chapter. It is therefore a parameter `Ψ` of the first two statements,
+of the six-operations chapter. It is therefore a parameter `Ψ` of the first statement,
 a family of functors `Ψ Z : D(Z, A) ⥤ D(Z, B)`, and the compatibilities that its
 construction supplies are hypotheses: `Ψ` commutes with `Lg^*`, and with `Rg_*` for an
 open immersion and for a proper `g`. These are exactly the ingredients out of which
 `Rf_! = Rf̄_* ∘ j_!` is assembled, which is why the conclusion for `Rf_!` is the content of
-the proposition; the conclusion for a geometric stalk is the pullback hypothesis read at
-the point. Both are `Nonempty` isomorphisms of *functors*, since the comparison maps
-themselves are not available; naturality is what the sketch's "the comparisons are natural,
-hence compatible with the Frobenius maps" means.
+the proposition. The blueprint's second assertion, for a geometric stalk, is the pullback
+hypothesis read at the point, so it gets no separate declaration. The conclusion is a
+`Nonempty` isomorphism of *functors*, since the comparison maps themselves are not
+available; naturality is what the sketch's "the comparisons are natural, hence compatible
+with the Frobenius maps" means.
 
 The adic realization follows the project's derived-completeness API, which models the whole
 tower inside the single derived category `D(X, 𝒪_E)` of sheaves of `𝒪_E`-modules rather
@@ -77,16 +77,17 @@ taken as a hypothesis — a ring map `θ` from the coefficient ring `End (𝟙_ 
 stage to a field `Λ` of characteristic zero, finite-dimensional `Λ`-vector spaces `Hc i`
 and `St y i` with endomorphisms realizing `H_c^i(X, K)` and the cohomology of the stalk
 `K_ȳ` at a closed point `y` of `X₀`, and the two hypotheses `hHc`, `hSt` saying that `θ`
-carries the two categorical traces of
-`trace_globalOperator_eq_sum_trace_stalkFrobenius` to the alternating linear-algebra
-traces. The point side is regrouped as in the sketch: a closed point `y` of degree `e_y`
-contributes `e_y` rational points, each with stalk Frobenius `F_y^{m/e_y}`, exactly when
-`e_y ∣ m`. The scheme `X₀` is tied to `X` by `hbase`, which exhibits `X` as its base change
-along `s ⟶ Spec k`. The passage from the trace identity to the product is
-`LinearMap.inv_charpolyRev_eq_exp`, and the coefficient field carries the discrete
-topology, so that `HasProd` in `PowerSeries Λ` is exactly coefficientwise local finiteness
-together with the value of the product. Compatibility with an embedding `ι : ℚ̄_ℓ ⟶ ℂ` is
-not stated separately: it is the image of the identity under `PowerSeries.map ι`.
+carries the categorical traces of the global Frobenius and of the stalk Frobenius
+`F_{x,m}` at each fixed point `x` lying over `y` to the alternating linear-algebra traces of
+`F^m` and `F_y^{m/e_y}`. The regrouping of the point side — a closed point `y` of degree
+`e_y` contributes `e_y` rational points exactly when `e_y ∣ m` — is part of the assertion.
+The scheme `X₀` is tied to `X` by `hΦ`, which exhibits `X` as its base change along
+`s ⟶ Spec k` and the Frobenius as the base change of that of `X₀`. The passage from the
+trace identity to the product is `LinearMap.inv_charpolyRev_eq_exp`, and the coefficient
+field carries the discrete topology, so that `HasProd` in `PowerSeries Λ` is exactly
+coefficientwise local finiteness together with the value of the product. Compatibility
+with an embedding `ι : ℚ̄_ℓ ⟶ ℂ` is not stated separately: it is the image of the identity
+under `PowerSeries.map ι`.
 -/
 
 @[expose] public section
@@ -124,20 +125,6 @@ theorem nonempty_rightDerivedLowerShriek_comp_iso
     (aX : X ⟶ s) [HasCompactification aX] :
     Nonempty (rightDerivedLowerShriek A aX ⋙ Ψ s ≅ Ψ X ⋙ rightDerivedLowerShriek B aX) :=
   sorry
-
-/-- Finite-level coefficient change for geometric stalks: derived scalar extension
-`- ⊗ᴸ_A B` commutes with the stalk at a geometric point, that is,
-`(K ⊗ᴸ B)_x̄ ≅ K_x̄ ⊗ᴸ B` (blueprint: `sk-p-trace-coeff`). -/
-theorem nonempty_leftDerivedUpperStar_comp_iso
-    (Ψ : ∀ Z : Scheme.{u}, DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A) ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology Z) B))
-    (hupperStar : ∀ {Z Z' : Scheme.{u}} (g : Z ⟶ Z'),
-      Nonempty ((upperStar A g).leftDerivedFunctor ⋙ Ψ Z ≅
-        Ψ Z' ⋙ (upperStar B g).leftDerivedFunctor))
-    (x : s ⟶ X) :
-    Nonempty ((upperStar A x).leftDerivedFunctor ⋙ Ψ s ≅
-      Ψ X ⋙ (upperStar B x).leftDerivedFunctor) :=
-  hupperStar x
 
 /-- Adic realization, derived completeness: the realization `K_{𝒪_E} = R lim_n K_n` of a
 normalized system `K_• = (K_n, t_{n+1,n})` of finite-level complexes is derived complete
@@ -204,33 +191,32 @@ in `1 + T Λ[[T]]`, the product over the closed points `y` of `X₀` being coeff
 locally finite. This is the Euler-product form of
 `trace_globalOperator_eq_sum_trace_stalkFrobenius`
 (blueprint: `sk-thm-trace-transport`). -/
-theorem hasProd_inv_alternatingCharpolyRevProd [DerivedBraiding A]
-    (G : GeometricOperations A s)
-    {aX : X ⟶ s} [HasCompactification aX] (W : WeilComplex (A := A) aX) (hW : IsIso W.coeff)
+theorem hasProd_inv_alternatingCharpolyRevProd [DerivedBraiding A] {Ω : Type u} [Field Ω]
+    [IsAlgClosed Ω] (G : GeometricOperations A (Spec (.of Ω))) {aX : X ⟶ Spec (.of Ω)}
+    [HasCompactification aX] (W : WeilComplex (A := A) aX) (hW : IsIso W.coeff)
     (hctf : G.ctf X W.obj)
     [∀ m : ℕ, IsProper (W.graph G m).snd]
-    [∀ m : ℕ, Fintype {x : s ⟶ X // x ≫ W.frobeniusIterate m = x}]
     [HasRightDual ((rightDerivedLowerShriek A aX).obj W.obj)]
-    [∀ x : s ⟶ X, HasRightDual (((upperStar A x).leftDerivedFunctor).obj W.obj)]
+    [∀ x : Spec (.of Ω) ⟶ X, HasRightDual (((upperStar A x).leftDerivedFunctor).obj W.obj)]
     {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f₀ : X₀ ⟶ Spec (.of k))
-    [QuasiCompact f₀] [LocallyOfFiniteType f₀] (σ : s ⟶ Spec (.of k)) (p : X ⟶ X₀)
-    (hbase : IsPullback p aX f₀ σ)
+    [IsSeparated f₀] [QuasiCompact f₀] [LocallyOfFiniteType f₀] (σ : Spec (.of Ω) ⟶ Spec (.of k))
+    (p : X ⟶ X₀) (hΦ : W.IsModelFrobenius f₀ σ p)
     {Λ : Type w} [Field Λ] [CharZero Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (degs : Finset ℤ)
     {Hc : ℤ → Type w} [∀ i, AddCommGroup (Hc i)] [∀ i, Module Λ (Hc i)]
     [∀ i, FiniteDimensional Λ (Hc i)] (Fc : ∀ i, Module.End Λ (Hc i))
     {St : X₀ → ℤ → Type w} [∀ y i, AddCommGroup (St y i)] [∀ y i, Module Λ (St y i)]
     [∀ y i, FiniteDimensional Λ (St y i)] (Fst : ∀ y i, Module.End Λ (St y i))
-    (θ : End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))) →+* Λ)
+    (θ : End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) A))) →+* Λ)
     (hHc : ∀ m : ℕ, 1 ≤ m →
       θ (MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G m))) =
         ∑ i ∈ degs, (i.negOnePow : ℤ) • LinearMap.trace Λ (Hc i) (Fc i ^ m))
     (hSt : ∀ m : ℕ, 1 ≤ m →
-      ∑ y : {x : s ⟶ X // x ≫ W.frobeniusIterate m = x},
-          θ (MonoidalCategory.trace (W.stalkFrobenius m y.1 y.2)) =
-        ∑ᶠ y : X₀.finitePoints, if f₀.degreeOver y.1 ∣ m then (f₀.degreeOver y.1 : Λ) *
+      ∀ x : {x : Spec (.of Ω) ⟶ X // x ≫ aX = 𝟙 _ ∧ x ≫ W.frobeniusIterate m = x},
+      ∀ y : X₀.finitePoints, y.1 ∈ Set.range (x.1 ≫ p).base →
+        θ (MonoidalCategory.trace (W.stalkFrobenius m x.1 x.2.2)) =
           ∑ i ∈ degs, (i.negOnePow : ℤ) •
-            LinearMap.trace Λ (St y.1 i) (Fst y.1 i ^ (m / f₀.degreeOver y.1)) else 0) :
+            LinearMap.trace Λ (St y.1 i) (Fst y.1 i ^ (m / f₀.degreeOver y.1))) :
     HasProd
       (fun y : X₀.finitePoints ↦
         (LinearMap.alternatingCharpolyRevProd degs (Fst y.1) (f₀.degreeOver y.1))⁻¹)

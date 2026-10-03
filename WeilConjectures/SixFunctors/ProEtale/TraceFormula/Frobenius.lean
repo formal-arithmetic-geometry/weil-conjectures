@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
@@ -23,9 +24,13 @@ graph correspondences `c_m = (id, Φ_m)` and the global Frobenius operators.
 - `AlgebraicGeometry.ProEtale.WeilComplex`: a complex with a Frobenius coefficient
   morphism, together with its iterates `frobeniusIterate`, `coeffIterate` and its graph
   correspondences `WeilComplex.graph`.
+- `AlgebraicGeometry.ProEtale.WeilComplex.IsModelFrobenius`: the Frobenius `Φ₁` is the base
+  change of the `q`-power Frobenius of a model `X₀` over `𝐅_q`.
 - `AlgebraicGeometry.ProEtale.WeilComplex.upperStarPullCoeff`: the Frobenius coefficient
   morphism `Lg^* Lf^* K ⟶ Lf^* K` of the pullback along a morphism `f` intertwining `g` and
   `Φ_m`.
+- `AlgebraicGeometry.ProEtale.WeilComplex.upperStarPull`: the pullback `Lf^* K` of a Weil
+  complex along a morphism `f` intertwining `g` and `Φ₁`.
 - `AlgebraicGeometry.ProEtale.WeilComplex.stalkFrobenius`: the geometric-stalk Frobenius
   `F_{x,m} = (φ_m)_x̄` at a point fixed by `Φ_m`.
 - `AlgebraicGeometry.ProEtale.relativeFrobenius`: the relative Frobenius `r_m` of a
@@ -46,13 +51,16 @@ graph correspondences `c_m = (id, Φ_m)` and the global Frobenius operators.
 
 ## Implementation notes
 
-The `q^m`-power Frobenius of a scheme is not formalised anywhere in Mathlib or in this
+The `q^m`-power Frobenius of a scheme is not constructed anywhere in Mathlib or in this
 project, so `AlgebraicGeometry.ProEtale.WeilComplex` carries it as data: an `s`-morphism
-`Φ₁ : X ⟶ X`. The properties of it that the trace formula uses — being finite and a
-universal homeomorphism — appear as hypotheses where they are needed. The `coeff` field is
-a plain morphism rather than an isomorphism, so that a `WeilComplex` covers both a Weil
-datum (add `IsIso W.coeff`) and the arbitrary *Frobenius coefficient morphism* that the
-coefficient continuation of the argument needs.
+`Φ₁ : X ⟶ X`. Statements that are only true for the Frobenius, such as the trace formula,
+add the hypothesis `WeilComplex.IsModelFrobenius`: `X = X₀ ×_{𝐅_q} s` for a model `X₀` and
+`Φ₁` is the base change of the `q`-power Frobenius of `X₀`
+(`AlgebraicGeometry.Scheme.Hom.IsFrobenius`). The properties of `Φ₁` that the formal parts of
+the argument use — being finite and a universal homeomorphism — appear as hypotheses where
+they are needed. The `coeff` field is a plain morphism rather than an isomorphism, so that a
+`WeilComplex` covers both a Weil datum (add `IsIso W.coeff`) and the arbitrary *Frobenius
+coefficient morphism* that the coefficient continuation of the argument needs.
 
 `isUniversalHomeomorphism_relativeFrobenius` is not proved because the cancellation lemma
 it needs — if `g ≫ f` and `f` are universal homeomorphisms then so is `g` — is missing;
@@ -72,10 +80,9 @@ depend on `G`.
 
 `GeometricOperations.lowerShriekExchange`, and hence the coefficient map of
 `WeilComplex.lowerShriekPush`, uses the fields `baseChange`, `properComparison` and
-`lowerShriekComp` at non-identity morphisms. These are not pinned to the canonical maps nor
-tied to each other (see `WeilConjectures.SixFunctors.ProEtale.TraceFormula.Defs`), so
-rescaling `properComparison r` rescales the Frobenius coefficient of `Rf_! K`. Statements
-about traces of Frobenius on `Rf_! K` need those coherence axioms first.
+`lowerShriekComp` at non-identity morphisms. These are tied to each other by the coherence
+axioms of the package, but `properComparison` is not pinned to the canonical map
+`Rf_! ⟶ Rf_*` (see `WeilConjectures.SixFunctors.ProEtale.TraceFormula.Defs`).
 -/
 
 @[expose] public section
@@ -141,6 +148,27 @@ lemma comp_frobeniusIterate_of_comp_frobenius {x : s ⟶ X} (hx : x ≫ W.froben
   induction m with
   | zero => simp
   | succ n ih => rw [frobeniusIterate_succ, ← Category.assoc, hx, ih]
+
+/-- The Frobenius `Φ₁` of a Weil complex on `a_X : X ⟶ s` is the geometric `q`-power Frobenius
+of a model `X₀` over the finite field `k` with `q = #k`: the square
+
+```
+     X ───p───▶ X₀
+     │          │
+  a_X│          │f₀
+     ▼          ▼
+     s ───σ───▶ Spec k
+```
+
+is Cartesian, and `Φ₁ = F₀ × 𝟙_s` for the `q`-power Frobenius `F₀` of `X₀`, that is,
+`Φ₁ ≫ p = p ≫ F₀` (`Φ₁ ≫ a_X = a_X` is `WeilComplex.frobenius_comp`). Since the square is
+Cartesian, these two equations determine `Φ₁` (blueprint: `sk-d-weil`). -/
+structure IsModelFrobenius {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}}
+    (f₀ : X₀ ⟶ Spec (.of k)) (σ : s ⟶ Spec (.of k)) (p : X ⟶ X₀) : Prop where
+  /-- `X` is the base change `X₀ ×_{Spec k} s`. -/
+  isPullback : IsPullback p aX f₀ σ
+  /-- `Φ₁` is the base change of the `q`-power Frobenius of `X₀`. -/
+  exists_isFrobenius : ∃ F₀ : X₀ ⟶ X₀, F₀.IsFrobenius (Nat.card k) ∧ W.frobenius ≫ p = p ≫ F₀
 
 /-- The iterate `φ_m : Φ_m^* K ⟶ K` of the Frobenius coefficient morphism, obtained by
 composing the pulled back copies of `φ` along the composition isomorphisms for `Φ^*`:
@@ -259,6 +287,17 @@ instance isIso_upperStarPullCoeff [IsIso W.coeff] (m : ℕ) {f : Y ⟶ X} {g : Y
     IsIso (W.upperStarPullCoeff m sq) := by
   dsimp [upperStarPullCoeff]
   infer_instance
+
+/-- The pullback of a Weil complex along a morphism `f : Y ⟶ X` over `s` that intertwines an
+endomorphism `g : Y ⟶ Y` with `Φ₁`: the Weil complex `Lf^* K` on `Y` with Frobenius `g` and
+coefficient morphism `W.upperStarPullCoeff 1 sq` (part of blueprint `sk-d-curve-pieces`). -/
+noncomputable def upperStarPull (f : Y ⟶ X) {aY : Y ⟶ s} (hf : f ≫ aX = aY) (g : Y ⟶ Y)
+    (sq : CommSq g f f (W.frobeniusIterate 1)) : WeilComplex (A := A) aY where
+  frobenius := g
+  frobenius_comp := by
+    rw [← hf, ← Category.assoc, sq.w, Category.assoc, W.frobeniusIterate_comp]
+  obj := ((upperStar A f).leftDerivedFunctor).obj W.obj
+  coeff := W.upperStarPullCoeff 1 sq
 
 end WeilComplex
 

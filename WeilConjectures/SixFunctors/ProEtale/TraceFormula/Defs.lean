@@ -41,6 +41,9 @@ data which this project has not yet built, stated for the pro-étale functors th
   isomorphisms of the monoidal structure `upperStarMonoidal` of `Lf^*`.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.dualizingCongr`: transport of `ω` along an
   equality of structure morphisms.
+- `AlgebraicGeometry.ProEtale.GeometricOperations.kunnethVerdierMap`,
+  `AlgebraicGeometry.ProEtale.GeometricOperations.kunnethVerdier`: the canonical Künneth-Verdier
+  map `M ⊠ D_Y N ⟶ RHom(p_Y^* N, p_X^! M)` and, on `Dᵇctf`, the isomorphism it is.
 
 ## Main results
 
@@ -73,32 +76,32 @@ braidings of all the `D(X, A)` are therefore supplied at once by the temporary c
 `DerivedBraiding`, whose instances are global, rather than by a separate instance argument
 for each scheme, and the package requires the monoidal structure `upperStarMonoidal` of
 every `Lf^*` to be braided for them (`upperStarMonoidal_braiding`). So all braidings in the
-trace formula are the same choice, compatible with pullback. The choice is not pinned to the
-Koszul-sign braiding induced from `A`, and the trace statements are only correct for that
-braiding; once it is constructed, `DerivedBraiding` should be removed and
-`upperStarMonoidal_braiding` becomes a theorem.
+trace formula are the same choice, compatible with pullback. The trace statements are only
+correct for the Koszul-sign braiding induced from `A`, so `DerivedBraiding` pins the sign of
+the braiding of `A_X[1]` with itself to `-1`; once the braiding is constructed,
+`DerivedBraiding` should be removed and `upperStarMonoidal_braiding` becomes a theorem.
 
-Two limitations of the package as stated.
+The comparison isomorphisms are tied to each other by coherence axioms: the unit axioms of
+`lowerShriekId`; the identifications of `properComparison`, `dualizingBase`, `dualizingComp`
+and the unit of `upperStarMonoidal` at `f = 𝟙`; the compatibility of `properComparison` with
+composition (`properComparison_comp`, against `lowerShriekComp` and the composition of
+`Rf_*`) and of `dualizingComp` with composition (`dualizingComp_comp`); and the
+compatibility of `baseChange` with vertical pasting of Cartesian squares
+(`baseChange_paste_vert`, against `lowerShriekComp`). Without them, rescaling
+`properComparison f` by a unit of `A` at a non-identity `f` would rescale
+`Correspondence.globalOperator` and `GeometricOperations.integral` without changing the
+stalk traces.
 
-* The comparison data are *not* pinned to the canonical maps: `properComparison` and
-  `openPurity` to the natural transformations `Rf_! ⟶ Rf_*` and `f^! ⟶ Lf^*`,
-  `upperStarMonoidal` to the oplax monoidal structure of the left adjoint `Lf^*` of the lax
-  monoidal `Rf_*`, and `kunnethVerdier` to the map `p_X^* M ⊗ᴸ p_Y^* D_Y N ⟶
-  RHom(p_Y^* N, p_X^! M)` built from the projection formula, base change, tensor-hom and the
-  `!`-adjunction. This project constructs none of these at the level of derived categories.
-* The coherence imposed is only at identities: the unit axioms of `lowerShriekId`, and the
-  identifications of `properComparison`, `dualizingBase`, `dualizingComp` and the unit of
-  `upperStarMonoidal` at `f = 𝟙`. The compatibility of `properComparison` and `dualizingComp`
-  with composition (`lowerShriekComp` and the composition of `Rf_*`), and between
-  `baseChange` and `lowerShriekComp`, is not imposed.
+The Künneth-Verdier comparison is not a free isomorphism either: it is the canonical map
+`GeometricOperations.kunnethVerdierMap`, built from the projection formula, `!`-base change,
+the monoidal structure of the pullback, tensor-hom and the `!`-adjunction, and the package
+only asserts that it is invertible (`isIso_kunnethVerdierMap`).
 
-Since `Correspondence.globalOperator` and `GeometricOperations.integral` are composites of
-these isomorphisms, the second limitation matters. Rescaling `properComparison f` by a unit
-of `A` at a non-identity `f` rescales `globalOperator` and `integral` without changing the
-stalk traces. So the trace theorems of `Pairing.lean`, `ProperPushforward.lean` and
-`Main.lean` need the composition coherences as extra axioms before they can be proved
-from the package. All of this belongs to the six operations chapter rather than to this
-block.
+The remaining comparison data are still *not* pinned to canonical maps: `properComparison`
+and `openPurity` to the natural transformations `Rf_! ⟶ Rf_*` and `f^! ⟶ Lf^*`, and
+`upperStarMonoidal` to the oplax monoidal structure of the left adjoint `Lf^*` of the lax
+monoidal `Rf_*`. This project constructs none of these at the level of derived categories;
+they belong to the six operations chapter rather than to this block.
 
 The dualizing complex `ω_X = a_X^! A` *is* constructible when `a_X` admits a
 compactification, but it is needed for morphisms whose compactification is not in scope, so
@@ -152,13 +155,18 @@ braidings of all the `D(X, A)` one choice, supplied by a global instance.
 This class is a temporary stand-in. It should be removed once the braiding on `D(X, A)`
 induced from the symmetric structure of `A` (with the Koszul signs on complexes) is
 constructed, and the global instance below may then conflict with that canonical instance.
-The braiding is not constrained: the trace statements of this block are only correct for the
-Koszul-sign braiding, since for another braiding the categorical trace changes (for example
-`dim k[1]` is `-1` only for the Koszul signs). -/
+The trace statements of this block are only correct for the Koszul-sign braiding: for the
+unsigned braiding `tr(𝟙 ∣ A_X[1]) = +1` instead of `-1`. The field
+`braiding_unit_shift_one` pins that sign: the braiding of `A_X[1]` with itself is `-1`. -/
 class DerivedBraiding where
   /-- the braiding on `D(X, A)`. -/
   braidedCategory (X : Scheme.{u}) :
     BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+  /-- the Koszul sign: the braiding of `A_X[1]` with itself is `-1`. -/
+  braiding_unit_shift_one (X : Scheme.{u}) :
+    letI := braidedCategory X
+    (β_ ((𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)))⟦(1 : ℤ)⟧)
+      ((𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)))⟦(1 : ℤ)⟧)).hom = -𝟙 _
 
 instance [DerivedBraiding A] (X : Scheme.{u}) :
     BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
@@ -166,16 +174,56 @@ instance [DerivedBraiding A] (X : Scheme.{u}) :
 
 variable [DerivedBraiding A]
 
+/-- The Künneth-Verdier map `pX^* M ⊗ᴸ pY^* RHom(N, ω) ⟶ RHom(pY^* N, pX^! M)` for
+morphisms `pX : Z ⟶ X`, `pY : Z ⟶ Y`, assembled from a monoidal structure `μ` of `LpY^*`,
+a projection formula `pf` for `pX` and an *exceptional trace* `t : RpX_! pY^* ω ⟶ A_X`: the
+tensor-hom adjoint of
+
+```
+  pY^* N ⊗ᴸ (pX^* M ⊗ᴸ pY^* RHom(N, ω)) ≃ pX^* M ⊗ᴸ pY^* (N ⊗ᴸ RHom(N, ω))
+      ──ev──▶ pX^* M ⊗ᴸ pY^* ω ──▶ pX^! M,
+```
+
+whose last map is the exceptional adjoint of
+`RpX_! (pX^* M ⊗ᴸ pY^* ω) ≃ RpX_! pY^* ω ⊗ᴸ M ──t──▶ A_X ⊗ᴸ M ≃ M`.
+`GeometricOperations.kunnethVerdierMap` instantiates it with the package data. -/
+noncomputable def kunnethVerdierMapOf {X Y Z : Scheme.{u}} {pX : Z ⟶ X} {pY : Z ⟶ Y}
+    [HasCompactification pX] {ω : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    (μ : ((upperStar A pY).leftDerivedFunctor).CoreMonoidal)
+    (pf : (rightDerivedLowerShriek A pX).prod
+          (𝟭 (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))) ⋙
+        MonoidalCategory.tensor (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) ≅
+      (𝟭 (DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A))).prod
+          ((upperStar A pX).leftDerivedFunctor) ⋙
+        MonoidalCategory.tensor (DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)) ⋙
+          rightDerivedLowerShriek A pX)
+    (t : (rightDerivedLowerShriek A pX).obj (((upperStar A pY).leftDerivedFunctor).obj ω) ⟶
+      𝟙_ _)
+    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+    ((upperStar A pX).leftDerivedFunctor).obj M ⊗
+        ((upperStar A pY).leftDerivedFunctor).obj ((ihom N).obj ω) ⟶
+      (ihom (((upperStar A pY).leftDerivedFunctor).obj N)).obj
+        ((rightDerivedUpperShriek A pX).obj M) :=
+  MonoidalClosed.curry <|
+    (α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫
+      (_ ◁ ((μ.μIso N ((ihom N).obj ω)).hom ≫
+        ((upperStar A pY).leftDerivedFunctor).map ((ihom.ev N).app ω))) ≫
+      (rightDerivedUpperShriekAdjunction A pX).homEquiv _ _
+        ((rightDerivedLowerShriek A pX).map (β_ _ _).hom ≫ pf.inv.app (_, M) ≫ (t ▷ M) ≫
+          (λ_ M).hom)
+
 /-- The geometric operation package over a base `s`: the comparison data of the six
 operations that the blueprint fixes, namely the dualizing complex `ω_X = a_X^! A` with its
 composition `f^! ω_Y ≃ ω_X`, the identification `Rf_* = Rf_!` for proper `f`, composition
 of exceptional direct images, `!`-base change, the projection formula, open-immersion
 purity, the closed-immersion unit `1 ≃ Ri^! Ri_*`, the monoidal structure of the
 pullback `Lf^*`, braided for `DerivedBraiding`, biduality
-`K ≃ D_X D_X K` on `Dᵇctf`, and the Künneth-Verdier isomorphism. The identity isomorphism
-`R(𝟙 X)_! ≃ 𝟭` is tied to `lowerShriekComp` by unit axioms, and `properComparison`,
-`dualizingBase`, `dualizingComp` and the unit of `Lf^*` are tied to the identity
-isomorphisms at `f = 𝟙`.
+`K ≃ D_X D_X K` on `Dᵇctf`, and the invertibility of the Künneth-Verdier map
+`kunnethVerdierMapOf`. The identity isomorphism `R(𝟙 X)_! ≃ 𝟭` is tied to `lowerShriekComp`
+by unit axioms; `properComparison`, `dualizingBase`, `dualizingComp` and the unit of `Lf^*`
+are tied to the identity isomorphisms at `f = 𝟙`; `properComparison` and `dualizingComp`
+are compatible with composition, and `baseChange` with vertical pasting.
 
 The functors and the two adjunctions are *not* fields: they are the pro-étale functors of
 `WeilConjectures.SixFunctors.ProEtale`, listed in the module docstring
@@ -256,6 +304,40 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
       (conjugateIsoEquiv Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 X))
         (lowerShriekId X)).symm.app (dualizing a) ≪≫
         eqToIso (congrArg dualizing (Category.id_comp a).symm)
+  /-- `properComparison` is compatible with composition: for proper `f` and `g`,
+  `properComparison (f ≫ g)` is the composite
+
+  ```
+    R(f ≫ g)_! ≃ Rf_! ⋙ Rg_! ≃ Rf_* ⋙ Rg_! ≃ Rf_* ⋙ Rg_* ≃ R(f ≫ g)_*
+  ```
+
+  of `lowerShriekComp f g`, `properComparison f`, `properComparison g` and the composition
+  isomorphism of `R(-)_*`, the conjugate of `leftDerivedUpperStarComp`. -/
+  properComparison_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f]
+      [HasCompactification g] [HasCompactification (f ≫ g)] [IsProper f] [IsProper g] :
+    properComparison (f ≫ g) = (lowerShriekComp f g).symm ≪≫
+      Functor.isoWhiskerRight (properComparison f) _ ≪≫
+      Functor.isoWhiskerLeft _ (properComparison g) ≪≫
+      (conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction A (f ≫ g))
+        ((derivedUpperStarLowerStarAdjunction A g).comp (derivedUpperStarLowerStarAdjunction A f))
+        (leftDerivedUpperStarComp A f g).symm).symm
+  /-- `dualizingComp` is compatible with composition: `dualizingComp (f ≫ g) a` is the
+  composite
+
+  ```
+    (f ≫ g)^! ω_a ≃ f^! g^! ω_a ≃ f^! ω_{g ≫ a} ≃ ω_{f ≫ g ≫ a}
+  ```
+
+  of the composition isomorphism of `(-)^!` (the conjugate of `lowerShriekComp f g`),
+  `dualizingComp g a` and `dualizingComp f (g ≫ a)`, transported along associativity. -/
+  dualizingComp_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (a : Z ⟶ s)
+      [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
+    dualizingComp (f ≫ g) a =
+      (conjugateIsoEquiv (rightDerivedUpperShriekAdjunction A (f ≫ g))
+          ((rightDerivedUpperShriekAdjunction A f).comp (rightDerivedUpperShriekAdjunction A g))
+          (lowerShriekComp f g)).app (dualizing a) ≪≫
+        (rightDerivedUpperShriek A f).mapIso (dualizingComp g a) ≪≫ dualizingComp f (g ≫ a) ≪≫
+        eqToIso (congrArg dualizing (Category.assoc f g a).symm)
   /-- `!`-base change along a Cartesian square: `Lg^* Rf_! ≃ Rf'_! Lg'^*`, for
 
   ```
@@ -270,6 +352,32 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
       (sq : IsPullback g' f' f g) [HasCompactification f] [HasCompactification f'] :
     rightDerivedLowerShriek A f ⋙ (upperStar A g).leftDerivedFunctor ≅
       (upperStar A g').leftDerivedFunctor ⋙ rightDerivedLowerShriek A f'
+  /-- `!`-base change is compatible with vertical pasting of Cartesian squares: for
+
+  ```
+     X' ──g_X──→ X
+     │           │
+   f'│           │f
+     ↓           ↓
+     Y' ──g_Y──→ Y
+     │           │
+   h'│           │h
+     ↓           ↓
+     Z' ──g_Z──→ Z
+  ```
+
+  the base change of the outer square is the composite of the two base changes, read through
+  `lowerShriekComp f h` and `lowerShriekComp f' h'`. -/
+  baseChange_paste_vert {X' X Y' Y Z' Z : Scheme.{u}} {gX : X' ⟶ X} {f' : X' ⟶ Y'}
+      {f : X ⟶ Y} {gY : Y' ⟶ Y} {h' : Y' ⟶ Z'} {h : Y ⟶ Z} {gZ : Z' ⟶ Z}
+      (sq₁ : IsPullback gX f' f gY) (sq₂ : IsPullback gY h' h gZ)
+      [HasCompactification f] [HasCompactification f'] [HasCompactification h]
+      [HasCompactification h'] [HasCompactification (f ≫ h)] [HasCompactification (f' ≫ h')] :
+    baseChange (sq₁.paste_vert sq₂) =
+      Functor.isoWhiskerRight (lowerShriekComp f h).symm _ ≪≫ Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft _ (baseChange sq₂) ≪≫ (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (baseChange sq₁) _ ≪≫ Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft _ (lowerShriekComp f' h')
   /-- the projection formula `Rf_! K ⊗ᴸ L ≃ Rf_! (K ⊗ᴸ Lf^* L)`, as an isomorphism of
   bifunctors `D(X, A) × D(Y, A) ⥤ D(Y, A)`. -/
   projectionFormula {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
@@ -321,21 +429,31 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   isIso_bidualityMap {X : Scheme.{u}} (a : X ⟶ s)
       (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hK : ctf X K) :
     IsIso (bidualityMap a K)
-  /-- the Künneth-Verdier isomorphism `κ_{M,N} : M ⊠ D_Y N ≃ RHom(p_Y^* N, p_X^! M)` for
-  `M ∈ Dᵇctf(X)` and `N ∈ Dᵇctf(Y)`, where `X` and `Y` are separated of finite type over a
-  field `s = Spec k` (blueprint `sk-thm-sf-kunneth-verdier`). It is stated for every
-  Cartesian square over `s`, so that both orientations are available on `pullback aY aX`. -/
-  kunnethVerdier {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} {pX : Z ⟶ X} {pY : Z ⟶ Y}
-      [s.IsSpecOfField]
-      [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
-      [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]
+  /-- Künneth-Verdier: for `X` and `Y` separated of finite type over a field `s = Spec k`,
+  `M ∈ Dᵇctf(X)` and `N ∈ Dᵇctf(Y)`, the canonical map
+  `κ_{M,N} : M ⊠ D_Y N ⟶ RHom(p_Y^* N, p_X^! M)` is invertible
+  (blueprint `sk-thm-sf-kunneth-verdier`). The map is `kunnethVerdierMapOf` for the monoidal
+  structure of `Lp_Y^*`, the projection formula for `p_X` and the exceptional trace
+
+  ```
+    Rp_{X!} p_Y^* ω_Y ≃ a_X^* Ra_{Y!} ω_Y ≃ a_X^* Ra_{Y!} a_Y^! A ──ε──▶ a_X^* A ≃ A_X
+  ```
+
+  built from `!`-base change, `dualizingIso`, the counit of `Ra_{Y!} ⊣ a_Y^!` and the unit of
+  `Lf^*`. It is stated for every Cartesian square over `s`, so that both orientations are
+  available on `pullback aY aX`. -/
+  isIso_kunnethVerdierMap {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} {pX : Z ⟶ X}
+      {pY : Z ⟶ Y} [s.IsSpecOfField] [HasCompactification aX] [QuasiCompact aX]
+      [HasCompactification aY] [QuasiCompact aY]
       (sq : IsPullback pX pY aX aY) [HasCompactification pX]
       (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hM : ctf X M)
       (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) (hN : ctf Y N) :
-    ((upperStar A pX).leftDerivedFunctor).obj M ⊗
-        ((upperStar A pY).leftDerivedFunctor).obj ((ihom N).obj (dualizing aY)) ≅
-      (ihom (((upperStar A pY).leftDerivedFunctor).obj N)).obj
-        ((rightDerivedUpperShriek A pX).obj M)
+    IsIso (kunnethVerdierMapOf A (upperStarMonoidal pY) (projectionFormula pX)
+      ((baseChange sq.flip).inv.app (dualizing aY) ≫
+        ((upperStar A aX).leftDerivedFunctor).map
+          ((rightDerivedLowerShriek A aY).map (dualizingIso aY).hom ≫
+            (rightDerivedUpperShriekAdjunction A aY).counit.app (𝟙_ _)) ≫
+        (upperStarMonoidal aX).εIso.inv) M N)
 
 variable {A}
 
@@ -447,6 +565,57 @@ lemma conjugateIsoEquiv_lowerShriekComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : 
         ((rightDerivedUpperShriekAdjunction A f).comp (rightDerivedUpperShriekAdjunction A g))
         (G.lowerShriekComp f g) = G.upperShriekComp f g :=
   rfl
+
+/-- The exceptional trace `Rp_{X!} p_Y^* ω_Y ⟶ A_X` of a Cartesian square `Z = X ×_s Y`: the
+composite
+
+```
+  Rp_{X!} p_Y^* ω_Y ≃ a_X^* Ra_{Y!} ω_Y ≃ a_X^* Ra_{Y!} a_Y^! A ──ε──▶ a_X^* A ≃ A_X
+```
+
+of `!`-base change, `dualizingIso`, the counit of `Ra_{Y!} ⊣ a_Y^!` and `upperStarUnit`. -/
+noncomputable def exceptionalTrace {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s}
+    {pX : Z ⟶ X} {pY : Z ⟶ Y} [HasCompactification aY] (sq : IsPullback pX pY aX aY)
+    [HasCompactification pX] :
+    (rightDerivedLowerShriek A pX).obj (((upperStar A pY).leftDerivedFunctor).obj
+        (G.dualizing aY)) ⟶ 𝟙_ _ :=
+  (G.baseChange sq.flip).inv.app (G.dualizing aY) ≫
+    ((upperStar A aX).leftDerivedFunctor).map
+      ((rightDerivedLowerShriek A aY).map (G.dualizingIso aY).hom ≫
+        (rightDerivedUpperShriekAdjunction A aY).counit.app (𝟙_ _)) ≫
+    (G.upperStarUnit aX).hom
+
+/-- The Künneth-Verdier map `κ_{M,N} : p_X^* M ⊗ᴸ p_Y^* D_Y N ⟶ RHom(p_Y^* N, p_X^! M)` of a
+Cartesian square `Z = X ×_s Y`: `kunnethVerdierMapOf` for the monoidal structure of
+`Lp_Y^*`, the projection formula for `p_X` and `GeometricOperations.exceptionalTrace`
+(part of blueprint `sk-thm-sf-kunneth-verdier`). -/
+noncomputable def kunnethVerdierMap {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s}
+    {pX : Z ⟶ X} {pY : Z ⟶ Y} [HasCompactification aY] (sq : IsPullback pX pY aX aY)
+    [HasCompactification pX] (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+    ((upperStar A pX).leftDerivedFunctor).obj M ⊗
+        ((upperStar A pY).leftDerivedFunctor).obj (G.verdierDual aY N) ⟶
+      (ihom (((upperStar A pY).leftDerivedFunctor).obj N)).obj
+        ((rightDerivedUpperShriek A pX).obj M) :=
+  kunnethVerdierMapOf A (G.upperStarMonoidal pY) (G.projectionFormula pX)
+    (G.exceptionalTrace sq) M N
+
+/-- The Künneth-Verdier isomorphism `κ_{M,N} : M ⊠ D_Y N ≃ RHom(p_Y^* N, p_X^! M)` for
+`M ∈ Dᵇctf(X)` and `N ∈ Dᵇctf(Y)`, where `X` and `Y` are separated of finite type over a
+field `s = Spec k`: the map `GeometricOperations.kunnethVerdierMap`, invertible by the field
+`isIso_kunnethVerdierMap` (blueprint: `sk-thm-sf-kunneth-verdier`). -/
+noncomputable def kunnethVerdier {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s}
+    {pX : Z ⟶ X} {pY : Z ⟶ Y} [s.IsSpecOfField] [HasCompactification aX] [QuasiCompact aX]
+    [HasCompactification aY] [QuasiCompact aY] (sq : IsPullback pX pY aX aY)
+    [HasCompactification pX]
+    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hM : G.ctf X M)
+    (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) (hN : G.ctf Y N) :
+    ((upperStar A pX).leftDerivedFunctor).obj M ⊗
+        ((upperStar A pY).leftDerivedFunctor).obj (G.verdierDual aY N) ≅
+      (ihom (((upperStar A pY).leftDerivedFunctor).obj N)).obj
+        ((rightDerivedUpperShriek A pX).obj M) :=
+  haveI : IsIso (G.kunnethVerdierMap sq M N) := G.isIso_kunnethVerdierMap sq M hM N hN
+  asIso (G.kunnethVerdierMap sq M N)
 
 end GeometricOperations
 

@@ -42,7 +42,9 @@ them.
 * `BraidedCategory (DerivedCategory (ModuleCat R))` is assumed because no braiding on a
   derived category is constructed here, while `MonoidalCategory.trace` needs one. The
   intended braiding is the Koszul symmetry inherited from `ModuleCat R`; it is what produces
-  the sign `(-1) ^ i`, the dual of the degree `i` part having degree `-i`.
+  the sign `(-1) ^ i`, the dual of the degree `i` part having degree `-i`. For the unsigned
+  braiding the statement is false (`P = R[-1]`, `v = 𝟙` gives `+1 ≠ -1`), so the hypothesis
+  `hβ` pins the Koszul sign: the braiding of `R[1]` with itself is `-1`.
 * Perfectness of `P` is rendered as an object `K` of `D(R)` with `[HasRightDual K]` together
   with an isomorphism `e : K ≅ Q.obj P` intertwining `w` and `Q.map v`, since this project
   has no `Perf R` and does not prove that a bounded complex of finitely generated free
@@ -79,8 +81,11 @@ components of `v`:
 
 Boundedness of `P` is rendered by a `Finset ℤ` containing its support, which also makes the
 right hand sum finite. The sign `(-1) ^ i` of an integer exponent is `Int.negOnePow i`,
-acting on `R` by `zsmul` (blueprint: `sk-p-trace`). -/
+acting on `R` by `zsmul`. The braiding is the Koszul one in the sense that the braiding of
+`R[1]` with itself is `-1` (blueprint: `sk-p-trace`). -/
 theorem trace_eq_algebraMap_sum_negOnePow_linearMapTrace
+    (hβ : (β_ ((𝟙_ (DerivedCategory (ModuleCat.{u} R)))⟦(1 : ℤ)⟧)
+      ((𝟙_ (DerivedCategory (ModuleCat.{u} R)))⟦(1 : ℤ)⟧)).hom = -𝟙 _)
     (P : CochainComplex (ModuleCat.{u} R) ℤ) (v : P ⟶ P) (s : Finset ℤ)
     (hs : ∀ i ∉ s, IsZero (P.X i))
     (hfree : ∀ i, Module.Free R (P.X i)) (hfin : ∀ i, Module.Finite R (P.X i))

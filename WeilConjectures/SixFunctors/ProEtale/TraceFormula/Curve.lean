@@ -30,8 +30,11 @@ Frobenius on the geometric stalk `K_x̄`.
 ## Implementation notes
 
 Smoothness of pure dimension one is rendered as
-`AlgebraicGeometry.SmoothOfRelativeDimension 1 aX`. The geometric point is an `s`-point
-`x : s ⟶ X` fixed by `Φ_m`, as in the rendering of `X₀(𝐅_{q^m})`. The clopen component of
+`AlgebraicGeometry.SmoothOfRelativeDimension 1 aX`. The Frobenius of the Weil complex is the
+base change of the `q`-power Frobenius of a model `X₀` over `𝐅_q`
+(`WeilComplex.IsModelFrobenius`): for an arbitrary `s`-endomorphism the fixed points need not
+be transversal and the local terms are not the naive ones. The geometric point is a section
+`x : s ⟶ X` of `a_X` fixed by `Φ_m`, as in the rendering of `X₀(𝐅_{q^m})`. The clopen component of
 `x̄` inside the fixed scheme is taken as data, since the project constructs neither the
 reduced point structure nor open complements. Isolatedness of the fixed point, which the
 blueprint derives from the vanishing of the map induced by `Φ_m` on the cotangent space, is
@@ -72,8 +75,11 @@ does the local term `LT_x̄(φ_m)` (blueprint: `sk-i-curve-zero`). -/
 theorem localTerm_traceClass_eq_zero_of_isZero [SmoothOfRelativeDimension 1 aX]
     (G : GeometricOperations A s)
     [s.IsSpecOfField] [HasCompactification aX] [QuasiCompact aX]
-    (W : WeilComplex (A := A) aX) (hW : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m)
-    (x : s ⟶ X) (hx : x ≫ W.frobeniusIterate m = x) (xFix : s ⟶ (W.graph G m).fix)
+    (W : WeilComplex (A := A) aX) {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}}
+    (f₀ : X₀ ⟶ Spec (.of k)) (σ : s ⟶ Spec (.of k)) (p : X ⟶ X₀)
+    (hΦ : W.IsModelFrobenius f₀ σ p) (hW : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m)
+    (x : s ⟶ X) (hxs : x ≫ aX = 𝟙 s) (hx : x ≫ W.frobeniusIterate m = x)
+    (xFix : s ⟶ (W.graph G m).fix)
     (hxFix : xFix ≫ (W.graph G m).fixι = x) {B : Scheme.{u}} (jB : B ⟶ (W.graph G m).fix)
     [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
     (hBx : Set.range jB.base = Set.range xFix.base)
@@ -92,8 +98,10 @@ No local constancy of `K` at `x̄` is assumed (blueprint: `sk-p-frob`). -/
 theorem localTerm_traceClass_eq_trace [SmoothOfRelativeDimension 1 aX]
     (G : GeometricOperations A s)
     [s.IsSpecOfField] [HasCompactification aX] [QuasiCompact aX]
-    (W : WeilComplex (A := A) aX) (hW : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m)
-    (x : s ⟶ X) (hx : x ≫ W.frobeniusIterate m = x)
+    (W : WeilComplex (A := A) aX) {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}}
+    (f₀ : X₀ ⟶ Spec (.of k)) (σ : s ⟶ Spec (.of k)) (p : X ⟶ X₀)
+    (hΦ : W.IsModelFrobenius f₀ σ p) (hW : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m)
+    (x : s ⟶ X) (hxs : x ≫ aX = 𝟙 s) (hx : x ≫ W.frobeniusIterate m = x)
     [HasRightDual (((upperStar A x).leftDerivedFunctor).obj W.obj)]
     (xFix : s ⟶ (W.graph G m).fix) (hxFix : xFix ≫ (W.graph G m).fixι = x) {B : Scheme.{u}}
     (jB : B ⟶ (W.graph G m).fix) [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
