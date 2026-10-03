@@ -9,7 +9,6 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
 public import WeilConjectures.WeilSheaf.Category
-public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
 
 /-!
 # Direct images with compact support of Weil sheaves and Weil complexes
@@ -30,8 +29,8 @@ finiteness theorem
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_padicAlgCl`.
 The higher direct images `Rʳf₀!` of Weil sheaves are the cohomology sheaves of `Rf₀!`.
 
-Compactly supported cohomology is still a placeholder with a `sorry` body; see
-`WeilConjectures.WeilSheaf.Defs`.
+Compactly supported cohomology is defined from `Rf₀!` in
+`WeilConjectures.WeilSheaf.Cohomology`.
 
 ## Main declarations
 
@@ -40,9 +39,6 @@ Compactly supported cohomology is still a placeholder with a `sorry` body; see
 - `AlgebraicGeometry.WeilSheaf.higherLowerShriek` and
   `AlgebraicGeometry.WeilComplex.derivedLowerShriek`: the higher direct images with compact
   support `Rʳf₀!` and the total derived one `Rf₀!`.
-- `AlgebraicGeometry.WeilComplex.compactlySupportedCohomology` and
-  `AlgebraicGeometry.WeilSheaf.compactlySupportedCohomology`: compactly supported cohomology
-  with its geometric Frobenius.
 -/
 
 @[expose] public section
@@ -148,25 +144,5 @@ instance (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f]
     WeilComplex.homologySheaf r).Additive
 
 end LowerShriek
-
-section Cohomology
-
-variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-
--- TODO(unify): sk-thm-sf-global-duality
--- TODO: define this as the stalk over `Spec k̄` of the `r`-th cohomology of `Rf₀!` along the
--- structure morphism `X ⟶ Spec k₀` (`WeilComplex.derivedLowerShriek`).
-/-- The compactly supported cohomology `H_c^r(X ⊗ k, K)` of a Weil complex, with its geometric
-Frobenius. -/
-noncomputable def WeilComplex.compactlySupportedCohomology (r : ℤ) (K : WeilComplex k₀ l X) :
-    FrobeniusModule.{u + 1, 0} (PadicAlgCl l) := sorry
-
-/-- The compactly supported cohomology `H_c^r(X ⊗ k, F)` of a Weil sheaf. -/
-noncomputable def WeilSheaf.compactlySupportedCohomology (r : ℤ) (F : WeilSheaf k₀ l X) :
-    FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
-  (WeilSheaf.toComplex.obj F).compactlySupportedCohomology r
-
-end Cohomology
 
 end AlgebraicGeometry

@@ -90,7 +90,9 @@ has weights at most `w + r`, with no ramification restriction at the point at in
 theorem hasWeightsAtMost_compactlySupportedCohomology_of_projectiveLine {C : Scheme.{u}}
     [Nonempty C] [C.Over (Spec (CommRingCat.of k₀))]
     (c : C ⟶ ℙ(ULift.{u} (Fin 2); Spec (CommRingCat.of k₀))) [IsOpenImmersion c]
-    [c.IsOver (Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l C) (hF : F.IsLisse) (w : ℝ)
+    [c.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated (C ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l C) (hF : F.IsLisse) (w : ℝ)
     (hpure : F.IsPunctuallyPureOfWeight ι w) (r : ℤ) :
     (F.compactlySupportedCohomology r).HasWeightsAtMostOver k₀ ι (w + r) :=
   sorry
