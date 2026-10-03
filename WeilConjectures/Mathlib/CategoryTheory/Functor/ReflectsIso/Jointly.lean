@@ -26,6 +26,9 @@ carrying `F₁` and `false` carrying `F₂`.
   isomorphisms as soon as every morphism they both send to an isomorphism is an isomorphism.
 - `CategoryTheory.JointlyReflectIsomorphisms.isIso_of_pairFunctor`: the converse, in the
   two-hypothesis form a human caller wants.
+- `CategoryTheory.JointlyReflectIsomorphisms.of_iso` and
+  `CategoryTheory.JointlyReflectIsomorphisms.pairFunctor_of_iso`: joint reflection of
+  isomorphisms is invariant under replacing the functors by isomorphic ones.
 
 -/
 
@@ -44,6 +47,13 @@ global instance it would be tried on every goal of that shape and then have to s
 side goals. -/
 scoped instance instCategoryCond (b : Bool) : Category.{v₁} (cond b D₁ D₂) :=
   Bool.rec (motive := fun b ↦ Category.{v₁} (cond b D₁ D₂)) ‹Category D₂› ‹Category D₁› b
+
+/-- A family of functors isomorphic to a family which jointly reflects isomorphisms jointly
+reflects isomorphisms. -/
+lemma JointlyReflectIsomorphisms.of_iso {I : Type*} {D : I → Type*} [∀ i, Category (D i)]
+    {F G : ∀ i, C ⥤ D i} (hF : JointlyReflectIsomorphisms F) (e : ∀ i, F i ≅ G i) :
+    JointlyReflectIsomorphisms G where
+  isIso f _ := (hF.isIso_iff f).2 fun i ↦ (NatIso.isIso_map_iff (e i) f).2 inferInstance
 
 variable (F₁ : C ⥤ D₁) (F₂ : C ⥤ D₂)
 
@@ -84,5 +94,14 @@ lemma JointlyReflectIsomorphisms.isIso_of_pairFunctor
   (hP.isIso_iff f).2 fun b ↦ by
     cases b
     exacts [h₂, h₁]
+
+/-- A pair of functors isomorphic to a pair which jointly reflects isomorphisms jointly
+reflects isomorphisms. -/
+lemma JointlyReflectIsomorphisms.pairFunctor_of_iso
+    (hP : JointlyReflectIsomorphisms (pairFunctor F₁ F₂)) {G₁ : C ⥤ D₁} {G₂ : C ⥤ D₂}
+    (e₁ : F₁ ≅ G₁) (e₂ : F₂ ≅ G₂) : JointlyReflectIsomorphisms (pairFunctor G₁ G₂) :=
+  hP.of_iso fun b ↦ by
+    cases b
+    exacts [e₂, e₁]
 
 end CategoryTheory

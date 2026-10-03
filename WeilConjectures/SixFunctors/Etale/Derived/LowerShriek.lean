@@ -14,6 +14,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 
 /-!
@@ -127,6 +128,12 @@ noncomputable def rightDerivedLowerShriekOfCompactificationPlusCompatibility :
       R((c.g)_*[A]) ≪≫
     Functor.associator _ _ _
 
+/-- The derived lower shriek attached to a compactification is additive. -/
+instance : Rf_!(c)[A].Additive :=
+  -- `D(i_!)` is additive, and so is `R(g_*)`, being a right adjoint
+  have := (Etale.mapDerivedUpperStarLowerStarAdjunction A c.g).right_adjoint_additive
+  inferInstance
+
 end Etale
 
 end OfCompactification
@@ -175,6 +182,10 @@ noncomputable def rightDerivedLowerShriekPlusCompatibility :
     R(f)_![A]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ R(f)_![A] :=
   rightDerivedLowerShriekOfCompactificationPlusCompatibility A
     (HasCompactification.compactification f)
+
+/-- The derived lower shriek along a morphism admitting a compactification is additive. -/
+instance : R(f)_![A].Additive :=
+  inferInstanceAs (Rf_!(HasCompactification.compactification f)[A]).Additive
 
 end Etale
 

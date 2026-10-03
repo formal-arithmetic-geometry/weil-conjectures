@@ -12,6 +12,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExten
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 
 /-!
@@ -149,6 +150,53 @@ lemma Etale.DerivedCategory.constructibleHomology_eq :
       _root_.DerivedCategory.homologyProperty (Etale.constructibleSheaf A X) :=
   rfl
 
+instance : (Etale.DerivedCategory.boundedConstructible A X).IsClosedUnderIsomorphisms := by
+  rw [Etale.DerivedCategory.boundedConstructible, Etale.DerivedCategory.constructibleHomology_eq]
+  infer_instance
+
+/-- `Dᵇc(X, A)` is stable under the shifts of the derived category; unlike
+`Etale.DerivedCategory.boundedConstructible_isTriangulated` this needs no closure property of
+the constructible sheaves. -/
+instance : (Etale.DerivedCategory.boundedConstructible A X).IsStableUnderShift ℤ := by
+  rw [Etale.DerivedCategory.boundedConstructible, Etale.DerivedCategory.constructibleHomology_eq]
+  infer_instance
+
+variable {A X}
+
+/-- A constructible sheaf placed in degree `n` is a bounded constructible complex: its only
+nonzero homology sheaf is itself, in degree `n`. -/
+lemma Etale.DerivedCategory.boundedConstructible_singleFunctor_obj
+    [PreservesFiniteLimits (CategoryTheory.forget A)] (F : Sheaf X.smallEtaleTopology A)
+    [IsConstructibleSheaf F] (n : ℤ) :
+    Etale.DerivedCategory.boundedConstructible A X
+      ((DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) n).obj F) := by
+  refine ⟨⟨⟨n, inferInstanceAs (DerivedCategory.IsGE _ n)⟩,
+    ⟨n, inferInstanceAs (DerivedCategory.IsLE _ n)⟩⟩, fun m ↦ ?_⟩
+  obtain hm | rfl | hm := lt_trichotomy m n
+  · exact IsConstructibleSheaf.of_isZero ((DerivedCategory.isGE_iff _ n).1 inferInstance m hm)
+  · have : IsConstructibleSheaf ((𝟭 _).obj F) := ‹_›
+    exact IsConstructibleSheaf.of_iso
+      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ m).app F).symm
+  · exact IsConstructibleSheaf.of_isZero ((DerivedCategory.isLE_iff _ n).1 inferInstance m hm)
+
+/-- The derived pullback `D(g^*)` of the exact functor `g^*` sends bounded constructible
+complexes to bounded constructible complexes: `H^n(D(g^*) K) ≅ g^* H^n(K)` and the pullback of
+a constructible sheaf is constructible. -/
+lemma Etale.DerivedCategory.boundedConstructible.mapDerivedCategory_upperStar {Y : Scheme.{u}}
+    (g : Y ⟶ X) {K : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hK : Etale.DerivedCategory.boundedConstructible A X K) :
+    Etale.DerivedCategory.boundedConstructible A Y
+      ((Etale.upperStar A g).mapDerivedCategory.obj K) :=
+  ⟨Functor.bounded_mapDerivedCategory_obj _ hK.1, fun n ↦
+    have : IsConstructibleSheaf
+        ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology A) n).obj K) := hK.2 n
+    have : IsConstructibleSheaf ((DerivedCategory.homologyFunctor _ n ⋙
+        Etale.upperStar A g).obj K) :=
+      IsConstructibleSheaf.upperStar (FA := FA) (CA := CA) _ _
+    IsConstructibleSheaf.of_iso ((Functor.mapDerivedCategoryHomologyFunctorIso _ n).app K)⟩
+
+variable (A X)
+
 variable [(Etale.constructibleSheaf A X).IsClosedUnderKernels]
   [(Etale.constructibleSheaf A X).IsClosedUnderCokernels]
   [(Etale.constructibleSheaf A X).IsClosedUnderExtensions]
@@ -195,6 +243,23 @@ instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderCoke
     exact (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).prop_of_iso
       (IsColimit.coconePointUniqueUpToIso (cokernelIsCokernel f) hk)
       ((Etale.constructibleSheaf_iff _ _ _).mpr (IsConstructibleSheaf.cokernel f))
+
+/-- Constructible sheaves of `Λ`-modules are closed under binary products: the product is the
+direct sum, which is constructible by `IsConstructibleSheaf.biprod`. -/
+instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderBinaryProducts where
+  limitsOfShape_le := by
+    rintro _ ⟨p, hp⟩
+    have := (Etale.constructibleSheaf_iff _ _ _).mp (hp ⟨.left⟩)
+    have := (Etale.constructibleSheaf_iff _ _ _).mp (hp ⟨.right⟩)
+    exact (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).prop_of_iso
+      ((biprod.isoProd _ _ ≪≫ (HasLimit.isoOfNatIso (diagramIsoPair p.diag)).symm ≪≫
+        (p.isLimit.conePointUniqueUpToIso (limit.isLimit p.diag)).symm))
+      ((Etale.constructibleSheaf_iff _ _ _).mpr (IsConstructibleSheaf.biprod _ _))
+
+/-- Constructible sheaves of `Λ`-modules are closed under finite products: they contain zero
+and are closed under binary products. -/
+instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderFiniteProducts :=
+  .mk'
 
 end ModuleCat
 

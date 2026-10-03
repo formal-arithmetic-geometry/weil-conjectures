@@ -20,6 +20,9 @@ multicospan `WalkingMulticospan S.shape` indexing the sheaf condition
 (`CategoryTheory.GrothendieckTopology.Cover.hasCardinalLT_arrow_walkingMulticospan`).
 
 See also `CategoryTheory.preservesColimitsOfShape_lim_of_isDetector`.
+
+We also record how the canonical map `S.toMultiequalizer P` interacts with the projections of
+the multiequalizer (`CategoryTheory.GrothendieckTopology.Cover.toMultiequalizer_ι`).
 -/
 
 @[expose] public section
@@ -88,5 +91,13 @@ lemma hasCardinalLT_arrow_walkingMulticospan (S : J.Cover X)
     HasCardinalLT (CategoryTheory.Arrow (WalkingMulticospan S.shape)) κ :=
   Limits.hasCardinalLT_arrow_walkingMulticospan (S.hasCardinalLT_arrow hC)
     (S.hasCardinalLT_relation hC) (Fact.out : κ.IsRegular).aleph0_le
+
+/-- The `I`-th component of the canonical map `P(X) ⟶ multiequalizer (S.index P)` is the
+restriction `P.map I.f.op : P(X) ⟶ P(I.Y)`. -/
+@[reassoc (attr := simp)]
+lemma toMultiequalizer_ι {D : Type*} [Category* D] (S : J.Cover X) (P : Cᵒᵖ ⥤ D)
+    [HasMultiequalizer (S.index P)] (I : S.Arrow) :
+    S.toMultiequalizer P ≫ Multiequalizer.ι (S.index P) I = P.map I.f.op :=
+  Multiequalizer.lift_ι _ _ _ _ _
 
 end CategoryTheory.GrothendieckTopology.Cover

@@ -20,6 +20,10 @@ We also show that being a cartesian square is local on the target
 `AlgebraicGeometry.isPullback_of_opensRange_sup_eq_top`), and that the intersection of the
 preimages of two affine opens in a pullback over an affine scheme is affine
 (`AlgebraicGeometry.isAffineOpen_preimage_inf_preimage_pullback`).
+
+Finally, the image of a product map `X ×_S Y ⟶ X' ×_{S'} Y'` is the intersection of the
+images of the base changes of the two factors
+(`AlgebraicGeometry.Scheme.Pullback.range_map_eq_inter`).
 -/
 
 @[expose] public section
@@ -161,5 +165,16 @@ lemma isAffineOpen_preimage_inf_preimage_pullback {X Y T : Scheme.{u}} [IsAffine
     TopologicalSpace.Opens.ext (by rw [Scheme.Hom.coe_opensRange, hm₂]; rfl)
   rw [hr]
   exact isAffineOpen_opensRange _
+
+/-- The image of the product map `X ×_S Y ⟶ X' ×_{S'} Y'` of `i₁ : X ⟶ X'` and `i₂ : Y ⟶ Y'`
+over a monomorphism `S ⟶ S'` is the intersection of the images of the base changes of `i₁` and
+`i₂` along the two projections of `X' ×_{S'} Y'`. -/
+lemma Scheme.Pullback.range_map_eq_inter {X Y S X' Y' S' : Scheme.{u}} {f : X ⟶ S}
+    {g : Y ⟶ S} (f' : X' ⟶ S') (g' : Y' ⟶ S') (i₁ : X ⟶ X') (i₂ : Y ⟶ Y') (i₃ : S ⟶ S')
+    (e₁ : f ≫ i₃ = i₁ ≫ f') (e₂ : g ≫ i₃ = i₂ ≫ g') [Mono i₃] :
+    Set.range (pullback.map f g f' g' i₁ i₂ i₃ e₁ e₂) =
+      Set.range (pullback.snd i₁ (pullback.fst f' g')) ∩
+        Set.range (pullback.snd i₂ (pullback.snd f' g')) := by
+  rw [Scheme.Pullback.range_map, Scheme.Pullback.range_snd, Scheme.Pullback.range_snd]
 
 end AlgebraicGeometry

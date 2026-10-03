@@ -29,8 +29,8 @@ This file states the last three steps of the representability of `F`:
 
 Neither a zero scheme `Z(s)` of a section of an invertible sheaf nor the notion of a *relative*
 effective Cartier divisor exists in Mathlib or in this project (the absolute notion does, as
-`AlgebraicGeometry.IsEffectiveCartierCenter`), and the tensor product of sheaves of modules is
-the `opaque` placeholder of `WeilConjectures/AlgebraicGeometry/Modules/Invertible.lean`.
+`AlgebraicGeometry.IsEffectiveCartierCenter`); the tensor product of sheaves of modules is the
+sheafified tensor product `AlgebraicGeometry.Scheme.Modules.tensorObj`.
 Rather than invent two definitions whose blueprint home is elsewhere, the dictionary is stated
 as an existence statement: to `ℒ ∈ F(T)` is attached a quasi-coherent ideal sheaf `D` on `X_T`
 whose closed subscheme is an effective Cartier centre and which lies in the Hilbert functor
@@ -46,7 +46,7 @@ which changes nothing since that functor is fully faithful; this is the same dev
 
 The structure morphism `X ⟶ Spec k` is carried as an `AlgebraicGeometry.Scheme.Over` instance
 and written `X ↘ Spec (.of k)`, as in `WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch`,
-because `AlgebraicGeometry.Scheme.genus` needs that instance.
+because `AlgebraicGeometry.Scheme.arithmeticGenus` needs that instance.
 
 The instance hypothesis `∀ T, HasInjectiveResolutions (X ×[k] T).Modules` is the one nothing
 can discharge yet; see `AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`.
@@ -94,7 +94,7 @@ theorem exists_isEffectiveCartierCenter_hilbertPresheaf [IsSepClosed k]
       HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
     (T : Over (Spec (.of k)))
     (ℒ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T)) :
-    ∃ D : (hilbertPresheaf (X ↘ Spec (.of k)) (genus k X)).obj (op T),
+    ∃ D : (hilbertPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj (op T),
       IsEffectiveCartierCenter D.1.subschemeι :=
   sorry
 
@@ -115,7 +115,7 @@ theorem exists_injective_natTrans_hilbertPresheaf [IsSepClosed k]
     [∀ T : Over (Spec (.of k)),
       HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules] :
     ∃ Φ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor ⟶
-      hilbertPresheaf (X ↘ Spec (.of k)) (genus k X) ⋙ uliftFunctor.{u + 1, u},
+      hilbertPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X) ⋙ uliftFunctor.{u + 1, u},
       ∀ T, Function.Injective (Φ.app T) :=
   sorry
 
@@ -129,7 +129,7 @@ theorem isRepresentable_picardFunctorInvertibleDirectImage [IsSepClosed k]
     [∀ T : Over (Spec (.of k)),
       HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
     (H : Over (Spec (.of k)))
-    (e : (hilbertPresheaf (X ↘ Spec (.of k)) (genus k X)).RepresentableBy H) :
+    (e : (hilbertPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X)).RepresentableBy H) :
     ∃ (W : Scheme.{u}) (j : W ⟶ H.left), IsOpenImmersion j ∧
       Nonempty ((picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor
         |>.RepresentableBy (Over.mk (j ≫ H.hom))) :=
