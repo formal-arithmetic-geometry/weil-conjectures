@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk
 
 /-!
 
@@ -26,8 +27,10 @@ Both halves are stated here and combined into
 
 ## The proof of the projective-line case
 
-By `AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity` it suffices to
-prove injective acyclicity for the projection. Over a strictly henselian base the
+By `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity` it suffices to
+prove injective acyclicity for the projection, which is
+`AlgebraicGeometry.Etale.hasInjectiveAcyclicity_projectiveLine` of
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk`. Over a strictly henselian base the
 degree-zero comparison between a proper scheme and its closed fibre, fed through the
 Mayer–Vietoris sequence of the two standard affine charts of the projective line, kills the
 cohomology of an injective sheaf in degrees `≥ 2`, and the finite-étale machinery kills it
@@ -112,7 +115,8 @@ docstring, and Stacks Project, Tag 095T, whose proof it is.
 (blueprint: `prop:weil-pbc-projective-line`) -/
 theorem Etale.hasTorsionBaseChange_projectiveLine (S : Scheme.{u}) :
     Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S) :=
-  sorry
+  Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity Λ _
+    (Etale.hasInjectiveAcyclicity_projectiveLine Λ S)
 
 /-- **Reduction of proper base change to the projective line**: if the projection
 `ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasTorsionBaseChange` for every scheme `S`,
