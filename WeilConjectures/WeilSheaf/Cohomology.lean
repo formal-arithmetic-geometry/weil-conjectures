@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.ConstructibleSheaf.Zero
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
@@ -35,6 +37,12 @@ whose first isomorphism is the invariance of derived global sections under the a
 - `AlgebraicGeometry.WeilComplex.compactlySupportedCohomologyLinearEquiv`: its identification
   with the étale compactly supported cohomology `H_c(ā)[Λ](r)` of the underlying complex.
 
+## Main statements
+
+- `AlgebraicGeometry.WeilComplex.subsingleton_compactlySupportedCohomology_carrier`: with the
+  present coefficients every Weil complex is zero (`AlgebraicGeometry.WeilComplex.isZero_carrier`),
+  and so is its compactly supported cohomology.
+
 ## TODO
 
 Define the Frobenius from the derived pullback map on global sections (see the `TODO` of
@@ -55,6 +63,21 @@ open Etale
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 namespace WeilComplex
+
+section
+
+variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+
+/-- The underlying complex of a Weil complex is zero: its homology sheaves are constructible
+sheaves of `ℚ̄_ℓ`-modules, and these are zero
+(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.isZero`). -/
+theorem isZero_carrier (K : WeilComplex k₀ l Y) : IsZero K.obj.carrier :=
+  DerivedCategory.isZero_of_forall_isZero_homology _ fun n ↦
+    have : Scheme.IsConstructibleSheaf
+        ((DerivedCategory.homologyFunctor _ n).obj K.obj.carrier) := K.property.2 n
+    Scheme.IsConstructibleSheaf.isZero _
+
+end
 
 /-- The `r`-th cohomology `Hʳ(Spec k̄, M)` of the underlying complex of a Weil complex `M` on
 `Spec k₀`: the `r`-th cohomology of its derived global sections on the geometric fiber
@@ -90,6 +113,15 @@ noncomputable def cohomologyFrobeniusModule (M : WeilComplex k₀ l (Spec (CommR
         (((upperStarCompRightDerivedGlobalSectionsIso _ σ).app M.obj.carrier).symm ≪≫
           (rightDerivedGlobalSections _ _).mapIso M.obj.str)) }
 
+/-- The cohomology of a Weil complex on `Spec k₀` is zero, the complex being zero
+(`AlgebraicGeometry.WeilComplex.isZero_carrier`). -/
+theorem subsingleton_cohomologyFrobeniusModule_carrier
+    (M : WeilComplex k₀ l (Spec (CommRingCat.of k₀))) (r : ℤ) :
+    Subsingleton (M.cohomologyFrobeniusModule r).carrier :=
+  ModuleCat.isZero_iff_subsingleton.1 ((WeilCoefficients.toModuleCat l).map_isZero
+    ((DerivedCategory.homologyFunctor _ r).map_isZero
+      ((rightDerivedGlobalSections _ _).map_isZero M.isZero_carrier)))
+
 end WeilComplex
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -107,6 +139,12 @@ complex on `Spec k₀`. -/
 noncomputable def compactlySupportedCohomology (K : WeilComplex k₀ l X) (r : ℤ) :
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj K).cohomologyFrobeniusModule r
+
+/-- The compactly supported cohomology of a Weil complex is zero, see
+`AlgebraicGeometry.WeilComplex.subsingleton_cohomologyFrobeniusModule_carrier`. -/
+theorem subsingleton_compactlySupportedCohomology_carrier (K : WeilComplex k₀ l X) (r : ℤ) :
+    Subsingleton (K.compactlySupportedCohomology r).carrier :=
+  subsingleton_cohomologyFrobeniusModule_carrier _ r
 
 /-- The underlying vector space of the compactly supported cohomology of a Weil complex `K` is
 the étale compactly supported cohomology `H_c(ā)[Λ](r)` of the underlying complex on `X ⊗ k̄`

@@ -94,6 +94,30 @@ theorem IsPureOfWeight.hasWeightsAtMost {ι : K →+* ℂ} {q : ℕ} {M : Froben
     {w : ℝ} (h : M.IsPureOfWeight ι q w) : M.HasWeightsAtMost ι q w :=
   fun α hα ↦ (h α hα).le
 
+/-- For `q ≥ 1`, weights at most `w` are weights at most any `w' ≥ w`. -/
+theorem HasWeightsAtMost.mono {ι : K →+* ℂ} {q : ℕ} (hq : 1 ≤ q)
+    {M : FrobeniusModule.{u, v} K} {w w' : ℝ} (h : M.HasWeightsAtMost ι q w) (hww' : w ≤ w') :
+    M.HasWeightsAtMost ι q w' :=
+  fun α hα ↦ (h α hα).trans
+    (Real.rpow_le_rpow_of_exponent_le (by exact_mod_cast hq) (by linarith))
+
+/-- An isomorphism of Frobenius modules preserves the eigenvalues of the Frobenius. -/
+theorem Equiv.hasEigenvalue {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) {α : K}
+    (hα : M.frobeniusEnd.HasEigenvalue α) : N.frobeniusEnd.HasEigenvalue α := by
+  obtain ⟨x, hx⟩ := hα.exists_hasEigenvector
+  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff] at hx
+  refine Module.End.hasEigenvalue_of_hasEigenvector
+    (Module.End.hasEigenvector_iff.2 ⟨Module.End.mem_eigenspace_iff.2 ?_, ?_⟩)
+  · change N.frobenius (e.toLinearEquiv x) = α • e.toLinearEquiv x
+    rw [← e.map_frobenius, ← map_smul]
+    exact congrArg e.toLinearEquiv hx.1
+  · exact (map_ne_zero_iff _ e.toLinearEquiv.injective).2 hx.2
+
+/-- A Frobenius module isomorphic to one with weights at most `w` has weights at most `w`. -/
+theorem HasWeightsAtMost.of_equiv {ι : K →+* ℂ} {q : ℕ} {M N : FrobeniusModule.{u, v} K}
+    (e : M.Equiv N) {w : ℝ} (h : N.HasWeightsAtMost ι q w) : M.HasWeightsAtMost ι q w :=
+  fun α hα ↦ h α (e.hasEigenvalue hα)
+
 /-- The local polynomial `det (1 - T F)` of a Frobenius module, the reverse characteristic
 polynomial of its Frobenius `F`. -/
 noncomputable def localPolynomial (M : FrobeniusModule.{u, v} K) : Polynomial K :=
