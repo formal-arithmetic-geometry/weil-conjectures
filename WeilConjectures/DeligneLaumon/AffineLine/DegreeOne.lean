@@ -68,8 +68,9 @@ noncomputable def affineLine.origin (k₀ : Type u) [Field k₀] [Finite k₀] :
 theorem affineLine.residueCard_origin :
     (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).residueCard (affineLine.origin k₀).1 =
       Nat.card k₀ := by
-  rw [Scheme.Hom.residueCard, Scheme.Hom.degreeOver_eq_one_of_comp_eq_id _ _
-    (AffineSpace.homOfVector_over _ _), pow_one]
+  rw [Scheme.Hom.residueCard]
+  exact (congrArg (Nat.card k₀ ^ ·) (Scheme.Hom.degreeOver_eq_one_of_comp_eq_id _ _
+    (AffineSpace.homOfVector_over (𝟙 _) 0) (IsLocalRing.closedPoint k₀))).trans (pow_one _)
 
 namespace WeilSheaf.LisseOnDenseOpen
 
@@ -84,7 +85,7 @@ theorem hasWeightsAtMost_directImage (D : LisseOnDenseOpen k₀ l) {ι : PadicAl
     {β : ℝ} (hβ : D.sheaf.HasWeightsAtMost ι β) : D.directImage.HasWeightsAtMost ι β :=
   -- the stalks of `j_*M` are zero, see `WeilSheaf.isZero_stalkObj`
   fun x α hα ↦ by
-    haveI : Subsingleton (D.directImage.stalk x).carrier :=
+    have : Subsingleton (D.directImage.stalk x).carrier :=
       WeilSheaf.subsingleton_stalkAt_carrier _ _ _ _
     obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
     exact absurd (Subsingleton.elim v 0) hv.2
@@ -111,11 +112,10 @@ theorem nonempty_equiv_stalk_origin_of_isFourierPartner (ψ : AddChar k₀ (Padi
   -- and `WeilSheaf.subsingleton_stalkAt_carrier`
   have h :=
     (WeilSheaf.toComplex.obj D.directImage).subsingleton_compactlySupportedCohomology_carrier
-  haveI : Subsingleton (D.directImage.compactlySupportedCohomology 1).carrier := h 1
-  haveI : Subsingleton (D'.directImage.stalk (affineLine.origin k₀)).carrier :=
+  have : Subsingleton (D.directImage.compactlySupportedCohomology 1).carrier := h 1
+  have : Subsingleton (D'.directImage.stalk (affineLine.origin k₀)).carrier :=
     WeilSheaf.subsingleton_stalkAt_carrier _ _ _ _
-  exact ⟨⟨{ toLinearEquiv := LinearEquiv.ofSubsingleton _ _,
-    map_frobenius := fun _ ↦ Subsingleton.elim _ _ }⟩, h 2⟩
+  exact ⟨⟨⟨LinearEquiv.ofSubsingleton _ _, fun _ ↦ Subsingleton.elim _ _⟩⟩, h 2⟩
 
 end WeilSheaf.LisseOnDenseOpen
 
