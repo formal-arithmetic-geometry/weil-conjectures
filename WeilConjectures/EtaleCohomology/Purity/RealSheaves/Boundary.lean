@@ -7,10 +7,10 @@ module
 
 public import Mathlib.RepresentationTheory.Invariants
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 
 /-!
 # Boundary extension of a lisse Weil sheaf on a curve
@@ -45,12 +45,14 @@ points, which is what makes the residue degree `e_s` meaningful.
 - `AlgebraicGeometry.Scheme.isIso_unit_upperStarLowerStarAdjunction` : a finite locally
   constant sheaf on a smooth curve is the direct image of its restriction to a dense open.
 
-Both are proved from their pointwise inputs at the boundary,
+Both are proved from two auxiliary pointwise inputs at the boundary,
 `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_middleExtension`
-(the boundary stalk is the finite module of inertia invariants) and
+(the restriction of `j_* ℱ` to a boundary point is finite locally constant, a consequence of
+the blueprint's identification of the boundary stalk with the inertia invariants) and
 `AlgebraicGeometry.Scheme.isIso_sheafFiber_map_unit_upperStarLowerStarAdjunction` (inertia acts
 trivially on the stalks of a sheaf lisse at the boundary point), which need the strict
-henselization of a curve at a point and are not yet proved.
+henselization of a curve at a point and are not yet proved. The inertia-invariants
+identification `lem-wf-boundary-stalk-invariants` itself is not formalised here.
 -/
 
 @[expose] public section
@@ -141,16 +143,15 @@ namespace Scheme
 
 variable {j : U ⟶ C} [IsOpenImmersion j] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lem-wf-boundary-stalk-invariants`: Boundary stalk as inertia invariants.
+/-- Let `j : U₀ ↪ C₀` be an open immersion into a curve, `ℱ` a finite locally constant sheaf of
+`Λ`-modules on `U₀` and `s` a closed point of `C₀` outside `U₀`. Then the restriction of the
+middle extension `j_* ℱ` to the point `Spec k(s)` is finite locally constant.
 
-Let `j : U₀ ↪ C₀` be an open immersion into a curve, `ℱ` a finite locally constant sheaf of
-`Λ`-modules on `U₀` and `s` a closed point of `C₀` outside `U₀`. The stalk of the middle
-extension `j_* ℱ` at a geometric point `s̄` over `s` is the module of inertia invariants
-`ℱ_η̄ ^ I_s` of the geometric generic stalk at `s`, computed on the punctured strict henselian
-trait at `s̄`, and the Galois group of `k(s)` acts on it through a residue Frobenius lift. At a
-finite coefficient level this says exactly that the restriction of `j_* ℱ` to the point
-`Spec k(s)` is finite locally constant: a sheaf on `Spec k(s)` is the continuous Galois
-module of its geometric stalk, which here is the finite module `ℱ_η̄ ^ I_s`. -/
+This is an auxiliary finiteness input, weaker than the blueprint lemma
+`lem-wf-boundary-stalk-invariants`, which identifies the stalk of `j_* ℱ` at a geometric point
+`s̄` over `s`, Frobenius-equivariantly, with the inertia invariants `ℱ_η̄ ^ I_s`. That
+identification implies this statement, since a sheaf on `Spec k(s)` is the continuous Galois
+module of its geometric stalk, and `ℱ_η̄ ^ I_s` is finite. -/
 theorem isFiniteLocallyConstantSheaf_upperStar_middleExtension
     (p : C ⟶ Spec (.of K)) [IsCurve p] (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsFiniteLocallyConstantSheaf F] (s : C) (hs : IsClosed {s})
@@ -168,12 +169,12 @@ curve `C₀` with finite complement is constructible. The complement consists of
 since `C₀` is a Jacobson space, so the range of `j` and the boundary points stratify `C₀`
 (`AlgebraicGeometry.Scheme.Stratification.ofOpenImmersion`). On `U₀` the restriction of
 `j_* ℱ` is `ℱ`, and at a boundary point it is finite locally constant by
-`lem-wf-boundary-stalk-invariants`. -/
+`AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_middleExtension`. -/
 theorem isConstructibleSheaf_lowerStar (p : C ⟶ Spec (.of K)) [IsCurve p]
     (hfin : (Set.range j.base)ᶜ.Finite)
     (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsFiniteLocallyConstantSheaf F] :
-    Scheme.IsConstructibleSheaf (((j)_*[ModuleCat.{u + 1} Λ]).obj F) := by
+    Scheme.IsConstructibleSheaf ((Etale.middleExtension (ModuleCat.{u + 1} Λ) j).obj F) := by
   have : JacobsonSpace C := LocallyOfFiniteType.jacobsonSpace p
   have hcl : ∀ x ∈ (Set.range j.base)ᶜ, IsClosed {x} := fun x hx ↦
     _root_.isClosed_singleton_of_mem_of_finite j.isOpenEmbedding.isOpen_range.isClosed_compl hfin hx
