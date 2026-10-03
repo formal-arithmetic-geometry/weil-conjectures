@@ -51,6 +51,11 @@ variable {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
   (F : WeilSheaf k₀ l U)
 
+/-- The curve `C₀` is locally of finite type over `k₀`, being smooth over `k₀`. -/
+local instance : LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀)) :=
+  haveI := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
+  inferInstance
+
 /-- For a dense open immersion `j : U₀ ↪ C₀` with `C₀` a smooth geometrically connected affine
 curve and `F` lisse on `U₀`, the compactly supported cohomology `H_c^r(C, j_*F)` vanishes for
 every `r` outside `{0, 1, 2}`. (blueprint: `sk-l-dl-a1-endpoints`) -/
