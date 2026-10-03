@@ -128,7 +128,7 @@ the kernel transform of the Fourier kernel `𝒦_ψ` with shift `r`. The shift i
 definition: it is Laumon's normalization, for which the inversion theorem holds up to the
 Tate twist `(-r)` and no further shift. The transform attached to the inverse character is
 the same construction with `Ψ⁻¹` in place of `Ψ`; its kernel is the inverse of `𝒦_ψ` by
-`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_inv`.
+`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv`.
 (sketch blueprint: `sk-def-ft`) -/
 noncomputable def fourierTransform [CharP Γ(pullback π π', ⊤) p]
     [HasCompactification (pullback.snd π π')] (Ψ : AddChar (ZMod p) Λ)

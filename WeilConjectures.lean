@@ -238,7 +238,6 @@ public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.ConstructibleSheaf.Presentation
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.ConstructibleSheaf.Refinement
-public import WeilConjectures.ConstructibleSheaf.TensorUnit
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 public import WeilConjectures.ConstructibleSheaf.Zero
 public import WeilConjectures.Convergence
@@ -376,7 +375,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
-public import WeilConjectures.Mathlib.Algebra.CharP.Basic
+public import WeilConjectures.Mathlib.Algebra.CharP.Algebra
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
 public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.Algebra.Exact.Basic
@@ -695,6 +694,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat

@@ -9,18 +9,18 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
-public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 
 /-!
-# The constant sheaf `Λ` as the monoidal unit
+# Endomorphisms of `f_* Λ` from endomorphisms over the base
 
-The monoidal unit `𝟙_` of étale sheaves of `Λ`-modules is the constant sheaf `Λ`
-(definitionally `constantSheaf` applied to `ModuleCat.of Λ Λ`), so the pullback of constant
-sheaves `AlgebraicGeometry.Scheme.upperStarConstantSheafIso` applies to it.
+For `f : Y ⟶ X` and an endomorphism `g : Y ⟶ Y` over `X`, pulling back sections along `g`
+gives an endomorphism of the pushforward `f_* Λ` of the constant sheaf, the monoidal unit `𝟙_`.
+The identification `g^* Λ ≅ Λ` is the unit isomorphism of the strong monoidal structure
+`AlgebraicGeometry.Etale.monoidal_upperStar` of `g^*`.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.upperStarTensorUnitIso`: the isomorphism `g^* Λ ≅ Λ`.
 - `AlgebraicGeometry.Etale.lowerStarConstantSheafEndOfOver`: for `f : Y ⟶ X` and
   `g : Y ⟶ Y` with `g ≫ f = f`, the endomorphism of `f_* Λ` given by pulling back sections
   along `g`.
@@ -37,20 +37,12 @@ noncomputable section
 
 namespace AlgebraicGeometry.Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ]
-
-/-- The pullback of étale sheaves of `Λ`-modules along `g : Y ⟶ X` preserves the monoidal
-unit, the constant sheaf `Λ`: `g^* Λ ≅ Λ`. -/
-def upperStarTensorUnitIso {X Y : Scheme.{u}} (g : Y ⟶ X) :
-    (g)^*[ModuleCat Λ].obj (𝟙_ _) ≅ 𝟙_ _ :=
-  -- the unit is definitionally `constantSheaf` applied to `ModuleCat.of Λ Λ`
-  (Scheme.upperStarConstantSheafIso _ g).app (ModuleCat.of Λ Λ)
-
-variable {Λ}
+variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- For `f : Y ⟶ X` and an endomorphism `g : Y ⟶ Y` over `X`, the endomorphism of `f_* Λ`
-pulling back sections along `g`: `f_*` of the unit of `g^* ⊣ g_*`, followed by the
-composition isomorphism of pushforwards,
+pulling back sections along `g`: `f_*` of the unit of `g^* ⊣ g_*`, followed by the unit
+isomorphism `g^* Λ ≅ Λ` of the monoidal pullback and the composition isomorphism of
+pushforwards,
 
 ```
 f_* Λ --f_* η--> f_* g_* g^* Λ ≅ f_* g_* Λ ≅ (g ≫ f)_* Λ = f_* Λ
@@ -60,7 +52,7 @@ def lowerStarConstantSheafEndOfOver {X Y : Scheme.{u}} (f : Y ⟶ X) (g : Y ⟶ 
     (h : g ≫ f = f) :
     (f)_*[ModuleCat Λ].obj (𝟙_ _) ⟶ (f)_*[ModuleCat Λ].obj (𝟙_ _) :=
   (f)_*[ModuleCat Λ].map ((upperStarLowerStarAdjunction _ g).unit.app _ ≫
-      (g)_*[ModuleCat Λ].map (upperStarTensorUnitIso Λ g).hom) ≫
+      (g)_*[ModuleCat Λ].map (Functor.Monoidal.εIso (g)^*[ModuleCat Λ]).inv) ≫
     (lowerStarComp _ g f f h.symm).hom.app _
 
 /-- The identity of `Y` acts trivially on `f_* Λ`. -/
@@ -71,7 +63,19 @@ lemma lowerStarConstantSheafEndOfOver_id {X Y : Scheme.{u}} (f : Y ⟶ X) :
   sorry
 
 /-- Pulling back sections is contravariant: the endomorphism attached to `g ≫ g'` is that of
-`g'` followed by that of `g`. -/
+`g'` followed by that of `g`, i.e. writing `End(g)` for
+`AlgebraicGeometry.Etale.lowerStarConstantSheafEndOfOver f g h`, the triangle
+
+```
+f_* Λ ---End(g')---> f_* Λ
+     \                 |
+   End(g ≫ g')       End(g)
+         \             |
+          v            v
+            f_* Λ
+```
+
+commutes. -/
 lemma lowerStarConstantSheafEndOfOver_comp {X Y : Scheme.{u}} (f : Y ⟶ X) (g g' : Y ⟶ Y)
     (h : g ≫ f = f) (h' : g' ≫ f = f) :
     lowerStarConstantSheafEndOfOver (Λ := Λ) f (g ≫ g') (by rw [Category.assoc, h', h]) =

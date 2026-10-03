@@ -11,8 +11,8 @@ public import Mathlib.Data.ZMod.Basic
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.ConstructibleSheaf.Pullback
-public import WeilConjectures.ConstructibleSheaf.TensorUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 
 /-!
@@ -90,9 +90,9 @@ decomposition — for `Λ = ℤ/p` every statement below is false.
 The field `k` lives in the universe `u` of the schemes, so that `𝔸¹_k = 𝔸(PUnit; Spec k)` is
 a scheme in that universe; the case `k = ℤ/p` uses `ULift (ZMod p)`.
 
-The constant sheaf `Λ` is the monoidal unit `𝟙_`, which is definitionally `constantSheaf`
-applied to `ModuleCat.of Λ Λ`; its pullback is
-`AlgebraicGeometry.Etale.upperStarTensorUnitIso`. The action of `σ_a` on `(AS_q)_* Λ` is the
+The constant sheaf `Λ` is the monoidal unit `𝟙_`, and its pullback `g^* Λ ≅ Λ` is the unit
+isomorphism `Functor.Monoidal.εIso` of the strong monoidal structure
+`AlgebraicGeometry.Etale.monoidal_upperStar`. The action of `σ_a` on `(AS_q)_* Λ` is the
 general `AlgebraicGeometry.Etale.lowerStarConstantSheafEndOfOver` for the endomorphism `σ_a`
 of `𝔸¹_k` over `AS_q`, so the group law of the action reduces to that of the translations.
 
@@ -287,7 +287,7 @@ def _root_.AlgebraicGeometry.Scheme.overSpecZModOfCharP (X : Scheme.{u}) (p : �
     ((ZMod.castHom dvd_rfl Γ(X, ⊤)).comp ULift.ringEquiv.toRingHom))⟩
 
 /-- If `p` is invertible in `Λ`, so is the number of elements of `ULift (ZMod p)`. -/
-instance {p : ℕ} [NeZero p] [Invertible (p : Λ)] :
+instance invertible_card_ulift_zmod {p : ℕ} [NeZero p] [Invertible (p : Λ)] :
     Invertible (Fintype.card (ULift.{u} (ZMod p)) : Λ) :=
   ‹Invertible (p : Λ)›.copy _ (by rw [Fintype.card_ulift, ZMod.card])
 
@@ -420,7 +420,7 @@ theorem nonempty_iso_artinSchreierSheafOf_zero (Ψ : AddChar k Λ) :
   exact ⟨(upperStarComp _ (X ↘ Spec (.of k)) (AffineSpace.zeroSection PUnit _) _ (by
       rw [AffineSpace.zeroSection, AffineSpace.comp_homOfVector, Category.comp_id]
       congr 1; ext; simp)).app (artinSchreierSheaf Ψ) ≪≫
-    (X ↘ Spec (.of k))^*[ModuleCat Λ].mapIso e.symm ≪≫ upperStarTensorUnitIso Λ _⟩
+    (X ↘ Spec (.of k))^*[ModuleCat Λ].mapIso e.symm ≪≫ (Functor.Monoidal.εIso _).symm⟩
 
 /-- The Artin–Schreier sheaf turns addition of functions into tensor product of sheaves,
 `ℒ_{Ψ, f} ⊗ ℒ_{Ψ, g} ≅ ℒ_{Ψ, f + g}`.
@@ -455,7 +455,7 @@ the pullback of `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_one` al
 theorem nonempty_iso_artinSchreierSheafOf_one (f : Γ(X, ⊤)) :
     Nonempty (artinSchreierSheafOf X (1 : AddChar k Λ) f ≅ 𝟙_ _) := by
   obtain ⟨e⟩ := nonempty_iso_artinSchreierSheaf_one (k := k) (Λ := Λ)
-  exact ⟨Functor.mapIso _ e ≪≫ upperStarTensorUnitIso Λ _⟩
+  exact ⟨Functor.mapIso _ e ≪≫ (Functor.Monoidal.εIso _).symm⟩
 
 /-- The Artin–Schreier sheaf turns multiplication of characters into tensor product of
 sheaves, `ℒ_{Ψ, f} ⊗ ℒ_{Ψ', f} ≅ ℒ_{Ψ Ψ', f}`.
