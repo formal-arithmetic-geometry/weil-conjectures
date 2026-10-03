@@ -642,6 +642,7 @@ public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
+public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.BaseChange.Etale
 public import WeilConjectures.SixFunctors.BaseChange.Pasting
 public import WeilConjectures.SixFunctors.BaseChange.Square
