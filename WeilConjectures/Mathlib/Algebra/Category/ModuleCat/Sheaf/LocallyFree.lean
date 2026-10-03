@@ -23,6 +23,8 @@ The rank-one case of `SheafOfModules.IsFiniteLocallyFreeOfRank` and
 
 - `SheafOfModules.IsFiniteLocallyFreeOfRank`: `M : SheafOfModules R` is finite locally free of
   rank `r`.
+- `SheafOfModules.IsFiniteLocallyFree`: `M : SheafOfModules R` is finite locally free, of a rank
+  that may vary; `SheafOfModules.isFiniteLocallyFree` is the corresponding property of objects.
 - `SheafOfModules.LocalGeneratorsData.IsInvertibleData`: a predicate on
   `q : M.LocalGeneratorsData` saying that `q` is locally free data whose generating families
   are each indexed by a type with exactly one element.
@@ -31,7 +33,8 @@ The rank-one case of `SheafOfModules.IsFiniteLocallyFreeOfRank` and
 
 ## Main results
 
-- `SheafOfModules.IsInvertible.of_iso`: invertibility only depends on the isomorphism class.
+- `SheafOfModules.IsInvertible.of_iso` and `SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso`:
+  invertibility and finite local freeness of rank `r` only depend on the isomorphism class.
 - `SheafOfModules.instIsInvertibleUnit`: the unit sheaf `𝒪` is invertible.
 -/
 
@@ -135,6 +138,44 @@ theorem IsFiniteLocallyFreeOfRank.isLocallyFree (M : SheafOfModules.{u} R)
     (r : ℕ) [h : M.IsFiniteLocallyFreeOfRank r] : M.IsLocallyFree :=
   have := h.exists_localGeneratorsData.choose_spec.choose
   ⟨_, this⟩
+
+theorem IsFiniteLocallyFreeOfRank.of_iso {M N : SheafOfModules.{u} R} (e : M ≅ N) {r : ℕ}
+    [h : M.IsFiniteLocallyFreeOfRank r] : N.IsFiniteLocallyFreeOfRank r := by
+  obtain ⟨q, hq, hr⟩ := h.exists_localGeneratorsData
+  exact ⟨q.ofIso e, inferInstance, hr⟩
+
+/-- A sheaf of modules is *finite locally free* if it admits local generators data which is
+locally free data (`SheafOfModules.LocalGeneratorsData.IsLocallyFreeData`) with finitely many
+generators over each member of the covering. Unlike `SheafOfModules.IsFiniteLocallyFreeOfRank`,
+the rank may vary from one member of the covering to another. -/
+@[stacks 01C6]
+class IsFiniteLocallyFree (M : SheafOfModules.{u} R) : Prop where
+  exists_localGeneratorsData :
+    ∃ q : LocalGeneratorsData.{u₁} M, q.IsLocallyFreeData ∧ q.IsFiniteType
+
+variable (R) in
+/-- The finite locally free sheaves of modules, as a property of objects. -/
+abbrev isFiniteLocallyFree : ObjectProperty (SheafOfModules.{u} R) :=
+  fun M ↦ M.IsFiniteLocallyFree
+
+theorem IsFiniteLocallyFreeOfRank.isFiniteLocallyFree (M : SheafOfModules.{u} R) (r : ℕ)
+    [h : M.IsFiniteLocallyFreeOfRank r] : M.IsFiniteLocallyFree := by
+  obtain ⟨q, hq, hr⟩ := h.exists_localGeneratorsData
+  exact ⟨q, hq, ⟨fun i ↦ ⟨Finite.of_equiv _ (hr i).some.symm⟩⟩⟩
+
+theorem IsFiniteLocallyFree.of_iso {M N : SheafOfModules.{u} R} (e : M ≅ N)
+    [h : M.IsFiniteLocallyFree] : N.IsFiniteLocallyFree := by
+  obtain ⟨q, hq, hf⟩ := h.exists_localGeneratorsData
+  refine ⟨q.ofIso e, inferInstance, ⟨fun i ↦ ?_⟩⟩
+  have := hf.isFiniteType i
+  exact inferInstanceAs ((q.generators i).ofEpi _).IsFiniteType
+
+instance (priority := 100) IsInvertible.isFiniteLocallyFree (M : SheafOfModules.{u} R)
+    [h : M.IsInvertible] : M.IsFiniteLocallyFree := by
+  obtain ⟨q, hq⟩ := h.exists_isInvertibleData
+  refine ⟨q, inferInstance, ⟨fun i ↦ ⟨?_⟩⟩⟩
+  have := (hq.nonempty_unique i).some
+  infer_instance
 
 end
 

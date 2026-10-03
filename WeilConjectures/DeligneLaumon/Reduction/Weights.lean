@@ -147,7 +147,10 @@ def HasDirectImageWeightBound (k₀ : Type u) [Field k₀] [Finite k₀] {l : �
     [Fact (ringChar k₀ ≠ l)] (ι : PadicAlgCl l →+* ℂ) {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
-    [QuasiCompact f] : Prop :=
+    [QuasiCompact f]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] : Prop :=
   ∀ (w : ℝ) (F : WeilSheaf k₀ l X), F.IsMixedOfWeightsAtMost ι w →
     ∀ r : ℕ, ((WeilSheaf.higherLowerShriek k₀ l f r).obj F).IsMixedOfWeightsAtMost ι (w + r)
 

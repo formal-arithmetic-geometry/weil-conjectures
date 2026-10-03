@@ -93,6 +93,8 @@ is the automorphism `γ_X` of the blueprint, induced by `σ_geom`, and not its i
   is Cartesian.
 - `AlgebraicGeometry.Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius`: base change
   to `k̄` commutes with the geometric Galois Frobenii.
+- `AlgebraicGeometry.Scheme.Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap`: the
+  square formed by the base change `φ̄` and the geometric Galois Frobenii is cartesian.
 - `AlgebraicGeometry.Scheme.Hom.geometricFiberPoint_comp_geometricGaloisFrobenius_pow`: a
   geometric point `s` over a point with values in a field with `#k ^ m` elements satisfies
   `s ≫ g_Xᵐ = σᵐ ≫ s`.
@@ -298,6 +300,33 @@ instance (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) [QuasiCompact φ] :
 instance (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) [LocallyOfFiniteType φ] :
     LocallyOfFiniteType (geometricFiberMap φ h) :=
   geometricFiberMap_of_isStableUnderBaseChange (P := @LocallyOfFiniteType) φ h ‹_›
+
+/-- The projection of the geometric fiber to the model is affine, being the base change of
+`Spec k̄ ⟶ Spec k`. -/
+instance : IsAffineHom g.geometricFiberProj :=
+  MorphismProperty.pullback_fst _ _
+    (inferInstanceAs
+      (IsAffineHom (Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k))))))
+
+/-! The base change to `k̄` of a quasi-compact, quasi-separated or locally of finite type
+structure morphism `g : Y₀ ⟶ Spec k` is again one. -/
+
+instance [QuasiCompact g] : QuasiCompact g.geometricFiberToAlgebraicClosure :=
+  inferInstanceAs (QuasiCompact (pullback.snd _ _))
+
+instance [QuasiSeparated g] : QuasiSeparated g.geometricFiberToAlgebraicClosure :=
+  inferInstanceAs (QuasiSeparated (pullback.snd _ _))
+
+instance [LocallyOfFiniteType g] : LocallyOfFiniteType g.geometricFiberToAlgebraicClosure :=
+  inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
+
+/-- The geometric fiber of a quasi-compact `k`-scheme is quasi-compact. -/
+instance [QuasiCompact g] : CompactSpace g.geometricFiber :=
+  QuasiCompact.compactSpace_of_compactSpace g.geometricFiberToAlgebraicClosure
+
+/-- The geometric fiber of a quasi-separated `k`-scheme is quasi-separated. -/
+instance [QuasiSeparated g] : QuasiSeparatedSpace g.geometricFiber :=
+  quasiSeparatedSpace_of_quasiSeparated g.geometricFiberToAlgebraicClosure
 
 end Scheme.Hom
 
@@ -543,6 +572,43 @@ theorem geometricFiberMap_comp_geometricGaloisFrobenius (φ : X₀ ⟶ Y₀) (h 
     geometricFiberMap φ h ≫ g.geometricGaloisFrobenius.hom =
       f.geometricGaloisFrobenius.hom ≫ geometricFiberMap φ h := by
   apply pullback.hom_ext <;> simp [geometricFiberMap, geometricGaloisFrobenius]
+
+/-- The base change `φ̄ = φ × 𝟙` of a morphism over `k` and the geometric Galois Frobenii form
+a commutative square:
+
+```
+          Fr_X
+     X ────────▶ X
+     │           │
+   φ̄ │           │ φ̄
+     ▼           ▼
+     Y ────────▶ Y
+          Fr_Y
+```
+-/
+theorem commSq_geometricGaloisFrobenius (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) :
+    CommSq f.geometricGaloisFrobenius.hom (geometricFiberMap φ h) (geometricFiberMap φ h)
+      g.geometricGaloisFrobenius.hom :=
+  ⟨(geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm⟩
+
+/-- The square
+
+```
+          Fr_X
+     X ────────▶ X
+     │           │
+   φ̄ │           │ φ̄
+     ▼           ▼
+     Y ────────▶ Y
+          Fr_Y
+```
+
+of the base change `φ̄ = φ × 𝟙` of a morphism over `k` and the geometric Galois Frobenii is
+cartesian, its horizontal maps being isomorphisms. -/
+theorem isPullback_geometricGaloisFrobenius_geometricFiberMap (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) :
+    IsPullback f.geometricGaloisFrobenius.hom (geometricFiberMap φ h) (geometricFiberMap φ h)
+      g.geometricGaloisFrobenius.hom :=
+  .of_horiz_isIso (commSq_geometricGaloisFrobenius φ h)
 
 end Scheme.Hom
 

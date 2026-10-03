@@ -65,8 +65,9 @@ abelian group.
 
 This is Mathlib's `AlgebraicGeometry.isCommMonObj_of_isProper_of_geometricallyIntegral` applied
 to `AlgebraicGeometry.IsAbelianVariety.geometricallyIntegral`. The blueprint instead deduces it
-from the rigidity lemma, which is recorded in
-`WeilConjectures.AlgebraicGeometry.AbelianVariety.Rigidity`. -/
+from the rigidity lemma `AlgebraicGeometry.exists_eq_snd_comp`, which is recorded in
+`WeilConjectures.AlgebraicGeometry.AbelianVariety.Rigidity`, whose hypotheses on `X` an abelian
+variety satisfies (see Stacks 04KV for geometric connectedness). -/
 instance IsAbelianVariety.isCommMonObj (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] : IsCommMonObj A :=
   isCommMonObj_of_isProper_of_geometricallyIntegral A

@@ -48,6 +48,8 @@ which is not needed downstream.
 - `AlgebraicGeometry.IsRegularImmersion.smooth_comp`
 - `AlgebraicGeometry.IsRegularImmersion.ringKrullDim_stalk_add`
 - `AlgebraicGeometry.isRegularImmersion_diagonal`
+- `AlgebraicGeometry.IsRegularImmersion.of_isPullback`: stability under flat base change.
+- `AlgebraicGeometry.IsRegularImmersion.pullback_map`: exterior products over a field.
 -/
 
 @[expose] public section
@@ -149,6 +151,27 @@ stated here. -/
 instance isRegularImmersion_diagonal (d : ℕ) (f : X ⟶ Y) [IsSeparated f]
     [SmoothOfRelativeDimension d f] :
     IsRegularImmersion d (pullback.diagonal f) :=
+  sorry
+
+/-- **Flat base change.** The base change `i' : Z' ⟶ X'` of a regular closed immersion
+`i : Z ⟶ X` of pure codimension `c` along a flat morphism `e : X' ⟶ X` is again a regular closed
+immersion of pure codimension `c`: a regular sequence stays regular after a flat extension of
+scalars, and it still generates the extended ideal. -/
+theorem IsRegularImmersion.of_isPullback {Z' X' : Scheme.{u}} (c : ℕ) {i : Z ⟶ X}
+    {i' : Z' ⟶ X'} {g : Z' ⟶ Z} {e : X' ⟶ X} (h : IsPullback g i' i e) [IsRegularImmersion c i]
+    [Flat e] : IsRegularImmersion c i' :=
+  sorry
+
+/-- **Exterior products.** For regular closed immersions `i₁ : Z₁ ⟶ X₁` and `i₂ : Z₂ ⟶ X₂` of
+pure codimensions `c₁` and `c₂` of schemes over a field `k`, the closed immersion
+`Z₁ ×_k Z₂ ⟶ X₁ ×_k X₂` is regular of pure codimension `c₁ + c₂`. It is the composite of
+`Z₁ ×_k Z₂ ⟶ Z₁ ×_k X₂` and `Z₁ ×_k X₂ ⟶ X₁ ×_k X₂`, the base changes of `i₂` and `i₁` along the
+projections, which are flat because every scheme over a field is flat. -/
+theorem IsRegularImmersion.pullback_map {k : Type u} [Field k] {X₁ X₂ Z₁ Z₂ : Scheme.{u}}
+    (c₁ c₂ : ℕ) (i₁ : Z₁ ⟶ X₁) (i₂ : Z₂ ⟶ X₂) [IsRegularImmersion c₁ i₁]
+    [IsRegularImmersion c₂ i₂] (a₁ : X₁ ⟶ Spec (.of k)) (a₂ : X₂ ⟶ Spec (.of k)) :
+    IsRegularImmersion (c₁ + c₂)
+      (pullback.map (i₁ ≫ a₁) (i₂ ≫ a₂) a₁ a₂ i₁ i₂ (𝟙 _) (by simp) (by simp)) :=
   sorry
 
 end AlgebraicGeometry

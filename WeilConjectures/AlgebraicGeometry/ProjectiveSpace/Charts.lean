@@ -26,6 +26,8 @@ is the preimage of `D₊(Tᵢ) ⊆ ℙⁿ_ℤ`, the chart over `S` is obtained b
 
 - `AlgebraicGeometry.ProjectiveSpace.standardOpenIso` — the isomorphism of `S`-schemes
   `D₊(Tᵢ) ≅ 𝔸({j : n // j ≠ i}; S)`.
+- `AlgebraicGeometry.ProjectiveLine.affineChart` — the standard chart `𝔸¹_S ↪ ℙ¹_S`,
+  `x ↦ [x : 1]`, an open immersion of `S`-schemes onto `D₊(T₁)`.
 
 ## Main results
 
@@ -228,3 +230,53 @@ theorem homOfSections_resLE_standardOpenIso_hom (i : n) :
 end Sections
 
 end AlgebraicGeometry.ProjectiveSpace
+
+namespace AlgebraicGeometry.ProjectiveLine
+
+open ProjectiveSpace
+
+variable (S : Scheme.{u})
+
+/-- The standard open `D₊(T₁)` of `ℙ¹_S` has a single affine coordinate `T₀ / T₁`. -/
+private lemma subsingleton_ne_one : Subsingleton {j : ULift.{u} (Fin 2) // j ≠ ⟨1⟩} :=
+  ⟨fun ⟨⟨a⟩, ha⟩ ⟨⟨b⟩, hb⟩ ↦ by
+    have ha : a = 0 := by grind
+    have hb : b = 0 := by grind
+    subst ha hb
+    rfl⟩
+
+/-- **The standard affine chart of the projective line**: the open immersion
+`𝔸¹_S ↪ ℙ¹_S`, `x ↦ [x : 1]`, onto the standard open `D₊(T₁)`. Its complement is the closed
+locus `V(T₁)`, the point `∞ = [1 : 0]` over `S`. -/
+def affineChart : 𝔸(PUnit.{u + 1}; S) ⟶ ProjectiveLine S :=
+  AffineSpace.reindex (fun _ : {j : ULift.{u} (Fin 2) // j ≠ ⟨1⟩} ↦ PUnit.unit) S ≫
+    (standardOpenIso (ULift.{u} (Fin 2)) S ⟨1⟩).inv ≫ (standardOpen (ULift.{u} (Fin 2)) S ⟨1⟩).ι
+
+instance : IsIso (AffineSpace.reindex (fun _ : {j : ULift.{u} (Fin 2) // j ≠ ⟨1⟩} ↦
+    PUnit.unit.{u + 1}) S) := by
+  have := subsingleton_ne_one.{u}
+  refine ⟨AffineSpace.reindex (fun _ ↦ ⟨⟨0⟩, by simp⟩) S, ?_, ?_⟩ <;>
+    refine AffineSpace.hom_ext (by simp [AffineSpace.reindex_over]) fun i ↦ ?_ <;>
+    rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.reindex_appTop_coord,
+      AffineSpace.reindex_appTop_coord, Scheme.Hom.id_appTop, CommRingCat.id_apply]
+  exact congrArg _ (Subsingleton.elim _ _)
+
+instance : IsOpenImmersion (affineChart S) := by
+  rw [affineChart]
+  infer_instance
+
+@[reassoc (attr := simp)]
+lemma affineChart_over : affineChart S ≫ ProjectiveLine S ↘ S = 𝔸(PUnit.{u + 1}; S) ↘ S := by
+  rw [affineChart, Category.assoc, Category.assoc, standardOpenIso_inv_ι_over,
+    AffineSpace.reindex_over]
+
+instance : (affineChart S).IsOver S := ⟨affineChart_over S⟩
+
+/-- The image of the standard affine chart is the standard open `D₊(T₁)`. -/
+lemma opensRange_affineChart :
+    (affineChart S).opensRange = standardOpen (ULift.{u} (Fin 2)) S ⟨1⟩ := by
+  unfold affineChart
+  rw [Scheme.Hom.opensRange_comp_of_isIso, Scheme.Hom.opensRange_comp_of_isIso,
+    Scheme.Opens.opensRange_ι]
+
+end AlgebraicGeometry.ProjectiveLine

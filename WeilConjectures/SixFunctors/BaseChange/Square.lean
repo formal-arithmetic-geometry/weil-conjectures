@@ -162,6 +162,27 @@ lemma Etale.baseChangeSquare_eq_mateEquiv_symm (sq : CommSq g' f' f g) :
   rw [← Etale.mateEquiv_baseChangeSquare]
   exact (Equiv.symm_apply_apply _ _).symm
 
+omit [HasSmallSiteSheafify A] in
+/-- The square isomorphism of the flipped square is the inverse of the square isomorphism. -/
+lemma Etale.squareUpperStarIso_flip (sq : CommSq g' f' f g) :
+    Etale.squareUpperStarIso A sq.flip = (Etale.squareUpperStarIso A sq).symm := by
+  have key (h₁ h₂ : X' ⟶ Y) (e : h₁ = h₂) (p₁ q₁ p₂ q₂) :
+      (Etale.upperStarComp A g' f h₁ p₁).symm ≪≫ Etale.upperStarComp A f' g h₁ q₁ =
+        (Etale.upperStarComp A g' f h₂ p₂).symm ≪≫
+          Etale.upperStarComp A f' g h₂ q₂ := by
+    subst e
+    rfl
+  exact key _ _ sq.w.symm _ _ _ _
+
+omit [HasSmallSiteSheafify A] in
+/-- The square isomorphisms of a square and of its flip compose to the identity. -/
+@[reassoc (attr := simp)]
+lemma Etale.squareUpperStarIso_flip_hom_app_hom_app (sq : CommSq g' f' f g)
+    (G : Sheaf Y.smallEtaleTopology A) :
+    (Etale.squareUpperStarIso A sq.flip).hom.app G ≫ (Etale.squareUpperStarIso A sq).hom.app G =
+      𝟙 _ := by
+  rw [Etale.squareUpperStarIso_flip A sq, Iso.symm_hom, Iso.inv_hom_id_app]
+
 end Square
 
 section IsIso
@@ -178,6 +199,21 @@ instance Etale.isIso_baseChangeMap_of_isUniversalHomeomorphism (sq : CommSq g' f
     IsIso (Etale.baseChangeMap A sq) := by
   have h₁ := Etale.isEquivalence_upperStar A g'
   have h₂ := Etale.isEquivalence_lowerStar A g
+  have : IsIso (Etale.upperStarLowerStarAdjunction A g').unit := inferInstance
+  have : IsIso (Etale.upperStarLowerStarAdjunction A g).counit := inferInstance
+  change IsIso (Etale.baseChangeSquare A sq).natTrans
+  rw [Etale.baseChangeSquare_eq_mateEquiv_symm]
+  unfold mateEquiv
+  dsimp only [Equiv.coe_fn_symm_mk]
+  infer_instance
+
+/-- **The base change map is an isomorphism when the horizontal maps are isomorphisms.** This
+is the elementary case of `AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isUniversalHomeomorphism`:
+the pullbacks along `g` and `g'` are equivalences by
+`AlgebraicGeometry.Etale.isEquivalence_upperStar_of_isIso`, which needs no topological invariance
+of the étale site. -/
+instance Etale.isIso_baseChangeMap_of_isIso (sq : CommSq g' f' f g) [IsIso g] [IsIso g'] :
+    IsIso (Etale.baseChangeMap A sq) := by
   have : IsIso (Etale.upperStarLowerStarAdjunction A g').unit := inferInstance
   have : IsIso (Etale.upperStarLowerStarAdjunction A g).counit := inferInstance
   change IsIso (Etale.baseChangeSquare A sq).natTrans

@@ -24,12 +24,18 @@ This is the tool that turns a sheaf of modules defined as a kernel — as the id
 into a computable object.
 
 The file also records that the pullback of the structure sheaf along any morphism of schemes
-is the structure sheaf.
+is the structure sheaf, and the presheaf of `Γ(X, ⊤)`-modules underlying a sheaf of modules.
 
 ## Main results
 
 - `AlgebraicGeometry.Scheme.Modules.range_map_kernelι`
 - `AlgebraicGeometry.Scheme.Modules.pullbackObjUnitIso`: `f^* 𝒪_Y ≅ 𝒪_X`.
+
+## Main definitions
+
+- `AlgebraicGeometry.Scheme.Modules.unit`: the structure sheaf as an object of `X.Modules`.
+- `AlgebraicGeometry.Scheme.Modules.presheafModuleCat`: the presheaf of `Γ(X, ⊤)`-modules
+  underlying a sheaf of modules.
 -/
 
 @[expose] public section
@@ -92,5 +98,33 @@ noncomputable def pullbackObjUnitIso {Y : Scheme.{u}} (g : X ⟶ Y) :
   haveI : IsIso (C := SheafOfModules.{u} X.ringCatSheaf)
       (SheafOfModules.pullbackObjUnitToUnit g.toRingCatSheafHom) := inferInstance
   asIso (SheafOfModules.pullbackObjUnitToUnit g.toRingCatSheafHom)
+
+end Modules
+
+/-- The structure sheaf `𝒪_X` of a scheme `X`, as an object of `X.Modules`. -/
+noncomputable abbrev Modules.unit (X : Scheme.{u}) : X.Modules :=
+  SheafOfModules.unit X.ringCatSheaf
+
+namespace Modules
+
+variable {X : Scheme.{u}}
+
+/-- The presheaf of `Γ(X, ⊤)`-modules underlying a sheaf of modules `ℱ`: its value on an open
+`U` is `Γ(U, ℱ)`, a `Γ(X, ⊤)`-module by restriction of scalars along `Γ(X, ⊤) ⟶ Γ(X, U)`.
+It is the image of `ℱ` under `PresheafOfModules.forgetToPresheafModuleCat`. -/
+noncomputable def presheafModuleCat (ℱ : X.Modules) : X.Opensᵒᵖ ⥤ ModuleCat.{u} Γ(X, ⊤) :=
+  (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj ℱ.val
+
+@[simp]
+lemma presheafModuleCat_obj (ℱ : X.Modules) (V : X.Opensᵒᵖ) :
+    ℱ.presheafModuleCat.obj V = (ModuleCat.restrictScalars
+      (X.ringCatSheaf.obj.map (homOfLE le_top : V.unop ⟶ ⊤).op).hom).obj (ℱ.val.obj V) :=
+  rfl
+
+-- Not a `simp` lemma, for the same reason as
+-- `PresheafOfModules.forgetToPresheafModuleCatObjObj_coe`.
+lemma presheafModuleCat_obj_coe (ℱ : X.Modules) (V : X.Opensᵒᵖ) :
+    (ℱ.presheafModuleCat.obj V : Type u) = ℱ.val.obj V :=
+  rfl
 
 end AlgebraicGeometry.Scheme.Modules

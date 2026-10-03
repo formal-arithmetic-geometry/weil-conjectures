@@ -60,7 +60,8 @@ twist. (blueprint: `sk-i-dl-a1-local`)
 -/
 theorem exists_linearEquiv_dual_stalk_higherDirectImage
     {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
-    (j : U ⟶ C) [IsOpenImmersion j] [j.IsOver (Spec (CommRingCat.of k₀))] [IsDominant j]
+    (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
+    [IsDominant j]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l U) (hF : F.IsLisse) (s : C.finitePoints)
     (hsU : s.1 ∉ Set.range j.base) :
