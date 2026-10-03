@@ -8,11 +8,15 @@ module
 public import Mathlib.Algebra.Lie.Abelian
 public import Mathlib.Algebra.Lie.Matrix
 public import Mathlib.Algebra.Lie.Subalgebra
+public import Mathlib.LinearAlgebra.Dual.Lemmas
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.Tactic.NoncommRing
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.ClosedSubgroup
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.Mathlib.Algebra.DualNumber
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
+public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 
 /-!
 # Lie algebras of closed subgroup schemes of `GL_n` and rational representations
@@ -427,17 +431,65 @@ theorem lieAlgebra_identityComponent_le [IsAlgClosed k] :
     lieAlgebra (identityComponent I) ≤ lieAlgebra I :=
   lieAlgebra_anti (le_identityComponent I)
 
+/-- The point `1 + εX` of `GL_n` with values in the dual numbers reduces to the identity modulo
+`ε`: as an algebra map on the coordinate ring, its reduction is the counit. -/
+theorem fst_comp_evalAlgHom_dualUnit (X : Matrix n n k) :
+    (fstHom k k k).comp (evalAlgHom (dualUnit X)) =
+      Bialgebra.counitAlgHom k (CoordinateRing n k) := by
+  rw [← evalAlgHom_map, map_fstHom_dualUnit]
+  rfl
+
 /-- In characteristic zero, every tangent vector of `G` is tangent to the identity component.
 
-`CharZero` is needed because `identityComponent I` is the ideal of the *reduced* identity
-component. Proof sketch (not formalised): by Cartier's theorem `V(I)` is reduced, so the
-scheme-theoretic identity component `G°`, an open subgroup scheme with the same tangent space at
-`1` as `G`, is cut out by `identityComponent I`. Alternatively, compare dimensions with
-`finrank_lieAlgebra_eq_ringKrullDim` for both ideals, using `dim G° = dim G`.
-(blueprint: `sk-i-cartier`) -/
+`identityComponent I` is the ideal of the *reduced* identity component. By Cartier's lemma
+(`Bialgebra.isPrime_iInf_pow_ker_counitAlgHom`) the functions on `G` vanishing near the identity
+form a prime ideal `P`, so `V(P)` is an irreducible closed subset of `V(I)` through the identity,
+contained in the identity component. A function vanishing on the identity component thus lies
+in `P`, hence vanishes in the local ring at the identity and on every tangent vector there.
+(blueprint: `lem-wf-same-lie-closed-subgroup`, clause (3)) -/
 theorem lieAlgebra_le_lieAlgebra_identityComponent [IsAlgClosed k] [CharZero k] :
     lieAlgebra I ≤ lieAlgebra (identityComponent I) := by
-  sorry
+  intro X hX a ha
+  set B := CoordinateRing n k ⧸ I
+  set P := ⨅ r : ℕ, RingHom.ker (Bialgebra.counitAlgHom k B) ^ r
+  have hP : P.IsPrime := Bialgebra.isPrime_iInf_pow_ker_counitAlgHom k B
+  set P' := P.comap (Ideal.Quotient.mk I)
+  have hP' : P'.IsPrime := Ideal.IsPrime.comap _ (hK := hP)
+  have hIP : I ≤ P' := fun b hb ↦ by
+    rw [Ideal.mem_comap, Ideal.Quotient.eq_zero_iff_mem.2 hb]
+    exact zero_mem _
+  have h1 : toPrimeSpectrum (1 : GL n k) ∈
+      PrimeSpectrum.zeroLocus (P' : Set (CoordinateRing n k)) := fun b hb ↦ by
+    have hb' : Ideal.Quotient.mk I b ∈ RingHom.ker (Bialgebra.counitAlgHom k B) := by
+      have := (Submodule.mem_iInf _).1 (Ideal.mem_comap.1 hb) 1
+      rwa [pow_one] at this
+    rw [RingHom.mem_ker, Bialgebra.counitAlgHom_apply, Bialgebra.Quotient.counit_mk] at hb'
+    exact hb'
+  have hsub : PrimeSpectrum.zeroLocus (P' : Set (CoordinateRing n k)) ⊆
+      connectedComponentIn (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))
+        (toPrimeSpectrum 1) :=
+    (IsPreirreducible.isPreconnected ((PrimeSpectrum.isIrreducible_zeroLocus_iff P').2
+      (by rw [hP'.radical]; exact hP')).2).subset_connectedComponentIn h1
+        (PrimeSpectrum.zeroLocus_anti_mono hIP)
+  have haP : Ideal.Quotient.mk I a ∈ P := by
+    have := PrimeSpectrum.vanishingIdeal_anti_mono hsub ha
+    rwa [PrimeSpectrum.vanishingIdeal_zeroLocus_eq_radical, hP'.radical] at this
+  have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
+  obtain ⟨s, hs, hsa⟩ := AlgHom.mem_iInf_pow_ker_iff.1 haP
+  let φ : B →ₐ[k] DualNumber k := Ideal.Quotient.liftₐ I (evalAlgHom (dualUnit X)) hX
+  have hφ : (fstHom k k k).comp φ = Bialgebra.counitAlgHom k B := by
+    refine Ideal.Quotient.algHom_ext _ ?_
+    rw [AlgHom.comp_assoc]
+    exact fst_comp_evalAlgHom_dualUnit X
+  have hunit : IsUnit (φ s) := by
+    rw [TrivSqZeroExt.isUnit_iff_isUnit_fst]
+    have := congrArg (· s) hφ
+    simp only [AlgHom.comp_apply, fstHom_apply] at this
+    rw [this, hs]
+    exact isUnit_one
+  have h := congrArg φ hsa
+  rw [map_mul, map_zero] at h
+  exact (hunit.mul_right_eq_zero).1 h
 
 /-- Over an algebraically closed field of characteristic zero, the Lie algebra of an algebraic
 group is the Lie algebra of its identity component. (blueprint: `sk-i-cartier`) -/
@@ -445,16 +497,215 @@ theorem lieAlgebra_identityComponent [IsAlgClosed k] [CharZero k] :
     lieAlgebra (identityComponent I) = lieAlgebra I :=
   le_antisymm (lieAlgebra_identityComponent_le I) (lieAlgebra_le_lieAlgebra_identityComponent I)
 
+local notation "𝔪" => RingHom.ker (Bialgebra.counitAlgHom k (CoordinateRing n k ⧸ I))
+
+/-- The tangent vector `X ∈ gl_n` of a linear form `ψ` on the cotangent space at the identity of
+`V(I)`: `X i j = ψ (x_ij - δ_ij)`. -/
+noncomputable def dualCotangentToMatrix
+    (ψ : Module.Dual k
+      (RingHom.ker (Bialgebra.counitAlgHom k (CoordinateRing n k ⧸ I))).Cotangent) :
+    Matrix n n k :=
+  Matrix.of fun i j ↦ (Bialgebra.counitAlgHom k (CoordinateRing n k ⧸ I)).cotangentDerivation ψ
+    (Ideal.Quotient.mk I (coord n k i j))
+
+/-- The point `1 + εX_ψ` of `V(I)` is the dual-number point of the tangent vector `ψ`. -/
+theorem evalAlgHom_dualUnit_dualCotangentToMatrix (ψ : Module.Dual k (𝔪).Cotangent) :
+    evalAlgHom (k := k) (R := DualNumber k) (dualUnit (dualCotangentToMatrix I ψ)) =
+      ((Bialgebra.counitAlgHom k (CoordinateRing n k ⧸ I)).toDualNumber ψ).comp
+        (Ideal.Quotient.mkₐ k I) := by
+  refine algHom_ext fun i j ↦ ?_
+  rw [evalAlgHom_coord, coe_dualUnit, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk]
+  refine TrivSqZeroExt.ext ?_ ?_
+  · rw [AlgHom.fst_toDualNumber, Bialgebra.counitAlgHom_apply, Bialgebra.Quotient.counit_mk]
+    rw [counit_coord]
+    simp [Matrix.one_apply, apply_ite TrivSqZeroExt.fst]
+  · rw [AlgHom.snd_toDualNumber]
+    simp [Matrix.one_apply, apply_ite TrivSqZeroExt.snd, dualCotangentToMatrix]
+
+theorem dualCotangentToMatrix_mem_lieAlgebra (ψ : Module.Dual k (𝔪).Cotangent) :
+    dualCotangentToMatrix I ψ ∈ lieAlgebra I := fun a ha ↦ by
+  change evalAlgHom (k := k) (R := DualNumber k) (dualUnit (dualCotangentToMatrix I ψ)) a = 0
+  rw [evalAlgHom_dualUnit_dualCotangentToMatrix, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk,
+    Ideal.Quotient.eq_zero_iff_mem.2 ha, map_zero]
+
+/-- The Lie algebra of `V(I)` is the tangent space at the identity: the dual of the cotangent space
+`𝔪 / 𝔪²` of the coordinate ring `k[GL_n] ⧸ I` at the identity. -/
+noncomputable def dualCotangentLinearEquivLieAlgebra :
+    Module.Dual k (RingHom.ker (Bialgebra.counitAlgHom k (CoordinateRing n k ⧸ I))).Cotangent ≃ₗ[k]
+      lieAlgebra I :=
+  LinearEquiv.ofBijective
+    { toFun ψ := ⟨dualCotangentToMatrix I ψ, dualCotangentToMatrix_mem_lieAlgebra I ψ⟩
+      map_add' _ _ := rfl
+      map_smul' _ _ := rfl }
+    ⟨fun ψ ψ' h ↦ by
+      have h' := congrArg (fun X : lieAlgebra I ↦
+        evalAlgHom (k := k) (R := DualNumber k) (dualUnit (X : Matrix n n k))) h
+      simp only [LinearMap.coe_mk, AddHom.coe_mk,
+        evalAlgHom_dualUnit_dualCotangentToMatrix] at h'
+      exact AlgHom.toDualNumber_injective (Ideal.Quotient.algHom_ext k h'),
+    fun X ↦ by
+      let φ : (CoordinateRing n k ⧸ I) →ₐ[k] DualNumber k :=
+        Ideal.Quotient.liftₐ I (evalAlgHom (k := k) (R := DualNumber k)
+          (dualUnit (X : Matrix n n k))) (mem_lieAlgebra.1 X.2)
+      have hφ : (fstHom k k k).comp φ = Bialgebra.counitAlgHom k _ := by
+        refine Ideal.Quotient.algHom_ext _ ?_
+        rw [AlgHom.comp_assoc]
+        exact fst_comp_evalAlgHom_dualUnit _
+      refine ⟨(Bialgebra.counitAlgHom k _).cotangentForm φ hφ, Subtype.ext ?_⟩
+      ext i j
+      change dualCotangentToMatrix I _ i j = _
+      rw [dualCotangentToMatrix, Matrix.of_apply]
+      rw [← AlgHom.snd_toDualNumber, AlgHom.toDualNumber_cotangentForm]
+      simp [φ, coe_dualUnit, Matrix.one_apply, apply_ite TrivSqZeroExt.snd]⟩
+
+/-- The dimension of the Lie algebra of `V(I)` is the dimension of the cotangent space of its
+coordinate ring at the identity. -/
+theorem finrank_lieAlgebra_eq_finrank_cotangent :
+    Module.finrank k (lieAlgebra I) = Module.finrank k (𝔪).Cotangent := by
+  have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
+  have := (Bialgebra.counitAlgHom k (CoordinateRing n k ⧸ I)).finiteDimensional_cotangent
+  rw [← (dualCotangentLinearEquivLieAlgebra I).finrank_eq, Subspace.dual_finrank_eq]
+
 /-- Cartier's theorem, Lie algebra form: over a field of characteristic zero, the Lie algebra of
 a closed subgroup scheme `V(I)` has dimension the Krull dimension of its coordinate ring.
 
-Proof sketch (not formalised): `lieAlgebra I` is the tangent space `Hom_k(𝔪/𝔪², k)` at the
-identity of `k[GL_n] ⧸ I`, where `𝔪` is the kernel of the counit; in characteristic zero
-`V(I)` is smooth (`AlgebraicGeometry.smooth_of_grpObj_of_charZero`), so this tangent space has
-the dimension of `V(I)`. (blueprint: `sk-i-cartier`) -/
+The Lie algebra is the tangent space at the identity (`finrank_lieAlgebra_eq_finrank_cotangent`),
+whose dimension is that of the group by `HopfAlgebra.finrank_cotangent_eq_ringKrullDim`.
+(blueprint: `sk-i-cartier`, `lem-wf-same-lie-closed-subgroup` clause (2)) -/
 theorem finrank_lieAlgebra_eq_ringKrullDim [CharZero k] :
     (Module.finrank k (lieAlgebra I) : WithBot ℕ∞) = ringKrullDim (CoordinateRing n k ⧸ I) := by
-  sorry
+  rw [finrank_lieAlgebra_eq_finrank_cotangent]
+  exact HopfAlgebra.finrank_cotangent_eq_ringKrullDim k _
+
+/-- The ideal of the functions on `GL_n` whose restriction to `V(I)` vanishes near the point `c`
+of `V(I)`. -/
+private noncomputable abbrev localVanishing (c : CoordinateRing n k ⧸ I →ₐ[k] k) :
+    Ideal (CoordinateRing n k) :=
+  (⨅ r : ℕ, RingHom.ker c ^ r).comap (Ideal.Quotient.mk I)
+
+omit [I.IsHopfIdeal k] in
+private theorem localVanishing_le [CharZero k] (c : CoordinateRing n k ⧸ I →ₐ[k] k)
+    {q : Ideal (CoordinateRing n k)} [q.IsPrime] (hIq : I ≤ q)
+    (hq : q ≤ RingHom.ker (c.comp (Ideal.Quotient.mkₐ k I))) : localVanishing I c ≤ q := by
+  intro a ha
+  have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
+  obtain ⟨t, ht, hta⟩ := AlgHom.mem_iInf_pow_ker_iff.1 (Ideal.mem_comap.1 ha)
+  obtain ⟨t, rfl⟩ := Ideal.Quotient.mk_surjective t
+  rw [← map_mul, Ideal.Quotient.eq_zero_iff_mem] at hta
+  refine ((‹q.IsPrime›.mem_or_mem (hIq hta)).resolve_left fun htq ↦ ?_)
+  have := hq htq
+  rw [RingHom.mem_ker, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk, ht] at this
+  exact one_ne_zero this
+
+omit [I.IsHopfIdeal k] in
+private theorem le_localVanishing (c : CoordinateRing n k ⧸ I →ₐ[k] k) :
+    I ≤ localVanishing I c := fun a ha ↦ by
+  rw [Ideal.mem_comap, Ideal.Quotient.eq_zero_iff_mem.2 ha]
+  exact zero_mem _
+
+omit [I.IsHopfIdeal k] in
+private theorem localVanishing_le_ker (c : CoordinateRing n k ⧸ I →ₐ[k] k) :
+    localVanishing I c ≤ RingHom.ker (c.comp (Ideal.Quotient.mkₐ k I)) := fun a ha ↦ by
+  have := (Submodule.mem_iInf _).1 (Ideal.mem_comap.1 ha) 1
+  rw [pow_one] at this
+  exact this
+
+private theorem localVanishing_mem_minimalPrimes [CharZero k]
+    (c : CoordinateRing n k ⧸ I →ₐ[k] k) : localVanishing I c ∈ I.minimalPrimes := by
+  have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
+  have : (localVanishing I c).IsPrime :=
+    Ideal.IsPrime.comap _ (hK := HopfAlgebra.isPrime_iInf_pow_ker c)
+  refine ⟨⟨this, le_localVanishing I c⟩, fun q ⟨hq, hIq⟩ hqP ↦ ?_⟩
+  exact localVanishing_le I c hIq (hqP.trans (localVanishing_le_ker I c))
+
+/-- **A connected matrix group is irreducible**: in characteristic zero, over an algebraically
+closed field, the ideal of a connected closed subgroup `V(I)` of `GL_n` is prime.
+
+By Cartier's lemma the functions vanishing near a point `c` of `V(I)` form a prime ideal, contained
+in every prime of `V(I)` through `c`: a single irreducible component passes through each point,
+so the irreducible components of `V(I)` are pairwise disjoint, and the connected `V(I)` has only
+one. (blueprint: `lem-wf-same-lie-closed-subgroup`, clause (1)) -/
+theorem IsConnected.isPrime [IsAlgClosed k] [CharZero k] (hconn : IsConnected I) :
+    I.IsPrime := by
+  have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
+  set e := Bialgebra.counitAlgHom k (CoordinateRing n k ⧸ I)
+  set P := localVanishing I e
+  have hPmin := localVanishing_mem_minimalPrimes I e
+  have hP : P.IsPrime := hPmin.1.1
+  -- a minimal prime meeting `V(P)` is `P`
+  have key (Q : Ideal (CoordinateRing n k)) (hQ : Q ∈ I.minimalPrimes)
+      (x : PrimeSpectrum (CoordinateRing n k)) (hQx : Q ≤ x.asIdeal) (hPx : P ≤ x.asIdeal) :
+      Q = P := by
+    obtain ⟨M, hM, hxM⟩ := x.asIdeal.exists_le_maximal x.2.ne_top
+    obtain ⟨φ, hφ⟩ := exists_algHom_ker_eq_of_isMaximal k (CoordinateRing n k) M
+    have hIM : I ≤ RingHom.ker φ := hφ ▸ hQ.1.2.trans (hQx.trans hxM)
+    let c : CoordinateRing n k ⧸ I →ₐ[k] k := Ideal.Quotient.liftₐ I φ fun a ha ↦ hIM ha
+    have hc : RingHom.ker (c.comp (Ideal.Quotient.mkₐ k I)) = M := by
+      rw [← hφ]
+      congr 1
+    have : Q.IsPrime := hQ.1.1
+    have h1 : localVanishing I c ≤ Q :=
+      localVanishing_le I c hQ.1.2 (hc ▸ hQx.trans hxM)
+    have h2 : localVanishing I c ≤ P := localVanishing_le I c hPmin.1.2 (hc ▸ hPx.trans hxM)
+    have hc' := localVanishing_mem_minimalPrimes I c
+    exact (le_antisymm (hQ.2 hc'.1 h1) h1).trans (le_antisymm (hPmin.2 hc'.1 h2) h2).symm
+  have h1 : toPrimeSpectrum (1 : GL n k) ∈ PrimeSpectrum.zeroLocus (P : Set (CoordinateRing n k)) :=
+    fun b hb ↦ by
+      have hb' := localVanishing_le_ker I e hb
+      rw [RingHom.mem_ker, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk,
+        Bialgebra.counitAlgHom_apply, Bialgebra.Quotient.counit_mk] at hb'
+      exact hb'
+  have h1I : toPrimeSpectrum (1 : GL n k) ∈
+      PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)) :=
+    PrimeSpectrum.zeroLocus_anti_mono (le_localVanishing I e) h1
+  set W := ⋃ Q ∈ {Q | Q ∈ I.minimalPrimes ∧ Q ≠ P},
+    PrimeSpectrum.zeroLocus (Q : Set (CoordinateRing n k))
+  have hW : IsClosed W :=
+    ((Ideal.finite_minimalPrimes_of_isNoetherianRing _ I).subset fun Q hQ ↦ hQ.1).isClosed_biUnion
+      fun Q _ ↦ PrimeSpectrum.isClosed_zeroLocus _
+  set C := connectedComponentIn (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))
+    (toPrimeSpectrum 1)
+  have hcover : C ⊆ PrimeSpectrum.zeroLocus (P : Set (CoordinateRing n k)) ∪ W := fun x hx ↦ by
+    have hxI := (PrimeSpectrum.mem_zeroLocus _ _).1 (connectedComponentIn_subset _ _ hx)
+    obtain ⟨Q, hQ, hQx⟩ := Ideal.exists_minimalPrimes_le (J := x.asIdeal) hxI
+    by_cases hQP : Q = P
+    · subst hQP
+      exact Or.inl hQx
+    · exact Or.inr (Set.mem_biUnion (x := Q) ⟨hQ, hQP⟩ hQx)
+  have hdisj : C ∩ (PrimeSpectrum.zeroLocus (P : Set (CoordinateRing n k)) ∩ W) = ∅ := by
+    refine Set.eq_empty_iff_forall_notMem.2 fun x ⟨_, hPx, hWx⟩ ↦ ?_
+    obtain ⟨Q, ⟨hQ, hQP⟩, hQx⟩ := Set.mem_iUnion₂.1 hWx
+    exact hQP (key Q hQ x hQx hPx)
+  have hC1 : toPrimeSpectrum 1 ∈ C := mem_connectedComponentIn h1I
+  have hCP : C ⊆ PrimeSpectrum.zeroLocus (P : Set (CoordinateRing n k)) :=
+    ((isPreconnected_iff_subset_of_disjoint_closed.1 isPreconnected_connectedComponentIn) _ _
+      (PrimeSpectrum.isClosed_zeroLocus _) hW hcover hdisj).resolve_right fun hCW ↦
+        (Set.eq_empty_iff_forall_notMem.1 hdisj) _ ⟨hC1, h1, hCW hC1⟩
+  have hPI : P ≤ I := fun a ha ↦ by
+    rw [← hconn]
+    exact (PrimeSpectrum.mem_vanishingIdeal _ _).2 fun x hx ↦ hCP hx ha
+  rw [le_antisymm (le_localVanishing I e) hPI]
+  exact hP
+
+omit [I.IsHopfIdeal k] in
+/-- **A closed subgroup of full dimension is everything**: if `V(I)` is irreducible and
+`V(J) ⊆ V(I)` has the same dimension, then `J = I`. (blueprint: `lem-ag-equal-dimension-subgroup`)
+-/
+theorem eq_of_le_of_ringKrullDim_eq [I.IsPrime] {J : Ideal (CoordinateRing n k)} (hIJ : I ≤ J)
+    (h : ringKrullDim (CoordinateRing n k ⧸ J) = ringKrullDim (CoordinateRing n k ⧸ I)) :
+    J = I :=
+  Ideal.eq_of_le_of_ringKrullDim_quotient_eq hIJ (ringKrullDim_ne_top_of_finiteType k _) h
+
+/-- A closed subgroup `V(J)` of a connected matrix group `V(I)` with the same Lie algebra is all of
+`V(I)`, in characteristic zero: the Lie algebras have the dimensions of the groups
+(`finrank_lieAlgebra_eq_ringKrullDim`), and `V(I)` is irreducible (`IsConnected.isPrime`).
+(blueprint: `lem-wf-same-lie-closed-subgroup`, clause (1)) -/
+theorem eq_of_le_of_lieAlgebra_eq [IsAlgClosed k] [CharZero k] (hconn : IsConnected I)
+    {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k] (hIJ : I ≤ J)
+    (h : lieAlgebra J = lieAlgebra I) : J = I := by
+  have := hconn.isPrime
+  refine eq_of_le_of_ringKrullDim_eq I hIJ ?_
+  rw [← finrank_lieAlgebra_eq_ringKrullDim, ← finrank_lieAlgebra_eq_ringKrullDim, h]
 
 end Cartier
 
