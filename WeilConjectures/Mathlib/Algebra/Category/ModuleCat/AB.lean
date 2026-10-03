@@ -29,6 +29,8 @@ universe u
 
 open CategoryTheory
 
+-- TODO: remove this shortcut once the Mathlib instance no longer has its proof abstracted
+-- into an auxiliary lemma inside definitions involving the derived tensor product.
 /-- `ModuleCat R` is Grothendieck abelian for a commutative ring `R`: a shortcut for the
 Mathlib instance, whose proof term stays atomic (see the implementation notes). -/
 instance (priority := high) ModuleCat.isGrothendieckAbelian_of_commRing (R : Type u)

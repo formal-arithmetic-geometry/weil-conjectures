@@ -30,6 +30,10 @@ of the unit `K ⟶ D(j^*) D(j_!) K`, which is an isomorphism
 - `AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekToLowerStar`
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekToLowerStarComp`
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekTranspose`
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekToLowerStarComp_of_isClosedImmersion`
 -/
 
 @[expose] public section
@@ -52,7 +56,15 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- The derived comparison `D(j_!) ⟶ Rj_*` along an open immersion `j`: the transpose, under
 `D(j^*) ⊣ Rj_*`, of the inverse of the unit `K ⟶ D(j^*) D(j_!) K` of `D(j_!) ⊣ D(j^*)`. It is
-the derived counterpart of the comparison `j_! ⟶ j_*` of sheaves. -/
+the derived counterpart of the comparison `j_! ⟶ j_*` of sheaves. Componentwise it is the
+composite
+
+```
+          η_{D(j_!) K}                         Rj_* (η'_K)⁻¹
+D(j_!) K ─────────────▶ Rj_* D(j^*) D(j_!) K ───────────────▶ Rj_* K
+```
+
+of the unit `η` of `D(j^*) ⊣ Rj_*` and the inverse of the unit `η'` of `D(j_!) ⊣ D(j^*)`. -/
 noncomputable def derivedOpenImmersionLowerShriekToLowerStar {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : D((j)_!open[A]) ⟶ R((j)_*[A]) :=
   Functor.whiskerLeft D((j)_!open[A]) (mapDerivedUpperStarLowerStarAdjunction A j).unit ≫
@@ -70,12 +82,21 @@ noncomputable def rightDerivedLowerShriekToLowerStarComp :
       R(((HasCompactification.compactification f).g)_*[A]) :=
   Functor.whiskerRight (derivedOpenImmersionLowerShriekToLowerStar A _) _
 
+/-- For a closed immersion `f` the forget-supports map `Rf_! ⟶ Rg_* Ri_*` is an isomorphism.
+The open immersion `i : X ⟶ X̄` of the chosen compactification is then also closed, since `X`
+is proper over `Y` and `X̄` is separated over `Y`, so `X` is open and closed in `X̄` and the
+comparison `D(i_!) ⟶ Ri_*` is an isomorphism. -/
+theorem isIso_rightDerivedLowerShriekToLowerStarComp_of_isClosedImmersion [IsClosedImmersion f] :
+    IsIso (rightDerivedLowerShriekToLowerStarComp A f) :=
+  sorry
+
 /-- The *transpose* of a class `γ : K ⟶ Rf_! N` along the forget-supports map: the morphism
 `Li^* Lg^* K ⟶ N` adjoint, under `Li^* Lg^* ⊣ Rg_* Ri_*`, to
 `K ⟶ Rf_! N ⟶ Rg_* Ri_* N`, where `(i, g)` is the chosen compactification of `f`.
 
-For a closed immersion `f` the forget-supports map is an isomorphism and this is the
-adjunction `Lf^* ⊣ Rf_*`, transported along `Rf_! ≅ Rf_*`. -/
+For a closed immersion `f` the forget-supports map is an isomorphism
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekToLowerStarComp_of_isClosedImmersion`)
+and this is the adjunction `Lf^* ⊣ Rf_*`, transported along `Rf_! ≅ Rf_*`. -/
 noncomputable def rightDerivedLowerShriekTranspose
     {K : DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     {N : DerivedCategory (Sheaf X.smallEtaleTopology A)} (γ : K ⟶ (R(f)_![A]).obj N) :
