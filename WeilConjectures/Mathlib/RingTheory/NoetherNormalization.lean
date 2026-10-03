@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.NoetherNormalization
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 
 /-!
 # Noether normalization with the number of variables the Krull dimension
@@ -62,5 +63,5 @@ finitely generated domain `A` over a field and a nonzero prime `P` of `A`,
 `dim (A ⧸ P) < dim A`. (blueprint: `sk-i-geometry`) -/
 theorem ringKrullDim_quotient_lt_of_finiteType (k A : Type*) [Field k] [CommRing A] [IsDomain A]
     [Algebra k A] [Algebra.FiniteType k A] (P : Ideal A) [P.IsPrime] (hP : P ≠ ⊥) :
-    ringKrullDim (A ⧸ P) < ringKrullDim A := by
-  sorry
+    ringKrullDim (A ⧸ P) < ringKrullDim A :=
+  ringKrullDim_quotient_lt_of_irreducibleSpace k A hP

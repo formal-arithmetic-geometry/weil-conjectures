@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.KrullDimension.Field
 public import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 public import Mathlib.RingTheory.KrullDimension.Polynomial
+public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Krull dimension of finitely generated algebras and of quotients
@@ -20,6 +21,14 @@ public import Mathlib.RingTheory.KrullDimension.Polynomial
 - `Ideal.eq_of_le_of_ringKrullDim_quotient_eq`: if `I ≤ J` with `I` prime and `R ⧸ I` of finite
   dimension, then `R ⧸ J` has the dimension of `R ⧸ I` only if `J = I`: a proper closed subset
   of an irreducible variety has smaller dimension.
+- `ringKrullDim_quotient_lt_of_ne_bot`: in a finite-dimensional domain the quotient by a nonzero
+  ideal has strictly smaller dimension.
+- `ringKrullDim_quotient_lt_of_irreducibleSpace`: a proper closed subset of an irreducible affine
+  variety has strictly smaller dimension.
+
+## Blueprint
+
+- `lem-wf-affine-dimension-drop`: proper closed subsets have strictly smaller dimension.
 -/
 
 @[expose] public section
@@ -60,3 +69,28 @@ theorem Ideal.eq_of_le_of_ringKrullDim_quotient_eq {R : Type*} [CommRing R] {I J
   have := Order.LTSeries.length_le_krullDim l'
   rw [hd, RelSeries.cons_length, LTSeries.map_length, hl] at this
   exact absurd (WithBot.coe_le_coe.1 this) (by norm_cast; omega)
+
+/-- In a domain `R` of finite Krull dimension, the quotient by a nonzero ideal `I` has strictly
+smaller dimension: a prime chain of `R ⧸ I` consists of nonzero primes of `R`, and prepending the
+prime `(0)` lengthens it. -/
+theorem ringKrullDim_quotient_lt_of_ne_bot {R : Type*} [CommRing R] [IsDomain R]
+    (hR : ringKrullDim R ≠ ⊤) {I : Ideal R} (hI : I ≠ ⊥) :
+    ringKrullDim (R ⧸ I) < ringKrullDim R := by
+  have e := ringKrullDim_eq_of_ringEquiv (RingEquiv.quotientBot R)
+  rw [← e] at hR ⊢
+  refine lt_of_le_of_ne (ringKrullDim_le_of_surjective _
+    (Ideal.Quotient.factor_surjective (bot_le (a := I)))) fun h ↦ hI ?_
+  exact Ideal.eq_of_le_of_ringKrullDim_quotient_eq (hIJ := bot_le) (hI := Ideal.isPrime_bot) hR h
+
+/-- Blueprint `lem-wf-affine-dimension-drop`: let `A` be the coordinate algebra of an irreducible
+affine variety over a field `k`, i.e. a reduced finitely generated `k`-algebra with irreducible
+spectrum. Then `A` is a domain (`PrimeSpectrum.isDomain_of_irreducibleSpace`), and a proper closed
+subset `V(I)`, i.e. one with `I ≠ 0`, has strictly smaller dimension: `dim (A ⧸ I) < dim A`.
+
+The dimension of `A` is finite (`ringKrullDim_ne_top_of_finiteType`), and the strict drop is
+`ringKrullDim_quotient_lt_of_ne_bot`. -/
+theorem ringKrullDim_quotient_lt_of_irreducibleSpace (k A : Type*) [Field k] [CommRing A]
+    [IsReduced A] [IrreducibleSpace (PrimeSpectrum A)] [Algebra k A] [Algebra.FiniteType k A]
+    {I : Ideal A} (hI : I ≠ ⊥) : ringKrullDim (A ⧸ I) < ringKrullDim A := by
+  have := PrimeSpectrum.isDomain_of_irreducibleSpace A
+  exact ringKrullDim_quotient_lt_of_ne_bot (ringKrullDim_ne_top_of_finiteType k A) hI
