@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.NumberTheory.Padics.Complex
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
@@ -41,7 +42,8 @@ for complexes of sheaves. The geometric-stalk half of the same subsection is lik
 ## Main statements
 
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`
-- `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`
+- `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek` and
+  `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_padicAlgCl`
 - `AlgebraicGeometry.Etale.isZero_compactlySupportedCohomology_of_lt`
 - `AlgebraicGeometry.Etale.finite_compactlySupportedCohomology`
 - `AlgebraicGeometry.Etale.hasTorAmplitudeIn_iff_exists_flatModel`
@@ -97,6 +99,27 @@ theorem boundedConstructible_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactif
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
       ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) :=
+  sorry
+
+/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
+
+**Finiteness of compactly supported direct images with `ℚ̄_ℓ`-coefficients.** For a prime `ℓ`
+invertible in `k` and `f : X ⟶ Y` separated of finite type between finite-type `k`-schemes,
+`Rf_!` carries `D^b_c(X, ℚ̄_ℓ)` into `D^b_c(Y, ℚ̄_ℓ)`.
+
+The blueprint deduces this from the finite-coefficient case
+`boundedConstructible_rightDerivedLowerShriek` by passing to the limit over the `ℤ/ℓⁿ` and
+inverting `ℓ`; that passage is not formalised. -/
+theorem boundedConstructible_rightDerivedLowerShriek_padicAlgCl (l : ℕ) [Fact l.Prime]
+    (hl : ringChar k ≠ l) (f : X ⟶ Y) [HasCompactification f] (aX : X ⟶ Spec (.of k))
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [LocallyOfFiniteType aY]
+    (hf : f ≫ aY = aX)
+    (K : _root_.DerivedCategory
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l)))))
+    (hK : DerivedCategory.boundedConstructible
+      (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))) X K) :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))) Y
+      ((R(f)_![ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))]).obj K) :=
   sorry
 
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility

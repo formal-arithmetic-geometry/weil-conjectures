@@ -301,6 +301,33 @@ instance (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) [LocallyOfFiniteType φ] :
     LocallyOfFiniteType (geometricFiberMap φ h) :=
   geometricFiberMap_of_isStableUnderBaseChange (P := @LocallyOfFiniteType) φ h ‹_›
 
+/-- The projection of the geometric fiber to the model is affine, being the base change of
+`Spec k̄ ⟶ Spec k`. -/
+instance : IsAffineHom g.geometricFiberProj :=
+  MorphismProperty.pullback_fst _ _
+    (inferInstanceAs
+      (IsAffineHom (Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k))))))
+
+/-! The base change to `k̄` of a quasi-compact, quasi-separated or locally of finite type
+structure morphism `g : Y₀ ⟶ Spec k` is again one. -/
+
+instance [QuasiCompact g] : QuasiCompact g.geometricFiberToAlgebraicClosure :=
+  inferInstanceAs (QuasiCompact (pullback.snd _ _))
+
+instance [QuasiSeparated g] : QuasiSeparated g.geometricFiberToAlgebraicClosure :=
+  inferInstanceAs (QuasiSeparated (pullback.snd _ _))
+
+instance [LocallyOfFiniteType g] : LocallyOfFiniteType g.geometricFiberToAlgebraicClosure :=
+  inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
+
+/-- The geometric fiber of a quasi-compact `k`-scheme is quasi-compact. -/
+instance [QuasiCompact g] : CompactSpace g.geometricFiber :=
+  QuasiCompact.compactSpace_of_compactSpace g.geometricFiberToAlgebraicClosure
+
+/-- The geometric fiber of a quasi-separated `k`-scheme is quasi-separated. -/
+instance [QuasiSeparated g] : QuasiSeparatedSpace g.geometricFiber :=
+  quasiSeparatedSpace_of_quasiSeparated g.geometricFiberToAlgebraicClosure
+
 end Scheme.Hom
 
 end AlgebraicClosure

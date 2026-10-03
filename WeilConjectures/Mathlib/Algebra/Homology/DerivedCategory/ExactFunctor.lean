@@ -24,6 +24,8 @@ For exact functors between abelian categories, the induced functor
   functors induces an isomorphism `F.mapDerivedCategory ≅ G.mapDerivedCategory`.
 - `CategoryTheory.Functor.mapDerivedCategoryCompIso`: the composition isomorphism
   `(F ⋙ G).mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory`.
+- `CategoryTheory.Equivalence.mapDerivedCategory`: an equivalence of abelian categories
+  induces an equivalence of derived categories.
 - `CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso`: the commutation
   `H^n(-) ⋙ F ≅ F.mapDerivedCategory ⋙ H^n(-)` with the homology functors, with the
   bounded below variant `CategoryTheory.Functor.mapDerivedCategoryPlusHomologyFunctorIso`.
@@ -799,3 +801,21 @@ lemma mapDerivedCategoryPlusCompIso_assoc (F : C ⥤ D) (G : D ⥤ E) (H : E ⥤
 end Coherence
 
 end CategoryTheory.Functor
+
+namespace CategoryTheory.Equivalence
+
+variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+  [HasDerivedCategory C] [HasDerivedCategory D]
+
+/-- An equivalence `E : C ≌ D` of abelian categories induces an equivalence
+`D(C) ≌ D(D)` of derived categories, with functor `D(E.functor)` and inverse
+`D(E.inverse)`. -/
+noncomputable def mapDerivedCategory (E : C ≌ D) [E.functor.Additive] [E.inverse.Additive] :
+    DerivedCategory C ≌ DerivedCategory D :=
+  Equivalence.mk E.functor.mapDerivedCategory E.inverse.mapDerivedCategory
+    ((Functor.mapDerivedCategoryIdIso C).symm ≪≫ Functor.mapDerivedCategoryNatIso E.unitIso ≪≫
+      Functor.mapDerivedCategoryCompIso _ _)
+    ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso E.counitIso ≪≫ Functor.mapDerivedCategoryIdIso D)
+
+end CategoryTheory.Equivalence

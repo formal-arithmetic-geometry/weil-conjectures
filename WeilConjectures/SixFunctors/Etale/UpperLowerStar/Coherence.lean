@@ -27,6 +27,9 @@ Everything here is the `P = Q = @Etale` case of the corresponding statement for 
 - `AlgebraicGeometry.Etale.lowerStarId` and `AlgebraicGeometry.Etale.upperStarId`: the
   identity isomorphisms `(𝟙 V)_* ≅ 𝟭` and `(𝟙 V)^* ≅ 𝟭`, the latter obtained from the
   former by uniqueness of left adjoints.
+- `AlgebraicGeometry.Etale.lowerStarEquivalenceOfIso` and
+  `AlgebraicGeometry.Etale.upperStarInvIsoLowerStarHom`: for an isomorphism `e` of schemes,
+  `e_*` is an equivalence and `(e⁻¹)^* ≅ e_*`.
 
 ## Main results
 
@@ -299,5 +302,30 @@ instance Etale.isEquivalence_lowerStar_of_isIso : ((f)_*[A]).IsEquivalence :=
   (Etale.upperStarLowerStarAdjunction A f).isEquivalence_right_of_isEquivalence_left
 
 end IsIso
+
+section Iso
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
+variable {U U' : Scheme.{u}} (e : U ≅ U')
+
+open Etale
+
+/-- The pushforwards along an isomorphism `e` of schemes and along its inverse form an
+equivalence of the categories of étale sheaves. -/
+noncomputable def Etale.lowerStarEquivalenceOfIso :
+    Sheaf U.smallEtaleTopology A ≌ Sheaf U'.smallEtaleTopology A :=
+  CategoryTheory.Equivalence.mk (e.hom)_*[A] (e.inv)_*[A]
+    ((Etale.lowerStarId A U).symm ≪≫ (Etale.lowerStarComp A e.hom e.inv (𝟙 U) (by simp)).symm)
+    (Etale.lowerStarComp A e.inv e.hom (𝟙 U') (by simp) ≪≫ Etale.lowerStarId A U')
+
+/-- The pullback along the inverse of an isomorphism `e` of schemes is the pushforward along
+`e`: `(e⁻¹)^* ≅ e_*`. -/
+noncomputable def Etale.upperStarInvIsoLowerStarHom : (e.inv)^*[A] ≅ (e.hom)_*[A] :=
+  -- both are left adjoint to `(e⁻¹)_*`
+  (Etale.upperStarLowerStarAdjunction A e.inv).leftAdjointUniq
+    (Etale.lowerStarEquivalenceOfIso A e).toAdjunction
+
+end Iso
 
 end AlgebraicGeometry
