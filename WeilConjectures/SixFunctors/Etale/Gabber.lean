@@ -132,7 +132,8 @@ lemma shortExact_map_forget₂ {X : Scheme.{u}}
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))).ShortExact := by
   have := hS.mono_f
   have := hS.epi_g
-  have hg : Sheaf.IsLocallySurjective S.g := (Sheaf.isLocallySurjective_iff_epi' (φ := S.g)).2 inferInstance
+  have hg : Sheaf.IsLocallySurjective S.g :=
+    (Sheaf.isLocallySurjective_iff_epi' (φ := S.g)).2 inferInstance
   have : Sheaf.IsLocallySurjective ((sheafCompose X.smallEtaleTopology
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map S.g) :=
     ⟨fun s ↦ hg.imageSieve_mem s⟩
@@ -187,7 +188,8 @@ infinite `Λ` such as `𝐅_p[t]` this fails).
 theorem exists_isConstructibleSheaf_mono_of_henselianRing [Finite Λ] {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I]
     (F : Sheaf (Spec (.of A)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) {q : ℕ}
-    (c : Sheaf.H (((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))^*[AddCommGrpCat.{u + 1}]).obj
+    (c : Sheaf.H
+      (((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))^*[AddCommGrpCat.{u + 1}]).obj
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)) q) :
     ∃ (C : Sheaf (Spec (.of A)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ι : C ⟶ F),
       IsConstructibleSheaf C ∧ Mono ι ∧ ∃ c', Sheaf.H.map
@@ -205,10 +207,12 @@ theorem exists_isFinite_cohomologyMap_eq_zero_of_henselianRing {A : Type u} [Com
     (I : Ideal A) [HenselianRing A I]
     (C : Sheaf (Spec (.of A)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf C]
     {q : ℕ} (hq : 0 < q)
-    (c : Sheaf.H (((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))^*[AddCommGrpCat.{u + 1}]).obj
+    (c : Sheaf.H
+      (((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))^*[AddCommGrpCat.{u + 1}]).obj
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj C)) q) :
     ∃ (V : Scheme.{u}) (h : V ⟶ Spec (.of A)), IsFinite h ∧ LocallyOfFinitePresentation h ∧
-      cohomologyMap (pullback.fst (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) h) _ q c = 0 ∧
+      cohomologyMap (pullback.fst (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) h) _ q c =
+        0 ∧
       Mono ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h).unit.app C) :=
   sorry
 
@@ -219,7 +223,8 @@ theorem exists_isFinite_cohomologyMap_eq_zero_of_henselianRing {A : Type u} [Com
 theorem exists_mono_map_eq_zero_of_henselianRing {A : Type u} [CommRing A] (I : Ideal A)
     [HenselianRing A I] (F : Sheaf (Spec (.of A)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsTorsionSheaf F] {q : ℕ} (hq : 0 < q)
-    (c : Sheaf.H (((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))^*[AddCommGrpCat.{u + 1}]).obj
+    (c : Sheaf.H
+      (((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))^*[AddCommGrpCat.{u + 1}]).obj
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)) q) :
     ∃ (F' : Sheaf (Spec (.of A)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ι : F ⟶ F'),
       IsTorsionSheaf F' ∧ Mono ι ∧ Sheaf.H.map
@@ -277,7 +282,7 @@ theorem bijective_cohomologyMap_of_henselianRing {A : Type u} [CommRing A] (I : 
         (ih (cokernel ι)).1 ((cohomologyMap_comp_mk₀ _ _ v).trans hw)
       rw [← hvz, Ext.comp_assoc _ _ _ (add_zero n) (zero_add 1) (by omega)]
       exact (congrArg (fun t ↦ v.comp t (show n + 1 = n + 1 from rfl)) hS.comp_extClass).trans
-        (Ext.comp_zero _ _ _)
+        (Ext.comp_zero _ _ _ _ _)
     · obtain ⟨F', ι, hF', hι, hη⟩ := exists_mono_map_eq_zero_of_henselianRing Λ I F n.succ_pos η
       let S := ShortComplex.mk ι (cokernel.π ι) (cokernel.condition ι)
       have hS : (S.map (sheafCompose _

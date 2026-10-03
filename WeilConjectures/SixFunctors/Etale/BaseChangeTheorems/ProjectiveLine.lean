@@ -30,7 +30,8 @@ Both halves are stated here and combined into
 By `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity` it suffices to
 prove injective acyclicity for the projection, which is
 `AlgebraicGeometry.Etale.hasInjectiveAcyclicity_projectiveLine` of
-`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk`. Over a strictly henselian base the
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk`. Over a
+strictly henselian base the
 degree-zero comparison between a proper scheme and its closed fibre, fed through the
 Mayer–Vietoris sequence of the two standard affine charts of the projective line, kills the
 cohomology of an injective sheaf in degrees `≥ 2`, and the finite-étale machinery kills it
