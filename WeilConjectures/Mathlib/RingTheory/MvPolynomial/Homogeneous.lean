@@ -399,4 +399,19 @@ theorem closure_range_awayXRatio_eq_top (R : Type*) [CommRing R] {σ : Type*}
 
 end Generators
 
+/-- A homogeneous polynomial of degree `r` in elements of `I` lies in `I ^ r`. -/
+theorem IsHomogeneous.aeval_mem_pow {k A ι : Type*} [CommRing k] [CommRing A] [Algebra k A]
+    {I : Ideal A} {x : ι → A} (hx : ∀ i, x i ∈ I)
+    {f : MvPolynomial ι k} {r : ℕ} (hf : f.IsHomogeneous r) : MvPolynomial.aeval x f ∈ I ^ r := by
+  classical
+  rw [f.as_sum, map_sum]
+  refine Ideal.sum_mem _ fun d hd ↦ ?_
+  rw [aeval_monomial]
+  refine Ideal.mul_mem_left _ _ ?_
+  have hd' : d.degree = r := by
+    rw [Finsupp.degree_eq_weight_one]
+    exact hf (mem_support_iff.1 hd)
+  rw [← hd', Finsupp.degree_apply, Finsupp.prod, ← Finset.prod_pow_eq_pow_sum]
+  exact Ideal.prod_mem_prod fun i _ ↦ Ideal.pow_mem_pow (hx i) _
+
 end MvPolynomial
