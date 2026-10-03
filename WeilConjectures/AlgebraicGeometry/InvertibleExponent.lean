@@ -19,6 +19,10 @@ images, nor purity survives. This file records that hypothesis as a class.
 
 - `AlgebraicGeometry.HasInvertibleExponent`: some positive integer annihilating the
   coefficient ring is invertible on the scheme.
+
+## Main statements
+
+- `AlgebraicGeometry.HasInvertibleExponent.of_hom`: the hypothesis passes to `Y`-schemes.
 -/
 
 @[expose] public section
@@ -36,5 +40,11 @@ Artin–Schreier counterexamples in characteristic `p`. -/
 class HasInvertibleExponent (Λ : Type*) [CommRing Λ] (X : Scheme.{u}) : Prop where
   /-- Some positive integer annihilating `Λ` is a unit in `Γ(X, ⊤)`. -/
   exists_isUnit_natCast : ∃ n : ℕ, 0 < n ∧ (n : Λ) = 0 ∧ IsUnit (n : Γ(X, ⊤))
+
+/-- If the exponent of `Λ` is invertible on `Y`, it is invertible on every `Y`-scheme. -/
+theorem HasInvertibleExponent.of_hom {Λ : Type*} [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [HasInvertibleExponent Λ Y] : HasInvertibleExponent Λ X := by
+  obtain ⟨n, hn, hΛ, hu⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := Y)
+  exact ⟨n, hn, hΛ, by simpa using hu.map f.appTop.hom⟩
 
 end AlgebraicGeometry

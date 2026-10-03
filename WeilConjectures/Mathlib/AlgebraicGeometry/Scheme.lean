@@ -20,6 +20,10 @@ We also record that a global section whose non-vanishing locus is everything is 
 
 - `AlgebraicGeometry.Scheme.isUnit_of_basicOpen_eq_top`.
 
+and that the zero locus of `insert a s` is the intersection of the zero loci of `a` and `s`:
+
+- `AlgebraicGeometry.Scheme.zeroLocus_insert`.
+
 # Complements on schemes
 
 * `AlgebraicGeometry.Scheme.isUnit_of_le_basicOpen`: if `U ≤ X.basicOpen f` for a section
@@ -66,6 +70,12 @@ lemma isUnit_of_basicOpen_eq_top {X : Scheme.{u}} (f : Γ(X, ⊤)) (h : X.basicO
     IsUnit f := by
   refine X.toRingedSpace.isUnit_of_isUnit_germ ⊤ f fun x _ ↦ ?_
   exact (X.mem_basicOpen_top f x).mp (h.ge trivial)
+
+/-- The zero locus of `insert a s` is the intersection of the zero loci of `a` and of `s`. -/
+lemma zeroLocus_insert {X : Scheme.{u}} {U : X.Opens} (a : Γ(X, U)) (s : Set Γ(X, U)) :
+    X.zeroLocus (insert a s) = X.zeroLocus {a} ∩ X.zeroLocus s := by
+  ext x
+  simp
 
 end AlgebraicGeometry.Scheme
 

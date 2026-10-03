@@ -7,9 +7,14 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.Algebra.Field.ULift
+public import Mathlib.LinearAlgebra.Dual.Defs
 
 /-!
-# Finite modules over an infinite field
+# Finite modules over an infinite field, and the dual functor
+
+## Main definitions
+
+- `ModuleCat.dualFunctor`: the contravariant functor `V ↦ Module.Dual R V` on `R`-modules.
 
 ## Main results
 
@@ -37,3 +42,11 @@ theorem ModuleCat.isZero_ulift_of_finite {K : Type v} [Field K] [Infinite K]
     rw [← one_smul (ULift.{u} K) v, ← inv_mul_cancel₀ (sub_ne_zero.2 hcd), mul_smul,
       sub_smul, h, sub_self, smul_zero]
   exact ModuleCat.isZero_of_subsingleton M
+
+/-- The dual `V ↦ V^∨ = Module.Dual R V` as a contravariant functor on `R`-modules, sending a
+linear map to its transpose. -/
+@[simps]
+noncomputable def ModuleCat.dualFunctor (R : Type u) [CommRing R] :
+    (ModuleCat.{v} R)ᵒᵖ ⥤ ModuleCat.{max u v} R where
+  obj V := ModuleCat.of R (Module.Dual R V.unop)
+  map f := ModuleCat.ofHom (Module.Dual.transpose f.unop.hom)
