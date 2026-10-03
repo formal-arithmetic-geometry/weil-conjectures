@@ -5,10 +5,14 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.FieldTheory.Perfect
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Regular schemes
@@ -24,6 +28,11 @@ injection for the Brauer group.
   is regular.
 - `AlgebraicGeometry.isRegularLocalRing_stalk_pullback`: a product of regular schemes locally
   of finite type over a perfect field is regular.
+- `AlgebraicGeometry.IsRegular.of_smooth`: a scheme smooth over a field is regular.
+- `AlgebraicGeometry.IsRegular.irreducibleSpace`: a connected locally noetherian regular scheme
+  is irreducible.
+- `AlgebraicGeometry.GeometricallyIrreducible.of_smooth_of_geometricallyConnected`: a smooth
+  morphism with geometrically connected fibres has geometrically irreducible fibres.
 -/
 
 @[expose] public section
@@ -58,5 +67,29 @@ theorem isRegularLocalRing_stalk_pullback {k : Type u} [Field k] [PerfectField k
     (hY : ∀ y : Y, IsRegularLocalRing (Y.presheaf.stalk y)) (z : ↥(pullback f g)) :
     IsRegularLocalRing ((pullback f g).presheaf.stalk z) :=
   sorry
+
+/-- A scheme smooth over a field `k` is regular: the local rings of a smooth `k`-scheme are
+regular local rings. -/
+theorem IsRegular.of_smooth {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
+    [Smooth f] : IsRegular X :=
+  sorry
+
+/-- A connected locally noetherian regular scheme is irreducible, since its local rings, being
+regular, are integral domains. -/
+theorem IsRegular.irreducibleSpace (X : Scheme.{u}) [IsRegular X] [IsLocallyNoetherian X]
+    [ConnectedSpace X] : IrreducibleSpace X :=
+  irreducibleSpace_of_isDomain_stalk X fun _ ↦ inferInstance
+
+/-- A smooth morphism with geometrically connected fibres has geometrically irreducible fibres:
+a base change of it to a field is smooth over that field, hence regular and locally noetherian,
+and connected, hence irreducible. -/
+theorem GeometricallyIrreducible.of_smooth_of_geometricallyConnected {X S : Scheme.{u}}
+    (f : X ⟶ S) [Smooth f] [GeometricallyConnected f] : GeometricallyIrreducible f where
+  geometrically_irreducibleSpace _ _ y _ fst snd h := by
+    have := GeometricallyConnected.geometrically_connectedSpace y fst snd h
+    have : Smooth snd := MorphismProperty.of_isPullback h ‹Smooth f›
+    have := LocallyOfFiniteType.isLocallyNoetherian snd
+    have := IsRegular.of_smooth snd
+    exact IsRegular.irreducibleSpace _
 
 end AlgebraicGeometry
