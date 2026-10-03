@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 Christian Merten. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Christian Merten, Claude
+Authors: Christian Merten, Joël Riou, Claude
 -/
 module
 
@@ -26,6 +26,20 @@ The typical example is a right adjoint `G = G'` with a strong monoidal structure
 inverse of its comparison; then the projection map is an isomorphism for example when `F`
 is the extension by zero along an open immersion.
 
+## The right adjoint form
+
+Dually, let `adj : F ⊣ G` be an adjunction with `F : D ⥤ C`, let `T_C : C ⥤ C ⥤ C` and
+`T_D : D ⥤ D ⥤ D` be bifunctors, and let `φ : F (T_D a b) ⟶ T_C (F a) (F b)` be a natural
+transformation of bifunctors `D ⥤ D ⥤ C`. The *right adjoint projection map* is the morphism
+of bifunctors `T_D (G M) L ⟶ G (T_C M (F L))`, natural in `M` in `C` and `L` in `D`, whose
+transpose along `adj` is the composite
+```
+F (T_D (G M) L) --φ--> T_C (F (G M)) (F L) --T_C (ε_M) (𝟙 (F L))--> T_C M (F L)
+```
+where `ε` is the counit of `adj`. When `T_C` and `T_D` are tensor products and `φ` is the
+oplax monoidal structure of `F`, this is the classical projection map
+`G M ⊗ L ⟶ G (M ⊗ F L)`, used for example for derived pushforwards.
+
 ## Main definitions and results
 
 - `CategoryTheory.Adjunction.projectionMapTranspose`: the morphism
@@ -33,11 +47,17 @@ is the extension by zero along an open immersion.
 - `CategoryTheory.Adjunction.projectionMap`: its transpose `F (K ⊗ G' M) ⟶ F K ⊗ M`.
 - `CategoryTheory.Adjunction.isIso_map_projectionMap_app_app`: `G` of the projection map is
   an isomorphism if the unit of `adj` and `δ` are.
+- `CategoryTheory.Adjunction.rightAdjointProjectionMap adj φ`: the right adjoint projection map
+  `T_D (G M) L ⟶ G (T_C M (F L))`, as a natural transformation of bifunctors `C ⥤ D ⥤ D`.
+- `CategoryTheory.Adjunction.homEquiv_symm_rightAdjointProjectionMap_app_app`: its transpose
+  along `adj` is `φ` followed by the counit of `adj` in the first variable.
 -/
 
 @[expose] public section
 
 namespace CategoryTheory.Adjunction
+
+section LeftAdjoint
 
 variable {C D : Type*} [Category* C] [Category* D] {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
   (G' : D ⥤ C) (T : C ⥤ C ⥤ C) (T' : D ⥤ D ⥤ D)
@@ -112,5 +132,71 @@ lemma isIso_map_projectionMap_app_app [IsIso adj.unit] [IsIso δ] (K : C) (M : D
     IsIso (G.map (((adj.projectionMap G' T T' δ).app K).app M)) := by
   rw [(IsIso.eq_inv_comp _).2 (adj.unit_app_comp_map_projectionMap_app_app G' T T' δ K M)]
   infer_instance
+
+end LeftAdjoint
+
+section RightAdjoint
+
+open _root_.CategoryTheory.Functor
+
+variable {C D : Type*} [Category* C] [Category* D] {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
+  {T_C : C ⥤ C ⥤ C} {T_D : D ⥤ D ⥤ D}
+  (φ : (postcompose₂.obj F).obj T_D ⟶ (((whiskeringLeft₂ C).obj F).obj F).obj T_C)
+
+/-- The right adjoint projection map `T_D (G M) L ⟶ G (T_C M (F L))` attached to an adjunction
+`F ⊣ G` and a comparison `φ : F (T_D a b) ⟶ T_C (F a) (F b)`, as a natural transformation of
+bifunctors `C ⥤ D ⥤ D`. It is the transpose along `adj` of
+`(φ.app (G.obj M)).app L ≫ (T_C.map (adj.counit.app M)).app (F.obj L)`, see
+`CategoryTheory.Adjunction.homEquiv_symm_rightAdjointProjectionMap_app_app`. -/
+def rightAdjointProjectionMap :
+    G ⋙ T_D ⟶ (postcompose₂.obj G).obj ((((whiskeringLeft₂ C).obj (𝟭 C)).obj F).obj T_C) where
+  app M :=
+    { app L := adj.homEquiv _ _
+        ((φ.app (G.obj M)).app L ≫ (T_C.map (adj.counit.app M)).app (F.obj L))
+      naturality L L' f := by
+        dsimp
+        rw [← homEquiv_naturality_left, ← homEquiv_naturality_right]
+        congr 1
+        simpa using (φ.app (G.obj M)).naturality_assoc f ((T_C.map (adj.counit.app M)).app _) }
+  naturality M M' f := by
+    ext L
+    dsimp
+    rw [← homEquiv_naturality_left, ← homEquiv_naturality_right]
+    congr 1
+    simpa [← NatTrans.comp_app, ← Functor.map_comp] using NatTrans.naturality_app_assoc φ L
+      (G.map f) ((T_C.map (adj.counit.app M')).app (F.obj L))
+
+lemma rightAdjointProjectionMap_app_app (M : C) (L : D) :
+    ((adj.rightAdjointProjectionMap φ).app M).app L = adj.homEquiv _ _
+      ((φ.app (G.obj M)).app L ≫ (T_C.map (adj.counit.app M)).app (F.obj L)) :=
+  rfl
+
+/-- The transpose along `adj : F ⊣ G` of the right adjoint projection map
+`T_D (G M) L ⟶ G (T_C M (F L))` is the composite
+```
+F (T_D (G M) L) --φ--> T_C (F (G M)) (F L)
+        \                    |
+         \                   | T_C (ε_M) (𝟙 (F L))
+       transpose             v
+           ----------->  T_C M (F L)
+```
+where the long edge is `(adj.homEquiv _ _).symm` of the right adjoint projection map.
+-/
+@[simp, reassoc]
+lemma homEquiv_symm_rightAdjointProjectionMap_app_app (M : C) (L : D) :
+    (adj.homEquiv _ _).symm (((adj.rightAdjointProjectionMap φ).app M).app L) =
+      (φ.app (G.obj M)).app L ≫ (T_C.map (adj.counit.app M)).app (F.obj L) :=
+  Equiv.symm_apply_apply _ _
+
+/-- The counit form of `CategoryTheory.Adjunction.homEquiv_symm_rightAdjointProjectionMap_app_app`:
+applying `F` to the right adjoint projection map and composing with the counit of `adj` gives
+`φ` followed by the counit of `adj` in the first variable. -/
+@[reassoc]
+lemma map_rightAdjointProjectionMap_app_app_comp_counit (M : C) (L : D) :
+    F.map (((adj.rightAdjointProjectionMap φ).app M).app L) ≫ adj.counit.app _ =
+      (φ.app (G.obj M)).app L ≫ (T_C.map (adj.counit.app M)).app (F.obj L) := by
+  simpa [homEquiv_counit] using adj.homEquiv_symm_rightAdjointProjectionMap_app_app φ M L
+
+end RightAdjoint
 
 end CategoryTheory.Adjunction
