@@ -9,14 +9,16 @@ public import Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
-# Global sections of a pullback of étale sheaves
+# Global sections of a pushforward and of a pullback of étale sheaves
 
-For a morphism of schemes `f : X ⟶ Y` and an étale sheaf `G` on `Y`, this file constructs the
-pullback map `Γ(Y, G) ⟶ Γ(X, f^* G)` on global sections, and shows that it is an isomorphism
-when `f` is.
+For a morphism of schemes `f : X ⟶ Y`, this file identifies the global sections of a
+pushforward, `Γ(Y, f_* F) ≅ Γ(X, F)`. For an étale sheaf `G` on `Y`, it constructs the pullback
+map `Γ(Y, G) ⟶ Γ(X, f^* G)` on global sections, and shows that it is an isomorphism when `f` is.
 
 ## Main definitions
 
+- `AlgebraicGeometry.Etale.lowerStarCompGlobalSectionsIso`: the isomorphism
+  `f_* ⋙ Γ_Y ≅ Γ_X`.
 - `AlgebraicGeometry.Etale.globalSectionsUpperStarMap`: the map `Γ(Y, G) ⟶ Γ(X, f^* G)`.
 - `AlgebraicGeometry.Etale.globalSectionsUpperStarIso`: the isomorphism
   `Γ(Y, G) ≅ Γ(X, f^* G)` for an isomorphism `f`.
@@ -34,6 +36,14 @@ open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A] {X Y : Scheme.{u}} (f : X ⟶ Y) (G : Sheaf Y.smallEtaleTopology A)
+
+/-- Global sections are invariant under the pushforward along a morphism `f : X ⟶ Y`:
+`Γ(Y, f_* F) ≅ (f_* F)(Y) = F(Y ×_Y X) ≅ F(X) ≅ Γ(X, F)`. -/
+noncomputable def lowerStarCompGlobalSectionsIso :
+    (f)_*[A] ⋙ Sheaf.Γ Y.smallEtaleTopology A ≅ Sheaf.Γ X.smallEtaleTopology A :=
+  Functor.isoWhiskerLeft _ (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal) ≪≫
+    lowerStarCompSheafSectionsTerminalIso A f ≪≫
+    (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).symm
 
 /-- The pullback map on global sections
 

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.Category
+public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.LowerShriek
@@ -64,6 +65,10 @@ instead, which `FrobeniusModule.IsPureOfWeightOver` names.
 - `AlgebraicGeometry.WeilSheaf.higherLowerShriek` and
   `AlgebraicGeometry.WeilComplex.derivedLowerShriek`: the higher direct images with compact
   support `Rʳf₀!` and the total derived one `Rf₀!`.
+- `AlgebraicGeometry.WeilComplex.compactlySupportedCohomology` and
+  `AlgebraicGeometry.WeilSheaf.compactlySupportedCohomology`: compactly supported cohomology
+  `H_c^r(X ⊗ k̄, K) = Hʳ(Spec k̄, Ra_! K)` with its geometric Frobenius
+  (`WeilConjectures.WeilSheaf.Cohomology`).
 - `AlgebraicGeometry.WeilSheaf.directImage`, `AlgebraicGeometry.WeilSheaf.extensionByZero` and
   `AlgebraicGeometry.WeilSheaf.extensionByZeroToDirectImage`: the two extensions along an open
   immersion and the canonical map between them.
