@@ -101,7 +101,7 @@ theorem Etale.isIso_derivedBaseChangeMapPlus_app_of_retract {X' Y' : Scheme.{u}}
     (r : Retract K M)
     (hM : IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq).app M)) :
     IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq).app K) :=
-  sorry
+  (MorphismProperty.isomorphisms _).of_retract (NatTrans.retractArrowApp _ r) hM
 
 /-- **Retract supplied by a surjection**: for a surjective morphism `f : X ⟶ Y` and an
 injective sheaf `I` on `Y_ét`, the complex `I[0]` is a retract of `Rf_*(f^* I[0])`.

@@ -39,34 +39,37 @@ closed base fields; geometric stalks are conservative.
 
 ## The proof of the reduction
 
-The base change property is étale local on the target, so the target may be assumed affine.
-Chow's lemma then dominates a proper `f : X ⟶ Y` by a projective one: `π : X̃ ⟶ X` proper
-surjective with a closed immersion of `X̃` into `ℙⁿ_Y` over `Y`. Closed immersions are
-finite, and finite morphisms satisfy base change unrestrictedly
-(`AlgebraicGeometry.Etale.isBaseChangeIso_of_isFinite`, whence
-`AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isBaseChangeIso`). The finite surjective
-symmetric-product morphism `(ℙ¹_S)ⁿ ⟶ ℙⁿ_S` passes the hypothesis from `ℙ¹` to `ℙⁿ`.
-Finally the base change property composes and cancels along proper surjections, which
-disposes of `π`.
-
-## Prerequisites not yet formalised
+The base change property is étale local on the target
+(`AlgebraicGeometry.Etale.hasTorsionBaseChange_of_jointlySurjective`), so the target may be
+assumed affine. Chow's lemma then dominates a proper `f : X ⟶ Y` by a projective one
+(`AlgebraicGeometry.exists_isClosedImmersion_projectiveSpace_of_isProper`): `π : X̃ ⟶ X`
+proper surjective with a closed immersion `i` of `X̃` into `ℙⁿ_Y` over `Y`, and the graph
+`(π, i) : X̃ ⟶ ℙⁿ_X` is a closed immersion over `X`
+(`AlgebraicGeometry.ProjectiveSpace.isClosedImmersion_liftBaseChange`). Closed immersions are
+finite, and finite morphisms satisfy base change
+(`AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isFinite`). The finite surjective
+symmetric-product morphism `(ℙ¹_S)ⁿ ⟶ ℙⁿ_S`
+(`AlgebraicGeometry.ProjectiveSpace.symmetricProduct`) passes the hypothesis from `ℙ¹` to
+`ℙⁿ` (`AlgebraicGeometry.Etale.hasTorsionBaseChange_projectiveSpace_of_projectiveLine`).
+Finally the base change property composes
+(`AlgebraicGeometry.Etale.HasTorsionBaseChange.comp`) and cancels along proper surjections
+(`AlgebraicGeometry.Etale.HasTorsionBaseChange.of_comp_of_surjective`), which disposes of
+`π`. These stability properties are in
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Stability`.
 
 The reduction is stated without a noetherian hypothesis, matching
-`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`. The Chow factorisation available in
-this repository, `AlgebraicGeometry.ChowModification.nonempty_data` together with
-`AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpace`, assumes a
-noetherian base. Closing the gap is the blueprint's `lemma:weil-pbc-chow-factorization`,
-which removes the hypothesis by a finite-presentation envelope and noetherian approximation;
-it is a prerequisite of the proof below and is not formalised yet.
-
-The reduction also absorbs several steps which the blueprint keeps separate — target
-locality, stability under composition, and cancellation along a proper surjection (Stacks
-Project, Tags 0A4D and 0A4C) — none of which is stated on its own here.
+`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`, so it uses the general form of the
+Chow factorisation over an affine base (the blueprint's `lemma-weil-pbc-chow-factorization`)
+rather than `AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpace`, which
+assumes a noetherian base.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.hasTorsionBaseChange_projectiveLine`: the projective line over
   any base satisfies the base change property.
+- `AlgebraicGeometry.Etale.hasTorsionBaseChange_projectiveSpace_of_projectiveLine`: if the
+  projective line over every base satisfies the base change property, then so does every
+  projective space.
 - `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper`: if the
   projective line over every base satisfies the base change property, then so does every
   proper morphism.
@@ -140,8 +143,8 @@ theorem Etale.hasTorsionBaseChange_projectiveSpace_of_projectiveLine
     Etale.HasTorsionBaseChange Λ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T) := by
   have := ProjectiveSpace.isFinite_symmetricProduct T n
   have := ProjectiveSpace.surjective_symmetricProduct T n
-  refine Etale.HasTorsionBaseChange.of_comp_of_surjective Λ (f := ProjectiveSpace.symmetricProduct T n)
-    (Etale.hasTorsionBaseChange_of_isFinite Λ _) ?_
+  refine Etale.HasTorsionBaseChange.of_comp_of_surjective Λ
+    (f := ProjectiveSpace.symmetricProduct T n) (Etale.hasTorsionBaseChange_of_isFinite Λ _) ?_
   rw [ProjectiveSpace.symmetricProduct_over]
   exact Etale.hasTorsionBaseChange_powOver_of_projectiveLine Λ h T n
 
