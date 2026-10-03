@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.LinearAlgebra.Dual.Defs
-public import WeilConjectures.AlgebraicGeometry.Curve.Degree
+public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
@@ -21,10 +21,11 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCart
 # Riemann–Roch, Serre duality and the twist lemma for curves
 
 Let `X` be a smooth proper geometrically integral curve over a field `k`. Its genus
-`g = dim_k H^1(X, 𝒪_X)` and the degree `deg ℒ = χ(ℒ) - χ(𝒪_X)` of an invertible sheaf on
-it are defined in `WeilConjectures/AlgebraicGeometry/Curve/Degree.lean`. We state
-Riemann–Roch, Serre duality, and the two statements about line bundles on the base change `X_K`
-of `X` along a field extension `K/k` that the Picard framework needs.
+`g = dim_k H^1(X, 𝒪_X)` is `AlgebraicGeometry.Scheme.arithmeticGenus`, and the degree
+`deg ℒ = χ(ℒ) - χ(𝒪_X)` of an invertible sheaf on it is
+`AlgebraicGeometry.Scheme.Modules.degree`. We state Riemann–Roch, Serre duality, and the two
+statements about line bundles on the base change `X_K` of `X` along a field extension `K/k`
+that the Picard framework needs.
 
 ## Implementation notes
 
@@ -109,7 +110,7 @@ rank-`r` sheaf against `𝒪_X^{⊕ r}`, this is the content of the Riemann–Ro
 (blueprint: `sk-thm-picard-rr`) -/
 theorem eulerChar_free_eq (r : ℕ) :
     Modules.eulerChar (X := X) k (SheafOfModules.free (ULift.{u} (Fin r))) =
-      r * (1 - (genus k X : ℤ)) :=
+      r * (1 - (arithmeticGenus k X : ℤ)) :=
   sorry
 
 /-- **Riemann–Roch for curves, structure sheaf.** `χ(𝒪_X) = 1 - g` on a smooth proper
@@ -117,7 +118,8 @@ geometrically integral curve `X` over `k` of genus `g`.
 
 (blueprint: `sk-thm-picard-rr`) -/
 theorem eulerChar_unit_eq :
-    Modules.eulerChar (X := X) k (SheafOfModules.unit X.ringCatSheaf) = 1 - (genus k X : ℤ) :=
+    Modules.eulerChar (X := X) k (SheafOfModules.unit X.ringCatSheaf) =
+      1 - (arithmeticGenus k X : ℤ) :=
   sorry
 
 /-- **Riemann–Roch for curves, `h⁰` of a line bundle of large degree.** A line bundle `ℒ` of
@@ -126,8 +128,8 @@ degree `d ≥ 2g - 1` on a smooth proper geometrically integral curve of genus `
 
 (blueprint: `sk-thm-picard-rr`) -/
 theorem finrankH_zero_eq (ℒ : X.Modules) [ℒ.IsInvertible]
-    (hd : 2 * (genus k X : ℤ) - 1 ≤ ℒ.degree k) :
-    (Modules.finrankH k ℒ 0 : ℤ) = ℒ.degree k + 1 - genus k X :=
+    (hd : 2 * (arithmeticGenus k X : ℤ) - 1 ≤ ℒ.degree k) :
+    (Modules.finrankH k ℒ 0 : ℤ) = ℒ.degree k + 1 - arithmeticGenus k X :=
   sorry
 
 /-- **Positive degree implies ample.** An invertible sheaf of positive degree on a smooth
@@ -201,7 +203,7 @@ theorem degree_eq_genus
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules)
     [ℒ.IsInvertible] (h0 : Modules.finrankH K ℒ 0 = 1)
     (hq : ∀ q : ℕ, 0 < q → Subsingleton (ℒ.H q)) :
-    ℒ.degree K = (genus k X : ℤ) :=
+    ℒ.degree K = (arithmeticGenus k X : ℤ) :=
   sorry
 
 /-- **The twist lemma.** Let `k` be separably closed, let `X` be a smooth projective curve over

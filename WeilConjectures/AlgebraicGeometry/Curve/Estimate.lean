@@ -53,8 +53,8 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 
 The genus is `f.genus = dim_k H⁰(C, Ω¹_{C/k})`, the definition of the blueprint
 (`sk-def-curve`). For a smooth proper connected curve it agrees, by Serre duality, with the
-arithmetic genus `AlgebraicGeometry.Scheme.genus = dim_k H¹(C, 𝒪_C)` of the Riemann–Roch
-block; the two definitions are not yet identified in Lean.
+arithmetic genus `AlgebraicGeometry.Scheme.arithmeticGenus = dim_k H¹(C, 𝒪_C)` of the
+Riemann–Roch block; the two definitions are not yet identified in Lean.
 (blueprint: `sk-thm-curveestimate`) -/
 theorem nonempty_addEquiv_sheafH_constantZMod_one (f : C ⟶ Spec (.of k)) [IsCurve f]
     [Smooth f] [IsProper f] [ConnectedSpace C] (n : ℕ) (hn : (n : k) ≠ 0) :

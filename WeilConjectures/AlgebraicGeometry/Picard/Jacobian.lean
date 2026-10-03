@@ -390,7 +390,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (.of k))]
 over a separably closed field `k` and let `J` be a group scheme over `k` representing the
 degree-zero part `Pic^0_{X/k}` of the Picard functor. Then the tangent space of `J` at the unit
 `η[J]` is isomorphic as a `k`-vector space to `H^1(X, 𝒪_X)`, which has dimension `g` by the
-definition of `AlgebraicGeometry.Scheme.genus`.
+definition of `AlgebraicGeometry.Scheme.arithmeticGenus`.
 
 (blueprint: `sk-prop-picard-jacobian-tangent`) -/
 theorem nonempty_tangentSpaceAt_linearEquiv_H_one [IsSepClosed k]
@@ -433,7 +433,7 @@ theorem exists_jacobian [IsSepClosed k]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] :
     ∃ (J : Over (Spec (.of k))) (_ : CommGrpObj J),
-      IsProper J.hom ∧ SmoothOfRelativeDimension (genus k X) J.hom ∧
+      IsProper J.hom ∧ SmoothOfRelativeDimension (arithmeticGenus k X) J.hom ∧
         GeometricallyIntegral J.hom ∧
         Nonempty ((picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy J) ∧
         Nonempty (picardZero k X ≃ (𝟙_ (Over (Spec (.of k))) ⟶ J)) :=
@@ -475,7 +475,7 @@ theorem exists_jacobian_descent (k₀ ks K : Type u) [Field k₀] [Field ks] [Fi
     [Algebra k₀ ks] [Algebra k₀ K] [Algebra ks K] [IsScalarTower k₀ ks K]
     [IsSepClosure k₀ ks] [IsAlgClosure k₀ K] (C₀ : Scheme.{u}) [C₀.Over (Spec (.of k₀))]
     [SmoothOfRelativeDimension 1 (C₀ ↘ Spec (.of k₀))] [IsProper (C₀ ↘ Spec (.of k₀))]
-    [GeometricallyConnected (C₀ ↘ Spec (.of k₀))] (g : ℕ) (hg : genus k₀ C₀ = g)
+    [GeometricallyConnected (C₀ ↘ Spec (.of k₀))] (g : ℕ) (hg : arithmeticGenus k₀ C₀ = g)
     (C : Scheme.{u}) [C.Over (Spec (.of K))] (p : C ⟶ C₀)
     (hC : IsPullback p (C ↘ Spec (.of K)) (C₀ ↘ Spec (.of k₀))
       (Spec.map (CommRingCat.ofHom (algebraMap k₀ K)))) :
