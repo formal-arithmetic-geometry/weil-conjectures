@@ -31,10 +31,16 @@ of affine space in the base, in `AlgebraicGeometry.AffineSpace.homOfVector_comp_
 Finally, `AlgebraicGeometry.AffineSpace.isClosedImmersion_homOfVector` is the criterion for a
 morphism into an affine space over an affine base to be a closed immersion.
 
-We also record the part of the additive group structure of relative affine space that is used
-elsewhere: the zero section `AlgebraicGeometry.AffineSpace.zeroSection`, the reflection
-`AlgebraicGeometry.AffineSpace.neg` and the standard pairing
-`AlgebraicGeometry.AffineSpace.stdPairing` on `𝔸(n; S) ×_S 𝔸(n; S)`.
+## Main definitions
+
+The part of the additive group structure of relative affine space that is used elsewhere:
+
+- `AlgebraicGeometry.AffineSpace.zeroSection`: the zero section `S ⟶ 𝔸(n; S)`.
+- `AlgebraicGeometry.AffineSpace.neg`: the reflection `x ↦ -x`.
+- `AlgebraicGeometry.AffineSpace.add`: the addition `𝔸(n; S) ×_S 𝔸(n; S) ⟶ 𝔸(n; S)`.
+- `AlgebraicGeometry.AffineSpace.smul`: the scaling `x ↦ c x` by a global function `c`.
+- `AlgebraicGeometry.AffineSpace.translation`: the translation `x ↦ x + a`.
+- `AlgebraicGeometry.AffineSpace.stdPairing`: the standard pairing on `𝔸(n; S) ×_S 𝔸(n; S)`.
 
 -/
 
@@ -451,6 +457,14 @@ section GroupLaw
 
 variable (n : Type u) (S : Scheme.{u})
 
+set_option hygiene false in
+/-- The first projection `𝔸(n; S) ×_S 𝔸(n; S) ⟶ 𝔸(n; S)`. -/
+local notation "pr₁" => Limits.pullback.fst (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)
+
+set_option hygiene false in
+/-- The second projection `𝔸(n; S) ×_S 𝔸(n; S) ⟶ 𝔸(n; S)`. -/
+local notation "pr₂" => Limits.pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)
+
 /-- The zero section `S ⟶ 𝔸(n; S)`, the unit of the additive group law. -/
 def zeroSection : S ⟶ 𝔸(n; S) :=
   homOfVector (𝟙 S) 0
@@ -490,11 +504,71 @@ lemma zeroSection_comp_neg : zeroSection n S ≫ neg n S = zeroSection n S := by
   · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, neg_appTop_coord, map_neg,
       zeroSection_appTop_coord, neg_zero]
 
+/-- The addition `(x, y) ↦ x + y` of `𝔸(n; S)`, a morphism `𝔸(n; S) ×_S 𝔸(n; S) ⟶ 𝔸(n; S)`,
+the group law of the additive group scheme. -/
+def add : Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ⟶ 𝔸(n; S) :=
+  homOfVector (pr₁ ≫ 𝔸(n; S) ↘ S) fun i ↦ (pr₁).appTop (coord S i) + (pr₂).appTop (coord S i)
+
+@[reassoc (attr := simp)]
+lemma add_over : add n S ≫ 𝔸(n; S) ↘ S = pr₁ ≫ 𝔸(n; S) ↘ S :=
+  homOfVector_over _ _
+
+@[simp]
+lemma add_appTop_coord (i : n) :
+    (add n S).appTop (coord S i) = (pr₁).appTop (coord S i) + (pr₂).appTop (coord S i) :=
+  homOfVector_appTop_coord _ _ _
+
+/-- The scaling `x ↦ c x` of `𝔸(n; S)` by a global function `c` on `S`. -/
+def smul (c : Γ(S, ⊤)) : 𝔸(n; S) ⟶ 𝔸(n; S) :=
+  homOfVector (𝔸(n; S) ↘ S) fun i ↦ (𝔸(n; S) ↘ S).appTop c * coord S i
+
+@[reassoc (attr := simp)]
+lemma smul_over (c : Γ(S, ⊤)) : smul n S c ≫ 𝔸(n; S) ↘ S = 𝔸(n; S) ↘ S :=
+  homOfVector_over _ _
+
+@[simp]
+lemma smul_appTop_coord (c : Γ(S, ⊤)) (i : n) :
+    (smul n S c).appTop (coord S i) = (𝔸(n; S) ↘ S).appTop c * coord S i :=
+  homOfVector_appTop_coord _ _ _
+
+/-- Scaling by `-1` is the reflection `x ↦ -x`. -/
+lemma smul_neg_one : smul n S (-1) = neg n S :=
+  hom_ext (by simp) fun i ↦ by simp
+
+variable {n S}
+
+/-- The translation `x ↦ x + a` of `𝔸(n; S)` by a vector `a` of global functions on `S`. -/
+def translation (a : n → Γ(S, ⊤)) : 𝔸(n; S) ⟶ 𝔸(n; S) :=
+  homOfVector (𝔸(n; S) ↘ S) fun i ↦ coord S i + (𝔸(n; S) ↘ S).appTop (a i)
+
+@[reassoc (attr := simp)]
+lemma translation_over (a : n → Γ(S, ⊤)) : translation a ≫ 𝔸(n; S) ↘ S = 𝔸(n; S) ↘ S :=
+  homOfVector_over _ _
+
+@[simp]
+lemma translation_appTop_coord (a : n → Γ(S, ⊤)) (i : n) :
+    (translation a).appTop (coord S i) = coord S i + (𝔸(n; S) ↘ S).appTop (a i) :=
+  homOfVector_appTop_coord _ _ _
+
+@[simp]
+lemma translation_zero : translation (0 : n → Γ(S, ⊤)) = 𝟙 𝔸(n; S) :=
+  hom_ext (by simp) fun i ↦ by simp
+
+/-- Translation by `a + b` is translation by `a` followed by translation by `b`. -/
+@[reassoc]
+lemma translation_add (a b : n → Γ(S, ⊤)) :
+    translation (a + b) = translation a ≫ translation b := by
+  refine hom_ext (by simp) fun i ↦ ?_
+  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, translation_appTop_coord, map_add,
+    Pi.add_apply, add_assoc]
+  rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, translation_over]
+
+variable (n S)
+
 /-- The standard pairing `⟨x, ξ⟩ = ∑ᵢ xᵢ ξᵢ` on `𝔸(n; S) ×_S 𝔸(n; S)`, a global function on
 the fibre product. -/
 def stdPairing [Fintype n] : Γ(Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) :=
-  ∑ i : n, (Limits.pullback.fst (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)).appTop (coord S i) *
-    (Limits.pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)).appTop (coord S i)
+  ∑ i : n, (pr₁).appTop (coord S i) * (pr₂).appTop (coord S i)
 
 end GroupLaw
 
