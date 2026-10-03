@@ -29,6 +29,14 @@ variable {R A B : Type*} [CommRing R] [CommRing A] [HopfAlgebra R A] [CommRing B
 
 namespace Ideal.IsHopfIdeal
 
+/-- The zero ideal is a Hopf ideal. -/
+instance bot : (⊥ : Ideal A).IsHopfIdeal R where
+  counit_eq_zero x hx := by simp_all
+  map_mkQ_comul_eq_zero x hx := by
+    rw [Submodule.restrictScalars_mem, Ideal.mem_bot] at hx
+    rw [hx, map_zero, map_zero]
+  antipode_mem x hx := by simp_all
+
 /-- The convolution product of two algebra homomorphisms vanishing on a Hopf ideal vanishes on
 it. (blueprint: `sk-d-geometry`) -/
 theorem convMul_apply_eq_zero {I : Ideal A} [I.IsHopfIdeal R] {f g : A →ₐ[R] B}

@@ -6,6 +6,7 @@ Authors: Weil conjectures project
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Etale
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChange
 
 /-!
@@ -51,6 +52,10 @@ For `g' = 𝟙` this recovers `AlgebraicGeometry.Etale.openImmersionLowerShriekB
   isomorphism.
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap_id_left`: for `g' = 𝟙` the
   base change map is `AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChange`.
+- `AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap_comp_baseChangeMap`: the
+  comparison `j_! ⟶ j_*` intertwines this base change map with the base change map
+  `g''^* j_* ⟶ j'_* g'^*` of the pushforward. Both sides are compared through their
+  transposes under `j'_! ⊣ j'^*` and `j'^* ⊣ j'_*`.
 
 -/
 
@@ -115,6 +120,58 @@ lemma Etale.isIso_openImmersionLowerShriekBaseChangeMap (hsq : IsPullback g' j' 
     IsIso (Etale.openImmersionLowerShriekBaseChangeMap A hsq.toCommSq) :=
   have := Etale.isIso_baseChangeMap_flip_of_isPullback A hsq
   conjugateEquiv_symm_iso _ _ _
+
+omit [HasSmallSiteSheafify A] in
+/-- The transpose of the base change map `j'_! g'^* ⟶ g''^* j_!` under `j'_! ⊣ j'^*` is
+`g'^*` of the unit of `j_! ⊣ j^*` followed by the square isomorphism. -/
+@[reassoc]
+lemma Etale.unit_map_openImmersionLowerShriekBaseChangeMap_app (sq : CommSq g' j' j g'')
+    (F : Sheaf U.smallEtaleTopology A) :
+    (Etale.openImmersionLowerShriekUpperStarAdjunction A j').unit.app ((g')^*[A].obj F) ≫
+        (j')^*[A].map ((Etale.openImmersionLowerShriekBaseChangeMap A sq).app F) =
+      (g')^*[A].map ((Etale.openImmersionLowerShriekUpperStarAdjunction A j).unit.app F) ≫
+        (Etale.squareUpperStarIso A sq.flip).hom.app ((j)_!open[A].obj F) := by
+  apply ((Etale.upperStarLowerStarAdjunction A g').homEquiv _ _).injective
+  have := unit_conjugateEquiv_symm ((Etale.openImmersionLowerShriekUpperStarAdjunction A j).comp
+      (Etale.upperStarLowerStarAdjunction A g''))
+    ((Etale.upperStarLowerStarAdjunction A g').comp
+      (Etale.openImmersionLowerShriekUpperStarAdjunction A j'))
+    (Etale.baseChangeMap A sq.flip) F
+  dsimp only [Functor.comp_obj, Functor.comp_map] at this
+  rw [Adjunction.comp_unit_app, Adjunction.comp_unit_app, assoc,
+    Etale.map_unit_baseChangeMap_app] at this
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, Functor.map_comp, Functor.map_comp,
+    Adjunction.unit_naturality_assoc]
+  exact (this.trans (assoc _ _ _)).symm
+
+omit [HasSmallSiteSheafify A] in
+/-- The comparison `j_! ⟶ j_*` intertwines the base change map `j'_! g'^* ⟶ g''^* j_!` of the
+extension by zero with the base change map `g''^* j_* ⟶ j'_* g'^*` of the pushforward. -/
+@[reassoc]
+lemma Etale.openImmersionLowerShriekBaseChangeMap_comp_baseChangeMap_app
+    (sq : CommSq g' j' j g'') (F : Sheaf U.smallEtaleTopology A) :
+    (Etale.openImmersionLowerShriekBaseChangeMap A sq).app F ≫
+        (g'')^*[A].map ((Etale.openImmersionLowerShriekToLowerStar A j).app F) ≫
+          (Etale.baseChangeMap A sq).app F =
+      (Etale.openImmersionLowerShriekToLowerStar A j').app ((g')^*[A].obj F) := by
+  apply Etale.openImmersionLowerShriek_lowerStar_hom_ext A j'
+  rw [Etale.unit_map_openImmersionLowerShriekToLowerStar_app_counit, Functor.map_comp,
+    Functor.map_comp, assoc, assoc, Etale.upperStar_map_baseChangeMap_app_counit,
+    ← Functor.comp_map (g'')^*[A] (j')^*[A], NatTrans.naturality_assoc, Functor.comp_map,
+    Etale.unit_map_openImmersionLowerShriekBaseChangeMap_app_assoc,
+    Etale.squareUpperStarIso_flip_hom_app_hom_app_assoc, ← Functor.map_comp, ← Functor.map_comp,
+    Etale.unit_map_openImmersionLowerShriekToLowerStar_app_counit, CategoryTheory.Functor.map_id]
+
+omit [HasSmallSiteSheafify A] in
+/-- The comparison `j_! ⟶ j_*` intertwines the base change map `j'_! g'^* ⟶ g''^* j_!` of the
+extension by zero with the base change map `g''^* j_* ⟶ j'_* g'^*` of the pushforward. -/
+lemma Etale.openImmersionLowerShriekBaseChangeMap_comp_baseChangeMap (sq : CommSq g' j' j g'') :
+    Etale.openImmersionLowerShriekBaseChangeMap A sq ≫
+        Functor.whiskerRight (Etale.openImmersionLowerShriekToLowerStar A j) (g'')^*[A] ≫
+          Etale.baseChangeMap A sq =
+      Functor.whiskerLeft (g')^*[A] (Etale.openImmersionLowerShriekToLowerStar A j') :=
+  NatTrans.ext <| funext <|
+    Etale.openImmersionLowerShriekBaseChangeMap_comp_baseChangeMap_app A sq
 
 section IdLeft
 

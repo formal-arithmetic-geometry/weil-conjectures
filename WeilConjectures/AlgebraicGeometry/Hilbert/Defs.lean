@@ -123,10 +123,15 @@ theorem isSheaf_hilbertPresheaf (f : X ⟶ S) (d : ℕ) :
 /-- **Representability of `Hilb^d`, general case.** Assume that for every point `s` of `S` and
 every finite set of at most `d` points of the fibre `X_s` there is an affine open of `X`
 containing all of them; this holds for instance when `X ⟶ S` is quasi-projective, or when `X`
-carries an ample invertible module. Then `Hilb^d_{X/S}` is representable by a scheme.
+carries an ample invertible module. If moreover `X ⟶ S` is separated, then `Hilb^d_{X/S}` is
+representable by a scheme.
+
+Separatedness cannot be dropped: for the line with doubled origin over a field and `d = 1`,
+every finite set of at most one point lies in an affine open, but `Hilb^1_{X/S}` is not
+representable.
 
 (blueprint: `sk-thm-picard-hilb-general`) -/
-theorem isRepresentable_hilbertPresheaf (f : X ⟶ S) (d : ℕ)
+theorem isRepresentable_hilbertPresheaf (f : X ⟶ S) [IsSeparated f] (d : ℕ)
     (hf : ∀ (s : S) (t : Finset (f.fiber s)), t.card ≤ d →
       ∃ U : X.affineOpens, ∀ x ∈ t, (f.fiberι s).base x ∈ U.1) :
     (hilbertPresheaf f d).IsRepresentable :=

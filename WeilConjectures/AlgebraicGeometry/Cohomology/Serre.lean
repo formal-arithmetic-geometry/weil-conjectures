@@ -89,11 +89,12 @@ theorem ProjectiveSpace.subsingleton_H_twist_of_ne (k : Type u) [Field k] [Finit
   sorry
 
 /-- **Vanishing of the top cohomology of the twisting sheaves.**
-`H^d(ℙᵈ_k, 𝒪(m)) = 0` for `m ≥ -d`.
+`H^d(ℙᵈ_k, 𝒪(m)) = 0` for `m ≥ -d`, when `d ≠ 0`. For `d = 0` the statement is false, since
+`H⁰(Spec k, 𝒪) = k`; that case is `nonempty_H_zero_twist_equiv` with `d = 0`.
 
 (blueprint: `sk-thm-picard-pn`) -/
 theorem ProjectiveSpace.subsingleton_H_twist_top (k : Type u) [Field k] [Finite n] (d : ℕ)
-    (hn : Nat.card n = d + 1) (m : ℤ) (hm : -(d : ℤ) ≤ m) :
+    (hd : d ≠ 0) (hn : Nat.card n = d + 1) (m : ℤ) (hm : -(d : ℤ) ≤ m) :
     Subsingleton ((ProjectiveSpace.twist n (Spec (.of k)) m).H d) :=
   sorry
 

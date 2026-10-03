@@ -65,7 +65,7 @@ along `r`, which is not stated here.
 
 @[expose] public section
 
-open scoped Matrix Zariski
+open scoped Matrix
 
 namespace Representation
 

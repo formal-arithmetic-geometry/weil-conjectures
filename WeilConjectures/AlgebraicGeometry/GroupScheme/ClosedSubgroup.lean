@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.GroupTheory.Commutator.Basic
 public import Mathlib.RingTheory.Jacobson.Ring
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
@@ -33,7 +34,10 @@ of a closed subgroup are described by ideals of the coordinate ring of `GL_n` in
 - `Matrix.GeneralLinearGroup.subgroupScheme`: the closed subgroup scheme `V(I)` of `GL_n`, a group
   object in schemes over `k`, with its closed immersion `subgroupSchemeι` into `GL_n`.
 - `Matrix.GeneralLinearGroup.identityComponent`: the ideal of the reduced identity component `G°`.
+- `Matrix.GeneralLinearGroup.IsConnected`: `V(I)` is its own reduced identity component.
 - `Matrix.GeneralLinearGroup.center`: the ideal of the reduced centre `Z(G)`.
+- `Matrix.GeneralLinearGroup.zeroLocusMulEquiv`: the `R`-points of `V(I)` as a group of
+  morphisms `Spec R ⟶ V(I)` are the group `zeroLocus I R`.
 
 ## Main results
 
@@ -41,12 +45,16 @@ of a closed subgroup are described by ideals of the coordinate ring of `GL_n` in
   satisfying the equations in `I`.
 - `Matrix.GeneralLinearGroup.vanishingIdeal_zeroLocus_eq_radical`: the Nullstellensatz for `GL_n`
   over an algebraically closed field.
+- `Matrix.GeneralLinearGroup.zeroLocus_vanishingIdeal_le_normalizer`,
+  `Matrix.GeneralLinearGroup.commutator_zeroLocus_vanishingIdeal_le`: Zariski closure preserves
+  normalizing and commutator inclusions between subgroups of `GL n k`.
 
 ## Blueprint
 
 - `sk-d-geometry`: matrix algebraic groups as reduced closed subgroups of `GL(V)`, their identity
   component and centre.
-- `sk-i-restriction`: the Zariski closure of a subgroup of `GL n k` is an algebraic group.
+- `sk-i-restriction`: the Zariski closure of a subgroup of `GL n k` is an algebraic group, and
+  closure preserves normalizing and commutator inclusions.
 - `sk-p-geometry`: the identity component is a closed subgroup scheme.
 -/
 
@@ -115,6 +123,34 @@ theorem zeroLocus_anti {I J : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] [J.I
     (h : I ≤ J) : zeroLocus J R ≤ zeroLocus I R :=
   fun _ hg a ha ↦ hg a (h ha)
 
+variable {S : Type*} [CommRing S] [Algebra k S]
+
+/-- An algebra homomorphism `R → S` maps the `R`-points of `V(I)` to its `S`-points. -/
+theorem map_mem_zeroLocus {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] (φ : R →ₐ[k] S)
+    {g : GL n R} (hg : g ∈ zeroLocus I R) : map φ.toRingHom g ∈ zeroLocus I S := by
+  intro a ha
+  rw [evalAlgHom_map, AlgHom.comp_apply, hg a ha, map_zero]
+
+/-- Along an injective algebra homomorphism `R → S`, a matrix over `R` is an `R`-point of `V(I)` if
+and only if its image is an `S`-point. -/
+theorem map_mem_zeroLocus_iff {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] {φ : R →ₐ[k] S}
+    (hφ : Function.Injective φ) {g : GL n R} :
+    map φ.toRingHom g ∈ zeroLocus I S ↔ g ∈ zeroLocus I R := by
+  refine ⟨fun hg a ha ↦ hφ ?_, map_mem_zeroLocus φ⟩
+  rw [map_zero, ← AlgHom.comp_apply, ← evalAlgHom_map]
+  exact hg a ha
+
+/-- The group homomorphism `V(I)(R) →* V(I)(S)` induced by an algebra homomorphism `R → S`. -/
+noncomputable def zeroLocus.map (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
+    (φ : R →ₐ[k] S) : zeroLocus I R →* zeroLocus I S :=
+  ((GeneralLinearGroup.map φ.toRingHom).comp (zeroLocus I R).subtype).codRestrict _
+    fun g ↦ map_mem_zeroLocus φ g.2
+
+@[simp]
+theorem zeroLocus.coe_map_apply {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] (φ : R →ₐ[k] S)
+    (g : zeroLocus I R) : (zeroLocus.map I φ g : GL n S) = GeneralLinearGroup.map φ.toRingHom g :=
+  rfl
+
 /-- The ideal of equations vanishing on a set `S` of invertible matrices over `k`. For a subgroup
 `S`, it cuts out the Zariski closure of `S`. (blueprint: `sk-i-restriction`) -/
 noncomputable def vanishingIdeal (S : Set (GL n k)) : Ideal (CoordinateRing n k) :=
@@ -176,6 +212,34 @@ theorem zeroLocus_vanishingIdeal_le {Γ : Subgroup (GL n k)} (J : Set (Coordinat
     (hJ : ∀ g : GL n k, (∀ a ∈ J, evalAlgHom g a = 0) → g ∈ Γ) :
     zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k ≤ Γ :=
   fun g hg ↦ hJ g fun a ha ↦ hg a (mem_vanishingIdeal.2 fun h hh ↦ hΓ h hh a ha)
+
+/-- If a subgroup `Γ` of `GL n k` normalizes a subgroup `Δ`, then the Zariski closure of `Γ`
+normalizes the Zariski closure of `Δ`, on `R`-points for every `k`-algebra `R`.
+
+Proof sketch (not formalized): over a field, `Γ × Δ` is schematically dense in the product of the
+closures: if `∑ aᵢ ⊗ bᵢ` vanishes on `Γ × Δ` with the `bᵢ` linearly independent modulo
+`vanishingIdeal Δ`, then every `aᵢ` vanishes on `Γ`. Apply this to the pullback of an equation of
+`Δ` along `(g, h) ↦ g h g⁻¹`. (blueprint: `sk-i-restriction`) -/
+theorem zeroLocus_vanishingIdeal_le_normalizer {Γ Δ : Subgroup (GL n k)}
+    (hΓ : Γ ≤ Subgroup.normalizer (Δ : Set (GL n k)))
+    (R : Type*) [CommRing R] [Algebra k R] :
+    zeroLocus (vanishingIdeal (Γ : Set (GL n k))) R ≤
+      Subgroup.normalizer (zeroLocus (vanishingIdeal (Δ : Set (GL n k))) R : Set (GL n R)) := by
+  sorry
+
+/-- If the commutators of a subgroup `Γ` of `GL n k` lie in a subgroup `Δ`, then the commutators of
+the Zariski closure of `Γ` lie in the Zariski closure of `Δ`, on `R`-points for every `k`-algebra
+`R`.
+
+Proof sketch (not formalized): the schematic density of `Γ × Γ` in the product of two copies of the
+closure of `Γ`, as in `zeroLocus_vanishingIdeal_le_normalizer`, applied to the pullback of an
+equation of `Δ` along `(g, h) ↦ g h g⁻¹ h⁻¹`. (blueprint: `sk-i-restriction`) -/
+theorem commutator_zeroLocus_vanishingIdeal_le {Γ Δ : Subgroup (GL n k)} (hΓ : ⁅Γ, Γ⁆ ≤ Δ)
+    (R : Type*) [CommRing R] [Algebra k R] :
+    ⁅zeroLocus (vanishingIdeal (Γ : Set (GL n k))) R,
+        zeroLocus (vanishingIdeal (Γ : Set (GL n k))) R⁆ ≤
+      zeroLocus (vanishingIdeal (Δ : Set (GL n k))) R := by
+  sorry
 
 /-- Over an algebraically closed field, every maximal ideal of the coordinate ring of `GL_n` is the
 ideal of a point. -/
@@ -252,6 +316,15 @@ theorem le_identityComponent (I : Ideal (CoordinateRing n k)) : I ≤ identityCo
 theorem isRadical_identityComponent (I : Ideal (CoordinateRing n k)) :
     (identityComponent I).IsRadical :=
   PrimeSpectrum.isRadical_vanishingIdeal _
+
+/-- The closed subgroup `V(I)` of `GL_n` is connected (and reduced): `I` is the ideal of its own
+reduced identity component. -/
+def IsConnected (I : Ideal (CoordinateRing n k)) : Prop :=
+  identityComponent I = I
+
+theorem IsConnected.isRadical {I : Ideal (CoordinateRing n k)} (h : IsConnected I) :
+    I.IsRadical :=
+  h ▸ isRadical_identityComponent I
 
 /-- The identity component of an algebraic group over an algebraically closed field is a closed
 subgroup scheme. (blueprint: `sk-p-geometry`) -/
@@ -356,8 +429,8 @@ theorem mapMulEquiv_comp_subgroupSchemeι {R : Type u} [CommRing R] [Algebra k R
     Spec.mapMulEquiv ψ ≫ subgroupSchemeι I =
       Spec.mapMulEquiv (toConv (ψ.ofConv.comp (Ideal.Quotient.mkₐ k I))) := by
   apply Over.OverMorphism.ext
-  simp only [Over.comp_left, Spec.mapMulEquiv, subgroupSchemeι, MulEquiv.coe_mk, Equiv.coe_fn_mk]
-  simp [← Spec.map_comp]
+  change Spec.map _ ≫ Spec.map _ = Spec.map _
+  rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
   rfl
 
 /-- The `R`-points of the closed subgroup scheme `V(I)` are the invertible matrices over `R`
@@ -387,6 +460,49 @@ theorem range_homMulEquiv_comp (R : Type u) [CommRing R] [Algebra k R] :
     dsimp only
     rw [key]
     exact (algHomMulEquiv n k R).apply_symm_apply g
+
+theorem injective_homMulEquiv_comp (R : Type u) [CommRing R] [Algebra k R] :
+    Function.Injective fun φ : (Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I ↦
+      homMulEquiv n k R (φ ≫ subgroupSchemeι I) :=
+  (homMulEquiv n k R).injective.comp (subgroupSchemeι_comp_injective I)
+
+/-- The `R`-points of the closed subgroup scheme `V(I)` are the group `zeroLocus I R` of matrices
+satisfying the equations in `I`: a point `φ : Spec R ⟶ V(I)` corresponds to the matrix of the
+point `φ ≫ ι` of `GL_n`, where `ι : V(I) ⟶ GL_n` is the closed immersion.
+(blueprint: `sk-d-geometry`) -/
+noncomputable def zeroLocusMulEquiv (R : Type u) [CommRing R] [Algebra k R] :
+    zeroLocus I R ≃* ((Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I) :=
+  (MulEquiv.subgroupCongr (SetLike.coe_injective (range_homMulEquiv_comp I R)).symm).trans
+    (MonoidHom.ofInjective (f := (homMulEquiv n k R).toMonoidHom.comp
+      (IsMonHom.monoidHom (subgroupSchemeι I) _)) (injective_homMulEquiv_comp I R)).symm
+
+variable {I}
+
+@[simp]
+theorem homMulEquiv_zeroLocusMulEquiv_comp {R : Type u} [CommRing R] [Algebra k R]
+    (g : zeroLocus I R) : homMulEquiv n k R (zeroLocusMulEquiv I R g ≫ subgroupSchemeι I) = g :=
+  congrArg Subtype.val ((MonoidHom.ofInjective (f := (homMulEquiv n k R).toMonoidHom.comp
+    (IsMonHom.monoidHom (subgroupSchemeι I) _)) (injective_homMulEquiv_comp I R)).apply_symm_apply
+      ⟨g, _⟩)
+
+attribute [irreducible] zeroLocusMulEquiv
+
+/-- The identification `zeroLocusMulEquiv` is natural in the algebra of values: the square
+```
+V(I)(R) ──zeroLocus.map φ──▶ V(I)(S)
+   │                            │
+   ▼                            ▼
+(Spec R ⟶ V(I)) ──Spec φ ≫ ·──▶ (Spec S ⟶ V(I))
+```
+commutes. -/
+theorem zeroLocusMulEquiv_map {R S : Type u} [CommRing R] [Algebra k R] [CommRing S]
+    [Algebra k S] (φ : R →ₐ[k] S) (g : zeroLocus I R) :
+    zeroLocusMulEquiv I S (zeroLocus.map I φ g) =
+      (Spec.map (CommRingCat.ofHom φ.toRingHom)).asOver (Spec (.of k)) ≫
+        zeroLocusMulEquiv I R g := by
+  apply injective_homMulEquiv_comp I S
+  simp only [homMulEquiv_zeroLocusMulEquiv_comp, zeroLocus.coe_map_apply, Category.assoc,
+    homMulEquiv_specMap_comp]
 
 end Scheme
 
