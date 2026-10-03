@@ -50,8 +50,11 @@ whose target is `H²(Spec k(X)_ét, 𝔾ₘ) = Br(k(X))` by
 
 - `AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField`: the
   pullback of `𝔾ₘ` along the generic point is `𝔾ₘ`. The proof is `sorry`.
+- `AlgebraicGeometry.Scheme.mono_toGenericGm`: the unit `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is a monomorphism.
+- `AlgebraicGeometry.Scheme.nonempty_cokernel_toGenericGm_iso`: its cokernel is
+  `⨁_{x ∈ X⁽¹⁾} i_{x*} ℤ`. The proof is `sorry`.
 - `AlgebraicGeometry.Scheme.exists_shortExact_divisorSequence`: the divisor sequence is short
-  exact. The proof is `sorry`.
+  exact, from the two previous statements.
 - `AlgebraicGeometry.Scheme.subsingleton_H_one_pointConstantInt`: `H¹(X, i_{x*} ℤ) = 0`.
 - `AlgebraicGeometry.Scheme.epi_lowerStar_map_cokernelπ_upperStar_gmSheaf`: `R¹i_* 𝔾ₘ = 0`
   along the generic point. The proof is `sorry`.
@@ -128,6 +131,58 @@ noncomputable def pointConstantInt (x : X) : Sheaf X.smallEtaleTopology AddCommG
   (Etale.lowerStar AddCommGrpCat.{u + 1} (X.fromSpecResidueField x)).obj
     ((constantSheaf _ AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))
 
+/-- The first map of the divisor sequence is injective: `𝔾ₘ ⟶ i_* 𝔾ₘ` along the generic point
+`i : Spec k(X) ⟶ X` is a monomorphism. On an étale `X`-scheme `U` it is the map on units
+`Γ(U, 𝒪)ˣ ⟶ Γ(U ×_X Spec k(X), 𝒪)ˣ` induced by restriction to the generic fibre, which is
+injective because `U` is flat over the integral scheme `X`
+(`AlgebraicGeometry.Scheme.injective_Γ_map_pullback_fst_fromSpecFunctionField`).
+This is the injectivity `A^× ⟶ (S⁻¹A)^×` in the proof of `lem-sc-divisor-sequence-general`,
+proved on sections rather than on stalks. -/
+theorem mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField :
+    Mono (gmSheafToLowerStarGmSheaf X.fromSpecFunctionField) := by
+  refine Sheaf.Hom.mono_of_presheaf_mono _ _ _ (h := ?_)
+  suffices ∀ V, Mono ((gmSheafToLowerStarGmSheaf X.fromSpecFunctionField).hom.app V) from
+    NatTrans.mono_of_mono_app _
+  intro V
+  rw [AddCommGrpCat.mono_iff_injective]
+  intro a b h
+  have hinj := X.injective_Γ_map_pullback_fst_fromSpecFunctionField V.unop.hom
+  exact ULift.ext _ _ (Units.ext (hinj (congrArg (fun x ↦ (Additive.toMul x.down).val) h)))
+
+/-- **The unit `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is a monomorphism**, the left exactness of the divisor
+sequence. Composed with `i_*` of the comparison map `i^* 𝔾ₘ ⟶ 𝔾ₘ` it is the restriction map
+`𝔾ₘ ⟶ i_* 𝔾ₘ` to the generic fibre, which is a monomorphism by
+`AlgebraicGeometry.Scheme.mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField`.
+(blueprint: `lem-sc-divisor-sequence-general`, injectivity) -/
+theorem mono_toGenericGm : Mono X.toGenericGm := by
+  have h := X.mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField
+  have e : X.toGenericGm ≫ (Etale.lowerStar _ _).map
+      (upperStarGmSheafToGmSheaf X.fromSpecFunctionField) =
+      gmSheafToLowerStarGmSheaf X.fromSpecFunctionField := by
+    simp [toGenericGm, upperStarGmSheafToGmSheaf, Adjunction.homEquiv_counit]
+  rw [← e] at h
+  exact mono_of_mono _ ((Etale.lowerStar _ _).map (upperStarGmSheafToGmSheaf _))
+
+/-- **The cokernel of `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is the sheaf of Weil divisors.** Let `X` be an
+integral regular locally noetherian scheme with generic point `i : Spec k(X) ⟶ X`. Then the
+cokernel of the unit `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is isomorphic to `⨁_{x ∈ X⁽¹⁾} i_{x*} ℤ`, the vertex
+of any colimit cocone `c` on the family `x ↦ i_{x*} ℤ`; the isomorphism is induced by the
+divisor map `f ↦ ∑_x ord_x(f) [x]`. This is exactness in the middle and on the right of the
+divisor sequence.
+
+On the stalk at a geometric point over `x`, with `A = 𝒪^{sh}_{X,x̄}` and `S = 𝒪_{X,x} ∖ {0}`,
+the claim is that `(S⁻¹A)^× / A^× ⟶ ⨁_𝔮 ℤ`, over the height-one primes `𝔮` of `A` meeting
+`S`, is bijective. Injectivity is algebraic Hartogs for the noetherian normal domain `A`,
+surjectivity uses that the regular local ring `A` is a UFD (Auslander–Buchsbaum). The proof is
+`sorry`: it needs the stalks of étale sheaves at geometric points as strict henselisations,
+regularity of strict henselisations and the factoriality of regular local rings, none of
+which is available.
+(blueprint: `lem-sc-divisor-sequence-general`, exactness in the middle and surjectivity) -/
+theorem nonempty_cokernel_toGenericGm_iso [IsLocallyNoetherian X] [IsRegular X]
+    (c : Cofan fun x : {x : X // coheight x = 1} ↦ X.pointConstantInt x.1) (hc : IsColimit c) :
+    Nonempty (cokernel X.toGenericGm ≅ c.pt) :=
+  sorry
+
 /-- **The divisor sequence.** Let `X` be an integral regular locally noetherian scheme with
 generic point `i : Spec k(X) ⟶ X`, and let `X⁽¹⁾` be its set of coheight-one points. Then
 there is a divisor map `div` making
@@ -140,13 +195,19 @@ a short exact sequence of étale sheaves on `X`, where the third term is the ver
 colimit cocone `c` on the family `x ↦ i_{x*} ℤ`. The first map is pinned down as the unit
 `AlgebraicGeometry.Scheme.toGenericGm`, which is the form the residue argument of
 `AlgebraicGeometry.Scheme.injective_cohomologyMap_gmSheaf_two` uses; `div` itself is only
-asserted to exist, see the TODO in the module docstring. The proof is `sorry`.
+asserted to exist, see the TODO in the module docstring. The unit is a monomorphism by
+`AlgebraicGeometry.Scheme.mono_toGenericGm`, and its cokernel is `c.pt` by
+`AlgebraicGeometry.Scheme.nonempty_cokernel_toGenericGm_iso`.
 (blueprint: `lem-sc-divisor-sequence-general`) -/
 theorem exists_shortExact_divisorSequence [IsLocallyNoetherian X] [IsRegular X]
     (c : Cofan fun x : {x : X // coheight x = 1} ↦ X.pointConstantInt x.1) (hc : IsColimit c) :
     ∃ (d : X.genericGm ⟶ c.pt) (w : X.toGenericGm ≫ d = 0),
-      (ShortComplex.mk X.toGenericGm d w).ShortExact :=
-  sorry
+      (ShortComplex.mk X.toGenericGm d w).ShortExact := by
+  have := X.mono_toGenericGm
+  obtain ⟨e⟩ := X.nonempty_cokernel_toGenericGm_iso c hc
+  refine ⟨cokernel.π _ ≫ e.hom, by simp, { mono_f := this, epi_g := epi_comp _ _, exact := ?_ }⟩
+  exact ShortComplex.exact_of_g_is_cokernel _
+    (IsColimit.ofIsoColimit (cokernelIsCokernel _) (Cofork.ext e (by simp)))
 
 omit [IsIntegral X] in
 /-- **`H¹` of a point sheaf vanishes.** For a point `x` of `X`, `H¹(X, i_{x*} ℤ) = 0`: the edge

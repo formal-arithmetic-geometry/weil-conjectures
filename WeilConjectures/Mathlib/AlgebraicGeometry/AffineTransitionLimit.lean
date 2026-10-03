@@ -133,8 +133,9 @@ finite type of the kernel of `X ⟶ Y` (Tag 09ZP).
 A property `P` of quasi-compact quasi-separated schemes over a fixed quasi-compact
 quasi-separated base `T` — a predicate on morphisms `T' ⟶ T` — is *qcqs-local*
 (`AlgebraicGeometry.Scheme.IsQcqsLocalProperty`) if it is invariant under thickenings,
-compatible with cofiltered limits along affine transition morphisms, and propagates from a
-scheme to a quasi-compact open subscheme or to its closed complement. Such a property holds
+compatible with cofiltered limits along affine transition morphisms, propagates from a
+scheme to a quasi-compact open subscheme or to its closed complement, and fails for the empty
+scheme. Such a property holds
 for the spectrum of a field over `T` as soon as it holds for `T` itself
 (`AlgebraicGeometry.exists_spec_field_of_isQcqsLocalProperty`). Applied to the failure locus
 of a base-change map, this says that a minimal counterexample can be found over a point.
@@ -4544,7 +4545,8 @@ section MinimalCounterexample
 
 /-- A property `P` of quasi-compact quasi-separated schemes over a quasi-compact
 quasi-separated base `T`, that is, a predicate on morphisms `T' ⟶ T` with `T'` qcqs, is
-*qcqs-local* when it satisfies the three stability conditions of Stacks `0F06`. -/
+*qcqs-local* when it satisfies the three stability conditions of Stacks `0F06` and fails for
+the empty scheme. -/
 structure Scheme.IsQcqsLocalProperty (T : Scheme.{u})
     (P : ⦃T' : Scheme.{u}⦄ → (T' ⟶ T) → Prop) : Prop where
   /-- `P` is invariant under thickenings: if `i : T₁ ⟶ T₂` is a closed immersion which is
@@ -4569,6 +4571,8 @@ structure Scheme.IsQcqsLocalProperty (T : Scheme.{u})
     [QuasiSeparatedSpace T'] (f : T' ⟶ T) (V : T'.Opens), IsCompact (V : Set T') →
     ∀ (i : Z ⟶ T') [IsClosedImmersion i], Set.range i.base = (V : Set T')ᶜ →
     P f → P (V.ι ≫ f) ∨ P (i ≫ f)
+  /-- `P` fails for the empty scheme. -/
+  not_of_isEmpty : ∀ {T' : Scheme.{u}} (f : T' ⟶ T), IsEmpty T' → ¬ P f
 
 /-- **Minimal counterexamples occur over a point.** A qcqs-local property `P` of
 quasi-compact quasi-separated schemes over a quasi-compact quasi-separated base `T` which

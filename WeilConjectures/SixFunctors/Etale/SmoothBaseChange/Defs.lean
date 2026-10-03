@@ -68,6 +68,8 @@ third, is `AlgebraicGeometry.Etale.baseChangeHomologyMap_naturality`.
 - `AlgebraicGeometry.Etale.baseChangeHomologyNatTrans` and
   `AlgebraicGeometry.Etale.baseChangeHomologyMap`: the degree-`q` base-change map.
 - `AlgebraicGeometry.Etale.BaseChangeProperty`: the recorded property `BC(p, Λ, q)`.
+- `AlgebraicGeometry.Etale.UniversalBaseChangeProperty`: `BC(p, Λ, q)` for every base change
+  of `p`.
 
 ## References
 
@@ -190,5 +192,26 @@ def Etale.BaseChangeProperty (p : X ⟶ S) (q : ℤ) : Prop :=
     [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
     IsIso (Etale.baseChangeHomologyMap Λ sq q F)
+
+/-- The base-change property `BC(p, Λ, q)` holds *universally* when it holds for every base
+change `p' : X' ⟶ S'` of `p` along a morphism `a : S' ⟶ S`. This is the form of the property
+in which the blueprint subsection `sk-def-bc` states it. -/
+def Etale.UniversalBaseChangeProperty (p : X ⟶ S) (q : ℤ) : Prop :=
+  ∀ ⦃S' X' : Scheme.{u}⦄ (a : S' ⟶ S) (b : X' ⟶ X) (p' : X' ⟶ S'),
+    IsPullback b p' p a → Etale.BaseChangeProperty Λ p' q
+
+variable {Λ} {p : X ⟶ S} {q : ℤ}
+
+lemma Etale.UniversalBaseChangeProperty.baseChangeProperty
+    (h : Etale.UniversalBaseChangeProperty Λ p q) : Etale.BaseChangeProperty Λ p q :=
+  h (𝟙 S) (𝟙 X) p (IsPullback.id_horiz p)
+
+/-- A base change of a morphism satisfying the base-change property universally satisfies it
+universally. -/
+lemma Etale.UniversalBaseChangeProperty.of_isPullback
+    (h : Etale.UniversalBaseChangeProperty Λ p q) {S' X' : Scheme.{u}} {a : S' ⟶ S}
+    {b : X' ⟶ X} {p' : X' ⟶ S'} (hp : IsPullback b p' p a) :
+    Etale.UniversalBaseChangeProperty Λ p' q :=
+  fun _ _ a' b' p'' hp' ↦ h (a' ≫ a) (b' ≫ b) p'' (hp'.paste_horiz hp)
 
 end AlgebraicGeometry

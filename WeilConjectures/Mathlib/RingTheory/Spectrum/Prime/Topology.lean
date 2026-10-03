@@ -17,6 +17,9 @@ form is `AlgebraicGeometry.exists_specializes_of_mem_closure_range`.
 
 `PrimeSpectrum.mem_genericPoints_iff`: the generic points of the irreducible components of
 `Spec R` are the minimal primes of `R`.
+
+`PrimeSpectrum.isDomain_of_irreducibleSpace`: a reduced ring with irreducible spectrum is a
+domain.
 -/
 
 @[expose] public section
@@ -44,5 +47,13 @@ theorem mem_genericPoints_iff {p : PrimeSpectrum R} :
     p ∈ genericPoints (PrimeSpectrum R) ↔ p.asIdeal ∈ minimalPrimes R := by
   change closure ({p} : Set (PrimeSpectrum R)) ∈ irreducibleComponents (PrimeSpectrum R) ↔ _
   rw [closure_singleton, zeroLocus_ideal_mem_irreducibleComponents, p.2.radical]
+
+/-- A reduced ring whose spectrum is irreducible is a domain: the nilradical `⊥` is prime.
+(blueprint: `lem-wf-affine-dimension-drop`, first claim) -/
+theorem isDomain_of_irreducibleSpace (R : Type*) [CommRing R] [IsReduced R]
+    [IrreducibleSpace (PrimeSpectrum R)] : IsDomain R := by
+  have := irreducibleSpace_iff_isPrime_nilradical.mp ‹_›
+  rw [nilradical_eq_zero] at this
+  exact IsDomain.of_bot_isPrime R
 
 end PrimeSpectrum

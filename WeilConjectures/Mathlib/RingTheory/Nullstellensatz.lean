@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.Nullstellensatz
+public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 
 /-!
 # The Nullstellensatz for finitely generated algebras
@@ -18,10 +19,20 @@ field `k`; and an element of `A` vanishing at every `k`-point is nilpotent.
 
 - `exists_algHom_ker_eq_of_isMaximal`: maximal ideals are kernels of `k`-points.
 - `iInf_ker_algHom_eq_nilradical`: the vanishing principle.
+- `eq_zero_of_forall_algHom_apply_eq_zero`: the vanishing principle on a reduced algebra.
+- `existsUnique_comp_mkₐ_eq_of_forall_algHom`: a regular map sending `k`-points into a closed
+  subvariety factors through it.
+- `Algebra.TensorProduct.eq_zero_of_forall_lift_algHom_eq_zero`: the vanishing principle on a
+  product of affine varieties.
 
 ## Blueprint
 
 - `sk-i-geometry`: the Nullstellensatz and the vanishing principle.
+- `lem-wf-affine-nullstellensatz-vanishing`: residue fields of closed points and the vanishing
+  principle.
+- `lem-wf-affine-product-reduced`: the vanishing principle on a product of reduced affine
+  varieties. Its reducedness clause holds over any perfect field, see
+  `isReduced_tensorProduct_of_perfectField`.
 -/
 
 @[expose] public section
@@ -53,3 +64,56 @@ theorem iInf_ker_algHom_eq_nilradical :
     obtain ⟨φ, rfl⟩ := exists_algHom_ker_eq_of_isMaximal k A 𝔪
     exact iInf_le _ φ
   · exact le_iInf fun φ ↦ @nilradical_le_prime _ _ _ (RingHom.ker_isPrime φ)
+
+/-- Blueprint `lem-wf-affine-nullstellensatz-vanishing`, clause (2) (the vanishing principle): over
+an algebraically closed field `k`, an element of a reduced finitely generated `k`-algebra vanishing
+at every `k`-point is zero.
+
+By `iInf_ker_algHom_eq_nilradical` such an element is nilpotent, hence zero. Clause (1), that the
+closed points are the `k`-points, is `exists_algHom_ker_eq_of_isMaximal`. -/
+theorem eq_zero_of_forall_algHom_apply_eq_zero [IsReduced A] {a : A}
+    (h : ∀ φ : A →ₐ[k] k, φ a = 0) : a = 0 := by
+  have : a ∈ nilradical A := by
+    rw [← iInf_ker_algHom_eq_nilradical k A, Ideal.mem_iInf]
+    exact fun φ ↦ h φ
+  rwa [nilradical_eq_zero, Submodule.zero_eq_bot, Ideal.mem_bot] at this
+
+/-- Blueprint `lem-wf-affine-nullstellensatz-vanishing`, clause (3): let `f : B →ₐ[k] A` be the
+coordinate map of a regular map `X → Y` of affine varieties over an algebraically closed field `k`,
+with `A` reduced and finitely generated, and let `J` be an ideal of `B` (cutting out `Z ⊆ Y`). If
+every `k`-point of `X` maps into `Z`, i.e. `φ (f b) = 0` for every `k`-point `φ` of `X` and
+`b ∈ J`, then `f` factors uniquely through `B ⧸ J`.
+
+Each `f b` with `b ∈ J` vanishes at every `k`-point, so it is zero by the vanishing principle
+`eq_zero_of_forall_algHom_apply_eq_zero`; uniqueness holds as `B → B ⧸ J` is surjective. -/
+theorem existsUnique_comp_mkₐ_eq_of_forall_algHom {B : Type*} [CommRing B] [Algebra k B]
+    [IsReduced A] (f : B →ₐ[k] A) (J : Ideal B) (h : ∀ φ : A →ₐ[k] k, ∀ b ∈ J, φ (f b) = 0) :
+    ∃! g : B ⧸ J →ₐ[k] A, g.comp (Ideal.Quotient.mkₐ k J) = f := by
+  have hJ (b : B) (hb : b ∈ J) : f b = 0 :=
+    eq_zero_of_forall_algHom_apply_eq_zero k A fun φ ↦ h φ b hb
+  refine ⟨Ideal.Quotient.liftₐ J f hJ, by ext; simp, fun g hg ↦ ?_⟩
+  exact Ideal.Quotient.algHom_ext k (by rw [hg]; ext; simp)
+
+open TensorProduct in
+/-- Blueprint `lem-wf-affine-product-reduced`: let `A` and `B` be reduced finitely generated
+algebras over an algebraically closed field `k`, the coordinate algebras of affine varieties `X`
+and `Y`. The `k`-points of `X × Y = Spec (A ⊗[k] B)` are the pairs `(φ, ψ)` of `k`-points, and a
+function on `X × Y` vanishing at all of them is zero.
+
+Evaluating the first factor at a `k`-point `φ` of `X` sends `t` to a function on `Y`, which
+vanishes at every `k`-point of `Y` and hence is zero by the vanishing principle for `B`. As the
+evaluations at `k`-points of `X` are jointly injective on `A` (the vanishing principle for `A`),
+`t = 0` by `TensorProduct.eq_zero_of_forall_rTensor_eq_zero`. In particular `A ⊗[k] B` is reduced,
+which holds more generally over a perfect field (`isReduced_tensorProduct_of_perfectField`). -/
+theorem Algebra.TensorProduct.eq_zero_of_forall_lift_algHom_eq_zero (B : Type*) [CommRing B]
+    [Algebra k B] [Algebra.FiniteType k B] [IsReduced A] [IsReduced B] {t : A ⊗[k] B}
+    (h : ∀ (φ : A →ₐ[k] k) (ψ : B →ₐ[k] k), lift φ ψ (fun _ _ ↦ .all _ _) t = 0) : t = 0 := by
+  refine TensorProduct.eq_zero_of_forall_rTensor_eq_zero (fun φ : A →ₐ[k] k ↦ φ.toLinearMap)
+    (fun a ha ↦ eq_zero_of_forall_algHom_apply_eq_zero k A ha) fun φ ↦ ?_
+  have key (ψ : B →ₐ[k] k) (t : A ⊗[k] B) :
+      ψ (TensorProduct.lid k B (φ.toLinearMap.rTensor B t)) = lift φ ψ (fun _ _ ↦ .all _ _) t := by
+    induction t using TensorProduct.induction_on with
+    | zero => simp
+    | tmul a b => simp
+    | add x y hx hy => simp [hx, hy]
+  simpa using eq_zero_of_forall_algHom_apply_eq_zero k B fun ψ ↦ (key ψ t).trans (h φ ψ)
