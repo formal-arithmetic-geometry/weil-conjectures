@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.AlgebraicGeometry.Curve.Degree
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
@@ -27,10 +28,10 @@ The Picard group `Pic(C)` of isomorphism classes of invertible `𝒪_C`-modules 
 whose kernel `Pic⁰(C)` is the subject of the Jacobian.
 
 The sheaf `Ω¹_{C/K}` is `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`, from
-`WeilConjectures.AlgebraicGeometry.Modules.Differentials`. The pinned Mathlib has no coherent
-cohomology of an `𝒪_X`-module, so the degree map is declared here as an `opaque` constant: it
-depends genuinely on its arguments and introduces no `sorryAx`, but it satisfies no equations,
-so no statement about `picDegree` can be proved before it is replaced.
+`WeilConjectures.AlgebraicGeometry.Modules.Differentials`. The degree of an invertible module
+`L` is defined cohomologically, as `deg L = χ(L) - χ(𝒪_C)` (Stacks 0AYQ), through
+`AlgebraicGeometry.Scheme.Modules.degree`; its description through divisors is to be a
+theorem.
 
 ## Main definitions
 
@@ -39,8 +40,8 @@ so no statement about `picDegree` can be proved before it is replaced.
 - `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`: the sheaf `Ω¹_{X/S}` of relative
   differentials (see `WeilConjectures.AlgebraicGeometry.Modules.Differentials`).
 - `AlgebraicGeometry.Scheme.Hom.genus`: the genus `dim_K Γ(C, Ω¹_{C/K})` of a curve.
-- `AlgebraicGeometry.Scheme.Hom.picDegree`: the degree of an invertible module on a curve
-  (placeholder).
+- `AlgebraicGeometry.Scheme.Hom.picDegree`: the degree `χ(L) - χ(𝒪_C)` of an invertible module
+  on a curve.
 - `AlgebraicGeometry.Scheme.Hom.picZero`: the degree-zero part `Pic⁰(C)` of the Picard group.
 -/
 
@@ -81,15 +82,17 @@ noncomputable def Scheme.Hom.genus (f : C ⟶ Spec (.of K)) : ℕ :=
   letI : Module K Γ(f.relativeDifferentials, ⊤) := Module.compHom _ (algebraMap K Γ(C, ⊤))
   Module.finrank K Γ(f.relativeDifferentials, ⊤)
 
-/-- The degree of an invertible module on a curve.
+/-- The degree `deg L = χ(L) - χ(𝒪_C)` of an invertible module on a curve `C` over `K`
+(Stacks 0AYQ), where `χ` is the Euler characteristic
+`AlgebraicGeometry.Scheme.Modules.eulerChar` over `K`; this is
+`AlgebraicGeometry.Scheme.Modules.degree` of a representative of the class `L`.
 
-On a smooth projective geometrically integral curve `C` over `K` the degree of an invertible
-module is the degree of any associated Weil divisor; equivalently it is determined by the
-Riemann-Roch formula `χ(L) = deg L + 1 - g`. Neither divisors on a scheme nor coherent
-cohomology are available in the pinned Mathlib, so this is an `opaque` placeholder; it
-satisfies no equations. -/
+On a smooth projective geometrically integral curve this is the degree of any associated Weil
+divisor, and the Riemann-Roch formula `χ(L) = deg L + 1 - g` holds. -/
 -- TODO(unify): sk-def-av-pic
-opaque Scheme.Hom.picDegree (f : C ⟶ Spec (.of K)) : C.Pic → ℤ := fun _ ↦ 0
+noncomputable def Scheme.Hom.picDegree (f : C ⟶ Spec (.of K)) : C.Pic → ℤ :=
+  letI : C.Over (Spec (.of K)) := ⟨f⟩
+  fun L ↦ Modules.degree K ((fromSkeleton C.Modules).obj L.val)
 
 /-- Blueprint `sk-def-av-pic`: Pic, degree, Pic⁰
 

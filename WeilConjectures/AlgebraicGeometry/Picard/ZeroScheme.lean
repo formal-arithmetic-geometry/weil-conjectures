@@ -29,8 +29,9 @@ This file states the last three steps of the representability of `F`:
 
 Neither a zero scheme `Z(s)` of a section of an invertible sheaf nor the notion of a *relative*
 effective Cartier divisor exists in Mathlib or in this project (the absolute notion does, as
-`AlgebraicGeometry.IsEffectiveCartierCenter`), and the tensor product of sheaves of modules is
-the `opaque` placeholder of `WeilConjectures/AlgebraicGeometry/Modules/Invertible.lean`.
+`AlgebraicGeometry.IsEffectiveCartierCenter`); the tensor product of sheaves of modules is the
+sheafified tensor product `AlgebraicGeometry.Scheme.Modules.tensorObj` of
+`WeilConjectures/AlgebraicGeometry/Modules/Invertible.lean`.
 Rather than invent two definitions whose blueprint home is elsewhere, the dictionary is stated
 as an existence statement: to `ℒ ∈ F(T)` is attached a quasi-coherent ideal sheaf `D` on `X_T`
 whose closed subscheme is an effective Cartier centre and which lies in the Hilbert functor

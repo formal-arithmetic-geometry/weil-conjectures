@@ -32,9 +32,9 @@ connected scheme, and the vanishing for `q ≥ 3` is
 
 ## TODO
 
-The genus is `AlgebraicGeometry.Scheme.Hom.genus`, which is defined through the `opaque`
-placeholder `AlgebraicGeometry.Scheme.Hom.cotangent`. So the `H¹` statement cannot be proved
-until the cotangent sheaf is a real definition.
+The genus is `AlgebraicGeometry.Scheme.Hom.genus`, the dimension of the global sections of the
+sheaf of relative differentials `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`. Proving
+the `H¹` statement needs the comparison of this genus with the étale cohomology of `C`.
 -/
 
 @[expose] public section
