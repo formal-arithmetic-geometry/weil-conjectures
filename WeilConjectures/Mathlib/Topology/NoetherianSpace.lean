@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Topology.NoetherianSpace
+public import Mathlib.Topology.Separation.Connected
 
 /-!
 # Connected components of a noetherian space
@@ -20,15 +21,6 @@ components, and each of them is open, being the complement of the finitely many 
 open Topology
 
 variable {α : Type*} [TopologicalSpace α]
-
-/-- The space of connected components of any topological space is `T₁`: the preimage of a
-point is a connected component, which is closed. -/
-instance ConnectedComponents.t1Space : T1Space (ConnectedComponents α) where
-  t1 c := by
-    obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe c
-    rw [← ConnectedComponents.isQuotientMap_coe.isClosed_preimage,
-      connectedComponents_preimage_singleton]
-    exact isClosed_connectedComponent
 
 namespace TopologicalSpace.NoetherianSpace
 

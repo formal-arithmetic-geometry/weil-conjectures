@@ -35,10 +35,10 @@ Riemann–Roch, stated in `WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.l
 - `AlgebraicGeometry.Scheme.Modules.degree_congr`: the degree only depends on the isomorphism
   class of the sheaf.
 - `AlgebraicGeometry.Scheme.Modules.degree_unit`: the structure sheaf has degree `0`.
-- `AlgebraicGeometry.Scheme.Modules.finrankH_eq_sum`: the cohomology of a finite disjoint union
-  of open subschemes is the direct sum of the cohomologies of the pieces.
-- `AlgebraicGeometry.Scheme.Modules.eulerChar_eq_sum`: the Euler characteristic is additive
-  over a finite disjoint union of open subschemes.
+- `AlgebraicGeometry.Scheme.Modules.finrankH_eq_sum_of_pairwise_disjoint`: the cohomology of a
+  finite disjoint union of open subschemes is the direct sum of the cohomologies of the pieces.
+- `AlgebraicGeometry.Scheme.Modules.eulerChar_eq_sum_of_pairwise_disjoint`: the Euler
+  characteristic is additive over a finite disjoint union of open subschemes.
 -/
 
 @[expose] public section
@@ -114,7 +114,7 @@ open subschemes `U i`, then `H^q(X, M) ≅ ⊕ᵢ H^q(U i, M|_{U i})`; in partic
 over `k` through `X`.
 
 This is used in the proof of blueprint `lem-sc-ample-positive-degree`. -/
-theorem finrankH_eq_sum {ι : Type*} [Fintype ι] (U : ι → X.Opens)
+theorem finrankH_eq_sum_of_pairwise_disjoint {ι : Type*} [Fintype ι] (U : ι → X.Opens)
     (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤) (M : X.Modules) (q : ℕ)
     [FiniteDimensional k (M.H q)] :
     M.finrankH k q = ∑ i,
@@ -145,7 +145,8 @@ theorem eulerChar_eq_sum_range [IsNoetherian X] (M : X.Modules) {n : ℕ}
 /-- **The Euler characteristic is additive over a finite disjoint union.** If a noetherian
 scheme `X` of finite dimension is the disjoint union of finitely many open subschemes `U i`,
 and the cohomology of `M` is finite-dimensional, then `χ(X, M) = ∑ᵢ χ(U i, M|_{U i})`. -/
-theorem eulerChar_eq_sum [IsNoetherian X] {n : ℕ} (hn : topologicalKrullDim X ≤ n) {ι : Type*}
+theorem eulerChar_eq_sum_of_pairwise_disjoint [IsNoetherian X] {n : ℕ}
+    (hn : topologicalKrullDim X ≤ n) {ι : Type*}
     [Fintype ι] (U : ι → X.Opens) (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤)
     (M : X.Modules) [∀ q, FiniteDimensional k (M.H q)] :
     M.eulerChar k = ∑ i,
@@ -155,7 +156,7 @@ theorem eulerChar_eq_sum [IsNoetherian X] {n : ℕ} (hn : topologicalKrullDim X 
   have (i : ι) : IsNoetherian (U i) :=
     { toCompactSpace := isCompact_iff_compactSpace.mp (NoetherianSpace.isCompact _) }
   rw [eulerChar_eq_sum_range k M hn]
-  simp_rw [finrankH_eq_sum k U hU hcover M, Nat.cast_sum, Finset.mul_sum]
+  simp_rw [finrankH_eq_sum_of_pairwise_disjoint k U hU hcover M, Nat.cast_sum, Finset.mul_sum]
   rw [Finset.sum_comm]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   rw [eulerChar_eq_sum_range k _ ((topologicalKrullDim_subspace_le X (U i)).trans hn)]

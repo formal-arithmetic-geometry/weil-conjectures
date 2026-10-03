@@ -49,8 +49,8 @@ leading coefficient whenever that function is a numerical polynomial of degree a
 - `AlgebraicGeometry.IsVeryAmple.isInvertible`: a very ample module is invertible.
 - `AlgebraicGeometry.Scheme.Modules.finiteDimensional_H`: the cohomology of an invertible module
   on a proper scheme over a field is finite-dimensional.
-- `AlgebraicGeometry.Scheme.Modules.degree_eq_sum`: the degree is additive over a finite disjoint
-  union of open subschemes.
+- `AlgebraicGeometry.Scheme.Modules.degree_eq_sum_of_pairwise_disjoint`: the degree is additive
+  over a finite disjoint union of open subschemes.
 - `AlgebraicGeometry.Scheme.Modules.degree_eq_zero_of_topologicalKrullDim_le_zero`: an
   invertible module on a connected noetherian scheme of dimension `0` has degree `0`.
 - `AlgebraicGeometry.IsAmple.pullback`: the restriction of an ample module to a closed subscheme
@@ -163,7 +163,8 @@ instance finiteDimensional_H [IsProper (X ↘ Spec (.of K))] (M : X.Modules) [M.
 /-- **The degree is additive over a finite disjoint union.** If a noetherian scheme `X` of
 finite dimension is the disjoint union of finitely many open subschemes `U i`, then
 `deg M = ∑ᵢ deg (M|_{U i})`, provided the cohomology of `M` and `𝒪_X` is finite-dimensional. -/
-theorem degree_eq_sum [IsNoetherian X] {n : ℕ} (hn : topologicalKrullDim X ≤ n) {ι : Type*}
+theorem degree_eq_sum_of_pairwise_disjoint [IsNoetherian X] {n : ℕ}
+    (hn : topologicalKrullDim X ≤ n) {ι : Type*}
     [Fintype ι] (U : ι → X.Opens) (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤)
     (M : X.Modules) [∀ q, FiniteDimensional K (M.H q)]
     [∀ q, FiniteDimensional K ((𝟙_ X.Modules).H q)] :
@@ -172,9 +173,9 @@ theorem degree_eq_sum [IsNoetherian X] {n : ℕ} (hn : topologicalKrullDim X ≤
       ((Scheme.Modules.pullback (U i).ι).obj M).degree K := by
   let (i : ι) : (U i).toScheme.Over (Spec (.of K)) := ⟨(U i).ι ≫ X ↘ Spec (.of K)⟩
   simp only [degree, Finset.sum_sub_distrib]
-  rw [eulerChar_eq_sum K hn U hU hcover M]
+  rw [eulerChar_eq_sum_of_pairwise_disjoint K hn U hU hcover M]
   congr 1
-  exact (eulerChar_eq_sum K hn U hU hcover (𝟙_ X.Modules)).trans
+  exact (eulerChar_eq_sum_of_pairwise_disjoint K hn U hU hcover (𝟙_ X.Modules)).trans
     (Finset.sum_congr rfl fun i _ ↦ eulerChar_congr K (pullbackObjUnitIso _))
 
 /-- On a connected locally noetherian `K`-scheme of dimension `0`, every invertible module has
@@ -221,10 +222,11 @@ disconnected) and `L` an ample invertible `𝒪_C`-module. Then `deg L > 0`.
 
 This is also blueprint `lem-sc-ample-positive-degree`. The proof decomposes `C` into its
 finitely many connected components `C_i`, which are open and closed. The degree is additive
-over them (`AlgebraicGeometry.Scheme.Modules.degree_eq_sum`); a component of dimension `0` is a
-single point, so contributes `0`; a component of dimension `1` contributes a positive degree by
-the connected case `AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace`, since
-`L|_{C_i}` is ample (`AlgebraicGeometry.IsAmple.pullback`). If all components had dimension `0`,
+over them (`AlgebraicGeometry.Scheme.Modules.degree_eq_sum_of_pairwise_disjoint`); a component
+of dimension `0` is a single point, so contributes `0`; a component of dimension `1` contributes
+a positive degree by the connected case
+`AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace`, since `L|_{C_i}` is
+ample (`AlgebraicGeometry.IsAmple.pullback`). If all components had dimension `0`,
 `C` would be discrete, so at least one has dimension `1`. -/
 theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)) [IsProper f]
     (hdim : topologicalKrullDim X = 1) (L : X.Modules) [L.IsInvertible] (hample : IsAmple f L) :
@@ -270,7 +272,7 @@ theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)
     · exact (hpos h).le
     · exact (Scheme.Modules.degree_eq_zero_of_topologicalKrullDim_le_zero K h _).ge
   rw [degree_eq_degree_of_topologicalKrullDim_eq_one f hdim,
-    Scheme.Modules.degree_eq_sum K hdim.le U hU hcover L]
+    Scheme.Modules.degree_eq_sum_of_pairwise_disjoint K hdim.le U hU hcover L]
   refine Finset.sum_pos' (fun c _ ↦ (hdeg c).1) ?_
   -- Some component has dimension `1`: otherwise every component is discrete, hence so is `X`.
   by_contra! h
