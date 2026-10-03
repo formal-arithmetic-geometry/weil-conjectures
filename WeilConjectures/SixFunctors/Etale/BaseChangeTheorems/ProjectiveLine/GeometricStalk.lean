@@ -10,6 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+public import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
+public import Mathlib.RingTheory.KrullDimension.Polynomial
 
 /-!
 # The exchange morphism of the projective line at a geometric point
@@ -58,6 +62,100 @@ vanish, this is the injective acyclicity of `p`
 universe u
 
 open CategoryTheory Limits
+
+section Auxiliary
+
+/-! ### Auxiliary lemmas -/
+
+open Topology TopologicalSpace Order
+
+attribute [local instance] specializationOrder in
+/-- In a quasi-sober `T₀` space, the coheight of a point for the specialization order is at
+most the topological Krull dimension. -/
+theorem coheight_le_topologicalKrullDim {X : Type*} [TopologicalSpace X] [QuasiSober X]
+    [T0Space X] (x : X) : (coheight x : WithBot ℕ∞) ≤ topologicalKrullDim X := by
+  rw [← coheight_orderIso irreducibleSetEquivPoints.symm]
+  exact coheight_le_krullDim _
+
+attribute [local instance] specializationOrder in
+/-- The topological Krull dimension of a quasi-sober `T₀` space is bounded by any common
+bound on the dimensions of the members of an open cover. -/
+theorem topologicalKrullDim_le_of_iSup_eq_top {X : Type*} [TopologicalSpace X] [QuasiSober X]
+    [T0Space X] {ι : Type*} (U : ι → Opens X) (hU : ⨆ i, U i = ⊤) (n : WithBot ℕ∞)
+    (h : ∀ i, topologicalKrullDim (U i) ≤ n) : topologicalKrullDim X ≤ n := by
+  rw [topologicalKrullDim, krullDim_eq_iSup_coheight]
+  refine iSup_le fun Z ↦ ?_
+  obtain ⟨i, hi⟩ := Opens.mem_iSup.mp (hU.ge (Set.mem_univ (irreducibleSetEquivPoints Z)))
+  have := (U i).isOpenEmbedding'.quasiSober
+  rw [← coheight_orderIso irreducibleSetEquivPoints Z]
+  exact (congrArg _ ((U i).isOpenEmbedding'.coheight_eq (x := (⟨_, hi⟩ : U i)))).trans_le
+    ((coheight_le_topologicalKrullDim _).trans (h i))
+
+/-- For an additive functor `F` out of an abelian category with enough injectives and an
+injective object `I`, the higher right derived functors of `F` vanish on `I`: the degree-`q`
+homology of `R⁺F(I[0])` is zero for `q ≠ 0`. -/
+theorem CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_singleFunctor
+    {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]
+    (F : C ⥤ D) [F.Additive] (I : C) [Injective I] {q : ℤ} (hq : q ≠ 0) :
+    IsZero ((DerivedCategory.Plus.homologyFunctor D q).obj
+      (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor C 0).obj I))) := by
+  let K : CochainComplex.Plus C := ⟨(CochainComplex.singleFunctor C 0).obj I, ⟨0, inferInstance⟩⟩
+  have (n : ℤ) : Injective (((HomotopyCategory.Plus.quotient C).obj K).obj.as.X n) := by
+    by_cases hn : n = 0
+    · subst hn
+      exact Injective.of_iso (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 I).symm
+        inferInstance
+    · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hn).injective
+  refine IsZero.of_iso ?_ ((DerivedCategory.Plus.homologyFunctor D q).mapIso
+    (asIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj K))).symm)
+  refine IsZero.of_iso ?_ ((DerivedCategory.homologyFunctorFactorsh D q).app _)
+  refine IsZero.of_iso ?_ ((HomotopyCategory.homologyFunctorFactors D _ q).app _)
+  refine ShortComplex.isZero_homology_of_isZero_X₂ _ ?_
+  exact Functor.map_isZero F (HomologicalComplex.isZero_single_obj_X _ _ _ _ hq)
+
+namespace AlgebraicGeometry
+
+open Scheme Etale
+
+/-- The projective line over a field has dimension at most one: it is covered by two
+affine lines, each the spectrum of a polynomial ring in one variable. -/
+theorem topologicalKrullDim_projectiveLine_le_one (k : Type u) [Field k] :
+    topologicalKrullDim (ProjectiveLine (Spec (.of k))) ≤ 1 := by
+  refine topologicalKrullDim_le_of_iSup_eq_top _ (ProjectiveSpace.iSup_standardOpen _ _) _
+    fun i ↦ ?_
+  refine (IsHomeomorph.topologicalKrullDim_eq _ (ProjectiveSpace.standardOpenIso _ _ i ≪≫
+    AffineSpace.SpecIso _ _).hom.homeomorph.isHomeomorph).trans_le ?_
+  refine (PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim _).trans_le ?_
+  rw [MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field]
+  simp [Nat.card_eq_fintype_card, Fintype.card_subtype_compl]
+
+/-- The projective line over a field is a curve. -/
+instance isCurve_projectiveLine (k : Type u) [Field k] :
+    IsCurve (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) where
+  krullDim_le_one := topologicalKrullDim_projectiveLine_le_one k
+
+/-- The pullback of a torsion sheaf of `Λ`-modules is torsion: the stalk of `f^* F` at a
+geometric point `s` is the stalk of `F` at `s ≫ f`. -/
+instance isTorsionSheaf_upperStar {Λ : Type (u + 1)} [CommRing Λ] {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf F] :
+    IsTorsionSheaf ((f)^*[ModuleCat.{u + 1} Λ].obj F) where
+  isTorsion_sheafFiber Ω _ _ s :=
+    IsAddTorsion.of_surjective
+      (f := ((Etale.upperStarCompSheafFiberIso _ f s).app F).toLinearEquiv.symm.toAddMonoidHom)
+      (LinearEquiv.surjective _) (IsTorsionSheaf.isTorsion_sheafFiber Ω (s ≫ f))
+
+/-- The geometric point `Spec κ(x)‾ ⟶ X` given by the algebraic closure of the residue field
+is `Spec` of the inclusion `κ(x) ⟶ κ(x)‾` followed by the canonical map. -/
+lemma Scheme.algClosurePoint_eq (X : Scheme.{u}) (x : X) :
+    X.algClosurePoint x =
+      Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) _)) ≫
+        X.fromSpecResidueField x :=
+  rfl
+
+end AlgebraicGeometry
+
+end Auxiliary
 
 namespace AlgebraicGeometry
 
@@ -141,7 +239,28 @@ theorem Etale.isIso_baseChangeHomologyMap_projectiveLine
     (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)
     (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsTorsionSheaf F] (q : ℕ) :
-    IsIso (Etale.baseChangeHomologyMap Λ sq q F) :=
+    IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
+  refine Scheme.isIso_of_isIso_sheafFiber_map _ fun t ↦ ?_
+  rw [uliftPointSmallEtale, NatIso.isIso_map_iff ((pointSmallEtale _).uliftSheafFiberIso _)]
+  let κs := S.residueField (g.base t)
+  let κt := T.residueField t
+  let : Algebra κs (AlgebraicClosure κt) :=
+    ((algebraMap κt (AlgebraicClosure κt)).comp (g.residueFieldMap t).hom).toAlgebra
+  let ψ : AlgebraicClosure κs →ₐ[κs] AlgebraicClosure κt := IsAlgClosed.lift
+  let ι : Spec (.of (AlgebraicClosure κt)) ⟶ Spec (.of (AlgebraicClosure κs)) :=
+    Spec.map (CommRingCat.ofHom ψ.toRingHom)
+  have hι : ι ≫ S.algClosurePoint (g.base t) = T.algClosurePoint t ≫ g := by
+    sorry
+  obtain ⟨e₁, e₂, h⟩ := Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
+    Λ sq (S.algClosurePoint (g.base t)) (T.algClosurePoint t) ι hι
+    ⟨g.base t, CommRingCat.ofHom (algebraMap κs (AlgebraicClosure κs)),
+      Algebra.IsIntegral.isIntegral (R := κs), rfl⟩
+    ⟨t, CommRingCat.ofHom (algebraMap κt (AlgebraicClosure κt)),
+      Algebra.IsIntegral.isIntegral (R := κt), rfl⟩ F q
+  have hb := IsCurve.bijective_cohomologyMap_of_isSepClosed Λ _
+    (ProjectiveSpace.isPullback_map _ ι)
+    ((ProjectiveSpace.map _ (S.algClosurePoint (g.base t)))^*[ModuleCat.{u + 1} Λ].obj F) q
+  rw [ConcreteCategory.isIso_iff_bijective]
   sorry
 
 /-- **Injective acyclicity of the projective line**: for every scheme `S`, the projection
