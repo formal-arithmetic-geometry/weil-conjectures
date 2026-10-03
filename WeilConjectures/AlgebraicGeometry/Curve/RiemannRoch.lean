@@ -33,8 +33,9 @@ the base change `X_K` of `X` along a field extension `K/k` that the Picard frame
 
 Riemann–Roch in the form `χ(𝒪_X) = 1 - g` needs `H⁰(X, 𝒪_X) = k`
 (`AlgebraicGeometry.Scheme.GlobalSectionsBijective`): `ℙ¹_ℂ` viewed as a curve over `ℝ` is
-smooth and proper of genus `0`, but `χ(𝒪) = dim_ℝ ℂ = 2 ≠ 1 - 0`. The statements about the
-degree of divisors, ampleness and Serre duality do not need it.
+smooth and proper of genus `0`, but `χ(𝒪) = dim_ℝ ℂ = 2 ≠ 1 - 0`. Ampleness of line bundles of
+positive degree needs it too: on `X = ℙ¹ ⊔ ℙ¹` the line bundle `𝒪(2) ⊔ 𝒪(-1)` has degree `1` but
+is not ample. The statements about the degree of divisors and Serre duality do not need it.
 
 The degree of a line bundle is *defined* cohomologically, as `deg ℒ = χ(ℒ) - χ(𝒪_X)`. Its
 identification with the divisor degree is stated in three parts. An effective Cartier divisor
@@ -145,10 +146,11 @@ theorem Modules.exists_tensorObj_dual_toModules_iso (ℒ : X.Modules) [ℒ.IsInv
   sorry
 
 /-- **Positive degree implies ample.** An invertible sheaf of positive degree on a smooth
-proper curve over `k` is ample.
+proper curve over `k` with `H⁰(X, 𝒪_X) = k` is ample.
 
 (blueprint: `sk-thm-picard-rr`, part (G)) -/
-theorem isAmple_of_degree_pos (ℒ : X.Modules) [ℒ.IsInvertible] (hd : 0 < ℒ.degree k) :
+theorem isAmple_of_degree_pos [GlobalSectionsBijective k X] (ℒ : X.Modules) [ℒ.IsInvertible]
+    (hd : 0 < ℒ.degree k) :
     IsAmple (X ↘ Spec (.of k)) ℒ :=
   sorry
 
