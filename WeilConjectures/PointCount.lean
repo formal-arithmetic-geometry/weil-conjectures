@@ -160,7 +160,7 @@ theorem Hom.bijective_residueFieldAlgebraMap_of_comp_eq_id (f : X.Hom (Spec (.of
     rw [Hom.residueFieldAlgebraMap, CommRingCat.hom_comp, CommRingCat.hom_comp,
       RingHom.coe_comp, RingHom.coe_comp]
     refine Function.Surjective.comp (Function.Surjective.comp ?_ ?_) ?_
-    · exact fun y ↦ ⟨y, by simp; rfl⟩
+    · exact fun y ↦ ⟨y, by simp⟩
     · exact fun y ↦ ⟨(Spec.residueFieldIso _ _).hom.hom y, by
         rw [← CommRingCat.comp_apply, Iso.hom_inv_id, CommRingCat.id_apply]⟩
     · exact (@Ideal.algEquivResidueFieldOfField _ _ _ (PrimeSpectrum.isPrime _)).surjective

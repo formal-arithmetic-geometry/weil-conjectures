@@ -106,8 +106,9 @@ theorem Equiv.hasEigenvalue {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) {α
     (hα : M.frobeniusEnd.HasEigenvalue α) : N.frobeniusEnd.HasEigenvalue α := by
   obtain ⟨x, hx⟩ := hα.exists_hasEigenvector
   rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff] at hx
-  refine Module.End.hasEigenvalue_of_hasEigenvector
-    (Module.End.hasEigenvector_iff.2 ⟨Module.End.mem_eigenspace_iff.2 ?_, ?_⟩)
+  refine Module.End.hasEigenvalue_of_hasEigenvector (x := e.toLinearEquiv x) ?_
+  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff]
+  refine ⟨?_, ?_⟩
   · change N.frobenius (e.toLinearEquiv x) = α • e.toLinearEquiv x
     rw [← e.map_frobenius, ← map_smul]
     exact congrArg e.toLinearEquiv hx.1
