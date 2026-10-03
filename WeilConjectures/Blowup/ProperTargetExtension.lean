@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.Blowup.Density
 public import WeilConjectures.Blowup.PartialSectionExtension
 public import WeilConjectures.Blowup.QuasiDomination
 
@@ -52,7 +53,7 @@ The two inputs are:
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
@@ -78,6 +79,28 @@ theorem exists_admissibleBlowup_extend_of_isProper {S X Y : Scheme.{u}} [Compact
     (hf : f ≫ y = U.ι ≫ x) :
     ∃ (B : IsAdmissible X U) (g : B.I.blowup ⟶ Y), g ≫ y = B.I.blowupMap ≫ x ∧
       (B.I.blowupMap ⁻¹ᵁ U).ι ≫ g = (B.I.blowupMap ∣_ U) ≫ f := by
-  sorry
+  -- Conrad's reduction `Y ⇝ Y ×ₛ X`: `f` becomes a section of `p := pullback.snd y x`.
+  have : CompactSpace (pullback y x : Scheme.{u}) :=
+    QuasiCompact.compactSpace_of_compactSpace (pullback.snd y x)
+  have : QuasiSeparatedSpace (pullback y x : Scheme.{u}) :=
+    quasiSeparatedSpace_of_quasiSeparated (pullback.snd y x)
+  obtain ⟨B, W, hUW, g, hg, hgU, hcl⟩ :=
+    exists_admissibleBlowup_extend_section hU hUdense (p := pullback.snd y x)
+      (pullback.lift f U.ι hf) (pullback.lift_snd _ _ _)
+  -- The extension is a quasi-domination of `X'` over `Y ×ₛ X`, hence defined everywhere.
+  let q : QuasiDomination B.I.blowupMap (pullback.snd y x) :=
+    { U := W
+      dense_coe := (B.dense_coe_preimage_blowupMap hUdense).mono hUW
+      hom := g
+      comm := hg
+      isClosed_range_lift := hcl }
+  have hW : W = ⊤ := q.U_eq_top
+  let j : B.I.blowup ⟶ W.toScheme := B.I.blowup.topIso.inv ≫ B.I.blowup.homOfLE hW.ge
+  have hj : j ≫ W.ι = 𝟙 _ := by simp [j]
+  refine ⟨B, j ≫ g ≫ pullback.fst y x, ?_, ?_⟩
+  · simp only [Category.assoc, pullback.condition, reassoc_of% hg, reassoc_of% hj]
+  · have hUj : (B.I.blowupMap ⁻¹ᵁ U).ι ≫ j = B.I.blowup.homOfLE hUW := by
+      rw [← cancel_mono W.ι, Category.assoc, hj, Category.comp_id, Scheme.homOfLE_ι]
+    rw [reassoc_of% hUj, reassoc_of% hgU, pullback.lift_fst]
 
 end AlgebraicGeometry

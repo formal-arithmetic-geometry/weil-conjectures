@@ -32,6 +32,8 @@ Riemann–Roch, stated in `WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.l
 - `AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`: Grothendieck
   vanishing, which makes the `finsum` defining the Euler characteristic a finite sum on a
   noetherian scheme of finite dimension.
+- `AlgebraicGeometry.Scheme.arithmeticGenus_pullback`: the arithmetic genus is invariant under
+  base change along a field extension.
 - `AlgebraicGeometry.Scheme.Modules.degree_congr`: the degree only depends on the isomorphism
   class of the sheaf.
 - `AlgebraicGeometry.Scheme.Modules.degree_unit`: the structure sheaf has degree `0`.
@@ -73,6 +75,20 @@ noncomputable def arithmeticGenus : ℕ :=
   Modules.finrankH (X := X) k (SheafOfModules.unit X.ringCatSheaf) 1
 
 end Defs
+
+/-- **The genus is invariant under base change.** Let `X` be a quasi-compact quasi-separated
+scheme over a field `k` and let `K/k` be a field extension. Then the base change
+`X_K = X ×_{Spec k} Spec K` has `dim_K H¹(X_K, 𝒪_{X_K}) = dim_k H¹(X, 𝒪_X)`: by flat base change
+`H¹(X_K, 𝒪_{X_K}) ≅ H¹(X, 𝒪_X) ⊗_k K` (Stacks 02KH).
+
+(blueprint: `lem-pc-genus-base-change`) -/
+theorem arithmeticGenus_pullback {k : Type u} [Field k] {X : Scheme.{u}}
+    [X.Over (Spec (.of k))] (K : Type u) [Field K] [Algebra k K]
+    [QuasiCompact (X ↘ Spec (.of k))] [QuasiSeparated (X ↘ Spec (.of k))] :
+    arithmeticGenus K
+        (Limits.pullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))) =
+      arithmeticGenus k X :=
+  sorry
 
 section Degree
 
