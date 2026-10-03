@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.Nullstellensatz
+public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 
 /-!
 # The Nullstellensatz for finitely generated algebras
@@ -21,12 +22,17 @@ field `k`; and an element of `A` vanishing at every `k`-point is nilpotent.
 - `eq_zero_of_forall_algHom_apply_eq_zero`: the vanishing principle on a reduced algebra.
 - `existsUnique_comp_mkₐ_eq_of_forall_algHom`: a regular map sending `k`-points into a closed
   subvariety factors through it.
+- `Algebra.TensorProduct.eq_zero_of_forall_lift_algHom_eq_zero`: the vanishing principle on a
+  product of affine varieties.
 
 ## Blueprint
 
 - `sk-i-geometry`: the Nullstellensatz and the vanishing principle.
 - `lem-wf-affine-nullstellensatz-vanishing`: residue fields of closed points and the vanishing
   principle.
+- `lem-wf-affine-product-reduced`: the vanishing principle on a product of reduced affine
+  varieties. Its reducedness clause holds over any perfect field, see
+  `isReduced_tensorProduct_of_perfectField`.
 -/
 
 @[expose] public section
@@ -87,3 +93,27 @@ theorem existsUnique_comp_mkₐ_eq_of_forall_algHom {B : Type*} [CommRing B] [Al
     eq_zero_of_forall_algHom_apply_eq_zero k A fun φ ↦ h φ b hb
   refine ⟨Ideal.Quotient.liftₐ J f hJ, by ext; simp, fun g hg ↦ ?_⟩
   exact Ideal.Quotient.algHom_ext k (by rw [hg]; ext; simp)
+
+open TensorProduct in
+/-- Blueprint `lem-wf-affine-product-reduced`: let `A` and `B` be reduced finitely generated
+algebras over an algebraically closed field `k`, the coordinate algebras of affine varieties `X`
+and `Y`. The `k`-points of `X × Y = Spec (A ⊗[k] B)` are the pairs `(φ, ψ)` of `k`-points, and a
+function on `X × Y` vanishing at all of them is zero.
+
+Evaluating the first factor at a `k`-point `φ` of `X` sends `t` to a function on `Y`, which
+vanishes at every `k`-point of `Y` and hence is zero by the vanishing principle for `B`. As the
+evaluations at `k`-points of `X` are jointly injective on `A` (the vanishing principle for `A`),
+`t = 0` by `TensorProduct.eq_zero_of_forall_rTensor_eq_zero`. In particular `A ⊗[k] B` is reduced,
+which holds more generally over a perfect field (`isReduced_tensorProduct_of_perfectField`). -/
+theorem Algebra.TensorProduct.eq_zero_of_forall_lift_algHom_eq_zero (B : Type*) [CommRing B]
+    [Algebra k B] [Algebra.FiniteType k B] [IsReduced A] [IsReduced B] {t : A ⊗[k] B}
+    (h : ∀ (φ : A →ₐ[k] k) (ψ : B →ₐ[k] k), lift φ ψ (fun _ _ ↦ .all _ _) t = 0) : t = 0 := by
+  refine TensorProduct.eq_zero_of_forall_rTensor_eq_zero (fun φ : A →ₐ[k] k ↦ φ.toLinearMap)
+    (fun a ha ↦ eq_zero_of_forall_algHom_apply_eq_zero k A ha) fun φ ↦ ?_
+  have key (ψ : B →ₐ[k] k) (t : A ⊗[k] B) :
+      ψ (TensorProduct.lid k B (φ.toLinearMap.rTensor B t)) = lift φ ψ (fun _ _ ↦ .all _ _) t := by
+    induction t using TensorProduct.induction_on with
+    | zero => simp
+    | tmul a b => simp
+    | add x y hx hy => simp [hx, hy]
+  simpa using eq_zero_of_forall_algHom_apply_eq_zero k B fun ψ ↦ (key ψ t).trans (h φ ψ)
