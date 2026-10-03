@@ -32,6 +32,7 @@ proper.
 - `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_unit_app`
 - `AlgebraicGeometry.Etale.subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar`
 - `AlgebraicGeometry.Etale.existsUnique_distTriang_supportedLocalization`
+- `AlgebraicGeometry.Etale.supportedLocalizationBoundary`: the boundary of the triangle.
 - `AlgebraicGeometry.Etale.exists_triangleHom_supportedLocalization`
 - `AlgebraicGeometry.Etale.triangleHom_supportedLocalization_ext`
 -/
@@ -160,6 +161,31 @@ theorem existsUnique_distTriang_supportedLocalization (i : Z ⟶ X) (j : U ⟶ X
   rw [h₁, h₃] at h
   erw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp] at h
   exact h
+
+/-- The *boundary* `δ : Rj_* Lj^* L ⟶ (Ri_! Ri^! L)[1]` of the supported localization triangle
+of `L`: the unique connecting map making `supportedLocalizationTriangle A i j L δ`
+distinguished.
+
+It is *defined* as `Classical.choose` of the existence half of
+`AlgebraicGeometry.Etale.existsUnique_distTriang_supportedLocalization`, which is not yet
+proved; uniqueness, which is proved, is what makes the choice canonical. The supported term is
+`Ri_!`, which for a closed immersion is `Ri_*`. -/
+noncomputable def supportedLocalizationBoundary (i : Z ⟶ X) (j : U ⟶ X)
+    [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (R((j)_*[A])).obj ((L((j)^*[A])).obj L) ⟶ ((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦(1 : ℤ)⟧ :=
+  (existsUnique_distTriang_supportedLocalization A i j hij L).exists.choose
+
+/-- The supported localization triangle with its boundary
+`AlgebraicGeometry.Etale.supportedLocalizationBoundary` is distinguished. -/
+theorem supportedLocalizationTriangle_mem_distTriang (i : Z ⟶ X) (j : U ⟶ X)
+    [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    supportedLocalizationTriangle A i j L (supportedLocalizationBoundary A i j hij L) ∈
+      distTriang _ :=
+  (existsUnique_distTriang_supportedLocalization A i j hij L).exists.choose_spec
 
 /-- Blueprint `sk-prop-sf-localization`: Supported localization
 
