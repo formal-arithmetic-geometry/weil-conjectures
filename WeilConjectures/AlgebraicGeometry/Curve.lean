@@ -100,10 +100,10 @@ Let `C` be a smooth projective geometrically integral curve over a field `K`. It
 of degree zero, recorded here as the subset `f.picZero` of `C.Pic`.
 
 The degree is not yet a bundled group homomorphism: the group structure on
-`AlgebraicGeometry.Scheme.Pic` is the tensor product of invertible modules, which awaits the
-monoidal structure on sheaves of modules (see
-`AlgebraicGeometry.Scheme.Modules.tensorObj`). Once that lands, `picZero` should be upgraded to
-the kernel of a `MonoidHom` and hence to a subgroup of `Pic(C)`. -/
+`AlgebraicGeometry.Scheme.Pic` is the tensor product of invertible modules
+(`AlgebraicGeometry.Scheme.Modules.tensorObj`), which is not yet defined on `Pic` because the
+tensor product of invertible modules is not yet known to be invertible. Once it is, `picZero`
+should be upgraded to the kernel of a `MonoidHom` and hence to a subgroup of `Pic(C)`. -/
 def Scheme.Hom.picZero (f : C ⟶ Spec (.of K)) : Set C.Pic :=
   {L | f.picDegree L = 0}
 
