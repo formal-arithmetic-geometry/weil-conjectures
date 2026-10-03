@@ -616,8 +616,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
