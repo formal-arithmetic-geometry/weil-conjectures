@@ -18,19 +18,21 @@ geometric points `A(K̄)`, written additively, and its rational form is
 `AddCommGroup.rationalTateModule`. Over an algebraically closed field it is free of rank
 `2 * g`.
 
-The two definitions live in the `IsAbelianVariety` namespace, both because the blueprint node
+The two definitions live in the `AbelianVariety` namespace, both because the blueprint node
 they realise is about abelian varieties and so that they do not shadow
-`AddCommGroup.tateModule` and `AddCommGroup.rationalTateModule`.
+`AddCommGroup.tateModule` and `AddCommGroup.rationalTateModule`. The geometric points of
+`A : AbelianVariety K` are the morphisms `Scheme.specAlgebraicClosure K ⟶ A.toOver` into its
+underlying group scheme.
 
 ## Main definitions
 
-- `AlgebraicGeometry.IsAbelianVariety.tateModule`,
-  `AlgebraicGeometry.IsAbelianVariety.rationalTateModule`: `T_ℓ A` and `V_ℓ A`.
+- `AlgebraicGeometry.AbelianVariety.tateModule`,
+  `AlgebraicGeometry.AbelianVariety.rationalTateModule`: `T_ℓ A` and `V_ℓ A`.
 
 ## Main statements
 
-- `AlgebraicGeometry.IsAbelianVariety.nonempty_linearEquiv_tateModule`: `T_ℓ A ≅ ℤ_[ℓ] ^ (2g)`.
-- `AlgebraicGeometry.IsAbelianVariety.nonempty_linearEquiv_rationalTateModule`:
+- `AlgebraicGeometry.AbelianVariety.nonempty_linearEquiv_tateModule`: `T_ℓ A ≅ ℤ_[ℓ] ^ (2g)`.
+- `AlgebraicGeometry.AbelianVariety.nonempty_linearEquiv_rationalTateModule`:
   `V_ℓ A ≅ ℚ_[ℓ] ^ (2g)`.
 
 ## TODO
@@ -48,10 +50,9 @@ open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj
 
 namespace AlgebraicGeometry
 
-namespace IsAbelianVariety
+namespace AbelianVariety
 
-variable {K : Type u} [Field K] (ℓ : ℕ) [Fact ℓ.Prime] (A : Over (Spec (.of K))) [GrpObj A]
-  [IsAbelianVariety A]
+variable {K : Type u} [Field K] (ℓ : ℕ) [Fact ℓ.Prime] (A : AbelianVariety K)
 
 /-- Blueprint `sk-def-av-tate`: `ℓ`-adic Tate module.
 
@@ -59,32 +60,32 @@ The *`ℓ`-adic Tate module* of an abelian variety `A` over `K` is the inverse l
 `T_ℓ A = lim_n A[ℓ^n](K̄)`, the transition map from level `n + 1` to level `n` being
 multiplication by `ℓ`. It is a `ℤ_[ℓ]`-module. -/
 noncomputable def tateModule :
-    AddSubgroup (∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) :=
-  AddCommGroup.tateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A))
+    AddSubgroup (∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A.toOver)) :=
+  AddCommGroup.tateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A.toOver))
 
 noncomputable instance tateModule.instModule : Module ℤ_[ℓ] (tateModule ℓ A) :=
   inferInstanceAs (Module ℤ_[ℓ]
-    (AddCommGroup.tateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A))))
+    (AddCommGroup.tateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A.toOver))))
 
 /-- The rational Tate module `V_ℓ A = ℚ_[ℓ] ⊗_{ℤ_[ℓ]} T_ℓ A` of an abelian variety. -/
 noncomputable def rationalTateModule : Type u :=
-  AddCommGroup.rationalTateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A))
+  AddCommGroup.rationalTateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A.toOver))
 
 noncomputable instance rationalTateModule.instAddCommGroup :
     AddCommGroup (rationalTateModule ℓ A) :=
   inferInstanceAs (AddCommGroup
-    (AddCommGroup.rationalTateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A))))
+    (AddCommGroup.rationalTateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A.toOver))))
 
 noncomputable instance rationalTateModule.instModule : Module ℚ_[ℓ] (rationalTateModule ℓ A) :=
   inferInstanceAs (Module ℚ_[ℓ]
-    (AddCommGroup.rationalTateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A))))
+    (AddCommGroup.rationalTateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A.toOver))))
 
 /-- Blueprint `sk-prop-av-tate-rank`: The `ℓ`-adic Tate module is free of rank `2g`.
 
 Let `A` be an abelian variety of dimension `g` over an algebraically closed field `K` and let
 `ℓ ≠ char K`. Then `T_ℓ A ≅ ℤ_[ℓ] ^ (2 * g)`. -/
 theorem nonempty_linearEquiv_tateModule [IsAlgClosed K] (p : ℕ) [CharP K p] (hℓ : ℓ ≠ p) :
-    Nonempty (tateModule ℓ A ≃ₗ[ℤ_[ℓ]] (Fin (2 * IsAbelianVariety.dim A) → ℤ_[ℓ])) :=
+    Nonempty (tateModule ℓ A ≃ₗ[ℤ_[ℓ]] (Fin (2 * A.dim) → ℤ_[ℓ])) :=
   sorry
 
 /-- Blueprint `sk-prop-av-tate-rank`: The `ℓ`-adic Tate module is free of rank `2g`.
@@ -93,9 +94,9 @@ Let `A` be an abelian variety of dimension `g` over an algebraically closed fiel
 `ℓ ≠ char K`. Then `V_ℓ A ≅ ℚ_[ℓ] ^ (2 * g)`. -/
 theorem nonempty_linearEquiv_rationalTateModule [IsAlgClosed K] (p : ℕ) [CharP K p]
     (hℓ : ℓ ≠ p) :
-    Nonempty (rationalTateModule ℓ A ≃ₗ[ℚ_[ℓ]] (Fin (2 * IsAbelianVariety.dim A) → ℚ_[ℓ])) :=
+    Nonempty (rationalTateModule ℓ A ≃ₗ[ℚ_[ℓ]] (Fin (2 * A.dim) → ℚ_[ℓ])) :=
   sorry
 
-end IsAbelianVariety
+end AbelianVariety
 
 end AlgebraicGeometry

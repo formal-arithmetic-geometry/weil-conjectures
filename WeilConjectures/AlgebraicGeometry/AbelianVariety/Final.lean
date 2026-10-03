@@ -52,15 +52,13 @@ Let `A` be an abelian variety of dimension `g` over a field `K`, let `p = char K
 * **(b)** If `n` is prime to `p` (in particular if `p = 0`), then `A[n]` is étale of rank
   `n ^ (2 * g)`; for `p > 0` and `n = p ^ e` clause (a) already gives that `A[p ^ e]` is finite
   flat of order `p ^ (2 * g * e)`. -/
-theorem abelianVariety_estimate (p : ℕ) [CharP K p] (A : Over (Spec (.of K))) [GrpObj A]
-    [IsAbelianVariety A] :
-    (∀ n : ℕ, 0 < n → IsIsogeny (𝟙 A ^ n)) ∧
-      (∀ n : ℕ, 0 < n → isogenyDegree (𝟙 A ^ n) = n ^ (2 * IsAbelianVariety.dim A)) ∧
-      (∀ n : ℕ, 0 < n → IsFinite (torsionSubgroupScheme A n).hom) ∧
-      (∀ n : ℕ, 0 < n → Flat (torsionSubgroupScheme A n).hom) ∧
-      (∀ n : ℕ, 0 < n →
-        (torsionSubgroupScheme A n).hom.finrankΓ = n ^ (2 * IsAbelianVariety.dim A)) ∧
-      (∀ n : ℕ, 0 < n → ¬ p ∣ n → Etale (torsionSubgroupScheme A n).hom) :=
+theorem abelianVariety_estimate (p : ℕ) [CharP K p] (A : AbelianVariety K) :
+    (∀ n : ℕ, 0 < n → IsIsogeny (𝟙 A.toOver ^ n)) ∧
+      (∀ n : ℕ, 0 < n → isogenyDegree (𝟙 A.toOver ^ n) = n ^ (2 * A.dim)) ∧
+      (∀ n : ℕ, 0 < n → IsFinite (torsionSubgroupScheme A.toOver n).hom) ∧
+      (∀ n : ℕ, 0 < n → Flat (torsionSubgroupScheme A.toOver n).hom) ∧
+      (∀ n : ℕ, 0 < n → (torsionSubgroupScheme A.toOver n).hom.finrankΓ = n ^ (2 * A.dim)) ∧
+      (∀ n : ℕ, 0 < n → ¬ p ∣ n → Etale (torsionSubgroupScheme A.toOver n).hom) :=
   sorry
 
 /-- Blueprint `sk-thm-av-final`: Abelian-variety estimate, clauses (c) and (d).
@@ -73,21 +71,20 @@ Let `A` be an abelian variety of dimension `g` over an algebraically closed fiel
 * **(d)** `A(K)` is a divisible abelian group, and for every prime `ℓ ≠ p` one has
   `T_ℓ A ≅ ℤ_[ℓ] ^ (2 * g)` and `V_ℓ A ≅ ℚ_[ℓ] ^ (2 * g)`. -/
 theorem abelianVariety_estimate_of_isAlgClosed [IsAlgClosed K] (p : ℕ) [CharP K p]
-    (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A] :
+    (A : AbelianVariety K) :
     (∀ n : ℕ, 0 < n → ¬ p ∣ n →
-        Nonempty (AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of K))) ⟶ A)) (n : ℤ) ≃+
-          (Fin (2 * IsAbelianVariety.dim A) → ZMod n))) ∧
+        Nonempty (AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of K))) ⟶ A.toOver)) (n : ℤ) ≃+
+          (Fin (2 * A.dim) → ZMod n))) ∧
       (∀ n : ℕ, 0 < n → ¬ p ∣ n → ∀ (K' : Type u) [Field K'] [Algebra K K'] [IsAlgClosed K'],
         Function.Bijective
-          (fun s : 𝟙_ (Over (Spec (.of K))) ⟶ torsionSubgroupScheme A n ↦
+          (fun s : 𝟙_ (Over (Spec (.of K))) ⟶ torsionSubgroupScheme A.toOver n ↦
             toUnit (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K K')))) ≫ s)) ∧
-      (∀ n : ℕ, 0 < n → Function.Surjective fun a : 𝟙_ (Over (Spec (.of K))) ⟶ A ↦ a ^ n) ∧
+      (∀ n : ℕ, 0 < n →
+        Function.Surjective fun a : 𝟙_ (Over (Spec (.of K))) ⟶ A.toOver ↦ a ^ n) ∧
       (∀ (ℓ : ℕ) [Fact ℓ.Prime], ℓ ≠ p →
-        Nonempty (IsAbelianVariety.tateModule ℓ A ≃ₗ[ℤ_[ℓ]]
-          (Fin (2 * IsAbelianVariety.dim A) → ℤ_[ℓ]))) ∧
+        Nonempty (AbelianVariety.tateModule ℓ A ≃ₗ[ℤ_[ℓ]] (Fin (2 * A.dim) → ℤ_[ℓ]))) ∧
       (∀ (ℓ : ℕ) [Fact ℓ.Prime], ℓ ≠ p →
-        Nonempty (IsAbelianVariety.rationalTateModule ℓ A ≃ₗ[ℚ_[ℓ]]
-          (Fin (2 * IsAbelianVariety.dim A) → ℚ_[ℓ]))) :=
+        Nonempty (AbelianVariety.rationalTateModule ℓ A ≃ₗ[ℚ_[ℓ]] (Fin (2 * A.dim) → ℚ_[ℓ]))) :=
   sorry
 
 end AlgebraicGeometry

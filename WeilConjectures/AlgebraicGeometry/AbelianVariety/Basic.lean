@@ -23,10 +23,10 @@ varieties are the same thing.
 
 ## Main statements
 
-- `AlgebraicGeometry.IsAbelianVariety.geometricallyIntegral`: an abelian variety is
+- `AlgebraicGeometry.AbelianVariety.geometricallyIntegral`: an abelian variety is
   geometrically integral over the base field.
-- `AlgebraicGeometry.IsAbelianVariety.irreducibleSpace`: its underlying space is irreducible.
-- `AlgebraicGeometry.IsAbelianVariety.isCommMonObj`: an abelian variety is commutative.
+- `AlgebraicGeometry.AbelianVariety.irreducibleSpace`: its underlying space is irreducible.
+- `AlgebraicGeometry.AbelianVariety.isCommMonObj`: an abelian variety is commutative.
 -/
 
 @[expose] public section
@@ -41,21 +41,20 @@ variable {K : Type u} [Field K]
 
 /-- Blueprint `sk-prop-av-char`: Abelian varieties are the complete group varieties.
 
-Let `G` be a group scheme over a field `K` which is proper, connected and smooth over `K`, that
-is, an abelian variety in the sense of `AlgebraicGeometry.IsAbelianVariety`. Then `G` is
+Let `A` be a group scheme over a field `K` which is proper, connected and smooth over `K`, that
+is, an abelian variety in the sense of `AlgebraicGeometry.AbelianVariety`. Then `A` is
 geometrically integral over `K`: it has a rational point, the unit, so connectedness gives
 geometric connectedness, and smoothness gives geometric reducedness. -/
-instance IsAbelianVariety.geometricallyIntegral (G : Over (Spec (.of K))) [GrpObj G]
-    [IsAbelianVariety G] : GeometricallyIntegral G.hom :=
+instance AbelianVariety.geometricallyIntegral (A : AbelianVariety K) :
+    GeometricallyIntegral A.toOver.hom :=
   sorry
 
 /-- Blueprint `sk-prop-av-char`: Abelian varieties are the complete group varieties.
 
 The underlying space of an abelian variety is irreducible, being geometrically irreducible over
 the one-point space `Spec K`. -/
-instance IsAbelianVariety.irreducibleSpace (G : Over (Spec (.of K))) [GrpObj G]
-    [IsAbelianVariety G] : IrreducibleSpace G.left :=
-  GeometricallyIrreducible.irreducibleSpace_of_subsingleton G.hom
+instance AbelianVariety.irreducibleSpace (A : AbelianVariety K) : IrreducibleSpace A.toOver.left :=
+  GeometricallyIrreducible.irreducibleSpace_of_subsingleton A.toOver.hom
 
 /-- Blueprint `sk-cor-av-commutative`: Abelian varieties are commutative
 
@@ -64,12 +63,11 @@ factors of `A ⊗ A`; that is, `A` is a commutative group object, and in particu
 abelian group.
 
 This is Mathlib's `AlgebraicGeometry.isCommMonObj_of_isProper_of_geometricallyIntegral` applied
-to `AlgebraicGeometry.IsAbelianVariety.geometricallyIntegral`. The blueprint instead deduces it
+to `AlgebraicGeometry.AbelianVariety.geometricallyIntegral`. The blueprint instead deduces it
 from the rigidity lemma `AlgebraicGeometry.exists_eq_snd_comp`, which is recorded in
 `WeilConjectures.AlgebraicGeometry.AbelianVariety.Rigidity`, whose hypotheses on `X` an abelian
 variety satisfies (see Stacks 04KV for geometric connectedness). -/
-instance IsAbelianVariety.isCommMonObj (A : Over (Spec (.of K))) [GrpObj A]
-    [IsAbelianVariety A] : IsCommMonObj A :=
-  isCommMonObj_of_isProper_of_geometricallyIntegral A
+instance AbelianVariety.isCommMonObj (A : AbelianVariety K) : IsCommMonObj A.toOver :=
+  isCommMonObj_of_isProper_of_geometricallyIntegral A.toOver
 
 end AlgebraicGeometry
