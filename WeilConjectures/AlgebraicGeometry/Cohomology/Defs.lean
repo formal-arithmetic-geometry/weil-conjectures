@@ -47,6 +47,8 @@ lemma `AlgebraicGeometry.Scheme.Modules.smul_H_eq_globalSectionsRingHom_smul`.
 - `AlgebraicGeometry.Scheme.Modules.H`: the sheaf cohomology of a sheaf of modules.
 - `AlgebraicGeometry.Scheme.Modules.smulHom`: multiplication by a global function.
 - `AlgebraicGeometry.Scheme.Modules.moduleH`: the `Γ(X, ⊤)`-module structure on `M.H n`.
+- `AlgebraicGeometry.Scheme.Modules.H.mapLinearMap`: the `k`-linear map on cohomology induced
+  by a morphism, over a base field `k`.
 - `AlgebraicGeometry.Scheme.Modules.finrankH`: the dimension of `M.H n` over a base field.
 - `AlgebraicGeometry.Scheme.Modules.eulerChar`: the Euler characteristic of `M`.
 
@@ -230,6 +232,19 @@ the compatibility that an `IsScalarTower k Γ(X, ⊤) (M.H n)` instance would re
 without an `Algebra k Γ(X, ⊤)` instance. -/
 lemma smul_H_eq_globalSectionsRingHom_smul (M : X.Modules) (n : ℕ) (c : k) (x : M.H n) :
     c • x = globalSectionsRingHom k (X := X) c • x :=
+  rfl
+
+/-- The `k`-linear map on sheaf cohomology induced by a morphism of sheaves of modules on a
+`k`-scheme. -/
+noncomputable def H.mapLinearMap {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) :
+    M.H n →ₗ[k] N.H n where
+  toFun := H.map φ n
+  map_add' := map_add _
+  map_smul' c := H.map_smul φ n (globalSectionsRingHom k c)
+
+@[simp]
+lemma H.mapLinearMap_apply {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) (x : M.H n) :
+    H.mapLinearMap k φ n x = H.map φ n x :=
   rfl
 
 /-- The `q`-th cohomological invariant `h^q(X, M)` of a sheaf of modules `M` on a
