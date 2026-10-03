@@ -45,13 +45,15 @@ The sheaf `Ω¹_{C/K}` is `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`, 
 
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.Hom.genus_eq_finrankH_zero`: the genus is `h⁰(C, Ω¹_{C/K})`.
 - `AlgebraicGeometry.Scheme.Hom.picDegree_mk`: the degree of the class of an invertible module
   `M` is `χ(M) - χ(𝒪_C)`.
 
 ## TODO
 
 - Identify `picDegree` with the degree of the associated Weil divisor on a smooth projective
-  curve.
+  curve. The identification with the degree of effective Cartier divisors is stated in
+  `WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.lean`.
 - Make `picDegree` a group homomorphism `Pic(C) →* ℤ` once `Pic` carries its group structure.
 -/
 
@@ -88,12 +90,19 @@ structure by restriction of scalars along the `K`-algebra structure of `Γ(C, �
 This definition makes sense for an arbitrary morphism `f : C ⟶ Spec K`, but is only the genus
 in the intended sense when `f` is a smooth proper connected curve.
 
-TODO: for a smooth proper geometrically integral curve, Serre duality identifies this with the
-arithmetic genus `AlgebraicGeometry.Scheme.arithmeticGenus K C = dim_K H¹(C, 𝒪_C)`. -/
+For a smooth proper curve, Serre duality identifies this with the arithmetic genus
+`AlgebraicGeometry.Scheme.arithmeticGenus K C = dim_K H¹(C, 𝒪_C)`; see
+`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`. -/
 noncomputable def Scheme.Hom.genus (f : C ⟶ Spec (.of K)) : ℕ :=
   letI := f.ΓAlgebra
   letI : Module K Γ(f.relativeDifferentials, ⊤) := Module.compHom _ (algebraMap K Γ(C, ⊤))
   Module.finrank K Γ(f.relativeDifferentials, ⊤)
+
+/-- The genus `dim_K Γ(C, Ω¹_{C/K})` is `h⁰(C, Ω¹_{C/K})`: the global sections of a sheaf of
+modules are its cohomology in degree `0`, compatibly with the `K`-module structures. -/
+theorem Scheme.Hom.genus_eq_finrankH_zero [C.Over (Spec (.of K))] :
+    (C ↘ Spec (.of K)).genus = Modules.finrankH K (C ↘ Spec (.of K)).relativeDifferentials 0 :=
+  sorry
 
 /-- Blueprint `sk-def-av-pic`: Pic, degree, Pic⁰
 

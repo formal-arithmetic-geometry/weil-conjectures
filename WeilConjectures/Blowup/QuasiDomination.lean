@@ -126,7 +126,7 @@ def of_isSeparated {U : Scheme.{u}} (y : Y ⟶ S) [IsSeparated y] (hom : U ⟶ Y
     have : IsIso ((⊤ : U.Opens).ι) := inferInstanceAs (IsIso U.topIso.hom)
     isClosed_range_lift_of_isIso _ _ _
 
-/-- Blueprint `lemma:nagata-conrad-quasi-domination-proper-target`: **a quasi-domination
+/-- Blueprint `lemma-nagata-conrad-quasi-domination-proper-target`: **a quasi-domination
 over a universally closed target is defined everywhere**.
 
 The projection `pullback.snd y x : Y ×ₛ X ⟶ X` is universally closed, being a base change of

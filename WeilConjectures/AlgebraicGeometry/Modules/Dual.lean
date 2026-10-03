@@ -22,6 +22,11 @@ Both are abbreviations for `SheafOfModules.homObj`, so its API (`SheafOfModules.
 - `AlgebraicGeometry.Scheme.Modules.homObj`: the internal hom `Hom(M, N)`.
 - `AlgebraicGeometry.Scheme.Modules.dual`: the dual `M^∨ = Hom(M, 𝒪_X)`, with notation `Mᵛ`.
 - `AlgebraicGeometry.Scheme.Modules.dualMap`: the transpose `Nᵛ ⟶ Mᵛ` of `f : M ⟶ N`.
+- `AlgebraicGeometry.Scheme.Modules.dualFunctor`: `M ↦ Mᵛ` as a contravariant functor.
+
+## Main statements
+
+- `AlgebraicGeometry.Scheme.Modules.nonempty_dual_unit_iso`: `𝒪_Xᵛ ≅ 𝒪_X`.
 -/
 
 @[expose] public section
@@ -48,5 +53,16 @@ noncomputable abbrev dual (M : X.Modules) : X.Modules :=
 /-- The transpose `Nᵛ ⟶ Mᵛ` of a morphism `f : M ⟶ N` of sheaves of modules on a scheme. -/
 noncomputable abbrev dualMap {M N : X.Modules} (f : M ⟶ N) : Nᵛ ⟶ Mᵛ :=
   SheafOfModules.homObjMap (R := X.sheaf) f (𝟙 _)
+
+variable (X) in
+/-- The dual `M ↦ Mᵛ` as a contravariant functor on sheaves of modules on a scheme. -/
+noncomputable abbrev dualFunctor : X.Modulesᵒᵖ ⥤ X.Modules :=
+  (SheafOfModules.homFunctor X.sheaf).flip.obj (SheafOfModules.unit _)
+
+/-- The dual of the structure sheaf is the structure sheaf: `Hom(𝒪_X, 𝒪_X) ≅ 𝒪_X`. -/
+theorem nonempty_dual_unit_iso :
+    Nonempty ((SheafOfModules.unit X.ringCatSheaf : X.Modules)ᵛ ≅
+      SheafOfModules.unit X.ringCatSheaf) :=
+  sorry
 
 end AlgebraicGeometry.Scheme.Modules
