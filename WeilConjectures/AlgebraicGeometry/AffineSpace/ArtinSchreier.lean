@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.FieldTheory.Finite.Basic
-public import WeilConjectures.Mathlib.Algebra.CharP.Algebra
+public import WeilConjectures.Mathlib.Algebra.CharP.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
