@@ -31,7 +31,8 @@ whenever the bounded constructible Weil complex `K` is.
   open–closed reduction restores the discarded strata.
 - For `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek`: the finite
   hypercohomology spectral sequence `Rᵃf₀!𝓗ᵇ(K) ⇒ 𝓗ᵃ⁺ᵇ(Rf₀!K)`, whose left-hand term is mixed of
-  weights at most `w + a + b` by the theorem above.
+  weights at most `w + a + b` by the theorem above
+  (`AlgebraicGeometry.HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek`).
 
 ## Main statements
 
@@ -73,7 +74,8 @@ theorem hasDirectImageWeightBound_over_finiteField (ι : PadicAlgCl l →+* ℂ)
   sorry
 
 /-- If `K` is a bounded constructible Weil complex on `X` mixed of weights at most `w`, then
-`Rf₀!K` is mixed of weights at most `w` (blueprint: `sk-cor-dl-general-complex`). -/
+`Rf₀!K` is mixed of weights at most `w` (blueprint: `sk-cor-dl-general-complex`,
+`thm-zl-wme-deligne-estimate`). -/
 theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
     {K : WeilComplex k₀ l X} (hK : K.IsMixedOfWeightsAtMost ι w) (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -81,6 +83,6 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek {ι : PadicAlgCl l
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] :
     ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w :=
-  sorry
+  (hasDirectImageWeightBound_over_finiteField ι f).isMixedOfWeightsAtMost_derivedLowerShriek hK
 
 end AlgebraicGeometry

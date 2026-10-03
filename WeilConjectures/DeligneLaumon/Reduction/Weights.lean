@@ -45,9 +45,11 @@ a complex of weights at most `w` is `w + b` in degree `b`, Deligne's convention.
 - `AlgebraicGeometry.HasDirectImageWeightBound`: the direct-image weight assertion for a single
   morphism, the statement the reductions of `sec-deligne-laumon-general` propagate.
 
-Monotonicity in the bound is proved, and the closure properties the blueprint records alongside
-the definition — under subobjects, quotients and extensions — are stated:
-`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.mono_weight`, `.of_mono`, `.of_epi` and
+Monotonicity in the bound and the bound for a zero sheaf are proved
+(`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.mono_weight` and
+`AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_of_isZero`), and the closure properties the
+blueprint records alongside the definition — under subobjects, quotients and extensions — are
+stated: `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_mono`, `.of_epi` and
 `.of_mono_cokernel`.
 
 ## References
@@ -107,6 +109,12 @@ theorem IsMixedOfWeightsAtMost.mono_weight (h : F.IsMixedOfWeightsAtMost ι w) (
   refine ⟨n, G, φ, h0, hlast, hmono, fun i ↦ ?_⟩
   obtain ⟨v, hv, hvpure⟩ := hpure i
   exact ⟨v, hv.trans hw, hvpure⟩
+
+/-- A zero sheaf is mixed of weights at most `w`, for every `w`: the filtration of length zero
+exhibits it (blueprint: `sk-d-dl-general-weights`). -/
+theorem isMixedOfWeightsAtMost_of_isZero (hF : IsZero F) (w : ℝ) :
+    F.IsMixedOfWeightsAtMost ι w :=
+  ⟨0, fun _ ↦ F, fun i ↦ i.elim0, hF, ⟨Iso.refl F⟩, fun i ↦ i.elim0, fun i ↦ i.elim0⟩
 
 /-- A subobject of a sheaf mixed of weights at most `w` is mixed of weights at most `w`: intersect
 the filtration (blueprint: `sk-d-dl-general-weights`). -/
