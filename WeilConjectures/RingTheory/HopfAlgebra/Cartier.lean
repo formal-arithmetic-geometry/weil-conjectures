@@ -19,7 +19,11 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.MvPolynomial.EulerIdentity
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.RingTheory.Nilpotent.Defs
+public import WeilConjectures.Mathlib.Algebra.MvPolynomial.PDeriv
+public import WeilConjectures.Mathlib.RingTheory.Derivation.Basic
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Cotangent
+public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
+public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
 
 /-!
@@ -44,7 +48,7 @@ through the smoothness of the reduced group by the invariant derivations.
 
 ## Main results
 
-- `isPrime_iInf_pow_ker_of_forall_exists_derivation`: Cartier's lemma for a `k`-point of a
+- `AlgHom.isPrime_iInf_pow_ker_of_forall_exists_derivation`: Cartier's lemma for a `k`-point of a
   Noetherian `k`-algebra whose tangent vectors extend to derivations.
 - `Bialgebra.exists_derivation_of_cotangent`: invariant derivations of a commutative bialgebra.
 - `HopfAlgebra.isPrime_iInf_pow_ker`: the functions vanishing near a `k`-point of a Noetherian
@@ -64,77 +68,6 @@ through the smoothness of the reduced group by the invariant derivations.
 
 open MvPolynomial
 
-section Pow
-
-variable {k A : Type*} [CommRing k] [CommRing A] [Algebra k A] {I : Ideal A}
-
-/-- A derivation lowers the `I`-adic order by at most one. -/
-theorem Derivation.map_mem_pow_of_mem_pow_succ (D : Derivation k A A) {r : ℕ} {a : A}
-    (ha : a ∈ I ^ (r + 1)) : D a ∈ I ^ r := by
-  induction r generalizing a with
-  | zero => simp
-  | succ r ih =>
-    rw [pow_succ'] at ha
-    refine Submodule.mul_induction_on ha (fun b hb c hc ↦ ?_) (fun b c hb hc ↦ ?_)
-    · rw [Derivation.leibniz, smul_eq_mul, smul_eq_mul, pow_succ']
-      exact add_mem (Ideal.mul_mem_mul hb (ih hc))
-        (Ideal.mul_mem_right _ _ (by rw [← pow_succ']; exact hc))
-    · rw [map_add]
-      exact add_mem hb hc
-
-variable {ι : Type*}
-
-/-- The chain rule for a derivation applied to a polynomial expression. -/
-theorem Derivation.map_aeval_eq_sum [Fintype ι] (D : Derivation k A A) (x : ι → A)
-    (f : MvPolynomial ι k) : D (aeval x f) = ∑ i, aeval x (pderiv i f) * D (x i) := by
-  induction f using MvPolynomial.induction_on with
-  | C c => simp
-  | add p q hp hq => simp [hp, hq, add_mul, Finset.sum_add_distrib]
-  | mul_X p j hp =>
-    classical
-    have h (i : ι) : aeval x (pderiv i (p * X j)) =
-        aeval x (pderiv i p) * x j + if i = j then aeval x p else 0 := by
-      rw [Derivation.leibniz, pderiv_X, smul_eq_mul, smul_eq_mul, map_add, map_mul, map_mul,
-        aeval_X]
-      rcases eq_or_ne i j with rfl | hij
-      · simp [add_comm, mul_comm]
-      · simp [hij, Ne.symm hij, mul_comm]
-    have hsum : ∑ i, aeval x (pderiv i (p * X j)) * D (x i) =
-        x j * ∑ i, aeval x (pderiv i p) * D (x i) + aeval x p * D (x j) := by
-      simp only [h, add_mul, Finset.sum_add_distrib, ite_mul, zero_mul, Finset.sum_ite_eq',
-        Finset.mem_univ, if_true, Finset.mul_sum]
-      congr 1
-      exact Finset.sum_congr rfl fun _ _ ↦ by ring
-    rw [hsum, map_mul, aeval_X, Derivation.leibniz, smul_eq_mul, smul_eq_mul, hp]
-    ring
-
-/-- A homogeneous polynomial of degree `r` in elements of `I` lies in `I ^ r`. -/
-theorem MvPolynomial.IsHomogeneous.aeval_mem_pow {x : ι → A} (hx : ∀ i, x i ∈ I)
-    {f : MvPolynomial ι k} {r : ℕ} (hf : f.IsHomogeneous r) : MvPolynomial.aeval x f ∈ I ^ r := by
-  classical
-  rw [f.as_sum, map_sum]
-  refine Ideal.sum_mem _ fun d hd ↦ ?_
-  rw [aeval_monomial]
-  refine Ideal.mul_mem_left _ _ ?_
-  have hd' : d.degree = r := by
-    rw [Finsupp.degree_eq_weight_one]
-    exact hf (mem_support_iff.1 hd)
-  rw [← hd', Finsupp.degree_apply, Finsupp.prod, ← Finset.prod_pow_eq_pow_sum]
-  exact Ideal.prod_mem_prod fun i _ ↦ Ideal.pow_mem_pow (hx i) _
-
-/-- If `a ∉ ⋂ₙ Iⁿ`, then `a` has a well-defined `I`-adic order. -/
-theorem Ideal.exists_mem_pow_not_mem_pow_succ {a : A} (h : a ∉ ⨅ r : ℕ, I ^ r) :
-    ∃ r, a ∈ I ^ r ∧ a ∉ I ^ (r + 1) := by
-  rw [Submodule.mem_iInf, not_forall] at h
-  obtain ⟨n, hn⟩ := h
-  induction n with
-  | zero => simp at hn
-  | succ n ih =>
-    by_cases h : a ∈ I ^ n
-    exacts [⟨n, h, hn⟩, ih h]
-
-end Pow
-
 /-! ### Cartier's argument
 
 Let `ε : A → k` be a `k`-point of a `k`-algebra `A` with augmentation ideal `I = ker ε`. Suppose
@@ -144,7 +77,7 @@ homogeneous polynomial `f` of degree `r` with `f(x) ∈ I ^ (r + 1)` vanishes: d
 lowers the degree, and Euler's identity recovers `f` from its partial derivatives. So the
 associated graded ring of `A` for `I` is a polynomial ring, and `⋂ₙ Iⁿ` is a prime ideal. -/
 
-section Cartier
+namespace AlgHom
 
 variable {k A : Type*} [Field k] [CommRing A] [Algebra k A] {ε : A →ₐ[k] k}
   {ι : Type*} {x : ι → A} (hx : ∀ i, x i ∈ RingHom.ker ε)
@@ -197,8 +130,9 @@ variable [CharZero k] [DecidableEq ι] {D : ι → Derivation k A A}
 include hx hD in
 /-- **Cartier's lemma**: in characteristic zero, a homogeneous polynomial `f` of degree `r` with
 `f(x) ∈ I ^ (r + 1)` is zero. -/
-theorem eq_zero_of_isHomogeneous_of_aeval_mem_pow_succ [Finite ι] {r : ℕ} {f : MvPolynomial ι k}
-    (hf : f.IsHomogeneous r) (hfx : aeval x f ∈ RingHom.ker ε ^ (r + 1)) : f = 0 := by
+theorem eq_zero_of_isHomogeneous_of_aeval_mem_pow_succ [_root_.Finite ι] {r : ℕ}
+    {f : MvPolynomial ι k} (hf : f.IsHomogeneous r)
+    (hfx : aeval x f ∈ RingHom.ker ε ^ (r + 1)) : f = 0 := by
   have := Fintype.ofFinite ι
   induction r generalizing f with
   | zero =>
@@ -238,7 +172,7 @@ variable [Fintype ι] (hspan : ∀ a ∈ RingHom.ker ε, ∃ c : ι → k,
 
 include hx hspan hD in
 /-- The `I`-adic order is additive: the associated graded ring of `I` is a domain. -/
-theorem mul_not_mem_pow_add_add_one {a b : A} {r s : ℕ} (ha : a ∈ RingHom.ker ε ^ r)
+theorem mul_notMem_pow_add_add_one {a b : A} {r s : ℕ} (ha : a ∈ RingHom.ker ε ^ r)
     (ha' : a ∉ RingHom.ker ε ^ (r + 1)) (hb : b ∈ RingHom.ker ε ^ s)
     (hb' : b ∉ RingHom.ker ε ^ (s + 1)) : a * b ∉ RingHom.ker ε ^ (r + s + 1) := by
   obtain ⟨f, hf, hfa⟩ := exists_isHomogeneous_sub_aeval_mem_pow_succ hx hspan ha
@@ -266,24 +200,24 @@ theorem isPrime_iInf_pow_ker : (⨅ r : ℕ, RingHom.ker ε ^ r).IsPrime := by
   · rw [pow_one, Ne, Ideal.eq_top_iff_one, RingHom.mem_ker, map_one]
     exact one_ne_zero
   by_contra! h
-  obtain ⟨r, ha, ha'⟩ := Ideal.exists_mem_pow_not_mem_pow_succ h.1
-  obtain ⟨s, hb, hb'⟩ := Ideal.exists_mem_pow_not_mem_pow_succ h.2
-  exact mul_not_mem_pow_add_add_one hx hspan hD ha ha' hb hb' (Submodule.mem_iInf _ |>.1 hab _)
+  obtain ⟨r, ha, ha'⟩ := Ideal.exists_mem_pow_notMem_pow_succ_of_notMem_iInf h.1
+  obtain ⟨s, hb, hb'⟩ := Ideal.exists_mem_pow_notMem_pow_succ_of_notMem_iInf h.2
+  exact mul_notMem_pow_add_add_one hx hspan hD ha ha' hb hb' (Submodule.mem_iInf _ |>.1 hab _)
 
-end Cartier
+end AlgHom
 
-section Cotangent
+namespace AlgHom
 
 variable {k A : Type*} [Field k] [CommRing A] [Algebra k A] (ε : A →ₐ[k] k)
 
 /-- On the cotangent space at a `k`-point `ε`, the ring `A` acts through `ε`. -/
-theorem AlgHom.smul_cotangent_eq (a : A) (v : (RingHom.ker ε).Cotangent) :
+theorem smul_cotangent_eq (a : A) (v : (RingHom.ker ε).Cotangent) :
     a • v = ε a • v := by
   rw [← algebraMap_smul A (ε a) v, ← sub_eq_zero, ← sub_smul]
   exact Ideal.Cotangent.smul_eq_zero_of_mem (ε.sub_algebraMap_mem_ker a) v
 
 /-- The cotangent space at a `k`-point of a Noetherian `k`-algebra is finite-dimensional. -/
-theorem AlgHom.finiteDimensional_cotangent [IsNoetherianRing A] :
+theorem finiteDimensional_cotangent [IsNoetherianRing A] :
     FiniteDimensional k (RingHom.ker ε).Cotangent := by
   obtain ⟨S, hS⟩ := Module.Finite.fg_top (R := A) (M := (RingHom.ker ε).Cotangent)
   refine ⟨⟨S, eq_top_iff.2 fun v _ ↦ ?_⟩⟩
@@ -357,7 +291,7 @@ theorem exists_apply_eq_one_mul_eq_zero_of_forall_exists_derivation [IsNoetheria
   exact mem_iInf_pow_ker_iff.1 ((isPrime_iInf_pow_ker_of_forall_exists_derivation hD).mem_of_pow_mem
     n (hn ▸ zero_mem _))
 
-end Cotangent
+end AlgHom
 
 /-! ### Invariant derivations of a bialgebra -/
 
@@ -440,7 +374,8 @@ the augmentation ideal of a Noetherian commutative bialgebra is a prime ideal. G
 single irreducible component passes through the identity. -/
 theorem Bialgebra.isPrime_iInf_pow_ker_counitAlgHom [IsNoetherianRing A] :
     (⨅ r : ℕ, RingHom.ker (Bialgebra.counitAlgHom k A) ^ r).IsPrime :=
-  isPrime_iInf_pow_ker_of_forall_exists_derivation (Bialgebra.exists_derivation_of_cotangent k A)
+  AlgHom.isPrime_iInf_pow_ker_of_forall_exists_derivation
+    (Bialgebra.exists_derivation_of_cotangent k A)
 
 end Bialgebra
 
@@ -497,7 +432,7 @@ theorem HopfAlgebra.exists_apply_eq_one_mul_eq_zero_of_isNilpotent [IsNoetherian
     (g : A →ₐ[k] k) {b : A} (hb : IsNilpotent b) : ∃ t, g t = 1 ∧ t * b = 0 := by
   have hφψ : (translation (toConv g)⁻¹).comp (translation (toConv g)) = AlgHom.id k A := by
     rw [translation_comp_translation, mul_inv_cancel, translation_one]
-  obtain ⟨s, hs, hsb⟩ := exists_apply_eq_one_mul_eq_zero_of_forall_exists_derivation
+  obtain ⟨s, hs, hsb⟩ := AlgHom.exists_apply_eq_one_mul_eq_zero_of_forall_exists_derivation
     (Bialgebra.exists_derivation_of_cotangent k A) (IsNilpotent.map hb (translation (toConv g)))
   refine ⟨translation (toConv g)⁻¹ s, ?_, ?_⟩
   · have h := comp_translation_inv (toConv g)
@@ -521,7 +456,7 @@ theorem HopfAlgebra.isPrime_iInf_pow_ker [IsNoetherianRing A] (g : A →ₐ[k] k
   rw [ofConv_toConv] at hε hg
   convert Ideal.IsPrime.comap (translation (toConv g)) (hK := hP) using 1
   ext b
-  rw [Ideal.mem_comap, mem_iInf_pow_ker_iff, mem_iInf_pow_ker_iff]
+  rw [Ideal.mem_comap, AlgHom.mem_iInf_pow_ker_iff, AlgHom.mem_iInf_pow_ker_iff]
   constructor
   · rintro ⟨t, ht, htb⟩
     refine ⟨translation (toConv g) t, ?_, ?_⟩

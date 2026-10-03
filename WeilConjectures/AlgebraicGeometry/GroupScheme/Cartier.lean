@@ -83,9 +83,10 @@ over an algebraically closed field of characteristic zero is reduced.
 
 The affine case is `isReduced_of_grpObj_of_isAffine`. In general, by translation it suffices that
 the local ring at the identity is reduced, which follows as in the affine case from Cartier's
-lemma (`exists_apply_eq_one_mul_eq_zero_of_forall_exists_derivation`) applied to the coordinate
-ring of an affine open neighbourhood of the identity, once its tangent vectors are extended to
-derivations by the invariant vector fields of `G`. (blueprint: `lem-ag-cartier-reduced`) -/
+lemma (`AlgHom.exists_apply_eq_one_mul_eq_zero_of_forall_exists_derivation`) applied to the
+coordinate ring of an affine open neighbourhood of the identity, once its tangent vectors are
+extended to derivations by the invariant vector fields of `G`.
+(blueprint: `lem-ag-cartier-reduced`) -/
 theorem isReduced_of_grpObj_of_isAlgClosed [IsAlgClosed K] : IsReduced G := by
   sorry
 

@@ -8,12 +8,12 @@ module
 public import Mathlib.Algebra.Lie.Abelian
 public import Mathlib.Algebra.Lie.Matrix
 public import Mathlib.Algebra.Lie.Subalgebra
+public import Mathlib.LinearAlgebra.Dual.Lemmas
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.Tactic.NoncommRing
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.ClosedSubgroup
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
-public import Mathlib.LinearAlgebra.Dual.Lemmas
-public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
@@ -475,7 +475,7 @@ theorem lieAlgebra_le_lieAlgebra_identityComponent [IsAlgClosed k] [CharZero k] 
     have := PrimeSpectrum.vanishingIdeal_anti_mono hsub ha
     rwa [PrimeSpectrum.vanishingIdeal_zeroLocus_eq_radical, hP'.radical] at this
   have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
-  obtain ⟨s, hs, hsa⟩ := mem_iInf_pow_ker_iff.1 haP
+  obtain ⟨s, hs, hsa⟩ := AlgHom.mem_iInf_pow_ker_iff.1 haP
   let φ : B →ₐ[k] DualNumber k := Ideal.Quotient.liftₐ I (evalAlgHom (dualUnit X)) hX
   have hφ : (fstHom k k k).comp φ = Bialgebra.counitAlgHom k B := by
     refine Ideal.Quotient.algHom_ext _ ?_
@@ -589,7 +589,7 @@ private theorem localVanishing_le [CharZero k] (c : CoordinateRing n k ⧸ I →
     (hq : q ≤ RingHom.ker (c.comp (Ideal.Quotient.mkₐ k I))) : localVanishing I c ≤ q := by
   intro a ha
   have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
-  obtain ⟨t, ht, hta⟩ := mem_iInf_pow_ker_iff.1 (Ideal.mem_comap.1 ha)
+  obtain ⟨t, ht, hta⟩ := AlgHom.mem_iInf_pow_ker_iff.1 (Ideal.mem_comap.1 ha)
   obtain ⟨t, rfl⟩ := Ideal.Quotient.mk_surjective t
   rw [← map_mul, Ideal.Quotient.eq_zero_iff_mem] at hta
   refine ((‹q.IsPrime›.mem_or_mem (hIq hta)).resolve_left fun htq ↦ ?_)
