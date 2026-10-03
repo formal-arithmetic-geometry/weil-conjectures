@@ -107,12 +107,7 @@ def upperStarConstantSheafIso (f : X ⟶ Y) :
   Adjunction.leftAdjointUniq
     (((constantSheafAdj Y.smallEtaleTopology A terminalIsTerminal).comp
         (Etale.upperStarLowerStarAdjunction A f)).ofNatIsoRight
-      (NatIso.ofComponents
-        (F := Etale.lowerStar A f ⋙
-          (sheafSections Y.smallEtaleTopology A).obj (op (⊤_ Y.Etale)))
-        (G := (sheafSections X.smallEtaleTopology A).obj (op (⊤_ X.Etale)))
-        (fun H ↦ H.obj.mapIso (PreservesTerminal.iso f.Etale).op.symm)
-        (fun α ↦ (α.hom.naturality _).symm)))
+      (Etale.lowerStarCompSheafSectionsTerminalIso A f))
     (constantSheafAdj X.smallEtaleTopology A terminalIsTerminal)
 
 end PullbackFunctor

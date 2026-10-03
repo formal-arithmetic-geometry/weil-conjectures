@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.LinearAlgebra.Dual.Defs
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
@@ -20,10 +20,12 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCart
 /-!
 # Riemann–Roch, Serre duality and the twist lemma for curves
 
-Let `X` be a smooth proper geometrically integral curve over a field `k`. We define its genus
-`g = dim_k H^1(X, 𝒪_X)` and the degree `deg ℒ = χ(ℒ) - χ(𝒪_X)` of an invertible sheaf on it,
-and state Riemann–Roch, Serre duality, and the two statements about line bundles on the base
-change `X_K` of `X` along a field extension `K/k` that the Picard framework needs.
+Let `X` be a smooth proper geometrically integral curve over a field `k`. Its genus
+`g = dim_k H^1(X, 𝒪_X)` is `AlgebraicGeometry.Scheme.arithmeticGenus`, and the degree
+`deg ℒ = χ(ℒ) - χ(𝒪_X)` of an invertible sheaf on it is
+`AlgebraicGeometry.Scheme.Modules.degree`. We state Riemann–Roch, Serre duality, and the two
+statements about line bundles on the base change `X_K` of `X` along a field extension `K/k`
+that the Picard framework needs.
 
 ## Implementation notes
 
@@ -48,17 +50,12 @@ statement of this file about `χ`, `deg` and the genus meaningful.
 Ampleness is `AlgebraicGeometry.IsAmple` of
 `WeilConjectures/AlgebraicGeometry/Modules/Ample.lean`, shared with the abelian-variety block.
 The dual `ℱᵛ = Hom(ℱ, 𝒪_X)` of a sheaf of modules is the internal hom of
-`WeilConjectures/AlgebraicGeometry/Modules/Dual.lean`; only the tensor product is still the
-`opaque` placeholder of `WeilConjectures/AlgebraicGeometry/Modules/Invertible.lean`. The
+`WeilConjectures/AlgebraicGeometry/Modules/Dual.lean`, and the tensor product is the monoidal
+structure on `X.Modules` of `WeilConjectures/AlgebraicGeometry/Modules/Invertible.lean`. The
 canonical module `ω_X = Ω^n_{X/k}` has no placeholder: Serre duality is stated existentially,
 as the existence of a dualising invertible module, which is what is provable before
 `Ω^n_{X/k}` exists and is strictly stronger than a statement about a placeholder. Identifying
 that module with `Ω^n_{X/k}` is separate work.
-
-## Main definitions
-
-- `AlgebraicGeometry.Scheme.genus`: the genus `dim_k H^1(X, 𝒪_X)` of a curve.
-- `AlgebraicGeometry.Scheme.Modules.degree`: the degree `χ(ℒ) - χ(𝒪_X)` of an invertible sheaf.
 
 ## Main statements
 
@@ -79,47 +76,11 @@ that module with `Ω^n_{X/k}` is separate work.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits MonoidalCategory
 
 open scoped AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.Scheme
-
-section Defs
-
-variable (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
-
-/-- The **genus** `g = dim_k H^1(X, 𝒪_X)` of a `k`-scheme `X`.
-
-This is the arithmetic genus, and it is the genus in the usual sense when `X` is a smooth proper
-geometrically integral curve over `k`; no hypotheses are imposed on `X` here, so for other `X`
-the value carries no meaning. -/
-noncomputable def genus : ℕ :=
-  Modules.finrankH (X := X) k (SheafOfModules.unit X.ringCatSheaf) 1
-
-end Defs
-
-section Degree
-
-variable (k : Type u) [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
-
--- TODO(unify): sk-def-av-pic
--- This is the same notion as `AlgebraicGeometry.Scheme.Hom.picDegree` of the
--- abelian-variety block, which is an `opaque` placeholder for the divisor-theoretic degree;
--- the two have to be identified once divisors on a scheme exist.
-/-- The **degree** `deg ℒ = χ(ℒ) - χ(𝒪_X)` of a sheaf of modules on a `k`-scheme `X`.
-
-On a smooth proper geometrically integral curve this agrees with the degree of the associated
-divisor class, and it is the definition used throughout, because there is no divisor-theoretic
-degree of a line bundle in Mathlib: neither Cartier nor Weil divisors on a scheme are defined
-there.
-
-The formula is the degree in the usual sense only for sheaves of rank one; for a locally free
-sheaf of rank `r` the degree is `χ(ℱ) - χ(𝒪_X^r)`. -/
-noncomputable def Modules.degree (M : X.Modules) : ℤ :=
-  M.eulerChar k - Modules.eulerChar (X := X) k (SheafOfModules.unit X.ringCatSheaf)
-
-end Degree
 
 section RiemannRoch
 
@@ -149,7 +110,7 @@ rank-`r` sheaf against `𝒪_X^{⊕ r}`, this is the content of the Riemann–Ro
 (blueprint: `sk-thm-picard-rr`) -/
 theorem eulerChar_free_eq (r : ℕ) :
     Modules.eulerChar (X := X) k (SheafOfModules.free (ULift.{u} (Fin r))) =
-      r * (1 - (genus k X : ℤ)) :=
+      r * (1 - (arithmeticGenus k X : ℤ)) :=
   sorry
 
 /-- **Riemann–Roch for curves, structure sheaf.** `χ(𝒪_X) = 1 - g` on a smooth proper
@@ -157,7 +118,8 @@ geometrically integral curve `X` over `k` of genus `g`.
 
 (blueprint: `sk-thm-picard-rr`) -/
 theorem eulerChar_unit_eq :
-    Modules.eulerChar (X := X) k (SheafOfModules.unit X.ringCatSheaf) = 1 - (genus k X : ℤ) :=
+    Modules.eulerChar (X := X) k (SheafOfModules.unit X.ringCatSheaf) =
+      1 - (arithmeticGenus k X : ℤ) :=
   sorry
 
 /-- **Riemann–Roch for curves, `h⁰` of a line bundle of large degree.** A line bundle `ℒ` of
@@ -166,8 +128,8 @@ degree `d ≥ 2g - 1` on a smooth proper geometrically integral curve of genus `
 
 (blueprint: `sk-thm-picard-rr`) -/
 theorem finrankH_zero_eq (ℒ : X.Modules) [ℒ.IsInvertible]
-    (hd : 2 * (genus k X : ℤ) - 1 ≤ ℒ.degree k) :
-    (Modules.finrankH k ℒ 0 : ℤ) = ℒ.degree k + 1 - genus k X :=
+    (hd : 2 * (arithmeticGenus k X : ℤ) - 1 ≤ ℒ.degree k) :
+    (Modules.finrankH k ℒ 0 : ℤ) = ℒ.degree k + 1 - arithmeticGenus k X :=
   sorry
 
 /-- **Positive degree implies ample.** An invertible sheaf of positive degree on a smooth
@@ -219,7 +181,7 @@ theorem serreDuality (n : ℕ) (hn : n ≤ 1) [SmoothOfRelativeDimension n (X �
     [IsProper (X ↘ Spec (.of k))] [GeometricallyIntegral (X ↘ Spec (.of k))] :
     ∃ ω : X.Modules, ω.IsInvertible ∧
       ∀ (ℱ : X.Modules) (r : ℕ), ℱ.IsFiniteLocallyFreeOfRank r → ∀ q ≤ n,
-        Nonempty (Module.Dual k (ℱ.H q) ≃ₗ[k] (ℱᵛ ⊗ₘ ω).H (n - q)) :=
+        Nonempty (Module.Dual k (ℱ.H q) ≃ₗ[k] (ℱᵛ ⊗ ω).H (n - q)) :=
   sorry
 
 end Duality
@@ -241,7 +203,7 @@ theorem degree_eq_genus
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules)
     [ℒ.IsInvertible] (h0 : Modules.finrankH K ℒ 0 = 1)
     (hq : ∀ q : ℕ, 0 < q → Subsingleton (ℒ.H q)) :
-    ℒ.degree K = (genus k X : ℤ) :=
+    ℒ.degree K = (arithmeticGenus k X : ℤ) :=
   sorry
 
 /-- **The twist lemma.** Let `k` be separably closed, let `X` be a smooth projective curve over
@@ -256,9 +218,9 @@ theorem exists_isInvertible_twist [IsSepClosed k]
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules)
     [ℒ.IsInvertible] :
     ∃ ℒ₀ : X.Modules, ℒ₀.IsInvertible ∧
-      Modules.finrankH K (ℒ ⊗ₘ (Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
+      Modules.finrankH K (ℒ ⊗ (Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
         (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj ℒ₀) 0 = 1 ∧
-      Modules.finrankH K (ℒ ⊗ₘ (Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
+      Modules.finrankH K (ℒ ⊗ (Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
         (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj ℒ₀) 1 = 0 :=
   sorry
 

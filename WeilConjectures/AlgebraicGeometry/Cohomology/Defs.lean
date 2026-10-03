@@ -49,6 +49,11 @@ lemma `AlgebraicGeometry.Scheme.Modules.smul_H_eq_globalSectionsRingHom_smul`.
 - `AlgebraicGeometry.Scheme.Modules.moduleH`: the `Γ(X, ⊤)`-module structure on `M.H n`.
 - `AlgebraicGeometry.Scheme.Modules.finrankH`: the dimension of `M.H n` over a base field.
 - `AlgebraicGeometry.Scheme.Modules.eulerChar`: the Euler characteristic of `M`.
+
+## Main statements
+
+- `AlgebraicGeometry.Scheme.Modules.eulerChar_congr`: the Euler characteristic only depends on
+  the isomorphism class of `M`.
 -/
 
 @[expose] public section
@@ -148,6 +153,12 @@ lemma smulHom_add (M : X.Modules) (a b : Γ(X, ⊤)) :
   ext U x
   simp [add_smul]
 
+@[reassoc]
+lemma smulHom_naturality {M N : X.Modules} (φ : M ⟶ N) (a : Γ(X, ⊤)) :
+    M.smulHom a ≫ φ = φ ≫ N.smulHom a := by
+  ext U x
+  simp
+
 /-- Multiplication by global functions on the `n`-th cohomology of a sheaf of modules, as a
 ring homomorphism to the additive endomorphisms of `M.H n`. -/
 noncomputable def smulEnd (M : X.Modules) (n : ℕ) : Γ(X, ⊤) →+* AddMonoid.End (M.H n) where
@@ -173,6 +184,25 @@ noncomputable def smulEnd (M : X.Modules) (n : ℕ) : Γ(X, ⊤) →+* AddMonoid
 via multiplication by global functions. -/
 noncomputable instance moduleH (M : X.Modules) (n : ℕ) : Module Γ(X, ⊤) (M.H n) :=
   Module.compHom (M.H n) (M.smulEnd n)
+
+lemma H.map_smul {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) (a : Γ(X, ⊤)) (x : M.H n) :
+    H.map φ n (a • x) = a • H.map φ n x := by
+  change H.map φ n (H.map (M.smulHom a) n x) = H.map (N.smulHom a) n (H.map φ n x)
+  rw [← H.map_comp_apply, ← H.map_comp_apply, smulHom_naturality]
+
+/-- The `Γ(X, ⊤)`-linear map on sheaf cohomology induced by a morphism of sheaves of modules. -/
+noncomputable def H.mapₗ {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) : M.H n →ₗ[Γ(X, ⊤)] N.H n where
+  toFun := H.map φ n
+  map_add' := map_add _
+  map_smul' := H.map_smul φ n
+
+/-- An isomorphism of sheaves of modules induces a `Γ(X, ⊤)`-linear isomorphism on sheaf
+cohomology. -/
+noncomputable def H.mapLinearEquiv {M N : X.Modules} (e : M ≅ N) (n : ℕ) :
+    M.H n ≃ₗ[Γ(X, ⊤)] N.H n :=
+  LinearEquiv.ofLinearMap (H.mapₗ e.hom n) (H.mapₗ e.inv n)
+    (LinearMap.ext fun x ↦ by simp [H.mapₗ, ← H.map_comp_apply])
+    (LinearMap.ext fun x ↦ by simp [H.mapₗ, ← H.map_comp_apply])
 
 end Modules
 
@@ -214,6 +244,16 @@ The sum is a `finsum`, so it is `0` whenever infinitely many terms are nonzero. 
 a curve the relevant one is
 `AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_two_le`. -/
 noncomputable def eulerChar (M : X.Modules) : ℤ := ∑ᶠ q : ℕ, (-1) ^ q * (M.finrankH k q : ℤ)
+
+/-- `h^q(X, M)` only depends on the isomorphism class of `M`. -/
+lemma finrankH_congr {M N : X.Modules} (e : M ≅ N) (q : ℕ) : M.finrankH k q = N.finrankH k q :=
+  LinearEquiv.finrank_eq
+    { H.mapLinearEquiv e q with
+      map_smul' := fun c x ↦ (H.mapLinearEquiv e q).map_smul (globalSectionsRingHom k c) x }
+
+/-- The Euler characteristic only depends on the isomorphism class of a sheaf of modules. -/
+lemma eulerChar_congr {M N : X.Modules} (e : M ≅ N) : M.eulerChar k = N.eulerChar k := by
+  simp only [eulerChar, finrankH_congr k e]
 
 end Modules
 

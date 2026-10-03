@@ -5,12 +5,14 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Group.ForwardDiff
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
@@ -24,23 +26,24 @@ For an ample invertible module `M` on a proper `K`-scheme `X` of dimension `g`, 
 `m ↦ χ(X, M^{⊗ m})` is a numerical polynomial of degree at most `g`, and the *degree of `X` with
 respect to `M`* is `g!` times its leading coefficient.
 
-`AlgebraicGeometry.IsVeryAmple` and `AlgebraicGeometry.IsAmple` are genuine definitions, built
-on the twisting sheaf `AlgebraicGeometry.ProjectiveSpace.twist`. The Euler characteristic of a
-coherent sheaf is not available in Mathlib, however, so `AlgebraicGeometry.Scheme.Hom.degree`
-is declared here as an `opaque` constant. Being `opaque` rather than `sorry`-bodied it depends
-genuinely on its arguments and introduces no `sorryAx`; but it satisfies no equations
-whatsoever, so **none of the statements below about the degree can be proved before it is
-replaced**.
+`AlgebraicGeometry.IsVeryAmple` and `AlgebraicGeometry.IsAmple` are built on the twisting sheaf
+`AlgebraicGeometry.ProjectiveSpace.twist`. The degree `AlgebraicGeometry.Scheme.Hom.degree` is
+the `g`-th forward difference `fwdDiff` at `0` of the Hilbert function `m ↦ χ(X, M^{⊗ m})`, with
+the Euler characteristic `AlgebraicGeometry.Scheme.Modules.eulerChar`; it is `g!` times the
+leading coefficient whenever that function is a numerical polynomial of degree at most `g`
+(`Polynomial.fwdDiff_iter_degree_eq_factorial`).
 
 ## Main definitions
 
 - `AlgebraicGeometry.IsVeryAmple`, `AlgebraicGeometry.IsAmple`: very ample and ample modules.
-  These are real definitions.
+- `AlgebraicGeometry.Scheme.Hom.hilbertFunction`: the Hilbert function `m ↦ χ(X, M^{⊗ m})`.
 - `AlgebraicGeometry.Scheme.Hom.degree`: the degree of a proper scheme with respect to an ample
-  invertible module (placeholder).
+  invertible module.
 
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one`: in dimension
+  one the degree is the cohomological degree `χ(M) - χ(𝒪_X)`.
 - `AlgebraicGeometry.IsVeryAmple.isInvertible`: a very ample module is invertible.
 - `AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`: an ample invertible module on a proper
   curve has positive degree.
@@ -85,16 +88,50 @@ An invertible `𝒪_X`-module is *ample* if some positive tensor power of it is 
 def IsAmple (f : X ⟶ Spec (.of K)) (M : X.Modules) : Prop :=
   ∃ m : ℕ, 0 < m ∧ IsVeryAmple f (M.tensorPow m)
 
+/-- The Hilbert function `m ↦ χ(X, M^{⊗ m})` of an `𝒪_X`-module `M` on a `K`-scheme `X`, with
+the Euler characteristic `AlgebraicGeometry.Scheme.Modules.eulerChar` over `K`. -/
+noncomputable def Scheme.Hom.hilbertFunction (f : X ⟶ Spec (.of K)) (M : X.Modules) : ℕ → ℤ :=
+  letI : X.Over (Spec (.of K)) := ⟨f⟩
+  fun m ↦ Scheme.Modules.eulerChar K (M.tensorPow m)
+
+open scoped fwdDiff in
 /-- Blueprint `sk-def-av-ample-degree`: Ample modules and the Hilbert degree.
 
-The degree of a proper `K`-scheme `X` of dimension `g` with respect to an ample invertible
-`𝒪_X`-module `M`: `g!` times the leading coefficient of the Hilbert polynomial
-`m ↦ χ(X, M^{⊗ m})`.
+The degree of a `K`-scheme `X` of dimension `g` with respect to an `𝒪_X`-module `M`: the `g`-th
+forward difference at `0` of the Hilbert function `m ↦ χ(X, M^{⊗ m})`. When the Hilbert
+function is a numerical polynomial of degree at most `g`, as it is for `X` proper and `M` ample
+invertible, this equals `g!` times its coefficient of `m^g`. Here `g` is the topological Krull
+dimension of `X`, read as `0` if `X` is empty or infinite-dimensional.
 
-The Euler characteristic of a coherent sheaf is not available in Mathlib, so this is an
-`opaque` placeholder; it satisfies no equations. -/
--- TODO(unify): sk-def-av-ample-degree
-opaque Scheme.Hom.degree (f : X ⟶ Spec (.of K)) (M : X.Modules) : ℤ
+The value is meaningful only for `f` proper and `M` coherent: otherwise the Euler
+characteristics involved may be junk values. -/
+noncomputable def Scheme.Hom.degree (f : X ⟶ Spec (.of K)) (M : X.Modules) : ℤ :=
+  Δ_[1]^[((topologicalKrullDim X).unbotD 0).toNat] (f.hilbertFunction M) 0
+
+/-- The degree as an explicit alternating sum of Euler characteristics:
+`∑_{i=0}^{g} (-1)^(g-i) (g choose i) χ(X, M^{⊗ i})`. -/
+lemma Scheme.Hom.degree_eq_sum (f : X ⟶ Spec (.of K)) (M : X.Modules) :
+    f.degree M = ∑ i ∈ Finset.range (((topologicalKrullDim X).unbotD 0).toNat + 1),
+      ((-1 : ℤ) ^ (((topologicalKrullDim X).unbotD 0).toNat - i) *
+        (((topologicalKrullDim X).unbotD 0).toNat.choose i : ℤ)) • f.hilbertFunction M i := by
+  rw [degree, fwdDiff_iter_eq_sum_shift]
+  simp
+
+/-- On a `K`-scheme of dimension one, the degree with respect to `M` is the cohomological
+degree `χ(M) - χ(𝒪_X)` of `AlgebraicGeometry.Scheme.Modules.degree`. -/
+lemma Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one (f : X ⟶ Spec (.of K))
+    (h : topologicalKrullDim X = 1) (M : X.Modules) :
+    letI : X.Over (Spec (.of K)) := ⟨f⟩
+    f.degree M = Scheme.Modules.degree K M := by
+  let : X.Over (Spec (.of K)) := ⟨f⟩
+  have hg : ((topologicalKrullDim X).unbotD 0).toNat = 1 := by
+    rw [h]
+    rfl
+  rw [degree, hg, Function.iterate_one, fwdDiff, zero_add, Scheme.Modules.degree]
+  simp only [hilbertFunction, Scheme.Modules.tensorPow_zero]
+  rw [Scheme.Modules.tensorPow_succ, Scheme.Modules.tensorPow_zero,
+    Scheme.Modules.eulerChar_congr K (MonoidalCategory.rightUnitor M)]
+  rfl
 
 /-- Blueprint `sk-prop-av-ample-positive`: Ample modules on proper curves have positive degree.
 

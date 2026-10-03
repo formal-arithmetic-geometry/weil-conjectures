@@ -32,9 +32,9 @@ connected scheme, and the vanishing for `q ≥ 3` is
 
 ## TODO
 
-The genus is `AlgebraicGeometry.Scheme.Hom.genus`, which is defined through the `opaque`
-placeholder `AlgebraicGeometry.Scheme.Hom.cotangent`. So the `H¹` statement cannot be proved
-until the cotangent sheaf is a real definition.
+The genus is `AlgebraicGeometry.Scheme.Hom.genus`, the dimension of the global sections of the
+sheaf of relative differentials `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`. Proving
+the `H¹` statement needs the comparison of this genus with the étale cohomology of `C`.
 -/
 
 @[expose] public section
@@ -53,8 +53,8 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 
 The genus is `f.genus = dim_k H⁰(C, Ω¹_{C/k})`, the definition of the blueprint
 (`sk-def-curve`). For a smooth proper connected curve it agrees, by Serre duality, with the
-arithmetic genus `AlgebraicGeometry.Scheme.genus = dim_k H¹(C, 𝒪_C)` of the Riemann–Roch
-block; the two definitions are not yet identified in Lean.
+arithmetic genus `AlgebraicGeometry.Scheme.arithmeticGenus = dim_k H¹(C, 𝒪_C)` of the
+Riemann–Roch block; the two definitions are not yet identified in Lean.
 (blueprint: `sk-thm-curveestimate`) -/
 theorem nonempty_addEquiv_sheafH_constantZMod_one (f : C ⟶ Spec (.of k)) [IsCurve f]
     [Smooth f] [IsProper f] [ConnectedSpace C] (n : ℕ) (hn : (n : k) ≠ 0) :

@@ -32,9 +32,6 @@ the product `p_{i₁} * ⋯ * p_{i_t}`. Naming the eight vertices of the cube `(
 
 the vertex `(ε₁, ε₂, ε₃)` contributing `m_{i : εᵢ = 1}^* L` with sign `(-1)^(ε₁ + ε₂ + ε₃)`.
 
-Since `AlgebraicGeometry.Scheme.Modules.tensorObj` is still an `opaque` placeholder, neither
-statement below can be proved before it is replaced by the real tensor product.
-
 ## Main statements
 
 - `AlgebraicGeometry.nonempty_iso_cube`: the theorem of the cube.
@@ -68,15 +65,16 @@ Let `A` be an abelian variety over a field `K` and let `L` be an invertible `�
 theorem nonempty_iso_cube (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A]
     (L : A.left.Modules) [L.IsInvertible] :
     Nonempty
-      (tensorObj
+      (Scheme.Modules.tensorObj
           (overPullback ((fst (A ⊗ A) A ≫ fst A A) * (fst (A ⊗ A) A ≫ snd A A) *
             snd (A ⊗ A) A) L)
-          (tensorObj (overPullback (fst (A ⊗ A) A ≫ fst A A) L)
-            (tensorObj (overPullback (fst (A ⊗ A) A ≫ snd A A) L)
+          (Scheme.Modules.tensorObj (overPullback (fst (A ⊗ A) A ≫ fst A A) L)
+            (Scheme.Modules.tensorObj (overPullback (fst (A ⊗ A) A ≫ snd A A) L)
               (overPullback (snd (A ⊗ A) A) L))) ≅
-        tensorObj
+        Scheme.Modules.tensorObj
           (overPullback ((fst (A ⊗ A) A ≫ fst A A) * (fst (A ⊗ A) A ≫ snd A A)) L)
-          (tensorObj (overPullback ((fst (A ⊗ A) A ≫ fst A A) * snd (A ⊗ A) A) L)
+          (Scheme.Modules.tensorObj
+            (overPullback ((fst (A ⊗ A) A ≫ fst A A) * snd (A ⊗ A) A) L)
             (overPullback ((fst (A ⊗ A) A ≫ snd A A) * snd (A ⊗ A) A) L))) :=
   sorry
 

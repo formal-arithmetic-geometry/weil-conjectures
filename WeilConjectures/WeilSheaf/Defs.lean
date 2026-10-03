@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.Category
+public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.LowerShriek
@@ -27,11 +28,13 @@ one copy.
 an isomorphism `Fr_X^* F ≅ F` for the geometric Galois Frobenius `Fr_X`. These definitions are
 a degenerate scaffold: constructible sheaves of discrete `ℚ̄_ℓ`-modules are zero, so every Weil
 sheaf and every Weil complex is zero, and `WeilComplex` is not triangulated; see the
-implementation notes of `WeilConjectures.WeilSheaf.Category`. The notions built on
-them in `WeilConjectures.WeilSheaf.Stalk`, `WeilConjectures.WeilSheaf.OpenImmersion`,
-`WeilConjectures.WeilSheaf.LowerShriek`, `WeilConjectures.WeilSheaf.Dual` and
-`WeilConjectures.WeilSheaf.Fourier` are still placeholders with `sorry` bodies, each carrying a
-`TODO(unify)` comment naming the blueprint node that owns it; nothing is proved about them.
+implementation notes of `WeilConjectures.WeilSheaf.Category`. The geometric stalks with their
+local Frobenius, the trace function and the global sections are constructed in
+`WeilConjectures.WeilSheaf.Stalk`. The notions built on them in
+`WeilConjectures.WeilSheaf.OpenImmersion`, `WeilConjectures.WeilSheaf.LowerShriek`,
+`WeilConjectures.WeilSheaf.Dual` and `WeilConjectures.WeilSheaf.Fourier` are still placeholders
+with `sorry` bodies, each carrying a `TODO(unify)` comment naming the blueprint node that owns
+it; nothing is proved about them.
 
 What is *not* provisional is the weight formalism they are phrased against:
 `FrobeniusModule` (`WeilConjectures.ZetaLinearAlgebra.FrobeniusModule`) is an honest
@@ -62,6 +65,10 @@ instead, which `FrobeniusModule.IsPureOfWeightOver` names.
 - `AlgebraicGeometry.WeilSheaf.higherLowerShriek` and
   `AlgebraicGeometry.WeilComplex.derivedLowerShriek`: the higher direct images with compact
   support `Rʳf₀!` and the total derived one `Rf₀!`.
+- `AlgebraicGeometry.WeilComplex.compactlySupportedCohomology` and
+  `AlgebraicGeometry.WeilSheaf.compactlySupportedCohomology`: compactly supported cohomology
+  `H_c^r(X ⊗ k̄, K) = Hʳ(Spec k̄, Ra_! K)` with its geometric Frobenius
+  (`WeilConjectures.WeilSheaf.Cohomology`).
 - `AlgebraicGeometry.WeilSheaf.directImage`, `AlgebraicGeometry.WeilSheaf.extensionByZero` and
   `AlgebraicGeometry.WeilSheaf.extensionByZeroToDirectImage`: the two extensions along an open
   immersion and the canonical map between them.

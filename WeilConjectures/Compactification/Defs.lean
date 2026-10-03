@@ -31,6 +31,8 @@ We derive the properties of the morphisms involved in a compactification:
 - `Compactification.ofIsProper`: a proper morphism is a compactification of itself;
 - `Compactification.copy` and `HasCompactification.of_eq`: a compactification of `f` is one
   of any morphism equal to `f`;
+- `Compactification.transport`: a compactification transports along isomorphisms of the
+  source and the target;
 - `Compactification.precomp` and `HasCompactification.comp_of_isOpenImmersion`:
   compactifiability is inherited by open subschemes of the source.
 
@@ -95,6 +97,24 @@ def copy (c : Compactification f) {f' : X ⟶ Y} (h : f' = f) : Compactification
   comm := h.trans c.comm
   isProper := c.isProper
   isOpenImmersion := c.isOpenImmersion
+
+/-- The compactification of `f'` transported from a compactification `X ⟶[i] Z ⟶[g] Y` of `f`
+along isomorphisms `eX : X ≅ X'`, `eY : Y ≅ Y'` with `f ≫ eY = eX ≫ f'`;
+its open immersion and its proper morphism are the composites
+```
+X' --eX⁻¹--> X --i--> Z --g--> Y --eY--> Y'
+```
+-/
+@[simps]
+def transport {X' Y' : Scheme.{u}} {f' : X' ⟶ Y'} (eX : X ≅ X') (eY : Y ≅ Y')
+    (w : f ≫ eY.hom = eX.hom ≫ f') (c : Compactification f) : Compactification f' where
+  Z := c.Z
+  g := c.g ≫ eY.hom
+  i := eX.inv ≫ c.i
+  comm := by
+    rw [Category.assoc, ← Category.assoc c.i, ← c.comm, w, Iso.inv_hom_id_assoc]
+  isProper := inferInstance
+  isOpenImmersion := inferInstance
 
 /-- **Compactifications restrict to open subschemes**: if `c` is a compactification of
 `f : X ⟶ Y` and `e : X' ⟶ X` is an open immersion, then composing `e` with the open

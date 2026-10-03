@@ -51,7 +51,8 @@ functors yields `RF ⋙ RG ≅ RH` in one step
 - `CategoryTheory.Functor.PreservesKInjectiveComplexes`: the class of additive functors
   sending K-injective complexes to K-injective complexes, with the criterion
   `CategoryTheory.Adjunction.preservesKInjectiveComplexes` for right adjoints of exact
-  functors.
+  functors and its special case
+  `CategoryTheory.Functor.preservesKInjectiveComplexes_of_isEquivalence` for equivalences.
 - `CategoryTheory.Functor.rightDerivedFunctorNatTrans` and
   `Functor.rightDerivedFunctorNatIso`: functoriality of the total right derived functor.
 - `CategoryTheory.Functor.rightDerivedFunctorCompIso`: the composition isomorphism
@@ -111,6 +112,14 @@ lemma Adjunction.preservesKInjectiveComplexes {G : D ⥤ C} {F : C ⥤ D} (adj :
       (((F.mapHomotopy
         (CochainComplex.IsKInjective.homotopyZero g' hM')).compLeft (adjc.unit.app M)).trans
         (Homotopy.ofEq hzero))⟩
+
+/-- An additive equivalence preserves K-injective complexes, being right adjoint to its
+inverse, which is exact. -/
+instance Functor.preservesKInjectiveComplexes_of_isEquivalence (F : C ⥤ D) [F.Additive]
+    [F.IsEquivalence] : F.PreservesKInjectiveComplexes :=
+  have : F.asEquivalence.functor.Additive := ‹F.Additive›
+  have : F.asEquivalence.symm.functor.Additive := F.asEquivalence.inverse_additive
+  F.asEquivalence.symm.toAdjunction.preservesKInjectiveComplexes
 
 end PreservesKInjective
 
