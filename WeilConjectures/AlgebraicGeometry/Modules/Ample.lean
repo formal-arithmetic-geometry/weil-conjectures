@@ -15,6 +15,7 @@ public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 /-!
 # Ample invertible modules and the Hilbert degree
@@ -45,6 +46,10 @@ leading coefficient whenever that function is a numerical polynomial of degree a
 - `AlgebraicGeometry.Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one`: in dimension
   one the degree is the cohomological degree `χ(M) - χ(𝒪_X)`.
 - `AlgebraicGeometry.IsVeryAmple.isInvertible`: a very ample module is invertible.
+- `AlgebraicGeometry.IsAmple.pullback`: the restriction of an ample module to a closed subscheme
+  is ample.
+- `AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace`: an ample invertible
+  module on a connected proper curve has positive degree.
 - `AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`: an ample invertible module on a proper
   curve has positive degree.
 - `AlgebraicGeometry.Scheme.Hom.degree_pullback`: the degree multiplies by the degree of the
@@ -55,7 +60,7 @@ leading coefficient whenever that function is a numerical polynomial of degree a
 
 universe u
 
-open CategoryTheory Limits TopologicalSpace
+open CategoryTheory Limits TopologicalSpace Function
 
 namespace AlgebraicGeometry
 
@@ -133,14 +138,109 @@ lemma Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one (f : X ⟶ Spec 
     Scheme.Modules.eulerChar_congr K (MonoidalCategory.rightUnitor M)]
   rfl
 
+/-- **The restriction of an ample module to a closed subscheme is ample.** If `L^{⊗ n}` is the
+pullback of `𝒪(1)` along a closed immersion `X ⟶ ℙ(m; K)`, then `(i^* L)^{⊗ n} ≅ i^* (L^{⊗ n})`
+is its pullback along the closed immersion `Z ⟶ X ⟶ ℙ(m; K)` (Stacks, Properties of Schemes,
+Section 28.26).
+
+This is used in the proof of blueprint `lem-sc-ample-positive-degree`. -/
+theorem IsAmple.pullback {Z : Scheme.{u}} {f : X ⟶ Spec (.of K)} {L : X.Modules}
+    (hL : IsAmple f L) (i : Z ⟶ X) [IsClosedImmersion i] :
+    IsAmple (i ≫ f) ((Scheme.Modules.pullback i).obj L) :=
+  sorry
+
+/-- **An ample module on a connected proper curve has positive degree.** Let `K` be
+algebraically closed, `X` a connected proper curve over `K` and `L` an ample invertible
+`𝒪_X`-module. Then `deg L = χ(L) - χ(𝒪_X) > 0`.
+
+This is the connected case of blueprint `lem-sc-ample-positive-degree`, recorded there as
+classical input without a separate proof. -/
+@[stacks 0B5X]
+theorem Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace [IsAlgClosed K]
+    (f : X ⟶ Spec (.of K)) [IsProper f] [ConnectedSpace X] (hdim : topologicalKrullDim X = 1)
+    (L : X.Modules) [L.IsInvertible] (hample : IsAmple f L) : 0 < f.degree L :=
+  sorry
+
 /-- Blueprint `sk-prop-av-ample-positive`: Ample modules on proper curves have positive degree.
 
 Let `K` be algebraically closed, `C` a proper curve over `K` of dimension one (possibly
-disconnected) and `L` an ample invertible `𝒪_C`-module. Then `deg L > 0`. -/
+disconnected) and `L` an ample invertible `𝒪_C`-module. Then `deg L > 0`.
+
+This is also blueprint `lem-sc-ample-positive-degree`. The proof decomposes `C` into its
+finitely many connected components `C_i`, which are open and closed. The degree is additive
+over them (`AlgebraicGeometry.Scheme.Modules.degree_eq_sum`); a component of dimension `0` is a
+single point, so contributes `0`; a component of dimension `1` contributes a positive degree by
+the connected case `AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace`, since
+`L|_{C_i}` is ample (`AlgebraicGeometry.IsAmple.pullback`). If all components had dimension `0`,
+`C` would be discrete, so at least one has dimension `1`. -/
 theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)) [IsProper f]
     (hdim : topologicalKrullDim X = 1) (L : X.Modules) [L.IsInvertible] (hample : IsAmple f L) :
-    0 < f.degree L :=
-  sorry
+    0 < f.degree L := by
+  let : X.Over (Spec (.of K)) := ⟨f⟩
+  have : IsProper (X ↘ Spec (.of K)) := ‹IsProper f›
+  have := LocallyOfFiniteType.isLocallyNoetherian f
+  have := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian X := {}
+  have : Fintype (ConnectedComponents X) := Fintype.ofFinite _
+  -- The connected components `U c` of `X`, open and closed in `X`.
+  let U (c : ConnectedComponents X) : X.Opens :=
+    ⟨ConnectedComponents.mk ⁻¹' {c}, (isOpen_discrete {c}).preimage
+      ConnectedComponents.continuous_coe⟩
+  have hU : _root_.Pairwise (Disjoint on U) := fun c d hcd ↦
+    Opens.coe_disjoint.mp ((Set.disjoint_singleton.mpr hcd).preimage ConnectedComponents.mk)
+  have hcover : ⨆ c, U c = ⊤ := eq_top_iff.mpr fun x _ ↦
+    Opens.mem_iSup.mpr ⟨ConnectedComponents.mk x, rfl⟩
+  let (c : ConnectedComponents X) : (U c).toScheme.Over (Spec (.of K)) := ⟨(U c).ι ≫ f⟩
+  have hdimU (c : ConnectedComponents X) :
+      topologicalKrullDim (U c) = 1 ∨ topologicalKrullDim (U c) ≤ 0 := by
+    rcases (hdim ▸ topologicalKrullDim_subspace_le X (U c)).lt_or_eq with h | h
+    · exact Or.inr (Order.le_of_lt_succ h)
+    · exact Or.inl h
+  -- Each component contributes a nonnegative degree, positive if it has dimension `1`.
+  have hdeg (c : ConnectedComponents X) :
+      0 ≤ ((Scheme.Modules.pullback (U c).ι).obj L).degree K ∧
+      (topologicalKrullDim (U c) = 1 →
+        0 < ((Scheme.Modules.pullback (U c).ι).obj L).degree K) := by
+    have : ConnectedSpace (U c) := by
+      obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe c
+      have : (U x : Set X) = connectedComponent x := connectedComponents_preimage_singleton
+      exact isConnected_iff_connectedSpace.mp (this ▸ isConnected_connectedComponent)
+    have hclosed : IsClosed (U c : Set X) :=
+      (isClosed_discrete {c}).preimage ConnectedComponents.continuous_coe
+    have : IsClosedImmersion (U c).ι := .of_isPreimmersion _ (by simpa using hclosed)
+    have hpos (h1 : topologicalKrullDim (U c) = 1) :
+        0 < ((Scheme.Modules.pullback (U c).ι).obj L).degree K := by
+      have := ((U c).ι ≫ f).degree_pos_of_isAmple_of_connectedSpace h1 _ (hample.pullback _)
+      rwa [degree_eq_degree_of_topologicalKrullDim_eq_one _ h1] at this
+    refine ⟨?_, hpos⟩
+    rcases hdimU c with h | h
+    · exact (hpos h).le
+    · exact (Scheme.Modules.degree_eq_zero_of_topologicalKrullDim_le_zero K h _).ge
+  rw [degree_eq_degree_of_topologicalKrullDim_eq_one f hdim,
+    Scheme.Modules.degree_eq_sum K hdim.le U hU hcover L]
+  refine Finset.sum_pos' (fun c _ ↦ (hdeg c).1) ?_
+  -- Some component has dimension `1`: otherwise every component is discrete, hence so is `X`.
+  by_contra! h
+  have : DiscreteTopology X := by
+    refine discreteTopology_iff_isOpen_singleton.mpr fun x ↦ ?_
+    have := IsLocallyArtinian.of_topologicalKrullDim_le_zero
+      ((hdimU (ConnectedComponents.mk x)).resolve_left fun h1 ↦
+        (h _ (Finset.mem_univ _)).not_gt ((hdeg _).2 h1))
+    have hd : DiscreteTopology (U (ConnectedComponents.mk x)) :=
+      IsLocallyArtinian.discreteTopology (X := (U (ConnectedComponents.mk x)).toScheme)
+    have := (U (ConnectedComponents.mk x)).isOpen.isOpenMap_subtype_val _
+      (@isOpen_discrete _ _ hd {(⟨x, rfl⟩ : U (ConnectedComponents.mk x))})
+    convert this using 1
+    ext y
+    constructor
+    · rintro rfl
+      exact ⟨⟨y, rfl⟩, rfl, rfl⟩
+    · rintro ⟨z, hz, rfl⟩
+      rw [Set.mem_singleton_iff.mp hz]
+      rfl
+  have := topologicalKrullDim_zero_of_discreteTopology X
+  rw [hdim] at this
+  exact absurd this (by decide)
 
 /-- Blueprint `sk-prop-av-deg-pullback`: Degree of a pullback under a finite morphism.
 

@@ -31,6 +31,8 @@ An `𝒪_X`-module is *invertible* if it is locally isomorphic to `𝒪_X`.
 
 - `AlgebraicGeometry.Scheme.Modules.IsInvertible.pullback`: the pullback of an invertible module
   along any morphism of schemes is invertible.
+- `AlgebraicGeometry.Scheme.Modules.IsInvertible.nonempty_iso_unit`: on a scheme with a single
+  point every invertible module is trivial.
 -/
 
 @[expose] public section
@@ -80,6 +82,16 @@ lemma IsInvertible.of_iso {M N : X.Modules} (e : M ≅ N) [M.IsInvertible] : N.I
     obtain ⟨U, hx, ⟨e'⟩⟩ := IsInvertible.exists_isoUnit (M := M) x
     exact ⟨U, hx, ⟨(Scheme.Modules.pullback U.ι).mapIso e.symm ≪≫ e'⟩⟩
 
+/-- On a scheme with a single point `x`, every invertible module is trivial: it is trivial on
+an open neighbourhood of `x`, which is all of `X`. -/
+lemma IsInvertible.nonempty_iso_unit [Subsingleton X] (x : X) (M : X.Modules)
+    [M.IsInvertible] : Nonempty (M ≅ SheafOfModules.unit _) := by
+  obtain ⟨U, hx, ⟨e⟩⟩ := IsInvertible.exists_isoUnit (M := M) x
+  obtain rfl : U = ⊤ := eq_top_iff.mpr fun y _ ↦ by rwa [Subsingleton.elim y x]
+  exact ⟨((pullbackId X).app M).symm ≪≫ (pullbackCongr (Scheme.toIso_inv_ι X).symm).app M ≪≫
+    (pullbackComp _ _).symm.app M ≪≫ (Scheme.Modules.pullback X.topIso.inv).mapIso e ≪≫
+    pullbackObjUnitIso _⟩
+
 /-- The monoidal category structure on `𝒪_X`-modules: the tensor product over `𝒪_X`.
 This uses that `X.ringCatSheaf` is by definition the underlying sheaf of rings
 `(sheafCompose _ (forget₂ CommRingCat RingCat)).obj X.sheaf` of `X.sheaf`. -/
@@ -89,6 +101,10 @@ noncomputable instance : MonoidalCategory X.Modules :=
 /-- The monoidal category structure on `𝒪_X`-modules is symmetric. -/
 noncomputable instance : SymmetricCategory X.Modules :=
   SheafOfModules.symmetricCategory X.sheaf
+
+/-- The structure sheaf, the unit of the tensor product, is invertible. -/
+instance isInvertible_tensorUnit : (𝟙_ X.Modules).IsInvertible where
+  exists_isoUnit _ := ⟨⊤, trivial, ⟨pullbackObjUnitIso _⟩⟩
 
 /-- The tensor product `M ⊗_{𝒪_X} N` of two `𝒪_X`-modules: the sheafification of the tensor
 product of the underlying presheaves of modules (`SheafOfModules.tensorObjIsoSheafification`).
