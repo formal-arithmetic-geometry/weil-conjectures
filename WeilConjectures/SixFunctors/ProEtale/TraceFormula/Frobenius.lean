@@ -344,7 +344,7 @@ instance isFinite_relativeFrobenius (f : X ⟶ Y) (frobX : X ⟶ X) (frobY : Y �
 /-- The relative Frobenius of a morphism between schemes whose Frobenius morphisms are
 finite universal homeomorphisms is a universal homeomorphism
 (blueprint: `sk-i-relative-frob`). -/
-instance isUniversalHomeomorphism_relativeFrobenius (f : X ⟶ Y) (frobX : X ⟶ X)
+theorem isUniversalHomeomorphism_relativeFrobenius (f : X ⟶ Y) (frobX : X ⟶ X)
     (frobY : Y ⟶ Y) (h : f ≫ frobY = frobX ≫ f) [IsFinite frobX] [IsFinite frobY]
     [IsUniversalHomeomorphism frobX] [IsUniversalHomeomorphism frobY] :
     IsUniversalHomeomorphism (relativeFrobenius f frobX frobY h) :=
@@ -354,7 +354,7 @@ instance isUniversalHomeomorphism_relativeFrobenius (f : X ⟶ Y) (frobX : X ⟶
 an equivalence `Lr^* : D(Y, A) ≌ D(X, A)`, with inverse `Rr_* = Rr_!` and invertible unit
 and counit. Reduction of a scheme is a finite universal homeomorphism, so the statement
 covers it (blueprint: `sk-i-topology`). -/
-instance isEquivalence_leftDerivedUpperStar (r : X ⟶ Y) [IsFinite r]
+theorem isEquivalence_leftDerivedUpperStar (r : X ⟶ Y) [IsFinite r]
     [IsUniversalHomeomorphism r] : ((upperStar A r).leftDerivedFunctor).IsEquivalence :=
   sorry
 
@@ -391,7 +391,7 @@ with `f' = pullback.fst g_Y f` and `p = pullback.snd g_Y f`. It is the natural t
   Lg_Y^* Rf_! K ──baseChange sq──▶ Rf'_! Lp^* K
     ──Rf'_!(unit of Lr^* ⊣ Rr_*)──▶ Rf'_! Rr_* Lr^* Lp^* K
     ──Rf'_!(properComparison r).inv──▶ Rf'_! Rr_! Lr^* Lp^* K
-    ──lowerShriekComp r f' ≪≫ lowerShriekCongr──▶ Rf_! Lr^* Lp^* K
+    ──lowerShriekComp r f' ≪≫ rightDerivedLowerShriekCongr──▶ Rf_! Lr^* Lp^* K
     ──Rf_!(leftDerivedUpperStarComp r p ≪≫ leftDerivedUpperStarCongr)──▶ Rf_! Lg_X^* K.
 ```
 
@@ -417,7 +417,8 @@ noncomputable def lowerShriekExchange (G : GeometricOperations A s) (f : X ⟶ Y
         Functor.whiskerLeft (upperStar A r).leftDerivedFunctor (G.properComparison r).inv))
       (rightDerivedLowerShriek A f') ≫
     Functor.whiskerLeft ((upperStar A p).leftDerivedFunctor ⋙ (upperStar A r).leftDerivedFunctor)
-      (G.lowerShriekComp r f' ≪≫ lowerShriekCongr (relativeFrobenius_comp_fst f gX gY h)).hom ≫
+      (G.lowerShriekComp r f' ≪≫
+        rightDerivedLowerShriekCongr A (relativeFrobenius_comp_fst f gX gY h)).hom ≫
     Functor.whiskerRight ((leftDerivedUpperStarComp A r p).symm ≪≫
       leftDerivedUpperStarCongr A (relativeFrobenius_comp_snd f gX gY h)).hom
       (rightDerivedLowerShriek A f)

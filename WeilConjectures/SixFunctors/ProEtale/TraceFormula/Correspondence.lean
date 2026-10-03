@@ -65,7 +65,8 @@ functors and the comparison data of the package
   hence the field `lowerShriekId`;
 * `globalOperator` uses the fields `properComparison` and `lowerShriekComp`, transported
   along `c₁ ≫ a_X = a_C = c₂ ≫ a_X` by `rightDerivedLowerShriekCongr`;
-* `borelMooreRestrict` uses the fields `upperStarUnit`, `openPurity` and `dualizingComp`;
+* `borelMooreRestrict` uses `upperStarUnit`, `GeometricOperations.openPurity` (built from the
+  fields `baseChange` and `lowerShriekId`) and the field `dualizingComp`;
 * `borelMoorePushforward` uses the fields `upperStarUnit`, `properComparison` and
   `dualizingComp`, and `integral` is the pushforward along `a_T : T ⟶ s` followed by
   `dualizingBase`.

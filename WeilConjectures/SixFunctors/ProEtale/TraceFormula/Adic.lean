@@ -40,11 +40,12 @@ project: coefficients are abstract monoidal Grothendieck abelian categories, and
 functor `- ⊗ᴸ_A B` between the associated derived categories of pro-étale sheaves is part
 of the six-operations chapter. It is therefore a parameter `Ψ` of the first statement,
 a family of functors `Ψ Z : D(Z, A) ⥤ D(Z, B)`, and the compatibilities that its
-construction supplies are hypotheses: `Ψ` commutes with `Lg^*`, and with `Rg_*` for an
-open immersion and for a proper `g`. These are exactly the ingredients out of which
-`Rf_! = Rf̄_* ∘ j_!` is assembled, which is why the conclusion for `Rf_!` is the content of
-the proposition. The blueprint's second assertion, for a geometric stalk, is the pullback
-hypothesis read at the point, so it gets no separate declaration. The conclusion is a
+construction supplies are hypotheses: `Ψ` commutes with the extension by zero `j_!` along
+an open immersion and with `Rg_*` for a proper `g`. These are exactly the ingredients out of
+which `Rf_! = Rf̄_* ∘ j_!` is assembled, so the conclusion for `Rf_!` follows formally from
+them. The blueprint's second assertion, for a geometric stalk, is the commutation of `Ψ`
+with `Lx̄^*`, a property of the construction of `Ψ` rather than a consequence of the
+proposition, so it gets no separate declaration. The conclusion is a
 `Nonempty` isomorphism of *functors*, since the comparison maps themselves are not
 available; naturality is what the sketch's "the comparisons are natural, hence compatible
 with the Frobenius maps" means.
@@ -107,24 +108,29 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
   [Abelian.HasFunctorialFlatResolution B] {s X : Scheme.{u}}
 
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [MonoidalCategory B] [MonoidalPreadditive B]
+  [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B] in
 /-- Finite-level coefficient change for compactly supported cohomology: derived scalar
 extension `- ⊗ᴸ_A B` commutes with `Ra_{X!}`, that is, `(Ra_{X!} K) ⊗ᴸ B ≅ Ra_{X!}(K ⊗ᴸ B)`
 (blueprint: `sk-p-trace-coeff`). -/
 theorem nonempty_rightDerivedLowerShriek_comp_iso
     (Ψ : ∀ Z : Scheme.{u}, DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology Z) B))
-    (hupperStar : ∀ {Z Z' : Scheme.{u}} (g : Z ⟶ Z'),
-      Nonempty ((upperStar A g).leftDerivedFunctor ⋙ Ψ Z ≅
-        Ψ Z' ⋙ (upperStar B g).leftDerivedFunctor))
-    (hlowerStarOpen : ∀ {Z Z' : Scheme.{u}} (g : Z ⟶ Z'), IsOpenImmersion g →
-      Nonempty ((lowerStar A g).rightDerivedFunctor ⋙ Ψ Z' ≅
-        Ψ Z ⋙ (lowerStar B g).rightDerivedFunctor))
-    (hlowerStarProper : ∀ {Z Z' : Scheme.{u}} (g : Z ⟶ Z'), IsProper g →
+    (hlowerShriekOpen : ∀ {Z Z' : Scheme.{u}} (g : Z ⟶ Z') [IsOpenImmersion g],
+      Nonempty ((openImmersionLowerShriek A g).mapDerivedCategory ⋙ Ψ Z' ≅
+        Ψ Z ⋙ (openImmersionLowerShriek B g).mapDerivedCategory))
+    (hlowerStarProper : ∀ {Z Z' : Scheme.{u}} (g : Z ⟶ Z') [IsProper g],
       Nonempty ((lowerStar A g).rightDerivedFunctor ⋙ Ψ Z' ≅
         Ψ Z ⋙ (lowerStar B g).rightDerivedFunctor))
     (aX : X ⟶ s) [HasCompactification aX] :
-    Nonempty (rightDerivedLowerShriek A aX ⋙ Ψ s ≅ Ψ X ⋙ rightDerivedLowerShriek B aX) :=
-  sorry
+    Nonempty (rightDerivedLowerShriek A aX ⋙ Ψ s ≅ Ψ X ⋙ rightDerivedLowerShriek B aX) := by
+  obtain ⟨e₁⟩ := hlowerShriekOpen (HasCompactification.compactification aX).i
+  obtain ⟨e₂⟩ := hlowerStarProper (HasCompactification.compactification aX).g
+  rw [rightDerivedLowerShriek_eq, rightDerivedLowerShriek_eq]
+  exact ⟨Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ e₂ ≪≫
+    (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight e₁ _ ≪≫
+    Functor.associator _ _ _⟩
 
 /-- Adic realization, derived completeness: the realization `K_{𝒪_E} = R lim_n K_n` of a
 normalized system `K_• = (K_n, t_{n+1,n})` of finite-level complexes is derived complete

@@ -130,7 +130,8 @@ noncomputable def exceptionalMate :
       ((leftDerivedUpperStarComp A i pY).symm ≪≫ leftDerivedUpperStarCongr A hY).hom.app N ≫
       u ≫
       (conjugateIsoEquiv (rightDerivedUpperShriekAdjunction A cX)
-        (rightDerivedUpperShriekAdjunction A (i ≫ pX)) (lowerShriekCongr (A := A) hX)).hom.app M ≫
+        (rightDerivedUpperShriekAdjunction A (i ≫ pX))
+        (rightDerivedLowerShriekCongr A hX)).hom.app M ≫
       (G.upperShriekComp i pX).hom.app M) ≫
     (rightDerivedUpperShriekAdjunction A i).counit.app _
 

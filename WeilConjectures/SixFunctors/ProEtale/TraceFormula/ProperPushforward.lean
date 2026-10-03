@@ -203,7 +203,7 @@ noncomputable def pushforwardCoeffCounit (G : GeometricOperations A s) :
   have : HasCompactification (c.fst ≫ P.f) := .of_eq P.g_fst
   (rightDerivedUpperShriekAdjunction A P.fst).homEquiv _ _
     ((rightDerivedLowerShriek A P.fst).map ((G.properComparison P.g).inv.app _) ≫
-      (G.lowerShriekComp P.g P.fst ≪≫ lowerShriekCongr P.g_fst ≪≫
+      (G.lowerShriekComp P.g P.fst ≪≫ rightDerivedLowerShriekCongr A P.g_fst ≪≫
           (G.lowerShriekComp c.fst P.f).symm).hom.app _ ≫
       (rightDerivedLowerShriek A P.f).map
         ((rightDerivedUpperShriekAdjunction A c.fst).counit.app K) ≫
