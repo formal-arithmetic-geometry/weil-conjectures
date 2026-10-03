@@ -29,7 +29,9 @@ proper.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_unit_app`
-- `AlgebraicGeometry.Etale.exists_distTriang_supportedLocalization`
+- `AlgebraicGeometry.Etale.subsingleton_hom_rightDerivedLowerStar_rightDerivedLowerStar_shift`
+- `AlgebraicGeometry.Etale.existsUnique_distTriang_supportedLocalization`
+- `AlgebraicGeometry.Etale.supportedLocalization_naturality`
 -/
 
 @[expose] public section
@@ -74,26 +76,75 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
 
 /-- Blueprint `sk-prop-sf-localization`: Supported localization
 
+**No maps from the closed side to the open side.** Let `i : Z ⟶ X` be a closed immersion with
+complementary open `j : U ⟶ X`. Then `Hom(Ri_* A, (Rj_* B)[n]) = 0` for all `A`, `B` and `n`:
+by `Lj^* ⊣ Rj_*` it is `Hom(Lj^* Ri_* A, B[n])`, and `Lj^* Ri_* = 0` [BBD, 1.1.9]. -/
+theorem subsingleton_hom_rightDerivedLowerStar_rightDerivedLowerStar_shift (i : Z ⟶ X)
+    (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    (B : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
+    (C : _root_.DerivedCategory (Sheaf U.smallEtaleTopology A)) (n : ℤ) :
+    Subsingleton ((R((i)_*[A])).obj B ⟶ ((R((j)_*[A])).obj C)⟦n⟧) :=
+  sorry
+
+/-- Blueprint `sk-prop-sf-localization`: Supported localization
+
 **The supported localization triangle.** Let `i : Z ⟶ X` be a closed immersion with
-complementary open `j : U ⟶ X`. For `L ∈ D^b_{ctf}(X, Λ)` the *adjunction maps*
+complementary open `j : U ⟶ X`. For `L ∈ D(X_ét, A)` the *adjunction maps*
 
 ```
   Ri_! Ri^! L --ε_L--> L --η_L--> Rj_* Lj^* L --w--> (Ri_! Ri^! L)[1]
 ```
 
 — `ε` the counit of `Ri_! ⊣ Ri^!` and `η` the unit of `Lj^* ⊣ Rj_*` — extend to a
-distinguished triangle; only the connecting map `w` is not canonically given. Under the
-closed-immersion unit `Ri_! Ri^! L` is cohomology with supports along `Z`.
+distinguished triangle, and the connecting map `w` is *unique*: two choices differ by a map
+`Rj_* Lj^* L ⟶ (Ri_! Ri^! L)[1]` factoring through `L`, hence by
+`subsingleton_hom_rightDerivedLowerStar_rightDerivedLowerStar_shift` they agree [BBD, 1.1.10].
+Under the closed-immersion unit `Ri_! Ri^! L` is cohomology with supports along `Z`.
 
 The triangle is the derived form of the open–closed sequence, obtained from the open–closed
 triangle by the closed-immersion unit and the determination of a natural transformation on a
-generating class; it is natural in `L`, which the objectwise form below does not record. -/
-theorem exists_distTriang_supportedLocalization (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i]
-    [HasCompactification i] [IsOpenImmersion j]
+generating class. -/
+theorem existsUnique_distTriang_supportedLocalization (i : Z ⟶ X) (j : U ⟶ X)
+    [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    ∃ w, Triangle.mk ((rightDerivedUpperShriekAdjunction A i).counit.app L)
+    ∃! w, Triangle.mk ((rightDerivedUpperShriekAdjunction A i).counit.app L)
       ((derivedUpperStarLowerStarAdjunction A j).unit.app L) w ∈ distTriang _ :=
+  sorry
+
+/-- Blueprint `sk-prop-sf-localization`: Supported localization
+
+**Naturality of the supported localization triangle.** For `φ : L ⟶ L'` and the supported
+localization triangles of `L` and `L'` (with their unique connecting maps, see
+`existsUnique_distTriang_supportedLocalization`), the triple
+`(Ri_! Ri^! φ, φ, Rj_* Lj^* φ)` is a morphism of triangles, and it is the only morphism of
+triangles whose middle component is `φ`: by
+`subsingleton_hom_rightDerivedLowerStar_rightDerivedLowerStar_shift` a morphism of these
+triangles is determined by its middle component [BBD, 1.1.9]. -/
+theorem supportedLocalization_naturality (i : Z ⟶ X) (j : U ⟶ X)
+    [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    {L L' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : L ⟶ L')
+    (w : (R((j)_*[A])).obj ((L((j)^*[A])).obj L) ⟶
+      ((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦(1 : ℤ)⟧)
+    (w' : (R((j)_*[A])).obj ((L((j)^*[A])).obj L') ⟶
+      ((R(i)_![A]).obj ((R(i)^![A]).obj L'))⟦(1 : ℤ)⟧)
+    (hw : Triangle.mk ((rightDerivedUpperShriekAdjunction A i).counit.app L)
+      ((derivedUpperStarLowerStarAdjunction A j).unit.app L) w ∈ distTriang _)
+    (hw' : Triangle.mk ((rightDerivedUpperShriekAdjunction A i).counit.app L')
+      ((derivedUpperStarLowerStarAdjunction A j).unit.app L') w' ∈ distTriang _) :
+    (∃ τ : Triangle.mk ((rightDerivedUpperShriekAdjunction A i).counit.app L)
+        ((derivedUpperStarLowerStarAdjunction A j).unit.app L) w ⟶
+      Triangle.mk ((rightDerivedUpperShriekAdjunction A i).counit.app L')
+        ((derivedUpperStarLowerStarAdjunction A j).unit.app L') w',
+      τ.hom₁ = (R(i)_![A]).map ((R(i)^![A]).map φ) ∧ τ.hom₂ = φ ∧
+        τ.hom₃ = (R((j)_*[A])).map ((L((j)^*[A])).map φ)) ∧
+    ∀ τ τ' : Triangle.mk ((rightDerivedUpperShriekAdjunction A i).counit.app L)
+        ((derivedUpperStarLowerStarAdjunction A j).unit.app L) w ⟶
+      Triangle.mk ((rightDerivedUpperShriekAdjunction A i).counit.app L')
+        ((derivedUpperStarLowerStarAdjunction A j).unit.app L') w',
+      τ.hom₂ = φ → τ'.hom₂ = φ → τ = τ' :=
   sorry
 
 end Localization
