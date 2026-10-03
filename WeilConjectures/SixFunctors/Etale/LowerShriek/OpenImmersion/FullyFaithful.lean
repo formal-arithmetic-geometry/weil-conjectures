@@ -45,6 +45,8 @@ is fully faithful", and none is needed here.
   `j_! ⊣ j^*` is an isomorphism.
 - `AlgebraicGeometry.Etale.fullyFaithfulOpenImmersionLowerShriek`, with the corresponding
   `Full` and `Faithful` instances.
+- `AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion`: the pushforward `j_*` is
+  fully faithful as well, so `j^* j_* F ≅ F`.
 - `AlgebraicGeometry.Etale.isIso_openImmersionRestriction_map_lowerShriekAdjunction_counit`:
   `j^*` of the counit of `j_! ⊣ j^*` is an isomorphism at every sheaf. This is the form the
   comparison `j_! ⟶ j_*` consumes; see
@@ -88,6 +90,29 @@ instance Etale.full_openImmersionLowerShriek : (j)_!open[A].Full :=
 
 instance Etale.faithful_openImmersionLowerShriek : (j)_!open[A].Faithful :=
   (Etale.fullyFaithfulOpenImmersionLowerShriek A j).faithful
+
+/-- **The pushforward along an open immersion is fully faithful**, the counit of `j^* ⊣ j_*`
+being an isomorphism by `Etale.isIso_openImmersionRestrictionLowerStarAdjunction_counit`.
+In particular the counit of `Etale.upperStarLowerStarAdjunction` along `j` is an isomorphism,
+i.e. `j^* j_* F ≅ F`. -/
+noncomputable def Etale.fullyFaithfulLowerStarOfIsOpenImmersion : (j)_*[A].FullyFaithful :=
+  (Etale.openImmersionRestrictionLowerStarAdjunction A j).fullyFaithfulROfIsIsoCounit
+
+instance Etale.full_lowerStar_of_isOpenImmersion : (j)_*[A].Full :=
+  (Etale.fullyFaithfulLowerStarOfIsOpenImmersion A j).full
+
+instance Etale.faithful_lowerStar_of_isOpenImmersion : (j)_*[A].Faithful :=
+  (Etale.fullyFaithfulLowerStarOfIsOpenImmersion A j).faithful
+
+/-- `j^*` of the unit of `j^* ⊣ j_*` is an isomorphism at every sheaf `G` on `X`, for an open
+immersion `j`: the triangle identity `j^*(η_G) ≫ ε_{j^* G} = 𝟙` exhibits it as the inverse of
+the counit `ε_{j^* G}`, which is an isomorphism since `j_*` is fully faithful. -/
+instance Etale.isIso_upperStar_map_upperStarLowerStarAdjunction_unit_of_isOpenImmersion
+    (G : Sheaf X.smallEtaleTopology A) :
+    IsIso ((j)^*[A].map ((Etale.upperStarLowerStarAdjunction A j).unit.app G)) := by
+  rw [← IsIso.inv_eq_of_inv_hom_id
+    ((Etale.upperStarLowerStarAdjunction A j).left_triangle_components G)]
+  infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
 /-- `j^*` of the counit of `j_! ⊣ j^*` is an isomorphism at every sheaf `G` on `X`.
