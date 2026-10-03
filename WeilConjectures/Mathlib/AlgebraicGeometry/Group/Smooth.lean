@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Group.Affine
 public import Mathlib.AlgebraicGeometry.Group.Smooth
+public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 
 /-!
 # Cartier's theorem: group schemes in characteristic zero are smooth
@@ -55,6 +57,26 @@ universe u
 variable {K : Type u} [Field K] [CharZero K] {G : Scheme} (f : G ⟶ Spec (.of K))
   [LocallyOfFiniteType f] [GrpObj (Over.mk f)]
 
+include f in
+/-- **Cartier's theorem** for affine group schemes: an affine group scheme of finite type over a
+field of characteristic zero is reduced. Its coordinate ring is a finitely generated Hopf algebra,
+reduced by `HopfAlgebra.isReduced_of_charZero`. (blueprint: `lem-ag-cartier-reduced`) -/
+theorem isReduced_of_grpObj_of_isAffine [IsAffine G] : IsReduced G := by
+  obtain ⟨H, ⟨e⟩⟩ := (essImage_hopfSpec (R := .of K) (G := Grp.mk (Over.mk f))).2 ‹_›
+  have he : e.hom.hom.hom.left ≫ f = Spec.map (CommRingCat.ofHom (algebraMap K H.unop)) :=
+    Over.w e.hom.hom.hom
+  have : LocallyOfFiniteType (Spec.map (CommRingCat.ofHom (algebraMap K H.unop))) := by
+    rw [← he]
+    infer_instance
+  have : Algebra.FiniteType K H.unop := by
+    rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)] at this
+    exact RingHom.finiteType_algebraMap.1 this
+  have : _root_.IsReduced H.unop := HopfAlgebra.isReduced_of_charZero (k := K)
+  have : IsReduced ((hopfSpec (.of K)).obj H).X.left :=
+    inferInstanceAs (IsReduced (Spec (.of H.unop)))
+  exact isReduced_of_isOpenImmersion e.inv.hom.hom.left
+
+include f in
 /-- A group scheme locally of finite type over a field of characteristic zero has no nilpotents
 in its structure sheaf, i.e. it is reduced.
 (blueprint: `sk-i-cartier`) -/
@@ -65,6 +87,12 @@ theorem isReduced_of_grpObj : IsReduced G := by
 zero is smooth over the base field, equivalently `dim Lie(G) = dim G`.
 (blueprint: `sk-i-cartier`) -/
 theorem smooth_of_grpObj_of_charZero : Smooth f := by
-  sorry
+  have : GeometricallyReduced f := by
+    refine ⟨(geometrically_iff_of_commRing_of_isClosedUnderIsomorphisms).2 fun L _ _ ↦ ?_⟩
+    have : CharZero L := charZero_of_injective_algebraMap (algebraMap K L).injective
+    let : GrpObj (Over.mk (Limits.pullback.snd f (Spec.map (CommRingCat.ofHom
+      (algebraMap K L))))) := Over.grpObjMkPullbackSnd
+    exact isReduced_of_grpObj (Limits.pullback.snd f _)
+  exact smooth_of_grpObj f
 
 end AlgebraicGeometry
