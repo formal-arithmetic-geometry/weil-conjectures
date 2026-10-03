@@ -20,10 +20,11 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCart
 /-!
 # Riemann–Roch, Serre duality and the twist lemma for curves
 
-Let `X` be a smooth proper geometrically integral curve over a field `k`, with genus
-`g = dim_k H^1(X, 𝒪_X)` and degree `deg ℒ = χ(ℒ) - χ(𝒪_X)` of an invertible sheaf on it, both
-defined in `WeilConjectures/AlgebraicGeometry/Curve/Degree.lean`. We state Riemann–Roch, Serre duality, and the two statements about line bundles on the base
-change `X_K` of `X` along a field extension `K/k` that the Picard framework needs.
+Let `X` be a smooth proper geometrically integral curve over a field `k`. Its genus
+`g = dim_k H^1(X, 𝒪_X)` and the degree `deg ℒ = χ(ℒ) - χ(𝒪_X)` of an invertible sheaf on
+it are defined in `WeilConjectures/AlgebraicGeometry/Curve/Degree.lean`. We state
+Riemann–Roch, Serre duality, and the two statements about line bundles on the base change `X_K`
+of `X` along a field extension `K/k` that the Picard framework needs.
 
 ## Implementation notes
 
