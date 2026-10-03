@@ -27,6 +27,10 @@ pair vanish, and a zero sheaf is constructible (`IsConstructibleSheaf.of_isZero`
 (blueprint: `prop:constructible-open-closed`, `lemma:constructible-lowerStar-closed`,
 `lemma:constructible-lowerShriek-open`)
 
+When the complement of an open immersion `j` is a finite set of closed points, the range of
+`j` and these points form a stratification of `X`
+(`AlgebraicGeometry.Scheme.Stratification.ofOpenImmersion`).
+
 -/
 
 @[expose] public section
@@ -105,6 +109,58 @@ lemma IsConstructibleSheaf.of_isZero {F : Sheaf X.smallEtaleTopology A} (hF : Is
     IsFiniteLocallyConstantSheaf.of_isZero ((Etale.upperStar A (𝟙 X)).map_isZero hF)⟩
 
 end Zero
+
+section OpenImmersionPoints
+
+variable {U : Scheme.{u}}
+
+/-- The stratification of `X` whose strata are the range of an open immersion `j : U ⟶ X`
+and the points of its complement, when that complement is finite and consists of closed
+points. The point strata are realized by the closed immersions
+`X.fromSpecResidueField x ⟶ X`. -/
+@[simps n]
+def Stratification.ofOpenImmersion (j : U ⟶ X) [IsOpenImmersion j]
+    (hfin : (Set.range j.base)ᶜ.Finite) (hcl : ∀ x ∈ (Set.range j.base)ᶜ, IsClosed {x}) :
+    Stratification X :=
+  haveI := hfin.to_subtype
+  let e := (Finite.equivFin ↥(Set.range j.base)ᶜ).symm
+  { n := Nat.card ↥(Set.range j.base)ᶜ + 1
+    stratum := Fin.cases (Set.range j.base) fun i ↦ {(e i).1}
+    isLocallyClosed_stratum := Fin.cases j.isOpenEmbedding.isOpen_range.isLocallyClosed
+      fun i ↦ (hcl _ (e i).2).isLocallyClosed
+    iUnion_stratum_eq_univ := by
+      refine Set.eq_univ_of_forall fun x ↦ Set.mem_iUnion.mpr ?_
+      by_cases hx : x ∈ Set.range j.base
+      · exact ⟨0, hx⟩
+      · refine ⟨(e.symm ⟨x, hx⟩).succ, ?_⟩
+        rw [Fin.cases_succ, Equiv.apply_symm_apply]
+        rfl
+    pairwise_disjoint_stratum := by
+      intro a b hab
+      induction a using Fin.cases with
+      | zero =>
+        induction b using Fin.cases with
+        | zero => exact absurd rfl hab
+        | succ b =>
+          simp only [Function.onFun, Fin.cases_zero, Fin.cases_succ]
+          exact Set.disjoint_singleton_right.mpr (e b).2
+      | succ a =>
+        induction b using Fin.cases with
+        | zero =>
+          simp only [Function.onFun, Fin.cases_zero, Fin.cases_succ]
+          exact Set.disjoint_singleton_left.mpr (e a).2
+        | succ b =>
+          have : e a ≠ e b := fun h ↦ hab (by rw [e.injective h])
+          simp only [Function.onFun, Fin.cases_succ]
+          exact Set.disjoint_singleton.mpr (Subtype.coe_injective.ne this)
+    domain := Fin.cases U fun i ↦ Spec (X.residueField (e i).1)
+    immersion := Fin.cases j fun i ↦ X.fromSpecResidueField (e i).1
+    isImmersion := Fin.cases (inferInstanceAs (IsImmersion j)) fun i ↦
+      have := (isClosed_singleton_iff_isClosedImmersion (x := (e i).1)).mp (hcl _ (e i).2)
+      inferInstanceAs (IsImmersion (X.fromSpecResidueField (e i).1))
+    range_immersion := Fin.cases rfl fun i ↦ Scheme.range_fromSpecResidueField (e i).1 }
+
+end OpenImmersionPoints
 
 section Devissage
 
