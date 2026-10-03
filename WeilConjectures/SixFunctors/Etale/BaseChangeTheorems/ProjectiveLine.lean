@@ -5,8 +5,9 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
+public import WeilConjectures.AlgebraicGeometry.ChowLemma
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Stability
 
 /-!
 
@@ -114,11 +115,65 @@ theorem Etale.hasTorsionBaseChange_projectiveLine (S : Scheme.{u}) :
     Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S) :=
   sorry
 
+/-- **Products of projective lines satisfy base change**: if the projection `ℙ¹_S ⟶ S`
+satisfies the base change property for every scheme `S`, then so does the product projection
+`(ℙ¹_T)ⁿ ⟶ T`, which is the composite of `n` projective-line projections over the successive
+bases `T, ℙ¹_T, …`. -/
+theorem Etale.hasTorsionBaseChange_powOver_of_projectiveLine
+    (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))
+    (T : Scheme.{u}) (n : ℕ) :
+    Etale.HasTorsionBaseChange Λ (ProjectiveLine.powOver T n) := by
+  induction n with
+  | zero => exact Etale.hasTorsionBaseChange_of_isFinite Λ (𝟙 T)
+  | succ n ih => exact (h _).comp Λ ih
+
+/-- **Reduction of projective space to products of lines**: if the projection `ℙ¹_S ⟶ S`
+satisfies the base change property for every scheme `S`, then so does the projection
+`ℙⁿ_T ⟶ T` for every scheme `T` and every `n`. The product projection `(ℙ¹_T)ⁿ ⟶ T` has the
+property by composition, and factors through the finite surjective symmetric-product
+morphism `σₙ : (ℙ¹_T)ⁿ ⟶ ℙⁿ_T`, which has it as a finite morphism; cancellation along `σₙ`
+concludes.
+(blueprint: `lem-weil-pbc-reduction-projective-space`) -/
+theorem Etale.hasTorsionBaseChange_projectiveSpace_of_projectiveLine
+    (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))
+    (T : Scheme.{u}) (n : ℕ) :
+    Etale.HasTorsionBaseChange Λ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T) := by
+  have := ProjectiveSpace.isFinite_symmetricProduct T n
+  have := ProjectiveSpace.surjective_symmetricProduct T n
+  refine Etale.HasTorsionBaseChange.of_comp_of_surjective Λ (f := ProjectiveSpace.symmetricProduct T n)
+    (Etale.hasTorsionBaseChange_of_isFinite Λ _) ?_
+  rw [ProjectiveSpace.symmetricProduct_over]
+  exact Etale.hasTorsionBaseChange_powOver_of_projectiveLine Λ h T n
+
+/-- The affine case of `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper`:
+Chow's factorization `f ∘ π = p ∘ i`, the closed immersion `i_X = (π, i) : X' ⟶ ℙⁿ_X` over
+`X`, composition and cancellation along `π`. -/
+theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper_of_isAffine
+    (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] [IsAffine Y] :
+    Etale.HasTorsionBaseChange Λ f := by
+  obtain ⟨X', π, n, i, hπ, hs, hi, w⟩ := exists_isClosedImmersion_projectiveSpace_of_isProper f
+  -- `π ≫ f = i ≫ p_Y` satisfies the base change property
+  have hπf : Etale.HasTorsionBaseChange Λ (π ≫ f) := by
+    rw [← w]
+    exact (Etale.hasTorsionBaseChange_of_isFinite Λ i).comp Λ
+      (Etale.hasTorsionBaseChange_projectiveSpace_of_projectiveLine Λ h Y n)
+  -- `π = i_X ≫ p_X` satisfies the base change property
+  have hπ' : Etale.HasTorsionBaseChange Λ π := by
+    let iX := ProjectiveSpace.liftBaseChange (g := f) π i w.symm
+    have : IsClosedImmersion iX := inferInstance
+    rw [← ProjectiveSpace.liftBaseChange_over (g := f) π i w.symm]
+    exact (Etale.hasTorsionBaseChange_of_isFinite Λ iX).comp Λ
+      (Etale.hasTorsionBaseChange_projectiveSpace_of_projectiveLine Λ h X n)
+  exact Etale.HasTorsionBaseChange.of_comp_of_surjective Λ hπ' hπf
+
 /-- **Reduction of proper base change to the projective line**: if the projection
 `ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasTorsionBaseChange` for every scheme `S`,
 then so does every proper morphism of schemes.
 
-The proof is Chow's lemma: a proper `f : X ⟶ Y` is dominated by a projective one,
+The proof is Chow's lemma: after reducing to an affine base by target locality
+(`AlgebraicGeometry.Etale.hasTorsionBaseChange_of_jointlySurjective`), a proper
+`f : X ⟶ Y` is dominated by a projective one,
 
 ```
        X̃ ------------> ℙⁿ_Y
@@ -128,18 +183,20 @@ The proof is Chow's lemma: a proper `f : X ⟶ Y` is dominated by a projective o
        X ------ f ----> Y
 ```
 
-with `π` proper surjective and the horizontal arrow a closed immersion over `Y`; the base
-change property for `pₙ` comes from that of `ℙ¹` by the symmetric-product morphism, and
-transfers to `f` because it composes and cancels along proper surjections. See the module
-docstring for the steps, and for the noetherian-freeness of the Chow factorisation the
-statement uses.
-(blueprint: `prop:weil-pbc-reduction-to-projective-line`) -/
+with `π` proper surjective and the horizontal arrow a closed immersion over `Y`
+(`AlgebraicGeometry.exists_isClosedImmersion_projectiveSpace_of_isProper`); the base change
+property for `pₙ` comes from that of `ℙ¹` by the symmetric-product morphism
+(`AlgebraicGeometry.Etale.hasTorsionBaseChange_projectiveSpace_of_projectiveLine`), and
+transfers to `f` because it composes and cancels along proper surjections.
+(blueprint: `prop-weil-pbc-reduction-to-projective-line`) -/
 @[stacks 0A4F]
 theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper
     (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :
     Etale.HasTorsionBaseChange Λ f :=
-  sorry
+  Etale.hasTorsionBaseChange_of_jointlySurjective Λ f Y.affineCover.f
+    (fun y ↦ ⟨Y.affineCover.idx y, Y.affineCover.covers y⟩)
+    fun _ ↦ Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper_of_isAffine Λ h _
 
 /-- **Proper morphisms satisfy base change**: the two halves of the proof combined. -/
 theorem Etale.hasTorsionBaseChange_of_isProper {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :

@@ -338,4 +338,29 @@ end ChowModification
 
 end
 
+/-- **Chow and projective factorization**: a proper morphism `f : X ⟶ Y` to an affine scheme
+is dominated by a projective one. There are a proper surjective morphism `π : X' ⟶ X`, an
+integer `n` and a closed immersion `i : X' ⟶ ℙⁿ_Y` with `f ∘ π = p ∘ i`, where `p : ℙⁿ_Y ⟶ Y`
+is the structure morphism:
+
+```
+       X' ------ i -----> ℙⁿ_Y
+       |                    |
+     π |                    | p
+       v                    v
+       X ------- f -------> Y
+```
+
+No noetherian or finite-presentation hypothesis is imposed. For a noetherian `Y` this is
+`AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpace`. In general, embed `X`
+as a closed subscheme of a separated `Y`-scheme of finite presentation, descend that envelope
+to a noetherian base, apply Chow's lemma there, base change back to `Y` and restrict to `X`.
+(blueprint: `lemma-weil-pbc-chow-factorization`) -/
+theorem exists_isClosedImmersion_projectiveSpace_of_isProper {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [IsAffine Y] [IsProper f] :
+    ∃ (X' : Scheme.{u}) (π : X' ⟶ X) (n : ℕ) (i : X' ⟶ ℙ(ULift.{u} (Fin (n + 1)); Y)),
+      IsProper π ∧ Surjective π ∧ IsClosedImmersion i ∧
+        i ≫ ℙ(ULift.{u} (Fin (n + 1)); Y) ↘ Y = π ≫ f :=
+  sorry
+
 end AlgebraicGeometry
