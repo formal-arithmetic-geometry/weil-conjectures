@@ -40,11 +40,12 @@ blueprint home is the framework chapter (`def:coefficient-twists`), not this blo
 sheaf of roots of unity `μ_n` it is built from belongs to the Kummer block. It is therefore
 taken as a *parameter*: `AlgebraicGeometry.Etale.HasTateTwist` bundles the twisting objects
 `Λ_X(m)` with the normalization `Λ_X(0) = Λ_X`, multiplicativity in `m`, compatibility with
-pullback, ⊗-invertibility, and the Kummer classes of units (the rank-one datum). Every statement of the chapter carries `[HasTateTwist Λ]`, and
-becomes an unconditional theorem once the Kummer block supplies the instance.
+pullback, ⊗-invertibility, and the Kummer classes of units (the rank-one datum). Every
+statement of the chapter carries `[HasTateTwist Λ]`, and becomes an unconditional theorem
+once the Kummer block supplies the instance.
 
-Invertibility is a field rather than a consequence of the other two: `Λ_X(m) ⊗ Λ_X(-m) ≅
-Λ_X(0) ≅ Λ_X` is a two-line proof, but checking it forces the kernel to unfold
+Invertibility is a field rather than a consequence of the zero and addition isomorphisms:
+`Λ_X(m) ⊗ Λ_X(-m) ≅ Λ_X(0) ≅ Λ_X` is a two-line proof, but checking it forces the kernel to unfold
 `AlgebraicGeometry.Etale.derivedTensor`, and that does not terminate in reasonable time.
 
 ## Main definitions

@@ -158,7 +158,8 @@ the iterated cup product with supports of the Kummer boundaries
 `V(f₁) ∩ ⋯ ∩ V(f_c) = Z_U`. -/
 noncomputable def frameClass (F : i.EtaleFrame c) :
     constantComplex Λ F.U ⟶
-      (R((IdealSheafData.ofIdealTop (Ideal.span (Set.range F.f))).subschemeι)_![ModuleCat.{u + 1} Λ]).obj
+      (R((IdealSheafData.ofIdealTop
+          (Ideal.span (Set.range F.f))).subschemeι)_![ModuleCat.{u + 1} Λ]).obj
         ((R((IdealSheafData.ofIdealTop
           (Ideal.span (Set.range F.f))).subschemeι)^![ModuleCat.{u + 1} Λ]).obj
           ((tateObject Λ F.U c)⟦2 * (c : ℤ)⟧)) :=
@@ -171,7 +172,8 @@ noncomputable def frameRestriction [IsClosedImmersion i] (F : i.EtaleFrame c)
     (γ : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
       ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) :
     constantComplex Λ F.U ⟶
-      (R((IdealSheafData.ofIdealTop (Ideal.span (Set.range F.f))).subschemeι)_![ModuleCat.{u + 1} Λ]).obj
+      (R((IdealSheafData.ofIdealTop
+          (Ideal.span (Set.range F.f))).subschemeι)_![ModuleCat.{u + 1} Λ]).obj
         ((R((IdealSheafData.ofIdealTop
           (Ideal.span (Set.range F.f))).subschemeι)^![ModuleCat.{u + 1} Λ]).obj
           ((tateObject Λ F.U c)⟦2 * (c : ℤ)⟧)) :=
@@ -181,7 +183,6 @@ variable [HasInvertibleExponent Λ X] {k : Type u} [Field k] [PerfectField k] (c
   [IsRegularImmersion c i] (aX : X ⟶ Spec (.of k)) [Smooth aX]
 
 include aX in
-
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
 
 **(b) The fundamental class.** Let `i : Z ⟶ X` be a regular closed immersion of pure
@@ -302,7 +303,8 @@ theorem isIso_fundamentalClassMap : IsIso (fundamentalClassMap Λ c i aX hZ) :=
 base change `i' : Z' ⟶ X'` of `i`, the restriction of supports along `e`
 (`AlgebraicGeometry.Etale.restrictSupportedClass`) carries the fundamental class of `i` to that
 of `i'`. An étale map pulls frames back to frames and frame classes to frame classes. -/
-theorem fundamentalClass_pullback_etale {X' Z' : Scheme.{u}} (e : X' ⟶ X) [AlgebraicGeometry.Etale e]
+theorem fundamentalClass_pullback_etale {X' Z' : Scheme.{u}} (e : X' ⟶ X)
+    [AlgebraicGeometry.Etale e]
     (i' : Z' ⟶ X') [IsRegularImmersion c i'] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
     [HasInvertibleExponent Λ X'] [Smooth (e ≫ aX)]
     (hZ' : ∀ z : Z', IsRegularLocalRing (Z'.presheaf.stalk z)) :
@@ -355,8 +357,11 @@ dimension `m` where `m + c = n`. There is a canonical isomorphism
 
 `Ri^! Λ_X ≅ Λ_Z(-c)[-2c]`,
 
-carrying `1` to the fundamental class `[Z ⊂ X]`, compatible with étale base change and with
-exterior products.
+the inverse of `cl_i(-c)[-2c]`, where `cl_i : Λ_Z ≅ Ri^! (Λ_X(c)[2c])`, `1 ↦ [Z ⊂ X]`, is
+`AlgebraicGeometry.Etale.fundamentalClassMap` (an isomorphism by
+`AlgebraicGeometry.Etale.isIso_fundamentalClassMap`); it is compatible with étale base change
+and with exterior products (`AlgebraicGeometry.Etale.fundamentalClass_pullback_etale`,
+`AlgebraicGeometry.Etale.fundamentalClass_externalProduct`).
 
 Smooth purity computes `ω_{a_X}` and `ω_{a_Z}`, and the co-projection formula lets one divide
 the former into the latter. The relative dimension of `a_Z` is carried as `m` with
