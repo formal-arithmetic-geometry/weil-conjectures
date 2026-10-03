@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
@@ -33,7 +34,8 @@ structure `[GrpObj G]` as a parameter, so that a declaration about abelian schem
 
 ## Main statements
 
-- `AlgebraicGeometry.IsAbelianScheme.connectedSpace`: an abelian variety is connected.
+- `AlgebraicGeometry.IsAbelianScheme.connectedSpace`: an abelian scheme over a connected base is
+  connected; in particular an abelian variety is connected.
 - `AlgebraicGeometry.IsAbelianScheme.topologicalKrullDim_eq`: the Krull dimension of an abelian
   variety is the natural number `IsAbelianScheme.dim`.
 -/
@@ -58,13 +60,21 @@ class IsAbelianScheme {S : Scheme.{u}} (G : Over S) [GrpObj G] : Prop
 
 namespace IsAbelianScheme
 
-variable {K : Type u} [Field K]
+variable {S : Scheme.{u}} {K : Type u} [Field K]
 
-/-- The underlying space of an abelian variety is connected, being geometrically connected over
-the one-point space `Spec K`. -/
-instance connectedSpace (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianScheme A] :
+/-- The underlying space of an abelian scheme `A` over a connected base `S` is connected: the
+structure morphism is open, being smooth, and has geometrically connected fibres, so the
+connected components of `A` are those of `S`. -/
+instance connectedSpace (A : Over S) [GrpObj A] [IsAbelianScheme A] [ConnectedSpace S] :
     ConnectedSpace A.left :=
-  GeometricallyConnected.connectedSpace_of_subsingleton A.hom
+  GeometricallyConnected.connectedSpace A.hom
+    (isOpenMap_of_generalizingMap A.hom (Flat.generalizingMap A.hom))
+
+/-- The spectrum of a field is connected, being a point. With
+`AlgebraicGeometry.IsAbelianScheme.connectedSpace` this makes the underlying space of an
+abelian variety connected. -/
+instance _root_.AlgebraicGeometry.instConnectedSpaceSpecField : ConnectedSpace (Spec (.of K)) :=
+  { toNonempty := inferInstance }
 
 /-- Blueprint `sk-def-av-jacobian`: the dimension of an abelian variety, that is, the Krull
 dimension of its underlying topological space, as a natural number.
