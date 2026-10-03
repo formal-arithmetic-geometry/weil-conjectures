@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Group.ForwardDiff
+public import Mathlib.AlgebraicGeometry.Artinian
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
@@ -46,6 +47,12 @@ leading coefficient whenever that function is a numerical polynomial of degree a
 - `AlgebraicGeometry.Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one`: in dimension
   one the degree is the cohomological degree `χ(M) - χ(𝒪_X)`.
 - `AlgebraicGeometry.IsVeryAmple.isInvertible`: a very ample module is invertible.
+- `AlgebraicGeometry.Scheme.Modules.finiteDimensional_H`: the cohomology of an invertible module
+  on a proper scheme over a field is finite-dimensional.
+- `AlgebraicGeometry.Scheme.Modules.degree_eq_sum`: the degree is additive over a finite disjoint
+  union of open subschemes.
+- `AlgebraicGeometry.Scheme.Modules.degree_eq_zero_of_topologicalKrullDim_le_zero`: an
+  invertible module on a connected noetherian scheme of dimension `0` has degree `0`.
 - `AlgebraicGeometry.IsAmple.pullback`: the restriction of an ample module to a closed subscheme
   is ample.
 - `AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace`: an ample invertible
@@ -60,7 +67,7 @@ leading coefficient whenever that function is a numerical polynomial of degree a
 
 universe u
 
-open CategoryTheory Limits TopologicalSpace Function
+open CategoryTheory Limits TopologicalSpace Function MonoidalCategory
 
 namespace AlgebraicGeometry
 
@@ -137,6 +144,52 @@ lemma Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one (f : X ⟶ Spec 
   rw [Scheme.Modules.tensorPow_succ, Scheme.Modules.tensorPow_zero,
     Scheme.Modules.eulerChar_congr K (MonoidalCategory.rightUnitor M)]
   rfl
+
+namespace Scheme.Modules
+
+section Additivity
+
+variable (K) [X.Over (Spec (.of K))]
+
+/-- **Finiteness of cohomology.** The cohomology of an invertible module on a proper scheme over
+a field `K` is finite-dimensional over `K`. This is a special case of the finiteness theorem
+for the cohomology of coherent modules on proper schemes (EGA III, 3.2.1).
+
+This is used in the proof of blueprint `lem-sc-ample-positive-degree`. -/
+instance finiteDimensional_H [IsProper (X ↘ Spec (.of K))] (M : X.Modules) [M.IsInvertible]
+    (q : ℕ) : FiniteDimensional K (M.H q) :=
+  sorry
+
+/-- **The degree is additive over a finite disjoint union.** If a noetherian scheme `X` of
+finite dimension is the disjoint union of finitely many open subschemes `U i`, then
+`deg M = ∑ᵢ deg (M|_{U i})`, provided the cohomology of `M` and `𝒪_X` is finite-dimensional. -/
+theorem degree_eq_sum [IsNoetherian X] {n : ℕ} (hn : topologicalKrullDim X ≤ n) {ι : Type*}
+    [Fintype ι] (U : ι → X.Opens) (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤)
+    (M : X.Modules) [∀ q, FiniteDimensional K (M.H q)]
+    [∀ q, FiniteDimensional K ((𝟙_ X.Modules).H q)] :
+    M.degree K = ∑ i,
+      letI : (U i).toScheme.Over (Spec (.of K)) := ⟨(U i).ι ≫ X ↘ Spec (.of K)⟩
+      ((Scheme.Modules.pullback (U i).ι).obj M).degree K := by
+  let (i : ι) : (U i).toScheme.Over (Spec (.of K)) := ⟨(U i).ι ≫ X ↘ Spec (.of K)⟩
+  simp only [degree, Finset.sum_sub_distrib]
+  rw [eulerChar_eq_sum K hn U hU hcover M]
+  congr 1
+  exact (eulerChar_eq_sum K hn U hU hcover (𝟙_ X.Modules)).trans
+    (Finset.sum_congr rfl fun i _ ↦ eulerChar_congr K (pullbackObjUnitIso _))
+
+/-- On a connected locally noetherian `K`-scheme of dimension `0`, every invertible module has
+degree `0`: the scheme is artinian, hence discrete, hence a single point, on which every
+invertible module is trivial. -/
+theorem degree_eq_zero_of_topologicalKrullDim_le_zero [IsLocallyNoetherian X] [ConnectedSpace X]
+    (hdim : topologicalKrullDim X ≤ 0) (L : X.Modules) [L.IsInvertible] : L.degree K = 0 := by
+  have := IsLocallyArtinian.of_topologicalKrullDim_le_zero hdim
+  have : Subsingleton X := Set.subsingleton_univ_iff.mp isPreconnected_univ.subsingleton
+  obtain ⟨e⟩ := IsInvertible.nonempty_iso_unit (Classical.arbitrary X) L
+  rw [degree_congr K e, degree_unit]
+
+end Additivity
+
+end Scheme.Modules
 
 /-- **The restriction of an ample module to a closed subscheme is ample.** If `L^{⊗ n}` is the
 pullback of `𝒪(1)` along a closed immersion `X ⟶ ℙ(m; K)`, then `(i^* L)^{⊗ n} ≅ i^* (L^{⊗ n})`
