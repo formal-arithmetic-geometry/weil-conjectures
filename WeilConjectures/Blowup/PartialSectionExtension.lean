@@ -216,10 +216,14 @@ theorem exists_admissibleBlowup_extend_partialSection
       (B₁.preimage_blowupMap_mono hUV) (B₁.isCompact_coe_preimage_blowupMap hU)
       (B₁.isCompact_coe_preimage_blowupMap hV) f' hf'p hf'c)
 
-/-- **Conrad's Remark 2.5**: the case `V = U` of
+/-- Blueprint `cor-nagata-conrad-proper-target-extension`, section form.
+
+**Conrad's Remark 2.5**: the case `V = U` of
 `AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection` (blueprint:
 `thm:nagata-conrad-elimination` with `V = U`, together with
-`lemma:nagata-conrad-morphism-is-quasi-domination`).
+`lemma:nagata-conrad-morphism-is-quasi-domination`). Combined with
+`AlgebraicGeometry.QuasiDomination.U_eq_top` it yields the extension to a proper target
+`AlgebraicGeometry.exists_admissibleBlowup_extend_of_isProper`.
 
 No closedness hypothesis is needed: over `U` the morphism `f` is a section of the
 separated morphism `p ∣_ U`, hence a closed immersion, so its image is closed in

@@ -325,8 +325,23 @@ theorem degree_eq_genus [GlobalSectionsBijective k X]
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules)
     [ℒ.IsInvertible] (h0 : Modules.finrankH K ℒ 0 = 1)
     (hq : ∀ q : ℕ, 0 < q → Subsingleton (ℒ.H q)) :
-    ℒ.degree K = (arithmeticGenus k X : ℤ) :=
-  sorry
+    ℒ.degree K = (arithmeticGenus k X : ℤ) := by
+  -- `X_K` is a smooth proper curve over `K` with `H⁰(X_K, 𝒪_{X_K}) = K`
+  -- (`AlgebraicGeometry.Scheme.GlobalSectionsBijective.pullback`), so Riemann–Roch applies.
+  have : SmoothOfRelativeDimension 1 (Limits.pullback (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K))) ↘ Spec (.of K)) :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback
+      (IsPullback.of_hasPullback _ _) ‹_›
+  have : IsProper (Limits.pullback (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K))) ↘ Spec (.of K)) :=
+    IsProper.isStableUnderBaseChange.of_isPullback (IsPullback.of_hasPullback _ _) ‹_›
+  have hχ : ℒ.eulerChar K = 1 := by
+    rw [Modules.eulerChar, finsum_eq_single _ 0 fun q hq0 ↦ ?_]
+    · simp [h0]
+    · have := hq q (Nat.pos_of_ne_zero hq0)
+      simp [Modules.finrankH, Module.finrank_zero_of_subsingleton]
+  rw [Modules.degree, hχ, eulerChar_unit_eq, arithmeticGenus_pullback]
+  ring
 
 /-- **The twist lemma.** Let `k` be separably closed, let `X` be a smooth projective connected
 curve over `k`, let `K/k` be a field extension and let `ℒ` be a line bundle on the base change

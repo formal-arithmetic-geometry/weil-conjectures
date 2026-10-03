@@ -279,6 +279,11 @@ theorem IsPunctuallyPureOfWeight.hasWeightsAtMost {ι : PadicAlgCl l →+* ℂ}
     F.HasWeightsAtMost ι w :=
   fun x ↦ (h x).hasWeightsAtMost
 
+/-- Weights at most `w` are weights at most any `w' ≥ w`. -/
+theorem HasWeightsAtMost.mono {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X} {w w' : ℝ}
+    (h : F.HasWeightsAtMost ι w) (hww' : w ≤ w') : F.HasWeightsAtMost ι w' :=
+  fun x ↦ (h x).mono (Nat.one_le_pow _ _ Nat.card_pos) hww'
+
 /-- `F` is `ι`-*real* if at every closed point `x` the stalk `F_x̄` with its local Frobenius is
 `ι`-real (`FrobeniusModule.IsReal`): the realization under `ι` of the local polynomial
 `P_x(F, T) = det(1 - T Fₓ | F_x̄)` has real coefficients. -/
