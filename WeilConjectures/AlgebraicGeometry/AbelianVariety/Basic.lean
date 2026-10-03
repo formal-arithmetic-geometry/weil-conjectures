@@ -8,6 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Group.Abelian
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
+public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 
 /-!
 # Abelian varieties are geometrically integral, and commutative
@@ -44,15 +47,23 @@ variable {K : Type u} [Field K]
 Let `G` be a group scheme over a field `K` which is proper, connected and smooth over `K`, that
 is, an abelian variety in the sense of `AlgebraicGeometry.IsAbelianVariety`. Then `G` is
 geometrically integral over `K`: it has a rational point, the unit, so connectedness gives
-geometric connectedness, and smoothness gives geometric reducedness. -/
+geometric connectedness; a smooth morphism with geometrically connected fibres is geometrically
+irreducible; and smoothness gives geometric reducedness.
+
+This is also blueprint `lem-sc-abelian-variety-characterization`. -/
 instance IsAbelianVariety.geometricallyIntegral (G : Over (Spec (.of K))) [GrpObj G]
-    [IsAbelianVariety G] : GeometricallyIntegral G.hom :=
-  sorry
+    [IsAbelianVariety G] : GeometricallyIntegral G.hom := by
+  have hη : η[G].left ≫ G.hom = 𝟙 _ := by simp
+  have := GeometricallyConnected.of_connectedSpace_of_section G.hom η[G].left hη
+  have := GeometricallyIrreducible.of_smooth_of_geometricallyConnected G.hom
+  exact .of_geometricallyReduced_of_geometricallyIrreducible _
 
 /-- Blueprint `sk-prop-av-char`: Abelian varieties are the complete group varieties.
 
 The underlying space of an abelian variety is irreducible, being geometrically irreducible over
-the one-point space `Spec K`. -/
+the one-point space `Spec K`.
+
+This is also blueprint `lem-sc-abelian-variety-characterization`. -/
 instance IsAbelianVariety.irreducibleSpace (G : Over (Spec (.of K))) [GrpObj G]
     [IsAbelianVariety G] : IrreducibleSpace G.left :=
   GeometricallyIrreducible.irreducibleSpace_of_subsingleton G.hom
