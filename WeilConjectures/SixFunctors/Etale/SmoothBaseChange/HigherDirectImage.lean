@@ -19,9 +19,6 @@ the composition isomorphism `Lh'^* ≅ Lh^* ⋙ La^*` and the counit of `Lh^* �
 are the maps along which higher direct images are compared when the source scheme varies, as
 in the limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit`.
 
-This file also records the description of the higher direct images as sheafified cohomology
-presheaves, `AlgebraicGeometry.Etale.nonempty_higherDirectImage_iso_sheafify`.
-
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.lowerStarPlusTransition`: the map `Rh_* K ⟶ Rh'_* (a^* K)`.
@@ -30,14 +27,11 @@ presheaves, `AlgebraicGeometry.Etale.nonempty_higherDirectImage_iso_sheafify`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_higherDirectImage_iso_sheafify`: `R^q h_* F` is the sheaf
-  associated with `U ↦ H^q(U ×_X Y, F)`.
 - `AlgebraicGeometry.Etale.higherDirectImage_limit`: higher direct images commute with limits
   of schemes along affine transition morphisms.
 
 ## References
 
-- Stacks Project, Lemma 59.51.6, <https://stacks.math.columbia.edu/tag/03Q8>
 - Stacks Project, Lemma 59.51.7, <https://stacks.math.columbia.edu/tag/09Z1>
 -/
 
@@ -45,7 +39,7 @@ presheaves, `AlgebraicGeometry.Etale.nonempty_higherDirectImage_iso_sheafify`.
 
 universe u
 
-open CategoryTheory Limits Opposite
+open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
@@ -103,27 +97,6 @@ noncomputable def Etale.higherDirectImageOverMap {W S : Scheme.{u}} (k : W ⟶ S
           G)))
 
 end Transition
-
-/-- Blueprint `sbc-lem-higher-direct-image-presheaf`: Higher direct image as a sheafified
-cohomology presheaf.
-
-Let `h : Y ⟶ X` be a morphism of schemes and `F` a sheaf of `Λ`-modules on `Y_ét`. Then
-`R^q h_* F`, as a sheaf of abelian groups, is the sheaf associated with the presheaf
-`(U → X) ↦ H^q(U ×_X Y, F)` on `X_ét`. Here `H^q(V, F)` is computed as
-`Ext^q(Λ[V], F)`, where `Λ[V]` is the free sheaf of `Λ`-modules on the étale `Y`-scheme `V`;
-this is the cohomology of the restriction of `F` to `V_ét`. -/
-@[stacks 03Q8]
-theorem Etale.nonempty_higherDirectImage_iso_sheafify {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℕ)
-    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    Nonempty ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-        (Etale.higherDirectImage Λ h q F) ≅
-      (presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
-        (h.Etale.op ⋙
-          (yoneda ⋙ (Functor.whiskeringRight _ _ _).obj
-              (uliftFunctor.{u + 1} ⋙ ModuleCat.free Λ) ⋙
-            presheafToSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).op ⋙
-          (Abelian.extFunctor.{u + 1} q).flip.obj F)) :=
-  sorry
 
 /-- Blueprint `sbc-lem-higher-direct-image-limit`: Higher direct images and limits of schemes.
 

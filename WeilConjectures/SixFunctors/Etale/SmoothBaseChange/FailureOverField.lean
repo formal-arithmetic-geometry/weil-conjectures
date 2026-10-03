@@ -34,9 +34,8 @@ enter) and the failure over the empty scheme.
 
 - `AlgebraicGeometry.Etale.FieldFailure`: a counterexample to `BC(p, Λ, q)` living over a
   field, after an affine base change of `p`.
-- `AlgebraicGeometry.Etale.baseChangeSourceTransition`,
-  `AlgebraicGeometry.Etale.baseChangeTargetTransition`: the maps relating the source and the
-  target of the base-change maps over `T` and over `T'`, for `π : T' ⟶ T`.
+- `AlgebraicGeometry.Etale.baseChangeTargetTransition`: the map relating the targets of the
+  base-change maps over `T` and over `T'`, for `π : T' ⟶ T`.
 - `AlgebraicGeometry.Etale.SurvivesBaseChange`: the property "the chosen cokernel element
   survives" of schemes over `T`.
 
@@ -46,6 +45,8 @@ enter) and the failure over the empty scheme.
   the hypotheses of the minimal-counterexample lemma.
 - `AlgebraicGeometry.Etale.nonempty_fieldFailure`: if `BC(p, Λ, q')` holds universally for
   `q' < q` and `BC(p, Λ, q)` fails, a counterexample over a field exists.
+- `AlgebraicGeometry.Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty`: the same
+  conclusion when `BC(p, Λ, q)` only fails universally, as in the blueprint.
 - `AlgebraicGeometry.Etale.FieldFailure.isAffineHom_a`: if `S` is separated, the base change
   `S' ⟶ S` of such a counterexample is affine.
 
@@ -136,21 +137,7 @@ end FieldFailure
 
 section Transition
 
-variable {X S T Y T' Y' : Scheme.{u}}
-
-/-- The map from the source of the base-change map over `T` to the source of the base-change
-map over `T'`, for `π : T' ⟶ T` over `S`: `p⁻¹` and `H^q` applied to the transition map
-`Rg_*(F[0]) ⟶ Rg'_*(π^*(F[0])) ≅ Rg'_*((π^* F)[0])` of
-`AlgebraicGeometry.Etale.lowerStarPlusTransition`. -/
-noncomputable def Etale.baseChangeSourceTransition (p : X ⟶ S) (g : T ⟶ S) (q : ℤ)
-    (π : T' ⟶ T) (g' : T' ⟶ S) (w : π ≫ g = g')
-    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    (Etale.baseChangeSourceFunctor Λ p g q).obj F ⟶
-      (Etale.baseChangeSourceFunctor Λ p g' q).obj (((π)^*[ModuleCat.{u + 1} Λ]).obj F) :=
-  (DerivedCategory.Plus.homologyFunctor _ q).map (D+((p)^*[ModuleCat.{u + 1} Λ]).map
-    (Etale.lowerStarPlusTransition Λ π g g' w _ ≫
-      R+((g')_*[ModuleCat.{u + 1} Λ]).map
-        ((((π)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F)))
+variable {X T Y T' Y' : Scheme.{u}}
 
 /-- The map from the target of the base-change map over `T` to the target of the base-change
 map over `T'`, for `π : T' ⟶ T` covered by `a : Y' ⟶ Y` over `X`: `H^q` applied to the
@@ -328,12 +315,13 @@ theorem Etale.exists_isAffineOpen_not_baseChangeProperty {q : ℤ}
   sorry
 
 variable (p) in
-/-- Blueprint `sk-lem-failure-field`: A failure is detected on the generic fibre; also
-blueprint `sbc-lem-bc-failure-field`.
+/-- Blueprint `sk-lem-failure-field`: A failure is detected on the generic fibre.
 
 If the base-change property `BC(p, Λ, q')` holds universally for all `q' < q` while
 `BC(p, Λ, q)` fails for some `q ≥ 1`, there is a counterexample over a field, that is, an
-`AlgebraicGeometry.Etale.FieldFailure`.
+`AlgebraicGeometry.Etale.FieldFailure`. Blueprint `sbc-lem-bc-failure-field` only assumes that
+`BC(p, Λ, q)` fails universally; that form is
+`AlgebraicGeometry.Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty`.
 
 After restricting to an affine open of `S` the base of the failing square is quasi-compact
 and quasi-separated. The base-change map is injective there
@@ -386,5 +374,25 @@ theorem Etale.nonempty_fieldFailure (q : ℤ) (hq : 1 ≤ q)
     (h := pullback.snd _ _) (isPullback_fibre := IsPullback.of_hasPullback _ _)
     (F := ((φ)^*[ModuleCat.{u + 1} Λ]).obj F) (not_isIso := fun hiso ↦ hφ ?_)⟩
   exact ((ConcreteCategory.isIso_iff_bijective _).1 inferInstance).2 _
+
+variable (p) in
+/-- Blueprint `sbc-lem-bc-failure-field`: A failure of base change is detected over a field.
+
+If the base-change property `BC(p, Λ, q')` holds universally for all `q' < q` while
+`BC(p, Λ, q)` fails universally for some `q ≥ 1`, there is a counterexample over a field. Apply
+`AlgebraicGeometry.Etale.nonempty_fieldFailure` to a failing base change of `p` and paste the
+squares. -/
+@[stacks 0F07]
+theorem Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty (q : ℤ) (hq : 1 ≤ q)
+    (hprev : ∀ q' < q, Etale.UniversalBaseChangeProperty Λ p q')
+    (hfail : ¬ Etale.UniversalBaseChangeProperty Λ p q) :
+    Nonempty (Etale.FieldFailure Λ p q) := by
+  simp only [Etale.UniversalBaseChangeProperty, not_forall] at hfail
+  obtain ⟨S'', X'', a, b, p'', hpb, hfail⟩ := hfail
+  obtain ⟨F⟩ := Etale.nonempty_fieldFailure Λ p'' q hq
+    (fun q' hq' ↦ (hprev q' hq').of_isPullback hpb) hfail
+  have := F.isAffine
+  have := F.field
+  exact ⟨{ F with a := F.a ≫ a, b := F.b ≫ b, isPullback := F.isPullback.paste_horiz hpb }⟩
 
 end AlgebraicGeometry
