@@ -8,7 +8,8 @@ module
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.NumberTheory.Padics.Complex
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
-public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.ConstructibleSheaf.Presentation
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
@@ -48,8 +49,7 @@ for complexes of sheaves. The geometric-stalk half of the same subsection is lik
 - `AlgebraicGeometry.Etale.isZero_compactlySupportedCohomology_of_lt`
 - `AlgebraicGeometry.Etale.finite_compactlySupportedCohomology`
 - `AlgebraicGeometry.Etale.hasTorAmplitudeIn_iff_exists_flatModel`
-- `AlgebraicGeometry.Etale.exists_epi_finsum_lowerShriek_constant`
-- `AlgebraicGeometry.Etale.exists_flatConstructibleModel_of_hasTorAmplitudeIn`
+- `AlgebraicGeometry.Etale.hasTorAmplitudeIn_iff_exists_flatConstructibleModel`
 - `AlgebraicGeometry.Etale.nonempty_iso_kunneth`
 -/
 
@@ -179,11 +179,17 @@ theorem finite_compactlySupportedCohomology
 
 end Perfectness
 
+/-- A complex `P` of sheaves of `Λ`-modules on `X_ét` is a *bounded flat complex in degrees
+`[a, b]`* if every `P^q` is flat and `P^q = 0` for `q ∉ [a, b]`. -/
+def IsBoundedFlatComplex (a b : ℤ)
+    (P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) : Prop :=
+  (∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q)) ∧ ∀ q : ℤ, ObjectProperty.flat (P.X q)
+
 /-- Blueprint `sk-lem-sf-flat-model`: Bounded flat model of finite Tor amplitude
 
 **Finite Tor amplitude means a bounded flat model.** For `K ∈ D^b_c(X, Λ)` and integers
 `a ≤ b` the following are equivalent: `K` has Tor amplitude in `[a, b]`; and `K` is isomorphic
-to a bounded complex `P` of *flat* sheaves of `Λ`-modules with `P^q = 0` for `q ∉ [a, b]`.
+to a bounded flat complex `P` in degrees `[a, b]`.
 
 One direction is that a bounded-above complex of flat sheaves is K-flat; the other truncates a
 bounded-above free resolution and checks that the truncation is flat by the Tor criterion. -/
@@ -192,48 +198,32 @@ theorem hasTorAmplitudeIn_iff_exists_flatModel (a b : ℤ) (hab : a ≤ b)
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
     DerivedCategory.hasTorAmplitudeIn Λ X a b K ↔
       ∃ P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ,
-        (∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q)) ∧
-        (∀ q : ℤ, ObjectProperty.flat (P.X q)) ∧
-        Nonempty (K ≅ (_root_.DerivedCategory.Q).obj P) :=
+        IsBoundedFlatComplex Λ a b P ∧ Nonempty (K ≅ (_root_.DerivedCategory.Q).obj P) :=
   sorry
 
 /-- Blueprint `sk-lem-sf-flat-model`: Bounded flat model of finite Tor amplitude
 
-**Constructible sheaves are quotients of sums of `j_{V!} Λ_V`** [Stacks 095M; SGA 4½, Rapport,
-4.6]. On a Noetherian scheme `X`, every constructible sheaf `F` of `Λ`-modules on `X_ét` is a
-quotient of a finite direct sum `∐ j_{V!} Λ_V` of extensions by zero of constant sheaves, with
-`j_V : V ⟶ X` étale and `V` affine. Each `j_{V!} Λ_V` is flat and constructible; this is the
-input of the constructible variant `exists_flatConstructibleModel_of_hasTorAmplitudeIn`. -/
-theorem exists_epi_finsum_lowerShriek_constant [IsNoetherian X]
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :
-    ∃ (n : ℕ) (V : Fin n → Scheme.{u}) (j : ∀ i, V i ⟶ X) (_ : ∀ i, Etale (j i))
-      (_ : ∀ i, IsAffine (V i)) (_ : ∀ i, HasCompactification (j i))
-      (φ : (∐ fun i ↦ (lowerShriek (ModuleCat.{u + 1} Λ) (j i)).obj
-        ((constantSheaf (V i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-          (ModuleCat.of Λ Λ))) ⟶ F), Epi φ :=
-  sorry
-
-/-- Blueprint `sk-lem-sf-flat-model`: Bounded flat model of finite Tor amplitude
-
-**Constructible variant.** On a Noetherian scheme `X`, a bounded constructible `K` with Tor
-amplitude in `[a, b]` is isomorphic to a bounded complex `P` of *flat constructible* sheaves of
-`Λ`-modules with `P^q = 0` for `q ∉ [a, b]`; in particular every object of `Dctf(X, Λ)` has such
-a model.
+**Constructible variant.** Let `X` be Noetherian and `Λ` finite. For `K ∈ D^b_c(X, Λ)` and
+integers `a ≤ b`, `K` has Tor amplitude in `[a, b]` if and only if it is isomorphic to a bounded
+flat complex `P` in degrees `[a, b]` whose terms are *constructible*. In particular every object
+of `Dctf(X, Λ)` has such a model.
 
 The bounded-above resolution of `hasTorAmplitudeIn_iff_exists_flatModel` is built with terms
-finite sums of sheaves `j_{V!} Λ_V`, by `exists_epi_finsum_lowerShriek_constant` applied to the
-constructible cohomology sheaves of `K` and to the constructible kernels and cokernels that arise
-(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.kernel`, `…cokernel`); its truncation in degree
-`a` is then a cokernel of a map of constructible sheaves, hence flat and constructible. -/
-theorem exists_flatConstructibleModel_of_hasTorAmplitudeIn [IsNoetherian X] (a b : ℤ)
+finite sums of sheaves `j_{V!} Λ_V`, by `Scheme.exists_epi_sigma_lowerShriek_constantSheaf`
+applied to the constructible cohomology sheaves of `K` and to the constructible kernels and
+cokernels that arise (`Scheme.IsConstructibleSheaf.kernel`,
+`Scheme.IsConstructibleSheaf.cokernel`); its truncation in degree `a` is then a cokernel of a
+map of constructible sheaves, hence flat and constructible. The converse is the corresponding
+direction of `hasTorAmplitudeIn_iff_exists_flatModel`. Finiteness of `Λ` is needed: for
+`Λ = ℤ` a flat constructible sheaf has finite flat stalks, hence is zero. -/
+theorem hasTorAmplitudeIn_iff_exists_flatConstructibleModel [Finite Λ] [IsNoetherian X]
+    (a b : ℤ) (hab : a ≤ b)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
-    (hKab : DerivedCategory.hasTorAmplitudeIn Λ X a b K) :
-    ∃ P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ,
-      (∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q)) ∧
-      (∀ q : ℤ, ObjectProperty.flat (P.X q)) ∧
-      (∀ q : ℤ, IsConstructibleSheaf (P.X q)) ∧
-      Nonempty (K ≅ (_root_.DerivedCategory.Q).obj P) :=
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    DerivedCategory.hasTorAmplitudeIn Λ X a b K ↔
+      ∃ P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ,
+        IsBoundedFlatComplex Λ a b P ∧ (∀ q : ℤ, IsConstructibleSheaf (P.X q)) ∧
+        Nonempty (K ≅ (_root_.DerivedCategory.Q).obj P) :=
   sorry
 
 section Kunneth
