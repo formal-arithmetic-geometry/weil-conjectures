@@ -103,20 +103,21 @@ noncomputable def kernelTransform [HasCompactification (pullback.snd π π')]
       R(pullback.snd π π')_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ a
 
 /-- For a pairing `b ∈ Γ(V ×_S V', 𝒪)` between two `S`-schemes, the *Fourier kernel* `𝒦_ψ`
-is the Artin–Schreier sheaf `ℒ_{Ψ, b}` of the pairing. On the affine line over a field, with
+is the Artin–Schreier sheaf `ℒ_{Ψ, b} = b^* ℒ_Ψ` of the pairing, the pullback of the
+Artin–Schreier sheaf of `𝔸¹` along `b : V ×_S V' ⟶ 𝔸¹`. On the affine line over a field, with
 `V = V' = 𝔸¹` and the pairing the product `x ξ`, this is the sheaf usually written
 `ℒ_{ψ(xξ)}`.
 
 Being an Artin–Schreier sheaf, it is lisse of rank one
-(`AlgebraicGeometry.Etale.isLocallyConstantSheaf_artinSchreierSheaf`,
-`AlgebraicGeometry.Etale.artinSchreierSheafZeroIso`) and multiplicative in the character
-(`AlgebraicGeometry.Etale.artinSchreierSheafMulIso`), with
-`AlgebraicGeometry.Etale.artinSchreierSheafInvIso` identifying `𝒦_ψ⁻¹` with `𝒦_{ψ⁻¹}`.
+(`AlgebraicGeometry.Etale.isLocallyConstantSheaf_artinSchreierSheafOf`) and multiplicative in
+the character (`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_mul`), with
+`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv` identifying `𝒦_ψ⁻¹` with
+`𝒦_{ψ⁻¹}`.
 (sketch blueprint: `sk-def-kernel`, `sk-prop-kernel-lisse`) -/
 noncomputable def fourierKernel [CharP Γ(pullback π π', ⊤) p] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) :
     Sheaf (pullback π π').smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
-  artinSchreierSheaf (pullback π π') Ψ b
+  artinSchreierSheafZMod (pullback π π') Ψ b
 
 /-- For a pairing `b ∈ Γ(V ×_S V', 𝒪)` between two `S`-schemes and a relative dimension `r`,
 the *Fourier–Deligne transform* is
@@ -127,7 +128,7 @@ the kernel transform of the Fourier kernel `𝒦_ψ` with shift `r`. The shift i
 definition: it is Laumon's normalization, for which the inversion theorem holds up to the
 Tate twist `(-r)` and no further shift. The transform attached to the inverse character is
 the same construction with `Ψ⁻¹` in place of `Ψ`; its kernel is the inverse of `𝒦_ψ` by
-`AlgebraicGeometry.Etale.artinSchreierSheafInvIso`.
+`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv`.
 (sketch blueprint: `sk-def-ft`) -/
 noncomputable def fourierTransform [CharP Γ(pullback π π', ⊤) p]
     [HasCompactification (pullback.snd π π')] (Ψ : AddChar (ZMod p) Λ)
