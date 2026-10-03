@@ -6,12 +6,10 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Mathlib.FieldTheory.Normal.Basic
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
-public import WeilConjectures.Mathlib.RingTheory.LaurentSeries
 
 /-!
-# Local boundary duality on a curve, and ramification at infinity
+# Local boundary duality on a curve
 
 Let `j : U₀ ↪ C₀` be a dense open immersion of smooth curves and `F` a lisse Weil sheaf on
 `U₀`. At a missing closed point `s` the two boundary modules `(j_*F^∨)_s̄` and `(R¹j_*F)_s̄`
@@ -23,11 +21,12 @@ The open–closed triangle `j_!F → j_*F → i_*i^*j_*F` also gives the boundar
 `H_c^0(Z, i^*j_*F) → H_c^1(U, F) → H_c^1(C, j_*F) → 0`, since the cohomology of the finite
 boundary `Z` is concentrated in degree zero.
 
-The file also records the second half of the same blueprint subsection: a nonzero linear
-Artin–Schreier sheaf `ℒ_{ψ(a x)}` is ramified at infinity, because in `t = 1/x` the
-Artin–Schreier cover `u^q - u = a/t` of `k((t))` is totally ramified of degree `q` with Galois
-group `k₀`, on which a nontrivial `ψ` is nontrivial. This is what excludes linear characters in
-the nonexceptionality test of `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension`.
+The second half of the same blueprint subsection, that a nonzero linear Artin–Schreier sheaf
+`ℒ_{ψ(a x)}` is ramified at infinity, is stated for the Artin–Schreier extension of the local
+field `k((t))` at infinity, where the inertia group acts:
+`LaurentSeries.exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single`. It is not stated for
+`AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity`, which with the present coefficients holds
+for every Weil sheaf.
 
 ## Main statements
 
@@ -35,16 +34,20 @@ the nonexceptionality test of `WeilConjectures.DeligneLaumon.AffineLine.MiddleEx
   pairing.
 - `AlgebraicGeometry.exists_exact_compactlySupportedCohomology_boundary`: the boundary sequence
   in degrees zero and one.
-- `AlgebraicGeometry.not_isUnramifiedAtInfinity_artinSchreier`: inertia at infinity acts on
-  `ℒ_{ψ(a x)}` through a nontrivial character for `a ≠ 0`.
 
 ## Implementation notes
 
 With the present coefficients every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf`), so the
-statements about Weil sheaves in this file are proved by vanishing. For the same reason
-`AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity` holds for every Weil sheaf, so ramification
-at infinity of `ℒ_{ψ(a x)}` is stated for the Artin–Schreier extension of the local field
-`k((t))` at infinity, which is where the inertia group acts.
+statements about Weil sheaves in this file are proved by vanishing.
+
+## TODO
+
+The maps `g` and `h` of `AlgebraicGeometry.exists_exact_compactlySupportedCohomology_boundary`
+should be the maps induced by the canonical arrow `WeilSheaf.extensionByZeroToDirectImage j`
+from `j_!F` to `j_*F`. This needs the identification `H_c(U, F) ≅ H_c(C, j_!F)` and the
+functoriality of `compactlySupportedCohomology`; once they exist, the existential statement
+should be replaced by one about these maps. The map `δ` needs a triangulated structure on Weil
+complexes.
 -/
 
 @[expose] public section
@@ -153,56 +156,5 @@ theorem exists_exact_compactlySupportedCohomology_boundary
     fun _ ↦ Subsingleton.elim _ _⟩, 0, fun _ _ _ ↦ Subsingleton.elim _ _,
     fun _ ↦ Subsingleton.elim _ _⟩
   simp [Subsingleton.elim y 0]
-
-omit [Fact (ringChar k₀ ≠ l)] in
-/-- *Linear Artin–Schreier sheaves are ramified at infinity.* Let `ψ` be a nontrivial additive
-character of `k₀`, `a ∈ k₀ˣ` and `q = #k₀`. In the coordinate `t = 1 / x` at `∞ ∈ ℙ¹`, the
-Artin–Schreier cover `u^q - u = a x` defining `ℒ_{ψ(a x)}` becomes `u^q - u = a / t` over the
-local field `K = k((t))`, for a field `k` over `k₀` (for the geometric statement, an algebraic
-closure of `k₀`, in which case `Gal(K̄/K)` is the inertia group `I_∞`). Given a root `u` in an
-algebraic closure `L` of `K`, an element `σ ∈ Gal(L/K)` acts on the roots `u + c`, `c ∈ k₀`, by
-the translation `σ u = u + κ(σ)`, hence on the geometric generic stalk of `ℒ_{ψ(a x)}` by the
-scalar `ψ(±κ(σ))`. Since `uᑫ - u - a / t` is irreducible over `K`
-(`LaurentSeries.irreducible_X_pow_sub_X_sub_C_single`), `κ` is onto `k₀`, so some `σ` acts
-through `ψ(c) ≠ 1`: inertia at infinity acts nontrivially.
-
-This statement replaces `¬ (artinSchreier ψ a).IsUnramifiedAtInfinity (𝟙 (affineLine k₀))`,
-which is false with the present coefficients: every Weil sheaf is zero, so every Weil sheaf on
-`𝔸¹` extends to a lisse Weil sheaf on `ℙ¹`.
-(blueprint: `lem-a1-artin-schreier-ramified-infinity`, `sk-i-dl-a1-local`) -/
-theorem not_isUnramifiedAtInfinity_artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1)
-    {a : k₀} (ha : a ≠ 0) (k : Type*) [Field k] [Algebra k₀ k] (L : Type*) [Field L]
-    [Algebra (LaurentSeries k) L] [IsAlgClosure (LaurentSeries k) L] {u : L}
-    (hu : u ^ Nat.card k₀ - u =
-      algebraMap (LaurentSeries k) L (HahnSeries.single (-1) (algebraMap k₀ k a))) :
-    ∃ (σ : L ≃ₐ[LaurentSeries k] L) (c : k₀),
-      σ u = u + algebraMap (LaurentSeries k) L (HahnSeries.C (algebraMap k₀ k c)) ∧ ψ c ≠ 1 := by
-  set K := LaurentSeries k
-  have := Fintype.ofFinite k₀
-  obtain ⟨c, hc⟩ := AddChar.ne_one_iff.1 hψ
-  set ι : k₀ →+* L := (algebraMap K L).comp (HahnSeries.C.comp (algebraMap k₀ k))
-  set q := Nat.card k₀
-  have hq : 2 ≤ q := Finite.one_lt_card
-  set s : K := HahnSeries.single (-1 : ℤ) (algebraMap k₀ k a)
-  set f : K[X] := X ^ q - X - C s
-  have hfirr : Irreducible f := LaurentSeries.irreducible_X_pow_sub_X_sub_C_single hq
-    ((map_ne_zero_iff _ (algebraMap k₀ k).injective).2 ha)
-  have hfmon : f.Monic := by
-    unfold f
-    rw [sub_sub]
-    exact monic_X_pow_sub (by compute_degree; exact_mod_cast (by omega : 1 < q))
-  -- `u + ι c` is again a root of `f`, as `c ^ q = c`
-  obtain ⟨p, hp⟩ := CharP.exists k₀
-  have : Fact p.Prime := ⟨CharP.char_is_prime k₀ p⟩
-  have : CharP L p := charP_of_injective_ringHom ι.injective p
-  obtain ⟨m, -, hm⟩ := FiniteField.card k₀ p
-  have hqc : q = Fintype.card k₀ := Nat.card_eq_fintype_card
-  have hroot : (u + ι c) ^ q - (u + ι c) = algebraMap K L s := by
-    rw [hqc, hm, add_pow_char_pow, ← hm, ← map_pow, FiniteField.pow_card, ← hqc, ← hu]
-    ring
-  have hmin : ∀ x : L, x ^ q - x = algebraMap K L s → f = minpoly K x := fun x hx ↦
-    minpoly.eq_of_irreducible_of_monic hfirr (by simp [f, hx]) hfmon
-  obtain ⟨σ, hσ⟩ := (Normal.minpoly_eq_iff_mem_orbit L).1 ((hmin _ hroot).symm.trans (hmin _ hu))
-  exact ⟨σ, c, hσ, hc⟩
 
 end AlgebraicGeometry
