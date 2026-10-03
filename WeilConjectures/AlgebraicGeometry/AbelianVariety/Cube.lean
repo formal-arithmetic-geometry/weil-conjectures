@@ -11,9 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 /-!
 # The theorem of the cube
 
-For an invertible module `L` on an abelian variety `A` the seven pullbacks of `L` along the
-partial sum maps `A × A × A ⟶ A` satisfy the cube relation, and as a consequence the pullback of
-a symmetric invertible module along multiplication by `n` is its `n²`-th tensor power.
+For an invertible module `L` on an abelian scheme `A` over a base `S` the seven pullbacks of `L`
+along the partial sum maps `A × A × A ⟶ A` satisfy the cube relation, and as a consequence the
+pullback of a symmetric invertible module along multiplication by `n` is its `n²`-th tensor
+power.
 
 The partial sum maps are written using the group structure on `X ⟶ A` coming from
 `CategoryTheory.GrpObj.Hom.group`: writing `p₁ = fst _ _ ≫ fst _ _`, `p₂ = fst _ _ ≫ snd _ _`
@@ -54,15 +55,15 @@ namespace AlgebraicGeometry
 
 open Scheme.Modules
 
-variable {K : Type u} [Field K]
+variable {S : Scheme.{u}}
 
 /-- Blueprint `sk-prop-av-cube`: The theorem of the cube.
 
-Let `A` be an abelian variety over a field `K` and let `L` be an invertible `𝒪_A`-module. For
+Let `A` be an abelian scheme over a base `S` and let `L` be an invertible `𝒪_A`-module. For
 `1 ≤ i₁ < ⋯ < i_t ≤ 3` let `m_{i₁…i_t} : A × A × A ⟶ A` be the partial sum map
 `(x₁, x₂, x₃) ↦ x_{i₁} + ⋯ + x_{i_t}`. Then
 `m₁₂₃^* L ⊗ m₁^* L ⊗ m₂^* L ⊗ m₃^* L ≅ m₁₂^* L ⊗ m₁₃^* L ⊗ m₂₃^* L`. -/
-theorem nonempty_iso_cube (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianScheme A]
+theorem nonempty_iso_cube (A : Over S) [GrpObj A] [IsAbelianScheme A]
     (L : A.left.Modules) [L.IsInvertible] :
     Nonempty
       (Scheme.Modules.tensorObj
@@ -81,10 +82,10 @@ theorem nonempty_iso_cube (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianScheme 
 /-- Blueprint `sk-prop-av-mult-n-pullback`: Pullback of symmetric modules under multiplication
 by `n`.
 
-Let `A` be an abelian variety over `K` and let `N` be an invertible `𝒪_A`-module which is
+Let `A` be an abelian scheme over a base `S` and let `N` be an invertible `𝒪_A`-module which is
 *symmetric*, that is `[-1]^* N ≅ N`. Then `[n]^* N ≅ N^{⊗ n²}` for every `n`. -/
-theorem nonempty_iso_overPullback_npow_id (A : Over (Spec (.of K))) [GrpObj A]
-    [IsAbelianScheme A] (N : A.left.Modules) [N.IsInvertible]
+theorem nonempty_iso_overPullback_npow_id (A : Over S) [GrpObj A] [IsAbelianScheme A]
+    (N : A.left.Modules) [N.IsInvertible]
     (hsymm : Nonempty (overPullback ι[A] N ≅ N)) (n : ℕ) :
     Nonempty (overPullback (𝟙 A ^ n) N ≅ N.tensorPow (n ^ 2)) :=
   sorry

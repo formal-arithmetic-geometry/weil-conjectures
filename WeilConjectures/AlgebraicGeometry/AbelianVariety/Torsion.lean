@@ -15,8 +15,8 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 /-!
 # The `n`-torsion of an abelian variety
 
-For `n` prime to the characteristic, the `n`-torsion subgroup scheme of an abelian variety is
-étale; over an algebraically closed field its points do not change under extension of
+For `n` invertible on the base, the `n`-torsion subgroup scheme of an abelian scheme is étale;
+over an algebraically closed field its points do not change under extension of
 algebraically closed fields, and for an abelian variety of dimension `g` the group of
 `n`-torsion points is `(ℤ/nℤ) ^ (2 * g)`.
 
@@ -25,12 +25,14 @@ of `CategoryTheory.GrpObj.Hom.group`; it is written additively as
 `Additive (𝟙_ (Over (Spec (.of K))) ⟶ A)`, so that `AddSubgroup.torsionBy` describes its
 `n`-torsion.
 
-"Prime to the characteristic" is spelled `¬ p ∣ n`, which for `p = 0` says exactly `n ≠ 0`.
+Over a field of characteristic `p`, "prime to the characteristic" is spelled `¬ p ∣ n`, which
+for `p = 0` says exactly `n ≠ 0`; over a general base `S` it becomes `n` being a unit of
+`Γ(S, 𝒪_S)`, which is the hypothesis of `AlgebraicGeometry.etale_torsionSubgroupScheme`.
 
 ## Main statements
 
-- `AlgebraicGeometry.etale_torsionSubgroupScheme`: the `n`-torsion of an abelian variety is
-  étale for `n` prime to the characteristic.
+- `AlgebraicGeometry.etale_torsionSubgroupScheme`: the `n`-torsion of an abelian scheme is
+  étale for `n` invertible on the base.
 - `AlgebraicGeometry.bijective_toUnit_comp_torsionSubgroupScheme`: its points do not change
   under an extension of algebraically closed fields.
 - `AlgebraicGeometry.nonempty_addEquiv_torsionBy`: `A(K)[n] ≃+ (ℤ/nℤ) ^ (2 * g)`.
@@ -44,14 +46,16 @@ open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj
 
 namespace AlgebraicGeometry
 
-variable {K : Type u} [Field K]
+variable {S : Scheme.{u}} {K : Type u} [Field K]
 
 /-- Blueprint `sk-prop-av-ntorsion-etale`: The `n`-torsion of an abelian variety is étale.
 
-Let `A` be an abelian variety over a field `K` of characteristic `p` and let `n` be prime to
-`p`. Then `A[n]` is an étale group scheme over `K`. -/
-theorem etale_torsionSubgroupScheme (p : ℕ) [CharP K p] (A : Over (Spec (.of K))) [GrpObj A]
-    [IsAbelianScheme A] (n : ℕ) (hn : 0 < n) (hnp : ¬ p ∣ n) :
+Let `A` be an abelian scheme over a base `S` and let `n` be invertible on `S`. Then `A[n]` is an
+étale group scheme over `S`. For `S = Spec K` with `K` a field of characteristic `p`, `n` is
+invertible exactly when it is prime to `p`, and this is the blueprint statement: the `n`-torsion
+of an abelian variety is étale for `n` prime to the characteristic. -/
+theorem etale_torsionSubgroupScheme (A : Over S) [GrpObj A] [IsAbelianScheme A] (n : ℕ)
+    (hn : IsUnit (n : Γ(S, ⊤))) :
     Etale (torsionSubgroupScheme A n).hom :=
   sorry
 

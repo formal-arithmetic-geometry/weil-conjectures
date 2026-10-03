@@ -16,6 +16,10 @@ An abelian variety admits a closed immersion into a projective space over the ba
 carries an ample invertible module, and the symmetrisation `L ⊗ [-1]^* L` of an ample invertible
 module is again ample and is symmetric.
 
+The projectivity statements are specific to a field: an abelian scheme over a general base need
+not be projective (Raynaud's examples), and `AlgebraicGeometry.IsAmple` is only defined over a
+field. The symmetrisation and its symmetry make sense over any base.
+
 `AlgebraicGeometry.IsVeryAmple` is a genuine definition, and so is the tensor product
 `AlgebraicGeometry.Scheme.Modules.tensorObj` (see
 `WeilConjectures.AlgebraicGeometry.Modules.Invertible`), through whose tensor powers ampleness is
@@ -48,11 +52,11 @@ namespace AlgebraicGeometry
 
 open Scheme.Modules
 
-variable {K : Type u} [Field K]
+variable {S : Scheme.{u}} {K : Type u} [Field K]
 
-/-- The *symmetrisation* `L ⊗ [-1]^* L` of an invertible module `L` on a group scheme: the
-smallest symmetric module built from `L`. -/
-noncomputable def Scheme.Modules.symmetrisation {A : Over (Spec (.of K))} [GrpObj A]
+/-- The *symmetrisation* `L ⊗ [-1]^* L` of an invertible module `L` on a group scheme over a
+base `S`: the smallest symmetric module built from `L`. -/
+noncomputable def Scheme.Modules.symmetrisation {A : Over S} [GrpObj A]
     (L : A.left.Modules) : A.left.Modules :=
   tensorObj L (overPullback ι[A] L)
 
@@ -87,11 +91,10 @@ theorem IsAbelianScheme.isAmple_symmetrisation (A : Over (Spec (.of K))) [GrpObj
 
 /-- Blueprint `sk-prop-av-symmetric-ample`: A symmetric ample module.
 
-The symmetrisation `N = L ⊗ [-1]^* L` of an invertible module on an abelian variety is
-*symmetric*, that is `[-1]^* N ≅ N`. -/
-theorem IsAbelianScheme.nonempty_iso_overPullback_inv_symmetrisation
-    (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianScheme A] (L : A.left.Modules)
-    [L.IsInvertible] :
+The symmetrisation `N = L ⊗ [-1]^* L` of an invertible module on an abelian scheme over a base
+`S` is *symmetric*, that is `[-1]^* N ≅ N`. -/
+theorem IsAbelianScheme.nonempty_iso_overPullback_inv_symmetrisation (A : Over S) [GrpObj A]
+    [IsAbelianScheme A] (L : A.left.Modules) [L.IsInvertible] :
     Nonempty (overPullback ι[A] L.symmetrisation ≅ L.symmetrisation) :=
   sorry
 
