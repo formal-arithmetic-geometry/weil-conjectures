@@ -54,7 +54,7 @@ classical `F^*` on cohomology.
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
@@ -120,7 +120,7 @@ theorem subsingleton_cohomologyFrobeniusModule_carrier
     Subsingleton (M.cohomologyFrobeniusModule r).carrier :=
   ModuleCat.isZero_iff_subsingleton.1 ((WeilCoefficients.toModuleCat l).map_isZero
     ((DerivedCategory.homologyFunctor _ r).map_isZero
-      ((rightDerivedGlobalSections _ _).map_isZero M.isZero_carrier)))
+      ((Sheaf.Γ _ _).isZero_rightDerivedFunctor_obj M.isZero_carrier)))
 
 end WeilComplex
 
