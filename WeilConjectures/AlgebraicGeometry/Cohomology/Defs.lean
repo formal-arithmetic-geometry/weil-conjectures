@@ -49,6 +49,8 @@ lemma `AlgebraicGeometry.Scheme.Modules.smul_H_eq_globalSectionsRingHom_smul`.
 - `AlgebraicGeometry.Scheme.Modules.moduleH`: the `Γ(X, ⊤)`-module structure on `M.H n`.
 - `AlgebraicGeometry.Scheme.Modules.H.mapLinearMap`: the `k`-linear map on cohomology induced
   by a morphism, over a base field `k`.
+- `AlgebraicGeometry.Scheme.Modules.cohomologyFunctor`: `M ↦ H^n(X, M)` as a functor to
+  `k`-vector spaces.
 - `AlgebraicGeometry.Scheme.Modules.finrankH`: the dimension of `M.H n` over a base field.
 - `AlgebraicGeometry.Scheme.Modules.eulerChar`: the Euler characteristic of `M`.
 
@@ -237,15 +239,31 @@ lemma smul_H_eq_globalSectionsRingHom_smul (M : X.Modules) (n : ℕ) (c : k) (x 
 /-- The `k`-linear map on sheaf cohomology induced by a morphism of sheaves of modules on a
 `k`-scheme. -/
 noncomputable def H.mapLinearMap {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) :
-    M.H n →ₗ[k] N.H n where
-  toFun := H.map φ n
-  map_add' := map_add _
-  map_smul' c := H.map_smul φ n (globalSectionsRingHom k c)
+    M.H n →ₗ[k] N.H n :=
+  { H.mapₗ φ n with map_smul' c := H.map_smul φ n (globalSectionsRingHom k c) }
 
 @[simp]
 lemma H.mapLinearMap_apply {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) (x : M.H n) :
     H.mapLinearMap k φ n x = H.map φ n x :=
   rfl
+
+@[simp]
+lemma H.mapLinearMap_id (M : X.Modules) (n : ℕ) :
+    H.mapLinearMap k (𝟙 M) n = LinearMap.id :=
+  LinearMap.ext (H.map_id_apply M n)
+
+lemma H.mapLinearMap_comp {M N P : X.Modules} (φ : M ⟶ N) (ψ : N ⟶ P) (n : ℕ) :
+    H.mapLinearMap k (φ ≫ ψ) n = H.mapLinearMap k ψ n ∘ₗ H.mapLinearMap k φ n :=
+  LinearMap.ext (H.map_comp_apply φ ψ n)
+
+/-- The `n`-th sheaf cohomology `M ↦ H^n(X, M)` of sheaves of modules on a `k`-scheme, as a
+functor to `k`-vector spaces. -/
+@[simps]
+noncomputable def cohomologyFunctor (n : ℕ) : X.Modules ⥤ ModuleCat.{u} k where
+  obj M := ModuleCat.of k (M.H n)
+  map φ := ModuleCat.ofHom (H.mapLinearMap k φ n)
+  map_id M := by ext1; exact H.mapLinearMap_id k M n
+  map_comp φ ψ := by ext1; exact H.mapLinearMap_comp k φ ψ n
 
 /-- The `q`-th cohomological invariant `h^q(X, M)` of a sheaf of modules `M` on a
 `k`-scheme `X`: the dimension of `H^q(X, M)` as a `k`-vector space. -/
@@ -255,9 +273,9 @@ noncomputable def finrankH (M : X.Modules) (q : ℕ) : ℕ := Module.finrank k (
 `k`-scheme `X`.
 
 The sum is a `finsum`, so it is `0` whenever infinitely many terms are nonzero. That makes
-`eulerChar` meaningful only together with a vanishing statement for the higher cohomology; on
-a curve the relevant one is
-`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_two_le`. -/
+`eulerChar` meaningful only together with a vanishing statement for the higher cohomology,
+such as Grothendieck vanishing
+`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`. -/
 noncomputable def eulerChar (M : X.Modules) : ℤ := ∑ᶠ q : ℕ, (-1) ^ q * (M.finrankH k q : ℤ)
 
 /-- `h^q(X, M)` only depends on the isomorphism class of `M`. -/

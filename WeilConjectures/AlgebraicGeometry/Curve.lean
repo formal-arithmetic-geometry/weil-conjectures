@@ -45,6 +45,7 @@ The sheaf `Ω¹_{C/K}` is `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`, 
 
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.Hom.genus_eq_finrankH_zero`: the genus is `h⁰(C, Ω¹_{C/K})`.
 - `AlgebraicGeometry.Scheme.Hom.picDegree_mk`: the degree of the class of an invertible module
   `M` is `χ(M) - χ(𝒪_C)`.
 
@@ -96,6 +97,12 @@ noncomputable def Scheme.Hom.genus (f : C ⟶ Spec (.of K)) : ℕ :=
   letI := f.ΓAlgebra
   letI : Module K Γ(f.relativeDifferentials, ⊤) := Module.compHom _ (algebraMap K Γ(C, ⊤))
   Module.finrank K Γ(f.relativeDifferentials, ⊤)
+
+/-- The genus `dim_K Γ(C, Ω¹_{C/K})` is `h⁰(C, Ω¹_{C/K})`: the global sections of a sheaf of
+modules are its cohomology in degree `0`, compatibly with the `K`-module structures. -/
+theorem Scheme.Hom.genus_eq_finrankH_zero [C.Over (Spec (.of K))] :
+    (C ↘ Spec (.of K)).genus = Modules.finrankH K (C ↘ Spec (.of K)).relativeDifferentials 0 :=
+  sorry
 
 /-- Blueprint `sk-def-av-pic`: Pic, degree, Pic⁰
 
