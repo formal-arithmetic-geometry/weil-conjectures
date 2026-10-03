@@ -50,7 +50,7 @@ namespace PowerSeries
 
 /-- The logarithmic derivative of a finite product is the sum of the logarithmic
 derivatives. -/
-private theorem X_mul_derivative_prod {K : Type*} [Field K] {ι : Type*}
+theorem X_mul_derivative_prod {K : Type*} [Field K] {ι : Type*}
     {f a : ι → K⟦X⟧} (s : Finset ι) (h : ∀ i ∈ s, X * derivative K (f i) = a i * f i) :
     X * derivative K (∏ i ∈ s, f i) = (∑ i ∈ s, a i) * ∏ i ∈ s, f i := by
   classical
@@ -62,6 +62,27 @@ private theorem X_mul_derivative_prod {K : Type*} [Field K] {ι : Type*}
     rw [Finset.prod_insert hb, Finset.sum_insert hb, Derivation.leibniz, smul_eq_mul,
       smul_eq_mul]
     linear_combination f b * ihs + (∏ i ∈ s, f i) * h4
+
+/-- The logarithmic derivative of the counting series `exp (∑_{n ≥ 1} a n tⁿ / n)` is the
+generating series `∑_{n ≥ 1} a n tⁿ`. -/
+theorem X_mul_derivative_exp_subst {K : Type*} [Field K] [CharZero K] (a : ℕ → K) :
+    X * derivative K ((exp K).subst (mk fun n ↦ if n = 0 then 0 else a n / n)) =
+      (mk fun n ↦ if n = 0 then 0 else a n) *
+        (exp K).subst (mk fun n ↦ if n = 0 then 0 else a n / n) := by
+  have hsub : HasSubst (mk fun n ↦ if n = 0 then 0 else a n / n) :=
+    HasSubst.of_constantCoeff_zero' (by simp)
+  have hXF : X * derivative K (mk fun n ↦ if n = 0 then 0 else a n / n) =
+      mk fun n ↦ if n = 0 then 0 else a n := by
+    ext n
+    match n with
+    | 0 => simp
+    | m + 1 =>
+      rw [coeff_succ_X_mul, coeff_derivative, coeff_mk, coeff_mk, if_neg m.succ_ne_zero,
+        if_neg m.succ_ne_zero]
+      have hm : ((m : K) + 1) ≠ 0 := by exact_mod_cast Nat.succ_ne_zero m
+      push_cast
+      rw [div_mul_cancel₀ _ hm]
+  rw [derivative_subst hsub, derivative_exp, mul_comm (subst _ (exp K)), ← mul_assoc, hXF]
 
 end PowerSeries
 
@@ -145,22 +166,8 @@ theorem constantCoeff_zeta [CharZero K] : PowerSeries.constantCoeff D.zeta = 1 :
 series of the integers `N n`. -/
 theorem X_mul_derivative_zeta [CharZero K] :
     X * derivative K D.zeta =
-      (PowerSeries.mk fun n ↦ if n = 0 then 0 else (D.N n : K)) * D.zeta := by
-  have hXF : X * derivative K
-      (PowerSeries.mk fun n ↦ if n = 0 then 0 else (D.N n : K) / n) =
-      PowerSeries.mk fun n ↦ if n = 0 then 0 else (D.N n : K) := by
-    ext n
-    match n with
-    | 0 => simp
-    | m + 1 =>
-      rw [PowerSeries.coeff_succ_X_mul, PowerSeries.coeff_derivative, PowerSeries.coeff_mk,
-        PowerSeries.coeff_mk, if_neg m.succ_ne_zero, if_neg m.succ_ne_zero]
-      have hm : ((m : K) + 1) ≠ 0 := by exact_mod_cast Nat.succ_ne_zero m
-      push_cast
-      rw [div_mul_cancel₀ _ hm]
-  unfold zeta
-  rw [PowerSeries.derivative_subst D.hasSubst_zeta, PowerSeries.derivative_exp,
-    mul_comm (PowerSeries.subst _ (PowerSeries.exp K)), ← mul_assoc, hXF]
+      (PowerSeries.mk fun n ↦ if n = 0 then 0 else (D.N n : K)) * D.zeta :=
+  PowerSeries.X_mul_derivative_exp_subst _
 
 /-- **The cohomological determinant factorisation**: the counting series of a trace datum is
 the alternating product of the reciprocal characteristic polynomials of its endomorphisms,

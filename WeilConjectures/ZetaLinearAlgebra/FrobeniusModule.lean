@@ -42,6 +42,9 @@ reversed characteristic polynomial, for an integral weight and with the normaliz
 - `FrobeniusModule.tateTwist`: the Tate twist `M(n)`, rescaling the Frobenius by `q ^ (-n)`.
 - `FrobeniusModule.dual`: the dual `M^∨` with the inverse transpose of the Frobenius.
 - `FrobeniusModule.IsPureOfWeight.tateTwist`: the twist by `n` lowers the weight by `2 n`.
+- `FrobeniusModule.trivial`: the trivial Frobenius module `K`, and
+  `FrobeniusModule.localPolynomial_eq_and_finrank_eq_of_equiv_tateTwist`: a Frobenius module
+  isomorphic to `K(-d)` is one-dimensional with local polynomial `1 - qᵈ T`.
 -/
 
 @[expose] public section
@@ -215,6 +218,64 @@ theorem IsPureOfWeight.tateTwist {ι : K →+* ℂ} {q : ℕ} (hq : 0 < q)
   congr 1
   push_cast
   ring
+
+/-- The *trivial* Frobenius module `K`, with the identity as Frobenius. -/
+def trivial (K : Type v) [Field K] : FrobeniusModule.{v, v} K where
+  carrier := K
+  frobenius := LinearEquiv.refl K K
+
+/-- An isomorphism of Frobenius modules conjugates the two Frobenius endomorphisms. -/
+theorem Equiv.frobeniusEnd_eq {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) :
+    N.frobeniusEnd = e.toLinearEquiv.conj M.frobeniusEnd := by
+  ext x
+  obtain ⟨y, rfl⟩ := e.toLinearEquiv.surjective x
+  simp [LinearEquiv.conj_apply, frobeniusEnd, e.map_frobenius]
+
+/-- Isomorphic Frobenius modules have the same local polynomial. -/
+theorem Equiv.localPolynomial_eq {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) :
+    M.localPolynomial = N.localPolynomial := by
+  rw [localPolynomial, localPolynomial, LinearMap.charpolyRev_def, LinearMap.charpolyRev_def,
+    e.frobeniusEnd_eq, LinearEquiv.charpoly_conj]
+
+/-- Isomorphic Frobenius modules have the same dimension. -/
+theorem Equiv.finrank_eq {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) :
+    Module.finrank K M.carrier = Module.finrank K N.carrier :=
+  e.toLinearEquiv.finrank_eq
+
+/-- The local polynomial of the Tate twist `K(-d)` of the trivial Frobenius module is
+`1 - qᵈ T`: its Frobenius is multiplication by `qᵈ`. -/
+theorem localPolynomial_tateTwist_trivial {q : ℕ} (hq : (q : K) ≠ 0) (d : ℕ) :
+    ((trivial K).tateTwist q (-d)).localPolynomial =
+      1 - Polynomial.C ((q : K) ^ d) * Polynomial.X := by
+  have hc : ((q : K) ^ (-(-(d : ℤ)))) ≠ 0 := zpow_ne_zero _ hq
+  have hF : ((trivial K).tateTwist q (-d)).frobeniusEnd =
+      ((q : K) ^ d • LinearMap.id : Module.End K K) := by
+    refine LinearMap.ext fun x ↦ ?_
+    refine (frobeniusEnd_rescale_apply (M := trivial K) hc x).trans ?_
+    simp [frobeniusEnd, trivial]
+    rfl
+  rw [localPolynomial, hF]
+  change LinearMap.charpolyRev ((q : K) ^ d • LinearMap.id : Module.End K K) = _
+  rw [← LinearMap.charpolyRev_toMatrix (Module.Basis.singleton Unit K),
+    Matrix.charpolyRev, Matrix.det_unique]
+  simp [Module.Basis.toMatrix_apply, Module.Basis.singleton_repr, mul_comm]
+
+/-- **Endpoint factors.** A Frobenius module isomorphic to the Tate twist `K(-d)` of the trivial
+Frobenius module is one-dimensional with local polynomial `1 - qᵈ T`.
+
+Applied with `d = 0` to `H⁰(X, ℚ_ℓ) ≅ ℚ_ℓ` and with `d = dim X` to `H^{2d}(X, ℚ_ℓ) ≅ ℚ_ℓ(-d)`
+for a smooth proper geometrically connected `X` over `𝔽_q`, this gives the endpoint factors
+`P 0 = 1 - T` and `P (2 * d) = 1 - qᵈ T` and the endpoint Betti numbers `b 0 = b (2 * d) = 1`.
+The cohomological isomorphisms themselves are not available in this repository; the endpoint
+factors appear in the zeta function as the fields `AlgebraicGeometry.IsWeilFactorization.apply_zero`
+and `AlgebraicGeometry.IsWeilFactorization.apply_last`.
+(blueprint: `prop-endpoints`) -/
+theorem localPolynomial_eq_and_finrank_eq_of_equiv_tateTwist {q : ℕ} (hq : (q : K) ≠ 0)
+    {d : ℕ} {M : FrobeniusModule.{v, v} K} (e : M.Equiv ((trivial K).tateTwist q (-d))) :
+    M.localPolynomial = 1 - Polynomial.C ((q : K) ^ d) * Polynomial.X ∧
+      Module.finrank K M.carrier = 1 :=
+  ⟨e.localPolynomial_eq.trans (localPolynomial_tateTwist_trivial hq d),
+    e.finrank_eq.trans (Module.finrank_self K)⟩
 
 /-- The dual `M^∨ = Hom_K(M, K)` of a Frobenius module, with the inverse transpose
 `f ↦ f ∘ F⁻¹` of the Frobenius `F`, so that the evaluation pairing `M^∨ ⊗ M → K` is
