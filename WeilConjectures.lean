@@ -229,6 +229,7 @@ public import WeilConjectures.Compactification.TwoOpenSetup
 public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.Biproduct
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.DenseOpen
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
@@ -605,6 +606,7 @@ public import WeilConjectures.Mathlib.SetTheory.Cardinal.HasCardinalLT
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 public import WeilConjectures.Mathlib.Topology.Constructible
 public import WeilConjectures.Mathlib.Topology.Constructions
+public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.Mathlib.Topology.Maps.Basic
 public import WeilConjectures.Mathlib.Topology.Sober
 public import WeilConjectures.Mathlib.Topology.Spectral.Prespectral
