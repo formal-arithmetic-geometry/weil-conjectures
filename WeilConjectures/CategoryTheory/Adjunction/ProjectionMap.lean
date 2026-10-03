@@ -174,12 +174,13 @@ lemma rightAdjointProjectionMap_app_app (M : C) (L : D) :
 /-- The transpose along `adj : F ⊣ G` of the right adjoint projection map
 `T_D (G M) L ⟶ G (T_C M (F L))` is the composite
 ```
- F (T_D (G M) L) ──── (adj.homEquiv _ _).symm (projection map) ────▶ T_C M (F L)
-        │                                                                ▲
-        │ φ                                                              │ T_C (ε_M) (𝟙 (F L))
-        ▼                                                                │
- T_C (F (G M)) (F L) ════════════════════════════════════════ T_C (F (G M)) (F L)
+F (T_D (G M) L) --φ--> T_C (F (G M)) (F L)
+        \                    |
+         \                   | T_C (ε_M) (𝟙 (F L))
+       transpose             v
+           ----------->  T_C M (F L)
 ```
+where the long edge is `(adj.homEquiv _ _).symm` of the right adjoint projection map.
 -/
 @[simp, reassoc]
 lemma homEquiv_symm_rightAdjointProjectionMap_app_app (M : C) (L : D) :

@@ -19,13 +19,15 @@ adjunction `Lp^* ⊣ Rp_*` and the comparison
 `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison`. Its transpose along
 `Lp^* ⊣ Rp_*` is given by the diagram
 ```
- Lp^*(Rp_*M ⊗ᴸ L) ──── (homEquiv _ _).symm (projection map) ────▶ M ⊗ᴸ Lp^*L
-        │                                                              ▲
-        │ leftDerivedUpperStarTensorComparison                         │ ε_M ⊗ᴸ 𝟙
-        ▼                                                              │
- Lp^*Rp_*M ⊗ᴸ Lp^*L ═══════════════════════════════════════ Lp^*Rp_*M ⊗ᴸ Lp^*L
+Lp^*(Rp_*M ⊗ᴸ L) --comparison--> Lp^*Rp_*M ⊗ᴸ Lp^*L
+        \                               |
+         \                              | ε_M ⊗ᴸ 𝟙
+       transpose                        v
+           ---------------------->  M ⊗ᴸ Lp^*L
 ```
-where `ε` is the counit of `AlgebraicGeometry.Etale.derivedUpperStarLowerStarAdjunction`.
+where the comparison is `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison`, the long
+edge is `(homEquiv _ _).symm` of the projection map and `ε` is the counit of
+`AlgebraicGeometry.Etale.derivedUpperStarLowerStarAdjunction`.
 
 ## Main definitions and results
 
@@ -120,7 +122,6 @@ noncomputable def rightDerivedLowerStarProjectionMap :
 /-- The projection map `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` at `(M, L)` is the transpose along
 `Lp^* ⊣ Rp_*` of the comparison `Lp^*(Rp_*M ⊗ᴸ L) ⟶ Lp^*Rp_*M ⊗ᴸ Lp^*L` followed by
 `ε_M ⊗ᴸ 𝟙`. -/
-@[simp]
 lemma rightDerivedLowerStarProjectionMap_app_app
     (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
@@ -134,13 +135,15 @@ lemma rightDerivedLowerStarProjectionMap_app_app
 /-- The transpose along `Lp^* ⊣ Rp_*` of the projection map
 `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` is the composite
 ```
- Lp^*(Rp_*M ⊗ᴸ L) ──── (homEquiv _ _).symm (projection map) ────▶ M ⊗ᴸ Lp^*L
-        │                                                              ▲
-        │ leftDerivedUpperStarTensorComparison                         │ ε_M ⊗ᴸ 𝟙
-        ▼                                                              │
- Lp^*Rp_*M ⊗ᴸ Lp^*L ═══════════════════════════════════════ Lp^*Rp_*M ⊗ᴸ Lp^*L
+Lp^*(Rp_*M ⊗ᴸ L) --comparison--> Lp^*Rp_*M ⊗ᴸ Lp^*L
+        \                               |
+         \                              | ε_M ⊗ᴸ 𝟙
+       transpose                        v
+           ---------------------->  M ⊗ᴸ Lp^*L
 ```
-where `ε` is the counit of `AlgebraicGeometry.Etale.derivedUpperStarLowerStarAdjunction`. -/
+where the comparison is `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison`, the long
+edge is `(homEquiv _ _).symm` of the projection map and `ε` is the counit of
+`AlgebraicGeometry.Etale.derivedUpperStarLowerStarAdjunction`. -/
 @[simp, reassoc]
 lemma homEquiv_symm_rightDerivedLowerStarProjectionMap
     (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
