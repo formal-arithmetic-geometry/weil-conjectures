@@ -13,6 +13,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.ConstructibleSheaf.TensorUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 
 /-!
 
@@ -102,11 +103,11 @@ inversion and base change arguments need the specific rigidification
 `ε_Ψ : Λ ≅ 0^* ℒ_Ψ` and the unique `m^* ℒ_Ψ ≅ u₁^* ℒ_Ψ ⊗ u₂^* ℒ_Ψ` restricting to it, with
 their coherences.
 
-The statements for `ℒ_{Ψ, f}` are pullbacks of the universal statements on `𝔸¹_k` and
-`𝔸²_k`. For `zero` and `one` this needs only `g^* Λ ≅ Λ`, and they are proved. For `add` and
-`mul` it needs `g^* (A ⊗ B) ≅ g^* A ⊗ g^* B`; at present
-`AlgebraicGeometry.Etale.oplaxMonoidal_upperStar` only makes `g^*` oplax monoidal, so they are
-left as `sorry`.
+The statements for `ℒ_{Ψ, f}` are proved as pullbacks of the universal statements on `𝔸¹_k`
+and `𝔸²_k`: `zero` and `one` along `g^* Λ ≅ Λ`, and `add` and `mul` along
+`g^* (A ⊗ B) ≅ g^* A ⊗ g^* B` from the strong monoidal structure
+`AlgebraicGeometry.Etale.monoidal_upperStar`. For `add` the pullback is along the pair
+`(f, g) : X ⟶ 𝔸²_k`.
 
 -/
 
@@ -271,7 +272,7 @@ def artinSchreierSheafOfPullbackIso {X X' : Scheme.{u}} [X.Over (Spec (.of k))]
     (g)^*[ModuleCat Λ].obj (artinSchreierSheafOf X Ψ f) ≅
       artinSchreierSheafOf X' Ψ (g.appTop f) :=
   ((upperStarComp _ g _ _
-    (AffineSpace.hom_ext (by simp) fun _ ↦ by simp)).app (artinSchreierSheaf Ψ)).symm
+    (by rw [AffineSpace.comp_homOfVector, comp_over]; rfl)).app (artinSchreierSheaf Ψ)).symm
 
 end Construction
 
@@ -416,8 +417,9 @@ X ----> Spec k --0--> 𝔸¹_k
 theorem nonempty_iso_artinSchreierSheafOf_zero (Ψ : AddChar k Λ) :
     Nonempty (artinSchreierSheafOf X Ψ 0 ≅ 𝟙_ _) := by
   obtain ⟨e⟩ := nonempty_iso_artinSchreierSheaf_zero Ψ
-  exact ⟨(upperStarComp _ (X ↘ Spec (.of k)) (AffineSpace.zeroSection PUnit _) _
-      (AffineSpace.hom_ext (by simp) fun _ ↦ by simp)).app (artinSchreierSheaf Ψ) ≪≫
+  exact ⟨(upperStarComp _ (X ↘ Spec (.of k)) (AffineSpace.zeroSection PUnit _) _ (by
+      rw [AffineSpace.zeroSection, AffineSpace.comp_homOfVector, Category.comp_id]
+      congr 1; ext; simp)).app (artinSchreierSheaf Ψ) ≪≫
     (X ↘ Spec (.of k))^*[ModuleCat Λ].mapIso e.symm ≪≫ upperStarTensorUnitIso Λ _⟩
 
 /-- The Artin–Schreier sheaf turns addition of functions into tensor product of sheaves,
@@ -425,10 +427,27 @@ theorem nonempty_iso_artinSchreierSheafOf_zero (Ψ : AddChar k Λ) :
 (sketch blueprint: `sk-lem-as-properties`) -/
 theorem nonempty_iso_artinSchreierSheafOf_add (Ψ : AddChar k Λ) (f g : Γ(X, ⊤)) :
     Nonempty (artinSchreierSheafOf X Ψ f ⊗ artinSchreierSheafOf X Ψ g ≅
-      artinSchreierSheafOf X Ψ (f + g)) :=
-  -- the pullback of `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_add` along
-  -- `(f, g) : X ⟶ 𝔸²_k`, once `(f, g)^*` is known to be monoidal
-  sorry
+      artinSchreierSheafOf X Ψ (f + g)) := by
+  obtain ⟨e⟩ := nonempty_iso_artinSchreierSheaf_add Ψ
+  -- the pair `(f, g) : X ⟶ 𝔸²_k`, through which `f`, `g` and `f + g` factor
+  obtain ⟨h, hf, hg, hm⟩ : ∃ h : X ⟶ pullback (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k)),
+      (AffineSpace.homOfVector (X ↘ Spec (.of k)) fun _ ↦ f) = h ≫ pullback.fst _ _ ∧
+      (AffineSpace.homOfVector (X ↘ Spec (.of k)) fun _ ↦ g) = h ≫ pullback.snd _ _ ∧
+      (AffineSpace.homOfVector (X ↘ Spec (.of k)) fun _ ↦ f + g) =
+        h ≫ AffineSpace.add PUnit (Spec (.of k)) := by
+    refine ⟨pullback.lift (AffineSpace.homOfVector (X ↘ Spec (.of k)) fun _ ↦ f)
+      (AffineSpace.homOfVector (X ↘ Spec (.of k)) fun _ ↦ g) (by simp),
+      (pullback.lift_fst _ _ _).symm, (pullback.lift_snd _ _ _).symm, ?_⟩
+    rw [AffineSpace.add, AffineSpace.comp_homOfVector]
+    simp only [pullback.lift_fst_assoc, AffineSpace.homOfVector_over]
+    congr 1; ext
+    simp only [Function.comp_apply, map_add, ← CommRingCat.comp_apply,
+      ← Scheme.Hom.comp_appTop, pullback.lift_fst, pullback.lift_snd,
+      AffineSpace.homOfVector_appTop_coord]
+  exact ⟨tensorIso ((upperStarComp (ModuleCat Λ) h _ _ hf).app (artinSchreierSheaf Ψ))
+      ((upperStarComp (ModuleCat Λ) h _ _ hg).app (artinSchreierSheaf Ψ)) ≪≫
+    (Functor.Monoidal.μIso (h)^*[ModuleCat Λ] _ _) ≪≫ (h)^*[ModuleCat Λ].mapIso e.symm ≪≫
+    ((upperStarComp (ModuleCat Λ) h _ _ hm).app (artinSchreierSheaf Ψ)).symm⟩
 
 /-- The Artin–Schreier sheaf of the trivial character is the constant sheaf: `ℒ_{1, f} ≅ Λ`,
 the pullback of `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_one` along `f`.
@@ -443,10 +462,9 @@ sheaves, `ℒ_{Ψ, f} ⊗ ℒ_{Ψ', f} ≅ ℒ_{Ψ Ψ', f}`.
 (sketch blueprint: `sk-lem-as-properties`) -/
 theorem nonempty_iso_artinSchreierSheafOf_mul (Ψ Ψ' : AddChar k Λ) (f : Γ(X, ⊤)) :
     Nonempty (artinSchreierSheafOf X Ψ f ⊗ artinSchreierSheafOf X Ψ' f ≅
-      artinSchreierSheafOf X (Ψ * Ψ') f) :=
-  -- the pullback of `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_mul` along `f`,
-  -- once `f^*` is known to be monoidal
-  sorry
+      artinSchreierSheafOf X (Ψ * Ψ') f) := by
+  obtain ⟨e⟩ := nonempty_iso_artinSchreierSheaf_mul Ψ Ψ'
+  exact ⟨Functor.Monoidal.μIso _ _ _ ≪≫ Functor.mapIso _ e⟩
 
 /-- The inverse of `ℒ_{Ψ, f}` is `ℒ_{Ψ, -f}`.
 (sketch blueprint: `sk-lem-as-properties`) -/
