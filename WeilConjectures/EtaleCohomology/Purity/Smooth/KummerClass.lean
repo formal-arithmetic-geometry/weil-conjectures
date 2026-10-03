@@ -81,6 +81,12 @@ namespace AlgebraicGeometry
 
 open Scheme
 
+/-- The zero locus of `insert a s` is the intersection of the zero loci of `a` and of `s`. -/
+lemma Scheme.zeroLocus_insert {X : Scheme.{u}} {U : X.Opens} (a : Γ(X, U)) (s : Set Γ(X, U)) :
+    X.zeroLocus (insert a s) = X.zeroLocus {a} ∩ X.zeroLocus s := by
+  ext x
+  simp
+
 namespace Scheme.IdealSheafData
 
 /-- The closed subscheme cut out by a set `s` of global sections has the zero locus of `s` as
@@ -195,6 +201,31 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
 
+**Supports on everything.** For a closed immersion `i : Z ⟶ U` that is surjective, every
+morphism `φ : K ⟶ L` factors uniquely through the counit `Ri_! Ri^! L ⟶ L`, which is an
+isomorphism: the open complement of `Z` is empty, so the supported localization triangle
+degenerates. -/
+theorem existsUnique_comp_counit_of_range_eq_univ (i : Z ⟶ U) [IsClosedImmersion i]
+    (hi : Set.range i.base = Set.univ)
+    {K L : DerivedCategory (Sheaf U.smallEtaleTopology A)} (φ : K ⟶ L) :
+    ∃! ψ : K ⟶ (R(i)_![A]).obj ((R(i)^![A]).obj L),
+      ψ ≫ (rightDerivedUpperShriekAdjunction A i).counit.app L = φ :=
+  sorry
+
+/-- The lift `K ⟶ Ri_! Ri^! L` of a morphism `φ : K ⟶ L` along a surjective closed immersion
+`i`, through the counit of `Ri_! ⊣ Ri^!`.
+
+It is *defined* as `Classical.choose` of
+`AlgebraicGeometry.Etale.existsUnique_comp_counit_of_range_eq_univ`, whose proof is not yet
+formalised; uniqueness is what makes the choice canonical. -/
+noncomputable def liftCounitOfRangeEqUniv (i : Z ⟶ U) [IsClosedImmersion i]
+    (hi : Set.range i.base = Set.univ)
+    {K L : DerivedCategory (Sheaf U.smallEtaleTopology A)} (φ : K ⟶ L) :
+    K ⟶ (R(i)_![A]).obj ((R(i)^![A]).obj L) :=
+  (existsUnique_comp_counit_of_range_eq_univ A i hi φ).exists.choose
+
+/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+
 **The product of supports.** Let `i₁ : Z₁ ⟶ U`, `i₂ : Z₂ ⟶ U` and `i : Z ⟶ U` be closed
 immersions with `Z = Z₁ ∩ Z₂`. The tensor product of the two counits
 `Ri₁_! Ri₁^! M ⊗ Ri₂_! Ri₂^! N ⟶ M ⊗ N` factors uniquely through the counit
@@ -209,13 +240,13 @@ after the projection formula). -/
 theorem existsUnique_supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
-    (M N : DerivedCategory (Sheaf U.smallEtaleTopology (A))) :
-    ∃! ψ : (R(i₁)_![A]).obj ((R(i₁)^![A]).obj M) ⊗
-        (R(i₂)_![A]).obj ((R(i₂)^![A]).obj N) ⟶
-          (R(i)_![A]).obj ((R(i)^![A]).obj (M ⊗ N)),
-      ψ ≫ (rightDerivedUpperShriekAdjunction (A) i).counit.app (M ⊗ N) =
-        (rightDerivedUpperShriekAdjunction (A) i₁).counit.app M ⊗ₘ
-          (rightDerivedUpperShriekAdjunction (A) i₂).counit.app N :=
+    (M N : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
+    ∃! ψ : ((derivedTensor A U).obj ((R(i₁)_![A]).obj ((R(i₁)^![A]).obj M))).obj
+        ((R(i₂)_![A]).obj ((R(i₂)^![A]).obj N)) ⟶
+          (R(i)_![A]).obj ((R(i)^![A]).obj (((derivedTensor A U).obj M).obj N)),
+      ψ ≫ (rightDerivedUpperShriekAdjunction A i).counit.app (((derivedTensor A U).obj M).obj N) =
+        ((derivedTensor A U).map ((rightDerivedUpperShriekAdjunction A i₁).counit.app M)).app _ ≫
+          ((derivedTensor A U).obj M).map ((rightDerivedUpperShriekAdjunction A i₂).counit.app N) :=
   sorry
 
 /-- The *product of supports* `Ri₁_! Ri₁^! M ⊗ Ri₂_! Ri₂^! N ⟶ Ri_! Ri^! (M ⊗ N)` for closed
@@ -228,35 +259,37 @@ uniqueness is what makes the choice canonical. -/
 noncomputable def supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
-    (M N : DerivedCategory (Sheaf U.smallEtaleTopology (A))) :
-    (R(i₁)_![A]).obj ((R(i₁)^![A]).obj M) ⊗
-        (R(i₂)_![A]).obj ((R(i₂)^![A]).obj N) ⟶
-      (R(i)_![A]).obj ((R(i)^![A]).obj (M ⊗ N)) :=
+    (M N : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
+    ((derivedTensor A U).obj ((R(i₁)_![A]).obj ((R(i₁)^![A]).obj M))).obj
+        ((R(i₂)_![A]).obj ((R(i₂)^![A]).obj N)) ⟶
+      (R(i)_![A]).obj ((R(i)^![A]).obj (((derivedTensor A U).obj M).obj N)) :=
   (existsUnique_supportedProduct A i₁ i₂ i h M N).exists.choose
 
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
 
-The *cup product with supports* of classes `α : Λ_U ⟶ Ri₁_! Ri₁^! M` supported on `Z₁` and
-`β : Λ_U ⟶ Ri₂_! Ri₂^! N` supported on `Z₂`, a class supported on `Z = Z₁ ∩ Z₂`:
+The *cup product with supports* of classes `α : K ⟶ Ri₁_! Ri₁^! M` supported on `Z₁` and
+`β : K ⟶ Ri₂_! Ri₂^! N` supported on `Z₂`, a class supported on `Z = Z₁ ∩ Z₂`:
 
-`α ∪ β : Λ_U ≅ Λ_U ⊗ Λ_U ⟶ Ri₁_! Ri₁^! M ⊗ Ri₂_! Ri₂^! N ⟶ Ri_! Ri^! (M ⊗ N)`,
+`α ∪ β : K ⟶ K ⊗ K ⟶ Ri₁_! Ri₁^! M ⊗ Ri₂_! Ri₂^! N ⟶ Ri_! Ri^! (M ⊗ N)`,
 
-the last map being `AlgebraicGeometry.Etale.supportedProduct`. Degrees are carried by the
-coefficients: a class of degree `a` is a class with coefficients `M[a]`. -/
+where `Δ : K ⟶ K ⊗ K` is a diagonal and the last map is
+`AlgebraicGeometry.Etale.supportedProduct`. For cohomology classes `K = Λ_U` is the unit and
+`Δ` the inverse of the unitor `Λ_U ⊗ Λ_U ≅ Λ_U` (`AlgebraicGeometry.Etale.constantComplexDiagonal`).
+Degrees are carried by the coefficients: a class of degree `a` is a class with coefficients
+`M[a]`. -/
 noncomputable def cupWithSupports (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
-    {M N : DerivedCategory (Sheaf U.smallEtaleTopology (A))}
-    (α : 𝟙_ (DerivedCategory (Sheaf U.smallEtaleTopology A)) ⟶
-      (R(i₁)_![A]).obj ((R(i₁)^![A]).obj M))
-    (β : 𝟙_ (DerivedCategory (Sheaf U.smallEtaleTopology A)) ⟶
-      (R(i₂)_![A]).obj ((R(i₂)^![A]).obj N)) :
-    𝟙_ (DerivedCategory (Sheaf U.smallEtaleTopology A)) ⟶
-      (R(i)_![A]).obj ((R(i)^![A]).obj (M ⊗ N)) :=
-  (λ_ _).inv ≫ (α ⊗ₘ β) ≫ supportedProduct A i₁ i₂ i h M N
+    {K M N : DerivedCategory (Sheaf U.smallEtaleTopology A)}
+    (Δ : K ⟶ ((derivedTensor A U).obj K).obj K)
+    (α : K ⟶ (R(i₁)_![A]).obj ((R(i₁)^![A]).obj M))
+    (β : K ⟶ (R(i₂)_![A]).obj ((R(i₂)^![A]).obj N)) :
+    K ⟶ (R(i)_![A]).obj ((R(i)^![A]).obj (((derivedTensor A U).obj M).obj N)) :=
+  Δ ≫ ((derivedTensor A U).map α).app K ≫ ((derivedTensor A U).obj _).map β ≫
+    supportedProduct A i₁ i₂ i h M N
 
-/-- A class `Λ_U ⟶ (Ri_! Ri^! L)[n]` of degree `n` with supports, read as a class with
-coefficients `L[n]`, `Λ_U ⟶ Ri_! Ri^! (L[n])`, through the shift compatibility of `Ri_!` and
+/-- A class `K ⟶ (Ri_! Ri^! L)[n]` of degree `n` with supports, read as a class with
+coefficients `L[n]`, `K ⟶ Ri_! Ri^! (L[n])`, through the shift compatibility of `Ri_!` and
 `Ri^!`. -/
 noncomputable def shiftSupportedClass (i : Z ⟶ U) [IsClosedImmersion i] (n : ℤ)
     {L : DerivedCategory (Sheaf U.smallEtaleTopology (A))}
@@ -269,6 +302,77 @@ noncomputable def shiftSupportedClass (i : Z ⟶ U) [IsClosedImmersion i] (n : �
       (((R(i)^![A]).commShiftIso n).inv.app L)
 
 end CupProduct
+
+section BoundaryProduct
+
+variable (U : Scheme.{u}) in
+/-- The diagonal `Λ_U ⟶ Λ_U ⊗ Λ_U`, the inverse of the identification
+`Λ_U ⊗ Λ_U ≅ Λ_U(0) ⊗ Λ_U(0) ≅ Λ_U(0) ≅ Λ_U` of the Tate twist datum. It is the diagonal along
+which cohomology classes are multiplied. -/
+noncomputable def constantComplexDiagonal :
+    constantComplex Λ U ⟶
+      ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj (constantComplex Λ U)).obj
+        (constantComplex Λ U) :=
+  (HasTateTwist.twistObjectZeroIso (Λ := Λ) U).inv ≫ eqToHom (by rw [add_zero]) ≫
+    (HasTateTwist.twistObjectAddIso U 0 0).inv ≫
+      ((derivedTensor (ModuleCat.{u + 1} Λ) U).map (HasTateTwist.twistObjectZeroIso U).hom).app _ ≫
+        ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj _).map (HasTateTwist.twistObjectZeroIso U).hom
+
+variable {U : Scheme.{u}}
+
+/-- The zero locus of a tuple `f : Fin (n + 1) → Γ(U, ⊤)` is the intersection of the zero
+locus of `f 0` and of the zero locus of the remaining entries. -/
+lemma range_subschemeι_ofIdealTop_span_range_succ {n : ℕ} (f : Fin (n + 1) → Γ(U, ⊤)) :
+    Set.range (IdealSheafData.ofIdealTop (Ideal.span (Set.range f))).subschemeι.base =
+      Set.range (IdealSheafData.ofIdealTop (Ideal.span {f 0})).subschemeι.base ∩
+        Set.range (IdealSheafData.ofIdealTop
+          (Ideal.span (Set.range (Fin.tail f)))).subschemeι.base := by
+  simp only [IdealSheafData.range_subschemeι_ofIdealTop_span]
+  rw [Fin.range_fin_succ, Scheme.zeroLocus_insert]
+
+/-- The zero locus of the empty tuple is everything. -/
+lemma range_subschemeι_ofIdealTop_span_range_zero (f : Fin 0 → Γ(U, ⊤)) :
+    Set.range (IdealSheafData.ofIdealTop (Ideal.span (Set.range f))).subschemeι.base =
+      Set.univ := by
+  rw [IdealSheafData.range_subschemeι_ofIdealTop_span, Set.range_eq_empty,
+    Scheme.zeroLocus_empty_eq_univ]
+
+/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+
+The *iterated cup product of Kummer boundaries* of a tuple `f = (f₁, …, f_n)` of global
+functions on `U`:
+
+`∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_n) ∈ H^{2n}_{V(f)}(U, Λ(n)) = Hom(Λ_U, Ri_! Ri^! (Λ_U(n)[2n]))`,
+
+where `i : V(f) ⟶ U` is the closed subscheme cut out by `f₁, …, f_n`. It is built by recursion
+on `n`: the empty product is the unit class `Λ_U ≅ Λ_U(0)` supported everywhere
+(`AlgebraicGeometry.Etale.liftCounitOfRangeEqUniv`), and
+`∂κ(f₁) ∪ (∂κ(f₂) ∪ ⋯ ∪ ∂κ(f_n))` is the cup product with supports
+(`AlgebraicGeometry.Etale.cupWithSupports`) over `V(f₁) ∩ V(f₂, …, f_n) = V(f)`, followed by
+`Λ(1)[2] ⊗ Λ(n - 1)[2(n - 1)] ≅ Λ(n)[2n]` of the Tate twist datum. All the classes have even
+degree, so no sign is involved. -/
+noncomputable def kummerBoundaryProduct : {n : ℕ} → (f : Fin n → Γ(U, ⊤)) →
+    constantComplex Λ U ⟶
+      (R((IdealSheafData.ofIdealTop
+          (Ideal.span (Set.range f))).subschemeι)_![ModuleCat.{u + 1} Λ]).obj
+        ((R((IdealSheafData.ofIdealTop
+          (Ideal.span (Set.range f))).subschemeι)^![ModuleCat.{u + 1} Λ]).obj
+          ((tateObject Λ U n)⟦2 * (n : ℤ)⟧))
+  | 0, f => liftCounitOfRangeEqUniv (ModuleCat.{u + 1} Λ) _
+      (range_subschemeι_ofIdealTop_span_range_zero f)
+      ((HasTateTwist.twistObjectZeroIso (Λ := Λ) U).inv ≫
+        (shiftFunctorZero' _ (2 * (0 : ℤ)) (by simp)).inv.app _ ≫ eqToHom rfl)
+  | n + 1, f =>
+      cupWithSupports (ModuleCat.{u + 1} Λ) _ _ _ (range_subschemeι_ofIdealTop_span_range_succ f)
+          (constantComplexDiagonal Λ U)
+          (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ (2 * 1)
+            (kummerBoundary Λ (f 0) ≫ eqToHom (by rw [mul_one]; rfl)))
+          (kummerBoundaryProduct (Fin.tail f)) ≫
+        (R(_)_![ModuleCat.{u + 1} Λ]).map ((R(_)^![ModuleCat.{u + 1} Λ]).map
+          ((HasTateTwist.shiftTwistObjectAddIso U 1 n).hom ≫
+            eqToHom (by rw [show (1 + (n : ℤ)) = ((n + 1 : ℕ) : ℤ) by push_cast; ring]; rfl)))
+
+end BoundaryProduct
 
 section Restriction
 
