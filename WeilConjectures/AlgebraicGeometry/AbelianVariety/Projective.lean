@@ -19,8 +19,8 @@ module is again ample and is symmetric.
 `AlgebraicGeometry.IsVeryAmple` is a genuine definition, and so is the tensor product
 `AlgebraicGeometry.Scheme.Modules.tensorObj` (see
 `WeilConjectures.AlgebraicGeometry.Modules.Invertible`), through whose tensor powers ampleness is
-phrased. So `AbelianVariety.exists_isAmple` follows from
-`AbelianVariety.exists_isClosedImmersion_projectiveSpace`, with `M := j^* 𝒪(1)` and the first
+phrased. So `IsAbelianScheme.exists_isAmple` follows from
+`IsAbelianScheme.exists_isClosedImmersion_projectiveSpace`, with `M := j^* 𝒪(1)` and the first
 tensor power, together with the identification `M^{⊗ 1} ≅ M`.
 
 ## Main definitions
@@ -29,12 +29,12 @@ tensor power, together with the identification `M^{⊗ 1} ≅ M`.
 
 ## Main statements
 
-- `AlgebraicGeometry.AbelianVariety.exists_isClosedImmersion_projectiveSpace`: abelian
+- `AlgebraicGeometry.IsAbelianScheme.exists_isClosedImmersion_projectiveSpace`: abelian
   varieties are projective.
-- `AlgebraicGeometry.AbelianVariety.exists_isAmple`: abelian varieties carry an ample
+- `AlgebraicGeometry.IsAbelianScheme.exists_isAmple`: abelian varieties carry an ample
   invertible module.
-- `AlgebraicGeometry.AbelianVariety.isAmple_symmetrisation`,
-  `AlgebraicGeometry.AbelianVariety.nonempty_iso_overPullback_inv_symmetrisation`:
+- `AlgebraicGeometry.IsAbelianScheme.isAmple_symmetrisation`,
+  `AlgebraicGeometry.IsAbelianScheme.nonempty_iso_overPullback_inv_symmetrisation`:
   `L ⊗ [-1]^* L` is ample and symmetric.
 -/
 
@@ -62,34 +62,37 @@ Every abelian variety `A` over a field `K` admits a closed immersion into a proj
 over `Spec K` compatible with the structure morphisms. The index type of the projective space
 is called `α`; `ι`, the usual name for an index type, is unavailable as an identifier here,
 being the token of the inversion notation `ι[A]`. -/
-theorem AbelianVariety.exists_isClosedImmersion_projectiveSpace (A : AbelianVariety K) :
-    ∃ (α : Type u) (_ : Finite α) (j : A.toOver.left ⟶ ℙ(α; Spec (.of K))),
-      IsClosedImmersion j ∧ j ≫ ℙ(α; Spec (.of K)) ↘ Spec (.of K) = A.toOver.hom :=
+theorem IsAbelianScheme.exists_isClosedImmersion_projectiveSpace (A : Over (Spec (.of K)))
+    [GrpObj A] [IsAbelianScheme A] :
+    ∃ (α : Type u) (_ : Finite α) (j : A.left ⟶ ℙ(α; Spec (.of K))),
+      IsClosedImmersion j ∧ j ≫ ℙ(α; Spec (.of K)) ↘ Spec (.of K) = A.hom :=
   sorry
 
 /-- Blueprint `sk-prop-av-projective`: Abelian varieties are projective.
 
 Being projective, an abelian variety carries an ample invertible `𝒪_A`-module. -/
-theorem AbelianVariety.exists_isAmple (A : AbelianVariety K) :
-    ∃ M : A.toOver.left.Modules, M.IsInvertible ∧ IsAmple A.toOver.hom M :=
+theorem IsAbelianScheme.exists_isAmple (A : Over (Spec (.of K))) [GrpObj A]
+    [IsAbelianScheme A] :
+    ∃ M : A.left.Modules, M.IsInvertible ∧ IsAmple A.hom M :=
   sorry
 
 /-- Blueprint `sk-prop-av-symmetric-ample`: A symmetric ample module.
 
 Let `A` be an abelian variety over `K` and let `L` be an ample invertible `𝒪_A`-module. Then the
 symmetrisation `L ⊗ [-1]^* L` is ample. -/
-theorem AbelianVariety.isAmple_symmetrisation (A : AbelianVariety K) (L : A.toOver.left.Modules)
-    [L.IsInvertible] (hample : IsAmple A.toOver.hom L) :
-    IsAmple A.toOver.hom L.symmetrisation :=
+theorem IsAbelianScheme.isAmple_symmetrisation (A : Over (Spec (.of K))) [GrpObj A]
+    [IsAbelianScheme A] (L : A.left.Modules) [L.IsInvertible] (hample : IsAmple A.hom L) :
+    IsAmple A.hom L.symmetrisation :=
   sorry
 
 /-- Blueprint `sk-prop-av-symmetric-ample`: A symmetric ample module.
 
 The symmetrisation `N = L ⊗ [-1]^* L` of an invertible module on an abelian variety is
 *symmetric*, that is `[-1]^* N ≅ N`. -/
-theorem AbelianVariety.nonempty_iso_overPullback_inv_symmetrisation (A : AbelianVariety K)
-    (L : A.toOver.left.Modules) [L.IsInvertible] :
-    Nonempty (overPullback ι[A.toOver] L.symmetrisation ≅ L.symmetrisation) :=
+theorem IsAbelianScheme.nonempty_iso_overPullback_inv_symmetrisation
+    (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianScheme A] (L : A.left.Modules)
+    [L.IsInvertible] :
+    Nonempty (overPullback ι[A] L.symmetrisation ≅ L.symmetrisation) :=
   sorry
 
 end AlgebraicGeometry
