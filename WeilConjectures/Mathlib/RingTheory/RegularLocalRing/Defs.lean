@@ -44,7 +44,8 @@ universe u
 least one generator fewer than `𝔪`: extend the image of `x` in `𝔪 / 𝔪²` to a basis and lift it to
 generators of `𝔪` by Nakayama; the generator `x` dies in `R ⧸ (x)`. -/
 theorem IsLocalRing.spanFinrank_map_quotient_span_singleton_add_one_le {R : Type*} [CommRing R]
-    [IsLocalRing R] [IsNoetherianRing R] {x : R} (hx : x ∈ maximalIdeal R) (hx2 : x ∉ maximalIdeal R ^ 2) :
+    [IsLocalRing R] [IsNoetherianRing R] {x : R}
+    (hx : x ∈ maximalIdeal R) (hx2 : x ∉ maximalIdeal R ^ 2) :
     ((maximalIdeal R).map (Ideal.Quotient.mk (Ideal.span {x}))).spanFinrank + 1 ≤
       (maximalIdeal R).spanFinrank := by
   classical
