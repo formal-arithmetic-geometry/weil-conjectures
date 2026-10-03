@@ -374,6 +374,34 @@ noncomputable def kummerBoundaryProduct : {n : ℕ} → (f : Fin n → Γ(U, ⊤
 
 end BoundaryProduct
 
+section TateCup
+
+variable {U Z₁ Z₂ Z : Scheme.{u}}
+
+/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+
+The cup product with supports of classes `α ∈ H^{2m}_{Z₁}(U, Λ(m))` and
+`β ∈ H^{2m'}_{Z₂}(U, Λ(m'))`, a class in `H^{2(m + m')}_{Z₁ ∩ Z₂}(U, Λ(m + m'))`: the cup
+product `AlgebraicGeometry.Etale.cupWithSupports` along the diagonal of `Λ_U`, followed by
+`Λ(m)[2m] ⊗ Λ(m')[2m'] ≅ Λ(m + m')[2(m + m')]` of the Tate twist datum. -/
+noncomputable def cupWithSupportsTateObject (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
+    [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
+    (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base) (m m' : ℕ)
+    (α : constantComplex Λ U ⟶ (R(i₁)_![ModuleCat.{u + 1} Λ]).obj
+      ((R(i₁)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m)⟦2 * (m : ℤ)⟧)))
+    (β : constantComplex Λ U ⟶ (R(i₂)_![ModuleCat.{u + 1} Λ]).obj
+      ((R(i₂)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U m')⟦2 * (m' : ℤ)⟧))) :
+    constantComplex Λ U ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
+      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U (m + m' : ℕ))⟦2 * ((m + m' : ℕ) : ℤ)⟧)) :=
+  cupWithSupports (ModuleCat.{u + 1} Λ) i₁ i₂ i h (constantComplexDiagonal Λ U)
+      (α ≫ eqToHom rfl) (β ≫ eqToHom rfl) ≫
+    (R(i)_![ModuleCat.{u + 1} Λ]).map ((R(i)^![ModuleCat.{u + 1} Λ]).map
+      ((HasTateTwist.shiftTwistObjectAddIso U m m').hom ≫
+        eqToHom (by rw [show ((m : ℤ) + (m' : ℤ)) = ((m + m' : ℕ) : ℤ) by push_cast; ring]; rfl)))
+
+end TateCup
+
+
 section Restriction
 
 variable {U X Z Z' : Scheme.{u}}
