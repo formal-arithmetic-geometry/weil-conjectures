@@ -53,7 +53,8 @@ is an equivalence, and the comparison map is an isomorphism.
 
 - `AlgebraicGeometry.Etale.isEquivalence_lowerStar` and
   `AlgebraicGeometry.Etale.isEquivalence_upperStar`: the pushforward and the pullback along a
-  universal homeomorphism are equivalences of categories of étale sheaves.
+  universal homeomorphism are equivalences of categories of étale sheaves;
+  `AlgebraicGeometry.Etale.isEquivalence_upperStar_of_thickening` is the case of a thickening.
 - `AlgebraicGeometry.Etale.cohomologyMap_bijective`: **topological invariance of étale
   cohomology**, [Stacks 03SI]: for a universal homeomorphism the comparison map on étale
   cohomology is bijective.
@@ -153,6 +154,19 @@ sheaves on the small étale site of `Y` and that of `X`.
 @[stacks 03SI]
 theorem isEquivalence_upperStar : ((f)^*[A]).IsEquivalence :=
   Functor.isEquivalence_of_iso (upperStarIsoInverse A f).symm
+
+omit [HasSmallSiteSheafify A] in
+/-- Blueprint `sbc-lem-thickening-etale-site`: The etale site of a thickening.
+
+If `i : T₁ ⟶ T₂` is a thickening, that is, a closed immersion which is surjective on points,
+then pullback along `i` is an equivalence between the categories of `A`-valued étale sheaves
+on `T₂` and on `T₁`. In particular it identifies the étale cohomology of `T₂` and of `T₁`, see
+`AlgebraicGeometry.Etale.cohomologyMap_bijective`. -/
+@[stacks 03SI]
+theorem isEquivalence_upperStar_of_thickening {T₁ T₂ : Scheme.{u}} (i : T₁ ⟶ T₂)
+    [IsClosedImmersion i] (hi : Function.Surjective i.base) : ((i)^*[A]).IsEquivalence :=
+  have : Surjective i := ⟨hi⟩
+  isEquivalence_upperStar A i
 
 end GrothendieckAbelian
 
