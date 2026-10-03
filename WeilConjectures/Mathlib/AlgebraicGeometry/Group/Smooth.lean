@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Group.Affine
 public import Mathlib.AlgebraicGeometry.Group.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 
 /-!
@@ -77,11 +78,32 @@ theorem isReduced_of_grpObj_of_isAffine [IsAffine G] : IsReduced G := by
   exact isReduced_of_isOpenImmersion e.inv.hom.hom.left
 
 include f in
-/-- A group scheme locally of finite type over a field of characteristic zero has no nilpotents
-in its structure sheaf, i.e. it is reduced.
-(blueprint: `sk-i-cartier`) -/
-theorem isReduced_of_grpObj : IsReduced G := by
+/-- **Cartier's theorem** over an algebraically closed field: a group scheme locally of finite type
+over an algebraically closed field of characteristic zero is reduced.
+
+The affine case is `isReduced_of_grpObj_of_isAffine`. In general, by translation it suffices that
+the local ring at the identity is reduced, which follows as in the affine case from Cartier's
+lemma (`exists_apply_eq_one_mul_eq_zero_of_forall_exists_derivation`) applied to the coordinate
+ring of an affine open neighbourhood of the identity, once its tangent vectors are extended to
+derivations by the invariant vector fields of `G`. (blueprint: `lem-ag-cartier-reduced`) -/
+theorem isReduced_of_grpObj_of_isAlgClosed [IsAlgClosed K] : IsReduced G := by
   sorry
+
+include f in
+/-- A group scheme locally of finite type over a field of characteristic zero has no nilpotents
+in its structure sheaf, i.e. it is reduced: its base change to an algebraic closure is reduced by
+`isReduced_of_grpObj_of_isAlgClosed`, and reducedness descends along the faithfully flat
+morphism `G_K̄ ⟶ G`. (blueprint: `sk-i-cartier`, `lem-ag-cartier-reduced`) -/
+theorem isReduced_of_grpObj : IsReduced G := by
+  let g : Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of K) :=
+    Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K)))
+  have : CharZero (AlgebraicClosure K) :=
+    charZero_of_injective_algebraMap (algebraMap K (AlgebraicClosure K)).injective
+  let : GrpObj (Over.mk (Limits.pullback.snd f g)) := Over.grpObjMkPullbackSnd
+  have : IsReduced (Limits.pullback f g) :=
+    isReduced_of_grpObj_of_isAlgClosed (Limits.pullback.snd f g)
+  have : IsSchemeTheoreticallyDominant g := .of_isDominant g
+  exact IsSchemeTheoreticallyDominant.isReduced (Limits.pullback.fst f g)
 
 /-- **Cartier's theorem**: a group scheme locally of finite type over a field of characteristic
 zero is smooth over the base field, equivalently `dim Lie(G) = dim G`.

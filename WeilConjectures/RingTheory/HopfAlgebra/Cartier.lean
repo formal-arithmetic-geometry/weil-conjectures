@@ -5,25 +5,59 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.RingTheory.Derivation.Basic
 public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.FiniteStability
+public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.HopfAlgebra.Convolution
+public import Mathlib.RingTheory.HopfAlgebra.Quotient
 public import Mathlib.RingTheory.HopfAlgebra.TensorProduct
 public import Mathlib.RingTheory.Ideal.Cotangent
+public import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
+public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.MvPolynomial.EulerIdentity
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.RingTheory.Nilpotent.Defs
-public import Mathlib.RingTheory.Flat.Basic
-public import Mathlib.RingTheory.FiniteStability
-public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-public import Mathlib.RingTheory.HopfAlgebra.Quotient
-public import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
-public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Cotangent
 public import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
 
 /-!
 # Cartier's theorem: Hopf algebras in characteristic zero are reduced
+
+A finitely generated commutative Hopf algebra `A` over a field `k` of characteristic zero is
+reduced (Cartier). Geometrically: an affine group scheme of finite type over `k` is reduced.
+
+We follow the invariant derivation argument (Waterhouse, *Introduction to affine group schemes*,
+§11.4). Let `ε : A → k` be the counit with augmentation ideal `I`, and choose `x₁, …, xₙ ∈ I`
+lifting a basis of `I / I²`. Every tangent vector `d` at the identity extends to the invariant
+derivation `a ↦ ∑ a₁ d(a₂)` of `A`; derivations `Dⱼ` with `ε (Dⱼ xᵢ) = δᵢⱼ` lower the `I`-adic
+order by one, so by Euler's identity a homogeneous polynomial `f` of degree `r` with
+`f(x) ∈ I ^ (r + 1)` vanishes in characteristic zero. Hence the associated graded ring of `I` is a
+polynomial ring, `⋂ₙ Iⁿ` is a prime ideal, and by Krull's intersection theorem every nilpotent of
+`A` vanishes in the local ring at the identity. Translating by `k`-points (the convolution group
+of `k`-points acts on `A` by algebra automorphisms) moves this to every `k`-point, so over an
+algebraically closed field `A` is reduced; the general case follows by base change.
+
+This proves the blueprint's *Cartier step* `𝔫 ⊆ 𝔪²` in a stronger form, and replaces the passage
+through the smoothness of the reduced group by the invariant derivations.
+
+## Main results
+
+- `isPrime_iInf_pow_ker_of_forall_exists_derivation`: Cartier's lemma for a `k`-point of a
+  Noetherian `k`-algebra whose tangent vectors extend to derivations.
+- `Bialgebra.exists_derivation_of_cotangent`: invariant derivations of a commutative bialgebra.
+- `HopfAlgebra.isPrime_iInf_pow_ker`: the functions vanishing near a `k`-point of a Noetherian
+  commutative Hopf algebra in characteristic zero form a prime ideal.
+- `HopfAlgebra.isReduced_of_charZero`: Cartier's theorem.
+- `Ideal.IsHopfIdeal.isRadical`: Hopf ideals are radical in characteristic zero.
+- `HopfAlgebra.finrank_cotangent_eq_ringKrullDim`: the cotangent space at the identity has the
+  dimension of the group.
+
+## Blueprint
+
+- `lem-ag-cartier-reduced`: Cartier's theorem.
+- `lem-wf-same-lie-closed-subgroup`: the dimension clause (2).
 -/
 
 @[expose] public section
@@ -112,9 +146,8 @@ associated graded ring of `A` for `I` is a polynomial ring, and `⋂ₙ Iⁿ` is
 
 section Cartier
 
-variable {k A : Type*} [Field k] [CommRing A] [Algebra k A] (ε : A →ₐ[k] k)
-
-variable {ε} {ι : Type*} {x : ι → A} (hx : ∀ i, x i ∈ RingHom.ker ε)
+variable {k A : Type*} [Field k] [CommRing A] [Algebra k A] {ε : A →ₐ[k] k}
+  {ι : Type*} {x : ι → A} (hx : ∀ i, x i ∈ RingHom.ker ε)
 
 section Spanning
 
@@ -399,6 +432,16 @@ theorem Bialgebra.exists_derivation_of_cotangent (φ : (𝔪).Cotangent →ₗ[k
       simpa using (counitAlgHom k A).cotangentDerivation_mul φ a b
   exact ⟨D, fun a ha ↦ by rw [counitAlgHom_apply, hD, AlgHom.cotangentDerivation_of_mem φ ha]⟩
 
+variable [CharZero k]
+
+variable (k A) in
+/-- **Cartier's lemma** for bialgebras: in characteristic zero, the intersection of the powers of
+the augmentation ideal of a Noetherian commutative bialgebra is a prime ideal. Geometrically, a
+single irreducible component passes through the identity. -/
+theorem Bialgebra.isPrime_iInf_pow_ker_counitAlgHom [IsNoetherianRing A] :
+    (⨅ r : ℕ, RingHom.ker (Bialgebra.counitAlgHom k A) ^ r).IsPrime :=
+  isPrime_iInf_pow_ker_of_forall_exists_derivation (Bialgebra.exists_derivation_of_cotangent k A)
+
 end Bialgebra
 
 /-! ### Cartier's theorem -/
@@ -436,15 +479,17 @@ private theorem comp_translation_inv (g : WithConv (A →ₐ[k] k)) :
     AlgHom.comp_id, toConv_ofConv, toConv_ofConv, inv_mul_cancel, AlgHom.convOne_def,
     ofConv_toConv, Subsingleton.elim (Algebra.ofId k k) (AlgHom.id k k), AlgHom.id_comp]
 
-variable [CharZero k]
+private theorem counitAlgHom_comp_translation (g : WithConv (A →ₐ[k] k)) :
+    (counitAlgHom k A).comp (translation g) = g.ofConv := by
+  rw [translation, AlgHom.comp_convMul_distrib, ← AlgHom.comp_assoc,
+    Subsingleton.elim ((counitAlgHom k A).comp (Algebra.ofId k A)) (AlgHom.id k k),
+    AlgHom.id_comp, AlgHom.comp_id, toConv_ofConv,
+    show toConv (counitAlgHom k A) = 1 by
+      rw [AlgHom.convOne_def, Subsingleton.elim (Algebra.ofId k k) (AlgHom.id k k),
+        AlgHom.id_comp],
+    mul_one, ofConv_toConv]
 
-variable (k A) in
-/-- **Cartier's lemma** for bialgebras: in characteristic zero, the intersection of the powers of
-the augmentation ideal of a Noetherian commutative bialgebra is a prime ideal. Geometrically, a
-single irreducible component passes through the identity. -/
-theorem Bialgebra.isPrime_iInf_pow_ker_counitAlgHom [IsNoetherianRing A] :
-    (⨅ r : ℕ, RingHom.ker (counitAlgHom k A) ^ r).IsPrime :=
-  isPrime_iInf_pow_ker_of_forall_exists_derivation (Bialgebra.exists_derivation_of_cotangent k A)
+variable [CharZero k]
 
 /-- **Cartier's lemma** for Hopf algebras: in characteristic zero, a nilpotent element of a
 Noetherian commutative Hopf algebra vanishes in the local ring at every `k`-point `g`. -/
@@ -461,6 +506,33 @@ theorem HopfAlgebra.exists_apply_eq_one_mul_eq_zero_of_isNilpotent [IsNoetherian
   · have h := congrArg (translation (toConv g)⁻¹) hsb
     rwa [map_mul, map_zero, ← AlgHom.comp_apply _ (translation (toConv g)), hφψ,
       AlgHom.id_apply] at h
+
+/-- **Cartier's lemma** at an arbitrary `k`-point `g` of a Noetherian commutative Hopf algebra in
+characteristic zero: the functions vanishing near `g` form a prime ideal, so a single
+irreducible component passes through `g`. It is the translate by `g` of
+`Bialgebra.isPrime_iInf_pow_ker_counitAlgHom`. -/
+theorem HopfAlgebra.isPrime_iInf_pow_ker [IsNoetherianRing A] (g : A →ₐ[k] k) :
+    (⨅ r : ℕ, RingHom.ker g ^ r).IsPrime := by
+  have hP := Bialgebra.isPrime_iInf_pow_ker_counitAlgHom k A
+  have hφψ : (translation (toConv g)⁻¹).comp (translation (toConv g)) = AlgHom.id k A := by
+    rw [translation_comp_translation, mul_inv_cancel, translation_one]
+  have hε := counitAlgHom_comp_translation (toConv g)
+  have hg := comp_translation_inv (toConv g)
+  rw [ofConv_toConv] at hε hg
+  convert Ideal.IsPrime.comap (translation (toConv g)) (hK := hP) using 1
+  ext b
+  rw [Ideal.mem_comap, mem_iInf_pow_ker_iff, mem_iInf_pow_ker_iff]
+  constructor
+  · rintro ⟨t, ht, htb⟩
+    refine ⟨translation (toConv g) t, ?_, ?_⟩
+    · rw [← AlgHom.comp_apply, hε, ht]
+    · rw [← map_mul, htb, map_zero]
+  · rintro ⟨s, hs, hsb⟩
+    refine ⟨translation (toConv g)⁻¹ s, ?_, ?_⟩
+    · rw [← AlgHom.comp_apply, hg, hs]
+    · have h := congrArg (translation (toConv g)⁻¹) hsb
+      rwa [map_mul, map_zero, ← AlgHom.comp_apply _ (translation (toConv g)), hφψ,
+        AlgHom.id_apply] at h
 
 /-- Over an algebraically closed field of characteristic zero, a finitely generated commutative
 Hopf algebra is reduced. -/
@@ -481,7 +553,7 @@ theorem HopfAlgebra.isReduced_of_isAlgClosed [IsAlgClosed k] [Algebra.FiniteType
 
 /-- **Cartier's theorem**: over a field of characteristic zero, a finitely generated commutative
 Hopf algebra is reduced. Equivalently, an affine group scheme of finite type over a field of
-characteristic zero is reduced. -/
+characteristic zero is reduced. (blueprint: `lem-ag-cartier-reduced`) -/
 theorem HopfAlgebra.isReduced_of_charZero [Algebra.FiniteType k A] : IsReduced A := by
   have : CharZero (AlgebraicClosure k) :=
     charZero_of_injective_algebraMap (algebraMap k (AlgebraicClosure k)).injective
@@ -492,7 +564,7 @@ theorem HopfAlgebra.isReduced_of_charZero [Algebra.FiniteType k A] : IsReduced A
     (Algebra.TensorProduct.includeRight_injective (algebraMap k (AlgebraicClosure k)).injective)
 
 /-- In characteristic zero, every Hopf ideal of a finitely generated commutative Hopf algebra is
-radical: closed subgroup schemes are reduced. -/
+radical: closed subgroup schemes are reduced. (blueprint: `lem-ag-cartier-reduced`) -/
 theorem Ideal.IsHopfIdeal.isRadical [Algebra.FiniteType k A] (I : Ideal A) [I.IsHopfIdeal k] :
     I.IsRadical := by
   have := HopfAlgebra.isReduced_of_charZero (k := k) (A := A ⧸ I)
