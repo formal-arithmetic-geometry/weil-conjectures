@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.Algebra.CharP.Basic
+public import Mathlib.Algebra.CharP.Algebra
 
 /-!
 # Characteristic along a ring homomorphism

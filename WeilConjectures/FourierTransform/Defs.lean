@@ -110,8 +110,8 @@ Artin–Schreier sheaf of `𝔸¹` along `b : V ×_S V' ⟶ 𝔸¹`. On the affi
 
 Being an Artin–Schreier sheaf, it is lisse of rank one
 (`AlgebraicGeometry.Etale.isLocallyConstantSheaf_artinSchreierSheafOf`) and multiplicative in
-the character (`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_mul`), with
-`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_inv` identifying `𝒦_ψ⁻¹` with
+the character (`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_mul`), with
+`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv` identifying `𝒦_ψ⁻¹` with
 `𝒦_{ψ⁻¹}`.
 (sketch blueprint: `sk-def-kernel`, `sk-prop-kernel-lisse`) -/
 noncomputable def fourierKernel [CharP Γ(pullback π π', ⊤) p] (Ψ : AddChar (ZMod p) Λ)

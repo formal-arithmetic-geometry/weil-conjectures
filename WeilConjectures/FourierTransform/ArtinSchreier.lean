@@ -58,6 +58,15 @@ classical case is `k = ℤ/p`.
 - `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_inv` and
   `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_neg`: the two inversion formulas
   `ℒ_Ψ ⊗ ℒ_{Ψ⁻¹} ≅ Λ` and `ℒ_Ψ ⊗ (-1)^* ℒ_Ψ ≅ Λ`, proved from the previous three.
+- `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_add`,
+  `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_zero`,
+  `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_mul` and
+  `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_one`: for functions `f, g` on
+  `X`, `ℒ_{Ψ, f} ⊗ ℒ_{Ψ, g} ≅ ℒ_{Ψ, f + g}`, `ℒ_{Ψ, 0} ≅ Λ`, `ℒ_{Ψ, f} ⊗ ℒ_{Ψ', f} ≅ ℒ_{Ψ Ψ', f}`
+  and `ℒ_{1, f} ≅ Λ`.
+- `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg` and
+  `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv`: the inverse of `ℒ_{Ψ, f}` is
+  both `ℒ_{Ψ, -f}` and `ℒ_{Ψ⁻¹, f}`.
 
 ## Blueprint
 
@@ -93,10 +102,11 @@ inversion and base change arguments need the specific rigidification
 `ε_Ψ : Λ ≅ 0^* ℒ_Ψ` and the unique `m^* ℒ_Ψ ≅ u₁^* ℒ_Ψ ⊗ u₂^* ℒ_Ψ` restricting to it, with
 their coherences.
 
-The statements are made on `𝔸¹_k` and `𝔸²_k` only. Their versions for `ℒ_{Ψ, f}`
-(`ℒ_{Ψ, f} ⊗ ℒ_{Ψ, g} ≅ ℒ_{Ψ, f + g}`, `ℒ_{Ψ, 0} ≅ Λ`) follow by pullback once `g^*` is
-known to be monoidal (`g^* (A ⊗ B) ≅ g^* A ⊗ g^* B`); at present
-`AlgebraicGeometry.Etale.oplaxMonoidal_upperStar` only makes it oplax monoidal.
+The statements for `ℒ_{Ψ, f}` are pullbacks of the universal statements on `𝔸¹_k` and
+`𝔸²_k`. For `zero` and `one` this needs only `g^* Λ ≅ Λ`, and they are proved. For `add` and
+`mul` it needs `g^* (A ⊗ B) ≅ g^* A ⊗ g^* B`; at present
+`AlgebraicGeometry.Etale.oplaxMonoidal_upperStar` only makes `g^*` oplax monoidal, so they are
+left as `sorry`.
 
 -/
 
@@ -391,6 +401,70 @@ theorem nonempty_iso_artinSchreierSheaf_neg (Ψ : AddChar k Λ) :
   rw [Units.val_neg, Units.val_one, map_neg, map_one, AffineSpace.smul_neg_one,
     ← AddChar.inv_mulShift] at e
   exact ⟨whiskerLeftIso _ e ≪≫ e'⟩
+
+variable (X : Scheme.{u}) [X.Over (Spec (.of k))]
+
+/-- The Artin–Schreier sheaf of the zero function is the constant sheaf: `ℒ_{Ψ, 0} ≅ Λ`, the
+pullback along `X ⟶ Spec k` of the rigidification `Λ ≅ 0^* ℒ_Ψ`, since the function `0` is the
+composite
+
+```
+X ----> Spec k --0--> 𝔸¹_k
+```
+
+(sketch blueprint: `sk-lem-as-properties`) -/
+theorem nonempty_iso_artinSchreierSheafOf_zero (Ψ : AddChar k Λ) :
+    Nonempty (artinSchreierSheafOf X Ψ 0 ≅ 𝟙_ _) := by
+  obtain ⟨e⟩ := nonempty_iso_artinSchreierSheaf_zero Ψ
+  exact ⟨(upperStarComp _ (X ↘ Spec (.of k)) (AffineSpace.zeroSection PUnit _) _
+      (AffineSpace.hom_ext (by simp) fun _ ↦ by simp)).app (artinSchreierSheaf Ψ) ≪≫
+    (X ↘ Spec (.of k))^*[ModuleCat Λ].mapIso e.symm ≪≫ upperStarTensorUnitIso Λ _⟩
+
+/-- The Artin–Schreier sheaf turns addition of functions into tensor product of sheaves,
+`ℒ_{Ψ, f} ⊗ ℒ_{Ψ, g} ≅ ℒ_{Ψ, f + g}`.
+(sketch blueprint: `sk-lem-as-properties`) -/
+theorem nonempty_iso_artinSchreierSheafOf_add (Ψ : AddChar k Λ) (f g : Γ(X, ⊤)) :
+    Nonempty (artinSchreierSheafOf X Ψ f ⊗ artinSchreierSheafOf X Ψ g ≅
+      artinSchreierSheafOf X Ψ (f + g)) :=
+  -- the pullback of `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_add` along
+  -- `(f, g) : X ⟶ 𝔸²_k`, once `(f, g)^*` is known to be monoidal
+  sorry
+
+/-- The Artin–Schreier sheaf of the trivial character is the constant sheaf: `ℒ_{1, f} ≅ Λ`,
+the pullback of `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_one` along `f`.
+(sketch blueprint: `sk-lem-as-properties`) -/
+theorem nonempty_iso_artinSchreierSheafOf_one (f : Γ(X, ⊤)) :
+    Nonempty (artinSchreierSheafOf X (1 : AddChar k Λ) f ≅ 𝟙_ _) := by
+  obtain ⟨e⟩ := nonempty_iso_artinSchreierSheaf_one (k := k) (Λ := Λ)
+  exact ⟨Functor.mapIso _ e ≪≫ upperStarTensorUnitIso Λ _⟩
+
+/-- The Artin–Schreier sheaf turns multiplication of characters into tensor product of
+sheaves, `ℒ_{Ψ, f} ⊗ ℒ_{Ψ', f} ≅ ℒ_{Ψ Ψ', f}`.
+(sketch blueprint: `sk-lem-as-properties`) -/
+theorem nonempty_iso_artinSchreierSheafOf_mul (Ψ Ψ' : AddChar k Λ) (f : Γ(X, ⊤)) :
+    Nonempty (artinSchreierSheafOf X Ψ f ⊗ artinSchreierSheafOf X Ψ' f ≅
+      artinSchreierSheafOf X (Ψ * Ψ') f) :=
+  -- the pullback of `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_mul` along `f`,
+  -- once `f^*` is known to be monoidal
+  sorry
+
+/-- The inverse of `ℒ_{Ψ, f}` is `ℒ_{Ψ, -f}`.
+(sketch blueprint: `sk-lem-as-properties`) -/
+theorem nonempty_iso_artinSchreierSheafOf_neg (Ψ : AddChar k Λ) (f : Γ(X, ⊤)) :
+    Nonempty (artinSchreierSheafOf X Ψ f ⊗ artinSchreierSheafOf X Ψ (-f) ≅ 𝟙_ _) := by
+  obtain ⟨e⟩ := nonempty_iso_artinSchreierSheafOf_add X Ψ f (-f)
+  obtain ⟨e'⟩ := nonempty_iso_artinSchreierSheafOf_zero X Ψ
+  exact ⟨e ≪≫ eqToIso (congrArg (artinSchreierSheafOf X Ψ) (add_neg_cancel f)) ≪≫ e'⟩
+
+/-- The inverse of `ℒ_{Ψ, f}` is also `ℒ_{Ψ⁻¹, f}`; together with
+`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg` this identifies
+`ℒ_{Ψ, -f}` with `ℒ_{Ψ⁻¹, f}`, as used for the kernel of the inverse Fourier transform.
+(sketch blueprint: `sk-lem-as-properties`) -/
+theorem nonempty_iso_artinSchreierSheafOf_inv (Ψ : AddChar k Λ) (f : Γ(X, ⊤)) :
+    Nonempty (artinSchreierSheafOf X Ψ f ⊗ artinSchreierSheafOf X Ψ⁻¹ f ≅ 𝟙_ _) := by
+  obtain ⟨e⟩ := nonempty_iso_artinSchreierSheafOf_mul X Ψ Ψ⁻¹ f
+  obtain ⟨e'⟩ := nonempty_iso_artinSchreierSheafOf_one X (Λ := Λ) (k := k) f
+  exact ⟨e ≪≫ eqToIso (congrArg (artinSchreierSheafOf X · f) (mul_inv_cancel Ψ)) ≪≫ e'⟩
 
 end Properties
 
