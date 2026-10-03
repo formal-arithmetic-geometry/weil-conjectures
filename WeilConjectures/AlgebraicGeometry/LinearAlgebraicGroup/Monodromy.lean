@@ -21,7 +21,8 @@ A *degree datum* is a group `W` with a surjective homomorphism `deg : W → ℤ`
 `W` or a sheaf: the whole setting is the degree datum.
 
 The groups `G` and `H` are closed subgroup schemes of `GL_n`, given by their Hopf ideals
-`Matrix.GeneralLinearGroup.vanishingIdeal` in `Matrix.GeneralLinearGroup.CoordinateRing n k`.
+`Matrix.GeneralLinearGroup.vanishingIdeal` in
+`Matrix.GeneralLinearGroup.CoordinateRing n k`.
 Their groups of points, identity components, centers and Lie algebras are
 `Matrix.GeneralLinearGroup.zeroLocus`, `identityComponent`, `center` and `lieAlgebra`.
 
@@ -72,7 +73,7 @@ implement `sk-d-central`;
 @[expose] public section
 
 open scoped Matrix Pointwise
-open Matrix.GeneralLinearGroup
+open Matrix.GeneralLinearGroup AlgebraicGeometry.GeneralLinearGroup
 
 /-- A degree datum: a group `W`, a surjective homomorphism `deg : W → ℤ` and a chosen element
 `γ` of degree one.
@@ -243,7 +244,8 @@ end Lie
 section IsAlgClosed
 
 /- The identity component `G°` is a closed subgroup scheme over an algebraically closed field
-(`Matrix.GeneralLinearGroup.identityComponent`); this, and not the degree datum, is where the
+(`Matrix.GeneralLinearGroup.identityComponent`); this, and not the degree datum, is
+where the
 hypothesis `IsAlgClosed k` below comes from. -/
 variable [IsAlgClosed k]
 

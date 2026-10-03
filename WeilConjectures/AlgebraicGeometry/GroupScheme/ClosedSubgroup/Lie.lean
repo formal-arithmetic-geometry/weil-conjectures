@@ -22,7 +22,7 @@ For a closed subgroup scheme `G = V(I)` of `GL_n` over a commutative ring `k`, t
 values in the dual numbers `k[ε] = k[ε]/(ε²)`. With the commutator bracket `⁅X, Y⁆ = XY - YX` it
 is a Lie subalgebra of `gl_n`. Its additive group is the tangent group
 `AlgebraicGeometry.tangentGroup G = ker(G(k[ε]) → G(k))` of the group scheme `G`
-(`Matrix.GeneralLinearGroup.tangentGroupMulEquiv`).
+(`AlgebraicGeometry.GeneralLinearGroup.tangentGroupMulEquiv`).
 
 A rational representation of `G` on `k^m` is a homomorphism of group schemes `G ⟶ GL_m`, that is
 a bialgebra homomorphism `k[GL_m] → k[G]` of coordinate rings. On `R`-points it is a group
@@ -38,32 +38,40 @@ under its Lie algebra, and the Lie algebra of the centre is the centre of the Li
 
 The bracket on `Matrix n n k` is the commutator bracket `LieRing.ofAssociativeRing`, which is
 not a global instance; it is activated locally here, as in `Mathlib.Algebra.Lie.Matrix`. Since it
-appears in the type `LieSubalgebra k (Matrix n n k)` of `Matrix.GeneralLinearGroup.lieAlgebra`,
+appears in the type `LieSubalgebra k (Matrix n n k)` of
+`AlgebraicGeometry.GeneralLinearGroup.lieAlgebra`,
 files using the declarations of this file must activate it as well:
 `attribute [local instance 100] LieRing.ofAssociativeRing`.
 
 ## Main definitions
 
-- `Matrix.GeneralLinearGroup.dualUnit`: the invertible matrix `1 + εX` over the dual numbers.
-- `Matrix.GeneralLinearGroup.lieAlgebra`: the Lie algebra of the closed subgroup scheme `V(I)`.
-- `Matrix.GeneralLinearGroup.tangentGroupMulEquiv`: the tangent group of the group scheme `V(I)`
+- `AlgebraicGeometry.GeneralLinearGroup.dualUnit`: the invertible matrix `1 + εX` over the dual
+  numbers.
+- `AlgebraicGeometry.GeneralLinearGroup.lieAlgebra`: the Lie algebra of the closed subgroup scheme
+  `V(I)`.
+- `AlgebraicGeometry.GeneralLinearGroup.tangentGroupMulEquiv`: the tangent group of the group
+  scheme `V(I)`
   is the additive group of `lieAlgebra I`.
-- `Matrix.GeneralLinearGroup.RationalHom`: a rational representation of `V(I)` on `k^m`.
-- `Matrix.GeneralLinearGroup.RationalHom.points`: a rational representation on `R`-points.
-- `Matrix.GeneralLinearGroup.RationalHom.differential`: the differential of a rational
+- `AlgebraicGeometry.GeneralLinearGroup.RationalHom`: a rational representation of `V(I)` on `k^m`.
+- `AlgebraicGeometry.GeneralLinearGroup.RationalHom.points`: a rational representation on
+  `R`-points.
+- `AlgebraicGeometry.GeneralLinearGroup.RationalHom.differential`: the differential of a rational
   representation, a homomorphism of Lie algebras.
 
 ## Main results
 
-- `Matrix.GeneralLinearGroup.dualUnit_add`: differentiating the multiplication of `GL_n` at
+- `AlgebraicGeometry.GeneralLinearGroup.dualUnit_add`: differentiating the multiplication of `GL_n`
+  at
   `(1, 1)` gives addition.
-- `Matrix.GeneralLinearGroup.lie_mem_lieAlgebra_of_commutator_le`: if the commutators of `V(I)`
+- `AlgebraicGeometry.GeneralLinearGroup.lie_mem_lieAlgebra_of_commutator_le`: if the commutators of
+  `V(I)`
   lie in `V(J)`, then so do the brackets of their tangent vectors.
-- `Matrix.GeneralLinearGroup.lieAlgebra_identityComponent`,
-  `Matrix.GeneralLinearGroup.finrank_lieAlgebra_eq_ringKrullDim`: the Lie algebra only sees the
+- `AlgebraicGeometry.GeneralLinearGroup.lieAlgebra_identityComponent`,
+  `AlgebraicGeometry.GeneralLinearGroup.finrank_lieAlgebra_eq_ringKrullDim`: the Lie algebra only
+  sees the
   identity component and has the dimension of the group (Cartier's theorem).
-- `Matrix.GeneralLinearGroup.invariant_iff_differential_invariant`,
-  `Matrix.GeneralLinearGroup.lieAlgebra_center`: the group–Lie comparison.
+- `AlgebraicGeometry.GeneralLinearGroup.invariant_iff_differential_invariant`,
+  `AlgebraicGeometry.GeneralLinearGroup.lieAlgebra_center`: the group–Lie comparison.
 
 ## Blueprint
 
@@ -80,7 +88,11 @@ universe u
 open CategoryTheory AlgebraicGeometry TrivSqZeroExt
 open scoped MonObj
 
-namespace Matrix.GeneralLinearGroup
+namespace AlgebraicGeometry.GeneralLinearGroup
+
+open Matrix.GeneralLinearGroup
+open scoped Matrix
+open Matrix (map_inr_mul_map_inr eq_one_add_map_inr_of_map_fst_eq_one map_snd_mul_of_map_fst_eq_one)
 
 attribute [local instance 100] LieRing.ofAssociativeRing
 
@@ -481,7 +493,7 @@ Spec (k[GL_n] ⧸ I) ──Spec r──▶ Spec k[GL_m]
            ╲──▶   Spec k   ◀────╱
 ```
 over `Spec k`. -/
-noncomputable def toSchemeHom (r : RationalHom I m) : subgroupScheme I ⟶ scheme m k :=
+noncomputable def toSchemeHom (r : RationalHom I m) : subgroupScheme I ⟶ GL(m; k) :=
   (Spec.map (CommRingCat.ofHom
     (r : CoordinateRing m k →ₐ[k] CoordinateRing n k ⧸ I).toRingHom)).asOver (Spec (.of k))
 
@@ -492,19 +504,20 @@ instance (r : RationalHom I m) : IsMonHom r.toSchemeHom :=
 given by composing points `Spec R ⟶ V(I)` with `r.toSchemeHom`. (blueprint: `sk-d-tangent`) -/
 noncomputable def points (r : RationalHom I m) (R : Type u) [CommRing R] [Algebra k R] :
     zeroLocus I R →* GL m R :=
-  (homMulEquiv m k R).toMonoidHom.comp
+  (GeneralLinearGroup.homMulEquiv m k R).toMonoidHom.comp
     ((IsMonHom.monoidHom r.toSchemeHom _).comp (zeroLocusMulEquiv I R).toMonoidHom)
 
 theorem points_apply (r : RationalHom I m) {R : Type u} [CommRing R] [Algebra k R]
     (g : zeroLocus I R) :
-    r.points R g = homMulEquiv m k R (zeroLocusMulEquiv I R g ≫ r.toSchemeHom) :=
+    r.points R g = GeneralLinearGroup.homMulEquiv m k R (zeroLocusMulEquiv I R g ≫ r.toSchemeHom) :=
   rfl
 
 /-- A rational representation commutes with base change of points along `R → S`. -/
 theorem map_points (r : RationalHom I m) {R S : Type u} [CommRing R] [Algebra k R] [CommRing S]
     [Algebra k S] (φ : R →ₐ[k] S) (g : zeroLocus I R) :
     map φ.toRingHom (r.points R g) = r.points S (zeroLocus.map I φ g) := by
-  rw [points_apply, points_apply, zeroLocusMulEquiv_map, Category.assoc, homMulEquiv_specMap_comp]
+  rw [points_apply, points_apply, zeroLocusMulEquiv_map, Category.assoc,
+    GeneralLinearGroup.homMulEquiv_specMap_comp]
 
 theorem map_fstHom_points_dualUnit (r : RationalHom I m) (X : lieAlgebra I) :
     map (fstHom k k k).toRingHom (r.points (DualNumber k) ⟨dualUnit X, X.2⟩) = 1 := by
@@ -573,9 +586,9 @@ theorem points_dualUnit (r : RationalHom I m) (X : lieAlgebra I) :
 
 /-- The differential of a rational representation `r` is the differential `tangentGroupMap` of
 the homomorphism of group schemes `r.toSchemeHom : V(I) ⟶ GL_m`, read through
-`tangentGroupMulEquiv` and `homMulEquiv`. (blueprint: `sk-d-tangent`) -/
+`tangentGroupMulEquiv` and `GeneralLinearGroup.homMulEquiv`. (blueprint: `sk-d-tangent`) -/
 theorem homMulEquiv_tangentGroupMap (r : RationalHom I m) (X : lieAlgebra I) :
-    homMulEquiv m k (DualNumber k)
+    GeneralLinearGroup.homMulEquiv m k (DualNumber k)
         (tangentGroupMap r.toSchemeHom ((tangentGroupMulEquiv I).symm (.ofAdd X))) =
       dualUnit (r.differential X) :=
   points_dualUnit r X
@@ -688,4 +701,4 @@ theorem lieAlgebra_identityComponent_center [IsAlgClosed k] [CharZero k] (hconn 
 
 end Comparison
 
-end Matrix.GeneralLinearGroup
+end AlgebraicGeometry.GeneralLinearGroup

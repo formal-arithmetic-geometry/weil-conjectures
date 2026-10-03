@@ -84,7 +84,8 @@ Proof sketch (not formalised): over `S = k[ε₁, ε₂]/(ε₁, ε₂)²`, the 
 representable, `G(S) = G(k[ε]) ×_{G(k)} G(k[ε])`, and both products `XY` and `YX` of two tangent
 vectors are the image of the same point of `G(S)` under the multiplication `ε₁, ε₂ ↦ ε`.
 For closed subgroups of `GL_n` it also follows from
-`Matrix.GeneralLinearGroup.tangentGroupMulEquiv` and `Matrix.GeneralLinearGroup.dualUnit_add`.
+`AlgebraicGeometry.GeneralLinearGroup.tangentGroupMulEquiv` and
+`AlgebraicGeometry.GeneralLinearGroup.dualUnit_add`.
 (blueprint: `sk-d-tangent`) -/
 instance : IsMulCommutative (tangentGroup G) :=
   sorry

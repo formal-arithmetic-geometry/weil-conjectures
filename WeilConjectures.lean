@@ -3,7 +3,6 @@ module  -- shake: keep-all --deprecated_module: ignore
 public import WeilConjectures.AlgebraicGeometry.ChowLemma
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.ClosedSubgroup
-public import WeilConjectures.AlgebraicGeometry.GroupScheme.ClosedSubgroup.Geometry
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.ClosedSubgroup.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
@@ -241,6 +240,7 @@ public import WeilConjectures.NumberTheory.Padics.Extension
 public import WeilConjectures.NumberTheory.TateModule
 public import WeilConjectures.PointCount
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
+public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdeal
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
