@@ -267,6 +267,8 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.OpenSubcurve
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
@@ -382,6 +384,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
 public import WeilConjectures.Mathlib.Algebra.CharP.Algebra
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
+public import WeilConjectures.Mathlib.Algebra.DirectSum.LinearMap
 public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.Algebra.Exact.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
@@ -410,6 +413,7 @@ public import WeilConjectures.Mathlib.Algebra.Module.Torsion
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Basic
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.PDeriv
+public import WeilConjectures.Mathlib.Algebra.Order.BigOperators.Group.Multiset
 public import WeilConjectures.Mathlib.Algebra.Polynomial.BigOperators
 public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Reverse

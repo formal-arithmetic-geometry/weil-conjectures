@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.Topology.KrullDimension
 
@@ -19,7 +20,9 @@ morphism of finite type between affine schemes the global sections of the source
 by the image of the global sections of the target together with finitely many elements
 (`AlgebraicGeometry.exists_finset_closure_range_appTop_union_eq_top`). An integral scheme locally
 of finite type over a field has the dimension of any of its nonempty open subschemes
-(`AlgebraicGeometry.topologicalKrullDim_opens_eq`).
+(`AlgebraicGeometry.topologicalKrullDim_opens_eq`), and the closed complement of a dense open
+of a nonempty scheme of finite type over a field has strictly smaller dimension
+(`AlgebraicGeometry.topologicalKrullDim_compl_lt_of_dense`).
 -/
 
 @[expose] public section
@@ -70,6 +73,20 @@ field of `X`. -/
 theorem topologicalKrullDim_opens_eq {K : Type u} [Field K] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [IsIntegral X] (U : X.Opens) [Nonempty U] :
     topologicalKrullDim (U : Set X) = topologicalKrullDim X :=
+  sorry
+
+/-- The closed complement of a dense open `U` of a nonempty scheme `X` of finite type over a
+field `K` has strictly smaller dimension than `X`.
+
+A dense open contains the generic point of every irreducible component of the noetherian
+space `X`, so every irreducible closed subset of `X ∖ U` lies strictly inside an irreducible
+component of `X`, and every chain of irreducible closed subsets of `X ∖ U` extends by one
+in `X`. The dimension of `X` is finite, by the dimension formula for finitely generated
+`K`-algebras, which gives the strict inequality. -/
+theorem topologicalKrullDim_compl_lt_of_dense {K : Type u} [Field K] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [QuasiCompact f] [Nonempty X] {U : Set X}
+    (hU : IsOpen U) (hd : Dense U) :
+    topologicalKrullDim (Uᶜ : Set X) < topologicalKrullDim X :=
   sorry
 
 end AlgebraicGeometry
