@@ -36,6 +36,8 @@ The sheaf `Ω¹_{C/K}` is `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`, 
 
 - `AlgebraicGeometry.IsCurve`: a separated morphism of finite type to `Spec K` whose source has
   topological Krull dimension at most one.
+- `AlgebraicGeometry.IsConnectedCurve`: a curve whose source is connected, hence nonempty, and
+  of topological Krull dimension exactly one.
 - `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`: the sheaf `Ω¹_{X/S}` of relative
   differentials (see `WeilConjectures.AlgebraicGeometry.Modules.Differentials`).
 - `AlgebraicGeometry.Scheme.Hom.genus`: the genus `dim_K Γ(C, Ω¹_{C/K})` of a curve.
@@ -78,6 +80,25 @@ class IsCurve (f : C ⟶ Spec (.of K)) : Prop
     extends IsSeparated f, LocallyOfFiniteType f, QuasiCompact f where
   /-- The underlying space of a curve has dimension at most one. -/
   krullDim_le_one : topologicalKrullDim C ≤ 1
+
+/-- Blueprint `sk-def-curve`: Curves and genus
+
+A *connected curve* over `K` is a curve over `K` that is nonempty, connected and of dimension
+exactly one. The last condition excludes points such as `Spec K`, for which the curve estimate
+`sk-thm-curveestimate` fails in degree two. Mathlib's `ConnectedSpace` already includes
+nonemptiness.
+
+The field `IsConnectedCurve.connectedSpace` is not an instance, since `f` cannot be inferred
+from `ConnectedSpace C`; use `have := IsConnectedCurve.connectedSpace (f := f)`. -/
+class IsConnectedCurve (f : C ⟶ Spec (.of K)) : Prop extends IsCurve f where
+  /-- The underlying space of a connected curve is connected, in particular nonempty. -/
+  connectedSpace : ConnectedSpace C
+  /-- The underlying space of a connected curve has dimension exactly one. -/
+  krullDim_eq_one : topologicalKrullDim C = 1
+
+lemma IsConnectedCurve.nonempty (f : C ⟶ Spec (.of K)) [IsConnectedCurve f] : Nonempty C :=
+  have := IsConnectedCurve.connectedSpace (f := f)
+  inferInstance
 
 /-- Blueprint `sk-def-curve`: Curves and genus
 

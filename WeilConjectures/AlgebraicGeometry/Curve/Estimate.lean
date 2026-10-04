@@ -19,13 +19,14 @@ and `n` prime to the characteristic, the cohomology of the constant sheaf `ℤ/n
 
 `H⁰ = ℤ/n`, `H¹ = (ℤ/n)^{2g}`, `H² = ℤ/n`, `H^q = 0` for `q ≥ 3`.
 
-Only `H¹` and `H²` are stated here. `H⁰` is
-`AlgebraicGeometry.Scheme.nonempty_addEquiv_sheafH_zero_constantZMod`, which holds for every
-connected scheme, and the vanishing for `q ≥ 3` is
+A smooth proper connected curve is recorded by the class `AlgebraicGeometry.IsConnectedCurve`
+together with `Smooth` and `IsProper`; connectedness and dimension exactly one are both needed,
+`Spec k` being a counterexample in degree two otherwise. The vanishing for `q ≥ 3` is
 `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le` applied to `C.constantZMod n`.
 
 ## Main statements
 
+- `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_zero`: `H⁰(C, ℤ/n) ≅ ℤ/n`.
 - `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_one`:
   `H¹(C, ℤ/n) ≅ (ℤ/n)^{2g}`.
 - `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_two`: `H²(C, ℤ/n) ≅ ℤ/n`.
@@ -47,6 +48,17 @@ namespace AlgebraicGeometry.IsCurve
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 
+omit [IsAlgClosed k] in
+/-- **The curve estimate in degree zero.** Let `C` be a smooth proper connected curve over an
+algebraically closed field `k`, and let `n ≥ 1` be prime to `char k`. Then
+`H⁰(C_ét, ℤ/n) ≅ ℤ/n`. Only connectedness of `C` is used.
+(blueprint: `sk-thm-curveestimate`) -/
+theorem nonempty_addEquiv_sheafH_constantZMod_zero (f : C ⟶ Spec (.of k)) [IsConnectedCurve f]
+    [Smooth f] [IsProper f] (n : ℕ) (_hn : (n : k) ≠ 0) :
+    Nonempty (Sheaf.H (C.constantZMod n) 0 ≃+ ZMod n) :=
+  have := IsConnectedCurve.connectedSpace (f := f)
+  Scheme.nonempty_addEquiv_sheafH_zero_constantZMod C n
+
 /-- **The curve estimate in degree one.** Let `C` be a smooth proper connected curve of genus
 `g` over an algebraically closed field `k`, and let `n ≥ 1` be prime to `char k`. Then
 `H¹(C_ét, ℤ/n) ≅ (ℤ/n)^{2g}`.
@@ -56,8 +68,8 @@ The genus is `f.genus = dim_k H⁰(C, Ω¹_{C/k})`, the definition of the bluepr
 arithmetic genus `AlgebraicGeometry.Scheme.arithmeticGenus = dim_k H¹(C, 𝒪_C)` of the
 Riemann–Roch block; the two definitions are not yet identified in Lean.
 (blueprint: `sk-thm-curveestimate`) -/
-theorem nonempty_addEquiv_sheafH_constantZMod_one (f : C ⟶ Spec (.of k)) [IsCurve f]
-    [Smooth f] [IsProper f] [ConnectedSpace C] (n : ℕ) (hn : (n : k) ≠ 0) :
+theorem nonempty_addEquiv_sheafH_constantZMod_one (f : C ⟶ Spec (.of k)) [IsConnectedCurve f]
+    [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 1 ≃+ (Fin (2 * f.genus) → ZMod n)) :=
   -- Proof sketch: after choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and
   -- `H¹(C, μₙ) ≅ Pic(C)[n]` by
@@ -73,12 +85,11 @@ algebraically closed field `k`, and let `n ≥ 1` be prime to `char k`. Then
 
 The isomorphism depends on the choice of a primitive `n`-th root of unity, that is, of an
 isomorphism `μₙ ≅ ℤ/n` of étale sheaves, so it is only asserted to exist. A connected curve has
-dimension exactly one, which is the hypothesis `hC`; without it `Spec k` would be a smooth
-proper connected curve with `H² = 0`.
+dimension exactly one (`AlgebraicGeometry.IsConnectedCurve.krullDim_eq_one`); without this
+`Spec k` would be a smooth proper connected curve with `H² = 0`.
 (blueprint: `sk-thm-curveestimate`) -/
-theorem nonempty_addEquiv_sheafH_constantZMod_two (f : C ⟶ Spec (.of k)) [IsCurve f]
-    [Smooth f] [IsProper f] [ConnectedSpace C] (hC : topologicalKrullDim C = 1) (n : ℕ)
-    (hn : (n : k) ≠ 0) :
+theorem nonempty_addEquiv_sheafH_constantZMod_two (f : C ⟶ Spec (.of k)) [IsConnectedCurve f]
+    [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 2 ≃+ ZMod n) :=
   -- Proof sketch: after choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and
   -- `H²(C, μₙ) ≅ Pic(C)/n` by
