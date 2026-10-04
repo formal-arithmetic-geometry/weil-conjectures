@@ -183,7 +183,7 @@ naturally in `K`. Both squares
 must be **cartesian**: the proof is proper base change for `Rp₂,!` along the induced
 cartesian square `W ×_{S'} W' ⟶ V ×_S V'`, which fails for merely commuting squares. For the
 same reason the coefficients are those of proper base change
-(`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedLowerShriek`):
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`):
 `Λ` finite with exponent invertible on `S`, and `p₂` locally of finite type.
 (sketch blueprint: `sk-prop-base-change`) -/
 theorem nonempty_iso_fourierTransform_baseChange [Finite Λ] [HasInvertibleExponent Λ S]

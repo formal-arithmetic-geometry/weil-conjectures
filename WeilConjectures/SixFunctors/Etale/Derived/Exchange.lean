@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 /-!
@@ -18,22 +19,22 @@ consumes: compact-support base change for a cartesian square, and the projection
 
 ## Implementation notes
 
-The canonical transformations these theorems are *about* are the exchange
-`Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` and the projection map
-`PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)` of the framework chapter's `def:exchange-projection`.
-The exchange is `AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap` (and
+Compact-support base change is stated as `IsIso Ex_!` for the exchange
+`Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` of the framework chapter's `sk-def-sf-exchanges`, which is
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap` (and
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationBaseChangeMap` for a given
-compactification); it needs `f'` to be quasi-compact, which the statement below does not
-assume. The projection map is not constructed yet. The statements below therefore assert that
-the two functors in question are isomorphic. They should be restated as `IsIso Ex_!` and
-`IsIso PF`, in the style of `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`.
+compactification). Its construction needs `f'` to be quasi-compact, so the statement assumes
+`[QuasiCompact f']`. The projection map `PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)` is not
+constructed yet, so the projection formula below asserts that the two objects in question are
+isomorphic. It should be restated as `IsIso PF`, in the style of
+`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`.
 
 The exchange `Ex_*` for `Rf_*` does already exist in this repository, as
 `AlgebraicGeometry.Etale.baseChange` and `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedLowerShriek`
+- `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_leftDerivedUpperStar`
@@ -75,18 +76,15 @@ arbitrary and a cartesian square
 ```
 
 the exchange transformation `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` of `sk-def-sf-exchanges` is an
-isomorphism; for now (see the implementation notes) this is recorded as the existence of an
-isomorphism between the two functors.
+isomorphism.
 
 The proof is the five-stage argument of the compact-support base change chapter: finite
 coefficients on the étale site, degreewise constructibility, the pro-étale finite level for
 objects with an étale-origin witness, completed coefficients, and finite extensions of the
 coefficient field. -/
--- TODO(unify): restate as `IsIso (rightDerivedLowerShriekBaseChangeMap _ sq)`.
-theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedLowerShriek [Finite Λ]
-    [HasInvertibleExponent Λ Y] [LocallyOfFiniteType f] (sq : IsPullback g' f' f g) :
-    Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
-      L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ]) :=
+theorem isIso_rightDerivedLowerShriekBaseChangeMap [Finite Λ] [HasInvertibleExponent Λ Y]
+    [LocallyOfFiniteType f] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
+    IsIso (rightDerivedLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq) :=
   sorry
 
 end Exchange
