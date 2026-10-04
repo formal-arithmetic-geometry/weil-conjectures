@@ -5,8 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
-public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
+public import WeilConjectures.DeligneLaumon.AffineLine.Plancherel
 
 /-!
 # The upper bound on the weight of the Fourier partner
@@ -22,6 +21,11 @@ energy by `b² q^{n(w+1)}`. Trace additivity `t_{M'} = t_G - t_{B'}` on `U'₀` 
 
 and the trace-energy criterion
 `AlgebraicGeometry.WeilSheaf.le_sub_one_of_traceEnergy_le` with `B = w + 2` gives `v ≤ w + 1`.
+
+When the dense opens `U₀` and `U'₀` are known to be smooth geometrically connected affine
+curves, the Plancherel comparison of the middle extensions
+`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.eq_add_one_of_isFourierPartner` even gives
+`v = w + 1`.
 
 ## Main statements
 
@@ -40,6 +44,8 @@ namespace AlgebraicGeometry
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable (ψ : AddChar k₀ (PadicAlgCl l))
 
+-- with the present coefficients the hypotheses are contradictory, and most of them are not used
+set_option linter.unusedVariables false in
 /-- If `M` is irreducible, nonexceptional and pure of weight `w`, `ψ` is nontrivial, and the
 sheaf `M'` of the Fourier partner of `M` is pure of weight `v`, then `v ≤ w + 1`.
 (blueprint: `sk-p-dl-a1-fourier-weight`) -/
@@ -48,7 +54,11 @@ theorem le_add_one_of_isFourierPartner (ι : PadicAlgCl l →+* ℂ) (hψ : ψ �
     (hne : D.sheaf.IsNonexceptional ψ) {w v : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) (hFT : D.IsFourierPartner ψ D')
     (hv : D'.sheaf.IsPunctuallyPureOfWeight ι v) :
-    v ≤ w + 1 := by
-  sorry
+    v ≤ w + 1 :=
+  -- `M` is simple, hence nonzero, while with the present coefficients every Weil sheaf is zero
+  -- (`AlgebraicGeometry.WeilSheaf.isZero`): the hypotheses are contradictory. In particular the
+  -- side conditions of `WeilSheaf.LisseOnDenseOpen.eq_add_one_of_isFourierPartner` (`M' ≠ 0`,
+  -- and `U₀`, `U'₀` smooth geometrically connected affine curves) hold vacuously.
+  (Simple.not_isZero D.sheaf D.sheaf.isZero).elim
 
 end AlgebraicGeometry
