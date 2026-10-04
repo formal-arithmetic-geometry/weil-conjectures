@@ -432,6 +432,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Limits
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
@@ -612,6 +613,7 @@ public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Ideal
 public import WeilConjectures.Mathlib.RingTheory.Nilpotent.GeometricallyReduced
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
+public import WeilConjectures.Mathlib.RingTheory.PiTensorProduct
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
@@ -639,6 +641,7 @@ public import WeilConjectures.PointCount
 public import WeilConjectures.RepresentationTheory.Clifford
 public import WeilConjectures.RepresentationTheory.FiniteMatrixWitness
 public import WeilConjectures.RingTheory.Dehomogenization
+public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
 public import WeilConjectures.SixFunctors.BaseChange.Derived
@@ -761,6 +764,8 @@ public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
+public import WeilConjectures.Topology.Sheaves.Cech
+public import WeilConjectures.Topology.Sheaves.CechCriterion
 public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.Topology.StratificationDense
 public import WeilConjectures.WeilSheaf.Category
