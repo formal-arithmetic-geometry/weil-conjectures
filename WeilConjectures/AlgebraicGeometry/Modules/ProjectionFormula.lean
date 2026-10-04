@@ -1,0 +1,120 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.PicardFunctor
+
+/-!
+# Pullback, tensor products and the projection formula
+
+We record how the pullback of `𝒪`-modules along a morphism of schemes `g : X ⟶ Y` interacts with
+the tensor product, and the projection formula `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N` for an invertible
+`𝒪_Y`-module `N`.
+
+## Main statements
+
+- `AlgebraicGeometry.Scheme.Modules.nonempty_pullback_tensorObj_iso`: the pullback of a tensor
+  product is the tensor product of the pullbacks.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_pullback_tensorPow_iso`: the pullback of a tensor
+  power is the tensor power of the pullback.
+- `AlgebraicGeometry.Scheme.Modules.IsInvertible.tensorObj`,
+  `AlgebraicGeometry.Scheme.Modules.IsInvertible.tensorPow`: tensor products and tensor powers of
+  invertible modules are invertible.
+- `AlgebraicGeometry.Scheme.Modules.IsInvertible.isQuasicoherent`: an invertible module is
+  quasi-coherent.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_pullback_iso`: the projection formula
+  for an invertible module.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits MonoidalCategory TopologicalSpace
+
+namespace AlgebraicGeometry.Scheme.Modules
+
+variable {X Y : Scheme.{u}}
+
+section Tensor
+
+/-- **The pullback of a tensor product is the tensor product of the pullbacks.** For
+`g : X ⟶ Y` and `𝒪_Y`-modules `M` and `N`, `g^* (M ⊗ N) ≅ g^* M ⊗ g^* N`: the pullback is the
+sheafification of the presheaf pullback, which is a base change of modules and so commutes with
+tensor products. -/
+theorem nonempty_pullback_tensorObj_iso (g : X ⟶ Y) (M N : Y.Modules) :
+    Nonempty ((pullback g).obj (M ⊗ N) ≅ (pullback g).obj M ⊗ (pullback g).obj N) :=
+  sorry
+
+/-- **The pullback of a tensor power is the tensor power of the pullback.**
+`g^* (M^{⊗ m}) ≅ (g^* M)^{⊗ m}`. -/
+theorem nonempty_pullback_tensorPow_iso (g : X ⟶ Y) (M : Y.Modules) (m : ℕ) :
+    Nonempty ((pullback g).obj (M.tensorPow m) ≅ ((pullback g).obj M).tensorPow m) := by
+  induction m with
+  | zero => exact ⟨pullbackObjUnitIso g⟩
+  | succ m ih =>
+    obtain ⟨e⟩ := nonempty_pullback_tensorObj_iso g M (M.tensorPow m)
+    exact ⟨e ≪≫ (Iso.refl _ ⊗ᵢ ih.some)⟩
+
+/-- **A tensor product of invertible modules is invertible.** If `M` and `N` are trivial near a
+point `x`, so is `M ⊗ N`, since restriction to an open commutes with tensor products. -/
+instance IsInvertible.tensorObj (M N : X.Modules) [M.IsInvertible] [N.IsInvertible] :
+    (M ⊗ N).IsInvertible where
+  exists_isoUnit x := by
+    obtain ⟨U, hU, ⟨e⟩⟩ := IsInvertible.exists_isoUnit (M := M) x
+    obtain ⟨V, hV, ⟨e'⟩⟩ := IsInvertible.exists_isoUnit (M := N) x
+    refine ⟨U ⊓ V, ⟨hU, hV⟩, ?_⟩
+    have hW (P : X.Modules) {W : X.Opens} (hW : U ⊓ V ≤ W)
+        (eP : (Modules.pullback W.ι).obj P ≅ SheafOfModules.unit _) :
+        Nonempty ((Modules.pullback (U ⊓ V).ι).obj P ≅ SheafOfModules.unit _) :=
+      ⟨(pullbackCongr (X.homOfLE_ι hW).symm).app P ≪≫ (pullbackComp _ _).symm.app P ≪≫
+        (Modules.pullback (X.homOfLE hW)).mapIso eP ≪≫ pullbackObjUnitIso _⟩
+    obtain ⟨eM⟩ := hW M inf_le_left e
+    obtain ⟨eN⟩ := hW N inf_le_right e'
+    obtain ⟨t⟩ := nonempty_pullback_tensorObj_iso (U ⊓ V).ι M N
+    exact ⟨t ≪≫ (eM ⊗ᵢ eN) ≪≫ λ_ _⟩
+
+/-- **A tensor power of an invertible module is invertible.** -/
+instance IsInvertible.tensorPow (M : X.Modules) [M.IsInvertible] (m : ℕ) :
+    (M.tensorPow m).IsInvertible := by
+  induction m with
+  | zero => exact isInvertible_tensorUnit
+  | succ m ih => exact IsInvertible.tensorObj M (M.tensorPow m)
+
+end Tensor
+
+section Quasicoherent
+
+/-- **An invertible module is quasi-coherent**, being locally isomorphic to the structure
+sheaf. -/
+instance IsInvertible.isQuasicoherent (M : X.Modules) [M.IsInvertible] : M.IsQuasicoherent := by
+  choose U hU e using fun x : X ↦ IsInvertible.exists_isoUnit (M := M) x
+  have (x : X) : (M.over (U x)).IsQuasicoherent :=
+    (SheafOfModules.isQuasicoherent (X.ringCatSheaf.over (U x))).prop_of_iso
+      (overIsoUnitOfPullbackIotaIso (e x).some).symm
+      (SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf.over (U x)))
+  refine SheafOfModules.IsQuasicoherent.of_coversTop M U ?_
+  rw [Opens.coversTop_iff]
+  exact IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ Opens.mem_iSup.mpr ⟨x, hU x⟩)
+
+end Quasicoherent
+
+section ProjectionFormula
+
+/-- **The projection formula** for an invertible module. For `g : X ⟶ Y` and an invertible
+`𝒪_Y`-module `N`, `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N`. Locally on `Y`, where `N ≅ 𝒪_Y`, both sides are
+`g_* 𝒪_X`; the global isomorphism is the adjoint of `g^* (g_* 𝒪_X ⊗ N) ≅ g^* g_* 𝒪_X ⊗ g^* N ⟶
+𝒪_X ⊗ g^* N ≅ g^* N`. -/
+theorem nonempty_pushforward_pullback_iso (g : X ⟶ Y) (N : Y.Modules) [N.IsInvertible] :
+    Nonempty ((pushforward g).obj ((pullback g).obj N) ≅
+      (pushforward g).obj (𝟙_ X.Modules) ⊗ N) :=
+  sorry
+
+end ProjectionFormula
+
+end AlgebraicGeometry.Scheme.Modules
