@@ -71,22 +71,158 @@ def IsFreeGenerator {U : X.Opens} (e : Γ(M, U)) : Prop :=
   ∀ (V : X.Opens) (h : V ≤ U),
     Function.Bijective fun r : Γ(X, V) ↦ r • M.presheaf.map (homOfLE h).op e
 
+/-- Restricting a section of `M` twice is restricting it along the composite. -/
+lemma presheaf_map_map_apply {U V W : X.Opens} (f : V ⟶ U) (g : W ⟶ V) (e : Γ(M, U)) :
+    M.presheaf.map g.op (M.presheaf.map f.op e) = M.presheaf.map (g ≫ f).op e := by
+  rw [op_comp, Functor.map_comp]
+  rfl
+
+/-- Restricting a section of `M` along an endomorphism of an open does nothing. -/
+lemma presheaf_map_id_apply {U : X.Opens} (f : U ⟶ U) (e : Γ(M, U)) :
+    M.presheaf.map f.op e = e := by
+  rw [Subsingleton.elim f (𝟙 U), op_id, CategoryTheory.Functor.map_id]
+  rfl
+
+/-- Restricting a function twice is restricting it along the composite. -/
+private lemma scheme_presheaf_map_map_apply {U V W : X.Opens} (f : V ⟶ U) (g : W ⟶ V)
+    (a : Γ(X, U)) :
+    X.presheaf.map g.op (X.presheaf.map f.op a) = X.presheaf.map (g ≫ f).op a := by
+  rw [op_comp, Functor.map_comp]
+  rfl
+
+/-- Restricting a function along an endomorphism of an open does nothing. -/
+private lemma scheme_presheaf_map_id_apply {U : X.Opens} (f : U ⟶ U) (a : Γ(X, U)) :
+    X.presheaf.map f.op a = a := by
+  rw [Subsingleton.elim f (𝟙 U), op_id, CategoryTheory.Functor.map_id]
+  rfl
+
 /-- The restriction of a free generator to a smaller open is a free generator. -/
 lemma IsFreeGenerator.map {U V : X.Opens} {e : Γ(M, U)} (he : IsFreeGenerator e)
-    (h : V ≤ U) : IsFreeGenerator (M.presheaf.map (homOfLE h).op e) :=
-  sorry
+    (h : V ≤ U) : IsFreeGenerator (M.presheaf.map (homOfLE h).op e) := by
+  intro W hW
+  simp_rw [presheaf_map_map_apply]
+  exact he W (hW.trans h)
+
+/-- A free generator `e` on `U` gives an injection `r ↦ r • e` of `Γ(X, U)` into `Γ(M, U)`. -/
+lemma IsFreeGenerator.smul_left_injective {U : X.Opens} {e : Γ(M, U)}
+    (he : IsFreeGenerator e) : Function.Injective fun r : Γ(X, U) ↦ r • e := by
+  simpa only [presheaf_map_id_apply] using (he U le_rfl).1
+
+/-- Every section over `U` is a multiple of a free generator on `U`. -/
+lemma IsFreeGenerator.exists_smul_eq {U : X.Opens} {e : Γ(M, U)} (he : IsFreeGenerator e)
+    (m : Γ(M, U)) : ∃ r : Γ(X, U), r • e = m := by
+  simpa only [presheaf_map_id_apply] using (he U le_rfl).2 m
 
 /-- Two free generators on the same open differ by a unit. -/
 lemma IsFreeGenerator.exists_unit_smul_eq {U : X.Opens} {e e' : Γ(M, U)}
-    (he : IsFreeGenerator e) (he' : IsFreeGenerator e') : ∃ u : Γ(X, U)ˣ, e' = u.1 • e :=
-  sorry
+    (he : IsFreeGenerator e) (he' : IsFreeGenerator e') : ∃ u : Γ(X, U)ˣ, e' = u.1 • e := by
+  obtain ⟨u, hu⟩ := he.exists_smul_eq e'
+  obtain ⟨v, hv⟩ := he'.exists_smul_eq e
+  have huv : v * u = 1 := he.smul_left_injective (by simp only [mul_smul, hu, hv, one_smul])
+  exact ⟨⟨u, v, by rw [mul_comm, huv], huv⟩, hu.symm⟩
+
+/-- If `M` is trivial on `U`, i.e. `M.over U ≅ 𝒪_U`, then `M` has a free generator on `U`,
+namely the section corresponding to `1`. -/
+lemma exists_isFreeGenerator_of_iso {U : X.Opens}
+    (i : M.over U ≅ SheafOfModules.unit (X.ringCatSheaf.over U)) :
+    ∃ e : Γ(M, U), IsFreeGenerator e := by
+  let s := (M.over U).unitHomEquiv i.inv
+  refine ⟨s.val (.op (Over.mk (𝟙 U))), fun V h ↦ ?_⟩
+  let ψ := (i.inv.val.app (.op (Over.mk (homOfLE h)))).hom
+  let ψ' : Γ(X, V) → Γ(M, V) := fun r ↦ ψ r
+  have h1 (r : Γ(X, V)) : ψ' r = r • ψ' 1 :=
+    (congrArg ψ (mul_one r).symm).trans (ψ.map_smul r (1 : Γ(X, V)))
+  have h2 : M.presheaf.map (homOfLE h).op (s.val (.op (Over.mk (𝟙 U)))) = ψ' 1 :=
+    s.2 (Over.homMk (homOfLE h) : Over.mk (homOfLE h) ⟶ Over.mk (𝟙 U)).op
+  have key : (fun r : Γ(X, V) ↦ r • M.presheaf.map (homOfLE h).op
+      (s.val (.op (Over.mk (𝟙 U))))) = ψ' := by
+    ext r
+    rw [h1, h2]
+  rw [key]
+  exact ConcreteCategory.bijective_of_isIso ((PresheafOfModules.evaluation _
+    (.op (Over.mk (homOfLE h)))).mapIso ((SheafOfModules.forget _).mapIso i)).inv
 
 /-- **Invertible modules are locally trivial.** Every point `x` of an open `W` has an affine
 open neighbourhood `U ⊆ W` on which an invertible module has a free generator. -/
 lemma exists_isFreeGenerator (M : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} M] {x : X}
     {W : X.Opens} (hx : x ∈ W) :
-    ∃ U : X.affineOpens, x ∈ U.1 ∧ U.1 ≤ W ∧ ∃ e : Γ(M, U.1), IsFreeGenerator e :=
-  sorry
+    ∃ U : X.affineOpens, x ∈ U.1 ∧ U.1 ≤ W ∧ ∃ e : Γ(M, U.1), IsFreeGenerator e := by
+  obtain ⟨q, hq⟩ := SheafOfModules.IsInvertible.exists_isInvertibleData (M := M)
+  obtain ⟨i, hi⟩ := ((Opens.coversTop_iff _ _).mp q.coversTop).exists_mem x
+  obtain ⟨hu⟩ := SheafOfModules.LocalGeneratorsData.IsInvertibleData.nonempty_unique (q := q) i
+  have := SheafOfModules.LocalGeneratorsData.IsLocallyFreeData.isIso (q := q) i
+  obtain ⟨e, he⟩ := exists_isFreeGenerator_of_iso
+    ((asIso (q.generators i).π).symm ≪≫ SheafOfModules.freeUniqueIso _)
+  obtain ⟨V, hV, hxV, hVW⟩ :=
+    exists_isAffineOpen_mem_and_subset (x := x) (U := q.X i ⊓ W) ⟨hi, hx⟩
+  have hVi : V ≤ q.X i := fun y hy ↦ (hVW hy).1
+  exact ⟨⟨V, hV⟩, hxV, fun y hy ↦ (hVW hy).2, _, he.map hVi⟩
+
+/-- Every point `x` of an open `W` has an affine open neighbourhood `U ⊆ W` on which two
+invertible modules both have free generators. -/
+lemma exists_isFreeGenerator₂ (M N : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} M]
+    [SheafOfModules.IsInvertible.{u, u, u} N] {x : X} {W : X.Opens} (hx : x ∈ W) :
+    ∃ U : X.affineOpens, x ∈ U.1 ∧ U.1 ≤ W ∧ (∃ eM : Γ(M, U.1), IsFreeGenerator eM) ∧
+      ∃ eN : Γ(N, U.1), IsFreeGenerator eN := by
+  obtain ⟨U, hxU, hUW, eM, hM⟩ := exists_isFreeGenerator M hx
+  obtain ⟨U', hxU', hU'U, eN, hN⟩ := exists_isFreeGenerator N hxU
+  exact ⟨U', hxU', hU'U.trans hUW, ⟨_, hM.map hU'U⟩, _, hN⟩
+
+/-- Every point of an affine open `W` lies in a basic open of `W` on which two invertible
+modules both have free generators. -/
+lemma exists_basicOpen_isFreeGenerator (M N : X.Modules)
+    [SheafOfModules.IsInvertible.{u, u, u} M] [SheafOfModules.IsInvertible.{u, u, u} N]
+    {W : X.Opens} (hW : IsAffineOpen W) {x : X} (hx : x ∈ W) : ∃ g : Γ(X, W),
+      x ∈ X.basicOpen g ∧ (∃ eM : Γ(M, X.basicOpen g), IsFreeGenerator eM) ∧
+        ∃ eN : Γ(N, X.basicOpen g), IsFreeGenerator eN := by
+  obtain ⟨U, hxU, -, ⟨eM, hM⟩, eN, hN⟩ := exists_isFreeGenerator₂ M N hx
+  obtain ⟨g, hgU, hxg⟩ := hW.exists_basicOpen_le ⟨x, hxU⟩ hx
+  exact ⟨g, hxg, ⟨_, hM.map hgU⟩, _, hN.map hgU⟩
+
+/-- Morphisms of modules commute with restriction of sections. -/
+lemma Hom.app_presheaf_map (φ : M ⟶ N) {U V : X.Opens} (i : V ⟶ U) (x : Γ(M, U)) :
+    φ.app V (M.presheaf.map i.op x) = N.presheaf.map i.op (φ.app U x) :=
+  PresheafOfModules.naturality_apply φ.val i.op x
+
+/-- If `φ(eM) = b • eN` on `U`, then the same holds for the restrictions to `V ⊆ U`. -/
+lemma Hom.app_presheaf_map_of_eq (φ : M ⟶ N) {U V : X.Opens} (i : V ⟶ U) {eM : Γ(M, U)}
+    {eN : Γ(N, U)} {b : Γ(X, U)} (hb : φ.app U eM = b • eN) :
+    φ.app V (M.presheaf.map i.op eM) = X.presheaf.map i.op b • N.presheaf.map i.op eN := by
+  rw [Hom.app_presheaf_map, hb, map_smul]
+
+/-- The coefficient of `φ` with respect to free generators of `M` and `N` is well defined up to
+a unit: coefficients with respect to different free generators divide each other. -/
+lemma Hom.mem_span_of_isFreeGenerator (φ : M ⟶ N) {U : X.Opens} {eM eM' : Γ(M, U)}
+    {eN eN' : Γ(N, U)} (hM : IsFreeGenerator eM) (hM' : IsFreeGenerator eM')
+    (hN : IsFreeGenerator eN) (hN' : IsFreeGenerator eN') {b b' : Γ(X, U)}
+    (hb : φ.app U eM = b • eN) (hb' : φ.app U eM' = b' • eN') : b ∈ Ideal.span {b'} := by
+  obtain ⟨u, rfl⟩ := hM'.exists_unit_smul_eq hM
+  obtain ⟨w, rfl⟩ := hN'.exists_unit_smul_eq hN
+  have : b * w.1 = u.1 * b' := hN'.smul_left_injective (by
+    simp only [mul_smul, ← hb, ← hb', Hom.app_smul])
+  rw [Ideal.mem_span_singleton']
+  refine ⟨u.1 * w⁻¹.1, ?_⟩
+  rw [mul_right_comm, ← this, mul_assoc, Units.mul_inv, mul_one]
+
+/-- Membership in an ideal of the sections over an affine open can be checked locally on
+basic opens. -/
+lemma _root_.AlgebraicGeometry.IsAffineOpen.mem_of_forall_exists_basicOpen {U : X.Opens}
+    (hU : IsAffineOpen U) (I : Ideal Γ(X, U)) (a : Γ(X, U))
+    (H : ∀ x ∈ U, ∃ g : Γ(X, U), x ∈ X.basicOpen g ∧
+      X.presheaf.map (homOfLE (X.basicOpen_le g)).op a ∈
+        I.map (X.presheaf.map (homOfLE (X.basicOpen_le g)).op).hom) : a ∈ I := by
+  let s : Set Γ(X, U) := {g | X.presheaf.map (homOfLE (X.basicOpen_le g)).op a ∈
+    I.map (X.presheaf.map (homOfLE (X.basicOpen_le g)).op).hom}
+  have hs : Ideal.span s = ⊤ := by
+    rw [← hU.self_le_iSup_basicOpen_iff]
+    intro x hx
+    obtain ⟨g, hxg, hg⟩ := H x hx
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨g, hg⟩, hxg⟩
+  refine Submodule.mem_of_span_eq_top_of_smul_pow_mem I s hs a fun g ↦ ?_
+  have := hU.isLocalization_basicOpen g.1
+  obtain ⟨_, ⟨n, rfl⟩, hn⟩ := (IsLocalization.algebraMap_mem_map_algebraMap_iff
+    (Submonoid.powers g.1) _ I a).mp g.2
+  exact ⟨n, hn⟩
 
 /-- The family of ideals defining the zero scheme of `φ : M ⟶ N`: a function `a` on `W` lies in
 it if, on every affine `V ⊆ W` on which `M` and `N` have free generators `eM` and `eN`, the
@@ -109,9 +245,126 @@ the zero scheme of `s : 𝒪_X ⟶ ℳ`; its ideal is the image of `s^∨ : ℳ^
 def Hom.zeroLocus (φ : M ⟶ N) : X.IdealSheafData :=
   IdealSheafData.ofIdeals fun W ↦ φ.zeroLocusIdeal W.1
 
+lemma Hom.mem_zeroLocusIdeal_iff (φ : M ⟶ N) {W : X.Opens} (a : Γ(X, W)) :
+    a ∈ φ.zeroLocusIdeal W ↔ ∀ (V : X.affineOpens) (h : V.1 ≤ W) (eM : Γ(M, V.1)),
+      IsFreeGenerator eM → ∀ eN : Γ(N, V.1), IsFreeGenerator eN → ∀ b : Γ(X, V.1),
+      φ.app V.1 eM = b • eN → X.presheaf.map (homOfLE h).op a ∈ Ideal.span {b} := by
+  simp only [Hom.zeroLocusIdeal, Submodule.mem_iInf, Ideal.mem_comap]
+
+/-- On an affine open `U` on which `M` and `N` have free generators, `φ.zeroLocusIdeal U` is
+generated by the coefficient of `φ`. -/
+lemma Hom.zeroLocusIdeal_eq_span (φ : M ⟶ N) (U : X.affineOpens) {eM : Γ(M, U.1)}
+    {eN : Γ(N, U.1)} (hM : IsFreeGenerator eM) (hN : IsFreeGenerator eN) {b : Γ(X, U.1)}
+    (hb : φ.app U.1 eM = b • eN) : φ.zeroLocusIdeal U.1 = Ideal.span {b} := by
+  refine le_antisymm (fun a ha ↦ ?_) (Ideal.span_le.mpr ?_)
+  · simpa only [scheme_presheaf_map_id_apply] using
+      (φ.mem_zeroLocusIdeal_iff a).mp ha U le_rfl eM hM eN hN b hb
+  · rintro _ rfl
+    rw [SetLike.mem_coe, Hom.mem_zeroLocusIdeal_iff]
+    intro V h eM' hM' eN' hN' b' hb'
+    exact φ.mem_span_of_isFreeGenerator (hM.map h) hM' (hN.map h) hN'
+      (φ.app_presheaf_map_of_eq _ hb) hb'
+
+/-- The restriction of a member of `φ.zeroLocusIdeal W` to `W' ⊆ W` is a member of
+`φ.zeroLocusIdeal W'`. -/
+lemma Hom.presheaf_map_mem_zeroLocusIdeal (φ : M ⟶ N) {W W' : X.Opens} (h : W' ≤ W)
+    {a : Γ(X, W)} (ha : a ∈ φ.zeroLocusIdeal W) :
+    X.presheaf.map (homOfLE h).op a ∈ φ.zeroLocusIdeal W' := by
+  rw [Hom.mem_zeroLocusIdeal_iff] at ha ⊢
+  intro V hV eM hM eN hN b hb
+  rw [scheme_presheaf_map_map_apply]
+  exact ha V (hV.trans h) eM hM eN hN b hb
+
+/-- Membership in `φ.zeroLocusIdeal W` is local on `W`. -/
+lemma Hom.mem_zeroLocusIdeal_of_forall_exists (φ : M ⟶ N) {W : X.Opens} (a : Γ(X, W))
+    (H : ∀ x ∈ W, ∃ (W' : X.Opens) (h : W' ≤ W), x ∈ W' ∧
+      X.presheaf.map (homOfLE h).op a ∈ φ.zeroLocusIdeal W') :
+    a ∈ φ.zeroLocusIdeal W := by
+  rw [Hom.mem_zeroLocusIdeal_iff]
+  intro V hV eM hM eN hN b hb
+  refine V.2.mem_of_forall_exists_basicOpen _ _ fun x hx ↦ ?_
+  obtain ⟨W', hW', hxW', ha⟩ := H x (hV hx)
+  obtain ⟨g, hgW', hxg⟩ := V.2.exists_basicOpen_le ⟨x, hxW'⟩ hx
+  refine ⟨g, hxg, ?_⟩
+  have := (φ.mem_zeroLocusIdeal_iff _).mp ha ⟨_, V.2.basicOpen g⟩ hgW' _
+    (hM.map (X.basicOpen_le g)) _ (hN.map (X.basicOpen_le g)) _ (φ.app_presheaf_map_of_eq _ hb)
+  rw [scheme_presheaf_map_map_apply] at this
+  rw [scheme_presheaf_map_map_apply, Ideal.map_span, Set.image_singleton]
+  exact this
+
+variable [SheafOfModules.IsInvertible.{u, u, u} M] [SheafOfModules.IsInvertible.{u, u, u} N] in
+/-- For invertible modules the ideals `φ.zeroLocusIdeal` are quasi-coherent. -/
+lemma Hom.map_zeroLocusIdeal_basicOpen (φ : M ⟶ N) (W : X.affineOpens) (f : Γ(X, W.1)) :
+    (φ.zeroLocusIdeal W.1).map (X.presheaf.map (homOfLE (X.basicOpen_le f)).op).hom =
+      φ.zeroLocusIdeal (X.basicOpen f) := by
+  refine le_antisymm (Ideal.map_le_iff_le_comap.mpr fun a ha ↦
+    φ.presheaf_map_mem_zeroLocusIdeal _ ha) fun c hc ↦ ?_
+  have := W.2.isLocalization_basicOpen f
+  obtain ⟨a, ⟨_, k, rfl⟩, rfl⟩ := IsLocalization.exists_mk'_eq (.powers f) c
+  refine (IsLocalization.mk'_mem_map_algebraMap_iff (.powers f) _ _ _ _).mpr ?_
+  have ha : X.presheaf.map (homOfLE (X.basicOpen_le f)).op a ∈
+      φ.zeroLocusIdeal (X.basicOpen f) := by
+    have := Ideal.mul_mem_right (algebraMap Γ(X, W.1) Γ(X, X.basicOpen f) (f ^ k)) _ hc
+    rwa [IsLocalization.mk'_spec] at this
+  let S : Set Γ(X, W.1) := {g | (∃ eM : Γ(M, X.basicOpen g), IsFreeGenerator eM) ∧
+    ∃ eN : Γ(N, X.basicOpen g), IsFreeGenerator eN}
+  have hS : Ideal.span S = ⊤ := by
+    rw [← W.2.self_le_iSup_basicOpen_iff]
+    intro x hx
+    obtain ⟨g, hxg, hg⟩ := exists_basicOpen_isFreeGenerator M N W.2 hx
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨g, hg⟩, hxg⟩
+  -- On each trivializing basic open `D(g)`, some power of `f` times `a` lies in the ideal.
+  have key (g : Γ(X, W.1)) : ∃ n : ℕ, g ∈ S → X.presheaf.map (homOfLE (X.basicOpen_le g)).op
+      (f ^ n * a) ∈ φ.zeroLocusIdeal (X.basicOpen g) := by
+    by_cases hg : g ∈ S
+    · obtain ⟨⟨eM, hM⟩, eN, hN⟩ := hg
+      obtain ⟨b, hb⟩ := hN.exists_smul_eq (φ.app _ eM)
+      have hU : IsAffineOpen (X.basicOpen g) := W.2.basicOpen g
+      rw [φ.zeroLocusIdeal_eq_span ⟨_, hU⟩ hM hN hb.symm]
+      let f' := X.presheaf.map (homOfLE (X.basicOpen_le g)).op f
+      have := hU.isLocalization_basicOpen f'
+      have hle : X.basicOpen f' ≤ X.basicOpen f := by
+        rw [Scheme.basicOpen_res]
+        exact inf_le_right
+      have h1 := φ.presheaf_map_mem_zeroLocusIdeal hle ha
+      rw [φ.zeroLocusIdeal_eq_span ⟨_, hU.basicOpen f'⟩ (hM.map (X.basicOpen_le f'))
+        (hN.map (X.basicOpen_le f')) (φ.app_presheaf_map_of_eq _ hb.symm)] at h1
+      have h2 : algebraMap Γ(X, X.basicOpen g) Γ(X, X.basicOpen f')
+          (X.presheaf.map (homOfLE (X.basicOpen_le g)).op a) ∈
+          (Ideal.span {b}).map (algebraMap Γ(X, X.basicOpen g) Γ(X, X.basicOpen f')) := by
+        rw [Ideal.map_span, Set.image_singleton]
+        convert h1 using 2
+        · rfl
+        · exact (scheme_presheaf_map_map_apply (homOfLE (X.basicOpen_le g))
+            (homOfLE (X.basicOpen_le f')) a).trans
+            (scheme_presheaf_map_map_apply (homOfLE (X.basicOpen_le f)) (homOfLE hle) a).symm
+      obtain ⟨_, ⟨n, rfl⟩, hn⟩ := (IsLocalization.algebraMap_mem_map_algebraMap_iff
+        (.powers f') _ _ _).mp h2
+      refine ⟨n, fun _ ↦ ?_⟩
+      rw [map_mul, map_pow]
+      exact hn
+    · exact ⟨0, fun h ↦ (hg h).elim⟩
+  choose n hn using key
+  obtain ⟨T, hTS, hT⟩ := (Ideal.span_eq_top_iff_finite S).mp hS
+  obtain ⟨m, hm⟩ := Finset.exists_le (T.image n)
+  refine ⟨f ^ m, ⟨m, rfl⟩, φ.mem_zeroLocusIdeal_of_forall_exists _ fun x hx ↦ ?_⟩
+  obtain ⟨⟨g, hgT⟩, hxg⟩ := TopologicalSpace.Opens.mem_iSup.mp
+    ((W.2.self_le_iSup_basicOpen_iff.mpr hT) hx)
+  refine ⟨_, X.basicOpen_le g, hxg, ?_⟩
+  rw [← pow_sub_mul_pow f (hm _ (Finset.mem_image_of_mem n hgT)), mul_assoc, map_mul]
+  exact Ideal.mul_mem_left _ _ (hn g (hTS hgT))
+
 section Properties
 
 variable [SheafOfModules.IsInvertible.{u, u, u} M] [SheafOfModules.IsInvertible.{u, u, u} N]
+
+/-- For invertible modules, the sections of the ideal sheaf `Z(φ)` over an affine open `U` are
+`φ.zeroLocusIdeal U`. -/
+lemma Hom.ideal_zeroLocus_eq (φ : M ⟶ N) (U : X.affineOpens) :
+    φ.zeroLocus.ideal U = φ.zeroLocusIdeal U.1 := by
+  let I : X.IdealSheafData :=
+    ⟨fun U ↦ φ.zeroLocusIdeal U.1, φ.map_zeroLocusIdeal_basicOpen, _, rfl⟩
+  exact congr($(IdealSheafData.ofIdeals_ideal I).ideal U)
 
 /-- **The zero scheme is a closed subscheme with the expected local equations.** On an affine
 open `U = Spec A` on which `M` and `N` have free generators `eM` and `eN`, with
@@ -121,8 +374,8 @@ open `U = Spec A` on which `M` and `N` have free generators `eM` and `eN`, with
 theorem Hom.ideal_zeroLocus (φ : M ⟶ N) (U : X.affineOpens) {eM : Γ(M, U.1)} {eN : Γ(N, U.1)}
     (hM : IsFreeGenerator eM) (hN : IsFreeGenerator eN) {b : Γ(X, U.1)}
     (hb : φ.app U.1 eM = b • eN) :
-    φ.zeroLocus.ideal U = Ideal.span {b} :=
-  sorry
+    φ.zeroLocus.ideal U = Ideal.span {b} := by
+  rw [Hom.ideal_zeroLocus_eq, φ.zeroLocusIdeal_eq_span U hM hN hb]
 
 /-- **The zero scheme commutes with pullback.** For a morphism `g : Y ⟶ X`, the pullback of the
 ideal of `Z(φ)` is the ideal of the zero scheme of `g^* φ`: `Z(g^* φ) = Z(φ) ×_X Y`.
@@ -140,12 +393,44 @@ theorem Hom.comap_zeroLocus {Y : Scheme.{u}} (g : Y ⟶ X) (φ : M ⟶ N) :
 ideal is `⊥`, if and only if `φ = 0`.
 
 (blueprint: `lem-pc-zero-scheme-properties`, part (3)) -/
-theorem Hom.zeroLocus_eq_bot_iff (φ : M ⟶ N) : φ.zeroLocus = ⊥ ↔ φ = 0 :=
-  sorry
+theorem Hom.zeroLocus_eq_bot_iff (φ : M ⟶ N) : φ.zeroLocus = ⊥ ↔ φ = 0 := by
+  refine ⟨fun h ↦ ?_, ?_⟩
+  · -- `φ` vanishes on every trivializing affine open, hence everywhere.
+    have key (x : X) (W : X.Opens) (hx : x ∈ W) : ∃ U : X.affineOpens, x ∈ U.1 ∧ U.1 ≤ W ∧
+        ∀ m : Γ(M, U.1), φ.app U.1 m = 0 := by
+      obtain ⟨U, hxU, hUW, ⟨eM, hM⟩, eN, hN⟩ := exists_isFreeGenerator₂ M N hx
+      obtain ⟨b, hb⟩ := hN.exists_smul_eq (φ.app U.1 eM)
+      have hb0 : b = 0 := by
+        have := φ.ideal_zeroLocus U hM hN hb.symm
+        rw [h, IdealSheafData.ideal_bot] at this
+        exact Ideal.span_singleton_eq_bot.mp this.symm
+      refine ⟨U, hxU, hUW, fun m ↦ ?_⟩
+      obtain ⟨r, rfl⟩ := hM.exists_smul_eq m
+      rw [Hom.app_smul, ← hb, hb0, zero_smul, smul_zero]
+    refine Modules.hom_ext _ _ fun W ↦ ?_
+    ext m
+    choose U hxU hUW hU using fun x : W ↦ key x.1 W x.2
+    refine TopCat.Sheaf.eq_of_locally_eq' ⟨N.presheaf, N.isSheaf⟩ (fun x ↦ (U x).1) W
+      (fun x ↦ homOfLE (hUW x))
+      (fun x hx ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨x, hx⟩, hxU _⟩) _ _ fun x ↦ ?_
+    simp [← Hom.app_presheaf_map, hU]
+  · rintro rfl
+    choose U hxU _ hM hN using fun x : X ↦
+      exists_isFreeGenerator₂ M N (TopologicalSpace.Opens.mem_top x)
+    refine le_bot_iff.mp (IdealSheafData.le_of_iSup_eq_top U
+      (eq_top_iff.mpr fun x _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hxU x⟩) fun x ↦ ?_)
+    obtain ⟨eM, hM⟩ := hM x
+    obtain ⟨eN, hN⟩ := hN x
+    rw [Hom.ideal_zeroLocus (0 : M ⟶ N) (U x) hM hN (b := 0) (by simp)]
+    simp
 
 /-- The zero scheme of a morphism of invertible modules is locally principal. -/
-theorem Hom.isLocallyPrincipal_zeroLocus (φ : M ⟶ N) : φ.zeroLocus.IsLocallyPrincipal :=
-  sorry
+theorem Hom.isLocallyPrincipal_zeroLocus (φ : M ⟶ N) : φ.zeroLocus.IsLocallyPrincipal := by
+  intro x
+  obtain ⟨U, hxU, -, ⟨eM, hM⟩, eN, hN⟩ :=
+    exists_isFreeGenerator₂ M N (TopologicalSpace.Opens.mem_top x)
+  obtain ⟨b, hb⟩ := hN.exists_smul_eq (φ.app U.1 eM)
+  exact ⟨U, hxU, ⟨b, φ.ideal_zeroLocus U hM hN hb.symm⟩⟩
 
 end Properties
 

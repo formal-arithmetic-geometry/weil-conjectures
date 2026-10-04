@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
@@ -141,15 +142,51 @@ lemma IsInvertible.isLocallyPrincipal {J : X.IdealSheafData} (hJ : J.IsInvertibl
 /-- **Locally principal ideals pull back to locally principal ideals**: on an affine chart the
 pulled back ideal is the extension of the ideal, by `ideal_comap_appLE`. -/
 lemma IsLocallyPrincipal.comap {J : Y.IdealSheafData} (hJ : J.IsLocallyPrincipal) (f : X ⟶ Y) :
-    (J.comap f).IsLocallyPrincipal :=
-  sorry
+    (J.comap f).IsLocallyPrincipal := by
+  intro x
+  obtain ⟨U, hxU, ⟨b, hb⟩⟩ := hJ (f x)
+  obtain ⟨V, hVaff, hxV, hVU⟩ :=
+    exists_isAffineOpen_mem_and_subset (U := f ⁻¹ᵁ U.1) (x := x) hxU
+  refine ⟨⟨V, hVaff⟩, hxV, ⟨f.appLE U.1 V hVU b, ?_⟩⟩
+  rw [ideal_comap_appLE J f U ⟨V, hVaff⟩ hVU, hb, Ideal.submodule_span_eq, Ideal.map_span,
+    Set.image_singleton]
 
 /-- **On an integral scheme a nonzero locally principal ideal is invertible.** A local generator
 `b` of `J` on a nonempty affine open `U` is nonzero: otherwise `J` vanishes on `U`, hence on
 every affine open (they all meet `U`, and restriction maps of an integral scheme are
 injective), so `J = ⊥`. In the domain `Γ(X, U)`, the nonzero `b` is a non-zerodivisor. -/
 lemma IsLocallyPrincipal.isInvertible [IsIntegral X] {J : X.IdealSheafData}
-    (hJ : J.IsLocallyPrincipal) (h : J ≠ ⊥) : J.IsInvertible :=
-  sorry
+    (hJ : J.IsLocallyPrincipal) (h : J ≠ ⊥) : J.IsInvertible := by
+  intro x
+  obtain ⟨U, hxU, ⟨b, hb⟩⟩ := hJ x
+  refine ⟨U, hxU, b, ?_, hb⟩
+  have : Nonempty U.1 := ⟨⟨x, hxU⟩⟩
+  refine mem_nonZeroDivisors_of_ne_zero fun hb0 ↦ h (IdealSheafData.ext (funext fun W ↦ ?_))
+  rw [ideal_bot, Pi.bot_apply, eq_bot_iff]
+  intro a ha
+  rw [Ideal.mem_bot]
+  rcases isEmpty_or_nonempty W.1 with hW | ⟨⟨y, hyW⟩⟩
+  · have : Subsingleton Γ(X, W.1) :=
+      CommRingCat.subsingleton_of_isTerminal (X.sheaf.isTerminalOfEqEmpty
+        (by ext z; exact iff_false_intro fun hz ↦ hW.false ⟨z, hz⟩))
+    exact Subsingleton.elim _ _
+  -- `W` and `U` meet, since `X` is irreducible; pick a basic open `V` of `U` inside `W`.
+  obtain ⟨z, hzW, hzU⟩ : ((W.1 : Set X) ∩ U.1).Nonempty :=
+    nonempty_preirreducible_inter W.1.2 U.1.2 ⟨y, hyW⟩ ⟨x, hxU⟩
+  obtain ⟨g, hgW, hzg⟩ := U.2.exists_basicOpen_le ⟨z, hzW⟩ hzU
+  let V := X.affineBasicOpen g
+  have hVW : V ≤ W := hgW
+  have hVU : V ≤ U := X.basicOpen_le g
+  have hV : J.ideal V = ⊥ := by
+    rw [← J.map_ideal hVU, hb, hb0, Ideal.submodule_span_eq, Ideal.span_singleton_eq_bot.mpr rfl,
+      Ideal.map_bot]
+  have hzV : z ∈ V.1 := hzg
+  have : X.presheaf.map (homOfLE hVW).op a = 0 := by
+    rw [← Ideal.mem_bot, ← hV, ← J.map_ideal hVW]
+    exact Ideal.mem_map_of_mem _ ha
+  have hgerm := X.presheaf.germ_res_apply (homOfLE (show V.1 ≤ W.1 from hVW)) z hzV a
+  refine germ_injective_of_isIntegral (X := X) z hzW ?_
+  rw [← hgerm, map_zero]
+  exact (congr(X.presheaf.germ V.1 z hzV $this)).trans (map_zero _)
 
 end AlgebraicGeometry.Scheme.IdealSheafData
