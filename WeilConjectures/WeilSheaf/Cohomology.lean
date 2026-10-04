@@ -42,6 +42,8 @@ whose first isomorphism is the invariance of derived global sections under the a
 - `AlgebraicGeometry.WeilComplex.subsingleton_compactlySupportedCohomology_carrier`: with the
   present coefficients every Weil complex is zero (`AlgebraicGeometry.WeilComplex.isZero_carrier`),
   and so is its compactly supported cohomology.
+- `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite`: the
+  compactly supported cohomology of a finite `k₀`-scheme is concentrated in degree zero.
 
 ## TODO
 
@@ -167,6 +169,23 @@ Frobenius: that of the Weil complex `F` concentrated in degree zero. -/
 noncomputable def compactlySupportedCohomology (F : WeilSheaf k₀ l X) (r : ℤ) :
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   (toComplex.obj F).compactlySupportedCohomology r
+
+-- the provisional Weil sheaves are zero, and the proof needs no hypothesis
+set_option linter.unusedVariables false in
+/-- *Cohomology of a finite boundary.* If `X` is finite over `k₀`, then the compactly supported
+cohomology `H_c^r(X ⊗ k̄, G)` of a Weil sheaf `G` on `X` vanishes for `r ≠ 0`: after geometric
+base change `X` becomes a finite discrete space, whose cohomology is concentrated in degree
+zero. The blueprint states this for `G` with stalk weights at most some `w`; the weights play
+no role.
+
+With the present coefficients every Weil complex is zero
+(`AlgebraicGeometry.WeilComplex.subsingleton_compactlySupportedCohomology_carrier`), which is
+how the statement is proved here.
+(blueprint: `lem-a1-finite-boundary-cohomology`) -/
+theorem subsingleton_compactlySupportedCohomology_of_isFinite
+    [IsFinite (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X) {r : ℤ} (hr : r ≠ 0) :
+    Subsingleton (G.compactlySupportedCohomology r).carrier :=
+  (toComplex.obj G).subsingleton_compactlySupportedCohomology_carrier r
 
 end WeilSheaf
 
