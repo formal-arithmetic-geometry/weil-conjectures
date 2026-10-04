@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.KrullDimension.Polynomial
@@ -71,33 +71,6 @@ section Auxiliary
 namespace AlgebraicGeometry
 
 open Scheme Etale
-
-/-- The projective line over a field has dimension at most one: it is covered by two
-affine lines, each the spectrum of a polynomial ring in one variable. -/
-theorem topologicalKrullDim_projectiveLine_le_one (k : Type u) [Field k] :
-    topologicalKrullDim (ProjectiveLine (Spec (.of k))) ≤ 1 := by
-  refine topologicalKrullDim_le_of_iSup_eq_top _ (ProjectiveSpace.iSup_standardOpen _ _) _
-    fun i ↦ ?_
-  refine (IsHomeomorph.topologicalKrullDim_eq _ (ProjectiveSpace.standardOpenIso _ _ i ≪≫
-    AffineSpace.SpecIso _ _).hom.homeomorph.isHomeomorph).trans_le ?_
-  refine (PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim _).trans_le ?_
-  rw [MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field]
-  simp [Nat.card_eq_fintype_card, Fintype.card_subtype_compl]
-
-/-- The projective line over a field is a curve. -/
-instance isCurve_projectiveLine (k : Type u) [Field k] :
-    IsCurve (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) where
-  krullDim_le_one := topologicalKrullDim_projectiveLine_le_one k
-
-/-- The pullback of a torsion sheaf of `Λ`-modules is torsion: the stalk of `f^* F` at a
-geometric point `s` is the stalk of `F` at `s ≫ f`. -/
-instance isTorsionSheaf_upperStar {Λ : Type (u + 1)} [CommRing Λ] {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf F] :
-    IsTorsionSheaf ((f)^*[ModuleCat.{u + 1} Λ].obj F) where
-  isTorsion_sheafFiber Ω _ _ s :=
-    IsAddTorsion.of_surjective
-      (f := ((Etale.upperStarCompSheafFiberIso _ f s).app F).toLinearEquiv.symm.toAddMonoidHom)
-      (LinearEquiv.surjective _) (IsTorsionSheaf.isTorsion_sheafFiber Ω (s ≫ f))
 
 /-- The geometric point `Spec κ(x)‾ ⟶ X` given by the algebraic closure of the residue field
 is `Spec` of the inclusion `κ(x) ⟶ κ(x)‾` followed by the canonical map. -/

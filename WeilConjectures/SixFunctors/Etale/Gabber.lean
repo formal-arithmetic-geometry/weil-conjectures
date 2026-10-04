@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.RingTheory.Henselian
+public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
@@ -64,11 +64,6 @@ section Auxiliary
 
 /-! ### Auxiliary lemmas -/
 
-/-- The zero ideal of any ring is henselian. -/
-instance _root_.HenselianRing.bot (R : Type*) [CommRing R] : HenselianRing R ⊥ where
-  jac := bot_le
-  is_henselian f _ a₀ h _ := ⟨a₀, by simpa using h, by simp⟩
-
 /-- The comparison map on cohomology commutes with the maps induced by morphisms of
 sheaves. -/
 lemma cohomologyMap_comp_mk₀ {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -90,20 +85,6 @@ lemma cohomologyMap_comp_extClass {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [cohomologyMap_apply, cohomologyMap_apply, Ext.mapExactFunctor_comp,
     Ext.mapExactFunctor_extClass]
   exact (Ext.comp_assoc _ _ _ (zero_add n) rfl (by omega)).symm
-
-/-- A quotient of a torsion sheaf is torsion. -/
-lemma _root_.AlgebraicGeometry.Scheme.IsTorsionSheaf.of_epi {X : Scheme.{u}}
-    {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (π : F ⟶ G) [Epi π]
-    [IsTorsionSheaf F] : IsTorsionSheaf G where
-  isTorsion_sheafFiber Ω _ _ s x := by
-    have : PreservesFiniteColimits
-        ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)) := inferInstance
-    have : Epi ((pointSmallEtale s).sheafFiber.map π) := preserves_epi_of_preservesColimit _ π
-    obtain ⟨y, rfl⟩ := (ModuleCat.epi_iff_surjective
-      ((pointSmallEtale s).sheafFiber.map π)).mp inferInstance x
-    obtain ⟨n, hn, hy⟩ := isOfFinAddOrder_iff_nsmul_eq_zero.1
-      (IsTorsionSheaf.isTorsion_sheafFiber (F := F) Ω s y)
-    exact isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨n, hn, by rw [← map_nsmul, hy, map_zero]⟩
 
 /-- Taking underlying abelian sheaves of sheaves of `Λ`-modules is additive. -/
 instance additive_sheafCompose_forget₂ {X : Scheme.{u}} :
@@ -271,7 +252,7 @@ theorem bijective_cohomologyMap_of_henselianRing {A : Type u} [CommRing A] (I : 
       have hS : (S.map (sheafCompose _
           (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))).ShortExact :=
         shortExact_map_forget₂ Λ (key ι)
-      have : IsTorsionSheaf (cokernel ι) := IsTorsionSheaf.of_epi Λ (cokernel.π ι)
+      have : IsTorsionSheaf (cokernel ι) := IsTorsionSheaf.of_epi (cokernel.π ι)
       obtain ⟨z, rfl⟩ := Ext.covariant_sequence_exact₁ _ hS ξ hξι rfl
       replace hξ := (cohomologyMap_comp_extClass _ hS z).symm.trans hξ
       obtain ⟨w, hw⟩ := Ext.covariant_sequence_exact₃ _
@@ -288,7 +269,7 @@ theorem bijective_cohomologyMap_of_henselianRing {A : Type u} [CommRing A] (I : 
       have hS : (S.map (sheafCompose _
           (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))).ShortExact :=
         shortExact_map_forget₂ Λ (key ι)
-      have : IsTorsionSheaf (cokernel ι) := IsTorsionSheaf.of_epi Λ (cokernel.π ι)
+      have : IsTorsionSheaf (cokernel ι) := IsTorsionSheaf.of_epi (cokernel.π ι)
       obtain ⟨y, hy⟩ := Ext.covariant_sequence_exact₁ _
         (hS.map_of_exact ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))^*[_])) η hη rfl
       obtain ⟨z, rfl⟩ := (ih (cokernel ι)).2 y
