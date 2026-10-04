@@ -118,18 +118,21 @@ theorem ringKrullDim_quotient_lt_of_finiteType (k A : Type*) [Field k] [CommRing
 attribute [local instance] MvPolynomial.algebraMvPolynomial in
 /-- Blueprint `lem-zl-spread-normalization`: spreading Noether normalization to a principal open.
 
-Let `A` be a domain and `B` a finitely generated `A`-algebra. Then there are `0 ≠ s ∈ A`, `d ≥ 0`
-and `t₁, …, t_d ∈ B` such that for the localizations `A_s = A[1/s]` and `B_s = B[1/s]`, the
+Let `A` be a domain and `B` a finitely generated `A`-algebra. Then there are `0 ≠ s₀ ∈ A`,
+`d ≥ 0` and `t₁, …, t_d ∈ B` such that for the localizations `A_s = A[1/s]` and `B_s = B[1/s]`, the
 algebra map `A_s[T₁, …, T_d] → B_s`, `Tᵢ ↦ tᵢ` (the map of blueprint
 `def-zl-localized-coordinates` on rings) makes `B_s` a finite module. If moreover `A → B` is
 injective, this map is injective as well.
+
+The blueprint statement is the case `s = s₀`; we allow any nonzero multiple `s` of `s₀`, as
+localizing further preserves finiteness (this is used in `thm-zl-relative-noether`).
 
 Following the blueprint, apply Noether normalization (`exists_finite_inj_algHom_of_fg`) to the
 generic fibre `B ⊗_A Frac A`, rescale the coordinates so that they come from `B`, and clear the
 finitely many denominators of the integral equations of generators of `B`. -/
 theorem Algebra.FiniteType.exists_finite_aeval_away (A B : Type u) [CommRing A] [IsDomain A]
     [CommRing B] [Algebra A B] [Algebra.FiniteType A B] :
-    ∃ s : A, s ≠ 0 ∧ ∃ (d : ℕ) (t : Fin d → B),
+    ∃ s₀ : A, s₀ ≠ 0 ∧ ∃ (d : ℕ) (t : Fin d → B), ∀ s : A, s₀ ∣ s → s ≠ 0 →
       ∀ (Aₛ Bₛ : Type*) [CommRing Aₛ] [CommRing Bₛ] [Algebra A Aₛ] [Algebra B Bₛ]
         [Algebra Aₛ Bₛ] [Algebra A Bₛ] [IsScalarTower A Aₛ Bₛ] [IsScalarTower A B Bₛ]
         [IsLocalization.Away s Aₛ] [IsLocalization.Away (algebraMap A B s) Bₛ],
@@ -141,9 +144,9 @@ theorem Algebra.FiniteType.exists_finite_aeval_away (A B : Type u) [CommRing A] 
   by_cases hzero : ∃ a ∈ M, algebraMap A B a = 0
   · obtain ⟨a, ha, ha0⟩ := hzero
     refine ⟨a, nonZeroDivisors.ne_zero ha, 0, Fin.elim0,
-      fun Aₛ Bₛ _ _ _ _ _ _ _ _ _ _ ↦ ⟨?_, fun hinj ↦ ?_⟩⟩
-    · have hu := IsLocalization.Away.algebraMap_isUnit (S := Bₛ) (algebraMap A B a)
-      rw [ha0, map_zero, isUnit_zero_iff] at hu
+      fun s ⟨c, hc⟩ _ Aₛ Bₛ _ _ _ _ _ _ _ _ _ _ ↦ ⟨?_, fun hinj ↦ ?_⟩⟩
+    · have hu := IsLocalization.Away.algebraMap_isUnit (S := Bₛ) (algebraMap A B s)
+      rw [hc, map_mul, ha0, zero_mul, map_zero, isUnit_zero_iff] at hu
       have : Subsingleton Bₛ := subsingleton_of_zero_eq_one hu
       let _ := (aeval (R := Aₛ) fun i : Fin 0 ↦ algebraMap B Bₛ (Fin.elim0 i)).toRingHom.toAlgebra
       exact (inferInstance : Module.Finite (MvPolynomial (Fin 0) Aₛ) Bₛ)
@@ -231,10 +234,8 @@ theorem Algebra.FiniteType.exists_finite_aeval_away (A B : Type u) [CommRing A] 
     rwa [hsmul, ← mul_assoc, ← map_mul] at h₂
   choose c hc hcint using key
   obtain ⟨S, hS⟩ := Algebra.FiniteType.out (R := A) (A := B)
-  have hsM : (∏ b ∈ S, c b) ∈ M := prod_mem fun b _ ↦ hc b
-  refine ⟨∏ b ∈ S, c b, nonZeroDivisors.ne_zero hsM, d, t,
-    fun Aₛ Bₛ _ _ _ _ _ _ _ _ _ _ ↦ ?_⟩
-  set s := ∏ b ∈ S, c b
+  refine ⟨∏ b ∈ S, c b, nonZeroDivisors.ne_zero (prod_mem fun b _ ↦ hc b), d, t,
+    fun s hs hs0 Aₛ Bₛ _ _ _ _ _ _ _ _ _ _ ↦ ?_⟩
   let φ : MvPolynomial (Fin d) Aₛ →ₐ[Aₛ] Bₛ := aeval fun i ↦ algebraMap B Bₛ (t i)
   have hφ : φ.toRingHom.comp (MvPolynomial.map (algebraMap A Aₛ)) =
       (algebraMap B Bₛ).comp (aeval t).toRingHom := by
@@ -265,7 +266,8 @@ theorem Algebra.FiniteType.exists_finite_aeval_away (A B : Type u) [CommRing A] 
     .of_algebraMap_eq fun x ↦ (φ.commutes x).symm
   -- The images of the generators of `B` are integral over `A_s[T]`.
   have hint (b : B) (hb : b ∈ S) : IsIntegral (MvPolynomial (Fin d) Aₛ) (algebraMap B Bₛ b) := by
-    obtain ⟨v, hv⟩ := isUnit_of_dvd_unit (map_dvd (algebraMap A Aₛ) (Finset.dvd_prod_of_mem c hb))
+    obtain ⟨v, hv⟩ := isUnit_of_dvd_unit
+      (map_dvd (algebraMap A Aₛ) ((Finset.dvd_prod_of_mem c hb).trans hs))
       (IsLocalization.Away.algebraMap_isUnit (S := Aₛ) s)
     have h₁ : IsIntegral (MvPolynomial (Fin d) Aₛ)
         (algebraMap B Bₛ (algebraMap A B (c b) * b)) :=
@@ -306,7 +308,7 @@ theorem Algebra.FiniteType.exists_finite_aeval_away (A B : Type u) [CommRing A] 
   have h₃ : C (s ^ k) * q = 0 := MvPolynomial.map_injective _ (IsFractionRing.injective A K)
     ((hg'inj (h₂.trans (map_zero g').symm)).trans (map_zero _).symm)
   have hq0 : q = 0 := (mul_eq_zero.mp h₃).resolve_left
-    (by rw [C_eq_zero]; exact pow_ne_zero _ (nonZeroDivisors.ne_zero hsM))
+    (by rw [C_eq_zero]; exact pow_ne_zero _ hs0)
   rw [hq0, map_zero] at hq
   exact (IsLocalization.map_units (M := (Submonoid.powers s).map C) (MvPolynomial (Fin d) Aₛ)
     ⟨_, _, ⟨n, rfl⟩, rfl⟩).mul_left_eq_zero.mp hq

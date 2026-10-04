@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
@@ -124,9 +125,10 @@ lemma Scheme.Hom.topologicalKrullDim_fiber_genericPoint [IsIntegral S]
 ring maps. -/
 private lemma finite_injective_eval₂Hom_of_arrowIso {R S R' S' : CommRingCat.{u}} {φ : R ⟶ S}
     {φ' : R' ⟶ S'} (e : Arrow.mk φ' ≅ Arrow.mk φ) {r : ℕ} (t : Fin r → S)
-    (hfin : (eval₂Hom φ.hom t).Finite) (hinj : Function.Injective (eval₂Hom φ.hom t)) :
+    (hfin : (eval₂Hom φ.hom t).Finite) :
     (eval₂Hom φ'.hom fun i ↦ e.inv.right (t i)).Finite ∧
-      Function.Injective (eval₂Hom φ'.hom fun i ↦ e.inv.right (t i)) := by
+      (Function.Injective (eval₂Hom φ.hom t) →
+        Function.Injective (eval₂Hom φ'.hom fun i ↦ e.inv.right (t i))) := by
   have hφ' : φ' = e.hom.left ≫ φ ≫ e.inv.right := by
     have := Arrow.w e.hom
     simp only [Arrow.mk_hom] at this
@@ -147,9 +149,82 @@ private lemma finite_injective_eval₂Hom_of_arrowIso {R S R' S' : CommRingCat.{
   rw [key]
   refine ⟨RingHom.Finite.comp (RingHom.Finite.of_surjective _ hr.2)
     (RingHom.Finite.comp hfin (RingHom.Finite.of_surjective _ (map_surjective _ hl.2))),
-    hr.1.comp (hinj.comp (map_injective _ hl.1))⟩
+    fun hinj ↦ hr.1.comp (hinj.comp (map_injective _ hl.1))⟩
 
 end Affine
+
+/-- Generic relative Noether normalization over a principal open of an affine open.
+
+Let `f : X ⟶ Y` be an affine morphism locally of finite type to an integral scheme and `U` a
+nonempty affine open of `Y`. Then there are `s₀ ≠ 0` in `Γ(Y, U)` and `d` such that over every
+principal open `D(s) ⊆ U` with `s₀ ∣ s`, `s ≠ 0`, the restriction of `f` factors through a finite
+morphism to the `d`-fold relative affine line. If `Γ(Y, U) → Γ(X, f⁻¹ U)` is injective, this finite
+morphism is surjective and `d` is the dimension of the generic fibre.
+
+This is the geometric form of `Algebra.FiniteType.exists_finite_aeval_away`
+(blueprint `lem-zl-spread-normalization`), using the coordinates of blueprint
+`def-zl-localized-coordinates`. -/
+theorem exists_isFinite_toIteratedAffineLine_basicOpen {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [IsIntegral Y] [IsAffineHom f] [LocallyOfFiniteType f] {U : Y.Opens} (hU : IsAffineOpen U)
+    [Nonempty U] :
+    ∃ s₀ : Γ(Y, U), s₀ ≠ 0 ∧ ∃ d : ℕ, ∀ s : Γ(Y, U), s₀ ∣ s → s ≠ 0 →
+      ∃ ν : (f ⁻¹ᵁ Y.basicOpen s).toScheme ⟶ iteratedAffineLine (Y.basicOpen s).toScheme d,
+        IsFinite ν ∧ ν ≫ iteratedAffineLineProj (Y.basicOpen s).toScheme d = f ∣_ Y.basicOpen s ∧
+        (Function.Injective (f.app U).hom → Surjective ν ∧
+          topologicalKrullDim (f.fiber (genericPoint Y)) = d) := by
+  classical
+  have hfU : IsAffineOpen (f ⁻¹ᵁ U) := hU.preimage f
+  let _ : Algebra Γ(Y, U) Γ(X, f ⁻¹ᵁ U) := (f.app U).hom.toAlgebra
+  have : Algebra.FiniteType Γ(Y, U) Γ(X, f ⁻¹ᵁ U) := by
+    have := HasRingHomProperty.appLE (P := @LocallyOfFiniteType) f inferInstance ⟨U, hU⟩
+      ⟨_, hfU⟩ le_rfl
+    rwa [← Scheme.Hom.app_eq_appLE] at this
+  obtain ⟨s₀, hs₀, d, t, H⟩ := Algebra.FiniteType.exists_finite_aeval_away Γ(Y, U) Γ(X, f ⁻¹ᵁ U)
+  refine ⟨s₀, hs₀, d, fun s hs₀s hs ↦ ?_⟩
+  have hsY : (Y.basicOpen s : Set Y).Nonempty := by
+    rw [Set.nonempty_iff_ne_empty, Ne, TopologicalSpace.Opens.coe_eq_empty, basicOpen_eq_bot_iff]
+    exact hs
+  have hV : IsAffineOpen (Y.basicOpen s) := hU.basicOpen s
+  have : Nonempty (Y.basicOpen s) := hsY.to_subtype
+  have : IsAffine (f ⁻¹ᵁ Y.basicOpen s) := hV.preimage f
+  have : IsAffine (Y.basicOpen s) := hV
+  -- The rings of `V = D(s)` and `f ⁻¹ V` are the localizations `A_s` and `B_s`.
+  let _ : Algebra Γ(Y, Y.basicOpen s) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
+    (f.app (Y.basicOpen s)).hom.toAlgebra
+  have : IsLocalization.Away s Γ(Y, Y.basicOpen s) := hU.isLocalization_basicOpen s
+  let inst : Algebra Γ(X, f ⁻¹ᵁ U) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
+    (X.presheaf.map (homOfLE (f.preimage_mono (Y.basicOpen_le s))).op).hom.toAlgebra
+  have : IsLocalization.Away (algebraMap Γ(Y, U) Γ(X, f ⁻¹ᵁ U) s)
+      Γ(X, f ⁻¹ᵁ Y.basicOpen s) := by
+    let : Algebra Γ(X, f ⁻¹ᵁ U) Γ(X, X.basicOpen (f.app _ s)) :=
+      (X.presheaf.map (homOfLE (X.basicOpen_le _)).op).hom.toAlgebra
+    dsimp +instances [inst]
+    rw! (castMode := .all) [f.preimage_basicOpen s]
+    exact hfU.isLocalization_basicOpen (f.app _ s)
+  let _ : Algebra Γ(Y, U) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
+    (f.appLE _ _ (f.preimage_mono (Y.basicOpen_le _))).hom.toAlgebra
+  have : IsScalarTower Γ(Y, U) Γ(X, f ⁻¹ᵁ U) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
+    .of_algebraMap_eq' rfl
+  have : IsScalarTower Γ(Y, U) Γ(Y, Y.basicOpen s) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
+    .of_algebraMap_eq' <| by
+      simp only [RingHom.algebraMap_toAlgebra, ← CommRingCat.hom_comp, Scheme.Hom.app_eq_appLE,
+        Scheme.Hom.map_appLE]
+  obtain ⟨hfin, hinj⟩ := H s hs₀s hs Γ(Y, Y.basicOpen s) Γ(X, f ⁻¹ᵁ Y.basicOpen s)
+  -- Transport to the global sections of the restriction `f ∣_ V`.
+  let e := arrowResLEAppIso f (Y.basicOpen s) (f ⁻¹ᵁ Y.basicOpen s) le_rfl
+  rw [← Scheme.Hom.app_eq_appLE] at e
+  obtain ⟨hfin', hinj'⟩ := finite_injective_eval₂Hom_of_arrowIso e
+    (fun i ↦ algebraMap Γ(X, f ⁻¹ᵁ U) Γ(X, f ⁻¹ᵁ Y.basicOpen s) (t i)) hfin
+  set g := f.resLE (Y.basicOpen s) (f ⁻¹ᵁ Y.basicOpen s) le_rfl with hg
+  refine ⟨g.toIteratedAffineLine _, g.isFinite_toIteratedAffineLine _ hfin', ?_, fun hAB ↦ ?_⟩
+  · rw [Scheme.Hom.toIteratedAffineLine_proj, hg, Scheme.Hom.resLE_eq_morphismRestrict]
+  replace hinj' := hinj' (hinj hAB)
+  refine ⟨g.surjective_toIteratedAffineLine _ hfin' hinj', ?_⟩
+  -- The number of coordinates is the dimension of the generic fibre.
+  have h := g.topologicalKrullDim_fiber_genericPoint _ hfin' hinj'
+  rwa [hg, Scheme.Hom.resLE_eq_morphismRestrict,
+    topologicalKrullDim_fiber_of_isPullback (isPullback_morphismRestrict f _).flip,
+    genericPoint_eq_of_isOpenImmersion] at h
 
 /-- Let `f : X ⟶ Y` be a dominant affine morphism of finite type between integral schemes whose
 generic fibre has dimension `r`. Then there is a dense open `V ⊆ Y` over which `f` factors as a
@@ -178,14 +253,8 @@ theorem exists_dense_isFinite_toIteratedAffineLine {X Y : Scheme.{u}} (f : X ⟶
   obtain ⟨U, hU, hηU, -⟩ :=
     exists_isAffineOpen_mem_and_subset (x := genericPoint Y) (U := ⊤) trivial
   have : Nonempty U := ⟨⟨_, hηU⟩⟩
-  have hfU : IsAffineOpen (f ⁻¹ᵁ U) := hU.preimage f
-  let _ : Algebra Γ(Y, U) Γ(X, f ⁻¹ᵁ U) := (f.app U).hom.toAlgebra
-  have : Algebra.FiniteType Γ(Y, U) Γ(X, f ⁻¹ᵁ U) := by
-    have := HasRingHomProperty.appLE (P := @LocallyOfFiniteType) f inferInstance ⟨U, hU⟩
-      ⟨_, hfU⟩ le_rfl
-    rwa [← Scheme.Hom.app_eq_appLE] at this
   -- `A → B` is injective since `f` is dominant.
-  have hAB : Function.Injective (algebraMap Γ(Y, U) Γ(X, f ⁻¹ᵁ U)) := by
+  have hAB : Function.Injective (f.app U).hom := by
     refine (injective_iff_map_eq_zero _).mpr fun a ha ↦ ?_
     by_contra ha0
     have hne : (Y.basicOpen a : Set Y).Nonempty := by
@@ -194,59 +263,82 @@ theorem exists_dense_isFinite_toIteratedAffineLine {X Y : Scheme.{u}} (f : X ⟶
       exact ha0
     obtain ⟨x, hx⟩ := f.denseRange.exists_mem_open (Y.basicOpen a).isOpen hne
     have : x ∈ f ⁻¹ᵁ Y.basicOpen a := hx
-    rw [Scheme.preimage_basicOpen] at this
-    change x ∈ X.basicOpen (algebraMap Γ(Y, U) Γ(X, f ⁻¹ᵁ U) a) at this
-    rw [ha, Scheme.basicOpen_zero] at this
+    rw [Scheme.preimage_basicOpen, ha, Scheme.basicOpen_zero] at this
     exact this
-  obtain ⟨s, hs, d, t, H⟩ := Algebra.FiniteType.exists_finite_aeval_away Γ(Y, U) Γ(X, f ⁻¹ᵁ U)
-  -- Shrink `Y` to the principal open `V = D(s)`.
+  obtain ⟨s, hs, d, H⟩ := exists_isFinite_toIteratedAffineLine_basicOpen f hU
+  obtain ⟨ν, hfin, hν, H'⟩ := H s dvd_rfl hs
+  obtain ⟨hsurj, hdim⟩ := H' hAB
+  -- The number of coordinates is the dimension of the generic fibre.
+  rw [hr] at hdim
+  obtain rfl : d = r := by exact_mod_cast hdim.symm
   have hsY : (Y.basicOpen s : Set Y).Nonempty := by
     rw [Set.nonempty_iff_ne_empty, Ne, TopologicalSpace.Opens.coe_eq_empty, basicOpen_eq_bot_iff]
     exact hs
-  refine ⟨Y.basicOpen s, (Y.basicOpen s).isOpen.dense hsY, ?_⟩
-  have hV : IsAffineOpen (Y.basicOpen s) := hU.basicOpen s
-  have : Nonempty (Y.basicOpen s) := hsY.to_subtype
-  have : IsAffine (f ⁻¹ᵁ Y.basicOpen s) := hV.preimage f
-  have : IsAffine (Y.basicOpen s) := hV
-  -- The rings of `V` and `f ⁻¹ V` are the localizations `A_s` and `B_s`.
-  let _ : Algebra Γ(Y, Y.basicOpen s) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
-    (f.app (Y.basicOpen s)).hom.toAlgebra
-  have : IsLocalization.Away s Γ(Y, Y.basicOpen s) := hU.isLocalization_basicOpen s
-  let inst : Algebra Γ(X, f ⁻¹ᵁ U) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
-    (X.presheaf.map (homOfLE (f.preimage_mono (Y.basicOpen_le s))).op).hom.toAlgebra
-  have : IsLocalization.Away (algebraMap Γ(Y, U) Γ(X, f ⁻¹ᵁ U) s)
-      Γ(X, f ⁻¹ᵁ Y.basicOpen s) := by
-    let : Algebra Γ(X, f ⁻¹ᵁ U) Γ(X, X.basicOpen (f.app _ s)) :=
-      (X.presheaf.map (homOfLE (X.basicOpen_le _)).op).hom.toAlgebra
-    dsimp +instances [inst]
-    rw! (castMode := .all) [f.preimage_basicOpen s]
-    exact hfU.isLocalization_basicOpen (f.app _ s)
-  let _ : Algebra Γ(Y, U) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
-    (f.appLE _ _ (f.preimage_mono (Y.basicOpen_le _))).hom.toAlgebra
-  have : IsScalarTower Γ(Y, U) Γ(X, f ⁻¹ᵁ U) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
-    .of_algebraMap_eq' rfl
-  have : IsScalarTower Γ(Y, U) Γ(Y, Y.basicOpen s) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
-    .of_algebraMap_eq' <| by
-      simp only [RingHom.algebraMap_toAlgebra, ← CommRingCat.hom_comp, Scheme.Hom.app_eq_appLE,
-        Scheme.Hom.map_appLE]
-  obtain ⟨hfin, hinj⟩ := H Γ(Y, Y.basicOpen s) Γ(X, f ⁻¹ᵁ Y.basicOpen s)
-  replace hinj := hinj hAB
-  -- Transport to the global sections of the restriction `f ∣_ V`.
-  let e := arrowResLEAppIso f (Y.basicOpen s) (f ⁻¹ᵁ Y.basicOpen s) le_rfl
-  rw [← Scheme.Hom.app_eq_appLE] at e
-  obtain ⟨hfin', hinj'⟩ := finite_injective_eval₂Hom_of_arrowIso e
-    (fun i ↦ algebraMap Γ(X, f ⁻¹ᵁ U) Γ(X, f ⁻¹ᵁ Y.basicOpen s) (t i)) hfin hinj
-  set g := f.resLE (Y.basicOpen s) (f ⁻¹ᵁ Y.basicOpen s) le_rfl with hg
-  -- The number of coordinates is the dimension of the generic fibre.
-  have hd : d = r := by
-    have h := g.topologicalKrullDim_fiber_genericPoint _ hfin' hinj'
-    rw [hg, Scheme.Hom.resLE_eq_morphismRestrict,
-      topologicalKrullDim_fiber_of_isPullback (isPullback_morphismRestrict f _).flip,
-      genericPoint_eq_of_isOpenImmersion, hr] at h
-    exact_mod_cast h.symm
-  subst hd
-  refine ⟨g.toIteratedAffineLine _, g.isFinite_toIteratedAffineLine _ hfin',
-    g.surjective_toIteratedAffineLine _ hfin' hinj', ?_⟩
-  rw [Scheme.Hom.toIteratedAffineLine_proj, hg, Scheme.Hom.resLE_eq_morphismRestrict]
+  exact ⟨Y.basicOpen s, (Y.basicOpen s).isOpen.dense hsY, ν, hfin, hsurj, hν⟩
+
+/-- Blueprint `lem-zl-affine-partition`: a quasi-compact (e.g. Noetherian) scheme `X` has a finite
+partition by locally closed reduced affine subschemes.
+
+Choose a finite affine open cover `U₁, …, Uₙ` and take the `i`-th piece to be
+`Uᵢ ∖ ⋃_{j < i} Uⱼ` with its reduced closed subscheme structure inside `Uᵢ`. Every point lies in
+the piece indexed by the first `Uᵢ` containing it. -/
+theorem Scheme.exists_partition_isImmersion_isAffine_isReduced (X : Scheme.{u})
+    [CompactSpace X] :
+    ∃ (n : ℕ) (Z : Fin n → Scheme.{u}) (ι : ∀ i, Z i ⟶ X),
+      (∀ i, IsImmersion (ι i) ∧ IsAffine (Z i) ∧ IsReduced (Z i)) ∧
+        ∀ x : X, ∃! i, x ∈ Set.range (ι i) := by
+  classical
+  -- A finite affine open cover `U₁, …, Uₙ` of `X`.
+  obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover (fun U : X.affineOpens ↦ (U : Set X))
+    (fun U ↦ U.1.isOpen) (by
+      intro x _
+      have : x ∈ (⨆ i : X.affineOpens, (i : X.Opens)) := by
+        rw [iSup_affineOpens_eq_top]; trivial
+      simpa [TopologicalSpace.Opens.mem_iSup] using this)
+  let n := s.card
+  let U : Fin n → X.affineOpens := fun i ↦ (s.equivFin.symm i).1
+  have hcov (x : X) : ∃ i, x ∈ (U i : X.Opens) := by
+    obtain ⟨V, hV, hx⟩ := Set.mem_iUnion₂.mp (hs (Set.mem_univ x))
+    exact ⟨s.equivFin ⟨V, hV⟩, by simpa [U] using hx⟩
+  -- The `i`-th piece is `Uᵢ ∖ ⋃_{j < i} Uⱼ`, with its reduced structure inside `Uᵢ`.
+  let C : Fin n → Set X := fun i ↦ ⋂ j : Fin n, ⋂ (_ : j < i), ((U j : X.Opens) : Set X)ᶜ
+  let F (i : Fin n) : Spec Γ(X, (U i : X.Opens)) ⟶ X := (U i).2.fromSpec
+  let T (i : Fin n) : Set (Spec Γ(X, (U i : X.Opens))) := F i ⁻¹' C i
+  have hT (i : Fin n) : IsClosed (T i) :=
+    (isClosed_iInter fun j ↦ isClosed_iInter fun _ ↦
+      (U j).1.isOpen.isClosed_compl).preimage (F i).continuous
+  let I (i : Fin n) : Ideal Γ(X, (U i : X.Opens)) := PrimeSpectrum.vanishingIdeal (T i)
+  refine ⟨n, fun i ↦ Spec (.of (Γ(X, (U i : X.Opens)) ⧸ I i)),
+    fun i ↦ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I i))) ≫ F i, fun i ↦ ⟨?_, ?_, ?_⟩, ?_⟩
+  · infer_instance
+  · infer_instance
+  · have : _root_.IsReduced (Γ(X, (U i : X.Opens)) ⧸ I i) :=
+      (Ideal.isRadical_iff_quotient_reduced _).mp (PrimeSpectrum.isRadical_vanishingIdeal _)
+    infer_instance
+  -- The range of the `i`-th piece is `Uᵢ ∖ ⋃_{j < i} Uⱼ`.
+  have hrange (i : Fin n) : Set.range (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I i))) ≫
+      F i) = ((U i : X.Opens) : Set X) ∩ C i := by
+    rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp]
+    have : Set.range (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I i)))) = T i := by
+      change Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk (I i))) = T i
+      rw [range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective,
+        Ideal.mk_ker, PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure, (hT i).closure_eq]
+    rw [this]
+    change F i '' (F i ⁻¹' C i) = _
+    rw [Set.image_preimage_eq_inter_range, IsAffineOpen.range_fromSpec, Set.inter_comm]
+  refine fun x ↦ ?_
+  simp only [hrange]
+  obtain ⟨i₀, hi₀⟩ := hcov x
+  let i := Finset.min' {j | x ∈ (U j : X.Opens)} ⟨i₀, by simpa using hi₀⟩
+  have hi : x ∈ (U i : X.Opens) := by
+    simpa using Finset.min'_mem {j | x ∈ (U j : X.Opens)} ⟨i₀, by simpa using hi₀⟩
+  refine ⟨i, ⟨hi, ?_⟩, fun j ⟨hj, hjC⟩ ↦ ?_⟩
+  · simp only [C, Set.mem_iInter, Set.mem_compl_iff]
+    intro j hji hj
+    exact absurd (Finset.min'_le _ j (by simpa using hj)) (not_le.mpr hji)
+  · simp only [C, Set.mem_iInter, Set.mem_compl_iff] at hjC
+    refine le_antisymm ?_ (Finset.min'_le _ j (by simpa using hj))
+    by_contra h
+    exact hjC i (not_le.mp h) hi
 
 end AlgebraicGeometry
