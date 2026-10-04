@@ -8,6 +8,7 @@ module
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.RingTheory.PowerSeries.Exp
 public import WeilConjectures.EulerProductAux
+public import WeilConjectures.Mathlib.Algebra.Polynomial.Splits
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 
@@ -31,6 +32,8 @@ polynomial, so that everything follows from the single factor case
 
 ## Main results
 
+- `PowerSeries.X_mul_derivative_coe_of_coeff_zero_eq_one`: the logarithmic derivative of a split
+  polynomial `Q` with `Q (0) = 1` is `- ∑_{n ≥ 1} (∑ z⁻ⁿ) tⁿ`, summed over the roots `z` of `Q`.
 - `LinearMap.X_mul_derivative_charpolyRev`: the logarithmic derivative form
   `t * (det (1 - t F))' = - (∑_{n ≥ 1} tr (F ^ n) t ^ n) * det (1 - t F)`, together with its
   matrix counterpart `Matrix.X_mul_derivative_charpolyRev`.
@@ -103,6 +106,24 @@ private theorem coe_multiset_prod_one_sub (s : Multiset K) :
       (s.map fun l ↦ (1 - C l * X : K⟦X⟧)).prod := by
   rw [← Polynomial.coeToPowerSeries.ringHom_apply, map_multiset_prod, Multiset.map_map]
   simp
+
+/-- The logarithmic derivative of a split polynomial `Q` with `Q (0) = 1` is minus the generating
+series of the power sums of its reciprocal roots:
+`t * Q' = - (∑_{n ≥ 1} (∑_z z⁻ⁿ) tⁿ) * Q`, the inner sum running over the roots `z` of `Q`. -/
+theorem X_mul_derivative_coe_of_coeff_zero_eq_one {Q : Polynomial K} (hQ : Q.Splits)
+    (h0 : Q.coeff 0 = 1) :
+    X * derivative K (Q : K⟦X⟧) =
+      (-mk fun n ↦ if n = 0 then 0 else (Q.roots.map fun z ↦ z⁻¹ ^ n).sum) * (Q : K⟦X⟧) := by
+  have h : (Q : K⟦X⟧) = ((Q.roots.map (·⁻¹)).map fun l ↦ (1 - C l * X : K⟦X⟧)).prod := by
+    conv_lhs => rw [Polynomial.eq_prod_one_sub_inv_roots hQ h0]
+    rw [← coe_multiset_prod_one_sub, Multiset.map_map]
+    rfl
+  have hs : ∀ n, (Q.roots.map fun z ↦ z⁻¹ ^ n) = (Q.roots.map (·⁻¹)).map (· ^ n) := fun n ↦ by
+    rw [Multiset.map_map]
+    rfl
+  simp only [hs]
+  rw [h]
+  exact X_mul_derivative_multiset_prod _
 
 end PowerSeries
 
