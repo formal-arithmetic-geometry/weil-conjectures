@@ -52,9 +52,10 @@ namespace AlgebraicGeometry
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 
-/-- **The curve estimate in degree zero.** Let `C` be a smooth proper connected curve over an
-algebraically closed field `k`, and let `n ≥ 1` be prime to `char k`. Then
-`H⁰(C_ét, ℤ/n) ≅ ℤ/n`; this only uses that `C` is connected.
+omit [IsAlgClosed k] in
+/-- **The curve estimate in degree zero.** Let `C` be a smooth proper connected curve over a
+field `k`, and let `n ≥ 1` be prime to `char k`. Then `H⁰(C_ét, ℤ/n) ≅ ℤ/n`; this only uses
+that `C` is connected, so `k` need not be algebraically closed.
 (blueprint: `sk-thm-curveestimate`) -/
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_zero (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (_hn : (n : k) ≠ 0) :
