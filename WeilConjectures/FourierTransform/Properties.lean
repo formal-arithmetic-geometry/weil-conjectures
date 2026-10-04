@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.FourierTransform.Defs
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 
@@ -29,15 +30,16 @@ transport `t`-structures.
   back along `f : X ⟶ Y`, `N ↦ (K ↦ K ⊗ᴸ f^* N)`.
 - `AlgebraicGeometry.Etale.artinSchreierTwist`: tensoring with the Artin–Schreier sheaf of
   a global function, `K ↦ K ⊗ᴸ ℒ_{Ψ, f}`.
-- `AlgebraicGeometry.Etale.pairingAt`: the function `x ↦ b(x, ξ)` on the fibre of `V` over
-  a point `ξ` of `V'`.
+- `AlgebraicGeometry.Etale.pairingAt`: the function `x ↦ b(x, ξ)` on the base change
+  `V ×_S T` of `V` along a point `ξ : T ⟶ V'` of the dual.
 - `AlgebraicGeometry.Etale.pairingBaseChange`: the base change of the pairing.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_geometricStalk`: the stalk of
-  `FT_ψ(K)` at a geometric point `ξ` of `V'` is the compactly supported cohomology of
-  `K|_{V_ξ} ⊗ᴸ ℒ_{ψ(b(x, ξ))}` on the geometric fibre `V_ξ`, shifted by `r`.
+- `AlgebraicGeometry.Etale.fourierTransformPullbackIso`: the pullback of `FT_ψ(K)` along
+  `ξ : T ⟶ V'` is the compactly supported pushforward to `T` of `K|_{V_ξ} ⊗ᴸ ℒ_{ψ(b(x, ξ))}`
+  on `V_ξ = V ×_S T`, shifted by `r`; at a geometric point this computes the stalks of
+  `FT_ψ(K)`.
 - `AlgebraicGeometry.Etale.fourierTransformBaseChangeIso`: the transform commutes with base
   change along `S' ⟶ S`.
 - `AlgebraicGeometry.Etale.fourierTransformTensorIso`: the transform is linear over the
@@ -83,12 +85,13 @@ noncomputable def artinSchreierTwist (X : Scheme.{u}) [CharP Γ(X, ⊤) p]
 
 section Stalk
 
-/-- The pairing `b` pulled back to the fibre `V_ξ = V ×ₛ T` of `V` over a point
-`ξ : T ⟶ V'` of the dual, along the morphism `V_ξ ⟶ V ×ₛ V'` induced by `p₁` and `p₂ ≫ ξ`:
+/-- The pairing `b` pulled back to the fibre `V_ξ = V ×_S T` of `V` over a point
+`ξ : T ⟶ V'` of the dual, where `T` lies over `S` via `ξ ≫ π'`. It is the pullback along the
+morphism `V ×_S T ⟶ V ×_S V'` induced by `p₁` and `p₂ ≫ ξ`:
 
 ```
                  ⟨p₁, p₂ ≫ ξ⟩
-      V ×ₛ T ─────────────────▶ V ×ₛ V'
+      V ×_S T ─────────────────▶ V ×_S V'
         │                          │
       p₂│                          │p₂
         ▼                          ▼
@@ -102,36 +105,37 @@ noncomputable def pairingAt (b : Γ(pullback π π', ⊤)) {T : Scheme.{u}} (ξ 
   (pullback.lift (pullback.fst π (ξ ≫ π')) (pullback.snd π (ξ ≫ π') ≫ ξ)
     (by simp [pullback.condition])).appTop b
 
-/-- At a geometric point `ξ : Spec Ω ⟶ V'` of the dual, with `Ω` separably closed, the stalk
-of the Fourier–Deligne transform is the compactly supported cohomology of the input restricted
-to the geometric fibre `V_ξ = V ×ₛ Spec Ω`, twisted by the Artin–Schreier sheaf of the function
-`x ↦ b(x, ξ)` of `AlgebraicGeometry.Etale.pairingAt`, shifted by the relative dimension:
+/-- For a morphism `ξ : T ⟶ V'`, the pullback of the Fourier–Deligne transform along `ξ` is
+the compactly supported pushforward to `T` of the input restricted to the fibre
+`V_ξ = V ×_S T`, twisted by the Artin–Schreier sheaf of the function `x ↦ b(x, ξ)` of
+`AlgebraicGeometry.Etale.pairingAt`, shifted by the relative dimension:
 
-`FT_ψ(K)_ξ ≅ RΓ_c(V_ξ, K|_{V_ξ} ⊗ᴸ ℒ_{ψ(b(x, ξ))})[r]`,
+`ξ^* FT_ψ(K) ≅ Rp₂,!(K|_{V_ξ} ⊗ᴸ ℒ_{ψ(b(x, ξ))})[r]`,
 
-naturally in `K`. The proof is proper (compactly supported) base change
-(sketch blueprint: `sk-prop-sf-cbc`) for `Rp₂,!` along `ξ`, not smooth base change:
+naturally in `K`. Here `V_ξ` sits in the square
 
 ```
                  ⟨p₁, p₂ ≫ ξ⟩
-      V_ξ ────────────────────▶ V ×ₛ V'
+      V_ξ ────────────────────▶ V ×_S V'
         │                          │
       p₂│                          │p₂
         ▼                          ▼
-      Spec Ω ────────ξ─────────▶  V'
+        T ───────────ξ──────────▶  V'
 ```
 
-followed by the projection formula for the pullback of the kernel to `V_ξ`.
+When `T = Spec Ω` with `Ω` separably closed, so that `ξ` is a geometric point of `V'`, this
+says that the stalk of `FT_ψ(K)` at `ξ` is `RΓ_c(V_ξ, K|_{V_ξ} ⊗ᴸ ℒ_{ψ(b(x, ξ))})[r]`.
 (sketch blueprint: `sk-prop-stalk`) -/
-theorem nonempty_iso_fourierTransform_geometricStalk [CharP Γ(pullback π π', ⊤) p]
-    [HasCompactification (pullback.snd π π')] (Ψ : AddChar (ZMod p) Λ)
-    (b : Γ(pullback π π', ⊤)) (r : ℤ) {Ω : Type u} [Field Ω] [IsSepClosed Ω]
-    (ξ : Spec (.of Ω) ⟶ V') [CharP Γ(pullback π (ξ ≫ π'), ⊤) p]
-    [HasCompactification (pullback.snd π (ξ ≫ π'))] :
-    Nonempty (fourierTransform Λ π π' Ψ b r ⋙ D((ξ)^*[ModuleCat.{u + 1} Λ]) ≅
+noncomputable def fourierTransformPullbackIso [CharP Γ(pullback π π', ⊤) p]
+    [HasCompactification π] (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ)
+    {T : Scheme.{u}} (ξ : T ⟶ V') [CharP Γ(pullback π (ξ ≫ π'), ⊤) p] :
+    fourierTransform Λ π π' Ψ b r ⋙ D((ξ)^*[ModuleCat.{u + 1} Λ]) ≅
       D((pullback.fst π (ξ ≫ π'))^*[ModuleCat.{u + 1} Λ]) ⋙
         artinSchreierTwist Λ (pullback π (ξ ≫ π')) Ψ (pairingAt π π' b ξ) ⋙
-          R(pullback.snd π (ξ ≫ π'))_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ r) :=
+          R(pullback.snd π (ξ ≫ π'))_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ r :=
+  -- Proof sketch: compactly supported base change (sketch blueprint: `sk-prop-sf-cbc`) for
+  -- `Rp₂,!` along `ξ` in the square above, followed by the projection formula for the
+  -- pullback of the kernel to `V_ξ`. No smooth base change is needed.
   sorry
 
 end Stalk
