@@ -16,7 +16,9 @@ component lies in a single connected component. Hence it has finitely many conne
 components, and each of them is open, being the complement of the finitely many other ones.
 
 Likewise a point lying in a unique irreducible component has a preirreducible open
-neighbourhood (`TopologicalSpace.NoetherianSpace.exists_isOpen_isPreirreducible`).
+neighbourhood (`TopologicalSpace.NoetherianSpace.exists_isOpen_isPreirreducible`), and if the
+irreducible components are pairwise disjoint, they are the connected components
+(`TopologicalSpace.NoetherianSpace.connectedComponent_eq_irreducibleComponent`).
 -/
 
 @[expose] public section
@@ -24,6 +26,14 @@ neighbourhood (`TopologicalSpace.NoetherianSpace.exists_isOpen_isPreirreducible`
 open Topology
 
 variable {α : Type*} [TopologicalSpace α]
+
+/-- A homeomorphism of `X` permutes the irreducible components of `X`. -/
+theorem Homeomorph.image_mem_irreducibleComponents (φ : α ≃ₜ α) {Z : Set α}
+    (hZ : Z ∈ irreducibleComponents α) : φ '' Z ∈ irreducibleComponents α := by
+  rw [← φ.preimage_symm]
+  refine preimage_mem_irreducibleComponents hZ φ.symm.isOpenEmbedding ?_
+  obtain ⟨z, hz⟩ := hZ.1.nonempty
+  exact ⟨z, hz, φ.symm.surjective z⟩
 
 namespace TopologicalSpace.NoetherianSpace
 
@@ -66,5 +76,30 @@ theorem exists_isOpen_isPreirreducible (x : α)
       mem_irreducibleComponent
     rw [← Set.mem_singleton_iff.mp h]
     exact mem_irreducibleComponent
+/-- In a noetherian space with pairwise disjoint irreducible components, the connected component
+of a point is its irreducible component. -/
+theorem connectedComponent_eq_irreducibleComponent
+    (h : (irreducibleComponents α).Pairwise Disjoint) (x : α) :
+    connectedComponent x = irreducibleComponent x := by
+  set Z := irreducibleComponent x
+  have hZ := irreducibleComponent_mem_irreducibleComponents x
+  have hcompl : Zᶜ = ⋃ W ∈ irreducibleComponents α \ {Z}, W := by
+    ext y
+    simp only [Set.mem_compl_iff, Set.mem_iUnion, Set.mem_sdiff, Set.mem_singleton_iff,
+      exists_prop]
+    refine ⟨fun hy ↦ ⟨_, ⟨irreducibleComponent_mem_irreducibleComponents y, ?_⟩,
+      mem_irreducibleComponent⟩, ?_⟩
+    · rintro hyZ
+      exact hy (hyZ ▸ mem_irreducibleComponent)
+    · rintro ⟨W, ⟨hW, hWZ⟩, hyW⟩ hyZ
+      exact Set.disjoint_left.1 (h hW hZ hWZ) hyW hyZ
+  have hclopen : IsClopen Z := by
+    refine ⟨isClosed_irreducibleComponent, ?_⟩
+    rw [← isClosed_compl_iff, hcompl]
+    exact NoetherianSpace.finite_irreducibleComponents.sdiff.isClosed_biUnion
+      fun W hW ↦ isClosed_of_mem_irreducibleComponents W hW.1
+  exact (hclopen.connectedComponent_subset mem_irreducibleComponent).antisymm
+    (isIrreducible_irreducibleComponent.isPreirreducible.isPreconnected.subset_connectedComponent
+      mem_irreducibleComponent)
 
 end TopologicalSpace.NoetherianSpace
