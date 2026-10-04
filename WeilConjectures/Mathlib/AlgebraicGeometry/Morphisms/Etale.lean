@@ -11,6 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.Unramified.LocalStructure
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.LocalIso
+public import WeilConjectures.Mathlib.RingTheory.Etale.QuasiFinite
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 
 /-!
@@ -194,6 +197,61 @@ theorem Etale.exists_pullback_hom_of_isClosedImmersion {X Z W : Scheme.{u}} (i :
     exact hpb.isoPullback_hom_snd.symm
   · rw [Category.assoc, Iso.hom_inv_id_assoc, IsOpenImmersion.lift_fac]
 
+/-- An étale morphism `p : V ⟶ S` into an integral normal scheme `S` with separably closed
+function field is a local isomorphism: every point of `V` has an open neighbourhood mapping
+isomorphically onto an open of `S`. Normality of `S` is the hypothesis `hS` that every stalk of
+`S` is integrally closed.
+
+Over affine charts `Spec A ⊆ S` and `Spec B ⊆ V` this is
+`Algebra.Etale.exists_algHom_localizationAway_comap_eq`: every point of `Spec B` lies on a
+section of `Spec B → Spec A` over a basic open of `Spec A`, and a section of an étale morphism
+over an open is an open immersion (`AlgebraicGeometry.FormallyUnramified.isOpenImmersion_of_comp`).
+-/
+theorem Etale.isLocalIso_of_isSepClosed_functionField {V S : Scheme.{u}} [IsIntegral S]
+    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
+    [IsSepClosed S.functionField] (p : V ⟶ S) [Etale p] : IsLocalIso p :=
+  sorry
+
+/-- The stalks of an integral normal scheme with separably closed function field are henselian.
+-/
+theorem Scheme.henselianLocalRing_stalk_of_isSepClosed_functionField {S : Scheme.{u}}
+    [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
+    [IsSepClosed S.functionField] (x : S) : HenselianLocalRing (S.presheaf.stalk x) :=
+  have := hS x
+  HenselianLocalRing.of_isSepClosed_fractionRing S.functionField
+
+/-- The residue fields of an integral normal scheme with separably closed function field are
+separably closed. -/
+theorem Scheme.isSepClosed_residueField_of_isSepClosed_functionField {S : Scheme.{u}}
+    [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
+    [IsSepClosed S.functionField] (x : S) : IsSepClosed (S.residueField x) :=
+  have := hS x
+  IsLocalRing.isSepClosed_residueField_of_isSepClosed_fractionRing S.functionField
+
+/-- **Étale covers of a normal scheme with separably closed function field**
+(blueprint `sbc-lem-etale-over-normal`). Let `S` be an integral normal scheme — normality being
+the hypothesis `hS` that every stalk of `S` is integrally closed — with separably closed function
+field. Then
+
+1. every separated étale morphism `p : V ⟶ S` is a disjoint union of open immersions: there are
+  nonempty, pairwise disjoint opens `U i` covering `V` with every `(U i).ι ≫ p` an open
+  immersion;
+2. every local ring of `S` is strictly henselian: it is henselian with separably closed residue
+  field. -/
+@[stacks 09Z9]
+theorem Etale.exists_opens_isOpenImmersion_and_henselianLocalRing_stalk {S : Scheme.{u}}
+    [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
+    [IsSepClosed S.functionField] :
+    (∀ (V : Scheme.{u}) (p : V ⟶ S) [IsSeparated p] [Etale p],
+      ∃ (ι : Type u) (U : ι → V.Opens), (∀ i, (U i : Set V).Nonempty) ∧
+        (∀ i j, i ≠ j → Disjoint (U i) (U j)) ∧ (⨆ i, U i) = ⊤ ∧
+        ∀ i, IsOpenImmersion ((U i).ι ≫ p)) ∧
+      ∀ x : S, HenselianLocalRing (S.presheaf.stalk x) ∧ IsSepClosed (S.residueField x) := by
+  refine ⟨fun V p _ _ ↦ ?_, fun x ↦ ⟨Scheme.henselianLocalRing_stalk_of_isSepClosed_functionField
+    hS x, Scheme.isSepClosed_residueField_of_isSepClosed_functionField hS x⟩⟩
+  have := Etale.isLocalIso_of_isSepClosed_functionField hS p
+  exact IsLocalIso.exists_opens_isOpenImmersion p
+
 /-- **Étale covers of a normal scheme with separably closed function field.** Let `S` be an
 integral normal scheme — normality being spelled out as the hypothesis `hS` that every stalk of
 `S` is integrally closed — whose function field `S.functionField` is separably closed, and let
@@ -205,8 +263,10 @@ theorem Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     [IsSepClosed S.functionField] (p : V ⟶ S) [IsSeparated p] [Etale p] :
     ∃ (ι : Type u) (U : ι → V.Opens), (∀ i j, i ≠ j → Disjoint (U i) (U j)) ∧
-      (⨆ i, U i) = ⊤ ∧ ∀ i, IsOpenImmersion ((U i).ι ≫ p) :=
-  sorry
+      (⨆ i, U i) = ⊤ ∧ ∀ i, IsOpenImmersion ((U i).ι ≫ p) := by
+  obtain ⟨ι, U, -, hU⟩ :=
+    (Etale.exists_opens_isOpenImmersion_and_henselianLocalRing_stalk hS).1 V p
+  exact ⟨ι, U, hU⟩
 
 /-- The quasi-compact refinement of
 `AlgebraicGeometry.Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField`: if `V` is
@@ -217,7 +277,10 @@ theorem Etale.exists_finite_opens_isOpenImmersion_of_isSepClosed_functionField
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     [IsSepClosed S.functionField] (p : V ⟶ S) [IsSeparated p] [Etale p] [CompactSpace V] :
     ∃ (ι : Type u) (_ : Finite ι) (U : ι → V.Opens), (∀ i j, i ≠ j → Disjoint (U i) (U j)) ∧
-      (⨆ i, U i) = ⊤ ∧ ∀ i, IsOpenImmersion ((U i).ι ≫ p) :=
+      (⨆ i, U i) = ⊤ ∧ ∀ i, IsOpenImmersion ((U i).ι ≫ p) := by
+  obtain ⟨ι, U, hne, hdisj, hcov, hU⟩ :=
+    (Etale.exists_opens_isOpenImmersion_and_henselianLocalRing_stalk hS).1 V p
+  refine ⟨ι, ?_, U, hdisj, hcov, hU⟩
   sorry
 
 end AlgebraicGeometry

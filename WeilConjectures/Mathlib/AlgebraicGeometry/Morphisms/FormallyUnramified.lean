@@ -108,6 +108,13 @@ theorem eqLocus_ι_comp_eq : (eqLocus p a b h).ι ≫ a = (eqLocus p a b h).ι �
     pullback.lift_fst, pullback.lift_snd] at h₁ h₂
   rw [← h₁, ← h₂]
 
+/-- If `f : X ⟶ Y` is formally unramified and locally of finite type, then every morphism
+`σ : T ⟶ X` whose composite with `f` is an open immersion is itself an open immersion. In
+particular a section of `f` over an open of `Y` is an open immersion. -/
+theorem isOpenImmersion_of_comp {T X Y : Scheme.{u}} (f : X ⟶ Y) [FormallyUnramified f]
+    [LocallyOfFiniteType f] (σ : T ⟶ X) [IsOpenImmersion (σ ≫ f)] : IsOpenImmersion σ :=
+  sorry
+
 end FormallyUnramified
 
 end AlgebraicGeometry
