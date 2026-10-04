@@ -220,7 +220,8 @@ noncomputable def leftDerivedUpperStarIsoMapDerivedCategory :
 
 /-- The composition isomorphism `L(g₁ ≫ g₂)^* ≅ Lg₂^* ∘ Lg₁^*` of derived pullbacks,
 obtained from the underived composition isomorphism `Etale.upperStarComp` and the
-compatibility of left derivation with `mapDerivedCategory` for exact functors.
+compatibility of left derivation with `mapDerivedCategory` for exact functors. As for
+`Etale.upperStarComp`, the composite may be given as any `g₁₂` with `g₁₂ = g₁ ≫ g₂`.
 
 ```
                  L(g₁ ≫ g₂)^*
@@ -232,9 +233,10 @@ D(R_ét) -------------------------------> D(T_ét)
 ```
 -/
 noncomputable def leftDerivedUpperStarComp {T S R : Scheme.{u}}
-    (g₁ : T ⟶ S) (g₂ : S ⟶ R) :
-    L((g₁ ≫ g₂)^*[A]) ≅ L((g₂)^*[A]) ⋙ L((g₁)^*[A]) :=
-  Functor.leftDerivedFunctorNatIso _ (Etale.upperStarComp A g₁ g₂) ≪≫
+    (g₁ : T ⟶ S) (g₂ : S ⟶ R) (g₁₂ : T ⟶ R := g₁ ≫ g₂)
+    (hg₁₂ : g₁₂ = g₁ ≫ g₂ := by cat_disch) :
+    L((g₁₂)^*[A]) ≅ L((g₂)^*[A]) ⋙ L((g₁)^*[A]) :=
+  Functor.leftDerivedFunctorNatIso _ (Etale.upperStarComp A g₁ g₂ g₁₂ hg₁₂) ≪≫
     Functor.leftDerivedFunctorCompIso (g₂)^*[A] (g₁)^*[A]
 
 /-- The exactness comparison `H^n ∘ g^* ≅ g^* ∘ H^n`: since the underived pullback `g^*`
