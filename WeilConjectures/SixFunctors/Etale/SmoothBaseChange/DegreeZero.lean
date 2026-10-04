@@ -7,6 +7,7 @@ module
 
 public import Mathlib
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallyBijective
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
 /-!
@@ -23,8 +24,30 @@ with geometrically connected fibres, and then both sides evaluate to `F(V ×_S T
 such a morphism the global sections of an inverse image agree with the global sections
 downstairs [Stacks 0A3H].
 
+The argument is carried out for the underived base-change map
+`AlgebraicGeometry.Etale.upperStarLowerStarBaseChange`, the adjoint of
+`g_* F ⟶ g_* e_* e^* F ≅ p_* h_* e^* F`, whose sections can be computed. It is transferred to
+the degree-zero homology of the derived base-change map of
+`WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs` by
+`AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_zero`.
+
+## Main definitions
+
+- `AlgebraicGeometry.Etale.upperStarLowerStarBaseChange`: the base-change map
+  `p⁻¹ g_* F ⟶ h_* e⁻¹ F`.
+- `AlgebraicGeometry.Etale.upperStarSectionsMap`: the map `G(V) ⟶ (p^* G)(W)` attached to an
+  étale chart `W ⟶ V ×_S X`.
+
 ## Main statements
 
+- `AlgebraicGeometry.Etale.isIso_upperStarSectionsMap`: the map `G(V) ⟶ (p^* G)(W)` is
+  bijective when `W ⟶ V` is flat, of finite presentation, quasi-compact with geometrically
+  connected fibres [Stacks 0A3H].
+- `AlgebraicGeometry.Etale.isIso_upperStarLowerStarBaseChange`: the underived base-change map
+  is an isomorphism for `p` flat, locally of finite presentation with geometrically reduced
+  fibres (blueprint `sbc-lem-degree-zero-flat-base-change`).
+- `AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_zero`: in degree zero the
+  derived base-change map is the underived one.
 - `AlgebraicGeometry.Etale.baseChangeProperty_zero`: degree-zero base change for a flat,
   locally finitely presented morphism with geometrically reduced fibres.
 - `AlgebraicGeometry.Etale.baseChangeProperty_zero_of_smooth`: the smooth case, a corollary
@@ -36,15 +59,276 @@ downstairs [Stacks 0A3H].
 - Stacks Project, Lemma 59.87.2, <https://stacks.math.columbia.edu/tag/0EYS>
 - Stacks Project, Lemma 59.87.1, <https://stacks.math.columbia.edu/tag/0EZX>
 - Stacks Project, More on Morphisms, Lemma 37.46.3, <https://stacks.math.columbia.edu/tag/0EY5>
+- Stacks Project, Tag `0A3H`, <https://stacks.math.columbia.edu/tag/0A3H>
 -/
 
 @[expose] public section
 
-universe u
+universe u' u
+
+open CategoryTheory Limits Opposite
+
+open scoped AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry
 
-variable (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (p : X ⟶ S)
+open Scheme
+
+section BaseChangeMap
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
+
+/-- The degree-zero base-change map `p⁻¹ g_* F ⟶ h_* e⁻¹ F` of a commutative square
+
+```
+Y --e--> T
+|        |
+h        g
+v        v
+X --p--> S
+```
+
+of schemes, for a sheaf `F` on `T_ét`: the adjoint, under `p^* ⊣ p_*`, of the morphism
+`g_* F ⟶ g_* e_* e^* F ≅ p_* h_* e^* F` obtained by applying `g_*` to the unit of
+`e^* ⊣ e_*`. -/
+noncomputable def Etale.upperStarLowerStarBaseChange (sq : CommSq e h g p)
+    (F : Sheaf T.smallEtaleTopology A) :
+    (p)^*[A].obj ((g)_*[A].obj F) ⟶ (h)_*[A].obj ((e)^*[A].obj F) :=
+  ((Etale.upperStarLowerStarAdjunction A p).homEquiv _ _).symm
+    ((g)_*[A].map ((Etale.upperStarLowerStarAdjunction A e).unit.app F) ≫
+      (Etale.lowerStarComp A e g (h ≫ p) sq.w.symm).hom.app _ ≫
+      (Etale.lowerStarComp A h p).inv.app _)
+
+variable (p) in
+/-- For a sheaf `G` on `S_ét`, an étale `S`-scheme `V`, an étale `X`-scheme `W` and a morphism
+`φ : W ⟶ V ×_S X` of étale `X`-schemes, the map `G(V) ⟶ (p^* G)(W)`: the unit of
+`p^* ⊣ p_*` at `V`, landing in `(p_* p^* G)(V) = (p^* G)(V ×_S X)`, followed by the restriction
+along `φ`.
+
+When `W ⟶ V` is flat, of finite presentation, quasi-compact and has geometrically connected
+fibres, this map is bijective, see `AlgebraicGeometry.Etale.isIso_upperStarSectionsMap`. -/
+noncomputable def Etale.upperStarSectionsMap (G : Sheaf S.smallEtaleTopology A) {V : S.Etale}
+    {W : X.Etale} (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V) :
+    G.obj.obj (op V) ⟶ ((p)^*[A].obj G).obj.obj (op W) :=
+  ((Etale.upperStarLowerStarAdjunction A p).unit.app G).hom.app (op V) ≫
+    ((p)^*[A].obj G).obj.map φ.op
+
+/-- The base-change map is compatible with the maps `Etale.upperStarSectionsMap` on both sides
+of the square: for `φ : W ⟶ V ×_S X` and the induced morphism
+`φ' : W ×_X Y ⟶ (V ×_S T) ×_T Y` of étale `Y`-schemes, the composite
+`(g_* F)(V) ⟶ (p^* g_* F)(W) ⟶ (h_* e^* F)(W)` is the map
+`F(V ×_S T) ⟶ (e^* F)(W ×_X Y)` attached to `φ'`. The morphism `φ'` is pinned down by its
+first component `hφ'`. This is the computation underlying Step 2 of the blueprint proof of
+`sk-prop-deg0`. -/
+lemma Etale.upperStarSectionsMap_comp_upperStarLowerStarBaseChange (sq : CommSq e h g p)
+    (F : Sheaf T.smallEtaleTopology A) {V : S.Etale} {W : X.Etale}
+    (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V)
+    (φ' : (MorphismProperty.Over.pullback @Etale ⊤ h).obj W ⟶
+      (MorphismProperty.Over.pullback @Etale ⊤ e).obj
+        ((MorphismProperty.Over.pullback @Etale ⊤ g).obj V))
+    (hφ' : φ'.left ≫ pullback.fst _ e ≫ pullback.fst V.hom g =
+      pullback.fst W.hom h ≫ φ.left ≫ pullback.fst V.hom p) :
+    Etale.upperStarSectionsMap A p ((g)_*[A].obj F) φ ≫
+        (Etale.upperStarLowerStarBaseChange A sq F).hom.app (op W) =
+      Etale.upperStarSectionsMap A e F φ' := by
+  have key := (Etale.upperStarLowerStarBaseChange A sq F).hom.naturality φ.op
+  simp only [Etale.upperStarSectionsMap, Category.assoc]
+  rw [key, ← Category.assoc]
+  have h2 : (Etale.upperStarLowerStarAdjunction A p).unit.app ((g)_*[A].obj F) ≫
+      (p)_*[A].map (Etale.upperStarLowerStarBaseChange A sq F) =
+      (g)_*[A].map ((Etale.upperStarLowerStarAdjunction A e).unit.app F) ≫
+        (Etale.lowerStarComp A e g (h ≫ p) sq.w.symm).hom.app _ ≫
+        (Etale.lowerStarComp A h p).inv.app _ := by
+    have := (Etale.upperStarLowerStarAdjunction A p).homEquiv_unit _ _
+      (Etale.upperStarLowerStarBaseChange A sq F)
+    rw [← this, Etale.upperStarLowerStarBaseChange, Equiv.apply_symm_apply]
+  have h3 := congr_arg (fun f ↦ f.hom.app (op V)) h2
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app] at h3
+  erw [h3]
+  simp only [Category.assoc, Etale.lowerStarComp]
+  rw [Functor.sheafPushforwardContinuousComp'_hom_app_hom_app,
+    Functor.sheafPushforwardContinuousComp'_inv_app_hom_app, Etale.lowerStar_map_hom_app,
+    Etale.lowerStar_obj_val_map]
+  simp only [← Functor.map_comp, ← op_comp]
+  congr 2
+  apply Quiver.Hom.unop_inj
+  dsimp only [Quiver.Hom.unop_op]
+  ext : 1
+  have hw := MorphismProperty.Over.w φ'
+  simp only [MorphismProperty.Over.pullback_obj_hom] at hw hφ' ⊢
+  apply pullback.hom_ext
+  · apply pullback.hom_ext
+    · simp only [Category.assoc]
+      rw [hφ']
+      simp only [Functor.id_obj, Functor.const_obj_obj, Iso.symm_hom, Iso.symm_inv,
+        MorphismProperty.Comma.comp_hom, Comma.comp_left, MorphismProperty.Over.pullback_map_left,
+        MorphismProperty.Over.pullbackComp_inv_app_left, pullback.map_id, Category.comp_id,
+        MorphismProperty.Over.pullbackComp_hom_app_left, Category.assoc]
+      erw [pullbackLeftPullbackSndIso_inv_fst]
+      simp only [limit.lift_π, PullbackCone.mk_π_app, Category.comp_id,
+        pullbackLeftPullbackSndIso_hom_fst]
+      erw [pullback.lift_fst_assoc]
+      rw [Category.assoc]
+    · simp only [Category.assoc]
+      simp only [Functor.id_obj, Functor.const_obj_obj, Iso.symm_hom, Iso.symm_inv,
+        MorphismProperty.Comma.comp_hom, Comma.comp_left, MorphismProperty.Over.pullback_map_left,
+        MorphismProperty.Over.pullbackComp_inv_app_left, pullback.map_id, Category.comp_id,
+        MorphismProperty.Over.pullbackComp_hom_app_left, Category.assoc]
+      erw [pullbackLeftPullbackSndIso_inv_fst_snd]
+      simp only [limit.lift_π_assoc, PullbackCone.mk_π_app, Category.comp_id]
+      erw [pullbackLeftPullbackSndIso_hom_snd_assoc, pullback.lift_snd_assoc, pullback.condition]
+      rw [reassoc_of% hw]
+  · simp only [Category.assoc]
+    simp only [Functor.id_obj, Functor.const_obj_obj, Iso.symm_hom, Iso.symm_inv,
+      MorphismProperty.Comma.comp_hom, Comma.comp_left, MorphismProperty.Over.pullback_map_left,
+      MorphismProperty.Over.pullbackComp_inv_app_left, pullback.map_id, Category.comp_id,
+      MorphismProperty.Over.pullbackComp_hom_app_left, Category.assoc]
+    erw [pullbackLeftPullbackSndIso_inv_snd_snd]
+    simp only [pullback.map, limit.lift_π, PullbackCone.mk_π_app, Category.comp_id]
+    erw [pullbackLeftPullbackSndIso_hom_snd, pullback.lift_snd]
+    rw [hw]
+
+/-- Let `φ : W ⟶ V ×_S X` be a morphism of étale `X`-schemes, so that `W ⟶ X ⟶ S` factors
+through `q : W ⟶ V`, and let `c : W ×_X Y ⟶ V ×_S T` be the induced morphism. If the square
+`(e, h, g, p)` is Cartesian, then `c` is the base change of `q` along `V ×_S T ⟶ V`. -/
+lemma Etale.isPullback_pullbackFst_of_hom (sq : IsPullback e h g p) {V : S.Etale} {W : X.Etale}
+    (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V)
+    (c : pullback W.hom h ⟶ pullback V.hom g)
+    (hc₁ : c ≫ pullback.fst V.hom g = pullback.fst W.hom h ≫ φ.left ≫ pullback.fst V.hom p)
+    (hc₂ : c ≫ pullback.snd V.hom g = pullback.snd W.hom h ≫ e) :
+    IsPullback c (pullback.fst W.hom h) (pullback.fst V.hom g)
+      (φ.left ≫ pullback.fst V.hom p) := by
+  have hφ : φ.left ≫ pullback.snd V.hom p = W.hom := MorphismProperty.Over.w φ
+  refine IsPullback.of_right ?_ (by rw [hc₁])
+    (IsPullback.of_hasPullback V.hom g).flip
+  rw [hc₂, Category.assoc, pullback.condition, reassoc_of% hφ]
+  exact (IsPullback.of_hasPullback W.hom h).flip.paste_horiz sq
+
+end BaseChangeMap
+
+variable (Λ : Type (u + 1)) [CommRing Λ]
+
+section DegreeZero
+
+variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
+
+variable (p) in
+/-- Let `φ : W ⟶ V ×_S X` be a morphism of étale `X`-schemes such that the induced morphism
+`q : W ⟶ V` is flat, locally of finite presentation, quasi-compact and has geometrically
+connected fibres. Then for every sheaf `G` of `Λ`-modules on `S_ét` the map
+`G(V) ⟶ (p^* G)(W)` of `AlgebraicGeometry.Etale.upperStarSectionsMap` is bijective.
+
+Writing `j : W ⟶ X` and `r : V ⟶ S` for the structure morphisms, `j ≫ p = q ≫ r` and `r` is
+étale, so `(p^* G)(W) = Γ(W, q^* (G|_V))`; and for a flat quasi-compact `q` with geometrically
+connected fibres the global sections of an inverse image agree with the global sections
+downstairs [Stacks 0A3H]: a section of `q^* G'` is constant on the connected geometric fibres,
+hence descends along the fpqc covering `q`. This is Step 2 of the blueprint proof of
+`sk-prop-deg0`. -/
+@[stacks 0A3H]
+theorem Etale.isIso_upperStarSectionsMap (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    {V : S.Etale} {W : X.Etale} (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V)
+    [Flat (φ.left ≫ pullback.fst V.hom p)]
+    [LocallyOfFinitePresentation (φ.left ≫ pullback.fst V.hom p)]
+    [QuasiCompact (φ.left ≫ pullback.fst V.hom p)]
+    [GeometricallyConnected (φ.left ≫ pullback.fst V.hom p)] :
+    IsIso (Etale.upperStarSectionsMap _ p G φ) :=
+  sorry
+
+/-- Blueprint `sbc-lem-degree-zero-flat-base-change`: degree-zero flat base change.
+
+For a Cartesian square
+
+```
+Y --e--> T
+|        |
+h        g
+v        v
+X --p--> S
+```
+
+with `p` flat, locally of finite presentation and with geometrically reduced fibres, the
+degree-zero base-change map `p⁻¹ g_* F ⟶ h_* e⁻¹ F` of
+`AlgebraicGeometry.Etale.upperStarLowerStarBaseChange` is an isomorphism for every sheaf `F` of
+`Λ`-modules on `T_ét`; no hypothesis on `g` is needed.
+
+Every étale `X`-scheme `W₀` is covered, by `AlgebraicGeometry.exists_etaleCover_factorization`
+applied to `W₀ ⟶ S`, by charts `W` for which `W ⟶ S` factors as `W ⟶ V ⟶ S` with `V ⟶ S` étale
+and `W ⟶ V` flat, of finite presentation, affine, with geometrically connected fibres. On such
+a chart both sides have sections `F(V ×_S T)`, by
+`AlgebraicGeometry.Etale.isIso_upperStarSectionsMap` applied to `W ⟶ V` and to its base change
+`W ×_X Y ⟶ V ×_S T`, compatibly with the base-change map by
+`AlgebraicGeometry.Etale.upperStarSectionsMap_comp_upperStarLowerStarBaseChange`. Since the
+charts generate a covering sieve of every object, the base-change map is an isomorphism by
+`CategoryTheory.Sheaf.isIso_of_isIso_app_of_generate_mem`. -/
+@[stacks 0EYS]
+theorem Etale.isIso_upperStarLowerStarBaseChange [Flat p] [LocallyOfFinitePresentation p]
+    [GeometricallyReduced p] (sq : IsPullback e h g p)
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsIso (Etale.upperStarLowerStarBaseChange _ sq.toCommSq F) := by
+  refine Sheaf.isIso_of_isIso_app_of_generate_mem _ (forget (ModuleCat.{u + 1} Λ)) _ fun W₀ ↦ ?_
+  have : Etale W₀.hom := W₀.prop
+  have : GeometricallyReduced (W₀.hom ≫ p) := GeometricallyReduced.comp_of_etale _ _
+  obtain ⟨ι, U, a, V, q, r, ha, hcov, hr, hq₁, hq₂, hq₃, hq₄, -, hfac⟩ :=
+    exists_etaleCover_factorization (W₀.hom ≫ p)
+  let W (i : ι) : X.Etale := Scheme.Etale.mk (a i ≫ W₀.hom)
+  let ι' (i : ι) : W i ⟶ W₀ := MorphismProperty.Over.homMk (a i)
+  refine ⟨Presieve.ofArrows W ι', (ofArrows_mem_smallEtaleTopology_iff ι').2 ?_, ?_⟩
+  · refine Set.eq_univ_iff_forall.2 fun x ↦ ?_
+    obtain ⟨i, y, hy⟩ := hcov x
+    exact Set.mem_iUnion.2 ⟨i, y, hy⟩
+  · rintro _ _ ⟨i⟩
+    let Vi : S.Etale := Scheme.Etale.mk (r i)
+    let φ : W i ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj Vi :=
+      MorphismProperty.Over.homMk (pullback.lift (q i) (a i ≫ W₀.hom)
+        (by rw [Category.assoc]; exact hfac i)) (by simp [W])
+    have hq : φ.left ≫ pullback.fst Vi.hom p = q i := by simp [φ]
+    have : Flat (φ.left ≫ pullback.fst Vi.hom p) := hq ▸ hq₁ i
+    have : LocallyOfFinitePresentation (φ.left ≫ pullback.fst Vi.hom p) := hq ▸ hq₂ i
+    have : QuasiCompact (φ.left ≫ pullback.fst Vi.hom p) := hq ▸ inferInstance
+    have : GeometricallyConnected (φ.left ≫ pullback.fst Vi.hom p) := hq ▸ hq₄ i
+    let c : pullback (W i).hom h ⟶ pullback Vi.hom g :=
+      pullback.lift (pullback.fst (W i).hom h ≫ φ.left ≫ pullback.fst Vi.hom p)
+        (pullback.snd (W i).hom h ≫ e) (by
+          have hφ : φ.left ≫ pullback.snd Vi.hom p = (W i).hom := MorphismProperty.Over.w φ
+          simp only [Category.assoc]
+          rw [pullback.condition, reassoc_of% hφ, pullback.condition_assoc, sq.w])
+    have hc := Etale.isPullback_pullbackFst_of_hom sq φ c (by simp [c]) (by simp [c])
+    let φ' : (MorphismProperty.Over.pullback @Etale ⊤ h).obj (W i) ⟶
+        (MorphismProperty.Over.pullback @Etale ⊤ e).obj
+          ((MorphismProperty.Over.pullback @Etale ⊤ g).obj Vi) :=
+      MorphismProperty.Over.homMk (pullback.lift c (pullback.snd (W i).hom h) (by simp [c]))
+        (by simp)
+    have hφ' : φ'.left ≫ pullback.fst _ e = c := by simp [φ']
+    have : Flat (φ'.left ≫ pullback.fst _ e) :=
+      hφ' ▸ MorphismProperty.of_isPullback hc.flip inferInstance
+    have : LocallyOfFinitePresentation (φ'.left ≫ pullback.fst _ e) :=
+      hφ' ▸ MorphismProperty.of_isPullback hc.flip inferInstance
+    have : QuasiCompact (φ'.left ≫ pullback.fst _ e) :=
+      hφ' ▸ MorphismProperty.of_isPullback hc.flip inferInstance
+    have : GeometricallyConnected (φ'.left ≫ pullback.fst _ e) :=
+      hφ' ▸ MorphismProperty.of_isPullback hc.flip inferInstance
+    have h₁ := Etale.isIso_upperStarSectionsMap Λ p ((g)_*[_].obj F) φ
+    have h₂ := Etale.isIso_upperStarSectionsMap Λ e F φ'
+    rw [← Etale.upperStarSectionsMap_comp_upperStarLowerStarBaseChange _ sq.toCommSq F φ φ'
+      (by rw [reassoc_of% hφ']; simp [c])] at h₂
+    exact IsIso.of_isIso_comp_left (Etale.upperStarSectionsMap _ p ((g)_*[_].obj F) φ) _
+
+/-- In degree zero the base-change map `AlgebraicGeometry.Etale.baseChangeHomologyMap` of the
+derived base-change morphism is, up to isomorphism of arrows, the underived base-change map
+`AlgebraicGeometry.Etale.upperStarLowerStarBaseChange`: the degree-zero homology of
+`p^*(R g_* F[0])` is `p^* g_* F` and that of `R h_*(e^*(F[0]))` is `h_* e^* F`, the pullbacks
+being exact and `g_*`, `h_*` left exact, and under these identifications the units and counits
+of the derived adjunctions restrict in degree zero to those of the underived adjunctions. -/
+theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_zero (sq : IsPullback e h g p)
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Nonempty (Arrow.mk (Etale.baseChangeHomologyMap Λ sq 0 F) ≅
+      Arrow.mk (Etale.upperStarLowerStarBaseChange _ sq.toCommSq F)) :=
+  sorry
+
+end DegreeZero
+
+variable {X S : Scheme.{u}} (p : X ⟶ S)
 
 /-- Blueprint `sk-prop-deg0`: Degree-zero flat base change.
 
@@ -61,12 +345,17 @@ X --p--> S
 with `g` quasi-compact quasi-separated and `p` flat, locally of finite presentation and with
 geometrically reduced fibres, the degree-zero base-change map `p⁻¹ g_* F ⟶ h_* e⁻¹ F` is an
 isomorphism for *every* sheaf `F` of `Λ`-modules on `T_ét`: no torsion hypothesis is needed in
-degree zero. -/
+degree zero. This is `AlgebraicGeometry.Etale.isIso_upperStarLowerStarBaseChange`, transferred
+to the derived base-change map by
+`AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_zero`. -/
 @[stacks 0EYS]
 theorem Etale.baseChangeProperty_zero [Flat p] [LocallyOfFinitePresentation p]
     [GeometricallyReduced p] :
-    Etale.BaseChangeProperty Λ p 0 :=
-  sorry
+    Etale.BaseChangeProperty Λ p 0 := by
+  intro T Y g e h _ _ sq F
+  obtain ⟨φ⟩ := Etale.nonempty_arrowIso_baseChangeHomologyMap_zero Λ sq F
+  exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff φ).2
+    (Etale.isIso_upperStarLowerStarBaseChange Λ sq F)
 
 /-- The smooth case of `AlgebraicGeometry.Etale.baseChangeProperty_zero`: a smooth morphism
 is flat and locally of finite presentation and its geometric fibres are smooth varieties,
