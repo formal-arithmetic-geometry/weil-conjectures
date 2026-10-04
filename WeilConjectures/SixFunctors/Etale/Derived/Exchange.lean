@@ -7,9 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 /-!
 # Compact-support base change and the projection formula
@@ -20,11 +19,20 @@ consumes: compact-support base change for a cartesian square, and the projection
 ## Implementation notes
 
 Compact-support base change is stated as `IsIso Ex_!` for the exchange
-`Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` of the framework chapter's `sk-def-sf-exchanges`, which is
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap` (and
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationBaseChangeMap` for a given
-compactification). Its construction needs `f'` to be quasi-compact, so the statement assumes
-`[QuasiCompact f']`. The projection map `PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)` is not
+`Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` of the framework chapter's `sk-def-sf-exchanges`, on the
+unbounded derived categories. The main form is for the exchange map
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationBaseChangeMap` computed with
+an arbitrary compactification `c` of `f`: it reduces to unbounded proper base change for the
+proper map of `c`. The blueprint states it on `D⁺` instead.
+
+The statement for the canonical exchange map
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap` is a corollary. That map is only
+defined for `f'` quasi-compact, and it goes through the comparison isomorphism
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, which rests on an unproved instance that is
+not expected to hold on unbounded derived categories in this generality. Both the hypothesis
+`[QuasiCompact f']` and this dependence should disappear once `Ex_!` is constructed on `D⁺`.
+
+The projection map `PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)` is not
 constructed yet, so the projection formula below asserts that the two objects in question are
 isomorphic. It should be restated as `IsIso PF`, in the style of
 `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`.
@@ -34,6 +42,7 @@ The exchange `Ex_*` for `Rf_*` does already exist in this repository, as
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite`
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`
@@ -59,33 +68,68 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
 section Exchange
 
 variable {X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
-  [HasCompactification f] [HasCompactification f']
 
-/-- Blueprint `sk-prop-sf-cbc`: Compact-support base change
-
-**Compact-support base change.** For `f : X ⟶ Y` separated of finite type, `g : Y' ⟶ Y`
-arbitrary and a cartesian square
+/-- **Compact-support base change along a compactification.** For a cartesian square
 
 ```
-  X' --g'--> X            Rf_! ⋙ Lg^*  --Ex_!-->  Lg'^* ⋙ Rf'_!
+  X' --g'--> X
   |          |
-  f'         f            as functors D(X_ét, Λ) ⥤ D(Y'_ét, Λ)
-  |          |
-  v          v
+  f'         f
+  ↓          ↓
   Y' --g---> Y
 ```
 
-the exchange transformation `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` of `sk-def-sf-exchanges` is an
-isomorphism.
+with `g` arbitrary, a compactification `c` of `f` and `Λ` finite, the exchange transformation
+`Ex_!(c) : Lg^* Rf_!(c) ⟶ Rf'_!(c ×_Y Y') Lg'^*` of `sk-def-sf-exchanges`, computed with `c`
+and its base change, is an isomorphism of functors `D(X_ét, Λ) ⥤ D(Y'_ét, Λ)`.
 
-The proof is the five-stage argument of the compact-support base change chapter: finite
-coefficients on the étale site, degreewise constructibility, the pro-étale finite level for
-objects with an étale-origin witness, completed coefficients, and finite extensions of the
-coefficient field. -/
-theorem isIso_rightDerivedLowerShriekBaseChangeMap [Finite Λ] [HasInvertibleExponent Λ Y]
-    [LocallyOfFiniteType f] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
-    IsIso (rightDerivedLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq) :=
-  sorry
+This is the blueprint's raw finite compact-support base change theorem, stated on the
+unbounded derived categories rather than on `D⁺`. By
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap` it
+reduces to the invertibility of the derived base change map `Ex_*` for the proper map `c.g`,
+which is unbounded proper base change
+`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`. -/
+theorem isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite [Finite Λ]
+    (sq : IsPullback g' f' f g) (c : Compactification f) :
+    IsIso (rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq c) :=
+  have := isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite
+    (IsPullback.of_hasPullback c.g g)
+  isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap _ sq c
+
+/-- Blueprint `sk-prop-sf-cbc`: Compact-support base change
+
+**Compact-support base change.** For `f : X ⟶ Y` admitting a compactification, `g : Y' ⟶ Y`
+arbitrary, a cartesian square
+
+```
+  X' --g'--> X
+  |          |
+  f'         f
+  ↓          ↓
+  Y' --g---> Y
+```
+
+with `f'` quasi-compact and admitting a compactification, and `Λ` finite, the exchange
+transformation `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` of `sk-def-sf-exchanges` is an isomorphism of
+functors `D(X_ét, Λ) ⥤ D(Y'_ét, Λ)`.
+
+`Ex_!` is `Ex_!(c)` for the chosen compactification `c` of `f`, followed by the comparison
+isomorphism `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` for `f'`, so this follows from
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite`.
+That comparison isomorphism rests on the unproved instance
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison`, which is not
+expected to hold on unbounded derived categories in this generality; the blueprint states this
+theorem on `D⁺`. If `f` is quasi-compact, `[QuasiCompact f']` is obtained from `sq` by
+`MorphismProperty.of_isPullback`. -/
+-- TODO: state this for the `D⁺` exchange map built from `derivedBaseChangeMapPlus`, and drop
+-- `[QuasiCompact f']` once `Ex_!` is constructed without it.
+theorem isIso_rightDerivedLowerShriekBaseChangeMap [Finite Λ] [HasCompactification f]
+    [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
+    IsIso (rightDerivedLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq) := by
+  have := isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite Λ sq
+    (HasCompactification.compactification f)
+  unfold rightDerivedLowerShriekBaseChangeMap
+  infer_instance
 
 end Exchange
 
