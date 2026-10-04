@@ -6,6 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.Topology.KrullDimension
 
 /-!
 # Complements on morphisms locally of finite type
@@ -15,7 +17,9 @@ form a finitely generated `ℤ`-algebra
 (`AlgebraicGeometry.IsAffineOpen.algebra_finiteType_of_locallyOfFiniteType`), and that for a
 morphism of finite type between affine schemes the global sections of the source are generated
 by the image of the global sections of the target together with finitely many elements
-(`AlgebraicGeometry.exists_finset_closure_range_appTop_union_eq_top`).
+(`AlgebraicGeometry.exists_finset_closure_range_appTop_union_eq_top`). An integral scheme locally
+of finite type over a field has the dimension of any of its nonempty open subschemes
+(`AlgebraicGeometry.topologicalKrullDim_opens_eq`).
 -/
 
 @[expose] public section
@@ -59,5 +63,13 @@ lemma exists_finset_closure_range_appTop_union_eq_top {X Y : Scheme.{u}} (f : X 
   rw [hs] at h3
   rw [← h2, ← h3]
   rfl
+
+/-- An integral scheme `X` locally of finite type over a field `K` has the same dimension as each
+of its nonempty open subschemes: both are the transcendence degree over `K` of the function
+field of `X`. -/
+theorem topologicalKrullDim_opens_eq {K : Type u} [Field K] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [IsIntegral X] (U : X.Opens) [Nonempty U] :
+    topologicalKrullDim (U : Set X) = topologicalKrullDim X :=
+  sorry
 
 end AlgebraicGeometry

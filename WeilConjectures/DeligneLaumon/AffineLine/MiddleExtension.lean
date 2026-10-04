@@ -18,9 +18,11 @@ sheaves. So, as soon as no geometric irreducible constituent of `M` is a linear 
 `ℒ_{ψ(a x)}`, the transform of `(j_*M)[1]` is again a middle extension `(j'_*M')[1]` on the
 dual line. Such an `M` is called *nonexceptional*.
 
-A nonzero linear character is ramified at infinity
-(`AlgebraicGeometry.not_isUnramifiedAtInfinity_artinSchreier`), and the trivial one would make
-`M` geometrically constant, so an irreducible `M` that is unramified at infinity and not
+A nonzero linear character is ramified at infinity: inertia at infinity acts on the
+Artin–Schreier cover `u^q - u = a x` by all translations `u ↦ u + c`, `c ∈ 𝔽_q`
+(`LaurentSeries.exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single`), hence on `ℒ_{ψ(a x)}`
+through the nontrivial character `ψ`. The trivial linear character would make `M`
+geometrically constant, so an irreducible `M` that is unramified at infinity and not
 geometrically constant is automatically nonexceptional. Only arithmetic irreducibility is
 assumed: restriction to the normal geometric subgroup of the Weil group is semisimple.
 

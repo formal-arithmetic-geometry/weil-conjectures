@@ -28,6 +28,8 @@ affine open cover all of whose members contain all the generic points.
   (`AlgebraicGeometry.exists_isAffineOpen_of_subset_genericPoints`).
 * `AlgebraicGeometry.exists_isAffineOpen_mem_of_subset_genericPoints`: on a quasi-separated
   scheme, any point together with finitely many generic points is contained in an affine open.
+* `AlgebraicGeometry.ringKrullDim_stalk_le_topologicalKrullDim`: the local rings of a scheme have
+  dimension at most that of the scheme.
 * `AlgebraicGeometry.exists_isAffineOpen_cover_genericPoints_subset`: a quasi-compact and
   quasi-separated scheme with finitely many irreducible components has a finite affine open
   cover each member of which contains all the generic points. The intersection of such a cover
@@ -273,3 +275,13 @@ theorem exists_isCompact_opens_inf_eq_of_disjoint_closure_sdiff
 
 end AlgebraicGeometry
 
+namespace AlgebraicGeometry
+
+/-- The Krull dimension of a local ring of a scheme is at most the dimension of the scheme. -/
+theorem ringKrullDim_stalk_le_topologicalKrullDim {X : Scheme} (x : X) :
+    ringKrullDim (X.presheaf.stalk x) ≤ topologicalKrullDim X := by
+  rw [ringKrullDim_stalk_eq_coheight, topologicalKrullDim,
+    Order.krullDim_eq_of_orderIso irreducibleSetEquivPoints]
+  exact Order.coheight_le_krullDim x
+
+end AlgebraicGeometry
