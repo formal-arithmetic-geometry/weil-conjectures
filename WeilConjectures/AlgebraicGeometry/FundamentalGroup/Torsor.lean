@@ -74,7 +74,7 @@ lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.hom_ext {P Q : Y.FiniteEtale} 
 
 lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.hom_left_comp {P Q : Y.FiniteEtale}
     (f : P ⟶ Q) : f.hom.left ≫ Q.obj.hom = P.obj.hom := by
-  simpa using f.hom.w
+  simp
 
 lemma vaddHom_zero (t : EtaleTorsor M Y) : t.vaddHom 0 = 𝟙 _ :=
   FiniteEtale.hom_ext t.zero_vadd
