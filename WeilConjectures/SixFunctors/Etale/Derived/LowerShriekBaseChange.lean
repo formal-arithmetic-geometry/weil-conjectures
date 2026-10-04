@@ -115,7 +115,7 @@ square `AlgebraicGeometry.Compactification.isPullback_i_ofIsPullback`, whiskered
   D(Y) --Lg^*---> D(Y')
 ```
 
-(blueprint: `def-exchange-projection`) -/
+(blueprint: `sk-def-sf-exchanges`) -/
 noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeMap
     (sq : IsPullback g' f' f g) (c : Compactification f) :
     Rf_!(c)[A] ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ Rf_!(c.ofIsPullback sq)[A] :=
@@ -154,7 +154,7 @@ cartesian square `g' ≫ f = f' ≫ g`: the map
 chosen compactification of `f`, followed by the comparison isomorphism
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` between the derived lower shriek of `f'`
 computed with its base change and the one computed with the chosen compactification of `f'`.
-(blueprint: `def-exchange-projection`) -/
+(blueprint: `sk-def-sf-exchanges`) -/
 noncomputable def rightDerivedLowerShriekBaseChangeMap [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
     R(f)_![A] ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ R(f')_![A] :=

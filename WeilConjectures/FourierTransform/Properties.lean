@@ -180,11 +180,13 @@ naturally in `K`. Both squares
       S' ──g──▶ S           S' ──g──▶ S
 ```
 
-must be **cartesian**: the proof is proper base change for `Rp₂,!` along the induced
-cartesian square `W ×_{S'} W' ⟶ V ×_S V'`, which fails for merely commuting squares. For the
-same reason the coefficients are those of proper base change
-(`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedLowerShriek`):
-`Λ` finite with exponent invertible on `S`, and `p₂` locally of finite type.
+must be **cartesian**: the proof is compact-support base change for `Rp₂,!` along the
+induced cartesian square `W ×_{S'} W' ⟶ V ×_S V'`, which fails for merely commuting squares.
+That theorem needs `Λ` finite and `p₂` to admit a compactification; in the form
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite`,
+which is computed with a compactification of `p₂` and its base change, it needs no
+quasi-compactness of the base changed map. As in the rest of this file, the exponent of `Λ` is
+also assumed invertible on `S`.
 (sketch blueprint: `sk-prop-base-change`) -/
 theorem nonempty_iso_fourierTransform_baseChange [Finite Λ] [HasInvertibleExponent Λ S]
     [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
