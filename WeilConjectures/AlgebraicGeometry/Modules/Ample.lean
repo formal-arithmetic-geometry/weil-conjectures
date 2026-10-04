@@ -13,8 +13,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
@@ -59,6 +63,8 @@ leading coefficient whenever that function is a numerical polynomial of degree a
   module on a connected proper curve has positive degree.
 - `AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`: an ample invertible module on a proper
   curve has positive degree.
+- `AlgebraicGeometry.Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow`: twisting the
+  Hilbert function by a coherent module of generic rank `r` multiplies the degree by `r`.
 - `AlgebraicGeometry.Scheme.Hom.degree_pullback`: the degree multiplies by the degree of the
   morphism under pullback along a finite surjective morphism.
 -/
@@ -297,11 +303,39 @@ theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)
   rw [hdim] at this
   exact absurd this (by decide)
 
+open scoped fwdDiff in
+/-- **The leading coefficient of a twisted Hilbert function only depends on the generic rank.**
+Let `Y` be an integral proper `K`-scheme of dimension `g`, `M` an ample invertible `𝒪_Y`-module
+and `E` a coherent `𝒪_Y`-module which is free of rank `r` on a nonempty open subset of `Y`. Then
+the `g`-th forward difference at `0` of `m ↦ χ(Y, E ⊗ M^{⊗ m})` is `r` times the degree of `Y`
+with respect to `M`. Both `m ↦ χ(Y, E ⊗ M^{⊗ m})` and `m ↦ r χ(Y, M^{⊗ m})` are numerical
+polynomials of degree at most `g` (blueprint `lem-sc-hilbert-polynomial`), and their difference
+has degree at most `g - 1`: by additivity of `χ` and dévissage, `E` may be compared with
+`𝒪_Y^{⊕ r}` up to coherent modules supported on a proper closed subset, of dimension `< g`.
+
+This is the input on Hilbert polynomials used in the proof of blueprint
+`lem-sc-deg-pullback-finite`. -/
+theorem Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow [IsIntegral Y]
+    (f : Y ⟶ Spec (.of K)) [IsProper f] (M : Y.Modules) [M.IsInvertible] (hample : IsAmple f M)
+    (E : Y.Modules) [E.IsFinitePresentation] {U : Y.Opens} (hU : (U : Set Y).Nonempty) {r : ℕ}
+    (e : (Scheme.Modules.pullback U.ι).obj E ≅ SheafOfModules.free (ULift.{u} (Fin r))) :
+    letI : Y.Over (Spec (.of K)) := ⟨f⟩
+    Δ_[1]^[((topologicalKrullDim Y).unbotD 0).toNat]
+      (fun m ↦ Scheme.Modules.eulerChar K (E ⊗ M.tensorPow m)) 0 = r * f.degree M :=
+  sorry
+
 /-- Blueprint `sk-prop-av-deg-pullback`: Degree of a pullback under a finite morphism.
 
 Let `g : X ⟶ Y` be a finite surjective morphism of proper `K`-varieties of the same dimension,
 let `M` be an ample invertible `𝒪_Y`-module and let `d = [k(X) : k(Y)]` be the degree of `g`.
 Then `deg_{g^*M}(X) = d * deg_M(Y)`.
+
+This is also blueprint `lem-sc-deg-pullback-finite` (Stacks 0BEX). Both sides are `g`-th forward
+differences at `0`, where `dim X = dim Y` since `g` is finite surjective
+(`AlgebraicGeometry.Scheme.Hom.topologicalKrullDim_eq_of_surjective`). By the projection formula
+`χ(X, (g^* M)^{⊗ m}) = χ(X, g^* M^{⊗ m}) = χ(Y, g_* g^* M^{⊗ m}) = χ(Y, g_* 𝒪_X ⊗ M^{⊗ m})`, and
+`g_* 𝒪_X` is a coherent module of generic rank `d`, so the leading coefficients compare by
+`AlgebraicGeometry.Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow`.
 
 ```
   X ────────── g ─────────▶ Y
@@ -315,7 +349,22 @@ theorem Scheme.Hom.degree_pullback [IsIntegral X] [IsIntegral Y] (fX : X ⟶ Spe
     (fY : Y ⟶ Spec (.of K)) [IsProper fX] [IsProper fY] (g : X ⟶ Y) (hg : g ≫ fY = fX)
     [IsFinite g] [Surjective g] (M : Y.Modules) [M.IsInvertible] (hample : IsAmple fY M) :
     fX.degree ((Scheme.Modules.pullback g).obj M) =
-      g.finrank (genericPoint Y) * fY.degree M :=
-  sorry
+      g.finrank (genericPoint Y) * fY.degree M := by
+  subst hg
+  let : Y.Over (Spec (.of K)) := ⟨fY⟩
+  let : X.Over (Spec (.of K)) := ⟨g ≫ fY⟩
+  have : g.IsOver (Spec (.of K)) := ⟨rfl⟩
+  have := LocallyOfFiniteType.isLocallyNoetherian fY
+  have := Scheme.Modules.isFinitePresentation_pushforward_unit g
+  obtain ⟨U, hU, ⟨e⟩⟩ := Scheme.Modules.exists_pullback_pushforward_unit_iso_free g
+  rw [← fY.fwdDiff_iter_eulerChar_tensorObj_tensorPow M hample _ hU e, degree,
+    g.topologicalKrullDim_eq_of_surjective]
+  refine congrArg (fun F : ℕ → ℤ ↦ (fwdDiff 1)^[_] F 0) (funext fun m ↦ ?_)
+  -- `χ(X, (g^* M)^{⊗ m}) = χ(X, g^* M^{⊗ m}) = χ(Y, g_* g^* M^{⊗ m}) = χ(Y, g_* 𝒪_X ⊗ M^{⊗ m})`
+  obtain ⟨e₁⟩ := Scheme.Modules.nonempty_pullback_tensorPow_iso g M m
+  obtain ⟨e₂⟩ := Scheme.Modules.nonempty_pushforward_pullback_iso g (M.tensorPow m)
+  change Scheme.Modules.eulerChar K _ = _
+  rw [← Scheme.Modules.eulerChar_congr K e₁, ← Scheme.Modules.eulerChar_congr K e₂,
+    Scheme.Modules.eulerChar_pushforward_of_isAffineHom]
 
 end AlgebraicGeometry
