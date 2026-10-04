@@ -589,6 +589,7 @@ public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
 public import WeilConjectures.Mathlib.RingTheory.Derivation.Basic
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiberDegree
+public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSection
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSplitting
 public import WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint
