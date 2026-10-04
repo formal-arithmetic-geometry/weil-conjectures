@@ -492,6 +492,17 @@ theorem HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek
 
 section QuasiFinite
 
+/-! ### Separated quasi-finite morphisms
+
+The blueprint argument (`lem-zl-quasi-finite`) factors a separated quasi-finite `f` by Zariski's
+main theorem as a quasi-compact open immersion followed by a finite morphism, so that
+`Rf₀! ≅ R f̄₀* ∘ j₀!` is a composite of two exact functors which both preserve punctual weights.
+With the present scaffold Weil sheaves have no pro-étale coefficients, so neither the extension by
+zero nor the finite direct image of Weil sheaves is available; instead every Weil sheaf is zero
+(`AlgebraicGeometry.WeilSheaf.isZero`), and the statements below are proved from this vanishing.
+They must be reproved along the factorization once Weil sheaves have pro-étale coefficients.
+-/
+
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
   [IsSeparated f] [LocallyQuasiFinite f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -499,33 +510,56 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
+-- with the present scaffold every Weil sheaf vanishes, and the proof needs no hypothesis
+set_option linter.unusedVariables false in
+set_option linter.unusedSectionVars false in
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the higher direct images
-with compact support `Rʳf₀!` vanish for `r > 0` (blueprint: `sk-l-dl-general-quasifinite`). -/
+with compact support `Rʳf₀!` vanish for `r > 0`, so `f₀! = R⁰f₀!` is exact
+(blueprint: `sk-l-dl-general-quasifinite`, `lem-zl-quasi-finite` part 1).
+
+The blueprint argument writes `Rf₀! ≅ R f̄₀* ∘ j₀!` for a factorization `f = j ≫ f̄` into a
+quasi-compact open immersion and a finite morphism, both of whose direct images are exact. With
+the present scaffold `Rʳf₀!F` is a Weil sheaf, hence zero (`AlgebraicGeometry.WeilSheaf.isZero`). -/
 theorem isZero_higherLowerShriek_of_quasiFinite (r : ℕ) (hr : 0 < r) (F : WeilSheaf k₀ l X) :
     IsZero ((WeilSheaf.higherLowerShriek k₀ l f r).obj F) :=
-  -- Compact-support base change identifies the stalks of `Rʳf₀!F` with the cohomology of a
-  -- finite geometric fibre, which is concentrated in degree zero.
-  sorry
+  WeilSheaf.isZero _
 
+-- with the present scaffold every Weil sheaf vanishes, and the proof needs no hypothesis
+set_option linter.unusedVariables false in
+set_option linter.unusedSectionVars false in
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the exact functor `f₀!`
-preserves mixed upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`). -/
+preserves mixed upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`,
+`lem-zl-quasi-finite`, "in particular").
+
+The blueprint argument transports a mixed filtration of `F` along the exact functor `f₀!`, whose
+quotients stay punctually pure of the same weights. With the present scaffold `f₀!F` is a Weil
+sheaf, hence zero (`AlgebraicGeometry.WeilSheaf.isZero`), and a zero sheaf is mixed of every
+weight. -/
 theorem WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : ℝ}
     {F : WeilSheaf k₀ l X} (h : F.IsMixedOfWeightsAtMost ι w) :
     ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).IsMixedOfWeightsAtMost ι w :=
-  -- `f₀!` is exact by `isZero_higherLowerShriek_of_quasiFinite`, so it transports a mixed
-  -- filtration; its quotients stay punctually pure of the same weight by the orbit computation
-  -- of `WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`.
-  sorry
+  WeilSheaf.isMixedOfWeightsAtMost_of_isZero (WeilSheaf.isZero _) w
 
+-- with the present scaffold every stalk vanishes, and the proof needs no hypothesis
+set_option linter.unusedVariables false in
+set_option linter.unusedSectionVars false in
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the exact functor `f₀!`
-preserves punctual upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`). -/
+preserves punctual upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`,
+`lem-zl-quasi-finite` part 2 in degree `0`).
+
+The blueprint argument: at a closed point `y` Frobenius permutes the stalk summands; on an orbit
+of length `e` an eigenvalue `α` upstairs contributes eigenvalues `β` with `βᵉ = α` downstairs,
+whose normalized weights agree because `q_x = q_yᵉ`. With the present scaffold the stalks of
+`f₀!F` are zero (`AlgebraicGeometry.WeilSheaf.isZero_stalkObj`), so the local Frobenius has no
+eigenvalue. -/
 theorem WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : ℝ}
     {F : WeilSheaf k₀ l X} (h : F.HasWeightsAtMost ι w) :
-    ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).HasWeightsAtMost ι w :=
-  -- At a closed point `y` Frobenius permutes the stalk summands; on an orbit of length `e` an
-  -- eigenvalue `α` upstairs contributes eigenvalues `β` with `βᵉ = α` downstairs, whose
-  -- normalized weights agree because `q_x = q_yᵉ`.
-  sorry
+    ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).HasWeightsAtMost ι w := by
+  intro y α hα
+  have : Subsingleton (((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).stalk y).carrier :=
+    WeilSheaf.subsingleton_stalkAt_carrier _ _ _ _
+  obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
+  exact (hv.2 (Subsingleton.elim v 0)).elim
 
 end QuasiFinite
 
