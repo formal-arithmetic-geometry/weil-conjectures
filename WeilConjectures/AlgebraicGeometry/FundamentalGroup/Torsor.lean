@@ -119,7 +119,8 @@ lemma exists_fiber_map_vaddHom (x y : (fiber s).obj t.toFiniteEtale) :
     ∃ m, (fiber s).map (t.vaddHom m) x = y := by
   have := t.isIso_sigmaDesc
   let D := Sigma.desc fun m : M ↦
-    pullback.lift (f := t.π) (g := t.π) (t.vadd m) (𝟙 t.P) (by rw [t.vadd_π, Category.id_comp])
+    pullback.lift (f := t.π) (g := t.π) (t.vadd m) (𝟙 t.P)
+      (by rw [t.vadd_π, Category.id_comp])
   obtain ⟨z, hz1, hz2⟩ : ∃ z : Spec (.of Ω) ⟶ pullback t.π t.π,
       z ≫ pullback.fst _ _ = y.left ∧ z ≫ pullback.snd _ _ = x.left :=
     ⟨pullback.lift y.left x.left ((fiber_left_comp s y).trans (fiber_left_comp s x).symm),
@@ -157,7 +158,8 @@ lemma eq_of_fiber_map_vaddHom_eq (x : (fiber s).obj t.toFiniteEtale) {m n : M}
   have h' : x' ≫ t.vadd m = x' ≫ t.vadd n := congrArg CommaMorphism.left h
   have h2 : x' ≫ Sigma.ι (fun _ : M ↦ t.P) m = x' ≫ Sigma.ι (fun _ : M ↦ t.P) n := by
     rw [← cancel_mono (Sigma.desc fun m : M ↦
-      pullback.lift (f := t.π) (g := t.π) (t.vadd m) (𝟙 t.P) (by rw [t.vadd_π, Category.id_comp]))]
+      pullback.lift (f := t.π) (g := t.π) (t.vadd m) (𝟙 t.P)
+      (by rw [t.vadd_π, Category.id_comp]))]
     apply pullback.hom_ext <;>
       simp only [Category.assoc, Sigma.ι_desc_assoc, pullback.lift_fst, pullback.lift_snd,
         Category.comp_id, h']
@@ -323,7 +325,8 @@ lemma isIsomorphic_of_monodromy_eq {t₁ t₂ : EtaleTorsor M Y}
     simp only [ψ]
     rw [this, hd₁', fiber_map_vaddHom_vaddHom]
   have hsmul (g : G) (x : (fiber s).obj t₁.toFiniteEtale) : ψ (g • x) = g • ψ x := by
-    rw [← t₁.fiber_map_vaddHom_monodromy s G g x, hvadd, h, t₂.fiber_map_vaddHom_monodromy s G g (ψ x)]
+    rw [← t₁.fiber_map_vaddHom_monodromy s G g x, hvadd, h,
+      t₂.fiber_map_vaddHom_monodromy s G g (ψ x)]
   let E := equivalenceContAction s G
   let I : E.functor.obj t₁.toFiniteEtale ≅ E.functor.obj t₂.toFiniteEtale :=
     ObjectProperty.isoMk _ (Action.mkIso (FintypeCat.equivEquivIso e) fun g ↦
@@ -388,7 +391,8 @@ lemma exists_monodromy_eq (φ : G →ₜ* Multiplicative M) :
         (Action.FintypeCat.ofMulAction G (FintypeCat.of V))) := ⟨rfl⟩
       have : DiscreteTopology ((forget₂ FintypeCat TopCat).obj
         (Action.FintypeCat.ofMulAction G (FintypeCat.of V)).V) := ⟨rfl⟩
-      refine continuous_prod_of_discrete_right.mpr fun v ↦ continuous_discrete_rng.mpr fun w ↦ ?_
+      refine continuous_prod_of_discrete_right.mpr fun v ↦
+        continuous_discrete_rng.mpr fun w ↦ ?_
       exact (isOpen_discrete ((fun a : Multiplicative M ↦ (eM (a.toAdd + eM.symm v) : V)) ⁻¹'
         {(w : V)})).preimage φ.continuous⟩
   let τ (n : M) : X ⟶ X := ObjectProperty.homMk

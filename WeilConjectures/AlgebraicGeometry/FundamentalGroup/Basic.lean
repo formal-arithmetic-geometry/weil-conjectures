@@ -179,7 +179,8 @@ theorem exists_isFundamentalGroup :
         exact (h.continuous.comp continuous_fst).mul (h.continuous.comp continuous_snd)
       continuous_inv := by
         rw [h.isInducing.continuous_iff]
-        have : (fun p : Shrink.{u} A ↦ e p⁻¹) = fun p ↦ (e p)⁻¹ := funext fun p ↦ map_inv e _
+        have : (fun p : Shrink.{u} A ↦ e p⁻¹) = fun p ↦ (e p)⁻¹ :=
+          funext fun p ↦ map_inv e _
         change Continuous fun p : Shrink.{u} A ↦ e p⁻¹
         rw [this]
         exact h.continuous.inv }
@@ -207,6 +208,17 @@ theorem exists_isFundamentalGroup :
       non_trivial' g hg := by
         have := IsFundamentalGroup.non_trivial (F := fiber s) (e g) fun P x ↦ hg P x
         exact e.injective (this.trans (map_one e).symm) }
+
+/-- Blueprint `rem-ptr-galois-object-2`: Pointer to the properties of [def-galois-object].
+
+The Galois covers of `Y` — the connected finite étale `P ⟶ Y` on whose geometric fibre `P_s`
+the automorphism group `Aut_Y(P)` acts simply transitively — are exactly the Galois objects of
+the Galois category of finite étale `Y`-schemes. -/
+theorem isGalois_iff (P : Y.FiniteEtale) :
+    IsGalois P ↔ IsConnected P ∧
+      ∀ x : (fiber s).obj P, Function.Bijective fun σ : Aut P ↦ (fiber s).map σ.hom x := by
+  refine ⟨fun _ ↦ ⟨inferInstance, evaluation_aut_bijective_of_isGalois (fiber s) P⟩,
+    fun ⟨_, h⟩ ↦ (isGalois_iff_pretransitive (fiber s) P).mpr ⟨fun x y ↦ (h x).2 y⟩⟩
 
 variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
   [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
