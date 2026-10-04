@@ -17,15 +17,19 @@ of `C` the counit `adj.counit.app Y : L (R Y) ⟶ Y` gives, after applying `S`, 
 `S (L (R Y)) ⟶ S Y` out of `(L ⋙ S) (R Y)`, and this file computes its transpose along
 `adj.comp adjS`: it is the image under `R` of the transpose along `adjS`.
 
+We also record that representability of a presheaf `F` by `Y` gives representability of its
+restriction `L.op ⋙ F` along a left adjoint `L ⊣ R` by `R.obj Y`.
+
 ## Main results
 
 - `CategoryTheory.Adjunction.comp_homEquiv_map_counit_app_comp`.
+- `CategoryTheory.Functor.RepresentableBy.ofAdjunction`.
 
 -/
 
 @[expose] public section
 
-universe v₁ v₂ v₃ u₁ u₂ u₃
+universe w v₁ v₂ v₃ u₁ u₂ u₃
 
 namespace CategoryTheory.Adjunction
 
@@ -60,3 +64,22 @@ theorem comp_homEquiv_map_counit_app_comp (Y : C) (M : E) (g : S.obj Y ⟶ M) :
     adj.right_triangle_components, Category.id_comp]
 
 end CategoryTheory.Adjunction
+
+namespace CategoryTheory.Functor.RepresentableBy
+
+variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D] {L : D ⥤ C}
+  {R : C ⥤ D} {F : Cᵒᵖ ⥤ Type w} {Y : C}
+
+/-- If `adj : L ⊣ R` and `Y` represents `F`, then `R.obj Y` represents `L.op ⋙ F`: a morphism
+`X ⟶ R.obj Y` is a morphism `L.obj X ⟶ Y`, that is, an element of `F (L.obj X)`.
+
+For `L = Over.map p` and `R = Over.pullback p` this says that the base change of a representing
+object represents the restriction of the functor to the slice. -/
+@[simps]
+def ofAdjunction (r : F.RepresentableBy Y) (adj : L ⊣ R) :
+    (L.op ⋙ F).RepresentableBy (R.obj Y) where
+  homEquiv {X} := (adj.homEquiv X Y).symm.trans r.homEquiv
+  homEquiv_comp f g := by
+    simp [Adjunction.homEquiv_naturality_left_symm, r.homEquiv_comp]
+
+end CategoryTheory.Functor.RepresentableBy
