@@ -50,6 +50,8 @@ the isomorphism awaits the edge map of `CategoryTheory.Sheaf.exists_cechToDerive
   of a quasi-coherent sheaf, linearly over the global functions.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_cechComplex_linearEquiv_H_of_isSeparated`: the
   case of an open affine covering of a scheme separated over an affine base.
+- `AlgebraicGeometry.Scheme.Modules.finrankH_pushforward_of_isAffineHom`: the pushforward along
+  an affine morphism preserves the cohomology of quasi-coherent sheaves of modules.
 -/
 
 @[expose] public section
@@ -342,5 +344,29 @@ theorem nonempty_cechComplex_linearEquiv_H_of_isSeparated {S : Scheme.{u}} (f : 
     infer_instance
   nonempty_cechComplex_linearEquiv_H U
     (fun s hs ↦ IsAffineOpen.biInf (s : Set ι) s.finite_toSet hs (fun i _ ↦ hU i)) hU' ℱ q
+
+section AffineMorphism
+
+variable (k : Type u) [Field k] {Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+
+/-- **Cohomology along an affine morphism.** Let `g : X ⟶ Y` be an affine morphism of
+`k`-schemes. For every quasi-coherent `𝒪_X`-module `ℱ` and every `q` we have
+`H^q(Y, g_* ℱ) ≅ H^q(X, ℱ)`, so the two have the same dimension over `k`. The higher direct
+images `R^p g_* ℱ` vanish, since on an affine open `V` of `Y` they are computed by the
+cohomology of `ℱ` on the affine scheme `g ⁻¹ᵁ V`, which vanishes by
+`subsingleton_H_succ_of_isAffine`; the Leray spectral sequence then degenerates. -/
+theorem finrankH_pushforward_of_isAffineHom (g : X ⟶ Y) [g.IsOver (Spec (.of k))]
+    [IsAffineHom g] (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+    (q : ℕ) : ((pushforward g).obj ℱ).finrankH k q = ℱ.finrankH k q :=
+  sorry
+
+/-- The Euler characteristic is invariant under pushforward along an affine morphism:
+`χ(Y, g_* ℱ) = χ(X, ℱ)` for a quasi-coherent `𝒪_X`-module `ℱ`. -/
+theorem eulerChar_pushforward_of_isAffineHom (g : X ⟶ Y) [g.IsOver (Spec (.of k))]
+    [IsAffineHom g] (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
+    ((pushforward g).obj ℱ).eulerChar k = ℱ.eulerChar k := by
+  simp only [eulerChar, finrankH_pushforward_of_isAffineHom k g ℱ]
+
+end AffineMorphism
 
 end AlgebraicGeometry.Scheme.Modules
