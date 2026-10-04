@@ -112,8 +112,12 @@ theorem eqLocus_ι_comp_eq : (eqLocus p a b h).ι ≫ a = (eqLocus p a b h).ι �
 `σ : T ⟶ X` whose composite with `f` is an open immersion is itself an open immersion. In
 particular a section of `f` over an open of `Y` is an open immersion. -/
 theorem isOpenImmersion_of_comp {T X Y : Scheme.{u}} (f : X ⟶ Y) [FormallyUnramified f]
-    [LocallyOfFiniteType f] (σ : T ⟶ X) [IsOpenImmersion (σ ≫ f)] : IsOpenImmersion σ :=
-  sorry
+    [LocallyOfFiniteType f] (σ : T ⟶ X) [IsOpenImmersion (σ ≫ f)] : IsOpenImmersion σ := by
+  rw [← pullback.lift_snd (f := σ ≫ f) (g := f) (𝟙 T) σ (by simp)]
+  have : IsOpenImmersion (pullback.lift (𝟙 T) σ (by simp) : T ⟶ pullback (σ ≫ f) f) :=
+    MorphismProperty.of_isPullback (P := @IsOpenImmersion)
+      (pullback_lift_diagonal_isPullback σ f) inferInstance
+  infer_instance
 
 end FormallyUnramified
 
