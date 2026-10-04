@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.GroupTheory.Commutator.Basic
+public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import Mathlib.RingTheory.Jacobson.Ring
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
@@ -48,6 +49,10 @@ of a closed subgroup are described by ideals of the coordinate ring of `GL_n` in
 - `Matrix.GeneralLinearGroup.zeroLocus_vanishingIdeal_le_normalizer`,
   `Matrix.GeneralLinearGroup.commutator_zeroLocus_vanishingIdeal_le`: Zariski closure preserves
   normalizing and commutator inclusions between subgroups of `GL n k`.
+- `Matrix.GeneralLinearGroup.commute_of_mem_zeroLocus_vanishingIdeal`,
+  `Matrix.GeneralLinearGroup.mulVec_mem_of_mem_zeroLocus_vanishingIdeal`,
+  `Matrix.GeneralLinearGroup.map_mem_zeroLocus_vanishingIdeal`: centralizers, stabilizers of
+  subspaces and polynomial homomorphisms pass to the Zariski closure.
 
 ## Blueprint
 
@@ -379,6 +384,65 @@ theorem mem_zeroLocus_center_iff (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal
   · rintro ⟨hg, hc⟩
     exact subset_zeroLocus_vanishingIdeal _
       ⟨hg, Subgroup.mem_centralizer_iff.2 fun h hh ↦ (hc h hh).symm⟩
+
+/-- An element commuting with a subgroup `Γ` of `GL n k` commutes with the `k`-points of its
+Zariski closure: the commutator equations are closed. (blueprint: `sk-i-restriction`) -/
+theorem commute_of_mem_zeroLocus_vanishingIdeal {Γ : Subgroup (GL n k)} {z : GL n k}
+    (hz : ∀ g ∈ Γ, z * g = g * z) {g : GL n k}
+    (hg : g ∈ zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k) : z * g = g * z := by
+  ext i j
+  have h := hg (commutatorEquation z i j) <| mem_vanishingIdeal.2 fun h hh ↦ by
+    rw [evalAlgHom_commutatorEquation, ← Units.val_mul, ← Units.val_mul, hz h hh, sub_self]
+  rw [evalAlgHom_commutatorEquation, sub_eq_zero] at h
+  exact h.symm
+
+/-- The `k`-points of the Zariski closure of a subgroup `Γ` of `GL n k` preserve every subspace of
+`n → k` that `Γ` preserves: the stabilizer of a subspace is closed.
+(blueprint: `sk-i-restriction`) -/
+theorem mulVec_mem_of_mem_zeroLocus_vanishingIdeal {Γ : Subgroup (GL n k)}
+    {S : Submodule k (n → k)} (hΓ : ∀ g ∈ Γ, ∀ x ∈ S, (g : Matrix n n k) *ᵥ x ∈ S) {g : GL n k}
+    (hg : g ∈ zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k) {x : n → k} (hx : x ∈ S) :
+    (g : Matrix n n k) *ᵥ x ∈ S := by
+  by_contra hgx
+  obtain ⟨l, hl, hlS⟩ := S.exists_dual_map_eq_bot_of_notMem hgx inferInstance
+  let a : CoordinateRing n k := ∑ i, ∑ j,
+    algebraMap k _ (l (fun i' ↦ if i = i' then 1 else 0) * x j) * coord n k i j
+  have ha (h : GL n k) : evalAlgHom h a = l ((h : Matrix n n k) *ᵥ x) := by
+    rw [LinearMap.pi_apply_eq_sum_univ l]
+    simp only [a, map_sum, map_mul, AlgHom.commutes, evalAlgHom_coord, Matrix.mulVec,
+      dotProduct, smul_eq_mul, Algebra.algebraMap_self, RingHom.id_apply]
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    rw [Finset.sum_mul]
+    exact Finset.sum_congr rfl fun j _ ↦ by ring
+  refine hl ?_
+  rw [← ha]
+  refine hg a (mem_vanishingIdeal.2 fun h hh ↦ ?_)
+  rw [ha]
+  have := Submodule.mem_map_of_mem (f := l) (hΓ h hh x hx)
+  rw [hlS] at this
+  exact (Submodule.mem_bot k).1 this
+
+section Map
+
+variable {m : Type*} [Fintype m] [DecidableEq m]
+
+/-- A homomorphism `r : GL n k →* GL m k` given by polynomials (an algebra map `φ` of coordinate
+rings with `evalAlgHom (r g) = evalAlgHom g ∘ φ`) maps the `k`-points of the Zariski closure of a
+subgroup `Γ` into the Zariski closure of any subgroup `Γ'` containing `r(Γ)`.
+(blueprint: `sk-i-restriction`) -/
+theorem map_mem_zeroLocus_vanishingIdeal (r : GL n k →* GL m k)
+    (φ : CoordinateRing m k →ₐ[k] CoordinateRing n k)
+    (hφ : ∀ g : GL n k, (evalAlgHom g).comp φ = evalAlgHom (r g)) {Γ : Subgroup (GL n k)}
+    {Γ' : Subgroup (GL m k)} (hΓ : ∀ h ∈ Γ, r h ∈ Γ') {g : GL n k}
+    (hg : g ∈ zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k) :
+    r g ∈ zeroLocus (vanishingIdeal (Γ' : Set (GL m k))) k := by
+  intro a ha
+  rw [← hφ, AlgHom.comp_apply]
+  refine hg _ (mem_vanishingIdeal.2 fun h hh ↦ ?_)
+  rw [← AlgHom.comp_apply, hφ]
+  exact mem_vanishingIdeal.1 ha _ (hΓ h hh)
+
+end Map
 
 end Field
 

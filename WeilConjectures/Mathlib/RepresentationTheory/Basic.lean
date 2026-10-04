@@ -47,6 +47,17 @@ theorem coe_detCharacter_apply (ρ : Representation k W V) (w : W) :
     (ρ.detCharacter w : k) = LinearMap.det (ρ w) :=
   rfl
 
+/-- Representations that correspond along a `W`-equivariant linear equivalence have the same
+determinant character. -/
+theorem detCharacter_eq_of_linearEquiv {V' : Type*} [AddCommGroup V'] [Module k V']
+    {ρ : Representation k W V} {σ : Representation k W V'} (e : V ≃ₗ[k] V')
+    (he : ∀ w x, e (ρ w x) = σ w (e x)) : σ.detCharacter = ρ.detCharacter := by
+  ext w
+  have : σ w = (e : V →ₗ[k] V') ∘ₗ ρ w ∘ₗ (e.symm : V' →ₗ[k] V) := by
+    ext x
+    simp [he]
+  simp only [coe_detCharacter_apply, this, LinearMap.det_conj]
+
 /-- The representation induced on the `s`-th exterior power `⋀^s V`, by functoriality of the
 exterior power.  The name shadows the root namespace `exteriorPower`, whose declarations are
 therefore spelled `_root_.exteriorPower.*` below. -/

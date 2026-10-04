@@ -9,6 +9,7 @@ public import Mathlib.GroupTheory.Commutator.Basic
 public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import Mathlib.RepresentationTheory.Semisimple
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.ClosedSubgroup.Lie
+public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.Basis
 public import WeilConjectures.Mathlib.RepresentationTheory.Semisimple
 
 /-!
@@ -48,6 +49,9 @@ statements are instances of general facts about Zariski closures of subgroups of
   representative.
 * `RepresentedDegreeDatum.identityComponent_eq_center_mul_geometricMonodromy`: the
   central–geometric product.
+* `RepresentedDegreeDatum.map`, `RepresentedDegreeDatum.IsPositiveCentralPair.map`: a positive
+  central pair transported along a polynomial homomorphism `GL n k →* GL m k`, such as the
+  exterior power (`Matrix.GeneralLinearGroup.exists_algHom_comp_eq_evalAlgHom_exteriorPower`).
 
 ## Blueprint
 
@@ -212,6 +216,60 @@ theorem commutator_zeroLocus_le_zeroLocus_geometricMonodromy (R : Type*) [CommRi
     (Subgroup.commutator_mem_commutator (Subgroup.mem_top w₁) (Subgroup.mem_top w₂)),
     map_commutatorElement D.rep w₁ w₂⟩
 
+variable {D} in
+theorem IsPositiveCentralPair.mem_zeroLocus_arithmeticMonodromy {N : ℕ} {z : GL n k}
+    (hz : D.IsPositiveCentralPair N z) : z ∈ zeroLocus D.arithmeticMonodromy k :=
+  ((mem_zeroLocus_center_iff _).1 hz.2.1).1
+
+variable {D} in
+/-- The central element of a positive central pair commutes with the image of `W`. -/
+theorem IsPositiveCentralPair.commute {N : ℕ} {z : GL n k} (hz : D.IsPositiveCentralPair N z)
+    (w : W) : z * D.rep w = D.rep w * z :=
+  ((mem_zeroLocus_center_iff _).1 hz.2.1).2 _ (D.rep_mem_zeroLocus_arithmeticMonodromy w)
+
+/-- The `k`-points of the arithmetic monodromy group preserve every subrepresentation of the
+defining representation: invariance under `ρ(W)` passes to its Zariski closure.
+(blueprint: `sk-i-restriction`) -/
+theorem mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy {g : GL n k}
+    (hg : g ∈ zeroLocus D.arithmeticMonodromy k) (S : Subrepresentation D.asRepresentation)
+    {x : n → k} (hx : x ∈ S) : (g : Matrix n n k) *ᵥ x ∈ S :=
+  mulVec_mem_of_mem_zeroLocus_vanishingIdeal (Γ := D.rep.range) (S := S.toSubmodule)
+    (by
+      rintro _ ⟨w, rfl⟩ y hy
+      simpa [asRepresentation] using S.apply_mem_toSubmodule w hy) hg hx
+
+section Map
+
+variable {m : Type*} [Fintype m] [DecidableEq m]
+
+/-- The represented degree datum `r ∘ ρ` obtained from a homomorphism `r : GL n k →* GL m k`. -/
+def map (r : GL n k →* GL m k) : RepresentedDegreeDatum W m k :=
+  { D.toDegreeDatum with rep := r.comp D.rep }
+
+variable {D} in
+/-- A positive central pair `(N, z)` is transported to the positive central pair `(N, r z)` along a
+homomorphism `r : GL n k →* GL m k` given by polynomials, such as an exterior power.
+(blueprint: `sk-i-restriction`) -/
+theorem IsPositiveCentralPair.map {N : ℕ} {z : GL n k} (hz : D.IsPositiveCentralPair N z)
+    (r : GL n k →* GL m k) (φ : CoordinateRing m k →ₐ[k] CoordinateRing n k)
+    (hφ : ∀ g : GL n k, (evalAlgHom g).comp φ = evalAlgHom (r g)) :
+    (D.map r).IsPositiveCentralPair N (r z) := by
+  obtain ⟨hN, -, h, hh, hzh⟩ := id hz
+  refine ⟨hN, (mem_zeroLocus_center_iff _).2 ⟨?_, fun g hg ↦ ?_⟩, r h, ?_, ?_⟩
+  · exact map_mem_zeroLocus_vanishingIdeal r φ hφ (Γ := D.rep.range)
+      (Γ' := (r.comp D.rep).range) (by rintro _ ⟨w, rfl⟩; exact ⟨w, rfl⟩)
+      (hz.mem_zeroLocus_arithmeticMonodromy)
+  · refine commute_of_mem_zeroLocus_vanishingIdeal (Γ := (r.comp D.rep).range) ?_ hg
+    rintro _ ⟨w, rfl⟩
+    simp only [MonoidHom.comp_apply, ← map_mul, hz.commute w]
+  · exact map_mem_zeroLocus_vanishingIdeal r φ hφ (Γ := D.degreeZero.map D.rep)
+      (Γ' := D.degreeZero.map (r.comp D.rep))
+      (by rintro _ ⟨w, hw, rfl⟩; exact ⟨w, hw, rfl⟩) hh
+  · rw [hzh, map_mul, map_pow]
+    rfl
+
+end Map
+
 section Lie
 
 -- `LieRing.ofAssociativeRing` is the commutator bracket of the matrix ring, as in
@@ -324,3 +382,21 @@ theorem identityComponent_eq_center_mul_geometricMonodromy (hD : D.IsSemisimple)
 end IsAlgClosed
 
 end RepresentedDegreeDatum
+
+namespace Matrix.GeneralLinearGroup
+
+variable {n : Type*} [Fintype n] [LinearOrder n] {k : Type*} [Field k]
+
+/-- The exterior power `GL n k →* GL (powersetCard n s) k` is given by polynomials: there is an
+algebra map `φ` of coordinate rings with `evalAlgHom (⋀^s g) = evalAlgHom g ∘ φ`.
+(blueprint: `sk-i-restriction`) -/
+theorem exists_algHom_comp_eq_evalAlgHom_exteriorPower (s : ℕ) :
+    ∃ φ : CoordinateRing (Set.powersetCard n s) k →ₐ[k] CoordinateRing n k,
+      ∀ g : GL n k, (evalAlgHom g).comp φ = evalAlgHom (exteriorPower s g) := by
+  refine ⟨evalAlgHom (exteriorPower s (genericUnit n k)), fun g ↦ ?_⟩
+  rw [← evalAlgHom_map, ← exteriorPower_map]
+  congr 2
+  ext i j
+  simp
+
+end Matrix.GeneralLinearGroup
