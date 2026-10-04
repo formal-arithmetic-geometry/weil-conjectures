@@ -29,6 +29,10 @@ of weights at most `w`, by the hypercohomology spectral sequence.
 ## Main statements
 
 - `AlgebraicGeometry.HasDirectImageWeightBound.comp`: blueprint `sk-l-dl-general-composition`.
+- `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso`: blueprint
+  `lem-zl-shriek-composition`.
+- `AlgebraicGeometry.WeilSheaf.exists_filtration_higherLowerShriek_comp`: the abutment filtration
+  of the compact-support Leray spectral sequence, used in `lem-zl-composition-weight-bound`.
 - `AlgebraicGeometry.HasDirectImageWeightBound.of_openClosed`: blueprint
   `sk-l-dl-general-excision`.
 - `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.of_openClosed`: blueprint
@@ -65,6 +69,73 @@ namespace AlgebraicGeometry
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {ι : PadicAlgCl l →+* ℂ}
 
+/-! ### Composition
+
+The blueprint argument for the composition step runs through the composition isomorphism
+`R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!` and the compact-support Leray spectral sequence
+`E₂^{a,b} = Rᵃg₀!Rᵇf₀!F ⇒ Rᵃ⁺ᵇ(f ≫ g)₀!F`. With the present scaffold
+`AlgebraicGeometry.WeilComplex` is not triangulated, so this spectral sequence cannot be set up;
+its two inputs below — the composition isomorphism and the finite abutment filtration by
+subquotients of the `E₂`-terms — are proved from the vanishing of every Weil sheaf and every Weil
+complex (`AlgebraicGeometry.WeilSheaf.isZero`, `AlgebraicGeometry.WeilComplex.isZero`). The
+composition step itself is derived from these inputs as in the blueprint; the inputs must be
+reproved once Weil sheaves have pro-étale coefficients.
+-/
+
+section Composition
+
+variable {X Z Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Z.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Z) (g : Z ⟶ Y)
+  [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+  [g.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+
+-- `Fact (ringChar k₀ ≠ l)` is used, through the type of the Weil complexes; the linter does not
+-- see this
+set_option linter.unusedSectionVars false in
+/-- The direct images with compact support compose: for `f : X ⟶ Z` and `g : Z ⟶ Y` there is a
+Frobenius-compatible isomorphism `R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!` of functors on Weil complexes
+(blueprint: `lem-zl-shriek-composition`, the composition constraint of `prop-functor-package`).
+
+With the present scaffold this holds because every Weil complex is zero. -/
+theorem WeilComplex.nonempty_derivedLowerShriek_comp_iso :
+    Nonempty (WeilComplex.derivedLowerShriek k₀ l (f ≫ g) ≅
+      WeilComplex.derivedLowerShriek k₀ l f ⋙ WeilComplex.derivedLowerShriek k₀ l g) :=
+  ⟨NatIso.ofComponents (fun _ ↦ (WeilComplex.isZero _).iso (WeilComplex.isZero _))
+    fun _ ↦ (WeilComplex.isZero _).eq_of_tgt _ _⟩
+
+-- `Fact (ringChar k₀ ≠ l)` is used, through the type of the Weil sheaves; the linter does not
+-- see this
+set_option linter.unusedSectionVars false in
+/-- The abutment of the compact-support Leray spectral sequence
+`E₂^{a,b} = Rᵃg₀!Rᵇf₀!F ⇒ Rᵃ⁺ᵇ(f ≫ g)₀!F`: in each total degree `n` the sheaf `Rⁿ(f ≫ g)₀!F`
+carries a finite filtration `0 = G 0 ↪ G 1 ↪ ⋯ ↪ G m ≅ Rⁿ(f ≫ g)₀!F` whose successive
+quotients `E_∞^{a,b}`, `a + b = n`, are subquotients of the `E₂`-terms `Rᵃg₀!Rᵇf₀!F`: quotients
+of subobjects of them (blueprint: `lem-zl-composition-weight-bound`, from
+`lem-zl-shriek-composition`, `def-weil-pbc-hypercohomology-filtrations` and
+`lemma-weil-pbc-hypercohomology-convergence`).
+
+With the present scaffold this holds because every Weil sheaf is zero: the filtration of length
+zero exhibits it. -/
+theorem WeilSheaf.exists_filtration_higherLowerShriek_comp (F : WeilSheaf k₀ l X) (n : ℕ) :
+    ∃ (m : ℕ) (G : Fin (m + 1) → WeilSheaf k₀ l Y) (φ : ∀ i : Fin m, G i.castSucc ⟶ G i.succ),
+      IsZero (G 0) ∧
+        IsIsomorphic (G (Fin.last m)) ((WeilSheaf.higherLowerShriek k₀ l (f ≫ g) n).obj F) ∧
+        (∀ i : Fin m, Mono (φ i)) ∧
+        ∀ i : Fin m, ∃ a b : ℕ, a + b = n ∧ ∃ (S : WeilSheaf k₀ l Y)
+          (j : S ⟶ (WeilSheaf.higherLowerShriek k₀ l g a).obj
+            ((WeilSheaf.higherLowerShriek k₀ l f b).obj F))
+          (p : S ⟶ cokernel (φ i)), Mono j ∧ Epi p :=
+  ⟨0, fun _ ↦ (WeilSheaf.higherLowerShriek k₀ l (f ≫ g) n).obj F, fun i ↦ i.elim0,
+    WeilSheaf.isZero _, ⟨Iso.refl _⟩, fun i ↦ i.elim0, fun i ↦ i.elim0⟩
+
+variable {f g}
+
 /-- If the direct-image weight assertion holds for `f : X ⟶ Z` and for `g : Z ⟶ Y`, then it holds
 for `f ≫ g`:
 
@@ -74,26 +145,23 @@ X --- f ---> Z --- g ---> Y
   `-------- f ≫ g --------'
 ```
 
-(blueprint: `sk-l-dl-general-composition`). -/
-theorem HasDirectImageWeightBound.comp {X Z Y : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))]
-    [Y.Over (Spec (CommRingCat.of k₀))] {f : X ⟶ Z} {g : Z ⟶ Y}
-    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
-    [QuasiCompact f] [g.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated g]
-    [LocallyOfFiniteType g] [QuasiCompact g]
-    [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (Z ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
-    (hf : HasDirectImageWeightBound k₀ ι f) (hg : HasDirectImageWeightBound k₀ ι g) :
-    HasDirectImageWeightBound k₀ ι (f ≫ g) :=
-  -- Run the Frobenius-equivariant compact-support Leray spectral sequence
-  -- `E₂^{a,b} = Rᵃg₀!Rᵇf₀!F ⇒ Rᵃ⁺ᵇ(f ≫ g)₀!F`, whose `E₂`-terms are mixed of weights at most
-  -- `w + a + b`; the abutment is filtered by subquotients of the `E₂`-terms, and `.of_mono`,
-  -- `.of_epi` and `.of_mono_cokernel` preserve mixed upper bounds.
-  sorry
+(blueprint: `sk-l-dl-general-composition`, proved as `lem-zl-composition-weight-bound`).
+
+The `E₂`-term `Rᵃg₀!Rᵇf₀!F` of the compact-support Leray spectral sequence is mixed of weights
+at most `w + b + a`, so its subquotients `E_∞^{a,b}` are, and the abutment `Rⁿ(f ≫ g)₀!F` is
+filtered by these. -/
+theorem HasDirectImageWeightBound.comp (hf : HasDirectImageWeightBound k₀ ι f)
+    (hg : HasDirectImageWeightBound k₀ ι g) : HasDirectImageWeightBound k₀ ι (f ≫ g) := by
+  intro w F hF n
+  obtain ⟨m, G, φ, h0, hlast, hmono, hφ⟩ :=
+    WeilSheaf.exists_filtration_higherLowerShriek_comp (l := l) f g F n
+  refine WeilSheaf.IsMixedOfWeightsAtMost.of_filtration G φ h0 hlast fun i ↦ ?_
+  obtain ⟨a, b, hab, S, j, p, _, _⟩ := hφ i
+  have hE := hg (w + b) _ (hf w F hF b) a
+  rw [show w + (b : ℝ) + a = w + n by rw [← hab]; push_cast; ring] at hE
+  exact (hE.of_mono j).of_epi p
+
+end Composition
 
 /-! ### Open–closed decompositions
 
