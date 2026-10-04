@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.FieldTheory.Perfect
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
@@ -29,6 +30,12 @@ injection for the Brauer group.
 - `AlgebraicGeometry.isRegularLocalRing_stalk_pullback`: a product of regular schemes locally
   of finite type over a perfect field is regular.
 - `AlgebraicGeometry.IsRegular.of_smooth`: a scheme smooth over a field is regular.
+- `AlgebraicGeometry.smooth_of_isRegular`: a regular scheme locally of finite type over a perfect
+  field is smooth over it.
+- `AlgebraicGeometry.IsRegular.of_isIntegrallyClosed_stalk`: a locally noetherian scheme of
+  dimension at most one whose local rings are integrally closed domains is regular.
+- `AlgebraicGeometry.isIntegrallyClosed_stalk_of_isRegular`: conversely, the local rings of a
+  regular locally noetherian scheme of dimension at most one are integrally closed.
 - `AlgebraicGeometry.IsRegular.irreducibleSpace`: a connected locally noetherian regular scheme
   is irreducible.
 - `AlgebraicGeometry.GeometricallyIrreducible.of_smooth_of_geometricallyConnected`: a smooth
@@ -73,6 +80,30 @@ regular local rings. -/
 theorem IsRegular.of_smooth {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     [Smooth f] : IsRegular X :=
   sorry
+
+/-- A regular scheme locally of finite type over a perfect field `k` is smooth over `k`: at a
+point `x` the residue field is finitely generated over the perfect field `k`, hence separably
+generated, and a regular local `k`-algebra essentially of finite type with such a residue field
+is smooth over `k` (Stacks `00TV`). (blueprint: `lem-sc-normalized-curve-smooth`) -/
+theorem smooth_of_isRegular {k : Type u} [Field k] [PerfectField k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [IsRegular X] : Smooth f :=
+  sorry
+
+/-- A locally noetherian scheme of dimension at most one whose local rings are integrally closed
+domains is regular: each local ring is a field or a discrete valuation ring.
+(blueprint: `lem-sc-normal-dim1-dvr`) -/
+theorem IsRegular.of_isIntegrallyClosed_stalk {X : Scheme.{u}} [IsLocallyNoetherian X]
+    (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x))
+    (hdim : topologicalKrullDim X ≤ 1) : IsRegular X := by
+  refine ⟨fun x ↦ ?_⟩
+  obtain ⟨_, _⟩ := hX x
+  exact .of_isIntegrallyClosed _ ((ringKrullDim_stalk_le_topologicalKrullDim x).trans hdim)
+
+/-- The local rings of a regular locally noetherian scheme of dimension at most one are
+integrally closed: each of them is a field or a discrete valuation ring. -/
+theorem isIntegrallyClosed_stalk_of_isRegular {X : Scheme.{u}} [IsRegular X]
+    (hdim : topologicalKrullDim X ≤ 1) (x : X) : IsIntegrallyClosed (X.presheaf.stalk x) :=
+  IsRegularLocalRing.isIntegrallyClosed _ ((ringKrullDim_stalk_le_topologicalKrullDim x).trans hdim)
 
 /-- A connected locally noetherian regular scheme is irreducible, since its local rings, being
 regular, are integral domains. -/

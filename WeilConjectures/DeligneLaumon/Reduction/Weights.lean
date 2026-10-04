@@ -43,14 +43,17 @@ a complex of weights at most `w` is `w + b` in degree `b`, Deligne's convention.
 - `AlgebraicGeometry.WeilSheaf.IsMixed`: mixed, that is, mixed of weights at most `w` for some
   `w`.
 - `AlgebraicGeometry.HasDirectImageWeightBound`: the direct-image weight assertion for a single
-  morphism, the statement the reductions of `sec-deligne-laumon-general` propagate.
+  morphism, the statement the reductions of `sec-deligne-laumon-general` propagate, and its
+  complex form `AlgebraicGeometry.HasDirectImageComplexWeightBound`.
 
 Monotonicity in the bound and the bound for a zero sheaf are proved
 (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.mono_weight` and
 `AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_of_isZero`), and the closure properties the
 blueprint records alongside the definition — under subobjects, quotients and extensions — are
 stated: `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_mono`, `.of_epi` and
-`.of_mono_cokernel`.
+`.of_mono_cokernel`. From them, the middle term of an exact sequence whose outer terms are mixed
+of weights at most `w` is mixed of weights at most `w`
+(`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_exact`).
 
 ## References
 
@@ -135,6 +138,23 @@ theorem IsMixedOfWeightsAtMost.of_mono_cokernel (i : G ⟶ F) [Mono i]
     F.IsMixedOfWeightsAtMost ι w :=
   sorry
 
+/-- Mixed upper bounds are invariant under isomorphism (blueprint: `sk-d-dl-general-weights`). -/
+theorem IsMixedOfWeightsAtMost.of_iso (e : F ≅ G) (h : F.IsMixedOfWeightsAtMost ι w) :
+    G.IsMixedOfWeightsAtMost ι w := by
+  obtain ⟨n, H, φ, h0, ⟨e'⟩, hmono, hpure⟩ := h
+  exact ⟨n, H, φ, h0, ⟨e' ≪≫ e⟩, hmono, hpure⟩
+
+/-- In an exact sequence `A ⟶ B ⟶ C` of Weil sheaves whose outer terms are mixed of weights at
+most `w`, the middle term is mixed of weights at most `w`: the kernel of `B ⟶ C` is a quotient
+of `A`, and the cokernel of its inclusion is a subobject of `C`
+(blueprint: `lem-zl-morphism-open-closed-reduction`, step 0). -/
+theorem IsMixedOfWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} (hS : S.Exact)
+    (h₁ : S.X₁.IsMixedOfWeightsAtMost ι w) (h₃ : S.X₃.IsMixedOfWeightsAtMost ι w) :
+    S.X₂.IsMixedOfWeightsAtMost ι w :=
+  have := hS.epi_kernelLift
+  (h₁.of_epi (kernel.lift S.g S.f S.zero)).of_mono_cokernel (kernel.ι S.g)
+    (h₃.of_mono (Abelian.factorThruCoimage S.g))
+
 end WeilSheaf
 
 /-! ### Mixed complexes -/
@@ -145,6 +165,13 @@ bound in total degree `n` is `w + n` (blueprint: `sk-d-dl-general-weights`). -/
 def WeilComplex.IsMixedOfWeightsAtMost (ι : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l X)
     (w : ℝ) : Prop :=
   ∀ b : ℤ, ((WeilComplex.homologySheaf b).obj K).IsMixedOfWeightsAtMost ι (w + (b : ℝ))
+
+/-- Mixed upper bounds of Weil complexes are invariant under isomorphism
+(blueprint: `sk-d-dl-general-weights`). -/
+theorem WeilComplex.IsMixedOfWeightsAtMost.of_iso {ι : PadicAlgCl l →+* ℂ}
+    {K L : WeilComplex k₀ l X} {w : ℝ} (e : K ≅ L) (h : K.IsMixedOfWeightsAtMost ι w) :
+    L.IsMixedOfWeightsAtMost ι w :=
+  fun b ↦ (h b).of_iso ((WeilComplex.homologySheaf b).mapIso e)
 
 /-- The direct-image weight assertion of the blueprint theorem `sk-thm-dl-general-sheaf`, for a
 single morphism `f : X ⟶ Y` of `k₀`-schemes: every constructible Weil sheaf `F` on `X` that is
@@ -161,5 +188,20 @@ def HasDirectImageWeightBound (k₀ : Type u) [Field k₀] [Finite k₀] {l : �
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] : Prop :=
   ∀ (w : ℝ) (F : WeilSheaf k₀ l X), F.IsMixedOfWeightsAtMost ι w →
     ∀ r : ℕ, ((WeilSheaf.higherLowerShriek k₀ l f r).obj F).IsMixedOfWeightsAtMost ι (w + r)
+
+/-- The complex form of the direct-image weight assertion, for a single morphism `f : X ⟶ Y` of
+`k₀`-schemes: `Rf₀!` carries every Weil complex on `X` that is mixed of weights at most `w` to a
+Weil complex mixed of weights at most `w`, for every `w`
+(blueprint: `lem-zl-morphism-open-closed-reduction`). -/
+def HasDirectImageComplexWeightBound (k₀ : Type u) [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+    [Fact (ringChar k₀ ≠ l)] (ι : PadicAlgCl l →+* ℂ) {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] : Prop :=
+  ∀ (w : ℝ) (K : WeilComplex k₀ l X), K.IsMixedOfWeightsAtMost ι w →
+    ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w
 
 end AlgebraicGeometry
