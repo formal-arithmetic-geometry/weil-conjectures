@@ -26,6 +26,9 @@ and that the zero locus of `insert a s` is the intersection of the zero loci of 
 
 # Complements on schemes
 
+* `AlgebraicGeometry.Scheme.basicOpen_prod`,
+  `AlgebraicGeometry.Scheme.iInf_basicOpen_eq_basicOpen_prod`: the basic open of a finite
+  product of sections is the intersection of the basic opens.
 * `AlgebraicGeometry.Scheme.isUnit_of_le_basicOpen`: if `U ≤ X.basicOpen f` for a section
   `f : Γ(X, U)`, then `f` is a unit. This is the converse of `Scheme.basicOpen_of_isUnit`.
 * `AlgebraicGeometry.Scheme.Hom.range_appLE_subset_of_comp_eq`: sections in the image of
@@ -153,3 +156,33 @@ lemma appLE_eq_pullbackPresheafToPresheaf_app (U : S.Opens) (V : X.Opens) (e : V
   rfl
 
 end AlgebraicGeometry.Scheme.Hom
+
+namespace AlgebraicGeometry
+
+/-- The basic open of a finite product of sections is the intersection of the basic opens. -/
+lemma Scheme.basicOpen_prod {X : Scheme.{u}} {V : X.Opens} {ι : Type*} (s : Finset ι)
+    (g : ι → Γ(X, V)) : X.basicOpen (∏ i ∈ s, g i) = V ⊓ ⨅ i ∈ s, X.basicOpen (g i) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simp [Scheme.basicOpen_one]
+  | insert a s ha ih =>
+    rw [Finset.prod_insert ha, Scheme.basicOpen_mul, ih, Finset.iInf_insert, inf_left_comm,
+      inf_eq_right.2 ((inf_le_left).trans (X.basicOpen_le _))]
+
+/-- A nonempty finite intersection of basic opens is the basic open of the product. -/
+lemma Scheme.iInf_basicOpen_eq_basicOpen_prod {X : Scheme.{u}} {V : X.Opens} {ι : Type*}
+    [Fintype ι] [Nonempty ι] (g : ι → Γ(X, V)) :
+    ⨅ i, X.basicOpen (g i) = X.basicOpen (∏ i, g i) := by
+  rw [Scheme.basicOpen_prod]
+  simp only [Finset.mem_univ, iInf_pos]
+  exact (inf_eq_right.2 ((iInf_le _ (Classical.arbitrary ι)).trans (X.basicOpen_le _))).symm
+
+/-- Composition of restriction maps of the structure sheaf, elementwise. -/
+lemma Scheme.presheaf_map_homOfLE_map_homOfLE_apply {X : Scheme.{u}} {U V W : X.Opens}
+    (h₁ : U ≤ V) (h₂ : V ≤ W) (a : Γ(X, W)) :
+    X.presheaf.map (homOfLE h₁).op (X.presheaf.map (homOfLE h₂).op a) =
+      X.presheaf.map (homOfLE (h₁.trans h₂)).op a := by
+  rw [← CommRingCat.comp_apply, ← Functor.map_comp]
+  rfl
+
+end AlgebraicGeometry
