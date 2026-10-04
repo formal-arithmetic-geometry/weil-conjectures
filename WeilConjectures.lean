@@ -598,6 +598,7 @@ public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocali
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
 public import WeilConjectures.Mathlib.RingTheory.HopfAlgebra.Quotient
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Cotangent
+public import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
