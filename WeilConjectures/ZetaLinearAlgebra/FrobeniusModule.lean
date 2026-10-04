@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import Mathlib.LinearAlgebra.Eigenspace.Basic
+public import Mathlib.LinearAlgebra.Eigenspace.Charpoly
+public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 
 /-!
@@ -42,6 +43,10 @@ reversed characteristic polynomial, for an integral weight and with the normaliz
 - `FrobeniusModule.tateTwist`: the Tate twist `M(n)`, rescaling the Frobenius by `q ^ (-n)`.
 - `FrobeniusModule.dual`: the dual `M^∨` with the inverse transpose of the Frobenius.
 - `FrobeniusModule.IsPureOfWeight.tateTwist`: the twist by `n` lowers the weight by `2 n`.
+- `FrobeniusModule.roots_charpoly_frobeniusEnd_eq_add`: the spectrum of the middle term of a
+  short exact sequence is the union of the spectra of the outer terms.
+- `FrobeniusModule.HasWeightsAtMost.of_injective`, `FrobeniusModule.HasWeightsAtMost.of_surjective`:
+  submodules and quotients have weights at most those of the ambient module.
 -/
 
 @[expose] public section
@@ -118,6 +123,16 @@ theorem Equiv.hasEigenvalue {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) {α
 theorem HasWeightsAtMost.of_equiv {ι : K →+* ℂ} {q : ℕ} {M N : FrobeniusModule.{u, v} K}
     (e : M.Equiv N) {w : ℝ} (h : N.HasWeightsAtMost ι q w) : M.HasWeightsAtMost ι q w :=
   fun α hα ↦ h α (e.hasEigenvalue hα)
+
+/-- A Frobenius module isomorphic to one pure of weight `w` is pure of weight `w`. -/
+theorem IsPureOfWeight.of_equiv {ι : K →+* ℂ} {q : ℕ} {M N : FrobeniusModule.{u, v} K}
+    (e : M.Equiv N) {w : ℝ} (h : N.IsPureOfWeight ι q w) : M.IsPureOfWeight ι q w :=
+  fun α hα ↦ h α (e.hasEigenvalue hα)
+
+/-- The zero Frobenius module has no Frobenius eigenvalue, so it is pure of every weight. -/
+theorem isPureOfWeight_of_subsingleton {ι : K →+* ℂ} {q : ℕ} (M : FrobeniusModule.{u, v} K)
+    [Subsingleton M.carrier] (w : ℝ) : M.IsPureOfWeight ι q w := fun _ hα ↦
+  (hα.exists_hasEigenvector.choose_spec.2 (Subsingleton.elim _ _)).elim
 
 /-- The local polynomial `det (1 - T F)` of a Frobenius module, the reverse characteristic
 polynomial of its Frobenius `F`. -/
@@ -239,5 +254,122 @@ lemma dual_frobenius_comp_frobenius (M : FrobeniusModule.{u, v} K)
     (M.dual.frobenius f : Module.Dual K M.carrier) ∘ₗ M.frobenius.toLinearMap = f := by
   ext
   simp
+
+section Subquotient
+
+variable {M M' M'' : FrobeniusModule.{u, v} K}
+
+/-- A Frobenius-equivariant injection carries eigenvalues of the source to eigenvalues of the
+target. -/
+theorem hasEigenvalue_of_injective (f : M'.carrier →ₗ[K] M.carrier) (hf : Function.Injective f)
+    (hfF : ∀ x, f (M'.frobenius x) = M.frobenius (f x)) {α : K}
+    (hα : M'.frobeniusEnd.HasEigenvalue α) : M.frobeniusEnd.HasEigenvalue α := by
+  obtain ⟨x, hx⟩ := hα.exists_hasEigenvector
+  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff] at hx
+  refine Module.End.hasEigenvalue_of_hasEigenvector (x := f x) ?_
+  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff]
+  refine ⟨?_, (map_ne_zero_iff _ hf).2 hx.2⟩
+  change M.frobenius (f x) = α • f x
+  rw [← hfF, ← map_smul]
+  exact congrArg f hx.1
+
+/-- The Frobenius of `M` preserves the kernel of a Frobenius-equivariant map `g : M → M''`. -/
+theorem ker_le_comap_frobeniusEnd (g : M.carrier →ₗ[K] M''.carrier)
+    (hgF : ∀ x, g (M.frobenius x) = M''.frobenius (g x)) :
+    LinearMap.ker g ≤ (LinearMap.ker g).comap M.frobeniusEnd := fun x hx ↦ by
+  simp only [LinearMap.mem_ker, Submodule.mem_comap] at hx ⊢
+  change g (M.frobenius x) = 0
+  rw [hgF, hx, map_zero]
+
+/-- For a Frobenius-equivariant surjection `g : M → M''`, the Frobenius induced on `M ⧸ ker g`
+has the characteristic polynomial of the Frobenius of `M''`. -/
+theorem charpoly_mapQ_frobeniusEnd (g : M.carrier →ₗ[K] M''.carrier)
+    (hg : Function.Surjective g) (hgF : ∀ x, g (M.frobenius x) = M''.frobenius (g x)) :
+    ((LinearMap.ker g).mapQ (LinearMap.ker g) M.frobeniusEnd
+      (ker_le_comap_frobeniusEnd g hgF)).charpoly = M''.frobeniusEnd.charpoly := by
+  let e := g.quotKerEquivOfSurjective hg
+  rw [← LinearEquiv.charpoly_conj e]
+  congr 1
+  refine LinearMap.ext fun y ↦ ?_
+  obtain ⟨x, rfl⟩ := hg y
+  rw [LinearEquiv.conj_apply_apply, LinearMap.quotKerEquivOfSurjective_symm_apply,
+    Submodule.mapQ_apply, LinearMap.quotKerEquivOfSurjective_apply_mk]
+  exact hgF x
+
+/-- For a Frobenius-equivariant surjection `g : M → M''`, the characteristic polynomial of the
+Frobenius of `M''` divides that of the Frobenius of `M`. -/
+theorem charpoly_frobeniusEnd_dvd_of_surjective (g : M.carrier →ₗ[K] M''.carrier)
+    (hg : Function.Surjective g) (hgF : ∀ x, g (M.frobenius x) = M''.frobenius (g x)) :
+    M''.frobeniusEnd.charpoly ∣ M.frobeniusEnd.charpoly := by
+  rw [LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ _ _
+    (ker_le_comap_frobeniusEnd g hgF), charpoly_mapQ_frobeniusEnd g hg hgF]
+  exact dvd_mul_left _ _
+
+/-- For a short exact sequence `0 → M' → M → M'' → 0` of Frobenius modules with
+Frobenius-equivariant maps, the characteristic polynomial of the Frobenius of `M` is the product
+of those of `M'` and `M''`. -/
+theorem charpoly_frobeniusEnd_eq_mul (f : M'.carrier →ₗ[K] M.carrier)
+    (g : M.carrier →ₗ[K] M''.carrier) (hf : Function.Injective f) (hg : Function.Surjective g)
+    (hfg : Function.Exact f g) (hfF : ∀ x, f (M'.frobenius x) = M.frobenius (f x))
+    (hgF : ∀ x, g (M.frobenius x) = M''.frobenius (g x)) :
+    M.frobeniusEnd.charpoly = M'.frobeniusEnd.charpoly * M''.frobeniusEnd.charpoly := by
+  have hW := ker_le_comap_frobeniusEnd g hgF
+  rw [LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ _ _ hW,
+    charpoly_mapQ_frobeniusEnd g hg hgF]
+  congr 1
+  -- `f` identifies `M'` with `ker g`, intertwining the Frobenius of `M'` with its restriction
+  let e : M'.carrier ≃ₗ[K] LinearMap.ker g :=
+    LinearEquiv.ofInjective f hf ≪≫ₗ LinearEquiv.ofEq _ _ hfg.linearMap_ker_eq.symm
+  rw [← LinearEquiv.charpoly_conj e]
+  congr 1
+  refine LinearMap.ext fun x ↦ Subtype.ext ?_
+  obtain ⟨y, hy⟩ : (x : M.carrier) ∈ LinearMap.range f := by
+    rw [← hfg.linearMap_ker_eq]
+    exact x.2
+  have hx : x = e y := Subtype.ext hy.symm
+  subst hx
+  rw [LinearEquiv.conj_apply_apply, LinearEquiv.symm_apply_apply]
+  exact (hfF y).symm
+
+/-- *Spectrum of an exact Frobenius sequence.* For a short exact sequence
+`0 → M' → M → M'' → 0` of Frobenius modules with Frobenius-equivariant maps, the spectrum of the
+Frobenius of `M`, the multiset of eigenvalues counted with algebraic multiplicity, is the union of
+the spectra of `M'` and `M''`.
+(blueprint: `lem-a1-spectrum-exact-sequence`) -/
+theorem roots_charpoly_frobeniusEnd_eq_add (f : M'.carrier →ₗ[K] M.carrier)
+    (g : M.carrier →ₗ[K] M''.carrier) (hf : Function.Injective f) (hg : Function.Surjective g)
+    (hfg : Function.Exact f g) (hfF : ∀ x, f (M'.frobenius x) = M.frobenius (f x))
+    (hgF : ∀ x, g (M.frobenius x) = M''.frobenius (g x)) :
+    M.frobeniusEnd.charpoly.roots =
+      M'.frobeniusEnd.charpoly.roots + M''.frobeniusEnd.charpoly.roots := by
+  rw [charpoly_frobeniusEnd_eq_mul f g hf hg hfg hfF hgF]
+  exact Polynomial.roots_mul (mul_ne_zero (LinearMap.charpoly_monic _).ne_zero
+    (LinearMap.charpoly_monic _).ne_zero)
+
+/-- *Subquotient bounds, submodule case.* A Frobenius module embedding Frobenius-equivariantly
+into one with weights at most `w` has weights at most `w`.
+(blueprint: `lem-a1-subquotient-extension-bounds`) -/
+theorem HasWeightsAtMost.of_injective {ι : K →+* ℂ} {q : ℕ} {w : ℝ}
+    (f : M'.carrier →ₗ[K] M.carrier) (hf : Function.Injective f)
+    (hfF : ∀ x, f (M'.frobenius x) = M.frobenius (f x)) (h : M.HasWeightsAtMost ι q w) :
+    M'.HasWeightsAtMost ι q w :=
+  fun α hα ↦ h α (hasEigenvalue_of_injective f hf hfF hα)
+
+/-- *Subquotient bounds, quotient case.* A Frobenius-equivariant quotient of a Frobenius module
+with weights at most `w` has weights at most `w`: the characteristic polynomial of the quotient
+divides that of the ambient module (`lem-a1-spectrum-exact-sequence`), so every eigenvalue of the
+quotient is an eigenvalue of the ambient module.
+(blueprint: `lem-a1-subquotient-extension-bounds`) -/
+theorem HasWeightsAtMost.of_surjective {ι : K →+* ℂ} {q : ℕ} {w : ℝ}
+    (g : M.carrier →ₗ[K] M''.carrier) (hg : Function.Surjective g)
+    (hgF : ∀ x, g (M.frobenius x) = M''.frobenius (g x)) (h : M.HasWeightsAtMost ι q w) :
+    M''.HasWeightsAtMost ι q w := by
+  intro α hα
+  refine h α ?_
+  rw [Module.End.hasEigenvalue_iff_isRoot_charpoly] at hα ⊢
+  obtain ⟨p, hp⟩ := charpoly_frobeniusEnd_dvd_of_surjective g hg hgF
+  rw [Polynomial.IsRoot, hp, Polynomial.eval_mul, hα, zero_mul]
+
+end Subquotient
 
 end FrobeniusModule

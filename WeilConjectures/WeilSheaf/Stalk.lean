@@ -298,15 +298,19 @@ theorem isZero_globalSectionsObj :
     IsZero ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj F.obj.carrier) :=
   (Sheaf.Γ _ _).map_isZero (isZero_carrier F)
 
+/-- The underlying module of the global sections of a Weil sheaf is zero. -/
+theorem subsingleton_globalSectionsObj :
+    Subsingleton ((WeilCoefficients.toModuleCat l).obj
+      ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj F.obj.carrier)) :=
+  ModuleCat.isZero_iff_subsingleton.1 ((WeilCoefficients.toModuleCat l).map_isZero
+    F.isZero_globalSectionsObj)
+
 /-- The global sections of a Weil sheaf are finite-dimensional, being zero. -/
 theorem finiteDimensional_globalSections :
     FiniteDimensional (PadicAlgCl l)
       ((WeilCoefficients.toModuleCat l).obj ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj
         F.obj.carrier)) :=
-  have : Subsingleton ((WeilCoefficients.toModuleCat l).obj
-      ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj F.obj.carrier)) :=
-    ModuleCat.isZero_iff_subsingleton.1 ((WeilCoefficients.toModuleCat l).map_isZero
-      F.isZero_globalSectionsObj)
+  have := F.subsingleton_globalSectionsObj
   Module.Finite.of_finite
 
 /-- The global sections `Γ(X̄, F)` of a Weil sheaf, with the Frobenius
