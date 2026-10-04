@@ -355,11 +355,6 @@ lemma Hom.map_zeroLocusIdeal_basicOpen (φ : M ⟶ N) (W : X.affineOpens) (f : �
   rw [← pow_sub_mul_pow f (hm _ (Finset.mem_image_of_mem n hgT)), mul_assoc, map_mul]
   exact Ideal.mul_mem_left _ _ (hn g (hTS hgT))
 
-/-- On elements, the naturality of a morphism of modules with respect to restriction. -/
-lemma Hom.app_map_apply {P Q : X.Modules} (φ : P ⟶ Q) {U V : X.Opens} (i : V ⟶ U)
-    (x : Γ(P, U)) : φ.app V (P.presheaf.map i.op x) = Q.presheaf.map i.op (φ.app U x) :=
-  ConcreteCategory.congr_hom (φ.mapPresheaf.naturality i.op) x
-
 /-- Conjugating the pullback of an endomorphism `f` of `𝒪_X` by `h^* 𝒪_X ≅ 𝒪_Y` gives the
 endomorphism of `𝒪_Y` whose value at `1` is `h^♯ (f 1)`. -/
 lemma pullbackObjUnitIso_conj_app_top {Y : Scheme.{u}} (h : Y ⟶ X)
@@ -422,7 +417,7 @@ lemma restrictAppIso_hom_comp_app_comp_appIso_hom {Z : Scheme.{u}} (j : Z ⟶ X)
   rw [h1, Hom.app_smul, smul_restrictAppIso_hom_apply, Iso.hom_inv_id_apply]
   congr 1
   exact congrArg (Q.restrictAppIso j W).hom
-    (Hom.app_map_apply α (homOfLE le_top) (1 : Γ(Z, ⊤)))
+    (Hom.app_presheaf_map α (homOfLE le_top) (1 : Γ(Z, ⊤)))
 
 /-- The value at `1` of a morphism `α : 𝒪_Z ⟶ Q|_Z` along an open immersion `j` is a free
 generator of `Q` on the image of `j` if and only if `α` is an isomorphism. -/
@@ -506,7 +501,7 @@ lemma IsFreeGenerator.exists_pullback {Y : Scheme.{u}} (g : Y ⟶ X)
       X.presheaf.map (homOfLE hW).op b := by
     have h1 := app_app_top_one W.ι αM (asIso αN) φ
     rw [asIso_hom, restrictAppIso_hom_unitToRestrict_app_top,
-      restrictAppIso_hom_unitToRestrict_app_top, Hom.app_map_apply, hb, map_smul] at h1
+      restrictAppIso_hom_unitToRestrict_app_top, Hom.app_presheaf_map, hb, map_smul] at h1
     exact ((hN.map hW).smul_left_injective h1).symm
   set κ := restrictFunctorCompPullbackIso g W
   set αM' : Modules.unit (g ⁻¹ᵁ W).toScheme ⟶ ((pullback g).obj M).restrict (g ⁻¹ᵁ W).ι :=
@@ -526,7 +521,7 @@ lemma IsFreeGenerator.exists_pullback {Y : Scheme.{u}} (g : Y ⟶ X)
   have hW' : g ⁻¹ᵁ W ≤ (g ⁻¹ᵁ W).ι ''ᵁ ⊤ := (Opens.ι_image_top _).ge
   refine ⟨_, _, (((isFreeGenerator_iff_isIso _ αM').mpr inferInstance).map hW'),
     (((isFreeGenerator_iff_isIso _ αN').mpr inferInstance).map hW'), ?_⟩
-  rw [Hom.app_map_apply, h2, map_smul]
+  rw [Hom.app_presheaf_map, h2, map_smul]
   congr 1
   have hid₁ (x : Γ(Y, (g ⁻¹ᵁ W).ι ''ᵁ ⊤)) : ((g ⁻¹ᵁ W).ι.appIso ⊤).inv x = x := by
     rw [Opens.ι_appIso]
@@ -591,7 +586,7 @@ theorem Hom.comap_zeroLocus {Y : Scheme.{u}} (g : Y ⟶ X) (φ : M ⟶ N) :
       Hom.ideal_zeroLocus φ U (hM.map hU) hN hb.symm,
       Hom.ideal_zeroLocus _ ⟨V, hVaff⟩ (hM'.map hVU) (hN'.map hVU) (b := g.appLE U V hVU b),
       Ideal.map_span, Set.image_singleton]
-    rw [Hom.app_map_apply, hb', map_smul]
+    rw [Hom.app_presheaf_map, hb', map_smul]
     rfl
   choose V hyV hV using key
   have hcov : ⨆ y, (V y).1 = ⊤ := eq_top_iff.mpr fun y _ ↦
