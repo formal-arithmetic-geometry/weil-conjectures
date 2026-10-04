@@ -54,8 +54,13 @@ base change.
 
 ## Main results
 
-- `AlgebraicGeometry.Etale.compactificationTopIsPullback`: the top square of the diagram above
-  is cartesian.
+- `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_iff`:
+  `Ex_!(c)` is an isomorphism if and only if the derived base change map `Ex_*` of the bottom
+  square of the diagram above, whiskered by `Di_!`, is.
+- `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap`:
+  `Ex_!(c)` is an isomorphism if `Ex_*` of the bottom square is.
+
+The top square is cartesian by `AlgebraicGeometry.Compactification.isPullback_ofIsPullback_i`.
 -/
 
 @[expose] public section
@@ -100,21 +105,13 @@ end OpenImmersion
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- For a cartesian square `g' ≫ f = f' ≫ g` and a compactification `c` of `f`, the open
-immersion of the base changed compactification `c.ofIsPullback sq` is the base change of
-`c.i` along `pullback.fst c.g g : c.Z ×_Y Y' ⟶ c.Z`. -/
-theorem compactificationTopIsPullback (sq : IsPullback g' f' f g) (c : Compactification f) :
-    IsPullback g' (c.ofIsPullback sq).i c.i (pullback.fst c.g g) :=
-  Compactification.isPullback_of_isPullback sq c (pullback.lift_fst _ _ _)
-    (pullback.lift_snd _ _ _)
-
 /-- **The compactly supported base change map along a compactification** `Ex_!(c)`: for a
 cartesian square `g' ≫ f = f' ≫ g` and a compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`, the
 natural transformation `Lg^* Rf_!(c) ⟶ Rf'_!(c ×_Y Y') Lg'^*`, where `c ×_Y Y'` is the base
 changed compactification `c.ofIsPullback sq` of `f'`. It is the derived base change map `Ex_*`
 of the cartesian square `Z ×_Y Y' ⟶ Z` over `g`, whiskered by `Di_!`, followed by the derived
 base change isomorphism of the extension by zero for the cartesian square
-`AlgebraicGeometry.Etale.compactificationTopIsPullback`, whiskered by `Rp'_*`.
+`AlgebraicGeometry.Compactification.isPullback_ofIsPullback_i`, whiskered by `Rp'_*`.
 
 ```
   D(X) --Lg'^*--> D(X')
@@ -137,9 +134,28 @@ noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeMap
       (derivedBaseChangeMap A (IsPullback.of_hasPullback c.g g).toCommSq) ≫
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight
-      (derivedOpenImmersionLowerShriekBaseChangeIso A (compactificationTopIsPullback sq c)).hom
+      (derivedOpenImmersionLowerShriekBaseChangeIso A (c.isPullback_ofIsPullback_i sq)).hom
       R(((c.ofIsPullback sq).g)_*[A]) ≫
     (Functor.associator _ _ _).hom
+
+/-- `Ex_!(c)` is an isomorphism if and only if the derived base change map `Ex_*` of the
+cartesian square `c.Z ×_Y Y' ⟶ c.Z` over `g`, whiskered by `Di_!`, is: the other factors of
+`Ex_!(c)` are isomorphisms. -/
+theorem isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_iff
+    (sq : IsPullback g' f' f g) (c : Compactification f) :
+    IsIso (rightDerivedLowerShriekOfCompactificationBaseChangeMap A sq c) ↔
+      IsIso (Functor.whiskerLeft D((c.i)_!open[A])
+        (derivedBaseChangeMap A (IsPullback.of_hasPullback c.g g).toCommSq)) := by
+  rw [rightDerivedLowerShriekOfCompactificationBaseChangeMap, isIso_comp_left_iff,
+    isIso_comp_right_iff]
+
+/-- If the derived base change map `Ex_*` of the cartesian square `c.Z ×_Y Y' ⟶ c.Z` over `g`
+is an isomorphism, then so is `Ex_!(c)`. -/
+theorem isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap
+    (sq : IsPullback g' f' f g) (c : Compactification f)
+    [IsIso (derivedBaseChangeMap A (IsPullback.of_hasPullback c.g g).toCommSq)] :
+    IsIso (rightDerivedLowerShriekOfCompactificationBaseChangeMap A sq c) :=
+  (isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_iff A sq c).2 inferInstance
 
 end Etale
 

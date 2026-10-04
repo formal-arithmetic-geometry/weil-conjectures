@@ -36,6 +36,8 @@ special case of the literal pullback is `Compactification.baseChange`.
 
 - `AlgebraicGeometry.Compactification.isPullback_of_isPullback`: the open immersion of the
   base changed compactification is a base change of the original open immersion;
+- `AlgebraicGeometry.Compactification.isPullback_ofIsPullback_i`: the same, for the open
+  immersion of `AlgebraicGeometry.Compactification.ofIsPullback`;
 - `AlgebraicGeometry.HasCompactification.of_isPullback`: compactifiability is stable under
   base change, with the two projections of a fibre product as instances
   (`AlgebraicGeometry.HasCompactification.pullback_snd` and
@@ -96,6 +98,12 @@ noncomputable def ofIsPullback (hsq : IsPullback h u p t) (c : Compactification 
     MorphismProperty.IsStableUnderBaseChange.of_isPullback
       (isPullback_of_isPullback hsq c (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _))
       c.isOpenImmersion
+
+/-- The open immersion of the base changed compactification `c.ofIsPullback hsq` is the base
+change of `c.i` along `pullback.fst c.g t : c.Z ×_T S ⟶ c.Z`. -/
+theorem isPullback_ofIsPullback_i (hsq : IsPullback h u p t) (c : Compactification p) :
+    IsPullback h (c.ofIsPullback hsq).i c.i (pullback.fst c.g t) :=
+  isPullback_of_isPullback hsq c (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _)
 
 /-- **Base change of a compactification** along a morphism `t : T ⟶ S` of bases: if `c` is a
 compactification of `f : X ⟶ S`, then `c.Z ×_S T ⟶ T` together with `X ×_S T ⟶ c.Z ×_S T`
