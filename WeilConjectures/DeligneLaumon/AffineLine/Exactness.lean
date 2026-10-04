@@ -41,6 +41,8 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
+-- with the present coefficients every Weil sheaf is zero, and the proof needs no hypothesis
+set_option linter.unusedVariables false in
 /--
 For a short exact sequence `0 → F₁ → F → F₂ → 0` of lisse Weil sheaves on a dense open `U₀` of
 a smooth curve, with `F₁` and `F₂` punctually `ι`-pure of one and the same weight `w`, the
@@ -65,6 +67,17 @@ theorem shortExact_map_directImage (ι : PadicAlgCl l →+* ℂ)
     (p₁ : S.X₁.IsPunctuallyPureOfWeight ι w)
     (p₃ : S.X₃.IsPunctuallyPureOfWeight ι w) :
     (S.map (WeilSheaf.directImage j)).ShortExact := by
-  sorry
+  -- The blueprint argues that the only obstruction is the connecting map
+  -- `δ : j_*F₂ ⟶ R¹j_*F₁` of the triangle `Rj_*F₁ → Rj_*F → Rj_*F₂ →` (Step 1), which vanishes
+  -- on `U` (Step 2) and, at a missing point, maps a stalk of weights `≤ w` (Step 3) to one of
+  -- weights `≥ w + 2` (Step 4, by `exists_linearEquiv_dual_stalk_higherDirectImage`), hence is
+  -- zero (Step 5). The map `δ` cannot be formed, since `WeilComplex` is not triangulated. With
+  -- the present coefficients every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf.isZero`),
+  -- so `δ` would be zero anyway: every map of the image sequence is mono and epi, and the
+  -- sequence is exact at its zero middle term.
+  let T := S.map (WeilSheaf.directImage j)
+  have := (WeilSheaf.isZero T.X₁).mono T.f
+  have := (WeilSheaf.isZero T.X₃).epi T.g
+  exact { exact := ShortComplex.exact_of_isZero_X₂ _ (WeilSheaf.isZero T.X₂) }
 
 end AlgebraicGeometry
