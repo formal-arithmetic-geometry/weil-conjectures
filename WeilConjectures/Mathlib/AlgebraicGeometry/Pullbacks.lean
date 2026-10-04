@@ -38,6 +38,8 @@ schemes appear in practice.
   induced by two open immersions is the intersection of the preimages of their ranges, and its
   variant `AlgebraicGeometry.Scheme.Pullback.opensRange_openCoverOfLeftRight_f` for the charts
   of the product of two open covers.
+* `AlgebraicGeometry.Scheme.pullback_fst_toSpecΓ_appTop`: global sections of the base change of
+  `Spec R ⟶ Spec Γ(U, ⊤)` along `U ⟶ Spec Γ(U, ⊤)`.
 
 Note that `IsAffine (pullback (terminal.from X) (terminal.from Y))` for affine `X` and `Y` is
 already an instance in Mathlib, since `⊤_ Scheme` is affine.
@@ -624,5 +626,26 @@ lemma isIso_morphismRestrict_pullback_fst (f : A ⟶ C) (g : B ⟶ C) (O : C.Ope
   exact (IsPullback.of_right' hs ht).flip.isIso_fst_of_isIso
 
 end RestrictBaseChange
+
+section PullbackSpec
+
+/-- For a ring map `φ : Γ(U, ⊤) ⟶ R`, pulling a global function on `U` back to the fibre product
+`U ×_{Spec Γ(U, ⊤)} Spec R` along the first projection is the same as applying `φ` and then
+pulling back along the second projection: `fst^* = snd^* ∘ (ΓSpecIso R)⁻¹ ∘ φ`. This is the
+commutativity of the pullback square on global sections, together with
+`X.toSpecΓ.appTop = (ΓSpecIso Γ(X, ⊤)).hom`. -/
+lemma Scheme.pullback_fst_toSpecΓ_appTop {U : Scheme.{u}} {R : CommRingCat.{u}}
+    (φ : Γ(U, ⊤) ⟶ R) :
+    (pullback.fst U.toSpecΓ (Spec.map φ)).appTop =
+      φ ≫ (Scheme.ΓSpecIso R).inv ≫ (pullback.snd U.toSpecΓ (Spec.map φ)).appTop := by
+  have e : (Scheme.ΓSpecIso Γ(U, ⊤)).inv ≫ U.toSpecΓ.appTop = 𝟙 _ := by
+    rw [Scheme.toSpecΓ_appTop, Iso.inv_hom_id]
+  rw [Scheme.ΓSpecIso_inv_naturality_assoc]
+  change _ = _ ≫ (pullback.snd U.toSpecΓ (Spec.map φ) ≫ Spec.map φ).appTop
+  rw [← pullback.condition]
+  change _ = _ ≫ U.toSpecΓ.appTop ≫ (pullback.fst U.toSpecΓ (Spec.map φ)).appTop
+  rw [reassoc_of% e]
+
+end PullbackSpec
 
 end AlgebraicGeometry
