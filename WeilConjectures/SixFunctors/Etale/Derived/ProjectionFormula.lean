@@ -6,9 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
 
@@ -17,13 +18,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 Let `A` be a monoidal Grothendieck abelian coefficient category and let `f : X ⟶ Y` be a
 morphism of schemes admitting a compactification, so that the compactly supported direct
 image `Rf_! : D(X_ét) ⥤ D(Y_ét)` is available. The *projection formula* is the assertion
-that the canonical comparison map
+that the projection map
 
 ```
-  PF_{f, K, L} : Rf_!(K ⊗ᴸ Lf^* L) ⟶ (Rf_! K) ⊗ᴸ L
+  PF_{f, K, L} : (Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)
 ```
 
-is an isomorphism, for `K : D(X_ét)` and `L : D(Y_ét)`.
+of `AlgebraicGeometry.Etale.projectionMapOfCompactification` is an isomorphism, for
+`K : D(X_ét)` and `L : D(Y_ét)`.
 
 ## Main definitions
 
@@ -48,19 +50,22 @@ is an isomorphism, for `K : D(X_ét)` and `L : D(Y_ét)`.
 
 ## Implementation notes
 
-The canonical map `PF_{f, K, L}` — the mate of the tensor-hom adjunction against the
-adjunction `Rf_! ⊣ Rf^!` — is not available in this repository, so, following the convention
-of this folder, the projection formula is recorded as the `Prop`-valued property
-`AlgebraicGeometry.Etale.HasProjectionFormula` asserting that the two objects are
-*isomorphic*, and the blueprint statements below are statements about that property.
+The projection map `PF_{f, K, L}` is
+`AlgebraicGeometry.Etale.projectionMapOfCompactification`, built in
+`WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection` from a compactification
+`c = (X ⟶[i] Z ⟶[g] Y)` of `f`: it is the projection map of `Rg_*` followed by the inverse of
+the projection formula for the open immersion `i`. The projection formula is the assertion
+`IsIso (PF_{f, K, L})`. Building `PF` needs `Etale.UpperStarPreservesFlat A` and a concrete
+structure on `A` (with `forget A` reflecting isomorphisms, preserving filtered colimits and
+sheaves); these hold for `A = ModuleCat Λ`.
 
-That convention costs `sk-prop-sf-pf-coherence` most of its content. The blueprint node is a
-list of identities between natural transformations — naturality in `K`, `L` and `f`, the
-associativity pentagon, agreement with the direct-image projection formula for proper `f`
-through `Rf_! ≅ Rf_*`, and compatibility with finite reduction, scalar extension and the
-pro-étale realization. None of these is expressible without the transformation itself; what
-survives is the objectwise shadow of the identity case, of the composition law and of the
-independence of the compactification, which is what the four statements below record.
+The statements of `sk-prop-sf-pf-coherence` below are still objectwise: the identity case,
+the composition law and the independence of the compactification. The blueprint node also
+asks for identities between natural transformations — naturality in `f`, the associativity
+pentagon, agreement with the direct-image projection formula for proper `f` through
+`Rf_! ≅ Rf_*`, and compatibility with finite reduction, scalar extension and the pro-étale
+realization. These need comparison isomorphisms for `Rf_!` (composition, change of
+compactification) that are not constructed yet, and are not stated.
 
 The integral stage is modelled exactly as in
 `WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient`: the
@@ -97,34 +102,39 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A]
 
+variable [Etale.UpperStarPreservesFlat A]
+  {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
 variable {X Y : Scheme.{u}}
 
 /-- The projection formula for a morphism `f : X ⟶ Y`, at `K : D(X_ét)` and `L : D(Y_ét)`,
-with `Rf_!` computed from a chosen compactification `c` of `f`: the assertion that
+with `Rf_!` computed from a chosen compactification `c` of `f`: the assertion that the
+projection map
 
 ```
-  Rf_!(K ⊗ᴸ Lf^* L)  ≅  (Rf_! K) ⊗ᴸ L .
+  PF_c : (Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)
 ```
 
-The canonical comparison map going from left to right is not constructed in this
-repository, so the property records the existence of *some* isomorphism between the two
-objects; see the module docstring. -/
+of `AlgebraicGeometry.Etale.projectionMapOfCompactification` is an isomorphism. -/
 def HasProjectionFormulaOfCompactification {f : X ⟶ Y} (c : Compactification f)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) : Prop :=
-  Nonempty ((Rf_!(c)[A]).obj (((-⊗ᴸ-(X)[A]).obj K).obj ((L((f)^*[A])).obj L)) ≅
-    ((-⊗ᴸ-(Y)[A]).obj ((Rf_!(c)[A]).obj K)).obj L)
+  IsIso (((projectionMapOfCompactification A c).app K).app L)
 
 /-- The projection formula for a morphism `f : X ⟶ Y` admitting a compactification, at
-`K : D(X_ét)` and `L : D(Y_ét)`: the assertion that
+`K : D(X_ét)` and `L : D(Y_ét)`: the assertion that the projection map
 
 ```
-  Rf_!(K ⊗ᴸ Lf^* L)  ≅  (Rf_! K) ⊗ᴸ L ,
+  PF : (Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)
 ```
 
-with `Rf_!` the compactly supported direct image
-`AlgebraicGeometry.Etale.rightDerivedLowerShriek` attached to the chosen compactification
-of `f`. -/
+of `AlgebraicGeometry.Etale.projectionMap` is an isomorphism, with `Rf_!` the compactly
+supported direct image `AlgebraicGeometry.Etale.rightDerivedLowerShriek` attached to the
+chosen compactification of `f`. -/
 def HasProjectionFormula (f : X ⟶ Y) [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) : Prop :=
@@ -191,17 +201,24 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A]
 
+variable [Etale.UpperStarPreservesFlat A]
+  {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
 variable {X Y Z : Scheme.{u}}
 
 /-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
 
-The identity case: the projection formula holds for `f = 𝟙 X`, where the comparison
-transformation is the identity. -/
+The identity case: the projection formula holds for `f = 𝟙 X`. -/
 theorem hasProjectionFormula_id (X : Scheme.{u})
     (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     HasProjectionFormula A (𝟙 X) K L :=
   sorry
 
+omit [Etale.UpperStarPreservesFlat A] in
 /-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
 
 The composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the compactly supported direct image. -/
