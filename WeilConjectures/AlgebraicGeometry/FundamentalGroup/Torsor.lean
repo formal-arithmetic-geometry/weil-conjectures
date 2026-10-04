@@ -72,6 +72,10 @@ lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.hom_ext {P Q : Y.FiniteEtale} 
     (h : f.hom.left = g.hom.left) : f = g :=
   ObjectProperty.hom_ext _ (MorphismProperty.Over.Hom.ext h)
 
+lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.hom_left_comp {P Q : Y.FiniteEtale}
+    (f : P ⟶ Q) : f.hom.left ≫ Q.obj.hom = P.obj.hom := by
+  simpa using f.hom.w
+
 lemma vaddHom_zero (t : EtaleTorsor M Y) : t.vaddHom 0 = 𝟙 _ :=
   FiniteEtale.hom_ext t.zero_vadd
 
@@ -180,5 +184,315 @@ lemma nonempty_fiber : Nonempty ((fiber s).obj t.toFiniteEtale) := by
   exact ⟨Over.homMk l hl⟩
 
 end Fiber
+
+section Monodromy
+
+open FiniteEtale
+
+open scoped FintypeCatDiscrete
+
+variable [ConnectedSpace Y] (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
+  [CompactSpace G] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
+  (t : EtaleTorsor M Y)
+
+/-- The action of the fundamental group on the geometric fibre of a torsor commutes with the
+action of `M`. -/
+lemma fiber_map_vaddHom_smul (m : M) (g : G) (x : (fiber s).obj t.toFiniteEtale) :
+    (fiber s).map (t.vaddHom m) (g • x) = g • (fiber s).map (t.vaddHom m) x :=
+  IsNaturalSMul.naturality g _ x
+
+/-- The function underlying the monodromy character `f_P` of a torsor `P`: `f_P(g)` is the
+element of `M` moving a chosen point `p` of the geometric fibre to `g • p`. -/
+noncomputable def monodromyFun (g : G) : M :=
+  (t.exists_fiber_map_vaddHom s (t.nonempty_fiber s).some (g • (t.nonempty_fiber s).some)).choose
+
+/-- `f_P(g)` moves every point `x` of the geometric fibre to `g • x`; it does not depend on the
+chosen point because `M` is abelian. -/
+lemma fiber_map_vaddHom_monodromyFun (g : G) (x : (fiber s).obj t.toFiniteEtale) :
+    (fiber s).map (t.vaddHom (t.monodromyFun s G g)) x = g • x := by
+  have h₀ := (t.exists_fiber_map_vaddHom s (t.nonempty_fiber s).some
+    (g • (t.nonempty_fiber s).some)).choose_spec
+  obtain ⟨n, rfl⟩ := t.exists_fiber_map_vaddHom s (t.nonempty_fiber s).some x
+  rw [← fiber_map_vaddHom_smul, ← monodromyFun] at *
+  rw [← h₀, fiber_map_vaddHom_vaddHom, fiber_map_vaddHom_vaddHom, add_comm]
+
+lemma monodromyFun_eq_iff (g : G) (x : (fiber s).obj t.toFiniteEtale) (m : M) :
+    t.monodromyFun s G g = m ↔ (fiber s).map (t.vaddHom m) x = g • x := by
+  refine ⟨fun h ↦ h ▸ t.fiber_map_vaddHom_monodromyFun s G g x, fun h ↦ ?_⟩
+  exact t.eq_of_fiber_map_vaddHom_eq s x ((t.fiber_map_vaddHom_monodromyFun s G g x).trans h.symm)
+
+variable [TopologicalSpace M] [DiscreteTopology M]
+
+/-- Blueprint `cor-galois-abelian-h1`: Abelian case: torsors, characters and H^1.
+
+The monodromy character `f_P : π₁(Y, s) → M` of an `M`-torsor `P`, characterised by
+`g • p = f_P(g) +ᵥ p` for `p` in the geometric fibre `P_s`
+(`AlgebraicGeometry.Scheme.EtaleTorsor.fiber_map_vaddHom_monodromy`): a continuous
+homomorphism, as the stabilisers of the points of `P_s` are open. -/
+noncomputable def monodromy : G →ₜ* Multiplicative M where
+  toFun g := Multiplicative.ofAdd (t.monodromyFun s G g)
+  map_one' := by
+    rw [ofAdd_eq_one, t.monodromyFun_eq_iff s G 1 (t.nonempty_fiber s).some, one_smul]
+    exact t.fiber_map_vaddHom_zero s _
+  map_mul' g h := by
+    let p := (t.nonempty_fiber s).some
+    rw [← ofAdd_add]
+    congr 1
+    rw [t.monodromyFun_eq_iff s G _ p, mul_smul, ← t.fiber_map_vaddHom_monodromyFun s G h p,
+      ← fiber_map_vaddHom_smul, ← t.fiber_map_vaddHom_monodromyFun s G g p,
+      fiber_map_vaddHom_vaddHom, add_comm]
+  continuous_toFun := by
+    refine continuous_discrete_rng.mpr fun m ↦ ?_
+    let p := (t.nonempty_fiber s).some
+    have : (fun g ↦ Multiplicative.ofAdd (t.monodromyFun s G g)) ⁻¹' {m} =
+        (fun g : G ↦ g • p) ⁻¹' {(fiber s).map (t.vaddHom m.toAdd) p} := by
+      ext g
+      simp only [Set.mem_preimage, Set.mem_singleton_iff]
+      rw [eq_comm (b := (fiber s).map _ p), ← t.monodromyFun_eq_iff s G g p,
+        ← Multiplicative.toAdd.injective.eq_iff, toAdd_ofAdd]
+    rw [this]
+    exact (continuous_id.smul continuous_const).isOpen_preimage _ (isOpen_discrete _)
+
+/-- Blueprint `cor-galois-abelian-h1`: Abelian case: torsors, characters and H^1.
+
+The defining property of the monodromy character: `g • p = f_P(g) +ᵥ p`. -/
+lemma fiber_map_vaddHom_monodromy (g : G) (x : (fiber s).obj t.toFiniteEtale) :
+    (fiber s).map (t.vaddHom (t.monodromy s G g).toAdd) x = g • x :=
+  t.fiber_map_vaddHom_monodromyFun s G g x
+
+lemma monodromy_eq_iff (g : G) (x : (fiber s).obj t.toFiniteEtale) (m : M) :
+    t.monodromy s G g = Multiplicative.ofAdd m ↔ (fiber s).map (t.vaddHom m) x = g • x := by
+  rw [← t.monodromyFun_eq_iff s G g x]
+  exact ⟨fun h ↦ congrArg Multiplicative.toAdd h, fun h ↦ congrArg Multiplicative.ofAdd h⟩
+
+/-- Blueprint `cor-galois-abelian-h1`: Abelian case: torsors, characters and H^1.
+
+Isomorphic torsors have the same monodromy character. -/
+lemma monodromy_eq_of_isIsomorphic {t₁ t₂ : EtaleTorsor M Y} (h : t₁.IsIsomorphic t₂) :
+    t₁.monodromy s G = t₂.monodromy s G := by
+  obtain ⟨φ, hπ, hv⟩ := h
+  let Φ : t₁.toFiniteEtale ⟶ t₂.toFiniteEtale :=
+    ObjectProperty.homMk (MorphismProperty.Over.homMk φ.hom hπ)
+  have hΦ (m : M) : t₁.vaddHom m ≫ Φ = Φ ≫ t₂.vaddHom m := FiniteEtale.hom_ext (hv m)
+  ext g
+  let p := (t₁.nonempty_fiber s).some
+  refine congrArg Multiplicative.toAdd ((t₂.monodromy_eq_iff s G g ((fiber s).map Φ p)
+    (t₁.monodromy s G g).toAdd).mpr ?_).symm
+  rw [← FintypeCat.comp_apply, ← Functor.map_comp, ← hΦ, Functor.map_comp,
+    FintypeCat.comp_apply, t₁.fiber_map_vaddHom_monodromy s G g p]
+  exact IsNaturalSMul.naturality g Φ p
+
+end Monodromy
+
+section Bijection
+
+open FiniteEtale
+
+open scoped FintypeCatDiscrete
+
+variable [ConnectedSpace Y] (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
+  [CompactSpace G] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
+  [TopologicalSpace M] [DiscreteTopology M]
+
+/-- Blueprint `cor-galois-abelian-h1`: Abelian case: torsors, characters and H^1.
+
+Torsors with the same monodromy character are isomorphic: matching the points `m +ᵥ p₁` and
+`m +ᵥ p₂` of the geometric fibres is an isomorphism of `π₁(Y, s)`-sets commuting with `M`, so
+it comes from an isomorphism of finite étale `Y`-schemes by the Galois correspondence. -/
+lemma isIsomorphic_of_monodromy_eq {t₁ t₂ : EtaleTorsor M Y}
+    (h : t₁.monodromy s G = t₂.monodromy s G) : t₁.IsIsomorphic t₂ := by
+  let p₁ := (t₁.nonempty_fiber s).some
+  let p₂ := (t₂.nonempty_fiber s).some
+  choose d₁ hd₁ using t₁.exists_fiber_map_vaddHom s p₁
+  choose d₂ hd₂ using t₂.exists_fiber_map_vaddHom s p₂
+  have hd₁' (m : M) : d₁ ((fiber s).map (t₁.vaddHom m) p₁) = m :=
+    t₁.eq_of_fiber_map_vaddHom_eq s p₁ (hd₁ _)
+  have hd₂' (m : M) : d₂ ((fiber s).map (t₂.vaddHom m) p₂) = m :=
+    t₂.eq_of_fiber_map_vaddHom_eq s p₂ (hd₂ _)
+  let ψ : (fiber s).obj t₁.toFiniteEtale → (fiber s).obj t₂.toFiniteEtale :=
+    fun x ↦ (fiber s).map (t₂.vaddHom (d₁ x)) p₂
+  let e : (fiber s).obj t₁.toFiniteEtale ≃ (fiber s).obj t₂.toFiniteEtale :=
+    { toFun := ψ
+      invFun y := (fiber s).map (t₁.vaddHom (d₂ y)) p₁
+      left_inv x := by simp only [ψ, hd₂', hd₁]
+      right_inv y := by simp only [ψ, hd₁', hd₂] }
+  have hvadd (m : M) (x : (fiber s).obj t₁.toFiniteEtale) :
+      ψ ((fiber s).map (t₁.vaddHom m) x) = (fiber s).map (t₂.vaddHom m) (ψ x) := by
+    have : (fiber s).map (t₁.vaddHom m) x = (fiber s).map (t₁.vaddHom (d₁ x + m)) p₁ := by
+      rw [← fiber_map_vaddHom_vaddHom, hd₁]
+    simp only [ψ]
+    rw [this, hd₁', fiber_map_vaddHom_vaddHom]
+  have hsmul (g : G) (x : (fiber s).obj t₁.toFiniteEtale) : ψ (g • x) = g • ψ x := by
+    rw [← t₁.fiber_map_vaddHom_monodromy s G g x, hvadd, h, t₂.fiber_map_vaddHom_monodromy s G g (ψ x)]
+  let E := equivalenceContAction s G
+  let I : E.functor.obj t₁.toFiniteEtale ≅ E.functor.obj t₂.toFiniteEtale :=
+    ObjectProperty.isoMk _ (Action.mkIso (FintypeCat.equivEquivIso e) fun g ↦
+      FintypeCat.hom_ext _ _ fun x ↦ hsmul g x)
+  let Φ := E.fullyFaithfulFunctor.preimageIso I
+  have hΦ (x : (fiber s).obj t₁.toFiniteEtale) : (fiber s).map Φ.hom x = ψ x := by
+    have := congrArg (fun f ↦ f.hom.hom x) (E.fullyFaithfulFunctor.map_preimage I.hom)
+    exact this
+  refine ⟨⟨Φ.hom.hom.left, Φ.inv.hom.left, congrArg (fun f ↦ f.hom.left) Φ.hom_inv_id,
+    congrArg (fun f ↦ f.hom.left) Φ.inv_hom_id⟩, hom_left_comp Φ.hom, fun m ↦ ?_⟩
+  have : t₁.vaddHom m ≫ Φ.hom = Φ.hom ≫ t₂.vaddHom m := by
+    refine (fiber s).map_injective (FintypeCat.hom_ext _ _ fun x ↦ ?_)
+    rw [Functor.map_comp, Functor.map_comp, FintypeCat.comp_apply, FintypeCat.comp_apply, hΦ,
+      hΦ, hvadd]
+  exact congrArg (fun f ↦ f.hom.left) this
+
+omit [TopologicalSpace M] [DiscreteTopology M] in
+/-- A finite étale scheme over a connected scheme with nonempty geometric fibre is surjective:
+its image is open, as étale morphisms are open, closed, as finite morphisms are closed, and
+nonempty. -/
+lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.surjective_of_nonempty_fiber
+    (P : Y.FiniteEtale) (h : Nonempty ((fiber s).obj P)) : Surjective P.obj.hom := by
+  let f : P.obj.left ⟶ Y := P.obj.hom
+  have : IsFinite f := P.property
+  have : Etale f := P.obj.prop
+  have hc : IsClopen (Set.range f) := ⟨f.isClosedMap.isClosed_range, f.isOpenMap.isOpen_range⟩
+  obtain ⟨x⟩ := h
+  let x' : Spec (.of Ω) ⟶ P.obj.left := x.left
+  have hne : (Set.range f).Nonempty := ⟨_, x' default, rfl⟩
+  exact ⟨fun y ↦ (hc.eq_univ hne ▸ Set.mem_univ y : y ∈ Set.range f)⟩
+
+/-- A finite étale `Y`-scheme `P` over a connected scheme with an action of `M` by
+`Y`-automorphisms which is simply transitive on the geometric fibre at `s` is an `M`-torsor:
+the morphism `∐_{m ∈ M} P ⟶ P ×_Y P` is a morphism of finite étale `Y`-schemes inducing a
+bijection on geometric fibres, hence an isomorphism, as the fibre functor is conservative. -/
+lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.isIso_sigmaDesc_of_existsUnique
+    (P : Y.FiniteEtale) (v : M → (P ⟶ P))
+    (hv : ∀ x y : (fiber s).obj P, ∃! m, (fiber s).map (v m) x = y) :
+    IsIso (Sigma.desc fun m : M ↦ pullback.lift (f := P.obj.hom) (g := P.obj.hom)
+      (v m).hom.left (𝟙 P.obj.left) (by rw [Category.id_comp]; exact hom_left_comp (v m))) := by
+  sorry
+
+/-- Blueprint `cor-galois-abelian-h1`: Abelian case: torsors, characters and H^1.
+
+Every continuous homomorphism `f : π₁(Y, s) → M` is the monodromy character of a torsor:
+`M` with `π₁(Y, s)` acting by `g • a = f(g) + a` is a finite continuous `π₁(Y, s)`-set on which
+the translations act by automorphisms, and the corresponding finite étale `Y`-scheme with the
+induced action of `M` is a torsor. -/
+lemma exists_monodromy_eq (φ : G →ₜ* Multiplicative M) :
+    ∃ t : EtaleTorsor M Y, t.monodromy s G = φ := by
+  let V := Shrink.{u} M
+  let eM : M ≃ V := equivShrink.{u, u + 1} M
+  let _ : MulAction G V :=
+    { smul g v := eM ((φ g).toAdd + eM.symm v)
+      one_smul v := by simp [HSMul.hSMul]
+      mul_smul g h v := by simp [HSMul.hSMul, add_assoc] }
+  have hsmul (g : G) (v : V) : g • v = eM ((φ g).toAdd + eM.symm v) := rfl
+  let X : ContAction FintypeCat.{u} G :=
+    ⟨Action.FintypeCat.ofMulAction G (FintypeCat.of V), by
+      rw [Action.isContinuous_def]
+      have : DiscreteTopology ((forget₂ (Action FintypeCat G) TopCat).obj
+        (Action.FintypeCat.ofMulAction G (FintypeCat.of V))) := ⟨rfl⟩
+      have : DiscreteTopology ((forget₂ FintypeCat TopCat).obj
+        (Action.FintypeCat.ofMulAction G (FintypeCat.of V)).V) := ⟨rfl⟩
+      refine continuous_prod_of_discrete_right.mpr fun v ↦ continuous_discrete_rng.mpr fun w ↦ ?_
+      exact (isOpen_discrete ((fun a : Multiplicative M ↦ (eM (a.toAdd + eM.symm v) : V)) ⁻¹'
+        {(w : V)})).preimage φ.continuous⟩
+  let τ (n : M) : X ⟶ X := ObjectProperty.homMk
+    { hom := FintypeCat.homMk fun v ↦ eM (n + eM.symm v)
+      comm g := FintypeCat.hom_ext _ _ fun v ↦ by
+        change eM (n + eM.symm (eM ((φ g).toAdd + eM.symm v))) =
+          eM ((φ g).toAdd + eM.symm (eM (n + eM.symm v)))
+        simp only [Equiv.symm_apply_apply, add_left_comm] }
+  have hτ (n : M) (v : V) : (τ n).hom.hom v = eM (n + eM.symm v) := rfl
+  let E := equivalenceContAction s G
+  let P := E.inverse.obj X
+  let c := E.counitIso.app X
+  let T (n : M) : P ⟶ P := E.functor.preimage (c.hom ≫ τ n ≫ c.inv)
+  have hT (n : M) : E.functor.map (T n) = c.hom ≫ τ n ≫ c.inv := E.functor.map_preimage _
+  have hT0 : T 0 = 𝟙 P := E.functor.map_injective <| by
+    rw [hT, E.functor.map_id]
+    have : τ 0 = 𝟙 X := ObjectProperty.hom_ext _ (Action.Hom.ext (FintypeCat.hom_ext _ _
+      fun v ↦ by
+        change eM (0 + eM.symm v) = v
+        rw [zero_add]
+        exact eM.apply_symm_apply v))
+    simp [this]
+    rfl
+  have hTadd (m n : M) : T (m + n) = T m ≫ T n := E.functor.map_injective <| by
+    rw [hT, E.functor.map_comp, hT, hT]
+    have : τ (m + n) = τ m ≫ τ n := ObjectProperty.hom_ext _ (Action.Hom.ext
+      (FintypeCat.hom_ext _ _ fun v ↦ by
+        change eM ((m + n) + eM.symm v) = eM (n + eM.symm (eM (m + eM.symm v)))
+        simp [add_left_comm, add_assoc]))
+    simp [this]
+  let cV := (ObjectProperty.ι _ ⋙ Action.forget _ _).mapIso c
+  let β : (fiber s).obj P → V := fun x ↦ cV.hom x
+  have hβ : Function.Injective β := (FintypeCat.equivEquivIso.symm cV).injective
+  have hβT (n : M) (x : (fiber s).obj P) :
+      β ((fiber s).map (T n) x) = eM (n + eM.symm (β x)) := by
+    have h₁ : (fiber s).map (T n) x = (E.functor.map (T n)).hom.hom x := rfl
+    rw [h₁, hT]
+    change ((c.hom ≫ τ n ≫ c.inv) ≫ c.hom).hom.hom x = _
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rfl
+  have hβsmul (g : G) (x : (fiber s).obj P) : β (g • x) = g • β x := by
+    have := congrArg (fun f ↦ f.hom x) (c.hom.hom.comm g)
+    exact this
+  have hne : Nonempty ((fiber s).obj P) := ⟨c.inv.hom.hom (eM 0)⟩
+  have huniq (x y : (fiber s).obj P) : ∃! n, (fiber s).map (T n) x = y := by
+    refine ⟨eM.symm (β y) - eM.symm (β x), hβ ?_, fun n hn ↦ ?_⟩
+    · rw [hβT, sub_add_cancel, Equiv.apply_symm_apply]
+    · have := congrArg β hn
+      rw [hβT] at this
+      rw [← this, Equiv.symm_apply_apply, add_sub_cancel_right]
+  let t : EtaleTorsor M Y :=
+    { P := P.obj.left
+      π := P.obj.hom
+      isFinite := P.property
+      etale := P.obj.prop
+      surjective := surjective_of_nonempty_fiber s P hne
+      vadd n := (T n).hom.left
+      vadd_π n := hom_left_comp (T n)
+      zero_vadd := by rw [hT0]; rfl
+      add_vadd m n := by rw [hTadd]; rfl
+      isIso_sigmaDesc := isIso_sigmaDesc_of_existsUnique s P T huniq }
+  refine ⟨t, ContinuousMonoidHom.ext fun g ↦ ?_⟩
+  obtain ⟨x⟩ := hne
+  refine (t.monodromy_eq_iff s G g x (φ g).toAdd).mpr (hβ ?_)
+  change β ((fiber s).map (T (φ g).toAdd) x) = β (g • x)
+  rw [hβT, hβsmul, hsmul]
+
+/-- Blueprint `cor-galois-abelian-h1`: Abelian case: torsors, characters and H^1.
+
+The monodromy character `P ↦ f_P` is a bijection between isomorphism classes of `M`-torsors
+over `Y` and continuous homomorphisms `π₁(Y, s) → M`. -/
+theorem bijective_monodromy :
+    Function.Bijective (Quotient.lift (s := EtaleTorsor.setoid M Y) (fun t ↦ t.monodromy s G)
+      fun _ _ h ↦ monodromy_eq_of_isIsomorphic s G h) := by
+  refine ⟨fun a b h ↦ ?_, fun φ ↦ ?_⟩
+  · induction a using Quotient.inductionOn
+    induction b using Quotient.inductionOn
+    exact Quotient.sound (isIsomorphic_of_monodromy_eq s G h)
+  · obtain ⟨t, rfl⟩ := exists_monodromy_eq s G φ
+    exact ⟨⟦t⟧, rfl⟩
+
+/-- Blueprint `cor-galois-abelian-h1`: Abelian case: torsors, characters and H^1.
+
+Let `Y` be a connected scheme with geometric point `s`, let `G = π₁(Y, s)` be the étale
+fundamental group (a fundamental group of the fibre functor on finite étale `Y`-schemes) and
+let `M` be a finite abelian group. Then there is a bijection
+`H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)`, given on torsors by `P ↦ f_P`, where
+`g • p = f_P(g) +ᵥ p` for `p` in the geometric fibre `P_s`: the class of a torsor `P` under
+the bijection `c` of `AlgebraicGeometry.Scheme.EtaleTorsor.exists_quotientEquivSheafH` is sent
+to `f_P`. -/
+theorem exists_equiv_sheafH_continuousMonoidHom :
+    ∃ (c : Quotient (EtaleTorsor.setoid M Y) ≃ Sheaf.H
+        ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+          (AddCommGrpCat.of M)) 1)
+      (e : Sheaf.H ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+          (AddCommGrpCat.of M)) 1 ≃ (G →ₜ* Multiplicative M)),
+      ∀ (t : EtaleTorsor M Y) (g : G) (p : (fiber s).obj t.toFiniteEtale),
+        (fiber s).map (t.vaddHom (e (c ⟦t⟧) g).toAdd) p = g • p := by
+  obtain ⟨c, -⟩ := exists_quotientEquivSheafH M Y
+  let f := Equiv.ofBijective _ (bijective_monodromy (M := M) s G)
+  refine ⟨c, c.symm.trans f, fun t g p ↦ ?_⟩
+  simp only [Equiv.trans_apply, Equiv.symm_apply_apply]
+  exact t.fiber_map_vaddHom_monodromy s G g p
+
+end Bijection
 
 end AlgebraicGeometry.Scheme.EtaleTorsor
