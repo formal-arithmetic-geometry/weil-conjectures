@@ -79,6 +79,14 @@ theorem isZero_carrier (K : WeilComplex k₀ l Y) : IsZero K.obj.carrier :=
         ((DerivedCategory.homologyFunctor _ n).obj K.obj.carrier) := K.property.2 n
     Scheme.IsConstructibleSheaf.isZero _
 
+/-- A Weil complex is zero, its underlying complex being zero
+(`AlgebraicGeometry.WeilComplex.isZero_carrier`). -/
+theorem isZero (K : WeilComplex k₀ l Y) : IsZero K :=
+  ⟨fun _ ↦ ⟨⟨0⟩, fun _ ↦ ObjectProperty.hom_ext _ <| ObjectProperty.hom_ext _ <|
+      Endofunctor.Algebra.Hom.ext <| K.isZero_carrier.eq_of_src _ _⟩,
+    fun _ ↦ ⟨⟨0⟩, fun _ ↦ ObjectProperty.hom_ext _ <| ObjectProperty.hom_ext _ <|
+      Endofunctor.Algebra.Hom.ext <| K.isZero_carrier.eq_of_tgt _ _⟩⟩
+
 end
 
 /-- The `r`-th cohomology `Hʳ(Spec k̄, M)` of the underlying complex of a Weil complex `M` on

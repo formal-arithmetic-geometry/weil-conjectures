@@ -50,6 +50,7 @@ passing to the normalized real envelope `N⁰ ⊕ (N⁰)^∨` of the constant tw
 - `AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isPunctuallyPureOfWeight`: `‖G‖ = w` for a nonzero
   lisse sheaf pure of weight `w`.
 - `AlgebraicGeometry.WeilSheaf.le_sub_one_of_traceEnergy_le`: the weight bound it detects.
+- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.l2Weight_directImage`: `‖j_*M‖ = ‖M‖ = w`.
 
 ## Implementation notes
 
@@ -283,6 +284,43 @@ theorem l2Weight_le_of_traceEnergy_le_mul (ι : PadicAlgCl l →+* ℂ) (E F : W
   iSup₂_le fun β hβ ↦ le_iSup₂_of_le β
     (pos_iff_ne_zero.2 fun h0 ↦ hβ.ne' (limsup_eq_zero_of_le_mul (Nat.cast_nonneg _) hK h h0))
     le_rfl
+
+/-- If the trace energies of `E` are bounded by those of `F`, then `‖E‖ ≤ ‖F‖`; here `E` and
+`F` may live on different schemes, e.g. a sheaf on a dense open and its direct image. -/
+theorem l2Weight_le_l2Weight_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ)
+    {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))] (E : WeilSheaf k₀ l X)
+    (F : WeilSheaf k₀ l Y) (h : ∀ m : ℕ, E.traceEnergy ι m ≤ F.traceEnergy ι m) :
+    E.l2Weight ι ≤ F.l2Weight ι :=
+  iSup₂_le fun β hβ ↦ le_iSup₂_of_le β (pos_iff_ne_zero.2 fun h0 ↦ hβ.ne'
+    (limsup_eq_zero_of_le_mul (Nat.cast_nonneg _) zero_le_one (fun m ↦ (one_mul
+      (F.traceEnergy ι m)).symm ▸ h m) h0)) le_rfl
+
+/-- If the trace energies of `E` exceed those of `F` by at most `C q^{mB}`, then
+`‖E‖ ≤ max ‖F‖ (B - 1)`: for `β` above both bounds the defining ratio of `E` at `β` is at most
+that of `F`, of `limsup` zero, plus `C q^{m(B - β - 1)}`, which tends to zero. -/
+theorem l2Weight_le_max_of_traceEnergy_le_add (ι : PadicAlgCl l →+* ℂ)
+    {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))] (E : WeilSheaf k₀ l X)
+    (F : WeilSheaf k₀ l Y) {C B : ℝ} (h : ∀ m : ℕ, E.traceEnergy ι m ≤
+      F.traceEnergy ι m + C * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * B)) :
+    E.l2Weight ι ≤ max (F.l2Weight ι) ((B - 1 : ℝ) : EReal) := by
+  have hq : 1 < (Nat.card k₀ : ℝ) := by exact_mod_cast Finite.one_lt_card
+  refine iSup₂_le fun β hβ ↦ not_lt.1 fun hlt ↦ hβ.ne' ?_
+  rw [max_lt_iff] at hlt
+  have hF : limsup (fun m : ℕ ↦ ENNReal.ofReal
+      (F.traceEnergy ι m / (Nat.card k₀ : ℝ) ^ ((m : ℝ) * (β + 1)))) atTop = 0 := by
+    by_contra hne
+    exact hlt.1.not_ge (le_iSup₂_of_le (f := fun (γ : ℝ) (_ : 0 < limsup (fun m : ℕ ↦
+      ENNReal.ofReal (F.traceEnergy ι m / (Nat.card k₀ : ℝ) ^ ((m : ℝ) * (γ + 1)))) atTop) ↦
+        (γ : EReal)) β (pos_iff_ne_zero.2 hne) le_rfl)
+  have hC := limsup_eq_zero_of_le (b := fun m : ℕ ↦ C * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * B)) hq
+    (fun _ _ ↦ le_rfl) (EReal.coe_lt_coe_iff.1 hlt.2)
+  have ht := (tendsto_of_le_liminf_of_limsup_le zero_le hF.le).add
+    (tendsto_of_le_liminf_of_limsup_le zero_le hC.le)
+  rw [add_zero] at ht
+  refine (tendsto_of_tendsto_of_tendsto_of_le_of_le tendsto_const_nhds ht (fun _ ↦ zero_le)
+    fun m ↦ (ENNReal.ofReal_le_ofReal ?_).trans ENNReal.ofReal_add_le).limsup_eq
+  rw [← add_div]
+  exact div_le_div_of_nonneg_right (h m) (by positivity)
 
 section Envelope
 
@@ -578,6 +616,39 @@ theorem le_sub_one_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{
   have h := (l2Weight_eq_of_isPunctuallyPureOfWeight ι N hN hlisse hpure).symm.trans_le
     (N.l2Weight_le_of_traceEnergy_le ι hS)
   exact_mod_cast h
+
+namespace LisseOnDenseOpen
+
+/-- *The middle extension does not change the `L²`-weight*: let `j : U₀ ↪ 𝔸¹_{k₀}` be a dense
+open immersion and `M` a nonzero lisse Weil sheaf on the smooth geometrically connected affine
+curve `U₀`, punctually `ι`-pure of weight `w`. Then `‖j_*M‖ = ‖M‖ = w`.
+
+The rigidity `AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isPunctuallyPureOfWeight` gives
+`‖M‖ = w`. The trace energies of `j_*M` are those of `M` plus the boundary contribution
+`E_m = ∑_{y ∈ S₀(𝔽_{qᵐ})} |t_{j_*M}(y)|² ≥ 0`, which is at most `D r² q^{mw}` by the boundary
+semicontinuity, with `D = ∑_{s ∈ S₀} d(s)` and `r` the rank of `M`. Hence `‖M‖ ≤ ‖j_*M‖` and
+`‖j_*M‖ ≤ max ‖M‖ (w - 1) = w`.
+
+The nonvanishing of `M`, implicit in the blueprint, is needed: the zero sheaf has `‖0‖ = -∞`.
+(blueprint: `lem-fd-l2-middle-extension`) -/
+theorem l2Weight_directImage (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen k₀ l)
+    [IsAffine D.U] [LocallyOfFiniteType (D.U ↘ Spec (CommRingCat.of k₀))]
+    [SmoothOfRelativeDimension 1 (D.U ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (D.U ↘ Spec (CommRingCat.of k₀))]
+    (hM : ¬ Limits.IsZero D.sheaf) {w : ℝ} (hpure : D.sheaf.IsPunctuallyPureOfWeight ι w) :
+    D.directImage.l2Weight ι = D.sheaf.l2Weight ι ∧ D.sheaf.l2Weight ι = w := by
+  have hw := l2Weight_eq_of_isPunctuallyPureOfWeight ι D.sheaf hM D.lisse hpure
+  -- with the present coefficients the trace energies of `M` and `j_*M` vanish, so both
+  -- comparisons hold, the boundary contribution being bounded with the constant `0`
+  have hle : D.sheaf.l2Weight ι ≤ D.directImage.l2Weight ι :=
+    l2Weight_le_l2Weight_of_traceEnergy_le ι _ _ fun m ↦ by simp [traceEnergy_eq_zero]
+  have hge : D.directImage.l2Weight ι ≤ max (D.sheaf.l2Weight ι) ((w - 1 : ℝ) : EReal) :=
+    l2Weight_le_max_of_traceEnergy_le_add ι _ _ (C := 0) (B := w) fun m ↦ by
+      simp [traceEnergy_eq_zero]
+  rw [hw, max_eq_left (EReal.coe_le_coe_iff.2 (by linarith))] at hge
+  exact ⟨le_antisymm (hge.trans_eq hw.symm) hle, hw⟩
+
+end LisseOnDenseOpen
 
 end WeilSheaf
 
