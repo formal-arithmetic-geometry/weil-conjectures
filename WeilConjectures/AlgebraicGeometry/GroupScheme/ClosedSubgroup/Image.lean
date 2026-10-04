@@ -187,6 +187,7 @@ theorem closure_identityComponentRange :
   (closure_minimal r.range_subset_closure isClosed_closure).antisymm
     (closure_mono r.image_identityComponentImage_subset_range)
 
+omit [IsAlgClosed k] in
 theorem isConstructible_identityComponentRange : IsConstructible r.identityComponentRange := by
   have : IsNoetherianRing (CoordinateRing m k) := Algebra.FiniteType.isNoetherianRing k _
   rw [identityComponentRange, ← Set.image_univ]

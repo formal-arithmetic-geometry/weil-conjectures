@@ -14,10 +14,15 @@ public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 
 Let `G = V(I)` be the closed subgroup scheme of `GL_n` over an algebraically closed field `k` cut
 out by a Hopf ideal `I`, and let `G° = V(identityComponent I)` be its reduced identity component.
-This file states the structure of `G°`: it is irreducible, normal in `G` (on `R`-points for every
-`k`-algebra `R`) and of finite index in `G(k)`; `V(I)` has finitely many connected components,
-and they are the cosets `g G°` of the identity component. Finally, a closed subgroup of a
-connected group of the same dimension is the whole group.
+This file proves the structure of `G°`: it is irreducible, normal in `G` (on `R`-points for every
+`k`-algebra `R`, when `G` is reduced) and of finite index in `G(k)`; `V(I)` has finitely many
+connected components, and they are the cosets `g G°` of the identity component. Finally, a closed
+subgroup of a connected group of the same dimension is the whole group.
+
+The key input is that the translations by `G(k)` act transitively on the closed points of `V(I)`,
+so that the irreducible components of `V(I)` are pairwise disjoint
+(`Matrix.GeneralLinearGroup.pairwise_disjoint_irreducibleComponents_zeroLocus`), hence equal to
+its connected components.
 
 ## Main results
 
@@ -27,12 +32,16 @@ connected group of the same dimension is the whole group.
   in `G(k)`.
 - `Matrix.GeneralLinearGroup.toPrimeSpectrum_mem_connectedComponentIn_iff`: the connected
   components of `G` are the cosets of `G°`.
+- `Matrix.GeneralLinearGroup.isClopen_connectedComponent_zeroLocus`: the connected components of
+  `G` are open and closed.
 - `Matrix.GeneralLinearGroup.eq_of_ringKrullDim_eq`: a closed subgroup of a connected group of
   the same dimension is the whole group.
 
 ## Blueprint
 
 - `sk-p-geometry`: structure of the identity component and the dimension criterion.
+- `lem-wf-algebraic-component-cosets`: the identity component, its cosets and the finite
+  component group.
 -/
 
 @[expose] public section
@@ -85,7 +94,7 @@ theorem pairwise_disjoint_irreducibleComponents_zeroLocus :
   rw [translateHomeomorph_toPrimeSpectrum, mul_one, inv_mul_cancel_right]
 
 /-- The connected component of `V(I)` through a point is an irreducible component. -/
-theorem connectedComponentIn_zeroLocus_mem_irreducibleComponents
+theorem isIrreducible_connectedComponentIn_zeroLocus
     {p : PrimeSpectrum (CoordinateRing n k)}
     (hp : p ∈ PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) :
     IsIrreducible (connectedComponentIn
@@ -99,7 +108,7 @@ theorem connectedComponentIn_zeroLocus_mem_irreducibleComponents
 ideal is prime. (blueprint: `sk-p-geometry`) -/
 theorem isPrime_identityComponent : (identityComponent I).IsPrime :=
   PrimeSpectrum.isIrreducible_iff_vanishingIdeal_isPrime.1
-    (connectedComponentIn_zeroLocus_mem_irreducibleComponents I (zeroLocus I k).one_mem)
+    (isIrreducible_connectedComponentIn_zeroLocus I (zeroLocus I k).one_mem)
 
 variable {I} in
 /-- The `k`-points of `G°` are stable under conjugation by `G(k)`. -/
@@ -209,6 +218,18 @@ theorem finiteIndex_zeroLocus_identityComponent :
     fun x y ↦ Quotient.inductionOn₂ x y fun a b hab ↦
       Quotient.sound (QuotientGroup.leftRel_apply.2 ((hf a b).1 hab))
   exact Subgroup.finiteIndex_of_finite_quotient
+
+omit [IsAlgClosed k] [I.IsHopfIdeal k] in
+/-- **Identity component and cosets.** The connected component of a point `g` of a closed subgroup
+`G = V(I)` of `GL_n` is open and closed in `G`, and it is the coset `g G°`: its points are the `x`
+with `g⁻¹ * x ∈ G°` (`toPrimeSpectrum_mem_connectedComponentIn_iff`). There are finitely many of
+them (`finite_connectedComponents_zeroLocus`, `finiteIndex_zeroLocus_identityComponent`), and `G°`
+is normal (`normal_zeroLocus_identityComponent`), so that `G(k) ⧸ G°(k)` is a finite group.
+(blueprint: `lem-wf-algebraic-component-cosets`) -/
+theorem isClopen_connectedComponent_zeroLocus
+    (p : PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) :
+    IsClopen (connectedComponent p) :=
+  ⟨isClosed_connectedComponent, TopologicalSpace.NoetherianSpace.isOpen_connectedComponent p⟩
 
 omit [IsAlgClosed k] [I.IsHopfIdeal k] in
 /-- A reduced closed subgroup `V(J)` of a connected reduced closed subgroup `V(I)` of `GL_n` of

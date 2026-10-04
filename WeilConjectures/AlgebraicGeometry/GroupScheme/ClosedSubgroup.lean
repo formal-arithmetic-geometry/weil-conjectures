@@ -41,6 +41,10 @@ of a closed subgroup are described by ideals of the coordinate ring of `GL_n` in
 - `Matrix.GeneralLinearGroup.center`: the ideal of the reduced centre `Z(G)`.
 - `Matrix.GeneralLinearGroup.zeroLocusMulEquiv`: the `R`-points of `V(I)` as a group of
   morphisms `Spec R ⟶ V(I)` are the group `zeroLocus I R`.
+- `Matrix.GeneralLinearGroup.translate`, `Matrix.GeneralLinearGroup.translateHomeomorph`: the
+  two-sided translation `x ↦ g * x * h` on the coordinate ring of `GL_n` and on its spectrum.
+- `Matrix.GeneralLinearGroup.identityComponentSubgroup`: the `k`-points of the identity component,
+  as a subgroup of `GL n k`.
 
 ## Main results
 
@@ -48,6 +52,9 @@ of a closed subgroup are described by ideals of the coordinate ring of `GL_n` in
   satisfying the equations in `I`.
 - `Matrix.GeneralLinearGroup.vanishingIdeal_zeroLocus_eq_radical`: the Nullstellensatz for `GL_n`
   over an algebraically closed field.
+- `Matrix.GeneralLinearGroup.isHopfIdeal_of_isRadical`: over an algebraically closed field, a
+  radical ideal whose `k`-points form a subgroup is a Hopf ideal; in particular the ideal of the
+  identity component is a Hopf ideal.
 - `Matrix.GeneralLinearGroup.zeroLocus_vanishingIdeal_le_normalizer`,
   `Matrix.GeneralLinearGroup.commutator_zeroLocus_vanishingIdeal_le`: Zariski closure preserves
   normalizing and commutator inclusions between subgroups of `GL n k`.

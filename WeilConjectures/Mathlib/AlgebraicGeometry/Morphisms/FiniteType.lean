@@ -90,7 +90,7 @@ theorem topologicalKrullDim_ne_top {K : Type u} [Field K] {X : Scheme.{u}}
   let φ : K →+* Γ(X, U) := (f.appLE ⊤ U (by simp)).hom.comp (Scheme.ΓSpecIso (.of K)).inv.hom
   have hφ : φ.FiniteType := hft.comp (RingHom.FiniteType.of_surjective _
     (Scheme.ΓSpecIso (.of K)).symm.commRingCatIsoToRingEquiv.surjective)
-  letI := φ.toAlgebra
+  let := φ.toAlgebra
   have : Algebra.FiniteType K Γ(X, U) := hφ
   have := IsHomeomorph.topologicalKrullDim_eq _ hU.isoSpec.hom.homeomorph.isHomeomorph
   change topologicalKrullDim (U : Set X) = topologicalKrullDim (PrimeSpectrum Γ(X, U)) at this

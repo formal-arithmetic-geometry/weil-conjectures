@@ -53,27 +53,9 @@ theorem disjoint_of_mem_irreducibleComponents_of_forall_closedPoints [Noetherian
   obtain ⟨q, ⟨hq₁, hq₂⟩, hq⟩ := nonempty_inter_closedPoints (Z := Z₁ ∩ Z₂) ⟨z, hz₁, hz₂⟩
     ((isClosed_of_mem_irreducibleComponents _ hZ₁).inter
       (isClosed_of_mem_irreducibleComponents _ hZ₂)).isLocallyClosed
-  -- the complement of all components other than `Z₁` is a nonempty open set
-  set W := ⋃ W ∈ irreducibleComponents X \ {Z₁}, W
-  have hW : IsClosed W := NoetherianSpace.finite_irreducibleComponents.sdiff.isClosed_biUnion
-    fun W hW ↦ isClosed_of_mem_irreducibleComponents W hW.1
-  have hU : (Wᶜ).Nonempty := by
-    by_contra hU
-    rw [Set.not_nonempty_iff_eq_empty, Set.compl_empty_iff] at hU
-    obtain ⟨W', hW', hZW'⟩ := (isIrreducible_iff_sUnion_isClosed.1 hZ₁.1)
-      (NoetherianSpace.finite_irreducibleComponents.sdiff (t := {Z₁})).toFinset
-      (fun W hW ↦ isClosed_of_mem_irreducibleComponents W
-        ((Set.Finite.mem_toFinset _).1 hW).1)
-      (by
-        rw [Set.Finite.coe_toFinset, Set.sUnion_eq_biUnion]
-        exact fun x _ ↦ (hU ▸ Set.mem_univ x : x ∈ W))
-    rw [Set.Finite.mem_toFinset] at hW'
-    exact hW'.2 (le_antisymm (hZ₁.2 hW'.1.1 hZW') hZW')
-  obtain ⟨p, hpU, hp⟩ := nonempty_inter_closedPoints hU hW.isOpen_compl.isLocallyClosed
-  have hunique (V : Set X) (hV : V ∈ irreducibleComponents X) (hpV : p ∈ V) : V = Z₁ := by
-    by_contra hVZ
-    exact hpU (Set.mem_biUnion (x := V) ⟨hV, hVZ⟩ hpV)
+  have : Nonempty X := ⟨z⟩
+  obtain ⟨U, hU, hUne, hUuniq⟩ := NoetherianSpace.exists_isOpen_nonempty_forall_eq (α := X)
+  obtain ⟨p, hpU, hp⟩ := nonempty_inter_closedPoints hUne hU.isLocallyClosed
   obtain ⟨φ, hφ⟩ := h q hq p hp
-  have h₁ := hunique _ (φ.image_mem_irreducibleComponents hZ₁) ⟨q, hq₁, hφ⟩
-  have h₂ := hunique _ (φ.image_mem_irreducibleComponents hZ₂) ⟨q, hq₂, hφ⟩
-  exact hne (φ.injective.image_injective (h₁.trans h₂.symm))
+  exact hne (φ.injective.image_injective (hUuniq p hpU _ (φ.image_mem_irreducibleComponents hZ₁)
+    _ (φ.image_mem_irreducibleComponents hZ₂) ⟨q, hq₁, hφ⟩ ⟨q, hq₂, hφ⟩))
