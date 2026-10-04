@@ -6,11 +6,14 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
+public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 
 /-!
 # Generic relative Noether normalization
@@ -53,9 +56,100 @@ separate blueprint node and is not stated here.
 
 universe u
 
-open CategoryTheory
+open CategoryTheory MvPolynomial
 
 namespace AlgebraicGeometry
+
+section Affine
+
+variable {X S : Scheme.{u}} (g : X ⟶ S) [IsAffine X] [IsAffine S]
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Coordinates `t` for which `Γ(X, ⊤)` is finite over `Γ(S, ⊤)[t]` give a finite morphism to the
+iterated affine line. -/
+lemma Scheme.Hom.isFinite_toIteratedAffineLine {r : ℕ} (t : Fin r → Γ(X, ⊤))
+    (h : (eval₂Hom g.appTop.hom t).Finite) : IsFinite (g.toIteratedAffineLine t) := by
+  rw [HasAffineProperty.iff_of_isAffine (P := @IsFinite)]
+  refine ⟨inferInstance, ?_⟩
+  rw [← toIteratedAffineLine_appTop_comp_evalCoord] at h
+  exact RingHom.Finite.of_comp_finite h
+
+/-- If moreover the coordinates `t` are algebraically independent over `Γ(S, ⊤)`, the morphism to
+the iterated affine line is surjective (lying over). -/
+lemma Scheme.Hom.surjective_toIteratedAffineLine {r : ℕ} (t : Fin r → Γ(X, ⊤))
+    (hfin : (eval₂Hom g.appTop.hom t).Finite)
+    (hinj : Function.Injective (eval₂Hom g.appTop.hom t)) :
+    Surjective (g.toIteratedAffineLine t) := by
+  set ν := g.toIteratedAffineLine t
+  have hcomp := toIteratedAffineLine_appTop_comp_evalCoord g t
+  have hνinj : Function.Injective ν.appTop.hom := by
+    intro a b hab
+    obtain ⟨p, rfl⟩ := iteratedAffineLine.evalCoord_surjective S r a
+    obtain ⟨q, rfl⟩ := iteratedAffineLine.evalCoord_surjective S r b
+    congr 1
+    apply hinj
+    rw [← hcomp]
+    exact hab
+  have hνfin : ν.appTop.hom.Finite := by
+    rw [← hcomp] at hfin
+    exact RingHom.Finite.of_comp_finite hfin
+  have hs := hνfin.to_isIntegral.comap_surjective hνinj
+  have hν : ν = X.isoSpec.hom ≫ Spec.map ν.appTop ≫ (iteratedAffineLine S r).isoSpec.inv := by
+    rw [Scheme.isoSpec_inv_naturality, Iso.hom_inv_id_assoc]
+  have : Surjective (Spec.map ν.appTop) := ⟨hs⟩
+  rw [hν]
+  infer_instance
+
+/-- The generic fibre of a morphism of affine schemes which is finite and injective over a
+polynomial ring in `r` variables over the base has dimension `r`. -/
+lemma Scheme.Hom.topologicalKrullDim_fiber_genericPoint [IsIntegral S]
+    {r : ℕ} (t : Fin r → Γ(X, ⊤)) (hfin : (eval₂Hom g.appTop.hom t).Finite)
+    (hinj : Function.Injective (eval₂Hom g.appTop.hom t)) :
+    topologicalKrullDim (g.fiber (genericPoint S)) = r := by
+  have hsq : IsPullback X.isoSpec.hom g (Spec.map g.appTop) S.isoSpec.hom :=
+    IsPullback.of_horiz_isIso ⟨Scheme.isoSpec_hom_naturality g⟩
+  rw [topologicalKrullDim_fiber_of_isPullback hsq, genericPoint_eq_of_isOpenImmersion,
+    genericPoint_eq_bot_of_affine]
+  let _ := g.appTop.hom.toAlgebra
+  let e := Spec.fiberToSpecResidueFieldIso Γ(S, ⊤) Γ(X, ⊤) ⊥
+  refine (IsHomeomorph.topologicalKrullDim_eq _
+    (Scheme.Hom.homeomorph e.hom.left).isHomeomorph).trans ?_
+  refine (PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim _).trans ?_
+  have : IsFractionRing Γ(S, ⊤) (⊥ : PrimeSpectrum Γ(S, ⊤)).asIdeal.ResidueField :=
+    inferInstanceAs (IsFractionRing Γ(S, ⊤) (⊥ : Ideal Γ(S, ⊤)).ResidueField)
+  exact_mod_cast ringKrullDim_tensorProduct_eq_of_finite_inj_algHom_mvPolynomial _
+    (aeval (R := Γ(S, ⊤)) t) hinj hfin
+
+/-- Finiteness and injectivity of the evaluation of polynomials transfer along an isomorphism of
+ring maps. -/
+private lemma finite_injective_eval₂Hom_of_arrowIso {R S R' S' : CommRingCat.{u}} {φ : R ⟶ S}
+    {φ' : R' ⟶ S'} (e : Arrow.mk φ' ≅ Arrow.mk φ) {r : ℕ} (t : Fin r → S)
+    (hfin : (eval₂Hom φ.hom t).Finite) (hinj : Function.Injective (eval₂Hom φ.hom t)) :
+    (eval₂Hom φ'.hom fun i ↦ e.inv.right (t i)).Finite ∧
+      Function.Injective (eval₂Hom φ'.hom fun i ↦ e.inv.right (t i)) := by
+  have hφ' : φ' = e.hom.left ≫ φ ≫ e.inv.right := by
+    have := Arrow.w e.hom
+    simp only [Arrow.mk_hom] at this
+    rw [← Category.assoc, this, Category.assoc, Arrow.hom_inv_id_right, Category.comp_id]
+  have key : eval₂Hom φ'.hom (fun i ↦ e.inv.right (t i)) =
+      e.inv.right.hom.comp ((eval₂Hom φ.hom t).comp (MvPolynomial.map e.hom.left.hom)) := by
+    refine MvPolynomial.ringHom_ext (fun a ↦ ?_) (fun i ↦ ?_)
+    · change eval₂Hom φ'.hom _ (C a) =
+        e.inv.right.hom (eval₂Hom φ.hom t (MvPolynomial.map e.hom.left.hom (C a)))
+      rw [map_C, eval₂Hom_C]
+      erw [eval₂Hom_C]
+      exact congrArg (fun g ↦ g.hom a) hφ'
+    · simp
+  have hl : Function.Bijective e.hom.left.hom :=
+    ConcreteCategory.bijective_of_isIso (Arrow.leftFunc.mapIso e).hom
+  have hr : Function.Bijective e.inv.right.hom :=
+    ConcreteCategory.bijective_of_isIso (Arrow.rightFunc.mapIso e).inv
+  rw [key]
+  refine ⟨RingHom.Finite.comp (RingHom.Finite.of_surjective _ hr.2)
+    (RingHom.Finite.comp hfin (RingHom.Finite.of_surjective _ (map_surjective _ hl.2))),
+    hr.1.comp (hinj.comp (map_injective _ hl.1))⟩
+
+end Affine
 
 /-- Let `f : X ⟶ Y` be a dominant affine morphism of finite type between integral schemes whose
 generic fibre has dimension `r`. Then there is a dense open `V ⊆ Y` over which `f` factors as a
@@ -78,7 +172,81 @@ theorem exists_dense_isFinite_toIteratedAffineLine {X Y : Scheme.{u}} (f : X ⟶
     (hr : topologicalKrullDim (f.fiber (genericPoint Y)) = r) :
     ∃ V : Y.Opens, Dense (V : Set Y) ∧
       ∃ ν : (f ⁻¹ᵁ V).toScheme ⟶ iteratedAffineLine V.toScheme r,
-        IsFinite ν ∧ Surjective ν ∧ ν ≫ iteratedAffineLineProj V.toScheme r = f ∣_ V :=
-  sorry
+        IsFinite ν ∧ Surjective ν ∧ ν ≫ iteratedAffineLineProj V.toScheme r = f ∣_ V := by
+  classical
+  -- A nonempty affine open `U = Spec A` of `Y`, with preimage `f ⁻¹ U = Spec B`.
+  obtain ⟨U, hU, hηU, -⟩ :=
+    exists_isAffineOpen_mem_and_subset (x := genericPoint Y) (U := ⊤) trivial
+  have : Nonempty U := ⟨⟨_, hηU⟩⟩
+  have hfU : IsAffineOpen (f ⁻¹ᵁ U) := hU.preimage f
+  let _ : Algebra Γ(Y, U) Γ(X, f ⁻¹ᵁ U) := (f.app U).hom.toAlgebra
+  have : Algebra.FiniteType Γ(Y, U) Γ(X, f ⁻¹ᵁ U) := by
+    have := HasRingHomProperty.appLE (P := @LocallyOfFiniteType) f inferInstance ⟨U, hU⟩
+      ⟨_, hfU⟩ le_rfl
+    rwa [← Scheme.Hom.app_eq_appLE] at this
+  -- `A → B` is injective since `f` is dominant.
+  have hAB : Function.Injective (algebraMap Γ(Y, U) Γ(X, f ⁻¹ᵁ U)) := by
+    refine (injective_iff_map_eq_zero _).mpr fun a ha ↦ ?_
+    by_contra ha0
+    have hne : (Y.basicOpen a : Set Y).Nonempty := by
+      rw [Set.nonempty_iff_ne_empty, Ne, TopologicalSpace.Opens.coe_eq_empty,
+        basicOpen_eq_bot_iff]
+      exact ha0
+    obtain ⟨x, hx⟩ := f.denseRange.exists_mem_open (Y.basicOpen a).isOpen hne
+    have : x ∈ f ⁻¹ᵁ Y.basicOpen a := hx
+    rw [Scheme.preimage_basicOpen] at this
+    change x ∈ X.basicOpen (algebraMap Γ(Y, U) Γ(X, f ⁻¹ᵁ U) a) at this
+    rw [ha, Scheme.basicOpen_zero] at this
+    exact this
+  obtain ⟨s, hs, d, t, H⟩ := Algebra.FiniteType.exists_finite_aeval_away Γ(Y, U) Γ(X, f ⁻¹ᵁ U)
+  -- Shrink `Y` to the principal open `V = D(s)`.
+  have hsY : (Y.basicOpen s : Set Y).Nonempty := by
+    rw [Set.nonempty_iff_ne_empty, Ne, TopologicalSpace.Opens.coe_eq_empty, basicOpen_eq_bot_iff]
+    exact hs
+  refine ⟨Y.basicOpen s, (Y.basicOpen s).isOpen.dense hsY, ?_⟩
+  have hV : IsAffineOpen (Y.basicOpen s) := hU.basicOpen s
+  have : Nonempty (Y.basicOpen s) := hsY.to_subtype
+  have : IsAffine (f ⁻¹ᵁ Y.basicOpen s) := hV.preimage f
+  have : IsAffine (Y.basicOpen s) := hV
+  -- The rings of `V` and `f ⁻¹ V` are the localizations `A_s` and `B_s`.
+  let _ : Algebra Γ(Y, Y.basicOpen s) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
+    (f.app (Y.basicOpen s)).hom.toAlgebra
+  have : IsLocalization.Away s Γ(Y, Y.basicOpen s) := hU.isLocalization_basicOpen s
+  let inst : Algebra Γ(X, f ⁻¹ᵁ U) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
+    (X.presheaf.map (homOfLE (f.preimage_mono (Y.basicOpen_le s))).op).hom.toAlgebra
+  have : IsLocalization.Away (algebraMap Γ(Y, U) Γ(X, f ⁻¹ᵁ U) s)
+      Γ(X, f ⁻¹ᵁ Y.basicOpen s) := by
+    let : Algebra Γ(X, f ⁻¹ᵁ U) Γ(X, X.basicOpen (f.app _ s)) :=
+      (X.presheaf.map (homOfLE (X.basicOpen_le _)).op).hom.toAlgebra
+    dsimp +instances [inst]
+    rw! (castMode := .all) [f.preimage_basicOpen s]
+    exact hfU.isLocalization_basicOpen (f.app _ s)
+  let _ : Algebra Γ(Y, U) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
+    (f.appLE _ _ (f.preimage_mono (Y.basicOpen_le _))).hom.toAlgebra
+  have : IsScalarTower Γ(Y, U) Γ(X, f ⁻¹ᵁ U) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
+    .of_algebraMap_eq' rfl
+  have : IsScalarTower Γ(Y, U) Γ(Y, Y.basicOpen s) Γ(X, f ⁻¹ᵁ Y.basicOpen s) :=
+    .of_algebraMap_eq' <| by
+      simp only [RingHom.algebraMap_toAlgebra, ← CommRingCat.hom_comp, Scheme.Hom.app_eq_appLE,
+        Scheme.Hom.map_appLE]
+  obtain ⟨hfin, hinj⟩ := H Γ(Y, Y.basicOpen s) Γ(X, f ⁻¹ᵁ Y.basicOpen s)
+  replace hinj := hinj hAB
+  -- Transport to the global sections of the restriction `f ∣_ V`.
+  let e := arrowResLEAppIso f (Y.basicOpen s) (f ⁻¹ᵁ Y.basicOpen s) le_rfl
+  rw [← Scheme.Hom.app_eq_appLE] at e
+  obtain ⟨hfin', hinj'⟩ := finite_injective_eval₂Hom_of_arrowIso e
+    (fun i ↦ algebraMap Γ(X, f ⁻¹ᵁ U) Γ(X, f ⁻¹ᵁ Y.basicOpen s) (t i)) hfin hinj
+  set g := f.resLE (Y.basicOpen s) (f ⁻¹ᵁ Y.basicOpen s) le_rfl with hg
+  -- The number of coordinates is the dimension of the generic fibre.
+  have hd : d = r := by
+    have h := g.topologicalKrullDim_fiber_genericPoint _ hfin' hinj'
+    rw [hg, Scheme.Hom.resLE_eq_morphismRestrict,
+      topologicalKrullDim_fiber_of_isPullback (isPullback_morphismRestrict f _).flip,
+      genericPoint_eq_of_isOpenImmersion, hr] at h
+    exact_mod_cast h.symm
+  subst hd
+  refine ⟨g.toIteratedAffineLine _, g.isFinite_toIteratedAffineLine _ hfin',
+    g.surjective_toIteratedAffineLine _ hfin' hinj', ?_⟩
+  rw [Scheme.Hom.toIteratedAffineLine_proj, hg, Scheme.Hom.resLE_eq_morphismRestrict]
 
 end AlgebraicGeometry
