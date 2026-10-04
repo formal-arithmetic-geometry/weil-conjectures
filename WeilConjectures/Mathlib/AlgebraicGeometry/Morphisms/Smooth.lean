@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.Topology.KrullDimension
 
 /-!
 # The étale-local normal form of a smooth morphism
@@ -25,6 +26,9 @@ The index type of the affine space is `ULift.{u} (Fin d)`, since
 
 - `AlgebraicGeometry.Smooth.exists_etale_to_affineSpace`: the étale-local normal form of a
   smooth morphism of relative dimension `d`.
+- `AlgebraicGeometry.smoothOfRelativeDimension_iff_topologicalKrullDim_eq`: an irreducible
+  scheme smooth over a field is smooth of relative dimension `n` if and only if it has
+  dimension `n`.
 
 ## References
 
@@ -58,6 +62,15 @@ theorem Smooth.exists_etale_to_affineSpace {X Y : Scheme.{u}} (g : X ⟶ Y) (d :
       (_ : g.base x ∈ U) (_ : x ∈ V) (hVU : V ≤ g ⁻¹ᵁ U)
       (e : V.toScheme ⟶ 𝔸(ULift.{u} (Fin d); U.toScheme)),
       Etale e ∧ e ≫ (𝔸(ULift.{u} (Fin d); U.toScheme) ↘ U.toScheme) = g.resLE U V hVU :=
+  sorry
+
+/-- An irreducible scheme `X` smooth over a field `K` is smooth of relative dimension `n` over
+`K` if and only if `X` has dimension `n`: the relative dimension of a smooth morphism at a point
+is the dimension of the fibre at that point, and an irreducible scheme locally of finite type
+over a field has the same dimension at all of its points. -/
+theorem smoothOfRelativeDimension_iff_topologicalKrullDim_eq {K : Type u} [Field K]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) [Smooth f] [IrreducibleSpace X] (n : ℕ) :
+    SmoothOfRelativeDimension n f ↔ topologicalKrullDim X = n :=
   sorry
 
 end AlgebraicGeometry
