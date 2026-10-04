@@ -24,11 +24,11 @@ kernels this reduces the inversion theorem to a single computation, that the con
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.kernelTransformCompIso`: composition of kernel transforms.
-- `AlgebraicGeometry.Etale.fourierKernelConvolutionIso`: the convolution of the two Fourier
-  kernels is the delta kernel.
-- `AlgebraicGeometry.Etale.fourierTransformInversionIso` and
-  `AlgebraicGeometry.Etale.fourierTransformSquareIso`: the inversion theorem.
+- `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_comp`: composition of kernel transforms.
+- `AlgebraicGeometry.Etale.nonempty_iso_fourierKernel_convolution`: the convolution of the two
+  Fourier kernels is the delta kernel.
+- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_inversion` and
+  `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_square`: the inversion theorem.
 
 ## Blueprint
 
@@ -110,15 +110,15 @@ compactifiability of `r₂₃` that this needs is the instance
 
 In particular `FT_{ψ⁻¹} ∘ FT_ψ` is the kernel transform of `𝒦_{ψ⁻¹} ∗ 𝒦_ψ` with shift `2r`.
 (sketch blueprint: `sk-lem-kernel-composition`) -/
-noncomputable def kernelTransformCompIso
+theorem nonempty_iso_kernelTransform_comp
     [HasCompactification (pullback.tripleProj₁₃ π π' π'')]
     [HasCompactification (pullback.snd π π')] [HasCompactification (pullback.snd π' π'')]
     [HasCompactification (pullback.snd π π'')]
     (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (𝒦' : DerivedCategory (Sheaf (pullback π' π'').smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (a c : ℤ) :
-    kernelTransform Λ π π' 𝒦 a ⋙ kernelTransform Λ π' π'' 𝒦' c ≅
-      kernelTransform Λ π π'' (kernelConvolution Λ π π' π'' 𝒦 𝒦') (a + c) :=
+    Nonempty (kernelTransform Λ π π' 𝒦 a ⋙ kernelTransform Λ π' π'' 𝒦' c ≅
+        kernelTransform Λ π π'' (kernelConvolution Λ π π' π'' 𝒦 𝒦') (a + c)) :=
   sorry
 
 end Convolution
@@ -135,22 +135,22 @@ variable [HasCompactification
 the delta kernel `Δ_* Λ(-r)[-2r]` supported on the diagonal, `r = #n` being the relative
 dimension. The companion statement `𝒦_ψ ∗ 𝒦_ψ ≅ (id × ι')_* Δ_* Λ(-r)[-2r]` is the same
 computation with `ψ` in place of `ψ⁻¹`, and is recorded through its consequence
-`AlgebraicGeometry.Etale.fourierTransformSquareIso`.
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_square`.
 
 The character must be **nontrivial**: for `Ψ = 1` both kernels are constant and the
 convolution is `Λ(-r)[-2r]`, supported everywhere.
 (sketch blueprint: `sk-prop-convolution-kernel`) -/
-noncomputable def fourierKernelConvolutionIso [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
+theorem nonempty_iso_fourierKernel_convolution [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (hΨ : Ψ ≠ 1) :
-    kernelConvolution Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)
-        ((DerivedCategory.singleFunctor _ 0).obj
-          (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S)))
-        ((DerivedCategory.singleFunctor _ 0).obj
-          (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ⁻¹ (stdPairing n S))) ≅
-      (shiftFunctor _ (-2 * (Fintype.card n : ℤ))).obj
-        ((R((pullback.diagonal (𝔸(n; S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
-          ((tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj
-            (constantComplex Λ (𝔸(n; S))))) :=
+    Nonempty (kernelConvolution Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)
+          ((DerivedCategory.singleFunctor _ 0).obj
+            (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S)))
+          ((DerivedCategory.singleFunctor _ 0).obj
+            (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ⁻¹ (stdPairing n S))) ≅
+        (shiftFunctor _ (-2 * (Fintype.card n : ℤ))).obj
+          ((R((pullback.diagonal (𝔸(n; S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
+            ((tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj
+              (constantComplex Λ (𝔸(n; S)))))) :=
   sorry
 
 /-- **Fourier inversion.** On `𝔸(n; S)` the Fourier–Deligne transform for the inverse
@@ -162,10 +162,10 @@ character inverts the Fourier–Deligne transform up to the Tate twist `(-r)`,
 functorially in `K`. The character must be **nontrivial**: for `Ψ = 1` the transform is
 `Rp₂,! p₁^*(-)[r]`, which is not invertible.
 (sketch blueprint: `sk-thm-inversion`) -/
-noncomputable def fourierTransformInversionIso [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
+theorem nonempty_iso_fourierTransform_inversion [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (hΨ : Ψ ≠ 1) :
-    affineFourierTransform Λ n S Ψ ⋙ affineFourierTransform Λ n S Ψ⁻¹ ≅
-      tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ)) :=
+    Nonempty (affineFourierTransform Λ n S Ψ ⋙ affineFourierTransform Λ n S Ψ⁻¹ ≅
+        tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))) :=
   sorry
 
 /-- Applying the Fourier–Deligne transform twice with the *same* character gives back the
@@ -175,13 +175,13 @@ reflection `ι'^* K` of the input, Tate twisted by `(-r)`:
 
 functorially in `K`, where `ι' = AlgebraicGeometry.AffineSpace.neg` is `x ↦ -x`. The
 character must be **nontrivial**, for the same reason as in
-`AlgebraicGeometry.Etale.fourierTransformInversionIso`.
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_inversion`.
 (sketch blueprint: `sk-thm-inversion`) -/
-noncomputable def fourierTransformSquareIso [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
+theorem nonempty_iso_fourierTransform_square [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (hΨ : Ψ ≠ 1) :
-    affineFourierTransform Λ n S Ψ ⋙ affineFourierTransform Λ n S Ψ ≅
-      D((neg n S)^*[ModuleCat.{u + 1} Λ]) ⋙
-        tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ)) :=
+    Nonempty (affineFourierTransform Λ n S Ψ ⋙ affineFourierTransform Λ n S Ψ ≅
+        D((neg n S)^*[ModuleCat.{u + 1} Λ]) ⋙
+          tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))) :=
   sorry
 
 end Inversion

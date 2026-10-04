@@ -38,11 +38,11 @@ transport `t`-structures.
 - `AlgebraicGeometry.Etale.fourierTransformStalkIso`: the stalk of `FT_ψ(K)` at a section
   `ξ` of `V' ⟶ S` is the compactly supported cohomology of `K ⊗ᴸ ℒ_{ψ(b(x, ξ))}`, shifted
   by `r`.
-- `AlgebraicGeometry.Etale.fourierTransformBaseChangeIso`: the transform commutes with base
-  change along `S' ⟶ S`.
-- `AlgebraicGeometry.Etale.fourierTransformTensorIso`: the transform is linear over the
+- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_baseChange`: the transform commutes with
+  base change along `S' ⟶ S`.
+- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor`: the transform is linear over the
   base.
-- `AlgebraicGeometry.Etale.fourierTransformTateTwistIso`: the transform commutes with the
+- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tateTwist`: the transform commutes with the
   Tate twist.
 
 ## Blueprint
@@ -174,16 +174,16 @@ naturally in `K`. Both squares
 must be **cartesian**: the isomorphism is proper base change for `Rp₂,!` along the induced
 cartesian square `W ×_{S'} W' ⟶ V ×_S V'`, which is false for merely commuting squares.
 (sketch blueprint: `sk-prop-base-change`) -/
-noncomputable def fourierTransformBaseChangeIso [CharP Γ(pullback π π', ⊤) p]
+theorem nonempty_iso_fourierTransform_baseChange [CharP Γ(pullback π π', ⊤) p]
     [HasCompactification (pullback.snd π π')]
     (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ) {S' W W' : Scheme.{u}}
     (g : S' ⟶ S) (ρ : W ⟶ S') (ρ' : W' ⟶ S') (u : W ⟶ V) (u' : W' ⟶ V')
     (hu : IsPullback u ρ π g) (hu' : IsPullback u' ρ' π' g)
     [CharP Γ(pullback ρ ρ', ⊤) p] [HasCompactification (pullback.snd ρ ρ')] :
-    D((u)^*[ModuleCat.{u + 1} Λ]) ⋙
-        fourierTransform Λ ρ ρ' Ψ
-          (pairingBaseChange π π' b g ρ ρ' u u' hu.w hu'.w) r ≅
-      fourierTransform Λ π π' Ψ b r ⋙ D((u')^*[ModuleCat.{u + 1} Λ]) :=
+    Nonempty (D((u)^*[ModuleCat.{u + 1} Λ]) ⋙
+          fourierTransform Λ ρ ρ' Ψ
+            (pairingBaseChange π π' b g ρ ρ' u u' hu.w hu'.w) r ≅
+        fourierTransform Λ π π' Ψ b r ⋙ D((u')^*[ModuleCat.{u + 1} Λ])) :=
   sorry
 
 end BaseChange
@@ -203,12 +203,12 @@ of functors `D(S_ét) ⥤ (D(V_ét) ⥤ D(V'_ét))`.
 In particular `FT_ψ(π^* N) ≅ FT_ψ(Λ) ⊗ᴸ π'^* N`, so the transform of a complex pulled back
 from the base is determined by the transform of the unit.
 (sketch blueprint: `sk-prop-base-linear`) -/
-noncomputable def fourierTransformTensorIso (Ψ : AddChar (ZMod p) Λ)
+theorem nonempty_iso_fourierTransform_tensor (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
-    derivedTensorRightPullback Λ π ⋙
-        (Functor.whiskeringRight _ _ _).obj (fourierTransform Λ π π' Ψ b r) ≅
-      derivedTensorRightPullback Λ π' ⋙
-        (Functor.whiskeringLeft _ _ _).obj (fourierTransform Λ π π' Ψ b r) :=
+    Nonempty (derivedTensorRightPullback Λ π ⋙
+          (Functor.whiskeringRight _ _ _).obj (fourierTransform Λ π π' Ψ b r) ≅
+        derivedTensorRightPullback Λ π' ⋙
+          (Functor.whiskeringLeft _ _ _).obj (fourierTransform Λ π π' Ψ b r)) :=
   sorry
 
 /-- The Fourier–Deligne transform commutes with the Tate twist: `FT_ψ(K(m)) ≅ FT_ψ(K)(m)`
@@ -216,10 +216,10 @@ for every `m : ℤ`, naturally in `K`. This is the second clause of the base lin
 proposition, the Tate twist being tensoring with an invertible complex pulled back from the
 base.
 (sketch blueprint: `sk-prop-base-linear`) -/
-noncomputable def fourierTransformTateTwistIso [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
+theorem nonempty_iso_fourierTransform_tateTwist [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r m : ℤ) :
-    tateTwist Λ V m ⋙ fourierTransform Λ π π' Ψ b r ≅
-      fourierTransform Λ π π' Ψ b r ⋙ tateTwist Λ V' m :=
+    Nonempty (tateTwist Λ V m ⋙ fourierTransform Λ π π' Ψ b r ≅
+        fourierTransform Λ π π' Ψ b r ⋙ tateTwist Λ V' m) :=
   sorry
 
 end BaseLinear

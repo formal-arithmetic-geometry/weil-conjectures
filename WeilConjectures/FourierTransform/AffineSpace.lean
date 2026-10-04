@@ -32,9 +32,9 @@ sheaves.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.fourierTransformUnitIso` and
-  `AlgebraicGeometry.Etale.fourierTransformSkyscraperZeroIso`: the transform exchanges the
-  constant sheaf and the skyscraper at the origin.
+- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_unit` and
+  `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_skyscraperZero`: the transform
+  exchanges the constant sheaf and the skyscraper at the origin.
 
 ## Blueprint
 
@@ -85,12 +85,12 @@ On the affine line, the blueprint's case, this reads `FT_ψ(Λ) ≅ δ₀(-1)[-1
 The character must be **nontrivial**: for `Ψ = 1` the kernel is the constant sheaf and the
 transform of `Λ` is `Λ(-r)[-r]`, supported everywhere.
 (sketch blueprint: `sk-prop-first-formula`) -/
-noncomputable def fourierTransformUnitIso [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
+theorem nonempty_iso_fourierTransform_unit [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (hΨ : Ψ ≠ 1) :
-    (affineFourierTransform Λ n S Ψ).obj (𝟙_ _) ≅
-      (shiftFunctor _ (-(Fintype.card n : ℤ))).obj
-        ((tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj
-          (skyscraperZero Λ n S)) :=
+    Nonempty ((affineFourierTransform Λ n S Ψ).obj (𝟙_ _) ≅
+        (shiftFunctor _ (-(Fintype.card n : ℤ))).obj
+          ((tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj
+            (skyscraperZero Λ n S))) :=
   sorry
 
 /-- The Fourier–Deligne transform of the skyscraper at the origin of `𝔸(n; S)` is the
@@ -99,12 +99,12 @@ constant sheaf, shifted by the relative dimension `r = #n`:
 `FT_ψ(δ₀) ≅ Λ[r]`.
 
 On the affine line, the blueprint's case, this reads `FT_ψ(δ₀) ≅ Λ[1]`. Unlike
-`AlgebraicGeometry.Etale.fourierTransformUnitIso` this holds for every character: the
-kernel restricted to `{0} ×_S 𝔸(n; S)` is the Artin–Schreier sheaf of the zero function.
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_unit` this holds for every character:
+the kernel restricted to `{0} ×_S 𝔸(n; S)` is the Artin–Schreier sheaf of the zero function.
 (sketch blueprint: `sk-prop-first-formula`) -/
-noncomputable def fourierTransformSkyscraperZeroIso (Ψ : AddChar (ZMod p) Λ) :
-    (affineFourierTransform Λ n S Ψ).obj (skyscraperZero Λ n S) ≅
-      (shiftFunctor _ (Fintype.card n : ℤ)).obj (𝟙_ _) :=
+theorem nonempty_iso_fourierTransform_skyscraperZero (Ψ : AddChar (ZMod p) Λ) :
+    Nonempty ((affineFourierTransform Λ n S Ψ).obj (skyscraperZero Λ n S) ≅
+        (shiftFunctor _ (Fintype.card n : ℤ)).obj (𝟙_ _)) :=
   sorry
 
 end AlgebraicGeometry.Etale
