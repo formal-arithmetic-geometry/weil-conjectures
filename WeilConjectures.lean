@@ -409,7 +409,6 @@ public import WeilConjectures.Mathlib.Algebra.MvPolynomial.PDeriv
 public import WeilConjectures.Mathlib.Algebra.Polynomial.BigOperators
 public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Reverse
-public import WeilConjectures.Mathlib.Algebra.Polynomial.Roots
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Splits
 public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineOpenAlgebra

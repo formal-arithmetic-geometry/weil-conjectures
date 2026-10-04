@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
-public import WeilConjectures.Mathlib.Algebra.Polynomial.Roots
+public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
 public import WeilConjectures.Statement
 public import WeilConjectures.ZetaLinearAlgebra.TraceDatum
 
