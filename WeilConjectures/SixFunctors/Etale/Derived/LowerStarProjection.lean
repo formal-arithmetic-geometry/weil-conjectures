@@ -48,8 +48,8 @@ The results depend on `sorryAx` through `AlgebraicGeometry.Etale.derivedTensor`.
 
 - The projection formula at finite coefficients, currently stated with `Nonempty` in the
   `TODO(unify)` of `WeilConjectures.SixFunctors.Etale.Derived.Exchange`, should be restated
-  through `AlgebraicGeometry.Etale.projectionMap`, which is built from this projection map in
-  `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection`.
+  through `AlgebraicGeometry.Etale.rightDerivedLowerShriekProjectionMap`, which is built from
+  this projection map in `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection`.
 - The pro-étale and `O_E`/`E`-coefficient projection maps should be obtained in the same way
   from `CategoryTheory.Adjunction.rightAdjointProjectionMap`.
 -/

@@ -79,9 +79,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [HasSmallSiteSheafify A]
-  [Etale.UpperStarPreservesFlat A] [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
-  [∀ X : Scheme.{u}, X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
 namespace Etale
 
@@ -107,7 +104,9 @@ admitting compactifications. The eight clauses of the blueprint, one group of fi
 
    one has `Lg^* Rf_! ≅ Rf'_! Lg'^*`; and `Lg^* Rf_* ≅ Rf'_* Lg'^*` for proper `f` and for
    smooth `g`.
-3. **Projection formula.** `Rf_!(K ⊗ᴸ Lf^* L) ≅ Rf_! K ⊗ᴸ L` at every `K` and `L`.
+3. **Projection formula.** The projection map `PF : Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)`
+   (`AlgebraicGeometry.Etale.rightDerivedLowerShriekProjectionMap`) is an isomorphism at every
+   `K` and `L`.
 4. **Compactifications and proper coincidence.** `Rf_!` is independent of the compactification,
    `R(f ≫ h)_! ≅ Rh_! Rf_!`, and `Rf_! ≅ Rf_*` for proper `f`.
 5. **Orientation.** A smooth `f` of pure relative dimension `d` carries an orientation
@@ -138,8 +137,13 @@ structure SixOperationsPackage : Prop where
     ∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (g' : X' ⟶ X) (f' : X' ⟶ Y'),
       IsPullback g' f' f g → Smooth g →
       Nonempty (R((f)_*[A]) ⋙ L((g)^*[A]) ≅ L((g')^*[A]) ⋙ R((f')_*[A]))
-  /-- (3) The projection formula. -/
-  projectionFormula : ∀ K L, HasProjectionFormula A f K L
+  /-- (3) The projection formula. The hypotheses on `A` are those needed to build the
+  projection map, see `AlgebraicGeometry.Etale.rightDerivedLowerShriekProjectionMap`. -/
+  projectionFormula : ∀ [Etale.UpperStarPreservesFlat A]
+    [(CategoryTheory.forget A).ReflectsIsomorphisms]
+    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+    [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    (K L), HasProjectionFormula A f K L
   /-- (4) `Rf_!` is independent of the chosen compactification. -/
   lowerShriekCompactificationIndependent :
     ∀ c c' : Compactification f, Nonempty (Rf_!(c)[A] ≅ Rf_!(c')[A])
@@ -190,7 +194,7 @@ theorem sixOperationsPackage : SixOperationsPackage A f aY where
   baseChangeLowerShriek _ _ _ _ := sorry
   baseChangeLowerStarOfProper _ _ _ _ _ := sorry
   baseChangeLowerStarOfSmooth _ _ _ _ _ := sorry
-  projectionFormula _ _ := sorry
+  projectionFormula := sorry
   lowerShriekCompactificationIndependent _ _ := sorry
   lowerShriekComp h := nonempty_iso_rightDerivedLowerShriek_comp A f h
   lowerShriekIsoLowerStarOfProper _ := sorry
@@ -204,6 +208,14 @@ theorem sixOperationsPackage : SixOperationsPackage A f aY where
   ctfRightDerivedLowerShriek _ hK := constructibleFiniteTor_rightDerivedLowerShriek A f hK
   ctfRightDerivedUpperShriek _ hK := constructibleFiniteTor_rightDerivedUpperShriek A f hK
   ctfVerdierDual _ hK := constructibleFiniteTor_verdierDual A (f ≫ aY) hK
+
+/-- The package and its projection-formula clause apply to `A = ModuleCat Λ`: the hypotheses
+on `A` are found by instance search. -/
+example (Λ : Type (u + 1)) [CommRing Λ]
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
+  (sixOperationsPackage (ModuleCat.{u + 1} Λ) f aY).projectionFormula K L
 
 end Etale
 
