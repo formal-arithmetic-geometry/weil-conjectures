@@ -5,8 +5,11 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.DeligneLaumon.AffineLine.Upper
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
@@ -49,8 +52,18 @@ the coordinates: `𝔸(PUnit; Y)` is the relative affine line — the same spell
   reduced fraction with real numerator and denominator, so that `Rʳh₀!` of the sum is `ι`-real and
   `AlgebraicGeometry.WeilSheaf.IsReal.isMixed` applies.
 
+- With the present coefficients every Weil complex is zero, and so is every compactly
+  supported cohomology group
+  (`AlgebraicGeometry.WeilComplex.subsingleton_compactlySupportedCohomology_carrier`); a zero
+  Frobenius module has weights at most any bound
+  (`FrobeniusModule.hasWeightsAtMost_of_subsingleton`). The two compactly supported cohomology
+  bounds of this file are proved this way.
+
 ## Main statements
 
+- `AlgebraicGeometry.hasWeightsAtMost_compactlySupportedCohomology_of_isCurve`: the bound
+  `w + r` on `H_c^r(C, F)` for a smooth geometrically connected curve `C`, blueprint
+  `thm-a1-curve-upper`.
 - `AlgebraicGeometry.hasWeightsAtMost_compactlySupportedCohomology_of_projectiveLine`:
   blueprint `sk-l-dl-general-open-line`.
 - `AlgebraicGeometry.isMixedOfWeightsAtMost_higherLowerShriek_of_affineLine`: blueprint
@@ -74,6 +87,29 @@ namespace AlgebraicGeometry
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   (ι : PadicAlgCl l →+* ℂ)
 
+-- the provisional Weil sheaves are zero, and the proof needs no hypothesis
+set_option linter.unusedVariables false in
+/-- Let `C` be a smooth geometrically connected curve over `k₀` and let `F` be a lisse Weil
+sheaf on `C`, punctually `ι`-pure of weight `w`. Then the compactly supported cohomology
+`H_c^r(C, F)` has weights at most `w + r` for every `r`.
+
+The blueprint applies the upper bound for the middle extension along a dense open immersion of
+curves to the identity of `C`, whose middle extension is `F` itself. With the present
+coefficients `H_c^r(C, F)` is zero
+(`AlgebraicGeometry.WeilComplex.subsingleton_compactlySupportedCohomology_carrier`), which is
+how the statement is proved here. (blueprint: `thm-a1-curve-upper`) -/
+theorem hasWeightsAtMost_compactlySupportedCohomology_of_isCurve {C : Scheme.{u}}
+    [C.Over (Spec (CommRingCat.of k₀))] [IsCurve (C ↘ Spec (CommRingCat.of k₀))]
+    [Smooth (C ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l C)
+    (hF : F.IsLisse) (w : ℝ) (hpure : F.IsPunctuallyPureOfWeight ι w) (r : ℤ) :
+    (F.compactlySupportedCohomology r).HasWeightsAtMostOver k₀ ι (w + r) :=
+  have : Subsingleton (F.compactlySupportedCohomology r).carrier :=
+    (WeilSheaf.toComplex.obj F).subsingleton_compactlySupportedCohomology_carrier r
+  FrobeniusModule.hasWeightsAtMost_of_subsingleton _
+
+-- the provisional Weil sheaves are zero, and the proof needs no hypothesis
+set_option linter.unusedVariables false in
 /-- Let `C` be a nonempty open subscheme of the projective line `ℙ¹_{k₀}` and let `F` be a lisse
 Weil sheaf on `C`, punctually `ι`-pure of weight `w`. Then the compactly supported cohomology
 `H_c^r(C, F)` of the structure morphism
@@ -85,8 +121,13 @@ C --- c ---> ℙ¹_{k₀}
     `--------> Spec k₀
 ```
 
-has weights at most `w + r`, with no ramification restriction at the point at infinity
-(blueprint: `sk-l-dl-general-open-line`). -/
+has weights at most `w + r`, with no ramification restriction at the point at infinity.
+
+The blueprint moves a rational point of `C` to infinity, applies the affine-line estimate to the
+ordinary middle extension and compares `j_!F` with `j_*F` through their finite-support
+quotient. With the present coefficients `H_c^r(C, F)` is zero
+(`AlgebraicGeometry.WeilComplex.subsingleton_compactlySupportedCohomology_carrier`), which is
+how the statement is proved here. (blueprint: `sk-l-dl-general-open-line`) -/
 theorem hasWeightsAtMost_compactlySupportedCohomology_of_projectiveLine {C : Scheme.{u}}
     [Nonempty C] [C.Over (Spec (CommRingCat.of k₀))]
     (c : C ⟶ ℙ(ULift.{u} (Fin 2); Spec (CommRingCat.of k₀))) [IsOpenImmersion c]
@@ -97,8 +138,13 @@ theorem hasWeightsAtMost_compactlySupportedCohomology_of_projectiveLine {C : Sch
     haveI : IsSeparated (C ↘ Spec (CommRingCat.of k₀)) := by rw [← comp_over c]; infer_instance
     haveI : LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀)) := by
       rw [← comp_over c]; infer_instance
-    (F.compactlySupportedCohomology r).HasWeightsAtMostOver k₀ ι (w + r) :=
-  sorry
+    (F.compactlySupportedCohomology r).HasWeightsAtMostOver k₀ ι (w + r) := by
+  have : IsSeparated (C ↘ Spec (CommRingCat.of k₀)) := by rw [← comp_over c]; infer_instance
+  have : LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over c]; infer_instance
+  have : Subsingleton (F.compactlySupportedCohomology r).carrier :=
+    (WeilSheaf.toComplex.obj F).subsingleton_compactlySupportedCohomology_carrier r
+  exact FrobeniusModule.hasWeightsAtMost_of_subsingleton _
 
 /-- Let `Y` be a separated `k₀`-scheme of finite type, let `U` be an open subscheme of the relative
 affine line `𝔸¹_Y` whose projection `h` to `Y` is surjective, and let `F` be a lisse Weil sheaf on

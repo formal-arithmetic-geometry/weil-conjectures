@@ -101,6 +101,12 @@ theorem HasWeightsAtMost.mono {ι : K →+* ℂ} {q : ℕ} (hq : 1 ≤ q)
   fun α hα ↦ (h α hα).trans
     (Real.rpow_le_rpow_of_exponent_le (by exact_mod_cast hq) (by linarith))
 
+/-- The zero Frobenius module has no eigenvalues, so it has weights at most any `w`. -/
+theorem hasWeightsAtMost_of_subsingleton {ι : K →+* ℂ} {q : ℕ} {M : FrobeniusModule.{u, v} K}
+    [Subsingleton M.carrier] (w : ℝ) : M.HasWeightsAtMost ι q w := fun _ hα ↦ by
+  obtain ⟨x, hx⟩ := hα.exists_hasEigenvector
+  exact (hx.2 (Subsingleton.elim x 0)).elim
+
 /-- An isomorphism of Frobenius modules preserves the eigenvalues of the Frobenius. -/
 theorem Equiv.hasEigenvalue {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) {α : K}
     (hα : M.frobeniusEnd.HasEigenvalue α) : N.frobeniusEnd.HasEigenvalue α := by
