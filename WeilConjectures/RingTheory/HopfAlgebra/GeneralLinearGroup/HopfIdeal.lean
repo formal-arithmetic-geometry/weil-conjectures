@@ -18,7 +18,7 @@ public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
 This file is the purely algebraic side of the theory of closed subgroups of `GL_n`: it concerns
 Hopf ideals `I` of the Hopf algebra `k[x_ij, det⁻¹]` and matrix groups, and never mentions
 schemes. The group scheme `V(I)` itself and the comparison of its points with the matrix groups
-defined here are in `WeilConjectures.AlgebraicGeometry.GroupScheme.ClosedSubgroup`.
+defined here are in `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup`.
 
 For a Hopf ideal `I` and a `k`-algebra `R`, the invertible matrices over `R` on which every
 equation in `I` vanishes form a subgroup `zeroLocus I R` of `GL n R`. Conversely, an abstract
@@ -319,6 +319,13 @@ theorem isRadical_identityComponent (I : Ideal (CoordinateRing n k)) :
     (identityComponent I).IsRadical :=
   PrimeSpectrum.isRadical_vanishingIdeal _
 
+/-- The reduced identity component is monotone in the group: if `V(J) ⊆ V(I)` then
+`V(J)° ⊆ V(I)°`. -/
+theorem identityComponent_mono (I : Ideal (CoordinateRing n k)) {J : Ideal (CoordinateRing n k)}
+    (h : I ≤ J) : identityComponent I ≤ identityComponent J :=
+  PrimeSpectrum.vanishingIdeal_anti_mono
+    (connectedComponentIn_mono _ (PrimeSpectrum.zeroLocus_anti_mono h))
+
 /-- The closed subgroup `V(I)` of `GL_n` is connected (and reduced): `I` is the ideal of its own
 reduced identity component. -/
 def IsConnected (I : Ideal (CoordinateRing n k)) : Prop :=
@@ -351,6 +358,10 @@ noncomputable def center (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
 
 instance (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] : (center I).IsHopfIdeal k :=
   instIsHopfIdealVanishingIdeal _
+
+/-- The ideal of `G` is contained in the ideal of its centre: `Z(G) ⊆ G`. -/
+theorem le_center (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] : I ≤ center I :=
+  (le_vanishingIdeal_zeroLocus I).trans (vanishingIdeal_anti fun _ hg ↦ hg.1)
 
 /-- The `k`-points of the centre of `G = V(I)` are the matrices of `G(k)` commuting with all of
 `G(k)`. (blueprint: `sk-d-geometry`) -/

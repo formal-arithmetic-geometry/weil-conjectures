@@ -14,8 +14,8 @@ public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdea
 # Closed subgroup schemes of `GL_n`
 
 A Hopf ideal `I` of `k[x_ij, det⁻¹]` cuts out the closed subgroup scheme
-`V(I) = Spec (k[x_ij, det⁻¹] ⧸ I)` of the group scheme `GL(n; k)`: a group object of
-`Over (Spec k)` with a closed immersion `V(I) ⟶ GL(n; k)` of group objects. An inclusion `I ≤ J`
+`V(I) = Spec (k[x_ij, det⁻¹] ⧸ I)` of the group scheme `𝔾𝕃(n; k)`: a group object of
+`Over (Spec k)` with a closed immersion `V(I) ⟶ 𝔾𝕃(n; k)` of group objects. An inclusion `I ≤ J`
 of Hopf ideals gives a closed immersion `V(J) ⟶ V(I)` of group objects.
 
 The `R`-points `Spec R ⟶ V(I)` of this group scheme are identified with the matrix group
@@ -26,11 +26,13 @@ definition, and it is the only place where the scheme and the matrix groups meet
 ## Main definitions
 
 - `AlgebraicGeometry.GeneralLinearGroup.subgroupScheme`: the closed subgroup scheme `V(I)` of
-  `GL(n; k)`, with its closed immersion `subgroupSchemeι` into `GL(n; k)`.
+  `𝔾𝕃(n; k)`, with its closed immersion `subgroupSchemeι` into `𝔾𝕃(n; k)`.
 - `AlgebraicGeometry.GeneralLinearGroup.subgroupSchemeHom`: the closed immersion `V(J) ⟶ V(I)`
   induced by an inclusion `I ≤ J` of Hopf ideals.
 - `AlgebraicGeometry.GeneralLinearGroup.zeroLocusMulEquiv`: the group of `R`-points
   `Spec R ⟶ V(I)` is the matrix group `zeroLocus I R`.
+- `AlgebraicGeometry.GeneralLinearGroup.derivedIdeal`: the Hopf ideal of the derived subgroup
+  `[V(I), V(I)]`, the smallest closed subgroup scheme of `V(I)` with commutative quotient.
 
 ## Main results
 
@@ -41,10 +43,16 @@ definition, and it is the only place where the scheme and the matrix groups meet
 - `AlgebraicGeometry.GeneralLinearGroup.range_subgroupSchemeHom_le_identityComponent`: the closed
   subgroup scheme cut out by the ideal `identityComponent I` is the reduced identity component of
   `V(I)`.
+- `AlgebraicGeometry.GeneralLinearGroup.containsCommutators_subgroupSchemeHom`: if `V(J)(R)`
+  contains the commutators of `V(I)(R)` for all `R`, then `V(J) ⟶ V(I)` contains the commutators
+  scheme-theoretically.
+- `AlgebraicGeometry.GeneralLinearGroup.containsCommutators_iff_le_derivedIdeal`: a closed subgroup
+  of `V(I)` contains the commutators if and only if it contains the derived subgroup.
 
 ## Blueprint
 
 - `sk-d-geometry`: matrix algebraic groups as closed subgroup schemes of `GL(V)`.
+- `sk-i-restriction`: closed subgroups containing the commutators, and the derived subgroup.
 -/
 
 @[expose] public section
@@ -81,7 +89,7 @@ instance : LocallyOfFiniteType (subgroupScheme I).hom :=
 
 /-- The closed immersion of the closed subgroup scheme `V(I)` into `GL_n`.
 (blueprint: `sk-d-geometry`) -/
-noncomputable def subgroupSchemeι : subgroupScheme I ⟶ GL(n; k) :=
+noncomputable def subgroupSchemeι : subgroupScheme I ⟶ 𝔾𝕃(n; k) :=
   (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mkₐ k I).toRingHom)).asOver (Spec (.of k))
 
 instance : IsMonHom (subgroupSchemeι I) :=
@@ -202,6 +210,13 @@ theorem subgroupSchemeHom_comp_subgroupSchemeι :
   rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
   rfl
 
+/-- The inclusions of closed subgroup schemes compose: `V(K) ⟶ V(J) ⟶ V(I)` is `V(K) ⟶ V(I)`. -/
+@[reassoc (attr := simp)]
+theorem subgroupSchemeHom_comp {K : Ideal (CoordinateRing n k)} [K.IsHopfIdeal k] (h' : J ≤ K) :
+    subgroupSchemeHom h' ≫ subgroupSchemeHom h = subgroupSchemeHom (h.trans h') := by
+  rw [← cancel_mono (subgroupSchemeι I), Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι,
+    subgroupSchemeHom_comp_subgroupSchemeι, subgroupSchemeHom_comp_subgroupSchemeι]
+
 instance : IsClosedImmersion (subgroupSchemeHom h).left :=
   IsClosedImmersion.spec_of_surjective _ (Ideal.Quotient.factor_surjective h)
 
@@ -219,7 +234,81 @@ instance : IsMonHom (subgroupSchemeHom h) where
       subgroupSchemeHom_comp_subgroupSchemeι, IsMonHom.mul_hom, Category.assoc, IsMonHom.mul_hom,
       tensorHom_comp_tensorHom_assoc, subgroupSchemeHom_comp_subgroupSchemeι]
 
+/-- The inclusion `V(I) ⟶ V(I)` induced by `I ≤ I` is the identity. -/
+@[simp]
+theorem subgroupSchemeHom_refl : subgroupSchemeHom (le_refl I) = 𝟙 (subgroupScheme I) :=
+  (cancel_mono (subgroupSchemeι I)).1 (by simp)
+
+/-- If `V(I)(R)` has its commutators in `V(J)(R)` for every `k`-algebra `R`, then the closed
+immersion `V(J) ⟶ V(I)` contains the commutators scheme-theoretically
+(`AlgebraicGeometry.IsMonHom.ContainsCommutators`).
+
+Proof sketch (not formalised): it suffices to factor the universal commutator, that of the two
+projections of `V(I) × V(I)`, through `V(J)`; every other commutator is obtained from it by
+precomposition. The product `V(I) × V(I)` is affine, the spectrum of
+`(k[GL_n] ⧸ I) ⊗[k] (k[GL_n] ⧸ I)`, so its identity is a point of `V(I) × V(I)` with values in this
+algebra, and the hypothesis for this algebra, transported through `zeroLocusMulEquiv`, factors the
+universal commutator. (blueprint: `sk-i-restriction`) -/
+theorem containsCommutators_subgroupSchemeHom
+    (hIJ : ∀ (R : Type u) [CommRing R] [Algebra k R],
+      ⁅zeroLocus I R, zeroLocus I R⁆ ≤ zeroLocus J R) :
+    IsMonHom.ContainsCommutators (subgroupSchemeHom h) := by
+  sorry
+
 end Inclusion
+
+section Derived
+
+/-! ### The derived subgroup
+
+The *derived subgroup* `[G, G]` of `G = V(I)` is the smallest closed subgroup scheme `D ⊆ G` whose
+inclusion `D ⟶ G` contains the commutators of `G`
+(`AlgebraicGeometry.IsMonHom.ContainsCommutators`), that is, such that `G ⧸ D` is commutative; it
+is normal
+(`AlgebraicGeometry.IsMonHom.Normal.of_containsCommutators`). In Hopf-ideal terms it is cut out by
+the largest Hopf ideal `J ≥ I` with this property, the sum of all of them. -/
+
+variable (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
+
+/-- The Hopf ideal of the derived subgroup `[V(I), V(I)]`: the sum of all Hopf ideals `J ≥ I` such
+that `V(J) ⟶ V(I)` contains the commutators of `V(I)`. (blueprint: `sk-i-restriction`) -/
+noncomputable def derivedIdeal : Ideal (CoordinateRing n k) :=
+  sSup {J | ∃ (hJ : J.IsHopfIdeal k) (h : I ≤ J),
+    haveI := hJ; IsMonHom.ContainsCommutators (subgroupSchemeHom h)}
+
+/-- The derived subgroup is a subgroup: `[G, G] ⊆ G`. -/
+theorem le_derivedIdeal : I ≤ derivedIdeal I :=
+  le_sSup ⟨inferInstance, le_refl I,
+    IsMonHom.ContainsCommutators.of_eq (subgroupSchemeHom_refl (I := I)).symm⟩
+
+/-- The sum of Hopf ideals is a Hopf ideal, so the derived subgroup is a closed subgroup scheme.
+
+Proof sketch (not formalised): if `Δ(a) ∈ J ⊗ A + A ⊗ J` and `Δ(b) ∈ J' ⊗ A + A ⊗ J'`, then
+`Δ(a + b) ∈ (J + J') ⊗ A + A ⊗ (J + J')`; likewise for the counit and the antipode. -/
+instance : (derivedIdeal I).IsHopfIdeal k := by
+  sorry
+
+/-- The derived subgroup contains the commutators of `G`: `G ⧸ [G, G]` is commutative.
+
+Proof sketch (not formalised): a morphism `X ⟶ V(I)` factors through `V(J)` if and only if `J`
+maps to zero in `Γ(X, 𝒪_X)`; this holds for every `J` in the family defining `derivedIdeal I`,
+hence for their sum. (blueprint: `sk-i-restriction`) -/
+instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I)) := by
+  sorry
+
+variable {I} {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k] (h : I ≤ J)
+
+/-- A closed subgroup `V(J) ⊆ V(I)` contains the commutators of `V(I)` if and only if it contains
+the derived subgroup `[V(I), V(I)]`, that is, `J ≤ derivedIdeal I`.
+(blueprint: `sk-i-restriction`) -/
+theorem containsCommutators_iff_le_derivedIdeal :
+    IsMonHom.ContainsCommutators (subgroupSchemeHom h) ↔ J ≤ derivedIdeal I := by
+  refine ⟨fun hc ↦ le_sSup ⟨inferInstance, h, hc⟩, fun hJ ↦ ⟨fun a b ↦ ?_⟩⟩
+  obtain ⟨c, hc⟩ := IsMonHom.ContainsCommutators.exists_comp_eq_commutator
+    (subgroupSchemeHom (le_derivedIdeal I)) a b
+  exact ⟨c ≫ subgroupSchemeHom hJ, by rw [Category.assoc, subgroupSchemeHom_comp, hc]⟩
+
+end Derived
 
 section IdentityComponent
 
@@ -235,5 +324,34 @@ theorem range_subgroupSchemeHom_le_identityComponent :
   sorry
 
 end IdentityComponent
+
+section Geometry
+
+variable {k : Type u} [Field k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
+
+/-- The closed subgroup scheme `V(I)` is reduced when `I` is a radical ideal. -/
+theorem isReduced_subgroupScheme (hI : I.IsRadical) : IsReduced (subgroupScheme I).left :=
+  haveI : _root_.IsReduced (CoordinateRing n k ⧸ I) := (Ideal.isRadical_iff_quotient_reduced I).1 hI
+  inferInstanceAs (IsReduced (Spec (.of (CoordinateRing n k ⧸ I))))
+
+/-- The closed subgroup scheme `V(I)` is connected when `I` is the ideal of its own reduced
+identity component: `V(I)` is then the closure of the connected component of the identity in
+`V(I)`, which is closed. -/
+theorem connectedSpace_subgroupScheme (h : IsConnected I) :
+    ConnectedSpace (subgroupScheme I).left := by
+  sorry
+
+/-- The reduced centre `Z(G)` of a reduced `G = V(I)` over an algebraically closed field is
+central scheme-theoretically: its points commute with all points of `G`.
+
+Proof sketch (not formalised): the condition that a point `z` of `Z(G)` commutes with a point `g`
+of `G` is cut out by equations on `Z(G) × G`; they vanish on the rational points, which are dense
+in the reduced scheme `Z(G) × G`, hence everywhere. (blueprint: `sk-p-comparison`) -/
+theorem central_subgroupSchemeHom_le_center [IsAlgClosed k] (hI : I.IsRadical)
+    {X : Over (Spec (.of k))} (a : X ⟶ subgroupScheme (center I)) (b : X ⟶ subgroupScheme I) :
+    (a ≫ subgroupSchemeHom (le_center I)) * b = b * (a ≫ subgroupSchemeHom (le_center I)) := by
+  sorry
+
+end Geometry
 
 end AlgebraicGeometry.GeneralLinearGroup

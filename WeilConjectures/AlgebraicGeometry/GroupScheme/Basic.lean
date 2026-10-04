@@ -40,6 +40,8 @@ the whole group.
   of `G` are the translates of `G°` by rational points.
 - `AlgebraicGeometry.finite_connectedComponents`: a group scheme of finite type over `k` has
   finitely many connected components.
+- `AlgebraicGeometry.GrpObj.isReduced_of_charZero`: Cartier's theorem, a group scheme locally of
+  finite type over a field of characteristic zero is reduced.
 - `AlgebraicGeometry.isClosed_range_of_isMonHom`: the image of a homomorphism of group schemes
   locally of finite type over `k` is closed.
 - `AlgebraicGeometry.isIso_left_of_topologicalKrullDim_eq`: a closed subgroup of a connected reduced
@@ -239,6 +241,12 @@ theorem GrpObj.image_mulLeft_connectedComponent_onePoint (g : 𝟙_ (Over (Spec 
 
 end IdentityComponent
 
+/-- Cartier's theorem: a group scheme locally of finite type over a field of characteristic zero
+is reduced (indeed smooth). (blueprint: `sk-i-cartier`) -/
+theorem GrpObj.isReduced_of_charZero [CharZero k] (G : Over (Spec (.of k))) [GrpObj G]
+    [LocallyOfFiniteType G.hom] : IsReduced G.left := by
+  sorry
+
 /-- The image of a homomorphism of group schemes locally of finite type over a field is closed.
 (blueprint: `sk-p-geometry`) -/
 theorem isClosed_range_of_isMonHom {G K : Over (Spec (.of k))} [GrpObj G] [GrpObj K]
@@ -254,5 +262,48 @@ theorem isIso_left_of_topologicalKrullDim_eq {J G : Over (Spec (.of k))} [GrpObj
     (f : J ⟶ G) [IsMonHom f] [IsClosedImmersion f.left]
     (h : topologicalKrullDim J.left = topologicalKrullDim G.left) : IsIso f.left := by
   sorry
+
+/-! ### Subgroup schemes containing the commutators -/
+
+section ContainsCommutators
+
+variable {S : Scheme.{u}} {G H : Over S} [GrpObj G] [GrpObj H]
+
+/-- A homomorphism of group schemes `f : H ⟶ G` over `S` *contains the commutators* of `G` when
+every commutator `a b a⁻¹ b⁻¹` of two points `a b : X ⟶ G` of `G`, with values in an arbitrary
+`S`-scheme `X`, factors through `f`. For a subgroup scheme `H ⊆ G` this is the scheme-theoretic
+form of `⁅G, G⁆ ⊆ H`, that is, of the commutativity of the quotient `G ⧸ H`.
+(blueprint: `sk-i-restriction`) -/
+class IsMonHom.ContainsCommutators (f : H ⟶ G) [IsMonHom f] : Prop where
+  exists_comp_eq_commutator (f) : ∀ {X : Over S} (a b : X ⟶ G),
+    ∃ c : X ⟶ H, c ≫ f = a * b * a⁻¹ * b⁻¹
+
+instance : IsMonHom.ContainsCommutators (𝟙 G) where
+  exists_comp_eq_commutator a b := ⟨a * b * a⁻¹ * b⁻¹, Category.comp_id _⟩
+
+theorem IsMonHom.ContainsCommutators.of_eq {f g : H ⟶ G} [IsMonHom f] [IsMonHom g]
+    [IsMonHom.ContainsCommutators f] (e : f = g) : IsMonHom.ContainsCommutators g := by
+  subst e; assumption
+
+/-- A subgroup scheme containing the commutators is normal: `g h g⁻¹ = (g h g⁻¹ h⁻¹) h`. -/
+instance (priority := low) IsMonHom.Normal.of_containsCommutators (f : H ⟶ G) [IsMonHom f]
+    [Mono f] [IsMonHom.ContainsCommutators f] : IsMonHom.Normal f where
+  exists_comp_eq_conj := by
+    obtain ⟨c, hc⟩ :=
+      IsMonHom.ContainsCommutators.exists_comp_eq_commutator f (fst G H) (snd G H ≫ f)
+    refine ⟨c * snd G H, ?_⟩
+    have h := (IsMonHom.monoidHom f (G ⊗ H)).map_mul c (snd G H)
+    simp only [IsMonHom.monoidHom_apply] at h
+    rw [h, hc, GrpObj.conj, MonObj.comp_mul, MonObj.comp_mul, GrpObj.comp_inv, whiskerLeft_fst,
+      whiskerLeft_snd, inv_mul_cancel_right]
+
+end ContainsCommutators
+
+/-- A fibre product over `Spec k` of two schemes locally of finite type over `k` is locally of
+finite type over `k`. -/
+instance {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [LocallyOfFiniteType Y.hom] :
+    LocallyOfFiniteType (X ⊗ Y).hom := by
+  rw [Over.tensorObj_hom]
+  infer_instance
 
 end AlgebraicGeometry

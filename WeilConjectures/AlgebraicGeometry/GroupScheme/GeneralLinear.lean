@@ -20,10 +20,10 @@ group object in `Over (Spec k)`. Its points with values in a `k`-algebra `R` are
 
 ## Main definitions
 
-- `AlgebraicGeometry.GeneralLinearGroup`, notation `GL(n; k)`: `GL_n` as an affine group scheme
+- `AlgebraicGeometry.GeneralLinearGroup`, notation `𝔾𝕃(n; k)`: `GL_n` as an affine group scheme
   of finite type over `k`.
 - `AlgebraicGeometry.GeneralLinearGroup.homMulEquiv`: the `R`-points of the group scheme
-  `GL(n; k)` are the group `GL n R`.
+  `𝔾𝕃(n; k)` are the group `GL n R`.
 
 ## Blueprint
 
@@ -42,36 +42,36 @@ namespace AlgebraicGeometry
 
 variable (n : Type u) [Fintype n] [DecidableEq n] (k : Type u) [CommRing k]
 
-/-- The general linear group scheme `GL(n; k)` over a commutative ring `k`: the affine group
+/-- The general linear group scheme `𝔾𝕃(n; k)` over a commutative ring `k`: the affine group
 scheme `Spec k[x_ij, det⁻¹]` over `Spec k`, the spectrum of the Hopf algebra
 `Matrix.GeneralLinearGroup.CoordinateRing n k`. (blueprint: `sk-d-geometry`) -/
 noncomputable def GeneralLinearGroup : Over (Spec (.of k)) :=
   (Spec (.of (CoordinateRing n k))).asOver (Spec (.of k))
 
-@[inherit_doc] scoped notation "GL(" n "; " k ")" => GeneralLinearGroup n k
+@[inherit_doc] scoped notation "𝔾𝕃(" n "; " k ")" => GeneralLinearGroup n k
 
 namespace GeneralLinearGroup
 
-/-- `GL(n; k)` is a group object in `Over (Spec k)`, by the Hopf algebra structure of its
+/-- `𝔾𝕃(n; k)` is a group object in `Over (Spec k)`, by the Hopf algebra structure of its
 coordinate ring (`instGrpObjSpecAsOverSpec`). -/
-noncomputable instance : GrpObj GL(n; k) :=
+noncomputable instance : GrpObj 𝔾𝕃(n; k) :=
   inferInstanceAs (GrpObj ((Spec (.of (CoordinateRing n k))).asOver (Spec (.of k))))
 
-instance : IsAffine (GL(n; k)).left :=
+instance : IsAffine (𝔾𝕃(n; k)).left :=
   inferInstanceAs (IsAffine (Spec (.of (CoordinateRing n k))))
 
-instance : LocallyOfFiniteType (GL(n; k)).hom :=
+instance : LocallyOfFiniteType (𝔾𝕃(n; k)).hom :=
   locallyOfFiniteType_specOverSpec
 
-/-- The `R`-points of the group scheme `GL(n; k)` are the invertible `n × n` matrices over `R`,
+/-- The `R`-points of the group scheme `𝔾𝕃(n; k)` are the invertible `n × n` matrices over `R`,
 as groups. (blueprint: `sk-d-geometry`) -/
 noncomputable def homMulEquiv (R : Type u) [CommRing R] [Algebra k R] :
-    ((Spec (.of R)).asOver (Spec (.of k)) ⟶ GL(n; k)) ≃* GL n R :=
+    ((Spec (.of R)).asOver (Spec (.of k)) ⟶ 𝔾𝕃(n; k)) ≃* GL n R :=
   Spec.mapMulEquiv.symm.trans (algHomMulEquiv n k R)
 
 variable {n k} {R S : Type u} [CommRing R] [Algebra k R] [CommRing S] [Algebra k S]
 
-/-- The point of `GL(n; k)` corresponding to an algebra homomorphism `ψ : k[GL_n] → R` is the
+/-- The point of `𝔾𝕃(n; k)` corresponding to an algebra homomorphism `ψ : k[GL_n] → R` is the
 matrix `ψ(x_ij)`. -/
 @[simp]
 theorem homMulEquiv_mapMulEquiv (ψ : WithConv (CoordinateRing n k →ₐ[k] R)) :
@@ -79,11 +79,11 @@ theorem homMulEquiv_mapMulEquiv (ψ : WithConv (CoordinateRing n k →ₐ[k] R))
   change algHomMulEquiv n k R (Spec.mapMulEquiv.symm (Spec.mapMulEquiv ψ)) = _
   rw [MulEquiv.symm_apply_apply]
 
-/-- The identification `homMulEquiv` of the points of `GL(n; k)` with invertible matrices is
+/-- The identification `homMulEquiv` of the points of `𝔾𝕃(n; k)` with invertible matrices is
 natural in the algebra of values: precomposing with `Spec S ⟶ Spec R` maps the entries along
 `R → S`. -/
 theorem homMulEquiv_specMap_comp (φ : R →ₐ[k] S)
-    (f : (Spec (.of R)).asOver (Spec (.of k)) ⟶ GL(n; k)) :
+    (f : (Spec (.of R)).asOver (Spec (.of k)) ⟶ 𝔾𝕃(n; k)) :
     homMulEquiv n k S ((Spec.map (CommRingCat.ofHom φ.toRingHom)).asOver (Spec (.of k)) ≫ f) =
       Matrix.GeneralLinearGroup.map φ.toRingHom (homMulEquiv n k R f) := by
   unfold GeneralLinearGroup at f
