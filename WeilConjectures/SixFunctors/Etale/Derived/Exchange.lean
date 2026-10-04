@@ -18,14 +18,15 @@ consumes: compact-support base change for a cartesian square, and the projection
 
 ## Implementation notes
 
-The canonical transformations these theorems are *about* — the exchange
+The canonical transformations these theorems are *about* are the exchange
 `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` and the projection map
-`PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)` — are the transformations of the framework
-chapter's `def:exchange-projection`, which is not this block's and has not landed. Neither is
-a formal mate of anything currently in the repository, so neither can be constructed here and
-neither is introduced: the statements below assert instead that the two functors in question
-are isomorphic. Once `def:exchange-projection` lands they should be restated as `IsIso Ex_!`
-and `IsIso PF`, in the style of `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`.
+`PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)` of the framework chapter's `def:exchange-projection`.
+The exchange is `AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap` (and
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationBaseChangeMap` for a given
+compactification); it needs `f'` to be quasi-compact, which the statement below does not
+assume. The projection map is not constructed yet. The statements below therefore assert that
+the two functors in question are isomorphic. They should be restated as `IsIso Ex_!` and
+`IsIso PF`, in the style of `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`.
 
 The exchange `Ex_*` for `Rf_*` does already exist in this repository, as
 `AlgebraicGeometry.Etale.baseChange` and `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`.
@@ -74,14 +75,14 @@ arbitrary and a cartesian square
 ```
 
 the exchange transformation `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` of `sk-def-sf-exchanges` is an
-isomorphism; here, in the absence of `Ex_!`, this is recorded as the existence of an
+isomorphism; for now (see the implementation notes) this is recorded as the existence of an
 isomorphism between the two functors.
 
 The proof is the five-stage argument of the compact-support base change chapter: finite
 coefficients on the étale site, degreewise constructibility, the pro-étale finite level for
 objects with an étale-origin witness, completed coefficients, and finite extensions of the
 coefficient field. -/
--- TODO(unify): def:exchange-projection — restate as `IsIso (Ex_! sq)`.
+-- TODO(unify): restate as `IsIso (rightDerivedLowerShriekBaseChangeMap _ sq)`.
 theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedLowerShriek [Finite Λ]
     [HasInvertibleExponent Λ Y] [LocallyOfFiniteType f] (sq : IsPullback g' f' f g) :
     Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
