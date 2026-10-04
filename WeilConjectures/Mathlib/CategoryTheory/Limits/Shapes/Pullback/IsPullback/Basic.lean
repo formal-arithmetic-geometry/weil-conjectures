@@ -23,6 +23,8 @@ form of the base change lemma that applies over a terminal base.
 
 * `CategoryTheory.IsPullback.of_isTerminal`: transport of a cartesian square along a change of
   terminal objects at the tip of its cospan.
+* `CategoryTheory.IsPullback.id_comp_of_mono`: the square `(𝟙 X, f, f ≫ m, m)` is cartesian
+  for a monomorphism `m`.
 * `CategoryTheory.IsPullback.baseChange_pullback`: the fibre product over `S` of two base changes
   to `S` is the base change to `S` of the fibre product over `T`.
 * `CategoryTheory.IsPullback.baseChange_prod`: the same statement over a terminal base `T`, where
@@ -51,6 +53,20 @@ theorem of_isTerminal {P X Y Z Z' : C} {fst : P ⟶ X} {snd : P ⟶ Y} {f : X �
     IsPullback fst snd f' g' :=
   mk' (hZ'.hom_ext _ _) (fun _ _ _ h₁ h₂ ↦ h.hom_ext h₁ h₂)
     (fun _ a b _ ↦ ⟨h.lift a b (hZ.hom_ext _ _), h.lift_fst .., h.lift_snd ..⟩)
+
+/-- Restricting along a monomorphism is cartesian: for `f : X ⟶ Y` and a monomorphism
+`m : Y ⟶ W`, the square
+```
+  X ---𝟙 X---> X
+  |            |
+  f          f ≫ m
+  ↓            ↓
+  Y -----m---> W
+```
+is a pullback square. -/
+theorem id_comp_of_mono {X Y W : C} (f : X ⟶ Y) (m : Y ⟶ W) [Mono m] :
+    IsPullback (𝟙 X) f (f ≫ m) m :=
+  of_horiz_isIso_mono ⟨by simp⟩
 
 section BaseChange
 
