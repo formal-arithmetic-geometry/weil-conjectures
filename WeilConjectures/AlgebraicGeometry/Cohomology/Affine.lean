@@ -12,6 +12,8 @@ public import Mathlib.CategoryTheory.Limits.Lattice
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import WeilConjectures.Topology.Sheaves.CechCriterion
 
 /-!
 # Cohomology of quasi-coherent sheaves on affine schemes
@@ -59,6 +61,24 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}}
 
+/-- **The Čech complex of a standard covering is exact.** Let `V` be an affine open of `X`, so
+that `V = Spec A` with `A = Γ(X, V)`, let `f₁, …, fₙ ∈ A` generate the unit ideal, i.e. the basic
+opens `D(fᵢ)` cover `V`, and let `ℱ` be a quasi-coherent `𝒪_X`-module, with `M = ℱ(V)`. Then the
+Čech complex `0 → ∏ᵢ M_{fᵢ} → ∏_{i, j} M_{fᵢfⱼ} → ⋯` of the covering is exact in positive degrees.
+
+This is the ordered Čech complex `TopCat.Presheaf.cechComplex`; exactness of the augmented
+complex in degree `0` is the sheaf condition for `ℱ`. The proof localizes at each `fⱼ`: after
+inverting `fⱼ` the covering contains the whole space and the complex is contractible, so every
+cocycle is killed by a power of each `fⱼ` up to a coboundary, and these powers still generate
+the unit ideal.
+
+(blueprint: `lem-pc-affine-cech-complex`) -/
+theorem exactAt_cechComplex_basicOpen (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {V : X.Opens} (hV : IsAffineOpen V)
+    {n : ℕ} (f : Fin n → Γ(X, V)) (hf : ⨆ i, X.basicOpen (f i) = V) (q : ℕ) :
+    ((TopCat.Presheaf.cechComplex fun i ↦ X.basicOpen (f i)).obj ℱ.presheaf).ExactAt (q + 1) :=
+  sorry
+
 /-- **Vanishing of cohomology on affine schemes.** Let `X = Spec A` be affine. For every
 quasi-coherent `𝒪_X`-module `ℱ` and every `q > 0` we have `H^q(X, ℱ) = 0`; the vanishing of the
 abelian group `ℱ.H (q + 1)` is expressed as it being a subsingleton.
@@ -66,8 +86,16 @@ abelian group `ℱ.H (q + 1)` is expressed as it being a subsingleton.
 (blueprint: `sk-lem-picard-affine`) -/
 theorem subsingleton_H_succ_of_isAffine [IsAffine X] (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
-    Subsingleton (ℱ.H (q + 1)) :=
-  sorry
+    Subsingleton (ℱ.H (q + 1)) := by
+  refine TopCat.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex
+    ((SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ) IsAffineOpen
+    (fun {n} U ↦ ∃ (V : X.Opens) (_ : IsAffineOpen V) (f : Fin n → Γ(X, V)),
+      U = (fun i ↦ X.basicOpen (f i)) ∧ ⨆ i, X.basicOpen (f i) = V)
+    (isAffineOpen_top X) ?_ ?_ ?_ q
+  · sorry
+  · sorry
+  · rintro n _ ⟨V, hV, f, rfl, hf⟩ q
+    exact exactAt_cechComplex_basicOpen ℱ hV f hf q
 
 /-- **Leray's theorem for quasi-coherent sheaves.** Let `𝔘 = (U i)` be an open covering of `X`
 all of whose nonempty finite intersections `U i₀ ⊓ ⋯ ⊓ U iₙ` are affine. Then for every
