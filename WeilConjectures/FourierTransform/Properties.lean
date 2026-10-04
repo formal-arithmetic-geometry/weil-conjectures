@@ -38,12 +38,21 @@ transport `t`-structures.
 - `AlgebraicGeometry.Etale.fourierTransformStalkIso`: the stalk of `FT_ψ(K)` at a section
   `ξ` of `V' ⟶ S` is the compactly supported cohomology of `K ⊗ᴸ ℒ_{ψ(b(x, ξ))}`, shifted
   by `r`.
-- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_baseChange`: the transform commutes with
-  base change along `S' ⟶ S`.
-- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor`: the transform is linear over the
-  base.
-- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tateTwist`: the transform commutes with the
-  Tate twist.
+- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_baseChange`: the transform commutes
+  with base change along `S' ⟶ S`.
+- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor`: the transform is
+  linear over the base.
+- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tateTwist`: the transform commutes
+  with the Tate twist.
+
+## Implementation notes
+
+The base change, base linearity and Tate twist compatibilities only assert that an
+isomorphism *exists*. Later uses, such as transporting `t`-structures, will need specific
+isomorphisms that are coherent with one another, which `Classical.choice` cannot provide.
+
+TODO: upgrade these back to `Iso` constructions once the exchange isomorphisms they are
+built from exist as data.
 
 ## Blueprint
 
@@ -171,11 +180,15 @@ naturally in `K`. Both squares
       S' ──g──▶ S           S' ──g──▶ S
 ```
 
-must be **cartesian**: the isomorphism is proper base change for `Rp₂,!` along the induced
-cartesian square `W ×_{S'} W' ⟶ V ×_S V'`, which is false for merely commuting squares.
+must be **cartesian**: the proof is proper base change for `Rp₂,!` along the induced
+cartesian square `W ×_{S'} W' ⟶ V ×_S V'`, which fails for merely commuting squares. For the
+same reason the coefficients are those of proper base change
+(`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedLowerShriek`):
+`Λ` finite with exponent invertible on `S`, and `p₂` locally of finite type.
 (sketch blueprint: `sk-prop-base-change`) -/
-theorem nonempty_iso_fourierTransform_baseChange [CharP Γ(pullback π π', ⊤) p]
-    [HasCompactification (pullback.snd π π')]
+theorem nonempty_iso_fourierTransform_baseChange [Finite Λ] [HasInvertibleExponent Λ S]
+    [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
+    [LocallyOfFiniteType (pullback.snd π π')]
     (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ) {S' W W' : Scheme.{u}}
     (g : S' ⟶ S) (ρ : W ⟶ S') (ρ' : W' ⟶ S') (u : W ⟶ V) (u' : W' ⟶ V')
     (hu : IsPullback u ρ π g) (hu' : IsPullback u' ρ' π' g)
@@ -190,15 +203,32 @@ end BaseChange
 
 section BaseLinear
 
-variable [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
+variable [Finite Λ] [HasInvertibleExponent Λ S] [CharP Γ(pullback π π', ⊤) p]
+  [HasCompactification (pullback.snd π π')] [LocallyOfFiniteType (pullback.snd π π')]
 
 /-- Tensoring the input with a complex pulled back from the base `S` along `π : V ⟶ S` is
 the same as tensoring the output with the same complex pulled back along `π' : V' ⟶ S`:
 
 `FT_ψ(K ⊗ᴸ π^* N) ≅ FT_ψ(K) ⊗ᴸ π'^* N`,
 
-naturally in `K` **and** in `N`; that is the content of the statement below, an isomorphism
-of functors `D(S_ét) ⥤ (D(V_ét) ⥤ D(V'_ét))`.
+naturally in `K` **and** in `N`: the statement below asserts that the two functors
+`D(S_ét) ⥤ (D(V_ét) ⥤ D(V'_ét))` are isomorphic. For fixed `N` it is the square
+
+```
+     D(V_ét) ───FT_ψ───▶ D(V'_ét)
+        │                    │
+  ⊗π^*N │                    │ ⊗π'^*N
+        ▼                    ▼
+     D(V_ét) ───FT_ψ───▶ D(V'_ét)
+```
+
+The proof is the projection formula for `Rp₂,!`. The statement is over the whole unbounded
+derived categories, while the project's projection formula
+`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek` only covers a
+bounded constructible `K` and an `N` of finite Tor amplitude. The unbounded form holds for
+finite `Λ`: the projection map is an isomorphism for `j_!` of an open immersion formally, and
+for a proper morphism because its direct image then has finite cohomological dimension and so
+commutes with the colimits reducing to bounded complexes.
 
 In particular `FT_ψ(π^* N) ≅ FT_ψ(Λ) ⊗ᴸ π'^* N`, so the transform of a complex pulled back
 from the base is determined by the transform of the unit.
@@ -212,15 +242,34 @@ theorem nonempty_iso_fourierTransform_tensor (Ψ : AddChar (ZMod p) Λ)
   sorry
 
 /-- The Fourier–Deligne transform commutes with the Tate twist: `FT_ψ(K(m)) ≅ FT_ψ(K)(m)`
-for every `m : ℤ`, naturally in `K`. This is the second clause of the base linearity
-proposition, the Tate twist being tensoring with an invertible complex pulled back from the
-base.
+for every `m : ℤ`, naturally in `K`:
+
+```
+     D(V_ét) ───FT_ψ───▶ D(V'_ét)
+        │                    │
+    (m) │                    │ (m)
+        ▼                    ▼
+     D(V_ét) ───FT_ψ───▶ D(V'_ét)
+```
+
+This is the second clause of the base linearity proposition, the Tate twist being tensoring
+with an invertible complex pulled back from the base: it is
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor` at `N = Λ_S(m)`, composed
+with the identifications `π^* Λ_S(m) ≅ Λ_V(m)` and `π'^* Λ_S(m) ≅ Λ_{V'}(m)`.
 (sketch blueprint: `sk-prop-base-linear`) -/
 theorem nonempty_iso_fourierTransform_tateTwist [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r m : ℤ) :
     Nonempty (tateTwist Λ V m ⋙ fourierTransform Λ π π' Ψ b r ≅
-        fourierTransform Λ π π' Ψ b r ⋙ tateTwist Λ V' m) :=
-  sorry
+        fourierTransform Λ π π' Ψ b r ⋙ tateTwist Λ V' m) := by
+  obtain ⟨e⟩ := nonempty_iso_fourierTransform_tensor Λ π π' Ψ b r
+  -- `K ↦ K ⊗ᴸ f^* Λ_S(m)` is the Tate twist `(m)` on the source of `f`.
+  let φ {X : Scheme.{u}} (f : X ⟶ S) :
+      (derivedTensorRightPullback Λ f).obj (tateObject Λ S m) ≅ tateTwist Λ X m :=
+    (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.mapIso
+      (((leftDerivedUpperStarIsoMapDerivedCategory _ f).app _).symm ≪≫
+        leftDerivedUpperStarTateObjectIso f m)
+  exact ⟨Functor.isoWhiskerRight (φ π).symm _ ≪≫ e.app (tateObject Λ S m) ≪≫
+    Functor.isoWhiskerLeft _ (φ π')⟩
 
 end BaseLinear
 
