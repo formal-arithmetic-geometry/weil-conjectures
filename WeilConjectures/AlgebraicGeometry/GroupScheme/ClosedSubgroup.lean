@@ -233,6 +233,11 @@ noncomputable def translateAlgEquiv (g h : GL n k) :
     (by rw [translate_comp_translate, inv_mul_cancel, mul_inv_cancel, translate_one_one])
     (by rw [translate_comp_translate, mul_inv_cancel, inv_mul_cancel, translate_one_one])
 
+theorem antipodeAlgHom_comp_antipodeAlgHom :
+    (antipodeAlgHom n k).comp (antipodeAlgHom n k) = AlgHom.id k _ := by
+  have := evalAlgHom_comp_antipodeAlgHom (k := k) (genericUnit n k)⁻¹
+  rwa [inv_inv, evalAlgHom_genericUnit] at this
+
 /-- Two-sided translations by points of `V(I)` preserve the ideal `I`. -/
 theorem translate_mem {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] {g h : GL n k}
     (hg : g ∈ zeroLocus I k) (hh : h ∈ zeroLocus I k) {a : CoordinateRing n k} (ha : a ∈ I) :
@@ -430,6 +435,37 @@ theorem translateHomeomorph_symm_apply (g h : GL n k) (p : PrimeSpectrum (Coordi
 theorem translateHomeomorph_toPrimeSpectrum (g h x : GL n k) :
     translateHomeomorph g h (toPrimeSpectrum x) = toPrimeSpectrum (g * x * h) :=
   comap_translate_toPrimeSpectrum g h x
+
+theorem translateHomeomorph_translateHomeomorph (a b c d : GL n k)
+    (p : PrimeSpectrum (CoordinateRing n k)) :
+    translateHomeomorph a b (translateHomeomorph c d p) =
+      translateHomeomorph (a * c) (d * b) p := by
+  simp only [translateHomeomorph_apply]
+  rw [← PrimeSpectrum.comap_comp_apply, ← AlgHom.comp_toRingHom, translate_comp_translate]
+
+/-- The homeomorphism of the spectrum of the coordinate ring of `GL_n` induced by the inversion
+`x ↦ x⁻¹`, the spectrum of the antipode. -/
+noncomputable def invHomeomorph :
+    PrimeSpectrum (CoordinateRing n k) ≃ₜ PrimeSpectrum (CoordinateRing n k) :=
+  PrimeSpectrum.homeomorphOfRingEquiv (AlgEquiv.ofAlgHom (antipodeAlgHom n k) (antipodeAlgHom n k)
+    antipodeAlgHom_comp_antipodeAlgHom antipodeAlgHom_comp_antipodeAlgHom).symm.toRingEquiv
+
+@[simp]
+theorem invHomeomorph_apply (p : PrimeSpectrum (CoordinateRing n k)) :
+    invHomeomorph p = PrimeSpectrum.comap (antipodeAlgHom n k) p :=
+  rfl
+
+theorem invHomeomorph_toPrimeSpectrum (x : GL n k) :
+    invHomeomorph (toPrimeSpectrum x) = toPrimeSpectrum x⁻¹ := by
+  ext a
+  simp [toPrimeSpectrum, RingHom.mem_ker, ← AlgHom.comp_apply, evalAlgHom_comp_antipodeAlgHom]
+
+theorem invHomeomorph_invHomeomorph (p : PrimeSpectrum (CoordinateRing n k)) :
+    invHomeomorph (invHomeomorph p) = p := by
+  simp only [invHomeomorph_apply]
+  rw [← PrimeSpectrum.comap_comp_apply, ← AlgHom.comp_toRingHom,
+    antipodeAlgHom_comp_antipodeAlgHom]
+  rfl
 
 variable {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k]
 
