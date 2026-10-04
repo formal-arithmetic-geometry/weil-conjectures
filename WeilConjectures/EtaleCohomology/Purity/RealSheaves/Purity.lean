@@ -312,8 +312,8 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
   [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
   (ρ : Representation (PadicAlgCl l) W.carrier V) (ι : PadicAlgCl l →+* ℂ)
 
--- The constituent bound elaborates exterior powers of direct sums of subquotients.
 set_option maxHeartbeats 1000000 in
+-- The constituent bound elaborates exterior powers of direct sums of subquotients.
 /-- Blueprint `thm-rp-real-lisse-purity-affine`, Steps 1–3, for the composition factors.
 
 Let `ρ` be an `ι`-real lisse Weil representation on a smooth geometrically connected affine

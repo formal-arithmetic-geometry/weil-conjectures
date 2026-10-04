@@ -141,12 +141,14 @@ theorem IsLisse.subquotient [FiniteDimensional (PadicAlgCl l) V] (hρ : W.IsLiss
     rfl
 
 /-- A finite direct sum of lisse representations is lisse. -/
-theorem IsLisse.directSum {ι : Type} [Fintype ι] [DecidableEq ι] {V : ι → Type u}
+theorem IsLisse.directSum {ι : Type} [Finite ι] {V : ι → Type u}
     [∀ i, AddCommGroup (V i)] [∀ i, Module (PadicAlgCl l) (V i)]
     [∀ i, FiniteDimensional (PadicAlgCl l) (V i)]
     {ρ : ∀ i, Representation (PadicAlgCl l) W.carrier (V i)} (hρ : ∀ i, W.IsLisse l (ρ i)) :
     W.IsLisse l (Representation.directSum ρ) :=
   IsLisse.of_continuous_apply fun φ v ↦ by
+    classical
+    have := Fintype.ofFinite ι
     have hv (g : W.geometric) : φ (Representation.directSum ρ g v) =
         ∑ i, (φ ∘ₗ DirectSum.lof (PadicAlgCl l) ι V i) (ρ i g (v i)) := by
       conv_lhs => rw [← DirectSum.sum_univ_of v]
