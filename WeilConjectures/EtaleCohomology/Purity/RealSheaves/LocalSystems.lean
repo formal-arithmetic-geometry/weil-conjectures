@@ -15,6 +15,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Continuous.Basic
 public import WeilConjectures.NumberTheory.Padics.Extension
+public import WeilConjectures.RepresentationTheory.IntegralModel
 
 /-!
 # Local systems: the Galois correspondence and the lisse sheaf–representation dictionary
@@ -214,7 +215,37 @@ theorem IsLisse.exists_lattice {l : ℕ} [Fact l.Prime] {W : WeilGroup p} {V : T
         ∀ n : ℕ, (Set.range fun g : WU.geometric ↦ fun x : L ↦
           Submodule.Quotient.mk (p := (IsLocalRing.maximalIdeal
             (PadicAlgCl.integers l (E : Type)) ^ n) • L) (ρ (R.restrict g) x)).Finite := by
-  sorry
+  classical
+  let b := Module.finBasis (PadicAlgCl l) V
+  -- the action `π₁(U) → GL(V)` of the geometric fundamental group of `U` through `R`
+  let σ : Representation (PadicAlgCl l) WU.geometric V :=
+    { toFun g := ρ (R.restrict g)
+      map_one' := by simp
+      map_mul' g h := by simp }
+  have hmem (g : WU.geometric) : R.restrict g ∈ W.geometric := by
+    rw [MonoidHom.mem_ker, ← MonoidHom.comp_apply, R.deg_restrict]
+    exact g.2
+  let ψ : WU.geometric → W.geometric := fun g ↦ ⟨R.restrict g, hmem g⟩
+  have hψ : Continuous ψ := (R.continuous_restrict.comp continuous_subtype_val).subtype_mk hmem
+  have hcont (i j : Fin (Module.finrank (PadicAlgCl l) V)) :
+      Continuous fun g ↦ LinearMap.toMatrix b b (σ g) i j := by
+    have h := (hρ.continuous_toMatrix b i j).comp hψ
+    have hσ (g : WU.geometric) : σ g = ρ (R.restrict g) := rfl
+    simpa only [hσ, Function.comp_def] using h
+  -- the coefficients lie in a finite extension `E` of `ℚ_ℓ` and are bounded
+  obtain ⟨E, hE, hσE⟩ := PadicAlgCl.exists_finiteDimensional_forall_mem l
+    ((LinearMap.toMatrixAlgEquiv b).toMonoidHom.comp σ) fun i j ↦ by
+      simpa [LinearMap.toMatrixAlgEquiv_apply, LinearMap.toMatrix_apply] using hcont i j
+  have hσE' (g : WU.geometric) (i j) : LinearMap.toMatrix b b (σ g) i j ∈ E := by
+    simpa [LinearMap.toMatrixAlgEquiv_apply, LinearMap.toMatrix_apply] using hσE g i j
+  obtain ⟨C, hC⟩ : ∃ C : ℝ, ∀ p : Fin _ × Fin _, ∀ g : WU.geometric,
+      ‖LinearMap.toMatrix b b (σ g) p.1 p.2‖ ≤ C := by
+    choose C hC using fun p : Fin _ × Fin _ ↦
+      (isCompact_range (hcont p.1 p.2)).isBounded.exists_norm_le
+    obtain ⟨M, hM⟩ := Finite.exists_le C
+    exact ⟨M, fun p g ↦ (hC p _ ⟨g, rfl⟩).trans (hM p)⟩
+  exact ⟨E, hE, PadicAlgCl.exists_lattice_of_forall_mem l b σ E hσE' C
+    fun g i j ↦ hC (i, j) g⟩
 
 /-- Blueprint `sk-p-real-sections`: Global sections as invariants.
 
