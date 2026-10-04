@@ -1750,7 +1750,19 @@ to the closed fibre has vanishing cohomology in degrees $>n$.
 \begin{proof}
 \uses{prop:weil-pbc-gabber-affine-comparison}
 
-For $n=0$ this is the affine comparison applied to the injective $I$.  For
+For $n=0$ the scheme is an affine $\operatorname{Spec}B$ of finite type over
+the henselian pair $(A,J)$, and $(B,JB)$ need not be henselian, so the affine
+comparison does not apply to it directly.  Let $B^h$ be the henselisation of
+$B$ along $JB$; it is a filtered colimit of etale $B$-algebras $B_\lambda$ with
+$B_\lambda/JB_\lambda=B/JB$, and $(B^h,JB^h)$ is a henselian pair with the
+same closed fibre.  The restriction of $I$ to each $\operatorname{Spec}B_\lambda$
+is injective, so its cohomology vanishes in positive degrees, and by
+continuity of etale cohomology along the limit
+$\operatorname{Spec}B^h=\lim\operatorname{Spec}B_\lambda$ so does that of
+$I|_{\operatorname{Spec}B^h}$.  For torsion $I$ the affine comparison for
+$(B^h,JB^h)$ identifies this with the cohomology of the closed fibre, which
+therefore vanishes in positive degrees.  (The Lean statement assumes $I$
+torsion for this reason.)  For
 $n>0$, split the cover as $U_0$ and $V=\bigcup_{i>0}U_i$.  The Mayer--Vietoris
 long exact sequence for $U_0\cup V$ has terms on $U_0$, $V$, and
 $U_0\cap V$; the last two have covers of size at most $n$ and the affine
@@ -3321,6 +3333,24 @@ square is the identical calculation after passing to the closed geometric
 fibres.  Therefore the stalk of the named S0 exchange is exactly the field
 extension map displayed in the bottom row, not an abstract replacement.
 \end{proof}
+
+\begin{remark}[Lean form of the geometric-stalk lemma]
+The Lean statement
+\texttt{Etale.exists\_addEquiv\_sheafFiber\_baseChangeHomologyMap\_projectiveLine}
+is weaker than the lemma: it asserts only that some isomorphisms of the source
+and target stalks with $H^q(\mathbf P^1_{\kappa(\bar s)},F|)$ and
+$H^q(\mathbf P^1_{\kappa(\bar t)},F|)$ carry the stalk of the exchange to the
+field extension map.  Since the separably closed invariance of curve
+cohomology is proved from its own nodes, this weak form is equivalent to the
+bijectivity of the stalk of the exchange.  It must be filled through the
+canonical maps $\rho\circ\Phi$ of the proof above.  Stating it with those maps
+needs two pieces that are not yet formalized: the strict henselisation with
+its stalk formula (the maps $\Phi$), and an edge map comparing the higher
+direct images $R^qp_*$, defined in the bounded below derived category, with
+the $\operatorname{Ext}$-groups used for $H^q$.  The strict-local exchange
+\texttt{Etale.exists\_addEquiv\_sheafFiber\_baseChangeHomologyMap\_strictLocal}
+has the same weak form for the same reason.
+\end{remark}
 
 \begin{lemma}[Conservativity of geometric stalks]
 \label{lemma:weil-pbc-geometric-stalk-conservative}

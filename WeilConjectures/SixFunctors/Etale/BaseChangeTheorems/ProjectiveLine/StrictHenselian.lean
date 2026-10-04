@@ -43,8 +43,8 @@ the `SixFunctors` folder.
   an `H¹`-class of `I₀` by classes of finite pushforwards of constant sheaves.
 - `AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_closedFibre_of_injective`: the
   acyclicity of `I₀` on `ℙ¹_κ`.
-- `AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_residueField_of_injective`: the same
-  statement for `𝔽_ℓ`-coefficients, in the form used for `Γ(X₀, -)`-acyclicity.
+- `AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_residueField_of_injective`: an alias
+  of the previous statement, recording the `Γ(X₀, -)`-acyclicity of `I₀`.
 - `AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField`: the strictly
   henselian comparison `Hᵠ(ℙ¹_A, F) ≅ Hᵠ(ℙ¹_κ, F₀)`.
 - `AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal`: the
@@ -141,16 +141,11 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [
 /-- **Acyclicity of injectives on `ℙ¹_κ`.** Let `A` be strictly henselian, `X = ℙ¹_A` and
 `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre. For a prime `ℓ` and an injective sheaf `I` of
 `𝔽_ℓ`-modules on `X`, the restriction `I₀` is `Γ(X₀, -)`-acyclic: `Hᵠ(X₀, I₀) = 0` for all
-`q > 0`. This is `AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_closedFibre_of_injective`.
+`q > 0`. In Lean this is the same statement as
+`AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_closedFibre_of_injective`.
 (blueprint: `lemma-weil-pbc-p1-injective-acyclic`) -/
-theorem Etale.subsingleton_H_projectiveLine_residueField_of_injective (ℓ : ℕ) [Fact ℓ.Prime]
-    (I : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology
-      (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) [Injective I] :
-    ∀ q : ℕ, 0 < q → Subsingleton (Sheaf.H ((sheafCompose _
-      (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) AddCommGrpCat.{u + 1})).obj
-        ((ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[
-          ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj I)) q) :=
-  fun q hq ↦ Etale.subsingleton_H_projectiveLine_closedFibre_of_injective A ℓ I q hq
+alias Etale.subsingleton_H_projectiveLine_residueField_of_injective :=
+  Etale.subsingleton_H_projectiveLine_closedFibre_of_injective
 
 /-- **The strictly henselian comparison for `ℙ¹`.** Let `A` be strictly henselian with
 residue field `κ` and `ι : ℙ¹_κ ⟶ ℙ¹_A` the closed fibre. For every torsion sheaf `F` of
@@ -189,6 +184,15 @@ geometric point `Spec κ_B ⟶ Spec B` of the degree-`q` exchange morphism
 `g⁻¹ Rᵠp_* F ⟶ Rᵠp'_* g'⁻¹ F` is, up to isomorphisms of its source and target, the pullback
 map `Hᵠ(ℙ¹_{κ_A}, F₀) ⟶ Hᵠ(ℙ¹_{κ_B}, F₀|)` along `ℙ¹_{κ_B} ⟶ ℙ¹_{κ_A}`. The isomorphisms are
 the strictly henselian comparisons on the two closed fibres.
+
+**Form of the statement.** The blueprint asks for the canonical restriction maps. This
+statement only asserts that *some* isomorphisms `e₁`, `e₂` make the square commute, which is
+weaker, for the same reason as
+`AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine`:
+the project has no edge map yet comparing the stalks of the higher direct images `Rᵠp_*`
+(homology in `DerivedCategory.Plus`) with the `Ext`-groups `CategoryTheory.Sheaf.H`. The
+`sorry` must be filled through the canonical maps. Once the edge map exists, `e₁` and `e₂`
+should be replaced by it, composed with the restrictions to the closed fibres.
 (blueprint: `prop-weil-pbc-strict-local-exchange`) -/
 theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal
     (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ))

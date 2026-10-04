@@ -46,8 +46,9 @@ Spec A/I --> Spec A
   finite étale lifting over a proper scheme over a henselian pair.
 - `AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianLocalRing`:
   the same over a henselian local ring and its residue field.
-- `AlgebraicGeometry.Scheme.finiteEtale_equiv_finiteLocallyConstant`: finite étale schemes
-  are the finite locally constant sheaves of sets.
+- `AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso`: the sheaf of
+  sections of a finite étale scheme is finite locally constant, and every finite locally
+  constant sheaf of sets is of this form.
 - `AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing`:
   the `H¹` comparison for a finite constant sheaf.
 
@@ -95,12 +96,12 @@ def Scheme.IsFiniteLocallyConstantSheafOfTypes {T : Scheme.{u}}
 * every finite locally constant sheaf of sets `E` is isomorphic to the sheaf of sections of
   a finite étale `T`-scheme.
 
-Together with the Yoneda lemma (morphisms of the sheaves of sections are `T`-morphisms) this
-is the equivalence between finite étale `T`-schemes and finite locally constant sheaves of
-sets; in particular an action of a finite group on such a sheaf is the same as an action by
-`T`-automorphisms on the corresponding finite étale scheme.
+These are the two object-level halves of the blueprint node. Together with the Yoneda lemma
+(morphisms of the sheaves of sections are `T`-morphisms) they give the equivalence between
+finite étale `T`-schemes and finite locally constant sheaves of sets, and with it the
+statement about finite group actions; neither is stated here.
 (blueprint: `lemma-weil-pbc-finite-locally-constant-etale-equivalence`) -/
-theorem Scheme.finiteEtale_equiv_finiteLocallyConstant (T : Scheme.{u}) :
+theorem Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso (T : Scheme.{u}) :
     (∀ (P : Scheme.{u}) (π : P ⟶ T) [IsFinite π] [Etale π],
       ∃ h : Presheaf.IsSheaf T.smallEtaleTopology (uliftYoneda.{u + 1}.obj (Scheme.Etale.mk π)),
         IsFiniteLocallyConstantSheafOfTypes ⟨_, h⟩) ∧

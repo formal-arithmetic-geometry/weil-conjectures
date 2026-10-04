@@ -12,7 +12,8 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangePro
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
-public import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.KrullDimension.Polynomial
 
 /-!
@@ -66,53 +67,6 @@ open CategoryTheory Limits
 section Auxiliary
 
 /-! ### Auxiliary lemmas -/
-
-open Topology TopologicalSpace Order
-
-attribute [local instance] specializationOrder in
-/-- In a quasi-sober `T₀` space, the coheight of a point for the specialization order is at
-most the topological Krull dimension. -/
-theorem coheight_le_topologicalKrullDim {X : Type*} [TopologicalSpace X] [QuasiSober X]
-    [T0Space X] (x : X) : (coheight x : WithBot ℕ∞) ≤ topologicalKrullDim X := by
-  rw [← coheight_orderIso irreducibleSetEquivPoints.symm]
-  exact coheight_le_krullDim _
-
-attribute [local instance] specializationOrder in
-/-- The topological Krull dimension of a quasi-sober `T₀` space is bounded by any common
-bound on the dimensions of the members of an open cover. -/
-theorem topologicalKrullDim_le_of_iSup_eq_top {X : Type*} [TopologicalSpace X] [QuasiSober X]
-    [T0Space X] {ι : Type*} (U : ι → Opens X) (hU : ⨆ i, U i = ⊤) (n : WithBot ℕ∞)
-    (h : ∀ i, topologicalKrullDim (U i) ≤ n) : topologicalKrullDim X ≤ n := by
-  rw [topologicalKrullDim, krullDim_eq_iSup_coheight]
-  refine iSup_le fun Z ↦ ?_
-  obtain ⟨i, hi⟩ := Opens.mem_iSup.mp (hU.ge (Set.mem_univ (irreducibleSetEquivPoints Z)))
-  have := (U i).isOpenEmbedding'.quasiSober
-  rw [← coheight_orderIso irreducibleSetEquivPoints Z]
-  exact (congrArg _ ((U i).isOpenEmbedding'.coheight_eq (x := (⟨_, hi⟩ : U i)))).trans_le
-    ((coheight_le_topologicalKrullDim _).trans (h i))
-
-/-- For an additive functor `F` out of an abelian category with enough injectives and an
-injective object `I`, the higher right derived functors of `F` vanish on `I`: the degree-`q`
-homology of `R⁺F(I[0])` is zero for `q ≠ 0`. -/
-theorem CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_singleFunctor
-    {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
-    [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]
-    (F : C ⥤ D) [F.Additive] (I : C) [Injective I] {q : ℤ} (hq : q ≠ 0) :
-    IsZero ((DerivedCategory.Plus.homologyFunctor D q).obj
-      (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor C 0).obj I))) := by
-  let K : CochainComplex.Plus C := ⟨(CochainComplex.singleFunctor C 0).obj I, ⟨0, inferInstance⟩⟩
-  have (n : ℤ) : Injective (((HomotopyCategory.Plus.quotient C).obj K).obj.as.X n) := by
-    by_cases hn : n = 0
-    · subst hn
-      exact Injective.of_iso (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 I).symm
-        inferInstance
-    · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hn).injective
-  refine IsZero.of_iso ?_ ((DerivedCategory.Plus.homologyFunctor D q).mapIso
-    (asIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj K))).symm)
-  refine IsZero.of_iso ?_ ((DerivedCategory.homologyFunctorFactorsh D q).app _)
-  refine IsZero.of_iso ?_ ((HomotopyCategory.homologyFunctorFactors D _ q).app _)
-  refine ShortComplex.isZero_homology_of_isZero_X₂ _ ?_
-  exact Functor.map_isZero F (HomologicalComplex.isZero_single_obj_X _ _ _ _ hq)
 
 namespace AlgebraicGeometry
 
@@ -187,6 +141,21 @@ The source and target stalks are the cohomologies of `ℙ¹` over the strict hen
 closed fibres (the strictly henselian comparison for `ℙ¹`); expanding the unit, base change
 and counit composite defining the exchange morphism identifies the induced map with the
 field-extension pullback.
+
+**Form of the statement.** The blueprint identifies the two stalks with the cohomologies of
+the closed fibres through the canonical maps `ρ ∘ Φ`. This statement only asserts that
+*some* isomorphisms `e₁`, `e₂` make the square commute, which is weaker. Since
+`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed` is proved from its own
+nodes, this weak form is equivalent to the bijectivity of the stalk map. So this `sorry`
+carries the content of `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine`,
+and it must be filled through the canonical maps, not from bijectivity. The canonical form
+needs infrastructure the project does not have yet:
+* the strict henselisation `Spec 𝒪ˢʰ_{S,s̄}` as a scheme, with the stalk formula
+  `(Rᵠp_* F)_{s̄} ≅ Hᵠ(ℙ¹_{𝒪ˢʰ}, F|)` (the maps `Φ`);
+* an edge map comparing the higher direct images `Rᵠp_*`, defined as homology in
+  `DerivedCategory.Plus`, with the `Ext`-groups `CategoryTheory.Sheaf.H`. Building it needs
+  `Functor.rightDerivedFunctorPlus` to commute with shifts, which Mathlib does not provide.
+Once these exist, `e₁` and `e₂` should be replaced by the canonical maps.
 (blueprint: `lemma-weil-pbc-p1-exchange-geometric-stalk`) -/
 theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
