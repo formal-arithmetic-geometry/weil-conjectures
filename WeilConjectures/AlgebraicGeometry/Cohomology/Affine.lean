@@ -271,7 +271,11 @@ theorem exactAt_cechComplex_basicOpen (ℱ : X.Modules)
 quasi-coherent `𝒪_X`-module `ℱ` and every `q > 0` we have `H^q(X, ℱ) = 0`; the vanishing of the
 abelian group `ℱ.H (q + 1)` is expressed as it being a subsingleton.
 
-(blueprint: `sk-lem-picard-affine`) -/
+This is the Čech criterion `TopCat.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex` applied to the
+affine opens and their standard coverings by basic opens, on which the Čech complex of `ℱ` is
+exact in positive degrees by `exactAt_cechComplex_basicOpen`.
+
+(blueprint: `sk-lem-picard-affine`, `lem-pc-affine-vanishing`) -/
 theorem subsingleton_H_succ_of_isAffine [IsAffine X] (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     Subsingleton (ℱ.H (q + 1)) := by
