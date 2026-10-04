@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.RingTheory.Etale.StandardEtale
+public import Mathlib.RingTheory.AdjoinRoot
 
 /-!
 # Standard etale algebras lift along quotient maps
@@ -22,6 +23,8 @@ along closed immersions.
 - `Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor`: if `S` is a standard etale
   `R ⧸ I`-algebra, then there is a standard etale `R`-algebra `T` together with an
   `R ⧸ I`-algebra isomorphism `(R ⧸ I) ⊗[R] T ≃ₐ[R ⧸ I] S`.
+- `AdjoinRoot.etale_X_pow_sub_C`: for `n` and `t` invertible in `R`, the Kummer algebra
+  `R[X]/(Xⁿ - t)` is etale over `R`.
 
 ## Implementation notes
 
@@ -129,7 +132,49 @@ theorem exists_algEquiv_quotient_tensor_ring (I : Ideal R) (P : StandardEtalePai
   rw [h]
   exact P.mulDerivativeRingEquiv
 
+/-- For `n ≠ 0` and `n`, `t` invertible in `R`, the pair `(Xⁿ - t, 1)` is a standard etale pair:
+`Xⁿ - t` is monic, and `(t⁻¹ n⁻¹ X) · nXⁿ⁻¹ - t⁻¹ (Xⁿ - t) = 1`, so the derivative of `Xⁿ - t` is
+invertible modulo `Xⁿ - t`. -/
+@[simps]
+def ofXPowSubC {n : ℕ} {t : R} (hn₀ : n ≠ 0) (hn : IsUnit (n : R)) (ht : IsUnit t) :
+    StandardEtalePair R where
+  f := X ^ n - C t
+  monic_f := monic_X_pow_sub_C t hn₀
+  g := 1
+  cond := by
+    obtain ⟨u, hu⟩ := hn
+    obtain ⟨v, rfl⟩ := ht
+    refine ⟨C (((u⁻¹ : Rˣ) : R) * ((v⁻¹ : Rˣ) : R)) * X, -C ((v⁻¹ : Rˣ) : R), 0, ?_⟩
+    obtain ⟨m, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hn₀
+    have h₁ : C (u : R) = C ((m.succ : ℕ) : R) := by rw [hu]
+    have h₂ : C ((u⁻¹ : Rˣ) : R) * C (u : R) = 1 := by rw [← C_mul]; simp
+    have h₃ : C ((v⁻¹ : Rˣ) : R) * C (v : R) = 1 := by rw [← C_mul]; simp
+    simp only [derivative_sub, derivative_X_pow, derivative_C, sub_zero, pow_zero, C_mul]
+    rw [← h₁, Nat.succ_sub_one, pow_succ]
+    linear_combination (X ^ (m + 1) * C ((v⁻¹ : Rˣ) : R)) * h₂ + h₃
+
+/-- The standard etale algebra of the pair `(Xⁿ - t, 1)` is the Kummer algebra
+`R[X]/(Xⁿ - t)`. -/
+def ofXPowSubCRingEquiv {n : ℕ} {t : R} (hn₀ : n ≠ 0) (hn : IsUnit (n : R)) (ht : IsUnit t) :
+    (ofXPowSubC hn₀ hn ht).Ring ≃ₐ[R] AdjoinRoot (X ^ n - C t) :=
+  .ofAlgHom
+    ((ofXPowSubC hn₀ hn ht).lift (AdjoinRoot.root _)
+      ⟨by rw [ofXPowSubC_f, AdjoinRoot.aeval_eq, AdjoinRoot.mk_self], by simp⟩)
+    (AdjoinRoot.liftAlgHom _ (Algebra.ofId _ _) (ofXPowSubC hn₀ hn ht).X hasMap_X.1)
+    (AdjoinRoot.algHom_ext (by simp [AdjoinRoot.liftAlgHom_root]))
+    (hom_ext (by simp [AdjoinRoot.liftAlgHom_root]))
+
 end StandardEtalePair
+
+/-- **The Kummer algebra is etale.** For `n ≠ 0` and `n`, `t` invertible in `R`, the algebra
+`R[X]/(Xⁿ - t)` is etale over `R`: it is the standard etale algebra of the pair `(Xⁿ - t, 1)`,
+the derivative `nXⁿ⁻¹` of `Xⁿ - t` being invertible modulo `Xⁿ - t`.
+
+This is the unramifiedness step of the proof of exactness of the Kummer sequence
+(blueprint: `lem-sc-kummer-exact`). -/
+theorem AdjoinRoot.etale_X_pow_sub_C {n : ℕ} {t : R} (hn₀ : n ≠ 0) (hn : IsUnit (n : R))
+    (ht : IsUnit t) : Algebra.Etale R (AdjoinRoot (X ^ n - C t)) :=
+  Algebra.Etale.of_equiv (StandardEtalePair.ofXPowSubCRingEquiv hn₀ hn ht)
 
 variable (S) in
 /-- Every standard etale algebra over a quotient `R ⧸ I` is the base change of a standard etale
