@@ -15,10 +15,11 @@ forgetful functor preserves limits and reflects isomorphisms) is an isomorphism 
 object `X` of the site admits a family of arrows `Y ⟶ X` generating a covering sieve such that
 the morphism is invertible at each `Y`. The morphism is *not* assumed to be invertible at the
 other members of the generated sieve, which is what distinguishes this criterion from
-`CategoryTheory.Sheaf.isIso_of_isIso_app_of_mem`.
+`CategoryTheory.Sheaf.isIso_of_isIso_app_of_mem` (in
+`WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf`).
 
 This is the form in which étale-local arguments are glued, e.g. in degree-zero flat base change
-`AlgebraicGeometry.Etale.isIso_upperStarLowerStarBaseChange`: there, the members of the family
+`AlgebraicGeometry.Etale.isIso_baseChangeMap_app_of_flat`: there, the members of the family
 are charts on which both sheaves can be computed, and these charts are not stable under
 refinement.
 
