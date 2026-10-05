@@ -5,6 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.Algebra.Ring.Shrink
 public import Mathlib.Analysis.Normed.Module.FiniteDimension
 public import Mathlib.NumberTheory.LocalField.Basic
@@ -42,6 +43,8 @@ the `ℓ`-adic one, and `E` becomes a nonarchimedean local field.
 - `PadicAlgCl.integers` : the ring of integers `𝒪_E`.
 - `PadicAlgCl.shrinkRingEquiv` and `PadicAlgCl.maximalIdealShrink` : the identification of
   `𝒪_E` with its copy `Shrink.{u + 1} 𝒪_E`, and the maximal ideal `𝔪_E` read in that copy.
+- `PadicAlgCl.integersModuleCat` : the category of modules over that copy, the coefficients of
+  the integral stage of the `ℓ`-adic formalism.
 
 ## Main results
 
@@ -199,5 +202,17 @@ instance isAdicComplete_maximalIdealShrink [FiniteDimensional ℚ_[l] E] [Small.
   (IsAdicComplete.congr_ringEquiv _ (shrinkRingEquiv l E)).mpr inferInstance
 
 end Complete
+
+end PadicAlgCl
+
+namespace PadicAlgCl
+
+/-- The category `ModuleCat 𝒪_E` of modules over the ring of integers `𝒪_E` of `E`, shrunk to
+`Type (u + 1)` (`PadicAlgCl.shrinkRingEquiv`): the coefficients of the integral stage of the
+`ℓ`-adic formalism on a `u`-site. The universe `u` comes first, so that it can be given
+explicitly as `PadicAlgCl.integersModuleCat.{u} l E`. -/
+abbrev integersModuleCat.{v, w'} (l : ℕ) [Fact l.Prime] (E : Type w') [Field E]
+    [Algebra E (PadicAlgCl l)] [Small.{v + 1} E] : Type (v + 2) :=
+  ModuleCat.{v + 1} (Shrink.{v + 1} (integers l E))
 
 end PadicAlgCl
