@@ -38,7 +38,8 @@ the filtered colimit of its `n`-torsion subsheaves; the assertion is étale loca
 `S`, so by `AlgebraicGeometry.exists_etaleCover_factorization`, the étale-local normal form
 `AlgebraicGeometry.Smooth.exists_etale_to_affineSpace` and the factorisation of
 `X ⟶ 𝔸^d_S` into relative curves it suffices to treat relative dimension one; and there
-`AlgebraicGeometry.Etale.BaseChangeProperty.of_sub_one` carries out the induction on `q`.
+`AlgebraicGeometry.Etale.universalBaseChangeProperty_of_forall_lt` carries out the induction
+on `q`.
 
 Compare `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`, the proper base change
 theorem, in which the roles of the two legs of the square are exchanged.
