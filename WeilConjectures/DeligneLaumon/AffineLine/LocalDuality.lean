@@ -25,8 +25,7 @@ The second half of the same blueprint subsection, that a nonzero linear Artin–
 `ℒ_{ψ(a x)}` is ramified at infinity, is stated for the Artin–Schreier extension of the local
 field `k((t))` at infinity, where the inertia group acts:
 `LaurentSeries.exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single`. It is not stated for
-`AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity`, which with the present coefficients holds
-for every Weil sheaf.
+`AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity`.
 
 ## Main statements
 
@@ -37,8 +36,8 @@ for every Weil sheaf.
 
 ## Implementation notes
 
-With the present coefficients every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf`), so the
-statements about Weil sheaves in this file are proved by vanishing.
+The category is being redefined (decision 1160); the proofs below that depended on the old
+vanishing have been removed.
 
 ## TODO
 
@@ -60,8 +59,6 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
--- the provisional Weil sheaves are zero, and the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /--
 For a dense open immersion `j : U₀ ↪ C₀` of smooth curves, a lisse Weil sheaf `F` on `U₀` and a
 closed point `s` of `C₀` outside `U₀`, there is a Frobenius-equivariant perfect pairing
@@ -91,16 +88,8 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
       ∀ a b, e ((((WeilSheaf.directImage j).obj F.dual).stalk s).frobenius a)
           ((((WeilSheaf.higherDirectImage j 1).obj F).stalk s).frobenius b) =
         (((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l)) * e a b := by
-  -- both stalks are zero, see `WeilSheaf.isZero_stalkObj`
-  have : Subsingleton (((WeilSheaf.directImage j).obj F.dual).stalk s).carrier :=
-    WeilSheaf.subsingleton_stalkAt_carrier _ _ _ _
-  have : Subsingleton (((WeilSheaf.higherDirectImage j 1).obj F).stalk s).carrier :=
-    WeilSheaf.subsingleton_stalkAt_carrier _ _ _ _
-  refine ⟨LinearEquiv.ofSubsingleton _ _, fun a b ↦ ?_⟩
-  simp [Subsingleton.elim b 0]
+  sorry
 
--- the provisional Weil sheaves are zero, and the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /-- *Boundary localization sequence for a curve.* Let `j : U₀ ↪ C₀` be a dense open immersion
 of smooth curves, `i : Z₀ ↪ C₀` the closed complement and `F` a lisse Weil sheaf on `U₀`. The
 open–closed triangle `j_!F → j_*F → i_*i^*j_*F →` gives a long exact sequence of compactly
@@ -112,8 +101,7 @@ Hence there are Frobenius-equivariant maps forming an exact sequence
 
 and a Frobenius-equivariant injection `H_c^0(U, F) ↪ H_c^0(C, j_*F)`.
 
-The provisional Weil complexes are not triangulated, so the maps are only asserted to exist;
-with the present coefficients all the groups vanish.
+The provisional Weil complexes are not triangulated, so the maps are only asserted to exist.
 (blueprint: `prop-a1-curve-boundary-sequence`) -/
 theorem exists_exact_compactlySupportedCohomology_boundary
     {U C Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
@@ -144,17 +132,6 @@ theorem exists_exact_compactlySupportedCohomology_boundary
           (A.compactlySupportedCohomology 0).carrier,
         Function.Injective h ∧ ∀ x, h ((F.compactlySupportedCohomology 0).frobenius x) =
           (A.compactlySupportedCohomology 0).frobenius (h x) := by
-  intro A B
-  -- all the groups are zero, see `WeilComplex.subsingleton_compactlySupportedCohomology_carrier`
-  have hU := (WeilSheaf.toComplex.obj F).subsingleton_compactlySupportedCohomology_carrier
-  have hC := (WeilSheaf.toComplex.obj A).subsingleton_compactlySupportedCohomology_carrier
-  have : Subsingleton (F.compactlySupportedCohomology 0).carrier := hU 0
-  have : Subsingleton (F.compactlySupportedCohomology 1).carrier := hU 1
-  have : Subsingleton (A.compactlySupportedCohomology 0).carrier := hC 0
-  have : Subsingleton (A.compactlySupportedCohomology 1).carrier := hC 1
-  refine ⟨⟨0, 0, fun y ↦ ?_, fun y ↦ ⟨0, Subsingleton.elim _ _⟩, fun _ ↦ Subsingleton.elim _ _,
-    fun _ ↦ Subsingleton.elim _ _⟩, 0, fun _ _ _ ↦ Subsingleton.elim _ _,
-    fun _ ↦ Subsingleton.elim _ _⟩
-  simp [Subsingleton.elim y 0]
+  sorry
 
 end AlgebraicGeometry

@@ -79,10 +79,7 @@ noncomputable def tensorObj (F G : WeilSheaf k₀ l X) : WeilSheaf k₀ l X wher
   obj := .mk (F.obj.carrier ⊗ G.obj.carrier)
     ((Functor.Monoidal.μIso (frobeniusPullback k₀ l X) _ _).symm ≪≫
       (F.obj.str ⊗ᵢ G.obj.str))
-  -- with the present coefficients `F` is zero, hence so is `F ⊗ G`, and the zero sheaf is
-  -- constructible
-  property := (Etale.constructibleSheaf _ _).prop_of_isZero
-    (isZero_tensorObj_of_isZero_left F.isZero_carrier _)
+  property := sorry
 
 /-- The constant Weil twist `F ⊗ 𝓑_b` of a Weil sheaf by a unit `b ∈ ℚ̄_ℓˣ`: the tensor product
 of `F` with the geometrically constant Weil line `𝓑_b` on which the geometric Frobenius acts

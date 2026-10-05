@@ -54,11 +54,9 @@ passing to the normalized real envelope `N⁰ ⊕ (N⁰)^∨` of the constant tw
 
 ## Implementation notes
 
-With the present coefficients every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf.isZero`):
-trace functions, trace energies and stalks vanish. The statements about traces of twists,
-envelopes and tensor products are proved this way, and the statements about a nonzero sheaf
-hold vacuously. The analytic part (the `L²`-weight, its radius characterisation and the energy
-bound) is proved in general.
+The category is being redefined (decision 1160); the proofs below that depended on the old
+vanishing have been removed. The analytic part (the `L²`-weight, its radius characterisation
+and the energy bound) is proved in general.
 -/
 
 @[expose] public section
@@ -84,19 +82,6 @@ field `k₀` and the index type is finite. (blueprint: `sk-l-dl-a1-energy`) -/
 noncomputable def traceEnergy (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (n : ℕ) : ℝ :=
   ∑ᶠ x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n),
     ‖ι (F.traceFunction n x)‖ ^ 2
-
-/-- The trace function of a Weil sheaf vanishes: with the present coefficients the stalks are
-zero (`AlgebraicGeometry.WeilSheaf.isZero_stalkObj`). -/
-theorem traceFunction_eq_zero (F : WeilSheaf k₀ l X) (n : ℕ)
-    (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
-    F.traceFunction n x = 0 := by
-  simp only [traceFunction, Subsingleton.elim _ (0 : Module.End _ _), map_zero]
-
-/-- The trace energy of a Weil sheaf vanishes, its trace function being zero
-(`AlgebraicGeometry.WeilSheaf.traceFunction_eq_zero`). -/
-theorem traceEnergy_eq_zero (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (n : ℕ) :
-    F.traceEnergy ι n = 0 := by
-  simp [traceEnergy, traceFunction_eq_zero]
 
 /-- The trace energy is nonnegative, as a sum of squares. -/
 theorem traceEnergy_nonneg (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (n : ℕ) :
@@ -333,22 +318,6 @@ envelope is `ι`-real (`AlgebraicGeometry.WeilSheaf.isReal_realEnvelope`).
 noncomputable def realEnvelope (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) : WeilSheaf k₀ l X :=
   F.constantTwist b ⊞ (F.constantTwist b).dual
 
-/-- The stalks of a Weil sheaf at closed points are zero, see
-`AlgebraicGeometry.WeilSheaf.isZero_stalkObj`. -/
-instance subsingleton_stalk_carrier (F : WeilSheaf k₀ l X) (x : X.finitePoints) :
-    Subsingleton (F.stalk x).carrier :=
-  subsingleton_stalkAt_carrier _ _ _ _
-
-/-- The local polynomials of a Weil sheaf are `1`, its stalks being zero
-(`AlgebraicGeometry.WeilSheaf.isZero_stalkObj`). -/
-theorem localPolynomial_stalk_eq_one (F : WeilSheaf k₀ l X) (x : X.finitePoints) :
-    (F.stalk x).localPolynomial = 1 := by
-  rw [FrobeniusModule.localPolynomial, LinearMap.charpolyRev_def,
-    LinearMap.charpoly_eq_one_of_subsingleton]
-  simpa using Polynomial.reverse_C (1 : PadicAlgCl l)
-
--- with the present coefficients the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /-- If `F` is lisse and punctually `ι`-pure of weight `w` and `2 log_q |ι b| = c`, then the
 constant twist `F ⊗ 𝓑_b` is punctually `ι`-pure of weight `w + c`: at a closed point of degree
 `m` every eigenvalue `α` of the local Frobenius becomes `bᵐ α`, of absolute value
@@ -357,13 +326,8 @@ theorem IsPunctuallyPureOfWeight.constantTwist {ι : PadicAlgCl l →+* ℂ} {F 
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ} {c : ℝ}
     (hb : 2 * Real.logb (Nat.card k₀) ‖ι b‖ = c) :
     (F.constantTwist b).IsPunctuallyPureOfWeight ι (w + c) := by
-  -- with the present coefficients the stalks are zero, so there are no eigenvalues
-  intro x α hα
-  obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
-  exact (hv.2 (Subsingleton.elim _ _)).elim
+  sorry
 
--- with the present coefficients the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /-- The envelope `Env_ι(F; b)` of a lisse sheaf `F` punctually `ι`-pure of weight `w`, with
 `|ι b| = q^{-w/2}`, is `ι`-real: at a closed point the eigenvalues `β_j` of `F⁰` have
 `|ι β_j| = 1`, so those of the dual summand are `ι(β_j⁻¹) = conj (ι β_j)`, and the local
@@ -373,13 +337,8 @@ theorem isReal_realEnvelope {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l 
     (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ}
     (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) :
     (F.realEnvelope b).IsReal ι := by
-  -- with the present coefficients the stalks are zero, so the local polynomials are `1`
-  intro x n
-  rw [localPolynomial_stalk_eq_one, Polynomial.coeff_one]
-  split_ifs <;> simp
+  sorry
 
--- with the present coefficients the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /-- The envelope of a punctually `ι`-pure sheaf of weight `w`, with `|ι b| = q^{-w/2}`, is
 punctually `ι`-pure of weight `0`: `F⁰` is by
 `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.constantTwist`, its dual has the inverse
@@ -389,13 +348,8 @@ theorem IsPunctuallyPureOfWeight.realEnvelope {ι : PadicAlgCl l →+* ℂ} {F :
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ}
     (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) :
     (F.realEnvelope b).IsPunctuallyPureOfWeight ι 0 := by
-  -- with the present coefficients the stalks are zero, so there are no eigenvalues
-  intro x α hα
-  obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
-  exact (hv.2 (Subsingleton.elim _ _)).elim
+  sorry
 
--- with the present coefficients the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /-- The trace energies of the constant twist `F ⊗ 𝓑_b` with `|ι b| = q^{-w/2}` are those of `F`
 divided by `q^{mw}`: the twist has trace function `t_{F ⊗ 𝓑_b}(y) = bᵐ t_F(y)` at
 `y ∈ X₀(𝔽_{qᵐ})`. -/
@@ -403,11 +357,8 @@ theorem traceEnergy_constantTwist (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k
     {b : (PadicAlgCl l)ˣ} {w : ℝ} (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) (m : ℕ) :
     (F.constantTwist b).traceEnergy ι m =
       F.traceEnergy ι m / (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) := by
-  -- with the present coefficients both trace functions are zero
-  simp [traceEnergy_eq_zero]
+  sorry
 
--- with the present coefficients the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /-- The trace energies of the envelope are at most four times those of `F⁰ = F ⊗ 𝓑_b`, for `F`
 punctually pure of weight `w` and `|ι b| = q^{-w/2}`: the trace of the envelope is
 `t_{F⁰} + conj t_{F⁰} = 2 Re t_{F⁰}`, and `|Re z|² ≤ |z|²`. -/
@@ -415,8 +366,7 @@ theorem traceEnergy_realEnvelope_le (ι : PadicAlgCl l →+* ℂ) {F : WeilSheaf
     (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ}
     (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) (m : ℕ) :
     (F.realEnvelope b).traceEnergy ι m ≤ 4 * (F.constantTwist b).traceEnergy ι m := by
-  -- with the present coefficients both trace functions are zero
-  simp [traceEnergy_eq_zero]
+  sorry
 
 /-- A nonzero lisse Weil sheaf, punctually `ι`-pure of weight `w`, admits a unit `b` with
 `|ι b| = q^{-w/2}`: if `α` is an eigenvalue of the local Frobenius at a closed point of degree
@@ -426,10 +376,9 @@ theorem exists_norm_eq_of_isPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ)
     (F : WeilSheaf k₀ l X) (hF : ¬ Limits.IsZero F) {w : ℝ}
     (h : F.IsPunctuallyPureOfWeight ι w) :
     ∃ b : (PadicAlgCl l)ˣ, ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2) := by
-  -- a nonzero Weil sheaf has a nonzero stalk at some closed point; with the present
-  -- coefficients there is no nonzero Weil sheaf (`AlgebraicGeometry.WeilSheaf.isZero`)
+  -- a nonzero Weil sheaf has a nonzero stalk at some closed point
   obtain ⟨x, hx⟩ : ∃ x : X.finitePoints, Nontrivial (F.stalk x).carrier :=
-    (hF F.isZero).elim
+    sorry
   obtain ⟨α, hα⟩ := Module.End.exists_eigenvalue (F.stalk x).frobeniusEnd
   have hα0 : α ≠ 0 := by
     rintro rfl
@@ -458,8 +407,6 @@ theorem exists_norm_eq_of_isPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ)
 
 end Envelope
 
--- with the present coefficients the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /-- The `L²`-weight is at most the weight: if `F` is a lisse Weil sheaf on the smooth
 geometrically connected affine curve `X₀`, punctually `ι`-mixed of weights at most `w`, then
 `‖F‖ ≤ w`. At `y ∈ X₀(𝔽_{qᵐ})` the eigenvalues of the Frobenius have absolute value at most
@@ -473,10 +420,7 @@ theorem l2Weight_le_of_hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ) {V : Schem
     [GeometricallyConnected (V ↘ Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l V) (hlisse : F.IsLisse) {w : ℝ} (h : F.HasWeightsAtMost ι w) :
     F.l2Weight ι ≤ w := by
-  -- with the present coefficients the trace energies vanish, so the bound holds with `C = 0`
-  have := F.l2Weight_le_of_traceEnergy_le ι (C := 0) (B := w + 1)
-    fun n _ ↦ by simp [traceEnergy_eq_zero]
-  simpa using this
+  sorry
 
 /-- The `L`-series `L(X₀, F, t) = ∏_{x ∈ |X₀|} det(1 - Fₓ t^{d(x)} | F_x̄)⁻¹ ∈ ℂ⟦t⟧` of a Weil
 sheaf, the product over the closed points of `X₀` of the inverses of the local polynomials
@@ -488,8 +432,6 @@ noncomputable def lSeries (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X)
     (Polynomial.X ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1) : Polynomial ℂ) :
       PowerSeries ℂ)⁻¹
 
--- with the present coefficients the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /-- Let `F` be a lisse Weil sheaf on the smooth geometrically connected affine curve `X₀` and
 `F'` a Weil sheaf whose local eigenvalues are the complex conjugates of those of `F` (the sheaf
 `F̄` of the complex-conjugate local Frobenius eigenvalues), in that the local polynomials of
@@ -514,19 +456,8 @@ theorem traceFunction_tensorObj_and_l2Series_mul_lSeries (ι : PadicAlgCl l →+
       ι ((F.tensorObj F').traceFunction n y) = ((‖ι (F.traceFunction n y)‖ ^ 2 : ℝ) : ℂ)) ∧
     PowerSeries.mk (fun m ↦ (F.traceEnergy ι (m + 1) : ℂ)) * (F.tensorObj F').lSeries ι =
       PowerSeries.derivative ℂ ((F.tensorObj F').lSeries ι) := by
-  -- with the present coefficients all stalks are zero: the trace functions vanish and every
-  -- local factor of the `L`-series is `1`
-  have hL : (F.tensorObj F').lSeries ι = 1 := by
-    refine (tprod_congr fun x ↦ ?_).trans tprod_one
-    rw [localPolynomial_stalk_eq_one, Polynomial.map_one,
-      Polynomial.one_comp, Polynomial.coe_one, inv_one]
-  refine ⟨fun n y ↦ by simp [traceFunction_eq_zero], ?_⟩
-  rw [hL, Derivation.map_one_eq_zero, mul_one]
-  ext
-  simp [traceEnergy_eq_zero]
+  sorry
 
--- with the present coefficients the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /-- The *`L²`-rigidity* for real sheaves: let `G` be a nonzero lisse `ι`-real Weil sheaf on the
 smooth geometrically connected affine curve `X₀`, punctually `ι`-pure of weight `w`. Then
 `‖G‖ = w`.
@@ -535,8 +466,7 @@ The proof in the blueprint writes `φ_G = L'/L` with `L` the ratio of the determ
 Frobenius on `H_c¹` and `H_c²` of `G ⊗ G`; the denominator is pure of weight `2w + 2` by the
 endpoint lemma, positivity of the local factors forces a surviving pole on `|t| = q^{-w-1}`,
 and the radius `q^{-w-1}` gives `‖G‖ = w` by `AlgebraicGeometry.WeilSheaf.lt_l2Weight_iff`.
-With the present coefficients every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf.isZero`),
-so the hypothesis `G ≠ 0` cannot hold. (blueprint: `thm-wf-l2-dictionary`) -/
+(blueprint: `thm-wf-l2-dictionary`) -/
 theorem l2Weight_eq_of_isReal (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]
     [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
@@ -545,7 +475,7 @@ theorem l2Weight_eq_of_isReal (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     (G : WeilSheaf k₀ l V) (hG : ¬ Limits.IsZero G) (hlisse : G.IsLisse) (hreal : G.IsReal ι)
     {w : ℝ} (hpure : G.IsPunctuallyPureOfWeight ι w) :
     G.l2Weight ι = w :=
-  (hG G.isZero).elim
+  sorry
 
 /-- The *`L²`-weight of a punctually pure lisse sheaf equals its weight*: let `G` be a nonzero
 lisse Weil sheaf on the smooth geometrically connected affine curve `X₀`, punctually `ι`-pure
@@ -574,10 +504,8 @@ theorem l2Weight_eq_of_isPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) {V
     l2Weight_eq_sub_of_traceEnergy_eq ι G _ (traceEnergy_constantTwist ι G hb)
   -- Step 2: the envelope has `L²`-weight zero
   have h2 : (G.realEnvelope b).l2Weight ι = 0 := by
-    -- with the present coefficients the envelope, like `G`, cannot be shown to be nonzero
-    -- or lisse other than through the vacuous hypothesis `G ≠ 0`
-    have hE : ¬ Limits.IsZero (G.realEnvelope b) := (hG G.isZero).elim
-    have hElisse : (G.realEnvelope b).IsLisse := (hG G.isZero).elim
+    have hE : ¬ Limits.IsZero (G.realEnvelope b) := sorry
+    have hElisse : (G.realEnvelope b).IsLisse := sorry
     exact_mod_cast l2Weight_eq_of_isReal ι _ hE hElisse (isReal_realEnvelope hpure hb)
       (hpure.realEnvelope hb)
   -- Step 3: comparison with the envelope
@@ -638,13 +566,10 @@ theorem l2Weight_directImage (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen
     (hM : ¬ Limits.IsZero D.sheaf) {w : ℝ} (hpure : D.sheaf.IsPunctuallyPureOfWeight ι w) :
     D.directImage.l2Weight ι = D.sheaf.l2Weight ι ∧ D.sheaf.l2Weight ι = w := by
   have hw := l2Weight_eq_of_isPunctuallyPureOfWeight ι D.sheaf hM D.lisse hpure
-  -- with the present coefficients the trace energies of `M` and `j_*M` vanish, so both
-  -- comparisons hold, the boundary contribution being bounded with the constant `0`
   have hle : D.sheaf.l2Weight ι ≤ D.directImage.l2Weight ι :=
-    l2Weight_le_l2Weight_of_traceEnergy_le ι _ _ fun m ↦ by simp [traceEnergy_eq_zero]
+    sorry
   have hge : D.directImage.l2Weight ι ≤ max (D.sheaf.l2Weight ι) ((w - 1 : ℝ) : EReal) :=
-    l2Weight_le_max_of_traceEnergy_le_add ι _ _ (C := 0) (B := w) fun m ↦ by
-      simp [traceEnergy_eq_zero]
+    sorry
   rw [hw, max_eq_left (EReal.coe_le_coe_iff.2 (by linarith))] at hge
   exact ⟨le_antisymm (hge.trans_eq hw.symm) hle, hw⟩
 

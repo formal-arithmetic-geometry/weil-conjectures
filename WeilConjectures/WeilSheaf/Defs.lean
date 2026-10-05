@@ -25,10 +25,9 @@ one copy.
 `AlgebraicGeometry.WeilSheaf` and `AlgebraicGeometry.WeilComplex` are defined in
 `WeilConjectures.WeilSheaf.Category`: constructible étale `ℚ̄_ℓ`-sheaves, resp. objects of
 `D(X̄_ét)` with bounded constructible homology, on the geometric fiber `X̄ = X ×_{k₀} k̄`, with
-an isomorphism `Fr_X^* F ≅ F` for the geometric Galois Frobenius `Fr_X`. These definitions are
-a degenerate scaffold: constructible sheaves of discrete `ℚ̄_ℓ`-modules are zero, so every Weil
-sheaf and every Weil complex is zero, and `WeilComplex` is not triangulated; see the
-implementation notes of `WeilConjectures.WeilSheaf.Category`. The geometric stalks with their
+an isomorphism `Fr_X^* F ≅ F` for the geometric Galois Frobenius `Fr_X`. The category is being
+redefined (decision 1160); the proofs below that depended on the old vanishing have been
+removed. The geometric stalks with their
 local Frobenius, the trace function and the global sections are constructed in
 `WeilConjectures.WeilSheaf.Stalk`. The notions built on them in
 `WeilConjectures.WeilSheaf.OpenImmersion`, `WeilConjectures.WeilSheaf.LowerShriek`,

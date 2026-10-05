@@ -51,17 +51,8 @@ and both notions pull back along morphisms of `k₀`-schemes (`WeilSheaf.upperSt
 
 ## Implementation notes
 
-**These definitions are a scaffold, and the categories are degenerate.** The coefficients are
-discrete `ℚ̄_ℓ`-modules on the étale site, and `Scheme.IsConstructibleSheaf` asks for finite
-stalks, so every constructible sheaf of `ℚ̄_ℓ`-modules is zero. Hence every Weil sheaf and
-every Weil complex is zero, and statements quantified over them are vacuous. Discrete
-`ℚ̄_ℓ`-coefficients would be wrong even with finite-dimensional stalks: lisse sheaves would have
-finite monodromy. The blueprint (`sk-d-real-weil`) takes constructible pro-étale `E_X`-modules
-for a finite extension `E` of `ℚ_ℓ`, and it defines Weil complexes as a Verdier localization of
-complexes of Weil sheaves, which is triangulated; the category `WeilComplex` here is not (see
-its docstring). Both definitions are to be redone once pro-étale constructible `E_X`-modules
-exist. Only the interface, the names and the transport of Frobenius structures along
-`φ̄^*` are meant to survive.
+The category is being redefined (decision 1160); the proofs below that depended on the old
+vanishing have been removed.
 
 The coefficient ring `ℚ̄_ℓ = PadicAlgCl l` lives in `Type`, while Mathlib's
 `IsGrothendieckAbelian.{v} (ModuleCat.{v} R)` needs `R : Type v`; hence the `ULift` in
@@ -150,12 +141,7 @@ end Frobenius
 
 /-- The category of constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme `X`: constructible
 étale sheaves `F` of `ℚ̄_ℓ`-modules on the geometric fiber `X̄` with an isomorphism
-`Fr_X^* F ≅ F`, where `Fr_X` is the geometric Galois Frobenius of `X̄`.
-
-This is a scaffold and it is degenerate: a constructible sheaf has finite stalks, and a
-`ℚ̄_ℓ`-vector space with finitely many elements is zero, so every Weil sheaf is zero. The
-blueprint (`sk-d-real-weil`) takes constructible pro-étale `E_X`-modules instead, which are
-not formalised yet. -/
+`Fr_X^* F ≅ F`, where `Fr_X` is the geometric Galois Frobenius of `X̄`. -/
 def WeilSheaf (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :
     Type (u + 2) :=
@@ -166,13 +152,11 @@ of étale sheaves of `ℚ̄_ℓ`-modules on the geometric fiber `X̄` with bound
 homology, with an isomorphism `Fr_X^* K ≅ K` in the derived category, where `Fr_X` is the
 geometric Galois Frobenius of `X̄`.
 
-This is a scaffold and it differs from the blueprint (`sk-d-real-weil`) in two ways. Its
-homology sheaves are constructible `ℚ̄_ℓ`-sheaves, hence zero, so every Weil complex is zero
-(see `AlgebraicGeometry.WeilSheaf`). And the blueprint defines Weil complexes as the Verdier
-localization of the homotopy category of complexes of Weil sheaves, while this category only
-records an isomorphism `Fr_X^* K ≅ K` in the derived category. Cones are not functorial in
-`D(X̄_ét)`, so this category is not triangulated, and its morphisms are not those of the
-blueprint category. Statements that need distinguished triangles of Weil complexes, such as
+This differs from the blueprint (`sk-d-real-weil`): the blueprint defines Weil complexes as
+the Verdier localization of the homotopy category of complexes of Weil sheaves, while this
+category only records an isomorphism `Fr_X^* K ≅ K` in the derived category. Cones are not
+functorial in `D(X̄_ét)`, so this category is not triangulated, and its morphisms are not those
+of the blueprint category. Statements that need distinguished triangles of Weil complexes, such as
 `WeilComplex.derivedLowerShriek`, `fourierTransform` and the open–closed triangle,
 cannot be stated on it faithfully. -/
 def WeilComplex (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]

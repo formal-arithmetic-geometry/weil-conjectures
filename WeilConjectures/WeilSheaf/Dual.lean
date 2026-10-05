@@ -82,10 +82,7 @@ It is defined for every Weil sheaf, but it is the duality functor only for lisse
 of a general constructible `F` is its Verdier dual `RHom(F, ℚ̄_ℓ(d)[2d])`, a Weil complex. -/
 noncomputable def dual (F : WeilSheaf k₀ l X) : WeilSheaf k₀ l X where
   obj := .mk ((ihom F.obj.carrier).obj (𝟙_ _)) F.dualStr
-  -- with the present coefficients `F` is zero, hence so is the internal hom out of it, and the
-  -- zero sheaf is constructible
-  property := (Etale.constructibleSheaf _ _).prop_of_isZero
-    (isZero_ihom_obj_of_isZero F.isZero_carrier _)
+  property := sorry
 
 /-- The evaluation `F ⊗ F^∨ ⟶ ℚ̄_ℓ` is compatible with the Weil structures:
 ```
