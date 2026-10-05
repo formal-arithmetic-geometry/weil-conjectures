@@ -379,9 +379,9 @@ variable (p) in
 /-- Blueprint `sbc-lem-bc-failure-field`: A failure of base change is detected over a field.
 
 If the base-change property `BC(p, Λ, q')` holds universally for all `q' < q` while
-`BC(p, Λ, q)` fails after some base change for some `q ≥ 1`, there is a counterexample over a field. Apply
-`AlgebraicGeometry.Etale.nonempty_fieldFailure` to a failing base change of `p` and paste the
-squares. -/
+`BC(p, Λ, q)` fails after some base change for some `q ≥ 1`, there is a counterexample over
+a field. Apply `AlgebraicGeometry.Etale.nonempty_fieldFailure` to a failing base change of
+`p` and paste the squares. -/
 @[stacks 0F07]
 theorem Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty (q : ℤ) (hq : 1 ≤ q)
     (hprev : ∀ q' < q, Etale.UniversalBaseChangeProperty Λ p q')

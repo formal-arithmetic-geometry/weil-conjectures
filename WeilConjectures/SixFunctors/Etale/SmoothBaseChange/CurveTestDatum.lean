@@ -34,8 +34,9 @@ is what contradicts it.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.exists_curveTestDatum`: a failure of `BC(p, Λ, q)` after some base
-  change, when `BC(p, Λ, q')` holds universally for `q' < q`, produces a curve-test datum which is a base change of `p` and on which a higher direct
-  image of a constant sheaf fails to vanish.
+  change, when `BC(p, Λ, q')` holds universally for `q' < q`, produces a curve-test datum
+  which is a base change of `p` and on which a higher direct image of a constant sheaf fails
+  to vanish.
 
 ## References
 
@@ -105,9 +106,10 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (p : X ⟶ S)
 Let `p : X ⟶ S` be an affine smooth relative curve with `X` affine, and let `n` be invertible
 on `S` and annihilate `Λ`. Suppose that, for some `q ≥ 1`, `BC(p, Λ, q')` holds universally
 (after every base change `S' ⟶ S`) for all `q' < q`, but `BC(p, Λ, q)` does not hold
-universally, i.e. it fails after some base change `S' ⟶ S`. Then there is a curve-test datum `D` which is a base
-change of `p`, whose torsion order `D.d` divides `n`, and on whose geometric generic fibre
-the higher direct image `R^q h_* (Λ/D.d Λ)` of the constant sheaf does not vanish. -/
+universally, i.e. it fails after some base change `S' ⟶ S`. Then there is a curve-test
+datum `D` which is a base change of `p`, whose torsion order `D.d` divides `n`, and on whose
+geometric generic fibre the higher direct image `R^q h_* (Λ/D.d Λ)` of the constant sheaf
+does not vanish. -/
 @[stacks 0F08]
 theorem Etale.exists_curveTestDatum [IsAffine X] [IsAffineHom p]
     [SmoothOfRelativeDimension 1 p] (n : ℕ) (hn : IsUnit (n : Γ(S, ⊤))) (hΛ : (n : Λ) = 0)
