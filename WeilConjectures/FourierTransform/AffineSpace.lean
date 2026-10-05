@@ -40,18 +40,20 @@ sheaves.
 
 ## Coefficients
 
-The transform and the skyscraper are defined for every commutative ring `Λ` in which `p` is
-invertible. The theorems follow the classes of the module docstring of
-`WeilConjectures.FourierTransform.Defs`. The transform of the skyscraper assumes `[Finite Λ]`:
-it uses compact-support base change. The comparison of the transforms for `ψ` and `ψ⁻¹` is
-compactification-dependent and assumes `[Finite Λ]` only: its proof is formal, and `[Finite Λ]`
-enters solely through independence of the compactification. The transform of the constant
-sheaf assumes `[Finite Λ] [HasInvertibleExponent Λ S]`: it uses `H_c^*(𝔸^r)`.
+Coefficient hypotheses follow the classes in `WeilConjectures.FourierTransform.Defs`.
 
 ## Implementation notes
 
 The statements only assert that an isomorphism *exists*. Later uses will need specific,
 coherent isomorphisms, which `Classical.choice` cannot provide.
+
+The transform of the constant sheaf is computed from the stalk formula
+(`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_geometricStalk`) and
+`H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`, which needs `Λ` finite with exponent invertible on `S`. The
+transform of the skyscraper is compact-support base change of `Rp₂,!` along the zero section.
+The comparison of the transforms for `ψ` and `ψ⁻¹` is base change of `Rp₂,!` along the
+isomorphism `ι × 1`; it compares the chosen compactifications of `p₂` and of its conjugate by
+`ι × 1`.
 
 TODO: upgrade these back to `Iso` constructions once they can be built.
 
@@ -106,9 +108,7 @@ the proof uses `H_c^*(𝔸¹, ℒ_ψ) = 0`, and the `ψ`-isotypic part of `H_c^*
 by `Ψ 1 - 1`. For `Ψ = 1` the kernel is the constant sheaf and the transform of `Λ` is
 `Λ(-r)[-r]`, supported everywhere. Asking `Ψ ≠ 1` is not enough when `Λ` is not a domain:
 for `Λ = 𝔽_ℓ × 𝔽_ℓ` and `Ψ = (ψ₀, 1)` the transform has the trivial-character transform as a
-factor. The proof uses the stalk formula
-(`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_geometricStalk`) and
-`H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`, which needs `Λ` finite with exponent invertible on `S`.
+factor.
 (sketch blueprint: `sk-prop-first-formula`) -/
 theorem nonempty_iso_affineFourierTransform_unit [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
@@ -126,8 +126,7 @@ constant sheaf, shifted by the relative dimension `r = #n`:
 On the affine line, the blueprint's case, this reads `FT_ψ(δ₀) ≅ Λ[1]`. Unlike
 `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_unit` this holds for every
 character: the kernel restricted to `{0} ×_S 𝔸(n; S)` is the Artin–Schreier sheaf of the zero
-function. The proof is compact-support base change of `Rp₂,!` along the zero section, which
-needs `Λ` finite.
+function.
 (sketch blueprint: `sk-prop-first-formula`) -/
 theorem nonempty_iso_affineFourierTransform_skyscraperZero [Finite Λ] (Ψ : AddChar (ZMod p) Λ) :
     Nonempty ((affineFourierTransform Λ n S Ψ).obj (skyscraperZero Λ n S) ≅
@@ -152,12 +151,7 @@ naturally in `K`:
 
 The kernel of `FT_{ψ⁻¹}` is the pullback of the kernel of `FT_ψ` along `ι × 1`, by
 `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv` and `b(-x, ξ) = -b(x, ξ)`.
-The proof is base change of `Rp₂,!` along the isomorphism `ι × 1`. It holds for every
-character.
-
-This is **compactification-dependent**: the blueprint proof is formal, and `[Finite Λ]` enters
-solely through independence of the compactification, since the chosen compactifications of `p₂`
-and of its conjugate by `ι × 1` must be compared.
+It holds for every character.
 (sketch blueprint: `sk-def-ft`, remark; `lem-fd-as-lisse`) -/
 theorem nonempty_iso_affineFourierTransform_inv [Finite Λ] (Ψ : AddChar (ZMod p) Λ) :
     Nonempty (affineFourierTransform Λ n S Ψ⁻¹ ≅
