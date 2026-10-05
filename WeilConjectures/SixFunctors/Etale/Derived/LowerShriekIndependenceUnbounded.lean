@@ -121,8 +121,13 @@ Not proved yet, and not expected to hold in this generality. The blueprint (`BA4
 states the bounded below version, with torsion coefficients: it rests on proper base change
 for `r.hom`, which needs torsion coefficients. Passing from `D⁺` to the unbounded derived
 category moreover needs `R(r.hom)_*` to have finite cohomological dimension, since étale
-topoi are not left-complete in general. The corresponding hypotheses on `A` and on `f` are
-still to be added. -/
+topoi are not left-complete in general.
+
+TODO: add the corresponding hypotheses on `A` and on `f`. This is the single place where they
+are missing: the formal consequences of `R(f)_!`, such as
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`,
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar` and the
+theorems built on them, will inherit them from here. -/
 instance isIso_rightDerivedLowerShriekOfCompactificationComparison
     (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
     IsIso (rightDerivedLowerShriekOfCompactificationComparison A r hcart) :=

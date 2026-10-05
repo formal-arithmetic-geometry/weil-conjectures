@@ -51,9 +51,8 @@ The transform of the constant sheaf is computed from the stalk formula
 (`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_geometricStalk`) and
 `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`, which needs `Λ` finite with exponent invertible on `S`. The
 transform of the skyscraper is compact-support base change of `Rp₂,!` along the zero section.
-The comparison of the transforms for `ψ` and `ψ⁻¹` is base change of `Rp₂,!` along the
-isomorphism `ι × 1`; it compares the chosen compactifications of `p₂` and of its conjugate by
-`ι × 1`.
+The comparison of the transforms for `ψ` and `ψ⁻¹` is formal: `p₂ = (ι × 1) ≫ p₂`, the
+composition law of `Rf_!` and `R(e)_! ≅ R(e)_* ≅ (e⁻¹)^*` for the isomorphism `e = ι × 1`.
 
 TODO: upgrade these back to `Iso` constructions once they can be built.
 
@@ -159,13 +158,10 @@ The kernel of `FT_{ψ⁻¹}` is the pullback of the kernel of `FT_ψ` along `ι 
 `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv` and `b(-x, ξ) = -b(x, ξ)`.
 It holds for every character.
 
-Class: compactification-dependent; decided by independence of the compactification. The
-blueprint proof is formal (base change along the isomorphism `ι × 1`); `[Finite Λ]` enters
-solely through independence of the compactification
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), comparing the chosen compactifications
-of `p₂` and of its conjugate by `ι × 1`.
-(sketch blueprint: `sk-def-ft`, remark; `lem-fd-as-lisse`) -/
-theorem nonempty_iso_affineFourierTransform_inv [Finite Λ] (Ψ : AddChar (ZMod p) Λ) :
+Class: general; decided by the composition law of `Rf_!` for `p₂ = (ι × 1) ≫ p₂` and
+`R(e)_! ≅ R(e)_*` for the isomorphism `e = ι × 1`.
+(sketch blueprint: `sk-def-ft`, remark) -/
+theorem nonempty_iso_affineFourierTransform_inv (Ψ : AddChar (ZMod p) Λ) :
     Nonempty (affineFourierTransform Λ n S Ψ⁻¹ ≅
         D((neg n S)^*[ModuleCat.{u + 1} Λ]) ⋙ affineFourierTransform Λ n S Ψ) :=
   sorry

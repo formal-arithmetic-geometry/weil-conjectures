@@ -154,7 +154,7 @@ theorem nonempty_iso_affineFourierTransform_comp_inv [Finite Λ] [HasInvertibleE
     ((R((pullback.diagonal (𝔸(n; S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
       (tateObject Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))))
     (-2 * (Fintype.card n : ℤ)) (Fintype.card n + Fintype.card n)
-  obtain ⟨e₄⟩ := nonempty_iso_kernelTransform_diagonal Λ (𝔸(n; S) ↘ S)
+  obtain ⟨e₄⟩ := nonempty_iso_kernelTransform_diagonal (ModuleCat.{u + 1} Λ) (𝔸(n; S) ↘ S)
     (tateObject Λ (𝔸(n; S)) (-(Fintype.card n : ℤ)))
   have hr : -2 * (Fintype.card n : ℤ) + (Fintype.card n + Fintype.card n) = 0 := by ring
   exact ⟨e₁ ≪≫ hk e₂ _ ≪≫ e₃ ≪≫

@@ -5,7 +5,6 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.FourierTransform.ArtinSchreier
 public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform
@@ -58,26 +57,22 @@ it by scalars of a ring, so the Fourier kernel and the Fourier–Deligne transfo
 over `ModuleCat Λ`, for any commutative ring `Λ` in which `p` is invertible.
 
 The theorems of the Fourier transform files assume the coefficient hypotheses of the strongest
-input of their proofs:
+input of their proofs. Each theorem records its class, the input that decides it and, where
+quasi-compactness is assumed, the morphism it is needed for:
 
 - **general**: formal six-functor manipulations (shifts, pullback along isomorphisms, the
-  projection formula for a closed immersion, multiplicativity of Artin–Schreier sheaves): no
-  hypothesis on the coefficients;
-- **compactification-dependent**: the blueprint proof is formal, but `R(f)_!` is computed with
-  a chosen compactification, and the proof compares two compactifications of a quasi-compact
-  morphism (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`). That comparison rests on
-  `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison`, which is
-  not proved and whose hypotheses are not settled: besides torsion coefficients, for proper
-  base change, it needs a finiteness condition on the morphism giving finite cohomological
-  dimension, to pass from `D⁺` to the unbounded derived category. These theorems assume
-  `[Finite Λ]` and quasi-compactness of the morphism whose compactifications are compared;
-- **torsion**: compact-support base change, the projection formula for `Rp₂,!`, Deligne
+  composition law of `Rf_!`, `Rf_! ≅ Rf_*` for proper `f`, the projection formula for a closed
+  immersion, multiplicativity of Artin–Schreier sheaves): no hypothesis on the coefficients;
+- **torsion**: compact-support base change, the unbounded projection formula for `Rp₂,!`,
   finiteness of `Rf_!` or the cohomology of `𝔸^r`: `[Finite Λ] [HasInvertibleExponent Λ S]`,
-  or `[Finite Λ]` alone where the blueprint proof does not use the exponent.
+  or `[Finite Λ]` alone where the proof does not use the exponent.
 
-TODO: once the hypotheses of
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison` are fixed,
-give the compactification-dependent theorems exactly those hypotheses.
+`R(f)_!` is computed with a chosen compactification, and the formal facts of the first class
+rest on the independence of the compactification,
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison`, which is
+not proved and whose hypotheses are not settled. Its TODO is the single place where these
+hypotheses are to be added; they will then reach the theorems here through the results they
+use.
 
 In the blueprint the `ℚ̄_ℓ` versions are deduced from the torsion ones by reduction. That
 deduction, and the `ℚ̄_ℓ` statements themselves, are not formalised here.
@@ -88,16 +83,8 @@ deduction, and the `ℚ̄_ℓ` statements themselves, are not formalised here.
 of the four factors of the transform only `Rp₂,!` is at issue. The pullback `p₁^*`, the tensor
 product with the lisse rank-one kernel and the shift preserve bounded constructibility for
 formal reasons, while `Rp₂,!` does so by the finiteness theorem
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`. That theorem is stated
-over a base field `k`, for finite `Λ` whose exponent is invertible on the source; hence `V'` is
-assumed locally of finite type over `k`, `p₂` of finite type, and the exponent invertible on
-`S`, which gives it on `V ×_S V'` by `AlgebraicGeometry.HasInvertibleExponent.of_hom`.
-
-TODO: neither restriction is needed for `Rf_!`. For torsion coefficients and `f` of finite
-presentation, `Rf_!` preserves constructibility over any quasi-compact quasi-separated base,
-with no invertibility of the exponent (SGA 4 XVII 5.3.6). Once
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek` is stated in that
-generality, drop the field and `[HasInvertibleExponent Λ S]` here.
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`, for `p₂` of finite
+presentation over the quasi-compact quasi-separated scheme `V'`.
 
 ## Deferred clauses
 
@@ -163,44 +150,40 @@ noncomputable def fourierTransform [CharP Γ(pullback π π', ⊤) p]
 
 section BoundedConstructible
 
-variable [Finite Λ] [HasInvertibleExponent Λ S]
-  [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
-  [LocallyOfFiniteType (pullback.snd π π')] [QuasiCompact (pullback.snd π π')]
+variable [Finite Λ] [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
+  [LocallyOfFinitePresentation (pullback.snd π π')] [QuasiCompact (pullback.snd π π')]
+  [CompactSpace V'] [QuasiSeparatedSpace V']
 
-/-- For `V'` locally of finite type over a field `k`, the Fourier–Deligne transform sends the
-bounded constructible derived category `Dᵇc(V, Λ)` into `Dᵇc(V', Λ)`.
+/-- For `V'` quasi-compact and quasi-separated and `p₂` of finite presentation, the
+Fourier–Deligne transform sends the bounded constructible derived category `Dᵇc(V, Λ)` into
+`Dᵇc(V', Λ)`.
 
-Class: torsion; decided by Deligne finiteness of `Rp₂,!`
+Class: torsion; decided by finiteness of `Rp₂,!`
 (`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`), which needs
-`[Finite Λ] [HasInvertibleExponent Λ S]`.
+`[Finite Λ]`.
 (sketch blueprint: `sk-prop-well-defined`) -/
-theorem boundedConstructible_fourierTransform_obj_of_boundedConstructible {k : Type u}
-    [Field k] (aV' : V' ⟶ Spec (.of k)) [LocallyOfFiniteType aV'] (Ψ : AddChar (ZMod p) Λ)
-    (b : Γ(pullback π π', ⊤)) (r : ℤ)
+theorem boundedConstructible_fourierTransform_obj_of_boundedConstructible
+    (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ)
     (K : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V'
       ((fourierTransform Λ π π' Ψ b r).obj K) :=
   sorry
 
-/-- For `V'` locally of finite type over a field, the Fourier–Deligne transform as a functor
-`Dᵇc(V, Λ) ⥤ Dᵇc(V', Λ)`, the functor whose existence `sk-prop-well-defined` asserts.
+/-- The Fourier–Deligne transform as a functor `Dᵇc(V, Λ) ⥤ Dᵇc(V', Λ)`, the functor whose
+existence `sk-prop-well-defined` asserts.
 
-Class: torsion; decided by Deligne finiteness of `Rp₂,!`, through
-`AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible`,
-which needs `[Finite Λ] [HasInvertibleExponent Λ S]`.
+Class: torsion; decided by finiteness of `Rp₂,!`, through
+`AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible`.
 (sketch blueprint: `sk-prop-well-defined`) -/
-noncomputable def fourierTransformBoundedConstructible
-    (hV' : ∃ (k : Type u) (_ : Field k) (a : V' ⟶ Spec (.of k)), LocallyOfFiniteType a)
-    (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ) :
+noncomputable def fourierTransformBoundedConstructible (Ψ : AddChar (ZMod p) Λ)
+    (b : Γ(pullback π π', ⊤)) (r : ℤ) :
     Dᵇc(V, ModuleCat.{u + 1} Λ) ⥤ Dᵇc(V', ModuleCat.{u + 1} Λ) :=
   ObjectProperty.lift _
     (Etale.DerivedCategoryBoundedConstructible.ι (ModuleCat.{u + 1} Λ) V ⋙
       fourierTransform Λ π π' Ψ b r)
-    fun K ↦ by
-      obtain ⟨k, _, a, _⟩ := hV'
-      exact boundedConstructible_fourierTransform_obj_of_boundedConstructible Λ π π' a Ψ b r
-        K.obj K.property
+    fun K ↦ boundedConstructible_fourierTransform_obj_of_boundedConstructible Λ π π' Ψ b r
+      K.obj K.property
 
 end BoundedConstructible
 
