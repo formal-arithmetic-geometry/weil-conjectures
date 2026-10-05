@@ -26,13 +26,19 @@ mate, along the adjunctions `D(g'^*) ⊣ Rg'_*` and `D(g''^*) ⊣ Rg''_*`, of th
 derived base change isomorphism `D(g'^*) ⋙ Dj'_! ≅ Dj_! ⋙ D(g''^*)` for the extension by zero.
 Since the pullbacks are exact, this needs no monoidal structure on the coefficients.
 
-When `g''` is proper and the coefficients are torsion, this map should be an isomorphism; this
-is the key step in the proof of the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`.
+When `g''` is proper and the coefficients are torsion, this map is an isomorphism (stated, not
+yet proved); this is the key step in the proof of the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekLowerStarExchange`: the exchange map
   `Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*`.
+
+## Main results
+
+- `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring`:
+  with torsion coefficients `Λ` and `g''` proper, the exchange map is an isomorphism (not proved
+  yet; see its docstring).
 
 ## TODO
 
@@ -41,13 +47,10 @@ is the key step in the proof of the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ R
   `j_!` and so preserves K-injectives.
 - Prove that `D(j^*)` of the exchange map agrees with this base change isomorphism, once
   `j^* j_! ≅ 𝟭` and `j'^* j'_! ≅ 𝟭` are used to identify the sources and targets.
-- State and prove that the exchange map is an isomorphism when `g''` is proper. On `D⁺` with
-  torsion coefficients this is `thm:open-proper-interchange`. On unbounded derived categories it
-  also needs `Rg''_*` to have finite cohomological dimension, because étale topoi are not
-  left-complete in general, and that hypothesis still has to be designed. Proof plan: with `i`
-  the closed complement of `j`, check the claim after `D(j^*)` and after `D(i^*)`. After
-  `D(j^*)` it follows from the two items above. After `D(i^*)` both sides vanish; for the
-  target this uses proper base change for `g''` along `i`.
+- Prove the isomorphism statement
+  `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring`
+  along the plan in its docstring, using the two items above and
+  `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`.
 - Redefine `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationComparison` as
   this exchange map for the square `(𝟙 X, c.i, d.i, r.hom)`, whiskered by `R(d.g)_*` and
   composed with `R(𝟙 X)_* ≅ 𝟭` and `R(r.hom)_* ⋙ R(d.g)_* ≅ R(c.g)_*`. Its invertibility then
@@ -129,6 +132,36 @@ lemma openImmersionLowerShriekLowerStarExchange_app (hsq : IsPullback g' j' j g'
               (R((g')_*[A]).obj K) ≫
             D((j')_!open[A]).map ((mapDerivedUpperStarLowerStarAdjunction A g').counit.app K)) := by
   simp [openImmersionLowerShriekLowerStarExchange]
+
+variable (Λ : Type (u + 1)) [CommRing Λ]
+
+/-- **Extension by zero commutes with proper pushforward**: if the coefficient ring `Λ` is
+torsion as an additive group, then for a cartesian square `g' ≫ j = j' ≫ g''` of schemes with
+`j` and `j'` open immersions and `g''` proper, the exchange map
+`Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*` on the unbounded derived categories `D(-_ét, Λ)` is an
+isomorphism.
+
+The statement fails for general coefficients, which is why `Λ` is torsion here. With `Λ` torsion
+and `g''` proper it holds by the argument of
+`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`: the
+question is local on `Z`, and over a quasi-compact open of `Z` the proper map `g''` has bounded
+fibre dimension, so `Rg''_*` has finite cohomological dimension on torsion sheaves and the
+bounded below statement passes to unbounded complexes.
+
+Proof plan: with `i` the closed complement of `j`, it suffices to check the claim after `D(j^*)`
+and after `D(i^*)`.
+- After `D(j^*)` it follows from base change along the open immersion `j`,
+  `j^* Rg''_* ≅ Rg'_* j'^*`, once `j^* j_! ≅ 𝟭` and `j'^* j'_! ≅ 𝟭` identify both sides.
+- After `D(i^*)` both sides vanish: the source because `i^* j_! = 0`, and the target by proper
+  base change for `g''` along `i`, which is
+  `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`, since
+  the pullback of `j'_!` to the closed complement of `j'` vanishes.
+
+(blueprint: unbounded analogue of `thm:open-proper-interchange`) -/
+theorem isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring
+    (hΛ : IsAddTorsion Λ) [IsProper g''] (hsq : IsPullback g' j' j g'') :
+    IsIso (openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} Λ) hsq) :=
+  sorry
 
 end Etale
 
