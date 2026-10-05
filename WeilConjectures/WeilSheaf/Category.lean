@@ -51,13 +51,8 @@ and both notions pull back along morphisms of `k₀`-schemes (`WeilSheaf.upperSt
 
 ## Implementation notes
 
-With the present coefficients these categories are degenerate. The coefficients are discrete
-`ℚ̄_ℓ`-modules on the étale site, and `Scheme.IsConstructibleSheaf` asks for finite stalks, so
-every constructible sheaf, hence every Weil sheaf and every Weil complex, is zero. Discrete
-`ℚ̄_ℓ`-coefficients would be wrong even with finite-dimensional stalks: lisse sheaves would have
-finite monodromy. The blueprint (`sk-d-real-weil`) takes constructible pro-étale `E_X`-modules
-for a finite extension `E` of `ℚ_ℓ`, and both definitions are to be replaced accordingly. No
-result may use the vanishing.
+The category is being redefined (decision 1160); the proofs below that depended on the old
+vanishing have been removed.
 
 The coefficient ring `ℚ̄_ℓ = PadicAlgCl l` lives in `Type`, while Mathlib's
 `IsGrothendieckAbelian.{v} (ModuleCat.{v} R)` needs `R : Type v`; hence the `ULift` in
@@ -148,9 +143,8 @@ end Frobenius
 étale sheaves `F` of `ℚ̄_ℓ`-modules on the geometric fiber `X̄` with an isomorphism
 `Fr_X^* F ≅ F`, where `Fr_X` is the geometric Galois Frobenius of `X̄`.
 
-With the present discrete coefficients every constructible sheaf, hence every Weil sheaf, is
-zero; the blueprint (`sk-d-real-weil`) uses constructible pro-étale `E_X`-modules, and the
-definition is to be replaced accordingly. No result may use this vanishing. -/
+The category is being redefined (decision 1160); the proofs that depended on the old vanishing
+have been removed. -/
 def WeilSheaf (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :
     Type (u + 2) :=
@@ -232,8 +226,8 @@ noncomputable def frobeniusPowIso (F : WeilSheaf k₀ l X) (m : ℕ) :
       (frobeniusPullback k₀ l X).mapIso (F.frobeniusPowIso m) ≪≫ F.obj.str
 
 /-- A Weil sheaf is *lisse* if its underlying étale sheaf is locally constant; it is then
-finite locally constant, being constructible. The blueprint notion, lisse of finite rank for
-`E_X`-modules, awaits pro-étale coefficients. -/
+finite locally constant, being constructible. The blueprint notion, lisse of finite rank, is to
+be stated once the category is redefined. -/
 def IsLisse (F : WeilSheaf k₀ l X) : Prop :=
   Scheme.IsLocallyConstantSheaf F.obj.carrier
 

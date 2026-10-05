@@ -38,7 +38,7 @@ the blueprint.
 ## TODO
 
 - Prove the local boundary pairing and the boundary sequence, which are stated with `sorry`,
-  for the constructible pro-étale `E_X`-modules of the blueprint (`sk-d-real-weil`).
+  once the category is redefined (`sk-d-real-weil`).
 - The maps `g` and `h` of `AlgebraicGeometry.exists_exact_compactlySupportedCohomology_boundary`
   should be the maps induced by the canonical arrow `WeilSheaf.extensionByZeroToDirectImage j`
   from `j_!F` to `j_*F`. This needs the identification `H_c(U, F) ≅ H_c(C, j_!F)` and the

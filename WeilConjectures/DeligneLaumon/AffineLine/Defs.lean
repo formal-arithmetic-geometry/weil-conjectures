@@ -30,10 +30,8 @@ the repository yet. Geometric constancy asks that the underlying étale sheaf be
 every connected open of the geometric fiber `Ū = U ⊗ k̄`. Being unramified at infinity asks
 that the sheaf extend to a lisse Weil sheaf on `U₀ ∪ {∞} ⊆ ℙ¹_{k₀}`.
 
-Both conditions are vacuous for now: with the present coefficients every Weil sheaf is zero
-(see `WeilConjectures.WeilSheaf.Category`), so every Weil sheaf is geometrically constant and
-unramified at infinity, and a hypothesis using either condition carries no content. They gain
-their meaning once Weil sheaves are constructible pro-étale `E_X`-modules (`sk-d-real-weil`).
+The category is being redefined (decision 1160); the proofs below that depended on the old
+vanishing have been removed.
 
 ## Main declarations
 

@@ -78,13 +78,13 @@ form in which the coefficients `AlgebraicGeometry.WeilCoefficients` take stalks.
 `ULift ℚ̄_ℓ` is made a `ℚ̄_ℓ`-module by restriction of scalars
 (`AlgebraicGeometry.WeilCoefficients.toModuleCat`).
 
-With the present discrete coefficients every Weil sheaf is zero (see the implementation notes
-of `WeilConjectures.WeilSheaf.Category`); no result of this file may use this vanishing.
+The category is being redefined (decision 1160); the proofs below that depended on the old
+vanishing have been removed.
 
 ## TODO
 
-Prove, for the constructible pro-étale `E_X`-modules of the blueprint (`sk-d-real-weil`), the
-statements of this file stated with `sorry`: the finiteness of stalks and global sections, the
+Prove, once the category is redefined (`sk-d-real-weil`), the statements of this file stated
+with `sorry`: the finiteness of stalks and global sections, the
 independence of the local Frobenius of the geometric point, the comparison of the trace function
 with the local Frobenius, the compatibility of restriction to a stalk with the Frobenius, and
 the detection of nonzero sheaves by stalks at closed points.

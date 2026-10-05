@@ -111,8 +111,7 @@ hypercohomology spectral sequence
 (`AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.of_openClosed`,
 `AlgebraicGeometry.HasDirectImageComplexWeightBound.of_openClosed`,
 `AlgebraicGeometry.HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek`) need
-`AlgebraicGeometry.WeilComplex` to be the triangulated Verdier localization of `sk-d-real-weil`;
-pro-étale coefficients alone do not suffice for them.
+`AlgebraicGeometry.WeilComplex` to be the triangulated Verdier localization of `sk-d-real-weil`.
 -/
 
 section OpenClosed

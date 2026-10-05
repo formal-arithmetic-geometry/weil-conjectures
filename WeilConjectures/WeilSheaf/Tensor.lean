@@ -68,7 +68,7 @@ end WeilCoefficients
 
 namespace WeilSheaf
 
--- TODO: prove for the constructible `E_X`-modules of the blueprint (`sk-d-real-operations`)
+-- TODO: prove once the category is redefined (`sk-d-real-operations`)
 /-- The tensor product of the underlying sheaves of two Weil sheaves is constructible: tensor
 products of constructible sheaves are constructible. -/
 theorem isConstructibleSheaf_tensorObj (F G : WeilSheaf k₀ l X) :

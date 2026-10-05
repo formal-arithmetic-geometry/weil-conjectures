@@ -74,7 +74,7 @@ noncomputable def dualStr (F : WeilSheaf k₀ l X) :
     ((MonoidalClosed.internalHom.mapIso F.obj.str.op).app _).symm ≪≫
     (ihom F.obj.carrier).mapIso (Functor.Monoidal.εIso _).symm
 
--- TODO: prove for the constructible `E_X`-modules of the blueprint (`sk-d-real-operations`)
+-- TODO: prove once the category is redefined (`sk-d-real-operations`)
 /-- The internal hom `[F, ℚ̄_ℓ]` out of the underlying sheaf of a Weil sheaf `F` into the unit
 sheaf is constructible: internal homs of constructible sheaves are constructible. -/
 theorem isConstructibleSheaf_ihom (F : WeilSheaf k₀ l X) :

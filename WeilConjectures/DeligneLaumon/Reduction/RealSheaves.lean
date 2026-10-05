@@ -48,7 +48,7 @@ testing for geometric irreducibility below.
 
 Prove `AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`
 and `AlgebraicGeometry.WeilSheaf.IsReal.isMixed`, stated with `sorry`, along the reduction above,
-for the constructible pro-étale `E_X`-modules of the blueprint (`sk-d-real-weil`).
+once the category is redefined (`sk-d-real-weil`).
 
 ## References
 
