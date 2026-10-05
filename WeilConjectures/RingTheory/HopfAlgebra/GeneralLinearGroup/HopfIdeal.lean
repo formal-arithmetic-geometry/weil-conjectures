@@ -7,9 +7,14 @@ module
 
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.GroupTheory.Commutator.Basic
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 public import Mathlib.RingTheory.Jacobson.Ring
+public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.HopfAlgebra.Quotient
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
+public import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
+public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
 
 /-!
@@ -50,6 +55,10 @@ Finally, the identity component and the centre of `V(I)` are described by Hopf i
 - `Matrix.GeneralLinearGroup.zeroLocus_vanishingIdeal_le_normalizer`,
   `Matrix.GeneralLinearGroup.commutator_zeroLocus_vanishingIdeal_le`: Zariski closure preserves
   normalizing and commutator inclusions between subgroups of `GL n k`.
+- `Matrix.GeneralLinearGroup.IsConnected.isPrime`: in characteristic zero, a connected matrix
+  group is irreducible, by Cartier's lemma; and
+  `Matrix.GeneralLinearGroup.eq_of_le_of_ringKrullDim_eq`: a closed subgroup of an irreducible
+  matrix group of the same dimension is the whole group.
 
 ## Blueprint
 
@@ -58,6 +67,8 @@ Finally, the identity component and the centre of `V(I)` are described by Hopf i
 - `sk-i-restriction`: the Zariski closure of a subgroup of `GL n k` is an algebraic group, and
   closure preserves normalizing and commutator inclusions.
 - `sk-p-geometry`: the identity component is cut out by a Hopf ideal.
+- `lem-wf-same-lie-closed-subgroup` (clause (1)), `lem-ag-equal-dimension-subgroup`: connected
+  matrix groups are irreducible; equal dimension forces equality.
 -/
 
 @[expose] public section
@@ -392,6 +403,134 @@ theorem mem_zeroLocus_center_iff (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal
   · rintro ⟨hg, hc⟩
     exact subset_zeroLocus_vanishingIdeal _
       ⟨hg, Subgroup.mem_centralizer_iff.2 fun h hh ↦ (hc h hh).symm⟩
+
+/-! ### Cartier's lemma: connected matrix groups are irreducible
+
+By Cartier's lemma (`HopfAlgebra.isPrime_iInf_pow_ker`), in characteristic zero the functions on
+`V(I)` vanishing near a `k`-point `c` form a prime ideal, contained in every prime of `V(I)` through
+`c`: a single irreducible component passes through each point. -/
+
+section Cartier
+
+/-- The ideal of the functions on `GL_n` whose restriction to `V(I)` vanishes near the point `c`
+of `V(I)`. -/
+private noncomputable abbrev localVanishing (I : Ideal (CoordinateRing n k))
+    (c : CoordinateRing n k ⧸ I →ₐ[k] k) : Ideal (CoordinateRing n k) :=
+  (⨅ r : ℕ, RingHom.ker c ^ r).comap (Ideal.Quotient.mk I)
+
+private theorem localVanishing_le [CharZero k] (I : Ideal (CoordinateRing n k))
+    (c : CoordinateRing n k ⧸ I →ₐ[k] k) {q : Ideal (CoordinateRing n k)} [q.IsPrime] (hIq : I ≤ q)
+    (hq : q ≤ RingHom.ker (c.comp (Ideal.Quotient.mkₐ k I))) : localVanishing I c ≤ q := by
+  intro a ha
+  have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
+  obtain ⟨t, ht, hta⟩ := AlgHom.mem_iInf_pow_ker_iff.1 (Ideal.mem_comap.1 ha)
+  obtain ⟨t, rfl⟩ := Ideal.Quotient.mk_surjective t
+  rw [← map_mul, Ideal.Quotient.eq_zero_iff_mem] at hta
+  refine ((‹q.IsPrime›.mem_or_mem (hIq hta)).resolve_left fun htq ↦ ?_)
+  have := hq htq
+  rw [RingHom.mem_ker, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk, ht] at this
+  exact one_ne_zero this
+
+private theorem le_localVanishing (I : Ideal (CoordinateRing n k))
+    (c : CoordinateRing n k ⧸ I →ₐ[k] k) : I ≤ localVanishing I c := fun a ha ↦ by
+  rw [Ideal.mem_comap, Ideal.Quotient.eq_zero_iff_mem.2 ha]
+  exact zero_mem _
+
+private theorem localVanishing_le_ker (I : Ideal (CoordinateRing n k))
+    (c : CoordinateRing n k ⧸ I →ₐ[k] k) :
+    localVanishing I c ≤ RingHom.ker (c.comp (Ideal.Quotient.mkₐ k I)) := fun a ha ↦ by
+  have := (Submodule.mem_iInf _).1 (Ideal.mem_comap.1 ha) 1
+  rw [pow_one] at this
+  exact this
+
+private theorem localVanishing_mem_minimalPrimes [CharZero k] (I : Ideal (CoordinateRing n k))
+    [I.IsHopfIdeal k] (c : CoordinateRing n k ⧸ I →ₐ[k] k) :
+    localVanishing I c ∈ I.minimalPrimes := by
+  have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
+  have : (localVanishing I c).IsPrime :=
+    Ideal.IsPrime.comap _ (hK := HopfAlgebra.isPrime_iInf_pow_ker c)
+  refine ⟨⟨this, le_localVanishing I c⟩, fun q ⟨hq, hIq⟩ hqP ↦ ?_⟩
+  exact localVanishing_le I c hIq (hqP.trans (localVanishing_le_ker I c))
+
+/-- **A connected matrix group is irreducible**: in characteristic zero, over an algebraically
+closed field, the ideal of a connected closed subgroup `V(I)` of `GL_n` is prime.
+
+By Cartier's lemma the functions vanishing near a point `c` of `V(I)` form a prime ideal, contained
+in every prime of `V(I)` through `c`: a single irreducible component passes through each point,
+so the irreducible components of `V(I)` are pairwise disjoint, and the connected `V(I)` has only
+one. (blueprint: `lem-wf-same-lie-closed-subgroup`, clause (1)) -/
+theorem IsConnected.isPrime [IsAlgClosed k] [CharZero k] {I : Ideal (CoordinateRing n k)}
+    [I.IsHopfIdeal k] (hconn : IsConnected I) : I.IsPrime := by
+  have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
+  set e := Bialgebra.counitAlgHom k (CoordinateRing n k ⧸ I)
+  set P := localVanishing I e
+  have hPmin := localVanishing_mem_minimalPrimes I e
+  have hP : P.IsPrime := hPmin.1.1
+  -- a minimal prime meeting `V(P)` is `P`
+  have key (Q : Ideal (CoordinateRing n k)) (hQ : Q ∈ I.minimalPrimes)
+      (x : PrimeSpectrum (CoordinateRing n k)) (hQx : Q ≤ x.asIdeal) (hPx : P ≤ x.asIdeal) :
+      Q = P := by
+    obtain ⟨M, hM, hxM⟩ := x.asIdeal.exists_le_maximal x.2.ne_top
+    obtain ⟨φ, hφ⟩ := exists_algHom_ker_eq_of_isMaximal k (CoordinateRing n k) M
+    have hIM : I ≤ RingHom.ker φ := hφ ▸ hQ.1.2.trans (hQx.trans hxM)
+    let c : CoordinateRing n k ⧸ I →ₐ[k] k := Ideal.Quotient.liftₐ I φ fun a ha ↦ hIM ha
+    have hc : RingHom.ker (c.comp (Ideal.Quotient.mkₐ k I)) = M := by
+      rw [← hφ]
+      congr 1
+    have : Q.IsPrime := hQ.1.1
+    have h1 : localVanishing I c ≤ Q :=
+      localVanishing_le I c hQ.1.2 (hc ▸ hQx.trans hxM)
+    have h2 : localVanishing I c ≤ P := localVanishing_le I c hPmin.1.2 (hc ▸ hPx.trans hxM)
+    have hc' := localVanishing_mem_minimalPrimes I c
+    exact (le_antisymm (hQ.2 hc'.1 h1) h1).trans (le_antisymm (hPmin.2 hc'.1 h2) h2).symm
+  have h1 : toPrimeSpectrum (1 : GL n k) ∈ PrimeSpectrum.zeroLocus (P : Set (CoordinateRing n k)) :=
+    fun b hb ↦ by
+      have hb' := localVanishing_le_ker I e hb
+      rw [RingHom.mem_ker, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk,
+        Bialgebra.counitAlgHom_apply, Bialgebra.Quotient.counit_mk] at hb'
+      exact hb'
+  have h1I : toPrimeSpectrum (1 : GL n k) ∈
+      PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)) :=
+    PrimeSpectrum.zeroLocus_anti_mono (le_localVanishing I e) h1
+  set W := ⋃ Q ∈ {Q | Q ∈ I.minimalPrimes ∧ Q ≠ P},
+    PrimeSpectrum.zeroLocus (Q : Set (CoordinateRing n k))
+  have hW : IsClosed W :=
+    ((Ideal.finite_minimalPrimes_of_isNoetherianRing _ I).subset fun Q hQ ↦ hQ.1).isClosed_biUnion
+      fun Q _ ↦ PrimeSpectrum.isClosed_zeroLocus _
+  set C := connectedComponentIn (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))
+    (toPrimeSpectrum 1)
+  have hcover : C ⊆ PrimeSpectrum.zeroLocus (P : Set (CoordinateRing n k)) ∪ W := fun x hx ↦ by
+    have hxI := (PrimeSpectrum.mem_zeroLocus _ _).1 (connectedComponentIn_subset _ _ hx)
+    obtain ⟨Q, hQ, hQx⟩ := Ideal.exists_minimalPrimes_le (J := x.asIdeal) hxI
+    by_cases hQP : Q = P
+    · subst hQP
+      exact Or.inl hQx
+    · exact Or.inr (Set.mem_biUnion (x := Q) ⟨hQ, hQP⟩ hQx)
+  have hdisj : C ∩ (PrimeSpectrum.zeroLocus (P : Set (CoordinateRing n k)) ∩ W) = ∅ := by
+    refine Set.eq_empty_iff_forall_notMem.2 fun x ⟨_, hPx, hWx⟩ ↦ ?_
+    obtain ⟨Q, ⟨hQ, hQP⟩, hQx⟩ := Set.mem_iUnion₂.1 hWx
+    exact hQP (key Q hQ x hQx hPx)
+  have hC1 : toPrimeSpectrum 1 ∈ C := mem_connectedComponentIn h1I
+  have hCP : C ⊆ PrimeSpectrum.zeroLocus (P : Set (CoordinateRing n k)) :=
+    ((isPreconnected_iff_subset_of_disjoint_closed.1 isPreconnected_connectedComponentIn) _ _
+      (PrimeSpectrum.isClosed_zeroLocus _) hW hcover hdisj).resolve_right fun hCW ↦
+        (Set.eq_empty_iff_forall_notMem.1 hdisj) _ ⟨hC1, h1, hCW hC1⟩
+  have hPI : P ≤ I := fun a ha ↦ by
+    rw [← hconn]
+    exact (PrimeSpectrum.mem_vanishingIdeal _ _).2 fun x hx ↦ hCP hx ha
+  rw [le_antisymm (le_localVanishing I e) hPI]
+  exact hP
+
+/-- **A closed subgroup of full dimension is everything**: if `V(I)` is irreducible and
+`V(J) ⊆ V(I)` has the same dimension, then `J = I`. (blueprint: `lem-ag-equal-dimension-subgroup`)
+-/
+theorem eq_of_le_of_ringKrullDim_eq (I : Ideal (CoordinateRing n k)) [I.IsPrime]
+    {J : Ideal (CoordinateRing n k)} (hIJ : I ≤ J)
+    (h : ringKrullDim (CoordinateRing n k ⧸ J) = ringKrullDim (CoordinateRing n k ⧸ I)) :
+    J = I :=
+  Ideal.eq_of_le_of_ringKrullDim_quotient_eq hIJ (ringKrullDim_ne_top_of_finiteType k _) h
+
+end Cartier
 
 end Field
 

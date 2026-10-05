@@ -5,10 +5,12 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import Mathlib.RepresentationTheory.Semisimple
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie
+public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 
 /-!
 # The Lie algebras of the closed subgroup schemes of `GL_n`
@@ -45,6 +47,14 @@ development only has in Hopf-ideal form, and to the matrix description of the po
 - `AlgebraicGeometry.GeneralLinearGroup.lieAlgebraMap_identityComponent_bijective`,
   `AlgebraicGeometry.GeneralLinearGroup.finrank_lie_eq_ringKrullDim`: the Lie algebra only sees
   the reduced identity component and has the dimension of the group (Cartier's theorem).
+- `AlgebraicGeometry.GeneralLinearGroup.dualUnit_mem_zeroLocus_identityComponent`,
+  `AlgebraicGeometry.GeneralLinearGroup.mem_range_dualCotangentToMatrixₗ`,
+  `AlgebraicGeometry.GeneralLinearGroup.finrank_cotangent_eq_finrank_range_dualCotangentToMatrixₗ`:
+  the matrix form of these clauses of Cartier's theorem, for the points `1 + εX` of `V(I)` over the
+  dual numbers: in characteristic zero they are points of the reduced identity component, and they
+  are the dual of the cotangent space `𝔪/𝔪²` of `k[GL_n] ⧸ I` at the identity.
+- `AlgebraicGeometry.GeneralLinearGroup.eq_of_le_of_bijective_lieAlgebraMap`: a closed subgroup
+  of a connected matrix group with the same Lie algebra is the whole group.
 - `AlgebraicGeometry.GeneralLinearGroup.invariant_iff_differential_invariant`,
   `AlgebraicGeometry.GeneralLinearGroup.range_lieAlgebraMap_center`: the group–Lie comparison.
 
@@ -99,11 +109,76 @@ section Cartier
 variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [Field k]
   (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
 
+/-- The point `1 + εX` of `GL_n` with values in the dual numbers reduces to the identity modulo
+`ε`: as an algebra map on the coordinate ring, its reduction is the counit. -/
+theorem fst_comp_evalAlgHom_dualUnit (X : Matrix n n k) :
+    (fstHom k k k).comp (evalAlgHom (dualUnit X)) =
+      Bialgebra.counitAlgHom k (CoordinateRing n k) := by
+  rw [← evalAlgHom_map, map_fstHom_dualUnit]
+  rfl
+
+/-- In characteristic zero, every tangent vector of `G = V(I)` is tangent to the reduced identity
+component, in matrix form: a point `1 + εX` of `V(I)` with values in the dual numbers is a point
+of `V(identityComponent I)`.
+
+`identityComponent I` is the ideal of the *reduced* identity component. By Cartier's lemma
+(`Bialgebra.isPrime_iInf_pow_ker_counitAlgHom`) the functions on `G` vanishing near the identity
+form a prime ideal `P`, so `V(P)` is an irreducible closed subset of `V(I)` through the identity,
+contained in the identity component. A function vanishing on the identity component thus lies
+in `P`, hence vanishes in the local ring at the identity and on every tangent vector there.
+(blueprint: `lem-wf-same-lie-closed-subgroup`, clause (3)) -/
+theorem dualUnit_mem_zeroLocus_identityComponent [IsAlgClosed k] [CharZero k] {X : Matrix n n k}
+    (hX : dualUnit X ∈ zeroLocus I (DualNumber k)) :
+    dualUnit X ∈ zeroLocus (identityComponent I) (DualNumber k) := by
+  rw [mem_zeroLocus] at hX ⊢
+  intro a ha
+  set B := CoordinateRing n k ⧸ I
+  set P := ⨅ r : ℕ, RingHom.ker (Bialgebra.counitAlgHom k B) ^ r
+  have hP : P.IsPrime := Bialgebra.isPrime_iInf_pow_ker_counitAlgHom k B
+  set P' := P.comap (Ideal.Quotient.mk I)
+  have hP' : P'.IsPrime := Ideal.IsPrime.comap _ (hK := hP)
+  have hIP : I ≤ P' := fun b hb ↦ by
+    rw [Ideal.mem_comap, Ideal.Quotient.eq_zero_iff_mem.2 hb]
+    exact zero_mem _
+  have h1 : toPrimeSpectrum (1 : GL n k) ∈
+      PrimeSpectrum.zeroLocus (P' : Set (CoordinateRing n k)) := fun b hb ↦ by
+    have hb' : Ideal.Quotient.mk I b ∈ RingHom.ker (Bialgebra.counitAlgHom k B) := by
+      have := (Submodule.mem_iInf _).1 (Ideal.mem_comap.1 hb) 1
+      rwa [pow_one] at this
+    rw [RingHom.mem_ker, Bialgebra.counitAlgHom_apply, Bialgebra.Quotient.counit_mk] at hb'
+    exact hb'
+  have hsub : PrimeSpectrum.zeroLocus (P' : Set (CoordinateRing n k)) ⊆
+      connectedComponentIn (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))
+        (toPrimeSpectrum 1) :=
+    (IsPreirreducible.isPreconnected ((PrimeSpectrum.isIrreducible_zeroLocus_iff P').2
+      (by rw [hP'.radical]; exact hP')).2).subset_connectedComponentIn h1
+        (PrimeSpectrum.zeroLocus_anti_mono hIP)
+  have haP : Ideal.Quotient.mk I a ∈ P := by
+    have := PrimeSpectrum.vanishingIdeal_anti_mono hsub ha
+    rwa [PrimeSpectrum.vanishingIdeal_zeroLocus_eq_radical, hP'.radical] at this
+  have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
+  obtain ⟨s, hs, hsa⟩ := AlgHom.mem_iInf_pow_ker_iff.1 haP
+  let φ : B →ₐ[k] DualNumber k := Ideal.Quotient.liftₐ I (evalAlgHom (dualUnit X)) hX
+  have hφ : (fstHom k k k).comp φ = Bialgebra.counitAlgHom k B := by
+    refine Ideal.Quotient.algHom_ext _ ?_
+    rw [AlgHom.comp_assoc]
+    exact fst_comp_evalAlgHom_dualUnit X
+  have hunit : IsUnit (φ s) := by
+    rw [TrivSqZeroExt.isUnit_iff_isUnit_fst]
+    have := congrArg (· s) hφ
+    simp only [AlgHom.comp_apply, fstHom_apply] at this
+    rw [this, hs]
+    exact isUnit_one
+  have h := congrArg φ hsa
+  rw [map_mul, map_zero] at h
+  exact (hunit.mul_right_eq_zero).1 h
+
 /-- In characteristic zero, every tangent vector of `G = V(I)` is tangent to the reduced identity
 component `V(identityComponent I)`: the differential `Lie(G°) → Lie(G)` is bijective.
 
 `CharZero` is needed because `identityComponent I` is the ideal of the *reduced* identity
-component. Proof sketch (not formalised): by Cartier's theorem
+component. The matrix form, for the points `1 + εX` of `V(I)` over the dual numbers, is
+`dualUnit_mem_zeroLocus_identityComponent`. Proof sketch (not formalised): by Cartier's theorem
 (`AlgebraicGeometry.GrpObj.isReduced_of_charZero`) `V(I)` is reduced, so the open identity
 component `AlgebraicGeometry.GrpObj.identityComponent (subgroupScheme I)`, whose differential is
 bijective by `AlgebraicGeometry.GrpObj.differential_identityComponentι_bijective`, is the reduced
@@ -128,6 +203,102 @@ theorem finrank_lie_eq_ringKrullDim [CharZero k] :
       ringKrullDim (CoordinateRing n k ⧸ I) :=
   (GrpObj.finrank_lie_eq_topologicalKrullDim (subgroupScheme I)).trans
     (PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim (CoordinateRing n k ⧸ I))
+
+/-- A closed subgroup `V(J)` of a connected matrix group `V(I)` with the same Lie algebra is all of
+`V(I)`, in characteristic zero: the Lie algebras have the dimensions of the groups
+(`finrank_lie_eq_ringKrullDim`), and `V(I)` is irreducible
+(`Matrix.GeneralLinearGroup.IsConnected.isPrime`).
+(blueprint: `lem-wf-same-lie-closed-subgroup`, clause (1)) -/
+theorem eq_of_le_of_bijective_lieAlgebraMap [IsAlgClosed k] [CharZero k] (hconn : IsConnected I)
+    {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k] (hIJ : I ≤ J)
+    (h : Function.Bijective (lieAlgebraMap hIJ)) : J = I := by
+  have := hconn.isPrime
+  refine eq_of_le_of_ringKrullDim_eq I hIJ ?_
+  rw [← finrank_lie_eq_ringKrullDim J, ← finrank_lie_eq_ringKrullDim I,
+    (LieEquiv.ofBijective _ h).toLinearEquiv.finrank_eq]
+
+/-! #### The tangent space at the identity, in matrices
+
+The points `1 + εX` of `V(I)` over the dual numbers are the linear forms on the cotangent space
+`𝔪/𝔪²` of the coordinate ring `k[GL_n] ⧸ I` at the identity: `X i j = ψ (x_ij - δ_ij)`. -/
+
+local notation "𝔪" => RingHom.ker (Bialgebra.counitAlgHom k (CoordinateRing n k ⧸ I))
+
+/-- The tangent vector `X ∈ gl_n` of a linear form `ψ` on the cotangent space at the identity of
+`V(I)`: `X i j = ψ (x_ij - δ_ij)`. -/
+noncomputable def dualCotangentToMatrix (ψ : Module.Dual k (𝔪).Cotangent) : Matrix n n k :=
+  Matrix.of fun i j ↦ (Bialgebra.counitAlgHom k (CoordinateRing n k ⧸ I)).cotangentDerivation ψ
+    (Ideal.Quotient.mk I (coord n k i j))
+
+/-- The point `1 + εX_ψ` of `V(I)` is the dual-number point of the tangent vector `ψ`. -/
+theorem evalAlgHom_dualUnit_dualCotangentToMatrix (ψ : Module.Dual k (𝔪).Cotangent) :
+    evalAlgHom (k := k) (R := DualNumber k) (dualUnit (dualCotangentToMatrix I ψ)) =
+      ((Bialgebra.counitAlgHom k (CoordinateRing n k ⧸ I)).toDualNumber ψ).comp
+        (Ideal.Quotient.mkₐ k I) := by
+  refine algHom_ext fun i j ↦ ?_
+  rw [evalAlgHom_coord, coe_dualUnit, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk]
+  refine TrivSqZeroExt.ext ?_ ?_
+  · rw [AlgHom.fst_toDualNumber, Bialgebra.counitAlgHom_apply, Bialgebra.Quotient.counit_mk]
+    rw [counit_coord]
+    simp [Matrix.one_apply, apply_ite TrivSqZeroExt.fst]
+  · rw [AlgHom.snd_toDualNumber]
+    simp [Matrix.one_apply, apply_ite TrivSqZeroExt.snd, dualCotangentToMatrix]
+
+theorem dualUnit_dualCotangentToMatrix_mem_zeroLocus (ψ : Module.Dual k (𝔪).Cotangent) :
+    dualUnit (dualCotangentToMatrix I ψ) ∈ zeroLocus I (DualNumber k) :=
+  mem_zeroLocus.2 fun a ha ↦ by
+    rw [evalAlgHom_dualUnit_dualCotangentToMatrix, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk,
+      Ideal.Quotient.eq_zero_iff_mem.2 ha, map_zero]
+
+/-- `ψ ↦ X_ψ`, from the dual of the cotangent space of `k[GL_n] ⧸ I` at the identity to `gl_n`,
+as a linear map. -/
+noncomputable def dualCotangentToMatrixₗ : Module.Dual k (𝔪).Cotangent →ₗ[k] Matrix n n k where
+  toFun := dualCotangentToMatrix I
+  map_add' _ _ := rfl
+  map_smul' _ _ := rfl
+
+@[simp]
+theorem dualCotangentToMatrixₗ_apply (ψ : Module.Dual k (𝔪).Cotangent) :
+    dualCotangentToMatrixₗ I ψ = dualCotangentToMatrix I ψ :=
+  rfl
+
+theorem dualCotangentToMatrixₗ_injective : Function.Injective (dualCotangentToMatrixₗ I) :=
+  fun ψ ψ' h ↦ by
+    have h' := congrArg (fun X : Matrix n n k ↦
+      evalAlgHom (k := k) (R := DualNumber k) (dualUnit X)) h
+    simp only [dualCotangentToMatrixₗ_apply, evalAlgHom_dualUnit_dualCotangentToMatrix] at h'
+    exact AlgHom.toDualNumber_injective (Ideal.Quotient.algHom_ext k h')
+
+/-- The tangent vectors of `V(I)` at the identity, as matrices, are exactly the `X ∈ gl_n` with
+`1 + εX ∈ V(I)`: the range of `ψ ↦ X_ψ`. -/
+theorem mem_range_dualCotangentToMatrixₗ {X : Matrix n n k} :
+    X ∈ LinearMap.range (dualCotangentToMatrixₗ I) ↔ dualUnit X ∈ zeroLocus I (DualNumber k) := by
+  refine ⟨?_, fun hX ↦ ?_⟩
+  · rintro ⟨ψ, rfl⟩
+    exact dualUnit_dualCotangentToMatrix_mem_zeroLocus I ψ
+  · let φ : (CoordinateRing n k ⧸ I) →ₐ[k] DualNumber k :=
+      Ideal.Quotient.liftₐ I (evalAlgHom (k := k) (R := DualNumber k) (dualUnit X))
+        (mem_zeroLocus.1 hX)
+    have hφ : (fstHom k k k).comp φ = Bialgebra.counitAlgHom k _ := by
+      refine Ideal.Quotient.algHom_ext _ ?_
+      rw [AlgHom.comp_assoc]
+      exact fst_comp_evalAlgHom_dualUnit _
+    refine ⟨(Bialgebra.counitAlgHom k _).cotangentForm φ hφ, ?_⟩
+    ext i j
+    change dualCotangentToMatrix I _ i j = _
+    rw [dualCotangentToMatrix, Matrix.of_apply]
+    rw [← AlgHom.snd_toDualNumber, AlgHom.toDualNumber_cotangentForm]
+    simp [φ, coe_dualUnit, Matrix.one_apply, apply_ite TrivSqZeroExt.snd]
+
+/-- The dimension of the cotangent space of `k[GL_n] ⧸ I` at the identity is the dimension of
+the space of matrices `X` with `1 + εX ∈ V(I)`. -/
+theorem finrank_cotangent_eq_finrank_range_dualCotangentToMatrixₗ :
+    Module.finrank k (𝔪).Cotangent =
+      Module.finrank k (LinearMap.range (dualCotangentToMatrixₗ I)) := by
+  have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
+  have := (Bialgebra.counitAlgHom k (CoordinateRing n k ⧸ I)).finiteDimensional_cotangent
+  rw [LinearMap.finrank_range_of_inj (dualCotangentToMatrixₗ_injective I),
+    Subspace.dual_finrank_eq]
 
 end Cartier
 

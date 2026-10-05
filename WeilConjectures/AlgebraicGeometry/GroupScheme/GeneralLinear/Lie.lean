@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Lie.Matrix
 public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
+public import WeilConjectures.Mathlib.Algebra.DualNumber
 
 /-!
 # The Lie algebra of `GL_n` and rational representations
@@ -76,7 +77,26 @@ of `GL_n` with values in `k[ε]` corresponding to the tangent vector `X ∈ gl_n
 (blueprint: `sk-d-tangent`) -/
 noncomputable def dualUnit {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [CommRing k]
     (X : Matrix n n k) : GL n (DualNumber k) :=
-  ⟨1 + X.map inr, 1 - X.map inr, by sorry, by sorry⟩
+  ⟨1 + X.map inr, 1 - X.map inr,
+    by rw [add_mul, one_mul, mul_sub, mul_one, Matrix.map_inr_mul_map_inr, sub_zero,
+      sub_add_cancel],
+    by rw [sub_mul, one_mul, mul_add, mul_one, Matrix.map_inr_mul_map_inr, add_zero,
+      add_sub_cancel_right]⟩
+
+theorem coe_dualUnit {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [CommRing k]
+    (X : Matrix n n k) : (dualUnit X : Matrix n n (DualNumber k)) = 1 + X.map inr :=
+  rfl
+
+/-- The matrix `1 + εX` reduces to the identity modulo `ε`. -/
+@[simp]
+theorem map_fstHom_dualUnit {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [CommRing k]
+    (X : Matrix n n k) :
+    Matrix.GeneralLinearGroup.map (fstHom k k k).toRingHom (dualUnit X) = 1 := by
+  refine Units.ext (Matrix.ext fun i j ↦ ?_)
+  change ((1 + X.map inr : Matrix n n (DualNumber k)) i j).fst = (1 : Matrix n n k) i j
+  rw [Matrix.add_apply, fst_add, Matrix.map_apply, fst_inr, add_zero, Matrix.one_apply,
+    Matrix.one_apply]
+  split_ifs <;> rfl
 
 /-- The matrix of a tangent vector of `GL_n`: the infinitesimal point `1 + εX` goes to `X`. -/
 noncomputable def toMatrix (x : GrpObj.Lie 𝔾𝕃(n; k)) : Matrix n n k :=
