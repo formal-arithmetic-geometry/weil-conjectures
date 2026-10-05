@@ -26,9 +26,7 @@ curve sections on which each constituent becomes pure of a weight independent of
 mixedness then descends along finite constant extensions and is spliced back along the open–closed
 sequence.
 
-The category is being redefined (decision 1160); the proofs below that depended on the old
-vanishing have been removed. The geometric and group-theoretic inputs of the reduction are
-stated and proved separately:
+The geometric and group-theoretic inputs of the reduction are stated and proved separately:
 `AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback` (Bertini),
 `Representation.exists_forall_isIrreducible_baseChange_of_congr` (finite matrix witnesses) and
 `Representation.exists_filtration_isIrreducible_restrict` (geometric constituents), and curve
@@ -45,6 +43,12 @@ testing for geometric irreducibility below.
   blueprint `lem-zl-curve-testing-irreducibility`.
 - `AlgebraicGeometry.WeilSheaf.IsReal.isMixed`: blueprint `sk-i-dl-general-real` and
   `thm-zl-real-mixed-by-curves`.
+
+## TODO
+
+Prove `AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`
+and `AlgebraicGeometry.WeilSheaf.IsReal.isMixed`, stated with `sorry`, along the reduction above,
+for the constructible pro-étale `E_X`-modules of the blueprint (`sk-d-real-weil`).
 
 ## References
 

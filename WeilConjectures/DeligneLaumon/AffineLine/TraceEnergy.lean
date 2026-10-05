@@ -54,9 +54,13 @@ passing to the normalized real envelope `N⁰ ⊕ (N⁰)^∨` of the constant tw
 
 ## Implementation notes
 
-The category is being redefined (decision 1160); the proofs below that depended on the old
-vanishing have been removed. The analytic part (the `L²`-weight, its radius characterisation
-and the energy bound) is proved in general.
+The analytic part (the `L²`-weight, its radius characterisation and the energy bound) is proved
+in general. The inputs about Weil sheaves are stated with `sorry`: the traces of twists,
+envelopes and tensor products, the purity and reality of the envelope, its nonvanishing and
+lisseness, the trace energy bound from an upper weight bound, the comparison of the trace
+energies of `M` and `j_*M`, and the `L²`-rigidity for real sheaves. With the present
+coefficients every Weil sheaf is zero (see `WeilConjectures.WeilSheaf.Category`); none of these
+statements may be proved from that.
 -/
 
 @[expose] public section
@@ -318,6 +322,24 @@ envelope is `ι`-real (`AlgebraicGeometry.WeilSheaf.isReal_realEnvelope`).
 noncomputable def realEnvelope (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) : WeilSheaf k₀ l X :=
   F.constantTwist b ⊞ (F.constantTwist b).dual
 
+/-- The constant twist of a nonzero Weil sheaf is nonzero: twisting by the invertible Weil line
+`𝓑_b` is an equivalence, with inverse the twist by `b⁻¹`. -/
+theorem not_isZero_constantTwist {F : WeilSheaf k₀ l X} (hF : ¬ Limits.IsZero F)
+    (b : (PadicAlgCl l)ˣ) : ¬ Limits.IsZero (F.constantTwist b) :=
+  sorry
+
+/-- The envelope of a nonzero Weil sheaf is nonzero: it contains the nonzero constant twist
+`F ⊗ 𝓑_b` as a summand. -/
+theorem not_isZero_realEnvelope {F : WeilSheaf k₀ l X} (hF : ¬ Limits.IsZero F)
+    (b : (PadicAlgCl l)ˣ) : ¬ Limits.IsZero (F.realEnvelope b) :=
+  fun h ↦ not_isZero_constantTwist hF b (h.of_mono (Limits.biprod.inl :
+    F.constantTwist b ⟶ F.constantTwist b ⊞ (F.constantTwist b).dual))
+
+/-- The envelope of a lisse Weil sheaf is lisse, as a sum of a constant twist and its dual. -/
+theorem IsLisse.realEnvelope {F : WeilSheaf k₀ l X} (hF : F.IsLisse) (b : (PadicAlgCl l)ˣ) :
+    (F.realEnvelope b).IsLisse :=
+  (hF.constantTwist b).biprod (hF.constantTwist b).dual
+
 /-- If `F` is lisse and punctually `ι`-pure of weight `w` and `2 log_q |ι b| = c`, then the
 constant twist `F ⊗ 𝓑_b` is punctually `ι`-pure of weight `w + c`: at a closed point of degree
 `m` every eigenvalue `α` of the local Frobenius becomes `bᵐ α`, of absolute value
@@ -368,17 +390,17 @@ theorem traceEnergy_realEnvelope_le (ι : PadicAlgCl l →+* ℂ) {F : WeilSheaf
     (F.realEnvelope b).traceEnergy ι m ≤ 4 * (F.constantTwist b).traceEnergy ι m := by
   sorry
 
-/-- A nonzero lisse Weil sheaf, punctually `ι`-pure of weight `w`, admits a unit `b` with
+/-- A nonzero Weil sheaf on a `k₀`-scheme locally of finite type, punctually `ι`-pure of weight
+`w`, admits a unit `b` with
 `|ι b| = q^{-w/2}`: if `α` is an eigenvalue of the local Frobenius at a closed point of degree
 `d` with nonzero stalk, then `|ι α| = q^{dw/2}`, and `b` can be taken to be a `d`-th root of
 `α⁻¹`. -/
 theorem exists_norm_eq_of_isPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ)
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l X) (hF : ¬ Limits.IsZero F) {w : ℝ}
     (h : F.IsPunctuallyPureOfWeight ι w) :
     ∃ b : (PadicAlgCl l)ˣ, ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2) := by
-  -- a nonzero Weil sheaf has a nonzero stalk at some closed point
-  obtain ⟨x, hx⟩ : ∃ x : X.finitePoints, Nontrivial (F.stalk x).carrier :=
-    sorry
+  obtain ⟨x, hx⟩ := F.exists_nontrivial_stalk_of_not_isZero hF
   obtain ⟨α, hα⟩ := Module.End.exists_eigenvalue (F.stalk x).frobeniusEnd
   have hα0 : α ≠ 0 := by
     rintro rfl
@@ -407,10 +429,26 @@ theorem exists_norm_eq_of_isPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ)
 
 end Envelope
 
+/-- The trace energy bound of a lisse sheaf with upper weights: if `F` is a lisse Weil sheaf of
+rank `r` on the smooth geometrically connected affine curve `X₀`, punctually `ι`-mixed of
+weights at most `w`, then at `y ∈ X₀(𝔽_{qᵐ})` the eigenvalues of the Frobenius have absolute
+value at most `q^{mw/2}`, so `|ι t_F(y)|² ≤ r² q^{mw}`, and
+`S_m ≤ r² · #X₀(𝔽_{qᵐ}) · q^{mw} ≤ C q^{m(w + 1)}`. (blueprint: `lem-wf-l2-upper`) -/
+theorem exists_traceEnergy_le_of_hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
+    [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]
+    [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
+    [SmoothOfRelativeDimension 1 (V ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (V ↘ Spec (CommRingCat.of k₀))]
+    (F : WeilSheaf k₀ l V) (hlisse : F.IsLisse) {w : ℝ} (h : F.HasWeightsAtMost ι w) :
+    ∃ C : ℝ, ∀ n : ℕ, 1 ≤ n →
+      F.traceEnergy ι n ≤ C * (Nat.card k₀ : ℝ) ^ ((n : ℝ) * (w + 1)) :=
+  sorry
+
 /-- The `L²`-weight is at most the weight: if `F` is a lisse Weil sheaf on the smooth
 geometrically connected affine curve `X₀`, punctually `ι`-mixed of weights at most `w`, then
 `‖F‖ ≤ w`. At `y ∈ X₀(𝔽_{qᵐ})` the eigenvalues of the Frobenius have absolute value at most
-`q^{mw/2}`, so `S_m ≤ r² · #X₀(𝔽_{qᵐ}) · q^{mw} ≤ C q^{m(w + 1)}`, and
+`q^{mw/2}`, so `S_m ≤ r² · #X₀(𝔽_{qᵐ}) · q^{mw} ≤ C q^{m(w + 1)}`
+(`AlgebraicGeometry.WeilSheaf.exists_traceEnergy_le_of_hasWeightsAtMost`), and
 `AlgebraicGeometry.WeilSheaf.l2Weight_le_of_traceEnergy_le` applies.
 (blueprint: `lem-wf-l2-upper`) -/
 theorem l2Weight_le_of_hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
@@ -420,7 +458,8 @@ theorem l2Weight_le_of_hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ) {V : Schem
     [GeometricallyConnected (V ↘ Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l V) (hlisse : F.IsLisse) {w : ℝ} (h : F.HasWeightsAtMost ι w) :
     F.l2Weight ι ≤ w := by
-  sorry
+  obtain ⟨C, hC⟩ := exists_traceEnergy_le_of_hasWeightsAtMost ι F hlisse h
+  simpa using F.l2Weight_le_of_traceEnergy_le ι hC
 
 /-- The `L`-series `L(X₀, F, t) = ∏_{x ∈ |X₀|} det(1 - Fₓ t^{d(x)} | F_x̄)⁻¹ ∈ ℂ⟦t⟧` of a Weil
 sheaf, the product over the closed points of `X₀` of the inverses of the local polynomials
@@ -504,17 +543,14 @@ theorem l2Weight_eq_of_isPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) {V
     l2Weight_eq_sub_of_traceEnergy_eq ι G _ (traceEnergy_constantTwist ι G hb)
   -- Step 2: the envelope has `L²`-weight zero
   have h2 : (G.realEnvelope b).l2Weight ι = 0 := by
-    have hE : ¬ Limits.IsZero (G.realEnvelope b) := sorry
-    have hElisse : (G.realEnvelope b).IsLisse := sorry
-    exact_mod_cast l2Weight_eq_of_isReal ι _ hE hElisse (isReal_realEnvelope hpure hb)
-      (hpure.realEnvelope hb)
+    exact_mod_cast l2Weight_eq_of_isReal ι _ (not_isZero_realEnvelope hG b)
+      (hlisse.realEnvelope b) (isReal_realEnvelope hpure hb) (hpure.realEnvelope hb)
   -- Step 3: comparison with the envelope
   have h3 : (G.realEnvelope b).l2Weight ι ≤ (G.constantTwist b).l2Weight ι :=
     l2Weight_le_of_traceEnergy_le_mul ι _ _ (by norm_num)
       (traceEnergy_realEnvelope_le ι hpure hb)
   have h4 : (G.constantTwist b).l2Weight ι ≤ 0 := by
-    have hlisse' : (G.constantTwist b).IsLisse := hlisse
-    have := l2Weight_le_of_hasWeightsAtMost ι _ hlisse'
+    have := l2Weight_le_of_hasWeightsAtMost ι _ (hlisse.constantTwist b)
       (hpure.constantTwist hc).hasWeightsAtMost
     simpa using this
   have h0 : G.l2Weight ι - w = 0 := h1 ▸ le_antisymm h4 (h2 ▸ h3)
@@ -547,6 +583,26 @@ theorem le_sub_one_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{
 
 namespace LisseOnDenseOpen
 
+/-- The trace energies of the lisse sheaf `M` on the dense open `U₀` are at most those of its
+direct image `j_*M` on the affine line: the trace functions agree at the points of `U₀`, and the
+boundary contribution `E_m = ∑_{y ∈ S₀(𝔽_{qᵐ})} |t_{j_*M}(y)|²` is nonnegative.
+(blueprint: `lem-fd-l2-middle-extension`) -/
+theorem traceEnergy_le_traceEnergy_directImage (ι : PadicAlgCl l →+* ℂ)
+    (D : LisseOnDenseOpen k₀ l) (m : ℕ) :
+    D.sheaf.traceEnergy ι m ≤ D.directImage.traceEnergy ι m :=
+  sorry
+
+/-- The trace energies of the direct image `j_*M` exceed those of `M` by at most `C q^{mw}` when
+`M` has weights at most `w`: the boundary contribution
+`E_m = ∑_{y ∈ S₀(𝔽_{qᵐ})} |t_{j_*M}(y)|²` is at most `D r² q^{mw}` by the boundary
+semicontinuity `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`, with
+`D = ∑_{s ∈ S₀} d(s)` and `r` the rank of `M`. (blueprint: `lem-fd-l2-middle-extension`) -/
+theorem exists_traceEnergy_directImage_le_add (ι : PadicAlgCl l →+* ℂ)
+    (D : LisseOnDenseOpen k₀ l) {w : ℝ} (h : D.sheaf.HasWeightsAtMost ι w) :
+    ∃ C : ℝ, ∀ m : ℕ, D.directImage.traceEnergy ι m ≤
+      D.sheaf.traceEnergy ι m + C * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) :=
+  sorry
+
 /-- *The middle extension does not change the `L²`-weight*: let `j : U₀ ↪ 𝔸¹_{k₀}` be a dense
 open immersion and `M` a nonzero lisse Weil sheaf on the smooth geometrically connected affine
 curve `U₀`, punctually `ι`-pure of weight `w`. Then `‖j_*M‖ = ‖M‖ = w`.
@@ -567,9 +623,10 @@ theorem l2Weight_directImage (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen
     D.directImage.l2Weight ι = D.sheaf.l2Weight ι ∧ D.sheaf.l2Weight ι = w := by
   have hw := l2Weight_eq_of_isPunctuallyPureOfWeight ι D.sheaf hM D.lisse hpure
   have hle : D.sheaf.l2Weight ι ≤ D.directImage.l2Weight ι :=
-    sorry
+    l2Weight_le_l2Weight_of_traceEnergy_le ι _ _ (traceEnergy_le_traceEnergy_directImage ι D)
+  obtain ⟨C, hC⟩ := exists_traceEnergy_directImage_le_add ι D hpure.hasWeightsAtMost
   have hge : D.directImage.l2Weight ι ≤ max (D.sheaf.l2Weight ι) ((w - 1 : ℝ) : EReal) :=
-    sorry
+    l2Weight_le_max_of_traceEnergy_le_add ι _ _ hC
   rw [hw, max_eq_left (EReal.coe_le_coe_iff.2 (by linarith))] at hge
   exact ⟨le_antisymm (hge.trans_eq hw.symm) hle, hw⟩
 

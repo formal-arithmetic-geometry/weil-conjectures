@@ -51,8 +51,13 @@ and both notions pull back along morphisms of `k₀`-schemes (`WeilSheaf.upperSt
 
 ## Implementation notes
 
-The category is being redefined (decision 1160); the proofs below that depended on the old
-vanishing have been removed.
+With the present coefficients these categories are degenerate. The coefficients are discrete
+`ℚ̄_ℓ`-modules on the étale site, and `Scheme.IsConstructibleSheaf` asks for finite stalks, so
+every constructible sheaf, hence every Weil sheaf and every Weil complex, is zero. Discrete
+`ℚ̄_ℓ`-coefficients would be wrong even with finite-dimensional stalks: lisse sheaves would have
+finite monodromy. The blueprint (`sk-d-real-weil`) takes constructible pro-étale `E_X`-modules
+for a finite extension `E` of `ℚ_ℓ`, and both definitions are to be replaced accordingly. No
+result may use the vanishing.
 
 The coefficient ring `ℚ̄_ℓ = PadicAlgCl l` lives in `Type`, while Mathlib's
 `IsGrothendieckAbelian.{v} (ModuleCat.{v} R)` needs `R : Type v`; hence the `ULift` in
@@ -141,7 +146,11 @@ end Frobenius
 
 /-- The category of constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme `X`: constructible
 étale sheaves `F` of `ℚ̄_ℓ`-modules on the geometric fiber `X̄` with an isomorphism
-`Fr_X^* F ≅ F`, where `Fr_X` is the geometric Galois Frobenius of `X̄`. -/
+`Fr_X^* F ≅ F`, where `Fr_X` is the geometric Galois Frobenius of `X̄`.
+
+With the present discrete coefficients every constructible sheaf, hence every Weil sheaf, is
+zero; the blueprint (`sk-d-real-weil`) uses constructible pro-étale `E_X`-modules, and the
+definition is to be replaced accordingly. No result may use this vanishing. -/
 def WeilSheaf (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :
     Type (u + 2) :=
@@ -155,9 +164,9 @@ geometric Galois Frobenius of `X̄`.
 This differs from the blueprint (`sk-d-real-weil`): the blueprint defines Weil complexes as
 the Verdier localization of the homotopy category of complexes of Weil sheaves, while this
 category only records an isomorphism `Fr_X^* K ≅ K` in the derived category. Cones are not
-functorial in `D(X̄_ét)`, so this category is not triangulated, and its morphisms are not those
-of the blueprint category. Statements that need distinguished triangles of Weil complexes, such as
-`WeilComplex.derivedLowerShriek`, `fourierTransform` and the open–closed triangle,
+functorial in `D(X̄_ét)`, so this category is not triangulated, and its morphisms are not
+those of the blueprint category. Statements that need distinguished triangles of Weil complexes,
+such as `WeilComplex.derivedLowerShriek`, `fourierTransform` and the open–closed triangle,
 cannot be stated on it faithfully. -/
 def WeilComplex (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :
@@ -227,6 +236,12 @@ finite locally constant, being constructible. The blueprint notion, lisse of fin
 `E_X`-modules, awaits pro-étale coefficients. -/
 def IsLisse (F : WeilSheaf k₀ l X) : Prop :=
   Scheme.IsLocallyConstantSheaf F.obj.carrier
+
+/-- A biproduct of lisse Weil sheaves is lisse: a direct sum of two locally constant sheaves is
+locally constant. -/
+theorem IsLisse.biprod {F G : WeilSheaf k₀ l X} (hF : F.IsLisse) (hG : G.IsLisse) :
+    (F ⊞ G).IsLisse :=
+  sorry
 
 end WeilSheaf
 

@@ -78,8 +78,16 @@ form in which the coefficients `AlgebraicGeometry.WeilCoefficients` take stalks.
 `ULift ℚ̄_ℓ` is made a `ℚ̄_ℓ`-module by restriction of scalars
 (`AlgebraicGeometry.WeilCoefficients.toModuleCat`).
 
-The category is being redefined (decision 1160); the proofs below that depended on the old
-vanishing have been removed.
+With the present discrete coefficients every Weil sheaf is zero (see the implementation notes
+of `WeilConjectures.WeilSheaf.Category`); no result of this file may use this vanishing.
+
+## TODO
+
+Prove, for the constructible pro-étale `E_X`-modules of the blueprint (`sk-d-real-weil`), the
+statements of this file stated with `sorry`: the finiteness of stalks and global sections, the
+independence of the local Frobenius of the geometric point, the comparison of the trace function
+with the local Frobenius, the compatibility of restriction to a stalk with the Frobenius, and
+the detection of nonzero sheaves by stalks at closed points.
 -/
 
 @[expose] public section
@@ -188,6 +196,14 @@ geometric stalk `F_x̄` is nonzero. -/
 def support : Set X.finitePoints :=
   {x | Nontrivial (F.stalk x).carrier}
 
+/-- A nonzero Weil sheaf on a `k₀`-scheme locally of finite type has a nonzero geometric stalk at
+some closed point: the stalk functors at the closed points detect zero objects, the closed
+points being dense in every closed subset of a Jacobson scheme. -/
+theorem exists_nontrivial_stalk_of_not_isZero
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (hF : ¬ IsZero F) :
+    ∃ x : X.finitePoints, Nontrivial (F.stalk x).carrier :=
+  sorry
+
 /-- The trace function `t_{F,n}` of a Weil sheaf: the trace `Tr(F_x^{(n)} | F_x̄)` of the
 Frobenius relative to `𝔽_{qⁿ}` on the stalk at an `𝔽_{qⁿ}`-rational point `x`, taken at the
 geometric point over `x` for an embedding `𝔽_{qⁿ} ↪ k̄` chosen by `IsAlgClosed.lift`.
@@ -244,8 +260,10 @@ def IsReal (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : Prop :=
 
 section GlobalSections
 
-/-- The global sections of a Weil sheaf are finite-dimensional. -/
-theorem finiteDimensional_globalSections :
+/-- The global sections of a Weil sheaf on a quasi-compact `k₀`-scheme locally of finite type
+are finite-dimensional. -/
+theorem finiteDimensional_globalSections [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     FiniteDimensional (PadicAlgCl l)
       ((WeilCoefficients.toModuleCat l).obj ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj
         F.obj.carrier)) :=
@@ -260,7 +278,9 @@ theorem finiteDimensional_globalSections :
 whose first isomorphism is the pullback of global sections along the automorphism `Fr`
 (`AlgebraicGeometry.Etale.globalSectionsUpperStarIso`) and whose second map is induced by the
 Weil structure `φ : Fr^* F ≅ F`. -/
-noncomputable def globalSections : FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
+noncomputable def globalSections [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   have := F.finiteDimensional_globalSections
   { carrier := (WeilCoefficients.toModuleCat l).obj
       ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj F.obj.carrier)
@@ -295,7 +315,8 @@ noncomputable def globalSectionsToStalkObj
           Fr
 ```
 -/
-theorem globalSectionsToStalkObj_frobenius
+theorem globalSectionsToStalkObj_frobenius [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1).hom =
       (specGeometricFrobenius k₀ ^ 1).hom ≫ s)

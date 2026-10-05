@@ -25,7 +25,8 @@ The second half of the same blueprint subsection, that a nonzero linear Artin–
 `ℒ_{ψ(a x)}` is ramified at infinity, is stated for the Artin–Schreier extension of the local
 field `k((t))` at infinity, where the inertia group acts:
 `LaurentSeries.exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single`. It is not stated for
-`AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity`.
+`AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity`, which is not yet the inertia condition of
+the blueprint.
 
 ## Main statements
 
@@ -34,19 +35,16 @@ field `k((t))` at infinity, where the inertia group acts:
 - `AlgebraicGeometry.exists_exact_compactlySupportedCohomology_boundary`: the boundary sequence
   in degrees zero and one.
 
-## Implementation notes
-
-The category is being redefined (decision 1160); the proofs below that depended on the old
-vanishing have been removed.
-
 ## TODO
 
-The maps `g` and `h` of `AlgebraicGeometry.exists_exact_compactlySupportedCohomology_boundary`
-should be the maps induced by the canonical arrow `WeilSheaf.extensionByZeroToDirectImage j`
-from `j_!F` to `j_*F`. This needs the identification `H_c(U, F) ≅ H_c(C, j_!F)` and the
-functoriality of `compactlySupportedCohomology`; once they exist, the existential statement
-should be replaced by one about these maps. The map `δ` needs a triangulated structure on Weil
-complexes.
+- Prove the local boundary pairing and the boundary sequence, which are stated with `sorry`,
+  for the constructible pro-étale `E_X`-modules of the blueprint (`sk-d-real-weil`).
+- The maps `g` and `h` of `AlgebraicGeometry.exists_exact_compactlySupportedCohomology_boundary`
+  should be the maps induced by the canonical arrow `WeilSheaf.extensionByZeroToDirectImage j`
+  from `j_!F` to `j_*F`. This needs the identification `H_c(U, F) ≅ H_c(C, j_!F)` and the
+  functoriality of `compactlySupportedCohomology`; once they exist, the existential statement
+  should be replaced by one about these maps. The map `δ` needs a triangulated structure on
+  Weil complexes.
 -/
 
 @[expose] public section

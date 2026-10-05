@@ -74,6 +74,13 @@ noncomputable def dualStr (F : WeilSheaf k₀ l X) :
     ((MonoidalClosed.internalHom.mapIso F.obj.str.op).app _).symm ≪≫
     (ihom F.obj.carrier).mapIso (Functor.Monoidal.εIso _).symm
 
+-- TODO: prove for the constructible `E_X`-modules of the blueprint (`sk-d-real-operations`)
+/-- The internal hom `[F, ℚ̄_ℓ]` out of the underlying sheaf of a Weil sheaf `F` into the unit
+sheaf is constructible: internal homs of constructible sheaves are constructible. -/
+theorem isConstructibleSheaf_ihom (F : WeilSheaf k₀ l X) :
+    Scheme.IsConstructibleSheaf ((ihom F.obj.carrier).obj (𝟙_ _)) :=
+  sorry
+
 -- TODO(unify): sk-d-real-operations
 /-- The dual `F^∨ = [F, ℚ̄_ℓ]` of a lisse Weil sheaf: the internal hom into the unit sheaf on
 `X̄`, with the Weil structure `AlgebraicGeometry.WeilSheaf.dualStr`.
@@ -82,7 +89,12 @@ It is defined for every Weil sheaf, but it is the duality functor only for lisse
 of a general constructible `F` is its Verdier dual `RHom(F, ℚ̄_ℓ(d)[2d])`, a Weil complex. -/
 noncomputable def dual (F : WeilSheaf k₀ l X) : WeilSheaf k₀ l X where
   obj := .mk ((ihom F.obj.carrier).obj (𝟙_ _)) F.dualStr
-  property := sorry
+  property := F.isConstructibleSheaf_ihom
+
+/-- The dual of a lisse Weil sheaf is lisse: the internal hom from a locally constant
+constructible sheaf into the unit sheaf is locally constant. -/
+theorem IsLisse.dual {F : WeilSheaf k₀ l X} (hF : F.IsLisse) : F.dual.IsLisse :=
+  sorry
 
 /-- The evaluation `F ⊗ F^∨ ⟶ ℚ̄_ℓ` is compatible with the Weil structures:
 ```
@@ -121,7 +133,8 @@ components.
 
 The universe `max (u + 1) 0 = u + 1` of `FrobeniusModule.dual` agrees with that of the global
 sections, since the coefficients `ℚ̄_ℓ` live in universe `0`. -/
-noncomputable def geometricCoinvariants (F : WeilSheaf k₀ l X) :
+noncomputable def geometricCoinvariants [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X) :
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   FrobeniusModule.dual (globalSections F.dual)
 

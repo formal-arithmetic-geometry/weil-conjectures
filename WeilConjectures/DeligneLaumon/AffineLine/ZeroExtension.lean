@@ -83,17 +83,18 @@ comparison datum exists. (blueprint: `sk-p-dl-a1-correction`) -/
 theorem nonempty_fourierCorrection (hψ : ψ ≠ 1) (D D' : LisseOnDenseOpen k₀ l) [Simple D.sheaf]
     (hne : D.sheaf.IsNonexceptional ψ) (hFT : D.IsFourierPartner ψ D') :
     Nonempty (FourierCorrection ψ D D') := by
-  -- Step 5 of the blueprint: `G = 𝓗⁻¹ FT_ψ(j_!M[1])` and `B' = 𝓗⁻¹ FT_ψ(B)`. The maps of the
-  -- sequence come from the rotated triangle `B'[1] → FT_ψ(j_!M[1]) → (j'_*M')[1] →`, which
-  -- cannot be formed since `WeilComplex` is not triangulated.
+  -- TODO: Step 5 of `sk-p-dl-a1-correction`: `G = 𝓗⁻¹ FT_ψ(j_!M[1])` and
+  -- `B' = 𝓗⁻¹ FT_ψ(B)`. The maps of the sequence come from the rotated triangle
+  -- `B'[1] → FT_ψ(j_!M[1]) → (j'_*M')[1] →`, which cannot be formed since `WeilComplex` is not
+  -- triangulated.
   sorry
 
 /-- The correction sheaf `B'` is lisse on the entire dual line: it is a sum of Artin–Schreier
 kernels. (blueprint: `sk-p-dl-a1-correction`) -/
 theorem FourierCorrection.isLisse {D D' : LisseOnDenseOpen k₀ l}
     (c : FourierCorrection ψ D D') : c.seq.X₁.IsLisse :=
-  -- Step 3 of the blueprint: `B'` is a sum of finite direct images of Artin–Schreier twists
-  -- along the finite étale maps `A'_s → A'`.
+  -- TODO: Step 3 of `sk-p-dl-a1-correction`: `B'` is a sum of finite direct images of
+  -- Artin–Schreier twists along the finite étale maps `A'_s → A'`.
   sorry
 
 /-- The correction sheaf `B'` has weights at most `w` when `M` is punctually `ι`-pure of weight
@@ -102,8 +103,8 @@ Artin–Schreier kernel. (blueprint: `sk-p-dl-a1-correction`) -/
 theorem FourierCorrection.hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ)
     {D D' : LisseOnDenseOpen k₀ l} (c : FourierCorrection ψ D D') {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) : c.seq.X₁.HasWeightsAtMost ι w := by
-  -- Step 4 of the blueprint bounds the eigenvalues of `F_y` on `B'_ȳ` through the boundary
-  -- semicontinuity and the weight zero of the Artin–Schreier sheaves.
+  -- TODO: Step 4 of `sk-p-dl-a1-correction` bounds the eigenvalues of `F_y` on `B'_ȳ` through
+  -- the boundary semicontinuity and the weight zero of the Artin–Schreier sheaves.
   sorry
 
 end WeilSheaf.LisseOnDenseOpen

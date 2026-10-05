@@ -68,6 +68,13 @@ end WeilCoefficients
 
 namespace WeilSheaf
 
+-- TODO: prove for the constructible `E_X`-modules of the blueprint (`sk-d-real-operations`)
+/-- The tensor product of the underlying sheaves of two Weil sheaves is constructible: tensor
+products of constructible sheaves are constructible. -/
+theorem isConstructibleSheaf_tensorObj (F G : WeilSheaf k₀ l X) :
+    Scheme.IsConstructibleSheaf (F.obj.carrier ⊗ G.obj.carrier) :=
+  sorry
+
 /-- The tensor product `F ⊗ G` of two Weil sheaves: the tensor product of the underlying étale
 sheaves on `X̄`, with the Weil structure
 
@@ -79,7 +86,7 @@ noncomputable def tensorObj (F G : WeilSheaf k₀ l X) : WeilSheaf k₀ l X wher
   obj := .mk (F.obj.carrier ⊗ G.obj.carrier)
     ((Functor.Monoidal.μIso (frobeniusPullback k₀ l X) _ _).symm ≪≫
       (F.obj.str ⊗ᵢ G.obj.str))
-  property := sorry
+  property := isConstructibleSheaf_tensorObj F G
 
 /-- The constant Weil twist `F ⊗ 𝓑_b` of a Weil sheaf by a unit `b ∈ ℚ̄_ℓˣ`: the tensor product
 of `F` with the geometrically constant Weil line `𝓑_b` on which the geometric Frobenius acts
@@ -91,6 +98,11 @@ noncomputable def constantTwist (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) 
     WeilSheaf k₀ l X where
   obj := .mk F.obj.carrier (F.obj.str ≪≫ WeilCoefficients.smulIso b F.obj.carrier)
   property := F.property
+
+/-- A constant twist of a lisse Weil sheaf is lisse, the underlying étale sheaf being the same. -/
+theorem IsLisse.constantTwist {F : WeilSheaf k₀ l X} (hF : F.IsLisse) (b : (PadicAlgCl l)ˣ) :
+    (F.constantTwist b).IsLisse :=
+  hF
 
 end WeilSheaf
 

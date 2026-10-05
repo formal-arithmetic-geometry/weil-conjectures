@@ -37,6 +37,11 @@ whose first isomorphism is the invariance of derived global sections under the a
 - `AlgebraicGeometry.WeilComplex.compactlySupportedCohomologyLinearEquiv`: its identification
   with the étale compactly supported cohomology `H_c(ā)[Λ](r)` of the underlying complex.
 
+## Main statements
+
+- `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite`: the
+  compactly supported cohomology of a finite `k₀`-scheme is concentrated in degree zero.
+
 ## TODO
 
 Define the Frobenius from the derived pullback map on global sections (see the `TODO` of

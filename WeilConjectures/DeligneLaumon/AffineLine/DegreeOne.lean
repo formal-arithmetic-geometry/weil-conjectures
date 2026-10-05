@@ -37,9 +37,11 @@ bound holds for every irreducible, non-geometrically-constant `M` unramified at 
 
 ## Implementation notes
 
-The category is being redefined (decision 1160); the proofs below that depended on the old
-vanishing have been removed. The degree-one bound itself is derived from the semicontinuity and
-stationary-phase statements along the blueprint argument.
+The degree-one bound is derived along the blueprint argument from the boundary semicontinuity
+`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage` and the stationary
+phase
+`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
+These two inputs are stated with `sorry`, so the bound is conditional on them.
 -/
 
 @[expose] public section

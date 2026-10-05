@@ -99,9 +99,20 @@ theorem HasDirectImageWeightBound.comp {X Z Y : Scheme.{u}}
 
 The blueprint argument for the open–closed reduction runs through the open–closed triangle
 `j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶ K[1]`, the long exact cohomology sequence of a triangle and compact
-support base change. The category is being redefined (decision 1160); the proofs below that
-depended on the old vanishing have been removed. The reductions themselves are derived from
-these inputs as in the blueprint.
+support base change. The inputs that need distinguished triangles of Weil complexes — the
+restriction of weight bounds, the exact sequences of direct images and the base change
+isomorphisms below — are stated with `sorry`, since `AlgebraicGeometry.WeilComplex` is not
+triangulated; the reductions themselves are derived from these inputs as in the blueprint.
+
+## TODO
+
+Prove the inputs stated with `sorry`. Those that form the open–closed triangle or the
+hypercohomology spectral sequence
+(`AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.of_openClosed`,
+`AlgebraicGeometry.HasDirectImageComplexWeightBound.of_openClosed`,
+`AlgebraicGeometry.HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek`) need
+`AlgebraicGeometry.WeilComplex` to be the triangulated Verdier localization of `sk-d-real-weil`;
+pro-étale coefficients alone do not suffice for them.
 -/
 
 section OpenClosed
@@ -112,7 +123,7 @@ stalk and local Frobenius (blueprint: `lem-zl-morphism-open-closed-reduction`, r
 theorem WeilSheaf.IsMixedOfWeightsAtMost.upperStar {W X : Scheme.{u}}
     [W.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))] (h : W ⟶ X)
     [IsImmersion h] [h.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ} {F : WeilSheaf k₀ l X}
-    (_hF : F.IsMixedOfWeightsAtMost ι w) :
+    (hF : F.IsMixedOfWeightsAtMost ι w) :
     ((WeilSheaf.upperStar h).obj F).IsMixedOfWeightsAtMost ι w :=
   sorry
 
@@ -123,7 +134,7 @@ cohomology sheaves, and it preserves mixed upper bounds of sheaves
 theorem WeilComplex.IsMixedOfWeightsAtMost.upperStar {W X : Scheme.{u}}
     [W.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))] (h : W ⟶ X)
     [IsImmersion h] [h.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ} {K : WeilComplex k₀ l X}
-    (_hK : K.IsMixedOfWeightsAtMost ι w) :
+    (hK : K.IsMixedOfWeightsAtMost ι w) :
     ((WeilComplex.upperStar h).obj K).IsMixedOfWeightsAtMost ι w :=
   sorry
 
@@ -137,7 +148,7 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek_of_isOpenImmersion
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] {w : ℝ} {K : WeilComplex k₀ l U}
-    (_hK : K.IsMixedOfWeightsAtMost ι w) :
+    (hK : K.IsMixedOfWeightsAtMost ι w) :
     ((WeilComplex.derivedLowerShriek k₀ l j).obj K).IsMixedOfWeightsAtMost ι w :=
   sorry
 
@@ -148,7 +159,7 @@ immersion of the finite pushforward bound (blueprint: `lem-zl-finite-pushforward
 theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isClosedImmersion
     {Z X : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
     (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ}
-    {K : WeilComplex k₀ l Z} (_hK : K.IsMixedOfWeightsAtMost ι w) :
+    {K : WeilComplex k₀ l Z} (hK : K.IsMixedOfWeightsAtMost ι w) :
     ((WeilComplex.derivedLowerStar i).obj K).IsMixedOfWeightsAtMost ι w :=
   sorry
 
@@ -167,10 +178,10 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.of_openClosed {U X Z : Scheme.{u}}
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
-    (_hij : IsCompl (Set.range j.base) (Set.range i.base)) {w : ℝ} {K : WeilComplex k₀ l X}
-    (_hU : ((WeilComplex.derivedLowerShriek k₀ l j).obj
+    (hij : IsCompl (Set.range j.base) (Set.range i.base)) {w : ℝ} {K : WeilComplex k₀ l X}
+    (hU : ((WeilComplex.derivedLowerShriek k₀ l j).obj
       ((WeilComplex.upperStar j).obj K)).IsMixedOfWeightsAtMost ι w)
-    (_hZ : ((WeilComplex.derivedLowerStar i).obj
+    (hZ : ((WeilComplex.derivedLowerStar i).obj
       ((WeilComplex.upperStar i).obj K)).IsMixedOfWeightsAtMost ι w) :
     K.IsMixedOfWeightsAtMost ι w :=
   sorry
@@ -185,9 +196,9 @@ theorem WeilSheaf.IsMixedOfWeightsAtMost.of_openClosed {U X Z : Scheme.{u}}
     [Z.Over (Spec (CommRingCat.of k₀))] {j : U ⟶ X} [IsOpenImmersion j]
     [j.IsOver (Spec (CommRingCat.of k₀))] {i : Z ⟶ X} [IsClosedImmersion i]
     [i.IsOver (Spec (CommRingCat.of k₀))]
-    (_hij : IsCompl (Set.range j.base) (Set.range i.base)) {w : ℝ} {G : WeilSheaf k₀ l X}
-    (_hU : ((WeilSheaf.upperStar j).obj G).IsMixedOfWeightsAtMost ι w)
-    (_hZ : ((WeilSheaf.upperStar i).obj G).IsMixedOfWeightsAtMost ι w) :
+    (hij : IsCompl (Set.range j.base) (Set.range i.base)) {w : ℝ} {G : WeilSheaf k₀ l X}
+    (hU : ((WeilSheaf.upperStar j).obj G).IsMixedOfWeightsAtMost ι w)
+    (hZ : ((WeilSheaf.upperStar i).obj G).IsMixedOfWeightsAtMost ι w) :
     G.IsMixedOfWeightsAtMost ι w :=
   sorry
 
@@ -208,7 +219,7 @@ theorem WeilSheaf.exists_exact_higherLowerShriek_of_openClosed {U X Z Y : Scheme
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
-    (_hij : IsCompl (Set.range j.base) (Set.range i.base)) (F : WeilSheaf k₀ l X) (r : ℕ) :
+    (hij : IsCompl (Set.range j.base) (Set.range i.base)) (F : WeilSheaf k₀ l X) (r : ℕ) :
     ∃ S : ShortComplex (WeilSheaf k₀ l Y), S.Exact ∧
       Nonempty (S.X₁ ≅ (WeilSheaf.higherLowerShriek k₀ l (j ≫ f) r).obj
         ((WeilSheaf.upperStar j).obj F)) ∧
@@ -274,7 +285,7 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.upperStar_derivedLowerShriek_of_isPul
     {g : X' ⟶ X} [g.IsOver (Spec (CommRingCat.of k₀))] {h : Y' ⟶ Y}
     [h.IsOver (Spec (CommRingCat.of k₀))] (_H : IsPullback g f' f h) {w : ℝ}
     {K : WeilComplex k₀ l X}
-    (_hK : ((WeilComplex.derivedLowerShriek k₀ l f').obj
+    (hK : ((WeilComplex.derivedLowerShriek k₀ l f').obj
       ((WeilComplex.upperStar g).obj K)).IsMixedOfWeightsAtMost ι w) :
     ((WeilComplex.upperStar h).obj
       ((WeilComplex.derivedLowerShriek k₀ l f).obj K)).IsMixedOfWeightsAtMost ι w :=
@@ -291,7 +302,7 @@ theorem WeilSheaf.exact_map_higherLowerShriek {X Y : Scheme.{u}}
     [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] {S : ShortComplex (WeilSheaf k₀ l X)}
-    (_hS : S.ShortExact) (r : ℕ) :
+    (hS : S.ShortExact) (r : ℕ) :
     (S.map (WeilSheaf.higherLowerShriek k₀ l f r)).Exact :=
   sorry
 
@@ -349,9 +360,9 @@ theorem HasDirectImageComplexWeightBound.of_openClosed {U X Z Y : Scheme.{u}}
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
-    (_hij : IsCompl (Set.range j.base) (Set.range i.base))
-    (_hU : HasDirectImageComplexWeightBound k₀ ι (j ≫ f))
-    (_hZ : HasDirectImageComplexWeightBound k₀ ι (i ≫ f)) :
+    (hij : IsCompl (Set.range j.base) (Set.range i.base))
+    (hU : HasDirectImageComplexWeightBound k₀ ι (j ≫ f))
+    (hZ : HasDirectImageComplexWeightBound k₀ ι (i ≫ f)) :
     HasDirectImageComplexWeightBound k₀ ι f :=
   sorry
 
@@ -456,8 +467,8 @@ theorem HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek
     [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
-    (_hf : HasDirectImageWeightBound k₀ ι f) {w : ℝ} {K : WeilComplex k₀ l X}
-    (_hK : K.IsMixedOfWeightsAtMost ι w) :
+    (hf : HasDirectImageWeightBound k₀ ι f) {w : ℝ} {K : WeilComplex k₀ l X}
+    (hK : K.IsMixedOfWeightsAtMost ι w) :
     ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w :=
   sorry
 
