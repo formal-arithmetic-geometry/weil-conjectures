@@ -51,8 +51,11 @@ and both notions pull back along morphisms of `k₀`-schemes (`WeilSheaf.upperSt
 
 ## Implementation notes
 
-The category is being redefined (decision 1160); the proofs below that depended on the old
-vanishing have been removed.
+With the present discrete `ℚ̄_ℓ` coefficients both categories are zero:
+`Scheme.IsConstructibleSheaf` asks for finite stalks, and a finite `ℚ̄_ℓ`-vector space is zero.
+This is a known defect of the provisional definition, and no result here is proved from it.
+Discrete `ℚ̄_ℓ` coefficients would be wrong even with finite-dimensional stalks, since lisse
+sheaves would then have finite monodromy.
 
 The coefficient ring `ℚ̄_ℓ = PadicAlgCl l` lives in `Type`, while Mathlib's
 `IsGrothendieckAbelian.{v} (ModuleCat.{v} R)` needs `R : Type v`; hence the `ULift` in
@@ -61,6 +64,12 @@ The coefficient ring `ℚ̄_ℓ = PadicAlgCl l` lives in `Type`, while Mathlib's
 Weil complexes live in the unbounded derived category `D(X̄_ét)`, whose functor
 `Functor.mapDerivedCategory` is additive and commutes with the shifts. Their carriers are
 bounded, so they are objects of the bounded below derived category on the nose.
+
+## TODO
+
+- Replace `AlgebraicGeometry.WeilSheaf` and `AlgebraicGeometry.WeilComplex` by the categories
+  of the blueprint (`sk-d-real-weil`), in which Weil complexes form a triangulated category.
+- State the blueprint notion of a lisse sheaf, lisse of finite rank, for these categories.
 -/
 
 @[expose] public section
@@ -143,8 +152,8 @@ end Frobenius
 étale sheaves `F` of `ℚ̄_ℓ`-modules on the geometric fiber `X̄` with an isomorphism
 `Fr_X^* F ≅ F`, where `Fr_X` is the geometric Galois Frobenius of `X̄`.
 
-The category is being redefined (decision 1160); the proofs that depended on the old vanishing
-have been removed. -/
+This differs from the blueprint (`sk-d-real-weil`): its coefficients are discrete
+`ℚ̄_ℓ`-modules, so every Weil sheaf is zero (see the implementation notes). -/
 def WeilSheaf (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :
     Type (u + 2) :=
@@ -226,16 +235,32 @@ noncomputable def frobeniusPowIso (F : WeilSheaf k₀ l X) (m : ℕ) :
       (frobeniusPullback k₀ l X).mapIso (F.frobeniusPowIso m) ≪≫ F.obj.str
 
 /-- A Weil sheaf is *lisse* if its underlying étale sheaf is locally constant; it is then
-finite locally constant, being constructible. The blueprint notion, lisse of finite rank, is to
-be stated once the category is redefined. -/
+finite locally constant, being constructible. -/
 def IsLisse (F : WeilSheaf k₀ l X) : Prop :=
   Scheme.IsLocallyConstantSheaf F.obj.carrier
 
-/-- A biproduct of lisse Weil sheaves is lisse: a direct sum of two locally constant sheaves is
-locally constant. -/
+/-- A biproduct of lisse Weil sheaves is lisse: its underlying étale sheaf is the direct sum
+of two locally constant sheaves (`AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.biprod`). -/
 theorem IsLisse.biprod {F G : WeilSheaf k₀ l X} (hF : F.IsLisse) (hG : G.IsLisse) :
-    (F ⊞ G).IsLisse :=
-  sorry
+    (F ⊞ G).IsLisse := by
+  let Φ := (WeilSheaf.objectProperty k₀ l X).ι ⋙ IsoAlgebra.forget _
+  have := preservesBinaryBiproducts_of_preservesBiproducts Φ
+  have : Scheme.IsLocallyConstantSheaf (Φ.obj F) := hF
+  have : Scheme.IsLocallyConstantSheaf (Φ.obj G) := hG
+  have := Scheme.IsLocallyConstantSheaf.biprod (Φ.obj F) (Φ.obj G)
+  exact Scheme.IsLocallyConstantSheaf.of_iso
+    (Φ.mapBiprod (C := (WeilSheaf.objectProperty k₀ l X).FullSubcategory) F G).symm
+
+/-- A Weil sheaf is zero if and only if its underlying étale sheaf is: the forgetful functor is
+additive, and a morphism of Weil sheaves is determined by the underlying morphism of sheaves. -/
+theorem isZero_iff_isZero_carrier {F : WeilSheaf k₀ l X} : IsZero F ↔ IsZero F.obj.carrier := by
+  refine ⟨fun h ↦ ?_, fun h ↦ ?_⟩
+  · exact Functor.map_isZero ((WeilSheaf.objectProperty k₀ l X).ι ⋙ IsoAlgebra.forget _)
+      (X := (show (WeilSheaf.objectProperty k₀ l X).FullSubcategory from F)) h
+  · exact ⟨fun _ ↦ ⟨⟨0⟩, fun _ ↦ ObjectProperty.hom_ext _ <| ObjectProperty.hom_ext _ <|
+      Algebra.Hom.ext <| h.eq_of_src _ _⟩,
+    fun _ ↦ ⟨⟨0⟩, fun _ ↦ ObjectProperty.hom_ext _ <| ObjectProperty.hom_ext _ <|
+      Algebra.Hom.ext <| h.eq_of_tgt _ _⟩⟩
 
 end WeilSheaf
 

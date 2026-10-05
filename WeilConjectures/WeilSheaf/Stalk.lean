@@ -78,16 +78,16 @@ form in which the coefficients `AlgebraicGeometry.WeilCoefficients` take stalks.
 `ULift ℚ̄_ℓ` is made a `ℚ̄_ℓ`-module by restriction of scalars
 (`AlgebraicGeometry.WeilCoefficients.toModuleCat`).
 
-The category is being redefined (decision 1160); the proofs below that depended on the old
-vanishing have been removed.
-
 ## TODO
 
-Prove, once the category is redefined (`sk-d-real-weil`), the statements of this file stated
-with `sorry`: the finiteness of stalks and global sections, the
-independence of the local Frobenius of the geometric point, the comparison of the trace function
-with the local Frobenius, the compatibility of restriction to a stalk with the Frobenius, and
-the detection of nonzero sheaves by stalks at closed points.
+- Prove, once the category is redefined (`sk-d-real-weil`), the statements of this file stated
+  with `sorry`: the finiteness of stalks and global sections, the independence of the local
+  Frobenius of the geometric point, the comparison of the trace function with the local
+  Frobenius, and the compatibility of restriction to a stalk with the Frobenius.
+- Derive `AlgebraicGeometry.WeilSheaf.exists_nontrivial_stalk_of_not_isZero` from two
+  independent facts: a nonzero constructible étale sheaf has a nonzero stalk at a geometric
+  point, its support being a nonempty constructible set; and a nonempty locally closed subset of
+  a Jacobson scheme contains a closed point.
 -/
 
 @[expose] public section

@@ -81,9 +81,9 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l U) (hF : F.IsLisse) (s : C.finitePoints)
     (hsU : s.1 ∉ Set.range j.base) :
-    ∃ e : (((WeilSheaf.directImage j).obj F.dual).stalk s).carrier ≃ₗ[PadicAlgCl l]
+    ∃ e : (((WeilSheaf.directImage j).obj (F.dual hF)).stalk s).carrier ≃ₗ[PadicAlgCl l]
         Module.Dual (PadicAlgCl l) (((WeilSheaf.higherDirectImage j 1).obj F).stalk s).carrier,
-      ∀ a b, e ((((WeilSheaf.directImage j).obj F.dual).stalk s).frobenius a)
+      ∀ a b, e ((((WeilSheaf.directImage j).obj (F.dual hF)).stalk s).frobenius a)
           ((((WeilSheaf.higherDirectImage j 1).obj F).stalk s).frobenius b) =
         (((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l)) * e a b := by
   sorry
@@ -98,8 +98,6 @@ Hence there are Frobenius-equivariant maps forming an exact sequence
 `H_c^0(Z, i^*j_*F) → H_c^1(U, F) → H_c^1(C, j_*F) → 0`,
 
 and a Frobenius-equivariant injection `H_c^0(U, F) ↪ H_c^0(C, j_*F)`.
-
-The provisional Weil complexes are not triangulated, so the maps are only asserted to exist.
 (blueprint: `prop-a1-curve-boundary-sequence`) -/
 theorem exists_exact_compactlySupportedCohomology_boundary
     {U C Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]

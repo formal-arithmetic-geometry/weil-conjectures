@@ -27,10 +27,10 @@ one copy.
 `D(X̄_ét)` with bounded constructible homology, on the geometric fiber `X̄ = X ×_{k₀} k̄`, with
 an isomorphism `Fr_X^* F ≅ F` for the geometric Galois Frobenius `Fr_X`. With the present
 discrete coefficients every Weil sheaf and every Weil complex is zero, and `WeilComplex` is not
-triangulated; see the implementation notes of `WeilConjectures.WeilSheaf.Category`. No result
-may use this vanishing. The geometric stalks with their local Frobenius, the trace function and
-the global sections are constructed in `WeilConjectures.WeilSheaf.Stalk`. The notions built on
-them in `WeilConjectures.WeilSheaf.OpenImmersion`, `WeilConjectures.WeilSheaf.LowerShriek`,
+triangulated; see the implementation notes of `WeilConjectures.WeilSheaf.Category`. The
+geometric stalks with their local Frobenius, the trace function and the global sections are
+constructed in `WeilConjectures.WeilSheaf.Stalk`. The notions built on them in
+`WeilConjectures.WeilSheaf.OpenImmersion`, `WeilConjectures.WeilSheaf.LowerShriek`,
 `WeilConjectures.WeilSheaf.Dual` and `WeilConjectures.WeilSheaf.Fourier` are still placeholders
 with `sorry` bodies, each carrying a `TODO(unify)` comment naming the blueprint node that owns
 it; nothing is proved about them.

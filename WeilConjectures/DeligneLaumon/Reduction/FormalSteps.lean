@@ -251,7 +251,7 @@ theorem WeilSheaf.nonempty_upperStar_higherLowerShriek_iso {X Y X' Y' : Scheme.{
     [QuasiCompact (Y' ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y' ↘ Spec (CommRingCat.of k₀))]
     {g : X' ⟶ X} [g.IsOver (Spec (CommRingCat.of k₀))] {h : Y' ⟶ Y}
-    [h.IsOver (Spec (CommRingCat.of k₀))] (_H : IsPullback g f' f h) (F : WeilSheaf k₀ l X)
+    [h.IsOver (Spec (CommRingCat.of k₀))] (hH : IsPullback g f' f h) (F : WeilSheaf k₀ l X)
     (r : ℕ) :
     Nonempty ((WeilSheaf.upperStar h).obj ((WeilSheaf.higherLowerShriek k₀ l f r).obj F) ≅
       (WeilSheaf.higherLowerShriek k₀ l f' r).obj ((WeilSheaf.upperStar g).obj F)) :=
@@ -282,7 +282,7 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.upperStar_derivedLowerShriek_of_isPul
     [QuasiCompact (Y' ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y' ↘ Spec (CommRingCat.of k₀))]
     {g : X' ⟶ X} [g.IsOver (Spec (CommRingCat.of k₀))] {h : Y' ⟶ Y}
-    [h.IsOver (Spec (CommRingCat.of k₀))] (_H : IsPullback g f' f h) {w : ℝ}
+    [h.IsOver (Spec (CommRingCat.of k₀))] (hH : IsPullback g f' f h) {w : ℝ}
     {K : WeilComplex k₀ l X}
     (hK : ((WeilComplex.derivedLowerShriek k₀ l f').obj
       ((WeilComplex.upperStar g).obj K)).IsMixedOfWeightsAtMost ι w) :

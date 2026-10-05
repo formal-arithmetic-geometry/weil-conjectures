@@ -41,7 +41,14 @@ The degree-one bound is derived along the blueprint argument from the boundary s
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage` and the stationary
 phase
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
-These two inputs are stated with `sorry`, so the bound is conditional on them.
+
+## TODO
+
+Prove the two inputs of the degree-one bound:
+- the boundary semicontinuity
+  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`;
+- the stationary phase
+  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
 -/
 
 @[expose] public section

@@ -92,7 +92,7 @@ theorem nonempty_equiv_compactlySupportedCohomology_directImage_two
     [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] (hF : F.IsLisse) :
     Nonempty ((((WeilSheaf.directImage j).obj F).compactlySupportedCohomology 2).Equiv
-      (F.geometricCoinvariants.tateTwist (Nat.card k₀) (-1))) := by
+      ((F.geometricCoinvariants hF).tateTwist (Nat.card k₀) (-1))) := by
   sorry
 
 /-- If `F` is moreover punctually `ι`-pure of weight `w`, then `H_c^2(C, j_*F)` is pure of
