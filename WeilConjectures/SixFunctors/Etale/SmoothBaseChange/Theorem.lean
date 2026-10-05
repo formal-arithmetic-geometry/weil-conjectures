@@ -37,9 +37,17 @@ The proof is the second, shorter proof of the Stacks Project: degree zero is
 the filtered colimit of its `n`-torsion subsheaves; the assertion is étale local on `X` and
 `S`, so by `AlgebraicGeometry.exists_etaleCover_factorization`, the étale-local normal form
 `AlgebraicGeometry.Smooth.exists_etale_to_affineSpace` and the factorisation of
-`X ⟶ 𝔸^d_S` into relative curves it suffices to treat relative dimension one; and there
-`AlgebraicGeometry.Etale.universalBaseChangeProperty_of_forall_lt` carries out the induction
-on `q`.
+`X ⟶ 𝔸^d_S` into relative curves it suffices to treat relative dimension one. There
+`AlgebraicGeometry.Etale.universalBaseChangeProperty_of_smoothOfRelativeDimension_one` gives
+the base-change property after every base change, by strong induction on `q` on
+`AlgebraicGeometry.Etale.UniversalBaseChangeProperty` with step
+`AlgebraicGeometry.Etale.UniversalBaseChangeProperty.of_forall_lt`, starting from
+`AlgebraicGeometry.Etale.universalBaseChangeProperty_of_neg` and
+`AlgebraicGeometry.Etale.universalBaseChangeProperty_zero_of_smooth`. Since the induction
+runs on the universal property, the preceding reductions (torsion, étale localisation,
+factorisation into relative curves) are to be phrased universally as well, and the proof ends
+by specialising along `𝟙 S` with
+`AlgebraicGeometry.Etale.UniversalBaseChangeProperty.baseChangeProperty`.
 
 Compare `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`, the proper base change
 theorem, in which the roles of the two legs of the square are exchanged.

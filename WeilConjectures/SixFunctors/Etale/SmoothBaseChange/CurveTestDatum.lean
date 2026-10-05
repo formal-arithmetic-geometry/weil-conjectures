@@ -16,7 +16,8 @@ normal base `S₀` with algebraically closed function field, an affine smooth re
 `f₀ : X₀ ⟶ S₀` over it, the fibre of `f₀` over a geometric generic point
 `Spec K ⟶ S₀` of `S₀`, and an integer `d` invertible on `S₀`.
 
-A first universal failure of the base-change property in degree `q` can be normalised to
+A failure of the universal base-change property in degree `q`, below which it holds
+universally, can be normalised to
 such a datum: after passing to a field, enlarging it to an algebraically closed field and
 normalising the base, the failure is witnessed by a curve-test datum which is a base change of
 `p` and whose higher direct image `R^q h_* (Λ/dΛ)` does not vanish, with `d` dividing `n`. This is
@@ -32,8 +33,8 @@ is what contradicts it.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.exists_curveTestDatum`: a first universal failure of `BC(p, Λ, q)`
-  produces a curve-test datum which is a base change of `p` and on which a higher direct
+- `AlgebraicGeometry.Etale.exists_curveTestDatum`: a failure of `BC(p, Λ, q)` after some base
+  change, when `BC(p, Λ, q')` holds universally for `q' < q`, produces a curve-test datum which is a base change of `p` and on which a higher direct
   image of a constant sheaf fails to vanish.
 
 ## References
@@ -103,13 +104,10 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (p : X ⟶ S)
 
 Let `p : X ⟶ S` be an affine smooth relative curve with `X` affine, and let `n` be invertible
 on `S` and annihilate `Λ`. Suppose that, for some `q ≥ 1`, `BC(p, Λ, q')` holds universally
-(after every base change `S' ⟶ S`) for all `q' < q`, but `BC(p, Λ, q)` fails universally,
-i.e. fails after some base change. Then there is a curve-test datum `D` which is a base
+(after every base change `S' ⟶ S`) for all `q' < q`, but `BC(p, Λ, q)` does not hold
+universally, i.e. it fails after some base change `S' ⟶ S`. Then there is a curve-test datum `D` which is a base
 change of `p`, whose torsion order `D.d` divides `n`, and on whose geometric generic fibre
-the higher direct image `R^q h_* (Λ/D.d Λ)` of the constant sheaf does not vanish.
-
-That `D.f₀` is affine and smooth of relative dimension one is not an assertion of the lemma:
-these properties are inherited from `p`, since `D.f₀` is a base change of `p`. -/
+the higher direct image `R^q h_* (Λ/D.d Λ)` of the constant sheaf does not vanish. -/
 @[stacks 0F08]
 theorem Etale.exists_curveTestDatum [IsAffine X] [IsAffineHom p]
     [SmoothOfRelativeDimension 1 p] (n : ℕ) (hn : IsUnit (n : Γ(S, ⊤))) (hΛ : (n : Λ) = 0)
