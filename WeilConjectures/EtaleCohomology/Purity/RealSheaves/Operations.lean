@@ -11,6 +11,7 @@ public import Mathlib.Topology.Algebra.Ring.Basic
 public import Mathlib.Topology.Instances.Matrix
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
+public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
@@ -82,7 +83,7 @@ theorem frobeniusWeight_prod (qx : ℕ) {ι' : Type*} (s : Finset ι') {f : ι' 
 /-- Blueprint `sk-d-real-detweights`: the real weight character `a ↦ wt_{ι, q}(a)` of
 `sk-d-weights`, whose determinant weights (`Representation.detWeight`) are the determinant
 weights `dw_ι` of `sk-d-real-detweights`. -/
-noncomputable def weightCharacter (q : ℕ) : Representation.RealWeightCharacter E where
+noncomputable def weightCharacter (q : ℕ) : Representation.RealCharacter E where
   toFun a := Multiplicative.ofAdd (frobeniusWeight ι q (a : E))
   map_one' := by simp [frobeniusWeight]
   map_mul' a b := by
@@ -95,14 +96,6 @@ theorem detWeight_weightCharacter {G V : Type*} [Group G] [AddCommGroup V] [Modu
     ρ.detWeight (weightCharacter ι q) g =
       frobeniusWeight ι q (LinearMap.det (ρ g)) / Module.finrank E V := by
   simp [Representation.detWeight, weightCharacter, Representation.coe_detCharacter_apply]
-
-/-- The `ι`-weight relative to `q ^ e` is the weight relative to `q`, divided by `e`. -/
-theorem frobeniusWeight_pow (q e : ℕ) (a : E) :
-    frobeniusWeight ι (q ^ e) a = frobeniusWeight ι q a / e := by
-  simp only [frobeniusWeight, Nat.cast_pow, Real.log_pow]
-  rcases eq_or_ne (e : ℝ) 0 with he | he
-  · simp [he]
-  · field_simp
 
 end FrobeniusWeight
 
@@ -211,35 +204,6 @@ end Lisse
 
 section Real
 
-/-- The roots of `∏_{β ∈ M} (1 - β T)` are the inverses of the elements of `M`, if these are
-nonzero. -/
-theorem roots_prod_one_sub_C_mul_X {F : Type*} [Field F] {M : Multiset F} (hM : (0 : F) ∉ M) :
-    ((M.map fun β ↦ 1 - Polynomial.C β * Polynomial.X).prod).roots = M.map (·⁻¹) := by
-  have hfac (β : F) (hβ : β ≠ 0) : (1 - Polynomial.C β * Polynomial.X : Polynomial F) =
-      Polynomial.C (-β) * (Polynomial.X - Polynomial.C β⁻¹) := by
-    rw [mul_sub, ← Polynomial.C_mul, neg_mul, mul_inv_cancel₀ hβ]
-    simp only [map_neg, map_one]
-    ring
-  rw [Polynomial.roots_multiset_prod]
-  · rw [Multiset.bind_map]
-    conv_rhs => rw [← Multiset.bind_singleton M (·⁻¹)]
-    refine Multiset.bind_congr fun β hβ ↦ ?_
-    have hβ : β ≠ 0 := fun h ↦ hM (h ▸ hβ)
-    rw [hfac β hβ, Polynomial.roots_C_mul _ (neg_ne_zero.mpr hβ), Polynomial.roots_X_sub_C]
-  · simp only [Multiset.mem_map, not_exists, not_and]
-    intro β _ h
-    simpa using congrArg (Polynomial.coeff · 0) h
-
-/-- Mapping `∏_{β ∈ M} (1 - β T)` along a ring homomorphism `f` gives
-`∏_{β ∈ M} (1 - f(β) T)`. -/
-theorem map_prod_one_sub_C_mul_X {F F' : Type*} [Field F] [Field F'] (f : F →+* F')
-    (M : Multiset F) :
-    ((M.map fun β ↦ 1 - Polynomial.C β * Polynomial.X).prod).map f =
-      ((M.map f).map fun β ↦ 1 - Polynomial.C β * Polynomial.X).prod := by
-  rw [Polynomial.map_multiset_prod, Multiset.map_map, Multiset.map_map]
-  congr 1
-  exact Multiset.map_congr rfl fun β _ ↦ by simp
-
 variable {V V' : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
   [FiniteDimensional (PadicAlgCl l) V] [AddCommGroup V'] [Module (PadicAlgCl l) V']
   [FiniteDimensional (PadicAlgCl l) V'] {ρ : Representation (PadicAlgCl l) W.carrier V}
@@ -265,7 +229,7 @@ theorem map_localPolynomial (x : C.finitePoints) :
     (W.localPolynomial l ρ x).map ι =
       (((W.localEigenvalues l ρ x).map ι).map
         fun β ↦ 1 - Polynomial.C β * Polynomial.X).prod := by
-  rw [localPolynomial_eq_prod_localEigenvalues, map_prod_one_sub_C_mul_X]
+  rw [localPolynomial_eq_prod_localEigenvalues, Polynomial.map_multiset_prod_one_sub_C_mul_X]
 
 /-- The complex local eigenvalues are nonzero. -/
 theorem zero_notMem_map_localEigenvalues (x : C.finitePoints) :
@@ -286,9 +250,10 @@ theorem IsReal.map_conj_localEigenvalues (h : W.IsReal l ρ ι) (x : C.finitePoi
       (W.localPolynomial l ρ x).map ι := by
     ext n
     simpa [Polynomial.coeff_map] using h x n
-  rw [map_localPolynomial, map_prod_one_sub_C_mul_X] at h₁
+  rw [map_localPolynomial, Polynomial.map_multiset_prod_one_sub_C_mul_X] at h₁
   have := congrArg Polynomial.roots h₁
-  rw [roots_prod_one_sub_C_mul_X hM', roots_prod_one_sub_C_mul_X hM] at this
+  rw [Polynomial.roots_multiset_prod_one_sub_C_mul_X hM',
+    Polynomial.roots_multiset_prod_one_sub_C_mul_X hM] at this
   exact Multiset.map_injective inv_injective this
 
 /-- Blueprint `sk-d-real-weights`: a representation whose multisets of complex local
@@ -300,7 +265,7 @@ theorem isReal_of_map_conj_localEigenvalues
   intro x n
   have h₁ : ((W.localPolynomial l ρ x).map ι).map (starRingEnd ℂ) =
       (W.localPolynomial l ρ x).map ι := by
-    rw [map_localPolynomial, map_prod_one_sub_C_mul_X, h x]
+    rw [map_localPolynomial, Polynomial.map_multiset_prod_one_sub_C_mul_X, h x]
   simpa [Polynomial.coeff_map] using congrArg (Polynomial.coeff · n) h₁
 
 /-- Blueprint `sk-r-real-linear`: if the local characteristic polynomials of `σ` are those of an

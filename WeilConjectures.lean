@@ -279,7 +279,6 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.OpenSubcurve
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights

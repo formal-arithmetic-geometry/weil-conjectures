@@ -6,7 +6,6 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.ConstructibleSheaf.Refinement
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Topology.StratificationDense
 
 /-!
@@ -26,10 +25,6 @@ the interiors of the strata of a witnessing stratification is dense
 `U` the sheaf `F|_U` is the pullback of `F` along a morphism with image in `Xᵢ`, hence finite
 locally constant by the independence of the scheme structure. No Noetherian hypothesis is
 needed. (blueprint: `prop:constructible-generic-constancy`)
-
-Over a field, the complement of that open has strictly smaller dimension
-(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.exists_open_topologicalKrullDim_compl_lt`,
-blueprint `fin2-lem-lisse-dense-open`).
 
 -/
 
@@ -167,21 +162,6 @@ theorem IsConstructibleSheaf.exists_dense_open (F : Sheaf X.smallEtaleTopology A
       (Scheme.homOfLE_ι X (le_iSup S.interiorOpens i.down)).symm) ≪≫
       (Etale.upperStarComp A (S.interiorUnionCover.f i) S.interiorUnion.ι).app F
   exact IsFiniteLocallyConstantSheaf.of_openCover S.interiorUnionCover _
-
-/-- Blueprint `fin2-lem-lisse-dense-open`: A lisse locus for a constructible sheaf.
-
-Let `X` be a nonempty scheme of finite type over a field `k` and `F` a constructible sheaf on
-`X_ét`. Then there is an open subscheme `U ⊆ X` with `dim (X ∖ U) < dim X` on which `F` is
-finite locally constant: the dense open of
-`AlgebraicGeometry.Scheme.IsConstructibleSheaf.exists_dense_open` has a closed complement of
-smaller dimension (`AlgebraicGeometry.topologicalKrullDim_compl_lt_of_dense`). -/
-theorem IsConstructibleSheaf.exists_open_topologicalKrullDim_compl_lt {k : Type u} [Field k]
-    (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] [Nonempty X]
-    (F : Sheaf X.smallEtaleTopology A) [IsConstructibleSheaf F] :
-    ∃ U : X.Opens, topologicalKrullDim ((U : Set X)ᶜ : Set X) < topologicalKrullDim X ∧
-      IsFiniteLocallyConstantSheaf ((Etale.upperStar A U.ι).obj F) := by
-  obtain ⟨U, hU, hF⟩ := IsConstructibleSheaf.exists_dense_open (FA := FA) (CA := CA) F
-  exact ⟨U, topologicalKrullDim_compl_lt_of_dense f U.isOpen hU, hF⟩
 
 end Generic
 

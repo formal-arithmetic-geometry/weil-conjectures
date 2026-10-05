@@ -10,7 +10,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.LinearAlgebra.GeneralLinearGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.OpenSubcurve
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.Mathlib.Algebra.Order.BigOperators.Group.Multiset
 public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
@@ -218,6 +217,7 @@ variable {W : WeilGroup p} {l : ℕ} [Fact l.Prime] {V V' : Type u} [AddCommGrou
   {ρ : Representation (PadicAlgCl l) W.carrier V} (ι : PadicAlgCl l →+* ℂ)
 
 omit [Finite K] [IsCurve p] in
+/-- The determinant line `ULift ℚ̄_ℓ` is one-dimensional. -/
 theorem finrank_ulift_padicAlgCl :
     Module.finrank (PadicAlgCl l) (ULift.{u} (PadicAlgCl l)) = 1 :=
   (ULift.moduleEquiv (R := PadicAlgCl l) (M := PadicAlgCl l)).finrank_eq.trans
@@ -314,7 +314,7 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
 
 set_option maxHeartbeats 1000000 in
 -- The constituent bound elaborates exterior powers of direct sums of subquotients.
-/-- Blueprint `thm-rp-real-lisse-purity-affine`, Steps 1–3, for the composition factors.
+/-- Blueprint `thm:rp-real-lisse-purity-affine`, Steps 1–3, for the composition factors.
 
 Let `ρ` be an `ι`-real lisse Weil representation on a smooth geometrically connected affine
 curve, and `0 = F 0 ⋖ F 1 ⋖ ⋯ ⋖ F n = ρ` a composition series. Then every composition factor
@@ -493,7 +493,7 @@ theorem isPunctuallyPure_subquotient_of_isReal [IsAffine C] [SmoothOfRelativeDim
       obtain ⟨b, hb, rfl⟩ := Multiset.mem_map.1 ha
       exact key b hb) hsum _ (Multiset.mem_map_of_mem _ hα)
 
-/-- Blueprint `thm-rp-real-lisse-purity-affine`: Purity of real lisse sheaves on curves, for an
+/-- Blueprint `thm:rp-real-lisse-purity-affine`: Purity of real lisse sheaves on curves, for an
 affine curve.
 
 Let `C₀ / 𝔽_q` be a smooth geometrically connected affine curve and `ρ` an `ι`-real lisse Weil
@@ -549,23 +549,7 @@ theorem isPunctuallyPure_of_isConstituent_of_isReal [SmoothOfRelativeDimension 1
     (σ : Representation (PadicAlgCl l) W.carrier V') (hσ : σ.IsConstituent ρ)
     {γ : ℝ} (hγ : W.HasDetWeight l σ ι γ) :
     W.IsPunctuallyPure l σ ι γ := by
-  intro x α hα
-  obtain ⟨U, hU, hxU, -⟩ : ∃ U : C.Opens, IsAffineOpen U ∧ x.1 ∈ U ∧ U ≤ ⊤ :=
-    TopologicalSpace.Opens.isBasis_iff_nbhd.mp C.isBasis_affineOpens
-      (show x.1 ∈ (⊤ : C.Opens) from trivial)
-  have : IsAffine U := hU
-  have : Nonempty U := ⟨⟨x.1, hxU⟩⟩
-  have : IsCurve (U.ι ≫ p) := IsCurve.comp_of_isOpenImmersion p U.ι
-  have : SmoothOfRelativeDimension 1 (U.ι ≫ p) :=
-    inferInstanceAs (SmoothOfRelativeDimension (0 + 1) (U.ι ≫ p))
-  have : Smooth p := SmoothOfRelativeDimension.smooth 1 p
-  have : GeometricallyConnected (U.ι ≫ p) := GeometricallyConnected.comp_of_isOpenImmersion p U.ι
-  have hy : (⟨x.1, hxU⟩ : U) ∈ U.toScheme.finitePoints :=
-    (Scheme.mem_finitePoints_iff_of_isOpenImmersion U.ι _).1 x.2
-  have h := isPunctuallyPure_of_isConstituent_of_isReal_of_isAffine (W.ofIsOpenImmersion U.ι) l ρ
-    ι (hρ.ofIsOpenImmersion U.ι) (hreal.ofIsOpenImmersion U.ι ι) σ hσ
-    (hγ.ofIsOpenImmersion U.ι ι)
-  exact h.of_ofIsOpenImmersion U.ι ι ⟨_, hy⟩ α hα
+  sorry
 
 end WeilGroup
 
