@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
 public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
@@ -81,8 +82,9 @@ Several clauses of the blueprint statements cannot be expressed and are dropped:
 - `AlgebraicGeometry.picardSubfunctorDegree`: the degree-`d` subfunctor of the Picard presheaf.
 - `AlgebraicGeometry.picardFunctorDegree`: the degree-`d` part `Pic^d_{X/k}` of the relative
   Picard functor.
-- `AlgebraicGeometry.dualNumbersOver`: `Spec k[ε]` as a `k`-scheme, `k[ε] = k[T]/(T²)`.
-- `AlgebraicGeometry.dualNumbersZero`: the `k`-point `ε ↦ 0` of `Spec k[ε]`.
+- `AlgebraicGeometry.dualNumbersScale`: the `k`-endomorphism `ε ↦ cε` of `(Spec k)[ε]`, the
+  dual-number thickening `AlgebraicGeometry.Scheme.dualNumbersOver (Spec k)` of `Spec k` whose
+  `k`-point `ε ↦ 0` is `AlgebraicGeometry.Scheme.dualNumbersιOver`.
 - `AlgebraicGeometry.tangentSpaceAt`: the tangent space of a `k`-scheme at a `k`-rational point,
   defined through the functor of points.
 - `AlgebraicGeometry.tangentSubgroup`: the tangent space of a group scheme at the unit, as the
@@ -236,32 +238,13 @@ end Decomposition
 
 section TangentSpace
 
-variable (k : Type u) [Field k]
-
-/-- The dual numbers `k[ε] = k[T]/(T²)` over `k`, as a `k`-scheme `Spec k[ε] ⟶ Spec k`. -/
-noncomputable abbrev dualNumbersOver : Over (Spec (.of k)) :=
-  Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k (DualNumber k))))
-
-/-- The `k`-rational point `ε ↦ 0` of `Spec k[ε]`, i.e. the closed immersion
-`Spec k ⟶ Spec k[ε]` induced by the `k`-algebra projection `k[ε] → k`. -/
-noncomputable def dualNumbersZero : 𝟙_ (Over (Spec (.of k))) ⟶ dualNumbersOver k :=
-  Over.homMk (Spec.map (CommRingCat.ofHom (TrivSqZeroExt.fstHom k k k : DualNumber k →+* k))) (by
-    simp only [Over.mk_hom, Over.tensorUnit_hom]
-    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, AlgHom.comp_algebraMap]
-    exact Spec.map_id _)
-
-@[simp]
-lemma dualNumbersZero_left :
-    (dualNumbersZero k).left =
-      Spec.map (CommRingCat.ofHom (TrivSqZeroExt.fstHom k k k : DualNumber k →+* k)) :=
-  rfl
-
-variable {k}
+variable {k : Type u} [Field k]
 
 /-- The **tangent space** of a `k`-scheme `P` at a `k`-rational point `e`, defined through the
 functor of points: it is the fibre over `e` of the restriction map
-`P(k[ε]) → P(k)`, where `k[ε] = k[T]/(T²)` are the dual numbers and the map is induced by
-`ε ↦ 0`.
+`P((Spec k)[ε]) → P(k)`, where `(Spec k)[ε] = Spec k[ε]` is the dual-number thickening
+`AlgebraicGeometry.Scheme.dualNumbersOver (Spec k)` of `Spec k`, `k[ε] = k[T]/(T²)`, and the map
+is induced by the `k`-point `ε ↦ 0` (`AlgebraicGeometry.Scheme.dualNumbersιOver`).
 
 `k`-rational points of `P` are morphisms from the terminal object `𝟙_ (Over (Spec k))` of the
 category of `k`-schemes, so that the unit `η[G]` of a group scheme `G` is directly a point in
@@ -269,51 +252,34 @@ this sense.  Mathlib has no tangent space of a scheme, so this is a genuine defi
 than a reuse. At the unit of a group scheme it is a `k`-vector space, its addition being the
 group law; see `AlgebraicGeometry.tangentSubgroup`. -/
 def tangentSpaceAt (P : Over (Spec (.of k))) (e : 𝟙_ (Over (Spec (.of k))) ⟶ P) : Type u :=
-  {v : dualNumbersOver k ⟶ P // dualNumbersZero k ≫ v = e}
+  {v : Scheme.dualNumbersOver (Spec (.of k)) ⟶ P // Scheme.dualNumbersιOver _ ≫ v = e}
 
 variable (k) in
-/-- The `k`-endomorphism of `Spec k[ε]` induced by the `k`-algebra map `ε ↦ c ε` of the dual
-numbers. It defines the scalar action on tangent spaces. -/
-noncomputable def dualNumbersScale (c : k) : dualNumbersOver k ⟶ dualNumbersOver k :=
-  Over.homMk (Spec.map (CommRingCat.ofHom (DualNumber.scale c : DualNumber k →+* DualNumber k))) (by
-    simp only [Over.mk_hom]
-    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, AlgHom.comp_algebraMap])
-
-@[simp]
-lemma dualNumbersScale_left (c : k) :
-    (dualNumbersScale k c).left =
-      Spec.map (CommRingCat.ofHom (DualNumber.scale c : DualNumber k →+* DualNumber k)) :=
-  rfl
+/-- The `k`-endomorphism `ε ↦ cε` of `(Spec k)[ε]` for `c : k`: the scaling
+`AlgebraicGeometry.Scheme.dualNumbersScaleOver` by `c` viewed as a global section of `𝒪_{Spec k}`
+through `k ≅ Γ(Spec k, 𝒪)`. It defines the scalar action on tangent spaces. -/
+noncomputable abbrev dualNumbersScale (c : k) :
+    Scheme.dualNumbersOver (Spec (.of k)) ⟶ Scheme.dualNumbersOver (Spec (.of k)) :=
+  Scheme.dualNumbersScaleOver (Spec (.of k)) ((Scheme.ΓSpecIso (.of k)).inv.hom c)
 
 @[reassoc (attr := simp)]
-lemma dualNumbersZero_comp_dualNumbersScale (c : k) :
-    dualNumbersZero k ≫ dualNumbersScale k c = dualNumbersZero k := by
-  ext : 1
-  rw [Over.comp_left, dualNumbersScale_left, dualNumbersZero_left, ← Spec.map_comp,
-    ← CommRingCat.ofHom_comp, ← AlgHom.comp_toRingHom, DualNumber.fstHom_comp_scale]
+lemma dualNumbersιOver_comp_dualNumbersScale (c : k) :
+    Scheme.dualNumbersιOver _ ≫ dualNumbersScale k c = Scheme.dualNumbersιOver _ :=
+  Scheme.dualNumbersιOver_comp_scaleOver _ _
 
 @[simp]
 lemma dualNumbersScale_one : dualNumbersScale k 1 = 𝟙 _ := by
-  ext : 1
-  rw [dualNumbersScale_left, DualNumber.scale_one, Over.id_left]
-  exact Spec.map_id _
+  simp [dualNumbersScale]
 
 @[reassoc]
 lemma dualNumbersScale_mul (c d : k) :
     dualNumbersScale k (c * d) = dualNumbersScale k c ≫ dualNumbersScale k d := by
-  ext : 1
-  rw [Over.comp_left, dualNumbersScale_left, dualNumbersScale_left, dualNumbersScale_left,
-    ← Spec.map_comp, ← CommRingCat.ofHom_comp, ← AlgHom.comp_toRingHom, DualNumber.scale_mul]
+  simp [dualNumbersScale, Scheme.dualNumbersScaleOver_mul]
 
-/-- Scaling by `0` factors through the point `ε ↦ 0`, since `ε ↦ 0` factors as
-`k[ε] → k → k[ε]`. -/
+/-- Scaling by `0` factors through the point `ε ↦ 0`. -/
 lemma dualNumbersScale_zero :
-    dualNumbersScale k 0 = CartesianMonoidalCategory.toUnit _ ≫ dualNumbersZero k := by
-  ext : 1
-  rw [Over.comp_left, dualNumbersScale_left, dualNumbersZero_left, Over.toUnit_left]
-  simp only [Over.mk_hom]
-  rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, DualNumber.scale_zero, AlgHom.comp_toRingHom]
-  rfl
+    dualNumbersScale k 0 = CartesianMonoidalCategory.toUnit _ ≫ Scheme.dualNumbersιOver _ := by
+  simp [dualNumbersScale, Scheme.dualNumbersScaleOver_zero]
 
 section GrpObj
 
@@ -323,8 +289,8 @@ variable (P : Over (Spec (.of k))) [GrpObj P]
 
 /-- The tangent space of a group scheme `P` at the unit, as the kernel of the restriction map
 `P(k[ε]) → P(k)` induced by `ε ↦ 0`, a subgroup of the group `P(k[ε])`. -/
-def tangentSubgroup : Subgroup (dualNumbersOver k ⟶ P) where
-  carrier := {v | dualNumbersZero k ≫ v = η[P]}
+def tangentSubgroup : Subgroup (Scheme.dualNumbersOver (Spec (.of k)) ⟶ P) where
+  carrier := {v | Scheme.dualNumbersιOver _ ≫ v = η[P]}
   one_mem' := (MonObj.comp_one _).trans (MonObj.one_eq_one (M := P)).symm
   mul_mem' {v w} (hv : _ = _) (hw : _ = _) := by
     rw [Set.mem_ofPred_eq, MonObj.comp_mul, hv, hw, MonObj.one_eq_one, _root_.one_mul]
@@ -358,7 +324,7 @@ lemma tangentSpaceAt.val_neg (v : tangentSpaceAt P η[P]) : (-v).1 = v.1⁻¹ :=
 precomposed with the endomorphism `ε ↦ c ε` of `Spec k[ε]`. -/
 noncomputable instance : SMul k (tangentSpaceAt P η[P]) where
   smul c v := ⟨dualNumbersScale k c ≫ v.1, by
-    rw [dualNumbersZero_comp_dualNumbersScale_assoc, v.2]⟩
+    rw [dualNumbersιOver_comp_dualNumbersScale_assoc, v.2]⟩
 
 @[simp]
 lemma tangentSpaceAt.val_smul (c : k) (v : tangentSpaceAt P η[P]) :

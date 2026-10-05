@@ -7,6 +7,9 @@ module
 
 public import Mathlib.Algebra.DualNumber
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import WeilConjectures.Mathlib.Algebra.DualNumber
 
 /-!
 # Dual-number thickenings of schemes
@@ -36,6 +39,11 @@ values in the ring `k[ε]`.
   projection `X[ε] ⟶ X` and the closed immersion `X ⟶ X[ε]`.
 - `AlgebraicGeometry.Scheme.Hom.dualNumbers`: the morphism `f[ε] : X[ε] ⟶ Y[ε]`.
 - `AlgebraicGeometry.Scheme.dualNumbersMul`: the map `X[ε][δ] ⟶ X[η]`, `η ↦ εδ`.
+- `AlgebraicGeometry.Scheme.dualNumbersScale`: scaling the infinitesimal, `ε ↦ cε`, by a global
+  section `c` of `𝒪_X`.
+- `AlgebraicGeometry.Scheme.dualNumbersOver`, `AlgebraicGeometry.Scheme.dualNumbers₂Over`: the
+  thickenings `S[ε]` and `S[ε][δ]` as schemes over `S`, with the morphisms above as morphisms over
+  `S` (`dualNumbersιOver`, `dualNumbersScaleOver`, `dualNumbersMulOver`, ...).
 - `AlgebraicGeometry.Scheme.dualNumbersToSpec`: the isomorphism `(Spec R)[ε] ⟶ Spec R[ε]`.
 
 ## Implementation notes
@@ -53,7 +61,7 @@ milestone of the blueprint and are recorded as `sorry`.
 
 universe u
 
-open CategoryTheory TopologicalSpace TrivSqZeroExt
+open CategoryTheory MonoidalCategory TopologicalSpace TrivSqZeroExt
 
 /-! ### Dual numbers as a functor on commutative rings -/
 
@@ -204,6 +212,127 @@ theorem Hom.dualNumbers_comp {Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
 theorem dualNumbersMul_comp_proj (X : Scheme.{u}) :
     X.dualNumbersMul ≫ X.dualNumbersProj = X.dualNumbers.dualNumbersProj ≫ X.dualNumbersProj := by
   sorry
+
+/-! ### Scaling the infinitesimal -/
+
+variable (X) in
+/-- Scaling the infinitesimal by a global section `c` of `𝒪_X`: the endomorphism `ε ↦ cε` of
+`X[ε]`, the identity on points and `a + εb ↦ a + εcb` on functions. It is the scalar action of
+`Γ(X, 𝒪_X)` on tangent vectors. -/
+noncomputable def dualNumbersScale (c : Γ(X, ⊤)) : X.dualNumbers ⟶ X.dualNumbers where
+  base := 𝟙 _
+  c := { app := fun U ↦ CommRingCat.ofHom
+            (DualNumber.scale (X.presheaf.map (homOfLE le_top : U.unop ⟶ ⊤).op c)).toRingHom
+         naturality := by sorry } ≫ (TopCat.Presheaf.Pushforward.id _).inv
+  prop := by sorry
+
+@[reassoc (attr := simp)]
+theorem dualNumbersScale_comp_proj (c : Γ(X, ⊤)) :
+    X.dualNumbersScale c ≫ X.dualNumbersProj = X.dualNumbersProj := by
+  sorry
+
+@[reassoc (attr := simp)]
+theorem dualNumbersι_comp_scale (c : Γ(X, ⊤)) :
+    X.dualNumbersι ≫ X.dualNumbersScale c = X.dualNumbersι := by
+  sorry
+
+@[simp]
+theorem dualNumbersScale_one : X.dualNumbersScale 1 = 𝟙 _ := by
+  sorry
+
+theorem dualNumbersScale_mul (c d : Γ(X, ⊤)) :
+    X.dualNumbersScale (c * d) = X.dualNumbersScale c ≫ X.dualNumbersScale d := by
+  sorry
+
+/-- Scaling by `0` is the composite `X[ε] ⟶ X ⟶ X[ε]`, `ε ↦ 0`. -/
+theorem dualNumbersScale_zero : X.dualNumbersScale 0 = X.dualNumbersProj ≫ X.dualNumbersι := by
+  sorry
+
+/-! ### The thickening as a scheme over its base -/
+
+section Over
+
+variable (S : Scheme.{u})
+
+/-- The thickening `S[ε]` as a scheme over `S`, through the projection `p : S[ε] ⟶ S`. -/
+noncomputable def dualNumbersOver : Over S :=
+  Over.mk S.dualNumbersProj
+
+@[simp]
+theorem dualNumbersOver_left : (dualNumbersOver S).left = S.dualNumbers :=
+  rfl
+
+@[simp]
+theorem dualNumbersOver_hom : (dualNumbersOver S).hom = S.dualNumbersProj :=
+  rfl
+
+/-- The two-parameter thickening `S[ε][δ]` as a scheme over `S`. -/
+noncomputable def dualNumbers₂Over : Over S :=
+  Over.mk (S.dualNumbers.dualNumbersProj ≫ S.dualNumbersProj)
+
+/-- The closed immersion `i : S ⟶ S[ε]`, `ε ↦ 0`, as a morphism over `S` from the terminal
+object `S` of the schemes over `S`: the `S`-point `ε ↦ 0` of `S[ε]`. -/
+noncomputable def dualNumbersιOver : 𝟙_ (Over S) ⟶ dualNumbersOver S :=
+  Over.homMk S.dualNumbersι S.dualNumbersι_comp_proj
+
+@[simp]
+theorem dualNumbersιOver_left : (dualNumbersιOver S).left = S.dualNumbersι :=
+  rfl
+
+/-- The projection `S[ε][δ] ⟶ S[ε]` forgetting `δ`, as a morphism over `S`. -/
+noncomputable def dualNumbersProjεOver : dualNumbers₂Over S ⟶ dualNumbersOver S :=
+  Over.homMk S.dualNumbers.dualNumbersProj
+
+/-- The projection `S[ε][δ] ⟶ S[δ]` forgetting `ε`, as a morphism over `S`. -/
+noncomputable def dualNumbersProjδOver : dualNumbers₂Over S ⟶ dualNumbersOver S :=
+  Over.homMk S.dualNumbersProj.dualNumbers (by sorry)
+
+/-- The closed immersion `S[ε] ⟶ S[ε][δ]`, `δ ↦ 0`, as a morphism over `S`. -/
+noncomputable def dualNumbersιεOver : dualNumbersOver S ⟶ dualNumbers₂Over S :=
+  Over.homMk S.dualNumbers.dualNumbersι (by sorry)
+
+/-- The closed immersion `S[δ] ⟶ S[ε][δ]`, `ε ↦ 0`, as a morphism over `S`. -/
+noncomputable def dualNumbersιδOver : dualNumbersOver S ⟶ dualNumbers₂Over S :=
+  Over.homMk S.dualNumbersι.dualNumbers (by sorry)
+
+/-- The map `S[ε][δ] ⟶ S[η]`, `η ↦ εδ`, as a morphism over `S`. -/
+noncomputable def dualNumbersMulOver : dualNumbers₂Over S ⟶ dualNumbersOver S :=
+  Over.homMk S.dualNumbersMul (by sorry)
+
+/-- Scaling the infinitesimal by a global section `c` of `𝒪_S`, as an endomorphism of `S[ε]`
+over `S`. -/
+noncomputable def dualNumbersScaleOver (c : Γ(S, ⊤)) : dualNumbersOver S ⟶ dualNumbersOver S :=
+  Over.homMk (S.dualNumbersScale c) (S.dualNumbersScale_comp_proj c)
+
+@[simp]
+theorem dualNumbersScaleOver_left (c : Γ(S, ⊤)) :
+    (dualNumbersScaleOver S c).left = S.dualNumbersScale c :=
+  rfl
+
+@[reassoc (attr := simp)]
+theorem dualNumbersιOver_comp_scaleOver (c : Γ(S, ⊤)) :
+    dualNumbersιOver S ≫ dualNumbersScaleOver S c = dualNumbersιOver S := by
+  ext : 1
+  simp
+
+@[simp]
+theorem dualNumbersScaleOver_one : dualNumbersScaleOver S 1 = 𝟙 _ := by
+  ext : 1
+  simp
+
+theorem dualNumbersScaleOver_mul (c d : Γ(S, ⊤)) :
+    dualNumbersScaleOver S (c * d) = dualNumbersScaleOver S c ≫ dualNumbersScaleOver S d := by
+  ext : 1
+  simp [dualNumbersScale_mul]
+
+/-- Scaling by `0` factors through the `S`-point `ε ↦ 0` of `S[ε]`. -/
+theorem dualNumbersScaleOver_zero :
+    dualNumbersScaleOver S 0 =
+      CartesianMonoidalCategory.toUnit (dualNumbersOver S) ≫ dualNumbersιOver S := by
+  ext : 1
+  simp [dualNumbersScale_zero, Over.toUnit_left]
+
+end Over
 
 /-! ### The thickening of an affine scheme -/
 

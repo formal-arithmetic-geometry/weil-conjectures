@@ -176,44 +176,6 @@ end GrpObj
 
 section InfPoints
 
-namespace Scheme
-
-variable (S : Scheme.{u})
-
-/-- The thickening `S[ε]` as a scheme over `S`, through the projection `p : S[ε] ⟶ S`. -/
-noncomputable def dualNumbersOver : Over S :=
-  Over.mk S.dualNumbersProj
-
-/-- The two-parameter thickening `S[ε][δ]` as a scheme over `S`. -/
-noncomputable def dualNumbers₂Over : Over S :=
-  Over.mk (S.dualNumbers.dualNumbersProj ≫ S.dualNumbersProj)
-
-/-- The closed immersion `i : S ⟶ S[ε]`, `ε ↦ 0`, as a morphism over `S`. -/
-noncomputable def dualNumbersιOver : Over.mk (𝟙 S) ⟶ dualNumbersOver S :=
-  Over.homMk S.dualNumbersι
-
-/-- The projection `S[ε][δ] ⟶ S[ε]` forgetting `δ`, as a morphism over `S`. -/
-noncomputable def dualNumbersProjεOver : dualNumbers₂Over S ⟶ dualNumbersOver S :=
-  Over.homMk S.dualNumbers.dualNumbersProj
-
-/-- The projection `S[ε][δ] ⟶ S[δ]` forgetting `ε`, as a morphism over `S`. -/
-noncomputable def dualNumbersProjδOver : dualNumbers₂Over S ⟶ dualNumbersOver S :=
-  Over.homMk S.dualNumbersProj.dualNumbers (by sorry)
-
-/-- The closed immersion `S[ε] ⟶ S[ε][δ]`, `δ ↦ 0`, as a morphism over `S`. -/
-noncomputable def dualNumbersιεOver : dualNumbersOver S ⟶ dualNumbers₂Over S :=
-  Over.homMk S.dualNumbers.dualNumbersι (by sorry)
-
-/-- The closed immersion `S[δ] ⟶ S[ε][δ]`, `ε ↦ 0`, as a morphism over `S`. -/
-noncomputable def dualNumbersιδOver : dualNumbersOver S ⟶ dualNumbers₂Over S :=
-  Over.homMk S.dualNumbersι.dualNumbers (by sorry)
-
-/-- The map `S[ε][δ] ⟶ S[η]`, `η ↦ εδ`, as a morphism over `S`. -/
-noncomputable def dualNumbersMulOver : dualNumbers₂Over S ⟶ dualNumbersOver S :=
-  Over.homMk S.dualNumbersMul (by sorry)
-
-end Scheme
-
 variable {S : Scheme.{u}} (G : Over S) [GrpObj G]
 
 /-- Precomposition with a morphism `f : X ⟶ Y` over `S`, as a group homomorphism
