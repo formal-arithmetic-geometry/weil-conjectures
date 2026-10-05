@@ -36,14 +36,13 @@ kernels this reduces the inversion theorem to a single computation, that the con
 
 ## Coefficients
 
-`AlgebraicGeometry.Etale.kernelConvolution` and the shift compatibility
-`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_shift` are stated for an arbitrary
-coefficient category of the étale six functors, and the diagonal kernel for every commutative
-ring `Λ`: their proofs are formal. The composition of kernel transforms, the convolution of the
-Fourier kernels and the inversion theorem are **torsion** statements, assuming
-`[Finite Λ] [HasInvertibleExponent Λ S]`: their proofs use compact-support base change, the
-projection formula for compactly supported direct images and the cohomology of `𝔸^r`, which are
-proved at finite coefficients and carried over to `ℚ̄_ℓ` by reduction.
+`AlgebraicGeometry.Etale.kernelConvolution` is defined for any coefficient category `A` on which
+the étale six functors are built. The theorems follow the classes of the module docstring of
+`WeilConjectures.FourierTransform.Defs`. The diagonal kernel assumes `[Finite Λ]`: its proof
+uses `Δ_! = Δ_*` and the composition law of `Rf_!`. The composition of kernel transforms, the
+convolution of the Fourier kernels and the inversion theorem also assume
+`[HasInvertibleExponent Λ S]`: they use the projection formula for `Rf_!` and the cohomology
+of `𝔸^r`.
 
 ## Implementation notes
 
@@ -101,8 +100,7 @@ two projections are `r₁₂` and `r₂₃`; `r₁₃` is
 ```
 
 `𝒦` is pulled back along `r₁₂`, `𝒦'` along `r₂₃`, the two are tensored, and the result is
-pushed forward with compact support along `r₁₃`. The coefficients are an arbitrary category
-`A` on which the étale six functors are built. -/
+pushed forward with compact support along `r₁₃`. -/
 noncomputable def kernelConvolution
     [HasCompactification (pullback.tripleProj₁₃ π π' π'')]
     (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A))
@@ -113,17 +111,11 @@ noncomputable def kernelConvolution
         ((D((pullback.snd (pullback.snd π π') (pullback.fst π' π''))^*[A])).obj 𝒦')).obj
       ((D((pullback.fst (pullback.snd π π') (pullback.fst π' π''))^*[A])).obj 𝒦))
 
-/-- Shifting the kernel shifts the kernel transform: the kernel transform of `𝒦[a]` with shift
-`c` is the kernel transform of `𝒦` with shift `a + c`.
+end Convolution
 
-This is a **general** statement, for every coefficient category `A`: it is formal, each factor
-of `AlgebraicGeometry.Etale.kernelTransform` commuting with shifts (the `Functor.CommShift`
-instances of `WeilConjectures.SixFunctors.Etale.Derived.Shift`). -/
-theorem nonempty_iso_kernelTransform_shift [HasCompactification (pullback.snd π π')]
-    (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a c : ℤ) :
-    Nonempty (kernelTransform A π π' ((shiftFunctor _ a).obj 𝒦) c ≅
-        kernelTransform A π π' 𝒦 (a + c)) :=
-  sorry
+section KernelTransform
+
+variable {S V V' V'' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S) (π'' : V'' ⟶ S)
 
 /-- The composite of the kernel transform of `𝒦` with shift `a` and the kernel transform of
 `𝒦'` with shift `c` is the kernel transform of the convolution `𝒦' ∗ 𝒦` with shift `a + c`.
@@ -143,14 +135,24 @@ The proof reads the composite on the triple product
 
 and applies base change to the cartesian square with sides `r₁₂`, `r₂₃`, `p₂` and `q₁`; the
 compactifiability of `r₂₃` that this needs is the instance
-`AlgebraicGeometry.HasCompactification.pullback_snd` applied to `p₂ = pullback.snd π π'`.
+`AlgebraicGeometry.HasCompactification.pullback_snd` applied to `p₂ = pullback.snd π π'`. It
+then uses the projection formula for `r₂₃` and `r₁₃`, and the composition law of `Rf_!`.
+
+The maps `p₂`, `q₂ = pullback.snd π' π''` and `r₁₃` are base changes of `π` and `π'`, so
+they are locally of finite type and quasi-compact by the hypotheses on `π` and `π'`;
+compact-support base change needs this quasi-compactness. The statement is over the whole unbounded
+derived categories, while the project's projection formula
+`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek` only covers a
+bounded constructible complex and a complex of finite Tor amplitude. As for
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor`, the unbounded form holds for
+finite `Λ`: the projection map is an isomorphism for `j_!` of an open immersion formally, and
+for a proper morphism because its direct image then has finite cohomological dimension and so
+commutes with the colimits reducing to bounded complexes.
 
 In particular `FT_{ψ⁻¹} ∘ FT_ψ` is the kernel transform of `𝒦_{ψ⁻¹} ∗ 𝒦_ψ` with shift `2r`.
-
-This is a **torsion** statement: compact-support base change along `q₁` and the projection
-formula for `r₂₃` and `r₁₃` are proved for finite `Λ` with exponent invertible on the base.
 (sketch blueprint: `sk-lem-kernel-composition`) -/
 theorem nonempty_iso_kernelTransform_comp [Finite Λ] [HasInvertibleExponent Λ S]
+    [LocallyOfFiniteType π] [QuasiCompact π] [LocallyOfFiniteType π'] [QuasiCompact π']
     [HasCompactification (pullback.tripleProj₁₃ π π' π'')]
     [HasCompactification (pullback.snd π π')] [HasCompactification (pullback.snd π' π'')]
     [HasCompactification (pullback.snd π π'')]
@@ -173,9 +175,10 @@ the projection formula for the closed immersion `Δ`, which identifies the left 
 `Rp₂,! Δ_*(Δ^* p₁^* K ⊗ᴸ N)`, followed by `Δ_* = Δ_!` and `p₂ ∘ Δ = 𝟙`; `π` is separated so
 that `Δ` is a closed immersion.
 
-This is a **general** statement, for every commutative ring `Λ`: the projection formula for a
-closed immersion and `R(p₂)_! R(Δ)_* ≅ 𝟭` are formal. -/
-theorem nonempty_iso_kernelTransform_diagonal [IsSeparated π]
+The projection formula for a closed immersion is formal. The rest is not: `Rf_!` is computed
+with a chosen compactification, so `Δ_! = Δ_*`, `R(Δ ≫ p₂)_! ≅ Rp₂,! ⋙ RΔ_!` and `R(𝟙)_! ≅ 𝟭`
+are instances of the independence of the compactification, which needs finite `Λ`. -/
+theorem nonempty_iso_kernelTransform_diagonal [Finite Λ] [IsSeparated π]
     [HasCompactification (pullback.snd π π)]
     (N : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty (kernelTransform (ModuleCat.{u + 1} Λ) π π
@@ -183,7 +186,7 @@ theorem nonempty_iso_kernelTransform_diagonal [IsSeparated π]
         derivedTensorRight (ModuleCat.{u + 1} Λ) V N) :=
   sorry
 
-end Convolution
+end KernelTransform
 
 section Inversion
 
@@ -204,10 +207,8 @@ exponent invertible on `S`. The character must be **nontrivial** in the strong s
 `Ψ 1 - 1` is a unit of `Λ`, which is what makes `H_c^*(𝔸¹, ℒ_ψ)` vanish: for `Ψ = 1` both
 kernels are constant and the convolution is `Λ(-r)[-2r]`, supported everywhere, and `Ψ ≠ 1`
 is not enough when `Λ` is not a domain
-(see `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_unit`).
-
-This is a **torsion** statement, decided by the Thom isomorphism, Poincaré duality at geometric
-points and `H_c^*(𝔸¹, ℒ_ψ) = 0`.
+(see `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_unit`). The proof uses the
+Thom isomorphism, Poincaré duality at geometric points and `H_c^*(𝔸¹, ℒ_ψ) = 0`.
 (sketch blueprint: `sk-prop-convolution-kernel`) -/
 theorem nonempty_iso_fourierKernel_convolution [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
@@ -245,9 +246,6 @@ out of the kernel and recognises the kernel transform of `Δ_* Λ(-r)` as the Ta
 (`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal`). The hypotheses are those
 of the convolution computation: for `Ψ = 1` the transform is `Rp₂,! p₁^*(-)[r]`, which is not
 invertible.
-
-This is a **torsion** statement, inherited from the composition of kernel transforms and the
-convolution of the Fourier kernels.
 (sketch blueprint: `sk-thm-inversion`) -/
 theorem nonempty_iso_affineFourierTransform_comp_inv [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
@@ -302,7 +300,7 @@ functorially in `K`, where `ι = AlgebraicGeometry.AffineSpace.neg` is `x ↦ -x
 It follows from `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_inv`, which
 gives `FT_ψ ≅ ι^* ⋙ FT_{ψ⁻¹}`, and inversion
 (`AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_comp_inv`) for `ψ⁻¹`; the
-hypotheses are those of inversion. This is a **torsion** statement, inherited from inversion.
+hypotheses are those of inversion.
 (sketch blueprint: `sk-thm-inversion`) -/
 theorem nonempty_iso_affineFourierTransform_comp_self [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :

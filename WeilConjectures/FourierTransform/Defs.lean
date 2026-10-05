@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.FourierTransform.ArtinSchreier
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 
 /-!
 
@@ -44,6 +45,8 @@ block and is not formalised.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_shift`: shifting the kernel shifts the
+  kernel transform.
 - `AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible`:
   the transform preserves the bounded constructible derived category.
 
@@ -54,16 +57,29 @@ repository; they are not labels of `blueprint/src` and so are not checked by the
 
 ## Coefficients
 
-A kernel transform makes sense for any coefficient category `A` on which the étale six
-functors are built — a Grothendieck abelian, closed symmetric monoidal category with
-functorial flat resolutions — so `AlgebraicGeometry.Etale.kernelTransform` is defined at that
-generality. The Fourier kernel is a character sheaf: `Ψ : AddChar (ZMod p) Λ` acts on it by
-scalars of a ring. The Fourier kernel and the Fourier–Deligne transform are therefore defined
-over `ModuleCat Λ`, for *any* commutative ring `Λ` in which `p` is invertible; no finiteness of
-`Λ` enters the definition. Torsion coefficients (`[Finite Λ]` with exponent invertible on the
-base) enter only through the theorems whose proofs need compact-support base change, the
-projection formula for `Rp₂,!`, Deligne finiteness or the cohomology of `𝔸^r`; these are proved
-at finite coefficients and carried over to `ℚ̄_ℓ` by reduction.
+`AlgebraicGeometry.Etale.kernelTransform` is defined for any coefficient category `A` on which
+the étale six functors are built: a Grothendieck abelian, closed symmetric monoidal category
+with functorial flat resolutions. So are the kernel convolution of
+`WeilConjectures.FourierTransform.Inversion` and
+`AlgebraicGeometry.Etale.derivedTensorRightPullback` of
+`WeilConjectures.FourierTransform.Properties`. The Fourier kernel is a character sheaf:
+`Ψ : AddChar (ZMod p) Λ` acts on it by scalars of a ring, so the Fourier kernel and the
+Fourier–Deligne transform are defined over `ModuleCat Λ`, for any commutative ring `Λ` in which
+`p` is invertible.
+
+The theorems of the Fourier transform files assume the coefficient hypotheses of the strongest
+input of their proofs:
+
+- formal six-functor manipulations: no hypothesis on the coefficients;
+- compact-support base change and the functoriality of `Rf_!` (its composition law,
+  independence of the chosen compactification, `Δ_! = Δ_*` for a closed immersion), which are
+  available for torsion coefficients: `[Finite Λ]`;
+- the projection formula for `Rf_!`, finiteness of `Rf_!`, the cohomology of `𝔸^r` and Tate
+  twists, which also need the exponent of `Λ` to be invertible:
+  `[Finite Λ] [HasInvertibleExponent Λ S]`.
+
+In the blueprint the `ℚ̄_ℓ` versions are deduced from the torsion ones by reduction. That
+deduction, and the `ℚ̄_ℓ` statements themselves, are not formalised here.
 
 ## Deferred clauses
 
@@ -114,16 +130,28 @@ variable {S V V' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S)
 along `p₂` and shifted by `a`.
 
 The Fourier–Deligne transform `AlgebraicGeometry.Etale.fourierTransform` is the kernel
-transform of the Fourier kernel with shift the relative dimension.
-
-The coefficients are an arbitrary category `A` on which the étale six functors are built:
-nothing in the construction uses that they are modules over a ring. -/
+transform of the Fourier kernel with shift the relative dimension. -/
 noncomputable def kernelTransform [HasCompactification (pullback.snd π π')]
     (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a : ℤ) :
     DerivedCategory (Sheaf V.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf V'.smallEtaleTopology A) :=
   D((pullback.fst π π')^*[A]) ⋙ derivedTensorRight A (pullback π π') 𝒦 ⋙
     R(pullback.snd π π')_![A] ⋙ shiftFunctor _ a
+
+/-- Shifting the kernel shifts the kernel transform: the kernel transform of `𝒦[a]` with shift
+`c` is the kernel transform of `𝒦` with shift `a + c`.
+
+The proof is formal: `p₁^* K ⊗ᴸ 𝒦[a] ≅ (p₁^* K ⊗ᴸ 𝒦)[a]`, then `Rp₂,!` commutes with `[a]`
+(`AlgebraicGeometry.Etale.commShiftRightDerivedLowerShriek`), then `[a][c] ≅ [a + c]`. The first
+step needs the isomorphism `M ⊗ᴸ 𝒦[a] ≅ (M ⊗ᴸ 𝒦)[a]` of
+`AlgebraicGeometry.Etale.commShiftDerivedTensorObj` to be natural in `M`, the complex it
+tensors with. The `Functor.CommShift` instances only give naturality in `𝒦`, the variable being
+shifted, so this is still open. -/
+theorem nonempty_iso_kernelTransform_shift [HasCompactification (pullback.snd π π')]
+    (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a c : ℤ) :
+    Nonempty (kernelTransform A π π' ((shiftFunctor _ a).obj 𝒦) c ≅
+        kernelTransform A π π' 𝒦 (a + c)) :=
+  sorry
 
 end KernelTransform
 
@@ -169,25 +197,24 @@ noncomputable def fourierTransform [CharP Γ(pullback π π', ⊤) p]
 
 section BoundedConstructible
 
-variable [Finite Λ] [HasInvertibleExponent Λ (pullback π π')]
-  [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')] [IsNoetherian V']
-  [LocallyOfFiniteType (pullback.snd π π')]
-  [QuasiCompact (pullback.snd π π')]
+variable [Finite Λ] [HasInvertibleExponent Λ S]
+  [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
+  [LocallyOfFiniteType (pullback.snd π π')] [QuasiCompact (pullback.snd π π')]
+  {k : Type u} [Field k]
 
 /-- The Fourier–Deligne transform sends the bounded constructible derived category
 `Dᵇc(V, Λ)` into `Dᵇc(V', Λ)`. Of its four factors only `Rp₂,!` is at issue: the pullback
 `p₁^*`, the tensor product with the lisse rank-one kernel and the shift preserve bounded
-constructibility for formal reasons, while `Rp₂,!` does so by Deligne's finiteness theorem,
-which is why `p₂` is assumed of finite type over a noetherian target and `p` is assumed
-invertible in `Λ`.
-
-This is a **torsion** statement: Deligne finiteness
-(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`) is proved for a finite
-ring `Λ` whose exponent is invertible on the source, and the `ℚ̄_ℓ` case is deduced from it by
-passing to the limit.
+constructibility for formal reasons, while `Rp₂,!` does so by the finiteness theorem
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`. That theorem is stated
+over a base field `k`, for finite `Λ` whose exponent is invertible on the source; hence `V'` is
+assumed locally of finite type over `k` via `aV'`, `p₂` of finite type, and the exponent
+invertible on `S`, which gives it on `V ×_S V'` by
+`AlgebraicGeometry.HasInvertibleExponent.of_hom`.
 (sketch blueprint: `sk-prop-well-defined`) -/
 theorem boundedConstructible_fourierTransform_obj_of_boundedConstructible
-    (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ)
+    (aV' : V' ⟶ Spec (.of k)) [LocallyOfFiniteType aV'] (Ψ : AddChar (ZMod p) Λ)
+    (b : Γ(pullback π π', ⊤)) (r : ℤ)
     (K : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V'
@@ -199,15 +226,16 @@ existence `sk-prop-well-defined` asserts. It is exact and triangulated, each of 
 factors of `AlgebraicGeometry.Etale.kernelTransform` being triangulated; that is not
 recorded as an instance here, see the module docstring. Like
 `AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible`,
-on which it rests, it is stated for **torsion** coefficients.
+on which it rests, it is stated for finite coefficients.
 (sketch blueprint: `sk-prop-well-defined`) -/
-noncomputable def fourierTransformBoundedConstructible (Ψ : AddChar (ZMod p) Λ)
+noncomputable def fourierTransformBoundedConstructible
+    (aV' : V' ⟶ Spec (.of k)) [LocallyOfFiniteType aV'] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
     Dᵇc(V, ModuleCat.{u + 1} Λ) ⥤ Dᵇc(V', ModuleCat.{u + 1} Λ) :=
   ObjectProperty.lift _
     (Etale.DerivedCategoryBoundedConstructible.ι (ModuleCat.{u + 1} Λ) V ⋙
       fourierTransform Λ π π' Ψ b r)
-    fun K ↦ boundedConstructible_fourierTransform_obj_of_boundedConstructible Λ π π' Ψ b r
+    fun K ↦ boundedConstructible_fourierTransform_obj_of_boundedConstructible Λ π π' aV' Ψ b r
       K.obj K.property
 
 end BoundedConstructible
