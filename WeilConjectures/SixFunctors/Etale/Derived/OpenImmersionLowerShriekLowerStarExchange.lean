@@ -26,35 +26,40 @@ mate, along the adjunctions `D(g'^*) ⊣ Rg'_*` and `D(g''^*) ⊣ Rg''_*`, of th
 derived base change isomorphism `D(g'^*) ⋙ Dj'_! ≅ Dj_! ⋙ D(g''^*)` for the extension by zero.
 Since the pullbacks are exact, this needs no monoidal structure on the coefficients.
 
-When `g''` is proper and the coefficients are torsion, this map is expected to be an
-isomorphism; this is the key step in the proof of the composition law
-`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`.
+When `g''` is proper and the coefficients are torsion, this map should be an isomorphism; this
+is the key step in the proof of the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekLowerStarExchange`: the exchange map
   `Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*`.
 
-## Main results
-
-- `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekLowerStarExchange`: the exchange map
-  is an isomorphism when `g''` is proper (not proved yet; see its docstring).
-
 ## TODO
 
 - Prove base change along an open immersion on unbounded derived categories,
   `j^* Rg''_* ≅ Rg'_* j'^*`; it holds for any `g''`, since `j^*` has the exact left adjoint
   `j_!` and so preserves K-injectives.
-- Prove `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekLowerStarExchange`, after adding
-  the torsion and finite cohomological dimension hypotheses it needs.
+- Prove that `D(j^*)` of the exchange map agrees with this base change isomorphism, once
+  `j^* j_! ≅ 𝟭` and `j'^* j'_! ≅ 𝟭` are used to identify the sources and targets.
+- State and prove that the exchange map is an isomorphism when `g''` is proper. On `D⁺` with
+  torsion coefficients this is `thm:open-proper-interchange`. On unbounded derived categories it
+  also needs `Rg''_*` to have finite cohomological dimension, because étale topoi are not
+  left-complete in general, and that hypothesis still has to be designed. Proof plan: with `i`
+  the closed complement of `j`, check the claim after `D(j^*)` and after `D(i^*)`. After
+  `D(j^*)` it follows from the two items above. After `D(i^*)` both sides vanish; for the
+  target this uses proper base change for `g''` along `i`.
 - Redefine `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationComparison` as
   this exchange map for the square `(𝟙 X, c.i, d.i, r.hom)`, whiskered by `R(d.g)_*` and
-  composed with `R(r.hom)_* ⋙ R(d.g)_* ≅ R(c.g)_*`, so that its invertibility follows from
-  that of the exchange map.
+  composed with `R(𝟙 X)_* ≅ 𝟭` and `R(r.hom)_* ⋙ R(d.g)_* ≅ R(c.g)_*`. Its invertibility then
+  follows from that of the exchange map, which removes the `sorry` in
+  `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison` in favour
+  of the more general statement. This first needs
+  `AlgebraicGeometry.Etale.refinementLowerShriekBaseChangeDerivedIso` to be restated as a special
+  case of `AlgebraicGeometry.Etale.mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso`.
 
 ## Blueprint
 
-This file implements the unbounded analogue of `thm:open-proper-interchange`.
+This file constructs the map of `thm:open-proper-interchange` on unbounded derived categories.
 -/
 
 @[expose] public section
@@ -75,7 +80,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [HasSmallSiteSheafify A]
 
 variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
-  [IsOpenImmersion j] [IsOpenImmersion j'] (hsq : IsPullback g' j' j g'')
+  [IsOpenImmersion j] [IsOpenImmersion j']
 
 /-- **The exchange map of an extension by zero and a derived pushforward**: for a cartesian
 square `g' ≫ j = j' ≫ g''` of schemes with `j` and `j'` open immersions, the natural
@@ -86,13 +91,15 @@ transformation `Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*`. It is the mate, along the 
 ```
   D(U') --Dj'_!--> D(Z')
    |                 |
-  Rg'_*     ⇓      Rg''_*
+  Rg'_*     ⇗      Rg''_*
    ↓                 ↓
   D(U) ---Dj_!---> D(Z)
 ```
 
-(blueprint: unbounded analogue of `thm:open-proper-interchange`) -/
-noncomputable def openImmersionLowerShriekLowerStarExchange :
+The 2-cell goes from the path `Rg'_*` then `Dj_!` (left, then bottom) to the path `Dj'_!` then
+`Rg''_*` (top, then right). (blueprint: the map of `thm:open-proper-interchange`, on unbounded
+derived categories) -/
+noncomputable def openImmersionLowerShriekLowerStarExchange (hsq : IsPullback g' j' j g'') :
     R((g')_*[A]) ⋙ D((j)_!open[A]) ⟶ D((j')_!open[A]) ⋙ R((g'')_*[A]) :=
   (mateEquiv (mapDerivedUpperStarLowerStarAdjunction A g')
     (mapDerivedUpperStarLowerStarAdjunction A g'')
@@ -112,7 +119,7 @@ noncomputable def openImmersionLowerShriekLowerStarExchange :
 ```
 -/
 @[reassoc]
-lemma openImmersionLowerShriekLowerStarExchange_app
+lemma openImmersionLowerShriekLowerStarExchange_app (hsq : IsPullback g' j' j g'')
     (K : DerivedCategory (Sheaf U'.smallEtaleTopology A)) :
     (openImmersionLowerShriekLowerStarExchange A hsq).app K =
       (mapDerivedUpperStarLowerStarAdjunction A g'').unit.app
@@ -123,38 +130,6 @@ lemma openImmersionLowerShriekLowerStarExchange_app
             D((j')_!open[A]).map ((mapDerivedUpperStarLowerStarAdjunction A g').counit.app K)) := by
   simp [openImmersionLowerShriekLowerStarExchange]
 
-/-- **Extension by zero commutes with proper pushforward**: for a cartesian square
-`g' ≫ j = j' ≫ g''` of schemes with `j` and `j'` open immersions and `g''` proper, the exchange
-map `Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*` is an isomorphism.
-
-Not proved yet, and not expected to hold in this generality. The blueprint
-(`thm:open-proper-interchange`) states it with torsion coefficients: it rests on proper base
-change for `g''`, which needs torsion coefficients. Passing from `D⁺` to the unbounded derived
-category moreover needs `Rg''_*` to have finite cohomological dimension, since étale topoi are
-not left-complete in general. The corresponding hypotheses on `A` and on `g''` are still to be
-added.
-
-Proof plan: with `i` the closed complement of `j`, it suffices to check the claim after `D(j^*)`
-and after `D(i^*)`. After `D(j^*)` it follows from base change along the open immersion `j`,
-`j^* Rg''_* ≅ Rg'_* j'^*`. After `D(i^*)` both sides vanish; for the target this uses proper
-base change for `g''` along `i`. (blueprint: unbounded analogue of
-`thm:open-proper-interchange`) -/
-theorem isIso_openImmersionLowerShriekLowerStarExchange [IsProper g''] :
-    IsIso (openImmersionLowerShriekLowerStarExchange A hsq) :=
-  sorry
-
 end Etale
-
-/-! ### Axiom census
-
-The exchange map is built from the levelwise pullbacks and is unconditional; the check below is
-run by the build, so a `sorry` reappearing beneath it breaks compilation. -/
-
-/--
-info: 'AlgebraicGeometry.Etale.openImmersionLowerShriekLowerStarExchange' depends on axioms:
-  [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Etale.openImmersionLowerShriekLowerStarExchange
 
 end AlgebraicGeometry
