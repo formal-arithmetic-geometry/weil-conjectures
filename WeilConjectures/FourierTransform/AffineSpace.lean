@@ -38,6 +38,15 @@ sheaves.
 - `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_inv`: the transform for the
   inverse character is the transform of the reflected input.
 
+## Coefficients
+
+The transform and the skyscraper are defined for every commutative ring `Λ` in which `p` is
+invertible. The transforms of the constant sheaf and of the skyscraper are **torsion**
+statements, assuming `[Finite Λ] [HasInvertibleExponent Λ S]`: they use the stalk formula and
+`H_c^*(𝔸^r)`, resp. compact-support base change along the zero section, which are proved at
+finite coefficients and carried over to `ℚ̄_ℓ` by reduction. The comparison of the transforms
+for `ψ` and `ψ⁻¹` is **general**: it is base change along an isomorphism.
+
 ## Implementation notes
 
 The statements only assert that an isomorphism *exists*. Later uses will need specific,
@@ -98,6 +107,9 @@ by `Ψ 1 - 1`. For `Ψ = 1` the kernel is the constant sheaf and the transform o
 for `Λ = 𝔽_ℓ × 𝔽_ℓ` and `Ψ = (ψ₀, 1)` the transform has the trivial-character transform as a
 factor. The coefficients are torsion with exponent invertible on `S`, as needed for
 `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`.
+
+This is a **torsion** statement, decided by the stalk formula
+(`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_geometricStalk`) and `H_c^*(𝔸^r)`.
 (sketch blueprint: `sk-prop-first-formula`) -/
 theorem nonempty_iso_affineFourierTransform_unit [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
@@ -117,6 +129,8 @@ On the affine line, the blueprint's case, this reads `FT_ψ(δ₀) ≅ Λ[1]`. U
 character: the kernel restricted to `{0} ×_S 𝔸(n; S)` is the Artin–Schreier sheaf of the zero
 function. The proof is base change of `Rp₂,!` along the zero section, so the coefficients
 are those of proper base change.
+
+This is a **torsion** statement, decided by compact-support base change along the zero section.
 (sketch blueprint: `sk-prop-first-formula`) -/
 theorem nonempty_iso_affineFourierTransform_skyscraperZero [Finite Λ]
     [HasInvertibleExponent Λ S] (Ψ : AddChar (ZMod p) Λ) :
@@ -143,7 +157,10 @@ naturally in `K`:
 The kernel of `FT_{ψ⁻¹}` is the pullback of the kernel of `FT_ψ` along `ι × 1`, by
 `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv` and `b(-x, ξ) = -b(x, ξ)`.
 Since `ι × 1` is an isomorphism, the base change of `Rp₂,!` along it is formal, and this
-holds for every character and all coefficients. -/
+holds for every character and all coefficients.
+
+This is a **general** statement: base change along the isomorphism `ι × 1` and
+`ℒ_{ψ⁻¹, f} ≅ ℒ_{ψ, -f}` are valid for every commutative ring `Λ` in which `p` is invertible. -/
 theorem nonempty_iso_affineFourierTransform_inv (Ψ : AddChar (ZMod p) Λ) :
     Nonempty (affineFourierTransform Λ n S Ψ⁻¹ ≅
         D((neg n S)^*[ModuleCat.{u + 1} Λ]) ⋙ affineFourierTransform Λ n S Ψ) :=

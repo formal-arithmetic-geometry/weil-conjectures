@@ -41,10 +41,22 @@ transport `t`-structures.
   `K|_{V_ξ} ⊗ᴸ ℒ_{ψ(b(x, ξ))}` on the fibre `V_ξ = V ×_S Ω`, shifted by `r`.
 - `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_baseChange`: the transform commutes
   with base change along `S' ⟶ S`.
+- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_baseChange_of_isIso`: the same along
+  an isomorphism `S' ⟶ S`, for all coefficients.
 - `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor`: the transform is
   linear over the base.
 - `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tateTwist`: the transform commutes
   with the Tate twist.
+
+## Coefficients
+
+`AlgebraicGeometry.Etale.derivedTensorRightPullback` is defined for an arbitrary coefficient
+category of the étale six functors. The statements about geometric stalks, base change along an
+arbitrary morphism, base linearity and the Tate twist are **torsion** statements, assuming
+`[Finite Λ] [HasInvertibleExponent Λ S]`: their proofs use compact-support base change or the
+projection formula for `Rp₂,!`, which are proved at finite coefficients and carried over to
+`ℚ̄_ℓ` by reduction. Base change along an *isomorphism* of bases is formal and holds for every
+`Λ` in which `p` is invertible.
 
 ## Implementation notes
 
@@ -64,7 +76,7 @@ repository; they are not labels of `blueprint/src` and so are not checked by the
 
 @[expose] public section
 
-universe u
+universe u' u
 
 open CategoryTheory Limits
 
@@ -72,16 +84,24 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
-variable {S V V' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S)
+section DerivedTensorRightPullback
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
 
 /-- Tensoring with a complex pulled back along `f : X ⟶ Y`, as a functor of the complex
-downstairs: `N ↦ (K ↦ K ⊗ᴸ f^* N)`. -/
+downstairs: `N ↦ (K ↦ K ⊗ᴸ f^* N)`, for an arbitrary coefficient category `A`. -/
 noncomputable def derivedTensorRightPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
-      DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
-        DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  D((f)^*[ModuleCat.{u + 1} Λ]) ⋙ derivedTensorRightFunctor (ModuleCat.{u + 1} Λ) X
+    DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
+      DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
+        DerivedCategory (Sheaf X.smallEtaleTopology A) :=
+  D((f)^*[A]) ⋙ derivedTensorRightFunctor A X
+
+end DerivedTensorRightPullback
+
+variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
+variable {S V V' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S)
 
 /-- Twisting by the Artin–Schreier sheaf of a global function: `K ↦ K ⊗ᴸ ℒ_{Ψ, f}`. -/
 noncomputable def artinSchreierTwist (X : Scheme.{u}) [CharP Γ(X, ⊤) p]
@@ -135,8 +155,13 @@ naturally in `K`. Here `V_ξ` sits in the square
 The proof is compactly supported base change (sketch blueprint: `sk-prop-sf-cbc`) for `Rp₂,!`
 along `ξ` in this square, followed by the projection formula for the pullback of the kernel
 to `V_ξ`; no smooth base change is needed.
+
+This is a **torsion** statement: compact-support base change
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`) is proved for finite `Λ`
+with exponent invertible on the base.
 (sketch blueprint: `sk-prop-stalk`) -/
-theorem nonempty_iso_fourierTransform_geometricStalk [CharP Γ(pullback π π', ⊤) p]
+theorem nonempty_iso_fourierTransform_geometricStalk [Finite Λ] [HasInvertibleExponent Λ S]
+    [CharP Γ(pullback π π', ⊤) p]
     [HasCompactification π] (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ)
     {Ω : Type u} [Field Ω] [IsSepClosed Ω] (ξ : Spec (.of Ω) ⟶ V')
     [CharP Γ(pullback π (ξ ≫ π'), ⊤) p] :
@@ -192,12 +217,42 @@ That theorem needs `Λ` finite and `p₂` to admit a compactification; in the fo
 which is computed with a compactification of `p₂` and its base change, it needs no
 quasi-compactness of the base changed map. As in the rest of this file, the exponent of `Λ` is
 also assumed invertible on `S`.
+
+This is a **torsion** statement, decided by compact-support base change. Along an isomorphism
+of bases the torsion hypotheses are not needed, see
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_baseChange_of_isIso`.
 (sketch blueprint: `sk-prop-base-change`) -/
 theorem nonempty_iso_fourierTransform_baseChange [Finite Λ] [HasInvertibleExponent Λ S]
     [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
     [LocallyOfFiniteType (pullback.snd π π')]
     (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ) {S' W W' : Scheme.{u}}
     (g : S' ⟶ S) (ρ : W ⟶ S') (ρ' : W' ⟶ S') (u : W ⟶ V) (u' : W' ⟶ V')
+    (hu : IsPullback u ρ π g) (hu' : IsPullback u' ρ' π' g)
+    [CharP Γ(pullback ρ ρ', ⊤) p] [HasCompactification (pullback.snd ρ ρ')] :
+    Nonempty (D((u)^*[ModuleCat.{u + 1} Λ]) ⋙
+          fourierTransform Λ ρ ρ' Ψ
+            (pairingBaseChange π π' b g ρ ρ' u u' hu.w hu'.w) r ≅
+        fourierTransform Λ π π' Ψ b r ⋙ D((u')^*[ModuleCat.{u + 1} Λ])) :=
+  sorry
+
+/-- The Fourier–Deligne transform commutes with base change along an **isomorphism**
+`g : S' ⟶ S`:
+
+`FT_ψ(u^* K) ≅ u'^* FT_ψ(K)`,
+
+naturally in `K`, for cartesian squares as in
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_baseChange`. Then `u`, `u'` and the
+induced morphism `W ×_{S'} W' ⟶ V ×_S V'` are isomorphisms, and pullback along an isomorphism
+commutes with `Rp₂,!`, with the derived tensor product and with shifts for formal reasons.
+
+This is a **general** statement: no compact-support base change is used, so it holds for
+every commutative ring `Λ` in which `p` is invertible. It is the form in which the geometric
+Frobenius `𝟙 × σ`, base change along the automorphism `σ` of `Spec k̄`, acts on the transform.
+(sketch blueprint: `sk-prop-base-change`) -/
+theorem nonempty_iso_fourierTransform_baseChange_of_isIso
+    [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
+    (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ) {S' W W' : Scheme.{u}}
+    (g : S' ⟶ S) [IsIso g] (ρ : W ⟶ S') (ρ' : W' ⟶ S') (u : W ⟶ V) (u' : W' ⟶ V')
     (hu : IsPullback u ρ π g) (hu' : IsPullback u' ρ' π' g)
     [CharP Γ(pullback ρ ρ', ⊤) p] [HasCompactification (pullback.snd ρ ρ')] :
     Nonempty (D((u)^*[ModuleCat.{u + 1} Λ]) ⋙
@@ -239,12 +294,14 @@ commutes with the colimits reducing to bounded complexes.
 
 In particular `FT_ψ(π^* N) ≅ FT_ψ(Λ) ⊗ᴸ π'^* N`, so the transform of a complex pulled back
 from the base is determined by the transform of the unit.
+
+This is a **torsion** statement, decided by the projection formula for `Rp₂,!`.
 (sketch blueprint: `sk-prop-base-linear`) -/
 theorem nonempty_iso_fourierTransform_tensor (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
-    Nonempty (derivedTensorRightPullback Λ π ⋙
+    Nonempty (derivedTensorRightPullback (ModuleCat.{u + 1} Λ) π ⋙
           (Functor.whiskeringRight _ _ _).obj (fourierTransform Λ π π' Ψ b r) ≅
-        derivedTensorRightPullback Λ π' ⋙
+        derivedTensorRightPullback (ModuleCat.{u + 1} Λ) π' ⋙
           (Functor.whiskeringLeft _ _ _).obj (fourierTransform Λ π π' Ψ b r)) :=
   sorry
 
@@ -263,6 +320,9 @@ This is the second clause of the base linearity proposition, the Tate twist bein
 with an invertible complex pulled back from the base: it is
 `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor` at `N = Λ_S(m)`, composed
 with the identifications `π^* Λ_S(m) ≅ Λ_V(m)` and `π'^* Λ_S(m) ≅ Λ_{V'}(m)`.
+
+This is a **torsion** statement, inherited from the projection formula for `Rp₂,!` through
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor`.
 (sketch blueprint: `sk-prop-base-linear`) -/
 theorem nonempty_iso_fourierTransform_tateTwist [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r m : ℤ) :
@@ -271,7 +331,8 @@ theorem nonempty_iso_fourierTransform_tateTwist [HasTateTwist Λ] (Ψ : AddChar 
   obtain ⟨e⟩ := nonempty_iso_fourierTransform_tensor Λ π π' Ψ b r
   -- `K ↦ K ⊗ᴸ f^* Λ_S(m)` is the Tate twist `(m)` on the source of `f`.
   let φ {X : Scheme.{u}} (f : X ⟶ S) :
-      (derivedTensorRightPullback Λ f).obj (tateObject Λ S m) ≅ tateTwist Λ X m :=
+      (derivedTensorRightPullback (ModuleCat.{u + 1} Λ) f).obj (tateObject Λ S m) ≅
+        tateTwist Λ X m :=
     (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.mapIso
       (((leftDerivedUpperStarIsoMapDerivedCategory _ f).app _).symm ≪≫
         leftDerivedUpperStarTateObjectIso f m)
