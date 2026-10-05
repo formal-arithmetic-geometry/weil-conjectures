@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
@@ -63,6 +64,8 @@ unfold `AlgebraicGeometry.Etale.derivedTensor`, and that does not terminate in r
 - `AlgebraicGeometry.Etale.twistShift`: `K ↦ K(m)[2m]`.
 - `AlgebraicGeometry.Etale.shiftTateObjectAddIso`:
   `Λ_X(m)[2m] ⊗ Λ_X(m')[2m'] ≅ Λ_X(m + m')[2(m + m')]`.
+- `AlgebraicGeometry.Etale.untwistTateObject`: a morphism `Λ_X(m) ⟶ Λ_X` read as a class of
+  `Λ_X(-m)`.
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarConstantComplexIso`: `Lf^* Λ_Y ≅ Λ_X`.
 - `AlgebraicGeometry.Etale.sectionInvariant`: `𝒞(g, s) = Ls^* ω_g`.
 
@@ -247,6 +250,22 @@ noncomputable def shiftTateObjectAddIso (m m' : ℤ) :
   derivedTensorShiftIso _ _ _ (2 * m) (2 * m') ≪≫
     (shiftFunctor _ (2 * m + 2 * m')).mapIso (HasTateTwist.twistObjectAddIso X m m') ≪≫
       eqToIso (by simp only [tateObject, mul_add])
+
+/-- Untwisting a morphism `φ : Λ_X(m) ⟶ Λ_X` into a class of `Λ_X(-m)`:
+```
+       ≅                            ≅                          φ ⊗ᴸ 1                      λ
+Λ_X ─────▶ Λ_X(m + (-m)) ─────────▶ Λ_X(m) ⊗ᴸ Λ_X(-m) ─────────▶ Λ_X ⊗ᴸ Λ_X(-m) ─────▶ Λ_X(-m)
+```
+through the identifications `HasTateTwist.twistObjectZeroIso` and
+`HasTateTwist.twistObjectAddIso` of the Tate twist datum and the left unitor. This is how a
+trace or a pairing with values in `Λ` after a twist `(m)` is read as a `Λ(-m)`-valued one. It is
+`Λ`-linear, being built from composition and the `Λ`-linear functor `- ⊗ᴸ Λ_X(-m)`. -/
+noncomputable def untwistTateObject (m : ℤ) :
+    (tateObject Λ X m ⟶ 𝟙_ _) →ₗ[Λ] (𝟙_ _ ⟶ tateObject Λ X (-m)) :=
+  Linear.leftComp Λ _ ((HasTateTwist.twistObjectZeroIso X).inv ≫
+      eqToHom (by rw [add_neg_cancel]) ≫ (HasTateTwist.twistObjectAddIso X m (-m)).inv) ∘ₗ
+    Linear.rightComp Λ _ (derivedTensorLeftUnitor _ X (tateObject Λ X (-m))).hom ∘ₗ
+      ((derivedTensor _ X).flip.obj (tateObject Λ X (-m))).mapLinearMap Λ
 
 variable {Λ X} {Y : Scheme.{u}}
 
