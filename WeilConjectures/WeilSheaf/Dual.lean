@@ -130,31 +130,17 @@ noncomputable def geometricCoinvariants (F : WeilSheaf k₀ l X) :
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   FrobeniusModule.dual (globalSections F.dual)
 
-/-- The geometric coinvariants of a Weil sheaf are zero, being the dual of the global sections
-of a Weil sheaf, which are zero (`AlgebraicGeometry.WeilSheaf.subsingleton_globalSectionsObj`). -/
-theorem subsingleton_geometricCoinvariants_carrier (F : WeilSheaf k₀ l X) :
-    Subsingleton F.geometricCoinvariants.carrier := by
-  have : Subsingleton F.dual.globalSections.carrier := F.dual.subsingleton_globalSectionsObj
-  refine ⟨fun f g ↦ LinearMap.ext fun x ↦ ?_⟩
-  rw [Subsingleton.elim x 0, map_zero, map_zero]
-
--- the provisional Weil sheaves are zero, and the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /-- *Purity of the geometric coinvariants.* If `F` is a lisse Weil sheaf, punctually `ι`-pure of
 weight `w`, then its geometric coinvariants `V_{π₁(X̄)}` with the induced Frobenius are `ι`-pure
 of weight `w` (possibly zero). The blueprint states this for `X` a nonempty smooth geometrically
 connected curve; the argument, comparing the coinvariants with the stalk at a closed point as an
 equivariant quotient, does not use these hypotheses.
-
-With the present coefficients the coinvariants are zero
-(`AlgebraicGeometry.WeilSheaf.subsingleton_geometricCoinvariants_carrier`), which is how the
-statement is proved here.
 (blueprint: `lem-a1-geometric-coinvariants-pure`) -/
 theorem isPureOfWeightOver_geometricCoinvariants (ι : PadicAlgCl l →+* ℂ)
     (F : WeilSheaf k₀ l X) (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
-    F.geometricCoinvariants.IsPureOfWeightOver k₀ ι w :=
-  have := F.subsingleton_geometricCoinvariants_carrier
-  FrobeniusModule.isPureOfWeight_of_subsingleton _ w
+    F.geometricCoinvariants.IsPureOfWeightOver k₀ ι w := by
+  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
+  sorry
 
 end WeilSheaf
 
