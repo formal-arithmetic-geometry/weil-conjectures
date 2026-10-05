@@ -146,6 +146,9 @@ naturally in `K`. Here `V_ξ` sits in the square
         ▼                          ▼
       Spec Ω ────────ξ─────────▶  V'
 ```
+
+Class: torsion; decided by compact-support base change of `Rp₂,!` along `ξ`, which needs
+`[Finite Λ]`.
 (sketch blueprint: `sk-prop-stalk`) -/
 theorem nonempty_iso_fourierTransform_geometricStalk [Finite Λ]
     [CharP Γ(pullback π π', ⊤) p] [HasCompactification π] [QuasiCompact π]
@@ -198,6 +201,17 @@ naturally in `K`. Both squares
 ```
 
 must be **cartesian**; the statement fails for merely commuting squares.
+
+Class: compactification-dependent; decided by independence of the compactification. The
+blueprint proof is formal: compact-support base change along the cartesian square
+`W ×_{S'} W' ⟶ V ×_S V'`. Here `[Finite Λ]` enters solely through independence of the
+compactification (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), since `R(f)_!` is
+computed with a chosen compactification. The same comparison is why
+`[QuasiCompact (pullback.snd π π')]` is assumed: compact-support base change
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap` needs the base changed
+morphism `f' = pullback.snd ρ ρ'` to be quasi-compact, because it goes through
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, and `f'` is quasi-compact as a base change
+of `pullback.snd π π'` (`MorphismProperty.of_isPullback`).
 (sketch blueprint: `sk-prop-base-change`) -/
 theorem nonempty_iso_fourierTransform_baseChange [Finite Λ]
     [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
@@ -237,6 +251,9 @@ naturally in `K` **and** in `N`: the statement below asserts that the two functo
 
 In particular `FT_ψ(π^* N) ≅ FT_ψ(Λ) ⊗ᴸ π'^* N`, so the transform of a complex pulled back
 from the base is determined by the transform of the unit.
+
+Class: torsion; decided by the projection formula for `Rp₂,!`, which needs
+`[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-prop-base-linear`) -/
 theorem nonempty_iso_fourierTransform_tensor (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
@@ -261,6 +278,10 @@ This is the second clause of the base linearity proposition, the Tate twist bein
 with an invertible complex pulled back from the base: it is
 `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor` at `N = Λ_S(m)`, composed
 with the identifications `π^* Λ_S(m) ≅ Λ_V(m)` and `π'^* Λ_S(m) ≅ Λ_{V'}(m)`.
+
+Class: torsion; decided by the projection formula for `Rp₂,!`, through
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor`, which needs
+`[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-prop-base-linear`) -/
 theorem nonempty_iso_fourierTransform_tateTwist [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r m : ℤ) :

@@ -81,6 +81,9 @@ The character must be **nontrivial** in the strong sense that
 kernels are constant and the convolution is `Λ(-r)[-2r]`, supported everywhere, and `Ψ ≠ 1`
 is not enough when `Λ` is not a domain
 (see `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_unit`).
+
+Class: torsion; decided by the cohomology of `𝔸^r`, `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`, which needs
+`[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-prop-convolution-kernel`) -/
 theorem nonempty_iso_fourierKernel_convolution [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
@@ -118,6 +121,10 @@ out of the kernel and recognises the kernel transform of `Δ_* Λ(-r)` as the Ta
 (`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal`). The hypotheses are those
 of the convolution computation: for `Ψ = 1` the transform is `Rp₂,! p₁^*(-)[r]`, which is not
 invertible.
+
+Class: torsion; decided by the convolution computation
+`AlgebraicGeometry.Etale.nonempty_iso_fourierKernel_convolution` (cohomology of `𝔸^r`), which
+needs `[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-thm-inversion`) -/
 theorem nonempty_iso_affineFourierTransform_comp_inv [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
@@ -173,6 +180,10 @@ It follows from `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_inv
 gives `FT_ψ ≅ ι^* ⋙ FT_{ψ⁻¹}`, and inversion
 (`AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_comp_inv`) for `ψ⁻¹`; the
 hypotheses are those of inversion.
+
+Class: torsion; decided by inversion
+`AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_comp_inv`, which needs
+`[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-thm-inversion`) -/
 theorem nonempty_iso_affineFourierTransform_comp_self [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :

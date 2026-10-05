@@ -127,7 +127,10 @@ noncomputable def kernelTransform [HasCompactification (pullback.snd π π')]
     R(pullback.snd π π')_![A] ⋙ shiftFunctor _ a
 
 /-- Shifting the kernel shifts the kernel transform: the kernel transform of `𝒦[a]` with shift
-`c` is the kernel transform of `𝒦` with shift `a + c`. -/
+`c` is the kernel transform of `𝒦` with shift `a + c`.
+
+Class: general; decided by formal six-functor yoga (shifts commute with the derived tensor
+product and `Rf_!`), so it holds at every coefficient category `A`. -/
 theorem nonempty_iso_kernelTransform_shift [HasCompactification (pullback.snd π π')]
     (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a c : ℤ) :
     Nonempty (kernelTransform A π π' ((shiftFunctor _ a).obj 𝒦) c ≅
@@ -183,6 +186,9 @@ The composite is read on the triple product, in the cartesian square
 
 with `r₁₃ : V ×ₛ V' ×ₛ V'' ⟶ V ×ₛ V''` the remaining projection and
 `q₂ : V' ×ₛ V'' ⟶ V''` the second projection.
+
+Class: torsion; decided by compact-support base change and the projection formula for `Rf_!`,
+which need `[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-lem-kernel-composition`) -/
 theorem nonempty_iso_kernelTransform_comp [Finite Λ] [HasInvertibleExponent Λ S]
     [LocallyOfFiniteType π] [QuasiCompact π] [LocallyOfFiniteType π'] [QuasiCompact π']
@@ -215,6 +221,15 @@ naturally in `K`, where `Δ` is the diagonal of the separated morphism `π`:
 ```
 
 with `Δ ≫ p₁ = 𝟙 = Δ ≫ p₂`. For `N = Λ` this says that `Δ_* Λ` is the identity kernel.
+
+Class: compactification-dependent; decided by independence of the compactification. The
+blueprint proof is formal: the projection formula for the closed immersion `Δ`, `Δ_* = Δ_!`
+and `Δ ≫ p₂ = 𝟙`. Here `[Finite Λ]` enters solely through independence of the
+compactification (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), since `R(f)_!` is
+computed with a chosen compactification. The same comparison is why `[QuasiCompact π]` is
+assumed: `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` compares compactifications of a
+quasi-compact morphism, here of `p₂` and of `Δ ≫ p₂ = 𝟙`; `p₂` is quasi-compact as a base
+change of `π`. `[IsSeparated π]` makes `Δ` a closed immersion.
 (sketch blueprint: `sk-thm-inversion`, proof) -/
 theorem nonempty_iso_kernelTransform_diagonal [Finite Λ] [IsSeparated π] [QuasiCompact π]
     [HasCompactification (pullback.snd π π)]

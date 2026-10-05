@@ -169,6 +169,10 @@ variable [Finite Λ] [HasInvertibleExponent Λ S]
 
 /-- For `V'` locally of finite type over a field `k`, the Fourier–Deligne transform sends the
 bounded constructible derived category `Dᵇc(V, Λ)` into `Dᵇc(V', Λ)`.
+
+Class: torsion; decided by Deligne finiteness of `Rp₂,!`
+(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`), which needs
+`[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-prop-well-defined`) -/
 theorem boundedConstructible_fourierTransform_obj_of_boundedConstructible {k : Type u}
     [Field k] (aV' : V' ⟶ Spec (.of k)) [LocallyOfFiniteType aV'] (Ψ : AddChar (ZMod p) Λ)
@@ -181,6 +185,10 @@ theorem boundedConstructible_fourierTransform_obj_of_boundedConstructible {k : T
 
 /-- For `V'` locally of finite type over a field, the Fourier–Deligne transform as a functor
 `Dᵇc(V, Λ) ⥤ Dᵇc(V', Λ)`, the functor whose existence `sk-prop-well-defined` asserts.
+
+Class: torsion; decided by Deligne finiteness of `Rp₂,!`, through
+`AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible`,
+which needs `[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-prop-well-defined`) -/
 noncomputable def fourierTransformBoundedConstructible
     (hV' : ∃ (k : Type u) (_ : Field k) (a : V' ⟶ Spec (.of k)), LocallyOfFiniteType a)

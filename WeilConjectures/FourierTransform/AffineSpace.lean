@@ -109,6 +109,9 @@ by `Ψ 1 - 1`. For `Ψ = 1` the kernel is the constant sheaf and the transform o
 `Λ(-r)[-r]`, supported everywhere. Asking `Ψ ≠ 1` is not enough when `Λ` is not a domain:
 for `Λ = 𝔽_ℓ × 𝔽_ℓ` and `Ψ = (ψ₀, 1)` the transform has the trivial-character transform as a
 factor.
+
+Class: torsion; decided by the cohomology of `𝔸^r`, `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`, which needs
+`[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-prop-first-formula`) -/
 theorem nonempty_iso_affineFourierTransform_unit [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
@@ -127,6 +130,9 @@ On the affine line, the blueprint's case, this reads `FT_ψ(δ₀) ≅ Λ[1]`. U
 `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_unit` this holds for every
 character: the kernel restricted to `{0} ×_S 𝔸(n; S)` is the Artin–Schreier sheaf of the zero
 function.
+
+Class: torsion; decided by compact-support base change of `Rp₂,!` along the zero section,
+which needs `[Finite Λ]`.
 (sketch blueprint: `sk-prop-first-formula`) -/
 theorem nonempty_iso_affineFourierTransform_skyscraperZero [Finite Λ] (Ψ : AddChar (ZMod p) Λ) :
     Nonempty ((affineFourierTransform Λ n S Ψ).obj (skyscraperZero Λ n S) ≅
@@ -152,6 +158,12 @@ naturally in `K`:
 The kernel of `FT_{ψ⁻¹}` is the pullback of the kernel of `FT_ψ` along `ι × 1`, by
 `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv` and `b(-x, ξ) = -b(x, ξ)`.
 It holds for every character.
+
+Class: compactification-dependent; decided by independence of the compactification. The
+blueprint proof is formal (base change along the isomorphism `ι × 1`); `[Finite Λ]` enters
+solely through independence of the compactification
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), comparing the chosen compactifications
+of `p₂` and of its conjugate by `ι × 1`.
 (sketch blueprint: `sk-def-ft`, remark; `lem-fd-as-lisse`) -/
 theorem nonempty_iso_affineFourierTransform_inv [Finite Λ] (Ψ : AddChar (ZMod p) Λ) :
     Nonempty (affineFourierTransform Λ n S Ψ⁻¹ ≅
