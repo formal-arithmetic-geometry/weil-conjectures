@@ -86,7 +86,12 @@ theorem nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar (f : X ⟶ Y)
 the mate of the composition isomorphism is an isomorphism `R(g ∘ f)^! ≅ Rf^! ∘ Rg^!`: the
 functoriality of the mate construction turns an isomorphism of left adjoints into one of right
 adjoints, and the triangle identities of a composite adjunction are the composites of the
-component ones. -/
+component ones.
+
+This is clause (b) of `sk-lem-sf-mate` in its étale form. It is unconditional, because the
+étale adjunction `Rf_! ⊣ Rf^!` exists for every morphism admitting a compactification
+(`sk-prop-sf-existence`(a)). Clause (a), the pro-étale ambient form, is conditional on a datum
+that fails in general and is not formalised. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp (f : X ⟶ Y) (g : Y ⟶ S)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
     Nonempty (R(f ≫ g)^![A] ≅ R(g)^![A] ⋙ R(f)^![A]) :=

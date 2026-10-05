@@ -70,10 +70,9 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 /-- Blueprint `sk-thm-sf-tensor-hom`: Tensor–Hom form of the exchange.
 
-For a morphism `f : X ⟶ Y` carrying the ambient datum — here, admitting a compactification,
-so that `Rf_!` and its right adjoint `Rf^!` exist — and for `M` in `Dctf(X, A)` and `N` in
-`Dctf(Y, A)`, the direct image of the internal hom from `M` into `Rf^! N` agrees with the
-internal hom on `Y` from `Rf_! M` into `N`:
+For a morphism `f : X ⟶ Y` admitting a compactification, so that `Rf_!` and its right adjoint
+`Rf^!` exist, and for `M` in `Dctf(X, A)` and `N` in `Dctf(Y, A)`, the direct image of the
+internal hom from `M` into `Rf^! N` agrees with the internal hom on `Y` from `Rf_! M` into `N`:
 
 `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)`.
 
@@ -97,9 +96,9 @@ variable {X Y S : Scheme.{u}} (f : X ⟶ Y) (aY : Y ⟶ S) [HasCompactification 
 
 /-- Blueprint `sk-thm-sf-verdier-exchange`: Verdier-duality exchange.
 
-First half. If `f : X ⟶ Y` and the structure morphism `a_Y : Y ⟶ S` both carry the ambient
-datum, then so does `a_X = f ≫ a_Y`, and the exceptional inverse image along `f` of the
-dualizing complex of `Y` is the dualizing complex of `X`:
+First half. If `f : X ⟶ Y` and the structure morphism `a_Y : Y ⟶ S` both admit a
+compactification, then so does `a_X = f ≫ a_Y`, and the exceptional inverse image along `f` of
+the dualizing complex of `Y` is the dualizing complex of `X`:
 
 `Rf^! ω_Y ≅ ω_X`.
 
