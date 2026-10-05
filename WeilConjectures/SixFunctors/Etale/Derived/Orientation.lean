@@ -141,14 +141,16 @@ noncomputable def Orientation.ofDualizingComplexIso
 
 The special case of the orientation at the structure morphism `a : X ⟶ S`. There
 `La^* Λ_S ≅ Λ_X` is the monoidal unit
-(`AlgebraicGeometry.Etale.nonempty_leftDerivedUpperStar_unit_iso`) and `Ra^! Λ_S` is by
-definition the dualizing complex, so the purity isomorphism reads `ω_X ≅ Λ_X(d)[2d]`: the
-dualizing complex of a smooth `X` of pure relative dimension `d` over `S` is a shifted Tate
-twist. -/
+(`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_unit`) and `Ra^! Λ_S` is by
+definition the dualizing complex, so the purity isomorphism reads
+```
+ω_X ═══ Ra^! Λ_S ≅ T[2d]
+```
+for the twist `T` of `o` (`Λ_X(d)` for a Tate twist): the dualizing complex of a smooth `X` of
+pure relative dimension `d` over `S` is a shifted Tate twist. -/
 theorem Orientation.nonempty_iso_dualizingComplex (o : Orientation A a d) :
     Nonempty (dualizingComplex A a ≅ o.twist⟦(2 * d : ℤ)⟧) :=
-  let ⟨e⟩ := nonempty_leftDerivedUpperStar_unit_iso A a
-  ⟨(o.dualizingComplexIso e).symm⟩
+  (nonempty_iso_leftDerivedUpperStar_unit A a).map fun e ↦ (o.dualizingComplexIso e).symm
 
 /-- Blueprint `sk-thm-sf-dual-perfect`: The dual of a perfect complex.
 

@@ -14,8 +14,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 
 The derived tensor product `AlgebraicGeometry.Etale.derivedTensor` is the tensor product of
 the monoidal structure on `D(X_ét)`. This file restates the associator, the left unitor,
-invertibility, perfectness of pairings and the linearity of `K ⊗ᴸ -` and `- ⊗ᴸ K` in terms of
-`derivedTensor`, for a general coefficient category `A`.
+invertibility and perfectness of pairings in terms of `derivedTensor`, for a general coefficient
+category `A`.
 
 ## Implementation notes
 
@@ -39,9 +39,6 @@ involves no comparison at all.
 - `AlgebraicGeometry.Etale.isPerfectPairing_iff`,
   `AlgebraicGeometry.Etale.isInvertible_iff_exists_derivedTensor`: the comparison with
   `CategoryTheory.MonoidalClosed.IsPerfectPairing` and `CategoryTheory.IsInvertible`.
-- `AlgebraicGeometry.Etale.linear_derivedTensor_obj`,
-  `AlgebraicGeometry.Etale.linear_derivedTensor_flip_obj`: the derived tensor product is
-  linear in each variable, by `DerivedCategory.monoidalLinear`.
 -/
 
 @[expose] public section
@@ -86,7 +83,12 @@ This is `CategoryTheory.MonoidalClosed.IsPerfectPairing` (see
 with `AlgebraicGeometry.Etale.derivedTensor`. The only difference is the term used to
 elaborate `C ⊗ D`: here it is `derivedTensor`, so that the definition can be applied at
 `A = ModuleCat Λ` to pairings built from `derivedTensor`, without the kernel having to
-compare the two tensor products there (see the implementation notes). -/
+compare the two tensor products there (see the implementation notes).
+
+The names `AlgebraicGeometry.Etale.IsPerfectPairing` and
+`AlgebraicGeometry.Etale.isPerfectPairing_iff` repeat those of
+`CategoryTheory.MonoidalClosed.IsPerfectPairing` on purpose, since they express the same
+property. When both namespaces are open, write the namespace explicitly. -/
 def IsPerfectPairing {C D : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (b : ((derivedTensor A X).obj C).obj D ⟶ 𝟙_ _) : Prop :=
   MonoidalClosed.IsPerfectPairing (C := _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) b
@@ -103,28 +105,6 @@ lemma isInvertible_iff_exists_derivedTensor
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     IsInvertible K ↔ ∃ M, Nonempty (((derivedTensor A X).obj K).obj M ≅ 𝟙_ _) :=
   Iff.rfl
-
-variable (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-
-/-- Tensoring with a fixed complex, `M ↦ K ⊗ᴸ M`, is additive. -/
-instance additive_derivedTensor_obj : ((derivedTensor A X).obj K).Additive :=
-  inferInstanceAs (tensorLeft K).Additive
-
-/-- Tensoring with a fixed complex, `M ↦ M ⊗ᴸ K`, is additive. -/
-instance additive_derivedTensor_flip_obj : ((derivedTensor A X).flip.obj K).Additive :=
-  inferInstanceAs (tensorRight K).Additive
-
-variable (R : Type*) [Ring R] [Linear R A] [MonoidalLinear R A]
-
-/-- If the tensor product of `A` is `R`-linear, tensoring with a fixed complex,
-`M ↦ K ⊗ᴸ M`, is `R`-linear. -/
-instance linear_derivedTensor_obj : ((derivedTensor A X).obj K).Linear R :=
-  inferInstanceAs ((tensorLeft K).Linear R)
-
-/-- If the tensor product of `A` is `R`-linear, tensoring with a fixed complex,
-`M ↦ M ⊗ᴸ K`, is `R`-linear. -/
-instance linear_derivedTensor_flip_obj : ((derivedTensor A X).flip.obj K).Linear R :=
-  inferInstanceAs ((tensorRight K).Linear R)
 
 end Etale
 

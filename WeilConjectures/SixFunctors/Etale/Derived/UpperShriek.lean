@@ -6,7 +6,6 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Restrict
-public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
@@ -110,12 +109,6 @@ noncomputable def rightDerivedUpperShriekAdjunction : R(f)_![A] ⊣ R(f)^![A] :=
 
 instance : (R(f)^![A]).IsRightAdjoint :=
   (rightDerivedUpperShriekAdjunction A f).isRightAdjoint
-
-variable (R : Type*) [Ring R] [Linear R A] in
-/-- If `A` is `R`-linear, the exceptional inverse image `Rf^!` is `R`-linear, being right
-adjoint to the `R`-linear functor `Rf_!`. -/
-instance linear_rightDerivedUpperShriek : (R(f)^![A]).Linear R :=
-  (rightDerivedUpperShriekAdjunction A f).right_adjoint_linear (R := R)
 
 end Unbounded
 

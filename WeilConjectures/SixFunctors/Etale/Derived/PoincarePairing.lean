@@ -5,11 +5,14 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
 # The derived Poincaré pairing
@@ -29,10 +32,9 @@ Composing them gives the *derived Poincaré pairing*
 
 `β_K : Ra_! K ⊗ᴸ (Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ Λ_Y`,
 
-which over `Y = Spec k` is `RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ`. Its perfectness needs the
-projection formula for `Ra_!`, which is only available at finite coefficients `ModuleCat Λ`;
-it is stated there, as `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing` in
-`WeilConjectures.EtaleCohomology.PoincareDuality.Pairing`.
+which over `Y = Spec k` is `RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ`. Its perfectness
+(`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`) is stated at finite coefficients
+`ModuleCat Λ`, where the projection formula for `Ra_!` is available.
 
 ## Main definitions
 
@@ -40,11 +42,17 @@ it is stated there, as `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing
 - `AlgebraicGeometry.Etale.smoothTrace` (`sk-def-pairing-data`): `Tr_o`.
 - `AlgebraicGeometry.Etale.poincarePairing` (`sk-def-pairing`): `β_K`.
 
+## Main statements
+
+- `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing` (`sk-thm-derived-duality`): at
+  finite coefficients, the derived Poincaré pairing of an orientation is perfect for `K`
+  constructible of finite Tor amplitude and dualizable.
+
 ## Implementation notes
 
 The orientation `o` (`AlgebraicGeometry.Etale.Orientation`) gives `La^* Λ_Y ⊗ T[2d] ≅ Ra^! Λ_Y`.
 To read it as `T[2d] ≅ Ra^! Λ_Y` the definitions take an identification `e : La^* Λ_Y ≅ Λ_X` as
-an argument: it exists (`AlgebraicGeometry.Etale.nonempty_leftDerivedUpperStar_unit_iso`), but
+an argument: it exists (`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_unit`), but
 the derived pullback is not yet monoidal as a functor, so there is no canonical choice. For
 `A = ModuleCat Λ` with a Tate twist datum it is
 `AlgebraicGeometry.Etale.leftDerivedUpperStarConstantComplexIso`.
@@ -152,13 +160,6 @@ noncomputable def poincarePairingEvaluation (T K : 𝐃(X, A)) :
       (R(a)_![A]).obj T :=
   mixedSupportCupProduct A a _ _ ≫ (R(a)_![A]).map (twistedEvaluation T K)
 
-/-- The identification `Ra_! K ⊗ᴸ M[n] ≅ (Ra_! K ⊗ᴸ M)[n]`, moving the shift out of the second
-factor. -/
-noncomputable def poincarePairingShiftIso (K : 𝐃(X, A)) (M : 𝐃(Y, A)) (n : ℤ) :
-    ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).obj (M⟦n⟧) ≅
-      (((derivedTensor A Y).obj ((R(a)_![A]).obj K)).obj M)⟦n⟧ :=
-  (((derivedTensor A Y).obj ((R(a)_![A]).obj K)).commShiftIso n).app _
-
 /-- Blueprint `sk-def-pairing`: The derived pairing, and perfectness of a pairing.
 
 The *derived Poincaré pairing* of an orientation `o` with twist `T`,
@@ -180,9 +181,38 @@ noncomputable def poincarePairing (o : Orientation A a d) (e : (L((a)^*[A])).obj
     ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).obj
         (((R((a)_*[A])).obj (((derivedTensor A X).obj
           ((DerivedCategory.coefficientDual A X).obj (op K))).obj o.twist))⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
-  (poincarePairingShiftIso a K _ _).hom ≫
+  (((derivedTensor A Y).obj ((R(a)_![A]).obj K)).commShiftIso (2 * d : ℤ)).hom.app _ ≫
     (poincarePairingEvaluation a o.twist K)⟦(2 * d : ℤ)⟧' ≫
       ((R(a)_![A]).commShiftIso (2 * d : ℤ)).inv.app _ ≫ smoothTrace o e
+
+section ModuleCat
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasInvertibleExponent Λ Y]
+
+/-- Blueprint `sk-thm-derived-duality`: Derived Poincaré duality.
+
+**The derived pairing is perfect.** For a finite coefficient ring `Λ` whose exponent is
+invertible on `Y`, an orientation `o` of `a : X ⟶ Y` with twist `T`, and
+`K ∈ D^b_{ctf}(X, Λ)` dualizable (perfect over `Λ_X`), the derived Poincaré pairing `β_K`
+(`AlgebraicGeometry.Etale.poincarePairing`) is perfect: its tensor–internal-hom adjoint
+
+`(Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ (Ra_! K)^∨`
+
+is an isomorphism. Over `Y = Spec k` this is `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`. -/
+theorem isPerfectPairing_poincarePairing (o : Orientation (ModuleCat.{u + 1} Λ) a d)
+    (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _) {K : DerivedCategoryModule Λ X}
+    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (hKd : IsDualizable K) :
+    IsPerfectPairing (poincarePairing a o e K) :=
+  -- Proof sketch: the adjoint is the composite of `K^∨ ⊗ᴸ T[2d] ≅ RHom(K, Ra^! Λ_Y) = 𝔻_X K`,
+  -- by the orientation and the dualizability of `K`, with global Verdier duality
+  -- `Ra_* RHom(K, Ra^! Λ_Y) ≅ RHom(Ra_! K, Λ_Y)`, the adjunction `Ra_! ⊣ Ra^!` internalised by
+  -- the projection formula
+  -- `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`.
+  -- The projection formula is what needs `Λ` finite, its exponent invertible on `Y` and `K`
+  -- constructible.
+  sorry
+
+end ModuleCat
 
 end Etale
 

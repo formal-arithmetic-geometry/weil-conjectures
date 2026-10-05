@@ -81,12 +81,6 @@ def DerivedCategory.boundedConstructibleFiniteTor :
   DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X ⊓
     DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} Λ) X
 
-/-- The constant complex `Λ_X` is in `D^b_{ctf}(X, Λ)`: it is the constant sheaf `Λ` in degree
-`0`, which is constructible and flat. -/
-theorem DerivedCategory.boundedConstructibleFiniteTor_constantComplex :
-    DerivedCategory.boundedConstructibleFiniteTor Λ X (constantComplex Λ X) :=
-  sorry
-
 /-- An object `L` of `D(X_ét, Λ)` is *invertible* if it has a tensor inverse: there is an `M`
 with `L ⊗^L M ≅ Λ_X`. A lisse rank-one sheaf placed in any degree and twisted by any power of
 the Tate object is invertible in this sense, and these are the only invertible objects that

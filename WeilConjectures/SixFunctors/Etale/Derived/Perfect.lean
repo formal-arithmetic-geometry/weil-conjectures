@@ -24,7 +24,6 @@ product `- ⊗ᴸ -` and internal hom `RHom(-, -)`. The *coefficient dual* of a 
 - `AlgebraicGeometry.Etale.DerivedCategory.coefficientDual`: `K ↦ K^∨ = RHom(K, Λ_X)`.
 - `AlgebraicGeometry.Etale.DerivedCategory.coefficientEvaluation`: the evaluation
   `K ⊗ᴸ K^∨ ⟶ Λ_X`.
-- `AlgebraicGeometry.Etale.DerivedCategory.unitIsoCoefficientDualUnit`: `Λ_X ≅ Λ_X^∨`.
 
 ## Main statements
 
@@ -85,14 +84,6 @@ noncomputable def coefficientDual :
   (RHom(X)[A]).flip.obj (𝟙_ _)
 
 variable {A X}
-
-variable (A X) in
-/-- The unit is its own coefficient dual, `Λ_X ≅ Λ_X^∨ = RHom(Λ_X, Λ_X)`
-(`CategoryTheory.MonoidalClosed.unitNatIso`). -/
-noncomputable def unitIsoCoefficientDualUnit :
-    𝟙_ (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) ≅
-      (coefficientDual A X).obj (op (𝟙_ _)) :=
-  MonoidalClosed.unitNatIso.app (𝟙_ _)
 
 /-- The *evaluation* `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X`: the counit at `Λ_X` of the adjunction
 `K ⊗ᴸ - ⊣ RHom(K, -)` (`AlgebraicGeometry.Etale.derivedTensorHomAdjunction`). -/

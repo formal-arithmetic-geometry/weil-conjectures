@@ -25,7 +25,6 @@ injection for the Brauer group.
 
 ## Main statements
 
-- `AlgebraicGeometry.isRegularLocalRing_stalk_spec`: the spectrum of a field is regular.
 - `AlgebraicGeometry.isRegularLocalRing_stalk_of_etale`: a scheme étale over a regular scheme
   is regular.
 - `AlgebraicGeometry.isRegularLocalRing_stalk_pullback`: a product of regular schemes locally
@@ -50,16 +49,6 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry
-
-/-- The local rings of the spectrum of a field are regular: they are the field itself. -/
-theorem isRegularLocalRing_stalk_spec {k : Type u} [Field k] (z : Spec (.of k)) :
-    IsRegularLocalRing ((Spec (.of k)).presheaf.stalk z) := by
-  have : z.asIdeal.IsPrime := z.isPrime
-  have e : k ≃+* Localization.AtPrime z.asIdeal :=
-    (IsLocalization.atUnits k z.asIdeal.primeCompl (fun _ hx ↦ isUnit_iff_ne_zero.2
-      (fun h ↦ (Ideal.mem_primeCompl_iff.1 hx) (h ▸ z.asIdeal.zero_mem)))).toRingEquiv
-  exact IsRegularLocalRing.of_ringEquiv
-    (e.trans (Spec.stalkIso (.of k) z).commRingCatIsoToRingEquiv.symm)
 
 /-- A scheme is *regular* if the local ring at each of its points is a regular local ring. -/
 @[mk_iff]

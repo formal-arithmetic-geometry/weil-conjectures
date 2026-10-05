@@ -32,11 +32,9 @@ the six-functor formalism (`AlgebraicGeometry.Etale.TateOrientation.toOrientatio
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing` (`sk-thm-derived-duality`): at
-  finite coefficients, the derived Poincaré pairing of an orientation is perfect for `K`
-  constructible of finite Tor amplitude and dualizable.
-- `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`: the same for a
-  Tate orientation.
+- `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`
+  (`sk-thm-derived-duality`): at finite coefficients, the derived Poincaré pairing of a Tate
+  orientation is perfect for `K` constructible of finite Tor amplitude and dualizable.
 
 ## Implementation notes
 
@@ -79,36 +77,6 @@ noncomputable abbrev twistedDual (d : ℕ) (K : DerivedCategoryModule Λ X) :
 (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`) produces orientations. -/
 abbrev TateOrientation (a : X ⟶ Y) [HasCompactification a] (d : ℕ) : Type (u + 1) :=
   (twistShift Λ X d).obj (constantComplex Λ X) ≅ dualizingComplex (ModuleCat.{u + 1} Λ) a
-
-section Perfect
-
-variable [Finite Λ] [HasInvertibleExponent Λ Y] (a : X ⟶ Y) [HasCompactification a] {d : ℕ}
-
-omit [HasTateTwist Λ] in
-/-- Blueprint `sk-thm-derived-duality`: Derived Poincaré duality.
-
-**The derived pairing is perfect.** For a finite coefficient ring `Λ` whose exponent is
-invertible on `Y`, an orientation `o` of `a : X ⟶ Y` with twist `T`, and
-`K ∈ D^b_{ctf}(X, Λ)` dualizable (perfect over `Λ_X`), the derived Poincaré pairing `β_K`
-(`AlgebraicGeometry.Etale.poincarePairing`) is perfect: its tensor–internal-hom adjoint
-
-`(Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ (Ra_! K)^∨`
-
-is an isomorphism. Over `Y = Spec k` this is `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`.
-
-The adjoint is the composite of `K^∨ ⊗ᴸ T[2d] ≅ RHom(K, Ra^! Λ_Y) = 𝔻_X K`, by the orientation
-and the dualizability of `K`, with global Verdier duality
-`Ra_* RHom(K, Ra^! Λ_Y) ≅ RHom(Ra_! K, Λ_Y)`, the adjunction `Ra_! ⊣ Ra^!` internalised by the
-projection formula `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`.
-The projection formula is what needs `Λ` finite, its exponent invertible on `Y` and `K`
-constructible. -/
-theorem isPerfectPairing_poincarePairing (o : Orientation (ModuleCat.{u + 1} Λ) a d)
-    (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _) {K : DerivedCategoryModule Λ X}
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (hKd : IsDualizable K) :
-    IsPerfectPairing (poincarePairing a o e K) :=
-  sorry
-
-end Perfect
 
 namespace TateOrientation
 
@@ -158,7 +126,7 @@ theorem isPerfectPairing_poincarePairing [Finite Λ] [HasInvertibleExponent Λ Y
     (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X}
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (hKd : IsDualizable K) :
     IsPerfectPairing (γ.poincarePairing K) :=
-  Etale.isPerfectPairing_poincarePairing Λ a _ _ hK hKd
+  Etale.isPerfectPairing_poincarePairing a Λ _ _ hK hKd
 
 end TateOrientation
 
