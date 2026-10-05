@@ -197,18 +197,25 @@ end Projection
 
 section LowerStar
 
-variable (f : X ⟶ Y)
+variable {k : Type u} [Field k] (f : X ⟶ Y)
 
-/-- **`Rf_*` commutes with finite reduction.** For an ideal `J` of the finite coefficient ring
-`Λ` and `f` quasi-compact, quasi-separated and locally of finite type, with the exponent of
-`Λ` invertible on `Y`,
+/-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point
+
+**`Rf_*` commutes with finite reduction.** For an ideal `J` of the finite coefficient ring
+`Λ` and `f : X ⟶ Y` a quasi-compact, quasi-separated morphism of finite-type `k`-schemes, with
+the exponent of `Λ` invertible on `Y`,
 
 `(Rf_* K) ⊗^L (Λ/J)_Y ≅ Rf_*(K ⊗^L (Λ/J)_X)`.
 
-It is the ordinary counterpart of
-`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`. -/
+This is the input that carries `sk-lem-finite` from the finite stages to the integral stage
+`𝒪_E`. It is the ordinary counterpart of
+`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`; unlike `Rf_!`,
+`Rf_*` needs the schemes to be of finite type over a field, which is what gives it finite
+cohomological dimension (as in
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`). -/
 theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar [Finite Λ]
-    [HasInvertibleExponent Λ Y] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
+    [HasInvertibleExponent Λ Y] [QuasiCompact f] [QuasiSeparated f] (aX : X ⟶ Spec (.of k))
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] (hf : f ≫ aY = aX)
     (J : Ideal Λ) :
     Nonempty (R((f)_*[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ Y J ≅
       reductionModIdeal Λ X J ⋙ R((f)_*[ModuleCat.{u + 1} Λ])) :=

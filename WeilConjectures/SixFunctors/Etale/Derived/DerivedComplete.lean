@@ -27,6 +27,16 @@ object of the derived Poincaré pairing at `Λ = 𝒪_E` in the adic category.
   `a : X ⟶ Spec k` separated of finite type over a field.
 - `AlgebraicGeometry.Etale.derivedCompleteIntegral_coefficientDual`: so does the coefficient
   dual `K ↦ K^∨`.
+
+## Implementation notes
+
+The blueprint states `sk-thm-transport` at the three stages `𝒪_E`, `E` and `ℚ̄_ℓ`. Only the
+integral stage `𝒪_E` is stated here, and only its non-formal part: that the operations preserve
+derived completeness. The `E` stage would be the image of these statements under the
+rationalization `AlgebraicGeometry.DerivedCategoryDerivedCompleteRational.fromIntegral`, and the
+`ℚ̄_ℓ` stage their colimit over finite extensions `E/ℚ_ℓ`, a colimit category the repository
+does not have; neither is stated. Which coefficient category carries the `E` and `ℚ̄_ℓ` stages
+is not decided here.
 -/
 
 @[expose] public section
@@ -50,9 +60,11 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl 
 local notation "𝐃(" X ", " "𝒪_E" ")" =>
   _root_.DerivedCategory (Sheaf (Scheme.smallEtaleTopology X) (PadicAlgCl.integersModuleCat l E))
 
-/-- **`Rf_*` preserves derived completeness.** For every morphism `f : X ⟶ Y`, the derived
-direct image `Rf_*` carries derived-complete objects of `D(X_ét, 𝒪_E)` to derived-complete
-objects of `D(Y_ét, 𝒪_E)`. -/
+/-- Blueprint `sk-thm-transport`: Transport through the coefficient stages.
+
+**`Rf_*` preserves derived completeness** (integral stage only). For every morphism
+`f : X ⟶ Y`, the derived direct image `Rf_*` carries derived-complete objects of
+`D(X_ét, 𝒪_E)` to derived-complete objects of `D(Y_ét, 𝒪_E)`. -/
 theorem derivedCompleteIntegral_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : 𝐃(X, 𝒪_E))
     (hK : _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K) :
@@ -63,10 +75,12 @@ theorem derivedCompleteIntegral_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X 
   -- `RHom(E'_Y, Rf_* K) = Rf_* RHom(Lf^* E'_Y, K)` with `Lf^* E'_Y = E'_X`.
   sorry
 
-/-- **`RΓ_c` preserves derived completeness.** For `a : X ⟶ Spec k` separated of finite type
-over a field, `Ra_!` carries derived-complete objects of `D(X_ét, 𝒪_E)` to derived-complete
-objects of `D(Spec k_ét, 𝒪_E)`, so that `RΓ_c(X, K)` is an object of the adic category
-`D_comp(Spec k, 𝒪_E)`. -/
+/-- Blueprint `sk-thm-transport`: Transport through the coefficient stages.
+
+**`RΓ_c` preserves derived completeness** (integral stage only). For `a : X ⟶ Spec k`
+separated of finite type over a field, `Ra_!` carries derived-complete objects of
+`D(X_ét, 𝒪_E)` to derived-complete objects of `D(Spec k_ét, 𝒪_E)`, so that `RΓ_c(X, K)` is
+an object of the adic category `D_comp(Spec k, 𝒪_E)`. -/
 theorem derivedCompleteIntegral_rightDerivedLowerShriek {X : Scheme.{u}} {k : Type u} [Field k]
     (a : X ⟶ Spec (.of k)) [HasCompactification a] [QuasiCompact a] (K : 𝐃(X, 𝒪_E))
     (hK : _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K) :
@@ -76,7 +90,9 @@ theorem derivedCompleteIntegral_rightDerivedLowerShriek {X : Scheme.{u}} {k : Ty
   -- cohomological dimension.
   sorry
 
-/-- **The dual at the integral stage.** The coefficient dual `K^∨ = RHom(K, Λ_X)` of a
+/-- Blueprint `sk-thm-transport`: Transport through the coefficient stages.
+
+**The dual at the integral stage.** The coefficient dual `K^∨ = RHom(K, Λ_X)` of a
 derived-complete object of `D(X_ét, 𝒪_E)` is derived complete. -/
 theorem derivedCompleteIntegral_coefficientDual {X : Scheme.{u}} (K : 𝐃(X, 𝒪_E))
     (hK : _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K) :
