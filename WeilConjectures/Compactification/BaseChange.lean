@@ -35,7 +35,9 @@ special case of the literal pullback is `Compactification.baseChange`.
 ## Main results
 
 - `AlgebraicGeometry.Compactification.isPullback_of_isPullback`: the open immersion of the
-  base changed compactification is a base change of the original open immersion;
+  base changed compactification is a base change of the original open immersion, and
+  `AlgebraicGeometry.Compactification.isPullback_i_ofIsPullback` its special case for
+  `Compactification.ofIsPullback`;
 - `AlgebraicGeometry.HasCompactification.of_isPullback`: compactifiability is stable under
   base change, with the two projections of a fibre product as instances
   (`AlgebraicGeometry.HasCompactification.pullback_snd` and
@@ -97,6 +99,21 @@ noncomputable def ofIsPullback (hsq : IsPullback h u p t) (c : Compactification 
       (isPullback_of_isPullback hsq c (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _))
       c.isOpenImmersion
 
+/-- **The open immersion of a base-changed compactification is a base change of the
+original open immersion**, for the compactification `c.ofIsPullback hsq`:
+
+```
+  X ----h----------------> Y
+  |                        |
+  (c.ofIsPullback hsq).i   c.i
+  ↓                        ↓
+  c.Z ×_T S --fst-------> c.Z
+```
+-/
+theorem isPullback_i_ofIsPullback (hsq : IsPullback h u p t) (c : Compactification p) :
+    IsPullback h (c.ofIsPullback hsq).i c.i (pullback.fst c.g t) :=
+  isPullback_of_isPullback hsq c (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _)
+
 /-- **Base change of a compactification** along a morphism `t : T ⟶ S` of bases: if `c` is a
 compactification of `f : X ⟶ S`, then `c.Z ×_S T ⟶ T` together with `X ×_S T ⟶ c.Z ×_S T`
 is a compactification of the base change `pullback.snd f t`.
@@ -135,8 +152,7 @@ theorem isSchemeTheoreticallyDominant_i_ofIsPullback (hsq : IsPullback h u p t)
     [Flat t] :
     IsSchemeTheoreticallyDominant (c.ofIsPullback hsq).i :=
   have := hc
-  .of_isPullback (isPullback_of_isPullback hsq c (pullback.lift_fst _ _ _)
-    (pullback.lift_snd _ _ _))
+  .of_isPullback (c.isPullback_i_ofIsPullback hsq)
 
 /-- **Flat base change preserves scheme-theoretic density of a compactification**, stated for
 the literal fibre product, i.e. for `Compactification.baseChange`. -/

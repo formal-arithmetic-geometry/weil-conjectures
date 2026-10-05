@@ -7,6 +7,7 @@ module
 
 public import Mathlib
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 
@@ -91,6 +92,32 @@ lemma Scheme.IsTorsionSheaf.of_isTorsion {Λ : Type (u + 1)} [CommRing Λ]
 instance {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : IsTorsionSheaf F :=
   .of_isTorsion isAddTorsion_of_finite F
+
+/-- A quotient of a torsion sheaf is torsion. -/
+lemma Scheme.IsTorsionSheaf.of_epi {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
+    {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (π : F ⟶ G) [Epi π]
+    [IsTorsionSheaf F] : IsTorsionSheaf G where
+  isTorsion_sheafFiber Ω _ _ s x := by
+    have : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+      hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+    have :=
+      ((pointSmallEtale s).skyscraperSheafAdjunction (A := ModuleCat.{u + 1} Λ)).isLeftAdjoint
+    obtain ⟨y, rfl⟩ := (ModuleCat.epi_iff_surjective
+      ((pointSmallEtale s).sheafFiber.map π)).mp inferInstance x
+    obtain ⟨n, hn, hy⟩ := isOfFinAddOrder_iff_nsmul_eq_zero.1
+      (IsTorsionSheaf.isTorsion_sheafFiber (F := F) Ω s y)
+    exact isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨n, hn, by rw [← map_nsmul, hy, map_zero]⟩
+
+open Etale in
+/-- The pullback of a torsion sheaf of `Λ`-modules is torsion: the stalk of `f^* F` at a
+geometric point `s` is the stalk of `F` at `s ≫ f`. -/
+instance isTorsionSheaf_upperStar {Λ : Type (u + 1)} [CommRing Λ] {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf F] :
+    IsTorsionSheaf ((f)^*[ModuleCat.{u + 1} Λ].obj F) where
+  isTorsion_sheafFiber Ω _ _ s :=
+    IsAddTorsion.of_surjective
+      (f := ((Etale.upperStarCompSheafFiberIso _ f s).app F).toLinearEquiv.symm.toAddMonoidHom)
+      (LinearEquiv.surjective _) (IsTorsionSheaf.isTorsion_sheafFiber Ω (s ≫ f))
 
 /-- A sheaf `F` of `Λ`-modules on the small étale site of `T` is *torsion of orders
 invertible on `S`*, for a second scheme `S`, if every element of every geometric stalk of
