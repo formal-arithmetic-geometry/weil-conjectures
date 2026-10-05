@@ -38,6 +38,10 @@ product* `- ⊗ᴸ -`, the total left derived functor of `- ⊗ -` in two variab
   really is the total left derived functor of the tensor product of étale sheaves, in two
   variables.
 
+- `AlgebraicGeometry.Etale.linear_derivedTensor_obj` and
+  `AlgebraicGeometry.Etale.linear_derivedTensor_flip_obj` : the derived tensor product is
+  linear in each variable, by `DerivedCategory.monoidalLinear`.
+
 - `AlgebraicGeometry.Etale.laxMonoidal_Q` : the localization functor
   `Q : C(X_ét) ⥤ D(X_ét)` is lax monoidal.
 
@@ -126,6 +130,32 @@ instance isLeftDerivedFunctor₂_derivedTensor :
       (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ))
       (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ)) :=
   DerivedCategory.isLeftDerivedFunctor₂CurriedTensor (Sheaf X.smallEtaleTopology A)
+
+section Linear
+
+variable {A X} (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+
+/-- Tensoring with a fixed complex, `M ↦ K ⊗ᴸ M`, is additive. -/
+instance additive_derivedTensor_obj : ((derivedTensor A X).obj K).Additive :=
+  inferInstanceAs (tensorLeft K).Additive
+
+/-- Tensoring with a fixed complex, `M ↦ M ⊗ᴸ K`, is additive. -/
+instance additive_derivedTensor_flip_obj : ((derivedTensor A X).flip.obj K).Additive :=
+  inferInstanceAs (tensorRight K).Additive
+
+variable (R : Type*) [Ring R] [Linear R A] [MonoidalLinear R A]
+
+/-- If the tensor product of `A` is `R`-linear, tensoring with a fixed complex,
+`M ↦ K ⊗ᴸ M`, is `R`-linear. -/
+instance linear_derivedTensor_obj : ((derivedTensor A X).obj K).Linear R :=
+  inferInstanceAs ((tensorLeft K).Linear R)
+
+/-- If the tensor product of `A` is `R`-linear, tensoring with a fixed complex,
+`M ↦ M ⊗ᴸ K`, is `R`-linear. -/
+instance linear_derivedTensor_flip_obj : ((derivedTensor A X).flip.obj K).Linear R :=
+  inferInstanceAs ((tensorRight K).Linear R)
+
+end Linear
 
 end Etale
 

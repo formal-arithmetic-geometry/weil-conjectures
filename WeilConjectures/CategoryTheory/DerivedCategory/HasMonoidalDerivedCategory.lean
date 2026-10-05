@@ -5,6 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.Algebra.Homology.DerivedCategory.Linear
+public import Mathlib.CategoryTheory.Monoidal.Linear
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
@@ -41,10 +43,13 @@ Together these give the K-flat left derivability structure, which is what
   `Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso A (.up ℤ))`, from which
   `MonoidalCategory (DerivedCategory A)` follows by
   `WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal`.
+- `DerivedCategory.monoidalPreadditive`, `DerivedCategory.monoidalLinear`: the derived tensor
+  product is additive, and `R`-linear if the tensor product of `A` is, in each variable.
 
 ## TODO
 
-The proof is currently `sorry`. It should go through the K-flat route already available in
+The proofs are currently `sorry`. `hasDerivedMonoidalCategory` should go through the K-flat
+route already available in
 `WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat`: the hypotheses above give
 `(HomotopyCategory.quasiIso A (.up ℤ)).localizerMorphismKFlat.IsLeftDerivabilityStructure`
 (this part is already proved, in
@@ -73,6 +78,22 @@ structure with respect to quasi-isomorphisms. Consequently `DerivedCategory A` i
 with tensor product the derived tensor product `- ⊗ᴸ -`. -/
 instance hasDerivedMonoidalCategory [Abelian.HasFunctorialFlatResolution A] :
     Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) :=
+  sorry
+
+variable [Abelian.HasFunctorialFlatResolution A]
+
+/-- The derived tensor product is additive in each variable. -/
+instance monoidalPreadditive : MonoidalPreadditive (DerivedCategory A) :=
+  -- Proof sketch: tensoring with a fixed object of `D(A)` is a left adjoint between
+  -- preadditive categories.
+  sorry
+
+/-- If the tensor product of `A` is `R`-linear in each variable, so is the derived tensor
+product on `D(A)`. -/
+instance monoidalLinear (R : Type*) [Ring R] [Linear R A] [MonoidalLinear R A] :
+    MonoidalLinear R (DerivedCategory A) :=
+  -- Proof sketch: `K ⊗ᴸ -` and `- ⊗ᴸ K` are computed on K-flat resolutions by the tensor
+  -- product of complexes, which is `R`-linear.
   sorry
 
 end DerivedCategory
