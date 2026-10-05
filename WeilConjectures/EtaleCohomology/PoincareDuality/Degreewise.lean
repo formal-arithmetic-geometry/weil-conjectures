@@ -154,14 +154,14 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X : Sc
   {k : Type u} [Field k] [IsSepClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
   (a : X ⟶ Spec (.of k)) [HasCompactification a] [QuasiCompact a] {d : ℕ}
   (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X}
-  (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K)
+  (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (hKd : IsDualizable K)
 
-include hK in
+include hK hKd in
 /-- Blueprint `sk-thm-derived-duality`: Degreewise duality over a field.
 
 **Degreewise duality.** For `a : X ⟶ Spec k` separated of finite type over a separably closed
-field, a finite field `Λ` of coefficients and `K ∈ D^b_{ctf}(X, Λ)`, the degreewise Poincaré
-pairings
+field, a finite field `Λ` of coefficients and `K ∈ D^b_{ctf}(X, Λ)` dualizable, the
+degreewise Poincaré pairings
 
 `⟨-,-⟩_i : H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ Λ`, `i + j = 2d`,
 
@@ -172,13 +172,13 @@ finiteness (`AlgebraicGeometry.Etale.isDualizable_rightDerivedLowerShriek`). -/
 theorem isPerfPair_degreewisePoincarePairing (hΛ : IsField Λ) (i j : ℤ) (hij : i + j = 2 * d) :
     (degreewisePoincarePairing Λ a γ K i j hij).IsPerfPair := by
   have := isPerfPair_cohomologyClassesPairing Λ hΛ (γ.poincarePairing K)
-    (isDualizable_rightDerivedLowerShriek Λ a hK) (γ.isPerfectPairing_poincarePairing K)
+    (isDualizable_rightDerivedLowerShriek Λ a hK) (γ.isPerfectPairing_poincarePairing hK hKd)
     i (j - 2 * d) (by omega)
   exact LinearMap.IsPerfPair.compl₁₂ (p := cohomologyClassesPairing (γ.poincarePairing K) i
     (j - 2 * d) _) (LinearEquiv.refl Λ _)
     (cohomologyClassesShiftEquiv Λ _ (2 * d) (j - 2 * d) j _).symm
 
-include hK in
+include hK hKd in
 /-- Blueprint `sk-thm-derived-duality`: Degreewise duality over a field.
 
 **The proper case.** For `X` proper, the same holds with `H_c` replaced by `H`: the pairing
@@ -189,16 +189,16 @@ theorem isPerfPair_degreewisePoincarePairing_of_isProper [IsProper a] (hΛ : IsF
     (i j : ℤ) (hij : i + j = 2 * d) :
     ((degreewisePoincarePairing Λ a γ K i j hij).comp
       (lowerStarClassEquivLowerShriek (ModuleCat.{u + 1} Λ) Λ a K i).toLinearMap).IsPerfPair := by
-  have := isPerfPair_degreewisePoincarePairing Λ a γ hK hΛ i j hij
+  have := isPerfPair_degreewisePoincarePairing Λ a γ hK hKd hΛ i j hij
   exact LinearMap.IsPerfPair.compl₁₂ (p := degreewisePoincarePairing Λ a γ K i j hij)
     (lowerStarClassEquivLowerShriek (ModuleCat.{u + 1} Λ) Λ a K i) (LinearEquiv.refl Λ _)
 
-include hK in
+include hK hKd in
 /-- Blueprint `sk-thm-derived-duality`: Degreewise duality over a field.
 
-**The line-valued form.** For a finite field `Λ` of coefficients and `K ∈ D^b_{ctf}(X, Λ)`, the
-untwisted pairing `H^i_c(X, K) × H^j(X, K^∨) ⟶ Λ(-d)` is perfect: both of its adjoints, into
-the `Λ`-linear maps to the line `Λ(-d)`, are bijective. -/
+**The line-valued form.** For a finite field `Λ` of coefficients and `K ∈ D^b_{ctf}(X, Λ)`
+dualizable, the untwisted pairing `H^i_c(X, K) × H^j(X, K^∨) ⟶ Λ(-d)` is perfect: both of its
+adjoints, into the `Λ`-linear maps to the line `Λ(-d)`, are bijective. -/
 theorem bijective_untwistedDegreewisePoincarePairing (hΛ : IsField Λ) (i j : ℤ)
     (hij : i + j = 2 * d) :
     Function.Bijective (untwistedDegreewisePoincarePairing Λ a γ K i j hij) ∧

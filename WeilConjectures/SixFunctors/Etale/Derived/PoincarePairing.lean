@@ -29,21 +29,16 @@ Composing them gives the *derived Poincaré pairing*
 
 `β_K : Ra_! K ⊗ᴸ (Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ Λ_Y`,
 
-which over `Y = Spec k` is `RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ`. It is perfect for every `K`
-(`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`).
+which over `Y = Spec k` is `RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ`. Its perfectness needs the
+projection formula for `Ra_!`, which is only available at finite coefficients `ModuleCat Λ`;
+it is stated there, as `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing` in
+`WeilConjectures.EtaleCohomology.PoincareDuality.Pairing`.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.mixedSupportCupProduct` (`sk-def-pairing-data`): `⌣_c`.
 - `AlgebraicGeometry.Etale.smoothTrace` (`sk-def-pairing-data`): `Tr_o`.
 - `AlgebraicGeometry.Etale.poincarePairing` (`sk-def-pairing`): `β_K`.
-
-## Main statements
-
-- `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing` (`sk-thm-derived-duality`): `β_K`
-  is perfect. Global duality in the form of
-  `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation`
-  is a corollary.
 
 ## Implementation notes
 
@@ -179,8 +174,7 @@ Ra_! K ⊗ᴸ (Ra_*(K^∨ ⊗ᴸ T))[2d] ─────────▶ (Ra_! K 
                                    (Ra_!(ev))[2d]                ≅                      Tr_o
   (Ra_!(K ⊗ᴸ (K^∨ ⊗ᴸ T)))[2d] ─────────────────▶ (Ra_! T)[2d] ─────▶ Ra_!(T[2d]) ──────▶ Λ_Y
 ```
-The blueprint asks `K` to be perfect over `Λ_X`; the composite makes sense, and is perfect,
-for every `K`. -/
+The blueprint asks `K` to be perfect over `Λ_X`; the composite makes sense for every `K`. -/
 noncomputable def poincarePairing (o : Orientation A a d) (e : (L((a)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _)
     (K : 𝐃(X, A)) :
     ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).obj
@@ -189,31 +183,6 @@ noncomputable def poincarePairing (o : Orientation A a d) (e : (L((a)^*[A])).obj
   (poincarePairingShiftIso a K _ _).hom ≫
     (poincarePairingEvaluation a o.twist K)⟦(2 * d : ℤ)⟧' ≫
       ((R(a)_![A]).commShiftIso (2 * d : ℤ)).inv.app _ ≫ smoothTrace o e
-
-/-- Blueprint `sk-thm-derived-duality`: Derived Poincaré duality.
-
-**The derived pairing is perfect.** For every orientation `o` of `a : X ⟶ Y`, with twist `T`,
-and every `K`, the derived Poincaré pairing `β_K` is perfect: its tensor–internal-hom adjoint
-
-`(Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ (Ra_! K)^∨`
-
-is an isomorphism. Over `Y = Spec k` this is `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`.
-
-The adjoint is the composite of two isomorphisms (blueprint, *Identification of the comparison*
-and *Perfectness of the global Verdier pairing*):
-
-* `K^∨ ⊗ᴸ T[2d] ≅ RHom(K, T[2d]) ≅ RHom(K, Ra^! Λ_Y) = 𝔻_X K`, by the orientation and because
-  `RHom(K, -)` commutes with tensoring by the invertible object `T[2d]`;
-* global Verdier duality `Ra_* RHom(K, Ra^! Λ_Y) ≅ RHom(Ra_! K, Λ_Y)`, the adjunction
-  `Ra_! ⊣ Ra^!` internalised by the projection formula.
-
-Neither step needs `K` to be perfect: the blueprint asks for perfect `K` because it identifies
-`𝔻_X K` with `K^∨(d)[2d]` through the biduality of perfect complexes, which the first step
-avoids. -/
-theorem isPerfectPairing_poincarePairing (o : Orientation A a d)
-    (e : (L((a)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _) (K : 𝐃(X, A)) :
-    IsPerfectPairing (poincarePairing a o e K) :=
-  sorry
 
 end Etale
 

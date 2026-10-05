@@ -14,7 +14,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 # Cohomology classes with module coefficients, and the point
 
 The degreewise statements of the Poincaré duality chapter pair cohomology *classes*: a class of
-degree `i` of `M ∈ D(T_ét, Λ)` is a morphism `Λ_T ⟶ M[i]` (`CategoryTheory.cohomologyClasses`).
+degree `i` of `M ∈ D(T_ét, Λ)` is a morphism `Λ_T ⟶ M[i]`
+(`AlgebraicGeometry.Etale.DerivedCategory.cohomologyClasses`, an abbreviation of
+`CategoryTheory.cohomologyClasses`).
 For the structure morphism `a : X ⟶ s` of a scheme over `s = Spec k`, the classes of `Ra_! K` and
 of `Ra_* K` in `D(s_ét, Λ)` are `H^i_c(X, K)` and `H^i(X, K)`.
 
@@ -33,7 +35,9 @@ once here, and the étale statements are derived from them:
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.coefficientAlgEquiv`: `Λ ≃ End (Λ_T)` for a connected `T`.
+- `AlgebraicGeometry.Etale.DerivedCategory.cohomologyClasses`: the classes `Λ_T ⟶ M[i]`.
+- `AlgebraicGeometry.Etale.coefficientAlgEquiv`, `AlgebraicGeometry.Etale.coefficientRingEquiv`:
+  `Λ ≃ End (Λ_T)` for a connected `T`, as algebras and as rings.
 - `AlgebraicGeometry.Etale.cohomologyClassesUnitEquiv`: the classes of degree `0` of `Λ_T` are
   `Λ`.
 - `AlgebraicGeometry.Etale.cohomologyClassesPairing`: the `Λ`-valued pairing of classes
@@ -65,6 +69,13 @@ local notation "𝐃(" T ", " Λ ")" => Etale.DerivedCategoryModule Λ T
 
 namespace Etale
 
+variable {Λ : Type (u + 1)} [CommRing Λ] in
+/-- The classes of degree `i` of `M ∈ D(T_ét, Λ)`, the morphisms `Λ_T ⟶ M[i]`: the general
+`CategoryTheory.cohomologyClasses` in `D(T_ét, Λ)`. For the structure morphism `a` of a
+scheme over `Spec k`, the classes of `Ra_! K` and `Ra_* K` are `H^i_c(X, K)` and `H^i(X, K)`. -/
+abbrev DerivedCategory.cohomologyClasses {T : Scheme.{u}} (M : 𝐃(T, Λ)) (i : ℤ) :=
+  CategoryTheory.cohomologyClasses M i
+
 variable (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u}) [ConnectedSpace T]
 
 /-- The endomorphisms of the constant complex `Λ_T` of a connected scheme `T` are the scalars:
@@ -84,6 +95,12 @@ noncomputable def coefficientAlgEquiv : Λ ≃ₐ[Λ] End (𝟙_ 𝐃(T, Λ)) :=
     convert bijective_smul_id_unit Λ T using 1
     ext r
     exact Algebra.algebraMap_eq_smul_one r)
+
+/-- The coefficient ring `Λ` is the ring of endomorphisms of the constant complex `Λ_T` of a
+connected scheme `T`: the ring isomorphism underlying
+`AlgebraicGeometry.Etale.coefficientAlgEquiv`. -/
+noncomputable def coefficientRingEquiv : Λ ≃+* End (𝟙_ 𝐃(T, Λ)) :=
+  (coefficientAlgEquiv Λ T).toRingEquiv
 
 /-- The classes of degree `n = 0` of the unit `Λ_T` of a connected scheme `T` are the scalars:
 `H^0(T, Λ) = Λ`, through `AlgebraicGeometry.Etale.coefficientAlgEquiv`. -/

@@ -253,7 +253,8 @@ theorem bijective_traceCupPairing [IsProper a] (hΛ : IsField Λ) (i j : ℤ)
     Function.Bijective (traceCupPairing Λ a γ i j hij) ∧
       Function.Bijective (traceCupPairing Λ a γ i j hij).flip := by
   obtain ⟨h₁, h₂⟩ := bijective_untwistedDegreewisePoincarePairing Λ a γ
-    (DerivedCategory.boundedConstructibleFiniteTor_constantComplex Λ X) hΛ i j hij
+    (DerivedCategory.boundedConstructibleFiniteTor_constantComplex Λ X) isDualizable_unit hΛ i j
+    hij
   rw [traceCupPairing_eq_untwistedDegreewisePoincarePairing]
   exact ⟨LinearMap.bijective_compl₁₂ _ _ _ h₁, LinearMap.bijective_flip_compl₁₂ _ _ _ h₂⟩
 

@@ -272,6 +272,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Finiteness
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Transport
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
