@@ -32,9 +32,18 @@ sheaves.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.fourierTransformUnitIso` and
-  `AlgebraicGeometry.Etale.fourierTransformSkyscraperZeroIso`: the transform exchanges the
-  constant sheaf and the skyscraper at the origin.
+- `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_unit` and
+  `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_skyscraperZero`: the transform
+  exchanges the constant sheaf and the skyscraper at the origin.
+- `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_inv`: the transform for the
+  inverse character is the transform of the reflected input.
+
+## Implementation notes
+
+The statements only assert that an isomorphism *exists*. Later uses will need specific,
+coherent isomorphisms, which `Classical.choice` cannot provide.
+
+TODO: upgrade these back to `Iso` constructions once they can be built.
 
 ## Blueprint
 
@@ -82,15 +91,20 @@ the origin of the dual, Tate twisted and shifted by the relative dimension `r = 
 
 On the affine line, the blueprint's case, this reads `FT_ψ(Λ) ≅ δ₀(-1)[-1]`.
 
-The character must be **nontrivial**: for `Ψ = 1` the kernel is the constant sheaf and the
-transform of `Λ` is `Λ(-r)[-r]`, supported everywhere.
+The character must be **nontrivial** in the strong sense that `Ψ 1 - 1` is a unit of `Λ`:
+the proof uses `H_c^*(𝔸¹, ℒ_ψ) = 0`, and the `ψ`-isotypic part of `H_c^*(𝔸¹, Λ)` is killed
+by `Ψ 1 - 1`. For `Ψ = 1` the kernel is the constant sheaf and the transform of `Λ` is
+`Λ(-r)[-r]`, supported everywhere. Asking `Ψ ≠ 1` is not enough when `Λ` is not a domain:
+for `Λ = 𝔽_ℓ × 𝔽_ℓ` and `Ψ = (ψ₀, 1)` the transform has the trivial-character transform as a
+factor. The coefficients are torsion with exponent invertible on `S`, as needed for
+`H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`.
 (sketch blueprint: `sk-prop-first-formula`) -/
-noncomputable def fourierTransformUnitIso [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
-    (hΨ : Ψ ≠ 1) :
-    (affineFourierTransform Λ n S Ψ).obj (𝟙_ _) ≅
-      (shiftFunctor _ (-(Fintype.card n : ℤ))).obj
-        ((tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj
-          (skyscraperZero Λ n S)) :=
+theorem nonempty_iso_affineFourierTransform_unit [Finite Λ] [HasInvertibleExponent Λ S]
+    [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
+    Nonempty ((affineFourierTransform Λ n S Ψ).obj (𝟙_ _) ≅
+        (shiftFunctor _ (-(Fintype.card n : ℤ))).obj
+          ((tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj
+            (skyscraperZero Λ n S))) :=
   sorry
 
 /-- The Fourier–Deligne transform of the skyscraper at the origin of `𝔸(n; S)` is the
@@ -99,12 +113,40 @@ constant sheaf, shifted by the relative dimension `r = #n`:
 `FT_ψ(δ₀) ≅ Λ[r]`.
 
 On the affine line, the blueprint's case, this reads `FT_ψ(δ₀) ≅ Λ[1]`. Unlike
-`AlgebraicGeometry.Etale.fourierTransformUnitIso` this holds for every character: the
-kernel restricted to `{0} ×_S 𝔸(n; S)` is the Artin–Schreier sheaf of the zero function.
+`AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_unit` this holds for every
+character: the kernel restricted to `{0} ×_S 𝔸(n; S)` is the Artin–Schreier sheaf of the zero
+function. The proof is base change of `Rp₂,!` along the zero section, so the coefficients
+are those of proper base change.
 (sketch blueprint: `sk-prop-first-formula`) -/
-noncomputable def fourierTransformSkyscraperZeroIso (Ψ : AddChar (ZMod p) Λ) :
-    (affineFourierTransform Λ n S Ψ).obj (skyscraperZero Λ n S) ≅
-      (shiftFunctor _ (Fintype.card n : ℤ)).obj (𝟙_ _) :=
+theorem nonempty_iso_affineFourierTransform_skyscraperZero [Finite Λ]
+    [HasInvertibleExponent Λ S] (Ψ : AddChar (ZMod p) Λ) :
+    Nonempty ((affineFourierTransform Λ n S Ψ).obj (skyscraperZero Λ n S) ≅
+        (shiftFunctor _ (Fintype.card n : ℤ)).obj (𝟙_ _)) :=
+  sorry
+
+/-- The Fourier–Deligne transform for the inverse character is the transform of the reflected
+input, `ι = AlgebraicGeometry.AffineSpace.neg` being `x ↦ -x`:
+
+`FT_{ψ⁻¹}(K) ≅ FT_ψ(ι^* K)`,
+
+naturally in `K`:
+
+```
+                 ι^*
+     D(𝔸(n; S)) ─────▶ D(𝔸(n; S))
+              ╲             │
+        FT_ψ⁻¹  ╲           │ FT_ψ
+                  ▶         ▼
+                    D(𝔸(n; S))
+```
+
+The kernel of `FT_{ψ⁻¹}` is the pullback of the kernel of `FT_ψ` along `ι × 1`, by
+`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv` and `b(-x, ξ) = -b(x, ξ)`.
+Since `ι × 1` is an isomorphism, the base change of `Rp₂,!` along it is formal, and this
+holds for every character and all coefficients. -/
+theorem nonempty_iso_affineFourierTransform_inv (Ψ : AddChar (ZMod p) Λ) :
+    Nonempty (affineFourierTransform Λ n S Ψ⁻¹ ≅
+        D((neg n S)^*[ModuleCat.{u + 1} Λ]) ⋙ affineFourierTransform Λ n S Ψ) :=
   sorry
 
 end AlgebraicGeometry.Etale
