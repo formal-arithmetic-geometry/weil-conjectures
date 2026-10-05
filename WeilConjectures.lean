@@ -43,6 +43,7 @@ public import WeilConjectures.AlgebraicGeometry.DensePoints
 public import WeilConjectures.AlgebraicGeometry.Descent
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
@@ -164,6 +165,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
@@ -506,6 +508,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Basi
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Products
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Multiequalizer
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.PiProd
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Preorder.Basic
@@ -525,6 +528,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.CommaSites
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Composition
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Limits
@@ -575,6 +579,7 @@ public import WeilConjectures.Mathlib.GroupTheory.SemidirectProduct
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
+public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 public import WeilConjectures.Mathlib.LinearAlgebra.LinearIndependent.BaseChange
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.BilinearForm
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
@@ -752,9 +757,11 @@ public import WeilConjectures.SixFunctors.OpenClosed.Stalk
 public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ExternalProduct
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriek
@@ -772,6 +779,15 @@ public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Con
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Curve
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Defs
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Frobenius
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Localization
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Main
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Pairing
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.ProperPushforward
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
