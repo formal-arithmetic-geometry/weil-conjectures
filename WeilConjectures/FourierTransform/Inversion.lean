@@ -38,8 +38,9 @@ kernels this reduces the inversion theorem to a single computation, that the con
 
 `AlgebraicGeometry.Etale.kernelConvolution` is defined for any coefficient category `A` on which
 the étale six functors are built. The theorems follow the classes of the module docstring of
-`WeilConjectures.FourierTransform.Defs`. The diagonal kernel assumes `[Finite Λ]`: its proof
-uses `Δ_! = Δ_*` and the composition law of `Rf_!`. The composition of kernel transforms, the
+`WeilConjectures.FourierTransform.Defs`. The diagonal kernel is compactification-dependent and
+assumes `[Finite Λ]` only: its proof is formal, but `Δ_! = Δ_*` and the composition law of
+`Rf_!` need independence of the compactification. The composition of kernel transforms, the
 convolution of the Fourier kernels and the inversion theorem also assume
 `[HasInvertibleExponent Λ S]`: they use the projection formula for `Rf_!` and the cohomology
 of `𝔸^r`.
@@ -175,9 +176,11 @@ the projection formula for the closed immersion `Δ`, which identifies the left 
 `Rp₂,! Δ_*(Δ^* p₁^* K ⊗ᴸ N)`, followed by `Δ_* = Δ_!` and `p₂ ∘ Δ = 𝟙`; `π` is separated so
 that `Δ` is a closed immersion.
 
-The projection formula for a closed immersion is formal. The rest is not: `Rf_!` is computed
-with a chosen compactification, so `Δ_! = Δ_*`, `R(Δ ≫ p₂)_! ≅ Rp₂,! ⋙ RΔ_!` and `R(𝟙)_! ≅ 𝟭`
-are instances of the independence of the compactification, which needs finite `Λ`. -/
+This is **compactification-dependent**: the blueprint proof is formal, and `[Finite Λ]` enters
+solely through independence of the compactification. `Rf_!` is computed with a chosen
+compactification, so `Δ_! = Δ_*`, `R(Δ ≫ p₂)_! ≅ Rp₂,! ⋙ RΔ_!` and `R(𝟙)_! ≅ 𝟭` are
+instances of that independence, which goes through proper base change.
+(sketch blueprint: `sk-thm-inversion`, proof) -/
 theorem nonempty_iso_kernelTransform_diagonal [Finite Λ] [IsSeparated π]
     [HasCompactification (pullback.snd π π)]
     (N : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

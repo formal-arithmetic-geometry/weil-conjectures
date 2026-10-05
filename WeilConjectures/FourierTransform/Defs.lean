@@ -70,13 +70,17 @@ Fourier–Deligne transform are defined over `ModuleCat Λ`, for any commutative
 The theorems of the Fourier transform files assume the coefficient hypotheses of the strongest
 input of their proofs:
 
-- formal six-functor manipulations: no hypothesis on the coefficients;
-- compact-support base change and the functoriality of `Rf_!` (its composition law,
-  independence of the chosen compactification, `Δ_! = Δ_*` for a closed immersion), which are
-  available for torsion coefficients: `[Finite Λ]`;
-- the projection formula for `Rf_!`, finiteness of `Rf_!`, the cohomology of `𝔸^r` and Tate
-  twists, which also need the exponent of `Λ` to be invertible:
-  `[Finite Λ] [HasInvertibleExponent Λ S]`.
+- **general**: formal six-functor manipulations (shifts, pullback along isomorphisms, the
+  projection formula for a closed immersion, multiplicativity of Artin–Schreier sheaves): no
+  hypothesis on the coefficients;
+- **compactification-dependent**: the blueprint proof is formal, but `R(f)_!` is computed with
+  a chosen compactification, and comparing two compactifications
+  (`WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded`) goes through
+  proper base change: `[Finite Λ]` only, entering solely through independence of the
+  compactification;
+- **torsion**: compact-support base change, the projection formula for `Rp₂,!`, Deligne
+  finiteness of `Rf_!` or the cohomology of `𝔸^r`: `[Finite Λ] [HasInvertibleExponent Λ S]`,
+  or `[Finite Λ]` alone where the blueprint proof does not use the exponent.
 
 In the blueprint the `ℚ̄_ℓ` versions are deduced from the torsion ones by reduction. That
 deduction, and the `ℚ̄_ℓ` statements themselves, are not formalised here.

@@ -42,10 +42,11 @@ sheaves.
 
 The transform and the skyscraper are defined for every commutative ring `Λ` in which `p` is
 invertible. The theorems follow the classes of the module docstring of
-`WeilConjectures.FourierTransform.Defs`. The transform of the skyscraper and the comparison of
-the transforms for `ψ` and `ψ⁻¹` assume `[Finite Λ]`: they use compact-support base change and
-the independence of the compactification. The transform of the constant sheaf also assumes
-`[HasInvertibleExponent Λ S]`: it uses `H_c^*(𝔸^r)`.
+`WeilConjectures.FourierTransform.Defs`. The transform of the skyscraper assumes `[Finite Λ]`:
+it uses compact-support base change. The comparison of the transforms for `ψ` and `ψ⁻¹` is
+compactification-dependent and assumes `[Finite Λ]` only: its proof is formal, and `[Finite Λ]`
+enters solely through independence of the compactification. The transform of the constant
+sheaf assumes `[Finite Λ] [HasInvertibleExponent Λ S]`: it uses `H_c^*(𝔸^r)`.
 
 ## Implementation notes
 
@@ -151,9 +152,13 @@ naturally in `K`:
 
 The kernel of `FT_{ψ⁻¹}` is the pullback of the kernel of `FT_ψ` along `ι × 1`, by
 `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv` and `b(-x, ξ) = -b(x, ξ)`.
-The proof is base change of `Rp₂,!` along the isomorphism `ι × 1`. Even along an isomorphism
-this is not formal: the chosen compactifications of `p₂` and of its conjugate by `ι × 1` must be
-compared, which needs `Λ` finite. It holds for every character. -/
+The proof is base change of `Rp₂,!` along the isomorphism `ι × 1`. It holds for every
+character.
+
+This is **compactification-dependent**: the blueprint proof is formal, and `[Finite Λ]` enters
+solely through independence of the compactification, since the chosen compactifications of `p₂`
+and of its conjugate by `ι × 1` must be compared.
+(sketch blueprint: `sk-def-ft`, remark; `lem-fd-as-lisse`) -/
 theorem nonempty_iso_affineFourierTransform_inv [Finite Λ] (Ψ : AddChar (ZMod p) Λ) :
     Nonempty (affineFourierTransform Λ n S Ψ⁻¹ ≅
         D((neg n S)^*[ModuleCat.{u + 1} Λ]) ⋙ affineFourierTransform Λ n S Ψ) :=

@@ -41,6 +41,8 @@ transport `t`-structures.
   `K|_{V_ξ} ⊗ᴸ ℒ_{ψ(b(x, ξ))}` on the fibre `V_ξ = V ×_S Ω`, shifted by `r`.
 - `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_baseChange`: the transform commutes
   with base change along `S' ⟶ S`.
+- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_baseChange_of_isIso`: the same along
+  an isomorphism `S' ⟶ S`.
 - `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor`: the transform is
   linear over the base.
 - `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tateTwist`: the transform commutes
@@ -51,8 +53,11 @@ transport `t`-structures.
 `AlgebraicGeometry.Etale.derivedTensorRightPullback` is defined for any coefficient category
 `A` on which the étale six functors are built. The theorems follow the classes of the module
 docstring of `WeilConjectures.FourierTransform.Defs`. The stalk formula and base change assume
-`[Finite Λ]`: they use compact-support base change. Base linearity and the Tate twist also
-assume `[HasInvertibleExponent Λ S]`: they use the projection formula for `Rp₂,!`.
+`[Finite Λ]`: they use compact-support base change. Base change along an isomorphism is
+compactification-dependent and assumes `[Finite Λ]` only: its proof is formal, and
+`[Finite Λ]` enters solely through independence of the compactification. Base linearity and
+the Tate twist assume `[Finite Λ] [HasInvertibleExponent Λ S]`: they use the projection formula
+for `Rp₂,!`.
 
 ## Implementation notes
 
@@ -226,6 +231,38 @@ theorem nonempty_iso_fourierTransform_baseChange [Finite Λ]
         fourierTransform Λ π π' Ψ b r ⋙ D((u')^*[ModuleCat.{u + 1} Λ])) :=
   sorry
 
+/-- The Fourier–Deligne transform commutes with base change along an **isomorphism**
+`g : S' ⟶ S`:
+
+`FT_ψ(u^* K) ≅ u'^* FT_ψ(K)`,
+
+naturally in `K`, for cartesian squares as in
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_baseChange`. Then `u`, `u'` and the
+induced morphism `W ×_{S'} W' ⟶ V ×_S V'` are isomorphisms, and pullback along an isomorphism
+commutes with `Rp₂,!`, with the derived tensor product and with shifts. It is the form in which
+the geometric Frobenius `𝟙 × σ`, base change along the automorphism `σ` of `Spec k̄`, acts on
+the transform.
+
+This is **compactification-dependent**: the blueprint proof is formal, and `[Finite Λ]` enters
+solely through independence of the compactification. `Rp₂,!` and its base change are computed
+with chosen compactifications, and identifying the base change of the chosen compactification
+of `p₂` with the chosen compactification of `pullback.snd ρ ρ'` is
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, which needs that projection to be
+quasi-compact and goes through proper base change.
+(sketch blueprint: `sk-prop-base-change`, special case) -/
+theorem nonempty_iso_fourierTransform_baseChange_of_isIso [Finite Λ]
+    [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
+    (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ) {S' W W' : Scheme.{u}}
+    (g : S' ⟶ S) [IsIso g] (ρ : W ⟶ S') (ρ' : W' ⟶ S') (u : W ⟶ V) (u' : W' ⟶ V')
+    (hu : IsPullback u ρ π g) (hu' : IsPullback u' ρ' π' g)
+    [CharP Γ(pullback ρ ρ', ⊤) p] [HasCompactification (pullback.snd ρ ρ')]
+    [QuasiCompact (pullback.snd ρ ρ')] :
+    Nonempty (D((u)^*[ModuleCat.{u + 1} Λ]) ⋙
+          fourierTransform Λ ρ ρ' Ψ
+            (pairingBaseChange π π' b g ρ ρ' u u' hu.w hu'.w) r ≅
+        fourierTransform Λ π π' Ψ b r ⋙ D((u')^*[ModuleCat.{u + 1} Λ])) :=
+  sorry
+
 end BaseChange
 
 section BaseLinear
@@ -259,6 +296,9 @@ commutes with the colimits reducing to bounded complexes.
 
 In particular `FT_ψ(π^* N) ≅ FT_ψ(Λ) ⊗ᴸ π'^* N`, so the transform of a complex pulled back
 from the base is determined by the transform of the unit.
+
+This is **torsion** and assumes `[Finite Λ] [HasInvertibleExponent Λ S]`: the decisive input is
+the projection formula for `Rp₂,!`.
 (sketch blueprint: `sk-prop-base-linear`) -/
 theorem nonempty_iso_fourierTransform_tensor (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
@@ -283,6 +323,10 @@ This is the second clause of the base linearity proposition, the Tate twist bein
 with an invertible complex pulled back from the base: it is
 `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor` at `N = Λ_S(m)`, composed
 with the identifications `π^* Λ_S(m) ≅ Λ_V(m)` and `π'^* Λ_S(m) ≅ Λ_{V'}(m)`.
+
+This is **torsion** and assumes `[Finite Λ] [HasInvertibleExponent Λ S]`: the decisive input is
+the projection formula for `Rp₂,!`, through
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor`.
 (sketch blueprint: `sk-prop-base-linear`) -/
 theorem nonempty_iso_fourierTransform_tateTwist [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r m : ℤ) :
