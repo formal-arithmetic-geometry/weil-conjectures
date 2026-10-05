@@ -6,56 +6,59 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Classes
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Finiteness
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Proper
-public import WeilConjectures.AlgebraicGeometry.PoincareDualitySetting
-public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
-public import Mathlib.LinearAlgebra.PerfectPairing.Basic
 
 /-!
 # Degreewise duality over a field
 
-Over a field of coefficients a perfect point complex is the direct sum of its shifted
-cohomologies, so the derived Poincaré pairing `β_K` of
-`WeilConjectures.EtaleCohomology.PoincareDuality.Pairing` can be read degree by degree. The
-result is a family of perfect pairings
+The derived Poincaré pairing `β_K` of a Tate orientation can be read degree by degree. The
+result is a family of pairings
 
-`⟨-,-⟩_i : H^i_c(X, K) × H^{2d-i}(X, K^∨(d)) ⟶ Λ`.
+`⟨-,-⟩_i : H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ Λ`, `i + j = 2d`,
 
-Classes are the morphisms `Λ_s ⟶ M[i]` of
-`AlgebraicGeometry.Etale.DerivedCategory.cohomologyClasses`, for `M = Ra_! K` and
-`M = Ra_* (K^∨(d))` in `D(s_ét, Λ)`. The pairing of `x` and `y` is the composite
+which are perfect over a field `Λ` of coefficients.
 
-`Λ_s ≅ Λ_s ⊗ Λ_s ⟶ (Ra_! K)[i] ⊗ (Ra_* K^∨(d))[j] ≅ (Ra_! K ⊗ Ra_* K^∨(d))[i + j] ⟶ Λ_s`
+Classes are the morphisms `Λ_Y ⟶ M[i]` of `CategoryTheory.cohomologyClasses`, for
+`M = Ra_! K` and `M = Ra_*(K^∨(d))` in `D(Y_ét, Λ)`. The pairing of `x` and `y` is the pairing
+of classes (`AlgebraicGeometry.Etale.cohomologyClassesPairing`) induced by `β_K`, after reading
+`y ∈ H^j(X, K^∨(d))` as a class of degree `j - 2d` of `(Ra_*(K^∨(d)))[2d]`. It is `Λ`-valued
+for a connected `Y`, through `AlgebraicGeometry.Etale.coefficientAlgEquiv`. The two degrees are
+separate indices `i j : ℤ` with `i + j = 2 * d`, since `2 * d - (2 * d - i)` is not
+definitionally `i`.
 
-with `i + j = 2d`, the last map being `β_K` read through the identification of the shift.
-It lands in `End (Λ_s)`, which is `Λ` by `AlgebraicGeometry.Etale.coefficientRingEquiv`.
-The two degrees are separate indices `i j : ℤ` with `i + j = 2 * d`, since
-`2 * d - (2 * d - i)` is not definitionally `i`.
+Degreewise duality is then a consequence of two statements: derived Poincaré duality
+(`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`), and, at a
+separably closed point, the perfectness on classes of a perfect pairing of dualizable complexes
+over a field (`AlgebraicGeometry.Etale.isPerfPair_cohomologyClassesPairing`), applied to `β_K`;
+`Ra_! K` is dualizable by finiteness
+(`AlgebraicGeometry.Etale.isDualizable_rightDerivedLowerShriek`).
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.degreewisePoincarePairing`: the degreewise pairing `⟨-,-⟩_i`.
-- `AlgebraicGeometry.Etale.untwistedDegreewisePoincarePairing`: its line-valued form,
-  `H^i_c(X, K) × H^j(X, K^∨) ⟶ Λ(-d)`.
+- `AlgebraicGeometry.Etale.twistLowerStarClass`: a class of `Ra_* M` twisted by `Λ(d)`.
+- `AlgebraicGeometry.Etale.untwistedDegreewisePoincarePairing`: the line-valued form
+  `H^i_c(X, K) × H^j(X, K^∨) ⟶ Λ(-d)` of the degreewise pairing.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`: `β_K` is perfect.
 - `AlgebraicGeometry.Etale.isPerfPair_degreewisePoincarePairing`: `⟨-,-⟩_i` is perfect.
-- `AlgebraicGeometry.Etale.isPerfPair_untwistedDegreewisePoincarePairing`: the line-valued
-  form is perfect.
 - `AlgebraicGeometry.Etale.isPerfPair_degreewisePoincarePairing_of_isProper`: for proper `X`,
   the same with `H_c` replaced by `H`.
+- `AlgebraicGeometry.Etale.bijective_untwistedDegreewisePoincarePairing`: the line-valued form
+  is perfect.
 
 ## Implementation notes
 
 The blueprint's field stages are `E` and `ℚ̄_ℓ`. Neither carries the six operations in the
-repository (see `WeilConjectures.EtaleCohomology.Purity.Smooth.Transport`), so the field
-statements are made for `ModuleCat Λ` with `[Field Λ]`: these are the statements for a finite
-field `Λ = 𝔽_ℓ` of coefficients, the finite-field-coefficient form of Poincaré duality. The
-statements are not specialised to finite `Λ`, so they also apply to any field stage that is
-later realised as `ModuleCat Λ`.
+repository (see `WeilConjectures.EtaleCohomology.Purity.Smooth.Transport`), so they are **not
+covered** here. The field statements are for `ModuleCat Λ` with `Λ` a *finite* field, i.e.
+`Λ = 𝔽_ℓ`-algebras that are fields: finiteness of `Λ` is what the six operations and the
+finiteness theorem (`AlgebraicGeometry.Etale.isDualizable_rightDerivedLowerShriek`) need.
+
+That `Λ` is a field is the hypothesis `IsField Λ`, not an instance `[Field Λ]`: see
+`AlgebraicGeometry.Etale.isPerfPair_cohomologyClassesPairing`.
 -/
 
 @[expose] public section
@@ -74,125 +77,51 @@ namespace Etale
 
 section Definitions
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [HasTateTwist Λ]
-
-/-- Untwisting a morphism `φ : Λ_T(m) ⟶ Λ_T` into a class of `Λ_T(-m)`:
-
-`Λ_T ≅ Λ_T(m + (-m)) ≅ Λ_T(m) ⊗ᴸ Λ_T(-m) ⟶ Λ_T ⊗ᴸ Λ_T(-m) ≅ Λ_T(-m)`,
-
-through the identifications `HasTateTwist.twistObjectZeroIso`,
-`HasTateTwist.twistObjectAddIso` of the Tate twist datum and the left unitor. This is how a
-trace or a pairing with values in `Λ` after a twist `(m)` is read as a `Λ(-m)`-valued one. -/
-noncomputable def untwistTateObject (T : Scheme.{u}) (m : ℤ) :
-    (tateObject Λ T m ⟶ 𝟙_ _) →ₗ[Λ] (𝟙_ _ ⟶ tateObject Λ T (-m)) where
-  toFun φ := (HasTateTwist.twistObjectZeroIso T).inv ≫ eqToHom (by rw [add_neg_cancel]) ≫
-    (HasTateTwist.twistObjectAddIso T m (-m)).inv ≫
-      ((derivedTensor _ T).flip.obj (tateObject Λ T (-m))).map φ ≫
-        (derivedTensorLeftUnitor _ T _).hom
-  map_add' φ ψ := by
-    simp only [Functor.map_add, Preadditive.add_comp, Preadditive.comp_add]
-  map_smul' r φ := by
-    simp only [Functor.map_smul, Linear.smul_comp, Linear.comp_smul, RingHom.id_apply]
-
-variable {k : Type u} [Field k] {X : Scheme.{u}}
-
-/-- The composite of a pair of shifted morphisms `x : A ⟶ (Ra_! K)[i]`,
-`y : B ⟶ (Ra_*(K^∨(d)))[j]`, `i + j = 2d`, with the derived Poincaré pairing:
-
-`A ⊗ᴸ B ⟶ (Ra_! K)[i] ⊗ᴸ (Ra_*(K^∨(d)))[j] ≅ (Ra_! K ⊗ᴸ Ra_*(K^∨(d)))[2d]
-  ≅ Ra_! K ⊗ᴸ (Ra_*(K^∨(d)))[2d] ⟶ Λ_s`.
-
-For `A = B = Λ_s` it is the degreewise pairing of the classes `x` and `y`. -/
-noncomputable def poincarePairingComp (a : X ⟶ Spec (CommRingCat.of k))
-    [HasCompactification a] (d : ℕ)
-    (γ : (twistShift Λ X d).obj (constantComplex Λ X) ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) a)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (i j : ℤ) (hij : i + j = 2 * d)
-    {A B : _root_.DerivedCategory
-      (Sheaf (Spec (CommRingCat.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (x : A ⟶ ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)⟦i⟧)
-    (y : B ⟶ ((R((a)_*[ModuleCat.{u + 1} Λ])).obj ((tateTwist Λ X d).obj
-      ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))))⟦j⟧) :
-    ((derivedTensor _ _).obj A).obj B ⟶ 𝟙_ _ :=
-  ((derivedTensor _ _).flip.obj B).map x ≫ ((derivedTensor _ _).obj _).map y ≫
-    (derivedTensorShiftIso _ _ _ i j).hom ≫ eqToHom (by rw [hij]) ≫
-      (poincarePairingShiftIso Λ a d K).inv ≫ poincarePairing Λ a d γ K
-
-/-- The value `⟨x, y⟩ ∈ End (Λ_s)` of the degreewise Poincaré pairing at classes
-`x ∈ H^i_c(X, K)` and `y ∈ H^j(X, K^∨(d))`, `i + j = 2d`: the composite
-`Λ_s ≅ Λ_s ⊗ᴸ Λ_s ⟶ Λ_s` of the left unitor and
-`AlgebraicGeometry.Etale.poincarePairingComp`. -/
-noncomputable def degreewisePoincarePairingHom (a : X ⟶ Spec (CommRingCat.of k))
-    [HasCompactification a] (d : ℕ)
-    (γ : (twistShift Λ X d).obj (constantComplex Λ X) ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) a)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (i j : ℤ) (hij : i + j = 2 * d)
-    (x : DerivedCategory.cohomologyClasses ((R(a)_![ModuleCat.{u + 1} Λ]).obj K) i)
-    (y : DerivedCategory.cohomologyClasses ((R((a)_*[ModuleCat.{u + 1} Λ])).obj
-      ((tateTwist Λ X d).obj ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj
-        (op K)))) j) :
-    End (𝟙_ (_root_.DerivedCategory
-      (Sheaf (Spec (CommRingCat.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))) :=
-  (derivedTensorLeftUnitor _ _ _).inv ≫ poincarePairingComp Λ a d γ K i j hij x y
+variable (Λ : Type (u + 1)) [CommRing Λ] [HasTateTwist Λ] {X Y : Scheme.{u}} (a : X ⟶ Y)
+  {d : ℕ}
 
 /-- Blueprint `sk-thm-derived-duality`: Degreewise duality over a field.
 
-The *degreewise Poincaré pairing*
+The *degreewise Poincaré pairing* of a Tate orientation `γ` of `a : X ⟶ Y`, for a connected
+`Y`,
 
-`⟨-,-⟩_i : H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ Λ`, `i + j = 2d`,
+`⟨-,-⟩_i : H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ Λ`, `i + j = 2d`:
 
-the `Λ`-bilinear form `AlgebraicGeometry.Etale.degreewisePoincarePairingHom` read in `Λ`
-through `AlgebraicGeometry.Etale.coefficientRingEquiv`. Here `H^i_c(X, K)` and
-`H^j(X, K^∨(d))` are the classes `Λ_s ⟶ (Ra_! K)[i]` and `Λ_s ⟶ (Ra_*(K^∨(d)))[j]` in
-`D(s_ét, Λ)`. -/
-noncomputable def degreewisePoincarePairing (a : X ⟶ Spec (CommRingCat.of k))
-    [HasCompactification a] (d : ℕ)
-    (γ : (twistShift Λ X d).obj (constantComplex Λ X) ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) a)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (i j : ℤ) (hij : i + j = 2 * d) :
-    DerivedCategory.cohomologyClasses ((R(a)_![ModuleCat.{u + 1} Λ]).obj K) i →ₗ[Λ]
-      DerivedCategory.cohomologyClasses ((R((a)_*[ModuleCat.{u + 1} Λ])).obj
-        ((tateTwist Λ X d).obj ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj
-          (op K)))) j →ₗ[Λ] Λ :=
-  (LinearMap.mk₂ Λ (degreewisePoincarePairingHom Λ a d γ K i j hij)
-    (fun x x' y ↦ by
-      simp only [degreewisePoincarePairingHom, poincarePairingComp, Functor.map_add,
-        Preadditive.add_comp, Preadditive.comp_add])
-    (fun r x y ↦ by
-      simp only [degreewisePoincarePairingHom, poincarePairingComp, Functor.map_smul,
-        Linear.smul_comp, Linear.comp_smul])
-    (fun x y y' ↦ by
-      simp only [degreewisePoincarePairingHom, poincarePairingComp, Functor.map_add,
-        Preadditive.add_comp, Preadditive.comp_add])
-    (fun r x y ↦ by
-      simp only [degreewisePoincarePairingHom, poincarePairingComp, Functor.map_smul,
-        Linear.smul_comp, Linear.comp_smul])).compr₂ (coefficientLinearMap Λ k)
+the pairing of classes induced by `β_K` (`AlgebraicGeometry.Etale.cohomologyClassesPairing`),
+the class `y` of degree `j` of `Ra_*(K^∨(d))` being read as a class of degree `j - 2d` of
+`(Ra_*(K^∨(d)))[2d]` (`CategoryTheory.cohomologyClassesShiftEquiv`),
+```
+              x ⊗ᴸ y                                                  β_K
+Λ_Y ≅ Λ_Y ⊗ᴸ Λ_Y ─────▶ (Ra_! K)[i] ⊗ᴸ ((Ra_*(K^∨(d)))[2d])[j - 2d] ≅ (Ra_! K ⊗ᴸ …)[0] ───▶ Λ_Y
+```
+read in `Λ` through `AlgebraicGeometry.Etale.coefficientAlgEquiv`. -/
+noncomputable def degreewisePoincarePairing [HasCompactification a] [ConnectedSpace Y]
+    (γ : TateOrientation Λ a d) (K : DerivedCategoryModule Λ X) (i j : ℤ) (hij : i + j = 2 * d) :
+    cohomologyClasses ((R(a)_![ModuleCat.{u + 1} Λ]).obj K) i →ₗ[Λ]
+      cohomologyClasses ((R((a)_*[ModuleCat.{u + 1} Λ])).obj (twistedDual Λ d K)) j →ₗ[Λ] Λ :=
+  (cohomologyClassesPairing (γ.poincarePairing K) i (j - 2 * d) (by omega)).compl₂
+    (cohomologyClassesShiftEquiv Λ _ (2 * d) (j - 2 * d) j (by omega)).symm.toLinearMap
 
-/-- A class `y ∈ H^j(X, K^∨)` twisted into a morphism `Λ_s(d) ⟶ (Ra_*(K^∨(d)))[j]`:
-
-`Λ_s(d) ≅ Λ_s ⊗ᴸ Λ_s(d) ⟶ (Ra_* K^∨)[j] ⊗ᴸ Λ_s(d) ≅ (Ra_* K^∨ ⊗ᴸ Λ_s(d))[j]
-  ⟶ (Ra_*(K^∨ ⊗ᴸ La^* Λ_s(d)))[j] ≅ (Ra_*(K^∨(d)))[j]`,
-
-through the projection map of `Ra_*` and `La^* Λ_s(d) ≅ Λ_X(d)`. -/
-noncomputable def twistLowerStarClass (a : X ⟶ Spec (CommRingCat.of k)) (d : ℕ)
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (j : ℤ) :
-    DerivedCategory.cohomologyClasses ((R((a)_*[ModuleCat.{u + 1} Λ])).obj M) j →ₗ[Λ]
-      (tateObject Λ (Spec (CommRingCat.of k)) d ⟶
-        ((R((a)_*[ModuleCat.{u + 1} Λ])).obj ((tateTwist Λ X d).obj M))⟦j⟧) where
-  toFun y := (derivedTensorLeftUnitor _ _ _).inv ≫
-    ((derivedTensor _ _).flip.obj (tateObject Λ (Spec (CommRingCat.of k)) d)).map y ≫
-      (((derivedTensor _ _).flip.obj (tateObject Λ (Spec (CommRingCat.of k)) d)).commShiftIso
-        j).hom.app _ ≫
-      (((rightDerivedLowerStarProjectionMap _ a).app M).app _ ≫
-        (R((a)_*[ModuleCat.{u + 1} Λ])).map (((derivedTensor _ X).obj M).map
-          (leftDerivedUpperStarTateObjectIso a d).hom))⟦j⟧'
-  map_add' y y' := by
-    simp only [Functor.map_add, Preadditive.add_comp, Preadditive.comp_add]
-  map_smul' r y := by
-    simp only [Functor.map_smul, Linear.smul_comp, Linear.comp_smul, RingHom.id_apply]
+/-- A class `y ∈ H^j(Y, Ra_* M)` twisted into a morphism `Λ_Y(d) ⟶ (Ra_*(M ⊗ᴸ Λ_X(d)))[j]`:
+```
+         λ⁻¹                        y ⊗ᴸ 1                              ≅
+Λ_Y(d) ─────▶ Λ_Y ⊗ᴸ Λ_Y(d) ─────────────▶ (Ra_* M)[j] ⊗ᴸ Λ_Y(d) ─────▶ (Ra_* M ⊗ᴸ Λ_Y(d))[j]
+                  projection map                                ≅
+         ─────────────────────────▶ (Ra_*(M ⊗ᴸ La^* Λ_Y(d)))[j] ─────▶ (Ra_*(M ⊗ᴸ Λ_X(d)))[j]
+```
+through the projection map of `Ra_*` and `La^* Λ_Y(d) ≅ Λ_X(d)`. It is `Λ`-linear, being built
+from composition and the `Λ`-linear functor `- ⊗ᴸ Λ_Y(d)`. -/
+noncomputable def twistLowerStarClass (d : ℕ) (M : DerivedCategoryModule Λ X) (j : ℤ) :
+    cohomologyClasses ((R((a)_*[ModuleCat.{u + 1} Λ])).obj M) j →ₗ[Λ]
+      (tateObject Λ Y d ⟶ ((R((a)_*[ModuleCat.{u + 1} Λ])).obj
+        (((derivedTensor _ X).obj M).obj (tateObject Λ X d)))⟦j⟧) :=
+  Linear.leftComp Λ _ (derivedTensorLeftUnitor _ Y _).inv ∘ₗ
+    Linear.rightComp Λ _
+      ((((derivedTensor _ Y).flip.obj (tateObject Λ Y d)).commShiftIso j).hom.app _ ≫
+        (((rightDerivedLowerStarProjectionMap _ a).app M).app _ ≫
+          (R((a)_*[ModuleCat.{u + 1} Λ])).map (((derivedTensor _ X).obj M).map
+            (leftDerivedUpperStarTateObjectIso a d).hom))⟦j⟧') ∘ₗ
+      ((derivedTensor _ Y).flip.obj (tateObject Λ Y d)).mapLinearMap Λ
 
 /-- Blueprint `sk-thm-derived-duality`: Degreewise duality over a field.
 
@@ -200,141 +129,83 @@ The *line-valued* form of the degreewise Poincaré pairing,
 
 `H^i_c(X, K) × H^j(X, K^∨) ⟶ Λ(-d)`, `i + j = 2d`,
 
-with values in the classes `Λ_s ⟶ Λ_s(-d)`: the class `y ∈ H^j(X, K^∨)` is twisted into
-`Λ_s(d) ⟶ (Ra_*(K^∨(d)))[j]` (`AlgebraicGeometry.Etale.twistLowerStarClass`), paired with
-`x` into `Λ_s(d) ⟶ Λ_s`, and the result untwisted
-(`AlgebraicGeometry.Etale.untwistTateObject`). -/
-noncomputable def untwistedDegreewisePoincarePairing (a : X ⟶ Spec (CommRingCat.of k))
-    [HasCompactification a] (d : ℕ)
-    (γ : (twistShift Λ X d).obj (constantComplex Λ X) ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) a)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (i j : ℤ) (hij : i + j = 2 * d) :
-    DerivedCategory.cohomologyClasses ((R(a)_![ModuleCat.{u + 1} Λ]).obj K) i →ₗ[Λ]
-      DerivedCategory.cohomologyClasses ((R((a)_*[ModuleCat.{u + 1} Λ])).obj
+with values in the classes `Λ_Y ⟶ Λ_Y(-d)`: the class `y ∈ H^j(X, K^∨)` is twisted into
+`Λ_Y(d) ⟶ (Ra_*(K^∨(d)))[j]` (`AlgebraicGeometry.Etale.twistLowerStarClass`), paired with
+`x` along `β_K` into `Λ_Y(d) ⟶ Λ_Y` (`AlgebraicGeometry.Etale.shiftedHomCupProduct`), and the
+result untwisted (`AlgebraicGeometry.Etale.untwistTateObject`). -/
+noncomputable def untwistedDegreewisePoincarePairing [HasCompactification a]
+    (γ : TateOrientation Λ a d) (K : DerivedCategoryModule Λ X) (i j : ℤ) (hij : i + j = 2 * d) :
+    cohomologyClasses ((R(a)_![ModuleCat.{u + 1} Λ]).obj K) i →ₗ[Λ]
+      cohomologyClasses ((R((a)_*[ModuleCat.{u + 1} Λ])).obj
         ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))) j →ₗ[Λ]
-        (𝟙_ _ ⟶ tateObject Λ (Spec (CommRingCat.of k)) (-d)) :=
-  LinearMap.mk₂ Λ (fun x y ↦ untwistTateObject Λ _ d ((derivedTensorLeftUnitor _ _ _).inv ≫
-      poincarePairingComp Λ a d γ K i j hij x (twistLowerStarClass Λ a d _ j y)))
-    (fun x x' y ↦ by
-      simp only [poincarePairingComp, Functor.map_add, Preadditive.add_comp,
-        Preadditive.comp_add, map_add])
-    (fun r x y ↦ by
-      simp only [poincarePairingComp, Functor.map_smul, Linear.smul_comp, Linear.comp_smul,
-        map_smul])
-    (fun x y y' ↦ by
-      simp only [poincarePairingComp, map_add, Functor.map_add, Preadditive.add_comp,
-        Preadditive.comp_add])
-    (fun r x y ↦ by
-      simp only [poincarePairingComp, map_smul, Functor.map_smul, Linear.smul_comp,
-        Linear.comp_smul])
-
-/-- The identification `H^i(X, M) ≅ H^i_c(X, M)` of ordinary and compactly supported classes
-for a proper `a`, through `Ra_! ≅ Ra_*`
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoLowerStar`). -/
-noncomputable def lowerStarClassToLowerShriek (a : X ⟶ Spec (CommRingCat.of k)) [IsProper a]
-    [HasCompactification a]
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (i : ℤ) :
-    DerivedCategory.cohomologyClasses ((R((a)_*[ModuleCat.{u + 1} Λ])).obj M) i →ₗ[Λ]
-      DerivedCategory.cohomologyClasses ((R(a)_![ModuleCat.{u + 1} Λ]).obj M) i :=
-  Linear.rightComp Λ _ (((rightDerivedLowerShriekIsoLowerStar _ a).inv.app M)⟦i⟧')
+        (𝟙_ _ ⟶ tateObject Λ Y (-d)) :=
+  ((shiftedHomCupProduct Λ (γ.poincarePairing K) i (j - 2 * d)).compl₂
+      ((Linear.homCongr Λ (Iso.refl _)
+        ((shiftFunctorAdd' _ (2 * d : ℤ) (j - 2 * d) j (by omega)).app _)).toLinearMap ∘ₗ
+          twistLowerStarClass Λ a d _ j)).compr₂
+    (untwistTateObject Λ Y d ∘ₗ (Linear.homCongr Λ (derivedTensorLeftUnitor _ Y _)
+      ((shiftFunctorZero' _ (i + (j - 2 * d)) (by omega)).app _)).toLinearMap)
 
 end Definitions
 
 section Statements
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [HasTateTwist Λ]
-  {k₀ : Type u} [Field k₀] [Finite k₀] {d : ℕ} (S : PoincareDualitySetting k₀ d)
-  (k : Type u) [Field k] [IsAlgClosed k] [Algebra k₀ k]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X : Scheme.{u}}
+  {k : Type u} [Field k] [IsSepClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
+  (a : X ⟶ Spec (.of k)) [HasCompactification a] [QuasiCompact a] {d : ℕ}
+  (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X}
+  (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K)
 
+include hK in
 /-- Blueprint `sk-thm-derived-duality`: Degreewise duality over a field.
 
-**The derived pairing is perfect.** For `K` perfect over `Λ_X` and in `D^b_{ctf}(X, Λ)`, the
-derived Poincaré pairing `β_K` is perfect: its tensor–internal-hom adjoint
-`RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨` is an isomorphism. This is the content of
-`sk-thm-sf-identification` (stated in
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation` as
-the existence of that isomorphism), from which the degreewise form is read off. It needs no
-field hypothesis. -/
-theorem isPerfectPairing_poincarePairing [Finite Λ]
-    [HasInvertibleExponent Λ (Spec (CommRingCat.of k))]
-    [HasCompactification (S.structureMorphism k)]
-    (γ : (twistShift Λ (S.geometricFiber k) d).obj (constantComplex Λ (S.geometricFiber k)) ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) (S.structureMorphism k))
-    (K : _root_.DerivedCategory (Sheaf (S.geometricFiber k).smallEtaleTopology
-      (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ (S.geometricFiber k) K)
-    (hKd : IsDualizable K) :
-    DerivedCategory.IsPerfectPairing (poincarePairing Λ (S.structureMorphism k) d γ K) :=
-  sorry
-
-end Statements
-
-section FieldStatements
-
-variable (Λ : Type (u + 1)) [Field Λ] [HasTateTwist Λ]
-  {k₀ : Type u} [Field k₀] [Finite k₀] {d : ℕ} (S : PoincareDualitySetting k₀ d)
-  (k : Type u) [Field k] [IsAlgClosed k] [Algebra k₀ k]
-
-/-- Blueprint `sk-thm-derived-duality`: Degreewise duality over a field.
-
-**Degreewise duality.** Over a field `Λ` of coefficients, for `K` perfect over `Λ_X` and in
-`D^b_{ctf}(X, Λ)`, the degreewise Poincaré pairings
+**Degreewise duality.** For `a : X ⟶ Spec k` separated of finite type over a separably closed
+field, a finite field `Λ` of coefficients and `K ∈ D^b_{ctf}(X, Λ)`, the degreewise Poincaré
+pairings
 
 `⟨-,-⟩_i : H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ Λ`, `i + j = 2d`,
 
-are perfect. -/
-theorem isPerfPair_degreewisePoincarePairing [Finite Λ]
-    [HasInvertibleExponent Λ (Spec (CommRingCat.of k))]
-    [HasCompactification (S.structureMorphism k)]
-    (γ : (twistShift Λ (S.geometricFiber k) d).obj (constantComplex Λ (S.geometricFiber k)) ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) (S.structureMorphism k))
-    (K : _root_.DerivedCategory (Sheaf (S.geometricFiber k).smallEtaleTopology
-      (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ (S.geometricFiber k) K)
-    (hKd : IsDualizable K) (i j : ℤ) (hij : i + j = 2 * d) :
-    (degreewisePoincarePairing Λ (S.structureMorphism k) d γ K i j hij).IsPerfPair :=
-  sorry
+are perfect. This is derived Poincaré duality
+(`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`) read on classes
+(`AlgebraicGeometry.Etale.isPerfPair_cohomologyClassesPairing`), `Ra_! K` being dualizable by
+finiteness (`AlgebraicGeometry.Etale.isDualizable_rightDerivedLowerShriek`). -/
+theorem isPerfPair_degreewisePoincarePairing (hΛ : IsField Λ) (i j : ℤ) (hij : i + j = 2 * d) :
+    (degreewisePoincarePairing Λ a γ K i j hij).IsPerfPair := by
+  have := isPerfPair_cohomologyClassesPairing Λ hΛ (γ.poincarePairing K)
+    (isDualizable_rightDerivedLowerShriek Λ a hK) (γ.isPerfectPairing_poincarePairing K)
+    i (j - 2 * d) (by omega)
+  exact LinearMap.IsPerfPair.compl₁₂ (p := cohomologyClassesPairing (γ.poincarePairing K) i
+    (j - 2 * d) _) (LinearEquiv.refl Λ _)
+    (cohomologyClassesShiftEquiv Λ _ (2 * d) (j - 2 * d) j _).symm
 
-/-- Blueprint `sk-thm-derived-duality`: Degreewise duality over a field.
-
-**The line-valued form.** Over a field `Λ` of coefficients, for `K` perfect over `Λ_X` and in
-`D^b_{ctf}(X, Λ)`, the untwisted pairing `H^i_c(X, K) × H^j(X, K^∨) ⟶ Λ(-d)` is perfect: both
-of its adjoints, into the `Λ`-linear maps to the line `Λ(-d)`, are bijective. -/
-theorem bijective_untwistedDegreewisePoincarePairing [Finite Λ]
-    [HasInvertibleExponent Λ (Spec (CommRingCat.of k))]
-    [HasCompactification (S.structureMorphism k)]
-    (γ : (twistShift Λ (S.geometricFiber k) d).obj (constantComplex Λ (S.geometricFiber k)) ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) (S.structureMorphism k))
-    (K : _root_.DerivedCategory (Sheaf (S.geometricFiber k).smallEtaleTopology
-      (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ (S.geometricFiber k) K)
-    (hKd : IsDualizable K) (i j : ℤ) (hij : i + j = 2 * d) :
-    Function.Bijective
-        (untwistedDegreewisePoincarePairing Λ (S.structureMorphism k) d γ K i j hij) ∧
-      Function.Bijective
-        (untwistedDegreewisePoincarePairing Λ (S.structureMorphism k) d γ K i j hij).flip :=
-  sorry
-
+include hK in
 /-- Blueprint `sk-thm-derived-duality`: Degreewise duality over a field.
 
 **The proper case.** For `X` proper, the same holds with `H_c` replaced by `H`: the pairing
 `H^i(X, K) × H^j(X, K^∨(d)) ⟶ Λ`, obtained from `⟨-,-⟩_i` through the identification
-`H^i(X, K) ≅ H^i_c(X, K)` of `Ra_* ≅ Ra_!`, is perfect. -/
-theorem isPerfPair_degreewisePoincarePairing_of_isProper [Finite Λ]
-    [HasInvertibleExponent Λ (Spec (CommRingCat.of k))]
-    [IsProper (S.structureMorphism k)] [HasCompactification (S.structureMorphism k)]
-    (γ : (twistShift Λ (S.geometricFiber k) d).obj (constantComplex Λ (S.geometricFiber k)) ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) (S.structureMorphism k))
-    (K : _root_.DerivedCategory (Sheaf (S.geometricFiber k).smallEtaleTopology
-      (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ (S.geometricFiber k) K)
-    (hKd : IsDualizable K) (i j : ℤ) (hij : i + j = 2 * d) :
-    ((degreewisePoincarePairing Λ (S.structureMorphism k) d γ K i j hij).comp
-      (lowerStarClassToLowerShriek Λ (S.structureMorphism k) K i)).IsPerfPair :=
+`H^i(X, K) ≅ H^i_c(X, K)` of `Ra_* ≅ Ra_!`
+(`AlgebraicGeometry.Etale.lowerStarClassEquivLowerShriek`), is perfect. -/
+theorem isPerfPair_degreewisePoincarePairing_of_isProper [IsProper a] (hΛ : IsField Λ)
+    (i j : ℤ) (hij : i + j = 2 * d) :
+    ((degreewisePoincarePairing Λ a γ K i j hij).comp
+      (lowerStarClassEquivLowerShriek (ModuleCat.{u + 1} Λ) Λ a K i).toLinearMap).IsPerfPair := by
+  have := isPerfPair_degreewisePoincarePairing Λ a γ hK hΛ i j hij
+  exact LinearMap.IsPerfPair.compl₁₂ (p := degreewisePoincarePairing Λ a γ K i j hij)
+    (lowerStarClassEquivLowerShriek (ModuleCat.{u + 1} Λ) Λ a K i) (LinearEquiv.refl Λ _)
+
+include hK in
+/-- Blueprint `sk-thm-derived-duality`: Degreewise duality over a field.
+
+**The line-valued form.** For a finite field `Λ` of coefficients and `K ∈ D^b_{ctf}(X, Λ)`, the
+untwisted pairing `H^i_c(X, K) × H^j(X, K^∨) ⟶ Λ(-d)` is perfect: both of its adjoints, into
+the `Λ`-linear maps to the line `Λ(-d)`, are bijective. -/
+theorem bijective_untwistedDegreewisePoincarePairing (hΛ : IsField Λ) (i j : ℤ)
+    (hij : i + j = 2 * d) :
+    Function.Bijective (untwistedDegreewisePoincarePairing Λ a γ K i j hij) ∧
+      Function.Bijective (untwistedDegreewisePoincarePairing Λ a γ K i j hij).flip :=
   sorry
 
-end FieldStatements
+end Statements
 
 end Etale
 

@@ -82,6 +82,11 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   (J : GrothendieckTopology C) (l : ℕ) [Fact l.Prime] (E : Type w) [Field E]
   [Algebra E (PadicAlgCl l)] [Small.{u + 1} E]
 
+/-- The coefficient category `ModuleCat 𝒪_E` of the integral stage, for the ring of integers
+`𝒪_E` of `E`, shrunk to `Type (u + 1)`. -/
+abbrev PadicAlgCl.IntegralCoefficients : Type (u + 2) :=
+  ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))
+
 /-- An object `K` of the derived category `D(J, 𝒪_E)` of sheaves of `𝒪_E`-modules on a site
 `(C, J)` is *derived complete* if it is derived complete for the maximal ideal `𝔪_E` of
 `𝒪_E` in the sense of `DerivedCategory.derivedComplete`: the cone of the reduction maps

@@ -45,7 +45,8 @@ The exchange `Ex_*` for `Rf_*` does already exist in this repository, as
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite`
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`
-- `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`
+- `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`,
+  `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerStar`
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_leftDerivedUpperStar`
 -/
 
@@ -193,6 +194,31 @@ theorem nonempty_iso_reductionModIdeal_leftDerivedUpperStar (J : Ideal Λ) :
   sorry
 
 end Projection
+
+section LowerStar
+
+variable (f : X ⟶ Y)
+
+/-- **`Rf_*` commutes with finite reduction.** For an ideal `J` of the finite coefficient ring
+`Λ` and `f` quasi-compact, quasi-separated and locally of finite type, with the exponent of
+`Λ` invertible on `Y`,
+
+`(Rf_* K) ⊗^L (Λ/J)_Y ≅ Rf_*(K ⊗^L (Λ/J)_X)`.
+
+This is the projection formula of `Rf_*` for the constant complex `(Λ/J)_Y`, whose pullback is
+`(Λ/J)_X`. It holds for every `K` because `Rf_*` has finite cohomological dimension under
+these hypotheses, so that it commutes with the tensor product with the terms of a resolution
+of `Λ/J` by finite free `Λ`-modules and with the colimit of their truncations. It is the
+ordinary counterpart of
+`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`. -/
+theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar [Finite Λ]
+    [HasInvertibleExponent Λ Y] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
+    (J : Ideal Λ) :
+    Nonempty (R((f)_*[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ Y J ≅
+      reductionModIdeal Λ X J ⋙ R((f)_*[ModuleCat.{u + 1} Λ])) :=
+  sorry
+
+end LowerStar
 
 end Etale
 

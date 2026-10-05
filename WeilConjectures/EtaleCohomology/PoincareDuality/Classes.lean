@@ -5,53 +5,49 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Homology.DerivedCategory.Linear
-public import Mathlib.CategoryTheory.Linear.LinearFunctor
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.LinearAlgebra.PerfectPairing.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.Classes
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 
 /-!
-# Cohomology classes and the coefficient ring of a geometric point
+# Cohomology classes with module coefficients, and the point
 
-The degreewise statements of the Poincaré duality chapter pair cohomology *classes*. The
-repository has no Künneth map on the cohomology objects `H^i` and no lax monoidal structure
-on `RΓ`, so the pairings are not defined on the objects
-`AlgebraicGeometry.Etale.compactlySupportedCohomology`. Instead they use the convention of
-`WeilConjectures.SixFunctors.Etale.Derived.Supports`: a class of degree `i` of an object
-`M ∈ D(T_ét, Λ)` is a morphism `Λ_T ⟶ M[i]`. For the structure morphism `a : X ⟶ s` of a
-scheme over `s = Spec k`, the classes of `Ra_! K` and of `Ra_* K` in `D(s_ét, Λ)` are
-`H^i_c(X, K)` and `H^i(X, K)`.
+The degreewise statements of the Poincaré duality chapter pair cohomology *classes*: a class of
+degree `i` of `M ∈ D(T_ét, Λ)` is a morphism `Λ_T ⟶ M[i]` (`CategoryTheory.cohomologyClasses`).
+For the structure morphism `a : X ⟶ s` of a scheme over `s = Spec k`, the classes of `Ra_! K` and
+of `Ra_* K` in `D(s_ét, Λ)` are `H^i_c(X, K)` and `H^i(X, K)`.
 
-The classes form a `Λ`-module, because `D(T_ét, Λ)` is `Λ`-linear: the category of sheaves
-of `Λ`-modules is `Λ`-linear as a full subcategory of presheaves (`Linear.fullSubcategory`),
-and Mathlib makes the derived category of a `Λ`-linear abelian category `Λ`-linear
-(`DerivedCategory.instLinear`). For `s = Spec k` the endomorphisms of the unit `Λ_s` are
-`H^0(Spec k, Λ) = Λ` (`AlgebraicGeometry.Etale.bijective_smul_id_unit`), which is what makes
-pairings of classes `Λ`-valued (`AlgebraicGeometry.Etale.coefficientRingEquiv`).
+For a connected `T` the endomorphisms of the unit `Λ_T` are `H^0(T, Λ) = Λ`
+(`AlgebraicGeometry.Etale.coefficientAlgEquiv`), so that a pairing `C ⊗ᴸ D ⟶ Λ_T` induces
+`Λ`-valued pairings of classes (`AlgebraicGeometry.Etale.cohomologyClassesPairing`).
+
+Over a separably closed field `k`, `D(s_ét, Λ)` is the derived category of `Λ`-modules
+(blueprint, *Derived category at the point*), and its dualizable objects are the perfect
+complexes (*Perfect point complex*). The two facts about them that the chapter uses are stated
+once here, and the étale statements are derived from them:
+
+* a dualizable complex has bounded cohomology, and finite cohomology modules;
+* over a field `Λ`, a perfect pairing of dualizable complexes induces perfect pairings of
+  their classes in complementary degrees (*Biduality at the point*).
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.DerivedCategory.cohomologyClasses M i`: the classes `Λ_T ⟶ M[i]`.
-- `AlgebraicGeometry.Etale.coefficientRingEquiv`: `Λ ≃+* End (Λ_s)` for `s = Spec k`.
-- `AlgebraicGeometry.Etale.coefficientLinearMap`: its inverse, as a `Λ`-linear map.
+- `AlgebraicGeometry.Etale.coefficientAlgEquiv`: `Λ ≃ End (Λ_T)` for a connected `T`.
+- `AlgebraicGeometry.Etale.cohomologyClassesUnitEquiv`: the classes of degree `0` of `Λ_T` are
+  `Λ`.
+- `AlgebraicGeometry.Etale.cohomologyClassesPairing`: the `Λ`-valued pairing of classes
+  induced by a pairing `C ⊗ᴸ D ⟶ Λ_T`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.bijective_smul_id_unit`: `r ↦ r • 𝟙` is a bijection
-  `Λ ≃ End (Λ_s)`.
-- `AlgebraicGeometry.Etale.linear_derivedTensor_obj`,
-  `AlgebraicGeometry.Etale.linear_derivedTensor_flip_obj`: the derived tensor product of
-  `D(T_ét, Λ)` is `Λ`-linear in each variable.
-
-## Implementation notes
-
-The linearity of the derived tensor product in each variable is stated, not proved: the
-monoidal structure on `D(T_ét, Λ)` is the abstract one of
-`WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory`, and its
-compatibility with the additive and `Λ`-linear structures is not yet formalised. It is what
-makes the cup products and the degreewise pairings bilinear. It is stated for the functors
-`K ⊗ᴸ -` and `- ⊗ᴸ K` rather than as `CategoryTheory.MonoidalLinear`, because statements
-about `D(T_ét, ModuleCat Λ)` must be written with `AlgebraicGeometry.Etale.derivedTensor`
-(see `WeilConjectures.SixFunctors.Etale.Derived.TensorStructure`).
+  `Λ ≃ End (Λ_T)` for a connected `T`.
+- `AlgebraicGeometry.Etale.exists_subsingleton_cohomologyClasses_of_isDualizable`,
+  `AlgebraicGeometry.Etale.finite_cohomologyClasses_of_isDualizable`: the classes of a
+  dualizable complex at the point are bounded and finite.
+- `AlgebraicGeometry.Etale.isPerfPair_cohomologyClassesPairing`: over a field `Λ`, a perfect
+  pairing at the point is perfect on classes.
 -/
 
 @[expose] public section
@@ -64,80 +60,93 @@ namespace AlgebraicGeometry
 
 open Scheme
 
+/-- The derived category `D(T_ét, Λ)` of étale sheaves of `Λ`-modules on `T`. -/
+local notation "𝐃(" T ", " Λ ")" => Etale.DerivedCategoryModule Λ T
+
 namespace Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ]
+variable (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u}) [ConnectedSpace T]
 
-variable {Λ} in
-/-- Tensoring with a fixed complex, `M ↦ K ⊗ᴸ M`, is additive on `D(T_ét, Λ)`. -/
-instance additive_derivedTensor_obj {T : Scheme.{u}}
-    (K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((derivedTensor (ModuleCat.{u + 1} Λ) T).obj K).Additive :=
-  sorry
-
-/-- Tensoring with a fixed complex, `M ↦ K ⊗ᴸ M`, is `Λ`-linear on `D(T_ét, Λ)`. -/
-instance linear_derivedTensor_obj {T : Scheme.{u}}
-    (K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((derivedTensor (ModuleCat.{u + 1} Λ) T).obj K).Linear Λ :=
-  sorry
-
-variable {Λ} in
-/-- Tensoring with a fixed complex, `M ↦ M ⊗ᴸ K`, is additive on `D(T_ét, Λ)`. -/
-instance additive_derivedTensor_flip_obj {T : Scheme.{u}}
-    (K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((derivedTensor (ModuleCat.{u + 1} Λ) T).flip.obj K).Additive :=
-  sorry
-
-/-- Tensoring with a fixed complex, `M ↦ M ⊗ᴸ K`, is `Λ`-linear on `D(T_ét, Λ)`. -/
-instance linear_derivedTensor_flip_obj {T : Scheme.{u}}
-    (K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((derivedTensor (ModuleCat.{u + 1} Λ) T).flip.obj K).Linear Λ :=
-  sorry
-
-variable {Λ} in
-/-- The *cohomology classes of degree `i`* of an object `M` of `D(T_ét, Λ)`: the morphisms
-`Λ_T ⟶ M[i]` out of the unit, the constant complex `Λ_T`. For `M = Ra_! K` and `M = Ra_* K`
-in `D(s_ét, Λ)`, with `a : X ⟶ s` and `s = Spec k`, these are `H^i_c(X, K)` and
-`H^i(X, K)`; for `M = Λ_X` in `D(X_ét, Λ)` they are `H^i(X, Λ)`. They form a `Λ`-module,
-`D(T_ét, Λ)` being `Λ`-linear. -/
-abbrev DerivedCategory.cohomologyClasses {T : Scheme.{u}}
-    (M : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (i : ℤ) :=
-  𝟙_ (_root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) ⟶ M⟦i⟧
-
-variable (k : Type u) [Field k]
-
-/-- The endomorphisms of the constant complex `Λ_s` of `s = Spec k` are the scalars:
-`r ↦ r • 𝟙` is a bijection from `Λ` onto `End (Λ_s) = H^0(Spec k, Λ)`. The étale site of
-`Spec k` is the category of finite étale `k`-algebras, and `Spec k` is connected, so
-`H^0(Spec k, Λ) = Λ`. -/
+/-- The endomorphisms of the constant complex `Λ_T` of a connected scheme `T` are the scalars:
+`r ↦ r • 𝟙` is a bijection from `Λ` onto `End (Λ_T) = H^0(T, Λ)`. The global sections of the
+constant sheaf `Λ` on the étale site of `T` are the locally constant functions `T → Λ`, which
+are constant since `T` is connected. -/
 theorem bijective_smul_id_unit :
-    Function.Bijective (fun r : Λ ↦ r • 𝟙 (𝟙_ (DerivedCategory
-      (Sheaf (Spec (CommRingCat.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))))) :=
+    Function.Bijective (fun r : Λ ↦ r • 𝟙 (𝟙_ 𝐃(T, Λ))) :=
   sorry
 
-/-- The coefficient ring `Λ` is the ring of endomorphisms of the constant complex `Λ_s` of
-`s = Spec k`, through `r ↦ r • 𝟙` (`AlgebraicGeometry.Etale.bijective_smul_id_unit`).
-Through its inverse, morphisms `Λ_s ⟶ Λ_s`, such as the values of the degreewise pairings,
-are read as scalars. -/
-noncomputable def coefficientRingEquiv :
-    Λ ≃+* End (𝟙_ (DerivedCategory
-      (Sheaf (Spec (CommRingCat.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))) :=
-  RingEquiv.ofBijective (algebraMap Λ _) (by
-    convert bijective_smul_id_unit Λ k using 1
+/-- The coefficient ring `Λ` is the algebra of endomorphisms of the constant complex `Λ_T` of a
+connected scheme `T`, through `r ↦ r • 𝟙` (`AlgebraicGeometry.Etale.bijective_smul_id_unit`).
+Through its inverse, morphisms `Λ_T ⟶ Λ_T`, such as the values of the degreewise pairings, are
+read as scalars. -/
+noncomputable def coefficientAlgEquiv : Λ ≃ₐ[Λ] End (𝟙_ 𝐃(T, Λ)) :=
+  AlgEquiv.ofBijective (Algebra.ofId Λ _) (by
+    convert bijective_smul_id_unit Λ T using 1
     ext r
     exact Algebra.algebraMap_eq_smul_one r)
 
-/-- The inverse `End (Λ_s) ⟶ Λ` of `AlgebraicGeometry.Etale.coefficientRingEquiv`, as a
-`Λ`-linear map. -/
-noncomputable def coefficientLinearMap :
-    End (𝟙_ (DerivedCategory
-      (Sheaf (Spec (CommRingCat.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))) →ₗ[Λ] Λ where
-  toFun := (coefficientRingEquiv Λ k).symm
-  map_add' := map_add _
-  map_smul' r φ := by
-    rw [Algebra.smul_def, map_mul, RingHom.id_apply, smul_eq_mul]
-    congr 1
-    exact (coefficientRingEquiv Λ k).symm_apply_apply r
+/-- The classes of degree `n = 0` of the unit `Λ_T` of a connected scheme `T` are the scalars:
+`H^0(T, Λ) = Λ`, through `AlgebraicGeometry.Etale.coefficientAlgEquiv`. -/
+noncomputable def cohomologyClassesUnitEquiv (n : ℤ) (h : n = 0) :
+    cohomologyClasses (𝟙_ 𝐃(T, Λ)) n ≃ₗ[Λ] Λ :=
+  cohomologyClassesZeroEquiv Λ _ n h ≪≫ₗ (coefficientAlgEquiv Λ T).symm.toLinearEquiv
+
+variable {Λ T}
+
+/-- The `Λ`-valued pairing of classes `H^i(C) × H^j(D) ⟶ Λ`, `i + j = 0`, induced by a pairing
+`b : C ⊗ᴸ D ⟶ Λ_T` on a connected scheme `T`: the cup product of the classes along `b`
+(`AlgebraicGeometry.Etale.cohomologyClassesCupProduct`), a class of degree `0` of `Λ_T`, read
+as a scalar (`AlgebraicGeometry.Etale.cohomologyClassesUnitEquiv`). -/
+noncomputable def cohomologyClassesPairing {C D : 𝐃(T, Λ)}
+    (b : ((derivedTensor (ModuleCat.{u + 1} Λ) T).obj C).obj D ⟶ 𝟙_ _) (i j : ℤ)
+    (h : i + j = 0) :
+    cohomologyClasses C i →ₗ[Λ] cohomologyClasses D j →ₗ[Λ] Λ :=
+  (cohomologyClassesCupProduct Λ b i j).compr₂
+    (cohomologyClassesUnitEquiv Λ T (i + j) h).toLinearMap
+
+section Point
+
+variable (Λ) {k : Type u} [Field k] [IsSepClosed k]
+
+/-- Blueprint *Perfect point complex*.
+
+Over a separably closed field `k`, a dualizable (perfect) complex `C ∈ D(Spec k_ét, Λ)` over a
+noetherian ring `Λ` has bounded cohomology: its classes vanish outside a bounded range of
+degrees. `D(Spec k_ét, Λ)` is the derived category of `Λ`-modules, and `C` is a perfect complex
+of `Λ`-modules. -/
+theorem exists_subsingleton_cohomologyClasses_of_isDualizable [IsNoetherianRing Λ]
+    {C : 𝐃(Spec (.of k), Λ)} (hC : IsDualizable C) :
+    ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q → Subsingleton (cohomologyClasses C q) :=
+  sorry
+
+/-- Blueprint *Perfect point complex*.
+
+Over a separably closed field `k`, the classes of every degree of a dualizable (perfect)
+complex `C ∈ D(Spec k_ét, Λ)` over a noetherian ring `Λ` form a finite `Λ`-module. -/
+theorem finite_cohomologyClasses_of_isDualizable [IsNoetherianRing Λ]
+    {C : 𝐃(Spec (.of k), Λ)} (hC : IsDualizable C) (q : ℤ) :
+    Module.Finite Λ (cohomologyClasses C q) :=
+  sorry
+
+/-- Blueprint *Biduality at the point*.
+
+Over a separably closed field `k` and a field `Λ` of coefficients, a perfect pairing
+`b : C ⊗ᴸ D ⟶ Λ` of complexes of `D(Spec k_ét, Λ)` with `C` dualizable induces perfect pairings
+of classes `H^i(C) × H^j(D) ⟶ Λ` for `i + j = 0`. Over a field a perfect complex is the
+direct sum of its shifted cohomology, `D ≅ C^∨` by perfectness of `b`, and `H^j(C^∨)` is the
+dual of `H^{-j}(C)`.
+
+That `Λ` is a field is the hypothesis `IsField Λ` rather than an instance `[Field Λ]`, so that
+the coefficients `ModuleCat Λ` are elaborated from `[CommRing Λ]` as in every other statement;
+with `[Field Λ]` the kernel has to compare the two elaborations, which times out. -/
+theorem isPerfPair_cohomologyClassesPairing (hΛ : IsField Λ)
+    {C D : 𝐃(Spec (.of k), Λ)}
+    (b : ((derivedTensor (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C).obj D ⟶ 𝟙_ _)
+    (hC : IsDualizable C) (hb : IsPerfectPairing b) (i j : ℤ) (h : i + j = 0) :
+    (cohomologyClassesPairing b i j h).IsPerfPair :=
+  sorry
+
+end Point
 
 end Etale
 

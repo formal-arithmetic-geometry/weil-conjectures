@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 
 /-!
 
@@ -25,6 +26,10 @@ the Verdier dual of a perfect complex into its coefficient dual, twisted and shi
 
 - `AlgebraicGeometry.Etale.Orientation`: the interface record of an orientation of relative
   dimension `d`, namely a Tate twist together with `Lf^* Λ_Y (d)[2d] ≅ Rf^! Λ_Y`.
+- `AlgebraicGeometry.Etale.Orientation.dualizingComplexIso`: for the structure morphism, the
+  isomorphism `Λ_X(d)[2d] ≅ ω_X` of an orientation.
+- `AlgebraicGeometry.Etale.Orientation.ofDualizingComplexIso`: the orientation given by an
+  isomorphism `T[2d] ≅ ω_X` with `T` invertible.
 
 ## Main statements
 
@@ -44,9 +49,9 @@ perfectness is `CategoryTheory.IsDualizable`; see the implementation note of
 `WeilConjectures.SixFunctors.Etale.Derived.Perfect`.
 
 `Orientation.nonempty_iso_dualizingComplex` is not blueprint content: it is `o.purity`
-transported along `Lf^* Λ_S ≅ Λ_X`. That transport needs the monoidal structure on
-`L((f)^*[A])`, which this repository does not yet construct, so the statement is left sorried
-rather than proved; the monoidality of the derived pullback is the missing prerequisite.
+transported along `Lf^* Λ_S ≅ Λ_X` (`AlgebraicGeometry.Etale.Orientation.dualizingComplexIso`).
+Conversely an isomorphism `T⟦2d⟧ ≅ ω_X` with `T` invertible is an orientation
+(`AlgebraicGeometry.Etale.Orientation.ofDualizingComplexIso`).
 
 Biduality of the Verdier dual on `Dctf(X, A)` is *not* restated here: it is
 `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual` of
@@ -99,15 +104,51 @@ structure Orientation (f : X ⟶ Y) (d : ℕ) [HasCompactification f] where
 
 variable {S : Scheme.{u}} {d : ℕ} (a : X ⟶ S) [HasCompactification a]
 
+variable {A a} in
+/-- The isomorphism `Λ_X(d)[2d] ≅ ω_X` of an orientation `o` of the structure morphism
+`a : X ⟶ S`, given an identification `e : La^* Λ_S ≅ Λ_X`: the purity isomorphism read through
+`e` and the left unitor,
+```
+                   λ⁻¹                       e⁻¹ ⊗ 1                         o.purity
+Λ_X(d)[2d] ──────────────▶ Λ_X ⊗ Λ_X(d)[2d] ─────────▶ La^* Λ_S ⊗ Λ_X(d)[2d] ──────────▶ Ra^! Λ_S
+```
+-/
+noncomputable def Orientation.dualizingComplexIso (o : Orientation A a d)
+    (e : (L((a)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _) :
+    o.twist⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A a :=
+  (λ_ _).symm ≪≫ whiskerRightIso e.symm _ ≪≫ o.purity
+
+variable {A a} in
+/-- The orientation of the structure morphism `a : X ⟶ S` with twist an invertible object `T`,
+built from an isomorphism `γ : T⟦2d⟧ ≅ ω_X` and an identification `e : La^* Λ_S ≅ Λ_X`: its
+purity isomorphism is
+```
+                         e ⊗ 1                  λ                γ
+La^* Λ_S ⊗ T⟦2d⟧ ───────────────▶ Λ_X ⊗ T⟦2d⟧ ─────▶ T⟦2d⟧ ─────▶ Ra^! Λ_S
+```
+This is how an orientation in the form `Λ_X(d)[2d] ≅ ω_X`, as produced by smooth purity for a
+Tate twist (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`), is turned
+into an `AlgebraicGeometry.Etale.Orientation`. -/
+noncomputable def Orientation.ofDualizingComplexIso
+    (T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (hT : IsInvertible T)
+    (e : (L((a)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _) (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A a) :
+    Orientation A a d where
+  twist := T
+  isInvertible_twist := hT
+  purity := whiskerRightIso e _ ≪≫ λ_ _ ≪≫ γ
+
 /-- Blueprint `sk-def-sf-orientation`: Orientation: an interface record.
 
 The special case of the orientation at the structure morphism `a : X ⟶ S`. There
-`La^* Λ_S ≅ Λ_X` is the monoidal unit and `Ra^! Λ_S` is by definition the dualizing complex, so
-the purity isomorphism reads `ω_X ≅ Λ_X(d)[2d]`: the dualizing complex of a smooth `X` of pure
-relative dimension `d` over `S` is a shifted Tate twist. -/
+`La^* Λ_S ≅ Λ_X` is the monoidal unit
+(`AlgebraicGeometry.Etale.nonempty_leftDerivedUpperStar_unit_iso`) and `Ra^! Λ_S` is by
+definition the dualizing complex, so the purity isomorphism reads `ω_X ≅ Λ_X(d)[2d]`: the
+dualizing complex of a smooth `X` of pure relative dimension `d` over `S` is a shifted Tate
+twist. -/
 theorem Orientation.nonempty_iso_dualizingComplex (o : Orientation A a d) :
     Nonempty (dualizingComplex A a ≅ o.twist⟦(2 * d : ℤ)⟧) :=
-  sorry
+  let ⟨e⟩ := nonempty_leftDerivedUpperStar_unit_iso A a
+  ⟨(o.dualizingComplexIso e).symm⟩
 
 /-- Blueprint `sk-thm-sf-dual-perfect`: The dual of a perfect complex.
 

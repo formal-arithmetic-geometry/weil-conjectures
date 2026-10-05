@@ -23,6 +23,7 @@ These belong to the framework, not to any one chapter: the finiteness statements
 
 ## Main definitions
 
+- `AlgebraicGeometry.Etale.DerivedCategoryModule`: the derived category `D(X_ét, Λ)`.
 - `AlgebraicGeometry.Etale.constantComplex`: the constant complex `Λ_X`, the unit of the
   derived tensor product.
 - `AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeIn`: Tor amplitude in `[a, b]`.
@@ -45,6 +46,10 @@ namespace AlgebraicGeometry
 namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
+
+/-- The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`. -/
+abbrev DerivedCategoryModule : Type (u + 2) :=
+  DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 
 /-- Blueprint `sk-def-sf-setting`: Coefficients and sites
 
@@ -75,6 +80,12 @@ def DerivedCategory.boundedConstructibleFiniteTor :
     ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
   DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X ⊓
     DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} Λ) X
+
+/-- The constant complex `Λ_X` is in `D^b_{ctf}(X, Λ)`: it is the constant sheaf `Λ` in degree
+`0`, which is constructible and flat. -/
+theorem DerivedCategory.boundedConstructibleFiniteTor_constantComplex :
+    DerivedCategory.boundedConstructibleFiniteTor Λ X (constantComplex Λ X) :=
+  sorry
 
 /-- An object `L` of `D(X_ét, Λ)` is *invertible* if it has a tensor inverse: there is an `M`
 with `L ⊗^L M ≅ Λ_X`. A lisse rank-one sheaf placed in any degree and twisted by any power of

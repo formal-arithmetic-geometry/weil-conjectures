@@ -53,12 +53,14 @@ resolutions when `g^*` preserves flat sheaves, so they form a left derivability 
   with `CategoryTheory.Functor.leftDerived₂NatTrans`.
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorNatIso g`: it is a natural isomorphism,
   with components `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso g K M`.
+- `AlgebraicGeometry.Etale.nonempty_leftDerivedUpperStar_unit_iso`: `Lg^* Λ_Y ≅ Λ_Z`.
 - `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_left` and
   `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_right`: `K ⊗ᴸ M` vanishes
   when `K` or `M` does.
 
 The results depend on `sorryAx` through `AlgebraicGeometry.Etale.derivedTensor` and
-`AlgebraicGeometry.Etale.isLeftDerivedFunctor₂_derivedTensor`.
+`AlgebraicGeometry.Etale.isLeftDerivedFunctor₂_derivedTensor`;
+`AlgebraicGeometry.Etale.nonempty_leftDerivedUpperStar_unit_iso` is stated, not proved.
 
 ## TODO
 
@@ -345,6 +347,13 @@ lemma leftDerivedUpperStarTensorIso_hom
   rfl
 
 end
+
+/-- The derived pullback preserves the unit, `Lg^* Λ_Y ≅ Λ_Z`: the unit `Λ_Y` is the constant
+sheaf placed in degree `0`, which is K-flat, and `g^*` sends the constant sheaf of `Y` to that
+of `Z`. This is the existence of the unit comparison asked for in the TODO above. -/
+theorem nonempty_leftDerivedUpperStar_unit_iso :
+    Nonempty ((L((g)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _) :=
+  sorry
 
 end Etale
 

@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
@@ -186,6 +187,12 @@ noncomputable def rightDerivedLowerShriekPlusCompatibility :
 /-- The derived lower shriek along a morphism admitting a compactification is additive. -/
 instance : R(f)_![A].Additive :=
   inferInstanceAs (Rf_!(HasCompactification.compactification f)[A]).Additive
+
+variable (R : Type*) [Ring R] [Linear R A] in
+/-- If `A` is `R`-linear, the derived lower shriek `Rf_! = Rg_* D(i_!)` is `R`-linear, as the
+composite of the derived functors of the `R`-linear functors `i_!` and `g_*`. -/
+instance linear_rightDerivedLowerShriek : R(f)_![A].Linear R :=
+  sorry
 
 end Etale
 

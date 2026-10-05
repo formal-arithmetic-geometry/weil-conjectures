@@ -200,6 +200,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Subcomplex
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
+public import WeilConjectures.CategoryTheory.Monoidal.CohomologyClasses
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
@@ -270,10 +271,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Classes
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Finiteness
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Product
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Proper
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Transport
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
@@ -584,6 +582,7 @@ public import WeilConjectures.Mathlib.Data.Set.Image
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.GroupTheory.SemidirectProduct
+public import WeilConjectures.Mathlib.LinearAlgebra.BilinearMap
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
@@ -680,8 +679,10 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
+public import WeilConjectures.SixFunctors.Etale.Derived.Classes
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
+public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
@@ -705,6 +706,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.Package
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
+public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
