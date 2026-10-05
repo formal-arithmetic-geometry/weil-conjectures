@@ -96,9 +96,10 @@ variable {X Y S : Scheme.{u}} (f : X ⟶ Y) (aY : Y ⟶ S) [HasCompactification 
 
 /-- Blueprint `sk-thm-sf-verdier-exchange`: Verdier-duality exchange.
 
-First half. If `f : X ⟶ Y` and the structure morphism `a_Y : Y ⟶ S` both admit a
-compactification, then so does `a_X = f ≫ a_Y`, and the exceptional inverse image along `f` of
-the dualizing complex of `Y` is the dualizing complex of `X`:
+First half. If `f : X ⟶ Y`, the structure morphism `a_Y : Y ⟶ S` and `a_X = f ≫ a_Y` all
+admit a compactification (the last is assumed separately, there being no composition instance
+for `HasCompactification`), then the exceptional inverse image along `f` of the dualizing
+complex of `Y` is the dualizing complex of `X`:
 
 `Rf^! ω_Y ≅ ω_X`.
 

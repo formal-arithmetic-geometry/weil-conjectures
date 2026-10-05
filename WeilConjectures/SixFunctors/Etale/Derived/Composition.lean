@@ -88,10 +88,11 @@ functoriality of the mate construction turns an isomorphism of left adjoints int
 adjoints, and the triangle identities of a composite adjunction are the composites of the
 component ones.
 
-This is clause (b) of `sk-lem-sf-mate` in its étale form. It is unconditional, because the
-étale adjunction `Rf_! ⊣ Rf^!` exists for every morphism admitting a compactification
-(`sk-prop-sf-existence`(a)). Clause (a), the pro-étale ambient form, is conditional on a datum
-that fails in general and is not formalised. -/
+This is clause (b) of `sk-lem-sf-mate` in its étale form, for morphisms admitting a
+compactification (`sk-prop-sf-existence`(a)). Clause (a), the pro-étale ambient form, is not
+formalised. The hypothesis `HasCompactification (f ≫ g)` is redundant over a quasi-compact
+quasi-separated base, by Nagata's theorem; it is kept because no composition instance for
+`HasCompactification` is available in general. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp (f : X ⟶ Y) (g : Y ⟶ S)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
     Nonempty (R(f ≫ g)^![A] ≅ R(g)^![A] ⋙ R(f)^![A]) :=
