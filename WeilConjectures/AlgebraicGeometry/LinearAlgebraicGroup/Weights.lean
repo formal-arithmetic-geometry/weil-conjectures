@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
 /-!
 # Determinant weights of a degree datum
 
-A *real weight character* is a homomorphism `λ : k^× → (ℝ, +)`.  Composing it with the
+A *real character* is a homomorphism `λ : k^× → (ℝ, +)`.  Composing it with the
 determinant character `δ_V(w) = det ρ_V(w)` of a representation and normalising by the
 dimension produces the *determinant weight* `dw_λ(V) = λ(δ_V(γ)) / dim V`, a real number
 attached to any representation of a degree datum whose determinant is finite on the degree-zero
@@ -40,7 +40,7 @@ along `r`, which is not stated here.
 
 ## Main declarations
 
-* `Representation.RealWeightCharacter`: a homomorphism `k^× → (ℝ, +)`.
+* `Representation.RealCharacter`: a homomorphism `k^× → (ℝ, +)`.
 * `Representation.HasFiniteGeometricDet`, `Representation.detWeight`: the finiteness of the
   determinant character on `P`, and the determinant weight `dw_λ`.
 * `Representation.detWeight_mul_of_mem_ker`: the determinant weight does not depend on the choice
@@ -55,7 +55,7 @@ along `r`, which is not stated here.
 
 ## Blueprint
 
-`Representation.RealWeightCharacter`, `Representation.HasFiniteGeometricDet`,
+`Representation.RealCharacter`, `Representation.HasFiniteGeometricDet`,
 `Representation.detWeight` and `Representation.detWeight_mul_of_mem_ker` implement `sk-d-weights`;
 `RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair` implements `sk-p-readout`;
 `Representation.exists_detWeight_eq_add_of_subquotient_tprod` implements `sk-p-tensor`;
@@ -72,10 +72,12 @@ namespace Representation
 variable {k : Type*} [Field k] {W : Type*} [Group W]
 variable {V : Type*} [AddCommGroup V] [Module k V]
 
-/-- A *real weight character* is a group homomorphism `λ` from the units of `k` to the reals
-under addition.
+/-- A *real character* of the field `k` is a group homomorphism `λ : kˣ → (ℝ, +)` from the units
+of `k` to the reals under addition, `λ(ab) = λ(a) + λ(b)`. The weights of this file are read off
+through such a character, from the determinants of representations (`detWeight`); for
+`k = ℚ̄_ℓ` the relevant one is `log |ι(·)|` for a field embedding `ι : k → ℂ`.
 (blueprint: `sk-d-weights`) -/
-abbrev RealWeightCharacter (k : Type*) [Field k] := kˣ →* Multiplicative ℝ
+abbrev RealCharacter (k : Type*) [Field k] := kˣ →* Multiplicative ℝ
 
 /-- A representation has *finite geometric determinant* for a degree homomorphism `deg` when its
 determinant character takes only finitely many values on the degree-zero subgroup `P = ker deg`.
@@ -83,10 +85,10 @@ determinant character takes only finitely many values on the degree-zero subgrou
 def HasFiniteGeometricDet (deg : W →* Multiplicative ℤ) (ρ : Representation k W V) : Prop :=
   (Set.range fun w : deg.ker ↦ ρ.detCharacter w).Finite
 
-/-- The *determinant weight* of a representation with respect to a real weight character `χ` and
+/-- The *determinant weight* of a representation with respect to a real character `χ` and
 a degree-one element `γ` is `dw_χ(ρ) = χ(δ(γ)) / dim V`.
 (blueprint: `sk-d-weights`) -/
-noncomputable def detWeight (χ : RealWeightCharacter k) (γ : W) (ρ : Representation k W V) : ℝ :=
+noncomputable def detWeight (χ : RealCharacter k) (γ : W) (ρ : Representation k W V) : ℝ :=
   Multiplicative.toAdd (χ (ρ.detCharacter γ)) / Module.finrank k V
 
 /-- The determinant weight does not depend on the chosen degree-one element: replacing `γ` by
@@ -94,30 +96,30 @@ noncomputable def detWeight (χ : RealWeightCharacter k) (γ : W) (ρ : Represen
 finitely many values on the degree-zero subgroup and `ℝ` is torsion-free.
 (blueprint: `sk-d-weights`) -/
 theorem detWeight_mul_of_mem_ker {deg : W →* Multiplicative ℤ} (ρ : Representation k W V)
-    (hdet : ρ.HasFiniteGeometricDet deg) (χ : RealWeightCharacter k) (γ : W) {u : W}
+    (hdet : ρ.HasFiniteGeometricDet deg) (χ : RealCharacter k) (γ : W) {u : W}
     (hu : u ∈ deg.ker) : ρ.detWeight χ (u * γ) = ρ.detWeight χ γ := by
   sorry
 
 /-- The rank-counted weight multiset of a family of subrepresentations: the determinant weight of
 `Vs j` occurs `dim Vs j` times. -/
 noncomputable def weightMultiset {ι : Type*} [Fintype ι] {ρ : Representation k W V}
-    (χ : RealWeightCharacter k) (γ : W) (Vs : ι → Subrepresentation ρ) : Multiset ℝ :=
+    (χ : RealCharacter k) (γ : W) (Vs : ι → Subrepresentation ρ) : Multiset ℝ :=
   ∑ j : ι, Multiset.replicate (Module.finrank k (Vs j).toSubmodule)
     ((Vs j).toRepresentation.detWeight χ γ)
 
 end Representation
 
-namespace RepresentedDegreeDatum
+namespace AlgebraicGeometry.Monodromy.RepresentedDegreeDatum
 
 variable {W : Type*} [Group W] {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [Field k]
 
-/-- Fix a real weight character `χ` and a positive central pair `(N, z)` for a represented degree
+/-- Fix a real character `χ` and a positive central pair `(N, z)` for a represented degree
 datum.  If a nonzero `W`-subquotient `Q = S / U` of the defining representation has finite
 geometric determinant and `z` acts on `Q` as the scalar `c`, then `dw_χ(Q) = χ(c) / N`.  The
 scalar hypothesis is automatic when `Q` is simple, by Schur's lemma.
 (blueprint: `sk-p-readout`) -/
 theorem detWeight_eq_of_isPositiveCentralPair (D : RepresentedDegreeDatum W n k)
-    (χ : Representation.RealWeightCharacter k) {N : ℕ} {z : GL n k}
+    (χ : Representation.RealCharacter k) {N : ℕ} {z : GL n k}
     (hz : D.IsPositiveCentralPair N z) {U S : Subrepresentation D.asRepresentation} (hUS : U < S)
     (hdet : (S.subquotient U).HasFiniteGeometricDet D.deg) (c : kˣ)
     (hc : ∀ x ∈ S, Matrix.toLinAlgEquiv' (z : Matrix n n k) x - (c : k) • x ∈ U) :
@@ -125,7 +127,7 @@ theorem detWeight_eq_of_isPositiveCentralPair (D : RepresentedDegreeDatum W n k)
       Multiplicative.toAdd (χ c) / N := by
   sorry
 
-end RepresentedDegreeDatum
+end AlgebraicGeometry.Monodromy.RepresentedDegreeDatum
 
 namespace Representation
 
@@ -139,7 +141,7 @@ finite geometric determinant, then `dw_χ(Q) = dw_χ(V_i) + dw_χ(E_j)` for a si
 composition series of `V` and `E`.  Neither `V`, nor `E`, nor `V ⊗ E` is assumed semisimple.
 (blueprint: `sk-p-tensor`) -/
 theorem exists_detWeight_eq_add_of_subquotient_tprod
-    (χ : RealWeightCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
+    (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
     {V E : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
     [AddCommGroup E] [Module k E] [FiniteDimensional k E]
     (rV : Representation k W V) (rE : Representation k W E)
@@ -164,7 +166,7 @@ weight multiset of size `s`, that is, `a_{i₁} + ⋯ + a_{i_s}` for indices `i�
 rank-counted weight list.
 (blueprint: `sk-p-exterior`) -/
 theorem exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower
-    (χ : RealWeightCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
+    (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
     {V : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V] [Nontrivial V]
     (rV : Representation k W V) (s : ℕ)
     {ι : Type*} [Fintype ι] [DecidableEq ι] (Vs : ι → Subrepresentation rV)
