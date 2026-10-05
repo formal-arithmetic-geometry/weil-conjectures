@@ -8,18 +8,30 @@ module
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
 
 /-!
-# The admissibility datum for the ambient exceptional right adjoint
+# The ambient exceptional right adjoint datum and exceptional-adjoint admissibility
 
-The existence of the ambient exceptional right adjoint `Rf^×` on the *unbounded* derived
-category of the small pro-étale site is not a theorem of this development: it is an explicit
-hypothesis, recorded here as `AlgebraicGeometry.ProEtale.AmbientExceptionalAdjointData`. Its
-two ingredients are a uniform cohomological-dimension bound for the proper part `p` of a
-compactification — which is what makes `Rp_*` preserve coproducts, hence Brown representability
-applicable — and the requirement that the resulting right adjoint preserve the small
-subcategories in which the purity statements live.
+Blueprint `sk-def-sf-admissible` names two data of different strength for a separated
+finite-type `f : X ⟶ Y` with a compactification `X → X̄ → Y` whose proper part is `p`:
+
+* clause (1), the *ambient exceptional right adjoint datum*
+  `AlgebraicGeometry.ProEtale.AmbientExceptionalAdjointData`: a uniform cohomological-dimension
+  bound `FullCD(p, A; c)` for some `c`, and the existence of a right adjoint `Rf^×` of `Rf_!` on
+  the unbounded derived categories of the small pro-étale sites;
+* clauses (1)–(3), *exceptional-adjoint admissibility*
+  `AlgebraicGeometry.ProEtale.ExceptionalAdjointAdmissibilityData`: clause (1) together with
+  the preservation clauses, that `Rf^×` carries each constructible interval `D_c^[a, b](Y, A)`
+  into `D_c^[a + c⁻, b + c⁺](X, A)` for constants independent of `a, b` (2), and `Dctf(Y, A)`
+  into `Dctf(X, A)` (3).
+
+Both are *hypotheses*, and they **fail in general**: for an elliptic curve `E` over `𝔽̄_p` and
+`A` the category of `𝔽_r`-modules there is a pro-étale sheaf `F` with `Hⁿ(E_proét, F) ≠ 0` for
+all `n ≥ 1`, so `Rp_*` does not preserve the coproduct `⊕ F[n]` and `Rp_*` has no right adjoint
+on `D` or `D⁺` (`sk-rem-sf-fullcd-scope`). The blueprint's proof chain does not use these data:
+it works with the constructible `Rf^!` of `sk-def-sf-operations`(vi) instead.
 
 On the *étale-origin* class the bound is a theorem, with `c = 2 dim X̄`: it follows from the
 finiteness of proper direct images in ordinary étale cohomology together with the pro-étale
@@ -27,15 +39,22 @@ comparison.
 
 ## Implementation notes
 
-The datum is a `structure`, not a `class`: it is indexed by a family `P` of object properties
-which instance resolution cannot solve for, so it is meant to be named and passed explicitly.
+The data are `structure`s, not `class`es: they are meant to be named and passed explicitly.
+
+The field `AmbientExceptionalAdjointData.isLeftAdjoint` duplicates the global instance
+`AlgebraicGeometry.ProEtale.isLeftAdjoint_rightDerivedLowerShriek`; it is recorded so that the
+datum still carries the existence of the right adjoint should that instance be removed.
 
 The blueprint's "compatibly with refinements" clause of `sk-def-sf-admissible` is not among
 the fields: the repository has no refinement relation between compactifications to state it
 against.
 
+The constructible intervals and `Dctf` are those of
+`WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude`, whose bounded constructibility is
+étale origin; these agree with the blueprint's only at the finite coefficient stages.
+
 The purity chapter itself is stated on the small *étale* site, with
-`AlgebraicGeometry.Etale.rightDerivedUpperShriek`, while the datum here is about the pro-étale
+`AlgebraicGeometry.Etale.rightDerivedUpperShriek`, while the data here are about the pro-étale
 `Rf^!`. The bridge between the two is the comparison of
 `WeilConjectures.SixFunctors.ProEtale.Comparison`; that `ν^*` intertwines the two exceptional
 inverse images is not stated anywhere yet, and is a TODO of the block.
@@ -44,7 +63,10 @@ inverse images is not stated anywhere yet, and is a TODO of the block.
 
 - `AlgebraicGeometry.ProEtale.HasUniformCohomologicalDimensionLE`: the uniform
   cohomological-dimension bound, stable under base change along the pro-étale site.
-- `AlgebraicGeometry.ProEtale.AmbientExceptionalAdjointData`: the admissibility datum.
+- `AlgebraicGeometry.ProEtale.AmbientExceptionalAdjointData`: the ambient exceptional right
+  adjoint datum, clause (1).
+- `AlgebraicGeometry.ProEtale.ExceptionalAdjointAdmissibilityData`: exceptional-adjoint
+  admissibility, clauses (1)–(3).
 
 ## Main statements
 
@@ -55,7 +77,7 @@ inverse images is not stated anywhere yet, and is a TODO of the block.
 
 universe u' u
 
-open CategoryTheory Limits
+open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor
 
@@ -66,7 +88,7 @@ namespace ProEtale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   {X Y : Scheme.{u}}
 
-/-- Blueprint `sk-def-sf-admissible`: Admissibility datum: an explicit hypothesis
+/-- Blueprint `sk-def-sf-admissible`: the bound `FullCD(p, A; c)`.
 
 `p : X ⟶ Y` *has uniform cohomological dimension at most `c` at `A`* if the higher direct
 images of `p`, and of all its base changes along objects of `Y_proét`, vanish above `c` on
@@ -84,7 +106,11 @@ images of `p`, and of all its base changes along objects of `Y_proét`, vanish a
 This is the uniform bound that makes `Rp_*` preserve coproducts on the unbounded derived
 category. The base changes are taken along the pro-étale site of `Y`, as in the blueprint, and
 not along arbitrary morphisms of schemes: the latter is a strictly stronger hypothesis than
-`sk-prop-sf-fullcd-etale-origin` can deliver. -/
+`sk-prop-sf-fullcd-etale-origin` can deliver.
+
+*Not satisfied in general*, even for proper smooth `p`: for an elliptic curve `E` over `𝔽̄_p`
+and `A` the category of `𝔽_r`-modules, there is a pro-étale sheaf `F` on `E` with
+`Hⁿ(E_proét, F) ≠ 0` for all `n ≥ 1` (`sk-rem-sf-fullcd-scope`). -/
 def HasUniformCohomologicalDimensionLE (p : X ⟶ Y) (c : ℕ) : Prop :=
   ∀ (V : Y.ProEt) ⦃X' : Scheme.{u}⦄ (g' : X' ⟶ X) (p' : X' ⟶ V.left),
     IsPullback g' p' p V.hom →
@@ -92,25 +118,59 @@ def HasUniformCohomologicalDimensionLE (p : X ⟶ Y) (c : ℕ) : Prop :=
         IsZero ((_root_.DerivedCategory.homologyFunctor _ r).obj
           ((R((p')_*[A])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
 
-/-- Blueprint `sk-def-sf-admissible`: Admissibility datum: an explicit hypothesis
+/-- Blueprint `sk-def-sf-admissible`, clause (1): the ambient exceptional right adjoint datum.
 
-The *ambient exceptional right adjoint datum* for a separated finite-type `f : X ⟶ Y` at `A`,
-relative to a family `P` of object properties standing for the constructible intervals and the
-finite-Tor subcategory: a uniform cohomological-dimension bound for the proper part of the
-chosen compactification of `f`, together with the requirement that `Rf^!` preserve `P`.
+For a morphism `f : X ⟶ Y` with a chosen compactification: a uniform cohomological-dimension
+bound `FullCD(p, A; c)` for the proper part `p` of the compactification, for some `c`, and the
+existence of a right adjoint `Rf^×` of `Rf_!` on the unbounded derived categories of the small
+pro-étale sites. It asserts only existence, nothing about the values of `Rf^×`.
 
-This is an *assumption*, not a property proved here; the existence of the right adjoint itself
-is the ambient instance
-`AlgebraicGeometry.ProEtale.isLeftAdjoint_rightDerivedLowerShriek`, which is why it is not
-repeated as a field. -/
-structure AmbientExceptionalAdjointData (f : X ⟶ Y) [HasCompactification f]
-    (P : ∀ Z : Scheme.{u},
-      ObjectProperty (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A))) : Prop where
+This is a *hypothesis*, and it is *not satisfied in general*: for an elliptic curve over `𝔽̄_p`
+and `A` the category of `𝔽_r`-modules, `Rp_*` does not preserve coproducts and has no right
+adjoint on `D` or `D⁺` (`sk-rem-sf-fullcd-scope`). The blueprint's proof chain uses the
+constructible `Rf^!` of `sk-def-sf-operations`(vi) instead. -/
+structure AmbientExceptionalAdjointData (f : X ⟶ Y) [HasCompactification f] : Prop where
   /-- A uniform cohomological-dimension bound for the proper part of the compactification. -/
   exists_hasUniformCohomologicalDimensionLE :
     ∃ c : ℕ, HasUniformCohomologicalDimensionLE A (HasCompactification.compactification f).g c
-  /-- The exceptional right adjoint preserves the small subcategories. -/
-  rightDerivedUpperShriek_mem : ∀ K, P Y K → P X ((R(f)^![A]).obj K)
+  /-- `Rf_!` has a right adjoint on the unbounded derived categories. -/
+  isLeftAdjoint : (R(f)_![A]).IsLeftAdjoint
+
+section Admissibility
+
+variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+/-- Blueprint `sk-def-sf-admissible`: exceptional-adjoint admissibility, clauses (1)–(3).
+
+The ambient exceptional right adjoint datum (1), together with the preservation clauses: the
+exceptional inverse image `Rf^!` carries each constructible interval `D_c^[a, b](Y, A)` into
+`D_c^[a + c⁻, b + c⁺](X, A)` for constants `c⁻, c⁺` independent of `a, b` (2), and carries
+`Dctf(Y, A)` into `Dctf(X, A)` (3).
+
+This is a *hypothesis*, and it is *not satisfied in general*, since already clause (1) fails for
+an elliptic curve over `𝔽̄_p` with `A` the category of `𝔽_r`-modules
+(`sk-rem-sf-fullcd-scope`). The blueprint's proof chain uses the constructible `Rf^!` of
+`sk-def-sf-operations`(vi) instead. -/
+structure ExceptionalAdjointAdmissibilityData (f : X ⟶ Y) [HasCompactification f] : Prop
+    extends AmbientExceptionalAdjointData A f where
+  /-- `Rf^!` shifts the constructible intervals by constants independent of the interval. -/
+  exists_rightDerivedUpperShriek_mem_constructibleInterval :
+    ∃ c₁ c₂ : ℤ, ∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)),
+      DerivedCategory.boundedConstructible A Y K →
+        _root_.DerivedCategory.homologyConcentratedIn a b K →
+          DerivedCategory.boundedConstructible A X ((R(f)^![A]).obj K) ∧
+            _root_.DerivedCategory.homologyConcentratedIn (a + c₁) (b + c₂)
+              ((R(f)^![A]).obj K)
+  /-- `Rf^!` preserves `Dctf`. -/
+  rightDerivedUpperShriek_mem_constructibleFiniteTor :
+    ∀ K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A),
+      DerivedCategory.constructibleFiniteTor A Y K →
+        DerivedCategory.constructibleFiniteTor A X ((R(f)^![A]).obj K)
+
+end Admissibility
 
 /-- Blueprint `sk-prop-sf-fullcd-etale-origin`: `FullCD` on the étale-origin class
 
@@ -126,8 +186,9 @@ Quantifying over the base changes is what turns the statement into the bound
 `HasUniformCohomologicalDimensionLE` on the essential image of `ν^*`, which is the point of
 the subsection; without it the theorem would not imply admissibility.
 
-What remains open — and is why the ambient datum of `sk-def-sf-admissible` is an assumption —
-is the vanishing for pro-étale module sheaves that are *not* of étale origin. -/
+The bound covers étale-origin sheaves only: for general pro-étale module sheaves it is false
+(for an elliptic curve over `𝔽̄_p` and `A` the category of `𝔽_r`-modules;
+`sk-rem-sf-fullcd-scope`), so the étale-origin class is the natural domain. -/
 theorem isZero_homology_rightDerivedLowerStar_comparisonUpperStar (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsSepClosed k] {X' : Scheme.{u}}
     (p : X' ⟶ Y) [IsProper p] (aX' : X' ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
