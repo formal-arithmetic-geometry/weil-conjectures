@@ -29,7 +29,8 @@ We derive the properties of the morphisms involved in a compactification:
   and `Compactification.isClopen_range_openImmersion`: if `f` is proper, then `i` is proper,
   hence a closed immersion with clopen range;
 - `Compactification.ofIsProper`: a proper morphism is a compactification of itself;
-- `Compactification.copy`: a compactification of `f` is one of any morphism equal to `f`;
+- `Compactification.copy` and `HasCompactification.of_eq`: a compactification of `f` is one
+  of any morphism equal to `f`;
 - `Compactification.transport`: a compactification transports along isomorphisms of the
   source and the target;
 - `Compactification.precomp` and `HasCompactification.comp_of_isOpenImmersion`:
@@ -204,6 +205,10 @@ namespace HasCompactification
 /-- A proper morphism has a compactification, namely itself. -/
 instance (priority := 100) of_isProper (f : X ⟶ Y) [IsProper f] : HasCompactification f :=
   ⟨⟨.ofIsProper f⟩⟩
+
+/-- Compactifiability transports along an equality of morphisms. -/
+lemma of_eq {f g : X ⟶ Y} [HasCompactification f] (h : f = g) : HasCompactification g :=
+  h ▸ ‹_›
 
 variable (f : X ⟶ Y) [hf : HasCompactification f]
 

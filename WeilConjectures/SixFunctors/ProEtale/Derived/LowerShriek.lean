@@ -52,6 +52,9 @@ Those notations are scoped in the `CategoryTheory.Functor` namespace, hence the
   `Rf_!` is the restriction of the unbounded `Rf_!` along the inclusions
   `DerivedCategory.Plus.ι` of the bounded below derived categories.
 
+- `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekCongr` : the transport `Rf_! ≅ Rg_!`
+  along an equality `f = g`.
+
 - `AlgebraicGeometry.ProEtale.compactlySupportedCohomology` : `H_c`, with scoped notation
   `H_c(f)[A](i)`.
 
@@ -176,6 +179,19 @@ noncomputable def rightDerivedLowerShriekPlusCompatibility :
     R(f)_![A]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ R(f)_![A] :=
   rightDerivedLowerShriekOfCompactificationPlusCompatibility A
     (HasCompactification.compactification f)
+
+/-- Transport of the derived exceptional direct image along an equality of morphisms:
+`Rf_! ≅ Rg_!` for `f = g`. -/
+noncomputable def rightDerivedLowerShriekCongr {f g : X ⟶ Y} (h : f = g)
+    [HasCompactification f] [HasCompactification g] : R(f)_![A] ≅ R(g)_![A] :=
+  eqToIso <| by
+    subst h
+    rfl
+
+@[simp]
+lemma rightDerivedLowerShriekCongr_rfl {f : X ⟶ Y} [HasCompactification f] :
+    rightDerivedLowerShriekCongr A (rfl : f = f) = Iso.refl _ :=
+  rfl
 
 end ProEtale
 

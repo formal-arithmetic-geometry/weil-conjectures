@@ -175,6 +175,37 @@ theorem isLisse_iff_exists_basis {V : Type u} [AddCommGroup V] [Module (PadicAlg
       Continuous fun g : W.geometric ↦ LinearMap.toMatrix b b (ρ g) i j := by
   sorry
 
+variable {W l} in
+/-- For a lisse representation on a finite-dimensional `V`, every coefficient
+`g ↦ φ (ρ g v)` of the geometric part of `ρ`, for a linear form `φ` and a vector `v`, is
+continuous: in a basis it is a fixed linear combination of matrix coefficients. -/
+theorem IsLisse.continuous_apply {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
+    [FiniteDimensional (PadicAlgCl l) V] {ρ : Representation (PadicAlgCl l) W.carrier V}
+    (hρ : W.IsLisse l ρ) (φ : V →ₗ[PadicAlgCl l] PadicAlgCl l) (v : V) :
+    Continuous fun g : W.geometric ↦ φ (ρ g v) := by
+  let b := Module.finBasis (PadicAlgCl l) V
+  have key (g : W.geometric) : φ (ρ g v) =
+      ∑ i, φ (b i) * ∑ j, LinearMap.toMatrix b b (ρ g) i j * b.repr v j := by
+    conv_lhs => rw [← b.sum_repr (ρ g v)]
+    simp only [map_sum, map_smul, smul_eq_mul, ← LinearMap.toMatrix_mulVec_repr b b,
+      Matrix.mulVec, dotProduct]
+    exact Finset.sum_congr rfl fun i _ ↦ mul_comm _ _
+  simp_rw [key]
+  exact continuous_finsetSum _ fun i _ ↦ continuous_const.mul <|
+    continuous_finsetSum _ fun j _ ↦ (hρ.continuous_toMatrix b i j).mul continuous_const
+
+variable {W l} in
+/-- A representation is lisse as soon as every coefficient `g ↦ φ (ρ g v)` of its geometric
+part, for a linear form `φ` and a vector `v`, is continuous: the matrix coefficients in a
+basis `b` are the coefficients for the coordinate forms of `b` and the vectors of `b`. -/
+theorem IsLisse.of_continuous_apply {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
+    {ρ : Representation (PadicAlgCl l) W.carrier V}
+    (h : ∀ (φ : V →ₗ[PadicAlgCl l] PadicAlgCl l) (v : V),
+      Continuous fun g : W.geometric ↦ φ (ρ g v)) :
+    W.IsLisse l ρ where
+  continuous_toMatrix b i j := by
+    simpa [LinearMap.toMatrix_apply] using h (b.coord i) (b j)
+
 /-- Blueprint `sk-d-real-operations`: Operations, constituents and coinvariants.
 
 The constant Weil line `B_b`: the one-dimensional representation of `W(C₀)` on which `g`
