@@ -6,6 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.CategoryTheory.Abelian.ShortExact
+public import Mathlib.CategoryTheory.ObjectProperty.EpiMono
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.FieldTheory.IntermediateField.Basic
@@ -15,6 +17,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Continuous.Basic
 public import WeilConjectures.NumberTheory.Padics.Extension
+public import WeilConjectures.RepresentationTheory.IntegralModel
 
 /-!
 # Local systems: the Galois correspondence and the lisse sheaf–representation dictionary
@@ -56,6 +59,11 @@ The étale fundamental group of a scheme does not exist in Mathlib, and neither 
   `AlgebraicGeometry.WeilGroup.isLisseRep.isClosedUnderKernels` and its companions together
   with `AlgebraicGeometry.WeilGroup.isLisseRep_shortExact_iff`, since the source category of
   that equivalence — lisse `ℚ̄_ℓ`-Weil sheaves — cannot be written down here.
+  Closure under extensions is *not* recorded: inside `Rep ℚ̄_ℓ W(C₀)` it fails, since a
+  discontinuous additive character `c` of `π₁(C)` (for instance of a quotient `ℤ_ℓ`) gives the
+  non-lisse extension `g ↦ !![1, c g; 0, 1]` of the trivial line by itself. An extension of
+  lisse sheaves is lisse, but its representation is continuous for a reason — it comes from a
+  sheaf — that is invisible on the representation side.
 
 - In `AlgebraicGeometry.WeilGroup.IsLisse.exists_lattice` the finite extension `E/ℚ_ℓ` is
   existentially quantified as a finite-dimensional `IntermediateField ℚ_[l] (PadicAlgCl l)`,
@@ -149,38 +157,69 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime]
 
 /-- Blueprint `sk-i-real-sheaves`: The lisse sheaf–representation equivalence.
 
+A subrepresentation of a lisse Weil representation is again lisse: it is finite dimensional,
+and every coefficient `g ↦ φ (ρ g v)` of it is a coefficient of the ambient representation,
+for a linear form extending `φ`. -/
+instance isLisseRep.isClosedUnderSubobjects :
+    ObjectProperty.IsClosedUnderSubobjects (W.isLisseRep l) where
+  prop_of_mono {X Y} f _ hY := by
+    obtain ⟨_, hρ⟩ := hY
+    have hf : Function.Injective f.hom := (Rep.mono_iff_injective f).1 inferInstance
+    have : FiniteDimensional (PadicAlgCl l) X.V :=
+      Module.Finite.of_injective f.hom.toLinearMap hf
+    refine ⟨this, IsLisse.of_continuous_apply fun φ v ↦ ?_⟩
+    obtain ⟨ψ, hψ⟩ :=
+      f.hom.toLinearMap.exists_leftInverse_of_injective (LinearMap.ker_eq_bot.2 hf)
+    have hψ' (x : X.V) : ψ (f.hom x) = x := LinearMap.congr_fun hψ x
+    simpa [← Rep.hom_comm_apply, hψ'] using hρ.continuous_apply (φ ∘ₗ ψ) (f.hom v)
+
+/-- Blueprint `sk-i-real-sheaves`: The lisse sheaf–representation equivalence.
+
+A quotient of a lisse Weil representation is again lisse: it is finite dimensional, and every
+coefficient `g ↦ φ (ρ g (f v))` of it is the coefficient `g ↦ (φ ∘ f) (ρ g v)` of the source. -/
+instance isLisseRep.isClosedUnderQuotients :
+    ObjectProperty.IsClosedUnderQuotients (W.isLisseRep l) where
+  prop_of_epi {X Y} f _ hX := by
+    obtain ⟨_, hρ⟩ := hX
+    have hf : Function.Surjective f.hom := (Rep.epi_iff_surjective f).1 inferInstance
+    have : FiniteDimensional (PadicAlgCl l) Y.V :=
+      Module.Finite.of_surjective f.hom.toLinearMap hf
+    refine ⟨this, IsLisse.of_continuous_apply fun φ w ↦ ?_⟩
+    obtain ⟨v, rfl⟩ := hf w
+    simpa [Rep.hom_comm_apply] using hρ.continuous_apply (φ ∘ₗ f.hom.toLinearMap) v
+
+/-- Blueprint `sk-i-real-sheaves`: The lisse sheaf–representation equivalence.
+
 Lisse Weil representations are closed under kernels, so a subobject of a lisse Weil
 representation is again lisse. -/
 instance isLisseRep.isClosedUnderKernels :
-    ObjectProperty.IsClosedUnderKernels (W.isLisseRep l) := by
-  sorry
+    ObjectProperty.IsClosedUnderKernels (W.isLisseRep l) :=
+  inferInstance
 
 /-- Blueprint `sk-i-real-sheaves`: The lisse sheaf–representation equivalence.
 
 Lisse Weil representations are closed under cokernels, so a quotient of a lisse Weil
 representation is again lisse. -/
 instance isLisseRep.isClosedUnderCokernels :
-    ObjectProperty.IsClosedUnderCokernels (W.isLisseRep l) := by
-  sorry
+    ObjectProperty.IsClosedUnderCokernels (W.isLisseRep l) :=
+  inferInstance
 
-/-- Blueprint `sk-i-real-sheaves`: The lisse sheaf–representation equivalence.
-
-Lisse Weil representations are closed under extensions. -/
-instance isLisseRep.isClosedUnderExtensions :
-    ObjectProperty.IsClosedUnderExtensions (W.isLisseRep l) := by
-  sorry
-
-/-- Blueprint `sk-i-real-sheaves`: The lisse sheaf–representation equivalence.
+/-- Blueprint `sk-i-real-sheaves`, node `prop-wf-weil-sheaf-representation-equivalence`:
+The lisse sheaf–representation equivalence.
 
 A short complex of lisse Weil representations is short exact exactly when its geometric
 generic stalk, i.e. its image under the forgetful functor to `ModuleCat ℚ̄_ℓ`, is short exact.
 This is the form in which the exactness of the geometric-generic-stalk equivalence of
-`sk-i-real-sheaves` is used, lisse `ℚ̄_ℓ`-sheaves themselves being unavailable. -/
+`sk-i-real-sheaves` is used, lisse `ℚ̄_ℓ`-sheaves themselves being unavailable.
+
+The forgetful functor is faithful and exact, since kernels and cokernels of representations
+are computed on the underlying vector spaces, so it preserves and reflects short exactness;
+the lisse hypotheses are not needed. -/
 theorem isLisseRep_shortExact_iff (S : ShortComplex (Rep.{u} (PadicAlgCl l) W.carrier))
-    (h₁ : W.isLisseRep l S.X₁) (h₂ : W.isLisseRep l S.X₂) (h₃ : W.isLisseRep l S.X₃) :
+    (_h₁ : W.isLisseRep l S.X₁) (_h₂ : W.isLisseRep l S.X₂) (_h₃ : W.isLisseRep l S.X₃) :
     S.ShortExact ↔ (S.map (forget₂ (Rep.{u} (PadicAlgCl l) W.carrier)
-      (ModuleCat.{u} (PadicAlgCl l)))).ShortExact := by
-  sorry
+      (ModuleCat.{u} (PadicAlgCl l)))).ShortExact :=
+  (ShortExact.shortExact_map_iff _).symm
 
 variable {W l}
 
@@ -214,7 +253,37 @@ theorem IsLisse.exists_lattice {l : ℕ} [Fact l.Prime] {W : WeilGroup p} {V : T
         ∀ n : ℕ, (Set.range fun g : WU.geometric ↦ fun x : L ↦
           Submodule.Quotient.mk (p := (IsLocalRing.maximalIdeal
             (PadicAlgCl.integers l (E : Type)) ^ n) • L) (ρ (R.restrict g) x)).Finite := by
-  sorry
+  classical
+  let b := Module.finBasis (PadicAlgCl l) V
+  -- the action `π₁(U) → GL(V)` of the geometric fundamental group of `U` through `R`
+  let σ : Representation (PadicAlgCl l) WU.geometric V :=
+    { toFun g := ρ (R.restrict g)
+      map_one' := by simp
+      map_mul' g h := by simp }
+  have hmem (g : WU.geometric) : R.restrict g ∈ W.geometric := by
+    rw [MonoidHom.mem_ker, ← MonoidHom.comp_apply, R.deg_restrict]
+    exact g.2
+  let ψ : WU.geometric → W.geometric := fun g ↦ ⟨R.restrict g, hmem g⟩
+  have hψ : Continuous ψ := (R.continuous_restrict.comp continuous_subtype_val).subtype_mk hmem
+  have hcont (i j : Fin (Module.finrank (PadicAlgCl l) V)) :
+      Continuous fun g ↦ LinearMap.toMatrix b b (σ g) i j := by
+    have h := (hρ.continuous_toMatrix b i j).comp hψ
+    have hσ (g : WU.geometric) : σ g = ρ (R.restrict g) := rfl
+    simpa only [hσ, Function.comp_def] using h
+  -- the coefficients lie in a finite extension `E` of `ℚ_ℓ` and are bounded
+  obtain ⟨E, hE, hσE⟩ := PadicAlgCl.exists_finiteDimensional_forall_mem l
+    ((LinearMap.toMatrixAlgEquiv b).toMonoidHom.comp σ) fun i j ↦ by
+      simpa [LinearMap.toMatrixAlgEquiv_apply, LinearMap.toMatrix_apply] using hcont i j
+  have hσE' (g : WU.geometric) (i j) : LinearMap.toMatrix b b (σ g) i j ∈ E := by
+    simpa [LinearMap.toMatrixAlgEquiv_apply, LinearMap.toMatrix_apply] using hσE g i j
+  obtain ⟨C, hC⟩ : ∃ C : ℝ, ∀ p : Fin _ × Fin _, ∀ g : WU.geometric,
+      ‖LinearMap.toMatrix b b (σ g) p.1 p.2‖ ≤ C := by
+    choose C hC using fun p : Fin _ × Fin _ ↦
+      (isCompact_range (hcont p.1 p.2)).isBounded.exists_norm_le
+    obtain ⟨M, hM⟩ := Finite.exists_le C
+    exact ⟨M, fun p g ↦ (hC p _ ⟨g, rfl⟩).trans (hM p)⟩
+  exact ⟨E, hE, PadicAlgCl.exists_lattice_of_forall_mem l b σ E hσE' C
+    fun g i j ↦ hC (i, j) g⟩
 
 /-- Blueprint `sk-p-real-sections`: Global sections as invariants.
 

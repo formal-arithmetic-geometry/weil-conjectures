@@ -13,15 +13,17 @@ public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
 
 The general linear group `GL_n` over a commutative ring `k` is the affine group scheme
 `Spec k[x_ij, det⁻¹]` over `Spec k`, the spectrum of the Hopf algebra
-`Matrix.GeneralLinearGroup.CoordinateRing n k`. Mathlib's `instGrpObjSpecAsOverSpec` makes it a
+`Matrix.GeneralLinearGroup.CoordinateRing n k`. Mathlib's `instGrpObjSpecAsOverSpec`
+makes it a
 group object in `Over (Spec k)`. Its points with values in a `k`-algebra `R` are the invertible
 `n × n` matrices over `R`, as groups.
 
 ## Main definitions
 
-- `Matrix.GeneralLinearGroup.scheme`: `GL_n` as an affine group scheme of finite type over `k`.
-- `Matrix.GeneralLinearGroup.homMulEquiv`: the `R`-points of the group scheme `GL_n` are the
-  group `GL n R`.
+- `AlgebraicGeometry.GeneralLinearGroup`, notation `𝔾𝕃(n; k)`: `GL_n` as an affine group scheme
+  of finite type over `k`.
+- `AlgebraicGeometry.GeneralLinearGroup.homMulEquiv`: the `R`-points of the group scheme
+  `𝔾𝕃(n; k)` are the group `GL n R`.
 
 ## Blueprint
 
@@ -34,42 +36,62 @@ universe u
 
 open CategoryTheory AlgebraicGeometry WithConv
 open scoped MonObj
+open Matrix.GeneralLinearGroup (CoordinateRing algHomMulEquiv map_algHomMulEquiv)
 
-namespace Matrix.GeneralLinearGroup
+namespace AlgebraicGeometry
 
 variable (n : Type u) [Fintype n] [DecidableEq n] (k : Type u) [CommRing k]
 
-/-- The general linear group `GL_n` as an affine group scheme over `k`: the spectrum of the Hopf
-algebra `k[x_ij, det⁻¹]`. It is a group object by `instGrpObjSpecAsOverSpec`.
-(blueprint: `sk-d-geometry`) -/
-noncomputable abbrev scheme : Over (Spec (.of k)) :=
+/-- The general linear group scheme `𝔾𝕃(n; k)` over a commutative ring `k`: the affine group
+scheme `Spec k[x_ij, det⁻¹]` over `Spec k`, the spectrum of the Hopf algebra
+`Matrix.GeneralLinearGroup.CoordinateRing n k`. (blueprint: `sk-d-geometry`) -/
+noncomputable def GeneralLinearGroup : Over (Spec (.of k)) :=
   (Spec (.of (CoordinateRing n k))).asOver (Spec (.of k))
 
-noncomputable example : GrpObj (scheme n k) := inferInstance
+@[inherit_doc] scoped notation "𝔾𝕃(" n "; " k ")" => GeneralLinearGroup n k
 
-instance : IsAffine (scheme n k).left :=
+namespace GeneralLinearGroup
+
+/-- `𝔾𝕃(n; k)` is a group object in `Over (Spec k)`, by the Hopf algebra structure of its
+coordinate ring (`instGrpObjSpecAsOverSpec`). -/
+noncomputable instance : GrpObj 𝔾𝕃(n; k) :=
+  inferInstanceAs (GrpObj ((Spec (.of (CoordinateRing n k))).asOver (Spec (.of k))))
+
+instance : IsAffine (𝔾𝕃(n; k)).left :=
   inferInstanceAs (IsAffine (Spec (.of (CoordinateRing n k))))
 
-instance : LocallyOfFiniteType (scheme n k).hom :=
+instance : LocallyOfFiniteType (𝔾𝕃(n; k)).hom :=
   locallyOfFiniteType_specOverSpec
 
-/-- The `R`-points of the group scheme `GL_n` are the invertible `n × n` matrices over `R`, as
-groups. (blueprint: `sk-d-geometry`) -/
+/-- The `R`-points of the group scheme `𝔾𝕃(n; k)` are the invertible `n × n` matrices over `R`,
+as groups. (blueprint: `sk-d-geometry`) -/
 noncomputable def homMulEquiv (R : Type u) [CommRing R] [Algebra k R] :
-    ((Spec (.of R)).asOver (Spec (.of k)) ⟶ scheme n k) ≃* GL n R :=
+    ((Spec (.of R)).asOver (Spec (.of k)) ⟶ 𝔾𝕃(n; k)) ≃* GL n R :=
   Spec.mapMulEquiv.symm.trans (algHomMulEquiv n k R)
 
 variable {n k} {R S : Type u} [CommRing R] [Algebra k R] [CommRing S] [Algebra k S]
 
-/-- The identification `homMulEquiv` of the points of `GL_n` with invertible matrices is natural
-in the algebra of values: precomposing with `Spec S ⟶ Spec R` maps the entries along `R → S`. -/
+/-- The point of `𝔾𝕃(n; k)` corresponding to an algebra homomorphism `ψ : k[GL_n] → R` is the
+matrix `ψ(x_ij)`. -/
+@[simp]
+theorem homMulEquiv_mapMulEquiv (ψ : WithConv (CoordinateRing n k →ₐ[k] R)) :
+    homMulEquiv n k R (Spec.mapMulEquiv ψ) = algHomMulEquiv n k R ψ := by
+  change algHomMulEquiv n k R (Spec.mapMulEquiv.symm (Spec.mapMulEquiv ψ)) = _
+  rw [MulEquiv.symm_apply_apply]
+
+/-- The identification `homMulEquiv` of the points of `𝔾𝕃(n; k)` with invertible matrices is
+natural in the algebra of values: precomposing with `Spec S ⟶ Spec R` maps the entries along
+`R → S`. -/
 theorem homMulEquiv_specMap_comp (φ : R →ₐ[k] S)
-    (f : (Spec (.of R)).asOver (Spec (.of k)) ⟶ scheme n k) :
+    (f : (Spec (.of R)).asOver (Spec (.of k)) ⟶ 𝔾𝕃(n; k)) :
     homMulEquiv n k S ((Spec.map (CommRingCat.ofHom φ.toRingHom)).asOver (Spec (.of k)) ≫ f) =
-      map φ.toRingHom (homMulEquiv n k R f) := by
+      Matrix.GeneralLinearGroup.map φ.toRingHom (homMulEquiv n k R f) := by
+  unfold GeneralLinearGroup at f
+  delta homMulEquiv GeneralLinearGroup
   obtain ⟨χ, rfl⟩ := Spec.mapMulEquiv.surjective f
-  simp only [Spec.map_asOver_comp_mapMulEquiv, homMulEquiv, MulEquiv.trans_apply,
-    MulEquiv.symm_apply_apply]
+  simp only [Spec.map_asOver_comp_mapMulEquiv, MulEquiv.trans_apply, MulEquiv.symm_apply_apply]
   rw [← toConv_ofConv χ, map_algHomMulEquiv, ofConv_toConv]
 
-end Matrix.GeneralLinearGroup
+end GeneralLinearGroup
+
+end AlgebraicGeometry
