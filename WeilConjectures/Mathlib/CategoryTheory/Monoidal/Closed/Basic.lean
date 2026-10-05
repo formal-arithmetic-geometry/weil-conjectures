@@ -23,6 +23,9 @@ the TODO of `Mathlib.CategoryTheory.Monoidal.Closed.Functor`. If `G` is monoidal
 equivalence, the comparison map is an isomorphism (`CategoryTheory.Functor.Monoidal.commIhom`);
 compare `CategoryTheory.MonoidalClosed.ofEquiv`, which transports the closed structure along a
 monoidal equivalence.
+
+A pairing `b : X ⊗ Y ⟶ 𝟙_ C` is *perfect* (`CategoryTheory.MonoidalClosed.IsPerfectPairing`)
+if its adjoint `Y ⟶ [X, 𝟙_ C]` is an isomorphism.
 -/
 
 @[expose] public section
@@ -177,3 +180,17 @@ noncomputable def ihomObjIso (A B : C) :
 end Monoidal
 
 end CategoryTheory.Functor
+
+namespace CategoryTheory.MonoidalClosed
+
+open MonoidalCategory
+
+variable {C : Type*} [Category* C] [MonoidalCategory C] [MonoidalClosed C]
+
+/-- A pairing `b : X ⊗ Y ⟶ 𝟙_ C` is *perfect* if its tensor–internal-hom adjoint
+`curry b : Y ⟶ [X, 𝟙_ C]` is an isomorphism, i.e. if `b` identifies `Y` with the dual
+`[X, 𝟙_ C]` of `X`. No braiding is needed: the adjoint is taken in the second variable. -/
+def IsPerfectPairing {X Y : C} (b : X ⊗ Y ⟶ 𝟙_ C) : Prop :=
+  IsIso (curry b)
+
+end CategoryTheory.MonoidalClosed
