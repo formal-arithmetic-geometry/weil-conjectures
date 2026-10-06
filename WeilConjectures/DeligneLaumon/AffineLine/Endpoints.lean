@@ -33,6 +33,9 @@ This leaves degree one, which is the only place where the Fourier argument of
   coinvariant description of degree two.
 - `AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two`: its
   purity.
+- `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two`: the top
+  compactly supported cohomology of a pure lisse sheaf on a smooth affine curve has weights at
+  most `w + 2`.
 -/
 
 @[expose] public section
@@ -44,17 +47,30 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-variable {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
-  [C.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j]
-  [j.IsOver (Spec (CommRingCat.of k₀))] [IsDominant j] [IsAffine C]
+  {C : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
   [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
-  [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
-  (F : WeilSheaf k₀ l U)
 
-/-- The curve `C₀` is locally of finite type over `k₀`, being smooth over `k₀`. -/
+/-- A smooth affine curve `C₀` is locally of finite type over `k₀`, being smooth over `k₀`. -/
 local instance : LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀)) :=
   haveI := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
   inferInstance
+
+/-- *Top compact-support bound on a curve.* If `C₀` is a smooth affine curve and `G` is a lisse
+Weil sheaf on `C₀`, punctually `ι`-pure of weight `w`, then `H_c^2(C, G)` has weights at most
+`w + 2`: it is a Frobenius-equivariant quotient of the generic fibre, pure of weight `w`, twisted
+by `(-1)`.
+(blueprint: `lem-a1-curve-hc2-bound`) -/
+theorem WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two
+    (ι : PadicAlgCl l →+* ℂ) (G : WeilSheaf k₀ l C) (hG : G.IsLisse) {w : ℝ}
+    (hw : G.IsPunctuallyPureOfWeight ι w) :
+    (G.compactlySupportedCohomology 2).HasWeightsAtMostOver k₀ ι (w + 2) := by
+  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
+  sorry
+
+variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ C) [IsOpenImmersion j]
+  [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] [IsDominant j]
+  [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
+  (F : WeilSheaf k₀ l U)
 
 /-- For a dense open immersion `j : U₀ ↪ C₀` with `C₀` a smooth geometrically connected affine
 curve and `F` lisse on `U₀`, the compactly supported cohomology `H_c^r(C, j_*F)` vanishes for
@@ -63,6 +79,7 @@ theorem subsingleton_compactlySupportedCohomology_directImage (hF : F.IsLisse) {
     (hr : r < 0 ∨ 2 < r) :
     Subsingleton
       (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology r).carrier := by
+  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
   sorry
 
 /-- In the situation of `AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage`
@@ -72,6 +89,7 @@ global section of a lisse sheaf on a connected open has full support on a nonpro
 theorem subsingleton_compactlySupportedCohomology_directImage_zero (hF : F.IsLisse) :
     Subsingleton
       (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology 0).carrier := by
+  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
   sorry
 
 /--
@@ -104,6 +122,7 @@ theorem isPureOfWeightOver_compactlySupportedCohomology_directImage_two
     (hw : F.IsPunctuallyPureOfWeight ι w) :
     (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology 2).IsPureOfWeightOver
       k₀ ι (w + 2) := by
+  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
   sorry
 
 end AlgebraicGeometry

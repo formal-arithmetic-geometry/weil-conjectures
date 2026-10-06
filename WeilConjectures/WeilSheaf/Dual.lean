@@ -41,6 +41,8 @@ The geometric coinvariants of `F` are the dual of the global sections of `F^∨`
   with the Weil structures.
 - `AlgebraicGeometry.WeilSheaf.geometricCoinvariants`: the geometric coinvariants of a lisse
   Weil sheaf, with the Frobenius induced from the Weil structure.
+- `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants`: the geometric
+  coinvariants of a punctually pure lisse sheaf are pure of the same weight.
 
 ## TODO
 
@@ -136,6 +138,24 @@ noncomputable def geometricCoinvariants [QuasiCompact (X ↘ Spec (CommRingCat.o
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X)
     (hF : F.IsLisse) : FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   FrobeniusModule.dual (globalSections (F.dual hF))
+
+/-- *Purity of the geometric coinvariants.* If `F` is a lisse Weil sheaf, punctually `ι`-pure of
+weight `w`, then its geometric coinvariants `V_{π₁(X̄)}` with the induced Frobenius are `ι`-pure
+of weight `w` (possibly zero). The argument compares the coinvariants with the stalk at a closed
+point with finite residue field on each geometric component, as an equivariant quotient.
+
+The blueprint states this for `X` a nonempty smooth geometrically connected curve; here `X` is
+only assumed locally of finite type over `k₀`, which is what provides these closed points.
+Some such hypothesis is needed: `IsPunctuallyPureOfWeight` only sees the points of
+`X.finitePoints`, so for `X = Spec 𝔽_q(t)` it holds for every `w`, while the coinvariants of a
+rank-one sheaf need not be pure of every weight.
+(blueprint: `lem-a1-geometric-coinvariants-pure`) -/
+theorem isPureOfWeightOver_geometricCoinvariants
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ)
+    (F : WeilSheaf k₀ l X) (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
+    F.geometricCoinvariants.IsPureOfWeightOver k₀ ι w := by
+  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
+  sorry
 
 end WeilSheaf
 

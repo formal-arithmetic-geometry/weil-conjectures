@@ -6,6 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.AlgebraicGeometry.Fiber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Pullbacks
 
@@ -63,6 +65,10 @@ over a scheme `S` admits an immersion into a relative affine space `𝔸(Fin n; 
 - `AlgebraicGeometry.iteratedAffineLine` and `AlgebraicGeometry.iteratedAffineLineProj`: the
   `r`-fold relative affine line over `S` and its projection to `S`, the composition of the `r`
   affine-line projections.
+- `AlgebraicGeometry.Scheme.Hom.toIteratedAffineLine`: the morphism to the iterated affine line
+  with prescribed coordinates (blueprint `def-zl-localized-coordinates`).
+- `AlgebraicGeometry.AffineSpace.isAffine_fiber_of_isOpenImmersion`: the fibres of an open
+  subscheme of the relative affine line `𝔸¹_Y` over the points of `Y` are affine.
 
 ## Blueprint
 
@@ -611,6 +617,180 @@ lemma iteratedAffineLineProj_succ (S : Scheme.{u}) (r : ℕ) :
         iteratedAffineLineProj S r :=
   rfl
 
+instance (S : Scheme.{u}) : ∀ r : ℕ, IsAffineHom (iteratedAffineLineProj S r)
+  | 0 => inferInstanceAs (IsAffineHom (𝟙 S))
+  | r + 1 => by
+    have := instIsAffineHomIteratedAffineLineProj S r
+    rw [iteratedAffineLineProj_succ]
+    infer_instance
+
+instance (S : Scheme.{u}) : ∀ r : ℕ, LocallyOfFiniteType (iteratedAffineLineProj S r)
+  | 0 => inferInstanceAs (LocallyOfFiniteType (𝟙 S))
+  | r + 1 => by
+    have := instLocallyOfFiniteTypeIteratedAffineLineProj S r
+    rw [iteratedAffineLineProj_succ]
+    infer_instance
+
+namespace iteratedAffineLine
+
+/-- The coordinates of the iterated affine line: the `0`-th coordinate is the coordinate of the
+outermost affine line, and the others are pulled back from `iteratedAffineLine S r`. -/
+noncomputable def coord (S : Scheme.{u}) : ∀ r : ℕ, Fin r → Γ(iteratedAffineLine S r, ⊤)
+  | 0 => Fin.elim0
+  | r + 1 => Fin.cons (AffineSpace.coord (iteratedAffineLine S r) PUnit.unit)
+      fun i ↦ (𝔸(PUnit.{u + 1}; iteratedAffineLine S r) ↘ iteratedAffineLine S r).appTop
+        (coord S r i)
+
+/-- The iterated affine line over an affine scheme is affine. -/
+instance isAffine (S : Scheme.{u}) [IsAffine S] : ∀ r : ℕ, IsAffine (iteratedAffineLine S r)
+  | 0 => ‹_›
+  | r + 1 => by
+    have := isAffine S r
+    exact inferInstanceAs (IsAffine 𝔸(PUnit.{u + 1}; iteratedAffineLine S r))
+
+end iteratedAffineLine
+
+/-- The morphism `X ⟶ 𝔸ʳ_S` over `g : X ⟶ S` with coordinates `t₁, …, t_r ∈ Γ(X, ⊤)`, as a
+morphism to the iterated affine line: the coordinate `t 0` is the coordinate of the outermost
+affine line.
+
+For `X = Spec B_s` over `S = Spec A_s` this is the map `ν_t : Spec B_s ⟶ 𝔸ᵈ_{D(s)}` of blueprint
+`def-zl-localized-coordinates`, given by `A_s[T₁, …, T_d] → B_s`, `Tᵢ ↦ tᵢ`; see
+`AlgebraicGeometry.Scheme.Hom.toIteratedAffineLine_appTop_comp_evalCoord`. -/
+noncomputable def Scheme.Hom.toIteratedAffineLine {X S : Scheme.{u}} (g : X ⟶ S) :
+    ∀ {r : ℕ}, (Fin r → Γ(X, ⊤)) → (X ⟶ iteratedAffineLine S r)
+  | 0, _ => g
+  | _ + 1, t => AffineSpace.homOfVector (g.toIteratedAffineLine (Fin.tail t)) fun _ ↦ t 0
+
+section toIteratedAffineLine
+
+variable {X S : Scheme.{u}} (g : X ⟶ S)
+
+lemma Scheme.Hom.toIteratedAffineLine_succ {r : ℕ} (t : Fin (r + 1) → Γ(X, ⊤)) :
+    g.toIteratedAffineLine t =
+      AffineSpace.homOfVector (g.toIteratedAffineLine (Fin.tail t)) fun _ ↦ t 0 :=
+  rfl
+
+lemma Scheme.Hom.toIteratedAffineLine_comp_over {r : ℕ} (t : Fin (r + 1) → Γ(X, ⊤)) :
+    g.toIteratedAffineLine t ≫
+        (𝔸(PUnit.{u + 1}; iteratedAffineLine S r) ↘ iteratedAffineLine S r) =
+      g.toIteratedAffineLine (Fin.tail t) :=
+  AffineSpace.homOfVector_over _ _
+
+@[reassoc (attr := simp)]
+lemma Scheme.Hom.toIteratedAffineLine_proj :
+    ∀ {r : ℕ} (t : Fin r → Γ(X, ⊤)),
+      g.toIteratedAffineLine t ≫ iteratedAffineLineProj S r = g
+  | 0, _ => Category.comp_id _
+  | r + 1, t => by
+    calc g.toIteratedAffineLine t ≫ iteratedAffineLineProj S (r + 1)
+        = (g.toIteratedAffineLine t ≫
+            (𝔸(PUnit.{u + 1}; iteratedAffineLine S r) ↘ iteratedAffineLine S r)) ≫
+              iteratedAffineLineProj S r := (Category.assoc _ _ _).symm
+      _ = g := by rw [toIteratedAffineLine_comp_over, toIteratedAffineLine_proj]
+
+lemma iteratedAffineLine.coord_succ_zero (S : Scheme.{u}) (r : ℕ) :
+    coord S (r + 1) 0 = AffineSpace.coord (iteratedAffineLine S r) PUnit.unit :=
+  rfl
+
+lemma iteratedAffineLine.coord_succ_succ (S : Scheme.{u}) (r : ℕ) (i : Fin r) :
+    coord S (r + 1) i.succ =
+      (𝔸(PUnit.{u + 1}; iteratedAffineLine S r) ↘ iteratedAffineLine S r).appTop (coord S r i) :=
+  rfl
+
+lemma Scheme.Hom.toIteratedAffineLine_appTop_coord :
+    ∀ {r : ℕ} (t : Fin r → Γ(X, ⊤)) (i : Fin r),
+      (g.toIteratedAffineLine t).appTop (iteratedAffineLine.coord S r i) = t i
+  | 0, _, i => i.elim0
+  | r + 1, t, i => by
+    refine Fin.cases ?_ (fun j ↦ ?_) i
+    · rw [iteratedAffineLine.coord_succ_zero]
+      exact AffineSpace.homOfVector_appTop_coord _ _ _
+    · rw [iteratedAffineLine.coord_succ_succ]
+      erw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, toIteratedAffineLine_comp_over,
+        toIteratedAffineLine_appTop_coord]
+      rfl
+
+/-- The evaluation of polynomials at the coordinates of the iterated affine line. -/
+noncomputable def iteratedAffineLine.evalCoord (S : Scheme.{u}) (r : ℕ) :
+    MvPolynomial (Fin r) Γ(S, ⊤) →+* Γ(iteratedAffineLine S r, ⊤) :=
+  eval₂Hom (iteratedAffineLineProj S r).appTop.hom (coord S r)
+
+/-- On global sections, `g.toIteratedAffineLine t` evaluates polynomials at `t`. -/
+lemma Scheme.Hom.toIteratedAffineLine_appTop_comp_evalCoord {r : ℕ} (t : Fin r → Γ(X, ⊤)) :
+    (g.toIteratedAffineLine t).appTop.hom.comp (iteratedAffineLine.evalCoord S r) =
+      eval₂Hom g.appTop.hom t := by
+  refine MvPolynomial.ringHom_ext (fun a ↦ ?_) (fun i ↦ ?_)
+  · simp only [iteratedAffineLine.evalCoord, RingHom.comp_apply, eval₂Hom_C]
+    rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, toIteratedAffineLine_proj]
+  · simp [iteratedAffineLine.evalCoord, toIteratedAffineLine_appTop_coord]
+
+lemma iteratedAffineLine.evalCoord_succ_rename (S : Scheme.{u}) (r : ℕ)
+    (q : MvPolynomial (Fin r) Γ(S, ⊤)) :
+    evalCoord S (r + 1) (rename Fin.succ q) =
+      (𝔸(PUnit.{u + 1}; iteratedAffineLine S r) ↘ iteratedAffineLine S r).appTop
+        (evalCoord S r q) := by
+  have : (evalCoord S (r + 1)).comp (rename Fin.succ).toRingHom =
+      (𝔸(PUnit.{u + 1}; iteratedAffineLine S r) ↘ iteratedAffineLine S r).appTop.hom.comp
+        (evalCoord S r) := by
+    refine MvPolynomial.ringHom_ext (fun a ↦ ?_) (fun i ↦ ?_)
+    · change evalCoord S (r + 1) (rename Fin.succ (C a)) =
+        (𝔸(PUnit.{u + 1}; iteratedAffineLine S r) ↘ iteratedAffineLine S r).appTop.hom
+          (evalCoord S r (C a))
+      rw [rename_C]
+      simp only [evalCoord, eval₂Hom_C]
+      rfl
+    · change evalCoord S (r + 1) (rename Fin.succ (X i)) =
+        (𝔸(PUnit.{u + 1}; iteratedAffineLine S r) ↘ iteratedAffineLine S r).appTop.hom
+          (evalCoord S r (X i))
+      rw [rename_X]
+      simp only [evalCoord, eval₂Hom_X']
+      rfl
+  exact congr($this q)
+
+/-- Over an affine base, the global functions on the iterated affine line are polynomials in the
+coordinates. -/
+lemma iteratedAffineLine.evalCoord_surjective (S : Scheme.{u}) [IsAffine S] :
+    ∀ r : ℕ, Function.Surjective (evalCoord S r)
+  | 0 => fun y ↦ ⟨C (show Γ(S, ⊤) from y), by rw [evalCoord, eval₂Hom_C]; rfl⟩
+  | r + 1 => by
+    have hsurj : Function.Surjective (eval₂Hom
+        (𝔸(PUnit.{u + 1}; iteratedAffineLine S r) ↘ iteratedAffineLine S r).appTop.hom
+        (AffineSpace.coord (iteratedAffineLine S r))) := by
+      have := ConcreteCategory.bijective_of_isIso
+        ((AffineSpace.isoOfIsAffine PUnit.{u + 1} (iteratedAffineLine S r)).hom.app ⊤)
+      have h := AffineSpace.isoOfIsAffine_hom_appTop (n := PUnit.{u + 1})
+        (S := iteratedAffineLine S r)
+      intro y
+      obtain ⟨x, hx⟩ := this.2 y
+      refine ⟨(Scheme.ΓSpecIso _).hom x, ?_⟩
+      rw [← hx]
+      exact congr($(h).hom x).symm
+    intro y
+    obtain ⟨p, rfl⟩ := hsurj y
+    induction p using MvPolynomial.induction_on with
+    | C a =>
+      obtain ⟨q, rfl⟩ := evalCoord_surjective S r a
+      exact ⟨rename Fin.succ q, by rw [evalCoord_succ_rename, eval₂Hom_C]⟩
+    | add p q hp hq =>
+      obtain ⟨a, ha⟩ := hp
+      obtain ⟨b, hb⟩ := hq
+      exact ⟨a + b, by rw [map_add, ha, hb]; exact (map_add _ _ _).symm⟩
+    | mul_X p n hp =>
+      obtain ⟨a, ha⟩ := hp
+      refine ⟨a * X 0, ?_⟩
+      cases n
+      have h1 : evalCoord S (r + 1) (X 0) =
+          AffineSpace.coord (iteratedAffineLine S r) PUnit.unit := by
+        simp only [evalCoord, eval₂Hom_X']
+        rfl
+      calc evalCoord S (r + 1) (a * X 0) = evalCoord S (r + 1) a * evalCoord S (r + 1) (X 0) :=
+            map_mul _ _ _
+        _ = _ := by rw [ha, h1, map_mul (eval₂Hom _ _), eval₂Hom_X']
+
+end toIteratedAffineLine
+
+
 @[simp]
 lemma AffineSpace.zeroSection_comp_over (n : Type u) (S : Scheme.{u}) :
     AffineSpace.zeroSection n S ≫ 𝔸(n; S) ↘ S = 𝟙 S :=
@@ -660,5 +840,25 @@ instance AffineSpace.isClosedImmersion_zeroSection (n : Type u) (S : Scheme.{u})
   exact MorphismProperty.of_isPullback
     (IsPullback.of_bot hpaste (AffineSpace.zeroSection_comp_map f).symm
       (AffineSpace.isPullback_map f)) inferInstance
+
+/-- The fibre of an open subscheme `U ⊆ 𝔸¹_Y` over any point of `Y` is affine: it is an open
+subscheme of the affine line over a field, whose coordinate ring is a principal ideal domain. -/
+theorem AffineSpace.isAffine_fiber_of_isOpenImmersion {U Y : Scheme.{u}}
+    (u : U ⟶ 𝔸(PUnit.{u + 1}; Y)) [IsOpenImmersion u] (y : Y) :
+    IsAffine ((u ≫ 𝔸(PUnit.{u + 1}; Y) ↘ Y).fiber y) := by
+  let g := Y.fromSpecResidueField y
+  let π := 𝔸(PUnit.{u + 1}; Y) ↘ Y
+  let f : pullback u (pullback.fst π g) ⟶ Spec (.of (MvPolynomial PUnit (Y.residueField y))) :=
+    pullback.snd u (pullback.fst π g) ≫
+      (AffineSpace.isPullback_map (n := PUnit) g).isoPullback.inv ≫
+      (AffineSpace.SpecIso PUnit (Y.residueField y)).hom
+  have : IsPrincipalIdealRing (MvPolynomial PUnit.{u + 1} (Y.residueField y)) :=
+    IsPrincipalIdealRing.of_surjective
+      (MvPolynomial.uniqueAlgEquiv (Y.residueField y) PUnit).symm.toRingHom
+      (MvPolynomial.uniqueAlgEquiv (Y.residueField y) PUnit).symm.surjective
+  have : IsAffine (pullback u (pullback.fst π g)) :=
+    isAffine_of_isOpenImmersion_of_isPrincipalIdealRing f
+  change IsAffine (pullback (u ≫ π) g)
+  exact .of_isIso (pullbackRightPullbackFstIso π g u).inv
 
 end AlgebraicGeometry

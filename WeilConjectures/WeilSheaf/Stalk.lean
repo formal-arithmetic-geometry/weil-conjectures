@@ -70,6 +70,8 @@ function is computed by the local Frobenius at the closed points,
   function at an `𝔽_{qⁿ}`-point over a closed point `x` is `Tr(Fₓ^{n / e_x})`.
 - `AlgebraicGeometry.WeilSheaf.globalSectionsToStalkObj_frobenius`: restriction of global
   sections to a stalk intertwines the two Frobenii.
+- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.upperStar`: pullback preserves punctual
+  purity (blueprint: `lem-tw-punctual-rescaling`).
 
 ## Implementation notes
 
@@ -204,6 +206,18 @@ theorem exists_nontrivial_stalk_of_not_isZero
     ∃ x : X.finitePoints, Nontrivial (F.stalk x).carrier :=
   sorry
 
+variable {F} in
+/-- Isomorphic Weil sheaves have the same support: an isomorphism induces isomorphisms of the
+geometric stalks. -/
+theorem support_congr {G : WeilSheaf k₀ l X} (e : F ≅ G) : F.support = G.support := by
+  ext x
+  let e' : (F.stalk x).carrier ≃ₗ[PadicAlgCl l] (G.stalk x).carrier :=
+    WeilCoefficients.linearEquivOfIso
+      (((Scheme.pointSmallEtale _).ulift.{u + 1}).sheafFiber.mapIso
+        ((Endofunctor.IsoAlgebra.forget _).mapIso ((ObjectProperty.ι _).mapIso e)))
+  exact ⟨fun h ↦ @Equiv.nontrivial _ _ e'.symm.toEquiv h,
+    fun h ↦ @Equiv.nontrivial _ _ e'.toEquiv h⟩
+
 /-- The trace function `t_{F,n}` of a Weil sheaf: the trace `Tr(F_x^{(n)} | F_x̄)` of the
 Frobenius relative to `𝔽_{qⁿ}` on the stalk at an `𝔽_{qⁿ}`-rational point `x`, taken at the
 geometric point over `x` for an embedding `𝔽_{qⁿ} ↪ k̄` chosen by `IsAlgClosed.lift`.
@@ -230,7 +244,7 @@ theorem traceFunction_eq_trace_frobeniusEnd_stalk_pow (n : ℕ)
 
 /-- `F` is punctually `ι`-pure of weight `w`: at every closed point `x`, every eigenvalue `α`
 of the local Frobenius `Fₓ` satisfies `|ι α| = q_x ^ (w / 2)`, with `q_x` the residue
-cardinality at `x`. -/
+cardinality at `x`. (blueprint: `def-weil-punctual-weights`) -/
 def IsPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (w : ℝ) : Prop :=
   ∀ x : X.finitePoints,
     (F.stalk x).IsPureOfWeight ι ((X ↘ Spec (CommRingCat.of k₀)).residueCard x.1) w
@@ -251,6 +265,22 @@ theorem IsPunctuallyPureOfWeight.hasWeightsAtMost {ι : PadicAlgCl l →+* ℂ}
 theorem HasWeightsAtMost.mono {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X} {w w' : ℝ}
     (h : F.HasWeightsAtMost ι w) (hww' : w ≤ w') : F.HasWeightsAtMost ι w' :=
   fun x ↦ (h x).mono (Nat.one_le_pow _ _ Nat.card_pos) hww'
+
+-- TODO(adic): needs the stalks of `φ^* F` with their local Frobenius
+/-- **Punctual purity on a closed fibre.** The pullback `φ^* F` of a sheaf punctually `ι`-pure of
+weight `w` along a morphism `φ : X' ⟶ X` of `k₀`-schemes is punctually `ι`-pure of weight `w`:
+at a closed point `z` of `X'` over `x = φ z`, with `r = [κ(z) : κ(x)]`, the local Frobenius of
+`φ^* F` at `z` is `Fₓʳ`, and `q_z = q_xʳ`.
+
+The blueprint states this for the inclusion `X_y ⟶ X` of the fibre of a morphism `X ⟶ Y` over a
+closed point `y`, with purity on `X_y` relative to `κ(y)`; since residue cardinalities do not
+depend on the base field, purity relative to `κ(y)` and relative to `k₀` agree
+(blueprint: `lem-tw-punctual-rescaling`). -/
+theorem IsPunctuallyPureOfWeight.upperStar {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
+    {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {X' : Scheme.{u}}
+    [X'.Over (Spec (CommRingCat.of k₀))] (φ : X' ⟶ X) [φ.IsOver (Spec (CommRingCat.of k₀))] :
+    ((upperStar φ).obj F).IsPunctuallyPureOfWeight ι w :=
+  sorry
 
 /-- `F` is `ι`-*real* if at every closed point `x` the stalk `F_x̄` with its local Frobenius is
 `ι`-real (`FrobeniusModule.IsReal`): the realization under `ι` of the local polynomial

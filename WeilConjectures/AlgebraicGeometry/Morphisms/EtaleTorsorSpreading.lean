@@ -43,16 +43,25 @@ Normality of `S` is spelled out as integral closedness of all the stalks, there 
 `IsNormal` predicate on schemes; qcqs-ness of `S` is `CompactSpace` together with
 `QuasiSeparatedSpace`.
 
-Two refinements of `0EZJ` are left to the prose. First, the blueprint allows an arbitrary
-finite Galois group `G`, while only the abelian case is used by, and stated for, smooth base
-change. Second, the uniqueness of the extension is not asserted. Connectedness of the torsor
-is deliberately *not* assumed: the torsors that the vanishing theorem `sk-thm-vanishing`
-spreads are those attached to an arbitrary class in `H^1`, which need not be connected.
+Stacks `0EZJ` itself, for an arbitrary finite group `G`, is recorded as
+`AlgebraicGeometry.Scheme.GaloisCover.exists_isPullback_of_genericFibre`, for Galois covers in
+the sense of `AlgebraicGeometry.Scheme.GaloisCover` (finite étale `G`-torsors, following the
+blueprint definition `def-sbc-normal-dominant-galois`). It is a classical input whose proof
+(tame ramification, purity, and extension in depth two) is not formalised here. Only the
+abelian case is used by smooth base change; it is the statement
+`AlgebraicGeometry.Scheme.EtaleTorsor.exists_isPullback_of_genericFibre` about `M`-torsors,
+deduced by viewing an `M`-torsor as a Galois cover with group `Multiplicative M`.
+
+The uniqueness of the extension is not asserted. Connectedness of the torsor is deliberately
+*not* assumed: the torsors that the vanishing theorem `sk-thm-vanishing` spreads are those
+attached to an arbitrary class in `H^1`, which need not be connected.
 
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.GaloisCover.exists_isPullback_of_genericFibre`: spreading a finite
+  étale Galois cover with group `G` (blueprint `sbc-thm-spreading-finite-etale-galois`).
 - `AlgebraicGeometry.Scheme.EtaleTorsor.exists_isPullback_of_genericFibre`: the spreading
-  statement.
+  statement for torsors under a finite abelian group (blueprint `sk-prop-input-spreading`).
 
 ## References
 
@@ -64,6 +73,42 @@ spreads are those attached to an arbitrary class in `H^1`, which need not be con
 universe u
 
 open CategoryTheory
+
+namespace AlgebraicGeometry.Scheme
+
+/-- Blueprint `sbc-thm-spreading-finite-etale-galois`: Spreading a finite étale Galois cover
+
+Let `S` be a qcqs integral normal scheme with generic point `η` and function field
+`κ(η) = S.functionField`, let `c : C ⟶ S` be a qcqs smooth morphism with geometrically
+connected fibres, and let `σ` be a section of `c`. Let `G` be a finite group whose order is
+invertible on `S`, let `Cη` be the generic fibre of `c`, given by the cartesian square
+`hCη`, and let `Z` be a finite étale Galois cover of `Cη` with group `G` carrying a
+`κ(η)`-rational point above the generic point `sη` of the section. Then there is a finite
+étale Galois cover `T` of `C` with group `G` and a `G`-equivariant morphism `ψ : Z.P ⟶ T.P`
+making `Z` the restriction of `T` to `Cη`, that is, making the square over `j : Cη ⟶ C`
+cartesian.
+
+This is [Stacks 0EZJ], recorded as a classical input. Galois covers are taken in the sense
+of `AlgebraicGeometry.Scheme.GaloisCover`, following the blueprint definition
+`def-sbc-normal-dominant-galois`: their total space need not be connected. -/
+@[stacks 0EZJ]
+theorem GaloisCover.exists_isPullback_of_genericFibre {S C : Scheme.{u}} [CompactSpace S]
+    [QuasiSeparatedSpace S] [IsIntegral S]
+    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
+    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]
+    (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)
+    (G : Type (u + 1)) [Group G] [Finite G]
+    (hG : IsUnit (Nat.card G : Γ(S, ⊤)))
+    {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)
+    (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)
+    (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _)
+    (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)
+    (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη) :
+    ∃ (T : GaloisCover G C) (ψ : Z.P ⟶ T.P), IsPullback ψ Z.π T.π j ∧
+      ∀ g : G, Z.smul g ≫ ψ = ψ ≫ T.smul g :=
+  sorry
+
+end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme.EtaleTorsor
 
@@ -98,7 +143,8 @@ Z.π        T.π
 
 cartesian, so that the restriction of `T` to the generic fibre is `Z`.
 
-This is [Stacks 0EZJ]. -/
+This is [Stacks 0EZJ]: it is the case `G = Multiplicative M` of
+`AlgebraicGeometry.Scheme.GaloisCover.exists_isPullback_of_genericFibre`. -/
 @[stacks 0EZJ]
 theorem exists_isPullback_of_genericFibre {S C : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [IsIntegral S]
@@ -113,7 +159,9 @@ theorem exists_isPullback_of_genericFibre {S C : Scheme.{u}} [CompactSpace S]
     (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)
     (Z : EtaleTorsor M Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη) :
     ∃ (T : EtaleTorsor M C) (ψ : Z.P ⟶ T.P), IsPullback ψ Z.π T.π j ∧
-      ∀ m : M, Z.vadd m ≫ ψ = ψ ≫ T.vadd m :=
-  sorry
+      ∀ m : M, Z.vadd m ≫ ψ = ψ ≫ T.vadd m := by
+  obtain ⟨T, ψ, hψ, hψM⟩ := GaloisCover.exists_isPullback_of_genericFibre hS c σ hσ
+    (Multiplicative M) hM q j hCη sη hsq hsj Z.toGaloisCover hZ
+  exact ⟨T.toEtaleTorsor, ψ, hψ, fun m ↦ hψM (.ofAdd m)⟩
 
 end AlgebraicGeometry.Scheme.EtaleTorsor

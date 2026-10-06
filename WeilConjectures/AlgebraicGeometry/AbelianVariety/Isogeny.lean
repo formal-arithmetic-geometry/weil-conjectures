@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 
@@ -30,6 +32,8 @@ Multiplication by `n` is written `𝟙 A ^ n`, the `n`-th power of the identity 
   its kernel.
 - `AlgebraicGeometry.isIsogeny_npow_id`, `AlgebraicGeometry.isogenyDegree_npow_id`:
   multiplication by `n` is an isogeny of degree `n ^ (2 * g)`.
+- `AlgebraicGeometry.finrank_npow_id`: multiplication by `n` is finite locally free of rank
+  `n ^ (2 * g)`.
 - `AlgebraicGeometry.isFinite_torsionSubgroupScheme`,
   `AlgebraicGeometry.flat_torsionSubgroupScheme`,
   `AlgebraicGeometry.finrankΓ_torsionSubgroupScheme`: `A[n]` is finite flat of order
@@ -81,20 +85,73 @@ theorem topologicalKrullDim_torsionSubgroupScheme (A : Over (Spec (.of K))) [Grp
     topologicalKrullDim (torsionSubgroupScheme A n).left = 0 :=
   sorry
 
-variable {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B] [IsAbelianVariety A]
-  [IsAbelianVariety B]
+variable {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B]
+
+/-- Translation identifies the fibres of a homomorphism `f : A ⟶ B` of group schemes with its
+kernel: for a point `x : Spec Ω ⟶ A`, the fibre of `f` over `x ≫ f` is the base change
+`ker f ×_K Spec Ω`, embedded into `A` by `(k, t) ↦ k + x t`. -/
+theorem exists_isPullback_kernel (f : A ⟶ B) [IsMonHom f] {Ω : CommRingCat.{u}}
+    (x : Spec Ω ⟶ A.left) :
+    ∃ φ : pullback (GrpObj.ker f).hom (x ≫ A.hom) ⟶ A.left,
+      IsPullback φ (pullback.snd (GrpObj.ker f).hom (x ≫ A.hom)) f.left (x ≫ f.left) :=
+  ⟨_, (GrpObj.isPullback_ker_tensor f (Over.homMk x rfl : Over.mk (x ≫ A.hom) ⟶ A)).map
+    (Over.forget _)⟩
+
+/-- The fibres of an isogeny are finite: the fibre over `f a` is the image of the finite scheme
+`ker f ×_K Spec κ(a)` under translation by the `κ(a)`-point `a`. -/
+theorem IsIsogeny.finite_preimage_singleton (f : A ⟶ B) [IsIsogeny f] (y : B.left) :
+    (f.left ⁻¹' {y}).Finite := by
+  obtain ⟨a, rfl⟩ := f.left.surjective y
+  let x := A.left.fromSpecResidueField a
+  let z : Spec (A.left.residueField a) := IsLocalRing.closedPoint _
+  obtain ⟨φ, H⟩ := exists_isPullback_kernel f x
+  have : Finite (pullback (C := Scheme) (GrpObj.ker f).hom (x ≫ A.hom)) := by
+    refine Set.finite_univ_iff.mp (((pullback.snd (GrpObj.ker f).hom
+      (x ≫ A.hom)).finite_preimage_singleton z).subset fun w _ ↦ ?_)
+    exact Subsingleton.elim (α := Spec (A.left.residueField a)) _ _
+  refine (Set.finite_range φ).subset fun a' (ha' : f.left a' = f.left a) ↦ ?_
+  obtain ⟨w, hw, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := f.left) (g := x ≫ f.left)
+    a' z (by rw [ha', Scheme.Hom.comp_apply, Scheme.fromSpecResidueField_apply])
+  exact ⟨H.isoPullback.inv w, by rw [← Scheme.Hom.comp_apply, H.isoPullback_inv_fst, hw]⟩
+
+/-- All fibres of an isogeny `f` have degree the order of its kernel: by
+`AlgebraicGeometry.exists_isPullback_kernel` the fibre over `f a`, base changed to `κ(a)`, is
+the kernel base changed to `κ(a)`, and the fibre degree is invariant under base change. -/
+theorem IsIsogeny.fiberDegree_eq (f : A ⟶ B) [IsIsogeny f] [IsAffineHom f.left] (y : B.left) :
+    f.left.fiberDegree y = isogenyDegree f := by
+  obtain ⟨a, rfl⟩ := f.left.surjective y
+  let x := A.left.fromSpecResidueField a
+  let z : Spec (A.left.residueField a) := IsLocalRing.closedPoint _
+  obtain ⟨φ, H⟩ := exists_isPullback_kernel f x
+  have hz : (x ≫ f.left) z = f.left a := by
+    rw [Scheme.Hom.comp_apply, Scheme.fromSpecResidueField_apply]
+  rw [← hz, ← Scheme.Hom.fiberDegree_of_isPullback f.left H z,
+    Scheme.Hom.fiberDegree_of_isPullback (GrpObj.ker f).hom (.of_hasPullback _ _) z,
+    fiberDegree_eq_finrankΓ]
+  rfl
+
+variable [IsAbelianVariety A] [IsAbelianVariety B]
 
 /-- Blueprint `sk-prop-av-isogeny-degree`: The degree of an isogeny is the degree of the kernel.
 
-An isogeny of abelian varieties is a finite morphism. -/
-theorem IsIsogeny.isFinite (f : A ⟶ B) [IsIsogeny f] : IsFinite f.left :=
-  sorry
+An isogeny of abelian varieties is a finite morphism: it is proper, `A` being proper, and has
+finite fibres (`AlgebraicGeometry.IsIsogeny.finite_preimage_singleton`). -/
+theorem IsIsogeny.isFinite (f : A ⟶ B) [IsIsogeny f] : IsFinite f.left := by
+  have : IsProper (f.left ≫ B.hom) := by rw [Over.w f]; infer_instance
+  have : IsProper f.left := .of_comp f.left B.hom
+  have := LocallyQuasiFinite.of_finite_preimage_singleton f.left
+    (IsIsogeny.finite_preimage_singleton f)
+  exact IsFinite.of_isProper_of_locallyQuasiFinite f.left
 
 /-- Blueprint `sk-prop-av-isogeny-degree`: The degree of an isogeny is the degree of the kernel.
 
-An isogeny of abelian varieties is a flat morphism. -/
-theorem IsIsogeny.flat (f : A ⟶ B) [IsIsogeny f] : Flat f.left :=
-  sorry
+An isogeny of abelian varieties is a flat morphism: it is finite onto the reduced scheme `B`
+with all fibres of the same degree (`AlgebraicGeometry.Scheme.Hom.flat_of_fiberDegree_eq`). -/
+theorem IsIsogeny.flat (f : A ⟶ B) [IsIsogeny f] : Flat f.left := by
+  have := IsIsogeny.isFinite f
+  have : IsReduced B.left := GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian B.hom
+  have := LocallyOfFiniteType.isLocallyNoetherian B.hom
+  exact f.left.flat_of_fiberDegree_eq (IsIsogeny.fiberDegree_eq f)
 
 /-- Blueprint `sk-prop-av-isogeny-degree`: The degree of an isogeny is the degree of the kernel.
 
@@ -102,15 +159,24 @@ For an isogeny `f : A ⟶ B` of abelian varieties with kernel of order `d`, the 
 locally free of rank `d`: the degree of the finite flat morphism `f` equals the order of its
 kernel. -/
 theorem IsIsogeny.finrank_eq (f : A ⟶ B) [IsIsogeny f] (y : B.left) :
-    f.left.finrank y = isogenyDegree f :=
-  sorry
+    f.left.finrank y = isogenyDegree f := by
+  have := IsIsogeny.isFinite f
+  have : IsReduced B.left := GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian B.hom
+  have := LocallyOfFiniteType.isLocallyNoetherian B.hom
+  exact f.left.finrank_eq_of_fiberDegree_eq (IsIsogeny.fiberDegree_eq f) y
 
 /-- Blueprint `sk-prop-av-isogeny`: The multiplication-by-`n` isogeny.
 
 Let `A` be an abelian variety over `K` and let `0 < n`. Then `[n] : A ⟶ A` is a finite flat
-surjective homomorphism, hence an isogeny. -/
+surjective homomorphism, hence an isogeny.
+
+This is also blueprint `lem-sc-isogeny-facts`. Multiplication by `n` is a homomorphism since `A`
+is commutative (`AlgebraicGeometry.IsAbelianVariety.isCommMonObj`), it is surjective by
+`AlgebraicGeometry.surjective_npow_id`, and its kernel `A[n]` is finite by
+`AlgebraicGeometry.isFinite_torsionSubgroupScheme`. -/
 theorem isIsogeny_npow_id (n : ℕ) (hn : 0 < n) : IsIsogeny (𝟙 A ^ n) :=
-  sorry
+  have := surjective_npow_id A n hn
+  { isFinite_ker := isFinite_torsionSubgroupScheme A n hn }
 
 /-- Blueprint `sk-prop-av-isogeny`: The multiplication-by-`n` isogeny.
 
@@ -131,14 +197,34 @@ theorem flat_torsionSubgroupScheme (n : ℕ) (hn : 0 < n) :
 The `n`-torsion of an abelian variety of dimension `g` has order `n ^ (2 * g)` for `0 < n`. -/
 theorem finrankΓ_torsionSubgroupScheme (n : ℕ) (hn : 0 < n) :
     (torsionSubgroupScheme A n).hom.finrankΓ = n ^ (2 * IsAbelianVariety.dim A) :=
-  sorry
+  isogenyDegree_npow_id n hn
+
+/-- Blueprint `lem-sc-mult-n-finite-flat`: Multiplication by `n` is finite flat of degree
+`n ^ (2 * g)`.
+
+Let `A` be an abelian variety of dimension `g` over `K` and let `0 < n`. Then `[n] : A ⟶ A` is
+finite locally free of rank `n ^ (2 * g)`. Finiteness and flatness are
+`AlgebraicGeometry.isFinite_npow_id` and `AlgebraicGeometry.IsIsogeny.flat`, and the kernel
+`A[n]` has order `n ^ (2 * g)` by `AlgebraicGeometry.finrankΓ_torsionSubgroupScheme`. -/
+theorem finrank_npow_id (n : ℕ) (hn : 0 < n) (y : A.left) :
+    (𝟙 A ^ n).left.finrank y = n ^ (2 * IsAbelianVariety.dim A) := by
+  have := isIsogeny_npow_id (A := A) n hn
+  rw [IsIsogeny.finrank_eq, isogenyDegree_npow_id n hn]
 
 /-- Blueprint `sk-prop-av-divisible`: Surjectivity of multiplication by `n` on points.
 
 Let `A` be an abelian variety over an algebraically closed field `K` and `0 < n`. Then
 `[n] : A(K) ⟶ A(K)` is surjective: `A(K)` is a divisible abelian group. -/
 theorem surjective_npow_points [IsAlgClosed K] (n : ℕ) (hn : 0 < n) :
-    Function.Surjective fun a : 𝟙_ (Over (Spec (.of K))) ⟶ A ↦ a ^ n :=
-  sorry
+    Function.Surjective fun a : 𝟙_ (Over (Spec (.of K))) ⟶ A ↦ a ^ n := by
+  have := isIsogeny_npow_id (A := A) n hn
+  have := IsIsogeny.isFinite (𝟙 A ^ n)
+  intro b
+  obtain ⟨x, hx⟩ := exists_comp_eq_of_isFinite_of_surjective (𝟙 A ^ n).left b.left
+  refine ⟨Over.homMk (U := 𝟙_ _) (V := A) x ?_, ?_⟩
+  · rw [← Over.w (𝟙 A ^ n), reassoc_of% hx, Over.w b]
+  · dsimp only
+    rw [← Category.comp_id (Over.homMk _ _), ← comp_pow]
+    exact Over.OverMorphism.ext hx
 
 end AlgebraicGeometry

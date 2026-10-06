@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import WeilConjectures.Mathlib.RingTheory.Etale.QuasiFinite
 
 /-!
 # The generic point as a morphism from the spectrum of the function field
@@ -21,7 +22,10 @@ integral scheme `X` it is dominant and stays scheme-theoretically dominant after
 change: for a flat `U ⟶ X`, functions on `U` are determined by their restriction to the
 generic fibre `U ×_X Spec k(X)`. It also shows that the sections of an integral scheme with
 integrally closed local rings over a nonempty open form an integrally closed domain
-(`AlgebraicGeometry.Scheme.isIntegrallyClosed_of_isIntegrallyClosed_stalk`).
+(`AlgebraicGeometry.Scheme.isIntegrallyClosed_of_isIntegrallyClosed_stalk`), and that if moreover
+the function field is separably closed then all local rings are strictly henselian
+(`AlgebraicGeometry.Scheme.henselianLocalRing_stalk_of_isSepClosed_functionField`,
+`AlgebraicGeometry.Scheme.isSepClosed_residueField_of_isSepClosed_functionField`).
 -/
 
 @[expose] public section
@@ -74,6 +78,23 @@ theorem isIntegrallyClosed_of_isIntegrallyClosed_stalk {X : Scheme.{u}} [IsInteg
     rw [RingHom.algebraMap_toAlgebra, ← ht y, ← hs y]
     exact (X.presheaf.germ_res_apply _ _ _ s).symm
   exact .of_isIntegrallyClosedIn Γ(X, U) X.functionField
+
+/-- The stalks of an integral normal scheme with separably closed function field are henselian.
+-/
+theorem henselianLocalRing_stalk_of_isSepClosed_functionField {S : Scheme.{u}}
+    [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
+    [IsSepClosed S.functionField] (x : S) : HenselianLocalRing (S.presheaf.stalk x) :=
+  have := hS x
+  HenselianLocalRing.of_isSepClosed_fractionRing S.functionField
+
+/-- The residue fields of an integral normal scheme with separably closed function field are
+separably closed. -/
+theorem isSepClosed_residueField_of_isSepClosed_functionField {S : Scheme.{u}}
+    [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
+    [IsSepClosed S.functionField] (x : S) : IsSepClosed (S.residueField x) :=
+  have := hS x
+  IsLocalRing.isSepClosed_residueField_of_isSepClosed_fractionRing S.functionField
+
 variable (X : Scheme.{u}) [IsIntegral X]
 
 /-- The generic point `Spec k(X) ⟶ X` of an integral scheme is dominant: its image contains

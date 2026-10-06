@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.NumberTheory.Padics.RingHoms
+public import Mathlib.RingTheory.Localization.BaseChange
 public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
@@ -29,6 +30,14 @@ Tate module* is the `ℚ_[ℓ]`-vector space `V_ℓ M = ℚ_[ℓ] ⊗_{ℤ_[ℓ]
 - `AddCommGroup.tateModule`: the integral Tate module `T_ℓ M`.
 - `AddCommGroup.tateModule.instModule`: its `ℤ_[ℓ]`-module structure.
 - `AddCommGroup.rationalTateModule`: the rational Tate module `V_ℓ M`.
+- `AddCommGroup.tateModule.map`, `AddCommGroup.rationalTateModule.map`: the maps induced by a
+  homomorphism `M →+ N`.
+
+## Main statements
+
+- `AddCommGroup.tateModule.eq_zero_of_pow_zsmul_eq_zero`: `T_ℓ M` has no `ℓ`-power torsion; it
+  is a torsion-free `ℤ_[ℓ]`-module.
+- `AddCommGroup.rationalTateModule.injective_one_tmul`: `T_ℓ M → V_ℓ M` is injective.
 -/
 
 @[expose] public section
@@ -144,6 +153,53 @@ noncomputable instance instModule : Module ℤ_[ℓ] (tateModule ℓ M) where
     rw [coe_smul_apply, appr_zsmul_coe_eq t 0 (x := 0) (by rw [Int.cast_zero, map_zero]), zero_smul]
     simp
 
+omit [Fact ℓ.Prime] in
+/-- The coordinates of an element of the Tate module are related by `ℓ ^ k • t (n + k) = t n`. -/
+theorem pow_zsmul_coe_add (t : tateModule ℓ M) (n k : ℕ) :
+    (ℓ : ℤ) ^ k • (t : ∀ _ : ℕ, M) (n + k) = (t : ∀ _ : ℕ, M) n := by
+  induction k with
+  | zero => simp
+  | succ k ih => rw [pow_succ', mul_smul, smul_comm, ← add_assoc, zsmul_coe_succ, ih]
+
+omit [Fact ℓ.Prime] in
+/-- Part of blueprint `lem-tate-module-no-fixed`: the Tate module has no `ℓ`-power torsion. -/
+theorem eq_zero_of_pow_zsmul_eq_zero {t : tateModule ℓ M} {k : ℕ}
+    (h : (ℓ : ℤ) ^ k • t = 0) : t = 0 :=
+  Subtype.ext <| funext fun n ↦ by
+    rw [← pow_zsmul_coe_add t n k]
+    exact congr_fun (congr_arg Subtype.val h) (n + k)
+
+/-- Part of blueprint `lem-tate-module-no-fixed`: the Tate module is a torsion-free
+`ℤ_[ℓ]`-module, since a nonzero `ℓ`-adic integer is a unit times a power of `ℓ` and the Tate
+module has no `ℓ`-power torsion. -/
+instance : NoZeroSMulDivisors ℤ_[ℓ] (tateModule ℓ M) where
+  eq_zero_or_eq_zero_of_smul_eq_zero {a t} h := by
+    by_cases ha : a = 0
+    · exact Or.inl ha
+    refine Or.inr (eq_zero_of_pow_zsmul_eq_zero (k := a.valuation) ?_)
+    have hspec := PadicInt.unitCoeff_spec ha
+    set u := PadicInt.unitCoeff ha
+    have h2 : (u : ℤ_[ℓ]) • ((ℓ : ℤ_[ℓ]) ^ a.valuation • t) = 0 := by rw [smul_smul, ← hspec, h]
+    have h3 := congr_arg ((u⁻¹ : ℤ_[ℓ]ˣ) • ·) h2
+    simp only [smul_zero, ← Units.smul_def, inv_smul_smul] at h3
+    rw [← Int.cast_smul_eq_zsmul ℤ_[ℓ]]
+    exact_mod_cast h3
+
+variable {N : Type*} [AddCommGroup N]
+
+/-- The map of Tate modules `T_ℓ M → T_ℓ N` induced by a homomorphism `M →+ N`, acting
+coordinatewise. -/
+noncomputable def map (f : M →+ N) : tateModule ℓ M →ₗ[ℤ_[ℓ]] tateModule ℓ N where
+  toFun t := ⟨fun n ↦ f ((t : ∀ _ : ℕ, M) n), fun n ↦ by rw [← map_zsmul, pow_zsmul_coe, map_zero],
+    fun n ↦ by rw [← map_zsmul, zsmul_coe_succ]⟩
+  map_add' s t := Subtype.ext <| funext fun n ↦ by simp
+  map_smul' a t := Subtype.ext <| funext fun n ↦ by simp [coe_smul_apply]
+
+@[simp]
+theorem coe_map_apply (f : M →+ N) (t : tateModule ℓ M) (n : ℕ) :
+    ((map f t : tateModule ℓ N) : ∀ _ : ℕ, N) n = f ((t : ∀ _ : ℕ, M) n) :=
+  rfl
+
 end tateModule
 
 /-- Blueprint `sk-d-ab-tate`: Integral and rational Tate modules.
@@ -159,6 +215,26 @@ noncomputable instance : AddCommGroup (rationalTateModule ℓ M) :=
 
 noncomputable instance : Module ℚ_[ℓ] (rationalTateModule ℓ M) :=
   inferInstanceAs (Module ℚ_[ℓ] (ℚ_[ℓ] ⊗[ℤ_[ℓ]] (tateModule ℓ M)))
+
+/-- Part of blueprint `lem-tate-module-no-fixed`: since `T_ℓ M` is a torsion-free
+`ℤ_[ℓ]`-module, the natural map `T_ℓ M → V_ℓ M = ℚ_[ℓ] ⊗ T_ℓ M`, `t ↦ 1 ⊗ t`, is injective. -/
+theorem injective_one_tmul :
+    Function.Injective fun t : tateModule ℓ M ↦ (1 : ℚ_[ℓ]) ⊗ₜ[ℤ_[ℓ]] t := by
+  refine (injective_iff_map_eq_zero (TensorProduct.mk ℤ_[ℓ] ℚ_[ℓ] (tateModule ℓ M) 1)).mpr
+    fun t ht ↦ ?_
+  obtain ⟨c, hc⟩ := (IsLocalizedModule.eq_zero_iff (nonZeroDivisors ℤ_[ℓ]) _).mp ht
+  exact (smul_eq_zero.mp hc).resolve_left (nonZeroDivisors.ne_zero c.2)
+
+variable {ℓ M} {N : Type*} [AddCommGroup N]
+
+/-- The map of rational Tate modules `V_ℓ M → V_ℓ N` induced by a homomorphism `M →+ N`. -/
+noncomputable def map (f : M →+ N) : rationalTateModule ℓ M →ₗ[ℚ_[ℓ]] rationalTateModule ℓ N :=
+  (tateModule.map f).baseChange ℚ_[ℓ]
+
+theorem map_tmul (f : M →+ N) (a : ℚ_[ℓ]) (t : tateModule ℓ M) :
+    map f (a ⊗ₜ[ℤ_[ℓ]] t : ℚ_[ℓ] ⊗[ℤ_[ℓ]] tateModule ℓ M) =
+      (a ⊗ₜ[ℤ_[ℓ]] tateModule.map f t : ℚ_[ℓ] ⊗[ℤ_[ℓ]] tateModule ℓ N) :=
+  rfl
 
 end rationalTateModule
 

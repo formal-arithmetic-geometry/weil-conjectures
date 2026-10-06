@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.ZetaFunction
 
 /-!
@@ -142,8 +143,8 @@ algebraically closed, so the characteristic polynomial of `F_x` splits as `∏_�
 eigenvalues the inverse roots of the local polynomial. -/
 theorem localPolynomial_eq_prod_localEigenvalues (x : C.finitePoints) :
     W.localPolynomial l ρ x =
-      ((W.localEigenvalues l ρ x).map fun α ↦ 1 - Polynomial.C α * Polynomial.X).prod := by
-  sorry
+      ((W.localEigenvalues l ρ x).map fun α ↦ 1 - Polynomial.C α * Polynomial.X).prod :=
+  LinearMap.charpolyRev_eq_prod_roots _
 
 end WeilGroup
 

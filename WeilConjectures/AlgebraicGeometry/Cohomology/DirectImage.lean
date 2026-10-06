@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Noetherian
@@ -16,8 +17,10 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Topology.LocallyConstant.Basic
 public import Mathlib.Topology.Semicontinuity.Defs
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-!
 # Higher direct images, and cohomology and base change
@@ -157,6 +160,20 @@ def IsFlatOver (ℱ : X.Modules) (f : X ⟶ T) : Prop :=
     letI : Module Γ(T, V.1) Γ(ℱ, U.1) := Module.compHom _ (f.appLE V.1 U.1 e).hom
     Module.Flat Γ(T, V.1) Γ(ℱ, U.1)
 
+/-- **An invertible module is flat over the base of a flat morphism.** If `f : X ⟶ T` is flat
+and `ℱ` is an invertible `𝒪_X`-module, then `ℱ` is flat over `T`: on an affine open `U` the
+sections `Γ(ℱ, U)` form an invertible, hence flat, `Γ(X, U)`-module, and `Γ(X, U)` is flat over
+`Γ(T, V)` by flatness of `f`. -/
+theorem isFlatOver_of_isInvertible (f : X ⟶ T) [Flat f] (ℱ : X.Modules)
+    [ℱ.IsInvertible] : ℱ.IsFlatOver f := by
+  intro V U e
+  let := (f.appLE V.1 U.1 e).hom.toAlgebra
+  have : Module.Flat Γ(T, V.1) Γ(X, U.1) := HasRingHomProperty.appLE @Flat f ‹_› V U e
+  have := flat_sections_of_isInvertible ℱ U.2
+  let : Module Γ(T, V.1) Γ(ℱ, U.1) := Module.compHom _ (f.appLE V.1 U.1 e).hom
+  have : IsScalarTower Γ(T, V.1) Γ(X, U.1) Γ(ℱ, U.1) := ⟨fun a b m ↦ mul_smul _ _ _⟩
+  exact Module.Flat.trans Γ(T, V.1) Γ(X, U.1) Γ(ℱ, U.1)
+
 /-- The `q`-th **fibre dimension** `dim_{κ(t)} H^q(X_t, ℱ_t)` of an `𝒪_X`-module `ℱ` along a
 morphism `f : X ⟶ T` at a point `t` of `T`: the fibre `X_t = f.fiber t` is a scheme over the
 residue field `κ(t) = T.residueField t`, the restriction `ℱ_t` is the pullback of `ℱ` along
@@ -180,6 +197,61 @@ def perfectLocusOfRank (ℱ : X.Modules) (f : X ⟶ T) (i r : ℕ) : Set T :=
 `ℱ` along `f : X ⟶ T` at a point `t` of `T`. -/
 noncomputable def eulerCharFiber (ℱ : X.Modules) (f : X ⟶ T) (t : T) : ℤ :=
   ∑ᶠ q : ℕ, (-1) ^ q * (ℱ.hFiber f q t : ℤ)
+
+/-- The fibre dimensions only depend on the isomorphism class of the module. -/
+lemma hFiber_congr {ℱ 𝒢 : X.Modules} (e : ℱ ≅ 𝒢) (f : X ⟶ T) (q : ℕ) (t : T) :
+    ℱ.hFiber f q t = 𝒢.hFiber f q t :=
+  letI := f.fiberOverSpecResidueField t
+  finrankH_congr _ ((Modules.pullback (f.fiberι t)).mapIso e) q
+
+/-- The fibre Euler characteristic only depends on the isomorphism class of the module. -/
+lemma eulerCharFiber_congr {ℱ 𝒢 : X.Modules} (e : ℱ ≅ 𝒢) (f : X ⟶ T) :
+    ℱ.eulerCharFiber f = 𝒢.eulerCharFiber f := by
+  ext t
+  simp only [eulerCharFiber, hFiber_congr e]
+
+/-- **The fibre dimension over a field.** For a scheme `X` over a field `K`, through
+`f : X ⟶ Spec K`, and a quasi-coherent `𝒪_X`-module `ℱ`, the fibre dimension of `ℱ` at the
+unique point of `Spec K` is `dim_K H^q(X, ℱ)`: the fibre of `f` is `X` itself, base changed along
+the isomorphism `Spec κ(s) ≅ Spec K`. -/
+theorem hFiber_eq_finrankH {K : Type u} [Field K] (f : X ⟶ Spec (.of K)) (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) (s : Spec (.of K)) :
+    ℱ.hFiber f q s = letI : X.Over (Spec (.of K)) := ⟨f⟩; ℱ.finrankH K q := by
+  let φ := (Spec (.of K)).fromSpecResidueField s
+  have : IsClosedImmersion φ := isClosed_singleton_iff_isClosedImmersion.1 (by
+    rw [← (Set.subsingleton_of_subsingleton).eq_singleton_of_mem (Set.mem_univ s)]
+    exact isClosed_univ)
+  have : Surjective φ := ⟨fun t ↦ ⟨IsLocalRing.closedPoint _, Subsingleton.elim _ _⟩⟩
+  have : IsIso φ := isIso_of_isClosedImmersion_of_surjective φ
+  have : IsIso (f.fiberι s) := by unfold Scheme.Hom.fiberι; infer_instance
+  have : IsIso (Spec.preimage φ) := by
+    have : IsIso (Scheme.Spec.map (Spec.preimage φ).op) := by
+      change IsIso (Spec.map (Spec.preimage φ))
+      rw [Spec.map_preimage]
+      infer_instance
+    have := isIso_of_reflects_iso (Spec.preimage φ).op Scheme.Spec
+    exact isIso_of_op _
+  have hfac : f.fiberι s ≫ f = f.fiberToSpecResidueField s ≫ Spec.map (Spec.preimage φ) := by
+    rw [Spec.map_preimage]
+    exact pullback.condition
+  let : X.Over (Spec (.of K)) := ⟨f⟩
+  let : (f.fiber s).Over (Spec (.of K)) :=
+    ⟨f.fiberToSpecResidueField s ≫ Spec.map (Spec.preimage φ)⟩
+  have : (inv (f.fiberι s)).IsOver (Spec (.of K)) := ⟨by
+    change inv _ ≫ (_ ≫ _) = f
+    rw [← hfac, IsIso.inv_hom_id_assoc]⟩
+  -- change the base field from `κ(s)` to `K`, then transport along `f.fiberι s`
+  refine (finrankH_eq_of_comp_specMap (k := K) (L := (Spec (.of K)).residueField s)
+    (Spec.preimage φ) (f.fiberToSpecResidueField s) _ q).symm.trans ?_
+  rw [← finrankH_pushforward_of_isAffineHom K (inv (f.fiberι s)) ℱ q]
+  exact finrankH_congr K ((pullbackIsoPushforwardInv (f.fiberι s)).app ℱ) q
+
+/-- **The fibre Euler characteristic over a field** is the Euler characteristic, in the
+situation of `AlgebraicGeometry.Scheme.Modules.hFiber_eq_finrankH`. -/
+theorem eulerCharFiber_eq_eulerChar {K : Type u} [Field K] (f : X ⟶ Spec (.of K))
+    (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (s : Spec (.of K)) :
+    ℱ.eulerCharFiber f s = letI : X.Over (Spec (.of K)) := ⟨f⟩; ℱ.eulerChar K := by
+  simp only [eulerCharFiber, eulerChar, hFiber_eq_finrankH f ℱ _ s]
 
 @[simp]
 theorem mem_perfectLocus (ℱ : X.Modules) (f : X ⟶ T) (i : ℕ) (t : T) :
@@ -344,6 +416,23 @@ theorem exists_isFiniteFreeComplex_higherDirectImage (hℱ : ℱ.IsFlatOver f) (
           (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) :=
   sorry
 
+/-- **Finiteness of the cohomology of a proper morphism over a Noetherian affine base.** With
+`f : X ⟶ T` proper, `T` affine with Noetherian ring of global sections `Γ(T, ⊤)` and `ℱ` a coherent
+`𝒪_X`-module, the global sections `Γ(T, R^q f_* ℱ) = H^q(X, ℱ)` of the higher direct image form a
+finite `Γ(T, ⊤)`-module for every `q` [Stacks, Tag 02O6], [EGA III₁, 3.2.1].
+
+This is the affine clause of the blueprint lemma `lem-pc-coherent-hi`; for a general proper `f`
+the blueprint discharges it by the cited classical input (Chow's lemma and the projective case,
+Stacks 02O5/02O6). It is the only input to
+`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage` beyond the formal
+properties of the higher direct images.
+
+(blueprint: `lem-pc-coherent-hi`) -/
+theorem finite_sections_higherDirectImage [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
+    Module.Finite Γ(T, ⊤) Γ((higherDirectImage f q).obj ℱ, ⊤) :=
+  sorry
+
 /-- **Coherence of the higher direct images over a locally Noetherian base.** With
 `f : X ⟶ T` proper, `T` locally Noetherian and `ℱ` a coherent `𝒪_X`-module, the higher direct
 image `R^q f_* ℱ` is a coherent `𝒪_T`-module for every `q` [EGA III₁, 3.2.1],
@@ -363,8 +452,40 @@ killed by `V` and infinite-dimensional over `k`, hence not of finite type over `
 (blueprint: `sk-thm-picard-coherence`) -/
 theorem isFinitePresentation_higherDirectImage [IsLocallyNoetherian T]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
-    ((higherDirectImage f q).obj ℱ).IsFinitePresentation :=
-  sorry
+    ((higherDirectImage f q).obj ℱ).IsFinitePresentation := by
+  have hP (V : T.Opens) (hV : IsAffineOpen V) :
+      ∃ P : (((higherDirectImage f q).obj ℱ).restrict hV.fromSpec).Presentation, P.IsFinite := by
+    have := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
+    have : IsNoetherianRing Γ(Spec Γ(T, V), ⊤) :=
+      isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso Γ(T, V)).commRingCatIsoToRingEquiv.symm
+    have := isGrothendieckAbelian (Limits.pullback f hV.fromSpec)
+    obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ hV.fromSpec _ _
+      (IsPullback.of_hasPullback f hV.fromSpec) q
+    have : ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ).IsFinitePresentation :=
+      (SheafOfModules.isFinitePresentation (Limits.pullback f hV.fromSpec).ringCatSheaf).prop_of_iso
+        ((restrictFunctorIsoPullback _).app ℱ) (isFinitePresentation_restrictFunctor _ ℱ)
+    have : ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ).IsQuasicoherent :=
+      (SheafOfModules.isQuasicoherent (Limits.pullback f hV.fromSpec).ringCatSheaf).prop_of_iso
+        ((restrictFunctorIsoPullback _).app ℱ) (isQuasicoherent_restrictFunctor _ ℱ)
+    have := finite_sections_higherDirectImage (pullback.snd f hV.fromSpec)
+      ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ) q
+    let φ : Γ((higherDirectImage (pullback.snd f hV.fromSpec) q).obj
+        ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ), ⊤) →ₗ[Γ(Spec Γ(T, V), ⊤)]
+        Γ(((higherDirectImage f q).obj ℱ).restrict hV.fromSpec, ⊤) :=
+      { toFun := e.hom.app ⊤, map_add' := map_add _, map_smul' := Hom.app_smul e.hom }
+    have : Module.Finite Γ(Spec Γ(T, V), ⊤)
+        Γ(((higherDirectImage f q).obj ℱ).restrict hV.fromSpec, ⊤) :=
+      Module.Finite.of_surjective φ (ConcreteCategory.bijective_of_isIso (e.hom.app ⊤)).2
+    have := finite_sections_top_of_finite
+      (((higherDirectImage f q).obj ℱ).restrict hV.fromSpec)
+    have := isQuasicoherent_higherDirectImage f ℱ q
+    exact exists_presentation_isFinite _
+  have (V : T.affineOpens) : IsOpenImmersion (IsAffineOpen.fromSpec (U := V.1) V.2) :=
+    IsAffineOpen.isOpenImmersion_fromSpec V.2
+  choose P _ using fun V : T.affineOpens ↦ hP V.1 V.2
+  refine isFinitePresentation_of_iSup_opensRange_eq_top _ _ ?_ P
+  exact (iSup_congr fun V ↦ IsAffineOpen.opensRange_fromSpec V.2).trans
+    (iSup_affineOpens_eq_top T)
 
 /-- **Semicontinuity of the fibre dimension.** With `f : X ⟶ T` proper of finite presentation
 and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the fibre dimension
@@ -433,6 +554,13 @@ theorem hFiber_pullback_of_isPullback {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : 
     (f' : X' ⟶ T') (sq : IsPullback g' f' f g) (q : ℕ) (t' : T') :
     ((Modules.pullback g').obj ℱ).hFiber f' q t' = ℱ.hFiber f q (g.base t') :=
   sorry
+
+/-- **The fibre Euler characteristic is invariant under base change**, in the situation of
+`AlgebraicGeometry.Scheme.Modules.hFiber_pullback_of_isPullback`. -/
+theorem eulerCharFiber_pullback_of_isPullback {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X)
+    (f' : X' ⟶ T') (sq : IsPullback g' f' f g) (t' : T') :
+    ((Modules.pullback g').obj ℱ).eulerCharFiber f' t' = ℱ.eulerCharFiber f (g.base t') := by
+  simp only [eulerCharFiber, hFiber_pullback_of_isPullback f ℱ g g' f' sq]
 
 /-- **The fibre Euler characteristic is locally constant.** With `f : X ⟶ T` proper of finite
 presentation and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the Euler

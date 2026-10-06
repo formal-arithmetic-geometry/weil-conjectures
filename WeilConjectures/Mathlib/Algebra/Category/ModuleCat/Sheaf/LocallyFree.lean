@@ -250,6 +250,23 @@ theorem isInvertible_of_forall_over_unit {M : SheafOfModules.{u} R} {I : Type u�
 
 end
 
+section
+
+variable [∀ X, HasSheafify (J.over X) AddCommGrpCat.{u}]
+  [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+
+/-- A finite locally free sheaf of modules is of finite presentation: locally it is free on
+finitely many generators, with no relations. -/
+instance (priority := 100) IsFiniteLocallyFree.isFinitePresentation (M : SheafOfModules.{u} R)
+    [h : M.IsFiniteLocallyFree] : M.IsFinitePresentation := by
+  obtain ⟨q, hq, hf⟩ := h.exists_localGeneratorsData
+  refine ⟨q.quasiCoherentData, ⟨fun i ↦ ?_⟩⟩
+  have := hf.isFiniteType i
+  exact { isFiniteType_generators := this
+          isFiniteType_relations := ⟨inferInstanceAs (Finite (ULift Empty))⟩ }
+
+end
+
 end SheafOfModules
 
 end

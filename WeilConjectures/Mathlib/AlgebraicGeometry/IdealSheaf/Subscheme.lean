@@ -62,6 +62,12 @@ in `X*` is `AlgebraicGeometry.Scheme.Hom.ker_toImage` transported along that ide
 The inclusion `I.subschemeι` is a closed immersion, hence affine, so `V(I)` is quasi-compact
 (resp. quasi-separated) as soon as the ambient scheme is.
 
+## The reduced induced subscheme structure
+
+The subscheme cut out by the vanishing ideal of a closed subset `Z` is reduced: on an affine open
+`U` it is `Spec (Γ(X, U) ⧸ I)` for a radical ideal `I`
+(`AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme_vanishingIdeal`).
+
 ## The closed subscheme cut out by global sections
 
 The closed subscheme `V(s)` cut out by a set `s` of global sections is the subscheme of the
@@ -73,6 +79,7 @@ complement of the basic open `X_f` when `s = {f}`.
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeι_specMap_fromSpec`
+- `AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme_vanishingIdeal`
 - `AlgebraicGeometry.Scheme.zeroLocusSubscheme` and its closed immersion
   `AlgebraicGeometry.Scheme.zeroLocusSubschemeι`, with
   `AlgebraicGeometry.Scheme.range_zeroLocusSubschemeι`
@@ -125,6 +132,16 @@ instance compactSpace_subscheme [CompactSpace X] : CompactSpace I.subscheme :=
 instance quasiSeparatedSpace_subscheme [QuasiSeparatedSpace X] :
     QuasiSeparatedSpace I.subscheme :=
   quasiSeparatedSpace_of_quasiSeparated I.subschemeι
+
+/-- The subscheme cut out by the vanishing ideal of a closed subset is reduced: this is the
+reduced induced subscheme structure on the closed subset. -/
+instance isReduced_subscheme_vanishingIdeal (Z : TopologicalSpace.Closeds X) :
+    IsReduced (vanishingIdeal Z).subscheme := by
+  have (U : X.affineOpens) : IsReduced ((vanishingIdeal Z).subschemeCover.openCover.X U) := by
+    have : _root_.IsReduced (Γ(X, U) ⧸ (vanishingIdeal Z).ideal U) :=
+      (Ideal.isRadical_iff_quotient_reduced _).mp (PrimeSpectrum.isRadical_vanishingIdeal _)
+    exact inferInstanceAs (IsReduced (Spec (.of (Γ(X, U) ⧸ (vanishingIdeal Z).ideal U))))
+  exact IsReduced.of_openCover _ (vanishingIdeal Z).subschemeCover.openCover
 
 /-- The inclusions of the subschemes attached to equal ideal sheaves agree up to
 `eqToHom`. -/
