@@ -48,6 +48,8 @@ three theorems `injective_pic_map_snd`, `pic_map_sectionBaseChange_snd`,
   `0 → Pic T → Pic (X_T) → Pic_{X/S}(T) → 0` (blueprint `sk-prop-picard-pic-split`).
 - `AlgebraicGeometry.isSheaf_picardFunctorNormalized`: the `σ`-normalized relative Picard
   functor is an fppf sheaf (blueprint `sk-cor-picard-pic-sheaf`).
+- `AlgebraicGeometry.nonempty_picardFunctor_iso_of_isPullback`: the relative Picard functor is
+  compatible with base change (blueprint `lem-pd-picard-base-change`).
 -/
 
 @[expose] public section
@@ -110,6 +112,24 @@ noncomputable def picardFunctor (f : X ⟶ S) :
 i.e. the unit of the fppf sheafification adjunction. -/
 noncomputable abbrev toPicardFunctor (f : X ⟶ S) : picardPresheaf f ⟶ (picardFunctor f).obj :=
   toSheafify (Scheme.fppfTopology.over S) (picardPresheaf f)
+
+/-- **The Picard functor is compatible with base change.** Let `f : X ⟶ S` be a morphism of
+schemes, let `g : S' ⟶ S` be a morphism and let `f' : X' ⟶ S'` be the base change of `f` along
+`g`. Then the restriction of `Pic_{X/S}` to schemes over `S'` is `Pic_{X'/S'}`.
+
+For `T` over `S'` the fibre products `X ×_S T` and `X' ×_{S'} T` agree, so the two Picard presheaves
+agree on schemes over `S'`; the fppf coverings of a scheme over `S'` are the same in both sites, so
+their sheafifications agree as well (the remark after Stacks 0B9K).
+
+The blueprint asserts that the restriction *is* `Pic_{X'/S'}`, through the canonical
+identification induced by `X' ×_{S'} T = X ×_S T`. The statement here only asserts that some
+isomorphism exists, which is weaker; this suffices for the current applications.
+
+(blueprint: `lem-pd-picard-base-change`) -/
+theorem nonempty_picardFunctor_iso_of_isPullback {X' S' : Scheme.{u}} {f : X ⟶ S} {g : S' ⟶ S}
+    {f' : X' ⟶ S'} {g' : X' ⟶ X} (h : IsPullback g' f' f g) :
+    Nonempty ((Over.map g).op ⋙ (picardFunctor f).obj ≅ (picardFunctor f').obj) :=
+  sorry
 
 /-- The `σ`-normalized relative Picard functor `Pic_{X/S,σ}` of a morphism of schemes
 `f : X ⟶ S` equipped with a section `σ`: the subfunctor of the Picard presheaf `T ↦ Pic (X_T)`
