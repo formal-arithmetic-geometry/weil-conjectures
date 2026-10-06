@@ -83,8 +83,13 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Modules.nonempty_sections_higherDirectImage_iso_H`: over an affine
-  base, the global sections of `R^q f_* ℱ` are `H^q(X, ℱ)`.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_sections_higherDirectImage_iso_H` and
+  `exists_bijective_semilinearMap_sections_higherDirectImage_H`: over an affine base, the global
+  sections of `R^q f_* ℱ` are `H^q(X, ℱ)`, linearly over `Γ(T, ⊤)`. Hence
+  (`hFiber_eq_finrank_sections_higherDirectImage`) the fibre dimension is the dimension of the
+  higher direct image of the fibre to the point.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_pullback_of_flat`: cohomology
+  commutes with flat base change.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`: the higher direct
   images commute with restriction to an open subscheme of the base.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_tensorObj_pullback_iso`: the
@@ -357,6 +362,29 @@ theorem nonempty_higherDirectImage_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶
       ((higherDirectImage f q).obj ℱ).restrict g) :=
   sorry
 
+/-- **Cohomology and flat base change.** Let `f : X ⟶ T` be quasi-compact and quasi-separated,
+`ℱ` a quasi-coherent `𝒪_X`-module, `g : T' ⟶ T` flat, and `f' : X' ⟶ T'`, `g' : X' ⟶ X` the base
+change of `f` along `g`, in the cartesian square `sq`
+```
+X' --g'--> X
+|          |
+f'         f
+v          v
+T' --g---> T
+```
+Then `R^q f'_* (g'^* ℱ) ≅ g^* R^q f_* ℱ` for every `q` [Stacks, Tag 02KH]. Over affine `T` and
+`T'` this is `H^q(X, ℱ) ⊗_A B ≅ H^q(X_B, ℱ_B)`, computed with Čech complexes, since a flat ring
+map commutes with taking cohomology of a complex.
+
+(blueprint: `lem-pc-flat-base-change-cohom`) -/
+theorem nonempty_higherDirectImage_iso_pullback_of_flat [QuasiCompact f] [QuasiSeparated f]
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {T' X' : Scheme.{u}} (g : T' ⟶ T)
+    [Flat g] (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules]
+    (sq : IsPullback g' f' f g) (q : ℕ) :
+    Nonempty ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ) ≅
+      (Modules.pullback g).obj ((higherDirectImage f q).obj ℱ)) :=
+  sorry
+
 open MonoidalCategory in
 /-- **The projection formula** for an invertible module. For `f : X ⟶ T`, an `𝒪_X`-module `ℱ`
 and an invertible `𝒪_T`-module `𝒩`, `R^q f_* (ℱ ⊗ f^* 𝒩) ≅ R^q f_* ℱ ⊗ 𝒩` for every `q`: twisting
@@ -561,11 +589,15 @@ and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the 
 
 Locally on `T` the fibre dimension is `dim_{κ(t)} H^q(P ⊗ κ(t))` for the bounded complex `P` of
 finite free modules of
-`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`, and the
-dimension of the cohomology of a complex of finite free modules is upper semicontinuous in the
-point.
+`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`: the pullback of
+`P` to `Spec κ(t)` computes the higher direct images of the fibre `ℱ_t` to the point, whose global
+sections are `H^q(X_t, ℱ_t)`
+(`AlgebraicGeometry.Scheme.Modules.hFiber_eq_finrank_sections_higherDirectImage`). The dimension
+of the cohomology of a complex of finite free modules is upper semicontinuous in the point, by the
+lower semicontinuity of the ranks of its differentials
+(`AlgebraicGeometry.Scheme.Modules.exists_finrank_homology_pullback_le`).
 
-(blueprint: `sk-thm-picard-semicon`) -/
+(blueprint: `sk-thm-picard-semicon`, `thm-pc-semicontinuity-base-change`) -/
 theorem upperSemicontinuous_hFiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) :
     UpperSemicontinuous (ℱ.hFiber f q) := by
   intro t m hm

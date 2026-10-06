@@ -26,7 +26,8 @@ This is the tool that turns a sheaf of modules defined as a kernel — as the id
 into a computable object.
 
 The file also records that the pullback of the structure sheaf along any morphism of schemes
-is the structure sheaf, and the presheaf of `Γ(X, ⊤)`-modules underlying a sheaf of modules.
+is the structure sheaf, the presheaf of `Γ(X, ⊤)`-modules underlying a sheaf of modules, and the
+matrices of morphisms between free modules of finite rank.
 
 ## Main results
 
@@ -36,6 +37,9 @@ is the structure sheaf, and the presheaf of `Γ(X, ⊤)`-modules underlying a sh
   isomorphism `e`.
 - `AlgebraicGeometry.Scheme.Modules.exists_mem_over_iso_unit`: an invertible module is locally
   trivial.
+- `AlgebraicGeometry.Scheme.Modules.freeMatrix_pullback`: the matrix `freeMatrix φ` of global
+  functions of a morphism `φ` of free modules is compatible with pullback, and
+  `AlgebraicGeometry.Scheme.Modules.rank_freeMatrix` computes the rank of `φ` on global sections.
 
 ## Main definitions
 

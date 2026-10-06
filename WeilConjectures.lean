@@ -3,6 +3,7 @@ module  -- shake: keep-all --deprecated_module: ignore
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+public import WeilConjectures.Algebra.Homology.FlatComplex
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
@@ -81,6 +82,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
@@ -459,6 +461,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
@@ -667,6 +670,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter

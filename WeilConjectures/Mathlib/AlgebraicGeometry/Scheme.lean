@@ -24,6 +24,11 @@ and that the zero locus of `insert a s` is the intersection of the zero loci of 
 
 - `AlgebraicGeometry.Scheme.zeroLocus_insert`.
 
+At a point `g : Spec R ⟶ Y` with values in a field, a global function `a` does not vanish iff the
+point lies in `D(a)`:
+
+- `AlgebraicGeometry.Scheme.Hom.appTop_ne_zero_iff_mem_basicOpen`.
+
 # Complements on schemes
 
 * `AlgebraicGeometry.Scheme.basicOpen_prod`,

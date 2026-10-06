@@ -39,6 +39,11 @@ on the spectrum of a Noetherian ring is detected by finiteness of the global sec
 - `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_of_isOpenCover` and
   `isFinitePresentation_of_iSup_opensRange_eq_top`: a module with finite presentations locally on
   an open cover is of finite presentation.
+- `AlgebraicGeometry.isEquivalence_moduleSpecΓFunctor`: over a field `R`, every `𝒪_{Spec R}`-module
+  is quasi-coherent (`AlgebraicGeometry.Scheme.Modules.isIso_fromTildeΓ_of_isField`), so the global
+  sections functor `(Spec R).Modules ⥤ ModuleCat R` is an equivalence; in particular it is exact.
+- `AlgebraicGeometry.Scheme.Modules.finrank_eq_of_coe_eq`: dimensions of global sections over `R`
+  and over `Γ(Spec R, ⊤)` agree.
 - `AlgebraicGeometry.Scheme.Modules.exists_presentation_isFinite` and
   `isFinitePresentation_of_finite`: over a Noetherian ring `R`, a quasi-coherent module on
   `Spec R` with finite global sections has a finite global presentation.
