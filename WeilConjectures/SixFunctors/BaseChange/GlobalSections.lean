@@ -51,7 +51,15 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [HasSmallSiteSheafify A]
 
 /-- **Finite pullback along the identity**: pulling back a section along `𝟙 Y` gives back the
-section, under the identity isomorphism `(𝟙 Y)^* G ≅ G`.
+section, under the identity isomorphism `(𝟙 Y)^* G ≅ G`: the triangle
+```
+Γ(Y, G) --(𝟙 Y)^♯--> Γ(Y, (𝟙 Y)^* G)
+      \                   |
+       𝟙                  | ≅
+        \                 v
+         `---------> Γ(Y, G)
+```
+commutes.
 (blueprint: `lemma-weil-pbc-finite-pullback-identity`) -/
 @[reassoc]
 lemma globalSectionsUpperStarMap_id {Y : Scheme.{u}} (G : Sheaf Y.smallEtaleTopology A) :
@@ -74,7 +82,15 @@ lemma globalSectionsUpperStarMap_id {Y : Scheme.{u}} (G : Sheaf Y.smallEtaleTopo
 
 /-- **Finite pullback along a composite**: for `v : T'' ⟶ T'` and `u : T' ⟶ T`, pulling a
 section back along `v ≫ u` is pulling it back along `u` and then along `v`, under the
-composition isomorphism `(v ≫ u)^* G ≅ v^* u^* G`.
+composition isomorphism `(v ≫ u)^* G ≅ v^* u^* G`: the square
+```
+Γ(T, G) ------(v ≫ u)^♯------> Γ(T'', (v ≫ u)^* G)
+   |                                  |
+  u^♯                                 | ≅
+   v                                  v
+Γ(T', u^* G) -------v^♯------> Γ(T'', v^* u^* G)
+```
+commutes.
 (blueprint: `lemma-weil-pbc-finite-pullback-composition`) -/
 @[reassoc]
 lemma globalSectionsUpperStarMap_comp {T'' T' T : Scheme.{u}} (v : T'' ⟶ T') (u : T' ⟶ T)

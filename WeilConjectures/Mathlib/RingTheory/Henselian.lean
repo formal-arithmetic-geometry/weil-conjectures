@@ -26,9 +26,9 @@ a section sends `X` to a root of `f`.
 - `IsLocalRing.isSepClosed_residueField_of_exists_algHom_comap_maximalIdeal_eq`: such a local
   ring has separably closed residue field.
 
-We also record the idempotent-lifting form of a henselian pair, `Ideal.IsHenselianPair`: every
-idempotent of `B ⧸ IB` lifts uniquely to an idempotent of `B`, for every finite `A`-algebra
-`B`. It passes to finite `A`-algebras (`Ideal.IsHenselianPair.map`).
+The henselian pairs `(A, I)` of the blueprint (`def-weil-pbc-henselian-terminology`) are
+Mathlib's `HenselianRing A I`; a henselian local ring is `HenselianLocalRing`, and it is
+strictly henselian when moreover `IsSepClosed (IsLocalRing.ResidueField A)`.
 -/
 
 @[expose] public section
@@ -113,34 +113,3 @@ theorem IsLocalRing.isSepClosed_residueField_of_exists_algHom_comap_maximalIdeal
   obtain ⟨a, ha, -⟩ := exists_isRoot_algebraMap_eq_of_exists_algHom_comap_maximalIdeal_eq H hK hf
     hroot hroot'
   exact ⟨residue R a, by simpa using congr(residue R $ha)⟩
-
-/-- **Henselian pairs, via idempotents.** A pair `(A, I)` of a commutative ring and an ideal is
-*henselian* if, for every finite `A`-algebra `B`, every idempotent of `B ⧸ IB` lifts uniquely
-to an idempotent of `B`. A local ring is henselian when its maximal-ideal pair is henselian
-(`HenselianLocalRing`), and *strictly henselian* when moreover its residue field is
-separably closed; for `T = Spec A` the closed member of the pair is `T₀ = Spec (A ⧸ I)`.
-This is equivalent to `HenselianRing A I` [Stacks 09XI]; the comparison is not formalised.
-(blueprint: `def-weil-pbc-henselian-terminology`) -/
-def Ideal.IsHenselianPair {A : Type u} [CommRing A] (I : Ideal A) : Prop :=
-  ∀ (B : Type u) [CommRing B] [Algebra A B] [Module.Finite A B]
-    (e : B ⧸ I.map (algebraMap A B)), IsIdempotentElem e →
-      ∃! e' : B, IsIdempotentElem e' ∧ Ideal.Quotient.mk _ e' = e
-
-/-- If `(A, I)` is a henselian pair and `B` is a finite `A`-algebra, then `(B, IB)` is a
-henselian pair: a finite `B`-algebra `C` is a finite `A`-algebra, and `(IB)C = IC`.
-This is Step 2 of the blueprint lemma `lemma-weil-pbc-stein-connectedness`. -/
-theorem Ideal.IsHenselianPair.map {A B : Type u} [CommRing A] [CommRing B]
-    [Algebra A B] [Module.Finite A B] {I : Ideal A} (hI : I.IsHenselianPair) :
-    (I.map (algebraMap A B)).IsHenselianPair := by
-  intro C _ _ _
-  let : Algebra A C := Algebra.compHom C (algebraMap A B)
-  have : IsScalarTower A B C := IsScalarTower.of_algebraMap_eq' rfl
-  have : Module.Finite A C := Module.Finite.trans B C
-  have h : (I.map (algebraMap A B)).map (algebraMap B C) = I.map (algebraMap A C) := by
-    rw [Ideal.map_map, ← IsScalarTower.algebraMap_eq]
-  have key : ∀ J : Ideal C, J = I.map (algebraMap A C) → ∀ e : C ⧸ J, IsIdempotentElem e →
-      ∃! e' : C, IsIdempotentElem e' ∧ Ideal.Quotient.mk J e' = e := by
-    rintro J rfl
-    exact hI C
-  exact key _ h
-

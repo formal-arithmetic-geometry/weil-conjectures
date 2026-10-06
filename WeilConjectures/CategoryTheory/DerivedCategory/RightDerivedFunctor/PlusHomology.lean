@@ -147,9 +147,17 @@ theorem nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso [PreservesFiniteLimi
 
 /-- **Acyclic complexes compute `R⁺F`, at the level of the unit.** If `F` is left exact and `L`
 is a bounded below complex of `F`-acyclic objects, then the unit `F(L) ⟶ R⁺F(L)` is an
-isomorphism in `DerivedCategory.Plus D`: choosing a quasi-isomorphism `i : L ⟶ T` to a bounded
-below complex of injectives, the unit at `T` is an isomorphism, and so is `F(i)`, by
-`Functor.quasiIso_map_of_rightAcyclic`. -/
+isomorphism in `DerivedCategory.Plus D`. Choose a quasi-isomorphism `i : L ⟶ T` to a bounded
+below complex of injectives. In the naturality square of the unit
+```
+F(L) ----unit----> R⁺F(L)
+ |                   |
+F(i)              R⁺F(i)
+ v                   v
+F(T) ----unit----> R⁺F(T)
+```
+the bottom map is an isomorphism as `T` is injective, `R⁺F(i)` is an isomorphism as `i` is a
+quasi-isomorphism, and `F(i)` is an isomorphism by `Functor.quasiIso_map_of_rightAcyclic`. -/
 theorem isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic [PreservesFiniteLimits F]
     (L : CochainComplex.Plus C) (hL : ∀ n, F.rightAcyclic (L.obj.X n)) :
     IsIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj L)) := by

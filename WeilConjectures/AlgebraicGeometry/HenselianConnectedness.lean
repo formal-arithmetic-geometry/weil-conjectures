@@ -25,7 +25,7 @@ Let `(A, I)` be a henselian pair and `p : Y ⟶ Spec A` a proper morphism, with 
 
 Together with the spectrality of `Y` and the closedness of `Y₀`, input (ii) is exactly the
 hypothesis of the Zariski restriction criterion
-`TopCat.Sheaf.bijective_unit_app_top_of_isLocallyConstant` for the pair `(Y, Y₀)`.
+`TopCat.Sheaf.bijective_unit_app_top` for the pair `(Y, Y₀)`.
 
 ## Main statements
 
@@ -76,7 +76,7 @@ theorem Scheme.Hom.isConnected_inter_preimage_zeroLocus {A : Type u} [CommRing A
 closed fibre `Y₀ = p⁻¹(V(I))`. Then `Y` is a spectral space, `Y₀` is closed in `Y`, and every
 irreducible closed subset of `Y` meets `Y₀` in a nonempty connected subset. These are the
 hypotheses of the Zariski restriction criterion
-`TopCat.Sheaf.bijective_unit_app_top_of_isLocallyConstant` for the pair `(Y, Y₀)`. The
+`TopCat.Sheaf.bijective_unit_app_top` for the pair `(Y, Y₀)`. The
 spectrality holds because `Y` is quasi-compact and quasi-separated, the closedness because
 `V(I)` is closed, and the connectedness is the classical input
 `AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`.

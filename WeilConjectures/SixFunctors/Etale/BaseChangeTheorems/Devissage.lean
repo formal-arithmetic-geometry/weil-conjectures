@@ -91,25 +91,6 @@ open Scheme Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S}
   {e : Y ⟶ T} {h : Y ⟶ X}
 
-/-- The functor induced on bounded below derived categories by the pullback is additive: it is
-a lift of the additive functor `Plus.ι ⋙ D(p^*)` through the fully faithful inclusion. -/
-instance (p : X ⟶ S) : ((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.Additive :=
-  have : (((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.ι).Additive :=
-    Functor.additive_of_iso
-      ((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusCompatibility.symm
-  Functor.additive_of_comp_faithful _ DerivedCategory.Plus.ι
-
-/-- The functor induced on bounded below derived categories by the pullback commutes with
-shifts: it is the restriction of the triangulated functor `D(p^*)`. -/
-noncomputable instance (p : X ⟶ S) :
-    ((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.CommShift ℤ := by
-  dsimp only [Functor.mapDerivedCategoryPlus]
-  infer_instance
-
-instance (p : X ⟶ S) : ((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.IsTriangulated := by
-  dsimp only [Functor.mapDerivedCategoryPlus]
-  infer_instance
-
 instance (p : X ⟶ S) (g : T ⟶ S) (q : ℤ) : (Etale.baseChangeSourceFunctor Λ p g q).Additive := by
   dsimp only [Etale.baseChangeSourceFunctor]
   infer_instance
