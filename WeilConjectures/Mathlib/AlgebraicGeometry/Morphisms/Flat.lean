@@ -18,6 +18,12 @@ flat, and flatness of `𝒪_{X',x'}` over `𝒪_{S,f(x)}` descends to `𝒪_{X,x
 ## Main results
 
 - `AlgebraicGeometry.Flat.of_comp_of_flat_of_surjective` (blueprint `lem-pc-flat-source-descent`).
+
+## Implementation notes
+
+Every morphism `X ⟶ Spec k` to the spectrum of a field is flat (blueprint `lem-pc-flat-field`).
+This is Mathlib's low-priority instance `Flat f` for `f : X ⟶ Y` with `[Subsingleton Y]`
+`[IsIntegral Y]`, found by `inferInstance`, so it is not restated here.
 -/
 
 @[expose] public section

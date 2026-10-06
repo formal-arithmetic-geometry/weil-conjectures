@@ -231,7 +231,11 @@ theorem Hom.nonempty_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k))) [Smo
 
 open Limits in
 /-- The `K`-rational point `x_K = Spec K ×_k x` of the base change `X_K = X ×_k Spec K`
-induced by a `k`-rational point `x` of `X`, for a field extension `K` of `k`. -/
+induced by a `k`-rational point `x` of `X`, for a field extension `K` of `k`. A `k`-rational
+point is an element of `AlgebraicGeometry.Scheme.Hom.fieldPoints`, a section `Spec k ⟶ X` of the
+structure morphism, and `x_K` is the induced section `σ_T` for `T = Spec K`.
+
+(blueprint: `def-pc-rational-point`) -/
 noncomputable def Hom.baseChangeFieldPoint (f : X.Hom (Spec (.of k))) (K : Type u) [Field K]
     [Algebra k K] (p : f.fieldPoints k) :
     (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).fieldPoints K :=
@@ -239,6 +243,15 @@ noncomputable def Hom.baseChangeFieldPoint (f : X.Hom (Spec (.of k))) (K : Type 
     rw [Category.assoc, p.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id,
       Category.comp_id, Category.id_comp]), by
     rw [pullback.lift_snd, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]⟩
+
+/-- A `k`-rational point `x : Spec k ⟶ X` of a `k`-scheme is a closed immersion, being a section
+of the structure morphism. This specialises Mathlib's low-priority instance `IsClosedImmersion f`
+for `f : Y ⟶ X` with `[Subsingleton Y] [X.Over Y] [f.IsOver Y]`, which does not apply here because
+`fieldPoints` carry no `IsOver` instances. -/
+instance Hom.isClosedImmersion_fieldPoints (f : X.Hom (Spec (.of k))) (p : f.fieldPoints k) :
+    IsClosedImmersion p.1 :=
+  isClosedImmersion_of_comp_eq_id f p.1 (by
+    rw [p.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id])
 
 open Limits in
 /-- The only point of `X_K` over a `k`-rational point `x` of `X` is `x_K`: the fibre of

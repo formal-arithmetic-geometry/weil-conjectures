@@ -19,6 +19,7 @@ public import Mathlib.Topology.LocallyConstant.Basic
 public import Mathlib.Topology.Semicontinuity.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -84,8 +85,11 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Modules.nonempty_sections_higherDirectImage_iso_H`: over an affine
-  base, the global sections of `R^q f_* ℱ` are `H^q(X, ℱ)`.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_sections_higherDirectImage_iso_H` and
+  `exists_bijective_semilinearMap_sections_higherDirectImage_H`: over an affine base, the global
+  sections of `R^q f_* ℱ` are `H^q(X, ℱ)`, linearly over `Γ(T, ⊤)`. Hence
+  (`hFiber_eq_finrank_sections_higherDirectImage`) the fibre dimension is the dimension of the
+  higher direct image of the fibre to the point.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`: the higher direct
   images commute with restriction to an open subscheme of the base.
 - `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isAffineHom` and
@@ -285,18 +289,64 @@ theorem perfectLocusOfRank_subset (ℱ : X.Modules) (f : X ⟶ T) (i r : ℕ) :
 
 variable (f : X ⟶ T) (ℱ : X.Modules)
 
-/-- Over an affine base the global sections of the `q`-th higher direct image are the sheaf
-cohomology of `ℱ`: `Γ(T, R^q f_* ℱ) ≅ H^q(X, ℱ)`.
+/-- **The sections of the higher direct images over an affine base, linearly.** Over an affine
+base the global sections of the `q`-th higher direct image are the sheaf cohomology of `ℱ`,
+`Γ(T, R^q f_* ℱ) ≅ H^q(X, ℱ)`, by an isomorphism which is linear along `f^♯ : Γ(T, ⊤) → Γ(X, ⊤)`.
 
 This is the comparison between the two cohomology theories used in the Picard-framework block:
 the right derived functors of `f_*` inside `X.Modules` on the one hand, and the `Ext`-groups in
 abelian sheaves of `AlgebraicGeometry.Scheme.Modules.H` on the other. It holds because
-injective objects of `X.Modules` are `Γ`-acyclic. -/
+injective objects of `X.Modules` are `Γ`-acyclic, and the comparison is natural in `ℱ`, hence
+compatible with multiplication by global functions of `T`. Over `T = Spec κ` for a field `κ`, this
+is the identification of the `q`-th direct image to a point with `H^q` as `κ`-vector spaces, used
+in the local model of the proof of `thm-pc-semicontinuity-base-change`. -/
+theorem exists_bijective_semilinearMap_sections_higherDirectImage_H [IsAffine T] [QuasiCompact f]
+    [IsSeparated f] [HasInjectiveResolutions X.Modules]
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
+    ∃ e : Γ((higherDirectImage f q).obj ℱ, ⊤) →ₛₗ[f.appTop.hom] ℱ.H q, Function.Bijective e :=
+  sorry
+
+/-- Over an affine base the global sections of the `q`-th higher direct image are the sheaf
+cohomology of `ℱ`: `Γ(T, R^q f_* ℱ) ≅ H^q(X, ℱ)`. See
+`AlgebraicGeometry.Scheme.Modules.exists_bijective_semilinearMap_sections_higherDirectImage_H`
+for the linearity of this isomorphism. -/
 theorem nonempty_sections_higherDirectImage_iso_H [IsAffine T] [QuasiCompact f] [IsSeparated f]
     [HasInjectiveResolutions X.Modules]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     Nonempty (Γ((higherDirectImage f q).obj ℱ, ⊤) ≃+ ℱ.H q) :=
-  sorry
+  have ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H f ℱ q
+  ⟨AddEquiv.ofBijective e.toAddMonoidHom he⟩
+
+/-- **The fibre dimension is the dimension of the direct image to the point.** For `f`
+quasi-compact and separated, `h^q(t) = dim_{κ(t)} H^q(X_t, ℱ_t)` is the dimension of the global
+sections of `R^q (f_t)_* ℱ_t` for the fibre `f_t : X_t ⟶ Spec κ(t)`, as a vector space over the
+field `Γ(Spec κ(t), ⊤) ≅ κ(t)`. -/
+theorem hFiber_eq_finrank_sections_higherDirectImage [QuasiCompact f] [IsSeparated f] (t : T)
+    [HasInjectiveResolutions (f.fiber t).Modules]
+    [SheafOfModules.IsQuasicoherent (R := (f.fiber t).ringCatSheaf)
+      ((Modules.pullback (f.fiberι t)).obj ℱ)] (q : ℕ) :
+    ℱ.hFiber f q t = Module.finrank Γ(Spec (T.residueField t), ⊤)
+      Γ((higherDirectImage (f.fiberToSpecResidueField t) q).obj
+        ((Modules.pullback (f.fiberι t)).obj ℱ), ⊤) := by
+  have : IsSeparated (f.fiberToSpecResidueField t) := by
+    unfold Scheme.Hom.fiberToSpecResidueField
+    infer_instance
+  have : QuasiCompact (f.fiberToSpecResidueField t) := by
+    unfold Scheme.Hom.fiberToSpecResidueField
+    infer_instance
+  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H
+    (f.fiberToSpecResidueField t) ((Modules.pullback (f.fiberι t)).obj ℱ) q
+  let j := (AddEquiv.ofBijective e.toAddMonoidHom he).symm
+  let := f.fiberOverSpecResidueField t
+  refine congrArg Cardinal.toNat (rank_eq_of_equiv_equiv _ j
+    (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (T.residueField t)).inv) ?_)
+  intro c h
+  obtain ⟨y, rfl⟩ := he.2 h
+  have hc : c • e y = e ((Scheme.ΓSpecIso (T.residueField t)).inv c • y) := by
+    rw [smul_H_eq_globalSectionsRingHom_smul, e.map_smulₛₗ]
+    rfl
+  have hj (z) : j (e z) = z := (AddEquiv.ofBijective e.toAddMonoidHom he).symm_apply_apply z
+  rw [hc, hj, hj]
 
 section BaseChange
 
@@ -575,14 +625,66 @@ and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the 
 
 Locally on `T` the fibre dimension is `dim_{κ(t)} H^q(P ⊗ κ(t))` for the bounded complex `P` of
 finite free modules of
-`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`, and the
-dimension of the cohomology of a complex of finite free modules is upper semicontinuous in the
-point.
+`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`: the pullback of
+`P` to `Spec κ(t)` computes the higher direct images of the fibre `ℱ_t` to the point, whose global
+sections are `H^q(X_t, ℱ_t)`
+(`AlgebraicGeometry.Scheme.Modules.hFiber_eq_finrank_sections_higherDirectImage`). The dimension
+of the cohomology of a complex of finite free modules is upper semicontinuous in the point, by the
+lower semicontinuity of the ranks of its differentials
+(`AlgebraicGeometry.Scheme.Modules.exists_finrank_homology_pullback_le`).
 
-(blueprint: `sk-thm-picard-semicon`) -/
+(blueprint: `sk-thm-picard-semicon`, `thm-pc-semicontinuity-base-change`) -/
 theorem upperSemicontinuous_hFiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) :
-    UpperSemicontinuous (ℱ.hFiber f q) :=
-  sorry
+    UpperSemicontinuous (ℱ.hFiber f q) := by
+  intro t m hm
+  obtain ⟨U, P, d, htU, hP, hbc⟩ := exists_isFiniteFreeComplex_higherDirectImage f ℱ hℱ t
+  -- at a point `s ∈ U`, the fibre dimension is the dimension of `H^q(P ⊗ κ(s))`
+  have key (s : T) (hs : s ∈ U) : ∃ g : Spec (T.residueField s) ⟶ U.toScheme,
+      g ≫ U.ι = T.fromSpecResidueField s ∧ ℱ.hFiber f q s =
+        Module.finrank (T.residueField s) ((moduleSpecΓFunctor (R := T.residueField s)).obj
+          ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q)) := by
+    have hrange : Set.range (T.fromSpecResidueField s).base ⊆ Set.range U.ι.base := by
+      rw [Scheme.Opens.range_ι, Scheme.range_fromSpecResidueField]
+      simpa using hs
+    let g := IsOpenImmersion.lift U.ι (T.fromSpecResidueField s) hrange
+    have hg : g ≫ U.ι = T.fromSpecResidueField s := IsOpenImmersion.lift_fac _ _ _
+    refine ⟨g, hg, ?_⟩
+    have := isGrothendieckAbelian (f.fiber s)
+    have sq : IsPullback (f.fiberι s) (f.fiberToSpecResidueField s) f (g ≫ U.ι) := by
+      rw [hg]
+      exact IsPullback.of_hasPullback _ _
+    obtain ⟨e⟩ := hbc g _ _ sq q
+    rw [hFiber_eq_finrank_sections_higherDirectImage f ℱ s q,
+      ← (appLinearEquivOfIso e ⊤).finrank_eq]
+    have h := finrank_eq_of_coe_eq
+      ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q) ⊤ ⊤ rfl
+    rw [finrank_top, finrank_top] at h
+    exact h.symm
+  obtain ⟨g, hg, hgt⟩ := key t htU
+  obtain ⟨V, hV, hle⟩ := exists_finrank_homology_pullback_le hP.exists_iso_free q
+    (Field.toIsField _) g
+  have hmem (s : T) (g' : Spec (T.residueField s) ⟶ U.toScheme)
+      (hg' : g' ≫ U.ι = T.fromSpecResidueField s) (v : U.toScheme) (hv : U.ι.base v = s) :
+      Set.range g'.base ⊆ {v} := by
+    rintro _ ⟨x, rfl⟩
+    refine U.ι.isOpenEmbedding.injective ?_
+    rw [← Scheme.Hom.comp_apply, hg', hv]
+    exact (Scheme.range_fromSpecResidueField s).subset ⟨x, rfl⟩
+  have : Nonempty (Spec (T.residueField t)) := inferInstance
+  obtain ⟨x⟩ := this
+  refine Filter.mem_of_superset ((U.ι ''ᵁ V).isOpen.mem_nhds ⟨g.base x, hV ⟨x, rfl⟩, ?_⟩) ?_
+  · have := (Scheme.range_fromSpecResidueField t).subset ⟨x, rfl⟩
+    rw [← hg] at this
+    exact this
+  · rintro _ ⟨v, hv, rfl⟩
+    have hvU : U.ι.base v ∈ U := by
+      rw [← SetLike.mem_coe, ← Scheme.Opens.range_ι]
+      exact ⟨v, rfl⟩
+    obtain ⟨g', hg', hgs⟩ := key _ hvU
+    change ℱ.hFiber f q (U.ι.base v) < m
+    rw [hgs]
+    refine (hle (Field.toIsField _) g' ((hmem _ g' hg' v rfl).trans ?_)).trans_lt (hgt ▸ hm)
+    simpa using hv
 
 /-- **Grauert's theorem.** In the situation of
 `AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`, if moreover `T` is reduced and

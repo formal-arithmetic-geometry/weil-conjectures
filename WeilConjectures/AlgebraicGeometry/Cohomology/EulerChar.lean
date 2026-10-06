@@ -85,7 +85,9 @@ are imposed on `X` here, so for other `X` the value carries no meaning.
 
 For a smooth proper curve `X ↘ Spec k`, Serre duality identifies this with
 `AlgebraicGeometry.Scheme.Hom.genus (X ↘ Spec k) = dim_k H^0(X, Ω¹_{X/k})`; see
-`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`. -/
+`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`.
+
+(blueprint: `def-pc-genus`) -/
 noncomputable def arithmeticGenus : ℕ :=
   Modules.finrankH (X := X) k (SheafOfModules.unit X.ringCatSheaf) 1
 
@@ -116,7 +118,9 @@ theorem Modules.nonempty_H_pullback_linearEquiv [QuasiCompact (X ↘ Spec (.of k
 
 /-- **Flat base change of `h^q`.** For a quasi-coherent module `M` on a quasi-compact
 quasi-separated scheme `X` over `k` and a field extension `K/k`,
-`dim_K H^q(X_K, M_K) = dim_k H^q(X, M)`. -/
+`dim_K H^q(X_K, M_K) = dim_k H^q(X, M)`.
+
+(blueprint: `lem-pc-flat-base-change-cohom`) -/
 theorem Modules.finrankH_pullback [QuasiCompact (X ↘ Spec (.of k))]
     [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules) [M.IsQuasicoherent] (q : ℕ) :
     ((Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
