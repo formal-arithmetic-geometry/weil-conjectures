@@ -26,7 +26,7 @@ injection for the Brauer group.
 
 ## Main statements
 
-- `AlgebraicGeometry.isRegular_Spec_of_field`: the spectrum of a field is regular.
+- `AlgebraicGeometry.instIsRegularSpecOfField`: the spectrum of a field is regular.
 - `AlgebraicGeometry.isRegularLocalRing_stalk_of_etale`: a scheme étale over a regular scheme
   is regular.
 - `AlgebraicGeometry.isRegularLocalRing_stalk_pullback`: a product of regular schemes locally
@@ -61,7 +61,7 @@ class IsRegular (X : Scheme.{u}) : Prop where
 attribute [instance] IsRegular.isRegularLocalRing_stalk
 
 /-- The spectrum of a field is regular: its local ring is the field itself. -/
-instance isRegular_Spec_of_field (k : Type u) [Field k] : IsRegular (Spec (.of k)) where
+instance instIsRegularSpecOfField (k : Type u) [Field k] : IsRegular (Spec (.of k)) where
   isRegularLocalRing_stalk z := by
     have : z.asIdeal.IsPrime := z.isPrime
     have e : k ≃+* Localization.AtPrime z.asIdeal :=

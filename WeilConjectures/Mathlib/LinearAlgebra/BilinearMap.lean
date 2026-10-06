@@ -26,13 +26,13 @@ variable {R M M' N N' P : Type*} [CommSemiring R] [AddCommMonoid M] [AddCommMono
 
 /-- If the adjoint `M → (N →ₗ P)` of a bilinear map `B` is bijective, so is the adjoint of
 `B.compl₁₂ e₁ e₂` for linear equivalences `e₁`, `e₂`. -/
-lemma bijective_compl₁₂ (h : Function.Bijective B) :
+theorem bijective_compl₁₂_of_equiv (h : Function.Bijective B) :
     Function.Bijective (B.compl₁₂ (e₁ : M' →ₗ[R] M) (e₂ : N' →ₗ[R] N)) :=
   ((LinearEquiv.congrLeft P R e₂).symm.bijective.comp h).comp e₁.bijective
 
 /-- If the adjoint `N → (M →ₗ P)` of a bilinear map `B` is bijective, so is the adjoint of
 `B.compl₁₂ e₁ e₂` for linear equivalences `e₁`, `e₂`. -/
-lemma bijective_flip_compl₁₂ (h : Function.Bijective B.flip) :
+theorem bijective_flip_compl₁₂_of_equiv (h : Function.Bijective B.flip) :
     Function.Bijective (B.compl₁₂ (e₁ : M' →ₗ[R] M) (e₂ : N' →ₗ[R] N)).flip :=
   ((LinearEquiv.congrLeft P R e₁).symm.bijective.comp h).comp e₂.bijective
 

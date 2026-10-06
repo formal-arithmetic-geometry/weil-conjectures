@@ -40,7 +40,8 @@ product with supports compatible with the degree shifts in which cohomology clas
 - `AlgebraicGeometry.Etale.commShiftRightDerivedUpperShriek`
 - `AlgebraicGeometry.Etale.commShiftDerivedTensorObj`,
   `AlgebraicGeometry.Etale.commShiftDerivedTensorFlipObj`
-- `AlgebraicGeometry.Etale.derivedTensorShiftIso`: `K⟦a⟧ ⊗ᴸ M⟦b⟧ ≅ (K ⊗ᴸ M)⟦a + b⟧`.
+- `AlgebraicGeometry.Etale.derivedTensorShiftIso`: `K⟦a⟧ ⊗ᴸ M⟦b⟧ ≅ (K ⊗ᴸ M)⟦a + b⟧`, and
+  `AlgebraicGeometry.Etale.derivedTensorShiftIso'`, the same with target degree `c = a + b`.
 -/
 
 @[expose] public section
@@ -122,6 +123,21 @@ noncomputable def derivedTensorShiftIso (K M : DerivedCategory (Sheaf X.smallEta
   (((derivedTensor A X).flip.obj (M⟦b⟧)).commShiftIso a).app K ≪≫
     (shiftFunctor _ a).mapIso ((((derivedTensor A X).obj K).commShiftIso b).app M) ≪≫
       ((shiftFunctorAdd' _ b a (a + b) (add_comm b a)).app _).symm
+
+/-- The derived tensor product of shifted complexes, `K⟦a⟧ ⊗ᴸ M⟦b⟧ ≅ (K ⊗ᴸ M)⟦c⟧` for
+`a + b = c`: the version of `AlgebraicGeometry.Etale.derivedTensorShiftIso` with an explicit
+target degree, as in `CategoryTheory.shiftFunctorAdd'`.
+
+```
+K⟦a⟧ ⊗ᴸ M⟦b⟧ ≅ (K ⊗ᴸ M⟦b⟧)⟦a⟧ ≅ ((K ⊗ᴸ M)⟦b⟧)⟦a⟧ ≅ (K ⊗ᴸ M)⟦c⟧
+```
+-/
+noncomputable def derivedTensorShiftIso' (K M : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (a b c : ℤ) (h : a + b = c) :
+    ((derivedTensor A X).obj (K⟦a⟧)).obj (M⟦b⟧) ≅ (((derivedTensor A X).obj K).obj M)⟦c⟧ :=
+  (((derivedTensor A X).flip.obj (M⟦b⟧)).commShiftIso a).app K ≪≫
+    (shiftFunctor _ a).mapIso ((((derivedTensor A X).obj K).commShiftIso b).app M) ≪≫
+      ((shiftFunctorAdd' _ b a c (by rw [add_comm, h])).app _).symm
 
 end Monoidal
 

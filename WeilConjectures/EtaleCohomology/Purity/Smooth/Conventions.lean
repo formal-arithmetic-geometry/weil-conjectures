@@ -267,6 +267,13 @@ noncomputable def untwistTateObject (m : ℤ) :
     Linear.rightComp Λ _ (derivedTensorLeftUnitor _ X (tateObject Λ X (-m))).hom ∘ₗ
       ((derivedTensor _ X).flip.obj (tateObject Λ X (-m))).mapLinearMap Λ
 
+lemma untwistTateObject_apply (m : ℤ) (φ : tateObject Λ X m ⟶ 𝟙_ _) :
+    untwistTateObject Λ X m φ = ((HasTateTwist.twistObjectZeroIso X).inv ≫
+      eqToHom (by rw [add_neg_cancel]) ≫ (HasTateTwist.twistObjectAddIso X m (-m)).inv) ≫
+        ((derivedTensor _ X).flip.obj (tateObject Λ X (-m))).map φ ≫
+          (derivedTensorLeftUnitor _ X (tateObject Λ X (-m))).hom :=
+  rfl
+
 variable {Λ X} {Y : Scheme.{u}}
 
 /-- The identification `Lf^* Λ_Y(m) ≅ Λ_X(m)` of the Tate twist datum. -/

@@ -15,8 +15,8 @@ instance search. This file gives the versions with an explicit hypothesis that c
 variable along a linear equivalence, so that they can be used with dot notation, as
 `LinearMap.IsPerfPair.flip` is:
 
-- `LinearMap.IsPerfPair.comp`: `p ∘ₗ e` is perfect if `p` is.
-- `LinearMap.IsPerfPair.compl₂`: `p.compl₂ e` is perfect if `p` is.
+- `LinearMap.IsPerfPair.comp_equiv`: `p ∘ₗ e` is perfect if `p` is.
+- `LinearMap.IsPerfPair.compl₂_equiv`: `p.compl₂ e` is perfect if `p` is.
 -/
 
 @[expose] public section
@@ -29,13 +29,13 @@ variable {R M M' N N' : Type*} [CommRing R] [AddCommGroup M] [AddCommGroup M'] [
 
 /-- A perfect pairing stays perfect after precomposing its first variable with a linear
 equivalence. -/
-protected lemma IsPerfPair.comp (hp : p.IsPerfPair) (e : M' ≃ₗ[R] M) :
+theorem IsPerfPair.comp_equiv (hp : p.IsPerfPair) (e : M' ≃ₗ[R] M) :
     (p ∘ₗ (e : M' →ₗ[R] M)).IsPerfPair :=
   IsPerfPair.compl₁₂ (p := p) e (LinearEquiv.refl R N)
 
 /-- A perfect pairing stays perfect after precomposing its second variable with a linear
 equivalence. -/
-protected lemma IsPerfPair.compl₂ (hp : p.IsPerfPair) (e : N' ≃ₗ[R] N) :
+theorem IsPerfPair.compl₂_equiv (hp : p.IsPerfPair) (e : N' ≃ₗ[R] N) :
     (p.compl₂ (e : N' →ₗ[R] N)).IsPerfPair :=
   IsPerfPair.compl₁₂ (p := p) (LinearEquiv.refl R M) e
 

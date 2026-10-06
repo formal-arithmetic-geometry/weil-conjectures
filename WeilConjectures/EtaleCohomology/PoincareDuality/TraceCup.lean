@@ -30,19 +30,16 @@ is a morphism `Λ_Y ⟶ Λ_Y(-d)`. The cup product is taken on `X`, on the adjoi
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.traceMapTensorTateObject`: a class `c ∈ H^{2d}_c(X, Λ)` sent to
-  `Λ_Y(d) ⟶ Λ_Y`.
 - `AlgebraicGeometry.Etale.traceMap`: the trace `tr_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)`.
 - `AlgebraicGeometry.Etale.twistedTraceMap`: its twist `tr_X(d) : H^{2d}_c(X, Λ(d)) ⟶ Λ`.
-- `AlgebraicGeometry.Etale.tateDualUnitClass`: the unit class in `H^0(X, Λ(d)^∨(d))`.
 - `AlgebraicGeometry.Etale.traceCupPairing`: the trace–cup pairing `⟨-,-⟩_i`, for proper `X`.
 - `AlgebraicGeometry.Etale.rationalPointClass`: the class in `H^{2d}(X, Λ(d))` of a `k`-point.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.bijective_traceMap` (`sk-cor-trace`): the trace isomorphism.
-- `AlgebraicGeometry.Etale.twistedTraceMap_eq_degreewisePoincarePairing`: the twisted trace is
-  the degreewise pairing at `i = 2d` against the unit class, for `K = Λ_X(d)`.
+- `AlgebraicGeometry.Etale.bijective_twistedTraceMap`, `AlgebraicGeometry.Etale.bijective_traceMap`
+  (`sk-cor-trace`): the trace isomorphism, the second deduced from the first through
+  `AlgebraicGeometry.Etale.exists_traceMap_eq`, which relates the two traces.
 - `AlgebraicGeometry.Etale.traceCupPairing_eq_untwistedDegreewisePoincarePairing`: the
   trace–cup pairing is the line-valued degreewise pairing for `K = Λ_X`, and
   `AlgebraicGeometry.Etale.bijective_traceCupPairing`,
@@ -56,6 +53,14 @@ The statements are for `ModuleCat Λ` with a finite coefficient ring `Λ`, the s
 of the blueprint. The orientation `γ` is arbitrary: the repository does not yet define the
 blueprint's normalized orientation, for which the twisted trace of the class of a point is `1`.
 What holds for every `γ` is that this value is a unit, which is what is stated here.
+
+TODO: once the normalized orientation of the purity chapter is defined, state the
+normalisation `tr(cl(x)) = 1` for it.
+
+The class of a `k`-point lives in ordinary cohomology, so its trace statement assumes `X`
+proper. Its compactly supported version needs the composition isomorphism
+`R(x ≫ a)_! ≅ Ra_! ∘ Rx_!` of the étale lower shriek, which is not yet available as a
+morphism in the repository.
 -/
 
 @[expose] public section
@@ -77,7 +82,10 @@ section Trace
 variable (Λ : Type (u + 1)) [CommRing Λ] [HasTateTwist Λ] {X Y : Scheme.{u}} (a : X ⟶ Y)
   [HasCompactification a] {d : ℕ}
 
-/-- The trace of a class `c ∈ H^{2d}_c(X, Λ)`, as a morphism `Λ_Y(d) ⟶ Λ_Y`:
+/-- Blueprint `sk-def-trace-cup`: Trace and trace–cup pairing.
+
+The *trace* `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` of a Tate orientation `γ`: a class
+`c : Λ_Y ⟶ (Ra_! Λ_X)[2d]` is sent to the morphism
 ```
           λ⁻¹                    c ⊗ᴸ 1                                  ≅
 Λ_Y(d) ─────▶ Λ_Y ⊗ᴸ Λ_Y(d) ─────────▶ (Ra_! Λ_X)[2d] ⊗ᴸ Λ_Y(d) ─────▶ (Ra_! Λ_X ⊗ᴸ Λ_Y(d))[2d]
@@ -86,12 +94,17 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [HasTateTwist Λ] {X Y : Scheme.{u}} 
             ≅                      Tr_γ
      ─────────▶ Ra_!(Λ_X(d)[2d]) ─────────▶ Λ_Y
 ```
-through the projection map of `Ra_!`, `La^* Λ_Y(d) ≅ Λ_X(d)` and the smooth trace of `γ`. It
-is `Λ`-linear, being built from composition and the `Λ`-linear functor `- ⊗ᴸ Λ_Y(d)`. -/
-noncomputable def traceMapTensorTateObject (γ : TateOrientation Λ a d) :
+through the projection map of `Ra_!`, `La^* Λ_Y(d) ≅ Λ_X(d)` and the smooth trace of `γ`, and
+this morphism `Λ_Y(d) ⟶ Λ_Y` is untwisted into a class `Λ_Y ⟶ Λ_Y(-d)`
+(`AlgebraicGeometry.Etale.untwistTateObject`). It is `Λ`-linear, being built from composition
+and the `Λ`-linear functor `- ⊗ᴸ Λ_Y(d)`.
+
+For `X` proper over `Y = Spec k` the source is `H^{2d}(X, Λ)`, and this is the trace of the
+blueprint; it is defined for any `a` admitting a compactification. -/
+noncomputable def traceMap (γ : TateOrientation Λ a d) :
     ShiftedHom (𝟙_ _) ((R(a)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ X)) (2 * d : ℤ) →ₗ[Λ]
-      (tateObject Λ Y d ⟶ 𝟙_ _) :=
-  Linear.leftComp Λ _ (derivedTensorLeftUnitor _ Y _).inv ∘ₗ
+      (𝟙_ _ ⟶ tateObject Λ Y (-d)) :=
+  untwistTateObject Λ Y d ∘ₗ Linear.leftComp Λ _ (derivedTensorLeftUnitor _ Y _).inv ∘ₗ
     Linear.rightComp Λ _
       ((((derivedTensor _ Y).flip.obj (tateObject Λ Y d)).commShiftIso (2 * d : ℤ)).hom.app _ ≫
         (((projectionMap _ a).app (constantComplex Λ X)).app (tateObject Λ Y d) ≫
@@ -101,19 +114,18 @@ noncomputable def traceMapTensorTateObject (γ : TateOrientation Λ a d) :
         ((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 * d : ℤ)).inv.app _ ≫ γ.smoothTrace) ∘ₗ
       ((derivedTensor _ Y).flip.obj (tateObject Λ Y d)).mapLinearMap Λ
 
-/-- Blueprint `sk-def-trace-cup`: Trace and trace–cup pairing.
-
-The *trace* `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` of a Tate orientation `γ`: a class
-`c : Λ_Y ⟶ (Ra_! Λ_X)[2d]` is sent to `Λ_Y(d) ⟶ Λ_Y`
-(`AlgebraicGeometry.Etale.traceMapTensorTateObject`) and untwisted into a class
-`Λ_Y ⟶ Λ_Y(-d)` (`AlgebraicGeometry.Etale.untwistTateObject`).
-
-For `X` proper over `Y = Spec k` the source is `H^{2d}(X, Λ)`, and this is the trace of the
-blueprint; it is defined for any `a` admitting a compactification. -/
-noncomputable def traceMap (γ : TateOrientation Λ a d) :
-    ShiftedHom (𝟙_ _) ((R(a)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ X)) (2 * d : ℤ) →ₗ[Λ]
-      (𝟙_ _ ⟶ tateObject Λ Y (-d)) :=
-  untwistTateObject Λ Y d ∘ₗ traceMapTensorTateObject Λ a γ
+lemma traceMap_apply (γ : TateOrientation Λ a d)
+    (c : ShiftedHom (𝟙_ _) ((R(a)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ X))
+      (2 * d : ℤ)) :
+    traceMap Λ a γ c = untwistTateObject Λ Y d ((derivedTensorLeftUnitor _ Y _).inv ≫
+      ((derivedTensor _ Y).flip.obj (tateObject Λ Y d)).map c ≫
+        (((derivedTensor _ Y).flip.obj (tateObject Λ Y d)).commShiftIso (2 * d : ℤ)).hom.app _ ≫
+          (((projectionMap _ a).app (constantComplex Λ X)).app (tateObject Λ Y d) ≫
+            (R(a)_![ModuleCat.{u + 1} Λ]).map (((derivedTensor _ X).obj _).map
+              (leftDerivedUpperStarTateObjectIso a d).hom ≫
+                (derivedTensorLeftUnitor _ X _).hom))⟦(2 * d : ℤ)⟧' ≫
+          ((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 * d : ℤ)).inv.app _ ≫ γ.smoothTrace) :=
+  rfl
 
 /-- Blueprint `sk-cor-trace`: The trace isomorphism.
 
@@ -131,21 +143,11 @@ noncomputable def twistedTraceMap [ConnectedSpace Y] (γ : TateOrientation Λ a 
     Linear.rightComp Λ _
       (((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 * d : ℤ)).inv.app _ ≫ γ.smoothTrace)
 
-variable (X d) in
-/-- The *unit class* `u ∈ H^0(X, Λ(d)^∨(d))`, the class `Λ_X ⟶ Λ_X(d)^∨ ⊗ᴸ Λ_X(d)`
-```
-       ≅                         ≅                            φ ⊗ᴸ 1
-Λ_X ─────▶ Λ_X(-d + d) ─────▶ Λ_X(-d) ⊗ᴸ Λ_X(d) ─────────▶ Λ_X(d)^∨ ⊗ᴸ Λ_X(d)
-```
-where `φ : Λ_X(-d) ⟶ Λ_X(d)^∨` is the adjoint of the multiplication
-`Λ_X(d) ⊗ᴸ Λ_X(-d) ≅ Λ_X(d + -d) ≅ Λ_X` of the Tate twist datum. -/
-noncomputable def tateDualUnitClass :
-    constantComplex Λ X ⟶ twistedDual Λ d (tateObject Λ X d) :=
-  (HasTateTwist.twistObjectZeroIso X).inv ≫ eqToHom (by rw [neg_add_cancel]) ≫
-    (HasTateTwist.twistObjectAddIso X (-d) d).inv ≫
-      ((derivedTensor _ X).map ((derivedTensorHomAdjunction _ (tateObject Λ X d)).homEquiv _ _
-        ((HasTateTwist.twistObjectAddIso X d (-d)).hom ≫ eqToHom (by rw [add_neg_cancel]) ≫
-          (HasTateTwist.twistObjectZeroIso X).hom))).app (tateObject Λ X d)
+lemma twistedTraceMap_apply [ConnectedSpace Y] (γ : TateOrientation Λ a d)
+    (c : ShiftedHom (𝟙_ _) ((R(a)_![ModuleCat.{u + 1} Λ]).obj (tateObject Λ X d)) (2 * d : ℤ)) :
+    twistedTraceMap Λ a γ c = (coefficientAlgEquiv Λ Y).symm
+      (c ≫ ((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 * d : ℤ)).inv.app _ ≫ γ.smoothTrace) :=
+  rfl
 
 /-- Blueprint `sk-def-trace-cup`: Trace and trace–cup pairing.
 
@@ -167,15 +169,24 @@ noncomputable def traceCupPairing [IsProper a] (γ : TateOrientation Λ a d) (i 
     ShiftedHom (𝟙_ _) ((R((a)_*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ X)) i →ₗ[Λ]
       ShiftedHom (𝟙_ _) ((R((a)_*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ X)) j →ₗ[Λ]
         (𝟙_ _ ⟶ tateObject Λ Y (-d)) :=
-  let e := leftDerivedUpperStarConstantComplexIso Λ a
-  ((unitCupProduct (ModuleCat.{u + 1} Λ) Λ X i j).compl₁₂
-      (lowerStarClassEquiv _ Λ a e _ i).symm.toLinearMap
-      (lowerStarClassEquiv _ Λ a e _ j).symm.toLinearMap).compr₂
-    (traceMap Λ a γ ∘ₗ (lowerStarClassEquivLowerShriek _ Λ a _ _).toLinearMap ∘ₗ
-      (lowerStarClassEquiv _ Λ a e _ _).toLinearMap ∘ₗ
-        (Linear.homCongr Λ (Iso.refl _) (eqToIso (by
-          rw [hij]
-          rfl))).toLinearMap)
+  ((unitCupProduct (ModuleCat.{u + 1} Λ) Λ X i j (2 * d) hij).compl₁₂
+      (lowerStarClassEquiv _ Λ a (leftDerivedUpperStarConstantComplexIso Λ a) _ i).symm.toLinearMap
+      (lowerStarClassEquiv _ Λ a (leftDerivedUpperStarConstantComplexIso Λ a) _ j).symm.toLinearMap
+    ).compr₂ (traceMap Λ a γ ∘ₗ (lowerStarClassEquivLowerShriek _ Λ a _ _).toLinearMap ∘ₗ
+      (lowerStarClassEquiv _ Λ a (leftDerivedUpperStarConstantComplexIso Λ a) _ _).toLinearMap)
+
+set_option maxRecDepth 10000 in
+lemma traceCupPairing_apply [IsProper a] (γ : TateOrientation Λ a d) (i j : ℤ)
+    (hij : i + j = 2 * d)
+    (x : ShiftedHom (𝟙_ _) ((R((a)_*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ X)) i)
+    (y : ShiftedHom (𝟙_ _) ((R((a)_*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ X)) j) :
+    traceCupPairing Λ a γ i j hij x y = traceMap Λ a γ (lowerStarClassEquivLowerShriek _ Λ a _ _
+      (lowerStarClassEquiv _ Λ a (leftDerivedUpperStarConstantComplexIso Λ a) (𝟙_ _) _
+        (unitCupProduct (ModuleCat.{u + 1} Λ) Λ X i j (2 * d) hij
+          ((lowerStarClassEquiv _ Λ a (leftDerivedUpperStarConstantComplexIso Λ a) _ i).symm x)
+          ((lowerStarClassEquiv _ Λ a (leftDerivedUpperStarConstantComplexIso Λ a) _ j).symm
+            y)))) :=
+  rfl
 
 end Trace
 
@@ -188,39 +199,49 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X : Sc
 
 /-- Blueprint `sk-cor-trace`: The trace isomorphism.
 
-For `X` smooth and connected of pure dimension `d` over a separably closed field `k`, the trace
-`tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` is an isomorphism; no properness is needed. -/
-theorem bijective_traceMap [SmoothOfRelativeDimension d a] [ConnectedSpace X] :
-    Function.Bijective (traceMap Λ a γ) :=
-  -- Proof sketch: over a field `Λ` this is degreewise duality at `i = 2d` for `K = Λ_X(d)`
-  -- (`AlgebraicGeometry.Etale.twistedTraceMap_eq_degreewisePoincarePairing`) together with
-  -- `H^0(X, Λ) = Λ` for connected `X`. Over a finite ring `Λ` degreewise duality fails in
-  -- general, and the statement rests on the vanishing of `H^q_c(X, Λ)` above `q = 2d`.
+**The two traces agree** (blueprint, *Degree of the pairing*). Over a separably closed field,
+the trace `tr_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` is the twisted trace `tr_X(d)` read through linear
+isomorphisms `f` and `e`:
+```
+                    f                               tr_X(d)          e
+H^{2d}_c(X, Λ) ──────────▶ H^{2d}_c(X, Λ(d)) ──────────▶ Λ ──────────▶ Λ(-d)
+```
+-/
+theorem exists_traceMap_eq :
+    ∃ (f : ShiftedHom (𝟙_ _) ((R(a)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ X))
+        (2 * d : ℤ) ≃ₗ[Λ]
+          ShiftedHom (𝟙_ _) ((R(a)_![ModuleCat.{u + 1} Λ]).obj (tateObject Λ X d)) (2 * d : ℤ))
+      (e : Λ ≃ₗ[Λ] (𝟙_ _ ⟶ tateObject Λ (Spec (.of k)) (-d))),
+      traceMap Λ a γ = e.toLinearMap ∘ₗ twistedTraceMap Λ a γ ∘ₗ f.toLinearMap :=
+  -- Proof sketch: since `k` is separably closed, the Tate object `Λ(d)` on `Spec k` is
+  -- trivial; choose `t : Λ ≅ Λ(d)`. By the projection formula
+  -- `Ra_! Λ_X(d) ≅ Ra_! Λ_X ⊗ᴸ Λ(d)`, so `t` gives `f`, and `e` is
+  -- `r ↦ untwistTateObject (r • t⁻¹)`. The two traces are then the same composite through
+  -- the smooth trace of `γ`, before and after inserting the twist.
   sorry
 
 /-- Blueprint `sk-cor-trace`: The trace isomorphism.
 
-**The twisted trace is degreewise duality at `i = 2d`.** For `K = Λ_X(d)`, the degreewise
-Poincaré pairing `⟨x, u⟩` of `x ∈ H^{2d}_c(X, Λ(d))` with the unit class
-`u ∈ H^0(X, Λ(d)^∨(d))` (`AlgebraicGeometry.Etale.tateDualUnitClass`, read on `Spec k` through
-`AlgebraicGeometry.Etale.lowerStarClassEquiv`) is the twisted trace of `x`:
-```
-                                  x ⊗ᴸ u                                       β_K
-Λ ≅ Λ ⊗ᴸ Λ ─────────▶ (Ra_! Λ_X(d))[2d] ⊗ᴸ (Ra_*(Λ_X(d)^∨(d)))[0] ─────────────▶ Λ
- ‖                                                                              ‖
- ‖                 x                                     ≅                    Tr_γ ‖
-Λ ─────────▶ (Ra_! Λ_X(d))[2d] ─────────▶ Ra_!(Λ_X(d)[2d]) ─────────────────────▶ Λ
-```
--/
-theorem twistedTraceMap_eq_degreewisePoincarePairing
-    (x : ShiftedHom (𝟙_ _) ((R(a)_![ModuleCat.{u + 1} Λ]).obj (tateObject Λ X d)) (2 * d : ℤ)) :
-    twistedTraceMap Λ a γ x =
-      degreewisePoincarePairing Λ a γ (tateObject Λ X d) (2 * d) 0 (add_zero _) x
-        (lowerStarClassEquiv _ Λ a (leftDerivedUpperStarConstantComplexIso Λ a) _ 0
-          (ShiftedHom.homLinearEquiv Λ _ _ 0 rfl (tateDualUnitClass Λ X d))) :=
-  -- Proof sketch: the evaluation of `Λ_X(d)` against the unit class is the identity of
-  -- `Λ_X(d)`, so that the mixed-support cup product with `u` is the identity of `Ra_! Λ_X(d)`.
+For `X` smooth and connected of pure dimension `d` over a separably closed field `k`, the
+twisted trace `tr^{(-d)}_X(d) : H^{2d}_c(X, Λ(d)) ⟶ Λ` is an isomorphism; no properness is
+needed. -/
+theorem bijective_twistedTraceMap [SmoothOfRelativeDimension d a] [ConnectedSpace X] :
+    Function.Bijective (twistedTraceMap Λ a γ) :=
+  -- Proof sketch (SGA 4 XVIII 2.9): `H^q_c(X, M) = 0` for `q > 2d` and every sheaf `M`, so
+  -- `Ra_! Λ_X(d)[2d]` has amplitude `≤ 0`, and `H^{2d}_c(X, Λ(d)) = H^0(Ra_! Ra^! Λ)` through
+  -- `γ`. The twisted trace is `H^0` of the counit `Ra_! Ra^! Λ ⟶ Λ`, which is an isomorphism
+  -- on `H^0` for `X` connected: by adjunction its source is `Hom(Λ_X, Λ_X) = Λ`.
   sorry
+
+/-- Blueprint `sk-cor-trace`: The trace isomorphism.
+
+For `X` smooth and connected of pure dimension `d` over a separably closed field `k`, the trace
+`tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` is an isomorphism; no properness is needed. -/
+theorem bijective_traceMap [SmoothOfRelativeDimension d a] [ConnectedSpace X] :
+    Function.Bijective (traceMap Λ a γ) := by
+  obtain ⟨f, e, h⟩ := exists_traceMap_eq Λ a γ
+  rw [h]
+  exact e.bijective.comp ((bijective_twistedTraceMap Λ a γ).comp f.bijective)
 
 /-- Blueprint `sk-def-trace-cup`: Trace and trace–cup pairing.
 
@@ -252,9 +273,10 @@ theorem bijective_traceCupPairing [IsProper a] (hΛ : IsField Λ) (i j : ℤ)
     (hij : i + j = 2 * d) :
     Function.Bijective (traceCupPairing Λ a γ i j hij) := by
   rw [traceCupPairing_eq_untwistedDegreewisePoincarePairing]
-  exact LinearMap.bijective_compl₁₂ _ _ _ (bijective_untwistedDegreewisePoincarePairing Λ a γ
-    (DerivedCategory.boundedConstructibleFiniteTor_constantComplex Λ X) isDualizable_unit hΛ i j
-    hij)
+  exact LinearMap.bijective_compl₁₂_of_equiv _ _ _
+    (bijective_untwistedDegreewisePoincarePairing Λ a γ
+      (DerivedCategory.boundedConstructibleFiniteTor_constantComplex Λ X) isDualizable_unit hΛ i j
+      hij)
 
 /-- Blueprint `sk-def-trace-cup`: Trace and trace–cup pairing.
 
@@ -264,7 +286,7 @@ theorem bijective_traceCupPairing_flip [IsProper a] (hΛ : IsField Λ) (i j : �
     (hij : i + j = 2 * d) :
     Function.Bijective (traceCupPairing Λ a γ i j hij).flip := by
   rw [traceCupPairing_eq_untwistedDegreewisePoincarePairing]
-  exact LinearMap.bijective_flip_compl₁₂ _ _ _
+  exact LinearMap.bijective_flip_compl₁₂_of_equiv _ _ _
     (bijective_untwistedDegreewisePoincarePairing_flip Λ a γ
       (DerivedCategory.boundedConstructibleFiniteTor_constantComplex Λ X) isDualizable_unit hΛ i j
       hij)
@@ -274,11 +296,11 @@ end Statements
 section RationalPoint
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
-  [HasKummerClass.IsNormalized Λ] {X : Scheme.{u}} {k : Type u} [Field k] [IsAlgClosed k]
-  [HasInvertibleExponent Λ (Spec (.of k))] (d : ℕ) (a : X ⟶ Spec (.of k))
-  [SmoothOfRelativeDimension d a] (x : Spec (.of k) ⟶ X) [HasCompactification x]
+  [HasKummerClass.IsNormalized Λ] {X : Scheme.{u}} {k : Type u} [Field k] [IsSepClosed k]
+  [PerfectField k] [HasInvertibleExponent Λ (Spec (.of k))] [HasInvertibleExponent Λ X] (d : ℕ)
+  (a : X ⟶ Spec (.of k)) [HasCompactification a] (x : Spec (.of k) ⟶ X)
 
-/-- The *class of a `k`-point* `x` of `X` smooth of pure dimension `d`, in
+/-- The *class of a `k`-point* `x` of a smooth `X`, regularly immersed of codimension `d`, in
 `H^{2d}(X, Λ(d)) = Hom(Λ_X, Λ_X(d)[2d])`: the fundamental class
 `[x ⊂ X] ∈ H^{2d}_x(X, Λ(d))` of `sk-thm-regular` (`AlgebraicGeometry.Etale.fundamentalClass`),
 with supports forgotten through the counit of `Rx_! ⊣ Rx^!`,
@@ -286,32 +308,35 @@ with supports forgotten through the counit of `Rx_! ⊣ Rx^!`,
        [x ⊂ X]                                 counit
 Λ_X ─────────▶ Rx_! Rx^!(Λ_X(d)[2d]) ─────────▶ Λ_X(d)[2d]
 ```
-A `k`-point of a smooth `X` is a regular immersion of codimension `d`
-(`AlgebraicGeometry.isRegularImmersion_of_comp_eq_id`), and `Spec k` is regular
-(`AlgebraicGeometry.isRegular_Spec_of_field`). -/
-noncomputable def rationalPointClass (hx : x ≫ a = 𝟙 _) :
+`Spec k` is regular (`AlgebraicGeometry.instIsRegularSpecOfField`). A `k`-point of `X` smooth
+of relative dimension `d` is a regular immersion of codimension `d`
+(`AlgebraicGeometry.isRegularImmersion_of_comp_eq_id_of_smoothOfRelativeDimension`). -/
+noncomputable def rationalPointClass [Smooth a] [IsRegularImmersion d x] :
     constantComplex Λ X ⟶ (tateObject Λ X d)⟦(2 * d : ℤ)⟧ :=
-  haveI := HasInvertibleExponent.of_hom (Λ := Λ) a
-  haveI := SmoothOfRelativeDimension.smooth d a
-  haveI := isRegularImmersion_of_comp_eq_id d a x hx
   fundamentalClass Λ d x a (fun _ ↦ inferInstance) ≫
     (rightDerivedUpperShriekAdjunction _ x).counit.app _
 
 /-- Blueprint `sk-cor-trace`: The trace isomorphism.
 
 **Normalisation by the fundamental class.** For `X` proper and smooth of pure dimension `d`
-over an algebraically closed field and a `k`-point `x` of `X`, the twisted trace
-`tr^{(-d)}_X(d)` of the class of `x` (`AlgebraicGeometry.Etale.rationalPointClass`), read in
-`H^{2d}_c(X, Λ(d))` through `Ra_* ≅ Ra_!`, is a unit of `Λ`, for every Tate orientation `γ`.
-
+over a separably closed field and a `k`-point `x` of `X`, the twisted trace `tr^{(-d)}_X(d)` of
+the class of `x` (`AlgebraicGeometry.Etale.rationalPointClass`) is a unit of `Λ`, for every
+Tate orientation `γ`. The class is read in `H^{2d}_c(X, Λ(d))` through `H(X) ≅ H` and
+`H ≅ H_c`:
+```
+     [x]                          ≅                           ≅                            tr(d)
+Λ_X ────▶ Λ_X(d)[2d]  ↦  (Λ_k ⟶ (Ra_* Λ_X(d))[2d]) ────▶ (Λ_k ⟶ (Ra_! Λ_X(d))[2d]) ────▶ Λ
+```
 For the normalized orientation of the blueprint it is `1`; replacing `γ` by `u • γ` for a unit
 `u ∈ Λˣ` multiplies it by `u⁻¹`. The normalized orientation is not yet defined in the
 repository, so the normalisation itself is not stated. -/
-theorem isUnit_twistedTraceMap_rationalPointClass [HasCompactification a] [IsProper a]
+theorem isUnit_twistedTraceMap_rationalPointClass [SmoothOfRelativeDimension d a] [IsProper a]
     (γ : TateOrientation Λ a d) (hx : x ≫ a = 𝟙 _) :
+    haveI := SmoothOfRelativeDimension.smooth d a
+    haveI := isRegularImmersion_of_comp_eq_id_of_smoothOfRelativeDimension d a x hx
     IsUnit (twistedTraceMap Λ a γ (lowerStarClassEquivLowerShriek _ Λ a _ _
       (lowerStarClassEquiv _ Λ a (leftDerivedUpperStarConstantComplexIso Λ a) _ _
-        (rationalPointClass Λ d a x hx)))) :=
+        (rationalPointClass Λ d a x)))) :=
   sorry
 
 end RationalPoint

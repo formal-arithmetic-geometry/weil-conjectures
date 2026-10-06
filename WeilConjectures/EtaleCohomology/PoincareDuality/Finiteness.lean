@@ -23,19 +23,19 @@ are read one step earlier, as `Ra_! K` and `Ra_* K` in `D(Spec k_ét, Λ)`. "Per
 complex" is rendered as dualizability (`CategoryTheory.IsDualizable`), as everywhere in the
 project (see `WeilConjectures.SixFunctors.Etale.Derived.Perfect`). The boundedness and finiteness
 of the cohomology modules then follow from the corresponding facts at the point,
-`AlgebraicGeometry.Etale.exists_subsingleton_cohomologyClasses_of_isDualizable` and
-`AlgebraicGeometry.Etale.finite_cohomologyClasses_of_isDualizable`.
+`AlgebraicGeometry.Etale.exists_subsingleton_shiftedHom_of_isDualizable` and
+`AlgebraicGeometry.Etale.finite_shiftedHom_of_isDualizable`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isDualizable_rightDerivedLowerShriek`,
   `AlgebraicGeometry.Etale.isDualizable_rightDerivedLowerStar` (`sk-lem-finite`): `RΓ_c(X, K)`
   and `RΓ(X, K)` are perfect point complexes.
-- `AlgebraicGeometry.Etale.exists_subsingleton_cohomologyClasses_rightDerivedLowerShriek`,
-  `AlgebraicGeometry.Etale.exists_subsingleton_cohomologyClasses_rightDerivedLowerStar`:
+- `AlgebraicGeometry.Etale.exists_subsingleton_shiftedHom_rightDerivedLowerShriek`,
+  `AlgebraicGeometry.Etale.exists_subsingleton_shiftedHom_rightDerivedLowerStar`:
   `H^q_c(X, K)` and `H^q(X, K)` vanish outside a bounded range of degrees.
-- `AlgebraicGeometry.Etale.finite_cohomologyClasses_rightDerivedLowerShriek`,
-  `AlgebraicGeometry.Etale.finite_cohomologyClasses_rightDerivedLowerStar`: they are finite
+- `AlgebraicGeometry.Etale.finite_shiftedHom_rightDerivedLowerShriek`,
+  `AlgebraicGeometry.Etale.finite_shiftedHom_rightDerivedLowerStar`: they are finite
   `Λ`-modules.
 
 ## Implementation notes
@@ -87,19 +87,19 @@ include hK in
 /-- **Boundedness of compactly supported cohomology.** For `K ∈ D^b_{ctf}(X, Λ)`, the
 cohomology `H^q_c(X, K)`, the degree `q` classes of `Ra_! K`, vanishes for `q` outside a bounded
 range `[m, n]`. Compare `AlgebraicGeometry.Etale.isZero_compactlySupportedCohomology_of_lt`. -/
-theorem exists_subsingleton_cohomologyClasses_rightDerivedLowerShriek :
+theorem exists_subsingleton_shiftedHom_rightDerivedLowerShriek :
     ∃ m n : ℤ, ∀ q : ℤ, q < m ∨ n < q →
       Subsingleton (ShiftedHom (𝟙_ _) ((R(a)_![ModuleCat.{u + 1} Λ]).obj K) q) :=
-  exists_subsingleton_cohomologyClasses_of_isDualizable Λ
+  exists_subsingleton_shiftedHom_of_isDualizable Λ
     (isDualizable_rightDerivedLowerShriek Λ a hK)
 
 include hK in
 /-- **Finiteness of compactly supported cohomology.** For `K ∈ D^b_{ctf}(X, Λ)` every
 cohomology module `H^q_c(X, K)`, the degree `q` classes of `Ra_! K`, is a finite `Λ`-module.
 Compare `AlgebraicGeometry.Etale.finite_compactlySupportedCohomology`. -/
-theorem finite_cohomologyClasses_rightDerivedLowerShriek (q : ℤ) :
+theorem finite_shiftedHom_rightDerivedLowerShriek (q : ℤ) :
     Module.Finite Λ (ShiftedHom (𝟙_ _) ((R(a)_![ModuleCat.{u + 1} Λ]).obj K) q) :=
-  finite_cohomologyClasses_of_isDualizable Λ (isDualizable_rightDerivedLowerShriek Λ a hK) q
+  finite_shiftedHom_of_isDualizable Λ (isDualizable_rightDerivedLowerShriek Λ a hK) q
 
 end LowerShriek
 
@@ -122,18 +122,18 @@ include hK in
 /-- **Boundedness of ordinary cohomology.** For `K ∈ D^b_{ctf}(X, Λ)`, the cohomology
 `H^q(X, K)`, the degree `q` classes of `Ra_* K`, vanishes for `q` outside a bounded range
 `[m, n]`. -/
-theorem exists_subsingleton_cohomologyClasses_rightDerivedLowerStar :
+theorem exists_subsingleton_shiftedHom_rightDerivedLowerStar :
     ∃ m n : ℤ, ∀ q : ℤ, q < m ∨ n < q →
       Subsingleton (ShiftedHom (𝟙_ _) ((R((a)_*[ModuleCat.{u + 1} Λ])).obj K) q) :=
-  exists_subsingleton_cohomologyClasses_of_isDualizable Λ
+  exists_subsingleton_shiftedHom_of_isDualizable Λ
     (isDualizable_rightDerivedLowerStar Λ a hK)
 
 include hK in
 /-- **Finiteness of ordinary cohomology.** For `K ∈ D^b_{ctf}(X, Λ)` every cohomology module
 `H^q(X, K)`, the degree `q` classes of `Ra_* K`, is a finite `Λ`-module. -/
-theorem finite_cohomologyClasses_rightDerivedLowerStar (q : ℤ) :
+theorem finite_shiftedHom_rightDerivedLowerStar (q : ℤ) :
     Module.Finite Λ (ShiftedHom (𝟙_ _) ((R((a)_*[ModuleCat.{u + 1} Λ])).obj K) q) :=
-  finite_cohomologyClasses_of_isDualizable Λ (isDualizable_rightDerivedLowerStar Λ a hK) q
+  finite_shiftedHom_of_isDualizable Λ (isDualizable_rightDerivedLowerStar Λ a hK) q
 
 end LowerStar
 
