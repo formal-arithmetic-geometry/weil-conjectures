@@ -19,6 +19,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Tensor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 
@@ -67,6 +68,10 @@ the type of the functor is spelled out.
   `AlgebraicGeometry.Etale.derivedUpperStarLowerStarAdjunctionPlus` : the derived
   adjunctions `D((g)^*[A]) ⊣ R((g)_*[A])`, `L((g)^*[A]) ⊣ R((g)_*[A])` and
   `D+((g)^*[A]) ⊣ R+((g)_*[A])`. The first one needs no monoidal structure on `A`.
+
+- `AlgebraicGeometry.Etale.linear_rightDerivedLowerStar` and
+  `AlgebraicGeometry.Etale.linear_leftDerivedUpperStar` : for a `Λ`-linear `A`, the derived
+  functors `Rg_*` and `Lg^*` are `Λ`-linear.
 
 -/
 
@@ -124,6 +129,12 @@ noncomputable def mapDerivedUpperStarLowerStarAdjunction : D((g)^*[A]) ⊣ R((g)
 sheaves is additive, being right adjoint to `D(g^*)`. -/
 instance additive_rightDerivedLowerStar : (R((g)_*[A])).Additive :=
   (mapDerivedUpperStarLowerStarAdjunction A g).right_adjoint_additive
+
+variable (Λ : Type*) [Ring Λ] [Linear Λ A] in
+/-- If `A` is `Λ`-linear, the total right derived pushforward `Rg_*` is `Λ`-linear, being right
+adjoint to the functor `D(g^*)` induced by the `Λ`-linear exact functor `g^*`. -/
+instance linear_rightDerivedLowerStar : (R((g)_*[A])).Linear Λ :=
+  (mapDerivedUpperStarLowerStarAdjunction A g).right_adjoint_linear
 
 end Etale
 
@@ -217,6 +228,12 @@ This is `Functor.leftDerivedFunctorIsoMapDerivedCategory` at `g^*`. -/
 noncomputable def leftDerivedUpperStarIsoMapDerivedCategory :
     L((g)^*[A]) ≅ D((g)^*[A]) :=
   (g)^*[A].leftDerivedFunctorIsoMapDerivedCategory
+
+variable (Λ : Type*) [Ring Λ] [Linear Λ A] in
+/-- If `A` is `Λ`-linear, the derived pullback `Lg^*` is `Λ`-linear: it is isomorphic to the
+functor `D(g^*)` induced by the `Λ`-linear exact functor `g^*`. -/
+instance linear_leftDerivedUpperStar : (L((g)^*[A])).Linear Λ :=
+  Functor.linear_of_iso Λ (leftDerivedUpperStarIsoMapDerivedCategory A g).symm
 
 /-- The composition isomorphism `L(g₁ ≫ g₂)^* ≅ Lg₂^* ∘ Lg₁^*` of derived pullbacks,
 obtained from the underived composition isomorphism `Etale.upperStarComp` and the
