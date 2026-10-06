@@ -14,7 +14,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Cube
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Projective
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Image
 
 /-!
 # The multiplication-by-`n` isogeny
@@ -176,19 +178,53 @@ theorem isFinite_torsionSubgroupScheme (A : Over (Spec (.of K))) [GrpObj A] [IsA
 /-- Blueprint `sk-prop-av-mult-surjective`: Surjectivity of the multiplication map.
 
 Let `A` be an abelian variety over `K` and `0 < n`. Then `[n] : A ⟶ A` is surjective, so `A` is
-a divisible group scheme. -/
+a divisible group scheme.
+
+This is also blueprint `lem-sc-mult-n-isogeny`, whose finiteness half is
+`AlgebraicGeometry.isFinite_torsionSubgroupScheme`. The scheme-theoretic image `Z` of `[n]` is a
+closed subscheme of `A` onto which `[n]` maps surjectively
+(`AlgebraicGeometry.exists_isMonHom_imageι`). As `A ⟶ Z` is finite and surjective,
+`dim Z = dim A`; a closed subset of the irreducible finite-dimensional `A` of full dimension is
+all of `A`. -/
 theorem surjective_npow_id (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A] (n : ℕ)
     (hn : 0 < n) :
-    Surjective (𝟙 A ^ n).left :=
-  sorry
+    Surjective (𝟙 A ^ n).left := by
+  have := isFinite_npow_id A n hn
+  have := irreducibleSpace_of_connectedSpace A
+  let f := (𝟙 A ^ n).left
+  obtain ⟨-, hsurj, -⟩ := exists_isMonHom_imageι (𝟙 A ^ n)
+  have : IsProper (f.toImage ≫ f.imageι ≫ A.hom) := by
+    rw [f.toImage_imageι_assoc, Over.w (𝟙 A ^ n)]; infer_instance
+  have : IsProper f.toImage := .of_comp _ (f.imageι ≫ A.hom)
+  have : LocallyQuasiFinite (f.toImage ≫ f.imageι) := by
+    rw [f.toImage_imageι]; infer_instance
+  have : LocallyQuasiFinite f.toImage := .of_comp _ f.imageι
+  have hι := f.imageι.isClosedEmbedding.isInducing.surjective_of_topologicalKrullDim_eq
+    f.imageι.isClosedEmbedding.isClosed_range (by
+      rw [IsAbelianVariety.topologicalKrullDim_eq]
+      exact WithBot.coe_injective.ne (ENat.natCast_ne_top _))
+    f.toImage.topologicalKrullDim_eq_of_surjective.symm
+  have : Surjective (f.toImage ≫ f.imageι) := ⟨by
+    rw [Scheme.Hom.comp_base, TopCat.coe_comp]; exact hι.comp hsurj.surj⟩
+  rwa [f.toImage_imageι] at this
 
 /-- Blueprint `sk-prop-av-mult-surjective`: Surjectivity of the multiplication map.
 
-The `n`-torsion of an abelian variety is zero-dimensional for `0 < n`. -/
+The `n`-torsion of an abelian variety is zero-dimensional for `0 < n`: it is finite over `K`
+(`AlgebraicGeometry.isFinite_torsionSubgroupScheme`), so its underlying space is discrete. -/
 theorem topologicalKrullDim_torsionSubgroupScheme (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] (n : ℕ) (hn : 0 < n) :
-    topologicalKrullDim (torsionSubgroupScheme A n).left = 0 :=
-  sorry
+    topologicalKrullDim (torsionSubgroupScheme A n).left = 0 := by
+  have := isFinite_torsionSubgroupScheme A n hn
+  obtain ⟨p⟩ : Nonempty (Spec (.of K)) := inferInstance
+  have : DiscreteTopology (torsionSubgroupScheme A n).left := by
+    rw [← isDiscrete_univ_iff]
+    convert (torsionSubgroupScheme A n).hom.isDiscrete_preimage_singleton p
+    exact (Set.eq_univ_of_forall fun _ ↦ Subsingleton.elim _ _).symm
+  let x := (η[torsionSubgroupScheme A n]).left p
+  have : Nonempty (TopologicalSpace.IrreducibleCloseds (torsionSubgroupScheme A n).left) :=
+    ⟨⟨closure {x}, isIrreducible_singleton.closure, isClosed_closure⟩⟩
+  exact le_antisymm (topologicalKrullDim_zero_of_discreteTopology _) Order.krullDim_nonneg
 
 variable {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B]
 
