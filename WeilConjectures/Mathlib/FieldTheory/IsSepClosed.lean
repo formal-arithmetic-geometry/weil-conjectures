@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.Finite.Basic
 public import Mathlib.FieldTheory.SeparableClosure
 
 /-!
@@ -18,6 +19,7 @@ the directed union of its finite separable subextensions, so that `ks` is their 
 
 - `IsSepClosure.exists_intermediateField_mem`: every element of a separable closure lies in a
   finite separable subextension (blueprint `def-pd-separable-closure`).
+- `IsSepClosed.instInfinite`: a separably closed field is infinite.
 -/
 
 @[expose] public section
@@ -40,3 +42,13 @@ theorem IsSepClosure.exists_intermediateField_mem (k : Type u) {ks : Type v} [Fi
   have hx : IsSeparable k x := Algebra.IsSeparable.isSeparable k x
   exact ⟨k⟮x⟯, adjoin.finiteDimensional hx.isIntegral,
     (isSeparable_adjoin_simple_iff_isSeparable k ks).mpr hx, mem_adjoin_simple_self k x⟩
+
+/-- A separably closed field is infinite: over a finite field `k` with `q` elements the
+polynomial `X ^ q - X - 1` is separable (its derivative is `-1`) but has no root, since
+`a ^ q = a` for every `a ∈ k`. -/
+instance (priority := 100) IsSepClosed.instInfinite (k : Type u) [Field k] [IsSepClosed k] :
+    Infinite k := by
+  refine Infinite.of_not_fintype fun _ ↦ ?_
+  obtain ⟨a, ha⟩ := IsSepClosed.exists_root_C_mul_X_pow_add_C_mul_X_add_C (1 : k) (-1) (-1)
+    (FiniteField.cast_card_eq_zero k) (Fintype.one_lt_card (α := k)) (by simp)
+  simp [FiniteField.pow_card] at ha
