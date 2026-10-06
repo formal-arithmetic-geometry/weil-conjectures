@@ -103,23 +103,36 @@ theorem IsAbelianVariety.exists_isAmple (A : Over (Spec (.of K))) [GrpObj A]
   rw [tensorPow_succ, tensorPow_zero]
   exact (ρ_ _).symm
 
-/-- Blueprint `sk-prop-av-symmetric-ample`: A symmetric ample module.
+/-- Blueprint `sk-prop-av-symmetric-ample`: A symmetric ample module (also
+`lem-sc-ample-tensor`).
 
 Let `A` be an abelian variety over `K` and let `L` be an ample invertible `𝒪_A`-module. Then the
-symmetrisation `L ⊗ [-1]^* L` is ample. -/
+symmetrisation `L ⊗ [-1]^* L` is ample: `[-1]` is an automorphism, so `[-1]^* L` is ample, and a
+tensor product of ample modules is ample (`AlgebraicGeometry.IsAmple.tensorObj`). -/
 theorem IsAbelianVariety.isAmple_symmetrisation (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] (L : A.left.Modules) [L.IsInvertible] (hample : IsAmple A.hom L) :
-    IsAmple A.hom L.symmetrisation :=
-  sorry
+    IsAmple A.hom L.symmetrisation := by
+  have : IsClosedImmersion ι[A].left := by
+    have : IsIso ι[A].left := (Over.forget _).map_isIso ι[A]
+    infer_instance
+  have h := hample.pullback ι[A].left
+  rw [Over.w ι[A]] at h
+  exact hample.tensorObj h
 
-/-- Blueprint `sk-prop-av-symmetric-ample`: A symmetric ample module.
+/-- Blueprint `sk-prop-av-symmetric-ample`: A symmetric ample module (also
+`lem-sc-ample-tensor`).
 
 The symmetrisation `N = L ⊗ [-1]^* L` of an invertible module on an abelian variety is
-*symmetric*, that is `[-1]^* N ≅ N`. -/
+*symmetric*, that is `[-1]^* N ≅ N`: since `[-1] ∘ [-1] = id`, one has
+`[-1]^* N ≅ [-1]^* L ⊗ [-1]^* [-1]^* L ≅ [-1]^* L ⊗ L ≅ N`. -/
 theorem IsAbelianVariety.nonempty_iso_overPullback_inv_symmetrisation
     (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A] (L : A.left.Modules)
     [L.IsInvertible] :
-    Nonempty (overPullback ι[A] L.symmetrisation ≅ L.symmetrisation) :=
-  sorry
+    Nonempty (overPullback ι[A] L.symmetrisation ≅ L.symmetrisation) := by
+  obtain ⟨e⟩ := nonempty_pullback_tensorObj_iso ι[A].left L (overPullback ι[A] L)
+  have h : ι[A].left ≫ ι[A].left = 𝟙 A.left := by
+    rw [← Over.comp_left, GrpObj.inv_comp_inv, Over.id_left]
+  exact ⟨e ≪≫ (Iso.refl _ ⊗ᵢ ((pullbackComp ι[A].left ι[A].left).app L ≪≫
+    (pullbackCongr h).app L ≪≫ (pullbackId A.left).app L)) ≪≫ β_ _ _⟩
 
 end AlgebraicGeometry

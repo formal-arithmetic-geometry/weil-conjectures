@@ -31,10 +31,9 @@ makes invertibility stable under pullback.
 ## Implementation notes
 
 `Y.Modules` lives in `Type (u + 1)`, so `Y.Pic` as defined here does too, even though `Pic Y`
-is really a small group.  Smallness is not pursued: only the underlying set is needed for the
-`Set`-valued Picard presheaf. No group law is defined yet: it should come from the monoidal
-structure on `Y.Modules` (`AlgebraicGeometry.Scheme.Modules.tensorObj`), using that the tensor
-product of invertible modules is invertible, which is not proved yet.
+is really a small group; that it is `u`-small is `AlgebraicGeometry.Scheme.Pic.small`. The group
+law, which comes from the tensor product of invertible modules, is defined in
+`WeilConjectures/AlgebraicGeometry/Picard/Group.lean`.
 
 ## Main definitions
 
@@ -168,6 +167,13 @@ def Pic : Type (u + 1) :=
   { L : Skeleton Y.Modules // ((fromSkeleton Y.Modules).obj L).IsInvertible }
 
 namespace Pic
+
+/-- **The Picard group is small.** Although `Y.Pic` lives in `Type (u + 1)`, it is `u`-small: an
+invertible module is determined up to isomorphism by an open cover of `Y` on which it is trivial
+together with the transition functions, units of `Γ(U_i ∩ U_j, 𝒪_Y)`, and these data range over
+a `u`-small set. -/
+theorem small (Y : Scheme.{u}) : Small.{u} Y.Pic :=
+  sorry
 
 /-- The isomorphism class in `Skeleton Y.Modules` underlying an element of `Y.Pic`. -/
 def val (L : Y.Pic) : Skeleton Y.Modules :=

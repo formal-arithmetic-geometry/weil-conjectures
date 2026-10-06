@@ -9,7 +9,10 @@ public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
@@ -56,6 +59,8 @@ below are recorded for their own sake and have no consumer in this repository ye
   fibre is contracted to a single point is closed in `Y`.
 - `AlgebraicGeometry.eventually_finite_image`: if the fibre over `y₀` has finite image, then so
   does the fibre over every `y` near `y₀`.
+- `AlgebraicGeometry.exists_mem_and_comp_eq_of_subsingleton_image`: if `g` contracts the fibre
+  over `y`, then `g` factors through the second projection over a neighbourhood of `y`.
 - `AlgebraicGeometry.exists_eq_snd_comp`: the rigidity lemma, `g` factors through the second
   projection.
 -/
@@ -226,6 +231,72 @@ theorem eventually_finite_image {X Y Z : Scheme.{u}} (fX : X ⟶ Spec (.of K))
   refine ⟨h.toImage x, ?_, ?_⟩ <;>
     simp_all [← Scheme.Hom.comp_apply, -Scheme.Hom.comp_base]
 
+/-- Step 4 of blueprint `lem-sc-rigidity` (`sk-prop-av-rigidity`): if `X` is proper,
+geometrically connected and geometrically reduced over `K` and `g : X ×_K Y ⟶ Z` contracts the
+fibre `X ×_K {y}` of the second projection `pr₂` to a point, then `g` factors through `pr₂` over
+an open neighbourhood `U` of `y`: there is `h : U ⟶ Z` over `K` such that `a ≫ g = b ≫ h`
+whenever `a : T ⟶ X ×_K Y` and `b : T ⟶ U` agree in `Y`.
+
+Following the blueprint, choose an affine open `V` around the image point. As `pr₂` is closed,
+`Y ∖ pr₂ (g⁻¹ (Z ∖ V))` is an open neighbourhood of `y`; choose an affine open `U` around `y`
+inside it, so that `g` maps `X ×_K U` into `V`. Since `Γ(X, 𝒪_X) = K` (Stacks 0BUG), flat base
+change gives `Γ(X ×_K U, 𝒪) = Γ(U, 𝒪_U)`, so the morphism `X ×_K U ⟶ V` to the affine scheme
+`V` factors through `pr₂ : X ×_K U ⟶ U`. -/
+theorem exists_mem_and_comp_eq_of_subsingleton_image {X Y Z : Scheme.{u}}
+    (fX : X ⟶ Spec (.of K)) (fY : Y ⟶ Spec (.of K)) (fZ : Z ⟶ Spec (.of K)) [IsProper fX]
+    [GeometricallyConnected fX] [GeometricallyReduced fX] (g : pullback fX fY ⟶ Z)
+    (hg : g ≫ fZ = pullback.fst fX fY ≫ fX) (y : Y)
+    (hy : (g '' (pullback.snd fX fY ⁻¹' {y})).Subsingleton) :
+    ∃ U : Y.Opens, y ∈ U ∧ ∃ h : U.toScheme ⟶ Z, h ≫ fZ = U.ι ≫ fY ∧
+      ∀ {T : Scheme.{u}} (a : T ⟶ pullback fX fY) (b : T ⟶ U),
+        a ≫ pullback.snd fX fY = b ≫ U.ι → a ≫ g = b ≫ h := by
+  set p := pullback.snd fX fY
+  obtain ⟨x, hx⟩ := p.surjective y
+  obtain ⟨V, hV, hxV, -⟩ := exists_isAffineOpen_mem_and_subset (x := g x) (U := ⊤) trivial
+  have hC : IsClosed (p '' (g ⁻¹' (V : Set Z)ᶜ)) :=
+    p.isClosedMap _ (V.isOpen.isClosed_compl.preimage g.continuous)
+  have hyC : y ∉ p '' (g ⁻¹' (V : Set Z)ᶜ) := by
+    rintro ⟨x', hx', hx'y⟩
+    exact hx' (hy ⟨x', hx'y, rfl⟩ ⟨x, hx, rfl⟩ ▸ hxV)
+  obtain ⟨U, hU, hyU, hUC⟩ := exists_isAffineOpen_mem_and_subset
+    (U := ⟨_, hC.isOpen_compl⟩) hyC
+  have : IsAffine U := hU
+  have : IsAffine V := hV
+  let fU := U.ι ≫ fY
+  let j : pullback fX fU ⟶ pullback fX fY :=
+    pullback.map _ _ _ _ (𝟙 X) U.ι (𝟙 _) (by simp) (by simp [fU])
+  have hj : j ≫ p = pullback.snd fX fU ≫ U.ι := pullback.lift_snd _ _ _
+  have hjV : Set.range (j ≫ g) ⊆ V := by
+    rintro _ ⟨w, rfl⟩
+    by_contra hw
+    refine hUC (pullback.snd fX fU w).2 ⟨j w, hw, ?_⟩
+    rw [← Scheme.Hom.comp_apply, hj, Scheme.Hom.comp_apply]
+    rfl
+  let φ : pullback fX fU ⟶ V := IsOpenImmersion.lift V.ι (j ≫ g) (by simpa using hjV)
+  let _ : X.Over (Spec (.of K)) := ⟨fX⟩
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace fX
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated fX
+  have : IsProper (X ↘ Spec (.of K)) := ‹IsProper fX›
+  have : GeometricallyConnected (X ↘ Spec (.of K)) := ‹_›
+  have : GeometricallyReduced (X ↘ Spec (.of K)) := ‹_›
+  have : IsIso (pullback.snd fX fU).appTop :=
+    Scheme.GlobalSectionsBijective.isIso_appTop_pullback_snd (k := K) (X := X) fU
+  obtain ⟨h', hh'⟩ := (pullback.snd fX fU).exists_comp_eq_of_isIso_appTop φ
+  have hfac : pullback.snd fX fU ≫ h' ≫ V.ι = j ≫ g := by
+    rw [reassoc_of% hh']; exact IsOpenImmersion.lift_fac _ _ _
+  refine ⟨U, hyU, h' ≫ V.ι, ?_, fun a b hab ↦ ?_⟩
+  · refine (pullback.snd fX fU).cancel_left_of_isIso_appTop ?_
+    rw [Category.assoc, reassoc_of% hfac, hg, pullback.condition]
+    simpa using hj =≫ fY
+  · have hab' : a ≫ pullback.fst fX fY ≫ fX = b ≫ fU := by
+      rw [pullback.condition, reassoc_of% hab]
+    have : a = pullback.lift (f := fX) (g := fU) (a ≫ pullback.fst fX fY) b
+        (by simpa using hab') ≫ j := by
+      ext
+      · simp [j, pullback.map]
+      · simp [j, p, hab, pullback.map]
+    rw [this, Category.assoc, ← hfac, pullback.lift_snd_assoc]
+
 /-- Blueprint `sk-prop-av-rigidity`: The rigidity lemma
 
 Let `X`, `Y`, `Z` be `K`-schemes with `X` proper, geometrically connected and geometrically
@@ -251,20 +322,83 @@ geometrically reduced but not geometrically connected, and `g` does not factor. 
 imperfect of characteristic `p`, `a ∈ K ∖ K^p`, `K' = K(a^{1/p})`, `X = Spec K'`, `Y = 𝔸¹_K`,
 `Z = 𝔸¹_{K'}` and `g` the identity of `X ×_K Y = 𝔸¹_{K'}`, `X` is geometrically connected and
 reduced but not geometrically reduced, and `g` does not factor since `pr₂ : 𝔸¹_{K'} ⟶ 𝔸¹_K` is
-not a monomorphism. In both examples `Γ(X, 𝒪_X) ≠ K`. -/
+not a monomorphism. In both examples `Γ(X, 𝒪_X) ≠ K`.
+
+This is also blueprint `lem-sc-rigidity`. The proof follows the blueprint with one change: `L`
+is the set of `y` near which `g` factors through `pr₂`. It is open by definition and contains
+`y₀` by `AlgebraicGeometry.exists_mem_and_comp_eq_of_subsingleton_image` (Step 4). The same
+lemma shows that `L` is the locus of `AlgebraicGeometry.isClosed_setOf_subsingleton_image`, so
+it is closed, hence `L = Y` as `Y` is connected. The local factorizations glue because `pr₂` is
+flat, surjective and quasi-compact, hence an effective epimorphism. This route needs neither
+Step 2 (`AlgebraicGeometry.eventually_finite_image`) nor `Z` locally of finite type, nor `y₀`
+`K`-rational. -/
 theorem exists_eq_snd_comp {X Y Z : Scheme.{u}} (fX : X ⟶ Spec (.of K))
     (fY : Y ⟶ Spec (.of K)) (fZ : Z ⟶ Spec (.of K)) [IsProper fX] [GeometricallyConnected fX]
     [GeometricallyReduced fX] [ConnectedSpace Y] [IsSeparated fZ]
     (g : pullback fX fY ⟶ Z) (hg : g ≫ fZ = pullback.fst fX fY ≫ fX) (y₀ : Y)
     (hy₀ : (Set.range ((pullback.snd fX fY).fiberι y₀ ≫ g).base).Subsingleton) :
-    ∃ h : Y ⟶ Z, g = pullback.snd fX fY ≫ h :=
-  -- Proof sketch (Mumford, Abelian Varieties §4). Let `L'` be the set of `y` with
-  -- `g (X ×_K {y})` a single point. For `y ∈ L'` and an affine open `V` around that point,
-  -- `Y ∖ pr₂ (g⁻¹ (Z ∖ V))` is an open neighbourhood of `y` since `pr₂` is closed. On an
-  -- affine open `U` inside it, `Γ(X ×_K U, 𝒪) = 𝒪(U)` (flat base change and `Γ(X, 𝒪_X) = K`)
-  -- gives `g = pr₂ ≫ h_U` on `X ×_K U`. So `L'` is open and equals the geometric locus of
-  -- `isClosed_setOf_subsingleton_image`, which is closed; as `Y` is connected, `L' = Y`, and
-  -- the `h_U` glue since `pr₂` is an epimorphism.
-  sorry
+    ∃ h : Y ⟶ Z, g = pullback.snd fX fY ≫ h := by
+  set p := pullback.snd fX fY
+  -- `L` is the set of points `y` near which `g` factors through `p`.
+  let L : Set Y := {y | ∃ U : Y.Opens, y ∈ U ∧ ∃ h : U.toScheme ⟶ Z, h ≫ fZ = U.ι ≫ fY ∧
+      ∀ {T : Scheme.{u}} (a : T ⟶ pullback fX fY) (b : T ⟶ U), a ≫ p = b ≫ U.ι → a ≫ g = b ≫ h}
+  have hL : L = Set.univ := by
+    have hLo : IsOpen L := isOpen_iff_forall_mem_open.mpr fun y ⟨U, hyU, hU⟩ ↦
+      ⟨U, fun y' hy' ↦ ⟨U, hy', hU⟩, U.isOpen, hyU⟩
+    have hy₀L : y₀ ∈ L := by
+      refine exists_mem_and_comp_eq_of_subsingleton_image fX fY fZ g hg y₀ ?_
+      rwa [← p.range_fiberι y₀, ← Set.range_comp]
+    let F (y : Y) := Scheme.Hom.fiberMap
+      (pullback.lift (f := fZ) (g := fY) g p (by rw [hg, pullback.condition]))
+      (pullback.lift_snd _ _ _) (Y.fromSpecAlgebraicClosureResidueField y)
+    have hp (y : Y) (q) : Y.fromSpecAlgebraicClosureResidueField y q = y := by
+      simp only [Scheme.fromSpecAlgebraicClosureResidueField, Scheme.Hom.comp_apply]
+      exact Scheme.fromSpecResidueField_apply _ _
+    have hLc : L = {y | (Set.range (F y).base).Subsingleton} := by
+      ext y
+      constructor
+      · rintro ⟨U, hyU, h, hh, hfac⟩
+        set yb := Y.fromSpecAlgebraicClosureResidueField y
+        let yU : _ ⟶ U.toScheme := IsOpenImmersion.lift U.ι yb (by
+          rintro _ ⟨q, rfl⟩
+          simpa [yb, hp] using hyU)
+        have hyUb : yU ≫ U.ι = yb := IsOpenImmersion.lift_fac _ _ _
+        let s : Spec _ ⟶ pullback (pullback.snd fZ fY) yb :=
+          pullback.lift (pullback.lift (yU ≫ h) yb (by rw [Category.assoc, hh, reassoc_of% hyUb]))
+            (𝟙 _) (by rw [pullback.lift_snd, Category.id_comp])
+        have hF : F y = pullback.snd p yb ≫ s := by
+          have := hfac (pullback.fst p yb) (pullback.snd p yb ≫ yU)
+            (by rw [Category.assoc, hyUb, pullback.condition])
+          simp only [yb] at this
+          ext <;> simp [F, s, yb, Scheme.Hom.fiberMap, pullback.map, this, pullback.condition, p]
+        change (Set.range (F y).base).Subsingleton
+        rw [hF, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp]
+        exact (Set.subsingleton_of_subsingleton).image _
+      · intro hy
+        refine exists_mem_and_comp_eq_of_subsingleton_image fX fY fZ g hg y ?_
+        let yb := Y.fromSpecAlgebraicClosureResidueField y
+        have key : F y ≫ pullback.fst _ _ ≫ pullback.fst fZ fY = pullback.fst p yb ≫ g := by
+          simp [F, yb, Scheme.Hom.fiberMap, pullback.map]
+        have hgx (x : ↑(pullback fX fY)) (hx : x ∈ p ⁻¹' {y}) :
+            ∃ a, g x = (pullback.fst fZ fY) (pullback.fst _ yb (F y a)) := by
+          obtain ⟨a, rfl, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := p) (g := yb) x
+            (IsLocalRing.closedPoint _) (hx.trans (hp y _).symm)
+          refine ⟨a, ?_⟩
+          rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, key]
+        rintro _ ⟨x₁, hx₁, rfl⟩ _ ⟨x₂, hx₂, rfl⟩
+        obtain ⟨a₁, ha₁⟩ := hgx x₁ hx₁
+        obtain ⟨a₂, ha₂⟩ := hgx x₂ hx₂
+        rw [ha₁, ha₂, hy ⟨a₁, rfl⟩ ⟨a₂, rfl⟩]
+    have hLc' : IsClosed L := hLc ▸ isClosed_setOf_subsingleton_image fX fY fZ g hg
+    exact IsClopen.eq_univ ⟨hLc', hLo⟩ ⟨y₀, hy₀L⟩
+  have : Surjective p := inferInstance
+  have : Flat p := inferInstance
+  have : QuasiCompact p := inferInstance
+  refine ⟨EffectiveEpi.desc p g fun {T} g₁ g₂ e ↦ ?_, (EffectiveEpi.fac p g _).symm⟩
+  refine Scheme.hom_ext_of_forall _ _ fun τ ↦ ?_
+  obtain ⟨U, hU, h, -, hfac⟩ : (g₁ ≫ p) τ ∈ L := hL ▸ Set.mem_univ _
+  refine ⟨(g₁ ≫ p) ⁻¹ᵁ U, hU, ?_⟩
+  rw [← Category.assoc, hfac _ ((g₁ ≫ p) ∣_ U) (by simp),
+    ← Category.assoc, hfac _ ((g₁ ≫ p) ∣_ U) (by simp [← e])]
 
 end AlgebraicGeometry
