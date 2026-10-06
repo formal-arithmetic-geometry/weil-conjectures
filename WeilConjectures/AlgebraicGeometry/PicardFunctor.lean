@@ -274,6 +274,14 @@ lemma baseChangeMap_comp (f : X ⟶ S) {T T' T'' : Over S} (φ : T'' ⟶ T') (ψ
     baseChangeMap f (φ ≫ ψ) = baseChangeMap f φ ≫ baseChangeMap f ψ := by
   apply Limits.pullback.hom_ext <;> simp
 
+/-- The base change square of `X_T ⟶ T` along a morphism `g : T' ⟶ T` of schemes over `S`. -/
+lemma isPullback_baseChangeMap (f : X ⟶ S) {T T' : Over S} (g : T' ⟶ T) :
+    IsPullback (baseChangeMap f g) (Limits.pullback.snd f T'.hom) (Limits.pullback.snd f T.hom)
+      g.left := by
+  refine IsPullback.of_right ?_ (by simp) (IsPullback.of_hasPullback f T.hom)
+  rw [Over.w g]
+  simpa using IsPullback.of_hasPullback f T'.hom
+
 /-- The Picard presheaf of a morphism of schemes `f : X ⟶ S`: it sends a scheme `T` over `S`
 to the Picard group of the fibre product `X_T = X ×[S] T`, and a morphism over `S` to the
 corresponding pullback map on Picard groups. -/
