@@ -36,14 +36,11 @@ finite separable extension of the base field.
 - `AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback`:
   properness, smoothness of relative dimension `n` and geometric integrality descend along a field
   extension (blueprint `thm-pd-fpqc-local-properties`).
-- `AlgebraicGeometry.nonempty_representableBy_of_isPullback`: if an fppf sheaf becomes
-  representable after an fppf base change, and its canonical descent datum is effective, the
-  descended scheme represents the sheaf.
 -/
 
 @[expose] public section
 
-universe w u
+universe u
 
 open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj
 
@@ -148,28 +145,6 @@ theorem isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback {
     (h : IsPullback q z' z (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (n : ℕ)
     [IsProper z'] [SmoothOfRelativeDimension n z'] [GeometricallyIntegral z'] :
     IsProper z ∧ SmoothOfRelativeDimension n z ∧ GeometricallyIntegral z :=
-  sorry
-
-/-- **A sheaf is determined by its base change along an fppf cover.** Let `p : X ⟶ Y` be flat,
-surjective and locally of finite presentation, let `F` be an fppf sheaf on schemes over `Y`, and
-let `V` represent the restriction of `F` to schemes over `X`. If the canonical descent datum of `V`
-(`CategoryTheory.Functor.RepresentableBy.overDescentDatum`) is effective, with descended scheme
-`V₀`, then `V₀` represents `F`.
-
-For a `Y`-scheme `T`, put `T' = T ×_Y X`, an fppf cover of `T`. An element of `F(T)` restricts to
-`F(T')`, that is, to a point of `V` over `T' ⟶ X`, whose image in `V₀` is invariant and descends
-to `T ⟶ V₀` because `V₀` is an fppf sheaf; conversely a point `T ⟶ V₀` lifts to `T' ⟶ V`, giving
-an element of `F(T')` which descends to `F(T)` by the sheaf property of `F`.
-
-This is Step 7 of the proof of `AlgebraicGeometry.exists_jacobian_descent`. -/
-theorem nonempty_representableBy_of_isPullback {X Y : Scheme.{u}} (p : X ⟶ Y) [Flat p]
-    [Surjective p] [LocallyOfFinitePresentation p]
-    (F : Sheaf (Scheme.fppfTopology.over Y) (Type w)) {V : Over X}
-    (r : ((Over.map p).op ⋙ F.obj).RepresentableBy V) {V₀ : Over Y} (q : V.left ⟶ V₀.left)
-    (hq : IsPullback q V.hom V₀.hom p)
-    (hinv : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
-      (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q) :
-    Nonempty (F.obj.RepresentableBy V₀) :=
   sorry
 
 end AlgebraicGeometry

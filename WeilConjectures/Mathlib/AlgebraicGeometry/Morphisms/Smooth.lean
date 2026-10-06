@@ -29,6 +29,9 @@ The index type of the affine space is `ULift.{u} (Fin d)`, since
 - `AlgebraicGeometry.smoothOfRelativeDimension_iff_topologicalKrullDim_eq`: an irreducible
   scheme smooth over a field is smooth of relative dimension `n` if and only if it has
   dimension `n`.
+- `AlgebraicGeometry.smoothOfRelativeDimension_pullback_fst`,
+  `AlgebraicGeometry.smoothOfRelativeDimension_pullback_snd`: smoothness of relative dimension `n`
+  is inherited by the projections of a fibre product.
 
 ## References
 
@@ -42,6 +45,20 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry
+
+open Limits in
+instance smoothOfRelativeDimension_pullback_fst {X Y Z : Scheme.{u}} (n : ℕ) (f : X ⟶ Z)
+    (g : Y ⟶ Z) [SmoothOfRelativeDimension n g] :
+    SmoothOfRelativeDimension n (pullback.fst f g) :=
+  have := smoothOfRelativeDimension_isStableUnderBaseChange (n := n)
+  MorphismProperty.pullback_fst (P := @SmoothOfRelativeDimension n) _ _ inferInstance
+
+open Limits in
+instance smoothOfRelativeDimension_pullback_snd {X Y Z : Scheme.{u}} (n : ℕ) (f : X ⟶ Z)
+    (g : Y ⟶ Z) [SmoothOfRelativeDimension n f] :
+    SmoothOfRelativeDimension n (pullback.snd f g) :=
+  have := smoothOfRelativeDimension_isStableUnderBaseChange (n := n)
+  MorphismProperty.pullback_snd (P := @SmoothOfRelativeDimension n) _ _ inferInstance
 
 /-- Let `g : X ⟶ Y` be smooth of relative dimension `d` and let `x : X`. After replacing
 `X` and `Y` by affine open neighbourhoods `V ∋ x` and `U ∋ g.base x` with `V ≤ g ⁻¹ᵁ U`,

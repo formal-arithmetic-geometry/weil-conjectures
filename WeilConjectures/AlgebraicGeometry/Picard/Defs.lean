@@ -121,6 +121,10 @@ For `T` over `S'` the fibre products `X ×_S T` and `X' ×_{S'} T` agree, so the
 agree on schemes over `S'`; the fppf coverings of a scheme over `S'` are the same in both sites, so
 their sheafifications agree as well (the remark after Stacks 0B9K).
 
+The blueprint asserts that the restriction *is* `Pic_{X'/S'}`, through the canonical
+identification induced by `X' ×_{S'} T = X ×_S T`. The statement here only asserts that some
+isomorphism exists, which is weaker; this suffices for the current applications.
+
 (blueprint: `lem-pd-picard-base-change`) -/
 theorem nonempty_picardFunctor_iso_of_isPullback {X' S' : Scheme.{u}} {f : X ⟶ S} {g : S' ⟶ S}
     {f' : X' ⟶ S'} {g' : X' ⟶ X} (h : IsPullback g' f' f g) :

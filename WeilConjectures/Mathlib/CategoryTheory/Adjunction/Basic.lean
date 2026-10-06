@@ -71,7 +71,11 @@ variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
   {R : C ⥤ D} {F : Cᵒᵖ ⥤ Type w} {Y : C}
 
 /-- If `adj : L ⊣ R` and `Y` represents `F`, then `R.obj Y` represents `L.op ⋙ F`: a morphism
-`X ⟶ R.obj Y` is a morphism `L.obj X ⟶ Y`, that is, an element of `F (L.obj X)`.
+`X ⟶ R.obj Y` is a morphism `L.obj X ⟶ Y`, that is, an element of `F (L.obj X)`. The
+representation is the composite
+```
+  (X ⟶ R.obj Y) --(adj.homEquiv X Y).symm--> (L.obj X ⟶ Y) --r.homEquiv--> F (L.obj X).
+```
 
 For `L = Over.map p` and `R = Over.pullback p` this says that the base change of a representing
 object represents the restriction of the functor to the slice. -/

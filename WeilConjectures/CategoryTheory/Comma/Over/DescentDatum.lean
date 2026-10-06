@@ -33,6 +33,8 @@ over `f₂`, because `f₁` and `f₂` define the same object of `Over Y`.
   (blueprint `def-pd-descent-datum`).
 - `CategoryTheory.Over.DescentDatum.IsEffective`: the datum comes from an object over `Y`
   (blueprint `def-pd-descent-datum`).
+- `CategoryTheory.Over.DescentDatum.IsBaseChange`: a descent datum is the base change of
+  another one.
 - `CategoryTheory.Functor.RepresentableBy.overDescentDatum`: the canonical descent datum on an
   object representing the restriction of a presheaf to `Over X` (blueprint
   `lem-pd-canonical-descent-datum`).
@@ -63,6 +65,12 @@ of `V` lying over `f₁` to `T`-points of `V` lying over `f₂`. It is natural i
 By the Yoneda lemma this is the same as an isomorphism `φ : pr₀^* V ≅ pr₁^* V` over `X ×_Y X`
 satisfying `pr₀₂^* φ = pr₁₂^* φ ∘ pr₀₁^* φ` over `X ×_Y X ×_Y X` (Stacks 023V): `φ` is the
 transport for the universal pair `pr₀, pr₁`.
+
+Mathlib's `CategoryTheory.Pseudofunctor.DescentData` is the same transport-style notion for a
+pseudofunctor `F` on `C`: its `hom` compares the pullbacks of the object along any two morphisms
+`T ⟶ X` with the same composite to `Y`. It is not used here because there is no pullback
+pseudofunctor `X ↦ Over X` available, and the points of `V` are what the descent arguments
+below manipulate.
 
 (blueprint: `def-pd-descent-datum`) -/
 structure DescentDatum (V : Over X) where
@@ -95,6 +103,25 @@ def IsEffective (D : DescentDatum p V) : Prop :=
     ∀ {T : C} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
       (D.transport f₁ f₂ h a).left ≫ q = a.left ≫ q
 
+/-- A descent datum `D` on `V` relative to `p : X ⟶ Y` **base changes** to a descent datum `E` on
+`V'` relative to `p' = ι ≫ p : X' ⟶ Y`, through a morphism `q : V' ⟶ V` over `ι : X' ⟶ X`, if
+transporting a point `a` of `V'` by `E` and then mapping it to `V` by `q` is the same as mapping
+`a` to `V` and transporting it by `D`:
+```
+  V'(f₁) --E--> V'(f₂)
+    |             |
+    q             q
+    v             v
+  V(f₁ ≫ ι) --D--> V(f₂ ≫ ι)
+```
+When `q` exhibits `V'` as `V ×_X X'`, this says that `E` is the pullback of `D` along `ι`. -/
+def IsBaseChange {X' : C} {ι : X' ⟶ X} {p' : X' ⟶ Y} (hp : ι ≫ p = p') {V' : Over X'}
+    {q : V'.left ⟶ V.left} (hq : q ≫ V.hom = V'.hom ≫ ι) (D : DescentDatum p V)
+    (E : DescentDatum p' V') : Prop :=
+  ∀ ⦃T : C⦄ (f₁ f₂ : T ⟶ X') (h : f₁ ≫ p' = f₂ ≫ p') (a : Over.mk f₁ ⟶ V'),
+    (D.transport (f₁ ≫ ι) (f₂ ≫ ι) (by rw [Category.assoc, Category.assoc, hp, h])
+      (Over.homMk (a.left ≫ q) (by simp [hq]))).left = (E.transport f₁ f₂ h a).left ≫ q
+
 end DescentDatum
 
 end Over
@@ -121,6 +148,14 @@ lemma homEquiv_overTransport {T : C} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f�
     r.homEquiv (r.overTransport f₁ f₂ h a) = F.map (overMapHomMkId f₁ f₂ h).op (r.homEquiv a) :=
   r.homEquiv.apply_symm_apply _
 
+/-- The transport of the canonical descent datum is natural in `T`: for `g : T' ⟶ T`, the square
+```
+  V(f₁)     --transport-->  V(f₂)
+    | g^*                     | g^*
+    v                         v
+  V(g ≫ f₁) --transport-->  V(g ≫ f₂)
+```
+commutes, where `V(f)` denotes the points of `V` over `f`. -/
 lemma overTransport_homMk_comp {T T' : C} (g : T' ⟶ T) (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p)
     (a : Over.mk f₁ ⟶ V) :
     r.overTransport (g ≫ f₁) (g ≫ f₂) (by rw [Category.assoc, Category.assoc, h])
@@ -145,7 +180,16 @@ lemma overTransport_self {T : C} (f : T ⟶ X) (a : Over.mk f ⟶ V) :
   exact r.homEquiv.symm_apply_apply a
 
 /-- **The cocycle condition is automatic** for the canonical descent datum of a representing
-object: both sides are the transport of an element of `F(T)` along the identity of `T`.
+object: both sides are the transport of an element of `F(T)` along the identity of `T`. The
+triangle
+```
+  V(f₁) --transport--> V(f₂)
+       \                 |
+    transport        transport
+          \              v
+           ----------> V(f₃)
+```
+commutes, where `V(f)` denotes the points of `V` over `f`.
 
 (blueprint: `lem-pd-descent-cocycle`) -/
 theorem overTransport_overTransport {T : C} (f₁ f₂ f₃ : T ⟶ X) (h₁₂ : f₁ ≫ p = f₂ ≫ p)

@@ -17,6 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 
 /-!
@@ -125,14 +126,14 @@ value at an algebraically closed point — are stated separately.
   `thm-sc-theorem-of-the-base`).
 - `AlgebraicGeometry.exists_jacobian`: the Jacobian is an abelian variety (blueprint
   `sk-prop-jacobian`, `thm-sc-jacobian-representability`).
-- `AlgebraicGeometry.isSepClosed_and_curve_pullback`: the base change of the curve to a separable
-  closure (blueprint `lem-pd-geometric-curve`).
 - `AlgebraicGeometry.exists_jacobian_pullback`: the Jacobian over a separable closure (blueprint
   `thm-pd-geometric-pic0`).
 - `AlgebraicGeometry.nonempty_picardFunctorDegree_iso_of_isPullback`: `Pic^0` commutes with base
   change (blueprint `cor-pd-pic0-base-change`).
-- `AlgebraicGeometry.exists_intermediateField_representableBy`: the descent datum is defined at a
+- `AlgebraicGeometry.exists_intermediateField_descentDatum`: the descent datum is defined at a
   finite separable level (blueprint `cor-pd-finite-level`).
+- `AlgebraicGeometry.nonempty_representableBy_picardFunctorDegree_of_isPullback`: `Pic^0_{C/k}`
+  is represented by the descended scheme (Step 7 of `thm-pd-jacobian-general-field`).
 - `AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree`: `Pic^0_{C/k}` is
   represented by an abelian variety over any field `k` (blueprint `thm-pd-jacobian-general-field`).
 - `AlgebraicGeometry.exists_jacobian_descent`: the Jacobian over a general base field (blueprint
@@ -583,34 +584,6 @@ noncomputable def specAlgEquivOver {k K : Type u} [CommRing k] [CommRing K] [Alg
 
 variable {k : Type u} [Field k]
 
-/-- **The base change of a curve to a separable closure.** Let `C` be a smooth projective
-geometrically integral curve of genus `g` over `k` and let `k_s` be a separable closure of `k`.
-Then `k_s` is separably closed and the base change `C_{k_s}` is a smooth projective geometrically
-integral curve of genus `g` over `k_s`.
-
-(blueprint: `lem-pd-geometric-curve`) -/
-theorem isSepClosed_and_curve_pullback (ks : Type u) [Field ks] [Algebra k ks]
-    [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
-    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
-    [GeometricallyIntegral (C ↘ Spec (.of k))] :
-    IsSepClosed ks ∧
-      SmoothOfRelativeDimension 1
-        (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘
-          Spec (.of ks)) ∧
-      IsProper (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘
-          Spec (.of ks)) ∧
-      GeometricallyIntegral
-        (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘
-          Spec (.of ks)) ∧
-      arithmeticGenus ks
-          (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks)))) =
-        arithmeticGenus k C :=
-  ⟨IsSepClosure.sep_closed k,
-    have := smoothOfRelativeDimension_isStableUnderBaseChange (n := 1)
-    MorphismProperty.pullback_snd (P := @SmoothOfRelativeDimension 1) _ _ inferInstance,
-    inferInstanceAs (IsProper (pullback.snd _ _)),
-    inferInstanceAs (GeometricallyIntegral (pullback.snd _ _)), arithmeticGenus_pullback ks⟩
-
 /-- **The degree-zero Picard functor over a separable closure.** Let `C` be a smooth projective
 geometrically integral curve of genus `g` over `k` and let `k_s` be a separable closure of `k`.
 Then `Pic^0_{C_{k_s}/k_s}` is represented by an abelian variety `J_s` of dimension `g` over
@@ -629,8 +602,19 @@ theorem exists_jacobian_pullback (ks : Type u) [Field ks] [Algebra k ks] [IsSepC
         Nonempty (picardZero ks
             (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks)))) ≃
           (𝟙_ (Over (Spec (.of ks))) ⟶ J)) := by
-  obtain ⟨_, _, _, _, hgs⟩ := isSepClosed_and_curve_pullback (k := k) ks C
-  rw [← hg, ← hgs]
+  -- The base change of `C` to `k_s` is a smooth projective geometrically integral curve of
+  -- genus `g` over the separably closed field `k_s` (blueprint `lem-pd-geometric-curve`).
+  have : IsSepClosed ks := IsSepClosure.sep_closed k
+  have : SmoothOfRelativeDimension 1 (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (SmoothOfRelativeDimension 1 (pullback.snd _ _))
+  have : IsProper (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (IsProper (pullback.snd _ _))
+  have : GeometricallyIntegral (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (GeometricallyIntegral (pullback.snd _ _))
+  rw [← hg, ← arithmeticGenus_pullback ks]
   exact exists_jacobian (k := ks)
 
 /-- **The degree-zero part is compatible with base change.** Let `C` be a smooth projective
@@ -641,6 +625,10 @@ over `K` is `Pic^0_{C_K/K}`.
 This follows from the compatibility of the Picard functor with base change
 (`AlgebraicGeometry.nonempty_picardFunctor_iso_of_isPullback`), the fibrewise degree of a class
 being computed on the same fibres in both cases.
+
+The blueprint asserts that the restriction *is* `Pic^0_{C_K/K}`, through the canonical
+identification. The statement here only asserts that some isomorphism exists, which is weaker;
+this suffices for the current applications.
 
 (blueprint: `cor-pd-pic0-base-change`) -/
 theorem nonempty_picardFunctorDegree_iso_of_isPullback {K : Type u} [Field K] [Algebra k K]
@@ -654,67 +642,112 @@ theorem nonempty_picardFunctorDegree_iso_of_isPullback {K : Type u} [Field K] [A
         (picardFunctorDegree (C' ↘ Spec (.of K)) d).obj) :=
   sorry
 
+omit [Field k] in
+lemma specMap_algebraMap_comp_specMap_algebraMap (k K L : Type u) [CommRing k] [CommRing K]
+    [CommRing L] [Algebra k K] [Algebra K L] [Algebra k L] [IsScalarTower k K L] :
+    Spec.map (CommRingCat.ofHom (algebraMap K L)) ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) =
+      Spec.map (CommRingCat.ofHom (algebraMap k L)) := by
+  rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, ← IsScalarTower.algebraMap_eq]
+
 /-- **The descent datum is defined at a finite separable level.** Let `C` be a smooth projective
 geometrically integral curve over `k`, let `k_s` be a separable closure of `k` and let `J_s`
 represent the restriction of `Pic^0_{C/k}` to schemes over `k_s`, so that `J_s` carries the
-canonical descent datum relative to `Spec k_s ⟶ Spec k`
+canonical descent datum `φ` relative to `Spec k_s ⟶ Spec k`
 (`CategoryTheory.Functor.RepresentableBy.overDescentDatum`). Then there are a finite separable
-subextension `K` of `k_s/k` and a `K`-scheme `J_K` representing the restriction of `Pic^0_{C/k}`
-to schemes over `K` — so that `J_K` carries the canonical descent datum relative to
-`Spec K ⟶ Spec k`, which base changes to that of `J_s` — such that `J_K ×_K k_s ≅ J_s`. Moreover
-every finite set of points of `J_K` lies in an affine open, `J_K` being projective over `K`.
+subextension `K` of `k_s/k`, a `K`-scheme `J_K` with `J_K ×_K k_s ≅ J_s`, and a descent datum
+`φ_K` on `J_K` relative to `Spec K ⟶ Spec k` whose base change to `k_s` is `φ`. Moreover every
+finite set of points of `J_K` lies in an affine open, `J_K` being projective over `K`.
 
-The blueprint asks for a descent datum on `J_K` whose base change is that of `J_s`; asking that
-`J_K` represent the restriction of `Pic^0_{C/k}` produces such a datum canonically. The proof
-spreads `J_s`, its datum and a closed immersion `J_s ⟶ ℙ^N` out to a finite level
-(Stacks 01ZM: `AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`,
+The proof spreads `J_s`, the isomorphism `φ` and a closed immersion `J_s ⟶ ℙ^N` out to a finite
+level (Stacks 01ZM: `AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`,
 `AlgebraicGeometry.Scheme.exists_pullback_hom_of_isLimit` and
-`AlgebraicGeometry.Scheme.exists_pullback_fst_comp_eq_of_isLimit`).
+`AlgebraicGeometry.Scheme.exists_pullback_fst_comp_eq_of_isLimit`), the cocycle condition
+holding at a finite level because it holds over `k_s`.
 
 (blueprint: `cor-pd-finite-level`) -/
-theorem exists_intermediateField_representableBy {ks : Type u} [Field ks] [Algebra k ks]
+theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra k ks]
     [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
     [GeometricallyIntegral (C ↘ Spec (.of k))] (Js : Over (Spec (.of ks)))
     (rs : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k ks)))).op ⋙
       (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy Js) :
     ∃ (K : IntermediateField k ks), FiniteDimensional k K ∧ Algebra.IsSeparable k K ∧
-      ∃ (JK : Over (Spec (.of K)))
-        (_ : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
-          (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy JK)
-        (q : Js.left ⟶ JK.left),
-        IsPullback q Js.hom JK.hom (Spec.map (CommRingCat.ofHom (algebraMap K ks))) ∧
+      ∃ (JK : Over (Spec (.of K))) (q : Js.left ⟶ JK.left)
+        (hq : IsPullback q Js.hom JK.hom (Spec.map (CommRingCat.ofHom (algebraMap K ks))))
+        (D : Over.DescentDatum (Spec.map (CommRingCat.ofHom (algebraMap k K))) JK),
+        D.IsBaseChange (specMap_algebraMap_comp_specMap_algebraMap k K ks) hq.w
+            rs.overDescentDatum ∧
           ∀ s : Set JK.left, s.Finite → ∃ U : JK.left.Opens, IsAffineOpen U ∧ s ⊆ U :=
   sorry
 
-/-- **The group law is compatible with the canonical descent datum.** Let `K/k` be a field
-extension and let `J_K` represent the restriction of `Pic^0_{C/k}` to schemes over `K`. Then `J_K`
-carries a commutative group scheme structure whose multiplication and unit are compatible with the
-canonical descent datum of `J_K` relative to `Spec K ⟶ Spec k`.
+/-- **The group law is compatible with the descent datum at a finite level.** Let `k ⊆ K ⊆ k_s`
+be field extensions, let `J_s` represent the restriction of `Pic^0_{C/k}` to schemes over `k_s`
+and let `J_K` be a `K`-scheme with `J_K ×_K k_s ≅ J_s`, carrying a descent datum `φ_K` relative to
+`Spec K ⟶ Spec k` whose base change to `k_s` is the canonical descent datum of `J_s`. Then `J_K`
+carries a commutative group scheme structure whose multiplication and unit are compatible with
+`φ_K`.
 
-The group structure is the one induced by the group law of `Pic^0_{C/k}`, and it is compatible
-with the datum because that group law is defined over `k`: transport does not change the element
-of `Pic^0_{C/k}(T)` that a point stands for. This is Step 5 of the proof of
+The group law of `Pic^0_{C/k}` makes `J_s` a commutative group scheme over `k_s` compatible with
+its canonical descent datum, since transport does not change the element of `Pic^0_{C/k}(T)` that
+a point stands for. Restricted to `Spec k_s ⟶ Spec K`, that datum is the one induced by `J_K`, so
+the group law descends to `J_K` (`CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback`
+along `Spec k_s ⟶ Spec K`), and it is compatible with `φ_K` because it is so after the faithfully
+flat base change to `k_s`. This is Step 5 of the proof of
 `AlgebraicGeometry.exists_jacobian_descent`; it is stated separately because
 `AlgebraicGeometry.Scheme.Pic` carries no group law here. -/
-theorem exists_commGrpObj_overTransport {K : Type u} [Field K] [Algebra k K] (C : Scheme.{u})
-    [C.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))]
-    [IsProper (C ↘ Spec (.of k))] [GeometricallyIntegral (C ↘ Spec (.of k))]
-    (JK : Over (Spec (.of K)))
-    (r : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
-      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy JK) :
+theorem exists_commGrpObj_of_isBaseChange {K ks : Type u} [Field K] [Field ks] [Algebra k K]
+    [Algebra K ks] [Algebra k ks] [IsScalarTower k K ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (Js : Over (Spec (.of ks)))
+    (rs : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k ks)))).op ⋙
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy Js)
+    (JK : Over (Spec (.of K))) (q : Js.left ⟶ JK.left)
+    (hq : IsPullback q Js.hom JK.hom (Spec.map (CommRingCat.ofHom (algebraMap K ks))))
+    (D : Over.DescentDatum (Spec.map (CommRingCat.ofHom (algebraMap k K))) JK)
+    (hD : D.IsBaseChange (specMap_algebraMap_comp_specMap_algebraMap k K ks) hq.w
+      rs.overDescentDatum) :
     ∃ _ : CommGrpObj JK,
       (∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of K))
         (h : f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) =
           f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K))) (a b : Over.mk f₁ ⟶ JK),
-        r.overTransport f₁ f₂ h (CartesianMonoidalCategory.lift a b ≫ μ[JK]) =
-          CartesianMonoidalCategory.lift (r.overTransport f₁ f₂ h a)
-            (r.overTransport f₁ f₂ h b) ≫ μ[JK]) ∧
+        D.transport f₁ f₂ h (CartesianMonoidalCategory.lift a b ≫ μ[JK]) =
+          CartesianMonoidalCategory.lift (D.transport f₁ f₂ h a) (D.transport f₁ f₂ h b) ≫
+            μ[JK]) ∧
       ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of K))
         (h : f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) =
           f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K))),
-        r.overTransport f₁ f₂ h (CartesianMonoidalCategory.toUnit _ ≫ η[JK]) =
+        D.transport f₁ f₂ h (CartesianMonoidalCategory.toUnit _ ≫ η[JK]) =
           CartesianMonoidalCategory.toUnit _ ≫ η[JK] :=
+  sorry
+
+/-- **`Pic^0_{C/k}` is represented by the descended scheme.** Let `K/k` be a field extension, let
+`J_K` represent the restriction of `Pic^0_{C/k}` to schemes over `K`, and let `J` be a `k`-scheme
+with `J ×_k K ≅ J_K` through which the canonical descent datum of `J_K` relative to
+`Spec K ⟶ Spec k` is the trivial one: the projection `q : J_K ⟶ J` is invariant under transport.
+Then `J` represents `Pic^0_{C/k}`.
+
+This is Step 7 of the proof of `AlgebraicGeometry.exists_jacobian_descent`, applied with
+`K = k_s`. The morphism `Spec K ⟶ Spec k` is faithfully flat and quasi-compact but in general not
+locally of finite presentation, so this does not follow from the fppf sheaf property of
+`Pic^0_{C/k}` alone. Since `Pic^0_{C/k}` and `J` are locally of finite presentation, the
+identification of `Pic^0_{C/k}` with `h_J` over `K` is defined over a finitely generated
+subalgebra `A ⊆ K` (Stacks 01ZC), along which fppf descent of sections applies; equivalently, by
+fpqc descent of morphisms (Stacks 02W0) it agrees with the representing object of `Pic^0_{C/k}`.
+
+(blueprint: `thm-pd-jacobian-general-field`, Step 7) -/
+theorem nonempty_representableBy_picardFunctorDegree_of_isPullback {K : Type u} [Field K]
+    [Algebra k K] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (JK : Over (Spec (.of K)))
+    (r : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy JK)
+    (J : Over (Spec (.of k))) (q : JK.left ⟶ J.left)
+    (hq : IsPullback q JK.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+    (hinv : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of K))
+      (h : f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) =
+        f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K))) (a : Over.mk f₁ ⟶ JK),
+      (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q) :
+    Nonempty ((picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J) :=
   sorry
 
 /-- **The geometric points of `Pic^0_{C₀/k₀}`.** Let `C₀` be a smooth projective geometrically
@@ -748,21 +781,27 @@ theorem exists_picardZero_equiv_picardFunctorDegree {k₀ K : Type u} [Field k�
   sorry
 
 omit [Field k] in
-/-- `Spec K ⟶ Spec k` is surjective, finite, flat and of finite presentation for a finite field
-extension `K/k`. -/
-lemma isFinite_flat_surjective_specMap (k K : Type u) [Field k] [Field K] [Algebra k K]
-    [FiniteDimensional k K] :
-    IsFinite (Spec.map (CommRingCat.ofHom (algebraMap k K))) ∧
-      Flat (Spec.map (CommRingCat.ofHom (algebraMap k K))) ∧
-      LocallyOfFinitePresentation (Spec.map (CommRingCat.ofHom (algebraMap k K))) ∧
-      Surjective (Spec.map (CommRingCat.ofHom (algebraMap k K))) := by
-  have hfin : (CommRingCat.ofHom (algebraMap k K)).hom.Finite :=
-    RingHom.finite_algebraMap.mpr inferInstance
-  refine ⟨IsFinite.SpecMap_iff _ |>.mpr hfin, Flat.SpecMap_iff.mpr ?_, ?_,
-    ⟨fun x ↦ ⟨default, Subsingleton.elim _ _⟩⟩⟩
-  · exact RingHom.flat_algebraMap_iff.mpr inferInstance
-  · rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFinitePresentation)]
-    exact RingHom.FinitePresentation.of_finiteType.mp hfin.finiteType
+lemma isFinite_specMap_algebraMap (k K : Type u) [Field k] [Field K] [Algebra k K]
+    [FiniteDimensional k K] : IsFinite (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+  IsFinite.SpecMap_iff _ |>.mpr (RingHom.finite_algebraMap.mpr inferInstance)
+
+omit [Field k] in
+lemma flat_specMap_algebraMap (k K : Type u) [Field k] [CommRing K] [Algebra k K] :
+    Flat (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+  Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
+
+omit [Field k] in
+lemma locallyOfFinitePresentation_specMap_algebraMap (k K : Type u) [Field k] [Field K]
+    [Algebra k K] [FiniteDimensional k K] :
+    LocallyOfFinitePresentation (Spec.map (CommRingCat.ofHom (algebraMap k K))) := by
+  rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFinitePresentation)]
+  exact RingHom.FinitePresentation.of_finiteType.mp
+    (RingHom.finite_algebraMap.mpr inferInstance).finiteType
+
+omit [Field k] in
+lemma surjective_specMap_algebraMap (k K : Type u) [Field k] [Field K] [Algebra k K] :
+    Surjective (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+  ⟨fun _ ↦ ⟨default, Subsingleton.elim _ _⟩⟩
 
 /-- **The Jacobian over an arbitrary ground field, as a representing object.** Let `C` be a smooth
 projective geometrically integral curve of genus `g` over a field `k`. Then `Pic^0_{C/k}` is
@@ -786,23 +825,30 @@ theorem exists_commGrpObj_representableBy_picardFunctorDegree (ks : Type u) [Fie
     (C' := pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))))
     (pullback.fst _ _) (IsPullback.of_hasPullback _ _) 0
   -- Steps 2 and 3: its canonical descent datum is defined at a finite separable level `K`.
-  obtain ⟨K, _, _, JK, rK, q', hq', hJK⟩ :=
-    exists_intermediateField_representableBy C Js (rJs.ofIso e.symm)
-  obtain ⟨_, _, _, _⟩ := isFinite_flat_surjective_specMap k K
-  -- Step 4: the canonical descent datum of `J_K` is effective, with descended scheme `J`.
-  obtain ⟨J, q, hq, hinv⟩ := rK.overDescentDatum.isEffective_of_isFinite hJK
-  -- Step 7: `J` represents `Pic^0_{C/k}`.
-  obtain ⟨r⟩ := nonempty_representableBy_of_isPullback _ _ rK q hq hinv
+  obtain ⟨K, _, _, JK, q', hq', D, hD, hJK⟩ :=
+    exists_intermediateField_descentDatum C Js (rJs.ofIso e.symm)
+  have := isFinite_specMap_algebraMap k K
+  have := flat_specMap_algebraMap k K
+  have := locallyOfFinitePresentation_specMap_algebraMap k K
+  have := surjective_specMap_algebraMap k K
+  -- Step 4: the descent datum `φ_K` is effective, with descended scheme `J`.
+  obtain ⟨J, q, hq, hinv⟩ := D.isEffective_of_isFinite hJK
   -- Step 5: the group law descends.
-  obtain ⟨_, hμ, hη⟩ := exists_commGrpObj_overTransport C JK rK
-  obtain ⟨_, -⟩ := rK.overDescentDatum.exists_commGrpObj_of_isPullback q hq hinv hμ hη
+  obtain ⟨_, hμ, hη⟩ := exists_commGrpObj_of_isBaseChange C Js (rJs.ofIso e.symm) JK q' hq' D hD
+  obtain ⟨_, -⟩ := D.exists_commGrpObj_of_isPullback q hq hinv hμ hη
+  -- Step 7: `J` represents `Pic^0_{C/k}`, since `J ×_k k_s ≅ J_s` compatibly with the canonical
+  -- descent datum of `J_s`.
+  have hs := specMap_algebraMap_comp_specMap_algebraMap k K ks
+  have hJ : IsPullback (q' ≫ q) Js.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k ks))) :=
+    hs ▸ hq'.paste_horiz hq
+  obtain ⟨r⟩ := nonempty_representableBy_picardFunctorDegree_of_isPullback C Js
+    (rJs.ofIso e.symm) J (q' ≫ q) hJ fun f₁ f₂ h a ↦ by
+      rw [← Category.assoc, ← Functor.RepresentableBy.overDescentDatum_transport, ← hD f₁ f₂ h a,
+        hinv]
+      simp
   -- Step 6: the geometric properties descend along `k ⊆ k_s`.
-  have hs : Spec.map (CommRingCat.ofHom (algebraMap K ks)) ≫
-      Spec.map (CommRingCat.ofHom (algebraMap k K)) =
-        Spec.map (CommRingCat.ofHom (algebraMap k ks)) := by
-    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, ← IsScalarTower.algebraMap_eq]
   obtain ⟨hP, hS, hG⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback
-    J.hom Js.hom (q' ≫ q) (hs ▸ hq'.paste_horiz hq) g
+    J.hom Js.hom (q' ≫ q) hJ g
   exact ⟨J, inferInstance, hP, hS, hG, ⟨r⟩⟩
 
 /-- **The Jacobian over a general base field, by Galois descent.** Let `k₀` be any field, `k_s` a

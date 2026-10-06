@@ -29,6 +29,16 @@ namespace CategoryTheory.Functor.RepresentableBy
 
 variable {C : Type u} [Category.{v} C] {F : Cᵒᵖ ⥤ Type w} {Y Y' : C}
 
+/-- The isomorphism `e.uniqueUpToIso e' : Y ≅ Y'` between two representing objects of `F` is
+compatible with the representations: the triangle
+```
+  (X ⟶ Y) --(· ≫ u.hom)--> (X ⟶ Y')
+        \                     /
+       e.homEquiv      e'.homEquiv
+           \               /
+            --->  F(X)  <--
+```
+commutes, where `u = e.uniqueUpToIso e'`. -/
 lemma homEquiv_comp_uniqueUpToIso_hom (e : F.RepresentableBy Y) (e' : F.RepresentableBy Y')
     {X : C} (f : X ⟶ Y) : e'.homEquiv (f ≫ (e.uniqueUpToIso e').hom) = e.homEquiv f := by
   have h : (e.uniqueUpToIso e').hom = e'.homEquiv.symm (e.homEquiv (𝟙 Y)) := by
@@ -38,7 +48,15 @@ lemma homEquiv_comp_uniqueUpToIso_hom (e : F.RepresentableBy Y) (e' : F.Represen
 
 /-- **Uniqueness of the representing object.** If `(Y, e)` and `(Y', e')` both represent `F`, there
 is a unique isomorphism `u : Y ≅ Y'` with `e' ∘ h_u = e`, i.e. `e'.homEquiv (f ≫ u.hom) =
-e.homEquiv f` for every `f : X ⟶ Y`.
+e.homEquiv f` for every `f : X ⟶ Y`: `u` is the unique isomorphism making the triangle
+```
+  (X ⟶ Y) --(· ≫ u.hom)--> (X ⟶ Y')
+        \                     /
+       e.homEquiv      e'.homEquiv
+           \               /
+            --->  F(X)  <--
+```
+commute for every `X`.
 
 For the functor `Pic^0_{C/k}` this is the uniqueness of the Jacobian; that `u` is a homomorphism
 of group schemes is not part of the statement, as `Pic^0_{C/k}` is only a functor to types here.
