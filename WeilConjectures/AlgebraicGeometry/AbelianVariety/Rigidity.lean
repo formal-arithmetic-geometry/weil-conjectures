@@ -5,10 +5,12 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 
 /-!
@@ -45,6 +47,9 @@ below are recorded for their own sake and have no consumer in this repository ye
 
 ## Main statements
 
+- `AlgebraicGeometry.isClosed_setOf_subsingleton_range_fiberMap`: for a morphism `F : A ⟶ B` over
+  `Y` with `A` universally open and locally of finite type and `B` separated over `Y`, the locus
+  of `y : Y` whose geometric fibre `F_ȳ` has subsingleton image is closed in `Y`.
 - `AlgebraicGeometry.isClosed_setOf_subsingleton_image`: the locus of `y : Y` whose geometric
   fibre is contracted to a single point is closed in `Y`.
 - `AlgebraicGeometry.eventually_finite_image`: if the fibre over `y₀` has finite image, then so
@@ -62,6 +67,97 @@ open CategoryTheory Limits Topology
 namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
+
+/-- The general form of blueprint `lem-sc-constant-locus-closed`. Let `F : A ⟶ B` be a morphism
+of schemes over `Y`, with `a : A ⟶ Y` universally open and locally of finite type and with
+`b : B ⟶ Y` separated. Then the locus of `y : Y` such that the base change
+`F_ȳ : A_{κ(y)‾} ⟶ B_{κ(y)‾}` of `F` along the geometric point `ȳ` over `y` has subsingleton
+image is closed.
+
+Following the blueprint, write `Φ : A ×_Y A ⟶ B ×_Y B` for the product of `F` with itself and
+`π : A ×_Y A ⟶ Y` for the projection. The locus is the complement of the image under `π` of the
+open set `U` of points that `Φ` sends off the diagonal of `b`, and `π` is an open map. To see
+that `y` lies outside `π(U)` exactly when the image of `F_ȳ` is a subsingleton, base change
+along `ȳ`: the diagonal of `B_{κ(y)‾}` is the preimage of the diagonal of `b`
+(`Scheme.Pullback.map_fst_mem_range_diagonal_iff`), and if the image of `F_ȳ` is a single point
+then that point is a `κ(y)‾`-point, since `A_{κ(y)‾}` has a closed, hence rational, point. -/
+theorem isClosed_setOf_subsingleton_range_fiberMap {A B Y : Scheme.{u}} (a : A ⟶ Y)
+    (b : B ⟶ Y) [UniversallyOpen a] [LocallyOfFiniteType a] [IsSeparated b] (F : A ⟶ B)
+    (hF : F ≫ b = a) :
+    IsClosed {y : Y | (Set.range (Scheme.Hom.fiberMap F hF
+      (Y.fromSpecAlgebraicClosureResidueField y)).base).Subsingleton} := by
+  let Φ := pullback.map a a b b F F (𝟙 Y) (by simp [hF]) (by simp [hF])
+  let π := pullback.fst a a ≫ a
+  let U : Set ↑(pullback a a) := Φ ⁻¹' (Set.range (pullback.diagonal b))ᶜ
+  have hU : IsOpen U :=
+    (pullback.diagonal b).isClosedEmbedding.isClosed_range.isOpen_compl.preimage Φ.continuous
+  suffices key : ∀ y, (Set.range
+      (Scheme.Hom.fiberMap F hF (Y.fromSpecAlgebraicClosureResidueField y)).base).Subsingleton ↔
+      y ∉ π '' U by
+    convert (π.isOpenMap U hU).isClosed_compl using 1
+    ext y
+    exact key y
+  intro y
+  set p := Y.fromSpecAlgebraicClosureResidueField y
+  have hp (q) : p q = y := by
+    simp only [p, Scheme.fromSpecAlgebraicClosureResidueField, Scheme.Hom.comp_apply]
+    exact Scheme.fromSpecResidueField_apply _ _
+  let FΩ := Scheme.Hom.fiberMap F hF p
+  have hFΩ : FΩ ≫ pullback.snd b p = pullback.snd a p := by simp [FΩ, Scheme.Hom.fiberMap]
+  let hA := pullback.map _ _ a a (pullback.fst a p) (pullback.fst a p) p
+    pullback.condition.symm pullback.condition.symm
+  let hB := pullback.map _ _ b b (pullback.fst b p) (pullback.fst b p) p
+    pullback.condition.symm pullback.condition.symm
+  let ΦΩ := pullback.map (pullback.snd a p) (pullback.snd a p) (pullback.snd b p)
+    (pullback.snd b p) FΩ FΩ (𝟙 _) (by simp [hFΩ]) (by simp [hFΩ])
+  have hcomm : hA ≫ Φ = ΦΩ ≫ hB := by
+    ext <;> simp [hA, hB, Φ, ΦΩ, FΩ, Scheme.Hom.fiberMap]
+  have hΦΩ₁ (v) : pullback.fst (pullback.snd b p) (pullback.snd b p) (ΦΩ v) =
+      FΩ (pullback.fst (pullback.snd a p) (pullback.snd a p) v) := by
+    rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply]
+    simp [ΦΩ]
+  have hΦΩ₂ (v) : pullback.snd (pullback.snd b p) (pullback.snd b p) (ΦΩ v) =
+      FΩ (pullback.snd (pullback.snd a p) (pullback.snd a p) v) := by
+    rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply]
+    simp [ΦΩ]
+  constructor
+  · rintro hsub ⟨w, hw, hπw⟩
+    apply hw
+    obtain ⟨c, rfl⟩ : w ∈ Set.range (pullback.fst π p) := by
+      rw [Scheme.Pullback.range_fst]
+      exact ⟨IsLocalRing.closedPoint _, by rw [hp, hπw]⟩
+    let ψ : pullback π p ⟶ pullback (pullback.snd a p) (pullback.snd a p) :=
+      pullback.lift (pullback.lift (pullback.fst π p ≫ pullback.fst a a) (pullback.snd π p)
+          (by rw [Category.assoc]; exact pullback.condition))
+        (pullback.lift (pullback.fst π p ≫ pullback.snd a a) (pullback.snd π p)
+          (by rw [Category.assoc, ← pullback.condition]; exact pullback.condition))
+        (by simp)
+    have hψ : ψ ≫ hA = pullback.fst π p := by ext <;> simp [ψ, hA]
+    rw [← hψ, Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, hcomm, Scheme.Hom.comp_apply,
+      Scheme.Pullback.map_fst_mem_range_diagonal_iff]
+    have : JacobsonSpace ↑(pullback a p) := LocallyOfFiniteType.jacobsonSpace (pullback.snd a p)
+    obtain ⟨e, -, he⟩ := nonempty_inter_closedPoints
+      ⟨pullback.fst (pullback.snd a p) (pullback.snd a p) (ψ c), Set.mem_univ _⟩
+      isClosed_univ.isLocallyClosed
+    let σ := pointOfClosedPoint (pullback.snd a p) e he
+    have hσ : (σ ≫ FΩ) (IsLocalRing.closedPoint _) = FΩ e := by simp [σ]
+    exact Scheme.Pullback.mem_range_diagonal_of_mem_range (σ ≫ FΩ) (by simp [σ, hFΩ]) _
+      ⟨_, hσ.trans ((hsub ⟨_, rfl⟩ ⟨_, rfl⟩).trans (hΦΩ₁ _).symm)⟩
+      ⟨_, hσ.trans ((hsub ⟨_, rfl⟩ ⟨_, rfl⟩).trans (hΦΩ₂ _).symm)⟩
+  · intro hy
+    rintro _ ⟨x₁, rfl⟩ _ ⟨x₂, rfl⟩
+    by_contra hne
+    obtain ⟨v, rfl, rfl⟩ := Scheme.Pullback.exists_preimage_pullback (f := pullback.snd a p)
+      (g := pullback.snd a p) x₁ x₂ (Subsingleton.elim _ _)
+    refine hy ⟨hA v, fun h ↦ hne ?_, ?_⟩
+    · rw [← Scheme.Hom.comp_apply, hcomm, Scheme.Hom.comp_apply,
+        Scheme.Pullback.map_fst_mem_range_diagonal_iff] at h
+      obtain ⟨β, hβ⟩ := h
+      rw [← hΦΩ₁, ← hΦΩ₂, ← hβ, ← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply,
+        pullback.diagonal_fst, pullback.diagonal_snd]
+    · have : hA ≫ π = (pullback.fst _ _ ≫ pullback.snd a p) ≫ p := by
+        simp [hA, π, pullback.condition]
+      rw [← Scheme.Hom.comp_apply, this, Scheme.Hom.comp_apply, hp]
 
 /-- Blueprint `sk-prop-av-const-locus`: The locus of constant fibres is closed
 
@@ -83,7 +179,7 @@ theorem isClosed_setOf_subsingleton_image {X Y Z : Scheme.{u}}
       (pullback.lift (f := fZ) (g := fY) g (pullback.snd fX fY)
         (by rw [hg, pullback.condition]))
       (pullback.lift_snd _ _ _) (Y.fromSpecAlgebraicClosureResidueField y)).base).Subsingleton} :=
-  sorry
+  isClosed_setOf_subsingleton_range_fiberMap _ _ _ _
 
 /-- Blueprint `sk-prop-av-image-open`: Finiteness of the image is open in the parameter
 
