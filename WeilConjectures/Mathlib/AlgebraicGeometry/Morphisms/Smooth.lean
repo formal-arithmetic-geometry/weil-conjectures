@@ -30,6 +30,8 @@ The index type of the affine space is `ULift.{u} (Fin d)`, since
 - `AlgebraicGeometry.smoothOfRelativeDimension_iff_topologicalKrullDim_eq`: an irreducible
   scheme smooth over a field is smooth of relative dimension `n` if and only if it has
   dimension `n`.
+- `AlgebraicGeometry.topologicalKrullDim_le_of_smoothOfRelativeDimension`: a scheme smooth of
+  relative dimension `n` over a field has dimension at most `n`.
 - `AlgebraicGeometry.AffineSpace.smoothOfRelativeDimension_over`: the affine space `𝔸(n; S)` in
   finitely many variables is smooth of relative dimension `#n` over `S`.
 - `AlgebraicGeometry.AffineSpace.smoothOfRelativeDimension_reindex_succ`: forgetting the first
@@ -95,6 +97,15 @@ over a field has the same dimension at all of its points. -/
 theorem smoothOfRelativeDimension_iff_topologicalKrullDim_eq {K : Type u} [Field K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) [Smooth f] [IrreducibleSpace X] (n : ℕ) :
     SmoothOfRelativeDimension n f ↔ topologicalKrullDim X = n :=
+  sorry
+
+/-- A scheme smooth of relative dimension `n` over a field has dimension at most `n`. It is
+normal and locally noetherian, so its connected components are open and irreducible; each of
+them is smooth of relative dimension `n`, hence of dimension `n` by
+`AlgebraicGeometry.smoothOfRelativeDimension_iff_topologicalKrullDim_eq`. -/
+theorem topologicalKrullDim_le_of_smoothOfRelativeDimension {K : Type u} [Field K]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) (n : ℕ) [SmoothOfRelativeDimension n f] :
+    topologicalKrullDim X ≤ n :=
   sorry
 
 open Limits in

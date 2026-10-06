@@ -123,6 +123,19 @@ theorem IdealSheafData.IsInvertible.degree_dual_toModules {J : X.IdealSheafData}
   -- `k`, hence semi-local, so `χ(𝒪_X(D)) - χ(𝒪_X) = h⁰(𝒪_D)`.
   sorry
 
+/-- **The line bundle of a rational point has degree one.** Let `D` be an effective Cartier
+divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf `J = 𝒪_X(-D)`, which is
+a `k`-rational point: `Γ(D, 𝒪_D) = k` is one-dimensional. Then the χ-degree of `𝒪_X(D)` of
+blueprint `def-pc-degree-line-bundle` is `1`, the degree of the divisor `[P]` of `def-sc-pic0`.
+For an arbitrary effective `D` the agreement of the two degrees is
+`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules`.
+
+(blueprint: `lem-pc-degree-agrees-sc`) -/
+theorem IdealSheafData.IsInvertible.degree_dual_toModules_eq_one {J : X.IdealSheafData}
+    (hJ : J.IsInvertible) (h : (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ = 1) :
+    J.toModulesᵛ.degree k = 1 := by
+  rw [hJ.degree_dual_toModules, h, Nat.cast_one]
+
 /-- **The degree is additive.** `deg (ℒ ⊗ ℳ) = deg ℒ + deg ℳ` for invertible sheaves on a smooth
 proper curve.
 
@@ -292,9 +305,10 @@ theorem finrankH_relativeDifferentials_zero_eq_arithmeticGenus
   rfl
 
 /-- **The two genera agree.** On a smooth proper curve over `k`, the genus
-`dim_k Γ(X, Ω¹_{X/k})` of `sk-def-curve` is the arithmetic genus `dim_k H¹(X, 𝒪_X)`.
+`dim_k Γ(X, Ω¹_{X/k})` of `sk-def-curve` is the arithmetic genus `dim_k H¹(X, 𝒪_X)`, the genus
+of blueprint `def-pc-genus`.
 
-(blueprint: `sk-thm-picard-duality`) -/
+(blueprint: `sk-thm-picard-duality`, `lem-pc-genus-agrees-sc`) -/
 theorem genus_eq_arithmeticGenus [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] :
     (X ↘ Spec (.of k)).genus = arithmeticGenus k X := by
