@@ -141,6 +141,11 @@ lemma standardOpenIso_hom_toSpecMvPoly :
       (toProjInt n S).resLE _ (standardOpen n S i) le_rfl ≫ (projIntBasicOpenIso n i).hom :=
   IsPullback.isoIsPullback_hom_fst _ _ _ _
 
+/-- Over an affine base, the standard opens of projective space are affine. -/
+lemma isAffineOpen_standardOpen [IsAffine S] : IsAffineOpen (standardOpen n S i) :=
+  have : IsAffine (standardOpen n S i).toScheme := .of_isIso (standardOpenIso n S i).hom
+  this
+
 section Sections
 
 variable {X : Scheme.{u}} (g : X ⟶ S) (s : n → Γ(X, ⊤)) (hs : Ideal.span (Set.range s) = ⊤)
