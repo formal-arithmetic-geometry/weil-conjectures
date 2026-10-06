@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth
 
 /-!
 # The étale-local normal form of a smooth morphism
@@ -29,6 +30,8 @@ The index type of the affine space is `ULift.{u} (Fin d)`, since
 - `AlgebraicGeometry.smoothOfRelativeDimension_iff_topologicalKrullDim_eq`: an irreducible
   scheme smooth over a field is smooth of relative dimension `n` if and only if it has
   dimension `n`.
+- `AlgebraicGeometry.AffineSpace.smoothOfRelativeDimension_over`: the affine space `𝔸(n; S)` in
+  finitely many variables is smooth of relative dimension `#n` over `S`.
 - `AlgebraicGeometry.smoothOfRelativeDimension_pullback_fst`,
   `AlgebraicGeometry.smoothOfRelativeDimension_pullback_snd`: smoothness of relative dimension `n`
   is inherited by the projections of a fibre product.
@@ -89,5 +92,22 @@ theorem smoothOfRelativeDimension_iff_topologicalKrullDim_eq {K : Type u} [Field
     {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) [Smooth f] [IrreducibleSpace X] (n : ℕ) :
     SmoothOfRelativeDimension n f ↔ topologicalKrullDim X = n :=
   sorry
+
+open Limits in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The affine space `𝔸(n; S)` over `S` in finitely many variables is smooth of relative
+dimension `#n` over `S`. -/
+instance AffineSpace.smoothOfRelativeDimension_over (n : Type u) [Finite n] (S : Scheme.{u}) :
+    SmoothOfRelativeDimension (Nat.card n) (𝔸(n; S) ↘ S) :=
+  have := smoothOfRelativeDimension_isStableUnderBaseChange (n := Nat.card n)
+  MorphismProperty.pullback_fst _ _ <| by
+  have := isIso_of_isTerminal specULiftZIsTerminal.{u} terminalIsTerminal (terminal.from _)
+  rw [← terminal.comp_from (Spec.map (CommRingCat.ofHom MvPolynomial.C)),
+    MorphismProperty.cancel_right_of_respectsIso (P := @SmoothOfRelativeDimension (Nat.card n)),
+    HasRingHomProperty.Spec_iff (P := @SmoothOfRelativeDimension (Nat.card n))]
+  refine RingHom.locally_of RingHom.isStandardSmoothOfRelativeDimension_respectsIso _ ?_
+  exact (RingHom.isStandardSmoothOfRelativeDimension_algebraMap (R := ULift.{u} ℤ)
+    (S := MvPolynomial n (ULift.{u} ℤ)) (n := Nat.card n)).2
+      (MvPolynomial.isStandardSmoothOfRelativeDimension _ _)
 
 end AlgebraicGeometry

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.RingTheory.PrincipalIdealDomain
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 
 /-!
@@ -32,6 +33,9 @@ finitely many basic opens, each of which lands in an affine open of `S`.
 We also record that, for a morphism `f : X ⟶ Y`, the affine opens of `X` contained in the
 preimage of an affine open of `Y` form a basis of the topology of `X`
 (`AlgebraicGeometry.isBasis_affineOpens_le_preimage`).
+
+Finally, every open subscheme of the spectrum of a principal ideal ring is affine
+(`AlgebraicGeometry.isAffineOpen_of_isPrincipalIdealRing`).
 -/
 
 @[expose] public section
@@ -226,5 +230,31 @@ lemma exists_finite_basicOpen_cover [IsAffine X] {U : X.Opens}
   intro x hx
   obtain ⟨a, ha, hxa⟩ := Set.mem_iUnion₂.mp (ht hx)
   exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨a, ha⟩, hxa⟩
+
+/-- Every open subscheme of the spectrum of a principal ideal ring is affine: it is the
+complement of the zero locus of an ideal, hence of a single element, so it is a basic open. -/
+theorem isAffineOpen_of_isPrincipalIdealRing {R : CommRingCat.{u}} [IsPrincipalIdealRing R]
+    (U : (Spec R).Opens) : IsAffineOpen U := by
+  obtain ⟨s, hs⟩ :=
+    (PrimeSpectrum.isOpen_iff (show Set (PrimeSpectrum R) from (U : Set (Spec R)))).1 U.isOpen
+  obtain ⟨g, hg⟩ := (IsPrincipalIdealRing.principal (Ideal.span s)).principal
+  have : U = (Spec R).basicOpen ((Scheme.ΓSpecIso R).inv g) := by
+    rw [basicOpen_eq_of_affine]
+    ext x
+    have hx := congrArg (x ∈ ·) hs
+    simp only [eq_iff_iff] at hx
+    change x ∈ U ↔ g ∉ x.asIdeal
+    rw [← not_iff_not, not_not]
+    refine hx.trans ((PrimeSpectrum.mem_zeroLocus (x : PrimeSpectrum R) s).trans ?_)
+    rw [← Ideal.span_le, hg, Ideal.submodule_span_eq, Ideal.span_singleton_le_iff_mem]
+  rw [this]
+  exact (isAffineOpen_top (Spec R)).basicOpen _
+
+/-- A scheme with an open immersion into the spectrum of a principal ideal ring is affine. -/
+theorem isAffine_of_isOpenImmersion_of_isPrincipalIdealRing {X : Scheme.{u}}
+    {R : CommRingCat.{u}} [IsPrincipalIdealRing R] (f : X ⟶ Spec R) [IsOpenImmersion f] :
+    IsAffine X :=
+  have : IsAffine f.opensRange := isAffineOpen_of_isPrincipalIdealRing f.opensRange
+  .of_isIso f.isoOpensRange.hom
 
 end AlgebraicGeometry
