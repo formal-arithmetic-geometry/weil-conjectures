@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
 # Morphisms with geometrically reduced fibres
@@ -41,6 +42,8 @@ the members of an étale cover are not open subschemes of the source.
   morphism with geometrically reduced fibres has geometrically reduced fibres.
 - `AlgebraicGeometry.exists_etaleCover_factorization`: the étale-local slicing of a flat,
   locally finitely presented morphism with geometrically reduced fibres.
+- `AlgebraicGeometry.Smooth.exists_etaleCover_factorization`: the étale-local slicing of a
+  smooth morphism, through smooth morphisms of affine schemes.
 
 ## References
 
@@ -99,5 +102,53 @@ theorem exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Flat f
       (∀ i, IsAffineHom (q i)) ∧ (∀ i, GeometricallyConnected (q i)) ∧
       (∀ i, ∃ s : V i ⟶ U i, s ≫ q i = 𝟙 (V i)) ∧ (∀ i, q i ≫ r i = p i ≫ f) :=
   sorry
+
+/-- **Slicing a smooth morphism** (blueprint `sbc-lem-slicing`). Let `f : X ⟶ S` be smooth.
+Then there is an étale covering `p i : U i ⟶ X` of `X` such that each composite `p i ≫ f`
+factors as `q i ≫ r i` with `r i : V i ⟶ S` étale and `q i : U i ⟶ V i` a smooth morphism of
+affine schemes with geometrically connected fibres admitting a section.
+
+This is deduced from `AlgebraicGeometry.exists_etaleCover_factorization`: the first leg `q i`
+given there is smooth since `q i ≫ r i = p i ≫ f` is smooth and `r i` is étale, and the
+factorisations are restricted to the affine opens of `V i` and their preimages under the
+affine morphism `q i`. -/
+@[stacks 0EY4]
+theorem Smooth.exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
+    ∃ (ι : Type u) (U : ι → Scheme.{u}) (p : ∀ i, U i ⟶ X) (V : ι → Scheme.{u})
+      (q : ∀ i, U i ⟶ V i) (r : ∀ i, V i ⟶ S),
+      (∀ i, Etale (p i)) ∧ (∀ x : X, ∃ (i : ι) (y : U i), (p i).base y = x) ∧
+      (∀ i, Etale (r i)) ∧ (∀ i, Smooth (q i)) ∧ (∀ i, IsAffine (U i)) ∧
+      (∀ i, IsAffine (V i)) ∧ (∀ i, GeometricallyConnected (q i)) ∧
+      (∀ i, ∃ s : V i ⟶ U i, s ≫ q i = 𝟙 (V i)) ∧ (∀ i, q i ≫ r i = p i ≫ f) := by
+  obtain ⟨ι, U, p, V, q, r, hp, hcov, hr, -, -, hq, hgc, hs, hfac⟩ :=
+    AlgebraicGeometry.exists_etaleCover_factorization f
+  have hsm (i : ι) : Smooth (q i) := by
+    have := hr i
+    have : Smooth (q i ≫ r i) := by rw [hfac i]; infer_instance
+    exact Smooth.of_comp_of_etale (q i) (r i)
+  refine ⟨Σ i, (V i).affineOpens, fun j ↦ q j.1 ⁻¹ᵁ j.2.1, fun j ↦ (q j.1 ⁻¹ᵁ j.2.1).ι ≫ p j.1,
+    fun j ↦ j.2.1, fun j ↦ q j.1 ∣_ j.2.1, fun j ↦ j.2.1.ι ≫ r j.1, fun j ↦ ?_, fun x ↦ ?_,
+    fun j ↦ ?_, fun j ↦ ?_, fun j ↦ ?_, fun j ↦ j.2.2, fun j ↦ ?_, fun j ↦ ?_, fun j ↦ ?_⟩
+  · have := hp j.1
+    infer_instance
+  · obtain ⟨i, y, rfl⟩ := hcov x
+    obtain ⟨_, ⟨W, hW, rfl⟩, hyW, -⟩ := (V i).isBasis_affineOpens.exists_subset_of_mem_open
+      (Set.mem_univ ((q i).base y)) isOpen_univ
+    exact ⟨⟨i, ⟨W, hW⟩⟩, ⟨y, hyW⟩, rfl⟩
+  · have := hr j.1
+    infer_instance
+  · have := hsm j.1
+    infer_instance
+  · have := hq j.1
+    exact j.2.2.preimage (q j.1)
+  · have := hgc j.1
+    infer_instance
+  · obtain ⟨s, hs⟩ := hs j.1
+    have hle : j.2.1 ≤ s ⁻¹ᵁ q j.1 ⁻¹ᵁ j.2.1 := fun v hv ↦ by
+      simpa [← Scheme.Hom.comp_apply, hs] using hv
+    refine ⟨s.resLE _ _ hle, ?_⟩
+    rw [← cancel_mono j.2.1.ι, Category.assoc, morphismRestrict_ι, Scheme.Hom.resLE_comp_ι_assoc,
+      hs, Category.comp_id, Category.id_comp]
+  · rw [morphismRestrict_ι_assoc, hfac, Category.assoc]
 
 end AlgebraicGeometry
