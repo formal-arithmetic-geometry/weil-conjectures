@@ -139,18 +139,12 @@ noncomputable def geometricCoinvariants [QuasiCompact (X ↘ Spec (CommRingCat.o
     (hF : F.IsLisse) : FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   FrobeniusModule.dual (globalSections (F.dual hF))
 
--- TODO(adic): the internal hom of a locally constant sheaf of finite rank into the constant
--- sheaf is locally constant.
-/-- The dual of a lisse Weil sheaf is lisse. -/
-theorem IsLisse.dual {F : WeilSheaf k₀ l X} (hF : F.IsLisse) : F.dual.IsLisse := by
-  sorry
-
 -- TODO(adic): for `F` lisse, hence locally free of finite rank, the stalk of the internal hom
 -- `[F, ℚ̄_ℓ]` is the dual of the stalk of `F`, with the inverse transpose Frobenius.
 /-- The stalk of the dual of a lisse Weil sheaf is the dual of its stalk: the local Frobenius
 of `F^∨` at `x` is the inverse transpose of that of `F`. -/
 theorem nonempty_equiv_stalk_dual {F : WeilSheaf k₀ l X} (hF : F.IsLisse)
-    (x : X.finitePoints) : Nonempty ((F.dual.stalk x).Equiv (F.stalk x).dual) := by
+    (x : X.finitePoints) : Nonempty (((F.dual hF).stalk x).Equiv (F.stalk x).dual) := by
   sorry
 
 /-- *Purity of the geometric coinvariants.* If `F` is a lisse Weil sheaf, punctually `ι`-pure of
