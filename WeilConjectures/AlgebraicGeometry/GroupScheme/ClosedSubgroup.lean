@@ -247,10 +247,6 @@ theorem isRadical_vanishingIdeal (S : Set (GL n k)) : (vanishingIdeal S).IsRadic
   rw [← map_pow]
   exact mem_vanishingIdeal.1 hm g hg
 
-theorem evalAlgHom_eq_zero_of_mem_vanishingIdeal {S : Set (GL n k)} {g : GL n k} (hg : g ∈ S) :
-    ∀ a ∈ vanishingIdeal S, evalAlgHom g a = 0 :=
-  fun _ ha ↦ mem_vanishingIdeal.1 ha g hg
-
 theorem mem_vanishingIdeal_iff_forall_subtype {S : Set (GL n k)} (a : CoordinateRing n k) :
     a ∈ vanishingIdeal S ↔ ∀ g : S, evalAlgHom (g : GL n k) a = 0 :=
   mem_vanishingIdeal.trans ⟨fun h g ↦ h g g.2, fun h g hg ↦ h ⟨g, hg⟩⟩

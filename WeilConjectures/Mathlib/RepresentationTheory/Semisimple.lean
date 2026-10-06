@@ -27,15 +27,12 @@ of simple submodules is semisimple. No finiteness of `G ⧸ N` is used.
 ## Main declarations
 
 * `Representation.isSemisimpleRepresentation_comp_subtype`: **Clifford's theorem**.
-* `Representation.isSemisimpleRepresentation_comp_subtype_of_finiteIndex`: the special case of a
-  normal subgroup of finite index.
 
 ## Blueprint
 
-`Representation.isSemisimpleRepresentation_comp_subtype` implements part of `sk-i-restriction`
-and `lem-mg-normal-restriction-semisimple`;
-`Representation.isSemisimpleRepresentation_comp_subtype_of_finiteIndex` implements
-`lem-wf-finite-index-restriction-semisimple`.
+`Representation.isSemisimpleRepresentation_comp_subtype` implements part of `sk-i-restriction`,
+`lem-mg-normal-restriction-semisimple` and `lem-wf-finite-index-restriction-semisimple` (whose
+finite-index hypothesis is not needed).
 -/
 
 @[expose] public section
@@ -48,7 +45,8 @@ variable {k G V : Type*} [Field k] [Group G] [AddCommGroup V] [Module k V]
 
 /-- **Clifford's theorem**: a finite-dimensional semisimple representation restricts semisimply
 to a normal subgroup, with no finiteness assumption on the quotient.
-(blueprint: `sk-i-restriction`, `lem-mg-normal-restriction-semisimple`) -/
+(blueprint: `sk-i-restriction`, `lem-mg-normal-restriction-semisimple`,
+`lem-wf-finite-index-restriction-semisimple`) -/
 instance isSemisimpleRepresentation_comp_subtype :
     IsSemisimpleRepresentation (ρ.comp N.subtype) := by
   set σ : Representation k N V := ρ.comp N.subtype
@@ -94,12 +92,5 @@ instance isSemisimpleRepresentation_comp_subtype :
   intro v _
   have hv : v ∈ T' := by rw [hT'top]; trivial
   exact (Subrepresentation.mem_asSubmodule_iff (σ := e.symm T) (v := v)).2 hv
-
-/-- A finite-dimensional semisimple representation restricts semisimply to a normal subgroup of
-finite index; a special case of Clifford's theorem `isSemisimpleRepresentation_comp_subtype`.
-(blueprint: `lem-wf-finite-index-restriction-semisimple`) -/
-theorem isSemisimpleRepresentation_comp_subtype_of_finiteIndex [N.FiniteIndex] :
-    IsSemisimpleRepresentation (ρ.comp N.subtype) :=
-  inferInstance
 
 end Representation

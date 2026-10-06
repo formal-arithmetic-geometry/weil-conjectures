@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.LinearAlgebra.Matrix.ToLin
+public import Mathlib.RepresentationTheory.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Affine
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
 
@@ -22,6 +24,8 @@ group object in `Over (Spec k)`. Its points with values in a `k`-algebra `R` are
 - `Matrix.GeneralLinearGroup.scheme`: `GL_n` as an affine group scheme of finite type over `k`.
 - `Matrix.GeneralLinearGroup.homMulEquiv`: the `R`-points of the group scheme `GL_n` are the
   group `GL n R`.
+- `Matrix.GeneralLinearGroup.toRepresentation`: the defining representation of `GL n k` on
+  `n → k`.
 
 ## Blueprint
 
@@ -33,7 +37,7 @@ group object in `Over (Spec k)`. Its points with values in a `k`-algebra `R` are
 universe u
 
 open CategoryTheory AlgebraicGeometry WithConv
-open scoped MonObj
+open scoped Matrix MonObj
 
 namespace Matrix.GeneralLinearGroup
 
@@ -71,5 +75,24 @@ theorem homMulEquiv_specMap_comp (φ : R →ₐ[k] S)
   simp only [Spec.map_asOver_comp_mapMulEquiv, homMulEquiv, MulEquiv.trans_apply,
     MulEquiv.symm_apply_apply]
   rw [← toConv_ofConv χ, map_algHomMulEquiv, ofConv_toConv]
+
+section Representation
+
+variable (n : Type*) [Fintype n] [DecidableEq n] (k : Type*) [Field k]
+
+/-- The defining representation of `GL n k` on `n → k`, by matrix-vector multiplication. -/
+noncomputable def toRepresentation : Representation k (GL n k) (n → k) where
+  toFun g := Matrix.toLinAlgEquiv' (g : Matrix n n k)
+  map_one' := by simp
+  map_mul' x y := by simp
+
+variable {n k}
+
+@[simp]
+theorem toRepresentation_apply (g : GL n k) (v : n → k) :
+    toRepresentation n k g v = (g : Matrix n n k) *ᵥ v :=
+  rfl
+
+end Representation
 
 end Matrix.GeneralLinearGroup
