@@ -61,35 +61,10 @@ quotient is the honest subquotient `S / U`.
 
 namespace Subrepresentation
 
-section Monoid
+section Semiring
 
-variable {k V : Type*} [Field k] [AddCommGroup V] [Module k V]
-
-/-- A subrepresentation `S` that is irreducible as a representation is an atom of the lattice of
-subrepresentations. -/
-theorem isAtom_of_isIrreducible {G : Type*} [Monoid G] {ρ : Representation k G V}
-    {S : Subrepresentation ρ} (hS : S.toRepresentation.IsIrreducible) :
-    IsAtom S := by
-  let restrict (T : Subrepresentation ρ) : Subrepresentation S.toRepresentation :=
-    ⟨T.toSubmodule.comap S.toSubmodule.subtype, fun g x hx ↦ T.apply_mem_toSubmodule g hx⟩
-  have := hS
-  refine ⟨fun h ↦ ?_, fun T hT ↦ ?_⟩
-  · refine (bot_ne_top : (⊥ : Subrepresentation S.toRepresentation) ≠ ⊤) ?_
-    ext x
-    have : (x : V) = 0 := by
-      have hx : (x : V) ∈ (⊥ : Subrepresentation ρ) := h ▸ x.2
-      exact (Submodule.mem_bot k).1 hx
-    exact ⟨fun _ ↦ Submodule.mem_top, fun _ ↦ (Submodule.mem_bot k).2 (Subtype.ext this)⟩
-  · rcases IsSimpleOrder.eq_bot_or_eq_top (restrict T) with h | h
-    · refine le_antisymm (fun x hx ↦ ?_) bot_le
-      have : (⟨x, hT.le hx⟩ : S.toSubmodule) ∈ restrict T := hx
-      rw [h] at this
-      exact (Submodule.mem_bot k).2 (congrArg Subtype.val ((Submodule.mem_bot k).1 this))
-    · refine absurd (fun x hx ↦ ?_) hT.not_ge
-      have : (⟨x, hx⟩ : S.toSubmodule) ∈ restrict T := h ▸ Submodule.mem_top
-      exact this
-
-variable {G : Type*} [Monoid G] {ρ : Representation k G V}
+variable {A V G : Type*} [Semiring A] [AddCommMonoid V] [Module A V] [Monoid G]
+  {ρ : Representation A G V}
 
 /-- The join of a set of subrepresentations: the join of the underlying submodules is stable. -/
 instance : SupSet (Subrepresentation ρ) where
@@ -136,10 +111,6 @@ instance instCompleteLattice : CompleteLattice (Subrepresentation ρ) :=
   toSubmodule_injective.completeLattice _ .rfl .rfl toSubmodule_sup toSubmodule_inf
     toSubmodule_sSup toSubmodule_sInf rfl rfl
 
-/-- `toSubmodule` as an order embedding of the subrepresentations into the submodules. -/
-def toSubmoduleOrderEmbedding : Subrepresentation ρ ↪o Submodule k V :=
-  OrderEmbedding.ofMapLEIff toSubmodule fun _ _ ↦ Iff.rfl
-
 @[simp]
 theorem toSubmodule_iSup {ι : Sort*} (U : ι → Subrepresentation ρ) :
     (⨆ i, U i).toSubmodule = ⨆ i, (U i).toSubmodule := by
@@ -154,17 +125,6 @@ theorem disjoint_toSubmodule_iff {S T : Subrepresentation ρ} :
 theorem iSupIndep_toSubmodule_iff {ι : Type*} {U : ι → Subrepresentation ρ} :
     iSupIndep (fun i ↦ (U i).toSubmodule) ↔ iSupIndep U := by
   simp only [iSupIndep, ← toSubmodule_iSup, disjoint_toSubmodule_iff]
-
-instance : IsModularLattice (Subrepresentation ρ) :=
-  ⟨fun {x} {y} {z} h ↦ by
-    rw [← toSubmodule_le_toSubmodule_iff]
-    exact IsModularLattice.sup_inf_le_assoc_of_le (x := x.toSubmodule) y.toSubmodule
-      (z := z.toSubmodule) h⟩
-
-instance [FiniteDimensional k V] : IsCompactlyGenerated (Subrepresentation ρ) :=
-  have : WellFoundedGT (Subrepresentation ρ) :=
-    StrictMono.wellFoundedGT (f := toSubmodule (ρ := ρ)) fun _ _ h ↦ h
-  CompleteLattice.isCompactlyGenerated_of_wellFoundedGT
 
 /-- The subrepresentations of a subrepresentation `S` are the subrepresentations of `ρ` contained
 in `S`. -/
@@ -185,11 +145,42 @@ def orderIsoIic (S : Subrepresentation ρ) : Subrepresentation S.toRepresentatio
     change T.toSubmodule.map _ ≤ T'.toSubmodule.map _ ↔ T.toSubmodule ≤ T'.toSubmodule
     exact Submodule.map_le_map_iff_of_injective Subtype.val_injective _ _
 
+end Semiring
+
+section Ring
+
+variable {A V G : Type*} [Ring A] [AddCommGroup V] [Module A V] [Monoid G]
+  {ρ : Representation A G V}
+
+instance : IsModularLattice (Subrepresentation ρ) :=
+  ⟨fun {x} {y} {z} h ↦ by
+    rw [← toSubmodule_le_toSubmodule_iff]
+    exact IsModularLattice.sup_inf_le_assoc_of_le (x := x.toSubmodule) y.toSubmodule
+      (z := z.toSubmodule) h⟩
+
+instance [IsNoetherian A V] : IsCompactlyGenerated (Subrepresentation ρ) :=
+  have : WellFoundedGT (Subrepresentation ρ) :=
+    StrictMono.wellFoundedGT (f := toSubmodule (ρ := ρ)) fun _ _ h ↦ h
+  CompleteLattice.isCompactlyGenerated_of_wellFoundedGT
+
+end Ring
+
+section Monoid
+
+variable {k V G : Type*} [Field k] [AddCommGroup V] [Module k V] [Monoid G]
+  {ρ : Representation k G V}
+
 /-- A subrepresentation is irreducible as a representation if and only if it is an atom of the
 lattice of subrepresentations. -/
 theorem isIrreducible_toRepresentation_iff_isAtom {S : Subrepresentation ρ} :
     S.toRepresentation.IsIrreducible ↔ IsAtom S :=
   (orderIsoIic S).isSimpleOrder_iff.trans Set.isSimpleOrder_Iic_iff_isAtom
+
+/-- A subrepresentation `S` that is irreducible as a representation is an atom of the lattice of
+subrepresentations. -/
+theorem isAtom_of_isIrreducible {S : Subrepresentation ρ} (hS : S.toRepresentation.IsIrreducible) :
+    IsAtom S :=
+  isIrreducible_toRepresentation_iff_isAtom.1 hS
 
 end Monoid
 
