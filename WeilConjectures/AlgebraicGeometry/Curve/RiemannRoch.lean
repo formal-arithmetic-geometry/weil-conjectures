@@ -12,8 +12,8 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
@@ -123,10 +123,6 @@ lemma isNoetherian_of_isProper : IsNoetherian X :=
   have := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
   have := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
   {}
-
-/-- A smooth proper curve over `k` is a curve in the sense of `AlgebraicGeometry.IsCurve`. -/
-lemma isCurve_of_smoothOfRelativeDimension : IsCurve (X ↘ Spec (.of k)) where
-  krullDim_le_one := topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1
 
 /-- **`χ = h⁰ - h¹` on a curve.** On a smooth proper curve `X` over `k`, the Euler
 characteristic of every `𝒪_X`-module `M` is `χ(M) = h⁰(M) - h¹(M)`, since `H^q(X, M) = 0` for
@@ -340,14 +336,20 @@ morphism `φ : ℱ ⟶ 𝒢` of finite locally free modules the square
 ```
 commutes. No hypothesis `H⁰(X, 𝒪_X) = k` is needed.
 
-(blueprint: `sk-thm-picard-duality`) -/
+The case `q = 1` is `AlgebraicGeometry.Scheme.nonempty_dual_H_one_iso`, obtained from a finite flat
+morphism `X ⟶ ℙ¹_k` and duality on `ℙ¹_k`; the case `q = 0` is
+`AlgebraicGeometry.Scheme.nonempty_dual_H_zero_iso`, deduced from it by biduality.
+
+(blueprint: `sk-thm-picard-duality`, `thm-sc-serre-duality-curve`) -/
 theorem serreDuality [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] (p q : ℕ) (hpq : p + q = 1) :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
         (Modules.cohomologyFunctor k q).op ⋙ ModuleCat.dualFunctor k ≅
       (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
-        tensorRight (X ↘ Spec (.of k)).relativeDifferentials ⋙ Modules.cohomologyFunctor k p) :=
-  sorry
+        tensorRight (X ↘ Spec (.of k)).relativeDifferentials ⋙ Modules.cohomologyFunctor k p) := by
+  obtain ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩ : p = 0 ∧ q = 1 ∨ p = 1 ∧ q = 0 := by omega
+  · exact nonempty_dual_H_one_iso
+  · exact nonempty_dual_H_zero_iso
 
 /-- **Serre duality in dimension `0`.** Let `X` be smooth and proper of relative dimension `0`
 over `k`, i.e. `X = Spec A` with `A` finite étale over `k`, so that the canonical module is
@@ -452,8 +454,8 @@ by Serre duality `H¹(ℒ)^∨ ≅ H⁰(ℒᵛ ⊗ Ω¹)`, and `ℒᵛ ⊗ Ω¹`
 theorem Modules.finrankH_one_eq_zero_of_degree [GlobalSectionsBijective k X] (ℒ : X.Modules)
     [ℒ.IsInvertible] (hd : 2 * (arithmeticGenus k X : ℤ) - 1 ≤ ℒ.degree k) :
     ℒ.finrankH k 1 = 0 := by
-  have := isCurve_of_smoothOfRelativeDimension (k := k) (X := X)
-  have := isInvertible_relativeDifferentials (X ↘ Spec (.of k))
+  have := (X ↘ Spec (.of k)).isInvertible_relativeDifferentials
+  have := Modules.IsInvertible.of_sheafOfModules (X ↘ Spec (.of k)).relativeDifferentials
   have := Modules.IsInvertible.sheafOfModules_isInvertible ℒ
   obtain ⟨e⟩ := serreDuality (k := k) (X := X) 0 1 rfl
   let ℱ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory :=

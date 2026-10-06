@@ -16,7 +16,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Topology.LocallyConstant.Basic
-public import Mathlib.Topology.Semicontinuity.Defs
+public import Mathlib.Topology.Semicontinuity.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
@@ -75,6 +75,8 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
   `dim_{κ(t)} H^q(X_t, ℱ_t)`.
 - `AlgebraicGeometry.Scheme.Modules.IsFiniteFreeComplex`: a cochain complex of finite free
   modules concentrated in degrees `[0, d]`.
+- `AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFreeInDegree`: a family of cohomology sheaves
+  is that of a finite locally free module of rank `r` placed in degree `i`.
 - `AlgebraicGeometry.Scheme.Modules.perfectLocus` and `perfectLocusOfRank`: the perfect locus
   `U_i` of points where the fibre cohomology vanishes outside degree `i`, and the locus `U_{i,r}`
   where moreover it has dimension `r` in degree `i`.
@@ -101,6 +103,11 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
 - `AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber` and
   `exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant`: semicontinuity of
   the fibre dimension, and Grauert's theorem over a reduced base.
+- `AlgebraicGeometry.Scheme.Modules.IsFiniteFreeComplex.exists_opens_range_subset_iff`: the
+  locus where a bounded complex of finite free modules is finite locally free of rank `r` in
+  degree `i` is open, and characterised by pullbacks.
+- `AlgebraicGeometry.Scheme.Modules.exists_forall_hFiber_eq_zero`: locally on `T`, the fibre
+  cohomology vanishes in large degrees.
 - `AlgebraicGeometry.Scheme.Modules.isOpen_setOf_hFiber_le`: openness of the loci `U_{i,≤r}`, and
   hence of the perfect locus `U_i`.
 - `AlgebraicGeometry.Scheme.Modules.isLocallyConstant_eulerCharFiber`: the fibre Euler
@@ -116,9 +123,10 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
   so is `R f_* ℱ` over an open subscheme contained in `U_{i,r}`.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_pullback_of_isPullback`: after
   base change into `U_i`, `R^i f'_* ℱ' ≅ g^* R^i f_* ℱ`.
-- `AlgebraicGeometry.Scheme.Modules.range_subset_perfectLocusOfRank_iff` and
-  `range_subset_setOf_hFiber_eq_iff`: this shape of `R f'_* ℱ'` characterises the morphisms into
-  `U_{i,r}`.
+- `AlgebraicGeometry.Scheme.Modules.range_subset_perfectLocusOfRank_iff`,
+  `range_subset_setOf_hFiber_eq_iff` and
+  `exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree`: this shape of `R f'_* ℱ'`
+  characterises the morphisms into `U_{i,r}`.
 -/
 
 @[expose] public section
@@ -389,6 +397,54 @@ structure IsFiniteFreeComplex (P : CochainComplex X.Modules ℤ) (d : ℕ) : Pro
   exists_iso_free (n : ℤ) :
     ∃ r : ℕ, Nonempty (P.X n ≅ SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin r)))
 
+/-- `IsFiniteLocallyFreeInDegree M i r` says that the family `M = (M q)_{q : ℕ}` of `𝒪_X`-modules,
+thought of as the cohomology sheaves `H^q(E)` of an object `E` of the derived category of
+`𝒪_X`-modules, is that of a **finite locally free module of rank `r` placed in degree `i`**:
+`M q = 0` for `q ≠ i`, and `M i` is finite locally free of rank `r`.
+
+For an object `E` represented by a complex this is the same as `E ≅ ℰ[-i]` with `ℰ` finite
+locally free of rank `r`: a complex whose cohomology is concentrated in degree `i` is
+quasi-isomorphic to its `i`-th cohomology placed in degree `i`. There is no derived category of
+`X.Modules` with derived pushforward available, so the condition is stated on the cohomology
+sheaves. The case `i = 0`, `r = 1` is an *invertible module placed in degree `0`*
+(`isFiniteLocallyFreeInDegree_zero_one_iff`).
+
+(blueprint: `def-pc-invertible-in-degree-zero`) -/
+structure IsFiniteLocallyFreeInDegree (M : ℕ → X.Modules) (i r : ℕ) : Prop where
+  isZero (q : ℕ) (hq : q ≠ i) : IsZero (M q)
+  isFiniteLocallyFreeOfRank : (M i).IsFiniteLocallyFreeOfRank r
+
+/-- A family of modules is that of an invertible module placed in degree `0` if and only if it
+vanishes in nonzero degrees and is invertible in degree `0`.
+
+(blueprint: `def-pc-invertible-in-degree-zero`) -/
+theorem isFiniteLocallyFreeInDegree_zero_one_iff (M : ℕ → X.Modules) :
+    IsFiniteLocallyFreeInDegree M 0 1 ↔
+      (∀ q ≠ 0, IsZero (M q)) ∧ SheafOfModules.IsInvertible (R := X.ringCatSheaf) (M 0) :=
+  ⟨fun h ↦ ⟨h.isZero, (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one (M 0)).2
+      h.isFiniteLocallyFreeOfRank⟩,
+    fun h ↦ ⟨h.1, (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one (M 0)).1 h.2⟩⟩
+
+/-- **The perfect locus of a bounded complex of finite free modules.** Let `P` be a bounded complex
+of finite free `𝒪_Y`-modules, representing a perfect object `E` of the derived category of `Y`, and
+fix `i r : ℕ`. There is an open subscheme `U` of `Y` such that a morphism `g : Y' ⟶ Y` factors
+through `U` if and only if `L g^* E = g^* P` is a finite locally free module of rank `r` placed in
+degree `i` (`AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFreeInDegree`).
+
+The pullback `g^* P` computes `L g^* E` because the terms of `P` are free. The proof splits
+contractible summands off `P` over the local rings of `Y`, until every differential has entries in
+the maximal ideal; the remaining complex is then `𝒪^r[-i]` near every point whose derived fibre has
+cohomology `κ(y)^r` concentrated in degree `i`, and `U` is the set of such points. The converse
+direction uses that extension of fields is faithfully flat.
+
+(blueprint: `lem-pc-perfect-locus`) -/
+theorem IsFiniteFreeComplex.exists_opens_range_subset_iff {Y : Scheme.{u}}
+    {P : CochainComplex Y.Modules ℤ} {d : ℕ} (hP : IsFiniteFreeComplex P d) (i r : ℕ) :
+    ∃ U : Y.Opens, ∀ {Y' : Scheme.{u}} (g : Y' ⟶ Y), Set.range g.base ⊆ U ↔
+      IsFiniteLocallyFreeInDegree
+        (fun q : ℕ ↦ (((Modules.pullback g).mapHomologicalComplex _).obj P).homology q) i r :=
+  sorry
+
 section Coherence
 
 variable [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
@@ -539,14 +595,83 @@ theorem exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant 
         (ℱ.hFiber f q t) :=
   sorry
 
+/-- **The fibre cohomology vanishes in large degrees, locally on the base.** In the situation of
+`AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`, every point `t` of `T` has an open
+neighbourhood `U` and a bound `d` with `H^q(X_{t'}, ℱ_{t'}) = 0` for all `t' ∈ U` and all `q > d`.
+
+Take for `U` and `d` the neighbourhood and the length of the bounded complex `P` of finite free
+modules of `AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`. For
+`t' ∈ U` its pullback to `Spec κ(t')` computes the higher direct images of `ℱ_{t'}` along
+`X_{t'} ⟶ Spec κ(t')`, whose global sections are `H^q(X_{t'}, ℱ_{t'})`; it vanishes in degrees
+`q > d`.
+
+(blueprint: `lem-pc-flat-rf-open`) -/
+theorem exists_forall_hFiber_eq_zero (hℱ : ℱ.IsFlatOver f) (t : T) :
+    ∃ (U : T.Opens) (d : ℕ), t ∈ U ∧ ∀ t' ∈ U, ∀ q, d < q → ℱ.hFiber f q t' = 0 := by
+  obtain ⟨U, P, d, htU, hP, hbc⟩ := exists_isFiniteFreeComplex_higherDirectImage f ℱ hℱ t
+  refine ⟨U, d, htU, fun t' ht' q hq ↦ ?_⟩
+  have hrange : Set.range (T.fromSpecResidueField t').base ⊆ Set.range U.ι.base := by
+    rw [Scheme.Opens.range_ι, Scheme.range_fromSpecResidueField]
+    simpa using ht'
+  let g := IsOpenImmersion.lift U.ι (T.fromSpecResidueField t') hrange
+  have hg : g ≫ U.ι = T.fromSpecResidueField t' := IsOpenImmersion.lift_fac _ _ _
+  have := isGrothendieckAbelian (f.fiber t')
+  have sq : IsPullback (f.fiberι t') (f.fiberToSpecResidueField t') f (g ≫ U.ι) := by
+    rw [hg]
+    exact IsPullback.of_hasPullback _ _
+  obtain ⟨e⟩ := hbc g _ _ sq q
+  -- the pulled back complex vanishes in degree `q > d`, hence so does its cohomology
+  have hX : IsZero (((Modules.pullback g).mapHomologicalComplex _).obj P |>.X q) :=
+    (Modules.pullback g).map_isZero (by have := hP.isStrictlyLE; exact P.isZero_of_isStrictlyLE d q)
+  have hR : IsZero ((higherDirectImage (f.fiberToSpecResidueField t') q).obj
+      ((Modules.pullback (f.fiberι t')).obj ℱ)) :=
+    (ShortComplex.isZero_homology_of_isZero_X₂ _ hX).of_iso e.symm
+  have : IsSeparated (f.fiberToSpecResidueField t') := by
+    unfold Scheme.Hom.fiberToSpecResidueField
+    infer_instance
+  have : QuasiCompact (f.fiberToSpecResidueField t') := by
+    unfold Scheme.Hom.fiberToSpecResidueField
+    infer_instance
+  obtain ⟨φ⟩ := nonempty_sections_higherDirectImage_iso_H (f.fiberToSpecResidueField t')
+    ((Modules.pullback (f.fiberι t')).obj ℱ) q
+  have : Subsingleton (((Modules.pullback (f.fiberι t')).obj ℱ).H q) :=
+    have : Subsingleton Γ((higherDirectImage (f.fiberToSpecResidueField t') q).obj
+        ((Modules.pullback (f.fiberι t')).obj ℱ), ⊤) :=
+      ModuleCat.subsingleton_of_isZero
+        ((SheafOfModules.evaluation _ (Opposite.op ⊤)).map_isZero hR)
+    φ.symm.injective.subsingleton
+  let := f.fiberOverSpecResidueField t'
+  exact Module.finrank_zero_of_subsingleton
+
 /-- **Openness of the bounded perfect locus.** With `f : X ⟶ T` proper of finite presentation and
 `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the locus `U_{i,≤r}` of points
 `t` of the perfect locus `U_i` at which `H^i(X_t, ℱ_t)` has dimension at most `r` is open in `T`.
 
+Near a point `t`, the fibre cohomology vanishes in degrees `q > d`
+(`AlgebraicGeometry.Scheme.Modules.exists_forall_hFiber_eq_zero`), so there `U_{i,≤r}` is cut out
+by the finitely many conditions `h^q < 1` for `q ≤ d`, `q ≠ i`, and `h^i < r + 1`, each of which is
+open by upper semicontinuity (`AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`).
+
 (blueprint: `sk-thm-picard-perfect`) -/
 theorem isOpen_setOf_hFiber_le (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
-    IsOpen {t ∈ ℱ.perfectLocus f i | ℱ.hFiber f i t ≤ r} :=
-  sorry
+    IsOpen {t ∈ ℱ.perfectLocus f i | ℱ.hFiber f i t ≤ r} := by
+  have hopen (q n : ℕ) : IsOpen {t | ℱ.hFiber f q t < n} :=
+    (upperSemicontinuous_hFiber f ℱ hℱ q).isOpen_preimage n
+  rw [isOpen_iff_forall_mem_open]
+  rintro t ⟨ht, hti⟩
+  obtain ⟨U, d, htU, hU⟩ := exists_forall_hFiber_eq_zero f ℱ hℱ t
+  refine ⟨U ∩ (⋂ q ∈ Set.Iic d, {t' | q ≠ i → ℱ.hFiber f q t' < 1}) ∩
+    {t' | ℱ.hFiber f i t' < r + 1}, ?_, ?_, ?_⟩
+  · rintro t' ⟨⟨ht'U, hq⟩, hi⟩
+    refine ⟨fun q hqi ↦ ?_, Nat.lt_succ_iff.mp hi⟩
+    rcases le_or_gt q d with hqd | hqd
+    · exact Nat.lt_one_iff.mp (Set.mem_iInter₂.mp hq q hqd hqi)
+    · exact hU t' ht'U q hqd
+  · refine (U.isOpen.inter ((Set.finite_Iic d).isOpen_biInter fun q _ ↦ ?_)).inter (hopen i _)
+    by_cases hqi : q = i
+    · simp [hqi]
+    · simpa [hqi] using hopen q 1
+  · exact ⟨⟨htU, Set.mem_iInter₂.mpr fun q _ hqi ↦ by simp [ht q hqi]⟩, Nat.lt_succ_of_le hti⟩
 
 /-- **Openness of the perfect locus.** The perfect locus `U_i` is open in `T`, being the union
 over `r` of the open loci `U_{i,≤r}` of
@@ -673,8 +798,13 @@ subscheme `U` of `T` contained in the rank-`r` perfect locus `U_{i,r}`, the high
 theorem isZero_higherDirectImage_restrict (hℱ : ℱ.IsFlatOver f) (i r : ℕ) (U : T.Opens)
     (hU : ↑U ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r})
     (q : ℕ) (hq : q ≠ i) :
-    IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) :=
-  sorry
+    IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) := by
+  have := isGrothendieckAbelian (f ⁻¹ᵁ U).toScheme
+  have sq : IsPullback (f ⁻¹ᵁ U).ι (f ∣_ U) f U.ι := (isPullback_morphismRestrict f U).flip
+  obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ U.ι _ _ sq q
+  refine (isZero_higherDirectImage_of_isPullback f ℱ hℱ U.ι _ _ sq ?_ hq).of_iso e.symm
+  rw [Scheme.Opens.range_ι]
+  exact fun t ht ↦ (hU ht).1
 
 /-- **Cohomology and base change on the perfect locus.** In the situation of
 `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isPullback`, the `i`-th higher
@@ -724,8 +854,13 @@ image `R^i f_* ℱ|_U` is finite locally free of rank `r`. This is the case of t
 theorem isFiniteLocallyFreeOfRank_higherDirectImage_restrict (hℱ : ℱ.IsFlatOver f) (i r : ℕ)
     (U : T.Opens)
     (hU : ↑U ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r}) :
-    (((higherDirectImage f i).obj ℱ).restrict U.ι).IsFiniteLocallyFreeOfRank r :=
-  sorry
+    (((higherDirectImage f i).obj ℱ).restrict U.ι).IsFiniteLocallyFreeOfRank r := by
+  have := isGrothendieckAbelian (f ⁻¹ᵁ U).toScheme
+  have sq : IsPullback (f ⁻¹ᵁ U).ι (f ∣_ U) f U.ι := (isPullback_morphismRestrict f U).flip
+  obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ U.ι _ _ sq i
+  have := isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback f ℱ hℱ U.ι _ _ sq
+    (by rw [Scheme.Opens.range_ι]; exact hU)
+  exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso e
 
 /-- **Base change detects the rank-`r` perfect locus.** Let `f' : X' ⟶ T'` and `g' : X' ⟶ X` be
 the base change of `f` along `g : T' ⟶ T`, in the cartesian square `sq`
@@ -790,6 +925,29 @@ theorem range_subset_setOf_hFiber_eq_iff (hℱ : ℱ.IsFlatOver f) (i r : ℕ)
       (∀ q ≠ i, IsZero ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ))) ∧
         ((higherDirectImage f' i).obj ((Modules.pullback g').obj ℱ)).IsFiniteLocallyFreeOfRank r :=
   range_subset_perfectLocusOfRank_iff f ℱ hℱ i r g g' f' sq
+
+/-- **The open locus where `R f_* ℱ` is finite locally free in one degree.** With `f : X ⟶ T`
+proper of finite presentation, `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`,
+and `i r : ℕ`, there is an open subscheme `U` of `T`, namely `U_{i,r}`, such that a morphism
+`g : T' ⟶ T` factors through `U` if and only if `R f'_* ℱ'` is a finite locally free module of
+rank `r` placed in degree `i` [Stacks, Tag 0B9S].
+
+Here `f' : X' ⟶ T'` and `g' : X' ⟶ X` are the base change of `f` along `g`, and `ℱ'` is the
+pullback of `ℱ` to `X'`. The set `U_{i,r}` is open by
+`AlgebraicGeometry.Scheme.Modules.isOpen_perfectLocusOfRank`, and the factorisation criterion is
+`AlgebraicGeometry.Scheme.Modules.range_subset_perfectLocusOfRank_iff`.
+
+(blueprint: `lem-pc-flat-rf-open`) -/
+theorem exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree (hℱ : ℱ.IsFlatOver f)
+    (i r : ℕ) :
+    ∃ U : T.Opens, (U : Set T) = ℱ.perfectLocusOfRank f i r ∧
+      ∀ {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
+        [HasInjectiveResolutions X'.Modules], IsPullback g' f' f g →
+        (Set.range g.base ⊆ U ↔ IsFiniteLocallyFreeInDegree
+          (fun q ↦ (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) i r) :=
+  ⟨⟨_, isOpen_perfectLocusOfRank f ℱ hℱ i r⟩, rfl, fun g g' f' _ sq ↦
+    (range_subset_perfectLocusOfRank_iff f ℱ hℱ i r g g' f' sq).trans
+      ⟨fun h ↦ ⟨h.1, h.2⟩, fun h ↦ ⟨h.1, h.2⟩⟩⟩
 
 end Coherence
 

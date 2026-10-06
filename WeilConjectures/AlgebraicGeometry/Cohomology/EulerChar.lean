@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Pullbacks
@@ -43,6 +45,8 @@ Riemann–Roch, stated in `WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.l
   invariant under base change along a field extension.
 - `AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact`: the Euler characteristic
   is additive in short exact sequences.
+- `AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`: the cohomology of a
+  coherent sheaf on a proper scheme over a field is finite-dimensional.
 - `AlgebraicGeometry.Scheme.Modules.degree_congr`: the degree only depends on the isomorphism
   class of the sheaf.
 - `AlgebraicGeometry.Scheme.Modules.degree_unit`: the structure sheaf has degree `0`.
@@ -284,5 +288,21 @@ theorem eulerChar_eq_sum_of_pairwise_disjoint [IsNoetherian X] {n : ℕ}
 end Additivity
 
 end Modules
+
+section Finiteness
+
+variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
+
+/-- **Finiteness of coherent cohomology.** On a scheme `X` proper over a field `k`, the
+cohomology groups `H^q(X, ℱ)` of a coherent `𝒪_X`-module `ℱ` are finite-dimensional over `k`.
+Coherence is spelled as quasi-coherence together with finite presentation. -/
+@[stacks 02O5]
+theorem Modules.finiteDimensional_H_of_isProper [IsProper (X ↘ Spec (.of k))] (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] (q : ℕ) :
+    FiniteDimensional k (ℱ.H q) :=
+  sorry
+
+end Finiteness
 
 end AlgebraicGeometry.Scheme

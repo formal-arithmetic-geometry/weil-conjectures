@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion
 public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPoints
 public import WeilConjectures.GroupTheory.TateModule
@@ -30,6 +31,8 @@ they realise is about abelian varieties and so that they do not shadow
   `AlgebraicGeometry.IsAbelianVariety.rationalTateModule`: `T_ℓ A` and `V_ℓ A`.
 - `AlgebraicGeometry.IsAbelianVariety.geometricPointsAddEquiv`: the action of `Gal(K̄/K)` on the
   geometric points `A(K̄)` by coordinates.
+- `AlgebraicGeometry.IsAbelianVariety.pointsAddEquivGeometricPoints`: over an algebraically
+  closed field `K`, `A(K) ≃ A(K̄)`.
 
 ## Main statements
 
@@ -85,22 +88,81 @@ noncomputable instance rationalTateModule.instModule : Module ℚ_[ℓ] (rationa
   inferInstanceAs (Module ℚ_[ℓ]
     (AddCommGroup.rationalTateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A))))
 
+omit [IsAbelianVariety A] in
+/-- Over an algebraically closed field `K`, the structure morphism `Spec K̄ ⟶ Spec K` is an
+isomorphism. -/
+instance isIso_toUnit_specAlgebraicClosure [IsAlgClosed K] :
+    IsIso (toUnit (Scheme.specAlgebraicClosure K)) := by
+  have : IsIso (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K))) :=
+    (RingEquiv.ofBijective _ IsAlgClosed.algebraMap_bijective_of_isIntegral).toCommRingCatIso
+      |>.isIso_hom
+  have : IsIso ((Over.forget _).map (toUnit (Scheme.specAlgebraicClosure K))) :=
+    inferInstanceAs (IsIso (Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K)))))
+  exact isIso_of_reflects_iso _ (Over.forget _)
+
+omit [IsAbelianVariety A] in
+/-- Over an algebraically closed field `K`, the geometric points `A(K̄)` of a group scheme `A`
+are its `K`-points `A(K)`. -/
+noncomputable def pointsAddEquivGeometricPoints [IsAlgClosed K] :
+    Additive (𝟙_ (Over (Spec (.of K))) ⟶ A) ≃+ Additive (Scheme.specAlgebraicClosure K ⟶ A)
+    where
+  toFun P := .ofMul (toUnit _ ≫ P.toMul)
+  invFun P := .ofMul (inv (toUnit (Scheme.specAlgebraicClosure K)) ≫ P.toMul)
+  left_inv P := by simp
+  right_inv P := by simp
+  map_add' P Q := congr_arg Additive.ofMul (MonObj.comp_mul _ P.toMul Q.toMul)
+
+/-- Over an algebraically closed field `K` and for `ℓ ≠ char K`, the group `A(K̄)` is
+`ℓ`-divisible (blueprint `sk-prop-av-divisible`) and its `ℓ`-torsion has order `ℓ ^ (2g)`
+(blueprint `sk-prop-av-ntorsion-etale`). -/
+theorem exists_zsmul_eq_and_natCard_torsionBy [IsAlgClosed K] (p : ℕ) [CharP K p] (hℓ : ℓ ≠ p) :
+    (∀ x : Additive (Scheme.specAlgebraicClosure K ⟶ A), ∃ y, (ℓ : ℤ) • y = x) ∧
+      Nat.card (AddSubgroup.torsionBy (Additive (Scheme.specAlgebraicClosure K ⟶ A)) (ℓ : ℤ)) =
+        ℓ ^ (2 * IsAbelianVariety.dim A) := by
+  have hℓ' : (ℓ : ℕ).Prime := Fact.out
+  let e := pointsAddEquivGeometricPoints A
+  refine ⟨fun x ↦ ?_, ?_⟩
+  · obtain ⟨a, ha⟩ := surjective_npow_points (A := A) ℓ hℓ'.pos (e.symm x).toMul
+    refine ⟨e (.ofMul a), ?_⟩
+    rw [← map_zsmul, natCast_zsmul, ← e.eq_symm_apply]
+    exact congr_arg Additive.ofMul ha
+  · have hp : ¬ p ∣ ℓ := fun h ↦ by
+      rcases CharP.char_is_prime_or_zero K p with hp | rfl
+      · exact hℓ ((Nat.prime_dvd_prime_iff_eq hp hℓ').1 h).symm
+      · exact hℓ'.ne_zero (Nat.eq_zero_of_zero_dvd h)
+    obtain ⟨f⟩ := nonempty_addEquiv_torsionBy p A ℓ hℓ'.pos hp
+    rw [← Nat.card_congr (e.toEquiv.subtypeEquiv fun x ↦ ?_), Nat.card_congr f.toEquiv,
+      Nat.card_fun, Nat.card_zmod, Nat.card_eq_fintype_card, Fintype.card_fin]
+    simp only [AddSubgroup.torsionBy, Submodule.mem_toAddSubgroup, Submodule.mem_torsionBy_iff]
+    rw [AddEquiv.toEquiv_eq_coe, EquivLike.coe_coe, ← map_zsmul, AddEquiv.map_eq_zero_iff]
+
 /-- Blueprint `sk-prop-av-tate-rank`: The `ℓ`-adic Tate module is free of rank `2g`.
 
+This is also the blueprint proposition `prop-av-tate-rank`.
+
 Let `A` be an abelian variety of dimension `g` over an algebraically closed field `K` and let
-`ℓ ≠ char K`. Then `T_ℓ A ≅ ℤ_[ℓ] ^ (2 * g)`. -/
+`ℓ ≠ char K`. Then `T_ℓ A ≅ ℤ_[ℓ] ^ (2 * g)`.
+
+The group `A(K̄)` is `ℓ`-divisible (blueprint `sk-prop-av-divisible`) and its `ℓ`-torsion has
+`ℓ ^ (2g)` elements (blueprint `sk-prop-av-ntorsion-etale`), so this is
+`AddCommGroup.tateModule.nonempty_linearEquiv_of_natCard_eq`. -/
 theorem nonempty_linearEquiv_tateModule [IsAlgClosed K] (p : ℕ) [CharP K p] (hℓ : ℓ ≠ p) :
     Nonempty (tateModule ℓ A ≃ₗ[ℤ_[ℓ]] (Fin (2 * IsAbelianVariety.dim A) → ℤ_[ℓ])) :=
-  sorry
+  have h := exists_zsmul_eq_and_natCard_torsionBy ℓ A p hℓ
+  AddCommGroup.tateModule.nonempty_linearEquiv_of_natCard_eq ℓ _ h.1 _ h.2
 
 /-- Blueprint `sk-prop-av-tate-rank`: The `ℓ`-adic Tate module is free of rank `2g`.
 
+This is also the blueprint proposition `prop-av-tate-rank`.
+
 Let `A` be an abelian variety of dimension `g` over an algebraically closed field `K` and let
-`ℓ ≠ char K`. Then `V_ℓ A ≅ ℚ_[ℓ] ^ (2 * g)`. -/
+`ℓ ≠ char K`. Then `V_ℓ A ≅ ℚ_[ℓ] ^ (2 * g)`: this is the base change of
+`AlgebraicGeometry.IsAbelianVariety.nonempty_linearEquiv_tateModule` to `ℚ_[ℓ]`. -/
 theorem nonempty_linearEquiv_rationalTateModule [IsAlgClosed K] (p : ℕ) [CharP K p]
     (hℓ : ℓ ≠ p) :
     Nonempty (rationalTateModule ℓ A ≃ₗ[ℚ_[ℓ]] (Fin (2 * IsAbelianVariety.dim A) → ℚ_[ℓ])) :=
-  sorry
+  have h := exists_zsmul_eq_and_natCard_torsionBy ℓ A p hℓ
+  AddCommGroup.rationalTateModule.nonempty_linearEquiv_of_natCard_eq ℓ _ h.1 _ h.2
 
 section Galois
 
