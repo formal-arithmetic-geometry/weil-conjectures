@@ -86,6 +86,11 @@ theorem localTerm_traceClass_eq_zero_of_isZero [SmoothOfRelativeDimension 1 aX]
     [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
     (hBx : Set.range jB.base = Set.range xFix.base)
     [HasCompactification (W.graph G m).fixStr] [IsProper (W.graph G m).fixStr]
+    [(R(aX)_![A]).IsLeftAdjoint] [(R(pullback.fst aX aX)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd aX aX)_![A]).IsLeftAdjoint] [HasCompactification (pullback.diagonal aX)]
+    [(R(pullback.diagonal aX)_![A]).IsLeftAdjoint]
+    [(R((W.graph G m).toProd)_![A]).IsLeftAdjoint] [(R((W.graph G m).fixι)_![A]).IsLeftAdjoint]
+    [(R((W.graph G m).fixStr)_![A]).IsLeftAdjoint]
     (hstalk : IsZero (((upperStar A x).leftDerivedFunctor).obj W.obj)) :
     G.localTerm (W.graph G m).fixStr jB hB (G.traceClass (W.graph G m) hW) = 0 :=
   sorry
@@ -108,7 +113,12 @@ theorem localTerm_traceClass_eq_trace [SmoothOfRelativeDimension 1 aX]
     (xFix : s ⟶ (W.graph G m).fix) (hxFix : xFix ≫ (W.graph G m).fixι = x) {B : Scheme.{u}}
     (jB : B ⟶ (W.graph G m).fix) [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
     (hBx : Set.range jB.base = Set.range xFix.base)
-    [HasCompactification (W.graph G m).fixStr] [IsProper (W.graph G m).fixStr] :
+    [HasCompactification (W.graph G m).fixStr] [IsProper (W.graph G m).fixStr]
+    [(R(aX)_![A]).IsLeftAdjoint] [(R(pullback.fst aX aX)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd aX aX)_![A]).IsLeftAdjoint] [HasCompactification (pullback.diagonal aX)]
+    [(R(pullback.diagonal aX)_![A]).IsLeftAdjoint]
+    [(R((W.graph G m).toProd)_![A]).IsLeftAdjoint] [(R((W.graph G m).fixι)_![A]).IsLeftAdjoint]
+    [(R((W.graph G m).fixStr)_![A]).IsLeftAdjoint] :
     G.localTerm (W.graph G m).fixStr jB hB (G.traceClass (W.graph G m) hW) =
       MonoidalCategory.trace (W.stalkFrobenius m x hx) :=
   sorry
