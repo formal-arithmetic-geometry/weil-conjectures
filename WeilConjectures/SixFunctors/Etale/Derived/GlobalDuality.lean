@@ -53,10 +53,10 @@ separatedness and finite type.
 
 The subject of `sk-thm-sf-identification` is the pairing `β_K` — the mixed-support cup
 product followed by the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X` and the normalized trace — and the
-assertion that its tensor–internal-hom adjoint is invertible. The cup product is not
-available here, so `β_K` itself is **not stated**: what is recorded is only the isomorphism
-that the blueprint identifies the adjoint of `β_K` with. In particular the perfectness of
-`β_K`, and the classical degreewise form of the pairing, are not captured.
+assertion that its tensor–internal-hom adjoint is invertible. The pairing is
+`AlgebraicGeometry.Etale.poincarePairing`, and its perfectness at finite coefficients is
+`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`; this file does not import them,
+and records only the isomorphism that the blueprint identifies the adjoint of `β_K` with.
 
 -/
 
@@ -112,8 +112,7 @@ relative dimension `d` and with `K` perfect over `Λ_X`, there is an isomorphism
 
 again written one step earlier, with `Ra_{X*}` and `Ra_{X!}` in `D(S_ét)`. The blueprint
 identifies this isomorphism with the tensor–internal-hom adjoint of the derived Poincaré
-pairing `β_K`, and concludes that `β_K` is perfect; the pairing itself is not stated here,
-see the module docstring. -/
+pairing `β_K`, and concludes that `β_K` is perfect; see the module docstring. -/
 theorem nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation
     (o : Orientation A aX d)
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}

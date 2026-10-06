@@ -74,7 +74,34 @@ theorem charpoly_eq_charpoly_restrict_mul_charpoly_mapQ (f : V →ₗ[R] V) (W :
     [Module.Free R W] [Module.Finite R W] [Module.Free R (V ⧸ W)] [Module.Finite R (V ⧸ W)]
     (hW : W ≤ W.comap f) :
     f.charpoly = (f.restrict hW).charpoly * (W.mapQ W f hW).charpoly := by
-  sorry
+  classical
+  let bW := Module.Free.chooseBasis R W
+  let bQ := Module.Free.chooseBasis R (V ⧸ W)
+  let b := Module.Basis.sumQuot bW bQ
+  let B : Matrix (Module.Free.ChooseBasisIndex R W) (Module.Free.ChooseBasisIndex R (V ⧸ W)) R :=
+    Matrix.of fun i l ↦ (b.repr (f (b (Sum.inr l)))) (Sum.inl i)
+  suffices toMatrix b b f = Matrix.fromBlocks (toMatrix bW bW (f.restrict hW)) B 0
+      (toMatrix bQ bQ (W.mapQ W f hW)) by
+    rw [← charpoly_toMatrix f b, this, Matrix.charpoly_fromBlocks_zero₂₁, charpoly_toMatrix,
+      charpoly_toMatrix]
+  ext u v
+  cases u with
+  | inl i =>
+    cases v with
+    | inl k =>
+      simp only [b, Module.Basis.sumQuot_inl, Matrix.fromBlocks_apply₁₁, toMatrix_apply]
+      apply Module.Basis.sumQuot_repr_inl_of_mem
+    | inr l => simp [b, toMatrix_apply, Matrix.fromBlocks_apply₁₂, B]
+  | inr j =>
+    cases v with
+    | inl k =>
+      suffices W.mkQ (f (bW k)) = 0 by simp [toMatrix_apply, b, this]
+      rw [← mem_ker, Submodule.ker_mkQ]
+      exact hW (Submodule.coe_mem (bW k))
+    | inr l =>
+      simp only [toMatrix_apply, Module.Basis.sumQuot_repr_inr, Matrix.fromBlocks_apply₂₂, b]
+      rw [← Module.Basis.sumQuot_inr bW bQ l, W.mapQ_apply]
+      simp
 
 /-- The characteristic polynomial of an endomorphism of the zero module is `1`. -/
 theorem charpoly_eq_one_of_subsingleton [Nontrivial R] [Subsingleton V] (f : V →ₗ[R] V) :
