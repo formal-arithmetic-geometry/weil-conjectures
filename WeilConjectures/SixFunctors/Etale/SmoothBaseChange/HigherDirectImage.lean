@@ -131,7 +131,7 @@ theorem Etale.higherDirectImage_limit {W S : Scheme.{u}} (k : W ⟶ S)
   sorry
 
 
-/-- Blueprint `lemma-weil-pbc-direct-image-filtered-colimit`: Filtered colimits and higher
+/-- Blueprint `lem:weil-pbc-direct-image-filtered-colimit`: Filtered colimits and higher
 direct image.
 
 For a quasi-compact quasi-separated morphism `h : Y ⟶ X`, the higher direct image

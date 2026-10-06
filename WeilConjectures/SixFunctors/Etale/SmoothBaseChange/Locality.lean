@@ -78,8 +78,8 @@ theorem Etale.BaseChangeProperty.comp {Z : Scheme.{u}} {p₁ : X ⟶ Z} {p₂ : 
 
 /-- An isomorphism `p` satisfies the base-change property `BC(p, Λ, q)` in every degree: for
 a Cartesian square on an isomorphism, the base-change map is an isomorphism. This is the
-trivial case of the étale locality `AlgebraicGeometry.Etale.BaseChangeProperty.of_etale_cover`,
-in which the factorisations `U_i ⟶ V_i` are identities. -/
+elementary case where `p` is an isomorphism, so that `R^q p_*` is `p_*` (up to the pullback
+isomorphism) in degree `0` and vanishes in the other degrees. -/
 theorem Etale.baseChangeProperty_of_isIso (p : X ⟶ S) [IsIso p] (q : ℤ) :
     Etale.BaseChangeProperty Λ p q :=
   sorry
