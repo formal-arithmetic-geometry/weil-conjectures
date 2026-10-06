@@ -247,18 +247,39 @@ noncomputable def pullbackFreeIso (g : Y ⟶ X) (I : Type u) :
     (pullback g).obj (free (R := X.ringCatSheaf) I) ≅ free I :=
   SheafOfModules.pullbackObjFreeIso g.toRingCatSheafHom I
 
+/-- The pullback of the inclusion of the `i`-th summand of a free module is the inclusion of the
+`i`-th summand of the pulled back free module: the square
+```
+g^* 𝒪_X  --g^*(ιFree i)-->  g^* 𝒪_X^{(I)}
+   |                              |
+   ≅                         pullbackFreeIso
+   v                              v
+  𝒪_Y   ------ιFree i------>   𝒪_Y^{(I)}
+```
+commutes. -/
 @[reassoc (attr := simp)]
 lemma pullback_map_ιFree_pullbackFreeIso_hom (g : Y ⟶ X) {I : Type u} (i : I) :
     (pullback g).map (ιFree i) ≫ (pullbackFreeIso g I).hom =
       (pullbackObjUnitIso g).hom ≫ ιFree i :=
   SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom _ i
 
+/-- The inverse form of `pullback_map_ιFree_pullbackFreeIso_hom`. -/
 lemma ιFree_pullbackFreeIso_inv (g : Y ⟶ X) {I : Type u} (i : I) :
     ιFree i ≫ (pullbackFreeIso g I).inv =
       (pullbackObjUnitIso g).inv ≫ (pullback g).map (ιFree i) := by
   rw [Iso.comp_inv_eq, Category.assoc, pullback_map_ιFree_pullbackFreeIso_hom,
     Iso.inv_hom_id_assoc]
 
+/-- The pullback of the projection onto the `i`-th summand of a free module is the projection onto
+the `i`-th summand of the pulled back free module: the square
+```
+g^* 𝒪_X^{(I)}  --g^*(freeπ i)-->  g^* 𝒪_X
+     |                               |
+pullbackFreeIso                      ≅
+     v                               v
+  𝒪_Y^{(I)}   ------freeπ i------>   𝒪_Y
+```
+commutes. -/
 @[reassoc]
 lemma pullbackFreeIso_hom_freeπ (g : Y ⟶ X) {I : Type u} [DecidableEq I] (i : I) :
     (pullbackFreeIso g I).hom ≫ freeπ i =

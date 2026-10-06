@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Flat.Stability
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.Topology.Sheaves.Presheaf
 
 /-!
 # Sections of quasi-coherent modules over basic opens of an affine open
@@ -397,14 +398,6 @@ variable {R : CommRingCat.{u}}
 
 open CategoryTheory Limits Opposite
 
-/-- A restriction map of a presheaf along an equality of opens is bijective. -/
-lemma bijective_presheaf_map_of_le {C : Type*} [Category C] {FC : C → C → Type*} {CC : C → Type*}
-    [∀ X Y, FunLike (FC X Y) (CC X) (CC Y)] [ConcreteCategory C FC] {X : TopCat}
-    (F : TopCat.Presheaf C X) {U V : Opens X} (i : op U ⟶ op V) (h : U ≤ V) :
-    Function.Bijective (F.map i) := by
-  have : IsIso i := ⟨⟨(homOfLE h).op, Subsingleton.elim _ _, Subsingleton.elim _ _⟩⟩
-  exact ConcreteCategory.bijective_of_isIso _
-
 /-- Over a field `R`, every sheaf of `R`-modules on `Spec R` coming from an `𝒪_{Spec R}`-module is
 localizing: a basic open `D(f)` is empty for `f = 0` and everything for `f ≠ 0`. -/
 theorem isLocalizing_of_isField (hR : IsField R) (M : (Spec R).Modules) :
@@ -425,8 +418,8 @@ theorem isLocalizing_of_isField (hR : IsField R) (M : (Spec R).Modules) :
   · have hf' : IsUnit f := Ne.isUnit hf
     have hU : ⊤ ≤ PrimeSpectrum.basicOpen f := fun x _ ↦ (PrimeSpectrum.mem_basicOpen _ _).2
       fun h ↦ x.isPrime.ne_top (Ideal.eq_top_of_isUnit_mem _ h hf')
-    have hb := bijective_presheaf_map_of_le (modulesSpecToSheaf.obj M).obj
-      (PrimeSpectrum.basicOpen f).leTop.op hU
+    have hb := TopCat.Presheaf.bijective_map_of_eq (modulesSpecToSheaf.obj M).obj
+      (PrimeSpectrum.basicOpen f).leTop.op (hU.antisymm le_top)
     exact
       { map_units x := by
           obtain ⟨_, n, rfl⟩ := x

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -59,14 +60,6 @@ lemma le_rank_map_appTop_iff {m n : Type*} [Finite m] [Fintype n] {R : CommRingC
   simp_rw [← g.appTop_ne_zero_iff_mem_basicOpen hR _ x]
   exact Matrix.le_rank_map_iff A g.appTop.hom ρ
 
-lemma finrank_range_iso_comp {R : Type*} [Ring R] {M N M' N' : ModuleCat.{u} R} (a : M' ≅ M)
-    (m : M ⟶ N) (b : N ≅ N') :
-    finrank R (LinearMap.range (a.hom ≫ m ≫ b.hom).hom) = finrank R (LinearMap.range m.hom) := by
-  rw [ModuleCat.hom_comp, ModuleCat.hom_comp, LinearMap.range_comp,
-    LinearMap.range_eq_top.2 (ConcreteCategory.bijective_of_isIso a.hom).2, Submodule.map_top,
-    LinearMap.range_comp]
-  exact b.toLinearEquiv.finrank_map_eq _
-
 /-- The rank of `Γ(g^* φ)` for a morphism `φ` of free modules of finite rank on `Y` and a point
 `g : Spec R ⟶ Y` is the rank of the matrix of `φ` at that point. -/
 lemma finrank_range_moduleSpecΓFunctor_map {R : CommRingCat.{u}} (g : Spec R ⟶ Y)
@@ -83,7 +76,7 @@ lemma finrank_range_moduleSpecΓFunctor_map {R : CommRingCat.{u}} (g : Spec R �
       (eN.symm ≪≫ pullbackFreeIso g J).inv := by
     simp [h, D]
   rw [hψ, Functor.map_comp, Functor.map_comp]
-  refine (finrank_range_iso_comp ((moduleSpecΓFunctor (R := R)).mapIso
+  refine (ModuleCat.finrank_range_iso_comp ((moduleSpecΓFunctor (R := R)).mapIso
     (eM.symm ≪≫ pullbackFreeIso g I)) _ ((moduleSpecΓFunctor (R := R)).mapIso
     (eN.symm ≪≫ pullbackFreeIso g J)).symm).trans ?_
   exact finrank_eq_of_coe_eq _ _ _ rfl

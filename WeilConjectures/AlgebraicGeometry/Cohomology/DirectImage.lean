@@ -90,8 +90,6 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
   sections of `R^q f_* ℱ` are `H^q(X, ℱ)`, linearly over `Γ(T, ⊤)`. Hence
   (`hFiber_eq_finrank_sections_higherDirectImage`) the fibre dimension is the dimension of the
   higher direct image of the fibre to the point.
-- `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_pullback_of_flat`: cohomology
-  commutes with flat base change.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`: the higher direct
   images commute with restriction to an open subscheme of the base.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_tensorObj_pullback_iso`: the
@@ -368,29 +366,6 @@ theorem nonempty_higherDirectImage_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶
     (sq : IsPullback g' f' f g) (q : ℕ) :
     Nonempty ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ) ≅
       ((higherDirectImage f q).obj ℱ).restrict g) :=
-  sorry
-
-/-- **Cohomology and flat base change.** Let `f : X ⟶ T` be quasi-compact and quasi-separated,
-`ℱ` a quasi-coherent `𝒪_X`-module, `g : T' ⟶ T` flat, and `f' : X' ⟶ T'`, `g' : X' ⟶ X` the base
-change of `f` along `g`, in the cartesian square `sq`
-```
-X' --g'--> X
-|          |
-f'         f
-v          v
-T' --g---> T
-```
-Then `R^q f'_* (g'^* ℱ) ≅ g^* R^q f_* ℱ` for every `q` [Stacks, Tag 02KH]. Over affine `T` and
-`T'` this is `H^q(X, ℱ) ⊗_A B ≅ H^q(X_B, ℱ_B)`, computed with Čech complexes, since a flat ring
-map commutes with taking cohomology of a complex.
-
-(blueprint: `lem-pc-flat-base-change-cohom`) -/
-theorem nonempty_higherDirectImage_iso_pullback_of_flat [QuasiCompact f] [QuasiSeparated f]
-    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {T' X' : Scheme.{u}} (g : T' ⟶ T)
-    [Flat g] (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules]
-    (sq : IsPullback g' f' f g) (q : ℕ) :
-    Nonempty ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ) ≅
-      (Modules.pullback g).obj ((higherDirectImage f q).obj ℱ)) :=
   sorry
 
 open MonoidalCategory in
