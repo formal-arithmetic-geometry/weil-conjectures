@@ -22,6 +22,8 @@ through the adjunction.
 
 - `CategoryTheory.Adjunction.rightAdjointLaxBraided`: the lax braided structure on the
   right adjoint of a braided functor.
+- `CategoryTheory.BraidedCategory.tensorRightEquivalence`: in a braided category, tensoring
+  with an object `X` with `X ⊗ Y ≅ 𝟙_ C` is an autoequivalence.
 
 ## Main results
 
@@ -72,5 +74,15 @@ instance preservesColimitsOfShape_flip_curriedTensor_obj
     [∀ X : C, PreservesColimitsOfShape J (tensorLeft X)] (X : C) :
     PreservesColimitsOfShape J ((curriedTensor C).flip.obj X) :=
   preservesColimitsOfShape_of_natIso (tensorLeftIsoTensorRight X)
+
+/-- **Tensoring with an invertible object is an autoequivalence.** If `X ⊗ Y ≅ 𝟙_ C` in a
+braided monoidal category, then `tensorRight X` is an equivalence, with inverse
+`tensorRight Y`: both composites are tensoring with `X ⊗ Y ≅ Y ⊗ X ≅ 𝟙_ C`. -/
+@[simps! functor inverse]
+def tensorRightEquivalence (X Y : C) (e : X ⊗ Y ≅ 𝟙_ C) : C ≌ C :=
+  Equivalence.mk (tensorRight X) (tensorRight Y)
+    ((rightUnitorNatIso C).symm ≪≫ (tensoringRight C).mapIso e.symm ≪≫ tensorRightTensor X Y)
+    ((tensorRightTensor Y X).symm ≪≫ (tensoringRight C).mapIso (β_ Y X ≪≫ e) ≪≫
+      rightUnitorNatIso C)
 
 end CategoryTheory.BraidedCategory
