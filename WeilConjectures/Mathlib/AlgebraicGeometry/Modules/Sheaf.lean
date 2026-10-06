@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.AlgebraicGeometry.Modules.Presheaf
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # Sections of a kernel of `𝒪_X`-modules
@@ -23,6 +24,8 @@ into a computable object.
 ## Main results
 
 - `AlgebraicGeometry.Scheme.Modules.range_map_kernelι`
+- `AlgebraicGeometry.Scheme.Modules.restrictEquivalence`: restriction along an isomorphism of
+  schemes is an equivalence of categories of modules.
 -/
 
 @[expose] public section
@@ -75,5 +78,24 @@ instance : Mono ((SheafOfModules.evaluation X.ringCatSheaf (op U)).map (kernel.�
 lemma injective_map_kernelι :
     Function.Injective ((SheafOfModules.evaluation X.ringCatSheaf (op U)).map (kernel.ι f)) :=
   (ModuleCat.mono_iff_injective _).mp inferInstance
+
+section Restrict
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f]
+
+/-- Restriction of modules along an isomorphism of schemes `f : X ⟶ Y` is an equivalence, with
+inverse the restriction along `f⁻¹`. -/
+noncomputable def restrictEquivalence : Y.Modules ≌ X.Modules :=
+  .mk (restrictFunctor f) (restrictFunctor (inv f))
+    ((restrictFunctorId (X := Y)).symm ≪≫ restrictFunctorCongr (IsIso.inv_hom_id f).symm ≪≫
+      restrictFunctorComp (inv f) f)
+    ((restrictFunctorComp f (inv f)).symm ≪≫ restrictFunctorCongr (IsIso.hom_inv_id f) ≪≫
+      restrictFunctorId (X := X))
+
+@[simp]
+lemma restrictEquivalence_functor : (restrictEquivalence f).functor = restrictFunctor f :=
+  rfl
+
+end Restrict
 
 end AlgebraicGeometry.Scheme.Modules

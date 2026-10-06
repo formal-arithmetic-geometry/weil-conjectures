@@ -12,6 +12,8 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # The Lie algebra of a group scheme
@@ -168,7 +170,15 @@ noncomputable instance : Module Γ(S, ⊤) (Lie G) :=
 
 /-- The Lie algebra is the module of global sections of the Lie algebra sheaf. -/
 theorem nonempty_lie_equiv_sections : Nonempty (Lie G ≃+ Γ(lieAlgebraSheaf G, ⊤)) := by
-  sorry
+  have : IsIso (⊤ : S.Opens).ι := ⟨S.topIso.inv, S.ι_toIso_inv, S.toIso_inv_ι⟩
+  let E := Scheme.Modules.restrictEquivalence (⊤ : S.Opens).ι
+  let e : Lie G ≃ Scheme.Modules.DualSections (omega G) ⊤ :=
+    (E.fullyFaithfulFunctor.homEquiv).trans
+      ((Scheme.Modules.restrictUnitIso (⊤ : S.Opens).ι).homToEquiv)
+  refine ⟨{ e with map_add' := fun φ ψ ↦ ?_ }⟩
+  change (Scheme.Modules.restrictFunctor _).map (φ + ψ) ≫ _ =
+    (Scheme.Modules.restrictFunctor _).map φ ≫ _ + (Scheme.Modules.restrictFunctor _).map ψ ≫ _
+  rw [Scheme.Modules.restrictFunctor_map_add, Preadditive.add_comp]
 
 end GrpObj
 
@@ -265,11 +275,34 @@ noncomputable def infDerivation (v : dualNumbersOver S ⟶ G) :
       (Scheme.Modules.unitModule S)).val.Derivation' G.hom.pullbackPresheafHom where
   d {V} :=
     { toFun := fun a ↦ (v.left.app V.unop a).snd
-      map_zero' := by sorry
-      map_add' := by sorry }
-  d_mul := by sorry
-  d_map := by sorry
-  d_app := by sorry
+      map_zero' := by rw [map_zero]; rfl
+      map_add' x y := by rw [map_add]; rfl }
+  d_mul {V} a b := by
+    change (v.left.app V.unop (a * b)).snd =
+      (v.left.app V.unop a).fst * (v.left.app V.unop b).snd +
+        (v.left.app V.unop b).fst * (v.left.app V.unop a).snd
+    rw [map_mul, snd_mul, smul_eq_mul, op_smul_eq_mul, mul_comm (v.left.app V.unop a).snd]
+  d_map {X Y} f x := by
+    have h := ConcreteCategory.congr_hom (v.left.c.naturality f) x
+    exact (congr_arg snd h).trans (DualNumber.snd_mapRingHom _ _)
+  d_app {X} a := by
+    let ε₀ : (TopCat.Presheaf.pushforward CommRingCat v.left.base).obj
+        (dualNumbersOver S).left.presheaf ⟶
+        (TopCat.Presheaf.pushforward CommRingCat v.left.base).obj
+          (dualNumbersOver S).left.presheaf :=
+      Functor.whiskerLeft ((TopologicalSpace.Opens.map v.left.base).op ⋙ S.presheaf)
+        (CommRingCat.dualNumberFst ≫ CommRingCat.dualNumberInl)
+    have key : (G.hom.pullbackPresheafHom ≫ v.left.c) ≫ ε₀ =
+        G.hom.pullbackPresheafHom ≫ v.left.c := by
+      simp only [Scheme.Hom.pullbackPresheafHom, ← Adjunction.homEquiv_naturality_right_symm]
+      congr 1
+      ext U b
+      have hb : ((v.left ≫ G.hom).app U b).snd = 0 := by
+        rw [Scheme.Hom.congr_app (Over.w v) U]
+        exact (DualNumber.snd_mapRingHom _ _).trans (map_zero _)
+      exact TrivSqZeroExt.ext rfl hb.symm
+    have h := ConcreteCategory.congr_hom (congr_app key X) a
+    exact (congr_arg snd h).symm.trans rfl
 
 /-- The morphism `(i ≫ v)^*Ω¹_{G/S} ⟶ 𝒪_S` attached to a point `v : S[ε] ⟶ G`: the derivation
 `d_v` through the universal property of `Ω¹_{G/S}` and the adjunction `(i ≫ v)^* ⊣ (i ≫ v)_*`. -/
@@ -301,8 +334,38 @@ noncomputable def lieEquiv : infPoints G ≃ Lie G :=
 theorem lieEquiv_mul (v w : infPoints G) : lieEquiv G (v * w) = lieEquiv G v + lieEquiv G w := by
   sorry
 
+/-- The identity point `1 : S[ε] ⟶ G` is the identity section composed with `p : S[ε] ⟶ S`. -/
+theorem one_dualNumbersOver_left :
+    (1 : dualNumbersOver S ⟶ G).left = S.dualNumbersProj ≫ unitSection G := by
+  rw [Hom.one_def, Over.comp_left, unitSection]
+  congr 1
+
+/-- The derivation attached to the identity point vanishes. -/
+theorem infDerivation_one_d {V : (TopologicalSpace.Opens G.left)ᵒᵖ} (a : Γ(G.left, V.unop)) :
+    (infDerivation G 1).d a = 0 := by
+  change ((1 : dualNumbersOver S ⟶ G).left.app V.unop a).snd = 0
+  rw [Scheme.Hom.congr_app (one_dualNumbersOver_left G), Scheme.Hom.comp_app]
+  exact (DualNumber.snd_mapRingHom _ _).trans (map_zero _)
+
+omit [GrpObj G] in
+/-- The morphism attached to a point with vanishing derivation is zero. -/
+theorem omegaHom_eq_zero (v : dualNumbersOver S ⟶ G)
+    (hv : ∀ {V : (TopologicalSpace.Opens G.left)ᵒᵖ} (a : Γ(G.left, V.unop)),
+      (infDerivation G v).d a = 0) :
+    omegaHom G v = 0 := by
+  have h : (PresheafOfModules.DifferentialsConstruction.isUniversal' _).desc
+      (infDerivation G v) = 0 := by
+    apply (PresheafOfModules.DifferentialsConstruction.isUniversal' _).postcomp_injective
+    rw [PresheafOfModules.Derivation.Universal.fac]
+    ext V a
+    rw [hv a]
+    simp
+  rw [omegaHom, h, PresheafOfModules.sheafificationHomEquiv_symm_zero,
+    Adjunction.homEquiv_counit, Functor.map_zero, Limits.zero_comp]
+
 theorem lieEquiv_one : lieEquiv G 1 = 0 := by
-  sorry
+  change _ ≫ omegaHom G 1 = 0
+  rw [omegaHom_eq_zero G 1 (infDerivation_one_d G), Limits.comp_zero]
 
 /-! ### The bracket as the mixed term of the commutator -/
 
