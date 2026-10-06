@@ -252,22 +252,6 @@ theorem Etale.isLocalIso_of_isSepClosed_functionField {V S : Scheme.{u}} [IsInte
   · rw [← σ.isoOpensRange_inv_comp, Category.assoc, hσ]
     infer_instance
 
-/-- The stalks of an integral normal scheme with separably closed function field are henselian.
--/
-theorem Scheme.henselianLocalRing_stalk_of_isSepClosed_functionField {S : Scheme.{u}}
-    [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
-    [IsSepClosed S.functionField] (x : S) : HenselianLocalRing (S.presheaf.stalk x) :=
-  have := hS x
-  HenselianLocalRing.of_isSepClosed_fractionRing S.functionField
-
-/-- The residue fields of an integral normal scheme with separably closed function field are
-separably closed. -/
-theorem Scheme.isSepClosed_residueField_of_isSepClosed_functionField {S : Scheme.{u}}
-    [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
-    [IsSepClosed S.functionField] (x : S) : IsSepClosed (S.residueField x) :=
-  have := hS x
-  IsLocalRing.isSepClosed_residueField_of_isSepClosed_fractionRing S.functionField
-
 /-- **Étale covers of a normal scheme with separably closed function field**
 (blueprint `sbc-lem-etale-over-normal`). Let `S` be an integral normal scheme — normality being
 the hypothesis `hS` that every stalk of `S` is integrally closed — with separably closed function

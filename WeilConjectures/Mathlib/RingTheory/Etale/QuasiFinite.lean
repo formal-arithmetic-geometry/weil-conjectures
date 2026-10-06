@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Etale.Field
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Smooth.Flat
 public import Mathlib.RingTheory.Unramified.LocalStructure
+public import WeilConjectures.Mathlib.Algebra.Algebra.Hom
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 
@@ -50,21 +51,6 @@ closed fraction field is strictly henselian.
 open Polynomial
 
 open scoped TensorProduct
-
-/-- An `R`-algebra map into `K` whose image lies in the image of an injective `algebraMap R K`
-factors through `R`. -/
-lemma AlgHom.exists_algebraMap_comp_eq_of_forall_mem_range {R S K : Type*} [CommRing R]
-    [CommRing S] [CommRing K] [Algebra R S] [Algebra R K]
-    (hinj : Function.Injective (algebraMap R K))
-    (f : S →ₐ[R] K) (h : ∀ s, f s ∈ Set.range (algebraMap R K)) :
-    ∃ θ : S →ₐ[R] R, ∀ s, algebraMap R K (θ s) = f s := by
-  choose g hg using h
-  exact ⟨{ toFun := g
-           map_one' := hinj (by simp [hg])
-           map_mul' := fun x y ↦ hinj (by simp [hg])
-           map_zero' := hinj (by simp [hg])
-           map_add' := fun x y ↦ hinj (by simp [hg])
-           commutes' := fun x ↦ hinj (by simp [hg]) }, hg⟩
 
 namespace Algebra.Etale
 
@@ -169,7 +155,6 @@ theorem exists_algHom_localizationAway_comap_eq (K : Type*) [Field K] [Algebra A
   rw [Ideal.mem_comap, this]
   exact Ideal.IsPrime.mul_mem_left_iff (mt (Ideal.IsPrime.mem_of_pow_mem inferInstance m) hrq)
 
-
 /-- Over an integrally closed local domain `A` with separably closed fraction field, every prime
 `q` of an étale `A`-algebra `B` lying over the maximal ideal is the preimage of the maximal ideal
 under an `A`-algebra map `B →ₐ[A] A`. -/
@@ -196,7 +181,6 @@ theorem exists_algHom_comap_maximalIdeal_eq [IsLocalRing A] (K : Type*) [Field K
   rw [← hPq, Ideal.mem_comap, Ideal.mem_comap, ← hPA, Ideal.mem_comap, AlgHom.comp_apply,
     AlgEquiv.coe_toAlgHom, ← e.commutes, Algebra.algebraMap_self, RingHom.id_apply,
     e.apply_symm_apply]
-
 
 end Algebra.Etale
 
