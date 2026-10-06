@@ -284,7 +284,9 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
@@ -399,6 +401,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
 public import WeilConjectures.Mathlib.Algebra.CharP.Algebra
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
+public import WeilConjectures.Mathlib.Algebra.DirectSum.LinearMap
 public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.Algebra.Exact.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
@@ -833,6 +836,7 @@ public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.Topology.StratificationDense
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.Curve
 public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.Fourier
