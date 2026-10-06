@@ -151,9 +151,10 @@ Some such hypothesis is needed: `IsPunctuallyPureOfWeight` only sees the points 
 rank-one sheaf need not be pure of every weight.
 (blueprint: `lem-a1-geometric-coinvariants-pure`) -/
 theorem isPureOfWeightOver_geometricCoinvariants
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ)
     (F : WeilSheaf k₀ l X) (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
-    F.geometricCoinvariants.IsPureOfWeightOver k₀ ι w := by
+    (F.geometricCoinvariants hF).IsPureOfWeightOver k₀ ι w := by
   -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
   sorry
 
