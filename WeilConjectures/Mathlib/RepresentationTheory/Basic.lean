@@ -43,7 +43,9 @@ have, alongside `Representation.tprod` and `Representation.dual`:
 
 ## Blueprint
 
-`Representation.detCharacter` implements part of `sk-d-weights`.
+`Representation.detCharacter` implements part of `sk-d-weights`. `Representation.exteriorPower`
+is the exterior power `⋀^s V` of `sk-d-linear`, and `⋀^r V` for `r = dim V` its determinant
+representation.
 -/
 
 @[expose] public section
@@ -88,8 +90,8 @@ theorem Equiv.detCharacter_eq (e : ρ.Equiv σ) : σ.detCharacter = ρ.detCharac
 end Equiv
 
 /-- The representation induced on the `s`-th exterior power `⋀^s V`, by functoriality of the
-exterior power.  The name shadows the root namespace `exteriorPower`, whose declarations are
-therefore spelled `_root_.exteriorPower.*` below. -/
+exterior power. The name shadows the root namespace `exteriorPower`, whose declarations are
+therefore spelled `_root_.exteriorPower.*` below. (blueprint: `sk-d-linear`) -/
 noncomputable def exteriorPower (ρ : Representation k W V) (s : ℕ) :
     Representation k W ↥(⋀[k]^s V) where
   toFun w := _root_.exteriorPower.map s (ρ w)

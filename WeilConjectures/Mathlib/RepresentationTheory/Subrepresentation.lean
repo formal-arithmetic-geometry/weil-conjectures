@@ -28,6 +28,10 @@ quotient is the honest subquotient `S / U`.
 
 ## Main declarations
 
+* `Subrepresentation.instCompleteLattice`: the subrepresentations form a complete lattice, modular
+  and, for finite-dimensional `V`, compactly generated.
+* `Subrepresentation.isIrreducible_toRepresentation_iff_isAtom`: a subrepresentation is
+  irreducible if and only if it is an atom of the lattice of subrepresentations.
 * `Subrepresentation.subquotient`: the representation of `W` on `S ⧸ U`.
 * `Subrepresentation.translate`: translation by `g` of subrepresentations of the restriction to a
   normal subgroup.
@@ -84,6 +88,108 @@ theorem isAtom_of_isIrreducible {G : Type*} [Monoid G] {ρ : Representation k G 
     · refine absurd (fun x hx ↦ ?_) hT.not_ge
       have : (⟨x, hx⟩ : S.toSubmodule) ∈ restrict T := h ▸ Submodule.mem_top
       exact this
+
+variable {G : Type*} [Monoid G] {ρ : Representation k G V}
+
+/-- The join of a set of subrepresentations: the join of the underlying submodules is stable. -/
+instance : SupSet (Subrepresentation ρ) where
+  sSup S := ⟨⨆ U ∈ S, U.toSubmodule, fun g v hv ↦ by
+    induction hv using Submodule.iSup_induction' with
+    | mem U v hv =>
+      induction hv using Submodule.iSup_induction' with
+      | mem hU v hv => exact Submodule.mem_iSup_of_mem U <|
+          Submodule.mem_iSup_of_mem hU (U.apply_mem_toSubmodule g hv)
+      | zero => simp
+      | add x y _ _ hx hy => simpa using add_mem hx hy
+    | zero => simp
+    | add x y _ _ hx hy => simpa using add_mem hx hy⟩
+
+/-- The meet of a set of subrepresentations: the meet of the underlying submodules is stable. -/
+instance : InfSet (Subrepresentation ρ) where
+  sInf S := ⟨⨅ U ∈ S, U.toSubmodule, fun g v hv ↦ by
+    simp only [Submodule.mem_iInf] at hv ⊢
+    exact fun U hU ↦ U.apply_mem_toSubmodule g (hv U hU)⟩
+
+@[simp]
+theorem toSubmodule_sSup (S : Set (Subrepresentation ρ)) :
+    (sSup S).toSubmodule = ⨆ U ∈ S, U.toSubmodule :=
+  rfl
+
+@[simp]
+theorem toSubmodule_sInf (S : Set (Subrepresentation ρ)) :
+    (sInf S).toSubmodule = ⨅ U ∈ S, U.toSubmodule :=
+  rfl
+
+@[simp]
+theorem toSubmodule_top : (⊤ : Subrepresentation ρ).toSubmodule = ⊤ :=
+  rfl
+
+@[simp]
+theorem toSubmodule_bot : (⊥ : Subrepresentation ρ).toSubmodule = ⊥ :=
+  rfl
+
+theorem toSubmodule_le_toSubmodule_iff {S T : Subrepresentation ρ} :
+    S.toSubmodule ≤ T.toSubmodule ↔ S ≤ T :=
+  Iff.rfl
+
+instance instCompleteLattice : CompleteLattice (Subrepresentation ρ) :=
+  toSubmodule_injective.completeLattice _ .rfl .rfl toSubmodule_sup toSubmodule_inf
+    toSubmodule_sSup toSubmodule_sInf rfl rfl
+
+/-- `toSubmodule` as an order embedding of the subrepresentations into the submodules. -/
+def toSubmoduleOrderEmbedding : Subrepresentation ρ ↪o Submodule k V :=
+  OrderEmbedding.ofMapLEIff toSubmodule fun _ _ ↦ Iff.rfl
+
+@[simp]
+theorem toSubmodule_iSup {ι : Sort*} (U : ι → Subrepresentation ρ) :
+    (⨆ i, U i).toSubmodule = ⨆ i, (U i).toSubmodule := by
+  rw [iSup, toSubmodule_sSup, iSup_range]
+
+theorem disjoint_toSubmodule_iff {S T : Subrepresentation ρ} :
+    Disjoint S.toSubmodule T.toSubmodule ↔ Disjoint S T := by
+  rw [disjoint_iff, disjoint_iff, ← toSubmodule_inf, ← toSubmodule_bot (ρ := ρ),
+    toSubmodule_injective.eq_iff]
+
+/-- A family of subrepresentations is independent if and only if the underlying submodules are. -/
+theorem iSupIndep_toSubmodule_iff {ι : Type*} {U : ι → Subrepresentation ρ} :
+    iSupIndep (fun i ↦ (U i).toSubmodule) ↔ iSupIndep U := by
+  simp only [iSupIndep, ← toSubmodule_iSup, disjoint_toSubmodule_iff]
+
+instance : IsModularLattice (Subrepresentation ρ) :=
+  ⟨fun {x} {y} {z} h ↦ by
+    rw [← toSubmodule_le_toSubmodule_iff]
+    exact IsModularLattice.sup_inf_le_assoc_of_le (x := x.toSubmodule) y.toSubmodule
+      (z := z.toSubmodule) h⟩
+
+instance [FiniteDimensional k V] : IsCompactlyGenerated (Subrepresentation ρ) :=
+  have : WellFoundedGT (Subrepresentation ρ) :=
+    StrictMono.wellFoundedGT (f := toSubmodule (ρ := ρ)) fun _ _ h ↦ h
+  CompleteLattice.isCompactlyGenerated_of_wellFoundedGT
+
+/-- The subrepresentations of a subrepresentation `S` are the subrepresentations of `ρ` contained
+in `S`. -/
+def orderIsoIic (S : Subrepresentation ρ) : Subrepresentation S.toRepresentation ≃o Set.Iic S where
+  toFun T := ⟨⟨T.toSubmodule.map S.toSubmodule.subtype, by
+      rintro g _ ⟨x, hx, rfl⟩
+      exact ⟨_, T.apply_mem_toSubmodule g hx, rfl⟩⟩, by
+    rintro _ ⟨x, -, rfl⟩
+    exact x.2⟩
+  invFun U := ⟨U.1.toSubmodule.comap S.toSubmodule.subtype,
+    fun g _ hx ↦ U.1.apply_mem_toSubmodule g hx⟩
+  left_inv T := toSubmodule_injective <|
+    Submodule.comap_map_eq_of_injective Subtype.val_injective _
+  right_inv U := by
+    refine Subtype.ext (toSubmodule_injective ?_)
+    exact Submodule.map_comap_eq_self (by rw [Submodule.range_subtype]; exact U.2)
+  map_rel_iff' {T T'} := by
+    change T.toSubmodule.map _ ≤ T'.toSubmodule.map _ ↔ T.toSubmodule ≤ T'.toSubmodule
+    exact Submodule.map_le_map_iff_of_injective Subtype.val_injective _ _
+
+/-- A subrepresentation is irreducible as a representation if and only if it is an atom of the
+lattice of subrepresentations. -/
+theorem isIrreducible_toRepresentation_iff_isAtom {S : Subrepresentation ρ} :
+    S.toRepresentation.IsIrreducible ↔ IsAtom S :=
+  (orderIsoIic S).isSimpleOrder_iff.trans Set.isSimpleOrder_Iic_iff_isAtom
 
 end Monoid
 
