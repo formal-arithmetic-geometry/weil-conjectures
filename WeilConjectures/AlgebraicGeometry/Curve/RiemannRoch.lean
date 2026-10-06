@@ -127,7 +127,7 @@ theorem Modules.exists_ne_zero_of_nontrivial_H_zero {X : Scheme.{u}} (M : X.Modu
   refine ⟨M.unitHomEquiv.symm σ, fun h ↦ hm ?_⟩
   have h1 := congrArg (fun s ↦ s.val (op ⊤)) (M.unitHomEquiv.apply_symm_apply σ)
   rw [h] at h1
-  erw [SheafOfModules.unitHomEquiv_apply_coe] at h1
+  rw [SheafOfModules.unitHomEquiv_apply_coe] at h1
   have h2 : SheafOfModules.Hom.val (0 : 𝟙_ X.Modules ⟶ M) = 0 := rfl
   replace h1 : M.val.map (homOfLE le_top : (⊤ : X.Opens) ⟶ ⊤).op m = 0 := h1.symm
   rw [show (homOfLE le_top : (⊤ : X.Opens) ⟶ ⊤) = 𝟙 _ from Subsingleton.elim _ _, op_id,
