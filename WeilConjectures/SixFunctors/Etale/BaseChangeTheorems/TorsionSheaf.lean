@@ -206,6 +206,24 @@ lemma Etale.DerivedCategory.Plus.torsionHomology_of_isTorsion (hΛ : IsAddTorsio
     Etale.DerivedCategory.Plus.torsionHomology Λ X K :=
   fun _ ↦ .of_isTorsion hΛ _
 
+/-- A torsion sheaf placed in degree `0` has torsion cohomology: its cohomology sheaf in
+degree `0` is the sheaf itself, and all its other cohomology sheaves vanish. -/
+lemma Etale.DerivedCategory.Plus.torsionHomology_singleFunctor_obj
+    (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf I] :
+    Etale.DerivedCategory.Plus.torsionHomology Λ X
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj I) := by
+  intro n
+  by_cases hn : n = 0
+  · subst hn
+    exact IsTorsionSheaf.of_epi (F := I)
+      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).inv.app I)
+  · have hZ : IsZero ((DerivedCategory.Plus.homologyFunctor _ n).obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj I)) :=
+      IsZero.of_iso (HomologicalComplex.isZero_single_obj_homology _ _ _ _ hn)
+        ((DerivedCategory.homologyFunctorFactors _ n).app _)
+    have := hZ.epi (0 : I ⟶ _)
+    exact IsTorsionSheaf.of_epi (0 : I ⟶ _)
+
 end TorsionHomology
 
 end AlgebraicGeometry

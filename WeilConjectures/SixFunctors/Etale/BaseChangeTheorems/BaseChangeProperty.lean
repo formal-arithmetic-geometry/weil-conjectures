@@ -5,9 +5,11 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
 
 /-!
 
@@ -177,6 +179,87 @@ def Etale.HasInjectiveAcyclicity (f : X ⟶ Y) : Prop :=
               (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj
                 ((g')^*[ModuleCat.{u + 1} Λ].obj I))))
 
+/-- **`PBC ⇒ IA`**: a morphism with the base change property for torsion coefficients has
+injective acyclicity. For an injective torsion sheaf `I` on `X`, apply the base change property
+to `I` placed in degree `0`: the source `g^*(Rf_* I[0]) ≅ g^*((f_* I)[0])` has no homology
+outside degree `0` because `I` is injective, hence neither has the target
+`Rf'_*(g'^* I[0]) ≅ Rf'_*((g'^* I)[0])`. No properness is needed.
+(blueprint: `lemma-weil-pbc-property-iff-acyclicity`) -/
+theorem Etale.HasTorsionBaseChange.hasInjectiveAcyclicity (f : X ⟶ Y)
+    (hf : Etale.HasTorsionBaseChange Λ f) : Etale.HasInjectiveAcyclicity Λ f := by
+  intro Y' X' g f' g' sq I _ _ q hq
+  let K := (DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ)) 0).obj I
+  have := hf sq K (Etale.DerivedCategory.Plus.torsionHomology_singleFunctor_obj Λ X I)
+  have hsrc : IsZero ((DerivedCategory.Plus.homologyFunctor _ q).obj
+      (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj
+        ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.obj K))) :=
+    IsZero.of_iso (Functor.map_isZero (g)^*[ModuleCat.{u + 1} Λ]
+      ((f)_*[ModuleCat.{u + 1} Λ].isZero_homologyFunctor_rightDerivedFunctorPlus_singleFunctor
+        I hq.ne'))
+      (((g)^*[ModuleCat.{u + 1} Λ].mapDerivedCategoryPlusHomologyFunctorIso q).app _).symm
+  refine IsZero.of_iso (IsZero.of_iso hsrc ((DerivedCategory.Plus.homologyFunctor _ q).mapIso
+    (asIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K))).symm)
+    ((DerivedCategory.Plus.homologyFunctor _ q).mapIso
+      ((f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.mapIso
+        ((((g')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app I))).symm
+
+/-- Under injective acyclicity, the base change `g'^* I` of an injective torsion sheaf `I` is
+`f'_*`-acyclic, in the sense of `CategoryTheory.Functor.rightAcyclic`. -/
+lemma Etale.HasInjectiveAcyclicity.rightAcyclic {f : X ⟶ Y} (hf : Etale.HasInjectiveAcyclicity Λ f)
+    {Y' X' : Scheme.{u}} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
+    (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf I] [Injective I] :
+    (f')_*[ModuleCat.{u + 1} Λ].rightAcyclic ((g')^*[ModuleCat.{u + 1} Λ].obj I) := fun q ↦
+  IsZero.of_iso (hf sq I inferInstance inferInstance (q + 1) (by lia))
+    ((f')_*[ModuleCat.{u + 1} Λ].homologyRightDerivedFunctorPlusObjSingleFunctorIso
+      ((g')^*[ModuleCat.{u + 1} Λ].obj I) (q + 1)).symm
+
+/-- **`IA ⇒ PBC` for a torsion coefficient ring**: if `Λ` is torsion as an additive group and
+`f` is proper with injective acyclicity, then the derived base change map is an isomorphism on
+all of `D⁺(X_ét, Λ)`. Represent `K` by a bounded below complex `I` of injectives. The
+derived base change map at `I` is computed by the underived base change map
+`g^* f_* I ⟶ f'_* g'^* I`, which is a termwise isomorphism since `f` is proper
+(`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isProper`), followed by the unit
+`f'_* g'^* I ⟶ Rf'_*(g'^* I)`, which is an isomorphism because the terms of `g'^* I` are
+`f'_*`-acyclic by injective acyclicity
+(`CategoryTheory.Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic`).
+(blueprint: `lemma-weil-pbc-property-iff-acyclicity`) -/
+theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange (hΛ : IsAddTorsion Λ) (f : X ⟶ Y)
+    [IsProper f] (hf : Etale.HasInjectiveAcyclicity Λ f) : Etale.HasTorsionBaseChange Λ f := by
+  intro Y' X' g f' g' sq K _
+  have : IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
+    Etale.isIso_baseChangeMap_of_isProper Λ sq
+  obtain ⟨n, hn⟩ := K.2
+  have : K.IsGE n := (K.isGE_ι_obj_iff n).1 hn
+  obtain ⟨L, _, ⟨e⟩⟩ := DerivedCategory.Plus.exists_injective_nonempty_iso K n
+  let M := (InjectiveObject.ι _).mapCochainComplexPlus.obj L
+  let P := (HomotopyCategory.Plus.quotient _).obj M
+  suffices IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+      (DerivedCategory.Plus.Qh.obj P)) by
+    rw [← NatTrans.isIso_app_iff_of_iso _ e]
+    exact this
+  have hM : ∀ m, (f')_*[ModuleCat.{u + 1} Λ].rightAcyclic
+      ((((g')^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M).obj.X m) := fun m ↦
+    have : Injective (M.obj.X m) := (L.obj.X m).2
+    have : IsTorsionSheaf (M.obj.X m) := .of_isTorsion hΛ _
+    hf.rightAcyclic Λ sq (M.obj.X m)
+  have h₁ : IsIso ((f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app
+      (((g')^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj P)) :=
+    (f')_*[ModuleCat.{u + 1} Λ].isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic
+      (((g')^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M) hM
+  have h₂ : IsIso ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) := by
+    dsimp only [P, M]
+    infer_instance
+  have hfac := Etale.derivedBaseChangeMapPlus_fac_app (ModuleCat.{u + 1} Λ) sq.toCommSq P
+  have : IsIso (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
+      ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) ≫
+      (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+        (DerivedCategory.Plus.Qh.obj P)) := by
+    rw [hfac]
+    infer_instance
+  exact IsIso.of_isIso_comp_left (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
+      ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P)) _
+
 /-- **The base change property is injective acyclicity**: for a proper morphism `f : X ⟶ Y`
 and a coefficient ring `Λ` which is torsion as an additive group, the two properties of the
 preceding definitions agree. That is, for every cartesian square
@@ -204,7 +287,8 @@ are sections over the same proper geometric fibre.
 theorem Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity (hΛ : IsAddTorsion Λ)
     (f : X ⟶ Y) [IsProper f] :
     Etale.HasTorsionBaseChange Λ f ↔ Etale.HasInjectiveAcyclicity Λ f :=
-  sorry
+  ⟨Etale.HasTorsionBaseChange.hasInjectiveAcyclicity Λ f,
+    Etale.HasInjectiveAcyclicity.hasTorsionBaseChange Λ hΛ f⟩
 
 /-- **Injective acyclicity implies the base change property**, over an arbitrary coefficient
 ring: if a proper morphism `f : X ⟶ Y` has injective acyclicity, then it satisfies the base
