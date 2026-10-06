@@ -24,10 +24,10 @@ public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 Let `X` be a smooth curve over a field `k`, i.e. `X ⟶ Spec k` is smooth of relative dimension
 one. This file collects the inputs of the proof of Serre duality on `X`
 (`AlgebraicGeometry.Scheme.serreDuality`): the local rings of `X` at closed points are discrete
-valuation rings and closed points are effective Cartier divisors; a nonconstant rational function
-`t` on a proper `X` defines a finite flat morphism `X ⟶ ℙ¹_k`; along a finite flat morphism
-`f : X ⟶ ℙ¹_k` one has the duality `Hom(f_* ℳ, ω_{ℙ¹}) ≅ H⁰(X, ℳᵛ ⊗ ω_X)`; and the degree of a
-principal divisor is zero.
+valuation rings and closed points are effective Cartier divisors; a rational function `t` on a
+proper `X`, transcendental over `k`, defines a finite flat morphism `X ⟶ ℙ¹_k`; along a finite
+flat morphism `f : X ⟶ ℙ¹_k` one has the duality `Hom(f_* ℳ, ω_{ℙ¹}) ≅ H⁰(X, ℳᵛ ⊗ ω_X)`; and the
+degree of a principal divisor is zero.
 
 ## Main statements
 
@@ -36,8 +36,8 @@ principal divisor is zero.
 - `AlgebraicGeometry.Scheme.isInvertible_vanishingIdeal_of_isClosed`: closed points are effective
   Cartier divisors.
 - `AlgebraicGeometry.Scheme.exists_hom_projectiveLine_of_functionField` and
-  `AlgebraicGeometry.Scheme.isFinite_flat_of_hom_projectiveLine_of_functionField`: a nonconstant
-  rational function is a finite flat morphism to `ℙ¹_k`.
+  `AlgebraicGeometry.Scheme.isFinite_flat_of_hom_projectiveLine_of_functionField`: a rational
+  function transcendental over `k` is a finite flat morphism to `ℙ¹_k`.
 - `AlgebraicGeometry.Scheme.exists_isFinite_flat_hom_projectiveLine`: every smooth proper curve
   has a finite flat morphism to `ℙ¹_k`.
 - `AlgebraicGeometry.Scheme.nonempty_homObj_pushforward_iso`: duality along a finite flat
@@ -137,22 +137,22 @@ noncomputable abbrev functionFieldCoordinates [IsIntegral X] (t : X.functionFiel
   fun i ↦ (Scheme.ΓSpecIso X.functionField).inv (![1, t] i.down)
 
 /-- **Rational functions define morphisms to `ℙ¹`.** Let `X` be a proper smooth integral curve
-over `k` and `t ∈ k(X) ∖ k`. Then there is a morphism `π_t : X ⟶ ℙ¹_k` over `k` with
-`π_t^* (x₁ / x₀) = t`: at the generic point it is the point `[1 : t]` of `ℙ¹(k(X))`. On an affine
-open `Spec A` of `X` one writes `t = a / b` with `(a, b) = A`, using that the local rings at
-closed points are discrete valuation rings, and maps `x₀ ↦ b`, `x₁ ↦ a`; these glue since `ℙ¹_k`
-is separated.
+over `k` and `t ∈ k(X)` transcendental over `k`. Then there is a morphism `π_t : X ⟶ ℙ¹_k` over
+`k` with `π_t^* (x₁ / x₀) = t`: at the generic point it is the point `[1 : t]` of `ℙ¹(k(X))`. On
+an affine open `Spec A` of `X` one writes `t = a / b` with `(a, b) = A`, using that the local
+rings at closed points are discrete valuation rings, and maps `x₀ ↦ b`, `x₁ ↦ a`; these glue since
+`ℙ¹_k` is separated.
 
 (blueprint: `lem-sc-rational-function-morphism`) -/
 theorem exists_hom_projectiveLine_of_functionField [IsIntegral X] (t : X.functionField)
-    (ht : t ∉ Set.range (functionFieldRingHom k X)) :
+    (ht : letI := (functionFieldRingHom k X).toAlgebra; Transcendental k t) :
     ∃ π : X ⟶ ProjectiveLine (Spec (.of k)), π.IsOver (Spec (.of k)) ∧
       ∀ hs, X.fromSpecFunctionField ≫ π = ProjectiveSpace.homOfSections
         (X.fromSpecFunctionField ≫ X ↘ Spec (.of k)) (functionFieldCoordinates t) hs :=
   sorry
 
 /-- **Rational functions define finite morphisms to `ℙ¹`.** Let `X` be a proper smooth integral
-curve over `k`, `t ∈ k(X) ∖ k`, and `π_t : X ⟶ ℙ¹_k` the morphism of
+curve over `k`, `t ∈ k(X)` transcendental over `k`, and `π_t : X ⟶ ℙ¹_k` the morphism of
 `exists_hom_projectiveLine_of_functionField`. Then `π_t` is finite, surjective and flat, of
 degree `[k(X) : k(t)]`. It is surjective since its image is closed and not a point; its fibres
 are finite, so it is finite; and `π_* 𝒪_X` is torsion free on the smooth curve `ℙ¹_k`, hence
@@ -160,7 +160,7 @@ locally free, so `π_t` is flat.
 
 (blueprint: `lem-sc-morphism-from-function`) -/
 theorem isFinite_flat_of_hom_projectiveLine_of_functionField [IsIntegral X]
-    (t : X.functionField) (ht : t ∉ Set.range (functionFieldRingHom k X))
+    (t : X.functionField) (ht : letI := (functionFieldRingHom k X).toAlgebra; Transcendental k t)
     (π : X ⟶ ProjectiveLine (Spec (.of k))) [π.IsOver (Spec (.of k))]
     (hπ : ∀ hs, X.fromSpecFunctionField ≫ π = ProjectiveSpace.homOfSections
       (X.fromSpecFunctionField ≫ X ↘ Spec (.of k)) (functionFieldCoordinates t) hs) :
