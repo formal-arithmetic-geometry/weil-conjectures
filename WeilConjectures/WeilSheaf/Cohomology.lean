@@ -40,9 +40,6 @@ whose first isomorphism is the invariance of derived global sections under the a
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilComplex.subsingleton_compactlySupportedCohomology_carrier`: with the
-  present coefficients every Weil complex is zero (`AlgebraicGeometry.WeilComplex.isZero_carrier`),
-  and so is its compactly supported cohomology.
 - `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite`: the
   compactly supported cohomology of a finite `k₀`-scheme is concentrated in degree zero.
 - `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine`: the
@@ -68,29 +65,6 @@ open Etale
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 namespace WeilComplex
-
-section
-
-variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
-
-/-- The underlying complex of a Weil complex is zero: its homology sheaves are constructible
-sheaves of `ℚ̄_ℓ`-modules, and these are zero
-(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.isZero`). -/
-theorem isZero_carrier (K : WeilComplex k₀ l Y) : IsZero K.obj.carrier :=
-  DerivedCategory.isZero_of_forall_isZero_homology _ fun n ↦
-    have : Scheme.IsConstructibleSheaf
-        ((DerivedCategory.homologyFunctor _ n).obj K.obj.carrier) := K.property.2 n
-    Scheme.IsConstructibleSheaf.isZero _
-
-/-- A Weil complex is zero, its underlying complex being zero
-(`AlgebraicGeometry.WeilComplex.isZero_carrier`). -/
-theorem isZero (K : WeilComplex k₀ l Y) : IsZero K :=
-  ⟨fun _ ↦ ⟨⟨0⟩, fun _ ↦ ObjectProperty.hom_ext _ <| ObjectProperty.hom_ext _ <|
-      Endofunctor.Algebra.Hom.ext <| K.isZero_carrier.eq_of_src _ _⟩,
-    fun _ ↦ ⟨⟨0⟩, fun _ ↦ ObjectProperty.hom_ext _ <| ObjectProperty.hom_ext _ <|
-      Endofunctor.Algebra.Hom.ext <| K.isZero_carrier.eq_of_tgt _ _⟩⟩
-
-end
 
 /-- The `r`-th cohomology `Hʳ(Spec k̄, M)` of the underlying complex of a Weil complex `M` on
 `Spec k₀`: the `r`-th cohomology of its derived global sections on the geometric fiber
@@ -126,15 +100,6 @@ noncomputable def cohomologyFrobeniusModule (M : WeilComplex k₀ l (Spec (CommR
         (((upperStarCompRightDerivedGlobalSectionsIso _ σ).app M.obj.carrier).symm ≪≫
           (rightDerivedGlobalSections _ _).mapIso M.obj.str)) }
 
-/-- The cohomology of a Weil complex on `Spec k₀` is zero, the complex being zero
-(`AlgebraicGeometry.WeilComplex.isZero_carrier`). -/
-theorem subsingleton_cohomologyFrobeniusModule_carrier
-    (M : WeilComplex k₀ l (Spec (CommRingCat.of k₀))) (r : ℤ) :
-    Subsingleton (M.cohomologyFrobeniusModule r).carrier :=
-  ModuleCat.isZero_iff_subsingleton.1 ((WeilCoefficients.toModuleCat l).map_isZero
-    ((DerivedCategory.homologyFunctor _ r).map_isZero
-      ((Sheaf.Γ _ _).isZero_rightDerivedFunctor_obj M.isZero_carrier)))
-
 end WeilComplex
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -152,12 +117,6 @@ complex on `Spec k₀`. -/
 noncomputable def compactlySupportedCohomology (K : WeilComplex k₀ l X) (r : ℤ) :
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj K).cohomologyFrobeniusModule r
-
-/-- The compactly supported cohomology of a Weil complex is zero, see
-`AlgebraicGeometry.WeilComplex.subsingleton_cohomologyFrobeniusModule_carrier`. -/
-theorem subsingleton_compactlySupportedCohomology_carrier (K : WeilComplex k₀ l X) (r : ℤ) :
-    Subsingleton (K.compactlySupportedCohomology r).carrier :=
-  subsingleton_cohomologyFrobeniusModule_carrier _ r
 
 /-- The underlying vector space of the compactly supported cohomology of a Weil complex `K` is
 the étale compactly supported cohomology `H_c(ā)[Λ](r)` of the underlying complex on `X ⊗ k̄`
@@ -181,22 +140,16 @@ noncomputable def compactlySupportedCohomology (F : WeilSheaf k₀ l X) (r : ℤ
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   (toComplex.obj F).compactlySupportedCohomology r
 
--- the provisional Weil sheaves are zero, and the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /-- *Cohomology of a finite boundary.* If `X` is finite over `k₀`, then the compactly supported
 cohomology `H_c^r(X ⊗ k̄, G)` of a Weil sheaf `G` on `X` vanishes for `r ≠ 0`: after geometric
 base change `X` becomes a finite discrete space, whose cohomology is concentrated in degree
 zero. The blueprint states this for `G` with stalk weights at most some `w`; the weights play
 no role.
-
-With the present coefficients every Weil complex is zero
-(`AlgebraicGeometry.WeilComplex.subsingleton_compactlySupportedCohomology_carrier`), which is
-how the statement is proved here.
 (blueprint: `lem-a1-finite-boundary-cohomology`) -/
 theorem subsingleton_compactlySupportedCohomology_of_isFinite
     [IsFinite (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X) {r : ℤ} (hr : r ≠ 0) :
     Subsingleton (G.compactlySupportedCohomology r).carrier :=
-  (toComplex.obj G).subsingleton_compactlySupportedCohomology_carrier r
+  sorry
 
 /-- *Cohomological range of an affine curve.* If `X` is a smooth affine curve over `k₀` and `G`
 is a constructible Weil sheaf on `X`, then `H_c^r(X ⊗ k̄, G) = 0` for `r ∉ {0, 1, 2}`: after a
