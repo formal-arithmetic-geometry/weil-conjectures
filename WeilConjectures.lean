@@ -49,6 +49,8 @@ public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
 public import WeilConjectures.AlgebraicGeometry.Frobenius
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
@@ -525,6 +527,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointw
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
+public import WeilConjectures.Mathlib.CategoryTheory.Galois.IsFundamentalgroup
 public import WeilConjectures.Mathlib.CategoryTheory.Generator.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Generator.StrongGenerator
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.FinallySmall
