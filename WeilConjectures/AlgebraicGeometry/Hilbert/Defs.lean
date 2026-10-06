@@ -14,6 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
+public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
 
 /-!
@@ -51,6 +52,10 @@ presentation are `MorphismProperty.IsStableUnderBaseChange` in Mathlib; the inva
 
 - `AlgebraicGeometry.IsHilbertSubscheme.comap`: the defining condition is stable under base
   change.
+- `AlgebraicGeometry.IsHilbertSubscheme.isInvertible`: for a smooth curve, the points of the
+  Hilbert functor are relative effective Cartier divisors.
+- `AlgebraicGeometry.IsHilbertSubscheme.eq_of_le`: two points of `Hilb^d_{X/S}(T)` one of
+  which contains the other are equal.
 - `AlgebraicGeometry.isSheaf_hilbertPresheaf`: `Hilb^d_{X/S}` is an fppf sheaf
   (blueprint `sk-cor-picard-hilb-sheaf`).
 - `AlgebraicGeometry.isRepresentable_hilbertPresheaf`: representability of `Hilb^d_{X/S}`
@@ -90,6 +95,28 @@ statement about `finrank` alone and should move next to it once proved. -/
 theorem IsHilbertSubscheme.comap {f : X ⟶ S} {d : ℕ} {T T' : Over S} (φ : T' ⟶ T)
     {I : (Limits.pullback f T.hom).IdealSheafData} (hI : IsHilbertSubscheme f d T I) :
     IsHilbertSubscheme f d T' (I.comap (baseChangeMap f φ)) :=
+  sorry
+
+/-- **The points of the Hilbert functor of a smooth curve are divisors.** If `f : X ⟶ S` is
+smooth of relative dimension `1`, then every point of `Hilb^d_{X/S}(T)` is a relative effective
+Cartier divisor on `X_T/T`; in particular its ideal is invertible. This is
+`AlgebraicGeometry.Scheme.IdealSheafData.isInvertible_of_isFinite_of_flat` for the base change
+`X_T ⟶ T`, which is again smooth of relative dimension `1`. -/
+theorem IsHilbertSubscheme.isInvertible {f : X ⟶ S} [SmoothOfRelativeDimension 1 f] {d : ℕ}
+    {T : Over S} {I : (Limits.pullback f T.hom).IdealSheafData}
+    (hI : IsHilbertSubscheme f d T I) : I.IsInvertible :=
+  have : SmoothOfRelativeDimension 1 (Limits.pullback.snd f T.hom) :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback
+      (IsPullback.of_hasPullback f T.hom) ‹_›
+  Scheme.IdealSheafData.isInvertible_of_isFinite_of_flat _ hI.1 hI.2.1 hI.2.2.1
+
+/-- **Nested points of the Hilbert functor are equal.** If `Z ⊆ Z'` are closed subschemes of
+`X_T` which are both finite locally free of degree `d` over `T`, i.e. their ideals `I' ≤ I`
+both lie in `Hilb^d_{X/S}(T)`, then `Z = Z'`: the surjection `𝒪_{Z'} ⟶ 𝒪_Z` of finite locally
+free `𝒪_T`-modules of the same rank `d` is an isomorphism. -/
+theorem IsHilbertSubscheme.eq_of_le {f : X ⟶ S} {d : ℕ} {T : Over S}
+    {I J : (Limits.pullback f T.hom).IdealSheafData} (hI : IsHilbertSubscheme f d T I)
+    (hJ : IsHilbertSubscheme f d T J) (h : I ≤ J) : I = J :=
   sorry
 
 /-- The Hilbert functor. For `f : X ⟶ S` and `d : ℕ`, `Hilb^d_{X/S}` sends an `S`-scheme `T` to

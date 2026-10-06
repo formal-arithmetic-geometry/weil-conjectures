@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-!
 # The dual of a sheaf of modules on a scheme
@@ -32,6 +33,8 @@ Both are abbreviations for `SheafOfModules.homObj`, so its API (`SheafOfModules.
   `M ⊗ Mᵛ ≅ 𝒪_X`, so that `Mᵛ` is a tensor inverse of `M`.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_iso_unit_of_tensorObj_iso`: cancellation of an
   invertible module, `M ⊗ N ≅ M` implies `N ≅ 𝒪_X`.
+- `AlgebraicGeometry.Scheme.Modules.IsInvertible.dual`: the dual of an invertible module is
+  invertible.
 -/
 
 @[expose] public section
@@ -85,5 +88,20 @@ lemma nonempty_iso_unit_of_tensorObj_iso (M N : X.Modules) [M.IsInvertible] (e :
   obtain ⟨d⟩ := nonempty_tensorObj_dual_iso_unit M
   exact ⟨(λ_ N).symm ≪≫ (((β_ _ _) ≪≫ d).symm ⊗ᵢ Iso.refl N) ≪≫ α_ _ _ _ ≪≫
     (Iso.refl _ ⊗ᵢ e) ≪≫ (β_ _ _) ≪≫ d⟩
+
+/-- **A tensor inverse of an invertible module is invertible.** If `M` is invertible and
+`M ⊗ N ≅ 𝒪_X`, then `N` is invertible: on an open `U` where `M|_U ≅ 𝒪_U`,
+`N|_U ≅ M|_U ⊗ N|_U ≅ (M ⊗ N)|_U ≅ 𝒪_U`. -/
+lemma IsInvertible.of_tensorObj_iso_unit (M N : X.Modules) [M.IsInvertible]
+    (e : M ⊗ N ≅ 𝟙_ X.Modules) : N.IsInvertible where
+  exists_isoUnit x := by
+    obtain ⟨U, hx, ⟨eM⟩⟩ := IsInvertible.exists_isoUnit (M := M) x
+    obtain ⟨t⟩ := nonempty_pullback_tensorObj_iso U.ι M N
+    exact ⟨U, hx, ⟨(λ_ _).symm ≪≫ whiskerRightIso eM.symm _ ≪≫ t.symm ≪≫
+      (Modules.pullback U.ι).mapIso e ≪≫ pullbackObjUnitIso U.ι⟩⟩
+
+/-- **The dual of an invertible module is invertible**, being its tensor inverse. -/
+instance IsInvertible.dual (M : X.Modules) [M.IsInvertible] : (Mᵛ).IsInvertible :=
+  .of_tensorObj_iso_unit M _ (nonempty_tensorObj_dual_iso_unit M).some
 
 end AlgebraicGeometry.Scheme.Modules
