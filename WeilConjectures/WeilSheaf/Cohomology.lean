@@ -181,6 +181,12 @@ noncomputable def compactlySupportedCohomology (F : WeilSheaf k₀ l X) (r : ℤ
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   (toComplex.obj F).compactlySupportedCohomology r
 
+/-- The compactly supported cohomology of a Weil sheaf is zero, see
+`AlgebraicGeometry.WeilComplex.subsingleton_compactlySupportedCohomology_carrier`. -/
+theorem subsingleton_compactlySupportedCohomology_carrier (F : WeilSheaf k₀ l X) (r : ℤ) :
+    Subsingleton (F.compactlySupportedCohomology r).carrier :=
+  (toComplex.obj F).subsingleton_compactlySupportedCohomology_carrier r
+
 -- the provisional Weil sheaves are zero, and the proof needs no hypothesis
 set_option linter.unusedVariables false in
 /-- *Cohomology of a finite boundary.* If `X` is finite over `k₀`, then the compactly supported

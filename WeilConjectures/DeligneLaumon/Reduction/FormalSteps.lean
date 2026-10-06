@@ -208,6 +208,22 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isClosedImmersion
     ((WeilComplex.derivedLowerStar i).obj K).IsMixedOfWeightsAtMost ι w :=
   fun _ ↦ WeilSheaf.isMixedOfWeightsAtMost_of_isZero (WeilSheaf.isZero _) _
 
+/-- *Finite pushforward preserves upper weights.* The direct image `Rg₀* = Rg₀!` along a finite
+morphism `g : Z ⟶ Y` carries Weil complexes mixed of weights at most `w` to Weil complexes
+mixed of weights at most `w`. Since `g₀*` is exact, `𝓗ʲ(Rg₀*K) = g₀*𝓗ʲK`, and the pushforward
+of a filtration of `𝓗ʲK` with punctually pure quotients of weights `uᵢ ≤ w + j` is again such a
+filtration: at a closed point `y`, the Frobenius permutes the points `x` over `y`, and on an
+orbit of length `f` its `f`-th power is `Fₓ`, so an eigenvalue `μ` has
+`|ι μ|ᶠ = q_x ^ (uᵢ / 2) = (q_yᶠ) ^ (uᵢ / 2)` (blueprint: `lem-zl-finite-pushforward`).
+
+With the present scaffold this holds because every Weil sheaf is zero. -/
+theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isFinite
+    {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+    (g : Z ⟶ Y) [IsFinite g] [g.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ}
+    {K : WeilComplex k₀ l Z} (_hK : K.IsMixedOfWeightsAtMost ι w) :
+    ((WeilComplex.derivedLowerStar g).obj K).IsMixedOfWeightsAtMost ι w :=
+  fun _ ↦ WeilSheaf.isMixedOfWeightsAtMost_of_isZero (WeilSheaf.isZero _) _
+
 /-- Let `j : U ⟶ X` be an open immersion whose closed complement is `i : Z ⟶ X`. If the two
 outer terms `j₀!j₀^*K` and `i₀*i₀^*K` of the localization triangle
 `j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶ K[1]` are mixed of weights at most `w`, then so is `K`

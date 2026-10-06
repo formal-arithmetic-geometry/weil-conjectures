@@ -128,6 +128,21 @@ attribute [instance] overBase isOpenImmersion quasiCompact isOver isDominant
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable (D : LisseOnDenseOpen k₀ l)
 
+/-- The open `U₀` of the affine line is separated over `k₀`. -/
+instance : IsSeparated (D.U ↘ Spec (CommRingCat.of k₀)) := by
+  rw [← comp_over D.j (Spec (CommRingCat.of k₀))]
+  infer_instance
+
+/-- The open `U₀` of the affine line is locally of finite type over `k₀`. -/
+instance : LocallyOfFiniteType (D.U ↘ Spec (CommRingCat.of k₀)) := by
+  rw [← comp_over D.j (Spec (CommRingCat.of k₀))]
+  infer_instance
+
+/-- The open `U₀` of the affine line is quasi-compact over `k₀`. -/
+instance : QuasiCompact (D.U ↘ Spec (CommRingCat.of k₀)) := by
+  rw [← comp_over D.j (Spec (CommRingCat.of k₀))]
+  infer_instance
+
 /-- The sheaf of the datum is unramified at infinity. -/
 def IsUnramifiedAtInfinity : Prop := D.sheaf.IsUnramifiedAtInfinity D.j
 

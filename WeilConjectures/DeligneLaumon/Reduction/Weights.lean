@@ -213,7 +213,12 @@ end WeilSheaf
 
 /-- A bounded constructible Weil complex `K` is `ι`-*mixed of weights at most* `w` if its `b`-th
 cohomology sheaf `𝓗ᵇK` is mixed of weights at most `w + b`, for every `b`; equivalently, the
-bound in total degree `n` is `w + n` (blueprint: `sk-d-dl-general-weights`). -/
+bound in total degree `n` is `w + n` (blueprint: `sk-d-dl-general-weights`).
+
+This is the upper half `Wt_{ι, ≤ w}` of the weights of a Weil complex
+(blueprint: `def-weil-complex-weights`). The lower half `Wt_{ι, ≥ w}(K) ⇔ Wt_{ι, ≤ -w}(D K)`,
+and with it purity of a complex, needs the Verdier dual `D K` of a Weil complex, which the
+present scaffold does not provide. -/
 def WeilComplex.IsMixedOfWeightsAtMost (ι : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l X)
     (w : ℝ) : Prop :=
   ∀ b : ℤ, ((WeilComplex.homologySheaf b).obj K).IsMixedOfWeightsAtMost ι (w + (b : ℝ))

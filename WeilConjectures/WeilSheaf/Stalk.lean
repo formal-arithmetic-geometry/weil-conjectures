@@ -302,6 +302,31 @@ theorem IsPunctuallyPureOfWeight.upperStar {ι : PadicAlgCl l →+* ℂ} {F : We
     ((upperStar φ).obj F).IsPunctuallyPureOfWeight ι w :=
   sorry
 
+/-- The local Frobenius of a Weil sheaf has no eigenvalue: its stalks are zero, see
+`AlgebraicGeometry.WeilSheaf.isZero_stalkObj`. -/
+theorem not_hasEigenvalue_frobeniusEnd_stalk (x : X.finitePoints) (α : PadicAlgCl l) :
+    ¬ (F.stalk x).frobeniusEnd.HasEigenvalue α := fun hα ↦ by
+  have : Subsingleton (F.stalk x).carrier := subsingleton_stalkAt_carrier _ _ _ _
+  obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
+  exact hv.2 (Subsingleton.elim v 0)
+
+-- the stalks of the provisional Weil sheaves are zero, and the proof needs no hypothesis
+set_option linter.unusedVariables false in
+/-- *Subquotients of a pure sheaf are pure.* If `G` is punctually `ι`-pure of weight `w`, then
+so is every subquotient `S` of `G`, presented as a quotient `π : G' ↠ S` of a subobject
+`i : G' ↪ G`: the stalk functor is exact, so the stalk of `S` at a closed point `x` is an
+`Fₓ`-stable subquotient of the stalk of `G`, and its Frobenius eigenvalues are among those of
+`G` (`lem-a1-spectrum-exact-sequence`).
+
+The blueprint states this for an irreducible lisse subquotient of a lisse sheaf; neither
+condition enters the argument. With the present coefficients the stalks of `S` are zero, which
+is how the statement is proved here.
+(blueprint: `lem-a1-subquotient-pure`) -/
+theorem IsPunctuallyPureOfWeight.of_subquotient {ι : PadicAlgCl l →+* ℂ}
+    {G G' S : WeilSheaf k₀ l X} {w : ℝ} (h : G.IsPunctuallyPureOfWeight ι w) (i : G' ⟶ G)
+    [Mono i] (π : G' ⟶ S) [Epi π] : S.IsPunctuallyPureOfWeight ι w :=
+  fun x α hα ↦ absurd hα (S.not_hasEigenvalue_frobeniusEnd_stalk x α)
+
 /-- `F` is `ι`-*real* if at every closed point `x` the stalk `F_x̄` with its local Frobenius is
 `ι`-real (`FrobeniusModule.IsReal`): the realization under `ι` of the local polynomial
 `P_x(F, T) = det(1 - T Fₓ | F_x̄)` has real coefficients. -/
