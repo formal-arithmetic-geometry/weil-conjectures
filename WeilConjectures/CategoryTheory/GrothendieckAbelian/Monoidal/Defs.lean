@@ -103,6 +103,14 @@ noncomputable instance braidedCategory_sheaf_of_essentiallySmall :
     BraidedCategory (Sheaf J A) :=
   Sheaf.braidedCategory _ _
 
+/-- The monoidal structure on `A`-valued sheaves on an essentially small site is symmetric
+when `A` is. -/
+noncomputable instance symmetricCategory_sheaf_of_essentiallySmall {A : Type u'}
+    [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
+    [SymmetricCategory A] [MonoidalClosed A] :
+    SymmetricCategory (Sheaf J A) :=
+  Sheaf.symmetricCategory _ _
+
 end CategoryTheory.GrothendieckTopology
 
 namespace AlgebraicGeometry
@@ -137,6 +145,13 @@ noncomputable instance ProEtale.sheafMonoidalCategory :
 above applied to the essentially small small pro-étale site. -/
 noncomputable instance ProEtale.sheafBraidedCategory :
     BraidedCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
+  inferInstance
+
+/-- The symmetric structure on `A`-valued pro-étale sheaves, when `A` is symmetric. -/
+noncomputable instance ProEtale.sheafSymmetricCategory {A : Type u'} [Category.{u + 1} A]
+    [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [SymmetricCategory A]
+    [MonoidalClosed A] :
+    SymmetricCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
   inferInstance
 
 end AlgebraicGeometry

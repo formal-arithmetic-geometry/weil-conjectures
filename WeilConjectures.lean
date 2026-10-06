@@ -22,6 +22,7 @@ public import WeilConjectures.Blowup.Principalization
 public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+public import WeilConjectures.CategoryTheory.DerivedCategory.BoundedWithHomology
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
@@ -52,12 +53,15 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Basic
 public import WeilConjectures.CategoryTheory.ModuleObjects.Bimod
 public import WeilConjectures.CategoryTheory.ModuleObjects.Braided
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
+public import WeilConjectures.CategoryTheory.ModuleObjects.Free
+public import WeilConjectures.CategoryTheory.ModuleObjects.Functor
 public import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.CategoryTheory.RingObjects.Basic
+public import WeilConjectures.CategoryTheory.RingObjects.Functor
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Compactification.BoundaryPreparation
 public import WeilConjectures.Compactification.Defs
@@ -66,6 +70,9 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Constructible
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Pullback
 public import WeilConjectures.Convergence
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
