@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.CharP.Lemmas
+public import Mathlib.FieldTheory.Finite.Basic
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 public import Mathlib.RingTheory.TensorProduct.Free
@@ -27,6 +28,8 @@ points do not change under an extension of algebraically closed fields.
 ## Main definitions
 
 - `LinearMap.Frobenius.fixedPoints`: the additive subgroup of fixed points of a `p`-linear map.
+- `LinearMap.Frobenius.fixedPointsSubmodule`: the fixed points as a subspace over the prime
+  subfield of `k`.
 
 ## Main statements
 
@@ -44,6 +47,12 @@ Rather than equipping the fixed points with a `Module (ZMod p)` structure — wh
 available by instance search for a bare `k`-vector space — the dimension bound of
 `sk-prop-av-fixed-points` is stated in the equivalent cardinality form
 `Nat.card (fixedPoints F) ≤ p ^ Module.finrank k V`.
+
+The `𝔽_p`-structure on the fixed points is realised by the prime subfield `⊥ : Subfield k`,
+whose elements are exactly the `x` with `x ^ p = x`: the fixed points form the
+`⊥`-submodule `LinearMap.Frobenius.fixedPointsSubmodule F` of `V`. The key step
+`LinearMap.Frobenius.linearIndependent_of_mem_fixedPoints` shows that `⊥`-linearly independent
+fixed points are `k`-linearly independent, which bounds the `⊥`-dimension by `dim_k V`.
 
 The base change of `sk-prop-av-fixed-base-change` is written as `k' ⊗[k] V` (rather than
 `V ⊗[k] k'`), since that is the side on which Mathlib provides the `k'`-module structure. The
@@ -150,23 +159,119 @@ def fixedPoints (F : V →ₚ[k, p] V) : AddSubgroup V where
 theorem mem_fixedPoints {F : V →ₚ[k, p] V} {v : V} : v ∈ fixedPoints F ↔ F v = v :=
   Iff.rfl
 
+/-- The fixed points of a `p`-linear endomorphism `F` of `V`, as a subspace over the prime subfield
+`⊥ : Subfield k` (that is, over `𝔽_p`). Its underlying additive subgroup is `fixedPoints F`. -/
+def fixedPointsSubmodule (F : V →ₚ[k, p] V) : Submodule (⊥ : Subfield k) V where
+  toAddSubmonoid := (fixedPoints F).toAddSubmonoid
+  smul_mem' a v hv := by
+    change F (a • v) = a • v
+    rw [Subfield.smul_def, map_smulₛₗ, _root_.frobenius_def,
+      (Subfield.mem_bot_iff_pow_eq_self k p).mp a.2, mem_fixedPoints.mp hv]
+
+@[simp]
+theorem mem_fixedPointsSubmodule {F : V →ₚ[k, p] V} {v : V} :
+    v ∈ fixedPointsSubmodule F ↔ F v = v :=
+  Iff.rfl
+
+/-- The fixed points as an additive subgroup and as a submodule over the prime subfield have the
+same elements. -/
+def fixedPointsEquivSubmodule (F : V →ₚ[k, p] V) : fixedPoints F ≃ fixedPointsSubmodule F :=
+  Equiv.subtypeEquivRight fun _ ↦ Iff.rfl
+
+/-- Key step of blueprint `lem-sc-fixed-points-finite`: a finite family of fixed points of a
+`p`-linear map which is linearly independent over the prime subfield `𝔽_p` is linearly
+independent over `k`.
+
+Given a `k`-linear dependence `∑ gᵢ vᵢ = 0` of minimal support, normalise it so that `g i₀ = 1`;
+applying `F` gives `∑ gᵢ ^ p vᵢ = 0`, and subtracting yields the shorter dependence
+`∑ (gᵢ - gᵢ ^ p) vᵢ = 0`. By minimality `gᵢ ^ p = gᵢ`, so all `gᵢ` lie in `𝔽_p`, contradicting
+`𝔽_p`-independence. -/
+theorem linearIndependent_of_mem_fixedPoints (F : V →ₚ[k, p] V) {ι : Type*} [Finite ι]
+    {v : ι → V} (hv : ∀ i, v i ∈ fixedPoints F)
+    (hli : LinearIndependent (⊥ : Subfield k) v) : LinearIndependent k v := by
+  classical
+  cases nonempty_fintype ι
+  rw [Fintype.linearIndependent_iff]
+  suffices H : ∀ n : ℕ, ∀ g : ι → k, (Finset.univ.filter (g · ≠ 0)).card ≤ n →
+      ∑ i, g i • v i = 0 → g = 0 from fun g hg ↦ congrFun (H _ g le_rfl hg)
+  intro n
+  induction n with
+  | zero =>
+    intro g hcard _
+    ext i
+    by_contra hi
+    simp only [Nat.le_zero, Finset.card_eq_zero, Finset.filter_eq_empty_iff, Finset.mem_univ,
+      true_implies, not_not] at hcard
+    exact hi (@hcard i)
+  | succ n ih =>
+    intro g hcard hg
+    by_contra hne
+    obtain ⟨i₀, hi₀⟩ := Function.ne_iff.mp hne
+    set h : ι → k := fun i ↦ (g i₀)⁻¹ * g i with hh
+    have hh₀ : h i₀ = 1 := inv_mul_cancel₀ hi₀
+    have hsum : ∑ i, h i • v i = 0 := by
+      simp_rw [hh, mul_smul, ← Finset.smul_sum, hg, smul_zero]
+    have hsumF : ∑ i, h i ^ p • v i = 0 := by
+      have := congrArg F hsum
+      simpa [map_sum, map_smulₛₗ, _root_.frobenius_def, mem_fixedPoints.mp (hv _)] using this
+    have hdiff : (fun i ↦ h i - h i ^ p) = 0 := by
+      refine ih _ ?_ (by simp_rw [sub_smul, Finset.sum_sub_distrib, hsum, hsumF, sub_zero])
+      have hsub : Finset.univ.filter (fun i ↦ h i - h i ^ p ≠ 0) ⊆
+          (Finset.univ.filter (g · ≠ 0)).erase i₀ := by
+        intro i hi
+        simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_erase] at hi ⊢
+        refine ⟨fun e ↦ hi (by simp [e, hh₀]), fun e ↦ hi ?_⟩
+        simp [hh, e, zero_pow (Fact.out : p.Prime).ne_zero]
+      have := Finset.card_le_card hsub
+      rw [Finset.card_erase_of_mem (by simpa using hi₀)] at this
+      omega
+    have hbot : ∀ i, h i ∈ (⊥ : Subfield k) := fun i ↦
+      (Subfield.mem_bot_iff_pow_eq_self k p).mpr (sub_eq_zero.mp (congrFun hdiff i)).symm
+    have := Fintype.linearIndependent_iff.mp hli (fun i ↦ ⟨h i, hbot i⟩) hsum i₀
+    simp [Subtype.ext_iff, hh₀] at this
+
+/-- The fixed points of `F` have rank at most `dim_k V` over the prime subfield. -/
+theorem rank_fixedPointsSubmodule_le [FiniteDimensional k V] (F : V →ₚ[k, p] V) :
+    Module.rank (⊥ : Subfield k) (fixedPointsSubmodule F) ≤ Module.finrank k V := by
+  refine _root_.rank_le fun s hs ↦ ?_
+  have := (linearIndependent_of_mem_fixedPoints F (v := fun i : s ↦ ((i : _) : V))
+    (fun i ↦ (i : fixedPointsSubmodule F).2) (hs.map' _ (Submodule.ker_subtype _)))
+  simpa using this.fintype_card_le_finrank
+
+/-- The fixed points of `F` are finite-dimensional over the prime subfield. -/
+instance finite_fixedPointsSubmodule [FiniteDimensional k V] (F : V →ₚ[k, p] V) :
+    Module.Finite (⊥ : Subfield k) (fixedPointsSubmodule F) :=
+  Module.rank_lt_aleph0_iff.mp <|
+    (rank_fixedPointsSubmodule_le F).trans_lt Cardinal.natCast_lt_aleph0
+
+/-- The fixed points of `F` have dimension at most `dim_k V` over the prime subfield. -/
+theorem finrank_fixedPointsSubmodule_le [FiniteDimensional k V] (F : V →ₚ[k, p] V) :
+    Module.finrank (⊥ : Subfield k) (fixedPointsSubmodule F) ≤ Module.finrank k V :=
+  Module.finrank_le_of_rank_le (rank_fixedPointsSubmodule_le F)
+
 /-- Blueprint `sk-prop-av-fixed-points`: Fixed points of `p`-linear maps are finite.
 
 Let `k` be a field of characteristic `p > 0`, let `V` be a finite-dimensional `k`-vector space
 and let `F : V →ₛₗ[frobenius k p] V` be `p`-linear. Then the fixed points of `F` form a finite
-`𝔽_p`-subspace of `V`. -/
+`𝔽_p`-subspace of `V`. This is the finiteness part of blueprint `lem-sc-fixed-points-finite`. -/
 instance finite_fixedPoints [FiniteDimensional k V] (F : V →ₚ[k, p] V) :
     Finite (fixedPoints F) :=
-  sorry
+  have : Finite (⊥ : Subfield k) :=
+    Nat.finite_of_card_ne_zero ((Subfield.card_bot k p).trans_ne (Fact.out : p.Prime).ne_zero)
+  have := Module.finite_of_finite (⊥ : Subfield k) (M := fixedPointsSubmodule F)
+  .of_equiv _ (fixedPointsEquivSubmodule F).symm
 
 /-- Blueprint `sk-prop-av-fixed-points`: Fixed points of `p`-linear maps are finite.
 
 The `𝔽_p`-subspace of fixed points of a `p`-linear endomorphism `F` of a finite-dimensional
 `k`-vector space `V` has `𝔽_p`-dimension at most `Module.finrank k V`; equivalently, it has at
-most `p ^ Module.finrank k V` elements. -/
+most `p ^ Module.finrank k V` elements. This is the dimension bound of blueprint
+`lem-sc-fixed-points-finite`. -/
 theorem natCard_fixedPoints_le [FiniteDimensional k V] (F : V →ₚ[k, p] V) :
-    Nat.card (fixedPoints F) ≤ p ^ Module.finrank k V :=
-  sorry
+    Nat.card (fixedPoints F) ≤ p ^ Module.finrank k V := by
+  rw [Nat.card_congr (fixedPointsEquivSubmodule F),
+    Module.natCard_eq_pow_finrank (K := (⊥ : Subfield k)), Subfield.card_bot k p]
+  exact Nat.pow_le_pow_right (Fact.out : p.Prime).pos (finrank_fixedPointsSubmodule_le F)
 
 /-- Blueprint `sk-prop-av-lang-steinberg`: Lang–Steinberg for `p`-linear maps.
 
