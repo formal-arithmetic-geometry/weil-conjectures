@@ -59,24 +59,16 @@ section Reciprocity
 
 variable {K : Type*} [Field K] [IsAlgClosed K]
 
-/-- Over an algebraically closed field, the value of a polynomial at `x` is its leading
-coefficient times the product of the `x - z` over its roots `z`. -/
-theorem eval_eq_leadingCoeff_mul_prod_roots (P : K[X]) (x : K) :
-    P.eval x = P.leadingCoeff * (P.roots.map fun z ↦ x - z).prod := by
-  conv_lhs => rw [← C_leadingCoeff_mul_prod_multiset_X_sub_C
-    (splits_iff_card_roots.1 (IsAlgClosed.splits P))]
-  simp [eval_multiset_prod, Multiset.map_map]
-
 /-- Over an algebraically closed field, a polynomial with constant coefficient `1` has leading
 coefficient the inverse of `∏ (-z)` over its roots `z`. -/
 theorem leadingCoeff_mul_prod_roots_neg {P : K[X]} (hP : P.coeff 0 = 1) :
     P.leadingCoeff * (P.roots.map fun z ↦ -z).prod = 1 := by
-  have := eval_eq_leadingCoeff_mul_prod_roots P 0
+  have := (IsAlgClosed.splits P).eval_eq_prod_roots 0
   rw [← coeff_zero_eq_eval_zero, hP] at this
   simpa only [zero_sub] using this.symm
 
 omit [IsAlgClosed K] in
-/-- A polynomial with constant coefficient `1` does not vanish at `0`. -/
+/-- The roots of a polynomial with constant coefficient `1` are nonzero. -/
 theorem ne_zero_of_mem_roots_of_coeff_zero_eq_one {P : K[X]} (hP : P.coeff 0 = 1) {z : K}
     (hz : z ∈ P.roots) : z ≠ 0 := by
   rintro rfl
@@ -121,7 +113,7 @@ theorem eval_inv_mul_inv_of_roots_eq_map_inv {P Q : K[X]} (hP : P.coeff 0 = 1)
     rw [Ne, leadingCoeff_eq_zero]
     rintro rfl
     simp at hQ
-  rw [eval_eq_leadingCoeff_mul_prod_roots, eval_eq_leadingCoeff_mul_prod_roots Q, h,
+  rw [(IsAlgClosed.splits P).eval_eq_prod_roots, (IsAlgClosed.splits Q).eval_eq_prod_roots, h,
     Multiset.map_map]
   rw [Multiset.map_congr rfl (g := fun z ↦ -z * (t⁻¹ * (t - (c * z)⁻¹))) fun z hz ↦ by
       have := ne_zero_of_mem_roots_of_coeff_zero_eq_one hP hz
