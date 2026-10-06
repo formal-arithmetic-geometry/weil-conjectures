@@ -30,6 +30,8 @@ a geometric stalk.
 
 - `AlgebraicGeometry.Etale.isZero_baseChangeSourceFunctor_obj_of_injective`: the source of
   the degree-`q` base-change map vanishes on injective sheaves for `q ≠ 0`.
+- `AlgebraicGeometry.Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective`: for `q ≠ 0`,
+  the base-change map followed by `R^q h_* e⁻¹` of a map into an injective sheaf is zero.
 - `AlgebraicGeometry.Etale.exists_connecting_baseChangeHomologyMap`: the base-change maps
   form a morphism between the two long exact sequences attached to a short exact sequence of
   coefficient sheaves.
@@ -86,6 +88,18 @@ lemma Etale.isZero_baseChangeSourceFunctor_obj_of_injective (p : X ⟶ S) (g : T
   · exact DerivedCategory.Plus.isZero_homology_of_isLE
       ((DerivedCategory.Plus.singleFunctor _ 0).obj _) 0 q hq
 
+/-- For `q ≠ 0` and a morphism `α : F ⟶ G` to an injective sheaf `G`, the composite
+`p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F ⟶ R^q h_* e⁻¹ G` of the base-change map with `R^q h_* e⁻¹ α`
+vanishes: by naturality it factors through `p⁻¹ R^q g_* G`, which is zero. -/
+lemma Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective (sq : IsPullback e h g p)
+    {q : ℤ} (hq : q ≠ 0) {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (α : F ⟶ G) [Injective G] :
+    Etale.baseChangeHomologyMap Λ sq q F ≫ (Etale.baseChangeTargetFunctor Λ e h q).map α =
+      0 := by
+  rw [Etale.baseChangeHomologyMap_naturality,
+    (Etale.isZero_baseChangeSourceFunctor_obj_of_injective Λ p g hq G).eq_of_tgt
+      ((Etale.baseChangeSourceFunctor Λ p g q).map α) 0, zero_comp]
+
 /-- The two long exact sequences of the base-change map. For a short exact sequence
 `0 ⟶ F₁ ⟶ F₂ ⟶ F₃ ⟶ 0` of sheaves of `Λ`-modules on `T_ét` and `n₀ + 1 = n₁`, there are
 connecting maps `δS : p⁻¹ R^{n₀} g_* F₃ ⟶ p⁻¹ R^{n₁} g_* F₁` and
@@ -94,7 +108,17 @@ connecting maps `δS : p⁻¹ R^{n₀} g_* F₃ ⟶ p⁻¹ R^{n₁} g_* F₁` an
 `p⁻¹ R^{n₀} g_* F₂ ⟶ p⁻¹ R^{n₀} g_* F₃ ⟶ p⁻¹ R^{n₁} g_* F₁ ⟶ p⁻¹ R^{n₁} g_* F₂`,
 `R^{n₀} h_* e⁻¹ F₂ ⟶ R^{n₀} h_* e⁻¹ F₃ ⟶ R^{n₁} h_* e⁻¹ F₁ ⟶ R^{n₁} h_* e⁻¹ F₂`
 
-exact, and commuting with the base-change maps.
+exact, and such that the square
+
+```
+p⁻¹ R^{n₀} g_* F₃ --δS--> p⁻¹ R^{n₁} g_* F₁
+        |                         |
+  bc_{n₀} F₃                bc_{n₁} F₁
+        v                         v
+R^{n₀} h_* e⁻¹ F₃ --δT--> R^{n₁} h_* e⁻¹ F₁
+```
+
+of base-change maps commutes.
 
 This is the long exact sequence input of the blueprint lemma `sbc-lem-bc-injectivity`
 (the blueprint lemma `lemma-weil-pbc-five-lemma-transfer` of the proper base change
@@ -165,16 +189,17 @@ In the situation of `AlgebraicGeometry.Etale.mono_baseChangeHomologyMap`, if `F`
 subsheaf of an injective sheaf `G`, then the map `R^q h_* e⁻¹ F ⟶ R^q h_* e⁻¹ G` kills the
 image of the base-change map for `F` — the source of the base-change map for `G` vanishes,
 `G` being injective and `q` positive — and the induced map from the cokernel is injective.
-The hypothesis `hα` records the vanishing that makes the map out of the cokernel exist. -/
+The vanishing that makes the map out of the cokernel exist is
+`AlgebraicGeometry.Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective`. -/
 @[stacks 0F03]
 theorem Etale.mono_cokernelDesc (q : ℤ) (hq : 1 ≤ q)
     (hprev : Etale.BaseChangeProperty Λ p (q - 1)) [QuasiCompact g] [QuasiSeparated g]
     (sq : IsPullback e h g p) {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    (α : F ⟶ G) [Mono α] [Injective G]
-    (hα : Etale.baseChangeHomologyMap Λ sq q F ≫
-      (Etale.baseChangeTargetFunctor Λ e h q).map α = 0) :
+    (α : F ⟶ G) [Mono α] [Injective G] :
     Mono (cokernel.desc (Etale.baseChangeHomologyMap Λ sq q F)
-      ((Etale.baseChangeTargetFunctor Λ e h q).map α) hα) := by
+      ((Etale.baseChangeTargetFunctor Λ e h q).map α)
+      (Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective Λ sq (by lia) α)) := by
+  have hα := Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective Λ sq (q := q) (by lia) α
   have hS : (ShortComplex.mk α (cokernel.π α) (cokernel.condition α)).ShortExact :=
     { exact := ShortComplex.exact_cokernel α }
   obtain ⟨δS, δT, -, wS₂, -, wT₂, -, hS₂, -, hT₂, hδ⟩ :=
@@ -215,14 +240,9 @@ theorem Etale.mono_cokernelMap (q : ℤ) (hq : 1 ≤ q)
       (Etale.baseChangeHomologyMap Λ sq q G) ((Etale.baseChangeSourceFunctor Λ p g q).map α)
       ((Etale.baseChangeTargetFunctor Λ e h q).map α)
       (Etale.baseChangeHomologyMap_naturality Λ sq q α)) := by
-  have hI := Etale.isZero_baseChangeSourceFunctor_obj_of_injective Λ p g (q := q) (by lia)
-    (Injective.under G)
   have hzero {K : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-      (β : K ⟶ Injective.under G) :
-      Etale.baseChangeHomologyMap Λ sq q K ≫ (Etale.baseChangeTargetFunctor Λ e h q).map β =
-        0 := by
-    rw [Etale.baseChangeHomologyMap_naturality, hI.eq_of_tgt
-      ((Etale.baseChangeSourceFunctor Λ p g q).map β) 0, zero_comp]
+      (β : K ⟶ Injective.under G) :=
+    Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective Λ sq (q := q) (by lia) β
   have hfac : cokernel.map (Etale.baseChangeHomologyMap Λ sq q F)
       (Etale.baseChangeHomologyMap Λ sq q G) ((Etale.baseChangeSourceFunctor Λ p g q).map α)
       ((Etale.baseChangeTargetFunctor Λ e h q).map α)
@@ -231,7 +251,7 @@ theorem Etale.mono_cokernelMap (q : ℤ) (hq : 1 ≤ q)
         cokernel.desc _ _ (hzero (α ≫ Injective.ι G)) := by
     refine coequalizer.hom_ext ?_
     simp
-  have := Etale.mono_cokernelDesc Λ q hq hprev sq (α ≫ Injective.ι G) (hzero _)
+  have := Etale.mono_cokernelDesc Λ q hq hprev sq (α ≫ Injective.ι G)
   rw [← hfac] at this
   exact mono_of_mono _ (cokernel.desc _ _ (hzero (Injective.ι G)))
 
@@ -272,13 +292,13 @@ theorem Etale.UniversalBaseChangeProperty.mono_baseChangeHomologyMap_and_cokerne
         ((Etale.baseChangeTargetFunctor Λ e h q).map α)
         (Etale.baseChangeHomologyMap_naturality Λ sq q α))) ∧
     (∀ {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (α : F ⟶ G) [Mono α]
-      [Injective G] (hα : Etale.baseChangeHomologyMap Λ sq q F ≫
-        (Etale.baseChangeTargetFunctor Λ e h q).map α = 0),
+      [Injective G],
       Mono (cokernel.desc (Etale.baseChangeHomologyMap Λ sq q F)
-        ((Etale.baseChangeTargetFunctor Λ e h q).map α) hα)) :=
+        ((Etale.baseChangeTargetFunctor Λ e h q).map α)
+        (Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective Λ sq (by lia) α))) :=
   have hprev : Etale.BaseChangeProperty Λ p' (q - 1) := huniv a b p' hp
   ⟨Etale.mono_baseChangeHomologyMap Λ q hq hprev sq,
     fun α _ ↦ Etale.mono_cokernelMap Λ q hq hprev sq α,
-    fun α _ _ hα ↦ Etale.mono_cokernelDesc Λ q hq hprev sq α hα⟩
+    fun α _ _ ↦ Etale.mono_cokernelDesc Λ q hq hprev sq α⟩
 
 end AlgebraicGeometry
