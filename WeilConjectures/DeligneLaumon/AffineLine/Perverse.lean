@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.CategoryTheory.Simple
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.Smooth
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 
 /-!
@@ -230,6 +230,8 @@ theorem isCurvePerverse_fourierTransform_obj_iff (ψ : AddChar k₀ (PadicAlgCl 
     (K : WeilComplex k₀ l (affineLine k₀)) :
     ((fourierTransform ψ).obj K).IsCurvePerverse ↔ K.IsCurvePerverse := by
   have := isEquivalence_fourierTransform (l := l) ψ hψ
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
   constructor
   · rintro ⟨hU, hL⟩
     refine ⟨(isCurvePerverseLE_fourierTransform_inv_obj ψ hψ hU).of_iso

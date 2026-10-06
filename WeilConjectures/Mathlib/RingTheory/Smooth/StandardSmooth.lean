@@ -10,65 +10,42 @@ public import Mathlib.RingTheory.Smooth.StandardSmooth
 /-!
 # Polynomial algebras are standard smooth
 
-The polynomial algebra `MvPolynomial ι R` has a submersive presentation with variables `ι` and
-no relations, so it is standard smooth of relative dimension `Nat.card ι` over `R` for finite
-`ι`.
+The polynomial algebra `R[Xᵢ : i ∈ σ]` in finitely many variables is standard smooth of relative
+dimension `#σ` over `R`: the presentation with the variables as generators and no relations is
+submersive.
 
-## Main definitions
+## Main statements
 
-- `Algebra.Presentation.mvPolynomial`: the presentation of `MvPolynomial ι R` with variables
-  `ι` and no relations.
-- `Algebra.SubmersivePresentation.mvPolynomial`: the same presentation, as a submersive
-  presentation.
-
-## Main results
-
-- `Algebra.IsStandardSmoothOfRelativeDimension.mvPolynomial`: `MvPolynomial ι R` is standard
-  smooth of relative dimension `Nat.card ι` over `R`, for finite `ι`.
+- `MvPolynomial.isStandardSmoothOfRelativeDimension`: `R[Xᵢ : i ∈ σ]` is standard smooth of
+  relative dimension `Nat.card σ` over `R`.
 -/
 
 @[expose] public section
 
-open MvPolynomial
+universe u v
 
-namespace Algebra
+namespace MvPolynomial
 
-variable (R : Type*) [CommRing R] (ι : Type*)
+open Algebra
 
-/-- The presentation of the polynomial algebra `MvPolynomial ι R` with variables `ι` and no
+variable (R : Type u) [CommRing R] (σ : Type v) [Finite σ]
+
+/-- The submersive presentation of `R[Xᵢ : i ∈ σ]` with the variables as generators and no
 relations. -/
-noncomputable def Presentation.mvPolynomial :
-    Presentation R (MvPolynomial ι R) ι PEmpty.{1} where
-  __ := Generators.mvPolynomial R ι
-  relation := PEmpty.elim
-  span_range_relation_eq_ker := by
-    rw [Generators.ker_mvPolynomial]
-    simp
-
-/-- The presentation of `MvPolynomial ι R` with variables `ι` and no relations has
-dimension `Nat.card ι`. -/
-@[simp]
-lemma Presentation.mvPolynomial_dimension :
-    (Presentation.mvPolynomial R ι).dimension = Nat.card ι := by
-  simp [Presentation.dimension]
-
-/-- The submersive presentation of the polynomial algebra `MvPolynomial ι R` with variables `ι`
-and no relations. -/
-noncomputable def SubmersivePresentation.mvPolynomial :
-    SubmersivePresentation R (MvPolynomial ι R) ι PEmpty.{1} where
-  toPresentation := Presentation.mvPolynomial R ι
-  map := PEmpty.elim
-  map_inj a := a.elim
+noncomputable def submersivePresentation :
+    SubmersivePresentation R (MvPolynomial σ R) σ PEmpty.{1} where
+  __ := (PreSubmersivePresentation.naive (v := (PEmpty.elim : PEmpty.{1} → MvPolynomial σ R))
+    PEmpty.elim (fun a ↦ a.elim)).ofAlgEquiv
+      ((Ideal.quotientEquivAlgOfEq R (by simp)).trans (AlgEquiv.quotientBot R _))
   jacobian_isUnit := by
-    rw [PreSubmersivePresentation.jacobian_eq_jacobiMatrix_det, RingHom.map_det,
-      Matrix.det_isEmpty]
-    exact isUnit_one
+    rw [PreSubmersivePresentation.jacobian_eq_jacobiMatrix_det]
+    simp [Matrix.det_isEmpty]
 
-/-- The polynomial algebra `MvPolynomial ι R` in finitely many variables is standard smooth of
-relative dimension `Nat.card ι` over `R`. -/
-instance IsStandardSmoothOfRelativeDimension.mvPolynomial [Finite ι] :
-    IsStandardSmoothOfRelativeDimension (Nat.card ι) R (MvPolynomial ι R) :=
-  (SubmersivePresentation.mvPolynomial R ι).isStandardSmoothOfRelativeDimension
-    (Presentation.mvPolynomial_dimension R ι)
+/-- The polynomial algebra `R[Xᵢ : i ∈ σ]` in finitely many variables is standard smooth of
+relative dimension `#σ` over `R`. -/
+instance isStandardSmoothOfRelativeDimension :
+    IsStandardSmoothOfRelativeDimension (Nat.card σ) R (MvPolynomial σ R) :=
+  (submersivePresentation R σ).isStandardSmoothOfRelativeDimension (by
+    simp [Presentation.dimension])
 
-end Algebra
+end MvPolynomial

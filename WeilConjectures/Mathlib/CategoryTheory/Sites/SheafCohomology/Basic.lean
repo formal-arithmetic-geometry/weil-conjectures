@@ -35,6 +35,11 @@ push an `Ext`-class forward along `G` and precompose with the comparison of cons
   injective objects.
 - `CategoryTheory.Sheaf.subsingleton_H_one_of_surjective`: `H¹(F) = 0` as soon as, for every
   short exact sequence `0 → F → E → Q → 0`, every global section of `Q` lifts to `E`.
+- `CategoryTheory.Sheaf.H.quotientRangeAddEquiv`: for a short exact sequence
+  `0 → F → I → Q → 0` with `H¹(I) = 0`, the connecting homomorphism identifies `H¹(F)` with
+  the cokernel of `Γ(I) → Γ(Q)`.
+- `CategoryTheory.Sheaf.exists_shortExact_injective_addEquiv_H_one`: such a sequence exists
+  with `I` injective.
 -/
 
 @[expose] public section
@@ -146,5 +151,72 @@ theorem Sheaf.subsingleton_H_one_of_surjective (F : Sheaf J AddCommGrpCat.{w}) {
     Ext.comp_zero]
 
 end VanishingH1
+
+section HOneCokernel
+
+open Opposite
+
+variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+  [HasSheafify J AddCommGrpCat.{w}] [HasExt.{w'} (Sheaf J AddCommGrpCat.{w})]
+  {S : ShortComplex (Sheaf J AddCommGrpCat.{w})} (hS : S.ShortExact) {T : C} (hT : IsTerminal T)
+
+/-- The connecting homomorphism `Γ(S.X₃) → H¹(S.X₁)` of a short exact sequence of abelian
+sheaves, where global sections are sections over a terminal object `T`. -/
+noncomputable def Sheaf.H.δ : S.X₃.obj.obj (op T) →+ H S.X₁ 1 :=
+  (hS.extClass.postcomp _ (zero_add 1)).comp (H.equiv₀ S.X₃ hT).symm.toAddMonoidHom
+
+lemma Sheaf.H.δ_apply (s : S.X₃.obj.obj (op T)) :
+    H.δ hS hT s = ((H.equiv₀ S.X₃ hT).symm s).comp hS.extClass (zero_add 1) :=
+  rfl
+
+/-- The kernel of the connecting homomorphism `Γ(S.X₃) → H¹(S.X₁)` consists of the global
+sections of `S.X₃` which lift to `S.X₂`. -/
+lemma Sheaf.H.ker_δ : (H.δ hS hT).ker = (S.g.hom.app (op T)).hom.range := by
+  ext s
+  rw [AddMonoidHom.mem_ker, AddMonoidHom.mem_range, H.δ_apply]
+  constructor
+  · intro h
+    obtain ⟨x, hx⟩ := Ext.covariant_sequence_exact₃ _ hS _ (zero_add 1) h
+    refine ⟨H.equiv₀ S.X₂ hT x, (H.equiv₀ S.X₃ hT).symm.injective ?_⟩
+    rw [← H.equiv₀_symm_naturality, AddEquiv.symm_apply_apply, H.map_apply, hx]
+  · rintro ⟨x, rfl⟩
+    rw [← H.equiv₀_symm_naturality, H.map_apply, Ext.comp_assoc _ _ _ (add_zero 0) (zero_add 1)
+      (zero_add 1), hS.comp_extClass, Ext.comp_zero]
+
+/-- The connecting homomorphism `Γ(S.X₃) → H¹(S.X₁)` is surjective when `H¹(S.X₂) = 0`. -/
+lemma Sheaf.H.surjective_δ [Subsingleton (H S.X₂ 1)] : Function.Surjective (H.δ hS hT) := by
+  intro x
+  obtain ⟨y, rfl⟩ := Ext.covariant_sequence_exact₁ _ hS x (Subsingleton.elim _ _) (zero_add 1)
+  exact ⟨H.equiv₀ S.X₃ hT y, by rw [H.δ_apply, AddEquiv.symm_apply_apply]⟩
+
+/-- For a short exact sequence `0 → F → I → Q → 0` of abelian sheaves with `H¹(I) = 0`, the
+connecting homomorphism identifies `H¹(F)` with the cokernel of `Γ(I) → Γ(Q)`. -/
+noncomputable def Sheaf.H.quotientRangeAddEquiv [Subsingleton (H S.X₂ 1)] :
+    S.X₃.obj.obj (op T) ⧸ (S.g.hom.app (op T)).hom.range ≃+ H S.X₁ 1 :=
+  (QuotientAddGroup.quotientAddEquivOfEq (H.ker_δ hS hT)).symm.trans
+    (QuotientAddGroup.quotientKerEquivOfSurjective _ (H.surjective_δ hS hT))
+
+/-- **`H¹` as a cokernel of global sections.** Every abelian sheaf `F` on a site with a
+terminal object `T` sits in a short exact sequence `0 → F → I → Q → 0` with `I` injective,
+hence with `H^q(I) = 0` for `q ≥ 1`, and the connecting homomorphism then identifies `H¹(F)`
+with the cokernel of `d_T : Γ(I) → Γ(Q)`.
+
+The blueprint takes for `I` the Godement sheaf of `F`, which is flasque; here `I` is an
+injective sheaf, which has the same two properties used later: it is acyclic, and every
+equivariant map from a torsor into it exists (see
+`CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one`).
+(blueprint: `lem-galois-flasque`) -/
+theorem Sheaf.exists_shortExact_injective_addEquiv_H_one (hT : IsTerminal T)
+    [EnoughInjectives (Sheaf J AddCommGrpCat.{w})] (F : Sheaf J AddCommGrpCat.{w}) :
+    ∃ (I Q : Sheaf J AddCommGrpCat.{w}) (ι : F ⟶ I) (d : I ⟶ Q) (w : ι ≫ d = 0),
+      (ShortComplex.mk ι d w).ShortExact ∧ Injective I ∧ (∀ q, Subsingleton (H I (q + 1))) ∧
+      Nonempty (H F 1 ≃+ Q.obj.obj (op T) ⧸ (d.hom.app (op T)).hom.range) := by
+  let S := ShortComplex.mk (Injective.ι F) (cokernel.π (Injective.ι F)) (cokernel.condition _)
+  have hS : S.ShortExact :=
+    ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+  exact ⟨S.X₂, S.X₃, S.f, S.g, S.zero, hS, inferInstance, fun _ ↦ inferInstance,
+    ⟨(H.quotientRangeAddEquiv hS hT).symm⟩⟩
+
+end HOneCokernel
 
 end CategoryTheory

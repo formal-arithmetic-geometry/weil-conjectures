@@ -34,6 +34,8 @@ have, alongside `Representation.tprod` and `Representation.dual`:
   (`Representation.isInternal_directSumSummand`).
 * `Representation.charpoly_directSum`: the characteristic polynomial of `g` acting on a direct
   sum of representations is the product of the characteristic polynomials on the summands.
+* `Matrix.GeneralLinearGroup.toRepresentation`: the defining representation of `GL n k` on
+  `n → k`.
 
 ## Blueprint
 
@@ -41,6 +43,8 @@ have, alongside `Representation.tprod` and `Representation.dual`:
 -/
 
 @[expose] public section
+
+open scoped Matrix
 
 namespace Representation
 
@@ -212,3 +216,22 @@ theorem charpoly_directSum [Fintype ι] [LinearOrder ι] [∀ i, FiniteDimension
 end DirectSum
 
 end Representation
+
+namespace Matrix.GeneralLinearGroup
+
+variable (n : Type*) [Fintype n] [DecidableEq n] (k : Type*) [Field k]
+
+/-- The defining representation of `GL n k` on `n → k`, by matrix-vector multiplication. -/
+noncomputable def toRepresentation : Representation k (GL n k) (n → k) where
+  toFun g := Matrix.toLinAlgEquiv' (g : Matrix n n k)
+  map_one' := by simp
+  map_mul' x y := by simp
+
+variable {n k}
+
+@[simp]
+theorem toRepresentation_apply (g : GL n k) (v : n → k) :
+    toRepresentation n k g v = (g : Matrix n n k) *ᵥ v :=
+  rfl
+
+end Matrix.GeneralLinearGroup
