@@ -199,6 +199,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.Endofunctor.Shift
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.AcyclicSwallowing
@@ -437,6 +438,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.Double
@@ -451,6 +453,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Lie.CartanCriterion
@@ -597,6 +601,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProduc
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndoFunctor
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.Presentable.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.CompatiblePlus
@@ -631,6 +636,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Subobject.HasCardinalLT
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Lattice
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.SpectralObject
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 public import WeilConjectures.Mathlib.Data.Fin.Rev

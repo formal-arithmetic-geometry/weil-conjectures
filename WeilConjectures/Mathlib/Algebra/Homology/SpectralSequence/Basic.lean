@@ -108,6 +108,12 @@ noncomputable def Abutment.ofIso (A : E.Abutment H) (e : ∀ n, H n ≅ H' n) : 
 lemma AbutsTo.of_iso (h : E.AbutsTo H) (e : ∀ n, H n ≅ H' n) : E.AbutsTo H' :=
   ⟨h.some.ofIso e⟩
 
+/-- Convergence of a spectral sequence is invariant under (unspecified) isomorphisms of the
+abutment. -/
+lemma AbutsTo.of_nonempty_iso (h : E.AbutsTo H) (e : ∀ n, Nonempty (H n ≅ H' n)) :
+    E.AbutsTo H' :=
+  h.of_iso fun n ↦ (e n).some
+
 end SpectralSequence
 
 end CategoryTheory
