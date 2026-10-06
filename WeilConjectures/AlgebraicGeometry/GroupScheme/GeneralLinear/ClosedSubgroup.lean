@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Affine
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdeal
@@ -239,21 +240,50 @@ instance : IsMonHom (subgroupSchemeHom h) where
 theorem subgroupSchemeHom_refl : subgroupSchemeHom (le_refl I) = 𝟙 (subgroupScheme I) :=
   (cancel_mono (subgroupSchemeι I)).1 (by simp)
 
+/-- An `R`-point of `V(I)` whose matrix satisfies the equations of `J` factors through
+`V(J) ⟶ V(I)`. -/
+theorem zeroLocusMulEquiv_comp_subgroupSchemeHom {R : Type u} [CommRing R] [Algebra k R]
+    (g : zeroLocus I R) (hg : (g : GL n R) ∈ zeroLocus J R) :
+    zeroLocusMulEquiv J R ⟨g, hg⟩ ≫ subgroupSchemeHom h = zeroLocusMulEquiv I R g := by
+  apply injective_homMulEquiv_comp I R
+  simp only [Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι,
+    homMulEquiv_zeroLocusMulEquiv_comp]
+
+/-- Conversely, an `R`-point of `V(I)` which factors through `V(J) ⟶ V(I)` satisfies the
+equations of `J`. -/
+theorem coe_mem_zeroLocus_of_comp_eq {R : Type u} [CommRing R] [Algebra k R]
+    (g : zeroLocus I R) {c : (Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme J}
+    (hc : c ≫ subgroupSchemeHom h = zeroLocusMulEquiv I R g) : (g : GL n R) ∈ zeroLocus J R := by
+  rw [← SetLike.mem_coe, ← range_homMulEquiv_comp J R]
+  refine ⟨c, ?_⟩
+  dsimp only
+  rw [← subgroupSchemeHom_comp_subgroupSchemeι h, ← Category.assoc, hc,
+    homMulEquiv_zeroLocusMulEquiv_comp]
+
+attribute [local instance] Scheme.algebraΓOfOver in
+-- Searching for a commutative group structure on the points of `V(I)` times out.
+attribute [-instance] Hom.commGroup in
 /-- If `V(I)(R)` has its commutators in `V(J)(R)` for every `k`-algebra `R`, then the closed
 immersion `V(J) ⟶ V(I)` contains the commutators scheme-theoretically
-(`AlgebraicGeometry.IsMonHom.ContainsCommutators`).
-
-Proof sketch (not formalised): it suffices to factor the universal commutator, that of the two
-projections of `V(I) × V(I)`, through `V(J)`; every other commutator is obtained from it by
-precomposition. The product `V(I) × V(I)` is affine, the spectrum of
-`(k[GL_n] ⧸ I) ⊗[k] (k[GL_n] ⧸ I)`, so its identity is a point of `V(I) × V(I)` with values in this
-algebra, and the hypothesis for this algebra, transported through `zeroLocusMulEquiv`, factors the
-universal commutator. (blueprint: `sk-i-restriction`) -/
+(`AlgebraicGeometry.IsMonHom.ContainsCommutators`): a point of the affine scheme `V(I)` with
+values in `X` factors through `X ⟶ Spec Γ(X, ⊤)`, so it suffices to factor the commutators of
+`Γ(X, ⊤)`-points, which is the hypothesis for `R = Γ(X, ⊤)`. (blueprint: `sk-i-restriction`) -/
 theorem containsCommutators_subgroupSchemeHom
     (hIJ : ∀ (R : Type u) [CommRing R] [Algebra k R],
       ⁅zeroLocus I R, zeroLocus I R⁆ ≤ zeroLocus J R) :
-    IsMonHom.ContainsCommutators (subgroupSchemeHom h) := by
-  sorry
+    IsMonHom.ContainsCommutators (subgroupSchemeHom h) where
+  exists_comp_eq_commutator {X} a b := by
+    obtain ⟨a, rfl⟩ := Scheme.exists_toSpecΓOver_comp a
+    obtain ⟨b, rfl⟩ := Scheme.exists_toSpecΓOver_comp b
+    let e := zeroLocusMulEquiv I Γ(X.left, ⊤)
+    have hc : (e.symm (a * b * a⁻¹ * b⁻¹) : GL n Γ(X.left, ⊤)) ∈ zeroLocus J Γ(X.left, ⊤) := by
+      refine hIJ _ ?_
+      rw [map_mul, map_mul, map_mul, map_inv, map_inv]
+      simpa [commutatorElement_def] using
+        Subgroup.commutator_mem_commutator (e.symm a).2 (e.symm b).2
+    refine ⟨Scheme.toSpecΓOver X ≫ zeroLocusMulEquiv J _ ⟨_, hc⟩, ?_⟩
+    rw [Category.assoc, zeroLocusMulEquiv_comp_subgroupSchemeHom, e.apply_symm_apply,
+      MonObj.comp_mul, MonObj.comp_mul, MonObj.comp_mul, GrpObj.comp_inv, GrpObj.comp_inv]
 
 end Inclusion
 
@@ -281,20 +311,31 @@ theorem le_derivedIdeal : I ≤ derivedIdeal I :=
   le_sSup ⟨inferInstance, le_refl I,
     IsMonHom.ContainsCommutators.of_eq (subgroupSchemeHom_refl (I := I)).symm⟩
 
-/-- The sum of Hopf ideals is a Hopf ideal, so the derived subgroup is a closed subgroup scheme.
-
-Proof sketch (not formalised): if `Δ(a) ∈ J ⊗ A + A ⊗ J` and `Δ(b) ∈ J' ⊗ A + A ⊗ J'`, then
-`Δ(a + b) ∈ (J + J') ⊗ A + A ⊗ (J + J')`; likewise for the counit and the antipode. -/
-instance : (derivedIdeal I).IsHopfIdeal k := by
-  sorry
+/-- The sum of Hopf ideals is a Hopf ideal (`Ideal.isHopfIdeal_sSup`), so the derived subgroup is
+a closed subgroup scheme. -/
+instance : (derivedIdeal I).IsHopfIdeal k :=
+  Ideal.isHopfIdeal_sSup fun _ ⟨hJ, _⟩ ↦ hJ
 
 /-- The derived subgroup contains the commutators of `G`: `G ⧸ [G, G]` is commutative.
 
-Proof sketch (not formalised): a morphism `X ⟶ V(I)` factors through `V(J)` if and only if `J`
-maps to zero in `Γ(X, 𝒪_X)`; this holds for every `J` in the family defining `derivedIdeal I`,
-hence for their sum. (blueprint: `sk-i-restriction`) -/
+By `containsCommutators_subgroupSchemeHom` it suffices to check this on `R`-points: a commutator
+of `V(I)(R)` lies in `V(J)(R)` for every `J` in the family defining `derivedIdeal I`, so the
+equations of all these `J`, hence of their sum, vanish on it. (blueprint: `sk-i-restriction`) -/
 instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I)) := by
-  sorry
+  refine containsCommutators_subgroupSchemeHom _ fun R _ _ ↦ Subgroup.commutator_le.2
+    fun g hg g' hg' ↦ ?_
+  let x : zeroLocus I R := ⟨g, hg⟩
+  let y : zeroLocus I R := ⟨g', hg'⟩
+  change ((x * y * x⁻¹ * y⁻¹ : zeroLocus I R) : GL n R) ∈ zeroLocus (derivedIdeal I) R
+  suffices hle : derivedIdeal I ≤ RingHom.ker (evalAlgHom (R := R)
+      ((x * y * x⁻¹ * y⁻¹ : zeroLocus I R) : GL n R)) from fun a ha ↦ hle ha
+  refine sSup_le ?_
+  rintro J ⟨hJ, hIJ, hc⟩
+  let e := zeroLocusMulEquiv I R
+  obtain ⟨c, hc⟩ := hc.exists_comp_eq_commutator (e x) (e y)
+  have hg := coe_mem_zeroLocus_of_comp_eq hIJ (e.symm (c ≫ _)) (e.apply_symm_apply _).symm
+  rwa [hc, map_mul, map_mul, map_mul, map_inv, map_inv, e.symm_apply_apply,
+    e.symm_apply_apply] at hg
 
 variable {I} {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k] (h : I ≤ J)
 
