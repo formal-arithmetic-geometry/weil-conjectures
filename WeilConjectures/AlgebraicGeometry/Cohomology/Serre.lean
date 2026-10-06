@@ -358,7 +358,9 @@ noetherian scheme `X` these two conditions together are coherence.
 The pushforward `i_* ℱ` is coherent
 (`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_pushforward_of_isClosedImmersion`), with
 `i_* (ℱ ⊗ 𝒪_X(m)) ≅ (i_* ℱ)(m)` by the projection formula and
-`H^q(X, ℱ ⊗ 𝒪_X(m)) ≅ H^q(ℙᵈ_k, i_* (ℱ ⊗ 𝒪_X(m)))`, so this is Serre vanishing on `ℙᵈ_k`,
+`H^q(X, ℱ ⊗ 𝒪_X(m)) ≅ H^q(ℙᵈ_k, i_* (ℱ ⊗ 𝒪_X(m)))` since a closed immersion is affine
+(`AlgebraicGeometry.Scheme.Modules.nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom`),
+so this is Serre vanishing on `ℙᵈ_k`,
 `AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist`, for `i_* ℱ`.
 
 (blueprint: `sk-thm-picard-serre-b`) -/
@@ -376,10 +378,13 @@ theorem Scheme.Modules.exists_subsingleton_H_tensor_twist [Finite n]
   have := h m hm q hq
   obtain ⟨e⟩ := nonempty_pushforward_tensorObj_pullback_iso i F
     (ProjectiveSpace.twist n (Spec (.of k)) m)
-  obtain ⟨e'⟩ := nonempty_H_pushforward_addEquiv_of_isClosedImmersion i
-    (F ⊗ₘ ProjectiveSpace.twistRestrict i m) q
+  let : X.Over (Spec (.of k)) := ⟨i ≫ ℙ(n; Spec (.of k)) ↘ Spec (.of k)⟩
+  have : i.IsOver (Spec (.of k)) := ⟨rfl⟩
+  have := isQuasicoherent_tensorObj F (ProjectiveSpace.twistRestrict i m)
+  obtain ⟨e'⟩ := nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom k i q
   have := subsingleton_H_of_iso e.symm q
-  exact e'.toEquiv.symm.subsingleton
+  exact Equiv.subsingleton (β := ((pushforward i).obj (F ⊗ₘ ProjectiveSpace.twistRestrict i m)).H q)
+    (e'.app ⟨F ⊗ₘ ProjectiveSpace.twistRestrict i m, inferInstance⟩).toLinearEquiv.toEquiv
 
 open scoped AlgebraicGeometry.Scheme.Modules in
 open ProjectiveSpace in

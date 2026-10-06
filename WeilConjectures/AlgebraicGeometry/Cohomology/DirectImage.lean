@@ -95,8 +95,6 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
 - `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isAffineHom` and
   `isQuasicoherent_pushforward_of_isAffineHom`: the higher direct images along an affine morphism
   vanish, and its pushforward preserves quasi-coherence.
-- `AlgebraicGeometry.Scheme.Modules.nonempty_H_pushforward_addEquiv_of_isClosedImmersion`:
-  pushforward along a closed immersion preserves cohomology.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_tensorObj_pullback_iso`: the
   projection formula `R^q f_* (ℱ ⊗ f^* 𝒩) ≅ R^q f_* ℱ ⊗ 𝒩` for an invertible `𝒩`.
 - `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`,
@@ -1107,21 +1105,5 @@ theorem isQuasicoherent_pushforward_of_isAffineHom (f : X ⟶ T) [IsAffineHom f]
     (isQuasicoherent_higherDirectImage f ℱ 0)
 
 end AffineMorphism
-
-section ClosedImmersion
-
-/-- **Cohomology along a closed immersion.** For a closed immersion `i : X ⟶ Y` and any
-`𝒪_X`-module `ℱ`, `H^q(Y, i_* ℱ) ≅ H^q(X, ℱ)` for every `q`. The blueprint deduces this for
-coherent `ℱ` from the vanishing of the `R^q i_* ℱ`
-(`AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isAffineHom`) and the Leray
-spectral sequence; it holds for every `ℱ`, since `i_*` is exact on abelian sheaves and preserves
-injective (indeed flasque) sheaves.
-
-(blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
-theorem nonempty_H_pushforward_addEquiv_of_isClosedImmersion (i : X ⟶ T) [IsClosedImmersion i]
-    (ℱ : X.Modules) (q : ℕ) : Nonempty (((pushforward i).obj ℱ).H q ≃+ ℱ.H q) :=
-  sorry
-
-end ClosedImmersion
 
 end AlgebraicGeometry.Scheme.Modules
