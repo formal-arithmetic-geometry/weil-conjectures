@@ -210,6 +210,14 @@ theorem topologicalKrullDim_le_of_smoothOfRelativeDimension {K : Type u} [Field 
     topologicalKrullDim X ≤ n :=
   sorry
 
+/-- A nonempty scheme smooth of relative dimension `n` over a field has dimension exactly `n`:
+each of its connected components is irreducible and smooth of relative dimension `n`, hence of
+dimension `n` by `AlgebraicGeometry.smoothOfRelativeDimension_iff_topologicalKrullDim_eq`. -/
+theorem topologicalKrullDim_eq_of_smoothOfRelativeDimension {K : Type u} [Field K]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) (n : ℕ) [SmoothOfRelativeDimension n f]
+    [Nonempty X] : topologicalKrullDim X = n :=
+  sorry
+
 open Limits in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The affine space `𝔸(n; S)` over `S` in finitely many variables is smooth of relative
