@@ -5,47 +5,54 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.GroupTheory.Commutator.Basic
 public import Mathlib.LinearAlgebra.Dual.Lemmas
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 public import Mathlib.RingTheory.Jacobson.Ring
+public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
-public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
 public import WeilConjectures.Mathlib.RingTheory.HopfAlgebra.Quotient
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
+public import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
+public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
+public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
 
 /-!
-# Closed subgroup schemes of `GL_n`
+# Hopf ideals of the coordinate ring of `GL_n` and their zero loci
 
-A matrix algebraic group, a closed subgroup `G ⊆ GL(V)`, is a closed subgroup scheme of the
-group scheme `GL_n`: the spectrum of `k[x_ij, det⁻¹] ⧸ I` for a Hopf ideal `I`. Its `R`-points are
-the invertible matrices over `R` on which every equation in `I` vanishes; this is a theorem
-(`Matrix.GeneralLinearGroup.range_homMulEquiv_comp`), not a definition.
+This file is the purely algebraic side of the theory of closed subgroups of `GL_n`: it concerns
+Hopf ideals `I` of the Hopf algebra `k[x_ij, det⁻¹]` and matrix groups, and never mentions
+schemes. The group scheme `V(I)` itself and the comparison of its points with the matrix groups
+defined here are in `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup`.
 
-Conversely, an abstract subgroup `Γ` of `GL n k` has a Zariski closure, cut out by the ideal of
-all equations vanishing on `Γ`; this ideal is a Hopf ideal. The identity component and the centre
-of a closed subgroup are described by ideals of the coordinate ring of `GL_n` in the same way.
+For a Hopf ideal `I` and a `k`-algebra `R`, the invertible matrices over `R` on which every
+equation in `I` vanishes form a subgroup `zeroLocus I R` of `GL n R`. Conversely, an abstract
+subgroup `Γ` of `GL n k` has a Zariski closure, cut out by the ideal `vanishingIdeal Γ` of all
+equations vanishing on `Γ`; this ideal is a Hopf ideal. Over an algebraically closed field the
+Nullstellensatz identifies the ideal of the `k`-points of `zeroLocus I` with the radical of `I`.
+Finally, the identity component and the centre of `V(I)` are described by Hopf ideals of
+`k[x_ij, det⁻¹]`.
 
 ## Main definitions
 
-- `Matrix.GeneralLinearGroup.zeroLocus`: the `R`-points of the closed subgroup scheme `V(I)`, as a
-  subgroup of `GL n R`.
+- `Matrix.GeneralLinearGroup.zeroLocus`: the subgroup of `GL n R` of matrices satisfying the
+  equations of a Hopf ideal `I`.
 - `Matrix.GeneralLinearGroup.vanishingIdeal`: the ideal of equations vanishing on a set of
   matrices; for a subgroup, the ideal of its Zariski closure.
-- `Matrix.GeneralLinearGroup.subgroupScheme`: the closed subgroup scheme `V(I)` of `GL_n`, a group
-  object in schemes over `k`, with its closed immersion `subgroupSchemeι` into `GL_n`.
-- `Matrix.GeneralLinearGroup.identityComponent`: the ideal of the reduced identity component `G°`.
-- `Matrix.GeneralLinearGroup.IsConnected`: `V(I)` is its own reduced identity component.
-- `Matrix.GeneralLinearGroup.center`: the ideal of the reduced centre `Z(G)`.
-- `Matrix.GeneralLinearGroup.zeroLocusMulEquiv`: the `R`-points of `V(I)` as a group of
-  morphisms `Spec R ⟶ V(I)` are the group `zeroLocus I R`.
+- `Matrix.GeneralLinearGroup.toPrimeSpectrum`: the point of `Spec k[x_ij, det⁻¹]` given by a
+  matrix in `GL n k`.
+- `Matrix.GeneralLinearGroup.identityComponent`: the ideal of the reduced identity component
+  `G°` of `V(I)`.
+- `Matrix.GeneralLinearGroup.IsConnected`: `I` is the ideal of its own reduced identity component.
+- `Matrix.GeneralLinearGroup.center`: the ideal of the reduced centre `Z(G)` of `V(I)`.
 
 ## Main results
 
-- `Matrix.GeneralLinearGroup.range_homMulEquiv_comp`: the `R`-points of `V(I)` are the matrices
-  satisfying the equations in `I`.
-- `Matrix.GeneralLinearGroup.vanishingIdeal_zeroLocus_eq_radical`: the Nullstellensatz for `GL_n`
-  over an algebraically closed field.
+- `Matrix.GeneralLinearGroup.instIsHopfIdealVanishingIdeal`: the ideal of a subgroup of `GL n k`
+  is a Hopf ideal.
+- `Matrix.GeneralLinearGroup.vanishingIdeal_zeroLocus_eq_radical`: the Nullstellensatz for
+  `GL_n` over an algebraically closed field.
 - `Matrix.GeneralLinearGroup.zeroLocus_vanishingIdeal_le_normalizer`,
   `Matrix.GeneralLinearGroup.commutator_zeroLocus_vanishingIdeal_le`: Zariski closure preserves
   normalizing and commutator inclusions between subgroups of `GL n k`.
@@ -53,6 +60,10 @@ of a closed subgroup are described by ideals of the coordinate ring of `GL_n` in
   `Matrix.GeneralLinearGroup.mulVec_mem_of_mem_zeroLocus_vanishingIdeal`,
   `Matrix.GeneralLinearGroup.map_mem_zeroLocus_vanishingIdeal`: centralizers, stabilizers of
   subspaces and polynomial homomorphisms pass to the Zariski closure.
+- `Matrix.GeneralLinearGroup.IsConnected.isPrime`: in characteristic zero, a connected matrix
+  group is irreducible, by Cartier's lemma; and
+  `Matrix.GeneralLinearGroup.eq_of_le_of_ringKrullDim_eq`: a closed subgroup of an irreducible
+  matrix group of the same dimension is the whole group.
 
 ## Blueprint
 
@@ -60,13 +71,14 @@ of a closed subgroup are described by ideals of the coordinate ring of `GL_n` in
   component and centre.
 - `sk-i-restriction`: the Zariski closure of a subgroup of `GL n k` is an algebraic group, and
   closure preserves normalizing and commutator inclusions.
-- `sk-p-geometry`: the identity component is a closed subgroup scheme.
+- `sk-p-geometry`: the identity component is cut out by a Hopf ideal.
+- `lem-wf-same-lie-closed-subgroup` (clause (1)), `lem-ag-equal-dimension-subgroup`: connected
+  matrix groups are irreducible; equal dimension forces equality.
 -/
 
 @[expose] public section
 
-open CategoryTheory AlgebraicGeometry WithConv
-open scoped MonObj
+open WithConv
 
 namespace Matrix.GeneralLinearGroup
 
@@ -148,12 +160,13 @@ theorem map_mem_zeroLocus_iff {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k]
 /-- The group homomorphism `V(I)(R) →* V(I)(S)` induced by an algebra homomorphism `R → S`. -/
 noncomputable def zeroLocus.map (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
     (φ : R →ₐ[k] S) : zeroLocus I R →* zeroLocus I S :=
-  ((GeneralLinearGroup.map φ.toRingHom).comp (zeroLocus I R).subtype).codRestrict _
+  ((Matrix.GeneralLinearGroup.map φ.toRingHom).comp (zeroLocus I R).subtype).codRestrict _
     fun g ↦ map_mem_zeroLocus φ g.2
 
 @[simp]
 theorem zeroLocus.coe_map_apply {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] (φ : R →ₐ[k] S)
-    (g : zeroLocus I R) : (zeroLocus.map I φ g : GL n S) = GeneralLinearGroup.map φ.toRingHom g :=
+    (g : zeroLocus I R) :
+    (zeroLocus.map I φ g : GL n S) = Matrix.GeneralLinearGroup.map φ.toRingHom g :=
   rfl
 
 /-- The ideal of equations vanishing on a set `S` of invertible matrices over `k`. For a subgroup
@@ -322,6 +335,13 @@ theorem isRadical_identityComponent (I : Ideal (CoordinateRing n k)) :
     (identityComponent I).IsRadical :=
   PrimeSpectrum.isRadical_vanishingIdeal _
 
+/-- The reduced identity component is monotone in the group: if `V(J) ⊆ V(I)` then
+`V(J)° ⊆ V(I)°`. -/
+theorem identityComponent_mono (I : Ideal (CoordinateRing n k)) {J : Ideal (CoordinateRing n k)}
+    (h : I ≤ J) : identityComponent I ≤ identityComponent J :=
+  PrimeSpectrum.vanishingIdeal_anti_mono
+    (connectedComponentIn_mono _ (PrimeSpectrum.zeroLocus_anti_mono h))
+
 /-- The closed subgroup `V(I)` of `GL_n` is connected (and reduced): `I` is the ideal of its own
 reduced identity component. -/
 def IsConnected (I : Ideal (CoordinateRing n k)) : Prop :=
@@ -354,6 +374,10 @@ noncomputable def center (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
 
 instance (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] : (center I).IsHopfIdeal k :=
   instIsHopfIdealVanishingIdeal _
+
+/-- The ideal of `G` is contained in the ideal of its centre: `Z(G) ⊆ G`. -/
+theorem le_center (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] : I ≤ center I :=
+  (le_vanishingIdeal_zeroLocus I).trans (vanishingIdeal_anti fun _ hg ↦ hg.1)
 
 /-- The `k`-points of the centre of `G = V(I)` are the matrices of `G(k)` commuting with all of
 `G(k)`. (blueprint: `sk-d-geometry`) -/
@@ -444,130 +468,134 @@ theorem map_mem_zeroLocus_vanishingIdeal (r : GL n k →* GL m k)
 
 end Map
 
+/-! ### Cartier's lemma: connected matrix groups are irreducible
+
+By Cartier's lemma (`HopfAlgebra.isPrime_iInf_pow_ker`), in characteristic zero the functions on
+`V(I)` vanishing near a `k`-point `c` form a prime ideal, contained in every prime of `V(I)` through
+`c`: a single irreducible component passes through each point. -/
+
+section Cartier
+
+/-- The ideal of the functions on `GL_n` whose restriction to `V(I)` vanishes near the point `c`
+of `V(I)`. -/
+private noncomputable abbrev localVanishing (I : Ideal (CoordinateRing n k))
+    (c : CoordinateRing n k ⧸ I →ₐ[k] k) : Ideal (CoordinateRing n k) :=
+  (⨅ r : ℕ, RingHom.ker c ^ r).comap (Ideal.Quotient.mk I)
+
+private theorem localVanishing_le [CharZero k] (I : Ideal (CoordinateRing n k))
+    (c : CoordinateRing n k ⧸ I →ₐ[k] k) {q : Ideal (CoordinateRing n k)} [q.IsPrime] (hIq : I ≤ q)
+    (hq : q ≤ RingHom.ker (c.comp (Ideal.Quotient.mkₐ k I))) : localVanishing I c ≤ q := by
+  intro a ha
+  have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
+  obtain ⟨t, ht, hta⟩ := AlgHom.mem_iInf_pow_ker_iff.1 (Ideal.mem_comap.1 ha)
+  obtain ⟨t, rfl⟩ := Ideal.Quotient.mk_surjective t
+  rw [← map_mul, Ideal.Quotient.eq_zero_iff_mem] at hta
+  refine ((‹q.IsPrime›.mem_or_mem (hIq hta)).resolve_left fun htq ↦ ?_)
+  have := hq htq
+  rw [RingHom.mem_ker, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk, ht] at this
+  exact one_ne_zero this
+
+private theorem le_localVanishing (I : Ideal (CoordinateRing n k))
+    (c : CoordinateRing n k ⧸ I →ₐ[k] k) : I ≤ localVanishing I c := fun a ha ↦ by
+  rw [Ideal.mem_comap, Ideal.Quotient.eq_zero_iff_mem.2 ha]
+  exact zero_mem _
+
+private theorem localVanishing_le_ker (I : Ideal (CoordinateRing n k))
+    (c : CoordinateRing n k ⧸ I →ₐ[k] k) :
+    localVanishing I c ≤ RingHom.ker (c.comp (Ideal.Quotient.mkₐ k I)) := fun a ha ↦ by
+  have := (Submodule.mem_iInf _).1 (Ideal.mem_comap.1 ha) 1
+  rw [pow_one] at this
+  exact this
+
+private theorem localVanishing_mem_minimalPrimes [CharZero k] (I : Ideal (CoordinateRing n k))
+    [I.IsHopfIdeal k] (c : CoordinateRing n k ⧸ I →ₐ[k] k) :
+    localVanishing I c ∈ I.minimalPrimes := by
+  have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
+  have : (localVanishing I c).IsPrime :=
+    Ideal.IsPrime.comap _ (hK := HopfAlgebra.isPrime_iInf_pow_ker c)
+  refine ⟨⟨this, le_localVanishing I c⟩, fun q ⟨hq, hIq⟩ hqP ↦ ?_⟩
+  exact localVanishing_le I c hIq (hqP.trans (localVanishing_le_ker I c))
+
+/-- **A connected matrix group is irreducible**: in characteristic zero, over an algebraically
+closed field, the ideal of a connected closed subgroup `V(I)` of `GL_n` is prime.
+
+By Cartier's lemma the functions vanishing near a point `c` of `V(I)` form a prime ideal, contained
+in every prime of `V(I)` through `c`: a single irreducible component passes through each point,
+so the irreducible components of `V(I)` are pairwise disjoint, and the connected `V(I)` has only
+one. (blueprint: `lem-wf-same-lie-closed-subgroup`, clause (1)) -/
+theorem IsConnected.isPrime [IsAlgClosed k] [CharZero k] {I : Ideal (CoordinateRing n k)}
+    [I.IsHopfIdeal k] (hconn : IsConnected I) : I.IsPrime := by
+  have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
+  set e := Bialgebra.counitAlgHom k (CoordinateRing n k ⧸ I)
+  set P := localVanishing I e
+  have hPmin := localVanishing_mem_minimalPrimes I e
+  have hP : P.IsPrime := hPmin.1.1
+  -- a minimal prime meeting `V(P)` is `P`
+  have key (Q : Ideal (CoordinateRing n k)) (hQ : Q ∈ I.minimalPrimes)
+      (x : PrimeSpectrum (CoordinateRing n k)) (hQx : Q ≤ x.asIdeal) (hPx : P ≤ x.asIdeal) :
+      Q = P := by
+    obtain ⟨M, hM, hxM⟩ := x.asIdeal.exists_le_maximal x.2.ne_top
+    obtain ⟨φ, hφ⟩ := exists_algHom_ker_eq_of_isMaximal k (CoordinateRing n k) M
+    have hIM : I ≤ RingHom.ker φ := hφ ▸ hQ.1.2.trans (hQx.trans hxM)
+    let c : CoordinateRing n k ⧸ I →ₐ[k] k := Ideal.Quotient.liftₐ I φ fun a ha ↦ hIM ha
+    have hc : RingHom.ker (c.comp (Ideal.Quotient.mkₐ k I)) = M := by
+      rw [← hφ]
+      congr 1
+    have : Q.IsPrime := hQ.1.1
+    have h1 : localVanishing I c ≤ Q :=
+      localVanishing_le I c hQ.1.2 (hc ▸ hQx.trans hxM)
+    have h2 : localVanishing I c ≤ P := localVanishing_le I c hPmin.1.2 (hc ▸ hPx.trans hxM)
+    have hc' := localVanishing_mem_minimalPrimes I c
+    exact (le_antisymm (hQ.2 hc'.1 h1) h1).trans (le_antisymm (hPmin.2 hc'.1 h2) h2).symm
+  have h1 : toPrimeSpectrum (1 : GL n k) ∈ PrimeSpectrum.zeroLocus (P : Set (CoordinateRing n k)) :=
+    fun b hb ↦ by
+      have hb' := localVanishing_le_ker I e hb
+      rw [RingHom.mem_ker, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk,
+        Bialgebra.counitAlgHom_apply, Bialgebra.Quotient.counit_mk] at hb'
+      exact hb'
+  have h1I : toPrimeSpectrum (1 : GL n k) ∈
+      PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)) :=
+    PrimeSpectrum.zeroLocus_anti_mono (le_localVanishing I e) h1
+  set W := ⋃ Q ∈ {Q | Q ∈ I.minimalPrimes ∧ Q ≠ P},
+    PrimeSpectrum.zeroLocus (Q : Set (CoordinateRing n k))
+  have hW : IsClosed W :=
+    ((Ideal.finite_minimalPrimes_of_isNoetherianRing _ I).subset fun Q hQ ↦ hQ.1).isClosed_biUnion
+      fun Q _ ↦ PrimeSpectrum.isClosed_zeroLocus _
+  set C := connectedComponentIn (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))
+    (toPrimeSpectrum 1)
+  have hcover : C ⊆ PrimeSpectrum.zeroLocus (P : Set (CoordinateRing n k)) ∪ W := fun x hx ↦ by
+    have hxI := (PrimeSpectrum.mem_zeroLocus _ _).1 (connectedComponentIn_subset _ _ hx)
+    obtain ⟨Q, hQ, hQx⟩ := Ideal.exists_minimalPrimes_le (J := x.asIdeal) hxI
+    by_cases hQP : Q = P
+    · subst hQP
+      exact Or.inl hQx
+    · exact Or.inr (Set.mem_biUnion (x := Q) ⟨hQ, hQP⟩ hQx)
+  have hdisj : C ∩ (PrimeSpectrum.zeroLocus (P : Set (CoordinateRing n k)) ∩ W) = ∅ := by
+    refine Set.eq_empty_iff_forall_notMem.2 fun x ⟨_, hPx, hWx⟩ ↦ ?_
+    obtain ⟨Q, ⟨hQ, hQP⟩, hQx⟩ := Set.mem_iUnion₂.1 hWx
+    exact hQP (key Q hQ x hQx hPx)
+  have hC1 : toPrimeSpectrum 1 ∈ C := mem_connectedComponentIn h1I
+  have hCP : C ⊆ PrimeSpectrum.zeroLocus (P : Set (CoordinateRing n k)) :=
+    ((isPreconnected_iff_subset_of_disjoint_closed.1 isPreconnected_connectedComponentIn) _ _
+      (PrimeSpectrum.isClosed_zeroLocus _) hW hcover hdisj).resolve_right fun hCW ↦
+        (Set.eq_empty_iff_forall_notMem.1 hdisj) _ ⟨hC1, h1, hCW hC1⟩
+  have hPI : P ≤ I := fun a ha ↦ by
+    rw [← hconn]
+    exact (PrimeSpectrum.mem_vanishingIdeal _ _).2 fun x hx ↦ hCP hx ha
+  rw [le_antisymm (le_localVanishing I e) hPI]
+  exact hP
+
+/-- **A closed subgroup of full dimension is everything**: if `V(I)` is irreducible and
+`V(J) ⊆ V(I)` has the same dimension, then `J = I`. (blueprint: `lem-ag-equal-dimension-subgroup`)
+-/
+theorem eq_of_le_of_ringKrullDim_eq (I : Ideal (CoordinateRing n k)) [I.IsPrime]
+    {J : Ideal (CoordinateRing n k)} (hIJ : I ≤ J)
+    (h : ringKrullDim (CoordinateRing n k ⧸ J) = ringKrullDim (CoordinateRing n k ⧸ I)) :
+    J = I :=
+  Ideal.eq_of_le_of_ringKrullDim_quotient_eq hIJ (ringKrullDim_ne_top_of_finiteType k _) h
+
+end Cartier
+
 end Field
-
-section Scheme
-
-universe u
-
-variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [CommRing k]
-
-/-- The closed subgroup scheme `V(I) = Spec (k[x_ij, det⁻¹] ⧸ I)` of `GL_n` cut out by a Hopf ideal
-`I`. It is a group object by Mathlib's quotient Hopf algebra structure.
-(blueprint: `sk-d-geometry`) -/
-noncomputable abbrev subgroupScheme (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
-    Over (Spec (.of k)) :=
-  (Spec (.of (CoordinateRing n k ⧸ I))).asOver (Spec (.of k))
-
-variable (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
-
-noncomputable instance : GrpObj (subgroupScheme I) := inferInstance
-
-instance : IsAffine (subgroupScheme I).left :=
-  inferInstanceAs (IsAffine (Spec (.of (CoordinateRing n k ⧸ I))))
-
-instance : LocallyOfFiniteType (subgroupScheme I).hom :=
-  locallyOfFiniteType_specOverSpec
-
-/-- The closed immersion of the closed subgroup scheme `V(I)` into `GL_n`.
-(blueprint: `sk-d-geometry`) -/
-noncomputable def subgroupSchemeι : subgroupScheme I ⟶ scheme n k :=
-  (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mkₐ k I).toRingHom)).asOver (Spec (.of k))
-
-instance : IsMonHom (subgroupSchemeι I) :=
-  inferInstanceAs (IsMonHom ((bialgSpec (.of k)).map
-    (CommBialgCat.ofHom (Bialgebra.Quotient.mkBialgHom (R := k) I)).op).hom)
-
-instance : IsClosedImmersion (subgroupSchemeι I).left :=
-  IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
-
-instance : Mono (subgroupSchemeι I) :=
-  Over.mono_of_mono_left _
-
-theorem subgroupSchemeι_comp_injective {X : Over (Spec (.of k))} :
-    Function.Injective fun φ : X ⟶ subgroupScheme I ↦ φ ≫ subgroupSchemeι I :=
-  fun _ _ h ↦ (cancel_mono _).1 h
-
-theorem mapMulEquiv_comp_subgroupSchemeι {R : Type u} [CommRing R] [Algebra k R]
-    (ψ : WithConv (CoordinateRing n k ⧸ I →ₐ[k] R)) :
-    Spec.mapMulEquiv ψ ≫ subgroupSchemeι I =
-      Spec.mapMulEquiv (toConv (ψ.ofConv.comp (Ideal.Quotient.mkₐ k I))) := by
-  apply Over.OverMorphism.ext
-  change Spec.map _ ≫ Spec.map _ = Spec.map _
-  rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
-  rfl
-
-/-- The `R`-points of the closed subgroup scheme `V(I)` are the invertible matrices over `R`
-satisfying the equations in `I`: the identification of `G(R)` with a classical matrix group is a
-theorem, not a definition. (blueprint: `sk-d-geometry`) -/
-theorem range_homMulEquiv_comp (R : Type u) [CommRing R] [Algebra k R] :
-    Set.range (fun φ : (Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I ↦
-      homMulEquiv n k R (φ ≫ subgroupSchemeι I)) = zeroLocus I R := by
-  have key (χ : CoordinateRing n k ⧸ I →ₐ[k] R) :
-      homMulEquiv n k R (Spec.mapMulEquiv (toConv χ) ≫ subgroupSchemeι I) =
-        algHomMulEquiv n k R (toConv (χ.comp (Ideal.Quotient.mkₐ k I))) := by
-    rw [mapMulEquiv_comp_subgroupSchemeι, homMulEquiv, MulEquiv.trans_apply,
-      MulEquiv.symm_apply_apply, ofConv_toConv]
-  have heval (χ : CoordinateRing n k →ₐ[k] R) :
-      evalAlgHom (algHomMulEquiv n k R (toConv χ)) = χ :=
-    congrArg ofConv ((algHomMulEquiv n k R).symm_apply_apply (toConv χ))
-  ext g
-  constructor
-  · rintro ⟨φ, rfl⟩ a ha
-    obtain ⟨χ, rfl⟩ := Spec.mapMulEquiv.surjective φ
-    dsimp only
-    rw [← toConv_ofConv χ, key, heval, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk,
-      Ideal.Quotient.eq_zero_iff_mem.2 ha, map_zero]
-  · intro hg
-    refine ⟨Spec.mapMulEquiv (toConv (Ideal.Quotient.liftₐ I (evalAlgHom g) fun a ha ↦ hg a ha)),
-      ?_⟩
-    dsimp only
-    rw [key]
-    exact (algHomMulEquiv n k R).apply_symm_apply g
-
-theorem injective_homMulEquiv_comp (R : Type u) [CommRing R] [Algebra k R] :
-    Function.Injective fun φ : (Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I ↦
-      homMulEquiv n k R (φ ≫ subgroupSchemeι I) :=
-  (homMulEquiv n k R).injective.comp (subgroupSchemeι_comp_injective I)
-
-/-- The `R`-points of the closed subgroup scheme `V(I)` are the group `zeroLocus I R` of matrices
-satisfying the equations in `I`: a point `φ : Spec R ⟶ V(I)` corresponds to the matrix of the
-point `φ ≫ ι` of `GL_n`, where `ι : V(I) ⟶ GL_n` is the closed immersion.
-(blueprint: `sk-d-geometry`) -/
-noncomputable def zeroLocusMulEquiv (R : Type u) [CommRing R] [Algebra k R] :
-    zeroLocus I R ≃* ((Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I) :=
-  (MulEquiv.subgroupCongr (SetLike.coe_injective (range_homMulEquiv_comp I R)).symm).trans
-    (MonoidHom.ofInjective (f := (homMulEquiv n k R).toMonoidHom.comp
-      (IsMonHom.monoidHom (subgroupSchemeι I) _)) (injective_homMulEquiv_comp I R)).symm
-
-variable {I}
-
-@[simp]
-theorem homMulEquiv_zeroLocusMulEquiv_comp {R : Type u} [CommRing R] [Algebra k R]
-    (g : zeroLocus I R) : homMulEquiv n k R (zeroLocusMulEquiv I R g ≫ subgroupSchemeι I) = g :=
-  congrArg Subtype.val ((MonoidHom.ofInjective (f := (homMulEquiv n k R).toMonoidHom.comp
-    (IsMonHom.monoidHom (subgroupSchemeι I) _)) (injective_homMulEquiv_comp I R)).apply_symm_apply
-      ⟨g, _⟩)
-
-attribute [irreducible] zeroLocusMulEquiv
-
-/-- The identification `zeroLocusMulEquiv` is natural in the algebra of values: the square
-```
-V(I)(R) ──zeroLocus.map φ──▶ V(I)(S)
-   │                            │
-   ▼                            ▼
-(Spec R ⟶ V(I)) ──Spec φ ≫ ·──▶ (Spec S ⟶ V(I))
-```
-commutes. -/
-theorem zeroLocusMulEquiv_map {R S : Type u} [CommRing R] [Algebra k R] [CommRing S]
-    [Algebra k S] (φ : R →ₐ[k] S) (g : zeroLocus I R) :
-    zeroLocusMulEquiv I S (zeroLocus.map I φ g) =
-      (Spec.map (CommRingCat.ofHom φ.toRingHom)).asOver (Spec (.of k)) ≫
-        zeroLocusMulEquiv I R g := by
-  apply injective_homMulEquiv_comp I S
-  simp only [homMulEquiv_zeroLocusMulEquiv_comp, zeroLocus.coe_map_apply, Category.assoc,
-    homMulEquiv_specMap_comp]
-
-end Scheme
 
 end Matrix.GeneralLinearGroup

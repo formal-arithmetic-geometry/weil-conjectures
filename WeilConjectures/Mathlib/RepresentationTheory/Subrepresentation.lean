@@ -24,8 +24,8 @@ quotient is the honest subquotient `S / U`.
 ## Main declarations
 
 * `Subrepresentation.subquotient`: the representation of `W` on `S ⧸ U`.
-* `Subrepresentation.orderIsoMapComap`: subrepresentations correspond along an equivariant linear
-  equivalence, and so do the determinant characters of their subquotients
+* `Subrepresentation.orderIsoMapComap`: subrepresentations correspond along an equivalence of
+  representations, and so do the determinant characters of their subquotients
   (`Subrepresentation.detCharacter_subquotient_orderIsoMapComap`).
 * `Subrepresentation.exists_apply_sub_smul_mem_of_isIrreducible`: Schur's lemma on an irreducible
   subquotient, over an algebraically closed field.
@@ -68,85 +68,68 @@ section Equiv
 
 variable {V' : Type*} [AddCommGroup V'] [Module k V'] {σ : Representation k W V'}
 
-/-- Subrepresentations correspond along a `W`-equivariant linear equivalence `e`: `S ↦ e(S)`. -/
-def orderIsoMapComap (e : V ≃ₗ[k] V') (he : ∀ w x, e (ρ w x) = σ w (e x)) :
-    Subrepresentation ρ ≃o Subrepresentation σ where
-  toFun S := ⟨S.toSubmodule.map (e : V →ₗ[k] V'), by
+/-- Subrepresentations correspond along an equivalence of representations `e`: `S ↦ e(S)`. -/
+def orderIsoMapComap (e : ρ.Equiv σ) : Subrepresentation ρ ≃o Subrepresentation σ where
+  toFun S := ⟨S.toSubmodule.map (e.toLinearEquiv : V →ₗ[k] V'), by
     rintro w _ ⟨x, hx, rfl⟩
-    exact ⟨ρ w x, S.apply_mem_toSubmodule w hx, he w x⟩⟩
-  invFun S := ⟨S.toSubmodule.comap (e : V →ₗ[k] V'), by
+    exact ⟨ρ w x, S.apply_mem_toSubmodule w hx, e.apply_apply w x⟩⟩
+  invFun S := ⟨S.toSubmodule.comap (e.toLinearEquiv : V →ₗ[k] V'), by
     intro w x hx
-    simpa only [Submodule.mem_comap, LinearEquiv.coe_coe, he] using S.apply_mem_toSubmodule w hx⟩
-  left_inv S := toSubmodule_injective (Submodule.comap_map_eq_of_injective e.injective _)
-  right_inv S := toSubmodule_injective (Submodule.map_comap_eq_of_surjective e.surjective _)
+    rw [Submodule.mem_comap, LinearEquiv.coe_coe, e.toLinearEquiv_apply, e.coe_toIntertwiningMap,
+      e.apply_apply]
+    exact S.apply_mem_toSubmodule w hx⟩
+  left_inv S := toSubmodule_injective
+    (Submodule.comap_map_eq_of_injective e.toLinearEquiv.injective _)
+  right_inv S := toSubmodule_injective
+    (Submodule.map_comap_eq_of_surjective e.toLinearEquiv.surjective _)
   map_rel_iff' {S T} := by
     rw [← toSubmodule_le_toSubmodule, ← toSubmodule_le_toSubmodule]
-    exact Submodule.map_le_map_iff_of_injective e.injective _ _
+    exact Submodule.map_le_map_iff_of_injective e.toLinearEquiv.injective _ _
 
-theorem mem_orderIsoMapComap_iff (e : V ≃ₗ[k] V') (he : ∀ w x, e (ρ w x) = σ w (e x))
-    (S : Subrepresentation ρ) {y : V'} : y ∈ orderIsoMapComap e he S ↔ e.symm y ∈ S :=
-  Submodule.mem_map_equiv (p := S.toSubmodule)
+theorem mem_orderIsoMapComap_iff (e : ρ.Equiv σ) (S : Subrepresentation ρ) {y : V'} :
+    y ∈ orderIsoMapComap e S ↔ e.symm y ∈ S :=
+  Submodule.mem_map_equiv (p := S.toSubmodule) (e := e.toLinearEquiv)
 
-theorem apply_mem_orderIsoMapComap (e : V ≃ₗ[k] V') (he : ∀ w x, e (ρ w x) = σ w (e x))
-    (S : Subrepresentation ρ) {x : V} (hx : x ∈ S) : e x ∈ orderIsoMapComap e he S :=
+theorem apply_mem_orderIsoMapComap (e : ρ.Equiv σ) (S : Subrepresentation ρ) {x : V}
+    (hx : x ∈ S) : e x ∈ orderIsoMapComap e S :=
   ⟨x, hx, rfl⟩
 
-/-- The linear equivalence between the subquotients `S ⧸ U` and `e(S) ⧸ e(U)` induced by a
-`W`-equivariant linear equivalence `e`. -/
-noncomputable def subquotientLinearEquiv (e : V ≃ₗ[k] V') (he : ∀ w x, e (ρ w x) = σ w (e x))
-    (S U : Subrepresentation ρ) :
-    (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) ≃ₗ[k]
-      ((orderIsoMapComap e he S).toSubmodule ⧸
-        (orderIsoMapComap e he U).toSubmodule.comap
-          (orderIsoMapComap e he S).toSubmodule.subtype) :=
-  Submodule.Quotient.equiv _ _ (e.submoduleMap S.toSubmodule) <| by
+/-- The equivalence between the subquotients `S ⧸ U` and `e(S) ⧸ e(U)` induced by an equivalence
+of representations `e`. -/
+noncomputable def subquotientEquiv (e : ρ.Equiv σ) (S U : Subrepresentation ρ) :
+    (S.subquotient U).Equiv ((orderIsoMapComap e S).subquotient (orderIsoMapComap e U)) :=
+  .mk (Submodule.Quotient.equiv _ _ (e.toLinearEquiv.submoduleMap S.toSubmodule) <| by
     ext y
     rw [Submodule.mem_map_equiv, Submodule.mem_comap, Submodule.mem_comap,
       Submodule.subtype_apply, Submodule.subtype_apply]
-    exact (mem_orderIsoMapComap_iff e he U).symm
-
-theorem subquotientLinearEquiv_apply (e : V ≃ₗ[k] V') (he : ∀ w x, e (ρ w x) = σ w (e x))
-    (S U : Subrepresentation ρ) (w : W) (x) :
-    subquotientLinearEquiv e he S U (S.subquotient U w x) =
-      (orderIsoMapComap e he S).subquotient (orderIsoMapComap e he U) w
-        (subquotientLinearEquiv e he S U x) := by
-  induction x using Submodule.Quotient.induction_on with
-  | H x =>
-    simp only [subquotientLinearEquiv, subquotient_apply_mk, Submodule.Quotient.equiv_apply,
-      Submodule.mapQ_apply]
+    exact (mem_orderIsoMapComap_iff e U).symm) fun w ↦ by
+    refine Submodule.linearMap_qext _ (LinearMap.ext fun x ↦ ?_)
+    simp only [LinearMap.comp_apply, Submodule.mkQ_apply, LinearEquiv.coe_coe,
+      subquotient_apply_mk, Submodule.Quotient.equiv_apply, Submodule.mapQ_apply]
     congr 1
-    exact Subtype.ext (he w x)
+    exact Subtype.ext (e.apply_apply w x)
 
-/-- The subquotients `S ⧸ U` and `e(S) ⧸ e(U)` along a `W`-equivariant linear equivalence `e`
-have the same determinant character. -/
-theorem detCharacter_subquotient_orderIsoMapComap (e : V ≃ₗ[k] V')
-    (he : ∀ w x, e (ρ w x) = σ w (e x)) (S U : Subrepresentation ρ) :
-    ((orderIsoMapComap e he S).subquotient (orderIsoMapComap e he U)).detCharacter =
+/-- The subquotients `S ⧸ U` and `e(S) ⧸ e(U)` along an equivalence of representations `e` have the
+same determinant character. -/
+theorem detCharacter_subquotient_orderIsoMapComap (e : ρ.Equiv σ) (S U : Subrepresentation ρ) :
+    ((orderIsoMapComap e S).subquotient (orderIsoMapComap e U)).detCharacter =
       (S.subquotient U).detCharacter :=
-  Representation.detCharacter_eq_of_linearEquiv (subquotientLinearEquiv e he S U)
-    (subquotientLinearEquiv_apply e he S U)
+  (subquotientEquiv e S U).detCharacter_eq
 
 end Equiv
 
-/-- The subquotient `S ⧸ ⊥` is linearly equivalent to `S`, compatibly with the actions. -/
-noncomputable def subquotientBotLinearEquiv (S : Subrepresentation ρ) :
-    (S.toSubmodule ⧸ (⊥ : Subrepresentation ρ).toSubmodule.comap S.toSubmodule.subtype) ≃ₗ[k]
-      S.toSubmodule :=
-  Submodule.quotEquivOfEqBot _ <| by
+/-- The subquotient `S ⧸ ⊥` is equivalent to `S`. -/
+noncomputable def subquotientBotEquiv (S : Subrepresentation ρ) :
+    (S.subquotient ⊥).Equiv S.toRepresentation :=
+  .mk (Submodule.quotEquivOfEqBot _ <| by
     ext x
     exact ⟨fun h ↦ (Submodule.mem_bot k).2 (Subtype.ext ((Submodule.mem_bot k).1 h)),
-      fun h ↦ by rw [(Submodule.mem_bot k).1 h]; exact zero_mem _⟩
-
-theorem subquotientBotLinearEquiv_apply (S : Subrepresentation ρ) (w : W) (x) :
-    subquotientBotLinearEquiv S (S.subquotient ⊥ w x) =
-      S.toRepresentation w (subquotientBotLinearEquiv S x) := by
-  induction x using Submodule.Quotient.induction_on with
-  | H x => rfl
+      fun h ↦ by rw [(Submodule.mem_bot k).1 h]; exact zero_mem _⟩) fun w ↦
+    Submodule.linearMap_qext _ (LinearMap.ext fun _ ↦ rfl)
 
 theorem detCharacter_subquotient_bot (S : Subrepresentation ρ) :
     (S.subquotient ⊥).detCharacter = S.toRepresentation.detCharacter :=
-  (Representation.detCharacter_eq_of_linearEquiv (subquotientBotLinearEquiv S)
-    (subquotientBotLinearEquiv_apply S)).symm
+  (subquotientBotEquiv S).detCharacter_eq.symm
 
 /-- **Schur's lemma** on a subquotient: over an algebraically closed field, an endomorphism that
 commutes with the action and preserves `U` and `S` acts on an irreducible subquotient `S ⧸ U` by a
