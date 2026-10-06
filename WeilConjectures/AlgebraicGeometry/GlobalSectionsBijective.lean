@@ -32,6 +32,8 @@ connected `X` over a separably closed field.
 
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.Modules.finrankH_unit_zero`: `h⁰(X, 𝒪_X) = 1` when
+  `H⁰(X, 𝒪_X) = k`.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyConnected`: a proper,
   geometrically connected and geometrically reduced `k`-scheme has `H⁰(X, 𝒪_X) = k`.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyIntegral` and
@@ -130,5 +132,31 @@ theorem GlobalSectionsBijective.isIso_appTop_pullback_snd [CompactSpace X]
   have : IsIso (X ↘ Spec (.of k)).appTop :=
     IsIso.of_isIso_comp_left (Scheme.ΓSpecIso (.of k)).inv _
   exact (isPushout_appTop_of_flat fU (X ↘ Spec (.of k))).isIso_inr_of_isIso
+
+/-- A `k`-scheme with `H⁰(X, 𝒪_X) = k` is nonempty, since the ring of global functions of the
+empty scheme is zero. -/
+theorem GlobalSectionsBijective.nonempty [GlobalSectionsBijective k X] : Nonempty X := by
+  by_contra h
+  have : IsEmpty X := not_nonempty_iff.mp h
+  exact one_ne_zero
+    ((GlobalSectionsBijective.bijective_globalSectionsRingHom (k := k) (X := X)).1
+      (Subsingleton.elim _ _))
+
+/-- **`h⁰(X, 𝒪_X) = 1`** for a `k`-scheme `X` with `H⁰(X, 𝒪_X) = k`, using
+`H⁰(X, 𝒪_X) = Γ(X, 𝒪_X)`. -/
+theorem Modules.finrankH_unit_zero [GlobalSectionsBijective k X] :
+    Modules.finrankH (X := X) k (SheafOfModules.unit X.ringCatSheaf) 0 = 1 := by
+  let φ := RingEquiv.ofBijective (globalSectionsRingHom k (X := X))
+    GlobalSectionsBijective.bijective_globalSectionsRingHom
+  let O : X.Modules := SheafOfModules.unit X.ringCatSheaf
+  let e : O.H 0 ≃ₗ[k] k :=
+    { (Modules.H.zeroLinearEquiv O).toAddEquiv.trans φ.symm.toAddEquiv with
+      map_smul' c x := by
+        change φ.symm (Modules.H.zeroLinearEquiv O (globalSectionsRingHom k (X := X) c • x)) =
+          c • _
+        rw [LinearEquiv.map_smul]
+        exact (map_mul φ.symm (φ c) (Modules.H.zeroLinearEquiv O x : Γ(X, ⊤))).trans
+          (congrArg (· * _) (φ.symm_apply_apply c)) }
+  exact e.finrank_eq.trans (Module.finrank_self k)
 
 end AlgebraicGeometry.Scheme

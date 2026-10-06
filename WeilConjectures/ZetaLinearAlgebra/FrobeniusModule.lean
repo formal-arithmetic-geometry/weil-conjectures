@@ -5,8 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import Mathlib.LinearAlgebra.Eigenspace.Basic
+public import Mathlib.LinearAlgebra.Eigenspace.Charpoly
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 
 /-!
@@ -42,11 +43,14 @@ reversed characteristic polynomial, for an integral weight and with the normaliz
 - `FrobeniusModule.tateTwist`: the Tate twist `M(n)`, rescaling the Frobenius by `q ^ (-n)`.
 - `FrobeniusModule.dual`: the dual `M^∨` with the inverse transpose of the Frobenius.
 - `FrobeniusModule.IsPureOfWeight.tateTwist`: the twist by `n` lowers the weight by `2 n`.
+- `FrobeniusModule.prod`: the direct sum `M ⊕ N`.
+- `FrobeniusModule.IsPureOfWeight.isReal_prod_rescale_dual`: for `M` pure of weight `w` and
+  `ι c = q ^ w`, the sum `M ⊕ M^∨(c)` is `ι`-real.
 -/
 
 @[expose] public section
 
-universe u v
+universe u v t
 
 /-- A *Frobenius module* over a field `K`: a finite-dimensional `K`-vector space together with
 an automorphism, the geometric Frobenius. -/
@@ -239,5 +243,155 @@ lemma dual_frobenius_comp_frobenius (M : FrobeniusModule.{u, v} K)
     (M.dual.frobenius f : Module.Dual K M.carrier) ∘ₗ M.frobenius.toLinearMap = f := by
   ext
   simp
+
+section Realization
+
+open Polynomial
+
+/-- The direct sum `M ⊕ N` of two Frobenius modules, with the Frobenius acting diagonally. -/
+noncomputable def prod (M : FrobeniusModule.{u, v} K) (N : FrobeniusModule.{t, v} K) :
+    FrobeniusModule.{max u t, v} K where
+  carrier := M.carrier × N.carrier
+  frobenius := M.frobenius.prodCongr N.frobenius
+
+/-- The local polynomial of a direct sum is the product of the local polynomials. -/
+theorem localPolynomial_prod (M : FrobeniusModule.{u, v} K) (N : FrobeniusModule.{t, v} K) :
+    (M.prod N).localPolynomial = M.localPolynomial * N.localPolynomial := by
+  rw [localPolynomial, localPolynomial, localPolynomial, LinearMap.charpolyRev_def,
+    LinearMap.charpolyRev_def, LinearMap.charpolyRev_def, ← Polynomial.reverse_mul_of_domain,
+    ← LinearMap.charpoly_prodMap]
+  rfl
+
+/-- Isomorphic Frobenius modules have the same local polynomial. -/
+theorem Equiv.localPolynomial_eq {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) :
+    M.localPolynomial = N.localPolynomial := by
+  have h : N.frobeniusEnd = e.toLinearEquiv.conj M.frobeniusEnd := by
+    refine LinearMap.ext fun y ↦ ?_
+    obtain ⟨x, rfl⟩ := e.toLinearEquiv.surjective y
+    simp [LinearEquiv.conj_apply, frobeniusEnd, e.map_frobenius]
+  rw [localPolynomial, localPolynomial, LinearMap.charpolyRev_def, LinearMap.charpolyRev_def, h,
+    LinearEquiv.charpoly_conj]
+
+/-- An isomorphism of Frobenius modules is also one between their rescalings by `c`. -/
+noncomputable def Equiv.rescale {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) (c : K) :
+    (M.rescale c).Equiv (N.rescale c) where
+  toLinearEquiv := e.toLinearEquiv
+  map_frobenius x := by
+    change e.toLinearEquiv ((_ : K) • M.frobenius x) = (_ : K) • N.frobenius (e.toLinearEquiv x)
+    rw [map_smul, e.map_frobenius]
+
+/-- `ι`-reality only depends on the local polynomial. -/
+theorem IsReal.of_localPolynomial_eq {ι : K →+* ℂ} {M : FrobeniusModule.{u, v} K}
+    {N : FrobeniusModule.{t, v} K} (h : N.IsReal ι) (e : M.localPolynomial = N.localPolynomial) :
+    M.IsReal ι := by
+  rw [IsReal, e]
+  exact h
+
+/-- **A pure Frobenius module is realizable.** If `M` is `ι`-pure of weight `w` relative to `q`
+and `ι c = q ^ w`, then `M ⊕ M^∨(c)`, the sum of `M` and of its dual with the Frobenius rescaled
+by `c`, is `ι`-real. Over the algebraically closed field `K` the Frobenius `F` has eigenvalues
+`α₁, …, αₙ`; those of the second summand are the `c αᵢ⁻¹`, and
+`ι (c αᵢ⁻¹) = |ι αᵢ|² / ι αᵢ = conj (ι αᵢ)`. Hence the local polynomial of the sum is
+`Q · conj Q` for `Q = ∏ (1 - ι αᵢ T)`, which has real coefficients.
+(blueprint: `lem-wf-pure-realizable`) -/
+theorem IsPureOfWeight.isReal_prod_rescale_dual [IsAlgClosed K] {ι : K →+* ℂ} {q : ℕ}
+    (hq : 0 < q) {M : FrobeniusModule.{u, v} K} {w : ℝ} (h : M.IsPureOfWeight ι q w) {c : K}
+    (hc : ι c = (((q : ℝ) ^ w : ℝ) : ℂ)) :
+    (M.prod (M.dual.rescale c)).IsReal ι := by
+  classical
+  have hq0 : (0 : ℝ) < q := by exact_mod_cast hq
+  have hc0 : c ≠ 0 := by
+    rintro rfl
+    rw [map_zero, eq_comm, Complex.ofReal_eq_zero] at hc
+    exact (Real.rpow_pos_of_pos hq0 w).ne' hc
+  set F := M.frobeniusEnd with hF
+  set n := Module.finrank K M.carrier
+  -- the second summand has the reverse characteristic polynomial of `c F⁻¹`
+  set G : Module.End K M.carrier := c • M.frobenius.symm.toLinearMap
+  have hFG : F * G = c • 1 := by
+    ext x
+    simp [F, G, frobeniusEnd]
+  have hGdual : (M.dual.rescale c).localPolynomial = G.charpolyRev := by
+    rw [localPolynomial, LinearMap.charpolyRev_def, LinearMap.charpolyRev_def,
+      ← LinearMap.charpoly_dualMap G]
+    congr 2
+    refine LinearMap.ext fun (f : Module.Dual K M.carrier) ↦
+      (frobeniusEnd_rescale_apply (M := M.dual) hc0 f).trans ?_
+    refine LinearMap.ext fun x ↦ ?_
+    change c * f (M.frobenius.symm x) = f (c • M.frobenius.symm x)
+    rw [map_smul, smul_eq_mul]
+  have key := LinearMap.C_det_mul_charpolyRev hFG
+  -- the roots of the realized characteristic polynomial
+  set R : ℂ[X] := F.charpoly.map ι
+  set s := R.roots
+  have hsplit : F.charpoly.Splits := IsAlgClosed.splits _
+  have hRm : R.Monic := (LinearMap.charpoly_monic F).map ι
+  have hRs : R.Splits := IsAlgClosed.splits _
+  have hR : R = (s.map fun z ↦ X - C z).prod := by
+    simpa [hRm.leadingCoeff] using hRs.eq_prod_roots
+  have hroots : s = F.charpoly.roots.map ι := hsplit.roots_map ι
+  have hs : ∀ z ∈ s, z * (starRingEnd ℂ) z = ι c := by
+    intro z hz
+    rw [hroots, Multiset.mem_map] at hz
+    obtain ⟨α, hα, rfl⟩ := hz
+    have hev : F.HasEigenvalue α :=
+      (Module.End.hasEigenvalue_iff_isRoot_charpoly F α).2
+        (Polynomial.isRoot_of_mem_roots hα)
+    have hn := h α hev
+    rw [Complex.mul_conj, Complex.normSq_eq_norm_sq, hn, hc, ← Real.rpow_natCast,
+      ← Real.rpow_mul hq0.le]
+    norm_num
+  have hcard : s.card = n := by
+    rw [← hRs.natDegree_eq_card_roots, Polynomial.natDegree_map, LinearMap.charpoly_natDegree]
+  have hdet : ι F.det = s.prod := by
+    rw [LinearMap.det_eq_sign_charpoly_coeff, map_mul, map_pow, map_neg, map_one,
+      ← Polynomial.coeff_map, hRs.coeff_zero_eq_prod_roots_of_monic hRm,
+      hRs.natDegree_eq_card_roots, hcard, ← mul_assoc, ← mul_pow, neg_one_mul, neg_neg,
+      one_pow, one_mul]
+  have hrev (t : Multiset ℂ) :
+      ((t.map fun z ↦ X - C z).prod).reverse = (t.map fun z ↦ 1 - C z * X).prod := by
+    induction t using Multiset.induction_on with
+    | empty => simpa using reverse_C (1 : ℂ)
+    | cons a t ih =>
+      have hX : (X : ℂ[X]).reverse = 1 := by rw [← one_mul X, reverse_mul_X, ← C_1, reverse_C]
+      rw [Multiset.map_cons, Multiset.prod_cons, reverse_mul_of_domain, ih, Multiset.map_cons,
+        Multiset.prod_cons, sub_eq_add_neg, ← C_neg, reverse_add_C, hX]
+      simp [sub_eq_add_neg]
+  have hQ : M.localPolynomial.map ι = (s.map fun z ↦ 1 - C z * X).prod := by
+    rw [localPolynomial, LinearMap.charpolyRev_def, ← hrev, ← hR]
+    simp only [R, F, reverse, reflect_map, natDegree_map]
+  have hdet0 : s.prod ≠ 0 := by
+    rw [← hdet]
+    exact (map_ne_zero ι).2 (LinearEquiv.isUnit_det' M.frobenius).ne_zero
+  have hcomp : R.comp (C (ι c) * X) = C ((-1) ^ n * s.prod) *
+      (s.map fun z ↦ 1 - C ((starRingEnd ℂ) z) * X).prod := by
+    have hfac : ∀ z ∈ s, (X - C z).comp (C (ι c) * X) =
+        C (-z) * (1 - C ((starRingEnd ℂ) z) * X) := by
+      intro z hz
+      rw [← hs z hz]
+      simp only [sub_comp, X_comp, C_comp, C_neg, C_mul]
+      ring
+    rw [hR, multiset_prod_comp, Multiset.map_map, Function.comp_def, Multiset.map_congr rfl hfac,
+      Multiset.prod_map_mul, ← hcard, ← Multiset.prod_map_neg, map_multiset_prod, Multiset.map_map]
+    rfl
+  have hQ' : (M.dual.rescale c).localPolynomial.map ι =
+      (s.map fun z ↦ 1 - C ((starRingEnd ℂ) z) * X).prod := by
+    have hkey := congrArg (Polynomial.map ι) key
+    rw [Polynomial.map_mul, Polynomial.map_mul, map_C, map_C, Polynomial.map_comp,
+      Polynomial.map_mul, map_C, map_X, hcomp, hdet, ← mul_assoc, ← C_mul, map_pow, map_neg,
+      map_one, ← mul_assoc, ← mul_pow, neg_one_mul, neg_neg, one_pow, one_mul] at hkey
+    rw [hGdual]
+    exact mul_left_cancel₀ (C_ne_zero.2 hdet0) hkey
+  intro k
+  rw [localPolynomial_prod, ← Polynomial.coeff_map, Polynomial.map_mul, hQ, hQ']
+  set A := (s.map fun z ↦ 1 - C z * X).prod
+  have hB : (s.map fun z ↦ 1 - C ((starRingEnd ℂ) z) * X).prod = A.map (starRingEnd ℂ) := by
+    simp [A, Polynomial.map_multiset_prod, Multiset.map_map]
+  rw [hB, ← Polynomial.coeff_map (starRingEnd ℂ), Polynomial.map_mul, Polynomial.map_map]
+  have hcc : (starRingEnd ℂ).comp (starRingEnd ℂ) = RingHom.id ℂ :=
+    RingHom.ext Complex.conj_conj
+  rw [hcc, Polynomial.map_id, mul_comm]
+
+end Realization
 
 end FrobeniusModule

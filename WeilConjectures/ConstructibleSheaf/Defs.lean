@@ -154,6 +154,15 @@ lemma _root_.CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf
   have : etalePrecoverage.{u}.HasIsos := inferInstanceAs (precoverage @Etale).HasIsos
   ⟨⟨⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ F.isConstant_over _⟩⟩⟩
 
+/-- A sheaf `F` on the small étale site of `X` is an *irreducible local system* if it is locally
+constant and nonzero, and every locally constant subsheaf of `F` is zero or all of `F`. For a
+lisse sheaf on a connected scheme this says that the corresponding representation of the étale
+fundamental group is irreducible. -/
+def IsIrreducibleLocalSystem (F : Sheaf X.smallEtaleTopology A) : Prop :=
+  IsLocallyConstantSheaf F ∧ ¬ IsZero F ∧
+    ∀ (G : Sheaf X.smallEtaleTopology A) (ι : G ⟶ F), Mono ι → IsLocallyConstantSheaf G →
+      IsZero G ∨ IsIso ι
+
 end LocallyConstant
 
 section FiniteSheaf
