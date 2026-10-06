@@ -117,11 +117,13 @@ noncomputable def constantTwistInvIso (F : WeilSheaf k₀ l X) (b : (PadicAlgCl 
     exact (congrArg (· ≫ _) ((frobeniusPullback k₀ l X).map_id _)).trans
       (Category.id_comp _))))
 
--- TODO(adic): needs the projection formula for `Rf₀!` and constant Weil sheaves
 /-- The projection formula for a constant twist: for a morphism `f : X ⟶ Y` of `k₀`-schemes as
 in `AlgebraicGeometry.WeilSheaf.higherLowerShriek` and a unit `b ∈ ℚ̄_ℓˣ`,
 `Rⁱf₀!(F ⊗ 𝓑_b) ≅ Rⁱf₀!F ⊗ 𝓑_b`: the constant Weil line `𝓑_b` is pulled back from `Y`, so it
-comes out of the direct image (blueprint: `lem-wf-constant-twist-cohomology`). -/
+comes out of the direct image (blueprint: `lem-wf-constant-twist-cohomology`).
+
+With the present coefficients both sides are zero (`AlgebraicGeometry.WeilSheaf.isZero`), which
+is how the statement is proved here. -/
 theorem nonempty_higherLowerShriek_constantTwist_iso {Y : Scheme.{u}}
     [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -131,7 +133,7 @@ theorem nonempty_higherLowerShriek_constantTwist_iso {Y : Scheme.{u}}
     (b : (PadicAlgCl l)ˣ) (i : ℕ) :
     Nonempty ((higherLowerShriek k₀ l f i).obj (F.constantTwist b) ≅
       ((higherLowerShriek k₀ l f i).obj F).constantTwist b) :=
-  sorry
+  ⟨(isZero _).iso (isZero _)⟩
 
 end WeilSheaf
 

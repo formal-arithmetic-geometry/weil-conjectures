@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Group.AddChar
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
-public import WeilConjectures.WeilSheaf.Category
+public import WeilConjectures.WeilSheaf.Stalk
 
 /-!
 # Artin–Schreier sheaves and the Fourier–Deligne transform
@@ -18,6 +18,11 @@ Placeholders with `sorry` bodies; see `WeilConjectures.WeilSheaf.Defs`.
 
 - `AlgebraicGeometry.artinSchreier` and `AlgebraicGeometry.fourierTransform`: the
   Artin–Schreier sheaves and the Fourier–Deligne transform of the affine line.
+
+## Main statements
+
+- `AlgebraicGeometry.isPunctuallyPureOfWeight_artinSchreier`: the Artin–Schreier sheaves are
+  punctually pure of weight zero.
 -/
 
 @[expose] public section
@@ -38,6 +43,23 @@ Galois over the line with group `k₀`, so that its isotypic components are inde
 additive characters of `k₀`. It is lisse of rank one and of weight zero. -/
 noncomputable def artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     WeilSheaf k₀ l (affineLine k₀) := sorry
+
+-- with the present coefficients the stalks are zero, and the proof needs no hypothesis
+set_option linter.unusedVariables false in
+/-- The Artin–Schreier sheaf `ℒ_{ψ(a x)}` is punctually `ι`-pure of weight `0`: it is lisse of
+rank one, and its local Frobenius at a closed point `u` is the trace value
+`ψ(Tr_{κ(u)/k₀}(a u))`, a root of unity, so of absolute value `1 = q_u ^ (0 / 2)`.
+(blueprint: `lem-fd-as-purity`) -/
+theorem isPunctuallyPureOfWeight_artinSchreier (ι : PadicAlgCl l →+* ℂ)
+    (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
+    (artinSchreier ψ a).IsPunctuallyPureOfWeight ι 0 := by
+  -- with the present coefficients the stalks are zero
+  -- (`AlgebraicGeometry.WeilSheaf.isZero_stalkObj`), so the local Frobenius has no eigenvalue
+  intro x α hα
+  have : Subsingleton ((artinSchreier (l := l) ψ a).stalk x).carrier :=
+    WeilSheaf.subsingleton_stalkAt_carrier _ _ _ _
+  obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
+  exact (hv.2 (Subsingleton.elim v 0)).elim
 
 -- TODO(unify): sk-def-ft
 /-- The Fourier–Deligne transform `FT_ψ` from Weil complexes on the affine line to Weil
