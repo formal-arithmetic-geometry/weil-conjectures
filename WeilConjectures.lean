@@ -163,6 +163,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import WeilConjectures.Mathlib.Algebra.Lie.LieTheorem
+public import WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Defs
 public import WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Lemmas
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
 public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
@@ -215,6 +217,7 @@ public import WeilConjectures.Mathlib.GroupTheory.SemidirectProduct
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
+public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter

@@ -55,7 +55,31 @@ vectors, so the arithmetic and the geometric Frobenius give the same statement. 
 theorem eq_zero_of_mem_tateModule_of_forall_fixed {l : ℕ} [Fact l.Prime] {M : Type*}
     [AddCommGroup M] (s : M ≃+ M) (hfin : {x : M | s x = x}.Finite) {t : ℕ → M}
     (ht : t ∈ tateModule l M) (hst : ∀ n, s (t n) = t n) : t = 0 := by
-  sorry
+  -- The fixed subgroup `M^σ` is finite; let `N` be its order.
+  let H : AddSubgroup M := AddMonoidHom.eqLocus s.toAddMonoidHom (AddMonoidHom.id M)
+  have : Finite H := hfin.to_subtype
+  set N := Nat.card H
+  have hN : 0 < N := Nat.card_pos
+  let t' : tateModule l M := ⟨t, ht⟩
+  funext n
+  -- The coordinate `t (n + N)` is killed by `ℓ ^ (n + N)` and lies in `M^σ`, so its order is a
+  -- power `ℓ ^ j` of `ℓ` dividing `N`; then `j < ℓ ^ j ≤ N`.
+  have hx : t (n + N) ∈ H := hst (n + N)
+  obtain ⟨j, -, hj⟩ := (Nat.dvd_prime_pow (Fact.out : l.Prime)).mp <|
+    addOrderOf_dvd_of_nsmul_eq_zero (x := t (n + N)) (n := l ^ (n + N)) <| by
+      have := tateModule.pow_zsmul_coe t' (n + N)
+      exact_mod_cast this
+  have hjN : l ^ j ∣ N := by
+    rw [← hj, ← AddSubgroup.addOrderOf_mk _ hx]
+    exact addOrderOf_dvd_natCard _
+  have hjle : j ≤ N :=
+    ((Nat.lt_pow_self (Fact.out : l.Prime).one_lt).trans_le (Nat.le_of_dvd hN hjN)).le
+  -- Hence `t n = ℓ ^ N • t (n + N) = 0`.
+  have hkill : l ^ N • t (n + N) = 0 := by
+    rw [← addOrderOf_dvd_iff_nsmul_eq_zero, hj]
+    exact pow_dvd_pow l hjle
+  calc t n = (l : ℤ) ^ N • t (n + N) := (tateModule.pow_zsmul_coe_add t' n N).symm
+    _ = 0 := by exact_mod_cast hkill
 
 end AddCommGroup
 

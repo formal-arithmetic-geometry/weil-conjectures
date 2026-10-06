@@ -144,6 +144,14 @@ noncomputable instance instModule : Module ℤ_[ℓ] (tateModule ℓ M) where
     rw [coe_smul_apply, appr_zsmul_coe_eq t 0 (x := 0) (by rw [Int.cast_zero, map_zero]), zero_smul]
     simp
 
+omit [Fact ℓ.Prime] in
+/-- The coordinates of an element of the Tate module are related by `ℓ ^ k • t (n + k) = t n`. -/
+theorem pow_zsmul_coe_add (t : tateModule ℓ M) (n k : ℕ) :
+    (ℓ : ℤ) ^ k • (t : ∀ _ : ℕ, M) (n + k) = (t : ∀ _ : ℕ, M) n := by
+  induction k with
+  | zero => simp
+  | succ k ih => rw [pow_succ', mul_smul, smul_comm, ← add_assoc, zsmul_coe_succ, ih]
+
 end tateModule
 
 /-- Blueprint `sk-d-ab-tate`: Integral and rational Tate modules.
