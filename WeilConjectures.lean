@@ -758,6 +758,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverFiel
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Induction
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
@@ -771,10 +772,12 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.SixFunctors.Finite.Stalk
+public import WeilConjectures.SixFunctors.Integral.Exact
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.OpenClosed.AxiomCensus
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
