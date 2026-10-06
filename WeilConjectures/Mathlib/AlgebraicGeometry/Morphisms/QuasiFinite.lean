@@ -19,13 +19,15 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
   preserves the dimension.
 - `AlgebraicGeometry.Scheme.Hom.finite_preimage_singleton_of_isFinite_morphismRestrict`: a
   morphism that is finite over an open `U` has finite fibres over the points of `U`.
+- `AlgebraicGeometry.LocallyQuasiFinite.of_isPullback_of_surjective`: local quasi-finiteness of
+  a quasi-compact morphism locally of finite type descends along surjective base changes.
 -/
 
 @[expose] public section
 
 universe u
 
-open Topology
+open CategoryTheory Limits Topology
 
 namespace AlgebraicGeometry
 
@@ -57,5 +59,22 @@ lemma Scheme.Hom.finite_preimage_singleton_of_isFinite_morphismRestrict (f : X �
   intro x hx
   refine ⟨⟨x, by simp_all⟩, Subtype.ext ?_, rfl⟩
   simpa [← Scheme.Hom.comp_apply, -Scheme.Hom.comp_base] using hx
+
+/-- **Quasi-finiteness descends along surjective base changes.** Let `f : X ⟶ Z` be quasi-compact
+and locally of finite type, and let `snd : P ⟶ Y` be its base change along a surjective
+`g : Y ⟶ Z`. If `snd` is locally quasi-finite, so is `f`: every fibre of `f` is the image of a
+fibre of `snd`, which is finite. The hypothesis `QuasiCompact f` is only a convenience, used to
+get finite fibres of `snd`; the statement also holds without it. -/
+lemma LocallyQuasiFinite.of_isPullback_of_surjective {P Z : Scheme.{u}} {fst : P ⟶ X}
+    {snd : P ⟶ Y} {f : X ⟶ Z} {g : Y ⟶ Z} (h : IsPullback fst snd f g) [Surjective g]
+    [LocallyQuasiFinite snd] [QuasiCompact f] [LocallyOfFiniteType f] : LocallyQuasiFinite f := by
+  have : QuasiCompact snd := MorphismProperty.of_isPullback h ‹_›
+  refine .of_finite_preimage_singleton f fun z ↦ ?_
+  obtain ⟨y, rfl⟩ := g.surjective z
+  refine ((snd.finite_preimage_singleton y).image fst).subset fun x hx ↦ ?_
+  obtain ⟨w, hw₁, hw₂⟩ := Scheme.Pullback.exists_preimage_pullback (f := f) (g := g) x y hx
+  refine ⟨h.isoPullback.inv w, ?_, ?_⟩
+  · simp [← Scheme.Hom.comp_apply, -Scheme.Hom.comp_base, hw₂]
+  · simp [← Scheme.Hom.comp_apply, -Scheme.Hom.comp_base, hw₁]
 
 end AlgebraicGeometry

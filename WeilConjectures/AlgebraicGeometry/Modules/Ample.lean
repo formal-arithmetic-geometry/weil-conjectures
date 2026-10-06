@@ -59,10 +59,13 @@ leading coefficient whenever that function is a numerical polynomial of degree a
   invertible module on a connected noetherian scheme of dimension `0` has degree `0`.
 - `AlgebraicGeometry.IsAmple.pullback`: the restriction of an ample module to a closed subscheme
   is ample.
+- `AlgebraicGeometry.IsAmple.tensorPow`: positive tensor powers of an ample module are ample.
 - `AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace`: an ample invertible
   module on a connected proper curve has positive degree.
 - `AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`: an ample invertible module on a proper
   curve has positive degree.
+- `AlgebraicGeometry.IsAmple.isEmpty_tensorPow_iso_unit`: no positive tensor power of an ample
+  invertible module on a proper curve is trivial.
 - `AlgebraicGeometry.Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow`: twisting the
   Hilbert function by a coherent module of generic rank `r` multiplies the degree by `r`.
 - `AlgebraicGeometry.Scheme.Hom.degree_pullback`: the degree multiplies by the degree of the
@@ -209,6 +212,16 @@ theorem IsAmple.pullback {Z : Scheme.{u}} {f : X ⟶ Spec (.of K)} {L : X.Module
     IsAmple (i ≫ f) ((Scheme.Modules.pullback i).obj L) :=
   sorry
 
+/-- **Positive tensor powers of an ample module are ample.** If `L^{⊗ m}` is the pullback of
+`𝒪(1)` along a closed immersion `j : X ⟶ ℙ(n; K)`, then `(L^{⊗ k})^{⊗ m} ≅ (L^{⊗ m})^{⊗ k}` is
+the pullback of `𝒪(k)`, that is of `𝒪(1)` along the composite of `j` with the `k`-uple Veronese
+embedding, which is again a closed immersion (Hartshorne, Exercise II.5.13).
+
+This is used in the proof of blueprint `lem-sc-mult-n-finite-kernel`. -/
+theorem IsAmple.tensorPow {f : X ⟶ Spec (.of K)} {L : X.Modules} (hL : IsAmple f L) {k : ℕ}
+    (hk : 0 < k) : IsAmple f (L.tensorPow k) :=
+  sorry
+
 /-- **An ample module on a connected proper curve has positive degree.** Let `K` be
 algebraically closed, `X` a connected proper curve over `K` and `L` an ample invertible
 `𝒪_X`-module. Then `deg L = χ(L) - χ(𝒪_X) > 0`.
@@ -302,6 +315,23 @@ theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)
   have := topologicalKrullDim_zero_of_discreteTopology X
   rw [hdim] at this
   exact absurd this (by decide)
+
+/-- **No positive tensor power of an ample module on a proper curve is trivial.** Let `K` be
+algebraically closed, `X` a proper curve over `K` and `L` an ample invertible `𝒪_X`-module. For
+`0 < k` the module `L^{⊗ k}` is again ample (`AlgebraicGeometry.IsAmple.tensorPow`), so it has
+positive degree (`AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`), whereas `𝒪_X` has degree
+`0`.
+
+This is used in the proof of blueprint `lem-sc-mult-n-finite-kernel`. -/
+theorem IsAmple.isEmpty_tensorPow_iso_unit [IsAlgClosed K] {f : X ⟶ Spec (.of K)} [IsProper f]
+    (hdim : topologicalKrullDim X = 1) {L : X.Modules} [L.IsInvertible] (hL : IsAmple f L)
+    {k : ℕ} (hk : 0 < k) : IsEmpty (L.tensorPow k ≅ 𝟙_ X.Modules) := by
+  let : X.Over (Spec (.of K)) := ⟨f⟩
+  refine ⟨fun e ↦ ?_⟩
+  have := f.degree_pos_of_isAmple hdim _ (hL.tensorPow hk)
+  rw [Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one f hdim,
+    Scheme.Modules.degree_congr K e] at this
+  exact this.ne' (Scheme.Modules.degree_unit K)
 
 open scoped fwdDiff in
 /-- **The leading coefficient of a twisted Hilbert function only depends on the generic rank.**
