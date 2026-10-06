@@ -18,6 +18,8 @@ For a monic polynomial `f : R[X]` of nonzero degree, `R[X]/(f)` is a free `R`-mo
 
 - `AdjoinRoot.faithfullyFlat_of_monic`: `R[X]/(f)` is faithfully flat over `R` for `f` monic of
   nonzero degree.
+- `Module.Flat.of_flat_of_faithfullyFlat`: flatness over `A` descends along a faithfully flat
+  `B`-algebra `C`.
 -/
 
 @[expose] public section
@@ -44,3 +46,37 @@ theorem faithfullyFlat_of_monic {f : R[X]} (hf : f.Monic) (hdeg : f.degree ≠ 0
   infer_instance
 
 end AdjoinRoot
+
+namespace Module.Flat
+
+/-- **Flatness descends along faithfully flat algebras.** If `C` is faithfully flat over `B` and
+flat over `A`, then `B` is flat over `A`: for an injection `N ⟶ P` of `A`-modules, the map
+`B ⊗ N ⟶ B ⊗ P` becomes, after `C ⊗_B -`, the injective map `C ⊗ N ⟶ C ⊗ P`. -/
+theorem of_flat_of_faithfullyFlat {A B C : Type*} [CommRing A] [CommRing B]
+    [CommRing C] [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C]
+    [Module.FaithfullyFlat B C] [Module.Flat A C] : Module.Flat A B := by
+  rw [Module.Flat.iff_lTensor_preserves_injective_linearMap]
+  intro N P _ _ _ _ f hf
+  change Function.Injective (f.baseChange B)
+  rw [← Module.FaithfullyFlat.lTensor_injective_iff_injective B C]
+  have : ⇑((f.baseChange B).lTensor C) =
+      ⇑(TensorProduct.AlgebraTensorModule.cancelBaseChange A B B C P).symm ∘
+        ⇑(f.lTensor C) ∘ ⇑(TensorProduct.AlgebraTensorModule.cancelBaseChange A B B C N) := by
+    funext x
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul c y =>
+      induction y using TensorProduct.induction_on with
+      | zero => simp
+      | tmul b n =>
+        simp only [Function.comp_apply, LinearMap.lTensor_tmul, LinearMap.baseChange_tmul,
+          TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul,
+          TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul]
+        rw [TensorProduct.smul_tmul, TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+      | add y z hy hz => simp_all [TensorProduct.tmul_add]
+    | add x y hx hy => simp_all
+  rw [this]
+  exact (LinearEquiv.injective _).comp
+    ((Module.Flat.lTensor_preserves_injective_linearMap f hf).comp (LinearEquiv.injective _))
+
+end Module.Flat

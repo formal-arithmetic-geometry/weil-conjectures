@@ -11,12 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.Curve
 
 /-!
-# Coherent cohomology of the projective line and the canonical sheaf of a curve
+# Coherent cohomology of the projective line and of smooth projective curves
 
 Let `k` be a field and `ℙ¹_k = ProjectiveLine (Spec k)`. This file records the cohomology of the
 twisting sheaves `𝒪(d)` on `ℙ¹_k`, the vanishing of the cohomology of quasi-coherent sheaves on
 `ℙ¹_k` in degrees `≥ 2`, the finiteness of the cohomology of coherent sheaves on `ℙ¹_k`, and the
-invertibility of the canonical sheaf `Ω¹_{C/k}` of a smooth curve.
+finiteness of the cohomology of coherent sheaves on a smooth projective curve.
 
 The twisting sheaves are `AlgebraicGeometry.ProjectiveSpace.twist`, which exist and are
 invertible by `AlgebraicGeometry.ProjectiveSpace.isInvertible_twist` (blueprint
@@ -34,8 +34,6 @@ Serre's computation of the cohomology of `ℙᵈ_k`, `sk-thm-picard-pn`.
 - `AlgebraicGeometry.ProjectiveLine.subsingleton_H_of_two_le`: `H^q(ℙ¹_k, ℱ) = 0` for `q ≥ 2`.
 - `AlgebraicGeometry.ProjectiveLine.finiteDimensional_H`: `H⁰` and `H¹` of a coherent sheaf on
   `ℙ¹_k` are finite-dimensional.
-- `AlgebraicGeometry.isInvertible_relativeDifferentials`: the canonical sheaf of a smooth curve
-  is invertible.
 - `AlgebraicGeometry.finiteDimensional_H_of_isCurve`: the cohomology of a coherent sheaf on a
   smooth projective curve over an algebraically closed field is finite-dimensional, and vanishes
   in degrees `≥ 2`.
@@ -171,17 +169,6 @@ theorem finiteDimensional_H (ℱ : (ProjectiveLine (Spec (.of k))).Modules)
   sorry
 
 end ProjectiveLine
-
-/-- **The canonical sheaf of a smooth curve is a line bundle.** Let `C` be a smooth curve over
-`k` of relative dimension one. Then `ω_C = Ω¹_{C/k}` is an invertible `𝒪_C`-module: locally
-`C = Spec A` with `A` a smooth `k`-algebra of dimension one, and by the Jacobian criterion
-`Ω_{A/k}` is projective of rank one.
-
-(blueprint: `lem-sc-canonical-sheaf`) -/
-theorem isInvertible_relativeDifferentials {k : Type u} [Field k] {C : Scheme.{u}}
-    (f : C ⟶ Spec (.of k)) [IsCurve f] [SmoothOfRelativeDimension 1 f] :
-    f.relativeDifferentials.IsInvertible :=
-  sorry
 
 /-- **Coherent cohomology of a smooth projective curve over an algebraically closed field.** Let
 `k` be algebraically closed, `X` a smooth projective curve over `k` (an integral scheme of
