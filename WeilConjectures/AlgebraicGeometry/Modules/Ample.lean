@@ -19,7 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SegreTwist
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 /-!
@@ -59,10 +59,15 @@ leading coefficient whenever that function is a numerical polynomial of degree a
   invertible module on a connected noetherian scheme of dimension `0` has degree `0`.
 - `AlgebraicGeometry.IsAmple.pullback`: the restriction of an ample module to a closed subscheme
   is ample.
+- `AlgebraicGeometry.IsAmple.tensorPow`: positive tensor powers of an ample module are ample.
+- `AlgebraicGeometry.IsVeryAmple.tensorObj`, `AlgebraicGeometry.IsAmple.tensorObj`: tensor
+  products of very ample, respectively ample, modules are very ample, respectively ample.
 - `AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace`: an ample invertible
   module on a connected proper curve has positive degree.
 - `AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`: an ample invertible module on a proper
   curve has positive degree.
+- `AlgebraicGeometry.IsAmple.isEmpty_tensorPow_iso_unit`: no positive tensor power of an ample
+  invertible module on a proper curve is trivial.
 - `AlgebraicGeometry.Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow`: twisting the
   Hilbert function by a coherent module of generic rank `r` multiplies the degree by `r`.
 - `AlgebraicGeometry.Scheme.Hom.degree_pullback`: the degree multiplies by the degree of the
@@ -99,6 +104,55 @@ lemma IsVeryAmple.isInvertible {S : Scheme.{u}} {f : X ⟶ S} {M : X.Modules}
     (h : IsVeryAmple f M) : M.IsInvertible := by
   obtain ⟨n, i, -, -, -, ⟨e⟩⟩ := h
   exact Scheme.Modules.IsInvertible.of_iso e
+
+/-- Very ampleness only depends on the isomorphism class of the module. -/
+lemma IsVeryAmple.of_iso {S : Scheme.{u}} {f : X ⟶ S} {M N : X.Modules} (h : IsVeryAmple f M)
+    (e : M ≅ N) : IsVeryAmple f N := by
+  obtain ⟨n, i, hn, hi, hif, ⟨e'⟩⟩ := h
+  exact ⟨n, i, hn, hi, hif, ⟨e' ≪≫ e⟩⟩
+
+/-- **The restriction of a very ample module to a closed subscheme is very ample**: if `M` is
+the pullback of `𝒪(1)` along a closed immersion `i`, then `g^* M` is its pullback along the
+closed immersion `g ≫ i`. -/
+lemma IsVeryAmple.pullback {S Z : Scheme.{u}} {f : X ⟶ S} {M : X.Modules} (h : IsVeryAmple f M)
+    (g : Z ⟶ X) [IsClosedImmersion g] :
+    IsVeryAmple (g ≫ f) ((Scheme.Modules.pullback g).obj M) := by
+  obtain ⟨n, i, hn, hi, hif, ⟨e⟩⟩ := h
+  exact ⟨n, g ≫ i, hn, inferInstance, by rw [Category.assoc, hif],
+    ⟨(Scheme.Modules.pullbackComp g i).symm.app _ ≪≫ (Scheme.Modules.pullback g).mapIso e⟩⟩
+
+/-- Blueprint `lem-chow-segre`: The Segre embedding is a closed immersion (the consequence that
+`𝒪(1) ⊠ 𝒪(1)` is very ample, recorded in its detailed form).
+
+**A tensor product of very ample modules is very ample.** If `M = i^* 𝒪(1)` and `N = j^* 𝒪(1)`
+for closed immersions `i : X ⟶ ℙ(n; S)` and `j : X ⟶ ℙ(m; S)` over `S`, then `M ⊗ N` is the
+pullback of `𝒪(1)` along the composite of the closed immersion `(i, j)` into
+`ℙ(n; S) ×_S ℙ(m; S)` with the Segre embedding into `ℙ(n × m; S)`. -/
+theorem IsVeryAmple.tensorObj {S : Scheme.{u}} {f : X ⟶ S} {M N : X.Modules}
+    (hM : IsVeryAmple f M) (hN : IsVeryAmple f N) : IsVeryAmple f (M ⊗ N) := by
+  obtain ⟨n, i, hn, hi, hif, ⟨e⟩⟩ := hM
+  obtain ⟨m, j, hm, hj, hjf, ⟨e'⟩⟩ := hN
+  let k : X ⟶ Limits.pullback (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S) := pullback.lift i j (hif.trans hjf.symm)
+  have : IsClosedImmersion (k ≫ pullback.fst _ _) := by rwa [pullback.lift_fst]
+  have : IsClosedImmersion k := IsClosedImmersion.of_comp k (pullback.fst _ _)
+  obtain ⟨t⟩ := ProjectiveSpace.nonempty_twistRestrict_segre_iso n m S
+  obtain ⟨u⟩ := Scheme.Modules.nonempty_pullback_tensorObj_iso k
+    (ProjectiveSpace.twistRestrict (pullback.fst (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S)) 1)
+    (ProjectiveSpace.twistRestrict (pullback.snd (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S)) 1)
+  refine ⟨n × m, k ≫ ProjectiveSpace.segre n m S, inferInstance, inferInstance,
+    by simp [k, hif], ⟨?_⟩⟩
+  exact (Scheme.Modules.pullbackComp k _).symm.app _ ≪≫ (Scheme.Modules.pullback k).mapIso t ≪≫
+    u ≪≫ (((Scheme.Modules.pullbackComp k _).app _ ≪≫
+        (Scheme.Modules.pullbackCongr (pullback.lift_fst _ _ _)).app _ ≪≫ e) ⊗ᵢ
+      ((Scheme.Modules.pullbackComp k _).app _ ≪≫
+        (Scheme.Modules.pullbackCongr (pullback.lift_snd _ _ _)).app _ ≪≫ e'))
+
+/-- **Positive tensor powers of a very ample module are very ample**, by
+`AlgebraicGeometry.IsVeryAmple.tensorObj`. -/
+theorem IsVeryAmple.tensorPow {S : Scheme.{u}} {f : X ⟶ S} {M : X.Modules}
+    (hM : IsVeryAmple f M) : ∀ {k : ℕ}, 0 < k → IsVeryAmple f (M.tensorPow k)
+  | 1, _ => hM.of_iso (ρ_ M).symm
+  | k + 2, _ => hM.tensorObj (hM.tensorPow (Nat.succ_pos k))
 
 /-- Blueprint `sk-def-av-ample-degree`: Ample modules and the Hilbert degree.
 
@@ -206,8 +260,34 @@ Section 28.26).
 This is used in the proof of blueprint `lem-sc-ample-positive-degree`. -/
 theorem IsAmple.pullback {Z : Scheme.{u}} {f : X ⟶ Spec (.of K)} {L : X.Modules}
     (hL : IsAmple f L) (i : Z ⟶ X) [IsClosedImmersion i] :
-    IsAmple (i ≫ f) ((Scheme.Modules.pullback i).obj L) :=
+    IsAmple (i ≫ f) ((Scheme.Modules.pullback i).obj L) := by
+  obtain ⟨m, hm, h⟩ := hL
+  exact ⟨m, hm, (h.pullback i).of_iso
+    (Scheme.Modules.nonempty_pullback_tensorPow_iso i L m).some⟩
+
+/-- **Positive tensor powers of an ample module are ample.** If `L^{⊗ m}` is the pullback of
+`𝒪(1)` along a closed immersion `j : X ⟶ ℙ(n; K)`, then `(L^{⊗ k})^{⊗ m} ≅ (L^{⊗ m})^{⊗ k}` is
+the pullback of `𝒪(k)`, that is of `𝒪(1)` along the composite of `j` with the `k`-uple Veronese
+embedding, which is again a closed immersion (Hartshorne, Exercise II.5.13).
+
+This is used in the proof of blueprint `lem-sc-mult-n-finite-kernel`. -/
+theorem IsAmple.tensorPow {f : X ⟶ Spec (.of K)} {L : X.Modules} (hL : IsAmple f L) {k : ℕ}
+    (hk : 0 < k) : IsAmple f (L.tensorPow k) :=
   sorry
+
+/-- Blueprint `lem-sc-ample-tensor`: Tensor products of ample modules.
+
+**A tensor product of ample modules is ample** (Stacks 0890). If `L^{⊗ a}` and `M^{⊗ b}` are
+very ample, then so are `(L^{⊗ a})^{⊗ b} ≅ L^{⊗ ab}` and `(M^{⊗ b})^{⊗ a} ≅ M^{⊗ ab}`, hence also
+their tensor product `(L ⊗ M)^{⊗ ab}`, by the Segre embedding
+(`AlgebraicGeometry.IsVeryAmple.tensorObj`). -/
+theorem IsAmple.tensorObj {f : X ⟶ Spec (.of K)} {L M : X.Modules} (hL : IsAmple f L)
+    (hM : IsAmple f M) : IsAmple f (L ⊗ M) := by
+  obtain ⟨a, ha, hLa⟩ := hL
+  obtain ⟨b, hb, hMb⟩ := hM
+  refine ⟨a * b, Nat.mul_pos ha hb, ((hLa.tensorPow hb).tensorObj (hMb.tensorPow ha)).of_iso ?_⟩
+  exact ((L.tensorPowMulIso a b).symm ⊗ᵢ ((M.tensorPowMulIso b a).symm ≪≫
+    eqToIso (congrArg M.tensorPow (Nat.mul_comm b a)))) ≪≫ (L.tensorPowTensorObjIso M _).symm
 
 /-- **An ample module on a connected proper curve has positive degree.** Let `K` be
 algebraically closed, `X` a connected proper curve over `K` and `L` an ample invertible
@@ -302,6 +382,23 @@ theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)
   have := topologicalKrullDim_zero_of_discreteTopology X
   rw [hdim] at this
   exact absurd this (by decide)
+
+/-- **No positive tensor power of an ample module on a proper curve is trivial.** Let `K` be
+algebraically closed, `X` a proper curve over `K` and `L` an ample invertible `𝒪_X`-module. For
+`0 < k` the module `L^{⊗ k}` is again ample (`AlgebraicGeometry.IsAmple.tensorPow`), so it has
+positive degree (`AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`), whereas `𝒪_X` has degree
+`0`.
+
+This is used in the proof of blueprint `lem-sc-mult-n-finite-kernel`. -/
+theorem IsAmple.isEmpty_tensorPow_iso_unit [IsAlgClosed K] {f : X ⟶ Spec (.of K)} [IsProper f]
+    (hdim : topologicalKrullDim X = 1) {L : X.Modules} [L.IsInvertible] (hL : IsAmple f L)
+    {k : ℕ} (hk : 0 < k) : IsEmpty (L.tensorPow k ≅ 𝟙_ X.Modules) := by
+  let : X.Over (Spec (.of K)) := ⟨f⟩
+  refine ⟨fun e ↦ ?_⟩
+  have := f.degree_pos_of_isAmple hdim _ (hL.tensorPow hk)
+  rw [Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one f hdim,
+    Scheme.Modules.degree_congr K e] at this
+  exact this.ne' (Scheme.Modules.degree_unit K)
 
 open scoped fwdDiff in
 /-- **The leading coefficient of a twisted Hilbert function only depends on the generic rank.**

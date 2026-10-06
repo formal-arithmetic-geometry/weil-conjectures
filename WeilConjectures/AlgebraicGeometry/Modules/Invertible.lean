@@ -24,6 +24,9 @@ An `𝒪_X`-module is *invertible* if it is locally isomorphic to `𝒪_X`.
 - `AlgebraicGeometry.Scheme.Modules.tensorObj`: the tensor product `M ⊗_{𝒪_X} N`, i.e. `M ⊗ N`,
   with scoped notation `M ⊗ₘ N`.
 - `AlgebraicGeometry.Scheme.Modules.tensorPow`: the tensor power `M^{⊗ n}`.
+- `AlgebraicGeometry.Scheme.Modules.tensorPowAddIso`,
+  `AlgebraicGeometry.Scheme.Modules.tensorPowMulIso`,
+  `AlgebraicGeometry.Scheme.Modules.tensorPowTensorObjIso`: the exponent laws for tensor powers.
 - `AlgebraicGeometry.Scheme.Modules.overPullback`: pullback along a morphism of schemes over a
   base.
 
@@ -132,6 +135,27 @@ lemma tensorPow_zero (M : X.Modules) : M.tensorPow 0 = 𝟙_ X.Modules :=
 
 lemma tensorPow_succ (M : X.Modules) (n : ℕ) : M.tensorPow (n + 1) = M ⊗ M.tensorPow n :=
   rfl
+
+/-- `M^{⊗ (a + b)} ≅ M^{⊗ a} ⊗ M^{⊗ b}`. -/
+noncomputable def tensorPowAddIso (M : X.Modules) :
+    ∀ a b : ℕ, M.tensorPow (a + b) ≅ M.tensorPow a ⊗ M.tensorPow b
+  | 0, b => eqToIso (congrArg M.tensorPow (Nat.zero_add b)) ≪≫ (λ_ _).symm
+  | a + 1, b => eqToIso (congrArg M.tensorPow (Nat.succ_add a b)) ≪≫
+      (Iso.refl M ⊗ᵢ tensorPowAddIso M a b) ≪≫ (α_ _ _ _).symm
+
+/-- `M^{⊗ (a * b)} ≅ (M^{⊗ a})^{⊗ b}`. -/
+noncomputable def tensorPowMulIso (M : X.Modules) (a : ℕ) :
+    ∀ b : ℕ, M.tensorPow (a * b) ≅ (M.tensorPow a).tensorPow b
+  | 0 => eqToIso (congrArg M.tensorPow (Nat.mul_zero a))
+  | b + 1 => eqToIso (congrArg M.tensorPow (by ring)) ≪≫ tensorPowAddIso M a (a * b) ≪≫
+      (Iso.refl _ ⊗ᵢ tensorPowMulIso M a b)
+
+/-- `(M ⊗ N)^{⊗ k} ≅ M^{⊗ k} ⊗ N^{⊗ k}`, using the symmetry of the tensor product. -/
+noncomputable def tensorPowTensorObjIso (M N : X.Modules) :
+    ∀ k : ℕ, (M ⊗ N).tensorPow k ≅ M.tensorPow k ⊗ N.tensorPow k
+  | 0 => (λ_ _).symm
+  | k + 1 => (Iso.refl _ ⊗ᵢ tensorPowTensorObjIso M N k) ≪≫
+      { hom := tensorμ _ _ _ _, inv := tensorδ _ _ _ _ }
 
 end Scheme.Modules
 

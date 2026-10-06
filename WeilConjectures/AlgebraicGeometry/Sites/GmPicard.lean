@@ -7,42 +7,97 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
+public import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # The Picard group as first étale cohomology of `𝔾ₘ`
 
-For a scheme `X` the isomorphism classes of invertible `𝒪_X`-modules are in bijection with the
-cohomological Picard group `H¹(X_ét, 𝔾ₘ)`.
+For a scheme `X` the isomorphism classes of invertible `𝒪_X`-modules, the Zariski cohomology
+`H¹(X_Zar, 𝒪_Xˣ)` and the étale cohomology `H¹(X_ét, 𝔾ₘ)` are in bijection (Hilbert 90).
+All three classify torsors: an invertible module `L` gives the `𝔾ₘ`-torsor `Isom(𝒪, L)`, and
+`H¹` of an abelian sheaf classifies its torsors.
+
+## Main definitions
+
+- `AlgebraicGeometry.Scheme.unitsSheaf`: the sheaf `𝒪_Xˣ` of units on the Zariski site.
 
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.nonempty_equiv_quotient_torsor`: invertible modules up to
+  isomorphism are in bijection with `𝔾ₘ`-torsors on `X_ét` and with `𝒪_Xˣ`-torsors on `X_Zar`.
+  The proof is `sorry`.
+- `AlgebraicGeometry.Scheme.nonempty_equiv_H_one_unitsSheaf`: Hilbert 90,
+  `Pic(X) ≃ H¹(X_Zar, 𝒪_Xˣ) ≃ H¹(X_ét, 𝔾ₘ)`.
 - `AlgebraicGeometry.Scheme.nonempty_equiv_cohomologicalPicardGroup`: there is a bijection
-  `Pic(X) ≃ H¹(X_ét, 𝔾ₘ)` (no canonical map yet).
+  `Pic(X) ≃ H¹(X_ét, 𝔾ₘ)`.
 
 ## TODO
 
-`AlgebraicGeometry.Scheme.Pic` carries no group structure yet, and the torsor classification
-(blueprint: `lem-sc-torsor-h1`) is not available, so the comparison is recorded as the existence
-of a bijection of sets. Replace it by the canonical additive equivalence `L ↦ [Isom(𝒪, L)]`,
-of type `≃+`, once both are available.
+`AlgebraicGeometry.Scheme.Pic` carries no group structure yet, and the torsor classification is
+recorded as the existence of bijections, so the comparisons are bijections of sets. Replace
+them by the canonical additive equivalences `L ↦ [Isom(𝒪, L)]`, of type `≃+`, once both are
+available.
 -/
 
 @[expose] public section
 
 universe u
 
+open CategoryTheory
+
 namespace AlgebraicGeometry.Scheme
 
+variable (X : Scheme.{u})
+
+/-- The sheaf `𝒪_Xˣ` of units of the structure sheaf on the Zariski site of `X`, written
+additively. It is a sheaf because the functor of units preserves limits. -/
+noncomputable def unitsSheaf : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} :=
+  ⟨X.sheaf.obj ⋙ CommRingCat.unitsAddCommGrp,
+    Presheaf.isSheaf_comp_of_isSheaf _ _ _ X.sheaf.property⟩
+
+/-- **Line bundles and `𝔾ₘ`-torsors.** For a scheme `X`, the isomorphism classes of invertible
+`𝒪_X`-modules are in bijection with the isomorphism classes of `𝔾ₘ`-torsors on the small étale
+site of `X`, and with the isomorphism classes of `𝒪_Xˣ`-torsors on the Zariski site. The
+canonical bijections send `L` to the torsor `Isom(𝒪, L)`; that the étale one is surjective is
+fpqc descent for invertible modules.
+
+Only the existence of the bijections is recorded. The proof is `sorry`. For `X = Spec K` with
+`K` a field, the descent step is proved in
+`AlgebraicGeometry.Scheme.exists_app_eq_of_app_etaleSpec_eq`.
+(blueprint: `lem-sc-line-bundle-torsor`) -/
+theorem nonempty_equiv_quotient_torsor :
+    Nonempty (X.Pic ≃ _root_.Quotient (Sheaf.Torsor.setoid (G := X.gmSheaf))) ∧
+      Nonempty (X.Pic ≃ _root_.Quotient (Sheaf.Torsor.setoid (G := X.unitsSheaf))) :=
+  sorry
+
+/-- **Hilbert 90 for a scheme.** For a scheme `X` there are bijections
+
+`{invertible 𝒪_X-modules}/≅ ≃ H¹(X_Zar, 𝒪_Xˣ) ≃ H¹(X_ét, 𝔾ₘ)`.
+
+Both cohomology groups classify torsors (`CategoryTheory.Sheaf.nonempty_equiv_H_one_torsor`)
+and both kinds of torsors are classified by invertible modules
+(`AlgebraicGeometry.Scheme.nonempty_equiv_quotient_torsor`).
+
+Only the existence of the bijections is recorded, not that they are the natural maps.
+(blueprint: `thm-sc-hilbert-90`) -/
+theorem nonempty_equiv_H_one_unitsSheaf :
+    Nonempty (X.Pic ≃ Sheaf.H X.unitsSheaf 1) ∧
+      Nonempty (Sheaf.H X.unitsSheaf 1 ≃ X.CohomologicalPicardGroup) := by
+  obtain ⟨⟨eEt⟩, ⟨eZar⟩⟩ := X.nonempty_equiv_quotient_torsor
+  obtain ⟨fEt⟩ := Sheaf.nonempty_equiv_H_one_torsor X.gmSheaf
+  obtain ⟨fZar⟩ := Sheaf.nonempty_equiv_H_one_torsor X.unitsSheaf
+  exact ⟨⟨eZar.trans fZar.symm⟩, ⟨fZar.trans (eZar.symm.trans (eEt.trans fEt.symm))⟩⟩
+
 /-- **The Picard group is `H¹(X, 𝔾ₘ)`.** For a scheme `X` the isomorphism classes of invertible
-`𝒪_X`-modules are in bijection with the cohomological Picard group `H¹(X_ét, 𝔾ₘ)`.
+`𝒪_X`-modules are in bijection with the cohomological Picard group `H¹(X_ét, 𝔾ₘ)`: this is the
+composite of the two bijections of `AlgebraicGeometry.Scheme.nonempty_equiv_H_one_unitsSheaf`.
 
 This only asserts that some bijection exists; it does not specify the canonical map
 `L ↦ [Isom(𝒪, L)]` of the blueprint statement.
 (blueprint: `lem-sc-h1-gm-pic`) -/
-theorem nonempty_equiv_cohomologicalPicardGroup (X : Scheme.{u}) :
+theorem nonempty_equiv_cohomologicalPicardGroup :
     Nonempty (X.Pic ≃ X.CohomologicalPicardGroup) :=
-  -- Proof sketch: send `L` to the class of the `𝔾ₘ`-torsor `Isom(𝒪_X, L)`; Zariski and étale
-  -- `𝔾ₘ`-torsors agree by fpqc descent for invertible modules (Hilbert 90).
-  sorry
+  let h := X.nonempty_equiv_H_one_unitsSheaf
+  ⟨h.1.some.trans h.2.some⟩
 
 end AlgebraicGeometry.Scheme

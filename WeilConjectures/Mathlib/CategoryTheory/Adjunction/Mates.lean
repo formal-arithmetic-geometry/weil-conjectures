@@ -28,6 +28,9 @@ and it is the latter that one wants when transporting the coherence of a pseudof
 - `CategoryTheory.conjugateIsoEquiv_isoWhiskerLeft` and
   `CategoryTheory.conjugateIsoEquiv_isoWhiskerRight`: conjugation exchanges left and right
   whiskering.
+- `CategoryTheory.Adjunction.map_unit_app_comp_liftAlgebraStr`: the unit `K ⟶ R (L K)` of an
+  adjunction intertwines a structure map `G K ⟶ K` with its lift
+  `CategoryTheory.Adjunction.liftAlgebraStr : G (R (L K)) ⟶ R (L K)` along a lift of `G`.
 - `CategoryTheory.mateEquiv_whiskerBottom`: the mate of a 2-square whiskered at the bottom is
   the mate whiskered on the left.
 -/
@@ -100,6 +103,46 @@ lemma conjugateIsoEquiv_isoWhiskerRight {L₁ L₂ : A ⥤ B} {R₁ R₂ : B ⥤
       Functor.isoWhiskerLeft R (conjugateIsoEquiv adj₁ adj₂ e) := by
   ext : 1
   exact conjugateEquiv_whiskerRight adj₁ adj₂ adj e.hom
+
+section LiftAlgebraStr
+
+variable {L : A ⥤ B} {R : B ⥤ A} (adj : L ⊣ R) {G : A ⥤ A} {H : B ⥤ B}
+
+/-- Given an adjunction `L ⊣ R`, a lift `α : G ⋙ L ≅ L ⋙ H` of an endofunctor `G` of `A` to
+an endofunctor `H` of `B`, and a structure map `φ : G K ⟶ K`, the structure map
+
+```
+  G (R (L K)) ──mate of α──▶ R (H (L K)) ──R α⁻¹──▶ R (L (G K)) ──R (L φ)──▶ R (L K)
+```
+
+on `R (L K)`, where the mate `R ⋙ G ⟶ H ⋙ R` of `α` is
+`CategoryTheory.mateEquiv adj adj α.hom`. -/
+def Adjunction.liftAlgebraStr (α : G ⋙ L ≅ L ⋙ H) {K : A} (φ : G.obj K ⟶ K) :
+    G.obj (R.obj (L.obj K)) ⟶ R.obj (L.obj K) :=
+  (mateEquiv adj adj α.hom).app (L.obj K) ≫ R.map (α.inv.app K ≫ L.map φ)
+
+/-- The unit `η : K ⟶ R (L K)` intertwines `φ` and its lift `Adjunction.liftAlgebraStr`:
+
+```
+  G K ──G η──▶ G (R (L K))
+   │φ              │liftAlgebraStr α φ
+   ▼               ▼
+   K ────η────▶ R (L K)
+``` -/
+lemma Adjunction.map_unit_app_comp_liftAlgebraStr (α : G ⋙ L ≅ L ⋙ H) {K : A}
+    (φ : G.obj K ⟶ K) :
+    G.map (adj.unit.app K) ≫ adj.liftAlgebraStr α φ = φ ≫ adj.unit.app K := by
+  rw [liftAlgebraStr, ← Category.assoc, unit_mateEquiv]
+  simp only [Functor.id_obj, Functor.comp_obj, Category.assoc, Functor.map_comp,
+    ← R.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
+  exact adj.unit_naturality φ
+
+instance Adjunction.isIso_liftAlgebraStr (α : G ⋙ L ≅ L ⋙ H) {K : A} (φ : G.obj K ⟶ K)
+    [IsIso (mateEquiv adj adj α.hom).natTrans] [IsIso φ] : IsIso (adj.liftAlgebraStr α φ) := by
+  dsimp [liftAlgebraStr]
+  infer_instance
+
+end LiftAlgebraStr
 
 /-- Whiskering a 2-square at the bottom corresponds, under `mateEquiv`, to whiskering its mate
 on the left: for a 2-square `w` and `β : H ⟶ H'`

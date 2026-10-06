@@ -45,7 +45,8 @@ passing to the normalized real envelope `N⁰ ⊕ (N⁰)^∨` of the constant tw
 - `AlgebraicGeometry.WeilSheaf.traceEnergy`: the sum `S_n(X₀, N)`.
 - `AlgebraicGeometry.WeilSheaf.l2Weight`: the `L²`-weight parameter `‖F‖`.
 - `AlgebraicGeometry.WeilSheaf.l2Series`: the `L²`-series `φ_F(t) = ∑ S_m t^{m - 1}`.
-- `AlgebraicGeometry.WeilSheaf.realEnvelope`: the normalized real envelope.
+- `AlgebraicGeometry.WeilSheaf.realEnvelope`: the normalized real envelope, lisse for lisse `F`
+  (`AlgebraicGeometry.WeilSheaf.IsLisse.realEnvelope`).
 - `AlgebraicGeometry.WeilSheaf.lt_l2Weight_iff`: the radius of `φ_F` is `q^{-‖F‖ - 1}`.
 - `AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isPunctuallyPureOfWeight`: `‖G‖ = w` for a nonzero
   lisse sheaf pure of weight `w`.
@@ -377,6 +378,14 @@ theorem isReal_realEnvelope {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l 
   intro x n
   rw [localPolynomial_stalk_eq_one, Polynomial.coeff_one]
   split_ifs <;> simp
+
+-- TODO(adic): needs that locally constant sheaves are stable under duals and direct sums
+/-- The envelope `Env_ι(F; b) = F⁰ ⊕ (F⁰)^∨` of a lisse sheaf is lisse: the twist `F⁰` has the
+étale sheaf of `F`, and duals and finite direct sums of lisse sheaves are lisse
+(blueprint: `lem-wf-envelope-real`). -/
+theorem IsLisse.realEnvelope {F : WeilSheaf k₀ l X} (hF : F.IsLisse) (b : (PadicAlgCl l)ˣ) :
+    (F.realEnvelope b).IsLisse :=
+  sorry
 
 -- with the present coefficients the proof needs no hypothesis
 set_option linter.unusedVariables false in

@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 /-!
 # Morphisms with geometrically reduced fibres
 
-Two facts about morphisms whose geometric fibres are reduced.
+Three facts about morphisms whose geometric fibres are reduced.
 
 The first is that a smooth morphism has geometrically reduced fibres: its geometric fibres
 are smooth varieties, hence regular, hence reduced. Together with the instances
@@ -21,7 +21,11 @@ are smooth varieties, hence regular, hence reduced. Together with the instances
 `Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean`, this is what makes a smooth morphism
 satisfy the hypotheses of the statements below and of degree-zero flat base change.
 
-The second is the étale-local slicing of such a morphism: a flat morphism, locally of
+The second is that precomposing with an étale morphism preserves geometrically reduced fibres,
+an étale scheme over a reduced scheme being reduced. It makes the hypotheses of the third
+statement stable under passing to the objects of the small étale site of the source.
+
+The third is the étale-local slicing of such a morphism: a flat morphism, locally of
 finite presentation, with geometrically reduced fibres admits an étale covering of its
 source along which it factors through an étale morphism to the base, the remaining leg
 being flat, locally of finite presentation, affine, with geometrically connected fibres
@@ -33,6 +37,8 @@ the members of an étale cover are not open subschemes of the source.
 
 - `AlgebraicGeometry.Smooth.geometricallyReduced`: a smooth morphism has geometrically
   reduced fibres.
+- `AlgebraicGeometry.GeometricallyReduced.comp_of_etale`: an étale morphism followed by a
+  morphism with geometrically reduced fibres has geometrically reduced fibres.
 - `AlgebraicGeometry.exists_etaleCover_factorization`: the étale-local slicing of a flat,
   locally finitely presented morphism with geometrically reduced fibres.
 
@@ -56,6 +62,14 @@ morphism are smooth varieties over an algebraically closed field, hence regular,
 reduced. -/
 instance Smooth.geometricallyReduced {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
     GeometricallyReduced f :=
+  sorry
+
+/-- An étale morphism followed by a morphism with geometrically reduced fibres has
+geometrically reduced fibres: for a field `K` and `Spec K ⟶ Z`, the scheme `X ×_Z Spec K` is
+étale over the reduced scheme `Y ×_Z Spec K`, and a scheme étale over a reduced scheme is
+reduced. -/
+theorem GeometricallyReduced.comp_of_etale {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [Etale f] [GeometricallyReduced g] : GeometricallyReduced (f ≫ g) :=
   sorry
 
 /-- Let `f : X ⟶ S` be flat, locally of finite presentation and with geometrically reduced

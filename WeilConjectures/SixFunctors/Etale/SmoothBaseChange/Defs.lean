@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-!
@@ -70,11 +70,6 @@ third, is `AlgebraicGeometry.Etale.baseChangeHomologyMap_naturality`.
 - `AlgebraicGeometry.Etale.BaseChangeProperty`: the recorded property `BC(p, Λ, q)`.
 - `AlgebraicGeometry.Etale.UniversalBaseChangeProperty`: `BC(p, Λ, q)` for every base change
   of `p`.
-
-## Main statements
-
-- `AlgebraicGeometry.Etale.universalBaseChangeProperty_of_neg`: `BC(p, Λ, q)` holds universally
-  in every negative degree `q`.
 
 ## References
 
@@ -204,19 +199,6 @@ in which the blueprint subsection `sk-def-bc` states it. -/
 def Etale.UniversalBaseChangeProperty (p : X ⟶ S) (q : ℤ) : Prop :=
   ∀ ⦃S' X' : Scheme.{u}⦄ (a : S' ⟶ S) (b : X' ⟶ X) (p' : X' ⟶ S'),
     IsPullback b p' p a → Etale.BaseChangeProperty Λ p' q
-
-/-- The base-change property holds in negative degrees for every morphism `p`: the derived
-pushforward of a sheaf placed in degree `0` has no cohomology in negative degrees, so both
-`p⁻¹ R^q g_* F` and `R^q h_* e⁻¹ F` vanish for `q < 0`. -/
-theorem Etale.baseChangeProperty_of_neg (p : X ⟶ S) {q : ℤ} (hq : q < 0) :
-    Etale.BaseChangeProperty Λ p q :=
-  sorry
-
-/-- The base-change property holds universally in negative degrees, by
-`AlgebraicGeometry.Etale.baseChangeProperty_of_neg` applied to every base change of `p`. -/
-theorem Etale.universalBaseChangeProperty_of_neg (p : X ⟶ S) {q : ℤ} (hq : q < 0) :
-    Etale.UniversalBaseChangeProperty Λ p q :=
-  fun _ _ _ _ p' _ ↦ Etale.baseChangeProperty_of_neg Λ p' hq
 
 variable {Λ} {p : X ⟶ S} {q : ℤ}
 
