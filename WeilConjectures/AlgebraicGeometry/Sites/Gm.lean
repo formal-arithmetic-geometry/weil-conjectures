@@ -53,8 +53,6 @@ Pullback maps on the cohomology of `𝔾ₘ` along an arbitrary `g` go through t
 
 - `AlgebraicGeometry.Scheme.isSheaf_etaleStructurePresheaf`: the structure presheaf is a sheaf
   for the small étale topology. Its proof, étale descent, is `sorry`.
-- `AlgebraicGeometry.Scheme.subsingleton_cohomologicalPicardGroup_of_field`: Hilbert 90 for a
-  field, `H¹(Spec K_ét, 𝔾ₘ) = 0`.
 - `AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf`: the comparison map
   `g^* 𝔾ₘ ⟶ 𝔾ₘ` is an isomorphism for étale `g`. The proof is `sorry`.
 
@@ -126,8 +124,9 @@ It is called cohomological because the Picard group proper, the group of inverti
 `AlgebraicGeometry.Scheme.nonempty_equiv_cohomologicalPicardGroup`
 (blueprint: `lem-sc-h1-gm-pic`), and the invertible-module definition together with the degree
 homomorphism and `Pic⁰` belong to the blueprint block `sk-def-av-pic`. Its vanishing for the
-spectrum of a field is
-`AlgebraicGeometry.Scheme.subsingleton_cohomologicalPicardGroup_of_field`. -/
+spectrum of a field (Hilbert 90) is
+`AlgebraicGeometry.Scheme.subsingleton_cohomologicalPicardGroup_of_field`, in
+`WeilConjectures.AlgebraicGeometry.Sites.Hilbert90`. -/
 noncomputable abbrev CohomologicalPicardGroup : Type (u + 1) := Sheaf.H X.gmSheaf 1
 
 /-- The *cohomological Brauer group* `H²(X_ét, 𝔾ₘ)` of a scheme.
@@ -138,22 +137,6 @@ the two agree for a quasi-compact separated scheme with an ample family of line 
 (Gabber), which is not stated here.
 (blueprint: `def-br`) -/
 noncomputable abbrev CohomologicalBrauerGroup : Type (u + 1) := Sheaf.H X.gmSheaf 2
-
-/-- **Hilbert 90** for a field: the cohomological Picard group `H¹(Spec K_ét, 𝔾ₘ)` of the
-spectrum of a field vanishes.
-
-A field has no nontrivial invertible modules, and by Hilbert 90 the étale and the Zariski
-computation of `H¹` of the units agree. The three-way comparison
-
-`{invertible 𝒪_X-modules}/≅ ≃ H¹(X_Zar, 𝒪_Xˣ) ≃ H¹(X_ét, 𝔾ₘ)`
-
-that precedes it in the blueprint is stated, as a bijection of sets, in
-`AlgebraicGeometry.Scheme.nonempty_equiv_cohomologicalPicardGroup`; this instance is not yet
-derived from it. The proof is `sorry`.
-(blueprint: `cor-sc-hilbert-90-field`) -/
-instance subsingleton_cohomologicalPicardGroup_of_field (K : Type u) [Field K] :
-    Subsingleton (Spec (.of K)).CohomologicalPicardGroup :=
-  sorry
 
 variable {X} {Y : Scheme.{u}}
 

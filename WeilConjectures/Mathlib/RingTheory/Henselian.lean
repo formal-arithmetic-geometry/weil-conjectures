@@ -10,7 +10,9 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 
 /-!
-# Strictly henselian local rings via sections of étale algebras
+# Henselian rings and strictly henselian local rings via sections of étale algebras
+
+The zero ideal of any commutative ring is henselian (`HenselianRing.bot`).
 
 A local ring `R` such that every étale `R`-algebra `B` has, through every prime of `B` over the
 closed point, an `R`-algebra section `B →ₐ[R] R`, is henselian with separably closed residue
@@ -19,12 +21,18 @@ a section sends `X` to a root of `f`.
 
 ## Main results
 
+- `HenselianRing.bot`: the zero ideal of any ring is henselian.
 - `HenselianLocalRing.of_exists_algHom_comap_maximalIdeal_eq`: such a local ring is henselian.
 - `IsLocalRing.isSepClosed_residueField_of_exists_algHom_comap_maximalIdeal_eq`: such a local
   ring has separably closed residue field.
 -/
 
 @[expose] public section
+
+/-- The zero ideal of any ring is henselian. -/
+instance HenselianRing.bot (R : Type*) [CommRing R] : HenselianRing R ⊥ where
+  jac := bot_le
+  is_henselian f _ a₀ h _ := ⟨a₀, by simpa using h, by simp⟩
 
 universe u
 

@@ -3522,6 +3522,47 @@ theorem Scheme.exists_isPullback_of_finitePresentation_of_isSeparated
   exact ⟨i', pullback p (D.map f), pullback.snd p (D.map f), inferInstance, inferInstance,
     hsep, isPullbackLift D c f H, isPullback_isPullbackLift f H⟩
 
+include hc in
+/-- **Morphisms between schemes of finite presentation descend to a finite stage**
+(Stacks Project Tag 01ZM, part (2)). Let `{Dⱼ}` be a cofiltered inverse system of quasi-compact
+quasi-separated schemes with affine transition maps, and let `V`, `W` be of finite presentation
+over a stage `Dᵢ`. Every morphism `V ×_{Dᵢ} lim Dⱼ ⟶ W ×_{Dᵢ} lim Dⱼ` over `lim Dⱼ`, given here by
+its composite `ψ` with the projection to `W`, is the base change of a morphism
+`V ×_{Dᵢ} Dⱼ ⟶ W ×_{Dᵢ} Dⱼ` over some later stage `Dⱼ`.
+
+Part (1) is `AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`, part (3) is
+`AlgebraicGeometry.Scheme.exists_pullback_fst_comp_eq_of_isLimit`.
+
+(blueprint: `thm-pd-spreading-out`) -/
+@[stacks 01ZM]
+theorem Scheme.exists_pullback_hom_of_isLimit [∀ i, CompactSpace (D.obj i)]
+    [∀ i, QuasiSeparatedSpace (D.obj i)] {i : I} {V W : Scheme.{u}} (pV : V ⟶ D.obj i)
+    (pW : W ⟶ D.obj i) [LocallyOfFinitePresentation pV] [QuasiCompact pV] [QuasiSeparated pV]
+    [LocallyOfFinitePresentation pW] [QuasiCompact pW] [QuasiSeparated pW]
+    (ψ : pullback pV (c.π.app i) ⟶ W) (hψ : ψ ≫ pW = pullback.fst pV (c.π.app i) ≫ pV) :
+    ∃ (j : I) (f : j ⟶ i) (ψj : pullback pV (D.map f) ⟶ W),
+      ψj ≫ pW = pullback.fst pV (D.map f) ≫ pV ∧
+        pullback.map pV (c.π.app i) pV (D.map f) (𝟙 V) (c.π.app j) (𝟙 _) (by simp)
+          (by simp) ≫ ψj = ψ :=
+  sorry
+
+include hc in
+/-- **Equalities of morphisms between schemes of finite presentation descend to a finite stage**
+(Stacks Project Tag 01ZM, part (3)). Let `{Dⱼ}` be a cofiltered inverse system of quasi-compact
+quasi-separated schemes with affine transition maps, let `V`, `W` be of finite presentation over a
+stage `Dᵢ` and let `ψ χ : V ⟶ W` be morphisms over `Dᵢ` whose base changes to `lim Dⱼ` agree.
+Then their base changes to some later stage `Dⱼ` agree.
+
+(blueprint: `thm-pd-spreading-out`) -/
+@[stacks 01ZM]
+theorem Scheme.exists_pullback_fst_comp_eq_of_isLimit [∀ i, CompactSpace (D.obj i)]
+    [∀ i, QuasiSeparatedSpace (D.obj i)] {i : I} {V W : Scheme.{u}} (pV : V ⟶ D.obj i)
+    (pW : W ⟶ D.obj i) [LocallyOfFinitePresentation pV] [QuasiCompact pV] [QuasiSeparated pV]
+    [LocallyOfFinitePresentation pW] [QuasiCompact pW] [QuasiSeparated pW] (ψ χ : V ⟶ W)
+    (hψ : ψ ≫ pW = pV) (hχ : χ ≫ pW = pV)
+    (h : pullback.fst pV (c.π.app i) ≫ ψ = pullback.fst pV (c.π.app i) ≫ χ) :
+    ∃ (j : I) (f : j ⟶ i), pullback.fst pV (D.map f) ≫ ψ = pullback.fst pV (D.map f) ≫ χ :=
+  sorry
 
 end Descent
 
