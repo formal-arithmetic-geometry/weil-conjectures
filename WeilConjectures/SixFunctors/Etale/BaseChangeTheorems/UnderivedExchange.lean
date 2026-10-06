@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.BaseChange.Square
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 
 /-!
 # The underived proper base change
@@ -63,7 +63,7 @@ with `f` proper, the base change map `g^* f_* F ⟶ f'_* g'^* F` is an isomorphi
 étale sheaf `F` of `Λ`-modules on `X`. At a geometric point `ȳ'` of `Y'` both stalks are the
 sections of `F` over the closed geometric fibre `X_ȳ = X'_ȳ'`, by the stalk formula over the
 strict henselisation and the degree-zero comparison
-`AlgebraicGeometry.Etale.bijective_globalSectionsUpperStarMap_geometricFibre`, and the induced
+`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_geometricFibre`, and the induced
 map of stalks is the identity; geometric stalks are conservative.
 (blueprint: `lemma-weil-pbc-proper-underived-exchange`) -/
 @[stacks 0A3T]

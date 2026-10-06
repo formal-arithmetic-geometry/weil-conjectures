@@ -79,7 +79,7 @@ spectral restriction criterion; and the passage to étale sheaves by finite-refi
 (`AlgebraicGeometry.Scheme.exists_finite_surjective_refinement_of_etale`) along the
 finite-pullback identities
 (`AlgebraicGeometry.Etale.globalSectionsUpperStarMap_identities`). The affine case is
-`AlgebraicGeometry.bijective_cohomologyMap_zero_of_henselianRing`.
+`AlgebraicGeometry.Etale.bijective_cohomologyMap_zero_of_henselianRing`.
 (blueprint: `lemma-weil-pbc-etale-degree-zero`) -/
 @[stacks 0A0C]
 theorem Etale.isIso_globalSectionsUpperStarMap_of_henselianRing {A : Type u} [CommRing A]

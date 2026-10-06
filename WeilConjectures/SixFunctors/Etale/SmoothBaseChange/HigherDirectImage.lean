@@ -145,7 +145,8 @@ noncomputable def Etale.cohomologyPresheaf {Y : Scheme.{u}}
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
     Y.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
   (Functor.op (uliftYoneda.{u + 1} ⋙ (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙
-    presheafToSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ⋙ Abelian.extFunctor q).flip.obj G
+    presheafToSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ⋙
+      Abelian.extFunctor q).flip.obj G
 
 /-- The presheaf `W ↦ Hᵠ(W ×_X Y, G|)` on the small étale site of `X`, for a morphism
 `f : Y ⟶ X` and an abelian sheaf `G` on `Y_ét`: the cohomology presheaf
@@ -171,7 +172,8 @@ computation applied to a K-injective resolution of a bounded below complex compu
 every degree.
 (blueprint: `lem-weil-pbc-qcqs-higher-direct-image`) -/
 theorem Etale.nonempty_higherDirectImage_iso_presheafToSheaf {X Y : Scheme.{u}} (f : Y ⟶ X)
-    [QuasiCompact f] [QuasiSeparated f] [HasExt.{u + 1} (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})]
+    [QuasiCompact f] [QuasiSeparated f]
+    [HasExt.{u + 1} (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})]
     (q : ℕ) (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Nonempty ((sheafCompose X.smallEtaleTopology
         (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
