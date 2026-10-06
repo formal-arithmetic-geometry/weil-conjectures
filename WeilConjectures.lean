@@ -69,6 +69,7 @@ public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy
+public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.RankOne
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
@@ -401,6 +402,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.QuotientThree
 public import WeilConjectures.FromJoel.CategoryTheory.QuotientTwo
 public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor
 public import WeilConjectures.GroupTheory.TateModule
+public import WeilConjectures.GroupTheory.WeilGroup
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 public import WeilConjectures.Mathlib.Algebra.Algebra.Hom
 public import WeilConjectures.Mathlib.Algebra.BigOperators.GroupWithZero.Finset
@@ -626,6 +628,7 @@ public import WeilConjectures.Mathlib.Data.Set.Image
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
+public import WeilConjectures.Mathlib.GroupTheory.Exponent
 public import WeilConjectures.Mathlib.GroupTheory.SemidirectProduct
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
@@ -639,6 +642,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
