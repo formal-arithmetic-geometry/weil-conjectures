@@ -35,6 +35,8 @@ Both are abbreviations for `SheafOfModules.homObj`, so its API (`SheafOfModules.
   invertible module, `M ⊗ N ≅ M` implies `N ≅ 𝒪_X`.
 - `AlgebraicGeometry.Scheme.Modules.IsInvertible.dual`: the dual of an invertible module is
   invertible.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_iso_dual_dual`: an invertible module is its own
+  double dual (blueprint `lem-pc-tensor-dual-invertible`).
 -/
 
 @[expose] public section
@@ -103,5 +105,17 @@ lemma IsInvertible.of_tensorObj_iso_unit (M N : X.Modules) [M.IsInvertible]
 /-- **The dual of an invertible module is invertible**, being its tensor inverse. -/
 instance IsInvertible.dual (M : X.Modules) [M.IsInvertible] : (Mᵛ).IsInvertible :=
   .of_tensorObj_iso_unit M _ (nonempty_tensorObj_dual_iso_unit M).some
+
+/-- **An invertible module is its own double dual.** For an invertible `M`, `M ≅ Mᵛᵛ`:
+`M ≅ M ⊗ (Mᵛ ⊗ Mᵛᵛ) ≅ (M ⊗ Mᵛ) ⊗ Mᵛᵛ ≅ Mᵛᵛ`. With `IsInvertible.dual`,
+`IsInvertible.tensorObj` and `nonempty_tensorObj_dual_iso_unit` this is blueprint
+`lem-pc-tensor-dual-invertible`.
+
+(blueprint: `lem-pc-tensor-dual-invertible`) -/
+theorem nonempty_iso_dual_dual (M : X.Modules) [M.IsInvertible] : Nonempty (M ≅ Mᵛᵛ) := by
+  obtain ⟨d⟩ := nonempty_tensorObj_dual_iso_unit M
+  obtain ⟨d'⟩ := nonempty_tensorObj_dual_iso_unit Mᵛ
+  exact ⟨(ρ_ M).symm ≪≫ (Iso.refl M ⊗ᵢ d'.symm) ≪≫ (α_ _ _ _).symm ≪≫ (d ⊗ᵢ Iso.refl _) ≪≫
+    λ_ _⟩
 
 end AlgebraicGeometry.Scheme.Modules
