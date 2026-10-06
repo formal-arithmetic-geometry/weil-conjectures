@@ -8,7 +8,11 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Cube
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Projective
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 
 /-!
@@ -24,6 +28,8 @@ Multiplication by `n` is written `𝟙 A ^ n`, the `n`-th power of the identity 
 
 ## Main statements
 
+- `AlgebraicGeometry.locallyQuasiFinite_npow_id_of_isAlgClosed`: over an algebraically closed
+  field, multiplication by `n` has finite fibres.
 - `AlgebraicGeometry.isFinite_npow_id`, `AlgebraicGeometry.surjective_npow_id`: multiplication
   by `n` is finite and surjective.
 - `AlgebraicGeometry.IsIsogeny.isFinite`, `AlgebraicGeometry.IsIsogeny.flat`,
@@ -50,22 +56,121 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
+open Scheme.Modules in
+/-- Over an algebraically closed field `K`, multiplication by `0 < n` on an abelian variety `A`
+is locally quasi-finite. This is the main step of blueprint `lem-sc-mult-n-finite-kernel`.
+
+Let `N = L ⊗ [-1]^* L` for an ample invertible `L`; it is ample and symmetric, so
+`[n]^* N ≅ N^{⊗ n²}`. If `[n]` is not quasi-finite at some point, it is not quasi-finite at some
+closed point `x`, as the quasi-finite locus is open. The fibre `F` of `[n]` over the closed point
+`y = [n] x` is then not discrete at `x`, so it has positive (and finite) dimension and contains a
+closed subscheme `C` of dimension one, proper over `K`. On `C` the map `[n]` factors through
+`Spec κ(y)`, so `(N|_C)^{⊗ n²} ≅ ([n]^* N)|_C` is trivial; but `N|_C` is ample, which is
+impossible on a proper curve over an algebraically closed field. -/
+theorem locallyQuasiFinite_npow_id_of_isAlgClosed [IsAlgClosed K] (A : Over (Spec (.of K)))
+    [GrpObj A] [IsAbelianVariety A] (n : ℕ) (hn : 0 < n) :
+    LocallyQuasiFinite (𝟙 A ^ n).left := by
+  set f := (𝟙 A ^ n).left
+  -- A symmetric ample module `N` with `[n]^* N ≅ N^{⊗ n²}`.
+  obtain ⟨L, hLinv, hL⟩ := IsAbelianVariety.exists_isAmple A
+  have : L.symmetrisation.IsInvertible :=
+    inferInstanceAs (Scheme.Modules.tensorObj L (overPullback ι[A] L)).IsInvertible
+  have hN := IsAbelianVariety.isAmple_symmetrisation A L hL
+  obtain ⟨eN⟩ := nonempty_iso_overPullback_npow_id A L.symmetrisation
+    (IsAbelianVariety.nonempty_iso_overPullback_inv_symmetrisation A L) n
+  have : IsProper f := by
+    have : IsProper (f ≫ A.hom) := (Over.w (𝟙 A ^ n)).symm ▸ inferInstance
+    exact IsProper.of_comp f A.hom
+  rw [← f.quasiFiniteLocus_eq_top_iff]
+  by_contra hne
+  -- A closed point `x` at which `f` is not quasi-finite; its image `y = f x` is closed.
+  have := QuasiCompact.compactSpace_of_compactSpace A.hom
+  obtain ⟨x, hx, hxc⟩ := f.quasiFiniteLocus.isOpen.isClosed_compl.exists_closed_singleton <| by
+    by_contra h
+    exact hne (eq_top_iff.mpr fun z _ ↦ by_contra fun hz ↦ h ⟨z, hz⟩)
+  have hy : IsClosed {f x} := by simpa using f.isClosedMap _ hxc
+  have : IsClosedImmersion (A.left.fromSpecResidueField (f x)) :=
+    isClosed_singleton_iff_isClosedImmersion.mp hy
+  have : IsClosedImmersion (f.fiberι (f x)) :=
+    inferInstanceAs (IsClosedImmersion (pullback.fst _ _))
+  -- The fibre over `y` has finite positive dimension, since `x` is not isolated in it.
+  have hx' : ¬ IsOpen {f.asFiber x} := by
+    rwa [← Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber, ← f.mem_quasiFiniteLocus]
+  have : LocallyOfFiniteType (f.fiberToSpecResidueField (f x)) :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
+  have := LocallyOfFiniteType.isLocallyNoetherian (f.fiberToSpecResidueField (f x))
+  have h1 : 1 ≤ topologicalKrullDim (f.fiber (f x)) := by
+    by_contra h
+    have := IsLocallyArtinian.of_topologicalKrullDim_le_zero (Order.le_of_lt_succ (not_le.mp h))
+    exact hx' (isOpen_discrete _)
+  have htop : topologicalKrullDim (f.fiber (f x)) ≠ ⊤ := by
+    refine ne_top_of_le_ne_top ?_
+      (f.fiberι (f x)).isClosedEmbedding.isInducing.topologicalKrullDim_le
+    rw [IsAbelianVariety.topologicalKrullDim_eq]
+    exact_mod_cast ENat.natCast_ne_top _
+  -- A proper curve `C` in the fibre, on which `N` restricts to an ample module.
+  obtain ⟨C, i, hi, hC⟩ := Scheme.exists_isClosedImmersion_topologicalKrullDim_eq_one h1 htop
+  let j := i ≫ f.fiberι (f x)
+  have : IsProper (j ≫ A.hom) := inferInstanceAs (IsProper (i ≫ f.fiberι (f x) ≫ A.hom))
+  have hN' : IsAmple (j ≫ A.hom) ((Scheme.Modules.pullback j).obj L.symmetrisation) :=
+    hN.pullback j
+  -- `[n]` is constant on `C`, so `(N|_C)^{⊗ n²} ≅ ([n]^* N)|_C` is trivial.
+  have hj : j ≫ f =
+      (i ≫ f.fiberToSpecResidueField (f x)) ≫ A.left.fromSpecResidueField (f x) := by
+    simp [j, Scheme.Hom.fiber_fac]
+  obtain ⟨eT⟩ := IsInvertible.nonempty_iso_unit
+    (IsLocalRing.closedPoint (A.left.residueField (f x)))
+    ((Scheme.Modules.pullback (A.left.fromSpecResidueField (f x))).obj L.symmetrisation)
+  obtain ⟨e₁⟩ := nonempty_pullback_tensorPow_iso j L.symmetrisation (n ^ 2)
+  have e : ((Scheme.Modules.pullback j).obj L.symmetrisation).tensorPow (n ^ 2) ≅
+      𝟙_ C.Modules :=
+    e₁.symm ≪≫ (Scheme.Modules.pullback j).mapIso eN.symm ≪≫ (pullbackComp j f).app _ ≪≫
+      (pullbackCongr hj).app _ ≪≫ ((pullbackComp _ _).app _).symm ≪≫
+      (Scheme.Modules.pullback _).mapIso eT ≪≫ pullbackObjUnitIso _
+  exact (hN'.isEmpty_tensorPow_iso_unit hC (pow_pos hn 2)).false e
+
+open scoped Obj in
 /-- Blueprint `sk-prop-av-mult-finite`: Finiteness of the fibres of the multiplication map.
 
-Let `A` be an abelian variety over `K` and `0 < n`. Then `[n] : A ⟶ A` is finite. -/
+Let `A` be an abelian variety over `K` and `0 < n`. Then `[n] : A ⟶ A` is finite.
+
+This is also blueprint `lem-sc-mult-n-finite-kernel`. Since `[n]` is proper, it suffices that it
+is locally quasi-finite. Its base change to an algebraic closure `K̄` of `K` is multiplication by
+`n` on the abelian variety `A_K̄`, which is locally quasi-finite by
+`AlgebraicGeometry.locallyQuasiFinite_npow_id_of_isAlgClosed`, and local quasi-finiteness
+descends along the surjection `A_K̄ ⟶ A`. -/
 theorem isFinite_npow_id (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A] (n : ℕ)
     (hn : 0 < n) :
-    IsFinite (𝟙 A ^ n).left :=
-  sorry
+    IsFinite (𝟙 A ^ n).left := by
+  have : IsProper (𝟙 A ^ n).left := by
+    have : IsProper ((𝟙 A ^ n).left ≫ A.hom) := (Over.w (𝟙 A ^ n)).symm ▸ inferInstance
+    exact IsProper.of_comp _ A.hom
+  let g : Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of K) :=
+    Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K)))
+  have hφ : (Over.pullback g).map (𝟙 A ^ n) = 𝟙 ((Over.pullback g).obj A) ^ n := by
+    rw [← (Over.pullback g).homMonoidHom_apply, map_pow]
+    simp
+  have : LocallyQuasiFinite ((Over.pullback g).map (𝟙 A ^ n)).left :=
+    hφ ▸ locallyQuasiFinite_npow_id_of_isAlgClosed _ n hn
+  -- The base change of `[n]` along `A_K̄ ⟶ A` is `[n]` on `A_K̄`.
+  have hsq : IsPullback (pullback.fst A.hom g) ((Over.pullback g).map (𝟙 A ^ n)).left
+      (𝟙 A ^ n).left (pullback.fst A.hom g) := by
+    refine IsPullback.of_bot ?_ (pullback.lift_fst _ _ _).symm (IsPullback.of_hasPullback A.hom g)
+    convert IsPullback.of_hasPullback A.hom g using 1
+    · exact Over.w ((Over.pullback g).map (𝟙 A ^ n))
+    · exact Over.w (𝟙 A ^ n)
+  have := LocallyQuasiFinite.of_isPullback_of_surjective hsq
+  exact IsFinite.of_isProper_of_locallyQuasiFinite _
 
 /-- Blueprint `sk-prop-av-mult-finite`: Finiteness of the fibres of the multiplication map.
 
 The kernel `A[n] = ker [n]` of multiplication by `0 < n` on an abelian variety is a finite
-group scheme. -/
+group scheme: it is the base change of the finite morphism `[n]` along the unit section. -/
 theorem isFinite_torsionSubgroupScheme (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A]
     (n : ℕ) (hn : 0 < n) :
     IsFinite (torsionSubgroupScheme A n).hom :=
-  sorry
+  have := isFinite_npow_id A n hn
+  MorphismProperty.of_isPullback ((GrpObj.isPullback_kerι (𝟙 A ^ n)).map (Over.forget _)) this
 
 /-- Blueprint `sk-prop-av-mult-surjective`: Surjectivity of the multiplication map.
 
