@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExten
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
@@ -199,6 +200,11 @@ additive: it acts on morphisms by whiskering, which is compatible with the objec
 addition. -/
 instance Etale.lowerStar_additive : (g)_*[A].Additive where
 
+/-- The pushforward `g_*` on étale sheaves with values in a `Λ`-linear category is `Λ`-linear:
+it acts on morphisms by whiskering, which is compatible with the objectwise scalar
+multiplication. -/
+instance Etale.lowerStar_linear (Λ : Type*) [Semiring Λ] [Linear Λ A] : (g)_*[A].Linear Λ where
+
 /-- `g_*` preserves limits of any shape that exists in the coefficient category: it is
 given by restriction along the base change functor, and limits of sheaves are computed
 pointwise on the underlying presheaves. -/
@@ -273,6 +279,11 @@ example : PreservesFiniteColimits (g)^*[A] := inferInstance
 /-- The pullback `g^*` on étale sheaves is additive, being a left adjoint. -/
 instance Etale.additive_upperStar : (g)^*[A].Additive :=
   (Etale.upperStarLowerStarAdjunction A g).left_adjoint_additive
+
+/-- The pullback `g^*` on étale sheaves with values in a `Λ`-linear category is `Λ`-linear,
+being left adjoint to the `Λ`-linear pushforward `g_*`. -/
+instance Etale.linear_upperStar (Λ : Type*) [Semiring Λ] [Linear Λ A] : (g)^*[A].Linear Λ :=
+  (Etale.upperStarLowerStarAdjunction A g).left_adjoint_linear
 
 /-- The pullback `g^*` on étale sheaves preserves homology, being exact: it preserves
 finite limits by `Etale.preservesFiniteLimits_upperStar` and all colimits of size `0`,
