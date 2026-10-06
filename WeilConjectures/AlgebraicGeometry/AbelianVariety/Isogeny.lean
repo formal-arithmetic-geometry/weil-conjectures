@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 
@@ -138,7 +139,15 @@ theorem finrankΓ_torsionSubgroupScheme (n : ℕ) (hn : 0 < n) :
 Let `A` be an abelian variety over an algebraically closed field `K` and `0 < n`. Then
 `[n] : A(K) ⟶ A(K)` is surjective: `A(K)` is a divisible abelian group. -/
 theorem surjective_npow_points [IsAlgClosed K] (n : ℕ) (hn : 0 < n) :
-    Function.Surjective fun a : 𝟙_ (Over (Spec (.of K))) ⟶ A ↦ a ^ n :=
-  sorry
+    Function.Surjective fun a : 𝟙_ (Over (Spec (.of K))) ⟶ A ↦ a ^ n := by
+  have := isIsogeny_npow_id (A := A) n hn
+  have := IsIsogeny.isFinite (𝟙 A ^ n)
+  intro b
+  obtain ⟨x, hx⟩ := exists_comp_eq_of_isFinite_of_surjective (𝟙 A ^ n).left b.left
+  refine ⟨Over.homMk (U := 𝟙_ _) (V := A) x ?_, ?_⟩
+  · rw [← Over.w (𝟙 A ^ n), reassoc_of% hx, Over.w b]
+  · dsimp only
+    rw [← Category.comp_id (Over.homMk _ _), ← comp_pow]
+    exact Over.OverMorphism.ext hx
 
 end AlgebraicGeometry

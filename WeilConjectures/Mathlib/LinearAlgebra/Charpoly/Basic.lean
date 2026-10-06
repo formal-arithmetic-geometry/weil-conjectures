@@ -82,7 +82,60 @@ theorem charpoly_eq_one_of_subsingleton [Nontrivial R] [Subsingleton V] (f : V �
   Polynomial.eq_one_of_monic_natDegree_zero f.charpoly_monic
     (f.charpoly_natDegree.trans Module.finrank_zero_of_subsingleton)
 
+/-- Endomorphisms intertwined by a linear equivalence have the same characteristic
+polynomial. -/
+theorem charpoly_eq_of_comp_eq {V' : Type*} [AddCommGroup V'] [Module R V'] [Module.Free R V']
+    [Module.Finite R V'] (e : V ≃ₗ[R] V')
+    {f : V →ₗ[R] V} {g : V' →ₗ[R] V'} (h : e.toLinearMap ∘ₗ f = g ∘ₗ e.toLinearMap) :
+    f.charpoly = g.charpoly := by
+  have hg : g = e.conj f := by
+    ext x
+    simpa [LinearEquiv.conj_apply] using (LinearMap.congr_fun h (e.symm x)).symm
+  rw [hg, LinearEquiv.charpoly_conj]
+
 end CommRing
+
+section Field
+
+variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
+
+/-- Iterating `LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ` along a finite
+filtration `0 = F 0 ≤ F 1 ≤ ⋯ ≤ F n = V` by `f`-stable subspaces: the characteristic
+polynomial of `f` is the product of the characteristic polynomials of the endomorphisms
+induced by `f` on the graded pieces `F (i + 1) ⧸ F i`.
+(blueprint: `sk-p-linear-filtration`) -/
+theorem charpoly_eq_prod_charpoly_mapQ_of_le (f : V →ₗ[K] V) (F : ℕ → Submodule K V) (n : ℕ)
+    (h0 : F 0 = ⊥) (hn : F n = ⊤) (hle : ∀ i < n, F i ≤ F (i + 1))
+    (hF : ∀ i, F i ≤ (F i).comap f) :
+    f.charpoly = ∏ i ∈ Finset.range n,
+      (((F i).comap (F (i + 1)).subtype).mapQ ((F i).comap (F (i + 1)).subtype)
+        (f.restrict (hF (i + 1))) fun _ hx ↦ hF i hx).charpoly := by
+  have key : ∀ m ≤ n, (f.restrict (hF m)).charpoly = ∏ i ∈ Finset.range m,
+      (((F i).comap (F (i + 1)).subtype).mapQ ((F i).comap (F (i + 1)).subtype)
+        (f.restrict (hF (i + 1))) fun _ hx ↦ hF i hx).charpoly := by
+    intro m
+    induction m with
+    | zero =>
+      intro _
+      have : Subsingleton (F 0) := by rw [h0]; infer_instance
+      rw [Finset.prod_range_zero, charpoly_eq_one_of_subsingleton]
+    | succ m ih =>
+      intro hm
+      have hW : (F m).comap (F (m + 1)).subtype ≤
+          ((F m).comap (F (m + 1)).subtype).comap (f.restrict (hF (m + 1))) :=
+        fun _ hx ↦ hF m hx
+      rw [Finset.prod_range_succ, ← ih (by omega),
+        charpoly_eq_charpoly_restrict_mul_charpoly_mapQ _ _ hW]
+      congr 1
+      refine charpoly_eq_of_comp_eq (Submodule.comapSubtypeEquivOfLe (hle m (by omega))) ?_
+      ext x
+      rfl
+  rw [← key n le_rfl]
+  refine charpoly_eq_of_comp_eq (LinearEquiv.ofTop (F n) hn).symm ?_
+  ext x
+  rfl
+
+end Field
 
 section IsAlgClosed
 

@@ -10,14 +10,20 @@ public import Mathlib.Topology.NoetherianSpace
 public import Mathlib.Topology.Sober
 
 /-!
-# Complements of dense opens in spaces of dimension one
+# Topological Krull dimension: open covers and complements of dense opens
 
-In an irreducible `T₀` space of dimension at most one, every point outside a nonempty open subset
-is closed; if the space is moreover quasi-sober and noetherian, there are only finitely many such
-points.
+In a quasi-sober `T₀` space, the coheight of a point is bounded by the topological Krull
+dimension, and the topological Krull dimension is bounded by any common bound on the
+dimensions of the members of an open cover. In an irreducible `T₀` space of dimension at most
+one, every point outside a nonempty open subset is closed; if the space is moreover quasi-sober
+and noetherian, there are only finitely many such points.
 
 ## Main statements
 
+- `coheight_le_topologicalKrullDim`: the coheight of a point for the specialization order is
+  at most the topological Krull dimension.
+- `topologicalKrullDim_le_of_iSup_eq_top`: the topological Krull dimension is at most any
+  common bound on the dimensions of the members of an open cover.
 - `IsOpen.finite_compl_of_topologicalKrullDim_le_one`: the complement of a nonempty open subset
   is finite.
 - `IsOpen.isClosed_singleton_of_mem_compl`: each point of that complement is closed.
@@ -28,7 +34,31 @@ points.
 
 @[expose] public section
 
-open Topology TopologicalSpace
+open Topology TopologicalSpace Order
+
+attribute [local instance] specializationOrder in
+/-- In a quasi-sober `T₀` space, the coheight of a point for the specialization order is at
+most the topological Krull dimension. -/
+theorem coheight_le_topologicalKrullDim {X : Type*} [TopologicalSpace X] [QuasiSober X]
+    [T0Space X] (x : X) : (coheight x : WithBot ℕ∞) ≤ topologicalKrullDim X := by
+  rw [← coheight_orderIso irreducibleSetEquivPoints.symm]
+  exact coheight_le_krullDim _
+
+attribute [local instance] specializationOrder in
+/-- The topological Krull dimension of a quasi-sober `T₀` space is bounded by any common
+bound on the dimensions of the members of an open cover. -/
+theorem topologicalKrullDim_le_of_iSup_eq_top {X : Type*} [TopologicalSpace X] [QuasiSober X]
+    [T0Space X] {ι : Type*} (U : ι → Opens X) (hU : ⨆ i, U i = ⊤) (n : WithBot ℕ∞)
+    (h : ∀ i, topologicalKrullDim (U i) ≤ n) : topologicalKrullDim X ≤ n := by
+  rw [topologicalKrullDim, krullDim_eq_iSup_coheight]
+  refine iSup_le fun Z ↦ ?_
+  obtain ⟨i, hi⟩ := Opens.mem_iSup.mp (hU.ge (Set.mem_univ (irreducibleSetEquivPoints Z)))
+  have := (U i).isOpenEmbedding'.quasiSober
+  rw [← coheight_orderIso irreducibleSetEquivPoints Z]
+  exact (congrArg _ ((U i).isOpenEmbedding'.coheight_eq (x := (⟨_, hi⟩ : U i)))).trans_le
+    ((coheight_le_topologicalKrullDim _).trans (h i))
+
+section
 
 variable {X : Type*} [TopologicalSpace X] [IrreducibleSpace X] [T0Space X]
 
@@ -84,6 +114,8 @@ theorem IsOpen.finite_compl_of_topologicalKrullDim_le_one [QuasiSober X] [Noethe
   obtain ⟨z, rfl⟩ := key t ht
   exact Set.finite_singleton z
 
+end
+
 section Map
 
 open Order
@@ -136,3 +168,46 @@ theorem topologicalKrullDim_le_of_continuous {f : X → Y} (hf : Continuous f)
   exact hab.ne (hinj _ _ hab.le h.symm).symm
 
 end Map
+
+section Inducing
+
+variable {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]
+
+/-- An inducing map with closed range into an irreducible space of finite dimension, whose
+source has the same dimension as the target, is surjective: otherwise a maximal chain of
+irreducible closed subsets of the source, pushed forward and followed by the whole space, would be
+longer than any chain of the target. -/
+theorem Topology.IsInducing.surjective_of_topologicalKrullDim_eq [IrreducibleSpace X]
+    {f : Y → X} (hf : IsInducing f) (hc : IsClosed (Set.range f))
+    (hfin : topologicalKrullDim X ≠ ⊤) (h : topologicalKrullDim Y = topologicalKrullDim X) :
+    Function.Surjective f := by
+  by_contra hns
+  have hne : Set.range f ≠ Set.univ := fun h ↦ hns (Set.range_eq_univ.1 h)
+  have hbot : topologicalKrullDim X ≠ ⊥ := by
+    rw [topologicalKrullDim, Ne, Order.krullDim_eq_bot_iff, not_isEmpty_iff]
+    exact ⟨⟨Set.univ, IrreducibleSpace.isIrreducible_univ X, isClosed_univ⟩⟩
+  obtain ⟨m, hm⟩ := WithBot.ne_bot_iff_exists.1 hbot
+  have hm' : m ≠ ⊤ := by
+    rintro rfl
+    exact hfin hm.symm
+  obtain ⟨n, rfl⟩ := ENat.ne_top_iff_exists.1 hm'
+  obtain ⟨l, hl⟩ := Order.le_krullDim_iff.1 (show ((n : ℕ∞) : WithBot ℕ∞) ≤
+    topologicalKrullDim Y from h ▸ hm.le)
+  let top : IrreducibleCloseds X := ⟨Set.univ, IrreducibleSpace.isIrreducible_univ X, isClosed_univ⟩
+  let l₀ := l.map _ (IrreducibleCloseds.map_strictMono_of_isInducing hf)
+  have hlast : l₀.last < top := by
+    refine lt_of_le_of_ne (fun x _ ↦ Set.mem_univ x) fun heq ↦ hne ?_
+    refine Set.eq_univ_of_univ_subset ?_
+    have : (top : Set X) ⊆ closure (f '' l.last) := by
+      rw [← heq]
+      rfl
+    exact this.trans (closure_minimal (Set.image_subset_range _ _) hc)
+  let l' := l₀.snoc top hlast
+  have := Order.LTSeries.length_le_krullDim l'
+  rw [show l'.length = n + 1 by simp [l', l₀, hl]] at this
+  change _ ≤ topologicalKrullDim X at this
+  rw [← hm] at this
+  norm_cast at this
+  omega
+
+end Inducing
