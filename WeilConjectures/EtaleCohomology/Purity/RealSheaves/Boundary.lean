@@ -149,6 +149,18 @@ noncomputable def boundaryFrobenius (ρ : Representation (PadicAlgCl l) WU.carri
     (s : ↥((Set.range j.base)ᶜ)) : Module.End (PadicAlgCl l) (D.boundaryStalk l ρ s) :=
   (ρ (D.residueFrobenius s)).restrict fun _ ↦ D.residueFrobenius_mem_boundaryStalk l ρ s
 
+/-- A lisse Weil sheaf on `C₀` restricts to a lisse Weil sheaf on `U₀`: the geometric part of
+`W(U₀)` maps continuously into that of `W(C₀)`. -/
+theorem isLisse_comp_restrict {ρ : Representation (PadicAlgCl l) WC.carrier V}
+    (hρ : WC.IsLisse l ρ) : WU.IsLisse l (ρ.comp D.restrict) := by
+  refine WeilGroup.IsLisse.of_continuous_apply fun φ v ↦ ?_
+  have hmaps (g : WU.geometric) : D.restrict g.1 ∈ WC.geometric := by
+    rw [MonoidHom.mem_ker, ← MonoidHom.comp_apply, D.deg_restrict]
+    exact g.2
+  have hc : Continuous fun g : WU.geometric ↦ (⟨D.restrict g.1, hmaps g⟩ : WC.geometric) :=
+    (D.continuous_restrict.comp continuous_subtype_val).subtype_mk _
+  exact (hρ.continuous_apply φ v).comp hc
+
 end BoundaryDatum
 
 namespace Etale

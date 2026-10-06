@@ -35,8 +35,8 @@ the largest determinant weight of its constituents.
 `H_c² (U, ℱ)` is not available for a Weil representation, only for a Weil sheaf. By global
 Verdier duality on the smooth nonproper curve `U` it is the coinvariant Tate twist
 `V_{π₁(U)} (-1)`, on which the geometric Frobenius acts as `q` times the endomorphism induced by
-the degree-one lift `γ`; that module is `Representation.toCoinvariants ρ W.geometric` and is
-used here in its place. The numerator `det (1 - F T ∣ H_c¹ (U, ℱ))` of the Euler product is only
+the degree-one lift `γ`; that endomorphism, `AlgebraicGeometry.WeilGroup.compactTopFrobenius`,
+is used here in its place. The numerator `det (1 - F T ∣ H_c¹ (U, ℱ))` of the Euler product is only
 asserted to be some polynomial, which is all that the Rankin–Selberg argument uses.
 
 The Euler product identity `AlgebraicGeometry.WeilGroup.exists_eulerSeries_mul_eq_coe` is the
@@ -44,6 +44,10 @@ Grothendieck–Lefschetz trace formula; like the other statements of the real-sh
 the implementation notes of `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity`) it is
 not a consequence of the data of an `AlgebraicGeometry.WeilGroup` alone, and becomes provable
 once `AlgebraicGeometry.WeilGroup` is rebased on the étale fundamental group.
+
+## Main definitions
+
+- `AlgebraicGeometry.WeilGroup.compactTopFrobenius`: the geometric Frobenius on `H_c² (U, ℱ)`.
 
 ## Main statements
 
@@ -131,6 +135,17 @@ theorem IsReal.tprod (hρ : W.IsReal l ρ ι) (hσ : W.IsReal l σ ι) :
   refine isReal_of_map_conj_localEigenvalues ι fun x ↦ ?_
   rw [localEigenvalues_tprod, map_map_product_mul, map_map_product_mul,
     hρ.map_conj_localEigenvalues, hσ.map_conj_localEigenvalues]
+
+/-- The tensor square `ℱ ⊗ ℱ` of a sheaf with weights at most `β` has weights at most `2 β`. -/
+theorem HasWeightsAtMost.tprod_self {β : ℝ} (hw : W.HasWeightsAtMost l ρ ι β) :
+    W.HasWeightsAtMost l (ρ.tprod ρ) ι (2 * β) := by
+  intro x γ hγ
+  rw [localEigenvalues_tprod] at hγ
+  obtain ⟨⟨a, b⟩, hab, rfl⟩ := Multiset.mem_map.1 hγ
+  rw [Multiset.mem_product] at hab
+  rw [frobeniusWeight_mul ι _ (fun h ↦ zero_notMem_localEigenvalues x (h ▸ hab.1))
+    (fun h ↦ zero_notMem_localEigenvalues x (h ▸ hab.2))]
+  linarith [hw x a hab.1, hw x b hab.2]
 
 end TensorProduct
 
@@ -306,6 +321,21 @@ section TopCohomology
 
 variable (ρ)
 
+variable (W l) in
+/-- Blueprint `lem-a1-affine-hc2`: Description of `H_c²` on an affine curve.
+
+For a lisse Weil sheaf `ℱ` on a smooth geometrically connected affine curve `U₀` with local
+generic fibre `V`, there is a canonical Frobenius-equivariant isomorphism
+`H_c² (U, ℱ) ≅ V_{π₁(U)} (-1)`, by global Verdier duality on a smooth compactification and the
+description of global sections as invariants (`sk-p-real-sections`).
+
+Compactly supported cohomology of a Weil representation is not available, so the right-hand
+side is used as the model of `H_c² (U, ℱ)`: this is the geometric Frobenius acting on it, `q`
+times the endomorphism induced by the degree-one lift `γ` on the geometric coinvariants. -/
+noncomputable def compactTopFrobenius :
+    Module.End (PadicAlgCl l) (Representation.Coinvariants (ρ.comp W.geometric.subtype)) :=
+  (Nat.card K : PadicAlgCl l) • ρ.toCoinvariants W.geometric W.frobeniusLift
+
 /-- Blueprint `lem-rp-hc2-eigenvalue-determinant-weight`: Eigenvalues of `H_c²` are
 determinant weights.
 
@@ -321,8 +351,7 @@ by `π₁(U)` and `γ`. An irreducible subquotient of it has trivial geometric a
 it with the single eigenvalue `β`, so that the local Frobenius at a point of degree `e` has
 determinant `β ^ (r e)`, of weight `r wt_{ι, q} (β)` relative to `q ^ e`. -/
 theorem exists_isConstituent_hasDetWeight_of_hasEigenvalue {α : PadicAlgCl l}
-    (hα : Module.End.HasEigenvalue
-      ((Nat.card K : PadicAlgCl l) • ρ.toCoinvariants W.geometric W.frobeniusLift) α) :
+    (hα : (W.compactTopFrobenius l ρ).HasEigenvalue α) :
     ∃ N M : Subrepresentation ρ, N ≤ M ∧ (M.subquotient N).IsConstituent ρ ∧
       W.HasDetWeight l (M.subquotient N) ι
         (frobeniusWeight ι (Nat.card K) (α / Nat.card K)) := by
@@ -341,7 +370,7 @@ theorem exists_isConstituent_hasDetWeight_of_hasEigenvalue {α : PadicAlgCl l}
     refine Module.End.hasEigenvalue_of_hasEigenvector (x := v) ⟨?_, hv.2⟩
     rw [Module.End.mem_eigenspace_iff]
     have h := hv.apply_eq_smul
-    rw [LinearMap.smul_apply] at h
+    rw [compactTopFrobenius, LinearMap.smul_apply] at h
     calc T v = q⁻¹ • (q • T v) := by rw [smul_smul, inv_mul_cancel₀ hq, one_smul]
       _ = β • v := by rw [h, smul_smul, inv_mul_eq_div]
   -- the geometric part acts trivially on the coinvariants, so `γ` commutes with `W (U₀)`
@@ -449,9 +478,7 @@ implementation notes. -/
 theorem exists_eulerSeries_mul_eq_coe [IsAffine C] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] (hρ : W.IsLisse l ρ) :
     ∃ P : Polynomial ℂ, W.eulerSeries l ρ ι *
-      ((((Nat.card K : PadicAlgCl l) •
-        ρ.toCoinvariants W.geometric W.frobeniusLift).charpolyRev.map ι : Polynomial ℂ) :
-          PowerSeries ℂ) = P := by
+      (((W.compactTopFrobenius l ρ).charpolyRev.map ι : Polynomial ℂ) : PowerSeries ℂ) = P := by
   sorry
 
 end TopCohomology

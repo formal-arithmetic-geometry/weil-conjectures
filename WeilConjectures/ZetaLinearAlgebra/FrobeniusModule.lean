@@ -89,40 +89,6 @@ Frobenius satisfies `|ι α| ≤ q ^ (w / 2)`. -/
 def HasWeightsAtMost (ι : K →+* ℂ) (q : ℕ) (M : FrobeniusModule.{u, v} K) (w : ℝ) : Prop :=
   ∀ α : K, M.frobeniusEnd.HasEigenvalue α → ‖ι α‖ ≤ (q : ℝ) ^ (w / 2)
 
-/-- Blueprint `def-weil-frobenius-module-weights`: Weights of finite-dimensional Frobenius
-modules.
-
-`M` is `ι`-*mixed of weights at most `w`* relative to `q` if there are an `F`-stable filtration
-`0 = V₀ ⊆ V₁ ⊆ ⋯ ⊆ V_m = M` and real numbers `w₀, …, w_{m-1} ≤ w` such that each graded piece
-`V_{r+1} / V_r` is `ι`-pure of weight `w_r`: every eigenvalue `α` of the Frobenius it induces
-satisfies `|ι α| = q ^ (w_r / 2)`. Such an eigenvalue is a scalar `α` for which some
-`v ∈ V_{r+1} \ V_r` has `F v - α v ∈ V_r`. Purity of `M` itself is
-`FrobeniusModule.IsPureOfWeight`. -/
-def IsMixedOfWeightsAtMost (ι : K →+* ℂ) (q : ℕ) (M : FrobeniusModule.{u, v} K) (w : ℝ) :
-    Prop :=
-  ∃ (m : ℕ) (F : ℕ → Submodule K M.carrier) (wt : ℕ → ℝ), F 0 = ⊥ ∧ F m = ⊤ ∧
-    (∀ r < m, F r ≤ F (r + 1)) ∧ (∀ r, F r ≤ (F r).comap M.frobeniusEnd) ∧
-    (∀ r < m, wt r ≤ w) ∧ ∀ r < m, ∀ α : K,
-      (∃ x ∈ F (r + 1), x ∉ F r ∧ M.frobeniusEnd x - α • x ∈ F r) →
-        ‖ι α‖ = (q : ℝ) ^ (wt r / 2)
-
-/-- A module pure of weight `w` is mixed of weights at most `w`, with the one-step filtration
-`0 ⊆ M`. -/
-theorem IsPureOfWeight.isMixedOfWeightsAtMost {ι : K →+* ℂ} {q : ℕ}
-    {M : FrobeniusModule.{u, v} K} {w : ℝ} (h : M.IsPureOfWeight ι q w) :
-    M.IsMixedOfWeightsAtMost ι q w := by
-  refine ⟨1, fun r ↦ if r = 0 then ⊥ else ⊤, fun _ ↦ w, by simp, by simp, fun r _ ↦ ?_,
-    fun r ↦ ?_, fun _ _ ↦ le_rfl, ?_⟩
-  · dsimp only
-    split_ifs <;> simp_all
-  · dsimp only
-    split_ifs <;> simp
-  · rintro r hr α ⟨x, -, hx, hxα⟩
-    obtain rfl : r = 0 := by omega
-    simp only [↓reduceIte, Submodule.mem_bot, sub_eq_zero] at hx hxα
-    exact h α (Module.End.hasEigenvalue_of_hasEigenvector
-      ⟨Module.End.mem_eigenspace_iff.2 hxα, hx⟩)
-
 /-- A module pure of weight `w` has weights at most `w`. -/
 theorem IsPureOfWeight.hasWeightsAtMost {ι : K →+* ℂ} {q : ℕ} {M : FrobeniusModule.{u, v} K}
     {w : ℝ} (h : M.IsPureOfWeight ι q w) : M.HasWeightsAtMost ι q w :=

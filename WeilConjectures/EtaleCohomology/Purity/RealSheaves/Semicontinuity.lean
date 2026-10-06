@@ -41,6 +41,7 @@ boundary stalks contain `v ^ ⊗ 2 ^ k` for an eigenvector `v`, sharpens the bou
 The cohomology `H_c² (U, ℱ)` of a Weil representation is not available; as in
 `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin`, the coinvariant Tate twist
 `V_{π₁(U)} (-1)` is used in its place (`AlgebraicGeometry.WeilGroup.compactTopFrobenius`).
+
 The Euler-product form of the trace formula for middle extensions is not a consequence of the
 data of a `AlgebraicGeometry.BoundaryDatum`, and the statements of this file are false without
 it. It is the hypothesis `AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct` of
@@ -48,7 +49,6 @@ the main results; the trace formula itself is not available.
 
 ## Main definitions
 
-- `AlgebraicGeometry.WeilGroup.compactTopFrobenius`: the geometric Frobenius on `H_c² (U, ℱ)`.
 - `AlgebraicGeometry.BoundaryDatum.boundaryPolynomial`: `ι det (1 - F_s T ^ e_s ∣ V ^ (I_s))`.
 - `AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct`: the Euler-product identity
   for middle extensions.
@@ -76,56 +76,12 @@ variable {K : Type u} [Field K] [Finite K]
 
 namespace WeilGroup
 
-section Weight
-
-variable {E : Type*} [Field E] (ι : E →+* ℂ)
-
-/-- For `qx > 1` and `ι α ≠ 0`, the weight bound `wt_{ι, qx} (α) ≤ β` is the bound
-`|ι α| ^ 2 ≤ qx ^ β`. -/
-theorem frobeniusWeight_le_iff {qx : ℕ} (hq : 1 < qx) {α : E} (hα : ι α ≠ 0) {β : ℝ} :
-    frobeniusWeight ι qx α ≤ β ↔ ‖ι α‖ ^ 2 ≤ (qx : ℝ) ^ β := by
-  have hq' : (1 : ℝ) < qx := by exact_mod_cast hq
-  have h1 : 0 < ‖ι α‖ ^ 2 := by positivity
-  have h2 : (0 : ℝ) < (qx : ℝ) ^ β := by positivity
-  rw [frobeniusWeight, div_le_iff₀ (Real.log_pos hq'), ← Real.log_le_log_iff h1 h2,
-    Real.log_pow, Real.log_rpow (by positivity)]
-  push_cast
-  constructor <;> intro h <;> linarith
-
-/-- The weight of a power is the multiple of the weight. -/
-theorem frobeniusWeight_pow (qx : ℕ) (α : E) (n : ℕ) :
-    frobeniusWeight ι qx (α ^ n) = n * frobeniusWeight ι qx α := by
-  simp only [frobeniusWeight, map_pow, norm_pow, Real.log_pow]
-  ring
-
-/-- The weight of an inverse is the negative of the weight. -/
-theorem frobeniusWeight_inv (qx : ℕ) (α : E) :
-    frobeniusWeight ι qx α⁻¹ = -frobeniusWeight ι qx α := by
-  simp only [frobeniusWeight, map_inv₀, norm_inv, Real.log_inv]
-  ring
-
-end Weight
-
 variable {C : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p] (W : WeilGroup p) (l : ℕ)
   [Fact l.Prime] {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
   [FiniteDimensional (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) W.carrier V)
   (ι : PadicAlgCl l →+* ℂ)
 
 section TopCohomology
-
-/-- Blueprint `lem-a1-affine-hc2`: Description of `H_c²` on an affine curve.
-
-For a lisse Weil sheaf `ℱ` on a smooth geometrically connected affine curve `U₀` with local
-generic fibre `V`, there is a canonical Frobenius-equivariant isomorphism
-`H_c² (U, ℱ) ≅ V_{π₁(U)} (-1)`, by global Verdier duality on a smooth compactification and the
-description of global sections as invariants (`sk-p-real-sections`).
-
-Compactly supported cohomology of a Weil representation is not available, so the right-hand
-side is used as the model of `H_c² (U, ℱ)`: this is the geometric Frobenius acting on it, `q`
-times the endomorphism induced by the degree-one lift `γ` on the geometric coinvariants. -/
-noncomputable def compactTopFrobenius :
-    Module.End (PadicAlgCl l) (Representation.Coinvariants (ρ.comp W.geometric.subtype)) :=
-  (Nat.card K : PadicAlgCl l) • ρ.toCoinvariants W.geometric W.frobeniusLift
 
 /-- The eigenvalues of the geometric Frobenius on `H_c² (U, ℱ) = V_{π₁(U)} (-1)` are bounded by
 `q ^ (β / 2 + 1)` if `ℱ` has weights at most `β`.
@@ -806,19 +762,6 @@ theorem frobeniusWeight_le_add_two [SmoothOfRelativeDimension 1 p] [Geometricall
   change 2 * Real.log ‖ι α‖ ≤ (β + 2) * (e * Real.log q)
   nlinarith
 
-omit [Nonempty U] in
-/-- The tensor square `ℱ ⊗ ℱ` of a sheaf with weights at most `β` has weights at most `2 β`. -/
-theorem _root_.AlgebraicGeometry.WeilGroup.HasWeightsAtMost.tprod_self
-    {ρ : Representation (PadicAlgCl l) WU.carrier V} {β : ℝ}
-    (hw : WU.HasWeightsAtMost l ρ ι β) : WU.HasWeightsAtMost l (ρ.tprod ρ) ι (2 * β) := by
-  intro x γ hγ
-  rw [WeilGroup.localEigenvalues_tprod] at hγ
-  obtain ⟨⟨a, b⟩, hab, rfl⟩ := Multiset.mem_map.1 hγ
-  rw [Multiset.mem_product] at hab
-  rw [WeilGroup.frobeniusWeight_mul ι _ (fun h ↦ WeilGroup.zero_notMem_localEigenvalues x
-    (h ▸ hab.1)) (fun h ↦ WeilGroup.zero_notMem_localEigenvalues x (h ▸ hab.2))]
-  linarith [hw x a hab.1, hw x b hab.2]
-
 /-- If `α` is an eigenvalue of the boundary Frobenius of `ℱ` at `s`, then `α ^ 2` is one of
 `ℱ ⊗ ℱ`: for an invariant eigenvector `v`, the vector `v ⊗ v` is an invariant eigenvector
 (`sk-p-linear-spectra`). -/
@@ -874,7 +817,7 @@ theorem frobeniusWeight_le_add_div_two_pow [SmoothOfRelativeDimension 1 p]
     simpa using D.frobeniusWeight_le_add_two l ι hD ρ hρ hw s hα
   | succ k ih =>
     intro V _ _ _ ρ hρ β hw s α hα
-    have h := ih (ρ.tprod ρ) (hρ.tprod hρ) (hw.tprod_self l ι) s
+    have h := ih (ρ.tprod ρ) (hρ.tprod hρ) (hw.tprod_self ι) s
       (D.hasEigenvalue_boundaryFrobenius_tprod_self l hα)
     rw [WeilGroup.frobeniusWeight_pow] at h
     have h2 : (2 : ℝ) / 2 ^ (k + 1) = 2 / 2 ^ k / 2 := by rw [pow_succ]; ring
@@ -931,51 +874,6 @@ theorem sq_norm_le_rpow_of_hasEigenvalue_boundaryFrobenius [SmoothOfRelativeDime
     ((map_ne_zero ι).2 (D.ne_zero_of_hasEigenvalue_boundaryFrobenius l ρ s hα))).1
     (D.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius l ι hD ρ hρ hw s hα)
 
-/-- A lisse Weil sheaf on `C₀` restricts to a lisse Weil sheaf on `U₀`: the geometric part of
-`W(U₀)` maps continuously into that of `W(C₀)`. -/
-theorem isLisse_comp_restrict {ρ : Representation (PadicAlgCl l) WC.carrier V}
-    (hρ : WC.IsLisse l ρ) : WU.IsLisse l (ρ.comp D.restrict) := by
-  refine WeilGroup.IsLisse.of_continuous_apply fun φ v ↦ ?_
-  have hmaps (g : WU.geometric) : D.restrict g.1 ∈ WC.geometric := by
-    rw [MonoidHom.mem_ker, ← MonoidHom.comp_apply, D.deg_restrict]
-    exact g.2
-  have hc : Continuous fun g : WU.geometric ↦ (⟨D.restrict g.1, hmaps g⟩ : WC.geometric) :=
-    (D.continuous_restrict.comp continuous_subtype_val).subtype_mk _
-  exact (hρ.continuous_apply φ v).comp hc
-
-omit [Nonempty U] in
-/-- The dual of a lisse Weil sheaf is lisse: its matrix coefficients are those of `ρ (g⁻¹)`. -/
-theorem _root_.AlgebraicGeometry.WeilGroup.IsLisse.dual
-    {ρ : Representation (PadicAlgCl l) WU.carrier V} (hρ : WU.IsLisse l ρ) :
-    WU.IsLisse l ρ.dual := by
-  refine WeilGroup.IsLisse.of_continuous_apply fun φ f ↦ ?_
-  obtain ⟨w, rfl⟩ := (Module.evalEquiv (PadicAlgCl l) V).surjective φ
-  have h : (fun g : WU.geometric ↦ Module.evalEquiv (PadicAlgCl l) V w (ρ.dual g f)) =
-      fun g ↦ f (ρ (g⁻¹ : WU.geometric) w) := by
-    funext g
-    simp [Representation.dual_apply, Module.Dual.transpose_apply]
-  rw [h]
-  exact (hρ.continuous_apply f w).comp continuous_inv
-
-omit [Nonempty U] in
-/-- The dual of a sheaf punctually pure of weight `w` is punctually pure of weight `-w`: the
-local eigenvalues of the dual are the inverses of those of `ρ` (`sk-p-linear-spectra`). -/
-theorem _root_.AlgebraicGeometry.WeilGroup.IsPunctuallyPure.dual
-    {ρ : Representation (PadicAlgCl l) WU.carrier V} {w : ℝ}
-    (h : WU.IsPunctuallyPure l ρ ι w) : WU.IsPunctuallyPure l ρ.dual ι (-w) := by
-  intro x γ hγ
-  rw [WeilGroup.localEigenvalues, Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero,
-    ← Module.End.hasEigenvalue_iff_isRoot_charpoly, Representation.hasEigenvalue_dual_iff] at hγ
-  have hγ' := ρ.hasEigenvalue_inv hγ
-  rw [inv_inv] at hγ'
-  have hmem : γ⁻¹ ∈ WU.localEigenvalues l ρ x := by
-    rw [WeilGroup.localEigenvalues, Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero,
-      ← Module.End.hasEigenvalue_iff_isRoot_charpoly]
-    exact hγ'
-  have := h x _ hmem
-  rw [WeilGroup.frobeniusWeight_inv] at this
-  linarith
-
 omit [FiniteDimensional (PadicAlgCl l) V] in
 /-- If inertia at `s` acts trivially, every eigenvalue of the residue Frobenius on `V` is an
 eigenvalue of the boundary Frobenius at `s`, since the boundary stalk is all of `V`. -/
@@ -1023,7 +921,7 @@ theorem frobeniusWeight_eq_of_isPunctuallyPure [SmoothOfRelativeDimension 1 p]
     rw [Representation.hasEigenvalue_dual_iff]
     exact ρ.hasEigenvalue_inv hα
   have hge := D.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius l ι hD ρ.dual hρ.dual
-    (fun x a ha ↦ (hpure.dual l ι x a ha).le) s
+    (fun x a ha ↦ (hpure.dual ι x a ha).le) s
     (D.hasEigenvalue_boundaryFrobenius_of_forall_inertia l htriv' hα')
   rw [WeilGroup.frobeniusWeight_inv] at hge
   linarith

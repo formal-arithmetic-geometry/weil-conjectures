@@ -368,7 +368,7 @@ theorem frobeniusWeight_le_add_two_of_hasNonnegCoeffs [IsAffine C] (hρ : W.IsLi
   set e := p.degreeOver x.1
   have he : e ≠ 0 := p.degreeOver_ne_zero x.2
   -- the eigenvalues of the geometric Frobenius on `H_c²`
-  set Tq := (Nat.card K : PadicAlgCl l) • ρ.toCoinvariants W.geometric W.frobeniusLift
+  set Tq := W.compactTopFrobenius l ρ
   set S := Tq.charpoly.roots.map ι
   have hS : ∀ c ∈ S, ‖c‖ ≤ q ^ (D / 2 + 1) := by
     intro c hc
