@@ -9,8 +9,11 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import Mathlib.LinearAlgebra.GeneralLinearGroup.Basic
+public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
+public import WeilConjectures.Mathlib.Algebra.Order.BigOperators.Group.Multiset
 public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 
 /-!
@@ -60,10 +63,19 @@ rebased on the étale fundamental group and the trace formula is available.
 
 - `AlgebraicGeometry.WeilGroup.IsLisse.finite_geometric_image`
 - `AlgebraicGeometry.WeilGroup.IsLisse.isPunctuallyPure_of_finrank_eq_one`
+- `AlgebraicGeometry.WeilGroup.le_add_of_isConstituent_tprod_of_hasDetWeight`: the determinant
+  weights of the constituents of a tensor product are bounded by the sum of the bounds.
+- `AlgebraicGeometry.WeilGroup.frobeniusWeight_le_add_inv_two_pow_of_isReal`: the Rankin–Selberg
+  bound for the iterated tensor squares.
 - `AlgebraicGeometry.WeilGroup.hasWeightsAtMost_of_isReal`, and its unfolded form
   `AlgebraicGeometry.WeilGroup.sq_norm_le_rpow_of_isReal`
 - `AlgebraicGeometry.BoundaryDatum.frobeniusWeight_le_of_hasWeightsAtMost`
 - `AlgebraicGeometry.BoundaryDatum.isPunctuallyPure_of_isPunctuallyPure_restrict`
+- `AlgebraicGeometry.WeilGroup.IsLisse.hasDetWeight`: every lisse Weil sheaf has a determinant
+  weight, read off from the rank-one determinant line.
+- `AlgebraicGeometry.WeilGroup.isPunctuallyPure_subquotient_of_isReal`: the composition factors
+  of a real lisse Weil sheaf on an affine curve are pure of their determinant weights.
+- `AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal_of_isAffine`
 - `AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal`
 -/
 
@@ -217,6 +229,13 @@ theorem HasDetWeight.of_equiv {σ : Representation (PadicAlgCl l) W.carrier V'} 
     {γ : ℝ} (h : W.HasDetWeight l ρ ι γ) : W.HasDetWeight l σ ι γ := fun x ↦ by
   rw [e.det_apply, e.finrank_eq]
   exact h x
+
+omit [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] in
+/-- Local eigenvalues are invariant under equivalence of representations. -/
+theorem localEigenvalues_of_equiv {σ : Representation (PadicAlgCl l) W.carrier V'}
+    (e : ρ.Equiv σ) (x : C.finitePoints) :
+    W.localEigenvalues l σ x = W.localEigenvalues l ρ x := by
+  rw [localEigenvalues, localEigenvalues, e.charpoly_apply]
 
 end DetWeight
 
@@ -563,6 +582,219 @@ namespace WeilGroup
 variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V]
   [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
   (ρ : Representation (PadicAlgCl l) W.carrier V) (ι : PadicAlgCl l →+* ℂ)
+
+set_option maxHeartbeats 1000000 in
+-- The constituent bound elaborates exterior powers of direct sums of subquotients.
+/-- Blueprint `thm:rp-real-lisse-purity-affine`, Steps 1–3, for the composition factors.
+
+Let `ρ` be an `ι`-real lisse Weil representation on a smooth geometrically connected affine
+curve, and `0 = F 0 ⋖ F 1 ⋖ ⋯ ⋖ F n = ρ` a composition series. Then every composition factor
+`Q j = F (j + 1) ⧸ F j` is punctually `ι`-pure of its determinant weight
+`γ = wt_{ι, q}(det Q j (γ)) / rank Q j`.
+
+The semisimplification `S = ⨁ i, Q i` has the local polynomials of `ρ`, so its exterior power
+`E = ⋀^(N + 1) S`, where `N` is the total rank of the factors of determinant weight `> γ`, is
+real (`sk-r-real-linear`); by the exterior-power rule (`sk-p-exterior`) its constituents have
+determinant weight at most `B + γ`, where `B` is the sum of the determinant weights of those
+factors counted with rank. The Rankin–Selberg bound (`sk-p-real-rankin`) then bounds every
+local eigenvalue of `E` by `B + γ`. At a closed point `x`, the product of an eigenvalue `β` of
+`Q j` with all eigenvalues of the factors of weight `> γ` is such an eigenvalue
+(`sk-p-linear-spectra`), of weight `wt β + B`; so `wt β ≤ γ`. The weights of the eigenvalues
+of `Q j` sum to the weight `rank (Q j) * γ` of its determinant, so all of them equal `γ`. -/
+theorem isPunctuallyPure_subquotient_of_isReal [IsAffine C] [SmoothOfRelativeDimension 1 p]
+    [GeometricallyConnected p] (hρ : W.IsLisse l ρ) (hreal : W.IsReal l ρ ι) {n : ℕ}
+    {F : ℕ → Subrepresentation ρ} (h0 : F 0 = ⊥) (hn : F n = ⊤)
+    (hF : ∀ i < n, F i ⋖ F (i + 1)) {j : ℕ} (hj : j < n) :
+    W.IsPunctuallyPure l ((F (j + 1)).subquotient (F j)) ι
+      (frobeniusWeight ι (Nat.card K)
+          (LinearMap.det ((F (j + 1)).subquotient (F j) W.frobeniusLift)) /
+        Module.finrank (PadicAlgCl l)
+          ((F (j + 1)).toSubmodule ⧸ (F j).toSubmodule.comap (F (j + 1)).toSubmodule.subtype)) := by
+  classical
+  intro x α hα
+  let Qt : Fin n → Type u := fun i ↦
+    (F (i + 1)).toSubmodule ⧸ (F i).toSubmodule.comap (F (i + 1)).toSubmodule.subtype
+  let Q : ∀ i, Representation (PadicAlgCl l) W.carrier (Qt i) := fun i ↦
+    (F (i + 1)).subquotient (F i)
+  let d : Fin n → ℕ := fun i ↦ Module.finrank (PadicAlgCl l) (Qt i)
+  let w : Fin n → ℝ := fun i ↦
+    frobeniusWeight ι (Nat.card K) (LinearMap.det (Q i W.frobeniusLift)) / d i
+  let j' : Fin n := ⟨j, hj⟩
+  change α ∈ W.localEigenvalues l (Q j') x at hα
+  change frobeniusWeight ι (C.pointNorm x.1) α = w j'
+  set γ := w j' with hγ
+  set qx := C.pointNorm x.1
+  let eig : Fin n → Multiset (PadicAlgCl l) := fun i ↦ W.localEigenvalues l (Q i) x
+  -- the composition factors
+  have hQlisse (i : Fin n) : W.IsLisse l (Q i) := hρ.subquotient _ _
+  have hQirr (i : Fin n) : (Q i).IsIrreducible :=
+    (Subrepresentation.isIrreducible_subquotient_iff (hF i i.2).le).2 (hF i i.2)
+  have hQnontriv (i : Fin n) : Nontrivial (Qt i) := by
+    have := hQirr i
+    by_contra h
+    rw [not_nontrivial_iff_subsingleton] at h
+    exact (bot_ne_top : (⊥ : Subrepresentation (Q i)) ≠ ⊤)
+      (Subrepresentation.toSubmodule_injective (Subsingleton.elim _ _))
+  have hQdet (i : Fin n) : W.HasDetWeight l (Q i) ι (w i) := (hQlisse i).hasDetWeight ι
+  have hcardeig (i : Fin n) : Multiset.card (eig i) = d i := by
+    rw [show d i = (Q i (W.frobenius x)).charpoly.natDegree from
+      (LinearMap.charpoly_natDegree _).symm]
+    exact Polynomial.splits_iff_card_roots.mp (IsAlgClosed.splits _)
+  have hweig (i : Fin n) : frobeniusWeight ι qx (eig i).prod = d i * w i := by
+    change frobeniusWeight ι qx (Q i (W.frobenius x)).charpoly.roots.prod = _
+    rw [← Module.End.det_eq_prod_roots_charpoly_of_splits (IsAlgClosed.splits _)]
+    exact hQdet i x
+  have h0eig (i : Fin n) : (0 : PadicAlgCl l) ∉ eig i := zero_notMem_localEigenvalues x
+  -- the semisimplification
+  let S := Representation.directSum Q
+  have hcharpoly (g : W.carrier) : (S g).charpoly = (ρ g).charpoly := by
+    rw [Representation.charpoly_directSum, LinearMap.charpoly_eq_prod_charpoly_mapQ_of_le (ρ g)
+      (fun i ↦ (F i).toSubmodule) n (by rw [h0]; rfl) (by rw [hn]; rfl) (fun i hi ↦ (hF i hi).le)
+      (fun i ↦ (F i).apply_mem_toSubmodule g)]
+    exact Fin.prod_univ_eq_prod_range (fun i ↦ ((F (i + 1)).subquotient (F i) g).charpoly) n
+  have heigS : W.localEigenvalues l S x = ∑ i, eig i := by
+    change (S (W.frobenius x)).charpoly.roots = _
+    rw [Representation.charpoly_directSum, Polynomial.roots_prod _ _
+      (Finset.prod_ne_zero_iff.2 fun i _ ↦ (LinearMap.charpoly_monic _).ne_zero)]
+    rfl
+  -- the factors of determinant weight above `γ`
+  let A : Finset (Fin n) := Finset.univ.filter fun i ↦ γ < w i
+  let N := ∑ i ∈ A, d i
+  let B := ∑ i ∈ A, (d i : ℝ) * w i
+  have hj'A : j' ∉ A := by simp [A, γ]
+  have hSlisse : W.IsLisse l S := IsLisse.directSum hQlisse
+  have hSnontriv : Nontrivial (DirectSum (Fin n) Qt) :=
+    (DirectSum.of_injective (β := Qt) j').nontrivial
+  -- the bound on the determinant weights of the constituents of `⋀^(N + 1) S`
+  have hbound : ∀ {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l) V']
+      [FiniteDimensional (PadicAlgCl l) V'] (τ : Representation (PadicAlgCl l) W.carrier V')
+      (γ' : ℝ), τ.IsConstituent (S.exteriorPower (N + 1)) → W.HasDetWeight l τ ι γ' →
+      γ' ≤ B + γ := by
+    intro V' _ _ _ τ γ' hτ hγ'
+    obtain ⟨N₁, M₁, hcov, ⟨eτ⟩⟩ := hτ.exists_covBy
+    have hRirr : (M₁.subquotient N₁).IsIrreducible :=
+      (Representation.isIrreducible_iff_of_equiv eτ).1 hτ.1
+    have hRlisse : W.IsLisse l (M₁.subquotient N₁) := (hSlisse.exteriorPower _).subquotient _ _
+    obtain ⟨T, hT, hTc, hTs⟩ :=
+      Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower
+      (weightCharacter ι (Nat.card K)) W.deg W.frobeniusLift S (N + 1)
+      (Representation.directSumSummand Q)
+      (fun i ↦ (Representation.isIrreducible_iff_of_equiv
+        (Representation.directSumSummandEquiv Q i)).1 (hQirr i))
+      (fun i ↦ ((hQlisse i).of_equiv
+        (Representation.directSumSummandEquiv Q i)).hasFiniteGeometricDet)
+      (Representation.isInternal_directSumSummand Q) hcov.lt hRirr hRlisse.hasFiniteGeometricDet
+    have hτnontriv : Nontrivial V' := by
+      have := hτ.1
+      by_contra h
+      rw [not_nontrivial_iff_subsingleton] at h
+      exact (bot_ne_top : (⊥ : Subrepresentation τ) ≠ ⊤)
+        (Subrepresentation.toSubmodule_injective (Subsingleton.elim _ _))
+    have hγ'eq : γ' = (M₁.subquotient N₁).detWeight (weightCharacter ι (Nat.card K))
+        W.frobeniusLift := by
+      rw [detWeight_weightCharacter, eτ.det_apply, eτ.finrank_eq]
+      have hτlisse : W.IsLisse l τ := hRlisse.of_equiv eτ.symm
+      exact HasDetWeight.eq (ρ := τ) ι hγ' (hτlisse.hasDetWeight ι) x
+    have hWM : Representation.weightMultiset (weightCharacter ι (Nat.card K)) W.frobeniusLift
+        (Representation.directSumSummand Q) = ∑ i, Multiset.replicate (d i) (w i) := by
+      simp only [Representation.weightMultiset]
+      refine Finset.sum_congr rfl fun i _ ↦ ?_
+      have e := Representation.directSumSummandEquiv Q i
+      rw [detWeight_weightCharacter, e.det_apply, e.finrank_eq]
+    have hfilter : (∑ i, Multiset.replicate (d i) (w i)).filter (γ < ·) =
+        ∑ i ∈ A, Multiset.replicate (d i) (w i) := by
+      have key (s : Finset (Fin n)) : (∑ i ∈ s, Multiset.replicate (d i) (w i)).filter (γ < ·) =
+          ∑ i ∈ s.filter (fun i ↦ γ < w i), Multiset.replicate (d i) (w i) := by
+        induction s using Finset.induction_on with
+        | empty => simp
+        | insert a s ha ih =>
+          rw [Finset.sum_insert ha, Multiset.filter_add, ih, Finset.filter_insert]
+          split_ifs with h
+          · rw [Finset.sum_insert (by simp [ha]),
+              Multiset.filter_eq_self.2 fun b hb ↦ (Multiset.eq_of_mem_replicate hb) ▸ h]
+          · rw [Multiset.filter_eq_nil.2 fun b hb ↦ (Multiset.eq_of_mem_replicate hb) ▸ h,
+              zero_add]
+      exact key Finset.univ
+    rw [hWM] at hT
+    have hle := Multiset.sum_le_sum_filter_add_of_le γ hT (by
+      rw [hTc, hfilter, Multiset.card_sum]
+      simp [N])
+    rw [hfilter, Multiset.sum_sum] at hle
+    simp only [Multiset.sum_replicate, nsmul_eq_mul] at hle
+    rw [hγ'eq, hTs]
+    exact hle
+  -- the upper bound for the eigenvalues of the block `Q j`
+  have key (β : PadicAlgCl l) (hβ : β ∈ eig j') : frobeniusWeight ι qx β ≤ γ := by
+    let t := β ::ₘ ∑ i ∈ A, eig i
+    have ht : t.prod ∈ W.localEigenvalues l (S.exteriorPower (N + 1)) x := by
+      change t.prod ∈ (_root_.exteriorPower.map (N + 1) (S (W.frobenius x))).charpoly.roots
+      rw [LinearMap.charpoly_roots_exteriorPower]
+      change t.prod ∈ ((W.localEigenvalues l S x).powersetCard (N + 1)).map Multiset.prod
+      rw [heigS]
+      refine Multiset.mem_map_of_mem _ (Multiset.mem_powersetCard.2 ⟨?_, ?_⟩)
+      · change β ::ₘ (∑ i ∈ A, eig i) ≤ _
+        rw [← Finset.add_sum_erase _ _ (Finset.mem_univ j'), ← Multiset.singleton_add]
+        exact add_le_add (Multiset.singleton_le.2 hβ) (Finset.sum_le_sum_of_subset fun i hi ↦
+          Finset.mem_erase.2 ⟨fun h ↦ hj'A (h ▸ hi), Finset.mem_univ _⟩)
+      · simp [t, Multiset.card_sum, hcardeig, N, add_comm]
+    have hEnontriv : Nontrivial (⋀[PadicAlgCl l]^(N + 1) (DirectSum (Fin n) Qt)) := by
+      by_contra h
+      rw [not_nontrivial_iff_subsingleton] at h
+      have h' : W.localEigenvalues l (S.exteriorPower (N + 1)) x = 0 := by
+        rw [localEigenvalues, LinearMap.charpoly_eq_one_of_subsingleton, Polynomial.roots_one,
+          Multiset.empty_eq_zero]
+      rw [h'] at ht
+      exact Multiset.notMem_zero _ ht
+    have hE := hasWeightsAtMost_of_isReal W l (S.exteriorPower (N + 1)) ι
+      (hSlisse.exteriorPower _) (hreal.exteriorPower_of_charpoly_eq ι (fun _ ↦ hcharpoly _) _)
+      hbound x _ ht
+    have hne : ∀ i ∈ A, (eig i).prod ≠ 0 := fun i _ ↦ Multiset.prod_ne_zero (h0eig i)
+    have hw : frobeniusWeight ι qx t.prod = frobeniusWeight ι qx β + B := by
+      rw [Multiset.prod_cons, Multiset.prod_sum,
+        frobeniusWeight_mul ι qx (fun h ↦ h0eig j' (h ▸ hβ)) (Finset.prod_ne_zero_iff.2 hne),
+        frobeniusWeight_prod ι qx A hne]
+      simp only [hweig, B]
+    linarith
+  -- the product of the eigenvalues of `Q j` has weight `rank (Q j) * γ`
+  have hsum : ((eig j').map (frobeniusWeight ι qx)).sum =
+      Multiset.card ((eig j').map (frobeniusWeight ι qx)) • γ := by
+    rw [← frobeniusWeight_multiset_prod ι qx (h0eig j'), hweig, Multiset.card_map, hcardeig,
+      nsmul_eq_mul]
+  exact Multiset.eq_of_le_of_sum_eq (fun a ha ↦ by
+      obtain ⟨b, hb, rfl⟩ := Multiset.mem_map.1 ha
+      exact key b hb) hsum _ (Multiset.mem_map_of_mem _ hα)
+
+/-- Blueprint `thm:rp-real-lisse-purity-affine`: Purity of real lisse sheaves on curves, for an
+affine curve.
+
+Let `C₀ / 𝔽_q` be a smooth geometrically connected affine curve and `ρ` an `ι`-real lisse Weil
+representation. Every irreducible constituent `σ` of `ρ` is punctually `ι`-pure of its
+determinant weight `γ`. Indeed `σ` is a composition factor `F (i₀ + 1) ⧸ F i₀` of a
+composition series of `ρ`, and the composition factors are pure of their determinant weights
+(`AlgebraicGeometry.WeilGroup.isPunctuallyPure_subquotient_of_isReal`); the determinant weight
+of a nonzero representation is unique. -/
+theorem isPunctuallyPure_of_isConstituent_of_isReal_of_isAffine [IsAffine C]
+    [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] (hρ : W.IsLisse l ρ)
+    (hreal : W.IsReal l ρ ι) {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l) V']
+    [FiniteDimensional (PadicAlgCl l) V']
+    (σ : Representation (PadicAlgCl l) W.carrier V') (hσ : σ.IsConstituent ρ)
+    {γ : ℝ} (hγ : W.HasDetWeight l σ ι γ) :
+    W.IsPunctuallyPure l σ ι γ := by
+  obtain ⟨N, M, hNM, hE⟩ := hσ.exists_covBy
+  obtain ⟨n, F, i₀, h0, hn, hF, hi₀, hFi₀, hFi₀'⟩ := Subrepresentation.exists_covBy_chain hNM
+  rw [← hFi₀, ← hFi₀'] at hE
+  obtain ⟨e⟩ := hE
+  intro x α hα
+  rw [← localEigenvalues_of_equiv e] at hα
+  rw [isPunctuallyPure_subquotient_of_isReal W l ρ ι hρ hreal h0 hn hF hi₀ x α hα]
+  have hirr := (Subrepresentation.isIrreducible_subquotient_iff (hF i₀ hi₀).le).2 (hF i₀ hi₀)
+  have : Nontrivial ((F (i₀ + 1)).toSubmodule ⧸
+      (F i₀).toSubmodule.comap (F (i₀ + 1)).toSubmodule.subtype) := by
+    by_contra h
+    rw [not_nontrivial_iff_subsingleton] at h
+    exact (bot_ne_top : (⊥ : Subrepresentation ((F (i₀ + 1)).subquotient (F i₀))) ≠ ⊤)
+      (Subrepresentation.toSubmodule_injective (Subsingleton.elim _ _))
+  exact ((hρ.subquotient _ _).hasDetWeight ι).eq ι (hγ.of_equiv ι e) x
 
 /-- Blueprint `sk-p-real-purity`: Purity of real lisse sheaves on curves.
 
