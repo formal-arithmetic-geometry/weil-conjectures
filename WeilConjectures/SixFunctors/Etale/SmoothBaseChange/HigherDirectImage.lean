@@ -6,8 +6,10 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
+public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Transition maps of higher direct images
@@ -29,10 +31,14 @@ in the limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit`.
 
 - `AlgebraicGeometry.Etale.higherDirectImage_limit`: higher direct images commute with limits
   of schemes along affine transition morphisms.
+- `AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists`: the
+  higher direct image `R^q h_* (Λ/dΛ)` vanishes as soon as every class of
+  `H^q(U ×_X Y, ℤ/e)`, for `e ∣ d` and `U` affine étale over `X`, dies on an étale cover of `U`.
 
 ## References
 
 - Stacks Project, Lemma 59.51.7, <https://stacks.math.columbia.edu/tag/09Z1>
+- Stacks Project, Lemma 59.51.6, <https://stacks.math.columbia.edu/tag/03Q8>
 -/
 
 @[expose] public section
@@ -126,6 +132,34 @@ theorem Etale.higherDirectImage_limit {W S : Scheme.{u}} (k : W ⟶ S)
         (Etale.higherDirectImageOverMap Λ k G q (c.π.app i))).hom y' = 0 →
       ∃ (j : I) (f : j ⟶ i), ((S.uliftPointSmallEtale s).sheafFiber.map
         (Etale.higherDirectImageOverMap Λ k G q (D.map f))).hom y' = 0 :=
+  sorry
+
+/-- Blueprint `sbc-lem-higher-direct-image-presheaf`, in the vanishing form used for constant
+coefficients: Higher direct image as a sheafified cohomology presheaf.
+
+Let `h : Y ⟶ X` be quasi-compact and quasi-separated, let `d : ℕ` and `q : ℕ`. Suppose that for
+every `e ∣ d`, every affine scheme `U` étale over `X` and every class
+`ξ ∈ H^q(Y ×_X U, ℤ/e)` there is an étale covering `{V i ⟶ U}` such that `ξ` dies after
+pullback to every `Y ×_X V i`. Then `R^q h_* (Λ/dΛ) = 0`.
+
+By Stacks `03Q8` the abelian sheaf `R^q h_* (ℤ/e)` is the sheafification of
+`U ↦ H^q(Y ×_X U, ℤ/e)` on `X_ét`, and the affine `U` form a basis of `X_ét`, so the hypothesis
+says that `R^q h_* (ℤ/e) = 0` for every `e ∣ d`. The underlying abelian group of `Λ/dΛ` is the
+filtered colimit of its finitely generated subgroups, which are finite direct sums of cyclic
+groups `ℤ/e` with `e ∣ d` (and of copies of `ℤ` when `d = 0`); as `h` is quasi-compact and
+quasi-separated, `R^q h_*` commutes with filtered colimits, so the underlying abelian sheaf of
+`R^q h_* (Λ/dΛ)` vanishes, and the higher direct images of a sheaf of `Λ`-modules are computed
+on its underlying abelian sheaf. -/
+@[stacks 03Q8]
+theorem Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists {X Y : Scheme.{u}}
+    (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (d q : ℕ)
+    (H : ∀ e : ℕ, e ∣ d → ∀ ⦃U : Scheme.{u}⦄ (u : U ⟶ X) [Etale u] [IsAffine U]
+      (ξ : Sheaf.H ((pullback h u).constantZMod e) q),
+      ∃ (ι : Type u) (V : ι → Scheme.{u}) (v : ∀ i, V i ⟶ U), (∀ i, Etale (v i)) ∧
+        (∀ x : U, ∃ i y, (v i).base y = x) ∧
+        ∀ i, Etale.cohomologyMap (pullback.map h (v i ≫ u) h u (𝟙 Y) (v i) (𝟙 X) (by simp)
+          (by simp)) _ q ξ = 0) :
+    IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d)) :=
   sorry
 
 end AlgebraicGeometry
