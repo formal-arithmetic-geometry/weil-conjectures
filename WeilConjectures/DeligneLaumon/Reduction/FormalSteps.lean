@@ -28,7 +28,9 @@ of weights at most `w`, by the hypercohomology spectral sequence.
 
 ## Main statements
 
-- `AlgebraicGeometry.HasDirectImageWeightBound.comp`: blueprint `sk-l-dl-general-composition`.
+- `AlgebraicGeometry.HasDirectImageWeightBound.comp`: blueprint `sk-l-dl-general-composition`,
+  through its form `AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_comp` for
+  a single sheaf.
 - `AlgebraicGeometry.WeilSheaf.exists_filtration_higherLowerShriek_comp`: the abutment filtration
   of the compact-support Leray spectral sequence, used in `lem-zl-composition-weight-bound`.
 - `AlgebraicGeometry.HasDirectImageWeightBound.of_openClosed`: blueprint
@@ -46,7 +48,8 @@ of weights at most `w`, by the hypercohomology spectral sequence.
 - `AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite`,
   `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite` and
   `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`: blueprint
-  `sk-l-dl-general-quasifinite`.
+  `sk-l-dl-general-quasifinite`, and its consequence
+  `AlgebraicGeometry.HasDirectImageWeightBound.of_locallyQuasiFinite`.
 
 ## References
 
@@ -66,6 +69,19 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {ι : PadicAlgCl l →+* ℂ}
+
+/-- The direct-image weight assertion only depends on the morphism, not on the instance
+arguments through which it is stated. -/
+theorem HasDirectImageWeightBound.of_eq {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    [Y.Over (Spec (CommRingCat.of k₀))] {f f' : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [f'.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f'] [LocallyOfFiniteType f']
+    [QuasiCompact f'] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (h : f = f')
+    (hf : HasDirectImageWeightBound k₀ ι f) : HasDirectImageWeightBound k₀ ι f' := by
+  subst h
+  exact hf
 
 /-! ### Composition
 
@@ -113,6 +129,27 @@ theorem WeilSheaf.exists_filtration_higherLowerShriek_comp (F : WeilSheaf k₀ l
 
 variable {f g}
 
+/-- Let `F` be a Weil sheaf on `X` such that `Rᵇf₀!F` is mixed of weights at most `w + b` for every
+`b`, and suppose the direct-image weight assertion holds for `g`. Then `Rⁿ(f ≫ g)₀!F` is mixed of
+weights at most `w + n` for every `n` (blueprint: `lem-zl-composition-weight-bound`, for a single
+sheaf).
+
+The `E₂`-term `Rᵃg₀!Rᵇf₀!F` of the compact-support Leray spectral sequence is mixed of weights
+at most `w + b + a`, so its subquotients `E_∞^{a,b}` are, and the abutment `Rⁿ(f ≫ g)₀!F` is
+filtered by these. -/
+theorem WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_comp {w : ℝ} {F : WeilSheaf k₀ l X}
+    (hF : ∀ b : ℕ,
+      ((WeilSheaf.higherLowerShriek k₀ l f b).obj F).IsMixedOfWeightsAtMost ι (w + b))
+    (hg : HasDirectImageWeightBound k₀ ι g) (n : ℕ) :
+    ((WeilSheaf.higherLowerShriek k₀ l (f ≫ g) n).obj F).IsMixedOfWeightsAtMost ι (w + n) := by
+  obtain ⟨m, G, φ, h0, hlast, hmono, hφ⟩ :=
+    WeilSheaf.exists_filtration_higherLowerShriek_comp (l := l) f g F n
+  refine WeilSheaf.IsMixedOfWeightsAtMost.of_filtration G φ h0 hlast fun i ↦ ?_
+  obtain ⟨a, b, hab, S, j, p, _, _⟩ := hφ i
+  have hE := hg (w + b) _ (hF b) a
+  rw [show w + (b : ℝ) + a = w + n by rw [← hab]; push_cast; ring] at hE
+  exact (hE.of_mono j).of_epi p
+
 /-- If the direct-image weight assertion holds for `f : X ⟶ Z` and for `g : Z ⟶ Y`, then it holds
 for `f ≫ g`:
 
@@ -122,21 +159,10 @@ X --- f ---> Z --- g ---> Y
   `-------- f ≫ g --------'
 ```
 
-(blueprint: `sk-l-dl-general-composition`, proved as `lem-zl-composition-weight-bound`).
-
-The `E₂`-term `Rᵃg₀!Rᵇf₀!F` of the compact-support Leray spectral sequence is mixed of weights
-at most `w + b + a`, so its subquotients `E_∞^{a,b}` are, and the abutment `Rⁿ(f ≫ g)₀!F` is
-filtered by these. -/
+(blueprint: `sk-l-dl-general-composition`, proved as `lem-zl-composition-weight-bound`). -/
 theorem HasDirectImageWeightBound.comp (hf : HasDirectImageWeightBound k₀ ι f)
-    (hg : HasDirectImageWeightBound k₀ ι g) : HasDirectImageWeightBound k₀ ι (f ≫ g) := by
-  intro w F hF n
-  obtain ⟨m, G, φ, h0, hlast, hmono, hφ⟩ :=
-    WeilSheaf.exists_filtration_higherLowerShriek_comp (l := l) f g F n
-  refine WeilSheaf.IsMixedOfWeightsAtMost.of_filtration G φ h0 hlast fun i ↦ ?_
-  obtain ⟨a, b, hab, S, j, p, _, _⟩ := hφ i
-  have hE := hg (w + b) _ (hf w F hF b) a
-  rw [show w + (b : ℝ) + a = w + n by rw [← hab]; push_cast; ring] at hE
-  exact (hE.of_mono j).of_epi p
+    (hg : HasDirectImageWeightBound k₀ ι g) : HasDirectImageWeightBound k₀ ι (f ≫ g) :=
+  fun w F hF ↦ WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_comp (hf w F hF) hg
 
 end Composition
 
@@ -571,6 +597,16 @@ theorem WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : �
   -- eigenvalue `α` upstairs contributes eigenvalues `β` with `βᵉ = α` downstairs, whose
   -- normalized weights agree because `q_x = q_yᵉ`.
   sorry
+
+/-- The direct-image weight assertion holds for a separated quasi-finite morphism `f`: `Rʳf₀!`
+vanishes for `r > 0`, and `f₀!` preserves mixed upper weight bounds
+(blueprint: `sk-l-dl-general-quasifinite`). -/
+theorem HasDirectImageWeightBound.of_locallyQuasiFinite : HasDirectImageWeightBound k₀ ι f := by
+  intro w F hF r
+  rcases Nat.eq_zero_or_pos r with rfl | hr
+  · simpa using hF.higherLowerShriek_zero_of_quasiFinite f
+  · exact WeilSheaf.isMixedOfWeightsAtMost_of_isZero
+      (isZero_higherLowerShriek_of_quasiFinite f r hr F) _
 
 end QuasiFinite
 
