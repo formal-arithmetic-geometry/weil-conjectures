@@ -425,6 +425,7 @@ public import WeilConjectures.Mathlib.Algebra.DirectSum.LinearMap
 public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.Algebra.Exact.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
@@ -446,6 +447,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Lie.CartanCriterion
 public import WeilConjectures.Mathlib.Algebra.Lie.Engel
 public import WeilConjectures.Mathlib.Algebra.Lie.LieTheorem
