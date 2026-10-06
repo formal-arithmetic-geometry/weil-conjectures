@@ -233,13 +233,13 @@ theorem finsum_ord_eq_finrank [IsIntegral X] [IsLocallyNoetherian X] {Y : Scheme
       π.finrank (genericPoint Y) :=
   sorry
 
+variable (k X) in
 /-- **Principal divisors have degree zero.** For a nonzero rational function `f` on a proper
 smooth integral curve over an algebraically closed field `k`,
 `deg div(f) = ∑_x v_x(f) = 0`. For `f ∉ k` this is `div(f) = π_f^*([0] - [∞])` for the finite
 flat morphism `π_f : X ⟶ ℙ¹_k` of degree `d`, whose degree is `d - d = 0`.
 
 (blueprint: `lem-sc-deg-principal-zero`) -/
-variable (k X) in
 theorem finsum_ord_eq_zero [IsIntegral X] [IsLocallyNoetherian X] {f : X.functionField}
     (hf : f ≠ 0) : ∑ᶠ x : X, X.ord f x = 0 :=
   sorry
