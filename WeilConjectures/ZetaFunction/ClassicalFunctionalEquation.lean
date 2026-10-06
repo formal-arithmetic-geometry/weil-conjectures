@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.Algebra.BigOperators.GroupWithZero.Finset
 public import WeilConjectures.Mathlib.Algebra.Polynomial.BigOperators
+public import WeilConjectures.Mathlib.Data.Fin.Rev
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.ZetaFunction.BettiNumbers
 
@@ -79,21 +81,6 @@ noncomputable def weilSign (q : ℕ) (m : ℤ) {n : ℕ} (P : Fin (n + 1) → Po
     ∏ i : Fin (n + 1),
       ((-1) ^ (P i).natDegree * ((P i).leadingCoeff : ℚ)) ^ ((-1 : ℤ) ^ (i : ℕ))
 
-/-- A power of a nonzero element raised to an integer sum is the product of the powers. -/
-private theorem zpow_sum_of_ne_zero {G ι : Type*} [CommGroupWithZero G] {a : G} (ha : a ≠ 0)
-    (s : Finset ι) (f : ι → ℤ) : a ^ (∑ i ∈ s, f i) = ∏ i ∈ s, a ^ f i := by
-  classical
-  induction s using Finset.induction_on with
-  | empty => simp
-  | insert j s hj ih => rw [Finset.sum_insert hj, Finset.prod_insert hj, zpow_add₀ ha, ih]
-
-/-- The sign `(-1)ⁱ` is invariant under `i ↦ 2 d - i`. -/
-private theorem neg_one_pow_rev {R : Type*} [Monoid R] [HasDistribNeg R] {d : ℕ}
-    (i : Fin (2 * d + 1)) : (-1 : R) ^ (i.rev : ℕ) = (-1) ^ (i : ℕ) := by
-  have h : (i.rev : ℕ) + 2 * i = 2 * d + i := by simp only [Fin.val_rev]; omega
-  have := congrArg (fun n : ℕ ↦ (-1 : R) ^ n) h
-  simpa [pow_add, pow_mul] using this
-
 /-- **The determinant product rule.** For a family of normalized Weil factors satisfying the
 functional equation, the leading coefficients in degrees `i` and `2 d - i` multiply to
 `q ^ (d · b i)`, where `b i = deg (P i)`. Up to the signs `(-1)^{b i}`, which cancel, these
@@ -155,11 +142,11 @@ theorem WeilFunctionalEquation.prod_determinant_sq {q d : ℕ} (hq : 1 < q)
   have hrev : ∏ i : Fin (2 * d + 1), D i ^ ((-1 : ℤ) ^ (i : ℕ)) =
       ∏ i : Fin (2 * d + 1), D i.rev ^ ((-1 : ℤ) ^ (i : ℕ)) := by
     conv_lhs => rw [← Equiv.prod_comp Fin.revPerm]
-    simp only [Fin.revPerm_apply, neg_one_pow_rev]
+    simp only [Fin.revPerm_apply, Fin.neg_one_pow_rev]
   rw [sq]
   nth_rewrite 2 [hrev]
   rw [← Finset.prod_mul_distrib, Polynomial.alternatingNatDegreeSum, Finset.mul_sum,
-    zpow_sum_of_ne_zero hq0]
+    zpow_sum₀ hq0]
   refine Finset.prod_congr rfl fun i _ ↦ ?_
   rw [← mul_zpow, hD i, ← zpow_natCast, ← zpow_mul]
   congr 1
@@ -209,7 +196,7 @@ theorem WeilFunctionalEquation.alternatingProdEval_eq_prod_determinant {q d : �
           ((P i).map (Int.castRingHom ℂ)).eval t ^ ((-1 : ℤ) ^ ((i : ℕ) + 1)) := by
     intro i
     rw [hfe.eval_zpow_mul_inv hq h0 i.rev ht, Fin.rev_rev, hfe.natDegree_rev i, pow_succ,
-      neg_one_pow_rev, ← pow_succ]
+      Fin.neg_one_pow_rev, ← pow_succ]
     have hc : ((P i).leadingCoeff : ℂ) ≠ 0 := by
       simpa using (Polynomial.leadingCoeff_ne_zero.2 fun h ↦ by simpa [h] using h0 i)
     rcases neg_one_pow_eq_or ℤ (i : ℕ) with h | h <;>
@@ -221,8 +208,8 @@ theorem WeilFunctionalEquation.alternatingProdEval_eq_prod_determinant {q d : �
     ← Equiv.prod_comp Fin.revPerm]
   simp only [Fin.revPerm_apply]
   rw [Finset.prod_congr rfl fun i _ ↦ key i, Finset.prod_mul_distrib, Finset.prod_mul_distrib,
-    Finset.prod_mul_distrib, ← zpow_sum_of_ne_zero (neg_ne_zero.2 one_ne_zero),
-    ← zpow_sum_of_ne_zero ht, Polynomial.alternatingNatDegreeSum]
+    Finset.prod_mul_distrib, ← zpow_sum₀ (neg_ne_zero.2 one_ne_zero),
+    ← zpow_sum₀ ht, Polynomial.alternatingNatDegreeSum]
 
 /-- **The classical functional equation** (blueprint `sk-thm-fe`, and the main claim of
 `prop-functional-equation`). The alternating product of the values of a family of normalized

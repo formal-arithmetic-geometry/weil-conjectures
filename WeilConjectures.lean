@@ -390,6 +390,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.QuotientTwo
 public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor
 public import WeilConjectures.GroupTheory.TateModule
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
+public import WeilConjectures.Mathlib.Algebra.BigOperators.GroupWithZero.Finset
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Adjunctions
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.ForgetCorepresentable
@@ -601,6 +602,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
+public import WeilConjectures.Mathlib.Data.Fin.Rev
 public import WeilConjectures.Mathlib.Data.Set.Image
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
