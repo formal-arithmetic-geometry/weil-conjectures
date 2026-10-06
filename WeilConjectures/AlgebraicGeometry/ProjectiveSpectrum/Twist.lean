@@ -49,12 +49,15 @@ homogeneous element is `HomogeneousLocalization.mul_mem_degreePart` applied poin
   every `m` when `f` has degree `1`.
 - `AlgebraicGeometry.Proj.isInvertible_twist`: `𝒪(m)` is invertible when the `D₊(f)` with `f`
   of degree `1` cover `Proj 𝒜`.
+- `AlgebraicGeometry.Proj.nonempty_tensorObj_twist_iso`: `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)` under the same
+  hypothesis.
 
 ## TODO
 
 - Construct `M~` for an arbitrary graded `A`-module `M` and recover `𝒪(m)` as `(A(m))~`. All
   the proofs in this file go through with `a ∈ 𝒜 i` replaced by `a ∈ M i`.
-- The multiplication `𝒪(m) ⊗ 𝒪(n) ≅ 𝒪(m + n)`.
+- Construct the multiplication `𝒪(m) ⊗ 𝒪(n) ≅ 𝒪(m + n)`; its existence is stated as
+  `AlgebraicGeometry.Proj.nonempty_tensorObj_twist_iso`.
 - The global sections `𝒜 m → Γ(𝒪(m))` of homogeneous elements; for a polynomial ring, they are
   all the global sections.
 - Relate `Proj.twist` to `Proj.twistingSheaf` on the `Abelian-variety` branch, whose fibres are
@@ -449,6 +452,21 @@ lemma isInvertible_twist (h : ∀ x : Proj 𝒜, ∃ f ∈ 𝒜 1, x ∈ Proj.ba
     obtain ⟨f, hf, hx⟩ := h x
     obtain ⟨e⟩ := nonempty_restrict_twist_iso_unit m hf
     exact ⟨_, hx, ⟨(Scheme.Modules.restrictFunctorIsoPullback _).symm.app _ ≪≫ e⟩⟩
+
+open MonoidalCategory in
+variable (𝒜) in
+/-- **Twists and tensor products**: when the basic open sets `D₊(f)` of the homogeneous elements
+`f` of degree `1` cover `Proj 𝒜`, `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)`. The canonical isomorphism is
+induced by the multiplication of fractions; on `D₊(f)` it sends `fᵃ ⊗ fᵇ` to `fᵃ⁺ᵇ`, i.e. the
+local bases `e^{(a)} ⊗ e^{(b)}` to `e^{(a+b)}`, and these local isomorphisms agree on overlaps
+since the transition units multiply. Only the existence of an isomorphism is recorded here: the
+tensor product of sheaves of modules is a sheafification, out of which the multiplication map
+is not constructed yet.
+
+(blueprint: `lem-pc-twist-tensor`) -/
+theorem nonempty_tensorObj_twist_iso (h : ∀ x : Proj 𝒜, ∃ f ∈ 𝒜 1, x ∈ Proj.basicOpen 𝒜 f)
+    (a b : ℤ) : Nonempty (twist 𝒜 a ⊗ twist 𝒜 b ≅ twist 𝒜 (a + b)) :=
+  sorry
 
 end Proj
 
