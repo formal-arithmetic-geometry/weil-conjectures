@@ -350,15 +350,26 @@ section AffineMorphism
 variable (k : Type u) [Field k] {Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
 
 /-- **Cohomology along an affine morphism.** Let `g : X ⟶ Y` be an affine morphism of
-`k`-schemes. For every quasi-coherent `𝒪_X`-module `ℱ` and every `q` we have
-`H^q(Y, g_* ℱ) ≅ H^q(X, ℱ)`, so the two have the same dimension over `k`. The higher direct
-images `R^p g_* ℱ` vanish, since on an affine open `V` of `Y` they are computed by the
-cohomology of `ℱ` on the affine scheme `g ⁻¹ᵁ V`, which vanishes by
+`k`-schemes. Then `H^q(X, ℱ) ≅ H^q(Y, g_* ℱ)`, `k`-linearly and naturally in the quasi-coherent
+`𝒪_X`-module `ℱ`. The higher direct images `R^p g_* ℱ` vanish, since on an affine open `V` of `Y`
+they are computed by the cohomology of `ℱ` on the affine scheme `g ⁻¹ᵁ V`, which vanishes by
 `subsingleton_H_succ_of_isAffine`; the Leray spectral sequence then degenerates. -/
+theorem nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom (g : X ⟶ Y)
+    [g.IsOver (Spec (.of k))] [IsAffineHom g] (q : ℕ) :
+    Nonempty ((SheafOfModules.isQuasicoherent X.ringCatSheaf).ι ⋙ cohomologyFunctor k q ≅
+      (SheafOfModules.isQuasicoherent X.ringCatSheaf).ι ⋙ pushforward g ⋙
+        cohomologyFunctor k q) :=
+  sorry
+
+/-- **Cohomology along an affine morphism.** Let `g : X ⟶ Y` be an affine morphism of
+`k`-schemes. For every quasi-coherent `𝒪_X`-module `ℱ` and every `q` we have
+`H^q(Y, g_* ℱ) ≅ H^q(X, ℱ)` (`nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom`), so the
+two have the same dimension over `k`. -/
 theorem finrankH_pushforward_of_isAffineHom (g : X ⟶ Y) [g.IsOver (Spec (.of k))]
     [IsAffineHom g] (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
-    (q : ℕ) : ((pushforward g).obj ℱ).finrankH k q = ℱ.finrankH k q :=
-  sorry
+    (q : ℕ) : ((pushforward g).obj ℱ).finrankH k q = ℱ.finrankH k q := by
+  obtain ⟨e⟩ := nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom k g q
+  exact ((e.app ⟨ℱ, inferInstance⟩).toLinearEquiv.finrank_eq).symm
 
 /-- The Euler characteristic is invariant under pushforward along an affine morphism:
 `χ(Y, g_* ℱ) = χ(X, ℱ)` for a quasi-coherent `𝒪_X`-module `ℱ`. -/

@@ -211,3 +211,64 @@ theorem Topology.IsInducing.surjective_of_topologicalKrullDim_eq [IrreducibleSpa
   omega
 
 end Inducing
+
+section DimensionZero
+
+variable {X : Type*} [TopologicalSpace X]
+
+/-- In a space of dimension at most zero, an inclusion of irreducible closed subsets is an
+equality: a strict inclusion would be a chain of length one. -/
+theorem IrreducibleCloseds.eq_of_le_of_topologicalKrullDim_le_zero
+    (h : topologicalKrullDim X ≤ 0) {A B : IrreducibleCloseds X} (hAB : A ≤ B) : A = B := by
+  by_contra hne
+  have := Order.LTSeries.length_le_krullDim ((RelSeries.singleton _ A).snoc B
+    (lt_of_le_of_ne hAB hne))
+  have h1 : ((1 : ℕ) : WithBot ℕ∞) ≤ 0 := this.trans h
+  exact absurd h1 (by decide)
+
+/-- **Zero-dimensional closed subsets are finite.** A closed subset `Z` of dimension at most zero
+of a noetherian `T₀` space is a finite set of closed points. This applies to the underlying space
+of a scheme of finite type over a field, which is noetherian.
+
+(blueprint: `lem-sc-dim0-finite`) -/
+theorem IsClosed.finite_and_isClosed_singleton_of_topologicalKrullDim_le_zero
+    [NoetherianSpace X] [T0Space X] {Z : Set X} (hZ : IsClosed Z)
+    (h : topologicalKrullDim Z ≤ 0) : Z.Finite ∧ ∀ z ∈ Z, IsClosed {z} := by
+  -- Every point of `Z` is closed in `Z`: its closure is a minimal irreducible closed subset.
+  have hcl : ∀ z : Z, closure {z} = {z} := by
+    intro z
+    refine subset_antisymm (fun y hy ↦ ?_) subset_closure
+    let A : IrreducibleCloseds Z := ⟨closure {y}, isIrreducible_singleton.closure, isClosed_closure⟩
+    let B : IrreducibleCloseds Z := ⟨closure {z}, isIrreducible_singleton.closure, isClosed_closure⟩
+    have hAB : A ≤ B := show closure {y} ⊆ closure {z} from
+      closure_minimal (by simpa using hy) isClosed_closure
+    have hAB' := IrreducibleCloseds.eq_of_le_of_topologicalKrullDim_le_zero h hAB
+    exact (inseparable_iff_closure_eq.mpr congr(($hAB' : Set Z))).eq
+  refine ⟨?_, fun z hz ↦ ?_⟩
+  · -- Each irreducible component of `Z` is the closure of any of its points, a singleton.
+    have hinj : Function.Injective fun z : Z ↦ irreducibleComponent z := by
+      intro y z hyz
+      have hy : irreducibleComponent y = {y} := by
+        let A : IrreducibleCloseds Z := ⟨{y}, isIrreducible_singleton, by
+          rw [← hcl y]; exact isClosed_closure⟩
+        let B : IrreducibleCloseds Z := ⟨irreducibleComponent y,
+          isIrreducible_irreducibleComponent, isClosed_irreducibleComponent⟩
+        have hAB : A ≤ B := show {y} ⊆ irreducibleComponent y from
+          Set.singleton_subset_iff.mpr (mem_irreducibleComponent)
+        exact congr(($((IrreducibleCloseds.eq_of_le_of_topologicalKrullDim_le_zero h hAB).symm) :
+          Set Z))
+      have hz : z ∈ irreducibleComponent y := by
+        have hyz : irreducibleComponent y = irreducibleComponent z := hyz
+        rw [hyz]
+        exact mem_irreducibleComponent
+      rw [hy] at hz
+      exact hz.symm
+    have : Finite (irreducibleComponents Z) := NoetherianSpace.finite_irreducibleComponents
+    have : Finite Z := Finite.of_injective (fun z : Z ↦ (⟨irreducibleComponent z,
+      irreducibleComponent_mem_irreducibleComponents z⟩ : irreducibleComponents Z))
+      fun y z hyz ↦ hinj congr(($hyz).1)
+    exact Set.toFinite Z
+  · have := hZ.isClosedMap_subtype_val _ (closure_subset_iff_isClosed.mp (hcl ⟨z, hz⟩).subset)
+    simpa using this
+
+end DimensionZero
