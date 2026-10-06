@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.LinearAlgebra.Dimension.Constructions
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 /-!
@@ -56,6 +57,9 @@ lemma `AlgebraicGeometry.Scheme.Modules.smul_H_eq_globalSectionsRingHom_smul`.
 
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.Modules.H.zeroLinearEquiv`: `H⁰(X, M) ≅ Γ(X, M)`.
+- `AlgebraicGeometry.Scheme.Modules.finrankH_of_isBilimit`: cohomology commutes with finite
+  biproducts.
 - `AlgebraicGeometry.Scheme.Modules.eulerChar_congr`: the Euler characteristic only depends on
   the isomorphism class of `M`.
 -/
@@ -208,6 +212,30 @@ noncomputable def H.mapLinearEquiv {M N : X.Modules} (e : M ≅ N) (n : ℕ) :
     (LinearMap.ext fun x ↦ by simp [H.mapₗ, ← H.map_comp_apply])
     (LinearMap.ext fun x ↦ by simp [H.mapₗ, ← H.map_comp_apply])
 
+lemma H.map_sum_apply {ι : Type*} (s : Finset ι) {M N : X.Modules} (φ : ι → (M ⟶ N)) (n : ℕ)
+    (x : M.H n) : H.map (∑ i ∈ s, φ i) n x = ∑ i ∈ s, H.map (φ i) n x := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simp
+  | insert i s hi ih => rw [Finset.sum_insert hi, Finset.sum_insert hi, H.map_add_apply, ih]
+
+/-- On global sections, multiplication by a global function `a` is the scalar action of `a`. -/
+lemma smulHom_app_top_apply (M : X.Modules) (a : Γ(X, ⊤)) (x : Γ(M, ⊤)) :
+    (M.smulHom a).app ⊤ x = a • x := by
+  rw [smulHom_app_apply]
+  congr 1
+  change X.presheaf.map (𝟙 (Opposite.op ⊤)) a = a
+  simp
+
+/-- **Cohomology in degree `0` is global sections**: `H⁰(X, M) ≅ Γ(X, M)` as
+`Γ(X, ⊤)`-modules. -/
+noncomputable def H.zeroLinearEquiv (M : X.Modules) : M.H 0 ≃ₗ[Γ(X, ⊤)] Γ(M, ⊤) where
+  __ := Sheaf.H.equiv₀ ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) isTerminalTop
+  map_smul' a x :=
+    (Sheaf.H.equiv₀_naturality (hT := isTerminalTop)
+      ((SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom a)) x).symm.trans
+      (smulHom_app_top_apply M a _)
+
 end Modules
 
 section Field
@@ -275,7 +303,9 @@ noncomputable def finrankH (M : X.Modules) (q : ℕ) : ℕ := Module.finrank k (
 The sum is a `finsum`, so it is `0` whenever infinitely many terms are nonzero. That makes
 `eulerChar` meaningful only together with a vanishing statement for the higher cohomology,
 such as Grothendieck vanishing
-`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`. -/
+`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`.
+
+(blueprint: `def-pc-euler-characteristic`) -/
 noncomputable def eulerChar (M : X.Modules) : ℤ := ∑ᶠ q : ℕ, (-1) ^ q * (M.finrankH k q : ℤ)
 
 /-- `h^q(X, M)` only depends on the isomorphism class of `M`. -/
@@ -313,6 +343,33 @@ theorem finrankH_eq_of_comp_specMap {L : Type u} [Field L]
         globalSectionsRingHom L (X := X) (ψ.hom r) • m
       rw [hring, RingHom.comp_apply])
   exact congrArg Cardinal.toNat h
+
+/-- **Cohomology of a finite biproduct.** If `b` is a bilimit bicone on a finite family `M`
+of sheaves of modules, then `H^n(X, b.pt) ≅ ∏ᵢ H^n(X, Mᵢ)` as `k`-vector spaces, via the
+projections and the inclusions of `b`. -/
+noncomputable def H.isBilimitLinearEquiv {ι : Type*} [Fintype ι] [DecidableEq ι]
+    {M : ι → X.Modules} {b : Bicone M} (hb : b.IsBilimit) (n : ℕ) :
+    b.pt.H n ≃ₗ[k] ((i : ι) → (M i).H n) where
+  toFun x i := H.map (b.π i) n x
+  invFun y := ∑ i, H.map (b.ι i) n (y i)
+  map_add' x y := funext fun i ↦ map_add _ x y
+  map_smul' c x := funext fun i ↦ H.map_smul _ n (globalSectionsRingHom k c) x
+  left_inv x := by
+    simp only [← H.map_comp_apply]
+    rw [← H.map_sum_apply, IsBilimit.total hb, H.map_id_apply]
+  right_inv y := funext fun j ↦ by
+    simp only [map_sum, ← H.map_comp_apply, b.ι_π]
+    rw [Finset.sum_eq_single j (fun i _ hij ↦ by rw [dif_neg hij, H.map_zero_apply])
+      (by simp), dif_pos rfl, eqToHom_refl, H.map_id_apply]
+
+/-- **`h^n` of a finite biproduct** is the sum of the `h^n` of the summands, when these are
+finite-dimensional. -/
+theorem finrankH_of_isBilimit {ι : Type*} [Fintype ι] {M : ι → X.Modules} {b : Bicone M}
+    (hb : b.IsBilimit) (n : ℕ) [∀ i, FiniteDimensional k ((M i).H n)] :
+    b.pt.finrankH k n = ∑ i, (M i).finrankH k n := by
+  classical
+  rw [finrankH, (H.isBilimitLinearEquiv k hb n).finrank_eq, Module.finrank_pi_fintype]
+  rfl
 
 end Modules
 

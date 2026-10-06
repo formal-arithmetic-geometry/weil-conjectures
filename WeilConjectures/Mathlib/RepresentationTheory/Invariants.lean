@@ -10,6 +10,7 @@ public import Mathlib.FieldTheory.Finiteness
 public import Mathlib.GroupTheory.PGroup
 public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 public import Mathlib.RepresentationTheory.Invariants
+public import Mathlib.RepresentationTheory.Irreducible
 
 /-!
 # Invariants of `p`-groups on `𝔽_p`-vector spaces
@@ -29,6 +30,8 @@ Let `G` be a `p`-group and `V` a finite-dimensional `𝔽_p`-linear representati
   there is `x ∉ W` with `g x - x ∈ W` for all `g`.
 - `Representation.invariants_ne_bot_and_exists_filtration_of_isPGroup`: both statements of
   the blueprint lemma together (blueprint: `lemma-weil-pbc-finite-l-group-filtration`).
+- `Representation.IsIrreducible.invariants_comp_subtype_eq_bot_or_eq_top`: in an irreducible
+  representation the invariants of a normal subgroup are zero or everything.
 -/
 
 @[expose] public section
@@ -147,5 +150,30 @@ theorem invariants_ne_bot_and_exists_filtration_of_isPGroup (hG : IsPGroup p G) 
       exact ρ.exists_flag_succ hG k (by omega) F h0 hk' hstab hstep
   obtain ⟨F, h0, hn, hstab, hstep⟩ := key _ le_rfl
   exact ⟨F, h0, Submodule.eq_top_of_finrank_eq hn, hstab, hstep⟩
+
+section Normal
+
+variable {k G V : Type*} [Field k] [Group G] [AddCommGroup V] [Module k V]
+  (ρ : Representation k G V) (S : Subgroup G) [S.Normal]
+
+/-- In an irreducible representation the invariants `V^S` of a normal subgroup `S` are zero or
+everything: they form a subrepresentation, since `s (g v) = g (g⁻¹ s g) v = g v` for `v ∈ V^S`
+(`Representation.le_comap_invariants`). -/
+theorem IsIrreducible.invariants_comp_subtype_eq_bot_or_eq_top [IsIrreducible ρ] :
+    invariants (ρ.comp S.subtype) = ⊥ ∨ invariants (ρ.comp S.subtype) = ⊤ :=
+  (IsSimpleOrder.eq_bot_or_eq_top (⟨invariants (ρ.comp S.subtype),
+    fun g _ hv ↦ le_comap_invariants ρ S g hv⟩ : Subrepresentation ρ)).imp
+      (congrArg Subrepresentation.toSubmodule) (congrArg Subrepresentation.toSubmodule)
+
+/-- A normal subgroup `S` with nonzero invariants in an irreducible representation acts
+trivially. -/
+theorem IsIrreducible.eq_one_of_invariants_ne_bot [IsIrreducible ρ]
+    (h : invariants (ρ.comp S.subtype) ≠ ⊥) {s : G} (hs : s ∈ S) : ρ s = 1 := by
+  have htop := (invariants_comp_subtype_eq_bot_or_eq_top ρ S).resolve_left h
+  ext v
+  have hv : v ∈ invariants (ρ.comp S.subtype) := htop ▸ Submodule.mem_top
+  exact hv ⟨s, hs⟩
+
+end Normal
 
 end Representation

@@ -9,7 +9,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.LinearAlgebra.Dimension.Constructions
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # The arithmetic genus and the cohomological degree of a sheaf of modules
@@ -34,8 +38,11 @@ Riemann–Roch, stated in `WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.l
 - `AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`: Grothendieck
   vanishing, which makes the `finsum` defining the Euler characteristic a finite sum on a
   noetherian scheme of finite dimension.
-- `AlgebraicGeometry.Scheme.arithmeticGenus_pullback`: the arithmetic genus is invariant under
-  base change along a field extension.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv`: flat base change of
+  cohomology along a field extension, `H^q(X_K, M_K) ≅ H^q(X, M) ⊗_k K`.
+- `AlgebraicGeometry.Scheme.arithmeticGenus_pullback`,
+  `AlgebraicGeometry.Scheme.Modules.degree_pullback`: the arithmetic genus and the degree are
+  invariant under base change along a field extension.
 - `AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`: the cohomology of a
   coherent sheaf on a proper scheme over a field is finite-dimensional.
 - `AlgebraicGeometry.Scheme.Modules.degree_congr`: the degree only depends on the isomorphism
@@ -86,19 +93,65 @@ noncomputable def arithmeticGenus : ℕ :=
 
 end Defs
 
+section BaseChange
+
+variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
+  (K : Type u) [Field K] [Algebra k K]
+
+/-- **Flat base change of cohomology along a field extension.** Let `X` be a quasi-compact
+quasi-separated scheme over a field `k`, let `K/k` be a field extension and let `M` be a
+quasi-coherent `𝒪_X`-module. Then `H^q(X_K, M_K) ≅ H^q(X, M) ⊗_k K` as `K`-vector spaces, where
+`X_K = X ×_{Spec k} Spec K` and `M_K` is the pullback of `M` to `X_K`.
+
+Both sides are computed by the Čech complex of a finite affine open cover of `X`, which has
+affine intersections since `X` is quasi-separated; the Čech complex of the base-changed cover
+of `X_K` is obtained by applying the exact functor `- ⊗_k K` (Stacks 02KH).
+
+(blueprint: `lem-sc-flat-base-change-coherent`) -/
+@[stacks 02KH]
+theorem Modules.nonempty_H_pullback_linearEquiv [QuasiCompact (X ↘ Spec (.of k))]
+    [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules) [M.IsQuasicoherent] (q : ℕ) :
+    Nonempty (((Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M).H q ≃ₗ[K]
+        TensorProduct k K (M.H q)) :=
+  sorry
+
+/-- **Flat base change of `h^q`.** For a quasi-coherent module `M` on a quasi-compact
+quasi-separated scheme `X` over `k` and a field extension `K/k`,
+`dim_K H^q(X_K, M_K) = dim_k H^q(X, M)`. -/
+theorem Modules.finrankH_pullback [QuasiCompact (X ↘ Spec (.of k))]
+    [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules) [M.IsQuasicoherent] (q : ℕ) :
+    ((Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M).finrankH K q =
+      M.finrankH k q := by
+  obtain ⟨e⟩ := Modules.nonempty_H_pullback_linearEquiv (k := k) K M q
+  exact e.finrank_eq.trans Module.finrank_baseChange
+
+/-- **Flat base change of `χ`.** For a quasi-coherent module `M` on a quasi-compact
+quasi-separated scheme `X` over `k` and a field extension `K/k`, `χ(X_K, M_K) = χ(X, M)`. -/
+theorem Modules.eulerChar_pullback [QuasiCompact (X ↘ Spec (.of k))]
+    [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules) [M.IsQuasicoherent] :
+    ((Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M).eulerChar K =
+      M.eulerChar k := by
+  simp only [Modules.eulerChar, Modules.finrankH_pullback]
+
 /-- **The genus is invariant under base change.** Let `X` be a quasi-compact quasi-separated
 scheme over a field `k` and let `K/k` be a field extension. Then the base change
 `X_K = X ×_{Spec k} Spec K` has `dim_K H¹(X_K, 𝒪_{X_K}) = dim_k H¹(X, 𝒪_X)`: by flat base change
 `H¹(X_K, 𝒪_{X_K}) ≅ H¹(X, 𝒪_X) ⊗_k K` (Stacks 02KH).
 
 (blueprint: `lem-pc-genus-base-change`) -/
-theorem arithmeticGenus_pullback {k : Type u} [Field k] {X : Scheme.{u}}
-    [X.Over (Spec (.of k))] (K : Type u) [Field K] [Algebra k K]
-    [QuasiCompact (X ↘ Spec (.of k))] [QuasiSeparated (X ↘ Spec (.of k))] :
+theorem arithmeticGenus_pullback [QuasiCompact (X ↘ Spec (.of k))]
+    [QuasiSeparated (X ↘ Spec (.of k))] :
     arithmeticGenus K
         (Limits.pullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))) =
       arithmeticGenus k X :=
-  sorry
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+  (Modules.finrankH_congr K (Modules.pullbackObjUnitIso _).symm 1).trans
+    (Modules.finrankH_pullback K (SheafOfModules.unit X.ringCatSheaf) 1)
+
+end BaseChange
 
 section Degree
 
@@ -109,7 +162,9 @@ variable (k : Type u) [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 
 The value is the degree in the usual sense only for an invertible `ℒ` on a proper curve, where
 it agrees with the degree of the associated divisor class; for other sheaves it is just a
-difference of Euler characteristics. -/
+difference of Euler characteristics.
+
+(blueprint: `def-pc-degree-line-bundle`) -/
 noncomputable def Modules.degree (M : X.Modules) : ℤ :=
   M.eulerChar k - Modules.eulerChar (X := X) k (SheafOfModules.unit X.ringCatSheaf)
 
@@ -121,6 +176,23 @@ lemma Modules.degree_congr {M N : X.Modules} (e : M ≅ N) : M.degree k = N.degr
 lemma Modules.degree_unit :
     Modules.degree (X := X) k (SheafOfModules.unit X.ringCatSheaf) = 0 :=
   sub_self _
+
+/-- **The degree is invariant under base change** (blueprint `lem-pc-degree-base-change`,
+part (1)). For a quasi-coherent module `M` on a quasi-compact quasi-separated scheme `X` over
+`k` and a field extension `K/k`, `deg_{X_K}(M_K) = deg_X(M)`: both Euler characteristics in
+`deg M = χ(M) - χ(𝒪_X)` are invariant under flat base change.
+
+(blueprint: `lem-pc-degree-base-change`) -/
+theorem Modules.degree_pullback (K : Type u) [Field K] [Algebra k K]
+    [QuasiCompact (X ↘ Spec (.of k))] [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules)
+    [M.IsQuasicoherent] :
+    ((Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M).degree K = M.degree k := by
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+  rw [Modules.degree, Modules.degree, Modules.eulerChar_pullback]
+  congr 1
+  exact (Modules.eulerChar_congr K (Modules.pullbackObjUnitIso _).symm).trans
+    (Modules.eulerChar_pullback K _)
 
 end Degree
 

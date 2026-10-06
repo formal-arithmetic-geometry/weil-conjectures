@@ -50,8 +50,9 @@ namespace AlgebraicGeometry.Scheme
 
 variable {X : Scheme.{u}}
 
-/-- The line bundle `𝒪_X(D) = 𝒪_X(-D)ᵛ` of an effective Cartier divisor `D` is invertible,
-where `𝒪_X(-D)` is the ideal sheaf of the invertible ideal `J`.
+/-- The line bundle `𝒪_X(D) = 𝒪_X(-D)ᵛ = Hom(𝒪_X(-D), 𝒪_X)` of an effective Cartier divisor
+`D` (blueprint `def-pc-divisor-line-bundle`) is invertible, where `𝒪_X(-D)` is the ideal sheaf
+of the invertible ideal `J`.
 
 (blueprint: `sk-thm-picard-rr`, `lem-pc-divisor-line-bundle-properties`, part 1) -/
 theorem IdealSheafData.IsInvertible.isInvertible_dual_toModules {J : X.IdealSheafData}
