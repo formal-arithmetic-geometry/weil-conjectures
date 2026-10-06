@@ -33,8 +33,6 @@ This leaves degree one, which is the only place where the Fourier argument of
   coinvariant description of degree two.
 - `AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two`: its
   purity.
-- `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine`: the
-  cohomological range `{0, 1, 2}` of a smooth affine curve.
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two`: the top
   compactly supported cohomology of a pure lisse sheaf on a smooth affine curve has weights at
   most `w + 2`.
@@ -56,17 +54,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 local instance : LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀)) :=
   haveI := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
   inferInstance
-
-/-- *Cohomological range of an affine curve.* If `C₀` is a smooth affine curve and `G` is a
-constructible Weil sheaf on `C₀`, then `H_c^r(C, G) = 0` for `r ∉ {0, 1, 2}`: after a smooth
-compactification `C ↪ C̄`, `H_c^r(C, G) = H^r(C̄, j_!G)` is the cohomology of a sheaf on a proper
-curve, of cohomological dimension two.
-(blueprint: `lem-zl-affine-curve-range`) -/
-theorem WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine
-    (G : WeilSheaf k₀ l C) {r : ℤ} (hr : r < 0 ∨ 2 < r) :
-    Subsingleton (G.compactlySupportedCohomology r).carrier := by
-  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
-  sorry
 
 /-- *Top compact-support bound on a curve.* If `C₀` is a smooth affine curve and `G` is a lisse
 Weil sheaf on `C₀`, punctually `ι`-pure of weight `w`, then `H_c^2(C, G)` has weights at most
