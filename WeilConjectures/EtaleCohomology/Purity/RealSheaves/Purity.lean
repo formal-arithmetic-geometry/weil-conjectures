@@ -12,8 +12,10 @@ public import Mathlib.LinearAlgebra.GeneralLinearGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RankOne
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
 public import WeilConjectures.Mathlib.Algebra.Order.BigOperators.Group.Multiset
+public import WeilConjectures.Mathlib.LinearAlgebra.Determinant
 public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 
 /-!
@@ -45,15 +47,16 @@ here; only the map `AlgebraicGeometry.WeilGroup.toLinearAut` whose images they a
 is recorded, and the positive central Frobenius representative of `sk-d-central` is left to
 that block.
 
-The theorems below quantify over an arbitrary `AlgebraicGeometry.WeilGroup p`, whose data does
-not record that `ker deg` is the geometric fundamental group of `C`. They are therefore not
-consequences of that data alone: their proofs need the Grothendieck–Lefschetz trace formula
-relating `AlgebraicGeometry.WeilGroup.eulerSeries` to compactly supported cohomology, and the
-identification of `H¹(C)` with the dual of a Tate module. Both need the Galois category of
-finite étale covers of a scheme, hence Mathlib's
-`CategoryTheory.PreGaloisCategory.IsFundamentalGroup`, to even be stated. The statements
-recorded here are the blueprint's; they become provable once `AlgebraicGeometry.WeilGroup` is
-rebased on the étale fundamental group and the trace formula is available.
+The data of an `AlgebraicGeometry.WeilGroup p` does not record that `ker deg` is the geometric
+fundamental group of `C`. The rank-one theorems, and everything downstream of them, therefore
+assume that it is, in the form `AlgebraicGeometry.WeilGroup.IsEtaleQuotient` (the geometric part
+of `W` is a Frobenius-equivariant quotient of the étale fundamental group of `C`), together with
+`ℓ ≠ char 𝔽_q`; without these hypotheses they are false (for `W = ℤ_ℓ × ℤ` the character
+`(a, n) ↦ (1 + ℓ) ^ a` has infinite geometric image, and for `ℓ = p` so does the character of a
+Frobenius-invariant Artin–Schreier–Witt tower). The Rankin–Selberg statements moreover use the
+Grothendieck–Lefschetz trace formula relating `AlgebraicGeometry.WeilGroup.eulerSeries` to
+compactly supported cohomology, which is recorded without proof in
+`WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin`.
 
 ## Main definitions
 
@@ -108,37 +111,67 @@ noncomputable def toLinearAut : W.carrier →* (V ≃ₗ[PadicAlgCl l] V) :=
 
 variable (ι : PadicAlgCl l →+* ℂ)
 
+variable {W l} in
+/-- The determinant of a lisse Weil representation is continuous on the geometric part: in a
+basis it is a polynomial in the matrix coefficients. -/
+theorem IsLisse.continuous_detCharacter (hρ : W.IsLisse l ρ) :
+    Continuous fun g : W.geometric ↦ (ρ.detCharacter g : PadicAlgCl l) := by
+  let b := Module.finBasis (PadicAlgCl l) V
+  have h : Continuous fun g : W.geometric ↦ LinearMap.toMatrix b b (ρ g) :=
+    continuous_pi fun i ↦ continuous_pi fun j ↦ hρ.continuous_toMatrix b i j
+  simpa only [Representation.coe_detCharacter_apply, LinearMap.det_toMatrix] using h.matrix_det
+
 /-- Blueprint `sk-p-real-rankone`: Purity of rank-one Weil sheaves.
 
 The geometric image `χ (π₁ U)` of a rank-one lisse Weil sheaf on a smooth geometrically
-connected curve `U₀ / 𝔽_q` is finite.
+connected curve `U₀ / 𝔽_q` is finite, for `ℓ ≠ p` and a Weil group linked to the étale
+fundamental group (`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`).
 
 This is the heart of the matter: the `ℓ`-adic logarithm turns an `N`-th power of `χ`
 restricted to `π₁ U` into a continuous additive map invariant under conjugation by `γ`, and
 such a map is a Frobenius-fixed class in `H¹ (U, ℚ̄_ℓ)`, which vanishes because on a proper
 curve `H¹` is dual to a Tate module with no Frobenius-fixed vector, and the boundary
-contribution for an open curve is a nonzero power of `q`. -/
+contribution for an open curve is a nonzero power of `q`
+(`AlgebraicGeometry.WeilGroup.finite_range_of_continuous`, applied to `χ = det ρ`). -/
 theorem IsLisse.finite_geometric_image [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] (hrank : Module.finrank (PadicAlgCl l) V = 1)
-    (hρ : W.IsLisse l ρ) :
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient]
+    (hrank : Module.finrank (PadicAlgCl l) V = 1) (hρ : W.IsLisse l ρ) :
     (Set.range fun g : W.geometric ↦ ρ g).Finite := by
-  sorry
+  have hfin := W.finite_range_of_continuous ρ.detCharacter hρ.continuous_detCharacter
+  refine (hfin.image fun c : (PadicAlgCl l)ˣ ↦
+    (c : PadicAlgCl l) • (LinearMap.id : V →ₗ[PadicAlgCl l] V)).subset ?_
+  rintro _ ⟨g, rfl⟩
+  refine ⟨ρ.detCharacter g, ⟨g, rfl⟩, ?_⟩
+  dsimp only
+  rw [Representation.coe_detCharacter_apply, ← LinearMap.eq_det_smul_id_of_finrank_eq_one hrank]
 
 /-- Blueprint `sk-p-real-rankone`: Purity of rank-one Weil sheaves.
 
 A rank-one lisse Weil sheaf `L` on a smooth geometrically connected curve `U₀ / 𝔽_q`, with
 character `χ : W (U₀) → ℚ̄_ℓ ˣ`, is punctually `ι`-pure of weight
-`w = 2 log |ι c| / log q`, where `c = χ γ` is the value at the chosen degree-one lift.
+`w = 2 log |ι c| / log q`, where `c = χ γ` is the value at the chosen degree-one lift; here
+`ℓ ≠ p` and the Weil group is linked to the étale fundamental group
+(`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`).
 
 Once the geometric image is finite (`AlgebraicGeometry.WeilGroup.IsLisse.finite_geometric_image`),
 `χ` is a root of unity times the constant character `c ^ deg`, so the local scalar at a point
-of degree `e` has complex modulus `|ι c| ^ e = q ^ (e * w / 2)`. -/
+of degree `e` has complex modulus `|ι c| ^ e = q ^ (e * w / 2)`
+(`AlgebraicGeometry.WeilGroup.frobeniusWeight_eq_of_continuous`). -/
 theorem IsLisse.isPunctuallyPure_of_finrank_eq_one [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] (hrank : Module.finrank (PadicAlgCl l) V = 1)
-    (hρ : W.IsLisse l ρ) :
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient]
+    (hrank : Module.finrank (PadicAlgCl l) V = 1) (hρ : W.IsLisse l ρ) :
     W.IsPunctuallyPure l ρ ι
       (frobeniusWeight ι (Nat.card K) (LinearMap.det (ρ W.frobeniusLift))) := by
-  sorry
+  intro x α hα
+  have hα' : α = LinearMap.det (ρ (W.frobenius x)) := by
+    rw [localEigenvalues, Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero,
+      ← Module.End.hasEigenvalue_iff_isRoot_charpoly] at hα
+    obtain ⟨v, hv, hv0⟩ := hα.exists_hasEigenvector
+    rw [Module.End.mem_eigenspace_iff] at hv
+    conv at hv => lhs; rw [LinearMap.eq_det_smul_id_of_finrank_eq_one hrank (ρ _)]
+    exact (smul_left_injective _ hv0 hv).symm
+  rw [hα', ← Representation.coe_detCharacter_apply, ← Representation.coe_detCharacter_apply]
+  exact W.frobeniusWeight_eq_of_continuous ρ.detCharacter hρ.continuous_detCharacter ι x
 
 end WeilGroup
 
@@ -187,7 +220,7 @@ variable [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p]
 representation `ρ` has determinant weight `wt_{ι, q}(det ρ(γ)) / rank ρ`, for the degree-one
 lift `γ`: its determinant line is a rank-one lisse sheaf, hence punctually pure of the weight
 of its Frobenius scalar. -/
-theorem IsLisse.hasDetWeight (hρ : W.IsLisse l ρ) :
+theorem IsLisse.hasDetWeight [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient] (hρ : W.IsLisse l ρ) :
     W.HasDetWeight l ρ ι (frobeniusWeight ι (Nat.card K) (LinearMap.det (ρ W.frobeniusLift)) /
       Module.finrank (PadicAlgCl l) V) := by
   intro x
@@ -203,7 +236,8 @@ theorem IsLisse.hasDetWeight (hρ : W.IsLisse l ρ) :
 /-- Blueprint `sk-p-real-rankone`: the determinant of a lisse Weil representation takes
 finitely many values on the geometric fundamental group, since the determinant line has finite
 geometric image. -/
-theorem IsLisse.hasFiniteGeometricDet (hρ : W.IsLisse l ρ) :
+theorem IsLisse.hasFiniteGeometricDet [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient]
+    (hρ : W.IsLisse l ρ) :
     ρ.HasFiniteGeometricDet W.deg := by
   have hfin := IsLisse.finite_geometric_image W l _ finrank_ulift_padicAlgCl
     (hρ.ofCharacter_detCharacter (ULift.{u} (PadicAlgCl l)))
@@ -265,7 +299,8 @@ those of `𝒢` by `d₂`: by the tensor rule a constituent of `ℱ ⊗ 𝒢` ha
 `sk-p-real-rankone` every lisse Weil sheaf has its determinant weight in the sense of
 `AlgebraicGeometry.WeilGroup.HasDetWeight`, which is unique as soon as the curve has a closed
 point `x₀`. -/
-theorem le_add_of_isConstituent_tprod_of_hasDetWeight (x₀ : C.finitePoints)
+theorem le_add_of_isConstituent_tprod_of_hasDetWeight [Fact (ringChar K ≠ l)]
+    [W.IsEtaleQuotient] (x₀ : C.finitePoints)
     (hρ : W.IsLisse l ρ) (hσ : W.IsLisse l σ) {d₁ d₂ : ℝ}
     (hd₁ : ∀ {V'' : Type u} [AddCommGroup V''] [Module (PadicAlgCl l) V'']
       [FiniteDimensional (PadicAlgCl l) V''] (τ : Representation (PadicAlgCl l) W.carrier V'')
@@ -432,7 +467,8 @@ to the tensor square `ℱ ⊗ ℱ`, whose inverse local factors are nonnegative
 (`lem-rp-even-tensor-positivity`) and whose constituents have determinant weight at most `2 d`
 (`sk-p-tensor`), and to the local eigenvalue `α ^ 2`; for `j + 1` apply the case `j` to
 `ℱ ⊗ ℱ`, which is again lisse and `ι`-real. -/
-theorem frobeniusWeight_le_add_inv_two_pow_of_isReal [IsAffine C] (j : ℕ) :
+theorem frobeniusWeight_le_add_inv_two_pow_of_isReal [IsAffine C] [Fact (ringChar K ≠ l)]
+    [W.IsEtaleQuotient] (j : ℕ) :
     ∀ {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
       [FiniteDimensional (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) W.carrier V),
       W.IsLisse l ρ → W.IsReal l ρ ι → ∀ {d : ℝ},
@@ -486,7 +522,8 @@ every inverse local factor nonnegative, so each individual factor inherits that 
 from the product, and a zero of the local denominator at `|ι α| ^ (-2 m / e)` gives
 `wt (α) ≤ d + 1 / m` for every `m`. -/
 theorem hasWeightsAtMost_of_isReal [IsAffine C] [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] [Nontrivial V] (hρ : W.IsLisse l ρ)
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient] [Nontrivial V]
+    (hρ : W.IsLisse l ρ)
     (hreal : W.IsReal l ρ ι) {d : ℝ}
     (hd : ∀ {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l) V']
       [FiniteDimensional (PadicAlgCl l) V'] (σ : Representation (PadicAlgCl l) W.carrier V')
@@ -510,7 +547,8 @@ Rankin–Selberg bound for the iterated tensor squares
 (`AlgebraicGeometry.WeilGroup.frobeniusWeight_le_add_inv_two_pow_of_isReal`) gives
 `|ι α| ^ 2 ≤ q_x ^ (d + 2 ^ (-j))` for every `j`. -/
 theorem sq_norm_le_rpow_of_isReal [IsAffine C] [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] [Nontrivial V] (hρ : W.IsLisse l ρ)
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient] [Nontrivial V]
+    (hρ : W.IsLisse l ρ)
     (hreal : W.IsReal l ρ ι) {d : ℝ}
     (hd : ∀ {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l) V']
       [FiniteDimensional (PadicAlgCl l) V'] (σ : Representation (PadicAlgCl l) W.carrier V')
@@ -602,7 +640,8 @@ local eigenvalue of `E` by `B + γ`. At a closed point `x`, the product of an ei
 (`sk-p-linear-spectra`), of weight `wt β + B`; so `wt β ≤ γ`. The weights of the eigenvalues
 of `Q j` sum to the weight `rank (Q j) * γ` of its determinant, so all of them equal `γ`. -/
 theorem isPunctuallyPure_subquotient_of_isReal [IsAffine C] [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] (hρ : W.IsLisse l ρ) (hreal : W.IsReal l ρ ι) {n : ℕ}
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient] (hρ : W.IsLisse l ρ)
+    (hreal : W.IsReal l ρ ι) {n : ℕ}
     {F : ℕ → Subrepresentation ρ} (h0 : F 0 = ⊥) (hn : F n = ⊤)
     (hF : ∀ i < n, F i ⋖ F (i + 1)) {j : ℕ} (hj : j < n) :
     W.IsPunctuallyPure l ((F (j + 1)).subquotient (F j)) ι
@@ -774,7 +813,8 @@ composition series of `ρ`, and the composition factors are pure of their determ
 (`AlgebraicGeometry.WeilGroup.isPunctuallyPure_subquotient_of_isReal`); the determinant weight
 of a nonzero representation is unique. -/
 theorem isPunctuallyPure_of_isConstituent_of_isReal_of_isAffine [IsAffine C]
-    [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] (hρ : W.IsLisse l ρ)
+    [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
+    [W.IsEtaleQuotient] (hρ : W.IsLisse l ρ)
     (hreal : W.IsReal l ρ ι) {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l) V']
     [FiniteDimensional (PadicAlgCl l) V']
     (σ : Representation (PadicAlgCl l) W.carrier V') (hσ : σ.IsConstituent ρ)

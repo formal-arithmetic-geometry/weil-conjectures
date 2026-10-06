@@ -17,6 +17,8 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 - `AlgebraicGeometry.Scheme.Hom.topologicalKrullDim_eq_of_surjective`: a universally closed,
   locally quasi-finite, surjective morphism of schemes (for instance a finite surjective one)
   preserves the dimension.
+- `AlgebraicGeometry.Scheme.Hom.finite_preimage_singleton_of_isFinite_morphismRestrict`: a
+  morphism that is finite over an open `U` has finite fibres over the points of `U`.
 -/
 
 @[expose] public section
@@ -46,5 +48,14 @@ theorem Scheme.Hom.topologicalKrullDim_eq_of_surjective (f : X ⟶ Y) [Universal
   le_antisymm
     (topologicalKrullDim_le_of_continuous f.continuous fun _ _ ↦ f.eq_of_specializes_of_apply_eq)
     (topologicalKrullDim_le_of_specializingMap f.isClosedMap.specializingMap f.surjective)
+
+/-- If the restriction of `f` over an open `U` is finite, then the fibre of `f` over any point
+of `U` is finite. -/
+lemma Scheme.Hom.finite_preimage_singleton_of_isFinite_morphismRestrict (f : X ⟶ Y)
+    {U : Y.Opens} [IsFinite (f ∣_ U)] {y : Y} (hy : y ∈ U) : (f ⁻¹' {y}).Finite := by
+  refine (((f ∣_ U).finite_preimage_singleton ⟨y, hy⟩).image (f ⁻¹ᵁ U).ι).subset ?_
+  intro x hx
+  refine ⟨⟨x, by simp_all⟩, Subtype.ext ?_, rfl⟩
+  simpa [← Scheme.Hom.comp_apply, -Scheme.Hom.comp_base] using hx
 
 end AlgebraicGeometry
