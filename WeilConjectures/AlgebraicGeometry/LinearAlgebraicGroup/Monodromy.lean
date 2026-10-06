@@ -9,6 +9,7 @@ public import Mathlib.GroupTheory.Commutator.Basic
 public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import Mathlib.RepresentationTheory.Semisimple
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie
+public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Semisimple
 
 /-!
@@ -50,6 +51,9 @@ monodromy groups and read on `k`-points.
   `RepresentedDegreeDatum.commutator_zeroLocus_le_zeroLocus_geometricMonodromy`,
   `RepresentedDegreeDatum.lie_mem_lieAlgebra_geometricMonodromy`: normal restriction and passage
   to the closure.
+* `RepresentedDegreeDatum.isSemisimpleRepresentation_degreeZero`,
+  `RepresentedDegreeDatum.isSemisimpleRepresentation_arithmeticMonodromy`: a semisimple datum is
+  semisimple for `P` and for `G(k)`.
 * `RepresentedDegreeDatum.isSemisimpleRepresentation_standardRepresentation_identityComponent`:
   a semisimple datum acts semisimply through `G°`.
 * `RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy`,
@@ -76,7 +80,12 @@ the instance
 `RepresentedDegreeDatum.lie_mem_lieAlgebra_geometricMonodromy`,
 `RepresentedDegreeDatum.lie_mem_lieAlgebra_identityComponent_geometricMonodromy` and
 `RepresentedDegreeDatum.isSemisimpleRepresentation_standardRepresentation_identityComponent`
-implement `sk-i-restriction`;
+implement `sk-i-restriction`, the normality, commutator and Lie statements also
+`lem-ag-closure-commutators`;
+`RepresentedDegreeDatum.isSemisimpleRepresentation_degreeZero` implements
+`lem-mg-normal-restriction-semisimple`;
+`RepresentedDegreeDatum.isSemisimpleRepresentation_arithmeticMonodromy` implements
+the `G` part of `lem-ag-closure-semisimple`;
 `RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy` and
 `RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq` implement `sk-p-product`;
 `RepresentedDegreeDatum.exists_isPositiveCentralPair` implements `sk-p-central`.
@@ -118,6 +127,9 @@ variable (D : RepresentedDegreeDatum W n k)
 /-- The subgroup `P = ker deg` of degree-zero elements.
 (blueprint: `sk-d-monodromy`) -/
 def degreeZero : Subgroup W := D.deg.ker
+
+instance : D.degreeZero.Normal :=
+  D.deg.normal_ker
 
 /-- The arithmetic monodromy group `G = closure ρ(W)`, as a closed subgroup scheme of `GL_n`: the
 Hopf ideal of equations vanishing on `ρ(W)`, which cuts out the reduced Zariski closure.
@@ -168,6 +180,9 @@ noncomputable def asRepresentation : Representation k W (n → k) where
   map_one' := by simp
   map_mul' x y := by simp
 
+theorem asRepresentation_eq : D.asRepresentation = (toRepresentation n k).comp D.rep :=
+  rfl
+
 /-- A datum is *semisimple* when `n → k` is a semisimple `W`-representation.  This is an `abbrev`
 so that the underlying class `Representation.IsSemisimpleRepresentation` stays visible to
 instance search.
@@ -200,22 +215,22 @@ theorem zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy (R : Type*
 /-- The geometric monodromy group is a normal subgroup scheme of the arithmetic one: for every
 `k`-algebra `R`, the `R`-points of `H` form a normal subgroup of the `R`-points of `G`. This is the
 closure of the normality of `ρ(P)` in `ρ(W)`.
-(blueprint: `sk-i-restriction`) -/
+(blueprint: `sk-i-restriction`, `lem-ag-closure-commutators`) -/
 theorem normal_zeroLocus_geometricMonodromy (R : Type*) [CommRing R] [Algebra k R] :
     ((zeroLocus D.geometricMonodromy R).subgroupOf (zeroLocus D.arithmeticMonodromy R)).Normal := by
   rw [Subgroup.normal_subgroupOf_iff_le_normalizer
     (D.zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy R)]
   refine zeroLocus_vanishingIdeal_le_normalizer (Γ := D.rep.range) (Δ := D.degreeZero.map D.rep)
     ?_ R
-  have : D.degreeZero.Normal := D.deg.normal_ker
-  rw [MonoidHom.range_eq_map, ← Subgroup.normalizer_eq_top_iff.2 this]
+  rw [MonoidHom.range_eq_map,
+    ← Subgroup.normalizer_eq_top_iff.2 (inferInstance : D.degreeZero.Normal)]
   exact Subgroup.le_normalizer_map D.rep
 
 open scoped commutatorElement in
 /-- Every commutator of the arithmetic monodromy group lies in the geometric one: for every
 `k`-algebra `R`, `⁅G(R), G(R)⁆ ⊆ H(R)`. This is the closure of `⁅ρ(W), ρ(W)⁆ ⊆ ρ(P)`, which holds
 because `W ⧸ P ≅ ℤ` is abelian.
-(blueprint: `sk-i-restriction`) -/
+(blueprint: `sk-i-restriction`, `lem-ag-closure-commutators`) -/
 theorem commutator_zeroLocus_le_zeroLocus_geometricMonodromy (R : Type*) [CommRing R]
     [Algebra k R] :
     ⁅zeroLocus D.arithmeticMonodromy R, zeroLocus D.arithmeticMonodromy R⁆ ≤
@@ -227,6 +242,44 @@ theorem commutator_zeroLocus_le_zeroLocus_geometricMonodromy (R : Type*) [CommRi
   exact ⟨⁅w₁, w₂⁆, Abelianization.commutator_subset_ker D.deg
     (Subgroup.commutator_mem_commutator (Subgroup.mem_top w₁) (Subgroup.mem_top w₂)),
     map_commutatorElement D.rep w₁ w₂⟩
+
+section Semisimple
+
+/-- **Normal restriction.** A semisimple Weil representation is geometrically semisimple: the
+restriction of a semisimple datum to the normal subgroup `P = ker deg` is semisimple, by
+Clifford's theorem `Representation.isSemisimpleRepresentation_comp_subtype`.
+(blueprint: `lem-mg-normal-restriction-semisimple`) -/
+theorem isSemisimpleRepresentation_degreeZero (hD : D.IsSemisimple) :
+    Representation.IsSemisimpleRepresentation (D.asRepresentation.comp D.degreeZero.subtype) :=
+  Representation.isSemisimpleRepresentation_comp_subtype _ _
+
+/-- The lattices of subrepresentations of `ρ` and of the defining representation of its arithmetic
+monodromy group `G(k)` agree: a subspace is `ρ(W)`-stable if and only if it is stable under the
+closure `G` (`forall_mulVec_mem_iff_forall_mem_zeroLocus_vanishingIdeal`). -/
+noncomputable def subrepresentationOrderIsoArithmeticMonodromy :
+    Subrepresentation D.asRepresentation ≃o
+      Subrepresentation
+        ((toRepresentation n k).comp (zeroLocus D.arithmeticMonodromy k).subtype) :=
+  Subrepresentation.orderIsoOfForallIff fun U ↦ by
+    have h := forall_mulVec_mem_iff_forall_mem_zeroLocus_vanishingIdeal (Γ := D.rep.range)
+      (U := U)
+    simp only [asRepresentation_eq, MonoidHom.coe_comp, Function.comp_apply, toRepresentation_apply,
+      Subgroup.coe_subtype, Subtype.forall]
+    refine ⟨fun hU g hg v hv ↦ h.1 ?_ g hg v hv, fun hU w v hv ↦ hU _ ?_ v hv⟩
+    · rintro _ ⟨w, rfl⟩ v hv
+      exact hU w v hv
+    · exact subset_zeroLocus_vanishingIdeal _ ⟨w, rfl⟩
+
+/-- A semisimple datum is semisimple for its arithmetic monodromy group `G`: the defining
+representation of `G(k)` on `n → k` is semisimple, because `ρ(W)` and `G` have the same stable
+subspaces. (blueprint: the `G` part of `lem-ag-closure-semisimple`; the `G°` part is
+`isSemisimpleRepresentation_standardRepresentation_identityComponent`) -/
+theorem isSemisimpleRepresentation_arithmeticMonodromy (hD : D.IsSemisimple) :
+    Representation.IsSemisimpleRepresentation
+      ((toRepresentation n k).comp (zeroLocus D.arithmeticMonodromy k).subtype) :=
+  D.subrepresentationOrderIsoArithmeticMonodromy.complementedLattice_iff.1 hD
+
+end Semisimple
 
 variable {D} in
 /-- The central element of a positive central pair lies in the arithmetic monodromy group. -/
@@ -313,7 +366,8 @@ theorem geometricMonodromy_le_derivedIdeal_arithmeticMonodromy :
   (containsCommutators_iff_le_derivedIdeal _).1 inferInstance
 
 /-- The derived algebra of `Lie G` lies in `Lie H`, over any field, where `Lie H → Lie G` is the
-differential `lieAlgebraMap` of the closed immersion `H ⟶ G`. (blueprint: `sk-i-restriction`) -/
+differential `lieAlgebraMap` of the closed immersion `H ⟶ G`.
+(blueprint: `sk-i-restriction`, `lem-ag-closure-commutators`) -/
 theorem lie_mem_lieAlgebra_geometricMonodromy
     (X Y : GrpObj.Lie (subgroupScheme D.arithmeticMonodromy)) :
     ∃ Z : GrpObj.Lie (subgroupScheme D.geometricMonodromy),
@@ -321,7 +375,7 @@ theorem lie_mem_lieAlgebra_geometricMonodromy
   (LieHom.mem_range _ _).1 (lie_mem_range_lieAlgebraMap _ X Y)
 
 /-- The derived algebra of `Lie G°` lies in `Lie H°`, over an algebraically closed field of
-characteristic zero. (blueprint: `sk-i-restriction`) -/
+characteristic zero. (blueprint: `sk-i-restriction`, `lem-ag-closure-commutators`) -/
 theorem lie_mem_lieAlgebra_identityComponent_geometricMonodromy [IsAlgClosed k] [CharZero k]
     (X Y : GrpObj.Lie (subgroupScheme (identityComponent D.arithmeticMonodromy))) :
     ∃ Z : GrpObj.Lie (subgroupScheme (identityComponent D.geometricMonodromy)),
