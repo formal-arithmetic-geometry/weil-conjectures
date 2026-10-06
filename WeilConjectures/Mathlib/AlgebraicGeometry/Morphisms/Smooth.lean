@@ -32,6 +32,10 @@ The index type of the affine space is `ULift.{u} (Fin d)`, since
   dimension `n`.
 - `AlgebraicGeometry.AffineSpace.smoothOfRelativeDimension_over`: the affine space `𝔸(n; S)` in
   finitely many variables is smooth of relative dimension `#n` over `S`.
+- `AlgebraicGeometry.AffineSpace.smoothOfRelativeDimension_reindex_succ`: forgetting the first
+  coordinate `𝔸^{d+1}_S ⟶ 𝔸^d_S` is smooth of relative dimension one.
+- `AlgebraicGeometry.Smooth.exists_smoothOfRelativeDimension_resLE`: a smooth morphism is
+  locally smooth of some relative dimension.
 - `AlgebraicGeometry.smoothOfRelativeDimension_pullback_fst`,
   `AlgebraicGeometry.smoothOfRelativeDimension_pullback_snd`: smoothness of relative dimension `n`
   is inherited by the projections of a fibre product.
@@ -109,5 +113,80 @@ instance AffineSpace.smoothOfRelativeDimension_over (n : Type u) [Finite n] (S :
   exact (RingHom.isStandardSmoothOfRelativeDimension_algebraMap (R := ULift.{u} ℤ)
     (S := MvPolynomial n (ULift.{u} ℤ)) (n := Nat.card n)).2
       (MvPolynomial.isStandardSmoothOfRelativeDimension _ _)
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The map `𝔸^{d+1}_S ⟶ 𝔸^d_S` forgetting the first coordinate is smooth of relative
+dimension one: it is isomorphic, over `𝔸^d_S`, to the affine line `𝔸^1` over `𝔸^d_S`. Writing
+`𝔸^d_S ⟶ S` as the composite of `d` such maps reduces statements about smooth morphisms to
+relative dimension one. -/
+instance AffineSpace.smoothOfRelativeDimension_reindex_succ (d : ℕ) (S : Scheme.{u}) :
+    SmoothOfRelativeDimension 1
+      (reindex (fun i : ULift.{u} (Fin d) ↦ (⟨i.down.succ⟩ : ULift.{u} (Fin (d + 1)))) S) := by
+  set r := reindex (fun i : ULift.{u} (Fin d) ↦ (⟨i.down.succ⟩ : ULift.{u} (Fin (d + 1)))) S
+  let B := 𝔸(ULift.{u} (Fin d); S)
+  let φ : 𝔸(ULift.{u} (Fin (d + 1)); S) ⟶ 𝔸(PUnit.{u + 1}; B) :=
+    homOfVector r (fun _ ↦ coord S ⟨0⟩)
+  let ψ : 𝔸(PUnit.{u + 1}; B) ⟶ 𝔸(ULift.{u} (Fin (d + 1)); S) :=
+    homOfVector ((𝔸(PUnit.{u + 1}; B) ↘ B) ≫ (B ↘ S))
+      (fun j ↦ Fin.cases (coord B PUnit.unit)
+        (fun i ↦ (𝔸(PUnit.{u + 1}; B) ↘ B).appTop (coord S ⟨i⟩)) j.down)
+  have h₁ : φ ≫ ψ = 𝟙 _ := by
+    apply hom_ext
+    · simp only [φ, ψ, Category.assoc, homOfVector_over, homOfVector_over_assoc, r,
+        Category.id_comp]
+      exact reindex_over _ _
+    · rintro ⟨i⟩
+      induction i using Fin.cases with
+      | zero => simp [φ, ψ]
+      | succ i =>
+        simp only [φ, ψ, Scheme.Hom.comp_appTop, CommRingCat.comp_apply, homOfVector_appTop_coord,
+          Fin.cases_succ, Scheme.Hom.id_appTop, CommRingCat.id_apply]
+        rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop]
+        simp only [homOfVector_over, r]
+        exact reindex_appTop_coord _ _ _
+  have h₂ : ψ ≫ φ = 𝟙 _ := by
+    apply hom_ext
+    · apply hom_ext
+      · simp [φ, ψ, r]
+      · rintro ⟨i⟩
+        simp only [φ, ψ, r, Category.assoc, homOfVector_over, Scheme.Hom.comp_appTop,
+          CommRingCat.comp_apply, reindex_appTop_coord, homOfVector_appTop_coord,
+          Fin.cases_succ, Category.id_comp]
+        rfl
+    · rintro ⟨⟩
+      simp [φ, ψ]
+  have : IsIso φ := ⟨ψ, h₁, h₂⟩
+  have hr : r = φ ≫ (𝔸(PUnit.{u + 1}; B) ↘ B) := by simp [φ]
+  have : SmoothOfRelativeDimension (0 + Nat.card PUnit.{u + 1}) (φ ≫ (𝔸(PUnit.{u + 1}; B) ↘ B)) :=
+    inferInstance
+  simpa [hr] using this
+
+/-- A smooth morphism is, locally on the source and on the target, smooth of some relative
+dimension: every point `x` has affine open neighbourhoods `V ∋ x` and `U ∋ f.base x` with
+`V ≤ f ⁻¹ᵁ U` such that `f.resLE U V` is smooth of relative dimension `d` for some `d`.
+This is the input needed to apply `AlgebraicGeometry.Smooth.exists_etale_to_affineSpace` to
+a smooth morphism whose relative dimension varies. -/
+theorem Smooth.exists_smoothOfRelativeDimension_resLE {X Y : Scheme.{u}} (f : X ⟶ Y) [Smooth f]
+    (x : X) :
+    ∃ (U : Y.Opens) (V : X.Opens) (_ : IsAffineOpen U) (_ : IsAffineOpen V) (_ : x ∈ V)
+      (e : V ≤ f ⁻¹ᵁ U) (d : ℕ), SmoothOfRelativeDimension d (f.resLE U V e) := by
+  obtain ⟨U, hU, V, hV, hx, e, hf⟩ := (Smooth.iff_forall_exists_isStandardSmooth f).mp ‹_› x
+  let := (f.appLE U V e).hom.toAlgebra
+  obtain ⟨ι, σ, _, _, ⟨P⟩⟩ := hf.out
+  have hd : (f.appLE U V e).hom.IsStandardSmoothOfRelativeDimension P.dimension :=
+    P.isStandardSmoothOfRelativeDimension rfl
+  refine ⟨U, V, hU, hV, hx, e, P.dimension, ?_⟩
+  have : IsAffine U := hU
+  have : IsAffine V := hV
+  rw [HasRingHomProperty.iff_of_isAffine (P := @SmoothOfRelativeDimension P.dimension)]
+  have : (RingHom.toMorphismProperty
+      (RingHom.Locally (RingHom.IsStandardSmoothOfRelativeDimension P.dimension))).RespectsIso :=
+    RingHom.toMorphismProperty_respectsIso_iff.mp <|
+      (HasRingHomProperty.isLocal_ringHomProperty
+        (@SmoothOfRelativeDimension P.dimension)).respectsIso
+  exact (MorphismProperty.arrow_mk_iso_iff (RingHom.toMorphismProperty
+      (RingHom.Locally (RingHom.IsStandardSmoothOfRelativeDimension P.dimension)))
+      (arrowResLEAppIso f U V e)).mpr
+    (RingHom.locally_of RingHom.isStandardSmoothOfRelativeDimension_respectsIso _ hd)
 
 end AlgebraicGeometry
