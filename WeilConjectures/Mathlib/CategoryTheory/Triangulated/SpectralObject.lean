@@ -62,4 +62,33 @@ lemma mapHomologicalFunctor_δ {i j k : ι} (f : i ⟶ j) (g : j ⟶ k) (n₀ n�
 
 end Triangulated.SpectralObject
 
+namespace Functor
+
+variable {C A : Type*} [Category* C] [Category* A] [Abelian A]
+  [HasZeroObject C] [Preadditive C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
+  [Pretriangulated C]
+
+/-- The functor from spectral objects in a pretriangulated category `C` to spectral
+objects in an abelian category `A` that is induced by a homological functor `F : C ⥤ A`
+equipped with a shift sequence. -/
+noncomputable def mapHomologicalSpectralObject (F : C ⥤ A) [F.IsHomological]
+    [F.ShiftSequence ℤ] (ι : Type*) [Category* ι] :
+    Triangulated.SpectralObject C ι ⥤ Abelian.SpectralObject A ι where
+  obj X := X.mapHomologicalFunctor F
+  map α :=
+    { hom n := Functor.whiskerRight α.hom (F.shift n)
+      comm n₀ n₁ h i j k f g := by
+        simp only [Triangulated.SpectralObject.mapHomologicalFunctor_δ, homologySequenceδ,
+          Triangulated.SpectralObject.triangle_mor₃, whiskerRight_app, ← shiftMap_comp,
+          ← shiftMap_comp', Triangulated.SpectralObject.Hom.comm] }
+
+@[simp]
+lemma mapHomologicalSpectralObject_map_hom (F : C ⥤ A) [F.IsHomological]
+    [F.ShiftSequence ℤ] (ι : Type*) [Category* ι] {X Y : Triangulated.SpectralObject C ι}
+    (α : X ⟶ Y) (n : ℤ) :
+    ((F.mapHomologicalSpectralObject ι).map α).hom n =
+      Functor.whiskerRight α.hom (F.shift n) := rfl
+
+end Functor
+
 end CategoryTheory

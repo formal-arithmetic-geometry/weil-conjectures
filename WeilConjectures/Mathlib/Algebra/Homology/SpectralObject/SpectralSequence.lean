@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 public import Mathlib.Algebra.Homology.SpectralObject.FirstPage
 public import Mathlib.Algebra.Homology.SpectralObject.EpiMono
+public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 
 /-!
@@ -33,6 +34,10 @@ the first quadrant.
   `Y.E₂SpectralSequenceNat` to `n ↦ hⁿ(⊥, ⊤)`.
 - `CategoryTheory.Abelian.SpectralObject.abutsTo_E₂SpectralSequenceNat`: the spectral sequence
   `Y.E₂SpectralSequenceNat` abuts to `n ↦ hⁿ(⊥, ⊤)`.
+- `CategoryTheory.Abelian.SpectralObject.bottomEdge`,
+  `CategoryTheory.Abelian.SpectralObject.leftEdge`: the edge maps
+  `E₂^{n, 0} = hⁿ(0, 1) ⟶ hⁿ(⊥, ⊤)` and `hⁿ(⊥, ⊤) ⟶ hⁿ(n, n + 1) = E₂^{0, n}`, which are
+  natural in `Y` (`bottomEdge_naturality`, `leftEdge_naturality`).
 -/
 
 @[expose] public section
@@ -156,6 +161,76 @@ theorem abutsTo_E₂SpectralSequenceNat :
     Y.E₂SpectralSequenceNat.AbutsTo
       (fun n : ℕ ↦ (Y.H n).obj (mk₁ (homOfLE (bot_le : (⊥ : EInt) ≤ ⊤)))) :=
   ⟨Y.E₂SpectralSequenceNatAbutment⟩
+
+/-- For a first quadrant spectral object, the map `hⁿ(⊥, 1) ⟶ hⁿ(0, 1)` is an isomorphism. -/
+lemma isIso_H_map_bot_zero_one (n : ℤ) :
+    IsIso ((Y.H n).map (twoδ₁Toδ₀' ⊥ ((0 : ℤ) : EInt) ((1 : ℤ) : EInt) bot_le (by simp))) :=
+  Y.isIso_H_map_twoδ₁Toδ₀' n (n + 1) rfl _ _ _ _ _
+    (Y.isZero₁_of_isFirstQuadrant _ _ _ le_rfl n)
+    (Y.isZero₁_of_isFirstQuadrant _ _ _ le_rfl (n + 1))
+
+/-- For a first quadrant spectral object, the map `hⁿ(n, n + 1) ⟶ hⁿ(n, ⊤)` is
+an isomorphism. -/
+lemma isIso_H_map_self_succ_top (n : ℤ) :
+    IsIso ((Y.H n).map (twoδ₂Toδ₁' ((n : ℤ) : EInt) ((n + 1 : ℤ) : EInt) ⊤
+      (by simp) le_top)) :=
+  Y.isIso_H_map_twoδ₂Toδ₁ (n - 1) n (by lia) _ _ _ _
+    (Y.isZero₂_of_isFirstQuadrant _ _ _ _ (by simp; lia))
+    (Y.isZero₂_of_isFirstQuadrant _ _ _ _ (by simp))
+
+/-- The bottom edge map `E₂^{n, 0} = hⁿ(0, 1) ⟶ hⁿ(⊥, ⊤)` of the spectral sequence of a first
+quadrant spectral object: the inverse of the isomorphism `hⁿ(⊥, 1) ≅ hⁿ(0, 1)` followed by
+the map `hⁿ(⊥, 1) ⟶ hⁿ(⊥, ⊤)`. -/
+noncomputable def bottomEdge (n : ℤ) :
+    (Y.H n).obj (mk₁ (homOfLE (show ((0 : ℤ) : EInt) ≤ ((1 : ℤ) : EInt) by simp))) ⟶
+      (Y.H n).obj (mk₁ (homOfLE (bot_le : (⊥ : EInt) ≤ ⊤))) :=
+  have := Y.isIso_H_map_bot_zero_one n
+  inv ((Y.H n).map (twoδ₁Toδ₀' ⊥ ((0 : ℤ) : EInt) ((1 : ℤ) : EInt) bot_le (by simp))) ≫
+    (Y.H n).map (twoδ₂Toδ₁' ⊥ ((1 : ℤ) : EInt) ⊤ bot_le le_top)
+
+/-- The left edge map `hⁿ(⊥, ⊤) ⟶ hⁿ(n, n + 1) = E₂^{0, n}` of the spectral sequence of a first
+quadrant spectral object: the map `hⁿ(⊥, ⊤) ⟶ hⁿ(n, ⊤)` followed by the inverse of the
+isomorphism `hⁿ(n, n + 1) ≅ hⁿ(n, ⊤)`. -/
+noncomputable def leftEdge (n : ℤ) :
+    (Y.H n).obj (mk₁ (homOfLE (bot_le : (⊥ : EInt) ≤ ⊤))) ⟶
+      (Y.H n).obj (mk₁ (homOfLE (show ((n : ℤ) : EInt) ≤ ((n + 1 : ℤ) : EInt) by simp))) :=
+  have := Y.isIso_H_map_self_succ_top n
+  (Y.H n).map (twoδ₁Toδ₀' ⊥ ((n : ℤ) : EInt) ⊤ bot_le le_top) ≫
+    inv ((Y.H n).map (twoδ₂Toδ₁' ((n : ℤ) : EInt) ((n + 1 : ℤ) : EInt) ⊤ (by simp) le_top))
+
+/-- The image of the bottom edge map `hⁿ(0, 1) ⟶ hⁿ(⊥, ⊤)` is the smallest possibly nonzero
+step `F¹` of the image filtration, i.e. the step of filtration degree `p = n` of the abutment. -/
+lemma imageSubobject_bottomEdge (n : ℤ) :
+    imageSubobject (Y.bottomEdge n) = Y.imageFiltration n 1 := by
+  have := Y.isIso_H_map_bot_zero_one n
+  rw [bottomEdge, imageSubobject_iso_comp, imageFiltration, ← imageSubobject_mono,
+    ← Y.p_fromOpcycles]
+  have : IsIso (Subobject.ofLE _ _ (imageSubobject_comp_le (Y.pOpcycles _ _ n)
+      (Y.fromOpcycles (homOfLE (bot_le : (⊥ : EInt) ≤ ((1 : ℤ) : EInt)))
+        (homOfLE (le_top : ((1 : ℤ) : EInt) ≤ ⊤)) _ rfl n))) :=
+    isIso_of_mono_of_epi _
+  exact Subobject.eq_of_comm (asIso (Subobject.ofLE _ _ _)) (Subobject.ofLE_arrow _)
+
+variable {Y} in
+/-- The bottom edge map is natural in the first quadrant spectral object. -/
+lemma bottomEdge_naturality {Y' : SpectralObject C EInt} [Y'.IsFirstQuadrant] (φ : Y ⟶ Y')
+    (n : ℤ) :
+    (φ.hom n).app _ ≫ Y'.bottomEdge n = Y.bottomEdge n ≫ (φ.hom n).app _ := by
+  have := Y.isIso_H_map_bot_zero_one n
+  have := Y'.isIso_H_map_bot_zero_one n
+  rw [bottomEdge, bottomEdge, Category.assoc, IsIso.eq_inv_comp, NatTrans.naturality_assoc,
+    IsIso.hom_inv_id_assoc, NatTrans.naturality]
+
+variable {Y} in
+/-- The left edge map is natural in the first quadrant spectral object. -/
+lemma leftEdge_naturality {Y' : SpectralObject C EInt} [Y'.IsFirstQuadrant] (φ : Y ⟶ Y')
+    (n : ℤ) :
+    (φ.hom n).app _ ≫ Y'.leftEdge n = Y.leftEdge n ≫ (φ.hom n).app _ := by
+  have := Y.isIso_H_map_self_succ_top n
+  have := Y'.isIso_H_map_self_succ_top n
+  rw [leftEdge, leftEdge, Category.assoc, ← NatTrans.naturality_assoc]
+  congr 1
+  rw [IsIso.eq_inv_comp, NatTrans.naturality_assoc, IsIso.hom_inv_id, Category.comp_id]
 
 end
 

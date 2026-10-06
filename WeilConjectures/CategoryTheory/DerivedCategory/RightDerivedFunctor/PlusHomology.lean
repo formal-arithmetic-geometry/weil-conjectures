@@ -22,7 +22,9 @@ objects.
 
 - `CategoryTheory.InjectiveResolution.isoRightDerivedObjCochainComplex`: `R^n F X` is the
   homology of `F` applied to the `ℤ`-indexed cochain complex of an injective resolution of `X`.
-- `CategoryTheory.Functor.nonempty_homology_rightDerivedFunctorPlus_obj_singleFunctor_iso`:
+- `CategoryTheory.Functor.rightDerivedFunctorPlusObjSingleFunctorIsoQ`: `R⁺F(X[0])` is the image
+  of the complex `F(I)` for an injective resolution `I` of `X`.
+- `CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso`:
   `H^n(R⁺F(X[0])) ≅ R^n F X`.
 - `CategoryTheory.Functor.nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso`: if `L` is a
   bounded below complex of `F`-acyclic objects and `F` is left exact, then
@@ -75,8 +77,11 @@ end InjectiveResolution
 
 namespace Functor
 
-variable (F : C ⥤ D) [F.Additive] [EnoughInjectives C] [HasDerivedCategory C]
-  [HasDerivedCategory D]
+variable (F : C ⥤ D) [F.Additive] [EnoughInjectives C]
+
+section
+
+variable [HasDerivedCategory C] [HasDerivedCategory D]
 
 /-- If `L` is a bounded below complex of injective objects, the homology of `R⁺F(L)` is the
 homology of `F(L)`. -/
@@ -90,20 +95,34 @@ noncomputable def homologyRightDerivedFunctorPlusObjQIsoOfInjective (L : Cochain
     (DerivedCategory.homologyFunctorFactorsh D n).app _ ≪≫
     (HomotopyCategory.homologyFunctorFactors D _ n).app _
 
-/-- The `n`-th homology of `R⁺F` applied to `X` placed in degree `0` is `R^n F X`. -/
-theorem nonempty_homology_rightDerivedFunctorPlus_obj_singleFunctor_iso (X : C) (n : ℕ) :
-    Nonempty ((DerivedCategory.Plus.homologyFunctor D n).obj
-        (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor C 0).obj X)) ≅
-      (F.rightDerived n).obj X) := by
+/-- The bounded below cochain complex `F(I)`, where `I` is the chosen injective resolution of
+`X : C` (as a `ℤ`-indexed complex). Its image in `DerivedCategory.Plus D` is `R⁺F(X[0])`, see
+`Functor.rightDerivedFunctorPlusObjSingleFunctorIsoQ`. -/
+noncomputable def rightDerivedPlusComplex (X : C) : CochainComplex.Plus D :=
+  ⟨(F.mapHomologicalComplex _).obj (injectiveResolution X).cochainComplex, 0, inferInstance⟩
+
+/-- `R⁺F(X[0])` is the image in the derived category of the complex `F(I)`, where `I` is the
+chosen injective resolution of `X`. -/
+noncomputable def rightDerivedFunctorPlusObjSingleFunctorIsoQ (X : C) :
+    F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor C 0).obj X) ≅
+      DerivedCategory.Plus.Q.obj (F.rightDerivedPlusComplex X) :=
   let R := injectiveResolution X
   let L : CochainComplex.Plus C := ⟨R.cochainComplex, 0, inferInstance⟩
   have : ∀ n, Injective (L.obj.X n) := fun n ↦ inferInstanceAs (Injective (R.cochainComplex.X n))
-  let e : (DerivedCategory.Plus.singleFunctor C 0).obj X ≅ DerivedCategory.Plus.Q.obj L :=
-    DerivedCategory.Plus.ι.preimageIso ((DerivedCategory.singleFunctorIsoCompQ C 0).app X ≪≫
-      asIso (DerivedCategory.Q.map R.ι') ≪≫ (DerivedCategory.quotientCompQhIso C).symm.app _)
-  exact ⟨(DerivedCategory.Plus.homologyFunctor D n).mapIso (F.rightDerivedFunctorPlus.mapIso e) ≪≫
-    F.homologyRightDerivedFunctorPlusObjQIsoOfInjective L n ≪≫
-    (R.isoRightDerivedObjCochainComplex F n).symm⟩
+  F.rightDerivedFunctorPlus.mapIso (DerivedCategory.Plus.ι.preimageIso
+    ((DerivedCategory.singleFunctorIsoCompQ C 0).app X ≪≫
+      asIso (DerivedCategory.Q.map R.ι') ≪≫ (DerivedCategory.quotientCompQhIso C).symm.app _)) ≪≫
+    (asIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj L))).symm
+
+/-- The `n`-th homology of `R⁺F` applied to `X` placed in degree `0` is `R^n F X`. -/
+noncomputable def homologyRightDerivedFunctorPlusObjSingleFunctorIso (X : C) (n : ℕ) :
+    (DerivedCategory.Plus.homologyFunctor D n).obj
+        (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor C 0).obj X)) ≅
+      (F.rightDerived n).obj X :=
+  (DerivedCategory.Plus.homologyFunctor D n).mapIso
+      (F.rightDerivedFunctorPlusObjSingleFunctorIsoQ X) ≪≫
+    DerivedCategory.Plus.homologyFunctorObjQIso _ n ≪≫
+    ((injectiveResolution X).isoRightDerivedObjCochainComplex F n).symm
 
 /-- **Acyclic complexes compute `R⁺F`.** If `F` is left exact and `L` is a bounded below
 complex of `F`-acyclic objects, then the homology of `R⁺F(L)` is the homology of `F(L)`. -/
@@ -145,6 +164,8 @@ theorem isZero_homology_rightDerivedFunctorPlus_obj_of_isGE (Z : DerivedCategory
       F.homologyRightDerivedFunctorPlusObjQIsoOfInjective T' k)
   exact ShortComplex.isZero_homology_of_isZero_X₂ _
     (F.map_isZero (T'.obj.isZero_of_isStrictlyGE m k hk))
+
+end
 
 end Functor
 
