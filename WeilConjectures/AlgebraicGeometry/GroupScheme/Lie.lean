@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Lie.Abelian
 public import Mathlib.Algebra.Lie.Subalgebra
+public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import Mathlib.AlgebraicGeometry.Group.Affine
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
@@ -532,19 +533,61 @@ theorem mem_tangentGroup {x : points G (DualNumber R)} :
 /-- The isomorphism `(Spec R)[ε] ⟶ Spec R[ε]` as a morphism over `Spec R`. -/
 noncomputable def dualNumbersToSpecOver :
     dualNumbersOver (Spec (.of R)) ⟶ (Spec (.of (DualNumber R))).asOver (Spec (.of R)) :=
-  Over.homMk (Scheme.dualNumbersToSpec (.of R)) (by sorry)
+  Over.homMk (Scheme.dualNumbersToSpec (.of R))
+    (Scheme.dualNumbersToSpec_comp_specMap (.of R))
 
 instance : IsIso (dualNumbersToSpecOver (R := R)) := by
-  sorry
+  have : IsIso ((Over.forget _).map (dualNumbersToSpecOver (R := R))) :=
+    Scheme.isIso_dualNumbersToSpec (.of R)
+  exact isIso_of_reflects_iso _ (Over.forget _)
+
+/-- The closed point `ε ↦ 0` of `Spec R[ε]` is the closed immersion `i : S ⟶ S[ε]` through
+`(Spec R)[ε] ≅ Spec R[ε]`. -/
+private theorem specFst_asOver_eq :
+    (Spec.map (CommRingCat.ofHom (fstHom R R R).toRingHom)).asOver (Spec (.of R)) =
+      Over.homMk (U := (Spec (.of R)).asOver (Spec (.of R))) (V := Over.mk (𝟙 _)) (𝟙 _)
+        (by simp [specOverSpec_over]; rfl) ≫
+        dualNumbersιOver (Spec (.of R)) ≫ dualNumbersToSpecOver := by
+  ext1
+  simp [dualNumbersιOver, dualNumbersToSpecOver, Scheme.ι_comp_dualNumbersToSpec]
+
+/-- An infinitesimal point gives a point of the tangent group through `(Spec R)[ε] ≅ Spec R[ε]`. -/
+theorem GrpObj.inv_dualNumbersToSpecOver_comp_mem_tangentGroup
+    {v : dualNumbersOver (Spec (.of R)) ⟶ G} (hv : v ∈ GrpObj.infPoints G) :
+    inv dualNumbersToSpecOver ≫ v ∈ tangentGroup G := by
+  rw [mem_tangentGroup, points.map, ← Category.assoc]
+  erw [specFst_asOver_eq]
+  simp only [Category.assoc, IsIso.hom_inv_id_assoc]
+  rw [(GrpObj.mem_infPoints G).1 hv, MonObj.comp_one]
+
+/-- A point of the tangent group gives an infinitesimal point through `(Spec R)[ε] ≅ Spec R[ε]`. -/
+theorem GrpObj.dualNumbersToSpecOver_comp_mem_infPoints {x : points G (DualNumber R)}
+    (hx : x ∈ tangentGroup G) :
+    dualNumbersToSpecOver ≫ x ∈ GrpObj.infPoints G := by
+  rw [mem_tangentGroup, points.map] at hx
+  erw [specFst_asOver_eq] at hx
+  have e : Over.homMk (U := Over.mk (𝟙 (Spec (.of R))))
+      (V := (Spec (.of R)).asOver (Spec (.of R))) (𝟙 _) (by simp [specOverSpec_over]) ≫
+      Over.homMk (V := Over.mk (𝟙 _)) (𝟙 _) (by simp [specOverSpec_over]; rfl) = 𝟙 _ := by
+    ext1
+    simp
+  simp only [Category.assoc] at hx
+  rw [GrpObj.mem_infPoints, ← Category.id_comp (dualNumbersιOver _ ≫ _), ← e, Category.assoc, hx,
+    MonObj.comp_one]
 
 /-- The infinitesimal points of `G` are the points with values in the ring of dual numbers reducing
 to the identity, through `(Spec R)[ε] ≅ Spec R[ε]`. -/
 noncomputable def GrpObj.infPointsEquivTangentGroup : GrpObj.infPoints G ≃* tangentGroup G where
-  toFun v := ⟨inv dualNumbersToSpecOver ≫ v.1, by sorry⟩
-  invFun x := ⟨dualNumbersToSpecOver ≫ x.1, by sorry⟩
-  left_inv _ := by sorry
-  right_inv _ := by sorry
-  map_mul' _ _ := by sorry
+  toFun v :=
+    ⟨inv dualNumbersToSpecOver ≫ v.1, GrpObj.inv_dualNumbersToSpecOver_comp_mem_tangentGroup G v.2⟩
+  invFun x := ⟨dualNumbersToSpecOver ≫ x.1, GrpObj.dualNumbersToSpecOver_comp_mem_infPoints G x.2⟩
+  left_inv v := by
+    apply Subtype.ext
+    exact IsIso.hom_inv_id_assoc dualNumbersToSpecOver v.1
+  right_inv x := by
+    apply Subtype.ext
+    exact IsIso.inv_hom_id_assoc dualNumbersToSpecOver x.1
+  map_mul' _ _ := Subtype.ext (MonObj.comp_mul _ _ _)
 
 @[simp]
 theorem GrpObj.coe_infPointsEquivTangentGroup_apply (v : GrpObj.infPoints G) :
@@ -563,13 +606,29 @@ variable {k : Type u} [Field k]
 /-- A morphism of schemes locally of finite type over an algebraically closed field `k` which is
 surjective on underlying spaces is surjective on `k`-points.
 
-Proof sketch (not formalised): the fibre of `f` over the closed point `y` is a nonempty scheme
-locally of finite type over `k`; by the Nullstellensatz its closed points have residue field `k`,
-and such a point is a `k`-point of `X` over `y`. -/
+The fibre of `f` over the closed point `y` is a nonempty scheme locally of finite type over `k`; by
+the Nullstellensatz its closed points have residue field `k`, and such a point is a `k`-point of `X`
+over `y`. -/
 theorem exists_points_comp_eq_of_surjective [IsAlgClosed k] {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] (f : X ⟶ Y) (hf : Function.Surjective f.left.base)
     (y : points Y k) : ∃ x : points X k, x ≫ f = y := by
-  sorry
+  have : LocallyOfFiniteType f.left :=
+    have : LocallyOfFiniteType (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
+    locallyOfFiniteType_of_comp f.left Y.hom
+  have : JacobsonSpace (Limits.pullback f.left y.left : Scheme) :=
+    LocallyOfFiniteType.jacobsonSpace (Y := Spec (.of k)) (Limits.pullback.snd f.left y.left)
+  obtain ⟨x₀, hx₀⟩ := hf (y.left (IsLocalRing.closedPoint k))
+  obtain ⟨z, -, -⟩ := Scheme.Pullback.exists_preimage_pullback x₀ _ hx₀
+  obtain ⟨z, -, hz⟩ := nonempty_inter_closedPoints ⟨z, Set.mem_univ _⟩ isOpen_univ.isLocallyClosed
+  have hp := pointOfClosedPoint_comp (Limits.pullback.snd f.left y.left) z hz
+  set p := pointOfClosedPoint (Limits.pullback.snd f.left y.left) z hz
+  have hfy : (p ≫ Limits.pullback.fst f.left y.left) ≫ f.left = y.left := by
+    rw [Category.assoc, Limits.pullback.condition, reassoc_of% hp]
+  refine ⟨Over.homMk (p ≫ Limits.pullback.fst f.left y.left) ?_, ?_⟩
+  · rw [← Over.w f, ← Category.assoc, hfy]
+    exact Over.w y
+  · ext1
+    exact hfy
 
 namespace GrpObj
 
