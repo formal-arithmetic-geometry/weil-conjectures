@@ -593,16 +593,17 @@ to `|ι α| ≤ q_s ^ (w / 2 + 1 / n)` for every `n`, and `n → ∞` finishes
 (`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius`).
 
 The curve `C₀` is smooth and geometrically connected and `ℓ ≠ char 𝔽_q`, as in the setting
-`sk-d-real-setup` of the block, and `ℱ` is lisse: these are the hypotheses of the trace formula
-used in the proof, and without lissity the statement fails (a discontinuous character can be
-trivial on all local Frobenius elements but not on a residue Frobenius lift). -/
+`sk-d-real-setup` of the block, and `ℱ` is lisse. The trace formula used in the proof, in its
+Euler-product form for middle extensions (`lem-wf-euler-product-middle-extension`), is the
+hypothesis `hD`: it does not follow from the fields of a `BoundaryDatum`, and without it the
+statement is false (see `AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct`). -/
 theorem frobeniusWeight_le_of_hasWeightsAtMost [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hD : D.HasMiddleExtensionEulerProduct l ι)
     (ρ : Representation (PadicAlgCl l) WU.carrier V) (hρ : WU.IsLisse l ρ) {w : ℝ}
     (hw : WU.HasWeightsAtMost l ρ ι w) (s : ↥((Set.range j.base)ᶜ)) {α : PadicAlgCl l} {v : V}
     (hv : v ∈ D.boundaryStalk l ρ s) (hv0 : v ≠ 0) (hα : ρ (D.residueFrobenius s) v = α • v) :
     WeilGroup.frobeniusWeight ι (C.pointNorm s.1) α ≤ w := by
-  refine D.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius l ι ρ hρ hw s
+  refine D.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius l ι hD ρ hρ hw s
     (Module.End.hasEigenvalue_of_hasEigenvector (x := ⟨v, hv⟩) ⟨?_, ?_⟩)
   · rw [Module.End.mem_eigenspace_iff]
     ext
@@ -621,9 +622,11 @@ on `C₀`, so its stalk is the whole local representation, with Frobenius the re
 residue Frobenius lift; the bound for `j_* ℱ`, applied to `𝒢` and to its dual `𝒢 ^ ∨`, whose
 eigenvalues are the inverses of those of `𝒢`, gives an upper bound `w` and a lower bound `w`
 (`cor-wf-unramified-boundary-purity`,
-`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_eq_of_isPunctuallyPure`). -/
+`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_eq_of_isPunctuallyPure`). As there, the
+Euler-product form of the trace formula is the hypothesis `hD`, without which the statement is
+false. -/
 theorem isPunctuallyPure_of_isPunctuallyPure_restrict [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hD : D.HasMiddleExtensionEulerProduct l ι)
     (ρ : Representation (PadicAlgCl l) WC.carrier V) {w : ℝ} (hρ : WC.IsLisse l ρ)
     (hpure : WU.IsPunctuallyPure l (ρ.comp D.restrict) ι w) :
     WC.IsPunctuallyPure l ρ ι w := by
@@ -649,7 +652,7 @@ theorem isPunctuallyPure_of_isPunctuallyPure_restrict [SmoothOfRelativeDimension
       rw [Module.End.hasEigenvalue_iff_isRoot_charpoly] at hα ⊢
       rw [MonoidHom.comp_apply, ← LinearMap.charpoly_of_isConj (ρ.map_isConj hconj)]
       exact hα
-    exact D.frobeniusWeight_eq_of_isPunctuallyPure l ι (ρ.comp D.restrict)
+    exact D.frobeniusWeight_eq_of_isPunctuallyPure l ι hD (ρ.comp D.restrict)
       (D.isLisse_comp_restrict l hρ) hpure ⟨x.1, hx⟩
       (fun g hg ↦ by
         rw [MonoidHom.comp_apply, D.inertia_le_ker_restrict ⟨x.1, hx⟩ hg, map_one]) hα'

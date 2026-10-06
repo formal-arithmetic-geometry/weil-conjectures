@@ -41,20 +41,22 @@ boundary stalks contain `v ^ ⊗ 2 ^ k` for an eigenvector `v`, sharpens the bou
 The cohomology `H_c² (U, ℱ)` of a Weil representation is not available; as in
 `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin`, the coinvariant Tate twist
 `V_{π₁(U)} (-1)` is used in its place (`AlgebraicGeometry.WeilGroup.compactTopFrobenius`).
-Like the other statements of the real-sheaves block, the trace formula
-`AlgebraicGeometry.BoundaryDatum.exists_tprod_eulerFactor_mul_eq` is not a consequence of the
-data of a `AlgebraicGeometry.BoundaryDatum` alone, and is recorded without proof.
+The Euler-product form of the trace formula for middle extensions is not a consequence of the
+data of a `AlgebraicGeometry.BoundaryDatum`, and the statements of this file are false without
+it. It is the hypothesis `AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct` of
+the main results; the trace formula itself is not available.
 
 ## Main definitions
 
 - `AlgebraicGeometry.WeilGroup.compactTopFrobenius`: the geometric Frobenius on `H_c² (U, ℱ)`.
 - `AlgebraicGeometry.BoundaryDatum.boundaryPolynomial`: `ι det (1 - F_s T ^ e_s ∣ V ^ (I_s))`.
+- `AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct`: the Euler-product identity
+  for middle extensions.
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilGroup.norm_le_of_hasEigenvalue_compactTopFrobenius`
 - `AlgebraicGeometry.WeilGroup.le_radius_inv_tprod_eulerFactor`
-- `AlgebraicGeometry.BoundaryDatum.exists_tprod_eulerFactor_mul_eq`
 - `AlgebraicGeometry.BoundaryDatum.frobeniusWeight_le_add_two`
 - `AlgebraicGeometry.BoundaryDatum.sq_norm_le_rpow_of_hasEigenvalue_boundaryFrobenius`
 - `AlgebraicGeometry.BoundaryDatum.frobeniusWeight_eq_of_isPunctuallyPure`
@@ -553,18 +555,24 @@ boundary factors `ι det (1 - F_s T ^ e_s ∣ V ^ (I_s))⁻¹` at the points `s 
 `ι det (1 - F T ∣ H_c¹)`),
 `L (U'₀, ℱ, T) · ι det (1 - F T ∣ H_c²) = P · ∏_{s ∈ X'₀ \ U₀} ι det (1 - F_s T ^ e_s ∣ V ^ (I_s))`.
 
-The trace formula and the identification of the Weil groups with the étale fundamental groups
-are not available; see the implementation notes. -/
-theorem exists_tprod_eulerFactor_mul_eq [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] {X' : C.Opens} (hX' : IsAffineOpen X')
-    (ρ : Representation (PadicAlgCl l) WU.carrier V) (hρ : WU.IsLisse l ρ) :
-    ∃ P : Polynomial ℂ,
+This identity is not a consequence of the fields of a `BoundaryDatum`, which do not tie the
+residue Frobenius lifts and inertia groups to the geometry of `C₀`: for `C₀ = 𝔸¹`,
+`U₀ = 𝔾_m`, `W(U₀) = W(C₀) = ℤ_ℓ × ℤ`, local Frobenius elements `(0, e_x)` on `U₀`, residue
+Frobenius `(1, 1)` at `0` with trivial inertia, and the lisse character `(a, n) ↦ (1 + ℓ) ^ a`,
+all fields hold, the sheaf is pure of weight `0` on `U₀`, and the boundary eigenvalue `1 + ℓ`
+has positive weight. It is therefore recorded as a hypothesis on `D`, for every lisse Weil
+sheaf on `U₀` (the tensor-power argument applies it to `ℱ ^ ⊗ 2 ^ k` and to `ℱ ^ ∨`); for the
+boundary datum of an actual open immersion it is the Grothendieck–Lefschetz trace formula,
+which is not available. -/
+def HasMiddleExtensionEulerProduct [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p]
+    [Fact (ringChar K ≠ l)] : Prop :=
+  ∀ {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
+    {X' : C.Opens}, IsAffineOpen X' → ∀ ρ : Representation (PadicAlgCl l) WU.carrier V,
+    WU.IsLisse l ρ → ∃ P : Polynomial ℂ,
       (∏' x : {x : U.finitePoints | j.base x.1 ∈ X'}, WU.eulerFactor l ρ ι x.1) *
         (((WU.compactTopFrobenius l ρ).charpolyRev.map ι : Polynomial ℂ) : PowerSeries ℂ) =
       P * ((∏ᶠ s : {s : ↥((Set.range j.base)ᶜ) // s.1 ∈ X'},
-        D.boundaryPolynomial l ι ρ s.1 : Polynomial ℂ) : PowerSeries ℂ) := by
-  sorry
-
+        D.boundaryPolynomial l ι ρ s.1 : Polynomial ℂ) : PowerSeries ℂ)
 
 omit [FiniteDimensional (PadicAlgCl l) V] in
 /-- The eigenvalues of the boundary Frobenius are nonzero, since `F_s` acts invertibly. -/
@@ -674,7 +682,9 @@ identity (`lem-wf-euler-product-middle-extension`) so does the inverse of the pr
 boundary polynomials, which therefore has no zero in that disc. The zero `z` with
 `z ^ e_s = (ι α)⁻¹` gives `|ι α| ^ (-1 / e_s) ≥ R`. -/
 theorem frobeniusWeight_le_add_two [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p]
-    [Fact (ringChar K ≠ l)] (ρ : Representation (PadicAlgCl l) WU.carrier V)
+    [Fact (ringChar K ≠ l)]
+    (hD : D.HasMiddleExtensionEulerProduct l ι)
+    (ρ : Representation (PadicAlgCl l) WU.carrier V)
     (hρ : WU.IsLisse l ρ) {β : ℝ} (hw : WU.HasWeightsAtMost l ρ ι β)
     (s : ↥((Set.range j.base)ᶜ)) {α : PadicAlgCl l}
     (hα : (D.boundaryFrobenius l ρ s).HasEigenvalue α) :
@@ -708,7 +718,7 @@ theorem frobeniusWeight_le_add_two [SmoothOfRelativeDimension 1 p] [Geometricall
   have hRq : q ^ (β / 2 + 1) * R = 1 := by
     rw [← Real.rpow_add hq0, add_neg_cancel, Real.rpow_zero]
   -- the Euler product identity
-  obtain ⟨P, hP⟩ := D.exists_tprod_eulerFactor_mul_eq l ι hX' ρ hρ
+  obtain ⟨P, hP⟩ := hD hX' ρ hρ
   set L := ∏' x : T, WU.eulerFactor l ρ ι x.1
   set Dser : PowerSeries ℂ :=
     (((WU.compactTopFrobenius l ρ).charpolyRev.map ι : Polynomial ℂ) : PowerSeries ℂ)
@@ -850,7 +860,8 @@ Applying the preliminary bound to the iterated tensor squares `ℱ ^ ⊗ 2 ^ k`,
 at most `2 ^ k β` and whose boundary Frobenius has the eigenvalue `α ^ (2 ^ k)`, gives
 `wt (α) ≤ β + 2 / 2 ^ k`. -/
 theorem frobeniusWeight_le_add_div_two_pow [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (k : ℕ) :
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
+    (hD : D.HasMiddleExtensionEulerProduct l ι) (k : ℕ) :
     ∀ {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
       [FiniteDimensional (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) WU.carrier V),
       WU.IsLisse l ρ → ∀ {β : ℝ}, WU.HasWeightsAtMost l ρ ι β →
@@ -860,7 +871,7 @@ theorem frobeniusWeight_le_add_div_two_pow [SmoothOfRelativeDimension 1 p]
   induction k with
   | zero =>
     intro V _ _ _ ρ hρ β hw s α hα
-    simpa using D.frobeniusWeight_le_add_two l ι ρ hρ hw s hα
+    simpa using D.frobeniusWeight_le_add_two l ι hD ρ hρ hw s hα
   | succ k ih =>
     intro V _ _ _ ρ hρ β hw s α hα
     have h := ih (ρ.tprod ρ) (hρ.tprod hρ) (hw.tprod_self l ι) s
@@ -876,13 +887,14 @@ theorem frobeniusWeight_le_add_div_two_pow [SmoothOfRelativeDimension 1 p]
 at most `β`. -/
 theorem frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
+    (hD : D.HasMiddleExtensionEulerProduct l ι)
     (ρ : Representation (PadicAlgCl l) WU.carrier V) (hρ : WU.IsLisse l ρ) {β : ℝ}
     (hw : WU.HasWeightsAtMost l ρ ι β) (s : ↥((Set.range j.base)ᶜ)) {α : PadicAlgCl l}
     (hα : (D.boundaryFrobenius l ρ s).HasEigenvalue α) :
     WeilGroup.frobeniusWeight ι (C.pointNorm s.1) α ≤ β := by
   refine le_of_forall_pos_lt_add fun ε hε ↦ ?_
   obtain ⟨k, hk⟩ := exists_pow_lt_of_lt_one (half_pos hε) one_half_lt_one
-  have h := D.frobeniusWeight_le_add_div_two_pow l ι k ρ hρ hw s hα
+  have h := D.frobeniusWeight_le_add_div_two_pow l ι hD k ρ hρ hw s hα
   have hk' : (2 : ℝ) / 2 ^ k < ε := by
     rw [one_div_pow] at hk
     have : (2 : ℝ) / 2 ^ k = 2 * (1 / 2 ^ k) := by ring
@@ -903,6 +915,7 @@ Steps 0–3 (`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_le_add_two`) give 
 (`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_le_add_div_two_pow`). -/
 theorem sq_norm_le_rpow_of_hasEigenvalue_boundaryFrobenius [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
+    (hD : D.HasMiddleExtensionEulerProduct l ι)
     (ρ : Representation (PadicAlgCl l) WU.carrier V) (hρ : WU.IsLisse l ρ) {β : ℝ}
     (hβ : ∀ (x : U.finitePoints), ∀ α ∈ WU.localEigenvalues l ρ x,
       ‖ι α‖ ^ 2 ≤ (U.pointNorm x.1 : ℝ) ^ β)
@@ -916,7 +929,7 @@ theorem sq_norm_le_rpow_of_hasEigenvalue_boundaryFrobenius [SmoothOfRelativeDime
   exact (WeilGroup.frobeniusWeight_le_iff ι
     (C.one_lt_pointNorm (D.boundary_subset_finitePoints s.2))
     ((map_ne_zero ι).2 (D.ne_zero_of_hasEigenvalue_boundaryFrobenius l ρ s hα))).1
-    (D.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius l ι ρ hρ hw s hα)
+    (D.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius l ι hD ρ hρ hw s hα)
 
 /-- A lisse Weil sheaf on `C₀` restricts to a lisse Weil sheaf on `U₀`: the geometric part of
 `W(U₀)` maps continuously into that of `W(C₀)`. -/
@@ -993,12 +1006,13 @@ at most `w`; applied to the dual `ℱ ^ ∨`, punctually pure of weight `-w` and
 at `s`, whose residue Frobenius has the eigenvalue `α⁻¹`, it is at least `w`. -/
 theorem frobeniusWeight_eq_of_isPunctuallyPure [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
+    (hD : D.HasMiddleExtensionEulerProduct l ι)
     (ρ : Representation (PadicAlgCl l) WU.carrier V) (hρ : WU.IsLisse l ρ) {w : ℝ}
     (hpure : WU.IsPunctuallyPure l ρ ι w) (s : ↥((Set.range j.base)ᶜ))
     (htriv : ∀ g ∈ D.inertia s, ρ g = 1) {α : PadicAlgCl l}
     (hα : Module.End.HasEigenvalue (ρ (D.residueFrobenius s)) α) :
     WeilGroup.frobeniusWeight ι (C.pointNorm s.1) α = w := by
-  have hle := D.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius l ι ρ hρ
+  have hle := D.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius l ι hD ρ hρ
     (fun x a ha ↦ (hpure x a ha).le) s (D.hasEigenvalue_boundaryFrobenius_of_forall_inertia l
       htriv hα)
   have htriv' : ∀ g ∈ D.inertia s, ρ.dual g = 1 := fun g hg ↦ by
@@ -1008,7 +1022,7 @@ theorem frobeniusWeight_eq_of_isPunctuallyPure [SmoothOfRelativeDimension 1 p]
   have hα' : Module.End.HasEigenvalue (ρ.dual (D.residueFrobenius s)) α⁻¹ := by
     rw [Representation.hasEigenvalue_dual_iff]
     exact ρ.hasEigenvalue_inv hα
-  have hge := D.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius l ι ρ.dual hρ.dual
+  have hge := D.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius l ι hD ρ.dual hρ.dual
     (fun x a ha ↦ (hpure.dual l ι x a ha).le) s
     (D.hasEigenvalue_boundaryFrobenius_of_forall_inertia l htriv' hα')
   rw [WeilGroup.frobeniusWeight_inv] at hge
