@@ -217,6 +217,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
+public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Semisimple
@@ -225,8 +226,11 @@ public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
 public import WeilConjectures.Mathlib.RingTheory.HopfAlgebra.Quotient
+public import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
+public import WeilConjectures.Mathlib.RingTheory.LocalProperties.Reduced
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
