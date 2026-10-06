@@ -5,8 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
-public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Mathlib.CategoryTheory.Monoidal.Skeleton
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
+public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
 
 /-!
 # The theorem of the cube
@@ -61,7 +63,12 @@ variable {K : Type u} [Field K]
 Let `A` be an abelian variety over a field `K` and let `L` be an invertible `𝒪_A`-module. For
 `1 ≤ i₁ < ⋯ < i_t ≤ 3` let `m_{i₁…i_t} : A × A × A ⟶ A` be the partial sum map
 `(x₁, x₂, x₃) ↦ x_{i₁} + ⋯ + x_{i_t}`. Then
-`m₁₂₃^* L ⊗ m₁^* L ⊗ m₂^* L ⊗ m₃^* L ≅ m₁₂^* L ⊗ m₁₃^* L ⊗ m₂₃^* L`. -/
+`m₁₂₃^* L ⊗ m₁^* L ⊗ m₂^* L ⊗ m₃^* L ≅ m₁₂^* L ⊗ m₁₃^* L ⊗ m₂₃^* L`.
+
+This is also blueprint `thm-sc-theorem-of-cube`. The proof applies the general theorem of the
+cube `AlgebraicGeometry.nonempty_iso_of_nonempty_iso_overPullback_slices` with `X = Y = Z = A`
+and the unit as rational point: on each of the slices `{e} × A × A`, `A × {e} × A` and
+`A × A × {e}` both sides restrict to `n₁₂^* L ⊗ n₁^* L ⊗ n₂^* L`, since `e^* L` is trivial. -/
 theorem nonempty_iso_cube (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A]
     (L : A.left.Modules) [L.IsInvertible] :
     Nonempty
@@ -75,8 +82,33 @@ theorem nonempty_iso_cube (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety
           (overPullback ((fst (A ⊗ A) A ≫ fst A A) * (fst (A ⊗ A) A ≫ snd A A)) L)
           (Scheme.Modules.tensorObj
             (overPullback ((fst (A ⊗ A) A ≫ fst A A) * snd (A ⊗ A) A) L)
-            (overPullback ((fst (A ⊗ A) A ≫ snd A A) * snd (A ⊗ A) A) L))) :=
-  sorry
+            (overPullback ((fst (A ⊗ A) A ≫ snd A A) * snd (A ⊗ A) A) L))) := by
+  -- Compare isomorphism classes in the commutative monoid `Skeleton`, where pullback is
+  -- multiplicative and the pullback of `L` along the constant map `1` is trivial.
+  have hcomp {B C : Over (Spec (.of K))} (s : B ⟶ C) (g : C ⟶ A) :
+      toSkeleton (overPullback s (overPullback g L)) = toSkeleton (overPullback (s ≫ g) L) :=
+    toSkeleton_eq_toSkeleton_iff.2 ⟨(pullbackComp s.left g.left).app L⟩
+  have htensor {B C : Over (Spec (.of K))} (s : B ⟶ C) (M N : C.left.Modules) :
+      toSkeleton (overPullback s (M ⊗ N)) =
+        toSkeleton (overPullback s M) * toSkeleton (overPullback s N) := by
+    rw [← Skeleton.toSkeleton_tensorObj]
+    exact toSkeleton_eq_toSkeleton_iff.2 (nonempty_pullback_tensorObj_iso _ _ _)
+  have hone (B : Over (Spec (.of K))) :
+      toSkeleton (overPullback (toUnit B ≫ η[A]) L) = 1 := by
+    rw [← hcomp, Skeleton.one_eq]
+    obtain ⟨e⟩ := IsInvertible.nonempty_iso_unit (X := Spec (.of K))
+      (IsLocalRing.closedPoint K) (overPullback η[A] L)
+    exact toSkeleton_eq_toSkeleton_iff.2 ⟨(pullback _).mapIso e ≪≫ pullbackObjUnitIso _⟩
+  have hunit_mul {B : Over (Spec (.of K))} (f : B ⟶ A) : (toUnit B ≫ η[A]) * f = f :=
+    one_mul f
+  have mul_hunit {B : Over (Spec (.of K))} (f : B ⟶ A) : f * (toUnit B ≫ η[A]) = f := mul_one f
+  refine nonempty_iso_of_nonempty_iso_overPullback_slices A A A η[A] η[A] η[A] _ _ ?_ ?_ ?_ <;>
+    refine toSkeleton_eq_toSkeleton_iff.1 ?_ <;>
+    simp only [htensor, hcomp, comp_mul, lift_fst_assoc, lift_fst, lift_snd, Category.id_comp,
+      hunit_mul, mul_hunit, hone]
+  · rw [_root_.one_mul]; ac_rfl
+  · rw [_root_.one_mul]; ac_rfl
+  · rw [_root_.mul_one]
 
 /-- Blueprint `sk-prop-av-mult-n-pullback`: Pullback of symmetric modules under multiplication
 by `n`.
