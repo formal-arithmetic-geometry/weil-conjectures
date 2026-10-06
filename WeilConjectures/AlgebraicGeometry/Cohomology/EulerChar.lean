@@ -43,8 +43,6 @@ Riemann–Roch, stated in `WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.l
 - `AlgebraicGeometry.Scheme.arithmeticGenus_pullback`,
   `AlgebraicGeometry.Scheme.Modules.degree_pullback`: the arithmetic genus and the degree are
   invariant under base change along a field extension.
-- `AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact`: the Euler characteristic
-  is additive in short exact sequences.
 - `AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`: the cohomology of a
   coherent sheaf on a proper scheme over a field is finite-dimensional.
 - `AlgebraicGeometry.Scheme.Modules.degree_congr`: the degree only depends on the isomorphism
@@ -235,36 +233,6 @@ theorem eulerChar_eq_sum_range [IsNoetherian X] (M : X.Modules) {n : ℕ}
   rw [finrankH_eq_zero_of_topologicalKrullDim_lt k M (hn.trans_lt ?_), Nat.cast_zero, mul_zero]
   simp only [Finset.coe_range, Set.mem_Iio, not_lt] at h
   exact_mod_cast Nat.lt_of_lt_of_le n.lt_succ_self h
-
-/-- **The Euler characteristic is well defined.** On a noetherian scheme of dimension at most
-`n`, only finitely many `h^q(X, M)` are nonzero, so the `finsum` defining `χ(X, M)` is a finite
-sum. Together with the finite-dimensionality of the cohomology of coherent modules on proper
-schemes over a field (for invertible modules,
-`AlgebraicGeometry.Scheme.Modules.finiteDimensional_H`), this makes `χ` well defined.
-
-(blueprint: `lem-pc-euler-characteristic-well-defined`) -/
-theorem finite_support_finrankH [IsNoetherian X] (M : X.Modules) {n : ℕ}
-    (hn : topologicalKrullDim X ≤ n) : (Function.support (M.finrankH k)).Finite := by
-  refine (Set.finite_Iio (n + 1)).subset fun q hq ↦ ?_
-  by_contra h
-  refine hq (finrankH_eq_zero_of_topologicalKrullDim_lt k M (hn.trans_lt ?_))
-  simp only [Set.mem_Iio, not_lt] at h
-  exact_mod_cast Nat.lt_of_lt_of_le n.lt_succ_self h
-
-/-- **The Euler characteristic is additive in short exact sequences.** Let `X` be a
-noetherian scheme of finite dimension over a field `k` and `0 → M₁ → M₂ → M₃ → 0` a short
-exact sequence of `𝒪_X`-modules whose outer terms have finite-dimensional cohomology. Then
-`χ(M₂) = χ(M₁) + χ(M₃)`: the long exact cohomology sequence is a finite exact sequence of
-finite-dimensional `k`-vector spaces, so the alternating sum of its dimensions vanishes
-(Stacks 08AA).
-
-(blueprint: `lem-pc-euler-additive`) -/
-@[stacks 08AA]
-theorem eulerChar_eq_add_of_shortExact [IsNoetherian X] {n : ℕ}
-    (hn : topologicalKrullDim X ≤ n) {S : ShortComplex X.Modules} (hS : S.ShortExact)
-    [∀ q, FiniteDimensional k (S.X₁.H q)] [∀ q, FiniteDimensional k (S.X₃.H q)] :
-    S.X₂.eulerChar k = S.X₁.eulerChar k + S.X₃.eulerChar k :=
-  sorry
 
 /-- **The Euler characteristic is additive over a finite disjoint union.** If a noetherian
 scheme `X` of finite dimension is the disjoint union of finitely many open subschemes `U i`,

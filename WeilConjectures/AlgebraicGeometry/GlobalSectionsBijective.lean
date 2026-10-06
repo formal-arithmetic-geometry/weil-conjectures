@@ -9,7 +9,6 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.GlobalSections
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
@@ -33,10 +32,6 @@ connected `X` over a separably closed field.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.isField_globalSections`: the global functions of a proper integral
-  `k`-scheme form a finite field extension of `k`.
-- `AlgebraicGeometry.Scheme.globalSectionsBijective_iff_geometricallyConnected`: for proper
-  geometrically reduced `X`, `H⁰(X, 𝒪_X) = k` if and only if `X` is geometrically connected.
 - `AlgebraicGeometry.Scheme.Modules.finrankH_unit_zero`: `h⁰(X, 𝒪_X) = 1` when
   `H⁰(X, 𝒪_X) = k`.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyConnected`: a proper,
@@ -70,30 +65,6 @@ class GlobalSectionsBijective : Prop where
 
 variable {k X}
 
-variable (k) in
-/-- **The global functions of a proper variety.** The global functions `Γ(X, 𝒪_X)` of a proper
-integral scheme `X` over `k` form a field, finite over `k`: they are a finite-dimensional
-`k`-algebra by the finiteness of `H⁰(X, 𝒪_X) = Γ(X, 𝒪_X)`, and a domain since `X` is integral.
-If `X` is moreover geometrically integral, this field is `k`
-(`AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyIntegral`).
-
-(blueprint: `lem-pc-h0-proper-variety`) -/
-theorem isField_globalSections [IsProper (X ↘ Spec (.of k))] [IsIntegral X] :
-    IsField Γ(X, ⊤) ∧
-      letI := (globalSectionsRingHom k (X := X)).toAlgebra
-      Module.Finite k Γ(X, ⊤) := by
-  let := (globalSectionsRingHom k (X := X)).toAlgebra
-  let O : X.Modules := SheafOfModules.unit X.ringCatSheaf
-  have : FiniteDimensional k (O.H 0) :=
-    Modules.finiteDimensional_H (M := MonoidalCategory.tensorUnit X.Modules) k 0
-  let e : O.H 0 ≃ₗ[k] Γ(X, ⊤) :=
-    { Modules.H.zeroLinearEquiv O with
-      map_smul' c x := (Modules.H.zeroLinearEquiv O).map_smul (globalSectionsRingHom k c) x }
-  have : Module.Finite k Γ(X, ⊤) := Module.Finite.equiv e
-  refine ⟨?_, this⟩
-  have : Algebra.IsIntegral k Γ(X, ⊤) := Algebra.IsIntegral.of_finite k _
-  exact isField_of_isIntegral_of_isField' (Field.toIsField k)
-
 /-- A proper `k`-scheme that is geometrically connected and geometrically reduced has
 `H⁰(X, 𝒪_X) = k` (Stacks 0BUG). -/
 instance GlobalSectionsBijective.of_geometricallyConnected [IsProper (X ↘ Spec (.of k))]
@@ -105,22 +76,6 @@ instance GlobalSectionsBijective.of_geometricallyConnected [IsProper (X ↘ Spec
 theorem GlobalSectionsBijective.of_geometricallyIntegral [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] : GlobalSectionsBijective k X :=
   inferInstance
-
-/-- A proper `k`-scheme with `H⁰(X, 𝒪_X) = k` is geometrically connected: for every field
-extension `K/k`, `H⁰(X_K, 𝒪_{X_K}) = K` by flat base change, and a nonempty scheme whose ring of
-global functions has no nontrivial idempotents is connected. -/
-theorem GlobalSectionsBijective.geometricallyConnected [IsProper (X ↘ Spec (.of k))]
-    [GlobalSectionsBijective k X] : GeometricallyConnected (X ↘ Spec (.of k)) :=
-  sorry
-
-/-- **`H⁰(X, 𝒪_X) = k` and geometric connectedness.** A proper geometrically reduced `k`-scheme
-has `H⁰(X, 𝒪_X) = k` if and only if it is geometrically connected (Stacks 0BUG).
-
-(blueprint: `lem-pc-h0-geom-connected`) -/
-theorem globalSectionsBijective_iff_geometricallyConnected [IsProper (X ↘ Spec (.of k))]
-    [GeometricallyReduced (X ↘ Spec (.of k))] :
-    GlobalSectionsBijective k X ↔ GeometricallyConnected (X ↘ Spec (.of k)) :=
-  ⟨fun _ ↦ GlobalSectionsBijective.geometricallyConnected, fun _ ↦ inferInstance⟩
 
 /-- A smooth proper connected scheme over a separably closed field `k` has
 `H⁰(X, 𝒪_X) = k`. -/

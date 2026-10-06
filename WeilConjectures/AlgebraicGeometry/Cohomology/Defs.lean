@@ -344,7 +344,6 @@ theorem finrankH_eq_of_comp_specMap {L : Type u} [Field L]
       rw [hring, RingHom.comp_apply])
   exact congrArg Cardinal.toNat h
 
-
 /-- **Cohomology of a finite biproduct.** If `b` is a bilimit bicone on a finite family `M`
 of sheaves of modules, then `H^n(X, b.pt) ≅ ∏ᵢ H^n(X, Mᵢ)` as `k`-vector spaces, via the
 projections and the inclusions of `b`. -/

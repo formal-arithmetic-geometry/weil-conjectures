@@ -60,7 +60,6 @@ leading coefficient whenever that function is a numerical polynomial of degree a
   invertible module on a connected noetherian scheme of dimension `0` has degree `0`.
 - `AlgebraicGeometry.IsAmple.pullback`: the restriction of an ample module to a closed subscheme
   is ample.
-- `AlgebraicGeometry.IsVeryAmple.isAmple`: a very ample module is ample.
 - `AlgebraicGeometry.IsAmple.pullback_of_field` and `AlgebraicGeometry.IsVeryAmple.of_pullback`:
   ampleness is stable under field extension, and very ampleness descends along it.
 - `AlgebraicGeometry.isAffine_compl_of_isAmple_dual_toModules`: the complement of an effective
@@ -165,13 +164,6 @@ theorem IsVeryAmple.tensorPow {S : Scheme.{u}} {f : X ⟶ S} {M : X.Modules}
 An invertible `𝒪_X`-module is *ample* if some positive tensor power of it is very ample. -/
 def IsAmple (f : X ⟶ Spec (.of K)) (M : X.Modules) : Prop :=
   ∃ m : ℕ, 0 < m ∧ IsVeryAmple f (M.tensorPow m)
-
-/-- **A very ample module is ample**, with `m = 1`.
-
-(blueprint: `lem-pc-very-ample-ample`) -/
-theorem IsVeryAmple.isAmple {f : X ⟶ Spec (.of K)} {M : X.Modules} (h : IsVeryAmple f M) :
-    IsAmple f M :=
-  ⟨1, one_pos, h.of_iso (ρ_ M).symm⟩
 
 /-- The Hilbert function `m ↦ χ(X, M^{⊗ m})` of an `𝒪_X`-module `M` on a `K`-scheme `X`, with
 the Euler characteristic `AlgebraicGeometry.Scheme.Modules.eulerChar` over `K`. -/
