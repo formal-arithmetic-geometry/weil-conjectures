@@ -19,6 +19,7 @@ public import Mathlib.Topology.LocallyConstant.Basic
 public import Mathlib.Topology.Semicontinuity.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
@@ -85,6 +86,8 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
   base, the global sections of `R^q f_* ℱ` are `H^q(X, ℱ)`.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`: the higher direct
   images commute with restriction to an open subscheme of the base.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_tensorObj_pullback_iso`: the
+  projection formula `R^q f_* (ℱ ⊗ f^* 𝒩) ≅ R^q f_* ℱ ⊗ 𝒩` for an invertible `𝒩`.
 - `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`,
   `exists_isZero_higherDirectImage_restrict` and `exists_isZero_higherDirectImage`: for `f`
   quasi-compact and quasi-separated (resp. separated) and `ℱ` quasi-coherent, the higher direct
@@ -165,7 +168,7 @@ and `ℱ` is an invertible `𝒪_X`-module, then `ℱ` is flat over `T`: on an a
 sections `Γ(ℱ, U)` form an invertible, hence flat, `Γ(X, U)`-module, and `Γ(X, U)` is flat over
 `Γ(T, V)` by flatness of `f`. -/
 theorem isFlatOver_of_isInvertible (f : X ⟶ T) [Flat f] (ℱ : X.Modules)
-    [ℱ.IsInvertible] : ℱ.IsFlatOver f := by
+    [SheafOfModules.IsInvertible.{u, u, u} ℱ] : ℱ.IsFlatOver f := by
   intro V U e
   let := (f.appLE V.1 U.1 e).hom.toAlgebra
   have : Module.Flat Γ(T, V.1) Γ(X, U.1) := HasRingHomProperty.appLE @Flat f ‹_› V U e
@@ -305,6 +308,24 @@ theorem nonempty_higherDirectImage_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶
     (sq : IsPullback g' f' f g) (q : ℕ) :
     Nonempty ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ) ≅
       ((higherDirectImage f q).obj ℱ).restrict g) :=
+  sorry
+
+open MonoidalCategory in
+/-- **The projection formula** for an invertible module. For `f : X ⟶ T`, an `𝒪_X`-module `ℱ`
+and an invertible `𝒪_T`-module `𝒩`, `R^q f_* (ℱ ⊗ f^* 𝒩) ≅ R^q f_* ℱ ⊗ 𝒩` for every `q`: twisting
+by an invertible module pulled back from the base commutes with the higher direct images.
+
+The blueprint states the projection formula `Rf_* E ⊗^𝕃 K ≅ Rf_* (E ⊗^𝕃 Lf^* K)` in the derived
+category `D_QCoh` for `f` quasi-compact and quasi-separated, and deduces this case `K = 𝒩[0]`.
+There is no derived category of `X.Modules` here, so only this case is stated, through the
+higher direct images; it holds for every `f` and `ℱ`, as both sides are computed locally on
+`T`, where `𝒩 ≅ 𝒪_T`.
+
+(blueprint: `lem-pc-projection-formula`) -/
+theorem nonempty_higherDirectImage_tensorObj_pullback_iso (𝒩 : T.Modules) [𝒩.IsInvertible]
+    (q : ℕ) :
+    Nonempty ((higherDirectImage f q).obj (ℱ ⊗ (Modules.pullback f).obj 𝒩) ≅
+      (higherDirectImage f q).obj ℱ ⊗ 𝒩) :=
   sorry
 
 end BaseChange
