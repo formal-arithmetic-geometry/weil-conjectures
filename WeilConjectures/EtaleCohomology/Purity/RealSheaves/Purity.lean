@@ -320,7 +320,7 @@ theorem le_add_of_isConstituent_tprod_of_hasDetWeight [Fact (ringChar K ≠ l)]
     Representation.exists_detWeight_eq_add_of_subquotient_tprod
       (weightCharacter ι (Nat.card K)) W.deg W.frobeniusLift ρ σ
       (fun UV SV _ ↦ (hρ.subquotient SV UV).hasFiniteGeometricDet)
-      (fun UE SE _ ↦ (hσ.subquotient SE UE).hasFiniteGeometricDet) hcov.lt hQirr
+      (fun UE SE _ ↦ (hσ.subquotient SE UE).hasFiniteGeometricDet) hQirr
       hQlisse.hasFiniteGeometricDet
   have h₁ := hd₁ _ _ ⟨hVirr, UV, SV, hV.le, ⟨SV.subquotientAsModuleLinearEquiv UV⟩⟩
     ((hρ.subquotient SV UV).hasDetWeight ι)
@@ -758,14 +758,13 @@ theorem isPunctuallyPure_subquotient_of_isReal [IsAffine C] [SmoothOfRelativeDim
     intro V' _ _ _ τ γ' hτ hγ'
     obtain ⟨N₁, M₁, hcov, ⟨eτ⟩⟩ := hτ.exists_covBy
     have hRirr : (M₁.subquotient N₁).IsIrreducible :=
-      (Representation.isIrreducible_iff_of_equiv eτ).1 hτ.1
+      eτ.isIrreducible_iff.1 hτ.1
     have hRlisse : W.IsLisse l (M₁.subquotient N₁) := (hSlisse.exteriorPower _).subquotient _ _
     obtain ⟨T, hT, hTc, hTs⟩ :=
       Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower
       (weightCharacter ι (Nat.card K)) W.deg W.frobeniusLift S (N + 1)
       (Representation.directSumSummand Q)
-      (fun i ↦ (Representation.isIrreducible_iff_of_equiv
-        (Representation.directSumSummandEquiv Q i)).1 (hQirr i))
+      (fun i ↦ (Representation.directSumSummandEquiv Q i).isIrreducible_iff.1 (hQirr i))
       (fun i ↦ ((hQlisse i).of_equiv
         (Representation.directSumSummandEquiv Q i)).hasFiniteGeometricDet)
       (Representation.isInternal_directSumSummand Q) hcov.lt hRirr hRlisse.hasFiniteGeometricDet

@@ -666,7 +666,6 @@ theorem DegreeDatum.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower
     refine hQ.trans ?_
     simp only [hdw, map_prod, toAdd_prod, Finset.sum_div]
 
-
 /-- The tensor-product weight theorem for a degree datum `D₀` and irreducible `V` and `E`: every
 subquotient `Q` of `V ⊗ E` with finite geometric determinant has `dw(Q) = dw(V) + dw(E)`.
 Following the blueprint: a positive central pair `(N, z)` for the semisimple datum of `V ⊕ E`
@@ -855,7 +854,6 @@ theorem exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower [IsAlgClosed k]
       Multiset.sum_map_mul_left, Multiset.map_id']
     exact congrArg _ hsum
 
-
 /-- The weights of the subquotients of the tensor product of two irreducible representations `V`
 and `E` of a degree datum, over an algebraically closed field of characteristic zero: if `V`, `E`
 and a subquotient `Q = S / U` of `V ⊗ E` have finite geometric determinant, then
@@ -909,7 +907,7 @@ theorem exists_detWeight_eq_add_of_subquotient_tprod [IsAlgClosed k] [CharZero k
       (SV.subquotient UV).HasFiniteGeometricDet deg)
     (hdetE : ∀ UE SE : Subrepresentation rE, IsIrreducible (SE.subquotient UE) →
       (SE.subquotient UE).HasFiniteGeometricDet deg)
-    {U S : Subrepresentation (rV.tprod rE)} (_hUS : U < S)
+    {U S : Subrepresentation (rV.tprod rE)}
     (hsimple : IsIrreducible (S.subquotient U))
     (hdet : (S.subquotient U).HasFiniteGeometricDet deg) :
     ∃ UV SV : Subrepresentation rV, ∃ UE SE : Subrepresentation rE,
