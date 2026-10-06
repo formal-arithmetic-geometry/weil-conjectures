@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Mon
 
 /-!
 # Torsion subgroup schemes and isogenies
@@ -49,10 +50,12 @@ variable {K : Type u} [Field K]
 /-- Blueprint `sk-prop-av-mult-hom`: The `n`-fold sum is a homomorphism.
 
 Let `G` be a commutative group scheme over `K`. Then the `n`-fold sum map `[n] : G ⟶ G` is a
-homomorphism of group schemes. -/
+homomorphism of group schemes: it is the `n`-th power of the homomorphism `𝟙 G` in the
+commutative monoid `G ⟶ G`, and such powers are homomorphisms
+(`CategoryTheory.MonObj.isMonHom_pow`, blueprint `lem-sc-mult-n-homomorphism`). -/
 instance isMonHom_npow_id (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
     IsMonHom (𝟙 G ^ n) :=
-  sorry
+  MonObj.isMonHom_pow _ n
 
 /-- Blueprint `sk-def-av-group-scheme`: Kernels are closed subgroup schemes.
 

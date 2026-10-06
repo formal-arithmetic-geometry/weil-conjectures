@@ -29,14 +29,22 @@ of `Kˣ`, so the cyclotomic Tate module is literally the Tate module of the addi
   `Kˣ`.
 * `AddCommGroup.eq_zero_of_mem_tateModule_of_forall_fixed`: an automorphism of an abelian group
   with finitely many fixed points fixes no nonzero vector of the Tate module.
+* `AddCommGroup.rationalTateModule.eq_zero_of_map_eq_self`: the same for the rational Tate
+  module.
 
 ## Blueprint
 
 `cyclotomicTateModule` implements `sk-d-ab-cyclotomic`;
-`AddCommGroup.eq_zero_of_mem_tateModule_of_forall_fixed` implements `sk-p-tate`.
+`AddCommGroup.eq_zero_of_mem_tateModule_of_forall_fixed` implements `sk-p-tate`; together with
+`AddCommGroup.eq_zero_of_mem_tateModule_of_forall_symm_fixed`,
+`AddCommGroup.rationalTateModule.eq_zero_of_map_eq_self` and
+`AddCommGroup.rationalTateModule.eq_zero_of_map_symm_eq_self` it implements
+`lem-tate-module-no-fixed`.
 -/
 
 @[expose] public section
+
+open scoped TensorProduct
 
 namespace AddCommGroup
 
@@ -51,11 +59,83 @@ after clearing denominators. Moreover an automorphism and its inverse have the s
 vectors, so the arithmetic and the geometric Frobenius give the same statement. For
 `M = A₀(k)` with `σ` the arithmetic Frobenius, the hypothesis `hfin` says that the fixed subgroup
 `A^σ = A₀(k₀)` is finite, which is the only input the geometric proof uses.
-(blueprint: `sk-p-tate`) -/
+
+Proof (blueprint `lem-tate-module-no-fixed`): all `t n` lie in the finite group `M^σ`, of order
+`N` say; the order of `t (n + N)` is a power `ℓ ^ j` of `ℓ` dividing `N`, so `j ≤ N` and
+`t n = ℓ ^ N • t (n + N) = 0`.
+(blueprint: `sk-p-tate`, `lem-tate-module-no-fixed`) -/
 theorem eq_zero_of_mem_tateModule_of_forall_fixed {l : ℕ} [Fact l.Prime] {M : Type*}
     [AddCommGroup M] (s : M ≃+ M) (hfin : {x : M | s x = x}.Finite) {t : ℕ → M}
     (ht : t ∈ tateModule l M) (hst : ∀ n, s (t n) = t n) : t = 0 := by
-  sorry
+  -- The fixed subgroup `M^σ` is finite; let `N` be its order.
+  let H : AddSubgroup M := AddMonoidHom.eqLocus s.toAddMonoidHom (AddMonoidHom.id M)
+  have : Finite H := hfin.to_subtype
+  set N := Nat.card H
+  have hN : 0 < N := Nat.card_pos
+  let t' : tateModule l M := ⟨t, ht⟩
+  funext n
+  -- The coordinate `t (n + N)` is killed by `ℓ ^ (n + N)` and lies in `M^σ`, so its order is a
+  -- power `ℓ ^ j` of `ℓ` dividing `N`; then `j < ℓ ^ j ≤ N`.
+  have hx : t (n + N) ∈ H := hst (n + N)
+  obtain ⟨j, -, hj⟩ := (Nat.dvd_prime_pow (Fact.out : l.Prime)).mp <|
+    addOrderOf_dvd_of_nsmul_eq_zero (x := t (n + N)) (n := l ^ (n + N)) <| by
+      have := tateModule.pow_zsmul_coe t' (n + N)
+      exact_mod_cast this
+  have hjN : l ^ j ∣ N := by
+    rw [← hj, ← AddSubgroup.addOrderOf_mk _ hx]
+    exact addOrderOf_dvd_natCard _
+  have hjle : j ≤ N :=
+    ((Nat.lt_pow_self (Fact.out : l.Prime).one_lt).trans_le (Nat.le_of_dvd hN hjN)).le
+  -- Hence `t n = ℓ ^ N • t (n + N) = 0`.
+  have hkill : l ^ N • t (n + N) = 0 := by
+    rw [← addOrderOf_dvd_iff_nsmul_eq_zero, hj]
+    exact pow_dvd_pow l hjle
+  calc t n = (l : ℤ) ^ N • t (n + N) := (tateModule.pow_zsmul_coe_add t' n N).symm
+    _ = 0 := by exact_mod_cast hkill
+
+/-- Blueprint `lem-tate-module-no-fixed`, the same statement for the inverse automorphism:
+`σ⁻¹` has the same fixed points as `σ`. -/
+theorem eq_zero_of_mem_tateModule_of_forall_symm_fixed {l : ℕ} [Fact l.Prime] {M : Type*}
+    [AddCommGroup M] (s : M ≃+ M) (hfin : {x : M | s x = x}.Finite) {t : ℕ → M}
+    (ht : t ∈ tateModule l M) (hst : ∀ n, s.symm (t n) = t n) : t = 0 :=
+  eq_zero_of_mem_tateModule_of_forall_fixed s.symm
+    (hfin.subset fun _ hx ↦ (s.symm_apply_eq.mp hx).symm) ht hst
+
+namespace rationalTateModule
+
+/-- Blueprint `lem-tate-module-no-fixed`: an automorphism `σ` of an abelian group `M` whose fixed
+subgroup is finite fixes no nonzero vector of the rational Tate module `V_ℓ M`.
+
+Write `v = ℓ ^ {-b} t` with `t ∈ T_ℓ M`; since `T_ℓ M → V_ℓ M` is injective, `σ t = t`, so
+`t = 0` by `AddCommGroup.eq_zero_of_mem_tateModule_of_forall_fixed`. -/
+theorem eq_zero_of_map_eq_self {l : ℕ} [Fact l.Prime] {M : Type*} [AddCommGroup M] (s : M ≃+ M)
+    (hfin : {x : M | s x = x}.Finite) {v : rationalTateModule l M}
+    (hv : map s.toAddMonoidHom v = v) : v = 0 := by
+  change ℚ_[l] ⊗[ℤ_[l]] tateModule l M at v
+  obtain ⟨⟨t, c⟩, hc⟩ :=
+    IsLocalizedModule.surj (nonZeroDivisors ℤ_[l]) (TensorProduct.mk ℤ_[l] ℚ_[l] _ 1) v
+  dsimp only [TensorProduct.mk_apply] at hc
+  have hcv : (algebraMap ℤ_[l] ℚ_[l] c) • v = 1 ⊗ₜ t := by rw [algebraMap_smul]; exact hc
+  -- `σ` fixes `1 ⊗ t`, hence `t`.
+  have hfix : tateModule.map s.toAddMonoidHom t = t := by
+    refine injective_one_tmul l M ?_
+    dsimp only
+    rw [← map_tmul, ← hcv]
+    exact ((map s.toAddMonoidHom).map_smul _ v).trans (congr_arg _ hv)
+  have ht : t = 0 := Subtype.ext <|
+    eq_zero_of_mem_tateModule_of_forall_fixed s hfin t.2 fun n ↦
+      congr_fun (congr_arg Subtype.val hfix) n
+  rw [ht, TensorProduct.tmul_zero] at hcv
+  exact (smul_eq_zero.mp hcv).resolve_left
+    (IsFractionRing.to_map_ne_zero_of_mem_nonZeroDivisors c.2)
+
+/-- Blueprint `lem-tate-module-no-fixed`, the same statement for the inverse automorphism. -/
+theorem eq_zero_of_map_symm_eq_self {l : ℕ} [Fact l.Prime] {M : Type*} [AddCommGroup M]
+    (s : M ≃+ M) (hfin : {x : M | s x = x}.Finite) {v : rationalTateModule l M}
+    (hv : map s.symm.toAddMonoidHom v = v) : v = 0 :=
+  eq_zero_of_map_eq_self s.symm (hfin.subset fun _ hx ↦ (s.symm_apply_eq.mp hx).symm) hv
+
+end rationalTateModule
 
 end AddCommGroup
 

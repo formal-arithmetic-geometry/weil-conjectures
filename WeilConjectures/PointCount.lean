@@ -77,6 +77,33 @@ theorem Hom.residueFieldAlgebraMap_comp {Y : Scheme.{u}} (g : X ⟶ Y) (f : Y.Ho
   simp only [Hom.residueFieldAlgebraMap, Scheme.residueFieldMap_comp, CommRingCat.hom_comp]
   rfl
 
+/-- A morphism inducing an isomorphism of residue fields at `x`, such as an open immersion,
+does not change the degree of `x` over `k`. -/
+theorem Hom.degreeOver_comp_of_isIso {Y : Scheme.{u}} (g : X ⟶ Y) (f : Y.Hom (Spec (.of k)))
+    (x : X) [IsIso (g.residueFieldMap x)] :
+    (g ≫ f).degreeOver x = f.degreeOver (g.base x) := by
+  let := (f.residueFieldAlgebraMap (g.base x)).toAlgebra
+  let := ((g ≫ f).residueFieldAlgebraMap x).toAlgebra
+  let e : Y.residueField (g.base x) ≃ₐ[k] X.residueField x :=
+    { (asIso (g.residueFieldMap x)).commRingCatIsoToRingEquiv with
+      commutes' c := by
+        change _ = (g ≫ f).residueFieldAlgebraMap x c
+        rw [residueFieldAlgebraMap_comp]
+        rfl }
+  exact e.toLinearEquiv.finrank_eq.symm
+
+/-- A morphism inducing an isomorphism of residue fields at `x`, such as an open immersion,
+preserves and reflects the finiteness of the residue field at `x`. -/
+theorem Hom.mem_finitePoints_iff_of_isIso {Y : Scheme.{u}} (g : X ⟶ Y) (x : X)
+    [IsIso (g.residueFieldMap x)] : g.base x ∈ Y.finitePoints ↔ x ∈ X.finitePoints :=
+  (Equiv.finite_iff (asIso (g.residueFieldMap x)).commRingCatIsoToRingEquiv.toEquiv)
+
+/-- A morphism inducing an isomorphism of residue fields at `x`, such as an open immersion,
+does not change the norm of `x`. -/
+theorem Hom.pointNorm_of_isIso {Y : Scheme.{u}} (g : X ⟶ Y) (x : X)
+    [IsIso (g.residueFieldMap x)] : Y.pointNorm (g.base x) = X.pointNorm x :=
+  Nat.card_congr (asIso (g.residueFieldMap x)).commRingCatIsoToRingEquiv.toEquiv
+
 /-- The degree of a point with finite residue field is positive. -/
 theorem Hom.degreeOver_ne_zero [Finite k] (f : X.Hom (Spec (.of k))) {x : X}
     (hx : x ∈ X.finitePoints) : f.degreeOver x ≠ 0 := by
@@ -386,5 +413,23 @@ theorem Hom.pointCount_eq_sum [Finite k] (f : X.Hom (Spec (.of k)))
         rw [nat_card_fieldPointFiber f hn, if_pos (Finset.mem_filter.mp q.2).2]
     _ = ∑ x ∈ T', f.degreeOver x.1 :=
         Finset.sum_coe_sort T' (fun x : X.finitePoints ↦ f.degreeOver x.1)
+
+/-- A nonempty quasi-compact scheme locally of finite type over a finite field has a point
+with finite residue field: it has a closed point, and closed points of such a scheme have
+finite residue fields (`AlgebraicGeometry.Scheme.finitePoints_eq_closedPoints`). -/
+theorem Hom.exists_mem_finitePoints [Finite k] (f : X.Hom (Spec (.of k)))
+    [LocallyOfFiniteType f] [QuasiCompact f] [Nonempty X] : ∃ x, x ∈ X.finitePoints := by
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  obtain ⟨x, -, hx⟩ := isClosed_univ.exists_closed_singleton (X := X) Set.univ_nonempty
+  let φ : ULift.{u} ℤ →+* k := (Int.castRingHom k).comp ULift.ringEquiv.toRingHom
+  have hφ : φ.FiniteType := by
+    have h₁ : (algebraMap ℤ k).FiniteType :=
+      (RingHom.finite_algebraMap.2 Module.Finite.of_finite).finiteType
+    exact h₁.comp (RingHom.FiniteType.of_surjective _ ULift.ringEquiv.surjective)
+  have : LocallyOfFiniteType (Spec.map (CommRingCat.ofHom φ)) := by
+    rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)]
+    exact hφ
+  rw [finitePoints_eq_closedPoints X (f ≫ Spec.map (CommRingCat.ofHom φ))]
+  exact ⟨x, hx⟩
 
 end AlgebraicGeometry.Scheme

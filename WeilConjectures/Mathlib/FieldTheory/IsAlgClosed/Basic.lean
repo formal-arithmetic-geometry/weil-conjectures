@@ -22,6 +22,10 @@ over a finite field these are the reciprocity relations deduced from Poincaré d
 The fraction field of the integral closure of a ring in an algebraically closed field is again
 algebraically closed (`IsFractionRing.isAlgClosed_integralClosure`).
 
+If `P` has vanishing derivative (for instance, `P` is a polynomial in `X ^ p` in characteristic
+`p`), then `y ↦ P(y) - y` is surjective on an algebraically closed field; in particular the
+Artin–Schreier map `x ↦ x ^ p - x` is surjective.
+
 ## Main statements
 
 - `Polynomial.eq_of_coeff_zero_eq_one_of_roots_eq`: a normalized polynomial is determined by its
@@ -31,6 +35,9 @@ algebraically closed (`IsFractionRing.isAlgClosed_integralClosure`).
   leading coefficients.
 - `IsFractionRing.isAlgClosed_integralClosure`: the fraction field of an integral closure in an
   algebraically closed field is algebraically closed.
+- `IsAlgClosed.exists_eval_sub_self_eq_of_derivative_eq_zero`: if `P' = 0`, then `P(y) - y = b`
+  has a solution.
+- `IsAlgClosed.surjective_pow_sub_self`: the Artin–Schreier map is surjective.
 -/
 
 @[expose] public section
@@ -161,3 +168,32 @@ theorem IsFractionRing.isAlgClosed_integralClosure {R K L : Type*} [CommRing R] 
     ← IsScalarTower.algebraMap_apply, ← IsScalarTower.algebraMap_apply, hb,
     mul_div_cancel_left₀ _ hc]
   exact hy
+
+namespace IsAlgClosed
+
+open Polynomial
+
+variable {k : Type*} [Field k] [IsAlgClosed k]
+
+/-- Over an algebraically closed field, if the polynomial `P` has vanishing derivative, then the
+equation `P(y) - y = b` has a solution for every `b`: the polynomial `P - X - b` has derivative
+`-1`, so it is not constant and has a root. -/
+theorem exists_eval_sub_self_eq_of_derivative_eq_zero {P : k[X]} (hP : derivative P = 0)
+    (b : k) : ∃ y, P.eval y - y = b := by
+  obtain ⟨y, hy⟩ := exists_root (P - X - C b) fun h ↦ by
+    have := derivative_of_natDegree_zero (natDegree_eq_of_degree_eq_some h)
+    simp [hP] at this
+  exact ⟨y, by simpa [sub_eq_zero] using hy⟩
+
+/-- Blueprint `lem-sc-artin-schreier-k`: Artin–Schreier on algebraically closed fields.
+
+Over an algebraically closed field `k` of characteristic `p > 0`, the Artin–Schreier map
+`x ↦ x ^ p - x` is surjective, since `X ^ p - X - a` has derivative `-1`. Its kernel is the prime
+field `𝔽_p`, which is `Subfield.mem_bot_iff_pow_eq_self`. -/
+theorem surjective_pow_sub_self (p : ℕ) [CharP k p] :
+    Function.Surjective fun x : k ↦ x ^ p - x := by
+  intro a
+  have hd : derivative (X ^ p : k[X]) = 0 := by simp [derivative_X_pow, CharP.cast_eq_zero]
+  simpa using exists_eval_sub_self_eq_of_derivative_eq_zero hd a
+
+end IsAlgClosed
