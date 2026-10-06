@@ -146,11 +146,11 @@ theorem smoothOfRelativeDimension_of_representableBy_hilbertPresheaf [IsSeparate
     SmoothOfRelativeDimension d H.hom :=
   sorry
 
-/-- **The universal divisor.** Let `f : X ⟶ S` be flat, locally of finite presentation and smooth
-of relative dimension `1`, and let `H` represent `Hilb^d_{X/S}`. The universal closed subscheme
-`D_univ ⊆ X ×[S] H`, the point of `Hilb^d_{X/S}(H)` classified by `𝟙 H`, is a relative effective
-Cartier divisor over `H`, and for every point `h : T ⟶ H` the line bundle of the divisor
-`D_h ⊆ X_T` classified by `h` is the pullback of `𝒪(D_univ)` along `X_T ⟶ X ×[S] H`.
+/-- **The universal divisor.** Let `f : X ⟶ S` be smooth of relative dimension `1`, and let `H`
+represent `Hilb^d_{X/S}`. The universal closed subscheme `D_univ ⊆ X ×[S] H`, the point of
+`Hilb^d_{X/S}(H)` classified by `𝟙 H`, is a relative effective Cartier divisor over `H`, and for
+every point `h : T ⟶ H` the line bundle of the divisor `D_h ⊆ X_T` classified by `h` is the
+pullback of `𝒪(D_univ)` along `X_T ⟶ X ×[S] H`.
 
 For `T = Spec k` a rational point `[D]` of `H`, this says that `𝒪(D_univ)` restricts on the
 fibre `{[D]} × X ≅ X` to `𝒪_X(D)`.
