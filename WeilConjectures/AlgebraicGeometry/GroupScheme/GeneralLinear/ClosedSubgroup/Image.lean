@@ -7,9 +7,10 @@ module
 
 public import Mathlib.RingTheory.Spectrum.Prime.Chevalley
 public import Mathlib.RingTheory.Spectrum.Prime.Jacobson
-public import WeilConjectures.AlgebraicGeometry.GroupScheme.ClosedSubgroup.Geometry
-public import WeilConjectures.AlgebraicGeometry.GroupScheme.ClosedSubgroup.Lie
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie
 public import WeilConjectures.Mathlib.Topology.Constructible
+public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.IdentityComponent
 
 /-!
 # The image of a homomorphism of matrix groups is closed
@@ -25,8 +26,8 @@ that every `k`-point of `T` lies in `r(G°(k))`. Then `S` is the finite union of
 
 ## Main results
 
-- `Matrix.GeneralLinearGroup.RationalHom.mem_range_points_iff`: the image of `G(k)` is the set
-  of `k`-points of its Zariski closure.
+- `AlgebraicGeometry.GeneralLinearGroup.RationalHom.mem_range_points_iff`: the image of `G(k)` is
+  the set of `k`-points of its Zariski closure.
 
 ## Blueprint
 
@@ -37,84 +38,74 @@ that every `k`-point of `T` lies in `r(G°(k))`. Then `S` is the finite union of
 
 universe u
 
-open Topology CategoryTheory AlgebraicGeometry
+open Topology CategoryTheory AlgebraicGeometry Matrix.GeneralLinearGroup
 open scoped MonObj
 
-namespace Matrix.GeneralLinearGroup
+namespace AlgebraicGeometry.GeneralLinearGroup
 
 variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [Field k]
   {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] {m : Type u} [Fintype m] [DecidableEq m]
 
 namespace RationalHom
 
+variable (r : RationalHom (subgroupScheme I) m)
+
+/-- The coordinate map `k[GL_m] → k[GL_n] ⧸ I` of a homomorphism `r : V(I) ⟶ GL_m`. -/
+noncomputable def coordMap : CoordinateRing m k →ₐ[k] CoordinateRing n k ⧸ I :=
+  (Spec.mapMulEquiv.symm
+    (show subgroupScheme I ⟶ (Spec (.of (CoordinateRing m k))).asOver (Spec (.of k)) from r)).ofConv
+
+theorem mapMulEquiv_coordMap :
+    (Spec.mapMulEquiv (WithConv.toConv r.coordMap) : subgroupScheme I ⟶ _) = r :=
+  Spec.mapMulEquiv.apply_symm_apply _
+
+variable [IsMonHom r]
+
+/-- The homomorphism `r` on the `k`-points of `V(I)`, viewed as the matrix group `zeroLocus I k`. -/
+noncomputable def zeroLocusPoints : zeroLocus I k →* GL m k :=
+  (r.points k).comp (zeroLocusMulEquiv I k).toMonoidHom
+
+theorem range_zeroLocusPoints : r.zeroLocusPoints.range = (r.points k).range := by
+  ext x
+  refine ⟨fun ⟨g, hg⟩ ↦ ⟨_, hg⟩, fun ⟨p, hp⟩ ↦ ⟨(zeroLocusMulEquiv I k).symm p, ?_⟩⟩
+  simp [zeroLocusPoints, hp]
+
 /-- The point `r(g)` of `GL_m` is evaluation at `g` composed with the coordinate map of `r`. -/
-theorem evalAlgHom_points (r : RationalHom I m) (g : zeroLocus I k) :
-    evalAlgHom (r.points k g) =
-      (Ideal.Quotient.liftₐ I (evalAlgHom (g : GL n k)) g.2).comp
-        (r : CoordinateRing m k →ₐ[k] CoordinateRing n k ⧸ I) := by
+theorem evalAlgHom_zeroLocusPoints (g : zeroLocus I k) :
+    evalAlgHom (r.zeroLocusPoints g) =
+      (Ideal.Quotient.liftₐ I (evalAlgHom (g : GL n k)) g.2).comp r.coordMap := by
   set χ := Ideal.Quotient.liftₐ I (evalAlgHom (g : GL n k)) g.2
   have hg : zeroLocusMulEquiv I k g = Spec.mapMulEquiv (WithConv.toConv χ) := by
     refine injective_homMulEquiv_comp I k ?_
     dsimp only
-    rw [homMulEquiv_zeroLocusMulEquiv_comp, mapMulEquiv_comp_subgroupSchemeι, homMulEquiv,
-      MulEquiv.trans_apply, MulEquiv.symm_apply_apply, WithConv.ofConv_toConv]
+    rw [homMulEquiv_zeroLocusMulEquiv_comp, mapMulEquiv_comp_subgroupSchemeι,
+      homMulEquiv_mapMulEquiv]
     refine (evalAlgHom_injective (k := k) ?_).symm
     dsimp only
     rw [algHomMulEquiv_apply, WithConv.ofConv_toConv, evalAlgHom_map_genericUnit]
     exact Ideal.Quotient.liftₐ_comp _ _ _
-  have hr : Spec.mapMulEquiv (WithConv.toConv χ) ≫ r.toSchemeHom =
-      Spec.mapMulEquiv (WithConv.toConv (χ.comp
-        (r : CoordinateRing m k →ₐ[k] CoordinateRing n k ⧸ I))) := by
+  have hr : Spec.mapMulEquiv (WithConv.toConv χ) ≫ r =
+      (Spec.mapMulEquiv (WithConv.toConv (χ.comp r.coordMap)) :
+        (Spec (.of k)).asOver (Spec (.of k)) ⟶ (Spec (.of (CoordinateRing m k))).asOver _) := by
+    conv_lhs => rw [← r.mapMulEquiv_coordMap]
     apply Over.OverMorphism.ext
-    change Spec.map _ ≫ Spec.map _ =
-      Spec.map _
+    change Spec.map _ ≫ Spec.map _ = Spec.map _
     rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
     rfl
-  rw [points_apply, hg, hr, homMulEquiv, MulEquiv.trans_apply, MulEquiv.symm_apply_apply,
-    algHomMulEquiv_apply, WithConv.ofConv_toConv, evalAlgHom_map_genericUnit]
+  change evalAlgHom (homMulEquiv m k k (zeroLocusMulEquiv I k g ≫ r)) = _
+  rw [hg, hr, homMulEquiv_mapMulEquiv, algHomMulEquiv_apply, WithConv.ofConv_toConv,
+    evalAlgHom_map_genericUnit]
 
-
-end RationalHom
-
-theorem translateHomeomorph_one_one_apply (p : PrimeSpectrum (CoordinateRing m k)) :
-    translateHomeomorph (1 : GL m k) 1 p = p := by
-  rw [translateHomeomorph_apply, translate_one_one]
-  rfl
-
-theorem exists_toPrimeSpectrum_eq_of_mem_closedPoints [IsAlgClosed k]
-    {q : PrimeSpectrum (CoordinateRing m k)} (hq : q ∈ closedPoints _) :
-    ∃ z : GL m k, toPrimeSpectrum z = q := by
-  have := (PrimeSpectrum.isClosed_singleton_iff_isMaximal q).1 hq
-  obtain ⟨z, hz⟩ := exists_ker_evalAlgHom_eq q.asIdeal
-  exact ⟨z, PrimeSpectrum.ext hz⟩
-
-omit [I.IsHopfIdeal k] in
-/-- Every `k`-point of `V(J)` is evaluation at a matrix. -/
-theorem exists_eq_liftₐ_evalAlgHom {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k]
-    (χ : CoordinateRing n k ⧸ J →ₐ[k] k) :
-    ∃ g, ∃ hg : g ∈ zeroLocus J k, χ = Ideal.Quotient.liftₐ J (evalAlgHom g) hg := by
-  obtain ⟨g, hgdef⟩ : ∃ g, g = algHomMulEquiv n k k
-      (WithConv.toConv (χ.comp (Ideal.Quotient.mkₐ k J))) := ⟨_, rfl⟩
-  have hev : evalAlgHom g = χ.comp (Ideal.Quotient.mkₐ k J) := by
-    rw [hgdef, algHomMulEquiv_apply, WithConv.ofConv_toConv, evalAlgHom_map_genericUnit]
-  have hg : g ∈ zeroLocus J k := fun a ha ↦ by
-    rw [hev, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk, Ideal.Quotient.eq_zero_iff_mem.2 ha,
-      map_zero]
-  exact ⟨g, hg, Ideal.Quotient.algHom_ext k (by rw [Ideal.Quotient.liftₐ_comp, hev])⟩
-
-namespace RationalHom
-
-variable [IsAlgClosed k] (r : RationalHom I m)
+variable [IsAlgClosed k]
 
 /-- The image `r(G°(k))` of the `k`-points of the identity component. -/
 noncomputable def identityComponentImage : Subgroup (GL m k) :=
-  ((zeroLocus (identityComponent I) k).subgroupOf (zeroLocus I k)).map (r.points k)
+  ((zeroLocus (identityComponent I) k).subgroupOf (zeroLocus I k)).map r.zeroLocusPoints
 
 /-- The coordinate map `k[GL_m] → k[G°]` of the restriction of `r` to the identity component. -/
 noncomputable def identityComponentCoordMap :
     CoordinateRing m k →ₐ[k] CoordinateRing n k ⧸ identityComponent I :=
-  (Ideal.Quotient.factorₐ k (le_identityComponent I)).comp
-    (r : CoordinateRing m k →ₐ[k] CoordinateRing n k ⧸ I)
+  (Ideal.Quotient.factorₐ k (le_identityComponent I)).comp r.coordMap
 
 /-- The image of `G°` in `Spec k[GL_m]`. -/
 noncomputable def identityComponentRange : Set (PrimeSpectrum (CoordinateRing m k)) :=
@@ -122,17 +113,17 @@ noncomputable def identityComponentRange : Set (PrimeSpectrum (CoordinateRing m 
     CoordinateRing m k →+* CoordinateRing n k ⧸ identityComponent I))
 
 theorem mem_identityComponentImage (g : GL n k) (hg : g ∈ zeroLocus (identityComponent I) k) :
-    r.points k ⟨g, zeroLocus_anti (le_identityComponent I) hg⟩ ∈ r.identityComponentImage :=
-  Subgroup.mem_map_of_mem (r.points k) (Subgroup.mem_subgroupOf.2 hg)
+    r.zeroLocusPoints ⟨g, zeroLocus_anti (le_identityComponent I) hg⟩ ∈ r.identityComponentImage :=
+  Subgroup.mem_map_of_mem r.zeroLocusPoints (Subgroup.mem_subgroupOf.2 hg)
 
 theorem comap_ker_liftₐ (g : GL n k) (hg : g ∈ zeroLocus (identityComponent I) k) :
     PrimeSpectrum.comap (r.identityComponentCoordMap :
         CoordinateRing m k →+* CoordinateRing n k ⧸ identityComponent I)
         ⟨RingHom.ker (Ideal.Quotient.liftₐ _ (evalAlgHom g) hg), RingHom.ker_isPrime _⟩ =
-      toPrimeSpectrum (r.points k ⟨g, zeroLocus_anti (le_identityComponent I) hg⟩) := by
-  have key : evalAlgHom (r.points k ⟨g, zeroLocus_anti (le_identityComponent I) hg⟩) =
+      toPrimeSpectrum (r.zeroLocusPoints ⟨g, zeroLocus_anti (le_identityComponent I) hg⟩) := by
+  have key : evalAlgHom (r.zeroLocusPoints ⟨g, zeroLocus_anti (le_identityComponent I) hg⟩) =
       (Ideal.Quotient.liftₐ _ (evalAlgHom g) hg).comp r.identityComponentCoordMap := by
-    rw [evalAlgHom_points, identityComponentCoordMap, ← AlgHom.comp_assoc]
+    rw [evalAlgHom_zeroLocusPoints, identityComponentCoordMap, ← AlgHom.comp_assoc]
     congr 1
     exact Ideal.Quotient.algHom_ext k (AlgHom.ext fun a ↦ rfl)
   ext a
@@ -147,8 +138,8 @@ theorem mem_identityComponentImage_of_mem_range {y : GL m k}
   obtain ⟨M, hM, hqM⟩ := q.asIdeal.exists_le_maximal q.2.ne_top
   obtain ⟨χ, hχM⟩ := exists_algHom_ker_eq_of_isMaximal k _ M
   obtain ⟨g, hg, rfl⟩ := exists_eq_liftₐ_evalAlgHom χ
-  have hle : (toPrimeSpectrum y).asIdeal ≤
-      (toPrimeSpectrum (r.points k ⟨g, zeroLocus_anti (le_identityComponent I) hg⟩)).asIdeal := by
+  have hle : (toPrimeSpectrum y).asIdeal ≤ (toPrimeSpectrum
+      (r.zeroLocusPoints ⟨g, zeroLocus_anti (le_identityComponent I) hg⟩)).asIdeal := by
     rw [← hq, ← r.comap_ker_liftₐ g hg]
     exact Ideal.comap_mono (hχM ▸ hqM)
   have hmax : (toPrimeSpectrum y).asIdeal.IsMaximal :=
@@ -187,7 +178,7 @@ theorem closure_identityComponentRange :
   (closure_minimal r.range_subset_closure isClosed_closure).antisymm
     (closure_mono r.image_identityComponentImage_subset_range)
 
-omit [IsAlgClosed k] in
+omit [IsAlgClosed k] [IsMonHom r] in
 theorem isConstructible_identityComponentRange : IsConstructible r.identityComponentRange := by
   have : IsNoetherianRing (CoordinateRing m k) := Algebra.FiniteType.isNoetherianRing k _
   rw [identityComponentRange, ← Set.image_univ]
@@ -197,6 +188,7 @@ theorem isConstructible_identityComponentRange : IsConstructible r.identityCompo
   rw [AlgHom.comp_algebraMap]
   exact RingHom.finiteType_algebraMap.2 inferInstance
 
+omit [IsMonHom r] in
 theorem isIrreducible_closure_identityComponentRange :
     IsIrreducible (closure r.identityComponentRange) := by
   have : (identityComponent I).IsPrime := isPrime_identityComponent I
@@ -287,20 +279,11 @@ theorem mem_identityComponentImage_of_mem_closure {x : GL m k}
   have : z⁻¹ * x ∈ S₀ := r.mem_identityComponentImage_of_mem_range (hUY ⟨hp ▸ hpU, hp ▸ hpT⟩)
   simpa using S₀.mul_mem hz this
 
-/-- **The image of a homomorphism of matrix groups is closed.** Let `G = V(I) ⊆ GL_n` be a
-closed subgroup over an algebraically closed field `k` and `r : G ⟶ GL_m` a homomorphism. The
-image `S = r(G(k))` of the `k`-points is Zariski closed: a matrix on which every equation vanishing
-on `S` vanishes lies in `S`. So `S` is the set of `k`-points of the reduced closed subgroup
-`V(vanishingIdeal S)` of `GL_m`.
-
-The image of `G°` is constructible with irreducible closure `T`, hence contains a nonempty open
-`U ∩ T`; for a `k`-point `x` of `T`, the open subsets `U ∩ T` and `x (U ∩ T)⁻¹` of `T` meet in a
-`k`-point `z`, so that `x = z (z⁻¹ x) ∈ r(G°(k))`. Then `S` is the finite union of the translates
-of `T` by `r` of coset representatives of `G°(k)` in `G(k)`.
-(blueprint: `lem-ag-homomorphism-image-closed`) -/
-theorem mem_range_points_iff {x : GL m k} :
-    x ∈ (r.points k).range ↔
-      ∀ a ∈ vanishingIdeal ((r.points k).range : Set (GL m k)), evalAlgHom x a = 0 := by
+/-- The image of `G(k)` under `r` is the set of `k`-points of its Zariski closure, in terms of
+the matrix group `zeroLocus I k`. -/
+theorem mem_range_zeroLocusPoints_iff {x : GL m k} :
+    x ∈ r.zeroLocusPoints.range ↔
+      ∀ a ∈ vanishingIdeal (r.zeroLocusPoints.range : Set (GL m k)), evalAlgHom x a = 0 := by
   refine ⟨fun hx a ha ↦ mem_vanishingIdeal.1 ha x hx, fun hx ↦ ?_⟩
   set H := (zeroLocus (identityComponent I) k).subgroupOf (zeroLocus I k)
   set S₀ := r.identityComponentImage
@@ -308,12 +291,12 @@ theorem mem_range_points_iff {x : GL m k} :
   have hPT : toPrimeSpectrum '' (S₀ : Set (GL m k)) ⊆ T := subset_closure
   have : H.FiniteIndex := finiteIndex_zeroLocus_identityComponent I
   let F (g : zeroLocus I k) : Set (PrimeSpectrum (CoordinateRing m k)) :=
-    translateHomeomorph (r.points k g) 1 '' T
+    translateHomeomorph (r.zeroLocusPoints g) 1 '' T
   have hTstab (h : zeroLocus I k) (hh : h ∈ H) :
-      translateHomeomorph (r.points k h) 1 '' T = T := by
-    have hs : r.points k h ∈ S₀ := Subgroup.mem_map_of_mem (r.points k) hh
+      translateHomeomorph (r.zeroLocusPoints h) 1 '' T = T := by
+    have hs : r.zeroLocusPoints h ∈ S₀ := Subgroup.mem_map_of_mem r.zeroLocusPoints hh
     refine (r.image_closure_subset_of_toPrimeSpectrum_mem (hPT ⟨_, hs, rfl⟩)).antisymm
-      fun p hp ↦ ⟨translateHomeomorph (r.points k h)⁻¹ 1 p,
+      fun p hp ↦ ⟨translateHomeomorph (r.zeroLocusPoints h)⁻¹ 1 p,
         r.image_closure_subset_of_toPrimeSpectrum_mem (hPT ⟨_, S₀.inv_mem hs, rfl⟩) ⟨p, hp, rfl⟩,
         ?_⟩
     rw [translateHomeomorph_translateHomeomorph, mul_inv_cancel, mul_one,
@@ -333,24 +316,42 @@ theorem mem_range_points_iff {x : GL m k} :
     exact ⟨Quotient.mk _ g, rfl⟩
   have hZ : IsClosed (⋃ s ∈ Set.range F, s) := hFfin.isClosed_biUnion fun _ ⟨g, hg⟩ ↦
     hg ▸ (translateHomeomorph _ 1).isClosedMap _ isClosed_closure
-  have hSZ : toPrimeSpectrum '' ((r.points k).range : Set (GL m k)) ⊆ ⋃ s ∈ Set.range F, s := by
+  have hSZ :
+      toPrimeSpectrum '' (r.zeroLocusPoints.range : Set (GL m k)) ⊆ ⋃ s ∈ Set.range F, s := by
     rintro _ ⟨_, ⟨g, rfl⟩, rfl⟩
     refine Set.mem_biUnion (x := F g) ⟨g, rfl⟩ ⟨toPrimeSpectrum 1, hPT ⟨1, S₀.one_mem, rfl⟩, ?_⟩
     rw [translateHomeomorph_toPrimeSpectrum, mul_one, mul_one]
   have hxcl : toPrimeSpectrum x ∈
-      closure (toPrimeSpectrum '' ((r.points k).range : Set (GL m k))) := by
+      closure (toPrimeSpectrum '' (r.zeroLocusPoints.range : Set (GL m k))) := by
     rw [← PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure]
     intro a ha
     refine hx a (mem_vanishingIdeal.2 fun y hy ↦ ?_)
     exact (PrimeSpectrum.mem_vanishingIdeal _ _).1 ha _ ⟨y, hy, rfl⟩
   obtain ⟨_, ⟨g, rfl⟩, p, hpT, hpx⟩ := Set.mem_iUnion₂.1 (closure_minimal hSZ hZ hxcl)
-  have hp : p = toPrimeSpectrum ((r.points k g)⁻¹ * x) := by
-    rw [← mul_one ((r.points k g)⁻¹ * x), ← translateHomeomorph_toPrimeSpectrum, ← hpx,
+  have hp : p = toPrimeSpectrum ((r.zeroLocusPoints g)⁻¹ * x) := by
+    rw [← mul_one ((r.zeroLocusPoints g)⁻¹ * x), ← translateHomeomorph_toPrimeSpectrum, ← hpx,
       translateHomeomorph_translateHomeomorph, inv_mul_cancel, mul_one,
       translateHomeomorph_one_one_apply]
   obtain ⟨h, -, hh⟩ := r.mem_identityComponentImage_of_mem_closure (hp ▸ hpT)
   exact ⟨g * h, by rw [map_mul, hh, mul_inv_cancel_left]⟩
 
+/-- **The image of a homomorphism of matrix groups is closed.** Let `G = V(I) ⊆ GL_n` be a
+closed subgroup over an algebraically closed field `k` and `r : G ⟶ GL_m` a homomorphism. The
+image `S = r(G(k))` of the `k`-points is Zariski closed: a matrix on which every equation vanishing
+on `S` vanishes lies in `S`. So `S` is the set of `k`-points of the reduced closed subgroup
+`V(vanishingIdeal S)` of `GL_m`.
+
+The image of `G°` is constructible with irreducible closure `T`, hence contains a nonempty open
+`U ∩ T`; for a `k`-point `x` of `T`, the open subsets `U ∩ T` and `x (U ∩ T)⁻¹` of `T` meet in a
+`k`-point `z`, so that `x = z (z⁻¹ x) ∈ r(G°(k))`. Then `S` is the finite union of the translates
+of `T` by `r` of coset representatives of `G°(k)` in `G(k)`.
+(blueprint: `lem-ag-homomorphism-image-closed`) -/
+theorem mem_range_points_iff {x : GL m k} :
+    x ∈ (r.points k).range ↔
+      ∀ a ∈ vanishingIdeal ((r.points k).range : Set (GL m k)), evalAlgHom x a = 0 := by
+  rw [← range_zeroLocusPoints]
+  exact r.mem_range_zeroLocusPoints_iff
+
 end RationalHom
 
-end Matrix.GeneralLinearGroup
+end AlgebraicGeometry.GeneralLinearGroup

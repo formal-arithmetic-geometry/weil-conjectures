@@ -76,6 +76,7 @@ theorem exists_isOpen_isPreirreducible (x : α)
       mem_irreducibleComponent
     rw [← Set.mem_singleton_iff.mp h]
     exact mem_irreducibleComponent
+
 /-- A nonempty noetherian space has a nonempty open subset all of whose points lie in a single
 irreducible component: the complement of all irreducible components but one. -/
 theorem exists_isOpen_nonempty_forall_eq [Nonempty α] :

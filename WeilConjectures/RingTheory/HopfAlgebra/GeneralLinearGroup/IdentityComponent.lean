@@ -5,19 +5,19 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.GroupScheme.ClosedSubgroup
-public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
+public import Mathlib.RingTheory.Spectrum.Prime.Jacobson
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
+public import WeilConjectures.Mathlib.Topology.NoetherianSpace
+public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdeal
 
 /-!
 # The identity component of a closed subgroup of `GL_n`
 
-Let `G = V(I)` be the closed subgroup scheme of `GL_n` over an algebraically closed field `k` cut
+Let `G = V(I)` be the closed subgroup of `GL_n` over an algebraically closed field `k` cut
 out by a Hopf ideal `I`, and let `G° = V(identityComponent I)` be its reduced identity component.
 This file proves the structure of `G°`: it is irreducible, normal in `G` (on `R`-points for every
 `k`-algebra `R`, when `G` is reduced) and of finite index in `G(k)`; `V(I)` has finitely many
-connected components, and they are the cosets `g G°` of the identity component. Finally, a closed
-subgroup of a connected group of the same dimension is the whole group.
+connected components, and they are the cosets `g G°` of the identity component.
 
 The key input is that the translations by `G(k)` act transitively on the closed points of `V(I)`,
 so that the irreducible components of `V(I)` are pairwise disjoint
@@ -34,12 +34,10 @@ its connected components.
   components of `G` are the cosets of `G°`.
 - `Matrix.GeneralLinearGroup.isClopen_connectedComponent_zeroLocus`: the connected components of
   `G` are open and closed.
-- `Matrix.GeneralLinearGroup.eq_of_ringKrullDim_eq`: a closed subgroup of a connected group of
-  the same dimension is the whole group.
 
 ## Blueprint
 
-- `sk-p-geometry`: structure of the identity component and the dimension criterion.
+- `sk-p-geometry`: structure of the identity component.
 - `lem-wf-algebraic-component-cosets`: the identity component, its cosets and the finite
   component group.
 -/
@@ -186,8 +184,7 @@ theorem finite_connectedComponents_zeroLocus :
 /-- The connected components of a closed subgroup `G = V(I)` of `GL_n` are the cosets of the
 identity component: a point `x` of `G` lies in the connected component of `g ∈ G` if and only if
 `g⁻¹ * x ∈ G°`. (blueprint: `sk-p-geometry`) -/
-theorem toPrimeSpectrum_mem_connectedComponentIn_iff {g x : GL n k} (hg : g ∈ zeroLocus I k)
-    (_hx : x ∈ zeroLocus I k) :
+theorem toPrimeSpectrum_mem_connectedComponentIn_iff {g x : GL n k} (hg : g ∈ zeroLocus I k) :
     toPrimeSpectrum x ∈ connectedComponentIn
         (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) (toPrimeSpectrum g) ↔
       g⁻¹ * x ∈ zeroLocus (identityComponent I) k := by
@@ -210,7 +207,7 @@ theorem finiteIndex_zeroLocus_identityComponent :
     ConnectedComponents.mk ⟨toPrimeSpectrum (g : GL n k), toPrimeSpectrum_mem_zeroLocus_iff.2 g.2⟩
   have hf (g h : zeroLocus I k) : f g = f h ↔ g⁻¹ * h ∈ H := by
     rw [eq_comm, ConnectedComponents.coe_eq_coe', Subgroup.mem_subgroupOf, Subgroup.coe_mul,
-      Subgroup.coe_inv, ← toPrimeSpectrum_mem_connectedComponentIn_iff I g.2 h.2,
+      Subgroup.coe_inv, ← toPrimeSpectrum_mem_connectedComponentIn_iff I g.2,
       connectedComponentIn_eq_image (toPrimeSpectrum_mem_zeroLocus_iff.2 g.2)]
     exact (Subtype.val_injective.mem_set_image (a := (⟨_, _⟩ : X))).symm
   have : Finite (zeroLocus I k ⧸ H) := Finite.of_injective
@@ -230,14 +227,5 @@ theorem isClopen_connectedComponent_zeroLocus
     (p : PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) :
     IsClopen (connectedComponent p) :=
   ⟨isClosed_connectedComponent, TopologicalSpace.NoetherianSpace.isOpen_connectedComponent p⟩
-
-omit [IsAlgClosed k] [I.IsHopfIdeal k] in
-/-- A reduced closed subgroup `V(J)` of a connected reduced closed subgroup `V(I)` of `GL_n` of
-the same dimension is all of `V(I)`. (blueprint: `sk-p-geometry`) -/
-theorem eq_of_ringKrullDim_eq {J : Ideal (CoordinateRing n k)} (hIJ : I ≤ J) [I.IsPrime]
-    [J.IsHopfIdeal k] (_hJ : J.IsRadical)
-    (h : ringKrullDim (CoordinateRing n k ⧸ J) = ringKrullDim (CoordinateRing n k ⧸ I)) :
-    J = I :=
-  Ideal.eq_of_le_of_ringKrullDim_quotient_eq hIJ (ringKrullDim_ne_top_of_finiteType k _) h
 
 end Matrix.GeneralLinearGroup

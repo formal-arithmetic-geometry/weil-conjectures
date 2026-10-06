@@ -8,6 +8,7 @@ module
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.FieldTheory.Perfect
 public import Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
+public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 
 /-!
 # The cyclotomic character of a power of Frobenius
@@ -48,7 +49,17 @@ multiplication by `q`.
 (blueprint: `sk-p-cyclotomic`) -/
 theorem cyclotomicCharacter_frobeniusEquiv_pow (hl : l ≠ p) :
     ((cyclotomicCharacter K l ((frobeniusEquiv K p) ^ a) : ℤ_[l]ˣ) : ℤ_[l]) = (p : ℤ_[l]) ^ a := by
-  sorry
+  -- `ℓ` is invertible in `K`, so `K` contains all `ℓ^n`-th roots of unity.
+  have : NeZero ((l : ℕ) : K) := ⟨fun h ↦ hl <|
+    ((Nat.prime_dvd_prime_iff_eq Fact.out Fact.out).mp ((CharP.cast_eq_zero_iff K p l).mp h)).symm⟩
+  -- Modulo each `ℓ^n`, the character is pinned down by its action on `ℓ^n`-th roots of unity,
+  -- which `σ` raises to the power `q`.
+  refine PadicInt.ext_of_toZModPow.mp fun n ↦ ?_
+  rw [cyclotomicCharacter.toZModPow, ← modularCyclotomicCharacter.unique]
+  intro t ht
+  rw [← Nat.cast_pow, map_natCast, ZMod.val_natCast, ← Units.val_pow_eq_pow_val,
+    ← pow_eq_pow_mod _ ((mem_rootsOfUnity _ _).mp ht)]
+  simp [iterate_frobenius]
 
 /-- The geometric Frobenius `F = σ⁻¹`, the inverse of the `q = p ^ a` power Frobenius, acts on the
 cyclotomic Tate module `ℤ_ℓ(1)` as multiplication by `q⁻¹`; in particular `q` is a unit of `ℤ_ℓ`,
