@@ -136,19 +136,43 @@ instance IsInvertible.isQuasicoherent (M : X.Modules) [M.IsInvertible] : M.IsQua
   rw [Opens.coversTop_iff]
   exact IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ Opens.mem_iSup.mpr ⟨x, hU x⟩)
 
+/-- If an invertible module `N` is trivial on an open `U`, then `(M ⊗ N)|_U ≅ M|_U`. -/
+lemma nonempty_over_tensorObj_iso (M N : X.Modules) {U : X.Opens}
+    (e : (pullback U.ι).obj N ≅ SheafOfModules.unit U.toScheme.ringCatSheaf) :
+    Nonempty ((M ⊗ N).over U ≅ M.over U) := by
+  obtain ⟨t⟩ := nonempty_pullback_tensorObj_iso U.ι M N
+  exact ⟨(overEquiv U).functor.preimageIso (overEquivObjOverIso (M ⊗ N) U ≪≫ t ≪≫
+    (Iso.refl _ ⊗ᵢ e) ≪≫ ρ_ _ ≪≫ (overEquivObjOverIso M U).symm)⟩
+
 /-- **Twisting by an invertible module preserves quasi-coherence.** Locally `N ≅ 𝒪_X`, so
 `M ⊗ N` is locally isomorphic to `M`, and quasi-coherence is a local property. -/
 theorem isQuasicoherent_tensorObj (M N : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M] [N.IsInvertible] :
-    (M ⊗ N).IsQuasicoherent :=
-  sorry
+    (M ⊗ N).IsQuasicoherent := by
+  choose U hU e using fun x : X ↦ IsInvertible.exists_isoUnit (M := N) x
+  have (x : X) : ((M ⊗ N).over (U x)).IsQuasicoherent :=
+    (SheafOfModules.isQuasicoherent (X.ringCatSheaf.over (U x))).prop_of_iso
+      (nonempty_over_tensorObj_iso M N (e x).some).some.symm
+      (SheafOfModules.isQuasicoherent_over M (U x))
+  refine SheafOfModules.IsQuasicoherent.of_coversTop (tensorObj M N) U ?_
+  rw [Opens.coversTop_iff]
+  exact IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ Opens.mem_iSup.mpr ⟨x, hU x⟩)
 
 /-- **Twisting by an invertible module preserves finite presentation.** Locally `N ≅ 𝒪_X`, so
 `M ⊗ N` is locally isomorphic to `M`, and finite presentation is a local property. -/
 theorem isFinitePresentation_tensorObj (M N : X.Modules)
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) M] [N.IsInvertible] :
-    (M ⊗ N).IsFinitePresentation :=
-  sorry
+    (M ⊗ N).IsFinitePresentation := by
+  choose U hU e using fun x : X ↦ IsInvertible.exists_isoUnit (M := N) x
+  have (x : X) : SheafOfModules.IsFinitePresentation.{u} (M.over (U x)) :=
+    SheafOfModules.isFinitePresentation_pushforward_of_isLeftAdjoint (Over.forget (U x)) (𝟙 _)
+      (Iso.refl _)
+  have (x : X) : ((M ⊗ N).over (U x)).IsFinitePresentation :=
+    (SheafOfModules.isFinitePresentation (X.ringCatSheaf.over (U x))).prop_of_iso
+      (nonempty_over_tensorObj_iso M N (e x).some).some.symm (this x)
+  refine SheafOfModules.IsFinitePresentation.of_coversTop (tensorObj M N) U ?_
+  rw [Opens.coversTop_iff]
+  exact IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ Opens.mem_iSup.mpr ⟨x, hU x⟩)
 
 end Quasicoherent
 
