@@ -23,7 +23,8 @@ preimages of two affine opens in a pullback over an affine scheme is affine
 
 Finally, the image of a product map `X ×_S Y ⟶ X' ×_{S'} Y'` is the intersection of the
 images of the base changes of the two factors
-(`AlgebraicGeometry.Scheme.Pullback.range_map_eq_inter`).
+(`AlgebraicGeometry.Scheme.Pullback.range_map_eq_inter`), and the diagonal of a base change is
+the preimage of the diagonal (`AlgebraicGeometry.Scheme.Pullback.map_fst_mem_range_diagonal_iff`).
 -/
 
 @[expose] public section
@@ -176,5 +177,65 @@ lemma Scheme.Pullback.range_map_eq_inter {X Y S X' Y' S' : Scheme.{u}} {f : X �
       Set.range (pullback.snd i₁ (pullback.fst f' g')) ∩
         Set.range (pullback.snd i₂ (pullback.snd f' g')) := by
   rw [Scheme.Pullback.range_map, Scheme.Pullback.range_snd, Scheme.Pullback.range_snd]
+
+set_option backward.isDefEq.respectTransparency false in
+/-- A point of `B ×_S B` whose two projections lie in the image of a section `s` of
+`b : B ⟶ S` lies on the diagonal. -/
+lemma Scheme.Pullback.mem_range_diagonal_of_mem_range {B S : Scheme.{u}} {b : B ⟶ S}
+    (s : S ⟶ B) (hs : s ≫ b = 𝟙 S) (u : ↑(pullback b b))
+    (h₁ : pullback.fst b b u ∈ Set.range s) (h₂ : pullback.snd b b u ∈ Set.range s) :
+    u ∈ Set.range (pullback.diagonal b) := by
+  have hu : u ∈ Set.range (pullback.map (𝟙 S) (𝟙 S) b b s s (𝟙 S) (by simp [hs])
+      (by simp [hs])) := by
+    rw [Scheme.Pullback.range_map]
+    exact ⟨h₁, h₂⟩
+  obtain ⟨t, rfl⟩ := hu
+  refine ⟨s (pullback.fst (𝟙 S) (𝟙 S) t), ?_⟩
+  have : pullback.fst (𝟙 S) (𝟙 S) ≫ s ≫ pullback.diagonal b =
+      pullback.map (𝟙 S) (𝟙 S) b b s s (𝟙 S) (by simp [hs]) (by simp [hs]) := by
+    have := pullback.condition (f := 𝟙 S) (g := 𝟙 S)
+    simp only [Category.comp_id] at this
+    ext <;> simp [pullback.map, this]
+  rw [← this]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Let `b : B ⟶ Y` and `p : P ⟶ Y`, and write `B_P = B ×_Y P`. A point `u` of `B_P ×_P B_P`
+lies on the diagonal of `B_P ⟶ P` if and only if its image in `B ×_Y B` lies on the diagonal of
+`b`: the diagonal of `B_P ⟶ P` is the base change of the diagonal of `b`. -/
+lemma Scheme.Pullback.map_fst_mem_range_diagonal_iff {B Y P : Scheme.{u}} (b : B ⟶ Y)
+    (p : P ⟶ Y) (u : ↑(pullback (pullback.snd b p) (pullback.snd b p))) :
+    pullback.map _ _ b b (pullback.fst b p) (pullback.fst b p) p pullback.condition.symm
+        pullback.condition.symm u ∈ Set.range (pullback.diagonal b) ↔
+      u ∈ Set.range (pullback.diagonal (pullback.snd b p)) := by
+  constructor
+  · rintro ⟨β, hβ⟩
+    have e : pullback.map (𝟙 _ ≫ pullback.snd b p) (𝟙 _ ≫ pullback.snd b p) b b
+        (𝟙 _ ≫ pullback.fst b p) (𝟙 _ ≫ pullback.fst b p) p
+        (by simp [pullback.condition]) (by simp [pullback.condition]) =
+        pullback.map _ _ b b (pullback.fst b p) (pullback.fst b p) p pullback.condition.symm
+          pullback.condition.symm := by
+      congr 1
+    rw [← e] at hβ
+    obtain ⟨t, -, rfl⟩ := Scheme.Pullback.exists_preimage_pullback _ _ hβ
+    refine ⟨pullback.fst (𝟙 (pullback b p)) (𝟙 _)
+      ((pullbackDiagonalMapIso b p (𝟙 _) (𝟙 _)).hom t), ?_⟩
+    have : pullback.fst (𝟙 _) (𝟙 _) ≫ pullback.diagonal (pullback.snd b p) =
+        (pullbackDiagonalMapIso b p (𝟙 _) (𝟙 _)).inv ≫ pullback.snd _ _ := by
+      have := pullback.condition (f := 𝟙 (pullback b p)) (g := 𝟙 _)
+      simp only [Category.comp_id] at this
+      apply pullback.hom_ext
+      · rw [Category.assoc, pullback.diagonal_fst, Category.comp_id, Category.assoc]
+        exact (pullbackDiagonalMapIso.inv_snd_fst b p (𝟙 _) (𝟙 _)).symm
+      · rw [Category.assoc, pullback.diagonal_snd, Category.comp_id, Category.assoc, this]
+        exact (pullbackDiagonalMapIso.inv_snd_snd b p (𝟙 _) (𝟙 _)).symm
+    rw [← Scheme.Hom.comp_apply, this, ← Scheme.Hom.comp_apply, Iso.hom_inv_id_assoc]
+  · rintro ⟨β, rfl⟩
+    refine ⟨pullback.fst b p β, ?_⟩
+    have : pullback.fst b p ≫ pullback.diagonal b = pullback.diagonal (pullback.snd b p) ≫
+        pullback.map _ _ b b (pullback.fst b p) (pullback.fst b p) p pullback.condition.symm
+          pullback.condition.symm := by
+      ext <;> simp
+    rw [← Scheme.Hom.comp_apply, this, Scheme.Hom.comp_apply]
 
 end AlgebraicGeometry
