@@ -47,9 +47,13 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
+public import WeilConjectures.CategoryTheory.ModuleObjects.Basic
+public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
+public import WeilConjectures.CategoryTheory.RingObjects.Basic
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Compactification.BoundaryPreparation
 public import WeilConjectures.Compactification.Defs
