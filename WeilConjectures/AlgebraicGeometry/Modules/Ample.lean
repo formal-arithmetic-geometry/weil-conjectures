@@ -49,6 +49,10 @@ leading coefficient whenever that function is a numerical polynomial of degree a
 
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.Hom.exists_polynomial_hilbertFunction`: the Hilbert function of an
+  ample invertible module on a proper scheme is a polynomial of degree at most `dim X`.
+- `AlgebraicGeometry.Scheme.Hom.degree_eq_factorial_mul_coeff`: the degree is `g!` times the
+  coefficient of `m^g` of the Hilbert polynomial.
 - `AlgebraicGeometry.Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one`: in dimension
   one the degree is the cohomological degree `χ(M) - χ(𝒪_X)`.
 - `AlgebraicGeometry.IsVeryAmple.isInvertible`: a very ample module is invertible.
@@ -209,6 +213,59 @@ lemma Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one (f : X ⟶ Spec 
   rw [Scheme.Modules.tensorPow_succ, Scheme.Modules.tensorPow_zero,
     Scheme.Modules.eulerChar_congr K (MonoidalCategory.rightUnitor M)]
   rfl
+
+/-- Blueprint `lem-sc-hilbert-polynomial`: The Hilbert polynomial.
+
+Let `X` be a proper scheme of dimension `g` over a field `K` and `M` an ample invertible
+`𝒪_X`-module. Then `m ↦ χ(X, M^{⊗ m})` is a numerical polynomial of degree at most `g`: there is
+a polynomial `P` over `ℚ` of degree at most `g` with `P(m) = χ(X, M^{⊗ m})` for all `m`, the
+*Hilbert polynomial* of `M` (Stacks, Tag 0BEM). -/
+theorem Scheme.Hom.exists_polynomial_hilbertFunction (f : X ⟶ Spec (.of K)) [IsProper f]
+    (M : X.Modules) [M.IsInvertible] (hM : IsAmple f M) :
+    ∃ P : Polynomial ℚ, P.natDegree ≤ ((topologicalKrullDim X).unbotD 0).toNat ∧
+      ∀ m : ℕ, P.eval (m : ℚ) = f.hilbertFunction M m :=
+  sorry
+
+open scoped fwdDiff in
+/-- Blueprint `def-sc-hilbert-degree`: The Hilbert degree of an ample line bundle.
+
+If the Hilbert function `m ↦ χ(X, M^{⊗ m})` is given by a polynomial `P` of degree at most
+`g = dim X`, then the degree of `X` with respect to `M` is `g!` times the coefficient of `m^g`
+in `P`. -/
+theorem Scheme.Hom.degree_eq_factorial_mul_coeff (f : X ⟶ Spec (.of K)) (M : X.Modules)
+    {P : Polynomial ℚ} (hP : P.natDegree ≤ ((topologicalKrullDim X).unbotD 0).toNat)
+    (hPM : ∀ m : ℕ, P.eval (m : ℚ) = f.hilbertFunction M m) :
+    (f.degree M : ℚ) = ((topologicalKrullDim X).unbotD 0).toNat.factorial *
+      P.coeff ((topologicalKrullDim X).unbotD 0).toNat := by
+  rw [degree]
+  generalize ((topologicalKrullDim X).unbotD 0).toNat = g at hP ⊢
+  have h : ((Δ_[1]^[g] (f.hilbertFunction M) 0 : ℤ) : ℚ) = Δ_[1]^[g] P.eval 0 := by
+    rw [fwdDiff_iter_eq_sum_shift, fwdDiff_iter_eq_sum_shift]
+    push_cast
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    simp [← hPM]
+  rw [h]
+  rcases hP.lt_or_eq with hlt | rfl
+  · rw [Polynomial.fwdDiff_iter_eq_zero_of_degree_lt hlt,
+      Polynomial.coeff_eq_zero_of_natDegree_lt hlt]
+    simp
+  · rw [Polynomial.fwdDiff_iter_degree_eq_factorial]
+    simp [mul_comm]
+
+/-- Blueprint `sk-def-av-ample-degree`: Ample modules and the Hilbert degree.
+
+Let `X` be a proper scheme of dimension `g` over a field `K` and `M` an ample invertible
+`𝒪_X`-module. Then `m ↦ χ(X, M^{⊗ m})` is given by a polynomial `P` of degree at most `g`, and
+the degree of `X` with respect to `M` is `g!` times the leading coefficient of `P`, its
+coefficient of `m^g`. -/
+theorem Scheme.Hom.exists_polynomial_degree_eq_factorial_mul_coeff (f : X ⟶ Spec (.of K))
+    [IsProper f] (M : X.Modules) [M.IsInvertible] (hM : IsAmple f M) :
+    ∃ P : Polynomial ℚ, P.natDegree ≤ ((topologicalKrullDim X).unbotD 0).toNat ∧
+      (∀ m : ℕ, P.eval (m : ℚ) = f.hilbertFunction M m) ∧
+      (f.degree M : ℚ) = ((topologicalKrullDim X).unbotD 0).toNat.factorial *
+        P.coeff ((topologicalKrullDim X).unbotD 0).toNat := by
+  obtain ⟨P, hP, hPM⟩ := f.exists_polynomial_hilbertFunction M hM
+  exact ⟨P, hP, hPM, f.degree_eq_factorial_mul_coeff M hP hPM⟩
 
 namespace Scheme.Modules
 
