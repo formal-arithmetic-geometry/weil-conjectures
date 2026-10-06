@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 
 /-!
-# Flatness descends along flat surjections of the source; morphisms to a field are flat
+# Flatness descends along flat surjections of the source
 
 If `u : X' ⟶ X` is flat and surjective and `u ≫ f` is flat, then `f` is flat: at a point `x`
 with preimage `x'`, the local ring map `𝒪_{X,x} ⟶ 𝒪_{X',x'}` is flat and local, hence faithfully
@@ -18,8 +18,12 @@ flat, and flatness of `𝒪_{X',x'}` over `𝒪_{S,f(x)}` descends to `𝒪_{X,x
 ## Main results
 
 - `AlgebraicGeometry.Flat.of_comp_of_flat_of_surjective` (blueprint `lem-pc-flat-source-descent`).
-- `AlgebraicGeometry.Flat.of_field`: every morphism to the spectrum of a field is flat
-  (blueprint `lem-pc-flat-field`).
+
+## Implementation notes
+
+Every morphism `X ⟶ Spec k` to the spectrum of a field is flat (blueprint `lem-pc-flat-field`).
+This is Mathlib's low-priority instance `Flat f` for `f : X ⟶ Y` with `[Subsingleton Y]`
+`[IsIntegral Y]`, found by `inferInstance`, so it is not restated here.
 -/
 
 @[expose] public section
@@ -48,13 +52,5 @@ theorem Flat.of_comp_of_flat_of_surjective {X' X S : Scheme.{u}} (u : X' ⟶ X) 
   have : Module.Flat (S.presheaf.stalk (f (u x'))) (X'.presheaf.stalk x') := h
   exact Module.Flat.of_flat_of_faithfullyFlat (B := X.presheaf.stalk (u x'))
     (C := X'.presheaf.stalk x')
-
-/-- **Every morphism to the spectrum of a field is flat.** Affine-locally `X ⟶ Spec k` is given
-by a ring map `k ⟶ A`, and `A` is a free, hence flat, `k`-module. This is the instance for
-morphisms to an integral scheme with a single point.
-
-(blueprint: `lem-pc-flat-field`) -/
-theorem Flat.of_field {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) : Flat f :=
-  inferInstance
 
 end AlgebraicGeometry

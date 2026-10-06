@@ -245,7 +245,9 @@ noncomputable def Hom.baseChangeFieldPoint (f : X.Hom (Spec (.of k))) (K : Type 
     rw [pullback.lift_snd, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]⟩
 
 /-- A `k`-rational point `x : Spec k ⟶ X` of a `k`-scheme is a closed immersion, being a section
-of the structure morphism. -/
+of the structure morphism. This specialises Mathlib's low-priority instance `IsClosedImmersion f`
+for `f : Y ⟶ X` with `[Subsingleton Y] [X.Over Y] [f.IsOver Y]`, which does not apply here because
+`fieldPoints` carry no `IsOver` instances. -/
 instance Hom.isClosedImmersion_fieldPoints (f : X.Hom (Spec (.of k))) (p : f.fieldPoints k) :
     IsClosedImmersion p.1 :=
   isClosedImmersion_of_comp_eq_id f p.1 (by
