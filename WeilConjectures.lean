@@ -939,6 +939,7 @@ public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.OpenImmersion
+public import WeilConjectures.WeilSheaf.Realizable
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.ZetaFunction
