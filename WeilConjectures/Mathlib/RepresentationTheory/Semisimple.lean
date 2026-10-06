@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RepresentationTheory.Irreducible
 public import Mathlib.RepresentationTheory.Semisimple
+public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
 
 /-!
 # Clifford's theorem
@@ -48,30 +49,6 @@ end Representation
 namespace Representation
 
 variable {k V : Type*} [Field k] [AddCommGroup V] [Module k V]
-
-/-- A subrepresentation `S` that is irreducible as a representation is an atom of the lattice of
-subrepresentations. -/
-theorem _root_.Subrepresentation.isAtom_of_isIrreducible {G : Type*} [Monoid G]
-    {ρ : Representation k G V} {S : Subrepresentation ρ} (hS : IsIrreducible S.toRepresentation) :
-    IsAtom S := by
-  let restrict (T : Subrepresentation ρ) : Subrepresentation S.toRepresentation :=
-    ⟨T.toSubmodule.comap S.toSubmodule.subtype, fun g x hx ↦ T.apply_mem_toSubmodule g hx⟩
-  have := hS
-  refine ⟨fun h ↦ ?_, fun T hT ↦ ?_⟩
-  · refine (bot_ne_top : (⊥ : Subrepresentation S.toRepresentation) ≠ ⊤) ?_
-    ext x
-    have : (x : V) = 0 := by
-      have hx : (x : V) ∈ (⊥ : Subrepresentation ρ) := h ▸ x.2
-      exact (Submodule.mem_bot k).1 hx
-    exact ⟨fun _ ↦ Submodule.mem_top, fun _ ↦ (Submodule.mem_bot k).2 (Subtype.ext this)⟩
-  · rcases IsSimpleOrder.eq_bot_or_eq_top (restrict T) with h | h
-    · refine le_antisymm (fun x hx ↦ ?_) bot_le
-      have : (⟨x, hT.le hx⟩ : S.toSubmodule) ∈ restrict T := hx
-      rw [h] at this
-      exact (Submodule.mem_bot k).2 (congrArg Subtype.val ((Submodule.mem_bot k).1 this))
-    · refine absurd (fun x hx ↦ ?_) hT.not_ge
-      have : (⟨x, hx⟩ : S.toSubmodule) ∈ restrict T := h ▸ Submodule.mem_top
-      exact this
 
 /-- A representation that is the internal direct sum of irreducible subrepresentations is
 semisimple. -/

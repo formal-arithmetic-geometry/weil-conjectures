@@ -35,6 +35,36 @@ quotient is the honest subquotient `S / U`.
 
 namespace Subrepresentation
 
+section Monoid
+
+variable {k V : Type*} [Field k] [AddCommGroup V] [Module k V]
+
+/-- A subrepresentation `S` that is irreducible as a representation is an atom of the lattice of
+subrepresentations. -/
+theorem isAtom_of_isIrreducible {G : Type*} [Monoid G] {ρ : Representation k G V}
+    {S : Subrepresentation ρ} (hS : S.toRepresentation.IsIrreducible) :
+    IsAtom S := by
+  let restrict (T : Subrepresentation ρ) : Subrepresentation S.toRepresentation :=
+    ⟨T.toSubmodule.comap S.toSubmodule.subtype, fun g x hx ↦ T.apply_mem_toSubmodule g hx⟩
+  have := hS
+  refine ⟨fun h ↦ ?_, fun T hT ↦ ?_⟩
+  · refine (bot_ne_top : (⊥ : Subrepresentation S.toRepresentation) ≠ ⊤) ?_
+    ext x
+    have : (x : V) = 0 := by
+      have hx : (x : V) ∈ (⊥ : Subrepresentation ρ) := h ▸ x.2
+      exact (Submodule.mem_bot k).1 hx
+    exact ⟨fun _ ↦ Submodule.mem_top, fun _ ↦ (Submodule.mem_bot k).2 (Subtype.ext this)⟩
+  · rcases IsSimpleOrder.eq_bot_or_eq_top (restrict T) with h | h
+    · refine le_antisymm (fun x hx ↦ ?_) bot_le
+      have : (⟨x, hT.le hx⟩ : S.toSubmodule) ∈ restrict T := hx
+      rw [h] at this
+      exact (Submodule.mem_bot k).2 (congrArg Subtype.val ((Submodule.mem_bot k).1 this))
+    · refine absurd (fun x hx ↦ ?_) hT.not_ge
+      have : (⟨x, hx⟩ : S.toSubmodule) ∈ restrict T := h ▸ Submodule.mem_top
+      exact this
+
+end Monoid
+
 variable {k : Type*} [Field k] {W : Type*} [Group W]
 variable {V : Type*} [AddCommGroup V] [Module k V] {ρ : Representation k W V}
 
@@ -86,10 +116,12 @@ def orderIsoMapComap (e : ρ.Equiv σ) : Subrepresentation ρ ≃o Subrepresenta
     rw [← toSubmodule_le_toSubmodule, ← toSubmodule_le_toSubmodule]
     exact Submodule.map_le_map_iff_of_injective e.toLinearEquiv.injective _ _
 
+/-- `y` lies in `e(S)` if and only if `e⁻¹ y` lies in `S`. -/
 theorem mem_orderIsoMapComap_iff (e : ρ.Equiv σ) (S : Subrepresentation ρ) {y : V'} :
     y ∈ orderIsoMapComap e S ↔ e.symm y ∈ S :=
   Submodule.mem_map_equiv (p := S.toSubmodule) (e := e.toLinearEquiv)
 
+/-- If `x` lies in `S`, then `e x` lies in `e(S)`. -/
 theorem apply_mem_orderIsoMapComap (e : ρ.Equiv σ) (S : Subrepresentation ρ) {x : V}
     (hx : x ∈ S) : e x ∈ orderIsoMapComap e S :=
   ⟨x, hx, rfl⟩
@@ -127,6 +159,7 @@ noncomputable def subquotientBotEquiv (S : Subrepresentation ρ) :
       fun h ↦ by rw [(Submodule.mem_bot k).1 h]; exact zero_mem _⟩) fun w ↦
     Submodule.linearMap_qext _ (LinearMap.ext fun _ ↦ rfl)
 
+/-- The subquotient `S ⧸ ⊥` has the same determinant character as `S`. -/
 theorem detCharacter_subquotient_bot (S : Subrepresentation ρ) :
     (S.subquotient ⊥).detCharacter = S.toRepresentation.detCharacter :=
   (subquotientBotEquiv S).detCharacter_eq.symm
