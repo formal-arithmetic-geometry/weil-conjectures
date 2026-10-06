@@ -482,18 +482,20 @@ let `M` be a finite abelian group. Then there is a bijection
 `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)`, given on torsors by `P ↦ f_P`, where
 `g • p = f_P(g) +ᵥ p` for `p` in the geometric fibre `P_s`: the class of a torsor `P` under
 the bijection `c` of `AlgebraicGeometry.Scheme.EtaleTorsor.exists_quotientEquivSheafH` is sent
-to `f_P`. -/
+to `f_P`. The map `c` is pinned down only as far as `exists_quotientEquivSheafH` does: it is a
+bijection under which exactly the classes of torsors admitting a section vanish. -/
 theorem exists_equiv_sheafH_continuousMonoidHom :
     ∃ (c : Quotient (EtaleTorsor.setoid M Y) ≃ Sheaf.H
         ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
           (AddCommGrpCat.of M)) 1)
       (e : Sheaf.H ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
           (AddCommGrpCat.of M)) 1 ≃ (G →ₜ* Multiplicative M)),
+      (∀ t : EtaleTorsor M Y, c ⟦t⟧ = 0 ↔ ∃ σ : Y ⟶ t.P, σ ≫ t.π = 𝟙 Y) ∧
       ∀ (t : EtaleTorsor M Y) (g : G) (p : (fiber s).obj t.toFiniteEtale),
         (fiber s).map (t.vaddHom (e (c ⟦t⟧) g).toAdd) p = g • p := by
-  obtain ⟨c, -⟩ := exists_quotientEquivSheafH M Y
+  obtain ⟨c, hc⟩ := exists_quotientEquivSheafH M Y
   let f := Equiv.ofBijective _ (bijective_monodromy (M := M) s G)
-  refine ⟨c, c.symm.trans f, fun t g p ↦ ?_⟩
+  refine ⟨c, c.symm.trans f, hc, fun t g p ↦ ?_⟩
   simp only [Equiv.trans_apply, Equiv.symm_apply_apply]
   exact t.fiber_map_vaddHom_monodromy s G g p
 
