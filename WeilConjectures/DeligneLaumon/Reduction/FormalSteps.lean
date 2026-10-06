@@ -29,8 +29,6 @@ of weights at most `w`, by the hypercohomology spectral sequence.
 ## Main statements
 
 - `AlgebraicGeometry.HasDirectImageWeightBound.comp`: blueprint `sk-l-dl-general-composition`.
-- `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso`: blueprint
-  `lem-zl-shriek-composition`.
 - `AlgebraicGeometry.WeilSheaf.exists_filtration_higherLowerShriek_comp`: the abutment filtration
   of the compact-support Leray spectral sequence, used in `lem-zl-composition-weight-bound`.
 - `AlgebraicGeometry.HasDirectImageWeightBound.of_openClosed`: blueprint
