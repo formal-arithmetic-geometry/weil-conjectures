@@ -49,6 +49,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.Basic
+public import WeilConjectures.CategoryTheory.ModuleObjects.Bimod
+public import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
