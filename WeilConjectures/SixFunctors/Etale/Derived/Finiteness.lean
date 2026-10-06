@@ -32,9 +32,7 @@ The four finiteness inputs the purity chapter takes from the six-functor formali
 Throughout, `Λ` is a finite coefficient ring whose exponent is invertible on the schemes in
 question (`AlgebraicGeometry.HasInvertibleExponent`) and the schemes are of finite type over a
 field: without the invertibility the Artin–Schreier sequence already defeats constructibility
-of `R¹f_*` in characteristic `p`. The exception is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`, which holds for any
-finite `Λ` and `f` of finite presentation over a quasi-compact quasi-separated base.
+of `R¹f_*` in characteristic `p`.
 
 ## Implementation notes
 
@@ -95,15 +93,11 @@ theorem boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent (f :
 
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
 
-**Finiteness of compactly supported direct images.** For `f : X ⟶ Y` compactifiable of finite
-presentation over a quasi-compact quasi-separated base `Y`, `Rf_!` carries `D^b_c(X, Λ)` into
-`D^b_c(Y, Λ)` (SGA 4 XVII 5.3.6).
-
-This is more general than the blueprint statement, which takes `f` between finite-type
-`k`-schemes and the exponent of `Λ` invertible: for `Rf_!`, unlike for `Rf_*`, neither is
-needed. -/
+**Finiteness of compactly supported direct images.** For `f : X ⟶ Y` separated of finite type
+between finite-type `k`-schemes, `Rf_!` carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)`. -/
 theorem boundedConstructible_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactification f]
-    [LocallyOfFinitePresentation f] [QuasiCompact f] [CompactSpace Y] [QuasiSeparatedSpace Y]
+    [HasInvertibleExponent Λ X] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] (hf : f ≫ aY = aX)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y

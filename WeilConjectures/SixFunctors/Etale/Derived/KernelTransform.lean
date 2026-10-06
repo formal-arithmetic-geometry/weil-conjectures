@@ -5,6 +5,8 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Assoc
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
@@ -54,18 +56,22 @@ coherent isomorphisms, which `Classical.choice` cannot provide.
 compact-support base change along the cartesian square with sides `r₁₂`, `r₂₃`, `p₂` and
 `q₁`, then the projection formula for `r₂₃` and `r₁₃` and the composition law of `Rf_!`. The
 maps `p₂`, `q₂` and `r₁₃` are base changes of `π`, `π'` and `π'` respectively (`r₁₃` along
-`V ×_S V'' ⟶ S`), so the quasi-compactness hypotheses are put on `π` and `π'`: instance
-search does not derive them for `CategoryTheory.Limits.pullback.tripleProj₁₃`. The statement
-is over the whole unbounded derived categories, so it uses the unbounded projection formula
-for finite coefficients, `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`, which
-needs no condition on the exponent of `Λ`.
+`V ×_S V'' ⟶ S`), so the finiteness hypotheses are put on `π` and `π'`: instance search does
+not derive them for `CategoryTheory.Limits.pullback.tripleProj₁₃`. The statement is over the
+whole unbounded derived categories, while the project's projection formula
+`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek` only covers a
+bounded constructible complex and a complex of finite Tor amplitude. The unbounded form holds
+for finite `Λ`: the projection map is an isomorphism for `j_!` of an open immersion formally,
+and for a proper morphism because its direct image then has finite cohomological dimension.
+That argument does not use the exponent of `Λ`, and the classical projection formula for
+`Rf_!` holds for all torsion coefficients (SGA 4 XVII 5.2.9); `[HasInvertibleExponent Λ S]` is
+inherited from the project's projection formula.
 
-`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal` is formal: the projection
-formula for the closed immersion `Δ`, `RΔ_! ≅ RΔ_*`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar`), the
-composition law `R(Δ ≫ p₂)_! ≅ RΔ_! ⋙ Rp₂,!`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`) and `Δ ≫ p₂ = 𝟙`. Both
-results hold at every coefficient category, so the theorem is stated at `A`.
+`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal` is the projection formula for
+the closed immersion `Δ`, followed by `Δ_* = Δ_!` and `Δ ≫ p₂ = 𝟙`. Since `R(f)_!` is computed
+with a chosen compactification, the last two steps use independence of the compactification
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), which needs `π` quasi-compact and
+torsion coefficients.
 
 TODO: prove `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_shift`. It is formal once the
 shift isomorphism of the derived tensor product in its second variable is natural in the first,
@@ -89,15 +95,12 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
--- The coefficients are declared before the schemes so that they come first in the
--- arguments; each declaration only picks up the coefficients it mentions.
+section General
+
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
-variable (Λ : Type (u + 1)) [CommRing Λ]
 variable {S V V' V'' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S) (π'' : V'' ⟶ S)
-
-section General
 
 /-- The *kernel transform* `Φ_𝒦(K) = Rp₂,!(p₁^* K ⊗ᴸ 𝒦)[a]` attached to a kernel
 `𝒦 ∈ D((V ×_S V')_ét)` and a shift `a : ℤ`:
@@ -164,41 +167,10 @@ noncomputable def kernelConvolution
         ((D((pullback.snd (pullback.snd π π') (pullback.fst π' π''))^*[A])).obj 𝒦')).obj
       ((D((pullback.fst (pullback.snd π π') (pullback.fst π' π''))^*[A])).obj 𝒦))
 
-/-- The kernel transform of a kernel `Δ_* N` supported on the diagonal of `V ×_S V`, with
-shift `0`, is tensoring with `N`:
-
-`Rp₂,!(p₁^* K ⊗ᴸ Δ_* N) ≅ K ⊗ᴸ N`,
-
-naturally in `K`, where `Δ` is the diagonal of the separated morphism `π`:
-
-```
-          V
-          │ ╲
-         Δ│   ╲ 𝟙
-          ▼     ╲
-       V ×ₛ V ──p₂──▶ V
-          │
-        p₁│
-          ▼
-          V
-```
-
-with both triangles commuting (`Δ ≫ p₁ = 𝟙 = Δ ≫ p₂`). For `N = Λ` this says that `Δ_* Λ` is
-the identity kernel.
-
-Class: general; decided by the projection formula for the closed immersion `Δ`, `RΔ_! ≅ RΔ_*`
-and the composition law of `Rf_!`. `[IsSeparated π]` makes `Δ` a closed immersion.
-(sketch blueprint: `sk-thm-inversion`, proof) -/
-theorem nonempty_iso_kernelTransform_diagonal [IsSeparated π]
-    [HasCompactification (pullback.snd π π)]
-    (N : DerivedCategory (Sheaf V.smallEtaleTopology A)) :
-    Nonempty (kernelTransform A π π ((R((pullback.diagonal π)_*[A])).obj N) 0 ≅
-        derivedTensorRight A V N) :=
-  sorry
-
 end General
 
-section ModuleCat
+variable (Λ : Type (u + 1)) [CommRing Λ]
+variable {S V V' V'' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S) (π'' : V'' ⟶ S)
 
 /-- The composite of the kernel transform of `𝒦` with shift `a` and the kernel transform of
 `𝒦'` with shift `c` is the kernel transform of the convolution `𝒦' ∗ 𝒦` with shift `a + c`.
@@ -215,13 +187,11 @@ The composite is read on the triple product, in the cartesian square
 with `r₁₃ : V ×ₛ V' ×ₛ V'' ⟶ V ×ₛ V''` the remaining projection and
 `q₂ : V' ×ₛ V'' ⟶ V''` the second projection.
 
-Class: torsion; decided by compact-support base change
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`) and the unbounded
-projection formula (`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`), which need
-`[Finite Λ]`. Quasi-compactness is assumed on `π` and `π'` because `p₂`, `q₂` and `r₁₃` are
-base changes of them and instance search does not derive it for `pullback.tripleProj₁₃`.
+Class: torsion; decided by compact-support base change and the projection formula for `Rf_!`,
+which need `[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-lem-kernel-composition`) -/
-theorem nonempty_iso_kernelTransform_comp [Finite Λ] [QuasiCompact π] [QuasiCompact π']
+theorem nonempty_iso_kernelTransform_comp [Finite Λ] [HasInvertibleExponent Λ S]
+    [LocallyOfFiniteType π] [QuasiCompact π] [LocallyOfFiniteType π'] [QuasiCompact π']
     [HasCompactification (pullback.tripleProj₁₃ π π' π'')]
     [HasCompactification (pullback.snd π π')] [HasCompactification (pullback.snd π' π'')]
     [HasCompactification (pullback.snd π π'')]
@@ -234,6 +204,39 @@ theorem nonempty_iso_kernelTransform_comp [Finite Λ] [QuasiCompact π] [QuasiCo
           (kernelConvolution (ModuleCat.{u + 1} Λ) π π' π'' 𝒦 𝒦') (a + c)) :=
   sorry
 
-end ModuleCat
+/-- The kernel transform of a kernel `Δ_* N` supported on the diagonal of `V ×_S V`, with
+shift `0`, is tensoring with `N`:
+
+`Rp₂,!(p₁^* K ⊗ᴸ Δ_* N) ≅ K ⊗ᴸ N`,
+
+naturally in `K`, where `Δ` is the diagonal of the separated morphism `π`:
+
+```
+             Δ
+        V ──────▶ V ×ₛ V ──p₂──▶ V
+         ╲          │
+          ╲ 𝟙       │p₁
+           ╲        ▼
+            ──────▶ V
+```
+
+with `Δ ≫ p₁ = 𝟙 = Δ ≫ p₂`. For `N = Λ` this says that `Δ_* Λ` is the identity kernel.
+
+Class: compactification-dependent; decided by independence of the compactification. The
+blueprint proof is formal: the projection formula for the closed immersion `Δ`, `Δ_* = Δ_!`
+and `Δ ≫ p₂ = 𝟙`. Here `[Finite Λ]` enters solely through independence of the
+compactification (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), since `R(f)_!` is
+computed with a chosen compactification. The same comparison is why `[QuasiCompact π]` is
+assumed: `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` compares compactifications of a
+quasi-compact morphism, here of `p₂` and of `Δ ≫ p₂ = 𝟙`; `p₂` is quasi-compact as a base
+change of `π`. `[IsSeparated π]` makes `Δ` a closed immersion.
+(sketch blueprint: `sk-thm-inversion`, proof) -/
+theorem nonempty_iso_kernelTransform_diagonal [Finite Λ] [IsSeparated π] [QuasiCompact π]
+    [HasCompactification (pullback.snd π π)]
+    (N : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty (kernelTransform (ModuleCat.{u + 1} Λ) π π
+          ((R((pullback.diagonal π)_*[ModuleCat.{u + 1} Λ])).obj N) 0 ≅
+        derivedTensorRight (ModuleCat.{u + 1} Λ) V N) :=
+  sorry
 
 end AlgebraicGeometry.Etale

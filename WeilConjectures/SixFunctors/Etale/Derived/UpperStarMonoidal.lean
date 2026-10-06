@@ -59,11 +59,6 @@ resolutions when `g^*` preserves flat sheaves, so they form a left derivability 
   `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_right`: `K ⊗ᴸ M` vanishes
   when `K` or `M` does.
 
-`AlgebraicGeometry.Etale.derivedTensorRightPullback` only combines `D(g^*)` with
-`AlgebraicGeometry.Etale.derivedTensorRightFunctor`; it is defined here rather than next to the
-latter because `WeilConjectures.SixFunctors.Etale.Derived.Tensor` does not import the derived
-pullback `D(g^*)`.
-
 The results depend on `sorryAx` through `AlgebraicGeometry.Etale.derivedTensor` and
 `AlgebraicGeometry.Etale.isLeftDerivedFunctor₂_derivedTensor`.
 
@@ -353,8 +348,6 @@ lemma leftDerivedUpperStarTensorIso_hom
 
 end
 
-section TensorPullback
-
 /-- Tensoring with a complex pulled back along `g : Z ⟶ Y`, as a functor of the complex
 downstairs: `N ↦ (K ↦ K ⊗ᴸ g^* N)`. -/
 noncomputable def derivedTensorRightPullback :
@@ -362,8 +355,6 @@ noncomputable def derivedTensorRightPullback :
       DerivedCategory (Sheaf Z.smallEtaleTopology A) ⥤
         DerivedCategory (Sheaf Z.smallEtaleTopology A) :=
   D((g)^*[A]) ⋙ derivedTensorRightFunctor A Z
-
-end TensorPullback
 
 end Etale
 

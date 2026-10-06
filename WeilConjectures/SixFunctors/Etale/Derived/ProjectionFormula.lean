@@ -42,8 +42,6 @@ of `AlgebraicGeometry.Etale.projectionMapOfCompactification` is an isomorphism, 
 - `AlgebraicGeometry.Etale.hasProjectionFormula_field` (`sk-thm-sf-pf-field`) : the
   projection formula over a field of coefficients, for bounded constructible objects of
   finite Tor amplitude.
-- `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`: the projection formula on the whole
-  unbounded derived categories, for finite coefficients.
 - `AlgebraicGeometry.Etale.hasProjectionFormula_id`,
   `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`,
   `AlgebraicGeometry.Etale.hasProjectionFormula_comp`,
@@ -196,32 +194,6 @@ theorem hasProjectionFormula_field (f : X ⟶ Y) [HasCompactification f]
   sorry
 
 end Field
-
-section Finite
-
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-
-variable {X Y : Scheme.{u}}
-
-/-- **The projection formula at finite coefficients, unbounded.** For a finite coefficient
-ring `Λ` and `f` admitting a compactification, the projection formula holds for `f` at every
-`K : D(X_ét, Λ)` and `L : D(Y_ét, Λ)`, with no boundedness, constructibility or Tor amplitude
-condition and no condition on the exponent of `Λ` (SGA 4 XVII 5.2.9).
-
-For a compactification `f = i ≫ g`, the projection map for the open immersion `i` is an
-isomorphism formally, and the one for the proper map `g` is an isomorphism because `Rg_*` has
-finite cohomological dimension at torsion coefficients, so it commutes with the colimits
-reducing to bounded complexes. Unlike
-`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`, this is not a
-blueprint statement; it is what the kernel transforms of
-`WeilConjectures.SixFunctors.Etale.Derived.KernelTransform` need. -/
-theorem hasProjectionFormula_of_finite (f : X ⟶ Y) [HasCompactification f]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
-  sorry
-
-end Finite
 
 section Coherence
 
