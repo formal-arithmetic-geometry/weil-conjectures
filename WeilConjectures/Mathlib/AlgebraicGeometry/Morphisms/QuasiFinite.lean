@@ -63,7 +63,8 @@ lemma Scheme.Hom.finite_preimage_singleton_of_isFinite_morphismRestrict (f : X �
 /-- **Quasi-finiteness descends along surjective base changes.** Let `f : X ⟶ Z` be quasi-compact
 and locally of finite type, and let `snd : P ⟶ Y` be its base change along a surjective
 `g : Y ⟶ Z`. If `snd` is locally quasi-finite, so is `f`: every fibre of `f` is the image of a
-fibre of `snd`, which is finite. -/
+fibre of `snd`, which is finite. The hypothesis `QuasiCompact f` is only a convenience, used to
+get finite fibres of `snd`; the statement also holds without it. -/
 lemma LocallyQuasiFinite.of_isPullback_of_surjective {P Z : Scheme.{u}} {fst : P ⟶ X}
     {snd : P ⟶ Y} {f : X ⟶ Z} {g : Y ⟶ Z} (h : IsPullback fst snd f g) [Surjective g]
     [LocallyQuasiFinite snd] [QuasiCompact f] [LocallyOfFiniteType f] : LocallyQuasiFinite f := by
