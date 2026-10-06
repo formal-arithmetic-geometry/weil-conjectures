@@ -14,7 +14,6 @@ public import Mathlib.RingTheory.Unramified.LocalStructure
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.LocalIso
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.RingTheory.Etale.QuasiFinite
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 public import WeilConjectures.Mathlib.Topology.Sets.Opens
@@ -55,8 +54,6 @@ is taken as the explicit hypothesis that every stalk of `S` is integrally closed
   disjoint union of opens of the base.
 - `AlgebraicGeometry.Etale.exists_finite_opens_isOpenImmersion_of_isSepClosed_functionField`: the
   same statement with finitely many pieces when the source is quasi-compact.
-- `AlgebraicGeometry.Smooth.of_comp_of_etale`: if `f ≫ g` is smooth and `g` is étale, then `f`
-  is smooth.
 -/
 
 @[expose] public section
@@ -309,17 +306,5 @@ theorem Etale.exists_finite_opens_isOpenImmersion_of_isSepClosed_functionField
     (Etale.exists_opens_isOpenImmersion_and_henselianLocalRing_stalk hS).1 V p
   exact ⟨ι, TopologicalSpace.Opens.finite_of_compactSpace_of_pairwiseDisjoint U hne hdisj hcov,
     U, hdisj, hcov, hU⟩
-
-/-- Smoothness can be cancelled along étale morphisms: the diagonal of an étale morphism is an
-open immersion, hence smooth. -/
-instance : MorphismProperty.HasOfPostcompProperty @Smooth @Etale := by
-  rw [MorphismProperty.hasOfPostcompProperty_iff_le_diagonal]
-  intro X Y f hf
-  exact inferInstanceAs <| Smooth (pullback.diagonal f)
-
-/-- If `f ≫ g` is smooth and `g` is étale, then `f` is smooth. -/
-lemma Smooth.of_comp_of_etale {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [Etale g]
-    [Smooth (f ≫ g)] : Smooth f :=
-  MorphismProperty.of_postcomp _ (W' := @Etale) f g ‹_› ‹_›
 
 end AlgebraicGeometry

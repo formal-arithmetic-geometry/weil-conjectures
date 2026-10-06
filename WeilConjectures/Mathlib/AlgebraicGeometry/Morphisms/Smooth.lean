@@ -50,9 +50,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-instance : MorphismProperty.IsMultiplicative @Smooth where
-  id_mem _ := inferInstance
-
 open Limits in
 instance smoothOfRelativeDimension_pullback_fst {X Y Z : Scheme.{u}} (n : ℕ) (f : X ⟶ Z)
     (g : Y ⟶ Z) [SmoothOfRelativeDimension n g] :
@@ -70,7 +67,14 @@ instance smoothOfRelativeDimension_pullback_snd {X Y Z : Scheme.{u}} (n : ℕ) (
 open MvPolynomial in
 /-- Let `g : X ⟶ Y`, and let `U ⊆ Y`, `V ⊆ X` be affine opens with `V ≤ g ⁻¹ᵁ U` such that
 `Γ(Y, U) ⟶ Γ(X, V)` is standard smooth of relative dimension `d`. Then `g.resLE U V hVU`
-factors as an étale morphism `V ⟶ 𝔸(d; U)` followed by the projection `𝔸(d; U) ↘ U`.
+factors as an étale morphism `e : V ⟶ 𝔸(d; U)` followed by the projection `𝔸(d; U) ↘ U`:
+
+```
+V --e--> 𝔸(d; U)
+ \          |
+  \         ↓
+g.resLE     U
+```
 
 On rings, this is `Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial`:
 reading the last `d` variables of a submersive presentation as coordinates of the base turns
@@ -138,7 +142,14 @@ theorem Smooth.exists_etale_to_affineSpace {X Y : Scheme.{u}} (g : X ⟶ Y) (d :
 `sbc-thm-etale-local-normal-form`). Let `g : X ⟶ Y` be locally of finite presentation and
 smooth at `x : X`. Then there are `d : ℕ` and affine open neighbourhoods `V ∋ x` and
 `U ∋ g.base x` with `V ≤ g ⁻¹ᵁ U` such that `g.resLE U V hVU` factors as an étale morphism
-`e : V ⟶ 𝔸(d; U)` followed by the projection `𝔸(d; U) ↘ U`.
+`e : V ⟶ 𝔸(d; U)` followed by the projection `𝔸(d; U) ↘ U`:
+
+```
+V --e--> 𝔸(d; U)
+ \          |
+  \         ↓
+g.resLE     U
+```
 
 Near `x` the ring map `Γ(Y, U) ⟶ Γ(X, V)` is standard smooth, and
 `Scheme.Hom.exists_etale_to_affineSpace_of_isStandardSmoothOfRelativeDimension` applies. -/
