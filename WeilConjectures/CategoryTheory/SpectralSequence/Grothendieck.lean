@@ -161,8 +161,8 @@ instance (X : A) : (F.grothendieckSpectralObject G X).IsFirstQuadrant where
       | bot => simp at hi
       | coe i => simp at hi ⊢; lia
       | top => simp) ((t.eTruncLT.obj j).obj K)
-    exact G.isZero_homology_rightDerivedFunctorPlus_obj_of_isGE
-      ((t.eTruncGE.obj i).obj ((t.eTruncLT.obj j).obj K)) (n + 1) n (by lia)
+    exact G.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
+      ((t.eTruncGE.obj i).obj ((t.eTruncLT.obj j).obj K)) (n + 1) (by lia)
 
 /-- The Grothendieck spectral sequence of `X : A`, the first quadrant `E₂` spectral sequence of
 the spectral object `Functor.grothendieckSpectralObject`. -/

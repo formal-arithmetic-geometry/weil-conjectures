@@ -7,7 +7,6 @@ module
 
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.Subobject.Lattice
-public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 /-!
 # Convergence of a first quadrant cohomological spectral sequence
@@ -36,6 +35,8 @@ theorems that consume it is `SpectralSequence.AbutsTo E H`, its `Nonempty`.
 - `CategoryTheory.SpectralSequence.Abutment`: a filtration of a graded object exhibiting it as
   the abutment of a first quadrant cohomological spectral sequence.
 - `CategoryTheory.SpectralSequence.AbutsTo`: the associated `Prop`.
+- `CategoryTheory.SpectralSequence.Abutment.ofIso`: transport of an abutment along isomorphisms
+  of graded objects.
 -/
 
 @[expose] public section
@@ -83,27 +84,36 @@ each `H n` whose successive quotients are the `E∞`-terms `E∞^{p, q}` with `p
 def SpectralSequence.AbutsTo (E : E₂CohomologicalSpectralSequenceNat C) (H : ℕ → C) : Prop :=
   Nonempty (E.Abutment H)
 
-/-- Transport of an abutment along isomorphisms of the graded object. -/
-noncomputable def SpectralSequence.Abutment.ofIso {E : E₂CohomologicalSpectralSequenceNat C}
-    {H H' : ℕ → C} (h : E.Abutment H) (e : ∀ n, H n ≅ H' n) : E.Abutment H' where
-  filtration n p := Subobject.mapIsoToOrderIso (e n) (h.filtration n p)
-  filtration_succ_le n p := (Subobject.mapIsoToOrderIso (e n)).monotone (h.filtration_succ_le n p)
-  filtration_zero n := by rw [h.filtration_zero, OrderIso.map_top]
-  filtration_succ_self n := by rw [h.filtration_succ_self, OrderIso.map_bot]
-  nonempty_gradedIso n p q hpq := by
-    obtain ⟨i⟩ := h.nonempty_gradedIso n p q hpq
-    exact ⟨Subobject.cokernelOfLEMapIso (e n).hom _ _ (h.filtration_succ_le n p) _ ≪≫ i⟩
+namespace SpectralSequence
 
-/-- Convergence of a spectral sequence is invariant under isomorphisms of the abutment. -/
-theorem SpectralSequence.AbutsTo.of_iso {E : E₂CohomologicalSpectralSequenceNat C}
-    {H H' : ℕ → C} (h : E.AbutsTo H) (e : ∀ n, H n ≅ H' n) : E.AbutsTo H' :=
-  let ⟨a⟩ := h
-  ⟨a.ofIso e⟩
+variable {E : E₂CohomologicalSpectralSequenceNat C} {H H' : ℕ → C}
+
+/-- Transport of an abutment along isomorphisms `H n ≅ H' n`: the filtration of `H' n` is the
+image of the filtration of `H n`. -/
+noncomputable def Abutment.ofIso (A : E.Abutment H) (e : ∀ n, H n ≅ H' n) : E.Abutment H' where
+  filtration n p := Subobject.mk ((A.filtration n p).arrow ≫ (e n).hom)
+  filtration_succ_le n p :=
+    Subobject.mk_le_mk_of_comm (Subobject.ofLE _ _ (A.filtration_succ_le n p)) (by simp)
+  filtration_zero n := by
+    rw [A.filtration_zero]
+    exact Subobject.mk_eq_top_of_isIso _
+  filtration_succ_self n := by
+    rw [A.filtration_succ_self, Subobject.mk_eq_bot_iff_zero, Subobject.bot_arrow, zero_comp]
+  nonempty_gradedIso n p q hpq := by
+    obtain ⟨i⟩ := A.nonempty_gradedIso n p q hpq
+    refine ⟨cokernel.mapIso _ _ (Subobject.underlyingIso _) (Subobject.underlyingIso _) ?_ ≪≫ i⟩
+    simp [← cancel_mono ((A.filtration n p).arrow ≫ (e n).hom)]
+
+/-- Abutting to a graded object is invariant under isomorphisms of graded objects. -/
+lemma AbutsTo.of_iso (h : E.AbutsTo H) (e : ∀ n, H n ≅ H' n) : E.AbutsTo H' :=
+  ⟨h.some.ofIso e⟩
 
 /-- Convergence of a spectral sequence is invariant under (unspecified) isomorphisms of the
 abutment. -/
-theorem SpectralSequence.AbutsTo.of_nonempty_iso {E : E₂CohomologicalSpectralSequenceNat C}
-    {H H' : ℕ → C} (h : E.AbutsTo H) (e : ∀ n, Nonempty (H n ≅ H' n)) : E.AbutsTo H' :=
+lemma AbutsTo.of_nonempty_iso (h : E.AbutsTo H) (e : ∀ n, Nonempty (H n ≅ H' n)) :
+    E.AbutsTo H' :=
   h.of_iso fun n ↦ (e n).some
+
+end SpectralSequence
 
 end CategoryTheory

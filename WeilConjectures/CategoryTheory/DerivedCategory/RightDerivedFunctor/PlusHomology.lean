@@ -29,8 +29,6 @@ objects.
 - `CategoryTheory.Functor.nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso`: if `L` is a
   bounded below complex of `F`-acyclic objects and `F` is left exact, then
   `H^n(R⁺F(L)) ≅ H^n(F(L))`.
-- `CategoryTheory.Functor.isZero_homology_rightDerivedFunctorPlus_obj_of_isGE`: `R⁺F` sends
-  objects that are cohomologically `≥ m` to objects with no homology in degrees `< m`.
 -/
 
 @[expose] public section
@@ -146,23 +144,6 @@ theorem nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso [PreservesFiniteLimi
       (F.rightDerivedFunctorPlus.mapIso (asIso (DerivedCategory.Plus.Q.map i))) ≪≫
     F.homologyRightDerivedFunctorPlusObjQIsoOfInjective T' n ≪≫
     (asIso (HomologicalComplex.homologyMap ((F.mapHomologicalComplex _).map i.hom) n)).symm⟩
-
-/-- If `Z` is cohomologically `≥ m`, then so is `R⁺F(Z)`: its homology vanishes in degrees
-`k < m`. Indeed `Z` is represented by a complex of injective objects concentrated in
-degrees `≥ m`, on which `R⁺F` is computed by applying `F` termwise. -/
-theorem isZero_homology_rightDerivedFunctorPlus_obj_of_isGE (Z : DerivedCategory.Plus C)
-    (m : ℤ) [Z.IsGE m] (k : ℤ) (hk : k < m) :
-    IsZero ((DerivedCategory.Plus.homologyFunctor D k).obj (F.rightDerivedFunctorPlus.obj Z)) := by
-  obtain ⟨T, _, ⟨e⟩⟩ := DerivedCategory.Plus.exists_injective_nonempty_iso Z m
-  let T' := (InjectiveObject.ι C).mapCochainComplexPlus.obj T
-  have : ∀ n, Injective (T'.obj.X n) := fun n ↦ (T.obj.X n).2
-  have : T'.obj.IsStrictlyGE m :=
-    (CochainComplex.isStrictlyGE_mapHomologicalComplex_obj_iff _ _ _).2 ‹_›
-  refine IsZero.of_iso ?_ ((DerivedCategory.Plus.homologyFunctor D k).mapIso
-    (F.rightDerivedFunctorPlus.mapIso e.symm) ≪≫
-      F.homologyRightDerivedFunctorPlusObjQIsoOfInjective T' k)
-  exact ShortComplex.isZero_homology_of_isZero_X₂ _
-    (F.map_isZero (T'.obj.isZero_of_isStrictlyGE m k hk))
 
 end
 

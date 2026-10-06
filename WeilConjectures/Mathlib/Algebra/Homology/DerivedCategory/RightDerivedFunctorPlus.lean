@@ -22,7 +22,9 @@ in a single degree `n` to `F.obj I` placed in degree `n`
 is its own injective resolution.
 
 We also show that the higher right derived functors vanish on injective objects
-(`CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_singleFunctor`).
+(`CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_singleFunctor`), and
+that the right derived functor preserves the property of being cohomologically `≥ n`
+(`CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE`).
 
 Finally, we show that `F.rightDerivedFunctorPlus` is a triangulated functor (this is a TODO in
 Mathlib). The functor `HomotopyCategory.Plus (InjectiveObject C) ⥤ DerivedCategory.Plus C` is a
@@ -100,6 +102,29 @@ theorem CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_si
   refine IsZero.of_iso ?_ ((HomotopyCategory.homologyFunctorFactors D _ q).app _)
   refine ShortComplex.isZero_homology_of_isZero_X₂ _ ?_
   exact Functor.map_isZero F (HomologicalComplex.isZero_single_obj_X _ _ _ _ hq)
+
+/-- For an additive functor `F` out of an abelian category with enough injectives, the right
+derived functor `R⁺F` preserves the property of being cohomologically `≥ n`: if `K` has no
+homology in degrees `< n`, neither has `R⁺F(K)`, since `K` is represented by a complex of
+injective objects concentrated in degrees `≥ n`. -/
+theorem CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
+    {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]
+    (F : C ⥤ D) [F.Additive] (K : DerivedCategory.Plus C) (n : ℤ) [K.IsGE n] {q : ℤ}
+    (hq : q < n) :
+    IsZero ((DerivedCategory.Plus.homologyFunctor D q).obj (F.rightDerivedFunctorPlus.obj K)) := by
+  obtain ⟨L, _, ⟨e⟩⟩ := DerivedCategory.Plus.exists_injective_nonempty_iso K n
+  let M := (InjectiveObject.ι C).mapCochainComplexPlus.obj L
+  refine IsZero.of_iso ?_ ((DerivedCategory.Plus.homologyFunctor D q).mapIso
+    (F.rightDerivedFunctorPlus.mapIso e.symm))
+  refine IsZero.of_iso ?_ ((DerivedCategory.Plus.homologyFunctor D q).mapIso
+    (asIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj M))).symm)
+  refine IsZero.of_iso ?_ ((DerivedCategory.homologyFunctorFactorsh D q).app _)
+  refine IsZero.of_iso ?_ ((HomotopyCategory.homologyFunctorFactors D _ q).app _)
+  refine ShortComplex.isZero_homology_of_isZero_X₂ _ ?_
+  change IsZero (F.obj ((InjectiveObject.ι C).obj (L.obj.X q)))
+  exact F.map_isZero ((InjectiveObject.ι C).map_isZero
+    (CochainComplex.isZero_of_isStrictlyGE L.obj n q hq))
 
 namespace DerivedCategory.Plus
 

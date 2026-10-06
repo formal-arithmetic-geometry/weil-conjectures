@@ -31,6 +31,8 @@ in the limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit`.
 
 - `AlgebraicGeometry.Etale.higherDirectImage_limit`: higher direct images commute with limits
   of schemes along affine transition morphisms.
+- `AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`: higher direct images
+  along a quasi-compact quasi-separated morphism commute with filtered colimits of sheaves.
 - `AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists`: the
   higher direct image `R^q h_* (Λ/dΛ)` vanishes as soon as every class of
   `H^q(U ×_X Y, ℤ/e)`, for `e ∣ d` and `U` affine étale over `X`, dies on an étale cover of `U`.
@@ -132,6 +134,21 @@ theorem Etale.higherDirectImage_limit {W S : Scheme.{u}} (k : W ⟶ S)
         (Etale.higherDirectImageOverMap Λ k G q (c.π.app i))).hom y' = 0 →
       ∃ (j : I) (f : j ⟶ i), ((S.uliftPointSmallEtale s).sheafFiber.map
         (Etale.higherDirectImageOverMap Λ k G q (D.map f))).hom y' = 0 :=
+  sorry
+
+/-- Blueprint `lemma-weil-pbc-direct-image-filtered-colimit`: Filtered colimits and higher
+direct image.
+
+For a quasi-compact quasi-separated morphism `h : Y ⟶ X`, the higher direct image
+`F ↦ R^q h_* F` commutes with filtered colimits of sheaves of `Λ`-modules on `Y_ét`:
+`colim_i R^q h_* F_i ≅ R^q h_* (colim_i F_i)`. The functor is written out as the degree-`q`
+homology of the derived pushforward of a sheaf placed in degree `0`, the functor whose value
+at `F` is `AlgebraicGeometry.Etale.higherDirectImage`. -/
+theorem Etale.preservesColimitsOfShape_higherDirectImage {X Y : Scheme.{u}} (h : Y ⟶ X)
+    [QuasiCompact h] [QuasiSeparated h] (q : ℤ) (J : Type) [SmallCategory J] [IsFiltered J] :
+    PreservesColimitsOfShape J
+      (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
+        R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q) :=
   sorry
 
 /-- Blueprint `sbc-lem-higher-direct-image-presheaf`, in the vanishing form used for constant
