@@ -64,10 +64,10 @@ variable {R S T : Type*} [CommRing R] [CommRing S] [CommRing T]
 /-- A ring homomorphism `f : R → S` induces `R[ε] → S[ε]`, `a + εb ↦ f(a) + εf(b)`. -/
 def mapRingHom (f : R →+* S) : R[ε] →+* S[ε] where
   toFun x := inl (f x.fst) + inr (f x.snd)
-  map_one' := by sorry
-  map_mul' := by sorry
-  map_zero' := by sorry
-  map_add' := by sorry
+  map_one' := by ext <;> simp
+  map_mul' x y := by ext <;> simp [mul_comm]
+  map_zero' := by ext <;> simp
+  map_add' x y := by ext <;> simp
 
 @[simp]
 theorem fst_mapRingHom (f : R →+* S) (x : R[ε]) : (mapRingHom f x).fst = f x.fst := by
@@ -78,20 +78,49 @@ theorem snd_mapRingHom (f : R →+* S) (x : R[ε]) : (mapRingHom f x).snd = f x.
   simp [mapRingHom]
 
 theorem mapRingHom_id : mapRingHom (RingHom.id R) = RingHom.id R[ε] := by
-  sorry
+  ext x <;> simp
 
 theorem mapRingHom_comp (f : R →+* S) (g : S →+* T) :
     mapRingHom (g.comp f) = (mapRingHom g).comp (mapRingHom f) := by
-  sorry
+  ext x <;> simp
 
 /-- The ring homomorphism `R[η] → R[ε][δ]`, `a + ηb ↦ a + εδ b`, recording the mixed infinitesimal
 term of the two-parameter dual numbers `R[ε][δ] = R[ε, δ]/(ε², δ²)`. -/
 def mulRingHom : R[ε] →+* (R[ε])[ε] where
   toFun x := inl (inl x.fst) + inr (inr x.snd)
-  map_one' := by sorry
-  map_mul' := by sorry
-  map_zero' := by sorry
-  map_add' := by sorry
+  map_one' := by ext <;> simp
+  map_mul' x y := by ext <;> simp [mul_comm]
+  map_zero' := by ext <;> simp
+  map_add' x y := by ext <;> simp
+
+theorem mapRingHom_comp_inlHom (f : R →+* S) :
+    (mapRingHom f).comp (inlHom R R) = (inlHom S S).comp f :=
+  RingHom.ext fun x => TrivSqZeroExt.ext (by simp) (by simp)
+
+theorem fstHom_comp_mapRingHom (f : R →+* S) :
+    (fstHom S S S).toRingHom.comp (mapRingHom f) = f.comp (fstHom R R R).toRingHom :=
+  RingHom.ext fun x => by simp
+
+@[simp]
+theorem fst_fst_mulRingHom (x : R[ε]) : (mulRingHom x).fst.fst = x.fst := by
+  simp [mulRingHom]
+
+@[simp]
+theorem snd_fst_mulRingHom (x : R[ε]) : (mulRingHom x).fst.snd = 0 := by
+  simp [mulRingHom]
+
+@[simp]
+theorem fst_snd_mulRingHom (x : R[ε]) : (mulRingHom x).snd.fst = 0 := by
+  simp [mulRingHom]
+
+@[simp]
+theorem snd_snd_mulRingHom (x : R[ε]) : (mulRingHom x).snd.snd = x.snd := by
+  simp [mulRingHom]
+
+theorem mulRingHom_comp_mapRingHom (f : R →+* S) :
+    mulRingHom.comp (mapRingHom f) = (mapRingHom (mapRingHom f)).comp mulRingHom :=
+  RingHom.ext fun x => TrivSqZeroExt.ext (TrivSqZeroExt.ext (by simp) (by simp))
+    (TrivSqZeroExt.ext (by simp) (by simp))
 
 end DualNumber
 
@@ -111,17 +140,23 @@ noncomputable def dualNumber : CommRingCat.{u} ⥤ CommRingCat.{u} where
 /-- The inclusion of constants `R → R[ε]`, naturally in `R`. -/
 noncomputable def dualNumberInl : 𝟭 CommRingCat.{u} ⟶ dualNumber where
   app R := ofHom (TrivSqZeroExt.inlHom R R)
-  naturality _ _ _ := by sorry
+  naturality _ _ f := by
+    ext1
+    exact (DualNumber.mapRingHom_comp_inlHom f.hom).symm
 
 /-- The augmentation `R[ε] → R`, `ε ↦ 0`, naturally in `R`. -/
 noncomputable def dualNumberFst : dualNumber ⟶ 𝟭 CommRingCat.{u} where
   app R := ofHom (TrivSqZeroExt.fstHom R R R).toRingHom
-  naturality _ _ _ := by sorry
+  naturality _ _ f := by
+    ext1
+    exact DualNumber.fstHom_comp_mapRingHom f.hom
 
 /-- The map `R[η] → R[ε][δ]`, `η ↦ εδ`, naturally in `R`. -/
 noncomputable def dualNumberMul : dualNumber ⟶ dualNumber ⋙ dualNumber where
   app R := ofHom DualNumber.mulRingHom
-  naturality _ _ _ := by sorry
+  naturality _ _ f := by
+    ext1
+    exact DualNumber.mulRingHom_comp_mapRingHom f.hom
 
 end CommRingCat
 
