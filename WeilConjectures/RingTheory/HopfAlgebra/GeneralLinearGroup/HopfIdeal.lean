@@ -9,7 +9,9 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.GroupTheory.Commutator.Basic
 public import Mathlib.RingTheory.Jacobson.Ring
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 public import WeilConjectures.Mathlib.RingTheory.HopfAlgebra.Quotient
+public import WeilConjectures.Mathlib.Topology.Connected.Basic
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
 
 /-!
@@ -63,6 +65,7 @@ Finally, the identity component and the centre of `V(I)` are described by Hopf i
 @[expose] public section
 
 open WithConv
+open scoped TensorProduct
 
 namespace Matrix.GeneralLinearGroup
 
@@ -282,6 +285,17 @@ theorem vanishingIdeal_zeroLocus_le_of_isRadical [IsAlgClosed k] (I : Ideal (Coo
     [I.IsHopfIdeal k] (hI : I.IsRadical) : vanishingIdeal (zeroLocus I k : Set (GL n k)) ≤ I :=
   ((vanishingIdeal_zeroLocus_eq_radical I).trans hI.radical).le
 
+/-- Over an algebraically closed field, an element of `k[GL_n] ⧸ I` for a radical Hopf ideal `I`
+vanishing at every `k`-point of `V(I)` is zero. -/
+theorem eq_zero_of_forall_liftₐ_evalAlgHom_eq_zero [IsAlgClosed k]
+    {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] (hI : I.IsRadical)
+    (a : CoordinateRing n k ⧸ I)
+    (h : ∀ g : zeroLocus I k, Ideal.Quotient.liftₐ I (evalAlgHom (g : GL n k)) g.2 a = 0) :
+    a = 0 := by
+  obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective a
+  exact Ideal.Quotient.eq_zero_iff_mem.2 (vanishingIdeal_zeroLocus_le_of_isRadical I hI
+    (mem_vanishingIdeal.2 fun g hg ↦ h ⟨g, hg⟩))
+
 /-- The point of `Spec k[x_ij, det⁻¹]` given by an invertible matrix `g`: the kernel of evaluation
 at `g`. -/
 noncomputable def toPrimeSpectrum (g : GL n k) : PrimeSpectrum (CoordinateRing n k) :=
@@ -318,6 +332,15 @@ theorem le_identityComponent (I : Ideal (CoordinateRing n k)) : I ≤ identityCo
 theorem isRadical_identityComponent (I : Ideal (CoordinateRing n k)) :
     (identityComponent I).IsRadical :=
   PrimeSpectrum.isRadical_vanishingIdeal _
+
+/-- The closed subset of `Spec k[x_ij, det⁻¹]` cut out by the ideal of the reduced identity
+component of `V(I)` is the connected component of the identity in the closed subset `V(I)`. -/
+theorem zeroLocus_identityComponent (I : Ideal (CoordinateRing n k)) :
+    PrimeSpectrum.zeroLocus (identityComponent I : Set (CoordinateRing n k)) =
+      connectedComponentIn (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))
+        (toPrimeSpectrum 1) := by
+  rw [identityComponent, PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure,
+    ((PrimeSpectrum.isClosed_zeroLocus _).connectedComponentIn _).closure_eq]
 
 /-- The reduced identity component is monotone in the group: if `V(J) ⊆ V(I)` then
 `V(J)° ⊆ V(I)°`. -/
@@ -392,6 +415,70 @@ theorem mem_zeroLocus_center_iff (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal
   · rintro ⟨hg, hc⟩
     exact subset_zeroLocus_vanishingIdeal _
       ⟨hg, Subgroup.mem_centralizer_iff.2 fun h hh ↦ (hc h hh).symm⟩
+
+/-- The pair of points `(g, h)` of `V(I) × V(J)` with values in `R` is the image of the universal
+pair of points with values in `(k[GL_n] ⧸ I) ⊗ (k[GL_n] ⧸ J)` under the evaluation at `(g, h)`. -/
+private theorem map_lift_liftₐ_evalAlgHom {I J : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k]
+    [J.IsHopfIdeal k] {R : Type*} [CommRing R] [Algebra k R] {g h : GL n R}
+    (hg : g ∈ zeroLocus I R) (hh : h ∈ zeroLocus J R) :
+    map (Algebra.TensorProduct.lift (Ideal.Quotient.liftₐ I (evalAlgHom g) fun a ha ↦ hg a ha)
+        (Ideal.Quotient.liftₐ J (evalAlgHom h) fun a ha ↦ hh a ha)
+        fun _ _ ↦ Commute.all _ _).toRingHom
+      (algHomMulEquiv n k ((CoordinateRing n k ⧸ I) ⊗[k] (CoordinateRing n k ⧸ J))
+        (toConv (Algebra.TensorProduct.includeLeft.comp (Ideal.Quotient.mkₐ k I)))) = g ∧
+    map (Algebra.TensorProduct.lift (Ideal.Quotient.liftₐ I (evalAlgHom g) fun a ha ↦ hg a ha)
+        (Ideal.Quotient.liftₐ J (evalAlgHom h) fun a ha ↦ hh a ha)
+        fun _ _ ↦ Commute.all _ _).toRingHom
+      (algHomMulEquiv n k ((CoordinateRing n k ⧸ I) ⊗[k] (CoordinateRing n k ⧸ J))
+        (toConv (Algebra.TensorProduct.includeRight.comp (Ideal.Quotient.mkₐ k J)))) = h := by
+  constructor <;>
+  · ext i j
+    simp only [algHomMulEquiv_apply]
+    simp
+
+/-- Over an algebraically closed field, the points of the reduced centre `Z(G)` of a reduced
+`G = V(I)` commute with the points of `G`, with values in any `k`-algebra `R`.
+
+The universal pair of points of `Z(G) × G` commutes: the entries of its commutator vanish at every
+pair of `k`-points, hence vanish, since `Z(G)` and `G` are reduced. (blueprint: `sk-p-comparison`)
+-/
+theorem commute_of_mem_zeroLocus_center [IsAlgClosed k] {I : Ideal (CoordinateRing n k)}
+    [I.IsHopfIdeal k] (hI : I.IsRadical) {R : Type*} [CommRing R] [Algebra k R] {g h : GL n R}
+    (hg : g ∈ zeroLocus (center I) R) (hh : h ∈ zeroLocus I R) : Commute g h := by
+  have huniv : Commute
+      (algHomMulEquiv n k ((CoordinateRing n k ⧸ center I) ⊗[k] (CoordinateRing n k ⧸ I))
+        (toConv (Algebra.TensorProduct.includeLeft.comp (Ideal.Quotient.mkₐ k (center I)))))
+      (algHomMulEquiv n k ((CoordinateRing n k ⧸ center I) ⊗[k] (CoordinateRing n k ⧸ I))
+        (toConv (Algebra.TensorProduct.includeRight.comp (Ideal.Quotient.mkₐ k I)))) := by
+    refine Units.ext (Matrix.ext fun i j ↦ sub_eq_zero.1 ?_)
+    refine TensorProduct.eq_zero_of_forall_map_eq_zero
+      (Set.range fun z : zeroLocus (center I) k ↦
+        (Ideal.Quotient.liftₐ (center I) (evalAlgHom (z : GL n k)) fun a ha ↦ z.2 a ha).toLinearMap)
+      (Set.range fun g : zeroLocus I k ↦
+        (Ideal.Quotient.liftₐ I (evalAlgHom (g : GL n k)) fun a ha ↦ g.2 a ha).toLinearMap)
+      (fun m hm ↦ eq_zero_of_forall_liftₐ_evalAlgHom_eq_zero (isRadical_vanishingIdeal _) m
+        fun z ↦ hm _ ⟨z, rfl⟩)
+      (fun m hm ↦ eq_zero_of_forall_liftₐ_evalAlgHom_eq_zero hI m fun g ↦ hm _ ⟨g, rfl⟩) ?_
+    rintro _ ⟨z, rfl⟩ _ ⟨g, rfl⟩
+    obtain ⟨hz, hg⟩ := map_lift_liftₐ_evalAlgHom z.2 g.2
+    have hzg := ((mem_zeroLocus_center_iff I).1 z.2).2 g g.2
+    have hψ : (TensorProduct.lid k k).toLinearMap ∘ₗ TensorProduct.map
+        (Ideal.Quotient.liftₐ (center I) (evalAlgHom (z : GL n k)) fun a ha ↦ z.2 a ha).toLinearMap
+        (Ideal.Quotient.liftₐ I (evalAlgHom (g : GL n k)) fun a ha ↦ g.2 a ha).toLinearMap =
+        (Algebra.TensorProduct.lift
+          (Ideal.Quotient.liftₐ (center I) (evalAlgHom (z : GL n k)) fun a ha ↦ z.2 a ha)
+          (Ideal.Quotient.liftₐ I (evalAlgHom (g : GL n k)) fun a ha ↦ g.2 a ha)
+          fun _ _ ↦ Commute.all _ _).toLinearMap :=
+      TensorProduct.ext' fun _ _ ↦ by simp
+    refine (LinearMap.congr_fun hψ _).trans ?_
+    rw [AlgHom.toLinearMap_apply, map_sub, sub_eq_zero]
+    have h2 := (congrArg₂ (· * ·) hz hg).trans (hzg.trans (congrArg₂ (· * ·) hg hz).symm)
+    rw [← MonoidHom.map_mul, ← MonoidHom.map_mul] at h2
+    exact congrArg (fun x : GL n k ↦ (x : Matrix n n k) i j) h2
+  have := huniv.map (map (Algebra.TensorProduct.lift
+    (Ideal.Quotient.liftₐ (center I) (evalAlgHom g) fun a ha ↦ hg a ha)
+    (Ideal.Quotient.liftₐ I (evalAlgHom h) fun a ha ↦ hh a ha) fun _ _ ↦ Commute.all _ _).toRingHom)
+  rwa [(map_lift_liftₐ_evalAlgHom hg hh).1, (map_lift_liftₐ_evalAlgHom hg hh).2] at this
 
 end Field
 
