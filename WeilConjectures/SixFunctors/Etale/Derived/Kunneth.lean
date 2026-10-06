@@ -12,6 +12,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasP
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 
 /-!
 
@@ -40,14 +41,12 @@ for `Rf_!`, the four product comparison maps, and the Künneth–Verdier isomorp
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct`
   (`sk-thm-sf-kunneth-relative`): `R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`.
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_externalProduct`:
-  `L(i ×_B j)^* (K ⊠ L) ≅ Li^* K ⊠ Lj^* L`.
-- `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion`:
-  `(i ×_B j)_* (i ×_B j)^* (K ⊠ L) ≅ i_* i^* K ⊠ j_* j^* L` for closed immersions `i`, `j`.
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion`
+  `L(i ×_B j)^* (K ⊠ M) ≅ Li^* K ⊠ Lj^* M`.
+- `Etale.nonempty_iso_externalProduct_rightDerivedLowerStar_of_isClosedImmersion`:
+  `Ri_* M ⊠ Rj_* N ≅ R(i ×_B j)_* (M ⊠ N)` for closed immersions `i`, `j`.
+- `Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct_of_isClosedImmersion`
   (`sk-thm-product`): the relative product theorem for complexes supported on closed
   subschemes.
-- `AlgebraicGeometry.Etale.nonempty_iso_compactlySupported_externalProduct_closedImmersion`
-  (`sk-thm-product`): the Künneth formula for `RΓ_c(Z × W, -)` over a field.
 - `AlgebraicGeometry.Etale.hasKunnethComparisons` (`sk-thm-sf-kunneth-verdier`): the four
   comparison maps are isomorphisms.
 
@@ -170,110 +169,118 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct (f : X ⟶ B) (g : 
       (R(f)_![A]).obj K ⊗ (R(g)_![A]).obj M) :=
   sorry
 
-/-- The external product is compatible with pullback: for morphisms `i : Z ⟶ X`, `j : W ⟶ Y`
-over `B`, with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`,
+omit [HasSmallSiteSheafify A] in
+/-- The external product is compatible with pullback. Let `i : Z ⟶ X` and `j : W ⟶ Y` be
+morphisms of schemes over `B`, where `Z` and `W` are viewed over `B` through `i ≫ f` and
+`j ≫ g`, and let `i ×_B j : Z ×_B W ⟶ X ×_B Y` be their product, so that both squares in
 
-`L(i ×_B j)^* (K ⊠ L) ≅ Li^* K ⊠ Lj^* L`,
+```
+  Z <--p'-- Z ×_B W --q'--> W
+  |            |            |
+  i         i ×_B j         j
+  v            v            v
+  X <--p--- X ×_B Y ---q--> Y
+```
+
+commute. Then for `K ∈ D(X_ét)` and `M ∈ D(Y_ét)`,
+
+`L(i ×_B j)^* (K ⊠ M) ≅ Li^* K ⊠ Lj^* M`,
 
 the external product on the right being taken along `i ≫ f` and `j ≫ g`. -/
-theorem nonempty_iso_leftDerivedUpperStar_externalProduct (f : X ⟶ B) (g : Y ⟶ B)
-    {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y)
+theorem nonempty_iso_leftDerivedUpperStar_externalProduct [Etale.UpperStarPreservesFlat A]
+    (f : X ⟶ B) (g : Y ⟶ B) {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    Nonempty ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K L) ≅
-      externalProduct A (i ≫ f) (j ≫ g) ((L((i)^*[A])).obj K) ((L((j)^*[A])).obj L)) :=
-  -- Proof sketch: `K ⊠ L = Lp^* K ⊗ᴸ Lq^* L`; the derived pullback is monoidal, and
-  -- `p ∘ (i ×_B j) = i ∘ p'`, `q ∘ (i ×_B j) = j ∘ q'` for the projections `p'`, `q'` of
-  -- `Z ×_B W`.
-  sorry
+    (M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    Nonempty ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K M) ≅
+      externalProduct A (i ≫ f) (j ≫ g) ((L((i)^*[A])).obj K) ((L((j)^*[A])).obj M)) :=
+  ⟨leftDerivedUpperStarTensorIso A (pullback.mapOverBase i j f g) _ _ ≪≫
+    tensorIso
+      (((leftDerivedUpperStarComp A (pullback.mapOverBase i j f g) (pullback.fst f g)
+          (pullback.fst (i ≫ f) (j ≫ g) ≫ i)).app K).symm ≪≫
+        (leftDerivedUpperStarComp A (pullback.fst (i ≫ f) (j ≫ g)) i).app K)
+      (((leftDerivedUpperStarComp A (pullback.mapOverBase i j f g) (pullback.snd f g)
+          (pullback.snd (i ≫ f) (j ≫ g) ≫ j)).app M).symm ≪≫
+        (leftDerivedUpperStarComp A (pullback.snd (i ≫ f) (j ≫ g)) j).app M)⟩
 
-/-- The external product is compatible with restriction to closed subschemes: for closed
-immersions `i : Z ⟶ X`, `j : W ⟶ Y` over `B`, with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`,
+/-- The external product of extensions by zero along closed immersions. Let `i : Z ⟶ X` and
+`j : W ⟶ Y` be closed immersions over `B`, with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`, so
+that `Z ×_B W` is the closed subscheme `p⁻¹ Z ∩ q⁻¹ W` of `X ×_B Y`:
 
-`(i ×_B j)_* (i ×_B j)^* (K ⊠ L) ≅ i_* i^* K ⊠ j_* j^* L`. -/
-theorem nonempty_iso_externalProduct_closedImmersion (f : X ⟶ B) (g : Y ⟶ B)
-    {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    Nonempty ((R((pullback.mapOverBase i j f g)_*[A])).obj
-        ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K L)) ≅
-      externalProduct A f g ((R((i)_*[A])).obj ((L((i)^*[A])).obj K))
-        ((R((j)_*[A])).obj ((L((j)^*[A])).obj L))) :=
-  -- Proof sketch: both sides are `K ⊠ L` tensored with the constant sheaf of the closed
-  -- subscheme `Z ×_B W = p⁻¹ Z ∩ q⁻¹ W`, by the projection formula for closed immersions and
-  -- proper base change along the projections `p`, `q`.
+```
+  Z <--p'-- Z ×_B W --q'--> W
+  |            |            |
+  i         i ×_B j         j
+  v            v            v
+  X <--p--- X ×_B Y ---q--> Y
+```
+
+For `M ∈ D(Z_ét)` and `N ∈ D(W_ét)`,
+
+`Ri_* M ⊠ Rj_* N ≅ R(i ×_B j)_* (M ⊠ N)`,
+
+the external product on the right being taken along `i ≫ f` and `j ≫ g`. This is the
+two-factor analogue of
+`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedLowerStar`. -/
+theorem nonempty_iso_externalProduct_rightDerivedLowerStar_of_isClosedImmersion
+    (f : X ⟶ B) (g : Y ⟶ B) {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j]
+    (M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
+    (N : _root_.DerivedCategory (Sheaf W.smallEtaleTopology A)) :
+    Nonempty (externalProduct A f g ((R((i)_*[A])).obj M) ((R((j)_*[A])).obj N) ≅
+      (R((pullback.mapOverBase i j f g)_*[A])).obj
+        (externalProduct A (i ≫ f) (j ≫ g) M N)) :=
+  -- Proof sketch: proper base change for the closed immersions `i`, `j` along the projections
+  -- `p`, `q`, followed by the projection formula for the closed immersion `i ×_B j`.
   sorry
 
 /-- Blueprint `sk-thm-product`: Supported product over a relative base.
 
 Let `f : X ⟶ B` and `g : Y ⟶ B` be separated of finite type, `h = f ×_B g`, and let
 `i : Z ⟶ X`, `j : W ⟶ Y` be closed immersions, with product
-`i ×_B j : Z ×_B W ⟶ X ×_B Y`. For `K` in `Dctf(X, A)` and `L` in `Dctf(Y, A)`,
+`i ×_B j : Z ×_B W ⟶ X ×_B Y`:
 
-`Rf_!(i_* i^* K) ⊗ᴸ Rg_!(j_* j^* L) ≅ Rh_!((i ×_B j)_* (i ×_B j)^* (K ⊠ L))`.
+```
+  Z <--p'-- Z ×_B W --q'--> W
+  |            |            |
+  i         i ×_B j         j
+  v            v            v
+  X <--p--- X ×_B Y ---q--> Y
+    \          |          /
+     f         h         g
+      \        v        /
+       '-----> B <-----'
+```
 
-This is the relative product theorem
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` for the
-complexes `i_* i^* K` and `j_* j^* L`, rewritten with
-`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion`. Over `B = Spec k` it
-is the Künneth formula for the compactly supported cohomology of `Z ×_k W`. -/
-theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion
+For `K` in `Dctf(X, A)` and `M` in `Dctf(Y, A)`,
+
+`Rh_!((i ×_B j)_* (i ×_B j)^* (K ⊠ M)) ≅ Rf_!(i_* i^* K) ⊗ᴸ Rg_!(j_* j^* M)`.
+
+Over `B = Spec k` this is the Künneth formula for the compactly supported cohomology of
+`Z ×_k W`, see the blueprint. -/
+theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_of_isClosedImmersion
+    [Etale.UpperStarPreservesFlat A]
     (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f] [HasCompactification g]
     [QuasiCompact f] [QuasiCompact g] [HasCompactification (pullback.toBase f g)]
     {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    {M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     (hK : DerivedCategory.constructibleFiniteTor A X K)
-    (hL : DerivedCategory.constructibleFiniteTor A Y L) :
-    Nonempty ((R(f)_![A]).obj ((R((i)_*[A])).obj ((L((i)^*[A])).obj K)) ⊗
-        (R(g)_![A]).obj ((R((j)_*[A])).obj ((L((j)^*[A])).obj L)) ≅
-      (R(pullback.toBase f g)_![A]).obj
+    (hM : DerivedCategory.constructibleFiniteTor A Y M) :
+    Nonempty ((R(pullback.toBase f g)_![A]).obj
         ((R((pullback.mapOverBase i j f g)_*[A])).obj
-          ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K L)))) := by
-  obtain ⟨e⟩ := nonempty_iso_externalProduct_closedImmersion A f g i j K L
-  obtain ⟨k⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct A f g
+          ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K M))) ≅
+      (R(f)_![A]).obj ((R((i)_*[A])).obj ((L((i)^*[A])).obj K)) ⊗
+        (R(g)_![A]).obj ((R((j)_*[A])).obj ((L((j)^*[A])).obj M))) := by
+  obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_externalProduct A f g i j K M
+  obtain ⟨e'⟩ := nonempty_iso_externalProduct_rightDerivedLowerStar_of_isClosedImmersion A f g
+    i j ((L((i)^*[A])).obj K) ((L((j)^*[A])).obj M)
+  obtain ⟨φ⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct A f g
     (constructibleFiniteTor_rightDerivedLowerStar A i
       (constructibleFiniteTor_leftDerivedUpperStar A i hK))
     (constructibleFiniteTor_rightDerivedLowerStar A j
-      (constructibleFiniteTor_leftDerivedUpperStar A j hL))
-  exact ⟨k.symm ≪≫ (R(pullback.toBase f g)_![A]).mapIso e.symm⟩
-
-/-- Blueprint `sk-thm-product`: Supported product over a relative base.
-
-The Künneth formula with closed supports over a field: for `X`, `Y` separated of finite type
-over a field `k` and closed subschemes `i : Z ⟶ X`, `j : W ⟶ Y`,
-
-`RΓ_c(Z, i^* K) ⊗ᴸ RΓ_c(W, j^* L) ≅ RΓ_c(Z × W, (K ⊠ L)|_{Z × W})`,
-
-written one step earlier, in `D((Spec k)_ét)`, with the structure morphisms `i ≫ f`,
-`j ≫ g` of `Z`, `W` and `Z × W ⟶ Spec k`.
-
-It is the relative product theorem
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` for `i ≫ f`,
-`j ≫ g` and the complexes `i^* K`, `j^* L`, rewritten with
-`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_externalProduct`. Comparing it with
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion`
-over `B = Spec k` would also need `R(i ≫ f)_! ≅ Rf_! Ri_*`, the composition of compactly
-supported direct images. -/
-theorem nonempty_iso_compactlySupported_externalProduct_closedImmersion
-    {k : Type u} [Field k] (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k))
-    [HasCompactification f] [HasCompactification g] [QuasiCompact f] [QuasiCompact g]
-    {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
-    [HasCompactification (i ≫ f)] [HasCompactification (j ≫ g)]
-    [HasCompactification (pullback.toBase (i ≫ f) (j ≫ g))]
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    (hK : DerivedCategory.constructibleFiniteTor A X K)
-    (hL : DerivedCategory.constructibleFiniteTor A Y L) :
-    Nonempty ((R(i ≫ f)_![A]).obj ((L((i)^*[A])).obj K) ⊗
-        (R(j ≫ g)_![A]).obj ((L((j)^*[A])).obj L) ≅
-      (R(pullback.toBase (i ≫ f) (j ≫ g))_![A]).obj
-        ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K L))) := by
-  obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_externalProduct A f g i j K L
-  obtain ⟨k⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct A (i ≫ f) (j ≫ g)
-    (constructibleFiniteTor_leftDerivedUpperStar A i hK)
-    (constructibleFiniteTor_leftDerivedUpperStar A j hL)
-  exact ⟨k.symm ≪≫ (R(pullback.toBase (i ≫ f) (j ≫ g))_![A]).mapIso e.symm⟩
+      (constructibleFiniteTor_leftDerivedUpperStar A j hM))
+  exact ⟨(R(pullback.toBase f g)_![A]).mapIso
+    ((R((pullback.mapOverBase i j f g)_*[A])).mapIso e ≪≫ e'.symm) ≪≫ φ⟩
 
 /-- Blueprint `sk-def-sf-kv-maps`: The product comparison maps.
 
