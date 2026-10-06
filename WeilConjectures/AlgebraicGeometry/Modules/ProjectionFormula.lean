@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 # Pullback, tensor products and the projection formula
 
 We record how the pullback of `𝒪`-modules along a morphism of schemes `g : X ⟶ Y` interacts with
-the tensor product, and the projection formula `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N` for an invertible
+the tensor product, and the projection formula `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ ⊗ N` for an invertible
 `𝒪_Y`-module `N`.
 
 ## Main statements
@@ -35,8 +35,8 @@ the tensor product, and the projection formula `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N
   `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_tensorObj`: twisting by an invertible
   module preserves quasi-coherence and finite presentation.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_tensorObj_pullback_iso`: the projection
-  formula `g_* M ⊗ N ≅ g_* (M ⊗ g^* N)` for an invertible module `N`.
-- `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_pullback_iso`: its case `M = 𝒪_X`.
+  formula `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ ⊗ N` for an invertible module `N`.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_pullback_iso`: its case `ℱ = 𝒪_X`.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_pullback_iso_self`: if `g_* 𝒪_X ≅ 𝒪_Y`,
   then `g_* (g^* N) ≅ N` for every invertible `𝒪_Y`-module `N`.
 -/
@@ -178,28 +178,27 @@ end Quasicoherent
 
 section ProjectionFormula
 
-/-- **The projection formula** for an invertible module. For `g : X ⟶ Y`, an `𝒪_X`-module `M`
-and an invertible `𝒪_Y`-module `N`, `g_* M ⊗ N ≅ g_* (M ⊗ g^* N)`. The natural map is the
-adjoint of `g^* (g_* M ⊗ N) ≅ g^* g_* M ⊗ g^* N ⟶ M ⊗ g^* N`; on an open `V` of `Y` on which
-`N ≅ 𝒪_Y`, both sides are `g_* M` and the map is the identity, so it is an isomorphism.
+/-- **The projection formula** for an invertible module. For `g : X ⟶ Y`, an `𝒪_X`-module `ℱ`
+and an invertible `𝒪_Y`-module `N`, `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ ⊗ N`. The comparison map is the
+adjoint of `g^* (g_* ℱ ⊗ N) ≅ g^* g_* ℱ ⊗ g^* N ⟶ ℱ ⊗ g^* N`; it is an isomorphism because it is
+one locally on `Y`: on an open `V` where `N ≅ 𝒪_V`, both sides are `g_* ℱ` on `V`.
 
-For a closed immersion `g` of locally noetherian schemes this is the last assertion of the
-blueprint lemma, used to identify `i_* (ℱ ⊗ 𝒪_X(m))` with `(i_* ℱ)(m)`.
+For a closed immersion `g` this is the last clause of the blueprint lemma.
 
 (blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
-theorem nonempty_pushforward_tensorObj_pullback_iso (g : X ⟶ Y) (M : X.Modules) (N : Y.Modules)
+theorem nonempty_pushforward_tensorObj_pullback_iso (g : X ⟶ Y) (F : X.Modules) (N : Y.Modules)
     [N.IsInvertible] :
-    Nonempty ((pushforward g).obj M ⊗ N ≅ (pushforward g).obj (M ⊗ (pullback g).obj N)) :=
+    Nonempty ((pushforward g).obj (F ⊗ (pullback g).obj N) ≅ (pushforward g).obj F ⊗ N) :=
   sorry
 
-/-- **The projection formula** for the structure sheaf. For `g : X ⟶ Y` and an invertible
-`𝒪_Y`-module `N`, `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N`: this is
-`AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_tensorObj_pullback_iso` for `M = 𝒪_X`. -/
+/-- **The projection formula** for an invertible module and the structure sheaf. For
+`g : X ⟶ Y` and an invertible `𝒪_Y`-module `N`, `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N`: this is
+`nonempty_pushforward_tensorObj_pullback_iso` for `ℱ = 𝒪_X`, since `g^* N ≅ 𝒪_X ⊗ g^* N`. -/
 theorem nonempty_pushforward_pullback_iso (g : X ⟶ Y) (N : Y.Modules) [N.IsInvertible] :
     Nonempty ((pushforward g).obj ((pullback g).obj N) ≅
       (pushforward g).obj (𝟙_ X.Modules) ⊗ N) := by
   obtain ⟨e⟩ := nonempty_pushforward_tensorObj_pullback_iso g (𝟙_ X.Modules) N
-  exact ⟨(pushforward g).mapIso (λ_ _).symm ≪≫ e.symm⟩
+  exact ⟨(pushforward g).mapIso (λ_ _).symm ≪≫ e⟩
 
 /-- If `g_* 𝒪_X ≅ 𝒪_Y`, then `g_* (g^* N) ≅ N` for every invertible `𝒪_Y`-module `N`: by the
 projection formula `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N ≅ 𝒪_Y ⊗ N ≅ N`. -/

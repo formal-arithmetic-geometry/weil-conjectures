@@ -91,9 +91,8 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
 - `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isAffineHom` and
   `isQuasicoherent_pushforward_of_isAffineHom`: the higher direct images along an affine morphism
   vanish, and its pushforward preserves quasi-coherence.
-- `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_pushforward_of_isClosedImmersion` and
-  `nonempty_H_pushforward_addEquiv_of_isClosedImmersion`: pushforward along a closed immersion
-  preserves coherence and cohomology.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_H_pushforward_addEquiv_of_isClosedImmersion`:
+  pushforward along a closed immersion preserves cohomology.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_tensorObj_pullback_iso`: the
   projection formula `R^q f_* (ℱ ⊗ f^* 𝒩) ≅ R^q f_* ℱ ⊗ 𝒩` for an invertible `𝒩`.
 - `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`,
@@ -1008,31 +1007,6 @@ theorem isQuasicoherent_pushforward_of_isAffineHom (f : X ⟶ T) [IsAffineHom f]
 end AffineMorphism
 
 section ClosedImmersion
-
-/-- **The pushforward of a coherent module along a closed immersion is coherent.** Let
-`i : X ⟶ Y` be a closed immersion into a locally noetherian scheme and `ℱ` a coherent
-`𝒪_X`-module. Then `i_* ℱ` is of finite presentation; it is quasi-coherent by
-`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward_of_isAffineHom`. A closed
-immersion is proper, so `i_* ℱ = R⁰ i_* ℱ` is coherent by
-`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`. (The blueprint argues
-directly: over an affine open `Spec R` of `Y` with preimage `Spec R/I`, the sections of `ℱ` are
-a finite `R/I`-module, hence a finite `R`-module.)
-
-(blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
-theorem isFinitePresentation_pushforward_of_isClosedImmersion [IsLocallyNoetherian T]
-    (i : X ⟶ T) [IsClosedImmersion i] (ℱ : X.Modules)
-    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
-    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] :
-    ((pushforward i).obj ℱ).IsFinitePresentation := by
-  have := isGrothendieckAbelian X
-  have : PreservesFiniteLimits (pushforward i) :=
-    have := (pullbackPushforwardAdjunction i).rightAdjoint_preservesLimits.{0, 0}
-    inferInstance
-  have : LocallyOfFinitePresentation i :=
-    (LocallyOfFinitePresentation.iff_locallyOfFiniteType).mpr inferInstance
-  exact (SheafOfModules.isFinitePresentation T.ringCatSheaf).prop_of_iso
-    ((Functor.rightDerivedZeroIsoSelf (pushforward i)).app ℱ)
-    (isFinitePresentation_higherDirectImage i ℱ 0)
 
 /-- **Cohomology along a closed immersion.** For a closed immersion `i : X ⟶ Y` and any
 `𝒪_X`-module `ℱ`, `H^q(Y, i_* ℱ) ≅ H^q(X, ℱ)` for every `q`. The blueprint deduces this for

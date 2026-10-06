@@ -80,9 +80,15 @@ lemma subsingleton_H_of_shortExact {S : ShortComplex X.Modules} (hS : S.ShortExa
 of sheaves of modules, then `H^n(∐ G) = 0`: the identity of the coproduct, which is a
 biproduct, is the sum of the projections followed by the inclusions, and each of these factors
 through some `H^n(G i)`. -/
-lemma subsingleton_H_sigma {ι : Type} [Finite ι] (G : ι → X.Modules) (n : ℕ)
+lemma subsingleton_H_sigma {ι : Type*} [Finite ι] (G : ι → X.Modules) (n : ℕ)
     [∀ i, Subsingleton ((G i).H n)] : Subsingleton ((∐ G).H n) := by
-  have := Fintype.ofFinite ι
+  -- reindex by `Fin k`, since the biproduct API is stated for index types in `Type`
+  obtain ⟨k, ⟨e⟩⟩ := Finite.exists_equiv_fin ι
+  suffices ∀ G' : Fin k → X.Modules, (∀ i, Subsingleton ((G' i).H n)) →
+      Subsingleton ((∐ G').H n) by
+    have := this (G ∘ e.symm) fun i ↦ inferInstanceAs (Subsingleton ((G (e.symm i)).H n))
+    exact subsingleton_H_of_iso (Sigma.reindex e.symm G) n
+  intro G _
   have : HasFiniteBiproducts X.Modules := HasFiniteBiproducts.of_hasFiniteCoproducts
   suffices Subsingleton ((⨁ G).H n) from subsingleton_H_of_iso (biproduct.isoCoproduct G) n
   refine ⟨fun x y ↦ ?_⟩

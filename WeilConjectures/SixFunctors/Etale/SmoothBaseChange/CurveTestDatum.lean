@@ -18,10 +18,11 @@ normal base `S₀` with algebraically closed function field, an affine smooth re
 `f₀ : X₀ ⟶ S₀` over it, the fibre of `f₀` over a geometric generic point
 `Spec K ⟶ S₀` of `S₀`, and an integer `d` invertible on `S₀`.
 
-A first failure of the base-change property in degree `q` can be normalised to such a datum:
-after passing to a field, enlarging it to an algebraically closed field and normalising the
-base, the failure is witnessed by a curve-test datum which is a base change of `p` and whose
-higher direct image `R^q h_* (Λ/dΛ)` does not vanish, with `d` dividing `n`. This is
+A failure of the base-change property in degree `q`, below which it holds universally, can be
+normalised to such a datum: after passing to a field, enlarging it to an algebraically closed
+field and normalising the base, the failure is witnessed by a curve-test datum which is a base
+change of `p` and whose higher direct image `R^q h_* (Λ/dΛ)` does not vanish, with `d` dividing
+`n`. This is
 `AlgebraicGeometry.Etale.exists_curveTestDatum`; the vanishing theorem
 `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing`, which forbids exactly that,
 is what contradicts it.
@@ -38,9 +39,9 @@ is what contradicts it.
   `BC(p, Λ, q)` in the first degree where it can fail is witnessed by the geometric generic
   fibre of a base change of `p` over a normal affine base with algebraically closed function
   field, on which a higher direct image of a constant sheaf does not vanish.
-- `AlgebraicGeometry.Etale.exists_curveTestDatum`: a first failure of `BC(p, Λ, q)` produces
-  a curve-test datum which is a base change of `p` and on which a higher direct image of a
-  constant sheaf fails to vanish.
+- `AlgebraicGeometry.Etale.exists_curveTestDatum`: a failure of `BC(p, Λ, q)`, when
+  `BC(p, Λ, q')` holds universally for `q' < q`, produces a curve-test datum which is a base
+  change of `p` and on which a higher direct image of a constant sheaf fails to vanish.
 
 ## Implementation notes
 

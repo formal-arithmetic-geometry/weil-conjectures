@@ -47,7 +47,7 @@ affine charts `standardOpen n S i ≅ 𝔸({j : n // j ≠ i}; S)` are in
 
 - `AlgebraicGeometry.ProjectiveSpace.instIsProper` — for a finite index type, the structure
   morphism `ℙ(n; S) ↘ S` is proper.
-- `AlgebraicGeometry.ProjectiveSpace.isEmpty` — `ℙ(n; S)` is empty if `n` is.
+- `AlgebraicGeometry.ProjectiveSpace.instIsEmpty` — `ℙ(n; S)` is empty if `n` is.
 - `AlgebraicGeometry.ProjectiveSpace.isPullback_map` — projective space commutes with base
   change: for `g : X ⟶ S`, the scheme `ℙ(n; X)` is the base change of `ℙ(n; S)` along `g`.
 
@@ -174,7 +174,7 @@ instance instIsProper [Finite n] : IsProper (ℙ(n; S) ↘ S) := by
 attribute [local instance] MvPolynomial.gradedAlgebra in
 /-- **Projective space without homogeneous coordinates is empty**: if `n` is empty, the standard
 opens `D₊(Tᵢ)`, which cover `ℙⁿ_ℤ`, form an empty family. -/
-instance isEmpty [IsEmpty n] : IsEmpty ℙ(n; S) := by
+instance instIsEmpty [IsEmpty n] : IsEmpty ℙ(n; S) := by
   have h := Proj.iSup_basicOpen_eq_top' (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ))
     MvPolynomial.X (fun i ↦ ⟨1, MvPolynomial.isHomogeneous_X _ i⟩)
     (MvPolynomial.adjoin_range_X_eq_top n _)

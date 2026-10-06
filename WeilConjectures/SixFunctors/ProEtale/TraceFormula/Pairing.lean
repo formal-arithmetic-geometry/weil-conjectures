@@ -110,8 +110,9 @@ variable (G : GeometricOperations A s)
 section KunnethClass
 
 variable {Z T X' Y' : Scheme.{u}} {aX' : X' ⟶ s} {aY' : Y' ⟶ s} {pX : Z ⟶ X'} {pY : Z ⟶ Y'}
-  [HasCompactification pX] (i : T ⟶ Z) [HasCompactification i] {cX : T ⟶ X'} {cY : T ⟶ Y'}
-  [HasCompactification cX] (hX : i ≫ pX = cX) (hY : i ≫ pY = cY)
+  [HasCompactification pX] [(R(pX)_![A]).IsLeftAdjoint] (i : T ⟶ Z) [HasCompactification i]
+  [(R(i)_![A]).IsLeftAdjoint] {cX : T ⟶ X'} {cY : T ⟶ Y'} [HasCompactification cX]
+  [(R(cX)_![A]).IsLeftAdjoint] (hX : i ≫ pX = cX) (hY : i ≫ pY = cY)
   {M : DerivedCategory (Sheaf (Scheme.ProEt.topology X') A)}
   {N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y') A)}
   (u : ((upperStar A cY).leftDerivedFunctor).obj N ⟶ (rightDerivedUpperShriek A cX).obj M)
@@ -132,6 +133,7 @@ noncomputable def exceptionalMate :
     ((upperStar A pY).leftDerivedFunctor).obj N ⊗ (rightDerivedLowerShriek A i).obj (𝟙_ _) ⟶
       (rightDerivedUpperShriek A pX).obj M :=
   have : HasCompactification (i ≫ pX) := .of_eq hX.symm
+  have := G.isLeftAdjoint_rightDerivedLowerShriek_comp i pX
   (β_ _ _).hom ≫ (G.projectionFormula i).hom.app (𝟙_ _, _) ≫
     (rightDerivedLowerShriek A i).map ((λ_ _).hom ≫
       ((leftDerivedUpperStarComp A i pY).symm ≪≫ leftDerivedUpperStarCongr A hY).hom.app N ≫
@@ -149,7 +151,8 @@ the inverse of the Künneth-Verdier isomorphism
 `pX^* M ⊗ᴸ pY^* D N ≃ RHom(pY^* N, pX^! M)` (part of blueprint `sk-d-pairing`). -/
 noncomputable def kunnethClass [s.IsSpecOfField]
     [HasCompactification aX'] [QuasiCompact aX'] [HasCompactification aY'] [QuasiCompact aY']
-    (sq : IsPullback pX pY aX' aY') (hM : G.ctf X' M) (hN : G.ctf Y' N) :
+    [(R(aY')_![A]).IsLeftAdjoint] (sq : IsPullback pX pY aX' aY') (hM : G.ctf X' M)
+    (hN : G.ctf Y' N) :
     (rightDerivedLowerShriek A i).obj (𝟙_ _) ⟶
       ((upperStar A pX).leftDerivedFunctor).obj M ⊗
         ((upperStar A pY).leftDerivedFunctor).obj (G.verdierDual aY' N) :=
@@ -162,6 +165,7 @@ section Square
 
 variable [HasCompactification aX] {Z : Scheme.{u}} {p₁ : Z ⟶ Y} {p₂ : Z ⟶ X}
   (sq : IsPullback p₁ p₂ aY aX) [HasCompactification p₁] [HasCompactification p₂]
+  [(R(aX)_![A]).IsLeftAdjoint] [(R(p₁)_![A]).IsLeftAdjoint]
 
 /-- The exterior product of the dualizing complexes, `ω_Y ⊠ ω_X ⟶ ω_Z` for a Cartesian square
 `Z = Y ×_s X`: the exceptional adjoint under `Rp₁_! ⊣ p₁^!` of
@@ -189,7 +193,7 @@ noncomputable def dualizingExteriorProd :
 
 variable {C D E : Scheme.{u}} (i : C ⟶ Z) (j : D ⟶ Z) [HasCompactification i]
   [HasCompactification j] {q₁ : E ⟶ C} {q₂ : E ⟶ D} (sqE : IsPullback q₁ q₂ i j)
-  [HasCompactification q₁]
+  [HasCompactification q₁] [(R(i)_![A]).IsLeftAdjoint] [(R(q₁)_![A]).IsLeftAdjoint]
   (uc : (rightDerivedLowerShriek A i).obj (𝟙_ _) ⟶
     ((upperStar A p₁).leftDerivedFunctor).obj L ⊗
       ((upperStar A p₂).leftDerivedFunctor).obj (G.verdierDual aX K))
@@ -238,13 +242,15 @@ end Square
 section Pairing
 
 variable [HasCompactification aX] [HasCompactification aY] [s.IsSpecOfField]
-  [QuasiCompact aX] [QuasiCompact aY]
+  [QuasiCompact aX] [QuasiCompact aY] [(R(aX)_![A]).IsLeftAdjoint] [(R(aY)_![A]).IsLeftAdjoint]
+  [(R(pullback.fst aY aX)_![A]).IsLeftAdjoint] [(R(pullback.snd aY aX)_![A]).IsLeftAdjoint]
 
 /-- The supported class `ũ : Rc_! A_C ⟶ L ⊠ D_X K` on `Y × X` of a correspondence
 `(C, c, u)` from `(X, K)` to `(Y, L)`: the `GeometricOperations.kunnethClass` of `u` along
 the support map `c : C ⟶ Y × X` (blueprint: `sk-d-corr`, `sk-d-pairing`). -/
 noncomputable def supportedClass (c : Correspondence aX aY K L)
-    (hK : G.ctf X K) (hL : G.ctf Y L) [HasCompactification c.toProd] :
+    (hK : G.ctf X K) (hL : G.ctf Y L) [HasCompactification c.toProd]
+    [(R(c.toProd)_![A]).IsLeftAdjoint] :
     (rightDerivedLowerShriek A c.toProd).obj (𝟙_ _) ⟶
       ((upperStar A (pullback.fst aY aX)).leftDerivedFunctor).obj L ⊗
         ((upperStar A (pullback.snd aY aX)).leftDerivedFunctor).obj (G.verdierDual aX K) :=
@@ -255,7 +261,8 @@ noncomputable def supportedClass (c : Correspondence aX aY K L)
 `(D, d, v)` from `(Y, L)` to `(X, K)`: the `GeometricOperations.kunnethClass` of `v` along
 the swapped support map `d̄ : D ⟶ Y × X` (blueprint: `sk-d-pairing`). -/
 noncomputable def supportedClassSwap (d : Correspondence aY aX L K) (hK : G.ctf X K)
-    (hL : G.ctf Y L) [HasCompactification d.toProdSwap] :
+    (hL : G.ctf Y L) [HasCompactification d.toProdSwap]
+    [(R(d.toProdSwap)_![A]).IsLeftAdjoint] :
     (rightDerivedLowerShriek A d.toProdSwap).obj (𝟙_ _) ⟶
       ((upperStar A (pullback.snd aY aX)).leftDerivedFunctor).obj K ⊗
         ((upperStar A (pullback.fst aY aX)).leftDerivedFunctor).obj (G.verdierDual aY L) :=
@@ -274,7 +281,9 @@ section `⟨u, v⟩_LV : A_E ⟶ ω_E` on the intersection `E = E(C, D)`
 (blueprint: `sk-d-pairing`). -/
 noncomputable def supportedPairing (c : Correspondence aX aY K L)
     (d : Correspondence aY aX L K) (hK : G.ctf X K) (hL : G.ctf Y L)
-    [HasCompactification c.toProd] [HasCompactification d.toProdSwap] :
+    [HasCompactification c.toProd] [HasCompactification d.toProdSwap]
+    [(R(c.toProd)_![A]).IsLeftAdjoint] [(R(d.toProdSwap)_![A]).IsLeftAdjoint]
+    [(R(pullback.fst c.toProd d.toProdSwap)_![A]).IsLeftAdjoint] :
     G.borelMooreSections (c.intersectionStr d) :=
   G.pairingOfSquare (IsPullback.of_hasPullback aY aX) c.toProd d.toProdSwap
       (IsPullback.of_hasPullback c.toProd d.toProdSwap)
@@ -292,7 +301,11 @@ construction of the Lefschetz-Verdier pairing `⟨u, 1_K⟩_LV` with the fixed s
 place of the intersection `E(C, X)`; the comparison with `supportedPairing` along
 `F ≅ E(C, X)` is not formalised. -/
 noncomputable def traceClass [HasCompactification aX] [s.IsSpecOfField] [QuasiCompact aX]
-    (c : Correspondence aX aX K K) (hK : G.ctf X K) [HasCompactification c.toProd] :
+    [(R(aX)_![A]).IsLeftAdjoint] [(R(pullback.fst aX aX)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd aX aX)_![A]).IsLeftAdjoint] [HasCompactification (pullback.diagonal aX)]
+    [(R(pullback.diagonal aX)_![A]).IsLeftAdjoint]
+    (c : Correspondence aX aX K K) (hK : G.ctf X K) [HasCompactification c.toProd]
+    [(R(c.toProd)_![A]).IsLeftAdjoint] [(R(c.fixι)_![A]).IsLeftAdjoint] :
     G.borelMooreSections c.fixStr :=
   G.pairingOfSquare (IsPullback.of_hasPullback aX aX) c.toProd
       (Correspondence.ofEnd G aX K (𝟙 K)).toProdSwap c.isPullback_fixι_toProd
@@ -307,7 +320,8 @@ by the idempotent `e_B : A_E ⟶ A_E` of the clopen piece `B`
 point `LT_x̄` means the local term on its reduced clopen point component
 (blueprint: `sk-d-local-term`). -/
 noncomputable def localTerm {E B : Scheme.{u}} (aE : E ⟶ s) [HasCompactification aE]
-    [IsProper aE] (jB : B ⟶ E) [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base))
+    [IsProper aE] [(R(aE)_![A]).IsLeftAdjoint] (jB : B ⟶ E) [IsOpenImmersion jB]
+    (hB : IsClosed (Set.range jB.base))
     (α : G.borelMooreSections aE) :
     End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))) :=
   G.integral aE ((clopenIdempotent A jB hB).app (𝟙_ _) ≫ α)
@@ -321,8 +335,13 @@ The same adjunction calculation identifies the trace class of an endocorresponde
 arbitrary `X`, which is what the proper compatibility theorem uses
 (blueprint: `sk-p-pairing`). -/
 theorem integral_traceClass_eq_trace [s.IsSpecOfField]
+    [(R(pullback.fst (𝟙 s) (𝟙 s))_![A]).IsLeftAdjoint]
+    [(R(pullback.snd (𝟙 s) (𝟙 s))_![A]).IsLeftAdjoint]
+    [(R(pullback.diagonal (𝟙 s))_![A]).IsLeftAdjoint]
     (P : DerivedCategory (Sheaf (Scheme.ProEt.topology s) A)) (hP : G.ctf s P) [HasRightDual P]
-    (v : P ⟶ P) :
+    (v : P ⟶ P) [(R((Correspondence.ofEnd G (𝟙 s) P v).fixι)_![A]).IsLeftAdjoint]
+    [(R((Correspondence.ofEnd G (𝟙 s) P v).fixStr)_![A]).IsLeftAdjoint] :
+    haveI := G.isLeftAdjoint_rightDerivedLowerShriek_id s
     G.integral (Correspondence.ofEnd G (𝟙 s) P v).fixStr
         (G.traceClass (Correspondence.ofEnd G (𝟙 s) P v) hP) =
       MonoidalCategory.trace v :=
@@ -334,7 +353,8 @@ integral of the section is the sum of its local terms, `∫_E α = ∑_β LT_β(
 this applies to the Lefschetz-Verdier pairing `α = ⟨u, v⟩_LV`; the empty support gives the
 empty sum `0` (blueprint: `sk-p-local`). -/
 theorem integral_eq_sum_localTerm {E : Scheme.{u}} (aE : E ⟶ s) [HasCompactification aE]
-    [IsProper aE] {ι : Type u} [Fintype ι] {B : ι → Scheme.{u}} (j : ∀ i, B i ⟶ E)
+    [IsProper aE] [(R(aE)_![A]).IsLeftAdjoint] {ι : Type u} [Fintype ι] {B : ι → Scheme.{u}}
+    (j : ∀ i, B i ⟶ E)
     [∀ i, IsOpenImmersion (j i)] (hclosed : ∀ i, IsClosed (Set.range (j i).base))
     (hdisj : Pairwise fun i i' ↦ Disjoint (Set.range (j i).base) (Set.range (j i').base))
     (hcover : ⋃ i, Set.range (j i).base = Set.univ)

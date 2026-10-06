@@ -14,11 +14,12 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
+public import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 
 /-!
 # Serre's theorems on the cohomology of projective schemes
@@ -63,7 +64,7 @@ agrees with coherence on a noetherian scheme such as a closed subscheme of `ℙ�
 - `AlgebraicGeometry.Scheme.Modules.exists_tensorPowHom_eq` — clearing denominators for a
   section of an invertible module.
 - `AlgebraicGeometry.ProjectiveSpace.exists_epi_sigma_twist` — a coherent module on `ℙⁿ_A` is a
-  quotient of a finite sum of twists `𝒪(-m)`.
+  quotient of a finite sum of twists `𝒪(-mⱼ)`.
 - `AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist` — Serre vanishing on
   `ℙᵈ_k`: `H^q(ℙᵈ_k, ℱ(d)) = 0` for `q > 0` and `d ≫ 0`.
 - `AlgebraicGeometry.Scheme.Modules.exists_subsingleton_H_tensor_twist` — Serre's theorem B.
@@ -180,13 +181,14 @@ charts being spectra of noetherian rings.
 
 (blueprint: `lem-pc-projective-space-twist-quotient`) -/
 theorem ProjectiveSpace.exists_epi_sigma_twist (A : Type u) [CommRing A] [IsNoetherianRing A]
-    [Finite n] (ℱ : (ℙ(n; Spec (.of A))).Modules)
-    [SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) ℱ]
-    [SheafOfModules.IsFinitePresentation (R := (ℙ(n; Spec (.of A))).ringCatSheaf) ℱ] :
-    ∃ (r : ℕ) (m : Fin r → ℕ)
-      (p : (∐ fun j ↦ ProjectiveSpace.twist n (Spec (.of A)) (-(m j : ℤ))) ⟶ ℱ), Epi p ∧
-      SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) (kernel p) ∧
-      SheafOfModules.IsFinitePresentation (R := (ℙ(n; Spec (.of A))).ringCatSheaf) (kernel p) :=
+    [Finite n] (F : (ℙ(n; Spec (.of A))).Modules)
+    [SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) F]
+    [SheafOfModules.IsFinitePresentation (R := (ℙ(n; Spec (.of A))).ringCatSheaf) F] :
+    ∃ (ι : Type u) (_ : Finite ι) (e : ι → ℕ)
+      (φ : (∐ fun a ↦ ProjectiveSpace.twist n (Spec (.of A)) (-(e a : ℤ))) ⟶ F), Epi φ ∧
+        SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) (kernel φ) ∧
+        SheafOfModules.IsFinitePresentation (R := (ℙ(n; Spec (.of A))).ringCatSheaf)
+          (kernel φ) :=
   sorry
 
 end TwistQuotient
@@ -253,25 +255,22 @@ theorem ProjectiveSpace.exists_subsingleton_H_tensor_twist [Finite n]
     exact subsingleton_H_of_isClosedImmersion k (𝟙 _) _ hD (by omega)
   | succ j ih =>
     intro 𝒢 _ _
-    obtain ⟨r, m, p, hp, hK₁, hK₂⟩ := ProjectiveSpace.exists_epi_sigma_twist k 𝒢
+    obtain ⟨ι, _, m, p, hp, hK₁, hK₂⟩ := ProjectiveSpace.exists_epi_sigma_twist k 𝒢
+    obtain ⟨M, hM⟩ := (Set.finite_range m).bddAbove
     obtain ⟨d₁, h₁⟩ := ih 𝒢
     obtain ⟨d₂, h₂⟩ := ih (kernel p)
-    refine ⟨max (max d₁ d₂) (∑ i, (m i : ℤ)), fun d hd q hq hq0 ↦ ?_⟩
+    refine ⟨max (max d₁ d₂) (M : ℤ), fun d hd q hq hq0 ↦ ?_⟩
     have hd₁ : d₁ ≤ d := le_trans (le_trans (le_max_left _ _) (le_max_left _ _)) hd
     have hd₂ : d₂ ≤ d := le_trans (le_trans (le_max_right _ _) (le_max_left _ _)) hd
-    have hdm : ∀ i, (m i : ℤ) ≤ d := fun i ↦ le_trans
-      (Finset.single_le_sum (f := fun i ↦ (m i : ℤ)) (fun i _ ↦ by positivity)
-        (Finset.mem_univ i)) (le_trans (le_max_right _ _) hd)
+    have hdm : ∀ i, (m i : ℤ) ≤ d := fun i ↦
+      le_trans (Nat.cast_le.2 (hM ⟨i, rfl⟩)) (le_trans (le_max_right _ _) hd)
     by_cases hqj : D < q + j
     · exact h₁ d hd₁ q hqj hq0
     -- twisting by `𝒪(d)` is an equivalence, with inverse twisting by `𝒪(-d)`
     let T := ProjectiveSpace.twist n (Spec (.of k)) d
     obtain ⟨e₁⟩ := ProjectiveSpace.nonempty_twist_tensorObj_iso n (Spec (.of k)) d (-d)
-    obtain ⟨e₂⟩ := ProjectiveSpace.nonempty_twist_tensorObj_iso n (Spec (.of k)) (-d) d
-    let E := tensorRightEquivalence T (ProjectiveSpace.twist n (Spec (.of k)) (-d))
+    let E := BraidedCategory.tensorRightEquivalence T (ProjectiveSpace.twist n (Spec (.of k)) (-d))
       (e₁ ≪≫ eqToIso (congrArg _ (add_neg_cancel d)) ≪≫
-        (ProjectiveSpace.unitIsoTwistZero n (Spec (.of k))).symm)
-      (e₂ ≪≫ eqToIso (congrArg _ (neg_add_cancel d)) ≪≫
         (ProjectiveSpace.unitIsoTwistZero n (Spec (.of k))).symm)
     have : (tensorRight T).IsEquivalence := E.isEquivalence_functor
     have hS : (ShortComplex.kernelSequence p).ShortExact :=
@@ -318,7 +317,7 @@ theorem Scheme.Modules.exists_subsingleton_H_tensor_twist [Finite n]
     ∃ m₀ : ℤ, ∀ m ≥ m₀, ∀ q : ℕ, 0 < q →
       Subsingleton ((F ⊗ₘ ProjectiveSpace.twistRestrict i m).H q) := by
   have := LocallyOfFiniteType.isLocallyNoetherian (ℙ(n; Spec (.of k)) ↘ Spec (.of k))
-  have := isQuasicoherent_pushforward_of_isAffineHom i F
+  have := isQuasicoherent_pushforward_of_isClosedImmersion i F
   have := isFinitePresentation_pushforward_of_isClosedImmersion i F
   obtain ⟨m₀, h⟩ := ProjectiveSpace.exists_subsingleton_H_tensor_twist k ((pushforward i).obj F)
   refine ⟨m₀, fun m hm q hq ↦ ?_⟩
@@ -327,10 +326,11 @@ theorem Scheme.Modules.exists_subsingleton_H_tensor_twist [Finite n]
     (ProjectiveSpace.twist n (Spec (.of k)) m)
   obtain ⟨e'⟩ := nonempty_H_pushforward_addEquiv_of_isClosedImmersion i
     (F ⊗ₘ ProjectiveSpace.twistRestrict i m) q
-  have := subsingleton_H_of_iso e q
+  have := subsingleton_H_of_iso e.symm q
   exact e'.toEquiv.symm.subsingleton
 
 open scoped AlgebraicGeometry.Scheme.Modules in
+open ProjectiveSpace in
 /-- **Serre's theorem A: global generation after a twist.** Let `X ⊆ ℙᵈ_k` be a closed
 subscheme, i.e. a closed immersion `i : X ⟶ ℙ(n; Spec k)`, and let `ℱ` be a coherent sheaf on
 `X`. Then `ℱ ⊗ 𝒪_X(m)` is generated by its global sections for all `m ≫ 0`.
@@ -343,14 +343,54 @@ the map from the free module on those global sections is surjective as a map of 
 As for theorem B, "coherent" is `SheafOfModules.IsFinitePresentation` together with
 `SheafOfModules.IsQuasicoherent`.
 
-(blueprint: `sk-thm-picard-serre-a`) -/
+The proof follows Hartshorne: `𝒢 = i_* ℱ` is coherent on `P = ℙ(n; Spec k)`, and is a
+quotient `⊕ₐ 𝒪(-mₐ) ⟶ 𝒢` of a finite sum of twists (`ProjectiveSpace.exists_epi_sigma_twist`).
+For `m ≥ max mₐ`, tensoring with the invertible module `𝒪(m)` gives a surjection
+`⊕ₐ 𝒪(m - mₐ) ⟶ 𝒢(m)` from a sum of twists of non-negative degree, each generated by global
+sections (`ProjectiveSpace.generatingSectionsTwist`). Finally `𝒢(m) ≅ i_* (ℱ(m))` by the
+projection formula, and global generation descends along `i` because `i_*` is faithful
+(`Scheme.Modules.GeneratingSections.ofPushforward`).
+
+(blueprint: `sk-thm-picard-serre-a`, `thm-picard-serre-a`) -/
 theorem Scheme.Modules.exists_generatingSections_tensor_twist [Finite n]
     (i : X ⟶ ℙ(n; Spec (.of k))) [IsClosedImmersion i] (F : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) F] :
     ∃ m₀ : ℤ, ∀ m ≥ m₀,
-      Nonempty (SheafOfModules.GeneratingSections (F ⊗ₘ ProjectiveSpace.twistRestrict i m)) :=
-  sorry
+      Nonempty (SheafOfModules.GeneratingSections (F ⊗ₘ ProjectiveSpace.twistRestrict i m)) := by
+  -- Step 1: `𝒢 = i_* ℱ` is coherent on `P`, and a quotient of a finite sum of twists.
+  have : IsLocallyNoetherian ℙ(n; Spec (.of k)) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ℙ(n; Spec (.of k)) ↘ Spec (.of k))
+  have := isQuasicoherent_pushforward_of_isClosedImmersion i F
+  have := isFinitePresentation_pushforward_of_isClosedImmersion i F
+  obtain ⟨ι, _, e, φ, hφ, -, -⟩ := exists_epi_sigma_twist k ((pushforward i).obj F)
+  obtain ⟨M, hM⟩ := (Set.finite_range e).bddAbove
+  refine ⟨M, fun m hm ↦ ?_⟩
+  -- Step 2: each `𝒪(-mₐ) ⊗ 𝒪(m) ≅ 𝒪(m - mₐ)` is generated by global sections.
+  have hgen (a : ι) : Nonempty (SheafOfModules.GeneratingSections
+      (twist n (Spec (.of k)) (-(e a : ℤ)) ⊗ₘ twist n (Spec (.of k)) m)) := by
+    obtain ⟨t⟩ := nonempty_twist_tensorObj_iso n (Spec (.of k)) (-(e a : ℤ)) m
+    have hd : -(e a : ℤ) + m = ((m - e a).toNat : ℕ) := by
+      have := hM ⟨a, rfl⟩
+      omega
+    exact ⟨(SheafOfModules.GeneratingSections.equivOfIso (t ≪≫ eqToIso (by rw [hd]))).symm
+      (generatingSectionsTwist n _ _)⟩
+  -- Step 3: `- ⊗ 𝒪(m)` is an autoequivalence, so `φ ⊗ 𝒪(m)` is an epimorphism out of
+  -- `(⊕ₐ 𝒪(-mₐ)) ⊗ 𝒪(m) ≅ ⊕ₐ (𝒪(-mₐ) ⊗ 𝒪(m))`.
+  obtain ⟨t⟩ := nonempty_twist_tensorObj_iso n (Spec (.of k)) m (-m)
+  have : (tensorRight (twist n (Spec (.of k)) m)).IsEquivalence :=
+    (BraidedCategory.tensorRightEquivalence (twist n (Spec (.of k)) m)
+      (twist n (Spec (.of k)) (-m))
+        (t ≪≫ eqToIso (by simp) ≪≫ (unitIsoTwistZero n _).symm)).isEquivalence_functor
+  have : Epi (φ ▷ twist n (Spec (.of k)) m) := (tensorRight _).map_epi φ
+  let σ := ((SheafOfModules.GeneratingSections.equivOfIso
+    (PreservesCoproduct.iso (tensorRight (twist n (Spec (.of k)) m)) _).symm)
+      (SheafOfModules.GeneratingSections.sigma _ fun a ↦ (hgen a).some)).ofEpi
+        (φ ▷ twist n (Spec (.of k)) m)
+  -- Step 4: `𝒢 ⊗ 𝒪(m) ≅ i_* (ℱ ⊗ i^* 𝒪(m))`, and generation descends along `i`.
+  obtain ⟨pf⟩ := nonempty_pushforward_tensorObj_pullback_iso i F (twist n (Spec (.of k)) m)
+  exact ⟨GeneratingSections.ofPushforward i
+    (SheafOfModules.GeneratingSections.equivOfIso pf.symm σ)⟩
 
 
 /-- **Serre vanishing for an ample module.** Let `X` be a scheme over a field `k`, `ℒ` an ample
