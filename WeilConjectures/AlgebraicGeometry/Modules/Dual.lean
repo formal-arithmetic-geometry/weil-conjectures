@@ -43,6 +43,8 @@ Both are abbreviations for `SheafOfModules.homObj`, so its API (`SheafOfModules.
   invertible `ω`, `ℱ ≅ (ℱᵛ ⊗ ω)ᵛ ⊗ ω` naturally in finite locally free `ℱ`.
 - `AlgebraicGeometry.Scheme.Modules.IsInvertible.dual`: the dual of an invertible module is
   invertible.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_iso_dual_dual`: an invertible module is its own
+  double dual (blueprint `lem-pc-tensor-dual-invertible`).
 -/
 
 @[expose] public section
@@ -149,14 +151,26 @@ lemma IsInvertible.of_tensorObj_iso_unit (M N : X.Modules) [M.IsInvertible]
 instance IsInvertible.dual (M : X.Modules) [M.IsInvertible] : (Mᵛ).IsInvertible :=
   .of_tensorObj_iso_unit M _ (nonempty_tensorObj_dual_iso_unit M).some
 
+/-- **An invertible module is its own double dual.** For an invertible `M`, `M ≅ Mᵛᵛ`:
+`M ≅ M ⊗ (Mᵛ ⊗ Mᵛᵛ) ≅ (M ⊗ Mᵛ) ⊗ Mᵛᵛ ≅ Mᵛᵛ`. With `IsInvertible.dual`,
+`IsInvertible.tensorObj` and `nonempty_tensorObj_dual_iso_unit` this is blueprint
+`lem-pc-tensor-dual-invertible`.
+
+(blueprint: `lem-pc-tensor-dual-invertible`) -/
+theorem nonempty_iso_dual_dual (M : X.Modules) [M.IsInvertible] : Nonempty (M ≅ Mᵛᵛ) := by
+  obtain ⟨d⟩ := nonempty_tensorObj_dual_iso_unit M
+  obtain ⟨d'⟩ := nonempty_tensorObj_dual_iso_unit Mᵛ
+  exact ⟨(ρ_ M).symm ≪≫ (Iso.refl M ⊗ᵢ d'.symm) ≪≫ (α_ _ _ _).symm ≪≫ (d ⊗ᵢ Iso.refl _) ≪≫
+    λ_ _⟩
+
 /-- **Duals of invertible modules.** For an invertible `𝒪_X`-module `M`, the dual `Mᵛ` is
 invertible, the evaluation `M ⊗ Mᵛ ⟶ 𝒪_X` is an isomorphism, and `M ≅ Mᵛᵛ`. The first two
-assertions are `IsInvertible.dual` and `nonempty_tensorObj_dual_iso_unit`; the biduality is
-Zariski-local, and on an open where `M ≅ 𝒪` it is `𝒪 ≅ Hom(Hom(𝒪, 𝒪), 𝒪)`.
+assertions are `IsInvertible.dual` and `nonempty_tensorObj_dual_iso_unit`, and the biduality
+is `nonempty_iso_dual_dual`.
 
 (blueprint: `lem-sc-invertible-dual`) -/
 theorem isInvertible_dual_and_nonempty_iso (M : X.Modules) [M.IsInvertible] :
     Mᵛ.IsInvertible ∧ Nonempty (M ⊗ Mᵛ ≅ 𝟙_ X.Modules) ∧ Nonempty (M ≅ Mᵛᵛ) :=
-  ⟨inferInstance, nonempty_tensorObj_dual_iso_unit M, sorry⟩
+  ⟨inferInstance, nonempty_tensorObj_dual_iso_unit M, nonempty_iso_dual_dual M⟩
 
 end AlgebraicGeometry.Scheme.Modules
