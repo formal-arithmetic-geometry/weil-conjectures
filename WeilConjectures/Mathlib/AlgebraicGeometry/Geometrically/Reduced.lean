@@ -41,6 +41,8 @@ the members of an étale cover are not open subschemes of the source.
   morphism with geometrically reduced fibres has geometrically reduced fibres.
 - `AlgebraicGeometry.exists_etaleCover_factorization`: the étale-local slicing of a flat,
   locally finitely presented morphism with geometrically reduced fibres.
+- `AlgebraicGeometry.Smooth.exists_etaleCover_factorization`: the étale-local slicing of a
+  smooth morphism, through smooth morphisms of affine schemes.
 
 ## References
 
@@ -97,6 +99,32 @@ theorem exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Flat f
       (∀ i, Etale (p i)) ∧ (∀ x : X, ∃ (i : ι) (y : U i), (p i).base y = x) ∧
       (∀ i, Etale (r i)) ∧ (∀ i, Flat (q i)) ∧ (∀ i, LocallyOfFinitePresentation (q i)) ∧
       (∀ i, IsAffineHom (q i)) ∧ (∀ i, GeometricallyConnected (q i)) ∧
+      (∀ i, ∃ s : V i ⟶ U i, s ≫ q i = 𝟙 (V i)) ∧ (∀ i, q i ≫ r i = p i ≫ f) :=
+  sorry
+
+/-- **Slicing a smooth morphism** (blueprint `sbc-lem-slicing`). Let `f : X ⟶ S` be smooth.
+Then there is an étale covering `p i : U i ⟶ X` of `X` such that each composite `p i ≫ f`
+factors as `q i ≫ r i` with `r i : V i ⟶ S` étale and `q i : U i ⟶ V i` a smooth morphism of
+affine schemes with geometrically connected fibres admitting a section:
+
+```
+U i --q i--> V i
+ |            |
+p i          r i
+ v            v
+ X ----f----> S
+```
+
+This is Stacks `0EY4`. The section comes from étale quasi-sections, and the schemes can be taken
+affine since the geometrically connected fibres of a smooth morphism are geometrically
+irreducible, so that they stay connected after shrinking to affine opens. -/
+@[stacks 0EY4]
+theorem Smooth.exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
+    ∃ (ι : Type u) (U : ι → Scheme.{u}) (p : ∀ i, U i ⟶ X) (V : ι → Scheme.{u})
+      (q : ∀ i, U i ⟶ V i) (r : ∀ i, V i ⟶ S),
+      (∀ i, Etale (p i)) ∧ (∀ x : X, ∃ (i : ι) (y : U i), (p i).base y = x) ∧
+      (∀ i, Etale (r i)) ∧ (∀ i, Smooth (q i)) ∧ (∀ i, IsAffine (U i)) ∧
+      (∀ i, IsAffine (V i)) ∧ (∀ i, GeometricallyConnected (q i)) ∧
       (∀ i, ∃ s : V i ⟶ U i, s ≫ q i = 𝟙 (V i)) ∧ (∀ i, q i ≫ r i = p i ≫ f) :=
   sorry
 

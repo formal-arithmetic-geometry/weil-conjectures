@@ -15,6 +15,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
@@ -59,6 +60,10 @@ leading coefficient whenever that function is a numerical polynomial of degree a
   invertible module on a connected noetherian scheme of dimension `0` has degree `0`.
 - `AlgebraicGeometry.IsAmple.pullback`: the restriction of an ample module to a closed subscheme
   is ample.
+- `AlgebraicGeometry.IsAmple.pullback_of_field` and `AlgebraicGeometry.IsVeryAmple.of_pullback`:
+  ampleness is stable under field extension, and very ampleness descends along it.
+- `AlgebraicGeometry.isAffine_compl_of_isAmple_dual_toModules`: the complement of an effective
+  Cartier divisor with ample line bundle is affine.
 - `AlgebraicGeometry.IsAmple.tensorPow`: positive tensor powers of an ample module are ample.
 - `AlgebraicGeometry.IsVeryAmple.tensorObj`, `AlgebraicGeometry.IsAmple.tensorObj`: tensor
   products of very ample, respectively ample, modules are very ample, respectively ample.
@@ -215,7 +220,9 @@ variable (K) [X.Over (Spec (.of K))]
 a field `K` is finite-dimensional over `K`. This is a special case of the finiteness theorem
 for the cohomology of coherent modules on proper schemes (EGA III, 3.2.1).
 
-This is used in the proof of blueprint `lem-sc-ample-positive-degree`. -/
+For `M = 𝒪_X` on a curve, this is the finiteness of the genus `dim_k H¹(X, 𝒪_X)`
+(blueprint `lem-pc-genus-well-defined`). This is used in the proof of blueprint
+`lem-sc-ample-positive-degree`. -/
 instance finiteDimensional_H [IsProper (X ↘ Spec (.of K))] (M : X.Modules) [M.IsInvertible]
     (q : ℕ) : FiniteDimensional K (M.H q) :=
   sorry
@@ -288,6 +295,65 @@ theorem IsAmple.tensorObj {f : X ⟶ Spec (.of K)} {L M : X.Modules} (hL : IsAmp
   refine ⟨a * b, Nat.mul_pos ha hb, ((hLa.tensorPow hb).tensorObj (hMb.tensorPow ha)).of_iso ?_⟩
   exact ((L.tensorPowMulIso a b).symm ⊗ᵢ ((M.tensorPowMulIso b a).symm ≪≫
     eqToIso (congrArg M.tensorPow (Nat.mul_comm b a)))) ≪≫ (L.tensorPowTensorObjIso M _).symm
+
+/-- **Very ampleness is stable under field extension.** If `M = i^* 𝒪(1)` for a closed
+immersion `i : X ⟶ ℙ(n; k)`, then for a field extension `K/k` the base change `M_K` is the
+pullback of `𝒪(1)` along the base change `i_K : X_K ⟶ ℙ(n; K)` of `i`, which is again a closed
+immersion (Stacks 01JY).
+
+(blueprint: `lem-pc-very-ample-ample`, `lem-pc-closed-imm-base-change`) -/
+theorem IsVeryAmple.pullback_of_field {k : Type u} [Field k] {f : X ⟶ Spec (.of k)}
+    {M : X.Modules} (h : IsVeryAmple f M) (K : Type u) [Field K] [Algebra k K] :
+    IsVeryAmple (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+      ((Scheme.Modules.pullback
+        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M) :=
+  sorry
+
+/-- **Ampleness is stable under field extension**, by
+`AlgebraicGeometry.IsVeryAmple.pullback_of_field` applied to a very ample tensor power.
+
+(blueprint: `lem-pc-very-ample-ample`) -/
+theorem IsAmple.pullback_of_field {k : Type u} [Field k] {f : X ⟶ Spec (.of k)}
+    {M : X.Modules} (h : IsAmple f M) (K : Type u) [Field K] [Algebra k K] :
+    IsAmple (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+      ((Scheme.Modules.pullback
+        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M) := by
+  obtain ⟨m, hm, hv⟩ := h
+  exact ⟨m, hm, (hv.pullback_of_field K).of_iso
+    (Scheme.Modules.nonempty_pullback_tensorPow_iso _ M m).some⟩
+
+/-- **Very ampleness descends along a field extension.** Let `X` be proper over a field `k`, let
+`M` be an invertible `𝒪_X`-module and `K/k` a field extension such that `M_K` is very ample on
+`X_K`. Then `M` is very ample. The closed immersion `X_K ⟶ ℙ(n; K)` is given by finitely many
+sections of `M_K`, which lie in the `K`-span of finitely many sections of `M`, since
+`H⁰(X_K, M_K) = H⁰(X, M) ⊗_k K`; these define a morphism `X ⟶ ℙ(V)` whose base change to `K`
+is a closed immersion, hence which is a closed immersion by fpqc descent.
+
+(blueprint: `lem-pc-very-ample-descends`) -/
+theorem IsVeryAmple.of_pullback {k : Type u} [Field k] (f : X ⟶ Spec (.of k)) [IsProper f]
+    (K : Type u) [Field K] [Algebra k K] (M : X.Modules) [M.IsInvertible]
+    (h : IsVeryAmple (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+      ((Scheme.Modules.pullback
+        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M)) :
+    IsVeryAmple f M :=
+  sorry
+
+open scoped Scheme.Modules in
+/-- **The complement of an ample effective divisor is affine.** Let `X` be proper over a field
+`k` and `D ⊆ X` an effective Cartier divisor, with invertible ideal sheaf `J = 𝒪_X(-D)`, whose
+line bundle `𝒪_X(D) = J.toModulesᵛ` is ample. Then `X \ D` is affine, where the open
+complement of `D` is presented by an open immersion `j` whose range is the complement of the
+support of `J`. Choose `m` with `𝒪_X(mD)` very ample, embedding `X` by the complete linear
+system into `ℙ^N`; the `m`-th power of the canonical section of `𝒪_X(D)` is the pullback of a
+linear form `ℓ`, so `X \ D` is a closed subscheme of the affine space `ℙ^N \ V(ℓ)`.
+
+(blueprint: `lem-sc-ample-complement-affine`) -/
+theorem isAffine_compl_of_isAmple_dual_toModules {k : Type u} [Field k]
+    (f : X ⟶ Spec (.of k)) [IsProper f] {J : X.IdealSheafData} (hJ : J.IsInvertible)
+    (hample : IsAmple f J.toModulesᵛ) {V : Scheme.{u}} (j : V ⟶ X) [IsOpenImmersion j]
+    (hj : Set.range j.base = (J.support : Set X)ᶜ) :
+    IsAffine V :=
+  sorry
 
 /-- **An ample module on a connected proper curve has positive degree.** Let `K` be
 algebraically closed, `X` a connected proper curve over `K` and `L` an ample invertible

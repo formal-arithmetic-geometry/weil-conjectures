@@ -704,6 +704,7 @@ public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
 public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueFieldBaseChange
 public import WeilConjectures.Mathlib.RingTheory.Etale.Section
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
+public import WeilConjectures.Mathlib.RingTheory.Extension.Presentation.Submersive
 public import WeilConjectures.Mathlib.RingTheory.Flat.DescentAlgebra
 public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Descent
@@ -739,6 +740,7 @@ public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 public import WeilConjectures.Mathlib.RingTheory.RingHom.PurelyInseparable
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth
+public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Chevalley
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Noetherian
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
@@ -941,6 +943,7 @@ public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.OpenImmersion
+public import WeilConjectures.WeilSheaf.Realizable
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.ZetaFunction
