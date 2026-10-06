@@ -101,6 +101,11 @@ theorem inv_mem_integers_of_sub_one_div {a : E}
   rw [mem_integers_iff, map_inv₀, nnnorm_inv, inv_le_one₀ (lt_of_lt_of_le zero_lt_one hone)]
   exact hone
 
+/-- The norm of a natural number `m` in `E ⊆ ℚ̄_ℓ` is its `ℓ`-adic norm. -/
+theorem norm_algebraMap_natCast (m : ℕ) :
+    ‖algebraMap E (PadicAlgCl l) (m : E)‖ = ‖(m : ℚ_[l])‖ := by
+  rw [map_natCast, ← map_natCast (algebraMap ℚ_[l] (PadicAlgCl l)), PadicAlgCl.norm_extends]
+
 end Integers
 
 variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl l)]
@@ -160,6 +165,48 @@ theorem summable_logSeries {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E) :
     letI := normedFieldOfAlgebra l E
     Summable fun n : ℕ ↦ (-1) ^ n * x ^ (n + 1) / (n + 1 : ℕ) := by
   sorry
+
+omit instQ instT instF in
+/-- Blueprint `sk-d-real-log`: Small logarithm.
+
+On `ℓ² 𝒪_E` the logarithm does not increase the norm, `‖log (1 + x)‖ ≤ ‖x‖`: the term
+`x ^ (n + 1) / (n + 1)` has norm `‖x‖ ^ (n + 1) / ‖n + 1‖ ≤ ‖x‖`, as
+`‖x‖ ^ n ≤ ‖ℓ‖ ^ (2 n) ≤ ‖ℓ‖ ^ v_ℓ(n + 1) = ‖n + 1‖`, and the norm is nonarchimedean. In
+particular `u ↦ log u` is continuous at `1`. -/
+theorem norm_smallLog_le {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E) :
+    ‖algebraMap E (PadicAlgCl l) (smallLog l E x)‖ ≤ ‖algebraMap E (PadicAlgCl l) x‖ := by
+  let := normedFieldOfAlgebra l E
+  have := isUltrametricDist_ofAlgebra l E
+  have hnorm (y : E) : ‖y‖ = ‖algebraMap E (PadicAlgCl l) y‖ := rfl
+  rw [← hnorm, ← hnorm, smallLog]
+  refine IsUltrametricDist.norm_tsum_le_of_forall_le_of_nonneg (norm_nonneg _) fun n ↦ ?_
+  have hl : (1 : ℝ) < l := by exact_mod_cast (Fact.out : l.Prime).one_lt
+  set r : ℝ := (l : ℝ)⁻¹ with hr
+  have hr0 : 0 < r := inv_pos.mpr (zero_lt_one.trans hl)
+  have hr1 : r ≤ 1 := inv_le_one_of_one_le₀ hl.le
+  have hlE : ‖(l : E)‖ = r := by
+    rw [hnorm, norm_algebraMap_natCast, Padic.norm_p]
+  have hxr : ‖x‖ ≤ r ^ 2 := by
+    have h := (mem_integers_iff l E _).mp hx
+    have h' : ‖x / (l : E) ^ 2‖ ≤ 1 := by
+      rw [hnorm]
+      exact_mod_cast h
+    rwa [norm_div, norm_pow, hlE, div_le_one (pow_pos hr0 2)] at h'
+  set v := padicValNat l (n + 1)
+  have hv : v ≤ 2 * n := by
+    rcases Nat.eq_zero_or_pos n with rfl | hn
+    · simp [v]
+    · have := (padicValNat_le_nat_log (p := l) (n + 1)).trans (Nat.log_le_self l (n + 1))
+      omega
+  have hn1 : ‖((n + 1 : ℕ) : E)‖ = r ^ v := by
+    rw [hnorm, norm_algebraMap_natCast, Padic.norm_eq_zpow_neg_valuation (by exact_mod_cast
+      (Nat.succ_ne_zero n)), Padic.valuation_natCast, hr, inv_pow, zpow_neg, zpow_natCast]
+  rw [norm_div, norm_mul, norm_pow, norm_pow, norm_neg, norm_one, one_pow, one_mul, hn1,
+    div_le_iff₀ (pow_pos hr0 v), pow_succ']
+  refine mul_le_mul_of_nonneg_left ?_ (norm_nonneg x)
+  calc ‖x‖ ^ n ≤ (r ^ 2) ^ n := pow_le_pow_left₀ (norm_nonneg x) hxr n
+    _ = r ^ (2 * n) := by rw [← pow_mul]
+    _ ≤ r ^ v := pow_le_pow_of_le_one hr0.le hr1 hv
 
 /-- Blueprint `sk-d-real-log`: Small logarithm.
 
