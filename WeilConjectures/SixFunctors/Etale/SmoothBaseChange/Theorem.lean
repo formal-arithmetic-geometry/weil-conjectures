@@ -170,7 +170,7 @@ theorem Etale.baseChangeProperty_of_smooth (n : ℕ) (hΛ : (n : Λ) = 0)
     (p : X ⟶ S) [Smooth p] (hn : IsUnit (n : Γ(S, ⊤))) (q : ℕ) :
     Etale.BaseChangeProperty Λ p q :=
   Etale.baseChangeProperty_of_smooth_of_relativeDimension_one Λ n q
-    (fun X' S' p' _ _ _ hn' ↦
+    (fun _ _ p' _ _ _ hn' ↦
       (Etale.universalBaseChangeProperty_of_smoothOfRelativeDimension_one (p := p') n hn' hΛ
         q).baseChangeProperty)
     p hn
