@@ -6,10 +6,12 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # The étale-local normal form of a smooth morphism
@@ -36,6 +38,10 @@ The index type of the affine space is `ULift.{u} (Fin d)`, since
   dimension `n`.
 - `AlgebraicGeometry.topologicalKrullDim_le_of_smoothOfRelativeDimension`: a scheme smooth of
   relative dimension `n` over a field has dimension at most `n`.
+- `AlgebraicGeometry.topologicalKrullDimAt_eq_of_smoothOfRelativeDimension`: a scheme smooth of
+  relative dimension `n` over a field has local dimension `n` at every point.
+- `AlgebraicGeometry.Smooth.isLocallyConstant_topologicalKrullDimAt_asFiber`: for a smooth
+  morphism `f : X ⟶ Y`, the function `x ↦ dim_x (X_{f(x)})` is locally constant.
 - `AlgebraicGeometry.AffineSpace.smoothOfRelativeDimension_over`: the affine space `𝔸(n; S)` in
   finitely many variables is smooth of relative dimension `#n` over `S`.
 - `AlgebraicGeometry.AffineSpace.smoothOfRelativeDimension_reindex_succ`: forgetting the first
@@ -220,8 +226,8 @@ theorem topologicalKrullDim_eq_of_smoothOfRelativeDimension {K : Type u} [Field 
 
 open Limits in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The affine space `𝔸(n; S)` over `S` in finitely many variables is smooth of relative
-dimension `#n` over `S`. -/
+/-- **Affine space is smooth** (blueprint `sbc-lem-affine-space-smooth`). The affine space
+`𝔸(n; S)` over `S` in finitely many variables is smooth of relative dimension `#n` over `S`. -/
 instance AffineSpace.smoothOfRelativeDimension_over (n : Type u) [Finite n] (S : Scheme.{u}) :
     SmoothOfRelativeDimension (Nat.card n) (𝔸(n; S) ↘ S) :=
   have := smoothOfRelativeDimension_isStableUnderBaseChange (n := Nat.card n)
@@ -309,5 +315,57 @@ theorem Smooth.exists_smoothOfRelativeDimension_resLE {X Y : Scheme.{u}} (f : X 
       (RingHom.Locally (RingHom.IsStandardSmoothOfRelativeDimension P.dimension)))
       (arrowResLEAppIso f U V e)).mpr
     (RingHom.locally_of RingHom.isStandardSmoothOfRelativeDimension_respectsIso _ hd)
+
+/-- A scheme `X` smooth of relative dimension `n` over a field has local dimension `n` at every
+point: every open neighbourhood of a point is a nonempty scheme smooth of relative dimension `n`
+over the field, hence of dimension `n` by
+`AlgebraicGeometry.topologicalKrullDim_eq_of_smoothOfRelativeDimension`. -/
+theorem topologicalKrullDimAt_eq_of_smoothOfRelativeDimension {K : Type u} [Field K]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) (n : ℕ) [SmoothOfRelativeDimension n f] (x : X) :
+    topologicalKrullDimAt x = n := by
+  refine topologicalKrullDimAt_eq_of_forall fun (U : X.Opens) hU ↦ ?_
+  have : Nonempty U.toScheme := ⟨⟨x, hU⟩⟩
+  have : SmoothOfRelativeDimension n (U.ι ≫ f) := by
+    have : SmoothOfRelativeDimension (0 + n) (U.ι ≫ f) := inferInstance
+    simpa using this
+  exact topologicalKrullDim_eq_of_smoothOfRelativeDimension (U.ι ≫ f) n
+
+open Limits in
+/-- **Local constancy of the relative dimension** (blueprint
+`sbc-lem-smooth-relative-dimension-locally-constant`). For a smooth morphism `f : X ⟶ Y`, the
+function `x ↦ dim_x (X_{f(x)})`, the local dimension at `x` of the fibre of `f` through `x`, is
+locally constant on `X`.
+
+Near `x`, the morphism `f` restricts to a morphism `V ⟶ U` of open subschemes which is smooth
+of some relative dimension `d`; for `x' ∈ V` the open subscheme `V ∩ X_{f(x')}` of the fibre
+is its base change to `κ(f(x'))`, smooth of relative dimension `d` over that field, so that
+`dim_{x'} (X_{f(x')}) = d` by
+`AlgebraicGeometry.topologicalKrullDimAt_eq_of_smoothOfRelativeDimension`. -/
+@[stacks 02G1]
+theorem Smooth.isLocallyConstant_topologicalKrullDimAt_asFiber {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [Smooth f] : IsLocallyConstant fun x : X ↦ topologicalKrullDimAt (f.asFiber x) := by
+  rw [IsLocallyConstant.iff_eventually_eq]
+  intro x
+  obtain ⟨U, V, -, -, hx, e, d, hd⟩ := Smooth.exists_smoothOfRelativeDimension_resLE f x
+  suffices ∀ x' ∈ V, topologicalKrullDimAt (f.asFiber x') = d by
+    filter_upwards [V.isOpen.mem_nhds hx] with x' hx' using (this x' hx').trans (this x hx).symm
+  intro x' hx'
+  let W := (f.fiberι (f x')) ⁻¹ᵁ V
+  have hW : f.asFiber x' ∈ W := by
+    change f.fiberι _ (f.asFiber x') ∈ V
+    rwa [Scheme.Hom.fiberι_asFiber]
+  have : SmoothOfRelativeDimension d (V.ι ≫ f) := by
+    rw [← Scheme.Hom.resLE_comp_ι f e]
+    have : SmoothOfRelativeDimension (d + 0) (f.resLE U V e ≫ U.ι) := inferInstance
+    simpa using this
+  have hpb : IsPullback (f.fiberι (f x') ∣_ V) (W.ι ≫ f.fiberToSpecResidueField (f x'))
+      (V.ι ≫ f) (Y.fromSpecResidueField (f x')) :=
+    (isPullback_morphismRestrict (f.fiberι (f x')) V).paste_vert (IsPullback.of_hasPullback _ _)
+  have : SmoothOfRelativeDimension d (W.ι ≫ f.fiberToSpecResidueField (f x')) := by
+    have := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
+    exact MorphismProperty.of_isPullback hpb inferInstance
+  rw [← IsOpen.topologicalKrullDimAt_eq W.isOpen hW]
+  exact @topologicalKrullDimAt_eq_of_smoothOfRelativeDimension _ _ _
+    (W.ι ≫ f.fiberToSpecResidueField (f x')) d this ⟨_, hW⟩
 
 end AlgebraicGeometry

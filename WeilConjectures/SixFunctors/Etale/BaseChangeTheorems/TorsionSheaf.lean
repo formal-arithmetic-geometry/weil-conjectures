@@ -124,7 +124,8 @@ instance isTorsionSheaf_upperStar {Λ : Type (u + 1)} [CommRing Λ] {X Y : Schem
 /-- A sheaf `F` of `Λ`-modules on the small étale site of `T` is *torsion of orders
 invertible on `S`*, for a second scheme `S`, if every element of every geometric stalk of
 `F` is killed by a positive integer which is invertible on `S`, i.e. which is a unit of
-`Γ(S, ⊤)`.
+`Γ(S, ⊤)` (blueprint `sk-def-smooth`, "allowed torsion"). No common annihilator is required,
+and invertibility is read globally on `S`, not only near the support of `F`.
 
 This strengthening of `AlgebraicGeometry.Scheme.IsTorsionSheaf` is the coefficient
 condition of the smooth base change theorem, where `T` lies over `S` along the morphism

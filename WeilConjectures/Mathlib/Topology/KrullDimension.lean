@@ -18,6 +18,11 @@ dimensions of the members of an open cover. In an irreducible `T₀` space of di
 one, every point outside a nonempty open subset is closed; if the space is moreover quasi-sober
 and noetherian, there are only finitely many such points.
 
+## Main definitions
+
+- `topologicalKrullDimAt`: the local dimension `dim_x X` of a space at a point, the infimum of
+  the dimensions of the open neighbourhoods of the point.
+
 ## Main statements
 
 - `coheight_le_topologicalKrullDim`: the coheight of a point for the specialization order is
@@ -27,6 +32,8 @@ and noetherian, there are only finitely many such points.
 - `IsOpen.finite_compl_of_topologicalKrullDim_le_one`: the complement of a nonempty open subset
   is finite.
 - `IsOpen.isClosed_singleton_of_mem_compl`: each point of that complement is closed.
+- `IsOpen.topologicalKrullDimAt_eq`: the local dimension at a point of an open subset agrees
+  with the local dimension in the ambient space.
 - `topologicalKrullDim_le_of_specializingMap`, `topologicalKrullDim_le_of_continuous`: comparison
   of the dimensions of two sober spaces along a specializing surjection, respectively along a
   continuous map that is injective on specializations.
@@ -316,3 +323,42 @@ theorem exists_topologicalKrullDim_closure_singleton_eq_one
   rfl
 
 end ClosurePoint
+
+section LocalDimension
+
+variable {X : Type*} [TopologicalSpace X]
+
+/-- The *local dimension* `dim_x X` of a topological space `X` at a point `x`: the infimum of the
+topological Krull dimensions of the open neighbourhoods of `x` [Stacks 04NA]. -/
+noncomputable def topologicalKrullDimAt (x : X) : WithBot ℕ∞ :=
+  ⨅ (U : Opens X) (_ : x ∈ U), topologicalKrullDim U
+
+/-- If every open neighbourhood of `x` has dimension `n`, then `dim_x X = n`. -/
+theorem topologicalKrullDimAt_eq_of_forall {x : X} {n : WithBot ℕ∞}
+    (h : ∀ U : Opens X, x ∈ U → topologicalKrullDim U = n) : topologicalKrullDimAt x = n :=
+  le_antisymm ((iInf₂_le ⊤ trivial).trans (h ⊤ trivial).le) (le_iInf₂ fun U hU ↦ (h U hU).ge)
+
+/-- The local dimension at a point of an open subset `W` agrees with the local dimension in the
+ambient space: the open neighbourhoods of `x` contained in `W` are cofinal. -/
+theorem IsOpen.topologicalKrullDimAt_eq {W : Set X} (hW : IsOpen W) {x : X} (hx : x ∈ W) :
+    topologicalKrullDimAt (⟨x, hx⟩ : W) = topologicalKrullDimAt x := by
+  apply le_antisymm
+  · refine le_iInf₂ fun U hU ↦ ?_
+    let U' : Opens W := ⟨Subtype.val ⁻¹' U, U.isOpen.preimage continuous_subtype_val⟩
+    refine (iInf₂_le U' hU).trans ?_
+    refine IsInducing.topologicalKrullDim_le
+      (f := fun p : U' ↦ (⟨p.1.1, p.2⟩ : U)) (.of_comp (g := Subtype.val) (by fun_prop) ?_ ?_)
+    · exact continuous_subtype_val
+    · change IsInducing ((Subtype.val : W → X) ∘ (Subtype.val : U' → W))
+      exact IsInducing.subtypeVal.comp IsInducing.subtypeVal
+  · refine le_iInf₂ fun U' hU' ↦ ?_
+    let U : Opens X := ⟨Subtype.val '' (U' : Set W), hW.isOpenMap_subtype_val _ U'.isOpen⟩
+    refine (iInf₂_le U ⟨_, hU', rfl⟩).trans ?_
+    refine IsInducing.topologicalKrullDim_le
+      (f := fun p : U ↦ (⟨⟨p.1, by obtain ⟨q, -, hq⟩ := p.2; exact hq ▸ q.2⟩,
+        Subtype.val_injective.mem_set_image.mp p.2⟩ : U'))
+      (.of_comp (g := Subtype.val ∘ Subtype.val) (by fun_prop) ?_ ?_)
+    · exact continuous_subtype_val.comp continuous_subtype_val
+    · exact IsInducing.subtypeVal
+
+end LocalDimension
