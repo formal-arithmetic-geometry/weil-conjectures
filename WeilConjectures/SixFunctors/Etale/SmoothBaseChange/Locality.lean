@@ -46,7 +46,9 @@ namespace AlgebraicGeometry
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} {p : X ⟶ S}
 
-/-- Blueprint `sbc-lem-etale-locality`: Etale locality of the base-change map (degree `q`).
+/-- Etale locality of the base-change property (degree `q`). This is a consequence of
+blueprint `sbc-lem-etale-locality` (Stacks 0EZR), which is stated for a single Cartesian square
+and a single sheaf.
 
 Let `a_i : U_i ⟶ X` be a jointly surjective family of étale morphisms such that each composite
 `U_i ⟶ X ⟶ S` factors as `f_i : U_i ⟶ V_i` followed by an étale morphism `b_i : V_i ⟶ S`. If
@@ -62,8 +64,9 @@ theorem Etale.BaseChangeProperty.of_etale_cover {q : ℤ} {ι : Type u} {U V : �
     Etale.BaseChangeProperty Λ p q :=
   sorry
 
-/-- Blueprint `sbc-lem-base-change-composition`: Base change for a composite square
-(degree `q`).
+/-- Base change for composites (degree `q`). This is a consequence of blueprint
+`sbc-lem-base-change-composition` (Stacks 0EZS), which is stated for a single composite square
+and a single sheaf.
 
 If `BC(p₁, Λ, q)` and `BC(p₂, Λ, q)` hold, then so does `BC(p₁ ≫ p₂, Λ, q)`: a Cartesian square
 on `p₁ ≫ p₂` along a quasi-compact quasi-separated `g` is the pasting of a Cartesian square on

@@ -7,10 +7,10 @@ module
 
 public import Mathlib
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Induction
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality
 
 /-!

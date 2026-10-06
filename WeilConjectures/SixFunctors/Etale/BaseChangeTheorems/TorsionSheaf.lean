@@ -153,9 +153,12 @@ lemma Scheme.IsTorsionSheaf.of_isTorsionSheafOfInvertibleOrder
 
 /-- A sheaf `F` of `Λ`-modules which is torsion of orders invertible on `S` is the point of a
 colimit cocone over a filtered diagram of sheaves, each of which is killed by some positive
-integer `n` invertible on `S`. (One such diagram is that of the `n`-torsion subsheaves
-`F[n] = ker (n : F ⟶ F)`, ordered by divisibility; this lemma only records the existence of
-some such diagram, which is the form in which it is used.) -/
+integer `n` invertible on `S`.
+
+This follows from blueprint `lemma-weil-pbc-torsion-filtered-union`, which says that `F` is the
+colimit of its `n`-torsion subsheaves `F[n] = ker (n : F ⟶ F)` over the positive integers
+ordered by divisibility; this lemma only records the existence of some such diagram, which is
+the form in which it is used. -/
 theorem Scheme.IsTorsionSheafOfInvertibleOrder.exists_isColimit
     (Λ : Type (u + 1)) [CommRing Λ] (S : Scheme.{u}) {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
