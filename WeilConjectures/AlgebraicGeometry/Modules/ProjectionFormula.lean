@@ -27,8 +27,14 @@ the tensor product, and the projection formula `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N
   invertible modules are invertible.
 - `AlgebraicGeometry.Scheme.Modules.IsInvertible.isQuasicoherent`: an invertible module is
   quasi-coherent.
+- `AlgebraicGeometry.Scheme.Modules.IsInvertible.of_sheafOfModules`,
+  `AlgebraicGeometry.Scheme.Modules.IsInvertible.sheafOfModules_isInvertible`: the two notions of
+  invertibility, `AlgebraicGeometry.Scheme.Modules.IsInvertible` and
+  `SheafOfModules.IsInvertible`, agree.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_pullback_iso`: the projection formula
   for an invertible module.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_pullback_iso_self`: if `g_* 𝒪_X ≅ 𝒪_Y`,
+  then `g_* (g^* N) ≅ N` for every invertible `𝒪_Y`-module `N`.
 -/
 
 @[expose] public section
@@ -88,6 +94,30 @@ instance IsInvertible.tensorPow (M : X.Modules) [M.IsInvertible] (m : ℕ) :
 
 end Tensor
 
+section Comparison
+
+/-- A sheaf of modules which is invertible in the sense of `SheafOfModules.IsInvertible` (locally
+free of rank one) is invertible in the sense of `AlgebraicGeometry.Scheme.Modules.IsInvertible`
+(locally isomorphic to `𝒪_X`). -/
+lemma IsInvertible.of_sheafOfModules (M : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} M] :
+    M.IsInvertible where
+  exists_isoUnit x := by
+    obtain ⟨U, hx, ⟨e⟩⟩ := exists_mem_over_iso_unit M x
+    exact ⟨U, hx, ⟨pullbackIotaUnitIsoOfOverIso e⟩⟩
+
+/-- Conversely, an invertible module in the sense of
+`AlgebraicGeometry.Scheme.Modules.IsInvertible` is invertible in the sense of
+`SheafOfModules.IsInvertible`. -/
+lemma IsInvertible.sheafOfModules_isInvertible (M : X.Modules) [M.IsInvertible] :
+    SheafOfModules.IsInvertible.{u, u, u} M := by
+  choose U hU e using fun x : X ↦ IsInvertible.exists_isoUnit (M := M) x
+  refine SheafOfModules.isInvertible_of_forall_over_unit (M := M) U ?_ ?_
+  · rw [Opens.coversTop_iff]
+    exact IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ Opens.mem_iSup.mpr ⟨x, hU x⟩)
+  · exact fun x ↦ ⟨overIsoUnitOfPullbackIotaIso (e x).some⟩
+
+end Comparison
+
 section Quasicoherent
 
 /-- **An invertible module is quasi-coherent**, being locally isomorphic to the structure
@@ -114,6 +144,14 @@ theorem nonempty_pushforward_pullback_iso (g : X ⟶ Y) (N : Y.Modules) [N.IsInv
     Nonempty ((pushforward g).obj ((pullback g).obj N) ≅
       (pushforward g).obj (𝟙_ X.Modules) ⊗ N) :=
   sorry
+
+/-- If `g_* 𝒪_X ≅ 𝒪_Y`, then `g_* (g^* N) ≅ N` for every invertible `𝒪_Y`-module `N`: by the
+projection formula `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N ≅ 𝒪_Y ⊗ N ≅ N`. -/
+theorem nonempty_pushforward_pullback_iso_self (g : X ⟶ Y)
+    (e : (pushforward g).obj (𝟙_ X.Modules) ≅ 𝟙_ Y.Modules) (N : Y.Modules) [N.IsInvertible] :
+    Nonempty ((pushforward g).obj ((pullback g).obj N) ≅ N) := by
+  obtain ⟨e'⟩ := nonempty_pushforward_pullback_iso g N
+  exact ⟨e' ≪≫ (e ⊗ᵢ Iso.refl N) ≪≫ λ_ N⟩
 
 end ProjectionFormula
 
