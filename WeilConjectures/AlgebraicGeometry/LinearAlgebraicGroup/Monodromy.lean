@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.GroupTheory.Commutator.Basic
+public import Mathlib.GroupTheory.SemidirectProduct
 public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import Mathlib.RepresentationTheory.Semisimple
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie
@@ -61,6 +62,9 @@ monodromy groups and read on `k`-points.
   product `G° = Z(G°)° H°`, as surjectivity of the multiplication morphism of group schemes and on
   `k`-points.
 * `RepresentedDegreeDatum.exists_isPositiveCentralPair`: a positive central representative.
+* `RepresentedDegreeDatum.ArithmeticMonodromyExtension`,
+  `RepresentedDegreeDatum.arithmeticMonodromyExtensionHom`: the `k`-points `H(k) ⋊ ℤ` of the
+  arithmetic monodromy extension and its map `(h, m) ↦ h Fᵐ` to matrices.
 * `RepresentedDegreeDatum.map`, `RepresentedDegreeDatum.IsPositiveCentralPair.map`: a positive
   central pair transported along a polynomial homomorphism `GL n k →* GL m k`, such as the
   exterior power (`Matrix.GeneralLinearGroup.exists_algHom_comp_eq_evalAlgHom_exteriorPower`).
@@ -88,7 +92,11 @@ implement `sk-i-restriction`, the normality, commutator and Lie statements also
 the `G` part of `lem-ag-closure-semisimple`;
 `RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy` and
 `RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq` implement `sk-p-product`;
-`RepresentedDegreeDatum.exists_isPositiveCentralPair` implements `sk-p-central`.
+`RepresentedDegreeDatum.exists_isPositiveCentralPair` implements `sk-p-central`;
+`RepresentedDegreeDatum.frobeniusConj`, `RepresentedDegreeDatum.frobeniusAction`,
+`RepresentedDegreeDatum.ArithmeticMonodromyExtension` and
+`RepresentedDegreeDatum.arithmeticMonodromyExtensionHom` implement, on `k`-points,
+`def-wf-arithmetic-monodromy-extension`.
 -/
 
 @[expose] public section
@@ -303,6 +311,84 @@ theorem mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy {g : GL n k}
     (by
       rintro _ ⟨w, rfl⟩ y hy
       simpa [asRepresentation] using S.apply_mem_toSubmodule w hy) hg hx
+
+section ArithmeticMonodromyExtension
+
+/-- Conjugation by an element of the arithmetic monodromy group preserves the geometric one. -/
+theorem mul_mul_inv_mem_zeroLocus_geometricMonodromy {g h : GL n k}
+    (hg : g ∈ zeroLocus D.arithmeticMonodromy k) (hh : h ∈ zeroLocus D.geometricMonodromy k) :
+    g * h * g⁻¹ ∈ zeroLocus D.geometricMonodromy k := by
+  have h' := (D.normal_zeroLocus_geometricMonodromy k).conj_mem
+    ⟨h, D.zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy k hh⟩
+    (Subgroup.mem_subgroupOf.2 hh) ⟨g, hg⟩
+  exact Subgroup.mem_subgroupOf.1 h'
+
+theorem frobenius_mem_zeroLocus_arithmeticMonodromy :
+    D.frobenius ∈ zeroLocus D.arithmeticMonodromy k :=
+  D.rep_mem_zeroLocus_arithmeticMonodromy _
+
+/-- The automorphism `α : h ↦ F h F⁻¹` of the `k`-points of the geometric monodromy group.
+(blueprint: `def-wf-arithmetic-monodromy-extension`) -/
+noncomputable def frobeniusConj : MulAut (zeroLocus D.geometricMonodromy k) where
+  toFun h := ⟨D.frobenius * h * D.frobenius⁻¹,
+    D.mul_mul_inv_mem_zeroLocus_geometricMonodromy D.frobenius_mem_zeroLocus_arithmeticMonodromy
+      h.2⟩
+  invFun h := ⟨D.frobenius⁻¹ * h * D.frobenius⁻¹⁻¹,
+    D.mul_mul_inv_mem_zeroLocus_geometricMonodromy
+      (inv_mem D.frobenius_mem_zeroLocus_arithmeticMonodromy) h.2⟩
+  left_inv h := Subtype.ext <| by group
+  right_inv h := Subtype.ext <| by group
+  map_mul' h h' := Subtype.ext <| by
+    simp only [Subgroup.coe_mul]
+    group
+
+@[simp]
+theorem coe_frobeniusConj_apply (h : zeroLocus D.geometricMonodromy k) :
+    (D.frobeniusConj h : GL n k) = D.frobenius * h * D.frobenius⁻¹ :=
+  rfl
+
+/-- The action `m ↦ αᵐ` of `ℤ` on the `k`-points of the geometric monodromy group.
+(blueprint: `def-wf-arithmetic-monodromy-extension`) -/
+noncomputable def frobeniusAction : Multiplicative ℤ →* MulAut (zeroLocus D.geometricMonodromy k) :=
+  zpowersHom _ D.frobeniusConj
+
+theorem coe_frobeniusAction_apply (m : Multiplicative ℤ) (h : zeroLocus D.geometricMonodromy k) :
+    (D.frobeniusAction m h : GL n k) = D.frobenius ^ m.toAdd * h * (D.frobenius ^ m.toAdd)⁻¹ := by
+  rw [frobeniusAction, zpowersHom_apply]
+  induction m.toAdd using Int.induction_on generalizing h with
+  | zero => simp
+  | succ m ih =>
+    rw [zpow_add_one, MulAut.mul_apply, ih, coe_frobeniusConj_apply, zpow_add_one]
+    group
+  | pred m ih =>
+    rw [zpow_sub_one, MulAut.mul_apply, ih, MulAut.inv_apply, zpow_sub_one]
+    change D.frobenius ^ (-(m : ℤ)) * (D.frobenius⁻¹ * h * D.frobenius⁻¹⁻¹) *
+      (D.frobenius ^ (-(m : ℤ)))⁻¹ = _
+    group
+
+/-- The `k`-points `G_arith(ρ)(k) = H(k) ⋊ ℤ` of the arithmetic monodromy extension, with
+multiplication `(h, m) (h', n) = (h αᵐ(h'), m + n)`; its degree map `deg_G` is
+`SemidirectProduct.rightHom`.
+(blueprint: `def-wf-arithmetic-monodromy-extension`) -/
+abbrev ArithmeticMonodromyExtension : Type _ :=
+  zeroLocus D.geometricMonodromy k ⋊[D.frobeniusAction] Multiplicative ℤ
+
+/-- The map `j : G_arith(ρ)(k) → GL n k`, `(h, m) ↦ h Fᵐ`, to matrices.
+(blueprint: `def-wf-arithmetic-monodromy-extension`) -/
+noncomputable def arithmeticMonodromyExtensionHom : D.ArithmeticMonodromyExtension →* GL n k :=
+  SemidirectProduct.lift (zeroLocus D.geometricMonodromy k).subtype (zpowersHom _ D.frobenius)
+    fun m ↦ by
+      ext h : 1
+      simp [coe_frobeniusAction_apply, - map_zpow]
+
+@[simp]
+theorem arithmeticMonodromyExtensionHom_inl_mul_inr (h : zeroLocus D.geometricMonodromy k)
+    (m : Multiplicative ℤ) :
+    D.arithmeticMonodromyExtensionHom (SemidirectProduct.inl h * SemidirectProduct.inr m) =
+      h * D.frobenius ^ m.toAdd := by
+  simp [arithmeticMonodromyExtensionHom]
+
+end ArithmeticMonodromyExtension
 
 section Map
 
