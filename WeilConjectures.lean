@@ -71,6 +71,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Image
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
+public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Representability
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
