@@ -36,6 +36,8 @@ is `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` in `map`/`comap` language.
   pulling back to zero is contained in the kernel;
 - `AlgebraicGeometry.Scheme.IdealSheafData.fg_ideal_comap_iff`: finite generation of the
   ideal of sections transfers across an open immersion;
+- `AlgebraicGeometry.Scheme.IdealSheafData.comap_mul`: pullback of ideal sheaves is
+  multiplicative;
 - `AlgebraicGeometry.Scheme.IdealSheafData.map_comap_of_isPullback`: flat base change, with
   `AlgebraicGeometry.Scheme.IdealSheafData.map_comap_opens` (restriction to an open) and
   `AlgebraicGeometry.Scheme.IdealSheafData.comap_map` (a quasi-compact flat monomorphism)
@@ -248,8 +250,19 @@ section Mul
 of an ideal sheaf is the extension of its ideal of sections along `Γ(Y, U) ⟶ Γ(X, V)`, and
 extension of ideals is multiplicative. -/
 theorem comap_mul (I J : Y.IdealSheafData) (f : X ⟶ Y) :
-    (I * J).comap f = I.comap f * J.comap f :=
-  sorry
+    (I * J).comap f = I.comap f * J.comap f := by
+  let ι := Σ' (U : Y.affineOpens) (V : X.affineOpens), V.1 ≤ f ⁻¹ᵁ U.1
+  refine ext_of_iSup_eq_top (ι := ι) (fun i ↦ i.2.1) ?_ fun ⟨U, V, e⟩ ↦ ?_
+  · rw [eq_top_iff]
+    intro x _
+    obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
+      Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (f x)) isOpen_univ
+    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVU⟩ :=
+      X.isBasis_affineOpens.exists_subset_of_mem_open (a := x) (ou := (f ⁻¹ᵁ U).2) hxU
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨⟨U, hU⟩, ⟨V, hV⟩, hVU⟩, hxV⟩
+  · simp only [ideal_mul, Pi.mul_apply]
+    rw [ideal_comap_appLE _ f U V e, ideal_comap_appLE _ f U V e, ideal_comap_appLE _ f U V e,
+      ideal_mul, Pi.mul_apply, Ideal.map_mul]
 
 end Mul
 

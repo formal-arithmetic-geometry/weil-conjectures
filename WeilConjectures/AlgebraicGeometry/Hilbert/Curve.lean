@@ -5,12 +5,14 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
@@ -73,6 +75,26 @@ lemma hilbertPresheaf_homEquiv_comp_val {d : ℕ} {H : Over S}
     (e.homEquiv (φ ≫ h)).1 = (e.homEquiv h).1.comap (baseChangeMap f φ) := by
   rw [e.homEquiv_comp]
   rfl
+
+/-- The empty subscheme `⊤` lies in `Hilb^0_{X/S}(T)`. -/
+lemma isHilbertSubscheme_top {X S : Scheme.{u}} (f : X ⟶ S) (T : Over S) :
+    IsHilbertSubscheme f 0 T ⊤ :=
+  ⟨inferInstance, inferInstance, inferInstance, fun t ↦ Scheme.Hom.finrank_eq_zero_of_isEmpty _ t⟩
+
+/-- The only element of `Hilb^0_{X/S}(T)` is the empty subscheme `⊤`. -/
+lemma IsHilbertSubscheme.eq_top_of_zero {X S : Scheme.{u}} {f : X ⟶ S} {T : Over S}
+    {I : (pullback f T.hom).IdealSheafData} (hI : IsHilbertSubscheme f 0 T I) : I = ⊤ := by
+  obtain ⟨_, _, _, h⟩ := hI
+  have : IsEmpty I.subscheme := ⟨fun x ↦ by
+    simpa [h] using Scheme.Hom.one_le_finrank_map (I.subschemeι ≫ pullback.snd f T.hom) x⟩
+  rw [← Scheme.IdealSheafData.support_eq_bot_iff, ← SetLike.coe_set_eq,
+    ← Scheme.IdealSheafData.range_subschemeι]
+  simp [Set.range_eq_empty]
+
+/-- `Hilb^0_{X/S}(T)` has at most one element. -/
+instance hilbertPresheaf_zero_subsingleton {X S : Scheme.{u}} (f : X ⟶ S) (T : (Over S)ᵒᵖ) :
+    Subsingleton ((hilbertPresheaf f 0).obj T) :=
+  ⟨fun I J ↦ Subtype.ext (I.2.eq_top_of_zero.trans J.2.eq_top_of_zero.symm)⟩
 
 /-- **The sum of two finite locally free divisors.** Let `f : X ⟶ S` be smooth of relative
 dimension `1` and let `D₁, D₂ ⊆ X_T` be closed subschemes, with ideals `I₁` and `I₂`, finite
@@ -162,6 +184,37 @@ section Curve
 
 variable {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
 
+/-- A geometrically integral smooth curve has a non-closed point, its generic point: otherwise
+it would be a single point, of dimension `0`. -/
+lemma exists_not_isClosed_singleton_of_smoothOfRelativeDimension_one
+    [SmoothOfRelativeDimension 1 f] [GeometricallyIntegral f] :
+    ∃ x : X, ¬ IsClosed ({x} : Set X) := by
+  have : IrreducibleSpace X := GeometricallyIrreducible.irreducibleSpace_of_subsingleton f
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  have hdim := (smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1).mp inferInstance
+  refine ⟨genericPoint X, fun h ↦ ?_⟩
+  have huniv : ({genericPoint X} : Set X) = Set.univ := by
+    rw [← h.closure_eq, (genericPoint_spec X).def]
+  have : Subsingleton X := ⟨fun a b ↦ by
+    have ha : a ∈ ({genericPoint X} : Set X) := huniv ▸ trivial
+    have hb : b ∈ ({genericPoint X} : Set X) := huniv ▸ trivial
+    exact ha.trans hb.symm⟩
+  have : DiscreteTopology X := inferInstance
+  have := topologicalKrullDim_zero_of_discreteTopology X
+  rw [hdim] at this
+  exact absurd this (by norm_num)
+
+/-- **Closed points of a smooth curve are effective Cartier divisors.** On a smooth curve over a
+field the local ring at a closed point `Q` is regular of dimension `1`, a discrete valuation
+ring; a uniformizer generates the reduced ideal of `Q` near `Q` and is a non-zerodivisor there,
+and away from `Q` the ideal is the unit ideal.
+
+(blueprint: `thm-pc-hilb-curves`, Step 0, the divisor `[Q]`) -/
+lemma isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one
+    [SmoothOfRelativeDimension 1 f] {Q : X} (hQ : IsClosed ({Q} : Set X)) :
+    (Scheme.IdealSheafData.vanishingIdeal ⟨{Q}, hQ⟩).IsInvertible :=
+  sorry
+
 /-- **Finite sets of points of a curve lie in an affine open.** Let `X` be a geometrically
 integral smooth proper curve over `k`. Every finite set of points of `X` is contained in an
 affine open of `X`.
@@ -173,8 +226,69 @@ positive degree `[κ(Q) : k]`, so `𝒪_X(Q)` is ample
 
 (blueprint: `thm-pc-hilb-curves`, Step 0) -/
 theorem exists_affineOpens_forall_mem_of_curve [SmoothOfRelativeDimension 1 f] [IsProper f]
-    [GeometricallyIntegral f] (t : Finset X) : ∃ U : X.affineOpens, ∀ x ∈ t, x ∈ U.1 :=
-  sorry
+    [GeometricallyIntegral f] (t : Finset X) : ∃ U : X.affineOpens, ∀ x ∈ t, x ∈ U.1 := by
+  classical
+  have : LocallyOfFiniteType f := inferInstance
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  obtain ⟨x, hx⟩ := exists_not_isClosed_singleton_of_smoothOfRelativeDimension_one f
+  set C : Set X := {y | y ∈ t ∧ IsClosed ({y} : Set X)}
+  have hCfin : C.Finite := (t.finite_toSet).subset fun y hy ↦ hy.1
+  have hCcl : IsClosed C := by
+    rw [← C.biUnion_of_singleton]
+    exact hCfin.isClosed_biUnion fun y hy ↦ hy.2
+  obtain ⟨Q, hQC, hQ⟩ := nonempty_inter_closedPoints (Z := Cᶜ) ⟨x, fun h ↦ hx h.2⟩
+    hCcl.isOpen_compl.isLocallyClosed
+  have hQt : Q ∉ t := fun h ↦ hQC ⟨h, hQ⟩
+  set J := Scheme.IdealSheafData.vanishingIdeal (X := X) ⟨{Q}, hQ⟩
+  have hJ : J.IsInvertible := isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f hQ
+  have hsupp : (J.support : Set X) = {Q} := by
+    simp [J]
+  let : X.Over (Spec (.of k)) := ⟨f⟩
+  have hf : X ↘ Spec (.of k) = f := rfl
+  have : SmoothOfRelativeDimension 1 (X ↘ Spec (.of k)) := by rw [hf]; infer_instance
+  have : IsProper (X ↘ Spec (.of k)) := by rw [hf]; infer_instance
+  have : GeometricallyIntegral (X ↘ Spec (.of k)) := by rw [hf]; infer_instance
+  have : Scheme.GlobalSectionsBijective k X :=
+    Scheme.GlobalSectionsBijective.of_geometricallyIntegral
+  -- the subscheme `[Q]` is finite and nonempty over `k`
+  have hsub : Subsingleton J.subscheme := by
+    refine ⟨fun a b ↦ J.subschemeι.isEmbedding.injective ?_⟩
+    have ha : J.subschemeι a ∈ Set.range J.subschemeι := ⟨a, rfl⟩
+    have hb : J.subschemeι b ∈ Set.range J.subschemeι := ⟨b, rfl⟩
+    rw [J.range_subschemeι, hsupp] at ha hb
+    exact ha.trans hb.symm
+  have hne : Nonempty J.subscheme := by
+    have : Q ∈ Set.range J.subschemeι := by rw [J.range_subschemeι, hsupp]; rfl
+    obtain ⟨a, -⟩ := this
+    exact ⟨a⟩
+  have : LocallyQuasiFinite (J.subschemeι ≫ f) :=
+    .of_finite_preimage_singleton _ fun _ ↦ Set.toFinite _
+  have : IsFinite (J.subschemeι ≫ f) := .of_isProper_of_locallyQuasiFinite _
+  have hpos : 0 < (J.subschemeι ≫ f).finrankΓ := by
+    have hfin := (HasAffineProperty.iff_of_isAffine (P := @IsFinite)
+      (f := J.subschemeι ≫ f)).mp inferInstance
+    let := (J.subschemeι ≫ f).ΓAlgebra
+    have : Module.Finite k Γ(J.subscheme, ⊤) := by
+      have h2 : RingHom.Finite ((Scheme.ΓSpecIso (.of k)).inv ≫
+          (J.subschemeι ≫ f).appTop).hom := by
+        rw [CommRingCat.hom_comp]
+        exact hfin.2.comp (RingHom.Finite.of_surjective _
+          (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of k)).inv).2)
+      exact h2
+    have : Nonempty (⊤ : J.subscheme.Opens) := ⟨⟨hne.some, trivial⟩⟩
+    exact Module.finrank_pos
+  have hdeg : 0 < J.toModulesᵛ.degree k := by
+    rw [hJ.degree_dual_toModules]
+    exact_mod_cast hpos
+  have := hJ.isInvertible_dual_toModules
+  have hample := Scheme.isAmple_of_degree_pos (k := k) J.toModulesᵛ hdeg
+  let U : X.Opens := ⟨(J.support : Set X)ᶜ, J.support.isClosed.isOpen_compl⟩
+  have hU : IsAffine U := Scheme.isAffine_compl_of_isAmple hJ hample U.ι (by simp [U])
+  refine ⟨⟨U, hU⟩, fun y hy ↦ ?_⟩
+  change y ∈ (J.support : Set X)ᶜ
+  rw [hsupp]
+  rintro rfl
+  exact hQt hy
 
 /-- **The Hilbert functors of a curve are representable.** For a geometrically integral smooth
 proper curve `X` over `k`, every `Hilb^d_{X/k}` is representable: `X` is separated over `k`,
@@ -205,8 +319,29 @@ element, the empty subscheme of `X_T`, so a scheme `H` representing it is termin
 
 (blueprint: `lem-pc-hilb-smooth`, the case `d = 0`) -/
 theorem isIso_of_representableBy_hilbertPresheaf_zero {X S : Scheme.{u}} (f : X ⟶ S)
-    {H : Over S} (e : (hilbertPresheaf f 0).RepresentableBy H) : IsIso H.hom :=
-  sorry
+    {H : Over S} (e : (hilbertPresheaf f 0).RepresentableBy H) : IsIso H.hom := by
+  have hext : ∀ {T : Over S} (a b : T ⟶ H), a = b := fun a b ↦
+    e.homEquiv.injective (Subsingleton.elim _ _)
+  let s : Over.mk (𝟙 S) ⟶ H := e.homEquiv.symm ⟨⊤, isHilbertSubscheme_top f _⟩
+  refine ⟨s.left, ?_, by simp⟩
+  have := congrArg CommaMorphism.left (hext (Over.homMk (H.hom ≫ s.left) (by simp [Over.w s]) :
+    H ⟶ H) (𝟙 H))
+  simpa using this
+
+/-- A locally of finite type morphism to the spectrum of a field is universally open: it is flat
+(every module over a field is flat) and locally of finite presentation (the base is
+noetherian). -/
+lemma universallyOpen_of_locallyOfFiniteType_spec_field {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType g] : UniversallyOpen g := by
+  have : LocallyOfFinitePresentation g :=
+    LocallyOfFinitePresentation.iff_locallyOfFiniteType.mpr inferInstance
+  infer_instance
+
+/-- The identity of `Spec k` is geometrically irreducible. -/
+lemma geometricallyIrreducible_id_spec_field : GeometricallyIrreducible (𝟙 (Spec (.of k))) := by
+  refine ⟨geometrically_iff_of_isClosedUnderIsomorphisms.mpr fun K _ y ↦ ?_⟩
+  rw [(asIso (pullback.snd (𝟙 _) y)).hom.homeomorph.irreducibleSpace_iff]
+  infer_instance
 
 /-- **The Hilbert scheme of a curve is dominated by a power of the curve.** For a geometrically
 integral smooth proper curve `X` over `k` and `H` representing `Hilb^d_{X/k}`, there is a
@@ -218,8 +353,26 @@ theorem exists_surjective_of_representableBy_hilbertPresheaf_curve [SmoothOfRela
     [IsProper f] [GeometricallyIntegral f] (d : ℕ) (H : Over (Spec (.of k)))
     (e : (hilbertPresheaf f d).RepresentableBy H) :
     ∃ (Y : Scheme.{u}) (q : Y ⟶ Spec (.of k)) (π : Y ⟶ H.left), IsProper q ∧
-      GeometricallyIrreducible q ∧ Surjective π ∧ π ≫ H.hom = q :=
-  sorry
+      GeometricallyIrreducible q ∧ Surjective π ∧ π ≫ H.hom = q := by
+  induction d generalizing H with
+  | zero =>
+    have := isIso_of_representableBy_hilbertPresheaf_zero f e
+    exact ⟨Spec (.of k), 𝟙 _, inv H.hom, inferInstance,
+      geometricallyIrreducible_id_spec_field, inferInstance, by simp⟩
+  | succ d ih =>
+    obtain ⟨H₀, ⟨e₀⟩⟩ := isRepresentable_hilbertPresheaf_curve f d
+    obtain ⟨Y, _, π, hq, hirr, hπ, rfl⟩ := ih H₀ e₀
+    obtain ⟨a, ha, hfin, hflat, hlfp, hrank, -⟩ := exists_addition_hilbertPresheaf f d H₀ H e₀ e
+    have hasurj : Surjective a :=
+      (Scheme.Hom.one_le_finrank_iff_surjective a).mp fun t ↦ by simp [hrank t]
+    have := universallyOpen_of_locallyOfFiniteType_spec_field f
+    have := universallyOpen_of_locallyOfFiniteType_spec_field (π ≫ H₀.hom)
+    refine ⟨pullback (π ≫ H₀.hom) f, pullback.fst _ _ ≫ π ≫ H₀.hom,
+      (pullbackRightPullbackFstIso H₀.hom f π).inv ≫ pullback.snd _ _ ≫ a, inferInstance,
+      GeometricallyIrreducible.comp _ _, inferInstance, ?_⟩
+    rw [Category.assoc, Category.assoc, ha, pullbackRightPullbackFstIso_inv_snd_snd_assoc,
+      pullback.condition]
+
 
 /-- **The Hilbert scheme of a curve is proper and geometrically integral.** For a geometrically
 integral smooth proper curve `X` over `k`, the scheme `H` representing `Hilb^d_{X/k}` is proper
@@ -230,8 +383,24 @@ geometrically irreducible `X^d`, and it is smooth, hence geometrically reduced.
 theorem isProper_and_geometricallyIntegral_of_representableBy_hilbertPresheaf_curve
     [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] (d : ℕ)
     (H : Over (Spec (.of k))) (e : (hilbertPresheaf f d).RepresentableBy H) :
-    IsProper H.hom ∧ GeometricallyIntegral H.hom :=
-  sorry
+    IsProper H.hom ∧ GeometricallyIntegral H.hom := by
+  have := isSeparated_of_representableBy_hilbertPresheaf f e
+  have hsm := smoothOfRelativeDimension_of_representableBy_hilbertPresheaf f
+    (isRepresentable_hilbertPresheaf_curve f) d H e
+  have := SmoothOfRelativeDimension.smooth d H.hom
+  obtain ⟨Y, _, π, hq, hirr, hπ, rfl⟩ :=
+    exists_surjective_of_representableBy_hilbertPresheaf_curve f d H e
+  have : UniversallyClosed H.hom := UniversallyClosed.of_comp_surjective π H.hom
+  refine ⟨⟨⟩, ?_⟩
+  have := GeometricallyReduced.of_smooth H.hom
+  have : GeometricallyIrreducible H.hom := by
+    refine ⟨geometrically_iff_of_isClosedUnderIsomorphisms.mpr fun K _ y ↦ ?_⟩
+    have : IrreducibleSpace ↥(Limits.pullback (π ≫ H.hom) y) :=
+      GeometricallyIrreducible.geometrically_irreducibleSpace _ _ _ (.of_hasPullback _ _)
+    have hs : Surjective ((pullbackRightPullbackFstIso H.hom y π).inv ≫ pullback.snd _ _) :=
+      inferInstance
+    exact hs.surj.irreducibleSpace (Scheme.Hom.continuous _)
+  exact .of_geometricallyReduced_of_geometricallyIrreducible _
 
 /-- **The Hilbert scheme of a smooth projective curve.** For a geometrically integral smooth
 proper curve `X` over `k` and `d : ℕ`, the functor `Hilb^d_{X/k}` is represented by a smooth

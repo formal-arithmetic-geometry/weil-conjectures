@@ -128,7 +128,11 @@ theorem GeometricallyIrreducible.of_smooth_of_geometricallyConnected {X S : Sche
 field is smooth over that field, hence regular, so its local rings are regular local rings,
 which are integral domains. -/
 theorem GeometricallyReduced.of_smooth {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
-    GeometricallyReduced f :=
-  sorry
+    GeometricallyReduced f where
+  geometrically_isReduced _ _ y _ fst snd h := by
+    have : Smooth snd := MorphismProperty.of_isPullback h ‹Smooth f›
+    have := LocallyOfFiniteType.isLocallyNoetherian snd
+    have := IsRegular.of_smooth snd
+    exact isReduced_of_isReduced_stalk _
 
 end AlgebraicGeometry
