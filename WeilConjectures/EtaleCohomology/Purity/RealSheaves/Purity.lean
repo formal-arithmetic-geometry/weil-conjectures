@@ -317,7 +317,9 @@ theorem le_add_of_isConstituent_tprod_of_hasDetWeight [Fact (ringChar K ≠ l)]
   have hQlisse := (hρ.tprod hσ).subquotient M N
   obtain ⟨UV, SV, UE, SE, hV, hE, hVirr, hEirr, -, -, hsum⟩ :=
     Representation.exists_detWeight_eq_add_of_subquotient_tprod
-      (weightCharacter ι (Nat.card K)) W.deg W.frobeniusLift ρ σ hcov.lt hQirr
+      (weightCharacter ι (Nat.card K)) W.deg W.frobeniusLift ρ σ
+      (fun UV SV _ ↦ (hρ.subquotient SV UV).hasFiniteGeometricDet)
+      (fun UE SE _ ↦ (hσ.subquotient SE UE).hasFiniteGeometricDet) hcov.lt hQirr
       hQlisse.hasFiniteGeometricDet
   have h₁ := hd₁ _ _ ⟨hVirr, UV, SV, hV.le, ⟨SV.subquotientAsModuleLinearEquiv UV⟩⟩
     ((hρ.subquotient SV UV).hasDetWeight ι)

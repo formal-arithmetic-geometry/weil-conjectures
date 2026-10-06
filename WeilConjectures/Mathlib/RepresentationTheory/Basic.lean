@@ -27,6 +27,8 @@ have, alongside `Representation.tprod` and `Representation.dual`:
 
 * `Representation.detCharacter`: the determinant character `δ` of a representation.
 * `Representation.exteriorPower`: the representation induced on `⋀^s V`.
+* `Representation.tprodComm`: the symmetry `V ⊗ V' ≃ V' ⊗ V` of tensor products of
+  representations.
 * `Representation.ofCharacter`: the representation on a module in which `g` acts by the scalar
   `χ g` of a character `χ : G →* kˣ`.
 * `Representation.directSumSummand`: a summand of a direct sum of representations, as a
@@ -123,6 +125,11 @@ theorem Equiv.charpoly_apply [Module.Finite k V] [Module.Finite k V'] (e : ρ.Eq
 /-- Equivalent representations have the same dimension. -/
 theorem Equiv.finrank_eq (e : ρ.Equiv σ) : Module.finrank k V' = Module.finrank k V :=
   e.toLinearEquiv.finrank_eq.symm
+
+variable (ρ σ) in
+/-- The symmetry `V ⊗ V' ≃ V' ⊗ V` of the tensor product of two representations. -/
+noncomputable def tprodComm : (ρ.tprod σ).Equiv (σ.tprod ρ) :=
+  .mk (_root_.TensorProduct.comm k V V') fun _ ↦ TensorProduct.ext' fun _ _ ↦ rfl
 
 end Equiv
 
