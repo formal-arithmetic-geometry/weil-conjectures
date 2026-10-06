@@ -611,12 +611,14 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
+public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.Basis
 public import WeilConjectures.Mathlib.LinearAlgebra.LinearIndependent.BaseChange
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.BilinearForm
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
@@ -697,6 +699,7 @@ public import WeilConjectures.RingTheory.Dehomogenization
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
+public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.ExteriorPower
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdeal
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.IdentityComponent
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
