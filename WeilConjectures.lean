@@ -253,6 +253,7 @@ public import WeilConjectures.Compactification.BoundaryPreparation
 public import WeilConjectures.Compactification.Cofiltered
 public import WeilConjectures.Compactification.CommonModification
 public import WeilConjectures.Compactification.CommonRefinement
+public import WeilConjectures.Compactification.Comp
 public import WeilConjectures.Compactification.Constructions
 public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Compactification.Dense
