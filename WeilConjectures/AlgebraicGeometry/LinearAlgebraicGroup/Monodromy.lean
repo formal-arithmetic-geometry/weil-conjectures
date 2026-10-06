@@ -82,7 +82,7 @@ implement `sk-i-restriction`, the normality, commutator and Lie statements also
 `RepresentedDegreeDatum.isSemisimpleRepresentation_degreeZero` implements
 `lem-mg-normal-restriction-semisimple`;
 `RepresentedDegreeDatum.isSemisimpleRepresentation_arithmeticMonodromy` implements
-`lem-ag-closure-semisimple`;
+the `G` part of `lem-ag-closure-semisimple`;
 `RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy` and
 `RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq` implement `sk-p-product`;
 `RepresentedDegreeDatum.exists_isPositiveCentralPair` implements `sk-p-central`.
@@ -269,7 +269,8 @@ noncomputable def subrepresentationOrderIsoArithmeticMonodromy :
 
 /-- A semisimple datum is semisimple for its arithmetic monodromy group `G`: the defining
 representation of `G(k)` on `n → k` is semisimple, because `ρ(W)` and `G` have the same stable
-subspaces. (blueprint: `lem-ag-closure-semisimple`) -/
+subspaces. (blueprint: the `G` part of `lem-ag-closure-semisimple`; the `G°` part is
+`isSemisimpleRepresentation_standardRepresentation_identityComponent`) -/
 theorem isSemisimpleRepresentation_arithmeticMonodromy (hD : D.IsSemisimple) :
     Representation.IsSemisimpleRepresentation
       ((toRepresentation n k).comp (zeroLocus D.arithmeticMonodromy k).subtype) :=
