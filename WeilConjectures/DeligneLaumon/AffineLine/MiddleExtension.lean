@@ -33,6 +33,8 @@ over `k₀`, so nothing is lost, and the condition becomes a property of `M` alo
 ## Main declarations
 
 - `AlgebraicGeometry.WeilSheaf.IsNonexceptional`: the nonexceptionality condition.
+- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.IsFourierNonexceptional`: the geometric
+  middle extension is neither constant nor a linear Artin–Schreier sheaf.
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.IsFourierPartner`: the relation
   `FT_ψ((j_*M)[1]) ≃ (j'_*M')[1]` between a datum and its transform.
 - `AlgebraicGeometry.exists_middleExtension_fourierTransform`: the transform of an
@@ -58,6 +60,18 @@ closure of `k₀`, the value `a = 0` included. (blueprint: `sk-p-dl-a1-middle`) 
 def IsNonexceptional {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l U) (ψ : AddChar k₀ (PadicAlgCl l)) : Prop :=
   ∀ a : AlgebraicClosure k₀, ¬ F.HasLinearArtinSchreierConstituent ψ a
+
+/-- The middle extension `(j_*M)[1]` of a datum is *Fourier-nonexceptional* for `ψ` if, after
+geometric base change, `M` is neither constant — a constant Weil twist being invisible there —
+nor the restriction of an Artin–Schreier sheaf `ℒ_{ψ(a x)}`. It is meant for irreducible `M`.
+Only `a ∈ k₀` occurs: a Weil sheaf geometrically isomorphic to `ℒ_{ψ(a x)}` for `a ∈ k̄` is
+also geometrically isomorphic to its Frobenius pullback `ℒ_{ψ(a^q x)}`, which forces
+`a^q = a`. (blueprint: `def-fd-nonexceptional`) -/
+def LisseOnDenseOpen.IsFourierNonexceptional (ψ : AddChar k₀ (PadicAlgCl l))
+    (D : LisseOnDenseOpen k₀ l) : Prop :=
+  ¬ D.IsGeometricallyConstant ∧ ∀ a : k₀,
+    IsEmpty (((WeilSheaf.upperStar D.j).obj (artinSchreier ψ a)).obj.carrier ≅
+      D.sheaf.obj.carrier)
 
 /-- `D'` is a *Fourier partner* of `D` if the Fourier transform of the curve perverse middle
 extension `(j_*M)[1]` of `D` is the middle extension `(j'_*M')[1]` of `D'`.

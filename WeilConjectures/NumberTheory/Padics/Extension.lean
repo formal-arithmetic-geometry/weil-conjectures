@@ -6,12 +6,15 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.Algebra.Ring.Shrink
+public import Mathlib.Analysis.Normed.Field.Approximation
+public import Mathlib.Analysis.Normed.Field.Krasner
 public import Mathlib.Analysis.Normed.Module.FiniteDimension
 public import Mathlib.NumberTheory.LocalField.Basic
 public import Mathlib.NumberTheory.Padics.Complex
 public import Mathlib.NumberTheory.Padics.ProperSpace
 public import Mathlib.NumberTheory.Padics.ValuativeRel
 public import Mathlib.RingTheory.AdicCompletion.Topology
+public import Mathlib.RingTheory.Ideal.Quotient.Index
 public import Mathlib.RingTheory.Valuation.ValuationSubring
 public import Mathlib.Topology.Algebra.Valued.NormedValued
 
@@ -45,6 +48,10 @@ the `ℓ`-adic one, and `E` becomes a nonarchimedean local field.
 
 ## Main results
 
+- `PadicAlgCl.exists_isAlgebraic_mem_adjoin_simple` : every element of `ℚ̄_ℓ` lies in
+  `ℚ_ℓ(b)` for some `b` algebraic over `ℚ`, so countably many finite extensions of `ℚ_ℓ` cover
+  `ℚ̄_ℓ`.
+- `PadicAlgCl.isClosed_intermediateField` : a finite extension of `ℚ_ℓ` is closed in `ℚ̄_ℓ`.
 - `PadicAlgCl.isAdicComplete_integers` and `PadicAlgCl.isAdicComplete_maximalIdealShrink` :
   if `E` is finite over `ℚ_ℓ`, then `𝒪_E` and its copy `Shrink 𝒪_E` are `𝔪_E`-adically
   complete.
@@ -61,7 +68,70 @@ open NNReal
 
 namespace PadicAlgCl
 
-variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl l)]
+variable (l : ℕ) [Fact l.Prime]
+
+open Polynomial IntermediateField in
+/-- Every element `x` of `ℚ̄_ℓ` lies in `ℚ_ℓ(b)` for some `b` algebraic over `ℚ`.
+
+By the continuity of roots, a monic polynomial over `ℚ` whose coefficients are close enough to
+those of the minimal polynomial of `x` over `ℚ_ℓ` has a root `b` closer to `x` than any other
+conjugate of `x`, and then `x ∈ ℚ_ℓ(b)` by Krasner's lemma. Since `ℚ̄` is countable, this
+covers `ℚ̄_ℓ` by countably many finite extensions of `ℚ_ℓ`. -/
+theorem exists_isAlgebraic_mem_adjoin_simple (x : PadicAlgCl l) :
+    ∃ b : PadicAlgCl l, IsAlgebraic ℚ b ∧ x ∈ ℚ_[l]⟮b⟯ := by
+  classical
+  have hx : IsIntegral ℚ_[l] x := Algebra.IsIntegral.isIntegral x
+  set f := minpoly ℚ_[l] x
+  have fmon : f.Monic := minpoly.monic hx
+  have fa0 : f.aeval x = 0 := minpoly.aeval _ _
+  have fnatdeg0 : f.natDegree ≠ 0 := (minpoly.natDegree_pos hx).ne'
+  -- `δ` is a lower bound for the distance from `x` to its other conjugates
+  let S : Finset (PadicAlgCl l) := {y ∈ (f.rootSet (PadicAlgCl l)).toFinset | y ≠ x}
+  let δ : ℝ := if hS : S.Nonempty then Finset.min' (S.image fun y ↦ ‖x - y‖)
+      (Finset.image_nonempty.mpr hS) else 1
+  have norm_sub_le : ∀ y : PadicAlgCl l, IsConjRoot ℚ_[l] x y → x ≠ y → δ ≤ ‖x - y‖ := by
+    intro y conj ne
+    have hyS : y ∈ S := by
+      simp only [Finset.mem_filter, Set.mem_toFinset, S]
+      exact ⟨(isConjRoot_iff_mem_minpoly_rootSet hx).mp conj, ne.symm⟩
+    have hS : S.Nonempty := ⟨y, hyS⟩
+    simp only [hS, ↓reduceDIte, δ]
+    exact Finset.min'_le _ _ (Finset.mem_image_of_mem _ hyS)
+  have δpos : 0 < δ := by
+    by_cases hS : S.Nonempty <;> simp only [hS, ↓reduceDIte, δ]
+    · simp only [Finset.lt_min'_iff, Finset.mem_image, forall_exists_index, and_imp,
+        forall_apply_eq_imp_iff₂]
+      intro y hy
+      simp only [Finset.mem_filter, Set.mem_toFinset, S] at hy
+      rw [norm_pos_iff, sub_ne_zero]
+      exact hy.2.symm
+    · exact one_pos
+  -- approximate `f` by a monic polynomial `g` over `ℚ` and pick a root `b` of `g` near `x`
+  have hε : 0 < (δ / (max ‖x‖ 1)) ^ f.natDegree / (f.natDegree + 1) := by positivity
+  obtain ⟨g, gmon, gdeg, gcoeff⟩ :=
+    exists_monic_and_natDegree_eq_and_norm_map_algebraMap_coeff_sub_lt
+      (Padic.denseRange_ratCast l) fmon hε
+  obtain ⟨b, hb, hxb⟩ := exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt
+      hε fa0 fmon (gmon.map _) (gdeg ▸ (g.natDegree_map _)) gcoeff
+      (IsAlgClosed.splits _)
+  have hxb : ‖x - b‖ < δ := by
+    rw [← Real.rpow_natCast, ← mul_comm_div, div_self, one_mul,
+        ← Real.rpow_mul (div_pos δpos (by positivity)).le, mul_inv_cancel₀] at hxb
+    · simpa [mul_assoc, div_mul_cancel₀ _ (by positivity : (max ‖x‖ 1) > 0).ne'] using hxb
+    · simp [fnatdeg0]
+    · positivity
+  rw [mem_aroots] at hb
+  refine ⟨b, ⟨g, gmon.ne_zero, by simpa [aeval_map_algebraMap] using hb.2⟩, ?_⟩
+  exact IsKrasner.krasner (minpoly.irreducible hx).separable (IsAlgClosed.splits _)
+    (Algebra.IsIntegral.isIntegral b) fun y h1 h2 ↦ hxb.trans_le (norm_sub_le y h1 h2)
+
+/-- A finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ` is closed, being a finite-dimensional subspace
+over the complete field `ℚ_ℓ`. -/
+theorem isClosed_intermediateField (E : IntermediateField ℚ_[l] (PadicAlgCl l))
+    [FiniteDimensional ℚ_[l] E] : IsClosed (E : Set (PadicAlgCl l)) :=
+  Submodule.closed_of_finiteDimensional E.toSubalgebra.toSubmodule
+
+variable (E : Type w) [Field E] [Algebra E (PadicAlgCl l)]
 
 /-- The normed field structure on a subfield `E` of `ℚ̄_ℓ = PadicAlgCl l`, restricted from
 the `ℓ`-adic norm of `PadicAlgCl l` along the embedding `E → PadicAlgCl l`. Its topology is
@@ -132,16 +202,15 @@ lemma valuationOfAlgebra_algebraMap (x : ℚ_[l]) :
   exact NNReal.eq (PadicAlgCl.norm_extends l x)
 
 open ValuativeRel in
-/-- If `E` is a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, its ring of integers is isomorphic to
-a subring of `E` which is a complete discrete valuation ring.
-
-The proof equips `E` with the valuative relation and the topology restricted from
-`PadicAlgCl l`, checks that this makes `E` a nonarchimedean local field (it is locally
-compact, being a finite-dimensional normed space over `ℚ_ℓ`), and takes mathlib's ring of
-integers `𝒪[E]` of that local field. -/
-lemma exists_ringEquiv_integers [FiniteDimensional ℚ_[l] E] :
-    ∃ (O : Subring E) (_ : IsDiscreteValuationRing O),
-      IsAdicComplete (IsLocalRing.maximalIdeal O) O ∧ Nonempty (O ≃+* integers l E) := by
+/-- If `E` is a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, then `E`, with the valuative relation
+and the topology restricted from `PadicAlgCl l`, is a nonarchimedean local field (it is locally
+compact, being a finite-dimensional normed space over `ℚ_ℓ`), whose ring of integers `𝒪[E]` is
+`PadicAlgCl.integers l E`. This is how mathlib's results on local fields are transported to
+`PadicAlgCl.integers l E`. -/
+theorem isNonarchimedeanLocalField_and_integer_eq [FiniteDimensional ℚ_[l] E] :
+    letI := normedFieldOfAlgebra l E
+    letI : ValuativeRel E := .ofValuation (valuationOfAlgebra l E)
+    IsNonarchimedeanLocalField E ∧ 𝒪[E] = (integers l E).toSubring := by
   let w := valuationOfAlgebra l E
   let := normedFieldOfAlgebra l E
   have := isUltrametricDist_ofAlgebra l E
@@ -186,29 +255,58 @@ lemma exists_ringEquiv_integers [FiniteDimensional ℚ_[l] E] :
       rw [Set.mem_ofPred_eq, Valuation.restrict_lt_iff_lt_embedding, ← NNReal.coe_lt_coe,
         ← hnorm]
       simpa using hz
-  have : IsNonarchimedeanLocalField E := {}
-  have heq : 𝒪[E] = (integers l E).toSubring := by
-    ext x
-    exact (isEquiv (valuation E) w).le_one_iff_le_one
-  exact ⟨𝒪[E], inferInstance, inferInstance, ⟨RingEquiv.subringCongr heq⟩⟩
+  refine ⟨{}, ?_⟩
+  ext x
+  exact (isEquiv (valuation E) w).le_one_iff_le_one
 
+open ValuativeRel in
 /-- If `E` is a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, its ring of integers is
-`𝔪_E`-adically complete. -/
+`𝔪_E`-adically complete: this is mathlib's `IsAdicComplete 𝓂[E] 𝒪[E]`, transported along
+`PadicAlgCl.isNonarchimedeanLocalField_and_integer_eq`. -/
 instance isAdicComplete_integers [FiniteDimensional ℚ_[l] E] :
     IsAdicComplete (IsLocalRing.maximalIdeal (integers l E)) (integers l E) := by
-  obtain ⟨O, _, _, ⟨e⟩⟩ := exists_ringEquiv_integers l E
+  let := normedFieldOfAlgebra l E
+  let : ValuativeRel E := .ofValuation (valuationOfAlgebra l E)
+  obtain ⟨_, heq⟩ := isNonarchimedeanLocalField_and_integer_eq l E
+  let e : 𝒪[E] ≃+* integers l E := RingEquiv.subringCongr heq
   rw [← IsLocalRing.map_ringEquiv_maximalIdeal e]
   exact (IsAdicComplete.congr_ringEquiv _ e).mpr inferInstance
+
+open ValuativeRel in
+/-- If `E` is a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, its ring of integers is a principal
+ideal ring, being a discrete valuation ring. -/
+instance isPrincipalIdealRing_integers [FiniteDimensional ℚ_[l] E] :
+    IsPrincipalIdealRing (integers l E) := by
+  let := normedFieldOfAlgebra l E
+  let : ValuativeRel E := .ofValuation (valuationOfAlgebra l E)
+  obtain ⟨_, heq⟩ := isNonarchimedeanLocalField_and_integer_eq l E
+  exact IsPrincipalIdealRing.of_surjective (RingEquiv.subringCongr heq).toRingHom
+    (RingEquiv.subringCongr heq).surjective
+
+open ValuativeRel in
+/-- If `E` is a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, the residue field of its ring of
+integers is finite. -/
+instance finite_residueField_integers [FiniteDimensional ℚ_[l] E] :
+    Finite (IsLocalRing.ResidueField (integers l E)) := by
+  let := normedFieldOfAlgebra l E
+  let : ValuativeRel E := .ofValuation (valuationOfAlgebra l E)
+  obtain ⟨_, heq⟩ := isNonarchimedeanLocalField_and_integer_eq l E
+  let e : 𝒪[E] ≃+* integers l E := RingEquiv.subringCongr heq
+  exact .of_equiv _ (IsLocalRing.ResidueField.mapEquiv e).toEquiv
+
+/-- If `E` is a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, the quotients `𝒪_E / 𝔪_Eⁿ` of its
+ring of integers are finite. -/
+instance finite_quotient_maximalIdeal_pow [FiniteDimensional ℚ_[l] E] (n : ℕ) :
+    Finite (integers l E ⧸ IsLocalRing.maximalIdeal (integers l E) ^ n) :=
+  have : Finite (integers l E ⧸ IsLocalRing.maximalIdeal (integers l E)) :=
+    inferInstanceAs (Finite (IsLocalRing.ResidueField (integers l E)))
+  Ideal.finite_quotient_pow (IsNoetherian.noetherian _) n
 
 /-- If `E` is a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, the maximal ideal `𝔪_E` of its ring
 of integers is principal, generated by a uniformizer. -/
 lemma isPrincipal_maximalIdeal_integers [FiniteDimensional ℚ_[l] E] :
-    (IsLocalRing.maximalIdeal (integers l E)).IsPrincipal := by
-  obtain ⟨O, _, _, ⟨e⟩⟩ := exists_ringEquiv_integers l E
-  obtain ⟨ϖ, hϖ⟩ := IsPrincipalIdealRing.principal (IsLocalRing.maximalIdeal O)
-  rw [← IsLocalRing.map_ringEquiv_maximalIdeal e, hϖ, Ideal.submodule_span_eq, Ideal.map_span,
-    Set.image_singleton]
-  exact ⟨e ϖ, rfl⟩
+    (IsLocalRing.maximalIdeal (integers l E)).IsPrincipal :=
+  IsPrincipalIdealRing.principal _
 
 /-- If `E` is a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, the universe `u + 1` copy of its ring
 of integers is `𝔪_E`-adically complete. Through `Ideal.isLimitQuotPowCone` this says that

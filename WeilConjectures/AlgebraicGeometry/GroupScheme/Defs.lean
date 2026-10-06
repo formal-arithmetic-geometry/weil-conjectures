@@ -5,12 +5,14 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Module.Torsion.Basic
 public import Mathlib.AlgebraicGeometry.Group.Abelian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Mon
 
 /-!
 # Torsion subgroup schemes and isogenies
@@ -25,6 +27,7 @@ the `n`-torsion subgroup scheme and isogenies; the order of a finite group schem
 
 - `AlgebraicGeometry.torsionSubgroupScheme`: the `n`-torsion subgroup scheme `G[n]`.
   Being a kernel, it is itself a group scheme (`CategoryTheory.GrpObj.instGrpObjKer`).
+- `AlgebraicGeometry.torsionByEquiv`: the `K`-points of `G[n]` are the `n`-torsion of `G(K)`.
 - `AlgebraicGeometry.IsIsogeny`: a surjective homomorphism of group schemes with finite kernel.
 - `AlgebraicGeometry.isogenyDegree`: the degree of an isogeny, the order of its kernel.
 
@@ -34,8 +37,6 @@ the `n`-torsion subgroup scheme and isogenies; the order of a finite group schem
   homomorphism.
 - `AlgebraicGeometry.isClosedImmersion_kerι`: the kernel of a homomorphism of group schemes is
   a closed subgroup scheme.
-- `AlgebraicGeometry.fiberDegree_eq_finrankΓ`: the order of a group scheme over a field is the
-  fibre degree of its structure morphism.
 -/
 
 @[expose] public section
@@ -51,10 +52,12 @@ variable {K : Type u} [Field K]
 /-- Blueprint `sk-prop-av-mult-hom`: The `n`-fold sum is a homomorphism.
 
 Let `G` be a commutative group scheme over `K`. Then the `n`-fold sum map `[n] : G ⟶ G` is a
-homomorphism of group schemes. -/
+homomorphism of group schemes: it is the `n`-th power of the homomorphism `𝟙 G` in the
+commutative monoid `G ⟶ G`, and such powers are homomorphisms
+(`CategoryTheory.MonObj.isMonHom_pow`, blueprint `lem-sc-mult-n-homomorphism`). -/
 instance isMonHom_npow_id (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
     IsMonHom (𝟙 G ^ n) :=
-  sorry
+  MonObj.isMonHom_pow _ n
 
 /-- Blueprint `sk-def-av-group-scheme`: Kernels are closed subgroup schemes.
 
@@ -65,18 +68,6 @@ and closed immersions are stable under base change. It is a subgroup scheme by
 theorem isClosedImmersion_kerι {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B]
     [IsSeparated B.hom] (f : A ⟶ B) [IsMonHom f] :
     IsClosedImmersion (GrpObj.kerι f).left :=
-  sorry
-
-/-- The order `f.finrankΓ` of a finite group scheme over a field is the fibre degree of its
-structure morphism at the unique point of `Spec K`; the two degree notions of the project agree
-on group schemes over a field.
-
-This is a statement about an arbitrary affine morphism to the spectrum of a field, so it belongs
-in `WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree`; it is stated here only to keep
-that file free of `sorry`. -/
-theorem fiberDegree_eq_finrankΓ {G : Scheme.{u}} (f : G ⟶ Spec (.of K)) [IsAffineHom f]
-    (x : Spec (.of K)) :
-    f.fiberDegree x = f.finrankΓ :=
   sorry
 
 /-- Blueprint `sk-def-av-mult-n`: Multiplication by `n` and `n`-torsion.
@@ -100,6 +91,22 @@ noncomputable def torsionSubgroupScheme (G : Over (Spec (.of K))) [GrpObj G] (n 
 noncomputable instance (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
     GrpObj (torsionSubgroupScheme G n) :=
   inferInstanceAs (GrpObj (GrpObj.ker (𝟙 G ^ n)))
+
+/-- The `K`-points of the `n`-torsion subgroup scheme `G[n]` of a commutative group scheme `G`
+are the `n`-torsion points of `G`: the `n`-torsion of the group `G(K)`, written additively, is
+in bijection with `𝟙_ (Over (Spec (.of K))) ⟶ G[n]`, a point `x` of `G[n]` corresponding to
+its image `x ≫ GrpObj.kerι (𝟙 G ^ n)` in `G(K)`. -/
+noncomputable def torsionByEquiv (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
+    AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of K))) ⟶ G)) (n : ℤ) ≃
+      (𝟙_ (Over (Spec (.of K))) ⟶ torsionSubgroupScheme G n) :=
+  (Equiv.subtypeEquiv (p := fun x ↦ x ∈ AddSubgroup.torsionBy _ (n : ℤ))
+    (q := fun x ↦ x ∈ MonoidHom.ker (IsMonHom.monoidHom (𝟙 G ^ n) (𝟙_ _))) Additive.toMul
+    fun x ↦ by
+      rw [MonoidHom.mem_ker, AddSubgroup.torsionBy, Submodule.mem_toAddSubgroup,
+        Submodule.mem_torsionBy_iff, natCast_zsmul]
+      change n • x = 0 ↔ x.toMul ≫ 𝟙 G ^ n = 1
+      rw [comp_pow, Category.comp_id]
+      rfl).trans (GrpObj.kerRepresentableBy (𝟙 G ^ n)).homEquiv.symm
 
 /-- Blueprint `sk-def-av-isogeny`: Isogenies and their degree.
 

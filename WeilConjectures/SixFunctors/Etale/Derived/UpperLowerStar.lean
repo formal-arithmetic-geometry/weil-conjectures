@@ -68,6 +68,13 @@ the type of the functor is spelled out.
   adjunctions `D((g)^*[A]) ⊣ R((g)_*[A])`, `L((g)^*[A]) ⊣ R((g)_*[A])` and
   `D+((g)^*[A]) ⊣ R+((g)_*[A])`. The first one needs no monoidal structure on `A`.
 
+- `AlgebraicGeometry.Etale.rightDerivedLowerStarComp` : the composition isomorphism
+  `Rg₁_* ⋙ Rg₂_* ≅ R(g₁ ≫ g₂)_*`, conjugate to the composition isomorphism of the functors
+  `D(g^*)`. It needs no monoidal structure on `A`.
+
+- `AlgebraicGeometry.Etale.rightDerivedLowerStarCongr` : the isomorphism `Rg₁_* ≅ Rg₂_*`
+  induced by an equality `g₁ = g₂`.
+
 -/
 
 @[expose] public section
@@ -124,6 +131,51 @@ noncomputable def mapDerivedUpperStarLowerStarAdjunction : D((g)^*[A]) ⊣ R((g)
 sheaves is additive, being right adjoint to `D(g^*)`. -/
 instance additive_rightDerivedLowerStar : (R((g)_*[A])).Additive :=
   (mapDerivedUpperStarLowerStarAdjunction A g).right_adjoint_additive
+
+/-- The isomorphism `Rg₁_* ≅ Rg₂_*` induced by an equality `g₁ = g₂`. -/
+noncomputable def rightDerivedLowerStarCongr {g₁ g₂ : Z ⟶ Y} (h : g₁ = g₂) :
+    R((g₁)_*[A]) ≅ R((g₂)_*[A]) :=
+  eqToIso (congrArg (fun g ↦ R((g)_*[A])) h)
+
+@[simp]
+lemma rightDerivedLowerStarCongr_refl : rightDerivedLowerStarCongr A (g₁ := g) rfl = Iso.refl _ :=
+  rfl
+
+@[simp]
+lemma rightDerivedLowerStarCongr_hom_app {g₁ g₂ : Z ⟶ Y} (h : g₁ = g₂)
+    (K : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    (rightDerivedLowerStarCongr A h).hom.app K = eqToHom (by subst h; rfl) := by
+  subst h
+  rfl
+
+@[simp]
+lemma rightDerivedLowerStarCongr_inv_app {g₁ g₂ : Z ⟶ Y} (h : g₁ = g₂)
+    (K : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    (rightDerivedLowerStarCongr A h).inv.app K = eqToHom (by subst h; rfl) := by
+  subst h
+  rfl
+
+/-- The composition isomorphism `Rg₁_* ⋙ Rg₂_* ≅ R(g₁ ≫ g₂)_*` of the derived direct images.
+It is the conjugate, under the adjunctions `D(g^*) ⊣ Rg_*` of
+`AlgebraicGeometry.Etale.mapDerivedUpperStarLowerStarAdjunction`, of the composition
+isomorphism `D((g₁ ≫ g₂)^*) ≅ D(g₂^*) ⋙ D(g₁^*)` of the functors induced by the exact
+pullbacks:
+```
+   D((g₁ ≫ g₂)^*)  ≅  D(g₂^*) ⋙ D(g₁^*)
+         ⊣                    ⊣
+   R(g₁ ≫ g₂)_*    ≅  Rg₁_* ⋙ Rg₂_*
+```
+`conjugateIsoEquiv` turns an isomorphism of left adjoints into an isomorphism of right
+adjoints in the opposite direction, so the isomorphism of left adjoints is inverted before
+and the result after. Unlike `AlgebraicGeometry.Etale.leftDerivedUpperStarComp`, this needs no
+monoidal structure on `A`. -/
+noncomputable def rightDerivedLowerStarComp {T S U : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ U) :
+    R((g₁)_*[A]) ⋙ R((g₂)_*[A]) ≅ R((g₁ ≫ g₂)_*[A]) :=
+  (conjugateIsoEquiv (mapDerivedUpperStarLowerStarAdjunction A (g₁ ≫ g₂))
+    ((mapDerivedUpperStarLowerStarAdjunction A g₂).comp
+      (mapDerivedUpperStarLowerStarAdjunction A g₁))
+    (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A g₁ g₂) ≪≫
+      Functor.mapDerivedCategoryCompIso _ _).symm).symm
 
 end Etale
 

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
@@ -35,6 +36,8 @@ is `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` in `map`/`comap` language.
   pulling back to zero is contained in the kernel;
 - `AlgebraicGeometry.Scheme.IdealSheafData.fg_ideal_comap_iff`: finite generation of the
   ideal of sections transfers across an open immersion;
+- `AlgebraicGeometry.Scheme.IdealSheafData.comap_mul`: pullback of ideal sheaves is
+  multiplicative;
 - `AlgebraicGeometry.Scheme.IdealSheafData.map_comap_of_isPullback`: flat base change, with
   `AlgebraicGeometry.Scheme.IdealSheafData.map_comap_opens` (restriction to an open) and
   `AlgebraicGeometry.Scheme.IdealSheafData.comap_map` (a quasi-compact flat monomorphism)
@@ -240,5 +243,61 @@ lemma _root_.AlgebraicGeometry.Scheme.Hom.mem_ker_comp {W : Scheme.{u}} (w : W �
   exact Iff.rfl
 
 end Sections
+
+section Mul
+
+/-- **Pullback of ideal sheaves is multiplicative.** On affine opens `V ⊆ f ⁻¹ᵁ U` the pullback
+of an ideal sheaf is the extension of its ideal of sections along `Γ(Y, U) ⟶ Γ(X, V)`, and
+extension of ideals is multiplicative. -/
+theorem comap_mul (f : X ⟶ Y) (I J : Y.IdealSheafData) :
+    (I * J).comap f = I.comap f * J.comap f := by
+  let ι := Σ' (U : Y.affineOpens) (V : X.affineOpens), V.1 ≤ f ⁻¹ᵁ U.1
+  refine ext_of_iSup_eq_top (ι := ι) (fun i ↦ i.2.1) ?_ fun ⟨U, V, e⟩ ↦ ?_
+  · rw [eq_top_iff]
+    intro x _
+    obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
+      Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (f x)) isOpen_univ
+    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVU⟩ :=
+      X.isBasis_affineOpens.exists_subset_of_mem_open (a := x) (ou := (f ⁻¹ᵁ U).2) hxU
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨⟨U, hU⟩, ⟨V, hV⟩, hVU⟩, hxV⟩
+  · simp only [ideal_mul, Pi.mul_apply]
+    rw [ideal_comap_appLE _ f U V e, ideal_comap_appLE _ f U V e, ideal_comap_appLE _ f U V e,
+      ideal_mul, Pi.mul_apply, Ideal.map_mul]
+
+end Mul
+
+section OpenImmersion
+
+variable {U : Scheme.{u}} (j : U ⟶ Y)
+
+/-- If the closed subscheme of `J` stays closed in `Y` under a monomorphism `j : U ⟶ Y`, then
+pulling back the pushforward of `J` along `j` recovers `J`. -/
+lemma comap_map_of_isClosedImmersion [Mono j] (J : U.IdealSheafData)
+    [IsClosedImmersion (J.subschemeι ≫ j)] : (J.map j).comap j = J := by
+  have h : IsPullback (𝟙 _) J.subschemeι (J.subschemeι ≫ j) j :=
+    IsPullback.of_horiz_isIso_mono ⟨by simp⟩
+  rw [map, ← ker_fst_of_isClosedImmersion, ← h.flip.isoPullback_inv_fst,
+    Scheme.Hom.ker_comp_of_isIso, ker_subschemeι]
+
+/-- The support of the pushforward of `J` along `j` lies in the range of `j`, provided the
+closed subscheme of `J` stays closed in `Y`. -/
+lemma support_map_subset_range (J : U.IdealSheafData) [IsClosedImmersion (J.subschemeι ≫ j)] :
+    ((J.map j).support : Set Y) ⊆ Set.range j := by
+  rw [map, Scheme.Hom.support_ker,
+    (J.subschemeι ≫ j).isClosedEmbedding.isClosed_range.closure_eq, Scheme.Hom.comp_base,
+    TopCat.coe_comp, Set.range_comp]
+  exact Set.image_subset_range _ _
+
+/-- An ideal sheaf whose support lies in the range of an open immersion `j` is the pushforward
+of its pullback along `j`. -/
+lemma map_comap_of_subset_range [IsOpenImmersion j] (I : Y.IdealSheafData)
+    (hI : (I.support : Set Y) ⊆ Set.range j) : (I.comap j).map j = I := by
+  have hI' : Set.range I.subschemeι ⊆ Set.range j := by rwa [range_subschemeι]
+  have h : IsPullback (IsOpenImmersion.lift j I.subschemeι hI') (𝟙 _) j I.subschemeι :=
+    IsPullback.of_vert_isIso_mono ⟨by simp⟩
+  rw [comap, ← h.isoPullback_inv_fst, Scheme.Hom.ker_comp_of_isIso, map_ker,
+    IsOpenImmersion.lift_fac, ker_subschemeι]
+
+end OpenImmersion
 
 end AlgebraicGeometry.Scheme.IdealSheafData

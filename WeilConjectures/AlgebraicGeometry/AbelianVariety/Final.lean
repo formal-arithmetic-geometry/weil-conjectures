@@ -61,7 +61,9 @@ theorem abelianVariety_estimate (p : ℕ) [CharP K p] (A : Over (Spec (.of K))) 
       (∀ n : ℕ, 0 < n →
         (torsionSubgroupScheme A n).hom.finrankΓ = n ^ (2 * IsAbelianVariety.dim A)) ∧
       (∀ n : ℕ, 0 < n → ¬ p ∣ n → Etale (torsionSubgroupScheme A n).hom) :=
-  sorry
+  ⟨isIsogeny_npow_id, isogenyDegree_npow_id, isFinite_torsionSubgroupScheme A,
+    flat_torsionSubgroupScheme, finrankΓ_torsionSubgroupScheme,
+    etale_torsionSubgroupScheme p A⟩
 
 /-- Blueprint `sk-thm-av-final`: Abelian-variety estimate, clauses (c) and (d).
 
@@ -88,6 +90,8 @@ theorem abelianVariety_estimate_of_isAlgClosed [IsAlgClosed K] (p : ℕ) [CharP 
       (∀ (ℓ : ℕ) [Fact ℓ.Prime], ℓ ≠ p →
         Nonempty (IsAbelianVariety.rationalTateModule ℓ A ≃ₗ[ℚ_[ℓ]]
           (Fin (2 * IsAbelianVariety.dim A) → ℚ_[ℓ]))) :=
-  sorry
+  ⟨nonempty_addEquiv_torsionBy p A, bijective_toUnit_comp_torsionSubgroupScheme p A,
+    surjective_npow_points, fun ℓ _ hℓ ↦ IsAbelianVariety.nonempty_linearEquiv_tateModule ℓ A p hℓ,
+    fun ℓ _ hℓ ↦ IsAbelianVariety.nonempty_linearEquiv_rationalTateModule ℓ A p hℓ⟩
 
 end AlgebraicGeometry

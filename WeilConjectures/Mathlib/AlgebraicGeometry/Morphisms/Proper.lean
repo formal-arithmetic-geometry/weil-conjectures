@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import Mathlib.AlgebraicGeometry.Restrict
@@ -30,6 +31,12 @@ universally closed, this gives the form used in practice,
 `AlgebraicGeometry.Scheme.Opens.eq_of_isProper_of_dense`, and its variant
 `AlgebraicGeometry.Scheme.Opens.eq_of_isProper_of_isSchemeTheoreticallyDominant`, where the
 density is supplied by a quasi-compact scheme-theoretically dense open contained in `V`.
+
+## Immersions of proper schemes
+
+An immersion `f` whose composite with a separated morphism `g` is universally closed is a closed
+immersion (`AlgebraicGeometry.IsClosedImmersion.of_comp_of_isSeparated`); for instance, an
+immersion of a proper `S`-scheme into a separated `S`-scheme is closed.
 -/
 
 @[expose] public section
@@ -44,6 +51,15 @@ namespace AlgebraicGeometry
 theorem isProper_pi_hom {S : Scheme.{u}} {ι : Type*} [Finite ι] (F : ι → Over S)
     [HasProduct F] [∀ i, IsProper (F i).hom] : IsProper (∏ᶜ F).hom :=
   MorphismProperty.pi_hom _ F fun _ ↦ inferInstance
+
+/-- An immersion `f : X ⟶ Y` whose composite with a separated morphism `g : Y ⟶ Z` is
+universally closed is a closed immersion: `f` is then itself universally closed, so its image is
+closed. In particular, an immersion of a proper `Z`-scheme into a separated `Z`-scheme is a
+closed immersion. -/
+theorem IsClosedImmersion.of_comp_of_isSeparated {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [IsImmersion f] [UniversallyClosed (f ≫ g)] [IsSeparated g] : IsClosedImmersion f :=
+  have : UniversallyClosed f := UniversallyClosed.of_comp_of_isSeparated f g
+  .of_isPreimmersion f f.isClosedMap.isClosed_range
 
 variable {Z T : Scheme.{u}}
 
