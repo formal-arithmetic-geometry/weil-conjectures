@@ -64,6 +64,8 @@ Finally, the identity component and the centre of `V(I)` are described by Hopf i
 - `Matrix.GeneralLinearGroup.isHopfIdeal_of_isRadical`: over an algebraically closed field, a
   radical ideal whose `k`-points form a subgroup is a Hopf ideal; in particular the ideal of the
   identity component is a Hopf ideal.
+- `Matrix.GeneralLinearGroup.zeroLocus_vanishingIdeal_eq_of_finite`: a finite subgroup of
+  `GL n k` is Zariski closed.
 - `Matrix.GeneralLinearGroup.zeroLocus_vanishingIdeal_le_normalizer`,
   `Matrix.GeneralLinearGroup.commutator_zeroLocus_vanishingIdeal_le`: Zariski closure preserves
   normalizing and commutator inclusions between subgroups of `GL n k`.
@@ -71,6 +73,11 @@ Finally, the identity component and the centre of `V(I)` are described by Hopf i
   `Matrix.GeneralLinearGroup.mulVec_mem_of_mem_zeroLocus_vanishingIdeal`,
   `Matrix.GeneralLinearGroup.map_mem_zeroLocus_vanishingIdeal`: centralizers, stabilizers of
   subspaces and polynomial homomorphisms pass to the Zariski closure.
+- `Matrix.GeneralLinearGroup.exists_evalAlgHom_eq_det_of_mk_eq`,
+  `Matrix.GeneralLinearGroup.evalAlgHom_mem_of_mem_zeroLocus_vanishingIdeal`: the determinant on a
+  subquotient `S ⧸ U` of `k^n` is a polynomial function on the stabilizer of `U ≤ S`, and a
+  polynomial function with finitely many values on a subgroup takes the same values on its
+  Zariski closure.
 - `Matrix.GeneralLinearGroup.IsConnected.isPrime`: in characteristic zero, a connected matrix
   group is irreducible, by Cartier's lemma; and
   `Matrix.GeneralLinearGroup.eq_of_le_of_ringKrullDim_eq`: a closed subgroup of an irreducible
@@ -97,6 +104,8 @@ then specialised to the coordinate ring of `GL_n`: elaborating them directly at 
 - `sk-i-restriction`: the Zariski closure of a subgroup of `GL n k` is an algebraic group, and
   closure preserves normalizing and commutator inclusions.
 - `lem-wf-stabilizer-density`: closed stabilizers and density.
+- `sk-p-readout`: the determinant character of a subquotient has finite image on the closure of a
+  subgroup on which it has finite image.
 - `sk-p-geometry`: the identity component is cut out by a Hopf ideal.
 - `lem-wf-same-lie-closed-subgroup` (clause (1)), `lem-ag-equal-dimension-subgroup`: connected
   matrix groups are irreducible; equal dimension forces equality.
@@ -420,6 +429,36 @@ theorem zeroLocus_vanishingIdeal_le {Γ : Subgroup (GL n k)} (J : Set (Coordinat
     zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k ≤ Γ :=
   fun g hg ↦ hJ g fun a ha ↦ hg a (mem_vanishingIdeal.2 fun h hh ↦ hΓ h hh a ha)
 
+/-- A matrix outside a finite subgroup `Γ` of `GL n k` is separated from `Γ` by an equation: the
+product, over `γ ∈ Γ`, of `x_ij - γ_ij` for an entry `(i, j)` at which `g` and `γ` differ. -/
+theorem exists_mem_vanishingIdeal_evalAlgHom_ne_zero {Γ : Subgroup (GL n k)} [Finite Γ]
+    {g : GL n k} (hg : g ∉ Γ) :
+    ∃ a ∈ vanishingIdeal (Γ : Set (GL n k)), evalAlgHom g a ≠ 0 := by
+  have : Fintype Γ := Fintype.ofFinite Γ
+  have hne (γ : Γ) :
+      ∃ p : n × n, (g : Matrix n n k) p.1 p.2 ≠ ((γ : GL n k) : Matrix n n k) p.1 p.2 := by
+    by_contra! h
+    exact hg (Units.ext (Matrix.ext fun i j ↦ h (i, j)) ▸ γ.2)
+  choose p hp using hne
+  refine ⟨∏ γ : Γ, (coord n k (p γ).1 (p γ).2 -
+    algebraMap k _ (((γ : GL n k) : Matrix n n k) (p γ).1 (p γ).2)),
+    mem_vanishingIdeal.2 fun δ hδ ↦ ?_, ?_⟩
+  · rw [map_prod]
+    exact Finset.prod_eq_zero (Finset.mem_univ ⟨δ, hδ⟩) (by simp)
+  · rw [map_prod]
+    exact Finset.prod_ne_zero_iff.2 fun γ _ ↦ by simpa [sub_eq_zero] using hp γ
+
+/-- A finite subgroup of `GL n k` is Zariski closed: the `k`-points of its Zariski closure are
+the subgroup itself. -/
+theorem zeroLocus_vanishingIdeal_eq_of_finite (Γ : Subgroup (GL n k)) [Finite Γ] :
+    zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k = Γ := by
+  refine le_antisymm (zeroLocus_vanishingIdeal_le (vanishingIdeal (Γ : Set (GL n k)))
+    (fun g hg a ha ↦ mem_vanishingIdeal.1 ha g hg) fun g hg ↦ ?_)
+    (subset_zeroLocus_vanishingIdeal Γ)
+  by_contra hgΓ
+  obtain ⟨a, ha, hga⟩ := exists_mem_vanishingIdeal_evalAlgHom_ne_zero hgΓ
+  exact hga (hg a ha)
+
 /-- If a subgroup `Γ` of `GL n k` normalizes a subgroup `Δ`, then the Zariski closure of `Γ`
 normalizes the Zariski closure of `Δ`, on `R`-points for every `k`-algebra `R`.
 
@@ -518,6 +557,43 @@ theorem forall_mulVec_mem_iff_forall_mem_zeroLocus_vanishingIdeal {Γ : Subgroup
         (g : Matrix n n k) *ᵥ u ∈ U :=
   ⟨fun hU _ hg _ hu ↦ mulVec_mem_of_mem_zeroLocus_vanishingIdeal hU hg hu,
     fun hU g hg ↦ hU g (subset_zeroLocus_vanishingIdeal Γ hg)⟩
+
+/-- The determinant of the endomorphism induced on a subquotient `S ⧸ U` of `k^n` by a matrix
+`g` stabilizing `U ≤ S` is a polynomial function of the entries of `g`: there is one `p` in the
+coordinate ring of `GL_n` with `p(g) = det f` for every `g` and every endomorphism `f` of `S ⧸ U`
+induced by `g`.  In a basis `(mk sⱼ)` of `S ⧸ U`, with coordinate forms extended to linear forms
+`νᵢ` on `k^n`, the matrix of `f` is `(νᵢ(g sⱼ))ᵢⱼ`, whose entries are linear in `g`.
+(blueprint: `sk-p-readout`) -/
+theorem exists_evalAlgHom_eq_det_of_mk_eq (S U : Submodule k (n → k)) :
+    ∃ p : CoordinateRing n k, ∀ (g : GL n k) (f : Module.End k (S ⧸ U.comap S.subtype)),
+      (∀ x : S, ∃ y : S, (y : n → k) = (g : Matrix n n k) *ᵥ x ∧
+        f (Submodule.Quotient.mk x) = Submodule.Quotient.mk y) →
+      evalAlgHom g p = LinearMap.det f := by
+  classical
+  let b := Module.finBasis k (S ⧸ U.comap S.subtype)
+  choose s hs using fun j ↦ Submodule.Quotient.mk_surjective _ (b j)
+  choose ν hν using fun i ↦ LinearMap.exists_extend ((b.coord i).comp (U.comap S.subtype).mkQ)
+  refine ⟨(Matrix.of fun i j ↦ linearFormEquation (ν i) (s j : n → k)).det, fun g f hf ↦ ?_⟩
+  rw [← LinearMap.det_toMatrix b, AlgHom.map_det]
+  congr 1
+  ext i j
+  obtain ⟨y, hy, hfy⟩ := hf (s j)
+  have := congr($(hν i) y)
+  simp only [LinearMap.coe_comp, Function.comp_apply, Submodule.coe_subtype, Submodule.mkQ_apply,
+    Module.Basis.coord_apply] at this
+  simp [LinearMap.toMatrix_apply, ← hs, hfy, ← this, hy]
+
+/-- A polynomial function `p` on `GL_n` whose values on a subgroup `Γ` lie in a finite set `A`
+has its values in `A` on the whole Zariski closure of `Γ`: the product `∏_{a ∈ A} (p - a)`
+vanishes on `Γ`. (blueprint: `sk-p-readout`) -/
+theorem evalAlgHom_mem_of_mem_zeroLocus_vanishingIdeal {Γ : Subgroup (GL n k)}
+    (p : CoordinateRing n k) {A : Set k} (hA : A.Finite) (hΓ : ∀ γ ∈ Γ, evalAlgHom γ p ∈ A)
+    {g : GL n k} (hg : g ∈ zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k) :
+    evalAlgHom g p ∈ A := by
+  classical
+  have h := hg (∏ a ∈ hA.toFinset, (p - algebraMap k _ a)) (mem_vanishingIdeal.2 fun γ hγ ↦ by
+    simpa [Finset.prod_eq_zero_iff, sub_eq_zero] using hΓ γ hγ)
+  simpa [Finset.prod_eq_zero_iff, sub_eq_zero] using h
 
 /-- Over an algebraically closed field, every maximal ideal of the coordinate ring of `GL_n` is the
 ideal of a point. -/

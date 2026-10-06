@@ -95,6 +95,12 @@ theorem le_radius_of_summable {f : 𝕜⟦X⟧} {r : ℝ≥0}
   (FormalMultilinearSeries.ofScalars 𝕜 fun n ↦ coeff n f).le_radius_of_summable_norm
     (by simpa [FormalMultilinearSeries.ofScalars_norm] using h)
 
+/-- If `‖aₙ‖ rⁿ` is bounded, then `r` is at most the radius. -/
+theorem le_radius_of_bound {f : 𝕜⟦X⟧} {r : ℝ≥0} (B : ℝ)
+    (h : ∀ n, ‖coeff n f‖ * (r : ℝ) ^ n ≤ B) : (r : ℝ≥0∞) ≤ f.radius :=
+  (FormalMultilinearSeries.ofScalars 𝕜 fun n ↦ coeff n f).le_radius_of_bound B
+    (by simpa [FormalMultilinearSeries.ofScalars_norm] using h)
+
 /-- A series whose coefficients are dominated in norm by those of `g` has at least the radius
 of `g`. -/
 theorem radius_le_radius_of_norm_coeff_le {f g : 𝕜⟦X⟧} (h : ∀ n, ‖coeff n f‖ ≤ ‖coeff n g‖) :
