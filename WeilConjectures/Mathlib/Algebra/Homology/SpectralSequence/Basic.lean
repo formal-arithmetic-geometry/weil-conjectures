@@ -82,4 +82,51 @@ each `H n` whose successive quotients are the `E∞`-terms `E∞^{p, q}` with `p
 def SpectralSequence.AbutsTo (E : E₂CohomologicalSpectralSequenceNat C) (H : ℕ → C) : Prop :=
   Nonempty (E.Abutment H)
 
+/-- The underlying object of the image of a subobject `X` under `Subobject.map f` is isomorphic
+to the underlying object of `X`. -/
+noncomputable def Subobject.mapObjIso {A B : C} (f : A ⟶ B) [Mono f] (X : Subobject A) :
+    ((Subobject.map f).obj X : C) ≅ (X : C) :=
+  Subobject.isoOfEqMk _ (X.arrow ≫ f) (by
+    conv_lhs => rw [← Subobject.mk_arrow X]
+    rfl)
+
+omit [Abelian C] in
+@[reassoc (attr := simp)]
+lemma Subobject.mapObjIso_hom_arrow {A B : C} (f : A ⟶ B) [Mono f] (X : Subobject A) :
+    (Subobject.mapObjIso f X).hom ≫ X.arrow ≫ f = ((Subobject.map f).obj X).arrow := by
+  simp [Subobject.mapObjIso]
+
+/-- The cokernel of the inclusion of the images of two subobjects under `Subobject.map f` is
+isomorphic to the cokernel of the inclusion of the original subobjects. -/
+noncomputable def Subobject.cokernelOfLEMapIso {A B : C} (f : A ⟶ B) [Mono f]
+    (X Y : Subobject A) (h : X ≤ Y)
+    (h' : (Subobject.map f).obj X ≤ (Subobject.map f).obj Y) :
+    cokernel (Subobject.ofLE _ _ h') ≅ cokernel (Subobject.ofLE _ _ h) :=
+  cokernel.mapIso _ _ (Subobject.mapObjIso f X) (Subobject.mapObjIso f Y) (by
+    rw [← cancel_mono (Y.arrow ≫ f)]
+    simp)
+
+/-- Transport of an abutment along isomorphisms of the graded object. -/
+noncomputable def SpectralSequence.Abutment.ofIso {E : E₂CohomologicalSpectralSequenceNat C}
+    {H H' : ℕ → C} (h : E.Abutment H) (e : ∀ n, H n ≅ H' n) : E.Abutment H' where
+  filtration n p := Subobject.mapIsoToOrderIso (e n) (h.filtration n p)
+  filtration_succ_le n p := (Subobject.mapIsoToOrderIso (e n)).monotone (h.filtration_succ_le n p)
+  filtration_zero n := by rw [h.filtration_zero, OrderIso.map_top]
+  filtration_succ_self n := by rw [h.filtration_succ_self, OrderIso.map_bot]
+  nonempty_gradedIso n p q hpq := by
+    obtain ⟨i⟩ := h.nonempty_gradedIso n p q hpq
+    exact ⟨Subobject.cokernelOfLEMapIso (e n).hom _ _ (h.filtration_succ_le n p) _ ≪≫ i⟩
+
+/-- Convergence of a spectral sequence is invariant under isomorphisms of the abutment. -/
+theorem SpectralSequence.AbutsTo.of_iso {E : E₂CohomologicalSpectralSequenceNat C}
+    {H H' : ℕ → C} (h : E.AbutsTo H) (e : ∀ n, H n ≅ H' n) : E.AbutsTo H' :=
+  let ⟨a⟩ := h
+  ⟨a.ofIso e⟩
+
+/-- Convergence of a spectral sequence is invariant under (unspecified) isomorphisms of the
+abutment. -/
+theorem SpectralSequence.AbutsTo.of_nonempty_iso {E : E₂CohomologicalSpectralSequenceNat C}
+    {H H' : ℕ → C} (h : E.AbutsTo H) (e : ∀ n, Nonempty (H n ≅ H' n)) : E.AbutsTo H' :=
+  h.of_iso fun n ↦ (e n).some
+
 end CategoryTheory
