@@ -7,13 +7,13 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.MonoidAlgebra.Module
-public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 public import Mathlib.GroupTheory.Perm.Sign
 public import Mathlib.LinearAlgebra.Dual.Defs
 public import Mathlib.LinearAlgebra.Finsupp.Pi
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-!
 # The monomial Čech complex of the twisting sheaves on projective space
@@ -561,7 +561,7 @@ lemma monomialCech_cocycle_top_swap {d : ℕ} (hn : Fintype.card n = d + 1)
       c.coeff_eq_zero_of_neg _ (i := i) (fun ⟨k, hk⟩ ↦ hi ⟨_, hk⟩) (he i), neg_zero]
 
 /-- A non-injective tuple `Fin (d + 1) → n` misses some coordinate. -/
-lemma exists_notMem_range_of_not_injective {d : ℕ} (hn : Fintype.card n = d + 1)
+private lemma exists_notMem_range_of_not_injective {d : ℕ} (hn : Fintype.card n = d + 1)
     {σ : Fin (d + 1) → n} (hσ : ¬ Function.Injective σ) : ∃ i, i ∉ Set.range σ := by
   by_contra! h
   exact hσ ((Fintype.bijective_iff_surjective_and_card σ).2 ⟨fun i ↦ h i, by simp [hn]⟩).1
@@ -686,7 +686,7 @@ lemma monomialCech_cocycle_top_coeff_eq_zero {d : ℕ} (hn : Fintype.card n = d 
 
 /-- With a single coordinate and `m < 0`, every exponent vector of sum `m` is strictly
 negative. -/
-lemma forall_neg_of_card_eq_one (hn : Fintype.card n = 0 + 1) (hm : m < 0) {e : n → ℤ}
+private lemma forall_neg_of_card_eq_one (hn : Fintype.card n = 0 + 1) (hm : m < 0) {e : n → ℤ}
     (he : ∑ i, e i = m) (i : n) : e i < 0 := by
   obtain ⟨x, hx⟩ := Fintype.card_eq_one_iff.1 hn
   rw [Fintype.sum_eq_single i fun j hj ↦ absurd ((hx j).trans (hx i).symm) hj] at he
