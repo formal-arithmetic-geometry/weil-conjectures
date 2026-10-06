@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.MonoidAlgebra.Module
-public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 public import Mathlib.GroupTheory.Perm.Sign
 public import Mathlib.LinearAlgebra.Dual.Defs
@@ -30,16 +30,16 @@ blueprint proof of `lem-pc-projective-space-twist-cohomology`. Writing `d + 1` f
 of coordinates:
 
 * `H⁰` is the degree-`m` part `A[xᵢ]ₘ` of the polynomial ring
-  (`monomialCechComplex_homology_zero_linearEquiv`);
+  (`monomialCechComplexHomologyZeroLinearEquiv`);
 * `Hᵠ = 0` for `0 < q < d` (`exactAt_monomialCechComplex`);
 * `Hᵈ` is free on the strictly negative exponent vectors of sum `m`
-  (`monomialCechComplex_homology_top_linearEquiv`), so that `Hᵈ = 0` for `m ≥ -d`
+  (`monomialCechComplexHomologyTopLinearEquiv`), so that `Hᵈ = 0` for `m ≥ -d`
   (`subsingleton_monomialCechComplex_homology_top`), `Hᵈ(𝒪(-d-1)) ≅ A`
   (`monomialCechTrace`) and `Hᵈ ≅ (A[xᵢ]_{-m-d-1})^∨` for `m ≤ -d-1`
-  (`monomialCechComplex_homology_top_linearEquiv_dual`);
+  (`monomialCechComplexHomologyTopLinearEquivDual`);
 * for `d ≥ 1` the last isomorphism is the one induced by the perfect pairing
   `A[xᵢ]_{-m-d-1} × Hᵈ(𝒪(m)) → Hᵈ(𝒪(-d-1)) ≅ A` given by multiplication
-  (`monomialCechPairing`, `monomialCechComplex_homology_top_linearEquiv_dual_apply`), following
+  (`monomialCechPairing`, `monomialCechComplexHomologyTopLinearEquivDual_apply`), following
   the blueprint proof of `lem-pc-projective-space-serre-pairing`.
 
 ## Implementation notes
@@ -183,13 +183,13 @@ lemma monomialCechComplex_d_apply (p : ℕ) (c : MonomialCechCochain n A m p)
 
 /-- Deleting the entry `i + 1` of `Fin.cons r σ` is the same as deleting the entry `i` of
 `σ`. -/
-lemma cons_comp_succ_succAbove {α : Type*} {p : ℕ} (r : α) (σ : Fin (p + 1) → α)
+private lemma cons_comp_succ_succAbove {α : Type*} {p : ℕ} (r : α) (σ : Fin (p + 1) → α)
     (i : Fin (p + 1)) :
     (Fin.cons r σ : Fin (p + 2) → α) ∘ i.succ.succAbove = Fin.cons r (σ ∘ i.succAbove) := by
   funext l
   cases l using Fin.cases <;> simp
 
-lemma cons_comp_zero_succAbove {α : Type*} {p : ℕ} (r : α) (σ : Fin (p + 1) → α) :
+private lemma cons_comp_zero_succAbove {α : Type*} {p : ℕ} (r : α) (σ : Fin (p + 1) → α) :
     (Fin.cons r σ : Fin (p + 2) → α) ∘ (0 : Fin (p + 2)).succAbove = σ := by
   funext l
   simp
@@ -276,7 +276,8 @@ lemma monomialCechComplex_d_homotopy_add (p : ℕ) (c : MonomialCechCochain n A 
 
 /-- A tuple `Fin (p + 1) → n` with `p + 1` less than the number of coordinates misses some
 coordinate. -/
-lemma exists_notMem_range_of_lt {p : ℕ} (σ : Fin (p + 1) → n) (h : p + 1 < Fintype.card n) :
+private lemma exists_notMem_range_of_lt {p : ℕ} (σ : Fin (p + 1) → n)
+    (h : p + 1 < Fintype.card n) :
     ∃ i, i ∉ Set.range σ := by
   by_contra! h'
   have := Fintype.card_le_of_surjective σ fun i ↦ h' i
@@ -307,90 +308,6 @@ theorem exactAt_monomialCechComplex {d : ℕ} (hn : Fintype.card n = d + 1) (q :
     obtain ⟨i, hi⟩ := exists_notMem_range_of_lt σ (by omega)
     rw [c.coeff_eq_zero_of_neg σ hi (he i), monomialCechComplex_d_apply]
     simp [monomialCechHomotopy_coeff_of_forall _ _ he]
-
-/-! ### Homology of a cochain complex of modules -/
-
-/-- The homology in degree `j` of a cochain complex of modules, as the quotient of the kernel of
-the outgoing differential by the image of the incoming one. -/
-def _root_.CochainComplex.homologyLinearEquivQuotient {R : Type u} [Ring R]
-    (K : CochainComplex (ModuleCat.{u} R) ℕ) (i j k : ℕ) (hi : (ComplexShape.up ℕ).prev j = i)
-    (hk : (ComplexShape.up ℕ).next j = k) :
-    K.homology j ≃ₗ[R] LinearMap.ker (K.d j k).hom ⧸
-      LinearMap.range (K.sc' i j k).moduleCatToCycles :=
-  ((K.homologyIsoSc' i j k hi hk) ≪≫ (K.sc' i j k).moduleCatHomologyIso).toLinearEquiv
-
-/-- The homology in degree `0` of a cochain complex of modules is the kernel of the
-differential. -/
-def _root_.CochainComplex.homologyZeroLinearEquiv {R : Type u} [Ring R]
-    (K : CochainComplex (ModuleCat.{u} R) ℕ) :
-    K.homology 0 ≃ₗ[R] LinearMap.ker (K.d 0 1).hom :=
-  (K.homologyLinearEquivQuotient 0 0 1 (by simp) (by simp)).trans
-    (Submodule.quotEquivOfEqBot _ (LinearMap.range_eq_bot.2 (LinearMap.ext fun x ↦
-      Subtype.ext (by
-        change (K.d 0 0).hom x = 0
-        rw [K.shape 0 0 (by simp)]
-        rfl))))
-
-/-- The class in `K.homology j` of a cycle of a cochain complex of modules. -/
-def _root_.CochainComplex.homologyClass {R : Type u} [Ring R]
-    (K : CochainComplex (ModuleCat.{u} R) ℕ) (i j k : ℕ) (hi : (ComplexShape.up ℕ).prev j = i)
-    (hk : (ComplexShape.up ℕ).next j = k) :
-    LinearMap.ker (K.d j k).hom →ₗ[R] K.homology j :=
-  (K.homologyLinearEquivQuotient i j k hi hk).symm.toLinearMap ∘ₗ Submodule.mkQ _
-
-section HomologyClass
-
-variable {R : Type u} [Ring R] (K : CochainComplex (ModuleCat.{u} R) ℕ) {i j k : ℕ}
-  (hi : (ComplexShape.up ℕ).prev j = i) (hk : (ComplexShape.up ℕ).next j = k)
-
-lemma _root_.CochainComplex.homologyLinearEquivQuotient_homologyClass
-    (z : LinearMap.ker (K.d j k).hom) :
-    K.homologyLinearEquivQuotient i j k hi hk (K.homologyClass i j k hi hk z) =
-      Submodule.Quotient.mk z := by
-  simp [CochainComplex.homologyClass]
-
-lemma _root_.CochainComplex.homologyClass_surjective :
-    Function.Surjective (K.homologyClass i j k hi hk) :=
-  (K.homologyLinearEquivQuotient i j k hi hk).symm.surjective.comp (Submodule.mkQ_surjective _)
-
-/-- A cycle `z`, as an element of `K.cycles j`. -/
-lemma _root_.CochainComplex.iCycles_cyclesIsoSc'_inv_moduleCatCyclesIso_inv
-    (z : LinearMap.ker (K.d j k).hom) :
-    K.iCycles j ((K.cyclesIsoSc' i j k hi hk).inv ((K.sc' i j k).moduleCatCyclesIso.inv z)) =
-      z.1 := by
-  rw [← CategoryTheory.comp_apply, K.cyclesIsoSc'_inv_iCycles]
-  exact (ConcreteCategory.congr_hom (K.sc' i j k).moduleCatCyclesIso_inv_iCycles z).trans rfl
-
-/-- The class of a cycle `z` is the image under `homologyπ` of any element of `K.cycles j` lying
-over `z`. -/
-lemma _root_.CochainComplex.homologyClass_eq_homologyπ (z : LinearMap.ker (K.d j k).hom)
-    (y : K.cycles j) (hy : K.iCycles j y = z.1) :
-    K.homologyClass i j k hi hk z = K.homologyπ j y := by
-  have hw : (K.cyclesIsoSc' i j k hi hk).inv ((K.sc' i j k).moduleCatCyclesIso.inv z) = y :=
-    (ModuleCat.mono_iff_injective (K.iCycles j)).1 inferInstance
-      ((K.iCycles_cyclesIsoSc'_inv_moduleCatCyclesIso_inv hi hk z).trans hy.symm)
-  rw [← hw, ← CategoryTheory.comp_apply, ← K.π_homologyIsoSc'_inv i j k hi hk,
-    CategoryTheory.comp_apply, ShortComplex.moduleCatCyclesIso_inv_π_apply]
-  rfl
-
-/-- **Naturality of the classes of cycles**: a morphism of complexes maps the class of a cycle
-`z` to the class of its image. -/
-lemma _root_.CochainComplex.homologyMap_homologyClass {L : CochainComplex (ModuleCat.{u} R) ℕ}
-    (φ : K ⟶ L) (z : LinearMap.ker (K.d j k).hom) :
-    HomologicalComplex.homologyMap φ j (K.homologyClass i j k hi hk z) =
-      L.homologyClass i j k hi hk ⟨φ.f j z, by
-        have h := ConcreteCategory.congr_hom (φ.comm j k) z.1
-        simp only [CategoryTheory.comp_apply] at h
-        change L.d j k (φ.f j z.1) = 0
-        rw [h, LinearMap.mem_ker.1 z.2, map_zero]⟩ := by
-  set y := (K.cyclesIsoSc' i j k hi hk).inv ((K.sc' i j k).moduleCatCyclesIso.inv z)
-  have hy : K.iCycles j y = z.1 := K.iCycles_cyclesIsoSc'_inv_moduleCatCyclesIso_inv hi hk z
-  rw [K.homologyClass_eq_homologyπ hi hk z y hy, ← CategoryTheory.comp_apply,
-    HomologicalComplex.homologyπ_naturality, CategoryTheory.comp_apply]
-  refine (L.homologyClass_eq_homologyπ hi hk _ _ ?_).symm
-  rw [← CategoryTheory.comp_apply, HomologicalComplex.cyclesMap_i, CategoryTheory.comp_apply, hy]
-
-end HomologyClass
 
 /-! ### Degree zero -/
 
@@ -508,7 +425,7 @@ variable (n A) in
 Čech complex of `𝒪(m)` is the module `A[xᵢ]ₘ` of homogeneous polynomials of degree `m`.
 
 (blueprint: `lem-pc-projective-space-twist-cohomology` (i)) -/
-def monomialCechComplex_homology_zero_linearEquiv [Nonempty n] (D : ℕ) :
+def monomialCechComplexHomologyZeroLinearEquiv [Nonempty n] (D : ℕ) :
     (monomialCechComplex n A D).homology 0 ≃ₗ[A] MvPolynomial.homogeneousSubmodule n A D :=
   (monomialCechComplex n A D).homologyZeroLinearEquiv ≪≫ₗ
     monomialCechCocycleZeroEquiv n A D (Int.natCast_nonneg D) (Classical.arbitrary n) ≪≫ₗ
@@ -519,7 +436,7 @@ def monomialCechComplex_homology_zero_linearEquiv [Nonempty n] (D : ℕ) :
 /-! ### The top degree: alternating cochains -/
 
 /-- The value of `p.succAbove i`, as a natural number. -/
-lemma val_succAbove_eq_ite {k : ℕ} (p : Fin (k + 1)) (i : Fin k) :
+private lemma val_succAbove_eq_ite {k : ℕ} (p : Fin (k + 1)) (i : Fin k) :
     (p.succAbove i : ℕ) = if (i : ℕ) < p then (i : ℕ) else (i : ℕ) + 1 := by
   rcases lt_or_ge (i : ℕ) p with h | h
   · rw [Fin.succAbove_of_castSucc_lt _ _ (by simpa [Fin.lt_def] using h), if_pos h]
@@ -789,8 +706,8 @@ lemma monomialCechTopCoeff_d_eq_zero {p : ℕ} (E : Fin (p + 2) ≃ n)
 
 variable (n A m) in
 /-- The top cohomology of the monomial Čech complex with a single coordinate, for `m < 0`:
-`monomialCechComplex_homology_top_linearEquiv` for `d = 0`. -/
-def monomialCechComplex_homology_top_linearEquiv_zero (hn : Fintype.card n = 0 + 1)
+`monomialCechComplexHomologyTopLinearEquiv` for `d = 0`. -/
+def monomialCechComplexHomologyTopLinearEquivZero (hn : Fintype.card n = 0 + 1)
     (E : Fin (0 + 1) ≃ n) (hm : m < 0) :
     (monomialCechComplex n A m).homology 0 ≃ₗ[A] (negativeExponents n m →₀ A) :=
   (monomialCechComplex n A m).homologyZeroLinearEquiv ≪≫ₗ
@@ -828,8 +745,8 @@ lemma range_moduleCatToCycles_eq_ker_monomialCechCocycleTopCoeff {p : ℕ}
 
 variable (n A m) in
 /-- The top cohomology of the monomial Čech complex with at least two coordinates:
-`monomialCechComplex_homology_top_linearEquiv` for `d = p + 1`. -/
-def monomialCechComplex_homology_top_linearEquiv_succ {p : ℕ}
+`monomialCechComplexHomologyTopLinearEquiv` for `d = p + 1`. -/
+def monomialCechComplexHomologyTopLinearEquivSucc {p : ℕ}
     (hn : Fintype.card n = p + 1 + 1) (E : Fin (p + 1 + 1) ≃ n) :
     (monomialCechComplex n A m).homology (p + 1) ≃ₗ[A] (negativeExponents n m →₀ A) :=
   (monomialCechComplex n A m).homologyLinearEquivQuotient p (p + 1) (p + 2) (by simp)
@@ -848,12 +765,12 @@ nonnegative coordinate every cocycle is a coboundary, and on the other summands 
 cocycles are the alternating functions of the tuple.
 
 (blueprint: `lem-pc-projective-space-twist-cohomology` (ii)) -/
-def monomialCechComplex_homology_top_linearEquiv :
+def monomialCechComplexHomologyTopLinearEquiv :
     ∀ {d : ℕ} (_ : Fintype.card n = d + 1) (_ : Fin (d + 1) ≃ n) (_ : d ≠ 0 ∨ m < 0),
       (monomialCechComplex n A m).homology d ≃ₗ[A] (negativeExponents n m →₀ A)
-  | 0, hn, E, hm => monomialCechComplex_homology_top_linearEquiv_zero n A m hn E
+  | 0, hn, E, hm => monomialCechComplexHomologyTopLinearEquivZero n A m hn E
       (hm.resolve_left (by simp))
-  | _ + 1, hn, E, _ => monomialCechComplex_homology_top_linearEquiv_succ n A m hn E
+  | _ + 1, hn, E, _ => monomialCechComplexHomologyTopLinearEquivSucc n A m hn E
 
 /-- Strictly negative exponent vectors have sum at most `-(d + 1)`, so there are none of sum
 `m ≥ -d`. -/
@@ -875,7 +792,7 @@ theorem subsingleton_monomialCechComplex_homology_top {d : ℕ} (hn : Fintype.ca
     (hd : d ≠ 0) (hm : -(d : ℤ) ≤ m) :
     Subsingleton ((monomialCechComplex n A m).homology d) := by
   have := isEmpty_negativeExponents hn hm
-  exact (monomialCechComplex_homology_top_linearEquiv n A m hn
+  exact (monomialCechComplexHomologyTopLinearEquiv n A m hn
     (Fintype.equivFinOfCardEq hn).symm (.inl hd)).toEquiv.subsingleton
 
 variable (n m) in
@@ -922,13 +839,13 @@ variable (n A m) in
 
 (blueprint: `lem-pc-projective-space-twist-cohomology` (ii),
 `lem-pc-projective-space-serre-pairing`) -/
-def monomialCechComplex_homology_top_linearEquiv_dual {d : ℕ} (hn : Fintype.card n = d + 1)
+def monomialCechComplexHomologyTopLinearEquivDual {d : ℕ} (hn : Fintype.card n = d + 1)
     (hm : m ≤ -(d : ℤ) - 1) :
     (monomialCechComplex n A m).homology d ≃ₗ[A]
       Module.Dual A (MvPolynomial.homogeneousSubmodule n A (-m - d - 1).toNat) :=
   haveI : Finite {s : n →₀ ℕ | s.degree = (-m - d - 1).toNat} :=
     (Finsupp.finite_of_degree_eq _).to_subtype
-  monomialCechComplex_homology_top_linearEquiv n A m hn (Fintype.equivFinOfCardEq hn).symm
+  monomialCechComplexHomologyTopLinearEquiv n A m hn (Fintype.equivFinOfCardEq hn).symm
       (.inr (by omega)) ≪≫ₗ
     Finsupp.domLCongr (negativeExponentsEquiv n m hn hm) ≪≫ₗ
     Finsupp.linearEquivFunOnFinite A A _ ≪≫ₗ
@@ -1013,13 +930,13 @@ lemma monomialCechMul_f_apply (F : AddMonoidAlgebra A (n → ℤ))
 
 /-- The class of a top-degree cocycle has, as coordinates, its coefficients on `E` at the
 strictly negative exponent vectors. -/
-lemma monomialCechComplex_homology_top_linearEquiv_succ_homologyClass {p : ℕ}
+lemma monomialCechComplexHomologyTopLinearEquivSucc_homologyClass {p : ℕ}
     (hn : Fintype.card n = p + 1 + 1) (E : Fin (p + 1 + 1) ≃ n)
     (z : LinearMap.ker ((monomialCechComplex n A m).d (p + 1) (p + 2)).hom) :
-    monomialCechComplex_homology_top_linearEquiv_succ n A m hn E
+    monomialCechComplexHomologyTopLinearEquivSucc n A m hn E
         ((monomialCechComplex n A m).homologyClass p (p + 1) (p + 2) (by simp) (by simp) z) =
       monomialCechCocycleTopCoeff n A m E z := by
-  simp only [monomialCechComplex_homology_top_linearEquiv_succ, LinearEquiv.trans_apply,
+  simp only [monomialCechComplexHomologyTopLinearEquivSucc, LinearEquiv.trans_apply,
     CochainComplex.homologyLinearEquivQuotient_homologyClass]
   rfl
 
@@ -1052,7 +969,7 @@ def monomialCechTrace {p : ℕ} (hn : Fintype.card n = p + 1 + 1) :
     (monomialCechComplex n A (-((p + 1 : ℕ) : ℤ) - 1)).homology (p + 1) ≃ₗ[A] A :=
   haveI : Subsingleton (negativeExponents n (-((p + 1 : ℕ) : ℤ) - 1)) :=
     ⟨fun e e' ↦ (eq_negOneExponents hn e).trans (eq_negOneExponents hn e').symm⟩
-  monomialCechComplex_homology_top_linearEquiv_succ n A _ hn
+  monomialCechComplexHomologyTopLinearEquivSucc n A _ hn
       (Fintype.equivFinOfCardEq hn).symm ≪≫ₗ
     Finsupp.uniqueLinearEquiv A A (negOneExponents n hn)
 
@@ -1110,16 +1027,16 @@ lemma homogeneousSubmoduleBasis_apply (D : ℕ) (s : {s : n →₀ ℕ | s.degre
 
 /-- **The Serre pairing on the monomial Čech complex is perfect**: with `d + 1 ≥ 2` coordinates
 and `m ≤ -d - 1`, the isomorphism `Hᵈ(𝒪(m)) ≅ (A[xᵢ]_{-m-d-1})^∨` of
-`monomialCechComplex_homology_top_linearEquiv_dual` is `x ↦ (f ↦ ⟨f, x⟩)` for the pairing
+`monomialCechComplexHomologyTopLinearEquivDual` is `x ↦ (f ↦ ⟨f, x⟩)` for the pairing
 `monomialCechPairing` induced by multiplication. In the monomial bases, `x^f` pairs to `1` with
 the class of `x^{-f-1}` and to `0` with the other basis elements.
 
 (blueprint: `lem-pc-projective-space-serre-pairing`) -/
-theorem monomialCechComplex_homology_top_linearEquiv_dual_apply {p : ℕ}
+theorem monomialCechComplexHomologyTopLinearEquivDual_apply {p : ℕ}
     (hn : Fintype.card n = p + 1 + 1) (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1)
     (x : (monomialCechComplex n A m).homology (p + 1))
     (f : MvPolynomial.homogeneousSubmodule n A (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat) :
-    monomialCechComplex_homology_top_linearEquiv_dual n A m hn hm x f =
+    monomialCechComplexHomologyTopLinearEquivDual n A m hn hm x f =
       monomialCechPairing n A hn hm f x := by
   set E : Fin (p + 1 + 1) ≃ n := (Fintype.equivFinOfCardEq hn).symm
   obtain ⟨z, rfl⟩ := (monomialCechComplex n A m).homologyClass_surjective (i := p)
@@ -1130,25 +1047,25 @@ theorem monomialCechComplex_homology_top_linearEquiv_dual_apply {p : ℕ}
     simp only [monomialCechPairing, LinearMap.comp_apply]
     erw [CochainComplex.homologyMap_homologyClass]
     simp only [monomialCechTrace, LinearEquiv.coe_coe, LinearEquiv.trans_apply,
-      monomialCechComplex_homology_top_linearEquiv_succ_homologyClass,
+      monomialCechComplexHomologyTopLinearEquivSucc_homologyClass,
       Finsupp.uniqueLinearEquiv_apply]
     rfl
   rw [hR]
-  suffices h : (monomialCechComplex_homology_top_linearEquiv_dual n A m hn hm
+  suffices h : (monomialCechComplexHomologyTopLinearEquivDual n A m hn hm
       ((monomialCechComplex n A m).homologyClass p (p + 1) (p + 2) (by simp) (by simp) z) :
         MvPolynomial.homogeneousSubmodule n A _ →ₗ[A] A) =
       coeffNegOneMul n A (AddMonoidAlgebra.ofCoeff (z.1 E : (n → ℤ) →₀ A)) by
     rw [h]
   refine (homogeneousSubmoduleBasis n A _).ext fun s ↦ ?_
-  simp only [monomialCechComplex_homology_top_linearEquiv_dual, LinearEquiv.trans_apply]
+  simp only [monomialCechComplexHomologyTopLinearEquivDual, LinearEquiv.trans_apply]
   change ((homogeneousSubmoduleBasis n A _).constr A _) _ = _
   rw [Module.Basis.constr_basis]
   change _ = (toLaurent n A (homogeneousSubmoduleBasis n A _ s : MvPolynomial n A) *
     AddMonoidAlgebra.ofCoeff (z.1 E : (n → ℤ) →₀ A)).coeff fun _ ↦ -1
   rw [homogeneousSubmoduleBasis_apply, toLaurent_monomial, AddMonoidAlgebra.coeff_single_mul_apply,
     one_mul]
-  change (monomialCechComplex_homology_top_linearEquiv_succ n A m hn E _ : _ →₀ A) _ = _
-  rw [monomialCechComplex_homology_top_linearEquiv_succ_homologyClass, monomialCechCocycleTopCoeff,
+  change (monomialCechComplexHomologyTopLinearEquivSucc n A m hn E _ : _ →₀ A) _ = _
+  rw [monomialCechComplexHomologyTopLinearEquivSucc_homologyClass, monomialCechCocycleTopCoeff,
     LinearMap.comp_apply, monomialCechTopCoeff_apply]
   congr 1
 

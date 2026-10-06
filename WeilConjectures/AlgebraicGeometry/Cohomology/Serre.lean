@@ -143,7 +143,7 @@ theorem ProjectiveSpace.nonempty_H_zero_twist_equiv (k : Type u) [Field k] [Fini
   have := Fintype.ofFinite n
   have : Nonempty n := (Nat.card_pos_iff.1 (by omega)).1
   obtain ⟨e⟩ := ProjectiveSpace.nonempty_H_twist_linearEquiv_homology n k m 0
-  exact ⟨e ≪≫ₗ ProjectiveSpace.monomialCechComplex_homology_zero_linearEquiv n k m⟩
+  exact ⟨e ≪≫ₗ ProjectiveSpace.monomialCechComplexHomologyZeroLinearEquiv n k m⟩
 
 /-- **Vanishing of the cohomology of the twisting sheaves in middle degrees.**
 `H^q(ℙᵈ_k, 𝒪(m)) = 0` for every `m` and every `q ∉ {0, d}`.
@@ -181,6 +181,12 @@ theorem ProjectiveSpace.subsingleton_H_twist_top (k : Type u) [Field k] [Finite 
 `H^d(ℙᵈ_k, 𝒪(m)) = S^{-m-d-1}(V)^∨` for `m ≤ -d-1`. Taking `m = -d-1` exhibits `𝒪(-d-1)` as
 the dualising sheaf of `ℙᵈ_k`.
 
+The blueprint's isomorphism is the canonical one induced by the multiplication pairing. Here it
+is transported through the non-canonical identification
+`nonempty_H_twist_linearEquiv_homology` with the monomial Čech complex, so the description by
+the pairing (`monomialCechComplexHomologyTopLinearEquivDual_apply`) holds only on that
+complex.
+
 (blueprint: `sk-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology` (ii),
 `lem-pc-projective-space-serre-pairing`) -/
 theorem ProjectiveSpace.nonempty_H_twist_top_equiv_dual (k : Type u) [Field k] [Finite n]
@@ -189,7 +195,7 @@ theorem ProjectiveSpace.nonempty_H_twist_top_equiv_dual (k : Type u) [Field k] [
       Module.Dual k (MvPolynomial.homogeneousSubmodule n k (-m - d - 1).toNat)) := by
   have := Fintype.ofFinite n
   obtain ⟨e⟩ := ProjectiveSpace.nonempty_H_twist_linearEquiv_homology n k m d
-  exact ⟨e ≪≫ₗ ProjectiveSpace.monomialCechComplex_homology_top_linearEquiv_dual n k m
+  exact ⟨e ≪≫ₗ ProjectiveSpace.monomialCechComplexHomologyTopLinearEquivDual n k m
     (by rwa [← Nat.card_eq_fintype_card]) hm⟩
 
 end Pn

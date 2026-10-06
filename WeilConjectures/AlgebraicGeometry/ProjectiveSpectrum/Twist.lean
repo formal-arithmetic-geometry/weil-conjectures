@@ -463,6 +463,8 @@ since the transition units multiply. Only the existence of an isomorphism is rec
 tensor product of sheaves of modules is a sheafification, out of which the multiplication map
 is not constructed yet.
 
+TODO: construct the canonical isomorphism sending `e^{(a)} ⊗ e^{(b)}` to `e^{(a+b)}`.
+
 (blueprint: `lem-pc-twist-tensor`) -/
 theorem nonempty_tensorObj_twist_iso (h : ∀ x : Proj 𝒜, ∃ f ∈ 𝒜 1, x ∈ Proj.basicOpen 𝒜 f)
     (a b : ℤ) : Nonempty (twist 𝒜 a ⊗ twist 𝒜 b ≅ twist 𝒜 (a + b)) :=
