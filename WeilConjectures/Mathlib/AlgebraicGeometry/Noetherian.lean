@@ -17,6 +17,8 @@ public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 - `AlgebraicGeometry.irreducibleSpace_of_isDomain_stalk`: a connected locally noetherian scheme
   all of whose local rings are integral domains is irreducible.
+- `AlgebraicGeometry.isNoetherian_of_locallyOfFiniteType`: a scheme quasi-compact and locally of
+  finite type over a noetherian scheme is noetherian.
 -/
 
 @[expose] public section
@@ -61,5 +63,13 @@ theorem irreducibleSpace_of_isDomain_stalk (X : Scheme.{u}) [IsLocallyNoetherian
       exact (key Z₁ hZ₁ hx₁).trans (key Z₂ hZ₂ hx₂).symm
   exact ⟨((↑) : V → X) '' U, V.2.isOpenMap_subtype_val U hU, ⟨_, hxU, rfl⟩,
     hUirr.image _ continuous_subtype_val.continuousOn⟩
+
+/-- A scheme that is quasi-compact and locally of finite type over a noetherian scheme is
+noetherian. -/
+theorem isNoetherian_of_locallyOfFiniteType {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [LocallyOfFiniteType f] [QuasiCompact f] [IsNoetherian Y] : IsNoetherian X :=
+  have := LocallyOfFiniteType.isLocallyNoetherian f
+  have := QuasiCompact.compactSpace_of_compactSpace f
+  {}
 
 end AlgebraicGeometry
