@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Noetherian
@@ -157,6 +158,14 @@ def IsFlatOver (ℱ : X.Modules) (f : X ⟶ T) : Prop :=
     letI : Module Γ(T, V.1) Γ(ℱ, U.1) := Module.compHom _ (f.appLE V.1 U.1 e).hom
     Module.Flat Γ(T, V.1) Γ(ℱ, U.1)
 
+/-- **An invertible module is flat over the base of a flat morphism.** If `f : X ⟶ T` is flat
+and `ℱ` is an invertible `𝒪_X`-module, then `ℱ` is flat over `T`: on an affine open `U` the
+sections `Γ(ℱ, U)` form an invertible, hence flat, `Γ(X, U)`-module, and `Γ(X, U)` is flat over
+`Γ(T, V)` by flatness of `f`. -/
+theorem isFlatOver_of_isInvertible (f : X ⟶ T) [Flat f] (ℱ : X.Modules)
+    [ℱ.IsInvertible] : ℱ.IsFlatOver f :=
+  sorry
+
 /-- The `q`-th **fibre dimension** `dim_{κ(t)} H^q(X_t, ℱ_t)` of an `𝒪_X`-module `ℱ` along a
 morphism `f : X ⟶ T` at a point `t` of `T`: the fibre `X_t = f.fiber t` is a scheme over the
 residue field `κ(t) = T.residueField t`, the restriction `ℱ_t` is the pullback of `ℱ` along
@@ -180,6 +189,34 @@ def perfectLocusOfRank (ℱ : X.Modules) (f : X ⟶ T) (i r : ℕ) : Set T :=
 `ℱ` along `f : X ⟶ T` at a point `t` of `T`. -/
 noncomputable def eulerCharFiber (ℱ : X.Modules) (f : X ⟶ T) (t : T) : ℤ :=
   ∑ᶠ q : ℕ, (-1) ^ q * (ℱ.hFiber f q t : ℤ)
+
+/-- The fibre dimensions only depend on the isomorphism class of the module. -/
+lemma hFiber_congr {ℱ 𝒢 : X.Modules} (e : ℱ ≅ 𝒢) (f : X ⟶ T) (q : ℕ) (t : T) :
+    ℱ.hFiber f q t = 𝒢.hFiber f q t :=
+  letI := f.fiberOverSpecResidueField t
+  finrankH_congr _ ((Modules.pullback (f.fiberι t)).mapIso e) q
+
+/-- The fibre Euler characteristic only depends on the isomorphism class of the module. -/
+lemma eulerCharFiber_congr {ℱ 𝒢 : X.Modules} (e : ℱ ≅ 𝒢) (f : X ⟶ T) :
+    ℱ.eulerCharFiber f = 𝒢.eulerCharFiber f := by
+  ext t
+  simp only [eulerCharFiber, hFiber_congr e]
+
+/-- **The fibre dimension over a field.** For a scheme `X` over a field `K`, through
+`f : X ⟶ Spec K`, and a quasi-coherent `𝒪_X`-module `ℱ`, the fibre dimension of `ℱ` at the
+unique point of `Spec K` is `dim_K H^q(X, ℱ)`: the fibre of `f` is `X` itself, base changed along
+the isomorphism `Spec κ(s) ≅ Spec K`. -/
+theorem hFiber_eq_finrankH {K : Type u} [Field K] (f : X ⟶ Spec (.of K)) (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) (s : Spec (.of K)) :
+    ℱ.hFiber f q s = letI : X.Over (Spec (.of K)) := ⟨f⟩; ℱ.finrankH K q :=
+  sorry
+
+/-- **The fibre Euler characteristic over a field** is the Euler characteristic, in the
+situation of `AlgebraicGeometry.Scheme.Modules.hFiber_eq_finrankH`. -/
+theorem eulerCharFiber_eq_eulerChar {K : Type u} [Field K] (f : X ⟶ Spec (.of K))
+    (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (s : Spec (.of K)) :
+    ℱ.eulerCharFiber f s = letI : X.Over (Spec (.of K)) := ⟨f⟩; ℱ.eulerChar K := by
+  simp only [eulerCharFiber, eulerChar, hFiber_eq_finrankH f ℱ _ s]
 
 @[simp]
 theorem mem_perfectLocus (ℱ : X.Modules) (f : X ⟶ T) (i : ℕ) (t : T) :
@@ -433,6 +470,13 @@ theorem hFiber_pullback_of_isPullback {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : 
     (f' : X' ⟶ T') (sq : IsPullback g' f' f g) (q : ℕ) (t' : T') :
     ((Modules.pullback g').obj ℱ).hFiber f' q t' = ℱ.hFiber f q (g.base t') :=
   sorry
+
+/-- **The fibre Euler characteristic is invariant under base change**, in the situation of
+`AlgebraicGeometry.Scheme.Modules.hFiber_pullback_of_isPullback`. -/
+theorem eulerCharFiber_pullback_of_isPullback {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X)
+    (f' : X' ⟶ T') (sq : IsPullback g' f' f g) (t' : T') :
+    ((Modules.pullback g').obj ℱ).eulerCharFiber f' t' = ℱ.eulerCharFiber f (g.base t') := by
+  simp only [eulerCharFiber, hFiber_pullback_of_isPullback f ℱ g g' f' sq]
 
 /-- **The fibre Euler characteristic is locally constant.** With `f : X ⟶ T` proper of finite
 presentation and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the Euler
