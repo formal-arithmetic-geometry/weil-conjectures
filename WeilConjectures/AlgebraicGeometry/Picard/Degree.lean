@@ -82,13 +82,6 @@ noncomputable def picardPresheafDegree (f : X ⟶ S) {T : Over S}
 
 variable (f : X ⟶ S)
 
-/-- The base change square of `X_T ⟶ T` along a morphism `g : T' ⟶ T` of schemes over `S`. -/
-lemma isPullback_baseChangeMap {T T' : Over S} (g : T' ⟶ T) :
-    IsPullback (baseChangeMap f g) (pullback.snd f T'.hom) (pullback.snd f T.hom) g.left := by
-  refine IsPullback.of_right ?_ (by simp) (IsPullback.of_hasPullback f T.hom)
-  rw [Over.w g]
-  simpa using IsPullback.of_hasPullback f T'.hom
-
 /-- **The fibrewise degree is compatible with base change.** For `g : T' ⟶ T` and
 `ℒ ∈ Pic (X_T)`, the fibrewise degree of the pullback of `ℒ` to `X_{T'}` at `t'` is the
 fibrewise degree of `ℒ` at the image of `t'`.
