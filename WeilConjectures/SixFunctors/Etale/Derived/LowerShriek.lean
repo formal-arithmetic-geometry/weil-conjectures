@@ -134,6 +134,13 @@ instance : Rf_!(c)[A].Additive :=
   have := (Etale.mapDerivedUpperStarLowerStarAdjunction A c.g).right_adjoint_additive
   inferInstance
 
+variable (Λ : Type*) [Ring Λ] [Linear Λ A] in
+/-- If `A` is `Λ`-linear, the derived lower shriek `D(i_!) ⋙ Rg_*` attached to a compactification
+`(i, g)` is `Λ`-linear: `D(i_!)` is induced by the `Λ`-linear exact functor `i_!`, and `Rg_*` is
+`Λ`-linear by `AlgebraicGeometry.Etale.linear_rightDerivedLowerStar`. -/
+instance linear_rightDerivedLowerShriekOfCompactification : Rf_!(c)[A].Linear Λ :=
+  inferInstanceAs ((D((c.i)_!open[A]) ⋙ R((c.g)_*[A])).Linear Λ)
+
 end Etale
 
 end OfCompactification
@@ -186,6 +193,13 @@ noncomputable def rightDerivedLowerShriekPlusCompatibility :
 /-- The derived lower shriek along a morphism admitting a compactification is additive. -/
 instance : R(f)_![A].Additive :=
   inferInstanceAs (Rf_!(HasCompactification.compactification f)[A]).Additive
+
+variable (Λ : Type*) [Ring Λ] [Linear Λ A] in
+/-- If `A` is `Λ`-linear, the derived lower shriek `Rf_!` is `Λ`-linear, by
+`AlgebraicGeometry.Etale.linear_rightDerivedLowerShriekOfCompactification` for the chosen
+compactification. -/
+instance linear_rightDerivedLowerShriek : R(f)_![A].Linear Λ :=
+  inferInstanceAs ((Rf_!(HasCompactification.compactification f)[A]).Linear Λ)
 
 end Etale
 

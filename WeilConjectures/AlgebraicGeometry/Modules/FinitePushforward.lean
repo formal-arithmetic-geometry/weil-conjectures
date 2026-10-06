@@ -9,7 +9,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
@@ -25,6 +27,9 @@ degree `g.finrank (genericPoint Y)` of `g` at the generic point.
   finite presentation.
 - `AlgebraicGeometry.Scheme.Modules.exists_pullback_pushforward_unit_iso_free`: `g_* 𝒪_X` is
   generically free of rank `g.finrank (genericPoint Y)`.
+- `AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFree_pushforward`: the pushforward of a
+  finite locally free module along a finite flat morphism of finite presentation is finite
+  locally free.
 - `AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_pushforward_unit`: for `g` finite
   locally free of degree `d`, `g_* 𝒪_X` is finite locally free of rank `d`.
 -/
@@ -58,6 +63,18 @@ theorem exists_pullback_pushforward_unit_iso_free [IsIntegral Y] (g : X ⟶ Y) [
     ∃ U : Y.Opens, (U : Set Y).Nonempty ∧
       Nonempty ((Modules.pullback U.ι).obj ((pushforward g).obj (𝟙_ X.Modules)) ≅
         SheafOfModules.free (ULift.{u} (Fin (g.finrank (genericPoint Y))))) :=
+  sorry
+
+/-- **Pushforward of finite locally free modules along finite flat morphisms.** If `g : X ⟶ Y`
+is finite, flat and locally of finite presentation and `ℱ` is a finite locally free
+`𝒪_X`-module, then `g_* ℱ` is a finite locally free `𝒪_Y`-module. Over an affine open `Spec A`
+of `Y` with preimage `Spec B`, the `B`-module `M = Γ(ℱ, Spec B)` is finitely generated
+projective, and `B` is a finitely generated projective `A`-module, so `M` is a finitely
+generated projective `A`-module. -/
+theorem isFiniteLocallyFree_pushforward (g : X ⟶ Y) [IsFinite g] [Flat g]
+    [LocallyOfFinitePresentation g] (ℱ : X.Modules)
+    [SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ] :
+    SheafOfModules.IsFiniteLocallyFree (R := Y.ringCatSheaf) ((pushforward g).obj ℱ) :=
   sorry
 
 /-- **The pushforward of the structure sheaf along a finite locally free morphism.** If

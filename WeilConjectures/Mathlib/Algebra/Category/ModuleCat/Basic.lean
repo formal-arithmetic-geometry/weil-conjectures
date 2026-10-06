@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.Algebra.Field.ULift
 public import Mathlib.LinearAlgebra.Dual.Defs
+public import Mathlib.LinearAlgebra.Dual.Lemmas
 
 /-!
 # Finite modules over an infinite field, and the dual functor
@@ -15,6 +16,8 @@ public import Mathlib.LinearAlgebra.Dual.Defs
 ## Main definitions
 
 - `ModuleCat.dualFunctor`: the contravariant functor `V ↦ Module.Dual R V` on `R`-modules.
+- `ModuleCat.dualDualIso`: the double dual of a functor with finite-dimensional values is
+  naturally isomorphic to the functor.
 
 ## Main results
 
@@ -50,3 +53,19 @@ noncomputable def ModuleCat.dualFunctor (R : Type u) [CommRing R] :
     (ModuleCat.{v} R)ᵒᵖ ⥤ ModuleCat.{max u v} R where
   obj V := ModuleCat.of R (Module.Dual R V.unop)
   map f := ModuleCat.ofHom (Module.Dual.transpose f.unop.hom)
+
+/-- The double dual `j ↦ K(j)^∨∨` of a functor `K` to vector spaces with finite-dimensional
+values is naturally isomorphic to `K`, by the inverse of the evaluation maps
+`Module.evalEquiv`. -/
+noncomputable def ModuleCat.dualDualIso {C : Type*} [Category C] {k : Type u} [Field k]
+    (K : Cᵒᵖ ⥤ ModuleCat.{u} k) [∀ j, FiniteDimensional k (K.obj j)] :
+    (opOp C ⋙ K.op ⋙ ModuleCat.dualFunctor k).op ⋙ ModuleCat.dualFunctor k ≅ K :=
+  NatIso.ofComponents (fun j ↦ (Module.evalEquiv k (K.obj j)).symm.toModuleIso) fun {i j} f ↦ by
+    ext x
+    apply (Module.evalEquiv k (K.obj j)).injective
+    ext ψ
+    change ψ ((Module.evalEquiv k (K.obj j)).symm
+        (Module.Dual.transpose (Module.Dual.transpose (K.map f).hom) x)) =
+      ψ ((K.map f).hom ((Module.evalEquiv k (K.obj i)).symm x))
+    rw [Module.apply_evalEquiv_symm_apply, ← LinearMap.comp_apply ψ (K.map f).hom]
+    exact (Module.apply_evalEquiv_symm_apply (f := ψ ∘ₗ (K.map f).hom) (g := x)).symm
