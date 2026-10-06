@@ -7,7 +7,8 @@ module
 
 public import Mathlib.Algebra.CharP.Lemmas
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.RingTheory.TensorProduct.Free
 
 /-!
 # `p`-linear endomorphisms of vector spaces in characteristic `p`
@@ -49,11 +50,83 @@ The base change of `sk-prop-av-fixed-base-change` is written as `k' ⊗[k] V` (r
 base-changed map `F'` is taken as a hypothesis rather than constructed;
 `LinearMap.Frobenius.existsUnique_baseChange` records that exactly one such map exists, so that
 the hypothesis is not vacuous.
+
+The proof of `bijective_tmul_fixedPoints` does not use the cyclic-block normal form of the
+blueprint. Writing a fixed point of `F'` as `∑ cᵢ ⊗ eᵢ` in a `k`-basis `e` of `V`, the
+coordinates satisfy `cⱼ = ∑ᵢ aⱼᵢ cᵢ ^ p` with `aⱼᵢ ∈ k`. A dimension count shows that the `k`-span
+of the `cᵢ` in `k'` is stable under `x ↦ x ^ p`, so each `cᵢ` is algebraic over `k`, hence lies
+in `k` since `k` is algebraically closed.
 -/
 
 @[expose] public section
 
 open scoped TensorProduct
+
+section Auxiliary
+
+open Polynomial
+
+variable {k K : Type*} {p : ℕ} [Field k] [Fact p.Prime] [Field K] [Algebra k K]
+
+/-- An element whose iterated `p`-th powers stay in a finite-dimensional subspace is algebraic. -/
+private theorem isAlgebraic_of_pow_pow_mem (W : Submodule k K) [FiniteDimensional k W] {x : K}
+    (hx : ∀ i : ℕ, x ^ p ^ i ∈ W) : IsAlgebraic k x := by
+  by_contra h
+  set d := Module.finrank k W
+  have hli : LinearIndependent k (fun i : Fin (d + 1) ↦ (⟨x ^ p ^ (i : ℕ), hx i⟩ : W)) := by
+    refine LinearIndependent.of_comp W.subtype ?_
+    rw [Fintype.linearIndependent_iff]
+    intro g hg i
+    have hq : aeval x (∑ j : Fin (d + 1), C (g j) * X ^ p ^ (j : ℕ)) = 0 := by
+      simpa [Algebra.smul_def] using hg
+    have h0 := (transcendental_iff.mp h) _ hq
+    have := congrArg (coeff · (p ^ (i : ℕ))) h0
+    simp only [finsetSum_coeff, coeff_C_mul_X_pow, coeff_zero] at this
+    rwa [Finset.sum_eq_single i (fun j _ hj ↦ by
+        rw [if_neg]; exact fun e ↦ hj (Fin.ext
+          (Nat.pow_right_injective (Fact.out : p.Prime).two_le e).symm))
+      (by simp), if_pos rfl] at this
+  simpa [d] using hli.fintype_card_le_finrank
+
+/-- Over an algebraically closed field `k`, every element algebraic over `k` lies in `k`. -/
+private theorem mem_range_algebraMap_of_isAlgebraic [IsAlgClosed k] {x : K} (hx : IsAlgebraic k x) :
+    x ∈ (algebraMap k K).range := by
+  have hi := hx.isIntegral
+  exact minpoly.mem_range_of_degree_eq_one k x
+    (IsAlgClosed.degree_eq_one_of_irreducible k (minpoly.irreducible hi))
+
+/-- If every member of a finite family `c` in a field of characteristic `p` is a `k`-linear
+combination of the `p`-th powers `c i ^ p`, then the `k`-span `W` of the family is stable under
+`x ↦ x ^ p`: indeed `W` lies in the span of the `p`-th powers of a basis of `W`, which has
+dimension at most `dim W`. Hence all iterated powers `c j ^ p ^ m` lie in `W`. -/
+private theorem pow_pow_mem_span_of_mem_span_pow [CharP K p] {ι : Type*} [Finite ι] {c : ι → K}
+    (hc : ∀ j, c j ∈ Submodule.span k (Set.range fun i ↦ c i ^ p)) (j : ι) (m : ℕ) :
+    c j ^ p ^ m ∈ Submodule.span k (Set.range c) := by
+  set W := Submodule.span k (Set.range c)
+  have : FiniteDimensional k W := FiniteDimensional.span_of_finite k (Set.finite_range c)
+  set b := Module.finBasis k W
+  set U := Submodule.span k (Set.range fun l ↦ (b l : K) ^ p)
+  have : FiniteDimensional k U := FiniteDimensional.span_of_finite k (Set.finite_range _)
+  have hpow : ∀ x ∈ W, x ^ p ∈ U := by
+    intro x hx
+    rw [← show ((⟨x, hx⟩ : W) : K) = x from rfl, ← b.sum_repr ⟨x, hx⟩]
+    simp only [Submodule.coe_sum, Submodule.coe_smul, Algebra.smul_def]
+    rw [sum_pow_char]
+    refine Submodule.sum_mem _ fun l _ ↦ ?_
+    rw [mul_pow, ← map_pow, ← Algebra.smul_def]
+    exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨l, rfl⟩)
+  have hWU : W ≤ U := Submodule.span_le.mpr <| by
+    rintro _ ⟨j, rfl⟩
+    refine Submodule.span_le.mpr ?_ (hc j)
+    rintro _ ⟨i, rfl⟩
+    exact hpow _ (Submodule.subset_span ⟨i, rfl⟩)
+  have hUW : W = U := Submodule.eq_of_le_of_finrank_le hWU <|
+    (finrank_range_le_card _).trans (by simp [W])
+  induction m with
+  | zero => simpa using (Submodule.subset_span (Set.mem_range_self j) : c j ∈ W)
+  | succ m ih => rw [pow_succ, pow_mul]; exact hUW ▸ hpow _ ih
+
+end Auxiliary
 
 namespace LinearMap
 
@@ -112,8 +185,8 @@ theorem existsUnique_baseChange (F : V →ₚ[k, p] V) :
     ∃! F' : (k' ⊗[k] V) →ₚ[k', p] (k' ⊗[k] V), ∀ v : V, F' (1 ⊗ₜ[k] v) = 1 ⊗ₜ[k] F v :=
   sorry
 
-/-- Blueprint `sk-prop-av-fixed-base-change`: Fixed points are unchanged by algebraically closed
-base change.
+/-- Blueprint `sk-prop-av-fixed-base-change` (proved as `lem-sc-frobenius-fixed-invariance`):
+Fixed points are unchanged by algebraically closed base change.
 
 Let `k ⊆ k'` be an extension of algebraically closed fields of characteristic `p > 0`, let `V`
 be a finite-dimensional `k`-vector space and let `F : V →ₛₗ[frobenius k p] V` be `p`-linear. If
@@ -125,8 +198,33 @@ theorem bijective_tmul_fixedPoints [IsAlgClosed k] [IsAlgClosed k'] [FiniteDimen
     (hF' : ∀ v : V, F' (1 ⊗ₜ[k] v) = 1 ⊗ₜ[k] F v) :
     Function.Bijective fun v : fixedPoints F ↦
       (⟨1 ⊗ₜ[k] (v : V), by rw [mem_fixedPoints, hF', mem_fixedPoints.mp v.2]⟩ :
-        fixedPoints F') :=
-  sorry
+        fixedPoints F') := by
+  set b := Module.finBasis k V
+  set B := Algebra.TensorProduct.basis k' b
+  have hinj : Function.Injective fun v : V ↦ (1 : k') ⊗ₜ[k] v := by
+    intro u v huv
+    refine b.repr.injective (Finsupp.ext fun i ↦ (algebraMap k k').injective ?_)
+    simpa [B] using congrArg (fun w ↦ B.repr w i) huv
+  refine ⟨fun u v huv ↦ Subtype.ext (hinj (congrArg Subtype.val huv)), fun w ↦ ?_⟩
+  obtain ⟨c, hc⟩ : ∃ c : _ → k', ⇑(B.repr w) = c := ⟨_, rfl⟩
+  have key (j) : c j = ∑ i, b.repr (F (b i)) j • c i ^ p := by
+    rw [← hc]
+    conv_lhs => rw [← mem_fixedPoints.mp w.2, ← B.sum_repr w]
+    simp [B, map_sum, hF', Algebra.smul_def, mul_comm]
+    rfl
+  have := FiniteDimensional.span_of_finite k (Set.finite_range c)
+  have hd (j) : c j ∈ (algebraMap k k').range := by
+    refine mem_range_algebraMap_of_isAlgebraic (isAlgebraic_of_pow_pow_mem (p := p)
+      (Submodule.span k (Set.range c)) (pow_pow_mem_span_of_mem_span_pow (fun j ↦ ?_) j))
+    rw [key j]
+    exact Submodule.sum_mem _ fun i _ ↦ Submodule.smul_mem _ _ (Submodule.subset_span ⟨i, rfl⟩)
+  choose d hd using hd
+  set v := ∑ j, d j • b j
+  have hv : (1 : k') ⊗ₜ[k] v = w := B.repr.injective <| Finsupp.ext fun j ↦ by
+    simp [v, B, map_sum, Finsupp.single_apply, hd, ← hc]
+  refine ⟨⟨v, hinj ?_⟩, Subtype.ext hv⟩
+  change (1 : k') ⊗ₜ[k] F v = 1 ⊗ₜ[k] v
+  rw [← hF', hv, mem_fixedPoints.mp w.2]
 
 end Frobenius
 
