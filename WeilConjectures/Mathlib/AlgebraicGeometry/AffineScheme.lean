@@ -34,8 +34,13 @@ We also record that, for a morphism `f : X ⟶ Y`, the affine opens of `X` conta
 preimage of an affine open of `Y` form a basis of the topology of `X`
 (`AlgebraicGeometry.isBasis_affineOpens_le_preimage`).
 
-Finally, every open subscheme of the spectrum of a principal ideal ring is affine
+Every open subscheme of the spectrum of a principal ideal ring is affine
 (`AlgebraicGeometry.isAffineOpen_of_isPrincipalIdealRing`).
+
+Finally, a morphism `a : T ⟶ U` to an affine scheme inducing an isomorphism on global sections
+is universal among morphisms to affine schemes: every `φ : T ⟶ V` with `V` affine factors as
+`a ≫ h` (`AlgebraicGeometry.Scheme.Hom.exists_comp_eq_of_isIso_appTop`), and `h` is unique
+(`AlgebraicGeometry.Scheme.Hom.cancel_left_of_isIso_appTop`).
 -/
 
 @[expose] public section
@@ -256,5 +261,21 @@ theorem isAffine_of_isOpenImmersion_of_isPrincipalIdealRing {X : Scheme.{u}}
     IsAffine X :=
   have : IsAffine f.opensRange := isAffineOpen_of_isPrincipalIdealRing f.opensRange
   .of_isIso f.isoOpensRange.hom
+
+/-- Let `a : T ⟶ U` be a morphism to an affine scheme `U` such that `Γ(U, ⊤) ⟶ Γ(T, ⊤)` is an
+isomorphism. Then every morphism `φ : T ⟶ V` to an affine scheme `V` factors through `a`. -/
+lemma Scheme.Hom.exists_comp_eq_of_isIso_appTop {T U V : Scheme.{u}} [IsAffine U] [IsAffine V]
+    (a : T ⟶ U) [IsIso a.appTop] (φ : T ⟶ V) : ∃ h : U ⟶ V, a ≫ h = φ := by
+  refine ⟨U.isoSpec.hom ≫ Spec.map (φ.appTop ≫ inv a.appTop) ≫ V.isoSpec.inv, ?_⟩
+  rw [Scheme.isoSpec_hom, Scheme.toSpecΓ_naturality_assoc, ← Spec.map_comp_assoc,
+    Category.assoc, IsIso.inv_hom_id, Category.comp_id, ← Scheme.toSpecΓ_naturality_assoc,
+    ← Scheme.isoSpec_hom, Iso.hom_inv_id, Category.comp_id]
+
+/-- Let `a : T ⟶ U` be a morphism such that `Γ(U, ⊤) ⟶ Γ(T, ⊤)` is an isomorphism. Then two
+morphisms `U ⟶ V` to an affine scheme `V` agreeing after precomposition with `a` are equal. -/
+lemma Scheme.Hom.cancel_left_of_isIso_appTop {T U V : Scheme.{u}} [IsAffine V]
+    (a : T ⟶ U) [IsIso a.appTop] {h₁ h₂ : U ⟶ V} (e : a ≫ h₁ = a ≫ h₂) : h₁ = h₂ :=
+  ext_of_isAffine <| by
+    rw [← cancel_mono a.appTop, ← Scheme.Hom.comp_appTop, e, Scheme.Hom.comp_appTop]
 
 end AlgebraicGeometry
