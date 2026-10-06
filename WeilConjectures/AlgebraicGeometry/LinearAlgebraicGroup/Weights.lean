@@ -81,8 +81,6 @@ degree.
   tensor product of two irreducible representations, and
   `DegreeDatum.detWeight_subquotient_tprod_eq_add`: the same for a degree datum, where the proof
   happens.
-* `DegreeDatum.exists_ker_eq_and_eq_mul_zpow`: a nonzero degree map is a multiple of the degree map
-  of a degree datum.
 * `Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`: the weights of the
   constituents of an exterior power, over an algebraically closed field of characteristic zero.
 * `DegreeDatum.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`: the same for a degree
@@ -469,62 +467,6 @@ namespace AlgebraicGeometry.Monodromy
 open Module Matrix.GeneralLinearGroup Representation
 
 universe u
-
-/-- A degree map `deg` that is not identically zero is a multiple of the degree map of a degree
-datum `D₀` with the same kernel: the degrees are the multiples of some `a ≠ 0`, and dividing by `a`
-gives a surjective degree map. Every element `γ` is then `u γ₀ ^ m`, for the degree-one element
-`γ₀` of `D₀` and some `u` of degree zero, so that every determinant weight at `γ` is `m` times
-the corresponding weight at `γ₀`. -/
-theorem DegreeDatum.exists_ker_eq_and_eq_mul_zpow {W : Type*} [Group W]
-    (deg : W →* Multiplicative ℤ) (hdeg : ∃ w, deg w ≠ 1) (γ : W) :
-    ∃ D₀ : DegreeDatum W, deg.ker = D₀.deg.ker ∧
-      ∃ u ∈ deg.ker, ∃ m : ℤ, γ = u * D₀.degreeOneElement ^ m := by
-  obtain ⟨w₁, hw₁⟩ := hdeg
-  let H : AddSubgroup ℤ :=
-    { carrier := {x | ∃ w, Multiplicative.toAdd (deg w) = x}
-      add_mem' := by
-        rintro _ _ ⟨w, rfl⟩ ⟨w', rfl⟩
-        exact ⟨w * w', by rw [map_mul, toAdd_mul]⟩
-      zero_mem' := ⟨1, by rw [map_one, toAdd_one]⟩
-      neg_mem' := by
-        rintro _ ⟨w, rfl⟩
-        exact ⟨w⁻¹, by rw [map_inv, toAdd_inv]⟩ }
-  obtain ⟨a, ha⟩ := Int.subgroup_cyclic H
-  rw [← AddSubgroup.zmultiples_eq_closure] at ha
-  have hdvd (w : W) : a ∣ Multiplicative.toAdd (deg w) := by
-    have : Multiplicative.toAdd (deg w) ∈ H := ⟨w, rfl⟩
-    rwa [ha, Int.mem_zmultiples_iff] at this
-  obtain ⟨w₀, hw₀⟩ : ∃ w₀, Multiplicative.toAdd (deg w₀) = a := by
-    have : a ∈ H := ha ▸ AddSubgroup.mem_zmultiples a
-    exact this
-  have ha0 : a ≠ 0 := by
-    rintro rfl
-    exact hw₁ (by simpa using hdvd w₁)
-  let deg₀ : W →* Multiplicative ℤ :=
-    { toFun w := Multiplicative.ofAdd (Multiplicative.toAdd (deg w) / a)
-      map_one' := by simp
-      map_mul' x y := by
-        rw [map_mul, toAdd_mul, Int.add_ediv_of_dvd_left (hdvd x), ofAdd_add] }
-  have hdeg₀ (w : W) : Multiplicative.toAdd (deg₀ w) = Multiplicative.toAdd (deg w) / a := rfl
-  have hker : deg.ker = deg₀.ker := by
-    ext w
-    obtain ⟨q, hq⟩ := hdvd w
-    rw [MonoidHom.mem_ker, MonoidHom.mem_ker, ← toAdd_eq_zero, ← toAdd_eq_zero, hdeg₀, hq,
-      Int.mul_ediv_cancel_left _ ha0, mul_eq_zero, or_iff_right ha0]
-  have hw₀' : deg₀ w₀ = Multiplicative.ofAdd 1 :=
-    Multiplicative.toAdd.injective (by rw [hdeg₀, hw₀, Int.ediv_self ha0, toAdd_ofAdd])
-  have hsurj : Function.Surjective deg₀ := fun x ↦
-    ⟨w₀ ^ Multiplicative.toAdd x, Multiplicative.toAdd.injective (by
-      rw [map_zpow, toAdd_zpow, hw₀', toAdd_ofAdd, smul_eq_mul, mul_one])⟩
-  let D₀ : DegreeDatum W := ⟨deg₀, hsurj, w₀, hw₀'⟩
-  set m := Multiplicative.toAdd (deg₀ γ)
-  have hγ : γ = γ * (w₀ ^ m)⁻¹ * w₀ ^ m := (inv_mul_cancel_right γ _).symm
-  have hu : γ * (w₀ ^ m)⁻¹ ∈ deg.ker := by
-    rw [hker, MonoidHom.mem_ker, map_mul, map_inv, map_zpow, hw₀']
-    apply Multiplicative.toAdd.injective
-    rw [toAdd_mul, toAdd_inv, toAdd_zpow, toAdd_ofAdd, smul_eq_mul, mul_one, add_neg_cancel,
-      toAdd_one]
-  exact ⟨D₀, hker, _, hu, m, hγ⟩
 
 /-- The exterior-power weight theorem for a degree datum `D₀`, that is, for a surjective degree
 map and a chosen element of degree one.  Following the blueprint: a positive central pair `(N, z)`

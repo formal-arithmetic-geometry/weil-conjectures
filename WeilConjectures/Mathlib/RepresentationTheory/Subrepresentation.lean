@@ -324,16 +324,12 @@ instance [FiniteDimensional k V] : WellFoundedGT (Subrepresentation ρ) :=
 
 section IntertwiningMap
 
-theorem _root_.Representation.IntertwiningMap.apply_apply (f : ρ.IntertwiningMap σ) (w : W)
-    (x : V) : f (ρ w x) = σ w (f x) :=
-  Representation.IntertwiningMap.isIntertwining ρ σ f w x
-
 /-- The preimage `f⁻¹(S)` of a subrepresentation under an intertwining map. -/
 def comap (f : ρ.IntertwiningMap σ) (S : Subrepresentation σ) : Subrepresentation ρ where
   toSubmodule := S.toSubmodule.comap f.toLinearMap
   apply_mem_toSubmodule w x hx := by
     simp only [Submodule.mem_comap, Representation.IntertwiningMap.toLinearMap_apply,
-      f.apply_apply] at hx ⊢
+      f.isIntertwining] at hx ⊢
     exact S.apply_mem_toSubmodule w hx
 
 @[simp]
@@ -346,7 +342,7 @@ def map (f : ρ.IntertwiningMap σ) (S : Subrepresentation ρ) : Subrepresentati
   toSubmodule := S.toSubmodule.map f.toLinearMap
   apply_mem_toSubmodule w := by
     rintro _ ⟨x, hx, rfl⟩
-    exact ⟨ρ w x, S.apply_mem_toSubmodule w hx, f.apply_apply w x⟩
+    exact ⟨ρ w x, S.apply_mem_toSubmodule w hx, f.isIntertwining _ _ w x⟩
 
 theorem mem_map {f : ρ.IntertwiningMap σ} {S : Subrepresentation ρ} {y : V'} :
     y ∈ map f S ↔ ∃ x ∈ S, f x = y :=
@@ -367,7 +363,7 @@ noncomputable def subquotientEquivOfIntertwiningMap (f : ρ.IntertwiningMap σ)
         simp only [LinearMap.comp_apply, Submodule.mkQ_apply, Submodule.mapQ_apply,
           subquotient_apply_mk]
         congr 1
-        exact Subtype.ext (f.apply_apply w x) } <| by
+        exact Subtype.ext (f.isIntertwining _ _ w x) } <| by
     refine ⟨(injective_iff_map_eq_zero _).2 fun q hq ↦ ?_, fun q ↦ ?_⟩
     · induction q using Submodule.Quotient.induction_on with | _ x
       change Submodule.Quotient.mk _ = 0 at hq
@@ -573,11 +569,11 @@ theorem exists_subquotient_tprod_equiv [FiniteDimensional k V] [FiniteDimensiona
       ∃ U' S' : Subrepresentation ((SV.subquotient UV).tprod (SE.subquotient UE)),
         Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) := by
   obtain ⟨UV, SV, hUV, hV, U₁, S₁, ⟨e₁⟩⟩ := exists_subquotient_tprod_left_equiv hirr
-  let c₁ := Representation.tprodComm (SV.subquotient UV) σ
+  let c₁ := Representation.TensorProduct.comm (SV.subquotient UV) σ
   let e₂ := subquotientEquiv c₁ S₁ U₁
   obtain ⟨UE, SE, hUE, hE, U₃, S₃, ⟨e₃⟩⟩ :=
     exists_subquotient_tprod_left_equiv (e₂.symm.isIrreducible_iff.2 (e₁.isIrreducible_iff.2 hirr))
-  let c₄ := Representation.tprodComm (SE.subquotient UE) (SV.subquotient UV)
+  let c₄ := Representation.TensorProduct.comm (SE.subquotient UE) (SV.subquotient UV)
   exact ⟨UV, SV, UE, SE, hUV, hUE, hV, hE, _, _, ⟨(subquotientEquiv c₄ S₃ U₃).symm.trans
     (e₃.trans (e₂.symm.trans e₁))⟩⟩
 
