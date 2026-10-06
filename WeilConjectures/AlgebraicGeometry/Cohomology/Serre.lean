@@ -10,15 +10,17 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.LinearAlgebra.Dual.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.MonomialCech
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 
 /-!
@@ -61,8 +63,6 @@ agrees with coherence on a noetherian scheme such as a closed subscheme of `ℙ�
 - `AlgebraicGeometry.ProjectiveSpace.nonempty_H_zero_twist_equiv`,
   `subsingleton_H_twist_of_ne`, `subsingleton_H_twist_top` and
   `nonempty_H_twist_top_equiv_dual` — the cohomology of `𝒪(m)` on `ℙᵈ_k`.
-- `AlgebraicGeometry.Scheme.Modules.exists_tensorPowHom_eq` — clearing denominators for a
-  section of an invertible module.
 - `AlgebraicGeometry.ProjectiveSpace.exists_epi_sigma_twist` — a coherent module on `ℙⁿ_A` is a
   quotient of a finite sum of twists `𝒪(-mⱼ)`.
 - `AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist` — Serre vanishing on
@@ -88,81 +88,133 @@ variable (n : Type u)
 
 section Pn
 
+/-- **The Čech complex of `𝒪(m)` on the standard covering is the monomial Čech complex.** Let
+`k` be a field and `Uᵢ = D₊(xᵢ)` the standard opens of `ℙ(n; Spec k)`. The sections of `𝒪(m)`
+over `U_J = ⋂_{j ∈ J} U_j` are the degree-`m` part of `k[xᵢ, x_j⁻¹ : j ∈ J]`, the restriction
+maps being the inclusions; so the Čech complex of `𝒪(m)` on the covering `(Uᵢ)ᵢ`, as a complex
+of `k`-vector spaces, is `ProjectiveSpace.monomialCechComplex n k m`.
+
+This is the first step of the proof of `lem-pc-projective-space-twist-cohomology`: the
+transition rule `e_i^{(m)} = (x_i/x_j)^m e_j^{(m)}` of `def-pc-projective-space-twist`, a
+well-defined gluing by `lem-pc-twist-cocycle`, identifies the section `(x^e / x_i^m) e_i^{(m)}`
+on `U_J ⊆ U_i` with the Laurent monomial `xᵉ`.
+
+(blueprint: `lem-pc-projective-space-twist-cohomology`, `def-pc-projective-space-twist`) -/
+theorem ProjectiveSpace.nonempty_cechComplex_twist_iso_monomialCechComplex (k : Type u)
+    [Field k] [Fintype n] (m : ℤ) :
+    Nonempty (((ModuleCat.restrictScalars
+        (Scheme.globalSectionsRingHom k (X := ℙ(n; Spec (.of k))))).mapHomologicalComplex _).obj
+      ((cechComplexFunctor (ProjectiveSpace.standardOpen n (Spec (.of k)))).obj
+        (ProjectiveSpace.twist n (Spec (.of k)) m).presheafModuleCat) ≅
+      ProjectiveSpace.monomialCechComplex n k m) :=
+  sorry
+
+/-- **Cohomology vanishes above the number of projective coordinates.** For a commutative
+ring `A`, `n` with `Nat.card n = d + 1` and a quasi-coherent module `ℱ` on `ℙᵈ_A = ℙ(n; Spec A)`,
+`H^q(ℙᵈ_A, ℱ) = 0` for `q > d`: the alternating Čech complex of the `d + 1` standard opens,
+which computes the cohomology of `ℱ` since their intersections are affine, has no terms above
+degree `d`.
+
+(blueprint: `lem-pc-projective-space-cohomology-bound`) -/
+theorem ProjectiveSpace.subsingleton_H_of_lt (A : Type u) [CommRing A] [Finite n] {d : ℕ}
+    (hn : Nat.card n = d + 1) (ℱ : (ℙ(n; Spec (.of A))).Modules)
+    [SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) ℱ] {q : ℕ}
+    (hq : d < q) : Subsingleton (ℱ.H q) :=
+  sorry
+
+/-- **The cohomology of `𝒪(m)` on `ℙ(n; Spec k)` is that of the monomial Čech complex**,
+as `k`-vector spaces: Leray's theorem for the standard affine covering of the separated scheme
+`ℙ(n; Spec k)`, combined with `nonempty_cechComplex_twist_iso_monomialCechComplex`.
+
+(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+theorem ProjectiveSpace.nonempty_H_twist_linearEquiv_homology (k : Type u) [Field k]
+    [Fintype n] (m : ℤ) (q : ℕ) :
+    Nonempty ((ProjectiveSpace.twist n (Spec (.of k)) m).H q ≃ₗ[k]
+      (ProjectiveSpace.monomialCechComplex n k m).homology q) := by
+  let φ := Scheme.globalSectionsRingHom k (X := ℙ(n; Spec (.of k)))
+  let K := (cechComplexFunctor (ProjectiveSpace.standardOpen n (Spec (.of k)))).obj
+    (ProjectiveSpace.twist n (Spec (.of k)) m).presheafModuleCat
+  obtain ⟨e₁⟩ := Scheme.Modules.nonempty_cechComplex_linearEquiv_H_of_isSeparated
+    (ℙ(n; Spec (.of k)) ↘ Spec (.of k)) (ProjectiveSpace.standardOpen n (Spec (.of k)))
+    (fun i ↦ ProjectiveSpace.isAffineOpen_standardOpen n _ i)
+    (ProjectiveSpace.iSup_standardOpen n _)
+    (ProjectiveSpace.twist n (Spec (.of k)) m) q
+  obtain ⟨e₂⟩ := ProjectiveSpace.nonempty_cechComplex_twist_iso_monomialCechComplex n k m
+  let e₃ : (ProjectiveSpace.twist n (Spec (.of k)) m).H q ≃ₗ[k]
+      (ModuleCat.restrictScalars φ).obj (K.homology q) :=
+    { e₁.symm.toAddEquiv with map_smul' := fun c x ↦ e₁.symm.map_smul (φ c) x }
+  exact ⟨e₃ ≪≫ₗ ((ModuleCat.restrictScalarsHomologyIso φ K q).symm ≪≫
+    (HomologicalComplex.homologyFunctor _ _ q).mapIso e₂).toLinearEquiv⟩
+
 /-- **`H⁰` of the twisting sheaves on `ℙᵈ_k`.** With `X = ℙᵈ_k` presented as `ℙ(n; Spec k)`
 for an index type `n` of homogeneous coordinates with `Nat.card n = d + 1`, and `Sᵐ(V)` for
 `V = k^{d+1}` the degree-`m` homogeneous part of the polynomial ring in those coordinates,
 `H⁰(X, 𝒪(m)) = Sᵐ(V)` for `m ≥ 0`.
 
-(blueprint: `sk-thm-picard-pn`) -/
+(blueprint: `sk-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology` (i)) -/
 theorem ProjectiveSpace.nonempty_H_zero_twist_equiv (k : Type u) [Field k] [Finite n] (d : ℕ)
     (hn : Nat.card n = d + 1) (m : ℕ) :
     Nonempty ((ProjectiveSpace.twist n (Spec (.of k)) m).H 0 ≃ₗ[k]
-      MvPolynomial.homogeneousSubmodule n k m) :=
-  sorry
+      MvPolynomial.homogeneousSubmodule n k m) := by
+  have := Fintype.ofFinite n
+  have : Nonempty n := (Nat.card_pos_iff.1 (by omega)).1
+  obtain ⟨e⟩ := ProjectiveSpace.nonempty_H_twist_linearEquiv_homology n k m 0
+  exact ⟨e ≪≫ₗ ProjectiveSpace.monomialCechComplexHomologyZeroLinearEquiv n k m⟩
 
 /-- **Vanishing of the cohomology of the twisting sheaves in middle degrees.**
 `H^q(ℙᵈ_k, 𝒪(m)) = 0` for every `m` and every `q ∉ {0, d}`.
 
-(blueprint: `sk-thm-picard-pn`) -/
+(blueprint: `sk-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology`) -/
 theorem ProjectiveSpace.subsingleton_H_twist_of_ne (k : Type u) [Field k] [Finite n] (d : ℕ)
     (hn : Nat.card n = d + 1) (q : ℕ) (m : ℤ) (hq0 : q ≠ 0) (hqd : q ≠ d) :
-    Subsingleton ((ProjectiveSpace.twist n (Spec (.of k)) m).H q) :=
-  sorry
+    Subsingleton ((ProjectiveSpace.twist n (Spec (.of k)) m).H q) := by
+  have := Fintype.ofFinite n
+  rcases lt_or_gt_of_ne hqd with hlt | hlt
+  · obtain ⟨q, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hq0
+    obtain ⟨e⟩ := ProjectiveSpace.nonempty_H_twist_linearEquiv_homology n k m (q + 1)
+    have h := (ProjectiveSpace.exactAt_monomialCechComplex n k m
+      (by rwa [← Nat.card_eq_fintype_card]) q hlt).isZero_homology
+    have : Subsingleton ((ProjectiveSpace.monomialCechComplex n k m).homology (q + 1)) :=
+      (ModuleCat.isZero_iff_subsingleton).1 h
+    exact e.toEquiv.subsingleton
+  · exact ProjectiveSpace.subsingleton_H_of_lt n k hn _ hlt
 
 /-- **Vanishing of the top cohomology of the twisting sheaves.**
 `H^d(ℙᵈ_k, 𝒪(m)) = 0` for `m ≥ -d`, when `d ≠ 0`. For `d = 0` the statement is false, since
 `H⁰(Spec k, 𝒪) = k`; that case is `nonempty_H_zero_twist_equiv` with `d = 0`.
 
-(blueprint: `sk-thm-picard-pn`) -/
+(blueprint: `sk-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology` (ii)) -/
 theorem ProjectiveSpace.subsingleton_H_twist_top (k : Type u) [Field k] [Finite n] (d : ℕ)
     (hd : d ≠ 0) (hn : Nat.card n = d + 1) (m : ℤ) (hm : -(d : ℤ) ≤ m) :
-    Subsingleton ((ProjectiveSpace.twist n (Spec (.of k)) m).H d) :=
-  sorry
+    Subsingleton ((ProjectiveSpace.twist n (Spec (.of k)) m).H d) := by
+  have := Fintype.ofFinite n
+  obtain ⟨e⟩ := ProjectiveSpace.nonempty_H_twist_linearEquiv_homology n k m d
+  have := ProjectiveSpace.subsingleton_monomialCechComplex_homology_top (n := n) (A := k)
+    (by rwa [← Nat.card_eq_fintype_card]) hd hm
+  exact e.toEquiv.subsingleton
 
 /-- **The top cohomology of the twisting sheaves.**
 `H^d(ℙᵈ_k, 𝒪(m)) = S^{-m-d-1}(V)^∨` for `m ≤ -d-1`. Taking `m = -d-1` exhibits `𝒪(-d-1)` as
 the dualising sheaf of `ℙᵈ_k`.
 
-(blueprint: `sk-thm-picard-pn`) -/
+The blueprint's isomorphism is the canonical one induced by the multiplication pairing. Here it
+is transported through the non-canonical identification
+`nonempty_H_twist_linearEquiv_homology` with the monomial Čech complex, so the description by
+the pairing (`monomialCechComplexHomologyTopLinearEquivDual_apply`) holds only on that
+complex.
+
+(blueprint: `sk-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology` (ii),
+`lem-pc-projective-space-serre-pairing`) -/
 theorem ProjectiveSpace.nonempty_H_twist_top_equiv_dual (k : Type u) [Field k] [Finite n]
     (d : ℕ) (hn : Nat.card n = d + 1) (m : ℤ) (hm : m ≤ -(d : ℤ) - 1) :
     Nonempty ((ProjectiveSpace.twist n (Spec (.of k)) m).H d ≃ₗ[k]
-      Module.Dual k (MvPolynomial.homogeneousSubmodule n k (-m - d - 1).toNat)) :=
-  sorry
+      Module.Dual k (MvPolynomial.homogeneousSubmodule n k (-m - d - 1).toNat)) := by
+  have := Fintype.ofFinite n
+  obtain ⟨e⟩ := ProjectiveSpace.nonempty_H_twist_linearEquiv_homology n k m d
+  exact ⟨e ≪≫ₗ ProjectiveSpace.monomialCechComplexHomologyTopLinearEquivDual n k m
+    (by rwa [← Nat.card_eq_fintype_card]) hm⟩
 
 end Pn
-
-section ClearingDenominators
-
-variable {X : Scheme.{u}}
-
-/-- **Clearing denominators for a section of an invertible module.** Let `X` be quasi-compact
-and separated over an affine scheme `S`, let `ℒ` be an invertible `𝒪_X`-module and
-`s : 𝒪_X ⟶ ℒ` a global section, with zero scheme `Z(s)` and complement `X_s = X ∖ Z(s)`. For
-every quasi-coherent `𝒪_X`-module `ℱ` and every section `t` of `ℱ` over `X_s`, there are `m ≥ 0`
-and a global section `u` of `ℱ ⊗ ℒ^{⊗ m}` whose restriction to `X_s` is `t ⊗ s^{⊗ m}`.
-
-Here `t ⊗ s^{⊗ m}` is the image of `t` under `ℱ ≅ ℱ ⊗ 𝒪_X ⟶ ℱ ⊗ ℒ^{⊗ m}`, the second map being
-`ℱ ◁ s^{⊗ m}`.
-
-On a finite affine cover `V_j` of `X` trivialising `ℒ`, with `s = f_j e_j`, one has
-`X_s ∩ V_j = D(f_j)`, so `f_j^a t` lifts to `t_j ∈ Γ(V_j, ℱ)` for a common `a`; the overlaps
-`V_j ∩ V_k` are affine since `X` is separated over an affine base, so the differences of the
-`t_j ⊗ e_j^a` there are killed by a common power `f_j^b`, and the sections `t_j ⊗ e_j^a ⊗ s^b`
-glue. Take `m = a + b`.
-
-(blueprint: `lem-pc-section-clearing-denominators`) -/
-@[stacks 01PW]
-theorem Scheme.Modules.exists_tensorPowHom_eq {S : Scheme.{u}} [IsAffine S] (f : X ⟶ S)
-    [IsSeparated f] [CompactSpace X] (ℒ : X.Modules) [ℒ.IsInvertible] (s : 𝟙_ X.Modules ⟶ ℒ)
-    (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
-    (t : Γ(ℱ, s.zeroLocus.support.compl)) :
-    ∃ (m : ℕ) (u : Γ(ℱ ⊗ ℒ.tensorPow m, ⊤)),
-      (ℱ ⊗ ℒ.tensorPow m).presheaf.map (homOfLE le_top).op u =
-        ((ρ_ ℱ).inv ≫ ℱ ◁ tensorPowHom s m).app _ t :=
-  sorry
-
-end ClearingDenominators
 
 section TwistQuotient
 
@@ -173,9 +225,9 @@ variable {n}
 `⨁ⱼ 𝒪(-mⱼ) ⟶ ℱ`, whose kernel is coherent.
 
 On each standard chart `D₊(Tᵢ)` choose finitely many generators `tᵢₐ` of `ℱ`. Clearing
-denominators (`AlgebraicGeometry.Scheme.Modules.exists_tensorPowHom_eq`, applied to the section
-`Tᵢ` of `𝒪(1)`, `ℙⁿ_A` being separated over `Spec A`) extends `tᵢₐ ⊗ Tᵢ^{mᵢₐ}` to a global
-section of `ℱ(mᵢₐ)`, i.e. to a map `𝒪(-mᵢₐ) ⟶ ℱ` whose image contains `tᵢₐ` on `D₊(Tᵢ)`. The
+denominators (`lem-pc-section-clearing-denominators`, applied to the section `Tᵢ` of `𝒪(1)`,
+`ℙⁿ_A` being separated over `Spec A`) extends `tᵢₐ ⊗ Tᵢ^{mᵢₐ}` to a global section of
+`ℱ(mᵢₐ)`, i.e. to a map `𝒪(-mᵢₐ) ⟶ ℱ` whose image contains `tᵢₐ` on `D₊(Tᵢ)`. The
 sum of these maps is surjective on every chart, hence surjective. Its kernel is coherent, the
 charts being spectra of noetherian rings.
 
@@ -217,7 +269,7 @@ lemma ProjectiveSpace.subsingleton_H_twist_of_pos [Finite n] {d : ℕ} (hn : Nat
 `d₀` such that `H^q(ℙᵈ_k, ℱ(d)) = 0` for all `d ≥ d₀` and all `q > 0`.
 
 By descending induction on `q`, for all coherent modules at once. For `q > d` the cohomology
-vanishes (`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_isClosedImmersion`). In general,
+vanishes (`AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt`). In general,
 `AlgebraicGeometry.ProjectiveSpace.exists_epi_sigma_twist` gives `0 ⟶ 𝒦 ⟶ ⨁ⱼ 𝒪(-mⱼ) ⟶ ℱ ⟶ 0`
 with `𝒦` coherent; twisting by the invertible `𝒪(d)` keeps it exact, and in its long exact
 sequence `⨁ⱼ H^q(𝒪(d - mⱼ)) ⟶ H^q(ℱ(d)) ⟶ H^{q+1}(𝒦(d))` the left term vanishes for
@@ -252,7 +304,7 @@ theorem ProjectiveSpace.exists_subsingleton_H_tensor_twist [Finite n]
     intro 𝒢 _ _
     refine ⟨0, fun d _ q hq _ ↦ ?_⟩
     have := isQuasicoherent_tensorObj 𝒢 (ProjectiveSpace.twist n (Spec (.of k)) d)
-    exact subsingleton_H_of_isClosedImmersion k (𝟙 _) _ hD (by omega)
+    exact ProjectiveSpace.subsingleton_H_of_lt n k hD _ (by omega)
   | succ j ih =>
     intro 𝒢 _ _
     obtain ⟨ι, _, m, p, hp, hK₁, hK₂⟩ := ProjectiveSpace.exists_epi_sigma_twist k 𝒢
