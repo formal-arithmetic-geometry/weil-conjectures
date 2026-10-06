@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
-public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
+public import WeilConjectures.CategoryTheory.SpectralSequence.DoubleComplex
 
 /-!
 # The Čech-to-derived spectral sequence
@@ -27,8 +27,12 @@ restriction of `P` to `Over X`.
 
 ## Main statements
 
+- `CategoryTheory.Sheaf.exists_cechDoubleComplex`: the double complex `C^p(𝔘, I^q)` attached to
+  an injective resolution `F → I^•`, through its column cohomology and the cohomology of its
+  total complex.
 - `CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence`: the Čech-to-derived spectral
-  sequence of a covering.
+  sequence of a covering, the first spectral sequence
+  `HomologicalComplex₂.exists_spectralSequence` of that double complex.
 -/
 
 @[expose] public section
@@ -44,6 +48,32 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [HasFiniteWidePullbacks C]
   [HasSheafify J AddCommGrpCat.{v}] [HasExt.{w} (Sheaf J AddCommGrpCat.{v})]
 
+/-- **The Čech double complex of a covering.** Let `𝔘 = {π i : U i ⟶ X}` generate a covering
+sieve of `X` and let `F` be an abelian sheaf. There is a first quadrant double complex `D` of
+abelian groups such that
+
+* for every `q`, the complex `p ↦ H^q(D^{p, •})` is the Čech complex `C^•(𝔘, ℋ^q(F))` of the
+  presheaf `ℋ^q(F) : V ↦ H^q(V, F)`;
+* the total complex of `D` computes the cohomology `H^n(X, F)`.
+
+It is `D^{p, q} = C^p(𝔘, I^q)` for an injective resolution `F → I^•`: restricting `I^•` to
+`V = U i₀ ×[X] ⋯ ×[X] U iₚ` is again an injective resolution, so the columns compute
+`C^p(𝔘, ℋ^q(F))` (Step 2), and the Čech complex of the injective sheaf `I^q` is a resolution of
+`I^q(X)` (Stacks `03F6`, `03AW`), so the total complex computes `H^n(I^•(X)) = H^n(X, F)`
+(Step 3).
+
+(blueprint: `sk-thm-picard-cech`, Steps 1 to 3 of the proof) -/
+theorem Sheaf.exists_cechDoubleComplex (F : Sheaf J AddCommGrpCat.{v}) (X : C)
+    {ι : Type w} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :
+    ∃ D : HomologicalComplex₂ AddCommGrpCat.{w} (ComplexShape.up ℕ) (ComplexShape.up ℕ),
+      (∀ q : ℕ, Nonempty
+        (((HomologicalComplex.homologyFunctor _ (ComplexShape.up ℕ) q).mapHomologicalComplex
+          (ComplexShape.up ℕ)).obj D ≅
+        (cechComplexFunctor fun i ↦ Over.mk (π i)).obj
+          ((Over.forget X).op ⋙ F.cohomologyPresheaf q))) ∧
+      ∀ n : ℕ, Nonempty ((D.total (ComplexShape.up ℕ)).homology n ≅ F.H' n X) :=
+  sorry
+
 /-- **The Čech-to-derived spectral sequence.** Let `C` be a site with fibre products, `X : C` and
 `𝔘 = {π i : U i ⟶ X}` a family of morphisms generating a covering sieve of `X`. For an abelian
 sheaf `F` on `C` there is a first quadrant cohomological spectral sequence with
@@ -53,14 +83,20 @@ sheaf `F` on `C` there is a first quadrant cohomological spectral sequence with
 The `E₂`-term is the `p`-th cohomology of the Čech complex of the family `fun i ↦ Over.mk (π i)`
 of objects of `Over X` with coefficients in the restriction of `ℋ^q(F)` to `Over X`.
 
-(blueprint: `sk-thm-picard-cech`) -/
+It is the first spectral sequence of the double complex `Sheaf.exists_cechDoubleComplex`.
+
+(blueprint: `sk-thm-picard-cech`, `lem-sc-cech-spectral`) -/
 theorem Sheaf.exists_cechToDerivedSpectralSequence (F : Sheaf J AddCommGrpCat.{v}) (X : C)
     {ι : Type w} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :
     ∃ E : E₂CohomologicalSpectralSequenceNat AddCommGrpCat.{w},
       (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅
         ((cechComplexFunctor fun i ↦ Over.mk (π i)).obj
           ((Over.forget X).op ⋙ F.cohomologyPresheaf q)).homology p)) ∧
-      E.AbutsTo fun n ↦ F.H' n X :=
-  sorry
+      E.AbutsTo fun n ↦ F.H' n X := by
+  obtain ⟨D, hcol, htot⟩ := F.exists_cechDoubleComplex X π hπ
+  obtain ⟨E, hE₂, hE⟩ := D.exists_spectralSequence
+  refine ⟨E, fun p q ↦ ?_, hE.of_iso fun n ↦ (htot n).some⟩
+  obtain ⟨e⟩ := hE₂ p q
+  exact ⟨e ≪≫ (HomologicalComplex.homologyFunctor _ _ p).mapIso (hcol q).some⟩
 
 end CategoryTheory
