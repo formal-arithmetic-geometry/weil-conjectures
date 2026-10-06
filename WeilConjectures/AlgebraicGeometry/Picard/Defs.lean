@@ -28,7 +28,8 @@ with `Pic T` and `Pic_{X/S}(T)`, and the fact that `Pic_{X/S,σ}` is an fppf she
 
 ## Implementation notes
 
-`AlgebraicGeometry.Scheme.Pic` carries no group structure yet, so the exactness of
+The group law on `AlgebraicGeometry.Scheme.Pic` is only defined downstream, in
+`WeilConjectures/AlgebraicGeometry/Picard/Group.lean`, so the exactness of
 `0 → Pic T → Pic (X_T) → Pic_{X/S}(T) → 0` is stated in the equivalent group-free form: the
 four theorems `injective_pic_map_snd`, `pic_map_sectionBaseChange_snd`,
 `bijective_toPicardFunctor_picardFunctorNormalized` and `bijective_pic_split` below.  Likewise
@@ -55,7 +56,8 @@ difference being expressed with the tensor product of modules.
 - `AlgebraicGeometry.picardFunctorNormalized_eq_of_iso_tensorObj`: two `σ`-normalized classes
   which differ by a module pulled back from the base are equal.
 - `AlgebraicGeometry.isSheaf_picardFunctorNormalized`: the `σ`-normalized relative Picard
-  functor is an fppf sheaf (blueprint `sk-cor-picard-pic-sheaf`).
+  functor is an fppf sheaf (blueprint `sk-cor-picard-pic-sheaf`), hence a Zariski sheaf
+  (`AlgebraicGeometry.isSheaf_zariski_picardFunctorNormalized`).
 - `AlgebraicGeometry.nonempty_picardFunctor_iso_of_isPullback`: the relative Picard functor is
   compatible with base change (blueprint `lem-pd-picard-base-change`).
 -/
@@ -203,6 +205,19 @@ theorem isSheaf_picardFunctorNormalized (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ �
     Presheaf.IsSheaf (Scheme.fppfTopology.over S)
       (picardFunctorNormalized f σ hσ).toFunctor :=
   sorry
+
+/-- **The `σ`-normalized Picard functor is a Zariski sheaf.** Under the hypotheses of
+`AlgebraicGeometry.isSheaf_picardFunctorNormalized` it is an fppf sheaf, and every Zariski
+covering is an fppf covering.
+
+This is condition (1) in the proof of blueprint `thm-pc-picard-representable`. -/
+theorem isSheaf_zariski_picardFunctorNormalized (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S)
+    (hf : ∀ T : Over S, IsIso (pushforwardUnitMap (Limits.pullback.snd f T.hom))) :
+    Presheaf.IsSheaf (Scheme.zariskiTopology.over S)
+      (picardFunctorNormalized f σ hσ).toFunctor :=
+  (isSheaf_picardFunctorNormalized f σ hσ hf).of_le fun T R hR ↦ by
+    rw [GrothendieckTopology.mem_over_iff] at hR ⊢
+    exact Precoverage.toGrothendieck_mono zariskiPrecoverage_le_fppfPrecoverage _ hR
 
 section Pic
 
