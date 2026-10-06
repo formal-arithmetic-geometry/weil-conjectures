@@ -5,13 +5,13 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.Algebra.Group.Shrink
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Galois.Equivalence
-public import Mathlib.CategoryTheory.Galois.IsFundamentalgroup
-public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Galois.IsFundamentalgroup
 
 /-!
 # The étale fundamental group of a connected scheme
@@ -48,8 +48,10 @@ finite étale `Y`-schemes does. The étale fundamental group used elsewhere is t
 profinite group `G : ProfiniteGrp.{u}` together with a fundamental group structure
 `CategoryTheory.PreGaloisCategory.IsFundamentalGroup (fiber s) G`; such a `G` exists, by
 `AlgebraicGeometry.Scheme.FiniteEtale.exists_isFundamentalGroup`, since the category of finite
-étale `Y`-schemes is essentially small, and it is unique up to a unique isomorphism compatible
-with the actions (`CategoryTheory.PreGaloisCategory.toAutMulEquiv`).
+étale `Y`-schemes is essentially small
+(`CategoryTheory.PreGaloisCategory.exists_isFundamentalGroup`), and it is unique up to a unique
+isomorphism compatible with the actions
+(`CategoryTheory.PreGaloisCategory.toAutContinuousMulEquiv`).
 
 The Galois category axioms for finite étale schemes (blueprint `lem-fet-galois-category`), the
 finiteness of geometric fibres and the essential smallness are recorded as separate lemmas
@@ -66,9 +68,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable (Y : Scheme.{u})
 
-/-- Blueprint `def-galois-fibre-functor`: The fibre functor.
-
-The category `FÉt(Y)` of finite étale `Y`-schemes, as a full subcategory of the small étale
+/-- The category `FÉt(Y)` of finite étale `Y`-schemes, as a full subcategory of the small étale
 site of `Y`. -/
 protected abbrev FiniteEtale : Type (u + 1) :=
   ObjectProperty.FullSubcategory fun P : Y.Etale ↦ IsFinite P.hom
@@ -76,6 +76,14 @@ protected abbrev FiniteEtale : Type (u + 1) :=
 namespace FiniteEtale
 
 variable {Y} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+
+lemma hom_ext {P Q : Y.FiniteEtale} {f g : P ⟶ Q}
+    (h : f.hom.left = g.hom.left) : f = g :=
+  ObjectProperty.hom_ext _ (MorphismProperty.Over.Hom.ext h)
+
+lemma hom_left_comp {P Q : Y.FiniteEtale}
+    (f : P ⟶ Q) : f.hom.left ≫ Q.obj.hom = P.obj.hom := by
+  simp
 
 /-- The geometric fibre of a finite étale `Y`-scheme at a geometric point is finite. -/
 lemma finite_fiber (P : Y.FiniteEtale) : Finite ((pointSmallEtale s).fiber.obj P.obj) := by
@@ -94,6 +102,17 @@ lemma fiber_obj_obj (P : Y.FiniteEtale) :
 
 lemma fiber_map_apply {P Q : Y.FiniteEtale} (f : P ⟶ Q) (x : (fiber s).obj P) :
     (fiber s).map f x = (pointSmallEtale s).fiber.map f.hom x := rfl
+
+lemma fiber_map_left {P Q : Y.FiniteEtale}
+    (f : P ⟶ Q) (x : (fiber s).obj P) : ((fiber s).map f x).left = x.left ≫ f.hom.left := rfl
+
+lemma fiber_ext {P : Y.FiniteEtale}
+    {x y : (fiber s).obj P} (h : x.left = y.left) : x = y :=
+  Over.OverMorphism.ext h
+
+lemma fiber_left_comp {P : Y.FiniteEtale}
+    (x : (fiber s).obj P) : x.left ≫ P.obj.hom = s :=
+  Over.w x
 
 variable (Y) in
 /-- Blueprint `lem-fet-galois-category`: The finite etale category is a Galois category.
@@ -133,20 +152,6 @@ affine, so a finite étale `Y`-scheme is determined by a quasi-coherent `𝒪_Y`
 theorem essentiallySmall : EssentiallySmall.{u} Y.FiniteEtale := by
   sorry
 
-/-- The automorphism group of the fibre functor is small: an automorphism is determined by
-its components on a small model of `FÉt(Y)`. -/
-lemma small_aut : Small.{u} (Aut (fiber s)) := by
-  have := essentiallySmall Y
-  let e := equivSmallModel.{u} Y.FiniteEtale
-  let φ : Aut (fiber s) → ∀ X : SmallModel.{u} Y.FiniteEtale,
-      Aut ((fiber s).obj (e.inverse.obj X)) := fun σ X ↦ σ.app _
-  refine small_of_injective (f := φ) fun σ τ h ↦ ?_
-  refine Iso.ext (NatTrans.ext (funext fun P ↦ ?_))
-  have hP := congr_arg (fun ρ ↦ (ρ (e.functor.obj P)).hom) h
-  rw [← cancel_mono ((fiber s).map (e.unitIso.hom.app P)), ← NatTrans.naturality,
-    ← NatTrans.naturality]
-  exact congrArg ((fiber s).map (e.unitIso.hom.app P) ≫ ·) hP
-
 section FundamentalGroup
 
 variable [ConnectedSpace Y]
@@ -162,52 +167,33 @@ geometric fibres, transitively on those of Galois objects, and faithfully. This 
 theorem exists_isFundamentalGroup :
     ∃ (G : ProfiniteGrp.{u}) (_ : ∀ P, MulAction G ((fiber s).obj P)),
       IsFundamentalGroup (fiber s) G := by
-  have := small_aut s
-  let A := Aut (fiber s)
-  let e : Shrink.{u} A ≃* A := Shrink.mulEquiv
-  let _ : TopologicalSpace (Shrink.{u} A) := .induced e inferInstance
-  let h : Shrink.{u} A ≃ₜ A := e.toEquiv.toHomeomorphOfIsInducing ⟨rfl⟩
-  let f : Shrink.{u} A ≃ₜ* A :=
-    { toMulEquiv := e, continuous_toFun := h.continuous, continuous_invFun := h.symm.continuous }
-  have : IsTopologicalGroup (Shrink.{u} A) :=
-    { continuous_mul := by
-        rw [h.isInducing.continuous_iff]
-        have : (fun p : Shrink.{u} A × Shrink.{u} A ↦ e (p.1 * p.2)) =
-            fun p ↦ e p.1 * e p.2 := funext fun p ↦ map_mul e _ _
-        change Continuous fun p : Shrink.{u} A × Shrink.{u} A ↦ e (p.1 * p.2)
-        rw [this]
-        exact (h.continuous.comp continuous_fst).mul (h.continuous.comp continuous_snd)
-      continuous_inv := by
-        rw [h.isInducing.continuous_iff]
-        have : (fun p : Shrink.{u} A ↦ e p⁻¹) = fun p ↦ (e p)⁻¹ :=
-          funext fun p ↦ map_inv e _
-        change Continuous fun p : Shrink.{u} A ↦ e p⁻¹
-        rw [this]
-        exact h.continuous.inv }
-  let G := ProfiniteGrp.ofContinuousMulEquiv (G := ProfiniteGrp.of A) f.symm
-  let _ (P : Y.FiniteEtale) : MulAction G ((fiber s).obj P) :=
-    MulAction.compHom _ (e : Shrink.{u} A →* A)
-  refine ⟨G, inferInstance, ?_⟩
-  have hsmul (g : G) (P : Y.FiniteEtale) (x : (fiber s).obj P) : g • x = e g • x := rfl
-  exact
-    { naturality g _ _ f x := by
-        simp only [hsmul]
-        exact IsNaturalSMul.naturality (e g) f x
-      transitive_of_isGalois P _ := by
-        refine ⟨fun x y ↦ ?_⟩
-        obtain ⟨σ, hσ⟩ := MulAction.exists_smul_eq A x y
-        refine ⟨e.symm σ, ?_⟩
-        change e (e.symm σ) • x = y
-        rwa [MulEquiv.apply_symm_apply]
-      continuous_smul P := by
-        refine ⟨?_⟩
-        change Continuous fun p : G × (fiber s).obj P ↦ e p.1 • p.2
-        have : Continuous fun p : G × (fiber s).obj P ↦ (e p.1, p.2) :=
-          (h.continuous.comp continuous_fst).prodMk continuous_snd
-        exact (continuousSMul_aut_fiber (fiber s) P).continuous_smul.comp this
-      non_trivial' g hg := by
-        have := IsFundamentalGroup.non_trivial (F := fiber s) (e g) fun P x ↦ hg P x
-        exact e.injective (this.trans (map_one e).symm) }
+  have := essentiallySmall Y
+  exact PreGaloisCategory.exists_isFundamentalGroup (fiber s)
+
+/-- A finite étale scheme over a connected scheme with nonempty geometric fibre is surjective:
+its image is open, as étale morphisms are open, closed, as finite morphisms are closed, and
+nonempty. -/
+lemma surjective_of_nonempty_fiber
+    (P : Y.FiniteEtale) (h : Nonempty ((fiber s).obj P)) : Surjective P.obj.hom := by
+  let f : P.obj.left ⟶ Y := P.obj.hom
+  have : IsFinite f := P.property
+  have : Etale f := P.obj.prop
+  have hc : IsClopen (Set.range f) := ⟨f.isClosedMap.isClosed_range, f.isOpenMap.isOpen_range⟩
+  obtain ⟨x⟩ := h
+  let x' : Spec (.of Ω) ⟶ P.obj.left := x.left
+  have hne : (Set.range f).Nonempty := ⟨_, x' default, rfl⟩
+  exact ⟨fun y ↦ (hc.eq_univ hne ▸ Set.mem_univ y : y ∈ Set.range f)⟩
+
+/-- A finite étale `Y`-scheme `P` over a connected scheme with an action of `M` by
+`Y`-automorphisms which is simply transitive on the geometric fibre at `s` is an `M`-torsor:
+the morphism `∐_{m ∈ M} P ⟶ P ×_Y P` is a morphism of finite étale `Y`-schemes inducing a
+bijection on geometric fibres, hence an isomorphism, as the fibre functor is conservative. -/
+lemma isIso_sigmaDesc_of_existsUnique {M : Type (u + 1)} [Finite M]
+    (P : Y.FiniteEtale) (v : M → (P ⟶ P))
+    (hv : ∀ x y : (fiber s).obj P, ∃! m, (fiber s).map (v m) x = y) :
+    IsIso (Sigma.desc fun m : M ↦ pullback.lift (f := P.obj.hom) (g := P.obj.hom)
+      (v m).hom.left (𝟙 P.obj.left) (by rw [Category.id_comp]; exact hom_left_comp (v m))) := by
+  sorry
 
 /-- Blueprint `rem-ptr-galois-object-2`: Pointer to the properties of [def-galois-object].
 
@@ -223,13 +209,6 @@ theorem isGalois_iff (P : Y.FiniteEtale) :
 variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
   [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
 
-/-- The isomorphism of topological groups between a fundamental group `G` of the fibre
-functor and the automorphism group of the fibre functor. -/
-noncomputable def toAutContinuousMulEquiv : G ≃ₜ* Aut (fiber s) :=
-  { toAutMulEquiv (fiber s) G with
-    continuous_toFun := (toAutMulEquiv_isHomeomorph (fiber s) G).continuous
-    continuous_invFun := (toAutMulEquiv_isHomeomorph (fiber s) G).homeomorph.symm.continuous }
-
 /-- Blueprint `thm-galois-fundamental`: The fibre functor is an equivalence.
 
 For a connected scheme `Y` with geometric point `s` and a fundamental group `G` of the fibre
@@ -237,7 +216,7 @@ functor, the fibre functor induces an equivalence between finite étale `Y`-sche
 sets with a continuous `G`-action. -/
 noncomputable def equivalenceContAction : Y.FiniteEtale ≌ ContAction FintypeCat.{u} G :=
   (functorToContAction (fiber s)).asEquivalence.trans
-    (ContAction.resEquiv _ (toAutContinuousMulEquiv s G))
+    (ContAction.resEquiv _ (toAutContinuousMulEquiv (fiber s) G))
 
 /-- Blueprint `thm-galois-fundamental`: The fibre functor is an equivalence.
 

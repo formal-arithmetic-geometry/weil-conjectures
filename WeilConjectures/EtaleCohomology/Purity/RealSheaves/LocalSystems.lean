@@ -35,21 +35,23 @@ a curve over a finite field into statements about representations of its Weil gr
 
 ## Implementation notes
 
-The étale fundamental group of a scheme does not exist in Mathlib, and neither do lisse
-`ℚ̄_ℓ`-sheaves. The renderings chosen here are therefore the following.
+Lisse `ℚ̄_ℓ`-sheaves do not exist in Mathlib. The renderings chosen here are therefore the
+following.
 
-- In `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf` the group
-  `π₁(Y, s)` is *existentially quantified* as a bundled profinite group
-  (`ProfiniteGrp`, which packages "topological group, compact, T2, totally disconnected").
+- The étale fundamental group `π₁(Y, s)` is named as a fundamental group
+  (`CategoryTheory.PreGaloisCategory.IsFundamentalGroup`) of the fibre functor
+  `AlgebraicGeometry.Scheme.FiniteEtale.fiber s` on finite étale `Y`-schemes.
+  `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup`
+  states the Galois correspondence for any such group `G`, and
+  `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf` deduces the
+  version with `G` existentially quantified as a bundled profinite group (`ProfiniteGrp`).
   The target category is the full subcategory of `Rep Λ G` cut out by
-  `Rep.IsFiniteContinuous`. Compatibility with the geometric stalk is the requested clause;
-  exactness and the tensor structure are automatic for an equivalence of abelian categories
-  and are not restated. The compatibility with base change along a map `Λ → Λ'` of finite
-  rings is not restated either: the group `G` is existentially quantified, so two invocations
-  of the theorem, at `Λ` and at `Λ'`, produce unrelated groups and the square cannot even be
-  written down. Naming `π₁` — through `CategoryTheory.PreGaloisCategory.IsFundamentalGroup`,
-  once the Galois category of finite étale covers of a scheme exists — is what would make the
-  base change clause statable.
+  `Rep.IsFiniteContinuous`. Compatibility with the geometric stalk is the requested clause; it
+  is an isomorphism of underlying `Λ`-modules only, not tied to the action of `G` on geometric
+  fibres. Exactness and the tensor structure are automatic for an equivalence of abelian
+  categories and are not restated. The compatibility with base change along a map `Λ → Λ'` of
+  finite rings is not restated either; with `G` fixed as in the `_of_isFundamentalGroup`
+  version it could now be written down, but it is not part of the statement here.
 
 - `AlgebraicGeometry.WeilGroup.isLisseRep` is a full subcategory of `Rep ℚ̄_ℓ W(C₀)`, and the
   content of the lisse sheaf–representation equivalence used by the rest of the block is
@@ -126,11 +128,11 @@ theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalG
 /-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems.
 
 Let `Y` be a connected scheme, `s : Spec Ω ⟶ Y` a geometric point and `Λ` a finite ring.
-Then there is a profinite group `G` — the étale fundamental group `π₁(Y, s)`, which does
-not exist in Lean and is therefore existentially quantified as a `ProfiniteGrp` — together
-with an equivalence between the category of finite locally constant sheaves of
-`Λ`-modules on `Y_ét` and the category of finite `Λ`-modules with a continuous
-`G`-action, compatible with the geometric stalk at `s`: the triangle
+Then there is a profinite group `G` — the étale fundamental group `π₁(Y, s)`, a fundamental
+group of `AlgebraicGeometry.Scheme.FiniteEtale.fiber s`, here existentially quantified as a
+`ProfiniteGrp` — together with an equivalence between the category of finite locally
+constant sheaves of `Λ`-modules on `Y_ét` and the category of finite `Λ`-modules with a
+continuous `G`-action, compatible with the geometric stalk at `s`: the triangle
 
 ```
     FLC(Y_ét)  ──e.functor──▶  Rep^{fin,cont}_Λ(G)
@@ -144,7 +146,9 @@ commutes up to isomorphism.
 
 Exactness and compatibility with `⊗_Λ` are automatic consequences of the equivalence being
 an equivalence of abelian (monoidal) categories; the compatibility with base change along a
-map `Λ → Λ'` of finite rings is not restated here, see the module implementation notes. -/
+map `Λ → Λ'` of finite rings is not restated here, see the module implementation notes and
+`AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup`
+for the version with `π₁(Y, s)` named. -/
 theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf (Y : Scheme.{u})
     [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :

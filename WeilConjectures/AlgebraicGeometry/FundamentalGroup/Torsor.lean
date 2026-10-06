@@ -68,14 +68,6 @@ def vaddHom (t : EtaleTorsor M Y) (m : M) : t.toFiniteEtale ⟶ t.toFiniteEtale 
 @[simp]
 lemma vaddHom_hom_left (t : EtaleTorsor M Y) (m : M) : (t.vaddHom m).hom.left = t.vadd m := rfl
 
-lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.hom_ext {P Q : Y.FiniteEtale} {f g : P ⟶ Q}
-    (h : f.hom.left = g.hom.left) : f = g :=
-  ObjectProperty.hom_ext _ (MorphismProperty.Over.Hom.ext h)
-
-lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.hom_left_comp {P Q : Y.FiniteEtale}
-    (f : P ⟶ Q) : f.hom.left ≫ Q.obj.hom = P.obj.hom := by
-  simp
-
 lemma vaddHom_zero (t : EtaleTorsor M Y) : t.vaddHom 0 = 𝟙 _ :=
   FiniteEtale.hom_ext t.zero_vadd
 
@@ -88,17 +80,6 @@ variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
 section Fiber
 
 open FiniteEtale
-
-lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.fiber_map_left {P Q : Y.FiniteEtale}
-    (f : P ⟶ Q) (x : (fiber s).obj P) : ((fiber s).map f x).left = x.left ≫ f.hom.left := rfl
-
-lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.fiber_ext {P : Y.FiniteEtale}
-    {x y : (fiber s).obj P} (h : x.left = y.left) : x = y :=
-  Over.OverMorphism.ext h
-
-lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.fiber_left_comp {P : Y.FiniteEtale}
-    (x : (fiber s).obj P) : x.left ≫ P.obj.hom = s :=
-  Over.w x
 
 variable (t : EtaleTorsor M Y)
 
@@ -342,32 +323,6 @@ lemma isIsomorphic_of_monodromy_eq {t₁ t₂ : EtaleTorsor M Y}
     rw [Functor.map_comp, Functor.map_comp, FintypeCat.comp_apply, FintypeCat.comp_apply, hΦ,
       hΦ, hvadd]
   exact congrArg (fun f ↦ f.hom.left) this
-
-omit [TopologicalSpace M] [DiscreteTopology M] in
-/-- A finite étale scheme over a connected scheme with nonempty geometric fibre is surjective:
-its image is open, as étale morphisms are open, closed, as finite morphisms are closed, and
-nonempty. -/
-lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.surjective_of_nonempty_fiber
-    (P : Y.FiniteEtale) (h : Nonempty ((fiber s).obj P)) : Surjective P.obj.hom := by
-  let f : P.obj.left ⟶ Y := P.obj.hom
-  have : IsFinite f := P.property
-  have : Etale f := P.obj.prop
-  have hc : IsClopen (Set.range f) := ⟨f.isClosedMap.isClosed_range, f.isOpenMap.isOpen_range⟩
-  obtain ⟨x⟩ := h
-  let x' : Spec (.of Ω) ⟶ P.obj.left := x.left
-  have hne : (Set.range f).Nonempty := ⟨_, x' default, rfl⟩
-  exact ⟨fun y ↦ (hc.eq_univ hne ▸ Set.mem_univ y : y ∈ Set.range f)⟩
-
-/-- A finite étale `Y`-scheme `P` over a connected scheme with an action of `M` by
-`Y`-automorphisms which is simply transitive on the geometric fibre at `s` is an `M`-torsor:
-the morphism `∐_{m ∈ M} P ⟶ P ×_Y P` is a morphism of finite étale `Y`-schemes inducing a
-bijection on geometric fibres, hence an isomorphism, as the fibre functor is conservative. -/
-lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.isIso_sigmaDesc_of_existsUnique
-    (P : Y.FiniteEtale) (v : M → (P ⟶ P))
-    (hv : ∀ x y : (fiber s).obj P, ∃! m, (fiber s).map (v m) x = y) :
-    IsIso (Sigma.desc fun m : M ↦ pullback.lift (f := P.obj.hom) (g := P.obj.hom)
-      (v m).hom.left (𝟙 P.obj.left) (by rw [Category.id_comp]; exact hom_left_comp (v m))) := by
-  sorry
 
 /-- Blueprint `cor-galois-abelian-h1`: Abelian case: torsors, characters and H^1.
 
