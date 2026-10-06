@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.FieldTheory.Perfect
@@ -122,5 +123,12 @@ theorem GeometricallyIrreducible.of_smooth_of_geometricallyConnected {X S : Sche
     have := LocallyOfFiniteType.isLocallyNoetherian snd
     have := IsRegular.of_smooth snd
     exact IsRegular.irreducibleSpace _
+
+/-- **Smooth morphisms are geometrically reduced.** A base change of a smooth morphism to a
+field is smooth over that field, hence regular, so its local rings are regular local rings,
+which are integral domains. -/
+theorem GeometricallyReduced.of_smooth {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
+    GeometricallyReduced f :=
+  sorry
 
 end AlgebraicGeometry

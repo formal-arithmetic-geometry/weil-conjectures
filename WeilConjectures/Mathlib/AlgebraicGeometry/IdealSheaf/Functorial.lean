@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
@@ -240,5 +241,16 @@ lemma _root_.AlgebraicGeometry.Scheme.Hom.mem_ker_comp {W : Scheme.{u}} (w : W �
   exact Iff.rfl
 
 end Sections
+
+section Mul
+
+/-- **Pullback of ideal sheaves is multiplicative.** On affine opens `V ⊆ f ⁻¹ᵁ U` the pullback
+of an ideal sheaf is the extension of its ideal of sections along `Γ(Y, U) ⟶ Γ(X, V)`, and
+extension of ideals is multiplicative. -/
+theorem comap_mul (I J : Y.IdealSheafData) (f : X ⟶ Y) :
+    (I * J).comap f = I.comap f * J.comap f :=
+  sorry
+
+end Mul
 
 end AlgebraicGeometry.Scheme.IdealSheafData

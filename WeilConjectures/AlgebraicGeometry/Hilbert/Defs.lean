@@ -28,11 +28,9 @@ For a morphism of schemes `f : X ⟶ S` and `d : ℕ`, the Hilbert functor `Hilb
 of ideal sheaves, `AlgebraicGeometry.Scheme.IdealSheafData.comap`, along the base-change maps
 `AlgebraicGeometry.baseChangeMap` of the fibre products `X ×[S] T`.
 
-We then state that `Hilb^d_{X/S}` is a sheaf for the fppf topology, that it is representable
-under a hypothesis of "enough affine opens" on the fibres, and, over a field, that the Hilbert
-functor of a smooth proper geometrically integral curve is represented by a smooth proper
-geometrically integral `k`-scheme of dimension `d` carrying a universal effective Cartier
-divisor, together with the addition morphisms between these Hilbert schemes.
+We then state that `Hilb^d_{X/S}` is a sheaf for the fppf topology and that it is representable
+under a hypothesis of "enough affine opens" on the fibres. The Hilbert schemes of curves are in
+`WeilConjectures/AlgebraicGeometry/Hilbert/Curve.lean`.
 
 ## Implementation notes
 
@@ -55,10 +53,6 @@ presentation are `MorphismProperty.IsStableUnderBaseChange` in Mathlib; the inva
   (blueprint `sk-cor-picard-hilb-sheaf`).
 - `AlgebraicGeometry.isRepresentable_hilbertPresheaf`: representability of `Hilb^d_{X/S}`
   (blueprint `sk-thm-picard-hilb-general`).
-- `AlgebraicGeometry.hilbertPresheaf_curve_representable`,
-  `AlgebraicGeometry.hilbertPresheaf_curve_points`,
-  `AlgebraicGeometry.hilbertPresheaf_curve_add`: the Hilbert schemes of a smooth proper curve
-  (blueprint `sk-thm-picard-hilb-curves`).
 -/
 
 @[expose] public section
@@ -136,84 +130,5 @@ theorem isRepresentable_hilbertPresheaf (f : X ⟶ S) [IsSeparated f] (d : ℕ)
       ∃ U : X.affineOpens, ∀ x ∈ t, (f.fiberι s).base x ∈ U.1) :
     (hilbertPresheaf f d).IsRepresentable :=
   sorry
-
-section Curve
-
-variable {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
-
-/-- **The Hilbert scheme of a smooth projective curve.** For a geometrically integral smooth
-proper curve `X` over `k` and `d : ℕ`, the functor `Hilb^d_{X/k}` is represented by a smooth
-proper geometrically integral `k`-scheme `H` of dimension `d`, and `H ×[k] X` carries an
-effective Cartier divisor `D` which is universal, in the sense that the point of `Hilb^d_{X/k}`
-classified by a `k`-morphism `h : T ⟶ H` is the pullback of `D` along the induced morphism
-`X_T ⟶ H ×[k] X`:
-
-```
-        X_T ──────────────▶ H ×[k] X ─────▶ X
-         │  ⟨pr_T ≫ h, pr_X⟩    │            │
-         │                      │            f
-         ▼                      ▼            ▼
-         T ─────── h ─────────▶ H ─── p ──▶ Spec k
-```
-
-(blueprint: `sk-thm-picard-hilb-curves`, parts (1) and (3)) -/
-theorem hilbertPresheaf_curve_representable [SmoothOfRelativeDimension 1 f] [IsProper f]
-    [GeometricallyIntegral f] (d : ℕ) :
-    ∃ (H : Scheme.{u}) (p : H ⟶ Spec (.of k)), SmoothOfRelativeDimension d p ∧ IsProper p ∧
-      GeometricallyIntegral p ∧ ∃ e : (hilbertPresheaf f d).RepresentableBy (Over.mk p),
-        ∃ D : (Limits.pullback p f).IdealSheafData, IsEffectiveCartierCenter D.subschemeι ∧
-          ∀ (T : Over (Spec (.of k))) (h : T.left ⟶ H) (hh : h ≫ p = T.hom),
-            D.comap (Limits.pullback.lift (Limits.pullback.snd f T.hom ≫ h)
-                (Limits.pullback.fst f T.hom)
-                (by rw [Category.assoc, hh, Limits.pullback.condition])) =
-              (e.homEquiv (Over.homMk h hh)).1 :=
-  sorry
-
-/-- **The points of the Hilbert scheme of a curve.** For a field extension `k'` of `k`, the
-`k'`-points of `Hilb^d_{X/k}` are exactly the effective Cartier divisors of degree `d` on
-`X_{k'}`. Since both sides are described by ideal sheaves on `X_{k'}`, the bijection is the
-identity on underlying ideal sheaves, which is the naturality in `k'`.
-
-`Scheme.Hom.finrank` is junk-valued away from the finite flat case, so the right-hand side
-carries the finiteness and flatness of the projection explicitly.
-
-(blueprint: `sk-thm-picard-hilb-curves`, part (2)) -/
-theorem hilbertPresheaf_curve_points [SmoothOfRelativeDimension 1 f] [IsProper f]
-    [GeometricallyIntegral f] (d : ℕ) (k' : Type u) [Field k'] [Algebra k k']
-    (T : Over (Spec (.of k))) (hT : T = Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k k'))))
-    (I : (Limits.pullback f T.hom).IdealSheafData) :
-    (∃ Z : (hilbertPresheaf f d).obj (op T), Z.1 = I) ↔
-      IsEffectiveCartierCenter I.subschemeι ∧
-        IsFinite (I.subschemeι ≫ Limits.pullback.snd f T.hom) ∧
-        Flat (I.subschemeι ≫ Limits.pullback.snd f T.hom) ∧
-        ∀ t, (I.subschemeι ≫ Limits.pullback.snd f T.hom).finrank t = d :=
-  sorry
-
-/-- **The addition morphism of the Hilbert schemes of a curve.** If `H₁`, `H₂` and `H`
-represent `Hilb^{d₁}_{X/k}`, `Hilb^{d₂}_{X/k}` and `Hilb^{d₁ + d₂}_{X/k}`, then there is a
-`k`-morphism `H₁ ×[k] H₂ ⟶ H`, which on points is addition of effective Cartier divisors —
-i.e. the product of the corresponding ideal sheaves — and which is finite, flat and locally of
-finite presentation of degree `(d₁ + d₂).choose d₁`.
-
-The last clause is what identifies `α`: without it any finite flat morphism of the right degree
-would do, and the descent argument of the blueprint needs to know which morphism it is.
-
-(blueprint: `sk-thm-picard-hilb-curves`, part (3)) -/
-theorem hilbertPresheaf_curve_add [SmoothOfRelativeDimension 1 f] [IsProper f]
-    [GeometricallyIntegral f] (d₁ d₂ : ℕ) (H₁ H₂ H : Over (Spec (.of k)))
-    (e₁ : (hilbertPresheaf f d₁).RepresentableBy H₁)
-    (e₂ : (hilbertPresheaf f d₂).RepresentableBy H₂)
-    (e : (hilbertPresheaf f (d₁ + d₂)).RepresentableBy H) :
-    ∃ α : Limits.pullback H₁.hom H₂.hom ⟶ H.left,
-      α ≫ H.hom = Limits.pullback.fst H₁.hom H₂.hom ≫ H₁.hom ∧
-        IsFinite α ∧ Flat α ∧ LocallyOfFinitePresentation α ∧
-          (∀ t, α.finrank t = (d₁ + d₂).choose d₁) ∧
-          ∀ (T : Over (Spec (.of k))) (t₁ : T ⟶ H₁) (t₂ : T ⟶ H₂) (t : T ⟶ H),
-            t.left = Limits.pullback.lift t₁.left t₂.left
-                (by rw [Over.w, Over.w]) ≫ α →
-              (e.homEquiv t).1 = (e₁.homEquiv t₁).1 * (e₂.homEquiv t₂).1 :=
-  sorry
-
-end Curve
 
 end AlgebraicGeometry
