@@ -396,6 +396,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFu
 public import WeilConjectures.GroupTheory.TateModule
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 public import WeilConjectures.Mathlib.Algebra.Algebra.Hom
+public import WeilConjectures.Mathlib.Algebra.BigOperators.GroupWithZero.Finset
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Adjunctions
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.ForgetCorepresentable
@@ -512,6 +513,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius
+public import WeilConjectures.Mathlib.Analysis.Complex.Polynomial.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.CommSq
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
@@ -610,6 +612,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
+public import WeilConjectures.Mathlib.Data.Fin.Rev
 public import WeilConjectures.Mathlib.Data.Set.Image
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
@@ -679,6 +682,7 @@ public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 public import WeilConjectures.Mathlib.RingTheory.RingHom.PurelyInseparable
+public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Chevalley
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Noetherian
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
