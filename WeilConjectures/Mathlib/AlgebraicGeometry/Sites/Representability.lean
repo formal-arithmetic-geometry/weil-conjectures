@@ -29,6 +29,8 @@ that a scheme representing `sigmaOver P` gives an `S`-scheme representing `P`.
 
 - `AlgebraicGeometry.Scheme.LocalRepresentability.sigmaOver`: the presheaf
   `T ↦ Σ s : T ⟶ S, P(T, s)` on `Scheme.{u}`.
+- `AlgebraicGeometry.ZariskiCovers`: a family of subfunctors of a presheaf on `Over S` covers it
+  (Stacks, Definition 01JI).
 
 ## Main statements
 
@@ -38,6 +40,9 @@ that a scheme representing `sigmaOver P` gives an `S`-scheme representing `P`.
 - `AlgebraicGeometry.exists_opens_of_relative_isOpenImmersion`: a subfunctor `F ⊆ P` which is
   representable by open immersions (in the sense of `MorphismProperty.relative` for
   `uliftYoneda`) is cut out, over every `T` and `x ∈ P(T)`, by an open subscheme of `T`.
+- `AlgebraicGeometry.isRepresentable_of_isSheaf_of_zariskiCovers`: a Zariski sheaf on `Over S`
+  with small values, covered by representable subfunctors which are representable by open
+  immersions, is representable (Stacks, Lemma 01JJ, in the form of Definition 01JI).
 
 ## Implementation notes
 
@@ -400,7 +405,9 @@ namespace AlgebraicGeometry
 /-- **Subfunctors representable by open immersions.** If the inclusion of a subfunctor
 `F ⊆ P` of a presheaf on `Over S` is representable by open immersions, then for every `T` and
 `x ∈ P(T)` there is an open `U ⊆ T` such that a morphism `a : W ⟶ T` factors through `U` if
-and only if `a^* x ∈ F(W)` (Stacks, Definition 01JI). -/
+and only if `a^* x ∈ F(W)` (Stacks, Definition 01JI).
+
+(blueprint: `def-pc-open-subfunctor`) -/
 lemma exists_opens_of_relative_isOpenImmersion {S : Scheme.{u}}
     {P : (Over S)ᵒᵖ ⥤ Type (max w u)} {F : Subfunctor P}
     (hF : (IsOpenImmersion.inverseImage (Over.forget S)).relative uliftYoneda.{w} F.ι)
@@ -430,5 +437,62 @@ lemma exists_opens_of_relative_isOpenImmersion {S : Scheme.{u}}
       exact this.symm
     rw [h₂]
     exact ((hF.rep.fst g).app (op W) (ULift.up d)).2
+
+/-- **Covers of a functor.** A family `F i` of subfunctors of a presheaf `P` on `Over S`
+*covers* `P` if every element `x ∈ P(T)` lies locally on `T` in one of the `F i`: every point of
+`T` has an open neighbourhood `U` with `x|_U ∈ F i (U)` for some `i` (Stacks, Definition 01JI).
+
+(blueprint: `def-pc-cover`) -/
+def ZariskiCovers {S : Scheme.{u}} {P : (Over S)ᵒᵖ ⥤ Type w} {ι : Sort*}
+    (F : ι → Subfunctor P) : Prop :=
+  ∀ (T : Over S) (x : P.obj (op T)) (t : T.left), ∃ (i : ι) (U : T.left.Opens), t ∈ U ∧
+    P.map (Over.homMk U.ι rfl : Over.mk (U.ι ≫ T.hom) ⟶ T).op x ∈
+      (F i).obj (op (Over.mk (U.ι ≫ T.hom)))
+
+/-- **The representability criterion for schemes** (Stacks, Lemma 01JJ). Let `P` be a presheaf
+of sets on `Sch/S`, with `u`-small values, such that
+
+1. `P` is a Zariski sheaf;
+2. there is a family `(F i)` of subfunctors of `P` such that
+   (a) each `F i` is representable,
+   (b) each inclusion `F i ⊆ P` is representable by open immersions,
+   (c) the family `F i` covers `P`.
+
+Then `P` is representable by a scheme over `S`. Subfunctors (blueprint `def-pc-subfunctor`) are
+`CategoryTheory.Subfunctor`, the Zariski sheaf property (blueprint
+`def-pc-zariski-sheaf-property`) is `Presheaf.IsSheaf` for `zariskiTopology.over S`, and
+representability by open immersions (blueprint `def-pc-open-subfunctor`) is
+`MorphismProperty.relative` for `uliftYoneda`. The proof reduces to
+`AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over`, applied to the
+universal elements of the `F i`.
+
+(blueprint: `sk-prop-picard-schemes-criterion`, `lem-pc-schemes-criterion`) -/
+theorem isRepresentable_of_isSheaf_of_zariskiCovers {S : Scheme.{u}}
+    {P : (Over S)ᵒᵖ ⥤ Type (max w u)} [∀ T, Small.{u} (P.obj T)]
+    (hP : Presheaf.IsSheaf (Scheme.zariskiTopology.over S) P) {ι : Type u}
+    (F : ι → Subfunctor P)
+    (hrep : ∀ i, (F i).toFunctor.IsRepresentable)
+    (hopen : ∀ i, (IsOpenImmersion.inverseImage (Over.forget S)).relative uliftYoneda.{w}
+      (F i).ι)
+    (hcov : ZariskiCovers F) : P.IsRepresentable := by
+  choose X e using fun i ↦ (hrep i).has_representation
+  replace e := fun i ↦ (e i).some
+  let ξ (i : ι) : P.obj (op (X i)) := ((e i).homEquiv (𝟙 (X i))).1
+  have he (i : ι) {W : Over S} (b : W ⟶ X i) : ((e i).homEquiv b).1 = P.map b.op (ξ i) := by
+    rw [← Category.comp_id b, (e i).homEquiv_comp]
+    rfl
+  have hmem (i : ι) {W : Over S} (z : P.obj (op W)) :
+      (∃ b : W ⟶ X i, z = P.map b.op (ξ i)) ↔ z ∈ (F i).obj (op W) := by
+    refine ⟨fun ⟨b, hb⟩ ↦ hb ▸ he i b ▸ ((e i).homEquiv b).2, fun h ↦ ?_⟩
+    refine ⟨(e i).homEquiv.symm ⟨z, h⟩, ?_⟩
+    rw [← he, Equiv.apply_symm_apply]
+  refine Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over P hP X ξ
+    (fun i T a b h ↦ (e i).homEquiv.injective (Subtype.ext (by rw [he, he, h])))
+    (fun i T x ↦ ?_) (fun T x t ↦ ?_)
+  · obtain ⟨U, hU⟩ := exists_opens_of_relative_isOpenImmersion (hopen i) T x
+    exact ⟨U, fun W a ↦ (hmem i _).trans (hU W a)⟩
+  · obtain ⟨i, U, ht, h⟩ := hcov T x t
+    obtain ⟨b, hb⟩ := (hmem i _).2 h
+    exact ⟨i, _, _, b, by simpa [Scheme.Opens.range_ι] using ht, hb⟩
 
 end AlgebraicGeometry
