@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.BigOperators.Field
+public import Mathlib.Analysis.Complex.Basic
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.Data.Real.Basic
 public import Mathlib.GroupTheory.Archimedean
 public import Mathlib.RepresentationTheory.Irreducible
@@ -43,6 +45,16 @@ case, because `r(G)` is again a matrix group, hence the defining representation 
 represented degree datum; that reduction needs a transport of the positive central pair `(N, z)`
 along `r`, which is not stated here.
 
+The readout is proved by taking determinants in `z = h Fᴺ`, with `h` in the geometric monodromy
+group `H`.  The determinant of the action on `Q` is a polynomial function on the stabilizer of
+`U ≤ S` (`Matrix.GeneralLinearGroup.exists_evalAlgHom_eq_det_of_mk_eq`), so its finitely many
+values on `ρ(P)` are also its values on the closure `H`
+(`Matrix.GeneralLinearGroup.evalAlgHom_mem_of_mem_zeroLocus_vanishingIdeal`).  The character
+then kills the finite-order factor contributed by `h`.
+
+The last section reads the weight of a rank-one character off a single element of positive
+degree.
+
 ## Main declarations
 
 * `Representation.RealCharacter`: a homomorphism `k^× → (ℝ, +)`.
@@ -51,8 +63,16 @@ along `r`, which is not stated here.
 * `Representation.detWeight_mul_of_mem_ker`: the determinant weight does not depend on the choice
   of the degree-one element.
 * `Representation.weightMultiset`: the rank-counted weight multiset of a decomposition.
+* `Representation.toAdd_apply_detCharacter_eq_zero`: a real character kills the determinant of
+  a degree-zero element when the geometric determinant is finite.
 * `RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair`: the weight readout from a
-  positive central pair.
+  positive central pair, and
+  `RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible`: its
+  version for an irreducible subquotient, where `z` acts as a scalar by Schur's lemma.
+* `DegreeDatum.norm_apply_eq_zpow`: a rank-one character with finite geometric image has constant
+  modulus `|ι(χ(γ))| ^ m` on the elements of degree `m`.
+* `DegreeDatum.forall_norm_eq_rpow_iff_exists`, `DegreeDatum.forall_norm_eq_rpow_iff_forall`: the
+  weight of such a character is read off from one element of positive degree.
 * `Representation.exists_detWeight_eq_add_of_subquotient_tprod`: the weights of the constituents
   of a tensor product.
 * `Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`: the weights of the
@@ -66,7 +86,13 @@ along `r`, which is not stated here.
 
 `Representation.RealCharacter`, `Representation.HasFiniteGeometricDet`,
 `Representation.detWeight` and `Representation.detWeight_mul_of_mem_ker` implement `sk-d-weights`;
-`RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair` implements `sk-p-readout`;
+`RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair` implements `sk-p-readout`, and
+together with `RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair_of_basis` and
+`RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible` the
+degree-datum form of `cor-mg-central-determinant-weight`; `DegreeDatum.norm_apply_eq_zpow`
+implements `lem-wf-rank-one-component-modulus`, and `DegreeDatum.forall_norm_eq_rpow_iff_exists`
+and `DegreeDatum.forall_norm_eq_rpow_iff_forall` implement `cor-mg-rankone-weight-from-element`
+for a character along a family of Frobenius elements;
 `Representation.exists_detWeight_eq_add_of_subquotient_tprod` implements `sk-p-tensor`;
 `Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower` implements
 `sk-p-exterior`.  It is only the forward direction for a semisimple `V`, so it does not implement
@@ -102,6 +128,21 @@ a degree-one element `γ` is `dw_χ(ρ) = χ(δ(γ)) / dim V`.
 noncomputable def detWeight (χ : RealCharacter k) (γ : W) (ρ : Representation k W V) : ℝ :=
   Multiplicative.toAdd (χ (ρ.detCharacter γ)) / Module.finrank k V
 
+/-- A real character kills the determinant of a degree-zero element when the geometric
+determinant is finite: `δ(u)` has finite order `e`, so `e λ(δ(u)) = λ(δ(u) ^ e) = 0` in the
+torsion-free group `ℝ`. (blueprint: `sk-p-readout`) -/
+theorem toAdd_apply_detCharacter_eq_zero {deg : W →* Multiplicative ℤ}
+    (ρ : Representation k W V) (hdet : ρ.HasFiniteGeometricDet deg) (χ : RealCharacter k)
+    {u : W} (hu : u ∈ deg.ker) : Multiplicative.toAdd (χ (ρ.detCharacter u)) = 0 := by
+  let φ := ρ.detCharacter.comp deg.ker.subtype
+  have : Finite φ.range := (hdet : (Set.range φ).Finite).to_subtype
+  have hfin : IsOfFinOrder (χ (ρ.detCharacter u)) :=
+    (χ.comp φ.range.subtype).isOfFinOrder (isOfFinOrder_of_finite ⟨φ ⟨u, hu⟩, ⟨u, hu⟩, rfl⟩)
+  obtain ⟨m, hm, hum⟩ := isOfFinOrder_iff_pow_eq_one.1 hfin
+  have h := congr(Multiplicative.toAdd $hum)
+  rw [toAdd_pow, toAdd_one, nsmul_eq_mul, mul_eq_zero] at h
+  exact h.resolve_left (Nat.cast_ne_zero.2 hm.ne')
+
 /-- The determinant weight does not depend on the chosen degree-one element: replacing `γ` by
 `u γ` for a degree-zero element `u` leaves it unchanged, because the determinant character takes
 finitely many values on the degree-zero subgroup and `ℝ` is torsion-free.
@@ -109,7 +150,8 @@ finitely many values on the degree-zero subgroup and `ℝ` is torsion-free.
 theorem detWeight_mul_of_mem_ker {deg : W →* Multiplicative ℤ} (ρ : Representation k W V)
     (hdet : ρ.HasFiniteGeometricDet deg) (χ : RealCharacter k) (γ : W) {u : W}
     (hu : u ∈ deg.ker) : ρ.detWeight χ (u * γ) = ρ.detWeight χ γ := by
-  sorry
+  rw [detWeight, detWeight, map_mul, map_mul, toAdd_mul,
+    ρ.toAdd_apply_detCharacter_eq_zero hdet χ hu, zero_add]
 
 /-- The rank-counted weight multiset of a family of subrepresentations: the determinant weight of
 `Vs j` occurs `dim Vs j` times. -/
@@ -165,6 +207,8 @@ end Representation
 
 namespace AlgebraicGeometry.Monodromy.RepresentedDegreeDatum
 
+open Matrix.GeneralLinearGroup
+
 variable {W : Type*} [Group W] {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [Field k]
 
 /-- Fix a real character `χ` and a positive central pair `(N, z)` for a represented degree
@@ -179,7 +223,85 @@ theorem detWeight_eq_of_isPositiveCentralPair (D : RepresentedDegreeDatum W n k)
     (hc : ∀ x ∈ S, Matrix.toLinAlgEquiv' (z : Matrix n n k) x - (c : k) • x ∈ U) :
     (S.subquotient U).detWeight χ D.degreeOneElement =
       Multiplicative.toAdd (χ c) / N := by
-  sorry
+  classical
+  obtain ⟨hN, -, h, hh, _, rfl, hzh⟩ := id hz
+  set Q := S.subquotient U
+  set γ := D.degreeOneElement
+  obtain ⟨p, hp⟩ := exists_evalAlgHom_eq_det_of_mk_eq S.toSubmodule U.toSubmodule
+  -- `p` computes the determinant character of `Q` on `ρ(W)`
+  have hrep (w : W) : evalAlgHom (D.rep w) p = Q.detCharacter w := by
+    rw [Representation.coe_detCharacter_apply]
+    exact hp _ _ fun x ↦ ⟨_, rfl, rfl⟩
+  -- the induced action of `h ∈ H(k)` on `Q`
+  have hG := D.zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy k hh
+  let fh : Module.End k (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) :=
+    Submodule.mapQ _ _ (((h : Matrix n n k).mulVecLin).restrict
+      fun x hx ↦ D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy hG S hx)
+      fun x hx ↦ D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy hG U hx
+  -- by density, `det fh` is a value of the determinant character on `P`
+  obtain ⟨_, ⟨u, rfl⟩, hu⟩ : evalAlgHom h p ∈
+      Units.val '' Set.range fun u : D.deg.ker ↦ Q.detCharacter u :=
+    evalAlgHom_mem_of_mem_zeroLocus_vanishingIdeal (Γ := D.degreeZero.map D.rep) p
+      (hdet.image Units.val)
+      (by rintro _ ⟨w, hw, rfl⟩; exact ⟨_, ⟨⟨w, hw⟩, rfl⟩, (hrep w).symm⟩) hh
+  have hfh : evalAlgHom h p = LinearMap.det fh := hp _ _ fun x ↦ ⟨_, rfl, rfl⟩
+  have hzG := hz.mem_zeroLocus_arithmeticMonodromy
+  -- two descriptions of the action of `z = h Fᴺ` on `Q`
+  have h₁ : evalAlgHom z p = (c : k) ^ Module.finrank k
+      (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) := by
+    rw [hp _ ((c : k) • LinearMap.id) fun x ↦ ⟨⟨_, D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy
+      hzG S x.2⟩, rfl, ?_⟩, LinearMap.det_smul, LinearMap.det_id, mul_one]
+    rw [LinearMap.smul_apply, LinearMap.id_apply, ← Submodule.Quotient.mk_smul, eq_comm,
+      Submodule.Quotient.eq]
+    exact hc x x.2
+  have h₂ : evalAlgHom z p = LinearMap.det fh * Q.detCharacter (γ ^ N) := by
+    rw [Representation.coe_detCharacter_apply, ← map_mul]
+    refine hp _ _ fun x ↦ ⟨_, ?_, rfl⟩
+    rw [← hzh, Units.val_mul, ← Matrix.mulVec_mulVec]
+    simp only [frobenius, γ, ← map_pow]
+    rfl
+  have hunit : c ^ Module.finrank k (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) =
+      Q.detCharacter (u * γ ^ N) := Units.ext <| by
+    rw [Units.val_pow_eq_pow_val, map_mul, Units.val_mul, ← h₁, h₂, ← hfh, ← hu]
+  have h₃ := congr(Multiplicative.toAdd (χ $hunit))
+  rw [map_pow, toAdd_pow, map_mul, map_mul, toAdd_mul,
+    Q.toAdd_apply_detCharacter_eq_zero hdet χ u.2, zero_add, map_pow, map_pow, toAdd_pow,
+    nsmul_eq_mul, nsmul_eq_mul] at h₃
+  obtain ⟨x, hxS, hxU⟩ := SetLike.exists_of_lt hUS
+  have : Nontrivial (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) :=
+    ⟨Submodule.Quotient.mk ⟨x, hxS⟩, 0, by rwa [Ne, Submodule.Quotient.mk_eq_zero]⟩
+  have hr := Module.finrank_pos (R := k)
+    (M := S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype)
+  rw [Representation.detWeight, div_eq_div_iff (by positivity) (by positivity)]
+  linarith
+
+/-- The weight readout for an irreducible subquotient, over an algebraically closed field: by
+Schur's lemma the central element `z` acts on a nonzero irreducible subquotient `Q = S / U` as a
+scalar `c`, nonzero because `z` is invertible, and then `dw_χ(Q) = χ(c) / N`.
+(blueprint: `sk-p-readout`, `cor-mg-central-determinant-weight`) -/
+theorem exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible [IsAlgClosed k]
+    (D : RepresentedDegreeDatum W n k) (χ : Representation.RealCharacter k) {N : ℕ} {z : GL n k}
+    (hz : D.IsPositiveCentralPair N z) {U S : Subrepresentation D.asRepresentation} (hUS : U < S)
+    (hirr : (S.subquotient U).IsIrreducible)
+    (hdet : (S.subquotient U).HasFiniteGeometricDet D.deg) :
+    ∃ c : kˣ, (∀ x ∈ S, Matrix.toLinAlgEquiv' (z : Matrix n n k) x - (c : k) • x ∈ U) ∧
+      (S.subquotient U).detWeight χ D.degreeOneElement = Multiplicative.toAdd (χ c) / N := by
+  have hzG := hz.mem_zeroLocus_arithmeticMonodromy
+  obtain ⟨c, hc⟩ := Subrepresentation.exists_apply_sub_smul_mem_of_isIrreducible hirr
+    (Matrix.toLinAlgEquiv' (z : Matrix n n k))
+    (fun w x ↦ by
+      simp only [asRepresentation, MonoidHom.coe_mk, OneHom.coe_mk,
+        Matrix.toLinAlgEquiv'_apply, Matrix.mulVec_mulVec, ← Units.val_mul, hz.commute w])
+    (fun x hx ↦ D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy hzG U hx)
+    (fun x hx ↦ D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy hzG S hx)
+  have hc0 : c ≠ 0 := by
+    rintro rfl
+    obtain ⟨x, hxS, hxU⟩ := SetLike.exists_of_lt hUS
+    refine hxU ?_
+    have := D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy (inv_mem hzG) U
+      (by simpa using hc x hxS)
+    simpa [Matrix.mulVec_mulVec] using this
+  exact ⟨Units.mk0 c hc0, hc, D.detWeight_eq_of_isPositiveCentralPair χ hz hUS hdet _ hc⟩
 
 section Basis
 
@@ -562,3 +684,82 @@ theorem exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower [IsAlgClosed k]
     exact congrArg _ hsum
 
 end Representation
+
+namespace AlgebraicGeometry.Monodromy.DegreeDatum
+
+variable {W : Type*} [Group W] {k : Type*} [Field k]
+
+/-- **A rank-one character has constant modulus on a degree component.**  Let `χ : W → kˣ` be a
+character of a degree datum with finite image on the degree-zero subgroup `P`, and `ι : k → ℂ` a
+field embedding.  Every `w` of degree `m` satisfies `|ι(χ(w))| = |ι(χ(γ))| ^ m`: writing
+`w = u γ ^ m` with `u ∈ P`, the value `χ(u)` is a root of unity.
+(blueprint: `lem-wf-rank-one-component-modulus`) -/
+theorem norm_apply_eq_zpow (D : DegreeDatum W) (χ : W →* kˣ)
+    (hχ : (Set.range fun u : D.deg.ker ↦ χ u).Finite) (ι : k →+* ℂ) {w : W} {m : ℤ}
+    (hw : D.deg w = Multiplicative.ofAdd m) :
+    ‖ι (χ w : k)‖ = ‖ι (χ D.degreeOneElement : k)‖ ^ m := by
+  have hu : w * (D.degreeOneElement ^ m)⁻¹ ∈ D.deg.ker := by
+    rw [MonoidHom.mem_ker, map_mul, map_inv, map_zpow, D.deg_degreeOneElement, hw, ← ofAdd_zsmul,
+      smul_eq_mul, mul_one, mul_inv_cancel]
+  let φ := χ.comp D.deg.ker.subtype
+  have : Finite φ.range := (hχ : (Set.range φ).Finite).to_subtype
+  obtain ⟨e, he, hue⟩ := isOfFinOrder_iff_pow_eq_one.1 <| (Units.map ι.toMonoidHom).isOfFinOrder <|
+    φ.range.subtype.isOfFinOrder (isOfFinOrder_of_finite ⟨φ ⟨_, hu⟩, ⟨_, hu⟩, rfl⟩)
+  have h1 : ‖ι (χ (w * (D.degreeOneElement ^ m)⁻¹) : k)‖ = 1 :=
+    Complex.norm_eq_one_of_pow_eq_one (by simpa [φ] using congr(Units.val $hue)) he.ne'
+  calc ‖ι (χ w : k)‖
+      = ‖ι (χ (w * (D.degreeOneElement ^ m)⁻¹) * χ (D.degreeOneElement ^ m) : k)‖ := by
+        rw [← Units.val_mul, ← map_mul, inv_mul_cancel_right]
+    _ = ‖ι (χ D.degreeOneElement : k)‖ ^ m := by
+        rw [map_mul, norm_mul, h1, one_mul, map_zpow, Units.val_zpow_eq_zpow_val,
+          map_zpow₀, norm_zpow]
+
+/-- For an element `σ` of positive degree `e` and a character `χ` with finite image on `P`,
+`|ι(χ(σ))| = q ^ (e w / 2)` if and only if `|ι(χ(γ))| = q ^ (w / 2)`.
+(blueprint: `cor-mg-rankone-weight-from-element`) -/
+theorem norm_apply_eq_rpow_iff (D : DegreeDatum W) (χ : W →* kˣ)
+    (hχ : (Set.range fun u : D.deg.ker ↦ χ u).Finite) (ι : k →+* ℂ) {q : ℝ} (hq : 0 < q)
+    (t : ℝ) {σ : W} {e : ℕ} (he : 0 < e) (hσ : D.deg σ = Multiplicative.ofAdd (e : ℤ)) :
+    ‖ι (χ σ : k)‖ = q ^ (e * t / 2) ↔ ‖ι (χ D.degreeOneElement : k)‖ = q ^ (t / 2) := by
+  rw [D.norm_apply_eq_zpow χ hχ ι hσ, zpow_natCast, mul_div_assoc, mul_comm (e : ℝ),
+    Real.rpow_mul_natCast hq.le]
+  exact pow_left_inj₀ (norm_nonneg _) (by positivity) he.ne'
+
+/-- **Rank-one weight from a positive-degree element.**  Let `χ` be a character of a degree datum
+with finite image on `P`, `ι : k → ℂ` a field embedding and `q > 0`.  Let `F x` be a nonempty
+family of elements of positive degrees `d x`, such as the geometric Frobenius elements at the
+closed points of a curve over `𝔽_q`, of degree `[κ(x) : 𝔽_q]`.  Then `χ` is pure of weight `t`
+along this family, `|ι(χ(F x))| = q ^ (d x t / 2)` for all `x`, if and only if one element `σ`
+of positive degree `e` satisfies `|ι(χ(σ))| = q ^ (e t / 2)`.
+(blueprint: `cor-mg-rankone-weight-from-element`) -/
+theorem forall_norm_eq_rpow_iff_exists (D : DegreeDatum W) (χ : W →* kˣ)
+    (hχ : (Set.range fun u : D.deg.ker ↦ χ u).Finite) (ι : k →+* ℂ) {q : ℝ} (hq : 0 < q)
+    (t : ℝ) {X : Type*} [Nonempty X] (F : X → W) (d : X → ℕ) (hd : ∀ x, 0 < d x)
+    (hF : ∀ x, D.deg (F x) = Multiplicative.ofAdd (d x : ℤ)) :
+    (∀ x, ‖ι (χ (F x) : k)‖ = q ^ (d x * t / 2)) ↔
+      ∃ σ : W, ∃ e : ℕ, 0 < e ∧ D.deg σ = Multiplicative.ofAdd (e : ℤ) ∧
+        ‖ι (χ σ : k)‖ = q ^ (e * t / 2) := by
+  refine ⟨fun h ↦ ?_, fun ⟨σ, e, he, hσ, h⟩ x ↦ ?_⟩
+  · obtain ⟨x⟩ := ‹Nonempty X›
+    exact ⟨F x, d x, hd x, hF x, h x⟩
+  · rw [D.norm_apply_eq_rpow_iff χ hχ ι hq t he hσ] at h
+    rwa [D.norm_apply_eq_rpow_iff χ hχ ι hq t (hd x) (hF x)]
+
+/-- **Rank-one weight from a positive-degree element**, the version for every element: under the
+hypotheses of `forall_norm_eq_rpow_iff_exists`, `χ` is pure of weight `t` along the family `F` if
+and only if every element `σ` of positive degree `e` satisfies `|ι(χ(σ))| = q ^ (e t / 2)`.
+(blueprint: `cor-mg-rankone-weight-from-element`) -/
+theorem forall_norm_eq_rpow_iff_forall (D : DegreeDatum W) (χ : W →* kˣ)
+    (hχ : (Set.range fun u : D.deg.ker ↦ χ u).Finite) (ι : k →+* ℂ) {q : ℝ} (hq : 0 < q)
+    (t : ℝ) {X : Type*} [Nonempty X] (F : X → W) (d : X → ℕ) (hd : ∀ x, 0 < d x)
+    (hF : ∀ x, D.deg (F x) = Multiplicative.ofAdd (d x : ℤ)) :
+    (∀ x, ‖ι (χ (F x) : k)‖ = q ^ (d x * t / 2)) ↔
+      ∀ (σ : W) (e : ℕ), 0 < e → D.deg σ = Multiplicative.ofAdd (e : ℤ) →
+        ‖ι (χ σ : k)‖ = q ^ (e * t / 2) := by
+  refine ⟨fun h σ e he hσ ↦ ?_, fun h x ↦ h _ _ (hd x) (hF x)⟩
+  obtain ⟨x⟩ := ‹Nonempty X›
+  have := h x
+  rw [D.norm_apply_eq_rpow_iff χ hχ ι hq t (hd x) (hF x)] at this
+  rwa [D.norm_apply_eq_rpow_iff χ hχ ι hq t he hσ]
+
+end AlgebraicGeometry.Monodromy.DegreeDatum

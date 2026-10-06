@@ -276,7 +276,7 @@ theorem traceFunction_eq_trace_frobeniusEnd_stalk_pow (n : ℕ)
 
 /-- `F` is punctually `ι`-pure of weight `w`: at every closed point `x`, every eigenvalue `α`
 of the local Frobenius `Fₓ` satisfies `|ι α| = q_x ^ (w / 2)`, with `q_x` the residue
-cardinality at `x`. -/
+cardinality at `x`. (blueprint: `def-weil-punctual-weights`) -/
 def IsPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (w : ℝ) : Prop :=
   ∀ x : X.finitePoints,
     (F.stalk x).IsPureOfWeight ι ((X ↘ Spec (CommRingCat.of k₀)).residueCard x.1) w
