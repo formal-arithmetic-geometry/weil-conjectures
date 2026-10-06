@@ -26,8 +26,11 @@ representability argument:
   `𝒪_T`-module placed in degree `0`;
 * `F ⊆ G` is representable by open immersions;
 * the general criterion: a Zariski sheaf of groups with a representable open subfunctor that
-  generates it under translation is representable by a group scheme;
-* the resulting representability of `Pic_{X/k}`.
+  generates it under translation is representable by a group scheme.
+
+The resulting representability of `Pic_{X/k}` is
+`AlgebraicGeometry.isRepresentable_picardFunctor` in
+`WeilConjectures/AlgebraicGeometry/Picard/Scheme.lean`.
 
 ## Implementation notes
 
@@ -63,9 +66,6 @@ HasInjectiveResolutions (X ×[k] T).Modules`. Nothing can discharge that yet; se
   subfunctor of `Pic_{X/k,σ}` (blueprint `sk-lem-picard-f-open`).
 - `AlgebraicGeometry.isRepresentable_of_representable_open_subfunctor`: the representability
   criterion (blueprint `sk-thm-picard-criterion`).
-- `AlgebraicGeometry.isRepresentable_picardFunctor`: the Picard functor of a smooth projective
-  curve over a separably closed field is representable by a group scheme (blueprint
-  `sk-thm-picard-main`).
 -/
 
 @[expose] public section
@@ -268,18 +268,5 @@ theorem isRepresentable_of_representable_open_subfunctor
   obtain ⟨A', ⟨e⟩⟩ := (Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over P hG
     (fun _ : ι ↦ A) ξ hinj hopen hcov).has_representation
   exact ⟨A', GrpObj.ofRepresentableBy A' G e, ⟨e⟩⟩
-
-/-- **The Picard functor of a smooth projective curve over a separably closed field is
-representable.** Let `k` be a separably closed field and let `f : X ⟶ Spec k` be a smooth
-projective curve.  Then the Picard functor `Pic_{X/k} = AlgebraicGeometry.picardFunctor f` is
-represented by a group scheme over `k`, i.e. by an object of `Over (Spec k)` carrying a
-`CategoryTheory.GrpObj` structure.
-
-(blueprint: `sk-thm-picard-main`) -/
-theorem isRepresentable_picardFunctor [IsSepClosed k] (f : X ⟶ Spec (.of k))
-    [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] :
-    ∃ (A : Over (Spec (.of k))) (_ : GrpObj A),
-      Nonempty ((picardFunctor f).obj.RepresentableBy A) :=
-  sorry
 
 end AlgebraicGeometry
