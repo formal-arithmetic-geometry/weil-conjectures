@@ -61,6 +61,9 @@ monodromy groups and read on `k`-points.
   product `G° = Z(G°)° H°`, as surjectivity of the multiplication morphism of group schemes and on
   `k`-points.
 * `RepresentedDegreeDatum.exists_isPositiveCentralPair`: a positive central representative.
+* `RepresentedDegreeDatum.map`, `RepresentedDegreeDatum.IsPositiveCentralPair.map`: a positive
+  central pair transported along a polynomial homomorphism `GL n k →* GL m k`, such as the
+  exterior power (`Matrix.GeneralLinearGroup.exists_algHom_comp_eq_evalAlgHom_exteriorPower`).
 
 ## Blueprint
 
@@ -277,6 +280,61 @@ theorem isSemisimpleRepresentation_arithmeticMonodromy (hD : D.IsSemisimple) :
   D.subrepresentationOrderIsoArithmeticMonodromy.complementedLattice_iff.1 hD
 
 end Semisimple
+
+variable {D} in
+/-- The central element of a positive central pair lies in the arithmetic monodromy group. -/
+theorem IsPositiveCentralPair.mem_zeroLocus_arithmeticMonodromy {N : ℕ} {z : GL n k}
+    (hz : D.IsPositiveCentralPair N z) : z ∈ zeroLocus D.arithmeticMonodromy k :=
+  ((mem_zeroLocus_center_iff _).1 hz.2.1).1
+
+variable {D} in
+/-- The central element of a positive central pair commutes with the image of `W`. -/
+theorem IsPositiveCentralPair.commute {N : ℕ} {z : GL n k} (hz : D.IsPositiveCentralPair N z)
+    (w : W) : z * D.rep w = D.rep w * z :=
+  ((mem_zeroLocus_center_iff _).1 hz.2.1).2 _ (D.rep_mem_zeroLocus_arithmeticMonodromy w)
+
+/-- The `k`-points of the arithmetic monodromy group preserve every subrepresentation of the
+defining representation: invariance under `ρ(W)` passes to its Zariski closure.
+(blueprint: `sk-i-restriction`) -/
+theorem mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy {g : GL n k}
+    (hg : g ∈ zeroLocus D.arithmeticMonodromy k) (S : Subrepresentation D.asRepresentation)
+    {x : n → k} (hx : x ∈ S) : (g : Matrix n n k) *ᵥ x ∈ S :=
+  mulVec_mem_of_mem_zeroLocus_vanishingIdeal (Γ := D.rep.range) (S := S.toSubmodule)
+    (by
+      rintro _ ⟨w, rfl⟩ y hy
+      simpa [asRepresentation] using S.apply_mem_toSubmodule w hy) hg hx
+
+section Map
+
+variable {m : Type*} [Fintype m] [DecidableEq m]
+
+/-- The represented degree datum `r ∘ ρ` obtained from a homomorphism `r : GL n k →* GL m k`. -/
+def map (r : GL n k →* GL m k) : RepresentedDegreeDatum W m k :=
+  { D.toDegreeDatum with rep := r.comp D.rep }
+
+variable {D} in
+/-- A positive central pair `(N, z)` is transported to the positive central pair `(N, r z)` along a
+homomorphism `r : GL n k →* GL m k` given by polynomials, such as an exterior power.
+(blueprint: `sk-i-restriction`) -/
+theorem IsPositiveCentralPair.map {N : ℕ} {z : GL n k} (hz : D.IsPositiveCentralPair N z)
+    (r : GL n k →* GL m k) (φ : CoordinateRing m k →ₐ[k] CoordinateRing n k)
+    (hφ : ∀ g : GL n k, (evalAlgHom g).comp φ = evalAlgHom (r g)) :
+    (D.map r).IsPositiveCentralPair N (r z) := by
+  obtain ⟨hN, -, h, hh, _, rfl, hzh⟩ := id hz
+  refine ⟨hN, (mem_zeroLocus_center_iff _).2 ⟨?_, fun g hg ↦ ?_⟩, r h, ?_, _, rfl, ?_⟩
+  · exact map_mem_zeroLocus_vanishingIdeal r φ hφ (Γ := D.rep.range)
+      (Γ' := (r.comp D.rep).range) (by rintro _ ⟨w, rfl⟩; exact ⟨w, rfl⟩)
+      (hz.mem_zeroLocus_arithmeticMonodromy)
+  · refine commute_of_mem_zeroLocus_vanishingIdeal (Γ := (r.comp D.rep).range) ?_ hg
+    rintro _ ⟨w, rfl⟩
+    simp only [MonoidHom.comp_apply, ← map_mul, hz.commute w]
+  · exact map_mem_zeroLocus_vanishingIdeal r φ hφ (Γ := D.degreeZero.map D.rep)
+      (Γ' := D.degreeZero.map (r.comp D.rep))
+      (by rintro _ ⟨w, hw, rfl⟩; exact ⟨w, hw, rfl⟩) hh
+  · rw [← hzh, map_mul, map_pow]
+    rfl
+
+end Map
 
 section Lie
 

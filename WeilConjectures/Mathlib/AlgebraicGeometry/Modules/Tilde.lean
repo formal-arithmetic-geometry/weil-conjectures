@@ -6,6 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Flat.Stability
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # Sections of quasi-coherent modules over basic opens of an affine open
@@ -20,6 +23,9 @@ is killed by a power of `f`.
 
 - `AlgebraicGeometry.Scheme.Modules.exists_map_eq_pow_smul_of_isAffineOpen`
 - `AlgebraicGeometry.Scheme.Modules.exists_pow_smul_eq_zero_of_isAffineOpen`
+- `AlgebraicGeometry.Scheme.Modules.isLocalizedModule_basicOpen`: the two halves together.
+- `AlgebraicGeometry.Scheme.Modules.flat_sections_of_isInvertible`: the sections of an invertible
+  module over an affine open are flat.
 -/
 
 @[expose] public section
@@ -149,5 +155,74 @@ lemma exists_pow_smul_eq_zero_of_isAffineOpen {W : X.Opens} (hW : IsAffineOpen W
   simp only [← Functor.map_comp_apply, hid, CategoryTheory.Functor.map_id,
     ConcreteCategory.id_apply] at this
   exact this
+
+end AlgebraicGeometry.Scheme.Modules
+
+namespace AlgebraicGeometry.Scheme.Modules
+
+open Opposite
+
+variable {X : Scheme.{u}}
+
+/-- Let `M` be a quasi-coherent `𝒪_X`-module, `U` an affine open and `g ∈ Γ(X, U)`. Then the
+restriction map `Γ(M, U) → Γ(M, D(g))` is a localization at the powers of `g`, the
+`Γ(X, U)`-module structure on `Γ(M, D(g))` being restriction of scalars along
+`Γ(X, U) → Γ(X, D(g))`. -/
+lemma isLocalizedModule_basicOpen (M : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M] {U : X.Opens} (hU : IsAffineOpen U)
+    (g : Γ(X, U)) :
+    letI : Module Γ(X, U) Γ(M, X.basicOpen g) :=
+      Module.compHom _ (algebraMap Γ(X, U) Γ(X, X.basicOpen g))
+    IsLocalizedModule.Away g
+      { toFun := M.presheaf.map (homOfLE (X.basicOpen_le g)).op
+        map_add' := map_add _
+        map_smul' := map_smul M _ : Γ(M, U) →ₗ[Γ(X, U)] Γ(M, X.basicOpen g) } := by
+  let : Module Γ(X, U) Γ(M, X.basicOpen g) :=
+    Module.compHom _ (algebraMap Γ(X, U) Γ(X, X.basicOpen g))
+  refine ⟨fun ⟨x, hx⟩ ↦ ?_, fun y ↦ ?_, fun {x₁ x₂} h ↦ ?_⟩
+  · obtain ⟨n, rfl⟩ := hx
+    have hu : IsUnit (algebraMap Γ(X, U) Γ(X, X.basicOpen g) (g ^ n)) := by
+      rw [map_pow]
+      exact (X.toRingedSpace.isUnit_res_basicOpen g).pow n
+    rw [Module.End.isUnit_iff]
+    refine ⟨fun a b hab ↦ ?_, fun m ↦ ⟨hu.unit⁻¹ • m, ?_⟩⟩
+    · rw [Module.algebraMap_end_apply, Module.algebraMap_end_apply] at hab
+      exact hu.smul_left_cancel.mp hab
+    · rw [Module.algebraMap_end_apply]
+      exact smul_inv_smul hu.unit m
+  · obtain ⟨n, t, ht⟩ := exists_map_eq_pow_smul_of_isAffineOpen M hU g y
+    rw [← map_pow] at ht
+    exact ⟨⟨t, ⟨g ^ n, n, rfl⟩⟩, ht.symm⟩
+  · obtain ⟨n, hn⟩ := exists_pow_smul_eq_zero_of_isAffineOpen M hU g (x₁ - x₂)
+      ((map_sub _ x₁ x₂).trans (sub_eq_zero.mpr h))
+    exact ⟨⟨g ^ n, n, rfl⟩, sub_eq_zero.mp ((smul_sub _ _ _).symm.trans hn)⟩
+
+/-- The sections of an invertible `𝒪_X`-module over an affine open `U` form a flat
+`Γ(X, U)`-module. -/
+lemma flat_sections_of_isInvertible (M : X.Modules) [M.IsInvertible] {U : X.Opens}
+    (hU : IsAffineOpen U) : Module.Flat Γ(X, U) Γ(M, U) := by
+  let s : Set Γ(X, U) := {g | ∃ Y : X.Opens, X.basicOpen g ≤ Y ∧
+    Nonempty (M.over Y ≅ SheafOfModules.unit (X.ringCatSheaf.over Y))}
+  have hs : Ideal.span s = ⊤ := by
+    rw [← hU.self_le_iSup_basicOpen_iff]
+    intro x hx
+    obtain ⟨Y, hxY, ⟨e⟩⟩ := exists_mem_over_iso_unit M x
+    obtain ⟨g, hgY, hxg⟩ := hU.exists_basicOpen_le ⟨x, hxY⟩ hx
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨g, Y, hgY, ⟨e⟩⟩, hxg⟩
+  let _ (r : s) : Module Γ(X, U) Γ(M, X.basicOpen r.1) :=
+    Module.compHom _ (algebraMap Γ(X, U) Γ(X, X.basicOpen r.1))
+  have _ (r : s) := isLocalizedModule_basicOpen M hU r.1
+  refine Module.flat_of_isLocalized_span Γ(X, U) Γ(M, U) s hs
+    (fun r ↦ Γ(M, X.basicOpen r.1)) (fun r ↦
+      { toFun := M.presheaf.map (homOfLE (X.basicOpen_le r.1)).op
+        map_add' := map_add _
+        map_smul' := map_smul M _ }) fun r ↦ ?_
+  obtain ⟨Y, hY, ⟨e⟩⟩ := r.2
+  have := Module.Flat.of_linearEquiv (sectionsLinearEquivOfOverIsoUnit e hY)
+  have := hU.isLocalization_basicOpen r.1
+  have := IsLocalization.flat Γ(X, X.basicOpen r.1) (.powers r.1)
+  have : IsScalarTower Γ(X, U) Γ(X, X.basicOpen r.1) Γ(M, X.basicOpen r.1) :=
+    ⟨fun a b m ↦ mul_smul _ _ _⟩
+  exact Module.Flat.trans Γ(X, U) Γ(X, X.basicOpen r.1) Γ(M, X.basicOpen r.1)
 
 end AlgebraicGeometry.Scheme.Modules

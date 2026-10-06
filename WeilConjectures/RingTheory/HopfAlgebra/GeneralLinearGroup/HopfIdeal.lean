@@ -67,12 +67,14 @@ Finally, the identity component and the centre of `V(I)` are described by Hopf i
 - `Matrix.GeneralLinearGroup.zeroLocus_vanishingIdeal_le_normalizer`,
   `Matrix.GeneralLinearGroup.commutator_zeroLocus_vanishingIdeal_le`: Zariski closure preserves
   normalizing and commutator inclusions between subgroups of `GL n k`.
+- `Matrix.GeneralLinearGroup.commute_of_mem_zeroLocus_vanishingIdeal`,
+  `Matrix.GeneralLinearGroup.mulVec_mem_of_mem_zeroLocus_vanishingIdeal`,
+  `Matrix.GeneralLinearGroup.map_mem_zeroLocus_vanishingIdeal`: centralizers, stabilizers of
+  subspaces and polynomial homomorphisms pass to the Zariski closure.
 - `Matrix.GeneralLinearGroup.IsConnected.isPrime`: in characteristic zero, a connected matrix
   group is irreducible, by Cartier's lemma; and
   `Matrix.GeneralLinearGroup.eq_of_le_of_ringKrullDim_eq`: a closed subgroup of an irreducible
   matrix group of the same dimension is the whole group.
-- `Matrix.GeneralLinearGroup.mulVec_mem_of_mem_zeroLocus_vanishingIdeal`: a subspace stable under
-  a subgroup is stable under its Zariski closure.
 
 ## Implementation notes
 
@@ -496,7 +498,7 @@ theorem evalAlgHom_linearFormEquation (φ : Module.Dual k (n → k)) (u : n → 
 /-- **Closed stabilizers and density.** A subspace `S ⊆ k^n` stable under a subgroup `Γ` of
 `GL n k` is stable under its Zariski closure: the stabilizer of `S` is cut out by the linear
 equations `φ(g x) = 0`, for `x ∈ S` and `φ` in the annihilator of `S`.
-(blueprint: `lem-wf-stabilizer-density`) -/
+(blueprint: `lem-wf-stabilizer-density`, `sk-i-restriction`) -/
 theorem mulVec_mem_of_mem_zeroLocus_vanishingIdeal {Γ : Subgroup (GL n k)}
     {S : Submodule k (n → k)} (hΓ : ∀ g ∈ Γ, ∀ x ∈ S, (g : Matrix n n k) *ᵥ x ∈ S) {g : GL n k}
     (hg : g ∈ zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k) {x : n → k} (hx : x ∈ S) :
@@ -880,6 +882,39 @@ theorem mem_zeroLocus_center_iff (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal
   · rintro ⟨hg, hc⟩
     exact subset_zeroLocus_vanishingIdeal _
       ⟨hg, Subgroup.mem_centralizer_iff.2 fun h hh ↦ (hc h hh).symm⟩
+
+/-- An element commuting with a subgroup `Γ` of `GL n k` commutes with the `k`-points of its
+Zariski closure: the commutator equations are closed. (blueprint: `sk-i-restriction`) -/
+theorem commute_of_mem_zeroLocus_vanishingIdeal {Γ : Subgroup (GL n k)} {z : GL n k}
+    (hz : ∀ g ∈ Γ, z * g = g * z) {g : GL n k}
+    (hg : g ∈ zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k) : z * g = g * z := by
+  ext i j
+  have h := hg (commutatorEquation z i j) <| mem_vanishingIdeal.2 fun h hh ↦ by
+    rw [evalAlgHom_commutatorEquation, ← Units.val_mul, ← Units.val_mul, hz h hh, sub_self]
+  rw [evalAlgHom_commutatorEquation, sub_eq_zero] at h
+  exact h.symm
+
+section Map
+
+variable {m : Type*} [Fintype m] [DecidableEq m]
+
+/-- A homomorphism `r : GL n k →* GL m k` given by polynomials (an algebra map `φ` of coordinate
+rings with `evalAlgHom (r g) = evalAlgHom g ∘ φ`) maps the `k`-points of the Zariski closure of a
+subgroup `Γ` into the Zariski closure of any subgroup `Γ'` containing `r(Γ)`.
+(blueprint: `sk-i-restriction`) -/
+theorem map_mem_zeroLocus_vanishingIdeal (r : GL n k →* GL m k)
+    (φ : CoordinateRing m k →ₐ[k] CoordinateRing n k)
+    (hφ : ∀ g : GL n k, (evalAlgHom g).comp φ = evalAlgHom (r g)) {Γ : Subgroup (GL n k)}
+    {Γ' : Subgroup (GL m k)} (hΓ : ∀ h ∈ Γ, r h ∈ Γ') {g : GL n k}
+    (hg : g ∈ zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k) :
+    r g ∈ zeroLocus (vanishingIdeal (Γ' : Set (GL m k))) k := by
+  intro a ha
+  rw [← hφ, AlgHom.comp_apply]
+  refine hg _ (mem_vanishingIdeal.2 fun h hh ↦ ?_)
+  rw [← AlgHom.comp_apply, hφ]
+  exact mem_vanishingIdeal.1 ha _ (hΓ h hh)
+
+end Map
 
 /-! ### Cartier's lemma: connected matrix groups are irreducible
 
