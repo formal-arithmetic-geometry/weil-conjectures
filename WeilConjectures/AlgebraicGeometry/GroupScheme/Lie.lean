@@ -210,6 +210,53 @@ noncomputable def dualNumbersιδOver : dualNumbersOver S ⟶ dualNumbers₂Over
 noncomputable def dualNumbersMulOver : dualNumbers₂Over S ⟶ dualNumbersOver S :=
   Over.homMk S.dualNumbersMul (by sorry)
 
+/-- The projection `p : S[ε] ⟶ S`, as a morphism over `S`. -/
+noncomputable def dualNumbersProjOver : dualNumbersOver S ⟶ Over.mk (𝟙 S) :=
+  Over.homMk S.dualNumbersProj (by simp [dualNumbersOver])
+
+/-- Setting `δ = 0` and then forgetting `δ` is the identity of `S[ε]`. -/
+@[reassoc (attr := simp)]
+theorem dualNumbersιεOver_comp_dualNumbersProjεOver :
+    dualNumbersιεOver S ≫ dualNumbersProjεOver S = 𝟙 _ := by
+  ext1
+  exact S.dualNumbers.dualNumbersι_comp_proj
+
+/-- Setting `δ = 0` and then forgetting `ε` factors through `S`. -/
+@[reassoc (attr := simp)]
+theorem dualNumbersιεOver_comp_dualNumbersProjδOver :
+    dualNumbersιεOver S ≫ dualNumbersProjδOver S = dualNumbersProjOver S ≫ dualNumbersιOver S := by
+  ext1
+  exact Scheme.Hom.ι_comp_dualNumbers S.dualNumbersProj
+
+/-- Setting `ε = 0` and then forgetting `ε` factors through `S`. -/
+@[reassoc (attr := simp)]
+theorem dualNumbersιδOver_comp_dualNumbersProjεOver :
+    dualNumbersιδOver S ≫ dualNumbersProjεOver S = dualNumbersProjOver S ≫ dualNumbersιOver S := by
+  ext1
+  exact Scheme.Hom.dualNumbers_comp_proj S.dualNumbersι
+
+/-- Setting `ε = 0` and then forgetting `ε` is the identity of `S[δ]`. -/
+@[reassoc (attr := simp)]
+theorem dualNumbersιδOver_comp_dualNumbersProjδOver :
+    dualNumbersιδOver S ≫ dualNumbersProjδOver S = 𝟙 _ := by
+  ext1
+  change S.dualNumbersι.dualNumbers ≫ S.dualNumbersProj.dualNumbers = 𝟙 _
+  rw [← Scheme.Hom.dualNumbers_comp, Scheme.dualNumbersι_comp_proj, Scheme.Hom.dualNumbers_id]
+
+/-- Setting `δ = 0` in `η ↦ εδ` factors through `S`. -/
+@[reassoc (attr := simp)]
+theorem dualNumbersιεOver_comp_dualNumbersMulOver :
+    dualNumbersιεOver S ≫ dualNumbersMulOver S = dualNumbersProjOver S ≫ dualNumbersιOver S := by
+  ext1
+  exact S.dualNumbersι_comp_dualNumbersMul
+
+/-- Setting `ε = 0` in `η ↦ εδ` factors through `S`. -/
+@[reassoc (attr := simp)]
+theorem dualNumbersιδOver_comp_dualNumbersMulOver :
+    dualNumbersιδOver S ≫ dualNumbersMulOver S = dualNumbersProjOver S ≫ dualNumbersιOver S := by
+  ext1
+  exact Scheme.Hom.dualNumbers_dualNumbersι_comp_dualNumbersMul S
+
 variable {S} (G : Over S) [GrpObj G]
 
 /-- Precomposition with a morphism `f : X ⟶ Y` over `S`, as a group homomorphism
@@ -316,7 +363,16 @@ theorem mem_mixedPoints {z : dualNumbers₂Over S ⟶ G} :
 
 /-- The map `μ : infPoints G → mixedPoints G` induced by `η ↦ εδ`. -/
 noncomputable def toMixed (v : infPoints G) : mixedPoints G :=
-  ⟨dualNumbersMulOver S ≫ v.1, by sorry⟩
+  ⟨dualNumbersMulOver S ≫ v.1, by
+    have hv := (mem_infPoints G).1 v.2
+    rw [mem_mixedPoints, dualNumbersιεOver_comp_dualNumbersMulOver_assoc,
+      dualNumbersιδOver_comp_dualNumbersMulOver_assoc, hv, MonObj.comp_one]
+    exact ⟨rfl, rfl⟩⟩
+
+@[simp]
+theorem coe_toMixed (v : infPoints G) :
+    (toMixed G v : dualNumbers₂Over S ⟶ G) = dualNumbersMulOver S ≫ v.1 :=
+  rfl
 
 /-- `η ↦ εδ` identifies the infinitesimal points with the points over `S[ε][δ]` trivial for
 `ε = 0` and for `δ = 0`: such a point has `z^♯(a) = e^♯(a) + εδ d(a)` for a derivation `d`. -/
@@ -341,13 +397,28 @@ noncomputable def toδ (v : infPoints G) : dualNumbers₂Over S ⟶ G :=
 for `ε = 0` and for `δ = 0`. -/
 theorem commutator_mem_mixedPoints (v w : infPoints G) :
     toε G v * toδ G w * (toε G v)⁻¹ * (toδ G w)⁻¹ ∈ mixedPoints G := by
-  sorry
+  have hv := (mem_infPoints G).1 v.2
+  have hw := (mem_infPoints G).1 w.2
+  rw [mem_mixedPoints, ← pointsPrecomp_apply, ← pointsPrecomp_apply]
+  simp only [map_mul, map_inv, pointsPrecomp_apply, toε, toδ,
+    dualNumbersιεOver_comp_dualNumbersProjεOver_assoc,
+    dualNumbersιεOver_comp_dualNumbersProjδOver_assoc,
+    dualNumbersιδOver_comp_dualNumbersProjεOver_assoc,
+    dualNumbersιδOver_comp_dualNumbersProjδOver_assoc, hv, hw,
+    MonObj.comp_one]
+  exact ⟨by group, by group⟩
 
 /-- The bracket of two infinitesimal points: the mixed term `εδ` of their group commutator
 `v_ε w_δ v_ε⁻¹ w_δ⁻¹` over `S[ε][δ]`. It is the restriction to the identity of the commutator
 `[ṽ, w̃]` of the left-invariant vector fields extending `v` and `w`. (blueprint: `sk-d-tangent`) -/
 noncomputable def infBracket (v w : infPoints G) : infPoints G :=
   (mixedEquiv G).symm ⟨_, commutator_mem_mixedPoints G v w⟩
+
+/-- The mixed term of the bracket is the commutator. -/
+theorem coe_toMixed_infBracket (v w : infPoints G) :
+    (toMixed G (infBracket G v w) : dualNumbers₂Over S ⟶ G) =
+      toε G v * toδ G w * (toε G v)⁻¹ * (toδ G w)⁻¹ :=
+  congrArg Subtype.val ((mixedEquiv G).apply_symm_apply _)
 
 /-- The Lie bracket on `Lie(G)`, transported from the infinitesimal points. -/
 noncomputable instance : Bracket (Lie G) (Lie G) where
@@ -393,7 +464,13 @@ theorem coe_infPointsMap_apply (f : G ⟶ H) [IsMonHom f] (v : infPoints G) :
 group commutators and commutes with `η ↦ εδ`. -/
 theorem infPointsMap_infBracket (f : G ⟶ H) [IsMonHom f] (v w : infPoints G) :
     infPointsMap f (infBracket G v w) = infBracket H (infPointsMap f v) (infPointsMap f w) := by
-  sorry
+  apply (toMixed_bijective H).injective
+  ext1
+  rw [coe_toMixed_infBracket]
+  change (dualNumbersMulOver S ≫ (infBracket G v w : dualNumbersOver S ⟶ G)) ≫ f = _
+  rw [← coe_toMixed, coe_toMixed_infBracket, ← IsMonHom.monoidHom_apply]
+  simp only [map_mul, map_inv, IsMonHom.monoidHom_apply, toε, toδ, coe_infPointsMap_apply,
+    Category.assoc]
 
 /-- Let `f : G ⟶ H` be a monomorphism of group schemes, a subgroup scheme of `H`. If the
 commutators of the points of `H` over `S[ε][δ]` factor through `G`, then the bracket of two
@@ -404,7 +481,20 @@ its preimage under `η ↦ εδ` is an infinitesimal point of `G` mapping to `[v
 theorem infBracket_mem_range_infPointsMap (f : G ⟶ H) [IsMonHom f] [Mono f]
     (hf : ∀ a b : dualNumbers₂Over S ⟶ H, a * b * a⁻¹ * b⁻¹ ∈ (IsMonHom.monoidHom f _).range)
     (v w : infPoints H) : infBracket H v w ∈ (infPointsMap f).range := by
-  sorry
+  obtain ⟨c, hc⟩ := hf (toε H v) (toδ H w)
+  rw [IsMonHom.monoidHom_apply] at hc
+  have hcomm := commutator_mem_mixedPoints H v w
+  rw [mem_mixedPoints, ← hc] at hcomm
+  have hc' : c ∈ mixedPoints G := by
+    rw [mem_mixedPoints]
+    constructor
+    · exact (cancel_mono f).1 (by rw [Category.assoc, hcomm.1, MonObj.one_comp])
+    · exact (cancel_mono f).1 (by rw [Category.assoc, hcomm.2, MonObj.one_comp])
+  refine ⟨(mixedEquiv G).symm ⟨c, hc'⟩, (toMixed_bijective H).injective (Subtype.ext ?_)⟩
+  rw [coe_toMixed_infBracket, ← hc]
+  change dualNumbersMulOver S ≫ ((mixedEquiv G).symm ⟨c, hc'⟩ : dualNumbersOver S ⟶ G) ≫ f = _
+  rw [← Category.assoc]
+  exact congrArg (· ≫ f) (congrArg Subtype.val ((mixedEquiv G).apply_symm_apply ⟨c, hc'⟩))
 
 end GrpObj
 
