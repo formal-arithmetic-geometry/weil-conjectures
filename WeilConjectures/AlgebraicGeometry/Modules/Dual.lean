@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-!
 # The dual of a sheaf of modules on a scheme
@@ -27,13 +28,17 @@ Both are abbreviations for `SheafOfModules.homObj`, so its API (`SheafOfModules.
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.Modules.nonempty_dual_unit_iso`: `𝒪_Xᵛ ≅ 𝒪_X`.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_tensorObj_dual_iso_unit`: for an invertible `M`,
+  `M ⊗ Mᵛ ≅ 𝒪_X`, so that `Mᵛ` is a tensor inverse of `M`.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_iso_unit_of_tensorObj_iso`: cancellation of an
+  invertible module, `M ⊗ N ≅ M` implies `N ≅ 𝒪_X`.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory
+open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
@@ -64,5 +69,21 @@ theorem nonempty_dual_unit_iso :
     Nonempty ((SheafOfModules.unit X.ringCatSheaf : X.Modules)ᵛ ≅
       SheafOfModules.unit X.ringCatSheaf) :=
   sorry
+
+/-- **The dual of an invertible module is its tensor inverse.** For an invertible `𝒪_X`-module
+`M`, the evaluation `M ⊗ Mᵛ ⟶ 𝒪_X` is an isomorphism: this is local on `X`, and for `M = 𝒪_X` it
+is `𝒪_X ⊗ 𝒪_X ≅ 𝒪_X`. This is what makes the isomorphism classes of invertible modules a group,
+the Picard group (blueprint `def-sc-picard-group`). -/
+theorem nonempty_tensorObj_dual_iso_unit (M : X.Modules) [M.IsInvertible] :
+    Nonempty (M ⊗ Mᵛ ≅ 𝟙_ X.Modules) :=
+  sorry
+
+/-- **Cancellation of an invertible module.** If `M` is invertible and `M ⊗ N ≅ M`, then
+`N ≅ 𝒪_X`: tensor with the inverse `Mᵛ` of `M`. -/
+lemma nonempty_iso_unit_of_tensorObj_iso (M N : X.Modules) [M.IsInvertible] (e : M ⊗ N ≅ M) :
+    Nonempty (N ≅ 𝟙_ X.Modules) := by
+  obtain ⟨d⟩ := nonempty_tensorObj_dual_iso_unit M
+  exact ⟨(λ_ N).symm ≪≫ (((β_ _ _) ≪≫ d).symm ⊗ᵢ Iso.refl N) ≪≫ α_ _ _ _ ≪≫
+    (Iso.refl _ ⊗ᵢ e) ≪≫ (β_ _ _) ≪≫ d⟩
 
 end AlgebraicGeometry.Scheme.Modules
