@@ -48,6 +48,42 @@ universe u
 
 open CategoryTheory Limits
 
+namespace CategoryTheory.ShortComplex.ShortExact
+
+open Pretriangulated
+
+variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C] {E : ShortComplex C}
+
+/-- The triangle `X₁[0] ⟶ X₂[0] ⟶ X₃[0] ⟶ X₁[1]` in the bounded below derived category
+attached to a short exact sequence `0 ⟶ X₁ ⟶ X₂ ⟶ X₃ ⟶ 0`: the lift of
+`CategoryTheory.ShortComplex.ShortExact.singleTriangle` along the inclusion
+`DerivedCategory.Plus C ⥤ DerivedCategory C`. -/
+noncomputable def singleTrianglePlus (hE : E.ShortExact) : Triangle (DerivedCategory.Plus C) :=
+  Triangle.mk ((DerivedCategory.Plus.singleFunctor C 0).map E.f)
+    ((DerivedCategory.Plus.singleFunctor C 0).map E.g)
+    (DerivedCategory.TStructure.t.plus.fullyFaithfulι.preimage
+      (hE.singleδ ≫ (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).inv.app
+        ((DerivedCategory.Plus.singleFunctor C 0).obj E.X₁)))
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The triangle `X₁[0] ⟶ X₂[0] ⟶ X₃[0] ⟶ X₁[1]` attached to a short exact sequence is
+distinguished in the bounded below derived category. -/
+lemma singleTrianglePlus_distinguished (hE : E.ShortExact) :
+    hE.singleTrianglePlus ∈ distTriang (DerivedCategory.Plus C) := by
+  refine isomorphic_distinguished _ hE.singleTriangle_distinguished _
+    (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _) ?_ ?_ ?_)
+  · simp [singleTrianglePlus, Functor.mapTriangle]
+    rfl
+  · simp [singleTrianglePlus, Functor.mapTriangle]
+    rfl
+  · simp only [Functor.mapTriangle, ObjectProperty.ι_obj, ObjectProperty.ι_map, Triangle.mk,
+      singleTrianglePlus, ObjectProperty.homMk_hom, Category.assoc, Iso.inv_hom_id_app,
+      Functor.comp_obj, Iso.refl_hom, Functor.map_id, Category.comp_id, singleTriangle_mor₃,
+      Category.id_comp]
+    exact Category.comp_id _
+
+end CategoryTheory.ShortComplex.ShortExact
+
 namespace AlgebraicGeometry
 
 open Scheme Etale
@@ -63,6 +99,17 @@ instance (p : X ⟶ S) : ((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.Ad
       ((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusCompatibility.symm
   Functor.additive_of_comp_faithful _ DerivedCategory.Plus.ι
 
+/-- The functor induced on bounded below derived categories by the pullback commutes with
+shifts: it is the restriction of the triangulated functor `D(p^*)`. -/
+noncomputable instance (p : X ⟶ S) :
+    ((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.CommShift ℤ := by
+  dsimp only [Functor.mapDerivedCategoryPlus]
+  infer_instance
+
+instance (p : X ⟶ S) : ((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.IsTriangulated := by
+  dsimp only [Functor.mapDerivedCategoryPlus]
+  infer_instance
+
 instance (p : X ⟶ S) (g : T ⟶ S) (q : ℤ) : (Etale.baseChangeSourceFunctor Λ p g q).Additive := by
   dsimp only [Etale.baseChangeSourceFunctor]
   infer_instance
@@ -77,7 +124,10 @@ sequences), `Rg_*`, `p^*` with the homological functor `Hᵠ`. -/
 theorem Etale.exact_baseChangeSourceFunctor_map_of_shortExact (p : X ⟶ S) (g : T ⟶ S) (q : ℤ)
     {E : ShortComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hE : E.ShortExact) :
     (E.map (Etale.baseChangeSourceFunctor Λ p g q)).Exact :=
-  sorry
+  ((((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus ⋙
+      ((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus) ⋙
+    DerivedCategory.Plus.homologyFunctor _ q).map_distinguished_exact _
+      hE.singleTrianglePlus_distinguished
 
 /-- The target `F ↦ Rᵠh_* e⁻¹ F` of the exchange map is exact in the middle on short exact
 sequences: it is the composite of the triangulated functors `F ↦ F[0]` (on short exact
@@ -85,7 +135,10 @@ sequences), `e^*`, `Rh_*` with the homological functor `Hᵠ`. -/
 theorem Etale.exact_baseChangeTargetFunctor_map_of_shortExact (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ)
     {E : ShortComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hE : E.ShortExact) :
     (E.map (Etale.baseChangeTargetFunctor Λ e h q)).Exact :=
-  sorry
+  ((((e)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ⋙
+      ((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus) ⋙
+    DerivedCategory.Plus.homologyFunctor _ q).map_distinguished_exact _
+      hE.singleTrianglePlus_distinguished
 
 /-- **Five-lemma transfer for the exchange morphism**: for a short exact sequence
 `0 ⟶ F₁ ⟶ F ⟶ F₂ ⟶ 0` of sheaves of `Λ`-modules, if the exchange maps are isomorphisms at `F₁`
@@ -98,8 +151,44 @@ theorem Etale.isIso_baseChangeHomologyMap_X₂_of_shortExact (sq : IsPullback e 
     {E : ShortComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hE : E.ShortExact)
     (h₁ : ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q E.X₁))
     (h₃ : ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q E.X₃)) (q : ℤ) :
-    IsIso (Etale.baseChangeHomologyMap Λ sq q E.X₂) :=
-  sorry
+    IsIso (Etale.baseChangeHomologyMap Λ sq q E.X₂) := by
+  obtain ⟨δS, δT, wS₁, wS₂, wT₁, wT₂, -, hS₂, -, hT₂, hδ⟩ :=
+    Etale.exists_connecting_baseChangeHomologyMap Λ sq hE (q - 1) q (sub_add_cancel q 1)
+  obtain ⟨δS', δT', wS₁', wS₂', wT₁', wT₂', hS₁', -, -, -, hδ'⟩ :=
+    Etale.exists_connecting_baseChangeHomologyMap Λ sq hE q (q + 1) rfl
+  have hS := Etale.exact_baseChangeSourceFunctor_map_of_shortExact Λ p g q hE
+  have hT := Etale.exact_baseChangeTargetFunctor_map_of_shortExact Λ e h q hE
+  have hf := Etale.baseChangeHomologyMap_naturality Λ sq q E.f
+  have hg := Etale.baseChangeHomologyMap_naturality Λ sq q E.g
+  have : Mono (Etale.baseChangeHomologyMap Λ sq q E.X₂) :=
+    Abelian.mono_of_epi_of_mono_of_mono'
+      (ComposableArrows.homMk₃ (f := ComposableArrows.mk₃ δS
+        ((Etale.baseChangeSourceFunctor Λ p g q).map E.f)
+        ((Etale.baseChangeSourceFunctor Λ p g q).map E.g))
+        (g := ComposableArrows.mk₃ δT
+        ((Etale.baseChangeTargetFunctor Λ e h q).map E.f)
+        ((Etale.baseChangeTargetFunctor Λ e h q).map E.g))
+        (Etale.baseChangeHomologyMap Λ sq (q - 1) E.X₃)
+        (Etale.baseChangeHomologyMap Λ sq q E.X₁)
+        (Etale.baseChangeHomologyMap Λ sq q E.X₂)
+        (Etale.baseChangeHomologyMap Λ sq q E.X₃) hδ hf.symm hg.symm)
+      wS₂ hS.exact_toComposableArrows hT₂.exact_toComposableArrows
+      (h₃ (q - 1)).epi_of_iso (h₁ q).mono_of_iso (h₃ q).mono_of_iso
+  have : Epi (Etale.baseChangeHomologyMap Λ sq q E.X₂) :=
+    Abelian.epi_of_epi_of_epi_of_mono'
+      (ComposableArrows.homMk₃ (f := ComposableArrows.mk₃
+        ((Etale.baseChangeSourceFunctor Λ p g q).map E.f)
+        ((Etale.baseChangeSourceFunctor Λ p g q).map E.g) δS')
+        (g := ComposableArrows.mk₃
+        ((Etale.baseChangeTargetFunctor Λ e h q).map E.f)
+        ((Etale.baseChangeTargetFunctor Λ e h q).map E.g) δT')
+        (Etale.baseChangeHomologyMap Λ sq q E.X₁)
+        (Etale.baseChangeHomologyMap Λ sq q E.X₂)
+        (Etale.baseChangeHomologyMap Λ sq q E.X₃)
+        (Etale.baseChangeHomologyMap Λ sq (q + 1) E.X₁) hf.symm hg.symm hδ')
+      hS₁'.exact_toComposableArrows hT.exact_toComposableArrows wT₁'
+      (h₁ q).epi_of_iso (h₃ q).epi_of_iso (h₁ (q + 1)).mono_of_iso
+  exact isIso_of_mono_of_epi _
 
 /-- **Prime-factor induction for the exchange morphism**: if the exchange maps are
 isomorphisms in every degree at every sheaf killed by a prime, then they are isomorphisms in
@@ -114,7 +203,10 @@ theorem Etale.isIso_baseChangeHomologyMap_of_nsmul_id_eq_zero (sq : IsPullback e
     {n : ℕ} (hn : 0 < n) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : n • 𝟙 F = 0) (q : ℤ) :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) :=
-  sorry
+  ObjectProperty.prop_of_nsmul_id_eq_zero
+    (fun F ↦ ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q F))
+    (fun _ hE h₁ h₃ ↦ Etale.isIso_baseChangeHomologyMap_X₂_of_shortExact Λ sq hE h₁ h₃)
+    hprime n hn F hF q
 
 /-- **Prime-torsion dévissage for the exchange morphism**: let `g` be quasi-compact and
 quasi-separated. If the exchange maps are isomorphisms in every degree at every sheaf killed by
@@ -130,7 +222,25 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isTorsionSheaf (sq : IsPullback e h
     (hprime : ∀ r : ℕ, r.Prime → ∀ E : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ),
       r • 𝟙 E = 0 → ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q E))
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf F] (q : ℤ) :
-    IsIso (Etale.baseChangeHomologyMap Λ sq q F) :=
-  sorry
+    IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
+  have : QuasiCompact h := MorphismProperty.of_isPullback sq ‹_›
+  have : QuasiSeparated h := MorphismProperty.of_isPullback sq ‹_›
+  obtain ⟨J, _, _, D, c, hc, rfl, hD⟩ := Scheme.IsTorsionSheaf.exists_isColimit Λ F
+  have := Etale.preservesColimitsOfShape_higherDirectImage Λ g q J
+  have := Etale.preservesColimitsOfShape_higherDirectImage Λ h q J
+  have : PreservesColimitsOfSize.{0, 0} ((p)^*[ModuleCat.{u + 1} Λ]) :=
+    (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).leftAdjoint_preservesColimits
+  have : PreservesColimitsOfSize.{0, 0} ((e)^*[ModuleCat.{u + 1} Λ]) :=
+    (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) e).leftAdjoint_preservesColimits
+  have : PreservesColimitsOfShape J (Etale.baseChangeSourceFunctor Λ p g q) :=
+    preservesColimitsOfShape_of_natIso (Etale.baseChangeSourceFunctorIso Λ p g q).symm
+  have : PreservesColimitsOfShape J (Etale.baseChangeTargetFunctor Λ e h q) :=
+    preservesColimitsOfShape_of_natIso (Etale.baseChangeTargetFunctorIso Λ e h q).symm
+  have : IsIso (Functor.whiskerLeft D (Etale.baseChangeHomologyNatTrans Λ sq q)) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro j
+    obtain ⟨n, hn, hnj⟩ := hD j
+    exact Etale.isIso_baseChangeHomologyMap_of_nsmul_id_eq_zero Λ sq hprime hn _ hnj q
+  exact isIso_app_coconePt_of_preservesColimit D _ c hc
 
 end AlgebraicGeometry

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.RingTheory.Henselian
+public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 
@@ -90,6 +91,18 @@ theorem Etale.isIso_globalSectionsUpperStarMap_of_henselianRing {A : Type u} [Co
     IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i F) :=
   sorry
 
+/-- The pullback of global sections along a universal homeomorphism is an isomorphism: the
+pullback is then an equivalence of categories of étale sheaves
+(`AlgebraicGeometry.Etale.isEquivalence_upperStar`), so the unit of `f^* ⊣ f_*` is an
+isomorphism. -/
+instance Etale.isIso_globalSectionsUpperStarMap_of_isUniversalHomeomorphism {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [IsUniversalHomeomorphism f]
+    (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) f G) := by
+  have := isEquivalence_upperStar (ModuleCat.{u + 1} Λ) f
+  unfold globalSectionsUpperStarMap
+  infer_instance
+
 /-- **Degree-zero comparison over a strictly henselian base.** Let `A` be a strictly henselian
 local ring with residue field `κ`, let `s : Spec κ̄ ⟶ Spec A` be the closed geometric point
 given by an algebraic closure `κ̄` of `κ`, and let `p : Z ⟶ Spec A` be proper. For every étale
@@ -107,7 +120,32 @@ theorem Etale.isIso_globalSectionsUpperStarMap_geometricFibre (A : Type u) [Comm
     (p : Z ⟶ Spec (.of A)) [IsProper p] (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) (pullback.fst p
       (Spec.map (CommRingCat.ofHom
-        (algebraMap A (AlgebraicClosure (IsLocalRing.ResidueField A)))))) F) :=
-  sorry
+        (algebraMap A (AlgebraicClosure (IsLocalRing.ResidueField A)))))) F) := by
+  let κ := IsLocalRing.ResidueField A
+  let s₀ : Spec (.of κ) ⟶ Spec (.of A) := Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))
+  let t : Spec (.of (AlgebraicClosure κ)) ⟶ Spec (.of κ) :=
+    Spec.map (CommRingCat.ofHom (algebraMap κ (AlgebraicClosure κ)))
+  have hs : Spec.map (CommRingCat.ofHom (algebraMap A (AlgebraicClosure κ))) = t ≫ s₀ := by
+    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, IsScalarTower.algebraMap_eq A κ,
+      IsLocalRing.ResidueField.algebraMap_eq]
+  rw [hs]
+  let i₀ := pullback.fst p s₀
+  let v := (pullbackLeftPullbackSndIso p s₀ t).inv ≫ pullback.fst (pullback.snd p s₀) t
+  have hv : v ≫ i₀ = pullback.fst p (t ≫ s₀) := by
+    simp [v, i₀]
+  have : IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i₀ F) :=
+    Etale.isIso_globalSectionsUpperStarMap_of_henselianRing Λ (IsLocalRing.maximalIdeal A) p i₀
+      (pullback.snd p s₀) (IsPullback.of_hasPullback p s₀) F
+  have : IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) (v ≫ i₀) F ≫
+      (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map
+        ((upperStarComp (ModuleCat.{u + 1} Λ) v i₀).hom.app F)) := by
+    rw [globalSectionsUpperStarMap_comp]
+    infer_instance
+  have := IsIso.of_isIso_comp_right
+    (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) (v ≫ i₀) F)
+    ((Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map
+      ((upperStarComp (ModuleCat.{u + 1} Λ) v i₀ (v ≫ i₀) rfl).hom.app F))
+  rw [← hv]
+  exact this
 
 end AlgebraicGeometry
