@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Analysis.SpecialFunctions.Log.Base
 public import WeilConjectures.WeilSheaf.Defs
+public import WeilConjectures.WeilSheaf.Tensor
 
 /-!
 # Mixed weight bounds for constructible Weil sheaves and complexes
@@ -54,6 +56,11 @@ stated: `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_mono`, `.of_epi` 
 `.of_mono_cokernel`. From them, the middle term of an exact sequence whose outer terms are mixed
 of weights at most `w` is mixed of weights at most `w`
 (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_exact`).
+
+A mixed sheaf whose local Frobenius eigenvalues are bounded by `q_y ^ (v / 2)` is mixed of
+weights at most `v` (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost`,
+blueprint `lem-zl-mixed-punctual-cutoff`), and a constant twist shifts mixed weight bounds
+(`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.constantTwist`).
 
 ## References
 
@@ -154,6 +161,31 @@ theorem IsMixedOfWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} 
   have := hS.epi_kernelLift
   (h₁.of_epi (kernel.lift S.g S.f S.zero)).of_mono_cokernel (kernel.ι S.g)
     (h₃.of_mono (Abelian.factorThruCoimage S.g))
+
+-- TODO(adic): needs exactness of the stalk functor and closed points in the support
+/-- **Punctual cutoff for an already mixed sheaf.** Let `G` be a constructible Weil sheaf on a
+separated `k₀`-scheme of finite type, mixed of weights at most some `u`. If every eigenvalue
+`α` of the local Frobenius of `G` at every closed point `y` satisfies `|ι α| ≤ q_y ^ (v / 2)`,
+then `G` is mixed of weights at most `v`: a nonzero pure quotient of a mixed filtration has a
+nonzero stalk at some closed point, and its eigenvalues there are eigenvalues of `G`
+(blueprint: `lem-zl-mixed-punctual-cutoff`). -/
+theorem IsMixedOfWeightsAtMost.of_hasWeightsAtMost
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {u v : ℝ}
+    (h : F.IsMixedOfWeightsAtMost ι u) (hv : F.HasWeightsAtMost ι v) :
+    F.IsMixedOfWeightsAtMost ι v :=
+  sorry
+
+-- TODO(adic): needs the constant twist as an exact functor and its effect on stalks
+/-- The constant twist `G ⊗ 𝓑_b` of a sheaf mixed of weights at most `v` is mixed of weights at
+most `v + c`, where `2 log_q |ι b| = c`: tensoring a mixed filtration with the rank-one sheaf
+`𝓑_b` is exact, and it multiplies the eigenvalues at a closed point of degree `m` by `bᵐ`, so it
+raises every punctual weight by `c` (blueprint: `lem-zl-relative-curve-mixedness`). -/
+theorem IsMixedOfWeightsAtMost.constantTwist (h : F.IsMixedOfWeightsAtMost ι w)
+    {b : (PadicAlgCl l)ˣ} {c : ℝ} (hb : 2 * Real.logb (Nat.card k₀) ‖ι b‖ = c) :
+    (F.constantTwist b).IsMixedOfWeightsAtMost ι (w + c) :=
+  sorry
 
 end WeilSheaf
 
