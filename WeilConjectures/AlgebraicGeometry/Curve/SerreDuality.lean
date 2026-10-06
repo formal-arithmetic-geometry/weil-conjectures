@@ -124,7 +124,7 @@ section ProjectiveLine
 variable [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
   [IsProper (X ↘ Spec (.of k))]
 
-/-- The ring map `k →+* k(X)` of a `k`-scheme with irreducible underlying space. -/
+/-- The ring map `k →+* k(X)` of an integral `k`-scheme `X`. -/
 noncomputable abbrev functionFieldRingHom (k : Type u) [Field k] (X : Scheme.{u})
     [X.Over (Spec (.of k))] [IsIntegral X] : k →+* X.functionField :=
   (X.germToFunctionField ⊤ (h := ⟨⟨genericPoint X, trivial⟩⟩)).hom.comp

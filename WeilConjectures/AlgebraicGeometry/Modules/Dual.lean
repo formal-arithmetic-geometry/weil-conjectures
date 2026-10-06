@@ -97,15 +97,6 @@ lemma nonempty_iso_unit_of_tensorObj_iso (M N : X.Modules) [M.IsInvertible] (e :
   exact ⟨(λ_ N).symm ≪≫ (((β_ _ _) ≪≫ d).symm ⊗ᵢ Iso.refl N) ≪≫ α_ _ _ _ ≪≫
     (Iso.refl _ ⊗ᵢ e) ≪≫ (β_ _ _) ≪≫ d⟩
 
-/-- **Duals of invertible modules.** For an invertible `𝒪_X`-module `M`, the dual `Mᵛ` is
-invertible, the evaluation `M ⊗ Mᵛ ⟶ 𝒪_X` is an isomorphism, and `M ≅ Mᵛᵛ`. All assertions are
-Zariski-local, and on an open where `M ≅ 𝒪` they are `𝒪 ⊗ 𝒪 ≅ 𝒪` and `𝒪 ≅ Hom(𝒪, 𝒪)`.
-
-(blueprint: `lem-sc-invertible-dual`) -/
-theorem isInvertible_dual_and_nonempty_iso (M : X.Modules) [M.IsInvertible] :
-    Mᵛ.IsInvertible ∧ Nonempty (M ⊗ Mᵛ ≅ 𝟙_ X.Modules) ∧ Nonempty (M ≅ Mᵛᵛ) :=
-  sorry
-
 /-- The dual of a finite locally free `𝒪_X`-module is finite locally free: on an open where
 `M ≅ 𝒪^r`, the dual is `Hom(𝒪^r, 𝒪) ≅ 𝒪^r`. -/
 theorem IsFiniteLocallyFree.dual (M : X.Modules) [M.IsFiniteLocallyFree] :
@@ -142,6 +133,7 @@ theorem nonempty_iso_dual_tensorObj_dual_tensorObj (ω : X.Modules)
         (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ dualFunctor X ⋙
           tensorRight ω) :=
   sorry
+
 /-- **A tensor inverse of an invertible module is invertible.** If `M` is invertible and
 `M ⊗ N ≅ 𝒪_X`, then `N` is invertible: on an open `U` where `M|_U ≅ 𝒪_U`,
 `N|_U ≅ M|_U ⊗ N|_U ≅ (M ⊗ N)|_U ≅ 𝒪_U`. -/
@@ -156,5 +148,15 @@ lemma IsInvertible.of_tensorObj_iso_unit (M N : X.Modules) [M.IsInvertible]
 /-- **The dual of an invertible module is invertible**, being its tensor inverse. -/
 instance IsInvertible.dual (M : X.Modules) [M.IsInvertible] : (Mᵛ).IsInvertible :=
   .of_tensorObj_iso_unit M _ (nonempty_tensorObj_dual_iso_unit M).some
+
+/-- **Duals of invertible modules.** For an invertible `𝒪_X`-module `M`, the dual `Mᵛ` is
+invertible, the evaluation `M ⊗ Mᵛ ⟶ 𝒪_X` is an isomorphism, and `M ≅ Mᵛᵛ`. The first two
+assertions are `IsInvertible.dual` and `nonempty_tensorObj_dual_iso_unit`; the biduality is
+Zariski-local, and on an open where `M ≅ 𝒪` it is `𝒪 ≅ Hom(Hom(𝒪, 𝒪), 𝒪)`.
+
+(blueprint: `lem-sc-invertible-dual`) -/
+theorem isInvertible_dual_and_nonempty_iso (M : X.Modules) [M.IsInvertible] :
+    Mᵛ.IsInvertible ∧ Nonempty (M ⊗ Mᵛ ≅ 𝟙_ X.Modules) ∧ Nonempty (M ≅ Mᵛᵛ) :=
+  ⟨inferInstance, nonempty_tensorObj_dual_iso_unit M, sorry⟩
 
 end AlgebraicGeometry.Scheme.Modules
