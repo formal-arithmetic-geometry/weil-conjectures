@@ -263,7 +263,17 @@ theorem isAffine_of_isOpenImmersion_of_isPrincipalIdealRing {X : Scheme.{u}}
   .of_isIso f.isoOpensRange.hom
 
 /-- Let `a : T ⟶ U` be a morphism to an affine scheme `U` such that `Γ(U, ⊤) ⟶ Γ(T, ⊤)` is an
-isomorphism. Then every morphism `φ : T ⟶ V` to an affine scheme `V` factors through `a`. -/
+isomorphism. Then every morphism `φ : T ⟶ V` to an affine scheme `V` factors through `a`:
+```
+T ---a---> U
+  \        |
+   φ       h
+    \      |
+     ↘     ↓
+           V
+```
+with `a ≫ h = φ`. Together with `Scheme.Hom.cancel_left_of_isIso_appTop`, this says that `a` is
+universal among morphisms from `T` to affine schemes. -/
 lemma Scheme.Hom.exists_comp_eq_of_isIso_appTop {T U V : Scheme.{u}} [IsAffine U] [IsAffine V]
     (a : T ⟶ U) [IsIso a.appTop] (φ : T ⟶ V) : ∃ h : U ⟶ V, a ≫ h = φ := by
   refine ⟨U.isoSpec.hom ≫ Spec.map (φ.appTop ≫ inv a.appTop) ≫ V.isoSpec.inv, ?_⟩
@@ -272,7 +282,8 @@ lemma Scheme.Hom.exists_comp_eq_of_isIso_appTop {T U V : Scheme.{u}} [IsAffine U
     ← Scheme.isoSpec_hom, Iso.hom_inv_id, Category.comp_id]
 
 /-- Let `a : T ⟶ U` be a morphism such that `Γ(U, ⊤) ⟶ Γ(T, ⊤)` is an isomorphism. Then two
-morphisms `U ⟶ V` to an affine scheme `V` agreeing after precomposition with `a` are equal. -/
+morphisms `U ⟶ V` to an affine scheme `V` agreeing after precomposition with `a` are equal.
+Here `U` need not be affine. -/
 lemma Scheme.Hom.cancel_left_of_isIso_appTop {T U V : Scheme.{u}} [IsAffine V]
     (a : T ⟶ U) [IsIso a.appTop] {h₁ h₂ : U ⟶ V} (e : a ≫ h₁ = a ≫ h₂) : h₁ = h₂ :=
   ext_of_isAffine <| by
