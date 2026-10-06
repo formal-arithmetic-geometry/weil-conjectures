@@ -92,6 +92,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalization
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
+public import WeilConjectures.AlgebraicGeometry.Picard.Degree
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
 public import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
@@ -284,6 +285,8 @@ public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
 public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
 public import WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Transport
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
@@ -291,6 +294,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
@@ -391,6 +395,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.QuotientTwo
 public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor
 public import WeilConjectures.GroupTheory.TateModule
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
+public import WeilConjectures.Mathlib.Algebra.Algebra.Hom
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Adjunctions
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.ForgetCorepresentable
@@ -475,6 +480,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.IsIso
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.LocalIso
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
@@ -501,6 +507,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
@@ -510,6 +517,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Subobject
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
@@ -611,12 +619,14 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
+public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.Basis
 public import WeilConjectures.Mathlib.LinearAlgebra.LinearIndependent.BaseChange
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.BilinearForm
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
@@ -634,6 +644,7 @@ public import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSection
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSplitting
 public import WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint
 public import WeilConjectures.Mathlib.RingTheory.Etale.PropertyC
+public import WeilConjectures.Mathlib.RingTheory.Etale.QuasiFinite
 public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
 public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueFieldBaseChange
 public import WeilConjectures.Mathlib.RingTheory.Etale.Section
@@ -684,6 +695,7 @@ public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.Topology.Maps.Basic
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
+public import WeilConjectures.Mathlib.Topology.Sets.Opens
 public import WeilConjectures.Mathlib.Topology.Sober
 public import WeilConjectures.Mathlib.Topology.Spectral.Prespectral
 public import WeilConjectures.NumberTheory.Padics.Extension
@@ -697,6 +709,7 @@ public import WeilConjectures.RingTheory.Dehomogenization
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
+public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.ExteriorPower
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdeal
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.IdentityComponent
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
@@ -738,12 +751,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.Package
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
+public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.Supports
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
@@ -846,6 +861,7 @@ public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.Topology.StratificationDense
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.Curve
 public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.Fourier
