@@ -11,10 +11,12 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 
 /-!
-# Compact-support base change and the projection formula
+# Compact-support base change, the projection formula and finite reduction
 
 The two theorems of the six-functor formalism attached to `Rf_!` that the purity chapter
 consumes: compact-support base change for a cartesian square, and the projection formula.
+Alongside them, the compatibilities of `Rf_!`, `Lf^*` and `Rf_*` with the reduction
+`K ↦ K ⊗ᴸ (Λ/J)` of the coefficients modulo an ideal `J`.
 
 ## Implementation notes
 
@@ -197,33 +199,37 @@ end Projection
 
 section LowerStar
 
-variable {k : Type u} [Field k] (f : X ⟶ Y)
+/-- Used in blueprint `sk-lem-finite`.
 
-/-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point
+**`Rf_*` commutes with reduction modulo a principal ideal.** For `f : X ⟶ Y` arbitrary and a
+principal ideal `J` of a domain `Λ`, the square
 
-**`Rf_*` commutes with finite reduction.** For an ideal `J` of the finite coefficient ring
-`Λ` and `f : X ⟶ Y` a quasi-compact, quasi-separated morphism of finite-type `k`-schemes, with
-the exponent of `Λ` invertible on `Y`,
+```
+  D(X_ét, Λ) ---Rf_*---> D(Y_ét, Λ)
+      |                      |
+  – ⊗ᴸ (Λ/J)_X           – ⊗ᴸ (Λ/J)_Y
+      ↓                      ↓
+  D(X_ét, Λ) ---Rf_*---> D(Y_ét, Λ)
+```
 
-`(Rf_* K) ⊗^L (Λ/J)_Y ≅ Rf_*(K ⊗^L (Λ/J)_X)`.
+commutes up to isomorphism:
 
-This is the input that carries `sk-lem-finite` from the finite stages to the integral stage
-`𝒪_E`. It is the ordinary counterpart of
-`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`; unlike `Rf_!`,
-`Rf_*` needs the schemes to be of finite type over a field, which is what gives it finite
-cohomological dimension (as in
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`). -/
-theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar [Finite Λ]
-    [HasInvertibleExponent Λ Y] [QuasiCompact f] [QuasiSeparated f] (aX : X ⟶ Spec (.of k))
-    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] (hf : f ≫ aY = aX)
-    (J : Ideal Λ) :
+`R(f)_* ⋙ reductionModIdeal Λ Y J ≅ reductionModIdeal Λ X J ⋙ R(f)_*`.
+
+The hypotheses only serve to make `Λ/J` a perfect `Λ`-module, which is all the proof uses:
+for `J = (π)` with `π ≠ 0`, the module `Λ/J` is the cone of `π : Λ → Λ`, and for `J = 0` it
+is `Λ`. This is the reduction `𝒪_E → 𝒪_E/𝔪_Eⁿ` that carries `sk-lem-finite` from the finite
+stages to the integral stage `𝒪_E`, and the input of
+`AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerStar`. -/
+theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar (f : X ⟶ Y) [IsDomain Λ]
+    (J : Ideal Λ) (hJ : J.IsPrincipal) :
     Nonempty (R((f)_*[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ Y J ≅
       reductionModIdeal Λ X J ⋙ R((f)_*[ModuleCat.{u + 1} Λ])) :=
-  -- Proof sketch: this is the projection formula of `Rf_*` for the constant complex `(Λ/J)_Y`,
-  -- whose pullback is `(Λ/J)_X`. It holds for every `K` because `Rf_*` has finite cohomological
-  -- dimension under these hypotheses, so that it commutes with the tensor product with the
-  -- terms of a resolution of `Λ/J` by finite free `Λ`-modules and with the colimit of their
-  -- truncations.
+  -- Proof sketch: for `J = (π)` with `π ≠ 0`, `π` is a nonzerodivisor, so the constant
+  -- complex `(Λ/J)_Z` is the cone of `π : Λ_Z → Λ_Z` and `– ⊗ᴸ (Λ/J)_Z` is the cone of
+  -- multiplication by `π`, naturally on `D(Z_ét, Λ)`. The triangulated functor `Rf_*` is
+  -- `Λ`-linear, so it commutes with multiplication by `π` and hence with its cone. For
+  -- `J = 0` both reductions are isomorphic to the identity.
   sorry
 
 end LowerStar
