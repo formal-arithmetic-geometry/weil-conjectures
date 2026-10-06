@@ -64,6 +64,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Closed
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Image
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Image
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
