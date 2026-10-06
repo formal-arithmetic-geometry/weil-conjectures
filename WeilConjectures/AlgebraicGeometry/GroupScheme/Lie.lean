@@ -196,19 +196,19 @@ noncomputable def dualNumbersProjεOver : dualNumbers₂Over S ⟶ dualNumbersOv
 
 /-- The projection `S[ε][δ] ⟶ S[δ]` forgetting `ε`, as a morphism over `S`. -/
 noncomputable def dualNumbersProjδOver : dualNumbers₂Over S ⟶ dualNumbersOver S :=
-  Over.homMk S.dualNumbersProj.dualNumbers (by sorry)
+  Over.homMk S.dualNumbersProj.dualNumbers (by simp [dualNumbers₂Over, dualNumbersOver])
 
 /-- The closed immersion `S[ε] ⟶ S[ε][δ]`, `δ ↦ 0`, as a morphism over `S`. -/
 noncomputable def dualNumbersιεOver : dualNumbersOver S ⟶ dualNumbers₂Over S :=
-  Over.homMk S.dualNumbers.dualNumbersι (by sorry)
+  Over.homMk S.dualNumbers.dualNumbersι (by simp [dualNumbers₂Over, dualNumbersOver])
 
 /-- The closed immersion `S[δ] ⟶ S[ε][δ]`, `ε ↦ 0`, as a morphism over `S`. -/
 noncomputable def dualNumbersιδOver : dualNumbersOver S ⟶ dualNumbers₂Over S :=
-  Over.homMk S.dualNumbersι.dualNumbers (by sorry)
+  Over.homMk S.dualNumbersι.dualNumbers (by simp [dualNumbers₂Over, dualNumbersOver])
 
 /-- The map `S[ε][δ] ⟶ S[η]`, `η ↦ εδ`, as a morphism over `S`. -/
 noncomputable def dualNumbersMulOver : dualNumbers₂Over S ⟶ dualNumbersOver S :=
-  Over.homMk S.dualNumbersMul (by sorry)
+  Over.homMk S.dualNumbersMul (by simp [dualNumbers₂Over, dualNumbersOver])
 
 variable {S} (G : Over S) [GrpObj G]
 
@@ -240,14 +240,12 @@ theorem mem_infPoints {v : dualNumbersOver S ⟶ G} :
 instance : (infPoints G).Normal :=
   MonoidHom.normal_ker _
 
-/-- The infinitesimal points form a commutative group: their group law is the addition of tangent
-vectors. -/
-theorem isMulCommutative_infPoints : IsMulCommutative (infPoints G) := by
-  sorry
-
 /-- The identity point, as a morphism of schemes, is the identity section. -/
 theorem one_left : (1 : Over.mk (𝟙 S) ⟶ G).left = unitSection G := by
-  sorry
+  have h : (SemiCartesianMonoidalCategory.toUnit (Over.mk (𝟙 S))).left = 𝟙 S :=
+    (Category.comp_id _).symm.trans (Over.w _)
+  rw [Hom.one_def, Over.comp_left, h]
+  exact Category.id_comp _
 
 theorem ι_comp_left_eq {v : dualNumbersOver S ⟶ G} (hv : v ∈ infPoints G) :
     S.dualNumbersι ≫ v.left = unitSection G := by
@@ -303,6 +301,11 @@ theorem lieEquiv_mul (v w : infPoints G) : lieEquiv G (v * w) = lieEquiv G v + l
 
 theorem lieEquiv_one : lieEquiv G 1 = 0 := by
   sorry
+
+/-- The infinitesimal points form a commutative group: their group law is the addition of tangent
+vectors. -/
+theorem isMulCommutative_infPoints : IsMulCommutative (infPoints G) :=
+  ⟨⟨fun v w ↦ (lieEquiv G).injective (by rw [lieEquiv_mul, lieEquiv_mul, add_comm])⟩⟩
 
 /-! ### The bracket as the mixed term of the commutator -/
 
