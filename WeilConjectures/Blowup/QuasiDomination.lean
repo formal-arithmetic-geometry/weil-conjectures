@@ -25,13 +25,15 @@ extension theorem `AlgebraicGeometry.exists_admissibleBlowup_extend_section`.
 ## Main definitions
 
 - `AlgebraicGeometry.QuasiDomination`: the data of a quasi-domination of `X` over `Y`;
-- `AlgebraicGeometry.QuasiDomination.graph`: the graph `U ⟶ Y ×ₛ X` of a quasi-domination.
+- `AlgebraicGeometry.QuasiDomination.graph`: the graph `U ⟶ Y ×ₛ X` of a quasi-domination;
+- `AlgebraicGeometry.QuasiDomination.Extends`: a quasi-domination extends a morphism defined
+  on a smaller open (blueprint: `def-nagata-conrad-quasi-domination`).
 
 ## Main results
 
 - `AlgebraicGeometry.QuasiDomination.of_isSeparated`: a morphism to a separated target is a
   quasi-domination of its own source (blueprint:
-  `lemma:nagata-conrad-morphism-is-quasi-domination`);
+  `lemma-nagata-conrad-morphism-is-quasi-domination`);
 - `AlgebraicGeometry.QuasiDomination.U_eq_top`: a quasi-domination over a universally closed
   target is defined everywhere (blueprint:
   `lemma:nagata-conrad-quasi-domination-proper-target`).
@@ -50,7 +52,8 @@ namespace AlgebraicGeometry
 
 variable {S X Y : Scheme.{u}}
 
-/-- Blueprint `sk-def-nagata-sketch-quasidomination`: Quasi-domination.
+/-- Blueprint `sk-def-nagata-sketch-quasidomination`, `def-nagata-conrad-quasi-domination`:
+Quasi-domination.
 
 A quasi-domination of `x : X ⟶ S` over a separated `y : Y ⟶ S` is a morphism `hom : U ⟶ Y`
 over `S`, defined on a dense open `U ⊆ X`, whose graph `U ⟶ Y ×ₛ X` has closed range.
@@ -99,6 +102,16 @@ condition, restated in terms of `AlgebraicGeometry.QuasiDomination.graph`. -/
 theorem isClosed_range_graph (q : QuasiDomination x y) : IsClosed (Set.range q.graph) :=
   q.isClosed_range_lift
 
+/-- Blueprint `def-nagata-conrad-quasi-domination`: the quasi-domination `q` *extends* the
+morphism `f' : U' ⟶ Y` defined on an open `U' ⊆ X`, i.e. `U' ⊆ U` and `q.hom` restricts to
+`f'` on `U'`. -/
+def Extends (q : QuasiDomination x y) {U' : X.Opens} (f' : U'.toScheme ⟶ Y) : Prop :=
+  ∃ h : U' ≤ q.U, X.homOfLE h ≫ q.hom = f'
+
+/-- A quasi-domination extends its own morphism. -/
+theorem extends_hom (q : QuasiDomination x y) : q.Extends q.hom :=
+  ⟨le_rfl, by simp⟩
+
 /-- The graph of a morphism to a separated target is closed when the other leg is an
 isomorphism: the graph is then a section of the separated `pullback.snd y x`, hence a closed
 immersion. -/
@@ -110,7 +123,7 @@ theorem isClosed_range_lift_of_isIso {W : Scheme.{u}} (hom : W ⟶ Y) (j : W ⟶
     IsClosedImmersion.of_comp (pullback.lift hom j h) (pullback.snd y x)
   exact (pullback.lift hom j h).isClosedEmbedding.isClosed_range
 
-/-- Blueprint `lemma:nagata-conrad-morphism-is-quasi-domination`: **a morphism to a
+/-- Blueprint `lemma-nagata-conrad-morphism-is-quasi-domination`: **a morphism to a
 separated target is a quasi-domination of its own source**.
 
 For a separated `y : Y ⟶ S` and any `hom : U ⟶ Y`, the pair `(U, hom)` is a quasi-domination
