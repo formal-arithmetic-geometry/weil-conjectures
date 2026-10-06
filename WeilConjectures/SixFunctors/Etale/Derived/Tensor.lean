@@ -38,6 +38,13 @@ product* `- ⊗ᴸ -`, the total left derived functor of `- ⊗ -` in two variab
   really is the total left derived functor of the tensor product of étale sheaves, in two
   variables.
 
+- `AlgebraicGeometry.Etale.additive_derivedTensor_obj`,
+  `AlgebraicGeometry.Etale.additive_derivedTensor_flip_obj`,
+  `AlgebraicGeometry.Etale.linear_derivedTensor_obj` and
+  `AlgebraicGeometry.Etale.linear_derivedTensor_flip_obj` : the derived tensor product is
+  additive and `Λ`-linear in each variable, by `DerivedCategory.monoidalPreadditive` and
+  `DerivedCategory.monoidalLinear`.
+
 - `AlgebraicGeometry.Etale.laxMonoidal_Q` : the localization functor
   `Q : C(X_ét) ⥤ D(X_ét)` is lax monoidal.
 
@@ -126,6 +133,32 @@ instance isLeftDerivedFunctor₂_derivedTensor :
       (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ))
       (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ)) :=
   DerivedCategory.isLeftDerivedFunctor₂CurriedTensor (Sheaf X.smallEtaleTopology A)
+
+section Linear
+
+variable {A X} (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+
+/-- Tensoring with a fixed object `K` of `D(X_ét)`, `M ↦ K ⊗ᴸ M`, is additive. -/
+instance additive_derivedTensor_obj : ((derivedTensor A X).obj K).Additive :=
+  inferInstanceAs (tensorLeft K).Additive
+
+/-- Tensoring with a fixed object `K` of `D(X_ét)`, `M ↦ M ⊗ᴸ K`, is additive. -/
+instance additive_derivedTensor_flip_obj : ((derivedTensor A X).flip.obj K).Additive :=
+  inferInstanceAs (tensorRight K).Additive
+
+variable (Λ : Type*) [Ring Λ] [Linear Λ A] [MonoidalLinear Λ A]
+
+/-- If the tensor product of `A` is `Λ`-linear, tensoring with a fixed object `K` of `D(X_ét)`,
+`M ↦ K ⊗ᴸ M`, is `Λ`-linear. -/
+instance linear_derivedTensor_obj : ((derivedTensor A X).obj K).Linear Λ :=
+  inferInstanceAs ((tensorLeft K).Linear Λ)
+
+/-- If the tensor product of `A` is `Λ`-linear, tensoring with a fixed object `K` of `D(X_ét)`,
+`M ↦ M ⊗ᴸ K`, is `Λ`-linear. -/
+instance linear_derivedTensor_flip_obj : ((derivedTensor A X).flip.obj K).Linear Λ :=
+  inferInstanceAs ((tensorRight K).Linear Λ)
+
+end Linear
 
 end Etale
 

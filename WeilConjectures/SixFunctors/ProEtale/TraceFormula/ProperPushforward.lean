@@ -119,6 +119,8 @@ structure ProperPushforwardDiagram (c : Correspondence aX aX K K) where
   snd_comp : snd ≫ tgtStr = str
   /-- `b₁` admits a compactification, so that `b₁^!` is available. -/
   [hasCompactification_fst : HasCompactification fst]
+  /-- `Rb_{1!}` is a left adjoint, so that `b₁^!` is available. -/
+  [isLeftAdjoint_fst : (R(fst)_![A]).IsLeftAdjoint]
   /-- the morphism `g : C ⟶ D` of supports. -/
   g : c.supp ⟶ supp
   /-- `g` is proper. -/
@@ -134,7 +136,8 @@ structure ProperPushforwardDiagram (c : Correspondence aX aX K K) where
   g_snd : g ≫ snd = c.snd ≫ f
 
 attribute [instance] ProperPushforwardDiagram.isProper_f
-  ProperPushforwardDiagram.hasCompactification_fst ProperPushforwardDiagram.isProper_g
+  ProperPushforwardDiagram.hasCompactification_fst ProperPushforwardDiagram.isLeftAdjoint_fst
+  ProperPushforwardDiagram.isProper_g
   ProperPushforwardDiagram.hasCompactification_g_comp_fst
 
 namespace ProperPushforwardDiagram
@@ -248,6 +251,13 @@ instance hasCompactification_pushforwardCorrespondence_toProd (G : GeometricOper
     [HasCompactification P.toProd] : HasCompactification (P.pushforwardCorrespondence G).toProd :=
   inferInstanceAs (HasCompactification P.toProd)
 
+/-- The support map of the pushed correspondence is `P.toProd`, so its exceptional direct
+image is a left adjoint when that of `P.toProd` is. -/
+instance isLeftAdjoint_pushforwardCorrespondence_toProd (G : GeometricOperations A s)
+    [HasCompactification P.toProd] [(R(P.toProd)_![A]).IsLeftAdjoint] :
+    (R((P.pushforwardCorrespondence G).toProd)_![A]).IsLeftAdjoint :=
+  inferInstanceAs (R(P.toProd)_![A]).IsLeftAdjoint
+
 @[simp]
 lemma fixMap_comp_pushforwardCorrespondence_fixStr {G : GeometricOperations A s} :
     P.fixMap ≫ (P.pushforwardCorrespondence G).fixStr = c.fixStr :=
@@ -279,9 +289,19 @@ No properness over `s` of `X`, `Y`, `C` or `D` is required, and neither leg squa
 assumed Cartesian (blueprint: `sk-p-proper`). -/
 theorem borelMoorePushforward_traceClass (G : GeometricOperations A s)
     [s.IsSpecOfField] [HasCompactification aX] [QuasiCompact aX]
+    [(R(aX)_![A]).IsLeftAdjoint] [(R(pullback.fst aX aX)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd aX aX)_![A]).IsLeftAdjoint] [HasCompactification (pullback.diagonal aX)]
+    [(R(pullback.diagonal aX)_![A]).IsLeftAdjoint]
     (hK : G.ctf X K) {c : Correspondence aX aX K K} [HasCompactification c.toProd]
+    [(R(c.toProd)_![A]).IsLeftAdjoint] [(R(c.fixι)_![A]).IsLeftAdjoint]
     (P : ProperPushforwardDiagram c) [HasCompactification P.tgtStr] [QuasiCompact P.tgtStr]
-    [HasCompactification P.toProd] [HasCompactification P.fixMap] [IsProper P.fixMap] :
+    [(R(P.tgtStr)_![A]).IsLeftAdjoint] [(R(pullback.fst P.tgtStr P.tgtStr)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd P.tgtStr P.tgtStr)_![A]).IsLeftAdjoint]
+    [HasCompactification (pullback.diagonal P.tgtStr)]
+    [(R(pullback.diagonal P.tgtStr)_![A]).IsLeftAdjoint]
+    [HasCompactification P.toProd] [(R(P.toProd)_![A]).IsLeftAdjoint]
+    [(R((P.pushforwardCorrespondence G).fixι)_![A]).IsLeftAdjoint]
+    [HasCompactification P.fixMap] [IsProper P.fixMap] [(R(P.fixMap)_![A]).IsLeftAdjoint] :
     G.borelMoorePushforward P.fixMap (P.pushforwardCorrespondence G).fixStr
         (G.traceClass c hK ≫ eqToHom P.dualizing_fixStr) =
       G.traceClass (P.pushforwardCorrespondence G) (G.ctf_lowerStar P.f hK) :=
@@ -302,7 +322,11 @@ theorem trace_globalOperator_eq_integral_traceClass (G : GeometricOperations A s
     [s.IsSpecOfField] (hK : G.ctf X K) (c : Correspondence aX aX K K) [IsProper c.snd]
     [HasCompactification c.str] [HasCompactification c.toProd]
     [HasRightDual ((rightDerivedLowerShriek A aX).obj K)]
-    [HasCompactification c.fixStr] [IsProper c.fixStr] :
+    [HasCompactification c.fixStr] [IsProper c.fixStr]
+    [(R(aX)_![A]).IsLeftAdjoint] [(R(pullback.fst aX aX)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd aX aX)_![A]).IsLeftAdjoint] [HasCompactification (pullback.diagonal aX)]
+    [(R(pullback.diagonal aX)_![A]).IsLeftAdjoint] [(R(c.toProd)_![A]).IsLeftAdjoint]
+    [(R(c.fixι)_![A]).IsLeftAdjoint] [(R(c.fixStr)_![A]).IsLeftAdjoint] :
     MonoidalCategory.trace (Correspondence.globalOperator G c) =
       G.integral c.fixStr (G.traceClass c hK) :=
   sorry

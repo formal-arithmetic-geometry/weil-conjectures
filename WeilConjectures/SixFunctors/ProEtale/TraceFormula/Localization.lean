@@ -242,7 +242,15 @@ theorem traceClass_graph_eq_traceClass_add_traceClass (G : GeometricOperations A
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (frobZ : Z ⟶ Z) (hZ : CommSq frobZ i i (W.frobeniusIterate m)) (frobU : U ⟶ U)
     (hU : IsPullback frobU j j (W.frobeniusIterate m))
-    (hKZ : G.ctf X (W.closedPieceObj i)) (hKU : G.ctf X (W.openPieceObj j)) :
+    (hKZ : G.ctf X (W.closedPieceObj i)) (hKU : G.ctf X (W.openPieceObj j))
+    [(R(aX)_![A]).IsLeftAdjoint] [(R(pullback.fst aX aX)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd aX aX)_![A]).IsLeftAdjoint] [HasCompactification (pullback.diagonal aX)]
+    [(R(pullback.diagonal aX)_![A]).IsLeftAdjoint]
+    [(R((W.graph G m).toProd)_![A]).IsLeftAdjoint] [(R((W.graph G m).fixι)_![A]).IsLeftAdjoint]
+    [(R((W.closedPiece G m i frobZ hZ).toProd)_![A]).IsLeftAdjoint]
+    [(R((W.closedPiece G m i frobZ hZ).fixι)_![A]).IsLeftAdjoint]
+    [(R((W.openPiece G m j frobU hU).toProd)_![A]).IsLeftAdjoint]
+    [(R((W.openPiece G m j frobU hU).fixι)_![A]).IsLeftAdjoint] :
     G.traceClass (W.graph G m) hW =
       Add.add (α := G.borelMooreSections (W.graph G m).fixStr)
         (G.traceClass (W.closedPiece G m i frobZ hZ) hKZ)

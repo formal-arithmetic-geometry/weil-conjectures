@@ -33,11 +33,14 @@ Properness of `X₀` is deliberately *not* part of the datum: the duality statem
 formulated with compact supports and do not use it. It is imposed explicitly, as an
 `[IsProper …]` instance hypothesis, exactly where `Ra_{X!} ≅ Ra_{X*}` is needed.
 
-The "exceptional-adjoint admissibility" of `a_X` demanded by the blueprint is, in this
-formalisation, the existence of a compactification of `a_X`, i.e. an instance of
-`AlgebraicGeometry.HasCompactification`; it is what makes `Ra_{X!}` and `Ra_X^!` available.
-It is carried as an instance hypothesis by the statements that need it rather than as a field
-of the datum, since it is a property of the derived operations and not of the geometry.
+The blueprint (`sk-def-set`) imposes no admissibility on `a_X`. In Lean, `Ra_{X!}` and
+`Ra_X^!` are only constructed for morphisms admitting a compactification, so
+`AlgebraicGeometry.HasCompactification` is carried as an instance hypothesis by the statements
+that use them rather than as a field of the datum. For `a_X` this hypothesis is redundant
+mathematically: `a_X` is separated of finite type over the quasi-compact quasi-separated
+`Spec k`, so Nagata's theorem (`AlgebraicGeometry.NagataCompactification`, which comes with an
+instance) provides a compactification once those properties of `a_X` are available as
+instances.
 
 The blueprint node `sk-def-set` fixes, besides the geometry, a *coefficient* datum
 `(ℓ, E, 𝒪_E, ϖ_E, Λ)` subject to `ℓ ≠ ring characteristic of k₀`. That half of the datum is

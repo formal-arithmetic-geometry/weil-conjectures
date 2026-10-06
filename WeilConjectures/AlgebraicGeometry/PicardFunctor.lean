@@ -31,10 +31,9 @@ makes invertibility stable under pullback.
 ## Implementation notes
 
 `Y.Modules` lives in `Type (u + 1)`, so `Y.Pic` as defined here does too, even though `Pic Y`
-is really a small group.  Smallness is not pursued: only the underlying set is needed for the
-`Set`-valued Picard presheaf. No group law is defined yet: it should come from the monoidal
-structure on `Y.Modules` (`AlgebraicGeometry.Scheme.Modules.tensorObj`), using that the tensor
-product of invertible modules is invertible, which is not proved yet.
+is really a small group; that it is `u`-small is `AlgebraicGeometry.Scheme.Pic.small`. The group
+law, which comes from the tensor product of invertible modules, is defined in
+`WeilConjectures/AlgebraicGeometry/Picard/Group.lean`.
 
 ## Main definitions
 
@@ -169,6 +168,13 @@ def Pic : Type (u + 1) :=
 
 namespace Pic
 
+/-- **The Picard group is small.** Although `Y.Pic` lives in `Type (u + 1)`, it is `u`-small: an
+invertible module is determined up to isomorphism by an open cover of `Y` on which it is trivial
+together with the transition functions, units of `Γ(U_i ∩ U_j, 𝒪_Y)`, and these data range over
+a `u`-small set. -/
+theorem small (Y : Scheme.{u}) : Small.{u} Y.Pic :=
+  sorry
+
 /-- The isomorphism class in `Skeleton Y.Modules` underlying an element of `Y.Pic`. -/
 def val (L : Y.Pic) : Skeleton Y.Modules :=
   Subtype.val L
@@ -193,6 +199,14 @@ lemma mk_eq_mk_iff (M N : Y.Modules) [M.IsInvertible] [N.IsInvertible] :
     mk M = mk N ↔ Nonempty (M ≅ N) := by
   rw [← toSkeleton_eq_toSkeleton_iff]
   exact ⟨fun h ↦ congrArg val h, fun h ↦ ext h⟩
+
+/-- Two classes in the Picard group agree if and only if their chosen representatives are
+isomorphic. -/
+lemma eq_iff_nonempty_iso {L L' : Y.Pic} :
+    L = L' ↔
+      Nonempty ((fromSkeleton Y.Modules).obj L.val ≅ (fromSkeleton Y.Modules).obj L'.val) := by
+  rw [Pic.ext_iff, ← toSkeleton_eq_toSkeleton_iff, toSkeleton_fromSkeleton_obj,
+    toSkeleton_fromSkeleton_obj]
 
 /-- Pulling back invertible sheaves of modules along `g : X ⟶ Y` gives the map
 `Pic Y → Pic X` underlying the functoriality of the Picard presheaf. -/
@@ -259,6 +273,14 @@ lemma baseChangeMap_id (f : X ⟶ S) (T : Over S) : baseChangeMap f (𝟙 T) = �
 lemma baseChangeMap_comp (f : X ⟶ S) {T T' T'' : Over S} (φ : T'' ⟶ T') (ψ : T' ⟶ T) :
     baseChangeMap f (φ ≫ ψ) = baseChangeMap f φ ≫ baseChangeMap f ψ := by
   apply Limits.pullback.hom_ext <;> simp
+
+/-- The base change square of `X_T ⟶ T` along a morphism `g : T' ⟶ T` of schemes over `S`. -/
+lemma isPullback_baseChangeMap (f : X ⟶ S) {T T' : Over S} (g : T' ⟶ T) :
+    IsPullback (baseChangeMap f g) (Limits.pullback.snd f T'.hom) (Limits.pullback.snd f T.hom)
+      g.left := by
+  refine IsPullback.of_right ?_ (by simp) (IsPullback.of_hasPullback f T.hom)
+  rw [Over.w g]
+  simpa using IsPullback.of_hasPullback f T'.hom
 
 /-- The Picard presheaf of a morphism of schemes `f : X ⟶ S`: it sends a scheme `T` over `S`
 to the Picard group of the fibre product `X_T = X ×[S] T`, and a morphism over `S` to the

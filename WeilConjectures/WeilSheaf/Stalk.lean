@@ -236,17 +236,16 @@ def support : Set X.finitePoints :=
   {x | Nontrivial (F.stalk x).carrier}
 
 variable {F} in
-/-- Isomorphic Weil sheaves have the same support: an isomorphism of the underlying étale
-sheaves induces isomorphisms of all their stalks. -/
+/-- Isomorphic Weil sheaves have the same support: an isomorphism induces isomorphisms of the
+geometric stalks. -/
 theorem support_congr {G : WeilSheaf k₀ l X} (e : F ≅ G) : F.support = G.support := by
   ext x
-  let e' : F.obj.carrier ≅ G.obj.carrier :=
-    (ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _).mapIso e
-  let f := WeilCoefficients.linearEquivOfIso
-    ((Scheme.pointSmallEtale (Scheme.Hom.geometricFiberPointOfFinitePoint
-      (X ↘ Spec (CommRingCat.of k₀)) x)).ulift.{u + 1}.sheafFiber.mapIso e')
-  exact ⟨fun h ↦ @Equiv.nontrivial _ _ f.symm.toEquiv h,
-    fun h ↦ @Equiv.nontrivial _ _ f.toEquiv h⟩
+  let e' : (F.stalk x).carrier ≃ₗ[PadicAlgCl l] (G.stalk x).carrier :=
+    WeilCoefficients.linearEquivOfIso
+      (((Scheme.pointSmallEtale _).ulift.{u + 1}).sheafFiber.mapIso
+        ((Endofunctor.IsoAlgebra.forget _).mapIso ((ObjectProperty.ι _).mapIso e)))
+  exact ⟨fun h ↦ @Equiv.nontrivial _ _ e'.symm.toEquiv h,
+    fun h ↦ @Equiv.nontrivial _ _ e'.toEquiv h⟩
 
 /-- The trace function `t_{F,n}` of a Weil sheaf: the trace `Tr(F_x^{(n)} | F_x̄)` of the
 Frobenius relative to `𝔽_{qⁿ}` on the stalk at an `𝔽_{qⁿ}`-rational point `x`, taken at the
@@ -277,7 +276,7 @@ theorem traceFunction_eq_trace_frobeniusEnd_stalk_pow (n : ℕ)
 
 /-- `F` is punctually `ι`-pure of weight `w`: at every closed point `x`, every eigenvalue `α`
 of the local Frobenius `Fₓ` satisfies `|ι α| = q_x ^ (w / 2)`, with `q_x` the residue
-cardinality at `x`. -/
+cardinality at `x`. (blueprint: `def-weil-punctual-weights`) -/
 def IsPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (w : ℝ) : Prop :=
   ∀ x : X.finitePoints,
     (F.stalk x).IsPureOfWeight ι ((X ↘ Spec (CommRingCat.of k₀)).residueCard x.1) w

@@ -32,7 +32,7 @@ over `k₀`, so nothing is lost, and the condition becomes a property of `M` alo
 The proof that the transform is a middle extension runs in the curve perverse heart: `(j_*M)[1]`
 is simple there (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.simple_middleExtension`), the
 transform preserves simple objects (`AlgebraicGeometry.simple_fourierTransform_obj`), the simple
-objects are punctual or middle extensions (`AlgebraicGeometry.exists_of_simple_curvePerverseHeart`),
+objects are punctual or middle extensions (`AlgebraicGeometry.WeilComplex.simple_iff`),
 and nonexceptionality excludes the punctual case.
 
 ## Main declarations
@@ -196,10 +196,9 @@ theorem exists_middleExtension_fourierTransform (hψ : ψ ≠ 1)
       D.IsFourierPartner ψ D' := by
   have := D.simple_middleExtension hD
   have := simple_fourierTransform_obj ψ hψ ⟨D.middleExtension, D.isCurvePerverse_middleExtension⟩
-  rcases exists_of_simple_curvePerverseHeart (⟨(fourierTransform ψ).obj D.middleExtension,
-      (isCurvePerverse_fourierTransform_obj_iff ψ hψ _).2 D.isCurvePerverse_middleExtension⟩ :
-        WeilComplex.CurvePerverseHeart k₀ l (affineLine k₀)) with
-    ⟨G, hG, ⟨e⟩⟩ | ⟨D', hD', ⟨e⟩⟩
+  rcases (WeilComplex.simple_iff ⟨(fourierTransform ψ).obj D.middleExtension,
+      (isCurvePerverse_fourierTransform_obj_iff ψ hψ _).2 D.isCurvePerverse_middleExtension⟩).1
+        this with ⟨G, -, hG, ⟨e⟩⟩ | ⟨D', hD', ⟨e⟩⟩
   · exact ((D.isEmpty_iso_fourierTransform_middleExtension_toComplex ψ hψ hD hne G hG).false
       e).elim
   · exact ⟨D', hD', ⟨e⟩⟩

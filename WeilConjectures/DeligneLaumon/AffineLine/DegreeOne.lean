@@ -27,6 +27,8 @@ bound holds for every irreducible, non-geometrically-constant `M` unramified at 
 
 ## Main statements
 
+- `AlgebraicGeometry.nonempty_equiv_stalk_homologySheaf_fourierTransform_origin`: the stalk of
+  `FT_ψ(K)` at the origin of the dual line is `RΓ_c(A, K)[1]`.
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`: boundary
   semicontinuity of weights for the direct image `j_*M` on the affine line.
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`:
@@ -71,6 +73,37 @@ theorem affineLine.residueCard_origin :
   rw [Scheme.Hom.residueCard]
   exact (congrArg (Nat.card k₀ ^ ·) (Scheme.Hom.degreeOver_eq_one_of_comp_eq_id _ _
     (AffineSpace.homOfVector_over (𝟙 _) 0) (IsLocalRing.closedPoint k₀))).trans (pow_one _)
+
+variable (ψ : AddChar k₀ (PadicAlgCl l))
+
+/-- **Stalk of the transform at the origin of the dual line.** At the origin `0'` the Fourier
+kernel `ℒ_{ψ(x · 0)}` is constant, so the stalk formula identifies the fibre of `FT_ψ(K)` at
+`0'` with `RΓ_c(𝔸¹, K)[1]`: in each degree `r`, the stalk of `𝓗^r FT_ψ(K)` at `0'` is
+`H_c^{r+1}(𝔸¹ ⊗ k̄, K)`, Frobenius-equivariantly. (blueprint: `lem-fd-stalk-at-origin`) -/
+theorem nonempty_equiv_stalk_homologySheaf_fourierTransform_origin
+    (K : WeilComplex k₀ l (affineLine k₀)) (r : ℤ) :
+    Nonempty ((((WeilComplex.homologySheaf r).obj ((fourierTransform ψ).obj K)).stalk
+      (affineLine.origin k₀)).Equiv (K.compactlySupportedCohomology (r + 1))) :=
+  -- TODO(adic): the stalk formula `lem-fd-stalk-formula` at the origin
+  sorry
+
+/-- **Stalk of the transform at the origin of the dual line**, for a middle extension: the
+fibre of `FT_ψ((j_*M)[1])` at the origin has cohomology only in degrees `-1` and `0`, namely
+`H_c^1(𝔸¹ ⊗ k̄, j_*M)` and `H_c^2(𝔸¹ ⊗ k̄, j_*M)`; the group `H_c^0` vanishes.
+(blueprint: `lem-fd-stalk-at-origin`) -/
+theorem WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_fourierTransform_middleExtension_origin
+    (D : WeilSheaf.LisseOnDenseOpen k₀ l) :
+    Nonempty ((((WeilComplex.homologySheaf (-1)).obj
+      ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).Equiv
+        (D.directImage.compactlySupportedCohomology 1)) ∧
+    Nonempty ((((WeilComplex.homologySheaf 0).obj
+      ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).Equiv
+        (D.directImage.compactlySupportedCohomology 2)) ∧
+    ∀ r : ℤ, r ∉ ({-1, 0} : Set ℤ) → Subsingleton ((((WeilComplex.homologySheaf r).obj
+      ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).carrier) :=
+  -- TODO(adic): the case of `nonempty_equiv_stalk_homologySheaf_fourierTransform_origin` for
+  -- `K = (j_*M)[1]`, and `H_c^0(𝔸¹, j_*M) = 0`
+  sorry
 
 namespace WeilSheaf.LisseOnDenseOpen
 
@@ -118,8 +151,6 @@ theorem nonempty_equiv_stalk_origin_of_isFourierPartner (ψ : AddChar k₀ (Padi
   exact ⟨⟨⟨LinearEquiv.ofSubsingleton _ _, fun _ ↦ Subsingleton.elim _ _⟩⟩, h 2⟩
 
 end WeilSheaf.LisseOnDenseOpen
-
-variable (ψ : AddChar k₀ (PadicAlgCl l))
 
 /-- If `M` is irreducible, nonexceptional for a nontrivial `ψ` and punctually `ι`-pure of
 weight `w` on a dense open `U₀` of the affine line, then `H_c^1(A, j_*M)` has weights at most
