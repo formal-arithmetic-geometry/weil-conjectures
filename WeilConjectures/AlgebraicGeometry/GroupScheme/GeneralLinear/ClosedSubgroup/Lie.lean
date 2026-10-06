@@ -111,7 +111,36 @@ closed subscheme on the connected component of the identity, that is `V(identity
 (`range_subgroupSchemeHom_le_identityComponent`). (blueprint: `sk-i-cartier`) -/
 theorem lieAlgebraMap_identityComponent_bijective [IsAlgClosed k] [CharZero k] :
     Function.Bijective (lieAlgebraMap (le_identityComponent I)) := by
-  sorry
+  set G := subgroupScheme I
+  set f := subgroupSchemeHom (le_identityComponent I)
+  let g := GrpObj.identityComponentLift G f
+    (range_subgroupSchemeHom_le_identityComponent I).subset
+  have hg : g ≫ GrpObj.identityComponentι G = f :=
+    GrpObj.identityComponentLift_comp_identityComponentι G _ _
+  have : IsMonHom g :=
+    { one_hom := by
+        rw [← cancel_mono (GrpObj.identityComponentι G), Category.assoc, hg, IsMonHom.one_hom,
+          IsMonHom.one_hom]
+      mul_hom := by
+        rw [← cancel_mono (GrpObj.identityComponentι G), Category.assoc, hg, IsMonHom.mul_hom,
+          Category.assoc, IsMonHom.mul_hom, tensorHom_comp_tensorHom_assoc, hg] }
+  have : IsReduced G.left := GrpObj.isReduced_of_charZero G
+  have : IsReduced (GrpObj.identityComponent G).left :=
+    isReduced_of_isOpenImmersion (GrpObj.identityComponentι G).left
+  have : IsClosedImmersion (g.left ≫ (GrpObj.identityComponentι G).left) := by
+    rw [← Over.comp_left, hg]
+    infer_instance
+  have : IsClosedImmersion g.left := IsClosedImmersion.of_comp _ (GrpObj.identityComponentι G).left
+  have : Surjective g.left := ⟨fun x ↦ by
+    obtain ⟨y, hy⟩ : (GrpObj.identityComponentι G).left.base x ∈ Set.range f.left.base := by
+      rw [range_subgroupSchemeHom_le_identityComponent, ← GrpObj.range_identityComponentι]
+      exact ⟨x, rfl⟩
+    refine ⟨y, (GrpObj.identityComponentι G).left.isOpenEmbedding.injective ?_⟩
+    rw [← hy, ← Scheme.Hom.comp_apply, ← Over.comp_left, hg]⟩
+  have : IsIso g.left := isIso_of_isClosedImmersion_of_surjective g.left
+  rw [lieAlgebraMap, GrpObj.differential_congr hg.symm, GrpObj.differential_comp]
+  exact (GrpObj.differential_identityComponentι_bijective G).comp
+    (GrpObj.differential_bijective_of_isOpenImmersion g)
 
 /-- Over an algebraically closed field of characteristic zero, the Lie algebra of an algebraic
 group is the Lie algebra of its reduced identity component. (blueprint: `sk-i-cartier`) -/
