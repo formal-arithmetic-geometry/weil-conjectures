@@ -24,6 +24,8 @@ a finite index type, that `MvPolynomial σ R` is of finite type over its degree-
 
 - `MvPolynomial.instFiniteTypeHomogeneousSubmoduleZero` — for `Finite σ`, the ring
   `MvPolynomial σ R` is of finite type over `MvPolynomial.homogeneousSubmodule σ R 0`.
+- `MvPolynomial.IsHomogeneous.aeval_mem_pow` — a homogeneous polynomial of degree `r` evaluated
+  at elements of an ideal `I` lies in `I ^ r`.
 
 ## Implementation notes
 
@@ -68,5 +70,20 @@ instance [Finite σ] : Algebra.FiniteType (homogeneousSubmodule σ R 0) (MvPolyn
   | C r => exact Subalgebra.algebraMap_mem _ (homogeneousSubmoduleZeroEquiv σ R r)
   | add p q hp hq => exact add_mem hp hq
   | mul_X p i hp => exact mul_mem hp (Algebra.subset_adjoin (by simp))
+
+/-- A homogeneous polynomial of degree `r` in elements of `I` lies in `I ^ r`. -/
+theorem IsHomogeneous.aeval_mem_pow {k A ι : Type*} [CommRing k] [CommRing A] [Algebra k A]
+    {I : Ideal A} {x : ι → A} (hx : ∀ i, x i ∈ I)
+    {f : MvPolynomial ι k} {r : ℕ} (hf : f.IsHomogeneous r) : MvPolynomial.aeval x f ∈ I ^ r := by
+  classical
+  rw [f.as_sum, map_sum]
+  refine Ideal.sum_mem _ fun d hd ↦ ?_
+  rw [aeval_monomial]
+  refine Ideal.mul_mem_left _ _ ?_
+  have hd' : d.degree = r := by
+    rw [Finsupp.degree_eq_weight_one]
+    exact hf (mem_support_iff.1 hd)
+  rw [← hd', Finsupp.degree_apply, Finsupp.prod, ← Finset.prod_pow_eq_pow_sum]
+  exact Ideal.prod_mem_prod fun i _ ↦ Ideal.pow_mem_pow (hx i) _
 
 end MvPolynomial
