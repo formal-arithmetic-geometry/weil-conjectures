@@ -24,6 +24,9 @@ blueprint `lemma:nagata-dense-affine-cover-exists`):
 - `AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter`:
   the finite affine open cover with dense total intersection, extracted from the
   previous lemma by quasi-compactness.
+
+We also record `AlgebraicGeometry.sigmaSpec_comp_Spec_map_algebraMap`: under
+`∐_ι Spec k ≅ Spec (ι → k)` the fold map to `Spec k` is `Spec` of the diagonal.
 -/
 
 @[expose] public section
@@ -177,5 +180,16 @@ theorem exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter
     obtain ⟨z, hzt, hyz⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ y))
     exact Opens.mem_iSup.mpr ⟨t.equivFin ⟨z, hzt⟩, by simpa using hyz⟩
   · exact (dense_iff_closure_eq.mpr genericPoints.closure).mono hgen
+
+open CategoryTheory Limits in
+/-- The disjoint union `∐_ι Spec k ≅ Spec (ι → k)` is compatible with the structure maps to
+`Spec k`: the fold map `∐_ι Spec k ⟶ Spec k` is `Spec` of the diagonal `k → (ι → k)`. -/
+lemma sigmaSpec_comp_Spec_map_algebraMap (ι : Type u) (k : Type u) [CommRing k] :
+    sigmaSpec (fun _ : ι ↦ CommRingCat.of k) ≫
+        Spec.map (CommRingCat.ofHom (algebraMap k (ι → k))) =
+      Sigma.desc fun _ : ι ↦ 𝟙 (Spec (.of k)) := by
+  refine Sigma.hom_ext _ _ fun i ↦ ?_
+  rw [Sigma.ι_desc, ι_sigmaSpec_assoc, ← Spec.map_comp, ← Spec.map_id]
+  rfl
 
 end AlgebraicGeometry
