@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
@@ -36,7 +37,7 @@ together with `SheafOfModules.IsFinitePresentation`.
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme.Modules
 
@@ -84,13 +85,14 @@ noncomputable def GeneratingSections.ofPushforward {M : X.Modules}
 /-- **The pushforward along a closed immersion of a quasi-coherent module is
 quasi-coherent.** Over an affine open `Spec R` of `Y`, with preimage `Spec (R / I)`, the
 pushforward of the module associated with an `R / I`-module `M` is the module associated with
-`M` regarded as an `R`-module.
+`M` regarded as an `R`-module. Here it is the case of an affine morphism,
+`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward_of_isAffineHom`.
 
 (blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
 theorem isQuasicoherent_pushforward_of_isClosedImmersion (F : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F] :
     SheafOfModules.IsQuasicoherent (R := Y.ringCatSheaf) ((pushforward i).obj F) :=
-  sorry
+  isQuasicoherent_pushforward_of_isAffineHom i F
 
 /-- **The pushforward along a closed immersion of a coherent module is coherent**, for a
 locally noetherian target `Y`. Over an affine open `Spec R` of `Y`, with preimage

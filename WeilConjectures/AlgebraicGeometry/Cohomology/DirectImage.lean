@@ -92,6 +92,9 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
   higher direct image of the fibre to the point.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`: the higher direct
   images commute with restriction to an open subscheme of the base.
+- `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isAffineHom` and
+  `isQuasicoherent_pushforward_of_isAffineHom`: the higher direct images along an affine morphism
+  vanish, and its pushforward preserves quasi-coherence.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_tensorObj_pullback_iso`: the
   projection formula `R^q f_* (ℱ ⊗ f^* 𝒩) ≅ R^q f_* ℱ ⊗ 𝒩` for an invertible `𝒩`.
 - `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`,
@@ -1052,5 +1055,55 @@ theorem exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree (hℱ : ℱ.Is
       ⟨fun h ↦ ⟨h.1, h.2⟩, fun h ↦ ⟨h.1, h.2⟩⟩⟩
 
 end Coherence
+
+section AffineMorphism
+
+/-- **The higher direct images along an affine morphism vanish.** Let `f : X ⟶ T` be affine
+and `ℱ` a quasi-coherent `𝒪_X`-module. Then `R^q f_* ℱ = 0` for `q > 0`: the higher direct
+images commute with restriction to an affine open `V` of `T`, over which their sections are
+`H^q(f⁻¹ V, ℱ)`, and these vanish since `f⁻¹ V` is affine
+(`AlgebraicGeometry.Scheme.Modules.subsingleton_H_succ_of_isAffine`).
+
+(blueprint: `lem-pc-affine-morphism-hi`) -/
+theorem isZero_higherDirectImage_of_isAffineHom (f : X ⟶ T) [IsAffineHom f]
+    [HasInjectiveResolutions X.Modules] (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {q : ℕ} (hq : 0 < q) :
+    IsZero ((higherDirectImage f q).obj ℱ) := by
+  obtain ⟨q, rfl⟩ : ∃ q', q = q' + 1 := ⟨q - 1, by omega⟩
+  refine isZero_of_forall_affineOpens _ fun V ↦ ?_
+  have := isGrothendieckAbelian (f ⁻¹ᵁ V.1).toScheme
+  have : IsAffine V.1.toScheme := V.2
+  have : IsAffine (f ⁻¹ᵁ V.1).toScheme := V.2.preimage f
+  obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ V.1.ι (f ⁻¹ᵁ V.1).ι (f ∣_ V.1)
+    (isPullback_morphismRestrict f V.1).flip (q + 1)
+  obtain ⟨e'⟩ := nonempty_sections_higherDirectImage_iso_H (f ∣_ V.1)
+    ((Modules.pullback (f ⁻¹ᵁ V.1).ι).obj ℱ) (q + 1)
+  have := subsingleton_H_succ_of_isAffine ((Modules.pullback (f ⁻¹ᵁ V.1).ι).obj ℱ) q
+  have : Subsingleton Γ((higherDirectImage (f ∣_ V.1) (q + 1)).obj
+      ((Modules.pullback (f ⁻¹ᵁ V.1).ι).obj ℱ), ⊤) := e'.toEquiv.subsingleton
+  have : Subsingleton Γ(((higherDirectImage f (q + 1)).obj ℱ).restrict V.1.ι, ⊤) :=
+    (asIso (e.hom.app ⊤)).addCommGroupIsoToAddEquiv.toEquiv.symm.subsingleton
+  have : Subsingleton Γ((higherDirectImage f (q + 1)).obj ℱ, V.1.ι ''ᵁ ⊤) :=
+    (((higherDirectImage f (q + 1)).obj ℱ).restrictAppIso V.1.ι ⊤).addCommGroupIsoToAddEquiv
+      |>.toEquiv.symm.subsingleton
+  rwa [Scheme.Opens.ι_image_top] at this
+
+/-- **The pushforward along an affine morphism is quasi-coherent.** For `f : X ⟶ T` affine and
+`ℱ` quasi-coherent, `f_* ℱ = R⁰ f_* ℱ` is quasi-coherent
+(`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`).
+
+(blueprint: `lem-pc-affine-morphism-hi`) -/
+theorem isQuasicoherent_pushforward_of_isAffineHom (f : X ⟶ T) [IsAffineHom f] (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
+    ((pushforward f).obj ℱ).IsQuasicoherent := by
+  have := isGrothendieckAbelian X
+  have : PreservesFiniteLimits (pushforward f) :=
+    have := (pullbackPushforwardAdjunction f).rightAdjoint_preservesLimits.{0, 0}
+    inferInstance
+  exact (SheafOfModules.isQuasicoherent T.ringCatSheaf).prop_of_iso
+    ((Functor.rightDerivedZeroIsoSelf (pushforward f)).app ℱ)
+    (isQuasicoherent_higherDirectImage f ℱ 0)
+
+end AffineMorphism
 
 end AlgebraicGeometry.Scheme.Modules

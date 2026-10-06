@@ -7,9 +7,11 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.LinearAlgebra.Matrix.Rank
 public import Mathlib.AlgebraicGeometry.Modules.Presheaf
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 public import Mathlib.Topology.Sheaves.LocallySurjective
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
@@ -39,6 +41,8 @@ matrices of morphisms between free modules of finite rank.
   isomorphism `e`.
 - `AlgebraicGeometry.Scheme.Modules.exists_mem_over_iso_unit`: an invertible module is locally
   trivial.
+- `AlgebraicGeometry.Scheme.Modules.isZero_of_forall_affineOpens`: a module whose sections over
+  every affine open vanish is zero.
 - `AlgebraicGeometry.Scheme.Modules.freeMatrix_pullback`: the matrix `freeMatrix φ` of global
   functions of a morphism `φ` of free modules is compatible with pullback, and
   `AlgebraicGeometry.Scheme.Modules.rank_freeMatrix` computes the rank of `φ` on global sections.
@@ -183,6 +187,28 @@ noncomputable def sectionsLinearEquivOfOverIsoUnit {M : X.Modules} {Y : X.Opens}
     rw [← ConcreteCategory.comp_apply, ← PresheafOfModules.comp_app, ← SheafOfModules.comp_val,
       e.inv_hom_id]
     rfl
+
+/-- **A sheaf of modules vanishing on affine opens is zero.** If `Γ(M, V) = 0` for every affine
+open `V`, then `M = 0`: the affine opens form a basis, so every section is locally zero. -/
+lemma isZero_of_forall_affineOpens (M : X.Modules)
+    (h : ∀ V : X.affineOpens, Subsingleton Γ(M, V.1)) : IsZero M := by
+  refine (IsZero.iff_id_eq_zero M).2 (hom_ext _ _ fun U ↦ ?_)
+  ext x
+  change x = 0
+  refine TopCat.Sheaf.eq_of_locally_eq' ⟨M.presheaf, M.isSheaf⟩
+    (fun i : {V : X.affineOpens // V.1 ≤ U} ↦ i.1.1) U (fun i ↦ homOfLE i.2) ?_ x 0
+    fun i ↦ @Subsingleton.elim _ (h i.1) _ _
+  intro y hy
+  obtain ⟨_, ⟨V, hV, rfl⟩, hyV, hVU⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open hy U.2
+  exact TopologicalSpace.Opens.mem_iSup.2 ⟨⟨⟨V, hV⟩, hVU⟩, hyV⟩
+
+/-- Every sheaf of modules on an empty scheme is zero. -/
+lemma isZero_of_isEmpty [IsEmpty X] (M : X.Modules) : IsZero M := by
+  refine (IsZero.iff_id_eq_zero M).2 (hom_ext _ _ fun U ↦ ?_)
+  ext x
+  change x = 0
+  exact TopCat.Sheaf.eq_of_locally_eq' ⟨M.presheaf, M.isSheaf⟩ (fun i : Empty ↦ i.elim) U
+    (fun i ↦ i.elim) (fun y _ ↦ isEmptyElim y) x 0 (fun i ↦ i.elim)
 
 /-- Conjugating the pullback of an endomorphism `f` of `𝒪_X` by `h^* 𝒪_X ≅ 𝒪_Y` gives the
 endomorphism of `𝒪_Y` whose value at `1` is `h^♯ (f 1)`. -/
