@@ -340,29 +340,43 @@ variable {l : ℕ} [Fact l.Prime] {W : WeilGroup p} {V : Type u} [AddCommGroup V
 
 /-- Blueprint `sk-p-real-sections`: Global sections as invariants.
 
-The geometric Frobenius `F = ρ (res γ)` acts on global sections by post-composition: `π₁(U)`
-is normal in `W(U₀)`, so post-composing an equivariant map with `F` gives an equivariant
-map. -/
-theorem comp_mem_globalSections (f : PadicAlgCl l →ₗ[PadicAlgCl l] V)
-    (hf : f ∈ W.globalSections l ρ WU R.restrict) :
-    (ρ (R.restrict WU.frobeniusLift)).comp f ∈ W.globalSections l ρ WU R.restrict := by
-  sorry
-
-/-- Blueprint `sk-p-real-sections`: Global sections as invariants.
-
 The geometric Frobenius `F = ρ (res γ)` preserves the invariants `V ^ (π₁(U))`, because
 `π₁(U)` is normal in `W(U₀)`. -/
 theorem frobeniusLift_mem_invariants (v : V)
     (hv : v ∈ Representation.invariants ((ρ.comp R.restrict).comp WU.geometric.subtype)) :
     ρ (R.restrict WU.frobeniusLift) v ∈
       Representation.invariants ((ρ.comp R.restrict).comp WU.geometric.subtype) := by
-  sorry
+  intro g
+  have hg : WU.frobeniusLift⁻¹ * g * WU.frobeniusLift ∈ WU.geometric := by
+    have : WU.deg g = 1 := g.2
+    simp [MonoidHom.mem_ker, this]
+  have := hv ⟨_, hg⟩
+  simp only [MonoidHom.coe_comp, Function.comp_apply, Subgroup.coe_subtype, map_mul,
+    Module.End.mul_apply] at this ⊢
+  conv_rhs => rw [← this]
+  simp [← Module.End.mul_apply, ← map_mul]
 
 /-- Blueprint `sk-p-real-sections`: Global sections as invariants.
 
+The geometric Frobenius `F = ρ (res γ)` acts on global sections by post-composition: `π₁(U)`
+is normal in `W(U₀)`, so post-composing an equivariant map with `F` gives an equivariant
+map. -/
+theorem comp_mem_globalSections (f : PadicAlgCl l →ₗ[PadicAlgCl l] V)
+    (hf : f ∈ W.globalSections l ρ WU R.restrict) :
+    (ρ (R.restrict WU.frobeniusLift)).comp f ∈ W.globalSections l ρ WU R.restrict := by
+  refine fun g ↦ LinearMap.ext fun a ↦ ?_
+  simp only [Representation.linHom_apply, Representation.trivial_apply, MonoidHom.coe_comp,
+    Function.comp_apply, Subgroup.coe_subtype, LinearMap.comp_apply]
+  exact frobeniusLift_mem_invariants ρ R (f a)
+    (fun g ↦ by simpa using LinearMap.congr_fun (hf g) a) g
+
+/-- Blueprint `sk-p-real-sections`, node `p-real-sections`: Global sections as invariants.
+
 For a lisse Weil representation `(V, ρ)` and a restriction `R` of Weil groups along a nonempty
 open `U₀ ⊆ C₀`, the global sections `H⁰(U, F|_U) = Hom_{π₁(U)}(𝟙, V)` are the invariants
-`V ^ (π₁(U))`, by evaluation at `1`.
+`V ^ (π₁(U))`, by evaluation at `1`: an equivariant map `ℚ̄_ℓ → V` is determined by the
+image of `1`, which is fixed by `π₁(U)`, and every fixed vector arises this way. The finiteness
+and lisse hypotheses are not needed for this.
 
 Both sides carry a residual action of the geometric Frobenius `F = ρ (res γ)`
 (`AlgebraicGeometry.WeilGroup.comp_mem_globalSections` and
@@ -378,7 +392,7 @@ equivariant for it:
 ```
 -/
 theorem globalSections_eq_invariants [FiniteDimensional (PadicAlgCl l) V]
-    (hρ : W.IsLisse l ρ) :
+    (_hρ : W.IsLisse l ρ) :
     ∃ e : W.globalSections l ρ WU R.restrict ≃ₗ[PadicAlgCl l]
       Representation.invariants ((ρ.comp R.restrict).comp WU.geometric.subtype),
       ∀ f : W.globalSections l ρ WU R.restrict,
@@ -386,7 +400,13 @@ theorem globalSections_eq_invariants [FiniteDimensional (PadicAlgCl l) V]
             comp_mem_globalSections ρ R f f.2⟩ =
           ⟨ρ (R.restrict WU.frobeniusLift) (e f),
             frobeniusLift_mem_invariants ρ R (e f) (e f).2⟩ := by
-  sorry
+  refine ⟨(LinearMap.ringLmapEquivSelf (PadicAlgCl l) (PadicAlgCl l) V).ofSubmodules _ _ ?_,
+    fun f ↦ rfl⟩
+  ext v
+  simp only [Submodule.mem_map_equiv, LinearMap.ringLmapEquivSelf_symm_apply]
+  refine ⟨fun h g ↦ ?_, fun h g ↦ LinearMap.ext fun a ↦ ?_⟩
+  · simpa using LinearMap.congr_fun (h g) 1
+  · simpa using congrArg (a • ·) (h g)
 
 end Sections
 
