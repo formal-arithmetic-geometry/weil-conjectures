@@ -53,7 +53,9 @@ blueprint records alongside the definition — under subobjects, quotients and e
 stated: `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_mono`, `.of_epi` and
 `.of_mono_cokernel`. From them, the middle term of an exact sequence whose outer terms are mixed
 of weights at most `w` is mixed of weights at most `w`
-(`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_exact`).
+(`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_exact`), and so is a sheaf with a finite
+filtration whose successive quotients are
+(`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_filtration`).
 
 ## References
 
@@ -154,6 +156,24 @@ theorem IsMixedOfWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} 
   have := hS.epi_kernelLift
   (h₁.of_epi (kernel.lift S.g S.f S.zero)).of_mono_cokernel (kernel.ι S.g)
     (h₃.of_mono (Abelian.factorThruCoimage S.g))
+
+/-- A sheaf with a finite filtration `0 = G 0 ↪ G 1 ↪ ⋯ ↪ G n ≅ F` whose successive quotients
+`coker φᵢ` are mixed of weights at most `w` is mixed of weights at most `w`: splice the filtrations
+of the quotients along the filtration of `F` (blueprint: `lem-zl-composition-weight-bound`, the
+extension step along the abutment filtration). -/
+theorem IsMixedOfWeightsAtMost.of_filtration {n : ℕ} (G : Fin (n + 1) → WeilSheaf k₀ l X)
+    (φ : ∀ i : Fin n, G i.castSucc ⟶ G i.succ) (h0 : IsZero (G 0))
+    (hlast : IsIsomorphic (G (Fin.last n)) F) [∀ i, Mono (φ i)]
+    (h : ∀ i : Fin n, (cokernel (φ i)).IsMixedOfWeightsAtMost ι w) :
+    F.IsMixedOfWeightsAtMost ι w := by
+  have key : ∀ (i : ℕ) (hi : i < n + 1), (G ⟨i, hi⟩).IsMixedOfWeightsAtMost ι w := by
+    intro i
+    induction i with
+    | zero => exact fun _ ↦ isMixedOfWeightsAtMost_of_isZero h0 w
+    | succ i ih =>
+      intro hi
+      exact (ih (by omega)).of_mono_cokernel (φ ⟨i, by omega⟩) (h ⟨i, by omega⟩)
+  exact (key n (by omega)).of_iso hlast.some
 
 end WeilSheaf
 
