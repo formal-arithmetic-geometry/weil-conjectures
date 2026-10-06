@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
+public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
@@ -28,19 +29,47 @@ Convergence is expressed through `CategoryTheory.SpectralSequence.AbutsTo` of
 filtration attached to a first quadrant double complex, and the second half of that subsection
 is what `SpectralSequence.Abutment` records.
 
+## The construction
+
+The blueprint builds the spectral sequence from a Cartan–Eilenberg resolution of `F(I)`, `I` an
+injective resolution of `X`. We use instead the equivalent construction through the canonical
+t-structure on the bounded below derived category `D⁺(B)`, for which Mathlib provides spectral
+objects and their spectral sequences. Let `K = RF(X) = R⁺F(X[0]) ∈ D⁺(B)`. To `a ≤ b` in `EInt`
+and `n : ℤ` we attach `Hⁿ(RG(τ_{≥ a} τ_{< b} K))`; this is a first quadrant spectral object in
+`C` (`Functor.grothendieckSpectralObject`), whose `E₂` spectral sequence is the Grothendieck
+spectral sequence (`Functor.grothendieckSpectralSequence`). Its `E₂`-terms are
+`H^{p+q}(RG(τ_{≥ q} τ_{< q+1} K)) = H^{p+q}(RG((R^q F X)[-q])) = R^p G (R^q F X)`, and it
+converges to `Hⁿ(RG(K))`, which is `Hⁿ(G(F(I))) = R^n (F ⋙ G) X` because `F(I)` is a complex
+of `G`-acyclic objects. The two filtrations of the Cartan–Eilenberg double complex in the
+blueprint are replaced by the truncation filtration (giving the `E₂`-page) and the
+identification of the abutment through acyclic resolutions.
+
 ## Main definitions
 
 - `CategoryTheory.Functor.IsAcyclicComposablePair`: a composable pair with acyclicity.
+- `CategoryTheory.Functor.grothendieckSpectralObjectFunctor`,
+  `CategoryTheory.Functor.grothendieckSpectralObject`: the spectral object of the Grothendieck
+  spectral sequence, functorially in `X`.
+- `CategoryTheory.Functor.grothendieckSpectralSequence`: the Grothendieck spectral sequence.
+- `CategoryTheory.Functor.grothendieckBottomEdge`, `CategoryTheory.Functor.grothendieckLeftEdge`:
+  the edge maps `R^n G (F X) ⟶ R^n (F ⋙ G) X ⟶ G (R^n F X)` (blueprint
+  `lem-sp-grothendieck-edge-maps`).
 
 ## Main statements
 
+- `CategoryTheory.Adjunction.isAcyclicComposablePair`: a right adjoint of an exact functor gives
+  a composable pair with acyclicity.
+- `CategoryTheory.Functor.nonempty_grothendieckSpectralSequence_page_two_iso`,
+  `CategoryTheory.Functor.grothendieckSpectralSequence_abutsTo`: the `E₂`-page and the abutment.
+- `CategoryTheory.Functor.exists_grothendieckSpectralObjectFunctor_baseChange`: base-change
+  naturality (blueprint `thm-sp-grothendieck-base-change`; not proved yet).
 - `CategoryTheory.Functor.exists_grothendieckSpectralSequence`: the Grothendieck spectral
   sequence of a composable pair with acyclicity.
 -/
 
 @[expose] public section
 
-universe v₁ v₂ v₃ u₁ u₂ u₃
+universe v₁ v₂ v₃ v₄ v₅ v₆ u₁ u₂ u₃ u₄ u₅ u₆
 
 namespace CategoryTheory
 
@@ -253,6 +282,48 @@ theorem nonempty_grothendieckSpectralObject_H_self_succ_iso [PreservesFiniteLimi
       G.obj ((F.rightDerived n).obj X)) := by
   obtain ⟨e⟩ := F.nonempty_grothendieckSpectralObject_H_iso G X 0 n n n (n + 1) (by simp) rfl rfl
   exact ⟨e ≪≫ G.rightDerivedZeroIsoSelf.app _⟩
+
+section BaseChange
+
+variable {A' : Type u₄} [Category.{v₄} A'] [Abelian A'] [IsGrothendieckAbelian.{v₄} A']
+  {B' : Type u₅} [Category.{v₅} B'] [Abelian B'] [IsGrothendieckAbelian.{v₅} B']
+  {C' : Type u₆} [Category.{v₆} C'] [Abelian C']
+  [HasDerivedCategory A'] [HasDerivedCategory B'] [HasDerivedCategory C']
+  (F' : A' ⥤ B') (G' : B' ⥤ C') [F'.Additive] [G'.Additive]
+
+/-- **Base-change naturality of the Grothendieck spectral sequence.** Let `α : A ⥤ A'`,
+`β : B ⥤ B'` and `γ : C ⥤ C'` be exact functors making the squares
+```
+    A ──F──▶ B ──G──▶ C
+    │α       │β       │γ
+    ▼        ▼        ▼
+    A' ─F'─▶ B' ─G'─▶ C'
+```
+commute up to the natural isomorphisms `eF : F ⋙ β ≅ α ⋙ F'` and `eG : G ⋙ γ ≅ β ⋙ G'`. Then
+there is a morphism, natural in `X : A`, from the image under `γ` of the spectral object of the
+Grothendieck spectral sequence of `X` to the spectral object of the Grothendieck spectral
+sequence of `α X`; it induces the morphism of spectral sequences between `γ` applied to the
+Grothendieck spectral sequence of `(F, G, X)` and that of `(F', G', α X)`. It is built from the
+base-change morphisms `γ ∘ RG ⟶ RG' ∘ β` and `β ∘ RF ⟶ RF' ∘ α` of the right derived functors,
+using that the exact functor `β` commutes with the truncations of the canonical t-structures.
+When `α` and `β` preserve injective objects these base-change morphisms are isomorphisms, and so
+is the morphism of spectral objects.
+
+In the base-change situation of the proper-base-change chapter the vertical functors are the
+inverse images along the maps of a cartesian square.
+
+(blueprint: `thm-sp-grothendieck-base-change`) -/
+theorem exists_grothendieckSpectralObjectFunctor_baseChange
+    (α : A ⥤ A') (β : B ⥤ B') (γ : C ⥤ C') [α.Additive] [β.Additive] [γ.Additive]
+    [PreservesFiniteLimits α] [PreservesFiniteColimits α]
+    [PreservesFiniteLimits β] [PreservesFiniteColimits β] [γ.PreservesHomology]
+    (eF : F ⋙ β ≅ α ⋙ F') (eG : G ⋙ γ ≅ β ⋙ G') :
+    ∃ φ : F.grothendieckSpectralObjectFunctor G ⋙ γ.mapAbelianSpectralObject EInt ⟶
+        α ⋙ F'.grothendieckSpectralObjectFunctor G',
+      α.PreservesInjectiveObjects → β.PreservesInjectiveObjects → IsIso φ := by
+  sorry
+
+end BaseChange
 
 end Functor
 
