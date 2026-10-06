@@ -10,7 +10,8 @@ public import Mathlib.RingTheory.Ideal.Operations
 /-!
 # The order of an element with respect to an ideal
 
-An element not in `⋂ₙ Iⁿ` lies in some `I ^ r` but not in `I ^ (r + 1)`.
+An element not in `⋂ₙ Iⁿ` lies in some `I ^ r` but not in `I ^ (r + 1)`. We also record that if
+`c * a ∈ I` for every `a` in a generating set `S`, then `c * x ∈ I` for every `x ∈ span S`.
 -/
 
 @[expose] public section
@@ -29,5 +30,14 @@ theorem exists_mem_pow_notMem_pow_succ_of_notMem_iInf {a : A} (h : a ∉ ⨅ r :
   | succ n ih =>
     by_cases h : a ∈ I ^ n
     exacts [⟨n, h, hn⟩, ih h]
+
+/-- If `c * a ∈ I` for all `a ∈ S`, then `c * x ∈ I` for all `x ∈ span S`. -/
+lemma mul_mem_of_mem_span_of_forall (S : Set A) (I : Ideal A) (c : A) (h : ∀ a ∈ S, c * a ∈ I)
+    {x : A} (hx : x ∈ Ideal.span S) : c * x ∈ I := by
+  induction hx using Submodule.span_induction with
+  | mem a ha => exact h a ha
+  | zero => simp
+  | add x y _ _ hx hy => rw [mul_add]; exact I.add_mem hx hy
+  | smul r x _ hx => rw [smul_eq_mul, mul_left_comm]; exact I.mul_mem_left r hx
 
 end Ideal
