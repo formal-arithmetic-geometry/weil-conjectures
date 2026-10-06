@@ -97,23 +97,13 @@ theorem isQuasicoherent_pushforward_of_isClosedImmersion (F : X.Modules)
 /-- **The pushforward along a closed immersion of a coherent module is coherent**, for a
 locally noetherian target `Y`. Over an affine open `Spec R` of `Y`, with preimage
 `Spec (R / I)`, the module of sections of `ℱ` is finite over `R / I`, hence finite over the
-noetherian ring `R`, hence finitely presented. Here it is deduced from the coherence of the
-higher direct images along the proper morphism `i`: `i_* ℱ = R⁰ i_* ℱ` is coherent by
-`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`.
+noetherian ring `R`, hence finitely presented.
 
 (blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
 theorem isFinitePresentation_pushforward_of_isClosedImmersion [IsLocallyNoetherian Y]
     (F : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) F] :
-    SheafOfModules.IsFinitePresentation (R := Y.ringCatSheaf) ((pushforward i).obj F) := by
-  have := isGrothendieckAbelian X
-  have : PreservesFiniteLimits (pushforward i) :=
-    have := (pullbackPushforwardAdjunction i).rightAdjoint_preservesLimits.{0, 0}
-    inferInstance
-  have : LocallyOfFinitePresentation i :=
-    (LocallyOfFinitePresentation.iff_locallyOfFiniteType).mpr inferInstance
-  exact (SheafOfModules.isFinitePresentation Y.ringCatSheaf).prop_of_iso
-    ((Functor.rightDerivedZeroIsoSelf (pushforward i)).app F)
-    (isFinitePresentation_higherDirectImage i F 0)
+    SheafOfModules.IsFinitePresentation (R := Y.ringCatSheaf) ((pushforward i).obj F) :=
+  sorry
 
 end AlgebraicGeometry.Scheme.Modules

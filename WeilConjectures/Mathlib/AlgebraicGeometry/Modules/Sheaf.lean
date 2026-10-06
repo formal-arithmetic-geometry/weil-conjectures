@@ -204,6 +204,7 @@ lemma isZero_of_isEmpty [IsEmpty X] (M : X.Modules) : IsZero M := by
   change x = 0
   exact TopCat.Sheaf.eq_of_locally_eq' ⟨M.presheaf, M.isSheaf⟩ (fun i : Empty ↦ i.elim) U
     (fun i ↦ i.elim) (fun y _ ↦ isEmptyElim y) x 0 (fun i ↦ i.elim)
+
 section Stalk
 
 variable {X : Scheme.{u}}

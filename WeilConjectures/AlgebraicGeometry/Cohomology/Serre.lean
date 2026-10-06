@@ -392,7 +392,6 @@ theorem Scheme.Modules.exists_generatingSections_tensor_twist [Finite n]
   exact ⟨GeneratingSections.ofPushforward i
     (SheafOfModules.GeneratingSections.equivOfIso pf.symm σ)⟩
 
-
 /-- **Serre vanishing for an ample module.** Let `X` be a scheme over a field `k`, `ℒ` an ample
 invertible `𝒪_X`-module and `ℱ` a coherent `𝒪_X`-module. Then there is `n₀` with
 `H^p(X, ℱ ⊗ ℒ^{⊗ n}) = 0` for all `n ≥ n₀` and all `p > 0`.
