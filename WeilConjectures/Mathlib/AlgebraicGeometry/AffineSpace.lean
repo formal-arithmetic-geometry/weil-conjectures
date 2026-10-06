@@ -617,6 +617,20 @@ lemma iteratedAffineLineProj_succ (S : Scheme.{u}) (r : ℕ) :
         iteratedAffineLineProj S r :=
   rfl
 
+instance (S : Scheme.{u}) : ∀ r : ℕ, IsAffineHom (iteratedAffineLineProj S r)
+  | 0 => inferInstanceAs (IsAffineHom (𝟙 S))
+  | r + 1 => by
+    have := instIsAffineHomIteratedAffineLineProj S r
+    rw [iteratedAffineLineProj_succ]
+    infer_instance
+
+instance (S : Scheme.{u}) : ∀ r : ℕ, LocallyOfFiniteType (iteratedAffineLineProj S r)
+  | 0 => inferInstanceAs (LocallyOfFiniteType (𝟙 S))
+  | r + 1 => by
+    have := instLocallyOfFiniteTypeIteratedAffineLineProj S r
+    rw [iteratedAffineLineProj_succ]
+    infer_instance
+
 namespace iteratedAffineLine
 
 /-- The coordinates of the iterated affine line: the `0`-th coordinate is the coordinate of the

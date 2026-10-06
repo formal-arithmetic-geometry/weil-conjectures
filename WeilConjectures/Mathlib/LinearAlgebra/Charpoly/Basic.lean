@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Combinatorics.Colex
 public import Mathlib.Data.Multiset.Powerset
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.LinearAlgebra.Charpoly.Basic
@@ -12,7 +13,10 @@ public import Mathlib.LinearAlgebra.Charpoly.ToMatrix
 public import Mathlib.LinearAlgebra.Determinant
 public import Mathlib.LinearAlgebra.Dual.Defs
 public import Mathlib.LinearAlgebra.ExteriorPower.Basis
+public import Mathlib.LinearAlgebra.TensorProduct.Matrix
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
+public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 
 /-!
 # Characteristic polynomials along a filtration and under the linear-algebra operations
@@ -32,7 +36,10 @@ has eigenvalues `α₁, …, α_r` and `g` has eigenvalues `β₁, …, β_t`, t
 `i₁ < ⋯ < i_s`, and the contragredient `(f⁻¹)^∨` of an invertible `f` has eigenvalues `α_i⁻¹`.
 The last one splits into the transpose-invariance of the characteristic polynomial, which is
 `LinearMap.charpoly_dualMap` in `WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix`, and
-the inversion of the roots.
+the inversion of the roots. All three are proved by choosing a basis in which `f` (and `g`) is
+upper triangular, `Module.End.exists_basis_isUpperTriangular_toMatrix`, and checking that the
+induced matrix is again triangular, for a suitable order on the induced basis, with the
+expected diagonal.
 
 ## Main declarations
 
@@ -175,7 +182,32 @@ eigenvalues, with multiplicity.
 theorem charpoly_roots_tensorProduct (f : V →ₗ[K] V) (g : W →ₗ[K] W) :
     (TensorProduct.map f g).charpoly.roots =
       (f.charpoly.roots ×ˢ g.charpoly.roots).map fun p ↦ p.1 * p.2 := by
-  sorry
+  classical
+  obtain ⟨b, hb⟩ := Module.End.exists_basis_isUpperTriangular_toMatrix f
+  obtain ⟨c, hc⟩ := Module.End.exists_basis_isUpperTriangular_toMatrix g
+  -- In the lexicographically ordered tensor basis the Kronecker product is upper triangular.
+  have hbc : (toMatrix (b.tensorProduct c) (b.tensorProduct c)
+      (TensorProduct.map f g)).BlockTriangular toLex := by
+    rw [TensorProduct.toMatrix_map]
+    rintro ⟨i, j⟩ ⟨i', j'⟩ h
+    rw [Matrix.kroneckerMap_apply]
+    rcases Prod.Lex.toLex_lt_toLex.mp h with h | ⟨rfl, h⟩
+    · rw [hb h, zero_mul]
+    · rw [hc h, mul_zero]
+  rw [← charpoly_toMatrix _ (b.tensorProduct c), hbc.charpoly_roots_of_injective toLex.injective,
+    ← charpoly_toMatrix f b, ← charpoly_toMatrix g c, hb.charpoly_roots_of_injective
+    Function.injective_id, hc.charpoly_roots_of_injective Function.injective_id,
+    TensorProduct.toMatrix_map, ← Finset.univ_product_univ, Finset.product_val]
+  have key : ∀ (s : Multiset (Fin (Module.finrank K V)))
+      (t : Multiset (Fin (Module.finrank K W))),
+      (s ×ˢ t).map (fun p ↦ toMatrix b b f p.1 p.1 * toMatrix c c g p.2 p.2) =
+        ((s.map fun i ↦ toMatrix b b f i i) ×ˢ (t.map fun i ↦ toMatrix c c g i i)).map
+          fun p ↦ p.1 * p.2 := by
+    intro s t
+    induction s using Multiset.induction_on with
+    | empty => simp
+    | cons a s ih => simp [Multiset.cons_product, ih, Multiset.map_map]
+  exact key _ _
 
 /-- The eigenvalues of the `s`-th exterior power of an endomorphism are the products of the
 `s`-element sub-multisets of its eigenvalues.
@@ -183,7 +215,82 @@ theorem charpoly_roots_tensorProduct (f : V →ₗ[K] V) (g : W →ₗ[K] W) :
 theorem charpoly_roots_exteriorPower (f : V →ₗ[K] V) (s : ℕ) :
     (exteriorPower.map s f).charpoly.roots =
       (f.charpoly.roots.powersetCard s).map Multiset.prod := by
-  sorry
+  classical
+  obtain ⟨b, hb⟩ := Module.End.exists_basis_isUpperTriangular_toMatrix f
+  set A := toMatrix b b f
+  set E := toMatrix (b.exteriorPower s) (b.exteriorPower s) (exteriorPower.map s f)
+  let e : Set.powersetCard (Fin (Module.finrank K V)) s → (Fin s ↪o Fin (Module.finrank K V)) :=
+    fun I ↦ Set.powersetCard.ofFinEmbEquiv.symm I
+  -- The entry of `⋀^s f` at `(I, J)` in the exterior basis is the minor of `A` on `I × J`.
+  have hE : ∀ I J, E I J = (Matrix.of fun i j ↦ A (e I j) (e J i)).det := by
+    intro I J
+    rw [show E I J = _ from toMatrix_apply _ _ _ _ _, exteriorPower.basis_apply,
+      exteriorPower.map_apply_ιMulti_family,
+      exteriorPower.basis_repr_apply, exteriorPower.ιMulti_family,
+      exteriorPower.ιMultiDual_apply_ιMulti]
+    simp [A, e, toMatrix_apply]
+  -- A nonzero minor needs `I` to lie termwise below `J`, so `E` is upper triangular for the
+  -- order comparing first the sums of the indices and then the colexicographic order.
+  let key : Set.powersetCard (Fin (Module.finrank K V)) s →
+      ℕ ×ₗ Colex (Finset (Fin (Module.finrank K V))) :=
+    fun I ↦ toLex (∑ i, (e I i : ℕ), toColex I.val)
+  have hkey : Function.Injective key := by
+    intro I J h
+    simp only [key, toLex_inj, Prod.mk.injEq, toColex_inj] at h
+    exact Subtype.ext h.2
+  have hsum : ∀ I J, E I J ≠ 0 → ∑ i, (e I i : ℕ) ≤ ∑ i, (e J i : ℕ) ∧
+      (∑ i, (e I i : ℕ) = ∑ i, (e J i : ℕ) → I = J) := by
+    intro I J h
+    rw [hE, Matrix.det_apply] at h
+    obtain ⟨σ, -, hσ⟩ := Finset.exists_ne_zero_of_sum_ne_zero h
+    have hle : ∀ i, (e I i : ℕ) ≤ e J (σ i) := by
+      intro i
+      by_contra! hlt
+      apply hσ
+      rw [Finset.prod_eq_zero (Finset.mem_univ i)
+        (by rw [Matrix.of_apply]; exact hb (Fin.lt_def.mpr hlt)), smul_zero]
+    have hσsum : ∑ i, (e J (σ i) : ℕ) = ∑ i, (e J i : ℕ) :=
+      Equiv.sum_comp σ fun i ↦ (e J i : ℕ)
+    refine ⟨hσsum ▸ Finset.sum_le_sum fun i _ ↦ hle i, fun heq ↦ ?_⟩
+    rw [← hσsum] at heq
+    have hall := (Finset.sum_eq_sum_iff_of_le fun i _ ↦ hle i).mp heq
+    rw [Set.powersetCard.eq_iff_subset]
+    intro x hx
+    obtain ⟨i, rfl⟩ := (Set.powersetCard.mem_range_ofFinEmbEquiv_symm_iff_mem I x).mpr hx
+    exact (Set.powersetCard.mem_range_ofFinEmbEquiv_symm_iff_mem J _).mp
+      ⟨σ i, (Fin.ext (hall i (Finset.mem_univ _))).symm⟩
+  have htri : E.BlockTriangular key := by
+    intro I J hJI
+    by_contra h
+    obtain ⟨hle, heq⟩ := hsum I J h
+    rcases Prod.Lex.toLex_lt_toLex.mp hJI with hlt | ⟨hs, hc⟩
+    · exact absurd hle (not_le.mpr hlt)
+    · rw [heq hs.symm] at hc
+      exact lt_irrefl _ hc
+  -- A principal minor of a triangular matrix is the product of its diagonal entries.
+  have hdiag : ∀ I, E I I = ∏ i, A (e I i) (e I i) := by
+    intro I
+    rw [hE, ← Matrix.det_transpose, Matrix.det_of_isUpperTriangular]
+    · rfl
+    · intro i j hij
+      exact hb ((e I).strictMono hij)
+  have hprod : ∀ I : Set.powersetCard (Fin (Module.finrank K V)) s,
+      ∏ i, A (e I i) (e I i) = ∏ x ∈ I.val, A x x := by
+    intro I
+    rw [← Finset.map_orderEmbOfFin_univ I.val I.prop, Finset.prod_map]
+    rfl
+  have huniv :
+      (Finset.univ : Finset (Set.powersetCard (Fin (Module.finrank K V)) s)).val.map Subtype.val =
+      (Finset.powersetCard s (Finset.univ : Finset (Fin (Module.finrank K V)))).val := by
+    refine (Multiset.Nodup.ext (Finset.univ.nodup.map Subtype.val_injective)
+      (Finset.nodup _)).mpr fun x ↦ ?_
+    simp [Set.powersetCard.mem_iff]
+  rw [← charpoly_toMatrix _ (b.exteriorPower s), htri.charpoly_roots_of_injective hkey,
+    ← charpoly_toMatrix f b, hb.charpoly_roots_of_injective Function.injective_id,
+    Multiset.powersetCard_map, Multiset.map_map, ← Finset.map_val_val_powersetCard,
+    Multiset.map_map, ← huniv, Multiset.map_map]
+  simp_rw [hdiag, hprod]
+  rfl
 
 /-- The eigenvalues of the contragredient of a linear automorphism, that is the dual of its
 inverse, are the inverses of its eigenvalues.
@@ -191,7 +298,38 @@ inverse, are the inverses of its eigenvalues.
 theorem charpoly_roots_dualMap_symm (f : V ≃ₗ[K] V) :
     (f.symm : V →ₗ[K] V).dualMap.charpoly.roots =
       (f : V →ₗ[K] V).charpoly.roots.map fun a ↦ a⁻¹ := by
-  sorry
+  classical
+  rw [charpoly_dualMap]
+  obtain ⟨b, hb⟩ := Module.End.exists_basis_isUpperTriangular_toMatrix (f : V →ₗ[K] V)
+  set A := toMatrix b b f
+  set A' := toMatrix b b (f.symm : V →ₗ[K] V)
+  -- The matrix of `f⁻¹` is the inverse of `A`, again upper triangular, with diagonal `A i i⁻¹`.
+  have h1 : A' * A = 1 := by
+    rw [← toMatrix_comp, ← toMatrix_id b]
+    congr 1
+    ext x
+    simp
+  have := invertibleOfLeftInverse A A' h1
+  have hA' : A'.IsUpperTriangular := by
+    rw [← Matrix.inv_eq_left_inv h1]
+    exact Matrix.blockTriangular_inv_of_blockTriangular hb
+  have hdiag : ∀ i, A' i i * A i i = 1 := by
+    intro i
+    have := congrFun (congrFun h1 i) i
+    rw [Matrix.mul_apply, Finset.sum_eq_single i, Matrix.one_apply_eq] at this
+    · exact this
+    · intro k _ hk
+      rcases lt_or_gt_of_ne hk with h | h
+      · rw [hA' h, zero_mul]
+      · rw [hb h, mul_zero]
+    · simp
+  rw [← charpoly_toMatrix _ b, ← charpoly_toMatrix (f : V →ₗ[K] V) b,
+    hA'.charpoly_roots_of_injective Function.injective_id,
+    hb.charpoly_roots_of_injective Function.injective_id, Multiset.map_map]
+  congr 1
+  funext i
+  exact eq_inv_of_mul_eq_one_left (hdiag i)
+
 
 end IsAlgClosed
 

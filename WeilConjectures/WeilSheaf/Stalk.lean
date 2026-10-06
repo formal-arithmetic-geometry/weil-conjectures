@@ -235,6 +235,18 @@ geometric stalk `F_x̄` is nonzero. -/
 def support : Set X.finitePoints :=
   {x | Nontrivial (F.stalk x).carrier}
 
+variable {F} in
+/-- Isomorphic Weil sheaves have the same support: an isomorphism induces isomorphisms of the
+geometric stalks. -/
+theorem support_congr {G : WeilSheaf k₀ l X} (e : F ≅ G) : F.support = G.support := by
+  ext x
+  let e' : (F.stalk x).carrier ≃ₗ[PadicAlgCl l] (G.stalk x).carrier :=
+    WeilCoefficients.linearEquivOfIso
+      (((Scheme.pointSmallEtale _).ulift.{u + 1}).sheafFiber.mapIso
+        ((Endofunctor.IsoAlgebra.forget _).mapIso ((ObjectProperty.ι _).mapIso e)))
+  exact ⟨fun h ↦ @Equiv.nontrivial _ _ e'.symm.toEquiv h,
+    fun h ↦ @Equiv.nontrivial _ _ e'.toEquiv h⟩
+
 /-- The trace function `t_{F,n}` of a Weil sheaf: the trace `Tr(F_x^{(n)} | F_x̄)` of the
 Frobenius relative to `𝔽_{qⁿ}` on the stalk at an `𝔽_{qⁿ}`-rational point `x`, taken at the
 geometric point over `x` for an embedding `𝔽_{qⁿ} ↪ k̄` chosen by `IsAlgClosed.lift`.
