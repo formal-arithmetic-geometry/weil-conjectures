@@ -37,6 +37,7 @@ points, which is what makes the residue degree `e_s` meaningful.
 
 - `AlgebraicGeometry.BoundaryDatum` : the boundary extension datum of `sk-d-real-boundary`.
 - `AlgebraicGeometry.BoundaryDatum.boundaryStalk` : the boundary stalk `V^{I_s}`.
+- `AlgebraicGeometry.BoundaryDatum.boundaryFrobenius` : the residue Frobenius acting on it.
 - `AlgebraicGeometry.Etale.middleExtension` : the middle extension `j_* ℱ`.
 
 ## Main statements
@@ -90,6 +91,10 @@ structure BoundaryDatum (j : U ⟶ C) [IsOpenImmersion j] [Nonempty U] (WU : Wei
   inertia : ↥((Set.range j.base)ᶜ) → Subgroup WU.carrier
   /-- Inertia is contained in the geometric fundamental group `π₁(U)`. -/
   inertia_le (s : ↥((Set.range j.base)ᶜ)) : inertia s ≤ WU.geometric
+  /-- Inertia at `s` dies in `W(C₀)`: the decomposition homomorphism at `s` factors through the
+  fundamental group of the strict henselization of `C₀` at `s`, which is trivial, so a sheaf
+  which is lisse on all of `C₀` is unramified at `s`. -/
+  inertia_le_ker_restrict (s : ↥((Set.range j.base)ᶜ)) : inertia s ≤ restrict.ker
   /-- A residue Frobenius lift at a boundary point `s`. -/
   residueFrobenius : ↥((Set.range j.base)ᶜ) → WU.carrier
   /-- The residue Frobenius lift at `s` has degree `e_s = [k(s) : 𝔽_q]`. -/
@@ -121,6 +126,28 @@ unambiguously. -/
 noncomputable def boundaryStalk (ρ : Representation (PadicAlgCl l) WU.carrier V)
     (s : ↥((Set.range j.base)ᶜ)) : Submodule (PadicAlgCl l) V :=
   Representation.invariants (ρ.comp (D.inertia s).subtype)
+
+omit [FiniteDimensional (PadicAlgCl l) V] in
+/-- The residue Frobenius lift at `s` maps the boundary stalk `V ^ (I_s)` to itself, since it
+normalises the inertia subgroup `I_s`. -/
+theorem residueFrobenius_mem_boundaryStalk (ρ : Representation (PadicAlgCl l) WU.carrier V)
+    (s : ↥((Set.range j.base)ᶜ)) {v : V} (hv : v ∈ D.boundaryStalk l ρ s) :
+    ρ (D.residueFrobenius s) v ∈ D.boundaryStalk l ρ s := by
+  rw [boundaryStalk, Representation.mem_invariants] at hv ⊢
+  rintro ⟨g, hg⟩
+  rw [← D.normalizes_inertia s] at hg
+  obtain ⟨h, hh, rfl⟩ := Subgroup.mem_map.1 hg
+  change ρ (D.residueFrobenius s * h * (D.residueFrobenius s)⁻¹) (ρ (D.residueFrobenius s) v) = _
+  rw [← Module.End.mul_apply, ← map_mul, inv_mul_cancel_right, map_mul, Module.End.mul_apply]
+  exact congrArg _ (hv ⟨h, hh⟩)
+
+/-- Blueprint `sk-d-real-boundary`: Boundary extension and inertia.
+
+The residue Frobenius `F_s` acting on the boundary stalk `V ^ (I_s)`, the Frobenius of the stalk
+of `j_* ℱ` at a geometric point over the boundary point `s`. -/
+noncomputable def boundaryFrobenius (ρ : Representation (PadicAlgCl l) WU.carrier V)
+    (s : ↥((Set.range j.base)ᶜ)) : Module.End (PadicAlgCl l) (D.boundaryStalk l ρ s) :=
+  (ρ (D.residueFrobenius s)).restrict fun _ ↦ D.residueFrobenius_mem_boundaryStalk l ρ s
 
 end BoundaryDatum
 

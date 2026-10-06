@@ -14,6 +14,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RankOne
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Semicontinuity
 public import WeilConjectures.Mathlib.Algebra.Order.BigOperators.Group.Multiset
 public import WeilConjectures.Mathlib.LinearAlgebra.Determinant
 public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
@@ -576,11 +577,11 @@ variable {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)} [IsCurve pU] {j : U ⟶ C}
 
 /-- Blueprint `sk-p-real-semi`: Semi-continuity of weights.
 
-For a boundary datum `D`, if the lisse Weil sheaf `ℱ` on `U₀` has weights at most `w`, then
-`j_* ℱ` has weights at most `w` on `C₀`. Concretely: at a boundary point `s`, the residue
-Frobenius acts on the boundary stalk `V ^ (I_s)`, and every one of its eigenvalues `α`,
-witnessed by a nonzero invariant eigenvector `v`, has `ι`-weight at most `w` relative to the
-residue cardinality `q_s`.
+For a boundary datum `D` on a smooth geometrically connected curve `C₀`, if the lisse Weil sheaf
+`ℱ` on `U₀` has weights at most `w`, then `j_* ℱ` has weights at most `w` on `C₀`. Concretely:
+at a boundary point `s`, the residue Frobenius acts on the boundary stalk `V ^ (I_s)`, and every
+one of its eigenvalues `α`, witnessed by a nonzero invariant eigenvector `v`, has `ι`-weight at
+most `w` relative to the residue cardinality `q_s`.
 
 Shrinking to an affine neighbourhood, the counting bound `N_e ≤ A q ^ e` for closed points of
 degree `e` shows that `L_ι (U₀, ℱ, T)⁻¹` has radius at least `q ^ (-(w + 2) / 2)`, while the
@@ -588,30 +589,70 @@ open–closed sequence identifies `H_c² (C, j_* ℱ)` with a coinvariant Tate t
 eigenvalues are bounded by `q ^ ((w + 2) / 2)`. The trace formula then confines the zeros of
 the boundary factor, giving the preliminary bound `|ι α| ≤ q_s ^ ((w + 2) / 2)`; applying it
 to the tensor powers `ℱ ^ ⊗ n`, whose boundary stalks receive `(V ^ (I_s)) ^ ⊗ n`, improves it
-to `|ι α| ≤ q_s ^ (w / 2 + 1 / n)` for every `n`, and `n → ∞` finishes. -/
-theorem frobeniusWeight_le_of_hasWeightsAtMost
-    (ρ : Representation (PadicAlgCl l) WU.carrier V) {w : ℝ}
+to `|ι α| ≤ q_s ^ (w / 2 + 1 / n)` for every `n`, and `n → ∞` finishes
+(`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius`).
+
+The curve `C₀` is smooth and geometrically connected and `ℓ ≠ char 𝔽_q`, as in the setting
+`sk-d-real-setup` of the block, and `ℱ` is lisse: these are the hypotheses of the trace formula
+used in the proof, and without lissity the statement fails (a discontinuous character can be
+trivial on all local Frobenius elements but not on a residue Frobenius lift). -/
+theorem frobeniusWeight_le_of_hasWeightsAtMost [SmoothOfRelativeDimension 1 p]
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
+    (ρ : Representation (PadicAlgCl l) WU.carrier V) (hρ : WU.IsLisse l ρ) {w : ℝ}
     (hw : WU.HasWeightsAtMost l ρ ι w) (s : ↥((Set.range j.base)ᶜ)) {α : PadicAlgCl l} {v : V}
     (hv : v ∈ D.boundaryStalk l ρ s) (hv0 : v ≠ 0) (hα : ρ (D.residueFrobenius s) v = α • v) :
     WeilGroup.frobeniusWeight ι (C.pointNorm s.1) α ≤ w := by
-  sorry
+  refine D.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius l ι ρ hρ hw s
+    (Module.End.hasEigenvalue_of_hasEigenvector (x := ⟨v, hv⟩) ⟨?_, ?_⟩)
+  · rw [Module.End.mem_eigenspace_iff]
+    ext
+    simp [boundaryFrobenius, hα]
+  · exact fun h ↦ hv0 (congrArg Subtype.val h)
 
 /-- Blueprint `sk-p-real-semi`: Semi-continuity of weights.
 
-The consequence of the weight bound for `j_* ℱ`: a lisse Weil sheaf `𝒢` on `C₀` whose
-restriction to the open `U₀` is punctually `ι`-pure of weight `w` is punctually `ι`-pure of
-weight `w` on all of `C₀`.
+The consequence of the weight bound for `j_* ℱ`: a lisse Weil sheaf `𝒢` on a smooth
+geometrically connected curve `C₀` whose restriction to the open `U₀` is punctually `ι`-pure of
+weight `w` is punctually `ι`-pure of weight `w` on all of `C₀`.
 
-Indeed `𝒢` is the direct image of its restriction, so the previous bound applies to `𝒢` and
-to its dual `𝒢 ᵛ`; the eigenvalues of the dual are the inverses of the eigenvalues of `𝒢`, so
-the upper bound `w` for `𝒢` and the upper bound `-w` for `𝒢 ᵛ` combine into an equality at
-every closed point of the boundary. The dual `𝒢 ᵛ` is not defined in this block; the proof
-will need `Representation.dual` on top of the statements recorded here. -/
-theorem isPunctuallyPure_of_isPunctuallyPure_restrict
+At a closed point of `U₀` this is the hypothesis, the local Frobenius of `C₀` being conjugate to
+the image of that of `U₀`. At a boundary point `s`, inertia acts trivially on `𝒢`, which is lisse
+on `C₀`, so its stalk is the whole local representation, with Frobenius the restriction of the
+residue Frobenius lift; the bound for `j_* ℱ`, applied to `𝒢` and to its dual `𝒢 ^ ∨`, whose
+eigenvalues are the inverses of those of `𝒢`, gives an upper bound `w` and a lower bound `w`
+(`cor-wf-unramified-boundary-purity`,
+`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_eq_of_isPunctuallyPure`). -/
+theorem isPunctuallyPure_of_isPunctuallyPure_restrict [SmoothOfRelativeDimension 1 p]
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
     (ρ : Representation (PadicAlgCl l) WC.carrier V) {w : ℝ} (hρ : WC.IsLisse l ρ)
     (hpure : WU.IsPunctuallyPure l (ρ.comp D.restrict) ι w) :
     WC.IsPunctuallyPure l ρ ι w := by
-  sorry
+  intro x α hα
+  rw [WeilGroup.localEigenvalues, Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero,
+    ← Module.End.hasEigenvalue_iff_isRoot_charpoly] at hα
+  by_cases hx : x.1 ∈ Set.range j.base
+  · -- a closed point of `U₀`
+    obtain ⟨y, hy⟩ := hx
+    have hyfin : y ∈ U.finitePoints :=
+      (Scheme.Hom.mem_finitePoints_iff_of_isIso j y).1 (hy ▸ x.2)
+    have hconj := D.restrict_frobenius ⟨y, hyfin⟩ x hy
+    have hmem : α ∈ WU.localEigenvalues l (ρ.comp D.restrict) ⟨y, hyfin⟩ := by
+      rw [WeilGroup.localEigenvalues, Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero]
+      rw [Module.End.hasEigenvalue_iff_isRoot_charpoly,
+        LinearMap.charpoly_of_isConj (ρ.map_isConj hconj)] at hα
+      exact hα
+    have h := hpure ⟨y, hyfin⟩ α hmem
+    rwa [← Scheme.Hom.pointNorm_of_isIso j y, hy] at h
+  · -- a boundary point
+    have hconj := D.restrict_residueFrobenius ⟨x.1, hx⟩
+    have hα' : Module.End.HasEigenvalue ((ρ.comp D.restrict) (D.residueFrobenius ⟨x.1, hx⟩)) α := by
+      rw [Module.End.hasEigenvalue_iff_isRoot_charpoly] at hα ⊢
+      rw [MonoidHom.comp_apply, ← LinearMap.charpoly_of_isConj (ρ.map_isConj hconj)]
+      exact hα
+    exact D.frobeniusWeight_eq_of_isPunctuallyPure l ι (ρ.comp D.restrict)
+      (D.isLisse_comp_restrict l hρ) hpure ⟨x.1, hx⟩
+      (fun g hg ↦ by
+        rw [MonoidHom.comp_apply, D.inertia_le_ker_restrict ⟨x.1, hx⟩ hg, map_one]) hα'
 
 end BoundaryDatum
 
