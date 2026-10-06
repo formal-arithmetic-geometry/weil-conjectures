@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
@@ -21,7 +22,9 @@ by the image of the global sections of the target together with finitely many el
 (`AlgebraicGeometry.exists_finset_closure_range_appTop_union_eq_top`). An integral scheme locally
 of finite type over a field has the dimension of any of its nonempty open subschemes
 (`AlgebraicGeometry.topologicalKrullDim_opens_eq`), which is finite
-(`AlgebraicGeometry.topologicalKrullDim_ne_top`).
+(`AlgebraicGeometry.topologicalKrullDim_ne_top`). The dimension of a scheme locally of finite
+type over a field is invariant under field extension
+(`AlgebraicGeometry.topologicalKrullDim_pullback_of_field`).
 -/
 
 @[expose] public section
@@ -97,5 +100,19 @@ theorem topologicalKrullDim_ne_top {K : Type u} [Field K] {X : Scheme.{u}}
   rw [this]
   rw [PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
   exact ringKrullDim_ne_top_of_finiteType K _
+
+/-- **Dimension is invariant under field extension.** Let `X` be a scheme locally of finite type
+over a field `k` and `K/k` a field extension. Then `X_K = X ×_{Spec k} Spec K` has the same
+dimension as `X`: affine-locally `X = Spec A` with `A` of finite type over `k`, and
+`dim (A ⊗_k K) = dim A` since `k[x₁, …, xₙ] → K[x₁, …, xₙ]` is faithfully flat, so it preserves
+heights of ideals. In particular the base change of a curve is a curve.
+
+(blueprint: `lem-pc-dim-base-change`) -/
+theorem topologicalKrullDim_pullback_of_field {k : Type u} [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] (K : Type u) [Field K] [Algebra k K] :
+    topologicalKrullDim
+        (Limits.pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) =
+      topologicalKrullDim X :=
+  sorry
 
 end AlgebraicGeometry
