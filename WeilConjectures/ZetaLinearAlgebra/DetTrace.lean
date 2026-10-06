@@ -30,6 +30,19 @@ The proof reduces to an algebraically closed field, where `det (1 - t F) = ∏ (
 polynomial, so that everything follows from the single factor case
 `t * (1 - λ t)' = - (∑_{n ≥ 1} λ ^ n t ^ n) (1 - λ t)`.
 
+It also records the *trace series* of a Frobenius module, the generating series whose
+exponential is `det (1 - t F)⁻¹`, and the alternating determinant of a finite graded family
+of Frobenius modules, which is the local factor of an Euler product.
+
+## Main definitions
+
+- `LinearMap.traceSeries`: the trace series `∑_{n ≥ 1} tr (F ^ n) t ^ n / n` of an
+  endomorphism.
+- `LinearMap.alternatingTraceSeries`: the alternating sum of the trace series over a finite
+  graded family.
+- `LinearMap.alternatingCharpolyRevProd`: the alternating determinant
+  `∏_i det (1 - t ^ e F_i ∣ W_i) ^ ((-1) ^ i)` of a finite graded family.
+
 ## Main results
 
 - `PowerSeries.X_mul_derivative_coe_of_coeff_zero_eq_one`: the logarithmic derivative of a split
@@ -232,5 +245,42 @@ theorem inv_charpolyRev_eq_exp [CharZero K] (F : Module.End K V) :
   ext n
   exact PowerSeries.coeff_eq_of_X_mul_derivative_eq hlogPinv hlogE hconst hT0
     (m := n) (fun i _ ↦ rfl) n le_rfl
+
+/-- The *trace series*
+
+`tr_F(T) = ∑_{n ≥ 1} tr (F ^ n ∣ V) T ^ n / n`
+
+of an endomorphism `F` of a finite dimensional vector space. Its companion identity
+`exp (tr_F(T)) = det (1 - T F)⁻¹` is `LinearMap.inv_charpolyRev_eq_exp`, proved above
+(blueprint: `sk-def-frobmod`). -/
+noncomputable def traceSeries (F : Module.End K V) : K⟦X⟧ :=
+  PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n) / n
+
+variable {W : ℤ → Type*} [∀ i, AddCommGroup (W i)] [∀ i, Module K (W i)]
+  [∀ i, FiniteDimensional K (W i)]
+
+/-- The alternating trace series
+
+`str_F(T) = ∑_{n ≥ 1} (∑_i (-1) ^ i tr (F i ^ n ∣ W i)) T ^ n / n`
+
+of a finite graded family `(W i, F i)` of Frobenius modules, indexed by a finite set `s` of
+integers: the alternating sum of the individual trace series `LinearMap.traceSeries (F i)`,
+the sign being the parity of the degree `i` via `Int.negOnePow`
+(blueprint: `sk-def-frobmod`). -/
+noncomputable def alternatingTraceSeries (s : Finset ℤ) (F : ∀ i, Module.End K (W i)) : K⟦X⟧ :=
+  ∑ i ∈ s, (i.negOnePow : ℤ) • traceSeries (F i)
+
+/-- The alternating determinant
+
+`∏_i det (1 - T ^ e F i ∣ W i) ^ ((-1) ^ i)`
+
+of a finite graded family `(W i, F i)` of Frobenius modules, indexed by a finite set `s` of
+integers. For `e = 1` and `W i = H_c^i` this is the cohomological side of an Euler product,
+and for `e` the degree of a closed point and `W i` the cohomology of a stalk its inverse is
+the local factor at that point. -/
+noncomputable def alternatingCharpolyRevProd (s : Finset ℤ) (F : ∀ i, Module.End K (W i))
+    (e : ℕ) : K⟦X⟧ :=
+  ∏ i ∈ s, if Even i then ((F i).charpolyRev.comp (Polynomial.X ^ e) : K⟦X⟧)
+    else ((F i).charpolyRev.comp (Polynomial.X ^ e) : K⟦X⟧)⁻¹
 
 end LinearMap

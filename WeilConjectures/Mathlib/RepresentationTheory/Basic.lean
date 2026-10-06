@@ -23,6 +23,8 @@ have, alongside `Representation.tprod` and `Representation.dual`:
 
 * `Representation.detCharacter`: the determinant character `δ` of a representation.
 * `Representation.exteriorPower`: the representation induced on `⋀^s V`.
+* `Matrix.GeneralLinearGroup.toRepresentation`: the defining representation of `GL n k` on
+  `n → k`.
 
 ## Blueprint
 
@@ -30,6 +32,8 @@ have, alongside `Representation.tprod` and `Representation.dual`:
 -/
 
 @[expose] public section
+
+open scoped Matrix
 
 namespace Representation
 
@@ -61,3 +65,22 @@ noncomputable def exteriorPower (ρ : Representation k W V) (s : ℕ) :
     exact _root_.exteriorPower.map_comp (ρ w) (ρ v)
 
 end Representation
+
+namespace Matrix.GeneralLinearGroup
+
+variable (n : Type*) [Fintype n] [DecidableEq n] (k : Type*) [Field k]
+
+/-- The defining representation of `GL n k` on `n → k`, by matrix-vector multiplication. -/
+noncomputable def toRepresentation : Representation k (GL n k) (n → k) where
+  toFun g := Matrix.toLinAlgEquiv' (g : Matrix n n k)
+  map_one' := by simp
+  map_mul' x y := by simp
+
+variable {n k}
+
+@[simp]
+theorem toRepresentation_apply (g : GL n k) (v : n → k) :
+    toRepresentation n k g v = (g : Matrix n n k) *ᵥ v :=
+  rfl
+
+end Matrix.GeneralLinearGroup

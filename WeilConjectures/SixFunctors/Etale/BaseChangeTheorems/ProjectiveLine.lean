@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk
 
 /-!
 
@@ -26,15 +27,20 @@ Both halves are stated here and combined into
 
 ## The proof of the projective-line case
 
-By `AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity` it suffices to
-prove injective acyclicity for the projection. Over a strictly henselian base the
-degree-zero comparison between a proper scheme and its closed fibre, fed through the
-Mayer–Vietoris sequence of the two standard affine charts of the projective line, kills the
-cohomology of an injective sheaf in degrees `≥ 2`, and the finite-étale machinery kills it
-in degree `1`. Over a general base the stalk of the exchange morphism at a geometric point
-is the pullback map `Hᵠ(ℙ¹_{κ(s̄)}, F) ⟶ Hᵠ(ℙ¹_{κ(t̄)}, F)` between separably closed fields,
-an isomorphism by the invariance of the cohomology of a curve under extension of separably
-closed base fields; geometric stalks are conservative.
+By `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity` it suffices to
+prove injective acyclicity for the projection, which is
+`AlgebraicGeometry.Etale.hasInjectiveAcyclicity_projectiveLine` of
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk`. The
+Lean proof checks that the exchange morphism is an isomorphism at every geometric point, since
+geometric stalks are conservative. There, by
+`AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine`, the
+stalk is the pullback map `Hᵠ(ℙ¹_{κ(s̄)}, F) ⟶ Hᵠ(ℙ¹_{κ(t̄)}, F)` between two separably closed
+fields. That map is bijective by the invariance of the cohomology of a curve under extension
+of separably closed base fields. The strictly henselian route of
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian`
+(Mayer–Vietoris on the two standard charts, finite étale lifting) is not used by the Lean
+proof; it is the intended proof of the `sorry`ed stalk statement, through the comparison of
+`ℙ¹` over a strictly henselian ring with its closed fibre.
 
 ## The proof of the reduction
 
@@ -112,7 +118,8 @@ docstring, and Stacks Project, Tag 095T, whose proof it is.
 (blueprint: `prop:weil-pbc-projective-line`) -/
 theorem Etale.hasTorsionBaseChange_projectiveLine (S : Scheme.{u}) :
     Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S) :=
-  sorry
+  Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity Λ _
+    (Etale.hasInjectiveAcyclicity_projectiveLine Λ S)
 
 /-- **Reduction of proper base change to the projective line**: if the projection
 `ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasTorsionBaseChange` for every scheme `S`,

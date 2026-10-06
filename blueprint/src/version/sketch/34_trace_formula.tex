@@ -477,44 +477,67 @@ For \(M\in\Dctf(Y,A)\), Verdier biduality gives
 \]
 and evaluation is
 \[
- \operatorname{ev}_M:D_YM\otimes_A^LM\to\omega_{Y,A}.
+ \operatorname{ev}_M:M\otimes_A^LD_YM\to\omega_{Y,A}.
 \]
 \end{definition}
 
-\begin{proposition}[Fixed-point evaluation morphism]
-For \(K\in\Dctf(X,A)\), define
+\begin{definition}[Lefschetz--Verdier pairing]
+Assume that \(s_\Omega\) is the spectrum of a field, that \(X\) and \(Y\) are
+separated of finite type over it, and that \(K\in\Dctf(X,A)\) and
+\(L\in\Dctf(Y,A)\).  Let \(Z=Y\times X\) with projections \(p_1,p_2\), let
+\(c:C\to Z\) be a correspondence from \((X,K)\) to \((Y,L)\) with coefficient
+map \(u\), and let \(d:D\to Z\) be an opposite correspondence (legs exchanged)
+with coefficient map \(v\).  Put \(E=C\times_ZD\) with projections
+\(q_1:E\to C\), \(q_2:E\to D\).  The Kunneth--Verdier isomorphism turns \(u\)
+and \(v\) into classes
 \[
- \mathcal H_c(K):=
- R\mathcal Hom_A(Lc_2^*K,Rc_1^!K)\in D(C,A).
+ \widetilde u:Rc_!A_C\to p_1^*L\otimes_A^Lp_2^*D_XK,\qquad
+ \widetilde v:Rd_!A_D\to p_2^*K\otimes_A^Lp_1^*D_YL.
 \]
-There is a natural morphism
+Their contraction is the composite
 \[
- \theta_{c,K}:Li_F^*\mathcal H_c(K)\longrightarrow\omega_{F,A}.
+\begin{aligned}
+ Rc_!\bigl(A_C\otimes_A^Lc^*Rd_!A_D\bigr)
+ &\simeq Rc_!A_C\otimes_A^LRd_!A_D
+ \xrightarrow{\widetilde u\otimes\widetilde v}
+ (p_1^*L\otimes p_2^*D_XK)\otimes(p_2^*K\otimes p_1^*D_YL)\\
+ &\xrightarrow{\ \beta\ }
+ (p_1^*L\otimes p_1^*D_YL)\otimes(p_2^*K\otimes p_2^*D_XK)
+ \simeq p_1^*(L\otimes D_YL)\otimes p_2^*(K\otimes D_XK)\\
+ &\xrightarrow{\operatorname{ev}_L\otimes\operatorname{ev}_K}
+ p_1^*\omega_{Y,A}\otimes p_2^*\omega_{X,A}
+ \longrightarrow\omega_{Z,A},
+\end{aligned}
 \]
-It is obtained from Verdier biduality, tensor--internal-Hom adjunction, the
-cartesian fixed square, the equality \(c_1i_F=c_2i_F=d\), and evaluation
+where the first isomorphism is the projection formula, \(\beta\) is the
+braiding of the second factor followed by the exchange of the middle factors
+and the braiding of the last factor, and the next isomorphism is the monoidal
+structure of \(p_1^*\) and \(p_2^*\).  The last map is adjoint under
+\(Rp_{1!}\dashv Rp_1^!\) to
+\(Rp_{1!}(p_1^*\omega_Y\otimes p_2^*\omega_X)\simeq
+a_Y^*Ra_{X!}\omega_X\otimes\omega_Y\to\omega_Y\), built from the
+projection formula, exceptional base change and the trace
+\(Ra_{X!}\omega_{X,A}\to A\).  Its exceptional adjoint is a map
+\(c^*Rd_!A_D\to Rc^!\omega_{Z,A}\simeq\omega_{C,A}\); composing with
+exceptional base change \(Rq_{1!}A_E\simeq c^*Rd_!A_D\) and taking the
+adjoint under \(Rq_{1!}\dashv Rq_1^!\) gives the
+\emph{Lefschetz--Verdier pairing}
 \[
- D_XK\otimes_A^LK\longrightarrow\omega_{X,A},
+ \langle u,v\rangle_{\mathrm{LV}}:A_E\longrightarrow\omega_{E,A}.
 \]
-followed by \(Rd^!\omega_{X,A}\simeq\omega_{F,A}\).  It is natural in
-\((C,c,K)\), compatible with shifts, and \(A\)-linear.
-\depends{Verdier biduality, exceptional base change, the projection formula,
-and composition for exceptional inverse image.}
-\end{proposition}
+\end{definition}
 
 \begin{definition}[Verdier trace class]
-A correspondence \(u:Lc_2^*K\to Rc_1^!K\) is equivalently a section
+Keep the hypotheses of the Lefschetz--Verdier pairing, with \(Y=X\) and
+\(L=K\).  The \emph{Verdier trace class} of an endocorrespondence
+\((C,c,u)\) on \((X,K)\) is the section
 \[
- \widetilde u:A_C\longrightarrow\mathcal H_c(K).
+ \operatorname{Tr}_c(u):A_F\longrightarrow\omega_{F,A}
 \]
-Its Verdier trace class is
-\[
- \operatorname{Tr}_c(u):
- A_F\xrightarrow{Li_F^*\widetilde u}
- Li_F^*\mathcal H_c(K)
- \xrightarrow{\theta_{c,K}}\omega_{F,A}.
-\]
-Thus
+obtained by the construction of the Lefschetz--Verdier pairing applied to
+\(u\) and the diagonal identity \(1_K\) (support \(\Delta_X\)), with the
+cartesian fixed square \(F=C\times_{X\times X}X\) in place of the
+intersection \(E(C,X)\).  Thus
 \[
  \operatorname{tr}_c:
  \Hom_{D(C,A)}(Lc_2^*K,Rc_1^!K)
@@ -523,6 +546,16 @@ Thus
 \]
 is a natural \(A\)-linear map.
 \end{definition}
+
+\begin{remark}[Fixed-point evaluation]
+Classically the trace class is described through
+\(\mathcal H_c(K):=R\mathcal Hom_A(Lc_2^*K,Rc_1^!K)\): the map \(u\) is a
+section \(A_C\to\mathcal H_c(K)\), and Verdier biduality, tensor--internal-Hom
+adjunction, the cartesian fixed square and evaluation give a morphism
+\(\theta_{c,K}:Li_F^*\mathcal H_c(K)\to\omega_{F,A}\) with
+\(\operatorname{Tr}_c(u)=\theta_{c,K}\circ Li_F^*\widetilde u\).  This
+description is not used in the formalisation.
+\end{remark}
 
 \begin{definition}[Integration and local term]
 Assume \(F\) is proper over \(\Omega\).  The counit of
@@ -572,7 +605,7 @@ the triangle obtained by \(Rc_1^!\).  Then
 in \(\Hom_{D(F,A)}(A_F,\omega_{F,A})\).  If \(F\) is proper, the same
 identity holds for every local term; if \(c_2\) is proper, it also holds for
 the categorical traces of the three global operators.
-\depends{Linearity of \(\theta_{c,K}\), compatibility of Verdier duality
+\depends{Linearity of the Lefschetz--Verdier contraction, compatibility of Verdier duality
 with distinguished triangles, and additivity of categorical trace.}
 \end{proposition}
 
@@ -764,7 +797,7 @@ define its extension by the fully typed composite
 \]
 Put \(F=\Fix(c)\), \(F_U=\Fix(c_U)\), and \(F_Z=\Fix(c_Z)\), and write
 \(\jmath_F:F_U\hookrightarrow F\) and \(\imath_F:F_Z\hookrightarrow F\)
-for the induced immersions.  Naturality of fixed-point evaluation gives
+for the induced immersions.  Naturality of the Lefschetz--Verdier contraction gives
 \[
  L\jmath_F^*\operatorname{Tr}_c(j_!u_U)
    =\operatorname{Tr}_{c_U}(u_U),
@@ -772,7 +805,7 @@ for the induced immersions.  Naturality of fixed-point evaluation gives
  L\imath_F^*\operatorname{Tr}_c(j_!u_U)=0.
 \]
 \depends{Stable open exchange for the two legs, finite-derived zero
-complement restriction, and naturality of the fixed-point evaluation map.}
+complement restriction, and naturality of the Lefschetz--Verdier contraction.}
 \end{proposition}
 
 \begin{proposition}[Closed extension of a cohomological correspondence]
@@ -804,7 +837,7 @@ immersions \(\jmath_F:F_U\hookrightarrow F\) and
 \]
 \depends{Proper base change for a closed immersion, exceptional exchange,
 finite-derived zero restriction to the complementary open, and naturality
-of the fixed-point evaluation morphism.}
+of the Lefschetz--Verdier contraction.}
 \end{proposition}
 
 \begin{proposition}[Extension by zero and open--closed localization]
@@ -872,19 +905,25 @@ Let \(f:X\to Y\) and \(g:C\to D\) be proper, and let
  c=(c_1,c_2):C\to X\times X,
  \qquad d=(d_1,d_2):D\to Y\times Y
 \]
-satisfy \(d_rg=fc_r\) for \(r=1,2\), with both leg squares cartesian.  For
-\(K\in\Dctf(X,A)\) and
+satisfy \(d_rg=fc_r\) for \(r=1,2\); no leg square need be cartesian.
+For \(K\in\Dctf(X,A)\) and
 \(u:Lc_2^*K\to Rc_1^!K\), define
 \[
 \begin{aligned}
  f_*u:Ld_2^*Rf_*K
- &\xrightarrow{\sim}Rg_*Lc_2^*K
+ &\longrightarrow Rg_*Lc_2^*K
  \xrightarrow{Rg_*u}Rg_*Rc_1^!K
- \xrightarrow{\sim}Rd_1^!Rf_*K.
+ \longrightarrow Rd_1^!Rf_*K.
 \end{aligned}
 \]
-The first isomorphism is proper base change and the last is the proper
-duality exchange isomorphism.  The cartesian data induce a proper map
+The first arrow is the base change morphism
+\(Ld_2^*Rf_*K\to Rg_*Lg^*Ld_2^*Rf_*K\simeq Rg_*Lc_2^*Lf^*Rf_*K\to
+Rg_*Lc_2^*K\), built from the unit of \(Lg^*\dashv Rg_*\) and the counit of
+\(Lf^*\dashv Rf_*\).  The last is adjoint under
+\(Rd_{1!}\dashv Rd_1^!\) to
+\(Rd_{1!}Rg_*Rc_1^!K\simeq Rf_!Rc_{1!}Rc_1^!K\to Rf_!K\simeq Rf_*K\),
+using \(Rg_*\simeq Rg_!\) and \(Rf_*\simeq Rf_!\).  The leg relations
+induce a proper map
 \[
  g_F:F_c:=\Fix(c)\longrightarrow F_d:=\Fix(d).
 \]
@@ -929,8 +968,8 @@ For the proper morphism of correspondences above,
  \operatorname{Tr}_d(f_*u)=(g_F)_*\operatorname{Tr}_c(u)
  \quad\text{in }\Hom_{D(F_d,A)}(A_{F_d},\omega_{F_d,A}).
 \]
-\depends{Proper base change, the proper duality exchange isomorphism,
-projection, and compatibility of fixed-point evaluation with the
+\depends{The base change morphism, the exceptional counit,
+projection, and compatibility of the Lefschetz--Verdier contraction with the
 adjunction unit \(A_{F_d}\to Rg_{F*}A_{F_c}\) and the dualizing counit.}
 \end{theorem}
 
