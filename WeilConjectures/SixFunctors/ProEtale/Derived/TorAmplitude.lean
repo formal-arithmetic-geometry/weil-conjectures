@@ -39,10 +39,12 @@ bounded constructible complexes of finite Tor amplitude.
 As on the étale side, Tor amplitude is the site-independent `DerivedCategory.torAmplitudeIn` of
 `WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude`, specialised to `D(X_proét)`.
 
-The blueprint's second small category `D_c^[a, b](X, A)` is not realised as a category: the
-statements that speak about it always pair it with a Tor amplitude bound, so it is only realised
-as the object property `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTorAmplitudeIn`
-(see the note in `WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude`).
+The blueprint's second small category `D_c^[a, b](X, A)` is
+`AlgebraicGeometry.ProEtale.DerivedCategoryConstructibleIn` of
+`WeilConjectures.SixFunctors.ProEtale.Derived.Constructible`. The statements that speak about it
+always pair it with a Tor amplitude bound, and use the object property
+`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTorAmplitudeIn` (see the note in
+`WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude`).
 
 Bounded constructibility is étale origin
 (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible`), which is the right notion
@@ -129,6 +131,13 @@ lemma DerivedCategory.constructibleTorAmplitudeIn_iff (a b : ℤ)
         DerivedCategory.torAmplitudeIn A X a b K :=
   Iff.rfl
 
+/-- `D_c^[a, b](X, A)` with Tor amplitude in `[a, b]` is the intersection of
+`ProEtale.DerivedCategory.constructibleIn` and `ProEtale.DerivedCategory.torAmplitudeIn`. -/
+lemma DerivedCategory.constructibleTorAmplitudeIn_eq (a b : ℤ) :
+    DerivedCategory.constructibleTorAmplitudeIn A X a b =
+      DerivedCategory.constructibleIn A X a b ⊓ DerivedCategory.torAmplitudeIn A X a b :=
+  rfl
+
 variable {A X}
 
 /-- An object of `D(X_proét)` lies in `Dctf(X, A)` exactly when, for some interval `[a, b]`,
@@ -158,6 +167,11 @@ noncomputable instance : Category (DerivedCategoryFiniteTor A X) :=
 noncomputable def DerivedCategoryFiniteTor.ι :
     DerivedCategoryFiniteTor A X ⥤ _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
   (DerivedCategory.constructibleFiniteTor A X).ι
+
+/-- The inclusion `Dctf(X, A) ⊆ Dᵇc(X, A)` of blueprint `sk-def-sf-categories`. -/
+noncomputable def DerivedCategoryFiniteTor.toBoundedConstructible :
+    DerivedCategoryFiniteTor A X ⥤ DerivedCategoryBoundedConstructible A X :=
+  ObjectProperty.ιOfLE inf_le_left
 
 @[inherit_doc DerivedCategoryFiniteTor]
 scoped notation "Dctf(" X ", " A ")" => ProEtale.DerivedCategoryFiniteTor A X
