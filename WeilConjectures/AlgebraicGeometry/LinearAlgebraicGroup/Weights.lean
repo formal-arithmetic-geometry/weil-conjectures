@@ -91,6 +91,21 @@ a degree-one element `γ` is `dw_χ(ρ) = χ(δ(γ)) / dim V`.
 noncomputable def detWeight (χ : RealCharacter k) (γ : W) (ρ : Representation k W V) : ℝ :=
   Multiplicative.toAdd (χ (ρ.detCharacter γ)) / Module.finrank k V
 
+/-- A real character kills the determinant of a degree-zero element when the geometric
+determinant is finite: `δ(u)` has finite order `e`, so `e λ(δ(u)) = λ(δ(u) ^ e) = 0` in the
+torsion-free group `ℝ`. (blueprint: `sk-p-readout`) -/
+theorem toAdd_apply_detCharacter_eq_zero {deg : W →* Multiplicative ℤ}
+    (ρ : Representation k W V) (hdet : ρ.HasFiniteGeometricDet deg) (χ : RealCharacter k)
+    {u : W} (hu : u ∈ deg.ker) : Multiplicative.toAdd (χ (ρ.detCharacter u)) = 0 := by
+  let φ := ρ.detCharacter.comp deg.ker.subtype
+  have : Finite φ.range := (hdet : (Set.range φ).Finite).to_subtype
+  have hfin : IsOfFinOrder (χ (ρ.detCharacter u)) :=
+    (χ.comp φ.range.subtype).isOfFinOrder (isOfFinOrder_of_finite ⟨φ ⟨u, hu⟩, ⟨u, hu⟩, rfl⟩)
+  obtain ⟨m, hm, hum⟩ := isOfFinOrder_iff_pow_eq_one.1 hfin
+  have h := congr(Multiplicative.toAdd $hum)
+  rw [toAdd_pow, toAdd_one, nsmul_eq_mul, mul_eq_zero] at h
+  exact h.resolve_left (Nat.cast_ne_zero.2 hm.ne')
+
 /-- The determinant weight does not depend on the chosen degree-one element: replacing `γ` by
 `u γ` for a degree-zero element `u` leaves it unchanged, because the determinant character takes
 finitely many values on the degree-zero subgroup and `ℝ` is torsion-free.
@@ -98,7 +113,8 @@ finitely many values on the degree-zero subgroup and `ℝ` is torsion-free.
 theorem detWeight_mul_of_mem_ker {deg : W →* Multiplicative ℤ} (ρ : Representation k W V)
     (hdet : ρ.HasFiniteGeometricDet deg) (χ : RealCharacter k) (γ : W) {u : W}
     (hu : u ∈ deg.ker) : ρ.detWeight χ (u * γ) = ρ.detWeight χ γ := by
-  sorry
+  rw [detWeight, detWeight, map_mul, map_mul, toAdd_mul,
+    ρ.toAdd_apply_detCharacter_eq_zero hdet χ hu, zero_add]
 
 /-- The rank-counted weight multiset of a family of subrepresentations: the determinant weight of
 `Vs j` occurs `dim Vs j` times. -/
@@ -110,6 +126,8 @@ noncomputable def weightMultiset {ι : Type*} [Fintype ι] {ρ : Representation 
 end Representation
 
 namespace AlgebraicGeometry.Monodromy.RepresentedDegreeDatum
+
+open Matrix.GeneralLinearGroup
 
 variable {W : Type*} [Group W] {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [Field k]
 
@@ -125,7 +143,57 @@ theorem detWeight_eq_of_isPositiveCentralPair (D : RepresentedDegreeDatum W n k)
     (hc : ∀ x ∈ S, Matrix.toLinAlgEquiv' (z : Matrix n n k) x - (c : k) • x ∈ U) :
     (S.subquotient U).detWeight χ D.degreeOneElement =
       Multiplicative.toAdd (χ c) / N := by
-  sorry
+  classical
+  obtain ⟨hN, -, h, hh, _, rfl, hzh⟩ := id hz
+  set Q := S.subquotient U
+  set γ := D.degreeOneElement
+  obtain ⟨p, hp⟩ := exists_evalAlgHom_eq_det_of_mk_eq S.toSubmodule U.toSubmodule
+  -- `p` computes the determinant character of `Q` on `ρ(W)`
+  have hrep (w : W) : evalAlgHom (D.rep w) p = Q.detCharacter w := by
+    rw [Representation.coe_detCharacter_apply]
+    exact hp _ _ fun x ↦ ⟨_, rfl, rfl⟩
+  -- the induced action of `h ∈ H(k)` on `Q`
+  have hG := D.zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy k hh
+  let fh : Module.End k (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) :=
+    Submodule.mapQ _ _ (((h : Matrix n n k).mulVecLin).restrict
+      fun x hx ↦ D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy hG S hx)
+      fun x hx ↦ D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy hG U hx
+  -- by density, `det fh` is a value of the determinant character on `P`
+  obtain ⟨_, ⟨u, rfl⟩, hu⟩ : evalAlgHom h p ∈
+      Units.val '' Set.range fun u : D.deg.ker ↦ Q.detCharacter u :=
+    evalAlgHom_mem_of_mem_zeroLocus_vanishingIdeal (Γ := D.degreeZero.map D.rep) p
+      (hdet.image Units.val)
+      (by rintro _ ⟨w, hw, rfl⟩; exact ⟨_, ⟨⟨w, hw⟩, rfl⟩, (hrep w).symm⟩) hh
+  have hfh : evalAlgHom h p = LinearMap.det fh := hp _ _ fun x ↦ ⟨_, rfl, rfl⟩
+  have hzG := hz.mem_zeroLocus_arithmeticMonodromy
+  -- two descriptions of the action of `z = h Fᴺ` on `Q`
+  have h₁ : evalAlgHom z p = (c : k) ^ Module.finrank k
+      (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) := by
+    rw [hp _ ((c : k) • LinearMap.id) fun x ↦ ⟨⟨_, D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy
+      hzG S x.2⟩, rfl, ?_⟩, LinearMap.det_smul, LinearMap.det_id, mul_one]
+    rw [LinearMap.smul_apply, LinearMap.id_apply, ← Submodule.Quotient.mk_smul, eq_comm,
+      Submodule.Quotient.eq]
+    exact hc x x.2
+  have h₂ : evalAlgHom z p = LinearMap.det fh * Q.detCharacter (γ ^ N) := by
+    rw [Representation.coe_detCharacter_apply, ← map_mul]
+    refine hp _ _ fun x ↦ ⟨_, ?_, rfl⟩
+    rw [← hzh, Units.val_mul, ← Matrix.mulVec_mulVec]
+    simp only [frobenius, γ, ← map_pow]
+    rfl
+  have hunit : c ^ Module.finrank k (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) =
+      Q.detCharacter (u * γ ^ N) := Units.ext <| by
+    rw [Units.val_pow_eq_pow_val, map_mul, Units.val_mul, ← h₁, h₂, ← hfh, ← hu]
+  have h₃ := congr(Multiplicative.toAdd (χ $hunit))
+  rw [map_pow, toAdd_pow, map_mul, map_mul, toAdd_mul,
+    Q.toAdd_apply_detCharacter_eq_zero hdet χ u.2, zero_add, map_pow, map_pow, toAdd_pow,
+    nsmul_eq_mul, nsmul_eq_mul] at h₃
+  obtain ⟨x, hxS, hxU⟩ := SetLike.exists_of_lt hUS
+  have : Nontrivial (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) :=
+    ⟨Submodule.Quotient.mk ⟨x, hxS⟩, 0, by rwa [Ne, Submodule.Quotient.mk_eq_zero]⟩
+  have hr := Module.finrank_pos (R := k)
+    (M := S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype)
+  rw [Representation.detWeight, div_eq_div_iff (by positivity) (by positivity)]
+  linarith
 
 end AlgebraicGeometry.Monodromy.RepresentedDegreeDatum
 

@@ -225,6 +225,23 @@ theorem commutator_zeroLocus_le_zeroLocus_geometricMonodromy (R : Type*) [CommRi
     (Subgroup.commutator_mem_commutator (Subgroup.mem_top w₁) (Subgroup.mem_top w₂)),
     map_commutatorElement D.rep w₁ w₂⟩
 
+variable {D} in
+/-- The central element of a positive central pair lies in the arithmetic monodromy group. -/
+theorem IsPositiveCentralPair.mem_zeroLocus_arithmeticMonodromy {N : ℕ} {z : GL n k}
+    (hz : D.IsPositiveCentralPair N z) : z ∈ zeroLocus D.arithmeticMonodromy k :=
+  ((mem_zeroLocus_center_iff _).1 hz.2.1).1
+
+/-- The `k`-points of the arithmetic monodromy group preserve every subrepresentation of the
+defining representation: invariance under `ρ(W)` passes to its Zariski closure.
+(blueprint: `sk-i-restriction`) -/
+theorem mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy {g : GL n k}
+    (hg : g ∈ zeroLocus D.arithmeticMonodromy k) (S : Subrepresentation D.asRepresentation)
+    {x : n → k} (hx : x ∈ S) : (g : Matrix n n k) *ᵥ x ∈ S :=
+  mulVec_mem_of_mem_zeroLocus_vanishingIdeal (Γ := D.rep.range) (S := S.toSubmodule)
+    (by
+      rintro _ ⟨w, rfl⟩ y hy
+      simpa [asRepresentation] using S.apply_mem_toSubmodule w hy) hg hx
+
 section Lie
 
 open AlgebraicGeometry CategoryTheory
