@@ -159,7 +159,11 @@ lemma isPullback_over_toProjInt :
   IsPullback.of_hasPullback _ _
 
 /-- **`ℙ(n; S)` is proper over `S`**: for a finite index type `n`, the structure morphism
-`ℙ(n; S) ↘ S` is proper, being a base change of the proper morphism `ℙⁿ_ℤ ⟶ Spec ℤ`. -/
+`ℙ(n; S) ↘ S` is proper, being a base change of the proper morphism `ℙⁿ_ℤ ⟶ Spec ℤ`.
+
+Together with the instances for closed immersions and composites, `inferInstance` shows that
+`i ≫ ℙ(n; S) ↘ S` is proper for any closed immersion `i : X ⟶ ℙ(n; S)`: projective morphisms
+are proper (blueprint: `lem-pc-projective-proper`). -/
 instance instIsProper [Finite n] : IsProper (ℙ(n; S) ↘ S) := by
   have hZ : terminal.from (Spec (.of (ULift.{u} ℤ))) =
       (specULiftZIsTerminal.uniqueUpToIso terminalIsTerminal).hom := terminal.hom_ext _ _
