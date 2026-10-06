@@ -154,8 +154,8 @@ public import WeilConjectures.FromJoel.CategoryTheory.QuotientThree
 public import WeilConjectures.FromJoel.CategoryTheory.QuotientTwo
 public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor
 public import WeilConjectures.GroupTheory.TateModule
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
