@@ -9,7 +9,9 @@ public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 
@@ -187,7 +189,14 @@ Let `X` be proper over `K`, let `Z` be separated and locally of finite type over
 `g : X ×_K Y ⟶ Z` be a morphism of `K`-schemes and let `y₀ ∈ Y`. For `y : Y` let
 `g_y : X_{κ(y)} ⟶ Z_{κ(y)}` be the fibre of `(g, pr₂) : X ×_K Y ⟶ Z ×_K Y` over `y`. If the
 image of `g_{y₀}` is finite, then the image of `g_y` is finite for every `y` in some open
-neighbourhood of `y₀`.
+neighbourhood of `y₀`. This is also blueprint `lem-sc-finite-image-locus-open`.
+
+Following the blueprint, apply Stacks Tag 0AH8
+(`exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage`) to `h = (g, pr₂)` over
+`Y`: as `h ≫ pr₂ = pr₂` is proper and `pr₂ : Z ×_K Y ⟶ Y` is separated and locally of finite type,
+the image of `h` is finite over an open neighbourhood `U` of `y₀`, so its fibres over the points of
+`U` are finite. The image of `g_y` is identified with `h (pr₂⁻¹ {y})` by
+`Scheme.Hom.finite_range_fiberMap_iff`.
 
 The rigidity lemma `AlgebraicGeometry.exists_eq_snd_comp` does not depend on this result. -/
 theorem eventually_finite_image {X Y Z : Scheme.{u}} (fX : X ⟶ Spec (.of K))
@@ -201,8 +210,21 @@ theorem eventually_finite_image {X Y Z : Scheme.{u}} (fX : X ⟶ Spec (.of K))
     ∀ᶠ y in 𝓝 y₀, (Set.range (Scheme.Hom.fiberMap
       (pullback.lift (f := fZ) (g := fY) g (pullback.snd fX fY)
         (by rw [hg, pullback.condition]))
-      (pullback.lift_snd _ _ _) (Y.fromSpecResidueField y)).base).Finite :=
-  sorry
+      (pullback.lift_snd _ _ _) (Y.fromSpecResidueField y)).base).Finite := by
+  set h := pullback.lift (f := fZ) (g := fY) g (pullback.snd fX fY)
+    (by rw [hg, pullback.condition])
+  have hh : h ≫ pullback.snd fZ fY = pullback.snd fX fY := pullback.lift_snd _ _ _
+  replace hy₀ := (Scheme.Hom.finite_range_fiberMap_iff h hh y₀).1 hy₀
+  have : IsProper (h ≫ pullback.snd fZ fY) := by rw [hh]; infer_instance
+  obtain ⟨U, hy₀U, hU⟩ := exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage
+    h (pullback.snd fZ fY) y₀ (by rwa [hh])
+  filter_upwards [U.isOpen.mem_nhds hy₀U] with y hy
+  refine (Scheme.Hom.finite_range_fiberMap_iff h hh y).2 ?_
+  refine ((Scheme.Hom.finite_preimage_singleton_of_isFinite_morphismRestrict
+    (h.imageι ≫ pullback.snd fZ fY) hy).image h.imageι).subset ?_
+  rintro _ ⟨x, hx, rfl⟩
+  refine ⟨h.toImage x, ?_, ?_⟩ <;>
+    simp_all [← Scheme.Hom.comp_apply, -Scheme.Hom.comp_base]
 
 /-- Blueprint `sk-prop-av-rigidity`: The rigidity lemma
 
