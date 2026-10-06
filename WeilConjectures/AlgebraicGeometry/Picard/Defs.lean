@@ -52,6 +52,8 @@ difference being expressed with the tensor product of modules.
   `AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized` and
   `AlgebraicGeometry.bijective_pic_split`: the split exact sequence
   `0 → Pic T → Pic (X_T) → Pic_{X/S}(T) → 0` (blueprint `sk-prop-picard-pic-split`).
+- `AlgebraicGeometry.picardFunctorNormalized_eq_of_iso_tensorObj`: two `σ`-normalized classes
+  which differ by a module pulled back from the base are equal.
 - `AlgebraicGeometry.isSheaf_picardFunctorNormalized`: the `σ`-normalized relative Picard
   functor is an fppf sheaf (blueprint `sk-cor-picard-pic-sheaf`).
 - `AlgebraicGeometry.nonempty_picardFunctor_iso_of_isPullback`: the relative Picard functor is
@@ -444,6 +446,40 @@ theorem bijective_pic_split (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 
       (Modules.nonempty_pullback_tensorObj_iso _ _ _).some ≪≫
       (e₀ ⊗ᵢ pullbackSectionBaseChangeSndIso f σ hσ T _) ≪≫ λ_ _⟩)
       (toPicardFunctor_app_eq_of_iso f _ _ N (fromSkeletonToSkeletonIso M))⟩
+
+/-- **Normalized classes differing by a class from the base are equal.** If two `σ`-normalized
+classes `ℒ, ℒ' ∈ Pic_{X/S,σ}(T)` are of the form `ℒ ≅ P ⊗ f_T^* 𝒩` and `ℒ' ≅ P ⊗ f_T^* 𝒩'`
+for the same module `P` on `X_T`, then `ℒ = ℒ'`: pulling back along `σ_T` gives
+`𝒪_T ≅ σ_T^* P ⊗ 𝒩` and `𝒪_T ≅ σ_T^* P ⊗ 𝒩'`, hence `𝒩 ≅ 𝒩'` and `ℒ ≅ ℒ'`.
+
+This is the injectivity of `Pic_{X/S,σ}(T) → Pic (X_T) / Pic T` behind the splitting
+`AlgebraicGeometry.bijective_pic_split`, in a form that needs no hypothesis on `f`. -/
+theorem picardFunctorNormalized_eq_of_iso_tensorObj (f : X ⟶ S) (σ : S ⟶ X)
+    (hσ : σ ≫ f = 𝟙 S) {T : Over S}
+    (L L' : (picardFunctorNormalized f σ hσ).toFunctor.obj (.op T))
+    (P : (Limits.pullback f T.hom).Modules) (N N' : T.left.Modules)
+    (e : (fromSkeleton _).obj L.1.val ≅
+      P ⊗ (Modules.pullback (Limits.pullback.snd f T.hom)).obj N)
+    (e' : (fromSkeleton _).obj L'.1.val ≅
+      P ⊗ (Modules.pullback (Limits.pullback.snd f T.hom)).obj N') :
+    L = L' := by
+  have key (M : (picardFunctorNormalized f σ hσ).toFunctor.obj (.op T)) (Q : T.left.Modules)
+      (eM : (fromSkeleton _).obj M.1.val ≅
+        P ⊗ (Modules.pullback (Limits.pullback.snd f T.hom)).obj Q) :
+      Nonempty (𝟙_ T.left.Modules ≅
+        (Modules.pullback (sectionBaseChange f σ hσ T)).obj P ⊗ Q) := by
+    obtain ⟨n⟩ := Pic.nonempty_iso_unit_of_map_eq _ M.2
+    obtain ⟨t⟩ := Modules.nonempty_pullback_tensorObj_iso (sectionBaseChange f σ hσ T) P
+      ((Modules.pullback (Limits.pullback.snd f T.hom)).obj Q)
+    exact ⟨n.symm ≪≫ (Modules.pullback _).mapIso eM ≪≫ t ≪≫
+      whiskerLeftIso _ (pullbackSectionBaseChangeSndIso f σ hσ T Q)⟩
+  obtain ⟨n⟩ := key L N e
+  obtain ⟨n'⟩ := key L' N' e'
+  -- `𝒪_T ≅ A ⊗ 𝒩` and `𝒪_T ≅ A ⊗ 𝒩'` give `𝒩 ≅ 𝒩'`.
+  let i : N ≅ N' := (λ_ N).symm ≪≫ whiskerRightIso n' N ≪≫ whiskerRightIso (β_ _ N') N ≪≫
+    α_ N' _ N ≪≫ whiskerLeftIso N' n.symm ≪≫ ρ_ N'
+  exact Subtype.ext (Pic.eq_iff_nonempty_iso.2
+    ⟨e ≪≫ whiskerLeftIso P ((Modules.pullback _).mapIso i) ≪≫ e'.symm⟩)
 
 end Split
 

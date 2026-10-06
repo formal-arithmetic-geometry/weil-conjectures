@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Module.Torsion.Basic
 public import Mathlib.AlgebraicGeometry.Group.Abelian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
@@ -26,6 +27,7 @@ the `n`-torsion subgroup scheme and isogenies; the order of a finite group schem
 
 - `AlgebraicGeometry.torsionSubgroupScheme`: the `n`-torsion subgroup scheme `G[n]`.
   Being a kernel, it is itself a group scheme (`CategoryTheory.GrpObj.instGrpObjKer`).
+- `AlgebraicGeometry.torsionByEquiv`: the `K`-points of `G[n]` are the `n`-torsion of `G(K)`.
 - `AlgebraicGeometry.IsIsogeny`: a surjective homomorphism of group schemes with finite kernel.
 - `AlgebraicGeometry.isogenyDegree`: the degree of an isogeny, the order of its kernel.
 
@@ -89,6 +91,22 @@ noncomputable def torsionSubgroupScheme (G : Over (Spec (.of K))) [GrpObj G] (n 
 noncomputable instance (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
     GrpObj (torsionSubgroupScheme G n) :=
   inferInstanceAs (GrpObj (GrpObj.ker (𝟙 G ^ n)))
+
+/-- The `K`-points of the `n`-torsion subgroup scheme `G[n]` of a commutative group scheme `G`
+are the `n`-torsion points of `G`: the `n`-torsion of the group `G(K)`, written additively, is
+in bijection with `𝟙_ (Over (Spec (.of K))) ⟶ G[n]`, a point `x` of `G[n]` corresponding to
+its image `x ≫ GrpObj.kerι (𝟙 G ^ n)` in `G(K)`. -/
+noncomputable def torsionByEquiv (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
+    AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of K))) ⟶ G)) (n : ℤ) ≃
+      (𝟙_ (Over (Spec (.of K))) ⟶ torsionSubgroupScheme G n) :=
+  (Equiv.subtypeEquiv (p := fun x ↦ x ∈ AddSubgroup.torsionBy _ (n : ℤ))
+    (q := fun x ↦ x ∈ MonoidHom.ker (IsMonHom.monoidHom (𝟙 G ^ n) (𝟙_ _))) Additive.toMul
+    fun x ↦ by
+      rw [MonoidHom.mem_ker, AddSubgroup.torsionBy, Submodule.mem_toAddSubgroup,
+        Submodule.mem_torsionBy_iff, natCast_zsmul]
+      change n • x = 0 ↔ x.toMul ≫ 𝟙 G ^ n = 1
+      rw [comp_pow, Category.comp_id]
+      rfl).trans (GrpObj.kerRepresentableBy (𝟙 G ^ n)).homEquiv.symm
 
 /-- Blueprint `sk-def-av-isogeny`: Isogenies and their degree.
 

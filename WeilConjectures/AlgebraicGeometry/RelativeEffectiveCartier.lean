@@ -25,7 +25,8 @@ We state the two criteria that the Picard framework needs:
 * a locally principal closed subscheme of a flat, locally finitely presented `X/S` whose fibres
   are effective Cartier divisors is a relative effective Cartier divisor;
 * on a proper smooth `X/S` of relative dimension `1`, a relative effective Cartier divisor is
-  finite locally free over `S`.
+  finite locally free over `S`, and conversely, on a smooth `X/S` of relative dimension `1`, a
+  closed subscheme finite locally free over `S` is a relative effective Cartier divisor.
 
 ## Main statements
 
@@ -33,6 +34,8 @@ We state the two criteria that the Picard framework needs:
   (blueprint `lem-pc-recd-locally-principal`).
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.isFinite_and_locallyOfFinitePresentation`
   (blueprint `lem-pc-cartier-criterion`, `(2) ⇒ (1)` for proper `X/S`).
+- `AlgebraicGeometry.Scheme.IdealSheafData.isInvertible_of_isFinite_of_flat`
+  (blueprint `lem-pc-cartier-criterion`, `(1) ⇒ (2)`).
 -/
 
 @[expose] public section
@@ -68,6 +71,17 @@ theorem IsInvertible.isFinite_and_locallyOfFinitePresentation (π : X ⟶ S)
     [IsProper π] [SmoothOfRelativeDimension 1 π] {J : X.IdealSheafData} (hJ : J.IsInvertible)
     (hflat : Flat (J.subschemeι ≫ π)) :
     IsFinite (J.subschemeι ≫ π) ∧ LocallyOfFinitePresentation (J.subschemeι ≫ π) :=
+  sorry
+
+/-- **Finite locally free closed subschemes of a smooth curve are divisors.** Let `π : X ⟶ S`
+be smooth of relative dimension `1`, and let `D ⊆ X` be a closed subscheme, with ideal `J`,
+which is finite locally free over `S`: `D ⟶ S` is finite, flat and locally of finite
+presentation. Then `J` is invertible, so `D` is a relative effective Cartier divisor on `X/S`.
+
+(Stacks, Tag 0B9D; blueprint: `lem-pc-cartier-criterion`, the implication `(1) ⇒ (2)`) -/
+theorem isInvertible_of_isFinite_of_flat (π : X ⟶ S) [SmoothOfRelativeDimension 1 π]
+    {J : X.IdealSheafData} (hfin : IsFinite (J.subschemeι ≫ π)) (hflat : Flat (J.subschemeι ≫ π))
+    (hlfp : LocallyOfFinitePresentation (J.subschemeι ≫ π)) : J.IsInvertible :=
   sorry
 
 end AlgebraicGeometry.Scheme.IdealSheafData

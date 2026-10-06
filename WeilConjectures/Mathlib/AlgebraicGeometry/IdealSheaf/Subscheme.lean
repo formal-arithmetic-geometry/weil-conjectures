@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Complements on the subscheme cut out by an ideal sheaf
@@ -66,7 +67,10 @@ The inclusion `I.subschemeι` is a closed immersion, hence affine, so `V(I)` is 
 
 The subscheme cut out by the vanishing ideal of a closed subset `Z` is reduced: on an affine open
 `U` it is `Spec (Γ(X, U) ⧸ I)` for a radical ideal `I`
-(`AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme_vanishingIdeal`).
+(`AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme_vanishingIdeal`). Applied to
+the closure of a point of height one, it shows that a scheme of finite positive dimension has a
+closed subscheme of dimension one
+(`AlgebraicGeometry.Scheme.exists_isClosedImmersion_topologicalKrullDim_eq_one`).
 
 ## The closed subscheme cut out by global sections
 
@@ -80,6 +84,7 @@ complement of the basic open `X_f` when `s = {f}`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeι_specMap_fromSpec`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme_vanishingIdeal`
+- `AlgebraicGeometry.Scheme.exists_isClosedImmersion_topologicalKrullDim_eq_one`
 - `AlgebraicGeometry.Scheme.zeroLocusSubscheme` and its closed immersion
   `AlgebraicGeometry.Scheme.zeroLocusSubschemeι`, with
   `AlgebraicGeometry.Scheme.range_zeroLocusSubschemeι`
@@ -159,6 +164,22 @@ lemma range_subschemeι_ofIdealTop_span (s : Set Γ(X, ⊤)) :
 end AlgebraicGeometry.Scheme.IdealSheafData
 
 namespace AlgebraicGeometry.Scheme
+
+/-- A scheme of finite positive dimension has a closed subscheme of dimension one: the reduced
+induced subscheme structure on the closure of a point of height one. -/
+theorem exists_isClosedImmersion_topologicalKrullDim_eq_one {X : Scheme.{u}}
+    (h1 : 1 ≤ topologicalKrullDim X) (htop : topologicalKrullDim X ≠ ⊤) :
+    ∃ (C : Scheme.{u}) (i : C ⟶ X), IsClosedImmersion i ∧ topologicalKrullDim C = 1 := by
+  obtain ⟨z, hz⟩ := exists_topologicalKrullDim_closure_singleton_eq_one h1 htop
+  let I := IdealSheafData.vanishingIdeal ⟨closure {z}, isClosed_closure⟩
+  refine ⟨I.subscheme, I.subschemeι, inferInstance, ?_⟩
+  have hr : Set.range I.subschemeι = closure {z} := by
+    rw [IdealSheafData.range_subschemeι, IdealSheafData.coe_support_vanishingIdeal]
+    rfl
+  rw [← hz]
+  exact IsHomeomorph.topologicalKrullDim_eq _
+    ((I.subschemeι.isClosedEmbedding.isEmbedding.toHomeomorph.trans
+      (Homeomorph.setCongr hr)).isHomeomorph)
 
 variable (X : Scheme.{u})
 

@@ -6,15 +6,24 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # Abelian varieties are projective
 
 An abelian variety admits a closed immersion into a projective space over the base field, hence
-carries an ample invertible module, and the symmetrisation `L ⊗ [-1]^* L` of an ample invertible
+carries an ample invertible module (blueprint `sk-prop-av-projective`, Stacks 0BFA), and the
+symmetrisation `L ⊗ [-1]^* L` of an ample invertible
 module is again ample and is symmetric.
+
+An abelian variety is a group scheme of finite type over `K`, hence quasi-projective: it admits
+an immersion into a projective space over `K`
+(`AlgebraicGeometry.GrpObj.exists_isImmersion_projectiveSpace`, Stacks 0BF7). Being proper, the
+immersion is closed (`AlgebraicGeometry.IsClosedImmersion.of_comp_of_isSeparated`), which is the
+case `S = Spec K` of Stacks 0B45.
 
 `AlgebraicGeometry.IsVeryAmple` is a genuine definition, and so is the tensor product
 `AlgebraicGeometry.Scheme.Modules.tensorObj` (see
@@ -56,25 +65,43 @@ noncomputable def Scheme.Modules.symmetrisation {A : Over (Spec (.of K))} [GrpOb
     (L : A.left.Modules) : A.left.Modules :=
   tensorObj L (overPullback ι[A] L)
 
-/-- Blueprint `sk-prop-av-projective`: Abelian varieties are projective.
+/-- Blueprint `sk-prop-av-projective` (also `lem-sc-abelian-variety-projective`): Abelian
+varieties are projective.
 
 Every abelian variety `A` over a field `K` admits a closed immersion into a projective space
 over `Spec K` compatible with the structure morphisms. The index type of the projective space
 is called `α`; `ι`, the usual name for an index type, is unavailable as an identifier here,
-being the token of the inversion notation `ι[A]`. -/
+being the token of the inversion notation `ι[A]`.
+
+The proof follows Stacks 0BFA: `A` is a group scheme of finite type over `K`, so it admits an
+immersion into a projective space over `K` (Stacks 0BF7), and an immersion of the proper
+`K`-scheme `A` into the separated `K`-scheme `ℙ(α; Spec K)` is closed (Stacks 0B45). -/
 theorem IsAbelianVariety.exists_isClosedImmersion_projectiveSpace (A : Over (Spec (.of K)))
     [GrpObj A] [IsAbelianVariety A] :
     ∃ (α : Type u) (_ : Finite α) (j : A.left ⟶ ℙ(α; Spec (.of K))),
-      IsClosedImmersion j ∧ j ≫ ℙ(α; Spec (.of K)) ↘ Spec (.of K) = A.hom :=
-  sorry
+      IsClosedImmersion j ∧ j ≫ ℙ(α; Spec (.of K)) ↘ Spec (.of K) = A.hom := by
+  obtain ⟨α, _, j, hj, hjA⟩ := GrpObj.exists_isImmersion_projectiveSpace A
+  refine ⟨α, inferInstance, j, ?_, hjA⟩
+  have : IsProper (j ≫ ℙ(α; Spec (.of K)) ↘ Spec (.of K)) := hjA ▸ inferInstance
+  exact IsClosedImmersion.of_comp_of_isSeparated j (ℙ(α; Spec (.of K)) ↘ Spec (.of K))
 
-/-- Blueprint `sk-prop-av-projective`: Abelian varieties are projective.
+/-- Blueprint `sk-prop-av-projective` (also `lem-sc-abelian-variety-projective`): Abelian
+varieties are projective.
 
-Being projective, an abelian variety carries an ample invertible `𝒪_A`-module. -/
+Being projective, an abelian variety carries an ample invertible `𝒪_A`-module, namely the
+pullback `j^* 𝒪(1)` of the twisting sheaf along a closed immersion `j` into a projective space:
+it is very ample, and equal to its first tensor power. -/
 theorem IsAbelianVariety.exists_isAmple (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] :
-    ∃ M : A.left.Modules, M.IsInvertible ∧ IsAmple A.hom M :=
-  sorry
+    ∃ M : A.left.Modules, M.IsInvertible ∧ IsAmple A.hom M := by
+  obtain ⟨α, _, j, hj, hjA⟩ := exists_isClosedImmersion_projectiveSpace A
+  have hM : IsVeryAmple A.hom (ProjectiveSpace.twistRestrict j 1) :=
+    ⟨α, j, inferInstance, hj, hjA, ⟨Iso.refl _⟩⟩
+  refine ⟨_, hM.isInvertible, 1, one_pos, ?_⟩
+  obtain ⟨β, i, hβ, hi, hiA, ⟨e⟩⟩ := hM
+  refine ⟨β, i, hβ, hi, hiA, ⟨e ≪≫ ?_⟩⟩
+  rw [tensorPow_succ, tensorPow_zero]
+  exact (ρ_ _).symm
 
 /-- Blueprint `sk-prop-av-symmetric-ample`: A symmetric ample module.
 
