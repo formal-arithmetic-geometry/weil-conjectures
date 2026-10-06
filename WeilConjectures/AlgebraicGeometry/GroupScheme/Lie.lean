@@ -12,6 +12,8 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!
 # The Lie algebra of a group scheme
@@ -304,6 +306,10 @@ theorem lieEquiv_mul (v w : infPoints G) : lieEquiv G (v * w) = lieEquiv G v + l
 theorem lieEquiv_one : lieEquiv G 1 = 0 := by
   sorry
 
+theorem lieEquiv_symm_add (x y : Lie G) :
+    (lieEquiv G).symm (x + y) = (lieEquiv G).symm x * (lieEquiv G).symm y :=
+  (lieEquiv G).injective (by simp [lieEquiv_mul])
+
 /-! ### The bracket as the mixed term of the commutator -/
 
 /-- The points of `G` over `S[ε][δ]` reducing to the identity both for `ε = 0` and for `δ = 0`. -/
@@ -369,6 +375,90 @@ noncomputable instance : LieRing (Lie G) where
 noncomputable instance : LieAlgebra Γ(S, ⊤) (Lie G) where
   lie_smul := by sorry
 
+/-! ### Rescaling infinitesimal points -/
+
+omit [GrpObj G] in
+/-- The morphism `g^*Ω¹_{G/S} ⟶ 𝒪_S` attached to a derivation `d : 𝒪_G → g_*𝒪_S` over `f⁻¹𝒪_S`,
+for a morphism `g : S ⟶ G`: the universal property of `Ω¹_{G/S}` and the adjunction
+`g^* ⊣ g_*`. -/
+noncomputable def homOfDerivation (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) :
+    (Scheme.Modules.pullback g).obj G.hom.cotangentSheaf ⟶ Scheme.Modules.unitModule S :=
+  ((Scheme.Modules.pullbackPushforwardAdjunction _).homEquiv _ _).symm
+    ((PresheafOfModules.sheafificationHomEquiv (𝟙 _)).symm
+      ((PresheafOfModules.DifferentialsConstruction.isUniversal' _).desc D))
+
+omit [GrpObj G] in
+theorem omegaHom_eq_homOfDerivation (v : dualNumbersOver S ⟶ G) :
+    omegaHom G v = homOfDerivation G _ (infDerivation G v) :=
+  rfl
+
+omit [GrpObj G] in
+/-- Multiplying the morphism attached to a derivation by a global function `r` multiplies the
+derivation by `r`. -/
+theorem homOfDerivation_comp_unitSmul (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) (r : Γ(S, ⊤)) :
+    homOfDerivation G g D ≫ Scheme.Modules.unitSmul r = homOfDerivation G g
+      (D.postcomp ((Scheme.Modules.pushforward g).map (Scheme.Modules.unitSmul r)).val) := by
+  rw [homOfDerivation, homOfDerivation, ← Adjunction.homEquiv_naturality_right_symm,
+    ← PresheafOfModules.Derivation.Universal.desc_comp]
+  exact congrArg _ (PresheafOfModules.sheafificationHomEquiv_symm_comp _ _ _).symm
+
+/-- The morphisms `ω_{G/S} ⟶ 𝒪_S` attached to derivations along two morphisms `g₁ = g₂ = e` agree
+if the derivations do. -/
+theorem pullbackCongr_inv_comp_homOfDerivation {g₁ g₂ : S ⟶ G.left} (h₁ : g₁ = unitSection G)
+    (h₂ : g₂ = unitSection G)
+    (D₁ : ((Scheme.Modules.pushforward g₁).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom)
+    (D₂ : ((Scheme.Modules.pushforward g₂).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom)
+    (hD : ∀ {V : (TopologicalSpace.Opens G.left)ᵒᵖ} (a : Γ(G.left, V.unop)), D₁.d a ≍ D₂.d a) :
+    (Scheme.Modules.pullbackCongr h₁).inv.app G.hom.cotangentSheaf ≫ homOfDerivation G g₁ D₁ =
+      (Scheme.Modules.pullbackCongr h₂).inv.app G.hom.cotangentSheaf ≫
+        homOfDerivation G g₂ D₂ := by
+  subst h₁ h₂
+  obtain rfl : D₁ = D₂ := by
+    ext V a
+    exact eq_of_heq (hD a)
+  rfl
+
+variable (S) in
+/-- The rescaling `S[ε] ⟶ S[ε]`, `ε ↦ rε`, as a morphism over `S`. -/
+noncomputable def dualNumbersScaleOver (r : Γ(S, ⊤)) : dualNumbersOver S ⟶ dualNumbersOver S :=
+  Over.homMk (S.dualNumbersScale r) (S.dualNumbersScale_comp_proj r)
+
+theorem dualNumbersScaleOver_comp_mem_infPoints (r : Γ(S, ⊤)) {v : dualNumbersOver S ⟶ G}
+    (hv : v ∈ infPoints G) : dualNumbersScaleOver S r ≫ v ∈ infPoints G := by
+  rw [mem_infPoints] at hv ⊢
+  rw [← hv, ← Category.assoc]
+  congr 1
+  exact Over.OverMorphism.ext (S.dualNumbersι_comp_dualNumbersScale r)
+
+/-- The rescaling `v ↦ v(rε)` of an infinitesimal point by a global function `r`. It is the
+multiplication by `r` on the Lie algebra (`toLie_infPointsScale`). -/
+noncomputable def infPointsScale (r : Γ(S, ⊤)) (v : infPoints G) : infPoints G :=
+  ⟨dualNumbersScaleOver S r ≫ v.1, dualNumbersScaleOver_comp_mem_infPoints G r v.2⟩
+
+theorem toLie_infPointsScale (r : Γ(S, ⊤)) (v : infPoints G) :
+    toLie G (infPointsScale G r v) = r • toLie G v := by
+  rw [Scheme.Modules.homUnit_smul_def, toLie, toLie, Category.assoc, omegaHom_eq_homOfDerivation,
+    omegaHom_eq_homOfDerivation, homOfDerivation_comp_unitSmul]
+  refine pullbackCongr_inv_comp_homOfDerivation G _ _ _ _ fun {V} a ↦ heq_of_eq ?_
+  rw [PresheafOfModules.Derivation.postcomp_d_apply]
+  change (DualNumber.scaleRingHom _ (v.1.left.app V.unop a)).snd =
+    (v.1.left.app V.unop a).snd * S.presheaf.map (homOfLE le_top).op r
+  rw [DualNumber.snd_scaleRingHom, mul_comm]
+  rfl
+
+theorem lieEquiv_symm_smul (r : Γ(S, ⊤)) (x : Lie G) :
+    (lieEquiv G).symm (r • x) = infPointsScale G r ((lieEquiv G).symm x) := by
+  rw [Equiv.symm_apply_eq]
+  change _ = toLie G _
+  rw [toLie_infPointsScale]
+  exact congrArg (r • ·) ((lieEquiv G).apply_symm_apply x).symm
+
 /-! ### Functoriality -/
 
 variable {G} {H : Over S} [GrpObj H]
@@ -394,6 +484,30 @@ group commutators and commutes with `η ↦ εδ`. -/
 theorem infPointsMap_infBracket (f : G ⟶ H) [IsMonHom f] (v w : infPoints G) :
     infPointsMap f (infBracket G v w) = infBracket H (infPointsMap f v) (infPointsMap f w) := by
   sorry
+
+@[simp]
+theorem infPointsMap_id : infPointsMap (𝟙 G) = MonoidHom.id _ :=
+  MonoidHom.ext fun _ ↦
+    Subtype.ext ((coe_infPointsMap_apply _ _).trans (Category.comp_id _))
+
+theorem infPointsMap_comp {K : Over S} [GrpObj K] (f : G ⟶ H) (g : H ⟶ K) [IsMonHom f]
+    [IsMonHom g] : infPointsMap (f ≫ g) = (infPointsMap g).comp (infPointsMap f) :=
+  MonoidHom.ext fun _ ↦
+    Subtype.ext ((coe_infPointsMap_apply _ _).trans (Category.assoc _ _ _).symm)
+
+theorem infPointsMap_injective (f : G ⟶ H) [IsMonHom f] [Mono f] :
+    Function.Injective (infPointsMap f) :=
+  fun _ _ h ↦ Subtype.ext ((cancel_mono f).1 (congrArg Subtype.val h))
+
+theorem mixedEquiv_one : mixedEquiv G 1 = 1 :=
+  Subtype.ext (MonObj.comp_one _)
+
+/-- The bracket of two infinitesimal points vanishes if their points `v_ε` and `w_δ` over
+`S[ε][δ]` commute. -/
+theorem infBracket_eq_one {v w : infPoints G} (h : Commute (toε G v) (toδ G w)) :
+    infBracket G v w = 1 := by
+  rw [infBracket, Equiv.symm_apply_eq, mixedEquiv_one]
+  exact Subtype.ext (by simp [h.eq])
 
 /-- Let `f : G ⟶ H` be a monomorphism of group schemes, a subgroup scheme of `H`. If the
 commutators of the points of `H` over `S[ε][δ]` factor through `G`, then the bracket of two
@@ -436,9 +550,17 @@ variable {G} {H : Over (Spec (.of R))} [GrpObj H]
 (blueprint: `sk-d-tangent`) -/
 noncomputable def differential (f : G ⟶ H) [IsMonHom f] : Lie G →ₗ⁅R⁆ Lie H where
   toFun x := lieEquiv H (infPointsMap f ((lieEquiv G).symm x))
-  map_add' := by sorry
-  map_smul' := by sorry
-  map_lie' := by sorry
+  map_add' x y := by
+    simp only [lieEquiv_symm_add, map_mul, lieEquiv_mul]
+  map_smul' c x := by
+    change _ = c • lieEquiv H _
+    rw [show c • x = (Scheme.ΓSpecIso (.of R)).inv.hom c • x from rfl, lieEquiv_symm_smul,
+      show infPointsMap f (infPointsScale G _ ((lieEquiv G).symm x)) =
+        infPointsScale H _ (infPointsMap f ((lieEquiv G).symm x)) from
+          Subtype.ext ((coe_infPointsMap_apply _ _).trans (Category.assoc _ _ _))]
+    exact toLie_infPointsScale H _ _
+  map_lie' {x y} := by
+    simp only [lie_def, Equiv.symm_apply_apply, infPointsMap_infBracket]
 
 theorem differential_apply (f : G ⟶ H) [IsMonHom f] (x : Lie G) :
     differential f x = lieEquiv H (infPointsMap f ((lieEquiv G).symm x)) :=
@@ -448,18 +570,18 @@ theorem differential_congr {f g : G ⟶ H} [IsMonHom f] [IsMonHom g] (e : f = g)
     differential f = differential g := by
   subst e; rfl
 
-theorem differential_id : differential (𝟙 G) = LieHom.id := by
-  sorry
+theorem differential_id : differential (𝟙 G) = LieHom.id :=
+  LieHom.ext fun x ↦ by simp [differential_apply]
 
 theorem differential_comp {K : Over (Spec (.of R))} [GrpObj K] (f : G ⟶ H) (g : H ⟶ K)
-    [IsMonHom f] [IsMonHom g] : differential (f ≫ g) = (differential g).comp (differential f) := by
-  sorry
+    [IsMonHom f] [IsMonHom g] : differential (f ≫ g) = (differential g).comp (differential f) :=
+  LieHom.ext fun x ↦ by simp [differential_apply, infPointsMap_comp]
 
 /-- The differential of a monomorphism of group schemes, for instance of a closed immersion, is
 injective. -/
 theorem differential_injective (f : G ⟶ H) [IsMonHom f] [Mono f] :
-    Function.Injective (differential f) := by
-  sorry
+    Function.Injective (differential f) := fun _ _ h ↦
+  (lieEquiv G).symm.injective (infPointsMap_injective f ((lieEquiv H).injective h))
 
 /-- If the commutators of the points of `H` over `Spec R[ε, δ]/(ε², δ²)` factor through the
 subgroup scheme `f : G ⟶ H`, then the brackets of tangent vectors of `H` are tangent to `G`: the
@@ -487,14 +609,39 @@ so the mixed term `⁅df(x), y⁆` of their commutator vanishes. (blueprint: `sk
 theorem range_differential_le_center (f : G ⟶ H) [IsMonHom f]
     (hf : ∀ (X : Over (Spec (.of R))) (a : X ⟶ G) (b : X ⟶ H), (a ≫ f) * b = b * (a ≫ f)) :
     (differential f).range ≤ (LieAlgebra.center R (Lie H) : LieSubalgebra R (Lie H)) := by
-  sorry
+  rintro _ ⟨x, rfl⟩
+  refine (LieModule.mem_maxTrivSubmodule R (Lie H) (Lie H) _).2 fun y ↦ ?_
+  rw [lie_def, LieHom.coe_toLinearMap, differential_apply, Equiv.symm_apply_apply,
+    infBracket_eq_one, lieEquiv_one]
+  exact (hf _ (dualNumbersProjδOver _ ≫ ((lieEquiv G).symm x).1)
+    (dualNumbersProjεOver _ ≫ ((lieEquiv H).symm y).1)).symm
 
 /-- The differential of an open immersion of group schemes `f : G ⟶ H` is bijective: every
 infinitesimal point of `H` has the same underlying map as the identity section, hence factors
 through the open subscheme `G`. -/
 theorem differential_bijective_of_isOpenImmersion (f : G ⟶ H) [IsMonHom f]
     [IsOpenImmersion f.left] : Function.Bijective (differential f) := by
-  sorry
+  have : Mono f := Over.mono_of_mono_left f
+  refine ⟨differential_injective f, fun y ↦ ?_⟩
+  set w := (lieEquiv H).symm y
+  have hrange : Set.range w.1.left.base ⊆ Set.range f.left.base := by
+    rintro _ ⟨z, rfl⟩
+    refine ⟨(unitSection G).base z, ?_⟩
+    have h1 := congrArg (fun φ : Spec (.of R) ⟶ H.left ↦ φ.base z) (ι_comp_left_eq H w.2)
+    have h2 := congrArg (fun φ : Spec (.of R) ⟶ H.left ↦ φ.base z)
+      (congrArg CommaMorphism.left (IsMonHom.one_hom f))
+    exact h2.trans h1.symm
+  let v : dualNumbersOver _ ⟶ G := Over.homMk (IsOpenImmersion.lift f.left w.1.left hrange)
+    (by rw [← Over.w f, IsOpenImmersion.lift_fac_assoc, Over.w w.1])
+  have hvf : v ≫ f = w.1 := Over.OverMorphism.ext (IsOpenImmersion.lift_fac _ _ _)
+  have hv : v ∈ infPoints G := by
+    rw [mem_infPoints]
+    apply (cancel_mono f).1
+    rw [Category.assoc, hvf, MonObj.one_comp]
+    exact (mem_infPoints H).1 w.2
+  refine ⟨lieEquiv G ⟨v, hv⟩, ?_⟩
+  rw [differential_apply, Equiv.symm_apply_apply, ← (lieEquiv H).apply_symm_apply y]
+  exact congrArg (lieEquiv H) (Subtype.ext hvf)
 
 /-- An open immersion of group schemes `G ⟶ H` identifies `Lie(G)` with `Lie(H)`. -/
 noncomputable def lieEquivOfIsOpenImmersion (f : G ⟶ H) [IsMonHom f] [IsOpenImmersion f.left] :

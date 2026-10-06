@@ -36,6 +36,8 @@ values in the ring `k[ε]`.
   projection `X[ε] ⟶ X` and the closed immersion `X ⟶ X[ε]`.
 - `AlgebraicGeometry.Scheme.Hom.dualNumbers`: the morphism `f[ε] : X[ε] ⟶ Y[ε]`.
 - `AlgebraicGeometry.Scheme.dualNumbersMul`: the map `X[ε][δ] ⟶ X[η]`, `η ↦ εδ`.
+- `AlgebraicGeometry.Scheme.dualNumbersScale`: the rescaling `X[ε] ⟶ X[ε]`, `ε ↦ rε`, by a global
+  function `r`.
 - `AlgebraicGeometry.Scheme.dualNumbersToSpec`: the isomorphism `(Spec R)[ε] ⟶ Spec R[ε]`.
 
 ## Implementation notes
@@ -83,6 +85,26 @@ theorem mapRingHom_id : mapRingHom (RingHom.id R) = RingHom.id R[ε] := by
 theorem mapRingHom_comp (f : R →+* S) (g : S →+* T) :
     mapRingHom (g.comp f) = (mapRingHom g).comp (mapRingHom f) := by
   sorry
+
+/-- Rescaling `ε ↦ rε`: the ring endomorphism `a + εb ↦ a + ε rb` of `R[ε]`. -/
+def scaleRingHom (r : R) : R[ε] →+* R[ε] where
+  toFun x := inl x.fst + inr (r * x.snd)
+  map_one' := by ext <;> simp
+  map_mul' x y := by ext <;> simp; ring
+  map_zero' := by ext <;> simp
+  map_add' x y := by ext <;> simp; ring
+
+@[simp]
+theorem fst_scaleRingHom (r : R) (x : R[ε]) : (scaleRingHom r x).fst = x.fst := by
+  simp [scaleRingHom]
+
+@[simp]
+theorem snd_scaleRingHom (r : R) (x : R[ε]) : (scaleRingHom r x).snd = r * x.snd := by
+  simp [scaleRingHom]
+
+theorem mapRingHom_comp_scaleRingHom (f : R →+* S) (r : R) :
+    (mapRingHom f).comp (scaleRingHom r) = (scaleRingHom (f r)).comp (mapRingHom f) := by
+  ext x <;> simp
 
 /-- The ring homomorphism `R[η] → R[ε][δ]`, `a + ηb ↦ a + εδ b`, recording the mixed infinitesimal
 term of the two-parameter dual numbers `R[ε][δ] = R[ε, δ]/(ε², δ²)`. -/
@@ -173,6 +195,63 @@ noncomputable def dualNumbersMul : X.dualNumbers.dualNumbers ⟶ X.dualNumbers w
   c := Functor.whiskerLeft X.presheaf CommRingCat.dualNumberMul ≫
     (TopCat.Presheaf.Pushforward.id _).inv
   prop := by sorry
+
+/-- The rescaling `ε ↦ rε` of `𝒪_X[ε]` by a global function `r`, as a morphism of presheafed
+spaces `X[ε] ⟶ X[ε]`. -/
+noncomputable def dualNumbersScaleHom (r : Γ(X, ⊤)) :
+    X.dualNumbers.toPresheafedSpace ⟶ X.dualNumbers.toPresheafedSpace where
+  base := 𝟙 _
+  c :=
+    { app U := CommRingCat.ofHom
+        (DualNumber.scaleRingHom (X.presheaf.map (homOfLE le_top : U.unop ⟶ ⊤).op r))
+      naturality U V f := by
+        ext x
+        change DualNumber.scaleRingHom _ (DualNumber.mapRingHom (X.presheaf.map f).hom x) =
+          DualNumber.mapRingHom (X.presheaf.map f).hom (DualNumber.scaleRingHom _ x)
+        rw [← RingHom.comp_apply, ← RingHom.comp_apply,
+          DualNumber.mapRingHom_comp_scaleRingHom]
+        congr 3
+        rw [← CommRingCat.comp_apply, ← Functor.map_comp]
+        rfl } ≫ (TopCat.Presheaf.Pushforward.id _).inv
+
+theorem ι_comp_dualNumbersScaleHom (r : Γ(X, ⊤)) :
+    X.dualNumbersι.toPshHom ≫ X.dualNumbersScaleHom r = X.dualNumbersι.toPshHom := by
+  refine PresheafedSpace.ext _ _ rfl ?_
+  ext U x
+  simp only [Functor.comp_obj, Functor.op_obj, PresheafedSpace.comp_base, eqToHom_refl,
+    Functor.whiskerRight_id', TopCat.Presheaf.comp_app, TopCat.Presheaf.pushforward_obj_obj,
+    Opens.map_comp_obj, PresheafedSpace.comp_c_app, NatTrans.id_app, Category.comp_id,
+    CommRingCat.hom_comp, RingHom.coe_comp, Function.comp_apply]
+  change (DualNumber.scaleRingHom _ x).fst = x.fst
+  exact DualNumber.fst_scaleRingHom _ _
+
+/-- The rescaling `X[ε] ⟶ X[ε]`, `ε ↦ rε`, by a global function `r`: the identity on points and
+`a + εb ↦ a + ε rb` on functions. It is a morphism of schemes since it fixes `X ⟶ X[ε]`. -/
+noncomputable def dualNumbersScale (r : Γ(X, ⊤)) : X.dualNumbers ⟶ X.dualNumbers where
+  toHom := X.dualNumbersScaleHom r
+  prop y := by
+    have h := PresheafedSpace.stalkMap.comp X.dualNumbersι.toPshHom (X.dualNumbersScaleHom r) y
+    rw [PresheafedSpace.stalkMap.congr_hom _ _ (ι_comp_dualNumbersScaleHom X r),
+      eqToHom_refl, Category.id_comp] at h
+    have := X.dualNumbersι.prop y
+    rw [h, CommRingCat.hom_comp] at this
+    exact @isLocalHom_of_comp _ _ _ _ _ _ _ _ this
+
+@[reassoc (attr := simp)]
+theorem dualNumbersι_comp_dualNumbersScale (r : Γ(X, ⊤)) :
+    X.dualNumbersι ≫ X.dualNumbersScale r = X.dualNumbersι :=
+  Scheme.Hom.ext' (LocallyRingedSpace.Hom.ext' (ι_comp_dualNumbersScaleHom X r))
+
+@[reassoc (attr := simp)]
+theorem dualNumbersScale_comp_proj (r : Γ(X, ⊤)) :
+    X.dualNumbersScale r ≫ X.dualNumbersProj = X.dualNumbersProj := by
+  refine Scheme.Hom.ext' (LocallyRingedSpace.Hom.ext' (PresheafedSpace.ext _ _ rfl ?_))
+  ext U x
+  simp only [Functor.comp_obj, Functor.op_obj, eqToHom_refl, Functor.whiskerRight_id',
+    TopCat.Presheaf.comp_app, TopCat.Presheaf.pushforward_obj_obj, NatTrans.id_app,
+    Category.comp_id]
+  change DualNumber.scaleRingHom _ (inl x) = inl x
+  ext <;> simp
 
 variable {X} {Y : Scheme.{u}}
 
