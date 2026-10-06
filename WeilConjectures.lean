@@ -117,6 +117,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SegreTwist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Zero
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
