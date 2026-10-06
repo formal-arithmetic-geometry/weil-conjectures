@@ -17,7 +17,7 @@ generating families are indexed by one-element types.
 
 The rank-one case of `SheafOfModules.IsFiniteLocallyFreeOfRank` and
 `SheafOfModules.IsInvertible` say the same thing up to the difference between `Fin 1` and a
-`Unique` index type; the two are not related by a lemma here, since nothing below needs it.
+`Unique` index type (`SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one`).
 
 ## Main definitions
 
@@ -36,6 +36,8 @@ The rank-one case of `SheafOfModules.IsFiniteLocallyFreeOfRank` and
 - `SheafOfModules.IsInvertible.of_iso` and `SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso`:
   invertibility and finite local freeness of rank `r` only depend on the isomorphism class.
 - `SheafOfModules.instIsInvertibleUnit`: the unit sheaf `𝒪` is invertible.
+- `SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one`: a sheaf of modules is
+  invertible if and only if it is finite locally free of rank one.
 -/
 
 @[expose] public section
@@ -176,6 +178,14 @@ instance (priority := 100) IsInvertible.isFiniteLocallyFree (M : SheafOfModules.
   refine ⟨q, inferInstance, ⟨fun i ↦ ⟨?_⟩⟩⟩
   have := (hq.nonempty_unique i).some
   infer_instance
+
+/-- A sheaf of modules is invertible if and only if it is finite locally free of rank one. -/
+theorem isInvertible_iff_isFiniteLocallyFreeOfRank_one (M : SheafOfModules.{u} R) :
+    M.IsInvertible ↔ M.IsFiniteLocallyFreeOfRank 1 := by
+  refine ⟨fun ⟨q, hq⟩ ↦ ⟨q, inferInstance, fun i ↦ ?_⟩, fun ⟨q, hq, hr⟩ ↦ ⟨q, ?_⟩⟩
+  · have := (hq.nonempty_unique i).some
+    exact ⟨Equiv.ofUnique _ _⟩
+  · exact { toIsLocallyFreeData := hq, nonempty_unique i := ⟨(hr i).some.unique⟩ }
 
 end
 

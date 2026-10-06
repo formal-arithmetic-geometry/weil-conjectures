@@ -501,6 +501,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersio
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.IsIso
@@ -686,6 +687,7 @@ public import WeilConjectures.Mathlib.RingTheory.Etale.Section
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 public import WeilConjectures.Mathlib.RingTheory.Flat.DescentAlgebra
 public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Descent
 public import WeilConjectures.Mathlib.RingTheory.Flat.LocallyFree
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
