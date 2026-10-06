@@ -50,7 +50,7 @@ coefficients", i.e. integer relations among the `e i` have coefficients divisibl
 every element killed by `ℓ` is an integer combination of the `e i`. If `ℓ ^ k • z i = e i`,
 then integer relations among the `z i` have coefficients divisible by `ℓ ^ (k + 1)`, and every
 element killed by `ℓ ^ (k + 1)` is an integer combination of the `z i`. -/
-private theorem sum_zsmul_dvd_and_exists_of_pow_zsmul_eq (ℓ : ℤ) (e : ι → D)
+theorem sum_zsmul_dvd_and_exists_of_pow_zsmul_eq (ℓ : ℤ) (e : ι → D)
     (he : ∀ c : ι → ℤ, ∑ i, c i • e i = 0 → ∀ i, ℓ ∣ c i)
     (he' : ∀ x : D, ℓ • x = 0 → ∃ c : ι → ℤ, x = ∑ i, c i • e i) (k : ℕ) (z : ι → D)
     (hz : ∀ i, ℓ ^ k • z i = e i) :
@@ -81,16 +81,15 @@ private theorem sum_zsmul_dvd_and_exists_of_pow_zsmul_eq (ℓ : ℤ) (e : ι →
 
 end
 
-/-- Blueprint `sk-prop-av-divisible-structure`: The torsion of a divisible group.
-
-This is also the blueprint lemma `lem-sc-divisible-group-structure`.
-
-Let `D` be a divisible abelian group, let `ℓ` be a prime and suppose that the `ℓ`-torsion of
-`D` is finite of order `ℓ ^ r`. Then for every `n` the `ℓ ^ n`-torsion of `D` is isomorphic
-to `(ℤ / ℓ ^ n) ^ r`. -/
-theorem nonempty_addEquiv_torsionBy_of_natCard_eq (D : Type*) [AddCommGroup D]
-    [DivisibleBy D ℤ] (ℓ : ℕ) [Fact ℓ.Prime] (r : ℕ) (hr : Nat.card D[(ℓ : ℤ)] = ℓ ^ r) (n : ℕ) :
-    Nonempty (D[((ℓ : ℤ) ^ n)] ≃+ (Fin r → ZMod (ℓ ^ n))) := by
+/-- If the `ℓ`-torsion of an abelian group `D` has order `ℓ ^ r`, then it has an "integral
+basis": a family `e : Fin r → D` of `ℓ`-torsion elements such that integer relations among the
+`e i` have coefficients divisible by `ℓ`, and every element killed by `ℓ` is an integer
+combination of the `e i`. -/
+theorem exists_basis_torsionBy (D : Type*) [AddCommGroup D] (ℓ : ℕ) [Fact ℓ.Prime] (r : ℕ)
+    (hr : Nat.card D[(ℓ : ℤ)] = ℓ ^ r) :
+    ∃ e : Fin r → D, (∀ i, (ℓ : ℤ) • e i = 0) ∧
+      (∀ c : Fin r → ℤ, ∑ i, c i • e i = 0 → ∀ i, (ℓ : ℤ) ∣ c i) ∧
+      ∀ x : D, (ℓ : ℤ) • x = 0 → ∃ c : Fin r → ℤ, x = ∑ i, c i • e i := by
   have hℓ : ℓ.Prime := Fact.out
   -- an `𝔽_ℓ`-basis `e` of `D[ℓ]`
   let _ : Module (ZMod ℓ) D[(ℓ : ℤ)] := torsionBy.zmodModule
@@ -117,6 +116,20 @@ theorem nonempty_addEquiv_torsionBy_of_natCard_eq (D : Type*) [AddCommGroup D]
     refine Finset.sum_congr rfl fun i _ ↦ ?_
     conv_lhs => rw [← ZMod.intCast_zmod_cast (b.repr ⟨x, hx⟩ i), Int.cast_smul_eq_zsmul]
     rfl
+  exact ⟨e, fun i ↦ (Submodule.mem_torsionBy_iff _ _).1 (b i).2, he, he'⟩
+
+/-- Blueprint `sk-prop-av-divisible-structure`: The torsion of a divisible group.
+
+This is also the blueprint lemma `lem-sc-divisible-group-structure`.
+
+Let `D` be a divisible abelian group, let `ℓ` be a prime and suppose that the `ℓ`-torsion of
+`D` is finite of order `ℓ ^ r`. Then for every `n` the `ℓ ^ n`-torsion of `D` is isomorphic
+to `(ℤ / ℓ ^ n) ^ r`. -/
+theorem nonempty_addEquiv_torsionBy_of_natCard_eq (D : Type*) [AddCommGroup D]
+    [DivisibleBy D ℤ] (ℓ : ℕ) [Fact ℓ.Prime] (r : ℕ) (hr : Nat.card D[(ℓ : ℤ)] = ℓ ^ r) (n : ℕ) :
+    Nonempty (D[((ℓ : ℤ) ^ n)] ≃+ (Fin r → ZMod (ℓ ^ n))) := by
+  have hℓ : ℓ.Prime := Fact.out
+  obtain ⟨e, he₀, he, he'⟩ := exists_basis_torsionBy D ℓ r hr
   cases n with
   | zero =>
     rw [pow_zero, pow_zero]
@@ -139,7 +152,7 @@ theorem nonempty_addEquiv_torsionBy_of_natCard_eq (D : Type*) [AddCommGroup D]
       refine (Submodule.mem_torsionBy_iff _ _).2 ?_
       push_cast
       rw [pow_succ', mul_smul, hy]
-      exact (b i).2
+      exact (Submodule.mem_torsionBy_iff _ _).2 (he₀ i)
     let f := Fintype.linearCombination (ZMod (ℓ ^ (m + 1))) fun i ↦
       (⟨y i, hyN i⟩ : D[((ℓ ^ (m + 1) : ℕ) : ℤ)])
     have hf : ∀ c : Fin r → ℤ, (f fun i ↦ (c i : ZMod (ℓ ^ (m + 1))) : D) = ∑ i, c i • y i := by

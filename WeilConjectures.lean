@@ -71,6 +71,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Image
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
+public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Representability
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
@@ -102,9 +103,11 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalization
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
+public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
+public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
 public import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.PoincareDualitySetting
@@ -119,6 +122,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.MonomialCech
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SegreTwist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Zero
@@ -507,6 +511,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersio
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
