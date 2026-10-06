@@ -233,6 +233,19 @@ geometric stalk `F_x̄` is nonzero. -/
 def support : Set X.finitePoints :=
   {x | Nontrivial (F.stalk x).carrier}
 
+variable {F} in
+/-- Isomorphic Weil sheaves have the same support: an isomorphism of the underlying étale
+sheaves induces isomorphisms of all their stalks. -/
+theorem support_congr {G : WeilSheaf k₀ l X} (e : F ≅ G) : F.support = G.support := by
+  ext x
+  let e' : F.obj.carrier ≅ G.obj.carrier :=
+    (ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _).mapIso e
+  let f := WeilCoefficients.linearEquivOfIso
+    ((Scheme.pointSmallEtale (Scheme.Hom.geometricFiberPointOfFinitePoint
+      (X ↘ Spec (CommRingCat.of k₀)) x)).ulift.{u + 1}.sheafFiber.mapIso e')
+  exact ⟨fun h ↦ @Equiv.nontrivial _ _ f.symm.toEquiv h,
+    fun h ↦ @Equiv.nontrivial _ _ f.toEquiv h⟩
+
 /-- The trace function `t_{F,n}` of a Weil sheaf: the trace `Tr(F_x^{(n)} | F_x̄)` of the
 Frobenius relative to `𝔽_{qⁿ}` on the stalk at an `𝔽_{qⁿ}`-rational point `x`, taken at the
 geometric point over `x` for an embedding `𝔽_{qⁿ} ↪ k̄` chosen by `IsAlgClosed.lift`.
@@ -289,6 +302,18 @@ theorem HasWeightsAtMost.mono {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ 
 `P_x(F, T) = det(1 - T Fₓ | F_x̄)` has real coefficients. -/
 def IsReal (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : Prop :=
   ∀ x : X.finitePoints, (F.stalk x).IsReal ι
+
+/-- `F` is `ι`-*realizable* if it is a direct summand of an `ι`-real lisse Weil sheaf
+(Deligne, Weil II, (1.2.13)). (blueprint: `def-wf-iota-real`) -/
+def IsRealizable (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : Prop :=
+  ∃ (G : WeilSheaf k₀ l X) (i : F ⟶ G) (r : G ⟶ F), G.IsLisse ∧ G.IsReal ι ∧ i ≫ r = 𝟙 F
+
+-- TODO(adic): with pro-étale coefficients the stalk functor is additive, and the Weil
+-- structure of `F ⊞ G` is the sum of those of `F` and `G`.
+/-- The stalk of a direct sum is the direct sum of the stalks, with the diagonal Frobenius. -/
+theorem nonempty_equiv_stalk_biprod (G : WeilSheaf k₀ l X) (x : X.finitePoints) :
+    Nonempty (((F ⊞ G).stalk x).Equiv ((F.stalk x).prod (G.stalk x))) := by
+  sorry
 
 section GlobalSections
 

@@ -11,6 +11,7 @@ public import Mathlib.NumberTheory.Padics.Complex
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.Endofunctor.Shift
+public import WeilConjectures.ConstructibleSheaf.Biproduct
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
@@ -243,6 +244,17 @@ finite locally constant, being constructible. The blueprint notion, lisse of fin
 `E_X`-modules, awaits pro-étale coefficients. -/
 def IsLisse (F : WeilSheaf k₀ l X) : Prop :=
   Scheme.IsLocallyConstantSheaf F.obj.carrier
+
+/-- A direct sum of lisse Weil sheaves is lisse: the underlying étale sheaf of `F ⊞ G` is the
+direct sum of those of `F` and `G`. -/
+theorem IsLisse.biprod {F G : WeilSheaf k₀ l X} (hF : F.IsLisse) (hG : G.IsLisse) :
+    (F ⊞ G).IsLisse := by
+  let Φ := ObjectProperty.ι (objectProperty k₀ l X) ⋙ IsoAlgebra.forget (frobeniusPullback k₀ l X)
+  have : Scheme.IsLocallyConstantSheaf (Φ.obj F) := hF
+  have : Scheme.IsLocallyConstantSheaf (Φ.obj G) := hG
+  have := Scheme.IsLocallyConstantSheaf.biprod (Φ.obj F) (Φ.obj G)
+  have : PreservesBinaryBiproducts Φ := preservesBinaryBiproducts_of_preservesBiproducts _
+  exact Scheme.IsLocallyConstantSheaf.of_iso (Φ.mapBiprod F G).symm
 
 end WeilSheaf
 
