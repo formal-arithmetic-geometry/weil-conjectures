@@ -30,6 +30,8 @@ varieties are the same thing.
   geometrically integral over the base field.
 - `AlgebraicGeometry.IsAbelianVariety.irreducibleSpace`: its underlying space is irreducible.
 - `AlgebraicGeometry.IsAbelianVariety.isCommMonObj`: an abelian variety is commutative.
+- `AlgebraicGeometry.IsAbelianVariety.pullback`: the base change of an abelian variety to an
+  extension field is an abelian variety.
 -/
 
 @[expose] public section
@@ -82,5 +84,21 @@ variety satisfies (see Stacks 04KV for geometric connectedness). -/
 instance IsAbelianVariety.isCommMonObj (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] : IsCommMonObj A :=
   isCommMonObj_of_isProper_of_geometricallyIntegral A
+
+/-- The base change `A_L` of an abelian variety `A` over `K` along a field extension
+`Spec L ⟶ Spec K` is an abelian variety over `L`: properness and smoothness are stable under base
+change, and `A_L` is connected because `A`, being connected with a rational point (the unit), is
+geometrically connected (Stacks 04KV).
+
+This is used in the proof of blueprint `lem-sc-mult-n-finite-kernel`. -/
+instance IsAbelianVariety.pullback {L : Type u} [Field L] (g : Spec (.of L) ⟶ Spec (.of K))
+    (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A] :
+    IsAbelianVariety ((Over.pullback g).obj A) := by
+  have hη : η[A].left ≫ A.hom = 𝟙 _ := by simp
+  have := GeometricallyConnected.of_connectedSpace_of_section A.hom η[A].left hη
+  exact { toIsProper := inferInstanceAs (IsProper (pullback.snd _ _))
+          toSmooth := inferInstanceAs (Smooth (pullback.snd _ _))
+          toConnectedSpace := pullback_of_geometrically
+            (GeometricallyConnected.geometrically_connectedSpace (f := A.hom)) _ _ }
 
 end AlgebraicGeometry

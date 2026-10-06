@@ -281,6 +281,11 @@ instance Etale.isIso_openImmersionRestrictionLowerStarAdjunction_counit :
 instance Etale.openImmersionRestriction_additive :
     (Etale.openImmersionRestriction A j).Additive where
 
+/-- The restriction `j^*` along an open immersion on étale sheaves with values in a `Λ`-linear
+category is `Λ`-linear. -/
+instance Etale.openImmersionRestriction_linear (Λ : Type*) [Semiring Λ] [Linear Λ A] :
+    (Etale.openImmersionRestriction A j).Linear Λ where
+
 namespace Etale
 
 /-- The lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for the small
@@ -311,6 +316,12 @@ instance : (Etale.openImmersionRestriction A j).IsRightAdjoint :=
 preadditive category is additive, being left adjoint to the additive restriction `j^*`. -/
 instance Etale.openImmersionLowerShriek_additive : (j)_!open[A].Additive :=
   (Etale.openImmersionLowerShriekAdjunction A j).left_adjoint_additive
+
+/-- The extension by zero `j_!` along an open immersion on étale sheaves with values in a
+`Λ`-linear category is `Λ`-linear, being left adjoint to the `Λ`-linear restriction `j^*`. -/
+instance Etale.openImmersionLowerShriek_linear (Λ : Type*) [Semiring Λ] [Linear Λ A] :
+    (j)_!open[A].Linear Λ :=
+  (Etale.openImmersionLowerShriekAdjunction A j).left_adjoint_linear
 
 /-- The extension by zero `j_!` along an open immersion on étale sheaves with values in an
 abelian category is exact. This is the left exactness half.

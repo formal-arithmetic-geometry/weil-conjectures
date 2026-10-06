@@ -67,6 +67,12 @@ project has:
 * the two adjunctions are `derivedUpperStarLowerStarAdjunction` and
   `rightDerivedUpperShriekAdjunction`.
 
+The pro-étale `Rf_!` is not a left adjoint in general (blueprint `sk-rem-sf-fullcd-scope`),
+so every use of `f^!` carries the hypothesis `[(R(f)_![A]).IsLeftAdjoint]`, and the
+correspondence structures carry it for their exceptional leg. For identities and composites it
+follows from the package (`GeometricOperations.isLeftAdjoint_rightDerivedLowerShriek_id`,
+`GeometricOperations.isLeftAdjoint_rightDerivedLowerShriek_comp`).
+
 The coefficients are an arbitrary Grothendieck abelian monoidal closed category `A` rather
 than the blueprint's finite ring `𝒪_E/ϖⁿ`; the intended instantiation is
 `A = ModuleCat (𝒪_E/ϖⁿ)`. Constructibility on the pro-étale site is not available, so the
@@ -199,7 +205,8 @@ whose last map is the exceptional adjoint of
 `RpX_! (pX^* M ⊗ᴸ pY^* ω) ≃ RpX_! pY^* ω ⊗ᴸ M ──t──▶ A_X ⊗ᴸ M ≃ M`.
 `GeometricOperations.kunnethVerdierMap` instantiates it with the package data. -/
 noncomputable def kunnethVerdierMapOf {X Y Z : Scheme.{u}} {pX : Z ⟶ X} {pY : Z ⟶ Y}
-    [HasCompactification pX] {ω : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    [HasCompactification pX] [(R(pX)_![A]).IsLeftAdjoint]
+    {ω : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
     (μ : ((upperStar A pY).leftDerivedFunctor).CoreMonoidal)
     (pf : (rightDerivedLowerShriek A pX).prod
           (𝟭 (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))) ⋙
@@ -244,13 +251,15 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   dualizing {X : Scheme.{u}} (a : X ⟶ s) :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)
   /-- `ω_X` is `a_X^! A` whenever `a_X` admits a compactification. -/
-  dualizingIso {X : Scheme.{u}} (a : X ⟶ s) [HasCompactification a] :
+  dualizingIso {X : Scheme.{u}} (a : X ⟶ s) [HasCompactification a]
+      [(R(a)_![A]).IsLeftAdjoint] :
     dualizing a ≅ (rightDerivedUpperShriek A a).obj (𝟙_ _)
   /-- the normalisation `ω_s ≃ A_s` of the dualizing complex of the base. -/
   dualizingBase :
     dualizing (𝟙 s) ≅ 𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))
   /-- dualizing composition: `f^! ω_Y ≃ ω_X`. -/
-  dualizingComp {X Y : Scheme.{u}} (f : X ⟶ Y) (a : Y ⟶ s) [HasCompactification f] :
+  dualizingComp {X Y : Scheme.{u}} (f : X ⟶ Y) (a : Y ⟶ s) [HasCompactification f]
+      [(R(f)_![A]).IsLeftAdjoint] :
     (rightDerivedUpperShriek A f).obj (dualizing a) ≅ dualizing (f ≫ a)
   /-- `Rf_* = Rf_!` for proper `f`. -/
   properComparison {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [IsProper f] :
@@ -305,12 +314,14 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   /-- the normalisation `ω_s ≃ A_s` is `ω_s ≃ (𝟙 s)^! A_s ≃ A_s`, the second map being the
   identity isomorphism of `(𝟙 s)^!`, the conjugate of `lowerShriekId s`. -/
   dualizingBase_eq :
+    haveI := Functor.isLeftAdjoint_of_iso (lowerShriekId s).symm
     dualizingBase = dualizingIso (𝟙 s) ≪≫
       (conjugateIsoEquiv Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 s))
         (lowerShriekId s)).symm.app (𝟙_ _)
   /-- for `f = 𝟙 X`, `dualizingComp` is `(𝟙 X)^! ω_X ≃ ω_X`, the identity isomorphism of
   `(𝟙 X)^!` (the conjugate of `lowerShriekId X`), transported along `𝟙 X ≫ a = a`. -/
   dualizingComp_id {X : Scheme.{u}} (a : X ⟶ s) :
+    haveI := Functor.isLeftAdjoint_of_iso (lowerShriekId X).symm
     dualizingComp (𝟙 X) a =
       (conjugateIsoEquiv Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 X))
         (lowerShriekId X)).symm.app (dualizing a) ≪≫
@@ -342,7 +353,9 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   of the composition isomorphism of `(-)^!` (the conjugate of `lowerShriekComp f g`),
   `dualizingComp g a` and `dualizingComp f (g ≫ a)`, transported along associativity. -/
   dualizingComp_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (a : Z ⟶ s)
-      [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
+      [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+      [(R(f)_![A]).IsLeftAdjoint] [(R(g)_![A]).IsLeftAdjoint] :
+    haveI := Functor.isLeftAdjoint_of_iso (lowerShriekComp f g)
     dualizingComp (f ≫ g) a =
       (conjugateIsoEquiv (rightDerivedUpperShriekAdjunction A (f ≫ g))
           ((rightDerivedUpperShriekAdjunction A f).comp (rightDerivedUpperShriekAdjunction A g))
@@ -446,8 +459,8 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   available on `pullback aY aX`. -/
   isIso_kunnethVerdierMap {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} {pX : Z ⟶ X}
       {pY : Z ⟶ Y} [s.IsSpecOfField] [HasCompactification aX] [QuasiCompact aX]
-      [HasCompactification aY] [QuasiCompact aY]
-      (sq : IsPullback pX pY aX aY) [HasCompactification pX]
+      [HasCompactification aY] [QuasiCompact aY] [(R(aY)_![A]).IsLeftAdjoint]
+      (sq : IsPullback pX pY aX aY) [HasCompactification pX] [(R(pX)_![A]).IsLeftAdjoint]
       (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hM : ctf X M)
       (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) (hN : ctf Y N) :
     IsIso (kunnethVerdierMapOf A (upperStarMonoidal pY) (projectionFormula pX)
@@ -517,11 +530,28 @@ noncomputable def upperStarTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
       ((upperStar A f).leftDerivedFunctor).obj M ⊗ ((upperStar A f).leftDerivedFunctor).obj N :=
   ((G.upperStarMonoidal f).μIso M N).symm
 
+include G in
+/-- `R(𝟙 X)_!` is a left adjoint, being isomorphic to `𝟭` by the field `lowerShriekId`. -/
+lemma isLeftAdjoint_rightDerivedLowerShriek_id (X : Scheme.{u}) :
+    (R(𝟙 X)_![A]).IsLeftAdjoint :=
+  Functor.isLeftAdjoint_of_iso (G.lowerShriekId X).symm
+
+include G in
+/-- `R(f ≫ g)_!` is a left adjoint if `Rf_!` and `Rg_!` are, being isomorphic to
+`Rf_! ⋙ Rg_!` by the field `lowerShriekComp`. -/
+lemma isLeftAdjoint_rightDerivedLowerShriek_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [(R(f)_![A]).IsLeftAdjoint] [(R(g)_![A]).IsLeftAdjoint] :
+    (R(f ≫ g)_![A]).IsLeftAdjoint :=
+  Functor.isLeftAdjoint_of_iso (G.lowerShriekComp f g)
+
 /-- The identity isomorphism `(𝟙 X)^! ≃ 𝟭` of the exceptional inverse image: the conjugate
 of the field `lowerShriekId : R(𝟙 X)_! ≃ 𝟭` along the adjunctions `R(𝟙 X)_! ⊣ (𝟙 X)^!` and
 `𝟭 ⊣ 𝟭`. -/
 noncomputable def upperShriekId (X : Scheme.{u}) :
+    haveI := G.isLeftAdjoint_rightDerivedLowerShriek_id X
     rightDerivedUpperShriek A (𝟙 X) ≅ 𝟭 (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
+  haveI := G.isLeftAdjoint_rightDerivedLowerShriek_id X
   (conjugateIsoEquiv Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 X))
     (G.lowerShriekId X)).symm
 
@@ -536,6 +566,7 @@ of the identity isomorphism of the exceptional inverse image:
 ``` -/
 @[simp]
 lemma conjugateIsoEquiv_lowerShriekId (X : Scheme.{u}) :
+    haveI := G.isLeftAdjoint_rightDerivedLowerShriek_id X
     conjugateIsoEquiv Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 X))
         (G.lowerShriekId X) = (G.upperShriekId X).symm := by
   simp [upperShriekId]
@@ -543,6 +574,7 @@ lemma conjugateIsoEquiv_lowerShriekId (X : Scheme.{u}) :
 /-- The identity isomorphism `𝟭 ≃ (𝟙 X)^!` of the exceptional inverse image: the inverse of
 `GeometricOperations.upperShriekId`. -/
 noncomputable def upperShriekIdIso (X : Scheme.{u}) :
+    haveI := G.isLeftAdjoint_rightDerivedLowerShriek_id X
     𝟭 (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) ≅
       rightDerivedUpperShriek A (𝟙 X) :=
   (G.upperShriekId X).symm
@@ -551,9 +583,12 @@ noncomputable def upperShriekIdIso (X : Scheme.{u}) :
 the conjugate of `GeometricOperations.lowerShriekComp` along the adjunctions
 `R(f ≫ g)_! ⊣ (f ≫ g)^!` and `Rf_! ⋙ Rg_! ⊣ g^! ⋙ f^!`. -/
 noncomputable def upperShriekComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [(R(f)_![A]).IsLeftAdjoint] [(R(g)_![A]).IsLeftAdjoint] :
+    haveI := G.isLeftAdjoint_rightDerivedLowerShriek_comp f g
     rightDerivedUpperShriek A (f ≫ g) ≅
       rightDerivedUpperShriek A g ⋙ rightDerivedUpperShriek A f :=
+  haveI := G.isLeftAdjoint_rightDerivedLowerShriek_comp f g
   conjugateIsoEquiv (rightDerivedUpperShriekAdjunction A (f ≫ g))
     ((rightDerivedUpperShriekAdjunction A f).comp (rightDerivedUpperShriekAdjunction A g))
     (G.lowerShriekComp f g)
@@ -569,7 +604,9 @@ corresponds to the composition isomorphism of the exceptional inverse images:
 ``` -/
 @[simp]
 lemma conjugateIsoEquiv_lowerShriekComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [(R(f)_![A]).IsLeftAdjoint] [(R(g)_![A]).IsLeftAdjoint] :
+    haveI := G.isLeftAdjoint_rightDerivedLowerShriek_comp f g
     conjugateIsoEquiv (rightDerivedUpperShriekAdjunction A (f ≫ g))
         ((rightDerivedUpperShriekAdjunction A f).comp (rightDerivedUpperShriekAdjunction A g))
         (G.lowerShriekComp f g) = G.upperShriekComp f g :=
@@ -584,8 +621,8 @@ composite
 
 of `!`-base change, `dualizingIso`, the counit of `Ra_{Y!} ⊣ a_Y^!` and `upperStarUnit`. -/
 noncomputable def exceptionalTrace {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s}
-    {pX : Z ⟶ X} {pY : Z ⟶ Y} [HasCompactification aY] (sq : IsPullback pX pY aX aY)
-    [HasCompactification pX] :
+    {pX : Z ⟶ X} {pY : Z ⟶ Y} [HasCompactification aY] [(R(aY)_![A]).IsLeftAdjoint]
+    (sq : IsPullback pX pY aX aY) [HasCompactification pX] :
     (rightDerivedLowerShriek A pX).obj (((upperStar A pY).leftDerivedFunctor).obj
         (G.dualizing aY)) ⟶ 𝟙_ _ :=
   (G.baseChange sq.flip).inv.app (G.dualizing aY) ≫
@@ -599,8 +636,9 @@ Cartesian square `Z = X ×_s Y`: `kunnethVerdierMapOf` for the monoidal structur
 `Lp_Y^*`, the projection formula for `p_X` and `GeometricOperations.exceptionalTrace`
 (part of blueprint `sk-thm-sf-kunneth-verdier`). -/
 noncomputable def kunnethVerdierMap {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s}
-    {pX : Z ⟶ X} {pY : Z ⟶ Y} [HasCompactification aY] (sq : IsPullback pX pY aX aY)
-    [HasCompactification pX] (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    {pX : Z ⟶ X} {pY : Z ⟶ Y} [HasCompactification aY] [(R(aY)_![A]).IsLeftAdjoint]
+    (sq : IsPullback pX pY aX aY) [HasCompactification pX] [(R(pX)_![A]).IsLeftAdjoint]
+    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
     (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
     ((upperStar A pX).leftDerivedFunctor).obj M ⊗
         ((upperStar A pY).leftDerivedFunctor).obj (G.verdierDual aY N) ⟶
@@ -615,8 +653,8 @@ field `s = Spec k`: the map `GeometricOperations.kunnethVerdierMap`, invertible 
 `isIso_kunnethVerdierMap` (blueprint: `sk-thm-sf-kunneth-verdier`). -/
 noncomputable def kunnethVerdier {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s}
     {pX : Z ⟶ X} {pY : Z ⟶ Y} [s.IsSpecOfField] [HasCompactification aX] [QuasiCompact aX]
-    [HasCompactification aY] [QuasiCompact aY] (sq : IsPullback pX pY aX aY)
-    [HasCompactification pX]
+    [HasCompactification aY] [QuasiCompact aY] [(R(aY)_![A]).IsLeftAdjoint]
+    (sq : IsPullback pX pY aX aY) [HasCompactification pX] [(R(pX)_![A]).IsLeftAdjoint]
     (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hM : G.ctf X M)
     (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) (hN : G.ctf Y N) :
     ((upperStar A pX).leftDerivedFunctor).obj M ⊗

@@ -83,12 +83,6 @@ noncomputable def Equiv.ofAsModuleLinearEquiv (e : ρ.asModule ≃ₗ[k[G]] σ.a
       σ g (σ.asModuleEquiv (e (ρ.asModuleEquiv.symm v)))
     rw [asModuleEquiv_symm_map_rho, map_smul, asModuleEquiv_map_smul, asAlgebraHom_of]
 
-/-- Irreducibility is invariant under equivalence of representations. -/
-theorem isIrreducible_iff_of_equiv (e : ρ.Equiv σ) : ρ.IsIrreducible ↔ σ.IsIrreducible := by
-  rw [irreducible_iff_isSimpleModule_asModule, irreducible_iff_isSimpleModule_asModule]
-  exact ⟨fun _ ↦ IsSimpleModule.congr e.asModuleLinearEquiv.symm,
-    fun _ ↦ IsSimpleModule.congr e.asModuleLinearEquiv⟩
-
 end Representation
 
 namespace Subrepresentation
@@ -207,6 +201,6 @@ theorem IsConstituent.exists_covBy (hσ : σ.IsConstituent ρ) :
   let E : σ.Equiv (M.subquotient N) :=
     Equiv.ofAsModuleLinearEquiv (e.trans (M.subquotientAsModuleLinearEquiv N).symm)
   exact ⟨N, M, (Subrepresentation.isIrreducible_subquotient_iff hNM).1
-    ((isIrreducible_iff_of_equiv E).1 hirr), ⟨E⟩⟩
+    (E.isIrreducible_iff.1 hirr), ⟨E⟩⟩
 
 end Representation

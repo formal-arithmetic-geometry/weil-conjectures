@@ -10,12 +10,17 @@ public import Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 
 /-!
-# Subquotients of a representation
+# Subquotients of a representation, and translates of subrepresentations
 
 `Mathlib.RepresentationTheory.Subrepresentation` provides the lattice `Subrepresentation ρ` of
 subrepresentations of `ρ : Representation k W V` and, for a single subrepresentation `S`, the
 representation `S.toRepresentation` on `S`.  This file adds the subquotient: for
 subrepresentations `U ≤ S` the representation of `W` on `S ⧸ U`.
+
+It also adds two order isomorphisms of lattices of subrepresentations: the translation
+`U ↦ ρ g U` of subrepresentations of the restriction of `ρ` to a normal subgroup, and the
+identification of the lattices of two representations on the same space with the same invariant
+subspaces.
 
 `U` is presented inside `S` as `U.toSubmodule.comap S.toSubmodule.subtype`, so that no inclusion
 `U ≤ S` is needed to *form* the quotient; the interesting case is of course `U ≤ S`, where the
@@ -24,11 +29,28 @@ quotient is the honest subquotient `S / U`.
 ## Main declarations
 
 * `Subrepresentation.subquotient`: the representation of `W` on `S ⧸ U`.
+* `Subrepresentation.translate`: translation by `g` of subrepresentations of the restriction to a
+  normal subgroup.
+* `Subrepresentation.orderIsoOfForallIff`: representations with the same invariant subspaces have
+  the same lattice of subrepresentations.
 * `Subrepresentation.orderIsoMapComap`: subrepresentations correspond along an equivalence of
   representations, and so do the determinant characters of their subquotients
   (`Subrepresentation.detCharacter_subquotient_orderIsoMapComap`).
 * `Subrepresentation.exists_apply_sub_smul_mem_of_isIrreducible`: Schur's lemma on an irreducible
   subquotient, over an algebraically closed field.
+* `Subrepresentation.comap`, `Subrepresentation.map`: preimages and images along intertwining maps,
+  and `Subrepresentation.subquotientEquivOfIntertwiningMap`: the equivalence of subquotients
+  induced by an intertwining map.
+* `Subrepresentation.exists_lt_isIrreducible_subquotient`: a nonzero subrepresentation of a
+  finite-dimensional representation has an irreducible quotient.
+* `Subrepresentation.exists_subquotient_tprod_equiv`: every irreducible subquotient of `ρ ⊗ σ` is
+  a subquotient of `V_i ⊗ E_j` for irreducible subquotients `V_i` of `ρ` and `E_j` of `σ`.
+
+## Blueprint
+
+`Subrepresentation.exists_subquotient_tprod_equiv` and the lemmas it rests on implement the parts
+`lem-mg-filtered-tensor-product` and `lem-mg-filtration-refinement` of `sk-r-linear-library` that
+`sk-p-tensor` uses.
 -/
 
 @[expose] public section
@@ -190,5 +212,371 @@ theorem exists_apply_sub_smul_mem_of_isIrreducible [IsAlgClosed k] [FiniteDimens
       g (Submodule.Quotient.mk ⟨x, hx⟩)) hc
   rw [← Submodule.Quotient.mk_smul, eq_comm, Submodule.Quotient.eq] at h
   exact h
+
+end Subrepresentation
+
+namespace Subrepresentation
+
+variable {k G V : Type*} [CommSemiring k] [Group G] [AddCommMonoid V] [Module k V]
+
+section Translate
+
+variable (ρ : Representation k G V) (N : Subgroup G) [N.Normal]
+
+/-- For a normal subgroup `N` of `G`, the translate `ρ g U` of a subrepresentation `U` of the
+restriction of `ρ` to `N` is again a subrepresentation: `n (g u) = g ((g⁻¹ n g) u)`. -/
+def translateFun (g : G) (U : Subrepresentation (ρ.comp N.subtype)) :
+    Subrepresentation (ρ.comp N.subtype) where
+  toSubmodule := U.toSubmodule.map (ρ g)
+  apply_mem_toSubmodule n := by
+    rintro _ ⟨u, hu, rfl⟩
+    refine ⟨ρ (g⁻¹ * n * g) u, U.apply_mem_toSubmodule ⟨g⁻¹ * n * g, ?_⟩ hu, ?_⟩
+    · simpa using ‹N.Normal›.conj_mem _ n.2 g⁻¹
+    · simp only [MonoidHom.coe_comp, Subgroup.coe_subtype, Function.comp_apply]
+      rw [← Module.End.mul_apply, ← map_mul, ← Module.End.mul_apply, ← map_mul]
+      simp [mul_assoc]
+
+variable {ρ N} in
+theorem mem_translateFun {g : G} {U : Subrepresentation (ρ.comp N.subtype)} {v : V} :
+    v ∈ translateFun ρ N g U ↔ ρ g⁻¹ v ∈ U := by
+  change v ∈ U.toSubmodule.map (ρ g) ↔ _
+  constructor
+  · rintro ⟨u, hu, rfl⟩
+    rwa [← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one, Module.End.one_apply]
+  · intro hv
+    refine ⟨_, hv, ?_⟩
+    rw [← Module.End.mul_apply, ← map_mul, mul_inv_cancel, map_one, Module.End.one_apply]
+
+/-- Translation `U ↦ ρ g U` by an element `g ∈ G` is an order automorphism of the lattice of
+subrepresentations of the restriction of `ρ` to a normal subgroup `N`. -/
+def translate (g : G) :
+    Subrepresentation (ρ.comp N.subtype) ≃o Subrepresentation (ρ.comp N.subtype) where
+  toFun := translateFun ρ N g
+  invFun := translateFun ρ N g⁻¹
+  left_inv U := SetLike.ext fun v ↦ by
+    simp only [mem_translateFun, inv_inv, ← Module.End.mul_apply, ← map_mul, inv_mul_cancel,
+      map_one, Module.End.one_apply]
+  right_inv U := SetLike.ext fun v ↦ by
+    simp only [mem_translateFun, inv_inv, ← Module.End.mul_apply, ← map_mul, mul_inv_cancel,
+      map_one, Module.End.one_apply]
+  map_rel_iff' {U U'} := by
+    change translateFun ρ N g U ≤ translateFun ρ N g U' ↔ U ≤ U'
+    refine ⟨fun h v hv ↦ ?_, fun h v hv ↦ mem_translateFun.2 (h (mem_translateFun.1 hv))⟩
+    have := @h (ρ g v) (by
+      rwa [mem_translateFun, ← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one,
+        Module.End.one_apply])
+    rwa [mem_translateFun, ← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one,
+      Module.End.one_apply] at this
+
+variable {ρ N} in
+theorem mem_translate {g : G} {U : Subrepresentation (ρ.comp N.subtype)} {v : V} :
+    v ∈ translate ρ N g U ↔ ρ g⁻¹ v ∈ U :=
+  mem_translateFun
+
+end Translate
+
+section OrderIsoOfForallIff
+
+variable {H : Type*} [Monoid H] {ρ : Representation k G V} {σ : Representation k H V}
+
+/-- Two representations on the same module with the same invariant submodules have the same
+subrepresentations. -/
+def orderIsoOfForallIff
+    (h : ∀ U : Submodule k V, (∀ g, ∀ v ∈ U, ρ g v ∈ U) ↔ ∀ g, ∀ v ∈ U, σ g v ∈ U) :
+    Subrepresentation ρ ≃o Subrepresentation σ where
+  toFun U := ⟨U.toSubmodule, fun g _ hv ↦ (h U.toSubmodule).1
+    (fun g _ hv ↦ U.apply_mem_toSubmodule g hv) g _ hv⟩
+  invFun U := ⟨U.toSubmodule, fun g _ hv ↦ (h U.toSubmodule).2
+    (fun g _ hv ↦ U.apply_mem_toSubmodule g hv) g _ hv⟩
+  left_inv _ := rfl
+  right_inv _ := rfl
+  map_rel_iff' := Iff.rfl
+
+end OrderIsoOfForallIff
+
+end Subrepresentation
+
+namespace Subrepresentation
+
+variable {k : Type*} [Field k] {W : Type*} [Group W]
+variable {V : Type*} [AddCommGroup V] [Module k V] {ρ : Representation k W V}
+variable {V' : Type*} [AddCommGroup V'] [Module k V'] {σ : Representation k W V'}
+
+/-- An equivalence of representations preserves irreducibility. -/
+theorem _root_.Representation.Equiv.isIrreducible_iff (e : ρ.Equiv σ) :
+    ρ.IsIrreducible ↔ σ.IsIrreducible :=
+  (orderIsoMapComap e).isSimpleOrder_iff
+
+/-- The space of an irreducible representation is nontrivial. -/
+theorem _root_.Representation.IsIrreducible.nontrivial (hirr : ρ.IsIrreducible) : Nontrivial V := by
+  refine not_subsingleton_iff_nontrivial.1 fun _ ↦ hirr.bot_ne_top ?_
+  ext x
+  simp [Subsingleton.elim x 0]
+
+theorem mem_inf {U S : Subrepresentation ρ} {x : V} : x ∈ U ⊓ S ↔ x ∈ U ∧ x ∈ S :=
+  Iff.rfl
+
+instance [FiniteDimensional k V] : WellFoundedLT (Subrepresentation ρ) :=
+  StrictMono.wellFoundedLT (f := toSubmodule) fun _ _ h ↦ h
+
+instance [FiniteDimensional k V] : WellFoundedGT (Subrepresentation ρ) :=
+  StrictMono.wellFoundedGT (f := toSubmodule) fun _ _ h ↦ h
+
+section IntertwiningMap
+
+/-- The preimage `f⁻¹(S)` of a subrepresentation under an intertwining map. -/
+def comap (f : ρ.IntertwiningMap σ) (S : Subrepresentation σ) : Subrepresentation ρ where
+  toSubmodule := S.toSubmodule.comap f.toLinearMap
+  apply_mem_toSubmodule w x hx := by
+    simp only [Submodule.mem_comap, Representation.IntertwiningMap.toLinearMap_apply,
+      f.isIntertwining] at hx ⊢
+    exact S.apply_mem_toSubmodule w hx
+
+@[simp]
+theorem mem_comap {f : ρ.IntertwiningMap σ} {S : Subrepresentation σ} {x : V} :
+    x ∈ comap f S ↔ f x ∈ S :=
+  Iff.rfl
+
+/-- The image `f(S)` of a subrepresentation under an intertwining map. -/
+def map (f : ρ.IntertwiningMap σ) (S : Subrepresentation ρ) : Subrepresentation σ where
+  toSubmodule := S.toSubmodule.map f.toLinearMap
+  apply_mem_toSubmodule w := by
+    rintro _ ⟨x, hx, rfl⟩
+    exact ⟨ρ w x, S.apply_mem_toSubmodule w hx, f.isIntertwining _ _ w x⟩
+
+theorem mem_map {f : ρ.IntertwiningMap σ} {S : Subrepresentation ρ} {y : V'} :
+    y ∈ map f S ↔ ∃ x ∈ S, f x = y :=
+  Iff.rfl
+
+/-- An intertwining map `f` with `f(S) ⊆ S'` and `f(U ∩ S) ⊆ U'`, which is injective modulo `U` on
+`S` and surjective onto `S'` modulo `U'`, induces an equivalence of subquotients
+`S / U ≃ S' / U'`. -/
+noncomputable def subquotientEquivOfIntertwiningMap (f : ρ.IntertwiningMap σ)
+    {U S : Subrepresentation ρ} {U' S' : Subrepresentation σ}
+    (hS : ∀ x ∈ S, f x ∈ S') (hU : ∀ x ∈ S, x ∈ U → f x ∈ U')
+    (hinj : ∀ x ∈ S, f x ∈ U' → x ∈ U) (hsurj : ∀ y ∈ S', ∃ x ∈ S, f x - y ∈ U') :
+    (S.subquotient U).Equiv (S'.subquotient U') :=
+  Representation.IntertwiningMap.ofBijective
+    { toLinearMap := Submodule.mapQ _ _ (f.toLinearMap.restrict hS) fun x hx ↦ hU x x.2 hx
+      isIntertwining' w := by
+        refine Submodule.linearMap_qext _ (LinearMap.ext fun x ↦ ?_)
+        simp only [LinearMap.comp_apply, Submodule.mkQ_apply, Submodule.mapQ_apply,
+          subquotient_apply_mk]
+        congr 1
+        exact Subtype.ext (f.isIntertwining _ _ w x) } <| by
+    refine ⟨(injective_iff_map_eq_zero _).2 fun q hq ↦ ?_, fun q ↦ ?_⟩
+    · induction q using Submodule.Quotient.induction_on with | _ x
+      change Submodule.Quotient.mk _ = 0 at hq
+      rw [Submodule.Quotient.mk_eq_zero] at hq ⊢
+      exact hinj x x.2 hq
+    · induction q using Submodule.Quotient.induction_on with | _ y
+      obtain ⟨x, hx, hxy⟩ := hsurj y y.2
+      refine ⟨Submodule.Quotient.mk ⟨x, hx⟩, ?_⟩
+      change Submodule.Quotient.mk _ = _
+      rw [Submodule.Quotient.eq]
+      exact hxy
+
+/-- An intertwining map that is surjective identifies the subquotient `f⁻¹(S) / f⁻¹(U)` with
+`S / U`. -/
+noncomputable def subquotientComapEquiv (f : ρ.IntertwiningMap σ) (hf : Function.Surjective f)
+    (U S : Subrepresentation σ) :
+    ((comap f S).subquotient (comap f U)).Equiv (S.subquotient U) :=
+  subquotientEquivOfIntertwiningMap f (fun _ hx ↦ hx) (fun _ _ hx ↦ hx) (fun _ _ hx ↦ hx)
+    fun y _ ↦ by
+      obtain ⟨x, rfl⟩ := hf y
+      exact ⟨x, ‹f x ∈ S›, by rw [sub_self]; exact U.toSubmodule.zero_mem⟩
+
+end IntertwiningMap
+
+/-- The subquotient `S / (U ∩ S)` is the subquotient `S / U`. -/
+noncomputable def subquotientInfEquiv (U S : Subrepresentation ρ) :
+    (S.subquotient (U ⊓ S)).Equiv (S.subquotient U) :=
+  subquotientEquivOfIntertwiningMap (.id ρ) (fun _ hx ↦ hx) (fun _ _ hx ↦ (mem_inf.1 hx).1)
+    (fun _ hxS hx ↦ mem_inf.2 ⟨hx, hxS⟩) fun y hy ↦ ⟨y, hy, by
+      rw [Representation.IntertwiningMap.id_apply, sub_self]; exact U.toSubmodule.zero_mem⟩
+
+/-- If the subquotient `S / U` is irreducible, then `U ∩ S < S`. -/
+theorem inf_lt_of_isIrreducible {U S : Subrepresentation ρ}
+    (hirr : (S.subquotient U).IsIrreducible) : U ⊓ S < S := by
+  refine inf_le_right.lt_of_ne fun h ↦ hirr.bot_ne_top (eq_top_iff.2 fun q _ ↦ ?_)
+  induction q using Submodule.Quotient.induction_on with | _ x
+  refine (Submodule.mem_bot k).2 ((Submodule.Quotient.mk_eq_zero _).2 ?_)
+  exact (mem_inf.1 (h.symm ▸ x.2 : (x : V) ∈ U ⊓ S)).1
+
+/-- The subquotient `⊤ / ⊥` of `ρ` is equivalent to `ρ`. -/
+noncomputable def topSubquotientBotEquiv (ρ : Representation k W V) :
+    ((⊤ : Subrepresentation ρ).subquotient ⊥).Equiv ρ :=
+  (subquotientBotEquiv ⊤).trans (.mk Submodule.topEquiv fun _ ↦ rfl)
+
+/-- If `S / U` is irreducible and a subrepresentation `T` meets `S` outside of `U`, then `T ∩ S`
+generates `S` modulo `U`. -/
+theorem exists_mem_inf_sub_mem_of_isIrreducible {U S T : Subrepresentation ρ}
+    (hirr : (S.subquotient U).IsIrreducible) (hT : ¬ T ⊓ S ≤ U) {y : V} (hy : y ∈ S) :
+    ∃ x ∈ T ⊓ S, x - y ∈ U := by
+  let I : Subrepresentation (S.subquotient U) :=
+    ⟨(T.toSubmodule.comap S.toSubmodule.subtype).map (Submodule.mkQ _), by
+      rintro w _ ⟨x, hx, rfl⟩
+      exact ⟨⟨ρ w x, S.apply_mem_toSubmodule w x.2⟩, T.apply_mem_toSubmodule w hx, rfl⟩⟩
+  rcases hirr.eq_bot_or_eq_top I with h | h
+  · refine absurd (fun x hx ↦ ?_) hT
+    have hI : Submodule.Quotient.mk ⟨x, hx.2⟩ ∈ I := ⟨⟨x, hx.2⟩, hx.1, rfl⟩
+    rw [h] at hI
+    have := (Submodule.mem_bot k).1 hI
+    rwa [Submodule.Quotient.mk_eq_zero] at this
+  · have hI : Submodule.Quotient.mk ⟨y, hy⟩ ∈ I := h ▸ Submodule.mem_top
+    obtain ⟨x, hxT, hx⟩ := hI
+    refine ⟨x, ⟨hxT, x.2⟩, ?_⟩
+    exact (Submodule.Quotient.eq (U.toSubmodule.comap S.toSubmodule.subtype)).1 hx
+
+/-- A nonzero subrepresentation `A` of a finite-dimensional representation has a maximal proper
+subrepresentation `B`, so that `A / B` is irreducible. -/
+theorem exists_lt_isIrreducible_subquotient [FiniteDimensional k V] {A : Subrepresentation ρ}
+    (hA : A ≠ ⊥) : ∃ B < A, (A.subquotient B).IsIrreducible := by
+  obtain ⟨B, hBA, hmax⟩ := (wellFounded_gt (α := Subrepresentation ρ)).has_min {B | B < A}
+    ⟨⊥, bot_lt_iff_ne_bot.2 hA⟩
+  replace hBA : B < A := hBA
+  refine ⟨B, hBA, ?_⟩
+  obtain ⟨x, hxA, hxB⟩ := SetLike.exists_of_lt hBA
+  have hx : (Submodule.Quotient.mk ⟨x, hxA⟩ :
+      A.toSubmodule ⧸ B.toSubmodule.comap A.toSubmodule.subtype) ≠ 0 := by
+    rwa [Ne, Submodule.Quotient.mk_eq_zero]
+  have : Nontrivial (Subrepresentation (A.subquotient B)) := ⟨⟨⊥, ⊤, fun h ↦ hx <| by
+    have : Submodule.Quotient.mk ⟨x, hxA⟩ ∈ (⊤ : Subrepresentation (A.subquotient B)) :=
+      Submodule.mem_top
+    rw [← h] at this
+    exact (Submodule.mem_bot k).1 this⟩⟩
+  refine ⟨fun T ↦ ?_⟩
+  -- the preimage `T'` of `T` in `A`, which lies between `B` and `A`
+  let T' : Subrepresentation ρ :=
+    ⟨(T.toSubmodule.comap (Submodule.mkQ _)).map A.toSubmodule.subtype, by
+      rintro w _ ⟨y, hy, rfl⟩
+      exact ⟨⟨ρ w y, A.apply_mem_toSubmodule w y.2⟩, T.apply_mem_toSubmodule w hy, rfl⟩⟩
+  have hmem (y : A.toSubmodule) : (y : V) ∈ T' ↔ Submodule.Quotient.mk y ∈ T :=
+    ⟨fun ⟨y', hy', h⟩ ↦ Subtype.ext h ▸ hy', fun h ↦ ⟨y, h, rfl⟩⟩
+  have hBT : B ≤ T' := fun y hy ↦ (hmem ⟨y, hBA.le hy⟩).2 <| by
+    rw [(Submodule.Quotient.mk_eq_zero (B.toSubmodule.comap A.toSubmodule.subtype)).2 hy]
+    exact T.toSubmodule.zero_mem
+  have hTA : T' ≤ A := by
+    rintro _ ⟨y, -, rfl⟩
+    exact y.2
+  rcases hTA.lt_or_eq with hlt | heq
+  · have hTB : T' = B := (lt_or_eq_of_le hBT).resolve_left (hmax T' hlt) |>.symm
+    refine Or.inl (eq_bot_iff.2 fun q hq ↦ ?_)
+    induction q using Submodule.Quotient.induction_on with | _ y
+    have := (hmem y).2 hq
+    rw [hTB] at this
+    exact (Submodule.mem_bot k).2 ((Submodule.Quotient.mk_eq_zero _).2 this)
+  · refine Or.inr (eq_top_iff.2 fun q _ ↦ ?_)
+    induction q using Submodule.Quotient.induction_on with | _ y
+    have hy : (y : V) ∈ T' := by rw [heq]; exact y.2
+    exact (hmem y).1 hy
+
+section TensorProduct
+
+open TensorProduct
+
+/-- Peeling off the first factor of a tensor product, for a subrepresentation `A`: every
+irreducible subquotient of `A ⊗ σ` is equivalent to a subquotient of `(SV / UV) ⊗ σ` for an
+irreducible subquotient `SV / UV` of `ρ`. The proof runs along a composition series of `A`,
+using the right exactness of `- ⊗ σ`.
+(blueprint: `lem-mg-filtered-tensor-product`, `lem-mg-filtration-refinement`) -/
+theorem exists_subquotient_tprod_equiv_of_subrepresentation [FiniteDimensional k V]
+    (A : Subrepresentation ρ) {U S : Subrepresentation (A.toRepresentation.tprod σ)}
+    (hirr : (S.subquotient U).IsIrreducible) :
+    ∃ UV SV : Subrepresentation ρ, UV < SV ∧ (SV.subquotient UV).IsIrreducible ∧
+      ∃ U' S' : Subrepresentation ((SV.subquotient UV).tprod σ),
+        Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) := by
+  induction A using WellFoundedLT.induction with | _ A ih
+  by_cases hA : A = ⊥
+  · -- `A ⊗ σ` is zero, so it has no irreducible subquotient
+    subst hA
+    have h0 (z : (⊥ : Subrepresentation ρ).toSubmodule ⊗[k] V') : z = 0 := by
+      induction z using TensorProduct.induction_on with
+      | zero => rfl
+      | tmul a b =>
+        rw [show a = 0 from Subtype.ext ((Submodule.mem_bot k).1 a.2), TensorProduct.zero_tmul]
+      | add a b ha hb => rw [ha, hb, add_zero]
+    have := hirr.nontrivial
+    obtain ⟨q₁, q₂, hq⟩ :=
+      exists_pair_ne (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype)
+    induction q₁ using Submodule.Quotient.induction_on with | _ x
+    induction q₂ using Submodule.Quotient.induction_on with | _ y
+    exact (hq (congrArg _ (Subtype.ext ((h0 x).trans (h0 y).symm)))).elim
+  obtain ⟨B, hBA, hB⟩ := exists_lt_isIrreducible_subquotient hA
+  let incl : B.toRepresentation.IntertwiningMap A.toRepresentation :=
+    ⟨Submodule.inclusion hBA.le, fun _ ↦ rfl⟩
+  let quot : A.toRepresentation.IntertwiningMap (A.subquotient B) :=
+    ⟨Submodule.mkQ _, fun _ ↦ rfl⟩
+  let ι := incl.rTensor σ
+  let π := quot.rTensor σ
+  have hexact : Function.Exact ι π :=
+    rTensor_exact V' (fun y ↦ by
+      change Submodule.mkQ _ y = 0 ↔ _
+      rw [Submodule.mkQ_apply, Submodule.Quotient.mk_eq_zero]
+      exact ⟨fun hy ↦ ⟨⟨y, hy⟩, rfl⟩, by rintro ⟨y, rfl⟩; exact y.2⟩)
+      (Submodule.mkQ_surjective _)
+  by_cases h : ι.range ⊓ S ≤ U
+  · -- the subquotient survives in `(A / B) ⊗ σ`
+    have hinj (x) (hxS : x ∈ S) (hx : π x ∈ map π (U ⊓ S)) : x ∈ U := by
+      obtain ⟨u, hu, hux⟩ := mem_map.1 hx
+      have hxu : x - u ∈ ι.range := (hexact (x - u)).1 (by rw [map_sub, hux, sub_self])
+      have := h (mem_inf.2 ⟨hxu, S.toSubmodule.sub_mem hxS (mem_inf.1 hu).2⟩)
+      have hx := U.toSubmodule.add_mem this (mem_inf.1 hu).1
+      rwa [sub_add_cancel] at hx
+    refine ⟨B, A, hBA, hB, map π (U ⊓ S), map π S,
+      ⟨(subquotientEquivOfIntertwiningMap π (fun x hx ↦ mem_map.2 ⟨x, hx, rfl⟩)
+        (fun x hxS hxU ↦ mem_map.2 ⟨x, mem_inf.2 ⟨hxU, hxS⟩, rfl⟩) hinj
+        fun y hy ↦ ?_).symm⟩⟩
+    obtain ⟨x, hx, rfl⟩ := mem_map.1 hy
+    refine ⟨x, hx, ?_⟩
+    rw [sub_self]
+    exact (map π (U ⊓ S)).toSubmodule.zero_mem
+  · -- the subquotient comes from `B ⊗ σ`
+    let e := subquotientEquivOfIntertwiningMap ι (U := comap ι U) (S := comap ι S)
+      (U' := U) (S' := S) (fun _ hx ↦ hx) (fun _ _ hx ↦ hx) (fun _ _ hx ↦ hx) fun y hy ↦ by
+        obtain ⟨x, hx, hxy⟩ := exists_mem_inf_sub_mem_of_isIrreducible hirr h hy
+        obtain ⟨⟨x', rfl⟩, hxS⟩ := mem_inf.1 hx
+        exact ⟨x', hxS, hxy⟩
+    obtain ⟨UV, SV, hUV, hV, U', S', ⟨e'⟩⟩ := ih B hBA (e.isIrreducible_iff.2 hirr)
+    exact ⟨UV, SV, hUV, hV, U', S', ⟨e'.trans e⟩⟩
+
+/-- Peeling off the first factor of a tensor product: every irreducible subquotient of `ρ ⊗ σ`,
+for a finite-dimensional `ρ`, is equivalent to a subquotient of `(SV / UV) ⊗ σ` for an irreducible
+subquotient `SV / UV` of `ρ`.
+(blueprint: `lem-mg-filtered-tensor-product`, `lem-mg-filtration-refinement`) -/
+theorem exists_subquotient_tprod_left_equiv [FiniteDimensional k V]
+    {U S : Subrepresentation (ρ.tprod σ)} (hirr : (S.subquotient U).IsIrreducible) :
+    ∃ UV SV : Subrepresentation ρ, UV < SV ∧ (SV.subquotient UV).IsIrreducible ∧
+      ∃ U' S' : Subrepresentation ((SV.subquotient UV).tprod σ),
+        Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) := by
+  let g : (⊤ : Subrepresentation ρ).toRepresentation.IntertwiningMap ρ :=
+    ⟨Submodule.subtype _, fun _ ↦ rfl⟩
+  have hg : Function.Surjective (g.rTensor σ) :=
+    LinearMap.rTensor_surjective V' fun x ↦ ⟨⟨x, Submodule.mem_top⟩, rfl⟩
+  let e := subquotientComapEquiv (g.rTensor σ) hg U S
+  obtain ⟨UV, SV, hUV, hV, U', S', ⟨e'⟩⟩ :=
+    exists_subquotient_tprod_equiv_of_subrepresentation ⊤ (e.isIrreducible_iff.2 hirr)
+  exact ⟨UV, SV, hUV, hV, U', S', ⟨e'.trans e⟩⟩
+
+/-- The irreducible subquotients of a tensor product: every irreducible subquotient `Q` of
+`ρ ⊗ σ`, for finite-dimensional `ρ` and `σ`, is equivalent to a subquotient of `V_i ⊗ E_j` for
+irreducible subquotients `V_i = SV / UV` of `ρ` and `E_j = SE / UE` of `σ`.
+(blueprint: `lem-mg-filtered-tensor-product`, `lem-mg-filtration-refinement`) -/
+theorem exists_subquotient_tprod_equiv [FiniteDimensional k V] [FiniteDimensional k V']
+    {U S : Subrepresentation (ρ.tprod σ)} (hirr : (S.subquotient U).IsIrreducible) :
+    ∃ UV SV : Subrepresentation ρ, ∃ UE SE : Subrepresentation σ, UV < SV ∧ UE < SE ∧
+      (SV.subquotient UV).IsIrreducible ∧ (SE.subquotient UE).IsIrreducible ∧
+      ∃ U' S' : Subrepresentation ((SV.subquotient UV).tprod (SE.subquotient UE)),
+        Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) := by
+  obtain ⟨UV, SV, hUV, hV, U₁, S₁, ⟨e₁⟩⟩ := exists_subquotient_tprod_left_equiv hirr
+  let c₁ := Representation.TensorProduct.comm (SV.subquotient UV) σ
+  let e₂ := subquotientEquiv c₁ S₁ U₁
+  obtain ⟨UE, SE, hUE, hE, U₃, S₃, ⟨e₃⟩⟩ :=
+    exists_subquotient_tprod_left_equiv (e₂.symm.isIrreducible_iff.2 (e₁.isIrreducible_iff.2 hirr))
+  let c₄ := Representation.TensorProduct.comm (SE.subquotient UE) (SV.subquotient UV)
+  exact ⟨UV, SV, UE, SE, hUV, hUE, hV, hE, _, _, ⟨(subquotientEquiv c₄ S₃ U₃).symm.trans
+    (e₃.trans (e₂.symm.trans e₁))⟩⟩
+
+end TensorProduct
 
 end Subrepresentation

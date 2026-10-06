@@ -211,3 +211,108 @@ theorem Topology.IsInducing.surjective_of_topologicalKrullDim_eq [IrreducibleSpa
   omega
 
 end Inducing
+
+section DimensionZero
+
+variable {X : Type*} [TopologicalSpace X]
+
+/-- In a space of dimension at most zero, an inclusion of irreducible closed subsets is an
+equality: a strict inclusion would be a chain of length one. -/
+theorem IrreducibleCloseds.eq_of_le_of_topologicalKrullDim_le_zero
+    (h : topologicalKrullDim X ≤ 0) {A B : IrreducibleCloseds X} (hAB : A ≤ B) : A = B := by
+  by_contra hne
+  have := Order.LTSeries.length_le_krullDim ((RelSeries.singleton _ A).snoc B
+    (lt_of_le_of_ne hAB hne))
+  have h1 : ((1 : ℕ) : WithBot ℕ∞) ≤ 0 := this.trans h
+  exact absurd h1 (by decide)
+
+/-- **Zero-dimensional closed subsets are finite.** A closed subset `Z` of dimension at most zero
+of a noetherian `T₀` space is a finite set of closed points. This applies to the underlying space
+of a scheme of finite type over a field, which is noetherian.
+
+(blueprint: `lem-sc-dim0-finite`) -/
+theorem IsClosed.finite_and_isClosed_singleton_of_topologicalKrullDim_le_zero
+    [NoetherianSpace X] [T0Space X] {Z : Set X} (hZ : IsClosed Z)
+    (h : topologicalKrullDim Z ≤ 0) : Z.Finite ∧ ∀ z ∈ Z, IsClosed {z} := by
+  -- Every point of `Z` is closed in `Z`: its closure is a minimal irreducible closed subset.
+  have hcl : ∀ z : Z, closure {z} = {z} := by
+    intro z
+    refine subset_antisymm (fun y hy ↦ ?_) subset_closure
+    let A : IrreducibleCloseds Z := ⟨closure {y}, isIrreducible_singleton.closure, isClosed_closure⟩
+    let B : IrreducibleCloseds Z := ⟨closure {z}, isIrreducible_singleton.closure, isClosed_closure⟩
+    have hAB : A ≤ B := show closure {y} ⊆ closure {z} from
+      closure_minimal (by simpa using hy) isClosed_closure
+    have hAB' := IrreducibleCloseds.eq_of_le_of_topologicalKrullDim_le_zero h hAB
+    exact (inseparable_iff_closure_eq.mpr congr(($hAB' : Set Z))).eq
+  refine ⟨?_, fun z hz ↦ ?_⟩
+  · -- Each irreducible component of `Z` is the closure of any of its points, a singleton.
+    have hinj : Function.Injective fun z : Z ↦ irreducibleComponent z := by
+      intro y z hyz
+      have hy : irreducibleComponent y = {y} := by
+        let A : IrreducibleCloseds Z := ⟨{y}, isIrreducible_singleton, by
+          rw [← hcl y]; exact isClosed_closure⟩
+        let B : IrreducibleCloseds Z := ⟨irreducibleComponent y,
+          isIrreducible_irreducibleComponent, isClosed_irreducibleComponent⟩
+        have hAB : A ≤ B := show {y} ⊆ irreducibleComponent y from
+          Set.singleton_subset_iff.mpr (mem_irreducibleComponent)
+        exact congr(($((IrreducibleCloseds.eq_of_le_of_topologicalKrullDim_le_zero h hAB).symm) :
+          Set Z))
+      have hz : z ∈ irreducibleComponent y := by
+        have hyz : irreducibleComponent y = irreducibleComponent z := hyz
+        rw [hyz]
+        exact mem_irreducibleComponent
+      rw [hy] at hz
+      exact hz.symm
+    have : Finite (irreducibleComponents Z) := NoetherianSpace.finite_irreducibleComponents
+    have : Finite Z := Finite.of_injective (fun z : Z ↦ (⟨irreducibleComponent z,
+      irreducibleComponent_mem_irreducibleComponents z⟩ : irreducibleComponents Z))
+      fun y z hyz ↦ hinj congr(($hyz).1)
+    exact Set.toFinite Z
+  · have := hZ.isClosedMap_subtype_val _ (closure_subset_iff_isClosed.mp (hcl ⟨z, hz⟩).subset)
+    simpa using this
+
+end DimensionZero
+
+section ClosurePoint
+
+variable {X : Type*} [TopologicalSpace X] [QuasiSober X] [T0Space X]
+
+attribute [local instance] specializationOrder in
+/-- In a quasi-sober `T₀` space, the dimension of the closure of a point is its height for the
+specialization order: the points of `closure {z}` are exactly the specializations of `z`. -/
+theorem topologicalKrullDim_closure_singleton (z : X) :
+    topologicalKrullDim (closure ({z} : Set X)) = height z := by
+  have : QuasiSober (closure ({z} : Set X)) :=
+    isClosed_closure.isClosedEmbedding_subtypeVal.quasiSober
+  rw [topologicalKrullDim_eq_krullDim_specializationOrder, height_eq_krullDim_Iic]
+  exact @krullDim_eq_of_orderIso _ _ (specializationOrder _).toPreorder _
+    (@RelIso.mk _ _ (specializationOrder _).le (· ≤ ·)
+      (Equiv.subtypeEquivRight fun x ↦ specializes_iff_mem_closure.symm)
+      fun {a b} ↦ (IsInducing.subtypeVal.specializes_iff (x := b) (y := a)))
+
+attribute [local instance] specializationOrder in
+/-- A quasi-sober `T₀` space of finite positive dimension contains an irreducible closed subset
+of dimension one: the closure of a point of minimal positive height. -/
+theorem exists_topologicalKrullDim_closure_singleton_eq_one
+    (h1 : 1 ≤ topologicalKrullDim X) (htop : topologicalKrullDim X ≠ ⊤) :
+    ∃ z : X, topologicalKrullDim (closure ({z} : Set X)) = 1 := by
+  rw [topologicalKrullDim_eq_krullDim_specializationOrder] at h1 htop
+  have hfin (y : X) : height y < ⊤ :=
+    WithBot.coe_lt_coe.mp ((height_le_krullDim y).trans_lt (lt_top_iff_ne_top.mpr htop))
+  obtain ⟨l, hl⟩ := le_krullDim_iff.mp (by exact_mod_cast h1 : ((1 : ℕ) : WithBot ℕ∞) ≤ _)
+  -- A point `z` of minimal height among those of height at least one.
+  let S : Set ℕ∞ := {h | ∃ y : X, 1 ≤ height y ∧ height y = h}
+  have hne : S.Nonempty := ⟨_, l.last, by simpa [hl] using length_le_height_last (p := l), rfl⟩
+  obtain ⟨z, hz1, hz⟩ := WellFounded.min_mem wellFounded_lt _ hne
+  refine ⟨z, ?_⟩
+  have : height z = ((1 : ℕ) : ℕ∞) := by
+    refine height_eq_coe_iff_minimal_le_height.mpr ⟨by simpa using hz1, fun y hy hyz ↦ ?_⟩
+    by_contra hzy
+    have hlt : y < z := lt_of_le_of_ne hyz fun h ↦ hzy (h ▸ le_rfl)
+    have := WellFounded.min_le wellFounded_lt (show height y ∈ S from ⟨y, by simpa using hy, rfl⟩)
+    rw [← hz] at this
+    exact (height_strictMono hlt (hfin y)).not_ge this
+  rw [topologicalKrullDim_closure_singleton, this]
+  rfl
+
+end ClosurePoint

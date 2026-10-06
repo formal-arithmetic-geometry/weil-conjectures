@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
-public import WeilConjectures.AlgebraicGeometry.Picard.Representability
+public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced

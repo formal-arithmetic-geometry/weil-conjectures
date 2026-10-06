@@ -9,12 +9,17 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
-# Free sheaves of modules are quasi-coherent
+# Quasi-coherent sheaves and sheaves of finite presentation
 
 ## Main results
 
 - `SheafOfModules.isQuasicoherent_free`: a free sheaf of modules is quasi-coherent.
 - `SheafOfModules.isQuasicoherent_unit`: the unit sheaf of modules is quasi-coherent.
+- `SheafOfModules.Presentation.isFinitePresentation`: a sheaf of modules with a finite global
+  presentation is of finite presentation.
+- `SheafOfModules.isFinitePresentation_pushforward_of_isLeftAdjoint`: finite presentation is
+  preserved by pushforward along a continuous, cocontinuous left adjoint.
+- `SheafOfModules.IsFinitePresentation.of_coversTop`: finite presentation is local.
 -/
 
 @[expose] public section
@@ -40,5 +45,160 @@ instance isQuasicoherent_free (I : Type u) : (free (R := R) I).IsQuasicoherent :
 /-- The unit sheaf of modules is quasi-coherent. -/
 instance isQuasicoherent_unit : (unit R).IsQuasicoherent :=
   (isQuasicoherent R).prop_of_iso (freeUniqueIso PUnit.{u + 1}) (isQuasicoherent_free _)
+
+end SheafOfModules
+
+namespace SheafOfModules
+
+section FinitePresentation
+
+variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+  [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+  {C' : Type u₂} [Category.{v₂} C'] {J' : GrothendieckTopology C'} {S : Sheaf J' RingCat.{u}}
+  [HasSheafify J' AddCommGrpCat.{u}] [J'.WEqualsLocallyBijective AddCommGrpCat.{u}]
+
+/-- The image of a finite presentation under a colimit-preserving functor sending the unit to
+the unit is finite. -/
+instance Presentation.isFinite_map {M : SheafOfModules.{u} R} (P : Presentation M) [P.IsFinite]
+    (F : SheafOfModules.{u} R ⥤ SheafOfModules.{u} S) [PreservesColimitsOfSize.{u, u} F]
+    (η : unit S ≅ F.obj (unit R)) : (P.map F η).IsFinite where
+  isFiniteType_generators := ⟨by rw [Presentation.map_generators_I]; infer_instance⟩
+  isFiniteType_relations := ⟨by rw [Presentation.map_relations_I]; infer_instance⟩
+
+end FinitePresentation
+
+section QuasicoherentDataShrink
+
+variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+  [∀ X, HasSheafify (J.over X) AddCommGrpCat.{u}]
+  [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+
+/-- Shrinking the indexing type of quasi-coherent data preserves being a finite presentation. -/
+instance QuasicoherentData.isFinitePresentation_shrink {M : SheafOfModules.{u} R}
+    (σ : QuasicoherentData.{w} M) [σ.IsFinitePresentation] : σ.shrink.IsFinitePresentation where
+  isFinite_presentation i := by
+    dsimp only [QuasicoherentData.shrink]
+    infer_instance
+
+/-- A sheaf of modules admitting quasi-coherent data which is a finite presentation, indexed by
+a type in any universe, is of finite presentation. -/
+lemma QuasicoherentData.isFinitePresentation {M : SheafOfModules.{u} R}
+    (σ : QuasicoherentData.{w} M) [σ.IsFinitePresentation] : M.IsFinitePresentation :=
+  ⟨σ.shrink, inferInstance⟩
+
+end QuasicoherentDataShrink
+
+section FinitePresentationQuasicoherentData
+
+variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+  [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+  [∀ X, HasSheafify (J.over X) AddCommGrpCat.{u}]
+  [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+
+/-- The quasi-coherent data on the trivial cover attached to a finite presentation is a finite
+presentation. -/
+instance Presentation.isFinitePresentation_quasicoherentData [HasBinaryProducts C]
+    {M : SheafOfModules.{u} R} (P : Presentation M) [P.IsFinite] :
+    P.quasicoherentData.IsFinitePresentation where
+  isFinite_presentation _ := Presentation.isFinite_map _ _ _
+
+/-- A sheaf of modules with a finite global presentation is of finite presentation. -/
+theorem Presentation.isFinitePresentation [HasBinaryProducts C] {M : SheafOfModules.{u} R}
+    (P : Presentation M) [P.IsFinite] : M.IsFinitePresentation :=
+  P.quasicoherentData.isFinitePresentation
+
+end FinitePresentationQuasicoherentData
+
+section FinitePresentationPushforward
+
+variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+  [∀ X, HasSheafify (J.over X) AddCommGrpCat.{u}]
+  [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+  {D : Type u₂} [Category.{v₂, u₂} D] {K : GrothendieckTopology D}
+  {S : Sheaf K RingCat.{u}} [∀ (X : D), (K.over X).WEqualsLocallyBijective AddCommGrpCat]
+  [∀ (X : D), HasSheafify (K.over X) AddCommGrpCat.{u}]
+  (G : D ⥤ C) [G.IsContinuous K J] [G.IsCocontinuous K J]
+  (φ : S ⟶ (G.sheafPushforwardContinuous RingCat.{u} K J).obj R)
+
+/-- The pushforward of quasi-coherent data which is a finite presentation is a finite
+presentation. -/
+instance QuasicoherentData.isFinitePresentation_pushforward
+    (η : (SheafOfModules.pushforward φ).obj (unit R) ≅ unit S)
+    [∀ (X : D), (Over.post G).IsContinuous (K.over X) (J.over _)]
+    (h : ∀ (X : D) (Y : C) (f : G.obj X ⟶ Y),
+      PreservesColimitsOfSize.{u, u} <|
+      SheafOfModules.pushforward.{u} (R := (R.over Y)) (F := Over.post (X := X) G ⋙ Over.map f)
+        (((Over.forget X).sheafPushforwardContinuous RingCat.{u} (K.over X) K).map φ))
+    {M : SheafOfModules.{u} R} (P : M.QuasicoherentData) [P.IsFinitePresentation] :
+    (P.pushforward G φ η h).IsFinitePresentation where
+  isFinite_presentation i := by
+    have := h i.1 (P.X i.2.1) i.2.2
+    exact Presentation.isFinite_map _ _ _
+
+/-- The pushforward of a sheaf of modules of finite presentation along a continuous and
+cocontinuous functor is of finite presentation. This is the finite-presentation analogue of
+`SheafOfModules.isQuasicoherent_pushforward`. -/
+lemma isFinitePresentation_pushforward (η : (pushforward φ).obj (unit R) ≅ unit S)
+    [∀ (X : D), (Over.post G).IsContinuous (K.over X) (J.over _)]
+    (h : ∀ (X : D) (Y : C) (f : G.obj X ⟶ Y),
+      PreservesColimitsOfSize.{u, u} <|
+      pushforward.{u} (R := (R.over Y)) (F := Over.post (X := X) G ⋙ Over.map f)
+        (((Over.forget X).sheafPushforwardContinuous RingCat.{u} (K.over X) K).map φ))
+    {M : SheafOfModules.{u} R} [IsFinitePresentation M] :
+    IsFinitePresentation ((pushforward φ).obj M) := by
+  obtain ⟨P, _⟩ := IsFinitePresentation.exists_quasicoherentData M
+  exact (P.pushforward G φ η h).isFinitePresentation
+
+/-- The pushforward of a sheaf of modules of finite presentation along a continuous,
+cocontinuous left adjoint functor `G`, with `φ` an isomorphism, is of finite presentation. This
+is the finite-presentation analogue of
+`SheafOfModules.isQuasicoherent_pushforward_of_isLeftAdjoint`. -/
+lemma isFinitePresentation_pushforward_of_isLeftAdjoint
+    (η : (pushforward φ).obj (unit R) ≅ unit S) [G.IsLeftAdjoint] [IsIso φ]
+    [∀ X, Functor.IsContinuous (Over.post (X := X) G) (K.over _) (J.over _)]
+    [HasPullbacks C] [HasPullbacks D]
+    {M : SheafOfModules.{u} R} [IsFinitePresentation M] :
+    IsFinitePresentation ((pushforward φ).obj M) := by
+  apply +allowSynthFailures isFinitePresentation_pushforward G φ η _
+  intro X Y f
+  let G' := Over.post (X := X) G ⋙ Over.map f
+  have : G'.IsContinuous (K.over X) (J.over Y) := Functor.isContinuous_comp _ _ _ (J.over _) _
+  have : G'.IsCocontinuous (K.over X) (J.over Y) := isCocontinuous_comp _ _ _ (J.over _)
+  let a : S.over X ⟶
+      (G'.sheafPushforwardContinuous RingCat.{u} (K.over X) (J.over Y)).obj (R.over Y) :=
+    ((Over.forget X).sheafPushforwardContinuous RingCat.{u} (K.over X) K).map φ
+  have : (pushforward.{u} a).IsLeftAdjoint := isLeftAdjoint_pushforward_of_isIso a
+  infer_instance
+
+end FinitePresentationPushforward
+
+section bind
+
+variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C}
+  [∀ X, HasSheafify (J.over X) AddCommGrpCat.{u}]
+  [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+  [∀ X Y, HasSheafify ((J.over X).over Y) AddCommGrpCat.{u}]
+  [∀ X Y, ((J.over X).over Y).WEqualsLocallyBijective AddCommGrpCat.{u}]
+
+/-- Gluing finite presentations along a cover gives a finite presentation. -/
+instance QuasicoherentData.isFinitePresentation_bind {R : Sheaf J RingCat.{u}}
+    (M : SheafOfModules.{u} R) {I : Type u} (X : I → C) (hX : J.CoversTop X)
+    (D : Π i, QuasicoherentData (M.over (X i))) [∀ i, (D i).IsFinitePresentation] :
+    (QuasicoherentData.bind M X hX D).IsFinitePresentation where
+  isFinite_presentation i := by
+    dsimp only [QuasicoherentData.bind]
+    infer_instance
+
+/-- Being of finite presentation is local: if `M.over (X i)` is of finite presentation for a
+family `X` covering the terminal object, then so is `M`. This is the finite-presentation
+analogue of `SheafOfModules.IsQuasicoherent.of_coversTop`. -/
+lemma IsFinitePresentation.of_coversTop {R : Sheaf J RingCat.{u}}
+    (M : SheafOfModules.{u} R) {I : Type u}
+    (X : I → C) (hX : J.CoversTop X) [∀ i, IsFinitePresentation (M.over (X i))] :
+    IsFinitePresentation M := by
+  choose D hD using fun i ↦ IsFinitePresentation.exists_quasicoherentData (M.over (X i))
+  exact (QuasicoherentData.bind M X hX D).isFinitePresentation
+
+end bind
 
 end SheafOfModules

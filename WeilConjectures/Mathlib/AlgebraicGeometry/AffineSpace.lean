@@ -6,6 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.AlgebraicGeometry.Fiber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Pullbacks
 
@@ -65,6 +67,8 @@ over a scheme `S` admits an immersion into a relative affine space `𝔸(Fin n; 
   affine-line projections.
 - `AlgebraicGeometry.Scheme.Hom.toIteratedAffineLine`: the morphism to the iterated affine line
   with prescribed coordinates (blueprint `def-zl-localized-coordinates`).
+- `AlgebraicGeometry.AffineSpace.isAffine_fiber_of_isOpenImmersion`: the fibres of an open
+  subscheme of the relative affine line `𝔸¹_Y` over the points of `Y` are affine.
 
 ## Blueprint
 
@@ -613,6 +617,20 @@ lemma iteratedAffineLineProj_succ (S : Scheme.{u}) (r : ℕ) :
         iteratedAffineLineProj S r :=
   rfl
 
+instance (S : Scheme.{u}) : ∀ r : ℕ, IsAffineHom (iteratedAffineLineProj S r)
+  | 0 => inferInstanceAs (IsAffineHom (𝟙 S))
+  | r + 1 => by
+    have := instIsAffineHomIteratedAffineLineProj S r
+    rw [iteratedAffineLineProj_succ]
+    infer_instance
+
+instance (S : Scheme.{u}) : ∀ r : ℕ, LocallyOfFiniteType (iteratedAffineLineProj S r)
+  | 0 => inferInstanceAs (LocallyOfFiniteType (𝟙 S))
+  | r + 1 => by
+    have := instLocallyOfFiniteTypeIteratedAffineLineProj S r
+    rw [iteratedAffineLineProj_succ]
+    infer_instance
+
 namespace iteratedAffineLine
 
 /-- The coordinates of the iterated affine line: the `0`-th coordinate is the coordinate of the
@@ -822,5 +840,25 @@ instance AffineSpace.isClosedImmersion_zeroSection (n : Type u) (S : Scheme.{u})
   exact MorphismProperty.of_isPullback
     (IsPullback.of_bot hpaste (AffineSpace.zeroSection_comp_map f).symm
       (AffineSpace.isPullback_map f)) inferInstance
+
+/-- The fibre of an open subscheme `U ⊆ 𝔸¹_Y` over any point of `Y` is affine: it is an open
+subscheme of the affine line over a field, whose coordinate ring is a principal ideal domain. -/
+theorem AffineSpace.isAffine_fiber_of_isOpenImmersion {U Y : Scheme.{u}}
+    (u : U ⟶ 𝔸(PUnit.{u + 1}; Y)) [IsOpenImmersion u] (y : Y) :
+    IsAffine ((u ≫ 𝔸(PUnit.{u + 1}; Y) ↘ Y).fiber y) := by
+  let g := Y.fromSpecResidueField y
+  let π := 𝔸(PUnit.{u + 1}; Y) ↘ Y
+  let f : pullback u (pullback.fst π g) ⟶ Spec (.of (MvPolynomial PUnit (Y.residueField y))) :=
+    pullback.snd u (pullback.fst π g) ≫
+      (AffineSpace.isPullback_map (n := PUnit) g).isoPullback.inv ≫
+      (AffineSpace.SpecIso PUnit (Y.residueField y)).hom
+  have : IsPrincipalIdealRing (MvPolynomial PUnit.{u + 1} (Y.residueField y)) :=
+    IsPrincipalIdealRing.of_surjective
+      (MvPolynomial.uniqueAlgEquiv (Y.residueField y) PUnit).symm.toRingHom
+      (MvPolynomial.uniqueAlgEquiv (Y.residueField y) PUnit).symm.surjective
+  have : IsAffine (pullback u (pullback.fst π g)) :=
+    isAffine_of_isOpenImmersion_of_isPrincipalIdealRing f
+  change IsAffine (pullback (u ≫ π) g)
+  exact .of_isIso (pullbackRightPullbackFstIso π g u).inv
 
 end AlgebraicGeometry

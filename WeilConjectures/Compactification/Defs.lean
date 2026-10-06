@@ -35,6 +35,8 @@ We derive the properties of the morphisms involved in a compactification:
   source and the target;
 - `Compactification.precomp` and `HasCompactification.comp_of_isOpenImmersion`:
   compactifiability is inherited by open subschemes of the source.
+- `Compactification.postcomp` and `HasCompactification.comp_of_isProper`: compactifiability
+  is preserved by postcomposition with a proper morphism.
 
 Finally, we define the class `AlgebraicGeometry.HasCompactification f`, asserting
 `Nonempty (Compactification f)`. Nagata's compactification theorem asserts
@@ -127,6 +129,27 @@ def precomp {X' : Scheme.{u}} (c : Compactification f) (e : X' ⟶ X) [IsOpenImm
   i := e ≫ c.i
   comm := by rw [Category.assoc, ← c.comm]
   isProper := c.isProper
+  isOpenImmersion := inferInstance
+
+/-- **Postcomposing a compactification with a proper morphism**: if `c` is a compactification
+of `f : X ⟶ Y` and `p : Y ⟶ S` is proper, then composing `c.g` with `p` exhibits a
+compactification of `f ≫ p`, with the same ambient scheme.
+```
+  X --c.i--> c.Z
+    \         |
+   f ≫ p    c.g ≫ p
+      \       ↓
+       -----> S
+```
+-/
+@[simps]
+def postcomp {S : Scheme.{u}} (c : Compactification f) (p : Y ⟶ S) [IsProper p] :
+    Compactification (f ≫ p) where
+  Z := c.Z
+  g := c.g ≫ p
+  i := c.i
+  comm := by rw [← Category.assoc, ← c.comm]
+  isProper := inferInstance
   isOpenImmersion := inferInstance
 
 variable (c : Compactification f)
@@ -224,6 +247,12 @@ compactification, then so does its restriction `e ≫ f` along any open immersio
 theorem comp_of_isOpenImmersion {X' : Scheme.{u}} (e : X' ⟶ X) [IsOpenImmersion e] :
     HasCompactification (e ≫ f) :=
   ((compactification f).precomp e).hasCompactification
+
+/-- **Compactifiability is preserved by proper postcomposition**: if `f : X ⟶ Y` admits a
+compactification and `p : Y ⟶ S` is proper, then `f ≫ p` admits one too. -/
+theorem comp_of_isProper {S : Scheme.{u}} (p : Y ⟶ S) [IsProper p] :
+    HasCompactification (f ≫ p) :=
+  ((compactification f).postcomp p).hasCompactification
 
 end HasCompactification
 

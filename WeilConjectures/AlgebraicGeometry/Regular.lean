@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.FieldTheory.Perfect
@@ -76,7 +77,9 @@ theorem isRegularLocalRing_stalk_pullback {k : Type u} [Field k] [PerfectField k
   sorry
 
 /-- A scheme smooth over a field `k` is regular: the local rings of a smooth `k`-scheme are
-regular local rings. -/
+regular local rings, hence domains (`IsRegularLocalRing.isDomain`).
+
+(blueprint: `lem-sc-smooth-regular`) -/
 theorem IsRegular.of_smooth {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     [Smooth f] : IsRegular X :=
   sorry
@@ -122,5 +125,16 @@ theorem GeometricallyIrreducible.of_smooth_of_geometricallyConnected {X S : Sche
     have := LocallyOfFiniteType.isLocallyNoetherian snd
     have := IsRegular.of_smooth snd
     exact IsRegular.irreducibleSpace _
+
+/-- **Smooth morphisms are geometrically reduced.** A base change of a smooth morphism to a
+field is smooth over that field, hence regular, so its local rings are regular local rings,
+which are integral domains. -/
+theorem GeometricallyReduced.of_smooth {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
+    GeometricallyReduced f where
+  geometrically_isReduced _ _ y _ fst snd h := by
+    have : Smooth snd := MorphismProperty.of_isPullback h ‹Smooth f›
+    have := LocallyOfFiniteType.isLocallyNoetherian snd
+    have := IsRegular.of_smooth snd
+    exact isReduced_of_isReduced_stalk _
 
 end AlgebraicGeometry

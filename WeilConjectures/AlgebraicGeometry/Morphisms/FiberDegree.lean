@@ -10,7 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Limits
+public import WeilConjectures.Mathlib.RingTheory.Flat.LocallyFree
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiberDegree
 
@@ -31,6 +33,9 @@ of its ring of global sections.
   `Spec L ⟶ Z` over `Spec R` are the `R`-algebra homomorphisms `Γ(Z, ⊤) →ₐ[R] L`.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree`: the degree of the fibre of an affine morphism
   at a point.
+- `AlgebraicGeometry.Scheme.Hom.IsFiniteLocallyFree` and
+  `AlgebraicGeometry.Scheme.Hom.IsFiniteLocallyFreeOfDegree`: finite locally free morphisms, and
+  those of constant fibre degree `d`.
 
 ## Main statements
 
@@ -49,6 +54,11 @@ of its ring of global sections.
   `Ideal.fiberDegree`.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree_morphismRestrict`: compatibility with restriction
   to an open of the target.
+- `AlgebraicGeometry.fiberDegree_eq_finrankΓ`: over a field, the fibre degree of an affine
+  morphism is the dimension of its ring of global sections.
+- `AlgebraicGeometry.Scheme.Hom.flat_of_fiberDegree_eq`,
+  `AlgebraicGeometry.Scheme.Hom.finrank_eq_of_fiberDegree_eq`: a finite morphism of finite
+  presentation to a reduced scheme with constant fibre degree `n` is flat of rank `n`.
 -/
 
 @[expose] public section
@@ -540,5 +550,131 @@ lemma Scheme.Hom.exists_forall_fiberDegree_SpecMap_le [Algebra.IsStandardEtale R
 end Spec
 
 end FiberDegree
+
+section Field
+
+variable {K : Type u} [Field K]
+
+/-- The order `f.finrankΓ` of a finite group scheme over a field is the fibre degree of its
+structure morphism at the unique point of `Spec K`; the two degree notions of the project agree
+on group schemes over a field. -/
+theorem fiberDegree_eq_finrankΓ {G : Scheme.{u}} (f : G ⟶ Spec (.of K)) [IsAffineHom f]
+    (x : Spec (.of K)) :
+    f.fiberDegree x = f.finrankΓ := by
+  have : IsAffine G := isAffine_of_isAffineHom f
+  obtain ⟨ψ, hψ⟩ := Spec.map_surjective ((Spec (.of K)).fromSpecResidueField x)
+  have H : IsPullback (pullback.fst f _) (f.fiberToSpecResidueField x) f (Spec.map ψ) := by
+    rw [hψ]; exact .of_hasPullback _ _
+  obtain ⟨e⟩ := Scheme.Hom.nonempty_algEquiv_tensorProduct_Γ_of_isPullback ψ H
+  let _ := f.ΓAlgebra
+  let _ := ψ.hom.toAlgebra
+  have e' : (Spec (.of K)).residueField x ⊗[K] Γ(G, ⊤) ≃ₐ[(Spec (.of K)).residueField x]
+      Γ(f.fiber x, ⊤) := e
+  change Module.finrank _ _ = Module.finrank _ _
+  rw [← e'.toLinearEquiv.finrank_eq]
+  exact Module.finrank_baseChange
+
+end Field
+
+section FlatOfFiberDegree
+
+variable {X Y : Scheme.{u}}
+
+/-- The fibre degree is invariant under precomposition with an isomorphism. -/
+lemma Scheme.Hom.fiberDegree_comp_left_of_isIso {X' : Scheme.{u}} (e : X' ⟶ X) [IsIso e]
+    (f : X ⟶ Y) [IsAffineHom f] (y : Y) :
+    (e ≫ f).fiberDegree y = f.fiberDegree y :=
+  Scheme.Hom.fiberDegree_of_isPullback f
+    (IsPullback.of_horiz_isIso (fst := e) (snd := e ≫ f) (g := 𝟙 Y) ⟨by simp⟩) y
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The affine case of `AlgebraicGeometry.Scheme.Hom.flat_of_fiberDegree_eq` and
+`AlgebraicGeometry.Scheme.Hom.finrank_eq_of_fiberDegree_eq`, which reduces to
+`Module.projective_of_finrank_fiber_eq`. -/
+private lemma Scheme.Hom.flat_and_finrank_of_fiberDegree_eq_of_affine {R : CommRingCat.{u}}
+    (f : X ⟶ Spec R) [IsAffine X] [IsFinite f] [LocallyOfFinitePresentation f] [_root_.IsReduced R]
+    {n : ℕ} (h : ∀ y, f.fiberDegree y = n) : Flat f ∧ ∀ y, f.finrank y = n := by
+  wlog hX : ∃ S, X = Spec S generalizing X
+  · obtain ⟨h₁, h₂⟩ := this (X.isoSpec.inv ≫ f)
+      (fun y ↦ (Scheme.Hom.fiberDegree_comp_left_of_isIso _ _ _).trans (h y)) ⟨_, rfl⟩
+    refine ⟨?_, fun y ↦ ?_⟩
+    · rwa [MorphismProperty.cancel_left_of_respectsIso @Flat] at h₁
+    · have := (MorphismProperty.cancel_left_of_respectsIso @Flat _ _).mp h₁
+      rw [← h₂ y, Scheme.Hom.finrank_comp_left_of_isIso]
+  obtain ⟨S, rfl⟩ := hX
+  obtain ⟨φ, rfl⟩ := Spec.map_surjective f
+  simp only [IsFinite.SpecMap_iff, LocallyOfFinitePresentation.SpecMap_iff] at *
+  algebraize [φ.hom]
+  have : Module.FinitePresentation R S :=
+    .of_finite_of_finitePresentation _ _
+  have h' (q : Ideal R) [q.IsPrime] :
+      Module.finrank q.ResidueField (q.Fiber S) = n := by
+    have e : φ = CommRingCat.ofHom (algebraMap R S) := rfl
+    rw [← h ⟨q, inferInstance⟩, e, Scheme.Hom.fiberDegree_SpecMap]
+    rfl
+  have := Module.projective_of_finrank_fiber_eq h'
+  have hflat : φ.hom.Flat := by
+    rw [← RingHom.algebraMap_toAlgebra φ.hom, RingHom.flat_algebraMap_iff]; infer_instance
+  refine ⟨Flat.SpecMap_iff.mpr hflat, fun y ↦ ?_⟩
+  rw [Scheme.Hom.finrank_SpecMap_eq_finrank ‹_› hflat, ← RingHom.algebraMap_toAlgebra φ.hom,
+    RingHom.finrank_algebraMap]
+  exact Module.rankAtStalk_eq_of_finrank_fiber_eq h' y
+
+variable (f : X ⟶ Y) [IsFinite f] [LocallyOfFinitePresentation f] [IsReduced Y] {n : ℕ}
+
+/-- Blueprint `lem-sc-finite-constant-length-flat`: Finite morphisms with constant fibre length
+are flat.
+
+A finite morphism `f : X ⟶ Y` of finite presentation to a reduced scheme, all of whose fibres
+have the same degree `n`, is flat. -/
+theorem Scheme.Hom.flat_of_fiberDegree_eq (h : ∀ y, f.fiberDegree y = n) : Flat f := by
+  rw [IsZariskiLocalAtTarget.iff_of_openCover (P := @Flat) Y.affineCover]
+  intro i
+  have : IsReduced (Y.affineCover.X i) := isReduced_of_isOpenImmersion (Y.affineCover.f i)
+  have := (affine_isReduced_iff _).mp this
+  have : IsAffine (pullback f (Y.affineCover.f i)) :=
+    isAffine_of_isAffineHom (pullback.snd f (Y.affineCover.f i))
+  exact (flat_and_finrank_of_fiberDegree_eq_of_affine (pullback.snd f (Y.affineCover.f i))
+    fun y ↦ (Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback _ _) y).trans (h _)).1
+
+/-- Blueprint `lem-sc-finite-constant-length-flat`: Finite morphisms with constant fibre length
+are flat.
+
+A finite morphism `f : X ⟶ Y` of finite presentation to a reduced scheme, all of whose fibres
+have the same degree `n`, is finite flat of rank `n`: `f_* 𝒪_X` is locally free of rank `n`. -/
+theorem Scheme.Hom.finrank_eq_of_fiberDegree_eq (h : ∀ y, f.fiberDegree y = n) (y : Y) :
+    f.finrank y = n := by
+  have := f.flat_of_fiberDegree_eq h
+  obtain ⟨R, g, _, y, rfl⟩ := Y.exists_Spec_apply_eq y
+  rw [← Scheme.Hom.finrank_pullback_snd]
+  have : IsReduced (Spec R) := isReduced_of_isOpenImmersion g
+  have : _root_.IsReduced R := (affine_isReduced_iff _).mp this
+  have : IsAffine (pullback f g) := isAffine_of_isAffineHom (pullback.snd f g)
+  exact (flat_and_finrank_of_fiberDegree_eq_of_affine (pullback.snd f g)
+    fun y ↦ (Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback _ _) y).trans (h _)).2 y
+
+end FlatOfFiberDegree
+
+section FiniteLocallyFree
+
+variable {X S : Scheme.{u}}
+
+/-- A morphism of schemes `f : X ⟶ S` is **finite locally free** if it is finite, flat and
+locally of finite presentation.
+
+(blueprint: `def-pc-finite-locally-free`) -/
+class Scheme.Hom.IsFiniteLocallyFree (f : X ⟶ S) : Prop
+    extends IsFinite f, Flat f, LocallyOfFinitePresentation f
+
+/-- A morphism of schemes `f : X ⟶ S` is **finite locally free of degree `d`** if it is finite
+locally free and every fibre `X_s` has degree `d`: `dim_{κ(s)} Γ(X_s, 𝒪_{X_s}) = d` for every point
+`s` of `S` (`AlgebraicGeometry.Scheme.Hom.fiberDegree`).
+
+(blueprint: `def-pc-finite-locally-free`) -/
+class Scheme.Hom.IsFiniteLocallyFreeOfDegree (f : X ⟶ S) (d : ℕ) : Prop
+    extends f.IsFiniteLocallyFree where
+  fiberDegree_eq (s : S) : f.fiberDegree s = d
+
+end FiniteLocallyFree
 
 end AlgebraicGeometry

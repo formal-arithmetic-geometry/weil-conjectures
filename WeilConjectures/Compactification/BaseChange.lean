@@ -38,6 +38,8 @@ special case of the literal pullback is `Compactification.baseChange`.
   base changed compactification is a base change of the original open immersion, and
   `AlgebraicGeometry.Compactification.isPullback_i_ofIsPullback` its special case for
   `Compactification.ofIsPullback`;
+- `AlgebraicGeometry.Compactification.isPullback_g_ofIsPullback`: the proper morphism of the
+  base changed compactification is the base change of the original proper morphism;
 - `AlgebraicGeometry.HasCompactification.of_isPullback`: compactifiability is stable under
   base change, with the two projections of a fibre product as instances
   (`AlgebraicGeometry.HasCompactification.pullback_snd` and
@@ -113,6 +115,28 @@ original open immersion**, for the compactification `c.ofIsPullback hsq`:
 theorem isPullback_i_ofIsPullback (hsq : IsPullback h u p t) (c : Compactification p) :
     IsPullback h (c.ofIsPullback hsq).i c.i (pullback.fst c.g t) :=
   isPullback_of_isPullback hsq c (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _)
+
+/-- The open immersion of `c.ofIsPullback hsq` followed by the projection to `c.Z` is
+`h ≫ c.i`. -/
+@[reassoc (attr := simp)]
+lemma ofIsPullback_i_fst (hsq : IsPullback h u p t) (c : Compactification p) :
+    (c.ofIsPullback hsq).i ≫ pullback.fst c.g t = h ≫ c.i :=
+  pullback.lift_fst _ _ _
+
+/-- **The proper morphism of a base-changed compactification is a base change of the original
+proper morphism**, for the compactification `c.ofIsPullback hsq`:
+
+```
+  c.Z ×_T S --------fst-------> c.Z
+  |                              |
+  (c.ofIsPullback hsq).g        c.g
+  ↓                              ↓
+  S ------------t-------------> T
+```
+-/
+theorem isPullback_g_ofIsPullback (hsq : IsPullback h u p t) (c : Compactification p) :
+    IsPullback (c.ofIsPullback hsq).g (pullback.fst c.g t) t c.g :=
+  (IsPullback.of_hasPullback c.g t).flip
 
 /-- **Base change of a compactification** along a morphism `t : T ⟶ S` of bases: if `c` is a
 compactification of `f : X ⟶ S`, then `c.Z ×_S T ⟶ T` together with `X ×_S T ⟶ c.Z ×_S T`

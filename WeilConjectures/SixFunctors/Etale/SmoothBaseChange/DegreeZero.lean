@@ -53,6 +53,9 @@ the degree-zero homology of the derived base-change map of
 - `AlgebraicGeometry.Etale.baseChangeProperty_zero_of_smooth`: the smooth case, a corollary
   of the previous statement and the instance
   `AlgebraicGeometry.Smooth.geometricallyReduced`.
+- `AlgebraicGeometry.Etale.universalBaseChangeProperty_zero` and
+  `AlgebraicGeometry.Etale.universalBaseChangeProperty_zero_of_smooth`: the same statements
+  after every base change of `p`.
 
 ## References
 
@@ -356,5 +359,23 @@ induction in the smooth base change theorem. -/
 theorem Etale.baseChangeProperty_zero_of_smooth [Smooth p] :
     Etale.BaseChangeProperty Λ p 0 :=
   Etale.baseChangeProperty_zero Λ p
+
+/-- `AlgebraicGeometry.Etale.baseChangeProperty_zero` holds universally: flatness, local finite
+presentation and geometric reducedness of the fibres are stable under base change. -/
+theorem Etale.universalBaseChangeProperty_zero [Flat p] [LocallyOfFinitePresentation p]
+    [GeometricallyReduced p] :
+    Etale.UniversalBaseChangeProperty Λ p 0 := by
+  intro _ _ _ _ p' hp
+  have : Flat p' := CategoryTheory.MorphismProperty.of_isPullback hp ‹_›
+  have : LocallyOfFinitePresentation p' := CategoryTheory.MorphismProperty.of_isPullback hp ‹_›
+  have : GeometricallyReduced p' := CategoryTheory.MorphismProperty.of_isPullback hp ‹_›
+  intro _ _ g e h _ _ sq F
+  exact Etale.baseChangeProperty_zero Λ p' g e h sq F
+
+/-- The smooth case of `AlgebraicGeometry.Etale.universalBaseChangeProperty_zero`: the base case
+of the induction on `q` in the smooth base change theorem. -/
+theorem Etale.universalBaseChangeProperty_zero_of_smooth [Smooth p] :
+    Etale.UniversalBaseChangeProperty Λ p 0 :=
+  Etale.universalBaseChangeProperty_zero Λ p
 
 end AlgebraicGeometry
