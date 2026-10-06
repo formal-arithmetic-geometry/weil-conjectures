@@ -111,11 +111,11 @@ noncomputable def rightDerivedUpperShriekAdjunction : R(f)_![A] ⊣ R(f)^![A] :=
 instance : (R(f)^![A]).IsRightAdjoint :=
   (rightDerivedUpperShriekAdjunction A f).isRightAdjoint
 
-variable (R : Type*) [Ring R] [Linear R A] in
-/-- If `A` is `R`-linear, the exceptional inverse image `Rf^!` is `R`-linear, being right
-adjoint to the `R`-linear functor `Rf_!`. -/
-instance linear_rightDerivedUpperShriek : (R(f)^![A]).Linear R :=
-  (rightDerivedUpperShriekAdjunction A f).right_adjoint_linear (R := R)
+variable (Λ : Type*) [Ring Λ] [Linear Λ A] in
+/-- If `A` is `Λ`-linear, the exceptional inverse image `Rf^!` is `Λ`-linear, being right
+adjoint to the `Λ`-linear functor `Rf_!`. -/
+instance linear_rightDerivedUpperShriek : (R(f)^![A]).Linear Λ :=
+  (rightDerivedUpperShriekAdjunction A f).right_adjoint_linear
 
 end Unbounded
 

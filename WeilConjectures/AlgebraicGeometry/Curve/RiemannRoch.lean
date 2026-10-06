@@ -12,6 +12,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
@@ -122,6 +123,19 @@ theorem IdealSheafData.IsInvertible.degree_dual_toModules {J : X.IdealSheafData}
   -- Twist `0 → 𝒪_X(-D) → 𝒪_X → 𝒪_D → 0` by `𝒪_X(D)`; `𝒪_X(D)|_D ≅ 𝒪_D` since `D` is finite over
   -- `k`, hence semi-local, so `χ(𝒪_X(D)) - χ(𝒪_X) = h⁰(𝒪_D)`.
   sorry
+
+/-- **The line bundle of a rational point has degree one.** Let `D` be an effective Cartier
+divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf `J = 𝒪_X(-D)`, which is
+a `k`-rational point: `Γ(D, 𝒪_D) = k` is one-dimensional. Then the χ-degree of `𝒪_X(D)` of
+blueprint `def-pc-degree-line-bundle` is `1`, the degree of the divisor `[P]` of `def-sc-pic0`.
+For an arbitrary effective `D` the agreement of the two degrees is
+`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules`.
+
+(blueprint: `lem-pc-degree-agrees-sc`) -/
+theorem IdealSheafData.IsInvertible.degree_dual_toModules_eq_one {J : X.IdealSheafData}
+    (hJ : J.IsInvertible) (h : (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ = 1) :
+    J.toModulesᵛ.degree k = 1 := by
+  rw [hJ.degree_dual_toModules, h, Nat.cast_one]
 
 /-- **The degree is additive.** `deg (ℒ ⊗ ℳ) = deg ℒ + deg ℳ` for invertible sheaves on a smooth
 proper curve.
@@ -239,14 +253,20 @@ morphism `φ : ℱ ⟶ 𝒢` of finite locally free modules the square
 ```
 commutes. No hypothesis `H⁰(X, 𝒪_X) = k` is needed.
 
-(blueprint: `sk-thm-picard-duality`) -/
+The case `q = 1` is `AlgebraicGeometry.Scheme.nonempty_dual_H_one_iso`, obtained from a finite flat
+morphism `X ⟶ ℙ¹_k` and duality on `ℙ¹_k`; the case `q = 0` is
+`AlgebraicGeometry.Scheme.nonempty_dual_H_zero_iso`, deduced from it by biduality.
+
+(blueprint: `sk-thm-picard-duality`, `thm-sc-serre-duality-curve`) -/
 theorem serreDuality [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] (p q : ℕ) (hpq : p + q = 1) :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
         (Modules.cohomologyFunctor k q).op ⋙ ModuleCat.dualFunctor k ≅
       (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
-        tensorRight (X ↘ Spec (.of k)).relativeDifferentials ⋙ Modules.cohomologyFunctor k p) :=
-  sorry
+        tensorRight (X ↘ Spec (.of k)).relativeDifferentials ⋙ Modules.cohomologyFunctor k p) := by
+  obtain ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩ : p = 0 ∧ q = 1 ∨ p = 1 ∧ q = 0 := by omega
+  · exact nonempty_dual_H_one_iso
+  · exact nonempty_dual_H_zero_iso
 
 /-- **Serre duality in dimension `0`.** Let `X` be smooth and proper of relative dimension `0`
 over `k`, i.e. `X = Spec A` with `A` finite étale over `k`, so that the canonical module is
@@ -292,9 +312,10 @@ theorem finrankH_relativeDifferentials_zero_eq_arithmeticGenus
   rfl
 
 /-- **The two genera agree.** On a smooth proper curve over `k`, the genus
-`dim_k Γ(X, Ω¹_{X/k})` of `sk-def-curve` is the arithmetic genus `dim_k H¹(X, 𝒪_X)`.
+`dim_k Γ(X, Ω¹_{X/k})` of `sk-def-curve` is the arithmetic genus `dim_k H¹(X, 𝒪_X)`, the genus
+of blueprint `def-pc-genus`.
 
-(blueprint: `sk-thm-picard-duality`) -/
+(blueprint: `sk-thm-picard-duality`, `lem-pc-genus-agrees-sc`) -/
 theorem genus_eq_arithmeticGenus [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] :
     (X ↘ Spec (.of k)).genus = arithmeticGenus k X := by

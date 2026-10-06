@@ -9,6 +9,11 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Limits
+public import WeilConjectures.Mathlib.RingTheory.Flat.LocallyFree
+public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiberDegree
 
 /-!
@@ -24,8 +29,13 @@ of its ring of global sections.
   of `Z` as an `R`-algebra.
 - `AlgebraicGeometry.Scheme.Hom.finrankΓ`: the `R`-dimension of that algebra. For a finite
   group scheme over a field this is its order.
+- `AlgebraicGeometry.Scheme.Hom.overHomEquivAlgHom`: for `Z` affine over `Spec R`, the points
+  `Spec L ⟶ Z` over `Spec R` are the `R`-algebra homomorphisms `Γ(Z, ⊤) →ₐ[R] L`.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree`: the degree of the fibre of an affine morphism
   at a point.
+- `AlgebraicGeometry.Scheme.Hom.IsFiniteLocallyFree` and
+  `AlgebraicGeometry.Scheme.Hom.IsFiniteLocallyFreeOfDegree`: finite locally free morphisms, and
+  those of constant fibre degree `d`.
 
 ## Main statements
 
@@ -38,10 +48,17 @@ of its ring of global sections.
   whose fibre degrees vanish has empty source.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree_of_isCompl`: the fibre degree is additive in
   complementary open (and closed) subschemes of the source.
+- `AlgebraicGeometry.Scheme.Hom.exists_overIso_sigma_of_isSepClosed`: the fibre of a finite
+  étale morphism over a separably closed point is a finite disjoint union of copies of the point.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree_SpecMap`: comparison with the ring-theoretic
   `Ideal.fiberDegree`.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree_morphismRestrict`: compatibility with restriction
   to an open of the target.
+- `AlgebraicGeometry.fiberDegree_eq_finrankΓ`: over a field, the fibre degree of an affine
+  morphism is the dimension of its ring of global sections.
+- `AlgebraicGeometry.Scheme.Hom.flat_of_fiberDegree_eq`,
+  `AlgebraicGeometry.Scheme.Hom.finrank_eq_of_fiberDegree_eq`: a finite morphism of finite
+  presentation to a reduced scheme with constant fibre degree `n` is flat of rank `n`.
 -/
 
 @[expose] public section
@@ -141,6 +158,119 @@ lemma Scheme.Hom.nonempty_algEquiv_tensorProduct_Γ_of_isPullback :
 end BaseChange
 
 end ΓAlgebra
+
+section Points
+
+variable {Z : Scheme.{u}} {R : CommRingCat.{u}}
+
+/-- A morphism `Spec L ⟶ Z` to an affine scheme is `Spec` of its action on global sections. -/
+lemma Scheme.Spec_map_appTop_comp_ΓSpecIso_hom {L : CommRingCat.{u}} [IsAffine Z]
+    (v : Spec L ⟶ Z) : Spec.map (v.appTop ≫ (Scheme.ΓSpecIso L).hom) = v ≫ Z.isoSpec.hom := by
+  rw [← Scheme.isoSpec_hom_naturality, Scheme.isoSpec_Spec_hom, Spec.map_comp]
+
+/-- A morphism from an affine scheme to `Spec R` is `Spec` of its action on global sections. -/
+lemma Scheme.Hom.isoSpec_inv_comp [IsAffine Z] (h : Z ⟶ Spec R) :
+    Z.isoSpec.inv ≫ h = Spec.map ((Scheme.ΓSpecIso R).inv ≫ h.appTop) := by
+  rw [Iso.inv_comp_eq, Spec.map_comp, ← Category.assoc, Scheme.isoSpec_hom_naturality,
+    Category.assoc, Scheme.isoSpec_Spec_hom, ← Spec.map_comp, Iso.inv_hom_id, Spec.map_id,
+    Category.comp_id]
+
+/-- For `h : Z ⟶ Spec R` with `Z` affine and an `R`-algebra `L`, the morphisms `Spec L ⟶ Z`
+over `Spec R` are the `R`-algebra homomorphisms `Γ(Z, ⊤) →ₐ[R] L`. -/
+noncomputable def Scheme.Hom.overHomEquivAlgHom (h : Z ⟶ Spec R) [IsAffine Z] (L : Type u)
+    [CommRing L] [Algebra R L] :
+    letI := h.ΓAlgebra
+    (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R L))) ⟶ Over.mk h) ≃
+      (Γ(Z, ⊤) →ₐ[R] L) :=
+  letI := h.ΓAlgebra
+  { toFun u :=
+      { toRingHom := (u.left.appTop ≫ (Scheme.ΓSpecIso (.of L)).hom).hom
+        commutes' r := by
+          have hu : u.left ≫ h = Spec.map (CommRingCat.ofHom (algebraMap R L)) := Over.w u
+          change ((Scheme.ΓSpecIso R).inv ≫ h.appTop ≫ u.left.appTop ≫
+            (Scheme.ΓSpecIso (.of L)).hom).hom r = _
+          rw [← Scheme.Hom.comp_appTop_assoc, hu, Scheme.ΓSpecIso_naturality]
+          exact congrArg (algebraMap R L) (Iso.inv_hom_id_apply (Scheme.ΓSpecIso R) r) }
+    invFun g := Over.homMk (Spec.map (CommRingCat.ofHom g.toRingHom) ≫ Z.isoSpec.inv) (by
+      simp only [Over.mk_left, Over.mk_hom, Category.assoc, h.isoSpec_inv_comp, ← Spec.map_comp]
+      congr 1
+      ext r
+      exact g.commutes r)
+    left_inv u := by
+      ext1
+      change Spec.map _ ≫ Z.isoSpec.inv = u.left
+      rw [Iso.comp_inv_eq]
+      exact Scheme.Spec_map_appTop_comp_ΓSpecIso_hom (Z := Z) u.left
+    right_inv g := by
+      ext1 x
+      have := Scheme.Spec_map_appTop_comp_ΓSpecIso_hom
+        (Spec.map (CommRingCat.ofHom g.toRingHom) ≫ Z.isoSpec.inv)
+      rw [Category.assoc, Iso.inv_hom_id, Category.comp_id] at this
+      exact congr($(Spec.map_injective this).hom x) }
+
+/-- The bijection `Scheme.Hom.overHomEquivAlgHom` is natural in the algebra `L`. -/
+lemma Scheme.Hom.overHomEquivAlgHom_comp (h : Z ⟶ Spec R) [IsAffine Z] {L L' : Type u}
+    [CommRing L] [Algebra R L] [CommRing L'] [Algebra R L'] [Algebra L L']
+    [IsScalarTower R L L']
+    (v : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R L'))) ⟶
+      Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R L))))
+    (hv : v.left = Spec.map (CommRingCat.ofHom (algebraMap L L')))
+    (u : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R L))) ⟶ Over.mk h) :
+    letI := h.ΓAlgebra
+    h.overHomEquivAlgHom L' (v ≫ u) =
+      (IsScalarTower.toAlgHom R L L').comp (h.overHomEquivAlgHom L u) := by
+  let := h.ΓAlgebra
+  ext x
+  change ((v.left ≫ u.left).appTop ≫ (Scheme.ΓSpecIso (.of L')).hom).hom x = _
+  rw [hv, Scheme.Hom.comp_appTop, Category.assoc, Scheme.ΓSpecIso_naturality]
+  rfl
+
+/-- If `Z` is affine and étale over a field `K`, then `Γ(Z, ⊤)` is an étale `K`-algebra. -/
+lemma Scheme.Hom.etale_ΓAlgebra {K : Type u} [Field K] (h : Z ⟶ Spec (.of K)) [IsAffine Z]
+    [Etale h] :
+    letI := h.ΓAlgebra
+    Algebra.Etale K Γ(Z, ⊤) := by
+  let := h.ΓAlgebra
+  have h' := HasRingHomProperty.iff_of_isAffine (P := @Etale) (f := h) |>.mp inferInstance
+  refine RingHom.etale_algebraMap.mp ?_
+  rw [h.algebraMap_ΓAlgebra, CommRingCat.hom_comp, RingHom.Etale.respectsIso.cancel_left_isIso]
+  exact h'
+
+end Points
+
+section GeometricFiber
+
+/-- Blueprint `lem-galois-geometric-fibre`: the geometric fibre of a finite étale cover.
+
+Let `f : P ⟶ Y` be finite étale and `y : Spec k ⟶ Y` a point with `k` separably closed. Then
+the fibre `P ×_Y Spec k` is, as a scheme over `Spec k`, a finite disjoint union of copies of
+`Spec k`, the number of copies being the `k`-dimension of its ring of global sections. -/
+theorem Scheme.Hom.exists_overIso_sigma_of_isSepClosed {P Y : Scheme.{u}} (f : P ⟶ Y)
+    [IsFinite f] [Etale f] {k : Type u} [Field k] [IsSepClosed k] (y : Spec (.of k) ⟶ Y) :
+    ∃ (ι : Type u) (_ : Finite ι), Nat.card ι = (pullback.snd f y).finrankΓ ∧
+      Nonempty (Over.mk (pullback.snd f y) ≅
+        Over.mk (Sigma.desc fun _ : ι ↦ 𝟙 (Spec (.of k)))) := by
+  set h := pullback.snd f y
+  have : IsAffine (pullback f y) := isAffine_of_isAffineHom h
+  let := h.ΓAlgebra
+  have := h.etale_ΓAlgebra
+  let A := Γ(pullback f y, ⊤)
+  have := Algebra.Etale.finite_primeSpectrum k A
+  let e := Algebra.FormallyEtale.equivPiOfIsSepClosed k A
+  have : IsIso (CommRingCat.ofHom e.symm.toRingHom) :=
+    e.symm.toRingEquiv.toCommRingCatIso.isIso_hom
+  refine ⟨PrimeSpectrum A, inferInstance,
+    (Algebra.Etale.finrank_eq_natCard_primeSpectrum k A).symm, ⟨Over.isoMk
+      ((pullback f y).isoSpec ≪≫ asIso (Spec.map (CommRingCat.ofHom e.symm.toRingHom)) ≪≫
+        (asIso (sigmaSpec fun _ : PrimeSpectrum A ↦ CommRingCat.of k)).symm) ?_⟩⟩
+  simp only [Over.mk_left, Over.mk_hom, Iso.trans_hom, asIso_hom, Iso.symm_hom, asIso_inv,
+    Category.assoc, ← sigmaSpec_comp_Spec_map_algebraMap, IsIso.inv_hom_id_assoc]
+  rw [← Spec.map_comp, ← Iso.eq_inv_comp, h.isoSpec_inv_comp]
+  congr 1
+  ext r
+  exact e.symm.commutes r
+
+end GeometricFiber
 
 section FiberDegree
 
@@ -420,5 +550,131 @@ lemma Scheme.Hom.exists_forall_fiberDegree_SpecMap_le [Algebra.IsStandardEtale R
 end Spec
 
 end FiberDegree
+
+section Field
+
+variable {K : Type u} [Field K]
+
+/-- The order `f.finrankΓ` of a finite group scheme over a field is the fibre degree of its
+structure morphism at the unique point of `Spec K`; the two degree notions of the project agree
+on group schemes over a field. -/
+theorem fiberDegree_eq_finrankΓ {G : Scheme.{u}} (f : G ⟶ Spec (.of K)) [IsAffineHom f]
+    (x : Spec (.of K)) :
+    f.fiberDegree x = f.finrankΓ := by
+  have : IsAffine G := isAffine_of_isAffineHom f
+  obtain ⟨ψ, hψ⟩ := Spec.map_surjective ((Spec (.of K)).fromSpecResidueField x)
+  have H : IsPullback (pullback.fst f _) (f.fiberToSpecResidueField x) f (Spec.map ψ) := by
+    rw [hψ]; exact .of_hasPullback _ _
+  obtain ⟨e⟩ := Scheme.Hom.nonempty_algEquiv_tensorProduct_Γ_of_isPullback ψ H
+  let _ := f.ΓAlgebra
+  let _ := ψ.hom.toAlgebra
+  have e' : (Spec (.of K)).residueField x ⊗[K] Γ(G, ⊤) ≃ₐ[(Spec (.of K)).residueField x]
+      Γ(f.fiber x, ⊤) := e
+  change Module.finrank _ _ = Module.finrank _ _
+  rw [← e'.toLinearEquiv.finrank_eq]
+  exact Module.finrank_baseChange
+
+end Field
+
+section FlatOfFiberDegree
+
+variable {X Y : Scheme.{u}}
+
+/-- The fibre degree is invariant under precomposition with an isomorphism. -/
+lemma Scheme.Hom.fiberDegree_comp_left_of_isIso {X' : Scheme.{u}} (e : X' ⟶ X) [IsIso e]
+    (f : X ⟶ Y) [IsAffineHom f] (y : Y) :
+    (e ≫ f).fiberDegree y = f.fiberDegree y :=
+  Scheme.Hom.fiberDegree_of_isPullback f
+    (IsPullback.of_horiz_isIso (fst := e) (snd := e ≫ f) (g := 𝟙 Y) ⟨by simp⟩) y
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The affine case of `AlgebraicGeometry.Scheme.Hom.flat_of_fiberDegree_eq` and
+`AlgebraicGeometry.Scheme.Hom.finrank_eq_of_fiberDegree_eq`, which reduces to
+`Module.projective_of_finrank_fiber_eq`. -/
+private lemma Scheme.Hom.flat_and_finrank_of_fiberDegree_eq_of_affine {R : CommRingCat.{u}}
+    (f : X ⟶ Spec R) [IsAffine X] [IsFinite f] [LocallyOfFinitePresentation f] [_root_.IsReduced R]
+    {n : ℕ} (h : ∀ y, f.fiberDegree y = n) : Flat f ∧ ∀ y, f.finrank y = n := by
+  wlog hX : ∃ S, X = Spec S generalizing X
+  · obtain ⟨h₁, h₂⟩ := this (X.isoSpec.inv ≫ f)
+      (fun y ↦ (Scheme.Hom.fiberDegree_comp_left_of_isIso _ _ _).trans (h y)) ⟨_, rfl⟩
+    refine ⟨?_, fun y ↦ ?_⟩
+    · rwa [MorphismProperty.cancel_left_of_respectsIso @Flat] at h₁
+    · have := (MorphismProperty.cancel_left_of_respectsIso @Flat _ _).mp h₁
+      rw [← h₂ y, Scheme.Hom.finrank_comp_left_of_isIso]
+  obtain ⟨S, rfl⟩ := hX
+  obtain ⟨φ, rfl⟩ := Spec.map_surjective f
+  simp only [IsFinite.SpecMap_iff, LocallyOfFinitePresentation.SpecMap_iff] at *
+  algebraize [φ.hom]
+  have : Module.FinitePresentation R S :=
+    .of_finite_of_finitePresentation _ _
+  have h' (q : Ideal R) [q.IsPrime] :
+      Module.finrank q.ResidueField (q.Fiber S) = n := by
+    have e : φ = CommRingCat.ofHom (algebraMap R S) := rfl
+    rw [← h ⟨q, inferInstance⟩, e, Scheme.Hom.fiberDegree_SpecMap]
+    rfl
+  have := Module.projective_of_finrank_fiber_eq h'
+  have hflat : φ.hom.Flat := by
+    rw [← RingHom.algebraMap_toAlgebra φ.hom, RingHom.flat_algebraMap_iff]; infer_instance
+  refine ⟨Flat.SpecMap_iff.mpr hflat, fun y ↦ ?_⟩
+  rw [Scheme.Hom.finrank_SpecMap_eq_finrank ‹_› hflat, ← RingHom.algebraMap_toAlgebra φ.hom,
+    RingHom.finrank_algebraMap]
+  exact Module.rankAtStalk_eq_of_finrank_fiber_eq h' y
+
+variable (f : X ⟶ Y) [IsFinite f] [LocallyOfFinitePresentation f] [IsReduced Y] {n : ℕ}
+
+/-- Blueprint `lem-sc-finite-constant-length-flat`: Finite morphisms with constant fibre length
+are flat.
+
+A finite morphism `f : X ⟶ Y` of finite presentation to a reduced scheme, all of whose fibres
+have the same degree `n`, is flat. -/
+theorem Scheme.Hom.flat_of_fiberDegree_eq (h : ∀ y, f.fiberDegree y = n) : Flat f := by
+  rw [IsZariskiLocalAtTarget.iff_of_openCover (P := @Flat) Y.affineCover]
+  intro i
+  have : IsReduced (Y.affineCover.X i) := isReduced_of_isOpenImmersion (Y.affineCover.f i)
+  have := (affine_isReduced_iff _).mp this
+  have : IsAffine (pullback f (Y.affineCover.f i)) :=
+    isAffine_of_isAffineHom (pullback.snd f (Y.affineCover.f i))
+  exact (flat_and_finrank_of_fiberDegree_eq_of_affine (pullback.snd f (Y.affineCover.f i))
+    fun y ↦ (Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback _ _) y).trans (h _)).1
+
+/-- Blueprint `lem-sc-finite-constant-length-flat`: Finite morphisms with constant fibre length
+are flat.
+
+A finite morphism `f : X ⟶ Y` of finite presentation to a reduced scheme, all of whose fibres
+have the same degree `n`, is finite flat of rank `n`: `f_* 𝒪_X` is locally free of rank `n`. -/
+theorem Scheme.Hom.finrank_eq_of_fiberDegree_eq (h : ∀ y, f.fiberDegree y = n) (y : Y) :
+    f.finrank y = n := by
+  have := f.flat_of_fiberDegree_eq h
+  obtain ⟨R, g, _, y, rfl⟩ := Y.exists_Spec_apply_eq y
+  rw [← Scheme.Hom.finrank_pullback_snd]
+  have : IsReduced (Spec R) := isReduced_of_isOpenImmersion g
+  have : _root_.IsReduced R := (affine_isReduced_iff _).mp this
+  have : IsAffine (pullback f g) := isAffine_of_isAffineHom (pullback.snd f g)
+  exact (flat_and_finrank_of_fiberDegree_eq_of_affine (pullback.snd f g)
+    fun y ↦ (Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback _ _) y).trans (h _)).2 y
+
+end FlatOfFiberDegree
+
+section FiniteLocallyFree
+
+variable {X S : Scheme.{u}}
+
+/-- A morphism of schemes `f : X ⟶ S` is **finite locally free** if it is finite, flat and
+locally of finite presentation.
+
+(blueprint: `def-pc-finite-locally-free`) -/
+class Scheme.Hom.IsFiniteLocallyFree (f : X ⟶ S) : Prop
+    extends IsFinite f, Flat f, LocallyOfFinitePresentation f
+
+/-- A morphism of schemes `f : X ⟶ S` is **finite locally free of degree `d`** if it is finite
+locally free and every fibre `X_s` has degree `d`: `dim_{κ(s)} Γ(X_s, 𝒪_{X_s}) = d` for every point
+`s` of `S` (`AlgebraicGeometry.Scheme.Hom.fiberDegree`).
+
+(blueprint: `def-pc-finite-locally-free`) -/
+class Scheme.Hom.IsFiniteLocallyFreeOfDegree (f : X ⟶ S) (d : ℕ) : Prop
+    extends f.IsFiniteLocallyFree where
+  fiberDegree_eq (s : S) : f.fiberDegree s = d
+
+end FiniteLocallyFree
 
 end AlgebraicGeometry

@@ -17,16 +17,14 @@ This is the pro-étale counterpart of
 
 The exceptional inverse image `Rf^!` along a morphism `f : X ⟶ Y` admitting a compactification
 is *defined* here as a chosen right adjoint of the derived lower shriek `Rf_!` on the
-unbounded derived categories of pro-étale sheaves. On the bounded below derived categories,
-`Rf^!` is *not* defined by another adjoint-functor argument: it is the restriction of the
-unbounded `Rf^!` along the inclusion `DerivedCategory.Plus.ι`, which makes sense because
-`Rf^!` preserves bounded below objects. That the restriction is again a right adjoint, now
-of the bounded below `Rf_!`, is then a theorem.
+unbounded derived categories of pro-étale sheaves, *whenever such a right adjoint exists*: unlike
+in the étale case, `Rf_!` need not be a left adjoint, so its existence is a hypothesis. On the
+bounded below derived categories, `Rf^!` is *not* defined by another adjoint-functor argument:
+it is the restriction of the unbounded `Rf^!` along the inclusion `DerivedCategory.Plus.ι`,
+which makes sense because `Rf^!` preserves bounded below objects. That the restriction is again
+a right adjoint, now of the bounded below `Rf_!`, is then a theorem.
 
 # Main Results
-
-- `AlgebraicGeometry.ProEtale.isLeftAdjoint_rightDerivedLowerShriek` : `Rf_!` is a left
-  adjoint on `D(X_proét)`.
 
 - `AlgebraicGeometry.ProEtale.rightDerivedUpperShriek` : `Rf^! : D(Y_proét) ⥤ D(X_proét)`,
   with scoped notation `R(f)^![A]`.
@@ -42,14 +40,18 @@ of the bounded below `Rf_!`, is then a theorem.
   `Rf_! ⊣ Rf^!` on the bounded below derived categories.
 
 - `AlgebraicGeometry.ProEtale.isLeftAdjoint_rightDerivedLowerShriekPlus` : `Rf_!` is a left
-  adjoint on `D⁺(X_proét)`, a consequence of the previous item.
+  adjoint on `D⁺(X_proét)` whenever it is one on `D(X_proét)`.
 
 ## Implementation notes
 
-* `isLeftAdjoint_rightDerivedLowerShriek` is `sorry` by design, exactly as in the étale case:
-  this file only *states* that `Rf_!` has a right adjoint and packages that right adjoint, the
-  proof is left to a later file. The adjoint exists by Brown representability, `Rf_!` being a
-  colimit preserving functor between compactly generated triangulated categories.
+* Everything here takes `[(R(f)_![A]).IsLeftAdjoint]` as a hypothesis; there is no global
+  instance, unlike in the étale case. In general `Rf_!` is *not* a left adjoint on the pro-étale
+  derived categories, not even on `D⁺`: for the structure morphism of an elliptic curve over
+  `𝔽̄_p` and `𝔽_r`-module coefficients with `r ≠ p`, `Rf_! = Rf_*` does not preserve coproducts
+  (blueprint `sk-rem-sf-fullcd-scope`; see
+  `WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint`). A sufficient condition is the
+  uniform cohomological-dimension bound
+  `AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint`.
 * `plus_rightDerivedUpperShriek_obj`, that `Rf^!` preserves bounded below objects, is also
   `sorry` for now.
 * `Rf^!` is `Functor.rightAdjoint`, i.e. an arbitrary choice of right adjoint extracted from
@@ -88,15 +90,14 @@ namespace ProEtale
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
-section Unbounded
+variable [(R(f)_![A]).IsLeftAdjoint]
 
-/-- The derived lower shriek `Rf_! : D(X_proét) ⥤ D(Y_proét)` is a left adjoint; its right
-adjoint is the exceptional inverse image `Rf^!`. -/
-instance isLeftAdjoint_rightDerivedLowerShriek : (R(f)_![A]).IsLeftAdjoint := sorry
+section Unbounded
 
 /-- The exceptional inverse image `Rf^! : D(Y_proét) ⥤ D(X_proét)` along a morphism
 `f : X ⟶ Y` admitting a compactification, on the unbounded derived categories of pro-étale
-sheaves: *by definition* a chosen right adjoint of the derived lower shriek `R(f)_![A]`. -/
+sheaves, when the derived lower shriek `R(f)_![A]` is a left adjoint: *by definition* a chosen
+right adjoint of `R(f)_![A]`. -/
 noncomputable def rightDerivedUpperShriek :
     DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=

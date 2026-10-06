@@ -46,7 +46,7 @@ enter) and the failure over the empty scheme.
 - `AlgebraicGeometry.Etale.nonempty_fieldFailure`: if `BC(p, Λ, q')` holds universally for
   `q' < q` and `BC(p, Λ, q)` fails, a counterexample over a field exists.
 - `AlgebraicGeometry.Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty`: the same
-  conclusion when `BC(p, Λ, q)` only fails universally, as in the blueprint.
+  conclusion when `BC(p, Λ, q)` only fails after some base change, as in the blueprint.
 - `AlgebraicGeometry.Etale.FieldFailure.isAffineHom_a`: if `S` is separated, the base change
   `S' ⟶ S` of such a counterexample is affine.
 
@@ -320,7 +320,7 @@ variable (p) in
 If the base-change property `BC(p, Λ, q')` holds universally for all `q' < q` while
 `BC(p, Λ, q)` fails for some `q ≥ 1`, there is a counterexample over a field, that is, an
 `AlgebraicGeometry.Etale.FieldFailure`. Blueprint `sbc-lem-bc-failure-field` only assumes that
-`BC(p, Λ, q)` fails universally; that form is
+`BC(p, Λ, q)` does not hold universally; that form is
 `AlgebraicGeometry.Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty`.
 
 After restricting to an affine open of `S` the base of the failing square is quasi-compact
@@ -379,9 +379,9 @@ variable (p) in
 /-- Blueprint `sbc-lem-bc-failure-field`: A failure of base change is detected over a field.
 
 If the base-change property `BC(p, Λ, q')` holds universally for all `q' < q` while
-`BC(p, Λ, q)` fails universally for some `q ≥ 1`, there is a counterexample over a field. Apply
-`AlgebraicGeometry.Etale.nonempty_fieldFailure` to a failing base change of `p` and paste the
-squares. -/
+`BC(p, Λ, q)` fails after some base change for some `q ≥ 1`, there is a counterexample over
+a field. Apply `AlgebraicGeometry.Etale.nonempty_fieldFailure` to a failing base change of
+`p` and paste the squares. -/
 @[stacks 0F07]
 theorem Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty (q : ℤ) (hq : 1 ≤ q)
     (hprev : ∀ q' < q, Etale.UniversalBaseChangeProperty Λ p q')

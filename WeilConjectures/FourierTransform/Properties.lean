@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.FourierTransform.Defs
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 
 /-!
 
@@ -26,8 +27,6 @@ transport `t`-structures.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.derivedTensorRightPullback`: tensoring with a complex pulled
-  back along `f : X ⟶ Y`, `N ↦ (K ↦ K ⊗ᴸ f^* N)`.
 - `AlgebraicGeometry.Etale.artinSchreierTwist`: tensoring with the Artin–Schreier sheaf of
   a global function, `K ↦ K ⊗ᴸ ℒ_{Ψ, f}`.
 - `AlgebraicGeometry.Etale.pairingAt`: the function `x ↦ b(x, ξ)` on the base change
@@ -46,11 +45,35 @@ transport `t`-structures.
 - `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tateTwist`: the transform commutes
   with the Tate twist.
 
+## Coefficients
+
+Coefficient hypotheses follow the classes in `WeilConjectures.FourierTransform.Defs`.
+
 ## Implementation notes
 
 The base change, base linearity and Tate twist compatibilities only assert that an
 isomorphism *exists*. Later uses, such as transporting `t`-structures, will need specific
 isomorphisms that are coherent with one another, which `Classical.choice` cannot provide.
+
+The stalk formula and base change are compact-support base change for `Rp₂,!`
+(sketch blueprint: `sk-prop-sf-cbc`), along `ξ` for the stalk formula and along the induced
+cartesian square `W ×_{S'} W' ⟶ V ×_S V'` for base change. For the stalk formula it is
+followed by the pullback of the kernel to `V_ξ`, which is formal (`Lξ^*` is monoidal); no
+smooth base change is needed. In both cases the result is compared with `Rp₂,!` computed
+with the *chosen* compactification of the base changed projection
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), which needs that projection to be
+quasi-compact: it is a base change of `π`, resp. of `pullback.snd π π'`, which are assumed
+quasi-compact.
+
+Base linearity is the projection formula for `Rp₂,!`. The statement is over the whole
+unbounded derived categories, while the project's projection formula
+`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek` only covers a
+bounded constructible `K` and an `N` of finite Tor amplitude. The unbounded form holds for
+finite `Λ`: the projection map is an isomorphism for `j_!` of an open immersion formally, and
+for a proper morphism because its direct image then has finite cohomological dimension and so
+commutes with the colimits reducing to bounded complexes. `[HasInvertibleExponent Λ S]` is
+inherited from the project's projection formula; the classical projection formula for `Rf_!`
+holds for all torsion coefficients (SGA 4 XVII 5.2.9).
 
 TODO: upgrade these back to `Iso` constructions once the exchange isomorphisms they are
 built from exist as data.
@@ -74,14 +97,6 @@ namespace AlgebraicGeometry.Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
 variable {S V V' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S)
-
-/-- Tensoring with a complex pulled back along `f : X ⟶ Y`, as a functor of the complex
-downstairs: `N ↦ (K ↦ K ⊗ᴸ f^* N)`. -/
-noncomputable def derivedTensorRightPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
-      DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
-        DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  D((f)^*[ModuleCat.{u + 1} Λ]) ⋙ derivedTensorRightFunctor (ModuleCat.{u + 1} Λ) X
 
 /-- Twisting by the Artin–Schreier sheaf of a global function: `K ↦ K ⊗ᴸ ℒ_{Ψ, f}`. -/
 noncomputable def artinSchreierTwist (X : Scheme.{u}) [CharP Γ(X, ⊤) p]
@@ -132,12 +147,12 @@ naturally in `K`. Here `V_ξ` sits in the square
       Spec Ω ────────ξ─────────▶  V'
 ```
 
-The proof is compactly supported base change (sketch blueprint: `sk-prop-sf-cbc`) for `Rp₂,!`
-along `ξ` in this square, followed by the projection formula for the pullback of the kernel
-to `V_ξ`; no smooth base change is needed.
+Class: torsion; decided by compact-support base change of `Rp₂,!` along `ξ`, which needs
+`[Finite Λ]`.
 (sketch blueprint: `sk-prop-stalk`) -/
-theorem nonempty_iso_fourierTransform_geometricStalk [CharP Γ(pullback π π', ⊤) p]
-    [HasCompactification π] (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ)
+theorem nonempty_iso_fourierTransform_geometricStalk [Finite Λ]
+    [CharP Γ(pullback π π', ⊤) p] [HasCompactification π] [QuasiCompact π]
+    (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ)
     {Ω : Type u} [Field Ω] [IsSepClosed Ω] (ξ : Spec (.of Ω) ⟶ V')
     [CharP Γ(pullback π (ξ ≫ π'), ⊤) p] :
     Nonempty (fourierTransform Λ π π' Ψ b r ⋙ D((ξ)^*[ModuleCat.{u + 1} Λ]) ≅
@@ -185,17 +200,22 @@ naturally in `K`. Both squares
       S' ──g──▶ S           S' ──g──▶ S
 ```
 
-must be **cartesian**: the proof is compact-support base change for `Rp₂,!` along the
-induced cartesian square `W ×_{S'} W' ⟶ V ×_S V'`, which fails for merely commuting squares.
-That theorem needs `Λ` finite and `p₂` to admit a compactification; in the form
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite`,
-which is computed with a compactification of `p₂` and its base change, it needs no
-quasi-compactness of the base changed map. As in the rest of this file, the exponent of `Λ` is
-also assumed invertible on `S`.
+must be **cartesian**; the statement fails for merely commuting squares.
+
+Class: compactification-dependent; decided by independence of the compactification. The
+blueprint proof is formal: compact-support base change along the cartesian square
+`W ×_{S'} W' ⟶ V ×_S V'`. Here `[Finite Λ]` enters solely through independence of the
+compactification (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), since `R(f)_!` is
+computed with a chosen compactification. The same comparison is why
+`[QuasiCompact (pullback.snd π π')]` is assumed: compact-support base change
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap` needs the base changed
+morphism `f' = pullback.snd ρ ρ'` to be quasi-compact, because it goes through
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, and `f'` is quasi-compact as a base change
+of `pullback.snd π π'` (`MorphismProperty.of_isPullback`).
 (sketch blueprint: `sk-prop-base-change`) -/
-theorem nonempty_iso_fourierTransform_baseChange [Finite Λ] [HasInvertibleExponent Λ S]
+theorem nonempty_iso_fourierTransform_baseChange [Finite Λ]
     [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
-    [LocallyOfFiniteType (pullback.snd π π')]
+    [LocallyOfFiniteType (pullback.snd π π')] [QuasiCompact (pullback.snd π π')]
     (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ) {S' W W' : Scheme.{u}}
     (g : S' ⟶ S) (ρ : W ⟶ S') (ρ' : W' ⟶ S') (u : W ⟶ V) (u' : W' ⟶ V')
     (hu : IsPullback u ρ π g) (hu' : IsPullback u' ρ' π' g)
@@ -229,22 +249,17 @@ naturally in `K` **and** in `N`: the statement below asserts that the two functo
      D(V_ét) ───FT_ψ───▶ D(V'_ét)
 ```
 
-The proof is the projection formula for `Rp₂,!`. The statement is over the whole unbounded
-derived categories, while the project's projection formula
-`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek` only covers a
-bounded constructible `K` and an `N` of finite Tor amplitude. The unbounded form holds for
-finite `Λ`: the projection map is an isomorphism for `j_!` of an open immersion formally, and
-for a proper morphism because its direct image then has finite cohomological dimension and so
-commutes with the colimits reducing to bounded complexes.
-
 In particular `FT_ψ(π^* N) ≅ FT_ψ(Λ) ⊗ᴸ π'^* N`, so the transform of a complex pulled back
 from the base is determined by the transform of the unit.
+
+Class: torsion; decided by the projection formula for `Rp₂,!`, which needs
+`[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-prop-base-linear`) -/
 theorem nonempty_iso_fourierTransform_tensor (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
-    Nonempty (derivedTensorRightPullback Λ π ⋙
+    Nonempty (derivedTensorRightPullback (ModuleCat.{u + 1} Λ) π ⋙
           (Functor.whiskeringRight _ _ _).obj (fourierTransform Λ π π' Ψ b r) ≅
-        derivedTensorRightPullback Λ π' ⋙
+        derivedTensorRightPullback (ModuleCat.{u + 1} Λ) π' ⋙
           (Functor.whiskeringLeft _ _ _).obj (fourierTransform Λ π π' Ψ b r)) :=
   sorry
 
@@ -263,6 +278,10 @@ This is the second clause of the base linearity proposition, the Tate twist bein
 with an invertible complex pulled back from the base: it is
 `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor` at `N = Λ_S(m)`, composed
 with the identifications `π^* Λ_S(m) ≅ Λ_V(m)` and `π'^* Λ_S(m) ≅ Λ_{V'}(m)`.
+
+Class: torsion; decided by the projection formula for `Rp₂,!`, through
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor`, which needs
+`[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-prop-base-linear`) -/
 theorem nonempty_iso_fourierTransform_tateTwist [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r m : ℤ) :
@@ -271,7 +290,8 @@ theorem nonempty_iso_fourierTransform_tateTwist [HasTateTwist Λ] (Ψ : AddChar 
   obtain ⟨e⟩ := nonempty_iso_fourierTransform_tensor Λ π π' Ψ b r
   -- `K ↦ K ⊗ᴸ f^* Λ_S(m)` is the Tate twist `(m)` on the source of `f`.
   let φ {X : Scheme.{u}} (f : X ⟶ S) :
-      (derivedTensorRightPullback Λ f).obj (tateObject Λ S m) ≅ tateTwist Λ X m :=
+      (derivedTensorRightPullback (ModuleCat.{u + 1} Λ) f).obj (tateObject Λ S m) ≅
+        tateTwist Λ X m :=
     (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.mapIso
       (((leftDerivedUpperStarIsoMapDerivedCategory _ f).app _).symm ≪≫
         leftDerivedUpperStarTateObjectIso f m)

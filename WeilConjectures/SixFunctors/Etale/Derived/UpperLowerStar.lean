@@ -5,7 +5,6 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
@@ -70,6 +69,17 @@ the type of the functor is spelled out.
   adjunctions `D((g)^*[A]) ⊣ R((g)_*[A])`, `L((g)^*[A]) ⊣ R((g)_*[A])` and
   `D+((g)^*[A]) ⊣ R+((g)_*[A])`. The first one needs no monoidal structure on `A`.
 
+- `AlgebraicGeometry.Etale.rightDerivedLowerStarComp` : the composition isomorphism
+  `Rg₁_* ⋙ Rg₂_* ≅ R(g₁ ≫ g₂)_*`, conjugate to the composition isomorphism of the functors
+  `D(g^*)`. It needs no monoidal structure on `A`.
+
+- `AlgebraicGeometry.Etale.rightDerivedLowerStarCongr` : the isomorphism `Rg₁_* ≅ Rg₂_*`
+  induced by an equality `g₁ = g₂`.
+
+- `AlgebraicGeometry.Etale.linear_rightDerivedLowerStar` and
+  `AlgebraicGeometry.Etale.linear_leftDerivedUpperStar` : for a `Λ`-linear `A`, the derived
+  functors `Rg_*` and `Lg^*` are `Λ`-linear.
+
 -/
 
 @[expose] public section
@@ -127,25 +137,56 @@ sheaves is additive, being right adjoint to `D(g^*)`. -/
 instance additive_rightDerivedLowerStar : (R((g)_*[A])).Additive :=
   (mapDerivedUpperStarLowerStarAdjunction A g).right_adjoint_additive
 
-/-- The derived pushforwards along equal morphisms are isomorphic: for `h : g = g'`,
-```
-Rg_* ═══ Rg'_*
-```
-as functors `D(Z_ét) ⥤ D(Y_ét)`. -/
-noncomputable def rightDerivedLowerStarCongr {g g' : Z ⟶ Y} (h : g = g') :
-    R((g)_*[A]) ≅ R((g')_*[A]) :=
-  eqToIso (by rw [h])
+/-- The isomorphism `Rg₁_* ≅ Rg₂_*` induced by an equality `g₁ = g₂`. -/
+noncomputable def rightDerivedLowerStarCongr {g₁ g₂ : Z ⟶ Y} (h : g₁ = g₂) :
+    R((g₁)_*[A]) ≅ R((g₂)_*[A]) :=
+  eqToIso (congrArg (fun g ↦ R((g)_*[A])) h)
 
 @[simp]
-lemma rightDerivedLowerStarCongr_refl : rightDerivedLowerStarCongr A (rfl : g = g) = Iso.refl _ :=
+lemma rightDerivedLowerStarCongr_refl : rightDerivedLowerStarCongr A (g₁ := g) rfl = Iso.refl _ :=
   rfl
 
-variable (R : Type*) [Ring R] [Linear R A] in
-/-- If `A` is `R`-linear, the total right derived pushforward `Rg_*` is `R`-linear. -/
-instance linear_rightDerivedLowerStar : (R((g)_*[A])).Linear R :=
-  -- Proof sketch: the right derived functor of the `R`-linear functor `g_*` is computed on
-  -- K-injective resolutions, on which it is `g_*` applied termwise.
-  sorry
+@[simp]
+lemma rightDerivedLowerStarCongr_hom_app {g₁ g₂ : Z ⟶ Y} (h : g₁ = g₂)
+    (K : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    (rightDerivedLowerStarCongr A h).hom.app K = eqToHom (by subst h; rfl) := by
+  subst h
+  rfl
+
+@[simp]
+lemma rightDerivedLowerStarCongr_inv_app {g₁ g₂ : Z ⟶ Y} (h : g₁ = g₂)
+    (K : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    (rightDerivedLowerStarCongr A h).inv.app K = eqToHom (by subst h; rfl) := by
+  subst h
+  rfl
+
+/-- The composition isomorphism `Rg₁_* ⋙ Rg₂_* ≅ R(g₁ ≫ g₂)_*` of the derived direct images.
+It is the conjugate, under the adjunctions `D(g^*) ⊣ Rg_*` of
+`AlgebraicGeometry.Etale.mapDerivedUpperStarLowerStarAdjunction`, of the composition
+isomorphism `D((g₁ ≫ g₂)^*) ≅ D(g₂^*) ⋙ D(g₁^*)` of the functors induced by the exact
+pullbacks:
+```
+   D((g₁ ≫ g₂)^*)  ≅  D(g₂^*) ⋙ D(g₁^*)
+         ⊣                    ⊣
+   R(g₁ ≫ g₂)_*    ≅  Rg₁_* ⋙ Rg₂_*
+```
+`conjugateIsoEquiv` turns an isomorphism of left adjoints into an isomorphism of right
+adjoints in the opposite direction, so the isomorphism of left adjoints is inverted before
+and the result after. Unlike `AlgebraicGeometry.Etale.leftDerivedUpperStarComp`, this needs no
+monoidal structure on `A`. -/
+noncomputable def rightDerivedLowerStarComp {T S U : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ U) :
+    R((g₁)_*[A]) ⋙ R((g₂)_*[A]) ≅ R((g₁ ≫ g₂)_*[A]) :=
+  (conjugateIsoEquiv (mapDerivedUpperStarLowerStarAdjunction A (g₁ ≫ g₂))
+    ((mapDerivedUpperStarLowerStarAdjunction A g₂).comp
+      (mapDerivedUpperStarLowerStarAdjunction A g₁))
+    (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A g₁ g₂) ≪≫
+      Functor.mapDerivedCategoryCompIso _ _).symm).symm
+
+variable (Λ : Type*) [Ring Λ] [Linear Λ A] in
+/-- If `A` is `Λ`-linear, the total right derived pushforward `Rg_*` is `Λ`-linear, being right
+adjoint to the functor `D(g^*)` induced by the `Λ`-linear exact functor `g^*`. -/
+instance linear_rightDerivedLowerStar : (R((g)_*[A])).Linear Λ :=
+  (mapDerivedUpperStarLowerStarAdjunction A g).right_adjoint_linear
 
 end Etale
 
@@ -239,6 +280,12 @@ This is `Functor.leftDerivedFunctorIsoMapDerivedCategory` at `g^*`. -/
 noncomputable def leftDerivedUpperStarIsoMapDerivedCategory :
     L((g)^*[A]) ≅ D((g)^*[A]) :=
   (g)^*[A].leftDerivedFunctorIsoMapDerivedCategory
+
+variable (Λ : Type*) [Ring Λ] [Linear Λ A] in
+/-- If `A` is `Λ`-linear, the derived pullback `Lg^*` is `Λ`-linear: it is isomorphic to the
+functor `D(g^*)` induced by the `Λ`-linear exact functor `g^*`. -/
+instance linear_leftDerivedUpperStar : (L((g)^*[A])).Linear Λ :=
+  Functor.linear_of_iso Λ (leftDerivedUpperStarIsoMapDerivedCategory A g).symm
 
 /-- The composition isomorphism `L(g₁ ≫ g₂)^* ≅ Lg₂^* ∘ Lg₁^*` of derived pullbacks,
 obtained from the underived composition isomorphism `Etale.upperStarComp` and the
@@ -350,12 +397,6 @@ noncomputable def derivedUpperStarLowerStarAdjunction :
     L((g)^*[A]) ⊣ R((g)_*[A]) :=
   (Etale.upperStarLowerStarAdjunction A g).derivedAdjunction
 
-variable (R : Type*) [Ring R] [Linear R A] in
-/-- If `A` is `R`-linear, the derived pullback `Lg^*` is `R`-linear, being left adjoint to the
-`R`-linear functor `Rg_*`. -/
-instance linear_leftDerivedUpperStar : (L((g)^*[A])).Linear R :=
-  (derivedUpperStarLowerStarAdjunction A g).left_adjoint_linear (R := R)
-
 /-- The bounded below version of `Etale.derivedUpperStarLowerStarAdjunction`: since the
 pullback `g^*` on étale sheaves is exact, its derived functor on the bounded below
 derived categories is the restriction `D+((g)^*[A])` of the functor induced by `g^*`,
@@ -365,22 +406,6 @@ resolutions, which exist since the étale sheaf category is Grothendieck abelian
 noncomputable def derivedUpperStarLowerStarAdjunctionPlus :
     D+((g)^*[A]) ⊣ R+((g)_*[A]) :=
   (Etale.upperStarLowerStarAdjunction A g).derivedAdjunctionPlus
-
-/-- The composition isomorphism `Rg₁_* ⋙ Rg₂_* ≅ R(g₁ ≫ g₂)_*` of the derived direct images:
-the conjugate, under the adjunctions `Lg^* ⊣ Rg_*`, of the composition isomorphism
-`AlgebraicGeometry.Etale.leftDerivedUpperStarComp` of the derived pullbacks,
-```
-   Lg₂^* ⋙ Lg₁^*  ≅  L(g₁ ≫ g₂)^*
-         ⊣                 ⊣
-   Rg₁_* ⋙ Rg₂_*  ≅  R(g₁ ≫ g₂)_*
-```
--/
-noncomputable def rightDerivedLowerStarComp {T S U : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ U) :
-    R((g₁)_*[A]) ⋙ R((g₂)_*[A]) ≅ R((g₁ ≫ g₂)_*[A]) :=
-  (conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction A (g₁ ≫ g₂))
-    ((derivedUpperStarLowerStarAdjunction A g₂).comp
-      (derivedUpperStarLowerStarAdjunction A g₁))
-    (leftDerivedUpperStarComp A g₁ g₂).symm).symm
 
 end Etale
 
