@@ -7,12 +7,14 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
+public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
-public import WeilConjectures.AlgebraicGeometry.Picard.Representability
+public import WeilConjectures.AlgebraicGeometry.Picard.Degree
+public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
@@ -207,6 +209,46 @@ noncomputable def picardFunctorDegree (f : X ⟶ Spec (.of k)) (d : ℤ) :
   (presheafToSheaf (Scheme.fppfTopology.over (Spec (.of k))) (Type (u + 1))).obj
     (picardSubfunctorDegree f d).toFunctor
 
+/-- **The degree on a fibre over a field-valued point is the fibrewise degree** at the image
+point: the degree of `ℒ` on the fibre `X_K` over `t : Spec K ⟶ T` is the fibrewise degree
+`deg ℒ_t` of `AlgebraicGeometry.picardPresheafDegree` at the image of the point of `Spec K`.
+
+(blueprint: `lem-pd-degree-locally-constant`, part 3) -/
+theorem picardFibreDegree_eq_picardPresheafDegree (f : X ⟶ Spec (.of k)) [IsProper f]
+    [LocallyOfFinitePresentation f] {T : Over (Spec (.of k))}
+    (L : (picardPresheaf f).obj (.op T)) {K : Type u} [Field K] [Algebra k K]
+    (t : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ T) (s : Spec (.of K)) :
+    picardFibreDegree f L t = picardPresheafDegree f L (t.left s) := by
+  rw [← picardPresheafDegree_map f t L s]
+  have := Pic.isInvertible ((picardPresheaf f).map t.op L)
+  have : ((fromSkeleton _).obj (Pic.val ((picardPresheaf f).map t.op L))).IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  have : SheafOfModules.IsFinitePresentation.{u, u, u} (SheafOfModules.unit (pullback f
+      (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))).hom).ringCatSheaf) :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  simp only [picardFibreDegree, picardPresheafDegree, Modules.degree]
+  rw [Modules.eulerCharFiber_eq_eulerChar, Modules.eulerCharFiber_eq_eulerChar]
+  rfl
+
+/-- A class lies in the degree-`d` subfunctor exactly when its fibrewise degree is `d` at every
+point. -/
+theorem mem_picardSubfunctorDegree_iff (f : X ⟶ Spec (.of k)) [IsProper f]
+    [LocallyOfFinitePresentation f] (d : ℤ) {T : Over (Spec (.of k))}
+    (L : (picardPresheaf f).obj (.op T)) :
+    L ∈ (picardSubfunctorDegree f d).obj (.op T) ↔ ∀ t, picardPresheafDegree f L t = d := by
+  refine ⟨fun h t ↦ ?_, fun h K _ _ t ↦ ?_⟩
+  · let φ := T.left.fromSpecResidueField t ≫ T.hom
+    let : Algebra k (T.left.residueField t) := (Spec.preimage φ).hom.toAlgebra
+    let τ : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k (T.left.residueField t)))) ⟶ T :=
+      Over.homMk (T.left.fromSpecResidueField t) (Spec.map_preimage φ).symm
+    obtain ⟨s⟩ : Nonempty (Spec (T.left.residueField t)) := inferInstance
+    have := h _ τ
+    rwa [picardFibreDegree_eq_picardPresheafDegree f L τ s,
+      show τ.left s = t from Scheme.fromSpecResidueField_apply _ _] at this
+  · obtain ⟨s⟩ : Nonempty (Spec (.of K)) := inferInstance
+    rw [picardFibreDegree_eq_picardPresheafDegree f L t s]
+    exact h _
+
 end DegreeSubfunctor
 
 section Decomposition
@@ -215,6 +257,7 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))] [IsSepC
   [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
   [GeometricallyIntegral (X ↘ Spec (.of k))]
 
+set_option linter.unusedSectionVars false in
 /-- **The fibrewise degree is locally constant.** For a connected `k`-scheme `T` and a class
 `ℒ ∈ Pic (X_T)`, all the fibrewise degrees `deg ℒ_t` agree.
 
@@ -225,9 +268,14 @@ theorem picardFibreDegree_eq_of_connectedSpace (T : Over (Spec (.of k)))
     (t : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ T)
     {K' : Type u} [Field K'] [Algebra k K']
     (t' : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K'))) ⟶ T) :
-    picardFibreDegree (X ↘ Spec (.of k)) L t = picardFibreDegree (X ↘ Spec (.of k)) L t' :=
-  sorry
+    picardFibreDegree (X ↘ Spec (.of k)) L t = picardFibreDegree (X ↘ Spec (.of k)) L t' := by
+  obtain ⟨s⟩ : Nonempty (Spec (.of K)) := inferInstance
+  obtain ⟨s'⟩ : Nonempty (Spec (.of K')) := inferInstance
+  rw [picardFibreDegree_eq_picardPresheafDegree _ L t s,
+    picardFibreDegree_eq_picardPresheafDegree _ L t' s']
+  exact (isLocallyConstant_picardPresheafDegree _ L).apply_eq_of_preconnectedSpace _ _
 
+set_option linter.unusedSectionVars false in
 /-- **The degree decomposition of the Picard scheme.** Let `X` be a smooth projective curve over
 a separably closed field `k` and let `P` represent the Picard functor `Pic_{X/k}`.  Then `P` is
 the disjoint union `∐_{d ∈ ℤ} P^d` of a family of open and closed subschemes indexed by `ℤ`,
@@ -241,8 +289,101 @@ theorem exists_decomposition_picardFunctor (P : Over (Spec (.of k)))
       (∀ d, IsClopen (Set.range (j d).left.base)) ∧
       (∀ d d', d ≠ d' → Disjoint (Set.range (j d).left.base) (Set.range (j d').left.base)) ∧
       (⋃ d, Set.range (j d).left.base) = Set.univ ∧
-      ∀ d, Nonempty ((picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy (Pd d)) :=
-  sorry
+      ∀ d, Nonempty ((picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy (Pd d)) := by
+  set f := X ↘ Spec (.of k)
+  let J := Scheme.fppfTopology.over (Spec (.of k))
+  -- the degree `δ : P → ℤ` of the universal class
+  let δ := picardDegree f (hP.homEquiv (𝟙 P))
+  have hδ : IsLocallyConstant δ := isLocallyConstant_picardDegree f _
+  have hδh {T : Over (Spec (.of k))} (h : T ⟶ P) (t : T.left) :
+      picardDegree f (hP.homEquiv h) t = δ (h.left t) := by
+    rw [show hP.homEquiv h = (picardFunctor f).obj.map h.op (hP.homEquiv (𝟙 P)) by
+      simpa using hP.homEquiv_comp h (𝟙 P), picardDegree_map]
+  -- the components `P^d = δ⁻¹(d)`
+  let U (d : ℤ) : P.left.Opens := ⟨δ ⁻¹' {d}, hδ.isOpen_fiber d⟩
+  let Pd (d : ℤ) : Over (Spec (.of k)) := Over.mk ((U d).ι ≫ P.hom)
+  let j (d : ℤ) : Pd d ⟶ P := Over.homMk (U d).ι
+  have hj (d : ℤ) : Set.range (j d).left.base = δ ⁻¹' {d} := (U d).range_ι
+  have hjmono (d : ℤ) {T : Over (Spec (.of k))} (a b : T ⟶ Pd d) (hab : a ≫ j d = b ≫ j d) :
+      a = b := by
+    ext1
+    exact (cancel_mono (U d).ι).1 congr($(hab).left)
+  have hlift (d : ℤ) {T : Over (Spec (.of k))} (h : T ⟶ P) (hh : ∀ t, δ (h.left t) = d) :
+      ∃ l : T ⟶ Pd d, l ≫ j d = h := by
+    have H : Set.range h.left.base ⊆ Set.range (U d).ι.base := by
+      rw [(U d).range_ι]
+      rintro _ ⟨t, rfl⟩
+      exact hh t
+    refine ⟨Over.homMk (IsOpenImmersion.lift (U d).ι h.left H) ?_, ?_⟩
+    · simp [Pd, IsOpenImmersion.lift_fac_assoc]
+    · ext1
+      exact IsOpenImmersion.lift_fac _ _ _
+  refine ⟨Pd, j, fun d ↦ inferInstanceAs (IsOpenImmersion (U d).ι), fun d ↦ ?_, ?_, ?_,
+    fun d ↦ ⟨?_⟩⟩
+  · rw [hj]
+    exact hδ.isClopen_fiber d
+  · intro d d' hdd'
+    rw [hj, hj]
+    exact Disjoint.preimage _ (Set.disjoint_singleton.2 hdd')
+  · simp only [hj]
+    ext t
+    simp
+  -- `P^d` represents `Pic^d_{X/k}`
+  let S := picardSubfunctorDegree f d
+  have hmem {T : Over (Spec (.of k))} (L : (picardPresheaf f).obj (.op T))
+      (hL : L ∈ S.obj (.op T)) (t : T.left) :
+      δ ((hP.homEquiv.symm ((toPicardFunctor f).app (.op T) L)).left t) = d := by
+    rw [← hδh, Equiv.apply_symm_apply, picardDegree_toPicardFunctor]
+    exact (mem_picardSubfunctorDegree_iff f d L).1 hL t
+  let lift {T : Over (Spec (.of k))} (L : S.toFunctor.obj (.op T)) : T ⟶ Pd d :=
+    (hlift d _ (hmem L.1 L.2)).choose
+  have lift_j {T : Over (Spec (.of k))} (L : S.toFunctor.obj (.op T)) :
+      lift L ≫ j d = hP.homEquiv.symm ((toPicardFunctor f).app (.op T) L.1) :=
+    (hlift d _ (hmem L.1 L.2)).choose_spec
+  let α : S.toFunctor ⟶ uliftYoneda.{u + 1}.obj (Pd d) :=
+    { app T := TypeCat.ofHom fun L ↦ ULift.up (lift L)
+      naturality T T' g := by
+        ext L
+        refine ULift.ext _ _ (hjmono d _ _ ?_)
+        change lift (S.toFunctor.map g L) ≫ j d = (g.unop ≫ lift L) ≫ j d
+        rw [lift_j, Category.assoc, lift_j, hP.comp_homEquiv_symm]
+        exact congrArg hP.homEquiv.symm (NatTrans.naturality_apply (toPicardFunctor f) g L.1) }
+  have hinj : Presheaf.IsLocallyInjective J α := by
+    refine ⟨fun {T} L L' h ↦ ?_⟩
+    have h' : (toPicardFunctor f).app T L.1 = (toPicardFunctor f).app T L'.1 := by
+      apply hP.homEquiv.symm.injective
+      rw [← lift_j, ← lift_j]
+      exact congrArg (· ≫ j d) (congrArg ULift.down h)
+    exact J.superset_covering (fun Z g hg ↦ Subtype.ext hg)
+      (Presheaf.equalizerSieve_mem J (toPicardFunctor f) L.1 L'.1 h')
+  have hsurj : Presheaf.IsLocallySurjective J α := by
+    refine ⟨fun {T} l ↦ ?_⟩
+    refine J.superset_covering ?_
+      (Presheaf.imageSieve_mem J (toPicardFunctor f) (hP.homEquiv (l.down ≫ j d)))
+    rintro Z g ⟨L, hL⟩
+    have hLS : L ∈ S.obj (.op Z) := by
+      refine (mem_picardSubfunctorDegree_iff f d L).2 fun z ↦ ?_
+      rw [← picardDegree_toPicardFunctor, hL, picardDegree_map, hδh, ← Set.mem_singleton_iff,
+        ← Set.mem_preimage, ← hj d]
+      exact ⟨l.down.left (g.left z), rfl⟩
+    refine ⟨⟨L, hLS⟩, ULift.ext _ _ (hjmono d _ _ ?_)⟩
+    change lift ⟨L, hLS⟩ ≫ j d = (g ≫ l.down) ≫ j d
+    rw [lift_j, Category.assoc, ← Equiv.symm_apply_apply hP.homEquiv (l.down ≫ j d),
+      hP.comp_homEquiv_symm]
+    exact congrArg hP.homEquiv.symm hL
+  -- hence `α` induces an isomorphism from `Pic^d_{X/k}` to the sheaf represented by `P^d`
+  have : J.Subcanonical := inferInstanceAs (fppfTopology.over (Spec (.of k))).Subcanonical
+  let Y := J.uliftYoneda.{u + 1}.obj (Pd d)
+  let β : (presheafToSheaf J (Type (u + 1))).obj S.toFunctor ⟶ Y :=
+    ⟨sheafifyLift J α Y.property⟩
+  have fac : toSheafify J S.toFunctor ≫ β.hom = α := toSheafify_sheafifyLift J α Y.property
+  have : Presheaf.IsLocallyInjective J β.hom :=
+    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac J α fac
+  have : Presheaf.IsLocallySurjective J β.hom :=
+    Presheaf.isLocallySurjective_of_isLocallySurjective_fac J fac
+  have : IsIso β := (Sheaf.isLocallyBijective_iff_isIso β).1 ⟨inferInstance, inferInstance⟩
+  exact (Functor.RepresentableBy.equivUliftYonedaIso _ (Pd d)).symm
+    ((sheafToPresheaf J _).mapIso (asIso β)).symm
 
 /-- **`Pic^0` is a commutative group scheme.** A `k`-scheme representing the degree-zero part
 `Pic^0_{X/k}` of the Picard functor carries a commutative group scheme structure.

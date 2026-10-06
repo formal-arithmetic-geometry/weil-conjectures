@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.BigOperators.Field
+public import Mathlib.Analysis.Complex.Basic
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.Data.Real.Basic
 public import Mathlib.GroupTheory.Archimedean
 public import Mathlib.RepresentationTheory.Irreducible
@@ -15,6 +17,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.ExteriorPower
+public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Kronecker
 
 /-!
 # Determinant weights of a degree datum
@@ -43,6 +46,16 @@ case, because `r(G)` is again a matrix group, hence the defining representation 
 represented degree datum; that reduction needs a transport of the positive central pair `(N, z)`
 along `r`, which is not stated here.
 
+The readout is proved by taking determinants in `z = h Fᴺ`, with `h` in the geometric monodromy
+group `H`.  The determinant of the action on `Q` is a polynomial function on the stabilizer of
+`U ≤ S` (`Matrix.GeneralLinearGroup.exists_evalAlgHom_eq_det_of_mk_eq`), so its finitely many
+values on `ρ(P)` are also its values on the closure `H`
+(`Matrix.GeneralLinearGroup.evalAlgHom_mem_of_mem_zeroLocus_vanishingIdeal`).  The character
+then kills the finite-order factor contributed by `h`.
+
+The last section reads the weight of a rank-one character off a single element of positive
+degree.
+
 ## Main declarations
 
 * `Representation.RealCharacter`: a homomorphism `k^× → (ℝ, +)`.
@@ -51,23 +64,46 @@ along `r`, which is not stated here.
 * `Representation.detWeight_mul_of_mem_ker`: the determinant weight does not depend on the choice
   of the degree-one element.
 * `Representation.weightMultiset`: the rank-counted weight multiset of a decomposition.
+* `Representation.toAdd_apply_detCharacter_eq_zero`: a real character kills the determinant of
+  a degree-zero element when the geometric determinant is finite.
 * `RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair`: the weight readout from a
-  positive central pair.
+  positive central pair, and
+  `RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible`: its
+  version for an irreducible subquotient, where `z` acts as a scalar by Schur's lemma.
+* `DegreeDatum.norm_apply_eq_zpow`: a rank-one character with finite geometric image has constant
+  modulus `|ι(χ(γ))| ^ m` on the elements of degree `m`.
+* `DegreeDatum.forall_norm_eq_rpow_iff_exists`, `DegreeDatum.forall_norm_eq_rpow_iff_forall`: the
+  weight of such a character is read off from one element of positive degree.
 * `Representation.exists_detWeight_eq_add_of_subquotient_tprod`: the weights of the constituents
-  of a tensor product.
+  of a tensor product, over an algebraically closed field of characteristic zero, and its converse
+  `Representation.exists_isIrreducible_subquotient_tprod_detWeight_eq_add`.
+* `Representation.detWeight_subquotient_tprod_eq_add`: the weights of the subquotients of the
+  tensor product of two irreducible representations, and
+  `DegreeDatum.detWeight_subquotient_tprod_eq_add`: the same for a degree datum, where the proof
+  happens.
 * `Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`: the weights of the
   constituents of an exterior power, over an algebraically closed field of characteristic zero.
 * `DegreeDatum.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`: the same for a degree
   datum, where the proof happens.
 * `RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair_of_basis`: the readout for any
-  representation whose matrices in a basis are those of the datum.
+  representation whose matrices in a basis are those of the datum, and
+  `RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_surjective`: the readout
+  for an irreducible quotient of such a representation.
 
 ## Blueprint
 
 `Representation.RealCharacter`, `Representation.HasFiniteGeometricDet`,
 `Representation.detWeight` and `Representation.detWeight_mul_of_mem_ker` implement `sk-d-weights`;
-`RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair` implements `sk-p-readout`;
-`Representation.exists_detWeight_eq_add_of_subquotient_tprod` implements `sk-p-tensor`;
+`RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair` implements `sk-p-readout`, and
+together with `RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair_of_basis` and
+`RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible` the
+degree-datum form of `cor-mg-central-determinant-weight`; `DegreeDatum.norm_apply_eq_zpow`
+implements `lem-wf-rank-one-component-modulus`, and `DegreeDatum.forall_norm_eq_rpow_iff_exists`
+and `DegreeDatum.forall_norm_eq_rpow_iff_forall` implement `cor-mg-rankone-weight-from-element`
+for a character along a family of Frobenius elements;
+`Representation.exists_detWeight_eq_add_of_subquotient_tprod` implements `sk-p-tensor`, and together
+with its converse `Representation.exists_isIrreducible_subquotient_tprod_detWeight_eq_add` the node
+`prop-ag-det-weight-two-factor-tensor`;
 `Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower` implements
 `sk-p-exterior`.  It is only the forward direction for a semisimple `V`, so it does not implement
 the node `prop-ag-det-weight-exterior`, which allows a non-semisimple `V` and also asserts the
@@ -76,7 +112,7 @@ converse.
 
 @[expose] public section
 
-open scoped Matrix
+open scoped Matrix Kronecker TensorProduct
 
 namespace Representation
 
@@ -102,6 +138,21 @@ a degree-one element `γ` is `dw_χ(ρ) = χ(δ(γ)) / dim V`.
 noncomputable def detWeight (χ : RealCharacter k) (γ : W) (ρ : Representation k W V) : ℝ :=
   Multiplicative.toAdd (χ (ρ.detCharacter γ)) / Module.finrank k V
 
+/-- A real character kills the determinant of a degree-zero element when the geometric
+determinant is finite: `δ(u)` has finite order `e`, so `e λ(δ(u)) = λ(δ(u) ^ e) = 0` in the
+torsion-free group `ℝ`. (blueprint: `sk-p-readout`) -/
+theorem toAdd_apply_detCharacter_eq_zero {deg : W →* Multiplicative ℤ}
+    (ρ : Representation k W V) (hdet : ρ.HasFiniteGeometricDet deg) (χ : RealCharacter k)
+    {u : W} (hu : u ∈ deg.ker) : Multiplicative.toAdd (χ (ρ.detCharacter u)) = 0 := by
+  let φ := ρ.detCharacter.comp deg.ker.subtype
+  have : Finite φ.range := (hdet : (Set.range φ).Finite).to_subtype
+  have hfin : IsOfFinOrder (χ (ρ.detCharacter u)) :=
+    (χ.comp φ.range.subtype).isOfFinOrder (isOfFinOrder_of_finite ⟨φ ⟨u, hu⟩, ⟨u, hu⟩, rfl⟩)
+  obtain ⟨m, hm, hum⟩ := isOfFinOrder_iff_pow_eq_one.1 hfin
+  have h := congr(Multiplicative.toAdd $hum)
+  rw [toAdd_pow, toAdd_one, nsmul_eq_mul, mul_eq_zero] at h
+  exact h.resolve_left (Nat.cast_ne_zero.2 hm.ne')
+
 /-- The determinant weight does not depend on the chosen degree-one element: replacing `γ` by
 `u γ` for a degree-zero element `u` leaves it unchanged, because the determinant character takes
 finitely many values on the degree-zero subgroup and `ℝ` is torsion-free.
@@ -109,7 +160,8 @@ finitely many values on the degree-zero subgroup and `ℝ` is torsion-free.
 theorem detWeight_mul_of_mem_ker {deg : W →* Multiplicative ℤ} (ρ : Representation k W V)
     (hdet : ρ.HasFiniteGeometricDet deg) (χ : RealCharacter k) (γ : W) {u : W}
     (hu : u ∈ deg.ker) : ρ.detWeight χ (u * γ) = ρ.detWeight χ γ := by
-  sorry
+  rw [detWeight, detWeight, map_mul, map_mul, toAdd_mul,
+    ρ.toAdd_apply_detCharacter_eq_zero hdet χ hu, zero_add]
 
 /-- The rank-counted weight multiset of a family of subrepresentations: the determinant weight of
 `Vs j` occurs `dim Vs j` times. -/
@@ -140,6 +192,18 @@ theorem detWeight_eq_of_detCharacter_eq {V' : Type*} [AddCommGroup V'] [Module k
   unfold detWeight
   rw [h, hd]
 
+/-- Equivalent representations have the same determinant weight. -/
+theorem Equiv.detWeight_eq {V' : Type*} [AddCommGroup V'] [Module k V']
+    {ρ : Representation k W V} {σ : Representation k W V'} (e : ρ.Equiv σ) (χ : RealCharacter k)
+    (γ : W) : σ.detWeight χ γ = ρ.detWeight χ γ :=
+  detWeight_eq_of_detCharacter_eq e.detCharacter_eq e.finrank_eq χ γ
+
+/-- Equivalent representations both have, or both do not have, finite geometric determinant. -/
+theorem Equiv.hasFiniteGeometricDet_iff {V' : Type*} [AddCommGroup V'] [Module k V']
+    {deg : W →* Multiplicative ℤ} {ρ : Representation k W V} {σ : Representation k W V'}
+    (e : ρ.Equiv σ) : σ.HasFiniteGeometricDet deg ↔ ρ.HasFiniteGeometricDet deg :=
+  hasFiniteGeometricDet_iff_of_detCharacter_eq e.detCharacter_eq
+
 /-- The determinant weight is homogeneous in the chosen element: `dw(γ ^ m) = m dw(γ)`. -/
 theorem detWeight_zpow (ρ : Representation k W V) (χ : RealCharacter k) (γ : W) (m : ℤ) :
     ρ.detWeight χ (γ ^ m) = m * ρ.detWeight χ γ := by
@@ -165,6 +229,8 @@ end Representation
 
 namespace AlgebraicGeometry.Monodromy.RepresentedDegreeDatum
 
+open Matrix.GeneralLinearGroup
+
 variable {W : Type*} [Group W] {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [Field k]
 
 /-- Fix a real character `χ` and a positive central pair `(N, z)` for a represented degree
@@ -179,7 +245,85 @@ theorem detWeight_eq_of_isPositiveCentralPair (D : RepresentedDegreeDatum W n k)
     (hc : ∀ x ∈ S, Matrix.toLinAlgEquiv' (z : Matrix n n k) x - (c : k) • x ∈ U) :
     (S.subquotient U).detWeight χ D.degreeOneElement =
       Multiplicative.toAdd (χ c) / N := by
-  sorry
+  classical
+  obtain ⟨hN, -, h, hh, _, rfl, hzh⟩ := id hz
+  set Q := S.subquotient U
+  set γ := D.degreeOneElement
+  obtain ⟨p, hp⟩ := exists_evalAlgHom_eq_det_of_mk_eq S.toSubmodule U.toSubmodule
+  -- `p` computes the determinant character of `Q` on `ρ(W)`
+  have hrep (w : W) : evalAlgHom (D.rep w) p = Q.detCharacter w := by
+    rw [Representation.coe_detCharacter_apply]
+    exact hp _ _ fun x ↦ ⟨_, rfl, rfl⟩
+  -- the induced action of `h ∈ H(k)` on `Q`
+  have hG := D.zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy k hh
+  let fh : Module.End k (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) :=
+    Submodule.mapQ _ _ (((h : Matrix n n k).mulVecLin).restrict
+      fun x hx ↦ D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy hG S hx)
+      fun x hx ↦ D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy hG U hx
+  -- by density, `det fh` is a value of the determinant character on `P`
+  obtain ⟨_, ⟨u, rfl⟩, hu⟩ : evalAlgHom h p ∈
+      Units.val '' Set.range fun u : D.deg.ker ↦ Q.detCharacter u :=
+    evalAlgHom_mem_of_mem_zeroLocus_vanishingIdeal (Γ := D.degreeZero.map D.rep) p
+      (hdet.image Units.val)
+      (by rintro _ ⟨w, hw, rfl⟩; exact ⟨_, ⟨⟨w, hw⟩, rfl⟩, (hrep w).symm⟩) hh
+  have hfh : evalAlgHom h p = LinearMap.det fh := hp _ _ fun x ↦ ⟨_, rfl, rfl⟩
+  have hzG := hz.mem_zeroLocus_arithmeticMonodromy
+  -- two descriptions of the action of `z = h Fᴺ` on `Q`
+  have h₁ : evalAlgHom z p = (c : k) ^ Module.finrank k
+      (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) := by
+    rw [hp _ ((c : k) • LinearMap.id) fun x ↦ ⟨⟨_, D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy
+      hzG S x.2⟩, rfl, ?_⟩, LinearMap.det_smul, LinearMap.det_id, mul_one]
+    rw [LinearMap.smul_apply, LinearMap.id_apply, ← Submodule.Quotient.mk_smul, eq_comm,
+      Submodule.Quotient.eq]
+    exact hc x x.2
+  have h₂ : evalAlgHom z p = LinearMap.det fh * Q.detCharacter (γ ^ N) := by
+    rw [Representation.coe_detCharacter_apply, ← map_mul]
+    refine hp _ _ fun x ↦ ⟨_, ?_, rfl⟩
+    rw [← hzh, Units.val_mul, ← Matrix.mulVec_mulVec]
+    simp only [frobenius, γ, ← map_pow]
+    rfl
+  have hunit : c ^ Module.finrank k (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) =
+      Q.detCharacter (u * γ ^ N) := Units.ext <| by
+    rw [Units.val_pow_eq_pow_val, map_mul, Units.val_mul, ← h₁, h₂, ← hfh, ← hu]
+  have h₃ := congr(Multiplicative.toAdd (χ $hunit))
+  rw [map_pow, toAdd_pow, map_mul, map_mul, toAdd_mul,
+    Q.toAdd_apply_detCharacter_eq_zero hdet χ u.2, zero_add, map_pow, map_pow, toAdd_pow,
+    nsmul_eq_mul, nsmul_eq_mul] at h₃
+  obtain ⟨x, hxS, hxU⟩ := SetLike.exists_of_lt hUS
+  have : Nontrivial (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) :=
+    ⟨Submodule.Quotient.mk ⟨x, hxS⟩, 0, by rwa [Ne, Submodule.Quotient.mk_eq_zero]⟩
+  have hr := Module.finrank_pos (R := k)
+    (M := S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype)
+  rw [Representation.detWeight, div_eq_div_iff (by positivity) (by positivity)]
+  linarith
+
+/-- The weight readout for an irreducible subquotient, over an algebraically closed field: by
+Schur's lemma the central element `z` acts on a nonzero irreducible subquotient `Q = S / U` as a
+scalar `c`, nonzero because `z` is invertible, and then `dw_χ(Q) = χ(c) / N`.
+(blueprint: `sk-p-readout`, `cor-mg-central-determinant-weight`) -/
+theorem exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible [IsAlgClosed k]
+    (D : RepresentedDegreeDatum W n k) (χ : Representation.RealCharacter k) {N : ℕ} {z : GL n k}
+    (hz : D.IsPositiveCentralPair N z) {U S : Subrepresentation D.asRepresentation} (hUS : U < S)
+    (hirr : (S.subquotient U).IsIrreducible)
+    (hdet : (S.subquotient U).HasFiniteGeometricDet D.deg) :
+    ∃ c : kˣ, (∀ x ∈ S, Matrix.toLinAlgEquiv' (z : Matrix n n k) x - (c : k) • x ∈ U) ∧
+      (S.subquotient U).detWeight χ D.degreeOneElement = Multiplicative.toAdd (χ c) / N := by
+  have hzG := hz.mem_zeroLocus_arithmeticMonodromy
+  obtain ⟨c, hc⟩ := Subrepresentation.exists_apply_sub_smul_mem_of_isIrreducible hirr
+    (Matrix.toLinAlgEquiv' (z : Matrix n n k))
+    (fun w x ↦ by
+      simp only [asRepresentation, MonoidHom.coe_mk, OneHom.coe_mk,
+        Matrix.toLinAlgEquiv'_apply, Matrix.mulVec_mulVec, ← Units.val_mul, hz.commute w])
+    (fun x hx ↦ D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy hzG U hx)
+    (fun x hx ↦ D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy hzG S hx)
+  have hc0 : c ≠ 0 := by
+    rintro rfl
+    obtain ⟨x, hxS, hxU⟩ := SetLike.exists_of_lt hUS
+    refine hxU ?_
+    have := D.mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy (inv_mem hzG) U
+      (by simpa using hc x hxS)
+    simpa [Matrix.mulVec_mulVec] using this
+  exact ⟨Units.mk0 c hc0, hc, D.detWeight_eq_of_isPositiveCentralPair χ hz hUS hdet _ hc⟩
 
 section Basis
 
@@ -237,6 +381,61 @@ theorem detWeight_eq_of_isPositiveCentralPair_of_basis (D : RepresentedDegreeDat
   rw [map_sub, map_smul]
   exact this
 
+/-- The weight readout for an irreducible quotient `r₁` of a representation `ρ` whose matrices in a
+basis `b` are those of the datum, over an algebraically closed field: by Schur's lemma the central
+element `z` acts on `r₁` by a nonzero scalar `c`, and then `dw_χ(r₁) = χ(c) / N`.
+(blueprint: `sk-p-readout`, `cor-mg-central-determinant-weight`) -/
+theorem exists_detWeight_eq_of_isPositiveCentralPair_of_surjective [IsAlgClosed k]
+    [FiniteDimensional k V] (D : RepresentedDegreeDatum W n k)
+    (χ : Representation.RealCharacter k) {N : ℕ} {z : GL n k}
+    (hz : D.IsPositiveCentralPair N z) (b : Basis n k V)
+    (hρ : ∀ w, LinearMap.toMatrix b b (ρ w) = (D.rep w : Matrix n n k))
+    {V₁ : Type*} [AddCommGroup V₁] [Module k V₁] {r₁ : Representation k W V₁}
+    (hr₁ : r₁.IsIrreducible) (hdet₁ : r₁.HasFiniteGeometricDet D.deg)
+    (f : ρ.IntertwiningMap r₁) (hf : Function.Surjective f) :
+    ∃ c : kˣ, (∀ x, f (Matrix.toLin b b (z : Matrix n n k) x) = (c : k) • f x) ∧
+      r₁.detWeight χ D.degreeOneElement = Multiplicative.toAdd (χ c) / N := by
+  let Z : V →ₗ[k] V := Matrix.toLin b b (z : Matrix n n k)
+  have hZcomm (w : W) : Z ∘ₗ ρ w = ρ w ∘ₗ Z := by
+    apply (LinearMap.toMatrix b b).injective
+    rw [LinearMap.toMatrix_comp b b b, LinearMap.toMatrix_comp b b b, hρ,
+      LinearMap.toMatrix_toLin, ← Units.val_mul, ← Units.val_mul, hz.commute w]
+  have hZmem (T : Subrepresentation ρ) {x : V} (hx : x ∈ T) : Z x ∈ T :=
+    D.toLin_apply_mem_of_mem_zeroLocus_arithmeticMonodromy b hρ
+      hz.mem_zeroLocus_arithmeticMonodromy T hx
+  have hZsurj : Function.Surjective Z := by
+    have : IsUnit Z := z.isUnit.map (Matrix.toLinAlgEquiv b)
+    exact ((Module.End.isUnit_iff Z).1 this).2
+  -- `r₁` is the subquotient `ρ / ker f`
+  let e : ((⊤ : Subrepresentation ρ).subquotient f.ker).Equiv r₁ :=
+    (Subrepresentation.subquotientEquivOfIntertwiningMap f (U' := ⊥) (S' := ⊤)
+      (fun _ _ ↦ Submodule.mem_top) (fun _ _ hx ↦ (Submodule.mem_bot k).2 hx)
+      (fun _ _ hx ↦ (Submodule.mem_bot k).1 hx) fun y _ ↦ by
+        obtain ⟨x, rfl⟩ := hf y
+        exact ⟨x, Submodule.mem_top, (Submodule.mem_bot k).2 (sub_self _)⟩).trans
+      (Subrepresentation.topSubquotientBotEquiv r₁)
+  obtain ⟨c, hc⟩ := Subrepresentation.exists_apply_sub_smul_mem_of_isIrreducible
+    (e.isIrreducible_iff.2 hr₁) Z (fun w x ↦ LinearMap.congr_fun (hZcomm w) x)
+    (fun _ hx ↦ hZmem _ hx) (fun _ hx ↦ hZmem _ hx)
+  have hc' (x : V) : f (Z x) = c • f x := by
+    have := hc x Submodule.mem_top
+    rwa [Representation.IntertwiningMap.mem_ker, map_sub, map_smul, sub_eq_zero] at this
+  have := hr₁.nontrivial
+  obtain ⟨v, hv⟩ := exists_ne (0 : V₁)
+  obtain ⟨x₀, rfl⟩ := hf v
+  have hc0 : c ≠ 0 := by
+    rintro rfl
+    obtain ⟨x, rfl⟩ := hZsurj x₀
+    exact hv (by rw [hc', zero_smul])
+  have hUS : f.ker < ⊤ := lt_top_iff_ne_top.2 fun h ↦ hv <|
+    (Representation.IntertwiningMap.mem_ker _ _ _ _).1 (h ▸ Submodule.mem_top)
+  refine ⟨Units.mk0 c hc0, hc', ?_⟩
+  rw [e.detWeight_eq]
+  exact D.detWeight_eq_of_isPositiveCentralPair_of_basis χ hz b hρ hUS
+    ((e.hasFiniteGeometricDet_iff).1 hdet₁) _ fun x _ ↦ by
+      rw [Units.val_mk0]
+      exact hc x Submodule.mem_top
+
 end Basis
 
 end AlgebraicGeometry.Monodromy.RepresentedDegreeDatum
@@ -244,30 +443,6 @@ end AlgebraicGeometry.Monodromy.RepresentedDegreeDatum
 namespace Representation
 
 variable {k : Type*} [Field k] {W : Type*} [Group W]
-
-/-- Let `V` and `E` be finite-dimensional representations of one and the same degree datum, and
-let `Q` be a simple constituent of `V ⊗ E`, presented as a subquotient `S / U` for
-subrepresentations `U < S` of `V ⊗ E`.  If `Q` and the two subquotients produced below have
-finite geometric determinant, then `dw_χ(Q) = dw_χ(V_i) + dw_χ(E_j)` for a simple constituent
-`V_i` of `V` and a simple constituent `E_j` of `E`; these are the simple quotients of chosen
-composition series of `V` and `E`.  Neither `V`, nor `E`, nor `V ⊗ E` is assumed semisimple.
-(blueprint: `sk-p-tensor`) -/
-theorem exists_detWeight_eq_add_of_subquotient_tprod
-    (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
-    {V E : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
-    [AddCommGroup E] [Module k E] [FiniteDimensional k E]
-    (rV : Representation k W V) (rE : Representation k W E)
-    {U S : Subrepresentation (rV.tprod rE)} (hUS : U < S)
-    (hsimple : IsIrreducible (S.subquotient U))
-    (hdet : (S.subquotient U).HasFiniteGeometricDet deg) :
-    ∃ UV SV : Subrepresentation rV, ∃ UE SE : Subrepresentation rE,
-      UV < SV ∧ UE < SE ∧
-      IsIrreducible (SV.subquotient UV) ∧ IsIrreducible (SE.subquotient UE) ∧
-      (SV.subquotient UV).HasFiniteGeometricDet deg ∧
-      (SE.subquotient UE).HasFiniteGeometricDet deg ∧
-      (S.subquotient U).detWeight χ γ =
-        (SV.subquotient UV).detWeight χ γ + (SE.subquotient UE).detWeight χ γ := by
-  sorry
 
 /-- The rank-counted list of a family of values: `∑ⱼ replicate (d j) (f j)` is the multiset of the
 values of `f` along the first projection of `Σ j, Fin (d j)`. -/
@@ -433,6 +608,110 @@ theorem DegreeDatum.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower
     refine hQ.trans ?_
     simp only [hdw, map_prod, toAdd_prod, Finset.sum_div]
 
+/-- The tensor-product weight theorem for a degree datum `D₀` and irreducible `V` and `E`: every
+subquotient `Q` of `V ⊗ E` with finite geometric determinant has `dw(Q) = dw(V) + dw(E)`.
+Following the blueprint: a positive central pair `(N, z)` for the semisimple datum of `V ⊕ E`
+acts on `V` by a scalar `c` and on `E` by a scalar `d` (Schur's lemma), with `dw(V) = χ(c) / N`
+and `dw(E) = χ(d) / N`.  Transported along the polynomial Kronecker square, it acts on the
+quotient `V ⊗ E` of `(V ⊕ E) ⊗ (V ⊕ E)` by `c d`, hence on the preimage of `Q`, and the readout
+gives `dw(Q) = χ(c d) / N`.
+(blueprint: `sk-p-tensor`) -/
+theorem DegreeDatum.detWeight_subquotient_tprod_eq_add
+    {k : Type u} [Field k] [IsAlgClosed k] [CharZero k] {W : Type*} [Group W] (D₀ : DegreeDatum W)
+    (χ : RealCharacter k)
+    {V E : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
+    [AddCommGroup E] [Module k E] [FiniteDimensional k E]
+    (rV : Representation k W V) (rE : Representation k W E)
+    (hV : rV.IsIrreducible) (hE : rE.IsIrreducible)
+    (hdetV : rV.HasFiniteGeometricDet D₀.deg) (hdetE : rE.HasFiniteGeometricDet D₀.deg)
+    {U S : Subrepresentation (rV.tprod rE)} (hUS : U < S)
+    (hdet : (S.subquotient U).HasFiniteGeometricDet D₀.deg) :
+    (S.subquotient U).detWeight χ D₀.degreeOneElement =
+      rV.detWeight χ D₀.degreeOneElement + rE.detWeight χ D₀.degreeOneElement := by
+  classical
+  let X := rV.prod rE
+  let fst := Representation.IntertwiningMap.fst k rV rE
+  let snd := Representation.IntertwiningMap.snd k rV rE
+  -- `V ⊕ E` is semisimple
+  have hX : X.IsSemisimpleRepresentation := by
+    let Vs : Bool → Subrepresentation X := fun j ↦
+      if j then (Representation.IntertwiningMap.inl k rV rE).range
+      else (Representation.IntertwiningMap.inr k rV rE).range
+    refine isSemisimpleRepresentation_of_isInternal Vs (fun j ↦ ?_) ?_
+    · cases j
+      · let e : rE.Equiv (Vs false).toRepresentation :=
+          .mk (LinearEquiv.ofInjective (LinearMap.inr k V E) LinearMap.inr_injective)
+            fun _ ↦ LinearMap.ext fun _ ↦ Subtype.ext <| by
+              change LinearMap.inr k V E _ = X _ (LinearMap.inr k V E _)
+              simp [X]
+        exact e.isIrreducible_iff.1 hE
+      · let e : rV.Equiv (Vs true).toRepresentation :=
+          .mk (LinearEquiv.ofInjective (LinearMap.inl k V E) LinearMap.inl_injective)
+            fun _ ↦ LinearMap.ext fun _ ↦ Subtype.ext <| by
+              change LinearMap.inl k V E _ = X _ (LinearMap.inl k V E _)
+              simp [X]
+        exact e.isIrreducible_iff.1 hV
+    · refine (DirectSum.isInternal_submodule_iff_isCompl _ (i := true) (j := false) (by decide)
+        (by ext x; cases x <;> simp)).2 ?_
+      exact LinearMap.isCompl_range_inl_inr
+  -- the represented degree datum of `V ⊕ E` in a basis, and a positive central pair
+  let n := ULift.{u} (Fin (Module.finrank k (V × E)))
+  let b : Basis n k (V × E) := (Module.finBasis k (V × E)).reindex Equiv.ulift.symm
+  let D : RepresentedDegreeDatum W n k :=
+    { D₀ with rep := (Units.map (LinearMap.toMatrixAlgEquiv b).toMonoidHom).comp X.toHomUnits }
+  have hρ (w : W) : LinearMap.toMatrix b b (X w) = (D.rep w : Matrix n n k) := by
+    ext i i'
+    rw [LinearMap.toMatrix_apply]
+    exact (LinearMap.toMatrixAlgEquiv_apply b (X w) i i').symm
+  have hss : D.IsSemisimple :=
+    (Subrepresentation.orderIsoMapComap (D.basisEquiv b hρ)).complementedLattice_iff.1 hX
+  obtain ⟨N, z, hz⟩ := D.exists_isPositiveCentralPair hss
+  -- `z` acts on `V` by a scalar `c` and on `E` by a scalar `d`
+  obtain ⟨c, hc, hcV⟩ := D.exists_detWeight_eq_of_isPositiveCentralPair_of_surjective χ hz b hρ
+    hV hdetV fst (Representation.IntertwiningMap.fst_surjective rV rE)
+  obtain ⟨d, hd, hdE⟩ := D.exists_detWeight_eq_of_isPositiveCentralPair_of_surjective χ hz b hρ
+    hE hdetE snd (Representation.IntertwiningMap.snd_surjective rV rE)
+  -- the datum of `(V ⊕ E) ⊗ (V ⊕ E)`, with the transported positive central pair `(N, z ⊗ z)`
+  let B := b.tensorProduct b
+  let r : GL n k →* GL (n × n) k := kroneckerHom.comp ((MonoidHom.id _).prod (MonoidHom.id _))
+  obtain ⟨φ, hφ⟩ := exists_algHom_comp_eq_evalAlgHom_kroneckerHom (k := k) (n := n)
+  have hz' := hz.map r φ hφ
+  have hρ' (w : W) : LinearMap.toMatrix B B (X.tprod X w) = ((D.map r).rep w : Matrix _ _ k) := by
+    change LinearMap.toMatrix B B (TensorProduct.map (X w) (X w)) = _
+    rw [TensorProduct.toMatrix_map, hρ]
+    rfl
+  -- the quotient map `p : (V ⊕ E) ⊗ (V ⊕ E) → V ⊗ E`, through which `z ⊗ z` acts by `c d`
+  let p := fst.tensor snd
+  have hp : Function.Surjective p :=
+    TensorProduct.map_surjective (Representation.IntertwiningMap.fst_surjective rV rE)
+      (Representation.IntertwiningMap.snd_surjective rV rE)
+  have hpz (x : (V × E) ⊗[k] (V × E)) :
+      p (Matrix.toLin B B (r z : Matrix _ _ k) x) = ((c * d : kˣ) : k) • p x := by
+    change p (Matrix.toLin B B ((z : Matrix n n k) ⊗ₖ (z : Matrix n n k)) x) = _
+    rw [Matrix.toLin_kronecker]
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul x y =>
+      simp only [TensorProduct.map_tmul, p, Representation.IntertwiningMap.tensor_apply, hc, hd,
+        TensorProduct.smul_tmul_smul, Units.val_mul]
+    | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, smul_add]
+  -- the readout on the preimage of `Q`
+  let e := Subrepresentation.subquotientComapEquiv p hp U S
+  have hUS' : Subrepresentation.comap p U < Subrepresentation.comap p S := by
+    refine lt_of_le_of_ne (fun x hx ↦ hUS.le hx) fun h ↦ ?_
+    obtain ⟨y, hyS, hyU⟩ := SetLike.exists_of_lt hUS
+    obtain ⟨x, rfl⟩ := hp y
+    have hx : x ∈ Subrepresentation.comap p S := hyS
+    rw [← h] at hx
+    exact hyU hx
+  have hQ := (D.map r).detWeight_eq_of_isPositiveCentralPair_of_basis χ hz' B hρ' hUS'
+    ((e.hasFiniteGeometricDet_iff).1 hdet) (c * d) fun x _ ↦ by
+      rw [Subrepresentation.mem_comap, map_sub, map_smul, hpz, sub_self]
+      exact U.toSubmodule.zero_mem
+  rw [e.detWeight_eq]
+  refine hQ.trans ?_
+  rw [hcV, hdE, map_mul, toAdd_mul, add_div]
+
 end AlgebraicGeometry.Monodromy
 
 namespace Representation
@@ -498,67 +777,248 @@ theorem exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower [IsAlgClosed k]
       exact hs
     · rw [detWeight_eq_zero_of_forall_deg_eq_one htriv _ hdet χ γ, Multiset.sum_replicate,
         smul_zero]
-  -- Otherwise the degrees are the multiples of some `a ≠ 0`; divide by `a` to get a degree datum.
+  -- Otherwise divide the degrees by their generator to get a degree datum.
   simp only [not_forall] at htriv
-  obtain ⟨w₁, hw₁⟩ := htriv
-  let H : AddSubgroup ℤ :=
-    { carrier := {x | ∃ w, Multiplicative.toAdd (deg w) = x}
-      add_mem' := by
-        rintro _ _ ⟨w, rfl⟩ ⟨w', rfl⟩
-        exact ⟨w * w', by rw [map_mul, toAdd_mul]⟩
-      zero_mem' := ⟨1, by rw [map_one, toAdd_one]⟩
-      neg_mem' := by
-        rintro _ ⟨w, rfl⟩
-        exact ⟨w⁻¹, by rw [map_inv, toAdd_inv]⟩ }
-  obtain ⟨a, ha⟩ := Int.subgroup_cyclic H
-  rw [← AddSubgroup.zmultiples_eq_closure] at ha
-  have hdvd (w : W) : a ∣ Multiplicative.toAdd (deg w) := by
-    have : Multiplicative.toAdd (deg w) ∈ H := ⟨w, rfl⟩
-    rwa [ha, Int.mem_zmultiples_iff] at this
-  obtain ⟨w₀, hw₀⟩ : ∃ w₀, Multiplicative.toAdd (deg w₀) = a := by
-    have : a ∈ H := ha ▸ AddSubgroup.mem_zmultiples a
-    exact this
-  have ha0 : a ≠ 0 := by
-    rintro rfl
-    exact hw₁ (by simpa using hdvd w₁)
-  let deg₀ : W →* Multiplicative ℤ :=
-    { toFun w := Multiplicative.ofAdd (Multiplicative.toAdd (deg w) / a)
-      map_one' := by simp
-      map_mul' x y := by
-        rw [map_mul, toAdd_mul, Int.add_ediv_of_dvd_left (hdvd x), ofAdd_add] }
-  have hdeg₀ (w : W) : Multiplicative.toAdd (deg₀ w) = Multiplicative.toAdd (deg w) / a := rfl
-  have hker : deg.ker = deg₀.ker := by
-    ext w
-    obtain ⟨q, hq⟩ := hdvd w
-    rw [MonoidHom.mem_ker, MonoidHom.mem_ker, ← toAdd_eq_zero, ← toAdd_eq_zero, hdeg₀, hq,
-      Int.mul_ediv_cancel_left _ ha0, mul_eq_zero, or_iff_right ha0]
-  have hw₀' : deg₀ w₀ = Multiplicative.ofAdd 1 :=
-    Multiplicative.toAdd.injective (by rw [hdeg₀, hw₀, Int.ediv_self ha0, toAdd_ofAdd])
-  have hsurj : Function.Surjective deg₀ := fun x ↦
-    ⟨w₀ ^ Multiplicative.toAdd x, Multiplicative.toAdd.injective (by
-      rw [map_zpow, toAdd_zpow, hw₀', toAdd_ofAdd, smul_eq_mul, mul_one])⟩
-  let D₀ : DegreeDatum W := ⟨deg₀, hsurj, w₀, hw₀'⟩
-  -- `γ = u w₀ ^ m` with `u` of degree zero, so every weight at `γ` is `m` times that at `w₀`.
-  set m := Multiplicative.toAdd (deg₀ γ)
-  have hγ : γ = γ * (w₀ ^ m)⁻¹ * w₀ ^ m := (inv_mul_cancel_right γ _).symm
-  have hu : γ * (w₀ ^ m)⁻¹ ∈ deg.ker := by
-    rw [hker, MonoidHom.mem_ker, map_mul, map_inv, map_zpow, hw₀']
-    apply Multiplicative.toAdd.injective
-    rw [toAdd_mul, toAdd_inv, toAdd_zpow, toAdd_ofAdd, smul_eq_mul, mul_one, add_neg_cancel,
-      toAdd_one]
+  obtain ⟨D₀, hker, u, hu, m, hγ⟩ := DegreeDatum.exists_ker_eq_and_eq_mul_zpow deg htriv γ
   obtain ⟨T₀, hle, hcard, hsum⟩ := D₀.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower χ rV
     s Vs hsimpleVs (fun j ↦ (hasFiniteGeometricDet_congr hker _).1 (hdetVs j)) hdirect hUS hsimple
     ((hasFiniteGeometricDet_congr hker _).1 hdet)
   refine ⟨T₀.map fun x ↦ (m : ℝ) * x, ?_, by rw [Multiset.card_map, hcard], ?_⟩
-  · have : weightMultiset χ γ Vs = (weightMultiset χ w₀ Vs).map fun x ↦ (m : ℝ) * x := by
+  · have : weightMultiset χ γ Vs =
+        (weightMultiset χ D₀.degreeOneElement Vs).map fun x ↦ (m : ℝ) * x := by
       rw [weightMultiset, weightMultiset, ← Multiset.coe_mapAddMonoidHom, map_sum]
       refine Finset.sum_congr rfl fun j _ ↦ ?_
       rw [Multiset.coe_mapAddMonoidHom, Multiset.map_replicate, hγ,
-        detWeight_mul_zpow_of_mem_ker _ (hdetVs j) χ w₀ hu]
+        detWeight_mul_zpow_of_mem_ker _ (hdetVs j) χ D₀.degreeOneElement hu]
     rw [this]
     exact Multiset.map_le_map hle
-  · rw [hγ, detWeight_mul_zpow_of_mem_ker _ hdet χ w₀ hu, Multiset.sum_map_mul_left,
-      Multiset.map_id']
+  · rw [hγ, detWeight_mul_zpow_of_mem_ker _ hdet χ D₀.degreeOneElement hu,
+      Multiset.sum_map_mul_left, Multiset.map_id']
     exact congrArg _ hsum
 
+/-- The weights of the subquotients of the tensor product of two irreducible representations `V`
+and `E` of a degree datum, over an algebraically closed field of characteristic zero: if `V`, `E`
+and a subquotient `Q = S / U` of `V ⊗ E` have finite geometric determinant, then
+`dw_χ(Q) = dw_χ(V) + dw_χ(E)`.  The degree map need not be surjective and `γ` need not have degree
+one, as in `exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`; the proof is
+`DegreeDatum.detWeight_subquotient_tprod_eq_add`.
+(blueprint: `sk-p-tensor`) -/
+theorem detWeight_subquotient_tprod_eq_add [IsAlgClosed k] [CharZero k]
+    (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
+    {V E : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
+    [AddCommGroup E] [Module k E] [FiniteDimensional k E]
+    (rV : Representation k W V) (rE : Representation k W E)
+    (hV : rV.IsIrreducible) (hE : rE.IsIrreducible)
+    (hdetV : rV.HasFiniteGeometricDet deg) (hdetE : rE.HasFiniteGeometricDet deg)
+    {U S : Subrepresentation (rV.tprod rE)} (hUS : U < S)
+    (hdet : (S.subquotient U).HasFiniteGeometricDet deg) :
+    (S.subquotient U).detWeight χ γ = rV.detWeight χ γ + rE.detWeight χ γ := by
+  by_cases htriv : ∀ w, deg w = 1
+  · -- every element has degree zero: all the weights vanish
+    rw [detWeight_eq_zero_of_forall_deg_eq_one htriv _ hdet χ γ,
+      detWeight_eq_zero_of_forall_deg_eq_one htriv _ hdetV χ γ,
+      detWeight_eq_zero_of_forall_deg_eq_one htriv _ hdetE χ γ, add_zero]
+  -- otherwise divide the degrees by their generator to get a degree datum
+  simp only [not_forall] at htriv
+  obtain ⟨D₀, hker, u, hu, m, rfl⟩ := DegreeDatum.exists_ker_eq_and_eq_mul_zpow deg htriv γ
+  rw [detWeight_mul_zpow_of_mem_ker _ hdet χ _ hu, detWeight_mul_zpow_of_mem_ker _ hdetV χ _ hu,
+    detWeight_mul_zpow_of_mem_ker _ hdetE χ _ hu, ← mul_add,
+    D₀.detWeight_subquotient_tprod_eq_add χ _ _ hV hE ((hasFiniteGeometricDet_congr hker _).1 hdetV)
+      ((hasFiniteGeometricDet_congr hker _).1 hdetE) hUS
+      ((hasFiniteGeometricDet_congr hker _).1 hdet)]
+
+/-- Let `V` and `E` be finite-dimensional representations of one and the same degree datum over an
+algebraically closed field of characteristic zero, and let `Q` be a simple constituent of `V ⊗ E`,
+presented as a subquotient `S / U` for subrepresentations `U < S` of `V ⊗ E`.  If `Q` and all
+simple constituents of `V` and of `E` have finite geometric determinant, then
+`dw_χ(Q) = dw_χ(V_i) + dw_χ(E_j)` for a simple constituent `V_i = SV / UV` of `V` and a simple
+constituent `E_j = SE / UE` of `E`.  Neither `V`, nor `E`, nor `V ⊗ E` is assumed semisimple.
+
+The proof follows the blueprint: `Q` is a subquotient of some `V_i ⊗ E_j`
+(`Subrepresentation.exists_subquotient_tprod_equiv`), on which a positive central pair for the
+semisimple representation `V_i ⊕ E_j` acts by the product of its scalars on `V_i` and on `E_j`
+(`detWeight_subquotient_tprod_eq_add`).  The converse is
+`exists_isIrreducible_subquotient_tprod_detWeight_eq_add`.
+(blueprint: `sk-p-tensor`, `prop-ag-det-weight-two-factor-tensor`) -/
+theorem exists_detWeight_eq_add_of_subquotient_tprod [IsAlgClosed k] [CharZero k]
+    (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
+    {V E : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
+    [AddCommGroup E] [Module k E] [FiniteDimensional k E]
+    (rV : Representation k W V) (rE : Representation k W E)
+    (hdetV : ∀ UV SV : Subrepresentation rV, IsIrreducible (SV.subquotient UV) →
+      (SV.subquotient UV).HasFiniteGeometricDet deg)
+    (hdetE : ∀ UE SE : Subrepresentation rE, IsIrreducible (SE.subquotient UE) →
+      (SE.subquotient UE).HasFiniteGeometricDet deg)
+    {U S : Subrepresentation (rV.tprod rE)}
+    (hsimple : IsIrreducible (S.subquotient U))
+    (hdet : (S.subquotient U).HasFiniteGeometricDet deg) :
+    ∃ UV SV : Subrepresentation rV, ∃ UE SE : Subrepresentation rE,
+      UV < SV ∧ UE < SE ∧
+      IsIrreducible (SV.subquotient UV) ∧ IsIrreducible (SE.subquotient UE) ∧
+      (SV.subquotient UV).HasFiniteGeometricDet deg ∧
+      (SE.subquotient UE).HasFiniteGeometricDet deg ∧
+      (S.subquotient U).detWeight χ γ =
+        (SV.subquotient UV).detWeight χ γ + (SE.subquotient UE).detWeight χ γ := by
+  obtain ⟨UV, SV, UE, SE, hUV, hUE, hV, hE, U', S', ⟨e⟩⟩ :=
+    Subrepresentation.exists_subquotient_tprod_equiv hsimple
+  -- `Q' = S' / (U' ∩ S')`, a subquotient of `V_i ⊗ E_j` equivalent to `Q`
+  let e' := (Subrepresentation.subquotientInfEquiv U' S').trans e
+  refine ⟨UV, SV, UE, SE, hUV, hUE, hV, hE, hdetV UV SV hV, hdetE UE SE hE, ?_⟩
+  rw [e'.detWeight_eq]
+  exact detWeight_subquotient_tprod_eq_add χ deg γ _ _ hV hE (hdetV UV SV hV) (hdetE UE SE hE)
+    (Subrepresentation.inf_lt_of_isIrreducible (e.isIrreducible_iff.2 hsimple))
+    (e'.hasFiniteGeometricDet_iff.1 hdet)
+
+/-- The converse of `exists_detWeight_eq_add_of_subquotient_tprod`: for simple constituents
+`V_i = SV / UV` of `V` and `E_j = SE / UE` of `E` with finite geometric determinant, if all simple
+constituents of `V ⊗ E` have finite geometric determinant, then some simple constituent `Q` of
+`V ⊗ E` has `dw_χ(Q) = dw_χ(V_i) + dw_χ(E_j)`: any simple constituent of `V_i ⊗ E_j` is one.
+(blueprint: `prop-ag-det-weight-two-factor-tensor`) -/
+theorem exists_isIrreducible_subquotient_tprod_detWeight_eq_add [IsAlgClosed k] [CharZero k]
+    (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
+    {V E : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
+    [AddCommGroup E] [Module k E] [FiniteDimensional k E]
+    {rV : Representation k W V} {rE : Representation k W E}
+    {UV SV : Subrepresentation rV} {UE SE : Subrepresentation rE}
+    (hV : IsIrreducible (SV.subquotient UV)) (hE : IsIrreducible (SE.subquotient UE))
+    (hdetV : (SV.subquotient UV).HasFiniteGeometricDet deg)
+    (hdetE : (SE.subquotient UE).HasFiniteGeometricDet deg)
+    (hdet : ∀ U S : Subrepresentation (rV.tprod rE), IsIrreducible (S.subquotient U) →
+      (S.subquotient U).HasFiniteGeometricDet deg) :
+    ∃ U S : Subrepresentation (rV.tprod rE), U < S ∧ IsIrreducible (S.subquotient U) ∧
+      (S.subquotient U).detWeight χ γ =
+        (SV.subquotient UV).detWeight χ γ + (SE.subquotient UE).detWeight χ γ := by
+  -- a simple constituent `⊤ / B` of `V_i ⊗ E_j`
+  have := hV.nontrivial
+  have := hE.nontrivial
+  have : Nontrivial ((SV.toSubmodule ⧸ UV.toSubmodule.comap SV.toSubmodule.subtype) ⊗[k]
+      (SE.toSubmodule ⧸ UE.toSubmodule.comap SE.toSubmodule.subtype)) :=
+    Module.finrank_pos_iff.1 (by
+      rw [Module.finrank_tensorProduct (R := k)]
+      exact Nat.mul_pos Module.finrank_pos Module.finrank_pos)
+  obtain ⟨x, hx⟩ := exists_ne (0 : (SV.toSubmodule ⧸ UV.toSubmodule.comap SV.toSubmodule.subtype)
+    ⊗[k] (SE.toSubmodule ⧸ UE.toSubmodule.comap SE.toSubmodule.subtype))
+  obtain ⟨B, hB, hirr⟩ := Subrepresentation.exists_lt_isIrreducible_subquotient
+    (ρ := (SV.subquotient UV).tprod (SE.subquotient UE)) (A := ⊤)
+    fun h ↦ hx <| by
+      have : x ∈ (⊤ : Subrepresentation ((SV.subquotient UV).tprod (SE.subquotient UE))) :=
+        Submodule.mem_top
+      rw [h] at this
+      exact (Submodule.mem_bot k).1 this
+  -- it is a subquotient of `SV ⊗ SE`, hence of `V ⊗ E`
+  let qV : SV.toRepresentation.IntertwiningMap (SV.subquotient UV) := ⟨Submodule.mkQ _, fun _ ↦ rfl⟩
+  let qE : SE.toRepresentation.IntertwiningMap (SE.subquotient UE) := ⟨Submodule.mkQ _, fun _ ↦ rfl⟩
+  let iV : SV.toRepresentation.IntertwiningMap rV := ⟨Submodule.subtype _, fun _ ↦ rfl⟩
+  let iE : SE.toRepresentation.IntertwiningMap rE := ⟨Submodule.subtype _, fun _ ↦ rfl⟩
+  let q := qV.tensor qE
+  let i := iV.tensor iE
+  have hq : Function.Surjective q :=
+    TensorProduct.map_surjective (Submodule.mkQ_surjective _) (Submodule.mkQ_surjective _)
+  have hi : Function.Injective i :=
+    TensorProduct.map_injective_of_flat_flat _ _ (Submodule.injective_subtype _)
+      (Submodule.injective_subtype _)
+  let e₁ := Subrepresentation.subquotientComapEquiv q hq B ⊤
+  let U := Subrepresentation.map i (Subrepresentation.comap q B)
+  let S := Subrepresentation.map i (Subrepresentation.comap q ⊤)
+  let e₂ : (S.subquotient U).Equiv _ := (Subrepresentation.subquotientEquivOfIntertwiningMap i
+    (U := Subrepresentation.comap q B) (S := Subrepresentation.comap q ⊤) (U' := U) (S' := S)
+    (fun x hx ↦ ⟨x, hx, rfl⟩) (fun x _ hx ↦ ⟨x, hx, rfl⟩)
+    (fun x _ hx ↦ by
+      obtain ⟨y, hy, hxy⟩ := Subrepresentation.mem_map.1 hx
+      exact hi hxy ▸ hy) fun y hy ↦ by
+      obtain ⟨x, hx, rfl⟩ := Subrepresentation.mem_map.1 hy
+      exact ⟨x, hx, by rw [sub_self]; exact U.toSubmodule.zero_mem⟩).symm
+  let e := e₂.trans e₁
+  have hQ : IsIrreducible (S.subquotient U) := e.isIrreducible_iff.2 hirr
+  have hUS : U < S := by
+    have hle : U ≤ S := by
+      intro y hy
+      obtain ⟨x, -, rfl⟩ := Subrepresentation.mem_map.1 hy
+      exact Subrepresentation.mem_map.2
+        ⟨x, Subrepresentation.mem_comap.2 (by exact Submodule.mem_top), rfl⟩
+    simpa [inf_eq_left.2 hle] using Subrepresentation.inf_lt_of_isIrreducible hQ
+  refine ⟨U, S, hUS, hQ, ?_⟩
+  rw [← e.detWeight_eq]
+  exact detWeight_subquotient_tprod_eq_add χ deg γ _ _ hV hE hdetV hdetE hB
+    (e.hasFiniteGeometricDet_iff.2 (hdet U S hQ))
+
 end Representation
+
+namespace AlgebraicGeometry.Monodromy.DegreeDatum
+
+variable {W : Type*} [Group W] {k : Type*} [Field k]
+
+/-- **A rank-one character has constant modulus on a degree component.**  Let `χ : W → kˣ` be a
+character of a degree datum with finite image on the degree-zero subgroup `P`, and `ι : k → ℂ` a
+field embedding.  Every `w` of degree `m` satisfies `|ι(χ(w))| = |ι(χ(γ))| ^ m`: writing
+`w = u γ ^ m` with `u ∈ P`, the value `χ(u)` is a root of unity.
+(blueprint: `lem-wf-rank-one-component-modulus`) -/
+theorem norm_apply_eq_zpow (D : DegreeDatum W) (χ : W →* kˣ)
+    (hχ : (Set.range fun u : D.deg.ker ↦ χ u).Finite) (ι : k →+* ℂ) {w : W} {m : ℤ}
+    (hw : D.deg w = Multiplicative.ofAdd m) :
+    ‖ι (χ w : k)‖ = ‖ι (χ D.degreeOneElement : k)‖ ^ m := by
+  have hu : w * (D.degreeOneElement ^ m)⁻¹ ∈ D.deg.ker := by
+    rw [MonoidHom.mem_ker, map_mul, map_inv, map_zpow, D.deg_degreeOneElement, hw, ← ofAdd_zsmul,
+      smul_eq_mul, mul_one, mul_inv_cancel]
+  let φ := χ.comp D.deg.ker.subtype
+  have : Finite φ.range := (hχ : (Set.range φ).Finite).to_subtype
+  obtain ⟨e, he, hue⟩ := isOfFinOrder_iff_pow_eq_one.1 <| (Units.map ι.toMonoidHom).isOfFinOrder <|
+    φ.range.subtype.isOfFinOrder (isOfFinOrder_of_finite ⟨φ ⟨_, hu⟩, ⟨_, hu⟩, rfl⟩)
+  have h1 : ‖ι (χ (w * (D.degreeOneElement ^ m)⁻¹) : k)‖ = 1 :=
+    Complex.norm_eq_one_of_pow_eq_one (by simpa [φ] using congr(Units.val $hue)) he.ne'
+  calc ‖ι (χ w : k)‖
+      = ‖ι (χ (w * (D.degreeOneElement ^ m)⁻¹) * χ (D.degreeOneElement ^ m) : k)‖ := by
+        rw [← Units.val_mul, ← map_mul, inv_mul_cancel_right]
+    _ = ‖ι (χ D.degreeOneElement : k)‖ ^ m := by
+        rw [map_mul, norm_mul, h1, one_mul, map_zpow, Units.val_zpow_eq_zpow_val,
+          map_zpow₀, norm_zpow]
+
+/-- For an element `σ` of positive degree `e` and a character `χ` with finite image on `P`,
+`|ι(χ(σ))| = q ^ (e w / 2)` if and only if `|ι(χ(γ))| = q ^ (w / 2)`.
+(blueprint: `cor-mg-rankone-weight-from-element`) -/
+theorem norm_apply_eq_rpow_iff (D : DegreeDatum W) (χ : W →* kˣ)
+    (hχ : (Set.range fun u : D.deg.ker ↦ χ u).Finite) (ι : k →+* ℂ) {q : ℝ} (hq : 0 < q)
+    (t : ℝ) {σ : W} {e : ℕ} (he : 0 < e) (hσ : D.deg σ = Multiplicative.ofAdd (e : ℤ)) :
+    ‖ι (χ σ : k)‖ = q ^ (e * t / 2) ↔ ‖ι (χ D.degreeOneElement : k)‖ = q ^ (t / 2) := by
+  rw [D.norm_apply_eq_zpow χ hχ ι hσ, zpow_natCast, mul_div_assoc, mul_comm (e : ℝ),
+    Real.rpow_mul_natCast hq.le]
+  exact pow_left_inj₀ (norm_nonneg _) (by positivity) he.ne'
+
+/-- **Rank-one weight from a positive-degree element.**  Let `χ` be a character of a degree datum
+with finite image on `P`, `ι : k → ℂ` a field embedding and `q > 0`.  Let `F x` be a nonempty
+family of elements of positive degrees `d x`, such as the geometric Frobenius elements at the
+closed points of a curve over `𝔽_q`, of degree `[κ(x) : 𝔽_q]`.  Then `χ` is pure of weight `t`
+along this family, `|ι(χ(F x))| = q ^ (d x t / 2)` for all `x`, if and only if one element `σ`
+of positive degree `e` satisfies `|ι(χ(σ))| = q ^ (e t / 2)`.
+(blueprint: `cor-mg-rankone-weight-from-element`) -/
+theorem forall_norm_eq_rpow_iff_exists (D : DegreeDatum W) (χ : W →* kˣ)
+    (hχ : (Set.range fun u : D.deg.ker ↦ χ u).Finite) (ι : k →+* ℂ) {q : ℝ} (hq : 0 < q)
+    (t : ℝ) {X : Type*} [Nonempty X] (F : X → W) (d : X → ℕ) (hd : ∀ x, 0 < d x)
+    (hF : ∀ x, D.deg (F x) = Multiplicative.ofAdd (d x : ℤ)) :
+    (∀ x, ‖ι (χ (F x) : k)‖ = q ^ (d x * t / 2)) ↔
+      ∃ σ : W, ∃ e : ℕ, 0 < e ∧ D.deg σ = Multiplicative.ofAdd (e : ℤ) ∧
+        ‖ι (χ σ : k)‖ = q ^ (e * t / 2) := by
+  refine ⟨fun h ↦ ?_, fun ⟨σ, e, he, hσ, h⟩ x ↦ ?_⟩
+  · obtain ⟨x⟩ := ‹Nonempty X›
+    exact ⟨F x, d x, hd x, hF x, h x⟩
+  · rw [D.norm_apply_eq_rpow_iff χ hχ ι hq t he hσ] at h
+    rwa [D.norm_apply_eq_rpow_iff χ hχ ι hq t (hd x) (hF x)]
+
+/-- **Rank-one weight from a positive-degree element**, the version for every element: under the
+hypotheses of `forall_norm_eq_rpow_iff_exists`, `χ` is pure of weight `t` along the family `F` if
+and only if every element `σ` of positive degree `e` satisfies `|ι(χ(σ))| = q ^ (e t / 2)`.
+(blueprint: `cor-mg-rankone-weight-from-element`) -/
+theorem forall_norm_eq_rpow_iff_forall (D : DegreeDatum W) (χ : W →* kˣ)
+    (hχ : (Set.range fun u : D.deg.ker ↦ χ u).Finite) (ι : k →+* ℂ) {q : ℝ} (hq : 0 < q)
+    (t : ℝ) {X : Type*} [Nonempty X] (F : X → W) (d : X → ℕ) (hd : ∀ x, 0 < d x)
+    (hF : ∀ x, D.deg (F x) = Multiplicative.ofAdd (d x : ℤ)) :
+    (∀ x, ‖ι (χ (F x) : k)‖ = q ^ (d x * t / 2)) ↔
+      ∀ (σ : W) (e : ℕ), 0 < e → D.deg σ = Multiplicative.ofAdd (e : ℤ) →
+        ‖ι (χ σ : k)‖ = q ^ (e * t / 2) := by
+  refine ⟨fun h σ e he hσ ↦ ?_, fun h x ↦ h _ _ (hd x) (hF x)⟩
+  obtain ⟨x⟩ := ‹Nonempty X›
+  have := h x
+  rw [D.norm_apply_eq_rpow_iff χ hχ ι hq t (hd x) (hF x)] at this
+  rwa [D.norm_apply_eq_rpow_iff χ hχ ι hq t he hσ]
+
+end AlgebraicGeometry.Monodromy.DegreeDatum

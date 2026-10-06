@@ -7,11 +7,13 @@ module
 
 public import Mathlib.LinearAlgebra.Determinant
 public import Mathlib.LinearAlgebra.DirectSum.Finite
+public import Mathlib.LinearAlgebra.Eigenspace.Charpoly
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import Mathlib.RepresentationTheory.Basic
 public import Mathlib.RepresentationTheory.Intertwining
 public import WeilConjectures.Mathlib.Algebra.DirectSum.LinearMap
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
+public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 
 /-!
 # The determinant character and the exterior powers of a representation
@@ -34,6 +36,10 @@ have, alongside `Representation.tprod` and `Representation.dual`:
   (`Representation.isInternal_directSumSummand`).
 * `Representation.charpoly_directSum`: the characteristic polynomial of `g` acting on a direct
   sum of representations is the product of the characteristic polynomials on the summands.
+* `Matrix.GeneralLinearGroup.toRepresentation`: the defining representation of `GL n k` on
+  `n → k`.
+* `Representation.hasEigenvalue_dual_iff`: the eigenvalues of `g` on the dual representation are
+  those of `g⁻¹`.
 
 ## Blueprint
 
@@ -41,6 +47,8 @@ have, alongside `Representation.tprod` and `Representation.dual`:
 -/
 
 @[expose] public section
+
+open scoped Matrix
 
 namespace Representation
 
@@ -211,4 +219,57 @@ theorem charpoly_directSum [Fintype ι] [LinearOrder ι] [∀ i, FiniteDimension
 
 end DirectSum
 
+section Dual
+
+variable {k G V : Type*} [Field k] [Group G] [AddCommGroup V] [Module k V]
+  (ρ : Representation k G V)
+
+/-- If `α` is an eigenvalue of `ρ g`, then `α⁻¹` is an eigenvalue of `ρ g⁻¹`. -/
+theorem hasEigenvalue_inv {g : G} {α : k} (h : Module.End.HasEigenvalue (ρ g) α) :
+    Module.End.HasEigenvalue (ρ g⁻¹) α⁻¹ := by
+  obtain ⟨v, hv⟩ := h.exists_hasEigenvector
+  have hgv : ρ g v = α • v := hv.apply_eq_smul
+  have hα : α ≠ 0 := by
+    rintro rfl
+    rw [zero_smul] at hgv
+    have : v = ρ g⁻¹ (ρ g v) := by
+      rw [← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one, Module.End.one_apply]
+    exact hv.2 (by rw [this, hgv, map_zero])
+  refine Module.End.hasEigenvalue_of_hasEigenvector (x := v) ⟨?_, hv.2⟩
+  rw [Module.End.mem_eigenspace_iff]
+  calc ρ g⁻¹ v = α⁻¹ • ρ g⁻¹ (α • v) := by rw [map_smul, smul_smul, inv_mul_cancel₀ hα, one_smul]
+    _ = α⁻¹ • v := by
+      rw [← hgv, ← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one, Module.End.one_apply]
+
+/-- The eigenvalues of `g` on the dual representation are those of `g⁻¹` on `V`
+(`sk-p-linear-spectra`). -/
+theorem hasEigenvalue_dual_iff [FiniteDimensional k V] {g : G} {α : k} :
+    Module.End.HasEigenvalue (ρ.dual g) α ↔ Module.End.HasEigenvalue (ρ g⁻¹) α := by
+  have h : ρ.dual g = (ρ g⁻¹).dualMap := by
+    ext f v
+    simp [dual_apply, Module.Dual.transpose_apply]
+  rw [Module.End.hasEigenvalue_iff_isRoot_charpoly, Module.End.hasEigenvalue_iff_isRoot_charpoly,
+    h, LinearMap.charpoly_dualMap]
+
+end Dual
+
 end Representation
+
+namespace Matrix.GeneralLinearGroup
+
+variable (n : Type*) [Fintype n] [DecidableEq n] (k : Type*) [Field k]
+
+/-- The defining representation of `GL n k` on `n → k`, by matrix-vector multiplication. -/
+noncomputable def toRepresentation : Representation k (GL n k) (n → k) where
+  toFun g := Matrix.toLinAlgEquiv' (g : Matrix n n k)
+  map_one' := by simp
+  map_mul' x y := by simp
+
+variable {n k}
+
+@[simp]
+theorem toRepresentation_apply (g : GL n k) (v : n → k) :
+    toRepresentation n k g v = (g : Matrix n n k) *ᵥ v :=
+  rfl
+
+end Matrix.GeneralLinearGroup

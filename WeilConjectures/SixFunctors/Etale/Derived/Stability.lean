@@ -48,6 +48,9 @@ restrictions of `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!` and `𝔻_X` to `Dctf`.
   `…_of_isFinite_of_etale`, `…_of_isClosedImmersion`, `…_of_smoothOfRelativeDimension`,
   `AlgebraicGeometry.Etale.exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek`
   (`sk-prop-sf-rf-shriek-preservation`, clauses (i)–(iv)).
+- `exists_constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_topologicalKrullDim_le`, in
+  the namespace `AlgebraicGeometry.Etale` (`sk-prop-sf-rf-shriek-preservation`, clause (iv)
+  with its constants).
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_leftDerivedUpperStar`,
   `AlgebraicGeometry.Etale.constructibleFiniteTor_tensor`,
   `AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar`,
@@ -86,8 +89,9 @@ restrictions of `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!` and `𝔻_X` to `Dctf`.
   containing the generators contains all of `Dctf(X, A)`. Mathlib has no `thickClosure`.
 * The counterexample of `sk-thm-sf-hom-ctf` (the origin in `𝔸¹`, showing that the sharper
   interval fails without dualizability) is prose only and is not formalised.
-* A dimension bound `dim X ≤ d` is `topologicalKrullDim X ≤ (d : WithBot ℕ∞)`; the ambient datum
-  a morphism must carry for `Rf_!` and `Rf^!` to exist is `HasCompactification f`, taken as an
+* A dimension bound `dim X ≤ d` is `topologicalKrullDim X ≤ (d : WithBot ℕ∞)`. What Lean needs
+  to form `Rf_!` and `Rf^!` is that `f` admits a compactification, `HasCompactification f`,
+  taken as an
   explicit hypothesis throughout (it is *not* automatic for an open immersion, Nagata's theorem
   requiring a quasi-compact quasi-separated target). `HasCompactification f` already supplies
   `IsSeparated f` and `LocallyOfFiniteType f`, so "separated of finite type" is spelled as
@@ -97,7 +101,18 @@ restrictions of `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!` and `𝔻_X` to `Dctf`.
   vanishing of `R^p f_*` above twice the dimension, which uses those standing hypotheses. As
   everywhere in this folder the statements are made relatively, for an arbitrary base and an
   arbitrary coefficient category `A`, with the dimension bound carried explicitly; the absolute
-  case is the base `Spec k`.
+  case is the base `Spec k`. The dimension bound alone does not give the vanishing above twice
+  the dimension: that also needs the coefficients' characteristic to be invertible on the base
+  and a base on which the cohomological-dimension bound holds (finite type over a separably
+  closed field, or quasi-excellent Noetherian by Gabber). For `Λ = 𝔽_p` on `𝔸¹` over `𝔽̄_p`
+  the Artin–Schreier cohomology makes `Ri^!Λ` at the origin non-constructible. There is not
+  yet a way to say "the characteristic of `A` is invertible on `X`" for a general coefficient
+  category `A`, so this hypothesis is missing from every statement here carrying a `2d` bound.
+* The clause (iv) statements of `sk-prop-sf-rf-shriek-preservation` and clause (v) of
+  `sk-thm-sf-ctf-stability` assume `Y` Noetherian (`[IsNoetherian Y]`). Quasi-compactness of
+  `Y` is needed for a uniform shift, since `f` must be covered by finitely many affine charts:
+  for `f : ⊔ₙ 𝔸ⁿ_k ⟶ ⊔ₙ Spec k` the complex `Rf^!Λ` sits in degree `-2n` on the `n`-th
+  component. Noetherianity gives `dim 𝔸ⁿ_V = dim V + n`, which fails for general rings.
 
 -/
 
@@ -130,7 +145,7 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 /-- Blueprint `sk-lem-sf-open-ctf`: Extension by zero preserves the finite-Tor constructible
 category.
 
-For an open immersion `j : U ⟶ Y` carrying the ambient datum, extension by zero sends
+For an open immersion `j : U ⟶ Y` admitting a compactification, extension by zero sends
 `Dctf(U, A)` into `Dctf(Y, A)` *without moving the interval*: if `K` is bounded constructible
 with homology concentrated in `[a, b]` and Tor amplitude in `[a, b]`, then so is `Rj_! K`. -/
 theorem constructibleTorAmplitudeIn_rightDerivedLowerShriek {U Y : Scheme.{u}} (j : U ⟶ Y)
@@ -243,16 +258,20 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isFinite_of_etale
 image.
 
 Clause (ii): for a closed immersion `i : Z ⟶ T` into a target of dimension `≤ d`, the
-exceptional inverse image shifts both intervals by `2d + 1`, that is,
-`D_c^[a, b] ↦ D_c^[a, b + 2d + 1]` (by `2·codim + 1` in the pure case). The bound comes from
-the localization triangle for the open complement, the vanishing of étale cohomology above
-twice the dimension giving the `2d` and the triangle the extra `+1`. -/
+exceptional inverse image widens the upper end of the interval by `2d + 1`, that is,
+`D_c^[a, b] ↦ D_c^[a, b + 2d + 1]`. The bound is in terms of the dimension of the target, and
+comes from the localization triangle for the open complement, the vanishing of étale cohomology
+above twice the dimension giving the `2d` and the triangle the extra `+1`. No bound in terms of
+the codimension alone holds: for `Z = V(y) ⊂ T = Spec k[x, y]/(xy)`, `H²(Ri^!Λ)` is nonzero at
+the origin, coming from the punctured `y`-axis, although `Z` has codimension `0`. For `Z`
+regular of pure codimension `c` in a regular `T`, the sharp `Ri^!Λ_T ≅ Λ_Z(-c)[-2c]` is
+`sk-thm-regular`. -/
 theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
     {Z T : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i] [HasCompactification i] (d : ℕ)
     (hd : topologicalKrullDim T ≤ (d : WithBot ℕ∞)) (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A)}
     (hK : constructibleTorAmplitudeIn A T a b K) :
-    constructibleTorAmplitudeIn A Z a (b + 2 * (d : ℤ) + 1) ((R(i)^![A]).obj K) :=
+    constructibleTorAmplitudeIn A Z a (b + 2 * d + 1) ((R(i)^![A]).obj K) :=
   sorry
 
 /-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
@@ -266,19 +285,49 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeD
     [SmoothOfRelativeDimension d f] (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     (hK : constructibleTorAmplitudeIn A Y a b K) :
-    constructibleTorAmplitudeIn A X (a - 2 * (d : ℤ)) (b - 2 * (d : ℤ))
-      ((R(f)^![A]).obj K) :=
+    constructibleTorAmplitudeIn A X (a - 2 * d) (b - 2 * d) ((R(f)^![A]).obj K) :=
   sorry
 
 /-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
 image.
 
-Clause (iv): *every* separated finite-type `f` carrying the ambient datum preserves the
-constructible intervals up to some shift. The blueprint's "with the shift computed from the
-affine charts" is rendered here as a single integer `c`, depending only on `f`, widening every
-interval `[a, b]` to `[a - c, b + c]`. -/
+Clause (iv), with its constants: let `f : X ⟶ Y` be separated of finite type, admitting a
+compactification, with `Y` Noetherian. There is a `D`, depending only on `f`, such that whenever
+`dim Y ≤ d`, `Rf^!` sends `D_c^[a, b]` into `D_c^[a - 2D, b + 2d + 1]`. Here `D` is the maximal
+embedding dimension of the affine charts `U ↪ 𝔸^{d_U}_V` of `f`.
+
+The proof has three steps.
+1. Localise: the amplitudes are Zariski-local on `X` and `Rj^! = j^*` for an open immersion
+   `j`, so it suffices to treat finitely many affine charts `U ↪ 𝔸^{n}_V ⟶ V` with `n ≤ D`;
+   finitely many suffice because `Y` is quasi-compact.
+2. Compose: the smooth clause (iii) for `𝔸^n_V ⟶ V` sends `[a, b]` to `[a - 2n, b - 2n]`, and
+   the closed-immersion clause (ii) into `𝔸^n_V` then sends it to
+   `[a - 2n, b - 2n + 2(d + n) + 1]`.
+3. Count dimensions: `dim 𝔸^n_V = dim V + n ≤ d + n`, using that `V` is Noetherian, so the upper
+   end is `b + 2d + 1`. -/
+theorem exists_constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_topologicalKrullDim_le
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsNoetherian Y] :
+    ∃ D : ℕ, ∀ (d : ℕ), topologicalKrullDim Y ≤ (d : WithBot ℕ∞) →
+      ∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)),
+        constructibleTorAmplitudeIn A Y a b K →
+          constructibleTorAmplitudeIn A X (a - 2 * D) (b + 2 * d + 1) ((R(f)^![A]).obj K) :=
+  sorry
+
+/-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
+image.
+
+Clause (iv), dimension-free form with the shift forgotten: every separated finite-type `f`
+admitting a compactification, over a Noetherian `Y`, preserves the constructible intervals up
+to a single shift `c`, depending only on `f`, widening every interval `[a, b]` to
+`[a - c, b + c]`. When `dim Y ≤ d` this follows from the preceding theorem, with
+`c = max(2D, 2d + 1)`. Under the blueprint's standing hypothesis (finite type over a
+field) `dim Y` is always finite, but this repository cannot yet prove that, so no dimension
+hypothesis is imposed here: clause (v) of `sk-thm-sf-ctf-stability`
+(`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedUpperShriek`) is proved from it. -/
+-- TODO: once finite-type schemes over a field are known to be finite-dimensional, state this
+-- under that hypothesis and prove it from the constant-bearing form above.
 theorem exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek {X Y : Scheme.{u}}
-    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] :
+    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsNoetherian Y] :
     ∃ c : ℤ, ∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)),
       constructibleTorAmplitudeIn A Y a b K →
         constructibleTorAmplitudeIn A X (a - c) (b + c) ((R(f)^![A]).obj K) :=
@@ -374,7 +423,7 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X �
 subcategories.
 
 Clause (iv): `Rf_! : Dctf(X, A) ⥤ Dctf(Y, A)` is defined for every separated finite-type `f`
-carrying the ambient datum. One assembles the open-immersion case
+admitting a compactification. One assembles the open-immersion case
 (`AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedLowerShriek`) with the proper
 case, where `Rf_! = Rf_*`, along a compactification of `f`. -/
 theorem constructibleFiniteTor_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -387,12 +436,12 @@ theorem constructibleFiniteTor_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.
 
-Clause (v): `Rf^! : Dctf(Y, A) ⥤ Dctf(X, A)` is defined for every `f` carrying the ambient
-datum. This is
+Clause (v): `Rf^! : Dctf(Y, A) ⥤ Dctf(X, A)` is defined for every separated finite-type `f`
+admitting a compactification, over a Noetherian `Y`. This is
 `AlgebraicGeometry.Etale.exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek`
 with the shift forgotten. -/
 theorem constructibleFiniteTor_rightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [QuasiCompact f]
+    [HasCompactification f] [QuasiCompact f] [IsNoetherian Y]
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     (hK : constructibleFiniteTor A Y K) :
     constructibleFiniteTor A X ((R(f)^![A]).obj K) := by
@@ -435,7 +484,7 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriek (f : X ⟶ Y)
 /-- Blueprint `sk-thm-sf-ctf-stability`, clause (v): the restriction
 `Rf^! : Dctf(Y, A) ⥤ Dctf(X, A)` of the exceptional inverse image to the small categories. -/
 noncomputable def DerivedCategoryFiniteTor.rightDerivedUpperShriek (f : X ⟶ Y)
-    [HasCompactification f] [QuasiCompact f] :
+    [HasCompactification f] [QuasiCompact f] [IsNoetherian Y] :
     DerivedCategoryFiniteTor A Y ⥤ DerivedCategoryFiniteTor A X :=
   ObjectProperty.lift _ (DerivedCategoryFiniteTor.ι A Y ⋙ R(f)^![A])
     fun K ↦ constructibleFiniteTor_rightDerivedUpperShriek A f K.property

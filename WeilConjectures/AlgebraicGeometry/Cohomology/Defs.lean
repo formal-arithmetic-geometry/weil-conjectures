@@ -288,6 +288,32 @@ lemma finrankH_congr {M N : X.Modules} (e : M ≅ N) (q : ℕ) : M.finrankH k q 
 lemma eulerChar_congr {M N : X.Modules} (e : M ≅ N) : M.eulerChar k = N.eulerChar k := by
   simp only [eulerChar, finrankH_congr k e]
 
+omit [X.Over (Spec (CommRingCat.of k))] in
+/-- **Changing the base field along an isomorphism.** If the structure morphism of `X` to
+`Spec K` is the composite of `g : X ⟶ Spec L` with `Spec ψ` for an isomorphism `ψ : K ≅ L`,
+then `dim_K H^q(X, M) = dim_L H^q(X, M)`: the two scalar actions correspond under `ψ`. -/
+theorem finrankH_eq_of_comp_specMap {L : Type u} [Field L]
+    (ψ : CommRingCat.of k ⟶ CommRingCat.of L) [IsIso ψ] (g : X ⟶ Spec (.of L)) (M : X.Modules)
+    (q : ℕ) :
+    (letI : X.Over (Spec (.of k)) := ⟨g ≫ Spec.map ψ⟩; M.finrankH k q) =
+      (letI : X.Over (Spec (.of L)) := ⟨g⟩; M.finrankH L q) := by
+  let : X.Over (Spec (.of k)) := ⟨g ≫ Spec.map ψ⟩
+  let : X.Over (Spec (.of L)) := ⟨g⟩
+  have hring :
+      globalSectionsRingHom k (X := X) = (globalSectionsRingHom L (X := X)).comp ψ.hom := by
+    simp only [globalSectionsRingHom]
+    rw [← CommRingCat.hom_comp]
+    congr 1
+    change _ ≫ (g ≫ Spec.map ψ).appTop = ψ ≫ _ ≫ g.appTop
+    rw [Scheme.Hom.comp_appTop, ← Category.assoc, ← Scheme.ΓSpecIso_inv_naturality,
+      Category.assoc]
+  have h := rank_eq_of_equiv_equiv (R := k) (R' := L) (M := M.H q) (M₁ := M.H q) ψ.hom
+    (AddEquiv.refl _) (ConcreteCategory.bijective_of_isIso ψ) (fun r m ↦ by
+      change globalSectionsRingHom k (X := X) r • m =
+        globalSectionsRingHom L (X := X) (ψ.hom r) • m
+      rw [hring, RingHom.comp_apply])
+  exact congrArg Cardinal.toNat h
+
 end Modules
 
 end Field

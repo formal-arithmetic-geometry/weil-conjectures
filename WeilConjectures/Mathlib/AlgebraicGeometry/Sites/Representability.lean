@@ -1,0 +1,434 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Sites.Representability
+public import Mathlib.CategoryTheory.Sites.Over
+
+/-!
+# Representability of sheaves on `Sch/S` is a local property
+
+Mathlib's `AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable` shows that a
+`Type u`-valued Zariski sheaf on `Scheme.{u}` which is covered by relatively representable open
+immersions `yoneda.obj (X i) ⟶ F` is representable (Stacks, Lemma 01JJ). This file proves the
+relative version over a base scheme `S`: for a Zariski sheaf `P` on `Over S` with values in an
+arbitrary universe, but with `u`-small values.
+
+The proof reduces to Mathlib's statement. To `P` we attach the presheaf of `Type u` on
+`Scheme.{u}`
+`sigmaOver P : T ↦ Σ s : T ⟶ S, P(T, s)`,
+show that it is a Zariski sheaf, that the elements `ξ i ∈ P(X i)` give relatively representable
+open immersions `yoneda.obj (X i).left ⟶ sigmaOver P` which are jointly locally surjective, and
+that a scheme representing `sigmaOver P` gives an `S`-scheme representing `P`.
+
+## Main definitions
+
+- `AlgebraicGeometry.Scheme.LocalRepresentability.sigmaOver`: the presheaf
+  `T ↦ Σ s : T ⟶ S, P(T, s)` on `Scheme.{u}`.
+
+## Main statements
+
+- `AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over`: a Zariski
+  sheaf on `Over S` with small values, covered by open subfunctors which are representable, is
+  representable (Stacks, Lemma 01JJ, over a base).
+- `AlgebraicGeometry.exists_opens_of_relative_isOpenImmersion`: a subfunctor `F ⊆ P` which is
+  representable by open immersions (in the sense of `MorphismProperty.relative` for
+  `uliftYoneda`) is cut out, over every `T` and `x ∈ P(T)`, by an open subscheme of `T`.
+
+## Implementation notes
+
+The hypotheses of `isRepresentable_of_isSheaf_over` are stated concretely, in the form of
+Stacks, Definition 01JI: the family `ξ i ∈ P(X i)` is "injective" (`h_{X i} ⟶ P` is a
+monomorphism), the locus where an element of `P(T)` comes from `X i` is an open subscheme of
+`T`, and every point of every `T` lies in such a locus.
+-/
+
+@[expose] public section
+
+universe w u
+
+open CategoryTheory Limits Opposite
+
+namespace AlgebraicGeometry.Scheme.LocalRepresentability
+
+variable {S : Scheme.{u}} (P : (Over S)ᵒᵖ ⥤ Type w) [∀ T, Small.{u} (P.obj T)]
+
+/-- The element of `Σ s : T ⟶ S, P(T, s)` obtained by pulling back `y ∈ P(Y)` along
+`a : T ⟶ Y.left`. -/
+noncomputable def sigmaOverMk {T : Scheme.{u}} {Y : Over S} (a : T ⟶ Y.left)
+    (y : P.obj (op Y)) : Σ s : T ⟶ S, Shrink.{u} (P.obj (op (Over.mk s))) :=
+  ⟨a ≫ Y.hom, equivShrink _ (P.map (Over.homMk a rfl : Over.mk (a ≫ Y.hom) ⟶ Y).op y)⟩
+
+/-- Two elements `⟨s, x⟩` and `⟨s', x'⟩` of `Σ s : T ⟶ S, P(T, s)` agree if and only if
+`s = s'` and `x` corresponds to `x'` under the identification `Over.mk s ≅ Over.mk s'`. -/
+lemma sigma_mk_eq_iff {T : Scheme.{u}} {s s' : T ⟶ S} (x : P.obj (op (Over.mk s)))
+    (x' : P.obj (op (Over.mk s'))) :
+    (⟨s, equivShrink _ x⟩ : Σ s : T ⟶ S, Shrink.{u} (P.obj (op (Over.mk s)))) =
+      ⟨s', equivShrink _ x'⟩ ↔ ∃ h : s = s',
+        x = P.map (Over.homMk (𝟙 T) (by simp [h]) : Over.mk s ⟶ Over.mk s').op x' := by
+  constructor
+  · intro h
+    obtain ⟨rfl, h⟩ := Sigma.mk.inj_iff.1 h
+    refine ⟨rfl, ?_⟩
+    rw [show (Over.homMk (𝟙 T) (by simp) : Over.mk s ⟶ Over.mk s) = 𝟙 _ by ext; simp]
+    simpa using (equivShrink _).injective (eq_of_heq h)
+  · rintro ⟨rfl, rfl⟩
+    rw [show (Over.homMk (𝟙 T) (by simp) : Over.mk s ⟶ Over.mk s) = 𝟙 _ by ext; simp]
+    simp
+
+/-- The pullbacks of `y ∈ P(Y)` along `a` and of `y' ∈ P(Y')` along `a'` agree if and only
+if they agree as elements of `P(W)`, for any `W : Over S` with underlying scheme `T` over which
+`a` and `a'` are morphisms over `S`. -/
+lemma sigmaOverMk_eq_iff {W Y Y' : Over S} (a : W.left ⟶ Y.left) (a' : W.left ⟶ Y'.left)
+    (ha : a ≫ Y.hom = W.hom) (ha' : a' ≫ Y'.hom = W.hom)
+    (y : P.obj (op Y)) (y' : P.obj (op Y')) :
+    sigmaOverMk P a y = sigmaOverMk P a' y' ↔
+      P.map (Over.homMk a ha).op y = P.map (Over.homMk a' ha').op y' := by
+  rw [sigmaOverMk, sigmaOverMk, sigma_mk_eq_iff]
+  let i : W ⟶ Over.mk (a ≫ Y.hom) := Over.homMk (𝟙 W.left) (by simp [ha])
+  let j : Over.mk (a ≫ Y.hom) ⟶ W := Over.homMk (𝟙 W.left) (by simp [ha])
+  have hij : j ≫ i = 𝟙 _ := by ext; simp [i, j]
+  have e₁ : (Over.homMk a ha : W ⟶ Y) = i ≫ Over.homMk a rfl := by ext; simp [i]
+  have e₂ : (Over.homMk a' ha' : W ⟶ Y') = i ≫
+      (Over.homMk (𝟙 W.left) (by simp [ha, ha']) :
+        Over.mk (a ≫ Y.hom) ⟶ Over.mk (a' ≫ Y'.hom)) ≫
+        Over.homMk a' rfl := by ext; simp [i]
+  rw [e₁, e₂]
+  simp only [op_comp, Functor.map_comp_apply]
+  constructor
+  · rintro ⟨h, h'⟩
+    rw [h']
+  · intro h
+    refine ⟨by rw [ha, ha'], ?_⟩
+    have key : ∀ z, P.map j.op (P.map i.op z) = z := by
+      intro z
+      rw [← Functor.map_comp_apply, ← op_comp, hij, op_id, Functor.map_id_apply]
+    have := congrArg (P.map j.op) h
+    rwa [key, key] at this
+
+/-- Every element of `Σ s : T ⟶ S, P(T, s)` is of the form `sigmaOverMk P (𝟙 T) y`. -/
+lemma sigmaOverMk_id {T : Scheme.{u}} (x : Σ s : T ⟶ S, Shrink.{u} (P.obj (op (Over.mk s)))) :
+    sigmaOverMk P (Y := Over.mk x.1) (𝟙 T) ((equivShrink _).symm x.2) = x := by
+  obtain ⟨s, x⟩ := x
+  obtain ⟨x, rfl⟩ := (equivShrink _).surjective x
+  rw [sigmaOverMk, Equiv.symm_apply_apply, sigma_mk_eq_iff]
+  exact ⟨by simp, rfl⟩
+
+/-- Pulling back an element `sigmaOverMk P a y` further along `b`. -/
+lemma sigmaOverMk_comp {T T' : Scheme.{u}} {Y : Over S} (b : T' ⟶ T) (a : T ⟶ Y.left)
+    (y : P.obj (op Y)) :
+    sigmaOverMk P (Y := Over.mk (a ≫ Y.hom)) b
+      ((equivShrink _).symm (sigmaOverMk P a y).2) = sigmaOverMk P (b ≫ a) y := by
+  rw [sigmaOverMk_eq_iff P (W := Over.mk (b ≫ a ≫ Y.hom)) _ _ rfl (by simp)]
+  simp only [sigmaOverMk, Equiv.symm_apply_apply]
+  rw [← Functor.map_comp_apply, ← op_comp]
+  congr 3
+
+/-- The presheaf `T ↦ Σ s : T ⟶ S, P(T, s)` on the category of schemes attached to a presheaf
+`P` on `Over S` with small values. -/
+@[simps obj]
+noncomputable def sigmaOver : Scheme.{u}ᵒᵖ ⥤ Type u where
+  obj T := Σ s : T.unop ⟶ S, Shrink.{u} (P.obj (op (Over.mk s)))
+  map a := ↾fun x ↦ sigmaOverMk P (Y := Over.mk x.1) a.unop ((equivShrink _).symm x.2)
+  map_id T := by
+    ext x : 3
+    exact sigmaOverMk_id P x
+  map_comp {T T' T''} a b := by
+    ext x : 3
+    obtain ⟨s, x⟩ := x
+    obtain ⟨x, rfl⟩ := (equivShrink _).surjective x
+    dsimp
+    rw [Equiv.symm_apply_apply]
+    exact (sigmaOverMk_comp P (Y := Over.mk s) b.unop a.unop x).symm
+
+/-- The restriction maps of `sigmaOver P` on the elements `sigmaOverMk P a y`. -/
+lemma sigmaOver_map_sigmaOverMk {T T' : Scheme.{u}} {Y : Over S} (b : T' ⟶ T) (a : T ⟶ Y.left)
+    (y : P.obj (op Y)) :
+    (sigmaOver P).map b.op (sigmaOverMk P a y) = sigmaOverMk P (b ≫ a) y :=
+  sigmaOverMk_comp P b a y
+
+/-- Pulling back `P.map g.op z` along `a` is pulling back `z` along `a ≫ g.left`. -/
+lemma sigmaOverMk_map {T : Scheme.{u}} {W Z : Over S} (a : T ⟶ W.left) (g : W ⟶ Z)
+    (z : P.obj (op Z)) :
+    sigmaOverMk P a (P.map g.op z) = sigmaOverMk P (a ≫ g.left) z := by
+  rw [sigmaOverMk_eq_iff P (W := Over.mk (a ≫ W.hom)) _ _ rfl (by simp)]
+  rw [← Functor.map_comp_apply, ← op_comp]
+  congr 3
+
+/-- An element of `P(Y)` is determined by its image in `sigmaOver P` over `Y.left`. -/
+lemma sigmaOverMk_injective {Y : Over S} :
+    Function.Injective (sigmaOverMk P (𝟙 Y.left) : P.obj (op Y) → _) := by
+  intro y y' h
+  rw [sigmaOverMk_eq_iff P (W := Y) _ _ (by simp) (by simp)] at h
+  have e : (Over.homMk (𝟙 Y.left) (by simp) : Y ⟶ Y) = 𝟙 Y := by ext; simp
+  simpa [e] using h
+
+/-- An element `q` of `sigmaOver P` over `Z.left` whose structure morphism is `Z.hom`, viewed as
+an element of `P(Z)`. -/
+noncomputable def toObj {Z : Over S} (q : (sigmaOver P).obj (op Z.left)) (hq : q.1 = Z.hom) :
+    P.obj (op Z) :=
+  P.map (Over.homMk (𝟙 Z.left) (by simp [hq]) : Z ⟶ Over.mk q.1).op ((equivShrink _).symm q.2)
+
+/-- `toObj` is a section of `sigmaOverMk P (𝟙 Z.left)`. -/
+lemma sigmaOverMk_toObj {Z : Over S} (q : (sigmaOver P).obj (op Z.left)) (hq : q.1 = Z.hom) :
+    sigmaOverMk P (𝟙 Z.left) (toObj P q hq) = q := by
+  rw [toObj, sigmaOverMk_map]
+  conv_rhs => rw [← sigmaOverMk_id P q]
+  rw [sigmaOverMk_eq_iff P (W := Z) _ _ (by simp [hq]) (by simp [hq])]
+  congr 3
+
+/-- If `P` is a Zariski sheaf on `Over S`, then `sigmaOver P` is a Zariski sheaf on schemes. -/
+theorem isSheaf_sigmaOver (hP : Presheaf.IsSheaf (zariskiTopology.over S) P) :
+    Presheaf.IsSheaf zariskiTopology (sigmaOver P) := by
+  rw [isSheaf_iff_isSheaf_of_type] at hP ⊢
+  intro T R hR x hx
+  have hS : Presieve.IsSheaf zariskiTopology (yoneda.obj S) :=
+    (isSheaf_iff_isSheaf_of_type _ _).1 (zariskiTopology.yoneda.obj S).property
+  let xS : Presieve.FamilyOfElements (yoneda.obj S) R.arrows := fun V f hf ↦ (x f hf).1
+  have hxS : xS.Compatible := by
+    intro V₁ V₂ W g₁ g₂ f₁ f₂ h₁ h₂ e
+    exact congr_arg Sigma.fst (hx g₁ g₂ h₁ h₂ e)
+  obtain ⟨s, hs, hs'⟩ := hS R hR xS hxS
+  replace hs : ∀ (V : Scheme.{u}) (f : V ⟶ T) (hf : R f), f ≫ s = (x f hf).1 := hs
+  let R' := (Sieve.overEquiv (Over.mk s)).symm R
+  have hR' : R' ∈ zariskiTopology.over S (Over.mk s) :=
+    GrothendieckTopology.overEquiv_symm_mem_over _ _ _ hR
+  have hR'iff {Z : Over S} (g : Z ⟶ Over.mk s) : R'.arrows g ↔ R g.left :=
+    Sieve.overEquiv_symm_iff _ _
+  let y : Presieve.FamilyOfElements P R'.arrows := fun Z g hg ↦
+    toObj P (x g.left ((hR'iff g).1 hg)) (by rw [← hs]; exact Over.w g)
+  have hy (Z : Over S) (g : Z ⟶ Over.mk s) (hg : R'.arrows g) :
+      sigmaOverMk P (𝟙 Z.left) (y g hg) = x g.left ((hR'iff g).1 hg) :=
+    sigmaOverMk_toObj _ _ _
+  have hyc : y.Compatible := by
+    intro Z₁ Z₂ W g₁ g₂ f₁ f₂ h₁ h₂ e
+    apply sigmaOverMk_injective P
+    rw [sigmaOverMk_map, sigmaOverMk_map, Category.id_comp, Category.id_comp,
+      ← Category.comp_id g₁.left, ← Category.comp_id g₂.left,
+      ← sigmaOver_map_sigmaOverMk, ← sigmaOver_map_sigmaOverMk, hy _ _ h₁, hy _ _ h₂]
+    exact hx _ _ _ _ (congr_arg CommaMorphism.left e)
+  obtain ⟨t, ht, ht'⟩ := hP R' hR' y hyc
+  refine ⟨sigmaOverMk P (Y := Over.mk s) (𝟙 T) t, ?_, ?_⟩
+  · intro V f hf
+    have hg : R'.arrows (Over.homMk f rfl : Over.mk (f ≫ s) ⟶ Over.mk s) := (hR'iff _).2 hf
+    rw [sigmaOver_map_sigmaOverMk, Category.comp_id]
+    refine Eq.trans ?_ (hy _ _ hg)
+    rw [← ht _ hg, sigmaOverMk_map, Category.id_comp]
+    rfl
+  · intro q hq
+    have h₁ : q.1 = s := hs' q.1 (fun V f hf ↦ congr_arg Sigma.fst (hq f hf))
+    rw [← sigmaOverMk_toObj P (Z := Over.mk s) q h₁]
+    congr 1
+    refine ht' _ (fun Z g hg ↦ sigmaOverMk_injective P ?_)
+    rw [hy _ _ hg, sigmaOverMk_map, Category.id_comp]
+    refine Eq.trans (b := (sigmaOver P).map g.left.op
+      (sigmaOverMk P (Y := Over.mk s) (𝟙 _) (toObj P (Z := Over.mk s) q h₁))) ?_ ?_
+    · rw [sigmaOver_map_sigmaOverMk, Category.comp_id]
+    · rw [sigmaOverMk_toObj]
+      exact hq _ _
+
+section
+
+variable {P} {ι : Type u} (X : ι → Over S) (ξ : ∀ i, P.obj (op (X i)))
+
+/-- The morphism `h_{X i} ⟶ sigmaOver P` classifying the element `ξ i`. -/
+noncomputable def toSigmaOver (i : ι) : yoneda.obj (X i).left ⟶ sigmaOver P :=
+  yonedaEquiv.symm (sigmaOverMk P (𝟙 (X i).left) (ξ i))
+
+/-- The components of `toSigmaOver`. -/
+lemma toSigmaOver_app {V : Scheme.{u}} (i : ι) (e : V ⟶ (X i).left) :
+    (toSigmaOver X ξ i).app (op V) e = sigmaOverMk P e (ξ i) := by
+  change (sigmaOver P).map e.op (sigmaOverMk P (𝟙 (X i).left) (ξ i)) = _
+  rw [sigmaOver_map_sigmaOverMk, Category.comp_id]
+
+variable {X ξ}
+
+/-- If the locus where `y ∈ P(T)` comes from `X i` is the open `U`, then the pullback of
+`toSigmaOver X ξ i` along the morphism classifying `y` is represented by `U`. -/
+lemma exists_isPullback_toSigmaOver
+    (hinj : ∀ i {T : Over S} (a b : T ⟶ X i), P.map a.op (ξ i) = P.map b.op (ξ i) → a = b)
+    {i : ι} {T : Over S} {y : P.obj (op T)} {U : T.left.Opens}
+    (hU : ∀ (W : Over S) (a : W ⟶ T),
+      (∃ b : W ⟶ X i, P.map a.op y = P.map b.op (ξ i)) ↔ Set.range a.left ⊆ U) :
+    ∃ c : (U : Scheme.{u}) ⟶ (X i).left, ∀ (V : Scheme.{u}) (e : V ⟶ (X i).left)
+      (a : V ⟶ T.left), sigmaOverMk P e (ξ i) = sigmaOverMk P a y ↔
+        ∃ d : V ⟶ U, d ≫ c = e ∧ d ≫ U.ι = a := by
+  obtain ⟨b₀, hb₀⟩ := (hU (Over.mk (U.ι ≫ T.hom)) (Over.homMk U.ι rfl)).2
+    (by simp [Scheme.Opens.range_ι])
+  refine ⟨b₀.left, fun V e a ↦ ?_⟩
+  -- the key computation: pulling back along `d`
+  have key (W : Over S) (d : W.left ⟶ U) (hd : d ≫ U.ι ≫ T.hom = W.hom) :
+      P.map (Over.homMk (d ≫ b₀.left) (by simp [Over.w b₀, hd]) : W ⟶ X i).op (ξ i) =
+        P.map (Over.homMk (d ≫ U.ι) (by simp [hd]) : W ⟶ T).op y := by
+    have e₁ : (Over.homMk (d ≫ b₀.left) (by simp [Over.w b₀, hd]) : W ⟶ X i) =
+        (Over.homMk d (by simp [hd]) : W ⟶ Over.mk (U.ι ≫ T.hom)) ≫ b₀ := by ext; simp
+    have e₂ : (Over.homMk (d ≫ U.ι) (by simp [hd]) : W ⟶ T) =
+        (Over.homMk d (by simp [hd]) : W ⟶ Over.mk (U.ι ≫ T.hom)) ≫
+          Over.homMk U.ι rfl := by ext; simp
+    rw [e₁, e₂, op_comp, op_comp, Functor.map_comp_apply, Functor.map_comp_apply, hb₀]
+  constructor
+  · intro h
+    have h₁ : e ≫ (X i).hom = a ≫ T.hom := congr_arg Sigma.fst h
+    rw [sigmaOverMk_eq_iff P (W := Over.mk (a ≫ T.hom)) _ _ h₁ rfl] at h
+    have hr : Set.range a ⊆ U := (hU (Over.mk (a ≫ T.hom)) (Over.homMk a rfl)).1 ⟨_, h.symm⟩
+    let d := IsOpenImmersion.lift U.ι a (by rwa [Scheme.Opens.range_ι])
+    have hd : d ≫ U.ι = a := IsOpenImmersion.lift_fac _ _ _
+    refine ⟨d, ?_, hd⟩
+    have := key (Over.mk (a ≫ T.hom)) d (by simp [← hd])
+    have e₃ : (Over.homMk (d ≫ U.ι) (by simp [hd]) : Over.mk (a ≫ T.hom) ⟶ T) =
+        Over.homMk a rfl := by ext; simp [hd]
+    rw [e₃, ← h] at this
+    exact congr_arg CommaMorphism.left (hinj i _ _ this)
+  · rintro ⟨d, rfl, rfl⟩
+    rw [sigmaOverMk_eq_iff P (W := Over.mk (d ≫ U.ι ≫ T.hom)) _ _ (by simp [Over.w b₀])
+      (by simp)]
+    exact key (Over.mk (d ≫ U.ι ≫ T.hom)) d rfl
+
+end
+
+/-- If `sigmaOver P` is representable, then so is `P`. -/
+lemma isRepresentable_of_isRepresentable_sigmaOver [(sigmaOver P).IsRepresentable] :
+    P.IsRepresentable := by
+  obtain ⟨Y, ⟨e⟩⟩ := Functor.IsRepresentable.has_representation (F := sigmaOver P)
+  set u := e.homEquiv (𝟙 Y)
+  let A : Over S := Over.mk u.1
+  let y₀ : P.obj (op A) := (equivShrink _).symm u.2
+  have he {T : Scheme.{u}} (a : T ⟶ Y) : e.homEquiv a = sigmaOverMk P (Y := A) a y₀ := by
+    rw [← Category.comp_id a, e.homEquiv_comp]
+    refine (congr_arg ((sigmaOver P).map a.op) (sigmaOverMk_id P u).symm).trans ?_
+    rw [sigmaOver_map_sigmaOverMk, Category.comp_id]
+  have hbij (W : Over S) : Function.Bijective (fun a : W ⟶ A ↦ P.map a.op y₀) := by
+    refine ⟨fun a b h ↦ ?_, fun z ↦ ?_⟩
+    · have h' : sigmaOverMk P a.left y₀ = sigmaOverMk P b.left y₀ :=
+        (sigmaOverMk_eq_iff P (W := W) _ _ (Over.w a) (Over.w b) _ _).2 h
+      rw [← he, ← he] at h'
+      exact Over.OverMorphism.ext (e.homEquiv.injective h')
+    · have hq := e.homEquiv.apply_symm_apply (sigmaOverMk P (𝟙 W.left) z)
+      rw [he] at hq
+      have h₁ : e.homEquiv.symm (sigmaOverMk P (𝟙 W.left) z) ≫ A.hom = W.hom := by
+        simpa [sigmaOverMk] using congr_arg Sigma.fst hq
+      refine ⟨Over.homMk _ h₁, ?_⟩
+      replace hq := (sigmaOverMk_eq_iff P (W := W) _ _ h₁ (by simp) _ _).1 hq
+      have e₁ : (Over.homMk (𝟙 W.left) (by simp) : W ⟶ W) = 𝟙 W := by ext; simp
+      simpa [e₁] using hq
+  exact ⟨A, ⟨{
+    homEquiv := Equiv.ofBijective _ (hbij _)
+    homEquiv_comp := fun f a ↦ by simp }⟩⟩
+
+/-- **Representability is local, over a base.** Let `P` be a Zariski sheaf on `Over S` with
+`u`-small values, and let `ξ i ∈ P(X i)` be a family of elements such that
+
+* the induced maps `h_{X i} ⟶ P` are injective;
+* for every `T` and `x ∈ P(T)` there is an open `U ⊆ T` such that a morphism `a : W ⟶ T`
+  factors through `U` if and only if `a^* x` is the pullback of `ξ i` along some
+  `W ⟶ X i`;
+* every point `t` of every `T` lies in such an open for some `i`.
+
+Then `P` is representable. This is Stacks, Lemma 01JJ, for schemes over `S`; it is deduced from
+Mathlib's `AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable`. -/
+theorem isRepresentable_of_isSheaf_over (hP : Presheaf.IsSheaf (zariskiTopology.over S) P)
+    {ι : Type u} (X : ι → Over S) (ξ : ∀ i, P.obj (op (X i)))
+    (hinj : ∀ i {T : Over S} (a b : T ⟶ X i), P.map a.op (ξ i) = P.map b.op (ξ i) → a = b)
+    (hopen : ∀ i (T : Over S) (x : P.obj (op T)), ∃ U : T.left.Opens,
+      ∀ (W : Over S) (a : W ⟶ T),
+        (∃ b : W ⟶ X i, P.map a.op x = P.map b.op (ξ i)) ↔ Set.range a.left ⊆ U)
+    (hcov : ∀ (T : Over S) (x : P.obj (op T)) (t : T.left),
+      ∃ (i : ι) (W : Over S) (a : W ⟶ T) (b : W ⟶ X i),
+        t ∈ Set.range a.left ∧ P.map a.op x = P.map b.op (ξ i)) :
+    P.IsRepresentable := by
+  let F : Sheaf zariskiTopology (Type u) := ⟨sigmaOver P, isSheaf_sigmaOver P hP⟩
+  let f : (i : ι) → yoneda.obj (X i).left ⟶ F.obj := toSigmaOver X ξ
+  -- the open subscheme of `T` over which `x` comes from `X i`
+  have hpb (i : ι) (T : Scheme.{u}) (x : (sigmaOver P).obj (op T)) :
+      ∃ (U : T.Opens) (c : (U : Scheme.{u}) ⟶ (X i).left),
+        (∀ (V : Scheme.{u}) (e : V ⟶ (X i).left) (a : V ⟶ T),
+          (f i).app (op V) e = (sigmaOver P).map a.op x ↔
+            ∃ d : V ⟶ U, d ≫ c = e ∧ d ≫ U.ι = a) ∧
+        ∀ t : T, (∃ (W : Over S) (a : W ⟶ Over.mk x.1) (b : W ⟶ X i),
+          t ∈ Set.range a.left ∧ P.map a.op ((equivShrink _).symm x.2) = P.map b.op (ξ i)) →
+            t ∈ U := by
+    obtain ⟨U, hU⟩ := hopen i (Over.mk x.1) ((equivShrink _).symm x.2)
+    obtain ⟨c, hc⟩ := exists_isPullback_toSigmaOver hinj hU
+    refine ⟨U, c, fun V e a ↦ ?_, fun t ⟨W, a, b, ht, h⟩ ↦ (hU W a).1 ⟨b, h⟩ ht⟩
+    rw [toSigmaOver_app, ← hc V e a]
+    conv_lhs => rw [← sigmaOverMk_id P x]
+    rw [sigmaOver_map_sigmaOverMk, Category.comp_id]
+  have hf (i : ι) : IsOpenImmersion.presheaf (f i) := by
+    refine MorphismProperty.relative.of_exists (fun T g ↦ ?_)
+    obtain ⟨U, c, hc, -⟩ := hpb i T (yonedaEquiv g)
+    refine ⟨U, yoneda.map c, U.ι, IsPullback.of_forall_isPullback_app (fun V ↦ ?_),
+      inferInstance⟩
+    rw [Types.isPullback_iff]
+    refine ⟨?_, fun d d' ⟨_, h⟩ ↦ (cancel_mono U.ι).1 h, fun e a h ↦ ?_⟩
+    · ext d : 3
+      change (f i).app V (d ≫ c) = g.app V (d ≫ U.ι)
+      rw [← map_yonedaEquiv g]
+      exact (hc V.unop _ _).2 ⟨d, rfl, rfl⟩
+    · replace h : (f i).app V e = g.app V a := h
+      rw [← map_yonedaEquiv g] at h
+      exact (hc V.unop e a).1 h
+  have : Presheaf.IsLocallySurjective zariskiTopology (Sigma.desc f) := by
+    refine ⟨fun {T} x ↦ ?_⟩
+    have H (t : T) : ∃ (i : ι) (U : T.Opens) (c : (U : Scheme.{u}) ⟶ (X i).left),
+        t ∈ U ∧ (f i).app (op U) c = (sigmaOver P).map U.ι.op x := by
+      obtain ⟨i, W, a, b, ht, h⟩ := hcov (Over.mk x.1) ((equivShrink _).symm x.2) t
+      obtain ⟨U, c, hc, hU⟩ := hpb i T x
+      exact ⟨i, U, c, hU t ⟨W, a, b, ht, h⟩, (hc _ _ _).2 ⟨𝟙 _, by simp, by simp⟩⟩
+    choose i U c ht hc using H
+    rw [mem_grothendieckTopology_iff]
+    refine ⟨Scheme.Cover.mkOfCovers T (fun t ↦ (U t : Scheme.{u})) (fun t ↦ (U t).ι)
+      (fun t ↦ ⟨t, by
+        have h : t ∈ Set.range (U t).ι := by rw [Scheme.Opens.range_ι]; exact ht t
+        exact h⟩), ?_⟩
+    rintro V g ⟨t⟩
+    refine ⟨(Sigma.ι (fun i ↦ yoneda.obj (X i).left) (i t)).app _ (c t), ?_⟩
+    refine Eq.trans ?_ (hc t)
+    exact congr_arg
+      (fun φ : yoneda.obj (X (i t)).left ⟶ F.obj ↦ φ.app (op (U t : Scheme)) (c t))
+      (Sigma.ι_desc f (i t))
+  have := Scheme.LocalRepresentability.isRepresentable (F := F) hf
+  exact isRepresentable_of_isRepresentable_sigmaOver P
+
+end AlgebraicGeometry.Scheme.LocalRepresentability
+
+namespace AlgebraicGeometry
+
+/-- **Subfunctors representable by open immersions.** If the inclusion of a subfunctor
+`F ⊆ P` of a presheaf on `Over S` is representable by open immersions, then for every `T` and
+`x ∈ P(T)` there is an open `U ⊆ T` such that a morphism `a : W ⟶ T` factors through `U` if
+and only if `a^* x ∈ F(W)` (Stacks, Definition 01JI). -/
+lemma exists_opens_of_relative_isOpenImmersion {S : Scheme.{u}}
+    {P : (Over S)ᵒᵖ ⥤ Type (max w u)} {F : Subfunctor P}
+    (hF : (IsOpenImmersion.inverseImage (Over.forget S)).relative uliftYoneda.{w} F.ι)
+    (T : Over S) (x : P.obj (op T)) :
+    ∃ U : T.left.Opens, ∀ (W : Over S) (a : W ⟶ T),
+      P.map a.op x ∈ F.obj (op W) ↔ Set.range a.left ⊆ U := by
+  let g : uliftYoneda.{w}.obj T ⟶ P := uliftYonedaEquiv.symm x
+  have hg {W : Over S} (a : W ⟶ T) : g.app (op W) (ULift.up a) = P.map a.op x := rfl
+  have hpb := hF.rep.isPullback g
+  have hsnd : IsOpenImmersion (hF.rep.snd g).left := hF.property_snd g
+  refine ⟨(hF.rep.snd g).left.opensRange, fun W a ↦ ?_⟩
+  rw [Scheme.Hom.coe_opensRange]
+  constructor
+  · intro h
+    obtain ⟨d, -, hd⟩ := Types.exists_of_isPullback (hpb.app (op W)) ⟨_, h⟩ (ULift.up a)
+      (by rw [hg]; rfl)
+    replace hd : d.down ≫ hF.rep.snd g = a := congr_arg ULift.down hd
+    rw [← hd, Over.comp_left, Scheme.Hom.comp_base, TopCat.coe_comp]
+    exact Set.range_comp_subset_range _ _
+  · intro h
+    let d : W ⟶ hF.rep.pullback g := Over.homMk (IsOpenImmersion.lift _ a.left h) (by
+      rw [← Over.w (hF.rep.snd g), IsOpenImmersion.lift_fac_assoc, Over.w a])
+    have hd : d ≫ hF.rep.snd g = a := by ext; exact IsOpenImmersion.lift_fac _ _ _
+    have := congr_arg (fun φ ↦ φ.app (op W) (ULift.up d)) hpb.w
+    have h₂ : P.map a.op x = ((hF.rep.fst g).app (op W) (ULift.up d)).1 := by
+      rw [← hg, ← hd]
+      exact this.symm
+    rw [h₂]
+    exact ((hF.rep.fst g).app (op W) (ULift.up d)).2
+
+end AlgebraicGeometry
