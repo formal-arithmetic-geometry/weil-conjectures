@@ -12,11 +12,11 @@ public import Mathlib.Algebra.FiveLemma
 
 Consider a commutative diagram of additive groups with exact rows
 ```
-0 ──▶ M₁ ──▶ M₂ ──▶ M₃ ──▶ M₄ ──▶ M₅ ──▶ M₆ ──▶ 0
+0 ──▶ M₁ ──▶ M₂ ──▶ M₃ ──▶ M₄ ──▶ M₅ ──▶ M₆
       │      │      │      │      │      │
       i₁     i₂     i₃     i₄     i₅     i₆
       ▼      ▼      ▼      ▼      ▼      ▼
-0 ──▶ N₁ ──▶ N₂ ──▶ N₃ ──▶ N₄ ──▶ N₅ ──▶ N₆ ──▶ 0
+0 ──▶ N₁ ──▶ N₂ ──▶ N₃ ──▶ N₄ ──▶ N₅ ──▶ N₆
 ```
 If `i₂`, `i₃`, `i₅` and `i₆` are bijective, then so are `i₁` and `i₄`. This is two applications of
 the four lemmas of `Mathlib.Algebra.FiveLemma`.
@@ -32,7 +32,7 @@ variable {M₁ M₂ M₃ M₄ M₅ M₆ N₁ N₂ N₃ N₄ N₅ N₆ : Type*}
   [AddCommGroup N₅] [AddCommGroup N₆]
 
 /-- **The four lemma for exact hexagons.** Given a commutative diagram of additive groups whose
-rows `0 → M₁ → ⋯ → M₆ → 0` and `0 → N₁ → ⋯ → N₆ → 0` are exact, if the vertical maps `i₂`, `i₃`,
+rows `0 → M₁ → ⋯ → M₆` and `0 → N₁ → ⋯ → N₆` are exact, if the vertical maps `i₂`, `i₃`,
 `i₅` and `i₆` are bijective, then so are `i₁` and `i₄`.
 
 (blueprint: `lem-sc-four-lemma`) -/

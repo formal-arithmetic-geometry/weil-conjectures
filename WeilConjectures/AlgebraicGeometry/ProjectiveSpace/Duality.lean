@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.ExactSequence
+public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
@@ -19,10 +20,6 @@ Let `k` be a field, `ℙ¹_k = ProjectiveLine (Spec k)` and `ω = Ω¹_{ℙ¹_k/
 `𝒪(d)`, and the two duality isomorphisms
 `H¹(ℙ¹, 𝒢)^∨ ≅ Hom(𝒢, ω)` and `H⁰(ℙ¹, 𝒢)^∨ ≅ Ext¹(𝒢, ω)` hold.
 
-## Main definitions
-
-- `AlgebraicGeometry.Scheme.Modules.isCoherent`: coherent `𝒪_X`-modules, as a property of objects.
-
 ## Main statements
 
 - `AlgebraicGeometry.ProjectiveLine.exists_exact_sigma_twist`: resolutions by twists.
@@ -33,10 +30,9 @@ Let `k` be a field, `ℙ¹_k = ProjectiveLine (Spec k)` and `ω = Ω¹_{ℙ¹_k/
 
 ## Implementation notes
 
-Mathlib has no `IsCoherent` class for sheaves of modules; as elsewhere in the project, coherence
-is spelled as quasi-coherence together with finite presentation. The `𝒪_{ℙ¹}`-module `Hom(𝒢, ω)`
-of global homomorphisms is written as `H⁰(ℙ¹, Hom(𝒢, ω))`, the global sections of the internal
-hom, so that it is a functor to `k`-vector spaces.
+Coherence is spelled as `AlgebraicGeometry.Scheme.Modules.isCoherent`. The `𝒪_{ℙ¹}`-module
+`Hom(𝒢, ω)` of global homomorphisms is written as `H⁰(ℙ¹, Hom(𝒢, ω))`, the global sections of the
+internal hom, so that it is a functor to `k`-vector spaces.
 -/
 
 @[expose] public section
@@ -48,13 +44,6 @@ open CategoryTheory Limits Opposite
 open scoped AlgebraicGeometry.ProjectiveSpace
 
 namespace AlgebraicGeometry
-
-variable (X : Scheme.{u}) in
-/-- The coherent `𝒪_X`-modules, i.e. the quasi-coherent `𝒪_X`-modules of finite presentation, as
-a property of objects of `X.Modules`. -/
-abbrev Scheme.Modules.isCoherent : ObjectProperty X.Modules :=
-  fun ℱ ↦ SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ ∧
-    SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ
 
 namespace ProjectiveLine
 
@@ -73,11 +62,9 @@ theorem exists_exact_sigma_twist (𝒢 : (ProjectiveLine (Spec (.of k))).Modules
     let 𝒪 : ℤ → (ProjectiveLine (Spec (.of k))).Modules :=
       ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k))
     ∃ (n₀ n₁ n₂ : ℕ) (d₀ : Fin n₀ → ℤ) (d₁ : Fin n₁ → ℤ) (d₂ : Fin n₂ → ℤ)
-      (f₂ : ∐ (fun j ↦ ProjectiveSpace.twist _ _ (d₂ j)) ⟶
-        ∐ (fun j ↦ ProjectiveSpace.twist _ _ (d₁ j)))
-      (f₁ : ∐ (fun j ↦ ProjectiveSpace.twist _ _ (d₁ j)) ⟶
-        ∐ (fun j ↦ ProjectiveSpace.twist _ _ (d₀ j)))
-      (f₀ : ∐ (fun j ↦ ProjectiveSpace.twist _ _ (d₀ j)) ⟶ 𝒢),
+      (f₂ : ∐ (fun j ↦ 𝒪 (d₂ j)) ⟶ ∐ (fun j ↦ 𝒪 (d₁ j)))
+      (f₁ : ∐ (fun j ↦ 𝒪 (d₁ j)) ⟶ ∐ (fun j ↦ 𝒪 (d₀ j)))
+      (f₀ : ∐ (fun j ↦ 𝒪 (d₀ j)) ⟶ 𝒢),
       Mono f₂ ∧ Epi f₀ ∧ (ComposableArrows.mk₃ f₂ f₁ f₀).Exact :=
   sorry
 
