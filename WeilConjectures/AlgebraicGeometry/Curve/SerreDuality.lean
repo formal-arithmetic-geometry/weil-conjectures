@@ -239,9 +239,8 @@ smooth integral curve over an algebraically closed field `k`,
 flat morphism `π_f : X ⟶ ℙ¹_k` of degree `d`, whose degree is `d - d = 0`.
 
 (blueprint: `lem-sc-deg-principal-zero`) -/
-theorem finsum_ord_eq_zero (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u})
-    [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
-    [IsProper (X ↘ Spec (.of k))] [IsIntegral X] [IsLocallyNoetherian X] {f : X.functionField}
+variable (k X) in
+theorem finsum_ord_eq_zero [IsIntegral X] [IsLocallyNoetherian X] {f : X.functionField}
     (hf : f ≠ 0) : ∑ᶠ x : X, X.ord f x = 0 :=
   sorry
 
