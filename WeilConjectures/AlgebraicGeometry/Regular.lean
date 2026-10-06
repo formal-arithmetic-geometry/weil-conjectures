@@ -76,7 +76,9 @@ theorem isRegularLocalRing_stalk_pullback {k : Type u} [Field k] [PerfectField k
   sorry
 
 /-- A scheme smooth over a field `k` is regular: the local rings of a smooth `k`-scheme are
-regular local rings. -/
+regular local rings, hence domains (`IsRegularLocalRing.isDomain`).
+
+(blueprint: `lem-sc-smooth-regular`) -/
 theorem IsRegular.of_smooth {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     [Smooth f] : IsRegular X :=
   sorry
