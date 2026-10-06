@@ -391,6 +391,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.QuotientTwo
 public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor
 public import WeilConjectures.GroupTheory.TateModule
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
+public import WeilConjectures.Mathlib.Algebra.Algebra.Hom
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Adjunctions
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.ForgetCorepresentable
@@ -475,6 +476,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.IsIso
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.LocalIso
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
@@ -636,6 +638,7 @@ public import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSection
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSplitting
 public import WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint
 public import WeilConjectures.Mathlib.RingTheory.Etale.PropertyC
+public import WeilConjectures.Mathlib.RingTheory.Etale.QuasiFinite
 public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
 public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueFieldBaseChange
 public import WeilConjectures.Mathlib.RingTheory.Etale.Section
@@ -686,6 +689,7 @@ public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.Topology.Maps.Basic
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
+public import WeilConjectures.Mathlib.Topology.Sets.Opens
 public import WeilConjectures.Mathlib.Topology.Sober
 public import WeilConjectures.Mathlib.Topology.Spectral.Prespectral
 public import WeilConjectures.NumberTheory.Padics.Extension
