@@ -168,6 +168,7 @@ lemma pullbackResLEMap_snd (W : Over V.toScheme) :
       pullback.snd (f.resLE V U h) W.hom :=
   (pullback.lift_snd _ _ _).trans (Category.comp_id _)
 
+/-- `U ×[V] W` is the preimage of `U` in `X ×[S] W`. -/
 lemma isPullback_pullbackResLEMap (W : Over V.toScheme) :
     IsPullback (pullback.fst _ _) (pullbackResLEMap f h W) U.ι
       (pullback.fst f ((Over.map V.ι).obj W).hom) := by
@@ -182,6 +183,7 @@ lemma isPullback_pullbackResLEMap (W : Over V.toScheme) :
 instance (W : Over V.toScheme) : IsOpenImmersion (pullbackResLEMap f h W) :=
   MorphismProperty.of_isPullback (isPullback_pullbackResLEMap f h W) inferInstance
 
+/-- The image of `U ×[V] W ⟶ X ×[S] W` is the preimage of `U`. -/
 lemma range_pullbackResLEMap (W : Over V.toScheme) :
     Set.range (pullbackResLEMap f h W) = pullback.fst f ((Over.map V.ι).obj W).hom ⁻¹' U := by
   ext z
@@ -211,6 +213,7 @@ lemma isClosedImmersion_subschemeι_comp_pullbackResLEMap [IsSeparated f] {W : O
     (pullback.snd f ((Over.map V.ι).obj W).hom)
   exact .of_isPreimmersion _ (Scheme.Hom.isClosedMap _).isClosed_range
 
+/-- A point of `Hilb^d_{U/V}(W)` pushes forward to a point of `Hilb^d_{X/S}(W)`. -/
 lemma IsHilbertSubscheme.map_pullbackResLEMap [IsSeparated f] {d : ℕ} {W : Over V.toScheme}
     {J : (pullback (f.resLE V U h) W.hom).IdealSheafData}
     (hJ : IsHilbertSubscheme (f.resLE V U h) d W J) :
@@ -228,6 +231,7 @@ lemma IsHilbertSubscheme.map_pullbackResLEMap [IsSeparated f] {d : ℕ} {W : Ove
   rw [← key] at hJ
   exact (isFinite_flat_finrank_iso_comp_iff _ _ d).1 hJ
 
+/-- A point of `Hilb^d_{X/S}(W)` lying in `U_W` restricts to a point of `Hilb^d_{U/V}(W)`. -/
 lemma IsHilbertSubscheme.comap_pullbackResLEMap {d : ℕ} {W : Over V.toScheme}
     {I : (pullback f ((Over.map V.ι).obj W).hom).IdealSheafData}
     (hI : IsHilbertSubscheme f d ((Over.map V.ι).obj W) I)
@@ -286,6 +290,7 @@ lemma hilbertPresheafResLEι_app_coe [IsSeparated f] (d : ℕ) {W : Over V.toSch
     ((hilbertPresheafResLEι f h d).app (op W) J).1 = J.1.map (pullbackResLEMap f h W) :=
   rfl
 
+/-- The comparison `Hilb^d_{U/V} ⟶ Hilb^d_{X/S}` is injective. -/
 lemma hilbertPresheafResLEι_app_injective [IsSeparated f] (d : ℕ) (W : Over V.toScheme) :
     Function.Injective ((hilbertPresheafResLEι f h d).app (op W)) := by
   intro J₁ J₂ hJ
@@ -298,6 +303,7 @@ lemma hilbertPresheafResLEι_app_injective [IsSeparated f] (d : ℕ) (W : Over V
     ← Scheme.IdealSheafData.comap_map_of_isClosedImmersion (pullbackResLEMap f h W) J₂.1]
   exact congrArg (fun I ↦ Scheme.IdealSheafData.comap I _) (congrArg Subtype.val hJ)
 
+/-- The image of `Hilb^d_{U/V} ⟶ Hilb^d_{X/S}` consists of subschemes lying in `U_W`. -/
 lemma support_hilbertPresheafResLEι_app_subset [IsSeparated f] (d : ℕ) {W : Over V.toScheme}
     (J : (hilbertPresheaf (f.resLE V U h) d).obj (op W)) :
     ((J.1.map (pullbackResLEMap f h W)).support : Set _) ⊆
@@ -307,6 +313,7 @@ lemma support_hilbertPresheafResLEι_app_subset [IsSeparated f] (d : ℕ) {W : O
   rw [← range_pullbackResLEMap f h W]
   exact Scheme.IdealSheafData.support_map_subset_range _ _
 
+/-- Every point of `Hilb^d_{X/S}(W)` lying in `U_W` comes from `Hilb^d_{U/V}(W)`. -/
 lemma exists_hilbertPresheafResLEι_app_eq [IsSeparated f] (d : ℕ) {W : Over V.toScheme}
     (I : (hilbertPresheaf f d).obj (op ((Over.map V.ι).obj W)))
     (hIU : (I.1.support : Set _) ⊆ pullback.fst f ((Over.map V.ι).obj W).hom ⁻¹' U) :
