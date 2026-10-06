@@ -24,6 +24,7 @@ An `𝒪_X`-module is *invertible* if it is locally isomorphic to `𝒪_X`.
 - `AlgebraicGeometry.Scheme.Modules.tensorObj`: the tensor product `M ⊗_{𝒪_X} N`, i.e. `M ⊗ N`,
   with scoped notation `M ⊗ₘ N`.
 - `AlgebraicGeometry.Scheme.Modules.tensorPow`: the tensor power `M^{⊗ n}`.
+- `AlgebraicGeometry.Scheme.Modules.tensorPowHom`: the tensor power `s^{⊗ n}` of a section `s`.
 - `AlgebraicGeometry.Scheme.Modules.tensorPowAddIso`,
   `AlgebraicGeometry.Scheme.Modules.tensorPowMulIso`,
   `AlgebraicGeometry.Scheme.Modules.tensorPowTensorObjIso`: the exponent laws for tensor powers.
@@ -135,6 +136,12 @@ lemma tensorPow_zero (M : X.Modules) : M.tensorPow 0 = 𝟙_ X.Modules :=
 
 lemma tensorPow_succ (M : X.Modules) (n : ℕ) : M.tensorPow (n + 1) = M ⊗ M.tensorPow n :=
   rfl
+
+/-- The tensor power `s^{⊗ n} : 𝒪_X ⟶ M^{⊗ n}` of a global section `s : 𝒪_X ⟶ M`. -/
+noncomputable def tensorPowHom {M : X.Modules} (s : 𝟙_ X.Modules ⟶ M) :
+    ∀ n : ℕ, 𝟙_ X.Modules ⟶ M.tensorPow n
+  | 0 => 𝟙 _
+  | n + 1 => (λ_ (𝟙_ X.Modules)).inv ≫ tensorHom s (tensorPowHom s n)
 
 /-- `M^{⊗ (a + b)} ≅ M^{⊗ a} ⊗ M^{⊗ b}`. -/
 noncomputable def tensorPowAddIso (M : X.Modules) :

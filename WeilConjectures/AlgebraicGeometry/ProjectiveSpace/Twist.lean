@@ -29,6 +29,8 @@ projection of the twisting sheaf `Proj.twist` of the integral model.
   `Proj R[Tᵢ]`.
 - `AlgebraicGeometry.ProjectiveSpace.unitIsoTwistZero`: `𝒪(0)` is the structure sheaf.
 - `AlgebraicGeometry.ProjectiveSpace.isInvertible_twist`: `𝒪(m)` is invertible on `ℙ(n; S)`.
+- `AlgebraicGeometry.ProjectiveSpace.nonempty_twist_tensorObj_iso`: `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)`,
+  and `nonempty_tensorPow_twist_one_iso`: `𝒪(1)^{⊗ t} ≅ 𝒪(t)`.
 - `AlgebraicGeometry.ProjectiveSpace.pullbackMapTwistIso`: `𝒪(m)` commutes with base change.
 
 ## TODO
@@ -42,7 +44,7 @@ projection of the twisting sheaf `Proj.twist` of the integral model.
 
 universe u
 
-open CategoryTheory
+open CategoryTheory MonoidalCategory
 
 noncomputable section
 
@@ -104,6 +106,25 @@ def unitIsoTwistZero : SheafOfModules.unit (ℙ(n; S)).ringCatSheaf ≅ twist n 
 instance isInvertible_twist (m : ℤ) : (twist n S m).IsInvertible :=
   Scheme.Modules.IsInvertible.pullback (toProjInt n S)
     (Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) m)
+
+/-- **`𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)`** on `ℙ(n; S)`. The twisting module `𝒪(d)` is glued from the
+free modules on the standard opens `D₊(Tᵢ)` with bases `eᵢ⁽ᵈ⁾` and transition rule
+`eᵢ⁽ᵈ⁾ = (Tᵢ / Tⱼ)ᵈ eⱼ⁽ᵈ⁾`; the bases `eᵢ⁽ᵃ⁾ ⊗ eᵢ⁽ᵇ⁾` of `𝒪(a) ⊗ 𝒪(b)` obey the transition
+rule of `𝒪(a + b)`.
+
+(blueprint: `def-pc-projective-space-twist`) -/
+theorem nonempty_twist_tensorObj_iso (a b : ℤ) :
+    Nonempty (twist n S a ⊗ twist n S b ≅ twist n S (a + b)) :=
+  sorry
+
+/-- **`𝒪(1)^{⊗ t} ≅ 𝒪(t)`** on `ℙ(n; S)`, by induction from `nonempty_twist_tensorObj_iso`. -/
+theorem nonempty_tensorPow_twist_one_iso (t : ℕ) :
+    Nonempty ((twist n S 1).tensorPow t ≅ twist n S t) := by
+  induction t with
+  | zero => exact ⟨unitIsoTwistZero n S⟩
+  | succ t ih =>
+    obtain ⟨e⟩ := nonempty_twist_tensorObj_iso n S 1 t
+    exact ⟨(Iso.refl _ ⊗ᵢ ih.some) ≪≫ e ≪≫ eqToIso (by rw [add_comm]; push_cast; rfl)⟩
 
 /-- **`𝒪(m)` commutes with base change**: for `f : S ⟶ T`, the pullback of `𝒪(m)` on
 `ℙ(n; T)` along `map n f` is `𝒪(m)` on `ℙ(n; S)`. -/

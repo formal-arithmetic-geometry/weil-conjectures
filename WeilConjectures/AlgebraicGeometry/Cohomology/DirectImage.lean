@@ -88,6 +88,12 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
   base, the global sections of `R^q f_* ℱ` are `H^q(X, ℱ)`.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`: the higher direct
   images commute with restriction to an open subscheme of the base.
+- `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isAffineHom` and
+  `isQuasicoherent_pushforward_of_isAffineHom`: the higher direct images along an affine morphism
+  vanish, and its pushforward preserves quasi-coherence.
+- `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_pushforward_of_isClosedImmersion` and
+  `nonempty_H_pushforward_addEquiv_of_isClosedImmersion`: pushforward along a closed immersion
+  preserves coherence and cohomology.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_tensorObj_pullback_iso`: the
   projection formula `R^q f_* (ℱ ⊗ f^* 𝒩) ≅ R^q f_* ℱ ⊗ 𝒩` for an invertible `𝒩`.
 - `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`,
@@ -950,5 +956,96 @@ theorem exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree (hℱ : ℱ.Is
       ⟨fun h ↦ ⟨h.1, h.2⟩, fun h ↦ ⟨h.1, h.2⟩⟩⟩
 
 end Coherence
+
+section AffineMorphism
+
+/-- **The higher direct images along an affine morphism vanish.** Let `f : X ⟶ T` be affine
+and `ℱ` a quasi-coherent `𝒪_X`-module. Then `R^q f_* ℱ = 0` for `q > 0`: the higher direct
+images commute with restriction to an affine open `V` of `T`, over which their sections are
+`H^q(f⁻¹ V, ℱ)`, and these vanish since `f⁻¹ V` is affine
+(`AlgebraicGeometry.Scheme.Modules.subsingleton_H_succ_of_isAffine`).
+
+(blueprint: `lem-pc-affine-morphism-hi`) -/
+theorem isZero_higherDirectImage_of_isAffineHom (f : X ⟶ T) [IsAffineHom f]
+    [HasInjectiveResolutions X.Modules] (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {q : ℕ} (hq : 0 < q) :
+    IsZero ((higherDirectImage f q).obj ℱ) := by
+  obtain ⟨q, rfl⟩ : ∃ q', q = q' + 1 := ⟨q - 1, by omega⟩
+  refine isZero_of_forall_affineOpens _ fun V ↦ ?_
+  have := isGrothendieckAbelian (f ⁻¹ᵁ V.1).toScheme
+  have : IsAffine V.1.toScheme := V.2
+  have : IsAffine (f ⁻¹ᵁ V.1).toScheme := V.2.preimage f
+  obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ V.1.ι (f ⁻¹ᵁ V.1).ι (f ∣_ V.1)
+    (isPullback_morphismRestrict f V.1).flip (q + 1)
+  obtain ⟨e'⟩ := nonempty_sections_higherDirectImage_iso_H (f ∣_ V.1)
+    ((Modules.pullback (f ⁻¹ᵁ V.1).ι).obj ℱ) (q + 1)
+  have := subsingleton_H_succ_of_isAffine ((Modules.pullback (f ⁻¹ᵁ V.1).ι).obj ℱ) q
+  have : Subsingleton Γ((higherDirectImage (f ∣_ V.1) (q + 1)).obj
+      ((Modules.pullback (f ⁻¹ᵁ V.1).ι).obj ℱ), ⊤) := e'.toEquiv.subsingleton
+  have : Subsingleton Γ(((higherDirectImage f (q + 1)).obj ℱ).restrict V.1.ι, ⊤) :=
+    (asIso (e.hom.app ⊤)).addCommGroupIsoToAddEquiv.toEquiv.symm.subsingleton
+  have : Subsingleton Γ((higherDirectImage f (q + 1)).obj ℱ, V.1.ι ''ᵁ ⊤) :=
+    (((higherDirectImage f (q + 1)).obj ℱ).restrictAppIso V.1.ι ⊤).addCommGroupIsoToAddEquiv
+      |>.toEquiv.symm.subsingleton
+  rwa [Scheme.Opens.ι_image_top] at this
+
+/-- **The pushforward along an affine morphism is quasi-coherent.** For `f : X ⟶ T` affine and
+`ℱ` quasi-coherent, `f_* ℱ = R⁰ f_* ℱ` is quasi-coherent
+(`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`).
+
+(blueprint: `lem-pc-affine-morphism-hi`) -/
+theorem isQuasicoherent_pushforward_of_isAffineHom (f : X ⟶ T) [IsAffineHom f] (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
+    ((pushforward f).obj ℱ).IsQuasicoherent := by
+  have := isGrothendieckAbelian X
+  have : PreservesFiniteLimits (pushforward f) :=
+    have := (pullbackPushforwardAdjunction f).rightAdjoint_preservesLimits.{0, 0}
+    inferInstance
+  exact (SheafOfModules.isQuasicoherent T.ringCatSheaf).prop_of_iso
+    ((Functor.rightDerivedZeroIsoSelf (pushforward f)).app ℱ)
+    (isQuasicoherent_higherDirectImage f ℱ 0)
+
+end AffineMorphism
+
+section ClosedImmersion
+
+/-- **The pushforward of a coherent module along a closed immersion is coherent.** Let
+`i : X ⟶ Y` be a closed immersion into a locally noetherian scheme and `ℱ` a coherent
+`𝒪_X`-module. Then `i_* ℱ` is of finite presentation; it is quasi-coherent by
+`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward_of_isAffineHom`. A closed
+immersion is proper, so `i_* ℱ = R⁰ i_* ℱ` is coherent by
+`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`. (The blueprint argues
+directly: over an affine open `Spec R` of `Y` with preimage `Spec R/I`, the sections of `ℱ` are
+a finite `R/I`-module, hence a finite `R`-module.)
+
+(blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
+theorem isFinitePresentation_pushforward_of_isClosedImmersion [IsLocallyNoetherian T]
+    (i : X ⟶ T) [IsClosedImmersion i] (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] :
+    ((pushforward i).obj ℱ).IsFinitePresentation := by
+  have := isGrothendieckAbelian X
+  have : PreservesFiniteLimits (pushforward i) :=
+    have := (pullbackPushforwardAdjunction i).rightAdjoint_preservesLimits.{0, 0}
+    inferInstance
+  have : LocallyOfFinitePresentation i :=
+    (LocallyOfFinitePresentation.iff_locallyOfFiniteType).mpr inferInstance
+  exact (SheafOfModules.isFinitePresentation T.ringCatSheaf).prop_of_iso
+    ((Functor.rightDerivedZeroIsoSelf (pushforward i)).app ℱ)
+    (isFinitePresentation_higherDirectImage i ℱ 0)
+
+/-- **Cohomology along a closed immersion.** For a closed immersion `i : X ⟶ Y` and any
+`𝒪_X`-module `ℱ`, `H^q(Y, i_* ℱ) ≅ H^q(X, ℱ)` for every `q`. The blueprint deduces this for
+coherent `ℱ` from the vanishing of the `R^q i_* ℱ`
+(`AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isAffineHom`) and the Leray
+spectral sequence; it holds for every `ℱ`, since `i_*` is exact on abelian sheaves and preserves
+injective (indeed flasque) sheaves.
+
+(blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
+theorem nonempty_H_pushforward_addEquiv_of_isClosedImmersion (i : X ⟶ T) [IsClosedImmersion i]
+    (ℱ : X.Modules) (q : ℕ) : Nonempty (((pushforward i).obj ℱ).H q ≃+ ℱ.H q) :=
+  sorry
+
+end ClosedImmersion
 
 end AlgebraicGeometry.Scheme.Modules
