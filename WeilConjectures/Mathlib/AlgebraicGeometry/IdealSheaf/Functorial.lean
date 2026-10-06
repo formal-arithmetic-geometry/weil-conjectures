@@ -249,7 +249,7 @@ section Mul
 /-- **Pullback of ideal sheaves is multiplicative.** On affine opens `V ⊆ f ⁻¹ᵁ U` the pullback
 of an ideal sheaf is the extension of its ideal of sections along `Γ(Y, U) ⟶ Γ(X, V)`, and
 extension of ideals is multiplicative. -/
-theorem comap_mul (I J : Y.IdealSheafData) (f : X ⟶ Y) :
+theorem comap_mul (f : X ⟶ Y) (I J : Y.IdealSheafData) :
     (I * J).comap f = I.comap f * J.comap f := by
   let ι := Σ' (U : Y.affineOpens) (V : X.affineOpens), V.1 ≤ f ⁻¹ᵁ U.1
   refine ext_of_iSup_eq_top (ι := ι) (fun i ↦ i.2.1) ?_ fun ⟨U, V, e⟩ ↦ ?_
