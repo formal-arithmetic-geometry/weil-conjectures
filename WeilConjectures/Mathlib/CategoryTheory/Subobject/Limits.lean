@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Subobject.Limits
+public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.FactorThru
 
 /-!
@@ -28,6 +29,7 @@ We record some facts about the image subobject `imageSubobject f` of a morphism 
 - `CategoryTheory.Subobject.imageSubobject_eq_mk`
 - `CategoryTheory.Subobject.exists_obj_eq_imageSubobject`
 - `CategoryTheory.Subobject.exists_obj_top`
+- `CategoryTheory.Subobject.cokernelOfLEMapIso`
 -/
 
 @[expose] public section
@@ -109,5 +111,15 @@ theorem exists_obj_eq_imageSubobject (f : X ⟶ Y) (S : Subobject X) :
 theorem exists_obj_top [HasEqualizers C] (f : X ⟶ Y) :
     («exists» f).obj ⊤ = imageSubobject f := by
   rw [exists_obj_eq_imageSubobject, imageSubobject_iso_comp]
+
+omit [HasImages C] in
+/-- The cokernel of the inclusion of the images of two subobjects under `Subobject.map f` is
+isomorphic to the cokernel of the inclusion of the original subobjects. -/
+noncomputable def cokernelOfLEMapIso [HasZeroMorphisms C] [HasCokernels C] (f : X ⟶ Y) [Mono f]
+    (S T : Subobject X) (h : S ≤ T) (h' : (map f).obj S ≤ (map f).obj T) :
+    cokernel (ofLE _ _ h') ≅ cokernel (ofLE _ _ h) :=
+  cokernel.mapIso _ _ (mapObjIso f S) (mapObjIso f T) (by
+    rw [← cancel_mono (T.arrow ≫ f)]
+    simp)
 
 end CategoryTheory.Subobject

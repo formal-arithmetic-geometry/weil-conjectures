@@ -52,8 +52,10 @@ identification of the abutment through acyclic resolutions.
   spectral sequence, functorially in `X`.
 - `CategoryTheory.Functor.grothendieckSpectralSequence`: the Grothendieck spectral sequence.
 - `CategoryTheory.Functor.grothendieckBottomEdge`, `CategoryTheory.Functor.grothendieckLeftEdge`:
-  the edge maps `R^n G (F X) ⟶ R^n (F ⋙ G) X ⟶ G (R^n F X)` (blueprint
-  `lem-sp-grothendieck-edge-maps`).
+  the edge maps `E₂^{n,0} ⟶ Hⁿ ⟶ E₂^{0,n}` of the spectral object, natural in `X`. Their
+  sources and targets are identified with `R^n G (F X)`, `R^n (F ⋙ G) X` and `G (R^n F X)` only
+  up to non-canonical isomorphisms, so the blueprint edge maps of
+  `lem-sp-grothendieck-edge-maps` are not fully constructed yet.
 
 ## Main statements
 
@@ -61,15 +63,13 @@ identification of the abutment through acyclic resolutions.
   a composable pair with acyclicity.
 - `CategoryTheory.Functor.nonempty_grothendieckSpectralSequence_page_two_iso`,
   `CategoryTheory.Functor.grothendieckSpectralSequence_abutsTo`: the `E₂`-page and the abutment.
-- `CategoryTheory.Functor.exists_grothendieckSpectralObjectFunctor_baseChange`: base-change
-  naturality (blueprint `thm-sp-grothendieck-base-change`; not proved yet).
 - `CategoryTheory.Functor.exists_grothendieckSpectralSequence`: the Grothendieck spectral
   sequence of a composable pair with acyclicity.
 -/
 
 @[expose] public section
 
-universe v₁ v₂ v₃ v₄ v₅ v₆ u₁ u₂ u₃ u₄ u₅ u₆
+universe v₁ v₂ v₃ u₁ u₂ u₃
 
 namespace CategoryTheory
 
@@ -233,7 +233,8 @@ theorem grothendieckSpectralSequence_abutsTo [PreservesFiniteLimits G]
 transformation in `X : A`. Its source `H^n(RG(τ_{≥ 0} τ_{< 1} RF(X)))` is `R^n G (F X)` when `F`
 is left exact (`Functor.nonempty_grothendieckSpectralObject_H_zero_one_iso`) and its target
 `H^n(RG(RF(X)))` is `R^n (F ⋙ G) X` for a composable pair with acyclicity
-(`Functor.nonempty_grothendieckSpectralObject_H_bot_top_iso`): this is the edge map
+(`Functor.nonempty_grothendieckSpectralObject_H_bot_top_iso`). These identifications are not
+yet canonical or natural in `X`, so this does not yet give the blueprint edge map
 `R^n G (F X) ⟶ R^n (F ⋙ G) X`. It is the composite `E₂^{n,0} ↠ E∞^{n,0} = Fⁿ Hⁿ ↪ Hⁿ`, its image
 being the last step of the abutment filtration
 (`Abelian.SpectralObject.imageSubobject_bottomEdge`).
@@ -252,7 +253,8 @@ noncomputable def grothendieckBottomEdge (n : ℤ) :
 transformation in `X : A`. Its source `H^n(RG(RF(X)))` is `R^n (F ⋙ G) X` for a composable pair
 with acyclicity (`Functor.nonempty_grothendieckSpectralObject_H_bot_top_iso`) and its target
 `H^n(RG(τ_{≥ n} τ_{< n+1} RF(X)))` is `G (R^n F X)` when `G` is left exact
-(`Functor.nonempty_grothendieckSpectralObject_H_self_succ_iso`): this is the edge map
+(`Functor.nonempty_grothendieckSpectralObject_H_self_succ_iso`). These identifications are not
+yet canonical or natural in `X`, so this does not yet give the blueprint edge map
 `R^n (F ⋙ G) X ⟶ G (R^n F X)`.
 
 (blueprint: `lem-sp-grothendieck-edge-maps`) -/
@@ -282,48 +284,6 @@ theorem nonempty_grothendieckSpectralObject_H_self_succ_iso [PreservesFiniteLimi
       G.obj ((F.rightDerived n).obj X)) := by
   obtain ⟨e⟩ := F.nonempty_grothendieckSpectralObject_H_iso G X 0 n n n (n + 1) (by simp) rfl rfl
   exact ⟨e ≪≫ G.rightDerivedZeroIsoSelf.app _⟩
-
-section BaseChange
-
-variable {A' : Type u₄} [Category.{v₄} A'] [Abelian A'] [IsGrothendieckAbelian.{v₄} A']
-  {B' : Type u₅} [Category.{v₅} B'] [Abelian B'] [IsGrothendieckAbelian.{v₅} B']
-  {C' : Type u₆} [Category.{v₆} C'] [Abelian C']
-  [HasDerivedCategory A'] [HasDerivedCategory B'] [HasDerivedCategory C']
-  (F' : A' ⥤ B') (G' : B' ⥤ C') [F'.Additive] [G'.Additive]
-
-/-- **Base-change naturality of the Grothendieck spectral sequence.** Let `α : A ⥤ A'`,
-`β : B ⥤ B'` and `γ : C ⥤ C'` be exact functors making the squares
-```
-    A ──F──▶ B ──G──▶ C
-    │α       │β       │γ
-    ▼        ▼        ▼
-    A' ─F'─▶ B' ─G'─▶ C'
-```
-commute up to the natural isomorphisms `eF : F ⋙ β ≅ α ⋙ F'` and `eG : G ⋙ γ ≅ β ⋙ G'`. Then
-there is a morphism, natural in `X : A`, from the image under `γ` of the spectral object of the
-Grothendieck spectral sequence of `X` to the spectral object of the Grothendieck spectral
-sequence of `α X`; it induces the morphism of spectral sequences between `γ` applied to the
-Grothendieck spectral sequence of `(F, G, X)` and that of `(F', G', α X)`. It is built from the
-base-change morphisms `γ ∘ RG ⟶ RG' ∘ β` and `β ∘ RF ⟶ RF' ∘ α` of the right derived functors,
-using that the exact functor `β` commutes with the truncations of the canonical t-structures.
-When `α` and `β` preserve injective objects these base-change morphisms are isomorphisms, and so
-is the morphism of spectral objects.
-
-In the base-change situation of the proper-base-change chapter the vertical functors are the
-inverse images along the maps of a cartesian square.
-
-(blueprint: `thm-sp-grothendieck-base-change`) -/
-theorem exists_grothendieckSpectralObjectFunctor_baseChange
-    (α : A ⥤ A') (β : B ⥤ B') (γ : C ⥤ C') [α.Additive] [β.Additive] [γ.Additive]
-    [PreservesFiniteLimits α] [PreservesFiniteColimits α]
-    [PreservesFiniteLimits β] [PreservesFiniteColimits β] [γ.PreservesHomology]
-    (eF : F ⋙ β ≅ α ⋙ F') (eG : G ⋙ γ ≅ β ⋙ G') :
-    ∃ φ : F.grothendieckSpectralObjectFunctor G ⋙ γ.mapAbelianSpectralObject EInt ⟶
-        α ⋙ F'.grothendieckSpectralObjectFunctor G',
-      α.PreservesInjectiveObjects → β.PreservesInjectiveObjects → IsIso φ := by
-  sorry
-
-end BaseChange
 
 end Functor
 

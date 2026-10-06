@@ -74,7 +74,6 @@ noncomputable def isoRightDerivedObjCochainComplex {X : C} (R : InjectiveResolut
 
 end InjectiveResolution
 
-
 namespace Functor
 
 variable (F : C ⥤ D) [F.Additive] [EnoughInjectives C]

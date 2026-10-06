@@ -140,7 +140,6 @@ instance : (injectiveObjectFunctor C).EssSurj where
     obtain ⟨L, _, ⟨e⟩⟩ := exists_injective_nonempty_iso K n
     exact ⟨(HomotopyCategory.Plus.quotient _).obj L, ⟨e⟩⟩
 
-
 instance : (injectiveObjectFunctor C).IsEquivalence where
 
 variable (C) in
@@ -198,4 +197,3 @@ instance : F.rightDerivedFunctorPlus.IsTriangulated := by
   exact Functor.isTriangulated_of_iso F.rightDerivedFunctorPlusIsoInjectiveObject.symm
 
 end CategoryTheory.Functor
-

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.Subobject.Lattice
+public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 /-!
 # Convergence of a first quadrant cohomological spectral sequence
@@ -81,30 +82,6 @@ if there exists a `SpectralSequence.Abutment E H`, that is, a finite decreasing 
 each `H n` whose successive quotients are the `E∞`-terms `E∞^{p, q}` with `p + q = n`. -/
 def SpectralSequence.AbutsTo (E : E₂CohomologicalSpectralSequenceNat C) (H : ℕ → C) : Prop :=
   Nonempty (E.Abutment H)
-
-/-- The underlying object of the image of a subobject `X` under `Subobject.map f` is isomorphic
-to the underlying object of `X`. -/
-noncomputable def Subobject.mapObjIso {A B : C} (f : A ⟶ B) [Mono f] (X : Subobject A) :
-    ((Subobject.map f).obj X : C) ≅ (X : C) :=
-  Subobject.isoOfEqMk _ (X.arrow ≫ f) (by
-    conv_lhs => rw [← Subobject.mk_arrow X]
-    rfl)
-
-omit [Abelian C] in
-@[reassoc (attr := simp)]
-lemma Subobject.mapObjIso_hom_arrow {A B : C} (f : A ⟶ B) [Mono f] (X : Subobject A) :
-    (Subobject.mapObjIso f X).hom ≫ X.arrow ≫ f = ((Subobject.map f).obj X).arrow := by
-  simp [Subobject.mapObjIso]
-
-/-- The cokernel of the inclusion of the images of two subobjects under `Subobject.map f` is
-isomorphic to the cokernel of the inclusion of the original subobjects. -/
-noncomputable def Subobject.cokernelOfLEMapIso {A B : C} (f : A ⟶ B) [Mono f]
-    (X Y : Subobject A) (h : X ≤ Y)
-    (h' : (Subobject.map f).obj X ≤ (Subobject.map f).obj Y) :
-    cokernel (Subobject.ofLE _ _ h') ≅ cokernel (Subobject.ofLE _ _ h) :=
-  cokernel.mapIso _ _ (Subobject.mapObjIso f X) (Subobject.mapObjIso f Y) (by
-    rw [← cancel_mono (Y.arrow ≫ f)]
-    simp)
 
 /-- Transport of an abutment along isomorphisms of the graded object. -/
 noncomputable def SpectralSequence.Abutment.ofIso {E : E₂CohomologicalSpectralSequenceNat C}

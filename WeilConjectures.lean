@@ -619,6 +619,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafHom
 public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
 public import WeilConjectures.Mathlib.CategoryTheory.SmallObject.TransfiniteIteration
+public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.FactorThru
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.HasCardinalLT
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Lattice
