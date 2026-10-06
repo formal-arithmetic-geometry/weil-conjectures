@@ -10,6 +10,9 @@ public import Mathlib.GroupTheory.Commutator.Basic
 public import Mathlib.RingTheory.Jacobson.Ring
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.HopfAlgebra.Quotient
+public import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
+public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Maps
+public import WeilConjectures.Mathlib.Topology.Connected.Basic
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
 
 /-!
@@ -63,6 +66,7 @@ Finally, the identity component and the centre of `V(I)` are described by Hopf i
 @[expose] public section
 
 open WithConv
+open scoped TensorProduct
 
 namespace Matrix.GeneralLinearGroup
 
@@ -181,6 +185,102 @@ theorem evalAlgHom_commutatorEquation (g h : GL n k) (i j : n) :
       ((g : Matrix n n k) * h) i j - ((h : Matrix n n k) * g) i j := by
   simp [commutatorEquation, Matrix.mul_apply, Finset.sum_sub_distrib]
 
+section Pair
+
+variable {A : Type*} [CommRing A] [Algebra k A] (I J : Ideal A)
+
+/-- The image `x ⊗ 1` in `GL n ((A ⧸ I) ⊗[k] (A ⧸ J))` of an invertible matrix `x` over `A`. For
+`x` the generic matrix this is the first point of the universal pair of points of `V(I) × V(J)`. -/
+noncomputable def inlQuotient (x : GL n A) : GL n ((A ⧸ I) ⊗[k] (A ⧸ J)) :=
+  map (Algebra.TensorProduct.includeLeftRingHom.comp (Ideal.Quotient.mk I)) x
+
+/-- The image `1 ⊗ x` in `GL n ((A ⧸ I) ⊗[k] (A ⧸ J))` of an invertible matrix `x` over `A`. For
+`x` the generic matrix this is the second point of the universal pair of points of
+`V(I) × V(J)`. -/
+noncomputable def inrQuotient (x : GL n A) : GL n ((A ⧸ I) ⊗[k] (A ⧸ J)) :=
+  map ((Algebra.TensorProduct.includeRight (R := k) (A := A ⧸ I)).toRingHom.comp
+    (Ideal.Quotient.mk J)) x
+
+variable {I J}
+
+theorem map_liftQuotient_inlQuotient (f g : A →ₐ[k] R) (hf : ∀ a ∈ I, f a = 0)
+    (hg : ∀ a ∈ J, g a = 0) (x : GL n A) :
+    map (Algebra.TensorProduct.liftQuotient I J f g hf hg).toRingHom (inlQuotient I J x) =
+      map f.toRingHom x := by
+  ext i j
+  simp [inlQuotient, Algebra.TensorProduct.liftQuotient]
+
+theorem map_liftQuotient_inrQuotient (f g : A →ₐ[k] R) (hf : ∀ a ∈ I, f a = 0)
+    (hg : ∀ a ∈ J, g a = 0) (x : GL n A) :
+    map (Algebra.TensorProduct.liftQuotient I J f g hf hg).toRingHom (inrQuotient I J x) =
+      map g.toRingHom x := by
+  ext i j
+  simp [inrQuotient, Algebra.TensorProduct.liftQuotient]
+
+end Pair
+
+@[simp]
+theorem map_evalAlgHom_genericUnit {R : Type*} [CommRing R] [Algebra k R] (x : GL n R) :
+    map (evalAlgHom (k := k) x).toRingHom (genericUnit n k) = x :=
+  (algHomMulEquiv n k R).apply_symm_apply x
+
+@[simp]
+theorem evalAlgHom_genericUnit : evalAlgHom (genericUnit n k) = AlgHom.id k _ :=
+  algHom_ext fun i j ↦ by simp
+
+@[simp]
+theorem evalAlgHom_map_genericUnit {R : Type*} [CommRing R] [Algebra k R]
+    (φ : CoordinateRing n k →ₐ[k] R) : evalAlgHom (map φ.toRingHom (genericUnit n k)) = φ := by
+  rw [evalAlgHom_map, evalAlgHom_genericUnit, AlgHom.comp_id]
+
+/-- The algebra endomorphism of the coordinate ring of `GL_n` pulling functions back along the
+two-sided translation `x ↦ g * x * h`. -/
+noncomputable def translate (g h : GL n k) : CoordinateRing n k →ₐ[k] CoordinateRing n k :=
+  evalAlgHom (map (algebraMap k (CoordinateRing n k)) g * genericUnit n k *
+    map (algebraMap k (CoordinateRing n k)) h)
+
+theorem evalAlgHom_comp_translate {R : Type*} [CommRing R] [Algebra k R] (g h : GL n k)
+    (x : GL n R) : (evalAlgHom x).comp (translate g h) =
+      evalAlgHom (map (algebraMap k R) g * x * map (algebraMap k R) h) := by
+  have (g : GL n k) : map (evalAlgHom (k := k) x).toRingHom
+      (map (algebraMap k (CoordinateRing n k)) g) = map (algebraMap k R) g := by
+    ext
+    simp
+  rw [translate, ← evalAlgHom_map, map_mul, map_mul, map_evalAlgHom_genericUnit, this, this]
+
+theorem translate_comp_translate (g h g' h' : GL n k) :
+    (translate g h).comp (translate g' h') = translate (g' * g) (h * h') := by
+  rw [translate, evalAlgHom_comp_translate, translate, map_mul, map_mul]
+  simp only [mul_assoc]
+
+@[simp]
+theorem translate_one_one : translate (1 : GL n k) 1 = AlgHom.id k _ := by
+  simp [translate]
+
+/-- The algebra automorphism of the coordinate ring of `GL_n` pulling functions back along the
+two-sided translation `x ↦ g * x * h`. -/
+noncomputable def translateAlgEquiv (g h : GL n k) :
+    CoordinateRing n k ≃ₐ[k] CoordinateRing n k :=
+  AlgEquiv.ofAlgHom (translate g h) (translate g⁻¹ h⁻¹)
+    (by rw [translate_comp_translate, inv_mul_cancel, mul_inv_cancel, translate_one_one])
+    (by rw [translate_comp_translate, mul_inv_cancel, inv_mul_cancel, translate_one_one])
+
+/-- Two-sided translations by points of `V(I)` preserve the ideal `I`. -/
+theorem translate_mem {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] {g h : GL n k}
+    (hg : g ∈ zeroLocus I k) (hh : h ∈ zeroLocus I k) {a : CoordinateRing n k} (ha : a ∈ I) :
+    translate g h a ∈ I := by
+  set q := Ideal.Quotient.mkₐ k I
+  have hγ : map q.toRingHom (genericUnit n k) ∈ zeroLocus I (CoordinateRing n k ⧸ I) := by
+    intro b hb
+    rw [evalAlgHom_map, evalAlgHom_genericUnit, AlgHom.comp_id, Ideal.Quotient.mkₐ_eq_mk,
+      Ideal.Quotient.eq_zero_iff_mem]
+    exact hb
+  have key := congr($(evalAlgHom_comp_translate g h (map q.toRingHom (genericUnit n k))) a)
+  rw [AlgHom.comp_apply, evalAlgHom_map, evalAlgHom_genericUnit, AlgHom.comp_id] at key
+  rw [← Ideal.Quotient.eq_zero_iff_mem, ← Ideal.Quotient.mkₐ_eq_mk k, key]
+  exact (zeroLocus I _).mul_mem ((zeroLocus I _).mul_mem
+    (map_mem_zeroLocus (Algebra.ofId k _) hg) hγ) (map_mem_zeroLocus (Algebra.ofId k _) hh) a ha
+
 end CommRing
 
 section Field
@@ -193,12 +293,51 @@ theorem isRadical_vanishingIdeal (S : Set (GL n k)) : (vanishingIdeal S).IsRadic
   rw [← map_pow]
   exact mem_vanishingIdeal.1 hm g hg
 
+theorem mem_vanishingIdeal_iff_forall_subtype {S : Set (GL n k)} (a : CoordinateRing n k) :
+    a ∈ vanishingIdeal S ↔ ∀ g : S, evalAlgHom (g : GL n k) a = 0 :=
+  mem_vanishingIdeal.trans ⟨fun h g ↦ h g g.2, fun h g hg ↦ h ⟨g, hg⟩⟩
+
+/-- Passage to the closure for a pair of points: let `I` and `J` be the ideals of equations
+vanishing on two families of `k`-points `χ s` and `χ' t` of `Spec A`. If a matrix `x` over
+`(A ⧸ I) ⊗[k] (A ⧸ J)` specializes at every pair `(χ s, χ' t)` to a matrix satisfying the equation
+`a`, then so does its specialization at every pair of `R`-points of `Spec (A ⧸ I)` and
+`Spec (A ⧸ J)`. This is the schematic density of the product of the two families
+(`Algebra.TensorProduct.eq_zero_of_forall_liftQuotient_eq_zero`). -/
+theorem evalAlgHom_map_liftQuotient_eq_zero {A : Type*} [CommRing A] [Algebra k A]
+    {I J : Ideal A} {S T : Type*} (χ : S → A →ₐ[k] k) (χ' : T → A →ₐ[k] k)
+    (hI : ∀ a, a ∈ I ↔ ∀ s, χ s a = 0) (hJ : ∀ a, a ∈ J ↔ ∀ t, χ' t a = 0)
+    (x : GL n ((A ⧸ I) ⊗[k] (A ⧸ J))) (a : CoordinateRing n k)
+    (hx : ∀ s t, evalAlgHom (map (Algebra.TensorProduct.liftQuotient I J (χ s) (χ' t)
+      (fun b hb ↦ (hI b).1 hb s) (fun b hb ↦ (hJ b).1 hb t)).toRingHom x) a = 0)
+    {R : Type*} [CommRing R] [Algebra k R] (f g : A →ₐ[k] R) (hf : ∀ b ∈ I, f b = 0)
+    (hg : ∀ b ∈ J, g b = 0) :
+    evalAlgHom (map (Algebra.TensorProduct.liftQuotient I J f g hf hg).toRingHom x) a = 0 := by
+  have hc : evalAlgHom x a = 0 := by
+    refine Algebra.TensorProduct.eq_zero_of_forall_liftQuotient_eq_zero χ χ' hI hJ
+      fun s t ↦ ?_
+    have := hx s t
+    rwa [evalAlgHom_map, AlgHom.comp_apply] at this
+  rw [evalAlgHom_map, AlgHom.comp_apply, hc, map_zero]
+
 /-- The Zariski closure of a subgroup of `GL n k` is a closed subgroup scheme: the ideal of
-equations vanishing on the subgroup is a Hopf ideal. (blueprint: `sk-i-restriction`) -/
+equations vanishing on the subgroup is a Hopf ideal.
+
+For the comultiplication, the image of `Δ(a)` in `k[Γ̄] ⊗ k[Γ̄]` vanishes at every pair of points
+`(γ, δ)` of `Γ × Γ`, where it takes the value `a(γδ) = 0`; by schematic density it is zero.
+(blueprint: `sk-i-restriction`) -/
 instance instIsHopfIdealVanishingIdeal (Γ : Subgroup (GL n k)) :
     (vanishingIdeal (Γ : Set (GL n k))).IsHopfIdeal k where
   counit_eq_zero a ha := mem_vanishingIdeal.1 ha 1 Γ.one_mem
-  map_mkQ_comul_eq_zero a ha := sorry
+  map_mkQ_comul_eq_zero a ha := by
+    refine (Algebra.TensorProduct.map_mkQ_restrictScalars_eq_zero_iff _ _ _).2
+      (Algebra.TensorProduct.eq_zero_of_forall_liftQuotient_eq_zero
+        (fun γ : Γ ↦ evalAlgHom (γ : GL n k)) (fun γ : Γ ↦ evalAlgHom (γ : GL n k))
+        mem_vanishingIdeal_iff_forall_subtype mem_vanishingIdeal_iff_forall_subtype
+        fun γ δ ↦ ?_)
+    rw [Algebra.TensorProduct.liftQuotient_map_mkₐ, ← ofConv_toConv (evalAlgHom (γ : GL n k)),
+      ← ofConv_toConv (evalAlgHom (δ : GL n k)), ← AlgHom.convMul_apply, ← evalAlgHom_mul,
+      ofConv_toConv]
+    exact mem_vanishingIdeal.1 ha _ (Γ.mul_mem γ.2 δ.2)
   antipode_mem a ha := mem_vanishingIdeal.2 fun g hg ↦
     (DFunLike.congr_fun (evalAlgHom_comp_antipodeAlgHom g) a).trans
       (mem_vanishingIdeal.1 ha _ (Γ.inv_mem hg))
@@ -218,30 +357,61 @@ theorem zeroLocus_vanishingIdeal_le {Γ : Subgroup (GL n k)} (J : Set (Coordinat
 /-- If a subgroup `Γ` of `GL n k` normalizes a subgroup `Δ`, then the Zariski closure of `Γ`
 normalizes the Zariski closure of `Δ`, on `R`-points for every `k`-algebra `R`.
 
-Proof sketch (not formalized): over a field, `Γ × Δ` is schematically dense in the product of the
-closures: if `∑ aᵢ ⊗ bᵢ` vanishes on `Γ × Δ` with the `bᵢ` linearly independent modulo
-`vanishingIdeal Δ`, then every `aᵢ` vanishes on `Γ`. Apply this to the pullback of an equation of
-`Δ` along `(g, h) ↦ g h g⁻¹`. (blueprint: `sk-i-restriction`) -/
+The conjugate `x y x⁻¹` of the universal pair of points `(x, y)` of `Γ̄ × Δ̄` satisfies the
+equations of `Δ̄`, because its specializations `γ δ γ⁻¹` at the points of `Γ × Δ` lie in `Δ` and
+`Γ × Δ` is schematically dense in `Γ̄ × Δ̄` (`evalAlgHom_map_liftQuotient_eq_zero`); specializing
+along `Algebra.TensorProduct.liftQuotient` gives the statement on `R`-points.
+(blueprint: `sk-i-restriction`) -/
 theorem zeroLocus_vanishingIdeal_le_normalizer {Γ Δ : Subgroup (GL n k)}
     (hΓ : Γ ≤ Subgroup.normalizer (Δ : Set (GL n k)))
     (R : Type*) [CommRing R] [Algebra k R] :
     zeroLocus (vanishingIdeal (Γ : Set (GL n k))) R ≤
       Subgroup.normalizer (zeroLocus (vanishingIdeal (Δ : Set (GL n k))) R : Set (GL n R)) := by
-  sorry
+  have key {g h : GL n R} (hg : g ∈ zeroLocus (vanishingIdeal (Γ : Set (GL n k))) R)
+      (hh : h ∈ zeroLocus (vanishingIdeal (Δ : Set (GL n k))) R) :
+      g * h * g⁻¹ ∈ zeroLocus (vanishingIdeal (Δ : Set (GL n k))) R := by
+    intro a ha
+    have := evalAlgHom_map_liftQuotient_eq_zero (fun γ : Γ ↦ evalAlgHom (γ : GL n k))
+      (fun δ : Δ ↦ evalAlgHom (δ : GL n k)) mem_vanishingIdeal_iff_forall_subtype
+      mem_vanishingIdeal_iff_forall_subtype
+      (inlQuotient _ _ (genericUnit n k) * inrQuotient _ _ (genericUnit n k) *
+        (inlQuotient _ _ (genericUnit n k))⁻¹) a (fun γ δ ↦ by
+          rw [map_mul, map_mul, map_inv, map_liftQuotient_inlQuotient,
+            map_liftQuotient_inrQuotient, map_evalAlgHom_genericUnit,
+            map_evalAlgHom_genericUnit]
+          exact mem_vanishingIdeal.1 ha _ ((hΓ γ.2 δ).1 δ.2))
+      (evalAlgHom g) (evalAlgHom h) (fun b hb ↦ hg b hb) (fun b hb ↦ hh b hb)
+    rwa [map_mul, map_mul, map_inv, map_liftQuotient_inlQuotient, map_liftQuotient_inrQuotient,
+      map_evalAlgHom_genericUnit, map_evalAlgHom_genericUnit] at this
+  intro g hg h
+  refine ⟨key hg, fun hghg ↦ ?_⟩
+  simpa [mul_assoc] using key (inv_mem hg) hghg
 
+open scoped commutatorElement in
 /-- If the commutators of a subgroup `Γ` of `GL n k` lie in a subgroup `Δ`, then the commutators of
 the Zariski closure of `Γ` lie in the Zariski closure of `Δ`, on `R`-points for every `k`-algebra
 `R`.
 
-Proof sketch (not formalized): the schematic density of `Γ × Γ` in the product of two copies of the
-closure of `Γ`, as in `zeroLocus_vanishingIdeal_le_normalizer`, applied to the pullback of an
-equation of `Δ` along `(g, h) ↦ g h g⁻¹ h⁻¹`. (blueprint: `sk-i-restriction`) -/
+As in `zeroLocus_vanishingIdeal_le_normalizer`, by the schematic density of `Γ × Γ` in
+`Γ̄ × Γ̄`, applied to the commutator `⁅x, y⁆` of the universal pair of points `(x, y)`.
+(blueprint: `sk-i-restriction`) -/
 theorem commutator_zeroLocus_vanishingIdeal_le {Γ Δ : Subgroup (GL n k)} (hΓ : ⁅Γ, Γ⁆ ≤ Δ)
     (R : Type*) [CommRing R] [Algebra k R] :
     ⁅zeroLocus (vanishingIdeal (Γ : Set (GL n k))) R,
         zeroLocus (vanishingIdeal (Γ : Set (GL n k))) R⁆ ≤
       zeroLocus (vanishingIdeal (Δ : Set (GL n k))) R := by
-  sorry
+  rw [Subgroup.commutator_le]
+  intro g hg h hh a ha
+  have := evalAlgHom_map_liftQuotient_eq_zero (fun γ : Γ ↦ evalAlgHom (γ : GL n k))
+    (fun γ : Γ ↦ evalAlgHom (γ : GL n k)) mem_vanishingIdeal_iff_forall_subtype
+    mem_vanishingIdeal_iff_forall_subtype
+    ⁅inlQuotient _ _ (genericUnit n k), inrQuotient _ _ (genericUnit n k)⁆ a (fun γ δ ↦ by
+      rw [map_commutatorElement, map_liftQuotient_inlQuotient, map_liftQuotient_inrQuotient,
+        map_evalAlgHom_genericUnit, map_evalAlgHom_genericUnit]
+      exact mem_vanishingIdeal.1 ha _ (hΓ (Subgroup.commutator_mem_commutator γ.2 δ.2)))
+    (evalAlgHom g) (evalAlgHom h) (fun b hb ↦ hg b hb) (fun b hb ↦ hh b hb)
+  rwa [map_commutatorElement, map_liftQuotient_inlQuotient, map_liftQuotient_inrQuotient,
+    map_evalAlgHom_genericUnit, map_evalAlgHom_genericUnit] at this
 
 /-- Over an algebraically closed field, every maximal ideal of the coordinate ring of `GL_n` is the
 ideal of a point. -/
@@ -335,11 +505,167 @@ theorem IsConnected.isRadical {I : Ideal (CoordinateRing n k)} (h : IsConnected 
     I.IsRadical :=
   h ▸ isRadical_identityComponent I
 
+section Translation
+
+@[simp]
+theorem evalAlgHom_translate_apply (g h x : GL n k) (a : CoordinateRing n k) :
+    evalAlgHom x (translate g h a) = evalAlgHom (g * x * h) a := by
+  have := congr($(evalAlgHom_comp_translate (R := k) g h x) a)
+  rw [AlgHom.comp_apply] at this
+  rw [this]
+  congr 3
+
+theorem comap_translate_toPrimeSpectrum (g h x : GL n k) :
+    PrimeSpectrum.comap (translate g h) (toPrimeSpectrum x) = toPrimeSpectrum (g * x * h) := by
+  ext a
+  simp [toPrimeSpectrum, RingHom.mem_ker]
+
+/-- The homeomorphism of the spectrum of the coordinate ring of `GL_n` induced by the two-sided
+translation `x ↦ g * x * h`. -/
+noncomputable def translateHomeomorph (g h : GL n k) :
+    PrimeSpectrum (CoordinateRing n k) ≃ₜ PrimeSpectrum (CoordinateRing n k) :=
+  PrimeSpectrum.homeomorphOfRingEquiv (translateAlgEquiv g h).symm.toRingEquiv
+
+@[simp]
+theorem translateHomeomorph_apply (g h : GL n k) (p : PrimeSpectrum (CoordinateRing n k)) :
+    translateHomeomorph g h p = PrimeSpectrum.comap (translate g h) p :=
+  rfl
+
+@[simp]
+theorem translateHomeomorph_symm_apply (g h : GL n k) (p : PrimeSpectrum (CoordinateRing n k)) :
+    (translateHomeomorph g h).symm p = PrimeSpectrum.comap (translate g⁻¹ h⁻¹) p :=
+  rfl
+
+theorem translateHomeomorph_toPrimeSpectrum (g h x : GL n k) :
+    translateHomeomorph g h (toPrimeSpectrum x) = toPrimeSpectrum (g * x * h) :=
+  comap_translate_toPrimeSpectrum g h x
+
+variable {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k]
+
+theorem comap_translate_mem_zeroLocus {g h : GL n k} (hg : g ∈ zeroLocus I k)
+    (hh : h ∈ zeroLocus I k) {p : PrimeSpectrum (CoordinateRing n k)}
+    (hp : p ∈ PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) :
+    PrimeSpectrum.comap (translate g h) p ∈
+      PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)) :=
+  fun _ ha ↦ hp (translate_mem hg hh ha)
+
+/-- Two-sided translation by points of `V(I)` maps `V(I)` onto itself. -/
+theorem translateHomeomorph_image_zeroLocus {g h : GL n k} (hg : g ∈ zeroLocus I k)
+    (hh : h ∈ zeroLocus I k) :
+    translateHomeomorph g h '' PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)) =
+      PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)) := by
+  refine (Set.image_subset_iff.2 fun p hp ↦
+    show translateHomeomorph g h p ∈ _ from comap_translate_mem_zeroLocus hg hh hp).antisymm
+    fun p hp ↦ ⟨(translateHomeomorph g h).symm p, ?_, (translateHomeomorph g h).apply_symm_apply p⟩
+  exact comap_translate_mem_zeroLocus ((zeroLocus I k).inv_mem hg) ((zeroLocus I k).inv_mem hh) hp
+
+/-- Two-sided translation by points of `V(I)` permutes the connected components of `V(I)`. -/
+theorem translateHomeomorph_image_connectedComponentIn {g h : GL n k} (hg : g ∈ zeroLocus I k)
+    (hh : h ∈ zeroLocus I k) {p : PrimeSpectrum (CoordinateRing n k)}
+    (hp : p ∈ PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) :
+    translateHomeomorph g h ''
+        connectedComponentIn (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) p =
+      connectedComponentIn (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))
+        (translateHomeomorph g h p) := by
+  rw [(translateHomeomorph g h).image_connectedComponentIn hp,
+    translateHomeomorph_image_zeroLocus hg hh]
+
+omit [I.IsHopfIdeal k] in
+/-- Over an algebraically closed field, a radical ideal `J` of the coordinate ring of `GL_n` whose
+`k`-points form a subgroup `H` of `GL n k` is a Hopf ideal: `V(J)` is a closed subgroup scheme.
+Each Hopf ideal condition is an equation between functions on a reduced variety (`V(J)` or
+`V(J) × V(J)`), which may be tested on `k`-points. -/
+theorem isHopfIdeal_of_isRadical [IsAlgClosed k] {J : Ideal (CoordinateRing n k)}
+    (hJ : J.IsRadical) (H : Subgroup (GL n k)) (hH : ∀ g, g ∈ H ↔ ∀ a ∈ J, evalAlgHom g a = 0) :
+    J.IsHopfIdeal k where
+  counit_eq_zero a ha := (hH 1).1 H.one_mem a ha
+  map_mkQ_comul_eq_zero a ha := by
+    set q := Ideal.Quotient.mkₐ k J
+    have : IsReduced (CoordinateRing n k ⧸ J) := (Ideal.isRadical_iff_quotient_reduced J).1 hJ
+    let e := Submodule.Quotient.restrictScalarsEquiv k J
+    have he : (TensorProduct.congr e e).toLinearMap ∘ₗ
+        TensorProduct.map (J.restrictScalars k).mkQ (J.restrictScalars k).mkQ =
+          (Algebra.TensorProduct.map q q).toLinearMap := by
+      ext
+      rfl
+    refine (TensorProduct.congr e e).injective ?_
+    rw [map_zero, ← LinearEquiv.coe_toLinearMap, ← LinearMap.comp_apply, he]
+    refine Algebra.TensorProduct.eq_zero_of_forall_lift_algHom_eq_zero k _ _ fun φ ψ ↦ ?_
+    have hpt (φ : CoordinateRing n k ⧸ J →ₐ[k] k) :
+        algHomMulEquiv n k k (toConv (φ.comp q)) ∈ H := by
+      refine (hH _).2 fun b hb ↦ ?_
+      rw [algHomMulEquiv_apply, ofConv_toConv, evalAlgHom_map, evalAlgHom_genericUnit,
+        AlgHom.comp_id, AlgHom.comp_apply, Ideal.Quotient.mkₐ_eq_mk,
+        Ideal.Quotient.eq_zero_iff_mem.2 hb, map_zero]
+    have key : Algebra.TensorProduct.lift φ ψ (fun _ _ ↦ .all _ _)
+        (Algebra.TensorProduct.map q q (Coalgebra.comul a)) =
+          ofConv (toConv (φ.comp q) * toConv (ψ.comp q)) a := by
+      rw [AlgHom.convMul_apply]
+      simp only [← AlgHom.comp_apply]
+      congr 1
+      ext <;> simp
+    rw [AlgHom.toLinearMap_apply, key,
+      ← (algHomMulEquiv n k k).symm_apply_apply (toConv (φ.comp q)),
+      ← (algHomMulEquiv n k k).symm_apply_apply (toConv (ψ.comp q)), algHomMulEquiv_symm_apply,
+      algHomMulEquiv_symm_apply, ← evalAlgHom_mul, ofConv_toConv]
+    exact (hH _).1 (H.mul_mem (hpt φ) (hpt ψ)) a ha
+  antipode_mem a ha := by
+    refine hJ.radical.le (vanishingIdeal_setOf_le_radical J (mem_vanishingIdeal.2 fun g hg ↦ ?_))
+    change evalAlgHom g (antipodeAlgHom n k a) = 0
+    rw [← AlgHom.comp_apply, evalAlgHom_comp_antipodeAlgHom]
+    exact (hH _).1 (H.inv_mem ((hH g).2 hg)) a ha
+
+section IdentityComponent
+
+variable (I) in
+/-- The `k`-points of the identity component `G°` of `G = V(I)`, as a subgroup of `GL n k`: the
+matrices whose point lies in the connected component of `V(I)` containing the identity. -/
+noncomputable def identityComponentSubgroup : Subgroup (GL n k) where
+  carrier := {g | toPrimeSpectrum g ∈ connectedComponentIn
+    (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) (toPrimeSpectrum 1)}
+  one_mem' := mem_connectedComponentIn (toPrimeSpectrum_mem_zeroLocus_iff.2 (zeroLocus I k).one_mem)
+  mul_mem' {g h} hg hh := by
+    have h1 := translateHomeomorph_image_connectedComponentIn
+      (toPrimeSpectrum_mem_zeroLocus_iff.1 (connectedComponentIn_subset _ _ hg))
+      (zeroLocus I k).one_mem (toPrimeSpectrum_mem_zeroLocus_iff.2 (zeroLocus I k).one_mem)
+    rw [translateHomeomorph_toPrimeSpectrum, mul_one, mul_one, ← connectedComponentIn_eq hg]
+      at h1
+    rw [Set.mem_ofPred_eq, ← h1]
+    exact ⟨_, hh, by rw [translateHomeomorph_toPrimeSpectrum, mul_one]⟩
+  inv_mem' {g} hg := by
+    have hg' : g ∈ zeroLocus I k :=
+      toPrimeSpectrum_mem_zeroLocus_iff.1 (connectedComponentIn_subset _ _ hg)
+    have h1 := translateHomeomorph_image_connectedComponentIn ((zeroLocus I k).inv_mem hg')
+      (zeroLocus I k).one_mem (toPrimeSpectrum_mem_zeroLocus_iff.2 (zeroLocus I k).one_mem)
+    rw [translateHomeomorph_toPrimeSpectrum, mul_one, mul_one] at h1
+    have h2 : toPrimeSpectrum 1 ∈ connectedComponentIn
+        (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) (toPrimeSpectrum g⁻¹) := by
+      rw [← h1]
+      exact ⟨_, hg, by rw [translateHomeomorph_toPrimeSpectrum, mul_one, inv_mul_cancel]⟩
+    rw [Set.mem_ofPred_eq, ← connectedComponentIn_eq h2]
+    exact mem_connectedComponentIn
+      (toPrimeSpectrum_mem_zeroLocus_iff.2 ((zeroLocus I k).inv_mem hg'))
+
+theorem mem_identityComponentSubgroup_iff {g : GL n k} :
+    g ∈ identityComponentSubgroup I ↔ ∀ a ∈ identityComponent I, evalAlgHom g a = 0 := by
+  have hC := (PrimeSpectrum.isClosed_zeroLocus
+    (I : Set (CoordinateRing n k))).isClosed_connectedComponentIn (toPrimeSpectrum 1)
+  change toPrimeSpectrum g ∈ connectedComponentIn
+    (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) (toPrimeSpectrum 1) ↔ _
+  rw [← hC.closure_eq, ← PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure]
+  rfl
+
 /-- The identity component of an algebraic group over an algebraically closed field is a closed
-subgroup scheme. (blueprint: `sk-p-geometry`) -/
+subgroup scheme: its ideal is radical, and its `k`-points form the subgroup
+`identityComponentSubgroup I`. (blueprint: `sk-p-geometry`) -/
 instance [IsAlgClosed k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
     (identityComponent I).IsHopfIdeal k :=
-  sorry
+  isHopfIdeal_of_isRadical (isRadical_identityComponent I) (identityComponentSubgroup I)
+    fun _ ↦ mem_identityComponentSubgroup_iff
+
+end IdentityComponent
+
+end Translation
 
 theorem one_mem_zeroLocus_identityComponent [IsAlgClosed k] (I : Ideal (CoordinateRing n k))
     [I.IsHopfIdeal k] : (1 : GL n k) ∈ zeroLocus (identityComponent I) k := by
