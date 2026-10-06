@@ -34,8 +34,6 @@ the `n`-torsion subgroup scheme and isogenies; the order of a finite group schem
   homomorphism.
 - `AlgebraicGeometry.isClosedImmersion_kerι`: the kernel of a homomorphism of group schemes is
   a closed subgroup scheme.
-- `AlgebraicGeometry.fiberDegree_eq_finrankΓ`: the order of a group scheme over a field is the
-  fibre degree of its structure morphism.
 -/
 
 @[expose] public section
@@ -65,18 +63,6 @@ and closed immersions are stable under base change. It is a subgroup scheme by
 theorem isClosedImmersion_kerι {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B]
     [IsSeparated B.hom] (f : A ⟶ B) [IsMonHom f] :
     IsClosedImmersion (GrpObj.kerι f).left :=
-  sorry
-
-/-- The order `f.finrankΓ` of a finite group scheme over a field is the fibre degree of its
-structure morphism at the unique point of `Spec K`; the two degree notions of the project agree
-on group schemes over a field.
-
-This is a statement about an arbitrary affine morphism to the spectrum of a field, so it belongs
-in `WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree`; it is stated here only to keep
-that file free of `sorry`. -/
-theorem fiberDegree_eq_finrankΓ {G : Scheme.{u}} (f : G ⟶ Spec (.of K)) [IsAffineHom f]
-    (x : Spec (.of K)) :
-    f.fiberDegree x = f.finrankΓ :=
   sorry
 
 /-- Blueprint `sk-def-av-mult-n`: Multiplication by `n` and `n`-torsion.

@@ -194,6 +194,14 @@ lemma mk_eq_mk_iff (M N : Y.Modules) [M.IsInvertible] [N.IsInvertible] :
   rw [← toSkeleton_eq_toSkeleton_iff]
   exact ⟨fun h ↦ congrArg val h, fun h ↦ ext h⟩
 
+/-- Two classes in the Picard group agree if and only if their chosen representatives are
+isomorphic. -/
+lemma eq_iff_nonempty_iso {L L' : Y.Pic} :
+    L = L' ↔
+      Nonempty ((fromSkeleton Y.Modules).obj L.val ≅ (fromSkeleton Y.Modules).obj L'.val) := by
+  rw [Pic.ext_iff, ← toSkeleton_eq_toSkeleton_iff, toSkeleton_fromSkeleton_obj,
+    toSkeleton_fromSkeleton_obj]
+
 /-- Pulling back invertible sheaves of modules along `g : X ⟶ Y` gives the map
 `Pic Y → Pic X` underlying the functoriality of the Picard presheaf. -/
 noncomputable def map (g : X ⟶ Y) (L : Y.Pic) : X.Pic :=

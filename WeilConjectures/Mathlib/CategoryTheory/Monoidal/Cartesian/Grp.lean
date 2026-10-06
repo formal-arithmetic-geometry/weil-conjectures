@@ -34,6 +34,8 @@ group objects is the fibre product of `f` and the unit `η[H] : 𝟙_ C ⟶ H`:
 
 - `CategoryTheory.GrpObj.isPullback_kerι`: the square above is cartesian.
 - `CategoryTheory.GrpObj.isMonHom_kerι`: `kerι f` is a morphism of group objects.
+- `CategoryTheory.GrpObj.isPullback_ker_tensor`: translation by a `T`-point `x` of `G`
+  identifies the fibre of `f` over `x ≫ f` with `ker f ⊗ T`.
 
 For `f` a morphism of group objects, `ker f` is itself a group object: it represents the
 presheaf of groups `Y ↦ ker ((· ≫ f) : (Y ⟶ G) →* (Y ⟶ H))`, and `kerι f` is a morphism of
@@ -162,6 +164,33 @@ instance isMonHom_kerι [HasPullback f η[H]] : IsMonHom (kerι f) where
     rw [← homEquiv'_kerRepresentableBy f (μ[ker f]), h1, Subgroup.coe_mul,
       homEquiv'_kerRepresentableBy, homEquiv'_kerRepresentableBy, _root_.CategoryTheory.Hom.mul_def,
       lift_fst_comp_snd_comp]
+
+/-- Translation identifies the fibres of a morphism of group objects with its kernel: for
+`x : T ⟶ G`, the square
+```
+  ker f ⊗ T ──── (k, t) ↦ k * x t ────▶ G
+      │                                 │
+      │ snd                             │ f
+      ▼                                 ▼
+      T ─────────── x ≫ f ────────────▶ H
+```
+is cartesian, so the fibre of `f` over the `T`-point `x ≫ f` of `H` is `ker f ⊗ T`. -/
+theorem isPullback_ker_tensor [HasPullback f η[H]] {T : C} (x : T ⟶ G) :
+    IsPullback ((fst (ker f) T ≫ kerι f) * (snd (ker f) T ≫ x)) (snd (ker f) T) f (x ≫ f) := by
+  have hk : kerι f ≫ f = 1 := by rw [kerι_comp, Hom.one_def]
+  refine IsPullback.of_isLimit' ⟨?_⟩ (PullbackCone.IsLimit.mk _
+    (fun s ↦ lift (kerLift f (s.fst * (s.snd ≫ x)⁻¹) ?_) s.snd) ?_ ?_ ?_)
+  · rw [MonObj.mul_comp, Category.assoc, hk, MonObj.comp_one, _root_.one_mul, Category.assoc]
+  · rw [MonObj.mul_comp, GrpObj.inv_comp, s.condition, Category.assoc, mul_inv_cancel, Hom.one_def]
+  · intro s
+    simp [MonObj.comp_mul]
+  · intro s
+    simp
+  · intro s m h₁ h₂
+    refine hom_ext _ _ ?_ (by simpa using h₂)
+    simp only [lift_fst]
+    refine kerLift_unique _ _ _ _ ?_
+    rw [← h₁, ← h₂, MonObj.comp_mul, Category.assoc, Category.assoc, mul_inv_cancel_right]
 
 end GroupStructure
 
