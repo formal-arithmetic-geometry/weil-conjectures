@@ -17,8 +17,10 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Topology.LocallyConstant.Basic
 public import Mathlib.Topology.Semicontinuity.Defs
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-!
 # Higher direct images, and cohomology and base change
@@ -163,8 +165,14 @@ and `ℱ` is an invertible `𝒪_X`-module, then `ℱ` is flat over `T`: on an a
 sections `Γ(ℱ, U)` form an invertible, hence flat, `Γ(X, U)`-module, and `Γ(X, U)` is flat over
 `Γ(T, V)` by flatness of `f`. -/
 theorem isFlatOver_of_isInvertible (f : X ⟶ T) [Flat f] (ℱ : X.Modules)
-    [ℱ.IsInvertible] : ℱ.IsFlatOver f :=
-  sorry
+    [ℱ.IsInvertible] : ℱ.IsFlatOver f := by
+  intro V U e
+  let := (f.appLE V.1 U.1 e).hom.toAlgebra
+  have : Module.Flat Γ(T, V.1) Γ(X, U.1) := HasRingHomProperty.appLE @Flat f ‹_› V U e
+  have := flat_sections_of_isInvertible ℱ U.2
+  let : Module Γ(T, V.1) Γ(ℱ, U.1) := Module.compHom _ (f.appLE V.1 U.1 e).hom
+  have : IsScalarTower Γ(T, V.1) Γ(X, U.1) Γ(ℱ, U.1) := ⟨fun a b m ↦ mul_smul _ _ _⟩
+  exact Module.Flat.trans Γ(T, V.1) Γ(X, U.1) Γ(ℱ, U.1)
 
 /-- The `q`-th **fibre dimension** `dim_{κ(t)} H^q(X_t, ℱ_t)` of an `𝒪_X`-module `ℱ` along a
 morphism `f : X ⟶ T` at a point `t` of `T`: the fibre `X_t = f.fiber t` is a scheme over the
@@ -208,8 +216,35 @@ unique point of `Spec K` is `dim_K H^q(X, ℱ)`: the fibre of `f` is `X` itself,
 the isomorphism `Spec κ(s) ≅ Spec K`. -/
 theorem hFiber_eq_finrankH {K : Type u} [Field K] (f : X ⟶ Spec (.of K)) (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) (s : Spec (.of K)) :
-    ℱ.hFiber f q s = letI : X.Over (Spec (.of K)) := ⟨f⟩; ℱ.finrankH K q :=
-  sorry
+    ℱ.hFiber f q s = letI : X.Over (Spec (.of K)) := ⟨f⟩; ℱ.finrankH K q := by
+  let φ := (Spec (.of K)).fromSpecResidueField s
+  have : IsClosedImmersion φ := isClosed_singleton_iff_isClosedImmersion.1 (by
+    rw [← (Set.subsingleton_of_subsingleton).eq_singleton_of_mem (Set.mem_univ s)]
+    exact isClosed_univ)
+  have : Surjective φ := ⟨fun t ↦ ⟨IsLocalRing.closedPoint _, Subsingleton.elim _ _⟩⟩
+  have : IsIso φ := isIso_of_isClosedImmersion_of_surjective φ
+  have : IsIso (f.fiberι s) := by unfold Scheme.Hom.fiberι; infer_instance
+  have : IsIso (Spec.preimage φ) := by
+    have : IsIso (Scheme.Spec.map (Spec.preimage φ).op) := by
+      change IsIso (Spec.map (Spec.preimage φ))
+      rw [Spec.map_preimage]
+      infer_instance
+    have := isIso_of_reflects_iso (Spec.preimage φ).op Scheme.Spec
+    exact isIso_of_op _
+  have hfac : f.fiberι s ≫ f = f.fiberToSpecResidueField s ≫ Spec.map (Spec.preimage φ) := by
+    rw [Spec.map_preimage]
+    exact pullback.condition
+  let : X.Over (Spec (.of K)) := ⟨f⟩
+  let : (f.fiber s).Over (Spec (.of K)) :=
+    ⟨f.fiberToSpecResidueField s ≫ Spec.map (Spec.preimage φ)⟩
+  have : (inv (f.fiberι s)).IsOver (Spec (.of K)) := ⟨by
+    change inv _ ≫ (_ ≫ _) = f
+    rw [← hfac, IsIso.inv_hom_id_assoc]⟩
+  -- change the base field from `κ(s)` to `K`, then transport along `f.fiberι s`
+  refine (finrankH_eq_of_comp_specMap (k := K) (L := (Spec (.of K)).residueField s)
+    (Spec.preimage φ) (f.fiberToSpecResidueField s) _ q).symm.trans ?_
+  rw [← finrankH_pushforward_of_isAffineHom K (inv (f.fiberι s)) ℱ q]
+  exact finrankH_congr K ((pullbackIsoPushforwardInv (f.fiberι s)).app ℱ) q
 
 /-- **The fibre Euler characteristic over a field** is the Euler characteristic, in the
 situation of `AlgebraicGeometry.Scheme.Modules.hFiber_eq_finrankH`. -/

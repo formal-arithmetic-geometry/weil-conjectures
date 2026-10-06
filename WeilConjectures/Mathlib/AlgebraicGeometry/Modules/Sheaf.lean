@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import Mathlib.AlgebraicGeometry.Modules.Presheaf
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 
 /-!
@@ -30,6 +31,10 @@ is the structure sheaf, and the presheaf of `Γ(X, ⊤)`-modules underlying a sh
 
 - `AlgebraicGeometry.Scheme.Modules.range_map_kernelι`
 - `AlgebraicGeometry.Scheme.Modules.pullbackObjUnitIso`: `f^* 𝒪_Y ≅ 𝒪_X`.
+- `AlgebraicGeometry.Scheme.Modules.pullbackIsoPushforwardInv`: `e^* ≅ (e⁻¹)_*` for an
+  isomorphism `e`.
+- `AlgebraicGeometry.Scheme.Modules.exists_mem_over_iso_unit`: an invertible module is locally
+  trivial.
 
 ## Main definitions
 
@@ -99,6 +104,17 @@ noncomputable def pullbackObjUnitIso {Y : Scheme.{u}} (g : X ⟶ Y) :
       (SheafOfModules.pullbackObjUnitToUnit g.toRingCatSheafHom) := inferInstance
   asIso (SheafOfModules.pullbackObjUnitToUnit g.toRingCatSheafHom)
 
+/-- Pulling back sheaves of modules along an isomorphism of schemes `e` is pushing forward along
+its inverse: both are left adjoint to the pushforward along `e`, which is an equivalence with
+inverse the pushforward along `inv e`. -/
+noncomputable def pullbackIsoPushforwardInv {Y : Scheme.{u}} (e : X ⟶ Y) [IsIso e] :
+    Modules.pullback e ≅ pushforward (inv e) :=
+  let E : Y.Modules ≌ X.Modules :=
+    CategoryTheory.Equivalence.mk (pushforward (inv e)) (pushforward e)
+      ((pushforwardId Y).symm ≪≫ pushforwardCongr (by simp) ≪≫ (pushforwardComp _ _).symm)
+      (pushforwardComp _ _ ≪≫ pushforwardCongr (by simp) ≪≫ pushforwardId X)
+  Adjunction.leftAdjointUniq (pullbackPushforwardAdjunction e) E.toAdjunction
+
 end Modules
 
 /-- The structure sheaf `𝒪_X` of a scheme `X`, as an object of `X.Modules`. -/
@@ -126,5 +142,33 @@ lemma presheafModuleCat_obj (ℱ : X.Modules) (V : X.Opensᵒᵖ) :
 lemma presheafModuleCat_obj_coe (ℱ : X.Modules) (V : X.Opensᵒᵖ) :
     (ℱ.presheafModuleCat.obj V : Type u) = ℱ.val.obj V :=
   rfl
+
+/-- An invertible `𝒪_X`-module is trivial on a neighbourhood of every point: every `x : X` lies
+in an open `Y` over which `M` is isomorphic to the unit sheaf of modules. -/
+lemma exists_mem_over_iso_unit (M : X.Modules) [M.IsInvertible] (x : X) :
+    ∃ (Y : X.Opens), x ∈ Y ∧
+      Nonempty (M.over Y ≅ SheafOfModules.unit (X.ringCatSheaf.over Y)) := by
+  obtain ⟨q, hq⟩ := SheafOfModules.IsInvertible.exists_isInvertibleData (M := M)
+  obtain ⟨V, f, ⟨i, ⟨g⟩⟩, hx⟩ := q.coversTop ⊤ x trivial
+  have := (hq.nonempty_unique i).some
+  exact ⟨q.X i, g.le hx, ⟨(asIso (q.generators i).π).symm ≪≫ SheafOfModules.freeUniqueIso _⟩⟩
+
+/-- A trivialisation `M.over Y ≅ 𝒪_Y` of an `𝒪_X`-module over an open `Y` gives, for every open
+`W ≤ Y`, a `Γ(X, W)`-linear isomorphism between the sections `Γ(M, W)` and `Γ(X, W)`. -/
+noncomputable def sectionsLinearEquivOfOverIsoUnit {M : X.Modules} {Y : X.Opens}
+    (e : M.over Y ≅ SheafOfModules.unit (X.ringCatSheaf.over Y)) {W : X.Opens} (h : W ≤ Y) :
+    Γ(M, W) ≃ₗ[Γ(X, W)] Γ(X, W) where
+  toFun := (e.hom.val.app (op (Over.mk (homOfLE h)))).hom
+  invFun := (e.inv.val.app (op (Over.mk (homOfLE h)))).hom
+  map_add' := map_add _
+  map_smul' := (e.hom.val.app (op (Over.mk (homOfLE h)))).hom.map_smul
+  left_inv x := by
+    rw [← ConcreteCategory.comp_apply, ← PresheafOfModules.comp_app, ← SheafOfModules.comp_val,
+      e.hom_inv_id]
+    rfl
+  right_inv x := by
+    rw [← ConcreteCategory.comp_apply, ← PresheafOfModules.comp_app, ← SheafOfModules.comp_val,
+      e.inv_hom_id]
+    rfl
 
 end AlgebraicGeometry.Scheme.Modules

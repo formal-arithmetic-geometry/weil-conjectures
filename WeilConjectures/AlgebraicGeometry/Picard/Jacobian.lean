@@ -194,8 +194,8 @@ theorem picardFibreDegree_eq_picardPresheafDegree (f : X ⟶ Spec (.of k)) [IsPr
   have := Pic.isInvertible ((picardPresheaf f).map t.op L)
   have : ((fromSkeleton _).obj (Pic.val ((picardPresheaf f).map t.op L))).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
-  have : (SheafOfModules.unit (pullback f
-      (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))).hom).ringCatSheaf).IsFinitePresentation :=
+  have : SheafOfModules.IsFinitePresentation.{u, u, u} (SheafOfModules.unit (pullback f
+      (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))).hom).ringCatSheaf) :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   simp only [picardFibreDegree, picardPresheafDegree, Modules.degree]
   rw [Modules.eulerCharFiber_eq_eulerChar, Modules.eulerCharFiber_eq_eulerChar]
