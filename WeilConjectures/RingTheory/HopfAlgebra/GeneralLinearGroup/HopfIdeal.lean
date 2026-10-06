@@ -64,6 +64,8 @@ Finally, the identity component and the centre of `V(I)` are described by Hopf i
 - `Matrix.GeneralLinearGroup.isHopfIdeal_of_isRadical`: over an algebraically closed field, a
   radical ideal whose `k`-points form a subgroup is a Hopf ideal; in particular the ideal of the
   identity component is a Hopf ideal.
+- `Matrix.GeneralLinearGroup.zeroLocus_vanishingIdeal_eq_of_finite`: a finite subgroup of
+  `GL n k` is Zariski closed.
 - `Matrix.GeneralLinearGroup.zeroLocus_vanishingIdeal_le_normalizer`,
   `Matrix.GeneralLinearGroup.commutator_zeroLocus_vanishingIdeal_le`: Zariski closure preserves
   normalizing and commutator inclusions between subgroups of `GL n k`.
@@ -419,6 +421,36 @@ theorem zeroLocus_vanishingIdeal_le {Γ : Subgroup (GL n k)} (J : Set (Coordinat
     (hJ : ∀ g : GL n k, (∀ a ∈ J, evalAlgHom g a = 0) → g ∈ Γ) :
     zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k ≤ Γ :=
   fun g hg ↦ hJ g fun a ha ↦ hg a (mem_vanishingIdeal.2 fun h hh ↦ hΓ h hh a ha)
+
+/-- A matrix outside a finite subgroup `Γ` of `GL n k` is separated from `Γ` by an equation: the
+product, over `γ ∈ Γ`, of `x_ij - γ_ij` for an entry `(i, j)` at which `g` and `γ` differ. -/
+theorem exists_mem_vanishingIdeal_evalAlgHom_ne_zero {Γ : Subgroup (GL n k)} [Finite Γ]
+    {g : GL n k} (hg : g ∉ Γ) :
+    ∃ a ∈ vanishingIdeal (Γ : Set (GL n k)), evalAlgHom g a ≠ 0 := by
+  have : Fintype Γ := Fintype.ofFinite Γ
+  have hne (γ : Γ) :
+      ∃ p : n × n, (g : Matrix n n k) p.1 p.2 ≠ ((γ : GL n k) : Matrix n n k) p.1 p.2 := by
+    by_contra! h
+    exact hg (Units.ext (Matrix.ext fun i j ↦ h (i, j)) ▸ γ.2)
+  choose p hp using hne
+  refine ⟨∏ γ : Γ, (coord n k (p γ).1 (p γ).2 -
+    algebraMap k _ (((γ : GL n k) : Matrix n n k) (p γ).1 (p γ).2)),
+    mem_vanishingIdeal.2 fun δ hδ ↦ ?_, ?_⟩
+  · rw [map_prod]
+    exact Finset.prod_eq_zero (Finset.mem_univ ⟨δ, hδ⟩) (by simp)
+  · rw [map_prod]
+    exact Finset.prod_ne_zero_iff.2 fun γ _ ↦ by simpa [sub_eq_zero] using hp γ
+
+/-- A finite subgroup of `GL n k` is Zariski closed: the `k`-points of its Zariski closure are
+the subgroup itself. -/
+theorem zeroLocus_vanishingIdeal_eq_of_finite (Γ : Subgroup (GL n k)) [Finite Γ] :
+    zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k = Γ := by
+  refine le_antisymm (zeroLocus_vanishingIdeal_le (vanishingIdeal (Γ : Set (GL n k)))
+    (fun g hg a ha ↦ mem_vanishingIdeal.1 ha g hg) fun g hg ↦ ?_)
+    (subset_zeroLocus_vanishingIdeal Γ)
+  by_contra hgΓ
+  obtain ⟨a, ha, hga⟩ := exists_mem_vanishingIdeal_evalAlgHom_ne_zero hgΓ
+  exact hga (hg a ha)
 
 /-- If a subgroup `Γ` of `GL n k` normalizes a subgroup `Δ`, then the Zariski closure of `Γ`
 normalizes the Zariski closure of `Δ`, on `R`-points for every `k`-algebra `R`.
