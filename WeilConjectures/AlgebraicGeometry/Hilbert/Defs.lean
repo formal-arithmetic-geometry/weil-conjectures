@@ -14,6 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
+public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
 
 /-!
@@ -28,11 +29,12 @@ For a morphism of schemes `f : X ⟶ S` and `d : ℕ`, the Hilbert functor `Hilb
 of ideal sheaves, `AlgebraicGeometry.Scheme.IdealSheafData.comap`, along the base-change maps
 `AlgebraicGeometry.baseChangeMap` of the fibre products `X ×[S] T`.
 
-We then state that `Hilb^d_{X/S}` is a sheaf for the fppf topology, that it is representable
-under a hypothesis of "enough affine opens" on the fibres, and, over a field, that the Hilbert
-functor of a smooth proper geometrically integral curve is represented by a smooth proper
-geometrically integral `k`-scheme of dimension `d` carrying a universal effective Cartier
-divisor, together with the addition morphisms between these Hilbert schemes.
+We then state that `Hilb^d_{X/S}` is a sheaf for the fppf topology and, over a field, that the
+Hilbert functor of a smooth proper geometrically integral curve is represented by a smooth
+proper geometrically integral `k`-scheme of dimension `d` carrying a universal effective Cartier
+divisor, together with the addition morphisms between these Hilbert schemes. Representability
+of `Hilb^d_{X/S}` in general is proved in
+`WeilConjectures.AlgebraicGeometry.Hilbert.Representability`.
 
 ## Implementation notes
 
@@ -51,10 +53,12 @@ presentation are `MorphismProperty.IsStableUnderBaseChange` in Mathlib; the inva
 
 - `AlgebraicGeometry.IsHilbertSubscheme.comap`: the defining condition is stable under base
   change.
+- `AlgebraicGeometry.IsHilbertSubscheme.isInvertible`: for a smooth curve, the points of the
+  Hilbert functor are relative effective Cartier divisors.
+- `AlgebraicGeometry.IsHilbertSubscheme.eq_of_le`: two points of `Hilb^d_{X/S}(T)` one of
+  which contains the other are equal.
 - `AlgebraicGeometry.isSheaf_hilbertPresheaf`: `Hilb^d_{X/S}` is an fppf sheaf
   (blueprint `sk-cor-picard-hilb-sheaf`).
-- `AlgebraicGeometry.isRepresentable_hilbertPresheaf`: representability of `Hilb^d_{X/S}`
-  (blueprint `sk-thm-picard-hilb-general`).
 - `AlgebraicGeometry.hilbertPresheaf_curve_representable`,
   `AlgebraicGeometry.hilbertPresheaf_curve_points`,
   `AlgebraicGeometry.hilbertPresheaf_curve_add`: the Hilbert schemes of a smooth proper curve
@@ -92,6 +96,28 @@ theorem IsHilbertSubscheme.comap {f : X ⟶ S} {d : ℕ} {T T' : Over S} (φ : T
     IsHilbertSubscheme f d T' (I.comap (baseChangeMap f φ)) :=
   sorry
 
+/-- **The points of the Hilbert functor of a smooth curve are divisors.** If `f : X ⟶ S` is
+smooth of relative dimension `1`, then every point of `Hilb^d_{X/S}(T)` is a relative effective
+Cartier divisor on `X_T/T`; in particular its ideal is invertible. This is
+`AlgebraicGeometry.Scheme.IdealSheafData.isInvertible_of_isFinite_of_flat` for the base change
+`X_T ⟶ T`, which is again smooth of relative dimension `1`. -/
+theorem IsHilbertSubscheme.isInvertible {f : X ⟶ S} [SmoothOfRelativeDimension 1 f] {d : ℕ}
+    {T : Over S} {I : (Limits.pullback f T.hom).IdealSheafData}
+    (hI : IsHilbertSubscheme f d T I) : I.IsInvertible :=
+  have : SmoothOfRelativeDimension 1 (Limits.pullback.snd f T.hom) :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback
+      (IsPullback.of_hasPullback f T.hom) ‹_›
+  Scheme.IdealSheafData.isInvertible_of_isFinite_of_flat _ hI.1 hI.2.1 hI.2.2.1
+
+/-- **Nested points of the Hilbert functor are equal.** If `Z ⊆ Z'` are closed subschemes of
+`X_T` which are both finite locally free of degree `d` over `T`, i.e. their ideals `I' ≤ I`
+both lie in `Hilb^d_{X/S}(T)`, then `Z = Z'`: the surjection `𝒪_{Z'} ⟶ 𝒪_Z` of finite locally
+free `𝒪_T`-modules of the same rank `d` is an isomorphism. -/
+theorem IsHilbertSubscheme.eq_of_le {f : X ⟶ S} {d : ℕ} {T : Over S}
+    {I J : (Limits.pullback f T.hom).IdealSheafData} (hI : IsHilbertSubscheme f d T I)
+    (hJ : IsHilbertSubscheme f d T J) (h : I ≤ J) : I = J :=
+  sorry
+
 /-- The Hilbert functor. For `f : X ⟶ S` and `d : ℕ`, `Hilb^d_{X/S}` sends an `S`-scheme `T` to
 the set of closed subschemes `Z ⊆ X_T = X ×[S] T`, encoded as quasi-coherent ideal sheaves `I`
 on `X_T`, such that the projection `Z ⟶ T` is finite, flat, locally of finite presentation and
@@ -118,23 +144,6 @@ noncomputable def hilbertPresheaf (f : X ⟶ S) (d : ℕ) : (Over S)ᵒᵖ ⥤ T
 (blueprint: `sk-cor-picard-hilb-sheaf`) -/
 theorem isSheaf_hilbertPresheaf (f : X ⟶ S) (d : ℕ) :
     Presheaf.IsSheaf (Scheme.fppfTopology.over S) (hilbertPresheaf f d) :=
-  sorry
-
-/-- **Representability of `Hilb^d`, general case.** Assume that for every point `s` of `S` and
-every finite set of at most `d` points of the fibre `X_s` there is an affine open of `X`
-containing all of them; this holds for instance when `X ⟶ S` is quasi-projective, or when `X`
-carries an ample invertible module. If moreover `X ⟶ S` is separated, then `Hilb^d_{X/S}` is
-representable by a scheme.
-
-Separatedness cannot be dropped: for the line with doubled origin over a field and `d = 1`,
-every finite set of at most one point lies in an affine open, but `Hilb^1_{X/S}` is not
-representable.
-
-(blueprint: `sk-thm-picard-hilb-general`) -/
-theorem isRepresentable_hilbertPresheaf (f : X ⟶ S) [IsSeparated f] (d : ℕ)
-    (hf : ∀ (s : S) (t : Finset (f.fiber s)), t.card ≤ d →
-      ∃ U : X.affineOpens, ∀ x ∈ t, (f.fiberι s).base x ∈ U.1) :
-    (hilbertPresheaf f d).IsRepresentable :=
   sorry
 
 section Curve

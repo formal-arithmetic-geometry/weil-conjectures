@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.ConstructibleSheaf.Zero
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
@@ -44,6 +45,8 @@ whose first isomorphism is the invariance of derived global sections under the a
   and so is its compactly supported cohomology.
 - `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite`: the
   compactly supported cohomology of a finite `k₀`-scheme is concentrated in degree zero.
+- `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine`: the
+  compactly supported cohomology of a smooth affine curve is concentrated in degrees `0, 1, 2`.
 
 ## TODO
 
@@ -194,6 +197,18 @@ theorem subsingleton_compactlySupportedCohomology_of_isFinite
     [IsFinite (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X) {r : ℤ} (hr : r ≠ 0) :
     Subsingleton (G.compactlySupportedCohomology r).carrier :=
   (toComplex.obj G).subsingleton_compactlySupportedCohomology_carrier r
+
+/-- *Cohomological range of an affine curve.* If `X` is a smooth affine curve over `k₀` and `G`
+is a constructible Weil sheaf on `X`, then `H_c^r(X ⊗ k̄, G) = 0` for `r ∉ {0, 1, 2}`: after a
+smooth compactification `j : X ↪ X̄`, `H_c^r(X ⊗ k̄, G) = H^r(X̄ ⊗ k̄, j_!G)` is the cohomology of
+a sheaf on a proper curve, of cohomological dimension two.
+(blueprint: `lem-zl-affine-curve-range`) -/
+theorem subsingleton_compactlySupportedCohomology_of_isAffine [IsAffine X]
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X) {r : ℤ}
+    (hr : r < 0 ∨ 2 < r) :
+    Subsingleton (G.compactlySupportedCohomology r).carrier := by
+  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
+  sorry
 
 end WeilSheaf
 

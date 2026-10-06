@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Polynomial.FieldDivision
 # Roots of a product of factors `1 - a * X`
 
 The roots of `∏ (1 - aᵢ * X)` over a field are the inverses of the `aᵢ`, provided no `aᵢ`
-vanishes.
+vanishes, and mapping such a product along a ring homomorphism maps its factors.
 -/
 
 @[expose] public section
@@ -37,5 +37,12 @@ theorem roots_multiset_prod_one_sub_C_mul_X {s : Multiset K} (hs : (0 : K) ∉ s
   · simp only [Multiset.mem_map]
     rintro ⟨a, -, h⟩
     exact hne a h
+
+/-- Mapping `∏ (1 - a * X)` along a ring homomorphism `f` gives `∏ (1 - f a * X)`. -/
+theorem map_multiset_prod_one_sub_C_mul_X {R S : Type*} [CommRing R] [CommRing S] (f : R →+* S)
+    (s : Multiset R) :
+    ((s.map fun a ↦ 1 - C a * X).prod).map f = ((s.map f).map fun a ↦ 1 - C a * X).prod := by
+  rw [Polynomial.map_multiset_prod, Multiset.map_map, Multiset.map_map]
+  exact congrArg _ (Multiset.map_congr rfl fun a _ ↦ by simp)
 
 end Polynomial

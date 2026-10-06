@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Linear.FunctorCategory
 public import WeilConjectures.WeilSheaf.Dual
+public import WeilConjectures.WeilSheaf.LowerShriek
 
 /-!
 # Tensor products and constant twists of Weil sheaves
@@ -29,6 +30,14 @@ local Frobenius of `F`.
 
 - `AlgebraicGeometry.WeilSheaf.tensorObj`: the tensor product `F ⊗ G` of two Weil sheaves.
 - `AlgebraicGeometry.WeilSheaf.constantTwist`: the constant Weil twist `F ⊗ 𝓑_b`.
+- `AlgebraicGeometry.WeilSheaf.constantTwistInvIso`: twisting by `b` and then by `b⁻¹` gives
+  back `F`.
+
+## Main statements
+
+- `AlgebraicGeometry.WeilSheaf.nonempty_higherLowerShriek_constantTwist_iso`: the projection
+  formula `Rⁱf₀!(F ⊗ 𝓑_b) ≅ Rⁱf₀!F ⊗ 𝓑_b` for a constant twist
+  (blueprint: `lem-wf-constant-twist-cohomology`).
 -/
 
 @[expose] public section
@@ -94,6 +103,35 @@ noncomputable def constantTwist (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) 
     WeilSheaf k₀ l X where
   obj := .mk F.obj.carrier (F.obj.str ≪≫ WeilCoefficients.smulIso b F.obj.carrier)
   property := F.property
+
+/-- Twisting by `b` and then by `b⁻¹` gives back the Weil sheaf: both twists keep the
+underlying étale sheaf, and the Weil structure `b⁻¹ • b • φ` is `φ`. -/
+noncomputable def constantTwistInvIso (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) :
+    (F.constantTwist b).constantTwist b⁻¹ ≅ F :=
+  ObjectProperty.isoMk _ (ObjectProperty.isoMk _ (Endofunctor.Algebra.isoMk (Iso.refl _) (by
+    change _ ≫ F.obj.str.hom = ((F.obj.str ≪≫ WeilCoefficients.smulIso b F.obj.carrier) ≪≫
+      WeilCoefficients.smulIso b⁻¹ F.obj.carrier).hom ≫ 𝟙 _
+    have : (WeilCoefficients.smulIso b⁻¹ F.obj.carrier).hom =
+        (WeilCoefficients.smulIso b F.obj.carrier).inv := rfl
+    simp only [this, Iso.trans_hom, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+    exact (congrArg (· ≫ _) ((frobeniusPullback k₀ l X).map_id _)).trans
+      (Category.id_comp _))))
+
+-- TODO(adic): needs the projection formula for `Rf₀!` and constant Weil sheaves
+/-- The projection formula for a constant twist: for a morphism `f : X ⟶ Y` of `k₀`-schemes as
+in `AlgebraicGeometry.WeilSheaf.higherLowerShriek` and a unit `b ∈ ℚ̄_ℓˣ`,
+`Rⁱf₀!(F ⊗ 𝓑_b) ≅ Rⁱf₀!F ⊗ 𝓑_b`: the constant Weil line `𝓑_b` is pulled back from `Y`, so it
+comes out of the direct image (blueprint: `lem-wf-constant-twist-cohomology`). -/
+theorem nonempty_higherLowerShriek_constantTwist_iso {Y : Scheme.{u}}
+    [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X)
+    (b : (PadicAlgCl l)ˣ) (i : ℕ) :
+    Nonempty ((higherLowerShriek k₀ l f i).obj (F.constantTwist b) ≅
+      ((higherLowerShriek k₀ l f i).obj F).constantTwist b) :=
+  sorry
 
 end WeilSheaf
 
