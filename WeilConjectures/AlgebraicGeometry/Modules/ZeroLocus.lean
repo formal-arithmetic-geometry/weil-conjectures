@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
@@ -51,13 +53,22 @@ The properties of the zero scheme (blueprint `lem-pc-zero-scheme-properties`):
   pullback.
 - `AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_eq_bot_iff`: `Z(φ) = X` if and only if
   `φ = 0`.
+
+Further properties:
+
+- `AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_eq_of_arrowIso`: isomorphic morphisms have the
+  same zero scheme.
+- `AlgebraicGeometry.Scheme.Modules.Hom.nonempty_iso_dual_toModules_tensorObj`: if `Z(φ) = D`
+  is an effective Cartier divisor, then `N ≅ 𝒪_X(D) ⊗ M`.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory
+open CategoryTheory MonoidalCategory
+
+open scoped AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.Scheme
 
@@ -538,6 +549,53 @@ lemma IsFreeGenerator.exists_pullback {Y : Scheme.{u}} (g : Y ⟶ X)
     rw [Scheme.Hom.map_appLE_assoc, ← Functor.map_comp, Scheme.Hom.appLE_map]
   exact ConcreteCategory.congr_hom key b
 
+/-- An isomorphism of modules carries free generators to free generators. -/
+lemma IsFreeGenerator.app_hom {M' : X.Modules} (e : M ≅ M') {U : X.Opens} {x : Γ(M, U)}
+    (hx : IsFreeGenerator x) : IsFreeGenerator (e.hom.app U x) := by
+  intro V h
+  have he : Function.Bijective (e.hom.app V) := by
+    refine Function.bijective_iff_has_inverse.mpr ⟨e.inv.app V, fun y ↦ ?_, fun y ↦ ?_⟩
+    · change (e.hom.app V ≫ e.inv.app V) y = y
+      rw [← Hom.comp_app, e.hom_inv_id, Hom.id_app]
+      rfl
+    · change (e.inv.app V ≫ e.hom.app V) y = y
+      rw [← Hom.comp_app, e.inv_hom_id, Hom.id_app]
+      rfl
+  convert he.comp (hx V h) using 1
+  ext r
+  simp only [Function.comp_apply, Hom.app_smul, Hom.app_presheaf_map]
+
+/-- The ideals cutting out the zero scheme of `φ` are contained in those of `ψ` when `φ` and `ψ`
+are isomorphic arrows. -/
+private lemma Hom.zeroLocusIdeal_le_of_iso {M' N' : X.Modules} {φ : M ⟶ N} {ψ : M' ⟶ N'}
+    (eM : M ≅ M') (eN : N ≅ N') (w : φ ≫ eN.hom = eM.hom ≫ ψ) (W : X.Opens) :
+    φ.zeroLocusIdeal W ≤ ψ.zeroLocusIdeal W := by
+  intro a ha
+  rw [Hom.mem_zeroLocusIdeal_iff] at ha ⊢
+  intro V h x hx y hy b hb
+  have w' : eM.inv ≫ φ = ψ ≫ eN.inv := by
+    rw [Iso.inv_comp_eq, ← Category.assoc, ← w, Category.assoc, Iso.hom_inv_id,
+      Category.comp_id]
+  refine ha V h _ (hx.app_hom eM.symm) _ (hy.app_hom eN.symm) b ?_
+  change (eM.inv.app V.1 ≫ φ.app V.1) x = b • eN.inv.app V.1 y
+  rw [← Hom.comp_app, w', Hom.comp_app]
+  change eN.inv.app V.1 (ψ.app V.1 x) = _
+  rw [hb, Hom.app_smul]
+
+/-- **The zero scheme only depends on the isomorphism class of the morphism.** If
+`φ : M ⟶ N` and `ψ : M' ⟶ N'` are isomorphic as arrows, then `Z(φ) = Z(ψ)`. -/
+theorem Hom.zeroLocus_eq_of_arrowIso {M' N' : X.Modules} (φ : M ⟶ N) (ψ : M' ⟶ N')
+    (e : Arrow.mk φ ≅ Arrow.mk ψ) : φ.zeroLocus = ψ.zeroLocus := by
+  have w : φ ≫ (Arrow.rightFunc.mapIso e).hom = (Arrow.leftFunc.mapIso e).hom ≫ ψ :=
+    e.hom.w.symm
+  have w' : ψ ≫ (Arrow.rightFunc.mapIso e).inv = (Arrow.leftFunc.mapIso e).inv ≫ φ := by
+    rw [Iso.eq_inv_comp, ← Category.assoc, ← w, Category.assoc, Iso.hom_inv_id,
+      Category.comp_id]
+  have := fun W ↦ le_antisymm (Hom.zeroLocusIdeal_le_of_iso _ _ w W)
+    (Hom.zeroLocusIdeal_le_of_iso (Arrow.leftFunc.mapIso e).symm
+      (Arrow.rightFunc.mapIso e).symm w' W)
+  simp only [Hom.zeroLocus, this]
+
 section Properties
 
 variable [SheafOfModules.IsInvertible.{u, u, u} M] [SheafOfModules.IsInvertible.{u, u, u} N]
@@ -571,8 +629,8 @@ for every `g`.
 (blueprint: `lem-pc-zero-scheme-properties`, part (2)) -/
 theorem Hom.comap_zeroLocus {Y : Scheme.{u}} (g : Y ⟶ X) (φ : M ⟶ N) :
     φ.zeroLocus.comap g = ((Modules.pullback g).map φ).zeroLocus := by
-  have : ((pullback g).obj M).IsInvertible := .pullback inferInstance
-  have : ((pullback g).obj N).IsInvertible := .pullback inferInstance
+  have : SheafOfModules.IsInvertible.{u, u, u} ((pullback g).obj M) := .pullback inferInstance
+  have : SheafOfModules.IsInvertible.{u, u, u} ((pullback g).obj N) := .pullback inferInstance
   have key (y : Y) : ∃ V : Y.affineOpens, y ∈ V.1 ∧
       (φ.zeroLocus.comap g).ideal V = ((pullback g).map φ).zeroLocus.ideal V := by
     obtain ⟨U₁, hy₁, -, eM, hM⟩ := exists_isFreeGenerator M (x := g y) (W := ⊤) trivial
@@ -636,6 +694,17 @@ theorem Hom.isLocallyPrincipal_zeroLocus (φ : M ⟶ N) : φ.zeroLocus.IsLocally
     exists_isFreeGenerator₂ M N (TopologicalSpace.Opens.mem_top x)
   obtain ⟨b, hb⟩ := hN.exists_smul_eq (φ.app U.1 eM)
   exact ⟨U, hxU, ⟨b, φ.ideal_zeroLocus U hM hN hb.symm⟩⟩
+
+/-- **A morphism of invertible modules vanishing exactly along a divisor.** If the zero scheme
+`D = Z(φ)` of `φ : M ⟶ N` is an effective Cartier divisor, then `φ` identifies `M` with
+`N(-D) = 𝒪_X(-D) ⊗ N`, so that `N ≅ 𝒪_X(D) ⊗ M`, where `𝒪_X(D) = 𝒪_X(-D)ᵛ` is the dual of the
+ideal sheaf of `D`.
+
+Locally `φ` is multiplication by a non-zerodivisor `b` generating the ideal of `D`, so `φ` is
+injective with image `𝒪_X(-D) · N ≅ 𝒪_X(-D) ⊗ N`; tensoring with `𝒪_X(D)` gives the claim. -/
+theorem Hom.nonempty_iso_dual_toModules_tensorObj (φ : M ⟶ N) (hφ : φ.zeroLocus.IsInvertible) :
+    Nonempty (N ≅ φ.zeroLocus.toModulesᵛ ⊗ M) :=
+  sorry
 
 end Properties
 
