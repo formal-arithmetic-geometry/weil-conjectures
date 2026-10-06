@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Finite group schemes over a field
@@ -62,24 +63,75 @@ theorem etale_of_not_dvd_finrankΓ (p : ℕ) [CharP K p] (G : Over (Spec (.of K)
     Etale G.hom :=
   sorry
 
+/-- `Spec K`, viewed over itself through `Spec` of `algebraMap K K`, is the terminal object of
+`Over (Spec K)`. -/
+noncomputable def specAlgebraMapSelfIso :
+    Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K K))) ≅ 𝟙_ (Over (Spec (.of K))) :=
+  (Over.isoMk (Iso.refl (Spec (.of K))) ((Category.comp_id _).trans (Spec.map_id (.of K)).symm) :
+    Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K K))) ≅ Over.mk (𝟙 (Spec (.of K)))) ≪≫
+    Over.mkIdTerminal.uniqueUpToIso isTerminalTensorUnit
+
+/-- The `K`-points of an affine `K`-scheme `G` are the `K`-algebra homomorphisms
+`Γ(G, ⊤) →ₐ[K] K`. -/
+noncomputable def pointsEquivAlgHom (G : Over (Spec (.of K))) [IsAffine G.left] :
+    letI := G.hom.ΓAlgebra
+    (𝟙_ (Over (Spec (.of K))) ⟶ G) ≃ (Γ(G.left, ⊤) →ₐ[K] K) :=
+  specAlgebraMapSelfIso.symm.homCongr (Iso.refl G) |>.trans (G.hom.overHomEquivAlgHom K)
+
 /-- Blueprint `sk-prop-av-finite-etale-points`: Points of finite étale group schemes
 
 A finite étale group scheme `G` of order `m` over an algebraically closed field `K` has exactly
-`m` points with values in `K`. -/
+`m` points with values in `K`. This is the first half of blueprint `lem-sc-finite-etale-points`.
+
+The proof identifies the points with `K`-algebra homomorphisms `Γ(G, ⊤) →ₐ[K] K`; as `Γ(G, ⊤)`
+is an étale `K`-algebra it is a product of `m` copies of `K`, so there are `m` of them. -/
 theorem card_points_eq_finrankΓ [IsAlgClosed K] (G : Over (Spec (.of K))) [GrpObj G]
     [IsFinite G.hom] [Etale G.hom] :
-    Nat.card (𝟙_ (Over (Spec (.of K))) ⟶ G) = G.hom.finrankΓ :=
-  sorry
+    Nat.card (𝟙_ (Over (Spec (.of K))) ⟶ G) = G.hom.finrankΓ := by
+  have : IsAffine G.left := isAffine_of_isAffineHom G.hom
+  let := G.hom.ΓAlgebra
+  have := G.hom.etale_ΓAlgebra
+  rw [Nat.card_congr (pointsEquivAlgHom G), Algebra.Etale.natCard_algHom_eq_finrank]
+  rfl
 
 /-- Blueprint `sk-prop-av-finite-etale-points`: Points of finite étale group schemes
 
 Let `G` be a finite étale group scheme over an algebraically closed field `K` and let `K'` be an
 algebraically closed extension of `K`. Then base change along `K ⊆ K'`, that is precomposition
-with the structure morphism of `Spec K'` over `K`, is a bijection `G(K) ≃ G(K')`. -/
+with the structure morphism of `Spec K'` over `K`, is a bijection `G(K) ≃ G(K')`. This is the
+second half of blueprint `lem-sc-finite-etale-points`.
+
+Under the identification of points with `K`-algebra homomorphisms out of `Γ(G, ⊤)`, the map is
+composition with `K → K'`: it is injective, and both sides have `|G|` elements. -/
 theorem bijective_toUnit_comp [IsAlgClosed K] {K' : Type u} [Field K'] [Algebra K K']
     [IsAlgClosed K'] (G : Over (Spec (.of K))) [GrpObj G] [IsFinite G.hom] [Etale G.hom] :
     Function.Bijective (fun s : 𝟙_ (Over (Spec (.of K))) ⟶ G ↦
-      toUnit (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K K')))) ≫ s) :=
-  sorry
+      toUnit (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K K')))) ≫ s) := by
+  have : IsAffine G.left := isAffine_of_isAffineHom G.hom
+  let := G.hom.ΓAlgebra
+  have := G.hom.etale_ΓAlgebra
+  have := Algebra.FormallyUnramified.finite_of_free K Γ(G.left, ⊤)
+  let ψ : (Γ(G.left, ⊤) →ₐ[K] K) → (Γ(G.left, ⊤) →ₐ[K] K') := (Algebra.ofId K K').comp
+  have hψ : Function.Bijective ψ := by
+    have hinj : Function.Injective ψ := fun g₁ g₂ h ↦
+      AlgHom.ext fun x ↦ (algebraMap K K').injective (DFunLike.congr_fun h x)
+    refine hinj.bijective_of_nat_card_le ?_
+    rw [Algebra.Etale.natCard_algHom_eq_finrank, Algebra.Etale.natCard_algHom_eq_finrank]
+  have key : (fun s : 𝟙_ (Over (Spec (.of K))) ⟶ G ↦
+      toUnit (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K K')))) ≫ s) =
+      (G.hom.overHomEquivAlgHom K').symm ∘ ψ ∘ pointsEquivAlgHom G := by
+    ext1 s
+    refine (Equiv.eq_symm_apply _).2 ?_
+    have hv : (toUnit (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K K')))) ≫
+        specAlgebraMapSelfIso.inv).left = Spec.map (CommRingCat.ofHom (algebraMap K K')) := by
+      have := Over.w (toUnit (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K K')))) ≫
+        specAlgebraMapSelfIso.inv)
+      exact ((Category.comp_id _).symm.trans
+        (congrArg (_ ≫ ·) (Spec.map_id (.of K)).symm)).trans this
+    have := G.hom.overHomEquivAlgHom_comp _ hv (specAlgebraMapSelfIso.hom ≫ s)
+    simp only [Category.assoc, Iso.inv_hom_id_assoc] at this
+    exact this
+  rw [key]
+  exact (Equiv.bijective _).comp (hψ.comp (Equiv.bijective _))
 
 end AlgebraicGeometry

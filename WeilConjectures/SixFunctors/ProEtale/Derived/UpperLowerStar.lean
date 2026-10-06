@@ -57,6 +57,12 @@ the type of the functor is spelled out.
 - `AlgebraicGeometry.ProEtale.leftDerivedUpperStarComp` : the composition isomorphism
   `L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*`.
 
+- `AlgebraicGeometry.ProEtale.leftDerivedUpperStarId` : the identity isomorphism
+  `L(𝟙 X)^* ≅ 𝟭` of the derived pullback.
+
+- `AlgebraicGeometry.ProEtale.leftDerivedUpperStarCongr` : the transport `Lf^* ≅ Lg^*`
+  along an equality `f = g`.
+
 - `AlgebraicGeometry.ProEtale.leftDerivedUpperStarHomologyFunctorIso` : the derived
   pullback commutes with the homology functors, `H^n ⋙ g^* ≅ Lg^* ⋙ H^n`.
 
@@ -67,6 +73,10 @@ the type of the functor is spelled out.
 - `AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction` and
   `AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunctionPlus` : the derived
   adjunctions `L((g)^*[A]) ⊣ R((g)_*[A])` and `D+((g)^*[A]) ⊣ R+((g)_*[A])`.
+
+- `AlgebraicGeometry.ProEtale.derivedBaseChangeMap` : the derived base change map
+  `Lg^* Rf_* ⟶ Rf'_* Lg'^*` of a commutative square, the mate of the isomorphism
+  `AlgebraicGeometry.ProEtale.leftDerivedUpperStarSquareIso : Lf'^* Lg^* ≅ Lg'^* Lf^*`.
 
 -/
 
@@ -223,6 +233,23 @@ noncomputable def leftDerivedUpperStarComp {T S R : Scheme.{u}}
   Functor.leftDerivedFunctorNatIso _ (ProEtale.upperStarComp A g₁ g₂) ≪≫
     Functor.leftDerivedFunctorCompIso (g₂)^*[A] (g₁)^*[A]
 
+/-- The identity isomorphism `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on pro-étale sheaves. -/
+noncomputable def leftDerivedUpperStarId (X : Scheme.{u}) : L((𝟙 X)^*[A]) ≅ 𝟭 _ :=
+  -- the derived functor of `ProEtale.upperStarId`, followed by `L(𝟭) ≅ D(𝟭) ≅ 𝟭`
+  Functor.leftDerivedFunctorNatIso _ (ProEtale.upperStarId A X) ≪≫
+    (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
+
+/-- Transport of the derived pullback along an equality of morphisms: `Lf^* ≅ Lg^*` for
+`f = g`. -/
+noncomputable def leftDerivedUpperStarCongr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
+    L((f)^*[A]) ≅ L((g)^*[A]) :=
+  eqToIso (by rw [h])
+
+@[simp]
+lemma leftDerivedUpperStarCongr_rfl {X Y : Scheme.{u}} {f : X ⟶ Y} :
+    leftDerivedUpperStarCongr A (rfl : f = f) = Iso.refl _ :=
+  rfl
+
 /-- The exactness comparison `H^n ∘ g^* ≅ g^* ∘ H^n`: since the underived pullback `g^*`
 on pro-étale sheaves is exact, applying it to the `n`-th homology sheaf of an object of
 the derived category computes the `n`-th homology sheaf of the derived pullback.
@@ -322,6 +349,38 @@ resolutions, which exist since the pro-étale sheaf category is Grothendieck abe
 noncomputable def derivedUpperStarLowerStarAdjunctionPlus :
     D+((g)^*[A]) ⊣ R+((g)_*[A]) :=
   (ProEtale.upperStarLowerStarAdjunction A g).derivedAdjunctionPlus
+
+section Square
+
+variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+
+/-- The isomorphism `Lf'^* Lg^* ≃ L(f' ≫ g)^* = L(g' ≫ f)^* ≃ Lg'^* Lf^*` of derived pullbacks
+attached to a commutative square `g' ≫ f = f' ≫ g` of schemes. -/
+noncomputable def leftDerivedUpperStarSquareIso (sq : CommSq g' f' f g) :
+    L((g)^*[A]) ⋙ L((f')^*[A]) ≅ L((f)^*[A]) ⋙ L((g')^*[A]) :=
+  (leftDerivedUpperStarComp A f' g).symm ≪≫ leftDerivedUpperStarCongr A sq.w.symm ≪≫
+    leftDerivedUpperStarComp A g' f
+
+/-- The derived base change map `Lg^* Rf_* ⟶ Rf'_* Lg'^*` of a commutative square
+`g' ≫ f = f' ≫ g` of schemes,
+
+```
+  X' ──g'──▶ X
+  │          │
+  f'         f
+  ▼          ▼
+  Y' ──g───▶ Y
+```
+
+the mate (`CategoryTheory.mateEquiv`), along `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`, of the
+isomorphism `leftDerivedUpperStarSquareIso : Lf'^* Lg^* ≃ Lg'^* Lf^*`. The square is not
+required to be Cartesian, and the map is not an isomorphism in general. -/
+noncomputable def derivedBaseChangeMap (sq : CommSq g' f' f g) :
+    R((f)_*[A]) ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ R((f')_*[A]) :=
+  mateEquiv (derivedUpperStarLowerStarAdjunction A f) (derivedUpperStarLowerStarAdjunction A f')
+    (leftDerivedUpperStarSquareIso A sq).hom
+
+end Square
 
 end ProEtale
 

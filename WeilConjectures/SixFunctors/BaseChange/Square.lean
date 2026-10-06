@@ -162,6 +162,22 @@ lemma Etale.baseChangeSquare_eq_mateEquiv_symm (sq : CommSq g' f' f g) :
   rw [← Etale.mateEquiv_baseChangeSquare]
   exact (Equiv.symm_apply_apply _ _).symm
 
+/-- **The pushforward unit form of the base change map**: for a sheaf `F` on `X`,
+`η_g (f_* F) ≫ g_* (baseChangeMap F) = f_* (η_{g'} F) ≫ squareLowerStarIso (g'^* F)`, that is,
+the adjoint of the base change map under `g^* ⊣ g_*` is
+`f_* F ⟶ f_* g'_* g'^* F ≅ g_* f'_* g'^* F`. -/
+lemma Etale.unit_map_baseChangeMap_app (sq : CommSq g' f' f g)
+    (F : Sheaf X.smallEtaleTopology A) :
+    (Etale.upperStarLowerStarAdjunction A g).unit.app (((f)_*[A]).obj F) ≫
+        ((g)_*[A]).map ((Etale.baseChangeMap A sq).app F) =
+      ((f)_*[A]).map ((Etale.upperStarLowerStarAdjunction A g').unit.app F) ≫
+        (Etale.squareLowerStarIso A sq).hom.app (((g')^*[A]).obj F) := by
+  have := unit_mateEquiv_symm (Etale.upperStarLowerStarAdjunction A g')
+    (Etale.upperStarLowerStarAdjunction A g)
+    (TwoSquare.mk _ _ _ _ (Etale.squareLowerStarIso A sq).hom) F
+  rw [← Etale.baseChangeSquare_eq_mateEquiv_symm] at this
+  exact this.symm
+
 omit [HasSmallSiteSheafify A] in
 /-- The square isomorphism of the flipped square is the inverse of the square isomorphism. -/
 lemma Etale.squareUpperStarIso_flip (sq : CommSq g' f' f g) :

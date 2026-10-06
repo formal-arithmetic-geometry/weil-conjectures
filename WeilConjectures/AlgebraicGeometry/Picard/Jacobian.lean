@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
 public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
@@ -81,8 +82,9 @@ Several clauses of the blueprint statements cannot be expressed and are dropped:
 - `AlgebraicGeometry.picardSubfunctorDegree`: the degree-`d` subfunctor of the Picard presheaf.
 - `AlgebraicGeometry.picardFunctorDegree`: the degree-`d` part `Pic^d_{X/k}` of the relative
   Picard functor.
-- `AlgebraicGeometry.dualNumbersOver`: `Spec k[ε]` as a `k`-scheme, `k[ε] = k[T]/(T²)`.
-- `AlgebraicGeometry.dualNumbersZero`: the `k`-point `ε ↦ 0` of `Spec k[ε]`.
+- `AlgebraicGeometry.dualNumbersScale`: the `k`-endomorphism `ε ↦ cε` of `(Spec k)[ε]`, the
+  dual-number thickening `AlgebraicGeometry.Scheme.dualNumbersOver (Spec k)` of `Spec k` whose
+  `k`-point `ε ↦ 0` is `AlgebraicGeometry.Scheme.dualNumbersιOver`.
 - `AlgebraicGeometry.tangentSpaceAt`: the tangent space of a `k`-scheme at a `k`-rational point,
   defined through the functor of points.
 - `AlgebraicGeometry.tangentSubgroup`: the tangent space of a group scheme at the unit, as the
@@ -99,8 +101,12 @@ Several clauses of the blueprint statements cannot be expressed and are dropped:
   scheme (blueprint `sk-prop-picard-degree-decomposition`).
 - `AlgebraicGeometry.nonempty_tangentSpaceAt_linearEquiv_H_one`: the tangent space of the Jacobian
   (blueprint `sk-prop-picard-jacobian-tangent`).
+- `AlgebraicGeometry.isProper_of_representableBy_picardFunctorDegree` and
+  `AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctorDegree`: the
+  theorem of the base, every `Pic^d_{X/k}` is proper and smooth of dimension `g` (blueprint
+  `thm-sc-theorem-of-the-base`).
 - `AlgebraicGeometry.exists_jacobian`: the Jacobian is an abelian variety (blueprint
-  `sk-prop-jacobian`).
+  `sk-prop-jacobian`, `thm-sc-jacobian-representability`).
 - `AlgebraicGeometry.exists_jacobian_descent`: the Jacobian over a general base field (blueprint
   `sk-prop-jacobian-descent`).
 -/
@@ -232,36 +238,122 @@ theorem nonempty_iso_of_representableBy (d : ℤ) (P₀ Pd : Over (Spec (.of k))
     Nonempty (P₀ ≅ Pd) :=
   sorry
 
+/-- **`Pic^g` is proper.** A `k`-scheme representing the degree-`g` part `Pic^g_{X/k}` of the
+Picard functor, `g` the genus, is proper over `k`.  The universal divisor of the Hilbert scheme
+defines `Hilb^g_{X/k} ⟶ Pic^g_{X/k}`, `D ↦ 𝒪_X(D)`; it is surjective because by Riemann–Roch
+an invertible module of degree `g` has `h⁰ ≥ χ = 1`, hence is `𝒪_X(D)` for the zero divisor `D`
+of a nonzero section.  So `Pic^g_{X/k}` is the image of the proper `Hilb^g_{X/k}` in a
+separated `k`-scheme, hence proper (Stacks `03GN`).
+
+(blueprint: `thm-sc-theorem-of-the-base`, properness of `Pic^g`) -/
+theorem isProper_of_representableBy_picardFunctorDegree_genus (P : Over (Spec (.of k)))
+    (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
+    IsProper P.hom :=
+  sorry
+
+/-- **`Pic^g` is smooth of dimension `g`.** A `k`-scheme representing the degree-`g` part
+`Pic^g_{X/k}` of the Picard functor, `g` the genus, is smooth of relative dimension `g` over `k`.
+The subfunctor `F` of the normalized Picard functor is represented by an open subscheme `U` of
+the smooth `g`-dimensional `Hilb^g_{X/k}`, and its classes have degree `g`, so `U` is open in
+`Pic^g_{X/k}`; by the twist lemma the translates of `U` by `k`-points cover `Pic^g_{X/k}`.
+
+(blueprint: `thm-sc-theorem-of-the-base`, smoothness of `Pic^g`) -/
+theorem smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus
+    (P : Over (Spec (.of k)))
+    (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
+    SmoothOfRelativeDimension (arithmeticGenus k X) P.hom :=
+  sorry
+
+/-- Two representing objects of degree components of the Picard functor are isomorphic over
+`k`: both are isomorphic to a representing object of `Pic^0_{X/k}`. -/
+lemma nonempty_iso_of_representableBy_picardFunctorDegree (d d' : ℤ) (P P' : Over (Spec (.of k)))
+    (hP : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy P)
+    (hP' : (picardFunctorDegree (X ↘ Spec (.of k)) d').obj.RepresentableBy P') :
+    Nonempty (P ≅ P') := by
+  obtain ⟨A, -, ⟨hA⟩⟩ := isRepresentable_picardFunctor (X ↘ Spec (.of k))
+  obtain ⟨Pd, -, -, -, -, -, hPd⟩ := exists_decomposition_picardFunctor A hA
+  obtain ⟨h₀⟩ := hPd 0
+  obtain ⟨e⟩ := nonempty_iso_of_representableBy d (Pd 0) P h₀ hP
+  obtain ⟨e'⟩ := nonempty_iso_of_representableBy d' (Pd 0) P' h₀ hP'
+  exact ⟨e.symm ≪≫ e'⟩
+
+/-- A representing object of a degree component `Pic^d_{X/k}` is isomorphic to a representing
+object of `Pic^g_{X/k}`, `g` the genus. -/
+lemma exists_iso_representableBy_picardFunctorDegree_genus (d : ℤ) (P : Over (Spec (.of k)))
+    (hP : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy P) :
+    ∃ Pg : Over (Spec (.of k)), Nonempty
+      ((picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy Pg) ∧
+      Nonempty (P ≅ Pg) := by
+  obtain ⟨A, -, ⟨hA⟩⟩ := isRepresentable_picardFunctor (X ↘ Spec (.of k))
+  obtain ⟨Pd, -, -, -, -, -, hPd⟩ := exists_decomposition_picardFunctor A hA
+  obtain ⟨hg⟩ := hPd (arithmeticGenus k X)
+  exact ⟨_, ⟨hg⟩, nonempty_iso_of_representableBy_picardFunctorDegree d _ P _ hP hg⟩
+
+/-- **The theorem of the base.** Let `X` be a smooth projective curve of genus `g` over a
+separably closed field `k`.  Every degree component `Pic^d_{X/k}` of the Picard scheme is proper
+over `k`: all of them are isomorphic to `Pic^g_{X/k}`, which is proper by
+`AlgebraicGeometry.isProper_of_representableBy_picardFunctorDegree_genus`.
+
+(blueprint: `thm-sc-theorem-of-the-base`) -/
+theorem isProper_of_representableBy_picardFunctorDegree (d : ℤ) (P : Over (Spec (.of k)))
+    (hP : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy P) :
+    IsProper P.hom := by
+  obtain ⟨Pg, ⟨hg⟩, ⟨e⟩⟩ := exists_iso_representableBy_picardFunctorDegree_genus d P hP
+  rw [← Over.w e.hom, MorphismProperty.cancel_left_of_respectsIso (P := @IsProper)]
+  exact isProper_of_representableBy_picardFunctorDegree_genus _ hg
+
+/-- **The theorem of the base, smoothness.** Let `X` be a smooth projective curve of genus `g`
+over a separably closed field `k`.  Every degree component `Pic^d_{X/k}` of the Picard scheme is
+smooth of relative dimension `g` over `k`: all of them are isomorphic to `Pic^g_{X/k}`, which is
+smooth of dimension `g` by
+`AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus`.
+
+(blueprint: `thm-sc-theorem-of-the-base`) -/
+theorem smoothOfRelativeDimension_of_representableBy_picardFunctorDegree (d : ℤ)
+    (P : Over (Spec (.of k)))
+    (hP : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy P) :
+    SmoothOfRelativeDimension (arithmeticGenus k X) P.hom := by
+  obtain ⟨Pg, ⟨hg⟩, ⟨e⟩⟩ := exists_iso_representableBy_picardFunctorDegree_genus d P hP
+  rw [← Over.w e.hom, MorphismProperty.cancel_left_of_respectsIso
+    (P := @SmoothOfRelativeDimension (arithmeticGenus k X))]
+  exact smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus _ hg
+
+/-- **`Pic^g` is geometrically integral.** A `k`-scheme representing the degree-`g` part
+`Pic^g_{X/k}` of the Picard functor, `g` the genus, is geometrically integral over `k`: it is the
+image of the geometrically integral `Hilb^g_{X/k}` under `D ↦ 𝒪_X(D)`, so geometrically
+irreducible, and it is smooth, hence geometrically reduced.
+
+(blueprint: `sk-prop-jacobian`, connectedness) -/
+theorem geometricallyIntegral_of_representableBy_picardFunctorDegree_genus
+    (P : Over (Spec (.of k)))
+    (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
+    GeometricallyIntegral P.hom :=
+  sorry
+
+/-- **Every degree component is geometrically integral.** A `k`-scheme representing a degree
+component `Pic^d_{X/k}` of the Picard functor is geometrically integral over `k`, being isomorphic
+to `Pic^g_{X/k}`; in particular the Jacobian `Pic^0_{X/k}` is connected.
+
+(blueprint: `sk-prop-jacobian`, connectedness) -/
+theorem geometricallyIntegral_of_representableBy_picardFunctorDegree (d : ℤ)
+    (P : Over (Spec (.of k)))
+    (hP : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy P) :
+    GeometricallyIntegral P.hom := by
+  obtain ⟨Pg, ⟨hg⟩, ⟨e⟩⟩ := exists_iso_representableBy_picardFunctorDegree_genus d P hP
+  rw [← Over.w e.hom, MorphismProperty.cancel_left_of_respectsIso (P := @GeometricallyIntegral)]
+  exact geometricallyIntegral_of_representableBy_picardFunctorDegree_genus _ hg
+
 end Decomposition
 
 section TangentSpace
 
-variable (k : Type u) [Field k]
-
-/-- The dual numbers `k[ε] = k[T]/(T²)` over `k`, as a `k`-scheme `Spec k[ε] ⟶ Spec k`. -/
-noncomputable abbrev dualNumbersOver : Over (Spec (.of k)) :=
-  Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k (DualNumber k))))
-
-/-- The `k`-rational point `ε ↦ 0` of `Spec k[ε]`, i.e. the closed immersion
-`Spec k ⟶ Spec k[ε]` induced by the `k`-algebra projection `k[ε] → k`. -/
-noncomputable def dualNumbersZero : 𝟙_ (Over (Spec (.of k))) ⟶ dualNumbersOver k :=
-  Over.homMk (Spec.map (CommRingCat.ofHom (TrivSqZeroExt.fstHom k k k : DualNumber k →+* k))) (by
-    simp only [Over.mk_hom, Over.tensorUnit_hom]
-    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, AlgHom.comp_algebraMap]
-    exact Spec.map_id _)
-
-@[simp]
-lemma dualNumbersZero_left :
-    (dualNumbersZero k).left =
-      Spec.map (CommRingCat.ofHom (TrivSqZeroExt.fstHom k k k : DualNumber k →+* k)) :=
-  rfl
-
-variable {k}
+variable {k : Type u} [Field k]
 
 /-- The **tangent space** of a `k`-scheme `P` at a `k`-rational point `e`, defined through the
 functor of points: it is the fibre over `e` of the restriction map
-`P(k[ε]) → P(k)`, where `k[ε] = k[T]/(T²)` are the dual numbers and the map is induced by
-`ε ↦ 0`.
+`P((Spec k)[ε]) → P(k)`, where `(Spec k)[ε] = Spec k[ε]` is the dual-number thickening
+`AlgebraicGeometry.Scheme.dualNumbersOver (Spec k)` of `Spec k`, `k[ε] = k[T]/(T²)`, and the map
+is induced by the `k`-point `ε ↦ 0` (`AlgebraicGeometry.Scheme.dualNumbersιOver`).
 
 `k`-rational points of `P` are morphisms from the terminal object `𝟙_ (Over (Spec k))` of the
 category of `k`-schemes, so that the unit `η[G]` of a group scheme `G` is directly a point in
@@ -269,51 +361,34 @@ this sense.  Mathlib has no tangent space of a scheme, so this is a genuine defi
 than a reuse. At the unit of a group scheme it is a `k`-vector space, its addition being the
 group law; see `AlgebraicGeometry.tangentSubgroup`. -/
 def tangentSpaceAt (P : Over (Spec (.of k))) (e : 𝟙_ (Over (Spec (.of k))) ⟶ P) : Type u :=
-  {v : dualNumbersOver k ⟶ P // dualNumbersZero k ≫ v = e}
+  {v : Scheme.dualNumbersOver (Spec (.of k)) ⟶ P // Scheme.dualNumbersιOver _ ≫ v = e}
 
 variable (k) in
-/-- The `k`-endomorphism of `Spec k[ε]` induced by the `k`-algebra map `ε ↦ c ε` of the dual
-numbers. It defines the scalar action on tangent spaces. -/
-noncomputable def dualNumbersScale (c : k) : dualNumbersOver k ⟶ dualNumbersOver k :=
-  Over.homMk (Spec.map (CommRingCat.ofHom (DualNumber.scale c : DualNumber k →+* DualNumber k))) (by
-    simp only [Over.mk_hom]
-    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, AlgHom.comp_algebraMap])
-
-@[simp]
-lemma dualNumbersScale_left (c : k) :
-    (dualNumbersScale k c).left =
-      Spec.map (CommRingCat.ofHom (DualNumber.scale c : DualNumber k →+* DualNumber k)) :=
-  rfl
+/-- The `k`-endomorphism `ε ↦ cε` of `(Spec k)[ε]` for `c : k`: the scaling
+`AlgebraicGeometry.Scheme.dualNumbersScaleOver` by `c` viewed as a global section of `𝒪_{Spec k}`
+through `k ≅ Γ(Spec k, 𝒪)`. It defines the scalar action on tangent spaces. -/
+noncomputable abbrev dualNumbersScale (c : k) :
+    Scheme.dualNumbersOver (Spec (.of k)) ⟶ Scheme.dualNumbersOver (Spec (.of k)) :=
+  Scheme.dualNumbersScaleOver (Spec (.of k)) ((Scheme.ΓSpecIso (.of k)).inv.hom c)
 
 @[reassoc (attr := simp)]
-lemma dualNumbersZero_comp_dualNumbersScale (c : k) :
-    dualNumbersZero k ≫ dualNumbersScale k c = dualNumbersZero k := by
-  ext : 1
-  rw [Over.comp_left, dualNumbersScale_left, dualNumbersZero_left, ← Spec.map_comp,
-    ← CommRingCat.ofHom_comp, ← AlgHom.comp_toRingHom, DualNumber.fstHom_comp_scale]
+lemma dualNumbersιOver_comp_dualNumbersScale (c : k) :
+    Scheme.dualNumbersιOver _ ≫ dualNumbersScale k c = Scheme.dualNumbersιOver _ :=
+  Scheme.dualNumbersιOver_comp_scaleOver _ _
 
 @[simp]
 lemma dualNumbersScale_one : dualNumbersScale k 1 = 𝟙 _ := by
-  ext : 1
-  rw [dualNumbersScale_left, DualNumber.scale_one, Over.id_left]
-  exact Spec.map_id _
+  simp [dualNumbersScale]
 
 @[reassoc]
 lemma dualNumbersScale_mul (c d : k) :
     dualNumbersScale k (c * d) = dualNumbersScale k c ≫ dualNumbersScale k d := by
-  ext : 1
-  rw [Over.comp_left, dualNumbersScale_left, dualNumbersScale_left, dualNumbersScale_left,
-    ← Spec.map_comp, ← CommRingCat.ofHom_comp, ← AlgHom.comp_toRingHom, DualNumber.scale_mul]
+  simp [dualNumbersScale, Scheme.dualNumbersScaleOver_mul]
 
-/-- Scaling by `0` factors through the point `ε ↦ 0`, since `ε ↦ 0` factors as
-`k[ε] → k → k[ε]`. -/
+/-- Scaling by `0` factors through the point `ε ↦ 0`. -/
 lemma dualNumbersScale_zero :
-    dualNumbersScale k 0 = CartesianMonoidalCategory.toUnit _ ≫ dualNumbersZero k := by
-  ext : 1
-  rw [Over.comp_left, dualNumbersScale_left, dualNumbersZero_left, Over.toUnit_left]
-  simp only [Over.mk_hom]
-  rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, DualNumber.scale_zero, AlgHom.comp_toRingHom]
-  rfl
+    dualNumbersScale k 0 = CartesianMonoidalCategory.toUnit _ ≫ Scheme.dualNumbersιOver _ := by
+  simp [dualNumbersScale, Scheme.dualNumbersScaleOver_zero]
 
 section GrpObj
 
@@ -323,8 +398,8 @@ variable (P : Over (Spec (.of k))) [GrpObj P]
 
 /-- The tangent space of a group scheme `P` at the unit, as the kernel of the restriction map
 `P(k[ε]) → P(k)` induced by `ε ↦ 0`, a subgroup of the group `P(k[ε])`. -/
-def tangentSubgroup : Subgroup (dualNumbersOver k ⟶ P) where
-  carrier := {v | dualNumbersZero k ≫ v = η[P]}
+def tangentSubgroup : Subgroup (Scheme.dualNumbersOver (Spec (.of k)) ⟶ P) where
+  carrier := {v | Scheme.dualNumbersιOver _ ≫ v = η[P]}
   one_mem' := (MonObj.comp_one _).trans (MonObj.one_eq_one (M := P)).symm
   mul_mem' {v w} (hv : _ = _) (hw : _ = _) := by
     rw [Set.mem_ofPred_eq, MonObj.comp_mul, hv, hw, MonObj.one_eq_one, _root_.one_mul]
@@ -358,7 +433,7 @@ lemma tangentSpaceAt.val_neg (v : tangentSpaceAt P η[P]) : (-v).1 = v.1⁻¹ :=
 precomposed with the endomorphism `ε ↦ c ε` of `Spec k[ε]`. -/
 noncomputable instance : SMul k (tangentSpaceAt P η[P]) where
   smul c v := ⟨dualNumbersScale k c ≫ v.1, by
-    rw [dualNumbersZero_comp_dualNumbersScale_assoc, v.2]⟩
+    rw [dualNumbersιOver_comp_dualNumbersScale_assoc, v.2]⟩
 
 @[simp]
 lemma tangentSpaceAt.val_smul (c : k) (v : tangentSpaceAt P η[P]) :
@@ -416,6 +491,20 @@ of modules, hence no group law on `AlgebraicGeometry.Scheme.Pic`.
 def picardZero : Type (u + 1) :=
   {L : X.Pic // Modules.degree k ((fromSkeleton X.Modules).obj L.val) = 0}
 
+/-- **The `k`-points of `Pic^0_{X/k}`.** For a smooth projective curve `X` over a separably
+closed field `k`, the value of the degree-zero part `Pic^0_{X/k}` of the Picard functor on
+`Spec k` is `Pic^0(X)`.  By the split exact sequence with `T = Spec k` and `Pic (Spec k) = 0`,
+`Pic_{X/k}(k) = Pic X`, and its degree-zero part is `Pic^0(X)`, the fibrewise degree being
+invariant under extension of the base field.
+
+(blueprint: `thm-sc-jacobian-representability`, the `k`-points of `Pic^0_{X/k}`) -/
+theorem nonempty_picardZero_equiv_picardFunctorDegree_zero [IsSepClosed k]
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+    [GeometricallyIntegral (X ↘ Spec (.of k))] :
+    Nonempty (picardZero k X ≃
+      (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.obj (.op (𝟙_ (Over (Spec (.of k)))))) :=
+  sorry
+
 /-- **The Jacobian is an abelian variety.** Let `X` be a smooth projective curve of genus `g`
 over a separably closed field `k`.  Then there is a `k`-scheme `J` carrying a commutative group
 scheme structure which is proper, smooth of relative dimension `g` and geometrically integral
@@ -436,8 +525,16 @@ theorem exists_jacobian [IsSepClosed k]
       IsProper J.hom ∧ SmoothOfRelativeDimension (arithmeticGenus k X) J.hom ∧
         GeometricallyIntegral J.hom ∧
         Nonempty ((picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy J) ∧
-        Nonempty (picardZero k X ≃ (𝟙_ (Over (Spec (.of k))) ⟶ J)) :=
-  sorry
+        Nonempty (picardZero k X ≃ (𝟙_ (Over (Spec (.of k))) ⟶ J)) := by
+  obtain ⟨A, -, ⟨hA⟩⟩ := isRepresentable_picardFunctor (X ↘ Spec (.of k))
+  obtain ⟨Pd, -, -, -, -, -, hPd⟩ := exists_decomposition_picardFunctor A hA
+  obtain ⟨h₀⟩ := hPd 0
+  obtain ⟨e⟩ := nonempty_picardZero_equiv_picardFunctorDegree_zero (k := k) (X := X)
+  exact ⟨Pd 0, (nonempty_commGrpObj_of_representableBy _ h₀).some,
+    isProper_of_representableBy_picardFunctorDegree 0 _ h₀,
+    smoothOfRelativeDimension_of_representableBy_picardFunctorDegree 0 _ h₀,
+    geometricallyIntegral_of_representableBy_picardFunctorDegree 0 _ h₀, ⟨h₀⟩,
+    ⟨e.trans h₀.homEquiv.symm⟩⟩
 
 end Jacobian
 

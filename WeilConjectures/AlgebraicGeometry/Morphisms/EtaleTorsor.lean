@@ -53,6 +53,8 @@ the prose.
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.EtaleTorsor`: an `M`-torsor over a scheme `Y`.
+- `AlgebraicGeometry.Scheme.GaloisCover`: a finite étale Galois cover with group `G`, that is,
+  a finite étale `G`-torsor, for a finite group `G` acting on the left.
 - `AlgebraicGeometry.Scheme.EtaleTorsor.IsIsomorphic` and
   `AlgebraicGeometry.Scheme.EtaleTorsor.setoid`: the isomorphism relation on torsors, and
   the fact that it is an equivalence relation.
@@ -172,5 +174,78 @@ theorem exists_quotientEquivSheafH :
   sorry
 
 end Scheme.EtaleTorsor
+
+section GaloisCover
+
+variable (G : Type (u + 1)) [Group G] [Finite G]
+
+/-- A finite étale Galois cover of a scheme `Y` with group `G`: a finite étale surjective
+`Y`-scheme `P` on which the finite group `G` acts on the left over `Y`, simply transitively,
+that is, such that the morphism `∐_{g ∈ G} P ⟶ P ×_Y P` whose `g`-th component is
+`(g • -, id)` is an isomorphism. In other words, `P` is a finite étale `G`-torsor over `Y`.
+
+This is the notion of a Galois cover with group `G` of the blueprint definition
+`def-sbc-normal-dominant-galois`; as there, the total space is not required to be connected.
+The quotient `P / G ≅ Y` of that definition is a consequence of the torsor condition and is
+not recorded. For an abelian group written additively this is
+`AlgebraicGeometry.Scheme.EtaleTorsor`, see `AlgebraicGeometry.Scheme.EtaleTorsor.toGaloisCover`
+and `AlgebraicGeometry.Scheme.GaloisCover.toEtaleTorsor`. -/
+structure Scheme.GaloisCover (Y : Scheme.{u}) where
+  /-- the total space of the cover -/
+  P : Scheme.{u}
+  /-- the structure morphism to the base -/
+  π : P ⟶ Y
+  [isFinite : IsFinite π]
+  [etale : Etale π]
+  [surjective : Surjective π]
+  /-- the left action of `G` on `P` over `Y` -/
+  smul : G → (P ⟶ P)
+  /-- the action is by morphisms over `Y` -/
+  smul_π (g : G) : smul g ≫ π = π
+  /-- the unit of `G` acts as the identity -/
+  one_smul : smul 1 = 𝟙 P
+  /-- the action is a left action: `(g * h) • x = g • (h • x)` -/
+  mul_smul (g h : G) : smul (g * h) = smul h ≫ smul g
+  /-- the action is simply transitive: `∐_{g ∈ G} P ≅ P ×_Y P` -/
+  isIso_sigmaDesc : IsIso (Sigma.desc
+    fun g : G ↦ pullback.lift (f := π) (g := π) (smul g) (𝟙 P) (by simp [smul_π]))
+
+end GaloisCover
+
+namespace Scheme
+
+variable {M : Type (u + 1)} [AddCommGroup M] [Finite M] {Y : Scheme.{u}}
+
+/-- An `M`-torsor, for `M` a finite abelian group, as a Galois cover with group
+`Multiplicative M`. -/
+@[simps]
+def EtaleTorsor.toGaloisCover (t : EtaleTorsor M Y) : GaloisCover (Multiplicative M) Y where
+  P := t.P
+  π := t.π
+  isFinite := t.isFinite
+  etale := t.etale
+  surjective := t.surjective
+  smul g := t.vadd g.toAdd
+  smul_π g := t.vadd_π _
+  one_smul := t.zero_vadd
+  mul_smul g h := by rw [toAdd_mul, add_comm, t.add_vadd]
+  isIso_sigmaDesc := t.isIso_sigmaDesc
+
+/-- A Galois cover with group `Multiplicative M`, for `M` a finite abelian group, as an
+`M`-torsor. -/
+@[simps]
+def GaloisCover.toEtaleTorsor (t : GaloisCover (Multiplicative M) Y) : EtaleTorsor M Y where
+  P := t.P
+  π := t.π
+  isFinite := t.isFinite
+  etale := t.etale
+  surjective := t.surjective
+  vadd m := t.smul (.ofAdd m)
+  vadd_π m := t.smul_π _
+  zero_vadd := t.one_smul
+  add_vadd m n := by rw [add_comm, ofAdd_add, t.mul_smul]
+  isIso_sigmaDesc := t.isIso_sigmaDesc
+
+end Scheme
 
 end AlgebraicGeometry
