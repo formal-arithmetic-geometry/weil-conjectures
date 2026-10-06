@@ -155,6 +155,12 @@ class IsFiniteLocallyFree (M : SheafOfModules.{u} R) : Prop where
   exists_localGeneratorsData :
     ∃ q : LocalGeneratorsData.{u₁} M, q.IsLocallyFreeData ∧ q.IsFiniteType
 
+/-- A finite locally free sheaf of modules is locally free, hence quasi-coherent. -/
+instance (priority := 100) IsFiniteLocallyFree.isLocallyFree (M : SheafOfModules.{u} R)
+    [h : M.IsFiniteLocallyFree] : M.IsLocallyFree :=
+  have := h.exists_localGeneratorsData.choose_spec.1
+  h.exists_localGeneratorsData.choose.isLocallyFree
+
 variable (R) in
 /-- The finite locally free sheaves of modules, as a property of objects. -/
 abbrev isFiniteLocallyFree : ObjectProperty (SheafOfModules.{u} R) :=

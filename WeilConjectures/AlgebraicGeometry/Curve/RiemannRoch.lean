@@ -12,6 +12,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
@@ -252,14 +253,20 @@ morphism `φ : ℱ ⟶ 𝒢` of finite locally free modules the square
 ```
 commutes. No hypothesis `H⁰(X, 𝒪_X) = k` is needed.
 
-(blueprint: `sk-thm-picard-duality`) -/
+The case `q = 1` is `AlgebraicGeometry.Scheme.nonempty_dual_H_one_iso`, obtained from a finite flat
+morphism `X ⟶ ℙ¹_k` and duality on `ℙ¹_k`; the case `q = 0` is
+`AlgebraicGeometry.Scheme.nonempty_dual_H_zero_iso`, deduced from it by biduality.
+
+(blueprint: `sk-thm-picard-duality`, `thm-sc-serre-duality-curve`) -/
 theorem serreDuality [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] (p q : ℕ) (hpq : p + q = 1) :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
         (Modules.cohomologyFunctor k q).op ⋙ ModuleCat.dualFunctor k ≅
       (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
-        tensorRight (X ↘ Spec (.of k)).relativeDifferentials ⋙ Modules.cohomologyFunctor k p) :=
-  sorry
+        tensorRight (X ↘ Spec (.of k)).relativeDifferentials ⋙ Modules.cohomologyFunctor k p) := by
+  obtain ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩ : p = 0 ∧ q = 1 ∨ p = 1 ∧ q = 0 := by omega
+  · exact nonempty_dual_H_one_iso
+  · exact nonempty_dual_H_zero_iso
 
 /-- **Serre duality in dimension `0`.** Let `X` be smooth and proper of relative dimension `0`
 over `k`, i.e. `X = Spec A` with `A` finite étale over `k`, so that the canonical module is

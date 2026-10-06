@@ -9,7 +9,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 
 /-!
@@ -43,6 +45,8 @@ For an `A`-algebra `B`, apply these to `φ = CommRingCat.ofHom (algebraMap A B)`
 
 - `AlgebraicGeometry.Scheme.Hom.isZero_relativeDifferentials`: `Ω¹_{X/S} = 0` for an open
   immersion `f`; in particular `Ω¹_{X/X} = 0` (`isZero_relativeDifferentials_id`).
+- `AlgebraicGeometry.Scheme.Hom.isInvertible_relativeDifferentials`: `Ω¹_{X/S}` is invertible
+  for `f` smooth of relative dimension one.
 - `AlgebraicGeometry.isIso_relativeDifferentialsSpecTildeHom`: the canonical morphism
   `Ω_{S/R}^~ ⟶ Ω¹_{Spec S / Spec R}` is an isomorphism (currently `sorry`).
 
@@ -133,6 +137,16 @@ variable (X) in
 /-- The sheaf of relative differentials of the identity morphism vanishes: `Ω¹_{X/X} = 0`. -/
 lemma isZero_relativeDifferentials_id : IsZero (𝟙 X : X ⟶ X).relativeDifferentials :=
   isZero_relativeDifferentials _
+
+/-- **The canonical sheaf of a smooth curve.** For `f : X ⟶ S` smooth of relative dimension one,
+the sheaf `Ω¹_{X/S}` is invertible: Zariski-locally `f` is standard smooth, `X = Spec B` with
+`B = R[x₁, …, xₙ₊₁]/(g₁, …, gₙ)`, and `Ω_{B/R}` is free of rank one on the class of `dxᵢ` for
+the coordinate `xᵢ` not involved in the invertible Jacobian minor.
+
+(blueprint: `lem-sc-canonical-sheaf`) -/
+theorem isInvertible_relativeDifferentials [SmoothOfRelativeDimension 1 f] :
+    SheafOfModules.IsInvertible (R := X.ringCatSheaf) f.relativeDifferentials :=
+  sorry
 
 end AlgebraicGeometry.Scheme.Hom
 
