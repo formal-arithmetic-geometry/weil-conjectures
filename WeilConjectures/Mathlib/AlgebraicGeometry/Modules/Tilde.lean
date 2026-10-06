@@ -34,6 +34,8 @@ on the spectrum of a Noetherian ring is detected by finiteness of the global sec
   module over an affine open are flat.
 - `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_restrictFunctor`: restriction along an
   open immersion preserves finite presentation.
+- `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pullback`: pullback along any morphism of
+  schemes preserves quasi-coherence.
 - `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_of_isOpenCover` and
   `isFinitePresentation_of_iSup_opensRange_eq_top`: a module with finite presentations locally on
   an open cover is of finite presentation.
@@ -323,6 +325,32 @@ theorem isFinitePresentation_of_iSup_opensRange_eq_top {X : Scheme.{u}} (M : X.M
     [∀ i, (P i).IsFinite] : M.IsFinitePresentation :=
   isFinitePresentation_of_isOpenCover M (U := fun i ↦ (f i).opensRange) hf
     (fun i ↦ presentationRestrictOpensRange (f i) (P i))
+
+/-- **The pullback of a quasi-coherent module is quasi-coherent.** For `g : X ⟶ Y` and a
+quasi-coherent `𝒪_Y`-module `M`, take presentations of `M` over the members `U i` of an open cover
+of `Y`. Pulling them back along the restrictions `g ∣_ U i`, which preserve colimits and the
+structure sheaf, gives presentations of `g^* M` over the open cover `g ⁻¹ᵁ U i` of `X`. -/
+instance isQuasicoherent_pullback {X Y : Scheme.{u}} (g : X ⟶ Y) (M : Y.Modules)
+    [M.IsQuasicoherent] : ((Modules.pullback g).obj M).IsQuasicoherent := by
+  obtain ⟨ι, U, pres, hU, -⟩ := M.exists_isOpenCover_presentation
+  have (i : ι) : PreservesColimitsOfSize.{u, u} (Modules.pullback (g ∣_ U i)) := inferInstance
+  let P (i : ι) : (((Modules.pullback g).obj M).restrict (g ⁻¹ᵁ U i).ι).Presentation :=
+    SheafOfModules.Presentation.ofIsIso.{u, u, u}
+      ((restrictFunctorIsoPullback _).app _ ≪≫ (Modules.pullbackComp (g ⁻¹ᵁ U i).ι g).app M ≪≫
+        (Modules.pullbackCongr (morphismRestrict_ι g (U i)).symm).app M ≪≫
+        ((Modules.pullbackComp (g ∣_ U i) (U i).ι).symm).app M ≪≫
+        (Modules.pullback (g ∣_ U i)).mapIso ((restrictFunctorIsoPullback _).app M).symm).inv
+      ((pres i).map (Modules.pullback (g ∣_ U i)) (pullbackObjUnitIso _).symm)
+  let σ : SheafOfModules.QuasicoherentData.{u, u, u, u} ((Modules.pullback g).obj M) :=
+    { I := ι
+      X := fun i ↦ g ⁻¹ᵁ U i
+      coversTop := by
+        rw [Opens.coversTop_iff]
+        refine IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ ?_)
+        obtain ⟨i, hi⟩ := hU.exists_mem (g.base x)
+        exact Opens.mem_iSup.mpr ⟨i, hi⟩
+      presentation i := presentationOverOfRestrict (g ⁻¹ᵁ U i) (P i) }
+  exact σ.isQuasicoherent
 
 /-- If the global sections of an `𝒪_{Spec R}`-module are finite over `Γ(Spec R, ⊤)`, they are
 finite over `R`. -/
