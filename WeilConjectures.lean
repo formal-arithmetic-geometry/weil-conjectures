@@ -315,6 +315,7 @@ public import WeilConjectures.FourierTransform.AffineSpace
 public import WeilConjectures.FourierTransform.ArtinSchreier
 public import WeilConjectures.FourierTransform.Defs
 public import WeilConjectures.FourierTransform.Inversion
+public import WeilConjectures.FourierTransform.Perverse
 public import WeilConjectures.FourierTransform.Properties
 public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexRows
@@ -790,6 +791,8 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
+public import WeilConjectures.SixFunctors.Etale.Perverse.Operations
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.AlgClosedExtension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
