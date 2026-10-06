@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
@@ -26,7 +27,8 @@ those `Z ⊆ X_T` such that `T ⟶ S` factors through `V` and `Z ⊆ U_T`:
 * `F_{V,U}` is identified with the Hilbert functor of the morphism of affine schemes
   `U ⟶ V` (`AlgebraicGeometry.hilbertPresheafResLEι`, which uses that `f` is separated), and
   this one is representable by the affine case
-  `AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isAffine`;
+  `AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isAffine`, which embeds `U` into an
+  affine space over `V`;
 * the locus of `T` over which `Z ⊆ U_T` is open
   (`AlgebraicGeometry.Scheme.IdealSheafData.exists_opens_support_comap_subset`);
 * the `F_{V,U}` cover `Hilb^d_{X/S}`: a fibre of `Z ⟶ T` has at most `d` points
@@ -36,8 +38,11 @@ those `Z ⊆ X_T` such that `T ⟶ S` factors through `V` and `Z ⊆ U_T`:
 
 ## Main statements
 
-- `AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isAffine`: the affine case
-  (blueprint `lem-pc-hilb-representable`, Steps 1 and 4).
+- `AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isClosedImmersion`: the closed-immersion
+  claim (blueprint `lem-pc-hilb-representable`, Step 1).
+- `AlgebraicGeometry.isRepresentable_hilbertPresheaf_affineSpace`: the case of an affine space
+  over an affine base (blueprint `lem-pc-hilb-representable`, Step 4).
+- `AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isAffine`: the affine case.
 - `AlgebraicGeometry.isRepresentable_hilbertPresheaf`: representability of `Hilb^d_{X/S}`
   (blueprint `sk-thm-picard-hilb-general`, `lem-pc-hilb-representable`).
 -/
@@ -63,7 +68,7 @@ lemma isSheaf_zariskiTopology_hilbertPresheaf (f : X ⟶ S) (d : ℕ) :
 
 /-- The four conditions defining the Hilbert functor are invariant under precomposition with an
 isomorphism. -/
-lemma isFiniteFlatOfDegree_iso_comp {Z Z' T : Scheme.{u}} (e : Z' ⟶ Z) [IsIso e] (p : Z ⟶ T)
+lemma isFinite_flat_finrank_iso_comp_iff {Z Z' T : Scheme.{u}} (e : Z' ⟶ Z) [IsIso e] (p : Z ⟶ T)
     (d : ℕ) :
     (IsFinite (e ≫ p) ∧ Flat (e ≫ p) ∧ LocallyOfFinitePresentation (e ≫ p) ∧
       ∀ t, (e ≫ p).finrank t = d) ↔
@@ -220,7 +225,7 @@ lemma IsHilbertSubscheme.map_pullbackResLEMap [IsSeparated f] {d : ℕ} {W : Ove
     exact congrArg (J.subschemeι ≫ ·) (pullbackResLEMap_snd f h W)
   unfold IsHilbertSubscheme at hJ ⊢
   rw [← key] at hJ
-  exact (isFiniteFlatOfDegree_iso_comp _ _ d).1 hJ
+  exact (isFinite_flat_finrank_iso_comp_iff _ _ d).1 hJ
 
 lemma IsHilbertSubscheme.comap_pullbackResLEMap {d : ℕ} {W : Over V.toScheme}
     {I : (pullback f ((Over.map V.ι).obj W).hom).IdealSheafData}
@@ -242,7 +247,7 @@ lemma IsHilbertSubscheme.comap_pullbackResLEMap {d : ℕ} {W : Over V.toScheme}
       ← pullback.condition_assoc, pullbackResLEMap_snd]
   unfold IsHilbertSubscheme at hI ⊢
   rw [← key]
-  exact (isFiniteFlatOfDegree_iso_comp _ _ d).2 hI
+  exact (isFinite_flat_finrank_iso_comp_iff _ _ d).2 hI
 
 /-- **`F_{V,U}` is the Hilbert functor of `U ⟶ V`** (blueprint `lem-pc-hilb-representable`,
 Step 3). For opens `V ⊆ S` and `U ⊆ f⁻¹ V`, pushing forward closed subschemes along the open
@@ -313,15 +318,41 @@ lemma exists_hilbertPresheafResLEι_app_eq [IsSeparated f] (d : ℕ) {W : Over V
 
 end ResLE
 
-/-- **The affine claim** (blueprint `lem-pc-hilb-representable`, Steps 1 and 4). For a morphism
-of affine schemes `f : X ⟶ S`, the Hilbert functor `Hilb^d_{X/S}` is representable: by a closed
-subscheme of `Hilb^d` of an affine space over `S`, which is glued from the affine schemes
-representing the subfunctors where `d` given functions form a basis of `𝒪_Z`.
-
-This is Stacks, Proposition 0B9A, in the case where `X` and `S` are affine. -/
-theorem isRepresentable_hilbertPresheaf_of_isAffine (f : X ⟶ S) [IsAffine X] [IsAffine S]
-    (d : ℕ) : (hilbertPresheaf f d).IsRepresentable :=
+/-- **The closed-immersion claim** (blueprint `lem-pc-hilb-representable`, Step 1). For a closed
+immersion `i : X ⟶ Y` and `g : Y ⟶ S`, the functor `Hilb^d_{X/S}` is a closed subfunctor of
+`Hilb^d_{Y/S}`: for `Z ∈ Hilb^d_{Y/S}(T)` there is a largest closed subscheme `T_X ⊆ T` such
+that `T' ⟶ T` factors through `T_X` if and only if `Z_{T'}` lies in `X_{T'}`. In particular,
+if `Hilb^d_{Y/S}` is representable, so is `Hilb^d_{X/S}`, by a closed subscheme. -/
+theorem isRepresentable_hilbertPresheaf_of_isClosedImmersion {Y : Scheme.{u}} (i : X ⟶ Y)
+    [IsClosedImmersion i] (g : Y ⟶ S) (d : ℕ) (hg : (hilbertPresheaf g d).IsRepresentable) :
+    (hilbertPresheaf (i ≫ g) d).IsRepresentable :=
   sorry
+
+/-- **The Hilbert functor of an affine space over an affine base** (blueprint
+`lem-pc-hilb-representable`, Step 4). For an affine scheme `S` and any set `n` of variables,
+`Hilb^d` of the affine space `𝔸(n; S) ⟶ S` is representable. It is glued from the affine
+schemes representing the subfunctors `F_W`, for `W` a set of `d` polynomials, of those `Z` for
+which the images of the elements of `W` form a basis of `𝒪_Z`; these subfunctors are open and
+cover `Hilb^d`. -/
+theorem isRepresentable_hilbertPresheaf_affineSpace (n : Type u) (S : Scheme.{u}) [IsAffine S]
+    (d : ℕ) : (hilbertPresheaf (𝔸(n; S) ↘ S) d).IsRepresentable :=
+  sorry
+
+/-- **The affine claim** (blueprint `lem-pc-hilb-representable`, Steps 1 and 4). For a morphism
+of affine schemes `f : X ⟶ S`, the Hilbert functor `Hilb^d_{X/S}` is representable.
+
+The functions on `X` define a closed immersion of `X` into an affine space over `S`, so this
+follows from the case of affine spaces,
+`AlgebraicGeometry.isRepresentable_hilbertPresheaf_affineSpace`, by the closed-immersion claim
+`AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isClosedImmersion`. -/
+theorem isRepresentable_hilbertPresheaf_of_isAffine (f : X ⟶ S) [IsAffine X] [IsAffine S]
+    (d : ℕ) : (hilbertPresheaf f d).IsRepresentable := by
+  let i : X ⟶ 𝔸(Γ(X, ⊤); S) := AffineSpace.homOfVector f id
+  have : IsClosedImmersion i := .of_surjective_of_isAffine i fun a ↦
+    ⟨AffineSpace.coord S a, AffineSpace.homOfVector_appTop_coord f id a⟩
+  rw [← AffineSpace.homOfVector_over f id]
+  exact isRepresentable_hilbertPresheaf_of_isClosedImmersion i _ d
+    (isRepresentable_hilbertPresheaf_affineSpace _ S d)
 
 /-- **Representability of `Hilb^d`, general case.** Assume that for every point `s` of `S` and
 every finite set of at most `d` points of the fibre `X_s` there is an affine open of `X`
