@@ -79,18 +79,19 @@ namespace DerivedCategory
 
 variable (A : Type u) [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
-  [HasDerivedCategory.{w} A] [Abelian.HasFunctorialFlatResolution A]
+  [HasDerivedCategory.{w} A]
 
 /-- For a monoidal closed Grothendieck abelian category `A` admitting functorial flat
 resolutions, the localization functor `Qh : K(A) ⥤ D(A)` admits a derived monoidal
 structure with respect to quasi-isomorphisms. Consequently `DerivedCategory A` is monoidal,
 with tensor product the derived tensor product `- ⊗ᴸ -`. -/
-instance hasDerivedMonoidalCategory :
+instance hasDerivedMonoidalCategory [Abelian.HasFunctorialFlatResolution A] :
     Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) :=
   sorry
 
 /-- The derived tensor product is additive in each variable. -/
-instance monoidalPreadditive : MonoidalPreadditive (DerivedCategory A) :=
+instance monoidalPreadditive [Abelian.HasFunctorialFlatResolution A] :
+    MonoidalPreadditive (DerivedCategory A) :=
   -- Proof sketch: on K-flat complexes, `K ⊗ᴸ -` is the localization of the tensor product of
   -- complexes, which is additive by `MonoidalPreadditive A`, and `Qh` is additive.
   -- See the TODO in the module docstring.
@@ -98,7 +99,8 @@ instance monoidalPreadditive : MonoidalPreadditive (DerivedCategory A) :=
 
 /-- If the tensor product of `A` is `Λ`-linear in each variable, so is the derived tensor
 product on `D(A)`. -/
-instance monoidalLinear (Λ : Type*) [Ring Λ] [Linear Λ A] [MonoidalLinear Λ A] :
+instance monoidalLinear [Abelian.HasFunctorialFlatResolution A] (Λ : Type*) [Ring Λ] [Linear Λ A]
+    [MonoidalLinear Λ A] :
     MonoidalLinear Λ (DerivedCategory A) :=
   -- Proof sketch: it suffices that `(r • 𝟙 K) ▷ L = r • 𝟙 (K ⊗ᴸ L)` and symmetrically, which
   -- holds on K-flat representatives, where `⊗ᴸ` is the localization of the `Λ`-linear tensor
