@@ -28,11 +28,12 @@ For a morphism of schemes `f : X ⟶ S` and `d : ℕ`, the Hilbert functor `Hilb
 of ideal sheaves, `AlgebraicGeometry.Scheme.IdealSheafData.comap`, along the base-change maps
 `AlgebraicGeometry.baseChangeMap` of the fibre products `X ×[S] T`.
 
-We then state that `Hilb^d_{X/S}` is a sheaf for the fppf topology, that it is representable
-under a hypothesis of "enough affine opens" on the fibres, and, over a field, that the Hilbert
-functor of a smooth proper geometrically integral curve is represented by a smooth proper
-geometrically integral `k`-scheme of dimension `d` carrying a universal effective Cartier
-divisor, together with the addition morphisms between these Hilbert schemes.
+We then state that `Hilb^d_{X/S}` is a sheaf for the fppf topology and, over a field, that the
+Hilbert functor of a smooth proper geometrically integral curve is represented by a smooth
+proper geometrically integral `k`-scheme of dimension `d` carrying a universal effective Cartier
+divisor, together with the addition morphisms between these Hilbert schemes. Representability
+of `Hilb^d_{X/S}` in general is proved in
+`WeilConjectures.AlgebraicGeometry.Hilbert.Representability`.
 
 ## Implementation notes
 
@@ -53,8 +54,6 @@ presentation are `MorphismProperty.IsStableUnderBaseChange` in Mathlib; the inva
   change.
 - `AlgebraicGeometry.isSheaf_hilbertPresheaf`: `Hilb^d_{X/S}` is an fppf sheaf
   (blueprint `sk-cor-picard-hilb-sheaf`).
-- `AlgebraicGeometry.isRepresentable_hilbertPresheaf`: representability of `Hilb^d_{X/S}`
-  (blueprint `sk-thm-picard-hilb-general`).
 - `AlgebraicGeometry.hilbertPresheaf_curve_representable`,
   `AlgebraicGeometry.hilbertPresheaf_curve_points`,
   `AlgebraicGeometry.hilbertPresheaf_curve_add`: the Hilbert schemes of a smooth proper curve
@@ -118,23 +117,6 @@ noncomputable def hilbertPresheaf (f : X ⟶ S) (d : ℕ) : (Over S)ᵒᵖ ⥤ T
 (blueprint: `sk-cor-picard-hilb-sheaf`) -/
 theorem isSheaf_hilbertPresheaf (f : X ⟶ S) (d : ℕ) :
     Presheaf.IsSheaf (Scheme.fppfTopology.over S) (hilbertPresheaf f d) :=
-  sorry
-
-/-- **Representability of `Hilb^d`, general case.** Assume that for every point `s` of `S` and
-every finite set of at most `d` points of the fibre `X_s` there is an affine open of `X`
-containing all of them; this holds for instance when `X ⟶ S` is quasi-projective, or when `X`
-carries an ample invertible module. If moreover `X ⟶ S` is separated, then `Hilb^d_{X/S}` is
-representable by a scheme.
-
-Separatedness cannot be dropped: for the line with doubled origin over a field and `d = 1`,
-every finite set of at most one point lies in an affine open, but `Hilb^1_{X/S}` is not
-representable.
-
-(blueprint: `sk-thm-picard-hilb-general`) -/
-theorem isRepresentable_hilbertPresheaf (f : X ⟶ S) [IsSeparated f] (d : ℕ)
-    (hf : ∀ (s : S) (t : Finset (f.fiber s)), t.card ≤ d →
-      ∃ U : X.affineOpens, ∀ x ∈ t, (f.fiberι s).base x ∈ U.1) :
-    (hilbertPresheaf f d).IsRepresentable :=
   sorry
 
 section Curve

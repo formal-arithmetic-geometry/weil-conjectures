@@ -257,4 +257,11 @@ theorem isAffine_of_isOpenImmersion_of_isPrincipalIdealRing {X : Scheme.{u}}
   have : IsAffine f.opensRange := isAffineOpen_of_isPrincipalIdealRing f.opensRange
   .of_isIso f.isoOpensRange.hom
 
+/-- **Prime avoidance for affine opens.** A finite set of points of an open `O` contained in an
+affine open `U` lies in a basic open `D(r) ⊆ O` of `U`. -/
+theorem IsAffineOpen.exists_basicOpen_le_of_finite {X : Scheme.{u}} {U : X.Opens}
+    (hU : IsAffineOpen U) {O : X.Opens} (hO : O ≤ U) {s : Set X} (hs : s.Finite)
+    (hsO : s ⊆ O) : ∃ r : Γ(X, U), s ⊆ X.basicOpen r ∧ X.basicOpen r ≤ O := by
+  sorry
+
 end AlgebraicGeometry
