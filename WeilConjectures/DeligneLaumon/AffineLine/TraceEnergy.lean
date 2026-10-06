@@ -324,7 +324,7 @@ envelope is `ι`-real (`AlgebraicGeometry.WeilSheaf.isReal_realEnvelope`).
 (blueprint: `def-wf-normalized-real-envelope`) -/
 noncomputable def realEnvelope (F : WeilSheaf k₀ l X) (hF : F.IsLisse) (b : (PadicAlgCl l)ˣ) :
     WeilSheaf k₀ l X :=
-  F.constantTwist b ⊞ (F.constantTwist b).dual (hF.constantTwist b)
+  F.constantTwist b ⊞ (F.constantTwist b).dual (hF.constantTwist (b := b))
 
 /-- The constant twist of a nonzero Weil sheaf is nonzero, the underlying étale sheaf being the
 same. -/
@@ -342,7 +342,7 @@ theorem not_isZero_realEnvelope {F : WeilSheaf k₀ l X} (hF : ¬ Limits.IsZero 
 /-- The envelope of a lisse Weil sheaf is lisse, as a sum of a constant twist and its dual. -/
 theorem IsLisse.realEnvelope {F : WeilSheaf k₀ l X} (hF : F.IsLisse) (b : (PadicAlgCl l)ˣ) :
     (F.realEnvelope hF b).IsLisse :=
-  (hF.constantTwist b).biprod (hF.constantTwist b).dual
+  (hF.constantTwist (b := b)).biprod (hF.constantTwist (b := b)).dual
 
 /-- If `F` is lisse and punctually `ι`-pure of weight `w` and `2 log_q |ι b| = c`, then the
 constant twist `F ⊗ 𝓑_b` is punctually `ι`-pure of weight `w + c`: at a closed point of degree
@@ -550,7 +550,7 @@ theorem l2Weight_eq_of_isPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) {V
     l2Weight_le_of_traceEnergy_le_mul ι _ _ (by norm_num)
       (traceEnergy_realEnvelope_le ι hlisse hpure hb)
   have h4 : (G.constantTwist b).l2Weight ι ≤ 0 := by
-    have := l2Weight_le_of_hasWeightsAtMost ι _ (hlisse.constantTwist b)
+    have := l2Weight_le_of_hasWeightsAtMost ι _ (hlisse.constantTwist (b := b))
       (hpure.constantTwist hc).hasWeightsAtMost
     simpa using this
   have h0 : G.l2Weight ι - w = 0 := h1 ▸ le_antisymm h4 (h2 ▸ h3)

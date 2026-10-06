@@ -119,9 +119,7 @@ theorem nonempty_equiv_stalk_constantTwist (F : WeilSheaf k₀ l X) (b : (PadicA
   sorry
 
 /-- A constant twist of a lisse Weil sheaf is lisse, the underlying étale sheaf being the same. -/
-theorem IsLisse.constantTwist {F : WeilSheaf k₀ l X} (hF : F.IsLisse) (b : (PadicAlgCl l)ˣ) :
-    (F.constantTwist b).IsLisse :=
-  hF
+alias ⟨_, IsLisse.constantTwist⟩ := isLisse_constantTwist
 
 /-- Twisting by `b` and then by `b⁻¹` gives back the Weil sheaf: both twists keep the
 underlying étale sheaf, and the Weil structure `b⁻¹ • b • φ` is `φ`. -/

@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
-public import WeilConjectures.ConstructibleSheaf.Zero
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.WeilSheaf.Category

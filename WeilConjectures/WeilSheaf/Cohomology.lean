@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.ConstructibleSheaf.Zero
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.WeilSheaf.LowerShriek
