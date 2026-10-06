@@ -31,6 +31,8 @@ Multiplication by `n` is written `𝟙 A ^ n`, the `n`-th power of the identity 
   its kernel.
 - `AlgebraicGeometry.isIsogeny_npow_id`, `AlgebraicGeometry.isogenyDegree_npow_id`:
   multiplication by `n` is an isogeny of degree `n ^ (2 * g)`.
+- `AlgebraicGeometry.finrank_npow_id`: multiplication by `n` is finite locally free of rank
+  `n ^ (2 * g)`.
 - `AlgebraicGeometry.isFinite_torsionSubgroupScheme`,
   `AlgebraicGeometry.flat_torsionSubgroupScheme`,
   `AlgebraicGeometry.finrankΓ_torsionSubgroupScheme`: `A[n]` is finite flat of order
@@ -109,9 +111,15 @@ theorem IsIsogeny.finrank_eq (f : A ⟶ B) [IsIsogeny f] (y : B.left) :
 /-- Blueprint `sk-prop-av-isogeny`: The multiplication-by-`n` isogeny.
 
 Let `A` be an abelian variety over `K` and let `0 < n`. Then `[n] : A ⟶ A` is a finite flat
-surjective homomorphism, hence an isogeny. -/
+surjective homomorphism, hence an isogeny.
+
+This is also blueprint `lem-sc-isogeny-facts`. Multiplication by `n` is a homomorphism since `A`
+is commutative (`AlgebraicGeometry.IsAbelianVariety.isCommMonObj`), it is surjective by
+`AlgebraicGeometry.surjective_npow_id`, and its kernel `A[n]` is finite by
+`AlgebraicGeometry.isFinite_torsionSubgroupScheme`. -/
 theorem isIsogeny_npow_id (n : ℕ) (hn : 0 < n) : IsIsogeny (𝟙 A ^ n) :=
-  sorry
+  have := surjective_npow_id A n hn
+  { isFinite_ker := isFinite_torsionSubgroupScheme A n hn }
 
 /-- Blueprint `sk-prop-av-isogeny`: The multiplication-by-`n` isogeny.
 
@@ -132,7 +140,19 @@ theorem flat_torsionSubgroupScheme (n : ℕ) (hn : 0 < n) :
 The `n`-torsion of an abelian variety of dimension `g` has order `n ^ (2 * g)` for `0 < n`. -/
 theorem finrankΓ_torsionSubgroupScheme (n : ℕ) (hn : 0 < n) :
     (torsionSubgroupScheme A n).hom.finrankΓ = n ^ (2 * IsAbelianVariety.dim A) :=
-  sorry
+  isogenyDegree_npow_id n hn
+
+/-- Blueprint `lem-sc-mult-n-finite-flat`: Multiplication by `n` is finite flat of degree
+`n ^ (2 * g)`.
+
+Let `A` be an abelian variety of dimension `g` over `K` and let `0 < n`. Then `[n] : A ⟶ A` is
+finite locally free of rank `n ^ (2 * g)`. Finiteness and flatness are
+`AlgebraicGeometry.isFinite_npow_id` and `AlgebraicGeometry.IsIsogeny.flat`, and the kernel
+`A[n]` has order `n ^ (2 * g)` by `AlgebraicGeometry.finrankΓ_torsionSubgroupScheme`. -/
+theorem finrank_npow_id (n : ℕ) (hn : 0 < n) (y : A.left) :
+    (𝟙 A ^ n).left.finrank y = n ^ (2 * IsAbelianVariety.dim A) := by
+  have := isIsogeny_npow_id (A := A) n hn
+  rw [IsIsogeny.finrank_eq, isogenyDegree_npow_id n hn]
 
 /-- Blueprint `sk-prop-av-divisible`: Surjectivity of multiplication by `n` on points.
 
