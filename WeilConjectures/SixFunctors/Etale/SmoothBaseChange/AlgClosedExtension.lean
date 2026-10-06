@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
@@ -19,6 +20,8 @@ For an extension `k ⊆ k'` of algebraically closed fields, a quasi-compact quas
 ## Main statements
 
 - `AlgebraicGeometry.bijective_cohomologyMap_constantZMod`: the invariance statement.
+- `AlgebraicGeometry.bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension`: the
+  invariance statement for a smooth separated curve.
 -/
 
 @[expose] public section
@@ -60,5 +63,23 @@ theorem bijective_cohomologyMap_constantZMod {k : Type u} [Field k] [IsAlgClosed
   -- the `A` then give the claim. The target of `ρ^q` is the cohomology of the constant sheaf
   -- on `X_{k'}` by `AlgebraicGeometry.Scheme.upperStarConstantSheafIso`.
   sorry
+
+/-- Blueprint `sbc-thm-algebraically-closed-invariance`: Invariance under extension of
+algebraically closed fields.
+
+Let `k ⊆ k'` be algebraically closed fields, let `C` be a smooth separated curve over `k` and
+let `d ≥ 1` be prime to `char k`. For every `q ≥ 0` the pullback map
+`H^q(C_ét, ℤ/d) ⟶ H^q((C_{k'})_ét, ℤ/d)` along the projection `C_{k'} ⟶ C` is bijective.
+
+This is the case of a curve of `AlgebraicGeometry.bijective_cohomologyMap_constantZMod`
+(blueprint `sk-prop-ext-invariance`). -/
+@[stacks 0A5E]
+theorem bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension {k : Type u}
+    [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
+    [SmoothOfRelativeDimension 1 f] [IsSeparated f] [QuasiCompact f] {k' : Type u} [Field k']
+    [IsAlgClosed k'] [Algebra k k'] (d : ℕ) (hd : (d : k) ≠ 0) (q : ℕ) :
+    Function.Bijective (Etale.cohomologyMap
+      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) (C.constantZMod d) q) :=
+  bijective_cohomologyMap_constantZMod f d hd q
 
 end AlgebraicGeometry
