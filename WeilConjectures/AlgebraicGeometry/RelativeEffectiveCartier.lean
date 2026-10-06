@@ -45,6 +45,8 @@ We state the criteria that the Picard framework needs:
   (blueprint `lem-pc-recd-locally-principal`).
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.isFinite_and_locallyOfFinitePresentation`
   (blueprint `lem-pc-cartier-criterion`, `(2) ⇒ (1)` for proper `X/S`).
+- `AlgebraicGeometry.Scheme.IdealSheafData.isInvertible_of_isFinite_of_flat`
+  (blueprint `lem-pc-cartier-criterion`, `(1) ⇒ (2)`).
 - `AlgebraicGeometry.Scheme.IdealSheafData.isRelativeEffectiveCartier_of_isFinite`,
   `AlgebraicGeometry.Scheme.IdealSheafData.isRelativeEffectiveCartier_iff_locallyQuasiFinite`,
   `AlgebraicGeometry.Scheme.IdealSheafData.locallyOfFinitePresentation_of_locallyQuasiFinite`
@@ -98,21 +100,28 @@ theorem IsInvertible.isFinite_and_locallyOfFinitePresentation (π : X ⟶ S)
     IsFinite (J.subschemeι ≫ π) ∧ LocallyOfFinitePresentation (J.subschemeι ≫ π) :=
   sorry
 
-/-- **The Cartier criterion, `(1) ⇒ (2)`.** Let `π : X ⟶ S` be smooth of relative dimension `1`
-and let `D ⊆ X` be a closed subscheme, with ideal `J`, which is finite locally free over `S`:
-`D ⟶ S` is finite, flat and locally of finite presentation. Then `D` is a relative effective
-Cartier divisor on `X/S`.
+/-- **Finite locally free closed subschemes of a smooth curve are divisors.** Let `π : X ⟶ S`
+be smooth of relative dimension `1`, and let `D ⊆ X` be a closed subscheme, with ideal `J`,
+which is finite locally free over `S`: `D ⟶ S` is finite, flat and locally of finite
+presentation. Then `J` is invertible, so `D` is a relative effective Cartier divisor on `X/S`.
 
-The fibres `D_s` are finite over `κ(s)`, so at each of their points the ideal of `D_s` is a
-nonzero power of the maximal ideal of the discrete valuation ring `𝒪_{X_s, x}`; this makes `D_s`
-an effective Cartier divisor, and `lem-pc-recd-locally-principal` concludes.
+(Stacks, Tag 0B9D; blueprint: `lem-pc-cartier-criterion`, the implication `(1) ⇒ (2)`) -/
+theorem isInvertible_of_isFinite_of_flat (π : X ⟶ S) [SmoothOfRelativeDimension 1 π]
+    {J : X.IdealSheafData} (hfin : IsFinite (J.subschemeι ≫ π)) (hflat : Flat (J.subschemeι ≫ π))
+    (hlfp : LocallyOfFinitePresentation (J.subschemeι ≫ π)) : J.IsInvertible :=
+  sorry
+
+/-- **The Cartier criterion, `(1) ⇒ (2)`, for relative divisors.** Let `π : X ⟶ S` be smooth of
+relative dimension `1` and let `D ⊆ X` be a closed subscheme, with ideal `J`, which is finite
+locally free over `S`. Then `D` is a relative effective Cartier divisor on `X/S`: `J` is
+invertible by `isInvertible_of_isFinite_of_flat`, and `D ⟶ S` is flat by hypothesis.
 
 (Stacks, Tag 0B9D; blueprint: `lem-pc-cartier-criterion`, the implication `(1) ⇒ (2)`) -/
 theorem isRelativeEffectiveCartier_of_isFinite (π : X ⟶ S) [SmoothOfRelativeDimension 1 π]
     {J : X.IdealSheafData} [IsFinite (J.subschemeι ≫ π)] [Flat (J.subschemeι ≫ π)]
     [LocallyOfFinitePresentation (J.subschemeι ≫ π)] :
     J.IsRelativeEffectiveCartier π :=
-  sorry
+  ⟨isInvertible_of_isFinite_of_flat π inferInstance inferInstance inferInstance, inferInstance⟩
 
 /-- **The Cartier criterion, `(2) ⇔ (3)`.** Let `π : X ⟶ S` be smooth of relative dimension `1`
 and let `D ⊆ X` be a closed subscheme, with ideal `J`. Then `D` is a relative effective Cartier
@@ -157,11 +166,23 @@ relative effective Cartier divisor on `X'/T`, and its line bundle is the pullbac
 `D`: `𝒪_{X'}(D_T) ≅ g'^* 𝒪_X(D)`.
 
 (Stacks, Tag 056Q; blueprint: `lem-pc-recd-pullback`) -/
+theorem IsRelativeEffectiveCartier.isRelativeEffectiveCartier_comap_of_isPullback {π : X ⟶ S}
+    [Flat π] [LocallyOfFinitePresentation π] {J : X.IdealSheafData}
+    (hJ : J.IsRelativeEffectiveCartier π) {X' T : Scheme.{u}} {g' : X' ⟶ X} {π' : X' ⟶ T}
+    {g : T ⟶ S} (h : IsPullback g' π' π g) : (J.comap g').IsRelativeEffectiveCartier π' :=
+  sorry
+
+/-- **Pullback of relative effective Cartier divisors, with the line bundle.** In the situation
+of `IsRelativeEffectiveCartier.isRelativeEffectiveCartier_comap_of_isPullback`, the base change
+`D_T` is a relative effective Cartier divisor on `X'/T` and `𝒪_{X'}(D_T) ≅ g'^* 𝒪_X(D)`.
+
+(Stacks, Tag 056Q; blueprint: `lem-pc-recd-pullback`) -/
 theorem IsRelativeEffectiveCartier.comap_of_isPullback {π : X ⟶ S} [Flat π]
     [LocallyOfFinitePresentation π] {J : X.IdealSheafData} (hJ : J.IsRelativeEffectiveCartier π)
     {X' T : Scheme.{u}} {g' : X' ⟶ X} {π' : X' ⟶ T} {g : T ⟶ S} (h : IsPullback g' π' π g) :
     (J.comap g').IsRelativeEffectiveCartier π' ∧
-      Nonempty ((J.comap g').toModulesᵛ ≅ (Modules.pullback g').obj J.toModulesᵛ) :=
-  sorry
+      Nonempty ((J.comap g').toModulesᵛ ≅ (Modules.pullback g').obj J.toModulesᵛ) := by
+  have h' := hJ.isRelativeEffectiveCartier_comap_of_isPullback h
+  exact ⟨h', (hJ.1.nonempty_pullback_dual_toModules_iso g' h'.1).map Iso.symm⟩
 
 end AlgebraicGeometry.Scheme.IdealSheafData

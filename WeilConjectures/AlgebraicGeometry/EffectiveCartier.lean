@@ -30,6 +30,9 @@ of a divisor.
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.isInvertible_dual_toModules`: the line
   bundle `𝒪_X(D)` of an effective Cartier divisor is invertible
   (blueprint `lem-pc-divisor-line-bundle-properties`, part 1).
+- `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.nonempty_pullback_dual_toModules_iso`:
+  the line bundle of a divisor commutes with pullback, when the pulled back divisor is still
+  effective Cartier (blueprint `lem-pc-recd-pullback`).
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.nonempty_dual_toModules_comap_iso`: the
   line bundle commutes with flat pullback
   (blueprint `lem-pc-divisor-line-bundle-properties`, part 2).
@@ -55,15 +58,33 @@ theorem IdealSheafData.IsInvertible.isInvertible_dual_toModules {J : X.IdealShea
   -- one, and so is its dual.
   sorry
 
+/-- **The line bundle of a divisor commutes with pullback.** Let `g : Y ⟶ X` and let `D ⊆ X` be
+an effective Cartier divisor, with ideal `J`, whose pullback `D ×_X Y`, with ideal
+`J.comap g = J · 𝒪_Y`, is again an effective Cartier divisor. Then
+`𝒪_Y(D ×_X Y) ≅ g^* 𝒪_X(D)`.
+
+Locally `J = (b)` with `b` a non-zerodivisor and `J.comap g = (g^♯ b)`, and `g^♯ b` is again a
+non-zerodivisor since `J.comap g` is invertible; so `g^* J ⟶ 𝒪_Y` is injective with image
+`J.comap g`, and dualizing the locally free `g^* J ≅ J.comap g` gives the claim.
+
+The hypothesis on `J.comap g` holds for the pullback of a relative effective Cartier divisor
+along a base change, which is how the blueprint states it.
+
+(blueprint: `lem-pc-recd-pullback`) -/
+theorem IdealSheafData.IsInvertible.nonempty_pullback_dual_toModules_iso {Y : Scheme.{u}}
+    (g : Y ⟶ X) {J : X.IdealSheafData} (hJ : J.IsInvertible) (hJ' : (J.comap g).IsInvertible) :
+    Nonempty ((Modules.pullback g).obj J.toModulesᵛ ≅ (J.comap g).toModulesᵛ) :=
+  sorry
+
 /-- **The line bundle of an effective Cartier divisor commutes with flat pullback.** Let `D ⊆ Y`
 be an effective Cartier divisor with invertible ideal `J` and let `g : X ⟶ Y` be flat. The
-ideal of `D ×[Y] X` is the pullback `J.comap g` of `J`, and `𝒪_X(D ×[Y] X) ≅ g^* 𝒪_Y(D)`: the
-pullback of the dual of the invertible module `J.toModules` is the dual of its pullback.
+ideal of `D ×[Y] X` is the pullback `J.comap g` of `J`, which is again invertible, and
+`𝒪_X(D ×[Y] X) ≅ g^* 𝒪_Y(D)`.
 
 (blueprint: `lem-pc-divisor-line-bundle-properties`, part 2) -/
 theorem IdealSheafData.IsInvertible.nonempty_dual_toModules_comap_iso {Y : Scheme.{u}}
     {J : Y.IdealSheafData} (hJ : J.IsInvertible) (g : X ⟶ Y) [Flat g] :
     Nonempty ((J.comap g).toModulesᵛ ≅ (Modules.pullback g).obj J.toModulesᵛ) :=
-  sorry
+  (hJ.nonempty_pullback_dual_toModules_iso g (hJ.comap_of_flat g)).map CategoryTheory.Iso.symm
 
 end AlgebraicGeometry.Scheme
