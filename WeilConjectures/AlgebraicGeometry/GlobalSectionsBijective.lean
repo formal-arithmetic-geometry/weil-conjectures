@@ -76,7 +76,9 @@ theorem GlobalSectionsBijective.of_geometricallyIntegral [IsProper (X ↘ Spec (
   inferInstance
 
 /-- A smooth proper connected scheme over a separably closed field `k` has
-`H⁰(X, 𝒪_X) = k`. -/
+`H⁰(X, 𝒪_X) = k`.
+
+(blueprint: `prop-pc-xk-integral`, part (1)) -/
 theorem GlobalSectionsBijective.of_isSepClosed [IsSepClosed k] [Smooth (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] [ConnectedSpace X] : GlobalSectionsBijective k X :=
   have := GeometricallyConnected.of_isSepClosed (k := k) X

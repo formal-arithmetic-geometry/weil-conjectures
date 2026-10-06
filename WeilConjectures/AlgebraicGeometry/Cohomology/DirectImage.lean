@@ -951,4 +951,29 @@ theorem exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree (hℱ : ℱ.Is
 
 end Coherence
 
+section FieldExtension
+
+variable {k : Type u} [Field k] [X.Over (Spec (.of k))] (K : Type u) [Field K] [Algebra k K]
+
+/-- **Cohomology commutes with base change along a field extension**, dimension form. Let `X` be
+proper of finite presentation over a field `k`, let `K/k` be a field extension and let `ℱ` be a
+coherent `𝒪_X`-module. Then `dim_K H^q(X_K, ℱ_K) = dim_k H^q(X, ℱ)` for the base change
+`X_K = X ×_{Spec k} Spec K` and the pullback `ℱ_K` of `ℱ` to it: this is
+`AlgebraicGeometry.Scheme.Modules.hFiber_pullback_of_isPullback` over the one-point base `Spec k`.
+
+(blueprint: `lem-pc-flat-base-change-cohom`) -/
+theorem finrankH_pullback_fst [IsProper (X ↘ Spec (.of k))]
+    [LocallyOfFinitePresentation (X ↘ Spec (.of k))] (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] [ℱ.IsFinitePresentation] (q : ℕ) :
+    finrankH K ((Modules.pullback (pullback.fst (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj ℱ) q = finrankH k ℱ q := by
+  have : HasInjectiveResolutions X.Modules :=
+    have := isGrothendieckAbelian X
+    inferInstance
+  have h := hFiber_pullback_of_isPullback (X ↘ Spec (.of k)) ℱ
+    (Spec.map (CommRingCat.ofHom (algebraMap k K))) _ _ (IsPullback.of_hasPullback _ _) q default
+  rwa [hFiber_eq_finrankH, hFiber_eq_finrankH] at h
+
+end FieldExtension
+
 end AlgebraicGeometry.Scheme.Modules

@@ -74,7 +74,9 @@ are imposed on `X` here, so for other `X` the value carries no meaning.
 
 For a smooth proper curve `X ↘ Spec k`, Serre duality identifies this with
 `AlgebraicGeometry.Scheme.Hom.genus (X ↘ Spec k) = dim_k H^0(X, Ω¹_{X/k})`; see
-`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`. -/
+`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`.
+
+(blueprint: `def-pc-genus`) -/
 noncomputable def arithmeticGenus : ℕ :=
   Modules.finrankH (X := X) k (SheafOfModules.unit X.ringCatSheaf) 1
 

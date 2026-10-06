@@ -45,6 +45,8 @@ affine charts `standardOpen n S i ≅ 𝔸({j : n // j ≠ i}; S)` are in
 
 ## Main results
 
+- `AlgebraicGeometry.ProjectiveSpace.isProper_of_isClosedImmersion` — a closed subscheme of
+  `ℙ(n; S)` is proper over `S`.
 - `AlgebraicGeometry.ProjectiveSpace.instIsProper` — for a finite index type, the structure
   morphism `ℙ(n; S) ↘ S` is proper.
 - `AlgebraicGeometry.ProjectiveSpace.isPullback_map` — projective space commutes with base
@@ -169,6 +171,15 @@ instance instIsProper [Finite n] : IsProper (ℙ(n; S) ↘ S) := by
   have : IsProper (terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ))) :=
     hP ▸ inferInstance
   exact inferInstanceAs (IsProper (pullback.fst _ _))
+
+/-- **Projective morphisms are proper.** If `f : X ⟶ S` factors as a closed immersion
+`i : X ⟶ ℙ(n; S)` followed by the structure morphism of `ℙ(n; S)`, then `f` is proper: closed
+immersions are proper, `ℙ(n; S) ↘ S` is proper, and properness is stable under composition.
+
+(blueprint: `lem-pc-projective-proper`) -/
+theorem isProper_of_isClosedImmersion [Finite n] {X : Scheme.{u}} {f : X ⟶ S} (i : X ⟶ ℙ(n; S))
+    [IsClosedImmersion i] (h : i ≫ ℙ(n; S) ↘ S = f) : IsProper f :=
+  h ▸ inferInstance
 
 /-- `ℙ(n; S)` is functorial in the base `S`: `map n f` is the unique morphism making
 
