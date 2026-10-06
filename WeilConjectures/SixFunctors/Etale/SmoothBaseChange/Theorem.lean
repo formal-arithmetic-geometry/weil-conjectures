@@ -44,15 +44,23 @@ The proof is the second, shorter proof of the Stacks Project.
   killed by `n` is a sheaf of `Λ/nΛ`-modules
   (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero`), so it suffices to
   prove the base-change property `BC(p, Λ, q)` for a coefficient ring `Λ` in which `n = 0`.
-- *Induction on `q`*: degree zero is `AlgebraicGeometry.Etale.baseChangeProperty_zero_of_smooth`.
-  In degree `q ≥ 1` the property is étale local on `X` and `S`
+- *Reduction to relative dimension one*: the property is étale local on `X` and `S`
   (`AlgebraicGeometry.Etale.BaseChangeProperty.of_etale_cover`); by the étale-local normal
   form `AlgebraicGeometry.Smooth.exists_etale_to_affineSpace`, `X ⟶ S` is locally an étale
   morphism to `𝔸^d_S` followed by the projection, which is the composite of the `d` relative
   lines `𝔸^{k+1}_S ⟶ 𝔸^k_S`; by `AlgebraicGeometry.Etale.BaseChangeProperty.comp` it suffices
   to treat affine smooth morphisms of relative dimension one with affine source
-  (`AlgebraicGeometry.Etale.baseChangeProperty_of_smooth_of_relativeDimension_one`), and for
-  those `AlgebraicGeometry.Etale.BaseChangeProperty.of_sub_one` carries out the induction step.
+  (`AlgebraicGeometry.Etale.baseChangeProperty_of_smooth_of_relativeDimension_one`).
+- *Induction on `q`*: for those,
+  `AlgebraicGeometry.Etale.universalBaseChangeProperty_of_smoothOfRelativeDimension_one` gives
+  the base-change property after every base change, by strong induction on `q` on
+  `AlgebraicGeometry.Etale.UniversalBaseChangeProperty` with step
+  `AlgebraicGeometry.Etale.UniversalBaseChangeProperty.of_forall_lt`, starting from
+  `AlgebraicGeometry.Etale.universalBaseChangeProperty_of_neg` and
+  `AlgebraicGeometry.Etale.universalBaseChangeProperty_zero_of_smooth`. The induction has to
+  run on the universal property, since its step consumes the hypothesis after a preliminary
+  base change; the proof ends by specialising along `𝟙 S` with
+  `AlgebraicGeometry.Etale.UniversalBaseChangeProperty.baseChangeProperty`.
 
 Compare `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`, the proper base change
 theorem, in which the roles of the two legs of the square are exchanged.
@@ -154,24 +162,18 @@ theorem Etale.baseChangeProperty_of_smooth_of_relativeDimension_one (n : ℕ) (q
     (fun x ↦ ⟨x, hx x⟩) f (fun x ↦ (U₂ x).ι ≫ (U₁ x).ι) w hf g e h sq F
 
 /-- The base-change property for smooth morphisms: if `n` vanishes in `Λ` and is invertible on
-`S`, then `BC(p, Λ, q)` holds for every smooth `p : X ⟶ S` and every `q ≥ 0`. By induction on
-`q`, the induction step being `AlgebraicGeometry.Etale.BaseChangeProperty.of_sub_one` after the
-reduction `AlgebraicGeometry.Etale.baseChangeProperty_of_smooth_of_relativeDimension_one`. -/
+`S`, then `BC(p, Λ, q)` holds for every smooth `p : X ⟶ S` and every `q ≥ 0`. After the
+reduction `AlgebraicGeometry.Etale.baseChangeProperty_of_smooth_of_relativeDimension_one` this
+is `AlgebraicGeometry.Etale.universalBaseChangeProperty_of_smoothOfRelativeDimension_one`,
+specialised along `𝟙 S`. -/
 theorem Etale.baseChangeProperty_of_smooth (n : ℕ) (hΛ : (n : Λ) = 0)
     (p : X ⟶ S) [Smooth p] (hn : IsUnit (n : Γ(S, ⊤))) (q : ℕ) :
-    Etale.BaseChangeProperty Λ p q := by
-  induction q generalizing X S with
-  | zero => exact Etale.baseChangeProperty_zero_of_smooth Λ p
-  | succ q ih =>
-    refine Etale.baseChangeProperty_of_smooth_of_relativeDimension_one Λ n _
-      (fun X' S' p' _ _ _ hn' ↦ ?_) p hn
-    have := SmoothOfRelativeDimension.smooth 1 p'
-    have hprev : Etale.BaseChangeProperty Λ p' (((q + 1 : ℕ) : ℤ) - 1) := by
-      rw [show ((q + 1 : ℕ) : ℤ) - 1 = q by omega]
-      intro T Y g e h _ _ sq F
-      exact ih p' hn' g e h sq F
-    intro T Y g e h _ _ sq F
-    exact Etale.BaseChangeProperty.of_sub_one hprev (by omega) n hn' hΛ g e h sq F
+    Etale.BaseChangeProperty Λ p q :=
+  Etale.baseChangeProperty_of_smooth_of_relativeDimension_one Λ n q
+    (fun X' S' p' _ _ _ hn' ↦
+      (Etale.universalBaseChangeProperty_of_smoothOfRelativeDimension_one (p := p') n hn' hΛ
+        q).baseChangeProperty)
+    p hn
 
 /-- Blueprint `sk-thm-smooth-base-change`, `sbc-thm-smooth-base-change`: Smooth base change.
 

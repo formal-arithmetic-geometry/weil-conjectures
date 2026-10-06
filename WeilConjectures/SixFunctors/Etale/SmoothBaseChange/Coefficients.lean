@@ -33,6 +33,9 @@ contains the passage between the two.
 - `AlgebraicGeometry.Etale.isZero_baseChangeSourceFunctor_obj_of_neg`,
   `AlgebraicGeometry.Etale.isZero_baseChangeTargetFunctor_obj_of_neg`: vanishing in negative
   degrees.
+- `AlgebraicGeometry.Etale.baseChangeProperty_of_neg` and
+  `AlgebraicGeometry.Etale.universalBaseChangeProperty_of_neg`: the base-change property, and
+  its universal form, in negative degrees.
 - `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_forall_nsmul_eq_zero`: reduction to
   sheaves killed by an integer invertible on `S`.
 - `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero`: the change of rings
@@ -100,6 +103,21 @@ lemma Etale.isIso_baseChangeHomologyMap_of_neg (sq : IsPullback e h g p) {q : �
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) :=
   ⟨0, (Etale.isZero_baseChangeSourceFunctor_obj_of_neg Λ p g hq F).eq_of_src _ _,
     (Etale.isZero_baseChangeTargetFunctor_obj_of_neg Λ e h hq F).eq_of_src _ _⟩
+
+/-- The base-change property holds in negative degrees for every morphism `p`: the derived
+pushforward of a sheaf placed in degree `0` has no cohomology in negative degrees, so both
+`p⁻¹ R^q g_* F` and `R^q h_* e⁻¹ F` vanish for `q < 0`
+(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_neg`). -/
+theorem Etale.baseChangeProperty_of_neg (p : X ⟶ S) {q : ℤ} (hq : q < 0) :
+    Etale.BaseChangeProperty Λ p q := by
+  intro T Y g e h _ _ sq F
+  exact Etale.isIso_baseChangeHomologyMap_of_neg Λ sq hq F
+
+/-- The base-change property holds universally in negative degrees, by
+`AlgebraicGeometry.Etale.baseChangeProperty_of_neg` applied to every base change of `p`. -/
+theorem Etale.universalBaseChangeProperty_of_neg (p : X ⟶ S) {q : ℤ} (hq : q < 0) :
+    Etale.UniversalBaseChangeProperty Λ p q :=
+  fun _ _ _ _ p' _ ↦ Etale.baseChangeProperty_of_neg Λ p' hq
 
 end Identification
 
