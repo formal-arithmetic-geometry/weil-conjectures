@@ -36,6 +36,8 @@ a finite field `κ` with `[κ : k] = d` admits exactly `d` distinct `k`-embeddin
 
 - `AlgebraicGeometry.Scheme.Hom.specMap_residueFieldAlgebraMap`: the geometric
   characterization of `Hom.residueFieldAlgebraMap`.
+- `AlgebraicGeometry.Scheme.Hom.exists_fieldPoints_base_eq_iff`: a point is the image of a
+  `K`-rational point if and only if its residue field embeds into `K` over `k`.
 - `AlgebraicGeometry.Scheme.Hom.degreeOver_eq_one_of_comp_eq_id`: the image of a section of
   the structure morphism, a `k`-rational point, has degree one.
 - `AlgebraicGeometry.Scheme.Hom.finite_fieldPoints`: a scheme of finite type over a
@@ -63,6 +65,16 @@ theorem Hom.specMap_residueFieldAlgebraMap (f : X.Hom (Spec (.of k))) (x : X) :
     ← Spec.map_residueFieldIso_inv_eq_fromSpecResidueField, ← Spec.map_comp, ← Spec.map_comp,
     Spec.map_inj]
   ext a
+  rfl
+
+/-- The embedding of the base field into the residue field of a point of `X` over `k`,
+for `X` mapping to a `k`-scheme `Y`, is the embedding into the residue field of the image
+point followed by the induced map of residue fields. -/
+theorem Hom.residueFieldAlgebraMap_comp {Y : Scheme.{u}} (g : X ⟶ Y) (f : Y.Hom (Spec (.of k)))
+    (x : X) :
+    (g ≫ f).residueFieldAlgebraMap x =
+      (g.residueFieldMap x).hom.comp (f.residueFieldAlgebraMap (g.base x)) := by
+  simp only [Hom.residueFieldAlgebraMap, Scheme.residueFieldMap_comp, CommRingCat.hom_comp]
   rfl
 
 /-- The degree of a point with finite residue field is positive. -/
@@ -199,6 +211,27 @@ private lemma comp_eq_iff (f : X.Hom (Spec (.of k))) {K : Type u} [Field K] [Alg
       φ.hom.comp (f.residueFieldAlgebraMap x) = algebraMap k K := by
   rw [Category.assoc, ← f.specMap_residueFieldAlgebraMap x, ← Spec.map_comp, Spec.map_inj]
   exact ⟨fun h ↦ congrArg CommRingCat.Hom.hom h, fun h ↦ CommRingCat.hom_ext h⟩
+
+/-- A point `x` of `X` is the image of a `K`-rational point if and only if its residue field
+admits an embedding into `K` compatible with the base field embeddings. -/
+theorem Hom.exists_fieldPoints_base_eq_iff (f : X.Hom (Spec (.of k))) (K : Type u) [Field K]
+    [Algebra k K] (x : X) :
+    (∃ p : f.fieldPoints K, p.1.base default = x) ↔
+      ∃ φ : X.residueField x ⟶ .of K,
+        φ.hom.comp (f.residueFieldAlgebraMap x) = algebraMap k K := by
+  constructor
+  · rintro ⟨p, rfl⟩
+    obtain ⟨⟨y, φ⟩, hyφ⟩ := (SpecToEquivOfField K X).symm.surjective p.1
+    simp only [SpecToEquivOfField_symm_apply] at hyφ
+    have hy : p.1.base default = y := by
+      rw [← hyφ]
+      simp
+    have hp := p.2
+    rw [← hyφ, comp_eq_iff] at hp
+    rw [hy]
+    exact ⟨φ, hp⟩
+  · rintro ⟨φ, hφ⟩
+    exact ⟨⟨Spec.map φ ≫ X.fromSpecResidueField x, (comp_eq_iff f x φ).mpr hφ⟩, by simp⟩
 
 /-- The fiber of the point-embedding correspondence over a point `x`: embeddings of the
 residue field of `x` into `K` compatible with the base field embeddings. -/
