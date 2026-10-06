@@ -130,7 +130,8 @@ theorem hasWeightsAtMost_compactlySupportedCohomology_one (ι : PadicAlgCl l →
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
     (D.directImage.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
   -- Step 1: the transform of `(j_*M)[1]` is a middle extension `(j'_*M')[1]`
-  obtain ⟨D', _, hFT⟩ := exists_middleExtension_fourierTransform ψ hψ D hne
+  obtain ⟨D', _, hFT⟩ := exists_middleExtension_fourierTransform ψ hψ D
+    D.lisse.isIrreducibleLisse hne
   -- Step 2: `M'` is pure of a weight `v ≤ w + 1`
   obtain ⟨v, hv⟩ := exists_isPunctuallyPureOfWeight_of_isFourierPartner ψ ι hψ D D' hne hw hFT
   have hvw : v ≤ w + 1 := le_add_one_of_isFourierPartner ψ ι hψ D D' hne hw hFT hv

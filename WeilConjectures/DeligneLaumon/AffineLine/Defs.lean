@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Simple
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
@@ -41,8 +40,6 @@ than the scaffold it is stated in.
 
 - `AlgebraicGeometry.WeilSheaf.IsGeometricallyConstant`: constancy on the geometric fiber.
 - `AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity`: extension to a lisse sheaf at `∞ ∈ ℙ¹`.
-- `AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse`: a simple object of the category of lisse
-  Weil sheaves.
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen`: a dense open immersion `j : U₀ ↪ 𝔸¹_{k₀}`
   together with a lisse Weil sheaf on `U₀`, with its direct image, its extension by zero, its
   boundary sheaf and its curve perverse middle extension.
@@ -52,7 +49,7 @@ than the scaffold it is stated in.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory
 
 namespace AlgebraicGeometry
 
@@ -103,36 +100,6 @@ def IsUnramifiedAtInfinity (F : WeilSheaf k₀ l U) (j : U ⟶ affineLine k₀) 
         exact (hW ▸ j.mem_opensRange.2 ⟨x, rfl⟩ : j x ∈ ι ⁻¹ᵁ W)))).obj G ≅ F)
 
 end Infinity
-
-section Irreducible
-
-variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-
-/-- A Weil sheaf `F` is *irreducible lisse* if it is lisse and nonzero, and every lisse Weil
-subsheaf of `F` is zero or all of `F`: it is a simple object of the category of lisse Weil
-sheaves, the meaning of "nonzero irreducible lisse Weil sheaf" in the blueprint. On a connected
-normal `X` it says that the representation of the Weil group on the geometric generic stalk is
-irreducible.
-
-This is weaker than simplicity in the category of all Weil sheaves: a nonzero lisse sheaf `M`
-on a curve `U₀` is never simple there, since for a closed point `x` the extension by zero of
-`M|_{U₀ ∖ x}` is a nonzero proper subsheaf. (blueprint: `rem-dl-a1-conventions`) -/
-def IsIrreducibleLisse (F : WeilSheaf k₀ l X) : Prop :=
-  F.IsLisse ∧ ¬ IsZero F ∧
-    ∀ (G : WeilSheaf k₀ l X) (i : G ⟶ F), Mono i → G.IsLisse → IsZero G ∨ IsIso i
-
-/-- A lisse Weil sheaf which is simple in the category of all Weil sheaves is irreducible
-lisse. -/
-theorem IsLisse.isIrreducibleLisse {F : WeilSheaf k₀ l X} (hF : F.IsLisse) [Simple F] :
-    F.IsIrreducibleLisse := by
-  refine ⟨hF, Simple.not_isZero F, fun G i _ _ ↦ ?_⟩
-  by_cases h : i = 0
-  · subst h
-    exact Or.inl (IsZero.of_mono_zero G F)
-  · exact Or.inr ((Simple.mono_isIso_iff_nonzero i).2 h)
-
-end Irreducible
 
 /-- The standing situation of the affine-line estimate: a dense open immersion
 `j : U₀ ↪ 𝔸¹_{k₀}` together with a lisse Weil `ℚ̄_ℓ`-sheaf on `U₀`. Bundling the data avoids

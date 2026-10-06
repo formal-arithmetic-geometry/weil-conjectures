@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.Perverse
-public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
 
 /-!
 # Irreducible middle extensions under the Fourier transform
@@ -45,8 +44,7 @@ and nonexceptionality excludes the punctual case.
   `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isFourierNonexceptional_of_isNonexceptional`.
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.IsFourierPartner`: the relation
   `FT_ψ((j_*M)[1]) ≃ (j'_*M')[1]` between a datum and its transform.
-- `AlgebraicGeometry.exists_isFourierPartner_of_isIrreducibleLisse` and
-  `AlgebraicGeometry.exists_middleExtension_fourierTransform`: the transform of an irreducible
+- `AlgebraicGeometry.exists_middleExtension_fourierTransform`: the transform of an irreducible
   nonexceptional middle extension is a middle extension.
 - `AlgebraicGeometry.isNonexceptional_of_isUnramifiedAtInfinity`: the nonexceptionality test.
 -/
@@ -70,13 +68,6 @@ rank-one sheaf. (blueprint: `sk-p-dl-a1-middle`, `def-a1-constituent-nonexceptio
 def IsNonexceptional {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l U) (ψ : AddChar k₀ (PadicAlgCl l)) : Prop :=
   ∀ a : AlgebraicClosure k₀, ¬ F.HasLinearArtinSchreierConstituent ψ a
-
-/-- A Weil sheaf `F` is *geometrically irreducible* if its underlying étale sheaf on the
-geometric fiber `Ū` is an irreducible local system: for `Ū` connected, the geometric fundamental
-representation `π₁(Ū) → GL(F_η̄)` is irreducible. -/
-def IsGeometricallyIrreducible {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l U) : Prop :=
-  Scheme.IsIrreducibleLocalSystem F.obj.carrier
 
 /-- The middle extension `j_*M` of a lisse sheaf `M` on a dense open `j : U₀ ↪ 𝔸¹` is
 *Fourier-nonexceptional* if after geometric base change it is neither a constant sheaf (up to a
@@ -178,14 +169,27 @@ end WeilSheaf
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable (ψ : AddChar k₀ (PadicAlgCl l))
 
-/-- **The transform of an irreducible nonexceptional middle extension.** If `M` is an
-irreducible lisse Weil sheaf on a dense open `U₀` of the affine line, nonexceptional for a
+/-- **The transform of an irreducible nonexceptional middle extension.** If `M` is a nonzero
+irreducible lisse Weil sheaf on a dense open `U₀` of the affine line and is nonexceptional for a
 nontrivial `ψ`, then there are a dense open `j' : U'₀ ↪ A'₀` of the dual line and an irreducible
-lisse Weil sheaf `M'` on it with `FT_ψ((j_*M)[1]) ≅ (j'_*M')[1]`. The object `(j_*M)[1]` is
-simple in the curve perverse heart, hence so is its transform; a simple perverse object is
-punctual or a middle extension, and the punctual case is excluded by nonexceptionality.
-(blueprint: `prop-a1-fourier-middle-extension`) -/
-theorem exists_isFourierPartner_of_isIrreducibleLisse (hψ : ψ ≠ 1)
+lisse Weil sheaf `M'` on it whose middle extension is the transform:
+
+```
+    U₀ ──j──▶ 𝔸¹              U'₀ ──j'──▶ 𝔸'¹
+     M                          M'
+
+               FT_ψ
+    (j_*M)[1] ──────≃──────▶ (j'_*M')[1]
+```
+Irreducibility is meant among lisse sheaves (`AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse`),
+not simplicity in the category of all Weil sheaves: a nonzero lisse sheaf on a curve is never
+simple there. A lisse `M` with `[Simple M]` is irreducible lisse by
+`AlgebraicGeometry.WeilSheaf.IsLisse.isIrreducibleLisse`.
+
+The object `(j_*M)[1]` is simple in the curve perverse heart, hence so is its transform; a simple
+perverse object is punctual or a middle extension, and the punctual case is excluded by
+nonexceptionality. (blueprint: `sk-p-dl-a1-middle`, `prop-a1-fourier-middle-extension`) -/
+theorem exists_middleExtension_fourierTransform (hψ : ψ ≠ 1)
     (D : WeilSheaf.LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
     (hne : D.sheaf.IsNonexceptional ψ) :
     ∃ D' : WeilSheaf.LisseOnDenseOpen k₀ l, D'.sheaf.IsIrreducibleLisse ∧
@@ -200,41 +204,15 @@ theorem exists_isFourierPartner_of_isIrreducibleLisse (hψ : ψ ≠ 1)
       e).elim
   · exact ⟨D', hD', ⟨e⟩⟩
 
-/--
-If `M` is a nonzero irreducible lisse Weil sheaf on a dense open `U₀` of the affine line and is
-nonexceptional for a nontrivial `ψ`, then there are a dense open `j' : U'₀ ↪ A'₀` of the dual
-line and an irreducible lisse Weil sheaf `M'` on it whose middle extension is the transform:
-
-```
-    U₀ ──j──▶ 𝔸¹              U'₀ ──j'──▶ 𝔸'¹
-     M                          M'
-
-               FT_ψ
-    (j_*M)[1] ──────≃──────▶ (j'_*M')[1]
-```
-The sheaf `M'` is irreducible lisse (`AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse`), not
-simple in the category of all Weil sheaves: a nonzero lisse sheaf on a curve never is. The
-hypothesis `[Simple D.sheaf]` is the convention shared with the other affine-line statements;
-`AlgebraicGeometry.exists_isFourierPartner_of_isIrreducibleLisse` is the statement for an
-irreducible lisse `M`. (blueprint: `sk-p-dl-a1-middle`, `prop-a1-fourier-middle-extension`)
--/
-theorem exists_middleExtension_fourierTransform (hψ : ψ ≠ 1)
-    (D : WeilSheaf.LisseOnDenseOpen k₀ l) [Simple D.sheaf]
-    (hD : D.sheaf.IsNonexceptional ψ) :
-    ∃ D' : WeilSheaf.LisseOnDenseOpen k₀ l, D'.sheaf.IsIrreducibleLisse ∧
-      D.IsFourierPartner ψ D' :=
-  exists_isFourierPartner_of_isIrreducibleLisse ψ hψ D D.lisse.isIrreducibleLisse hD
-
 /-- An irreducible lisse Weil sheaf on a dense open of the affine line which is unramified at
 infinity and not geometrically constant is nonexceptional: the nonzero linear characters are
 excluded by their ramification at infinity, and a geometric constant constituent of an
 irreducible Weil representation forces geometric constancy. Only arithmetic irreducibility is
 used. (blueprint: `sk-p-dl-a1-middle`, `lem-a1-unramified-nonexceptional`) -/
 theorem isNonexceptional_of_isUnramifiedAtInfinity (hψ : ψ ≠ 1)
-    (D : WeilSheaf.LisseOnDenseOpen k₀ l) [Simple D.sheaf] (hinf : D.IsUnramifiedAtInfinity)
-    (hconst : ¬ D.IsGeometricallyConstant) :
+    (D : WeilSheaf.LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
+    (hinf : D.IsUnramifiedAtInfinity) (hconst : ¬ D.IsGeometricallyConstant) :
     D.sheaf.IsNonexceptional ψ := by
-  have hD := D.lisse.isIrreducibleLisse
   intro a ha
   rcases eq_or_ne a 0 with rfl | ha0
   · exact hconst (D.isGeometricallyConstant_of_hasLinearArtinSchreierConstituent_zero ψ hD ha)
