@@ -416,6 +416,23 @@ theorem exists_isFiniteFreeComplex_higherDirectImage (hℱ : ℱ.IsFlatOver f) (
           (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) :=
   sorry
 
+/-- **Finiteness of the cohomology of a proper morphism over a Noetherian affine base.** With
+`f : X ⟶ T` proper, `T` affine with Noetherian ring of global sections `Γ(T, ⊤)` and `ℱ` a coherent
+`𝒪_X`-module, the global sections `Γ(T, R^q f_* ℱ) = H^q(X, ℱ)` of the higher direct image form a
+finite `Γ(T, ⊤)`-module for every `q` [Stacks, Tag 02O6], [EGA III₁, 3.2.1].
+
+This is the affine clause of the blueprint lemma `lem-pc-coherent-hi`; for a general proper `f`
+the blueprint discharges it by the cited classical input (Chow's lemma and the projective case,
+Stacks 02O5/02O6). It is the only input to
+`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage` beyond the formal
+properties of the higher direct images.
+
+(blueprint: `lem-pc-coherent-hi`) -/
+theorem finite_sections_higherDirectImage [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
+    Module.Finite Γ(T, ⊤) Γ((higherDirectImage f q).obj ℱ, ⊤) :=
+  sorry
+
 /-- **Coherence of the higher direct images over a locally Noetherian base.** With
 `f : X ⟶ T` proper, `T` locally Noetherian and `ℱ` a coherent `𝒪_X`-module, the higher direct
 image `R^q f_* ℱ` is a coherent `𝒪_T`-module for every `q` [EGA III₁, 3.2.1],
@@ -435,8 +452,40 @@ killed by `V` and infinite-dimensional over `k`, hence not of finite type over `
 (blueprint: `sk-thm-picard-coherence`) -/
 theorem isFinitePresentation_higherDirectImage [IsLocallyNoetherian T]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
-    ((higherDirectImage f q).obj ℱ).IsFinitePresentation :=
-  sorry
+    ((higherDirectImage f q).obj ℱ).IsFinitePresentation := by
+  have hP (V : T.Opens) (hV : IsAffineOpen V) :
+      ∃ P : (((higherDirectImage f q).obj ℱ).restrict hV.fromSpec).Presentation, P.IsFinite := by
+    have := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
+    have : IsNoetherianRing Γ(Spec Γ(T, V), ⊤) :=
+      isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso Γ(T, V)).commRingCatIsoToRingEquiv.symm
+    have := isGrothendieckAbelian (Limits.pullback f hV.fromSpec)
+    obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ hV.fromSpec _ _
+      (IsPullback.of_hasPullback f hV.fromSpec) q
+    have : ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ).IsFinitePresentation :=
+      (SheafOfModules.isFinitePresentation (Limits.pullback f hV.fromSpec).ringCatSheaf).prop_of_iso
+        ((restrictFunctorIsoPullback _).app ℱ) (isFinitePresentation_restrictFunctor _ ℱ)
+    have : ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ).IsQuasicoherent :=
+      (SheafOfModules.isQuasicoherent (Limits.pullback f hV.fromSpec).ringCatSheaf).prop_of_iso
+        ((restrictFunctorIsoPullback _).app ℱ) (isQuasicoherent_restrictFunctor _ ℱ)
+    have := finite_sections_higherDirectImage (pullback.snd f hV.fromSpec)
+      ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ) q
+    let φ : Γ((higherDirectImage (pullback.snd f hV.fromSpec) q).obj
+        ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ), ⊤) →ₗ[Γ(Spec Γ(T, V), ⊤)]
+        Γ(((higherDirectImage f q).obj ℱ).restrict hV.fromSpec, ⊤) :=
+      { toFun := e.hom.app ⊤, map_add' := map_add _, map_smul' := Hom.app_smul e.hom }
+    have : Module.Finite Γ(Spec Γ(T, V), ⊤)
+        Γ(((higherDirectImage f q).obj ℱ).restrict hV.fromSpec, ⊤) :=
+      Module.Finite.of_surjective φ (ConcreteCategory.bijective_of_isIso (e.hom.app ⊤)).2
+    have := finite_sections_top_of_finite
+      (((higherDirectImage f q).obj ℱ).restrict hV.fromSpec)
+    have := isQuasicoherent_higherDirectImage f ℱ q
+    exact exists_presentation_isFinite _
+  have (V : T.affineOpens) : IsOpenImmersion (IsAffineOpen.fromSpec (U := V.1) V.2) :=
+    IsAffineOpen.isOpenImmersion_fromSpec V.2
+  choose P _ using fun V : T.affineOpens ↦ hP V.1 V.2
+  refine isFinitePresentation_of_iSup_opensRange_eq_top _ _ ?_ P
+  exact (iSup_congr fun V ↦ IsAffineOpen.opensRange_fromSpec V.2).trans
+    (iSup_affineOpens_eq_top T)
 
 /-- **Semicontinuity of the fibre dimension.** With `f : X ⟶ T` proper of finite presentation
 and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the fibre dimension
