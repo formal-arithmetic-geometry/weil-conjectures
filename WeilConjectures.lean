@@ -71,7 +71,6 @@ public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Constructible
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Pullback
 public import WeilConjectures.Convergence
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
