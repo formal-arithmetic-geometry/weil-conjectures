@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.AlgebraicGeometry.Modules.Presheaf
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # Sections of a kernel of `𝒪_X`-modules
@@ -23,6 +24,10 @@ into a computable object.
 ## Main results
 
 - `AlgebraicGeometry.Scheme.Modules.range_map_kernelι`
+
+We also record the naturality of the sections of a morphism of `𝒪_X`-modules
+(`AlgebraicGeometry.Scheme.Modules.Hom.naturality`) and the sections of the restriction of a
+morphism along an open immersion (`AlgebraicGeometry.Scheme.Modules.restrictFunctor_map_app`).
 -/
 
 @[expose] public section
@@ -75,5 +80,18 @@ instance : Mono ((SheafOfModules.evaluation X.ringCatSheaf (op U)).map (kernel.�
 lemma injective_map_kernelι :
     Function.Injective ((SheafOfModules.evaluation X.ringCatSheaf (op U)).map (kernel.ι f)) :=
   (ModuleCat.mono_iff_injective _).mp inferInstance
+
+/-- The sections of a morphism of `𝒪_X`-modules commute with the restriction maps. -/
+@[reassoc]
+lemma Hom.naturality {M N : X.Modules} (φ : M ⟶ N) {V W : X.Opens} (i : V ⟶ W) :
+    M.presheaf.map i.op ≫ φ.app V = φ.app W ≫ N.presheaf.map i.op :=
+  φ.mapPresheaf.naturality i.op
+
+/-- The sections of the restriction of a morphism along an open immersion `g` over `V` are its
+sections over the image of `V`. -/
+lemma restrictFunctor_map_app {Y Z : Scheme.{u}} (g : Y ⟶ Z) [IsOpenImmersion g]
+    {M N : Z.Modules} (φ : M ⟶ N) (V : Y.Opens) :
+    ((restrictFunctor g).map φ).app V = φ.app (g ''ᵁ V) :=
+  rfl
 
 end AlgebraicGeometry.Scheme.Modules
