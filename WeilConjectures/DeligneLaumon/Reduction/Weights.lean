@@ -93,7 +93,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 ```
 
 whose successive quotients `coker φᵢ` are punctually `ι`-pure of some weight at most `w`
-(blueprint: `sk-d-dl-general-weights`). -/
+(blueprint: `sk-d-dl-general-weights`, `def-weil-punctual-weights`). -/
 def WeilSheaf.IsMixedOfWeightsAtMost (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (w : ℝ) :
     Prop :=
   ∃ (n : ℕ) (G : Fin (n + 1) → WeilSheaf k₀ l X)
