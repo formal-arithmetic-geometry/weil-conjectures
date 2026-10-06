@@ -32,6 +32,8 @@ representation, which Mathlib does not have; it is what the rank `N_γ` and the 
 
 ## Main statements
 
+- `Representation.isIrreducible_iff`: `ρ` is irreducible if and only if `V` is nonzero and its
+  only invariant subspaces are `0` and `V` (blueprint: `def-wf-simple-module`).
 - `Subrepresentation.isIrreducible_subquotient_iff`: the subquotient `M ⧸ N` is irreducible if
   and only if `M` covers `N`.
 - `Representation.IsConstituent.exists_covBy`: a constituent is equivalent to the subquotient of
@@ -202,5 +204,31 @@ theorem IsConstituent.exists_covBy (hσ : σ.IsConstituent ρ) :
     Equiv.ofAsModuleLinearEquiv (e.trans (M.subquotientAsModuleLinearEquiv N).symm)
   exact ⟨N, M, (Subrepresentation.isIrreducible_subquotient_iff hNM).1
     (E.isIrreducible_iff.1 hirr), ⟨E⟩⟩
+
+end Representation
+
+namespace Representation
+
+variable {k G V : Type*} [Field k] [Monoid G] [AddCommGroup V] [Module k V]
+
+/-- A representation is irreducible if and only if `V` is nonzero and its only invariant
+subspaces are `0` and `V`. (blueprint: `def-wf-simple-module`) -/
+theorem isIrreducible_iff {ρ : Representation k G V} :
+    ρ.IsIrreducible ↔
+      Nontrivial V ∧ ∀ U : Submodule k V, (∀ g, ∀ v ∈ U, ρ g v ∈ U) → U = ⊥ ∨ U = ⊤ := by
+  constructor
+  · intro h
+    refine ⟨not_subsingleton_iff_nontrivial.1 fun _ ↦ h.bot_ne_top ?_, fun U hU ↦ ?_⟩
+    · ext x
+      simp [Subsingleton.elim x 0]
+    · exact (IsSimpleOrder.eq_bot_or_eq_top (⟨U, fun g v hv ↦ hU g v hv⟩ :
+        Subrepresentation ρ)).imp (congrArg Subrepresentation.toSubmodule)
+        (congrArg Subrepresentation.toSubmodule)
+  · rintro ⟨hV, h⟩
+    have : Nontrivial (Subrepresentation ρ) :=
+      ⟨⊥, ⊤, fun e ↦ bot_ne_top (congrArg Subrepresentation.toSubmodule e)⟩
+    exact ⟨fun U ↦ (h U.toSubmodule fun g v hv ↦ U.apply_mem_toSubmodule g hv).imp
+      (fun e ↦ Subrepresentation.toSubmodule_injective e)
+      (fun e ↦ Subrepresentation.toSubmodule_injective e)⟩
 
 end Representation
