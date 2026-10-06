@@ -53,6 +53,8 @@ resolutions when `g^*` preserves flat sheaves, so they form a left derivability 
   with `CategoryTheory.Functor.leftDerived₂NatTrans`.
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorNatIso g`: it is a natural isomorphism,
   with components `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso g K M`.
+- `AlgebraicGeometry.Etale.derivedTensorRightPullback g`: tensoring with a complex pulled
+  back along `g`, `N ↦ (K ↦ K ⊗ᴸ g^* N)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_unit`: `Lg^* Λ_Y ≅ Λ_Z`.
 - `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_left` and
   `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_right`: `K ⊗ᴸ M` vanishes
@@ -347,6 +349,14 @@ lemma leftDerivedUpperStarTensorIso_hom
   rfl
 
 end
+
+/-- Tensoring with a complex pulled back along `g : Z ⟶ Y`, as a functor of the complex
+downstairs: `N ↦ (K ↦ K ⊗ᴸ g^* N)`. -/
+noncomputable def derivedTensorRightPullback :
+    DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
+      DerivedCategory (Sheaf Z.smallEtaleTopology A) ⥤
+        DerivedCategory (Sheaf Z.smallEtaleTopology A) :=
+  D((g)^*[A]) ⋙ derivedTensorRightFunctor A Z
 
 /-- The derived pullback preserves the unit, `Lg^* Λ_Y ≅ Λ_Z`. This is the existence of the unit
 comparison asked for in the TODO above. -/
