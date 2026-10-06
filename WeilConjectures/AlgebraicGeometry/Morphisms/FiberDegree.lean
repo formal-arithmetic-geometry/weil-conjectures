@@ -9,6 +9,9 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Limits
+public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiberDegree
 
 /-!
@@ -24,6 +27,8 @@ of its ring of global sections.
   of `Z` as an `R`-algebra.
 - `AlgebraicGeometry.Scheme.Hom.finrankΓ`: the `R`-dimension of that algebra. For a finite
   group scheme over a field this is its order.
+- `AlgebraicGeometry.Scheme.Hom.overHomEquivAlgHom`: for `Z` affine over `Spec R`, the points
+  `Spec L ⟶ Z` over `Spec R` are the `R`-algebra homomorphisms `Γ(Z, ⊤) →ₐ[R] L`.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree`: the degree of the fibre of an affine morphism
   at a point.
 
@@ -38,6 +43,8 @@ of its ring of global sections.
   whose fibre degrees vanish has empty source.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree_of_isCompl`: the fibre degree is additive in
   complementary open (and closed) subschemes of the source.
+- `AlgebraicGeometry.Scheme.Hom.exists_overIso_sigma_of_isSepClosed`: the fibre of a finite
+  étale morphism over a separably closed point is a finite disjoint union of copies of the point.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree_SpecMap`: comparison with the ring-theoretic
   `Ideal.fiberDegree`.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree_morphismRestrict`: compatibility with restriction
@@ -141,6 +148,119 @@ lemma Scheme.Hom.nonempty_algEquiv_tensorProduct_Γ_of_isPullback :
 end BaseChange
 
 end ΓAlgebra
+
+section Points
+
+variable {Z : Scheme.{u}} {R : CommRingCat.{u}}
+
+/-- A morphism `Spec L ⟶ Z` to an affine scheme is `Spec` of its action on global sections. -/
+lemma Scheme.Spec_map_appTop_comp_ΓSpecIso_hom {L : CommRingCat.{u}} [IsAffine Z]
+    (v : Spec L ⟶ Z) : Spec.map (v.appTop ≫ (Scheme.ΓSpecIso L).hom) = v ≫ Z.isoSpec.hom := by
+  rw [← Scheme.isoSpec_hom_naturality, Scheme.isoSpec_Spec_hom, Spec.map_comp]
+
+/-- A morphism from an affine scheme to `Spec R` is `Spec` of its action on global sections. -/
+lemma Scheme.Hom.isoSpec_inv_comp [IsAffine Z] (h : Z ⟶ Spec R) :
+    Z.isoSpec.inv ≫ h = Spec.map ((Scheme.ΓSpecIso R).inv ≫ h.appTop) := by
+  rw [Iso.inv_comp_eq, Spec.map_comp, ← Category.assoc, Scheme.isoSpec_hom_naturality,
+    Category.assoc, Scheme.isoSpec_Spec_hom, ← Spec.map_comp, Iso.inv_hom_id, Spec.map_id,
+    Category.comp_id]
+
+/-- For `h : Z ⟶ Spec R` with `Z` affine and an `R`-algebra `L`, the morphisms `Spec L ⟶ Z`
+over `Spec R` are the `R`-algebra homomorphisms `Γ(Z, ⊤) →ₐ[R] L`. -/
+noncomputable def Scheme.Hom.overHomEquivAlgHom (h : Z ⟶ Spec R) [IsAffine Z] (L : Type u)
+    [CommRing L] [Algebra R L] :
+    letI := h.ΓAlgebra
+    (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R L))) ⟶ Over.mk h) ≃
+      (Γ(Z, ⊤) →ₐ[R] L) :=
+  letI := h.ΓAlgebra
+  { toFun u :=
+      { toRingHom := (u.left.appTop ≫ (Scheme.ΓSpecIso (.of L)).hom).hom
+        commutes' r := by
+          have hu : u.left ≫ h = Spec.map (CommRingCat.ofHom (algebraMap R L)) := Over.w u
+          change ((Scheme.ΓSpecIso R).inv ≫ h.appTop ≫ u.left.appTop ≫
+            (Scheme.ΓSpecIso (.of L)).hom).hom r = _
+          rw [← Scheme.Hom.comp_appTop_assoc, hu, Scheme.ΓSpecIso_naturality]
+          exact congrArg (algebraMap R L) (Iso.inv_hom_id_apply (Scheme.ΓSpecIso R) r) }
+    invFun g := Over.homMk (Spec.map (CommRingCat.ofHom g.toRingHom) ≫ Z.isoSpec.inv) (by
+      simp only [Over.mk_left, Over.mk_hom, Category.assoc, h.isoSpec_inv_comp, ← Spec.map_comp]
+      congr 1
+      ext r
+      exact g.commutes r)
+    left_inv u := by
+      ext1
+      change Spec.map _ ≫ Z.isoSpec.inv = u.left
+      rw [Iso.comp_inv_eq]
+      exact Scheme.Spec_map_appTop_comp_ΓSpecIso_hom (Z := Z) u.left
+    right_inv g := by
+      ext1 x
+      have := Scheme.Spec_map_appTop_comp_ΓSpecIso_hom
+        (Spec.map (CommRingCat.ofHom g.toRingHom) ≫ Z.isoSpec.inv)
+      rw [Category.assoc, Iso.inv_hom_id, Category.comp_id] at this
+      exact congr($(Spec.map_injective this).hom x) }
+
+/-- The bijection `Scheme.Hom.overHomEquivAlgHom` is natural in the algebra `L`. -/
+lemma Scheme.Hom.overHomEquivAlgHom_comp (h : Z ⟶ Spec R) [IsAffine Z] {L L' : Type u}
+    [CommRing L] [Algebra R L] [CommRing L'] [Algebra R L'] [Algebra L L']
+    [IsScalarTower R L L']
+    (v : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R L'))) ⟶
+      Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R L))))
+    (hv : v.left = Spec.map (CommRingCat.ofHom (algebraMap L L')))
+    (u : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R L))) ⟶ Over.mk h) :
+    letI := h.ΓAlgebra
+    h.overHomEquivAlgHom L' (v ≫ u) =
+      (IsScalarTower.toAlgHom R L L').comp (h.overHomEquivAlgHom L u) := by
+  let := h.ΓAlgebra
+  ext x
+  change ((v.left ≫ u.left).appTop ≫ (Scheme.ΓSpecIso (.of L')).hom).hom x = _
+  rw [hv, Scheme.Hom.comp_appTop, Category.assoc, Scheme.ΓSpecIso_naturality]
+  rfl
+
+/-- If `Z` is affine and étale over a field `K`, then `Γ(Z, ⊤)` is an étale `K`-algebra. -/
+lemma Scheme.Hom.etale_ΓAlgebra {K : Type u} [Field K] (h : Z ⟶ Spec (.of K)) [IsAffine Z]
+    [Etale h] :
+    letI := h.ΓAlgebra
+    Algebra.Etale K Γ(Z, ⊤) := by
+  let := h.ΓAlgebra
+  have h' := HasRingHomProperty.iff_of_isAffine (P := @Etale) (f := h) |>.mp inferInstance
+  refine RingHom.etale_algebraMap.mp ?_
+  rw [h.algebraMap_ΓAlgebra, CommRingCat.hom_comp, RingHom.Etale.respectsIso.cancel_left_isIso]
+  exact h'
+
+end Points
+
+section GeometricFiber
+
+/-- Blueprint `lem-galois-geometric-fibre`: the geometric fibre of a finite étale cover.
+
+Let `f : P ⟶ Y` be finite étale and `y : Spec k ⟶ Y` a point with `k` separably closed. Then
+the fibre `P ×_Y Spec k` is, as a scheme over `Spec k`, a finite disjoint union of copies of
+`Spec k`, the number of copies being the `k`-dimension of its ring of global sections. -/
+theorem Scheme.Hom.exists_overIso_sigma_of_isSepClosed {P Y : Scheme.{u}} (f : P ⟶ Y)
+    [IsFinite f] [Etale f] {k : Type u} [Field k] [IsSepClosed k] (y : Spec (.of k) ⟶ Y) :
+    ∃ (ι : Type u) (_ : Finite ι), Nat.card ι = (pullback.snd f y).finrankΓ ∧
+      Nonempty (Over.mk (pullback.snd f y) ≅
+        Over.mk (Sigma.desc fun _ : ι ↦ 𝟙 (Spec (.of k)))) := by
+  set h := pullback.snd f y
+  have : IsAffine (pullback f y) := isAffine_of_isAffineHom h
+  let := h.ΓAlgebra
+  have := h.etale_ΓAlgebra
+  let A := Γ(pullback f y, ⊤)
+  have := Algebra.Etale.finite_primeSpectrum k A
+  let e := Algebra.FormallyEtale.equivPiOfIsSepClosed k A
+  have : IsIso (CommRingCat.ofHom e.symm.toRingHom) :=
+    e.symm.toRingEquiv.toCommRingCatIso.isIso_hom
+  refine ⟨PrimeSpectrum A, inferInstance,
+    (Algebra.Etale.finrank_eq_natCard_primeSpectrum k A).symm, ⟨Over.isoMk
+      ((pullback f y).isoSpec ≪≫ asIso (Spec.map (CommRingCat.ofHom e.symm.toRingHom)) ≪≫
+        (asIso (sigmaSpec fun _ : PrimeSpectrum A ↦ CommRingCat.of k)).symm) ?_⟩⟩
+  simp only [Over.mk_left, Over.mk_hom, Iso.trans_hom, asIso_hom, Iso.symm_hom, asIso_inv,
+    Category.assoc, ← sigmaSpec_comp_Spec_map_algebraMap, IsIso.inv_hom_id_assoc]
+  rw [← Spec.map_comp, ← Iso.eq_inv_comp, h.isoSpec_inv_comp]
+  congr 1
+  ext r
+  exact e.symm.commutes r
+
+end GeometricFiber
 
 section FiberDegree
 
