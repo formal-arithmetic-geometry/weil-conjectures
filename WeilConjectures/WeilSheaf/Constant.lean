@@ -31,6 +31,8 @@ zero.
 
 - `AlgebraicGeometry.WeilSheaf.isLisse_adicConstant`: the constant Weil sheaf is lisse.
 - `AlgebraicGeometry.WeilSheaf.not_isZero_adicConstant`: it is nonzero on a nonempty `X`.
+- `AlgebraicGeometry.WeilComplex.not_isZero_toComplex_adicConstant`: so is the Weil complex
+  `ℚ̄_ℓ[0]`.
 -/
 
 @[expose] public section
@@ -95,5 +97,13 @@ theorem WeilSheaf.not_isZero_adicConstant [Nonempty X] :
   have := Scheme.Hom.nonempty_geometricFiber k₀ X
   rw [WeilSheaf.isZero_iff_isZero_carrier]
   exact not_isZero_adicConstantSheaf l _
+
+/-- **Non-degeneracy of Weil complexes.** The constant Weil sheaf `ℚ̄_ℓ` placed in degree zero is
+a nonzero Weil complex on a nonempty `k₀`-scheme: its cohomology sheaf `𝓗⁰` is `ℚ̄_ℓ`. -/
+theorem WeilComplex.not_isZero_toComplex_adicConstant [Nonempty X] :
+    ¬ IsZero (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)) := fun h ↦
+  WeilSheaf.not_isZero_adicConstant k₀ l X
+    (((WeilComplex.homologySheaf 0).map_isZero h).of_iso
+      (WeilSheaf.toComplexCompHomologySheafIso.app _).symm)
 
 end AlgebraicGeometry
