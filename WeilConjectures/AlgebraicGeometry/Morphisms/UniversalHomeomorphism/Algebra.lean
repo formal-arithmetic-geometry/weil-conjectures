@@ -132,4 +132,28 @@ lemma of_subalgebra (B₀ : Subalgebra A B) : Algebra.IsUniversalHomeomorphism A
 
 end Algebra.IsUniversalHomeomorphism
 
+/-- A purely inseparable extension of fields `L/K` is a universal homeomorphism: `Spec L ⟶ Spec K`
+is integral, surjective onto the point `Spec K`, and universally injective, since two field
+points `Spec Ω ⟶ Spec L` over `Spec K` are given by two embeddings `L ⟶ Ω` which agree on `K`,
+hence agree. -/
+instance _root_.Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable (K L : Type u) [Field K]
+    [Field L] [Algebra K L] [IsPurelyInseparable K L] : Algebra.IsUniversalHomeomorphism K L where
+  isUniversalHomeomorphism := by
+    let f := Spec.map (CommRingCat.ofHom (algebraMap K L))
+    have h1 : IsIntegralHom f := IsIntegralHom.SpecMap_iff.mpr
+      ((algebraMap_isIntegral_iff (R := K) (A := L)).mpr inferInstance)
+    have h2 : Surjective f := ⟨fun x ↦ ⟨IsLocalRing.closedPoint L, Subsingleton.elim _ _⟩⟩
+    have h3 : UniversallyInjective f := by
+      refine ((tfae_universallyInjective f).out 1 0).mp ?_
+      intro Ω _ g₁ g₂ hg
+      rw [← Spec.map_preimage g₁, ← Spec.map_preimage g₂] at hg ⊢
+      simp only [f, ← Spec.map_comp] at hg
+      have h := Spec.map_injective hg
+      congr 1
+      ext x
+      exact congr($(IsPurelyInseparable.injective_comp_algebraMap K L Ω
+        (a₁ := (Spec.preimage g₁).hom) (a₂ := (Spec.preimage g₂).hom)
+        (congrArg CommRingCat.Hom.hom h)) x)
+    exact { }
+
 end AlgebraicGeometry

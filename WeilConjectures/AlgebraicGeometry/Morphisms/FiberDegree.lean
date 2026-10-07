@@ -33,6 +33,9 @@ of its ring of global sections.
   `Spec L ⟶ Z` over `Spec R` are the `R`-algebra homomorphisms `Γ(Z, ⊤) →ₐ[R] L`.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree`: the degree of the fibre of an affine morphism
   at a point.
+- `AlgebraicGeometry.Scheme.Hom.IsFiniteLocallyFree` and
+  `AlgebraicGeometry.Scheme.Hom.IsFiniteLocallyFreeOfDegree`: finite locally free morphisms, and
+  those of constant fibre degree `d`.
 
 ## Main statements
 
@@ -103,6 +106,15 @@ lemma Scheme.Hom.finrankΓ_eq_of_iso {Z Z' : Scheme.{u}} {R R' : CommRingCat.{u}
     e.inv.appTop.hom.comp ((ΓSpecIso R).inv ≫ h.appTop).hom
   rw [← CommRingCat.hom_comp, ← CommRingCat.hom_comp, Category.assoc, ← Scheme.Hom.comp_appTop, he',
     Scheme.Hom.comp_appTop, ← ΓSpecIso_inv_naturality_assoc]
+
+/-- The spectrum of a field `k` has `dim_k Γ(Spec k, 𝒪) = 1`. -/
+lemma Scheme.Hom.finrankΓ_id {k : Type u} [Field k] : Hom.finrankΓ (𝟙 (Spec (.of k))) = 1 := by
+  let := Hom.ΓAlgebra (𝟙 (Spec (.of k)))
+  have hb : Function.Bijective (algebraMap (CommRingCat.of k) Γ(Spec (.of k), ⊤)) := by
+    rw [Hom.algebraMap_ΓAlgebra, Hom.id_appTop, Category.comp_id]
+    exact ConcreteCategory.bijective_of_isIso _
+  exact (AlgEquiv.ofBijective (Algebra.ofId (CommRingCat.of k) _) hb).toLinearEquiv.finrank_eq.symm
+    |>.trans (Module.finrank_self k)
 
 lemma Scheme.Hom.appLE_top_top {Y X : Scheme.{u}} (f : Y ⟶ X) (h : (⊤ : Y.Opens) ≤ f ⁻¹ᵁ ⊤) :
     f.appLE ⊤ ⊤ h = f.appTop :=
@@ -651,5 +663,27 @@ theorem Scheme.Hom.finrank_eq_of_fiberDegree_eq (h : ∀ y, f.fiberDegree y = n)
     fun y ↦ (Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback _ _) y).trans (h _)).2 y
 
 end FlatOfFiberDegree
+
+section FiniteLocallyFree
+
+variable {X S : Scheme.{u}}
+
+/-- A morphism of schemes `f : X ⟶ S` is **finite locally free** if it is finite, flat and
+locally of finite presentation.
+
+(blueprint: `def-pc-finite-locally-free`) -/
+class Scheme.Hom.IsFiniteLocallyFree (f : X ⟶ S) : Prop
+    extends IsFinite f, Flat f, LocallyOfFinitePresentation f
+
+/-- A morphism of schemes `f : X ⟶ S` is **finite locally free of degree `d`** if it is finite
+locally free and every fibre `X_s` has degree `d`: `dim_{κ(s)} Γ(X_s, 𝒪_{X_s}) = d` for every point
+`s` of `S` (`AlgebraicGeometry.Scheme.Hom.fiberDegree`).
+
+(blueprint: `def-pc-finite-locally-free`) -/
+class Scheme.Hom.IsFiniteLocallyFreeOfDegree (f : X ⟶ S) (d : ℕ) : Prop
+    extends f.IsFiniteLocallyFree where
+  fiberDegree_eq (s : S) : f.fiberDegree s = d
+
+end FiniteLocallyFree
 
 end AlgebraicGeometry

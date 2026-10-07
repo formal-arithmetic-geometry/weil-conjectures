@@ -47,6 +47,7 @@ affine charts `standardOpen n S i ≅ 𝔸({j : n // j ≠ i}; S)` are in
 
 - `AlgebraicGeometry.ProjectiveSpace.instIsProper` — for a finite index type, the structure
   morphism `ℙ(n; S) ↘ S` is proper.
+- `AlgebraicGeometry.ProjectiveSpace.instIsEmpty` — `ℙ(n; S)` is empty if `n` is.
 - `AlgebraicGeometry.ProjectiveSpace.isPullback_map` — projective space commutes with base
   change: for `g : X ⟶ S`, the scheme `ℙ(n; X)` is the base change of `ℙ(n; S)` along `g`.
 
@@ -159,7 +160,11 @@ lemma isPullback_over_toProjInt :
   IsPullback.of_hasPullback _ _
 
 /-- **`ℙ(n; S)` is proper over `S`**: for a finite index type `n`, the structure morphism
-`ℙ(n; S) ↘ S` is proper, being a base change of the proper morphism `ℙⁿ_ℤ ⟶ Spec ℤ`. -/
+`ℙ(n; S) ↘ S` is proper, being a base change of the proper morphism `ℙⁿ_ℤ ⟶ Spec ℤ`.
+
+Together with the instances for closed immersions and composites, `inferInstance` shows that
+`i ≫ ℙ(n; S) ↘ S` is proper for any closed immersion `i : X ⟶ ℙ(n; S)`: projective morphisms
+are proper (blueprint: `lem-pc-projective-proper`). -/
 instance instIsProper [Finite n] : IsProper (ℙ(n; S) ↘ S) := by
   have hZ : terminal.from (Spec (.of (ULift.{u} ℤ))) =
       (specULiftZIsTerminal.uniqueUpToIso terminalIsTerminal).hom := terminal.hom_ext _ _
@@ -169,6 +174,20 @@ instance instIsProper [Finite n] : IsProper (ℙ(n; S) ↘ S) := by
   have : IsProper (terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ))) :=
     hP ▸ inferInstance
   exact inferInstanceAs (IsProper (pullback.fst _ _))
+
+attribute [local instance] MvPolynomial.gradedAlgebra in
+/-- **Projective space without homogeneous coordinates is empty**: if `n` is empty, the standard
+opens `D₊(Tᵢ)`, which cover `ℙⁿ_ℤ`, form an empty family. -/
+instance instIsEmpty [IsEmpty n] : IsEmpty ℙ(n; S) := by
+  have h := Proj.iSup_basicOpen_eq_top' (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ))
+    MvPolynomial.X (fun i ↦ ⟨1, MvPolynomial.isHomogeneous_X _ i⟩)
+    (MvPolynomial.adjoin_range_X_eq_top n _)
+  rw [iSup_of_empty] at h
+  refine ⟨fun x ↦ ?_⟩
+  have : (toProjInt n S).base x ∈ (⊤ : (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)).Opens) :=
+    trivial
+  rw [← h] at this
+  exact this
 
 /-- `ℙ(n; S)` is functorial in the base `S`: `map n f` is the unique morphism making
 

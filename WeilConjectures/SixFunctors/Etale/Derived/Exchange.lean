@@ -11,10 +11,12 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 
 /-!
-# Compact-support base change and the projection formula
+# Compact-support base change, the projection formula and finite reduction
 
 The two theorems of the six-functor formalism attached to `Rf_!` that the purity chapter
 consumes: compact-support base change for a cartesian square, and the projection formula.
+Alongside them, the compatibilities of `Rf_!`, `Lf^*` and `Rf_*` with the reduction
+`K ↦ K ⊗ᴸ (Λ/J)` of the coefficients modulo an ideal `J`.
 
 ## Implementation notes
 
@@ -45,7 +47,8 @@ The exchange `Ex_*` for `Rf_*` does already exist in this repository, as
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite`
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`
-- `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`
+- `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`,
+  `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerStar`
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_leftDerivedUpperStar`
 -/
 
@@ -193,6 +196,43 @@ theorem nonempty_iso_reductionModIdeal_leftDerivedUpperStar (J : Ideal Λ) :
   sorry
 
 end Projection
+
+section LowerStar
+
+/-- Used in blueprint `sk-lem-finite`.
+
+**`Rf_*` commutes with reduction modulo a principal ideal.** For `f : X ⟶ Y` arbitrary and a
+principal ideal `J` of a domain `Λ`, the square
+
+```
+  D(X_ét, Λ) ---Rf_*---> D(Y_ét, Λ)
+      |                      |
+  – ⊗ᴸ (Λ/J)_X           – ⊗ᴸ (Λ/J)_Y
+      ↓                      ↓
+  D(X_ét, Λ) ---Rf_*---> D(Y_ét, Λ)
+```
+
+commutes up to isomorphism:
+
+`R(f)_* ⋙ reductionModIdeal Λ Y J ≅ reductionModIdeal Λ X J ⋙ R(f)_*`.
+
+The hypotheses only serve to make `Λ/J` a perfect `Λ`-module, which is all the proof uses:
+for `J = (π)` with `π ≠ 0`, the module `Λ/J` is the cone of `π : Λ → Λ`, and for `J = 0` it
+is `Λ`. This is the reduction `𝒪_E → 𝒪_E/𝔪_Eⁿ` that carries `sk-lem-finite` from the finite
+stages to the integral stage `𝒪_E`, and the input of
+`AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerStar`. -/
+theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar (f : X ⟶ Y) [IsDomain Λ]
+    (J : Ideal Λ) (hJ : J.IsPrincipal) :
+    Nonempty (R((f)_*[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ Y J ≅
+      reductionModIdeal Λ X J ⋙ R((f)_*[ModuleCat.{u + 1} Λ])) :=
+  -- Proof sketch: for `J = (π)` with `π ≠ 0`, `π` is a nonzerodivisor, so the constant
+  -- complex `(Λ/J)_Z` is the cone of `π : Λ_Z → Λ_Z` and `– ⊗ᴸ (Λ/J)_Z` is the cone of
+  -- multiplication by `π`, naturally on `D(Z_ét, Λ)`. The triangulated functor `Rf_*` is
+  -- `Λ`-linear, so it commutes with multiplication by `π` and hence with its cone. For
+  -- `J = 0` both reductions are isomorphic to the identity.
+  sorry
+
+end LowerStar
 
 end Etale
 

@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Data.Nat.Factorization.Induction
+public import Mathlib.Data.ZMod.Basic
 public import Mathlib.Algebra.Module.Torsion.Basic
 public import Mathlib.FieldTheory.Finiteness
 public import Mathlib.GroupTheory.Divisible
@@ -22,6 +24,8 @@ the structural input that makes the Tate module of an abelian variety a free `�
 ## Main statements
 
 - `AddSubgroup.nonempty_addEquiv_torsionBy_of_natCard_eq`: `D[ℓ ^ n] ≃+ (Fin r → ZMod (ℓ ^ n))`.
+- `AddSubgroup.nonempty_addEquiv_torsionBy_of_forall_prime`: if `|D[ℓ]| = ℓ ^ r` for every
+  prime `ℓ ∣ n`, then `D[n] ≃+ (Fin r → ZMod n)`.
 
 ## Implementation notes
 
@@ -46,7 +50,7 @@ coefficients", i.e. integer relations among the `e i` have coefficients divisibl
 every element killed by `ℓ` is an integer combination of the `e i`. If `ℓ ^ k • z i = e i`,
 then integer relations among the `z i` have coefficients divisible by `ℓ ^ (k + 1)`, and every
 element killed by `ℓ ^ (k + 1)` is an integer combination of the `z i`. -/
-private theorem sum_zsmul_dvd_and_exists_of_pow_zsmul_eq (ℓ : ℤ) (e : ι → D)
+theorem sum_zsmul_dvd_and_exists_of_pow_zsmul_eq (ℓ : ℤ) (e : ι → D)
     (he : ∀ c : ι → ℤ, ∑ i, c i • e i = 0 → ∀ i, ℓ ∣ c i)
     (he' : ∀ x : D, ℓ • x = 0 → ∃ c : ι → ℤ, x = ∑ i, c i • e i) (k : ℕ) (z : ι → D)
     (hz : ∀ i, ℓ ^ k • z i = e i) :
@@ -77,16 +81,15 @@ private theorem sum_zsmul_dvd_and_exists_of_pow_zsmul_eq (ℓ : ℤ) (e : ι →
 
 end
 
-/-- Blueprint `sk-prop-av-divisible-structure`: The torsion of a divisible group.
-
-This is also the blueprint lemma `lem-sc-divisible-group-structure`.
-
-Let `D` be a divisible abelian group, let `ℓ` be a prime and suppose that the `ℓ`-torsion of
-`D` is finite of order `ℓ ^ r`. Then for every `n` the `ℓ ^ n`-torsion of `D` is isomorphic
-to `(ℤ / ℓ ^ n) ^ r`. -/
-theorem nonempty_addEquiv_torsionBy_of_natCard_eq (D : Type*) [AddCommGroup D]
-    [DivisibleBy D ℤ] (ℓ : ℕ) [Fact ℓ.Prime] (r : ℕ) (hr : Nat.card D[(ℓ : ℤ)] = ℓ ^ r) (n : ℕ) :
-    Nonempty (D[((ℓ : ℤ) ^ n)] ≃+ (Fin r → ZMod (ℓ ^ n))) := by
+/-- If the `ℓ`-torsion of an abelian group `D` has order `ℓ ^ r`, then it has an "integral
+basis": a family `e : Fin r → D` of `ℓ`-torsion elements such that integer relations among the
+`e i` have coefficients divisible by `ℓ`, and every element killed by `ℓ` is an integer
+combination of the `e i`. -/
+theorem exists_basis_torsionBy (D : Type*) [AddCommGroup D] (ℓ : ℕ) [Fact ℓ.Prime] (r : ℕ)
+    (hr : Nat.card D[(ℓ : ℤ)] = ℓ ^ r) :
+    ∃ e : Fin r → D, (∀ i, (ℓ : ℤ) • e i = 0) ∧
+      (∀ c : Fin r → ℤ, ∑ i, c i • e i = 0 → ∀ i, (ℓ : ℤ) ∣ c i) ∧
+      ∀ x : D, (ℓ : ℤ) • x = 0 → ∃ c : Fin r → ℤ, x = ∑ i, c i • e i := by
   have hℓ : ℓ.Prime := Fact.out
   -- an `𝔽_ℓ`-basis `e` of `D[ℓ]`
   let _ : Module (ZMod ℓ) D[(ℓ : ℤ)] := torsionBy.zmodModule
@@ -113,6 +116,20 @@ theorem nonempty_addEquiv_torsionBy_of_natCard_eq (D : Type*) [AddCommGroup D]
     refine Finset.sum_congr rfl fun i _ ↦ ?_
     conv_lhs => rw [← ZMod.intCast_zmod_cast (b.repr ⟨x, hx⟩ i), Int.cast_smul_eq_zsmul]
     rfl
+  exact ⟨e, fun i ↦ (Submodule.mem_torsionBy_iff _ _).1 (b i).2, he, he'⟩
+
+/-- Blueprint `sk-prop-av-divisible-structure`: The torsion of a divisible group.
+
+This is also the blueprint lemma `lem-sc-divisible-group-structure`.
+
+Let `D` be a divisible abelian group, let `ℓ` be a prime and suppose that the `ℓ`-torsion of
+`D` is finite of order `ℓ ^ r`. Then for every `n` the `ℓ ^ n`-torsion of `D` is isomorphic
+to `(ℤ / ℓ ^ n) ^ r`. -/
+theorem nonempty_addEquiv_torsionBy_of_natCard_eq (D : Type*) [AddCommGroup D]
+    [DivisibleBy D ℤ] (ℓ : ℕ) [Fact ℓ.Prime] (r : ℕ) (hr : Nat.card D[(ℓ : ℤ)] = ℓ ^ r) (n : ℕ) :
+    Nonempty (D[((ℓ : ℤ) ^ n)] ≃+ (Fin r → ZMod (ℓ ^ n))) := by
+  have hℓ : ℓ.Prime := Fact.out
+  obtain ⟨e, he₀, he, he'⟩ := exists_basis_torsionBy D ℓ r hr
   cases n with
   | zero =>
     rw [pow_zero, pow_zero]
@@ -135,7 +152,7 @@ theorem nonempty_addEquiv_torsionBy_of_natCard_eq (D : Type*) [AddCommGroup D]
       refine (Submodule.mem_torsionBy_iff _ _).2 ?_
       push_cast
       rw [pow_succ', mul_smul, hy]
-      exact (b i).2
+      exact (Submodule.mem_torsionBy_iff _ _).2 (he₀ i)
     let f := Fintype.linearCombination (ZMod (ℓ ^ (m + 1))) fun i ↦
       (⟨y i, hyN i⟩ : D[((ℓ ^ (m + 1) : ℕ) : ℤ)])
     have hf : ∀ c : Fin r → ℤ, (f fun i ↦ (c i : ZMod (ℓ ^ (m + 1))) : D) = ∑ i, c i • y i := by
@@ -156,5 +173,88 @@ theorem nonempty_addEquiv_torsionBy_of_natCard_eq (D : Type*) [AddCommGroup D]
       obtain ⟨c, rfl⟩ := hsurj x hx'
       exact ⟨fun i ↦ c i, Subtype.ext (hf c)⟩
     exact ⟨(AddEquiv.ofBijective f.toAddMonoidHom ⟨hf_inj, hf_surj⟩).symm⟩
+
+/-- For coprime `a` and `b`, the `a * b`-torsion of an abelian group is the product of its
+`a`-torsion and its `b`-torsion, via `x ↦ (b • x, a • x)`. -/
+theorem nonempty_addEquiv_torsionBy_mul_prod (D : Type*) [AddCommGroup D] {a b : ℕ}
+    (hab : a.Coprime b) :
+    Nonempty (D[((a * b : ℕ) : ℤ)] ≃+ D[(a : ℤ)] × D[(b : ℤ)]) := by
+  obtain ⟨u, v, huv⟩ := Nat.isCoprime_iff_coprime.2 hab
+  let f : D[((a * b : ℕ) : ℤ)] →+ D[(a : ℤ)] × D[(b : ℤ)] :=
+    { toFun x := (⟨(b : ℤ) • x.1, by
+          have := (Submodule.mem_torsionBy_iff _ _).1 x.2
+          refine (Submodule.mem_torsionBy_iff _ _).2 ?_
+          rw [smul_smul, ← this]
+          push_cast
+          ring_nf⟩,
+        ⟨(a : ℤ) • x.1, by
+          have := (Submodule.mem_torsionBy_iff _ _).1 x.2
+          refine (Submodule.mem_torsionBy_iff _ _).2 ?_
+          rw [smul_smul, ← this]
+          push_cast
+          ring_nf⟩)
+      map_zero' := by ext <;> simp
+      map_add' x y := by ext <;> simp }
+  refine ⟨AddEquiv.ofBijective f ⟨(injective_iff_map_eq_zero f).2 fun x hx ↦ ?_, ?_⟩⟩
+  · have h₁ : (b : ℤ) • (x : D) = 0 := congrArg (fun y ↦ (y.1 : D)) hx
+    have h₂ : (a : ℤ) • (x : D) = 0 := congrArg (fun y ↦ (y.2 : D)) hx
+    refine Subtype.ext ?_
+    rw [ZeroMemClass.coe_zero, ← one_smul ℤ (x : D), ← huv, add_smul, mul_smul, mul_smul, h₁, h₂,
+      smul_zero, smul_zero, add_zero]
+  · rintro ⟨y, z⟩
+    have hy := (Submodule.mem_torsionBy_iff _ _).1 y.2
+    have hz := (Submodule.mem_torsionBy_iff _ _).1 z.2
+    refine ⟨⟨v • (y : D) + u • (z : D), (Submodule.mem_torsionBy_iff _ _).2 ?_⟩, ?_⟩
+    · push_cast
+      rw [smul_add, smul_smul, smul_smul, show (a : ℤ) * b * v = b * v * a by ring,
+        show (a : ℤ) * b * u = a * u * b by ring, mul_smul, mul_smul (a * u), hy, hz, smul_zero,
+        smul_zero, add_zero]
+    · have hy' : (y : D) = (v * b) • (y : D) := by
+        conv_lhs => rw [← one_smul ℤ (y : D), ← huv]
+        rw [add_smul, mul_smul u, hy, smul_zero, zero_add]
+      have hz' : (z : D) = (u * a) • (z : D) := by
+        conv_lhs => rw [← one_smul ℤ (z : D), ← huv]
+        rw [add_smul, mul_smul v, hz, smul_zero, add_zero]
+      ext
+      · change (b : ℤ) • (v • (y : D) + u • (z : D)) = y
+        rw [smul_add, smul_smul, smul_smul, mul_comm (b : ℤ) u, mul_smul u, hz, smul_zero,
+          add_zero, mul_comm, ← hy']
+      · change (a : ℤ) • (v • (y : D) + u • (z : D)) = z
+        rw [smul_add, smul_smul, smul_smul, mul_comm (a : ℤ) v, mul_smul v, hy, smul_zero,
+          zero_add, mul_comm, ← hz']
+
+/-- The Chinese remainder step of blueprint `sk-prop-av-ntorsion-etale`.
+
+Let `D` be a divisible abelian group and suppose that for every prime `ℓ` dividing `n ≠ 0` the
+`ℓ`-torsion of `D` has order `ℓ ^ r`. Then the `n`-torsion of `D` is isomorphic to
+`(ℤ / n) ^ r`: for prime powers this is
+`AddSubgroup.nonempty_addEquiv_torsionBy_of_natCard_eq`, and the general case follows by the
+Chinese remainder theorem. -/
+theorem nonempty_addEquiv_torsionBy_of_forall_prime (D : Type*) [AddCommGroup D]
+    [DivisibleBy D ℤ] (r : ℕ) {n : ℕ} (hn : n ≠ 0)
+    (h : ∀ ℓ : ℕ, ℓ.Prime → ℓ ∣ n → Nat.card D[(ℓ : ℤ)] = ℓ ^ r) :
+    Nonempty (D[(n : ℤ)] ≃+ (Fin r → ZMod n)) := by
+  induction n using Nat.recOnPosPrimePosCoprime with
+  | prime_pow ℓ e hℓ he =>
+    have : Fact ℓ.Prime := ⟨hℓ⟩
+    push_cast
+    exact nonempty_addEquiv_torsionBy_of_natCard_eq D ℓ r (h ℓ hℓ (dvd_pow_self ℓ he.ne')) e
+  | zero => exact absurd rfl hn
+  | one =>
+    have : Subsingleton D[((1 : ℕ) : ℤ)] := ⟨fun x y ↦ Subtype.ext <| by
+      have hx := (Submodule.mem_torsionBy_iff _ _).1 x.2
+      have hy := (Submodule.mem_torsionBy_iff _ _).1 y.2
+      simp only [Nat.cast_one, one_smul] at hx hy
+      rw [hx, hy]⟩
+    exact ⟨AddEquiv.ofBijective (0 : D[((1 : ℕ) : ℤ)] →+ (Fin r → ZMod 1))
+      ⟨fun _ _ _ ↦ Subsingleton.elim _ _, fun _ ↦ ⟨0, Subsingleton.elim _ _⟩⟩⟩
+  | coprime a b ha hb hab iha ihb =>
+    obtain ⟨ea⟩ := iha (by omega) fun ℓ hℓ hd ↦ h ℓ hℓ (hd.mul_right b)
+    obtain ⟨eb⟩ := ihb (by omega) fun ℓ hℓ hd ↦ h ℓ hℓ (hd.mul_left a)
+    obtain ⟨e⟩ := nonempty_addEquiv_torsionBy_mul_prod D hab
+    let arrow : (Fin r → ZMod a) × (Fin r → ZMod b) ≃+ (Fin r → ZMod a × ZMod b) :=
+      { (Equiv.arrowProdEquivProdArrow _ _ _).symm with map_add' := fun _ _ ↦ rfl }
+    exact ⟨e.trans ((ea.prodCongr eb).trans (arrow.trans
+      (AddEquiv.piCongrRight fun _ ↦ (ZMod.chineseRemainder hab).toAddEquiv).symm))⟩
 
 end AddSubgroup

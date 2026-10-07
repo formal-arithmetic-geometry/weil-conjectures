@@ -7,10 +7,12 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Field.ULift
+public import Mathlib.CategoryTheory.Simple
 public import Mathlib.NumberTheory.Padics.Complex
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.Endofunctor.Shift
+public import WeilConjectures.ConstructibleSheaf.Biproduct
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
@@ -47,6 +49,8 @@ and both notions pull back along morphisms of `k₀`-schemes (`WeilSheaf.upperSt
 - `AlgebraicGeometry.WeilSheaf.frobeniusPowIso`: the iterated Weil structure
   `φ_m : (Fr_Xᵐ)^* F ≅ F`.
 - `AlgebraicGeometry.WeilSheaf.IsLisse`: the underlying sheaf is locally constant.
+- `AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse`: a simple object of the category of lisse
+  Weil sheaves.
 - `AlgebraicGeometry.WeilSheaf.upperStar` and `AlgebraicGeometry.WeilComplex.upperStar`.
 
 ## Implementation notes
@@ -239,17 +243,16 @@ finite locally constant, being constructible. -/
 def IsLisse (F : WeilSheaf k₀ l X) : Prop :=
   Scheme.IsLocallyConstantSheaf F.obj.carrier
 
-/-- A biproduct of lisse Weil sheaves is lisse: its underlying étale sheaf is the direct sum
-of two locally constant sheaves (`AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.biprod`). -/
+/-- A direct sum of lisse Weil sheaves is lisse: the underlying étale sheaf of `F ⊞ G` is the
+direct sum of those of `F` and `G`. -/
 theorem IsLisse.biprod {F G : WeilSheaf k₀ l X} (hF : F.IsLisse) (hG : G.IsLisse) :
     (F ⊞ G).IsLisse := by
-  let Φ := (WeilSheaf.objectProperty k₀ l X).ι ⋙ IsoAlgebra.forget _
-  have := preservesBinaryBiproducts_of_preservesBiproducts Φ
+  let Φ := ObjectProperty.ι (objectProperty k₀ l X) ⋙ IsoAlgebra.forget (frobeniusPullback k₀ l X)
   have : Scheme.IsLocallyConstantSheaf (Φ.obj F) := hF
   have : Scheme.IsLocallyConstantSheaf (Φ.obj G) := hG
   have := Scheme.IsLocallyConstantSheaf.biprod (Φ.obj F) (Φ.obj G)
-  exact Scheme.IsLocallyConstantSheaf.of_iso
-    (Φ.mapBiprod (C := (WeilSheaf.objectProperty k₀ l X).FullSubcategory) F G).symm
+  have : PreservesBinaryBiproducts Φ := preservesBinaryBiproducts_of_preservesBiproducts _
+  exact Scheme.IsLocallyConstantSheaf.of_iso (Φ.mapBiprod F G).symm
 
 /-- A Weil sheaf is zero if and only if its underlying étale sheaf is: the forgetful functor is
 additive, and a morphism of Weil sheaves is determined by the underlying morphism of sheaves. -/
@@ -261,6 +264,35 @@ theorem isZero_iff_isZero_carrier {F : WeilSheaf k₀ l X} : IsZero F ↔ IsZero
       Algebra.Hom.ext <| h.eq_of_src _ _⟩,
     fun _ ↦ ⟨⟨0⟩, fun _ ↦ ObjectProperty.hom_ext _ <| ObjectProperty.hom_ext _ <|
       Algebra.Hom.ext <| h.eq_of_tgt _ _⟩⟩
+
+/-- A Weil sheaf `F` is *irreducible lisse* if it is lisse and nonzero, and every lisse Weil
+subsheaf of `F` is zero or all of `F`: it is a simple object of the category of lisse Weil
+sheaves, the meaning of "nonzero irreducible lisse Weil sheaf" in the blueprint. On a connected
+normal `X` it says that the representation of the Weil group on the geometric generic stalk is
+irreducible.
+
+This is weaker than simplicity in the category of all Weil sheaves: a nonzero lisse sheaf `M`
+on a curve `U₀` is never simple there, since for a closed point `x` the extension by zero of
+`M|_{U₀ ∖ x}` is a nonzero proper subsheaf. (blueprint: `rem-dl-a1-conventions`) -/
+def IsIrreducibleLisse (F : WeilSheaf k₀ l X) : Prop :=
+  F.IsLisse ∧ ¬ IsZero F ∧
+    ∀ (G : WeilSheaf k₀ l X) (i : G ⟶ F), Mono i → G.IsLisse → IsZero G ∨ IsIso i
+
+/-- A lisse Weil sheaf which is simple in the category of all Weil sheaves is irreducible
+lisse. -/
+theorem IsLisse.isIrreducibleLisse {F : WeilSheaf k₀ l X} (hF : F.IsLisse) [Simple F] :
+    F.IsIrreducibleLisse := by
+  refine ⟨hF, Simple.not_isZero F, fun G i _ _ ↦ ?_⟩
+  by_cases h : i = 0
+  · subst h
+    exact Or.inl (IsZero.of_mono_zero G F)
+  · exact Or.inr ((Simple.mono_isIso_iff_nonzero i).2 h)
+
+/-- A Weil sheaf `F` is *geometrically irreducible* if its underlying étale sheaf on the
+geometric fiber `X̄` is an irreducible local system: for `X̄` connected, the geometric fundamental
+representation `π₁(X̄) → GL(F_η̄)` is irreducible. -/
+def IsGeometricallyIrreducible (F : WeilSheaf k₀ l X) : Prop :=
+  Scheme.IsIrreducibleLocalSystem F.obj.carrier
 
 end WeilSheaf
 

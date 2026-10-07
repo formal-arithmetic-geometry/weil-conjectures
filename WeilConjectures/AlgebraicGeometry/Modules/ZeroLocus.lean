@@ -58,8 +58,13 @@ Further properties:
 
 - `AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_eq_of_arrowIso`: isomorphic morphisms have the
   same zero scheme.
+- `AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_comp_le`: `Z(φ) ⊆ Z(ψ ≫ φ)`.
+- `AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_whiskerRight`: twisting by an invertible
+  module does not change the zero scheme.
 - `AlgebraicGeometry.Scheme.Modules.Hom.nonempty_iso_dual_toModules_tensorObj`: if `Z(φ) = D`
   is an effective Cartier divisor, then `N ≅ 𝒪_X(D) ⊗ M`.
+- `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.exists_zeroLocus_eq`: an effective
+  Cartier divisor `D` is the zero scheme of the canonical section of `𝒪_X(D)`.
 -/
 
 @[expose] public section
@@ -366,31 +371,6 @@ lemma Hom.map_zeroLocusIdeal_basicOpen (φ : M ⟶ N) (W : X.affineOpens) (f : �
   rw [← pow_sub_mul_pow f (hm _ (Finset.mem_image_of_mem n hgT)), mul_assoc, map_mul]
   exact Ideal.mul_mem_left _ _ (hn g (hTS hgT))
 
-/-- Conjugating the pullback of an endomorphism `f` of `𝒪_X` by `h^* 𝒪_X ≅ 𝒪_Y` gives the
-endomorphism of `𝒪_Y` whose value at `1` is `h^♯ (f 1)`. -/
-lemma pullbackObjUnitIso_conj_app_top {Y : Scheme.{u}} (h : Y ⟶ X)
-    (f : Modules.unit X ⟶ Modules.unit X) :
-    ((pullbackObjUnitIso h).inv ≫ (pullback h).map f ≫ (pullbackObjUnitIso h).hom).app ⊤
-      (1 : Γ(Y, ⊤)) = h.appTop (f.app ⊤ (1 : Γ(X, ⊤))) := by
-  set F := (pullbackObjUnitIso h).inv ≫ (pullback h).map f ≫ (pullbackObjUnitIso h).hom
-  have hF : (pullback h).map f ≫ (pullbackObjUnitIso h).hom =
-      (pullbackObjUnitIso h).hom ≫ F := by
-    simp [F]
-  have key := congrArg ((pullbackPushforwardAdjunction h).homEquiv _ _) hF
-  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right] at key
-  have h2 : (pullbackPushforwardAdjunction h).homEquiv _ _ (pullbackObjUnitIso h).hom =
-      SheafOfModules.unitToPushforwardObjUnit h.toRingCatSheafHom :=
-    SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit _
-  rw [h2] at key
-  have := congrArg (fun (φ : Modules.unit X ⟶ (pushforward h).obj (Modules.unit Y)) ↦
-    (Hom.app φ ⊤) (1 : Γ(X, ⊤))) key
-  dsimp only at this
-  simp only [Hom.comp_app, pushforward_map_app, ConcreteCategory.comp_apply] at this
-  have e1 : (Hom.app (SheafOfModules.unitToPushforwardObjUnit (Hom.toRingCatSheafHom h)) ⊤)
-      (1 : Γ(X, ⊤)) = (1 : Γ(Y, ⊤)) :=
-    map_one h.appTop.hom
-  exact (this.trans (congrArg (Hom.app F (h ⁻¹ᵁ ⊤)) e1)).symm
-
 /-- If `αP : 𝒪_Z ⟶ P|_Z` and `αQ : 𝒪_Z ≅ Q|_Z` are trivializations over an open immersion `j`,
 then `φ : P ⟶ Q` sends the generator `αP 1` to `c • αQ 1`, where `c` is the value at `1` of
 the endomorphism `αP ≫ φ|_Z ≫ αQ⁻¹` of `𝒪_Z`. -/
@@ -695,6 +675,37 @@ theorem Hom.isLocallyPrincipal_zeroLocus (φ : M ⟶ N) : φ.zeroLocus.IsLocally
   obtain ⟨b, hb⟩ := hN.exists_smul_eq (φ.app U.1 eM)
   exact ⟨U, hxU, ⟨b, φ.ideal_zeroLocus U hM hN hb.symm⟩⟩
 
+/-- **The zero scheme of a composite contains the zero scheme of the second factor.** For
+morphisms `ψ : L ⟶ M` and `φ : M ⟶ N` of invertible modules, `Z(φ) ⊆ Z(ψ ≫ φ)`, i.e. the ideal
+of `Z(ψ ≫ φ)` is contained in the ideal of `Z(φ)`: locally `ψ` and `φ` are multiplication by
+`b` and `c`, and `(b c) ⊆ (c)`. -/
+theorem Hom.zeroLocus_comp_le {L : X.Modules} [SheafOfModules.IsInvertible.{u, u, u} L]
+    (ψ : L ⟶ M) (φ : M ⟶ N) : (ψ ≫ φ).zeroLocus ≤ φ.zeroLocus := by
+  have key (x : X) : ∃ V : X.affineOpens, x ∈ V.1 ∧
+      (ψ ≫ φ).zeroLocus.ideal V ≤ φ.zeroLocus.ideal V := by
+    obtain ⟨U, hxU, -, ⟨eM, hM⟩, eN, hN⟩ :=
+      exists_isFreeGenerator₂ M N (TopologicalSpace.Opens.mem_top x)
+    obtain ⟨V, hxV, hVU, eL, hL⟩ := exists_isFreeGenerator L hxU
+    obtain ⟨b, hb⟩ := (hM.map hVU).exists_smul_eq (ψ.app V.1 eL)
+    obtain ⟨c, hc⟩ := (hN.map hVU).exists_smul_eq
+      (φ.app V.1 (M.presheaf.map (homOfLE hVU).op eM))
+    refine ⟨V, hxV, ?_⟩
+    rw [Hom.ideal_zeroLocus φ V (hM.map hVU) (hN.map hVU) hc.symm,
+      Hom.ideal_zeroLocus (ψ ≫ φ) V hL (hN.map hVU) (b := b * c) ?_]
+    · exact Ideal.span_singleton_le_span_singleton.mpr (dvd_mul_left c b)
+    · change φ.app V.1 (ψ.app V.1 eL) = _
+      rw [← hb, Hom.app_smul, ← hc, mul_smul]
+  choose V hxV hV using key
+  exact IdealSheafData.le_of_iSup_eq_top V
+    (eq_top_iff.mpr fun x _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hxV x⟩) hV
+
+/-- **Twisting by an invertible module does not change the zero scheme.** For a morphism
+`φ : M ⟶ N` of invertible modules and an invertible module `P`, `Z(φ ⊗ P) = Z(φ)`: on an open
+trivializing `M`, `N` and `P` both morphisms are multiplication by the same coefficient. -/
+theorem Hom.zeroLocus_whiskerRight (φ : M ⟶ N) (P : X.Modules)
+    [SheafOfModules.IsInvertible.{u, u, u} P] : (φ ▷ P).zeroLocus = φ.zeroLocus :=
+  sorry
+
 /-- **A morphism of invertible modules vanishing exactly along a divisor.** If the zero scheme
 `D = Z(φ)` of `φ : M ⟶ N` is an effective Cartier divisor, then `φ` identifies `M` with
 `N(-D) = 𝒪_X(-D) ⊗ N`, so that `N ≅ 𝒪_X(D) ⊗ M`, where `𝒪_X(D) = 𝒪_X(-D)ᵛ` is the dual of the
@@ -709,5 +720,16 @@ theorem Hom.nonempty_iso_dual_toModules_tensorObj (φ : M ⟶ N) (hφ : φ.zeroL
 end Properties
 
 end Modules
+
+/-- **The canonical section of `𝒪_X(D)`.** For an effective Cartier divisor `D`, with invertible
+ideal sheaf `J = 𝒪_X(-D)`, the dual `𝒪_X(D) = Jᵛ` has a global section `s : 𝒪_X ⟶ 𝒪_X(D)`,
+the transpose of the inclusion `J ⟶ 𝒪_X`, whose zero scheme is `D`: on an affine open where
+`J = (b)` with `b` a non-zerodivisor, `𝒪_X(D)` is free on the dual generator `b^∨` and
+`s = b • b^∨`.
+
+(blueprint: the canonical section `1` of `𝒪(D)` in `lem-pc-universal-adjoint-section`) -/
+theorem IdealSheafData.IsInvertible.exists_zeroLocus_eq {X : Scheme.{u}} {J : X.IdealSheafData}
+    (hJ : J.IsInvertible) : ∃ s : 𝟙_ X.Modules ⟶ J.toModulesᵛ, Modules.Hom.zeroLocus s = J :=
+  sorry
 
 end AlgebraicGeometry.Scheme

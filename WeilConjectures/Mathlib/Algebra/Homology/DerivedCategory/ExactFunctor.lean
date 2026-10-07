@@ -390,6 +390,21 @@ noncomputable def mapDerivedCategoryPlusCompatibility :
       DerivedCategory.Plus.ι ⋙ F.mapDerivedCategory :=
   Iso.refl _
 
+instance : F.mapDerivedCategoryPlus.Additive :=
+  have : (F.mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.ι).Additive :=
+    Functor.additive_of_iso F.mapDerivedCategoryPlusCompatibility.symm
+  Functor.additive_of_comp_faithful _ DerivedCategory.Plus.ι
+
+/-- `F.mapDerivedCategoryPlus` commutes with shifts, as the restriction of the triangulated
+functor `F.mapDerivedCategory`. -/
+noncomputable instance : F.mapDerivedCategoryPlus.CommShift ℤ := by
+  dsimp only [mapDerivedCategoryPlus]
+  infer_instance
+
+instance : F.mapDerivedCategoryPlus.IsTriangulated := by
+  dsimp only [mapDerivedCategoryPlus]
+  infer_instance
+
 /-- The functor `F.mapDerivedCategoryPlus` induced on the bounded below derived categories
 by an exact functor `F` factors the functor `F.mapHomotopyCategoryPlus` on the bounded
 below homotopy categories through the localization functors: the bounded below counterpart

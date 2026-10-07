@@ -34,8 +34,13 @@ We also record that, for a morphism `f : X ⟶ Y`, the affine opens of `X` conta
 preimage of an affine open of `Y` form a basis of the topology of `X`
 (`AlgebraicGeometry.isBasis_affineOpens_le_preimage`).
 
-Finally, every open subscheme of the spectrum of a principal ideal ring is affine
+Every open subscheme of the spectrum of a principal ideal ring is affine
 (`AlgebraicGeometry.isAffineOpen_of_isPrincipalIdealRing`).
+
+Finally, a morphism `a : T ⟶ U` to an affine scheme inducing an isomorphism on global sections
+is universal among morphisms to affine schemes: every `φ : T ⟶ V` with `V` affine factors as
+`a ≫ h` (`AlgebraicGeometry.Scheme.Hom.exists_comp_eq_of_isIso_appTop`), and `h` is unique
+(`AlgebraicGeometry.Scheme.Hom.cancel_left_of_isIso_appTop`).
 -/
 
 @[expose] public section
@@ -256,5 +261,69 @@ theorem isAffine_of_isOpenImmersion_of_isPrincipalIdealRing {X : Scheme.{u}}
     IsAffine X :=
   have : IsAffine f.opensRange := isAffineOpen_of_isPrincipalIdealRing f.opensRange
   .of_isIso f.isoOpensRange.hom
+
+/-- Let `a : T ⟶ U` be a morphism to an affine scheme `U` such that `Γ(U, ⊤) ⟶ Γ(T, ⊤)` is an
+isomorphism. Then every morphism `φ : T ⟶ V` to an affine scheme `V` factors through `a`:
+```
+T ---a---> U
+  \        |
+   φ       h
+    \      |
+     ↘     ↓
+           V
+```
+with `a ≫ h = φ`. Together with `Scheme.Hom.cancel_left_of_isIso_appTop`, this says that `a` is
+universal among morphisms from `T` to affine schemes. -/
+lemma Scheme.Hom.exists_comp_eq_of_isIso_appTop {T U V : Scheme.{u}} [IsAffine U] [IsAffine V]
+    (a : T ⟶ U) [IsIso a.appTop] (φ : T ⟶ V) : ∃ h : U ⟶ V, a ≫ h = φ := by
+  refine ⟨U.isoSpec.hom ≫ Spec.map (φ.appTop ≫ inv a.appTop) ≫ V.isoSpec.inv, ?_⟩
+  rw [Scheme.isoSpec_hom, Scheme.toSpecΓ_naturality_assoc, ← Spec.map_comp_assoc,
+    Category.assoc, IsIso.inv_hom_id, Category.comp_id, ← Scheme.toSpecΓ_naturality_assoc,
+    ← Scheme.isoSpec_hom, Iso.hom_inv_id, Category.comp_id]
+
+/-- Let `a : T ⟶ U` be a morphism such that `Γ(U, ⊤) ⟶ Γ(T, ⊤)` is an isomorphism. Then two
+morphisms `U ⟶ V` to an affine scheme `V` agreeing after precomposition with `a` are equal.
+Here `U` need not be affine. -/
+lemma Scheme.Hom.cancel_left_of_isIso_appTop {T U V : Scheme.{u}} [IsAffine V]
+    (a : T ⟶ U) [IsIso a.appTop] {h₁ h₂ : U ⟶ V} (e : a ≫ h₁ = a ≫ h₂) : h₁ = h₂ :=
+  ext_of_isAffine <| by
+    rw [← cancel_mono a.appTop, ← Scheme.Hom.comp_appTop, e, Scheme.Hom.comp_appTop]
+
+/-- **Prime avoidance in `Spec R`.** A finite set of points of an open subset `O` of
+`PrimeSpectrum R` is contained in a basic open `D(r) ⊆ O`. -/
+theorem _root_.PrimeSpectrum.exists_basicOpen_le_of_finite {R : Type*} [CommRing R]
+    {O : Set (PrimeSpectrum R)} (hO : IsOpen O) {t : Set (PrimeSpectrum R)} (ht : t.Finite)
+    (htO : t ⊆ O) :
+    ∃ r : R, t ⊆ PrimeSpectrum.basicOpen r ∧ (PrimeSpectrum.basicOpen r : Set _) ⊆ O := by
+  obtain ⟨J, hJ⟩ := (PrimeSpectrum.isClosed_iff_zeroLocus_ideal Oᶜ).mp hO.isClosed_compl
+  have hJt : ¬ (J : Set R) ⊆ ⋃ I ∈ PrimeSpectrum.asIdeal '' t, ((id I : Ideal R) : Set R) := by
+    rw [Ideal.subset_union_prime_finite (ht.image _) (f := id) ⊥ ⊥
+      (by grind [PrimeSpectrum.isPrime])]
+    rintro ⟨_, ⟨p, hp, rfl⟩, hle⟩
+    have : p ∈ Oᶜ := hJ ▸ (PrimeSpectrum.mem_zeroLocus _ _).mpr hle
+    exact this (htO hp)
+  obtain ⟨r, hrJ, hr⟩ := Set.not_subset.mp hJt
+  refine ⟨r, fun p hp ↦ ?_, fun p hp ↦ ?_⟩
+  · simp only [Set.mem_iUnion, Set.mem_image, id] at hr
+    exact (PrimeSpectrum.mem_basicOpen _ _).mpr fun h ↦ hr ⟨_, ⟨p, hp, rfl⟩, h⟩
+  · by_contra h
+    have : p ∈ PrimeSpectrum.zeroLocus (J : Set R) := hJ ▸ h
+    exact (PrimeSpectrum.mem_basicOpen _ _).mp hp (this hrJ)
+
+/-- **Prime avoidance for affine opens.** A finite set of points of an open `O` contained in an
+affine open `U` lies in a basic open `D(r) ⊆ O` of `U`. -/
+theorem IsAffineOpen.exists_basicOpen_le_of_finite {X : Scheme.{u}} {U : X.Opens}
+    (hU : IsAffineOpen U) {O : X.Opens} (hO : O ≤ U) {s : Set X} (hs : s.Finite)
+    (hsO : s ⊆ O) : ∃ r : Γ(X, U), s ⊆ X.basicOpen r ∧ X.basicOpen r ≤ O := by
+  obtain ⟨r, hsr, hrO⟩ := PrimeSpectrum.exists_basicOpen_le_of_finite
+    (hU.fromSpec ⁻¹ᵁ O).isOpen (hs.preimage hU.fromSpec.isOpenEmbedding.injective.injOn)
+    (Set.preimage_mono hsO)
+  refine ⟨r, fun x hx ↦ ?_, ?_⟩
+  · obtain ⟨y, rfl⟩ : x ∈ Set.range hU.fromSpec := hU.range_fromSpec ▸ hO (hsO hx)
+    rw [SetLike.mem_coe, ← Scheme.Hom.mem_preimage, hU.fromSpec_preimage_basicOpen]
+    exact hsr hx
+  · rw [← hU.fromSpec_image_basicOpen]
+    rintro _ ⟨y, hy, rfl⟩
+    exact hrO hy
 
 end AlgebraicGeometry

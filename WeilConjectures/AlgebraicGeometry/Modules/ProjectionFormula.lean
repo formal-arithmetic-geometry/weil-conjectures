@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 # Pullback, tensor products and the projection formula
 
 We record how the pullback of `𝒪`-modules along a morphism of schemes `g : X ⟶ Y` interacts with
-the tensor product, and the projection formula `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N` for an invertible
+the tensor product, and the projection formula `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ ⊗ N` for an invertible
 `𝒪_Y`-module `N`.
 
 ## Main statements
@@ -31,8 +31,12 @@ the tensor product, and the projection formula `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N
   `AlgebraicGeometry.Scheme.Modules.IsInvertible.sheafOfModules_isInvertible`: the two notions of
   invertibility, `AlgebraicGeometry.Scheme.Modules.IsInvertible` and
   `SheafOfModules.IsInvertible`, agree.
-- `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_pullback_iso`: the projection formula
-  for an invertible module.
+- `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_tensorObj`,
+  `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_tensorObj`: twisting by an invertible
+  module preserves quasi-coherence and finite presentation.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_tensorObj_pullback_iso`: the projection
+  formula `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ ⊗ N` for an invertible module `N`.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_pullback_iso`: its case `ℱ = 𝒪_X`.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_pullback_iso_self`: if `g_* 𝒪_X ≅ 𝒪_Y`,
   then `g_* (g^* N) ≅ N` for every invertible `𝒪_Y`-module `N`.
 -/
@@ -132,18 +136,69 @@ instance IsInvertible.isQuasicoherent (M : X.Modules) [M.IsInvertible] : M.IsQua
   rw [Opens.coversTop_iff]
   exact IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ Opens.mem_iSup.mpr ⟨x, hU x⟩)
 
+/-- If an invertible module `N` is trivial on an open `U`, then `(M ⊗ N)|_U ≅ M|_U`. -/
+lemma nonempty_over_tensorObj_iso (M N : X.Modules) {U : X.Opens}
+    (e : (pullback U.ι).obj N ≅ SheafOfModules.unit U.toScheme.ringCatSheaf) :
+    Nonempty ((M ⊗ N).over U ≅ M.over U) := by
+  obtain ⟨t⟩ := nonempty_pullback_tensorObj_iso U.ι M N
+  exact ⟨(overEquiv U).functor.preimageIso (overEquivObjOverIso (M ⊗ N) U ≪≫ t ≪≫
+    (Iso.refl _ ⊗ᵢ e) ≪≫ ρ_ _ ≪≫ (overEquivObjOverIso M U).symm)⟩
+
+/-- **Twisting by an invertible module preserves quasi-coherence.** Locally `N ≅ 𝒪_X`, so
+`M ⊗ N` is locally isomorphic to `M`, and quasi-coherence is a local property. -/
+theorem isQuasicoherent_tensorObj (M N : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M] [N.IsInvertible] :
+    (M ⊗ N).IsQuasicoherent := by
+  choose U hU e using fun x : X ↦ IsInvertible.exists_isoUnit (M := N) x
+  have (x : X) : ((M ⊗ N).over (U x)).IsQuasicoherent :=
+    (SheafOfModules.isQuasicoherent (X.ringCatSheaf.over (U x))).prop_of_iso
+      (nonempty_over_tensorObj_iso M N (e x).some).some.symm
+      (SheafOfModules.isQuasicoherent_over M (U x))
+  refine SheafOfModules.IsQuasicoherent.of_coversTop (tensorObj M N) U ?_
+  rw [Opens.coversTop_iff]
+  exact IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ Opens.mem_iSup.mpr ⟨x, hU x⟩)
+
+/-- **Twisting by an invertible module preserves finite presentation.** Locally `N ≅ 𝒪_X`, so
+`M ⊗ N` is locally isomorphic to `M`, and finite presentation is a local property. -/
+theorem isFinitePresentation_tensorObj (M N : X.Modules)
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) M] [N.IsInvertible] :
+    (M ⊗ N).IsFinitePresentation := by
+  choose U hU e using fun x : X ↦ IsInvertible.exists_isoUnit (M := N) x
+  have (x : X) : SheafOfModules.IsFinitePresentation.{u} (M.over (U x)) :=
+    SheafOfModules.isFinitePresentation_pushforward_of_isLeftAdjoint (Over.forget (U x)) (𝟙 _)
+      (Iso.refl _)
+  have (x : X) : ((M ⊗ N).over (U x)).IsFinitePresentation :=
+    (SheafOfModules.isFinitePresentation (X.ringCatSheaf.over (U x))).prop_of_iso
+      (nonempty_over_tensorObj_iso M N (e x).some).some.symm (this x)
+  refine SheafOfModules.IsFinitePresentation.of_coversTop (tensorObj M N) U ?_
+  rw [Opens.coversTop_iff]
+  exact IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ Opens.mem_iSup.mpr ⟨x, hU x⟩)
+
 end Quasicoherent
 
 section ProjectionFormula
 
-/-- **The projection formula** for an invertible module. For `g : X ⟶ Y` and an invertible
-`𝒪_Y`-module `N`, `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N`. Locally on `Y`, where `N ≅ 𝒪_Y`, both sides are
-`g_* 𝒪_X`; the global isomorphism is the adjoint of `g^* (g_* 𝒪_X ⊗ N) ≅ g^* g_* 𝒪_X ⊗ g^* N ⟶
-𝒪_X ⊗ g^* N ≅ g^* N`. -/
+/-- **The projection formula** for an invertible module. For `g : X ⟶ Y`, an `𝒪_X`-module `ℱ`
+and an invertible `𝒪_Y`-module `N`, `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ ⊗ N`. The comparison map is the
+adjoint of `g^* (g_* ℱ ⊗ N) ≅ g^* g_* ℱ ⊗ g^* N ⟶ ℱ ⊗ g^* N`; it is an isomorphism because it is
+one locally on `Y`: on an open `V` where `N ≅ 𝒪_V`, both sides are `g_* ℱ` on `V`.
+
+For a closed immersion `g` this is the last clause of the blueprint lemma.
+
+(blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
+theorem nonempty_pushforward_tensorObj_pullback_iso (g : X ⟶ Y) (F : X.Modules) (N : Y.Modules)
+    [N.IsInvertible] :
+    Nonempty ((pushforward g).obj (F ⊗ (pullback g).obj N) ≅ (pushforward g).obj F ⊗ N) :=
+  sorry
+
+/-- **The projection formula** for an invertible module and the structure sheaf. For
+`g : X ⟶ Y` and an invertible `𝒪_Y`-module `N`, `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N`: this is
+`nonempty_pushforward_tensorObj_pullback_iso` for `ℱ = 𝒪_X`, since `g^* N ≅ 𝒪_X ⊗ g^* N`. -/
 theorem nonempty_pushforward_pullback_iso (g : X ⟶ Y) (N : Y.Modules) [N.IsInvertible] :
     Nonempty ((pushforward g).obj ((pullback g).obj N) ≅
-      (pushforward g).obj (𝟙_ X.Modules) ⊗ N) :=
-  sorry
+      (pushforward g).obj (𝟙_ X.Modules) ⊗ N) := by
+  obtain ⟨e⟩ := nonempty_pushforward_tensorObj_pullback_iso g (𝟙_ X.Modules) N
+  exact ⟨(pushforward g).mapIso (λ_ _).symm ≪≫ e⟩
 
 /-- If `g_* 𝒪_X ≅ 𝒪_Y`, then `g_* (g^* N) ≅ N` for every invertible `𝒪_Y`-module `N`: by the
 projection formula `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N ≅ 𝒪_Y ⊗ N ≅ N`. -/

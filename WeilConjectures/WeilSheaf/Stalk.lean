@@ -288,6 +288,18 @@ theorem IsPunctuallyPureOfWeight.upperStar {ι : PadicAlgCl l →+* ℂ} {F : We
 def IsReal (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : Prop :=
   ∀ x : X.finitePoints, (F.stalk x).IsReal ι
 
+/-- `F` is `ι`-*realizable* if it is a direct summand of an `ι`-real lisse Weil sheaf
+(Deligne, Weil II, (1.2.13)). (blueprint: `def-wf-iota-real`) -/
+def IsRealizable (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : Prop :=
+  ∃ (G : WeilSheaf k₀ l X) (i : F ⟶ G) (r : G ⟶ F), G.IsLisse ∧ G.IsReal ι ∧ i ≫ r = 𝟙 F
+
+-- TODO(adic): with pro-étale coefficients the stalk functor is additive, and the Weil
+-- structure of `F ⊞ G` is the sum of those of `F` and `G`.
+/-- The stalk of a direct sum is the direct sum of the stalks, with the diagonal Frobenius. -/
+theorem nonempty_equiv_stalk_biprod (G : WeilSheaf k₀ l X) (x : X.finitePoints) :
+    Nonempty (((F ⊞ G).stalk x).Equiv ((F.stalk x).prod (G.stalk x))) := by
+  sorry
+
 section GlobalSections
 
 /-- The global sections of a Weil sheaf on a quasi-compact `k₀`-scheme locally of finite type

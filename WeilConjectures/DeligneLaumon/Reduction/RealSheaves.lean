@@ -32,11 +32,6 @@ The geometric and group-theoretic inputs of the reduction are stated and proved 
 `Representation.exists_filtration_isIrreducible_restrict` (geometric constituents), and curve
 testing for geometric irreducibility below.
 
-## Main definitions
-
-- `AlgebraicGeometry.Scheme.IsIrreducibleLocalSystem`: a nonzero locally constant étale sheaf
-  without nonzero proper locally constant subsheaves.
-
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`:
@@ -66,17 +61,6 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry
-
-/-- A sheaf `F` on the small étale site of `X` is an *irreducible local system* if it is locally
-constant and nonzero, and every locally constant subsheaf of `F` is zero or all of `F`. For a
-lisse sheaf on a connected scheme this says that the corresponding representation of the étale
-fundamental group is irreducible. -/
-def Scheme.IsIrreducibleLocalSystem {X : Scheme.{u}} {A : Type*} [Category.{u + 1} A]
-    [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
-    (F : Sheaf X.smallEtaleTopology A) : Prop :=
-  IsLocallyConstantSheaf F ∧ ¬ IsZero F ∧
-    ∀ (G : Sheaf X.smallEtaleTopology A) (ι : G ⟶ F), Mono ι → IsLocallyConstantSheaf G →
-      IsZero G ∨ IsIso ι
 
 /-- **Curve testing for geometric irreducibility**
 (blueprint: `lem-zl-curve-testing-irreducibility`). Let `X₀` be a smooth geometrically connected
