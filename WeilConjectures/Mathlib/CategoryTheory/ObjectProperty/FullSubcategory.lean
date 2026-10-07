@@ -54,4 +54,16 @@ lemma liftFullSubcategory_additive [Preadditive C] [Preadditive D] (F : C ⥤ D)
 
 attribute [instance] liftFullSubcategory_additive
 
+/-- The functor between full subcategories induced by a full functor is full. -/
+lemma liftFullSubcategory_full (F : C ⥤ D) [F.Full] (h : ∀ X, P X → Q (F.obj X)) :
+    (P.liftFullSubcategory Q F h).Full where
+  map_surjective g := ⟨P.homMk (F.preimage g.hom), Q.hom_ext (F.map_preimage g.hom)⟩
+
+/-- The functor between full subcategories induced by a faithful functor is faithful. -/
+lemma liftFullSubcategory_faithful (F : C ⥤ D) [F.Faithful] (h : ∀ X, P X → Q (F.obj X)) :
+    (P.liftFullSubcategory Q F h).Faithful where
+  map_injective e := P.hom_ext (F.map_injective (congrArg (·.hom) e))
+
+attribute [instance] liftFullSubcategory_full liftFullSubcategory_faithful
+
 end CategoryTheory.ObjectProperty

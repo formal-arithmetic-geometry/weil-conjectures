@@ -83,7 +83,12 @@ both notions pull back along morphisms of `k₀`-schemes (`WeilSheaf.upperStar`,
 - `AlgebraicGeometry.WeilSheaf` and `AlgebraicGeometry.WeilComplex`: the abelian category of
   constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme and the triangulated category of Weil
   complexes.
-- `AlgebraicGeometry.WeilSheaf.toComplex` and `AlgebraicGeometry.WeilComplex.homologySheaf`.
+- `AlgebraicGeometry.WeilSheaf.toComplex` and `AlgebraicGeometry.WeilComplex.homologySheaf`:
+  the embedding of Weil sheaves as Weil complexes in degree zero, which is fully faithful, and
+  the cohomology sheaves, with `𝓗⁰ ∘ toComplex ≅ 𝟭`
+  (`AlgebraicGeometry.WeilSheaf.toComplexCompHomologySheafIso`).
+- `AlgebraicGeometry.WeilComplex.forget`: the forgetful functor to the derived category of
+  `ℓ`-adic pro-étale sheaves.
 - `AlgebraicGeometry.WeilSheaf.frobeniusPowIso`: the iterated Weil structure
   `φ_m : (Fr_Xᵐ)^* F ≅ F`.
 - `AlgebraicGeometry.WeilSheaf.IsLisse`: the underlying sheaf is lisse.
@@ -244,6 +249,14 @@ noncomputable def toComplex : WeilSheaf k₀ l X ⥤ WeilComplex k₀ l X :=
 instance : (toComplex (k₀ := k₀) (l := l) (X := X)).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
 
+/-- Weil sheaves embed fully faithfully into Weil complexes, as the complexes concentrated in
+degree zero: `DerivedCategory.singleFunctor` is fully faithful. -/
+instance : (toComplex (k₀ := k₀) (l := l) (X := X)).Full :=
+  ObjectProperty.liftFullSubcategory_full _ _ _ _
+
+instance : (toComplex (k₀ := k₀) (l := l) (X := X)).Faithful :=
+  ObjectProperty.liftFullSubcategory_faithful _ _ _ _
+
 /-- The iterated Weil structure `φ_m : (Fr_Xᵐ)^* F ≅ F` of a Weil sheaf, the ordered composite
 
 `(Fr_X^{m+1})^* F ≅ Fr_X^* (Fr_Xᵐ)^* F --Fr_X^* φ_m--> Fr_X^* F --φ--> F`
@@ -330,6 +343,15 @@ noncomputable def homologySheaf (a : ℤ) : WeilComplex k₀ l X ⥤ WeilSheaf k
 
 instance (a : ℤ) : (homologySheaf (k₀ := k₀) (l := l) (X := X) a).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
+
+/-- The cohomology sheaf `𝓗⁰` of a Weil sheaf placed in degree zero is the Weil sheaf itself. -/
+noncomputable def _root_.AlgebraicGeometry.WeilSheaf.toComplexCompHomologySheafIso :
+    WeilSheaf.toComplex ⋙ homologySheaf 0 ≅ 𝟭 (WeilSheaf k₀ l X) :=
+  NatIso.ofComponents
+    (fun F ↦ ObjectProperty.isoMk _
+      ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app F.obj))
+    fun f ↦ ObjectProperty.hom_ext _
+      ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).hom.naturality f.hom)
 
 /-- The forgetful functor `For` from Weil complexes to the derived category of `ℓ`-adic
 pro-étale sheaves on `X̄`, forgetting the Weil structure; the Weil structure of `K` induces the
