@@ -34,6 +34,9 @@ ring object of `Sheaf (Scheme.ProEt.topology X) A`, so that `R`-module objects a
 
 ## Constructibility
 
+This part follows the definitions in **Section 6.8** of
+*Bhargav Bhatt and Peter Scholze, The pro-étale topology for schemes*
+
 Constructibility is defined with respect to a finite stratification `X = ∐ₐ Xₐ` by locally
 closed subschemes, using the existing notion `Scheme.Stratification` (`ConstructibleSheaf.Defs`);
 restriction to a stratum is the pullback along its immersion `Xₐ ⟶ X`. Restriction along a
@@ -61,12 +64,6 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-
-/-- Tensoring with a pro-étale sheaf is right exact, since the tensor product is closed. -/
-instance preservesFiniteColimits_tensorLeft {Y : Scheme.{u}}
-    (F : Sheaf (Scheme.ProEt.topology Y) A) :
-    PreservesFiniteColimits (tensorLeft F) :=
-  PreservesColimitsOfSize.preservesFiniteColimits.{0, 0} _
 
 section Local
 
