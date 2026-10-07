@@ -7,10 +7,12 @@ module
 
 public import Mathlib.Algebra.Algebra.Subalgebra.Directed
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
 public import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
 
 /-!
-# A commutative ring is the filtered colimit of its finitely generated `ℤ`-subalgebras
+# Commutative rings as filtered colimits of subalgebras and of localizations
 
 If the `ℤ`-subalgebras of a commutative ring `R` satisfying a predicate `P` form a
 nonempty directed poset with supremum `⊤`, then `R` is the colimit of the diagram they
@@ -26,6 +28,12 @@ bare commutative ring carries a canonical algebra structure only over `ℤ`.
 For the analogous statement about the finitely generated submodules of a module, see
 `Module.fgSystem` in `Mathlib/Algebra/Colimit/Finiteness.lean`.
 
+Similarly, the localization `A_p` of a commutative ring at a prime ideal `p` is the filtered
+colimit of the localizations `A[1/f]` away from the elements `f ∉ p`
+(`CommRingCat.isColimitAwayProdCocone`). To have a diagram indexed by a partial order, the
+localizations are indexed by the finite sets `s` of elements outside `p`, through
+`A[1/∏ s]`.
+
 ## Main declarations
 
 * `CommRingCat.subalgebraDiagram`, `CommRingCat.subalgebraCocone`: the diagram of the
@@ -35,6 +43,9 @@ For the analogous statement about the finitely generated submodules of a module,
 * `CommRingCat.fgSubalgebraDiagram`, `CommRingCat.fgSubalgebraCocone`,
   `CommRingCat.isColimitFgSubalgebraCocone`: the special case of the family of all
   finitely generated `ℤ`-subalgebras of `R`.
+* `CommRingCat.awayProdDiagram`, `CommRingCat.awayProdCocone`,
+  `CommRingCat.isColimitAwayProdCocone`: the localization at a prime as the filtered colimit of
+  the localizations away from elements outside the prime.
 -/
 
 @[expose] public section
@@ -124,5 +135,140 @@ abbrev fgSubalgebraCocone : Cocone (fgSubalgebraDiagram R) :=
 /-- A commutative ring is the filtered colimit of its finitely generated `ℤ`-subalgebras. -/
 noncomputable def isColimitFgSubalgebraCocone : IsColimit (fgSubalgebraCocone R) :=
   isColimitSubalgebraCocone R Subalgebra.FG (Subalgebra.iSup_val_fg_eq_top ℤ R)
+
+/-! ### The localization at a prime as a filtered colimit -/
+
+section Localization
+
+variable {A : Type u} [CommRing A] (p : Ideal A) [p.IsPrime]
+
+/-- The localization `A[1/∏ s]` of `A` away from the product of a finite set `s` of elements
+outside the prime ideal `p`. -/
+abbrev AwayProd (s : Finset p.primeCompl) : Type u := Localization.Away (∏ x ∈ s, (x : A))
+
+lemma isUnit_algebraMap_prod_awayProd {s t : Finset p.primeCompl} (h : s ≤ t) :
+    IsUnit (algebraMap A (AwayProd p t) (∏ x ∈ s, (x : A))) := by
+  classical
+  refine isUnit_of_mul_isUnit_left (y := algebraMap A (AwayProd p t) (∏ x ∈ t \ s, (x : A))) ?_
+  rw [← map_mul, ← Finset.prod_union Finset.disjoint_sdiff, Finset.union_sdiff_of_subset h]
+  exact IsLocalization.Away.algebraMap_isUnit _
+
+/-- The `A`-algebra map `A[1/∏ s] ⟶ A[1/∏ t]` for `s ⊆ t`. -/
+noncomputable def awayProdMap {s t : Finset p.primeCompl} (h : s ≤ t) :
+    AwayProd p s →ₐ[A] AwayProd p t :=
+  IsLocalization.liftAlgHom (M := Submonoid.powers (∏ x ∈ s, (x : A)))
+    (f := Algebra.ofId A (AwayProd p t)) (by
+      rintro ⟨_, n, rfl⟩
+      simpa using (isUnit_algebraMap_prod_awayProd p h).pow n)
+
+/-- The filtered diagram of the localizations `A[1/f]`, `f ∉ p`: it is indexed by the finite sets
+`s` of elements outside `p`, sending `s` to `A[1/∏ s]`. -/
+@[simps]
+noncomputable def awayProdDiagram : Finset p.primeCompl ⥤ CommRingCat.{u} where
+  obj s := .of (AwayProd p s)
+  map {s t} h := ofHom (awayProdMap p (leOfHom h)).toRingHom
+  map_id s := by
+    ext1
+    exact congrArg AlgHom.toRingHom
+      ((IsLocalization.algHom_subsingleton (Submonoid.powers (∏ x ∈ s, (x : A)))
+        (S := AwayProd p s) (P := AwayProd p s)).elim _ (AlgHom.id A _))
+  map_comp {s t r} f g := by
+    ext1
+    exact congrArg AlgHom.toRingHom
+      ((IsLocalization.algHom_subsingleton (Submonoid.powers (∏ x ∈ s, (x : A)))
+        (S := AwayProd p s) (P := AwayProd p r)).elim _
+        ((awayProdMap p (leOfHom g)).comp (awayProdMap p (leOfHom f))))
+
+lemma awayProd_ringHom_ext {s : Finset p.primeCompl} {P : Type*} [CommRing P]
+    {f g : AwayProd p s →+* P} (h : ∀ x : A, f (algebraMap A _ x) = g (algebraMap A _ x)) :
+    f = g :=
+  IsLocalization.ringHom_ext (Submonoid.powers (∏ x ∈ s, (x : A))) (RingHom.ext h)
+
+/-- The `A`-algebra map `A[1/∏ s] ⟶ A_p`. -/
+noncomputable def awayProdToAtPrime (s : Finset p.primeCompl) :
+    AwayProd p s →ₐ[A] Localization.AtPrime p :=
+  IsLocalization.liftAlgHom (M := Submonoid.powers (∏ x ∈ s, (x : A)))
+    (f := Algebra.ofId A (Localization.AtPrime p)) (by
+      rintro ⟨_, n, rfl⟩
+      simpa using (IsLocalization.map_units (M := p.primeCompl) (Localization.AtPrime p)
+        ⟨_, Submonoid.prod_mem _ fun x _ ↦ x.2⟩).pow n)
+
+/-- The localization `A_p` as a cocone over `awayProdDiagram p`. -/
+@[simps]
+noncomputable def awayProdCocone : Cocone (awayProdDiagram p) where
+  pt := .of (Localization.AtPrime p)
+  ι :=
+  { app s := ofHom (awayProdToAtPrime p s).toRingHom
+    naturality {s t} f := by
+      ext1
+      refine awayProd_ringHom_ext p fun x ↦ ?_
+      change awayProdToAtPrime p t (awayProdMap p (leOfHom f) (algebraMap A _ x)) =
+        awayProdToAtPrime p s (algebraMap A _ x)
+      rw [AlgHom.commutes, AlgHom.commutes, AlgHom.commutes] }
+
+lemma awayProdCocone_comp_algebraMap (c : Cocone (awayProdDiagram p))
+    (s : Finset p.primeCompl) :
+    (c.ι.app s).hom.comp (algebraMap A (AwayProd p s)) =
+      (c.ι.app ∅).hom.comp (algebraMap A (AwayProd p ∅)) := by
+  rw [← c.w (homOfLE (Finset.empty_subset s))]
+  ext x
+  change (c.ι.app s).hom (algebraMap A (AwayProd p s) x : AwayProd p s) =
+    (c.ι.app s).hom ((awayProdMap p (Finset.empty_subset s))
+      (algebraMap A (AwayProd p ∅) x) : AwayProd p s)
+  rw [AlgHom.commutes]
+
+/-- (Implementation) The ring homomorphism out of `A` induced by a cocone. -/
+noncomputable def awayProdCoconeRingHom (c : Cocone (awayProdDiagram p)) : A →+* c.pt :=
+  (c.ι.app ∅).hom.comp (algebraMap A (AwayProd p ∅))
+
+lemma isUnit_awayProdCoconeRingHom (c : Cocone (awayProdDiagram p)) (y : p.primeCompl) :
+    IsUnit (awayProdCoconeRingHom p c y) := by
+  rw [awayProdCoconeRingHom, ← awayProdCocone_comp_algebraMap p c {y}]
+  change IsUnit ((c.ι.app {y}).hom (algebraMap A (AwayProd p {y}) y : AwayProd p {y}))
+  have hy : IsUnit (algebraMap A (AwayProd p {y}) y) := by
+    have : (y : A) = ∏ x ∈ ({y} : Finset p.primeCompl), (x : A) := by simp
+    rw [this]
+    exact IsLocalization.Away.algebraMap_isUnit _
+  exact hy.map _
+
+/-- **The localization at a prime is the filtered colimit of the localizations away from the
+elements outside the prime.** For a prime ideal `p` of `A`, the ring `A_p` is the colimit in
+`CommRingCat` of the rings `A[1/∏ s]`, `s` a finite set of elements outside `p`. -/
+noncomputable def isColimitAwayProdCocone : IsColimit (awayProdCocone p) where
+  desc c := ofHom (IsLocalization.lift (M := p.primeCompl) (S := Localization.AtPrime p)
+    (isUnit_awayProdCoconeRingHom p c))
+  fac c s := by
+    ext1
+    refine awayProd_ringHom_ext p fun x ↦ ?_
+    change IsLocalization.lift _ (awayProdToAtPrime p s (algebraMap A _ x)) = _
+    rw [AlgHom.commutes, Algebra.algebraMap_eq_smul_one, ← Algebra.algebraMap_eq_smul_one,
+      IsLocalization.lift_eq, awayProdCoconeRingHom, ← awayProdCocone_comp_algebraMap p c s]
+    rfl
+  uniq c m hm := by
+    ext1
+    refine IsLocalization.ringHom_ext p.primeCompl (S := Localization.AtPrime p)
+      (RingHom.ext fun x ↦ ?_)
+    change m.hom (algebraMap A (Localization.AtPrime p) x : Localization.AtPrime p) =
+      IsLocalization.lift _ (algebraMap A (Localization.AtPrime p) x)
+    rw [IsLocalization.lift_eq, awayProdCoconeRingHom, ← hm ∅]
+    change m.hom (algebraMap A (Localization.AtPrime p) x : Localization.AtPrime p) =
+      m.hom (awayProdToAtPrime p ∅ (algebraMap A (AwayProd p ∅) x) : Localization.AtPrime p)
+    rw [AlgHom.commutes]
+
+@[reassoc]
+lemma ofHom_algebraMap_comp_awayProdDiagram_map {s t : Finset p.primeCompl} (f : s ⟶ t) :
+    ofHom (algebraMap A (AwayProd p s)) ≫ (awayProdDiagram p).map f =
+      ofHom (algebraMap A (AwayProd p t)) := by
+  ext x
+  exact (awayProdMap p (leOfHom f)).commutes x
+
+@[reassoc]
+lemma ofHom_algebraMap_comp_awayProdCocone_ι_app (s : Finset p.primeCompl) :
+    ofHom (algebraMap A (AwayProd p s)) ≫ (awayProdCocone p).ι.app s =
+      ofHom (algebraMap A (Localization.AtPrime p)) := by
+  ext x
+  exact (awayProdToAtPrime p s).commutes x
+
+end Localization
 
 end CommRingCat
