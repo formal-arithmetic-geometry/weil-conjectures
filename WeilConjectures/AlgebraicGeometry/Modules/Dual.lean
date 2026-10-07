@@ -10,6 +10,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 
 /-!
 # The dual of a sheaf of modules on a scheme
@@ -26,6 +27,8 @@ Both are abbreviations for `SheafOfModules.homObj`, so its API (`SheafOfModules.
 - `AlgebraicGeometry.Scheme.Modules.dual`: the dual `M^∨ = Hom(M, 𝒪_X)`, with notation `Mᵛ`.
 - `AlgebraicGeometry.Scheme.Modules.dualMap`: the transpose `Nᵛ ⟶ Mᵛ` of `f : M ⟶ N`.
 - `AlgebraicGeometry.Scheme.Modules.dualFunctor`: `M ↦ Mᵛ` as a contravariant functor.
+- `AlgebraicGeometry.Scheme.Modules.dualEvaluation`: the evaluation `M ⊗ Mᵛ ⟶ 𝒪_X`, an
+  isomorphism for invertible `M` (`AlgebraicGeometry.Scheme.Modules.isIso_dualEvaluation`).
 
 ## Main statements
 
@@ -77,11 +80,77 @@ variable (X) in
 noncomputable abbrev dualFunctor : X.Modulesᵒᵖ ⥤ X.Modules :=
   (SheafOfModules.homFunctor X.sheaf).flip.obj (SheafOfModules.unit _)
 
+/-- The evaluation `M ⊗ Hom(M, 𝒪_X) ⟶ 𝒪_X`, `m ⊗ φ ↦ φ(m)`, of the underlying presheaves of
+modules of `M` and of its dual. -/
+noncomputable abbrev presheafDualEvaluation (M : X.Modules) :
+    (M.val ⊗ Mᵛ.val : _root_.PresheafOfModules.{u} (X.sheaf.obj ⋙ forget₂ _ _)) ⟶
+      (SheafOfModules.unit X.ringCatSheaf).val :=
+  PresheafOfModules.tensorHomUncurry (R := X.sheaf.obj) (𝟙 _)
+
+/-- The evaluation morphism `M ⊗ Mᵛ ⟶ 𝒪_X`, `m ⊗ φ ↦ φ(m)`: the sheafification of the
+evaluation `M ⊗ Hom(M, 𝒪_X) ⟶ 𝒪_X` of the underlying presheaves of modules. -/
+noncomputable def dualEvaluation (M : X.Modules) : M ⊗ Mᵛ ⟶ 𝟙_ X.Modules :=
+  letI := SheafOfModules.isMonoidal_W X.sheaf
+  (SheafOfModules.tensorObjIsoSheafification (R := X.sheaf) M Mᵛ).hom ≫
+    (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).map (presheafDualEvaluation M) ≫
+      (PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).counit.app (𝟙_ X.Modules)
+
+open Opposite in
+/-- If `M` is trivial on an open `U`, then the evaluation `M ⊗ Mᵛ ⟶ 𝒪_X` of the underlying
+presheaves of modules is bijective on sections over every open `V ⊆ U`. -/
+lemma presheafDualEvaluation_app_bijective {M : X.Modules} {U V : X.Opens} (g : V ⟶ U)
+    (E : M.over U ≅ SheafOfModules.unit (X.ringCatSheaf.over U)) :
+    Function.Bijective ((presheafDualEvaluation M).app (op V)) := by
+  refine PresheafOfModules.tensorHomUncurry_id_app_bijective (M := M.val)
+    (E.inv.val.app (op (Over.mk g)) (1 : X.sheaf.obj.obj (op V)))
+    { app W := E.hom.val.app (op (Over.mk (W.unop.hom ≫ g)))
+      naturality {A B} f := E.hom.val.naturality (Over.homMk f.unop.left (Subsingleton.elim _ _) :
+        Over.mk (B.unop.hom ≫ g) ⟶ Over.mk (A.unop.hom ≫ g)).op }
+    (congrArg (fun f ↦ f.val.app (op (Over.mk g)) (1 : X.sheaf.obj.obj (op V))) E.inv_hom_id)
+    fun W x ↦ ⟨E.hom.val.app (op (Over.mk (W.hom ≫ g))) x, ?_⟩
+  have h := PresheafOfModules.naturality_apply E.inv.val
+    (Over.homMk W.hom (Subsingleton.elim _ _) : Over.mk (W.hom ≫ g) ⟶ Over.mk g).op
+    (1 : X.sheaf.obj.obj (op V))
+  refine (congrArg (fun f ↦ f.val.app (op (Over.mk (W.hom ≫ g))) x) E.hom_inv_id).symm.trans ?_
+  refine (congrArg (E.inv.val.app (op (Over.mk (W.hom ≫ g))))
+    (@mul_one (X.sheaf.obj.obj (op W.left)) _
+      (E.hom.val.app (op (Over.mk (W.hom ≫ g))) x)).symm).trans ?_
+  refine ((E.inv.val.app (op (Over.mk (W.hom ≫ g)))).hom.map_smul _
+    (1 : X.sheaf.obj.obj (op W.left))).trans ?_
+  congr 1
+  exact (congrArg (E.inv.val.app (op (Over.mk (W.hom ≫ g))))
+    (PresheafOfModules.unit_map_one (R := X.ringCatSheaf.obj) W.hom.op).symm).trans h
+
+/-- **The evaluation `M ⊗ Mᵛ ⟶ 𝒪_X` is an isomorphism for an invertible `M`.** It is the
+sheafification of the evaluation of the underlying presheaves of modules, which is bijective on
+sections over every open on which `M` is trivial (`presheafDualEvaluation_app_bijective`), hence
+locally bijective. -/
+instance isIso_dualEvaluation (M : X.Modules) [M.IsInvertible] : IsIso (dualEvaluation M) := by
+  choose U hU e using fun x : X ↦ IsInvertible.exists_isoUnit (M := M) x
+  have hcov : (Opens.grothendieckTopology X).CoversTop U := by
+    rw [Opens.coversTop_iff]
+    exact TopologicalSpace.IsOpenCover.mk
+      (eq_top_iff.mpr fun x _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hU x⟩)
+  have hW : (Opens.grothendieckTopology X).W.inverseImage
+      (PresheafOfModules.toPresheaf X.ringCatSheaf.obj) (presheafDualEvaluation M) :=
+    (GrothendieckTopology.W_iff_isLocallyBijective _ _).2
+      ⟨Presheaf.isLocallyInjective_of_coversTop hcov _ fun V x g ↦
+        (presheafDualEvaluation_app_bijective g (overIsoUnitOfPullbackIotaIso (e x).some)).1,
+      Presheaf.isLocallySurjective_of_coversTop hcov _ fun V x g ↦
+        (presheafDualEvaluation_app_bijective g (overIsoUnitOfPullbackIotaIso (e x).some)).2⟩
+  rw [PresheafOfModules.inverseImage_W_toPresheaf_eq_inverseImage_isomorphisms
+    (𝟙 X.ringCatSheaf.obj)] at hW
+  have : IsIso ((PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).map
+    (presheafDualEvaluation M)) := hW
+  have hc : IsIso ((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).counit.app
+    (𝟙_ X.Modules)) := inferInstance
+  exact IsIso.comp_isIso' (Iso.isIso_hom _) (IsIso.comp_isIso' this hc)
+
 /-- The dual of the structure sheaf is the structure sheaf: `Hom(𝒪_X, 𝒪_X) ≅ 𝒪_X`. -/
 theorem nonempty_dual_unit_iso :
     Nonempty ((SheafOfModules.unit X.ringCatSheaf : X.Modules)ᵛ ≅
       SheafOfModules.unit X.ringCatSheaf) :=
-  sorry
+  ⟨(λ_ _).symm ≪≫ asIso (dualEvaluation (𝟙_ X.Modules))⟩
 
 /-- **The dual of an invertible module is its tensor inverse.** For an invertible `𝒪_X`-module
 `M`, the evaluation `M ⊗ Mᵛ ⟶ 𝒪_X` is an isomorphism: this is local on `X`, and for `M = 𝒪_X` it
@@ -89,7 +158,7 @@ is `𝒪_X ⊗ 𝒪_X ≅ 𝒪_X`. This is what makes the isomorphism classes of
 the Picard group (blueprint `def-sc-picard-group`). -/
 theorem nonempty_tensorObj_dual_iso_unit (M : X.Modules) [M.IsInvertible] :
     Nonempty (M ⊗ Mᵛ ≅ 𝟙_ X.Modules) :=
-  sorry
+  ⟨asIso (dualEvaluation M)⟩
 
 /-- **Cancellation of an invertible module.** If `M` is invertible and `M ⊗ N ≅ M`, then
 `N ≅ 𝒪_X`: tensor with the inverse `Mᵛ` of `M`. -/
@@ -122,6 +191,7 @@ noncomputable def dualTensorFunctor (ω : X.Modules)
     fun ℱ ↦ by
       have : ℱ.unop.obj.IsFiniteLocallyFree := ℱ.unop.property
       have := IsFiniteLocallyFree.dual ℱ.unop.obj
+      have : ω.IsFiniteLocallyFree := SheafOfModules.IsInvertible.isFiniteLocallyFree ω
       exact IsFiniteLocallyFree.tensorObj ℱ.unop.objᵛ ω
 
 /-- **Biduality twisted by an invertible module.** For an invertible `ω`, the canonical maps

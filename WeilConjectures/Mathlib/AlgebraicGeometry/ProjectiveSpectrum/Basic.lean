@@ -33,7 +33,10 @@ function `f / g` becomes a unit there.
 
 `AlgebraicGeometry.Proj.exists_isClosedImmersion_of_fromOfGlobalSections` is a criterion for
 the morphism induced by `f` to factor as a closed immersion into a standard affine chart of
-`Proj 𝒜`.
+`Proj 𝒜`, and `AlgebraicGeometry.Proj.exists_comp_awayι_eq_fromOfGlobalSections` computes the
+factorization through the chart on the fractions `a / tᵉ`. The chart `Spec (A_t)₀ ⟶ Proj 𝒜`
+pulls the section `awayToSection 𝒜 t z` back to `z`
+(`AlgebraicGeometry.Proj.awayToSection_awayι_appLE`).
 
 Finally, we record `AlgebraicGeometry.Proj.isIso_toSpecZero`, a criterion for the structure
 morphism `Proj 𝒜 ⟶ Spec 𝒜₀` to be an isomorphism.
@@ -382,6 +385,91 @@ theorem exists_isClosedImmersion_of_fromOfGlobalSections {X : Scheme.{u}} [IsAff
       rw [← basicOpenIsoSpec_inv_ι, Iso.hom_inv_id_assoc]
     rw [key, Category.assoc, Category.assoc, hbi,
       ← ι_comp_fromOfGlobalSections 𝒜 f hf h0d hd, IsIso.inv_hom_id_assoc]
+
+/-- The chart `Spec (A_t)₀ ⟶ Proj 𝒜` pulls the section `awayToSection 𝒜 t z` of `D₊(t)` back
+to the global function `z` of `Spec (A_t)₀`. -/
+lemma awayToSection_awayι_appLE {t : A} {d : ℕ} (hd : t ∈ 𝒜 d) (h0d : 0 < d) :
+    awayToSection 𝒜 t ≫ (awayι 𝒜 t hd h0d).appLE (basicOpen 𝒜 t) ⊤
+      (by rw [← opensRange_awayι 𝒜 t hd h0d]; exact (Scheme.Hom.preimage_opensRange _).ge) =
+      (Scheme.ΓSpecIso _).inv := by
+  have key : (basicOpenIsoSpec 𝒜 t hd h0d).hom.app ⊤ = (Scheme.ΓSpecIso _).hom ≫
+      awayToSection 𝒜 t ≫ (basicOpen 𝒜 t).topIso.inv := by
+    rw [basicOpenIsoSpec_hom]
+    exact basicOpenToSpec_app_top 𝒜 t
+  have hι : (basicOpenIsoSpec 𝒜 t hd h0d).hom ≫ awayι 𝒜 t hd h0d = (basicOpen 𝒜 t).ι := by
+    rw [← basicOpenIsoSpec_inv_ι, Iso.hom_inv_id_assoc]
+  have hcongr : ∀ {f g : (basicOpen 𝒜 t).toScheme ⟶ Proj 𝒜} (h : f = g) (V) (e),
+      f.appLE (basicOpen 𝒜 t) V e = g.appLE (basicOpen 𝒜 t) V (h ▸ e) := by
+    rintro f g rfl V e
+    rfl
+  rw [← cancel_mono ((basicOpenIsoSpec 𝒜 t hd h0d).hom.appTop), Category.assoc,
+    Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE, Scheme.Hom.appLE_comp_appLE, hcongr hι,
+    ← Scheme.Hom.app_eq_appLE, key, Iso.inv_hom_id_assoc]
+  congr 1
+
+/-- A morphism `a : V ⟶ Spec (A_t)₀` followed by the chart `Spec (A_t)₀ ⟶ Proj 𝒜` pulls the
+section `awayToSection 𝒜 t z` of `D₊(t)` back to `a^♯ z`. -/
+lemma comp_awayι_appLE_awayToSection {V : Scheme.{u}} {t : A} {d : ℕ} (hd : t ∈ 𝒜 d)
+    (h0d : 0 < d) (a : V ⟶ Spec (.of (Away 𝒜 t))) (e) (z : Away 𝒜 t) :
+    (a ≫ awayι 𝒜 t hd h0d).appLE (basicOpen 𝒜 t) ⊤ e (awayToSection 𝒜 t z) =
+      ((Scheme.ΓSpecIso _).inv ≫ a.appTop) z := by
+  rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE, ← awayToSection_awayι_appLE 𝒜 hd h0d,
+    Category.assoc, Scheme.Hom.appLE_comp_appLE]
+  rfl
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- If the homogeneous element `t` of positive degree pulls back to `1` under
+`f : A →+* Γ(X, ⊤)`, the morphism `X ⟶ Proj 𝒜` attached to `f` factors through the chart
+`Spec (A_t)₀`, by a morphism pulling back the fraction `a / tᵉ` to `f a`. -/
+lemma exists_comp_awayι_eq_fromOfGlobalSections {X : Scheme.{u}} (f : A →+* Γ(X, ⊤))
+    (hf : (HomogeneousIdeal.irrelevant 𝒜).toIdeal.map f = ⊤) {t : A} {d : ℕ} (h0d : 0 < d)
+    (hd : t ∈ 𝒜 d) (ht : f t = 1) :
+    ∃ q : X ⟶ Spec (.of (Away 𝒜 t)), q ≫ awayι 𝒜 t hd h0d = fromOfGlobalSections 𝒜 f hf ∧
+      ∀ (e : ℕ) (a : A) (ha : a ∈ 𝒜 (e • d)),
+        ((Scheme.ΓSpecIso _).inv ≫ q.appTop) (Away.mk 𝒜 hd e a ha) = f a := by
+  have hbo : X.basicOpen (f t) = ⊤ := by rw [ht]; exact X.basicOpen_one
+  have hι : IsIso (X.basicOpen (f t)).ι :=
+    isIso_of_isOpenImmersion_of_opensRange_eq_top _ ((Scheme.Opens.opensRange_ι _).trans hbo)
+  have hxle : Submonoid.powers t ≤ (Submonoid.powers (f t)).comap f :=
+    Submonoid.powers_le.mpr (Submonoid.mem_powers _)
+  set Θ : Away 𝒜 t →+* Localization.Away (f t) :=
+    (IsLocalization.map (S := Localization.Away t) (Localization.Away (f t)) f hxle).comp
+      (algebraMap (Away 𝒜 t) (Localization.Away t)) with hΘdef
+  have hΘmk : ∀ (e : ℕ) (a : A) (ha : a ∈ 𝒜 (e • d)),
+      Θ (Away.mk 𝒜 hd e a ha) = algebraMap Γ(X, ⊤) (Localization.Away (f t)) (f a) := by
+    intro e a ha
+    rw [hΘdef, RingHom.comp_apply, HomogeneousLocalization.algebraMap_apply,
+      HomogeneousLocalization.Away.val_mk, Localization.mk_eq_mk', IsLocalization.map_mk',
+      IsLocalization.mk'_eq_iff_eq_mul]
+    simp [ht]
+  refine ⟨inv (X.basicOpen (f t)).ι ≫ X.toSpecAway (f t) ≫
+    Spec.map (CommRingCat.ofHom Θ), ?_, fun e a ha ↦ ?_⟩
+  · have key : X.toSpecAway (f t) ≫ Spec.map (CommRingCat.ofHom Θ) =
+        toBasicOpenOfGlobalSections 𝒜 f rfl h0d hd ≫ (basicOpenIsoSpec 𝒜 t hd h0d).hom := by
+      rw [toBasicOpenOfGlobalSections_comp_basicOpenIsoSpec_hom 𝒜 f rfl h0d hd hxle,
+        Scheme.toSpecAway, Category.assoc]
+    have hbi : (basicOpenIsoSpec 𝒜 t hd h0d).hom ≫ awayι 𝒜 t hd h0d = (basicOpen 𝒜 t).ι := by
+      rw [← basicOpenIsoSpec_inv_ι, Iso.hom_inv_id_assoc]
+    rw [Category.assoc, key, Category.assoc, hbi,
+      ← ι_comp_fromOfGlobalSections 𝒜 f hf h0d hd, IsIso.inv_hom_id_assoc]
+  · have e1 := Scheme.ΓSpecIso_inv_naturality (CommRingCat.ofHom Θ)
+    have e2 := Scheme.ΓSpecIso_inv_naturality
+      (CommRingCat.ofHom (algebraMap Γ(X, ⊤) (Localization.Away (f t))))
+    have e3 : inv (X.basicOpen (f t)).ι ≫ X.toSpecAway (f t) ≫
+        Spec.map (CommRingCat.ofHom (algebraMap Γ(X, ⊤) (Localization.Away (f t)))) =
+        X.toSpecΓ := by
+      rw [Scheme.toSpecAway_SpecMap_algebraMap, IsIso.inv_hom_id_assoc]
+    have e5 : CommRingCat.ofHom (algebraMap Γ(X, ⊤) (Localization.Away (f t))) ≫
+        (Scheme.ΓSpecIso _).inv ≫ (X.toSpecAway (f t)).appTop ≫
+          (inv (X.basicOpen (f t)).ι).appTop = 𝟙 _ := by
+      rw [reassoc_of% e2, ← Scheme.Hom.comp_appTop, ← Scheme.Hom.comp_appTop,
+        Category.assoc, e3, Scheme.toSpecΓ_appTop]
+      exact (Scheme.ΓSpecIso Γ(X, ⊤)).inv_hom_id
+    simp only [Scheme.Hom.comp_appTop]
+    rw [← Category.assoc, ← Category.assoc, ← e1, Category.assoc, Category.assoc,
+      ConcreteCategory.comp_apply]
+    erw [hΘmk]
+    exact congrArg (fun φ : Γ(X, ⊤) ⟶ Γ(X, ⊤) ↦ φ (f a)) e5
 
 end Proj
 

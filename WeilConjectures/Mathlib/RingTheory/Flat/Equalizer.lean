@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.Flat.Equalizer
+public import Mathlib.RingTheory.RingHom.Flat
+public import WeilConjectures.Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Extension of ideals along a flat ring map commutes with finite intersections
@@ -17,6 +19,12 @@ map `R → S` commutes with finite intersections: `(I ⊓ J) S = I S ⊓ J S`.
 
 - `Ideal.map_inf_of_flat`: the binary case.
 - `Ideal.map_iInf_of_flat`: the case of a finite family.
+- `Module.Flat.of_exact_of_flat_of_flat`, `Module.Flat.of_exact_of_flat_of_flat_right`: an
+  extension of flat modules is flat, and the kernel of a surjection of flat modules is flat.
+- `Ideal.Quotient.flat_span_singleton_mul`: if `v₁` is a non-zerodivisor and `B ⧸ (v₁)`,
+  `B ⧸ (v₂)` are flat, then so is `B ⧸ (v₁ v₂)`.
+- `Algebra.TensorProduct.includeLeftRingHom_mem_nonZeroDivisors_of_flat`: a non-zerodivisor
+  `f ∈ B` with `B ⧸ (f)` flat over `A` stays a non-zerodivisor after any base change `A → A'`.
 -/
 
 @[expose] public section
@@ -82,3 +90,98 @@ theorem map_iInf_of_flat {ι : Type*} [Finite ι] (I : ι → Ideal R) :
   | insert i s _ ih => rw [Finset.inf_insert, Finset.inf_insert, map_inf_of_flat, ih]
 
 end Ideal
+
+/-- **Extensions of flat modules are flat.** In a short exact sequence
+`0 ⟶ M' ⟶ M ⟶ M'' ⟶ 0` of `R`-modules with `M'` and `M''` flat, `M` is flat. -/
+lemma Module.Flat.of_exact_of_flat_of_flat {R M' M M'' : Type*} [CommRing R]
+    [AddCommGroup M'] [AddCommGroup M] [AddCommGroup M''] [Module R M'] [Module R M]
+    [Module R M''] [Module.Flat R M'] [Module.Flat R M''] (f : M' →ₗ[R] M) (g : M →ₗ[R] M'')
+    (hf : Function.Injective f) (hg : Function.Surjective g) (H : Function.Exact f g) :
+    Module.Flat R M := by
+  rw [Module.Flat.iff_rTensor_preserves_injective_linearMap]
+  intro N P _ _ _ _ ι hι
+  rw [injective_iff_map_eq_zero]
+  intro x hx
+  have h1 : g.lTensor N x = 0 := by
+    apply Module.Flat.rTensor_preserves_injective_linearMap (M := M'') ι hι
+    rw [← LinearMap.comp_apply, LinearMap.rTensor_comp_lTensor, ← LinearMap.lTensor_comp_rTensor,
+      LinearMap.comp_apply, hx, map_zero, map_zero]
+  obtain ⟨y, rfl⟩ := (_root_.lTensor_exact N H hg x).mp h1
+  have h2 : ι.rTensor M' y = 0 := by
+    apply LinearMap.lTensor_injective_of_exact_of_flat g hg f hf H P
+    rw [← LinearMap.comp_apply, LinearMap.lTensor_comp_rTensor, ← LinearMap.rTensor_comp_lTensor,
+      LinearMap.comp_apply, hx, map_zero]
+  have h3 : y = 0 := by
+    apply Module.Flat.rTensor_preserves_injective_linearMap (M := M') ι hι
+    rw [h2, map_zero]
+  rw [h3, map_zero]
+
+/-- **Kernels of surjections of flat modules are flat.** In a short exact sequence
+`0 ⟶ M' ⟶ M ⟶ M'' ⟶ 0` of `R`-modules with `M` and `M''` flat, `M'` is flat. -/
+lemma Module.Flat.of_exact_of_flat_of_flat_right {R M' M M'' : Type*} [CommRing R]
+    [AddCommGroup M'] [AddCommGroup M] [AddCommGroup M''] [Module R M'] [Module R M]
+    [Module R M''] [Module.Flat R M] [Module.Flat R M''] (f : M' →ₗ[R] M) (g : M →ₗ[R] M'')
+    (hf : Function.Injective f) (hg : Function.Surjective g) (H : Function.Exact f g) :
+    Module.Flat R M' := by
+  rw [Module.Flat.iff_rTensor_preserves_injective_linearMap]
+  intro N P _ _ _ _ ι hι
+  rw [injective_iff_map_eq_zero]
+  intro x hx
+  have h1 : f.lTensor N x = 0 := by
+    apply Module.Flat.rTensor_preserves_injective_linearMap (M := M) ι hι
+    rw [← LinearMap.comp_apply, LinearMap.rTensor_comp_lTensor, ← LinearMap.lTensor_comp_rTensor,
+      LinearMap.comp_apply, hx, map_zero, map_zero]
+  exact LinearMap.lTensor_injective_of_exact_of_flat g hg f hf H N (h1.trans (map_zero _).symm)
+
+section Quotient
+
+variable {R B : Type*} [CommRing R] [CommRing B] [Algebra R B] (v₁ v₂ : B)
+
+/-- If `v₁` is a non-zerodivisor and `B ⧸ (v₁)`, `B ⧸ (v₂)` are flat over `R`, then so is
+`B ⧸ (v₁ v₂)`. -/
+lemma Ideal.Quotient.flat_span_singleton_mul (hv : v₁ ∈ nonZeroDivisors B)
+    [Module.Flat R (B ⧸ Ideal.span {v₁})] [Module.Flat R (B ⧸ Ideal.span {v₂})] :
+    Module.Flat R (B ⧸ Ideal.span {v₁ * v₂}) :=
+  Module.Flat.of_exact_of_flat_of_flat _ _ (Ideal.Quotient.injective_mulSpanSingleton v₁ v₂ hv)
+    (Ideal.Quotient.surjective_factorSpanSingleton v₁ v₂)
+    (Ideal.Quotient.exact_mulSpanSingleton_factorSpanSingleton v₁ v₂)
+
+end Quotient
+
+/-- **Base change of a regular element with flat quotient.** Let `A → B` be a ring map and let
+`f ∈ B` be a non-zerodivisor such that `B ⧸ (f)` is flat over `A` (here presented as a surjection
+`q : B → C` with kernel `(f)`). Then for every `A`-algebra `A'`, the element `f ⊗ 1` is a
+non-zerodivisor of `B ⊗[A] A'`: tensoring the exact sequence `0 → B → B → C → 0` (the first map
+being multiplication by `f`) with `A'` stays exact on the left as `C` is flat over `A`. -/
+theorem Algebra.TensorProduct.includeLeftRingHom_mem_nonZeroDivisors_of_flat
+    {A B C A' : Type*} [CommRing A] [CommRing B] [CommRing C] [CommRing A'] [Algebra A B]
+    [Algebra A A'] (q : B →+* C) (hq : Function.Surjective q) {f : B}
+    (hker : RingHom.ker q = Ideal.span {f}) (hflat : (q.comp (algebraMap A B)).Flat)
+    (hf : f ∈ nonZeroDivisors B) :
+    (Algebra.TensorProduct.includeLeftRingHom f : B ⊗[A] A') ∈ nonZeroDivisors (B ⊗[A] A') := by
+  let := (q.comp (algebraMap A B)).toAlgebra
+  have : Module.Flat A C := hflat
+  let qA : B →ₗ[A] C :=
+    { toFun := q
+      map_add' := map_add q
+      map_smul' := fun a b ↦ by
+        simp [Algebra.smul_def, RingHom.algebraMap_toAlgebra] }
+  have hex : Function.Exact (LinearMap.mulLeft A f) qA := fun b ↦
+    (RingHom.mem_ker (f := q)).symm.trans <| by
+      rw [hker, Ideal.mem_span_singleton']
+      simp [mul_comm]
+  have hinj := LinearMap.lTensor_injective_of_exact_of_flat qA hq (LinearMap.mulLeft A f)
+    (isRegular_iff_mem_nonZeroDivisors.mpr hf).left hex A'
+  have hcomm (x : B ⊗[A] A') :
+      (LinearMap.mulLeft A f).lTensor A' (TensorProduct.comm A B A' x) =
+        TensorProduct.comm A B A' (Algebra.TensorProduct.includeLeftRingHom f * x) := by
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul b a => simp
+    | add x y hx hy => rw [map_add, map_add, hx, hy, mul_add, map_add]
+  have key (x : B ⊗[A] A') (hx : Algebra.TensorProduct.includeLeftRingHom f * x = 0) :
+      x = 0 := by
+    have := hcomm x
+    rw [hx, map_zero, ← map_zero ((LinearMap.mulLeft A f).lTensor A')] at this
+    simpa using hinj this
+  exact mem_nonZeroDivisors_iff.mpr ⟨key, fun x hx ↦ key x (by rwa [mul_comm])⟩
