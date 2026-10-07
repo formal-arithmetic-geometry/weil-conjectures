@@ -321,7 +321,8 @@ of `h : P f`, for an arbitrary `f`, is left exact: at `W` it is the direct sum, 
 disjoint union of categories with terminal objects; direct sums are exact in the Grothendieck
 abelian category `A`. -/
 lemma preservesFiniteLimits_op_lan_overMap_of_isGrothendieckAbelian (h : P f)
-    [∀ F : (P.Over ⊤ V)ᵒᵖ ⥤ A, (MorphismProperty.Over.map ⊤ h).op.HasPointwiseLeftKanExtension F] :
+    [∀ F : (P.Over ⊤ V)ᵒᵖ ⥤ A,
+      (MorphismProperty.Over.map ⊤ h).op.HasPointwiseLeftKanExtension F] :
     PreservesFiniteLimits ((MorphismProperty.Over.map ⊤ h).op.lan :
       ((P.Over ⊤ V)ᵒᵖ ⥤ A) ⥤ (P.Over ⊤ U)ᵒᵖ ⥤ A) :=
   have : HasCoproducts.{u} A := hasCoproducts_shrink.{u, u + 1}
