@@ -23,6 +23,13 @@ tensor inverse.
 - `CategoryTheory.IsInvertible`: `X` admits a tensor inverse.
 - `CategoryTheory.MonoidalClosed.ihomIsoTensorLeft`: for an exact pairing of `Y` and `X`, the
   internal hom `ihom X` is `Y ⊗ -`.
+- `CategoryTheory.MonoidalClosed.ihomUnitTensorToIhom`: the canonical comparison map
+  `(ihom X).obj (𝟙_ C) ⊗ Z ⟶ (ihom X).obj Z`.
+
+## Main statements
+
+- `CategoryTheory.MonoidalClosed.isIso_ihomUnitTensorToIhom`: the comparison map is an
+  isomorphism when `X` has a left dual.
 
 -/
 
@@ -62,6 +69,10 @@ def IsInvertible (X : C) : Prop :=
 theorem isInvertible_unit : IsInvertible (𝟙_ C) :=
   ⟨𝟙_ C, ⟨λ_ _⟩⟩
 
+theorem tensorLeftAdjunction_counit_app (Y X : C) [ExactPairing Y X] (Z : C) :
+    (tensorLeftAdjunction Y X).counit.app Z = (α_ _ _ _).inv ≫ ε_ Y X ▷ Z ≫ (λ_ Z).hom := by
+  simp [tensorLeftAdjunction, tensorLeftHomEquiv]
+
 namespace MonoidalClosed
 
 variable [MonoidalClosed C]
@@ -80,6 +91,32 @@ noncomputable def ihomObjIsoTensor (Y X : C) [ExactPairing Y X] (Z : C) :
 /-- If `Y` is a left dual of `X`, then the internal dual `(ihom X).obj (𝟙_ C)` is `Y`. -/
 noncomputable def ihomObjUnitIso (Y X : C) [ExactPairing Y X] : (ihom X).obj (𝟙_ C) ≅ Y :=
   ihomObjIsoTensor Y X (𝟙_ C) ≪≫ ρ_ Y
+
+/-- The canonical comparison map `(ihom X).obj (𝟙_ C) ⊗ Z ⟶ (ihom X).obj Z`: the transpose of
+`X ⊗ ((ihom X).obj (𝟙_ C) ⊗ Z) ≅ (X ⊗ (ihom X).obj (𝟙_ C)) ⊗ Z ⟶ 𝟙_ C ⊗ Z ≅ Z`, built from
+the evaluation `X ⊗ (ihom X).obj (𝟙_ C) ⟶ 𝟙_ C`. -/
+noncomputable def ihomUnitTensorToIhom (X Z : C) : (ihom X).obj (𝟙_ C) ⊗ Z ⟶ (ihom X).obj Z :=
+  curry ((α_ _ _ _).inv ≫ (ihom.ev X).app (𝟙_ C) ▷ Z ≫ (λ_ Z).hom)
+
+theorem ihomUnitTensorToIhom_eq (Y X : C) [ExactPairing Y X] (Z : C) :
+    ihomUnitTensorToIhom X Z = (ihomObjUnitIso Y X).hom ▷ Z ≫ (ihomObjIsoTensor Y X Z).inv := by
+  have h₁ := (ihom.adjunction X).rightAdjointUniq_hom_app_counit (tensorLeftAdjunction Y X) (𝟙_ C)
+  have h₂ := (tensorLeftAdjunction Y X).rightAdjointUniq_hom_app_counit (ihom.adjunction X) Z
+  rw [tensorLeftAdjunction_counit_app] at h₁ h₂
+  dsimp only [ihom.ihom_adjunction_counit] at h₁ h₂
+  simp only [curriedTensor_obj_map] at h₁ h₂
+  simp only [ihomUnitTensorToIhom, curry_eq_iff, uncurry_eq, ihomObjUnitIso, ihomObjIsoTensor,
+    ihomIsoTensorLeft, Iso.trans_hom, Iso.app_inv, Adjunction.rightAdjointUniq_inv_app,
+    Iso.app_hom]
+  rw [← h₁, MonoidalCategory.whiskerLeft_comp_assoc, h₂]
+  monoidal
+
+/-- If `X` has a left dual, the comparison map `(ihom X).obj (𝟙_ C) ⊗ Z ⟶ (ihom X).obj Z` is an
+isomorphism. -/
+theorem isIso_ihomUnitTensorToIhom (Y X : C) [ExactPairing Y X] (Z : C) :
+    IsIso (ihomUnitTensorToIhom X Z) := by
+  rw [ihomUnitTensorToIhom_eq Y X]
+  infer_instance
 
 end MonoidalClosed
 

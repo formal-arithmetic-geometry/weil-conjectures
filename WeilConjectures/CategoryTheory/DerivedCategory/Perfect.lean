@@ -31,16 +31,18 @@ perfect objects of `D(R)` are the *perfect point complexes*.
   is perfect if and only if it is bounded with finite-dimensional cohomology.
 - `DerivedCategory.IsPerfect.nonempty_iso_ihom_ihom` (`prop-pod-biduality-at-the-point`):
   biduality `C ≅ C^∨∨` for a perfect `C`, where `C^∨ = RHom_R(C, R)`.
-- `DerivedCategory.IsPerfect.nonempty_tensor_iso_ihom` (`prop-pod-biduality-at-the-point`):
-  `C^∨ ⊗ᴸ_R D ≅ RHom_R(C, D)` for a perfect `C` and any `D`.
+- `DerivedCategory.IsPerfect.isIso_ihomUnitTensorToIhom` (`prop-pod-biduality-at-the-point`):
+  the canonical comparison `C^∨ ⊗ᴸ_R D ⟶ RHom_R(C, D)` is an isomorphism for a perfect `C` and
+  any `D`.
 
 ## Implementation notes
 
 The biduality statements are deduced from the dualizability of a perfect complex for the
 derived tensor product (`DerivedCategory.IsPerfect.isDualizable`), by the formal arguments of a
-rigid braided monoidal category. As in `WeilConjectures.SixFunctors.Etale.Derived.Perfect`,
-canonical comparison maps are not constructed, so the isomorphisms are stated as
-`Nonempty (_ ≅ _)`.
+rigid braided monoidal category. The tensor–internal-Hom comparison needs no braiding and is
+the canonical map `CategoryTheory.MonoidalClosed.ihomUnitTensorToIhom`. The canonical biduality
+map `C ⟶ C^∨∨` needs a braiding, and `D(R)` only carries one up to `Nonempty`
+(`DerivedCategory.nonempty_braidedCategory`), so biduality is stated as `Nonempty (_ ≅ _)`.
 -/
 
 @[expose] public section
@@ -162,8 +164,10 @@ theorem IsPerfect.isDualizable {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.I
 
 /-- Blueprint `prop-pod-biduality-at-the-point`: biduality at the point.
 
-For a perfect point complex `C`, the evaluation and coevaluation give an isomorphism
-`C ≅ C^∨∨` with the double derived dual, where `C^∨ = RHom_R(C, R)`. -/
+For a perfect point complex `C`, there is an isomorphism `C ≅ C^∨∨` with the double derived dual,
+where `C^∨ = RHom_R(C, R)`. This only asserts that some isomorphism exists, not that the
+canonical biduality map is one: that map needs a braiding of `D(R)`, which is only known to
+exist (`DerivedCategory.nonempty_braidedCategory`). -/
 theorem IsPerfect.nonempty_iso_ihom_ihom {C : DerivedCategory (ModuleCat.{u} R)}
     (hC : C.IsPerfect) :
     Nonempty (C ≅ (ihom ((ihom C).obj (𝟙_ _))).obj (𝟙_ _)) := by
@@ -176,16 +180,15 @@ theorem IsPerfect.nonempty_iso_ihom_ihom {C : DerivedCategory (ModuleCat.{u} R)}
 
 /-- Blueprint `prop-pod-biduality-at-the-point`: biduality at the point.
 
-For a perfect point complex `C` and every object `D` of `D(R)`, the tensor–internal-Hom
-comparison `C^∨ ⊗ᴸ_R D ≅ RHom_R(C, D)` is an isomorphism. -/
-theorem IsPerfect.nonempty_tensor_iso_ihom {C : DerivedCategory (ModuleCat.{u} R)}
+For a perfect point complex `C` and every object `D` of `D(R)`, the canonical tensor–internal-Hom
+comparison `C^∨ ⊗ᴸ_R D ⟶ RHom_R(C, D)` is an isomorphism. -/
+theorem IsPerfect.isIso_ihomUnitTensorToIhom {C : DerivedCategory (ModuleCat.{u} R)}
     (hC : C.IsPerfect) (D : DerivedCategory (ModuleCat.{u} R)) :
-    Nonempty ((ihom C).obj (𝟙_ _) ⊗ D ≅ (ihom C).obj D) := by
+    IsIso (MonoidalClosed.ihomUnitTensorToIhom C D) := by
   obtain ⟨_⟩ := hC.isDualizable
   obtain ⟨_⟩ := nonempty_braidedCategory (ModuleCat.{u} R)
   let := BraidedCategory.exactPairing_swap C Cᘁ
-  exact ⟨whiskerRightIso (MonoidalClosed.ihomObjUnitIso Cᘁ C) D ≪≫
-    (MonoidalClosed.ihomObjIsoTensor Cᘁ C D).symm⟩
+  exact MonoidalClosed.isIso_ihomUnitTensorToIhom Cᘁ C D
 
 end Biduality
 
