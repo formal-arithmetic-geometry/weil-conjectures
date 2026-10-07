@@ -102,7 +102,9 @@ noncomputable def oneIso : (fromSkeleton Y.Modules).obj (1 : Y.Pic).val ≅ 𝟙
   ofIsInvertibleIso _
 
 /-- **The group law on the Picard group**, induced by the tensor product of invertible modules.
-The inverse of a class is the class of the dual module. -/
+The inverse of a class is the class of the dual module.
+
+(blueprint: `lem-sc-pic-group`) -/
 noncomputable instance instCommGroup : CommGroup Y.Pic where
   mul_assoc L L' L'' := by
     refine eq_iff_nonempty_iso.2 ⟨mulIso _ _ ≪≫ whiskerRightIso (mulIso _ _) _ ≪≫ α_ _ _ _ ≪≫
