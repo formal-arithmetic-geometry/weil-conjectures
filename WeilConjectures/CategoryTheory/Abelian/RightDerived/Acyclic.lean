@@ -6,6 +6,7 @@ module
 
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 public import Mathlib.Algebra.Homology.HomotopyCategory.Plus
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.Embedding.Extend
@@ -21,10 +22,11 @@ injective resolutions. An object `A` is `F`-acyclic if `R^q F A = 0` for all `q 
 
 The key statement is that `F` sends exact bounded below cochain complexes of `F`-acyclic
 objects to exact complexes. It follows by dimension shifting from the long exact sequence of
-the right derived functors. Applied to mapping cones, it shows that `F.mapHomologicalComplex`
-sends quasi-isomorphisms between bounded below cochain complexes of `F`-acyclic objects to
-quasi-isomorphisms. As a consequence, if `ι : single₀ X ⟶ I` is a resolution of `X` by
-`F`-acyclic objects, then `R^q F X ≅ H^q(F I)`.
+the right derived functors (`ShortComplex.ShortExact.exists_rightDerived_δ_exact`). Applied to
+mapping cones, it shows that `F.mapHomologicalComplex` sends quasi-isomorphisms between
+bounded below cochain complexes of `F`-acyclic objects to quasi-isomorphisms. As a
+consequence, if `ι : single₀ X ⟶ I` is a resolution of `X` by `F`-acyclic objects, then
+`R^q F X ≅ H^q(F I)`.
 
 ## Main definitions
 
@@ -40,9 +42,6 @@ quasi-isomorphisms. As a consequence, if `ι : single₀ X ⟶ I` is a resolutio
 * `CategoryTheory.Functor.nonempty_rightDerivedObjIso_homology_of_acyclic`: a resolution
   `ι : single₀ X ⟶ I` of `X` by `F`-acyclic objects gives `R^q F X ≅ H^q(F I)`.
 
-* `CategoryTheory.ShortComplex.ShortExact.exists_rightDerived_δ_exact`: the long exact sequence
-  `R^q F B ⟶ R^q F C ⟶ R^{q+1} F A ⟶ R^{q+1} F B` of a short exact sequence
-  `0 ⟶ A ⟶ B ⟶ C ⟶ 0`. This is not proved yet.
 * `CategoryTheory.ShortComplex.ShortExact.rightAcyclic_X₃`: `F`-acyclic objects are closed under
   cokernels of monomorphisms.
 * `CategoryTheory.ShortComplex.ShortExact.map_of_rightAcyclic`: `F` sends a short exact sequence
@@ -86,7 +85,7 @@ instance : F.rightAcyclic.ContainsZero where
 
 variable {F}
 
-/-- Injective objects are `F`-acyclic. -/
+/-- Injective objects are `F`-acyclic. (blueprint: `lemma-weil-pbc-leray-acyclicity`, item 1) -/
 lemma rightAcyclic_of_injective (A : C) [Injective A] : F.rightAcyclic A :=
   fun q ↦ F.isZero_rightDerived_obj_injective_succ q A
 
@@ -109,23 +108,9 @@ end Functor
 
 namespace ShortComplex.ShortExact
 
-variable (F : C ⥤ D) [F.Additive] {S : ShortComplex C} (hS : S.ShortExact)
+variable {F : C ⥤ D} [F.Additive] {S : ShortComplex C} (hS : S.ShortExact)
 
 include hS
-
-/-- The long exact sequence of the right derived functors of `F`: a short exact sequence
-`0 ⟶ A ⟶ B ⟶ C ⟶ 0` gives a connecting morphism `δ : R^q F C ⟶ R^{q+1} F A` such that
-```
-  R^q F B ──R^q F g──▶ R^q F C ──δ──▶ R^{q+1} F A ──R^{q+1} F f──▶ R^{q+1} F B
-```
-is exact at `R^q F C` and at `R^{q+1} F A`. -/
-theorem exists_rightDerived_δ_exact (q : ℕ) :
-    ∃ (δ : (F.rightDerived q).obj S.X₃ ⟶ (F.rightDerived (q + 1)).obj S.X₁)
-      (w₁ : (F.rightDerived q).map S.g ≫ δ = 0) (w₂ : δ ≫ (F.rightDerived (q + 1)).map S.f = 0),
-      (ShortComplex.mk _ _ w₁).Exact ∧ (ShortComplex.mk _ _ w₂).Exact := by
-  sorry
-
-variable {F}
 
 /-- `F`-acyclic objects are closed under cokernels of monomorphisms: if `0 ⟶ A ⟶ B ⟶ C ⟶ 0`
 is short exact and `A` and `B` are `F`-acyclic, then so is `C`. -/
@@ -305,7 +290,7 @@ It is `InjectiveResolution.isoRightDerivedObjOfQuasiIso` applied to the lift
       J.ι ╲        ▼
             ╲────▶ J
 ```
--/
+(blueprint: `lemma-weil-pbc-leray-acyclicity`, item 2) -/
 noncomputable def rightDerivedObjIsoOfResolution (hI : ∀ n, F.rightAcyclic (I.X n)) (q : ℕ) :
     (F.rightDerived q).obj X ≅ ((F.mapHomologicalComplex _).obj I).homology q :=
   (injectiveResolution X).isoRightDerivedObjOfQuasiIso F
@@ -315,7 +300,8 @@ include ι in
 /-- **Acyclic resolutions compute right derived functors.** Let `F : C ⥤ D` be a left exact
 additive functor. If `ι : single₀ X ⟶ I` is a resolution `X → I⁰ → I¹ → ⋯` of `X` by
 `F`-acyclic objects, then `R^q F X ≅ H^q(F I)` for all `q`. The witness is the natural
-isomorphism `Functor.rightDerivedObjIsoOfResolution`. (blueprint: `sk-thm-acyclicity`) -/
+isomorphism `Functor.rightDerivedObjIsoOfResolution`. (blueprint: `sk-thm-acyclicity`;
+`lemma-weil-pbc-leray-acyclicity`, item 2) -/
 theorem nonempty_rightDerivedObjIso_homology_of_acyclic (hI : ∀ n, F.rightAcyclic (I.X n))
     (q : ℕ) :
     Nonempty ((F.rightDerived q).obj X ≅ ((F.mapHomologicalComplex _).obj I).homology q) :=
