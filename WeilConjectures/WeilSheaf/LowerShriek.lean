@@ -32,9 +32,9 @@ is needed.
 
 That `Rf_!` carries Weil complexes to Weil complexes is the finiteness theorem for `Rf_!`
 (SGA 4½, *Th. finitude*), `AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerShriek`,
-stated with `sorry`. The higher direct images `Rʳf₀!` of Weil sheaves are the cohomology sheaves
-of `Rf₀!`. Compactly supported cohomology is defined in `WeilConjectures.WeilSheaf.Cohomology`
-from `Rf₀!` along the structure morphism `X ⟶ Spec k₀`.
+deduced from the finiteness of `ī_!` and of `Rḡ_*`. The higher direct images `Rʳf₀!` of Weil
+sheaves are the cohomology sheaves of `Rf₀!`. Compactly supported cohomology is defined in
+`WeilConjectures.WeilSheaf.Cohomology` from `Rf₀!` along the structure morphism `X ⟶ Spec k₀`.
 
 ## Main declarations
 
@@ -105,17 +105,30 @@ lemma hasCompactification_of_over (f : X ⟶ Y) [IsSeparated f] [LocallyOfFinite
 
 /-- **Finiteness for the direct image with compact support of Weil complexes** (SGA 4½,
 *Th. finitude*): `Rf_!` carries Weil complexes, bounded with constructible cohomology, to
-Weil complexes. Forgetting the Weil structures, `Rf_!` is the pro-étale `Rf̄_!`, the
-forgetful functors preserving K-injective complexes and commuting with the exact extension by
-zero. -/
+Weil complexes. For `Rf_! = Rḡ_* ∘ ī_!` this follows from the exactness of `ī_!`, which
+preserves constructibility (`AlgebraicGeometry.WeilSheaf.isAdicConstructibleSheaf_extensionByZero`),
+and from the finiteness of `Rḡ_*`
+(`AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerStar`). The target is assumed
+quasi-compact over `k₀`: over `Y = ⊔ₙ Spec k₀` the direct image of `ℚ̄_ℓ` along the proper
+morphism `⊔ₙ ℙⁿ ⟶ Y` is not bounded. -/
 theorem WeilComplex.objectProperty_rightDerivedLowerShriek (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [hf : HasCompactification f]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     (K : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l X))
     (hK : WeilComplex.objectProperty k₀ l X K) :
     WeilComplex.objectProperty k₀ l Y ((ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f
-      (HasCompactification.compactification f)).obj K) :=
-  sorry
+      (HasCompactification.compactification f)).obj K) := by
+  let c := HasCompactification.compactification f
+  have hK' : WeilComplex.objectProperty k₀ l c.Z
+      ((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategory.obj K) :=
+    ⟨(ProEtaleWeilSheaf.extensionByZero k₀ l c.i).bounded_mapDerivedCategory_obj hK.1,
+      fun n ↦ (WeilSheaf.objectProperty k₀ l c.Z).prop_of_iso
+        (((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategoryHomologyFunctorIso
+          n).app K) (WeilSheaf.isAdicConstructibleSheaf_extensionByZero c.i _ (hK.2 n))⟩
+  unfold ProEtaleWeilSheaf.rightDerivedLowerShriek
+  rw [Functor.comp_obj]
+  exact WeilComplex.objectProperty_rightDerivedLowerStar c.g _ hK'
 
 -- TODO(unify): sk-thm-sf-package
 variable (k₀ l) in
