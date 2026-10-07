@@ -10,9 +10,10 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import WeilConjectures.Algebra.Central.ReducedNorm
 
 /-!
-# `Cᵣ` fields and Tsen's theorem
+# `Cᵣ` fields
 
 A field `K` has *property `Cᵣ`* if every homogeneous form of degree `d > 0` in more than
 `d ^ r` variables has a nontrivial zero over `K`. The case `r = 1` is *quasi-algebraic
@@ -27,8 +28,7 @@ closure*.
 
 - `IsCField.mono`: property `Cᵣ` implies property `Cₛ` for `r ≤ s`.
 - `IsAlgClosed.isCField_zero`: an algebraically closed field is `C₀`, hence `C₁`.
-- `IsQuasiAlgClosed.of_trdeg_le_one`: **Tsen's theorem**, a field of transcendence degree at
-  most one over an algebraically closed field is `C₁`.
+- `IsQuasiAlgClosed.of_finiteDimensional`: a finite extension of a `C₁` field is `C₁`.
 - `IsQuasiAlgClosed.subsingleton_brauerGroup`: the Brauer group of a `C₁` field vanishes.
 
 ## Implementation notes
@@ -125,17 +125,31 @@ instance IsAlgClosed.isCField_zero [IsAlgClosed K] : IsCField K 0 where
 instance IsAlgClosed.isQuasiAlgClosed [IsAlgClosed K] : IsQuasiAlgClosed K :=
   IsCField.mono zero_le_one
 
-/-- **Tsen's theorem.** A field `K` of transcendence degree at most one over an algebraically
-closed field `k` is quasi-algebraically closed. This covers the function field of a curve over
-`k` and all its algebraic extensions.
-(blueprint: `sk-prop-tsen`) -/
-@[stacks 03RD]
-theorem IsQuasiAlgClosed.of_trdeg_le_one (k : Type*) [Field k] [IsAlgClosed k] [Algebra k K]
-    (h : Algebra.trdeg k K ≤ 1) : IsQuasiAlgClosed K :=
-  -- Proof sketch: the rational function field `k(t)` is `C₁` by a dimension count on tuples of
-  -- polynomials of bounded degree, and a finite extension of a `C₁` field is `C₁` by a
-  -- norm-form argument. The algebraic case follows by writing `K` as a union of finite
-  -- extensions of `k` resp. `k(t)`.
+/-- Property `Cᵣ` for forms in variables indexed by an arbitrary finite type: a homogeneous form
+of degree `d > 0` in more than `d ^ r` variables has a nontrivial zero. -/
+theorem IsCField.exists_ne_zero_and_eval_eq_zero_of_finite {r : ℕ} [IsCField K r] {σ : Type*}
+    [Finite σ] {d : ℕ} (F : MvPolynomial σ K) (hF : F.IsHomogeneous d) (hd : 0 < d)
+    (hN : d ^ r < Nat.card σ) : ∃ x : σ → K, x ≠ 0 ∧ eval x F = 0 :=
+  sorry
+
+/-- Property `Cᵣ` is invariant under isomorphisms of fields. -/
+theorem IsCField.of_ringEquiv {L : Type*} [Field L] {r : ℕ} (e : K ≃+* L) [IsCField K r] :
+    IsCField L r :=
+  sorry
+
+/-- A finite extension of a quasi-algebraically closed field is quasi-algebraically closed: the
+norm of a form of degree `d` in `N > d` variables over `L` is a form of degree `[L : K] d` in
+`[L : K] N` variables over `K`, and it only vanishes where the original form does.
+(blueprint: `lem-sc-c1-finite-extension`) -/
+@[stacks 03RC]
+theorem IsQuasiAlgClosed.of_finiteDimensional (K L : Type*) [Field K] [Field L] [Algebra K L]
+    [FiniteDimensional K L] [IsQuasiAlgClosed K] : IsQuasiAlgClosed L :=
+  sorry
+
+/-- An algebraic extension of a quasi-algebraically closed field is quasi-algebraically closed:
+the finitely many coefficients of a form lie in a finite subextension. -/
+theorem IsQuasiAlgClosed.of_isAlgebraic (K L : Type*) [Field K] [Field L] [Algebra K L]
+    [Algebra.IsAlgebraic K L] [IsQuasiAlgClosed K] : IsQuasiAlgClosed L :=
   sorry
 
 /-- The Brauer group of a quasi-algebraically closed field vanishes: every central simple

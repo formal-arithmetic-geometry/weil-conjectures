@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup
+public import WeilConjectures.FieldTheory.Tsen
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 
 /-!

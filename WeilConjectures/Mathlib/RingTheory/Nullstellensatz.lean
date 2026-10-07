@@ -117,3 +117,12 @@ theorem Algebra.TensorProduct.eq_zero_of_forall_lift_algHom_eq_zero (B : Type*) 
     | tmul a b => simp
     | add x y hx hy => simp [hx, hy]
   simpa using eq_zero_of_forall_algHom_apply_eq_zero k B fun ψ ↦ (key ψ t).trans (h φ ψ)
+
+/-- **Affine dimension theorem, homogeneous form.** Over an algebraically closed field, finitely
+many polynomials without constant term in more variables than there are polynomials have a
+common nontrivial zero. This follows from Krull's height theorem: otherwise the ideal they
+generate would have the ideal of the origin, of height `Nat.card σ`, as its radical. -/
+theorem MvPolynomial.exists_ne_zero_forall_eval_eq_zero {k σ ι : Type*} [Field k] [IsAlgClosed k]
+    [Finite σ] [Finite ι] (f : ι → MvPolynomial σ k) (hf : ∀ i, constantCoeff (f i) = 0)
+    (hcard : Nat.card ι < Nat.card σ) : ∃ x : σ → k, x ≠ 0 ∧ ∀ i, eval x (f i) = 0 :=
+  sorry

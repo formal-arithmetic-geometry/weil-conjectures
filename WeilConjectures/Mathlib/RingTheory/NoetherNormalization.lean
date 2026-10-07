@@ -14,6 +14,7 @@ public import Mathlib.RingTheory.MvPolynomial.Localization
 public import Mathlib.RingTheory.NoetherNormalization
 public import Mathlib.RingTheory.RingHom.Finite
 public import Mathlib.RingTheory.RingHom.FiniteType
+public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 public import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 
@@ -346,3 +347,10 @@ theorem ringKrullDim_tensorProduct_eq_of_finite_inj_algHom_mvPolynomial {R S : T
   let ψ' : MvPolynomial (Fin d) K →ₐ[K] K ⊗[R] S :=
     { ψ with commutes' := fun k ↦ congr($hψC k) }
   exact ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial ψ' hψinj hψfin
+
+/-- The transcendence degree of a finitely generated domain `B` over a field `K` is its Krull
+dimension: for a Noether normalization `K[T₁, …, Tₙ] → B` both are `n`. -/
+theorem Algebra.trdeg_eq_of_ringKrullDim_eq (K B : Type*) [Field K] [CommRing B] [IsDomain B]
+    [Algebra K B] [Algebra.FiniteType K B] {n : ℕ} (hB : ringKrullDim B = n) :
+    Algebra.trdeg K B = n :=
+  sorry
