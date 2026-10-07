@@ -5,10 +5,13 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 
 /-!
-# The categorical trace of an endomorphism of a dualizable object
+# The categorical trace, and internal duals of dualizable objects
 
 In a braided monoidal category, an object `X` with a right dual `Xᘁ` has an
 `ExactPairing X Xᘁ`, hence a coevaluation `𝟙_ C ⟶ X ⊗ Xᘁ` and an evaluation
@@ -23,6 +26,13 @@ and `End (𝟙_ C) = R`.
 
 - `CategoryTheory.MonoidalCategory.trace`: the trace of an endomorphism of a dualizable
   object.
+- `CategoryTheory.MonoidalCategory.ihomUnitIsoRightDual`: in a braided monoidal closed
+  category, the internal dual `ihom X (𝟙_ C)` of an object with a right dual `Xᘁ` is `Xᘁ`.
+
+## Main statements
+
+- `CategoryTheory.IsDualizable.ihom_unit`: in a braided monoidal closed category, the internal
+  dual of a dualizable object is dualizable.
 
 ## Implementation notes
 
@@ -52,4 +62,29 @@ category `(Perf R, ⊗ᴸ_R, R)` of perfect complexes over a commutative ring `R
 noncomputable def trace {X : C} [HasRightDual X] (f : X ⟶ X) : 𝟙_ C ⟶ 𝟙_ C :=
   η_ X Xᘁ ≫ f ▷ Xᘁ ≫ (β_ X Xᘁ).hom ≫ ε_ X Xᘁ
 
+/-- In a braided monoidal closed category, the internal hom `[X, 𝟙_ C]` out of an object `X`
+with a right dual `Xᘁ` is isomorphic to `Xᘁ`: both `ihom X` and `tensorRight Xᘁ` are right
+adjoint to `X ⊗ - ≅ - ⊗ X`. -/
+noncomputable def ihomUnitIsoRightDual [MonoidalClosed C] (X : C) [HasRightDual X] :
+    (ihom X).obj (𝟙_ C) ≅ Xᘁ :=
+  ((ihom.adjunction X).rightAdjointUniq ((tensorRightAdjunction X Xᘁ).ofNatIsoLeft
+      (BraidedCategory.tensorLeftIsoTensorRight X).symm)).app _ ≪≫ λ_ _
+
 end CategoryTheory.MonoidalCategory
+
+namespace CategoryTheory
+
+open MonoidalCategory
+
+variable {C : Type*} [Category C] [MonoidalCategory C] [BraidedCategory C] [MonoidalClosed C]
+
+/-- In a braided monoidal closed category, the internal dual `[X, 𝟙_ C]` of a dualizable
+object `X` is dualizable, with right dual `X`. -/
+theorem IsDualizable.ihom_unit {X : C} (hX : IsDualizable X) :
+    IsDualizable ((ihom X).obj (𝟙_ C)) := by
+  obtain ⟨_⟩ := hX
+  let := BraidedCategory.exactPairing_swap X Xᘁ
+  let := exactPairingCongrLeft (Y := X) (ihomUnitIsoRightDual X)
+  exact ⟨⟨X⟩⟩
+
+end CategoryTheory
