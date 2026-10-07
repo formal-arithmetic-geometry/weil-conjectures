@@ -44,6 +44,7 @@ this is the same as a global finite stratification.
 - `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf` and
   `AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf`.
 - `AlgebraicGeometry.ProEtale.adicConstructibleSheaf`: constructibility as an object property.
+- `AlgebraicGeometry.ProEtale.IsIrreducibleAdicLocalSystem`: irreducible lisse sheaves.
 
 ## Main results
 
@@ -173,6 +174,16 @@ theorem IsAdicLisseSheaf.biprod
     {F G : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)} (hF : IsAdicLisseSheaf F)
     (hG : IsAdicLisseSheaf G) : IsAdicLisseSheaf (F ⊞ G) :=
   sorry
+
+/-- A sheaf of `ℚ̄_ℓ`-modules on the small pro-étale site of `X` is an *irreducible `ℓ`-adic local
+system* if it is lisse and nonzero, and every lisse subsheaf of it is zero or all of it. For
+`X` connected this says that the corresponding continuous representation of `π₁(X)` is
+irreducible. -/
+def IsIrreducibleAdicLocalSystem
+    (F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)) : Prop :=
+  IsAdicLisseSheaf F ∧ ¬ IsZero F ∧
+    ∀ (G : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)) (i : G ⟶ F), Mono i →
+      IsAdicLisseSheaf G → IsZero G ∨ IsIso i
 
 variable (l X) in
 /-- Constructibility of `ℓ`-adic pro-étale sheaves, as an object property. -/

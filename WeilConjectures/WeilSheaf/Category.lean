@@ -305,10 +305,7 @@ geometric fiber `X̄` is an irreducible local system: it is lisse and nonzero, a
 subsheaf of it, with no Weil structure, is zero or all of it. For `X̄` connected this says that
 the geometric fundamental representation `π₁(X̄) → GL(F_η̄)` is irreducible. -/
 def IsGeometricallyIrreducible (F : WeilSheaf k₀ l X) : Prop :=
-  IsAdicLisseSheaf F.obj.carrier ∧ ¬ IsZero F.obj.carrier ∧
-    ∀ (G : Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-      (WeilCoefficients.{u} l)) (i : G ⟶ F.obj.carrier), Mono i → IsAdicLisseSheaf G →
-        IsZero G ∨ IsIso i
+  IsIrreducibleAdicLocalSystem F.obj.carrier
 
 /-- A Weil sheaf is zero if and only if its underlying sheaf is: the forgetful functor is
 additive, and a morphism of Weil sheaves is determined by the underlying morphism of sheaves. -/

@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 public import WeilConjectures.WeilSheaf.Category
 
 /-!
@@ -153,5 +153,12 @@ instance : (lowerStar (k₀ := k₀) (l := l) φ).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
 
 end WeilSheaf
+
+instance : (WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) φ).Additive :=
+  ObjectProperty.liftFullSubcategory_additive _ _ _ _
+
+instance (i : ℕ) : (WeilSheaf.higherLowerStar (k₀ := k₀) (l := l) φ i).Additive := by
+  unfold WeilSheaf.higherLowerStar
+  infer_instance
 
 end AlgebraicGeometry

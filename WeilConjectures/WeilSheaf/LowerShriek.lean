@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.WeilSheaf.OpenImmersion
 
@@ -107,7 +108,7 @@ Weil complexes. Forgetting the Weil structures, `Rf_!` is the pro-étale `Rf̄_!
 forgetful functors preserving K-injective complexes and commuting with the exact extension by
 zero. -/
 theorem WeilComplex.objectProperty_rightDerivedLowerShriek (f : X ⟶ Y)
-    [f.IsOver (Spec (CommRingCat.of k₀))] [HasCompactification f]
+    [f.IsOver (Spec (CommRingCat.of k₀))] [hf : HasCompactification f]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     (K : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l X))
     (hK : WeilComplex.objectProperty k₀ l X K) :
@@ -127,10 +128,11 @@ noncomputable def WeilComplex.derivedLowerShriek (f : X ⟶ Y)
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
     WeilComplex k₀ l X ⥤ WeilComplex k₀ l Y :=
-  have := hasCompactification_of_over (k₀ := k₀) f
   (WeilComplex.objectProperty k₀ l X).liftFullSubcategory (WeilComplex.objectProperty k₀ l Y)
-    (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f (HasCompactification.compactification f))
-    (WeilComplex.objectProperty_rightDerivedLowerShriek f)
+    (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f
+      (HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)))
+    (WeilComplex.objectProperty_rightDerivedLowerShriek f
+      (hf := hasCompactification_of_over (k₀ := k₀) f))
 
 -- TODO(unify): sk-thm-sf-package
 variable (k₀ l) in
@@ -145,6 +147,28 @@ noncomputable def WeilSheaf.higherLowerShriek (f : X ⟶ Y)
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (r : ℕ) :
     WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l Y :=
   WeilSheaf.toComplex ⋙ WeilComplex.derivedLowerShriek k₀ l f ⋙ WeilComplex.homologySheaf r
+
+instance (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] (c : Compactification f) :
+    (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c).Additive := by
+  unfold ProEtaleWeilSheaf.rightDerivedLowerShriek
+  infer_instance
+
+instance (f : X ⟶ Y)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
+    (WeilComplex.derivedLowerShriek k₀ l f).Additive :=
+  ObjectProperty.liftFullSubcategory_additive _ _ _ _
+
+instance (f : X ⟶ Y)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (r : ℕ) :
+    (WeilSheaf.higherLowerShriek k₀ l f r).Additive := by
+  unfold WeilSheaf.higherLowerShriek
+  infer_instance
 
 end LowerShriek
 

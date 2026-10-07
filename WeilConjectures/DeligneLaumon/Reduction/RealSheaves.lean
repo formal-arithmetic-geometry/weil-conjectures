@@ -62,6 +62,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
+open scoped ProEtale
+
 /-- **Curve testing for geometric irreducibility**
 (blueprint: `lem-zl-curve-testing-irreducibility`). Let `X₀` be a smooth geometrically connected
 affine scheme of dimension `d ≥ 1` over a finite field `k₀`, with geometric fiber `X`, let
@@ -75,7 +77,8 @@ theorem WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar {k
     [X₀.Over (Spec (CommRingCat.of k₀))] [IsAffine X₀] {d : ℕ} (hd : 1 ≤ d)
     [SmoothOfRelativeDimension d (X₀ ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X₀ ↘ Spec (CommRingCat.of k₀))] {r : ℕ}
-    (𝒮 : Fin r → WeilSheaf k₀ l X₀) (h𝒮 : ∀ j, Scheme.IsIrreducibleLocalSystem (𝒮 j).obj.carrier)
+    (𝒮 : Fin r → WeilSheaf k₀ l X₀)
+    (h𝒮 : ∀ j, ProEtale.IsIrreducibleAdicLocalSystem (𝒮 j).obj.carrier)
     (S : Finset
       (Spec (.of (AlgebraicClosure k₀)) ⟶ (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber))
     (hS : S.Nonempty)
@@ -85,8 +88,8 @@ theorem WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar {k
       SmoothOfRelativeDimension 1
         (i ≫ (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure) ∧
       ConnectedSpace C ∧ (∀ s ∈ S, ∃ c, c ≫ i = s) ∧
-      (∀ j, Scheme.IsIrreducibleLocalSystem
-        ((Etale.upperStar (WeilCoefficients.{u} l) i).obj (𝒮 j).obj.carrier)) ∧
+      (∀ j, ProEtale.IsIrreducibleAdicLocalSystem
+        ((i)^*[WeilCoefficients.{u} l].obj (𝒮 j).obj.carrier)) ∧
       ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C,
         φ.hom ≫ i = i ≫ ((X₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom := by
   sorry
