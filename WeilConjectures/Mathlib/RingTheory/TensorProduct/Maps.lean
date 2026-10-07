@@ -25,6 +25,8 @@ public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
   tensor product of algebras is detected on pairs of characters from jointly injective families.
   For quotients by the ideals of common zeros of two families of `K`-points this says that the
   product of the two families is schematically dense in the product of their Zariski closures.
+- `Algebra.TensorProduct.isNilpotent_of_productMap_eq_zero`: if two `K`-points have nilpotent
+  kernels, then so has their tensor product.
 - `Algebra.TensorProduct.eq_zero_or_eq_one_of_isIdempotentElem`: if `A` has an `R`-point whose
   kernel is nil and `B` has no idempotents other than `0` and `1`, then neither has `A ⊗[R] B`.
 -/
@@ -165,5 +167,56 @@ theorem eq_zero_or_eq_one_of_isIdempotentElem (φ : A →ₐ[R] R)
     exact .inr (sub_eq_zero.mp (he.one_sub.eq_zero_of_isNilpotent this)).symm
 
 end Idempotent
+
+section Nilpotent
+
+open _root_.TensorProduct
+
+variable {K R S : Type*} [Field K] [CommRing R] [CommRing S] [Algebra K R] [Algebra K S]
+
+/-- If `f : R → K` and `g : S → K` are `K`-points with nilpotent ideals, then every element of
+`R ⊗[K] S` killed by the tensor product point `f ⊗ g` is nilpotent. -/
+theorem isNilpotent_of_productMap_eq_zero {f : R →ₐ[K] K} {g : S →ₐ[K] K}
+    (hf : IsNilpotent (RingHom.ker f)) (hg : IsNilpotent (RingHom.ker g)) {t : R ⊗[K] S}
+    (ht : productMap f g t = 0) : IsNilpotent t := by
+  set I₁ := (RingHom.ker f).map (includeLeft : R →ₐ[K] R ⊗[K] S)
+  set I₂ := (RingHom.ker g).map (includeRight : S →ₐ[K] R ⊗[K] S)
+  have key (t : R ⊗[K] S) : t - algebraMap K _ (productMap f g t) ∈ I₁ ⊔ I₂ := by
+    induction t using TensorProduct.induction_on with
+    | zero => simp
+    | add x y hx hy =>
+      rw [map_add, map_add, add_sub_add_comm]
+      exact add_mem hx hy
+    | tmul a b =>
+      have h₁ : includeLeft (S := K) (a - algebraMap K R (f a)) ∈ I₁ :=
+        Ideal.mem_map_of_mem _ (by simp [RingHom.mem_ker])
+      have h₂ : includeRight (b - algebraMap K S (g b)) ∈ I₂ :=
+        Ideal.mem_map_of_mem _ (by simp [RingHom.mem_ker])
+      have heq : a ⊗ₜ[K] b - algebraMap K _ (productMap f g (a ⊗ₜ b)) =
+          includeLeft (S := K) (a - algebraMap K R (f a)) * (1 ⊗ₜ b) +
+            algebraMap K _ (f a) * includeRight (b - algebraMap K S (g b)) := by
+        simp only [productMap_apply_tmul, includeLeft_apply, includeRight_apply, sub_tmul,
+          tmul_sub, sub_mul, mul_sub, tmul_mul_tmul, mul_one, one_mul, algebraMap_apply,
+          map_mul]
+        simp only [Algebra.algebraMap_eq_smul_one, smul_mul_assoc, one_mul, smul_smul,
+          tmul_smul, ← smul_tmul', mul_comm (g b)]
+        abel
+      rw [heq]
+      exact add_mem (Ideal.mem_sup_left (Ideal.mul_mem_right _ _ h₁))
+        (Ideal.mem_sup_right (Ideal.mul_mem_left _ _ h₂))
+  have h := key t
+  rw [ht, map_zero, sub_zero] at h
+  obtain ⟨y, hy, z, hz, rfl⟩ := Submodule.mem_sup.1 h
+  obtain ⟨n, hn⟩ := hf
+  obtain ⟨m, hm⟩ := hg
+  have hy' : IsNilpotent y := ⟨n, by
+    have : y ^ n ∈ I₁ ^ n := Ideal.pow_mem_pow hy n
+    rwa [← Ideal.map_pow, hn, Ideal.zero_eq_bot, Ideal.map_bot, Ideal.mem_bot] at this⟩
+  have hz' : IsNilpotent z := ⟨m, by
+    have : z ^ m ∈ I₂ ^ m := Ideal.pow_mem_pow hz m
+    rwa [← Ideal.map_pow, hm, Ideal.zero_eq_bot, Ideal.map_bot, Ideal.mem_bot] at this⟩
+  exact (Commute.all y z).isNilpotent_add hy' hz'
+
+end Nilpotent
 
 end Algebra.TensorProduct

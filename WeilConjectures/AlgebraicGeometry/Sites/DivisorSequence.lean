@@ -55,7 +55,8 @@ whose target is `H²(Spec k(X)_ét, 𝔾ₘ) = Br(k(X))` by
   pullback of `𝔾ₘ` along the generic point is `𝔾ₘ`. The proof is `sorry`.
 - `AlgebraicGeometry.Scheme.mono_toGenericGm`: the unit `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is a monomorphism.
 - `AlgebraicGeometry.Scheme.nonempty_cokernel_toGenericGm_iso`: its cokernel is
-  `⨁_{x ∈ X⁽¹⁾} i_{x*} ℤ`. The proof is `sorry`.
+  `⨁_{x ∈ X⁽¹⁾} i_{x*} ℤ`, from three local statements on étale neighbourhoods whose proofs
+  are `sorry`.
 - `AlgebraicGeometry.Scheme.exists_shortExact_divisorSequence`: the divisor sequence is short
   exact, from the two previous statements.
 - `AlgebraicGeometry.Scheme.subsingleton_H_one_pointConstantInt`: `H¹(X, i_{x*} ℤ) = 0`.
