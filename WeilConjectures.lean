@@ -724,6 +724,7 @@ public import WeilConjectures.Mathlib.RingTheory.Etale.Section
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 public import WeilConjectures.Mathlib.RingTheory.Extension.Presentation.Submersive
 public import WeilConjectures.Mathlib.RingTheory.Flat.DescentAlgebra
+public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
 public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Descent
 public import WeilConjectures.Mathlib.RingTheory.Flat.LocallyFree
@@ -926,6 +927,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.ExternalProduct
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.Derived.Perfect
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Stability
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Tensor
