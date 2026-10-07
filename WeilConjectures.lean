@@ -347,6 +347,7 @@ public import WeilConjectures.FourierTransform.ArtinSchreier
 public import WeilConjectures.FourierTransform.Defs
 public import WeilConjectures.FourierTransform.Inversion
 public import WeilConjectures.FourierTransform.Perverse
+public import WeilConjectures.FourierTransform.ProEtale
 public import WeilConjectures.FourierTransform.Properties
 public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexRows
@@ -915,6 +916,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExternalProduct
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
+public import WeilConjectures.SixFunctors.ProEtale.Derived.KernelTransform
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormula
