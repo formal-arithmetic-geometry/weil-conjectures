@@ -59,6 +59,8 @@ of its ring of global sections.
 - `AlgebraicGeometry.Scheme.Hom.flat_of_fiberDegree_eq`,
   `AlgebraicGeometry.Scheme.Hom.finrank_eq_of_fiberDegree_eq`: a finite morphism of finite
   presentation to a reduced scheme with constant fibre degree `n` is flat of rank `n`.
+- `AlgebraicGeometry.Scheme.Hom.finrank_eq_fiberDegree`: the rank of a finite flat morphism
+  locally of finite presentation is its fibre degree.
 -/
 
 @[expose] public section
@@ -686,6 +688,21 @@ theorem Scheme.Hom.finrank_eq_of_fiberDegree_eq (h : ∀ y, f.fiberDegree y = n)
     fun y ↦ (Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback _ _) y).trans (h _)).2 y
 
 end FlatOfFiberDegree
+
+/-- For a finite, flat morphism `f` locally of finite presentation, the rank of `f` at `y` is the
+fibre degree `dim_{κ(y)} Γ(X_y, 𝒪_{X_y})`: the fibre `X_y ⟶ Spec κ(y)` is a finite morphism to a
+reduced scheme of constant fibre degree, so its rank is that degree, and the rank is invariant
+under base change. -/
+theorem Scheme.Hom.finrank_eq_fiberDegree {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] [Flat f]
+    [LocallyOfFinitePresentation f] (y : Y) : f.finrank y = f.fiberDegree y := by
+  let x : Spec (Y.residueField y) := IsLocalRing.closedPoint (Y.residueField y)
+  have h := Scheme.Hom.finrank_pullback_snd f (Y.fromSpecResidueField y) x
+  rw [Scheme.fromSpecResidueField_apply] at h
+  rw [← h]
+  refine Scheme.Hom.finrank_eq_of_fiberDegree_eq (pullback.snd f (Y.fromSpecResidueField y))
+    (fun y' ↦ ?_) x
+  rw [Scheme.Hom.fiberDegree_of_isPullback f (IsPullback.of_hasPullback _ _) y',
+    Scheme.fromSpecResidueField_apply]
 
 section FiniteLocallyFree
 
