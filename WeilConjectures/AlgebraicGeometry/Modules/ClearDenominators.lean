@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-public import WeilConjectures.AlgebraicGeometry.Modules.TensorSections
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
@@ -73,10 +74,10 @@ lemma tensorPowSectionOne_zero {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L) (U : 
 /-- `s^{⊗ (m + 1)}(1) = s(1) ⊗ s^{⊗ m}(1)`. -/
 lemma tensorPowSectionOne_succ {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L) (m : ℕ) (U : X.Opens) :
     tensorPowSectionOne s (m + 1) U =
-      tmul (s.app U (unitSectionsEquiv U 1)) (tensorPowSectionOne s m U) := by
+      tmulSection (s.app U (unitSectionsEquiv U 1)) (tensorPowSectionOne s m U) := by
   rw [tensorPowSectionOne, tensorPowSection_succ, Hom.comp_app, ConcreteCategory.comp_apply,
     leftUnitor_inv_app]
-  exact tensorHom_app_tmul _ _ _ _
+  exact tensorHom_app_tmulSection _ _ _ _
 
 /-- `s^{⊗ m}(1)` is compatible with restriction. -/
 lemma presheaf_map_tensorPowSectionOne {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L) (m : ℕ)
@@ -94,8 +95,8 @@ lemma exists_tensorPowSectionOne_eq_pow_smul {L : X.Modules} (s : 𝟙_ X.Module
   | zero => exact ⟨_, isFreeGenerator_one U, by rw [pow_zero, one_smul]; rfl⟩
   | succ m ih =>
     obtain ⟨E, hE, hE'⟩ := ih
-    refine ⟨tmul e E, isFreeGenerator_tmul he hE, ?_⟩
-    rw [tensorPowSectionOne_succ, hf, hE', smul_tmul, tmul_smul, smul_smul, pow_succ']
+    refine ⟨tmulSection e E, he.tmulSection hE, ?_⟩
+    rw [tensorPowSectionOne_succ, hf, hE', smul_tmulSection, tmulSection_smul, smul_smul, pow_succ']
 
 /-- If `s(1)` is a free generator on `U`, so is `s^{⊗ m}(1)`. -/
 lemma isFreeGenerator_tensorPowSectionOne {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L)
@@ -105,7 +106,7 @@ lemma isFreeGenerator_tensorPowSectionOne {L : X.Modules} (s : 𝟙_ X.Modules �
   | zero => exact isFreeGenerator_one U
   | succ m ih =>
     rw [tensorPowSectionOne_succ]
-    exact isFreeGenerator_tmul hs ih
+    exact hs.tmulSection ih
 
 /-- Transport of `s^{⊗ m}(1)` along an equality of exponents. -/
 lemma eqToHom_app_tensorPowSectionOne {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L) {m n : ℕ}
@@ -117,28 +118,28 @@ lemma eqToHom_app_tensorPowSectionOne {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L
 
 /-- `s^{⊗ (a + b)}(1)` corresponds to `s^{⊗ a}(1) ⊗ s^{⊗ b}(1)` under `ℒ^{⊗ (a + b)} ≅
 ℒ^{⊗ a} ⊗ ℒ^{⊗ b}`. -/
-lemma tensorPowAddIso_inv_app_tmul {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L) (a b : ℕ)
+lemma tensorPowAddIso_inv_app_tmulSection {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L) (a b : ℕ)
     (U : X.Opens) :
     (L.tensorPowAddIso a b).inv.app U
-        (tmul (tensorPowSectionOne s a U) (tensorPowSectionOne s b U)) =
+        (tmulSection (tensorPowSectionOne s a U) (tensorPowSectionOne s b U)) =
       tensorPowSectionOne s (a + b) U := by
   induction a with
   | zero =>
     rw [tensorPowAddIso, Iso.trans_inv, Iso.symm_inv, eqToIso.inv, Hom.comp_app,
       ConcreteCategory.comp_apply]
-    exact (congrArg _ ((leftUnitor_hom_app_tmul _ _).trans (one_smul _ _))).trans
+    exact (congrArg _ ((leftUnitor_hom_app_tmulSection _ _).trans (one_smul _ _))).trans
       (eqToHom_app_tensorPowSectionOne s (Nat.zero_add b).symm U)
   | succ a ih =>
     rw [tensorPowAddIso, Iso.trans_inv, Iso.trans_inv, Iso.symm_inv, eqToIso.inv, Hom.comp_app,
       Hom.comp_app, ConcreteCategory.comp_apply, ConcreteCategory.comp_apply,
       tensorPowSectionOne_succ]
     have h2 : (Iso.refl L ⊗ᵢ L.tensorPowAddIso a b).inv.app U
-        (tmul (s.app U (unitSectionsEquiv U 1))
-          (tmul (tensorPowSectionOne s a U) (tensorPowSectionOne s b U))) =
-        tmul (s.app U (unitSectionsEquiv U 1)) (tensorPowSectionOne s (a + b) U) := by
-      rw [tensorIso_inv, Iso.refl_inv, tensorHom_app_tmul, ih, Hom.id_app]
+        (tmulSection (s.app U (unitSectionsEquiv U 1))
+          (tmulSection (tensorPowSectionOne s a U) (tensorPowSectionOne s b U))) =
+        tmulSection (s.app U (unitSectionsEquiv U 1)) (tensorPowSectionOne s (a + b) U) := by
+      rw [tensorIso_inv, Iso.refl_inv, tensorHom_app_tmulSection, ih, Hom.id_app]
       rfl
-    exact (congrArg _ ((congrArg _ (associator_hom_app_tmul _ _ _)).trans h2)).trans
+    exact (congrArg _ ((congrArg _ (associator_hom_app_tmulSection _ _ _)).trans h2)).trans
       ((congrArg _ (tensorPowSectionOne_succ s (a + b) U).symm).trans
         (eqToHom_app_tensorPowSectionOne s (Nat.succ_add a b).symm U))
 
@@ -152,8 +153,10 @@ lemma presheaf_map_homOfLE_homOfLE {M : X.Modules} {U V W : X.Opens} (h₁ : V �
 /-- The section `t ⊗ s^m` of `F ⊗ ℒ^{⊗ m}`. -/
 lemma rightUnitor_inv_comp_whiskerLeft_app {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L) (m : ℕ)
     (F : X.Modules) (U : X.Opens) (t : Γ(F, U)) :
-    ((ρ_ F).inv ≫ F ◁ tensorPowSection s m).app U t = tmul t (tensorPowSectionOne s m U) := by
-  rw [Hom.comp_app, ConcreteCategory.comp_apply, rightUnitor_inv_app, whiskerLeft_app_tmul]
+    ((ρ_ F).inv ≫ F ◁ tensorPowSection s m).app U t =
+      tmulSection t (tensorPowSectionOne s m U) := by
+  rw [Hom.comp_app, ConcreteCategory.comp_apply, rightUnitor_inv_app,
+    whiskerLeft_app_tmulSection]
 
 /-- Multiplication by `s^{⊗ b}`, as a morphism `F ⊗ ℒ^{⊗ a} ⟶ F ⊗ ℒ^{⊗ (a + b)}`. -/
 noncomputable def mulTensorPowSection {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L) (F : X.Modules)
@@ -165,18 +168,19 @@ noncomputable def mulTensorPowSection {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L
 lemma mulTensorPowSection_app {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L) (F : X.Modules)
     (a b : ℕ) (U : X.Opens) (y : Γ(F ⊗ L.tensorPow a, U)) :
     (mulTensorPowSection s F a b).app U y = (F ◁ (L.tensorPowAddIso a b).inv).app U
-      ((α_ F (L.tensorPow a) (L.tensorPow b)).hom.app U (tmul y (tensorPowSectionOne s b U))) := by
+      ((α_ F (L.tensorPow a) (L.tensorPow b)).hom.app U
+        (tmulSection y (tensorPowSectionOne s b U))) := by
   rw [mulTensorPowSection, Hom.comp_app, Hom.comp_app, Hom.comp_app, ConcreteCategory.comp_apply,
     ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, rightUnitor_inv_app,
-    whiskerLeft_app_tmul]
+    whiskerLeft_app_tmulSection]
 
 /-- Multiplication by `s^{⊗ b}` sends `x ⊗ s^{⊗ a}` to `x ⊗ s^{⊗ (a + b)}`. -/
-lemma mulTensorPowSection_app_tmul {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L) (F : X.Modules)
-    (a b : ℕ) (U : X.Opens) (x : Γ(F, U)) :
-    (mulTensorPowSection s F a b).app U (tmul x (tensorPowSectionOne s a U)) =
-      tmul x (tensorPowSectionOne s (a + b) U) := by
-  rw [mulTensorPowSection_app, associator_hom_app_tmul, whiskerLeft_app_tmul,
-    tensorPowAddIso_inv_app_tmul]
+lemma mulTensorPowSection_app_tmulSection {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L)
+    (F : X.Modules) (a b : ℕ) (U : X.Opens) (x : Γ(F, U)) :
+    (mulTensorPowSection s F a b).app U (tmulSection x (tensorPowSectionOne s a U)) =
+      tmulSection x (tensorPowSectionOne s (a + b) U) := by
+  rw [mulTensorPowSection_app, associator_hom_app_tmulSection, whiskerLeft_app_tmulSection,
+    tensorPowAddIso_inv_app_tmulSection]
 
 /-- Multiplication by `s^{⊗ b}` kills sections killed by `g` if `s^{⊗ b}(1)` is a multiple
 of `g`. -/
@@ -184,7 +188,8 @@ lemma mulTensorPowSection_app_eq_zero {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L
     (a b : ℕ) {U : X.Opens} {g : Γ(X, U)} {E : Γ(L.tensorPow b, U)}
     (hE : tensorPowSectionOne s b U = g • E) {y : Γ(F ⊗ L.tensorPow a, U)} (hy : g • y = 0) :
     (mulTensorPowSection s F a b).app U y = 0 := by
-  rw [mulTensorPowSection_app, hE, tmul_smul, ← smul_tmul, hy, zero_tmul, map_zero, map_zero]
+  rw [mulTensorPowSection_app, hE, tmulSection_smul, ← smul_tmulSection, hy, zero_tmulSection,
+    map_zero, map_zero]
 
 /-- On an affine open `V` on which `ℒ` has a free generator `e`, with `s(1) = f • e`, the
 non-vanishing locus `X_s` of `s` meets `V` in `D(f)`. -/
@@ -301,15 +306,15 @@ theorem exists_tensorPowSection_eq_restrict {S : Scheme.{u}} (f : X ⟶ S) [IsSe
     rw [map_smul, ht₀, smul_smul, map_pow, ← pow_add, Nat.sub_add_cancel (hna j)]
   choose E hE hE' using fun (j : ι) (m : ℕ) ↦
     exists_tensorPowSectionOne_eq_pow_smul s (he j.1) (hfc j) m
-  let u₁ : ∀ j : ι, Γ(F ⊗ L.tensorPow a, W j) := fun j ↦ tmul (t₁ j) (E j a)
+  let u₁ : ∀ j : ι, Γ(F ⊗ L.tensorPow a, W j) := fun j ↦ tmulSection (t₁ j) (E j a)
   have hu₁ (j : ι) {P : X.Opens} (hP : P ≤ X.basicOpen (fc j)) :
       (F ⊗ L.tensorPow a).presheaf.map (homOfLE (hP.trans (X.basicOpen_le _))).op (u₁ j) =
-        tmul (F.presheaf.map (homOfLE (hP.trans (hDle j))).op t)
+        tmulSection (F.presheaf.map (homOfLE (hP.trans (hDle j))).op t)
           (tensorPowSectionOne s a P) := by
-    rw [presheaf_map_tmul, ← presheaf_map_homOfLE_homOfLE (X.basicOpen_le (fc j)) hP (t₁ j), ht₁,
+    rw [tmulSection_map, ← presheaf_map_homOfLE_homOfLE (X.basicOpen_le (fc j)) hP (t₁ j), ht₁,
       map_smul, map_pow, presheaf_map_homOfLE_homOfLE,
       ← presheaf_map_tensorPowSectionOne s a (homOfLE (hP.trans (X.basicOpen_le _))), hE',
-      map_smul, map_pow, tmul_smul, smul_tmul, Scheme.presheaf_map_map_apply]
+      map_smul, map_pow, tmulSection_smul, smul_tmulSection, Scheme.presheaf_map_map_apply]
     rfl
   -- Step 2: on overlaps, the `u₁ j` agree after multiplication by a power of `f_j`.
   have hover (j k : ι) : ∃ b : ℕ,
@@ -328,17 +333,17 @@ theorem exists_tensorPowSection_eq_restrict {S : Scheme.{u}} (f : X ⟶ S) [IsSe
       rw [map_sub, presheaf_map_homOfLE_homOfLE, presheaf_map_homOfLE_homOfLE, hu₁ j hPj,
         hu₁ k hPk]
       exact sub_self _
-    obtain ⟨d', hd'⟩ := ((hE j a).bijective_tmul_right
+    obtain ⟨d', hd'⟩ := ((hE j a).bijective_tmulSection_right
       (inf_le_left : W j ⊓ W k ≤ W j)).2 d
     dsimp only at hd'
     have hd'0 : F.presheaf.map (homOfLE (X.basicOpen_le g)).op d' = 0 := by
-      apply ((hE j a).bijective_tmul_right ((X.basicOpen_le g).trans inf_le_left)).1
+      apply ((hE j a).bijective_tmulSection_right ((X.basicOpen_le g).trans inf_le_left)).1
       dsimp only
-      rw [zero_tmul, ← presheaf_map_homOfLE_homOfLE inf_le_left (X.basicOpen_le g),
-        ← presheaf_map_tmul, hd', hd0]
+      rw [zero_tmulSection, ← presheaf_map_homOfLE_homOfLE inf_le_left (X.basicOpen_le g),
+        ← tmulSection_map, hd', hd0]
     obtain ⟨b, hb⟩ := exists_pow_smul_eq_zero_of_isAffineOpen F ((hW j).inf (hW k)) g d' hd'0
     refine ⟨b, ?_⟩
-    rw [← hd', ← smul_tmul, hb, zero_tmul]
+    rw [← hd', ← smul_tmulSection, hb, zero_tmulSection]
   choose b hb using hover
   -- Step 3: multiply by `s^{⊗ b}` and glue.
   let b' := Finset.univ.sup fun p : ι × ι ↦ b p.1 p.2
@@ -375,20 +380,8 @@ theorem exists_tensorPowSection_eq_restrict {S : Scheme.{u}} (f : X ⟶ S) [IsSe
         v j := hu j
     refine (presheaf_map_homOfLE_homOfLE _ _ _).trans
       ((presheaf_map_homOfLE_homOfLE le_top inf_le_left u).symm.trans ?_)
-    rw [hu', ← Hom.app_presheaf_map, hu₁ j (hD j).ge, mulTensorPowSection_app_tmul,
-      presheaf_map_tmul, presheaf_map_tensorPowSectionOne]
-
-/-- The morphism `𝒪_X ⟶ M` corresponding to a global section `u` of `M`. -/
-noncomputable def homOfGlobalSection (M : X.Modules) (u : Γ(M, ⊤)) : 𝟙_ X.Modules ⟶ M :=
-  (SheafOfModules.unitHomEquiv M).symm (_root_.PresheafOfModules.sectionsMk
-    (fun W ↦ M.presheaf.map (homOfLE (le_top : W.unop ≤ ⊤)).op u)
-    (fun _ _ f ↦ (presheaf_map_map_apply _ f.unop _).trans rfl))
-
-/-- The morphism `𝒪_X ⟶ M` corresponding to a global section `u` sends `1` to `u`. -/
-lemma homOfGlobalSection_app (M : X.Modules) (u : Γ(M, ⊤)) (U : X.Opens) :
-    (homOfGlobalSection M u).app U (unitSectionsEquiv U 1) =
-      M.presheaf.map (homOfLE le_top).op u :=
-  congrArg (fun σ : M.sections ↦ σ.val (op U)) ((SheafOfModules.unitHomEquiv M).apply_symm_apply _)
+    rw [hu', ← Hom.app_presheaf_map, hu₁ j (hD j).ge, mulTensorPowSection_app_tmulSection,
+      tmulSection_map, presheaf_map_tensorPowSectionOne]
 
 /-- Let `s` be a section of `ℒ` which generates `ℒ` on `U`, and let `ℒ^{⊗ m} ⊗ D ≅ 𝒪_X`. If a
 section `t` of `F` over `U` is such that `t ⊗ s^m` extends to a global section `u` of
@@ -402,15 +395,24 @@ theorem exists_hom_app_eq_of_tensorPowSection {L : X.Modules} (s : 𝟙_ X.Modul
       ((ρ_ F).inv ≫ F ◁ tensorPowSection s m).app U t) :
     ∃ (φ : D ⟶ F) (w : Γ(D, U)), φ.app U w = t := by
   obtain ⟨w, hw⟩ := ((Iso.bijective_hom_app c U).comp
-    ((isFreeGenerator_tensorPowSectionOne s hs m).bijective_tmul_left (N := D) le_rfl)).2
+    ((isFreeGenerator_tensorPowSectionOne s hs m).bijective_tmulSection_left (N := D) le_rfl)).2
       (unitSectionsEquiv U 1)
   rw [Function.comp_apply, presheaf_map_id_apply] at hw
+  -- `homOfGlobalSection` has source `Modules.unit X`, which is `𝟙_ X.Modules` only up to
+  -- unfolding the monoidal structure, so we evaluate its whiskering by hand.
+  have h₁ : (homOfGlobalSection _ u ▷ D).app U (tmulSection (unitSectionsEquiv U 1) w) =
+      tmulSection ((F ⊗ L.tensorPow m).presheaf.map (homOfLE le_top).op u) w :=
+    (whiskerRight_app_tmulSection _ _ _).trans
+      (congrArg (tmulSection · w) (homOfGlobalSection_app_one _ u U))
   refine ⟨(λ_ D).inv ≫ homOfGlobalSection _ u ▷ D ≫ (α_ F (L.tensorPow m) D).hom ≫
     F ◁ c.hom ≫ (ρ_ F).hom, w, ?_⟩
   rw [Hom.comp_app, Hom.comp_app, Hom.comp_app, Hom.comp_app, ConcreteCategory.comp_apply,
     ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, ConcreteCategory.comp_apply,
-    leftUnitor_inv_app, whiskerRight_app_tmul, homOfGlobalSection_app, hu,
-    rightUnitor_inv_comp_whiskerLeft_app, associator_hom_app_tmul, whiskerLeft_app_tmul, hw,
-    rightUnitor_hom_app_tmul', LinearEquiv.symm_apply_apply, one_smul]
+    leftUnitor_inv_app]
+  refine (congrArg (fun z ↦ (ρ_ F).hom.app U ((F ◁ c.hom).app U
+    ((α_ F (L.tensorPow m) D).hom.app U z))) h₁).trans ?_
+  rw [hu, rightUnitor_inv_comp_whiskerLeft_app, associator_hom_app_tmulSection,
+    whiskerLeft_app_tmulSection, hw, rightUnitor_hom_app_tmulSection',
+    LinearEquiv.symm_apply_apply, one_smul]
 
 end AlgebraicGeometry.Scheme.Modules

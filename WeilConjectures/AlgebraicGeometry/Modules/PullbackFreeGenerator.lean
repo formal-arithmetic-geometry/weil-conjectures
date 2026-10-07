@@ -22,7 +22,15 @@ formed by `g ∣_ V` and the open immersions `V.ι` and `(g ⁻¹ᵁ V).ι`.
 We also show that a morphism of modules which is bijective on sections over all sufficiently small
 opens is an isomorphism.
 
+## Main definitions
+
+- `AlgebraicGeometry.Scheme.Modules.homOfGlobalSection`: the morphism `𝒪_X ⟶ M`, `r ↦ r • u`,
+  given by a global section `u` of `M` (via `SheafOfModules.unitHomEquiv`).
+
 ## Main statements
+
+- `AlgebraicGeometry.Scheme.Modules.isIso_homOfGlobalSection`: a global free generator
+  trivializes the module.
 
 - `AlgebraicGeometry.Scheme.Modules.IsFreeGenerator.pullback_unit_app`: the unit of the adjunction
   `g^* ⊣ g_*` maps free generators to free generators.
@@ -43,34 +51,34 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {X Y : Scheme.{u}}
 
 /-- The morphism `𝒪_X ⟶ M` corresponding to a global section `u` of `M`. -/
-noncomputable def homOfSectionTop (M : X.Modules) (u : Γ(M, ⊤)) :
+noncomputable def homOfGlobalSection (M : X.Modules) (u : Γ(M, ⊤)) :
     Modules.unit X ⟶ M :=
   (SheafOfModules.unitHomEquiv M).symm (_root_.PresheafOfModules.sectionsMk
     (fun W ↦ M.presheaf.map (homOfLE (le_top : W.unop ≤ ⊤)).op u)
     (fun _ _ f ↦ (presheaf_map_map_apply _ f.unop _).trans rfl))
 
 /-- The morphism `𝒪_X ⟶ M` corresponding to a global section `u` sends `1` to `u`. -/
-lemma homOfSectionTop_app_one (M : X.Modules) (u : Γ(M, ⊤)) (U : X.Opens) :
-    (homOfSectionTop M u).app U (1 : Γ(X, U)) = M.presheaf.map (homOfLE le_top).op u :=
+lemma homOfGlobalSection_app_one (M : X.Modules) (u : Γ(M, ⊤)) (U : X.Opens) :
+    (homOfGlobalSection M u).app U (1 : Γ(X, U)) = M.presheaf.map (homOfLE le_top).op u :=
   congrArg (fun σ : M.sections ↦ σ.val (op U)) ((SheafOfModules.unitHomEquiv M).apply_symm_apply _)
 
 /-- The morphism `𝒪_X ⟶ M` corresponding to a global section `u` sends `r` to `r • u`. -/
-lemma homOfSectionTop_app (M : X.Modules) (u : Γ(M, ⊤)) (U : X.Opens) (r : Γ(X, U)) :
-    (homOfSectionTop M u).app U r = r • M.presheaf.map (homOfLE le_top).op u := by
-  rw [← homOfSectionTop_app_one, ← Hom.app_smul]
+lemma homOfGlobalSection_app (M : X.Modules) (u : Γ(M, ⊤)) (U : X.Opens) (r : Γ(X, U)) :
+    (homOfGlobalSection M u).app U r = r • M.presheaf.map (homOfLE le_top).op u := by
+  rw [← homOfGlobalSection_app_one, ← Hom.app_smul]
   congr 1
   exact (mul_one r).symm
 
 /-- A global free generator `u` of `M` trivializes `M`: `r ↦ r • u` is an isomorphism
 `𝒪_X ≅ M`. -/
-lemma isIso_homOfSectionTop {M : X.Modules} {u : Γ(M, ⊤)} (hu : IsFreeGenerator u) :
-    IsIso (homOfSectionTop M u) := by
+lemma isIso_homOfGlobalSection {M : X.Modules} {u : Γ(M, ⊤)} (hu : IsFreeGenerator u) :
+    IsIso (homOfGlobalSection M u) := by
   rw [Hom.isIso_iff_isIso_app]
   intro U
   rw [ConcreteCategory.isIso_iff_bijective]
-  have h : (fun r : Γ(X, U) ↦ (homOfSectionTop M u).app U r) =
+  have h : (fun r : Γ(X, U) ↦ (homOfGlobalSection M u).app U r) =
       fun r : Γ(X, U) ↦ r • M.presheaf.map (homOfLE le_top).op u :=
-    funext (homOfSectionTop_app M u U)
+    funext (homOfGlobalSection_app M u U)
   have := hu U le_top
   rw [← h] at this
   exact this
@@ -95,14 +103,14 @@ lemma IsFreeGenerator.pullback_unit_app_top (k : X ⟶ Y) {L : Y.Modules} {s : �
     (hs : IsFreeGenerator s) :
     IsFreeGenerator (M := (pullback k).obj L) (U := k ⁻¹ᵁ ⊤)
       (((pullbackPushforwardAdjunction k).unit.app L).app ⊤ s) := by
-  have := isIso_homOfSectionTop hs
+  have := isIso_homOfGlobalSection hs
   let ψ : Modules.unit X ≅ (pullback k).obj L :=
-    (pullbackObjUnitIso k).symm ≪≫ (pullback k).mapIso (asIso (homOfSectionTop L s))
+    (pullbackObjUnitIso k).symm ≪≫ (pullback k).mapIso (asIso (homOfGlobalSection L s))
   have key : ((pullbackPushforwardAdjunction k).unit.app L).app ⊤ s =
       ψ.hom.app (k ⁻¹ᵁ ⊤) (1 : Γ(X, k ⁻¹ᵁ ⊤)) := by
-    have h1 : s = (homOfSectionTop L s).app ⊤ (1 : Γ(Y, ⊤)) := by
-      rw [homOfSectionTop_app_one, presheaf_map_id_apply]
-    have h3 := (pullbackPushforwardAdjunction k).unit.naturality (homOfSectionTop L s)
+    have h1 : s = (homOfGlobalSection L s).app ⊤ (1 : Γ(Y, ⊤)) := by
+      rw [homOfGlobalSection_app_one, presheaf_map_id_apply]
+    have h3 := (pullbackPushforwardAdjunction k).unit.naturality (homOfGlobalSection L s)
     have h4 := congrArg
       (fun φ : Modules.unit Y ⟶ (pushforward k).obj ((pullback k).obj L) ↦
         Hom.app φ ⊤ (1 : Γ(Y, ⊤))) h3
@@ -114,7 +122,7 @@ lemma IsFreeGenerator.pullback_unit_app_top (k : X ⟶ Y) {L : Y.Modules} {s : �
         (1 : Γ(Y, ⊤)) = (1 : Γ(X, k ⁻¹ᵁ ⊤)) :=
       map_one k.appTop.hom
     exact congrArg (fun x ↦ ((pullbackObjUnitIso k).inv ≫
-      (pullback k).map (homOfSectionTop L s)).app (k ⁻¹ᵁ ⊤) x) e1
+      (pullback k).map (homOfGlobalSection L s)).app (k ⁻¹ᵁ ⊤) x) e1
   rw [key]
   exact (isFreeGenerator_one (k ⁻¹ᵁ ⊤)).app_hom ψ
 

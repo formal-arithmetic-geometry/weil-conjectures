@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
-public import WeilConjectures.AlgebraicGeometry.Modules.TensorSections
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 
 /-!
@@ -196,28 +196,28 @@ noncomputable def projectionSectionsMap (U : Y.Opens) :
     Γ((pushforward g).obj F, U) →ₗ[Γ(Y, U)] Γ(N, U) →ₗ[Γ(Y, U)]
       Γ((pushforward g).obj (F ⊗ (pullback g).obj N), U) :=
   LinearMap.mk₂ Γ(Y, U)
-    (fun x n ↦ tmul (M := F) (N := (pullback g).obj N) (U := g ⁻¹ᵁ U) x
+    (fun x n ↦ tmulSection (M := F) (N := (pullback g).obj N) (U := g ⁻¹ᵁ U) x
       (((pullbackPushforwardAdjunction g).unit.app N).app U n))
-    (fun x x' n ↦ add_tmul _ _ _)
-    (fun r x n ↦ smul_tmul _ _ _)
-    (fun x n n' ↦ by rw [map_add, tmul_add])
-    (fun r x n ↦ (congrArg (tmul (M := F) (U := g ⁻¹ᵁ U) x) (Hom.app_smul _ r n)).trans
-      (tmul_smul _ _ _))
+    (fun x x' n ↦ add_tmulSection _ _ _)
+    (fun r x n ↦ smul_tmulSection _ _ _)
+    (fun x n n' ↦ by rw [map_add, tmulSection_add])
+    (fun r x n ↦ (congrArg (tmulSection (M := F) (U := g ⁻¹ᵁ U) x) (Hom.app_smul _ r n)).trans
+      (tmulSection_smul _ _ _))
 
 /-- The sections `x ⊗ η n` of `F ⊗ g^* N` are compatible with restriction. -/
-lemma tmul_unit_app_presheaf_map {U V : Y.Opens} (i : V ⟶ U) (x : Γ(F, g ⁻¹ᵁ U))
+lemma tmulSection_unit_app_presheaf_map {U V : Y.Opens} (i : V ⟶ U) (x : Γ(F, g ⁻¹ᵁ U))
     (n : Γ(N, U)) :
-    tmul (F.presheaf.map ((TopologicalSpace.Opens.map g.base).map i).op x)
+    tmulSection (F.presheaf.map ((TopologicalSpace.Opens.map g.base).map i).op x)
         (((pullbackPushforwardAdjunction g).unit.app N).app V (N.presheaf.map i.op n)) =
       (F ⊗ (pullback g).obj N).presheaf.map ((TopologicalSpace.Opens.map g.base).map i).op
-        (tmul x (((pullbackPushforwardAdjunction g).unit.app N).app U n)) := by
+        (tmulSection x (((pullbackPushforwardAdjunction g).unit.app N).app U n)) := by
   have h₁ : ((pullbackPushforwardAdjunction g).unit.app N).app V (N.presheaf.map i.op n) =
       ((pullback g).obj N).presheaf.map ((TopologicalSpace.Opens.map g.base).map i).op
         (((pullbackPushforwardAdjunction g).unit.app N).app U n) :=
     Hom.app_presheaf_map _ i n
   rw [h₁]
-  exact (presheaf_map_tmul (M := F) (N := (pullback g).obj N)
-    ((TopologicalSpace.Opens.map g.base).map i) _ _).symm
+  exact (tmulSection_map (M := F) (N := (pullback g).obj N)
+    (leOfHom ((TopologicalSpace.Opens.map g.base).map i)) _ _).symm
 
 /-- The morphism of presheaves of modules `g_* F ⊗ₚ N ⟶ g_* (F ⊗ g^* N)` given on sections by
 `x ⊗ n ↦ x ⊗ η n`. -/
@@ -240,7 +240,7 @@ noncomputable def projectionPresheafHom :
         ((pushforward g).obj (F ⊗ (pullback g).obj N))).map i).hom
           (TensorProduct.lift.tmul _ _).symm)
       dsimp only [projectionSectionsMap, LinearMap.mk₂_apply]
-      exact tmul_unit_app_presheaf_map g F N i.unop x n
+      exact tmulSection_unit_app_presheaf_map g F N i.unop x n
     | add a b ha hb => rw [map_add, map_add, ha, hb]
 
 /-- The comparison map `a(M ⊗ₚ N) ⟶ M ⊗ N` from the sheafification of the presheaf tensor
@@ -273,9 +273,9 @@ lemma μ_comp_map_projectionHom :
     Equiv.apply_symm_apply]
 
 /-- The projection morphism sends `x ⊗ n` to `x ⊗ η n`. -/
-lemma projectionHom_app_tmul (U : Y.Opens) (x : Γ(F, g ⁻¹ᵁ U)) (n : Γ(N, U)) :
-    (projectionHom g F N).app U (tmul (M := (pushforward g).obj F) x n) =
-      tmul (M := F) (N := (pullback g).obj N) (U := g ⁻¹ᵁ U) x
+lemma projectionHom_app_tmulSection (U : Y.Opens) (x : Γ(F, g ⁻¹ᵁ U)) (n : Γ(N, U)) :
+    (projectionHom g F N).app U (tmulSection (M := (pushforward g).obj F) x n) =
+      tmulSection (M := F) (N := (pullback g).obj N) (U := g ⁻¹ᵁ U) x
         (((pullbackPushforwardAdjunction g).unit.app N).app U n) :=
   (congr_arg (fun φ ↦ φ.app (op U) (x ⊗ₜ n)) (μ_comp_map_projectionHom g F N)).trans
     (TensorProduct.lift.tmul _ _)
@@ -284,17 +284,17 @@ lemma projectionHom_app_tmul (U : Y.Opens) (x : Γ(F, g ⁻¹ᵁ U)) (n : Γ(N, 
 generator. -/
 lemma bijective_projectionHom_app {V : Y.Opens} {e : Γ(N, V)} (he : IsFreeGenerator e)
     {W : Y.Opens} (hW : W ≤ V) : Function.Bijective ((projectionHom g F N).app W) := by
-  have h₁ := he.bijective_tmul_right (M := (pushforward g).obj F) hW
-  have h₂ := (he.pullback_unit_app g).bijective_tmul_right (M := F) (g.preimage_mono hW)
+  have h₁ := he.bijective_tmulSection_right (M := (pushforward g).obj F) hW
+  have h₂ := (he.pullback_unit_app g).bijective_tmulSection_right (M := F) (g.preimage_mono hW)
   have : (projectionHom g F N).app W ∘
-      (fun x : Γ(F, g ⁻¹ᵁ W) ↦ tmul (M := (pushforward g).obj F) x
+      (fun x : Γ(F, g ⁻¹ᵁ W) ↦ tmulSection (M := (pushforward g).obj F) x
         (N.presheaf.map (homOfLE hW).op e)) =
-      fun x : Γ(F, g ⁻¹ᵁ W) ↦ tmul x (((pullback g).obj N).presheaf.map
+      fun x : Γ(F, g ⁻¹ᵁ W) ↦ tmulSection x (((pullback g).obj N).presheaf.map
         (homOfLE (g.preimage_mono hW)).op
           (((pullbackPushforwardAdjunction g).unit.app N).app V e)) := by
     funext x
-    rw [Function.comp_apply, projectionHom_app_tmul]
-    exact congrArg (tmul x) (Hom.app_presheaf_map _ (homOfLE hW) e)
+    rw [Function.comp_apply, projectionHom_app_tmulSection]
+    exact congrArg (tmulSection x) (Hom.app_presheaf_map _ (homOfLE hW) e)
   rw [← this] at h₂
   exact (Function.Bijective.of_comp_iff _ h₁).1 h₂
 
