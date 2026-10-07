@@ -723,6 +723,7 @@ public import WeilConjectures.Mathlib.RingTheory.Etale.Section
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 public import WeilConjectures.Mathlib.RingTheory.Extension.Presentation.Submersive
 public import WeilConjectures.Mathlib.RingTheory.Flat.DescentAlgebra
+public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
 public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Descent
 public import WeilConjectures.Mathlib.RingTheory.Flat.LocallyFree
