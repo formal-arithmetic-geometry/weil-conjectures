@@ -35,6 +35,9 @@ push an `Ext`-class forward along `G` and precompose with the comparison of cons
   injective objects.
 - `CategoryTheory.Sheaf.subsingleton_H_one_of_surjective`: `H¹(F) = 0` as soon as, for every
   short exact sequence `0 → F → E → Q → 0`, every global section of `Q` lifts to `E`.
+- `CategoryTheory.Sheaf.H.exact_δ_map` and `CategoryTheory.Sheaf.H.exact_map_map`: exactness of
+  the long exact cohomology sequence `Γ(S.X₃) → H¹(S.X₁) → H¹(S.X₂)` and
+  `Hⁿ(S.X₁) → Hⁿ(S.X₂) → Hⁿ(S.X₃)` of a short exact sequence of abelian sheaves.
 - `CategoryTheory.Sheaf.H.quotientRangeAddEquiv`: for a short exact sequence
   `0 → F → I → Q → 0` with `H¹(I) = 0`, the connecting homomorphism identifies `H¹(F)` with
   the cokernel of `Γ(I) → Γ(Q)`.
@@ -183,6 +186,28 @@ lemma Sheaf.H.ker_δ : (H.δ hS hT).ker = (S.g.hom.app (op T)).hom.range := by
     rw [← H.equiv₀_symm_naturality, H.map_apply, Ext.comp_assoc _ _ _ (add_zero 0) (zero_add 1)
       (zero_add 1), hS.comp_extClass, Ext.comp_zero]
 
+/-- The long exact cohomology sequence is exact at `H¹(S.X₁)`: the kernel of
+`H¹(S.X₁) → H¹(S.X₂)` is the image of the connecting homomorphism `Γ(S.X₃) → H¹(S.X₁)`. -/
+lemma Sheaf.H.exact_δ_map : Function.Exact (H.δ hS hT) (H.map S.f 1) := by
+  intro x
+  constructor
+  · intro hx
+    obtain ⟨y, rfl⟩ := Ext.covariant_sequence_exact₁ _ hS x hx (zero_add 1)
+    exact ⟨H.equiv₀ _ hT y, by rw [H.δ_apply, AddEquiv.symm_apply_apply]⟩
+  · rintro ⟨y, rfl⟩
+    rw [H.δ_apply, H.map_apply, Ext.comp_assoc _ _ _ (zero_add 1) (add_zero 1) (zero_add 1),
+      hS.extClass_comp, Ext.comp_zero]
+
+include hS in
+/-- The long exact cohomology sequence is exact at `Hⁿ(S.X₂)`: the kernel of
+`Hⁿ(S.X₂) → Hⁿ(S.X₃)` is the image of `Hⁿ(S.X₁) → Hⁿ(S.X₂)`. -/
+lemma Sheaf.H.exact_map_map (n : ℕ) : Function.Exact (H.map S.f n) (H.map S.g n) := by
+  intro x
+  constructor
+  · exact Ext.covariant_sequence_exact₂ _ hS x
+  · rintro ⟨y, rfl⟩
+    rw [← H.map_comp_apply, S.zero, H.map_apply, Ext.mk₀_zero, Ext.comp_zero]
+
 /-- The connecting homomorphism `Γ(S.X₃) → H¹(S.X₁)` is surjective when `H¹(S.X₂) = 0`. -/
 lemma Sheaf.H.surjective_δ [Subsingleton (H S.X₂ 1)] : Function.Surjective (H.δ hS hT) := by
   intro x
@@ -218,5 +243,14 @@ theorem Sheaf.exists_shortExact_injective_addEquiv_H_one (hT : IsTerminal T)
     ⟨(H.quotientRangeAddEquiv hS hT).symm⟩⟩
 
 end HOneCokernel
+
+/-- The map induced on sheaf cohomology by `m • f` is `m` times the map induced by `f`. -/
+lemma Sheaf.H.map_nsmul_apply {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+    [HasSheafify J AddCommGrpCat.{w}] [HasExt.{w'} (Sheaf J AddCommGrpCat.{w})]
+    {F G : Sheaf J AddCommGrpCat.{w}} (f : F ⟶ G) (m n : ℕ) (x : H F n) :
+    H.map (m • f) n x = m • H.map f n x := by
+  induction m with
+  | zero => rw [zero_smul, zero_smul, H.map_apply, Ext.mk₀_zero, Ext.comp_zero]
+  | succ m ih => rw [succ_nsmul, succ_nsmul, H.map_add_apply, ih]
 
 end CategoryTheory

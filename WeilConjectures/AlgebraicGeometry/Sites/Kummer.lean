@@ -58,6 +58,8 @@ primitive `n`-th root of unity.
   when `n` is invertible on `X`.
 - `AlgebraicGeometry.Scheme.exists_exact_sheafH_rootsOfUnitySheaf_one`: the short exact
   sequence `0 → Γ(X, 𝒪)ˣ/n → H¹(X, μₙ) → H¹(X, 𝔾ₘ)[n] → 0`.
+- `AlgebraicGeometry.Scheme.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one`:
+  `H¹(X, μₙ) ≅ H¹(X, 𝔾ₘ)[n]` when every unit on `X` is an `n`-th power.
 - `AlgebraicGeometry.Scheme.exists_exact_sheafH_rootsOfUnitySheaf_two`: the short exact
   sequence `0 → H¹(X, 𝔾ₘ)/n → H²(X, μₙ) → H²(X, 𝔾ₘ)[n] → 0`.
 - `AlgebraicGeometry.Scheme.nonempty_addEquiv_sheafH_zero_constantZMod`:
@@ -217,6 +219,16 @@ theorem kummerSequence_shortExact (hn : IsUnit (n : Γ(X, ⊤))) :
     mono_f := by dsimp [kummerSequence]; infer_instance
     epi_g := Sheaf.epi_of_isLocallySurjective (n • 𝟙 X.gmSheaf) }
 
+/-- On sections, the second map of the Kummer sequence is multiplication by `n` in the
+additively written group of units. -/
+lemma kummerSequence_g_app_apply (U : X.Etaleᵒᵖ) (x : (X.kummerSequence n).X₂.obj.obj U) :
+    (X.kummerSequence n).g.hom.app U x = n • x := by
+  have e : (n • 𝟙 X.gmSheaf).hom = n • 𝟙 X.gmSheaf.obj :=
+    (sheafToPresheaf _ _).map_nsmul (f := 𝟙 X.gmSheaf) (n := n)
+  change (n • 𝟙 X.gmSheaf).hom.app U x = n • x
+  rw [e, NatTrans.app_nsmul, NatTrans.id_app]
+  rfl
+
 /-- **`H¹` via the Kummer sequence.** For a scheme `X` and `n` invertible on `X` there is an
 exact sequence
 
@@ -226,15 +238,70 @@ exact sequence
 
 that is, `0 → Γ(X, 𝒪)ˣ/n → H¹(X, μₙ) → H¹(X, 𝔾ₘ)[n] → 0`. It is recorded as the existence of
 maps `α` and `β` with `ker α = (Γ(X, 𝒪)ˣ)ⁿ`, `ker β = im α` and `im β = H¹(X, 𝔾ₘ)[n]`.
+
+The maps are those of the long exact cohomology sequence of the Kummer sequence
+(`AlgebraicGeometry.Scheme.kummerSequence_shortExact`): `α` is the connecting homomorphism
+`H⁰(X, 𝔾ₘ) = Γ(X, 𝒪)ˣ → H¹(X, μₙ)` and `β` is induced by `μₙ ⟶ 𝔾ₘ`. Exactness at `H⁰(X, 𝔾ₘ)`
+gives `ker α`, exactness at `H¹(X, μₙ)` gives `ker β = im α`, and exactness at `H¹(X, 𝔾ₘ)`,
+where the next map is multiplication by `n`, gives `im β`.
 (blueprint: `sk-prop-h1`) -/
 theorem exists_exact_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤))) :
     ∃ (α : Additive Γ(X, ⊤)ˣ →+ Sheaf.H (X.rootsOfUnitySheaf n) 1)
       (β : Sheaf.H (X.rootsOfUnitySheaf n) 1 →+ X.CohomologicalPicardGroup),
       α.ker = (zsmulAddGroupHom (α := Additive Γ(X, ⊤)ˣ) (n : ℤ)).range ∧
-        Function.Exact α β ∧ β.range = AddSubgroup.torsionBy X.CohomologicalPicardGroup n :=
-  -- Proof sketch: this is the start of the long exact sequence of
-  -- `AlgebraicGeometry.Scheme.kummerSequence_shortExact`, with `H⁰(X, 𝔾ₘ) = Γ(X, 𝒪)ˣ`.
-  sorry
+        Function.Exact α β ∧ β.range = AddSubgroup.torsionBy X.CohomologicalPicardGroup n := by
+  change ∃ (α : Additive Γ(X, ⊤)ˣ →+ Sheaf.H (X.kummerSequence n).X₁ 1)
+      (β : Sheaf.H (X.kummerSequence n).X₁ 1 →+ Sheaf.H (X.kummerSequence n).X₂ 1),
+      α.ker = (zsmulAddGroupHom (α := Additive Γ(X, ⊤)ˣ) (n : ℤ)).range ∧
+        Function.Exact α β ∧ β.range = AddSubgroup.torsionBy _ n
+  have hS := X.kummerSequence_shortExact n hn
+  -- The terminal object of `X.Etale` is abstracted away, as `rw` fails on terms mentioning it.
+  obtain ⟨T, hT, ⟨e⟩⟩ : ∃ (T : X.Etale) (_ : IsTerminal T),
+      Nonempty (Additive Γ(X, ⊤)ˣ ≃+ (X.kummerSequence n).X₃.obj.obj (Opposite.op T)) :=
+    ⟨_, MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X, ⟨AddEquiv.ulift.symm⟩⟩
+  refine ⟨(Sheaf.H.δ hS hT).comp e.toAddMonoidHom, Sheaf.H.map (X.kummerSequence n).f 1,
+    ?_, ?_, ?_⟩
+  · ext x
+    rw [AddMonoidHom.mem_ker, AddMonoidHom.comp_apply, ← AddMonoidHom.mem_ker, Sheaf.H.ker_δ]
+    simp only [AddMonoidHom.mem_range, kummerSequence_g_app_apply, zsmulAddGroupHom_apply,
+      natCast_zsmul]
+    constructor
+    · rintro ⟨y, hy⟩
+      exact ⟨e.symm y, by rw [← map_nsmul, hy]; simp⟩
+    · rintro ⟨y, rfl⟩
+      exact ⟨(e y : (X.kummerSequence n).X₂.obj.obj (Opposite.op T)), (map_nsmul e n y).symm⟩
+  · intro x
+    rw [Sheaf.H.exact_δ_map hS hT x]
+    exact ⟨fun ⟨y, hy⟩ ↦ ⟨e.symm y, by simpa using hy⟩, fun ⟨y, hy⟩ ↦ ⟨e y, hy⟩⟩
+  · ext x
+    rw [AddSubgroup.torsionBy.nsmul_iff, AddMonoidHom.mem_range]
+    have hmap (y : Sheaf.H (X.kummerSequence n).X₂ 1) :
+        Sheaf.H.map (X.kummerSequence n).g 1 y = n • y := by
+      change Sheaf.H.map (n • 𝟙 X.gmSheaf) 1 y = n • y
+      rw [Sheaf.H.map_nsmul_apply, Sheaf.H.map_id_apply]
+    rw [← hmap]
+    exact (Sheaf.H.exact_map_map hS 1 x).symm
+
+/-- **`H¹(X, μₙ) = H¹(X, 𝔾ₘ)[n]`.** If `n` is invertible on `X` and every unit on `X` is an
+`n`-th power, then `H¹(X, μₙ) ≅ H¹(X, 𝔾ₘ)[n]`: the first term `Γ(X, 𝒪)ˣ/n` of the short exact
+sequence `AlgebraicGeometry.Scheme.exists_exact_sheafH_rootsOfUnitySheaf_one` vanishes.
+(blueprint: `sk-prop-h1`) -/
+theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤)))
+    (hdiv : ∀ u : Γ(X, ⊤)ˣ, ∃ v : Γ(X, ⊤)ˣ, v ^ n = u) :
+    Nonempty (Sheaf.H (X.rootsOfUnitySheaf n) 1 ≃+
+      AddSubgroup.torsionBy X.CohomologicalPicardGroup n) := by
+  obtain ⟨α, β, hα, hαβ, hβ⟩ := X.exists_exact_sheafH_rootsOfUnitySheaf_one n hn
+  have hinj : Function.Injective β := by
+    rw [injective_iff_map_eq_zero]
+    intro x hx
+    obtain ⟨u, rfl⟩ := (hαβ x).1 hx
+    obtain ⟨v, hv⟩ := hdiv (Additive.toMul u)
+    have hu : u ∈ α.ker := by
+      rw [hα]
+      exact ⟨Additive.ofMul v, by simp [← ofMul_pow, hv]⟩
+    exact hu
+  rw [← hβ]
+  exact ⟨AddMonoidHom.ofInjective hinj⟩
 
 /-- **`H²` via the Kummer sequence.** For a scheme `X` and `n` invertible on `X` there is an
 exact sequence
