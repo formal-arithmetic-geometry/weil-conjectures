@@ -10,6 +10,7 @@ public import Mathlib.RepresentationTheory.Semisimple
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Representation
 public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 
 /-!
@@ -389,13 +390,11 @@ theorem lie_mem_range_lieAlgebraMap_identityComponent [IsAlgClosed k] [CharZero 
   sorry
 
 /-- The standard representation of the `k`-points of `V(I)` on `kⁿ`: a point `Spec k ⟶ V(I)` acts
-through its image in `GL_n(k)` under the closed immersion `V(I) ⟶ GL_n`.
-(blueprint: `sk-d-monodromy`) -/
+through its image in `GL_n(k)` under the closed immersion `V(I) ⟶ GL_n`: the algebraic-group
+module of `V(I) ⟶ GL_n`. (blueprint: `sk-d-monodromy`, `def-wf-algebraic-representations`) -/
 noncomputable def standardRepresentation (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
-    Representation k (points (subgroupScheme I) k) (n → k) where
-  toFun g := Matrix.toLinAlgEquiv' (RationalHom.points (subgroupSchemeι I) k g : Matrix n n k)
-  map_one' := by simp
-  map_mul' x y := by simp
+    Representation k (points (subgroupScheme I) k) (n → k) :=
+  RationalHom.representation (subgroupSchemeι I)
 
 variable [IsAlgClosed k]
 
