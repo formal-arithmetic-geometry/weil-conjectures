@@ -103,6 +103,32 @@ lemma ord_one (V : X.Etale) (y : V.left) : ord V y 1 = 0 := by
   simp only [mul_one, Units.val_one] at this
   omega
 
+/-- The restriction to the local generic ring of a function on `V` is its germ, mapped into
+the local generic ring. -/
+lemma toLocalGenericRing_fst_appTop (V : X.Etale) (y : V.left) (a : Γ(V.left, ⊤)) :
+    toLocalGenericRing V y ((pullback.fst V.hom X.fromSpecFunctionField).appTop a) =
+      stalkToLocalGenericRing V y (V.left.presheaf.germ ⊤ y trivial a) := by
+  have h : (pullback.fst V.hom X.fromSpecFunctionField).appTop ≫ toLocalGenericRing V y =
+      V.left.presheaf.germ ⊤ y trivial ≫ stalkToLocalGenericRing V y := by
+    rw [toLocalGenericRing, ← Scheme.Hom.comp_appTop, pullback.lift_fst, Scheme.Hom.comp_appTop,
+      fromSpecStalk_appTop, stalkToLocalGenericRing]
+    simp
+  exact congrArg (fun f ↦ f a) (congrArg CommRingCat.Hom.hom h)
+
+/-- A unit on `V` has order `0` at every point. -/
+lemma ord_fst_appTop (V : X.Etale) (y : V.left) (u : Γ(V.left, ⊤)ˣ) :
+    ord V y ((pullback.fst V.hom X.fromSpecFunctionField).appTop u.val) = 0 := by
+  by_cases hy : coheight (V.hom y) = 1
+  · rw [ord, if_pos hy, toLocalGenericRing_fst_appTop]
+    let := (stalkToLocalGenericRing V y).hom.toAlgebra
+    by_cases h : (IsNoetherianRing (V.left.presheaf.stalk y) ∧
+        Ring.KrullDimLE 1 (V.left.presheaf.stalk y) ∧ IsDomain (V.left.presheaf.stalk y)) ∧
+        IsFractionRing (V.left.presheaf.stalk y) (localGenericRing V y)
+    · have := h.1.1; have := h.1.2.1; have := h.1.2.2; have := h.2
+      exact Ring.ordOf_algebraMap_of_isUnit (u.isUnit.map _)
+    · rw [Ring.ordOf, dif_neg h]
+  · exact ord_of_coheight_ne_one V hy _
+
 /-- The order of vanishing at the points of `V`, as an additive map from the units on the
 generic fibre of `V`, written additively, to the functions `V → ℤ`. -/
 noncomputable def ordHom (V : X.Etale) :
