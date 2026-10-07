@@ -5,14 +5,13 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib.CategoryTheory.Monoidal.CommComon_
 public import Mathlib.CategoryTheory.Monoidal.CommMon_
 public import Mathlib.CategoryTheory.Monoidal.Conv
 public import Mathlib.CategoryTheory.Monoidal.Preadditive
 
 /-!
 
-# Ring objects in monoidal categories
+# Convolution rings and ring objects in monoidal categories
 
 Let `(C, ⊗, 𝟙)` be a monoidal category. An *(associative unital) algebra object* in `C` is an
 object `R` with a multiplication `μ : R ⊗ R ⟶ R` and a unit `η : 𝟙 ⟶ R` which are associative

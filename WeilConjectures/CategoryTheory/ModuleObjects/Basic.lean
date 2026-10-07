@@ -12,11 +12,11 @@ public import Mathlib.CategoryTheory.Monoidal.Mod
 # Module objects over a ring object
 
 Let `(C, ⊗, 𝟙)` be a monoidal category and `R : C` an algebra object, i.e. `[MonObj R]`
-(see `WeilConjectures.CategoryTheory.RingObjects.Basic`). A *left `R`-module object* is an
-object `M : C` with an action `γ : R ⊗ M ⟶ M` which is associative and unital; these are the
-instances `[ModObj R M]` of Mathlib, and they form the category `Mod C R`, written
-`Mod_R(C)` in the literature. Morphisms are the morphisms `f : M ⟶ N` of `C` with
-`γ ≫ f = R ◁ f ≫ γ`.
+(its ring of global sections is in `WeilConjectures.Mathlib.CategoryTheory.Monoidal.Conv`).
+A *left `R`-module object* is an object `M : C` with an action `γ : R ⊗ M ⟶ M` which is
+associative and unital; these are the instances `[ModObj R M]` of Mathlib, and they form the
+category `Mod C R`, written `Mod_R(C)` in the literature. Morphisms are the morphisms
+`f : M ⟶ N` of `C` with `γ ≫ f = R ◁ f ≫ γ`.
 
 This file contains the basic API of the forgetful functor `Mod.forget R : Mod C R ⥤ C`:
 it is faithful and reflects isomorphisms, and isomorphisms of module objects can be built from
