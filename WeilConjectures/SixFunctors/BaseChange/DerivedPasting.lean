@@ -408,7 +408,6 @@ lemma Etale.upperStarComp_congr {T S R : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S 
   subst h
   simp
 
-omit [HasSmallSiteSheafify A] in
 /-- The square isomorphism of the identity square on `f` is built from the identity
 isomorphisms `(𝟙 _)^* ≅ 𝟭`. -/
 lemma Etale.squareUpperStarIso_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 Y)) :
@@ -423,7 +422,6 @@ lemma Etale.squareUpperStarIso_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 
   ext M
   simp
 
-omit [HasSmallSiteSheafify A] in
 /-- **The underived base change map of the identity square** is the identity, modulo the
 identity isomorphisms `(𝟙 _)^* ≅ 𝟭` of the pullbacks. -/
 lemma Etale.baseChangeMap_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 Y)) :
