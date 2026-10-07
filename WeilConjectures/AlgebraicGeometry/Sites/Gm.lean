@@ -117,6 +117,13 @@ the block has no node of its own for the sheaf.
 noncomputable def gmSheaf : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   ⟨X.gmPresheaf, X.isSheaf_gmPresheaf⟩
 
+/-- Restriction in `𝔾ₘ` along a map `g` of étale `X`-schemes is pullback of functions along `g`. -/
+lemma gmPresheaf_map_apply {X : Scheme.{u}} {U V : X.Etale} (g : V ⟶ U)
+    (x : X.gmPresheaf.obj (Opposite.op U)) :
+    (((Additive.toMul (X.gmPresheaf.map g.op x).down : Γ(V.left, ⊤)ˣ)) : Γ(V.left, ⊤)) =
+      g.left.appTop ((Additive.toMul x.down : Γ(U.left, ⊤)ˣ) : Γ(U.left, ⊤)) :=
+  rfl
+
 /-- The *cohomological Picard group* `H¹(X_ét, 𝔾ₘ)` of a scheme.
 
 It is called cohomological because the Picard group proper, the group of invertible
