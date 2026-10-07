@@ -834,3 +834,17 @@ noncomputable def mapDerivedCategory (E : C ≌ D) [E.functor.Additive] [E.inver
       Functor.mapDerivedCategoryNatIso E.counitIso ≪≫ Functor.mapDerivedCategoryIdIso D)
 
 end CategoryTheory.Equivalence
+
+namespace CategoryTheory.Functor
+
+variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+  [HasDerivedCategory C] [HasDerivedCategory D]
+
+/-- The functor `D(F)` induced on derived categories by an additive equivalence `F` of abelian
+categories is an equivalence, with quasi-inverse `D(F⁻¹)`. -/
+instance isEquivalence_mapDerivedCategory (F : C ⥤ D) [F.IsEquivalence] [F.Additive] :
+    F.mapDerivedCategory.IsEquivalence :=
+  have : F.asEquivalence.functor.Additive := ‹F.Additive›
+  inferInstanceAs F.asEquivalence.mapDerivedCategory.functor.IsEquivalence
+
+end CategoryTheory.Functor
