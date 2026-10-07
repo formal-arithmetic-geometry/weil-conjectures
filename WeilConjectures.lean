@@ -810,6 +810,7 @@ public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Maps
 public import WeilConjectures.Mathlib.RingTheory.Unramified.Finite
+public import WeilConjectures.Mathlib.RingTheory.Unramified.LocalStructure
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.Mathlib.SetTheory.Cardinal.HasCardinalLT

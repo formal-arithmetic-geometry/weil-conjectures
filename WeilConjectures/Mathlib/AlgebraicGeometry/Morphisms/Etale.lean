@@ -18,10 +18,11 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.LocalIso
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Mathlib.RingTheory.Etale.QuasiFinite
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
+public import WeilConjectures.Mathlib.RingTheory.Unramified.LocalStructure
 public import WeilConjectures.Mathlib.Topology.Sets.Opens
 
 /-!
-# Three facts about étale morphisms
+# Four facts about étale morphisms
 
 ## Lifting along a closed immersion
 
@@ -49,6 +50,11 @@ Let `f : X ⟶ S` be locally of finite type and `r : Z ⟶ S` étale. For `z : Z
 from the fibre of `X ×_S Z` over `z` to the fibre of `X` over `r z` is open and closed, so it maps
 connected components onto connected components.
 
+## Étale schemes over reduced schemes
+
+A scheme étale over a reduced scheme is reduced, by the corresponding statement
+`Algebra.Etale.isReduced` for rings.
+
 ## Main results
 
 - `AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`: for every point `w` of `W`
@@ -64,6 +70,7 @@ connected components onto connected components.
   same statement with finitely many pieces when the source is quasi-compact.
 - `AlgebraicGeometry.connectedComponentIn_subset_image_pullback_fst`: the first projection maps
   a connected component of a fibre of `X ×_S Z ⟶ Z` onto a connected component of a fibre of `X`.
+- `AlgebraicGeometry.isReduced_of_etale`: a scheme étale over a reduced scheme is reduced.
 -/
 
 @[expose] public section
@@ -382,5 +389,23 @@ theorem connectedComponentIn_subset_image_pullback_fst {X S Z : Scheme.{u}} (f :
   obtain ⟨q, hq, hqy⟩ := hK.connectedComponent_subset (x := φ ⟨p, hpF⟩)
     (Set.mem_image_of_mem _ mem_connectedComponent) hy'
   exact ⟨q, hq, by rw [← hy, ← hqy]⟩
+
+/-- A scheme `X` étale over a reduced scheme `Y` is reduced: every point of `X` has an affine
+neighbourhood `U` mapping into an affine open `V` of `Y` with `Γ(Y, V) ⟶ Γ(X, U)` étale, so
+`Γ(X, U)` is reduced by `Algebra.Etale.isReduced`, and so is its localisation, the stalk. -/
+theorem isReduced_of_etale {X Y : Scheme.{u}} (f : X ⟶ Y) [Etale f] [IsReduced Y] :
+    IsReduced X := by
+  have (x : X) : _root_.IsReduced (X.presheaf.stalk x) := by
+    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ :=
+      Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (f.base x)) isOpen_univ
+    obtain ⟨_, ⟨U, hU, rfl⟩, hxU, hUV⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open
+      (show x ∈ f ⁻¹ᵁ V from hxV) (f ⁻¹ᵁ V).isOpen
+    have he := HasRingHomProperty.appLE @Etale f ‹_› ⟨V, hV⟩ ⟨U, hU⟩ hUV
+    algebraize [(f.appLE V U hUV).hom]
+    have : _root_.IsReduced Γ(X, U) := Algebra.Etale.isReduced Γ(Y, V) Γ(X, U)
+    have := hU.isLocalization_stalk ⟨x, hxU⟩
+    exact @isReduced_localizationPreserves _ _ _ _ _ (X.presheaf.algebra_section_stalk ⟨x, hxU⟩)
+      this ‹_›
+  exact isReduced_of_isReduced_stalk X
 
 end AlgebraicGeometry
