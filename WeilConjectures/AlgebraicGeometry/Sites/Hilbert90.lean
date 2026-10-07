@@ -192,6 +192,43 @@ section Descent
 variable {E Q : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}}
   (ι : (Spec (.of K)).gmSheaf ⟶ E) (π : E ⟶ Q)
 
+/-- **Gluing a lift along `Spec L → Spec K`.** Let `π : E ⟶ Q` be a morphism of abelian
+sheaves on the small étale site of `Spec K`, let `q` be a global section of `Q` and let `e` be a
+section of `E` over `Spec L`, for `L` a field étale over `K`, lifting the restriction of `q`. If
+the pullbacks of `e` along any two morphisms `Z ⟶ Spec L` agree, then `e` descends to a global
+section of `E` lifting `q`. -/
+theorem exists_app_eq_of_compatible (L : Type u) [Field L] [Algebra K L] [Algebra.Etale K L]
+    (f : etaleSpec K L ⟶ 𝟙ₑ) (q : Q.obj.obj (op 𝟙ₑ)) (e : E.obj.obj (op (etaleSpec K L)))
+    (he : π.hom.app _ e = Q.obj.map f.op q)
+    (hcompat : ∀ {Z : (Spec (.of K)).Etale} (g₁ g₂ : Z ⟶ etaleSpec K L),
+      E.obj.map g₁.op e = E.obj.map g₂.op e) :
+    ∃ x, π.hom.app (op 𝟙ₑ) x = q := by
+  have hT := MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale (Spec (.of K))
+  have hcov : Sieve.ofArrows _ (fun _ : Unit ↦ f) ∈ (Spec (.of K)).smallEtaleTopology 𝟙ₑ := by
+    rw [ofArrows_mem_smallEtaleTopology_iff]
+    ext x
+    simp only [Set.mem_iUnion, Set.mem_range, Set.mem_univ, iff_true]
+    exact ⟨(), (default : Spec (.of L)), @Subsingleton.elim (Spec (.of K)) _ _ _⟩
+  have hsheaf (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) :
+      Presieve.IsSheafFor (F.obj ⋙ CategoryTheory.forget _) (Presieve.singleton f) := by
+    have := (isSheaf_iff_isSheaf_of_type _ _).mp
+      (Presheaf.isSheaf_comp_of_isSheaf _ F.obj (CategoryTheory.forget AddCommGrpCat) F.property)
+    rw [← Presieve.ofArrows_pUnit.{0}, Presieve.isSheafFor_iff_generate]
+    exact this _ hcov
+  obtain ⟨x, hx, -⟩ := Presieve.isSheafFor_singleton.mp (hsheaf E) e
+    (fun g₁ g₂ _ ↦ hcompat g₁ g₂)
+  refine ⟨x, ?_⟩
+  obtain ⟨y, -, hy⟩ := Presieve.isSheafFor_singleton.mp (hsheaf Q) (Q.obj.map f.op q)
+    (fun g₁ g₂ _ ↦ by
+      change Q.obj.map g₁.op (Q.obj.map f.op q) = Q.obj.map g₂.op (Q.obj.map f.op q)
+      simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp,
+        hT.hom_ext (g₁ ≫ f) (g₂ ≫ f)])
+  refine (hy _ ?_).trans (hy _ rfl).symm
+  change Q.obj.map f.op (π.hom.app _ x) = _
+  rw [← NatTrans.naturality_apply]
+  have hx' : E.obj.map f.op x = e := hx
+  rw [hx', he]
+
 open Algebra.TensorProduct in
 /-- **Descent of a lift along `Spec L → Spec K`.** Let `0 → 𝔾ₘ → E → Q` be exact on sections
 over every étale `K`-scheme. If a global section `q` of `Q` lifts to a section `e` of `E` over
@@ -283,31 +320,8 @@ theorem exists_app_eq_of_app_etaleSpec_eq (hιπ : ι ≫ π = 0)
         ← map_sub, hw, map_zero]
     simp only [op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
     exact congr_arg _ this
-  -- glue along the covering `Spec L → Spec K`
-  have hcov : Sieve.ofArrows _ (fun _ : Unit ↦ f) ∈ (Spec (.of K)).smallEtaleTopology 𝟙ₑ := by
-    rw [ofArrows_mem_smallEtaleTopology_iff]
-    ext x
-    simp only [Set.mem_iUnion, Set.mem_range, Set.mem_univ, iff_true]
-    exact ⟨(), (default : Spec (.of L)), @Subsingleton.elim (Spec (.of K)) _ _ _⟩
-  have hsheaf (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) :
-      Presieve.IsSheafFor (F.obj ⋙ CategoryTheory.forget _) (Presieve.singleton f) := by
-    have := (isSheaf_iff_isSheaf_of_type _ _).mp
-      (Presheaf.isSheaf_comp_of_isSheaf _ F.obj (CategoryTheory.forget AddCommGrpCat) F.property)
-    rw [← Presieve.ofArrows_pUnit.{0}, Presieve.isSheafFor_iff_generate]
-    exact this _ hcov
-  obtain ⟨x, hx, -⟩ := Presieve.isSheafFor_singleton.mp (hsheaf E) e'
-    (fun g₁ g₂ _ ↦ hcompat g₁ g₂)
-  refine ⟨x, ?_⟩
-  obtain ⟨y, -, hy⟩ := Presieve.isSheafFor_singleton.mp (hsheaf Q) (Q.obj.map f.op q)
-    (fun g₁ g₂ _ ↦ by
-      change Q.obj.map g₁.op (Q.obj.map f.op q) = Q.obj.map g₂.op (Q.obj.map f.op q)
-      simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp,
-        hT.hom_ext (g₁ ≫ f) (g₂ ≫ f)])
-  refine (hy _ ?_).trans (hy _ rfl).symm
-  change Q.obj.map f.op (π.hom.app _ x) = _
-  rw [← NatTrans.naturality_apply]
-  have hx' : E.obj.map f.op x = e' := hx
-  rw [hx', he', he]
+  exact exists_app_eq_of_compatible π L f q e' (he'.trans he) hcompat
+
 /-- **Every `𝔾ₘ`-torsor on `Spec K` is trivial.** For a short exact sequence
 `0 → 𝔾ₘ → E → Q → 0` of abelian sheaves on the small étale site of the spectrum of a field `K`,
 every global section of `Q` lifts to `E`.
