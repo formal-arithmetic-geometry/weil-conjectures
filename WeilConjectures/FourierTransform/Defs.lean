@@ -29,13 +29,13 @@ The transform is a special case of a *kernel transform*
 `Φ_𝒦(K) = Rp₂,!(p₁^* K ⊗ᴸ 𝒦)[a]` attached to an arbitrary kernel `𝒦` on `V ×_S V'` and an
 arbitrary shift `a` (`WeilConjectures.SixFunctors.Etale.Derived.KernelTransform`).
 
-The *Fourier integrand* `ℱ_ψ(K) = p₁₃,*(p₁₂^* K ⊗ᴸ 𝒦_ψ)` on the triple product is the same
-expression read with the ordinary direct image; it is not needed for any statement of this
-block and is not formalised.
+The *Fourier integrand* `ℱ_ψ(K) = p₁^* K ⊗ᴸ 𝒦_ψ` is the complex on `V ×_S V'` whose
+compact-support direct image along `p₂` is the transform, before the shift.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.fourierKernel`: the Fourier kernel `𝒦_ψ`.
+- `AlgebraicGeometry.Etale.fourierIntegrand`: the Fourier integrand `ℱ_ψ(K) = p₁^* K ⊗ᴸ 𝒦_ψ`.
 - `AlgebraicGeometry.Etale.fourierTransform`: the Fourier–Deligne transform `FT_ψ`.
 - `AlgebraicGeometry.Etale.fourierTransformBoundedConstructible`: the transform as a
   functor `Dᵇc(V, Λ) ⥤ Dᵇc(V', Λ)`.
@@ -127,18 +127,34 @@ variable {S V V' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S)
 is the Artin–Schreier sheaf `ℒ_{Ψ, b} = b^* ℒ_Ψ` of the pairing, the pullback of the
 Artin–Schreier sheaf of `𝔸¹` along `b : V ×_S V' ⟶ 𝔸¹`. On the affine line over a field, with
 `V = V' = 𝔸¹` and the pairing the product `x ξ`, this is the sheaf usually written
-`ℒ_{ψ(xξ)}`.
+`ℒ_{ψ(xξ)}`. The two descriptions `ℒ_{Ψ, b}` and `b^* ℒ_Ψ` agree by construction, and the
+compatibility `h^* ℒ_{Ψ, f} ≅ ℒ_{Ψ, h^* f}` with further pullbacks is
+`AlgebraicGeometry.Etale.artinSchreierSheafOfPullbackIso`.
 
 Being an Artin–Schreier sheaf, it is lisse of rank one
 (`AlgebraicGeometry.Etale.isLocallyConstantSheaf_artinSchreierSheafOf`) and multiplicative in
 the character (`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_mul`), with
 `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv` identifying `𝒦_ψ⁻¹` with
 `𝒦_{ψ⁻¹}`. It is defined for every commutative ring `Λ` in which `p` is invertible.
-(sketch blueprint: `sk-def-kernel`, `sk-prop-kernel-lisse`) -/
+(sketch blueprint: `sk-def-kernel`, `sk-prop-kernel-lisse`; blueprint: `def-fd-kernel`) -/
 noncomputable def fourierKernel [CharP Γ(pullback π π', ⊤) p] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) :
     Sheaf (pullback π π').smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
   artinSchreierSheafZMod (pullback π π') Ψ b
+
+/-- For a pairing `b ∈ Γ(V ×_S V', 𝒪)` between two `S`-schemes, the *Fourier integrand* is the
+functor `ℱ_ψ(K) = p₁^* K ⊗ᴸ 𝒦_ψ` from `D(V_ét)` to `D((V ×_S V')_ét)`, `p₁` being the first
+projection and `𝒦_ψ` the Fourier kernel placed in degree `0`. The Fourier–Deligne transform is
+its compact-support direct image along the second projection `p₂`, shifted
+(`AlgebraicGeometry.Etale.fourierTransform_eq_fourierIntegrand_comp`).
+(sketch blueprint: `sk-def-kernel`; blueprint: `def-fd-kernel`) -/
+noncomputable def fourierIntegrand [CharP Γ(pullback π π', ⊤) p] (Ψ : AddChar (ZMod p) Λ)
+    (b : Γ(pullback π π', ⊤)) :
+    DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
+      DerivedCategory (Sheaf (pullback π π').smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+  D((pullback.fst π π')^*[ModuleCat.{u + 1} Λ]) ⋙
+    derivedTensorRight (ModuleCat.{u + 1} Λ) (pullback π π')
+      ((DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b))
 
 /-- For a pairing `b ∈ Γ(V ×_S V', 𝒪)` between two `S`-schemes and a relative dimension `r`,
 the *Fourier–Deligne transform* is
@@ -160,6 +176,17 @@ noncomputable def fourierTransform [CharP Γ(pullback π π', ⊤) p]
       DerivedCategory (Sheaf V'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   kernelTransform (ModuleCat.{u + 1} Λ) π π'
     ((DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) r
+
+/-- The Fourier–Deligne transform is the compact-support direct image of the Fourier integrand
+along the second projection, shifted by `r`: `FT_ψ(K) = Rp₂,!(ℱ_ψ(K))[r]`.
+(sketch blueprint: `sk-def-kernel`; blueprint: `def-fd-kernel`) -/
+lemma fourierTransform_eq_fourierIntegrand_comp [CharP Γ(pullback π π', ⊤) p]
+    [HasCompactification (pullback.snd π π')] (Ψ : AddChar (ZMod p) Λ)
+    (b : Γ(pullback π π', ⊤)) (r : ℤ) :
+    fourierTransform Λ π π' Ψ b r =
+      fourierIntegrand Λ π π' Ψ b ⋙ R(pullback.snd π π')_![ModuleCat.{u + 1} Λ] ⋙
+        shiftFunctor _ r :=
+  rfl
 
 section BoundedConstructible
 
