@@ -70,21 +70,22 @@ section Monoidal
 
 variable (k₀ l X) in
 /-- The comparison `Fr^* F ⊗ Fr^* G ⟶ Fr^* (F ⊗ G)` of the Frobenius pullback is an isomorphism:
-the pushforward along the automorphism `Fr⁻¹` is induced by an automorphism of the pro-étale
-site, which commutes with the objectwise tensor product of presheaves and with
-sheafification. -/
+the pushforward along the automorphism `Fr⁻¹` is the right adjoint in a monoidal adjoint
+equivalence whose left adjoint, the pullback along `Fr⁻¹`, is strong monoidal
+(`AlgebraicGeometry.ProEtale.isIso_lowerStar_μ`). -/
 instance WeilSheaf.isIso_μ_frobeniusPullback
     (F G : Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
       (WeilCoefficients.{u} l)) :
     IsIso (Functor.LaxMonoidal.μ (WeilSheaf.frobeniusPullback k₀ l X) F G) :=
-  sorry
+  ProEtale.isIso_lowerStar_μ _ _ F G
 
 variable (k₀ l X) in
 /-- The comparison `𝟙 ⟶ Fr^* 𝟙` of the Frobenius pullback is an isomorphism, as for
-`AlgebraicGeometry.WeilSheaf.isIso_μ_frobeniusPullback`. -/
+`AlgebraicGeometry.WeilSheaf.isIso_μ_frobeniusPullback`
+(`AlgebraicGeometry.ProEtale.isIso_lowerStar_ε`). -/
 instance WeilSheaf.isIso_ε_frobeniusPullback :
     IsIso (Functor.LaxMonoidal.ε (WeilSheaf.frobeniusPullback k₀ l X)) :=
-  sorry
+  ProEtale.isIso_lowerStar_ε _ _
 
 /-- The Frobenius pullback `Fr^* = (Fr⁻¹)_*` is a monoidal functor. -/
 noncomputable instance : (WeilSheaf.frobeniusPullback k₀ l X).Monoidal :=
