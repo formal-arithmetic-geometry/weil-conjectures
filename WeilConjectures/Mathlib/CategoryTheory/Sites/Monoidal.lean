@@ -58,6 +58,10 @@ sheafification.
 - `CategoryTheory.sheafToPresheafLaxBraided`: the underlying presheaf functor is lax braided.
 - `CategoryTheory.Functor.sheafPushforwardContinuousLaxBraided`: the pushforward of sheaves
   along a continuous functor of sites is lax braided.
+- `CategoryTheory.Functor.ε_sheafPushforwardContinuous_of_iso_id` and
+  `CategoryTheory.Functor.ε_sheafPushforwardContinuous_of_iso_comp`: the unit `ε` of the lax
+  monoidal pushforward is compatible with the identity and composition isomorphisms of
+  pushforwards.
 - `CategoryTheory.Functor.sheafPullbackConstruction.isIso_δ_sheafPullback` and
   `CategoryTheory.Functor.sheafPullbackConstruction.isIso_η_sheafPullback`: the comparison
   maps of the oplax monoidal pullback are isomorphisms, e.g. along a representably flat
@@ -336,5 +340,128 @@ example [∀ X : Dᵒᵖ, IsSifted (CostructuredArrow F.op X)]
   rfl
 
 end Functor.sheafPullbackConstruction
+
+section PushforwardUnit
+
+open MonoidalCategory
+
+namespace Functor
+
+open LaxMonoidal
+
+variable {C : Type*} [Category C] {D : Type*} [Category D] (F : C ⥤ D)
+  (A : Type*) [Category A] [MonoidalCategory A] [BraidedCategory A]
+  (J : GrothendieckTopology C) (K : GrothendieckTopology D)
+  [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A] [F.IsContinuous J K]
+  [(K.W (A := A)).IsMonoidal] [HasWeakSheafify K A]
+
+attribute [local instance] Sheaf.monoidalCategory
+
+omit [MonoidalCategory A] [BraidedCategory A] [(J.W (A := A)).IsMonoidal]
+  [(K.W (A := A)).IsMonoidal] [HasWeakSheafify K A] in
+/-- The comparison isomorphism `sheafToPresheafCompWhiskeringLeftIsoPushforward` between the
+restriction along `F.op` of the underlying presheaf and the underlying presheaf of the
+pushforward is the identity on components, by the triangle identity of sheafification. -/
+lemma sheafToPresheafCompWhiskeringLeftIsoPushforward_hom_app (G : Sheaf K A) :
+    (sheafPullbackConstruction.sheafToPresheafCompWhiskeringLeftIsoPushforward
+      F A J K).hom.app G = 𝟙 _ := by
+  simp [sheafPullbackConstruction.sheafToPresheafCompWhiskeringLeftIsoPushforward,
+    sheafToPresheafCompWhiskeringLeftCompPresheafToSheafIso]
+  rfl
+
+/-- The unit `ε` of the lax monoidal pushforward `F_*` of sheaves, read on underlying
+presheaves after the unit of the lax monoidal functor `sheafToPresheaf`, is the restriction
+along `F.op` of the unit of `sheafToPresheaf`. -/
+lemma ε_sheafToPresheaf_comp_map_ε_sheafPushforwardContinuous :
+    ε (sheafToPresheaf J A) ≫ (sheafToPresheaf J A).map (ε (F.sheafPushforwardContinuous A J K)) =
+      ε ((whiskeringLeft _ _ A).obj F.op) ≫
+        ((whiskeringLeft _ _ A).obj F.op).map (ε (sheafToPresheaf K A)) := by
+  have h := NatTrans.IsMonoidal.unit
+    (τ := (sheafPullbackConstruction.sheafToPresheafCompWhiskeringLeftIsoPushforward
+      F A J K).hom)
+  rw [sheafToPresheafCompWhiskeringLeftIsoPushforward_hom_app, comp_ε, comp_ε] at h
+  simpa using h.symm
+
+/-- The componentwise form of
+`CategoryTheory.Functor.ε_sheafToPresheaf_comp_map_ε_sheafPushforwardContinuous`. -/
+@[reassoc]
+lemma ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app (U : Cᵒᵖ) :
+    (ε (sheafToPresheaf J A)).app U ≫ (ε (F.sheafPushforwardContinuous A J K)).hom.app U =
+      (ε (sheafToPresheaf K A)).app (F.op.obj U) := by
+  simpa using congr_app (ε_sheafToPresheaf_comp_map_ε_sheafPushforwardContinuous F A J K) U
+
+end Functor
+
+namespace Sheaf
+
+open Functor.LaxMonoidal Functor.OplaxMonoidal
+
+variable {C : Type*} [Category C] {A : Type*} [Category A] [MonoidalCategory A]
+  {J : GrothendieckTopology C} [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A]
+
+attribute [local instance] Sheaf.monoidalCategory
+
+/-- Two morphisms of sheaves out of the monoidal unit agree as soon as they agree on
+underlying presheaves after the unit `ε : 𝟙_ ⟶ (𝟙_ : Sheaf J A).obj` of the lax monoidal functor
+`sheafToPresheaf`: this unit is adjoint to the isomorphism `η` of the monoidal sheafification. -/
+lemma hom_ext_of_ε_comp {G : Sheaf J A} {a b : 𝟙_ (Sheaf J A) ⟶ G}
+    (h : ε (sheafToPresheaf J A) ≫ (sheafToPresheaf J A).map a =
+      ε (sheafToPresheaf J A) ≫ (sheafToPresheaf J A).map b) : a = b := by
+  have e (c : 𝟙_ (Sheaf J A) ⟶ G) : ((sheafificationAdjunction J A).homEquiv _ _).symm
+      (ε (sheafToPresheaf J A) ≫ (sheafToPresheaf J A).map c) =
+        η (presheafToSheaf J A) ≫ c := by
+    rw [Adjunction.homEquiv_naturality_right_symm]
+    congr 1
+    exact Equiv.symm_apply_apply _ _
+  rw [← cancel_epi (η (presheafToSheaf J A)), ← e, ← e]
+  exact congrArg _ h
+
+end Sheaf
+
+namespace Functor
+
+open LaxMonoidal
+
+attribute [local instance] Sheaf.monoidalCategory
+
+variable {C : Type*} [Category C] (A : Type*) [Category A] [MonoidalCategory A]
+  [BraidedCategory A] (J : GrothendieckTopology C) [(J.W (A := A)).IsMonoidal]
+  [HasWeakSheafify J A]
+
+/-- For a continuous functor `F` isomorphic to the identity, the unit `ε` of the lax monoidal
+pushforward `F_*` is the identification `F_* ≅ 𝟭` of
+`CategoryTheory.Functor.sheafPushforwardContinuousId'` at the monoidal unit. -/
+lemma ε_sheafPushforwardContinuous_of_iso_id {F : C ⥤ C} (e : F ≅ 𝟭 C)
+    [hF : F.IsContinuous J J] :
+    ε (F.sheafPushforwardContinuous A J J) =
+      (sheafPushforwardContinuousId' e A J).inv.app (𝟙_ _) := by
+  apply Sheaf.hom_ext_of_ε_comp
+  rw [ε_sheafToPresheaf_comp_map_ε_sheafPushforwardContinuous]
+  ext U
+  simpa [sheafPushforwardContinuousId'] using
+    (ε (sheafToPresheaf J A)).naturality (e.hom.app U.unop).op
+
+/-- For continuous functors `F`, `G` and `FG ≅ F ⋙ G`, the unit `ε` of the lax monoidal
+pushforward `FG_*` is the composite of the units of `F_*` and `G_*` followed by the
+identification `G_* ⋙ F_* ≅ FG_*` of `CategoryTheory.Functor.sheafPushforwardContinuousComp'`. -/
+lemma ε_sheafPushforwardContinuous_of_iso_comp {D E : Type*} [Category D] [Category E]
+    (K : GrothendieckTopology D) (L : GrothendieckTopology E) [(K.W (A := A)).IsMonoidal]
+    [HasWeakSheafify K A] [(L.W (A := A)).IsMonoidal] [HasWeakSheafify L A]
+    {F : C ⥤ D} {G : D ⥤ E} {FG : C ⥤ E} (e : F ⋙ G ≅ FG) [hF : F.IsContinuous J K]
+    [hG : G.IsContinuous K L] [hFG : FG.IsContinuous J L] :
+    ε (FG.sheafPushforwardContinuous A J L) =
+      ε (F.sheafPushforwardContinuous A J K) ≫
+        (F.sheafPushforwardContinuous A J K).map (ε (G.sheafPushforwardContinuous A K L)) ≫
+          (sheafPushforwardContinuousComp' e A J K L).hom.app (𝟙_ _) := by
+  apply Sheaf.hom_ext_of_ε_comp
+  rw [ε_sheafToPresheaf_comp_map_ε_sheafPushforwardContinuous]
+  ext U
+  simpa [sheafPushforwardContinuousComp', sheafPushforwardContinuousComp,
+    ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app_assoc] using
+    (ε (sheafToPresheaf L A)).naturality (e.inv.app U.unop).op
+
+end Functor
+
+end PushforwardUnit
 
 end CategoryTheory

@@ -235,7 +235,7 @@ lemma isIdempotentElem_artinSchreierIdempotent (Ψ : AddChar k Λ) :
 /-- The *Artin–Schreier sheaf* `ℒ_Ψ` on `𝔸¹_k`: the image of the idempotent `e_Ψ` on
 `(AS_q)_* Λ`, that is, the `Ψ`-isotypic component of the pushforward of the constant sheaf
 along the Artin–Schreier map `AS_q : 𝔸¹_k ⟶ 𝔸¹_k`.
-(sketch blueprint: `sk-def-as`) -/
+(sketch blueprint: `sk-def-as`; blueprint: `def-fd-artin-schreier-sheaf`) -/
 def artinSchreierSheaf (Ψ : AddChar k Λ) :
     Sheaf (Scheme.smallEtaleTopology 𝔸¹[k]) (ModuleCat Λ) :=
   image (artinSchreierIdempotent Ψ)
@@ -252,8 +252,10 @@ lemma image_ι_comp_factorThruImage_artinSchreierIdempotent (Ψ : AddChar k Λ) 
   exact isIdempotentElem_artinSchreierIdempotent Ψ
 
 /-- The Artin–Schreier sheaf `ℒ_{Ψ, f} := f^* ℒ_Ψ` of a global function `f` on a `k`-scheme
-`X`, where `f` is viewed as a morphism `X ⟶ 𝔸¹_k`.
-(sketch blueprint: `sk-def-as`) -/
+`X`, where `f` is viewed as a morphism `X ⟶ 𝔸¹_k`. The variants `ℒ_{ψ⁻¹, f}` and
+`ℒ_{ψ(a f)}` of the blueprint are `artinSchreierSheafOf X Ψ⁻¹ f` and
+`artinSchreierSheafOf X Ψ (a • f)`.
+(sketch blueprint: `sk-def-as`; blueprint: `def-fd-artin-schreier-sheaf`) -/
 def artinSchreierSheafOf (X : Scheme.{u}) [X.Over (Spec (.of k))] (Ψ : AddChar k Λ)
     (f : Γ(X, ⊤)) : Sheaf X.smallEtaleTopology (ModuleCat Λ) :=
   (AffineSpace.homOfVector (X ↘ Spec (.of k)) fun _ ↦ f)^*[ModuleCat Λ].obj
@@ -293,7 +295,10 @@ instance invertible_card_ulift_zmod {p : ℕ} [NeZero p] [Invertible (p : Λ)] :
 
 /-- For a scheme `X` of characteristic `p`, the Artin–Schreier sheaf `ℒ_{Ψ, f}` of a global
 function `f` and an additive character `Ψ` of `ℤ/p`, where `X` is viewed as a scheme over
-`𝔽_p` by `AlgebraicGeometry.Scheme.overSpecZModOfCharP`. -/
+`𝔽_p` by `AlgebraicGeometry.Scheme.overSpecZModOfCharP`. This is the construction of the
+blueprint definition `def-fd-artin-schreier-sheaf` (sketch blueprint: `sk-def-as`): the
+`Ψ`-isotypic part, for a character `Ψ` of `𝔽_p`, of the Artin–Schreier covering
+`T ^ p - T = f`. -/
 def artinSchreierSheafZMod {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)] (X : Scheme.{u})
     [CharP Γ(X, ⊤) p] (Ψ : AddChar (ZMod p) Λ) (f : Γ(X, ⊤)) :
     Sheaf X.smallEtaleTopology (ModuleCat Λ) :=
