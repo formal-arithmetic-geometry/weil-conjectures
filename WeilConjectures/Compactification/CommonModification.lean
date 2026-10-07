@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.Blowup.Density
 public import WeilConjectures.Blowup.Extension
 public import WeilConjectures.Compactification.EliminationOfIndeterminacy
 public import WeilConjectures.Compactification.StrictTransformBlowup
@@ -24,7 +25,11 @@ blueprint `def:common-modification`, `thm:0F3X`, `def:nagata-common-modification
   separated finite-type models `X₁`, `X₂` of a common open `U` over `S`;
 - `AlgebraicGeometry.nonempty_commonModification`: two such models admit `U`-admissible
   blow-ups which glue along a common copy of the modified `U`-locus to a separated
-  finite-type model.
+  finite-type model;
+- `AlgebraicGeometry.CommonModification.j`: the open immersion of `U` into the glued
+  scheme, and `AlgebraicGeometry.CommonModification.dense_range_j`: density of `U` is
+  transported through the common modification (blueprint:
+  `lemma:nagata-two-open-density-transport`).
 
 The extension step of the construction is recorded separately as
 
@@ -432,6 +437,79 @@ theorem nonempty_commonModification [CompactSpace S] [QuasiSeparatedSpace S]
            locallyOfFiniteType_w := IsZariskiLocalAtSource.pushout_desc n₁ n₂ hw
              inferInstance inferInstance
            quasiCompact_w := QuasiCompact.pushout_desc n₁ n₂ hw }⟩
+
+namespace CommonModification
+
+variable {s₁ : X₁ ⟶ S} {s₂ : X₂ ⟶ S} {j₁ : U ⟶ X₁} {j₂ : U ⟶ X₂} [IsOpenImmersion j₁]
+  [IsOpenImmersion j₂] (cm : CommonModification s₁ s₂ j₁ j₂)
+
+instance isOpenImmersion_u₁ : IsOpenImmersion cm.u₁ :=
+  isOpenImmersion_of_comp_of_isIso_restrict cm.u₁ cm.B₁.I.blowupMap j₁ cm.u₁_blowupMap
+    cm.B₁.isIso_blowupMap_restrict
+
+instance isOpenImmersion_u₂ : IsOpenImmersion cm.u₂ :=
+  isOpenImmersion_of_comp_of_isIso_restrict cm.u₂ cm.B₂.I.blowupMap j₂ cm.u₂_blowupMap
+    cm.B₂.isIso_blowupMap_restrict
+
+/-- The open immersion `U ⟶ W` of the common open into the glued common modification,
+through either modified model. -/
+def j : U ⟶ cm.W := cm.u₁ ≫ cm.k₁
+
+lemma u₁_k₁ : cm.u₁ ≫ cm.k₁ = cm.j := rfl
+
+lemma u₂_k₂ : cm.u₂ ≫ cm.k₂ = cm.j := cm.u_glue.symm
+
+instance : IsOpenImmersion cm.j := by
+  rw [← u₁_k₁]
+  infer_instance
+
+@[reassoc]
+lemma j_w : cm.j ≫ cm.w = j₁ ≫ s₁ := by
+  rw [← u₁_k₁, Category.assoc, cm.k₁_w, ← Category.assoc, cm.u₁_blowupMap]
+
+/-- The copy of `U` in the first modified model is the full inverse image of the copy of
+`U` in the first model. -/
+lemma range_u₁ : Set.range cm.u₁ = cm.B₁.I.blowupMap ⁻¹' Set.range j₁ :=
+  range_eq_preimage_of_comp_of_isIso_restrict cm.u₁ cm.B₁.I.blowupMap j₁ cm.u₁_blowupMap
+    cm.B₁.isIso_blowupMap_restrict
+
+/-- The copy of `U` in the second modified model is the full inverse image of the copy of
+`U` in the second model. -/
+lemma range_u₂ : Set.range cm.u₂ = cm.B₂.I.blowupMap ⁻¹' Set.range j₂ :=
+  range_eq_preimage_of_comp_of_isIso_restrict cm.u₂ cm.B₂.I.blowupMap j₂ cm.u₂_blowupMap
+    cm.B₂.isIso_blowupMap_restrict
+
+/-- **Density transport through the common modification** (blueprint:
+`lemma:nagata-two-open-density-transport`): if `U` is dense in both Noetherian models,
+then it is dense in the glued common modification. The `U`-admissible blow-ups preserve
+the density of `U` (`IsAdmissible.dense_preimage_blowupMap`), and the two modified models
+form an open cover of the glued scheme. -/
+theorem dense_range_j [IsNoetherian X₁] [IsNoetherian X₂] (h₁ : Dense (Set.range j₁))
+    (h₂ : Dense (Set.range j₂)) : Dense (Set.range cm.j) := by
+  have hd₁ : Dense (Set.range cm.u₁) := by
+    rw [cm.range_u₁]
+    exact cm.B₁.dense_preimage_blowupMap h₁
+  have hd₂ : Dense (Set.range cm.u₂) := by
+    rw [cm.range_u₂]
+    exact cm.B₂.dense_preimage_blowupMap h₂
+  rw [dense_iff_inter_open]
+  rintro W₀ hW₀ ⟨w₀, hw₀⟩
+  have chartCase : ∀ {W' : Scheme.{u}} (k : W' ⟶ cm.W) (uu : U ⟶ W'),
+      Dense (Set.range uu) → uu ≫ k = cm.j → w₀ ∈ Set.range k →
+      (W₀ ∩ Set.range cm.j).Nonempty := by
+    rintro W' k uu hdu hglue ⟨b₀, rfl⟩
+    obtain ⟨-, hbW₀, y, rfl⟩ := dense_iff_inter_open.mp hdu (k ⁻¹' W₀)
+      (hW₀.preimage k.continuous) ⟨b₀, hw₀⟩
+    refine ⟨cm.j y, ?_, y, rfl⟩
+    rwa [← hglue, Scheme.Hom.comp_apply]
+  have hw₀cov : w₀ ∈ Set.range cm.k₁ ∪ Set.range cm.k₂ := by
+    rw [cm.cover]
+    trivial
+  obtain hw₀k | hw₀k := hw₀cov
+  · exact chartCase cm.k₁ cm.u₁ hd₁ cm.u₁_k₁ hw₀k
+  · exact chartCase cm.k₂ cm.u₂ hd₂ cm.u₂_k₂ hw₀k
+
+end CommonModification
 
 end CommonModification
 
