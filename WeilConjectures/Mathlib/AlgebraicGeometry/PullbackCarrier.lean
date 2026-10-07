@@ -6,7 +6,9 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Gluing
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
@@ -25,6 +27,9 @@ Finally, the image of a product map `X ×_S Y ⟶ X' ×_{S'} Y'` is the intersec
 images of the base changes of the two factors
 (`AlgebraicGeometry.Scheme.Pullback.range_map_eq_inter`), and the diagonal of a base change is
 the preimage of the diagonal (`AlgebraicGeometry.Scheme.Pullback.map_fst_mem_range_diagonal_iff`).
+
+A morphism all of whose geometric fibres are nonempty is surjective
+(`AlgebraicGeometry.Surjective.of_forall_nonempty_pullback`).
 -/
 
 @[expose] public section
@@ -237,5 +242,22 @@ lemma Scheme.Pullback.map_fst_mem_range_diagonal_iff {B Y P : Scheme.{u}} (b : B
           pullback.condition.symm := by
       ext <;> simp
     rw [← Scheme.Hom.comp_apply, this, Scheme.Hom.comp_apply]
+
+/-- **Surjectivity from nonempty geometric fibres.** A morphism `f : X ⟶ Y` such that the
+fibre `X ×_Y Spec Ω` over every geometric point `Spec Ω ⟶ Y`, with `Ω` algebraically closed, is
+nonempty is surjective: a point of the fibre over the geometric point
+`Spec κ(y)ᵃˡᵍ ⟶ Spec κ(y) ⟶ Y` lies over `y`. No finiteness hypothesis on `f` is needed.
+(blueprint: `lem-weil-pbc-surjective-nonempty-fibres`) -/
+theorem Surjective.of_forall_nonempty_pullback (f : X ⟶ Y)
+    (h : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y),
+      Nonempty ↥(pullback f y)) : Surjective f := by
+  refine ⟨fun y ↦ ?_⟩
+  set η : Spec (.of (AlgebraicClosure (Y.residueField y))) ⟶ Y :=
+    Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure _))) ≫
+      Y.fromSpecResidueField y
+  obtain ⟨z⟩ := h _ η
+  refine ⟨pullback.fst f η z, ?_⟩
+  rw [← Scheme.Hom.comp_apply, pullback.condition, Scheme.Hom.comp_apply, Scheme.Hom.comp_apply]
+  exact Scheme.fromSpecResidueField_apply (X := Y) y _
 
 end AlgebraicGeometry

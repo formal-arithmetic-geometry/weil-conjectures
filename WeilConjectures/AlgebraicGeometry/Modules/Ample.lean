@@ -334,15 +334,16 @@ theorem IsAmple.pullback {Z : Scheme.{u}} {f : X ⟶ Spec (.of K)} {L : X.Module
   exact ⟨m, hm, (h.pullback i).of_iso
     (Scheme.Modules.nonempty_pullback_tensorPow_iso i L m).some⟩
 
-/-- **Positive tensor powers of an ample module are ample.** If `L^{⊗ m}` is the pullback of
-`𝒪(1)` along a closed immersion `j : X ⟶ ℙ(n; K)`, then `(L^{⊗ k})^{⊗ m} ≅ (L^{⊗ m})^{⊗ k}` is
-the pullback of `𝒪(k)`, that is of `𝒪(1)` along the composite of `j` with the `k`-uple Veronese
-embedding, which is again a closed immersion (Hartshorne, Exercise II.5.13).
+/-- **Positive tensor powers of an ample module are ample.** If `L^{⊗ m}` is very ample, then
+so is `(L^{⊗ m})^{⊗ k}` (`AlgebraicGeometry.IsVeryAmple.tensorPow`, via the Segre embedding), and
+`(L^{⊗ m})^{⊗ k} ≅ L^{⊗ mk} ≅ (L^{⊗ k})^{⊗ m}`.
 
 This is used in the proof of blueprint `lem-sc-mult-n-finite-kernel`. -/
 theorem IsAmple.tensorPow {f : X ⟶ Spec (.of K)} {L : X.Modules} (hL : IsAmple f L) {k : ℕ}
-    (hk : 0 < k) : IsAmple f (L.tensorPow k) :=
-  sorry
+    (hk : 0 < k) : IsAmple f (L.tensorPow k) := by
+  obtain ⟨m, hm, hLm⟩ := hL
+  exact ⟨m, hm, (hLm.tensorPow hk).of_iso ((L.tensorPowMulIso m k).symm ≪≫
+    eqToIso (congrArg L.tensorPow (Nat.mul_comm m k)) ≪≫ L.tensorPowMulIso k m)⟩
 
 /-- Blueprint `lem-sc-ample-tensor`: Tensor products of ample modules.
 
