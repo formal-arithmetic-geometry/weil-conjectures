@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import Mathlib.RingTheory.Unramified.LocalStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
@@ -24,6 +25,8 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 - `AlgebraicGeometry.LocallyQuasiFinite.of_isPullback_of_surjective`: local quasi-finiteness of
   a quasi-compact morphism locally of finite type descends along surjective base changes.
 - `AlgebraicGeometry.locallyQuasiFinite_of_etale`: an étale morphism is locally quasi-finite.
+- `AlgebraicGeometry.Scheme.Hom.coheight_apply_of_flat`: a flat, locally quasi-finite morphism
+  preserves the codimension of points.
 -/
 
 @[expose] public section
@@ -91,5 +94,26 @@ lemma LocallyQuasiFinite.of_isPullback_of_surjective {P Z : Scheme.{u}} {fst : P
   refine ⟨h.isoPullback.inv w, ?_, ?_⟩
   · simp [← Scheme.Hom.comp_apply, -Scheme.Hom.comp_base, hw₂]
   · simp [← Scheme.Hom.comp_apply, -Scheme.Hom.comp_base, hw₁]
+
+open Order in
+/-- **Flat locally quasi-finite morphisms preserve codimension.** For a flat, locally
+quasi-finite morphism `f`, the codimension (coheight in the specialisation order) of `f y` is that
+of `y`: chains of generisations of `y` map to chains of generisations of `f y`, as no two points
+of a fibre specialise to each other, and chains of generisations of `f y` lift, as flat morphisms
+are generalizing. -/
+lemma Scheme.Hom.coheight_apply_of_flat (f : X ⟶ Y) [Flat f] [LocallyQuasiFinite f] (y : X) :
+    coheight (f y) = coheight y := by
+  have hf : StrictMono f := by
+    intro a b hab
+    rw [lt_iff_le_not_ge, Scheme.le_iff_specializes, Scheme.le_iff_specializes] at hab ⊢
+    refine ⟨hab.1.map f.continuous, fun h ↦ hab.2 ?_⟩
+    have := f.eq_of_specializes_of_apply_eq hab.1 (h.antisymm (hab.1.map f.continuous)).eq.symm
+    rw [this]
+  refine (coheight_eq_of_strictMono f hf (fun a b hab ↦ ?_) y).symm
+  rw [lt_iff_le_not_ge, Scheme.le_iff_specializes, Scheme.le_iff_specializes] at hab
+  obtain ⟨a', ha', rfl⟩ := Flat.generalizingMap f hab.1
+  refine ⟨a', ?_, rfl⟩
+  rw [lt_iff_le_not_ge, Scheme.le_iff_specializes, Scheme.le_iff_specializes]
+  exact ⟨ha', fun h ↦ hab.2 (h.map f.continuous)⟩
 
 end AlgebraicGeometry
