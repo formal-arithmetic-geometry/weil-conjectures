@@ -24,7 +24,7 @@ The pullback `g^*` is (strong) monoidal, for a closed `A`. Its oplax structure m
 transposes of the lax structure maps of `g_*` along the adjunction `g^* ⊣ g_*`, and its lax
 structure maps are their inverses; that these transposes are isomorphisms is `sorry`ed. The
 lax monoidal structure is what is needed to pull back ring objects, module objects and their
-global sections along `g` in `WeilConjectures.ConstructibleSheaf.ProEtaleModule.Constructible`.
+global sections along `g` in `WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def`.
 
 ## Main results
 
