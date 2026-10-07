@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.AlgebraicGeometry.Hilbert.AffineSpace
+public import WeilConjectures.AlgebraicGeometry.Hilbert.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
@@ -39,11 +41,11 @@ those `Z ⊆ X_T` such that `T ⟶ S` factors through `V` and `Z ⊆ U_T`:
 
 ## Main statements
 
-- `AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isClosedImmersion`: the closed-immersion
-  claim (blueprint `lem-pc-hilb-representable`, Step 1).
-- `AlgebraicGeometry.isRepresentable_hilbertPresheaf_affineSpace`: the case of an affine space
-  over an affine base (blueprint `lem-pc-hilb-representable`, Step 4).
-- `AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isAffine`: the affine case.
+- `AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isAffine`: the affine case, from the
+  closed-immersion claim
+  (`AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isClosedImmersion`) and the case of an
+  affine space over an affine base
+  (`AlgebraicGeometry.isRepresentable_hilbertPresheaf_affineSpace`).
 - `AlgebraicGeometry.isRepresentable_hilbertPresheaf`: representability of `Hilb^d_{X/S}`
   (blueprint `sk-thm-picard-hilb-general`, `lem-pc-hilb-representable`).
 -/
@@ -316,26 +318,6 @@ lemma exists_hilbertPresheafResLEι_app_eq [IsSeparated f] (d : ℕ) {W : Over V
     (hIU.trans (range_pullbackResLEMap f h W).symm.subset)
 
 end ResLE
-
-/-- **The closed-immersion claim** (blueprint `lem-pc-hilb-representable`, Step 1). For a closed
-immersion `i : X ⟶ Y` and `g : Y ⟶ S`, the functor `Hilb^d_{X/S}` is a closed subfunctor of
-`Hilb^d_{Y/S}`: for `Z ∈ Hilb^d_{Y/S}(T)` there is a largest closed subscheme `T_X ⊆ T` such
-that `T' ⟶ T` factors through `T_X` if and only if `Z_{T'}` lies in `X_{T'}`. In particular,
-if `Hilb^d_{Y/S}` is representable, so is `Hilb^d_{X/S}`, by a closed subscheme. -/
-theorem isRepresentable_hilbertPresheaf_of_isClosedImmersion {Y : Scheme.{u}} (i : X ⟶ Y)
-    [IsClosedImmersion i] (g : Y ⟶ S) (d : ℕ) (hg : (hilbertPresheaf g d).IsRepresentable) :
-    (hilbertPresheaf (i ≫ g) d).IsRepresentable :=
-  sorry
-
-/-- **The Hilbert functor of an affine space over an affine base** (blueprint
-`lem-pc-hilb-representable`, Step 4). For an affine scheme `S` and any set `n` of variables,
-`Hilb^d` of the affine space `𝔸(n; S) ⟶ S` is representable. It is glued from the affine
-schemes representing the subfunctors `F_W`, for `W` a set of `d` polynomials, of those `Z` for
-which the images of the elements of `W` form a basis of `𝒪_Z`; these subfunctors are open and
-cover `Hilb^d`. -/
-theorem isRepresentable_hilbertPresheaf_affineSpace (n : Type u) (S : Scheme.{u}) [IsAffine S]
-    (d : ℕ) : (hilbertPresheaf (𝔸(n; S) ↘ S) d).IsRepresentable :=
-  sorry
 
 /-- **The affine claim** (blueprint `lem-pc-hilb-representable`, Steps 1 and 4). For a morphism
 of affine schemes `f : X ⟶ S`, the Hilbert functor `Hilb^d_{X/S}` is representable.

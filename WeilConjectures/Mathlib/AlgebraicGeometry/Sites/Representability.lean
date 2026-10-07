@@ -398,6 +398,26 @@ theorem isRepresentable_of_isSheaf_over (hP : Presheaf.IsSheaf (zariskiTopology.
   have := Scheme.LocalRepresentability.isRepresentable (F := F) hf
   exact isRepresentable_of_isRepresentable_sigmaOver P
 
+/-- **Representability is local, over a base, tested on affine schemes.** This is
+`AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over` with each of
+its three hypotheses only required for affine test schemes: the injectivity of `h_{X i} ⟶ P`
+on affine `T`, the openness of the locus where an element of `P(T)` comes from `X i` for affine
+`T`, tested against affine `W ⟶ T`, and the covering condition for affine `T`. Since `P` is a
+Zariski sheaf, the general case follows by covering `T` and `W` by affine opens. -/
+theorem isRepresentable_of_isSheaf_over_of_isAffine
+    (hP : Presheaf.IsSheaf (zariskiTopology.over S) P)
+    {ι : Type u} (X : ι → Over S) (ξ : ∀ i, P.obj (op (X i)))
+    (hinj : ∀ i {T : Over S} [IsAffine T.left] (a b : T ⟶ X i),
+      P.map a.op (ξ i) = P.map b.op (ξ i) → a = b)
+    (hopen : ∀ i (T : Over S) [IsAffine T.left] (x : P.obj (op T)), ∃ U : T.left.Opens,
+      ∀ (W : Over S) [IsAffine W.left] (a : W ⟶ T),
+        (∃ b : W ⟶ X i, P.map a.op x = P.map b.op (ξ i)) ↔ Set.range a.left ⊆ U)
+    (hcov : ∀ (T : Over S) [IsAffine T.left] (x : P.obj (op T)) (t : T.left),
+      ∃ (i : ι) (W : Over S) (a : W ⟶ T) (b : W ⟶ X i),
+        t ∈ Set.range a.left ∧ P.map a.op x = P.map b.op (ξ i)) :
+    P.IsRepresentable :=
+  sorry
+
 end AlgebraicGeometry.Scheme.LocalRepresentability
 
 namespace AlgebraicGeometry

@@ -893,4 +893,31 @@ theorem AffineSpace.isAffine_fiber_of_isOpenImmersion {U Y : Scheme.{u}}
   change IsAffine (pullback (u ≫ π) g)
   exact .of_isIso (pullbackRightPullbackFstIso π g u).inv
 
+namespace AffineSpace
+
+variable (n : Type u) {S T : Scheme.{u}}
+
+/-- For `g : T ⟶ S`, the ring map `Γ(T)[n] ⟶ Γ(𝔸(n; S) ×[S] T)` sending a variable to the
+pullback of the corresponding coordinate. It is an isomorphism when `T` is affine
+(`AlgebraicGeometry.AffineSpace.toΓPullback_bijective`). -/
+noncomputable def toΓPullback (g : T ⟶ S) :
+    MvPolynomial n Γ(T, ⊤) →+* Γ(Limits.pullback (𝔸(n; S) ↘ S) g, ⊤) :=
+  eval₂Hom (Limits.pullback.snd (𝔸(n; S) ↘ S) g).appTop.hom
+    fun i ↦ (Limits.pullback.fst (𝔸(n; S) ↘ S) g).appTop (coord S i)
+
+theorem toΓPullback_bijective (g : T ⟶ S) [IsAffine T] :
+    Function.Bijective (toΓPullback n g) :=
+  sorry
+
+/-- The ring maps `AlgebraicGeometry.AffineSpace.toΓPullback` are compatible with base change
+along a morphism `h : T' ⟶ T` of schemes over `S`. -/
+theorem appTop_pullbackMap_toΓPullback {T' : Scheme.{u}} (g : T ⟶ S) (g' : T' ⟶ S)
+    (h : T' ⟶ T) (hh : h ≫ g = g') (p : MvPolynomial n Γ(T, ⊤)) :
+    (Limits.pullback.map (𝔸(n; S) ↘ S) g' (𝔸(n; S) ↘ S) g (𝟙 _) h (𝟙 S) (by simp)
+        (by simp [hh])).appTop (toΓPullback n g p) =
+      toΓPullback n g' (MvPolynomial.map h.appTop.hom p) :=
+  sorry
+
+end AffineSpace
+
 end AlgebraicGeometry

@@ -79,6 +79,9 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
+public import WeilConjectures.AlgebraicGeometry.Hilbert.Affine
+public import WeilConjectures.AlgebraicGeometry.Hilbert.AffineSpace
+public import WeilConjectures.AlgebraicGeometry.Hilbert.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Representability
@@ -834,6 +837,8 @@ public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Exterior
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdeal
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.IdentityComponent
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Kronecker
+public import WeilConjectures.RingTheory.MvPolynomial.QuotientBasis
+public import WeilConjectures.RingTheory.MvPolynomial.QuotientSpan
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
 public import WeilConjectures.SixFunctors.BaseChange.Derived
