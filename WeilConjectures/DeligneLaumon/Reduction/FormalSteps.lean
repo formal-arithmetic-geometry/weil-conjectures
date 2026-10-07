@@ -229,7 +229,8 @@ immersion of the finite pushforward bound (blueprint: `lem-zl-finite-pushforward
 theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isClosedImmersion
     {Z X : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
     (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {w : ℝ}
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {w : ℝ}
     {K : WeilComplex k₀ l Z} (hK : K.IsMixedOfWeightsAtMost ι w) :
     ((WeilComplex.derivedLowerStar i).obj K).IsMixedOfWeightsAtMost ι w :=
   sorry
