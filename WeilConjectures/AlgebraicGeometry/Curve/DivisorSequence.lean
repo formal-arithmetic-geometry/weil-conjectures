@@ -25,10 +25,24 @@ complement. Then
 is a short exact sequence of étale sheaves on `C̄`, the third map sending a function on `C`
 to its orders of vanishing at the punctures.
 
+The proof follows that of the divisor sequence of an integral regular scheme
+(`AlgebraicGeometry.Scheme.nonempty_cokernel_toGenericGm_iso`): both `j_* 𝔾ₘ` and
+`⨁_{P ∈ S} i_{P*} ℤ` map to the sheaf `V ↦ (V → ℤ)` of functions on points, the first by the
+orders of vanishing at the points over `S` and the second by extension by zero, and the
+cokernel of `𝔾ₘ ⟶ j_* 𝔾ₘ` is identified on geometric stalks
+(`AlgebraicGeometry.Scheme.nonempty_cokernel_iso_of_sheafFiber`). The local inputs are that a
+function on the punctured neighbourhood of a point over `S` of order zero there extends to a
+unit, and that a uniformiser at a point over `S` is a unit on the punctured neighbourhood.
+
+## Main definitions
+
+- `AlgebraicGeometry.Scheme.lowerStarGmSheafMap`: the restriction `g_* 𝔾ₘ ⟶ (h ≫ g)_* 𝔾ₘ` of
+  units along a morphism `h`.
+
 ## Main statements
 
 - `AlgebraicGeometry.IsCurve.exists_shortExact_divisorSequence`: the divisor sequence of a
-  punctured curve is short exact. The proof is `sorry`.
+  punctured curve is short exact.
 
 ## Blueprint references
 
@@ -41,11 +55,104 @@ this repository.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits Opposite Order
 
-namespace AlgebraicGeometry.IsCurve
+namespace AlgebraicGeometry
 
-variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
+namespace Scheme
+
+variable {X Z Z' : Scheme.{u}} (g : Z ⟶ X) (h : Z' ⟶ Z) (g' : Z' ⟶ X) (hh : h ≫ g = g')
+
+/-- The restriction of units `g_* 𝔾ₘ ⟶ g'_* 𝔾ₘ` along a morphism `h : Z' ⟶ Z` with
+`h ≫ g = g'`: on an étale `X`-scheme `V` it is the map `Γ(V ×_X Z, 𝒪)ˣ ⟶ Γ(V ×_X Z', 𝒪)ˣ`
+induced by `V ×_X Z' ⟶ V ×_X Z`. -/
+noncomputable def lowerStarGmSheafMap :
+    (Etale.lowerStar AddCommGrpCat.{u + 1} g).obj Z.gmSheaf ⟶
+      (Etale.lowerStar AddCommGrpCat.{u + 1} g').obj Z'.gmSheaf :=
+  ⟨{ app V := CommRingCat.unitsAddCommGrpULift.map
+        (pullback.map V.unop.hom g' V.unop.hom g (𝟙 _) h (𝟙 _) (by simp) (by simp [hh])).appTop
+     naturality {V W} φ := by
+      change CommRingCat.unitsAddCommGrpULift.map _ ≫ CommRingCat.unitsAddCommGrpULift.map _ =
+        CommRingCat.unitsAddCommGrpULift.map _ ≫ CommRingCat.unitsAddCommGrpULift.map _
+      rw [← Functor.map_comp, ← Functor.map_comp]
+      congr 1
+      change ((MorphismProperty.Over.pullback @Etale ⊤ g).map φ.unop).left.appTop ≫ _ =
+        _ ≫ ((MorphismProperty.Over.pullback @Etale ⊤ g').map φ.unop).left.appTop
+      rw [← Scheme.Hom.comp_appTop, ← Scheme.Hom.comp_appTop,
+        show ((MorphismProperty.Over.pullback @Etale ⊤ g).map φ.unop).left =
+          pullback.map _ _ _ _ φ.unop.left (𝟙 _) (𝟙 _) (by simp) (by simp) from rfl,
+        show ((MorphismProperty.Over.pullback @Etale ⊤ g').map φ.unop).left =
+          pullback.map _ _ _ _ φ.unop.left (𝟙 _) (𝟙 _) (by simp) (by simp) from rfl,
+        pullback.map_comp, pullback.map_comp]
+      congr 1 }⟩
+
+@[reassoc (attr := simp)]
+lemma gmSheafToLowerStarGmSheaf_comp_lowerStarGmSheafMap :
+    gmSheafToLowerStarGmSheaf g ≫ lowerStarGmSheafMap g h g' hh = gmSheafToLowerStarGmSheaf g' := by
+  ext V : 3
+  change CommRingCat.unitsAddCommGrpULift.map _ ≫ CommRingCat.unitsAddCommGrpULift.map _ =
+    CommRingCat.unitsAddCommGrpULift.map _
+  rw [← Functor.map_comp]
+  congr 1
+  change (pullback.fst V.unop.hom g).appTop ≫
+      (pullback.map V.unop.hom g' V.unop.hom g (𝟙 _) h (𝟙 _) (by simp) (by simp [hh])).appTop =
+      (pullback.fst V.unop.hom g').appTop
+  rw [← Scheme.Hom.comp_appTop, pullback.lift_fst, Category.comp_id]
+
+end Scheme
+
+namespace IsCurve
+
+variable {C : Scheme.{u}} [IsIntegral C] [IsLocallyNoetherian C] [IsRegular C]
+  {U : Scheme.{u}} (j : U ⟶ C) [IsOpenImmersion j] (iU : Spec C.functionField ⟶ U)
+  (hiU : iU ≫ j = C.fromSpecFunctionField)
+
+/-- **Units of order zero at the punctures extend.** Let `C` be an integral regular noetherian
+scheme of dimension one, `S` a finite set of closed points, `j : U ⟶ C` the open immersion of
+the complement of `S`, and `V` an étale `C`-scheme. A unit `f` on `V ×_C U` whose order at the
+points of `V` over `S` vanishes extends, near every point of `V`, to a unit of `𝒪_V`: at a point
+over `S` the local ring is a discrete valuation ring and `f` is a unit of it
+(`Ring.exists_eq_algebraMap_of_ordOf_eq_zero`). The proof is `sorry`.
+(blueprint: `lem-sc-divisor-exact-sequence`, exactness in the middle) -/
+lemma exists_eq_of_ord_eq_zero (hC : topologicalKrullDim C = 1) {S : Set C} (hS : S.Finite)
+    (hSc : ∀ P ∈ S, IsClosed {P}) (hj : Set.range j = Sᶜ) (V : C.Etale) (y : V.left)
+    (f : Γ(pullback V.hom j, ⊤)ˣ)
+    (hf : ∀ y', V.hom y' ∈ S → Scheme.Etale.ord V y'
+      ((pullback.map V.hom C.fromSpecFunctionField V.hom j (𝟙 _) iU (𝟙 _) (by simp)
+        (by simp [hiU])).appTop f.val) = 0) :
+    ∃ (W : V.left.Opens) (_ : y ∈ W) (u : Γ(Scheme.Etale.ofOpens V W |>.left, ⊤)ˣ),
+      (pullback.fst (Scheme.Etale.ofOpens V W).hom j).appTop u.val =
+        ((MorphismProperty.Over.pullback @Etale ⊤ j).map
+          (Scheme.Etale.ofOpensι V W)).left.appTop f.val := by
+  sorry
+
+open Classical in
+/-- **Uniformisers at the punctures.** In the situation of
+`AlgebraicGeometry.IsCurve.exists_eq_of_ord_eq_zero`, let `P ∈ S` and let `c` be an
+integer-valued function on the points of `V` over `P`. Near every point of `V` there is a unit on
+`V ×_C U` whose order is `c` at the points over `P` and `0` at the other points over `S`: a
+power of a uniformiser of the discrete valuation ring `𝒪_{V,y}`, which near `y` vanishes only
+at `y`. The proof is `sorry`.
+(blueprint: `lem-sc-divisor-exact-sequence`, surjectivity) -/
+lemma exists_ord_eq_extendByZero (hC : topologicalKrullDim C = 1) {S : Set C}
+    (hS : S.Finite) (hSc : ∀ P ∈ S, IsClosed {P}) (hj : Set.range j = Sᶜ) (V : C.Etale)
+    (y : V.left) {P : C} (hP : P ∈ S)
+    (c : ↥(pullback V.hom (C.fromSpecResidueField P)) → ULift.{u + 1} ℤ) :
+    ∃ (W : V.left.Opens) (_ : y ∈ W)
+      (f : Γ(pullback (Scheme.Etale.ofOpens V W).hom j, ⊤)ˣ),
+      ∀ y' : W, (if (Scheme.Etale.ofOpens V W).hom y' ∈ S then
+          ULift.up (Scheme.Etale.ord (Scheme.Etale.ofOpens V W) y'
+            ((pullback.map _ C.fromSpecFunctionField _ j (𝟙 _) iU (𝟙 _) (by simp)
+              (by simp [hiU])).appTop f.val)) else 0) =
+        Scheme.extendByZero (AddCommGrpCat.of (ULift.{u + 1} ℤ)) (C.fromSpecResidueField P) c
+          (W.ι y') := by
+  sorry
+
+end IsCurve
+
+namespace IsCurve
+
+variable {k : Type u} [Field k] {C : Scheme.{u}}
 
 /-- **The divisor sequence of a punctured curve.** Let `C` be a smooth proper connected curve
 over an algebraically closed field `k`, let `S` be a finite set of closed points of `C`, and
@@ -62,20 +169,131 @@ along `j` and the third term is the vertex of any colimit cocone `c` on the fami
 dimension exactly one, which is the hypothesis `hC`; without it `S` could be all of
 `C = Spec k`, where `j_* 𝔾ₘ = 0` but `𝔾ₘ ≠ 0`.
 
-The sequence is exact on stalks: away from `S` the last term vanishes and `j_* 𝔾ₘ = 𝔾ₘ`; at
-`P ∈ S` the strict henselisation `𝒪^{sh}_{C,P}` is a discrete valuation ring with fraction
-field `K`, and the stalks are `1 ⟶ (𝒪^{sh}_{C,P})ˣ ⟶ Kˣ ⟶ ℤ ⟶ 0` via the normalised
-valuation. The proof is `sorry`: stalks of étale sheaves as strict henselisations are not
-available.
+The curve is regular (`AlgebraicGeometry.IsRegular.of_smooth`), hence integral. The first map
+is a monomorphism since its composite with the restriction to the generic point is
+(`AlgebraicGeometry.Scheme.mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField`). For the
+cokernel, `j_* 𝔾ₘ` maps to the sheaf `V ↦ (V → ℤ)` of functions on points by the orders of
+vanishing at the points over `S`, and `⨁_{P ∈ S} i_{P*} ℤ` maps to it by extension by zero;
+on geometric stalks the second map is injective, the two images agree by
+`AlgebraicGeometry.IsCurve.exists_ord_eq_extendByZero`, and the kernel of the first is the
+image of `𝔾ₘ` by `AlgebraicGeometry.IsCurve.exists_eq_of_ord_eq_zero`.
 (blueprint: `lem-sc-divisor-exact-sequence`) -/
-theorem exists_shortExact_divisorSequence (f : C ⟶ Spec (.of k)) [IsCurve f] [Smooth f]
-    [IsProper f] [ConnectedSpace C] (hC : topologicalKrullDim C = 1) (S : Set C)
+theorem exists_shortExact_divisorSequence [IsAlgClosed k] (f : C ⟶ Spec (.of k)) [IsCurve f]
+    [Smooth f] [IsProper f] [ConnectedSpace C] (hC : topologicalKrullDim C = 1) (S : Set C)
     (hS : S.Finite) (hSc : ∀ P ∈ S, IsClosed {P}) {U : Scheme.{u}} (j : U ⟶ C)
     [IsOpenImmersion j] (hj : Set.range j = Sᶜ)
     (c : Cofan fun P : S ↦ C.pointConstantInt P.1) (hc : IsColimit c) :
     ∃ (d : (Etale.lowerStar AddCommGrpCat.{u + 1} j).obj U.gmSheaf ⟶ c.pt)
       (w : Scheme.gmSheafToLowerStarGmSheaf j ≫ d = 0),
-      (ShortComplex.mk (Scheme.gmSheafToLowerStarGmSheaf j) d w).ShortExact :=
-  sorry
+      (ShortComplex.mk (Scheme.gmSheafToLowerStarGmSheaf j) d w).ShortExact := by
+  classical
+  have : IsRegular C := IsRegular.of_smooth f
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IrreducibleSpace C := IsRegular.irreducibleSpace C
+  have : IsReduced C := isReduced_of_isReduced_stalk C
+  have : IsIntegral C := isIntegral_of_irreducibleSpace_of_isReduced C
+  -- the generic point lies in `U`
+  have hη : genericPoint C ∉ S := by
+    intro hη
+    have h₁ : (Set.univ : Set C) = {genericPoint C} := by
+      rw [← genericPoint_spec C, (hSc _ hη).closure_eq]
+    have : Subsingleton C := ⟨fun a b ↦ by
+      have ha : a ∈ ({genericPoint C} : Set C) := h₁ ▸ Set.mem_univ a
+      have hb : b ∈ ({genericPoint C} : Set C) := h₁ ▸ Set.mem_univ b
+      rw [Set.mem_singleton_iff.1 ha, Set.mem_singleton_iff.1 hb]⟩
+    have h₂ := topologicalKrullDim_zero_of_discreteTopology C
+    rw [hC] at h₂
+    exact absurd h₂ (by decide)
+  have hrange : Set.range C.fromSpecFunctionField ⊆ Set.range j := by
+    rintro _ ⟨z, rfl⟩
+    have hz : C.fromSpecFunctionField z ⤳ genericPoint C := by
+      have := Set.mem_range_self (f := C.fromSpecStalk (genericPoint C)) z
+      rwa [Scheme.range_fromSpecStalk] at this
+    exact hz.mem_open j.isOpenEmbedding.isOpen_range (by rw [hj]; exact hη)
+  let iU : Spec C.functionField ⟶ U := IsOpenImmersion.lift j C.fromSpecFunctionField hrange
+  have hiU : iU ≫ j = C.fromSpecFunctionField := IsOpenImmersion.lift_fac _ _ _
+  let M := AddCommGrpCat.of (ULift.{u + 1} ℤ)
+  let dS : (Etale.lowerStar AddCommGrpCat.{u + 1} j).obj U.gmSheaf ⟶ C.pointFunctionSheaf M :=
+    Scheme.lowerStarGmSheafMap j iU _ hiU ≫ C.divisorMap ≫ Scheme.pointFunctionSheafIndicator M S
+  let ψ := Cofan.IsColimit.desc hc fun P ↦ C.pointConstantIntToPointFunctionSheaf P.1
+  have hmono : Mono (Scheme.gmSheafToLowerStarGmSheaf j) := by
+    have := C.mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField
+    rw [← Scheme.gmSheafToLowerStarGmSheaf_comp_lowerStarGmSheafMap j iU _ hiU] at this
+    exact mono_of_mono _ (Scheme.lowerStarGmSheafMap j iU _ hiU)
+  have w : Scheme.gmSheafToLowerStarGmSheaf j ≫ dS = 0 := by
+    simp only [dS, Scheme.gmSheafToLowerStarGmSheaf_comp_lowerStarGmSheafMap_assoc]
+    rw [reassoc_of% C.gmSheafToLowerStarGmSheaf_comp_divisorMap, zero_comp]
+  have h₁ := C.exists_sheafFiber_eq_of_sheafFiber_map_eq_zero
+    (Scheme.gmSheafToLowerStarGmSheaf j) dS (fun V y b hb ↦ by
+    obtain ⟨W, hyW, u, hu⟩ := exists_eq_of_ord_eq_zero j iU hiU hC hS hSc hj V y
+      (Additive.toMul b.down) (fun y' hy' ↦ by
+        have h₀ : (if V.hom y' ∈ S then ULift.up (Scheme.Etale.ord V y'
+            ((pullback.map V.hom C.fromSpecFunctionField V.hom j (𝟙 _) iU (𝟙 _) (by simp)
+              (by simp [hiU])).appTop (Additive.toMul b.down).val)) else 0) = 0 :=
+          congrFun hb y'
+        rw [if_pos hy'] at h₀
+        exact congrArg ULift.down h₀)
+    exact ⟨W, hyW, ULift.up (Additive.ofMul u),
+      ULift.ext _ _ (congrArg Additive.ofMul (Units.ext hu))⟩)
+  have h₄ (x : C) := C.exists_sheafFiber_eq_desc dS c hc x fun P a ↦
+    C.exists_sheafFiber_eq_pointConstantIntToPointFunctionSheaf dS P.1 (fun V y cf ↦ by
+      obtain ⟨W, hyW, g, hg⟩ := exists_ord_eq_extendByZero j iU hiU hC hS hSc hj V y P.2 cf
+      exact ⟨W, hyW, ULift.up (Additive.ofMul g), funext hg⟩) x a
+  have h₃ (x : C) (b) : ∃ p, (C.uliftPointSmallEtale x).sheafFiber.map ψ p =
+      (C.uliftPointSmallEtale x).sheafFiber.map dS b := by
+    have : Fintype S := hS.fintype
+    let Φ := C.uliftPointSmallEtale x
+    let F := Φ.sheafFiber (A := AddCommGrpCat.{u + 1})
+    obtain ⟨V, v, b₀, rfl⟩ := Φ.toPresheafFiber_jointly_surjective
+      (P := ((Etale.lowerStar AddCommGrpCat.{u + 1} j).obj U.gmSheaf).obj) b
+    let D : V.left → M := (Scheme.lowerStarGmSheafMap j iU _ hiU ≫ C.divisorMap).hom.app
+      (op V) b₀
+    have hD : dS.hom.app (op V) b₀ = ∑ P : S, Scheme.extendByZero M (C.fromSpecResidueField P.1)
+        (fun z ↦ D (pullback.fst V.hom (C.fromSpecResidueField P.1) z)) := by
+      funext y'
+      rw [Finset.sum_apply]
+      simp only [Scheme.extendByZero_fromSpecResidueField_fst]
+      change (if V.hom y' ∈ S then D y' else 0) = _
+      by_cases hy' : V.hom y' ∈ S
+      · rw [if_pos hy', Finset.sum_eq_single_of_mem (⟨_, hy'⟩ : S) (Finset.mem_univ _), if_pos rfl]
+        intro P _ hP
+        rw [if_neg fun e ↦ hP (Subtype.ext e.symm)]
+      · rw [if_neg hy']
+        exact (Finset.sum_eq_zero fun P _ ↦ if_neg fun (e : V.hom y' = P.1) ↦ hy' (e ▸ P.2)).symm
+    refine ⟨∑ P : S, F.map (c.inj P) (Φ.toPresheafFiber V v (C.pointConstantInt P.1).obj
+      ((C.pointFunctionSheafToPointConstantInt P.1).hom.app (op V) D)), ?_⟩
+    have hterm (P : S) : F.map ψ (F.map (c.inj P) (Φ.toPresheafFiber V v
+        (C.pointConstantInt P.1).obj
+          ((C.pointFunctionSheafToPointConstantInt P.1).hom.app (op V) D))) =
+        Φ.toPresheafFiber V v (C.pointFunctionSheaf M).obj
+          (Scheme.extendByZero M (C.fromSpecResidueField P.1)
+            (fun z ↦ D (pullback.fst V.hom (C.fromSpecResidueField P.1) z))) := by
+      rw [← ConcreteCategory.comp_apply, ← F.map_comp, Cofan.IsColimit.fac]
+      change Φ.presheafFiber.map (C.pointConstantIntToPointFunctionSheaf P.1).hom _ = _
+      have e : (C.pointConstantIntToPointFunctionSheaf P.1).hom.app (op V)
+          ((C.pointFunctionSheafToPointConstantInt P.1).hom.app (op V) D) =
+          Scheme.extendByZero M (C.fromSpecResidueField P.1)
+            (fun z ↦ D (pullback.fst V.hom (C.fromSpecResidueField P.1) z)) :=
+        congrArg (fun φ ↦ (φ.hom.app (op V)).hom D)
+          (Scheme.pointFunctionSheafToPointConstantInt_comp C P.1)
+      rw [Φ.toPresheafFiber_naturality_apply, e]
+    calc _ = ∑ P : S, Φ.toPresheafFiber V v (C.pointFunctionSheaf M).obj
+          (Scheme.extendByZero M (C.fromSpecResidueField P.1)
+            (fun z ↦ D (pullback.fst V.hom (C.fromSpecResidueField P.1) z))) := by
+          rw [map_sum]
+          exact Finset.sum_congr rfl fun P _ ↦ hterm P
+      _ = Φ.toPresheafFiber V v (C.pointFunctionSheaf M).obj (dS.hom.app (op V) b₀) := by
+          rw [← map_sum, ← hD]
+      _ = _ := by
+          change _ = Φ.presheafFiber.map dS.hom _
+          rw [Φ.toPresheafFiber_naturality_apply]
+  obtain ⟨e⟩ := Scheme.nonempty_cokernel_iso_of_sheafFiber (Scheme.gmSheafToLowerStarGmSheaf j)
+    dS ψ w h₁ (C.injective_sheafFiber_map_desc_pointConstantIntToPointFunctionSheaf
+      Subtype.val_injective c hc) h₃ h₄
+  refine ⟨cokernel.π _ ≫ e.hom, by simp, { mono_f := hmono, epi_g := epi_comp _ _, exact := ?_ }⟩
+  exact ShortComplex.exact_of_g_is_cokernel _
+    (IsColimit.ofIsoColimit (cokernelIsCokernel _) (Cofork.ext e (by simp)))
 
-end AlgebraicGeometry.IsCurve
+end IsCurve
+
+end AlgebraicGeometry
