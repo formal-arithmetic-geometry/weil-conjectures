@@ -13,10 +13,17 @@ public import Mathlib.CategoryTheory.Monoidal.Functor
 `CategoryTheory.Functor.Monoidal.transport` transports a strong monoidal structure along a
 natural isomorphism of functors. Here we do the same for lax monoidal structures.
 
-## Main definitions
+We also show that the right adjoint `G` of a monoidal adjunction `F ⊣ G` whose unit and counit
+are isomorphisms (i.e. an adjoint equivalence) is strong monoidal as soon as `F` is: the lax
+structure of `G` is determined by the oplax structure of `F` and the adjunction.
+
+## Main definitions and results
 
 - `CategoryTheory.Functor.LaxMonoidal.transport`: the lax monoidal structure on a functor
   that is isomorphic to a lax monoidal functor.
+- `CategoryTheory.Adjunction.isIso_ε_of_isIso_η` and
+  `CategoryTheory.Adjunction.isIso_μ_of_isIso_δ`: for a monoidal adjunction `F ⊣ G` with
+  invertible unit and counit, the comparison maps of `G` are invertible if those of `F` are.
 -/
 
 @[expose] public section
@@ -77,3 +84,33 @@ lemma transport_μ {F G : C ⥤ D} [F.LaxMonoidal] (i : F ≅ G) (X Y : C) :
   rfl
 
 end CategoryTheory.Functor.LaxMonoidal
+
+namespace CategoryTheory.Adjunction
+
+open MonoidalCategory Functor.LaxMonoidal Functor.OplaxMonoidal
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+  {F : C ⥤ D} {G : D ⥤ C} [F.OplaxMonoidal] [G.LaxMonoidal] (adj : F ⊣ G) [adj.IsMonoidal]
+
+/-- For a monoidal adjunction `F ⊣ G` with invertible unit, the unit comparison map
+`ε : 𝟙 ⟶ G 𝟙` is invertible if `η : F 𝟙 ⟶ 𝟙` is: it is the composite
+`𝟙 ⟶ G (F 𝟙) ⟶ G 𝟙` of the unit of the adjunction and `G η`. -/
+lemma isIso_ε_of_isIso_η [IsIso adj.unit] [IsIso (η F)] : IsIso (ε G) := by
+  rw [IsMonoidal.leftAdjoint_ε (adj := adj)]
+  infer_instance
+
+/-- For a monoidal adjunction `F ⊣ G` with invertible unit and counit, the tensor comparison
+map `μ : G X ⊗ G Y ⟶ G (X ⊗ Y)` is invertible if `δ : F (G X ⊗ G Y) ⟶ F (G X) ⊗ F (G Y)` is:
+it is the composite
+```
+  G X ⊗ G Y ──unit──▶ G (F (G X ⊗ G Y)) ──G δ──▶ G (F (G X) ⊗ F (G Y))
+            ──G (counit ⊗ counit)──▶ G (X ⊗ Y)
+```
+-/
+lemma isIso_μ_of_isIso_δ [IsIso adj.unit] [IsIso adj.counit] (X Y : D)
+    [IsIso (δ F (G.obj X) (G.obj Y))] : IsIso (μ G X Y) := by
+  rw [IsMonoidal.leftAdjoint_μ (adj := adj)]
+  infer_instance
+
+end CategoryTheory.Adjunction

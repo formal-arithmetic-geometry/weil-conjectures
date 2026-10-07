@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Weil complexes, relative Frobenius and topological invariance
@@ -353,23 +354,47 @@ theorem isUniversalHomeomorphism_relativeFrobenius (f : X ⟶ Y) (frobX : X ⟶ 
 /-- Topological invariance: for a finite universal homeomorphism `r : X ⟶ Y`, pullback is
 an equivalence `Lr^* : D(Y, A) ≌ D(X, A)`, with inverse `Rr_* = Rr_!` and invertible unit
 and counit. Reduction of a scheme is a finite universal homeomorphism, so the statement
-covers it (blueprint: `sk-i-topology`). -/
+covers it. It is the derived functor of the exact equivalence `r^*` of
+`AlgebraicGeometry.ProEtale.isEquivalence_upperStar_of_isUniversalHomeomorphism`
+(blueprint: `sk-i-topology`). -/
 theorem isEquivalence_leftDerivedUpperStar (r : X ⟶ Y) [IsFinite r]
     [IsUniversalHomeomorphism r] : ((upperStar A r).leftDerivedFunctor).IsEquivalence :=
-  sorry
+  have := isEquivalence_upperStar_of_isUniversalHomeomorphism A r
+  inferInstance
 
-/-- Topological invariance preserves the coefficient stage: `Lr^*` restricts to an
-equivalence `Dᵇctf(Y, A) ≃ Dᵇctf(X, A)` along a finite universal homeomorphism
+/-- The unit `K ⟶ Rr_* Lr^* K` of the derived adjunction `Lr^* ⊣ Rr_*` is invertible for a
+finite universal homeomorphism `r`, since `Lr^*` is an equivalence
 (blueprint: `sk-i-topology`). -/
-theorem ctf_leftDerivedUpperStar_obj_iff (G : GeometricCoefficients A) (r : X ⟶ Y)
-    [IsFinite r] [IsUniversalHomeomorphism r]
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
-    G.ctf X (((upperStar A r).leftDerivedFunctor).obj K) ↔ G.ctf Y K :=
-  sorry
+instance isIso_derivedUpperStarLowerStarAdjunction_unit (r : X ⟶ Y) [IsFinite r]
+    [IsUniversalHomeomorphism r] : IsIso (derivedUpperStarLowerStarAdjunction A r).unit :=
+  have := isEquivalence_leftDerivedUpperStar (A := A) r
+  (derivedUpperStarLowerStarAdjunction A r).unit_isIso_of_L_fully_faithful
+
+/-- The counit `Lr^* Rr_* K ⟶ K` of the derived adjunction `Lr^* ⊣ Rr_*` is invertible for a
+finite universal homeomorphism `r`: `Rr_*` is right adjoint to an equivalence, hence an
+equivalence itself (blueprint: `sk-i-topology`). -/
+instance isIso_derivedUpperStarLowerStarAdjunction_counit (r : X ⟶ Y) [IsFinite r]
+    [IsUniversalHomeomorphism r] : IsIso (derivedUpperStarLowerStarAdjunction A r).counit :=
+  have := isEquivalence_leftDerivedUpperStar (A := A) r
+  have := (derivedUpperStarLowerStarAdjunction A r).isEquivalence_right_of_isEquivalence_left
+  (derivedUpperStarLowerStarAdjunction A r).counit_isIso_of_R_fully_faithful
 
 section
 
 variable [DerivedBraiding A]
+
+/-- Topological invariance preserves the coefficient stage: `Lr^*` restricts to an
+equivalence `Dᵇctf(Y, A) ≃ Dᵇctf(X, A)` along a finite universal homeomorphism. The
+inverse `Rr_* = Rr_!` preserves `Dᵇctf` because `r` is finite, hence proper, and `Rr_!`
+preserves `Dᵇctf` (blueprint: `sk-i-topology`). -/
+theorem ctf_leftDerivedUpperStar_obj_iff (G : GeometricOperations A s) (r : X ⟶ Y)
+    [IsFinite r] [IsUniversalHomeomorphism r]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+    G.ctf X (((upperStar A r).leftDerivedFunctor).obj K) ↔ G.ctf Y K :=
+  ⟨fun hK ↦ (G.ctf Y).prop_of_iso
+      (asIso ((derivedUpperStarLowerStarAdjunction A r).unit.app K)).symm
+      (G.ctf_lowerStar r hK),
+    G.ctf_upperStar r K⟩
 
 namespace GeometricOperations
 
@@ -430,8 +455,9 @@ instance isIso_lowerShriekExchange (G : GeometricOperations A s) (f : X ⟶ Y)
     [HasCompactification f] (gX : X ⟶ X) (gY : Y ⟶ Y) (h : f ≫ gY = gX ≫ f)
     [IsFinite (relativeFrobenius f gX gY h)]
     [IsUniversalHomeomorphism (relativeFrobenius f gX gY h)] :
-    IsIso (G.lowerShriekExchange f gX gY h) :=
-  sorry
+    IsIso (G.lowerShriekExchange f gX gY h) := by
+  dsimp only [lowerShriekExchange]
+  infer_instance
 
 end GeometricOperations
 

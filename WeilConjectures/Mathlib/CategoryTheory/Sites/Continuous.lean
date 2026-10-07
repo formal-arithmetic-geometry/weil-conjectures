@@ -28,6 +28,10 @@ that this does not go through the adjunction `F^* ⊣ F_*`, which needs extra hy
 
 A natural isomorphism of continuous functors induces an isomorphism of the pushforward
 functors (`CategoryTheory.Functor.isIso_sheafPushforwardContinuousNatTrans`).
+
+Finally, the pushforward turns a triangle identity between continuous functors `P` and `Q`
+(built from composition and identity isomorphisms) into the corresponding triangle identity
+for the pushforwards (`CategoryTheory.Functor.sheafPushforwardContinuous_triangle`).
 -/
 
 @[expose] public section
@@ -96,5 +100,45 @@ instance isIso_sheafPushforwardContinuousNatTrans {F' : C ⥤ D} [F'.IsContinuou
     (τ : F ⟶ F') [IsIso τ] :
     IsIso (Functor.sheafPushforwardContinuousNatTrans τ A J K) :=
   inferInstanceAs (IsIso (Functor.sheafPushforwardContinuousIso (asIso τ) A J K).inv)
+
+section Triangle
+
+variable {C : Type*} [Category* C] {D : Type*} [Category* D] {A : Type*} [Category* A]
+  {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+  {P : D ⥤ C} {Q : C ⥤ D} {RX R'X : C ⥤ C} {RY R'Y : D ⥤ D}
+  [hP : P.IsContinuous K J] [hQ : Q.IsContinuous J K] [hRX : RX.IsContinuous J J]
+  [hR'X : R'X.IsContinuous J J] [hRY : RY.IsContinuous K K] [hR'Y : R'Y.IsContinuous K K]
+
+/-- **Triangle identity for pushforwards.** Let `P : D ⥤ C` and `Q : C ⥤ D` be continuous
+functors, with isomorphisms `Q ⋙ P ≅ RX ≅ R'X ≅ 𝟭` and `P ⋙ Q ≅ RY ≅ R'Y ≅ 𝟭` through
+auxiliary continuous functors. If these satisfy the triangle identity
+`P (𝟭 ⟶ P ⋙ Q) ≫ (Q ⋙ P ⟶ 𝟭) P = 𝟙` at the level of sites, then the induced unit
+`𝟭 ≅ P_* ⋙ Q_*` and counit `Q_* ⋙ P_* ≅ 𝟭` of the pushforwards satisfy the triangle identity
+`P_* η ≫ ε P_* = 𝟙`. -/
+lemma sheafPushforwardContinuous_triangle (cX : Q ⋙ P ≅ RX) (cY : P ⋙ Q ≅ RY)
+    (kX : R'X ≅ RX) (kY : RY ≅ R'Y) (iX : R'X ≅ 𝟭 C) (iY : R'Y ≅ 𝟭 D)
+    (h : ∀ V, P.map (iY.inv.app V) ≫ P.map (kY.inv.app V) ≫ P.map (cY.inv.app V) ≫
+      cX.hom.app (P.obj V) ≫ kX.inv.app (P.obj V) ≫ iX.hom.app (P.obj V) = 𝟙 _)
+    (S : Sheaf J A) :
+    (P.sheafPushforwardContinuous A K J).map
+        (((sheafPushforwardContinuousId' iX A J).symm ≪≫ sheafPushforwardContinuousIso kX A J J ≪≫
+          (sheafPushforwardContinuousComp' cX A J K J).symm).hom.app S) ≫
+      (sheafPushforwardContinuousComp' cY A K J K ≪≫ sheafPushforwardContinuousIso kY A K K ≪≫
+          sheafPushforwardContinuousId' iY A K).hom.app
+        ((P.sheafPushforwardContinuous A K J).obj S) = 𝟙 _ := by
+  ext V
+  have := congrArg (fun f ↦ S.obj.map f.op) (h V.unop)
+  simp only [op_comp, Functor.map_comp, op_id, Category.assoc] at this
+  simp only [id_obj, comp_obj, Iso.trans_hom, Iso.symm_hom, sheafPushforwardContinuousIso_hom,
+    NatTrans.comp_app, map_comp, assoc, ObjectProperty.FullSubcategory.comp_hom,
+    sheafPushforwardContinuousNatTrans_app_hom, ObjectProperty.ι_obj,
+    sheafPushforwardContinuous_map_hom_app, sheafPushforwardContinuousId'_inv_app_hom_app,
+    whiskerRight_app, op_obj, NatTrans.op_app, sheafPushforwardContinuousComp'_inv_app_hom_app,
+    sheafPushforwardContinuousComp'_hom_app_hom_app, sheafPushforwardContinuous_obj_obj_map,
+    Quiver.Hom.unop_op, sheafPushforwardContinuousId'_hom_app_hom_app,
+    ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app]
+  exact this.trans (S.obj.map_id _)
+
+end Triangle
 
 end CategoryTheory.Functor
