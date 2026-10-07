@@ -28,8 +28,10 @@ structure given by the sheafification of the objectwise tensor product
   `AlgebraicGeometry.Scheme.ellAdicSheaf` lifted to the universe `u + 1`, definitionally
   (`ProEtale.sheafCompose_obj_padicIntSheaf`).
 * For a subfield `E` of `ℚ̄_ℓ = PadicAlgCl ℓ`, given by an embedding `E → ℚ̄_ℓ` as in
-  `WeilConjectures.NumberTheory.Padics.Extension`, `E_X` is the sheaf of continuous maps
-  `U ↦ C(U, E)` for the topology of `E` restricted from `ℚ̄_ℓ` (`ProEtale.padicSubfieldSheaf`).
+  `WeilConjectures.NumberTheory.Padics.Extension`, `E_X` and `𝒪_{E,X}` are the sheaves of
+  continuous maps `U ↦ C(U, E)` and `U ↦ C(U, 𝒪_E)`, for the topologies of `E` and of its ring
+  of integers `𝒪_E` restricted from `ℚ̄_ℓ` (`ProEtale.padicSubfieldSheaf`,
+  `ProEtale.padicIntegersSheaf`).
 * `ℚ̄_ℓ,X` is **not** the sheaf of continuous maps into `ℚ̄_ℓ` with its valuation topology:
   the sections of the correct `ℚ̄_ℓ`-sheaf over a w-contractible `U` are the continuous maps
   `U → ℚ̄_ℓ` taking values in some *finite* subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, which is a
@@ -45,17 +47,22 @@ structure given by the sheafification of the objectwise tensor product
   available.
 
 All of these are commutative ring objects, and the natural inclusions
-`ℤ_ℓ,X ⟶ ℚ_ℓ,X ⟶ E_X ⟶ ℚ̄_ℓ,X` and `ℚ_ℓ,X ⟶ ℚ̄_ℓ,X` are morphisms of ring objects.
+`ℤ_ℓ,X ⟶ ℚ_ℓ,X ⟶ E_X ⟶ ℚ̄_ℓ,X`, `ℤ_ℓ,X ⟶ 𝒪_{E,X} ⟶ E_X` and `ℚ_ℓ,X ⟶ ℚ̄_ℓ,X` are morphisms of
+ring objects.
 
 ## Main definitions
 
 * `AlgebraicGeometry.ProEtale.padicIntSheaf`: the sheaf of rings `ℤ_ℓ,X`.
 * `AlgebraicGeometry.ProEtale.padicSheaf`: the sheaf of rings `ℚ_ℓ,X`.
-* `AlgebraicGeometry.ProEtale.padicSubfieldSheaf`: the sheaf of rings `E_X` for `E ⊆ ℚ̄_ℓ`.
+* `AlgebraicGeometry.ProEtale.padicSubfieldSheaf` and
+  `AlgebraicGeometry.ProEtale.padicIntegersSheaf`: the sheaves of rings `E_X` and `𝒪_{E,X}` for
+  `E ⊆ ℚ̄_ℓ`.
 * `AlgebraicGeometry.ProEtale.padicAlgClSheaf`: the ring object `ℚ̄_ℓ,X` of abelian sheaves.
-* `AlgebraicGeometry.ProEtale.padicIntSheafToPadicSheaf` and
-  `AlgebraicGeometry.ProEtale.padicSheafToPadicSubfieldSheaf`: the inclusions, as morphisms of
-  sheaves of rings; `AlgebraicGeometry.ProEtale.padicSheafToPadicAlgClSheaf` and
+* `AlgebraicGeometry.ProEtale.padicIntSheafToPadicSheaf`,
+  `AlgebraicGeometry.ProEtale.padicSheafToPadicSubfieldSheaf`,
+  `AlgebraicGeometry.ProEtale.padicIntegersSheafToPadicSubfieldSheaf` and
+  `AlgebraicGeometry.ProEtale.padicIntSheafToPadicIntegersSheaf`: the inclusions, as morphisms
+  of sheaves of rings; `AlgebraicGeometry.ProEtale.padicSheafToPadicAlgClSheaf` and
   `AlgebraicGeometry.ProEtale.padicSubfieldSheafToPadicAlgClSheaf`: the inclusions into
   `ℚ̄_ℓ,X`, as morphisms of ring objects.
 
@@ -172,6 +179,57 @@ noncomputable def padicSheafToPadicSubfieldSheaf : padicSheaf X ℓ ⟶ padicSub
   continuousMapRingSheafMap X (algebraMap ℚ_[ℓ] E) (continuous_algebraMap_padic_of_algebra ℓ E)
 
 end Subfield
+
+/-! ### The rings of integers `𝒪_E` -/
+
+section Integers
+
+variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
+
+/-- The sheaf of rings `𝒪_{E,X}` on `X_proét`, for a subfield `E` of `ℚ̄_ℓ` given by an embedding
+`E → ℚ̄_ℓ`: the sheaf of continuous maps `U ↦ C(U, 𝒪_E)` with the pointwise ring structure
+into the ring of integers `𝒪_E = PadicAlgCl.integers ℓ E` of `E`, for the topology of `𝒪_E`
+restricted from `ℚ̄_ℓ` along the embedding. -/
+noncomputable abbrev padicIntegersSheaf : Sheaf (ProEt.topology X) RingCat.{u + 1} :=
+  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  continuousMapRingSheaf X (PadicAlgCl.integers ℓ E)
+
+/-- The inclusion `𝒪_{E,X} ⟶ E_X`, a morphism of sheaves of rings. -/
+noncomputable def padicIntegersSheafToPadicSubfieldSheaf :
+    padicIntegersSheaf X ℓ E ⟶ padicSubfieldSheaf X ℓ E :=
+  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  continuousMapRingSheafMap X (PadicAlgCl.integers ℓ E).subtype continuous_subtype_val
+
+variable [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
+
+/-- The structure map `ℚ_ℓ → E` sends `ℤ_ℓ` into the ring of integers `𝒪_E`: the valuation of
+`E` extends the `ℓ`-adic one. -/
+lemma algebraMap_padicInt_mem_integers (x : ℤ_[ℓ]) :
+    algebraMap ℚ_[ℓ] E x ∈ PadicAlgCl.integers ℓ E := by
+  rw [PadicAlgCl.mem_integers_iff, ← IsScalarTower.algebraMap_apply]
+  exact_mod_cast (PadicAlgCl.norm_extends ℓ (x : ℚ_[ℓ])).le.trans x.2
+
+/-- The structure map `ℤ_ℓ → 𝒪_E`, the restriction of `ℚ_ℓ → E` to the rings of integers. -/
+noncomputable def padicIntToIntegers : ℤ_[ℓ] →+* PadicAlgCl.integers ℓ E :=
+  ((algebraMap ℚ_[ℓ] E).comp PadicInt.Coe.ringHom).codRestrict (PadicAlgCl.integers ℓ E)
+    (algebraMap_padicInt_mem_integers ℓ E)
+
+/-- The structure map `ℤ_ℓ → 𝒪_E` is continuous for the topology of `𝒪_E` restricted from
+`ℚ̄_ℓ`. -/
+lemma continuous_padicIntToIntegers :
+    letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
+    Continuous (padicIntToIntegers ℓ E) := by
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  refine continuous_induced_rng.mpr ?_
+  exact (continuous_algebraMap_padic_of_algebra ℓ E).comp continuous_subtype_val
+
+/-- The inclusion `ℤ_ℓ,X ⟶ 𝒪_{E,X}`, a morphism of sheaves of rings. -/
+noncomputable def padicIntSheafToPadicIntegersSheaf :
+    padicIntSheaf X ℓ ⟶ padicIntegersSheaf X ℓ E :=
+  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  continuousMapRingSheafMap X (padicIntToIntegers ℓ E) (continuous_padicIntToIntegers ℓ E)
+
+end Integers
 
 /-! ### `ℚ̄_ℓ` -/
 
