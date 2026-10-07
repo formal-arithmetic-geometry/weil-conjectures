@@ -66,8 +66,9 @@ constituents is a linear Artin–Schreier sheaf `ℒ_{ψ(a x)}|_U`, for any `a` 
 closure of `k₀`, the value `a = 0` included; for `a = 0` the excluded constituent is the trivial
 rank-one sheaf. (blueprint: `sk-p-dl-a1-middle`, `def-a1-constituent-nonexceptional`) -/
 def IsNonexceptional {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l U) (ψ : AddChar k₀ (PadicAlgCl l)) : Prop :=
-  ∀ a : AlgebraicClosure k₀, ¬ F.HasLinearArtinSchreierConstituent ψ a
+    (F : WeilSheaf k₀ l U) (ψ : AddChar k₀ (PadicAlgCl l)) (j : U ⟶ affineLine k₀)
+    [j.IsOver (Spec (CommRingCat.of k₀))] : Prop :=
+  ∀ a : AlgebraicClosure k₀, ¬ F.HasLinearArtinSchreierConstituent ψ a j
 
 /-- The middle extension `j_*M` of a lisse sheaf `M` on a dense open `j : U₀ ↪ 𝔸¹` is
 *Fourier-nonexceptional* if after geometric base change it is neither a constant sheaf (up to a
@@ -81,7 +82,7 @@ which is equivalent since the Artin–Schreier sheaves are irreducible.
 def LisseOnDenseOpen.IsFourierNonexceptional (ψ : AddChar k₀ (PadicAlgCl l))
     (D : LisseOnDenseOpen k₀ l) : Prop :=
   ¬ D.IsGeometricallyConstant ∧ ∀ a : AlgebraicClosure k₀,
-    ¬ (D.sheaf.IsGeometricallyIrreducible ∧ D.sheaf.HasLinearArtinSchreierConstituent ψ a)
+    ¬ (D.sheaf.IsGeometricallyIrreducible ∧ D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j)
 
 /-- `D'` is a *Fourier partner* of `D` if the Fourier transform of the curve perverse middle
 extension `(j_*M)[1]` of `D` is the middle extension `(j'_*M')[1]` of `D'`.
@@ -101,7 +102,7 @@ variable (ψ : AddChar k₀ (PadicAlgCl l)) (D : LisseOnDenseOpen k₀ l)
 on its nonzero geometric generic stalk. -/
 theorem hasLinearArtinSchreierConstituent_zero_of_isGeometricallyConstant
     (hne : ¬ IsZero D.sheaf) (hc : D.IsGeometricallyConstant) :
-    D.sheaf.HasLinearArtinSchreierConstituent ψ 0 := by
+    D.sheaf.HasLinearArtinSchreierConstituent ψ 0 D.j := by
   sorry
 
 /-- **Constituent-nonexceptional implies Fourier-nonexceptional.** If no geometric constituent
@@ -110,7 +111,7 @@ constant, since a nonzero constant sheaf has the trivial constituent `ℒ_{ψ(0 
 isomorphic to some `ℒ_{ψ(a x)}|_U`, which would be its constituent.
 (blueprint: `lem-a1-constituent-nonexceptional-comparison`, part 1) -/
 theorem isFourierNonexceptional_of_isNonexceptional (hD : D.sheaf.IsIrreducibleLisse)
-    (h : D.sheaf.IsNonexceptional ψ) : D.IsFourierNonexceptional ψ :=
+    (h : D.sheaf.IsNonexceptional ψ D.j) : D.IsFourierNonexceptional ψ :=
   ⟨fun hc ↦ h 0 (D.hasLinearArtinSchreierConstituent_zero_of_isGeometricallyConstant ψ hD.2.1 hc),
     fun a ha ↦ h a ha.2⟩
 
@@ -119,7 +120,7 @@ irreducible, its only geometric constituent is `M_k̄` itself, so a constituent 
 would be isomorphic to `M_k̄`. (blueprint: `lem-a1-constituent-nonexceptional-comparison`) -/
 theorem isNonexceptional_iff_isFourierNonexceptional (hD : D.sheaf.IsIrreducibleLisse)
     (hirr : D.sheaf.IsGeometricallyIrreducible) :
-    D.sheaf.IsNonexceptional ψ ↔ D.IsFourierNonexceptional ψ :=
+    D.sheaf.IsNonexceptional ψ D.j ↔ D.IsFourierNonexceptional ψ :=
   ⟨D.isFourierNonexceptional_of_isNonexceptional ψ hD, fun h a ha ↦ h.2 a ⟨hirr, ha⟩⟩
 
 -- TODO(adic): needs the geometric fundamental representation `ρ : W(U₀) → GL(V)`
@@ -131,7 +132,7 @@ lisse sheaf `M`, then `M` is geometrically constant. The Weil group `W` acts irr
 is a constituent of `V|_G`; by `Representation.IsIrreducible.eq_one_of_isConstituent_trivial`,
 `G` acts trivially on `V`. (blueprint: `lem-a1-unramified-nonexceptional`, case `a = 0`) -/
 theorem isGeometricallyConstant_of_hasLinearArtinSchreierConstituent_zero
-    (hD : D.sheaf.IsIrreducibleLisse) (h : D.sheaf.HasLinearArtinSchreierConstituent ψ 0) :
+    (hD : D.sheaf.IsIrreducibleLisse) (h : D.sheaf.HasLinearArtinSchreierConstituent ψ 0 D.j) :
     D.IsGeometricallyConstant := by
   sorry
 
@@ -145,7 +146,7 @@ the nontrivial character `ψ`. (blueprint: `lem-a1-unramified-nonexceptional`, c
 theorem not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity (hψ : ψ ≠ 1)
     (hD : D.sheaf.IsIrreducibleLisse) (hinf : D.IsUnramifiedAtInfinity)
     {a : AlgebraicClosure k₀} (ha : a ≠ 0) :
-    ¬ D.sheaf.HasLinearArtinSchreierConstituent ψ a := by
+    ¬ D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j := by
   sorry
 
 -- TODO(adic): needs the transforms of skyscraper sheaves (`lem-fd-first-formula`), the base
@@ -157,7 +158,7 @@ transform and passing to `k̄` would give `M_k̄ ≅ ⊕_ξ (ℒ_{ψ(-ξ x)}|_U)
 have a linear character as a geometric constituent.
 (blueprint: `prop-a1-fourier-middle-extension`, Steps 2 and 3) -/
 theorem isEmpty_iso_fourierTransform_middleExtension_toComplex (hψ : ψ ≠ 1)
-    (hD : D.sheaf.IsIrreducibleLisse) (hne : D.sheaf.IsNonexceptional ψ)
+    (hD : D.sheaf.IsIrreducibleLisse) (hne : D.sheaf.IsNonexceptional ψ D.j)
     (G : WeilSheaf k₀ l (affineLine k₀)) (hG : (WeilSheaf.support G).Finite) :
     IsEmpty ((fourierTransform ψ).obj D.middleExtension ≅ WeilSheaf.toComplex.obj G) := by
   sorry
@@ -191,7 +192,7 @@ perverse object is punctual or a middle extension, and the punctual case is excl
 nonexceptionality. (blueprint: `sk-p-dl-a1-middle`, `prop-a1-fourier-middle-extension`) -/
 theorem exists_middleExtension_fourierTransform (hψ : ψ ≠ 1)
     (D : WeilSheaf.LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
-    (hne : D.sheaf.IsNonexceptional ψ) :
+    (hne : D.sheaf.IsNonexceptional ψ D.j) :
     ∃ D' : WeilSheaf.LisseOnDenseOpen k₀ l, D'.sheaf.IsIrreducibleLisse ∧
       D.IsFourierPartner ψ D' := by
   have := D.simple_middleExtension hD
@@ -211,7 +212,7 @@ used. (blueprint: `sk-p-dl-a1-middle`, `lem-a1-unramified-nonexceptional`) -/
 theorem isNonexceptional_of_isUnramifiedAtInfinity (hψ : ψ ≠ 1)
     (D : WeilSheaf.LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
     (hinf : D.IsUnramifiedAtInfinity) (hconst : ¬ D.IsGeometricallyConstant) :
-    D.sheaf.IsNonexceptional ψ := by
+    D.sheaf.IsNonexceptional ψ D.j := by
   intro a ha
   rcases eq_or_ne a 0 with rfl | ha0
   · exact hconst (D.isGeometricallyConstant_of_hasLinearArtinSchreierConstituent_zero ψ hD ha)

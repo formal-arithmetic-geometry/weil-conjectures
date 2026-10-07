@@ -23,7 +23,7 @@ free of finite rank over `ℚ̄_ℓ,X̄`, it is the internal hom `[F^∨, G]` ou
 For a unit `b ∈ ℚ̄_ℓˣ` the *constant Weil twist* `F ⊗ 𝓑_b` of `F` is the tensor product of `F`
 with the geometrically constant Weil line `𝓑_b` on which the geometric Frobenius acts by `b`.
 Since `𝓑_b` is the unit sheaf with its Weil structure multiplied by `b`, the twist is the same
-étale sheaf as `F`, with its Weil structure `φ` replaced by `b • φ`; this is how it is defined
+underlying sheaf as `F`, with its Weil structure `φ` replaced by `b • φ`; this is how it is defined
 here. At a point with values in `𝔽_{qᵐ}` the local Frobenius of the twist is `bᵐ` times the
 local Frobenius of `F`.
 
@@ -88,7 +88,7 @@ noncomputable def tensorObj (F G : WeilSheaf k₀ l X) (hF : F.IsLisse) : WeilSh
 
 /-- The constant Weil twist `F ⊗ 𝓑_b` of a Weil sheaf by a unit `b ∈ ℚ̄_ℓˣ`: the tensor product
 of `F` with the geometrically constant Weil line `𝓑_b` on which the geometric Frobenius acts
-by `b`. It is the étale sheaf of `F` with the Weil structure `b • φ`, so that at a point with
+by `b`. It is the underlying sheaf of `F` with the Weil structure `b • φ`, so that at a point with
 values in `𝔽_{qᵐ}` its local Frobenius is `bᵐ` times that of `F`, and every eigenvalue `α` of
 the local Frobenius of `F` at a closed point of degree `m` becomes `bᵐ α`.
 (blueprint: `def-wf-constant-weil-twist`) -/
@@ -114,11 +114,11 @@ theorem nonempty_equiv_stalk_constantTwist (F : WeilSheaf k₀ l X) (b : (PadicA
       ((b : PadicAlgCl l) ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1))) := by
   sorry
 
-/-- A constant twist of a lisse Weil sheaf is lisse, the underlying étale sheaf being the same. -/
+/-- A constant twist of a lisse Weil sheaf is lisse, the underlying sheaf being the same. -/
 alias ⟨_, IsLisse.constantTwist⟩ := isLisse_constantTwist
 
 /-- Twisting by `b` and then by `b⁻¹` gives back the Weil sheaf: both twists keep the
-underlying étale sheaf, and the Weil structure `b⁻¹ • b • φ` is `φ`. -/
+underlying sheaf, and the Weil structure `b⁻¹ • b • φ` is `φ`. -/
 noncomputable def constantTwistInvIso (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) :
     (F.constantTwist b).constantTwist b⁻¹ ≅ F :=
   ObjectProperty.isoMk _ (ObjectProperty.isoMk _ (Endofunctor.Algebra.isoMk (Iso.refl _) (by

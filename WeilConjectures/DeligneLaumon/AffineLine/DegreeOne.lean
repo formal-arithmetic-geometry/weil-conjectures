@@ -147,7 +147,7 @@ weight `w` on a dense open `U₀` of the affine line, then `H_c^1(A, j_*M)` has 
 `w + 1`. (blueprint: `sk-c-dl-a1-hc1`, `cor-a1-fourier-middle-hc1`) -/
 theorem hasWeightsAtMost_compactlySupportedCohomology_one (ι : PadicAlgCl l →+* ℂ)
     (hψ : ψ ≠ 1) (D : WeilSheaf.LisseOnDenseOpen k₀ l) [Simple D.sheaf]
-    (hne : D.sheaf.IsNonexceptional ψ) {w : ℝ}
+    (hne : D.sheaf.IsNonexceptional ψ D.j) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
     (D.directImage.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
   -- Step 1: the transform of `(j_*M)[1]` is a middle extension `(j'_*M')[1]`

@@ -81,7 +81,7 @@ structure FourierCorrection (D D' : LisseOnDenseOpen k₀ l) where
 /-- For an irreducible nonexceptional `M` and a Fourier partner `D'` of `D`, the zero-extension
 comparison datum exists. (blueprint: `sk-p-dl-a1-correction`) -/
 theorem nonempty_fourierCorrection (hψ : ψ ≠ 1) (D D' : LisseOnDenseOpen k₀ l) [Simple D.sheaf]
-    (hne : D.sheaf.IsNonexceptional ψ) (hFT : D.IsFourierPartner ψ D') :
+    (hne : D.sheaf.IsNonexceptional ψ D.j) (hFT : D.IsFourierPartner ψ D') :
     Nonempty (FourierCorrection ψ D D') := by
   -- TODO: Step 5 of `sk-p-dl-a1-correction`: `G = 𝓗⁻¹ FT_ψ(j_!M[1])` and
   -- `B' = 𝓗⁻¹ FT_ψ(B)`. The maps of the sequence come from the rotated triangle

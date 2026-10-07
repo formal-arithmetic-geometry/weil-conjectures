@@ -14,8 +14,8 @@ public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
 /-!
 # Stalks, trace functions and weights of Weil sheaves
 
-Let `F` be a Weil sheaf on a `k₀`-scheme `X`: a constructible étale sheaf on the geometric
-fiber `X̄ = X ×_{k₀} k̄` with an isomorphism `φ : Fr^* F ≅ F`, where `Fr = 𝟙 × σ` is the
+Let `F` be a Weil sheaf on a `k₀`-scheme `X`: a constructible `ℓ`-adic pro-étale sheaf on the
+geometric fiber `X̄ = X ×_{k₀} k̄` with an isomorphism `φ : Fr^* F ≅ F`, where `Fr = 𝟙 × σ` is the
 geometric Galois Frobenius of `X̄` and `σ` the automorphism of `Spec k̄` induced by the
 geometric Frobenius of `k̄`. This file constructs the geometric stalks of `F` with their local
 Frobenius, the trace function, the support and the global sections of `F`, and phrases
@@ -29,8 +29,9 @@ For a geometric point `s : Spec k̄ ⟶ X̄`, the iterated Weil structure
 component `Spec k̄ ⟶ Spec k̄` is `σᵐ` instead of the identity. If `s` lies over a point with
 values in a field with `qᵐ` elements, then `s ≫ Frᵐ = σᵐ ≫ s`
 (`AlgebraicGeometry.Scheme.Hom.geometricFiberPoint_comp_geometricGaloisFrobenius_pow`), and
-the reparametrisation `σᵐ ≫ s` of `s` is an isomorphic point of the étale site
-(`AlgebraicGeometry.Scheme.uliftPointSmallEtaleCongr`). The composite
+the stalk at the reparametrisation `σᵐ ≫ s` of `s` is canonically the stalk at `s`, pullback
+along the automorphism `σᵐ` of `Spec k̄` not changing global sections
+(`AlgebraicGeometry.ProEtale.globalSectionsUpperStarIso`). The composite
 
 `F_s ≅ F_{σᵐ ≫ s} = F_{s ≫ Frᵐ} ≅ F_s`
 
@@ -80,12 +81,11 @@ scalars (`AlgebraicGeometry.WeilCoefficients.toModuleCat`).
 
 ## TODO
 
-- Prove, once the category is redefined (`sk-d-real-weil`), the statements of this file stated
-  with `sorry`: the finiteness of stalks and global sections, the independence of the local
+- Prove the statements of this file stated with `sorry`: the finiteness of stalks and global sections, the independence of the local
   Frobenius of the geometric point, the comparison of the trace function with the local
   Frobenius, and the compatibility of restriction to a stalk with the Frobenius.
 - Derive `AlgebraicGeometry.WeilSheaf.exists_nontrivial_stalk_of_not_isZero` from two
-  independent facts: a nonzero constructible étale sheaf has a nonzero stalk at a geometric
+  independent facts: a nonzero constructible `ℓ`-adic sheaf has a nonzero stalk at a geometric
   point, its support being a nonempty constructible set; and a nonempty locally closed subset of
   a Jacobson scheme contains a closed point.
 -/
