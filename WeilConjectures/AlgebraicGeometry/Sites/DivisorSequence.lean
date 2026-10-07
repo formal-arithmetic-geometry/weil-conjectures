@@ -242,7 +242,7 @@ lemma extendByZero_fromSpecResidueField_fst (M : AddCommGrpCat.{u + 1}) (V : X.E
 /-- The divisor map vanishes on units: the composite `𝔾ₘ ⟶ i_* 𝔾ₘ ⟶ (V ↦ (V → ℤ))` is zero,
 since a unit on `V` has order `0` at every point (`AlgebraicGeometry.Scheme.Etale.ord_fst_appTop`).
 -/
-lemma gmSheafToLowerStarGmSheaf_comp_divisorMap :
+lemma gmSheafToLowerStarGmSheaf_comp_divisorMap [IsLocallyNoetherian X] [IsRegular X] :
     gmSheafToLowerStarGmSheaf X.fromSpecFunctionField ≫ X.divisorMap = 0 := by
   ext V u
   funext y

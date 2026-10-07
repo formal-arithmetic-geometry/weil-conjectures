@@ -5,6 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+public import Mathlib.RingTheory.Unramified.LocalRing
+public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
@@ -141,20 +144,137 @@ noncomputable def ordHom (V : X.Etale) :
     funext y
     exact ULift.ext _ _ (ord_mul V y _ _)
 
+/-- The map of local generic rings `Γ(Spec 𝒪_{V,φ y} ×_X Spec k(X), 𝒪) ⟶
+Γ(Spec 𝒪_{W,y} ×_X Spec k(X), 𝒪)` induced by a morphism `φ : W ⟶ V` of étale `X`-schemes. -/
+noncomputable def localGenericRingMap {V W : X.Etale} (φ : W ⟶ V) (y : W.left) :
+    localGenericRing V (φ.left y) ⟶ localGenericRing W y :=
+  (pullback.map _ _ _ _ (Spec.map (φ.left.stalkMap y)) (𝟙 _) (𝟙 _)
+    (by
+      rw [Category.comp_id, ← Category.assoc, SpecMap_stalkMap_fromSpecStalk, Category.assoc]
+      exact congrArg (fun g ↦ W.left.fromSpecStalk y ≫ g)
+        (CategoryTheory.Over.w ((Etale.forget X).map φ)).symm)
+    (by simp)).appTop
+
+lemma stalkToLocalGenericRing_comp_localGenericRingMap {V W : X.Etale} (φ : W ⟶ V)
+    (y : W.left) :
+    stalkToLocalGenericRing V (φ.left y) ≫ localGenericRingMap φ y =
+      φ.left.stalkMap y ≫ stalkToLocalGenericRing W y := by
+  rw [stalkToLocalGenericRing, stalkToLocalGenericRing, localGenericRingMap, Category.assoc,
+    ← Scheme.Hom.comp_appTop, pullback.lift_fst, Scheme.Hom.comp_appTop,
+    ← Category.assoc, ← Scheme.ΓSpecIso_inv_naturality, Category.assoc]
+
+lemma toLocalGenericRing_comp_localGenericRingMap {V W : X.Etale} (φ : W ⟶ V) (y : W.left) :
+    toLocalGenericRing V (φ.left y) ≫ localGenericRingMap φ y =
+      ((MorphismProperty.Over.pullback @Etale ⊤ X.fromSpecFunctionField).map φ).left.appTop ≫
+        toLocalGenericRing W y := by
+  rw [toLocalGenericRing, toLocalGenericRing, localGenericRingMap, ← Scheme.Hom.comp_appTop,
+    ← Scheme.Hom.comp_appTop,
+    show ((MorphismProperty.Over.pullback @Etale ⊤ X.fromSpecFunctionField).map φ).left =
+      pullback.map _ _ _ _ φ.left (𝟙 _) (𝟙 _) (by simp) (by simp) from rfl,
+    pullback.map_comp, pullback.map_comp]
+  congr 2
+  exact SpecMap_stalkMap_fromSpecStalk φ.left
+
+omit [IrreducibleSpace X] in
+/-- The stalk map of an étale morphism is unramified: it maps the maximal ideal onto the maximal
+ideal. -/
+lemma map_maximalIdeal_stalkMap {V W : X.Etale} (φ : W ⟶ V) (y : W.left) :
+    (IsLocalRing.maximalIdeal (V.left.presheaf.stalk (φ.left y))).map (φ.left.stalkMap y).hom =
+      IsLocalRing.maximalIdeal (W.left.presheaf.stalk y) := by
+  algebraize [(φ.left.stalkMap y).hom]
+  have : IsLocalHom (algebraMap (V.left.presheaf.stalk (φ.left y)) (W.left.presheaf.stalk y)) :=
+    inferInstanceAs <| IsLocalHom (φ.left.stalkMap y).hom
+  have : Algebra.EssFiniteType (V.left.presheaf.stalk (φ.left y)) (W.left.presheaf.stalk y) := by
+    rw [← RingHom.essFiniteType_algebraMap, RingHom.algebraMap_toAlgebra]
+    exact LocallyOfFiniteType.stalkMap φ.left y
+  have : Algebra.FormallyUnramified (V.left.presheaf.stalk (φ.left y))
+      (W.left.presheaf.stalk y) := by
+    rw [← RingHom.formallyUnramified_algebraMap, RingHom.algebraMap_toAlgebra]
+    exact FormallyUnramified.stalkMap φ.left y
+  exact Algebra.FormallyUnramified.map_maximalIdeal
+
+variable [IsLocallyNoetherian X] [IsRegular X]
+
+omit [IrreducibleSpace X] [IsLocallyNoetherian X] in
+instance isRegularLocalRing_stalk (V : X.Etale) (y : V.left) :
+    IsRegularLocalRing (V.left.presheaf.stalk y) :=
+  isRegularLocalRing_stalk_of_etale V.hom (fun x ↦ IsRegular.isRegularLocalRing_stalk (X := X) x) y
+
+omit [IrreducibleSpace X] [IsLocallyNoetherian X] [IsRegular X] in
+/-- **Étale morphisms preserve codimension.** A point of an étale `X`-scheme has the same
+codimension as its image in `X`: an étale morphism is flat, so generisations lift, and
+locally quasi-finite, so no two points of a fibre specialise to each other. The proof is
+`sorry`. -/
+lemma coheight_hom_apply (V : X.Etale) (y : V.left) : coheight (V.hom y) = coheight y := by
+  sorry
+
+omit [IrreducibleSpace X] [IsLocallyNoetherian X] [IsRegular X] in
+/-- **The local rings of an étale neighbourhood at codimension one points are discrete valuation
+rings.** Let `X` be a regular scheme and `V` an étale `X`-scheme. At a point `y` of `V` over a
+point of `X` of codimension one, the local ring `𝒪_{V,y}` is regular
+(`AlgebraicGeometry.isRegularLocalRing_stalk_of_etale`) of dimension one
+(`AlgebraicGeometry.Scheme.Etale.coheight_hom_apply`), hence a discrete valuation ring. -/
+lemma isDiscreteValuationRing_stalk [IsRegular X] (V : X.Etale) {y : V.left}
+    (hy : coheight (V.hom y) = 1) : IsDiscreteValuationRing (V.left.presheaf.stalk y) := by
+  refine IsRegularLocalRing.isDiscreteValuationRing _ ?_
+  rw [ringKrullDim_stalk_eq_coheight, ← coheight_hom_apply, hy]
+  rfl
+
+/-- **The local generic ring is the fraction field of the local ring.** Let `X` be an integral
+regular locally noetherian scheme and `V` an étale `X`-scheme. At a point `y` of `V` over a
+point `x` of `X` of codimension one, the local generic ring
+`Γ(Spec 𝒪_{V,y} ×_X Spec k(X), 𝒪) = 𝒪_{V,y} ⊗_{𝒪_{X,x}} k(X)` is a fraction ring of
+`𝒪_{V,y}`: a uniformiser of the discrete valuation ring `𝒪_{X,x}` stays a uniformiser of the
+discrete valuation ring `𝒪_{V,y}`, and inverting it gives the fraction field. The proof is
+`sorry`. -/
+lemma isFractionRing_localGenericRing (V : X.Etale) {y : V.left}
+    (hy : coheight (V.hom y) = 1) :
+    letI := (stalkToLocalGenericRing V y).hom.toAlgebra
+    IsFractionRing (V.left.presheaf.stalk y) (localGenericRing V y) := by
+  sorry
+
 /-- **Naturality of the order of vanishing.** For a morphism `φ : W ⟶ V` of étale
-`X`-schemes, a point `y` of `W` and a unit `f` on the generic fibre of `V`, the order of the
-pullback of `f` at `y` is the order of `f` at `φ y`. When `X` is regular the local rings
-`𝒪_{V,φ y} ⟶ 𝒪_{W,y}` are discrete valuation rings and the étale map is unramified, so a
-uniformiser stays a uniformiser (`Ring.ordOf_map`). The proof is `sorry`. -/
+`X`-schemes over an integral regular locally noetherian scheme `X`, a point `y` of `W` and a
+unit `f` on the generic fibre of `V`, the order of the pullback of `f` at `y` is the order of
+`f` at `φ y`. The local rings `𝒪_{V,φ y} ⟶ 𝒪_{W,y}` are discrete valuation rings and the étale
+map is unramified, so a uniformiser stays a uniformiser (`Ring.ordOf_map`). -/
 lemma ord_map {V W : X.Etale} (φ : W ⟶ V) (y : W.left)
     (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ) :
     ord W y (((MorphismProperty.Over.pullback @Etale ⊤ X.fromSpecFunctionField).map
       φ).left.appTop f.val) = ord V (φ.left y) f := by
-  sorry
+  have hx : W.hom y = V.hom (φ.left y) :=
+    (congrArg (fun g : W.left ⟶ X ↦ g y) (CategoryTheory.Over.w ((Etale.forget X).map φ))).symm
+  by_cases hy : coheight (W.hom y) = 1
+  · have hy' : coheight (V.hom (φ.left y)) = 1 := hx ▸ hy
+    rw [ord, if_pos hy, ord, if_pos hy']
+    have := isDiscreteValuationRing_stalk V hy'
+    have := isDiscreteValuationRing_stalk W hy
+    let := (stalkToLocalGenericRing V (φ.left y)).hom.toAlgebra
+    let := (stalkToLocalGenericRing W y).hom.toAlgebra
+    have := isFractionRing_localGenericRing V hy'
+    have := isFractionRing_localGenericRing W hy
+    have h₂ : toLocalGenericRing W y
+        (((MorphismProperty.Over.pullback @Etale ⊤ X.fromSpecFunctionField).map
+          φ).left.appTop f.val) = localGenericRingMap φ y (toLocalGenericRing V (φ.left y) f.val) :=
+      (congrArg (fun g ↦ g f.val)
+        (congrArg CommRingCat.Hom.hom (toLocalGenericRing_comp_localGenericRingMap φ y))).symm
+    have hc : (localGenericRingMap φ y).hom.comp
+        (algebraMap (V.left.presheaf.stalk (φ.left y)) (localGenericRing V (φ.left y))) =
+        (algebraMap (W.left.presheaf.stalk y) (localGenericRing W y)).comp
+          (φ.left.stalkMap y).hom :=
+      congrArg CommRingCat.Hom.hom (stalkToLocalGenericRing_comp_localGenericRingMap φ y)
+    rw [h₂]
+    have key := Ring.ordOf_map (R := V.left.presheaf.stalk (φ.left y))
+      (L := localGenericRing V (φ.left y)) (R' := W.left.presheaf.stalk y)
+      (L' := localGenericRing W y) (φ.left.stalkMap y).hom (localGenericRingMap φ y).hom hc
+      (map_maximalIdeal_stalkMap φ y) (Units.map (toLocalGenericRing V (φ.left y)).hom f)
+    exact key
+  · have hy' : coheight (V.hom (φ.left y)) ≠ 1 := hx ▸ hy
+    rw [ord_of_coheight_ne_one W hy, ord_of_coheight_ne_one V hy']
 
 end Etale
 
-variable (X)
+variable (X) [IsLocallyNoetherian X] [IsRegular X]
 
 /-- **The divisor map.** For an irreducible scheme `X` with generic point
 `i : Spec k(X) ⟶ X`, the map of étale sheaves `i_* 𝔾ₘ ⟶ (V ↦ (V → ℤ))` sending a unit `f` on
