@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
+public import WeilConjectures.AlgebraicGeometry.Sites.DivisorMap
+public import WeilConjectures.AlgebraicGeometry.Sites.StalkwiseCokernel
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
@@ -163,6 +165,99 @@ theorem mono_toGenericGm : Mono X.toGenericGm := by
   rw [← e] at h
   exact mono_of_mono _ ((Etale.lowerStar _ _).map (upperStarGmSheafToGmSheaf _))
 
+/-- The map `i_{x*} ℤ ⟶ (V ↦ (V → ℤ))` from the sheaf of a point `x` to the sheaf of functions on
+points: a section of `ℤ` over `V ×_X Spec κ(x)` is a function on the points of `V` over `x`
+(`AlgebraicGeometry.Scheme.constantSheafToPointFunctionSheaf`), which is extended by zero to all
+of `V`. -/
+noncomputable def pointConstantIntToPointFunctionSheaf (x : X) :
+    X.pointConstantInt x ⟶ X.pointFunctionSheaf (AddCommGrpCat.of (ULift.{u + 1} ℤ)) :=
+  (Etale.lowerStar AddCommGrpCat.{u + 1} (X.fromSpecResidueField x)).map
+      ((Spec (X.residueField x)).constantSheafToPointFunctionSheaf _) ≫
+    lowerStarPointFunctionSheafToPointFunctionSheaf _ (X.fromSpecResidueField x)
+
+instance isIso_constantSheafToPointFunctionSheaf_residueField (x : X)
+    (M : AddCommGrpCat.{u + 1}) :
+    IsIso ((Spec (X.residueField x)).constantSheafToPointFunctionSheaf M) :=
+  isIso_constantSheafToPointFunctionSheaf M discreteTopology_of_etale_of_unique
+
+/-- The map `(V ↦ (V → ℤ)) ⟶ i_{x*} ℤ` restricting a function on the points of `V` to the
+points of `V` over `x`. It is a retraction of
+`AlgebraicGeometry.Scheme.pointConstantIntToPointFunctionSheaf`. -/
+noncomputable def pointFunctionSheafToPointConstantInt (x : X) :
+    X.pointFunctionSheaf (AddCommGrpCat.of (ULift.{u + 1} ℤ)) ⟶ X.pointConstantInt x :=
+  pointFunctionSheafToLowerStar _ (X.fromSpecResidueField x) ≫
+    (Etale.lowerStar AddCommGrpCat.{u + 1} (X.fromSpecResidueField x)).map
+      (inv ((Spec (X.residueField x)).constantSheafToPointFunctionSheaf _))
+
+omit [IsIntegral X] in
+@[reassoc (attr := simp)]
+lemma pointConstantIntToPointFunctionSheaf_comp_self (x : X) :
+    X.pointConstantIntToPointFunctionSheaf x ≫ X.pointFunctionSheafToPointConstantInt x = 𝟙 _ := by
+  simp [pointConstantIntToPointFunctionSheaf, pointFunctionSheafToPointConstantInt]
+
+omit [IsIntegral X] in
+lemma pointConstantIntToPointFunctionSheaf_comp_of_ne {x x' : X} (h : x ≠ x') :
+    X.pointConstantIntToPointFunctionSheaf x ≫ X.pointFunctionSheafToPointConstantInt x' = 0 := by
+  have hd : Disjoint (Set.range (X.fromSpecResidueField x))
+      (Set.range (X.fromSpecResidueField x')) := by
+    rw [range_fromSpecResidueField, range_fromSpecResidueField]
+    exact Set.disjoint_singleton.2 h
+  simp only [pointConstantIntToPointFunctionSheaf, pointFunctionSheafToPointConstantInt,
+    Category.assoc]
+  rw [reassoc_of% (lowerStarPointFunctionSheafToPointFunctionSheaf_comp_eq_zero _ _ _ hd),
+    zero_comp, comp_zero]
+
+/-- The divisor map vanishes on units: the composite `𝔾ₘ ⟶ i_* 𝔾ₘ ⟶ (V ↦ (V → ℤ))` is zero,
+since a unit on `V` has order `0` at every point. The proof is `sorry`. -/
+lemma gmSheafToLowerStarGmSheaf_comp_divisorMap :
+    gmSheafToLowerStarGmSheaf X.fromSpecFunctionField ≫ X.divisorMap = 0 := by
+  sorry
+
+/-- **Local algebraic Hartogs on an étale neighbourhood.** Let `X` be an integral regular
+locally noetherian scheme, `V` an étale `X`-scheme and `f` a unit on the generic fibre of `V`
+whose order vanishes at every point of `V`. Then near every point `y` of `V` the function `f`
+is a unit of `𝒪_V`: there is an open neighbourhood `U` of `y` and `u ∈ Γ(U, 𝒪)ˣ` restricting
+to `f` on the generic fibre of `U`. The local rings of `V` are regular, hence unique
+factorisation domains, and a rational function of order zero along every height one prime of
+a unique factorisation domain is a unit. The proof is `sorry`.
+(blueprint: `lem-sc-divisor-sequence-general`, exactness in the middle) -/
+lemma Etale.exists_eq_of_ord_eq_zero [IsLocallyNoetherian X] [IsRegular X] (V : X.Etale)
+    (y : V.left) (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ)
+    (hf : ∀ y', Etale.ord V y' f = 0) :
+    ∃ (U : V.left.Opens) (_ : y ∈ U) (u : Γ(Etale.ofOpens V U |>.left, ⊤)ˣ),
+      (pullback.fst (Etale.ofOpens V U).hom X.fromSpecFunctionField).appTop u.val =
+        ((MorphismProperty.Over.pullback @Etale ⊤ X.fromSpecFunctionField).map
+          (Etale.ofOpensι V U)).left.appTop f.val := by
+  sorry
+
+/-- **Local finiteness of divisors.** Let `X` be an integral regular locally noetherian scheme,
+`V` an étale `X`-scheme and `f` a unit on the generic fibre of `V`. Near every point of `V`, the
+points at which `f` has nonzero order lie over finitely many points of `X`. The proof is
+`sorry`.
+(blueprint: `lem-sc-divisor-sequence-general`, the divisor is a finite sum) -/
+lemma Etale.exists_finset_of_ord_ne_zero [IsLocallyNoetherian X] [IsRegular X] (V : X.Etale)
+    (y : V.left) (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ) :
+    ∃ (U : V.left.Opens) (_ : y ∈ U) (T : Finset X),
+      ∀ y' ∈ U, Etale.ord V y' f ≠ 0 → V.hom y' ∈ T := by
+  sorry
+
+/-- **Weil divisors are locally principal on an étale neighbourhood.** Let `X` be an integral
+regular locally noetherian scheme, `x` a point of `X` of codimension one, `V` an étale
+`X`-scheme and `c` an integer-valued function on the points of `V` over `x`. Near every point
+`y` of `V` there is a unit on the generic fibre whose order is `c` at the points over `x` and `0`
+elsewhere. The local rings of `V` are regular, hence unique factorisation domains, so the height
+one primes of `𝒪_{V,y}` are principal. The proof is `sorry`.
+(blueprint: `lem-sc-divisor-sequence-general`, surjectivity) -/
+lemma Etale.exists_ord_eq_extendByZero [IsLocallyNoetherian X] [IsRegular X] (V : X.Etale)
+    (y : V.left) {x : X} (hx : coheight x = 1)
+    (c : ↥(pullback V.hom (X.fromSpecResidueField x)) → ULift.{u + 1} ℤ) :
+    ∃ (U : V.left.Opens) (_ : y ∈ U)
+      (f : Γ(pullback (Etale.ofOpens V U).hom X.fromSpecFunctionField, ⊤)ˣ),
+      ∀ y' : U, ULift.up (Etale.ord (Etale.ofOpens V U) y' f) =
+        extendByZero (AddCommGrpCat.of (ULift.{u + 1} ℤ)) (X.fromSpecResidueField x) c
+          (U.ι y') := by
+  sorry
+
 /-- **The cokernel of `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is the sheaf of Weil divisors.** Let `X` be an
 integral regular locally noetherian scheme with generic point `i : Spec k(X) ⟶ X`. Then the
 cokernel of the unit `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is isomorphic to `⨁_{x ∈ X⁽¹⁾} i_{x*} ℤ`, the vertex
@@ -170,18 +265,26 @@ of any colimit cocone `c` on the family `x ↦ i_{x*} ℤ`; the isomorphism is i
 divisor map `f ↦ ∑_x ord_x(f) [x]`. This is exactness in the middle and on the right of the
 divisor sequence.
 
-On the stalk at a geometric point over `x`, with `A = 𝒪^{sh}_{X,x̄}` and `S = 𝒪_{X,x} ∖ {0}`,
-the claim is that `(S⁻¹A)^× / A^× ⟶ ⨁_𝔮 ℤ`, over the height-one primes `𝔮` of `A` meeting
-`S`, is bijective. Injectivity is algebraic Hartogs for the noetherian normal domain `A`,
-surjectivity uses that the regular local ring `A` is a UFD (Auslander–Buchsbaum). The proof is
-`sorry`: it needs the stalks of étale sheaves at geometric points as strict henselisations,
-regularity of strict henselisations and the factoriality of regular local rings, none of
-which is available.
+Both `i_* i^* 𝔾ₘ = i_* 𝔾ₘ` and `⨁_x i_{x*} ℤ` map to the sheaf `V ↦ (V → ℤ)` of functions on
+points, by the divisor map `AlgebraicGeometry.Scheme.divisorMap` and by extension by zero
+`AlgebraicGeometry.Scheme.pointConstantIntToPointFunctionSheaf`. On geometric stalks the second
+map is injective, the two maps have the same image (local finiteness and local principality of
+divisors) and the kernel of the first is the image of `𝔾ₘ` (local algebraic Hartogs), so the
+cokernel is identified by `AlgebraicGeometry.Scheme.nonempty_cokernel_iso_of_sheafFiber`.
 (blueprint: `lem-sc-divisor-sequence-general`, exactness in the middle and surjectivity) -/
 theorem nonempty_cokernel_toGenericGm_iso [IsLocallyNoetherian X] [IsRegular X]
     (c : Cofan fun x : {x : X // coheight x = 1} ↦ X.pointConstantInt x.1) (hc : IsColimit c) :
-    Nonempty (cokernel X.toGenericGm ≅ c.pt) :=
-  sorry
+    Nonempty (cokernel X.toGenericGm ≅ c.pt) := by
+  have := X.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField
+  have he : X.toGenericGm ≫ (Etale.lowerStar _ _).map
+      (upperStarGmSheafToGmSheaf X.fromSpecFunctionField) =
+      gmSheafToLowerStarGmSheaf X.fromSpecFunctionField := by
+    simp [toGenericGm, upperStarGmSheafToGmSheaf, Adjunction.homEquiv_counit]
+  obtain ⟨φ⟩ := nonempty_cokernel_iso_of_sheafFiber
+    (gmSheafToLowerStarGmSheaf X.fromSpecFunctionField) X.divisorMap
+    (Cofan.IsColimit.desc hc fun x ↦ X.pointConstantIntToPointFunctionSheaf x.1)
+    X.gmSheafToLowerStarGmSheaf_comp_divisorMap sorry sorry sorry sorry
+  exact ⟨(cokernelCompIsIso _ _).symm ≪≫ cokernelIsoOfEq he ≪≫ φ⟩
 
 /-- **The divisor sequence.** Let `X` be an integral regular locally noetherian scheme with
 generic point `i : Spec k(X) ⟶ X`, and let `X⁽¹⁾` be its set of coheight-one points. Then
