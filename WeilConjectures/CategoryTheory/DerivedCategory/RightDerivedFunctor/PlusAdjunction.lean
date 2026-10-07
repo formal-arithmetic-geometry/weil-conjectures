@@ -54,6 +54,9 @@ of the four comparison isomorphisms.
   `LB ⊣ RB` between the same pair of categories come with isomorphisms `u : LA ≅ LB` and
   `l : RB ≅ RA` corresponding to each other under conjugation, then the same relation
   holds for the bounded below derived adjunctions.
+- `CategoryTheory.Adjunction.derivedPlus_mateEquiv_app_fac`: the mate of a square of derived
+  functors with respect to the bounded below derived adjunctions is computed on complexes by the
+  mate of the underived square.
 
 ## The proof
 
@@ -390,5 +393,96 @@ theorem derivedPlus_comp_unit_app (X : DerivedCategory.Plus C) :
   simp
 
 end Composition
+
+section Mates
+
+variable {C₁ C₂ C₃ C₄ : Type*} [Category* C₁] [Category* C₂] [Category* C₃] [Category* C₄]
+  [Abelian C₁] [Abelian C₂] [Abelian C₃] [Abelian C₄]
+  [HasDerivedCategory C₁] [HasDerivedCategory C₂] [HasDerivedCategory C₃]
+  [HasDerivedCategory C₄] [EnoughInjectives C₁] [EnoughInjectives C₃]
+  {L : C₂ ⥤ C₁} {R : C₁ ⥤ C₂} {L' : C₄ ⥤ C₃} {R' : C₃ ⥤ C₄}
+  {G : C₂ ⥤ C₄} {G' : C₁ ⥤ C₃}
+  [L.Additive] [R.Additive] [L'.Additive] [R'.Additive] [G.Additive] [G'.Additive]
+  [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+  [PreservesFiniteLimits L'] [PreservesFiniteColimits L']
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
+
+/-- **The derived mate is computed by the underived mate on complexes.** Let `L ⊣ R` and
+`L' ⊣ R'` be adjunctions with exact left adjoints, `G` and `G'` exact functors, and
+`σ : G ⋙ L' ⟶ L ⋙ G'` a square. Let `θ` be a square of the induced functors on the bounded below
+derived categories which is computed by `σ` on complexes (hypothesis `hθ`). Then the mate of `θ`
+with respect to the bounded below derived adjunctions `Adjunction.derivedPlus`, restricted along
+the unit `R(K) ⟶ R⁺(K)` of the derived functor, is the underived mate of `σ` followed by the unit
+`R'(G'K) ⟶ R'⁺(G'K)`. This is the form in which a natural transformation out of the right
+derived functor `R⁺ ⋙ G⁺` is characterised (`Functor.rightDerived_ext`). -/
+theorem derivedPlus_mateEquiv_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')
+    (σ : TwoSquare G L L' G')
+    (θ : TwoSquare G.mapDerivedCategoryPlus L.mapDerivedCategoryPlus L'.mapDerivedCategoryPlus
+      G'.mapDerivedCategoryPlus)
+    (hθ : ∀ N : HomotopyCategory.Plus C₂,
+      θ.natTrans.app (DerivedCategory.Plus.Qh.obj N) ≫
+          G'.mapDerivedCategoryPlus.map (L.mapDerivedCategoryPlusFactorsh.hom.app N) ≫
+          G'.mapDerivedCategoryPlusFactorsh.hom.app (L.mapHomotopyCategoryPlus.obj N) =
+        L'.mapDerivedCategoryPlus.map (G.mapDerivedCategoryPlusFactorsh.hom.app N) ≫
+          L'.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj N) ≫
+          DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app N))
+    (K : HomotopyCategory.Plus C₁) :
+    G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app K) ≫
+        (mateEquiv adj.derivedPlus adj'.derivedPlus θ).natTrans.app
+          (DerivedCategory.Plus.Qh.obj K) =
+      G.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj K) ≫
+        DerivedCategory.Plus.Qh.map
+          ((NatTrans.mapHomotopyCategoryPlus (mateEquiv adj adj' σ).natTrans).app K) ≫
+        R'.rightDerivedFunctorPlusUnit.app (G'.mapHomotopyCategoryPlus.obj K) ≫
+        R'.rightDerivedFunctorPlus.map (G'.mapDerivedCategoryPlusFactorsh.inv.app K) := by
+  have hmate : ∀ (Z : DerivedCategory.Plus C₁),
+      (mateEquiv adj.derivedPlus adj'.derivedPlus θ).natTrans.app Z =
+        adj'.derivedPlus.unit.app
+            (G.mapDerivedCategoryPlus.obj (R.rightDerivedFunctorPlus.obj Z)) ≫
+          R'.rightDerivedFunctorPlus.map (θ.natTrans.app (R.rightDerivedFunctorPlus.obj Z)) ≫
+          R'.rightDerivedFunctorPlus.map (G'.mapDerivedCategoryPlus.map
+            (adj.derivedPlus.counit.app Z)) := fun Z => by
+    simp [mateEquiv_apply]
+  set N := R.mapHomotopyCategoryPlus.obj K
+  set u := R.rightDerivedFunctorPlusUnit.app K
+  have h₁ := adj'.derivedPlus.unit.naturality (G.mapDerivedCategoryPlus.map u)
+  have h₂ := θ.natTrans.naturality u
+  have h₃ := adj.derivedPlus_counit_app_fac K
+  have h₄ := NatTrans.mapHomotopyCategoryPlus_mateEquiv_app adj adj' σ K
+  have h₅ := R'.rightDerivedFunctorPlusUnit.naturality
+    ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app N ≫
+      G'.mapHomotopyCategoryPlus.map (adj.mapHomotopyCategoryPlus.counit.app K))
+  have h₆ := adj'.derivedPlus_unit_app_fac (G.mapHomotopyCategoryPlus.obj N)
+  have h₇ := adj'.derivedPlus.unit.naturality (G.mapDerivedCategoryPlusFactorsh.hom.app N)
+  have h₈ := hθ N
+  have h₉ := G'.mapDerivedCategoryPlusFactorsh.hom.naturality
+    (adj.mapHomotopyCategoryPlus.counit.app K)
+  simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at h₁ h₂ h₅ h₇ h₉
+  rw [hmate, reassoc_of% h₁]
+  simp only [← Functor.map_comp]
+  rw [reassoc_of% h₂, ← Functor.map_comp (G'.mapDerivedCategoryPlus), h₃, h₄]
+  erw [← Functor.map_comp R'.mapHomotopyCategoryPlus]
+  erw [Functor.map_comp DerivedCategory.Plus.Qh, Category.assoc, reassoc_of% h₅]
+  erw [← reassoc_of% h₆, reassoc_of% h₇]
+  congr 1
+  have key : θ.natTrans.app (DerivedCategory.Plus.Qh.obj N) ≫
+      G'.mapDerivedCategoryPlus.map (L.mapDerivedCategoryPlusFactorsh.hom.app N ≫
+        DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.counit.app K)) =
+      L'.mapDerivedCategoryPlus.map (G.mapDerivedCategoryPlusFactorsh.hom.app N) ≫
+        L'.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj N) ≫
+        DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app N) ≫
+        DerivedCategory.Plus.Qh.map
+          (G'.mapHomotopyCategoryPlus.map (adj.mapHomotopyCategoryPlus.counit.app K)) ≫
+        G'.mapDerivedCategoryPlusFactorsh.inv.app K := by
+    rw [← cancel_mono (G'.mapDerivedCategoryPlusFactorsh.hom.app K)]
+    simp only [Category.assoc, Iso.inv_hom_id_app, Functor.map_comp]
+    rw [h₉, reassoc_of% h₈]
+    erw [Category.comp_id]
+  rw [key]
+  simp only [Functor.map_comp]
+  simp only [Category.assoc]
+
+end Mates
 
 end CategoryTheory.Adjunction

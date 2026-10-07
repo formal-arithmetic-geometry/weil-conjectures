@@ -54,12 +54,11 @@ classical forms of the theorem at once:
 
 `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs` constructs a second
 transformation `AlgebraicGeometry.Etale.baseChange` of the same type as
-`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`. The two are not identified in this
-repository, and all of the available base change machinery — the pasting lemmas, the
-underived-to-derived bridge, and the finite case — is stated for
-`derivedBaseChangeMapPlus`, which is also the blueprint's `def:weil-pbc-derived-exchange`.
-The statements below therefore use `derivedBaseChangeMapPlus`. Identifying the two, or
-removing one of them, is left to a separate change.
+`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`. The two agree
+(`AlgebraicGeometry.Etale.baseChange_eq_derivedBaseChangeMapPlus`). The base change machinery —
+the pasting lemmas, the underived-to-derived bridge, and the finite case — is stated for
+`derivedBaseChangeMapPlus`, which is also the blueprint's `def:weil-pbc-derived-exchange`, and
+the statements below use it as well.
 
 ## Main statements
 
