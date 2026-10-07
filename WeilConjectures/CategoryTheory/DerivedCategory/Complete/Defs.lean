@@ -211,6 +211,19 @@ end Ideal
 
 section Aux
 
+/-- In a monoidal category, let `π` be a cone with point `𝟙_ D` over a diagram `F`, and let
+`K ≅ K'`. If the cone `K ⟶ K ⊗ F` obtained by tensoring `π` with `K` and moving its point to
+`K` along the inverse right unitor is a limit cone, then so is the corresponding cone for
+`K'`. -/
+noncomputable def CategoryTheory.Limits.IsLimit.extendTensorLeftOfIso {D : Type u'}
+    [Category.{v'} D] [MonoidalCategory D] {𝒥 : Type*} [Category 𝒥] {F : 𝒥 ⥤ D}
+    (π : (Functor.const 𝒥).obj (𝟙_ D) ⟶ F) {K K' : D} (e : K ≅ K')
+    (h : IsLimit (((tensorLeft K).mapCone ⟨𝟙_ D, π⟩).extend (ρ_ K).inv)) :
+    IsLimit (((tensorLeft K').mapCone ⟨𝟙_ D, π⟩).extend (ρ_ K').inv) :=
+  ((IsLimit.postcomposeHomEquiv
+    (Functor.isoWhiskerLeft F ((curriedTensor D).mapIso e)) _).symm h).ofIsoLimit
+      (Cone.ext e fun n ↦ by simp [whisker_exchange])
+
 variable (A : Type u') [Category.{v'} A] [Abelian A] [HasColimitsOfSize.{0, 0} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
   [HasDerivedCategory.{w} A]
@@ -334,6 +347,33 @@ lemma derivedComplete_iff_isIso_lift (K : DerivedCategory (Sheaf J (ModuleCat.{u
       IsIso (limit.lift (derivedCompletionDiagram J I K)
         (derivedCompletionCone J I K)) :=
   (limit.isLimit (derivedCompletionDiagram J I K)).nonempty_isLimit_iff_isIso_lift
+
+/-- An isomorphism `K ≅ K'` induces an isomorphism of the towers of reductions
+`K ⊗ᴸ R/Iⁿ ≅ K' ⊗ᴸ R/Iⁿ`. -/
+noncomputable def derivedCompletionDiagramIso
+    {K K' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))} (e : K ≅ K') :
+    derivedCompletionDiagram J I K ≅ derivedCompletionDiagram J I K' :=
+  Functor.isoWhiskerLeft (quotPowFunctor J I) ((curriedTensor _).mapIso e)
+
+/-- If `K ≅ K'` and `K` is the limit of its reductions `K ⊗ᴸ R/Iⁿ`, then so is `K'`.
+
+This is a definition, rather than a step inside the proof of
+`DerivedCategory.derivedComplete_of_iso`, so that the nested proofs in the monoidal structure
+it elaborates are abstracted as they are in `DerivedCategory.derivedCompletionCone`; inside a
+theorem they are not, and the kernel check does not terminate. -/
+noncomputable def isLimitDerivedCompletionConeOfIso
+    {K K' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))} (e : K ≅ K')
+    (h : IsLimit (derivedCompletionCone J I K)) : IsLimit (derivedCompletionCone J I K') :=
+  IsLimit.extendTensorLeftOfIso (quotPowCone J I).π e h
+
+/-- Derived completeness is invariant under isomorphism. -/
+lemma derivedComplete_of_iso {K K' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))}
+    (e : K ≅ K') (h : derivedComplete J I K) : derivedComplete J I K' :=
+  h.map (isLimitDerivedCompletionConeOfIso e)
+
+variable (J I) in
+instance : (derivedComplete J I).IsClosedUnderIsomorphisms where
+  of_iso e h := derivedComplete_of_iso e h
 
 end DerivedCategory
 
