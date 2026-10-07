@@ -30,11 +30,9 @@ the repository yet. Geometric constancy asks that the underlying étale sheaf be
 every connected open of the geometric fiber `Ū = U ⊗ k̄`. Being unramified at infinity asks
 that the sheaf extend to a lisse Weil sheaf on `U₀ ∪ {∞} ⊆ ℙ¹_{k₀}`.
 
-Both conditions are vacuous for now: every Weil sheaf of the current scaffold is zero (see
-`WeilConjectures.WeilSheaf.Defs`), so every Weil sheaf is geometrically constant, and a Weil
-sheaf on an open `U₀` of `𝔸¹` is unramified at infinity, with `G = 0`, as soon as the open
-`U₀ ∪ {∞}` of `ℙ¹` exists. A downstream result assuming either condition has no more content
-than the scaffold it is stated in.
+Both conditions are vacuous for the present provisional coefficients, for which every Weil sheaf
+is zero (see `WeilConjectures.WeilSheaf.Category`); they gain content once Weil sheaves are
+defined as in the blueprint.
 
 ## Main declarations
 

@@ -55,17 +55,11 @@ and both notions pull back along morphisms of `k₀`-schemes (`WeilSheaf.upperSt
 
 ## Implementation notes
 
-**These definitions are a scaffold, and the categories are degenerate.** The coefficients are
-discrete `ℚ̄_ℓ`-modules on the étale site, and `Scheme.IsConstructibleSheaf` asks for finite
-stalks, so every constructible sheaf of `ℚ̄_ℓ`-modules is zero. Hence every Weil sheaf and
-every Weil complex is zero, and statements quantified over them are vacuous. Discrete
-`ℚ̄_ℓ`-coefficients would be wrong even with finite-dimensional stalks: lisse sheaves would have
-finite monodromy. The blueprint (`sk-d-real-weil`) takes constructible pro-étale `E_X`-modules
-for a finite extension `E` of `ℚ_ℓ`, and it defines Weil complexes as a Verdier localization of
-complexes of Weil sheaves, which is triangulated; the category `WeilComplex` here is not (see
-its docstring). Both definitions are to be redone once pro-étale constructible `E_X`-modules
-exist. Only the interface, the names and the transport of Frobenius structures along
-`φ̄^*` are meant to survive.
+With the present discrete `ℚ̄_ℓ` coefficients both categories are zero:
+`Scheme.IsConstructibleSheaf` asks for finite stalks, and a finite `ℚ̄_ℓ`-vector space is zero.
+This is a known defect of the provisional definition, and no result here is proved from it.
+Discrete `ℚ̄_ℓ` coefficients would be wrong even with finite-dimensional stalks, since lisse
+sheaves would then have finite monodromy.
 
 The coefficient ring `ℚ̄_ℓ = PadicAlgCl l` lives in `Type`, while Mathlib's
 `IsGrothendieckAbelian.{v} (ModuleCat.{v} R)` needs `R : Type v`; hence the `ULift` in
@@ -74,6 +68,12 @@ The coefficient ring `ℚ̄_ℓ = PadicAlgCl l` lives in `Type`, while Mathlib's
 Weil complexes live in the unbounded derived category `D(X̄_ét)`, whose functor
 `Functor.mapDerivedCategory` is additive and commutes with the shifts. Their carriers are
 bounded, so they are objects of the bounded below derived category on the nose.
+
+## TODO
+
+- Replace `AlgebraicGeometry.WeilSheaf` and `AlgebraicGeometry.WeilComplex` by the categories
+  of the blueprint (`sk-d-real-weil`), in which Weil complexes form a triangulated category.
+- State the blueprint notion of a lisse sheaf, lisse of finite rank, for these categories.
 -/
 
 @[expose] public section
@@ -156,10 +156,8 @@ end Frobenius
 étale sheaves `F` of `ℚ̄_ℓ`-modules on the geometric fiber `X̄` with an isomorphism
 `Fr_X^* F ≅ F`, where `Fr_X` is the geometric Galois Frobenius of `X̄`.
 
-This is a scaffold and it is degenerate: a constructible sheaf has finite stalks, and a
-`ℚ̄_ℓ`-vector space with finitely many elements is zero, so every Weil sheaf is zero. The
-blueprint (`sk-d-real-weil`) takes constructible pro-étale `E_X`-modules instead, which are
-not formalised yet. -/
+This differs from the blueprint (`sk-d-real-weil`): its coefficients are discrete
+`ℚ̄_ℓ`-modules, so every Weil sheaf is zero (see the implementation notes). -/
 def WeilSheaf (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :
     Type (u + 2) :=
@@ -170,14 +168,12 @@ of étale sheaves of `ℚ̄_ℓ`-modules on the geometric fiber `X̄` with bound
 homology, with an isomorphism `Fr_X^* K ≅ K` in the derived category, where `Fr_X` is the
 geometric Galois Frobenius of `X̄`.
 
-This is a scaffold and it differs from the blueprint (`sk-d-real-weil`) in two ways. Its
-homology sheaves are constructible `ℚ̄_ℓ`-sheaves, hence zero, so every Weil complex is zero
-(see `AlgebraicGeometry.WeilSheaf`). And the blueprint defines Weil complexes as the Verdier
-localization of the homotopy category of complexes of Weil sheaves, while this category only
-records an isomorphism `Fr_X^* K ≅ K` in the derived category. Cones are not functorial in
-`D(X̄_ét)`, so this category is not triangulated, and its morphisms are not those of the
-blueprint category. Statements that need distinguished triangles of Weil complexes, such as
-`WeilComplex.derivedLowerShriek`, `fourierTransform` and the open–closed triangle,
+This differs from the blueprint (`sk-d-real-weil`): the blueprint defines Weil complexes as
+the Verdier localization of the homotopy category of complexes of Weil sheaves, while this
+category only records an isomorphism `Fr_X^* K ≅ K` in the derived category. Cones are not
+functorial in `D(X̄_ét)`, so this category is not triangulated, and its morphisms are not
+those of the blueprint category. Statements that need distinguished triangles of Weil complexes,
+such as `WeilComplex.derivedLowerShriek`, `fourierTransform` and the open–closed triangle,
 cannot be stated on it faithfully. -/
 def WeilComplex (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :
@@ -243,8 +239,7 @@ noncomputable def frobeniusPowIso (F : WeilSheaf k₀ l X) (m : ℕ) :
       (frobeniusPullback k₀ l X).mapIso (F.frobeniusPowIso m) ≪≫ F.obj.str
 
 /-- A Weil sheaf is *lisse* if its underlying étale sheaf is locally constant; it is then
-finite locally constant, being constructible. The blueprint notion, lisse of finite rank for
-`E_X`-modules, awaits pro-étale coefficients. -/
+finite locally constant, being constructible. -/
 def IsLisse (F : WeilSheaf k₀ l X) : Prop :=
   Scheme.IsLocallyConstantSheaf F.obj.carrier
 
@@ -287,6 +282,17 @@ geometric fiber `X̄` is an irreducible local system: for `X̄` connected, the g
 representation `π₁(X̄) → GL(F_η̄)` is irreducible. -/
 def IsGeometricallyIrreducible (F : WeilSheaf k₀ l X) : Prop :=
   Scheme.IsIrreducibleLocalSystem F.obj.carrier
+
+/-- A Weil sheaf is zero if and only if its underlying étale sheaf is: the forgetful functor is
+additive, and a morphism of Weil sheaves is determined by the underlying morphism of sheaves. -/
+theorem isZero_iff_isZero_carrier {F : WeilSheaf k₀ l X} : IsZero F ↔ IsZero F.obj.carrier := by
+  refine ⟨fun h ↦ ?_, fun h ↦ ?_⟩
+  · exact Functor.map_isZero ((WeilSheaf.objectProperty k₀ l X).ι ⋙ IsoAlgebra.forget _)
+      (X := (show (WeilSheaf.objectProperty k₀ l X).FullSubcategory from F)) h
+  · exact ⟨fun _ ↦ ⟨⟨0⟩, fun _ ↦ ObjectProperty.hom_ext _ <| ObjectProperty.hom_ext _ <|
+      Algebra.Hom.ext <| h.eq_of_src _ _⟩,
+    fun _ ↦ ⟨⟨0⟩, fun _ ↦ ObjectProperty.hom_ext _ <| ObjectProperty.hom_ext _ <|
+      Algebra.Hom.ext <| h.eq_of_tgt _ _⟩⟩
 
 end WeilSheaf
 

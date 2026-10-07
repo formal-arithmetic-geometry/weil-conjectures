@@ -26,9 +26,7 @@ curve sections on which each constituent becomes pure of a weight independent of
 mixedness then descends along finite constant extensions and is spliced back along the open–closed
 sequence.
 
-With the present scaffold every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf.isZero`), and
-`AlgebraicGeometry.WeilSheaf.IsReal.isMixed` is proved by the filtration of length zero. The
-geometric and group-theoretic inputs of the reduction are stated and proved separately:
+The geometric and group-theoretic inputs of the reduction are stated and proved separately:
 `AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback` (Bertini),
 `Representation.exists_forall_isIrreducible_baseChange_of_congr` (finite matrix witnesses) and
 `Representation.exists_filtration_isIrreducible_restrict` (geometric constituents), and curve
@@ -40,6 +38,12 @@ testing for geometric irreducibility below.
   blueprint `lem-zl-curve-testing-irreducibility`.
 - `AlgebraicGeometry.WeilSheaf.IsReal.isMixed`: blueprint `sk-i-dl-general-real` and
   `thm-zl-real-mixed-by-curves`.
+
+## TODO
+
+Prove `AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`
+and `AlgebraicGeometry.WeilSheaf.IsReal.isMixed`, stated with `sorry`, along the reduction above,
+once the category is redefined (`sk-d-real-weil`).
 
 ## References
 
@@ -65,12 +69,7 @@ affine scheme of dimension `d ≥ 1` over a finite field `k₀`, with geometric 
 and let `S` be a nonempty finite set of `k̄`-points of `X`. There is a closed immersion
 `i : C ⟶ X` of a smooth connected affine curve over `k̄` through `S`, defined over a finite
 extension of `k₀` (stable under a power of the geometric Galois Frobenius of `X`), on which
-every `𝒮ⱼ` remains geometrically irreducible.
-
-With the present scaffold every Weil sheaf is zero, so the restrictions of the `𝒮ⱼ` are never
-irreducible and only `r = 0` is not vacuous; the curve is then provided by
-`AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback` for `d ≥ 2`,
-and is `X` itself for `d = 1`. -/
+every `𝒮ⱼ` remains geometrically irreducible. -/
 theorem WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar {k₀ : Type u}
     [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X₀ : Scheme.{u}}
     [X₀.Over (Spec (CommRingCat.of k₀))] [IsAffine X₀] {d : ℕ} (hd : 1 ≤ d)
@@ -90,43 +89,16 @@ theorem WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar {k
         ((Etale.upperStar (WeilCoefficients.{u} l) i).obj (𝒮 j).obj.carrier)) ∧
       ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C,
         φ.hom ≫ i = i ≫ ((X₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom := by
-  -- the geometric restrictions are zero, so no `𝒮ⱼ` is irreducible
-  obtain rfl | hr := Nat.eq_zero_or_pos r
-  swap
-  · exact absurd (𝒮 ⟨0, hr⟩).isZero_carrier (h𝒮 ⟨0, hr⟩).2.1
-  have : ConnectedSpace (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-    pullback_of_geometrically GeometricallyConnected.geometrically_connectedSpace _ _
-  have : IsAffine (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-    isAffine_of_isAffineHom (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj
-  obtain rfl | hd := hd.eq_or_lt
-  · refine ⟨_, 𝟙 _, inferInstance, inferInstance, ?_, inferInstance,
-      fun s _ ↦ ⟨s, Category.comp_id s⟩, fun j ↦ j.elim0, 1, one_pos,
-      (X₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius, by
-        rw [pow_one, Category.comp_id, Category.id_comp]⟩
-    rw [Category.id_comp]
-    exact (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback
-      (IsPullback.of_hasPullback _ _) ‹_›
-  · obtain ⟨C, i, hi, hC, hsm, hconn, hCS, -, m, hm, φ, hφ⟩ :=
-      (X₀ ↘ Spec (CommRingCat.of k₀)).exists_isClosedImmersion_connectedSpace_pullback hd (𝟙 _)
-        S hS hS'
-    exact ⟨C, i, hi, hC, hsm, hconn, hCS, fun j ↦ j.elim0, m, hm, φ, hφ⟩
+  sorry
 
--- with the present scaffold every Weil sheaf is zero, and the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /-- Every constructible `ι`-real Weil sheaf on a separated finite-type `k₀`-scheme is `ι`-mixed
-(blueprint: `sk-i-dl-general-real`, `thm-zl-real-mixed-by-curves`).
-
-With the present scaffold every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf.isZero`), and
-the filtration of length zero exhibits `F` as mixed; the reduction of the blueprint to lisse
-sheaves on curves through `Representation.exists_filtration_isIrreducible_restrict` and
-`AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar` is
-not needed. -/
+(blueprint: `sk-i-dl-general-real`, `thm-zl-real-mixed-by-curves`). -/
 theorem WeilSheaf.IsReal.isMixed {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] {ι : PadicAlgCl l →+* ℂ} {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X} (hF : F.IsReal ι) :
     F.IsMixed ι :=
-  (WeilSheaf.isMixedOfWeightsAtMost_of_isZero F.isZero 0).isMixed
+  sorry
 
 end AlgebraicGeometry
