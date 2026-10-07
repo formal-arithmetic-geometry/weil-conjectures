@@ -33,6 +33,9 @@ and it is the latter that one wants when transporting the coherence of a pseudof
   `CategoryTheory.Adjunction.liftAlgebraStr : G (R (L K)) ⟶ R (L K)` along a lift of `G`.
 - `CategoryTheory.mateEquiv_whiskerBottom`: the mate of a 2-square whiskered at the bottom is
   the mate whiskered on the left.
+- `CategoryTheory.Adjunction.whiskerRight_comp_conjugateIsoEquiv_hom`: for an adjoint triple
+  `L ⊣ M ⊣ R`, the comparison `L ⟶ R` commutes with the exchange isomorphisms obtained by
+  conjugating an isomorphism `ED ⋙ M ≅ M ⋙ EC` for self-equivalences `EC` and `ED`.
 -/
 
 @[expose] public section
@@ -161,5 +164,90 @@ lemma mateEquiv_whiskerBottom {G : A ⥤ C} {H H' : B ⥤ D} {L₁ : A ⥤ B} {R
     mateEquiv adj₁ adj₂ (w.whiskerBottom β) = (mateEquiv adj₁ adj₂ w).whiskerLeft β := by
   ext X
   simp [mateEquiv, TwoSquare.whiskerBottom, TwoSquare.whiskerLeft, ← Functor.map_comp]
+
+section Triple
+
+open _root_.CategoryTheory.Functor
+
+variable {C D : Type*} [Category* C] [Category* D] {L R : C ⥤ D} {M : D ⥤ C}
+  (adj₁ : L ⊣ M) (adj₂ : M ⊣ R) [IsIso adj₂.counit] (EC : C ≌ C) (ED : D ≌ D)
+  (e : ED.functor ⋙ M ≅ M ⋙ EC.functor) (can : L ⟶ R)
+  (hcan : ∀ F, adj₁.unit.app F ≫ M.map (can.app F) = inv (adj₂.counit.app F))
+
+namespace Adjunction
+
+include hcan in
+/-- **The comparison `L ⟶ R` of an adjoint triple commutes with conjugate exchange
+isomorphisms.** Let `L ⊣ M ⊣ R` be an adjoint triple between `C` and `D` whose second counit is
+invertible, let `can : L ⟶ R` be the comparison characterised by
+`η_F ≫ M (can_F) = ε_F⁻¹`, and let `EC`, `ED` be self-equivalences of `C` and `D` together with
+an isomorphism `e : ED ⋙ M ≅ M ⋙ EC`. Conjugating `e` gives the exchange isomorphisms
+`e_* : R ⋙ ED⁻¹ ≅ EC⁻¹ ⋙ R` (along `M ⊣ R`) and `e_! : L ⋙ ED⁻¹ ≅ EC⁻¹ ⋙ L` (along `L ⊣ M`), and
+the square
+```
+              can ED⁻¹
+  L ⋙ ED⁻¹ ──────────▶ R ⋙ ED⁻¹
+     │                    │
+ e_! │                    │ e_*
+     ▼                    ▼
+  EC⁻¹ ⋙ L ─────────▶ EC⁻¹ ⋙ R
+              EC⁻¹ can
+```
+commutes. Both composites are determined by their transposes under `M ⊣ R` and
+`L ⋙ ED⁻¹ ⊣ ED ⋙ M`, which agree by the conjugation identities for `e_!` and `e_*`. -/
+lemma whiskerRight_comp_conjugateIsoEquiv_hom :
+    whiskerRight can ED.inverse ≫
+        (conjugateIsoEquiv (ED.toAdjunction.comp adj₂) (adj₂.comp EC.toAdjunction) e.symm).hom =
+      ((conjugateIsoEquiv (EC.symm.toAdjunction.comp adj₁)
+        (adj₁.comp ED.symm.toAdjunction)).symm e.symm).hom ≫ whiskerLeft EC.inverse can := by
+  set s := (conjugateIsoEquiv (ED.toAdjunction.comp adj₂) (adj₂.comp EC.toAdjunction) e.symm).hom
+  set t := ((conjugateIsoEquiv (EC.symm.toAdjunction.comp adj₁)
+        (adj₁.comp ED.symm.toAdjunction)).symm e.symm).hom
+  have ht : conjugateEquiv (EC.symm.toAdjunction.comp adj₁) (adj₁.comp ED.symm.toAdjunction) t =
+      e.inv := by
+    simp [t]
+  have hs : ∀ F, EC.functor.map (M.map (s.app F)) ≫
+      EC.functor.map (adj₂.counit.app (EC.inverse.obj F)) ≫ EC.counit.app F =
+        e.inv.app (ED.inverse.obj (R.obj F)) ≫ M.map (ED.counit.app (R.obj F)) ≫
+          adj₂.counit.app F := by
+    intro F
+    have := conjugateEquiv_counit (ED.toAdjunction.comp adj₂) (adj₂.comp EC.toAdjunction)
+      e.inv F
+    simpa [s, conjugateIsoEquiv] using this
+  ext F
+  apply ((adj₁.comp ED.symm.toAdjunction).homEquiv _ _).injective
+  have hu := unit_conjugateEquiv (EC.symm.toAdjunction.comp adj₁)
+    (adj₁.comp ED.symm.toAdjunction) t F
+  rw [ht] at hu
+  simp only [homEquiv_unit, NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
+    Functor.map_comp]
+  simp only [Equivalence.symm_inverse, comp_obj, Equivalence.symm_functor, comp_unit_app,
+    Equivalence.toAdjunction_unit, Equivalence.symm_unit, Functor.comp_map,
+    Equivalence.fun_inv_map, id_obj, map_comp, Category.assoc] at hu ⊢
+  have key : inv (adj₂.counit.app F) ≫ M.map (ED.counitInv.app (R.obj F)) ≫
+      M.map (ED.functor.map (s.app F)) = EC.counitInv.app F ≫
+        EC.functor.map (inv (adj₂.counit.app (EC.inverse.obj F))) ≫
+          e.inv.app (R.obj (EC.inverse.obj F)) := by
+    rw [← cancel_epi (e.inv.app (ED.inverse.obj (R.obj F)) ≫ M.map (ED.counit.app (R.obj F)) ≫
+      adj₂.counit.app F)]
+    have hn := e.inv.naturality (s.app F)
+    simp only [Functor.comp_map] at hn
+    have hc : ED.counit.app (R.obj F) ≫ ED.counitInv.app (R.obj F) = 𝟙 _ :=
+      ED.counitIso.hom_inv_id_app _
+    have hc' : EC.counit.app F ≫ EC.counitInv.app F = 𝟙 _ := EC.counitIso.hom_inv_id_app _
+    simp only [Category.assoc, IsIso.hom_inv_id_assoc, ← M.map_comp_assoc]
+    simp only [hc]
+    rw [← reassoc_of% (hs F), reassoc_of% hc']
+    simpa [← EC.functor.map_comp_assoc] using hn.symm
+  have h₁ : M.map (ED.counitInv.app (L.obj F)) ≫ M.map (ED.counit.app (L.obj F)) = 𝟙 _ := by
+    rw [← M.map_comp]; simp
+  have hn := e.inv.naturality (can.app (EC.inverse.obj F))
+  simp only [Functor.comp_map] at hn
+  rw [reassoc_of% h₁, reassoc_of% (hcan F), key, ← reassoc_of% hu, ← hn,
+    ← EC.functor.map_comp_assoc, hcan]
+
+end Adjunction
+
+end Triple
 
 end CategoryTheory
