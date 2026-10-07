@@ -57,10 +57,6 @@ abbrev unitsSheaf.toUnits {U : X.Opensᵒᵖ} (g : X.unitsSheaf.obj.obj U) : Γ(
 abbrev unitsSheaf.ofUnits {U : X.Opensᵒᵖ} (g : Γ(X, U.unop)ˣ) : X.unitsSheaf.obj.obj U :=
   Additive.ofMul g
 
-lemma unitsSheaf.val_toUnits_map {U V : X.Opensᵒᵖ} (f : U ⟶ V) (g : X.unitsSheaf.obj.obj U) :
-    (toUnits (X.unitsSheaf.obj.map f g) : Γ(X, V.unop)) = X.presheaf.map f (toUnits g) :=
-  rfl
-
 /-- The structure sheaf of `X`, as a sheaf of types. -/
 lemma isSheaf_presheaf_comp_forget :
     Presieve.IsSheaf (Opens.grothendieckTopology X)
@@ -95,7 +91,7 @@ lemma map_map_apply {U V W : X.Opens} (i : V ⟶ U) (j : W ⟶ V) (s : Γ(M, U))
 lemma map_id_apply {U : X.Opens} (s : Γ(M, U)) : M.presheaf.map (𝟙 U).op s = s := by
   simp
 
-lemma _root_.AlgebraicGeometry.Scheme.map_map_apply' {U V W : X.Opens} (i : V ⟶ U)
+lemma _root_.AlgebraicGeometry.Scheme.presheaf_map_map_apply {U V W : X.Opens} (i : V ⟶ U)
     (j : W ⟶ V) (a : Γ(X, U)) :
     X.presheaf.map j.op (X.presheaf.map i.op a) = X.presheaf.map (j ≫ i).op a := by
   rw [op_comp, Functor.map_comp]
@@ -204,8 +200,8 @@ lemma isGenerator_of_iso {Y : X.Opens}
       (show Γ(M, Y) from e.inv.val.app (op (Over.mk (𝟙 Y))) (1 : Γ(X, Y))) := by
   intro W i
   let E := sectionsLinearEquivOfOverIsoUnit e (leOfHom i)
-  have key : M.presheaf.map i.op (show Γ(M, Y) from e.inv.val.app (op (Over.mk (𝟙 Y))) (1 : Γ(X, Y))) =
-      E.symm 1 := by
+  have key : M.presheaf.map i.op
+      (show Γ(M, Y) from e.inv.val.app (op (Over.mk (𝟙 Y))) (1 : Γ(X, Y))) = E.symm 1 := by
     have := PresheafOfModules.naturality_apply e.inv.val
       (Over.homMk i : Over.mk (homOfLE (leOfHom i)) ⟶ Over.mk (𝟙 Y)).op (1 : Γ(X, Y))
     refine this.symm.trans (congr_arg _ ?_)
@@ -355,7 +351,7 @@ instance (U : X.Opens) : SMul Γ(X, U) (unitsTorsorSections T U) where
   smul a f := ⟨fun V i t ↦ X.presheaf.map i.op a * f.1 V i t,
     fun V W i j t ↦ by
       dsimp only
-      rw [unitsTorsorSections.map_apply f, map_mul, map_map_apply'],
+      rw [unitsTorsorSections.map_apply f, map_mul, presheaf_map_map_apply],
     fun V i g t ↦ by
       dsimp only
       rw [unitsTorsorSections.vadd_apply f, mul_left_comm]⟩
@@ -415,7 +411,7 @@ lemma unitsTorsorPresheaf_map_smul {U U' : X.Opensᵒᵖ} (i : U ⟶ U')
       X.ringCatSheaf.obj.map i a • (unitsTorsorPresheaf T).map i f := by
   refine unitsTorsorSections.ext fun V j t ↦ ?_
   change X.presheaf.map (j ≫ i.unop).op a * _ = X.presheaf.map j.op (X.presheaf.map i a) * _
-  rw [← map_map_apply' i.unop j]
+  rw [← presheaf_map_map_apply i.unop j]
   rfl
 
 /-- Two sections of the structure sheaf over `W` agree if they agree on a covering sieve. -/
@@ -456,7 +452,7 @@ lemma isSheaf_unitsTorsorPresheaf :
     refine ⟨fun V W i j t ↦ ?_, fun V i g t ↦ ?_⟩
     · refine ext_of_mem ((Opens.grothendieckTopology X).pullback_stable (j ≫ i) hS)
         fun Z l hl ↦ ?_
-      rw [hF W (j ≫ i) _ l hl, map_map_apply', hF V i t (l ≫ j) (by simpa using hl),
+      rw [hF W (j ≫ i) _ l hl, presheaf_map_map_apply, hF V i t (l ≫ j) (by simpa using hl),
         torsor_map_map]
       rfl
     · refine ext_of_mem ((Opens.grothendieckTopology X).pullback_stable i hS)
