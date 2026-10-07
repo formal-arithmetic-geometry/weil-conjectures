@@ -6,11 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-<<<<<<< HEAD
 public import Mathlib.RingTheory.Unramified.LocalRing
-=======
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
->>>>>>> origin/slopmaster2
 
 /-!
 # The locus where two morphisms into an unramified scheme agree
