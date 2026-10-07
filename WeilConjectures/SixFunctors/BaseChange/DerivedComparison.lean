@@ -36,7 +36,9 @@ and the computations available for `derivedBaseChangeMapPlus` apply to `baseChan
 proof identifies the derived adjunction used by `baseChange` with `Adjunction.derivedPlus`
 (`Adjunction.derivedAdjunctionPlus_eq_derivedPlus`), computes `θ_sq` on complexes
 (`AlgebraicGeometry.Etale.pullbackSquareComparison_hom_app_factorsh`) and applies the
-general computation of derived mates `Adjunction.derivedPlus_mateEquiv_app_fac`.
+general computation of derived mates `Adjunction.derivedPlus_mateEquiv_app_fac`. In particular
+`AlgebraicGeometry.Etale.baseChange` commutes with the shifts
+(`AlgebraicGeometry.Etale.commShift_baseChange`).
 
 This is the identification of the base-change map of blueprint `sbc-def-base-change-map` with
 the derived exchange morphism of the proper base change chapter.
@@ -173,6 +175,15 @@ theorem Etale.baseChange_eq_derivedBaseChangeMapPlus (sq : CommSq g' f' f g) :
     (TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq).hom)
     (TwoSquare.mk _ _ _ _ (Etale.pullbackSquareComparison A sq).hom)
     (Etale.pullbackSquareComparison_hom_app_factorsh A sq) K
+
+omit [HasSmallSiteSheafify A] in
+/-- The derived base-change morphism `AlgebraicGeometry.Etale.baseChange` commutes with the
+shifts: it is `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`
+(`AlgebraicGeometry.Etale.commShift_derivedBaseChangeMapPlus`). -/
+instance Etale.commShift_baseChange (sq : CommSq g' f' f g) :
+    NatTrans.CommShift (Etale.baseChange A sq) ℤ := by
+  rw [Etale.baseChange_eq_derivedBaseChangeMapPlus]
+  infer_instance
 
 end
 
