@@ -64,8 +64,9 @@ theorem nonempty_pic_equiv_quotient_torsor_gmSheaf :
 site of `X`, and with the isomorphism classes of `𝒪_Xˣ`-torsors on the Zariski site. The
 canonical bijections send `L` to the torsor `Isom(𝒪, L)`.
 
-Only the existence of the bijections is recorded. The Zariski part is
-`AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_unitsSheaf`, the étale part
+Only the existence of the bijections is recorded here. The Zariski part is
+`AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_unitsSheaf`, which comes from the
+canonical bijection `AlgebraicGeometry.Scheme.picEquivQuotientTorsorUnitsSheaf`; the étale part
 `AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_gmSheaf`.
 (blueprint: `lem-sc-line-bundle-torsor`) -/
 theorem nonempty_equiv_quotient_torsor :

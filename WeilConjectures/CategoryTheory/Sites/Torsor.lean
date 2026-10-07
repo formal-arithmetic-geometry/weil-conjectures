@@ -400,6 +400,12 @@ section Sub
 
 variable (P : Torsor G)
 
+/-- Restricting a section of a torsor twice is restricting it along the composite. -/
+lemma map_map_apply {U V W : C} (f : V ⟶ U) (g : W ⟶ V) (t : P.sheaf.obj.obj (op U)) :
+    P.sheaf.obj.map g.op (P.sheaf.obj.map f.op t) = P.sheaf.obj.map (g ≫ f).op t := by
+  rw [op_comp, Functor.map_comp]
+  rfl
+
 /-- The difference of two sections of a torsor: the unique section `a` of `G` with
 `a +ᵥ x = y`. -/
 noncomputable def sub {U : Cᵒᵖ} (x y : P.sheaf.obj.obj U) : G.obj.obj U :=
