@@ -7,7 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.Matrix.Defs
 public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
-public import WeilConjectures.CategoryTheory.RingObjects.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Conv
 
 /-!
 
