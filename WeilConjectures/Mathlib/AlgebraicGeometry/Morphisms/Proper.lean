@@ -7,12 +7,19 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.RingTheory.Artinian.Algebra
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Limits
 
 /-!
 # Finite products of proper schemes, and dense proper open subschemes
+
+## Images of proper morphisms
+
+The scheme-theoretic image of a proper morphism into a separated scheme of finite type is
+proper (`AlgebraicGeometry.isProper_imageι_comp`), and a proper affine scheme over a field is
+finite and of dimension zero (`AlgebraicGeometry.isFinite_of_isProper_of_isAffine`).
 
 ## Finite products
 
@@ -60,6 +67,40 @@ theorem IsClosedImmersion.of_comp_of_isSeparated {X Y Z : Scheme.{u}} (f : X ⟶
     [IsImmersion f] [UniversallyClosed (f ≫ g)] [IsSeparated g] : IsClosedImmersion f :=
   have : UniversallyClosed f := UniversallyClosed.of_comp_of_isSeparated f g
   .of_isPreimmersion f f.isClosedMap.isClosed_range
+
+/-- **The scheme-theoretic image of a proper morphism is proper.** Let `g : Y ⟶ S` be separated
+and locally of finite type and let `f : X ⟶ Y` be such that `f ≫ g` is proper. Then the
+scheme-theoretic image `f.image` of `f` is proper over `S`, and `f.toImage : X ⟶ f.image` is
+proper and surjective. Universal closedness of `f.image ⟶ S` follows from that of `f ≫ g`,
+since `f.toImage` is surjective. (blueprint: `pqf-lem-image-proper`) -/
+theorem isProper_imageι_comp {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S) [IsProper (f ≫ g)]
+    [IsSeparated g] [LocallyOfFiniteType g] :
+    IsProper (f.imageι ≫ g) ∧ IsProper f.toImage ∧ Surjective f.toImage := by
+  have : IsProper f := .of_comp f g
+  have : IsProper (f.toImage ≫ f.imageι) := by rw [f.toImage_imageι]; infer_instance
+  have : IsProper f.toImage := .of_comp f.toImage f.imageι
+  have : UniversallyClosed (f.toImage ≫ f.imageι ≫ g) := by
+    rw [← Category.assoc, f.toImage_imageι]; infer_instance
+  have : UniversallyClosed (f.imageι ≫ g) := .of_comp_surjective f.toImage (f.imageι ≫ g)
+  exact ⟨{ }, inferInstance, inferInstance⟩
+
+/-- **Proper affine schemes over a field are finite.** If `X` is affine and proper over a field
+`K`, then `X` is finite over `K`, so `Γ(X, 𝒪_X)` is an artinian ring and `X` has dimension
+zero. (blueprint: `lem-sc-proper-affine-finite`) -/
+theorem isFinite_of_isProper_of_isAffine {X : Scheme.{u}} {K : Type u} [Field K]
+    (f : X ⟶ Spec (.of K)) [IsProper f] [IsAffine X] :
+    IsFinite f ∧ topologicalKrullDim X ≤ 0 := by
+  have : IsFinite f := IsFinite.iff_isProper_and_isAffineHom.mpr ⟨inferInstance, inferInstance⟩
+  refine ⟨this, ?_⟩
+  let φ : CommRingCat.of K ⟶ Γ(X, ⊤) := (Scheme.ΓSpecIso (.of K)).inv ≫ f.appTop
+  have : φ.hom.Finite :=
+    f.finite_appTop.comp (RingHom.Finite.of_surjective _
+      (Scheme.ΓSpecIso (.of K)).commRingCatIsoToRingEquiv.symm.surjective)
+  algebraize [φ.hom]
+  have : IsArtinianRing Γ(X, ⊤) := IsArtinianRing.of_finite K Γ(X, ⊤)
+  rw [← IsHomeomorph.topologicalKrullDim_eq _ (Scheme.homeoOfIso X.isoSpec).symm.isHomeomorph]
+  exact (PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim (R := Γ(X, ⊤))).le.trans
+    (Ring.krullDimLE_iff.mp inferInstance)
 
 variable {Z T : Scheme.{u}}
 
