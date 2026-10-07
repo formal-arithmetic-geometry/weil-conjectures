@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Comparison
 
 /-!
@@ -25,6 +26,8 @@ functor of `WeilConjectures.SixFunctors.ProEtale.Comparison.Defs`.
   `Dᵇc(X_ét, A)` under `D(ν^*)`.
 - `AlgebraicGeometry.ProEtale.DerivedCategoryBoundedConstructible`: the full subcategory
   `Dᵇc_proét(X, A)` of `D(X_proét)` cut out by this property.
+- `AlgebraicGeometry.ProEtale.DerivedCategoryConstructibleIn`: the full subcategory
+  `D_c^[a, b](X, A)` of bounded constructible complexes with homology concentrated in `[a, b]`.
 
 ## Main results
 
@@ -142,6 +145,48 @@ noncomputable def DerivedCategoryBoundedConstructible.ι :
 
 @[inherit_doc DerivedCategoryBoundedConstructible]
 scoped notation "Dᵇc_proét(" X ", " A ")" => ProEtale.DerivedCategoryBoundedConstructible A X
+
+/-- Blueprint `sk-def-sf-categories`: the inclusion of the small category `Dᵇc_proét(X, A)` into
+the ambient bounded derived category `Dᵇ(X_proét, A)`. -/
+noncomputable def DerivedCategoryBoundedConstructible.toBounded :
+    DerivedCategoryBoundedConstructible A X ⥤
+      _root_.DerivedCategory.Bounded (Sheaf (Scheme.ProEt.topology X) A) :=
+  ObjectProperty.ιOfLE fun _ hK ↦ DerivedCategory.boundedConstructible.bounded hK
+
+/-- Membership in `D_c^[a, b](X, A)` as an object property of `D(X_proét)`: bounded
+constructible with homology concentrated in `[a, b]` (blueprint
+`def-weil-constructible-intervals`). -/
+noncomputable def DerivedCategory.constructibleIn (a b : ℤ) :
+    ObjectProperty (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
+  DerivedCategory.boundedConstructible A X ⊓ _root_.DerivedCategory.homologyConcentratedIn a b
+
+lemma DerivedCategory.constructibleIn_iff (a b : ℤ)
+    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
+    DerivedCategory.constructibleIn A X a b K ↔
+      DerivedCategory.boundedConstructible A X K ∧
+        _root_.DerivedCategory.homologyConcentratedIn a b K :=
+  Iff.rfl
+
+/-- Blueprint `sk-def-sf-categories`: Ambient categories and small subcategories.
+
+The small category `D_c^[a, b](X, A)` of bounded constructible complexes of pro-étale sheaves
+with homology concentrated in `[a, b]`, as a full subcategory of `D(X_proét)`. -/
+noncomputable def DerivedCategoryConstructibleIn (a b : ℤ) : Type _ :=
+  (DerivedCategory.constructibleIn A X a b).FullSubcategory
+
+noncomputable instance (a b : ℤ) : Category (DerivedCategoryConstructibleIn A X a b) :=
+  inferInstanceAs <| Category (DerivedCategory.constructibleIn A X a b).FullSubcategory
+
+/-- The inclusion of `D_c^[a, b](X, A)` into the derived category of pro-étale sheaves. -/
+noncomputable def DerivedCategoryConstructibleIn.ι (a b : ℤ) :
+    DerivedCategoryConstructibleIn A X a b ⥤
+      _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
+  (DerivedCategory.constructibleIn A X a b).ι
+
+/-- The inclusion `D_c^[a, b](X, A) ⊆ Dᵇc_proét(X, A)`. -/
+noncomputable def DerivedCategoryConstructibleIn.toBoundedConstructible (a b : ℤ) :
+    DerivedCategoryConstructibleIn A X a b ⥤ DerivedCategoryBoundedConstructible A X :=
+  ObjectProperty.ιOfLE inf_le_left
 
 end ProEtale
 

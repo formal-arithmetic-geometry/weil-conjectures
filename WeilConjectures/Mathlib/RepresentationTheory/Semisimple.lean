@@ -34,6 +34,9 @@ of simple submodules is semisimple. No finiteness of `G ⧸ N` is used.
   trivial constituent in an irreducible representation acts trivially.
 * `Representation.isSemisimpleRepresentation_of_isInternal`: an internal direct sum of irreducible
   subrepresentations is semisimple.
+* `Representation.isSemisimpleRepresentation_iff_exists_iSupIndep`: a finite-dimensional
+  representation is semisimple if and only if it is a direct sum of irreducible
+  subrepresentations.
 
 ## Blueprint
 
@@ -42,6 +45,7 @@ of simple submodules is semisimple. No finiteness of `G ⧸ N` is used.
 finite-index hypothesis is not needed).
 `Representation.IsIrreducible.eq_one_of_isConstituent_trivial` is the case `a = 0` of
 `lem-a1-unramified-nonexceptional`.
+`Representation.isSemisimpleRepresentation_iff_exists_iSupIndep` is `def-wf-semisimple-module`.
 -/
 
 @[expose] public section
@@ -185,5 +189,32 @@ theorem isSemisimpleRepresentation_of_isInternal {G : Type*} [Monoid G]
     | mem j y hy => exact Submodule.mem_iSup_of_mem (p := fun j ↦ (Vs j).asSubmodule) j hy
     | zero => exact zero_mem _
     | add y z _ _ hy hz => exact add_mem hy hz
+
+end Representation
+
+namespace Representation
+
+variable {k G V : Type*} [Field k] [Monoid G] [AddCommGroup V] [Module k V]
+
+/-- A finite-dimensional representation is semisimple if and only if it is a direct sum of
+irreducible subrepresentations: there is a set of irreducible subrepresentations whose underlying
+subspaces are independent and span `V`. (blueprint: `def-wf-semisimple-module`) -/
+theorem isSemisimpleRepresentation_iff_exists_iSupIndep [FiniteDimensional k V]
+    {ρ : Representation k G V} :
+    IsSemisimpleRepresentation ρ ↔ ∃ s : Set (Subrepresentation ρ),
+      (∀ U ∈ s, U.toRepresentation.IsIrreducible) ∧
+        iSupIndep (fun U : s ↦ U.1.toSubmodule) ∧ ⨆ U : s, U.1.toSubmodule = ⊤ := by
+  constructor
+  · intro
+    obtain ⟨s, hind, htop, hat⟩ := exists_sSupIndep_of_sSup_atoms_eq_top
+      (sSup_atoms_eq_top (α := Subrepresentation ρ))
+    refine ⟨s, fun U hU ↦ Subrepresentation.isIrreducible_toRepresentation_iff_isAtom.2 (hat hU),
+      Subrepresentation.iSupIndep_toSubmodule_iff.2 ((sSupIndep_iff s).1 hind), ?_⟩
+    rw [← Subrepresentation.toSubmodule_iSup, ← sSup_eq_iSup', htop]
+    rfl
+  · rintro ⟨s, hirr, hind, htop⟩
+    classical
+    exact isSemisimpleRepresentation_of_isInternal (fun U : s ↦ U.1) (fun U ↦ hirr U.1 U.2)
+      (DirectSum.isInternal_submodule_of_iSupIndep_of_iSup_eq_top hind htop)
 
 end Representation

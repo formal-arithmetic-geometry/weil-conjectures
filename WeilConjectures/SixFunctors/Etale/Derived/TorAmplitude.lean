@@ -43,10 +43,11 @@ canonical t-structure so that the t-structure API applies to it, and
 `DerivedCategory.torAmplitudeIn` of `WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude`,
 for the derived tensor product. The definitions below specialise them to `D(X_ét)`.
 
-The blueprint's second small category `D_c^[a, b](X, A)` is not realised as a category: the
-statements that speak about it — those of
-`WeilConjectures.SixFunctors.Etale.Derived.Stability` — always pair it with a Tor amplitude
-bound, and use the object property
+The blueprint's second small category `D_c^[a, b](X, A)` is
+`AlgebraicGeometry.Etale.DerivedCategoryConstructibleIn` of
+`WeilConjectures.CategoryTheory.DerivedCategory.Constructible`. The statements that speak about
+it — those of `WeilConjectures.SixFunctors.Etale.Derived.Stability` — always pair it with a Tor
+amplitude bound, and use the object property
 `AlgebraicGeometry.Etale.DerivedCategory.constructibleTorAmplitudeIn`.
 
 -/
@@ -128,6 +129,13 @@ lemma DerivedCategory.constructibleTorAmplitudeIn_iff (a b : ℤ)
         Etale.DerivedCategory.torAmplitudeIn A X a b K :=
   Iff.rfl
 
+/-- `D_c^[a, b](X, A)` with Tor amplitude in `[a, b]` is the intersection of
+`Etale.DerivedCategory.constructibleIn` and `Etale.DerivedCategory.torAmplitudeIn`. -/
+lemma DerivedCategory.constructibleTorAmplitudeIn_eq (a b : ℤ) :
+    DerivedCategory.constructibleTorAmplitudeIn A X a b =
+      DerivedCategory.constructibleIn A X a b ⊓ DerivedCategory.torAmplitudeIn A X a b :=
+  rfl
+
 variable {A X}
 
 /-- An object of `D(X_ét)` lies in `Dctf(X, A)` exactly when, for some interval `[a, b]`, it
@@ -157,6 +165,11 @@ noncomputable instance : Category (DerivedCategoryFiniteTor A X) :=
 noncomputable def DerivedCategoryFiniteTor.ι :
     DerivedCategoryFiniteTor A X ⥤ _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
   (DerivedCategory.constructibleFiniteTor A X).ι
+
+/-- The inclusion `Dctf(X, A) ⊆ Dᵇc(X, A)` of blueprint `sk-def-sf-categories`. -/
+noncomputable def DerivedCategoryFiniteTor.toBoundedConstructible :
+    DerivedCategoryFiniteTor A X ⥤ DerivedCategoryBoundedConstructible A X :=
+  ObjectProperty.ιOfLE inf_le_left
 
 @[inherit_doc DerivedCategoryFiniteTor]
 scoped notation "Dctf(" X ", " A ")" => Etale.DerivedCategoryFiniteTor A X

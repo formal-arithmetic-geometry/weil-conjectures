@@ -70,6 +70,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Closed
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Image
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Representation
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Image
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
@@ -292,6 +293,7 @@ public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantReduction
+public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.ConstructibleSheaf.Presentation
 public import WeilConjectures.ConstructibleSheaf.Pullback
