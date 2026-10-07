@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 
 /-!
@@ -20,6 +21,8 @@ tensor inverse.
 
 - `CategoryTheory.IsDualizable`: `X` admits a right dual.
 - `CategoryTheory.IsInvertible`: `X` admits a tensor inverse.
+- `CategoryTheory.MonoidalClosed.ihomIsoTensorLeft`: for an exact pairing of `Y` and `X`, the
+  internal hom `ihom X` is `Y ⊗ -`.
 
 -/
 
@@ -58,5 +61,26 @@ def IsInvertible (X : C) : Prop :=
 
 theorem isInvertible_unit : IsInvertible (𝟙_ C) :=
   ⟨𝟙_ C, ⟨λ_ _⟩⟩
+
+namespace MonoidalClosed
+
+variable [MonoidalClosed C]
+
+/-- If `Y` is a left dual of `X`, that is, `Y` and `X` form an exact pairing, then the internal
+hom `ihom X` of a monoidal closed category is tensoring on the left with `Y`: both are right
+adjoint to `X ⊗ -`. -/
+noncomputable def ihomIsoTensorLeft (Y X : C) [ExactPairing Y X] : ihom X ≅ tensorLeft Y :=
+  (ihom.adjunction X).rightAdjointUniq (tensorLeftAdjunction Y X)
+
+/-- If `Y` is a left dual of `X`, then `(ihom X).obj Z ≅ Y ⊗ Z`. -/
+noncomputable def ihomObjIsoTensor (Y X : C) [ExactPairing Y X] (Z : C) :
+    (ihom X).obj Z ≅ Y ⊗ Z :=
+  (ihomIsoTensorLeft Y X).app Z
+
+/-- If `Y` is a left dual of `X`, then the internal dual `(ihom X).obj (𝟙_ C)` is `Y`. -/
+noncomputable def ihomObjUnitIso (Y X : C) [ExactPairing Y X] : (ihom X).obj (𝟙_ C) ≅ Y :=
+  ihomObjIsoTensor Y X (𝟙_ C) ≪≫ ρ_ Y
+
+end MonoidalClosed
 
 end CategoryTheory
