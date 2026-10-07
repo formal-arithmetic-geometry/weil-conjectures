@@ -29,7 +29,13 @@ and `End (𝟙_ C) = R`.
 - `CategoryTheory.MonoidalCategory.ihomUnitIsoRightDual`: in a braided monoidal closed
   category, the internal dual `ihom X (𝟙_ C)` of an object with a right dual `Xᘁ` is `Xᘁ`.
 
+- `CategoryTheory.MonoidalClosed.toIhomIhomUnit`: the canonical biduality map
+  `X ⟶ [[X, 𝟙_ C], 𝟙_ C]` of a braided monoidal closed category.
+
 ## Main statements
+
+- `CategoryTheory.MonoidalClosed.isIso_toIhomIhomUnit`: the biduality map of an object with a
+  right dual is an isomorphism.
 
 - `CategoryTheory.IsDualizable.ihom_unit`: in a braided monoidal closed category, the internal
   dual of a dualizable object is dualizable.
@@ -86,5 +92,38 @@ theorem IsDualizable.ihom_unit {X : C} (hX : IsDualizable X) :
   let := BraidedCategory.exactPairing_swap X Xᘁ
   let := exactPairingCongrLeft (Y := X) (ihomUnitIsoRightDual X)
   exact ⟨⟨X⟩⟩
+
+namespace MonoidalClosed
+
+/-- The canonical biduality map `X ⟶ [[X, 𝟙_ C], 𝟙_ C]` of a braided monoidal closed category:
+the transpose of
+```
+                       β_                         ev
+  [X, 𝟙_ C] ⊗ X ──────────→ X ⊗ [X, 𝟙_ C] ──────────→ 𝟙_ C.
+```
+-/
+noncomputable def toIhomIhomUnit (X : C) : X ⟶ (ihom ((ihom X).obj (𝟙_ C))).obj (𝟙_ C) :=
+  curry ((β_ _ X).hom ≫ (ihom.ev X).app (𝟙_ C))
+
+/-- In a braided monoidal closed category, the canonical biduality map
+`X ⟶ [[X, 𝟙_ C], 𝟙_ C]` of an object with a right dual is an isomorphism. -/
+theorem isIso_toIhomIhomUnit (X : C) [HasRightDual X] : IsIso (toIhomIhomUnit X) := by
+  -- `Xᘁ` is a left dual of `X` for the evaluation `X ⊗ Xᘁ ≅ Xᘁ ⊗ X ⟶ 𝟙_ C` along the inverse
+  -- braiding, which identifies `[X, 𝟙_ C]` with `Xᘁ` compatibly with `β_`.
+  let := @BraidedCategory.exactPairing_swap C _ _ (reverseBraiding C) X Xᘁ _
+  have hε : ε_ Xᘁ X = (β_ Xᘁ X).inv ≫ ε_ X Xᘁ := rfl
+  let e := ihomObjUnitIso Xᘁ X
+  have h : toIhomIhomUnit X ≫ (pre e.inv).app (𝟙_ C) = curry (ε_ X Xᘁ) := by
+    rw [toIhomIhomUnit, curry_pre_app, BraidedCategory.braiding_naturality_left_assoc,
+      ← curry_evaluation, whiskerLeft_curry_ihom_ev_app, hε, Iso.hom_inv_id_assoc]
+  have : IsIso ((pre e.inv).app (𝟙_ C)) :=
+    ⟨(pre e.hom).app (𝟙_ C), by simp [← NatTrans.comp_app, ← pre_map], by
+      simp [← NatTrans.comp_app, ← pre_map]⟩
+  have : IsIso (toIhomIhomUnit X ≫ (pre e.inv).app (𝟙_ C)) := by
+    rw [h]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _ ((pre e.inv).app (𝟙_ C))
+
+end MonoidalClosed
 
 end CategoryTheory
