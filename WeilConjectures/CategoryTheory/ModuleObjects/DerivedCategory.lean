@@ -9,8 +9,7 @@ public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
-public import WeilConjectures.CategoryTheory.ModuleObjects.Braided
+public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 
 /-!
 
@@ -35,21 +34,9 @@ which makes `DerivedCategory (Mod C R)` a monoidal category with tensor product 
 
 ## Sorried input
 
-The K-flat machinery requires three properties of `Mod C R`. Each is inherited from the
-corresponding property of `C`, and is stated here as a `sorry`ed instance under exactly that
-hypothesis on `C`:
-
-* `Mod.monoidalClosed`, from `MonoidalClosed C`: the internal hom `Hom_R(M, N)` is the equalizer
-  of the two maps `[M, N] ⇉ [R ⊗ M, N]`, adjoint to `R ⊗ M ⊗ [M, N] ⟶ R ⊗ N ⟶ N` and to
-  `R ⊗ M ⊗ [M, N] ⟶ M ⊗ [M, N] ⟶ N`, with the `R`-action induced by that of `N`.
-* `Mod.isGrothendieckAbelian`, from `IsGrothendieckAbelian C`: colimits and finite limits of
-  module objects are computed in `C` (`R ⊗ -` preserves colimits because `C` is closed), so
-  `Mod C R` satisfies AB5, and `R ⊗ G` is a separator for a separator `G` of `C`, since
-  `Hom_R(R ⊗ G, M) ≅ Hom(G, M)`.
-* `Mod.hasFunctorialFlatResolution`, from `Abelian.HasFunctorialFlatResolution C`: if `F` is
-  flat in `C`, then `R ⊗ F` is flat in `Mod C R` because `(R ⊗ F) ⊗_R M ≅ F ⊗ M`; and a
-  functorial flat resolution `P(M) ⟶ M` in `C` gives the functorial epimorphism
-  `R ⊗ P(M) ⟶ R ⊗ M ⟶ M` of `R`-modules.
+The K-flat machinery requires three properties of `Mod C R`, inherited from `C`:
+`Mod.monoidalClosed`, `Mod.isGrothendieckAbelian` and `Mod.hasFunctorialFlatResolution`. They
+are currently `sorry`ed in `WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian`.
 
 The construction moreover uses the instance `DerivedCategory.hasDerivedMonoidalCategory`, which
 is currently `sorry`ed in
@@ -67,23 +54,6 @@ namespace CategoryTheory.Mod
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C] [MonoidalPreadditive C]
   [SymmetricCategory C] [MonoidalClosed C] {R : C} [MonObj R] [IsCommMonObj R]
-
-/-- The relative tensor product of module objects over a commutative algebra object in a closed
-monoidal category is closed. -/
-noncomputable instance monoidalClosed : MonoidalClosed (Mod C R) :=
-  sorry
-
-/-- The category of module objects over a commutative algebra object in a closed monoidal
-Grothendieck abelian category is Grothendieck abelian. -/
-instance isGrothendieckAbelian [IsGrothendieckAbelian.{v} C] :
-    IsGrothendieckAbelian.{v} (Mod C R) :=
-  sorry
-
-/-- If `C` admits functorial flat resolutions, then so does `Mod C R`, by the free modules
-`R ⊗ F` on flat objects `F` of `C`. -/
-instance hasFunctorialFlatResolution [Abelian.HasFunctorialFlatResolution C] :
-    Abelian.HasFunctorialFlatResolution (Mod C R) :=
-  sorry
 
 variable [IsGrothendieckAbelian.{v} C] [Abelian.HasFunctorialFlatResolution C]
 /-- Small colimits of module objects, from the Grothendieck abelian structure. -/

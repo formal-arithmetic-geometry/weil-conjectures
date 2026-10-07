@@ -54,6 +54,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Braided
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import WeilConjectures.CategoryTheory.ModuleObjects.Functor
+public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
