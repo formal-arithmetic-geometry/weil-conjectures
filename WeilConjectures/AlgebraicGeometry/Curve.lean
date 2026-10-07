@@ -51,12 +51,8 @@ The sheaf `Ω¹_{C/K}` is `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`, 
 - `AlgebraicGeometry.Scheme.Hom.picDegree_mk`: the degree of the class of an invertible module
   `M` is `χ(M) - χ(𝒪_C)`.
 
-## TODO
-
-- Identify `picDegree` with the degree of the associated Weil divisor on a smooth projective
-  curve. The identification with the degree of effective Cartier divisors is stated in
-  `WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.lean`.
-- Make `picDegree` a group homomorphism `Pic(C) →* ℤ` once `Pic` carries its group structure.
+The degree as a group homomorphism, and its identification with the degree of divisors over an
+algebraically closed field, are in `WeilConjectures/AlgebraicGeometry/Curve/Picard.lean`.
 -/
 
 @[expose] public section
@@ -166,13 +162,9 @@ Let `C` be a smooth projective geometrically integral curve over a field `K`. It
 `AlgebraicGeometry.Scheme.Hom.picDegree`, and `Pic⁰(C) := ker(deg)` is the subgroup of classes
 of degree zero, recorded here as the subset `f.picZero` of `C.Pic`.
 
-The degree is not yet a bundled group homomorphism: the group structure on
-`AlgebraicGeometry.Scheme.Pic` is the tensor product `AlgebraicGeometry.Scheme.Modules.tensorObj`
-of invertible modules, which is not yet defined on `Pic` because the tensor product of
-invertible modules is not yet known to be invertible.
-
-TODO: once it is, upgrade `picDegree` to a `MonoidHom` and `picZero` to its kernel, a subgroup
-of `Pic(C)`. -/
+For a smooth proper curve the degree is the group homomorphism
+`AlgebraicGeometry.Scheme.picDegreeHom`, whose kernel is `picZero`
+(`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`). -/
 def Scheme.Hom.picZero (f : C ⟶ Spec (.of K)) : Set C.Pic :=
   {L | f.picDegree L = 0}
 
