@@ -179,6 +179,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90Etale
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
+public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 public import WeilConjectures.AlgebraicGeometry.Sites.StalkwiseCokernel
 public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
 public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
@@ -801,6 +802,7 @@ public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
 public import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 public import WeilConjectures.Mathlib.RingTheory.PiTensorProduct
+public import WeilConjectures.Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Inverse
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Log
@@ -810,6 +812,8 @@ public import WeilConjectures.Mathlib.RingTheory.Regular.RegularSequence
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 public import WeilConjectures.Mathlib.RingTheory.RingHom.PurelyInseparable
 public import WeilConjectures.Mathlib.RingTheory.RingHom.StandardSmooth
+public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
+public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Chevalley
