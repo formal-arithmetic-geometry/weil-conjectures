@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # The canonical morphism from a basic open to the spectrum of a localization
@@ -13,6 +14,10 @@ public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 We record that the canonical morphism `X.basicOpen x ⟶ Spec Γ(X, ⊤)[1/x]`, obtained by
 restricting `X.toSpecΓ` to the basic open `D(x)` of `Spec Γ(X, ⊤)`, is compatible with the
 localization map `Γ(X, ⊤) ⟶ Γ(X, ⊤)[1/x]`.
+
+A morphism `m : X ⟶ Spec R` whose image avoids the zero loci of the elements of a submonoid `M`
+of `R` factors through `Spec R_M ⟶ Spec R`
+(`AlgebraicGeometry.exists_comp_SpecMap_algebraMap_localization`).
 -/
 
 @[expose] public section
@@ -53,5 +58,23 @@ lemma Scheme.toSpecΓ_steinFactorizationBase {Y : Scheme.{u}} {R : CommRingCat.{
   rw [Scheme.Hom.steinFactorizationBase, Spec.map_comp, ← Category.assoc,
     ← Scheme.toSpecΓ_naturality, Category.assoc, toSpecΓ_SpecMap_ΓSpecIso_inv,
     Category.comp_id]
+
+/-- A morphism `m : X ⟶ Spec R` whose image avoids the zero loci of the elements of a submonoid
+`M` of `R` factors through `Spec R_M ⟶ Spec R`: the elements of `M` become units in
+`Γ(X, 𝒪_X)`. -/
+lemma exists_comp_SpecMap_algebraMap_localization {X : Scheme.{u}} {R : CommRingCat.{u}}
+    (m : X ⟶ Spec R) (M : Submonoid R)
+    (hM : ∀ r ∈ M, ∀ x : X, m x ∈ PrimeSpectrum.basicOpen r) :
+    ∃ m' : X ⟶ Spec (CommRingCat.of (Localization M)),
+      m' ≫ Spec.map (CommRingCat.ofHom (algebraMap R (Localization M))) = m := by
+  have hψ (r : M) : IsUnit (((Scheme.ΓSpecIso R).inv ≫ m.appTop).hom r) := by
+    refine Scheme.isUnit_of_basicOpen_eq_top _ (top_unique fun x _ ↦ ?_)
+    change x ∈ X.basicOpen (m.appTop ((Scheme.ΓSpecIso R).inv r))
+    rw [← Scheme.preimage_basicOpen_top, basicOpen_eq_of_affine]
+    exact hM r r.2 x
+  refine ⟨X.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (IsLocalization.lift (M := M)
+    (S := Localization M) hψ)), ?_⟩
+  rw [Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp, IsLocalization.lift_comp]
+  exact Scheme.toSpecΓ_steinFactorizationBase m
 
 end AlgebraicGeometry

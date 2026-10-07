@@ -23,6 +23,7 @@ pushforwards along the inverse Frobenius.
 ## Main definitions
 
 - `AlgebraicGeometry.ProEtale.lowerStarCongr`: `g_* ≅ g'_*` for `g = g'`.
+- `AlgebraicGeometry.ProEtale.upperStarCompIso`: `a^* ∘ b^* ≅ c^* ∘ d^*` for `a ≫ b = c ≫ d`.
 - `AlgebraicGeometry.ProEtale.lowerStarEquivalence`: the equivalence `(e.hom)_*` with inverse
   `(e.inv)_*`.
 - `AlgebraicGeometry.ProEtale.upperStarIsoLowerStarInv`: `(e.hom)^* ≅ (e.inv)_*`.
@@ -98,6 +99,13 @@ lemma lowerStarCongr_hom_app_hom_app {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g 
 noncomputable def upperStarCongr {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g') :
     (g)^*[A] ≅ (g')^*[A] :=
   eqToIso (by rw [h])
+
+/-- The pullbacks along the two sides of a commutative square `a ≫ b = c ≫ d` agree:
+`a^* ∘ b^* ≅ (a ≫ b)^* = (c ≫ d)^* ≅ c^* ∘ d^*`. -/
+noncomputable def upperStarCompIso {Y Z₁ Z₂ T : Scheme.{u}} {a : Y ⟶ Z₁} {b : Z₁ ⟶ T}
+    {c : Y ⟶ Z₂} {d : Z₂ ⟶ T} (h : a ≫ b = c ≫ d) :
+    (b)^*[A] ⋙ (a)^*[A] ≅ (d)^*[A] ⋙ (c)^*[A] :=
+  (upperStarComp A a b).symm ≪≫ upperStarCongr A h ≪≫ upperStarComp A c d
 
 variable {X Y : Scheme.{u}}
 
