@@ -9,9 +9,12 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.GlobalSections
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+public import WeilConjectures.Mathlib.RingTheory.Artinian.Ring
 
 /-!
 # Schemes over a field whose global functions are the constants
@@ -34,6 +37,8 @@ connected `X` over a separably closed field.
 
 - `AlgebraicGeometry.Scheme.Modules.finrankH_unit_zero`: `h⁰(X, 𝒪_X) = 1` when
   `H⁰(X, 𝒪_X) = k`.
+- `AlgebraicGeometry.Scheme.finite_globalSectionsRingHom_of_isProper`: `Γ(X, 𝒪_X)` is finite
+  over `k` for proper `X`.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyConnected`: a proper,
   geometrically connected and geometrically reduced `k`-scheme has `H⁰(X, 𝒪_X) = k`.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyIntegral` and
@@ -65,12 +70,87 @@ class GlobalSectionsBijective : Prop where
 
 variable {k X}
 
+/-- On a proper `k`-scheme `X`, the ring `Γ(X, 𝒪_X)` is finite over `k`: it is `H⁰(X, 𝒪_X)`,
+which is finite-dimensional by finiteness of coherent cohomology. -/
+theorem finite_globalSectionsRingHom_of_isProper [IsProper (X ↘ Spec (.of k))] :
+    (globalSectionsRingHom k (X := X)).Finite := by
+  let := (globalSectionsRingHom k (X := X)).toAlgebra
+  let O : X.Modules := SheafOfModules.unit X.ringCatSheaf
+  have : (SheafOfModules.unit X.ringCatSheaf).IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  have := Modules.finiteDimensional_H_of_isProper (k := k) O 0
+  let e : O.H 0 ≃ₗ[k] Γ(X, ⊤) :=
+    { (Modules.H.zeroLinearEquiv O).toAddEquiv with
+      map_smul' c x := by
+        change Modules.H.zeroLinearEquiv O (globalSectionsRingHom k (X := X) c • x) = _
+        rw [LinearEquiv.map_smul]
+        rfl }
+  exact Module.Finite.equiv e
+
 /-- A proper `k`-scheme that is geometrically connected and geometrically reduced has
-`H⁰(X, 𝒪_X) = k` (Stacks 0BUG). -/
+`H⁰(X, 𝒪_X) = k` (Stacks 0BUG). This is the input `Γ(X, 𝒪_X) = k` of Step 4 of blueprint
+`lem-sc-rigidity` (`sk-prop-av-rigidity`).
+
+Let `K` be an algebraic closure of `k`, `A = Γ(X, 𝒪_X)` and `B = Γ(X_K, 𝒪_{X_K})`. By flat base
+change `B = K ⊗_k A`, and `A` is finite over `k` as `X` is proper. So `B` is a finite `K`-algebra,
+reduced since `X_K` is reduced and without nontrivial idempotents since `X_K` is connected, hence
+`B = K` (`IsAlgClosed.finrank_eq_one_of_isReduced`). Thus `A` has dimension `1` over `k`, and the
+injective map `k → A` is bijective. -/
 instance GlobalSectionsBijective.of_geometricallyConnected [IsProper (X ↘ Spec (.of k))]
     [GeometricallyConnected (X ↘ Spec (.of k))] [GeometricallyReduced (X ↘ Spec (.of k))] :
-    GlobalSectionsBijective k X :=
-  sorry
+    GlobalSectionsBijective k X := by
+  let K := AlgebraicClosure k
+  set iX := X ↘ Spec (.of k)
+  set f := Spec.map (CommRingCat.ofHom (algebraMap k K))
+  have hpb := IsPullback.of_hasPullback iX f
+  have : IsReduced (Limits.pullback iX f) :=
+    GeometricallyReduced.geometrically_isReduced f _ _ hpb
+  have : ConnectedSpace ↥(Limits.pullback iX f) :=
+    GeometricallyConnected.geometrically_connectedSpace f _ _ hpb
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace iX
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated iX
+  have H := isPushout_appTop_of_flat f iX
+  let A := Γ(X, ⊤)
+  let B := Γ(Limits.pullback iX f, ⊤)
+  let : Algebra k A := (globalSectionsRingHom k (X := X)).toAlgebra
+  let : Algebra K B :=
+    ((Scheme.ΓSpecIso (.of K)).inv ≫ (Limits.pullback.snd iX f).appTop).hom.toAlgebra
+  let : Algebra A B := (Limits.pullback.fst iX f).appTop.hom.toAlgebra
+  let : Algebra k B := ((algebraMap A B).comp (algebraMap k A)).toAlgebra
+  have : IsScalarTower k A B := IsScalarTower.of_algebraMap_eq' rfl
+  have hw : CommRingCat.ofHom (algebraMap k K) ≫ CommRingCat.ofHom (algebraMap K B) =
+      CommRingCat.ofHom (algebraMap k A) ≫ CommRingCat.ofHom (algebraMap A B) := by
+    change _ ≫ (Scheme.ΓSpecIso (.of K)).inv ≫ (Limits.pullback.snd iX f).appTop =
+      ((Scheme.ΓSpecIso (.of k)).inv ≫ iX.appTop) ≫ (Limits.pullback.fst iX f).appTop
+    rw [reassoc_of% Scheme.ΓSpecIso_inv_naturality, Category.assoc, H.w]
+  have : IsScalarTower k K B := IsScalarTower.of_algebraMap_eq' congr($(hw).hom).symm
+  -- Flat base change: `B = K ⊗_k A`.
+  have : Algebra.IsPushout k K A B := by
+    rw [← CommRingCat.isPushout_iff_isPushout]
+    refine H.flip.of_iso (Scheme.ΓSpecIso (.of k)) (Scheme.ΓSpecIso (.of K)) (Iso.refl _)
+      (Iso.refl _) ?_ ?_ ?_ ?_
+    · rw [← cancel_epi (Scheme.ΓSpecIso (.of k)).inv]
+      simp [f]
+    · change _ = _ ≫ (Scheme.ΓSpecIso (.of k)).inv ≫ iX.appTop
+      simp
+    · change _ = _ ≫ (Scheme.ΓSpecIso (.of K)).inv ≫ (Limits.pullback.snd iX f).appTop
+      simp
+    · simp
+      rfl
+  have : Module.Finite k A := finite_globalSectionsRingHom_of_isProper
+  let e := (Algebra.IsPushout.equiv k K A B).toLinearEquiv
+  have : Module.Finite K B := Module.Finite.equiv e
+  obtain ⟨x⟩ : Nonempty ↥(Limits.pullback iX f) := inferInstance
+  have : Nonempty (⊤ : (Limits.pullback iX f).Opens) := ⟨⟨x, trivial⟩⟩
+  have hB : Module.finrank K B = 1 := IsAlgClosed.finrank_eq_one_of_isReduced
+    ((connectedSpace_iff_isIdempotentElem (Limits.pullback iX f)).1 inferInstance)
+  have hA : Module.finrank k A = 1 := by
+    rw [← hB, ← e.finrank_eq, Module.finrank_baseChange]
+  have : Nontrivial A := Module.nontrivial_of_finrank_eq_succ hA
+  refine ⟨⟨(globalSectionsRingHom k (X := X)).injective, ?_⟩⟩
+  exact (LinearMap.injective_iff_surjective_of_finrank_eq_finrank
+    (f := Algebra.linearMap k A) (by rw [hA, Module.finrank_self])).1
+    (algebraMap k A).injective
 
 /-- A proper geometrically integral `k`-scheme has `H⁰(X, 𝒪_X) = k`. -/
 theorem GlobalSectionsBijective.of_geometricallyIntegral [IsProper (X ↘ Spec (.of k))]
