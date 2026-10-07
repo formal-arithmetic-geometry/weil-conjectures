@@ -24,13 +24,19 @@ product `- ⊗ᴸ -` and internal hom `RHom(-, -)`. The *coefficient dual* of a 
 - `AlgebraicGeometry.Etale.DerivedCategory.coefficientDual`: `K ↦ K^∨ = RHom(K, Λ_X)`.
 - `AlgebraicGeometry.Etale.DerivedCategory.coefficientEvaluation`: the evaluation
   `K ⊗ᴸ K^∨ ⟶ Λ_X`.
+- `AlgebraicGeometry.Etale.DerivedCategory.coefficientDualIsoOfExactPairing`: `K^∨ ≅ L` for a
+  left dual `L` of `K`.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.DerivedCategory.isDualizable_coefficientDual`
+  (`sk-prop-sf-dualizable-biduality`, `prop-sf-dualizable`): `K^∨` is dualizable for a
+  dualizable `K`.
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_coefficientDual`
   (`sk-prop-sf-dualizable-biduality`): biduality `K ≅ K^∨∨` for a dualizable `K`.
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_tensor`
-  (`sk-prop-sf-dualizable-biduality`): the comparison `K^∨ ⊗ᴸ M ≅ RHom(K, M)`.
+  (`sk-prop-sf-dualizable-biduality`, `prop-sf-dualizable-hom`): the comparison
+  `K^∨ ⊗ᴸ M ≅ RHom(K, M)`.
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_derivedHom_tensor`
   (`sk-lem-sf-twist-interchange`): the internal hom commutes with an invertible twist.
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_leftDerivedUpperStar_derivedHom`
@@ -53,6 +59,12 @@ and the compatibilities with finite reduction, scalar extension and shifts, are 
 not stated. The proofs sketched in the blueprint go through the local description of a perfect
 complex as a bounded complex of finite free modules, which turns the internal hom into a tensor
 product.
+
+With perfectness rendered as dualizability, the biduality statements are formal consequences of
+the rigid monoidal structure: `RHom(K, -) ≅ L ⊗ᴸ -` for a left dual `L` of `K`
+(`CategoryTheory.MonoidalClosed.ihomIsoTensorLeft`). They use one further input, that the right
+dual of `K` is also a left dual (`nonempty_exactPairing_swap`). This follows from the symmetry
+of the derived tensor product, which has not been constructed yet.
 
 -/
 
@@ -92,13 +104,37 @@ noncomputable def coefficientEvaluation
     ((derivedTensor A X).obj K).obj ((coefficientDual A X).obj (op K)) ⟶ 𝟙_ _ :=
   (derivedTensorHomAdjunction A K).counit.app (𝟙_ _)
 
-/-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
+/-- An exact pairing in `D(X_ét)` can be swapped: if `K` and `K'` form an exact pairing, so do
+`K'` and `K`. In other words, the right dual of a dualizable complex is also its left dual.
 
-The coefficient dual of a dualizable complex is again dualizable. -/
+This holds because the derived tensor product of `D(X_ét)` is symmetric monoidal (with the
+Koszul sign rule), and in a braided monoidal category exact pairings can be swapped
+(`CategoryTheory.BraidedCategory.exactPairing_swap`). No braiding on `D(X_ét)` has been
+constructed in this repository yet, which is why this is stated separately. -/
+theorem nonempty_exactPairing_swap
+    (K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) [ExactPairing K K'] :
+    Nonempty (ExactPairing K' K) :=
+  sorry
+
+/-- If `L` and `K` form an exact pairing in `D(X_ét)`, that is, `L` is a left dual of `K`, then
+`K^∨ ≅ L`. -/
+noncomputable def coefficientDualIsoOfExactPairing
+    (L K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) [ExactPairing L K] :
+    (coefficientDual A X).obj (op K) ≅ L :=
+  MonoidalClosed.ihomObjUnitIso L K
+
+/-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
+This is also blueprint `prop-sf-dualizable` (Perfect complexes are dualizable).
+
+The coefficient dual of a dualizable complex is again dualizable. The evaluation
+`K ⊗ᴸ K^∨ ⟶ Λ_X` is `AlgebraicGeometry.Etale.DerivedCategory.coefficientEvaluation`. -/
 theorem isDualizable_coefficientDual
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
-    IsDualizable ((coefficientDual A X).obj (op K)) :=
-  sorry
+    IsDualizable ((coefficientDual A X).obj (op K)) := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨_⟩ := nonempty_exactPairing_swap K Kᘁ
+  exact ⟨{ rightDual := K
+           exact := exactPairingCongrLeft (coefficientDualIsoOfExactPairing Kᘁ K) }⟩
 
 /-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
 
@@ -106,18 +142,25 @@ For a dualizable `K` the biduality map `K ⟶ K^∨∨` into the double coeffici
 isomorphism. -/
 theorem nonempty_iso_coefficientDual_coefficientDual
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
-    Nonempty (K ≅ (coefficientDual A X).obj (op ((coefficientDual A X).obj (op K)))) :=
-  sorry
+    Nonempty (K ≅ (coefficientDual A X).obj (op ((coefficientDual A X).obj (op K)))) := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨_⟩ := nonempty_exactPairing_swap K Kᘁ
+  exact ⟨(coefficientDualIsoOfExactPairing K Kᘁ).symm ≪≫
+    (coefficientDual A X).mapIso (coefficientDualIsoOfExactPairing Kᘁ K).op⟩
 
 /-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
+This is also blueprint `prop-sf-dualizable-hom` (Internal Hom through the coefficient dual).
 
 For a dualizable `K` and every `M` the canonical map `K^∨ ⊗ᴸ M ⟶ RHom(K, M)` is an
 isomorphism. -/
 theorem nonempty_iso_coefficientDual_tensor
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    Nonempty ((coefficientDual A X).obj (op K) ⊗ M ≅ (RHom(X)[A].obj (op K)).obj M) :=
-  sorry
+    Nonempty ((coefficientDual A X).obj (op K) ⊗ M ≅ (RHom(X)[A].obj (op K)).obj M) := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨_⟩ := nonempty_exactPairing_swap K Kᘁ
+  exact ⟨whiskerRightIso (coefficientDualIsoOfExactPairing Kᘁ K) M ≪≫
+    (MonoidalClosed.ihomObjIsoTensor Kᘁ K M).symm⟩
 
 /-- Blueprint `sk-lem-sf-twist-interchange`: Internal Hom with an invertible twist.
 

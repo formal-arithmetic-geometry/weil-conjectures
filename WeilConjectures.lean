@@ -756,6 +756,7 @@ public import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
 public import WeilConjectures.Mathlib.RingTheory.PiTensorProduct
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Inverse
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Log
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.PiTopology
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
