@@ -568,11 +568,6 @@ lemma isFreeGenerator_unitToTwist :
   (Scheme.Modules.isFreeGenerator_one _).app_of_bijective _ fun _ hV ↦
     bijective_unitToTwist_app hf hV
 
-/-- Scalar multiplication on the sections of `𝒪(m)` is pointwise multiplication in `A_x`. -/
-lemma val_smul_apply {m : ℤ} {U : (Proj 𝒜).Opens} (r : Γ(Proj 𝒜, U)) (t : Γ(twist 𝒜 m, U))
-    (x : U) : ((r • t).1 x).1 = (r.1 x).val * (t.1 x).1 :=
-  rfl
-
 end UnitToTwist
 
 end Sections

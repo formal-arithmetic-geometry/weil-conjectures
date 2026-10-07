@@ -38,6 +38,8 @@ the tensor product, and the projection formula `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ 
   module preserves quasi-coherence and finite presentation.
 - `AlgebraicGeometry.Scheme.Modules.projectionHom`: the projection morphism
   `g_* ℱ ⊗ N ⟶ g_* (ℱ ⊗ g^* N)`, `x ⊗ n ↦ x ⊗ η n`.
+- `AlgebraicGeometry.Scheme.Modules.isIso_projectionHom`: the projection formula, i.e.
+  `projectionHom` is an isomorphism for an invertible module `N`.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_tensorObj_pullback_iso`: the projection
   formula `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ ⊗ N` for an invertible module `N`.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_pullback_iso`: its case `ℱ = 𝒪_X`.
@@ -298,28 +300,35 @@ lemma bijective_projectionHom_app {V : Y.Opens} {e : Γ(N, V)} (he : IsFreeGener
   rw [← this] at h₂
   exact (Function.Bijective.of_comp_iff _ h₁).1 h₂
 
-end ProjectionHom
-
-section ProjectionFormula
-
 /-- **The projection formula** for an invertible module. For `g : X ⟶ Y`, an `𝒪_X`-module `ℱ`
-and an invertible `𝒪_Y`-module `N`, `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ ⊗ N`. The comparison map
-`projectionHom` sends `x ⊗ n` to `x ⊗ η n`, where `η : N ⟶ g_* g^* N` is the unit of the
-adjunction; it is an isomorphism because it is one locally on `Y`: if `e` is a free generator of
-`N` on `V`, then `η e` is one of `g^* N` on `g ⁻¹ᵁ V`, and both sides have sections `Γ(ℱ, g ⁻¹ᵁ W)`
-over every `W ≤ V`, via `x ↦ x ⊗ e` and `x ↦ x ⊗ η e`.
+and an invertible `𝒪_Y`-module `N`, the natural map `projectionHom : g_* ℱ ⊗ N ⟶ g_* (ℱ ⊗ g^* N)`,
+`x ⊗ n ↦ x ⊗ η n` with `η : N ⟶ g_* g^* N` the unit of the adjunction, is an isomorphism. It is
+one locally on `Y`: if `e` is a free generator of `N` on `V`, then `η e` is one of `g^* N` on
+`g ⁻¹ᵁ V`, and both sides have sections `Γ(ℱ, g ⁻¹ᵁ W)` over every `W ≤ V`, via `x ↦ x ⊗ e` and
+`x ↦ x ⊗ η e`.
 
 For a closed immersion `g` this is the last clause of the blueprint lemma.
 
 (blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
+theorem isIso_projectionHom [N.IsInvertible] : IsIso (projectionHom g F N) := by
+  have := IsInvertible.sheafOfModules_isInvertible N
+  refine Hom.isIso_of_forall_bijective_app _ fun y ↦ ?_
+  obtain ⟨U, hy, -, e, he⟩ := exists_isFreeGenerator N (W := ⊤) (x := y) trivial
+  exact ⟨U.1, hy, fun W hW ↦ bijective_projectionHom_app g F N he hW⟩
+
+end ProjectionHom
+
+section ProjectionFormula
+
+/-- **The projection formula** for an invertible module: `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ ⊗ N`, the
+inverse of the isomorphism `projectionHom` (`isIso_projectionHom`).
+
+(blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
 theorem nonempty_pushforward_tensorObj_pullback_iso (g : X ⟶ Y) (F : X.Modules) (N : Y.Modules)
     [N.IsInvertible] :
-    Nonempty ((pushforward g).obj (F ⊗ (pullback g).obj N) ≅ (pushforward g).obj F ⊗ N) := by
-  have := IsInvertible.sheafOfModules_isInvertible N
-  have : IsIso (projectionHom g F N) := Hom.isIso_of_forall_bijective_app _ fun y ↦ by
-    obtain ⟨U, hy, -, e, he⟩ := exists_isFreeGenerator N (W := ⊤) (x := y) trivial
-    exact ⟨U.1, hy, fun W hW ↦ bijective_projectionHom_app g F N he hW⟩
-  exact ⟨(asIso (projectionHom g F N)).symm⟩
+    Nonempty ((pushforward g).obj (F ⊗ (pullback g).obj N) ≅ (pushforward g).obj F ⊗ N) :=
+  have := isIso_projectionHom g F N
+  ⟨(asIso (projectionHom g F N)).symm⟩
 
 /-- **The projection formula** for an invertible module and the structure sheaf. For
 `g : X ⟶ Y` and an invertible `𝒪_Y`-module `N`, `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N`: this is

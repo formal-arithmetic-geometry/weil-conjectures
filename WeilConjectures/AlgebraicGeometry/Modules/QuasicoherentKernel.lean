@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.Mathlib.Algebra.Module.LocalizedModule.Exact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-!
@@ -41,113 +43,15 @@ kernel of a morphism of localizing modules is localizing.
 
 ## Auxiliary results
 
-- `IsLocalizedModule.of_injective_of_exact`: localization commutes with taking kernels.
-- `CategoryTheory.Limits.isColimitCokernelCoforkSigmaMap`: a coproduct of cokernels is a
-  cokernel.
-- `SheafOfModules.Presentation.sigma`: a presentation of a coproduct of sheaves of modules from
-  presentations of the summands.
 - `AlgebraicGeometry.Scheme.Modules.preservesLimitsOfSize_restrictFunctor`: restriction along an
   open immersion preserves limits.
 -/
 
 @[expose] public section
 
-universe u v' u'
+universe u
 
 open CategoryTheory Limits Opposite TopologicalSpace
-
-/-- **Localization commutes with kernels.** Let `0 → K → M → N` and `K' → M' → N'` be exact
-sequences of `R`-modules with `K' → M'` injective, compatible with maps `K → K'`, `M → M'`,
-`N → N'`, the last two of which are localizations at `S`. If the elements of `S` act invertibly on
-`K'`, then `K → K'` is a localization at `S`. -/
-lemma IsLocalizedModule.of_injective_of_exact {R : Type*} [CommRing R] (S : Submonoid R)
-    {K M N K' M' N' : Type*} [AddCommGroup K] [AddCommGroup M] [AddCommGroup N]
-    [AddCommGroup K'] [AddCommGroup M'] [AddCommGroup N'] [Module R K] [Module R M] [Module R N]
-    [Module R K'] [Module R M'] [Module R N'] {ι : K →ₗ[R] M} {φ : M →ₗ[R] N}
-    {ι' : K' →ₗ[R] M'} {φ' : M' →ₗ[R] N'} (lK : K →ₗ[R] K') (lM : M →ₗ[R] M')
-    (lN : N →ₗ[R] N') [IsLocalizedModule S lM] [IsLocalizedModule S lN]
-    (hι : Function.Injective ι) (hex : Function.Exact ι φ) (hι' : Function.Injective ι')
-    (hφι' : ∀ y, φ' (ι' y) = 0) (h₁ : ∀ k, lM (ι k) = ι' (lK k))
-    (h₂ : ∀ m, lN (φ m) = φ' (lM m)) (hu : ∀ s : S, IsUnit (algebraMap R (Module.End R K') s)) :
-    IsLocalizedModule S lK where
-  map_units := hu
-  surj y := by
-    obtain ⟨⟨m, s⟩, hm⟩ := IsLocalizedModule.surj S lM (ι' y)
-    dsimp only at hm
-    rw [Submonoid.smul_def] at hm
-    have h0 : lN (φ m) = lN 0 := by
-      rw [h₂, ← hm, map_zero, map_smul, hφι', smul_zero]
-    obtain ⟨c, hc⟩ := IsLocalizedModule.exists_of_eq (S := S) h0
-    rw [smul_zero, Submonoid.smul_def, ← map_smul] at hc
-    obtain ⟨k, hk⟩ := (hex _).mp hc
-    refine ⟨⟨k, c * s⟩, hι' ?_⟩
-    rw [← h₁, hk, Submonoid.smul_def, map_smul, map_smul, ← hm, smul_smul, Submonoid.coe_mul]
-  exists_of_eq {k₁ k₂} h := by
-    have : lM (ι k₁) = lM (ι k₂) := by rw [h₁, h₁, h]
-    obtain ⟨c, hc⟩ := IsLocalizedModule.exists_of_eq (S := S) this
-    refine ⟨c, hι ?_⟩
-    rw [Submonoid.smul_def, Submonoid.smul_def, map_smul, map_smul]
-    exact hc
-
-namespace CategoryTheory.Limits
-
-/-- A coproduct of cokernels is a cokernel: if each `g i : B i ⟶ Z i` is a cokernel of
-`f i : A i ⟶ B i`, then `Sigma.map g` is a cokernel of `Sigma.map f`. -/
-noncomputable def isColimitCokernelCoforkSigmaMap {C : Type*} [Category C] [Preadditive C]
-    {ι : Type*} {A B Z : ι → C} [HasCoproduct A] [HasCoproduct B] [HasCoproduct Z]
-    (f : ∀ i, A i ⟶ B i) (g : ∀ i, B i ⟶ Z i) (w : ∀ i, f i ≫ g i = 0)
-    (h : ∀ i, IsColimit (CokernelCofork.ofπ (g i) (w i))) :
-    IsColimit (CokernelCofork.ofπ (Sigma.map g) (show Sigma.map f ≫ Sigma.map g = 0 by
-      ext i
-      simp [reassoc_of% (w i)])) :=
-  CokernelCofork.IsColimit.ofπ _ _
-    (fun k hk ↦ Sigma.desc fun i ↦ (h i).desc (CokernelCofork.ofπ (Sigma.ι B i ≫ k) (by
-      rw [← Sigma.ι_map_assoc, hk, comp_zero])))
-    (fun k hk ↦ by
-      ext i
-      simp only [Sigma.ι_map_assoc, colimit.ι_desc, Cofan.mk_ι_app]
-      exact (h i).fac _ WalkingParallelPair.one)
-    (fun k hk m hm ↦ by
-      ext i
-      simp only [colimit.ι_desc, Cofan.mk_ι_app]
-      refine Cofork.IsColimit.hom_ext (h i) ?_
-      refine Eq.trans ?_
-        ((h i).fac (CokernelCofork.ofπ (Sigma.ι B i ≫ k) _) WalkingParallelPair.one).symm
-      simp [← hm])
-
-end CategoryTheory.Limits
-
-namespace SheafOfModules
-
-variable {C : Type u'} [Category.{v'} C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
-  [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-
-/-- **A presentation of a coproduct.** Presentations of the sheaves of modules `M i` give a
-presentation of `∐ M`, with generators and relations the disjoint unions of those of the `M i`:
-the cokernel of `∐ free (relations i) ⟶ ∐ free (generators i)` is `∐ M`. -/
-noncomputable def Presentation.sigma {ι : Type u} (M : ι → SheafOfModules.{u} R)
-    (P : ∀ i, (M i).Presentation) : (∐ M).Presentation :=
-  letI eI := (freeFunctor (R := R)).mapIso (Types.coproductIso fun i ↦ (P i).generators.I).symm ≪≫
-    PreservesCoproduct.iso (freeFunctor (R := R)) fun i ↦ (P i).generators.I
-  letI eJ := (freeFunctor (R := R)).mapIso (Types.coproductIso fun i ↦ (P i).relations.I).symm ≪≫
-    PreservesCoproduct.iso (freeFunctor (R := R)) fun i ↦ (P i).relations.I
-  presentationOfIsCokernelFree
-    (eJ.hom ≫ Limits.Sigma.map (fun i ↦ (freeHomEquiv _).symm (P i).relations.s ≫ kernel.ι _) ≫
-      eI.inv)
-    (eI.hom ≫ Limits.Sigma.map fun i ↦ (P i).generators.π) (by
-      simp only [Category.assoc, Iso.inv_hom_id_assoc]
-      rw [Sigma.map_comp_map]
-      convert comp_zero
-      exact Sigma.hom_ext _ _ fun i ↦ by simp)
-    (IsCokernel.ofIso _ (isColimitCokernelCoforkSigmaMap _ _ _ fun i ↦ (P i).isColimit) _ eJ.symm
-      eI.symm (Iso.refl _) (by simp) (by simp))
-
-instance Presentation.isFinite_sigma {ι : Type u} [Finite ι] (M : ι → SheafOfModules.{u} R)
-    (P : ∀ i, (M i).Presentation) [∀ i, (P i).IsFinite] : (Presentation.sigma M P).IsFinite where
-  isFiniteType_generators := ⟨inferInstanceAs (Finite (Σ i, (P i).generators.I))⟩
-  isFiniteType_relations := ⟨inferInstanceAs (Finite (Σ i, (P i).relations.I))⟩
-
-end SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
 

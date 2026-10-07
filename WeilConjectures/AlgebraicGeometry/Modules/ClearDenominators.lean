@@ -394,7 +394,7 @@ theorem exists_hom_app_eq_of_tensorPowSection {L : X.Modules} (s : 𝟙_ X.Modul
     (hu : (F ⊗ L.tensorPow m).presheaf.map (homOfLE le_top).op u =
       ((ρ_ F).inv ≫ F ◁ tensorPowSection s m).app U t) :
     ∃ (φ : D ⟶ F) (w : Γ(D, U)), φ.app U w = t := by
-  obtain ⟨w, hw⟩ := ((Iso.bijective_hom_app c U).comp
+  obtain ⟨w, hw⟩ := ((bijective_app_of_iso c U).comp
     ((isFreeGenerator_tensorPowSectionOne s hs m).bijective_tmulSection_left (N := D) le_rfl)).2
       (unitSectionsEquiv U 1)
   rw [Function.comp_apply, presheaf_map_id_apply] at hw

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Kernels
 
 /-!
 # Quasi-coherent sheaves and sheaves of finite presentation
@@ -20,6 +21,9 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 - `SheafOfModules.isFinitePresentation_pushforward_of_isLeftAdjoint`: finite presentation is
   preserved by pushforward along a continuous, cocontinuous left adjoint.
 - `SheafOfModules.IsFinitePresentation.of_coversTop`: finite presentation is local.
+- `SheafOfModules.Presentation.sigma`, `SheafOfModules.Presentation.isFinite_sigma`: a
+  presentation of a coproduct of sheaves of modules from presentations of the summands, finite
+  if the summands are finitely many and finitely presented.
 -/
 
 @[expose] public section
@@ -200,5 +204,37 @@ lemma IsFinitePresentation.of_coversTop {R : Sheaf J RingCat.{u}}
   exact (QuasicoherentData.bind M X hX D).isFinitePresentation
 
 end bind
+
+section Sigma
+
+variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+  [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+
+/-- **A presentation of a coproduct.** Presentations of the sheaves of modules `M i` give a
+presentation of `∐ M`, with generators and relations the disjoint unions of those of the `M i`:
+the cokernel of `∐ free (relations i) ⟶ ∐ free (generators i)` is `∐ M`. -/
+noncomputable def Presentation.sigma {ι : Type u} (M : ι → SheafOfModules.{u} R)
+    (P : ∀ i, (M i).Presentation) : (∐ M).Presentation :=
+  letI eI := (freeFunctor (R := R)).mapIso (Types.coproductIso fun i ↦ (P i).generators.I).symm ≪≫
+    PreservesCoproduct.iso (freeFunctor (R := R)) fun i ↦ (P i).generators.I
+  letI eJ := (freeFunctor (R := R)).mapIso (Types.coproductIso fun i ↦ (P i).relations.I).symm ≪≫
+    PreservesCoproduct.iso (freeFunctor (R := R)) fun i ↦ (P i).relations.I
+  presentationOfIsCokernelFree
+    (eJ.hom ≫ Limits.Sigma.map (fun i ↦ (freeHomEquiv _).symm (P i).relations.s ≫ kernel.ι _) ≫
+      eI.inv)
+    (eI.hom ≫ Limits.Sigma.map fun i ↦ (P i).generators.π) (by
+      simp only [Category.assoc, Iso.inv_hom_id_assoc]
+      rw [Sigma.map_comp_map]
+      convert comp_zero
+      exact Sigma.hom_ext _ _ fun i ↦ by simp)
+    (IsCokernel.ofIso _ (isColimitCokernelCoforkSigmaMap _ _ _ fun i ↦ (P i).isColimit) _ eJ.symm
+      eI.symm (Iso.refl _) (by simp) (by simp))
+
+instance Presentation.isFinite_sigma {ι : Type u} [Finite ι] (M : ι → SheafOfModules.{u} R)
+    (P : ∀ i, (M i).Presentation) [∀ i, (P i).IsFinite] : (Presentation.sigma M P).IsFinite where
+  isFiniteType_generators := ⟨inferInstanceAs (Finite (Σ i, (P i).generators.I))⟩
+  isFiniteType_relations := ⟨inferInstanceAs (Finite (Σ i, (P i).relations.I))⟩
+
+end Sigma
 
 end SheafOfModules

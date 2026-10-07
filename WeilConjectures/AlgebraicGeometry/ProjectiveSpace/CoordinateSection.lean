@@ -24,8 +24,6 @@ the standard open `D₊(Tᵢ)`.
   homogeneous element `f` of degree `d`.
 - `AlgebraicGeometry.ProjectiveSpace.coordinateSection`: the coordinate section `Tᵢ` of `𝒪(1)`
   on `ℙ(n; S)`.
-- `AlgebraicGeometry.ProjectiveSpace.standardOpenSectionsIso`: the functions on the standard
-  open `D₊(Tᵢ)` of `ℙ(n; Spec A)` form the polynomial ring `A[Tⱼ / Tᵢ : j ≠ i]`.
 
 ## Main results
 
@@ -33,8 +31,6 @@ the standard open `D₊(Tᵢ)`.
   with `g` of degree `1` cover, the section `f` of `𝒪(1)` vanishes exactly off `D₊(f)`.
 - `AlgebraicGeometry.ProjectiveSpace.compl_support_zeroLocus_coordinateSection`: the
   non-vanishing locus of `Tᵢ` is the standard open `D₊(Tᵢ)`.
-- `AlgebraicGeometry.ProjectiveSpace.isNoetherianRing_standardOpen`: for a noetherian ring `A`
-  and finite `n`, the functions on `D₊(Tᵢ) ⊆ ℙ(n; Spec A)` form a noetherian ring.
 -/
 
 @[expose] public section
@@ -155,24 +151,6 @@ theorem compl_support_zeroLocus_coordinateSection (i : n) :
   rw [standardOpen, ← Proj.compl_support_zeroLocus_unitToTwist
     (Proj.exists_mem_basicOpen_homogeneousSubmodule n _) hX]
   rfl
-
-/-- Over an affine base `Spec A`, the ring of functions on the standard open `D₊(Tᵢ)` of
-`ℙ(n; Spec A)` is the polynomial ring `A[Tⱼ / Tᵢ : j ≠ i]`, via the standard affine chart
-`standardOpenIso`. -/
-def standardOpenSectionsIso (A : Type u) [CommRing A] (i : n) :
-    CommRingCat.of (MvPolynomial {j : n // j ≠ i} A) ≅
-      Γ(ℙ(n; Spec (.of A)), standardOpen n (Spec (.of A)) i) :=
-  (Scheme.ΓSpecIso (.of (MvPolynomial {j : n // j ≠ i} A))).symm ≪≫
-    Scheme.Γ.mapIso (AffineSpace.SpecIso _ (.of A)).op ≪≫
-      Scheme.Γ.mapIso (standardOpenIso n _ i).op ≪≫ (standardOpen n _ i).topIso
-
-/-- **The standard opens of `ℙⁿ_A` have noetherian coordinate rings** for a noetherian ring `A`
-and finitely many homogeneous coordinates: `Γ(D₊(Tᵢ)) ≅ A[Tⱼ / Tᵢ : j ≠ i]` is noetherian by
-Hilbert's basis theorem. -/
-theorem isNoetherianRing_standardOpen [Finite n] (A : Type u) [CommRing A] [IsNoetherianRing A]
-    (i : n) : IsNoetherianRing Γ(ℙ(n; Spec (.of A)), standardOpen n (Spec (.of A)) i) :=
-  isNoetherianRing_of_ringEquiv (MvPolynomial {j : n // j ≠ i} A)
-    (standardOpenSectionsIso n A i).commRingCatIsoToRingEquiv
 
 end ProjectiveSpace
 

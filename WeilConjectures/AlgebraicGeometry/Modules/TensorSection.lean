@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Associator
 
 /-!
@@ -56,54 +57,6 @@ shows that `s ↦ s ⊗ e|_W` is a bijection `Γ(M, W) ≃ Γ(M ⊗ N, W)`.
 universe u
 
 open CategoryTheory Opposite TopologicalSpace MonoidalCategory
-
-namespace CategoryTheory.Adjunction
-
-variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
-  [BraidedCategory C] [BraidedCategory D] {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) [F.Braided]
-
-/-- The right adjoint of a braided monoidal functor, with its lax monoidal structure
-`Adjunction.rightAdjointLaxMonoidal`, is compatible with the braidings. -/
-lemma rightAdjointLaxMonoidal_μ_comp_map_braiding (X Y : D) :
-    letI := adj.rightAdjointLaxMonoidal
-    Functor.LaxMonoidal.μ G X Y ≫ G.map (β_ X Y).hom =
-      (β_ (G.obj X) (G.obj Y)).hom ≫ Functor.LaxMonoidal.μ G Y X := by
-  let := adj.rightAdjointLaxMonoidal
-  rw [rightAdjointLaxMonoidal_μ, rightAdjointLaxMonoidal_μ, homEquiv_unit, homEquiv_unit,
-    Category.assoc, ← G.map_comp, ← adj.unit_naturality_assoc, ← G.map_comp]
-  congr 2
-  simp
-
-end CategoryTheory.Adjunction
-
-namespace SheafOfModules
-
-variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
-  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] (R : Sheaf J CommRingCat.{u})
-  [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
-
-attribute [local instance] monoidalCategory symmetricCategory
-
-/-- The sheafification functor from presheaves of modules over `R` to sheaves of modules is
-monoidal for `SheafOfModules.monoidalCategory`. This names the instance of
-`WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal`, which instance search does not
-find for the structure sheaf of a scheme. -/
-@[instance_reducible]
-noncomputable def sheafificationMonoidal :
-    (PresheafOfModules.sheafification.{u}
-      (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).Monoidal :=
-  inferInstance
-
-/-- The sheafification functor from presheaves of modules over `R` to sheaves of modules is
-braided for `SheafOfModules.symmetricCategory`. -/
-@[instance_reducible]
-noncomputable def sheafificationBraided :
-    letI := sheafificationMonoidal R
-    (PresheafOfModules.sheafification.{u}
-      (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).Braided :=
-  inferInstance
-
-end SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
@@ -395,32 +348,33 @@ lemma braiding_hom_app_tmulSection (s : Γ(M, U)) (t : Γ(N, U)) :
     ((sheafificationAdjunction X).rightAdjointLaxMonoidal_μ_comp_map_braiding M N)
 
 /-- The inverse of an isomorphism of modules undoes it on sections. -/
-lemma Iso.inv_app_hom_app_apply (e : M ≅ N) (z : Γ(M, U)) : e.inv.app U (e.hom.app U z) = z := by
+lemma inv_app_hom_app_apply_of_iso (e : M ≅ N) (z : Γ(M, U)) :
+    e.inv.app U (e.hom.app U z) = z := by
   rw [← ConcreteCategory.comp_apply, ← Hom.comp_app, e.hom_inv_id, Hom.id_app]
   rfl
 
 /-- An isomorphism of modules is bijective on sections. -/
-lemma Iso.bijective_hom_app (e : M ≅ N) (U : X.Opens) : Function.Bijective (e.hom.app U) :=
+lemma bijective_app_of_iso (e : M ≅ N) (U : X.Opens) : Function.Bijective (e.hom.app U) :=
   ConcreteCategory.bijective_of_isIso (e.hom.app U)
 
 /-- The inverse of the left unitor: `s ↦ 1 ⊗ s`. -/
 lemma leftUnitor_inv_app (s : Γ(M, U)) :
     (λ_ M).inv.app U s = tmulSection (unitSectionsEquiv U 1) s := by
   conv_lhs => rw [← one_smul Γ(X, U) s, ← leftUnitor_hom_app_tmulSection]
-  exact Iso.inv_app_hom_app_apply _ _
+  exact inv_app_hom_app_apply_of_iso _ _
 
 /-- The inverse of the right unitor: `s ↦ s ⊗ 1`. -/
 lemma rightUnitor_inv_app (s : Γ(M, U)) :
     (ρ_ M).inv.app U s = tmulSection s (unitSectionsEquiv U 1) := by
   conv_lhs => rw [← one_smul Γ(X, U) s, ← rightUnitor_hom_app_tmulSection]
-  exact Iso.inv_app_hom_app_apply _ _
+  exact inv_app_hom_app_apply_of_iso _ _
 
 /-- The inverse of the associator: `s ⊗ (t ⊗ w) ↦ (s ⊗ t) ⊗ w`. -/
 lemma associator_inv_app_tmulSection (s : Γ(M, U)) (t : Γ(N, U)) (w : Γ(P, U)) :
     (α_ M N P).inv.app U (tmulSection s (tmulSection t w)) =
       tmulSection (tmulSection s t) w := by
   rw [← associator_hom_app_tmulSection]
-  exact Iso.inv_app_hom_app_apply _ _
+  exact inv_app_hom_app_apply_of_iso _ _
 
 variable (M N) in
 /-- The map from the presheaf tensor product to `M ⊗ N` is the unit of the sheafification
@@ -546,7 +500,7 @@ lemma IsFreeGenerator.bijective_tmulSection_left {V : X.Opens} {e : Γ(M, V)}
     ext t
     exact (braiding_hom_app_tmulSection _ _).symm
   rw [this]
-  exact (Iso.bijective_hom_app _ W).comp (he.bijective_tmulSection_right h)
+  exact (bijective_app_of_iso _ W).comp (he.bijective_tmulSection_right h)
 
 end Monoidal
 
