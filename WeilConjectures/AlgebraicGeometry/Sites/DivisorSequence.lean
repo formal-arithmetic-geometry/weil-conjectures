@@ -294,27 +294,134 @@ lemma Etale.exists_ord_eq_extendByZero [IsLocallyNoetherian X] [IsRegular X] (V 
   sorry
 
 omit [IsIntegral X] in
-/-- On geometric stalks, extension by zero `⨁_x i_{x*} ℤ ⟶ (V ↦ (V → ℤ))` is injective: its
-components have the retractions `AlgebraicGeometry.Scheme.pointFunctionSheafToPointConstantInt`,
-which kill the other components. -/
-lemma injective_sheafFiber_map_desc_pointConstantIntToPointFunctionSheaf
-    (c : Cofan fun x : {x : X // coheight x = 1} ↦ X.pointConstantInt x.1) (hc : IsColimit c)
-    (s : X) :
+/-- On geometric stalks, extension by zero `⨁_{i} i_{e(i)*} ℤ ⟶ (V ↦ (V → ℤ))` is injective, for
+an injective family `e` of points of `X`: its components have the retractions
+`AlgebraicGeometry.Scheme.pointFunctionSheafToPointConstantInt`, which kill the other
+components. -/
+lemma injective_sheafFiber_map_desc_pointConstantIntToPointFunctionSheaf {ι : Type u}
+    {e : ι → X} (he : Function.Injective e) (c : Cofan fun i ↦ X.pointConstantInt (e i))
+    (hc : IsColimit c) (s : X) :
     Function.Injective ((X.uliftPointSmallEtale s).sheafFiber.map
-      (Cofan.IsColimit.desc hc fun x ↦ X.pointConstantIntToPointFunctionSheaf x.1)) := by
+      (Cofan.IsColimit.desc hc fun i ↦ X.pointConstantIntToPointFunctionSheaf (e i))) := by
   let F := (X.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})
   have hc' : IsColimit (Cofan.mk c.pt c.inj) :=
     hc.ofIsoColimit (Cofan.ext (Iso.refl _) (fun _ ↦ Category.comp_id _))
   have hd := isColimitCofanMkObjOfIsColimit F _ c.inj hc'
   refine AddCommGrpCat.injective_of_isColimit_cofan hd _
-    (fun x ↦ F.map (X.pointFunctionSheafToPointConstantInt x.1)) (fun x ↦ ?_) (fun x x' h ↦ ?_)
+    (fun i ↦ F.map (X.pointFunctionSheafToPointConstantInt (e i))) (fun i ↦ ?_)
+    (fun i i' h ↦ ?_)
   · change F.map _ ≫ F.map _ ≫ F.map _ = _
     rw [← F.map_comp, ← F.map_comp, Cofan.IsColimit.fac_assoc,
       pointConstantIntToPointFunctionSheaf_comp_self, F.map_id]
   · change F.map _ ≫ F.map _ ≫ F.map _ = _
     rw [← F.map_comp, ← F.map_comp, Cofan.IsColimit.fac_assoc,
-      pointConstantIntToPointFunctionSheaf_comp_of_ne _ (fun e ↦ h (Subtype.ext e)),
-      F.map_zero]
+      pointConstantIntToPointFunctionSheaf_comp_of_ne _ (fun h' ↦ h (he h')), F.map_zero]
+
+omit [IsIntegral X] in
+/-- The image of a geometric point of an étale `X`-scheme lies in every open subscheme
+containing its closed point. -/
+lemma range_uliftPointSmallEtale_fiber_subset {s : X} {V : X.Etale}
+    (v : (X.uliftPointSmallEtale s).fiber.obj V) (U : V.left.Opens)
+    (hU : v.down.left (IsLocalRing.closedPoint _) ∈ U) :
+    Set.range v.down.left ⊆ (U : Set V.left) := by
+  rintro _ ⟨z, rfl⟩
+  have : Subsingleton (Spec (.of (AlgebraicClosure (X.residueField s)))) :=
+    inferInstanceAs (Subsingleton (PrimeSpectrum _))
+  rwa [show z = IsLocalRing.closedPoint _ from @Subsingleton.elim _ this z _]
+
+omit [IsIntegral X] in
+/-- **Germs in the image of a point sheaf, from a local statement.** Let `d : B ⟶ (V ↦ (V → ℤ))`
+be a morphism of étale sheaves and `x` a point of `X`. Suppose that every function obtained by
+extending by zero a function on the points of an étale `X`-scheme `V` over `x` is, near every
+point of `V`, the image under `d` of a section of `B`. Then on geometric stalks the image of
+`i_{x*} ℤ ⟶ (V ↦ (V → ℤ))` is contained in that of `d`. -/
+lemma exists_sheafFiber_eq_pointConstantIntToPointFunctionSheaf
+    {B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (d : B ⟶ X.pointFunctionSheaf (AddCommGrpCat.of (ULift.{u + 1} ℤ))) (x : X)
+    (hd : ∀ (V : X.Etale) (y : V.left)
+      (c : ↥(pullback V.hom (X.fromSpecResidueField x)) → ULift.{u + 1} ℤ),
+      ∃ (U : V.left.Opens) (_ : y ∈ U) (b : B.obj.obj (Opposite.op (Etale.ofOpens V U))),
+        d.hom.app _ b = (X.pointFunctionSheaf _).obj.map (Etale.ofOpensι V U).op
+          (extendByZero (AddCommGrpCat.of (ULift.{u + 1} ℤ)) (X.fromSpecResidueField x) c))
+    (s : X) (a : ((X.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj
+      (X.pointConstantInt x)) :
+    ∃ b, (X.uliftPointSmallEtale s).sheafFiber.map d b =
+      (X.uliftPointSmallEtale s).sheafFiber.map (X.pointConstantIntToPointFunctionSheaf x) a := by
+  let Φ := X.uliftPointSmallEtale s
+  obtain ⟨V, v, t, rfl⟩ := Φ.toPresheafFiber_jointly_surjective (P := (X.pointConstantInt x).obj) a
+  let cf : ↥(pullback V.hom (X.fromSpecResidueField x)) → ULift.{u + 1} ℤ :=
+    ((Spec (X.residueField x)).constantSheafToPointFunctionSheaf _).hom.app _ t
+  have hψ : (X.pointConstantIntToPointFunctionSheaf x).hom.app (Opposite.op V) t =
+      extendByZero (AddCommGrpCat.of (ULift.{u + 1} ℤ)) (X.fromSpecResidueField x) cf := rfl
+  obtain ⟨U, hyU, b, hb⟩ := hd V (v.down.left (IsLocalRing.closedPoint _)) cf
+  obtain ⟨v', hv'⟩ := exists_ulift_pointSmallEtale_fiber_ofOpens _ v U
+    (range_uliftPointSmallEtale_fiber_subset X v U hyU)
+  refine ⟨Φ.toPresheafFiber (Etale.ofOpens V U) v' B.obj b, ?_⟩
+  change Φ.presheafFiber.map d.hom _ =
+    Φ.presheafFiber.map (X.pointConstantIntToPointFunctionSheaf x).hom _
+  rw [Φ.toPresheafFiber_naturality_apply, Φ.toPresheafFiber_naturality_apply, hψ, hb,
+    Φ.toPresheafFiber_w_apply, show Φ.fiber.map (Etale.ofOpensι V U) v' = v from hv']
+
+omit [IsIntegral X] in
+/-- **Germs in a kernel, from a local statement.** Let `f : A ⟶ B` and
+`d : B ⟶ (V ↦ (V → ℤ))` be morphisms of étale sheaves. Suppose that every section of `B` over
+an étale `X`-scheme `V` killed by `d` is, near every point of `V`, the image under `f` of a
+section of `A`. Then on geometric stalks the kernel of `d` is contained in the image of `f`. -/
+lemma exists_sheafFiber_eq_of_sheafFiber_map_eq_zero
+    {A B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (f : A ⟶ B)
+    (d : B ⟶ X.pointFunctionSheaf (AddCommGrpCat.of (ULift.{u + 1} ℤ)))
+    (hd : ∀ (V : X.Etale) (y : V.left) (b : B.obj.obj (Opposite.op V)), d.hom.app _ b = 0 →
+      ∃ (U : V.left.Opens) (_ : y ∈ U) (a : A.obj.obj (Opposite.op (Etale.ofOpens V U))),
+        f.hom.app _ a = B.obj.map (Etale.ofOpensι V U).op b)
+    (s : X) (b : ((X.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj B)
+    (hb : (X.uliftPointSmallEtale s).sheafFiber.map d b = 0) :
+    ∃ a, (X.uliftPointSmallEtale s).sheafFiber.map f a = b := by
+  let Φ := X.uliftPointSmallEtale s
+  obtain ⟨V, v, b₀, rfl⟩ := Φ.toPresheafFiber_jointly_surjective (P := B.obj) b
+  change Φ.presheafFiber.map d.hom _ = 0 at hb
+  rw [Φ.toPresheafFiber_naturality_apply,
+    ← map_zero (Φ.toPresheafFiber V v (X.pointFunctionSheaf _).obj).hom,
+    Φ.toPresheafFiber_eq_iff'] at hb
+  obtain ⟨W, φ, w, hw, hφ⟩ := hb
+  have hd₀ : d.hom.app _ (B.obj.map φ.op b₀) = 0 := by
+    have hnat := congrArg (fun F ↦ F b₀)
+      (congrArg AddCommGrpCat.Hom.hom (d.hom.naturality φ.op))
+    exact hnat.trans (hφ.trans (map_zero _))
+  obtain ⟨U, hyU, a, ha⟩ := hd W (w.down.left (IsLocalRing.closedPoint _)) _ hd₀
+  obtain ⟨w', hw'⟩ := exists_ulift_pointSmallEtale_fiber_ofOpens _ w U
+    (range_uliftPointSmallEtale_fiber_subset X w U hyU)
+  refine ⟨Φ.toPresheafFiber (Etale.ofOpens W U) w' A.obj a, ?_⟩
+  change Φ.presheafFiber.map f.hom _ = _
+  rw [Φ.toPresheafFiber_naturality_apply, ha, Φ.toPresheafFiber_w_apply,
+    show Φ.fiber.map (Etale.ofOpensι W U) w' = w from hw', Φ.toPresheafFiber_w_apply, hw]
+
+omit [IsIntegral X] in
+/-- On geometric stalks, if the images of the point sheaves `i_{e(i)*} ℤ ⟶ (V ↦ (V → ℤ))` are
+contained in that of `d`, so is the image of their direct sum. -/
+lemma exists_sheafFiber_eq_desc {B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (d : B ⟶ X.pointFunctionSheaf (AddCommGrpCat.of (ULift.{u + 1} ℤ))) {ι : Type u} {e : ι → X}
+    (c : Cofan fun i ↦ X.pointConstantInt (e i)) (hc : IsColimit c) (s : X)
+    (hd : ∀ i (a : ((X.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj
+      (X.pointConstantInt (e i))), ∃ b, (X.uliftPointSmallEtale s).sheafFiber.map d b =
+        (X.uliftPointSmallEtale s).sheafFiber.map (X.pointConstantIntToPointFunctionSheaf (e i)) a)
+    (p : ((X.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj c.pt) :
+    ∃ b, (X.uliftPointSmallEtale s).sheafFiber.map d b =
+      (X.uliftPointSmallEtale s).sheafFiber.map
+        (Cofan.IsColimit.desc hc fun i ↦ X.pointConstantIntToPointFunctionSheaf (e i)) p := by
+  let F := (X.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})
+  have hc' : IsColimit (Cofan.mk c.pt c.inj) :=
+    hc.ofIsoColimit (Cofan.ext (Iso.refl _) (fun _ ↦ Category.comp_id _))
+  have hd' := isColimitCofanMkObjOfIsColimit F _ c.inj hc'
+  obtain ⟨T, a, rfl⟩ := AddCommGrpCat.exists_eq_sum_of_isColimit_cofan hd' p
+  have hmem : F.map (Cofan.IsColimit.desc hc fun i ↦ X.pointConstantIntToPointFunctionSheaf (e i))
+      (∑ i ∈ T, F.map (c.inj i) (a i)) ∈ AddMonoidHom.range (F.map d).hom := by
+    rw [map_sum]
+    refine AddSubgroup.sum_mem _ fun i _ ↦ ?_
+    obtain ⟨b, hb⟩ := hd i (a i)
+    refine ⟨b, hb.trans ?_⟩
+    rw [← ConcreteCategory.comp_apply, ← F.map_comp, Cofan.IsColimit.fac]
+  obtain ⟨b, hb⟩ := hmem
+  exact ⟨b, hb⟩
 
 /-- On geometric stalks, every germ of a function on points coming from `i_{x*} ℤ` for a point
 `x` of codimension one is the germ of a divisor, by the local principality of divisors
@@ -325,30 +432,9 @@ lemma exists_sheafFiber_divisorMap_eq_pointConstantIntToPointFunctionSheaf
       (X.pointConstantInt x)) :
     ∃ b, (X.uliftPointSmallEtale s).sheafFiber.map X.divisorMap b =
       (X.uliftPointSmallEtale s).sheafFiber.map (X.pointConstantIntToPointFunctionSheaf x) a := by
-  let Φ := X.uliftPointSmallEtale s
-  obtain ⟨V, v, t, rfl⟩ := Φ.toPresheafFiber_jointly_surjective (P := (X.pointConstantInt x).obj) a
-  let cf : ↥(pullback V.hom (X.fromSpecResidueField x)) → ULift.{u + 1} ℤ :=
-    ((Spec (X.residueField x)).constantSheafToPointFunctionSheaf _).hom.app _ t
-  have hψ : (X.pointConstantIntToPointFunctionSheaf x).hom.app (Opposite.op V) t =
-      extendByZero (AddCommGrpCat.of (ULift.{u + 1} ℤ)) (X.fromSpecResidueField x) cf := rfl
-  let y : V.left := v.down.left (IsLocalRing.closedPoint _)
-  obtain ⟨U, hyU, f, hf⟩ := Etale.exists_ord_eq_extendByZero X V y hx cf
-  have hU : Set.range v.down.left ⊆ (U : Set V.left) := by
-    rintro _ ⟨z, rfl⟩
-    have : Subsingleton (Spec (.of (AlgebraicClosure (X.residueField s)))) :=
-      inferInstanceAs (Subsingleton (PrimeSpectrum _))
-    rwa [show z = IsLocalRing.closedPoint _ from @Subsingleton.elim _ this z _]
-  obtain ⟨v', hv'⟩ := exists_ulift_pointSmallEtale_fiber_ofOpens _ v U hU
-  refine ⟨Φ.toPresheafFiber (Etale.ofOpens V U) v'
-    ((Etale.lowerStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).obj
-      (Spec X.functionField).gmSheaf).obj (ULift.up (Additive.ofMul f)), ?_⟩
-  change Φ.presheafFiber.map X.divisorMap.hom _ =
-    Φ.presheafFiber.map (X.pointConstantIntToPointFunctionSheaf x).hom _
-  rw [Φ.toPresheafFiber_naturality_apply, Φ.toPresheafFiber_naturality_apply, hψ,
-    ← show Φ.fiber.map (Etale.ofOpensι V U) v' = v from hv', ← Φ.toPresheafFiber_w_apply]
-  congr 1
-  funext y'
-  exact hf y'
+  refine X.exists_sheafFiber_eq_pointConstantIntToPointFunctionSheaf _ x (fun V y c ↦ ?_) s a
+  obtain ⟨U, hyU, f, hf⟩ := Etale.exists_ord_eq_extendByZero X V y hx c
+  exact ⟨U, hyU, ULift.up (Additive.ofMul f), funext hf⟩
 
 /-- On geometric stalks, a germ of a unit on the generic fibre whose divisor vanishes is the
 germ of a unit, by local algebraic Hartogs
@@ -360,39 +446,11 @@ lemma exists_sheafFiber_gmSheafToLowerStarGmSheaf_eq [IsLocallyNoetherian X] [Is
     (hb : (X.uliftPointSmallEtale s).sheafFiber.map X.divisorMap b = 0) :
     ∃ a, (X.uliftPointSmallEtale s).sheafFiber.map
       (gmSheafToLowerStarGmSheaf X.fromSpecFunctionField) a = b := by
-  let Φ := X.uliftPointSmallEtale s
-  let P := ((Etale.lowerStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).obj
-      (Spec X.functionField).gmSheaf).obj
-  obtain ⟨V, v, f₀, rfl⟩ := Φ.toPresheafFiber_jointly_surjective (P := P) b
-  change Φ.presheafFiber.map X.divisorMap.hom _ = 0 at hb
-  rw [Φ.toPresheafFiber_naturality_apply,
-    ← map_zero (Φ.toPresheafFiber V v (X.pointFunctionSheaf _).obj).hom,
-    Φ.toPresheafFiber_eq_iff'] at hb
-  obtain ⟨W, φ, w, hw, hφ⟩ := hb
-  let f₁ := P.map φ.op f₀
-  have hdf (y' : W.left) : Etale.ord W y' (Additive.toMul f₁.down).val = 0 := by
-    have hnat := congrArg (fun F ↦ (F f₀ : W.left → ULift.{u + 1} ℤ) y')
-      (congrArg AddCommGrpCat.Hom.hom (X.divisorMap.hom.naturality φ.op))
-    have h₁ := congrFun hφ y'
-    exact congrArg ULift.down (hnat.trans h₁)
-  let y : W.left := w.down.left (IsLocalRing.closedPoint _)
-  obtain ⟨U, hyU, u, hu⟩ := Etale.exists_eq_of_ord_eq_zero X W y (Additive.toMul f₁.down) hdf
-  have hU : Set.range w.down.left ⊆ (U : Set W.left) := by
-    rintro _ ⟨z, rfl⟩
-    have : Subsingleton (Spec (.of (AlgebraicClosure (X.residueField s)))) :=
-      inferInstanceAs (Subsingleton (PrimeSpectrum _))
-    rwa [show z = IsLocalRing.closedPoint _ from @Subsingleton.elim _ this z _]
-  obtain ⟨w', hw'⟩ := exists_ulift_pointSmallEtale_fiber_ofOpens _ w U hU
-  refine ⟨Φ.toPresheafFiber (Etale.ofOpens W U) w' X.gmSheaf.obj (ULift.up (Additive.ofMul u)),
-    ?_⟩
-  change Φ.presheafFiber.map (gmSheafToLowerStarGmSheaf X.fromSpecFunctionField).hom _ = _
-  have e : (gmSheafToLowerStarGmSheaf X.fromSpecFunctionField).hom.app
-      (Opposite.op (Etale.ofOpens W U)) (ULift.up (Additive.ofMul u)) =
-      P.map (Etale.ofOpensι W U).op f₁ :=
-    ULift.ext _ _ (congrArg Additive.ofMul (Units.ext hu))
-  rw [Φ.toPresheafFiber_naturality_apply, e,
-    Φ.toPresheafFiber_w_apply, show Φ.fiber.map (Etale.ofOpensι W U) w' = w from hw',
-    Φ.toPresheafFiber_w_apply, hw]
+  refine X.exists_sheafFiber_eq_of_sheafFiber_map_eq_zero _ _ (fun V y b hb ↦ ?_) s b hb
+  obtain ⟨U, hyU, u, hu⟩ := Etale.exists_eq_of_ord_eq_zero X V y (Additive.toMul b.down)
+    (fun y' ↦ congrArg ULift.down (congrFun hb y'))
+  exact ⟨U, hyU, ULift.up (Additive.ofMul u),
+    ULift.ext _ _ (congrArg Additive.ofMul (Units.ext hu))⟩
 
 /-- On geometric stalks, the image of the divisor map is contained in that of
 `⨁_x i_{x*} ℤ ⟶ (V ↦ (V → ℤ))`: near a point, a divisor is supported over finitely many
@@ -483,22 +541,9 @@ lemma exists_sheafFiber_divisorMap_eq_desc [IsLocallyNoetherian X] [IsRegular X]
     (s : X) (p : ((X.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj c.pt) :
     ∃ b, (X.uliftPointSmallEtale s).sheafFiber.map X.divisorMap b =
       (X.uliftPointSmallEtale s).sheafFiber.map
-        (Cofan.IsColimit.desc hc fun x ↦ X.pointConstantIntToPointFunctionSheaf x.1) p := by
-  let F := (X.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})
-  have hc' : IsColimit (Cofan.mk c.pt c.inj) :=
-    hc.ofIsoColimit (Cofan.ext (Iso.refl _) (fun _ ↦ Category.comp_id _))
-  have hd := isColimitCofanMkObjOfIsColimit F _ c.inj hc'
-  obtain ⟨T, a, rfl⟩ := AddCommGrpCat.exists_eq_sum_of_isColimit_cofan hd p
-  have hmem : F.map (Cofan.IsColimit.desc hc fun x ↦ X.pointConstantIntToPointFunctionSheaf x.1)
-      (∑ x ∈ T, F.map (c.inj x) (a x)) ∈ AddMonoidHom.range (F.map X.divisorMap).hom := by
-    rw [map_sum]
-    refine AddSubgroup.sum_mem _ fun x _ ↦ ?_
-    obtain ⟨b, hb⟩ :=
-      X.exists_sheafFiber_divisorMap_eq_pointConstantIntToPointFunctionSheaf s x.2 (a x)
-    refine ⟨b, hb.trans ?_⟩
-    rw [← ConcreteCategory.comp_apply, ← F.map_comp, Cofan.IsColimit.fac]
-  obtain ⟨b, hb⟩ := hmem
-  exact ⟨b, hb⟩
+        (Cofan.IsColimit.desc hc fun x ↦ X.pointConstantIntToPointFunctionSheaf x.1) p :=
+  exists_sheafFiber_eq_desc X _ c hc s
+    (fun x ↦ X.exists_sheafFiber_divisorMap_eq_pointConstantIntToPointFunctionSheaf s x.2) p
 
 /-- **The cokernel of `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is the sheaf of Weil divisors.** Let `X` be an
 integral regular locally noetherian scheme with generic point `i : Spec k(X) ⟶ X`. Then the
@@ -526,7 +571,8 @@ theorem nonempty_cokernel_toGenericGm_iso [IsLocallyNoetherian X] [IsRegular X]
     (gmSheafToLowerStarGmSheaf X.fromSpecFunctionField) X.divisorMap
     (Cofan.IsColimit.desc hc fun x ↦ X.pointConstantIntToPointFunctionSheaf x.1)
     X.gmSheafToLowerStarGmSheaf_comp_divisorMap X.exists_sheafFiber_gmSheafToLowerStarGmSheaf_eq
-    (X.injective_sheafFiber_map_desc_pointConstantIntToPointFunctionSheaf c hc)
+    (X.injective_sheafFiber_map_desc_pointConstantIntToPointFunctionSheaf Subtype.val_injective
+      c hc)
     (X.exists_sheafFiber_desc_eq_divisorMap c hc) (X.exists_sheafFiber_divisorMap_eq_desc c hc)
   exact ⟨(cokernelCompIsIso _ _).symm ≪≫ cokernelIsoOfEq he ≪≫ φ⟩
 

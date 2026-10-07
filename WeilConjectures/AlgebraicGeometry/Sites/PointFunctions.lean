@@ -260,6 +260,45 @@ lemma lowerStarPointFunctionSheafToPointFunctionSheaf_comp_eq_zero {Z' : Scheme.
 
 end Pushforward
 
+section Indicator
+
+variable {X}
+
+open Classical in
+/-- Multiplication by the indicator function of the preimage of a set `S` of points of `X`: the
+endomorphism of `V ↦ (V → M)` keeping the values at the points of `V` over `S` and replacing the
+others by `0`. -/
+noncomputable def pointFunctionSheafIndicator (S : Set X) :
+    X.pointFunctionSheaf M ⟶ X.pointFunctionSheaf M :=
+  ⟨{ app V := AddCommGrpCat.ofHom
+        { toFun D y := if V.unop.hom y ∈ S then D y else 0
+          map_zero' := by
+            funext y
+            change (if _ then (0 : M) else 0) = 0
+            split_ifs <;> rfl
+          map_add' D D' := by
+            funext y
+            change (if _ then D y + D' y else 0) = (if _ then D y else 0) + (if _ then D' y else 0)
+            split_ifs <;> simp }
+     naturality {V W} φ := by
+      ext D
+      funext y
+      have e : W.unop.hom y = V.unop.hom (φ.unop.left y) :=
+        (congrArg (fun f : W.unop.left ⟶ X ↦ f y)
+          (CategoryTheory.Over.w ((Etale.forget X).map φ.unop))).symm
+      change (if W.unop.hom y ∈ S then D (φ.unop.left y) else 0) =
+        if V.unop.hom (φ.unop.left y) ∈ S then D (φ.unop.left y) else 0
+      rw [e] }⟩
+
+open Classical in
+lemma pointFunctionSheafIndicator_app_apply (S : Set X) (V : X.Etale) (D : V.left → M)
+    (y : V.left) :
+    ((pointFunctionSheafIndicator M S).hom.app (op V) D : V.left → M) y =
+      if V.hom y ∈ S then D y else 0 :=
+  rfl
+
+end Indicator
+
 section Neighbourhoods
 
 variable {X} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
