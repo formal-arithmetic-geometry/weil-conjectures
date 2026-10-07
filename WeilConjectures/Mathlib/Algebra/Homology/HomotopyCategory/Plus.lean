@@ -103,6 +103,20 @@ lemma mapHomotopyCategoryPlus_rightUnitor_hom_app {𝒞 𝒟 : Type*}
   rw [← (HomotopyCategory.quotient _ _).map_id]
   congr 1
 
+/-- `NatTrans.mapHomotopyCategoryPlus` sends the inverse of a right unitor to the identity. -/
+@[simp]
+lemma mapHomotopyCategoryPlus_rightUnitor_inv_app {𝒞 𝒟 : Type*}
+    [Category* 𝒞] [Category* 𝒟] [Preadditive 𝒞] [Preadditive 𝒟] (F : 𝒞 ⥤ 𝒟) [F.Additive]
+    (K : HomotopyCategory.Plus 𝒞) :
+    (NatTrans.mapHomotopyCategoryPlus F.rightUnitor.inv).app K = 𝟙 _ := by
+  apply (HomotopyCategory.Plus.ι 𝒟).map_injective
+  obtain ⟨⟨X⟩, hK⟩ := K
+  rw [NatTrans.ι_map_mapHomotopyCategoryPlus_app]
+  erw [CategoryTheory.Functor.map_id]
+  change (HomotopyCategory.quotient _ _).map _ = 𝟙 ((HomotopyCategory.quotient _ _).obj _)
+  rw [← (HomotopyCategory.quotient _ _).map_id]
+  congr 1
+
 /-- `NatTrans.mapHomotopyCategoryPlus` sends the inverse of a left unitor to the identity. -/
 @[simp]
 lemma mapHomotopyCategoryPlus_leftUnitor_inv_app {𝒞 𝒟 : Type*}
