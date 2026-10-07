@@ -438,6 +438,48 @@ lemma exists_opens_of_relative_isOpenImmersion {S : Scheme.{u}}
     rw [h₂]
     exact ((hF.rep.fst g).app (op W) (ULift.up d)).2
 
+/-- **Recognising subfunctors representable by open immersions.** Conversely to
+`AlgebraicGeometry.exists_opens_of_relative_isOpenImmersion`, if for every `T` and
+`x ∈ P(T)` there is an open `U ⊆ T` such that a morphism `a : W ⟶ T` factors through `U` if and
+only if `a^* x ∈ F(W)`, then the inclusion `F ⊆ P` is representable by open immersions: the
+pullback of `F` along `x : h_T ⟶ P` is represented by the open subscheme `U` of `T`
+(Stacks, Definition 01JI).
+
+(blueprint: `def-pc-open-subfunctor`) -/
+lemma relative_isOpenImmersion_of_exists_opens {S : Scheme.{u}}
+    {P : (Over S)ᵒᵖ ⥤ Type (max w u)} {F : Subfunctor P}
+    (hF : ∀ (T : Over S) (x : P.obj (op T)), ∃ U : T.left.Opens, ∀ (W : Over S) (a : W ⟶ T),
+      P.map a.op x ∈ F.obj (op W) ↔ Set.range a.left ⊆ U) :
+    (IsOpenImmersion.inverseImage (Over.forget S)).relative uliftYoneda.{w} F.ι := by
+  refine MorphismProperty.relative.of_exists fun T g ↦ ?_
+  obtain ⟨x, rfl⟩ := uliftYonedaEquiv.symm.surjective g
+  obtain ⟨U, hU⟩ := hF T x
+  let b : Over S := Over.mk (U.ι ≫ T.hom)
+  let snd : b ⟶ T := Over.homMk U.ι
+  have hb : P.map snd.op x ∈ F.obj (op b) :=
+    (hU b snd).2 (by change Set.range U.ι ⊆ U; rw [Scheme.Opens.range_ι])
+  refine ⟨b, uliftYonedaEquiv.symm ⟨_, hb⟩, snd,
+    IsPullback.of_forall_isPullback_app fun W ↦ ?_, ?_⟩
+  · rw [Types.isPullback_iff]
+    refine ⟨?_, fun d d' ⟨_, h⟩ ↦ ?_, fun e a h ↦ ?_⟩
+    · ext d
+      change P.map d.down.op (P.map snd.op x) = P.map (d.down ≫ snd).op x
+      rw [op_comp, Functor.map_comp_apply]
+    · replace h : d.down.left ≫ U.ι = d'.down.left ≫ U.ι := congr_arg (·.down.left) h
+      exact ULift.ext _ _ (Over.OverMorphism.ext ((cancel_mono U.ι).1 h))
+    · replace h : e.1 = P.map a.down.op x := h
+      have hrange : Set.range a.down.left.base ⊆ Set.range U.ι.base := by
+        rw [Scheme.Opens.range_ι, ← hU, ← h]
+        exact e.2
+      let d : W.unop ⟶ b := Over.homMk (IsOpenImmersion.lift U.ι a.down.left hrange) (by
+        simp [b, IsOpenImmersion.lift_fac_assoc])
+      have hd : d ≫ snd = a.down := by ext; exact IsOpenImmersion.lift_fac _ _ _
+      refine ⟨ULift.up d, Subtype.ext ?_, ULift.ext _ _ hd⟩
+      change P.map d.op (P.map snd.op x) = e.1
+      rw [← Functor.map_comp_apply, ← op_comp, hd, h]
+  · change IsOpenImmersion U.ι
+    infer_instance
+
 /-- **Covers of a functor.** A family `F i` of subfunctors of a presheaf `P` on `Over S`
 *covers* `P` if every element `x ∈ P(T)` lies locally on `T` in one of the `F i`: every point of
 `T` has an open neighbourhood `U` with `x|_U ∈ F i (U)` for some `i` (Stacks, Definition 01JI).
