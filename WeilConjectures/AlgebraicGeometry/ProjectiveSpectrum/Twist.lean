@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
@@ -469,6 +470,55 @@ TODO: construct the canonical isomorphism sending `e^{(a)} ⊗ e^{(b)}` to `e^{(
 theorem nonempty_tensorObj_twist_iso (h : ∀ x : Proj 𝒜, ∃ f ∈ 𝒜 1, x ∈ Proj.basicOpen 𝒜 f)
     (a b : ℤ) : Nonempty (twist 𝒜 a ⊗ twist 𝒜 b ≅ twist 𝒜 (a + b)) :=
   sorry
+
+section UnitToTwist
+
+/-- A point `x` of an open `U` of `Proj 𝒜` lies in the basic open of a section `s` over `U` if
+and only if the value of `s` at `x` is a unit of the localization `A_x`. -/
+lemma mem_basicOpen_iff_isUnit_val {U : (Proj 𝒜).Opens} (s : Γ(Proj 𝒜, U)) {x : Proj 𝒜}
+    (hx : x ∈ U) : x ∈ (Proj 𝒜).basicOpen s ↔ IsUnit (s.1 ⟨x, hx⟩).val := by
+  rw [Scheme.mem_basicOpen _ _ _ hx, HomogeneousLocalization.isUnit_iff_isUnit_val,
+    ← Proj.stalkIso'_germ 𝒜 U x hx s]
+  exact (isUnit_map_iff (stalkIso' 𝒜 x) _).symm
+
+variable {d : ℕ} {f : A} (hf : f ∈ 𝒜 d)
+
+/-- The global section of `𝒪(d)` on `Proj 𝒜` given by a homogeneous element `f` of degree `d`,
+as a morphism `𝒪 ⟶ 𝒪(0 + d)`: multiplication by `f` from `𝒪 ≅ 𝒪(0)`. -/
+def unitToTwist : Scheme.Modules.unit (Proj 𝒜) ⟶ twist 𝒜 (0 + d) :=
+  unitToTwistZero ≫ twistMul 0 hf
+
+/-- The value of `unitToTwist hf` on a section `s` at a point `x` is `s x * f`. -/
+lemma val_unitToTwist_app_apply {U : (Proj 𝒜).Opens} (s : Γ(Proj 𝒜, U)) (x : U) :
+    (((unitToTwist hf).app U s).1 x).1 = (s.1 x).val * Localization.mk f 1 :=
+  rfl
+
+/-- On an open contained in `D₊(f)`, the section `f` of `𝒪(d)` induces a bijection from the
+functions to the sections of `𝒪(d)`. -/
+lemma bijective_unitToTwist_app {V : (Proj 𝒜).Opens} (hV : V ≤ Proj.basicOpen 𝒜 f) :
+    Function.Bijective ((unitToTwist hf).app V) := by
+  have h₁ : Function.Bijective (Scheme.Modules.Hom.app (unitToTwistZero (𝒜 := 𝒜)) V) :=
+    ⟨fun s t h ↦ Subtype.ext (funext fun x ↦ degreePart.zeroEquiv.injective
+      ((val_unitToTwistZero_app_apply V s x).symm.trans (congr($(h).1 x) |>.trans
+        (val_unitToTwistZero_app_apply V t x)))), fun t ↦ ⟨sectionsZeroInv t, Subtype.ext
+        (funext fun x ↦ (val_unitToTwistZero_app_apply _ _ _).trans
+          (zeroEquiv_sectionsZeroInv t x))⟩⟩
+  have h₂ := isIso_mulPresheafHom_app 0 hf (U := Opposite.op V) hV
+  exact (ConcreteCategory.bijective_of_isIso ((mulPresheafHom 0 hf).app (Opposite.op V))).comp h₁
+
+/-- The section `f` of `𝒪(d)` is a free generator of `𝒪(d)` on `D₊(f)`. -/
+lemma isFreeGenerator_unitToTwist :
+    Scheme.Modules.IsFreeGenerator
+      ((unitToTwist hf).app (Proj.basicOpen 𝒜 f) (1 : Γ(Proj 𝒜, Proj.basicOpen 𝒜 f))) :=
+  (Scheme.Modules.isFreeGenerator_one _).app_of_bijective _ fun _ hV ↦
+    bijective_unitToTwist_app hf hV
+
+/-- Scalar multiplication on the sections of `𝒪(m)` is pointwise multiplication in `A_x`. -/
+lemma val_smul_apply {m : ℤ} {U : (Proj 𝒜).Opens} (r : Γ(Proj 𝒜, U)) (t : Γ(twist 𝒜 m, U))
+    (x : U) : ((r • t).1 x).1 = (r.1 x).val * (t.1 x).1 :=
+  rfl
+
+end UnitToTwist
 
 end Proj
 

@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
@@ -40,6 +41,51 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+set_option backward.isDefEq.respectTransparency false in
+/-- For an affine open `U`, the global sections of the restriction of `M` along
+`hU.fromSpec : Spec Γ(X, U) ⟶ X` are the sections of `M` over `U`, as `Γ(X, U)`-modules. -/
+noncomputable def sectionsTopRestrictFromSpecEquiv {X : Scheme.{u}} (M : X.Modules)
+    {U : X.Opens} (hU : IsAffineOpen U) :
+    Γ(M.restrict hU.fromSpec, ⊤) ≃ₗ[Γ(X, U)] Γ(M, U) where
+  toFun x := M.presheaf.map (homOfLE (by rw [Hom.image_top_eq_opensRange,
+    hU.opensRange_fromSpec])).op ((M.restrictAppIso hU.fromSpec ⊤).hom x)
+  invFun y := (M.restrictAppIso hU.fromSpec ⊤).inv
+    (M.presheaf.map (homOfLE (hU.fromSpec_image_le ⊤)).op y)
+  map_add' x y := by simp
+  map_smul' r x := by
+    dsimp only
+    rw [restrictAppIso_fromSpec_smul, map_smul, ← Functor.map_comp_apply,
+      Subsingleton.elim (_ ≫ _ : Opposite.op U ⟶ Opposite.op U) (𝟙 _),
+      CategoryTheory.Functor.map_id, ConcreteCategory.id_apply, RingHom.id_apply]
+  left_inv x := by
+    dsimp only
+    rw [← Functor.map_comp_apply,
+      Subsingleton.elim (_ ≫ _ : Opposite.op (hU.fromSpec ''ᵁ ⊤) ⟶ _) (𝟙 _),
+      CategoryTheory.Functor.map_id, ConcreteCategory.id_apply, Iso.hom_inv_id_apply]
+  right_inv y := by
+    dsimp only
+    rw [Iso.inv_hom_id_apply, ← Functor.map_comp_apply,
+      Subsingleton.elim (_ ≫ _ : Opposite.op U ⟶ Opposite.op U) (𝟙 _),
+      CategoryTheory.Functor.map_id, ConcreteCategory.id_apply]
+
+/-- Let `i : X ⟶ Y` be a morphism of schemes and `V` an open of `Y` such that
+`i.app V : Γ(Y, V) ⟶ Γ(X, i ⁻¹ᵁ V)` is surjective. If `Γ(F, i ⁻¹ᵁ V)` is a finite
+`Γ(X, i ⁻¹ᵁ V)`-module, then `Γ(i_* F, V)`, which is the same group with `Γ(Y, V)` acting through
+`i.app V`, is a finite `Γ(Y, V)`-module. -/
+theorem finite_sections_pushforward_of_surjective {X Y : Scheme.{u}} (i : X ⟶ Y) (F : X.Modules)
+    (V : Y.Opens) (hi : Function.Surjective (i.app V))
+    [Module.Finite Γ(X, i ⁻¹ᵁ V) Γ(F, i ⁻¹ᵁ V)] :
+    Module.Finite Γ(Y, V) Γ((pushforward i).obj F, V) := by
+  let := (i.app V).hom.toAlgebra
+  let : Module Γ(Y, V) Γ(F, i ⁻¹ᵁ V) := Module.compHom _ (i.app V).hom
+  have : IsScalarTower Γ(Y, V) Γ(X, i ⁻¹ᵁ V) Γ(F, i ⁻¹ᵁ V) := ⟨fun a b m ↦ mul_smul _ _ _⟩
+  have : Module.Finite Γ(Y, V) Γ(X, i ⁻¹ᵁ V) :=
+    Module.Finite.of_surjective (Algebra.linearMap _ _) hi
+  have := Module.Finite.trans Γ(X, i ⁻¹ᵁ V) Γ(F, i ⁻¹ᵁ V) (R := Γ(Y, V))
+  exact Module.Finite.equiv
+    { AddEquiv.refl _ with map_smul' _ _ := rfl :
+      Γ(F, i ⁻¹ᵁ V) ≃ₗ[Γ(Y, V)] Γ((pushforward i).obj F, V) }
 
 variable {X Y : Scheme.{u}} (i : X ⟶ Y) [IsClosedImmersion i]
 
@@ -103,7 +149,24 @@ noetherian ring `R`, hence finitely presented.
 theorem isFinitePresentation_pushforward_of_isClosedImmersion [IsLocallyNoetherian Y]
     (F : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) F] :
-    SheafOfModules.IsFinitePresentation (R := Y.ringCatSheaf) ((pushforward i).obj F) :=
-  sorry
+    SheafOfModules.IsFinitePresentation (R := Y.ringCatSheaf) ((pushforward i).obj F) := by
+  have : ((pushforward i).obj F).IsQuasicoherent :=
+    isQuasicoherent_pushforward_of_isClosedImmersion i F
+  let ι := {V : Y.Opens // IsAffineOpen V}
+  have (j : ι) : Module.Finite Γ(X, i ⁻¹ᵁ j.1) Γ(F, i ⁻¹ᵁ j.1) :=
+    finite_sections_of_isFinitePresentation F (j.2.preimage i)
+  have (j : ι) : IsNoetherianRing Γ(Y, j.1) :=
+    IsLocallyNoetherian.component_noetherian ⟨j.1, j.2⟩
+  have (j : ι) : Module.Finite Γ(Y, j.1)
+      Γ(((pushforward i).obj F).restrict j.2.fromSpec, ⊤) := by
+    have := finite_sections_pushforward_of_surjective i F j.1 (i.app_surjective j.1 j.2)
+    exact Module.Finite.equiv (sectionsTopRestrictFromSpecEquiv _ j.2).symm
+  choose P hP using fun j : ι ↦
+    exists_presentation_isFinite (((pushforward i).obj F).restrict j.2.fromSpec)
+  refine isFinitePresentation_of_iSup_opensRange_eq_top _ (fun j : ι ↦ j.2.fromSpec) ?_ P
+  refine eq_top_iff.mpr fun y _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ?_
+  obtain ⟨V, hV, hyV, -⟩ := TopologicalSpace.Opens.isBasis_iff_nbhd.mp Y.isBasis_affineOpens
+    (U := ⊤) (Set.mem_univ y)
+  exact ⟨⟨V, hV⟩, by rwa [IsAffineOpen.opensRange_fromSpec]⟩
 
 end AlgebraicGeometry.Scheme.Modules

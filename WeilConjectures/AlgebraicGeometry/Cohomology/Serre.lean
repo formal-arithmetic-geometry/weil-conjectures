@@ -14,10 +14,13 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
+public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.MonomialCech
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
@@ -240,8 +243,56 @@ theorem ProjectiveSpace.exists_epi_sigma_twist (A : Type u) [CommRing A] [IsNoet
       (φ : (∐ fun a ↦ ProjectiveSpace.twist n (Spec (.of A)) (-(e a : ℤ))) ⟶ F), Epi φ ∧
         SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) (kernel φ) ∧
         SheafOfModules.IsFinitePresentation (R := (ℙ(n; Spec (.of A))).ringCatSheaf)
-          (kernel φ) :=
-  sorry
+          (kernel φ) := by
+  -- every section over `D₊(Tᵢ)` is hit by a map from a twist `𝒪(-m)`, by clearing denominators
+  have key (i : n) : ∀ (V : (ℙ(n; Spec (.of A))).Opens)
+      (_ : (Hom.zeroLocus (ProjectiveSpace.coordinateSection n (Spec (.of A)) i)).support.compl
+        = V) (t : Γ(F, V)), ∃ (m : ℕ) (φ : ProjectiveSpace.twist n (Spec (.of A)) (-(m : ℤ)) ⟶ F)
+        (w : Γ(ProjectiveSpace.twist n (Spec (.of A)) (-(m : ℤ)), V)), φ.app V w = t := by
+    rintro V rfl t
+    have : CompactSpace ℙ(n; Spec (.of A)) :=
+      QuasiCompact.compactSpace_of_compactSpace (ℙ(n; Spec (.of A)) ↘ Spec (.of A))
+    obtain ⟨m, u, hu⟩ := exists_tensorPowSection_eq_restrict (ℙ(n; Spec (.of A)) ↘ Spec (.of A))
+      _ (ProjectiveSpace.coordinateSection n (Spec (.of A)) i) F t
+    obtain ⟨e₁⟩ := ProjectiveSpace.nonempty_tensorPow_twist_one_iso n (Spec (.of A)) m
+    obtain ⟨e₂⟩ := ProjectiveSpace.nonempty_twist_tensorObj_iso n (Spec (.of A)) m (-m)
+    let c : (ProjectiveSpace.twist n (Spec (.of A)) 1).tensorPow m ⊗
+        ProjectiveSpace.twist n (Spec (.of A)) (-(m : ℤ)) ≅ 𝟙_ _ :=
+      (e₁ ⊗ᵢ Iso.refl _) ≪≫ e₂ ≪≫ eqToIso (by rw [add_neg_cancel]) ≪≫
+        (ProjectiveSpace.unitIsoTwistZero n _).symm
+    exact ⟨m, exists_hom_app_eq_of_tensorPowSection _ (isFreeGenerator_app_one_of_le _ le_rfl)
+      m c t u hu⟩
+  -- finitely many generators of `Γ(D₊(Tᵢ), ℱ)` for each `i`
+  have := Fintype.ofFinite n
+  have hfin (i : n) : Module.Finite Γ(ℙ(n; Spec (.of A)), ProjectiveSpace.standardOpen n _ i)
+      Γ(F, ProjectiveSpace.standardOpen n _ i) :=
+    finite_sections_of_isFinitePresentation F (ProjectiveSpace.isAffineOpen_standardOpen _ _ i)
+  choose r t ht using fun i ↦ (hfin i).exists_fin
+  choose m φ w hw using fun (a : Σ i : n, ULift.{u} (Fin (r i))) ↦ key a.1 _
+    (ProjectiveSpace.compl_support_zeroLocus_coordinateSection n _ a.1) (t a.1 a.2.down)
+  refine ⟨Σ i : n, ULift.{u} (Fin (r i)), inferInstance, m, Sigma.desc φ, ?_, ?_, ?_⟩
+  · -- the sum of these maps is surjective on every `D₊(Tᵢ)`
+    refine epi_of_surjective_app _ (ProjectiveSpace.standardOpen n (Spec (.of A)))
+      (fun i ↦ ProjectiveSpace.isAffineOpen_standardOpen _ _ i)
+      (ProjectiveSpace.iSup_standardOpen n _) fun i y ↦ ?_
+    have hy : y ∈ Submodule.span Γ(ℙ(n; Spec (.of A)), ProjectiveSpace.standardOpen n _ i)
+        (Set.range (t i)) := by
+      rw [ht i]
+      trivial
+    obtain ⟨c, rfl⟩ := (Submodule.mem_span_range_iff_exists_fun _).mp hy
+    refine ⟨∑ a, c a • (Sigma.ι (fun b ↦ ProjectiveSpace.twist n (Spec (.of A)) (-(m b : ℤ)))
+      ⟨i, ⟨a⟩⟩).app _ (w ⟨i, ⟨a⟩⟩), ?_⟩
+    simp only [map_sum, Hom.app_smul]
+    refine Finset.sum_congr rfl fun a _ ↦ ?_
+    rw [← ConcreteCategory.comp_apply, ← Hom.comp_app, Sigma.ι_desc, hw]
+  · have := isQuasicoherent_sigma
+      (fun a ↦ ProjectiveSpace.twist n (Spec (.of A)) (-(m a : ℤ)))
+    exact isQuasicoherent_kernel _
+  · have : IsLocallyNoetherian ℙ(n; Spec (.of A)) :=
+      LocallyOfFiniteType.isLocallyNoetherian (ℙ(n; Spec (.of A)) ↘ Spec (.of A))
+    have := isFinitePresentation_sigma
+      (fun a ↦ ProjectiveSpace.twist n (Spec (.of A)) (-(m a : ℤ)))
+    exact isFinitePresentation_kernel _
 
 end TwistQuotient
 

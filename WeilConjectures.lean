@@ -105,6 +105,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSections
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology
@@ -138,6 +140,7 @@ public import WeilConjectures.AlgebraicGeometry.PoincareDualitySetting
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CurveProjection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials
