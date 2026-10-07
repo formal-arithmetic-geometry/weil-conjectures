@@ -26,11 +26,14 @@ in the limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit`.
 - `AlgebraicGeometry.Etale.lowerStarPlusTransition`: the map `Rh_* K ⟶ Rh'_* (a^* K)`.
 - `AlgebraicGeometry.Etale.higherDirectImageTransition`: the map
   `R^q h_* F ⟶ R^q h'_* a^* F`.
+- `AlgebraicGeometry.Etale.higherDirectImagePresheaf`: the presheaf `W ↦ H^q(W ×_X Y, K|)`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.higherDirectImage_limit`: higher direct images commute with limits
   of schemes along affine transition morphisms.
+- `AlgebraicGeometry.Etale.nonempty_presheafToSheaf_higherDirectImagePresheaf_iso`: `R^q h_* K`
+  is the sheafification of `W ↦ H^q(W ×_X Y, K|)` for a quasi-compact quasi-separated `h`.
 - `AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`: higher direct images
   along a quasi-compact quasi-separated morphism commute with filtered colimits of sheaves.
 - `AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists`: the
@@ -135,6 +138,65 @@ theorem Etale.higherDirectImage_limit {W S : Scheme.{u}} (k : W ⟶ S)
       ∃ (j : I) (f : j ⟶ i), ((S.uliftPointSmallEtale s).sheafFiber.map
         (Etale.higherDirectImageOverMap Λ k G q (D.map f))).hom y' = 0 :=
   sorry
+
+section CohomologyPresheaf
+
+/-- The free sheaf `Λ[W]` of `Λ`-modules on an étale `X`-scheme `W`: the sheafification of the
+presheaf `V ↦ Λ^{(Hom_X(V, W))}`. It corepresents sections over `W`, and
+`Ext^q(Λ[W], F)` is the étale cohomology `H^q(W, F|_W)`. -/
+noncomputable def Etale.freeSheaf (X : Scheme.{u}) :
+    X.Etale ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+  uliftYoneda.{u + 1} ⋙ (Functor.whiskeringRight _ _ _).obj (ModuleCat.free Λ) ⋙
+    presheafToSheaf _ _
+
+/-- The hypercohomology presheaf of an object `K` of `D⁺(Y_ét, Λ)` relative to `h : Y ⟶ X`:
+the presheaf on the small étale site of `X` sending `W` to
+`Hom(h^* Λ[W], K[q]) = H^q(W ×_X Y, K|)`, the degree-`q` (hyper)cohomology of the restriction
+of `K` to `W ×_X Y`; indeed `h^* Λ[W] = Λ[W ×_X Y]`. For a sheaf `K = F[0]` this is the
+presheaf `W ↦ H^q(W ×_X Y, F|)`. -/
+noncomputable def Etale.higherDirectImagePresheaf {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
+  (Etale.freeSheaf Λ X ⋙ (h)^*[ModuleCat.{u + 1} Λ] ⋙
+    DerivedCategory.Plus.singleFunctor _ 0).op ⋙ preadditiveYoneda.obj (K⟦q⟧)
+
+/-- Blueprint `lem-weil-pbc-qcqs-higher-direct-image`: Higher direct images for quasi-compact
+quasi-separated morphisms, for complexes.
+
+Let `h : Y ⟶ X` be quasi-compact and quasi-separated and `K ∈ D⁺(Y_ét, Λ)`. Then the `q`-th
+cohomology sheaf of `Rh_* K` is, as a sheaf of abelian groups, the sheafification of the
+presheaf `W ↦ H^q(W ×_X Y, K|)` on the small étale site of `X`
+(`AlgebraicGeometry.Etale.higherDirectImagePresheaf`). The isomorphism is stated as a bare
+`Nonempty`, as in the blueprint, which does not specify it. -/
+theorem Etale.nonempty_presheafToSheaf_higherDirectImagePresheaf_iso {X Y : Scheme.{u}}
+    (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (q : ℤ)
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+        (Etale.higherDirectImagePresheaf Λ h q K) ≅
+      (sheafCompose X.smallEtaleTopology
+        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        ((DerivedCategory.Plus.homologyFunctor _ q).obj (R+((h)_*[ModuleCat.{u + 1} Λ]).obj K))) :=
+  sorry
+
+/-- Blueprint `lem-weil-pbc-qcqs-higher-direct-image`: Higher direct images for quasi-compact
+quasi-separated morphisms.
+
+Let `h : Y ⟶ X` be quasi-compact and quasi-separated and `F` an étale sheaf of `Λ`-modules on
+`Y`. Then `R^q h_* F` is, as a sheaf of abelian groups, the sheafification of the presheaf
+`W ↦ H^q(W ×_X Y, F|)` on the small étale site of `X`. This is the case `K = F[0]` of
+`AlgebraicGeometry.Etale.nonempty_presheafToSheaf_higherDirectImagePresheaf_iso`. -/
+theorem Etale.nonempty_presheafToSheaf_higherDirectImagePresheaf_single_iso
+    {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (q : ℤ)
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Nonempty ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+        (Etale.higherDirectImagePresheaf Λ h q
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ≅
+      (sheafCompose X.smallEtaleTopology
+        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        (Etale.higherDirectImage Λ h q F)) :=
+  Etale.nonempty_presheafToSheaf_higherDirectImagePresheaf_iso Λ h q _
+
+end CohomologyPresheaf
 
 /-- Blueprint `lemma-weil-pbc-direct-image-filtered-colimit`: Filtered colimits and higher
 direct image.
