@@ -629,6 +629,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Comma.Arrow
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.CardinalArrow
 public import WeilConjectures.Mathlib.CategoryTheory.Elements
 public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
+public import WeilConjectures.Mathlib.CategoryTheory.EpiMono
 public import WeilConjectures.Mathlib.CategoryTheory.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
