@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
@@ -236,6 +237,60 @@ variable {n S} {X : Scheme.{u}}
 `i : X ⟶ ℙ(n; S)`, e.g. its restriction to a closed subscheme. -/
 abbrev twistRestrict (i : X ⟶ ℙ(n; S)) (m : ℤ) : X.Modules :=
   (Scheme.Modules.pullback i).obj (twist n S m)
+
+section Sections
+
+open Scheme.Modules
+open MvPolynomial (homogeneousSubmodule X_mem_homogeneousSubmodule_one awayXRatio)
+
+variable (n S) in
+/-- **The global section `Tᵢ` of `𝒪(1)`** on `ℙ(n; S)`: the pullback of the global section
+`Tᵢ` of `𝒪(1)` on the integral model `Proj ℤ[Tᵢ]`. -/
+def twistOneSection (i : n) : Γ(twist n S 1, ⊤) :=
+  pullbackSection (toProjInt n S)
+    (Hom.app (Proj.unitToTwist (X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) i)) ⊤
+      (1 : Γ(Proj (homogeneousSubmodule n (ULift.{u} ℤ)), ⊤)))
+
+/-- The pullback of the global section `Tᵢ` of `𝒪(1)` along a morphism `g : X ⟶ ℙ(n; S)` is a
+free generator of `g^* 𝒪(1)` over the preimage of the standard open `D₊(Tᵢ)`. -/
+lemma isFreeGenerator_pullbackSection_twistOneSection (g : X ⟶ ℙ(n; S)) (i : n) :
+    IsFreeGenerator (((Scheme.Modules.pullback g).obj (twist n S 1)).presheaf.map
+      (homOfLE (g.preimage_mono (le_top : toProjInt n S ⁻¹ᵁ
+        Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X i) ≤ ⊤))).op
+      (pullbackSection g (twistOneSection n S i))) := by
+  have := isIso_restrictFunctor_map_pullbackObjUnitIso_inv_comp
+    (Proj.unitToTwist (X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) i)) (g := toProjInt n S)
+    (U := Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X i))
+  have h := pullbackSection_app_one (toProjInt n S)
+    (Proj.unitToTwist (X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) i))
+  rw [twistOneSection]
+  erw [h]
+  exact isFreeGenerator_pullbackSection _
+
+/-- **The transition rule** `Tᵢ = (Tᵢ / Tⱼ) • Tⱼ` over `D₊(Tⱼ)`, pulled back along a morphism
+`g : X ⟶ ℙ(n; S)`. -/
+lemma pullbackSection_twistOneSection_map_eq_smul (g : X ⟶ ℙ(n; S)) (i j : n) :
+    ((Scheme.Modules.pullback g).obj (twist n S 1)).presheaf.map
+        (homOfLE (g.preimage_mono (le_top : toProjInt n S ⁻¹ᵁ
+          Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X j) ≤ ⊤))).op
+        (pullbackSection g (twistOneSection n S i)) =
+      g.app (toProjInt n S ⁻¹ᵁ
+          Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X j))
+        ((toProjInt n S).app
+          (Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X j))
+          (Proj.awayToSection _ _ (awayXRatio (ULift.{u} ℤ) j i))) •
+        ((Scheme.Modules.pullback g).obj (twist n S 1)).presheaf.map
+          (homOfLE (g.preimage_mono (le_top : toProjInt n S ⁻¹ᵁ
+            Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X j) ≤ ⊤))).op
+          (pullbackSection g (twistOneSection n S j)) := by
+  have H := Proj.map_unitToTwist_eq_smul
+    (X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) i)
+    (X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) j)
+    (by simpa using X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) i)
+  have H₁ := pullbackSection_map_eq_smul (toProjInt n S) le_top H
+  exact pullbackSection_map_eq_smul g _ H₁
+
+end Sections
 
 end ProjectiveSpace
 
