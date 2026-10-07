@@ -5,9 +5,12 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Comma.Arrow
+public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
-public import WeilConjectures.SixFunctors.Integral.Exact
+public import WeilConjectures.SixFunctors.Integral.BaseChange
 
 /-!
 # Integral base changes of the base-change map
@@ -23,10 +26,14 @@ integral:
   `g` factors (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_iff_of_isIntegralHom`).
 
 Both rest on the exactness of the direct image along an integral morphism,
-`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`: in each case the
+`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`, and on base change
+along an integral morphism,
+`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_isIntegralHom`: in each case the
 direct image along `π` (resp. along its base change `π'`) identifies the two base-change maps,
 which is recorded in `AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_lowerStar`
-and `AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_comp`.
+and `AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_comp`. Both are read off
+from the vertical pasting law `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_vert` of
+the derived base-change maps.
 
 ## Main statements
 
@@ -47,11 +54,25 @@ universe u
 
 open CategoryTheory Limits
 
-open scoped AlgebraicGeometry.Etale
+open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
+
+/-- The degree-`q` base-change map at `F` is, as an arrow, the degree-`q` homology of the
+derived base-change map `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus` at `F` placed in
+degree `0`. -/
+lemma Etale.arrow_mk_baseChangeHomologyMap {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S}
+    {e : Y ⟶ T} {h : Y ⟶ X} (sq : IsPullback e h g p) (q : ℤ)
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Arrow.mk (Etale.baseChangeHomologyMap Λ sq q F) = Arrow.mk
+      ((DerivedCategory.Plus.homologyFunctor _ q).map
+        ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) := by
+  rw [Etale.baseChangeHomologyMap, Etale.baseChangeHomologyNatTrans_eq,
+    Etale.baseChange_eq_derivedBaseChangeMapPlus]
+  exact Arrow.mk_whiskerLeft_whiskerRight_app _ _ _ _
 
 section Target
 
@@ -63,19 +84,43 @@ for Cartesian squares over `g : T ⟶ S` and over `π ≫ g`, the base-change ma
 square at `π_* F'` is isomorphic, as an arrow, to the base-change map of the second square at
 `F'`.
 
-Since `π_*` is exact (`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`)
-the Grothendieck spectral sequence gives `R^q g_* π_* F' = R^q (π ≫ g)_* F'`; the integral base
-change `e⁻¹ π_* F' = π''_* e'⁻¹ F'` along the base change `π'' : Y' ⟶ Y` of `π`, together with
-the exactness of `π''_*`, gives `R^q h_* e⁻¹ π_* F' = R^q h'_* e'⁻¹ F'`, and the two base-change
-maps correspond. This is the identification in the proof of blueprint
-`sbc-lem-bc-integral-surjective`. -/
+Write `h' = π'' ≫ h` with `π'' : Y' ⟶ Y` the base change of `π`. By the vertical pasting law
+the derived base-change map of the square over `π ≫ g` at `F'` is the one of the square over
+`g` at `Rπ_* F'`, followed by `Rh_*` of the derived base-change map of the square of `π''`
+over `π`, modulo the composition isomorphisms of the derived pushforwards. The latter is an
+isomorphism (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_isIntegralHom`), and
+`Rπ_* F' = π_* F'` as `π_*` is exact
+(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`). This is the
+identification in the proof of blueprint `sbc-lem-bc-integral-surjective`. -/
 theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_lowerStar (sq : IsPullback e h g p)
     (π : T' ⟶ T) [IsIntegralHom π] (sq' : IsPullback e' h' (π ≫ g) p) (q : ℤ)
     (F' : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Nonempty (Arrow.mk
       (Etale.baseChangeHomologyMap Λ sq q ((π)_*[ModuleCat.{u + 1} Λ].obj F')) ≅
-        Arrow.mk (Etale.baseChangeHomologyMap Λ sq' q F')) :=
-  sorry
+        Arrow.mk (Etale.baseChangeHomologyMap Λ sq' q F')) := by
+  obtain ⟨π'', hπ''e, rfl⟩ : ∃ π'' : Y' ⟶ Y, π'' ≫ e = e' ≫ π ∧ π'' ≫ h = h' :=
+    ⟨sq.lift (e' ≫ π) h' (by simp [sq'.w]), sq.lift_fst _ _ _, sq.lift_snd _ _ _⟩
+  have sq₁ : IsPullback e' π'' π e := IsPullback.of_bot sq' hπ''e.symm sq
+  have := Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom Λ π
+  have := Etale.isIso_derivedBaseChangeMapPlus_of_isIntegralHom Λ sq₁
+  have hfac := NatTrans.congr_app (Etale.derivedBaseChangeMapPlus_paste_vert
+    (ModuleCat.{u + 1} Λ) sq₁.toCommSq sq.toCommSq sq'.toCommSq)
+    ((DerivedCategory.Plus.singleFunctor _ 0).obj F')
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_obj,
+    Category.id_comp] at hfac
+  -- `Rπ_* (F'[0]) ≅ (π_* F')[0]`, the direct image along `π` being exact
+  let ι : R+((π)_*[ModuleCat.{u + 1} Λ]).obj
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj F') ≅
+        (DerivedCategory.Plus.singleFunctor _ 0).obj ((π)_*[ModuleCat.{u + 1} Λ].obj F') :=
+    ((π)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.app _ ≪≫
+      (((π)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app F'
+  refine ⟨eqToIso (Etale.arrow_mk_baseChangeHomologyMap Λ sq q _) ≪≫
+    (Arrow.isoMapApp _ _ ι).symm ≪≫ ?_ ≪≫
+    eqToIso (Etale.arrow_mk_baseChangeHomologyMap Λ sq' q F').symm⟩
+  rw [hfac]
+  simp only [Functor.map_comp]
+  exact (Arrow.isoOfIsIsoComp _ _ _).symm
 
 /-- Blueprint `sbc-lem-bc-integral-surjective`: Integral surjective base change on the target.
 
@@ -127,18 +172,45 @@ the base change `p''` of `p'` along `π`, the base-change map of the pasted squa
 `g' ≫ π` is isomorphic, as an arrow, to the image under `π'_*` of the base-change map of the
 square over `g'`.
 
-Since `π` and `π'` are integral, `π_*` and `π'_*` are exact
-(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`), so
-`R^q (g' ≫ π)_* = π_* R^q g'_*` and `R^q (h'' ≫ π')_* = π'_* R^q h''_*`, and the integral base
-change `p'⁻¹ π_* = π'_* p''⁻¹` identifies the sources. This is the identification in the
-proof of blueprint `sbc-lem-bc-integral-base`. -/
+By the vertical pasting law the derived base-change map of the pasted square over `g' ≫ π` is
+the derived base-change map of the square of `π'` over `π` at `Rg'_* F`, followed by `Rπ'_*` of
+the derived base-change map of the square over `g'`, modulo the composition isomorphisms of the
+derived pushforwards. The former is an isomorphism
+(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_isIntegralHom`), and `Rπ'_*`
+commutes with the homology functors as `π'_*` is exact
+(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`). This is the
+identification in the proof of blueprint `sbc-lem-bc-integral-base`. -/
 theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_comp (π : S'' ⟶ S') [IsIntegralHom π]
     (hπ : IsPullback π' p'' p' π) (sq'' : IsPullback e h'' g' p'')
     (sq : IsPullback e (h'' ≫ π') (g' ≫ π) p') (q : ℤ)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Nonempty (Arrow.mk (Etale.baseChangeHomologyMap Λ sq q F) ≅
-      Arrow.mk ((π')_*[ModuleCat.{u + 1} Λ].map (Etale.baseChangeHomologyMap Λ sq'' q F))) :=
-  sorry
+      Arrow.mk ((π')_*[ModuleCat.{u + 1} Λ].map (Etale.baseChangeHomologyMap Λ sq'' q F))) := by
+  have : IsIntegralHom π' := MorphismProperty.of_isPullback hπ.flip inferInstance
+  have := Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom Λ π'
+  have := Etale.isIso_derivedBaseChangeMapPlus_of_isIntegralHom Λ hπ.flip
+  have hfac := NatTrans.congr_app (Etale.derivedBaseChangeMapPlus_paste_vert
+    (ModuleCat.{u + 1} Λ) sq''.toCommSq hπ.flip.toCommSq sq.toCommSq)
+    ((DerivedCategory.Plus.singleFunctor _ 0).obj F)
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_obj,
+    Category.id_comp] at hfac
+  -- `H^q ∘ Rπ'_* ≅ π'_* ∘ H^q`, the direct image along `π'` being exact
+  let N : R+((π')_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q ≅
+      DerivedCategory.Plus.homologyFunctor _ q ⋙ (π')_*[ModuleCat.{u + 1} Λ] :=
+    Functor.isoWhiskerRight
+        ((π')_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus _ ≪≫
+      (((π')_*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).symm
+  refine ⟨eqToIso (Etale.arrow_mk_baseChangeHomologyMap Λ sq q F) ≪≫ ?_ ≪≫
+    Arrow.isoOfNatIso N
+      (Arrow.mk ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq''.toCommSq).app
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) ≪≫
+    eqToIso (congrArg ((π')_*[ModuleCat.{u + 1} Λ]).mapArrow.obj
+      (Etale.arrow_mk_baseChangeHomologyMap Λ sq'' q F)).symm⟩
+  rw [hfac]
+  simp only [Functor.map_comp]
+  rw [← Category.assoc]
+  exact Arrow.isoOfIsIsoComp _ _ _
 
 /-- Blueprint `sbc-lem-bc-integral-base`: Integral base change on the source.
 
