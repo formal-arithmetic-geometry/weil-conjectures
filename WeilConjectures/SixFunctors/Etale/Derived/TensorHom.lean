@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 /-!
@@ -20,16 +22,24 @@ Let `f : X ⟶ Y` be a morphism of schemes admitting a compactification, so that
 natural in `M` and `N`. It is the Yoneda consequence of the three adjunctions `Lf^* ⊣ Rf_*`,
 `Rf_! ⊣ Rf^!` and `- ⊗ᴸ - ⊣ RHom`, together with the projection formula.
 
-Specialising it to `N = ω_Y` and using `Rf^! ω_Y ≅ ω_X` gives the *Verdier-duality exchange*
-`𝔻_Y (Rf_! M) ≅ Rf_* 𝔻_X M`: the Verdier dual intertwines `Rf_!` and `Rf_*`. Note that this
-route to the exchange goes through the tensor–Hom statement only, and so does not depend on
-the duality theory itself.
+Specialising it to `N = ω_Y` and using `Rf^! ω_Y ≅ ω_X` (the mate of the composition law,
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp`) gives the
+*Verdier-duality exchange* `𝔻_Y (Rf_! M) ≅ Rf_* 𝔻_X M`: the Verdier dual intertwines `Rf_!`
+and `Rf_*`. Note that this route to the exchange goes through the tensor–Hom statement only,
+and so does not depend on the duality theory itself.
 
 ## Implementation notes
 
 Canonical comparison maps are not constructed in this repository, so the isomorphisms are
 asserted as `Nonempty (_ ≅ _)`; the blueprint's naturality clauses and its compatibilities
 with finite reduction, scalar extension and shifts are consequently **not stated**.
+
+The tensor–Hom statement is made on `Dctf`, so applying it at `N = ω_Y` needs `ω_Y` to lie in
+`Dctf(Y, A)`. In the blueprint's setting (a finite-type scheme over a field, finite coefficient
+ring) this holds; for the general coefficient category `A` and base `S` of this folder it does
+not follow (the unit of `A` need not be constructible), so the Verdier exchange carries it as
+the hypothesis `hω`. `AlgebraicGeometry.Etale.constructibleFiniteTor_dualizingComplex`
+discharges it over a Noetherian base whenever the unit `Λ_S` lies in `Dctf(S, A)`.
 
 ## Main statements
 
@@ -39,6 +49,8 @@ with finite reduction, scalar extension and shifts are consequently **not stated
   (`sk-thm-sf-verdier-exchange`): `Rf^! ω_Y ≅ ω_X`.
 - `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerShriek`
   (`sk-thm-sf-verdier-exchange`): `𝔻_Y (Rf_! M) ≅ Rf_* 𝔻_X M`.
+- `AlgebraicGeometry.Etale.constructibleFiniteTor_dualizingComplex`: `ω_Y` lies in `Dctf`
+  when `Λ_S` does and `S` is Noetherian.
 
 -/
 
@@ -106,8 +118,9 @@ complex of `Y` is the dualizing complex of `X`:
 This is the mate, under the adjunctions `Rf_! ⊣ Rf^!`, of the composition isomorphism
 `R(a_Y ∘ f)_! ≅ R a_{Y!} ∘ Rf_!`, evaluated at the monoidal unit `Λ_S`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_dualizingComplex :
-    Nonempty ((R(f)^![A]).obj (dualizingComplex A aY) ≅ dualizingComplex A (f ≫ aY)) :=
-  sorry
+    Nonempty ((R(f)^![A]).obj (dualizingComplex A aY) ≅ dualizingComplex A (f ≫ aY)) := by
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_comp A f aY
+  exact ⟨(e.app (𝟙_ _)).symm⟩
 
 /-- Blueprint `sk-thm-sf-verdier-exchange`: Verdier-duality exchange.
 
@@ -119,13 +132,29 @@ extraordinary and the ordinary direct image: for `M` in `Dctf(X, A)`,
 
 In the blueprint this is the tensor–Hom exchange
 `nonempty_iso_derivedHom_rightDerivedLowerShriek` at `N = ω_Y`, combined with
-`Rf^! ω_Y ≅ ω_X`. -/
+`Rf^! ω_Y ≅ ω_X`. The tensor–Hom exchange is a statement on `Dctf`, so `ω_Y` is assumed to
+lie in `Dctf(Y, A)` (hypothesis `hω`), as it does in the blueprint's setting; see
+`AlgebraicGeometry.Etale.constructibleFiniteTor_dualizingComplex`. -/
 theorem nonempty_iso_verdierDual_rightDerivedLowerShriek
+    (hω : DerivedCategory.constructibleFiniteTor A Y (dualizingComplex A aY))
     {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hM : DerivedCategory.constructibleFiniteTor A X M) :
     Nonempty ((verdierDual A aY).obj (op ((R(f)_![A]).obj M)) ≅
-      (R((f)_*[A])).obj ((verdierDual A (f ≫ aY)).obj (op M))) :=
-  sorry
+      (R((f)_*[A])).obj ((verdierDual A (f ≫ aY)).obj (op M))) := by
+  obtain ⟨e₁⟩ := nonempty_iso_derivedHom_rightDerivedLowerShriek A f hM hω
+  obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex A f aY
+  exact ⟨e₁.symm ≪≫ (R((f)_*[A])).mapIso ((RHom(X)[A].obj (op M)).mapIso e₂)⟩
+
+omit [HasCompactification f] [HasCompactification (f ≫ aY)] in
+/-- The dualizing complex `ω_Y = Ra_Y^! Λ_S` lies in `Dctf(Y, A)` when the unit `Λ_S` does
+and `S` is Noetherian, by the stability of `Dctf` under `Ra_Y^!`. In the blueprint's setting
+(`S` the spectrum of a field and `A` the modules over a finite ring) the unit is in `Dctf`,
+so this discharges the hypothesis `hω` of
+`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerShriek`. -/
+theorem constructibleFiniteTor_dualizingComplex [QuasiCompact aY] [IsNoetherian S]
+    (hΛ : DerivedCategory.constructibleFiniteTor A S (𝟙_ _)) :
+    DerivedCategory.constructibleFiniteTor A Y (dualizingComplex A aY) :=
+  constructibleFiniteTor_rightDerivedUpperShriek A aY hΛ
 
 end VerdierExchange
 
