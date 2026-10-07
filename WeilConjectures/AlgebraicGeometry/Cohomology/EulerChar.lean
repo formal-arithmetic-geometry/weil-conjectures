@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Clopen
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
@@ -204,10 +205,55 @@ section Additivity
 
 variable (k : Type u) [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 
+open Limits in
+attribute [local instance] Abelian.hasFiniteBiproducts in
+/-- `AlgebraicGeometry.Scheme.Modules.finrankH_eq_sum_of_pairwise_disjoint` for an index type in
+`Type`. -/
+private theorem finrankH_eq_sum_of_pairwise_disjoint_aux {ι : Type} [Fintype ι]
+    (U : ι → X.Opens) (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤)
+    (M : X.Modules) (q : ℕ) [FiniteDimensional k (M.H q)] :
+    M.finrankH k q = ∑ i,
+      letI : (U i).toScheme.Over (Spec (.of k)) := ⟨(U i).ι ≫ X ↘ Spec (.of k)⟩
+      ((Scheme.Modules.pullback (U i).ι).obj M).finrankH k q := by
+  classical
+  -- Each `U i` is closed, its complement being the union of the other `U j`.
+  have hclosed (i : ι) : IsClosed (U i : Set X) := by
+    have : (U i : Set X)ᶜ = (⨆ j : {j // j ≠ i}, U j : X.Opens) := by
+      ext x
+      simp only [Opens.coe_iSup, Set.mem_iUnion, Set.mem_compl_iff, SetLike.mem_coe]
+      refine ⟨fun hi ↦ ?_, fun ⟨j, hj⟩ hi ↦ (Opens.coe_disjoint.mpr (hU j.2)).le_bot ⟨hj, hi⟩⟩
+      have hx : x ∈ ⨆ i, U i := by rw [hcover]; trivial
+      obtain ⟨j, hj⟩ := Opens.mem_iSup.mp hx
+      exact ⟨⟨j, fun h ↦ hi (h ▸ hj)⟩, hj⟩
+    rw [← isOpen_compl_iff, this]
+    exact Opens.isOpen _
+  let N (i : ι) : X.Modules := (restrictFunctor (U i).ι ⋙ pushforward (U i).ι).obj M
+  let φ : M ≅ ⨁ N := @asIso _ _ _ _ (biproduct.lift fun i ↦
+    (restrictAdjunction (U i).ι).unit.app M)
+    (isIso_biproduct_lift_restrictAdjunction_unit U hU hcover M)
+  let e := H.isBilimitLinearEquiv k (biproduct.isBilimit N) q
+  have hφ : Function.Surjective (H.mapLinearMap k φ.hom q) := fun y ↦
+    ⟨H.map φ.inv q y, by rw [H.mapLinearMap_apply, ← H.map_comp_apply, φ.inv_hom_id,
+      H.map_id_apply]⟩
+  have := Module.Finite.of_surjective (e.toLinearMap ∘ₗ H.mapLinearMap k φ.hom q)
+    (e.surjective.comp hφ)
+  have (i : ι) := Module.Finite.of_surjective (LinearMap.proj (R := k) i)
+    (LinearMap.proj_surjective (φ := fun i ↦ (N i).H q) i)
+  rw [finrankH_congr k φ q, finrankH_of_isBilimit k (biproduct.isBilimit N) q]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  let : (U i).toScheme.Over (Spec (.of k)) := ⟨(U i).ι ≫ X ↘ Spec (.of k)⟩
+  exact (finrankH_pushforward_ι (U i) k (hclosed i) _ q).trans
+    (finrankH_congr k ((restrictFunctorIsoPullback (U i).ι).app M) q)
+
 /-- **Cohomology of a finite disjoint union.** If `X` is the disjoint union of finitely many
 open subschemes `U i`, then `H^q(X, M) ≅ ⊕ᵢ H^q(U i, M|_{U i})`; in particular, when
 `H^q(X, M)` is finite-dimensional, `h^q(X, M) = ∑ᵢ h^q(U i, M|_{U i})`. Each `U i` is a scheme
 over `k` through `X`.
+
+Each `U i` is open and closed, `M` is the direct sum of the pushforwards of its restrictions to
+the `U i` (`AlgebraicGeometry.Scheme.Modules.isIso_biproduct_lift_restrictAdjunction_unit`), and
+the pushforward along the inclusion of an open and closed subscheme does not change cohomology
+(`AlgebraicGeometry.Scheme.Modules.finrankH_pushforward_ι`).
 
 This is used in the proof of blueprint `lem-sc-ample-positive-degree`. -/
 theorem finrankH_eq_sum_of_pairwise_disjoint {ι : Type*} [Fintype ι] (U : ι → X.Opens)
@@ -215,8 +261,13 @@ theorem finrankH_eq_sum_of_pairwise_disjoint {ι : Type*} [Fintype ι] (U : ι �
     [FiniteDimensional k (M.H q)] :
     M.finrankH k q = ∑ i,
       letI : (U i).toScheme.Over (Spec (.of k)) := ⟨(U i).ι ≫ X ↘ Spec (.of k)⟩
-      ((Scheme.Modules.pullback (U i).ι).obj M).finrankH k q :=
-  sorry
+      ((Scheme.Modules.pullback (U i).ι).obj M).finrankH k q := by
+  let e := Fintype.equivFin ι
+  rw [← e.symm.sum_comp]
+  refine finrankH_eq_sum_of_pairwise_disjoint_aux k (U ∘ e.symm)
+    (hU.comp_of_injective e.symm.injective) ?_ M q
+  rw [← hcover]
+  exact (e.symm.surjective.iSup_comp U)
 
 /-- On a noetherian scheme, `h^q(X, M) = 0` above the dimension of `X`, by Grothendieck
 vanishing. -/

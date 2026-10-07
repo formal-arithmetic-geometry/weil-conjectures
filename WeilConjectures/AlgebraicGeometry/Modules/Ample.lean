@@ -275,14 +275,17 @@ variable (K) [X.Over (Spec (.of K))]
 
 /-- **Finiteness of cohomology.** The cohomology of an invertible module on a proper scheme over
 a field `K` is finite-dimensional over `K`. This is a special case of the finiteness theorem
-for the cohomology of coherent modules on proper schemes (EGA III, 3.2.1).
+for the cohomology of coherent modules on proper schemes (EGA III, 3.2.1),
+`AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`, since an invertible module
+is locally free of rank one, hence of finite presentation.
 
 For `M = 𝒪_X` on a curve, this is the finiteness of the genus `dim_k H¹(X, 𝒪_X)`
 (blueprint `lem-pc-genus-well-defined`). This is used in the proof of blueprint
 `lem-sc-ample-positive-degree`. -/
 instance finiteDimensional_H [IsProper (X ↘ Spec (.of K))] (M : X.Modules) [M.IsInvertible]
     (q : ℕ) : FiniteDimensional K (M.H q) :=
-  sorry
+  have := IsInvertible.sheafOfModules_isInvertible M
+  finiteDimensional_H_of_isProper M q
 
 /-- **The degree is additive over a finite disjoint union.** If a noetherian scheme `X` of
 finite dimension is the disjoint union of finitely many open subschemes `U i`, then
