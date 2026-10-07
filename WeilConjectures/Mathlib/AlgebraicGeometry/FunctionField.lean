@@ -42,13 +42,13 @@ noncomputable abbrev fromSpecFunctionField (X : Scheme.{u}) [IrreducibleSpace X]
     Spec X.functionField ⟶ X :=
   X.fromSpecStalk (genericPoint X)
 
-/-- The sections of an integral scheme with integrally closed local rings over a nonempty open
-`U` form an integrally closed domain: an element of the function field which is integral over
-`Γ(X, U)` is integral over every local ring at a point of `U`, hence lies in each of them, and
-the sections over `U` are exactly the elements of the function field lying in all these local
-rings. -/
-theorem isIntegrallyClosed_of_isIntegrallyClosed_stalk {X : Scheme.{u}} [IsIntegral X]
-    (hX : ∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x)) (U : X.Opens) [Nonempty U] :
+/-- The sections of an integral scheme over a nonempty open `U` at whose points the local rings
+are integrally closed form an integrally closed domain: an element of the function field which
+is integral over `Γ(X, U)` is integral over every local ring at a point of `U`, hence lies in each
+of them, and the sections over `U` are exactly the elements of the function field lying in all
+these local rings. -/
+theorem isIntegrallyClosed_of_isIntegrallyClosed_stalk_of_mem {X : Scheme.{u}} [IsIntegral X]
+    (U : X.Opens) [Nonempty U] (hX : ∀ x ∈ U, IsIntegrallyClosed (X.presheaf.stalk x)) :
     IsIntegrallyClosed Γ(X, U) := by
   have hinj := X.germToFunctionField_injective U
   have : FaithfulSMul Γ(X, U) X.functionField :=
@@ -57,6 +57,7 @@ theorem isIntegrallyClosed_of_isIntegrallyClosed_stalk {X : Scheme.{u}} [IsInteg
     refine isIntegrallyClosedIn_iff.mpr ⟨hinj, fun {g} hg ↦ ?_⟩
     have H (y : U) : ∃ (V : X.Opens) (hyV : (y : X) ∈ V) (hVU : V ≤ U) (t : Γ(X, V)),
         @Scheme.germToFunctionField X _ V ⟨⟨y, hyV⟩⟩ t = g := by
+      have := hX y y.2
       obtain ⟨s, hs⟩ := (IsIntegrallyClosed.isIntegral_iff (R := X.presheaf.stalk y)).mp
         (hg.tower_top (A := X.presheaf.stalk y))
       obtain ⟨W, hyW, t, rfl⟩ := X.presheaf.exists_germ_eq s
@@ -78,6 +79,14 @@ theorem isIntegrallyClosed_of_isIntegrallyClosed_stalk {X : Scheme.{u}} [IsInteg
     rw [RingHom.algebraMap_toAlgebra, ← ht y, ← hs y]
     exact (X.presheaf.germ_res_apply _ _ _ s).symm
   exact .of_isIntegrallyClosedIn Γ(X, U) X.functionField
+
+/-- The sections of an integral scheme with integrally closed local rings over a nonempty open
+`U` form an integrally closed domain; see
+`AlgebraicGeometry.Scheme.isIntegrallyClosed_of_isIntegrallyClosed_stalk_of_mem`. -/
+theorem isIntegrallyClosed_of_isIntegrallyClosed_stalk {X : Scheme.{u}} [IsIntegral X]
+    (hX : ∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x)) (U : X.Opens) [Nonempty U] :
+    IsIntegrallyClosed Γ(X, U) :=
+  isIntegrallyClosed_of_isIntegrallyClosed_stalk_of_mem U fun x _ ↦ hX x
 
 /-- The stalks of an integral normal scheme with separably closed function field are henselian.
 -/

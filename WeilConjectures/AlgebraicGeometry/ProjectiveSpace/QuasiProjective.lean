@@ -15,6 +15,11 @@ Over a field `k`, a scheme `X` is quasi-projective precisely when it admits an i
 `Spec k` into a projective space `ℙ(β; Spec k)` with finitely many homogeneous coordinates; this
 is the form in which quasi-projectivity is phrased here.
 
+## Main definitions
+
+- `AlgebraicGeometry.IsQuasiProjective`: a scheme over a field is quasi-projective if it admits
+  an immersion into a projective space.
+
 ## Main statements
 
 - `AlgebraicGeometry.exists_isImmersion_projectiveSpace_of_pullback`: if the base change `X_K`
@@ -31,6 +36,14 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 variable {k K : Type u} [Field k] [Field K] [Algebra k K]
+
+/-- A scheme `X` over a field `k`, with structure morphism `f`, is *quasi-projective* if it
+admits an immersion over `Spec k`, that is a locally closed immersion, into a projective space
+`ℙ(β; Spec k)` with finitely many homogeneous coordinates; equivalently, an open immersion into
+a closed subscheme of such a projective space. (blueprint: `def-sc-quasi-projective`) -/
+def IsQuasiProjective {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) : Prop :=
+  ∃ (β : Type u) (_ : Finite β) (i : X ⟶ ℙ(β; Spec (.of k))),
+    IsImmersion i ∧ i ≫ ℙ(β; Spec (.of k)) ↘ Spec (.of k) = f
 
 /-- **Quasi-projectivity descends along field extensions** (Stacks 0BDE). Let `K / k` be a field
 extension and let `X` be a scheme over `k`. If the base change `X_K` admits an immersion over
