@@ -51,6 +51,18 @@ noncomputable def mapHomotopyCategoryPlus
     (Functor.whiskerLeft (HomotopyCategory.Plus.ι C)
       (NatTrans.mapHomotopyCategory τ (ComplexShape.up ℤ)))
 
+/-- The components of `NatTrans.mapHomotopyCategoryPlus τ`, viewed in the ambient homotopy
+category, are those of `NatTrans.mapHomotopyCategory τ`. -/
+@[simp]
+lemma ι_map_mapHomotopyCategoryPlus_app {F G : C ⥤ D} [F.Additive] [G.Additive] (τ : F ⟶ G)
+    (K : HomotopyCategory.Plus C) :
+    (HomotopyCategory.Plus.ι D).map ((NatTrans.mapHomotopyCategoryPlus τ).app K) =
+      (NatTrans.mapHomotopyCategory τ (ComplexShape.up ℤ)).app K.obj :=
+  NatTrans.congr_app (((HomotopyCategory.plus D).fullyFaithfulι.whiskeringRight
+    (HomotopyCategory.Plus C)).map_preimage (X := F.mapHomotopyCategoryPlus)
+      (Y := G.mapHomotopyCategoryPlus) (Functor.whiskerLeft (HomotopyCategory.Plus.ι C)
+        (NatTrans.mapHomotopyCategory τ (ComplexShape.up ℤ)))) K
+
 @[simp]
 lemma mapHomotopyCategoryPlus_id (F : C ⥤ D) [F.Additive] :
     NatTrans.mapHomotopyCategoryPlus (𝟙 F) = 𝟙 F.mapHomotopyCategoryPlus := by
@@ -76,6 +88,34 @@ lemma mapHomotopyCategoryPlus_comp {F G H : C ⥤ D}
     NatTrans.mapHomotopyCategoryPlus, h]
   exact ((HomotopyCategory.plus D).fullyFaithfulι.whiskeringRight
     (HomotopyCategory.Plus C)).preimage_comp (Y := G.mapHomotopyCategoryPlus) _ _
+
+/-- `NatTrans.mapHomotopyCategoryPlus` sends a right unitor to the identity. -/
+@[simp]
+lemma mapHomotopyCategoryPlus_rightUnitor_hom_app {𝒞 𝒟 : Type*}
+    [Category* 𝒞] [Category* 𝒟] [Preadditive 𝒞] [Preadditive 𝒟] (F : 𝒞 ⥤ 𝒟) [F.Additive]
+    (K : HomotopyCategory.Plus 𝒞) :
+    (NatTrans.mapHomotopyCategoryPlus F.rightUnitor.hom).app K = 𝟙 _ := by
+  apply (HomotopyCategory.Plus.ι 𝒟).map_injective
+  obtain ⟨⟨X⟩, hK⟩ := K
+  rw [NatTrans.ι_map_mapHomotopyCategoryPlus_app]
+  erw [CategoryTheory.Functor.map_id]
+  change (HomotopyCategory.quotient _ _).map _ = 𝟙 ((HomotopyCategory.quotient _ _).obj _)
+  rw [← (HomotopyCategory.quotient _ _).map_id]
+  congr 1
+
+/-- `NatTrans.mapHomotopyCategoryPlus` sends the inverse of a left unitor to the identity. -/
+@[simp]
+lemma mapHomotopyCategoryPlus_leftUnitor_inv_app {𝒞 𝒟 : Type*}
+    [Category* 𝒞] [Category* 𝒟] [Preadditive 𝒞] [Preadditive 𝒟] (F : 𝒞 ⥤ 𝒟) [F.Additive]
+    (K : HomotopyCategory.Plus 𝒞) :
+    (NatTrans.mapHomotopyCategoryPlus F.leftUnitor.inv).app K = 𝟙 _ := by
+  apply (HomotopyCategory.Plus.ι 𝒟).map_injective
+  obtain ⟨⟨X⟩, hK⟩ := K
+  rw [NatTrans.ι_map_mapHomotopyCategoryPlus_app]
+  erw [CategoryTheory.Functor.map_id]
+  change (HomotopyCategory.quotient _ _).map _ = 𝟙 ((HomotopyCategory.quotient _ _).obj _)
+  rw [← (HomotopyCategory.quotient _ _).map_id]
+  congr 1
 
 /-- The natural transformation `NatTrans.mapHomotopyCategoryPlus τ` induced by a natural
 isomorphism is an isomorphism, with inverse induced by the inverse. -/
