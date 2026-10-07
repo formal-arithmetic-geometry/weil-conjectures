@@ -38,8 +38,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
 
--- TODO(adic): with the provisional coefficients every Weil sheaf is zero; prove this once Weil
--- sheaves have `ℚ̄_ℓ`-adic coefficients.
+-- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
 /-- Blueprint `lem-a1-affine-hc0`: Vanishing of `H_c⁰` on a nonproper curve.
 
 Let `U₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on `U₀`.

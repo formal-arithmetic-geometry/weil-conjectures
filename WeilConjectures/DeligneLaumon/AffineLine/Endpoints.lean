@@ -106,10 +106,11 @@ the Frobenius of the cohomology is `q` times the Frobenius of the coinvariants.
 ```
 (blueprint: `sk-l-dl-a1-endpoints`)
 -/
-theorem nonempty_equiv_compactlySupportedCohomology_directImage_two (hF : F.IsLisse) :
+theorem nonempty_equiv_compactlySupportedCohomology_directImage_two
+    [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] (hF : F.IsLisse) :
     Nonempty ((((WeilSheaf.directImage j).obj F).compactlySupportedCohomology 2).Equiv
-      (F.geometricCoinvariants.tateTwist (Nat.card k₀) (-1))) := by
-  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
+      ((F.geometricCoinvariants hF).tateTwist (Nat.card k₀) (-1))) := by
   sorry
 
 /-- If `F` is moreover punctually `ι`-pure of weight `w`, then `H_c^2(C, j_*F)` is pure of

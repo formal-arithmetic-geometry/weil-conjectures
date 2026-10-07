@@ -39,12 +39,18 @@ bound holds for every irreducible, non-geometrically-constant `M` unramified at 
 
 ## Implementation notes
 
-The provisional Weil sheaves of `WeilConjectures.WeilSheaf.Defs` are all zero, and so are
-their stalks and their compactly supported cohomology. The semicontinuity and stationary-phase
-statements are proved from this vanishing, as the comparison statements of
-`WeilConjectures.WeilSheaf.Stalk` are; they record what the definitions must keep once Weil
-sheaves are redefined with pro-étale coefficients. The degree-one bound itself is derived from
-them along the blueprint argument.
+The degree-one bound is derived along the blueprint argument from the boundary semicontinuity
+`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage` and the stationary
+phase
+`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
+
+## TODO
+
+Prove the two inputs of the degree-one bound:
+- the boundary semicontinuity
+  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`;
+- the stationary phase
+  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
 -/
 
 @[expose] public section
@@ -107,8 +113,6 @@ theorem WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_fourierTransform_middleE
 
 namespace WeilSheaf.LisseOnDenseOpen
 
--- the stalks of the provisional Weil sheaves are zero, and the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /-- *Boundary semicontinuity of weights* on the affine line: if the lisse sheaf `M` on the
 dense open `U₀` has punctual weights at most `β`, then so has its direct image `j_*M` at every
 closed point of the line, including the finitely many points outside `U₀`, where it may be
@@ -116,15 +120,8 @@ singular. This is the case of the affine line of the blueprint lemma, which hold
 smooth geometrically connected curve. (blueprint: `lem-wf-boundary-semicontinuity`) -/
 theorem hasWeightsAtMost_directImage (D : LisseOnDenseOpen k₀ l) {ι : PadicAlgCl l →+* ℂ}
     {β : ℝ} (hβ : D.sheaf.HasWeightsAtMost ι β) : D.directImage.HasWeightsAtMost ι β :=
-  -- the stalks of `j_*M` are zero, see `WeilSheaf.isZero_stalkObj`
-  fun x α hα ↦ by
-    have : Subsingleton (D.directImage.stalk x).carrier :=
-      WeilSheaf.subsingleton_stalkAt_carrier _ _ _ _
-    obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
-    exact absurd (Subsingleton.elim v 0) hv.2
+  sorry
 
--- the provisional Weil complexes are zero, and the proof needs no hypothesis
-set_option linter.unusedVariables false in
 /-- *The origin fibre is the stationary-phase contribution.* If the Fourier transform of the
 middle extension `(j_*M)[1]` is the middle extension `(j'_*M')[1]` of `D'`, then the fibre of
 the transform at the origin `0'` of the dual line identifies `H_c^1(𝔸¹, j_*M)` with the stalk
@@ -141,14 +138,7 @@ theorem nonempty_equiv_stalk_origin_of_isFourierPartner (ψ : AddChar k₀ (Padi
     Nonempty ((D.directImage.compactlySupportedCohomology 1).Equiv
         (D'.directImage.stalk (affineLine.origin k₀))) ∧
       Subsingleton (D.directImage.compactlySupportedCohomology 2).carrier := by
-  -- both sides are zero, see `WeilComplex.subsingleton_compactlySupportedCohomology_carrier`
-  -- and `WeilSheaf.subsingleton_stalkAt_carrier`
-  have h :=
-    (WeilSheaf.toComplex.obj D.directImage).subsingleton_compactlySupportedCohomology_carrier
-  have : Subsingleton (D.directImage.compactlySupportedCohomology 1).carrier := h 1
-  have : Subsingleton (D'.directImage.stalk (affineLine.origin k₀)).carrier :=
-    WeilSheaf.subsingleton_stalkAt_carrier _ _ _ _
-  exact ⟨⟨⟨LinearEquiv.ofSubsingleton _ _, fun _ ↦ Subsingleton.elim _ _⟩⟩, h 2⟩
+  sorry
 
 end WeilSheaf.LisseOnDenseOpen
 

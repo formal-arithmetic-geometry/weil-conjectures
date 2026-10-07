@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 
 /-!
 # Morphisms with geometrically reduced fibres
@@ -35,6 +36,7 @@ the members of an étale cover are not open subschemes of the source.
 
 ## Main statements
 
+- `AlgebraicGeometry.isReduced_of_smooth`: a scheme smooth over a field is reduced.
 - `AlgebraicGeometry.Smooth.geometricallyReduced`: a smooth morphism has geometrically
   reduced fibres.
 - `AlgebraicGeometry.GeometricallyReduced.comp_of_etale`: an étale morphism followed by a
@@ -59,12 +61,28 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A smooth morphism has geometrically reduced fibres: the geometric fibres of a smooth
-morphism are smooth varieties over an algebraically closed field, hence regular, hence
-reduced. -/
+/-- A scheme `X` smooth over a field `K` is reduced: on an affine open cover, the rings of
+sections are smooth `K`-algebras, which are reduced by `Algebra.Smooth.isReduced_of_field`. -/
+theorem isReduced_of_smooth {K : Type u} [Field K] {X : Scheme.{u}} (f : X ⟶ Spec (.of K))
+    [Smooth f] : IsReduced X := by
+  have (i : X.affineCover.I₀) : IsReduced (X.affineCover.X i) := by
+    have : Smooth (X.affineCover.f i ≫ f) := inferInstance
+    obtain ⟨φ, hφ⟩ := Spec.map_surjective (X.affineCover.f i ≫ f)
+    have : Smooth (Spec.map φ) := by rwa [hφ]
+    rw [HasRingHomProperty.Spec_iff (P := @Smooth)] at this
+    algebraize [φ.hom]
+    exact (affine_isReduced_iff _).mpr (Algebra.Smooth.isReduced_of_field K _)
+  exact IsReduced.of_openCover X X.affineCover
+
+/-- **Smooth morphisms have geometrically reduced fibres** (blueprint
+`sbc-lem-smooth-geometrically-reduced`). For a field `K` and `Spec K ⟶ S`, the base change
+`X ×_S Spec K` is smooth over `Spec K` (Stacks `01VB`), hence reduced (Stacks `056T`, here
+`AlgebraicGeometry.isReduced_of_smooth`). -/
 instance Smooth.geometricallyReduced {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
-    GeometricallyReduced f :=
-  sorry
+    GeometricallyReduced f := by
+  rw [geometricallyReduced_iff, geometrically_iff_of_isClosedUnderIsomorphisms]
+  intro K _ y
+  exact isReduced_of_smooth (Limits.pullback.snd f y)
 
 /-- An étale morphism followed by a morphism with geometrically reduced fibres has
 geometrically reduced fibres: for a field `K` and `Spec K ⟶ Z`, the scheme `X ×_Z Spec K` is

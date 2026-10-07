@@ -88,10 +88,7 @@ noncomputable def tensorObj (F G : WeilSheaf k₀ l X) : WeilSheaf k₀ l X wher
   obj := .mk (F.obj.carrier ⊗ G.obj.carrier)
     ((Functor.Monoidal.μIso (frobeniusPullback k₀ l X) _ _).symm ≪≫
       (F.obj.str ⊗ᵢ G.obj.str))
-  -- with the present coefficients `F` is zero, hence so is `F ⊗ G`, and the zero sheaf is
-  -- constructible
-  property := (Etale.constructibleSheaf _ _).prop_of_isZero
-    (isZero_tensorObj_of_isZero_left F.isZero_carrier _)
+  property := Scheme.IsConstructibleSheaf.tensorObj F.property G.property
 
 /-- The constant Weil twist `F ⊗ 𝓑_b` of a Weil sheaf by a unit `b ∈ ℚ̄_ℓˣ`: the tensor product
 of `F` with the geometrically constant Weil line `𝓑_b` on which the geometric Frobenius acts
@@ -120,6 +117,9 @@ theorem nonempty_equiv_stalk_constantTwist (F : WeilSheaf k₀ l X) (b : (PadicA
     Nonempty (((F.constantTwist b).stalk x).Equiv ((F.stalk x).rescale
       ((b : PadicAlgCl l) ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1))) := by
   sorry
+
+/-- A constant twist of a lisse Weil sheaf is lisse, the underlying étale sheaf being the same. -/
+alias ⟨_, IsLisse.constantTwist⟩ := isLisse_constantTwist
 
 /-- Twisting by `b` and then by `b⁻¹` gives back the Weil sheaf: both twists keep the
 underlying étale sheaf, and the Weil structure `b⁻¹ • b • φ` is `φ`. -/

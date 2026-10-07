@@ -245,6 +245,16 @@ lemma Scheme.Hom.etale_ΓAlgebra {K : Type u} [Field K] (h : Z ⟶ Spec (.of K))
   rw [h.algebraMap_ΓAlgebra, CommRingCat.hom_comp, RingHom.Etale.respectsIso.cancel_left_isIso]
   exact h'
 
+/-- An affine scheme `Z` over `Spec R` is étale over `Spec R` if and only if `Γ(Z, ⊤)` is an
+étale `R`-algebra. -/
+lemma Scheme.Hom.etale_iff_etale_ΓAlgebra (h : Z ⟶ Spec R) [IsAffine Z] :
+    Etale h ↔
+      letI := h.ΓAlgebra
+      Algebra.Etale R Γ(Z, ⊤) := by
+  let := h.ΓAlgebra
+  rw [HasRingHomProperty.iff_of_isAffine (P := @Etale), ← RingHom.etale_algebraMap,
+    h.algebraMap_ΓAlgebra, CommRingCat.hom_comp, RingHom.Etale.respectsIso.cancel_left_isIso]
+
 end Points
 
 section GeometricFiber
