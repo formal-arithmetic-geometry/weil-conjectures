@@ -282,6 +282,20 @@ lemma isPullback_baseChangeMap (f : X ⟶ S) {T T' : Over S} (g : T' ⟶ T) :
   rw [Over.w g]
   simpa using IsPullback.of_hasPullback f T'.hom
 
+/-- Base change along `f` preserves pullback squares: if the square of schemes underlying a
+commutative square in `Over S` is a pullback square, so is the square of fibre products with
+`X`. -/
+lemma isPullback_baseChangeMap_of_isPullback (f : X ⟶ S) {T₁ T₂ T₃ T₄ : Over S} {i : T₁ ⟶ T₂}
+    {j : T₁ ⟶ T₃} {k : T₂ ⟶ T₄} {l : T₃ ⟶ T₄} (h : IsPullback i.left j.left k.left l.left) :
+    IsPullback (baseChangeMap f i) (baseChangeMap f j) (baseChangeMap f k)
+      (baseChangeMap f l) := by
+  refine IsPullback.of_right ?_ ?_ (isPullback_baseChangeMap f k).flip
+  · rw [Limits.pullback.lift_snd, Limits.pullback.lift_snd]
+    exact (isPullback_baseChangeMap f j).flip.paste_horiz h
+  · rw [← baseChangeMap_comp, ← baseChangeMap_comp]
+    congr 1
+    exact Over.OverMorphism.ext h.w
+
 /-- The Picard presheaf of a morphism of schemes `f : X ⟶ S`: it sends a scheme `T` over `S`
 to the Picard group of the fibre product `X_T = X ×[S] T`, and a morphism over `S` to the
 corresponding pullback map on Picard groups.

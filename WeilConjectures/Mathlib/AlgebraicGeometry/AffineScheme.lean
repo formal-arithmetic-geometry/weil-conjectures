@@ -326,4 +326,13 @@ theorem IsAffineOpen.exists_basicOpen_le_of_finite {X : Scheme.{u}} {U : X.Opens
     rintro _ ⟨y, hy, rfl⟩
     exact hrO hy
 
+/-- If finitely many global sections of a scheme sum to `1`, their basic opens cover it. -/
+lemma Scheme.iSup_basicOpen_eq_top_of_sum_eq_one {X : Scheme.{u}} {ι : Type*} [Fintype ι]
+    (f : ι → Γ(X, ⊤)) (h : ∑ i, f i = 1) : ⨆ i, X.basicOpen (f i) = ⊤ := by
+  rw [← iSup_range (g := fun r ↦ X.basicOpen r) (f := f)]
+  refine iSup_basicOpen_of_span_eq_top (X := X) ⊤ _
+    (Ideal.eq_top_of_isUnit_mem _ ?_ isUnit_one)
+  rw [← h]
+  exact sum_mem fun i _ ↦ Ideal.subset_span ⟨i, rfl⟩
+
 end AlgebraicGeometry

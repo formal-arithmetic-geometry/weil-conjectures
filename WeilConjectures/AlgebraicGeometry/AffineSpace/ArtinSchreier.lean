@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.Mathlib.Algebra.CharP.Algebra
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
+public import WeilConjectures.Mathlib.LinearAlgebra.Lagrange
+public import WeilConjectures.RingTheory.MvPolynomial.ArtinSchreier
 
 /-!
 # The Artin–Schreier map of relative affine space
@@ -59,20 +62,6 @@ lemma artinSchreierMap_appTop_coord (q : ℕ) (i : n) :
     (artinSchreierMap n S q).appTop (coord S i) = coord S i ^ q - coord S i :=
   homOfVector_appTop_coord _ _ _
 
-/-- For `q ≠ 1` and finitely many coordinates, the Artin–Schreier map `x ↦ x ^ q - x` is
-finite. (For `q = 0` it is the isomorphism `x ↦ 1 - x`; for `q = 1` it is the zero map.) -/
-lemma isFinite_artinSchreierMap [Finite n] {q : ℕ} (hq : q ≠ 1) :
-    IsFinite (artinSchreierMap n S q) :=
-  -- each coordinate ring map `T ↦ T ^ q - T` makes `𝒪_S[T]` a free module of rank `q`
-  -- over itself
-  sorry
-
-/-- If `q = 0` on `S`, the Artin–Schreier map `x ↦ x ^ q - x` of `𝔸(n; S)` is étale. -/
-lemma etale_artinSchreierMap [Finite n] {q : ℕ} (hq : (q : Γ(S, ⊤)) = 0) :
-    Etale (artinSchreierMap n S q) :=
-  -- the Jacobian of `x ↦ x ^ q - x` is `q x ^ (q - 1) - 1 = -1`, a unit
-  sorry
-
 variable {n S}
 
 /-- The Artin–Schreier map commutes with the base change map `map f` of `f : S ⟶ T`: the
@@ -97,6 +86,58 @@ lemma isPullback_map_artinSchreierMap {T : Scheme.{u}} (f : S ⟶ T) (q : ℕ) :
     IsPullback (map n f) (artinSchreierMap n S q) (artinSchreierMap n T q) (map n f) :=
   IsPullback.of_bot (by simpa using isPullback_map (n := n) f)
     (map_comp_artinSchreierMap f q) (isPullback_map (n := n) f)
+
+variable (n) in
+/-- Over an affine base `Spec R`, the Artin–Schreier map is `Spec` of the ring map
+`R[n] → R[n]`, `Xᵢ ↦ Xᵢ ^ q - Xᵢ`. -/
+lemma artinSchreierMap_Spec (R : CommRingCat.{u}) (q : ℕ) :
+    artinSchreierMap n (Spec R) q = (SpecIso n R).hom ≫
+      Spec.map (CommRingCat.ofHom (MvPolynomial.artinSchreierRingHom R n q)) ≫
+        (SpecIso n R).inv := by
+  refine hom_ext ?_ fun i ↦ ?_
+  · rw [artinSchreierMap_over, Category.assoc, Category.assoc, SpecIso_inv_over, ← Spec.map_comp,
+      ← CommRingCat.ofHom_comp, MvPolynomial.artinSchreierRingHom_comp_C, ← SpecIso_inv_over,
+      Iso.hom_inv_id_assoc]
+  · rw [artinSchreierMap_appTop_coord, Scheme.Hom.comp_appTop, Scheme.Hom.comp_appTop,
+      CommRingCat.comp_apply, CommRingCat.comp_apply, SpecIso_inv_appTop_coord,
+      Scheme.specMap_appTop_ΓSpecIso_inv, CommRingCat.ofHom_apply,
+      MvPolynomial.artinSchreierRingHom_X, map_sub, map_pow, ← SpecIso_inv_appTop_coord, map_sub,
+      map_pow, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, Iso.hom_inv_id,
+      Scheme.Hom.id_appTop, CommRingCat.id_apply]
+
+variable (n S)
+
+/-- For `q ≠ 1` and finitely many coordinates, the Artin–Schreier map `x ↦ x ^ q - x` is
+finite. (For `q = 0` it is the isomorphism `x ↦ 1 - x`; for `q = 1` it is the zero map.)
+This is the finiteness of the Artin–Schreier covering of the blueprint definition
+`def-fd-artin-schreier-sheaf` (sketch blueprint: `sk-def-as`). -/
+lemma isFinite_artinSchreierMap [Finite n] {q : ℕ} (hq : q ≠ 1) :
+    IsFinite (artinSchreierMap n S q) := by
+  -- over `Spec Γ(S, ⊤)` each coordinate ring map `T ↦ T ^ q - T` is integral and of finite
+  -- type; `AS_q` over `S` is its base change
+  have (R : CommRingCat.{u}) : IsFinite (artinSchreierMap n (Spec R) q) := by
+    have := (IsFinite.SpecMap_iff (CommRingCat.ofHom (MvPolynomial.artinSchreierRingHom R n q))).mpr
+      (MvPolynomial.finite_artinSchreierRingHom n hq)
+    rw [artinSchreierMap_Spec]
+    infer_instance
+  exact MorphismProperty.of_isPullback (isPullback_map_artinSchreierMap S.toSpecΓ q) (this _)
+
+/-- If `q = 0` on `S`, the Artin–Schreier map `x ↦ x ^ q - x` of `𝔸(n; S)` is étale. This is
+the étaleness of the Artin–Schreier covering of the blueprint definition
+`def-fd-artin-schreier-sheaf` (sketch blueprint: `sk-def-as`). -/
+lemma etale_artinSchreierMap [Finite n] {q : ℕ} (hq : (q : Γ(S, ⊤)) = 0) :
+    Etale (artinSchreierMap n S q) := by
+  -- the Jacobian of `x ↦ x ^ q - x` is `q x ^ (q - 1) - 1 = -1`, a unit; over
+  -- `Spec Γ(S, ⊤)` this is `MvPolynomial.etale_artinSchreierRingHom`, and `AS_q` over `S` is its
+  -- base change
+  have : Etale (artinSchreierMap n (Spec Γ(S, ⊤)) q) := by
+    have : Etale (Spec.map (CommRingCat.ofHom (MvPolynomial.artinSchreierRingHom Γ(S, ⊤) n q))) :=
+      HasRingHomProperty.Spec_iff.mpr (MvPolynomial.etale_artinSchreierRingHom n q hq)
+    rw [artinSchreierMap_Spec]
+    infer_instance
+  exact MorphismProperty.of_isPullback (isPullback_map_artinSchreierMap S.toSpecΓ q) this
+
+variable {n S}
 
 /-- In characteristic `p`, the Artin–Schreier map `x ↦ x ^ (p ^ m) - x` is invariant under
 translation by a vector `a` with `a ^ (p ^ m) = a`:
@@ -177,17 +218,100 @@ lemma ι_artinSchreierTorsorMap_snd (k : Type u) [Field k] [Fintype k]
       translation fun i ↦ φ (a i) := by
   simp [artinSchreierTorsorMap]
 
+/-- The two projections of `𝔸(n; S) ×_{AS_q} 𝔸(n; S)` agree over `S`. -/
+@[reassoc]
+lemma pullback_fst_artinSchreierMap_over (q : ℕ) :
+    pullback.fst (artinSchreierMap n S q) (artinSchreierMap n S q) ≫ 𝔸(n; S) ↘ S =
+      pullback.snd (artinSchreierMap n S q) (artinSchreierMap n S q) ≫ 𝔸(n; S) ↘ S := by
+  rw [← artinSchreierMap_over n S q, pullback.condition_assoc]
+
 /-- Over a scheme `S` with a ring map `φ : k →+* Γ(S, 𝒪_S)` from a finite field `k` with `q`
 elements, the Artin–Schreier map `AS_q` of `𝔸(n; S)` is a torsor under `kⁿ` acting by
-translations: `AlgebraicGeometry.AffineSpace.artinSchreierTorsorMap` is an isomorphism. -/
+translations: `AlgebraicGeometry.AffineSpace.artinSchreierTorsorMap` is an isomorphism.
+This is the torsor structure of the Artin–Schreier covering of the blueprint definition
+`def-fd-artin-schreier-sheaf` (sketch blueprint: `sk-def-as`).
+
+The idempotents `E_a`, `a ∈ kⁿ`, obtained by evaluating Lagrange interpolation polynomials at
+the differences `d = y - x` (which satisfy `d ^ q = d`) split the fibre product into the open
+subschemes `D(E_a)`, and the summand indexed by `a` maps isomorphically onto `D(E_a)`. -/
 lemma isIso_artinSchreierTorsorMap [Finite n] (k : Type u) [Field k] [Fintype k]
     (φ : k →+* Γ(S, ⊤)) :
-    IsIso (artinSchreierTorsorMap k φ : ∐ (fun _ : n → k ↦ 𝔸(n; S)) ⟶ _) :=
-  -- locally on `S`, the fibre product is `Spec 𝒪_S[x, y] / ((y - x) ^ q - (y - x))`
-  -- coordinatewise, and `T ^ q - T = ∏_{a ∈ k} (T - φ a)` over any `k`-algebra
-  -- (`FiniteField.X_pow_card_sub_X` mapped along `φ`); the differences `φ a - φ b` are units,
-  -- so the Chinese remainder theorem splits it as `∏_a 𝒪_S[x]`
-  sorry
+    IsIso (artinSchreierTorsorMap k φ : ∐ (fun _ : n → k ↦ 𝔸(n; S)) ⟶ _) := by
+  classical
+  have := Fintype.ofFinite n
+  set AS := artinSchreierMap n S (Fintype.card k)
+  let ψ : k →+* Γ(pullback AS AS, ⊤) := (pullback.fst AS AS ≫ 𝔸(n; S) ↘ S).appTop.hom.comp φ
+  let d (i : n) : Γ(pullback AS AS, ⊤) :=
+    (pullback.snd AS AS).appTop (coord S i) - (pullback.fst AS AS).appTop (coord S i)
+  have hd (i : n) : d i ^ Fintype.card k = d i := by
+    have hc := congrArg (fun f ↦ f.appTop (coord S i))
+      (pullback.condition (f := AS) (g := AS))
+    simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AS, artinSchreierMap_appTop_coord,
+      map_sub, map_pow] at hc
+    exact FiniteField.sub_pow_card_eq_of_pow_card_sub_eq ψ hc
+  let E := FiniteField.lagrangeIdem ψ d
+  have key (a : n → k) :
+      IsOpenImmersion (Sigma.ι (fun _ : n → k ↦ 𝔸(n; S)) a ≫ artinSchreierTorsorMap k φ) ∧
+      Set.range (Sigma.ι (fun _ : n → k ↦ 𝔸(n; S)) a ≫ artinSchreierTorsorMap k φ) =
+        (pullback AS AS).basicOpen (E a) := by
+    refine isOpenImmersion_and_range_eq_of_section (pullback.fst AS AS) _ (by simp [AS]) _
+      ?_ ?_
+    · have hcomp {Z : Scheme.{u}} (g : pullback AS AS ⟶ Z) (x : Γ(Z, ⊤)) :
+          (Sigma.ι (fun _ : n → k ↦ 𝔸(n; S)) a ≫ artinSchreierTorsorMap k φ).appTop
+            (g.appTop x) =
+          (Sigma.ι (fun _ : n → k ↦ 𝔸(n; S)) a ≫ artinSchreierTorsorMap k φ ≫ g).appTop x := by
+        rw [← Category.assoc, Scheme.Hom.comp_appTop]
+        rfl
+      have hψ : (Sigma.ι (fun _ : n → k ↦ 𝔸(n; S)) a ≫
+          artinSchreierTorsorMap k φ).appTop.hom.comp ψ = (𝔸(n; S) ↘ S).appTop.hom.comp φ := by
+        ext c
+        change (Sigma.ι (fun _ : n → k ↦ 𝔸(n; S)) a ≫ artinSchreierTorsorMap k φ).appTop
+          ((pullback.fst AS AS ≫ 𝔸(n; S) ↘ S).appTop (φ c)) = _
+        rw [hcomp, ι_artinSchreierTorsorMap_fst_assoc]
+        rfl
+      have hd' (i : n) :
+          (Sigma.ι (fun _ : n → k ↦ 𝔸(n; S)) a ≫ artinSchreierTorsorMap k φ).appTop (d i) =
+            (𝔸(n; S) ↘ S).appTop.hom.comp φ (a i) := by
+        simp only [d, map_sub]
+        rw [hcomp, hcomp, ι_artinSchreierTorsorMap_snd, ι_artinSchreierTorsorMap_fst,
+          translation_appTop_coord, Scheme.Hom.id_appTop, CommRingCat.id_apply, add_sub_cancel_left]
+        rfl
+      rw [Scheme.preimage_basicOpen_top, FiniteField.map_lagrangeIdem]
+      refine (congrArg (𝔸(n; S)).basicOpen ?_).trans (Scheme.basicOpen_one _)
+      convert FiniteField.lagrangeIdem_self ((𝔸(n; S) ↘ S).appTop.hom.comp φ) a using 2
+      exact funext hd'
+    · refine pullback.hom_ext (by simp [AS]) ?_
+      simp only [Category.assoc]
+      rw [ι_artinSchreierTorsorMap_snd]
+      refine hom_ext (by simp [AS, pullback_fst_artinSchreierMap_over]) fun i ↦ ?_
+      have h0 : ((pullback AS AS).basicOpen (E a)).ι.appTop (d i - ψ (a i)) = 0 := by
+        have := congrArg (fun x ↦ ((pullback AS AS).basicOpen (E a)).ι.appTop x)
+          (FiniteField.lagrangeIdem_mul_sub ψ hd a i)
+        rw [map_mul, map_zero] at this
+        exact (Scheme.isUnit_ι_appTop_basicOpen _ (E a)).mul_right_eq_zero.mp this
+      simp only [d, ψ, map_sub, RingHom.comp_apply, Scheme.Hom.comp_appTop,
+        CommRingCat.comp_apply] at h0
+      simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, translation_appTop_coord,
+        map_add]
+      linear_combination -h0
+  have := fun a ↦ (key a).1
+  have hR (a : n → k) :
+      (Sigma.ι (fun _ : n → k ↦ 𝔸(n; S)) a ≫ artinSchreierTorsorMap k φ).opensRange =
+        (pullback AS AS).basicOpen (E a) :=
+    TopologicalSpace.Opens.ext (by rw [Scheme.Hom.coe_opensRange, (key a).2])
+  have h := nonempty_isColimit_cofanMk_of
+    (fun a ↦ Sigma.ι (fun _ : n → k ↦ 𝔸(n; S)) a ≫ artinSchreierTorsorMap k φ) ?_ ?_
+  · rw [Cofan.nonempty_isColimit_iff_isIso_sigmaDesc, cofan_mk_inj] at h
+    have hT : Sigma.desc (fun a ↦ Sigma.ι (fun _ : n → k ↦ 𝔸(n; S)) a ≫
+        artinSchreierTorsorMap k φ) = artinSchreierTorsorMap k φ :=
+      Sigma.hom_ext _ _ fun a ↦ by simp
+    exact hT ▸ h
+  · simp_rw [hR]
+    exact Scheme.iSup_basicOpen_eq_top_of_sum_eq_one E (FiniteField.sum_lagrangeIdem ψ d)
+  · intro a b hab
+    simp only [Function.onFun, hR]
+    rw [disjoint_iff, ← Scheme.basicOpen_mul, FiniteField.lagrangeIdem_mul_lagrangeIdem ψ hd hab,
+      Scheme.basicOpen_zero]
 
 end AlgebraicGeometry.AffineSpace
 

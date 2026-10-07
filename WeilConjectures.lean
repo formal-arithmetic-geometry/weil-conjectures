@@ -81,6 +81,9 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
+public import WeilConjectures.AlgebraicGeometry.Hilbert.Affine
+public import WeilConjectures.AlgebraicGeometry.Hilbert.AffineSpace
+public import WeilConjectures.AlgebraicGeometry.Hilbert.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Representability
@@ -93,6 +96,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import WeilConjectures.AlgebraicGeometry.Modules.Endomorphism
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
@@ -122,6 +126,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Defs
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent
 public import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
 public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
@@ -140,6 +145,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.MonomialCech
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SegreTwist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
@@ -168,6 +174,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
+public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90Etale
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
@@ -225,6 +232,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
@@ -670,6 +678,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Grothendieck
@@ -714,6 +723,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.Basis
 public import WeilConjectures.Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import WeilConjectures.Mathlib.LinearAlgebra.Lagrange
 public import WeilConjectures.Mathlib.LinearAlgebra.LinearIndependent.BaseChange
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.BilinearForm
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
@@ -826,6 +836,7 @@ public import WeilConjectures.RepresentationTheory.FiniteMatrixWitness
 public import WeilConjectures.RepresentationTheory.IntegralModel
 public import WeilConjectures.RingTheory.Bialgebra.Frobenius
 public import WeilConjectures.RingTheory.Dehomogenization
+public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 public import WeilConjectures.RingTheory.GradedAlgebra.LinearPair
 public import WeilConjectures.RingTheory.GradedAlgebra.Standard
@@ -836,6 +847,9 @@ public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Exterior
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdeal
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.IdentityComponent
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Kronecker
+public import WeilConjectures.RingTheory.MvPolynomial.ArtinSchreier
+public import WeilConjectures.RingTheory.MvPolynomial.QuotientBasis
+public import WeilConjectures.RingTheory.MvPolynomial.QuotientSpan
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
 public import WeilConjectures.SixFunctors.BaseChange.Derived
@@ -1020,6 +1034,7 @@ public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.Realizable
 public import WeilConjectures.WeilSheaf.Stalk
+public import WeilConjectures.WeilSheaf.TateTwist
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaFunction.BettiNumbers
