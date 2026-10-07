@@ -51,6 +51,8 @@ The index type of the affine space is `ULift.{u} (Fin d)`, since
 - `AlgebraicGeometry.smoothOfRelativeDimension_pullback_fst`,
   `AlgebraicGeometry.smoothOfRelativeDimension_pullback_snd`: smoothness of relative dimension `n`
   is inherited by the projections of a fibre product.
+- `AlgebraicGeometry.smoothOfRelativeDimension_of_comp_of_isFinite_of_surjective`: smoothness of
+  relative dimension `n` descends along a finite locally free surjection of the source.
 
 ## References
 
@@ -367,5 +369,18 @@ theorem Smooth.isLocallyConstant_topologicalKrullDimAt_asFiber {X Y : Scheme.{u}
   rw [← IsOpen.topologicalKrullDimAt_eq W.isOpen hW]
   exact @topologicalKrullDimAt_eq_of_smoothOfRelativeDimension _ _ _
     (W.ι ≫ f.fiberToSpecResidueField (f x')) d this ⟨_, hW⟩
+
+/-- **Smoothness descends along finite locally free surjections.** Let `u : X' ⟶ X` be finite,
+flat, locally of finite presentation and surjective, and let `f : X ⟶ S`. If `u ≫ f` is smooth of
+relative dimension `n`, then so is `f`.
+
+Smoothness descends along flat surjective morphisms locally of finite presentation (Stacks, Tag
+05B5), and the relative dimension is preserved since `u` is finite flat surjective, so that
+fibres of `u ≫ f` and of `f` have the same local dimensions. -/
+theorem smoothOfRelativeDimension_of_comp_of_isFinite_of_surjective {X' X S : Scheme.{u}}
+    (u : X' ⟶ X) (f : X ⟶ S) [IsFinite u] [Flat u] [LocallyOfFinitePresentation u]
+    [Surjective u] (n : ℕ) [SmoothOfRelativeDimension n (u ≫ f)] :
+    SmoothOfRelativeDimension n f :=
+  sorry
 
 end AlgebraicGeometry
