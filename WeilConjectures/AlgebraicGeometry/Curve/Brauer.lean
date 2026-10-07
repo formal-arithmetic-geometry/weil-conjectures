@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup
 public import WeilConjectures.FieldTheory.Tsen
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
+public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 
 /-!
 # Tsen's theorem and the Brauer group of a curve
@@ -52,10 +53,49 @@ degree `d` in `N > d` variables over `k(C)` has a nontrivial zero. Neither smoot
 properness of `C` is assumed.
 (blueprint: `sk-prop-tsen`) -/
 theorem isQuasiAlgClosed_functionField (f : C ⟶ Spec (.of k)) [IsCurve f] [IsIntegral C] :
-    IsQuasiAlgClosed C.functionField :=
-  -- Proof sketch: `k(C)` has transcendence degree at most one over `k`, since `C` has
-  -- dimension at most one, so this is `IsQuasiAlgClosed.of_trdeg_le_one`.
-  sorry
+    IsQuasiAlgClosed C.functionField := by
+  -- `k(C)` is the fraction field of `A = Γ(C, U)` for a nonempty affine open `U`, a finitely
+  -- generated `k`-domain of dimension at most one; so `trdeg_k k(C) = trdeg_k A = dim A ≤ 1`.
+  obtain ⟨x⟩ := (inferInstance : Nonempty C)
+  obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
+    C.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+  have : Nonempty U := ⟨⟨x, hxU⟩⟩
+  have hft : RingHom.FiniteType (f.appLE ⊤ U (by simp)).hom :=
+    HasRingHomProperty.appLE (P := @LocallyOfFiniteType) f inferInstance
+      ⟨⊤, isAffineOpen_top _⟩ ⟨U, hU⟩ (by simp)
+  let φ : k →+* Γ(C, U) := (f.appLE ⊤ U (by simp)).hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom
+  have hφ : φ.FiniteType := hft.comp (RingHom.FiniteType.of_surjective _
+    (Scheme.ΓSpecIso (.of k)).symm.commRingCatIsoToRingEquiv.surjective)
+  let := φ.toAlgebra
+  have : Algebra.FiniteType k Γ(C, U) := hφ
+  let := (C.germToFunctionField U).hom.toAlgebra
+  let : Algebra k C.functionField := ((C.germToFunctionField U).hom.comp φ).toAlgebra
+  have : IsScalarTower k Γ(C, U) C.functionField := .of_algebraMap_eq fun _ ↦ rfl
+  have : IsFractionRing Γ(C, U) C.functionField :=
+    functionField_isFractionRing_of_isAffineOpen C U hU
+  have : FaithfulSMul Γ(C, U) C.functionField :=
+    (faithfulSMul_iff_algebraMap_injective _ _).mpr (IsFractionRing.injective _ _)
+  have : Algebra.IsAlgebraic Γ(C, U) C.functionField :=
+    IsLocalization.isAlgebraic C.functionField (nonZeroDivisors Γ(C, U))
+  have hdim : ringKrullDim Γ(C, U) ≤ 1 := by
+    rw [← PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
+    exact (IsHomeomorph.topologicalKrullDim_eq _
+      hU.isoSpec.hom.homeomorph.isHomeomorph).symm.trans_le
+      ((topologicalKrullDim_subspace_le C U).trans (IsCurve.krullDim_le_one (f := f)))
+  obtain ⟨n, hn⟩ : ∃ n : ℕ, ringKrullDim Γ(C, U) = n := by
+    have h0 := ringKrullDim_nonneg_of_nontrivial (R := Γ(C, U))
+    generalize ringKrullDim Γ(C, U) = d at h0 hdim
+    induction d using WithBot.recBotCoe with
+    | bot => simp at h0
+    | coe d =>
+      induction d using ENat.recTopCoe with
+      | top => exact absurd (WithBot.coe_le_coe.mp hdim) (by simp)
+      | coe n => exact ⟨n, rfl⟩
+  rw [hn] at hdim
+  apply IsQuasiAlgClosed.of_trdeg_le_one k
+  rw [← trdeg_add_eq k Γ(C, U) (A := C.functionField), trdeg_eq_zero (R := Γ(C, U)), add_zero,
+    Algebra.trdeg_eq_of_ringKrullDim_eq k _ hn]
+  exact_mod_cast hdim
 
 /-- The Brauer group of the function field of an integral curve over an algebraically closed
 field vanishes, `Br(k(C)) = H²(k(C), 𝔾ₘ) = 0`.

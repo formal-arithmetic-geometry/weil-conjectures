@@ -352,5 +352,14 @@ theorem ringKrullDim_tensorProduct_eq_of_finite_inj_algHom_mvPolynomial {R S : T
 dimension: for a Noether normalization `K[T₁, …, Tₙ] → B` both are `n`. -/
 theorem Algebra.trdeg_eq_of_ringKrullDim_eq (K B : Type*) [Field K] [CommRing B] [IsDomain B]
     [Algebra K B] [Algebra.FiniteType K B] {n : ℕ} (hB : ringKrullDim B = n) :
-    Algebra.trdeg K B = n :=
-  sorry
+    Algebra.trdeg K B = n := by
+  obtain ⟨g, hinj, hfin⟩ := exists_finite_inj_algHom_mvPolynomial_of_ringKrullDim_eq K B n hB
+  algebraize [g.toRingHom]
+  have : IsScalarTower K (MvPolynomial (Fin n) K) B :=
+    .of_algebraMap_eq fun r ↦ (g.commutes r).symm
+  have : FaithfulSMul (MvPolynomial (Fin n) K) B :=
+    (faithfulSMul_iff_algebraMap_injective _ _).mpr hinj
+  have : Algebra.IsIntegral (MvPolynomial (Fin n) K) B := ⟨hfin.to_isIntegral⟩
+  have h := lift_trdeg_add_eq K (MvPolynomial (Fin n) K) B
+  rw [trdeg_eq_zero (R := MvPolynomial (Fin n) K), MvPolynomial.trdeg_of_isDomain] at h
+  simpa using h.symm

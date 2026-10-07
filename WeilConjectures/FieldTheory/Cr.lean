@@ -9,6 +9,7 @@ public import Mathlib.Algebra.BrauerGroup.Defs
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.Norm.Basic
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.Algebra.Central.ReducedNorm
 
@@ -29,6 +30,9 @@ closure*.
 - `IsCField.mono`: property `Cᵣ` implies property `Cₛ` for `r ≤ s`.
 - `IsAlgClosed.isCField_zero`: an algebraically closed field is `C₀`, hence `C₁`.
 - `IsQuasiAlgClosed.of_finiteDimensional`: a finite extension of a `C₁` field is `C₁`.
+- `IsQuasiAlgClosed.of_isAlgebraic`: an algebraic extension of a `C₁` field is `C₁`.
+- `IsQuasiAlgClosed.finrank_eq_one_of_isCentral`: a central division algebra over a `C₁` field
+  is trivial.
 - `IsQuasiAlgClosed.subsingleton_brauerGroup`: the Brauer group of a `C₁` field vanishes.
 
 ## Implementation notes
@@ -129,13 +133,27 @@ instance IsAlgClosed.isQuasiAlgClosed [IsAlgClosed K] : IsQuasiAlgClosed K :=
 of degree `d > 0` in more than `d ^ r` variables has a nontrivial zero. -/
 theorem IsCField.exists_ne_zero_and_eval_eq_zero_of_finite {r : ℕ} [IsCField K r] {σ : Type*}
     [Finite σ] {d : ℕ} (F : MvPolynomial σ K) (hF : F.IsHomogeneous d) (hd : 0 < d)
-    (hN : d ^ r < Nat.card σ) : ∃ x : σ → K, x ≠ 0 ∧ eval x F = 0 :=
-  sorry
+    (hN : d ^ r < Nat.card σ) : ∃ x : σ → K, x ≠ 0 ∧ eval x F = 0 := by
+  let e := Finite.equivFin σ
+  obtain ⟨x, hx, hFx⟩ := IsCField.exists_ne_zero_and_eval_eq_zero (rename e F)
+    (hF.rename_isHomogeneous) hd hN
+  refine ⟨x ∘ e, fun h => hx (funext fun i => ?_), by rwa [eval_rename] at hFx⟩
+  simpa using congrFun h (e.symm i)
 
 /-- Property `Cᵣ` is invariant under isomorphisms of fields. -/
 theorem IsCField.of_ringEquiv {L : Type*} [Field L] {r : ℕ} (e : K ≃+* L) [IsCField K r] :
-    IsCField L r :=
-  sorry
+    IsCField L r where
+  exists_ne_zero_and_eval_eq_zero F hF hd hN := by
+    obtain ⟨x, hx, hFx⟩ := IsCField.exists_ne_zero_and_eval_eq_zero (map e.symm.toRingHom F)
+      (hF.map _) hd hN
+    refine ⟨e ∘ x, fun h => hx (funext fun i => by simpa using congrFun h i), ?_⟩
+    have hF' : F = map e.toRingHom (map e.symm.toRingHom F) := by
+      rw [map_map]
+      simp [map_id]
+    have key := eval₂_comp_left e.toRingHom (RingHom.id K) x (map e.symm.toRingHom F)
+    rw [RingHom.comp_id] at key
+    rw [hF', eval_map, show (e ∘ x) = e.toRingHom ∘ x from rfl, ← key]
+    exact (congrArg e.toRingHom hFx).trans (map_zero _)
 
 /-- A finite extension of a quasi-algebraically closed field is quasi-algebraically closed: the
 norm of a form of degree `d` in `N > d` variables over `L` is a form of degree `[L : K] d` in
@@ -143,20 +161,113 @@ norm of a form of degree `d` in `N > d` variables over `L` is a form of degree `
 (blueprint: `lem-sc-c1-finite-extension`) -/
 @[stacks 03RC]
 theorem IsQuasiAlgClosed.of_finiteDimensional (K L : Type*) [Field K] [Field L] [Algebra K L]
-    [FiniteDimensional K L] [IsQuasiAlgClosed K] : IsQuasiAlgClosed L :=
-  sorry
+    [FiniteDimensional K L] [IsQuasiAlgClosed K] : IsQuasiAlgClosed L where
+  exists_ne_zero_and_eval_eq_zero {N d} F hF hd hN := by
+    classical
+    rw [pow_one] at hN
+    set m := Module.finrank K L
+    let b := Module.finBasis K L
+    -- the generic point `zᵢ = ∑ⱼ bⱼ yᵢⱼ` and the form `G(y) = F(z)` over `L`
+    let z : Fin N → MvPolynomial (Fin N × Fin m) L := fun i => ∑ j, C (b j) * X (i, j)
+    let G : MvPolynomial (Fin N × Fin m) L := aeval z F
+    have hG : G.IsHomogeneous d := by
+      have h := hF.aeval z fun i =>
+        IsHomogeneous.sum _ _ _ fun j _ => isHomogeneous_C_mul_X (b j) (i, j)
+      rwa [one_mul] at h
+    -- the matrix of multiplication by `G` in the basis `b`, a matrix of forms over `K`
+    let f : Fin m → Fin m → L →ₗ[K] K := fun j k => (b.coord j).comp (LinearMap.mulRight K (b k))
+    let M : Matrix (Fin m) (Fin m) (MvPolynomial (Fin N × Fin m) K) :=
+      fun j k => ∑ s ∈ G.support, monomial s (f j k (coeff s G))
+    have hM : M.det.IsHomogeneous (m * d) := by
+      simpa using IsHomogeneous.det fun j k => hG.sum_monomial_linearMap (f j k)
+    have hm : 0 < m := Module.finrank_pos
+    have hevalG (y : Fin N × Fin m → K) :
+        eval (algebraMap K L ∘ y) G = eval (fun i => ∑ j, y (i, j) • b j) F := by
+      rw [← coe_aeval_eq_eval, ← coe_aeval_eq_eval]
+      change aeval _ (aeval z F) = aeval _ F
+      rw [← AlgHom.comp_apply, comp_aeval]
+      congr 2
+      funext i
+      simp only [z, map_sum, map_mul, Algebra.smul_def]
+      exact Finset.sum_congr rfl fun j _ => by
+        simp only [aeval_X, Function.comp_apply, mul_comm]
+        exact congrArg _ (eval₂_C _ _ _)
+    have hevalM (y : Fin N × Fin m → K) :
+        eval y M.det = Algebra.norm K (eval (fun i => ∑ j, y (i, j) • b j) F) := by
+      rw [Algebra.norm_eq_matrix_det b, RingHom.map_det]
+      congr 1
+      ext j k
+      simp only [RingHom.mapMatrix_apply, Matrix.map_apply, M]
+      rw [eval_sum_monomial_linearMap, hevalG, Algebra.leftMulMatrix_apply,
+        LinearMap.toMatrix_apply]
+      simp [f]
+    obtain ⟨y, hy, hMy⟩ := IsCField.exists_ne_zero_and_eval_eq_zero_of_finite (r := 1) M.det hM
+      (Nat.mul_pos hm hd) (by simpa [mul_comm m] using Nat.mul_lt_mul_of_pos_right hN hm)
+    rw [hevalM, Algebra.norm_eq_zero_iff] at hMy
+    refine ⟨fun i => ∑ j, y (i, j) • b j, fun h => hy (funext fun ij => ?_), hMy⟩
+    have := congrArg (fun v => b.repr v ij.2) (congrFun h ij.1)
+    simpa [Finsupp.single_apply] using this
 
 /-- An algebraic extension of a quasi-algebraically closed field is quasi-algebraically closed:
 the finitely many coefficients of a form lie in a finite subextension. -/
 theorem IsQuasiAlgClosed.of_isAlgebraic (K L : Type*) [Field K] [Field L] [Algebra K L]
-    [Algebra.IsAlgebraic K L] [IsQuasiAlgClosed K] : IsQuasiAlgClosed L :=
-  sorry
+    [Algebra.IsAlgebraic K L] [IsQuasiAlgClosed K] : IsQuasiAlgClosed L where
+  exists_ne_zero_and_eval_eq_zero {N d} F hF hd hN := by
+    let E := IntermediateField.adjoin K (F.coeffs : Set L)
+    have : FiniteDimensional K E := IntermediateField.finiteDimensional_adjoin
+      fun x _ => (Algebra.IsAlgebraic.isAlgebraic x).isIntegral
+    have := IsQuasiAlgClosed.of_finiteDimensional K E
+    obtain ⟨F', hF'⟩ : F ∈ Set.range (map (algebraMap E L)) := by
+      rw [mem_range_map_iff_coeffs_subset]
+      intro c hc
+      exact ⟨⟨c, IntermediateField.subset_adjoin K _ hc⟩, rfl⟩
+    obtain ⟨x, hx, hFx⟩ := IsCField.exists_ne_zero_and_eval_eq_zero F'
+      ((hF' ▸ hF).of_map (algebraMap E L).injective) hd hN
+    refine ⟨algebraMap E L ∘ x,
+      fun h => hx (funext fun i => (algebraMap E L).injective (by simpa using congrFun h i)), ?_⟩
+    have key := eval₂_comp_left (algebraMap E L) (RingHom.id E) x F'
+    rw [RingHom.comp_id] at key
+    rw [← hF', eval_map, ← key]
+    exact (congrArg (algebraMap E L) hFx).trans (map_zero _)
+
+/-- A finite-dimensional central division algebra over a quasi-algebraically closed field `K`
+is `K` itself: its reduced norm is a form of degree `d` in `d ^ 2` variables without nontrivial
+zero, so `d = 1`.
+(blueprint: `lem-sc-c1-brauer-trivial`) -/
+theorem IsQuasiAlgClosed.finrank_eq_one_of_isCentral (K D : Type*) [Field K] [IsQuasiAlgClosed K]
+    [DivisionRing D] [Algebra K D] [Algebra.IsCentral K D] [FiniteDimensional K D] :
+    Module.finrank K D = 1 := by
+  obtain ⟨d, hd, hdim, P, hP, hP0⟩ := Algebra.IsCentral.exists_isHomogeneous_eval_ne_zero K D
+  rcases Nat.lt_or_ge d 2 with h | h
+  · rw [hdim, show d = 1 by omega, one_pow]
+  · obtain ⟨y, hy, hPy⟩ := IsCField.exists_ne_zero_and_eval_eq_zero P hP hd
+      (by rw [pow_one, hdim, sq]; exact lt_mul_left hd (by omega))
+    exact absurd hPy (hP0 y hy)
 
 /-- The Brauer group of a quasi-algebraically closed field vanishes: every central simple
-algebra over `K` is a matrix algebra.
-(blueprint: `sk-prop-tsen`) -/
+algebra over `K` is a matrix algebra over `K`.
+(blueprint: `lem-sc-c1-brauer-trivial`, `sk-prop-tsen`) -/
 theorem IsQuasiAlgClosed.subsingleton_brauerGroup (K : Type u) [Field K] [IsQuasiAlgClosed K] :
-    Subsingleton (BrauerGroup.{u, u} K) :=
-  -- Proof sketch: the reduced norm of a central division algebra of degree `d > 1` over `K` is
-  -- a form of degree `d` in `d ^ 2 > d` variables, so it would have a nontrivial zero.
-  sorry
+    Subsingleton (BrauerGroup.{u, u} K) := by
+  let one : CSA.{u, u} K := ⟨.of K K⟩
+  suffices h : ∀ A : CSA.{u, u} K, IsBrauerEquivalent A one by
+    refine ⟨fun A B => ?_⟩
+    induction A using Quotient.inductionOn
+    induction B using Quotient.inductionOn
+    exact Quotient.sound ((h _).trans (h _).symm)
+  intro A
+  have := IsArtinianRing.of_finite K A
+  obtain ⟨n, hn, D, _, _, _, ⟨e⟩⟩ := IsSimpleRing.exists_algEquiv_matrix_divisionRing_finite K A
+  have : Algebra.IsCentral K D := Algebra.IsCentral.of_algEquiv_matrix e
+  let f : K ≃ₐ[K] D := AlgEquiv.ofBijective (Algebra.ofId K D) <| by
+    refine ⟨(algebraMap K D).injective, ?_⟩
+    exact (LinearMap.injective_iff_surjective_of_finrank_eq_finrank
+      (f := (Algebra.ofId K D).toLinearMap)
+      (by rw [Module.finrank_self, finrank_eq_one_of_isCentral K D])).mp
+      (algebraMap K D).injective
+  let u : A ≃ₐ[K] Matrix (Fin 1) (Fin 1) A :=
+    AlgEquiv.ofBijective (Matrix.scalarAlgHom (Fin 1) K) ⟨fun a b h => by
+      simpa using congrFun (congrFun h 0) 0, fun M => ⟨M 0 0, by
+        ext i j
+        simp [Subsingleton.elim i 0, Subsingleton.elim j 0]⟩⟩
+  exact ⟨1, n, one_ne_zero, hn.ne, ⟨u.symm.trans (e.trans f.symm.mapMatrix)⟩⟩
