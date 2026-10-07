@@ -21,6 +21,10 @@ We record this for the fppf topology on `Scheme` and for its localization to `Ov
 A property of morphisms which is local at the target and descends along faithfully flat
 quasi-compact morphisms descends along every covering sieve of the fpqc topology
 (`AlgebraicGeometry.Scheme.of_isPullback_of_mem_fpqcTopology`).
+
+Over an affine scheme, a covering sieve of the fpqc topology is refined by a finite covering
+family of flat morphisms from affine schemes
+(`AlgebraicGeometry.Scheme.exists_finite_affine_flat_of_mem_fpqcTopology`).
 -/
 
 @[expose] public section
@@ -132,5 +136,28 @@ lemma exists_mem_of_mem_fpqcTopology {X : Scheme.{u}} {S : Sieve X} (hS : S ∈ 
   obtain ⟨_, g, h, hx⟩ := hR x
   rcases h with ⟨hg⟩
   exact ⟨_, _, hle _ _ hg, hx⟩
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- A covering sieve of the fpqc topology on an affine scheme `V` contains a finite family of flat
+morphisms from affine schemes which itself generates a covering sieve. -/
+lemma exists_finite_affine_flat_of_mem_fpqcTopology {V : Scheme.{u}} [IsAffine V] {S : Sieve V}
+    (hS : S ∈ fpqcTopology V) :
+    ∃ (κ : Type u) (W : κ → Scheme.{u}) (f : ∀ j, W j ⟶ V), Finite κ ∧ (∀ j, IsAffine (W j)) ∧
+      (∀ j, Flat (f j)) ∧ (∀ j, S (f j)) ∧ Sieve.ofArrows W f ∈ fpqcTopology V := by
+  have hS' := hS
+  rw [fpqcTopology, Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition] at hS'
+  obtain ⟨R, hR, hle⟩ := hS'
+  obtain ⟨𝒰, _, rfl⟩ := mem_propQCPrecoverage_iff_exists_quasiCompactCover.mp hR
+  obtain ⟨𝒱, φ, _, -⟩ : ∃ (𝒱 : Scheme.AffineCover.{u} @Flat V) (φ : 𝒱.cover ⟶ 𝒰.qculift),
+      Finite 𝒱.I₀ ∧ ∀ j, IsOpenImmersion (φ.h₀ j) := QuasiCompactCover.exists_hom _
+  have h𝒰 (k : 𝒰.qculift.I₀) : 𝒰.presieve₀ (𝒰.qculift.f k) := by
+    rcases k with k | k
+    · exact 𝒰.toPreZeroHypercover.presieve₀_f _
+    · exact 𝒰.toPreZeroHypercover.presieve₀_f _
+  have : Finite 𝒱.cover.I₀ := ‹Finite 𝒱.I₀›
+  refine ⟨𝒱.cover.I₀, 𝒱.cover.X, 𝒱.cover.f, inferInstance, fun j ↦ inferInstanceAs
+    (IsAffine (Spec _)), fun j ↦ 𝒱.map_prop j, fun j ↦ ?_, Cover.mem_propQCTopology 𝒱.cover⟩
+  rw [← φ.w₀ j]
+  exact S.downward_closed (hle _ _ (h𝒰 _)) _
 
 end AlgebraicGeometry.Scheme

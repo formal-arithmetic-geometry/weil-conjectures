@@ -11,6 +11,7 @@ public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Splits
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Log
 
 /-!
 # The determinant-trace identity
@@ -54,6 +55,8 @@ of Frobenius modules, which is the local factor of an Euler product.
   `det (1 - t F)⁻¹ = exp (∑_{n ≥ 1} tr (F ^ n) t ^ n / n)`, over a field of characteristic
   zero. It is stated in the same shape as
   `AlgebraicGeometry.Scheme.Hom.zetaSeries`, so that the two can be compared directly.
+- `LinearMap.logOf_charpolyRev`: the logarithmic form
+  `log det (1 - t F) = - ∑_{n ≥ 1} tr (F ^ n) t ^ n / n`, over a field of characteristic zero.
 -/
 
 @[expose] public section
@@ -198,7 +201,8 @@ theorem X_mul_derivative_charpolyRev (F : Module.End K V) :
 
 /-- **The determinant-trace identity**, exponential form:
 `det (1 - t F)⁻¹ = exp (∑_{n ≥ 1} tr (F ^ n) t ^ n / n)` for an endomorphism `F` of a finite
-dimensional vector space over a field of characteristic zero. -/
+dimensional vector space over a field of characteristic zero
+(blueprint: `sk-prop-logdet`, `lem-zl-euler-product-identity`). -/
 theorem inv_charpolyRev_eq_exp [CharZero K] (F : Module.End K V) :
     (F.charpolyRev : K⟦X⟧)⁻¹ =
       (PowerSeries.exp K).subst
@@ -255,6 +259,38 @@ of an endomorphism `F` of a finite dimensional vector space. Its companion ident
 (blueprint: `sk-def-frobmod`). -/
 noncomputable def traceSeries (F : Module.End K V) : K⟦X⟧ :=
   PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n) / n
+
+/-- **The determinant-trace identity**, logarithmic form: the formal logarithm of
+`det (1 - t F)` is minus the trace series,
+`log det (1 - t F) = - ∑_{n ≥ 1} tr (F ^ n) t ^ n / n`, for an endomorphism `F` of a finite
+dimensional vector space over a field of characteristic zero. No semisimplicity is assumed
+(blueprint: `lem-zl-log-det-identity`, `sk-prop-logdet`). -/
+theorem logOf_charpolyRev [CharZero K] (F : Module.End K V) :
+    PowerSeries.logOf (F.charpolyRev : K⟦X⟧) = -traceSeries F := by
+  set P : K⟦X⟧ := (F.charpolyRev : K⟦X⟧) with hP
+  set T : K⟦X⟧ := PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n)
+    with hT
+  have hP1 : PowerSeries.constantCoeff P = 1 := by
+    rw [hP, Polynomial.constantCoeff_coe, Polynomial.coeff_zero_eq_eval_zero, eval_charpolyRev]
+  have hP0 : P ≠ 0 := fun h ↦ by simp [h] at hP1
+  have hlogP : X * derivative K P = -T * P := X_mul_derivative_charpolyRev F
+  have hXg : X * derivative K (traceSeries F) = T := by
+    ext n
+    match n with
+    | 0 => simp [hT]
+    | m + 1 =>
+      rw [PowerSeries.coeff_succ_X_mul, PowerSeries.coeff_derivative, traceSeries, hT,
+        PowerSeries.coeff_mk, PowerSeries.coeff_mk, if_neg m.succ_ne_zero,
+        if_neg m.succ_ne_zero]
+      have hm : ((m : K) + 1) ≠ 0 := by exact_mod_cast Nat.succ_ne_zero m
+      push_cast
+      rw [div_mul_cancel₀ _ hm]
+  refine PowerSeries.derivative.ext ?_ ?_
+  · refine mul_left_cancel₀ (mul_ne_zero hP0 PowerSeries.X_ne_zero) ?_
+    rw [map_neg]
+    linear_combination X * PowerSeries.mul_derivative_logOf hP1 + hlogP + P * hXg
+  · rw [PowerSeries.constantCoeff_logOf hP1, map_neg, traceSeries]
+    simp
 
 variable {W : ℤ → Type*} [∀ i, AddCommGroup (W i)] [∀ i, Module K (W i)]
   [∀ i, FiniteDimensional K (W i)]

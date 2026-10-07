@@ -35,6 +35,9 @@ group objects is the fibre product of `f` and the unit `η[H] : 𝟙_ C ⟶ H`:
 ## Main statements
 
 - `CategoryTheory.GrpObj.isPullback_kerι`: the square above is cartesian.
+- `CategoryTheory.GrpObj.mono_kerι`: `kerι f` is a monomorphism.
+- `CategoryTheory.GrpObj.range_monoidHom_kerι`: the `Y`-points of `G` factoring through `ker f`
+  are the kernel of `f` on `Y`-points.
 - `CategoryTheory.GrpObj.isMonHom_kerι`: `kerι f` is a morphism of group objects.
 - `CategoryTheory.GrpObj.isMonHom_ofMono`: the monomorphism defining
   `CategoryTheory.GrpObj.ofMono` is a morphism of group objects.
@@ -115,6 +118,11 @@ theorem kerLift_unique (f : G ⟶ H) [HasPullback f η[H]] {X : C} (g : X ⟶ G)
   change l ≫ kerι f = kerLift f g hg ≫ kerι f
   rw [hl, kerLift_kerι]
 
+/-- The inclusion of the kernel is a monomorphism: `l ≫ kerι f` determines `l`, the other leg
+of the defining square being the unique morphism to the unit. -/
+instance mono_kerι (f : G ⟶ H) [HasPullback f η[H]] : Mono (kerι f) :=
+  ⟨fun _ _ h ↦ pullback.hom_ext h (toUnit_unique _ _)⟩
+
 section GroupStructure
 
 variable [GrpObj G] (f : G ⟶ H) [IsMonHom f]
@@ -172,6 +180,16 @@ instance isMonHom_kerι [HasPullback f η[H]] : IsMonHom (kerι f) where
     rw [← homEquiv'_kerRepresentableBy f (μ[ker f]), h1, Subgroup.coe_mul,
       homEquiv'_kerRepresentableBy, homEquiv'_kerRepresentableBy, _root_.CategoryTheory.Hom.mul_def,
       lift_fst_comp_snd_comp]
+
+/-- The `Y`-points of `G` which factor through `ker f` are exactly the kernel of the induced
+homomorphism `(· ≫ f) : (Y ⟶ G) →* (Y ⟶ H)`. -/
+theorem range_monoidHom_kerι [HasPullback f η[H]] (Y : C) :
+    (IsMonHom.monoidHom (kerι f) Y).range = (IsMonHom.monoidHom f Y).ker := by
+  ext g
+  refine ⟨?_, fun hg ↦ ⟨((kerRepresentableBy f).homEquiv.symm ⟨g, hg⟩), ?_⟩⟩
+  · rintro ⟨l, rfl⟩
+    exact ((kerRepresentableBy f).homEquiv l).2
+  · exact congrArg Subtype.val ((kerRepresentableBy f).homEquiv.apply_symm_apply ⟨g, hg⟩)
 
 /-- Translation identifies the fibres of a morphism of group objects with its kernel: for
 `x : T ⟶ G`, the square

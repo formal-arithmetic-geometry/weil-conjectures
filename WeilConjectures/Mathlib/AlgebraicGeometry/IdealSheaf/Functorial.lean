@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
 
 /-!
 # Complements on pullback and pushforward of ideal sheaves
@@ -41,7 +42,12 @@ is `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` in `map`/`comap` language.
 - `AlgebraicGeometry.Scheme.IdealSheafData.map_comap_of_isPullback`: flat base change, with
   `AlgebraicGeometry.Scheme.IdealSheafData.map_comap_opens` (restriction to an open) and
   `AlgebraicGeometry.Scheme.IdealSheafData.comap_map` (a quasi-compact flat monomorphism)
-  as special cases.
+  as special cases;
+- `AlgebraicGeometry.Scheme.IdealSheafData.comap_iInf_of_flat`: flat pullback commutes with
+  finite intersections, and `AlgebraicGeometry.Scheme.IdealSheafData.comap_iInf_map_of_flat`:
+  descent of ideal sheaves along a finite family of flat quasi-compact morphisms;
+- `AlgebraicGeometry.Scheme.IdealSheafData.exists_comap_ι_eq`: ideal sheaves on the affine opens
+  compatible with restriction to basic opens glue.
 
 The last section computes sections of the inverse image ideal sheaf:
 `AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_appLE_le_ideal_comap` and
@@ -211,6 +217,107 @@ theorem comap_map (f : X ⟶ Y) [QuasiCompact f] [Flat f] [Mono f] (J : X.IdealS
   rw [map_comap_of_isPullback J (IsKernelPair.id_of_mono f), comap_id, map_id]
 
 end FlatBaseChange
+
+section FlatPullback
+
+/-- Pullback of ideal sheaves along a flat morphism commutes with finite intersections: on affine
+opens it is the extension of ideals along a flat ring map (`Ideal.map_iInf_of_flat`). -/
+lemma comap_iInf_of_flat (f : X ⟶ Y) [Flat f] {ι : Type*} [Finite ι]
+    (I : ι → Y.IdealSheafData) : (⨅ i, I i).comap f = ⨅ i, (I i).comap f := by
+  refine ext_of_iSup_eq_top (ι := {p : Y.affineOpens × X.affineOpens // p.2.1 ≤ f ⁻¹ᵁ p.1.1})
+    (fun p ↦ p.1.2) ?_ fun p ↦ ?_
+  · rw [eq_top_iff]
+    intro x _
+    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ := Y.isBasis_affineOpens.exists_subset_of_mem_open
+      (Set.mem_univ (f x)) isOpen_univ
+    obtain ⟨_, ⟨W, hW, rfl⟩, hxW, hWV⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open
+      (a := x) hxV (f ⁻¹ᵁ V).2
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨(⟨V, hV⟩, ⟨W, hW⟩), hWV⟩, hxW⟩
+  · obtain ⟨⟨V, W⟩, h⟩ := p
+    have := f.flat_appLE V.2 W.2 h
+    algebraize [(f.appLE V.1 W.1 h).hom]
+    simp only [ideal_iInf, iInf_apply, ideal_comap_appLE _ f V W h]
+    exact Ideal.map_iInf_of_flat (S := Γ(X, W.1)) _
+
+/-- **Descent of ideal sheaves along a finite flat quasi-compact family.** Let `q k : W k ⟶ V`
+be finitely many flat quasi-compact morphisms and `I k` ideal sheaves on the `W k` whose
+pullbacks to every `W k ×_V W l` agree. Then the pullback of `⨅ k, (I k).map (q k)` along
+each `q l` is `I l`.
+
+This is the effectivity step "descending the quotients" of the proof of
+`lem-pc-descent-finite-flat-closed-subschemes`, in the form of an explicit formula: it uses
+flat base change (`map_comap_of_isPullback`) and that flat pullback commutes with finite
+intersections (`comap_iInf_of_flat`). -/
+theorem comap_iInf_map_of_flat {V : Scheme.{u}} {κ : Type*} [Finite κ] {W : κ → Scheme.{u}}
+    (q : ∀ k, W k ⟶ V) [∀ k, Flat (q k)] [∀ k, QuasiCompact (q k)]
+    (I : ∀ k, (W k).IdealSheafData)
+    (hcompat : ∀ k l, (I k).comap (pullback.fst (q k) (q l)) =
+      (I l).comap (pullback.snd (q k) (q l))) (l : κ) :
+    (⨅ k, (I k).map (q k)).comap (q l) = I l := by
+  refine le_antisymm ((comap_mono _ (iInf_le _ l)).trans (comap_map_le _ _)) ?_
+  rw [comap_iInf_of_flat]
+  refine le_iInf fun k ↦ ?_
+  rw [map_comap_of_isPullback (I k) (IsPullback.of_hasPullback (q k) (q l)), hcompat]
+  exact le_map_comap _ _
+
+end FlatPullback
+
+section Gluing
+
+/-- Two ideal sheaves on `Z` coincide as soon as their restrictions to every affine open of `Z`
+mapping into an affine open of `Y` along `f : Z ⟶ Y` coincide. -/
+theorem eq_of_comap_ι_eq {Z : Scheme.{u}} (f : Z ⟶ Y) {A B : Z.IdealSheafData}
+    (H : ∀ (U : Y.affineOpens) (W : Z.affineOpens), W.1 ≤ f ⁻¹ᵁ U.1 →
+      A.comap W.1.ι = B.comap W.1.ι) : A = B := by
+  refine ext_of_iSup_eq_top (ι := {p : Y.affineOpens × Z.affineOpens // p.2.1 ≤ f ⁻¹ᵁ p.1.1})
+    (fun p ↦ p.1.2) ?_ fun p ↦ ?_
+  · rw [eq_top_iff]
+    intro x _
+    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ := Y.isBasis_affineOpens.exists_subset_of_mem_open
+      (Set.mem_univ (f x)) isOpen_univ
+    obtain ⟨_, ⟨W, hW, rfl⟩, hxW, hWV⟩ := Z.isBasis_affineOpens.exists_subset_of_mem_open
+      (a := x) hxV (f ⁻¹ᵁ V).2
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨(⟨V, hV⟩, ⟨W, hW⟩), hWV⟩, hxW⟩
+  · obtain ⟨⟨U, W⟩, h⟩ := p
+    rw [← map_topIso_ideal_top_comap_ι A W, ← map_topIso_ideal_top_comap_ι B W, H U W h]
+
+/-- **Gluing ideal sheaves.** A family of ideal sheaves `K U` on the affine opens `U` of `X`
+which is compatible with restriction to basic opens is the family of restrictions of a single
+ideal sheaf on `X`. -/
+theorem exists_comap_ι_eq (K : ∀ U : X.affineOpens, U.1.toScheme.IdealSheafData)
+    (hK : ∀ (U : X.affineOpens) (f : Γ(X, U)),
+      (K U).comap (X.homOfLE (X.basicOpen_le f)) = K (X.affineBasicOpen f)) :
+    ∃ J : X.IdealSheafData, ∀ U, J.comap U.1.ι = K U := by
+  have (U : X.affineOpens) : IsAffine U.1.toScheme := U.2
+  have key (U V : X.affineOpens) (h : V.1 ≤ U.1) :
+      (((K U).comap (X.homOfLE h)).ideal ⟨⊤, isAffineOpen_top _⟩).map V.1.topIso.hom.hom =
+        (((K U).ideal ⟨⊤, isAffineOpen_top _⟩).map U.1.topIso.hom.hom).map
+          (X.presheaf.map (homOfLE h).op).hom := by
+    rw [ideal_comap_appLE _ _ ⟨⊤, isAffineOpen_top _⟩ ⟨⊤, isAffineOpen_top _⟩
+      (X.homOfLE h).preimage_top.ge, Ideal.map_map, Ideal.map_map, ← CommRingCat.hom_comp,
+      ← CommRingCat.hom_comp]
+    congr 2
+    simp only [Scheme.Opens.topIso_hom]
+    rw [Scheme.homOfLE_appLE]
+    exact (X.presheaf.map_comp _ _).symm.trans
+      ((congrArg X.presheaf.map (Subsingleton.elim _ _)).trans (X.presheaf.map_comp _ _))
+  let J : X.IdealSheafData :=
+    { ideal U := ((K U).ideal ⟨⊤, isAffineOpen_top _⟩).map U.1.topIso.hom.hom
+      map_ideal_basicOpen U f := by
+        have := key U (X.affineBasicOpen f) (X.basicOpen_le f)
+        have e : (K U).comap (X.homOfLE (show (X.affineBasicOpen f).1 ≤ U.1 from
+          X.basicOpen_le f)) = K (X.affineBasicOpen f) := hK U f
+        rw [e] at this
+        exact this.symm }
+  refine ⟨J, fun U ↦ ext_of_isAffine ?_⟩
+  have h : ((J.comap U.1.ι).ideal ⟨⊤, isAffineOpen_top _⟩).map U.1.topIso.hom.hom =
+      ((K U).ideal ⟨⊤, isAffineOpen_top _⟩).map U.1.topIso.hom.hom :=
+    map_topIso_ideal_top_comap_ι J U
+  have := congrArg (Ideal.map U.1.topIso.inv.hom) h
+  rwa [Ideal.map_map, Ideal.map_map, ← CommRingCat.hom_comp, Iso.hom_inv_id, CommRingCat.hom_id,
+    Ideal.map_id, Ideal.map_id] at this
+
+end Gluing
 
 section Sections
 
