@@ -8,6 +8,7 @@ module
 public import Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.WeilSheaf.Fourier
+import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 
 /-!
 # Tate twists of Weil complexes
@@ -24,7 +25,7 @@ fiber the line `ℤ_ℓ(1)(k̄) ⊗ ℚ̄_ℓ` (`cyclotomicTateModule`). The geo
 pullback of roots of unity, read on this constant description, is the canonical Weil structure
 of the constant sheaf `ℚ̄_ℓ` followed by the action of `σ` on `ℤ_ℓ(1)(k̄)`. That action is
 multiplication by the `ℓ`-adic cyclotomic character `χ_ℓ(σ) ∈ ℤ_ℓˣ`
-(`cyclotomicCharacter`; it is `q⁻¹` by `cyclotomicCharacter_frobeniusEquiv_pow_inv_mul`), a
+(`cyclotomicCharacter`; it is `q⁻¹`, see `AlgebraicGeometry.WeilSheaf.cyclotomicUnit_eq`), a
 scalar which does not depend on a choice of generator of `ℤ_ℓ(1)(k̄)`. Hence `ℚ̄_ℓ(1)` is the
 constant Weil twist `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)}` (`AlgebraicGeometry.WeilSheaf.constantTwist`), which is
 how it is defined here.
@@ -43,16 +44,15 @@ Tate twist `K ↦ K(m)` of Weil complexes is the derived tensor product with `�
 
 ## Main statements
 
+- `AlgebraicGeometry.WeilSheaf.cyclotomicUnit_eq`: for `ℓ ≠ p`, `χ_ℓ(σ) = q⁻¹`.
 - `AlgebraicGeometry.WeilSheaf.isLisse_tateTwistSheaf`: the Tate sheaves are lisse.
 - `AlgebraicGeometry.WeilSheaf.tateTwistSheaf_one`: `ℚ̄_ℓ(1)` is the constant Weil twist
-  `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)}`: its Weil structure, the pullback of roots of unity, is that of `ℚ̄_ℓ`
-  multiplied by `χ_ℓ(σ)`.
+  `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)}`.
 
 ## Blueprint
 
 `AlgebraicGeometry.WeilSheaf.tateTwistSheaf` and `AlgebraicGeometry.WeilComplex.tateTwist`
-implement `def-wf-tate-twist`; `AlgebraicGeometry.WeilSheaf.tateTwistSheaf_one` implements
-`rem-ptr-wf-tate-twist-5`. The cyclotomic Tate module `ℤ_ℓ(1)` of the subsection
+implement `def-wf-tate-twist`. The cyclotomic Tate module `ℤ_ℓ(1)` of the subsection
 `sk-d-ab-cyclotomic` is `cyclotomicTateModule`.
 -/
 
@@ -72,15 +72,44 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 
 /-- The scalar `χ_ℓ(σ) ∈ ℚ̄_ℓˣ` by which the geometric Frobenius `σ : x ↦ x ^ (1 / q)` of the
 algebraic closure `k̄` of `k₀` acts on the cyclotomic Tate module `ℤ_ℓ(1)(k̄)`: the value at `σ`
-of the `ℓ`-adic cyclotomic character, mapped along `ℤ_ℓ ⟶ ℚ_ℓ ⟶ ℚ̄_ℓ`. It is `q⁻¹`
-(`cyclotomicCharacter_frobeniusEquiv_pow_inv_mul`). (blueprint: `def-wf-tate-twist`) -/
+of the `ℓ`-adic cyclotomic character, mapped along `ℤ_ℓ ⟶ ℚ_ℓ ⟶ ℚ̄_ℓ`. For `ℓ ≠ p` it is `q⁻¹`
+(`cyclotomicUnit_eq`); for `ℓ = p` its value is meaningless. (blueprint: `def-wf-tate-twist`) -/
 noncomputable def cyclotomicUnit : (PadicAlgCl l)ˣ :=
   letI := Fintype.ofFinite k₀
   Units.map ((algebraMap ℚ_[l] (PadicAlgCl l)).comp PadicInt.Coe.ringHom).toMonoidHom
     (cyclotomicCharacter (AlgebraicClosure k₀) l
       (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k₀ (AlgebraicClosure k₀)).toRingEquiv)
 
-variable [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
+variable [Fact (ringChar k₀ ≠ l)]
+
+/-- For `ℓ ≠ p`, the geometric Frobenius acts on `ℤ_ℓ(1)(k̄)` by `q⁻¹`, where `q = #k₀`: the
+arithmetic Frobenius `x ↦ x ^ q` raises roots of unity to the `q`-th power. -/
+theorem cyclotomicUnit_eq :
+    (cyclotomicUnit k₀ l : PadicAlgCl l) = (Nat.card k₀ : PadicAlgCl l)⁻¹ := by
+  let := Fintype.ofFinite k₀
+  set k := AlgebraicClosure k₀
+  have : NeZero ((l : ℕ) : k) := ⟨by
+    rw [← map_natCast (algebraMap k₀ k), map_ne_zero_iff _ (algebraMap k₀ k).injective,
+      Ne, ringChar.spec, Nat.prime_dvd_prime_iff_eq (CharP.char_is_prime k₀ _) Fact.out]
+    exact Fact.out⟩
+  have hσ : ((cyclotomicCharacter k l (FiniteField.frobeniusAlgEquivOfAlgebraic k₀ k).toRingEquiv
+      : ℤ_[l]ˣ) : ℤ_[l]) = (Fintype.card k₀ : ℤ_[l]) := by
+    refine PadicInt.ext_of_toZModPow.mp fun n ↦ ?_
+    rw [cyclotomicCharacter.toZModPow, ← modularCyclotomicCharacter.unique]
+    intro t ht
+    rw [map_natCast, ZMod.val_natCast, ← Units.val_pow_eq_pow_val,
+      ← pow_eq_pow_mod _ ((mem_rootsOfUnity _ _).mp ht)]
+    simp
+  have hinv : (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k₀ k).toRingEquiv =
+      (FiniteField.frobeniusAlgEquivOfAlgebraic k₀ k).toRingEquiv⁻¹ := rfl
+  rw [cyclotomicUnit, Units.coe_map, hinv, map_inv]
+  change algebraMap ℚ_[l] (PadicAlgCl l) (PadicInt.Coe.ringHom
+    ((cyclotomicCharacter k l (FiniteField.frobeniusAlgEquivOfAlgebraic k₀ k).toRingEquiv)⁻¹ :
+      ℤ_[l]ˣ)) = _
+  rw [map_units_inv, map_inv₀, hσ]
+  simp [Nat.card_eq_fintype_card]
+
+variable (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The non-negative Tate sheaves `ℚ̄_ℓ(n) = ℚ̄_ℓ(1)^{⊗ n}`: `ℚ̄_ℓ(0)` is the constant Weil
 sheaf `ℚ̄_ℓ`, `ℚ̄_ℓ(1) = ℤ_ℓ(1) ⊗_{ℤ_ℓ} ℚ̄_ℓ` is the constant sheaf `ℚ̄_ℓ` whose Weil structure is
@@ -116,12 +145,8 @@ theorem isLisse_tateTwistSheaf : ∀ m : ℤ, (tateTwistSheaf k₀ l X m).IsLiss
 theorem tateTwistSheaf_zero : tateTwistSheaf k₀ l X 0 = adicConstant k₀ l X :=
   rfl
 
-/-- Blueprint `rem-ptr-wf-tate-twist-5`: the Weil structure `Fr_X^* ℚ̄_ℓ(1) ≅ ℚ̄_ℓ(1)` is the
-functorial pullback of roots of unity. On the constant description of `ℚ̄_ℓ(1)` it is the
-canonical Weil structure of the constant sheaf `ℚ̄_ℓ` followed by the action `χ_ℓ(σ)` of the
-geometric Frobenius `σ` of `k̄` on `ℤ_ℓ(1)(k̄)`, so `ℚ̄_ℓ(1)` is the constant Weil twist
-`ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)}` (`AlgebraicGeometry.WeilSheaf.constantTwist`). The remaining properties
-(`lem-wf-tate-twist-compatibility`, `lem-wf-tate-twist-frobenius`) belong to `sk-p-cyclotomic`. -/
+/-- `ℚ̄_ℓ(1)` is the constant Weil twist `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)}`
+(`AlgebraicGeometry.WeilSheaf.constantTwist`). This holds by definition. -/
 theorem tateTwistSheaf_one :
     tateTwistSheaf k₀ l X 1 = (adicConstant k₀ l X).constantTwist (cyclotomicUnit k₀ l) :=
   rfl
