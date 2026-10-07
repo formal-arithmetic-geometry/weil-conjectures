@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Field.ULift
 public import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
+public import Mathlib.AlgebraicGeometry.Sites.SheafQuasiCompact
+public import Mathlib.CategoryTheory.Sites.Subsheaf
 public import Mathlib.NumberTheory.Padics.Complex
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Iso
@@ -30,7 +32,8 @@ Since this condition is local, `ℚ̄_ℓ,X(U)` is, for an arbitrary scheme `U`,
 point has a neighbourhood on which the values of `f` span a finite-dimensional
 `ℚ_ℓ`-subspace. This defines a presheaf `AlgebraicGeometry.adicFunctionsPresheaf` on all
 schemes, a sheaf for the fpqc topology, and `AlgebraicGeometry.ProEtale.adicConstantSheaf ℓ X`
-is its restriction to the small pro-étale site of `X`, a sheaf of modules over `ℚ̄_ℓ`.
+is its restriction to the small pro-étale site of `X`, a sheaf of modules over `ℚ̄_ℓ`
+(`AlgebraicGeometry.isSheaf_fpqcTopology_adicFunctionsPresheaf`).
 
 It is *not* the constant sheaf of the discrete module `ℚ̄_ℓ`, whose sections are the locally
 constant functions: that sheaf is of étale origin, and the constructible sheaves of étale origin
@@ -108,6 +111,28 @@ lemma const_mem_locallyFiniteFunctions (c : PadicAlgCl l) :
     (S₂ := Submodule.span ℚ_[l] {c}) (Submodule.span_mono ?_)⟩
   rintro _ ⟨y, -, rfl⟩
   rfl
+
+/-- On a compact space, the values of a locally finite function span a finite-dimensional
+`ℚ_ℓ`-subspace. -/
+lemma finiteDimensional_span_range_of_mem_locallyFiniteFunctions [CompactSpace T]
+    {f : C(T, PadicAlgCl l)} (hf : f ∈ locallyFiniteFunctions l T) :
+    FiniteDimensional ℚ_[l] (Submodule.span ℚ_[l] (Set.range f)) := by
+  choose U hU hfin using hf
+  obtain ⟨t, -, ht⟩ := isCompact_univ.elim_nhds_subcover U (fun x _ ↦ hU x)
+  refine Submodule.finiteDimensional_of_le (S₂ := t.sup fun x ↦ Submodule.span ℚ_[l] (f '' U x))
+    (Submodule.span_le.2 ?_)
+  rintro _ ⟨y, rfl⟩
+  obtain ⟨x, hx, hyx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ y))
+  exact Finset.le_sup (f := fun x ↦ Submodule.span ℚ_[l] (f '' U x)) hx
+    (Submodule.subset_span ⟨y, hyx, rfl⟩)
+
+/-- A continuous function whose values span a finite-dimensional `ℚ_ℓ`-subspace is locally
+finite. -/
+lemma mem_locallyFiniteFunctions_of_finiteDimensional {f : C(T, PadicAlgCl l)}
+    (hf : FiniteDimensional ℚ_[l] (Submodule.span ℚ_[l] (Set.range f))) :
+    f ∈ locallyFiniteFunctions l T := fun _ ↦
+  ⟨Set.univ, Filter.univ_mem, Submodule.finiteDimensional_of_le
+    (Submodule.span_mono (Set.image_subset_range _ _))⟩
 
 variable {T' : Type*} [TopologicalSpace T']
 
@@ -191,15 +216,88 @@ noncomputable def adicFunctionsPresheaf : Scheme.{u}ᵒᵖ ⥤ WeilCoefficients.
   obj U := ModuleCat.of _ (ULift.{u + 1} (locallyFiniteFunctions l U.unop))
   map f := ModuleCat.ofHom (uliftLinearMap (locallyFiniteFunctionsComp l f.unop.base.hom))
 
+/-- The presheaf of continuous maps to `ULift ℚ̄_ℓ` on `Scheme.{u}`, with values in
+`Type (u + 1)`. -/
+noncomputable abbrev adicContinuousMapPresheaf : Scheme.{u}ᵒᵖ ⥤ Type (u + 1) :=
+  continuousMapPresheaf (ULift.{u + 1} (PadicAlgCl l))
+
+/-- The locally finite functions, as a subfunctor of the continuous maps to `ULift ℚ̄_ℓ`. -/
+noncomputable def adicFunctionsSubfunctor : Subfunctor (adicContinuousMapPresheaf.{u} l) where
+  obj U := {s | (ContinuousMap.mk ULift.down continuous_uliftDown).comp s ∈
+    locallyFiniteFunctions l U.unop}
+  map {_ _} f _ hs := comp_mem_locallyFiniteFunctions hs f.unop.base.hom
+
+/-- The locally finite functions form a Zariski sheaf: the condition is local. -/
+lemma isSheaf_zariskiTopology_adicFunctionsSubfunctor :
+    Presieve.IsSheaf Scheme.zariskiTopology (adicFunctionsSubfunctor.{u} l).toFunctor := by
+  have hT := (isSheaf_iff_isSheaf_of_type _ _).1
+    (isSheaf_zariskiTopology_continuousMapPresheaf (ULift.{u + 1} (PadicAlgCl l)))
+  refine ((adicFunctionsSubfunctor l).isSheaf_iff hT).2 fun U s hs x ↦ ?_
+  obtain ⟨𝒰, h𝒰⟩ := Scheme.mem_grothendieckTopology_iff.1 hs
+  obtain ⟨i, y, rfl⟩ := 𝒰.exists_eq x
+  obtain ⟨W, hW, hfin⟩ := h𝒰 _ _ (Presieve.ofArrows.mk i) y
+  refine ⟨(𝒰.f i).base '' W, (𝒰.f i).isOpenEmbedding.isOpenMap.image_mem_nhds hW, ?_⟩
+  rw [Set.image_image]
+  exact hfin
+
+/-- The locally finite functions satisfy the sheaf condition for a faithfully flat
+`Spec S ⟶ Spec R`: the gluing of a locally finite function on the compact `Spec S` takes the
+same values, which span a finite-dimensional subspace. -/
+lemma isSheafFor_singleton_adicFunctionsSubfunctor {R S : CommRingCat.{u}} (f : R ⟶ S)
+    (hf : Flat (Spec.map f)) (hs : Surjective (Spec.map f)) :
+    Presieve.IsSheafFor (adicFunctionsSubfunctor.{u} l).toFunctor (.singleton (Spec.map f)) := by
+  have hT : Presieve.IsSheafFor (adicContinuousMapPresheaf.{u} l) (.singleton (Spec.map f)) := by
+    have := (isSheaf_iff_isSheaf_of_type _ _).1
+      (isSheaf_fpqcTopology_continuousMapPresheaf (ULift.{u + 1} (PadicAlgCl l)))
+    rw [Scheme.fpqcTopology_eq_propQCTopology] at this
+    exact ((isSheaf_type_propQCTopology_iff _).1 this).2 f hf hs
+  rw [Presieve.isSheafFor_singleton] at hT ⊢
+  intro x hx
+  obtain ⟨t, ht, ht'⟩ := hT x.1 (fun p₁ p₂ h ↦ congrArg Subtype.val (hx p₁ p₂ h))
+  refine ⟨⟨t, ?_⟩, Subtype.ext ht, fun t' h' ↦ Subtype.ext (ht' _ (congrArg Subtype.val h'))⟩
+  apply mem_locallyFiniteFunctions_of_finiteDimensional
+  have hx' := finiteDimensional_span_range_of_mem_locallyFiniteFunctions x.2
+  refine Submodule.finiteDimensional_of_le (S₂ := Submodule.span ℚ_[l] (Set.range
+    ((ContinuousMap.mk ULift.down continuous_uliftDown).comp x.1))) (Submodule.span_mono ?_)
+  rintro _ ⟨y, rfl⟩
+  obtain ⟨z, rfl⟩ := (Spec.map f).surjective y
+  exact ⟨z, by rw [← ht]; rfl⟩
+
+/-- The locally finite functions form an fpqc sheaf. -/
+lemma isSheaf_fpqcTopology_adicFunctionsSubfunctor :
+    Presieve.IsSheaf Scheme.fpqcTopology (adicFunctionsSubfunctor.{u} l).toFunctor := by
+  rw [Scheme.fpqcTopology_eq_propQCTopology, isSheaf_type_propQCTopology_iff]
+  exact ⟨isSheaf_zariskiTopology_adicFunctionsSubfunctor l,
+    fun f hf hs ↦ isSheafFor_singleton_adicFunctionsSubfunctor l f hf hs⟩
+
+/-- The presheaf of locally finite continuous functions is the subfunctor
+`AlgebraicGeometry.adicFunctionsSubfunctor` of the continuous maps to `ULift ℚ̄_ℓ`. -/
+noncomputable def adicFunctionsPresheafForgetIso :
+    adicFunctionsPresheaf.{u} l ⋙ forget (WeilCoefficients.{u} l) ≅
+      (adicFunctionsSubfunctor.{u} l).toFunctor :=
+  NatIso.ofComponents (fun U ↦ Equiv.toIso
+    { toFun x := ⟨⟨fun t ↦ ULift.up (x.down.1 t), continuous_uliftUp.comp x.down.1.continuous⟩,
+        x.down.2⟩
+      invFun s := ULift.up ⟨(ContinuousMap.mk ULift.down continuous_uliftDown).comp s.1, s.2⟩
+      left_inv _ := rfl
+      right_inv _ := rfl })
+    fun _ ↦ by ext x; exact Subtype.ext (ContinuousMap.ext fun _ ↦ rfl)
+
 /-- The presheaf of locally finite continuous `ℓ`-adic functions is a sheaf for the fpqc
 topology. It is a subpresheaf of the fpqc sheaf `U ↦ C(U, ℚ̄_ℓ)`
-(`AlgebraicGeometry.isSheaf_fpqcTopology_continuousMapPresheaf`), defined by a condition which
-descends along fpqc covers: an fpqc cover is quasi-compact, so a continuous function on an
-affine open which is locally finite on the members of a cover takes its values in the span of
-finitely many finite-dimensional subspaces. -/
+(`AlgebraicGeometry.isSheaf_fpqcTopology_continuousMapPresheaf`) defined by a local condition,
+hence a Zariski sheaf; and for a faithfully flat `Spec S ⟶ Spec R` a function on `Spec R`
+whose pullback to the compact `Spec S` is locally finite has the same finite-dimensional span
+of values, `Spec S ⟶ Spec R` being surjective. -/
 theorem isSheaf_fpqcTopology_adicFunctionsPresheaf :
-    Presheaf.IsSheaf Scheme.fpqcTopology (adicFunctionsPresheaf.{u} l) :=
-  sorry
+    Presheaf.IsSheaf Scheme.fpqcTopology (adicFunctionsPresheaf.{u} l) := by
+  have : ReflectsLimitsOfSize.{u, u + 1} (forget (WeilCoefficients.{u} l)) :=
+    reflectsLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
+  refine Presheaf.isSheaf_of_isSheaf_comp Scheme.fpqcTopology _ (forget (WeilCoefficients.{u} l))
+    ((isSheaf_iff_isSheaf_of_type _ _).2 ?_)
+  exact Presieve.isSheaf_iso _ (adicFunctionsPresheafForgetIso l).symm
+    (isSheaf_fpqcTopology_adicFunctionsSubfunctor l)
+
 
 namespace ProEtale
 

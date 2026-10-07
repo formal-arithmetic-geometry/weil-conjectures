@@ -96,11 +96,13 @@ lemma affineLine.translation_zero : affineLine.translation k₀ 0 = 𝟙 _ := by
   simp only [affineLine.translation, map_zero]
   exact AffineSpace.translation_zero
 
+omit [Finite k₀] in
 @[reassoc]
 lemma affineLine.translation_comp_translation_neg (c : k₀) :
     affineLine.translation k₀ c ≫ affineLine.translation k₀ (-c) = 𝟙 _ := by
   rw [← affineLine.translation_add, add_neg_cancel, affineLine.translation_zero]
 
+omit [Finite k₀] in
 @[reassoc]
 lemma affineLine.translation_neg_comp_translation (c : k₀) :
     affineLine.translation k₀ (-c) ≫ affineLine.translation k₀ c = 𝟙 _ := by

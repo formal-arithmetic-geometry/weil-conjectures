@@ -120,6 +120,7 @@ noncomputable def ProEtaleWeilSheaf.ihom (A B : ProEtaleWeilSheaf k₀ l X) :
       ((MonoidalClosed.internalHom.mapIso A.str.op).app _).symm ≪≫
       (CategoryTheory.ihom A.carrier).mapIso B.str)
 
+omit [Fact (ringChar k₀ ≠ l)] in
 /-- The Weil structure of the internal hom `[A, B]` is natural in `B`: a morphism `f : B ⟶ B'` of
 pro-étale Weil sheaves induces a morphism `[A, B] ⟶ [A, B']` of pro-étale Weil sheaves. All
 three constituents of the Weil structure are natural in the second variable. -/
