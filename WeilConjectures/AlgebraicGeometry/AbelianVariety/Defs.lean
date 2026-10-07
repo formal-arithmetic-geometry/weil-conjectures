@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-!
 # Abelian varieties
@@ -60,10 +61,21 @@ noncomputable def IsAbelianVariety.dim (A : Over (Spec (.of K))) [IsAbelianVarie
   ((topologicalKrullDim A.left).unbotD 0).toNat
 
 /-- The Krull dimension of an abelian variety is the natural number
-`AlgebraicGeometry.IsAbelianVariety.dim`: it is neither `⊥` (the variety is nonempty, having a
-unit section) nor `⊤` (it is of finite type over `K`). -/
+`AlgebraicGeometry.IsAbelianVariety.dim`: it is neither `⊥` (the variety is nonempty, being
+connected) nor `⊤` (it is quasi-compact and of finite type over `K`). -/
 theorem IsAbelianVariety.topologicalKrullDim_eq (A : Over (Spec (.of K))) [IsAbelianVariety A] :
-    topologicalKrullDim A.left = (IsAbelianVariety.dim A : ℕ∞) :=
-  sorry
+    topologicalKrullDim A.left = (IsAbelianVariety.dim A : ℕ∞) := by
+  have : CompactSpace A.left := QuasiCompact.compactSpace_of_compactSpace A.hom
+  have hne := topologicalKrullDim_ne_top_of_compactSpace A.hom
+  obtain ⟨x⟩ := (inferInstance : Nonempty A.left)
+  have : Nonempty (TopologicalSpace.IrreducibleCloseds A.left) :=
+    ⟨⟨closure {x}, isIrreducible_singleton.closure, isClosed_closure⟩⟩
+  have hbot : topologicalKrullDim A.left ≠ ⊥ :=
+    ne_bot_of_le_ne_bot WithBot.coe_ne_bot Order.krullDim_nonneg
+  rw [IsAbelianVariety.dim]
+  generalize topologicalKrullDim A.left = d at hne hbot ⊢
+  induction d using WithBot.recBotCoe with
+  | bot => exact absurd rfl hbot
+  | coe d => induction d using ENat.recTopCoe <;> simp_all
 
 end AlgebraicGeometry
