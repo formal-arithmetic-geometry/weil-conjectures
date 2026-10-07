@@ -33,7 +33,7 @@ Reference: Brian Conrad, *Deligne's notes on Nagata compactifications*, Theorem 
 
 -/
 
-@[expose] public section
+public section
 
 noncomputable section
 
@@ -82,9 +82,8 @@ theorem exists_admissibleBlowup_quasiDomination_extends {S X Y : Scheme.{u}} [Co
       refine pullback.hom_ext ?_ ?_ <;>
         simp only [hkdef, e, hf₀def, Iso.trans_hom, Iso.symm_hom, Category.assoc,
           pullbackRestrictIsoRestrict_hom_ι, pullbackLeftPullbackSndIso_inv_fst,
-          pullbackLeftPullbackSndIso_inv_fst_snd]
-      · erw [pullback.lift_fst, pullback.lift_fst]
-      · erw [pullback.lift_snd_assoc, pullback.lift_snd, Scheme.homOfLE_ι]
+          pullbackLeftPullbackSndIso_inv_fst_snd, pullback.lift_fst, pullback.lift_snd_assoc,
+          pullback.lift_snd, Scheme.homOfLE_ι]
     have hrange : (pullback.snd y x ⁻¹ᵁ V).ι ⁻¹' Set.range f₀ = Set.range k := by
       rw [← hk, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
         Set.preimage_image_eq _ (pullback.snd y x ⁻¹ᵁ V).ι.isOpenEmbedding.injective]
@@ -94,14 +93,14 @@ theorem exists_admissibleBlowup_quasiDomination_extends {S X Y : Scheme.{u}} [Co
     exists_admissibleBlowup_extend_partialSection hUV hU hV hUdense f₀ hf₀ hfc₀
   have hcomm : (g ≫ pullback.fst y x) ≫ y = W.ι ≫ B.I.blowupMap ≫ x := by
     rw [Category.assoc, pullback.condition, ← Category.assoc, hg, Category.assoc]
-  -- the graph over `S` is the graph over `X`, transported along `(Y ×ₛ X) ×ₓ X' ≅ Y ×ₛ X'`
+  -- the graph over `S` is the graph over `X`, transported along
+  -- `(Y ×ₛ X) ×ₓ X' ≅ Y ×ₛ X'`
   have hgraph : pullback.lift (g ≫ pullback.fst y x) W.ι hcomm =
       pullback.lift g W.ι hg ≫ (pullbackLeftPullbackSndIso y x B.I.blowupMap).hom := by
     refine pullback.hom_ext ?_ ?_ <;>
       simp only [Category.assoc, pullbackLeftPullbackSndIso_hom_fst,
-        pullbackLeftPullbackSndIso_hom_snd]
-    · erw [pullback.lift_fst, pullback.lift_fst_assoc]
-    · erw [pullback.lift_snd, pullback.lift_snd]
+        pullbackLeftPullbackSndIso_hom_snd, pullback.lift_fst, pullback.lift_fst_assoc,
+        pullback.lift_snd]
   refine ⟨B, ⟨W, (B.dense_coe_preimage_blowupMap hUdense).mono hUW, g ≫ pullback.fst y x,
     hcomm, ?_⟩, hUW, ?_⟩
   · rw [hgraph, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp]
