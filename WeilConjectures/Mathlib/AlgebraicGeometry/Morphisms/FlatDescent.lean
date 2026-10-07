@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Descent
 
 /-!
@@ -36,12 +38,65 @@ instance Flat.descendsAlong_surjective_inf_flat_inf_quasicompact :
     DescendsAlong @Flat (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=
   HasRingHomProperty.descendsAlong_flat RingHom.Flat.codescendsAlong_faithfullyFlat
 
+set_option backward.isDefEq.respectTransparency.types false in
 /-- **Being affine satisfies fpqc descent.** If the base change of `f : X ⟶ Y` along a
-faithfully flat quasi-compact morphism is affine, then `f` is affine. -/
+faithfully flat quasi-compact morphism is affine, then `f` is affine.
+
+The question is local on `Y`, so let `Y = Spec R` and let `Spec S ⟶ Spec R` be faithfully flat
+with `X' = X ×_R Spec S` affine. Then `X` is quasi-compact and quasi-separated, as `X' ⟶ X` is
+surjective and quasi-compact, so `Γ(X') = Γ(X) ⊗_R S` by flat base change. Hence the canonical
+morphism `X' ⟶ Spec Γ(X')`, an isomorphism, is the base change of `X ⟶ Spec Γ(X)` along the
+faithfully flat `Spec Γ(X') ⟶ Spec Γ(X)`, and isomorphisms descend.
+
+This is used in the proof of `lem-pc-descent-finite-flat-closed-subschemes`. -/
 @[stacks 02L5]
 theorem IsAffineHom.descendsAlong_surjective_inf_flat_inf_quasicompact :
-    DescendsAlong @IsAffineHom (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=
-  sorry
+    DescendsAlong (@IsAffineHom : MorphismProperty Scheme.{u})
+      (@Surjective ⊓ @Flat ⊓ @QuasiCompact) := by
+  refine IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact _ _ ?_ ?_
+  · rw [inf_comm]
+    exact inf_le_inf le_rfl (IsLocalIso.le_of_isZariskiLocalAtSource _)
+  intro R S Y φ g ⟨hsurj, hflat⟩ hf
+  let Q : MorphismProperty Scheme.{u} := @Surjective ⊓ @Flat ⊓ @QuasiCompact
+  have hQ : Q (Spec.map φ) := ⟨⟨hsurj, hflat⟩, inferInstance⟩
+  have hsq := IsPullback.of_hasPullback (Spec.map φ) g
+  set π := pullback.snd (Spec.map φ) g
+  set f' := pullback.fst (Spec.map φ) g
+  have : IsAffine (pullback (Spec.map φ) g) := isAffine_of_isAffineHom f'
+  have hπ : Q π := Q.pullback_snd _ _ hQ
+  have : Surjective π := hπ.1.1
+  have : QuasiCompact π := hπ.2
+  have : CompactSpace Y := π.surjective.compactSpace π.continuous
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_surjective π
+  suffices IsAffine Y from inferInstance
+  -- flat base change for global sections: `Γ(X') = Γ(X) ⊗_R S`
+  have := isIso_pushoutSection_of_isQuasiSeparated_of_flat_right hsq.flip
+    (US := ⊤) (UT := ⊤) (UX := ⊤) (UY := ⊤) le_top le_top (by simp)
+    (isAffineOpen_top _) (isAffineOpen_top _) isCompact_univ isQuasiSeparated_univ
+  have happ {A B : Scheme.{u}} (h : A ⟶ B) (e) : h.appLE ⊤ ⊤ e = h.appTop := by
+    rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+    rfl
+  have hpo : IsPushout g.appTop (Spec.map φ).appTop π.appTop f'.appTop := by
+    have := (isIso_pushoutSection_iff ..).mp this
+    rwa [happ, happ, happ, happ] at this
+  have t := isPullback_SpecMap_of_isPushout _ _ _ _ hpo
+  have hR : IsPullback (Spec.map φ) (Spec S).toSpecΓ (Spec R).toSpecΓ
+      (Spec.map (Spec.map φ).appTop) :=
+    .of_vert_isIso ⟨Scheme.toSpecΓ_naturality _⟩
+  have s := hsq.flip.paste_vert hR
+  rw [Scheme.toSpecΓ_naturality, Scheme.toSpecΓ_naturality] at s
+  -- `X' ⟶ Spec Γ(X')` is the base change of `X ⟶ Spec Γ(X)`
+  have top := IsPullback.of_bot s (Scheme.toSpecΓ_naturality π) t
+  have hQ' : Q (Spec.map (Spec.map φ).appTop) := by
+    have e : Spec.map (Spec.map φ).appTop =
+        inv (Spec S).toSpecΓ ≫ Spec.map φ ≫ (Spec R).toSpecΓ := by
+      rw [Scheme.toSpecΓ_naturality (Spec.map φ), IsIso.inv_hom_id_assoc]
+    rw [e, Q.cancel_left_of_respectsIso, Q.cancel_right_of_respectsIso]
+    exact hQ
+  have : IsIso Y.toSpecΓ :=
+    DescendsAlong.of_isPullback (P := isomorphisms Scheme.{u}) top.flip (Q.of_isPullback t.flip hQ')
+      (inferInstanceAs (IsIso (pullback (Spec.map φ) g).toSpecΓ))
+  exact ⟨this⟩
 
 /-- **Being finite satisfies fpqc descent.** A morphism is finite if and only if it is
 universally closed, affine and locally of finite type, and each of these properties descends. -/

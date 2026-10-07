@@ -25,6 +25,7 @@ morphisms induce isomorphisms in homology in the expected range of degrees, and 
   for `a ≤ n`.
 - `DerivedCategory.Plus.nonempty_eTruncGE_eTruncLT_iso_singleFunctor`:
   `τ_{≥ q} τ_{< q + 1} X ≅ H^q(X)[-q]`.
+- `DerivedCategory.Plus.eTruncLTCompETruncGEIso`: the same isomorphism, natural in `X`.
 
 -/
 
@@ -79,5 +80,56 @@ lemma nonempty_eTruncGE_eTruncLT_iso_singleFunctor (X : Plus C) (q : ℤ) :
       (homologyFunctor C q).mapIso e'.symm ≪≫
       (asIso ((homologyFunctor C q).map ((t.truncGEπ q).app _))).symm ≪≫
       asIso ((homologyFunctor C q).map ((t.truncLTι (q + 1)).app X)))⟩
+
+instance (n : ℤ) : (singleFunctor C n).Faithful :=
+  Functor.Faithful.of_comp_iso (singleFunctorιIso C n)
+
+instance (n : ℤ) : (singleFunctor C n).Full :=
+  Functor.Full.of_comp_faithful_iso (singleFunctorιIso C n)
+
+/-- The single functor `C ⥤ DerivedCategory.Plus C` in degree `n` followed by the homology
+in degree `n` is isomorphic to the identity. -/
+noncomputable def singleFunctorCompHomologyFunctorIso (n : ℤ) :
+    singleFunctor C n ⋙ homologyFunctor C n ≅ 𝟭 C :=
+  DerivedCategory.singleFunctorCompHomologyFunctorIso C n
+
+/-- The truncation `τ_{≥ q} τ_{< q + 1}` on `DerivedCategory.Plus C`, written with the
+`EInt`-indexed truncations as in `t.spectralObject`, is isomorphic to `X ↦ H^q(X)[-q]`,
+naturally in `X`.
+
+Since the single functor in degree `q` is fully faithful and `τ_{≥ q} τ_{< q + 1}` lands in its
+essential image (`DerivedCategory.Plus.nonempty_eTruncGE_eTruncLT_iso_singleFunctor`), this
+truncation factors through the single functor, and the factorization is identified with `H^q`
+using that the truncation maps induce isomorphisms on `H^q`. -/
+noncomputable def eTruncLTCompETruncGEIso (q : ℤ) :
+    (t (C := C)).eTruncLT.obj ((q + 1 : ℤ) : EInt) ⋙ (t (C := C)).eTruncGE.obj (q : EInt) ≅
+      homologyFunctor C q ⋙ singleFunctor C q :=
+  let Φ := (t (C := C)).eTruncLT.obj ((q + 1 : ℤ) : EInt) ⋙ (t (C := C)).eTruncGE.obj (q : EInt)
+  let S := singleFunctor C q
+  have hΦ : ∀ X, S.essImage (Φ.obj X) := fun X ↦
+    ⟨_, ⟨(nonempty_eTruncGE_eTruncLT_iso_singleFunctor X q).some.symm⟩⟩
+  let L := S.essImage.lift Φ hΦ
+  let Φ' := L ⋙ S.toEssImage.inv
+  let e₁ : Φ' ⋙ S ≅ Φ :=
+    Functor.isoWhiskerLeft L (Functor.isoWhiskerLeft S.toEssImage.inv S.toEssImageCompι.symm ≪≫
+      Functor.isoWhiskerRight S.toEssImage.asEquivalence.counitIso S.essImage.ι ≪≫
+      Functor.leftUnitor _) ≪≫ S.essImage.liftCompιIso Φ hΦ
+  let e₂ : Φ ⋙ homologyFunctor C q ≅ Φ' :=
+    Functor.isoWhiskerRight e₁.symm _ ≪≫
+      Functor.isoWhiskerLeft Φ' (singleFunctorCompHomologyFunctorIso q) ≪≫ Functor.rightUnitor _
+  let α : (t (C := C)).eTruncLT.obj ((q + 1 : ℤ) : EInt) ⋙ homologyFunctor C q ⟶
+      homologyFunctor C q :=
+    Functor.whiskerRight ((t (C := C)).eTruncLTι ((q + 1 : ℤ) : EInt)) (homologyFunctor C q)
+  let β : (t (C := C)).eTruncLT.obj ((q + 1 : ℤ) : EInt) ⋙ homologyFunctor C q ⟶
+      Φ ⋙ homologyFunctor C q :=
+    Functor.whiskerLeft ((t (C := C)).eTruncLT.obj ((q + 1 : ℤ) : EInt))
+      (Functor.whiskerRight ((t (C := C)).eTruncGEπ (q : EInt)) (homologyFunctor C q))
+  have (X : Plus C) : IsIso (α.app X) :=
+    isIso_homologyFunctor_map_truncLTι_app X (q + 1) q (by lia)
+  have (X : Plus C) : IsIso (β.app X) :=
+    isIso_homologyFunctor_map_truncGEπ_app _ q q le_rfl
+  have : IsIso α := NatIso.isIso_of_isIso_app _
+  have : IsIso β := NatIso.isIso_of_isIso_app _
+  e₁.symm ≪≫ Functor.isoWhiskerRight (e₂.symm ≪≫ (asIso β).symm ≪≫ asIso α) S
 
 end DerivedCategory.Plus
