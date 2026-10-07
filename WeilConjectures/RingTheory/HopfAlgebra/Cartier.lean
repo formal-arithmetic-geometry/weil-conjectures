@@ -424,6 +424,18 @@ private theorem counitAlgHom_comp_translation (g : WithConv (A →ₐ[k] k)) :
         AlgHom.id_comp],
     mul_one, ofConv_toConv]
 
+/-- Translations act transitively on the `k`-points of a commutative Hopf algebra: for every
+`k`-point `g` there is an algebra automorphism `τ` of `A` with `g ∘ τ = ε`. -/
+theorem HopfAlgebra.exists_algEquiv_comp_eq_counitAlgHom (g : A →ₐ[k] k) :
+    ∃ τ : A ≃ₐ[k] A, g.comp τ.toAlgHom = counitAlgHom k A := by
+  have h₁ : (translation (toConv g)⁻¹).comp (translation (toConv g)) = AlgHom.id k A := by
+    rw [translation_comp_translation, mul_inv_cancel, translation_one]
+  have h₂ : (translation (toConv g)).comp (translation (toConv g)⁻¹) = AlgHom.id k A := by
+    rw [translation_comp_translation, inv_mul_cancel, translation_one]
+  refine ⟨AlgEquiv.ofAlgHom _ _ h₁ h₂, ?_⟩
+  have h := comp_translation_inv (toConv g)
+  rwa [ofConv_toConv] at h
+
 variable [CharZero k]
 
 /-- **Cartier's lemma** for Hopf algebras: in characteristic zero, a nilpotent element of a

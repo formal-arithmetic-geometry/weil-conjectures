@@ -5,9 +5,12 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.FieldTheory.Perfect
 public import Mathlib.LinearAlgebra.FreeModule.Finite.Matrix
+public import Mathlib.RingTheory.Artinian.Ring
 public import Mathlib.RingTheory.Etale.Field
 public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.Spectrum.Prime.Noetherian
 
 /-!
 # Points of étale algebras over a separably closed field
@@ -23,6 +26,10 @@ factors; in particular there are exactly `dim_K A` of them.
 - `Algebra.Etale.iff_subsingleton_kaehlerDifferential_of_field`: a finite algebra over a field
   is étale if and only if its module of Kähler differentials vanishes.
 - `Algebra.Etale.of_finite_of_isSeparable`: a finite separable field extension is étale.
+- `Algebra.Etale.of_isReduced_of_perfectField`: a finite reduced algebra over a perfect field is
+  étale.
+- `Algebra.Etale.of_forall_finrank_localization_eq_one`: a finite algebra over a field whose
+  local rings at maximal ideals are one-dimensional is étale.
 - `RingHom.Etale.of_comp_of_field`: a subextension of a finite separable field extension is
   finite separable.
 -/
@@ -78,6 +85,39 @@ theorem natCard_algHom_eq_finrank (L : Type v) [Field L] [Algebra K L] :
   have := finite_primeSpectrum K A
   rw [finrank_eq_natCard_primeSpectrum]
   exact Nat.card_le_card_of_injective _ (algHomOfPrimeSpectrum_injective K A L)
+
+attribute [local instance] Ideal.Quotient.field in
+/-- A finite reduced algebra over a perfect field is étale: it is a finite product of finite,
+hence separable, field extensions. -/
+theorem of_isReduced_of_perfectField (K A : Type*) [Field K] [PerfectField K] [CommRing A]
+    [Algebra K A] [Module.Finite K A] [IsReduced A] : Algebra.Etale K A := by
+  have : IsArtinianRing A := .of_finite K A
+  have (I : MaximalSpectrum A) : Algebra.FormallyEtale K (A ⧸ I.asIdeal) := by
+    rw [Algebra.FormallyEtale.iff_isSeparable]
+    exact Algebra.IsAlgebraic.isSeparable_of_perfectField
+  exact ⟨.of_equiv ((IsArtinianRing.equivPi A).restrictScalars K).symm,
+    FinitePresentation.of_finiteType.mp inferInstance⟩
+
+/-- A finite algebra over a field `K` all of whose local rings at maximal ideals are
+one-dimensional is étale: it is a finite product of copies of `K`. -/
+theorem of_forall_finrank_localization_eq_one {K A : Type*} [Field K] [CommRing A]
+    [Algebra K A] [Module.Finite K A]
+    (h : ∀ m : MaximalSpectrum A, finrank K (Localization.AtPrime m.asIdeal) = 1) :
+    Algebra.Etale K A := by
+  have : IsArtinianRing A := .of_finite K A
+  have : Finite (MaximalSpectrum A) :=
+    Finite.of_injective _ MaximalSpectrum.toPrimeSpectrum_injective
+  have (m : MaximalSpectrum A) : Algebra.FormallyEtale K (Localization.AtPrime m.asIdeal) := by
+    have : Module.Finite K (Localization.AtPrime m.asIdeal) :=
+      .of_surjective (IsScalarTower.toAlgHom K A _).toLinearMap
+        (IsArtinianRing.localization_surjective m.asIdeal.primeCompl _)
+    have hinj : Function.Injective (Algebra.linearMap K (Localization.AtPrime m.asIdeal)) :=
+      (algebraMap K _).injective
+    have hsurj := (LinearMap.injective_iff_surjective_of_finrank_eq_finrank
+      (by rw [h, Module.finrank_self])).1 hinj
+    exact .of_equiv (AlgEquiv.ofBijective (Algebra.ofId K _) ⟨hinj, hsurj⟩)
+  exact ⟨.of_equiv ((MaximalSpectrum.toPiLocalizationEquiv A).restrictScalars K).symm,
+    FinitePresentation.of_finiteType.mp inferInstance⟩
 
 end Algebra.Etale
 
