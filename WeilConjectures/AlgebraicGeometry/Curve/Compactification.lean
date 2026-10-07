@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Compactification.Dense
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
@@ -51,6 +52,13 @@ geometrically connected `U₀` as a dense open subscheme.
 - `AlgebraicGeometry.exists_smooth_projectiveCompactification`: a normal geometrically connected
   curve of pure dimension one over a perfect field is smooth and has a smooth projective
   geometrically connected completion with finite boundary.
+- `AlgebraicGeometry.IsCurve.isQuasiProjective`: a smooth curve over a field is
+  quasi-projective.
+- `AlgebraicGeometry.IsConnectedCurve.exists_smooth_properCompactification`: a smooth connected
+  curve over an algebraically closed field is a dense open subscheme of a smooth proper
+  connected curve, with finite boundary.
+- `AlgebraicGeometry.IsConnectedCurve.isAffine_of_ne_top`: a proper open subscheme of a smooth
+  proper connected curve over an algebraically closed field is affine.
 -/
 
 @[expose] public section
@@ -205,5 +213,54 @@ theorem exists_smooth_projectiveCompactification [PerfectField K] (p : U ⟶ Spe
   have : IsIso j := (isIso_iff_isOpenImmersion_and_surjective j).mpr ⟨hj, ‹_›⟩
   exact ⟨c, hcurve, hsm, hconn, ⟨n, hn, j ≫ ι, inferInstance, by simpa using hcomm⟩, hdense,
     hfin⟩
+
+/-- **Smooth curves are quasi-projective.** A smooth curve `U` over a field `K` (separated, of
+finite type, of dimension at most one) admits an immersion into a projective space over `K`.
+The proof glues embeddings of the members of a finite affine cover one at a time, using
+sections of line bundles separating the finitely many points outside the overlap (Stacks
+`0A25`). (blueprint: `lem-sc-curves-quasi-projective`) -/
+theorem IsCurve.isQuasiProjective (p : U ⟶ Spec (.of K)) [IsCurve p] [Smooth p] :
+    IsQuasiProjective p :=
+  sorry
+
+/-- **Compactification of a smooth curve.** A smooth connected curve `U` over an algebraically
+closed field `K` admits a compactification `c` whose ambient scheme `c.Z` is a smooth proper
+connected curve over `K`, in which `U` is open with complement a finite set of closed points.
+
+The compactification is the normalization of a Nagata compactification of `U` in `U`, as in
+`AlgebraicGeometry.exists_smooth_properCompactification_of_perfectField`; the blueprint uses the
+normalization of the closure of `U` in a projective space instead.
+(blueprint: `lem-sc-compactification`) -/
+theorem IsConnectedCurve.exists_smooth_properCompactification [IsAlgClosed K]
+    (p : U ⟶ Spec (.of K)) [IsConnectedCurve p] [Smooth p] :
+    ∃ c : Compactification p, IsConnectedCurve c.g ∧ Smooth c.g ∧ (Set.range c.i.base)ᶜ.Finite ∧
+      ∀ x ∈ (Set.range c.i.base)ᶜ, IsClosed ({x} : Set c.Z) := by
+  have := IsConnectedCurve.connectedSpace' p
+  have : IsLocallyNoetherian U := LocallyOfFiniteType.isLocallyNoetherian p
+  have : IsRegular U := IsRegular.of_smooth p
+  have : IrreducibleSpace U := IsRegular.irreducibleSpace U
+  have : SmoothOfRelativeDimension 1 p :=
+    (smoothOfRelativeDimension_iff_topologicalKrullDim_eq p 1).mpr
+      (IsConnectedCurve.krullDim_eq_one (f := p))
+  let : U.Over (Spec (.of K)) := ⟨p⟩
+  have : GeometricallyConnected p := GeometricallyConnected.of_isSepClosed (k := K) U
+  obtain ⟨c, hint, hcurve, hsm, -, -, hfin, hclosed⟩ :=
+    exists_smooth_properCompactification_of_perfectField p
+  have : Smooth c.g := SmoothOfRelativeDimension.smooth 1 c.g
+  have hconn : IsConnectedCurve c.g :=
+    { toIsCurve := hcurve
+      connectedSpace := inferInstance
+      krullDim_eq_one := (smoothOfRelativeDimension_iff_topologicalKrullDim_eq c.g 1).mp hsm }
+  exact ⟨c, hconn, inferInstance, hfin, hclosed⟩
+
+/-- **Open subschemes of a proper curve are affine.** Let `C` be a smooth proper connected curve
+over an algebraically closed field `K`. Every open subscheme `V ≠ C` is affine: its complement
+`S` is a finite nonempty set of closed points, the effective divisor `D = ∑_{P ∈ S} [P]` has
+positive degree, so `𝒪(D)` is ample, and `V = C ∖ D` is affine.
+(blueprint: `lem-sc-affine-open-proper`) -/
+theorem IsConnectedCurve.isAffine_of_ne_top [IsAlgClosed K] {C : Scheme.{u}}
+    (p : C ⟶ Spec (.of K)) [IsConnectedCurve p] [Smooth p] [IsProper p] (V : C.Opens)
+    (hV : V ≠ ⊤) : IsAffine V :=
+  sorry
 
 end AlgebraicGeometry

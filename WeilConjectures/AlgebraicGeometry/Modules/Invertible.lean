@@ -36,6 +36,8 @@ An `𝒪_X`-module is *invertible* if it is locally isomorphic to `𝒪_X`.
   along any morphism of schemes is invertible.
 - `AlgebraicGeometry.Scheme.Modules.IsInvertible.nonempty_iso_unit`: on a scheme with a single
   point every invertible module is trivial.
+- `AlgebraicGeometry.Scheme.Modules.IsInvertible.not_isZero`: an invertible module on a nonempty
+  scheme is not zero.
 -/
 
 @[expose] public section
@@ -94,6 +96,27 @@ lemma IsInvertible.nonempty_iso_unit [Subsingleton X] (x : X) (M : X.Modules)
   exact ⟨((pullbackId X).app M).symm ≪≫ (pullbackCongr (Scheme.toIso_inv_ι X).symm).app M ≪≫
     (pullbackComp _ _).symm.app M ≪≫ (Scheme.Modules.pullback X.topIso.inv).mapIso e ≪≫
     pullbackObjUnitIso _⟩
+
+/-- The structure sheaf of a nonempty scheme is not zero: `1 ≠ 0` in its ring of global
+sections, as the germ of `1` at a point is `1` in a local ring. -/
+lemma not_isZero_unit (X : Scheme.{u}) [Nonempty X] :
+    ¬ IsZero (SheafOfModules.unit X.ringCatSheaf) := by
+  intro h
+  have h₁ := congr_arg (fun f : SheafOfModules.unit X.ringCatSheaf ⟶ _ ↦ f.val.app (Opposite.op ⊤))
+    (h.eq_of_src (𝟙 _) 0)
+  have h₂ : (1 : Γ(X, ⊤)) = 0 := congr_arg (fun g ↦ g.hom (1 : Γ(X, ⊤))) h₁
+  obtain ⟨x⟩ := ‹Nonempty X›
+  have h₃ := congr_arg (X.presheaf.germ ⊤ x trivial).hom h₂
+  rw [map_one, map_zero] at h₃
+  exact one_ne_zero h₃
+
+/-- An invertible module on a nonempty scheme is not zero: it is trivial on a nonempty open. -/
+lemma IsInvertible.not_isZero [Nonempty X] (M : X.Modules) [M.IsInvertible] : ¬ IsZero M := by
+  intro h
+  obtain ⟨x⟩ := ‹Nonempty X›
+  obtain ⟨U, hx, ⟨e⟩⟩ := IsInvertible.exists_isoUnit (M := M) x
+  have : Nonempty U := ⟨⟨x, hx⟩⟩
+  exact not_isZero_unit U (((Scheme.Modules.pullback U.ι).map_isZero h).of_iso e.symm)
 
 /-- The monoidal category structure on `𝒪_X`-modules: the tensor product over `𝒪_X`.
 This uses that `X.ringCatSheaf` is by definition the underlying sheaf of rings

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.CategoryTheory.Triangulated.Adjunction
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 
 /-!
 # Notation for the right derived functor on the bounded below derived category
@@ -31,7 +32,11 @@ Mathlib). The functor `HomotopyCategory.Plus (InjectiveObject C) ⥤ DerivedCate
 triangulated equivalence (`DerivedCategory.Plus.injectiveObjectEquivalence`), and
 `F.rightDerivedFunctorPlus` identifies with its inverse followed by `F` applied termwise
 (`CategoryTheory.Functor.rightDerivedFunctorPlusIsoInjectiveObject`); the shift structure and
-the triangulated structure are transported along this isomorphism.
+the triangulated structure are transported along this isomorphism. The unit
+`F.mapHomotopyCategoryPlus ⋙ Qh ⟶ Qh ⋙ F.rightDerivedFunctorPlus` commutes with the shifts
+(`CategoryTheory.Functor.commShift_rightDerivedFunctorPlusUnit`): on complexes of injective
+objects this is the definition of the shift structure, and every bounded below complex maps
+to a complex of injective objects by a quasi-isomorphism.
 -/
 
 @[expose] public section
@@ -220,5 +225,61 @@ noncomputable instance : F.rightDerivedFunctorPlus.CommShift ℤ :=
 instance : F.rightDerivedFunctorPlus.IsTriangulated := by
   have := Functor.CommShift.ofIso_compatibility F.rightDerivedFunctorPlusIsoInjectiveObject.symm ℤ
   exact Functor.isTriangulated_of_iso F.rightDerivedFunctorPlusIsoInjectiveObject.symm
+
+open DerivedCategory.Plus in
+/-- The inverse of `Functor.rightDerivedFunctorPlusIsoInjectiveObject` at `Y` is the unit of the
+right derived functor at the complex of injective objects attached to `Y`, followed by the
+image of the counit of the equivalence `K⁺(Inj) ≌ D⁺`. -/
+lemma rightDerivedFunctorPlusIsoInjectiveObject_inv_app (Y : DerivedCategory.Plus C) :
+    F.rightDerivedFunctorPlusIsoInjectiveObject.inv.app Y =
+      F.rightDerivedFunctorPlusUnit.app ((InjectiveObject.ι C).mapHomotopyCategoryPlus.obj
+          ((injectiveObjectEquivalence C).inverse.obj Y)) ≫
+        F.rightDerivedFunctorPlus.map ((injectiveObjectEquivalence C).counit.app Y) := by
+  simp [rightDerivedFunctorPlusIsoInjectiveObject, mapHomotopyCategoryPlusCompIso_refl_inv_app]
+
+open DerivedCategory.Plus in
+/-- The unit `F.mapHomotopyCategoryPlus ⋙ Qh ⟶ Qh ⋙ F.rightDerivedFunctorPlus` of the right
+derived functor commutes with the shifts. On complexes of injective objects, this is the
+definition of the shift structure on `F.rightDerivedFunctorPlus`; in general, every bounded
+below complex maps to a complex of injective objects by a quasi-isomorphism. -/
+instance commShift_rightDerivedFunctorPlusUnit :
+    NatTrans.CommShift F.rightDerivedFunctorPlusUnit ℤ := by
+  let inj := (InjectiveObject.ι C).mapHomotopyCategoryPlus
+  let E := injectiveObjectEquivalence C
+  let G := (InjectiveObject.ι C ⋙ F).mapHomotopyCategoryPlus ⋙ Qh
+  let c := mapHomotopyCategoryPlusCompIso (Iso.refl (InjectiveObject.ι C ⋙ F))
+  have hI : NatTrans.CommShift F.rightDerivedFunctorPlusIsoInjectiveObject.inv ℤ :=
+    Functor.CommShift.ofIso_compatibility F.rightDerivedFunctorPlusIsoInjectiveObject.symm ℤ
+  have heq : whiskerLeft inj F.rightDerivedFunctorPlusUnit =
+      (associator inj F.mapHomotopyCategoryPlus Qh).inv ≫ whiskerRight c.hom Qh ≫
+        (leftUnitor G).inv ≫ whiskerRight E.unitIso.hom G ≫
+        (associator E.functor E.inverse G).hom ≫
+        whiskerLeft E.functor F.rightDerivedFunctorPlusIsoInjectiveObject.inv ≫
+        (associator inj Qh F.rightDerivedFunctorPlus).hom := by
+    refine NatTrans.ext (funext fun X ↦ ?_)
+    have h₁ := c.hom.naturality (E.unit.app X)
+    have h₂ := F.rightDerivedFunctorPlusUnit.naturality (inj.map (E.unit.app X))
+    simp only [c, mapHomotopyCategoryPlusCompIso_refl_hom_app, Category.comp_id,
+      Category.id_comp] at h₁
+    simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, associator_inv_app,
+      associator_hom_app, leftUnitor_inv_app, Category.id_comp, c,
+      mapHomotopyCategoryPlusCompIso_refl_hom_app, Functor.map_id,
+      rightDerivedFunctorPlusIsoInjectiveObject_inv_app]
+    erw [Category.id_comp, Category.id_comp, Category.comp_id]
+    change _ = Qh.map ((InjectiveObject.ι C ⋙ F).mapHomotopyCategoryPlus.map (E.unit.app X)) ≫ _
+    rw [← h₁]
+    erw [reassoc_of% h₂]
+    change _ = _ ≫ R+(F).map (E.functor.map (E.unit.app X)) ≫
+      R+(F).map (E.counit.app (E.functor.obj X))
+    rw [← Functor.map_comp]
+    erw [E.functor_unit_comp, Functor.map_id, Category.comp_id]
+  have : NatTrans.CommShift (whiskerLeft inj F.rightDerivedFunctorPlusUnit) ℤ := by
+    rw [heq]; infer_instance
+  refine NatTrans.CommShift.of_whiskerLeft _ inj (fun K ↦ ?_)
+  obtain ⟨f, hf⟩ := (Qh_map_bijective_of_isKInjective K (inj.obj (E.inverse.obj (Qh.obj K)))
+    inferInstance).2 (E.counitIso.inv.app (Qh.obj K))
+  refine ⟨_, f, ?_⟩
+  rw [Functor.comp_map, hf]
+  infer_instance
 
 end CategoryTheory.Functor

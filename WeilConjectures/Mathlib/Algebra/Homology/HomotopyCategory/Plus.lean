@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Shift
 
 /-!
 # Natural transformations between functors on bounded below homotopy categories
@@ -23,6 +24,10 @@ attached to `Iso.refl (F ⋙ G)` are in fact identities
 (`CategoryTheory.Functor.mapHomotopyCategoryPlusIdIso_hom_app_eq_id` and
 `CategoryTheory.Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app`), together with their
 inverse forms.
+
+Both `NatTrans.mapHomotopyCategoryPlus τ` and `Functor.mapHomotopyCategoryPlusCompIso e` commute
+with the shifts by `ℤ` (`CategoryTheory.NatTrans.commShift_mapHomotopyCategoryPlus` and
+`CategoryTheory.NatTrans.commShift_mapHomotopyCategoryPlusCompIso`).
 
 This material is destined for `Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean`, next to
 `CategoryTheory.Functor.mapHomotopyCategoryPlus`.
@@ -213,3 +218,54 @@ lemma mapHomotopyCategoryPlusCompIso_refl_inv_app {C D E : Type*} [Category C] [
     (mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))).app K = Iso.refl _)
 
 end CategoryTheory.Functor
+
+namespace CategoryTheory.NatTrans
+
+variable {C D E : Type*} [Category* C] [Category* D] [Category* E]
+  [Preadditive C] [Preadditive D] [Preadditive E]
+
+instance commShift_mapHomotopyCategoryPlus {F G : C ⥤ D} [F.Additive] [G.Additive]
+    (τ : F ⟶ G) : NatTrans.CommShift (NatTrans.mapHomotopyCategoryPlus τ) ℤ := by
+  have : Functor.whiskerRight (NatTrans.mapHomotopyCategoryPlus τ) (HomotopyCategory.Plus.ι D) =
+      ((HomotopyCategory.plus D).liftCompιIso _ _).hom ≫
+        Functor.whiskerLeft (HomotopyCategory.Plus.ι C)
+          (NatTrans.mapHomotopyCategory τ (.up ℤ)) ≫
+        ((HomotopyCategory.plus D).liftCompιIso _ _).inv := by
+    ext K
+    simp [ObjectProperty.liftCompιIso]
+    rfl
+  have : NatTrans.CommShift (Functor.whiskerRight (NatTrans.mapHomotopyCategoryPlus τ)
+      (HomotopyCategory.Plus.ι D)) ℤ := by
+    rw [this]; infer_instance
+  exact CommShift.of_whiskerRight _ (HomotopyCategory.Plus.ι D)
+
+instance commShift_mapHomotopyCategoryPlusCompIso {F : C ⥤ D} {G : D ⥤ E} {H : C ⥤ E}
+    [F.Additive] [G.Additive] [H.Additive] (e : F ⋙ G ≅ H) :
+    NatTrans.CommShift (Functor.mapHomotopyCategoryPlusCompIso e).hom ℤ := by
+  have : Functor.whiskerRight (Functor.mapHomotopyCategoryPlusCompIso e).hom
+      (HomotopyCategory.Plus.ι E) =
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft F.mapHomotopyCategoryPlus
+        ((HomotopyCategory.plus E).liftCompιIso _ _).hom ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight ((HomotopyCategory.plus D).liftCompιIso _ _).hom
+        (G.mapHomotopyCategory (.up ℤ)) ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft (HomotopyCategory.Plus.ι C)
+        (Functor.mapHomotopyCategoryCompIso e (.up ℤ)).hom ≫
+      ((HomotopyCategory.plus E).liftCompιIso _ _).inv := by
+    ext K
+    simp only [Functor.comp_obj, ObjectProperty.ι_obj, Functor.whiskerRight_app,
+      ObjectProperty.ι_map, comp_app, ObjectProperty.lift_obj_obj, Functor.associator_hom_app,
+      Functor.whiskerLeft_app, Functor.associator_inv_app, Category.id_comp]
+    rw [show ((Functor.mapHomotopyCategoryPlusCompIso e).hom.app K).hom =
+      (Functor.mapHomotopyCategoryCompIso e (.up ℤ)).hom.app K.obj from rfl]
+    simp only [ObjectProperty.liftCompιIso, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app]
+    erw [Category.id_comp, Functor.map_id, Category.id_comp, Category.id_comp,
+      Category.comp_id]
+  have : NatTrans.CommShift (Functor.whiskerRight (Functor.mapHomotopyCategoryPlusCompIso e).hom
+      (HomotopyCategory.Plus.ι E)) ℤ := by
+    rw [this]; infer_instance
+  exact CommShift.of_whiskerRight _ (HomotopyCategory.Plus.ι E)
+
+end CategoryTheory.NatTrans

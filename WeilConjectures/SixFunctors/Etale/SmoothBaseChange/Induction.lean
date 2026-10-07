@@ -42,6 +42,8 @@ base-change property universally in every degree.
 
 universe u
 
+open CategoryTheory
+
 namespace AlgebraicGeometry
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {X S : Scheme.{u}} {p : X ⟶ S}
@@ -64,8 +66,18 @@ rather than a single tagged one: it is the contradiction between
 theorem Etale.UniversalBaseChangeProperty.of_forall_lt [IsAffine X] [IsAffineHom p]
     [SmoothOfRelativeDimension 1 p] (n : ℕ) (hn : IsUnit (n : Γ(S, ⊤))) (hΛ : (n : Λ) = 0)
     {q : ℤ} (hq : 1 ≤ q) (hprev : ∀ q' < q, Etale.UniversalBaseChangeProperty Λ p q') :
-    Etale.UniversalBaseChangeProperty Λ p q :=
-  sorry
+    Etale.UniversalBaseChangeProperty Λ p q := by
+  by_contra hfail
+  obtain ⟨S', X', a, b, p', hpb, _, _, hnorm, _, K, _, _, i, Y, e, h, sq, d, hd, hne⟩ :=
+    Etale.exists_isPullback_not_isZero_higherDirectImage Λ p n hn hΛ q hq hprev hfail
+  -- the base change `p'` is again an affine smooth relative curve, and `d` is invertible on `S'`
+  have : IsAffineHom p' := MorphismProperty.of_isPullback hpb inferInstance
+  have : SmoothOfRelativeDimension 1 p' :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback hpb inferInstance
+  have hd' : IsUnit (d : Γ(S', ⊤)) :=
+    isUnit_of_dvd_unit (Nat.cast_dvd_cast hd) (by simpa using hn.map a.appTop.hom)
+  exact hne (Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf Λ
+    ⟨S', hnorm, X', p', K, i, Y, e, h, sq, d, hd'⟩ q hq)
 
 /-- Affine smooth base change in relative dimension one: for `p : X ⟶ S` affine smooth of
 relative dimension one with `X` affine, and `n` invertible on `S` and annihilating `Λ`,

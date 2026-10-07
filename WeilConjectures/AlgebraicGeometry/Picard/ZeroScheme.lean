@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
@@ -65,6 +66,10 @@ can discharge yet; see `AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`.
 
 ## Main statements
 
+- `AlgebraicGeometry.comap_fiberι_zeroLocus_directImageCounit_ne_bot`: the adjunction section is
+  nonzero on every fibre `X_t`.
+- `AlgebraicGeometry.finrank_zeroLocus_directImageCounit`: its zero scheme has degree `g` over
+  `T`.
 - `AlgebraicGeometry.isInvertible_zeroLocus_directImageCounit`: the zero scheme of the adjunction
   morphism is a relative effective Cartier divisor, finite locally free of degree `g` (blueprint
   `lem-pc-zero-scheme-recd`).
@@ -109,107 +114,22 @@ noncomputable def Scheme.Pic.directImageCounit {S : Scheme.{u}} (f : X ⟶ S) (T
           ((fromSkeleton _).obj L.val)) ⟶ (fromSkeleton _).obj L.val :=
   (Modules.pullbackPushforwardAdjunction _).counit.app _
 
-/-- **The fibres of the adjunction section are nonzero.** For `ℒ ∈ F(T)` and a point `t` of `T`,
-the zero scheme of the adjunction morphism `φ : f_T^* f_{T,*} ℒ ⟶ ℒ` does not contain the
-fibre `X_t`: the restriction of its ideal to `X_t` is nonzero.
-
-This is the step `s_t ≠ 0` of the blueprint proof of `lem-pc-zero-scheme-recd`: by cohomology
-and base change, `Rf_{t,*} ℒ_t ≅ 𝒩_t[0]` with `𝒩_t ≅ κ(t)`, and the base change `φ_t` of `φ`
-is the adjunction morphism of `ℒ_t`, which corresponds to the identity of `𝒩_t` and is
-therefore nonzero; then `Z(φ)|_{X_t} = Z(φ_t) ≠ X_t`. -/
-theorem comap_fiberι_zeroLocus_directImageCounit_ne_bot
-    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
-    [∀ T : Over (Spec (.of k)),
-      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
-    (T : Over (Spec (.of k)))
-    (ℒ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T))
-    (t : T.left) :
-    (Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).zeroLocus.comap
-      ((Limits.pullback.snd (X ↘ Spec (.of k)) T.hom).fiberι t) ≠ ⊥ :=
-  sorry
-
-/-- **The degree of the zero scheme of the adjunction section is the genus.** For `ℒ ∈ F(T)`,
-the rank at every point `t` of `T` of the projection `Z(φ) ⟶ T` from the zero scheme of the
-adjunction morphism `φ : f_T^* f_{T,*} ℒ ⟶ ℒ` is the genus `g` of `X`.
-
-This is the degree computation of the blueprint proof of `lem-pc-zero-scheme-recd`: the rank
-at `t` is `dim_{κ(t)} Γ(D_t, 𝒪_{D_t}) = deg D_t = deg 𝒪(D_t) = deg ℒ_t`, and
-`deg ℒ_t = χ(ℒ_t) - χ(𝒪_{X_t}) = 1 - (1 - g) = g` by `AlgebraicGeometry.Scheme.degree_eq_genus`
-(blueprint `sk-cor-picard-degree-g`), since `h⁰(ℒ_t) = 1` and the higher cohomology of `ℒ_t`
-vanishes by cohomology and base change. -/
-theorem finrank_zeroLocus_directImageCounit
-    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
-    [∀ T : Over (Spec (.of k)),
-      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
-    (T : Over (Spec (.of k)))
-    (ℒ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T))
-    (t : T.left) :
-    ((Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).zeroLocus.subschemeι ≫
-      Limits.pullback.snd (X ↘ Spec (.of k)) T.hom).finrank t = arithmeticGenus k X :=
-  sorry
-
-/-- **The zero scheme of the adjunction section.** Let `ℒ ∈ F(T)`, let `𝒩 = f_{T,*} ℒ`, so that
-`Rf_{T,*} ℒ ≅ 𝒩[0]` with `𝒩` invertible, and let `φ : f_T^* 𝒩 ⟶ ℒ` be the adjunction morphism,
-i.e. the section `s` of `ℒ ⊗ f_T^* 𝒩^{-1}` of the blueprint. Then the zero scheme
-`D = Z(φ) ⊆ X_T` is a relative effective Cartier divisor on `X_T/T` (its ideal is invertible
-and `D ⟶ T` is flat) which is finite locally free of degree `g` over `T`: it lies in the
-Hilbert functor `Hilb^g_{X/k}(T)`.
-
-(blueprint: `lem-pc-zero-scheme-recd`) -/
-theorem isInvertible_zeroLocus_directImageCounit
-    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
-    [∀ T : Over (Spec (.of k)),
-      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
-    (T : Over (Spec (.of k)))
-    (ℒ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T)) :
-    (Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).zeroLocus.IsInvertible ∧
-      IsHilbertSubscheme (X ↘ Spec (.of k)) (arithmeticGenus k X) T
-        (Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).zeroLocus := by
-  set π := Limits.pullback.snd (X ↘ Spec (.of k)) T.hom
-  have := smoothOfRelativeDimension_isStableUnderBaseChange 1
-  have : SmoothOfRelativeDimension 1 π :=
-    MorphismProperty.pullback_snd (P := @SmoothOfRelativeDimension 1) _ _ ‹_›
-  -- `ℒ`, `𝒩 = f_{T,*} ℒ ≅ R⁰f_{T,*} ℒ` and `f_T^* 𝒩` are invertible.
-  have hℒ := ℒ.1.1.isInvertible
-  have h𝒩 : SheafOfModules.IsInvertible.{u, u, u}
-      ((Modules.pushforward π).obj ((fromSkeleton _).obj ℒ.1.1.val)) :=
-    have := ℒ.2.1
-    SheafOfModules.IsInvertible.of_iso.{u, u, u}
-      ((Functor.rightDerivedZeroIsoSelf (Modules.pushforward π)).app _)
-  have := h𝒩.pullback (g := π)
-  -- `D = Z(φ)` is locally principal, and its fibres are effective Cartier divisors on the
-  -- integral fibres `X_t`.
-  have hD := (Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).isLocallyPrincipal_zeroLocus
-  have hfib (t : T.left) := (hD.comap (π.fiberι t)).isInvertible
-    (comap_fiberι_zeroLocus_directImageCounit_ne_bot σ hσ T ℒ t)
-  obtain ⟨hinv, hflat⟩ := hD.isInvertible_and_flat π hfib
-  obtain ⟨hfin, hlfp⟩ := hinv.isFinite_and_locallyOfFinitePresentation π hflat
-  exact ⟨hinv, hfin, hflat, hlfp, finrank_zeroLocus_directImageCounit σ hσ T ℒ⟩
-
-/-- **The zero-scheme dictionary.** Let `ℒ ∈ F(T)`, let `𝒩` be the invertible `𝒪_T`-module with
-`Rf_{T,*} ℒ ≅ 𝒩[0]` provided by the definition of `F`, and let
-`s ∈ H⁰(X_T, ℒ ⊗ f_T^* 𝒩^{-1})` be the section adjoint to that isomorphism.  Then the zero
-scheme `D = Z(s) ⊆ X_T` is a relative effective Cartier divisor on `X_T/T`, finite locally free
-of degree `g` over `T`, where `g` is the genus of the curve.
-
-There is no definition of a relative effective Cartier divisor, so the conclusion is stated
-as the existence of the divisor: there is a point `D` of the Hilbert functor `Hilb^g_{X/k}(T)`
-whose closed subscheme is moreover an effective Cartier centre in `X_T`.
-
-The witness is the zero scheme of the adjunction morphism, by
-`AlgebraicGeometry.isInvertible_zeroLocus_directImageCounit`.
-
-(blueprint: `sk-lem-picard-zero-dictionary`) -/
-theorem exists_isEffectiveCartierCenter_hilbertPresheaf [IsSepClosed k]
-    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
-    [∀ T : Over (Spec (.of k)),
-      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
-    (T : Over (Spec (.of k)))
-    (ℒ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T)) :
-    ∃ D : (hilbertPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj (op T),
-      IsEffectiveCartierCenter D.1.subschemeι :=
-  have h := isInvertible_zeroLocus_directImageCounit σ hσ T ℒ
-  ⟨⟨_, h.2⟩, h.1.isEffectiveCartierCenter⟩
+/-- For a class `ℒ ∈ Pic(X_T)` over a nonempty `T` whose direct image `f_{T,*} ℒ` is invertible,
+the adjunction morphism `f_T^* f_{T,*} ℒ ⟶ ℒ` is nonzero: by the triangle identity its adjoint is
+the identity of `f_{T,*} ℒ`, which is nonzero. -/
+theorem Scheme.Pic.directImageCounit_ne_zero {S : Scheme.{u}} (f : X ⟶ S) (T : Over S)
+    [Nonempty T.left] (L : (Limits.pullback f T.hom).Pic)
+    [SheafOfModules.IsInvertible.{u, u, u} ((Modules.pushforward (Limits.pullback.snd f T.hom)).obj
+      ((fromSkeleton _).obj L.val))] :
+    Pic.directImageCounit f T L ≠ 0 := by
+  intro h0
+  have tri := (Modules.pullbackPushforwardAdjunction
+    (Limits.pullback.snd f T.hom)).right_triangle_components ((fromSkeleton _).obj L.val)
+  change _ ≫ (Modules.pushforward _).map (Pic.directImageCounit f T L) = _ at tri
+  rw [h0, Functor.map_zero, comp_zero] at tri
+  have := Modules.IsInvertible.of_sheafOfModules
+    ((Modules.pushforward (Limits.pullback.snd f T.hom)).obj ((fromSkeleton _).obj L.val))
+  exact Modules.IsInvertible.not_isZero _ ((IsZero.iff_id_eq_zero _).mpr tri.symm)
 
 omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
   [GeometricallyIntegral (X ↘ Spec (.of k))] in
@@ -268,6 +188,300 @@ theorem comap_zeroLocus_directImageCounit
   rw [Modules.Hom.comap_zeroLocus]
   exact Modules.Hom.zeroLocus_eq_of_arrowIso _ _
     (nonempty_arrowIso_pullback_directImageCounit σ hσ i ℒ).some
+
+/-- **The fibres of the adjunction section are nonzero.** For `ℒ ∈ F(T)` and a point `t` of `T`,
+the zero scheme of the adjunction morphism `φ : f_T^* f_{T,*} ℒ ⟶ ℒ` does not contain the
+fibre `X_t`: the restriction of its ideal to `X_t` is nonzero.
+
+This is the step `s_t ≠ 0` of the blueprint proof of `lem-pc-zero-scheme-recd`: by cohomology
+and base change, `ℒ_t` lies in `F(κ(t))`, so `𝒩_t = f_{t,*} ℒ_t` is invertible, and the base
+change `φ_t` of `φ` is the adjunction morphism of `ℒ_t`
+(`AlgebraicGeometry.comap_zeroLocus_directImageCounit`), whose adjoint is the identity of the
+nonzero module `𝒩_t` (`AlgebraicGeometry.Scheme.Pic.directImageCounit_ne_zero`); hence
+`Z(φ)|_{X_t} = Z(φ_t) ≠ X_t` (`lem-pc-zero-scheme-properties` (3)). -/
+theorem comap_fiberι_zeroLocus_directImageCounit_ne_bot
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
+    [∀ T : Over (Spec (.of k)),
+      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
+    (T : Over (Spec (.of k)))
+    (ℒ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T))
+    (t : T.left) :
+    (Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).zeroLocus.comap
+      ((Limits.pullback.snd (X ↘ Spec (.of k)) T.hom).fiberι t) ≠ ⊥ := by
+  -- pass to the point `T' = Spec κ(t)` of `T`
+  let T' : Over (Spec (.of k)) := Over.mk (T.left.fromSpecResidueField t ≫ T.hom)
+  let i : T' ⟶ T := Over.homMk (T.left.fromSpecResidueField t)
+  let L' := Pic.map (baseChangeMap (X ↘ Spec (.of k)) i) ℒ.1.1
+  have hL' := IsInvertibleDirectImage.map (X ↘ Spec (.of k)) i ℒ.2
+  have h𝒩 : SheafOfModules.IsInvertible.{u, u, u}
+      ((Modules.pushforward (Limits.pullback.snd (X ↘ Spec (.of k)) T'.hom)).obj
+        ((fromSkeleton _).obj L'.val)) :=
+    have := hL'.1
+    SheafOfModules.IsInvertible.of_iso.{u, u, u}
+      ((Functor.rightDerivedZeroIsoSelf (Modules.pushforward _)).app _)
+  have := h𝒩.pullback (g := Limits.pullback.snd (X ↘ Spec (.of k)) T'.hom)
+  have := L'.isInvertible
+  have : Nonempty T'.left :=
+    ⟨(IsLocalRing.closedPoint (T.left.residueField t) : Spec (T.left.residueField t))⟩
+  have hne : (Pic.directImageCounit (X ↘ Spec (.of k)) T' L').zeroLocus ≠ ⊥ := by
+    rw [Ne, Modules.Hom.zeroLocus_eq_bot_iff]
+    exact Pic.directImageCounit_ne_zero (X ↘ Spec (.of k)) T' L'
+  -- the fibre `X_t` is the base change `X_{T'}`
+  let e : (Limits.pullback.snd (X ↘ Spec (.of k)) T.hom).fiber t ≅
+      Limits.pullback (X ↘ Spec (.of k)) T'.hom :=
+    pullbackLeftPullbackSndIso (X ↘ Spec (.of k)) T.hom (T.left.fromSpecResidueField t)
+  have he : e.hom ≫ baseChangeMap (X ↘ Spec (.of k)) i =
+      (Limits.pullback.snd (X ↘ Spec (.of k)) T.hom).fiberι t := by
+    apply Limits.pullback.hom_ext
+    · simp only [Category.assoc, Limits.pullback.lift_fst, Category.comp_id]
+      exact pullbackLeftPullbackSndIso_hom_fst _ _ _
+    · simp [e, Scheme.Hom.fiberι, i, T', Limits.pullback.condition]
+  intro hbot
+  apply hne
+  have h' : ((Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).zeroLocus.comap
+      (baseChangeMap (X ↘ Spec (.of k)) i)).comap e.hom = ⊥ := by
+    rw [← IdealSheafData.comap_comp, he, hbot]
+  rw [← comap_zeroLocus_directImageCounit σ hσ i ℒ, ← IdealSheafData.comap_id
+    (IdealSheafData.comap _ _), ← e.inv_hom_id, IdealSheafData.comap_comp, h',
+    IdealSheafData.comap_bot]
+
+/-- **The zero scheme of the adjunction section is a relative divisor.** For `ℒ ∈ F(T)`, the zero
+scheme `D = Z(φ) ⊆ X_T` of the adjunction morphism `φ : f_T^* f_{T,*} ℒ ⟶ ℒ` is an effective
+Cartier divisor which is finite locally free over `T`.
+
+This is the first half of the blueprint proof of `lem-pc-zero-scheme-recd`: `D` is locally
+principal, its fibres `D_t` are effective Cartier divisors on the integral curves `X_t` since
+`φ_t ≠ 0`, so `D` is a relative effective Cartier divisor (`lem-pc-recd-locally-principal`), and
+the Cartier criterion (`lem-pc-cartier-criterion`) makes it finite locally free over `T`. -/
+theorem isInvertible_zeroLocus_directImageCounit_and_isFiniteLocallyFree
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
+    [∀ T : Over (Spec (.of k)),
+      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
+    (T : Over (Spec (.of k)))
+    (ℒ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T)) :
+    (Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).zeroLocus.IsInvertible ∧
+      ((Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).zeroLocus.subschemeι ≫
+        Limits.pullback.snd (X ↘ Spec (.of k)) T.hom).IsFiniteLocallyFree := by
+  set π := Limits.pullback.snd (X ↘ Spec (.of k)) T.hom
+  have := smoothOfRelativeDimension_isStableUnderBaseChange 1
+  have : SmoothOfRelativeDimension 1 π :=
+    MorphismProperty.pullback_snd (P := @SmoothOfRelativeDimension 1) _ _ ‹_›
+  -- `ℒ`, `𝒩 = f_{T,*} ℒ ≅ R⁰f_{T,*} ℒ` and `f_T^* 𝒩` are invertible.
+  have hℒ := ℒ.1.1.isInvertible
+  have h𝒩 : SheafOfModules.IsInvertible.{u, u, u}
+      ((Modules.pushforward π).obj ((fromSkeleton _).obj ℒ.1.1.val)) :=
+    have := ℒ.2.1
+    SheafOfModules.IsInvertible.of_iso.{u, u, u}
+      ((Functor.rightDerivedZeroIsoSelf (Modules.pushforward π)).app _)
+  have := h𝒩.pullback (g := π)
+  -- `D = Z(φ)` is locally principal, and its fibres are effective Cartier divisors on the
+  -- integral fibres `X_t`.
+  have hD := (Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).isLocallyPrincipal_zeroLocus
+  have hfib (t : T.left) := (hD.comap (π.fiberι t)).isInvertible
+    (comap_fiberι_zeroLocus_directImageCounit_ne_bot σ hσ T ℒ t)
+  obtain ⟨hinv, hflat⟩ := hD.isInvertible_and_flat π hfib
+  obtain ⟨hfin, hlfp⟩ := hinv.isFinite_and_locallyOfFinitePresentation π hflat
+  exact ⟨hinv, { toIsFinite := hfin, toFlat := hflat, toLocallyOfFinitePresentation := hlfp }⟩
+
+/-- **The degree of the zero scheme of the adjunction section is the genus.** For `ℒ ∈ F(T)`,
+the rank at every point `t` of `T` of the projection `Z(φ) ⟶ T` from the zero scheme of the
+adjunction morphism `φ : f_T^* f_{T,*} ℒ ⟶ ℒ` is the genus `g` of `X`.
+
+This is the degree computation of the blueprint proof of `lem-pc-zero-scheme-recd`: the rank
+at `t` is `dim_{κ(t)} Γ(D_t, 𝒪_{D_t}) = deg D_t = deg 𝒪(D_t)`, and `ℒ_t ≅ 𝒪(D_t) ⊗ f_t^* 𝒩_t`
+with `f_t^* 𝒩_t` pulled back from the point `Spec κ(t)`, hence of degree `0`. Finally
+`deg ℒ_t = χ(ℒ_t) - χ(𝒪_{X_t}) = 1 - (1 - g) = g` as in `sk-cor-picard-degree-g`: the fibre
+cohomology of `ℒ ∈ F(T)` is `h⁰(ℒ_t) = 1`, `h^q(ℒ_t) = 0` for `q > 0` (cohomology and base
+change, `Modules.range_subset_setOf_hFiber_eq_iff`), and `χ(𝒪_{X_t}) = χ(𝒪_X) = 1 - g` by
+invariance of the fibre Euler characteristic under base change and Riemann–Roch. -/
+theorem finrank_zeroLocus_directImageCounit
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
+    [∀ T : Over (Spec (.of k)),
+      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
+    (T : Over (Spec (.of k)))
+    (ℒ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T))
+    (t : T.left) :
+    ((Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).zeroLocus.subschemeι ≫
+      Limits.pullback.snd (X ↘ Spec (.of k)) T.hom).finrank t = arithmeticGenus k X := by
+  have := (isInvertible_zeroLocus_directImageCounit_and_isFiniteLocallyFree σ hσ T ℒ).2
+  let π := Limits.pullback.snd (X ↘ Spec (.of k)) T.hom
+  let φ := Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1
+  let D := φ.zeroLocus
+  let ℳ := (fromSkeleton _).obj ℒ.1.1.val
+  let 𝒩 := (Modules.pushforward π).obj ℳ
+  let ι := π.fiberι t
+  let κ := T.left.residueField t
+  let _ := π.fiberOverSpecResidueField t
+  change (D.subschemeι ≫ π).finrank t = _
+  have := smoothOfRelativeDimension_isStableUnderBaseChange 1
+  have : SmoothOfRelativeDimension 1 π :=
+    MorphismProperty.pullback_snd (P := @SmoothOfRelativeDimension 1) _ _ ‹_›
+  have : IsProper π := MorphismProperty.pullback_snd (P := @IsProper) _ _ ‹_›
+  have : SmoothOfRelativeDimension 1 (π.fiber t ↘ Spec κ) :=
+    MorphismProperty.pullback_snd (P := @SmoothOfRelativeDimension 1) _ _ ‹_›
+  have : IsProper (π.fiber t ↘ Spec κ) :=
+    MorphismProperty.pullback_snd (P := @IsProper) _ _ ‹_›
+  -- invertibility of the modules involved
+  have hℳ := ℒ.1.1.isInvertible
+  have h𝒩 : SheafOfModules.IsInvertible.{u, u, u} 𝒩 :=
+    have := ℒ.2.1
+    SheafOfModules.IsInvertible.of_iso.{u, u, u}
+      ((Functor.rightDerivedZeroIsoSelf (Modules.pushforward π)).app _)
+  have : SheafOfModules.IsInvertible.{u, u, u} ((Modules.pullback π).obj 𝒩) := .pullback ‹_›
+  -- the fibre `D_t` is an effective Cartier divisor on `X_t`
+  have hDt : (D.comap ι).IsInvertible :=
+    (φ.isLocallyPrincipal_zeroLocus.comap ι).isInvertible
+      (comap_fiberι_zeroLocus_directImageCounit_ne_bot σ hσ T ℒ t)
+  -- Step 1: the rank at `t` is `deg D_t = dim_{κ(t)} Γ(D_t, 𝒪)`
+  have h1 : (D.subschemeι ≫ π).finrank t =
+      ((D.comap ι).subschemeι ≫ π.fiber t ↘ Spec κ).finrankΓ := by
+    rw [Scheme.Hom.finrank_eq_fiberDegree]
+    refine Scheme.Hom.finrankΓ_eq_of_iso _ _
+      ((pullbackRightPullbackFstIso π (T.left.fromSpecResidueField t) D.subschemeι).symm ≪≫
+        pullbackSymmetry _ _ ≪≫ (D.comapIso ι).symm) (Iso.refl _) ?_
+    simp only [ι, Scheme.Hom.fiberι, Iso.trans_hom, Iso.symm_hom, Category.assoc,
+      IdealSheafData.comapIso_inv_subschemeι_assoc, pullbackSymmetry_hom_comp_fst_assoc,
+      Iso.refl_hom, Spec.map_id]
+    exact pullbackRightPullbackFstIso_inv_snd_snd π (T.left.fromSpecResidueField t) D.subschemeι
+  -- Step 2: `deg D_t = deg 𝒪(D_t)`
+  have h2 : ((D.comap ι).toModulesᵛ).degree κ =
+      (((D.comap ι).subschemeι ≫ π.fiber t ↘ Spec κ).finrankΓ : ℤ) :=
+    hDt.degree_dual_toModules
+  -- Step 3: `ℳ_t ≅ 𝒪(D_t) ⊗ ι^* π^* 𝒩`, so `deg ℳ_t = deg D_t + deg (ι^* π^* 𝒩)`
+  have : SheafOfModules.IsInvertible.{u, u, u} ((Modules.pullback ι).obj ℳ) := .pullback ‹_›
+  have : SheafOfModules.IsInvertible.{u, u, u}
+      ((Modules.pullback ι).obj ((Modules.pullback π).obj 𝒩)) := .pullback ‹_›
+  have hz : ((Modules.pullback ι).map φ).zeroLocus = D.comap ι :=
+    (Modules.Hom.comap_zeroLocus ι φ).symm
+  obtain ⟨e⟩ := Modules.Hom.nonempty_iso_dual_toModules_tensorObj ((Modules.pullback ι).map φ)
+    (hz ▸ hDt)
+  rw [hz] at e
+  have := hDt.isInvertible_dual_toModules
+  have : Modules.IsInvertible ((Modules.pullback ι).obj ((Modules.pullback π).obj 𝒩)) :=
+    Modules.IsInvertible.of_sheafOfModules _
+  have h3 := Modules.degree_tensorObj (k := κ) ((D.comap ι).toModulesᵛ)
+    ((Modules.pullback ι).obj ((Modules.pullback π).obj 𝒩))
+  rw [← Modules.degree_congr κ e] at h3
+  -- Step 4: `ι^* π^* 𝒩` is pulled back from the point `Spec κ(t)`, so it has degree `0`
+  have h4 : ((Modules.pullback ι).obj ((Modules.pullback π).obj 𝒩)).degree κ = 0 := by
+    have : Modules.IsInvertible 𝒩 := Modules.IsInvertible.of_sheafOfModules _
+    obtain ⟨e'⟩ := Modules.IsInvertible.nonempty_iso_unit
+      (IsLocalRing.closedPoint κ : Spec κ)
+      ((Modules.pullback (T.left.fromSpecResidueField t)).obj 𝒩)
+    exact (Modules.degree_congr κ ((Modules.pullbackComp ι π).app 𝒩 ≪≫
+      (Modules.pullbackCongr (π.fiber_fac t)).app 𝒩 ≪≫
+      ((Modules.pullbackComp _ _).app 𝒩).symm ≪≫ (Modules.pullback _).mapIso e' ≪≫
+      Modules.pullbackObjUnitIso _)).trans (Modules.degree_unit κ)
+  -- Step 5: `h⁰(ℳ_t) = 1` and `h^q(ℳ_t) = 0` for `q > 0`
+  have : Flat π := inferInstance
+  have hfib : (∀ q ≠ 0, ℳ.hFiber π q t = 0) ∧ ℳ.hFiber π 0 t = 1 :=
+    (Modules.range_subset_setOf_hFiber_eq_iff π ℳ
+      (Modules.isFlatOver_of_isInvertible π ℳ) 0 1 (𝟙 T.left) (𝟙 _) π
+      (IsPullback.id_horiz π)).2
+      ⟨fun q hq ↦ (ℒ.2.2 q (Nat.pos_of_ne_zero hq)).of_iso
+          ((Modules.higherDirectImage π q).mapIso ((Modules.pullbackId _).app ℳ)),
+        (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one.{u, u, u} _).1
+          (SheafOfModules.IsInvertible.of_iso.{u, u, u}
+            ((Modules.higherDirectImage π 0).mapIso ((Modules.pullbackId _).app ℳ)).symm
+            (h := ℒ.2.1))⟩
+      ⟨t, rfl⟩
+  have hχ : ((Modules.pullback ι).obj ℳ).eulerChar κ = 1 := by
+    change ℳ.eulerCharFiber π t = 1
+    rw [Modules.eulerCharFiber, finsum_eq_single _ 0 (fun q hq ↦ by simp [hfib.1 q hq])]
+    simp [hfib.2]
+  -- Step 6: `χ(𝒪_{X_t}) = χ(𝒪_X) = 1 - g`
+  have hO : Modules.eulerChar κ (SheafOfModules.unit (π.fiber t).ringCatSheaf) =
+      1 - (arithmeticGenus k X : ℤ) := by
+    -- compare with `X = X ×_k Spec k`, written as a base change so that it carries the
+    -- injective resolutions of the hypothesis
+    let T₀ : Over (Spec (.of k)) := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k k)))
+    let j : T ⟶ T₀ := Over.homMk T.hom (by simp [T₀])
+    have : SmoothOfRelativeDimension 1 (Limits.pullback (X ↘ Spec (.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k k))) ↘ Spec (.of k)) :=
+      smoothOfRelativeDimension_baseChange (X := X) k 1
+    have : IsProper (Limits.pullback (X ↘ Spec (.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k k))) ↘ Spec (.of k)) :=
+      isProper_baseChange (X := X) k
+    have : IsProper (Limits.pullback.snd (X ↘ Spec (.of k)) T₀.hom) :=
+      MorphismProperty.pullback_snd (P := @IsProper) _ _ ‹_›
+    have : GlobalSectionsBijective k X := .of_geometricallyIntegral
+    have := SheafOfModules.isQuasicoherent_unit
+      (R := (Limits.pullback (X ↘ Spec (.of k)) T₀.hom).ringCatSheaf)
+    have : SheafOfModules.IsInvertible.{u, u, u}
+        (SheafOfModules.unit (Limits.pullback (X ↘ Spec (.of k)) T₀.hom).ringCatSheaf) :=
+      Modules.IsInvertible.sheafOfModules_isInvertible (𝟙_ _)
+    have : SheafOfModules.IsFiniteLocallyFree.{u, u, u}
+        (SheafOfModules.unit (Limits.pullback (X ↘ Spec (.of k)) T₀.hom).ringCatSheaf) :=
+      SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
+    have : (SheafOfModules.unit
+        (Limits.pullback (X ↘ Spec (.of k)) T₀.hom).ringCatSheaf).IsFinitePresentation :=
+      SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+    rw [Modules.eulerChar_congr κ (Modules.pullbackObjUnitIso ι).symm,
+      Modules.eulerChar_congr κ ((Modules.pullback ι).mapIso
+        (Modules.pullbackObjUnitIso (baseChangeMap (X ↘ Spec (.of k)) j)).symm)]
+    change Modules.eulerCharFiber _ π t = _
+    rw [Modules.eulerCharFiber_pullback_of_isPullback
+      (Limits.pullback.snd (X ↘ Spec (.of k)) T₀.hom) _ T.hom _ π
+      (isPullback_baseChangeMap (X ↘ Spec (.of k)) j) t, Modules.eulerCharFiber_eq_eulerChar,
+      ← arithmeticGenus_pullback (k := k) k]
+    convert eulerChar_unit_eq (k := k)
+      (X := Limits.pullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k k))))
+      using 0
+    exact Iff.rfl
+  have h5 : ((Modules.pullback ι).obj ℳ).degree κ = arithmeticGenus k X := by
+    rw [Modules.degree, hχ, hO]
+    ring
+  rw [h1]
+  have : (((D.comap ι).subschemeι ≫ π.fiber t ↘ Spec κ).finrankΓ : ℤ) =
+      arithmeticGenus k X := by
+    linarith
+  exact_mod_cast this
+
+/-- **The zero scheme of the adjunction section.** Let `ℒ ∈ F(T)`, let `𝒩 = f_{T,*} ℒ`, so that
+`Rf_{T,*} ℒ ≅ 𝒩[0]` with `𝒩` invertible, and let `φ : f_T^* 𝒩 ⟶ ℒ` be the adjunction morphism,
+i.e. the section `s` of `ℒ ⊗ f_T^* 𝒩^{-1}` of the blueprint. Then the zero scheme
+`D = Z(φ) ⊆ X_T` is a relative effective Cartier divisor on `X_T/T` (its ideal is invertible
+and `D ⟶ T` is flat) which is finite locally free of degree `g` over `T`: it lies in the
+Hilbert functor `Hilb^g_{X/k}(T)`.
+
+(blueprint: `lem-pc-zero-scheme-recd`) -/
+theorem isInvertible_zeroLocus_directImageCounit
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
+    [∀ T : Over (Spec (.of k)),
+      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
+    (T : Over (Spec (.of k)))
+    (ℒ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T)) :
+    (Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).zeroLocus.IsInvertible ∧
+      IsHilbertSubscheme (X ↘ Spec (.of k)) (arithmeticGenus k X) T
+        (Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).zeroLocus := by
+  obtain ⟨hinv, h⟩ := isInvertible_zeroLocus_directImageCounit_and_isFiniteLocallyFree σ hσ T ℒ
+  exact ⟨hinv, h.toIsFinite, h.toFlat, h.toLocallyOfFinitePresentation,
+    finrank_zeroLocus_directImageCounit σ hσ T ℒ⟩
+
+/-- **The zero-scheme dictionary.** Let `ℒ ∈ F(T)`, let `𝒩` be the invertible `𝒪_T`-module with
+`Rf_{T,*} ℒ ≅ 𝒩[0]` provided by the definition of `F`, and let
+`s ∈ H⁰(X_T, ℒ ⊗ f_T^* 𝒩^{-1})` be the section adjoint to that isomorphism.  Then the zero
+scheme `D = Z(s) ⊆ X_T` is a relative effective Cartier divisor on `X_T/T`, finite locally free
+of degree `g` over `T`, where `g` is the genus of the curve.
+
+There is no definition of a relative effective Cartier divisor, so the conclusion is stated
+as the existence of the divisor: there is a point `D` of the Hilbert functor `Hilb^g_{X/k}(T)`
+whose closed subscheme is moreover an effective Cartier centre in `X_T`.
+
+The witness is the zero scheme of the adjunction morphism, by
+`AlgebraicGeometry.isInvertible_zeroLocus_directImageCounit`.
+
+(blueprint: `sk-lem-picard-zero-dictionary`) -/
+theorem exists_isEffectiveCartierCenter_hilbertPresheaf [IsSepClosed k]
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
+    [∀ T : Over (Spec (.of k)),
+      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
+    (T : Over (Spec (.of k)))
+    (ℒ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T)) :
+    ∃ D : (hilbertPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj (op T),
+      IsEffectiveCartierCenter D.1.subschemeι :=
+  have h := isInvertible_zeroLocus_directImageCounit σ hσ T ℒ
+  ⟨⟨_, h.2⟩, h.1.isEffectiveCartierCenter⟩
 
 /-- **The zero-scheme dictionary is injective.** Two classes `ℒ, ℒ' ∈ F(T)` whose adjunction
 morphisms have the same zero scheme `D` are equal.

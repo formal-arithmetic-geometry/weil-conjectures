@@ -6,6 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.Nullstellensatz
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.KrullDimension.Field
+public import Mathlib.RingTheory.KrullDimension.Polynomial
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 
 /-!
@@ -117,3 +120,70 @@ theorem Algebra.TensorProduct.eq_zero_of_forall_lift_algHom_eq_zero (B : Type*) 
     | tmul a b => simp
     | add x y hx hy => simp [hx, hy]
   simpa using eq_zero_of_forall_algHom_apply_eq_zero k B fun ψ ↦ (key ψ t).trans (h φ ψ)
+
+namespace MvPolynomial
+
+/-- The translation automorphism `X i ↦ X i + C (c i)` of `MvPolynomial σ R`. -/
+noncomputable def translateAlgEquiv {R σ : Type*} [CommRing R] (c : σ → R) :
+    MvPolynomial σ R ≃ₐ[R] MvPolynomial σ R :=
+  AlgEquiv.ofAlgHom (aeval fun i ↦ X i + C (c i)) (aeval fun i ↦ X i - C (c i))
+    (algHom_ext fun i ↦ by simp) (algHom_ext fun i ↦ by simp)
+
+/-- Evaluating a translated polynomial at `x` is evaluating the polynomial at `x + c`. -/
+@[simp]
+lemma eval_translateAlgEquiv {R σ : Type*} [CommRing R] (c x : σ → R) (p : MvPolynomial σ R) :
+    eval x (translateAlgEquiv c p) = eval (x + c) p := by
+  induction p using MvPolynomial.induction_on with
+  | C a => simp [translateAlgEquiv]
+  | add p q hp hq => simp_all
+  | mul_X p i hp => simp_all [translateAlgEquiv]
+
+/-- The ideals of any two points of affine space have the same height: they are exchanged by a
+translation automorphism. -/
+lemma height_vanishingIdeal_singleton {k σ : Type*} [Field k] (a b : σ → k) :
+    (vanishingIdeal k {a}).height = (vanishingIdeal k {b}).height := by
+  rw [← RingEquiv.height_comap (translateAlgEquiv (b - a)).toRingEquiv]
+  congr 1
+  ext p
+  simp
+
+end MvPolynomial
+
+/-- **Affine dimension theorem, homogeneous form.** Over an algebraically closed field, finitely
+many polynomials without constant term in more variables than there are polynomials have a
+common nontrivial zero. This follows from Krull's height theorem: otherwise the ideal they
+generate would have the ideal of the origin, of height `Nat.card σ`, as its radical. -/
+theorem MvPolynomial.exists_ne_zero_forall_eval_eq_zero {k σ ι : Type*} [Field k] [IsAlgClosed k]
+    [Finite σ] [Finite ι] (f : ι → MvPolynomial σ k) (hf : ∀ i, constantCoeff (f i) = 0)
+    (hcard : Nat.card ι < Nat.card σ) : ∃ x : σ → k, x ≠ 0 ∧ ∀ i, eval x (f i) = 0 := by
+  by_contra! H
+  set I := Ideal.span (Set.range f)
+  have hI : I ≤ vanishingIdeal k {(0 : σ → k)} := by
+    refine Ideal.span_le.mpr ?_
+    rintro _ ⟨i, rfl⟩
+    simp [hf]
+  have hzero : zeroLocus k I = {0} := by
+    ext x
+    refine ⟨fun hx ↦ ?_, ?_⟩
+    · by_contra hx0
+      obtain ⟨i, hi⟩ := H x hx0
+      exact hi (hx _ (Ideal.subset_span ⟨i, rfl⟩))
+    · rintro rfl p hp
+      simpa using hI hp
+  have hrad : I.radical = vanishingIdeal k {(0 : σ → k)} := by
+    rw [← vanishingIdeal_zeroLocus_eq_radical (K := k), hzero]
+  -- the ideal of the origin is minimal over `I`, so has height at most `Nat.card ι`
+  have hmin : vanishingIdeal k {(0 : σ → k)} ∈ I.minimalPrimes := by
+    refine ⟨⟨(isMaximal_iff_eq_vanishingIdeal_singleton.mpr ⟨0, rfl⟩).isPrime, hI⟩,
+      fun q ⟨hq, hIq⟩ _ ↦ ?_⟩
+    rw [← hrad]
+    exact (Ideal.IsPrime.radical_le_iff hq).mpr hIq
+  have hheight := Ideal.height_le_card_of_mem_minimalPrimes_span (Set.finite_range f) hmin
+  -- hence so does every maximal ideal, contradicting `dim k[σ] = Nat.card σ`
+  have hdim : ringKrullDim (MvPolynomial σ k) ≤ (Nat.card ι : ℕ∞) := by
+    refine (ringKrullDim_le_iff_isMaximal_height_le _).mpr fun m hm ↦ ?_
+    obtain ⟨a, rfl⟩ := isMaximal_iff_eq_vanishingIdeal_singleton.mp hm
+    rw [height_vanishingIdeal_singleton a 0]
+    exact WithBot.coe_le_coe.mpr (hheight.trans (by exact_mod_cast Finite.card_range_le f))
+  rw [ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field, zero_add] at hdim
+  exact absurd hdim (by exact_mod_cast hcard.not_ge)

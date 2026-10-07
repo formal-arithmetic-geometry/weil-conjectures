@@ -7,6 +7,9 @@ module
 
 public import Mathlib
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
 
 /-!
 # Injectivity of the critical base-change map
@@ -49,9 +52,10 @@ a geometric stalk.
 The proof follows the blueprint: embed `F` in an injective sheaf `I`, compare the long exact
 sequences of `0 ⟶ F ⟶ I ⟶ I / F ⟶ 0` through the base-change maps, and use that the source
 of the degree-`q` map vanishes on `I` and that the degree-`(q - 1)` maps are isomorphisms. The
-long exact sequences and their compatibility with the base-change maps,
-`AlgebraicGeometry.Etale.exists_connecting_baseChangeHomologyMap`, are not yet proved: they
-need the right derived functor on the bounded below derived categories to be triangulated.
+long exact sequences are the homology sequences of the images of the distinguished triangle
+`F₁[0] ⟶ F₂[0] ⟶ F₃[0] ⟶ F₁[1]` under the triangulated functors `p^* ∘ Rg_*` and
+`Rh_* ∘ e^*`; the base-change maps form a morphism between them because the derived
+base-change morphism commutes with the shifts (`AlgebraicGeometry.Etale.commShift_baseChange`).
 
 ## References
 
@@ -122,10 +126,10 @@ of base-change maps commutes.
 
 This is the long exact sequence input of the blueprint lemma `sbc-lem-bc-injectivity`
 (the blueprint lemma `lemma-weil-pbc-five-lemma-transfer` of the proper base change
-chapter). It comes from the distinguished triangle of the short exact sequence; it is stated
-existentially because the connecting maps cannot be defined yet: the right derived functor
-`Functor.rightDerivedFunctorPlus` is not yet known to commute with shifts, nor the
-base-change morphism `AlgebraicGeometry.Etale.baseChange` with the shift isomorphisms. -/
+chapter). It comes from the distinguished triangle of the short exact sequence: its images
+under the triangulated functors `p^* ∘ Rg_*` and `Rh_* ∘ e^*` are distinguished, and the
+derived base-change morphism `AlgebraicGeometry.Etale.baseChange` is a morphism between them
+since it commutes with the shifts (`AlgebraicGeometry.Etale.commShift_baseChange`). -/
 theorem Etale.exists_connecting_baseChangeHomologyMap (sq : IsPullback e h g p)
     {E : ShortComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hE : E.ShortExact)
     (n₀ n₁ : ℤ) (hn : n₀ + 1 = n₁) :
@@ -141,7 +145,15 @@ theorem Etale.exists_connecting_baseChangeHomologyMap (sq : IsPullback e h g p)
       (ShortComplex.mk _ _ wT₁).Exact ∧ (ShortComplex.mk _ _ wT₂).Exact ∧
       δS ≫ Etale.baseChangeHomologyMap Λ sq n₁ E.X₁ =
         Etale.baseChangeHomologyMap Λ sq n₀ E.X₃ ≫ δT :=
-  sorry
+  -- The concrete functors are only passed as data with `rfl` equations: unifying them with
+  -- the abstract composites directly makes the kernel unfold the derived functors.
+  Functor.exists_homologySequenceδ_whiskerRight
+    (DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0)
+    (DerivedCategory.Plus.singleFunctor _ 0)
+    (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq)
+    (DerivedCategory.Plus.homologyFunctor _) (fun _ ↦ rfl) (Etale.baseChangeSourceFunctor Λ p g)
+    (Etale.baseChangeTargetFunctor Λ e h) (Etale.baseChangeHomologyNatTrans Λ sq) rfl E _
+    hE.singleTrianglePlus_distinguished n₀ n₁ hn
 
 /-- Blueprint `sk-prop-injectivity` (1): Injectivity of the critical map.
 
