@@ -3,6 +3,7 @@ module  -- shake: keep-all --deprecated_module: ignore
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+public import WeilConjectures.Algebra.Central.ReducedNorm
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
@@ -372,6 +373,7 @@ public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
 public import WeilConjectures.FieldTheory.Cr
+public import WeilConjectures.FieldTheory.Tsen
 public import WeilConjectures.FourierTransform.AffineSpace
 public import WeilConjectures.FourierTransform.ArtinSchreier
 public import WeilConjectures.FourierTransform.Defs
@@ -479,6 +481,8 @@ public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
+public import WeilConjectures.Mathlib.Algebra.Central.Matrix
+public import WeilConjectures.Mathlib.Algebra.Central.TensorProduct
 public import WeilConjectures.Mathlib.Algebra.CharP.Algebra
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
 public import WeilConjectures.Mathlib.Algebra.DirectSum.LinearMap
@@ -712,6 +716,7 @@ public import WeilConjectures.Mathlib.Data.Fin.Rev
 public import WeilConjectures.Mathlib.Data.Set.Image
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Polynomial
+public import WeilConjectures.Mathlib.FieldTheory.Galois.Infinite
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.GroupTheory.Exponent
@@ -786,8 +791,10 @@ public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Idempotent
 public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Lemmas
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
+public import WeilConjectures.Mathlib.RingTheory.MatrixAlgebra
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Ideal
+public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Localization
 public import WeilConjectures.Mathlib.RingTheory.Nilpotent.GeometricallyReduced
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
