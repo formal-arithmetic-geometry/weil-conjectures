@@ -26,7 +26,9 @@ blueprint `lemma:nagata-dense-affine-cover-exists`):
   previous lemma by quasi-compactness.
 
 We also record `AlgebraicGeometry.sigmaSpec_comp_Spec_map_algebraMap`: under
-`∐_ι Spec k ≅ Spec (ι → k)` the fold map to `Spec k` is `Spec` of the diagonal.
+`∐_ι Spec k ≅ Spec (ι → k)` the fold map to `Spec k` is `Spec` of the diagonal, and
+`AlgebraicGeometry.Scheme.isEmpty_of_subsingleton_Γ`: a scheme whose ring of global sections is
+zero is empty.
 -/
 
 @[expose] public section
@@ -191,5 +193,14 @@ lemma sigmaSpec_comp_Spec_map_algebraMap (ι : Type u) (k : Type u) [CommRing k]
   refine Sigma.hom_ext _ _ fun i ↦ ?_
   rw [Sigma.ι_desc, ι_sigmaSpec_assoc, ← Spec.map_comp, ← Spec.map_id]
   rfl
+
+/-- A scheme whose ring of global sections is the zero ring is empty: at a point `p` the germ map
+`Γ(X, ⊤) → 𝒪_{X,p}` would send `0 = 1` to `0 = 1` in the nonzero local ring `𝒪_{X,p}`. This is
+the converse of the instance `Subsingleton Γ(X, U)` for empty `X`. -/
+lemma Scheme.isEmpty_of_subsingleton_Γ (h : Subsingleton Γ(X, ⊤)) : IsEmpty X :=
+  ⟨fun p ↦ by
+    have := congrArg (X.presheaf.germ ⊤ p trivial).hom (Subsingleton.elim (0 : Γ(X, ⊤)) 1)
+    rw [map_zero, map_one] at this
+    exact zero_ne_one this⟩
 
 end AlgebraicGeometry
