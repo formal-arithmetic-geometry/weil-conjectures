@@ -27,7 +27,9 @@ We record:
 - `AlgebraicGeometry.Scheme.Hom.surjective_resLE_appTop` — surjectivity of `appLE` implies
   surjectivity of the induced map on global sections of the restrictions;
 - `AlgebraicGeometry.exists_opens_restrict_preimage` — a morphism defined on an open subscheme
-  restricts to the open subscheme of points mapping into a given open of the target.
+  restricts to the open subscheme of points mapping into a given open of the target;
+- `AlgebraicGeometry.Scheme.Opens.isIso_ι_of_eq_top` — the inclusion of the open `⊤` is an
+  isomorphism.
 -/
 
 @[expose] public section
@@ -153,5 +155,10 @@ lemma exists_opens_restrict_preimage {X Z : Scheme.{u}} (W₁ : X.Opens)
   · rw [hhom, Category.assoc, Category.assoc, morphismRestrict_ι]
   · intro x
     exact Scheme.Opens.mem_ι_image_iff W₁
+
+/-- The inclusion of an open subscheme which is all of `X` is an isomorphism. -/
+lemma Scheme.Opens.isIso_ι_of_eq_top {U : X.Opens} (h : U = ⊤) : IsIso U.ι := by
+  subst h
+  exact ⟨⟨X.topIso.inv, X.ι_toIso_inv, X.toIso_inv_ι⟩⟩
 
 end AlgebraicGeometry
