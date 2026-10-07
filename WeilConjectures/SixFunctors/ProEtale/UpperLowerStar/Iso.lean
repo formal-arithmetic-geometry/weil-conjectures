@@ -46,7 +46,7 @@ pushforwards along the inverse Frobenius.
 
 universe u' u
 
-open CategoryTheory Limits
+open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry
 
@@ -65,6 +65,47 @@ omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 @[simp]
 lemma lowerStarCongr_rfl {Z Y : Scheme.{u}} {g : Z ⟶ Y} :
     lowerStarCongr A (rfl : g = g) = Iso.refl _ :=
+  rfl
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- `g_*` acts on morphisms by whiskering along the opposite of base change; the form of
+`ProEtale.lowerStar_map_hom_app` at an object of the opposite site. -/
+lemma lowerStar_map_hom_app' {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+    {G G' : Sheaf (ProEt.topology Z) A} (φ : G ⟶ G') (V : Y.ProEtᵒᵖ) :
+    ((g)_*[A].map φ).hom.app V =
+      φ.hom.app (op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj V.unop)) :=
+  rfl
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The components of the composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` are the
+restriction maps along the pullback pasting isomorphisms. -/
+lemma lowerStarComp_hom_app_hom_app {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (G : Sheaf (ProEt.topology T) A) (V : R.ProEtᵒᵖ) :
+    ((lowerStarComp A h₁ h₂).hom.app G).hom.app V =
+      G.obj.map ((MorphismProperty.Over.pullbackComp h₁ h₂).hom.app V.unop).op := by
+  simp only [lowerStarComp, Functor.sheafPushforwardContinuousComp']
+  exact Category.id_comp _
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+lemma lowerStarComp_inv_app_hom_app {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (G : Sheaf (ProEt.topology T) A) (V : R.ProEtᵒᵖ) :
+    ((lowerStarComp A h₁ h₂).inv.app G).hom.app V =
+      G.obj.map ((MorphismProperty.Over.pullbackComp h₁ h₂).inv.app V.unop).op := by
+  simp only [lowerStarComp, Functor.sheafPushforwardContinuousComp']
+  exact Category.comp_id _
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The components of `g_* ≅ g'_*` for `g = g'` are the restriction maps along the canonical
+isomorphisms `V ×_{Y,g'} Z ≅ V ×_{Y,g} Z`. -/
+lemma lowerStarCongr_hom_app_hom_app {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g')
+    (G : Sheaf (ProEt.topology Z) A) (V : Y.ProEtᵒᵖ) :
+    ((lowerStarCongr A h).hom.app G).hom.app V =
+      G.obj.map ((MorphismProperty.Over.pullbackCongr h).inv.app V.unop).op := by
+  subst h
+  simp only [lowerStarCongr_rfl, Iso.refl_hom, NatTrans.id_app]
+  rw [show (MorphismProperty.Over.pullbackCongr (rfl : g = g)).inv.app V.unop = 𝟙 _ from
+    MorphismProperty.Over.Hom.ext (by simp [MorphismProperty.Over.pullbackCongr]; rfl), op_id,
+    G.obj.map_id]
   rfl
 
 /-- The pullbacks along equal morphisms are isomorphic. -/

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Topology.Connected.LocallyConnected
 public import Mathlib.Topology.NoetherianSpace
 public import Mathlib.Topology.Separation.Connected
 
@@ -19,6 +20,9 @@ Likewise a point lying in a unique irreducible component has a preirreducible op
 neighbourhood (`TopologicalSpace.NoetherianSpace.exists_isOpen_isPreirreducible`), and if the
 irreducible components are pairwise disjoint, they are the connected components
 (`TopologicalSpace.NoetherianSpace.connectedComponent_eq_irreducibleComponent`).
+
+The same argument applied to the open subspaces shows that a noetherian space is locally
+connected (`TopologicalSpace.NoetherianSpace.locallyConnectedSpace`).
 -/
 
 @[expose] public section
@@ -131,5 +135,13 @@ theorem connectedComponent_eq_irreducibleComponent
   exact (hclopen.connectedComponent_subset mem_irreducibleComponent).antisymm
     (isIrreducible_irreducibleComponent.isPreirreducible.isPreconnected.subset_connectedComponent
       mem_irreducibleComponent)
+
+/-- A noetherian space is locally connected: the connected components of its open subsets, which
+are again noetherian, are open. -/
+instance (priority := 100) locallyConnectedSpace : LocallyConnectedSpace α := by
+  rw [locallyConnectedSpace_iff_connectedComponentIn_open]
+  intro F hF x hx
+  rw [connectedComponentIn_eq_image hx]
+  exact hF.isOpenMap_subtype_val _ (isOpen_connectedComponent _)
 
 end TopologicalSpace.NoetherianSpace

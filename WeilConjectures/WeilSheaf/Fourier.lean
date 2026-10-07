@@ -42,10 +42,13 @@ derived on the category of pro-étale Weil sheaves (`AlgebraicGeometry.WeilCompl
 
 ## Implementation notes
 
-The compatibility of the translation action with the Weil structure of `AS_* ℚ̄_ℓ`, the
-compatibility of the internal hom of pro-étale Weil sheaves with morphisms in the second
-variable, and the constructibility statements which make the transforms land in Weil complexes
-are stated as separate lemmas with `sorry`.
+The compatibility of the translation action with the Weil structure of `AS_* ℚ̄_ℓ` is the
+general `AlgebraicGeometry.ProEtale.lowerStar_map_deckAction_comp_lowerStarExchange`, the
+translations commuting with the geometric Frobenius. That `ℒ_ψ` is lisse, the compatibility of
+the internal hom of pro-étale Weil sheaves with morphisms in the second variable, and the
+constructibility statements which make the transforms land in Weil complexes are stated as
+separate lemmas with `sorry`; for the tensor product with a lisse sheaf the latter is reduced by
+dévissage to the case of a single Weil sheaf.
 -/
 
 @[expose] public section
@@ -161,6 +164,15 @@ lemma affineLine.geometricTranslation_comp_artinSchreierMap (c : k₀) :
       affineLine.translation_comp_artinSchreierMap])
     (by simp [affineLine.geometricTranslationIso, affineLine.geometricArtinSchreierMap])
 
+/-- The translations of the geometric affine line commute with its geometric Frobenius: they
+are base changes of translations defined over `k₀`. -/
+lemma affineLine.geometricTranslation_comp_geometricGaloisFrobenius (c : k₀) :
+    (affineLine.geometricTranslationIso k₀ c).hom ≫
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom =
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ≫
+        (affineLine.geometricTranslationIso k₀ c).hom :=
+  Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius _ (comp_over _ _)
+
 end AffineLine
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
@@ -237,7 +249,20 @@ lemma artinSchreierTranslationSheafHom_comm (c : k₀) :
       (WeilSheaf.artinSchreierPushforward k₀ l).obj.obj.str =
     (WeilSheaf.artinSchreierPushforward k₀ l).obj.obj.str ≫
       artinSchreierTranslationSheafHom l c :=
-  sorry
+  ProEtale.lowerStar_map_deckAction_comp_lowerStarExchange l
+    (affineLine.geometricArtinSchreierMap k₀)
+    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+    (affineLine.geometricTranslationIso k₀ c)
+    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
+    (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)
+    (affineLine.geometricTranslation_comp_geometricGaloisFrobenius k₀ c)
+    ((WeilSheaf.lowerStar (affineLine.artinSchreierMap k₀)).obj
+      (WeilSheaf.adicConstant k₀ l (affineLine k₀))).obj.obj.str
+    (by
+      rw [← Endofunctor.IsoAlgebra.str_hom, WeilSheaf.lowerStar_obj_obj_str]
+      simp only [Iso.trans_hom, Functor.mapIso_hom, Endofunctor.IsoAlgebra.str_hom]
+      rfl)
 
 variable (l) in
 /-- The action of the translation `σ_c : x ↦ x + c` on `AS_* ℚ̄_ℓ`, as an endomorphism of Weil
@@ -266,11 +291,20 @@ noncomputable def artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     WeilSheaf k₀ l (affineLine k₀) :=
   (WeilSheaf.upperStar (affineLine.smul k₀ a)).obj (image (WeilSheaf.artinSchreierIdempotent ψ))
 
-/-- The Artin–Schreier sheaves are lisse: `ℒ_ψ` is a direct summand of the finite étale
-pushforward `AS_* ℚ̄_ℓ`, which is lisse, and pullback preserves lisse sheaves. -/
+/-- The `ψ`-isotypic component `ℒ_ψ` of `AS_* ℚ̄_ℓ`, the image of the projector `e_ψ`, is lisse
+(of rank one): after pullback along the finite étale Galois cover `AS` itself, `AS_* ℚ̄_ℓ`
+becomes `⨁_{c ∈ k₀} ℚ̄_ℓ` with `k₀` permuting the summands by translation, and the image of
+`e_ψ` is the line spanned by `∑_c ψ(c) δ_c`. -/
+theorem WeilSheaf.isLisse_image_artinSchreierIdempotent (ψ : AddChar k₀ (PadicAlgCl l)) :
+    (image (WeilSheaf.artinSchreierIdempotent ψ)).IsLisse :=
+  sorry
+
+/-- The Artin–Schreier sheaves are lisse: `ℒ_ψ` is lisse
+(`AlgebraicGeometry.WeilSheaf.isLisse_image_artinSchreierIdempotent`), and pullback preserves
+lisse sheaves. -/
 theorem isLisse_artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     (artinSchreier ψ a).IsLisse :=
-  sorry
+  ProEtale.IsAdicLisseSheaf.upperStar _ (WeilSheaf.isLisse_image_artinSchreierIdempotent ψ)
 
 end ArtinSchreier
 
@@ -335,16 +369,34 @@ instance (A : ProEtaleWeilSheaf k₀ l X) : (ProEtaleWeilSheaf.ihomFunctor k₀ 
   have := (ihom.adjunction A.carrier).right_adjoint_additive
   ⟨ObjectProperty.hom_ext _ (Algebra.Hom.ext (CategoryTheory.ihom A.carrier).map_add)⟩
 
+/-- **Finiteness for the tensor product with a lisse Weil sheaf, on a single Weil sheaf.** For
+a lisse Weil sheaf `F` and a Weil sheaf `G` placed in degree `0`, the right derived functor of
+`[F, -]` on pro-étale Weil sheaves gives a Weil complex: it is the tensor product `F^∨ ⊗ G`
+placed in degree `0`, the higher `Ext` sheaves out of the locally free `F` vanishing. -/
+theorem WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor_singleFunctor
+    (F : WeilSheaf k₀ l X) (hF : F.IsLisse) (G : ProEtaleWeilSheaf k₀ l X)
+    (hG : WeilSheaf.objectProperty k₀ l X G) :
+    WeilComplex.objectProperty k₀ l X
+      ((ProEtaleWeilSheaf.ihomFunctor k₀ l X F.obj).rightDerivedFunctor.obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) :=
+  sorry
+
 /-- **Finiteness for the tensor product with a lisse Weil sheaf.** For a lisse Weil sheaf `F`,
 the right derived functor of `[F, -]` on pro-étale Weil sheaves carries Weil complexes to Weil
-complexes: on complexes with constructible cohomology it is the tensor product with the lisse
-dual `F^∨`, which is exact and preserves constructibility. -/
+complexes: by dévissage along the truncation triangles (`DerivedCategory.prop_of_bounded`), the
+derived functor being triangulated, this reduces to the case of a single Weil sheaf,
+`AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor_singleFunctor`. -/
 theorem WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor (F : WeilSheaf k₀ l X)
     (hF : F.IsLisse) (K : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l X))
     (hK : WeilComplex.objectProperty k₀ l X K) :
     WeilComplex.objectProperty k₀ l X
       ((ProEtaleWeilSheaf.ihomFunctor k₀ l X F.obj).rightDerivedFunctor.obj K) :=
-  sorry
+  _root_.DerivedCategory.prop_of_bounded
+    ((WeilComplex.objectProperty k₀ l X).inverseImage
+      (ProEtaleWeilSheaf.ihomFunctor k₀ l X F.obj).rightDerivedFunctor)
+    (WeilSheaf.objectProperty k₀ l X)
+    (fun G hG ↦ WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor_singleFunctor F hF G hG)
+    K hK.1 hK.2
 
 /-- The derived internal hom `R[F, -]` out of a lisse Weil sheaf `F`, on Weil complexes. -/
 noncomputable def WeilComplex.ihomLisse (F : WeilSheaf k₀ l X) (hF : F.IsLisse) :

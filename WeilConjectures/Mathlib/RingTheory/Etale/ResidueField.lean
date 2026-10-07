@@ -10,6 +10,9 @@ public import Mathlib.RingTheory.Etale.StandardEtale
 public import Mathlib.RingTheory.Localization.Integral
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Polynomial.IntegralNormalization
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Unramified.Field
+public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 
 /-!
 # Étale algebras realizing finite separable residue field extensions
@@ -25,6 +28,8 @@ over `p` whose residue field is (compatibly) isomorphic to `L`.
   a primitive element `β` of `L / K` which is a simple root of `G`.
 - `Algebra.exists_etale_residueField_equiv`: the étale algebra realizing `L` as a residue field;
   it is the standard étale algebra `(A[X]/(F))[1/F']` for a monic lift `F` of `G`.
+- `MvPolynomial.exists_etale_comap_eq`: a prime of a polynomial ring `R[X₁, …, Xₙ]` with finite
+  separable residue field over `R` is the preimage of a prime of an étale `R`-algebra.
 
 ## Implementation notes
 
@@ -193,3 +198,76 @@ theorem exists_etale_residueField_equiv
 end Etale
 
 end Algebra
+
+open MvPolynomial in
+/-- Let `q` be a prime of `R[Xᵢ : i ∈ n]`, `n` finite, whose residue field is finite separable
+over the residue field of `p = q ∩ R`. Then there are an étale `R`-algebra `B`, an `R`-algebra
+map `ψ : R[X] → B` and a prime `Q` of `B` with `ψ⁻¹ Q = q`. -/
+theorem MvPolynomial.exists_etale_comap_eq {R : Type u} [CommRing R] {n : Type*} [Finite n]
+    (q : Ideal (MvPolynomial n R)) [q.IsPrime] (p : Ideal R) [p.IsPrime] (hp : p = q.comap C)
+    (hq : (Ideal.ResidueField.map p q C hp).Etale) :
+    ∃ (B : Type u) (_ : CommRing B) (_ : Algebra R B) (_ : Algebra.Etale R B)
+      (ψ : MvPolynomial n R →ₐ[R] B) (Q : Ideal B) (_ : Q.IsPrime), Q.comap ψ = q := by
+  classical
+  have := Fintype.ofFinite n
+  let L := q.ResidueField
+  algebraize [Ideal.ResidueField.map p q C hp]
+  have : Algebra.FinitePresentation p.ResidueField L := Algebra.Etale.finitePresentation
+  have : Algebra.EssFiniteType p.ResidueField L := .of_finiteType _ _
+  have : Algebra.IsSeparable p.ResidueField L :=
+    (Algebra.FormallyEtale.iff_isSeparable _ _).mp inferInstance
+  have : Module.Finite p.ResidueField L := Algebra.FormallyUnramified.finite_of_free _ _
+  obtain ⟨A', _, _, _, P, _, hP, e, he⟩ := Algebra.exists_etale_residueField_equiv p L
+  -- the coordinates of `q` as fractions in `κ(P)`
+  have hfrac (m : P.ResidueField) : ∃ a b : A', b ∉ P ∧
+      algebraMap A' P.ResidueField b * m = algebraMap A' P.ResidueField a := by
+    obtain ⟨⟨a, b⟩, rfl⟩ := IsLocalization.mk'_surjective (nonZeroDivisors (A' ⧸ P)) m
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective a
+    obtain ⟨b, hb⟩ := b
+    obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective b
+    refine ⟨a, b, fun h ↦ ?_, ?_⟩
+    · exact (mem_nonZeroDivisors_iff_ne_zero.mp hb) (Ideal.Quotient.eq_zero_iff_mem.mpr h)
+    · rw [IsScalarTower.algebraMap_apply A' (A' ⧸ P), IsScalarTower.algebraMap_apply A' (A' ⧸ P)]
+      exact IsLocalization.mk'_spec' P.ResidueField (Ideal.Quotient.mk P a)
+        ⟨Ideal.Quotient.mk P b, hb⟩
+  choose a b hb hab using fun i : n ↦ hfrac (e.symm (algebraMap (MvPolynomial n R) L (X i)))
+  set t := ∏ i, b i
+  have ht : t ∉ P := by
+    simpa [t, Ideal.IsPrime.prod_mem_iff] using hb
+  let B := Localization.Away t
+  have hu (i : n) : IsUnit (algebraMap A' B (b i)) :=
+    isUnit_of_dvd_unit (map_dvd _ (Finset.dvd_prod_of_mem _ (Finset.mem_univ i)))
+      (IsLocalization.Away.algebraMap_isUnit t)
+  let ψ : MvPolynomial n R →ₐ[R] B :=
+    aeval fun i ↦ algebraMap A' B (a i) * ↑(hu i).unit⁻¹
+  have htP : IsUnit (algebraMap A' P.ResidueField t) :=
+    isUnit_iff_ne_zero.mpr (by rwa [ne_eq, Ideal.algebraMap_residueField_eq_zero])
+  let ρ : B →+* P.ResidueField := IsLocalization.Away.lift t htP
+  have hρ (x : A') : ρ (algebraMap A' B x) = algebraMap A' P.ResidueField x :=
+    IsLocalization.Away.lift_eq t htP x
+  have key : e.toRingHom.comp (ρ.comp ψ.toRingHom) = algebraMap (MvPolynomial n R) L := by
+    refine MvPolynomial.ringHom_ext (fun r ↦ ?_) (fun i ↦ ?_)
+    · have h1 : ψ (C r) = algebraMap A' B (algebraMap R A' r) := by
+        rw [aeval_C, ← IsScalarTower.algebraMap_apply]
+      change e (ρ (ψ (C r))) = _
+      rw [h1, hρ, ← Ideal.ResidueField.map_algebraMap p P (algebraMap R A') hP, he]
+      exact Ideal.ResidueField.map_algebraMap p q C hp r
+    · have hbP : algebraMap A' P.ResidueField (b i) ≠ 0 := by
+        rw [ne_eq, Ideal.algebraMap_residueField_eq_zero]
+        exact hb i
+      have h2 : ρ ↑(hu i).unit⁻¹ = (algebraMap A' P.ResidueField (b i))⁻¹ :=
+        eq_inv_of_mul_eq_one_left (by
+          have h := congrArg ρ (hu i).unit.inv_mul
+          rwa [map_mul, map_one, IsUnit.unit_spec, hρ] at h)
+      have h3 : ρ (ψ (X i)) = e.symm (algebraMap (MvPolynomial n R) L (X i)) := by
+        rw [aeval_X, map_mul, hρ, h2, ← hab i]
+        field_simp
+      change e (ρ (ψ (X i))) = _
+      rw [h3, RingEquiv.apply_symm_apply]
+  refine ⟨B, inferInstance, inferInstance, inferInstance, ψ, RingHom.ker ρ,
+    RingHom.ker_isPrime ρ, ?_⟩
+  rw [← Ideal.ker_algebraMap_residueField q, ← key]
+  ext y
+  rw [Ideal.mem_comap, RingHom.mem_ker, RingHom.mem_ker]
+  change _ ↔ e (ρ (ψ y)) = 0
+  rw [map_eq_zero_iff e e.injective]

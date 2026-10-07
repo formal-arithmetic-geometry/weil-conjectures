@@ -84,7 +84,7 @@ image `WeilSheaf.higherLowerStar j i`, the cohomology sheaf `𝓗ⁱ` (indexed b
 `i : ℕ` coerced) of the derived pushforward `Rj_*` of a Weil sheaf placed in degree zero. -/
 noncomputable abbrev higherDirectImage (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     [j.IsOver (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    (i : ℕ) :
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (i : ℕ) :
     WeilSheaf k₀ l U ⥤ WeilSheaf k₀ l X :=
   higherLowerStar j i
 
