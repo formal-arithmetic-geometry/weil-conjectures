@@ -50,6 +50,9 @@ complexes, where the unit is given degreewise by the unit of `adj`.
   transformations `u : LA ⟶ LB` and `l : RB ⟶ RA` that are conjugate to each other, in the
   form of the unit relation `adjA.unit ≫ RA(u) = adjB.unit ≫ l`, then the same relation
   holds for the induced adjunctions on the bounded below homotopy categories.
+- `CategoryTheory.NatTrans.mapHomotopyCategoryPlus_mateEquiv_app`: the mate of a square,
+  induced on the bounded below homotopy categories, is the mate of the induced square with
+  respect to the induced adjunctions.
 - `CategoryTheory.Adjunction.mapHomotopyCategoryPlus_unit_app_comp_id`: the special case
   `adjB = Adjunction.id` of the previous statement, for an adjunction `L ⊣ R` of
   endofunctors and isomorphisms `L ≅ 𝟭`, `R ≅ 𝟭`.

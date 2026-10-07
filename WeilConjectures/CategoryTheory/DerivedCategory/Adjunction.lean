@@ -65,6 +65,9 @@ file lifts `adj` through the stages of the derived formalism:
   categories, using the identification of the left derived functor of the exact functor
   `f` with `f.mapDerivedCategory` and the compatibility of `g.rightDerivedFunctorPlus`
   with the unbounded right derived functor.
+* `Adjunction.derivedAdjunctionPlus_eq_derivedPlus`: the bounded below derived adjunction
+  agrees with `Adjunction.derivedPlus`, constructed directly on the bounded below derived
+  categories (`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction`).
 * `Adjunction.mapDerivedCategoryAdjunction` and
   `Adjunction.mapDerivedCategoryPlusAdjunction`: for `f` *and* `g` exact, the levelwise
   adjunctions `f.mapDerivedCategory ⊣ g.mapDerivedCategory` on the unbounded derived

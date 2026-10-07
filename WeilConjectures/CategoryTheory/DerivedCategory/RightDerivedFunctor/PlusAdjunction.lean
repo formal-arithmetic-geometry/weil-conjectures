@@ -54,6 +54,9 @@ of the four comparison isomorphisms.
   `LB ⊣ RB` between the same pair of categories come with isomorphisms `u : LA ≅ LB` and
   `l : RB ≅ RA` corresponding to each other under conjugation, then the same relation
   holds for the bounded below derived adjunctions.
+- `CategoryTheory.Adjunction.derivedPlus_mateEquiv_app_fac`: the mate of a square of derived
+  functors with respect to the bounded below derived adjunctions is computed on complexes by the
+  mate of the underived square.
 
 ## The proof
 

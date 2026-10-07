@@ -47,6 +47,10 @@ is the vertical pasting of cartesian squares on `e` and on `f`
 (blueprint: `lemma:weil-pbc-derived-exchange-coherence`, vertical pasting;
 `lemma:weil-pbc-composition`, formal part)
 
+For the identity square on `f` the derived base change map is the identity, modulo the identity
+isomorphisms of the derived pullbacks (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id`);
+with the horizontal pasting law this is blueprint `sbc-lem-identity-and-base-change-composition`.
+
 -/
 
 @[expose] public section
@@ -389,6 +393,103 @@ lemma Etale.derivedBaseChangeMapPlus_paste_horiz (sq₁ : CommSq g' f' f g)
   simp only [← reassoc_of% hη, hpaste, Functor.map_comp, Category.assoc, reassoc_of% hc2]
 
 end Horizontal
+
+section Identity
+
+variable {X Y : Scheme.{u}}
+
+omit [HasSmallSiteSheafify A] in
+/-- The composition isomorphism `AlgebraicGeometry.Etale.upperStarComp` along two equal
+diagonals `d = d'` agree up to the induced identification of the pullbacks. -/
+lemma Etale.upperStarComp_congr {T S R : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) (d d' : T ⟶ R)
+    (hd : d = h₁ ≫ h₂) (hd' : d' = h₁ ≫ h₂) (h : d = d') :
+    Etale.upperStarComp A h₁ h₂ d hd =
+      eqToIso (by rw [h]) ≪≫ Etale.upperStarComp A h₁ h₂ d' hd' := by
+  subst h
+  simp
+
+omit [HasSmallSiteSheafify A] in
+/-- The square isomorphism of the identity square on `f` is built from the identity
+isomorphisms `(𝟙 _)^* ≅ 𝟭`. -/
+lemma Etale.squareUpperStarIso_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 Y)) :
+    Etale.squareUpperStarIso A sq =
+      Functor.isoWhiskerRight (Etale.upperStarId A Y) (f)^*[A] ≪≫ Functor.leftUnitor _ ≪≫
+        (Functor.rightUnitor _).symm ≪≫
+          Functor.isoWhiskerLeft (f)^*[A] (Etale.upperStarId A X).symm := by
+  rw [Etale.squareUpperStarIso, Etale.upperStarComp_congr A f (𝟙 Y) _ f sq.w
+      (Category.comp_id f).symm (Category.id_comp f),
+    Etale.upperStarComp_congr A (𝟙 X) f _ f rfl (Category.id_comp f).symm (Category.id_comp f),
+    Etale.upperStarComp_id_left, Etale.upperStarComp_id_right]
+  ext M
+  simp
+
+omit [HasSmallSiteSheafify A] in
+/-- **The underived base change map of the identity square** is the identity, modulo the
+identity isomorphisms `(𝟙 _)^* ≅ 𝟭` of the pullbacks. -/
+lemma Etale.baseChangeMap_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 Y)) :
+    Etale.baseChangeMap A sq =
+      Functor.whiskerLeft (f)_*[A] (Etale.upperStarId A Y).hom ≫ (Functor.rightUnitor _).hom ≫
+        (Functor.leftUnitor _).inv ≫ Functor.whiskerRight (Etale.upperStarId A X).inv (f)_*[A] := by
+  ext F : 2
+  simp only [Etale.baseChangeMap, Etale.squareUpperStarIso_id, mateEquiv_apply]
+  simp only [Functor.comp_obj, Functor.id_obj, NatTrans.comp_app, Functor.rightUnitor_inv_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.whiskerRight_app, Iso.trans_hom, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Iso.symm_hom, Functor.leftUnitor_hom_app,
+    Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app, Category.id_comp,
+    Category.comp_id, Functor.map_comp, Category.assoc]
+  have h₁ := (Etale.upperStarLowerStarAdjunction A f).unit.naturality
+    ((Etale.upperStarId A Y).hom.app (((f)_*[A]).obj F))
+  have h₂ := (Etale.upperStarId A X).inv.naturality
+    ((Etale.upperStarLowerStarAdjunction A f).counit.app F)
+  simp only [Functor.comp_obj, Functor.id_obj, Functor.comp_map, Functor.id_map] at h₁ h₂
+  rw [← reassoc_of% h₁, Functor.comp_map, ← Functor.map_comp, ← h₂,
+    Functor.map_comp, Adjunction.right_triangle_components_assoc]
+
+/-- Blueprint `sbc-lem-identity-and-base-change-composition` (identity part): **the derived
+exchange morphism of the identity square is the identity**, modulo the identity isomorphisms
+`D(𝟙 _)^*⁺ ≅ 𝟭` of the derived pullbacks. The composition part of that blueprint lemma is the
+horizontal pasting law `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz`. -/
+lemma Etale.derivedBaseChangeMapPlus_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 Y)) :
+    Etale.derivedBaseChangeMapPlus A sq =
+      Functor.whiskerLeft (f)_*[A].rightDerivedFunctorPlus (Etale.upperStarIdDerivedPlus A Y).hom ≫
+        (Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv ≫
+        Functor.whiskerRight (Etale.upperStarIdDerivedPlus A X).inv
+          (f)_*[A].rightDerivedFunctorPlus := by
+  symm
+  refine Etale.derivedBaseChangeMapPlus_ext A sq _ fun K => ?_
+  rw [Etale.baseChangeMap_id]
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app, Category.id_comp,
+    NatTrans.mapHomotopyCategoryPlus_comp, NatTrans.mapHomotopyCategoryPlus_rightUnitor_hom_app,
+    NatTrans.mapHomotopyCategoryPlus_leftUnitor_inv_app,
+    NatTrans.mapHomotopyCategoryPlus_whiskerLeft_app,
+    NatTrans.mapHomotopyCategoryPlus_whiskerRight_app, Functor.map_comp]
+  have n₁ := (Etale.upperStarIdDerivedPlus A Y).hom.naturality
+    ((f)_*[A].rightDerivedFunctorPlusUnit.app K)
+  have e₁ := Etale.upperStarIdDerivedPlus_hom_app A Y ((f)_*[A].mapHomotopyCategoryPlus.obj K)
+  have n₂ := (f)_*[A].rightDerivedFunctorPlusUnit.naturality
+    ((NatTrans.mapHomotopyCategoryPlus (Etale.upperStarId A X).inv).app K)
+  have e₂ : DerivedCategory.Plus.Qh.map
+        ((NatTrans.mapHomotopyCategoryPlus (Etale.upperStarId A X).inv).app K) ≫
+      ((𝟙 X)^*[A]).mapDerivedCategoryPlusFactorsh.inv.app K =
+      (Etale.upperStarIdDerivedPlus A X).inv.app (DerivedCategory.Plus.Qh.obj K) := by
+    rw [← cancel_epi ((Etale.upperStarIdDerivedPlus A X).hom.app (DerivedCategory.Plus.Qh.obj K)),
+      Iso.hom_inv_id_app,
+      Etale.upperStarIdDerivedPlus_hom_app, Category.assoc, ← Functor.map_comp_assoc,
+      ← NatTrans.comp_app, ← NatTrans.mapHomotopyCategoryPlus_comp, Iso.hom_inv_id,
+      NatTrans.mapHomotopyCategoryPlus_id, NatTrans.id_app, CategoryTheory.Functor.map_id,
+      Category.id_comp, Iso.hom_inv_id_app]
+    rfl
+  simp only [Functor.comp_obj, Functor.id_obj, Functor.comp_map, Functor.id_map] at n₁ n₂
+  rw [reassoc_of% n₁, e₁]
+  simp only [Category.assoc]
+  erw [reassoc_of% n₂]
+  rw [← Functor.map_comp, e₂]
+  erw [Category.id_comp]
+  rfl
+
+end Identity
 
 section Comp
 
