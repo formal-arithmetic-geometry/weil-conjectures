@@ -53,6 +53,9 @@ leading coefficient whenever that function is a numerical polynomial of degree a
   ample invertible module on a proper scheme is a polynomial of degree at most `dim X`.
 - `AlgebraicGeometry.Scheme.Hom.degree_eq_factorial_mul_coeff`: the degree is `g!` times the
   coefficient of `m^g` of the Hilbert polynomial.
+- `AlgebraicGeometry.Scheme.Hom.degree_tensorPow`: `deg_{M^{⊗ k}}(X) = k^g deg_M(X)`.
+- `AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple_of_nonempty`: an ample invertible module
+  on a nonempty proper scheme has positive degree.
 - `AlgebraicGeometry.Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one`: in dimension
   one the degree is the cohomological degree `χ(M) - χ(𝒪_X)`.
 - `AlgebraicGeometry.IsVeryAmple.isInvertible`: a very ample module is invertible.
@@ -268,6 +271,66 @@ theorem Scheme.Hom.exists_polynomial_degree_eq_factorial_mul_coeff (f : X ⟶ Sp
         P.coeff ((topologicalKrullDim X).unbotD 0).toNat := by
   obtain ⟨P, hP, hPM⟩ := f.exists_polynomial_hilbertFunction M hM
   exact ⟨P, hP, hPM, f.degree_eq_factorial_mul_coeff M hP hPM⟩
+
+/-- The Hilbert function only depends on the isomorphism class of the module. -/
+lemma Scheme.Hom.hilbertFunction_congr (f : X ⟶ Spec (.of K)) {M N : X.Modules} (e : M ≅ N) :
+    f.hilbertFunction M = f.hilbertFunction N := by
+  let : X.Over (Spec (.of K)) := ⟨f⟩
+  have h (m : ℕ) : Nonempty (M.tensorPow m ≅ N.tensorPow m) := by
+    induction m with
+    | zero => exact ⟨Iso.refl _⟩
+    | succ m ih => exact ⟨e ⊗ᵢ ih.some⟩
+  funext m
+  exact Scheme.Modules.eulerChar_congr K (h m).some
+
+/-- The degree only depends on the isomorphism class of the module. -/
+lemma Scheme.Hom.degree_congr (f : X ⟶ Spec (.of K)) {M N : X.Modules} (e : M ≅ N) :
+    f.degree M = f.degree N := by
+  rw [degree, degree, f.hilbertFunction_congr e]
+
+/-- The Hilbert function of `M^{⊗ k}` is `m ↦ χ(X, M^{⊗ k m})`. -/
+lemma Scheme.Hom.hilbertFunction_tensorPow (f : X ⟶ Spec (.of K)) (M : X.Modules) (k m : ℕ) :
+    f.hilbertFunction (M.tensorPow k) m = f.hilbertFunction M (k * m) := by
+  let : X.Over (Spec (.of K)) := ⟨f⟩
+  exact Scheme.Modules.eulerChar_congr K (M.tensorPowMulIso k m).symm
+
+/-- **The degree of a tensor power.** Let `X` be a proper scheme of dimension `g` over `K` and
+`M` an ample invertible `𝒪_X`-module. Then `deg_{M^{⊗ k}}(X) = k^g deg_M(X)`: if `P` is the
+Hilbert polynomial of `M`, then `m ↦ χ(X, M^{⊗ k m})` is given by the polynomial `P(k X)`, whose
+coefficient of `m^g` is `k^g` times that of `P`.
+
+This is a step of the proof of blueprint `sk-prop-av-isogeny`. -/
+theorem Scheme.Hom.degree_tensorPow (f : X ⟶ Spec (.of K)) [IsProper f] (M : X.Modules)
+    [M.IsInvertible] (hM : IsAmple f M) (k : ℕ) :
+    f.degree (M.tensorPow k) = k ^ ((topologicalKrullDim X).unbotD 0).toNat * f.degree M := by
+  have hcoeff (P : Polynomial ℚ) (n : ℕ) :
+      (P.comp (Polynomial.C (k : ℚ) * Polynomial.X)).coeff n = (k : ℚ) ^ n * P.coeff n := by
+    induction P using Polynomial.induction_on' with
+    | add p q hp hq =>
+      rw [Polynomial.add_comp, Polynomial.coeff_add, hp, hq, Polynomial.coeff_add, mul_add]
+    | monomial m a =>
+      simp only [Polynomial.monomial_comp, mul_pow, ← Polynomial.C_pow, ← mul_assoc,
+        ← Polynomial.C_mul, Polynomial.coeff_C_mul_X_pow, Polynomial.coeff_monomial]
+      split_ifs with h₁ h₂ h₂
+      · subst h₁; ring
+      · exact absurd h₁.symm h₂
+      · exact absurd h₂.symm h₁
+      · simp
+  obtain ⟨P, hP, hPM, hdeg⟩ := f.exists_polynomial_degree_eq_factorial_mul_coeff M hM
+  set g := ((topologicalKrullDim X).unbotD 0).toNat
+  have hQ : (P.comp (Polynomial.C (k : ℚ) * Polynomial.X)).natDegree ≤ g :=
+    Polynomial.natDegree_le_iff_coeff_eq_zero.2 fun n hn ↦ by
+      rw [hcoeff, Polynomial.coeff_eq_zero_of_natDegree_lt (hP.trans_lt hn), mul_zero]
+  have hQM (m : ℕ) : (P.comp (Polynomial.C (k : ℚ) * Polynomial.X)).eval (m : ℚ) =
+      f.hilbertFunction (M.tensorPow k) m := by
+    rw [f.hilbertFunction_tensorPow, ← hPM]
+    simp
+  have := f.degree_eq_factorial_mul_coeff (M.tensorPow k) hQ hQM
+  rw [hcoeff] at this
+  have h : (f.degree (M.tensorPow k) : ℚ) = (k : ℚ) ^ g * f.degree M := by
+    rw [this, hdeg]
+    ring
+  exact_mod_cast h
 
 namespace Scheme.Modules
 
@@ -511,6 +574,17 @@ theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)
   have := topologicalKrullDim_zero_of_discreteTopology X
   rw [hdim] at this
   exact absurd this (by decide)
+
+/-- **An ample module has positive degree.** Let `X` be a nonempty proper scheme over a field
+`K` and `M` an ample invertible `𝒪_X`-module. Then the degree of `X` with respect to `M` is
+positive.
+
+This is Stacks 0BEV, cited as classical input in the proof of blueprint `sk-prop-av-isogeny`
+(also `lem-sc-isogeny-facts`). -/
+@[stacks 0BEV]
+theorem Scheme.Hom.degree_pos_of_isAmple_of_nonempty (f : X ⟶ Spec (.of K)) [IsProper f]
+    [Nonempty X] (M : X.Modules) [M.IsInvertible] (hample : IsAmple f M) : 0 < f.degree M :=
+  sorry
 
 /-- **An ample module on a proper curve is not trivial.** Let `K` be algebraically closed, `X` a
 proper curve over `K` and `L` an ample invertible `𝒪_X`-module. Then `L ≇ 𝒪_X`: `L` has positive
