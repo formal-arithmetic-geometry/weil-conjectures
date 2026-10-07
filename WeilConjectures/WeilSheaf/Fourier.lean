@@ -84,12 +84,14 @@ noncomputable def affineLine.translation (c : k₀) : affineLine k₀ ⟶ affine
 instance (c : k₀) : (affineLine.translation k₀ c).IsOver (Spec (CommRingCat.of k₀)) :=
   ⟨AffineSpace.translation_over _⟩
 
+omit [Finite k₀] in
 lemma affineLine.translation_add (c d : k₀) :
     affineLine.translation k₀ (c + d) =
       affineLine.translation k₀ c ≫ affineLine.translation k₀ d := by
   simp only [affineLine.translation, map_add]
   exact AffineSpace.translation_add _ _
 
+omit [Finite k₀] in
 lemma affineLine.translation_zero : affineLine.translation k₀ 0 = 𝟙 _ := by
   simp only [affineLine.translation, map_zero]
   exact AffineSpace.translation_zero
@@ -166,13 +168,24 @@ section Scalar
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
+/-- The pushforward of pro-étale sheaves commutes with multiplication by a scalar. -/
+lemma ProEtale.lowerStar_map_smul_id {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+    (G : Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l))
+    (c : ULift.{u + 1} (PadicAlgCl l)) :
+    (g)_*[WeilCoefficients.{u} l].map (ObjectProperty.homMk (c • 𝟙 G.obj)) =
+      ObjectProperty.homMk (c • 𝟙 ((g)_*[WeilCoefficients.{u} l].obj G).obj) := by
+  ext : 3
+  rfl
+
 /-- Multiplication by a scalar `b ∈ ℚ̄_ℓ` commutes with the Weil structure of a Weil sheaf: the
 Frobenius pullback, a pushforward, is `ℚ̄_ℓ`-linear. -/
 lemma WeilSheaf.smul_comm_str (b : PadicAlgCl l) (F : WeilSheaf k₀ l X) :
     (WeilSheaf.frobeniusPullback k₀ l X).map
         (ObjectProperty.homMk (ULift.up b • 𝟙 F.obj.carrier.obj)) ≫ F.obj.obj.str =
-      F.obj.obj.str ≫ ObjectProperty.homMk (ULift.up b • 𝟙 F.obj.carrier.obj) :=
-  sorry
+      F.obj.obj.str ≫ ObjectProperty.homMk (ULift.up b • 𝟙 F.obj.carrier.obj) := by
+  rw [ProEtale.lowerStar_map_smul_id]
+  ext U : 3
+  simp
 
 /-- Multiplication by a scalar `b ∈ ℚ̄_ℓ`, as an endomorphism of a Weil sheaf. -/
 noncomputable def WeilSheaf.smulEnd (b : PadicAlgCl l) (F : WeilSheaf k₀ l X) : F ⟶ F :=

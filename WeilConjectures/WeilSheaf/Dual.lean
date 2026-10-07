@@ -128,8 +128,18 @@ lemma ProEtaleWeilSheaf.ihom_map_comm (A : ProEtaleWeilSheaf k₀ l X)
     (WeilSheaf.frobeniusPullback k₀ l X).map ((CategoryTheory.ihom A.carrier).map f.hom.f) ≫
         (ProEtaleWeilSheaf.ihom k₀ l X A B').obj.str =
       (ProEtaleWeilSheaf.ihom k₀ l X A B).obj.str ≫
-        (CategoryTheory.ihom A.carrier).map f.hom.f :=
-  sorry
+        (CategoryTheory.ihom A.carrier).map f.hom.f := by
+  simp only [ProEtaleWeilSheaf.ihom, IsoAlgebra.mk_obj, Iso.trans_hom, Iso.symm_hom,
+    Functor.mapIso_hom, Category.assoc, Functor.Monoidal.ihomObjIso, Iso.app_hom, Iso.app_inv,
+    IsoAlgebra.str_hom]
+  have h₁ := (Functor.Monoidal.commIhom (WeilSheaf.frobeniusPullback k₀ l X)
+    A.carrier).hom.naturality f.hom.f
+  have h₂ := ((MonoidalClosed.internalHom.mapIso A.str.op).inv).naturality
+    ((WeilSheaf.frobeniusPullback k₀ l X).map f.hom.f)
+  simp only [Functor.comp_map] at h₁ h₂
+  rw [reassoc_of% h₁]
+  erw [reassoc_of% h₂, ← Functor.map_comp, f.hom.h, Functor.map_comp]
+  rfl
 
 end Monoidal
 

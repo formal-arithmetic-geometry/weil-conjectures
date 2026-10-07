@@ -69,11 +69,13 @@ noncomputable def lowerStarEquivalence (e : X ≅ Y) :
       (lowerStarComp A e.hom e.inv).symm)
     (lowerStarComp A e.inv e.hom ≪≫ lowerStarCongr A e.inv_hom_id ≪≫ lowerStarId A Y)
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 @[simp]
 lemma lowerStarEquivalence_functor (e : X ≅ Y) :
     (lowerStarEquivalence A e).functor = (e.hom)_*[A] :=
   rfl
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 @[simp]
 lemma lowerStarEquivalence_inverse (e : X ≅ Y) :
     (lowerStarEquivalence A e).inverse = (e.inv)_*[A] :=

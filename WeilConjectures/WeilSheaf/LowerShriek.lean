@@ -91,6 +91,7 @@ noncomputable def ProEtaleWeilSheaf.rightDerivedLowerShriek (f : X ⟶ Y)
   (ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategory ⋙
     (ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor
 
+omit [Finite k₀] [X.Over (Spec (CommRingCat.of k₀))] in
 /-- A separated quasi-compact morphism locally of finite type of `k₀`-schemes, whose target is
 quasi-compact and quasi-separated over `k₀`, has a compactification (Nagata). -/
 lemma hasCompactification_of_over (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f]

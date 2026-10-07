@@ -75,6 +75,7 @@ noncomputable def WeilSheaf.adicConstant : WeilSheaf k₀ l X where
 theorem WeilSheaf.isLisse_adicConstant : (WeilSheaf.adicConstant k₀ l X).IsLisse :=
   isAdicLisseSheaf_adicConstantSheaf _
 
+omit [Finite k₀] in
 /-- The geometric fiber of a nonempty `k₀`-scheme is nonempty: it surjects onto the scheme,
 being the base change of the surjective morphism `Spec k̄ ⟶ Spec k₀`. -/
 lemma Scheme.Hom.nonempty_geometricFiber [Nonempty X] :
