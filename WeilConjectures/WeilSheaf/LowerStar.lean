@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.WeilSheaf.Category
 
 /-!
@@ -21,10 +22,14 @@ to Weil complexes on `Y`. This mirrors the pullbacks `WeilSheaf.upperStar` and
 
 That the results are again constructible, respectively bounded with constructible
 cohomology, is the finiteness theorem (SGA 4½, *Th. finitude*), for `φ` quasi-compact,
-quasi-separated and of finite type and `Y` locally of finite type over `k₀`; these are
-hypotheses of the definitions below, and the finiteness statements
-`AlgebraicGeometry.WeilSheaf.isAdicConstructibleSheaf_lowerStar` and
-`AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerStar` are stated with `sorry`.
+quasi-separated and of finite type and `Y` locally of finite type over `k₀`, and for the
+derived pushforward `Y` quasi-compact over `k₀`; these are hypotheses of the definitions below.
+The finiteness statement for Weil complexes,
+`AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerStar`, is reduced by dévissage
+to the case of a single Weil sheaf; that case,
+`AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerStar_singleFunctor`, and the
+underived `AlgebraicGeometry.WeilSheaf.isAdicConstructibleSheaf_lowerStar` are stated with
+`sorry`.
 
 ## Main definitions
 
@@ -79,19 +84,43 @@ theorem WeilSheaf.isAdicConstructibleSheaf_lowerStar (φ : X ⟶ Y)
     WeilSheaf.objectProperty k₀ l Y ((ProEtaleWeilSheaf.lowerStar k₀ l φ).obj F) :=
   sorry
 
+/-- **Finiteness for the derived pushforward of a Weil sheaf** (SGA 4½, *Th. finitude*): the
+derived pushforward of a Weil sheaf, placed in degree `0`, along a quasi-compact
+quasi-separated morphism of finite type, with target of finite type over `k₀`, is bounded with
+constructible cohomology. Boundedness uses that the target is quasi-compact: the cohomological
+dimension of `φ̄_*` is bounded by twice the dimension of the fibres, which is bounded on a
+quasi-compact target. -/
+theorem WeilComplex.objectProperty_rightDerivedLowerStar_singleFunctor (φ : X ⟶ Y)
+    [φ.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact φ] [QuasiSeparated φ]
+    [LocallyOfFiniteType φ] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    (F : ProEtaleWeilSheaf k₀ l X) (hF : WeilSheaf.objectProperty k₀ l X F) :
+    WeilComplex.objectProperty k₀ l Y ((ProEtaleWeilSheaf.lowerStar k₀ l φ).rightDerivedFunctor.obj
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) :=
+  sorry
+
 /-- **Finiteness for the derived pushforward of Weil complexes** (SGA 4½, *Th. finitude*): the
 derived pushforward of a Weil complex along a quasi-compact quasi-separated morphism of finite
-type with target locally of finite type over `k₀` is bounded with constructible cohomology;
-the cohomology sheaves are those of the derived pushforward of the underlying complex, the
-forgetful functor preserving K-injective complexes. -/
+type, with target of finite type over `k₀`, is a Weil complex. By dévissage along the truncation
+triangles (`DerivedCategory.prop_of_bounded`), the derived pushforward being triangulated, this
+reduces to the case of a single Weil sheaf,
+`AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerStar_singleFunctor`.
+
+The target is assumed quasi-compact: over `Y = ⊔ₙ Spec k₀` the pushforward of `ℚ̄_ℓ` along
+`⊔ₙ ℙⁿ ⟶ Y` has nonzero cohomology `H^{2n}(ℙⁿ)` in every even degree, so it is not bounded. -/
 theorem WeilComplex.objectProperty_rightDerivedLowerStar (φ : X ⟶ Y)
     [φ.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact φ] [QuasiSeparated φ]
     [LocallyOfFiniteType φ] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     (K : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l X))
     (hK : WeilComplex.objectProperty k₀ l X K) :
     WeilComplex.objectProperty k₀ l Y
       ((ProEtaleWeilSheaf.lowerStar k₀ l φ).rightDerivedFunctor.obj K) :=
-  sorry
+  _root_.DerivedCategory.prop_of_bounded
+    ((WeilComplex.objectProperty k₀ l Y).inverseImage
+      (ProEtaleWeilSheaf.lowerStar k₀ l φ).rightDerivedFunctor)
+    (WeilSheaf.objectProperty k₀ l X)
+    (fun F hF ↦ WeilComplex.objectProperty_rightDerivedLowerStar_singleFunctor φ F hF) K hK.1 hK.2
 
 /-- The pushforward `φ_*` of Weil sheaves along a quasi-compact quasi-separated morphism
 `φ : X ⟶ Y` of finite type of `k₀`-schemes, with `Y` locally of finite type over `k₀`: the
@@ -104,12 +133,13 @@ noncomputable def WeilSheaf.lowerStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingC
     (ProEtaleWeilSheaf.lowerStar k₀ l φ) (WeilSheaf.isAdicConstructibleSheaf_lowerStar φ)
 
 /-- The derived pushforward `Rφ_*` of Weil complexes along a quasi-compact quasi-separated
-morphism `φ : X ⟶ Y` of finite type of `k₀`-schemes, with `Y` locally of finite type over
-`k₀`: the total right derived functor of the pushforward of pro-étale Weil sheaves, restricted
+morphism `φ : X ⟶ Y` of finite type of `k₀`-schemes, with `Y` of finite type over `k₀`: the
+total right derived functor of the pushforward of pro-étale Weil sheaves, restricted
 to Weil complexes. -/
 noncomputable def WeilComplex.derivedLowerStar (φ : X ⟶ Y)
     [φ.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact φ] [QuasiSeparated φ]
-    [LocallyOfFiniteType φ] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] :
+    [LocallyOfFiniteType φ] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] :
     WeilComplex k₀ l X ⥤ WeilComplex k₀ l Y :=
   (WeilComplex.objectProperty k₀ l X).liftFullSubcategory (WeilComplex.objectProperty k₀ l Y)
     (ProEtaleWeilSheaf.lowerStar k₀ l φ).rightDerivedFunctor
@@ -120,7 +150,8 @@ noncomputable def WeilComplex.derivedLowerStar (φ : X ⟶ Y)
 derived pushforward `Rφ_*` of a Weil sheaf placed in degree zero. -/
 noncomputable def WeilSheaf.higherLowerStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
     [QuasiCompact φ] [QuasiSeparated φ] [LocallyOfFiniteType φ]
-    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] (i : ℕ) :
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (i : ℕ) :
     WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l Y :=
   WeilSheaf.toComplex ⋙ WeilComplex.derivedLowerStar φ ⋙ WeilComplex.homologySheaf i
 
@@ -153,6 +184,8 @@ instance : (lowerStar (k₀ := k₀) (l := l) φ).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
 
 end WeilSheaf
+
+variable [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
 
 instance : (WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) φ).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _

@@ -45,7 +45,8 @@ derived on the category of pro-étale Weil sheaves (`AlgebraicGeometry.WeilCompl
 The compatibility of the translation action with the Weil structure of `AS_* ℚ̄_ℓ`, the
 compatibility of the internal hom of pro-étale Weil sheaves with morphisms in the second
 variable, and the constructibility statements which make the transforms land in Weil complexes
-are stated as separate lemmas with `sorry`.
+are stated as separate lemmas with `sorry`; for the tensor product with a lisse sheaf the
+latter is reduced by dévissage to the case of a single Weil sheaf.
 -/
 
 @[expose] public section
@@ -335,16 +336,34 @@ instance (A : ProEtaleWeilSheaf k₀ l X) : (ProEtaleWeilSheaf.ihomFunctor k₀ 
   have := (ihom.adjunction A.carrier).right_adjoint_additive
   ⟨ObjectProperty.hom_ext _ (Algebra.Hom.ext (CategoryTheory.ihom A.carrier).map_add)⟩
 
+/-- **Finiteness for the tensor product with a lisse Weil sheaf, on a single Weil sheaf.** For
+a lisse Weil sheaf `F` and a Weil sheaf `G` placed in degree `0`, the right derived functor of
+`[F, -]` on pro-étale Weil sheaves gives a Weil complex: it is the tensor product `F^∨ ⊗ G`
+placed in degree `0`, the higher `Ext` sheaves out of the locally free `F` vanishing. -/
+theorem WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor_singleFunctor
+    (F : WeilSheaf k₀ l X) (hF : F.IsLisse) (G : ProEtaleWeilSheaf k₀ l X)
+    (hG : WeilSheaf.objectProperty k₀ l X G) :
+    WeilComplex.objectProperty k₀ l X
+      ((ProEtaleWeilSheaf.ihomFunctor k₀ l X F.obj).rightDerivedFunctor.obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) :=
+  sorry
+
 /-- **Finiteness for the tensor product with a lisse Weil sheaf.** For a lisse Weil sheaf `F`,
 the right derived functor of `[F, -]` on pro-étale Weil sheaves carries Weil complexes to Weil
-complexes: on complexes with constructible cohomology it is the tensor product with the lisse
-dual `F^∨`, which is exact and preserves constructibility. -/
+complexes: by dévissage along the truncation triangles (`DerivedCategory.prop_of_bounded`), the
+derived functor being triangulated, this reduces to the case of a single Weil sheaf,
+`AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor_singleFunctor`. -/
 theorem WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor (F : WeilSheaf k₀ l X)
     (hF : F.IsLisse) (K : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l X))
     (hK : WeilComplex.objectProperty k₀ l X K) :
     WeilComplex.objectProperty k₀ l X
       ((ProEtaleWeilSheaf.ihomFunctor k₀ l X F.obj).rightDerivedFunctor.obj K) :=
-  sorry
+  _root_.DerivedCategory.prop_of_bounded
+    ((WeilComplex.objectProperty k₀ l X).inverseImage
+      (ProEtaleWeilSheaf.ihomFunctor k₀ l X F.obj).rightDerivedFunctor)
+    (WeilSheaf.objectProperty k₀ l X)
+    (fun G hG ↦ WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor_singleFunctor F hF G hG)
+    K hK.1 hK.2
 
 /-- The derived internal hom `R[F, -]` out of a lisse Weil sheaf `F`, on Weil complexes. -/
 noncomputable def WeilComplex.ihomLisse (F : WeilSheaf k₀ l X) (hF : F.IsLisse) :

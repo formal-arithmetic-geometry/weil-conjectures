@@ -11,15 +11,17 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.Unramified.LocalStructure
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.LocalIso
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Mathlib.RingTheory.Etale.QuasiFinite
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 public import WeilConjectures.Mathlib.Topology.Sets.Opens
 
 /-!
-# Two facts about étale morphisms
+# Three facts about étale morphisms
 
 ## Lifting along a closed immersion
 
@@ -41,6 +43,12 @@ immersion. Normality of `S` is not a notion available in Mathlib at the level of
 is taken as the explicit hypothesis that every stalk of `S` is integrally closed; together with
 `[IsIntegral S]` this says exactly that `S` is an integral normal scheme.
 
+## Connected components of fibres along an étale base change
+
+Let `f : X ⟶ S` be locally of finite type and `r : Z ⟶ S` étale. For `z : Z`, the projection
+from the fibre of `X ×_S Z` over `z` to the fibre of `X` over `r z` is open and closed, so it maps
+connected components onto connected components.
+
 ## Main results
 
 - `AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`: for every point `w` of `W`
@@ -54,13 +62,15 @@ is taken as the explicit hypothesis that every stalk of `S` is integrally closed
   disjoint union of opens of the base.
 - `AlgebraicGeometry.Etale.exists_finite_opens_isOpenImmersion_of_isSepClosed_functionField`: the
   same statement with finitely many pieces when the source is quasi-compact.
+- `AlgebraicGeometry.connectedComponentIn_subset_image_pullback_fst`: the first projection maps
+  a connected component of a fibre of `X ×_S Z ⟶ Z` onto a connected component of a fibre of `X`.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits TensorProduct
+open CategoryTheory Limits TensorProduct Topology
 
 namespace AlgebraicGeometry
 
@@ -306,5 +316,71 @@ theorem Etale.exists_finite_opens_isOpenImmersion_of_isSepClosed_functionField
     (Etale.exists_opens_isOpenImmersion_and_henselianLocalRing_stalk hS).1 V p
   exact ⟨ι, TopologicalSpace.Opens.finite_of_compactSpace_of_pairwiseDisjoint U hne hdisj hcov,
     U, hdisj, hcov, hU⟩
+
+/-- Let `f : X ⟶ S` be locally of finite type, `r : Z ⟶ S` étale and `p` a point of `X ×_S Z`
+over `z : Z`. The first projection maps the connected component of `p` in the fibre over `z`
+onto the connected component of its image in the fibre of `f` over `r z`: the map between these
+fibres is open, the fibre of `r` being discrete, and closed, being the base change of the finite
+morphism `Spec κ(z) ⟶ Spec κ(r z)`. -/
+theorem connectedComponentIn_subset_image_pullback_fst {X S Z : Scheme.{u}} (f : X ⟶ S)
+    [LocallyOfFiniteType f] (r : Z ⟶ S) [Etale r] {z : Z} (p : ↑(pullback f r))
+    (hp : pullback.snd f r p = z) :
+    connectedComponentIn (f ⁻¹' {r z}) (pullback.fst f r p) ⊆
+      pullback.fst f r '' connectedComponentIn (pullback.snd f r ⁻¹' {z}) p := by
+  set F := pullback.snd f r ⁻¹' {z}
+  set E := f ⁻¹' {r z}
+  have hc (q : ↑(pullback f r)) : f (pullback.fst f r q) = r (pullback.snd f r q) := by
+    rw [← Scheme.Hom.comp_apply, pullback.condition, Scheme.Hom.comp_apply]
+  have hpF : p ∈ F := hp
+  let φ : F → E := fun q ↦ ⟨pullback.fst f r q, by simp [E, hc, show _ = z from q.2]⟩
+  -- `φ` is an open map, since `z` is isolated in its fibre under `r`
+  obtain ⟨N, hN, hNz⟩ := isDiscrete_iff_forall_mem_exists_isOpen.mp
+    (r.isDiscrete_preimage_singleton (r z)) z rfl
+  have hφo : IsOpenMap φ := by
+    intro O hO
+    obtain ⟨O', hO', rfl⟩ := isOpen_induced_iff.mp hO
+    have : φ '' (Subtype.val ⁻¹' O') =
+        Subtype.val ⁻¹' (pullback.fst f r '' (O' ∩ pullback.snd f r ⁻¹' N)) := by
+      ext ⟨y, hy⟩
+      constructor
+      · rintro ⟨⟨q, hq⟩, hqO, hqy⟩
+        refine ⟨q, ⟨hqO, ?_⟩, congrArg Subtype.val hqy⟩
+        rw [Set.mem_preimage, show pullback.snd f r q = z from hq]
+        exact ((Set.ext_iff.mp hNz z).mpr rfl).1
+      · rintro ⟨q, ⟨hqO, hqN⟩, rfl⟩
+        have hqz : pullback.snd f r q = z := by
+          have : pullback.snd f r q ∈ N ∩ r ⁻¹' {r z} := ⟨hqN, by
+            change r _ = r z
+            rw [← hc]
+            exact hy⟩
+          rwa [hNz] at this
+        exact ⟨⟨q, hqz⟩, hqO, rfl⟩
+    rw [this]
+    exact ((pullback.fst f r).isOpenMap _
+      (hO'.inter (hN.preimage (pullback.snd f r).continuous))).preimage continuous_subtype_val
+  -- `φ` is a closed map, being the base change of `Spec κ(z) ⟶ Spec κ(r z)` on fibres
+  have H := isPullback_fiberToSpecResidueField_of_isPullback (IsPullback.of_hasPullback f r) z
+  have : IsFinite (Spec.map (r.residueFieldMap z)) :=
+    (IsFinite.SpecMap_iff _).mpr (r.finite_residueFieldMap z)
+  obtain ⟨Φ, hΦ, hUC⟩ : ∃ Φ : (pullback.snd f r).fiber z ⟶ f.fiber (r z),
+      Φ ≫ f.fiberι (r z) = (pullback.snd f r).fiberι z ≫ pullback.fst f r ∧
+        UniversallyClosed Φ :=
+    ⟨_, pullback.lift_fst _ _ _, MorphismProperty.of_isPullback H.flip inferInstance⟩
+  have hφc : IsClosedMap φ := by
+    convert (f.fiberHomeo (r z)).isClosedMap.comp
+      (Φ.isClosedMap.comp ((pullback.snd f r).fiberHomeo z).symm.isClosedMap)
+    funext q
+    refine Subtype.ext ?_
+    change _ = f.fiberι (r z) (Φ (((pullback.snd f r).fiberHomeo z).symm q))
+    rw [← Scheme.Hom.comp_apply, hΦ, Scheme.Hom.comp_apply, Scheme.Hom.fiberι_fiberHomeo_symm]
+  -- the image of the connected component of `p` is clopen, hence contains that of `φ p`
+  have hK : IsClopen (φ '' connectedComponent ⟨p, hpF⟩) :=
+    ⟨hφc _ isClopen_connectedComponent.1, hφo _ isClopen_connectedComponent.2⟩
+  have hpE : pullback.fst f r p ∈ E := (φ ⟨p, hpF⟩).2
+  rw [connectedComponentIn_eq_image hpE, connectedComponentIn_eq_image hpF, Set.image_image]
+  intro y ⟨y', hy', hy⟩
+  obtain ⟨q, hq, hqy⟩ := hK.connectedComponent_subset (x := φ ⟨p, hpF⟩)
+    (Set.mem_image_of_mem _ mem_connectedComponent) hy'
+  exact ⟨q, hq, by rw [← hy, ← hqy]⟩
 
 end AlgebraicGeometry

@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Galois.Equivalence
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.IsFundamentalgroup
 
 /-!
@@ -85,9 +86,32 @@ lemma hom_left_comp {P Q : Y.FiniteEtale}
     (f : P ⟶ Q) : f.hom.left ≫ Q.obj.hom = P.obj.hom := by
   simp
 
-/-- The geometric fibre of a finite étale `Y`-scheme at a geometric point is finite. -/
+/-- Blueprint `rem-ptr-galois-categories-1`: the geometric fibre of a finite étale `Y`-scheme
+at a geometric point is finite.
+
+The geometric fibre `|P_s|` is the set of `Y`-morphisms `Spec Ω ⟶ P`, which are the sections of
+the base change `P ×_Y Spec Ω ⟶ Spec Ω`; by blueprint `lem-galois-geometric-fibre`
+(`AlgebraicGeometry.Scheme.Hom.exists_overIso_sigma_of_isSepClosed`) this base change is finite
+étale, so its sections are the `Ω`-algebra maps out of a finite `Ω`-algebra, of which there are
+finitely many. -/
 lemma finite_fiber (P : Y.FiniteEtale) : Finite ((pointSmallEtale s).fiber.obj P.obj) := by
-  sorry
+  have : IsFinite P.obj.hom := P.property
+  set h := pullback.snd P.obj.hom s
+  have : IsAffine (pullback P.obj.hom s) := isAffine_of_isAffineHom h
+  let := h.ΓAlgebra
+  have := h.etale_ΓAlgebra
+  have := Algebra.FormallyUnramified.finite_of_free Ω Γ(pullback P.obj.hom s, ⊤)
+  have hid : Spec.map (CommRingCat.ofHom (algebraMap Ω Ω)) = 𝟙 _ := by
+    rw [Algebra.algebraMap_self]
+    exact Spec.map_id _
+  let φ (x : (pointSmallEtale s).fiber.obj P.obj) :
+      Over.mk (Spec.map (CommRingCat.ofHom (algebraMap Ω Ω))) ⟶ Over.mk h :=
+    Over.homMk (pullback.lift x.left (Spec.map (CommRingCat.ofHom (algebraMap Ω Ω)))
+      (by simpa [hid] using Over.w x)) (by simp [h])
+  refine Finite.of_injective (h.overHomEquivAlgHom Ω ∘ φ) fun x y hxy ↦ ?_
+  have := congrArg (fun u ↦ u.left ≫ pullback.fst P.obj.hom s)
+    ((h.overHomEquivAlgHom Ω).injective hxy)
+  exact Over.OverMorphism.ext (by simpa [φ] using this)
 
 /-- Blueprint `def-galois-fibre-functor`: The fibre functor.
 

@@ -116,6 +116,19 @@ lemma Scheme.Hom.finrankΓ_id {k : Type u} [Field k] : Hom.finrankΓ (𝟙 (Spec
   exact (AlgEquiv.ofBijective (Algebra.ofId (CommRingCat.of k) _) hb).toLinearEquiv.finrank_eq.symm
     |>.trans (Module.finrank_self k)
 
+/-- The `R`-dimension of the global sections of `Spec S` over `Spec R` is `dim_R S`. -/
+lemma Scheme.Hom.finrankΓ_SpecMap (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] :
+    (Spec.map (CommRingCat.ofHom (algebraMap R S))).finrankΓ = Module.finrank R S := by
+  let _ := (Spec.map (CommRingCat.ofHom (algebraMap R S))).ΓAlgebra
+  refine Algebra.finrank_eq_of_equiv_equiv (RingEquiv.refl _)
+    (Scheme.ΓSpecIso (.of S)).commRingCatIsoToRingEquiv ?_
+  refine RingHom.ext fun y ↦ ?_
+  change algebraMap R S y = (Scheme.ΓSpecIso (.of S)).hom
+    (((Scheme.ΓSpecIso (.of R)).inv ≫ (Spec.map (CommRingCat.ofHom (algebraMap R S))).appTop) y)
+  rw [← CommRingCat.comp_apply, Category.assoc, Scheme.ΓSpecIso_naturality, ← Category.assoc,
+    Iso.inv_hom_id, Category.id_comp]
+  rfl
+
 lemma Scheme.Hom.appLE_top_top {Y X : Scheme.{u}} (f : Y ⟶ X) (h : (⊤ : Y.Opens) ≤ f ⁻¹ᵁ ⊤) :
     f.appLE ⊤ ⊤ h = f.appTop :=
   f.appLE_eq_app
