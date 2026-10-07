@@ -43,15 +43,81 @@ namespace Module.End
 
 variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
 
+/-- An `f`-invariant proper subspace `W` of a finite dimensional vector space over an
+algebraically closed field is contained in an `f`-invariant subspace of dimension one more:
+add an eigenvector of the endomorphism induced by `f` on `V ⧸ W`. This is the inductive step
+of the triangularization (blueprint: `p-linear-triangular`). -/
+theorem exists_le_map_le_finrank_eq_succ [IsAlgClosed K] [FiniteDimensional K V] (f : End K V)
+    {W : Submodule K V} (hW : W.map f ≤ W) (hne : W ≠ ⊤) :
+    ∃ W' : Submodule K V, W ≤ W' ∧ W'.map f ≤ W' ∧
+      Module.finrank K W' = Module.finrank K W + 1 := by
+  have hf : W ≤ W.comap f := Submodule.map_le_iff_le_comap.mp hW
+  have : Nontrivial (V ⧸ W) := Submodule.Quotient.nontrivial_iff.mpr hne
+  obtain ⟨μ, hμ⟩ := exists_eigenvalue (W.mapQ W f hf)
+  obtain ⟨x, hx⟩ := hμ.exists_hasEigenvector
+  obtain ⟨v, rfl⟩ := W.mkQ_surjective x
+  have hv : v ∉ W := fun h ↦ hx.2 ((Submodule.Quotient.mk_eq_zero W).mpr h)
+  have hv₀ : v ≠ 0 := by
+    rintro rfl
+    exact hv W.zero_mem
+  have hfv : f v - μ • v ∈ W := by
+    rw [← Submodule.Quotient.eq]
+    simpa using hx.apply_eq_smul
+  refine ⟨W ⊔ K ∙ v, le_sup_left, ?_, ?_⟩
+  · refine Submodule.map_le_iff_le_comap.mpr (sup_le (hf.trans (Submodule.comap_mono le_sup_left))
+      ((Submodule.span_singleton_le_iff_mem _ _).mpr ?_))
+    rw [Submodule.mem_comap, ← sub_add_cancel (f v) (μ • v)]
+    exact Submodule.add_mem_sup hfv (Submodule.smul_mem _ _ (Submodule.mem_span_singleton_self v))
+  · have hdisj : W ⊓ K ∙ v = ⊥ := by
+      rw [← disjoint_iff, Submodule.disjoint_span_singleton' hv₀]
+      exact hv
+    have := Submodule.finrank_sup_add_finrank_inf_eq W (K ∙ v)
+    rw [hdisj, finrank_bot, finrank_span_singleton hv₀] at this
+    omega
+
 /-- An endomorphism `f` of a finite dimensional vector space `V` over an algebraically
 closed field `K` admits a complete flag of invariant subspaces: a monotone family
 `F : Fin (finrank K V + 1) → Submodule K V` with each `F i` mapped into itself by `f` and
 `finrank K (F i) = i`. A basis adapted to such a flag puts `f` in upper triangular form,
-with the eigenvalues of `f` on the diagonal (blueprint: `sk-p-linear-triangular`). -/
+with the eigenvalues of `f` on the diagonal (blueprint: `sk-p-linear-triangular`,
+`p-linear-triangular`). -/
 theorem exists_complete_invariant_flag [IsAlgClosed K] [FiniteDimensional K V] (f : End K V) :
     ∃ F : Fin (Module.finrank K V + 1) → Submodule K V,
-      Monotone F ∧ (∀ i, (F i).map f ≤ F i) ∧ ∀ i, Module.finrank K (F i) = (i : ℕ) :=
-  sorry
+      Monotone F ∧ (∀ i, (F i).map f ≤ F i) ∧ ∀ i, Module.finrank K (F i) = (i : ℕ) := by
+  have key : ∀ k ≤ Module.finrank K V, ∃ F : ℕ → Submodule K V, (∀ i, F i ≤ F (i + 1)) ∧
+      (∀ i, (F i).map f ≤ F i) ∧ ∀ i ≤ k, Module.finrank K (F i) = i := by
+    intro k
+    induction k with
+    | zero => exact fun _ ↦ ⟨fun _ ↦ ⊥, fun _ ↦ le_rfl, fun _ ↦ by simp,
+        fun i hi ↦ by simp [Nat.le_zero.mp hi]⟩
+    | succ k ih =>
+      intro hk
+      obtain ⟨F, h₁, h₂, h₃⟩ := ih (by omega)
+      have hne : F k ≠ ⊤ := fun h ↦ by
+        have := h₃ k le_rfl
+        rw [h, finrank_top] at this
+        omega
+      obtain ⟨W, hW₁, hW₂, hW₃⟩ := exists_le_map_le_finrank_eq_succ f (h₂ k) hne
+      refine ⟨fun i ↦ if i ≤ k then F i else W, fun i ↦ ?_, fun i ↦ ?_, fun i hi ↦ ?_⟩
+      · dsimp only
+        split_ifs with ha hb hb
+        · exact h₁ i
+        · obtain rfl : i = k := by omega
+          exact hW₁
+        · omega
+        · exact le_rfl
+      · dsimp only
+        split_ifs
+        exacts [h₂ i, hW₂]
+      · dsimp only
+        by_cases ha : i ≤ k
+        · exact (congrArg (fun p : Submodule K V ↦ finrank K p) (if_pos ha)).trans (h₃ i ha)
+        · refine (congrArg (fun p : Submodule K V ↦ finrank K p) (if_neg ha)).trans ?_
+          rw [hW₃, h₃ k le_rfl]
+          omega
+  obtain ⟨F, h₁, h₂, h₃⟩ := key _ le_rfl
+  exact ⟨fun i ↦ F i, fun _ _ hij ↦ monotone_nat_of_le_succ h₁ hij, fun i ↦ h₂ i,
+    fun i ↦ h₃ i (Nat.lt_succ_iff.mp i.2)⟩
 
 /-- An endomorphism `f` of a finite dimensional vector space over an algebraically closed field
 has an upper triangular matrix in a suitable basis: pick `b i` in the `(i + 1)`-st member of an
