@@ -491,9 +491,9 @@ theorem traceFunction_tensorObj_and_l2Series_mul_lSeries (ι : PadicAlgCl l →+
       ((F.stalk x).localPolynomial.map ι).map (starRingEnd ℂ)) :
     (∀ (n : ℕ) (y : (V ↘ Spec (CommRingCat.of k₀)).fieldPoints
         (FiniteField.galoisExtension k₀ n)),
-      ι ((F.tensorObj F').traceFunction n y) = ((‖ι (F.traceFunction n y)‖ ^ 2 : ℝ) : ℂ)) ∧
-    PowerSeries.mk (fun m ↦ (F.traceEnergy ι (m + 1) : ℂ)) * (F.tensorObj F').lSeries ι =
-      PowerSeries.derivative ℂ ((F.tensorObj F').lSeries ι) := by
+      ι ((F.tensorObj F' hlisse).traceFunction n y) = ((‖ι (F.traceFunction n y)‖ ^ 2 : ℝ) : ℂ)) ∧
+    PowerSeries.mk (fun m ↦ (F.traceEnergy ι (m + 1) : ℂ)) * (F.tensorObj F' hlisse).lSeries ι =
+      PowerSeries.derivative ℂ ((F.tensorObj F' hlisse).lSeries ι) := by
   sorry
 
 /-- The *`L²`-rigidity* for real sheaves: let `G` be a nonzero lisse `ι`-real Weil sheaf on the

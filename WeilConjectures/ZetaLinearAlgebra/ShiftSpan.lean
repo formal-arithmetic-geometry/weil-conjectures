@@ -42,6 +42,9 @@ field extension) and of the integral Fatou theorem; both are developed elsewhere
   beyond `A.natDegree`.
 - `finiteDimensional_shiftSpan_of_recurrence`: a sequence that eventually satisfies a
   linear recurrence has finite-dimensional shift span.
+- `PowerSeries.exists_monic_sum_coeff_mul_eq_zero_of_finiteDimensional_shiftSpan`: a sequence
+  with finite-dimensional shift span satisfies the linear recurrence given by the characteristic
+  polynomial of the shift operator on the span (Cayley–Hamilton).
 - `PowerSeries.exists_normalized_fraction_of_finiteDimensional_shiftSpan`: conversely, a
   finite-dimensional shift span produces a normalized fraction, by Cayley–Hamilton applied
   to the shift operator on the span; the denominator is the reversed characteristic
@@ -180,16 +183,16 @@ theorem sum_coeff_mul_coeff_eq_zero (h : f * (B : K⟦X⟧) = (A : K⟦X⟧)) {n
   rw [← coeff_coe_mul B f le_rfl hd, mul_comm, h, Polynomial.coeff_coe,
     A.coeff_eq_zero_of_natDegree_lt hn]
 
-/-- If the span of the shifts of the coefficient sequence of `f` is finite-dimensional,
-then `f` admits a normalized fraction: the denominator is the reverse of the
-characteristic polynomial of the shift operator on the span. -/
-theorem exists_normalized_fraction_of_finiteDimensional_shiftSpan (a : ℕ → K)
+/-- If the span of the shifts of a sequence `a` is finite-dimensional, then `a` satisfies the
+linear recurrence given by a monic polynomial in all degrees: by Cayley–Hamilton, the
+characteristic polynomial of the shift operator on the span kills `a`. -/
+theorem exists_monic_sum_coeff_mul_eq_zero_of_finiteDimensional_shiftSpan (a : ℕ → K)
     [FiniteDimensional K (shiftSpan K a)] :
-    ∃ A B : K[X], B.coeff 0 = 1 ∧ mk a * (B : K⟦X⟧) = (A : K⟦X⟧) := by
+    ∃ p : K[X], p.Monic ∧ ∀ n, ∑ j ∈ range (p.natDegree + 1), p.coeff j * a (n + j) = 0 := by
   set S : shiftSpan K a →ₗ[K] shiftSpan K a :=
     (seqShift K).restrict (fun _ hx => seqShift_mem_shiftSpan a hx) with hS
+  refine ⟨S.charpoly, LinearMap.charpoly_monic S, fun n => ?_⟩
   set p : K[X] := S.charpoly with hp
-  have hpm : p.Monic := LinearMap.charpoly_monic S
   -- Cayley–Hamilton, read off on the element `a` of the span
   have hpow : ∀ (i : ℕ) (x : shiftSpan K a),
       (((S ^ i) x : shiftSpan K a) : ℕ → K) = (⇑(seqShift K))^[i] (x : ℕ → K) := by
@@ -203,18 +206,24 @@ theorem exists_normalized_fraction_of_finiteDimensional_shiftSpan (a : ℕ → K
   have hpow' : ∀ i : ℕ,
       (((S ^ i) ⟨a, self_mem_shiftSpan a⟩ : shiftSpan K a) : ℕ → K)
         = (⇑(seqShift K))^[i] a := fun i => hpow i _
-  have key : ∀ n : ℕ, ∑ j ∈ range (p.natDegree + 1), p.coeff j * a (n + j) = 0 := by
-    intro n
-    have h0 : (Polynomial.aeval S) p = 0 := LinearMap.aeval_self_charpoly S
-    have h1 : ∑ j ∈ range (p.natDegree + 1),
-        p.coeff j • (S ^ j) (⟨a, self_mem_shiftSpan a⟩ : shiftSpan K a) = 0 := by
-      have := congrArg (fun T : Module.End K (shiftSpan K a) => T ⟨a, self_mem_shiftSpan a⟩) h0
-      simpa only [Polynomial.aeval_eq_sum_range, LinearMap.sum_apply, LinearMap.smul_apply,
-        LinearMap.zero_apply] using this
-    have h2 := congrArg (fun v : shiftSpan K a => (v : ℕ → K) n) h1
-    simpa only [Submodule.coe_sum, SetLike.val_smul, Finset.sum_apply, Pi.smul_apply,
-      smul_eq_mul, hpow', iterate_seqShift_apply, ZeroMemClass.coe_zero, Pi.zero_apply]
-      using h2
+  have h0 : (Polynomial.aeval S) p = 0 := LinearMap.aeval_self_charpoly S
+  have h1 : ∑ j ∈ range (p.natDegree + 1),
+      p.coeff j • (S ^ j) (⟨a, self_mem_shiftSpan a⟩ : shiftSpan K a) = 0 := by
+    have := congrArg (fun T : Module.End K (shiftSpan K a) => T ⟨a, self_mem_shiftSpan a⟩) h0
+    simpa only [Polynomial.aeval_eq_sum_range, LinearMap.sum_apply, LinearMap.smul_apply,
+      LinearMap.zero_apply] using this
+  have h2 := congrArg (fun v : shiftSpan K a => (v : ℕ → K) n) h1
+  simpa only [Submodule.coe_sum, SetLike.val_smul, Finset.sum_apply, Pi.smul_apply,
+    smul_eq_mul, hpow', iterate_seqShift_apply, ZeroMemClass.coe_zero, Pi.zero_apply]
+    using h2
+
+/-- If the span of the shifts of the coefficient sequence of `f` is finite-dimensional,
+then `f` admits a normalized fraction: the denominator is the reverse of the
+characteristic polynomial of the shift operator on the span. -/
+theorem exists_normalized_fraction_of_finiteDimensional_shiftSpan (a : ℕ → K)
+    [FiniteDimensional K (shiftSpan K a)] :
+    ∃ A B : K[X], B.coeff 0 = 1 ∧ mk a * (B : K⟦X⟧) = (A : K⟦X⟧) := by
+  obtain ⟨p, hpm, key⟩ := exists_monic_sum_coeff_mul_eq_zero_of_finiteDimensional_shiftSpan a
   -- the reversed characteristic polynomial kills all coefficients in degrees `≥ p.natDegree`
   have hzero : ∀ n, p.natDegree ≤ n → coeff n (mk a * (p.reverse : K⟦X⟧)) = 0 := by
     intro n hn

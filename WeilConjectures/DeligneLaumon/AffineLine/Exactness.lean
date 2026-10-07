@@ -60,6 +60,7 @@ theorem shortExact_map_directImage (ι : PadicAlgCl l →+* ℂ)
     (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
     [IsDominant j]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     (S : ShortComplex (WeilSheaf k₀ l U)) (hS : S.ShortExact)
     (h₁ : S.X₁.IsLisse) (h₂ : S.X₂.IsLisse) (h₃ : S.X₃.IsLisse) {w : ℝ}
     (p₁ : S.X₁.IsPunctuallyPureOfWeight ι w)

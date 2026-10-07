@@ -45,7 +45,7 @@ sheaf `M'` of the Fourier partner of `M` is pure of weight `v`, then `v ≤ w + 
 (blueprint: `sk-p-dl-a1-fourier-weight`) -/
 theorem le_add_one_of_isFourierPartner (ι : PadicAlgCl l →+* ℂ) (hψ : ψ ≠ 1)
     (D D' : WeilSheaf.LisseOnDenseOpen k₀ l) [Simple D.sheaf]
-    (hne : D.sheaf.IsNonexceptional ψ) {w v : ℝ}
+    (hne : D.sheaf.IsNonexceptional ψ D.j) {w v : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) (hFT : D.IsFourierPartner ψ D')
     (hv : D'.sheaf.IsPunctuallyPureOfWeight ι v) :
     v ≤ w + 1 := by
