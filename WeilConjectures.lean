@@ -688,6 +688,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Determinant
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.Basis
+public import WeilConjectures.Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 public import WeilConjectures.Mathlib.LinearAlgebra.LinearIndependent.BaseChange
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.BilinearForm
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
@@ -990,6 +991,7 @@ public import WeilConjectures.ZetaLinearAlgebra.NormalizedGauss
 public import WeilConjectures.ZetaLinearAlgebra.Pairing
 public import WeilConjectures.ZetaLinearAlgebra.Purity
 public import WeilConjectures.ZetaLinearAlgebra.Rationality
+public import WeilConjectures.ZetaLinearAlgebra.RationalityCriterion
 public import WeilConjectures.ZetaLinearAlgebra.Reciprocity
 public import WeilConjectures.ZetaLinearAlgebra.Recovery
 public import WeilConjectures.ZetaLinearAlgebra.ShiftSpan
