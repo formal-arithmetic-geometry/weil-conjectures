@@ -216,6 +216,7 @@ theorem IdealSheafData.IsInvertible.degree_dual_toModules_eq_one {J : X.IdealShe
     J.toModulesᵛ.degree k = 1 := by
   rw [hJ.degree_dual_toModules, h, Nat.cast_one]
 
+include k in
 /-- **Every line bundle comes from a divisor.** Every invertible sheaf `ℒ` on a smooth proper
 curve is `𝒪_X(D₁) ⊗ 𝒪_X(D₂)⁻¹` for effective Cartier divisors `D₁` and `D₂`, given by
 invertible ideal sheaves `J₁ = 𝒪_X(-D₁)` and `J₂ = 𝒪_X(-D₂)`: `ℒ ⊗ 𝒪_X(D₂) ≅ 𝒪_X(D₁)`.
@@ -245,7 +246,7 @@ adds their degrees to `χ`.
 (blueprint: `sk-thm-picard-rr`, `lem-pc-degree-base-change`) -/
 theorem Modules.degree_tensorObj (ℒ ℳ : X.Modules) [ℒ.IsInvertible] [ℳ.IsInvertible] :
     (ℒ ⊗ₘ ℳ).degree k = ℒ.degree k + ℳ.degree k := by
-  obtain ⟨J₁, J₂, h₁, h₂, ⟨e⟩⟩ := Modules.exists_tensorObj_dual_toModules_iso ℳ
+  obtain ⟨J₁, J₂, h₁, h₂, ⟨e⟩⟩ := Modules.exists_tensorObj_dual_toModules_iso (k := k) ℳ
   have := h₁.isInvertible_dual_toModules
   have := h₂.isInvertible_dual_toModules
   have a := h₂.eulerChar_tensorObj_dual_toModules (k := k) (ℒ ⊗ ℳ)

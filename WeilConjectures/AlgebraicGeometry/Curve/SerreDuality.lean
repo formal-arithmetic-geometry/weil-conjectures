@@ -234,6 +234,7 @@ theorem finsum_ord_eq_finrank [IsIntegral X] [IsLocallyNoetherian X] {Y : Scheme
   sorry
 
 variable (k X) in
+include k in
 /-- **Principal divisors have degree zero.** For a nonzero rational function `f` on a proper
 smooth integral curve over an algebraically closed field `k`,
 `deg div(f) = ∑_x v_x(f) = 0`. For `f ∉ k` this is `div(f) = π_f^*([0] - [∞])` for the finite
