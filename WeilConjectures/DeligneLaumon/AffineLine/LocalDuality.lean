@@ -80,6 +80,7 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
     [IsDominant j]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l U) (hF : F.IsLisse) (s : C.finitePoints)
     (hsU : s.1 ∉ Set.range j.base) :
     ∃ e : (((WeilSheaf.directImage j).obj (F.dual hF)).stalk s).carrier ≃ₗ[PadicAlgCl l]
