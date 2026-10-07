@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
@@ -39,7 +40,6 @@ the content of `AlgebraicGeometry.Scheme.Modules.Hom.ideal_zeroLocus`.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.Modules.IsFreeGenerator`: a section trivializing a module.
 - `AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus`: the ideal sheaf of the zero scheme `Z(φ)`
   (blueprint `def-pc-zero-scheme`).
 
@@ -81,100 +81,6 @@ namespace Modules
 
 variable {X : Scheme.{u}} {M N : X.Modules}
 
-/-- A section `e` of `M` over `U` is a *free generator* of `M` on `U` if every section of `M`
-over an open `V ⊆ U` is uniquely of the form `r • e|_V` with `r ∈ Γ(X, V)`; i.e. `e`
-trivializes `M|_U ≅ 𝒪_U`. -/
-def IsFreeGenerator {U : X.Opens} (e : Γ(M, U)) : Prop :=
-  ∀ (V : X.Opens) (h : V ≤ U),
-    Function.Bijective fun r : Γ(X, V) ↦ r • M.presheaf.map (homOfLE h).op e
-
-/-- Restricting a section of `M` twice is restricting it along the composite. -/
-lemma presheaf_map_map_apply {U V W : X.Opens} (f : V ⟶ U) (g : W ⟶ V) (e : Γ(M, U)) :
-    M.presheaf.map g.op (M.presheaf.map f.op e) = M.presheaf.map (g ≫ f).op e := by
-  rw [op_comp, Functor.map_comp]
-  rfl
-
-/-- Restricting a section of `M` along an endomorphism of an open does nothing. -/
-lemma presheaf_map_id_apply {U : X.Opens} (f : U ⟶ U) (e : Γ(M, U)) :
-    M.presheaf.map f.op e = e := by
-  rw [Subsingleton.elim f (𝟙 U), op_id, CategoryTheory.Functor.map_id]
-  rfl
-
-/-- Restricting a function twice is restricting it along the composite. -/
-private lemma scheme_presheaf_map_map_apply {U V W : X.Opens} (f : V ⟶ U) (g : W ⟶ V)
-    (a : Γ(X, U)) :
-    X.presheaf.map g.op (X.presheaf.map f.op a) = X.presheaf.map (g ≫ f).op a := by
-  rw [op_comp, Functor.map_comp]
-  rfl
-
-/-- Restricting a function along an endomorphism of an open does nothing. -/
-private lemma scheme_presheaf_map_id_apply {U : X.Opens} (f : U ⟶ U) (a : Γ(X, U)) :
-    X.presheaf.map f.op a = a := by
-  rw [Subsingleton.elim f (𝟙 U), op_id, CategoryTheory.Functor.map_id]
-  rfl
-
-/-- The restriction of a free generator to a smaller open is a free generator. -/
-lemma IsFreeGenerator.map {U V : X.Opens} {e : Γ(M, U)} (he : IsFreeGenerator e)
-    (h : V ≤ U) : IsFreeGenerator (M.presheaf.map (homOfLE h).op e) := by
-  intro W hW
-  simp_rw [presheaf_map_map_apply]
-  exact he W (hW.trans h)
-
-/-- A free generator `e` on `U` gives an injection `r ↦ r • e` of `Γ(X, U)` into `Γ(M, U)`. -/
-lemma IsFreeGenerator.smul_left_injective {U : X.Opens} {e : Γ(M, U)}
-    (he : IsFreeGenerator e) : Function.Injective fun r : Γ(X, U) ↦ r • e := by
-  simpa only [presheaf_map_id_apply] using (he U le_rfl).1
-
-/-- Every section over `U` is a multiple of a free generator on `U`. -/
-lemma IsFreeGenerator.exists_smul_eq {U : X.Opens} {e : Γ(M, U)} (he : IsFreeGenerator e)
-    (m : Γ(M, U)) : ∃ r : Γ(X, U), r • e = m := by
-  simpa only [presheaf_map_id_apply] using (he U le_rfl).2 m
-
-/-- Two free generators on the same open differ by a unit. -/
-lemma IsFreeGenerator.exists_unit_smul_eq {U : X.Opens} {e e' : Γ(M, U)}
-    (he : IsFreeGenerator e) (he' : IsFreeGenerator e') : ∃ u : Γ(X, U)ˣ, e' = u.1 • e := by
-  obtain ⟨u, hu⟩ := he.exists_smul_eq e'
-  obtain ⟨v, hv⟩ := he'.exists_smul_eq e
-  have huv : v * u = 1 := he.smul_left_injective (by simp only [mul_smul, hu, hv, one_smul])
-  exact ⟨⟨u, v, by rw [mul_comm, huv], huv⟩, hu.symm⟩
-
-/-- If `M` is trivial on `U`, i.e. `M.over U ≅ 𝒪_U`, then `M` has a free generator on `U`,
-namely the section corresponding to `1`. -/
-lemma exists_isFreeGenerator_of_iso {U : X.Opens}
-    (i : M.over U ≅ SheafOfModules.unit (X.ringCatSheaf.over U)) :
-    ∃ e : Γ(M, U), IsFreeGenerator e := by
-  let s := (M.over U).unitHomEquiv i.inv
-  refine ⟨s.val (.op (Over.mk (𝟙 U))), fun V h ↦ ?_⟩
-  let ψ := (i.inv.val.app (.op (Over.mk (homOfLE h)))).hom
-  let ψ' : Γ(X, V) → Γ(M, V) := fun r ↦ ψ r
-  have h1 (r : Γ(X, V)) : ψ' r = r • ψ' 1 :=
-    (congrArg ψ (mul_one r).symm).trans (ψ.map_smul r (1 : Γ(X, V)))
-  have h2 : M.presheaf.map (homOfLE h).op (s.val (.op (Over.mk (𝟙 U)))) = ψ' 1 :=
-    s.2 (Over.homMk (homOfLE h) : Over.mk (homOfLE h) ⟶ Over.mk (𝟙 U)).op
-  have key : (fun r : Γ(X, V) ↦ r • M.presheaf.map (homOfLE h).op
-      (s.val (.op (Over.mk (𝟙 U))))) = ψ' := by
-    ext r
-    rw [h1, h2]
-  rw [key]
-  exact ConcreteCategory.bijective_of_isIso ((PresheafOfModules.evaluation _
-    (.op (Over.mk (homOfLE h)))).mapIso ((SheafOfModules.forget _).mapIso i)).inv
-
-/-- **Invertible modules are locally trivial.** Every point `x` of an open `W` has an affine
-open neighbourhood `U ⊆ W` on which an invertible module has a free generator. -/
-lemma exists_isFreeGenerator (M : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} M] {x : X}
-    {W : X.Opens} (hx : x ∈ W) :
-    ∃ U : X.affineOpens, x ∈ U.1 ∧ U.1 ≤ W ∧ ∃ e : Γ(M, U.1), IsFreeGenerator e := by
-  obtain ⟨q, hq⟩ := SheafOfModules.IsInvertible.exists_isInvertibleData (M := M)
-  obtain ⟨i, hi⟩ := ((Opens.coversTop_iff _ _).mp q.coversTop).exists_mem x
-  obtain ⟨hu⟩ := SheafOfModules.LocalGeneratorsData.IsInvertibleData.nonempty_unique (q := q) i
-  have := SheafOfModules.LocalGeneratorsData.IsLocallyFreeData.isIso (q := q) i
-  obtain ⟨e, he⟩ := exists_isFreeGenerator_of_iso
-    ((asIso (q.generators i).π).symm ≪≫ SheafOfModules.freeUniqueIso _)
-  obtain ⟨V, hV, hxV, hVW⟩ :=
-    exists_isAffineOpen_mem_and_subset (x := x) (U := q.X i ⊓ W) ⟨hi, hx⟩
-  have hVi : V ≤ q.X i := fun y hy ↦ (hVW hy).1
-  exact ⟨⟨V, hV⟩, hxV, fun y hy ↦ (hVW hy).2, _, he.map hVi⟩
-
 /-- Every point `x` of an open `W` has an affine open neighbourhood `U ⊆ W` on which two
 invertible modules both have free generators. -/
 lemma exists_isFreeGenerator₂ (M N : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} M]
@@ -195,11 +101,6 @@ lemma exists_basicOpen_isFreeGenerator (M N : X.Modules)
   obtain ⟨U, hxU, -, ⟨eM, hM⟩, eN, hN⟩ := exists_isFreeGenerator₂ M N hx
   obtain ⟨g, hgU, hxg⟩ := hW.exists_basicOpen_le ⟨x, hxU⟩ hx
   exact ⟨g, hxg, ⟨_, hM.map hgU⟩, _, hN.map hgU⟩
-
-/-- Morphisms of modules commute with restriction of sections. -/
-lemma Hom.app_presheaf_map (φ : M ⟶ N) {U V : X.Opens} (i : V ⟶ U) (x : Γ(M, U)) :
-    φ.app V (M.presheaf.map i.op x) = N.presheaf.map i.op (φ.app U x) :=
-  PresheafOfModules.naturality_apply φ.val i.op x
 
 /-- If `φ(eM) = b • eN` on `U`, then the same holds for the restrictions to `V ⊆ U`. -/
 lemma Hom.app_presheaf_map_of_eq (φ : M ⟶ N) {U V : X.Opens} (i : V ⟶ U) {eM : Γ(M, U)}
@@ -274,7 +175,7 @@ lemma Hom.zeroLocusIdeal_eq_span (φ : M ⟶ N) (U : X.affineOpens) {eM : Γ(M, 
     {eN : Γ(N, U.1)} (hM : IsFreeGenerator eM) (hN : IsFreeGenerator eN) {b : Γ(X, U.1)}
     (hb : φ.app U.1 eM = b • eN) : φ.zeroLocusIdeal U.1 = Ideal.span {b} := by
   refine le_antisymm (fun a ha ↦ ?_) (Ideal.span_le.mpr ?_)
-  · simpa only [scheme_presheaf_map_id_apply] using
+  · simpa only [Scheme.presheaf_map_id_apply] using
       (φ.mem_zeroLocusIdeal_iff a).mp ha U le_rfl eM hM eN hN b hb
   · rintro _ rfl
     rw [SetLike.mem_coe, Hom.mem_zeroLocusIdeal_iff]
@@ -289,7 +190,7 @@ lemma Hom.presheaf_map_mem_zeroLocusIdeal (φ : M ⟶ N) {W W' : X.Opens} (h : W
     X.presheaf.map (homOfLE h).op a ∈ φ.zeroLocusIdeal W' := by
   rw [Hom.mem_zeroLocusIdeal_iff] at ha ⊢
   intro V hV eM hM eN hN b hb
-  rw [scheme_presheaf_map_map_apply]
+  rw [Scheme.presheaf_map_map_apply]
   exact ha V (hV.trans h) eM hM eN hN b hb
 
 /-- Membership in `φ.zeroLocusIdeal W` is local on `W`. -/
@@ -305,8 +206,8 @@ lemma Hom.mem_zeroLocusIdeal_of_forall_exists (φ : M ⟶ N) {W : X.Opens} (a : 
   refine ⟨g, hxg, ?_⟩
   have := (φ.mem_zeroLocusIdeal_iff _).mp ha ⟨_, V.2.basicOpen g⟩ hgW' _
     (hM.map (X.basicOpen_le g)) _ (hN.map (X.basicOpen_le g)) _ (φ.app_presheaf_map_of_eq _ hb)
-  rw [scheme_presheaf_map_map_apply] at this
-  rw [scheme_presheaf_map_map_apply, Ideal.map_span, Set.image_singleton]
+  rw [Scheme.presheaf_map_map_apply] at this
+  rw [Scheme.presheaf_map_map_apply, Ideal.map_span, Set.image_singleton]
   exact this
 
 variable [SheafOfModules.IsInvertible.{u, u, u} M] [SheafOfModules.IsInvertible.{u, u, u} N] in
@@ -352,9 +253,9 @@ lemma Hom.map_zeroLocusIdeal_basicOpen (φ : M ⟶ N) (W : X.affineOpens) (f : �
         rw [Ideal.map_span, Set.image_singleton]
         convert h1 using 2
         · rfl
-        · exact (scheme_presheaf_map_map_apply (homOfLE (X.basicOpen_le g))
+        · exact (Scheme.presheaf_map_map_apply (homOfLE (X.basicOpen_le g))
             (homOfLE (X.basicOpen_le f')) a).trans
-            (scheme_presheaf_map_map_apply (homOfLE (X.basicOpen_le f)) (homOfLE hle) a).symm
+            (Scheme.presheaf_map_map_apply (homOfLE (X.basicOpen_le f)) (homOfLE hle) a).symm
       obtain ⟨_, ⟨n, rfl⟩, hn⟩ := (IsLocalization.algebraMap_mem_map_algebraMap_iff
         (.powers f') _ _ _).mp h2
       refine ⟨n, fun _ ↦ ?_⟩
@@ -528,22 +429,6 @@ lemma IsFreeGenerator.exists_pullback {Y : Scheme.{u}} (g : Y ⟶ X)
     rw [Scheme.Hom.app_eq_appLE, Scheme.Hom.app_eq_appLE]
     rw [Scheme.Hom.map_appLE_assoc, ← Functor.map_comp, Scheme.Hom.appLE_map]
   exact ConcreteCategory.congr_hom key b
-
-/-- An isomorphism of modules carries free generators to free generators. -/
-lemma IsFreeGenerator.app_hom {M' : X.Modules} (e : M ≅ M') {U : X.Opens} {x : Γ(M, U)}
-    (hx : IsFreeGenerator x) : IsFreeGenerator (e.hom.app U x) := by
-  intro V h
-  have he : Function.Bijective (e.hom.app V) := by
-    refine Function.bijective_iff_has_inverse.mpr ⟨e.inv.app V, fun y ↦ ?_, fun y ↦ ?_⟩
-    · change (e.hom.app V ≫ e.inv.app V) y = y
-      rw [← Hom.comp_app, e.hom_inv_id, Hom.id_app]
-      rfl
-    · change (e.inv.app V ≫ e.hom.app V) y = y
-      rw [← Hom.comp_app, e.inv_hom_id, Hom.id_app]
-      rfl
-  convert he.comp (hx V h) using 1
-  ext r
-  simp only [Function.comp_apply, Hom.app_smul, Hom.app_presheaf_map]
 
 /-- The ideals cutting out the zero scheme of `φ` are contained in those of `ψ` when `φ` and `ψ`
 are isomorphic arrows. -/
