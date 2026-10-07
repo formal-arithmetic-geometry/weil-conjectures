@@ -162,6 +162,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
+public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
 public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube

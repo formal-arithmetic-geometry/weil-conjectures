@@ -36,8 +36,8 @@ that `T` has sections locally. The isomorphism classes of `G`-torsors are classi
   corresponding to the torsors with a global section. The bijection sends a global section `s`
   of `Q`, for `0 → G → I → Q → 0` with `I` injective, to the torsor
   `CategoryTheory.Sheaf.Torsor.lifts` of local lifts of `s` to `I`.
-- `CategoryTheory.Sheaf.nonempty_equiv_ext_torsor`: `Ext¹(ℤ, G)` is in bijection with the
-  isomorphism classes of `G`-torsors. The proof is `sorry`.
+- `CategoryTheory.Sheaf.nonempty_equiv_ext_torsor`: on a site with a terminal object,
+  `Ext¹(ℤ, G)` is in bijection with the isomorphism classes of `G`-torsors.
 - `CategoryTheory.Sheaf.nonempty_equiv_H_one_torsor`: so is `H¹(G)`.
 - `CategoryTheory.Sheaf.subsingleton_H_one_iff`: `H¹(G) = 0` if and only if every `G`-torsor
   is trivial.
@@ -425,6 +425,18 @@ lemma sub_sub_sub {U : Cᵒᵖ} (x₀ x y : P.sheaf.obj.obj U) :
   refine ((P.sub_eq_iff _ _ _).2 ?_).symm
   simp only [sub_vadd_eq, ← P.add_vadd, sub_add_cancel]
 
+lemma sub_vadd_right {U : Cᵒᵖ} (x y : P.sheaf.obj.obj U) (a : G.obj.obj U) :
+    P.sub x (P.vadd U a y) = a + P.sub x y := by
+  rw [sub_eq_iff, P.add_vadd, sub_vadd]
+
+lemma sub_vadd_left {U : Cᵒᵖ} (x y : P.sheaf.obj.obj U) (a : G.obj.obj U) :
+    P.sub (P.vadd U a x) y = P.sub x y - a := by
+  rw [sub_eq_iff, ← P.add_vadd, sub_add_cancel, sub_vadd]
+
+@[simp]
+lemma sub_self {U : Cᵒᵖ} (x : P.sheaf.obj.obj U) : P.sub x x = 0 := by
+  rw [sub_eq_iff, zero_vadd]
+
 lemma map_sub_apply {U V : Cᵒᵖ} (f : U ⟶ V) (x y : P.sheaf.obj.obj U) :
     G.obj.map f (P.sub x y) = P.sub (P.sheaf.obj.map f x) (P.sheaf.obj.map f y) := by
   conv_rhs => rw [← P.sub_vadd x y, P.map_vadd, sub_vadd_eq]
@@ -597,35 +609,39 @@ end Main
 
 end Torsor
 
-variable [HasSheafify J AddCommGrpCat.{w}] [HasExt.{w'} (Sheaf J AddCommGrpCat.{w})]
+variable [HasSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrpCat.{w}]
+  [HasExt.{w'} (Sheaf J AddCommGrpCat.{w})] [EnoughInjectives (Sheaf J AddCommGrpCat.{w})]
 
-/-- **Extensions and torsors.** For a sheaf `G` of abelian groups on a site, the group
-`Ext¹(ℤ, G)` of extensions `0 → G → E → ℤ → 0` is in bijection with the set of isomorphism
-classes of `G`-torsors. The canonical bijection sends an extension `E` with projection
-`π : E → ℤ` to the torsor `π⁻¹(1)`; its inverse sends `T` to `⊔_{n ∈ ℤ} T^{⊗ n}`.
+/-- **Extensions and torsors.** For a sheaf `G` of abelian groups on a site with a terminal
+object, the group `Ext¹(ℤ, G)` of extensions `0 → G → E → ℤ → 0` is in bijection with the set
+of isomorphism classes of `G`-torsors. The canonical bijection sends an extension `E` with
+projection `π : E → ℤ` to the torsor `π⁻¹(1)`; its inverse sends `T` to `⊔_{n ∈ ℤ} T^{⊗ n}`.
 
-Only the existence of a bijection is recorded. The proof is `sorry`.
+Only the existence of a bijection is recorded. It is obtained from an injective resolution
+`0 → G → I → Q → 0`: both sides are identified with the cokernel of `Γ(I) → Γ(Q)`
+(`CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one`).
 (blueprint: `lem-sc-ext-torsor`) -/
-theorem nonempty_equiv_ext_torsor (G : Sheaf J AddCommGrpCat.{w}) :
+theorem nonempty_equiv_ext_torsor {T : C} (hT : IsTerminal T) (G : Sheaf J AddCommGrpCat.{w}) :
     Nonempty (Abelian.Ext ((constantSheaf J AddCommGrpCat.{w}).obj
       (AddCommGrpCat.of (ULift ℤ))) G 1 ≃ _root_.Quotient (Torsor.setoid (G := G))) :=
-  sorry
+  let ⟨c, _⟩ := Torsor.exists_quotientEquiv_H_one G hT
+  ⟨c.symm⟩
 
-/-- **First cohomology classifies torsors.** For a sheaf `G` of abelian groups on a site,
-`H¹(G)` is in bijection with the set of isomorphism classes of `G`-torsors: it is
-`Ext¹(ℤ, G)`, to which `CategoryTheory.Sheaf.nonempty_equiv_ext_torsor` applies.
+/-- **First cohomology classifies torsors.** For a sheaf `G` of abelian groups on a site with a
+terminal object, `H¹(G)` is in bijection with the set of isomorphism classes of `G`-torsors: it
+is `Ext¹(ℤ, G)`, to which `CategoryTheory.Sheaf.nonempty_equiv_ext_torsor` applies.
 
 The vanishing direction is also proved directly, without torsors, in
 `CategoryTheory.Sheaf.subsingleton_H_one_of_surjective`.
 (blueprint: `lem-sc-torsor-h1`) -/
-theorem nonempty_equiv_H_one_torsor (G : Sheaf J AddCommGrpCat.{w}) :
+theorem nonempty_equiv_H_one_torsor {T : C} (hT : IsTerminal T) (G : Sheaf J AddCommGrpCat.{w}) :
     Nonempty (H G 1 ≃ _root_.Quotient (Torsor.setoid (G := G))) :=
-  nonempty_equiv_ext_torsor G
+  nonempty_equiv_ext_torsor hT G
 
 /-- `H¹(G)` vanishes if and only if every `G`-torsor is trivial. -/
-theorem subsingleton_H_one_iff (G : Sheaf J AddCommGrpCat.{w}) :
+theorem subsingleton_H_one_iff {T : C} (hT : IsTerminal T) (G : Sheaf J AddCommGrpCat.{w}) :
     Subsingleton (H G 1) ↔ ∀ T : Torsor G, T ≈ Torsor.trivial G := by
-  obtain ⟨e⟩ := nonempty_equiv_H_one_torsor G
+  obtain ⟨e⟩ := nonempty_equiv_H_one_torsor hT G
   rw [e.subsingleton_congr]
   refine ⟨fun h T ↦ _root_.Quotient.exact (Subsingleton.elim (h := h) ⟦T⟧ ⟦Torsor.trivial G⟧),
     fun h ↦ ⟨fun a b ↦ ?_⟩⟩
