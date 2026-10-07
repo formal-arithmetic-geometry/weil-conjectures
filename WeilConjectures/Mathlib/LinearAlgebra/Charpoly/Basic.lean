@@ -46,6 +46,10 @@ expected diagonal.
 * `LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ`: the characteristic polynomial of an
   endomorphism preserving a submodule is the product of those of the restriction to the submodule
   and of the induced endomorphism of the quotient.
+* `LinearMap.charpoly_eq_prod_charpoly_mapQ_of_le`: the characteristic polynomial of an
+  endomorphism preserving a finite filtration is the product over its graded pieces.
+* `LinearMap.charpoly_mapQ_restrict_dvd`: the characteristic polynomial on an invariant
+  subquotient divides the characteristic polynomial on the whole space.
 * `LinearMap.charpoly_eq_one_of_subsingleton`: the characteristic polynomial of an
   endomorphism of the zero module is `1`.
 * `LinearMap.charpoly_roots_tensorProduct`: the eigenvalues of a tensor product of endomorphisms
@@ -57,7 +61,9 @@ expected diagonal.
 
 ## Blueprint
 
-`LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ` implements `sk-p-linear-filtration`;
+`LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ`,
+`LinearMap.charpoly_eq_prod_charpoly_mapQ_of_le` and `LinearMap.charpoly_mapQ_restrict_dvd`
+implement `sk-p-linear-filtration`;
 `LinearMap.charpoly_roots_tensorProduct`, `LinearMap.charpoly_roots_exteriorPower` and
 `LinearMap.charpoly_roots_dualMap_symm` implement `sk-p-linear-spectra`.
 -/
@@ -168,6 +174,19 @@ theorem charpoly_eq_prod_charpoly_mapQ_of_le (f : V →ₗ[K] V) (F : ℕ → Su
   refine charpoly_eq_of_comp_eq (LinearEquiv.ofTop (F n) hn).symm ?_
   ext x
   rfl
+
+/-- The characteristic polynomial of the endomorphism induced by `f` on an invariant
+subquotient `S ⧸ U` divides the characteristic polynomial of `f`: the eigenvalues of `f` on a
+subquotient occur among those on `V`, with multiplicity.
+(blueprint: `sk-p-linear-filtration`) -/
+theorem charpoly_mapQ_restrict_dvd (f : V →ₗ[K] V) {U S : Submodule K V}
+    (hU : U ≤ U.comap f) (hS : S ≤ S.comap f) :
+    ((U.comap S.subtype).mapQ (U.comap S.subtype) (f.restrict hS)
+      fun _ hx ↦ hU hx).charpoly ∣ f.charpoly := by
+  rw [charpoly_eq_charpoly_restrict_mul_charpoly_mapQ f S hS,
+    charpoly_eq_charpoly_restrict_mul_charpoly_mapQ (f.restrict hS) (U.comap S.subtype)
+      fun _ hx ↦ hU hx]
+  exact (dvd_mul_left _ _).mul_right _
 
 end Field
 
