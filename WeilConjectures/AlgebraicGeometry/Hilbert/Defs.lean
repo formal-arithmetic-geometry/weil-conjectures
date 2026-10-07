@@ -13,6 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.AlgebraicGeometry.Descent
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
@@ -29,8 +30,8 @@ For a morphism of schemes `f : X ⟶ S` and `d : ℕ`, the Hilbert functor `Hilb
 of ideal sheaves, `AlgebraicGeometry.Scheme.IdealSheafData.comap`, along the base-change maps
 `AlgebraicGeometry.baseChangeMap` of the fibre products `X ×[S] T`.
 
-We then state that `Hilb^d_{X/S}` is a sheaf for the fppf topology. Representability of
-`Hilb^d_{X/S}` in general is proved in
+We then prove that `Hilb^d_{X/S}` is a sheaf for the fppf topology, by fpqc descent of finite
+locally free closed subschemes. Representability of `Hilb^d_{X/S}` in general is proved in
 `WeilConjectures.AlgebraicGeometry.Hilbert.Representability`, and the Hilbert schemes of curves
 are in `WeilConjectures.AlgebraicGeometry.Hilbert.Curve`.
 
@@ -56,7 +57,8 @@ presentation are `MorphismProperty.IsStableUnderBaseChange` in Mathlib; the inva
 - `AlgebraicGeometry.IsHilbertSubscheme.eq_of_le`: two points of `Hilb^d_{X/S}(T)` one of
   which contains the other are equal.
 - `AlgebraicGeometry.isSheaf_hilbertPresheaf`: `Hilb^d_{X/S}` is an fppf sheaf
-  (blueprint `sk-cor-picard-hilb-sheaf`).
+  (blueprint `sk-cor-picard-hilb-sheaf`), hence a Zariski sheaf
+  (`AlgebraicGeometry.isSheaf_zariskiTopology_hilbertPresheaf`).
 -/
 
 @[expose] public section
@@ -133,11 +135,92 @@ noncomputable def hilbertPresheaf (f : X ⟶ S) (d : ℕ) : (Over S)ᵒᵖ ⥤ T
     rfl))
 
 /-- **The Hilbert functor is an fppf sheaf.** `Hilb^d_{X/S}` is a sheaf for the fppf topology on
-`S`-schemes, hence in particular for the coarser Zariski topology.
+`S`-schemes, that is for `AlgebraicGeometry.Scheme.fppfTopology` localized to `Over S` (the big
+fppf site of `S`, blueprint `def-pc-fppf-site`), hence in particular for the coarser Zariski
+topology (`AlgebraicGeometry.isSheaf_zariskiTopology_hilbertPresheaf`).
 
-(blueprint: `sk-cor-picard-hilb-sheaf`) -/
+A covering sieve of `T` is in particular an fpqc covering of `T.left`, the base changes of `X_T`
+along its members are the `X_{T'}`, and a compatible family of points of `Hilb^d_{X/S}` is a
+descent datum of closed subschemes; it glues uniquely by
+`AlgebraicGeometry.isSheaf_fpqc_finiteLocallyFreeSubscheme` (blueprint `sk-thm-picard-descent`,
+part (D2)).
+
+(blueprint: `sk-cor-picard-hilb-sheaf`, `lem-pc-hilb-sheaf`) -/
 theorem isSheaf_hilbertPresheaf (f : X ⟶ S) (d : ℕ) :
-    Presheaf.IsSheaf (Scheme.fppfTopology.over S) (hilbertPresheaf f d) :=
-  sorry
+    Presheaf.IsSheaf (Scheme.fppfTopology.over S) (hilbertPresheaf f d) := by
+  rw [isSheaf_iff_isSheaf_of_type]
+  intro T R hR x hx
+  -- the covering family of `T.left` underlying `R`
+  let ι := { p : Σ Y : Over S, Y ⟶ T // R p.2 }
+  let g : ∀ i : ι, i.1.1.left ⟶ T.left := fun i ↦ i.1.2.left
+  have hg : Sieve.ofArrows _ g ∈ Scheme.fpqcTopology T.left := by
+    refine Scheme.fpqcTopology.superset_covering ?_
+      (Scheme.fppfTopology_le_fpqcTopology _ ((GrothendieckTopology.mem_over_iff _ _).1 hR))
+    rintro Y h ⟨Z, k, l, hk, rfl⟩
+    exact (Sieve.mem_ofArrows_iff ..).mpr ⟨⟨⟨Z, k⟩, hk⟩, l, rfl⟩
+  let I : ∀ i : ι, (pullback f i.1.1.hom).IdealSheafData := fun i ↦ (x i.1.2 i.2).1
+  have hI (i : ι) : IsHilbertSubscheme f d i.1.1 (I i) := (x i.1.2 i.2).2
+  have hcompat : ∀ ⦃W : Scheme.{u}⦄ ⦃i j : ι⦄ (a : W ⟶ pullback f i.1.1.hom)
+      (b : W ⟶ pullback f j.1.1.hom), a ≫ baseChangeMap f i.1.2 = b ≫ baseChangeMap f j.1.2 →
+      (I i).comap a = (I j).comap b := by
+    intro W i j a b hab
+    have hfst {Y Y' : Over S} (φ : Y ⟶ Y') :
+        baseChangeMap f φ ≫ pullback.fst f Y'.hom = pullback.fst f Y.hom :=
+      pullback.lift_fst _ _ _ |>.trans (Category.comp_id _)
+    have hsnd {Y Y' : Over S} (φ : Y ⟶ Y') :
+        baseChangeMap f φ ≫ pullback.snd f Y'.hom = pullback.snd f Y.hom ≫ φ.left :=
+      pullback.lift_snd _ _ _
+    have hab₁ : a ≫ pullback.fst f i.1.1.hom = b ≫ pullback.fst f j.1.1.hom := by
+      simpa only [Category.assoc, hfst] using congrArg (· ≫ pullback.fst f T.hom) hab
+    have hab₂ : (a ≫ pullback.snd f i.1.1.hom) ≫ i.1.2.left =
+        (b ≫ pullback.snd f j.1.1.hom) ≫ j.1.2.left := by
+      simpa only [Category.assoc, hsnd] using congrArg (· ≫ pullback.snd f T.hom) hab
+    have hW : (a ≫ pullback.snd f i.1.1.hom) ≫ i.1.1.hom =
+        (b ≫ pullback.snd f j.1.1.hom) ≫ j.1.1.hom := by
+      simpa only [Category.assoc, Over.w] using congrArg (· ≫ T.hom) hab₂
+    let Z : Over S := Over.mk ((a ≫ pullback.snd f i.1.1.hom) ≫ i.1.1.hom)
+    let g₁ : Z ⟶ i.1.1 := Over.homMk (a ≫ pullback.snd f i.1.1.hom)
+    let g₂ : Z ⟶ j.1.1 := Over.homMk (b ≫ pullback.snd f j.1.1.hom) hW.symm
+    have hcomm : g₁ ≫ i.1.2 = g₂ ≫ j.1.2 := by
+      ext
+      exact hab₂
+    have key := congrArg Subtype.val (hx g₁ g₂ i.2 j.2 hcomm)
+    let s : W ⟶ pullback f Z.hom := pullback.lift (a ≫ pullback.fst f i.1.1.hom) (𝟙 W) (by
+      simp [Z, pullback.condition])
+    have hs₁ : s ≫ baseChangeMap f g₁ = a := by
+      apply pullback.hom_ext
+      · rw [Category.assoc, hfst g₁]
+        exact pullback.lift_fst _ _ _
+      · rw [Category.assoc, hsnd g₁]
+        exact pullback.lift_snd_assoc _ _ _ _ |>.trans (Category.id_comp _)
+    have hs₂ : s ≫ baseChangeMap f g₂ = b := by
+      apply pullback.hom_ext
+      · rw [Category.assoc, hfst g₂]
+        exact (pullback.lift_fst _ _ _).trans hab₁
+      · rw [Category.assoc, hsnd g₂]
+        exact pullback.lift_snd_assoc _ _ _ _ |>.trans (Category.id_comp _)
+    rw [← hs₁, ← hs₂, Scheme.IdealSheafData.comap_comp, Scheme.IdealSheafData.comap_comp]
+    exact congrArg (Scheme.IdealSheafData.comap · s) key
+  obtain ⟨J, hJ, hfin, hflat, hfp, hdeg, huniq⟩ := isSheaf_fpqc_finiteLocallyFreeSubscheme g hg
+    (pullback.snd f T.hom) d (fun i ↦ baseChangeMap f i.1.2) (fun i ↦ pullback.snd f i.1.1.hom)
+    (fun i ↦ isPullback_baseChangeMap f i.1.2) I (fun i ↦ (hI i).1) (fun i ↦ (hI i).2.1)
+    (fun i ↦ (hI i).2.2.1) (fun i ↦ (hI i).2.2.2) hcompat
+  refine ⟨⟨J, hfin, hflat, hfp, hdeg⟩, fun Y h hh ↦ Subtype.ext (hJ ⟨⟨Y, h⟩, hh⟩), ?_⟩
+  intro y hy
+  refine Subtype.ext (huniq _ fun i ↦ ?_)
+  exact congrArg Subtype.val (hy i.1.2 i.2)
+
+/-- The Hilbert functor is a Zariski sheaf, since it is an fppf sheaf and Zariski coverings are
+fppf coverings.
+
+(blueprint: `sk-cor-picard-hilb-sheaf`, `rem-ptr-pc-fppf-site-5`) -/
+lemma isSheaf_zariskiTopology_hilbertPresheaf (f : X ⟶ S) (d : ℕ) :
+    Presheaf.IsSheaf (Scheme.zariskiTopology.over S) (hilbertPresheaf f d) := by
+  have h := isSheaf_hilbertPresheaf f d
+  rw [isSheaf_iff_isSheaf_of_type] at h ⊢
+  refine Presieve.isSheaf_of_le _ (fun T R hR ↦ ?_) h
+  rw [GrothendieckTopology.mem_over_iff] at hR ⊢
+  exact Precoverage.toGrothendieck_mono Scheme.zariskiPrecoverage_le_fppfPrecoverage _ hR
+
 
 end AlgebraicGeometry
