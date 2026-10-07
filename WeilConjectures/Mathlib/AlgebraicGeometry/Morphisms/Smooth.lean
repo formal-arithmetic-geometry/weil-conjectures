@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.Topology.KrullDimension
@@ -33,6 +34,12 @@ The index type of the affine space is `ULift.{u} (Fin d)`, since
   smooth morphism of relative dimension `d`.
 - `AlgebraicGeometry.Scheme.Hom.exists_etale_to_affineSpace_of_mem_smoothLocus`: the étale-local
   normal form of a morphism near a point at which it is smooth.
+- `AlgebraicGeometry.Smooth.exists_mem_etale_residueFieldMap`: in every fibre of a smooth
+  morphism, the points with finite separable residue field extension are dense.
+- `AlgebraicGeometry.Smooth.exists_etale_comp_of_etale_residueFieldMap`: through a point with
+  finite separable residue field extension passes an étale slice.
+- `AlgebraicGeometry.Smooth.exists_geometricallyIrreducible_of_section`: the relative connected
+  component of a section of a smooth morphism is open, with geometrically irreducible fibres.
 - `AlgebraicGeometry.smoothOfRelativeDimension_iff_topologicalKrullDim_eq`: an irreducible
   scheme smooth over a field is smooth of relative dimension `n` if and only if it has
   dimension `n`.
@@ -55,6 +62,7 @@ The index type of the affine space is `ULift.{u} (Fin d)`, since
 ## References
 
 - Stacks Project, Tag `054L`, <https://stacks.math.columbia.edu/tag/054L>
+- Stacks Project, Tags `056U`, `057G`, `055R`, <https://stacks.math.columbia.edu/tag/057G>
 -/
 
 @[expose] public section
@@ -197,6 +205,42 @@ theorem Scheme.Hom.exists_etale_to_affineSpace_of_mem_smoothLocus {X Y : Scheme.
   have hxV'' : x ∈ V.ι ''ᵁ V' := ⟨⟨x, hxV⟩, hxV', rfl⟩
   exact ⟨_, _, _, hU'', hV'', (le_resLE_preimage_iff g hVU U' V').mp hVU' hxV'', hxV'', _, e,
     he, hge⟩
+
+/-- **Density of separable points** (Stacks `056U`). Let `f : X ⟶ S` be smooth. Every open
+`U` of `X` meeting the fibre through `x` contains a point `x'` of that fibre whose residue field
+is finite separable over `κ(f x)`, that is, `κ(f x) ⟶ κ(x')` is étale. These are closed points of
+the fibre. By the normal form `AlgebraicGeometry.Smooth.exists_etale_to_affineSpace`, an open of
+the fibre is étale over an open of `𝔸ᵈ_{κ(s)}`, in which the closed points with separable
+residue field are dense. -/
+@[stacks 056U]
+theorem Smooth.exists_mem_etale_residueFieldMap {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f]
+    (U : X.Opens) {x : X} (hx : x ∈ U) :
+    ∃ x' ∈ U, f x' = f x ∧ (f.residueFieldMap x').hom.Etale :=
+  sorry
+
+/-- **Étale slices** (Stacks `057G`). Let `f : X ⟶ S` be smooth and let `x : X` have finite
+separable residue field over `κ(f x)`, so that `x` is a closed point of its fibre. Then there is
+an affine scheme `Z`, a point `z : Z` and an immersion `ι : Z ⟶ X` through `x` such that
+`ι ≫ f` is étale: one cuts `X` near `x` by `d` functions vanishing at `x` whose differentials are
+a basis of `Ω_{X/S} ⊗ κ(x)`. -/
+@[stacks 057G]
+theorem Smooth.exists_etale_comp_of_etale_residueFieldMap {X S : Scheme.{u}} (f : X ⟶ S)
+    [Smooth f] {x : X} (hx : (f.residueFieldMap x).hom.Etale) :
+    ∃ (Z : Scheme.{u}) (ι : Z ⟶ X) (z : Z), IsAffine Z ∧ IsImmersion ι ∧ Etale (ι ≫ f) ∧
+      ι z = x :=
+  sorry
+
+/-- **The relative connected component of a section** (Stacks `055R`, `055P`). Let `g : P ⟶ T`
+be smooth with a section `σ`. The points `p` lying in the connected component of `σ (g p)` in
+their fibre form an open `P⁰` of `P`, here an open `U` containing them. Its fibres over `T` are
+the connected components through the rational points `σ t` of the smooth fibres, hence
+geometrically connected and, being smooth, geometrically irreducible. -/
+@[stacks 055R]
+theorem Smooth.exists_geometricallyIrreducible_of_section {P T : Scheme.{u}} (g : P ⟶ T)
+    [Smooth g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) :
+    ∃ U : P.Opens, Set.range σ ⊆ U ∧ GeometricallyIrreducible (U.ι ≫ g) ∧
+      ∀ p : P, p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p)) → p ∈ U :=
+  sorry
 
 /-- An irreducible scheme `X` smooth over a field `K` is smooth of relative dimension `n` over
 `K` if and only if `X` has dimension `n`: the relative dimension of a smooth morphism at a point
