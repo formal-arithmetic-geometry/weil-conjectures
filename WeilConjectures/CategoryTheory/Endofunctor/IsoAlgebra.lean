@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndoFunctor
 
 /-!
@@ -75,6 +76,150 @@ instance preservesFiniteColimits_mapOfNatIso [PreservesFiniteColimits L] :
 
 end Map
 
+section Autoequivalence
+
+variable (F : C ⥤ C) [F.IsEquivalence]
+
+instance : (forget F).Faithful :=
+  inferInstanceAs ((Algebra.IsIsoStr F).ι ⋙ Algebra.forget F).Faithful
+
+/-- The category of algebras with invertible structure morphism of an autoequivalence has the
+colimits that the underlying category has: they are created by the forgetful functor. -/
+instance (J : Type*) [Category J] [HasColimitsOfShape J C] :
+    HasColimitsOfShape J (IsoAlgebra F) :=
+  inferInstanceAs (HasColimitsOfShape J (Algebra.IsIsoStr F).FullSubcategory)
+
+instance (J : Type*) [Category J] [HasColimitsOfShape J C] :
+    PreservesColimitsOfShape J (forget F) :=
+  inferInstanceAs (PreservesColimitsOfShape J ((Algebra.IsIsoStr F).ι ⋙ Algebra.forget F))
+
+/-! ### The free algebra on an object
+
+For an object `S`, the coproduct `∐_{n ∈ ℤ} Fⁿ S` carries the structure isomorphism
+`F (∐ₙ Fⁿ S) ≅ ∐ₙ Fⁿ⁺¹ S ≅ ∐ₙ Fⁿ S` shifting the summands, and a morphism `s : S ⟶ K` into an
+algebra `K` extends to a morphism of algebras `∐ₙ Fⁿ S ⟶ K`, given on `Fⁿ S` by `Fⁿ s` followed
+by the `n`-th iterate of the structure isomorphism of `K`. -/
+
+namespace Free
+
+/-- (Impl) The objects `Fⁿ S` for `n ≥ 0`. -/
+def posObj (S : C) : ℕ → C
+  | 0 => S
+  | n + 1 => F.obj (posObj S n)
+
+/-- (Impl) The objects `F⁻⁽ⁿ⁺¹⁾ S` for `n ≥ 0`, for a quasi-inverse `F⁻¹` of `F`. -/
+noncomputable def negObj (S : C) : ℕ → C
+  | 0 => F.inv.obj S
+  | n + 1 => F.inv.obj (negObj S n)
+
+/-- (Impl) The objects `Fⁿ S` for `n : ℤ`. -/
+noncomputable def obj (S : C) : ℤ → C
+  | .ofNat n => posObj F S n
+  | .negSucc n => negObj F S n
+
+/-- (Impl) The isomorphisms `F (Fⁿ S) ≅ Fⁿ⁺¹ S`: identities for `n ≥ 0` and counits of
+`F⁻¹ ⊣ F` for `n < 0`. -/
+noncomputable def objSucc (S : C) : ∀ n : ℤ, F.obj (obj F S n) ≅ obj F S (n + 1)
+  | .ofNat _ => Iso.refl _
+  | .negSucc 0 => F.asEquivalence.counitIso.app S
+  | .negSucc (n + 1) => F.asEquivalence.counitIso.app (negObj F S n)
+
+variable {F} {S : C} (K : IsoAlgebra F) (s : S ⟶ K.carrier)
+
+/-- (Impl) The morphisms `Fⁿ S ⟶ K` for `n ≥ 0` induced by `s : S ⟶ K`: `Fⁿ s` followed by
+the iterated structure isomorphism. -/
+noncomputable def posHom : ∀ n : ℕ, posObj F S n ⟶ K.carrier
+  | 0 => s
+  | n + 1 => F.map (posHom n) ≫ K.str.hom
+
+/-- (Impl) The morphisms `F⁻⁽ⁿ⁺¹⁾ S ⟶ K` for `n ≥ 0` induced by `s : S ⟶ K`, defined by
+descending induction using that `F` is fully faithful. -/
+noncomputable def negHom : ∀ n : ℕ, negObj F S n ⟶ K.carrier
+  | 0 => F.preimage ((objSucc F S (.negSucc 0)).hom ≫ s ≫ K.str.inv)
+  | n + 1 => F.preimage ((objSucc F S (.negSucc (n + 1))).hom ≫ negHom n ≫ K.str.inv)
+
+/-- (Impl) The morphisms `Fⁿ S ⟶ K` for `n : ℤ` induced by `s : S ⟶ K`. -/
+noncomputable def hom : ∀ n : ℤ, obj F S n ⟶ K.carrier
+  | .ofNat n => posHom K s n
+  | .negSucc n => negHom K s n
+
+/-- The morphisms `Fⁿ S ⟶ K` are compatible with the structure isomorphisms. -/
+lemma map_hom_comp_str (n : ℤ) :
+    F.map (hom K s n) ≫ K.str.hom = (objSucc F S n).hom ≫ hom K s (n + 1) := by
+  rcases n with n | _ | n
+  · exact (Category.id_comp _).symm
+  all_goals
+    simp only [hom, negHom, Functor.map_preimage, Category.assoc, Iso.inv_hom_id,
+      Category.comp_id]
+    rfl
+
+/-- On `F⁰ S = S`, the induced morphism is `s`. -/
+@[simp]
+lemma hom_zero : hom K s 0 = s :=
+  rfl
+
+variable (F S) [HasColimitsOfShape (Discrete ℤ) C]
+
+/-- (Impl) The structure isomorphism `F (∐ₙ Fⁿ S) ≅ ∐ₙ F (Fⁿ S) ≅ ∐ₙ Fⁿ⁺¹ S ≅ ∐ₙ Fⁿ S` of the free
+algebra. -/
+noncomputable def str : F.obj (∐ obj F S) ≅ ∐ obj F S :=
+  PreservesCoproduct.iso F (obj F S) ≪≫ Sigma.mapIso (objSucc F S) ≪≫
+    Sigma.reindex (Equiv.addRight (1 : ℤ)) (obj F S)
+
+/-- The structure isomorphism of the free algebra maps the summand `F (Fⁿ S)` to the summand
+`Fⁿ⁺¹ S`. -/
+@[reassoc]
+lemma map_ι_comp_str (n : ℤ) :
+    F.map (Sigma.ι (obj F S) n) ≫ (str F S).hom =
+      (objSucc F S n).hom ≫ Sigma.ι (obj F S) (n + 1) := by
+  have h : F.map (Sigma.ι (obj F S) n) ≫ (PreservesCoproduct.iso F (obj F S)).hom =
+      Sigma.ι (fun n ↦ F.obj (obj F S n)) n := by
+    rw [← Iso.eq_comp_inv, PreservesCoproduct.inv_hom, ι_comp_sigmaComparison]
+  simp only [str, Iso.trans_hom, reassoc_of% h, Sigma.ι_mapIso_hom_assoc]
+  exact congrArg _ (Sigma.ι_reindex_hom (Equiv.addRight (1 : ℤ)) (obj F S) n)
+
+/-- Morphisms out of `F (∐ₙ Fⁿ S)` are determined by their restrictions to the `F (Fⁿ S)`, since
+`F` preserves coproducts. -/
+lemma map_hom_ext {Z : C} {u u' : F.obj (∐ obj F S) ⟶ Z}
+    (h : ∀ n, F.map (Sigma.ι (obj F S) n) ≫ u = F.map (Sigma.ι (obj F S) n) ≫ u') : u = u' := by
+  rw [← cancel_epi (PreservesCoproduct.iso F (obj F S)).inv]
+  refine Sigma.hom_ext _ _ fun n ↦ ?_
+  simpa [PreservesCoproduct.inv_hom] using h n
+
+/-- The free algebra `∐ₙ Fⁿ S` on `S`, with structure isomorphism shifting the summands. -/
+noncomputable def algebra : IsoAlgebra F :=
+  IsoAlgebra.mk (∐ obj F S) (str F S)
+
+variable {F S}
+
+/-- The morphism of algebras `∐ₙ Fⁿ S ⟶ K` induced by a morphism `s : S ⟶ K`. -/
+noncomputable def desc : algebra F S ⟶ K :=
+  ObjectProperty.homMk
+    { f := Sigma.desc (hom K s)
+      h := map_hom_ext F S fun n ↦ by
+        change F.map (Sigma.ι (obj F S) n) ≫ F.map (Sigma.desc (hom K s)) ≫ K.str.hom =
+          F.map (Sigma.ι (obj F S) n) ≫ (str F S).hom ≫ Sigma.desc (hom K s)
+        rw [map_ι_comp_str_assoc, ← F.map_comp_assoc, Sigma.ι_desc, Sigma.ι_desc,
+          map_hom_comp_str] }
+
+/-- The morphism `desc K s` restricts to `s` on the summand `S = F⁰ S`. -/
+@[reassoc (attr := simp)]
+lemma ι_desc_hom_f : Sigma.ι (obj F S) 0 ≫ (desc K s).hom.f = s :=
+  Sigma.ι_desc _ _
+
+/-- The free algebra on a separator of `C` is a separator of `IsoAlgebra F`. -/
+lemma isSeparator_algebra (hS : IsSeparator S) : IsSeparator (algebra F S) := by
+  rw [isSeparator_def] at hS ⊢
+  intro K L f g hfg
+  refine (forget F).map_injective (hS _ _ fun s ↦ ?_)
+  have := congr_arg (fun φ ↦ Sigma.ι (obj F S) 0 ≫ (forget F).map φ) (hfg (desc K s))
+  simp only [Functor.map_comp] at this
+  simpa only [forget_map, ι_desc_hom_f_assoc] using this
+
+end Free
+
+end Autoequivalence
+
 variable (F : C ⥤ C) [Abelian C] [F.Additive] [F.IsEquivalence]
 
 /-- **Algebras for an autoequivalence of a Grothendieck abelian category.** If `F` is an
@@ -86,7 +231,14 @@ conservative. If `S` is a separator of `C`, then the free objects
 morphism of algebras out of the free object on `S` is the same as a morphism out of `S` in
 `C`. -/
 theorem isGrothendieckAbelian [IsGrothendieckAbelian.{w} C] :
-    IsGrothendieckAbelian.{w} (IsoAlgebra F) :=
-  sorry
+    IsGrothendieckAbelian.{w} (IsoAlgebra F) := by
+  have : HasFilteredColimitsOfSize.{w, w} (IsoAlgebra F) := ⟨fun _ _ _ ↦ inferInstance⟩
+  have : AB5OfSize.{w, w} (IsoAlgebra F) :=
+    ⟨fun J _ _ ↦ HasExactColimitsOfShape.domain_of_functor J (forget F)⟩
+  have : LocallySmall.{w} (IsoAlgebra F) := locallySmall_of_faithful (forget F)
+  have : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink.{0, 0} C
+  obtain ⟨S, hS⟩ := HasSeparator.hasSeparator (C := C)
+  have : HasSeparator (IsoAlgebra F) := ⟨_, Free.isSeparator_algebra hS⟩
+  exact {}
 
 end CategoryTheory.Endofunctor.IsoAlgebra

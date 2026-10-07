@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.RingTheory.Unramified.LocalRing
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 
 /-!
@@ -27,6 +28,8 @@ is the preimage of its range under `Limits.pullback.lift a b h : T ⟶ W ×[Z] W
 - `AlgebraicGeometry.FormallyUnramified.eqLocus` — the open subscheme of `T` on which `a`
   and `b` agree;
 - `AlgebraicGeometry.FormallyUnramified.eqLocus_ι_comp_eq` — the two morphisms do agree on it;
+- `AlgebraicGeometry.FormallyUnramified.map_maximalIdeal_stalkMap` — the stalk maps of an
+  unramified morphism map the maximal ideal onto the maximal ideal;
 - `AlgebraicGeometry.FormallyUnramified.range_subset_eqLocus` — a morphism `c : S ⟶ T` with
   `c ≫ a = c ≫ b` has its range inside it; in particular, if `a` and `b` agree at a point of
   `T` then that point lies in `eqLocus p a b h`.
@@ -121,6 +124,24 @@ theorem isOpenImmersion_of_comp {T X Y : Scheme.{u}} (f : X ⟶ Y) [FormallyUnra
       isOpenImmersion_diagonal g
   MorphismProperty.of_postcomp _ (W' := @FormallyUnramified ⊓ @LocallyOfFiniteType) σ f
     ⟨‹_›, ‹_›⟩ ‹_›
+
+/-- **The stalk maps of an unramified morphism are unramified.** For a formally unramified
+morphism `f` locally of finite type, the stalk map `𝒪_{Y, f x} ⟶ 𝒪_{X, x}` maps the maximal
+ideal onto the maximal ideal. -/
+lemma map_maximalIdeal_stalkMap {X Y : Scheme.{u}} (f : X ⟶ Y) [FormallyUnramified f]
+    [LocallyOfFiniteType f] (x : X) :
+    (IsLocalRing.maximalIdeal (Y.presheaf.stalk (f x))).map (f.stalkMap x).hom =
+      IsLocalRing.maximalIdeal (X.presheaf.stalk x) := by
+  algebraize [(f.stalkMap x).hom]
+  have : IsLocalHom (algebraMap (Y.presheaf.stalk (f x)) (X.presheaf.stalk x)) :=
+    inferInstanceAs <| IsLocalHom (f.stalkMap x).hom
+  have : Algebra.EssFiniteType (Y.presheaf.stalk (f x)) (X.presheaf.stalk x) := by
+    rw [← RingHom.essFiniteType_algebraMap, RingHom.algebraMap_toAlgebra]
+    exact LocallyOfFiniteType.stalkMap f x
+  have : Algebra.FormallyUnramified (Y.presheaf.stalk (f x)) (X.presheaf.stalk x) := by
+    rw [← RingHom.formallyUnramified_algebraMap, RingHom.algebraMap_toAlgebra]
+    exact FormallyUnramified.stalkMap f x
+  exact Algebra.FormallyUnramified.map_maximalIdeal
 
 end FormallyUnramified
 
