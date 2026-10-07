@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 
 /-!
 # The locus where two morphisms into an unramified scheme agree
@@ -147,10 +148,7 @@ lemma Scheme.Hom.finite_residueFieldMap (x : X) : (f.residueFieldMap x).hom.Fini
 lemma Scheme.Hom.etale_residueFieldMap (x : X) : (f.residueFieldMap x).hom.Etale := by
   have := f.finite_residueFieldMap x
   algebraize [(f.residueFieldMap x).hom]
-  refine RingHom.etale_algebraMap.mpr ?_
-  have : Algebra.FormallyEtale (Y.residueField (f x)) (X.residueField x) :=
-    (Algebra.FormallyEtale.iff_isSeparable _ _).mpr inferInstance
-  exact ⟨inferInstance, Algebra.FinitePresentation.of_finiteType.mp inferInstance⟩
+  exact RingHom.etale_algebraMap.mpr .of_finite_of_isSeparable
 
 end residueField
 

@@ -21,6 +21,7 @@ factors; in particular there are exactly `dim_K A` of them.
 - `Algebra.Etale.natCard_algHom_eq_finrank`: `#(A →ₐ[K] L) = dim_K A`.
 - `Algebra.Etale.iff_subsingleton_kaehlerDifferential_of_field`: a finite algebra over a field
   is étale if and only if its module of Kähler differentials vanishes.
+- `Algebra.Etale.of_finite_of_isSeparable`: a finite separable field extension is étale.
 -/
 
 @[expose] public section
@@ -91,5 +92,10 @@ theorem iff_subsingleton_kaehlerDifferential_of_field {K A : Type*} [Field K] [C
   have : Algebra.FormallyUnramified K A := ⟨h⟩
   exact ⟨.of_formallyUnramified_of_field K A,
     FinitePresentation.of_finiteType.mp inferInstance⟩
+
+/-- A finite separable field extension is étale. -/
+theorem of_finite_of_isSeparable {K L : Type*} [Field K] [Field L] [Algebra K L]
+    [Module.Finite K L] [Algebra.IsSeparable K L] : Algebra.Etale K L :=
+  ⟨.of_isSeparable K L, FinitePresentation.of_finiteType.mp inferInstance⟩
 
 end Algebra.Etale

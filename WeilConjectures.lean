@@ -107,6 +107,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceSections
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitExists
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitNeighborhood
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalization
