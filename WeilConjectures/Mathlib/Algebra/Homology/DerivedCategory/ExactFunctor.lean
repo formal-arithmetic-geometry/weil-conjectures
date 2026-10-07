@@ -440,6 +440,54 @@ lemma ι_map_mapDerivedCategoryPlusFactorsh_hom_app (K : HomotopyCategory.Plus C
     DerivedCategory.Plus.Qh, mapDerivedCategoryPlus, mapHomotopyCategoryPlus,
     ObjectProperty.lift]
 
+/-- The factorization `Functor.mapDerivedCategoryPlusFactorsh` commutes with the shifts. -/
+instance : NatTrans.CommShift F.mapDerivedCategoryPlusFactorsh.hom ℤ := by
+  have : Functor.whiskerRight F.mapDerivedCategoryPlusFactorsh.hom DerivedCategory.Plus.ι =
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft DerivedCategory.Plus.Qh
+        (DerivedCategory.TStructure.t.plus.liftCompιIso _ _).hom ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (DerivedCategory.TStructure.t.plus.liftCompιIso _ _).hom
+        F.mapDerivedCategory ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft (HomotopyCategory.Plus.ι C) F.mapDerivedCategoryFactorsh.hom ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight ((HomotopyCategory.plus D).liftCompιIso _ _).inv
+        DerivedCategory.Qh ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft F.mapHomotopyCategoryPlus
+        (DerivedCategory.TStructure.t.plus.liftCompιIso _ _).inv ≫
+      (Functor.associator _ _ _).inv := by
+    ext K
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, ObjectProperty.liftCompιIso,
+      Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, Functor.map_id, Category.id_comp]
+    rw [F.ι_map_mapDerivedCategoryPlusFactorsh_hom_app K]
+    simp only [Functor.comp_obj, ObjectProperty.ι_obj, ObjectProperty.lift_obj_obj,
+      Category.id_comp, Category.comp_id]
+    erw [Category.id_comp, Category.id_comp, Functor.map_id, Category.id_comp,
+      Category.comp_id]
+  have h₁ : NatTrans.CommShift (Functor.whiskerLeft DerivedCategory.Plus.Qh
+      (DerivedCategory.TStructure.t.plus.liftCompιIso (DerivedCategory.TStructure.t.plus.ι ⋙
+        F.mapDerivedCategory) (fun X ↦ (F.mapDerivedCategoryPlus.obj X).2)).hom) ℤ :=
+    inferInstance
+  have h₂ : NatTrans.CommShift (Functor.whiskerRight
+      (DerivedCategory.TStructure.t.plus.liftCompιIso
+        (HomotopyCategory.Plus.ι C ⋙ DerivedCategory.Qh)
+        (fun X ↦ (DerivedCategory.Plus.Qh.obj X).2)).hom F.mapDerivedCategory) ℤ :=
+    inferInstance
+  have h₃ : NatTrans.CommShift (Functor.whiskerLeft (HomotopyCategory.Plus.ι C)
+      F.mapDerivedCategoryFactorsh.hom) ℤ := inferInstance
+  have h₄ : NatTrans.CommShift (Functor.whiskerLeft F.mapHomotopyCategoryPlus
+      (DerivedCategory.TStructure.t.plus.liftCompιIso
+        ((HomotopyCategory.plus D).ι ⋙ DerivedCategory.Qh)
+        (fun X ↦ (DerivedCategory.Plus.Qh.obj X).2)).inv) ℤ :=
+    inferInstance
+  have : NatTrans.CommShift (Functor.whiskerRight F.mapDerivedCategoryPlusFactorsh.hom
+      DerivedCategory.Plus.ι) ℤ := by
+    rw [this]; infer_instance
+  exact NatTrans.CommShift.of_whiskerRight _ DerivedCategory.Plus.ι
+
 /-- An exact functor commutes with the homology functors of the bounded below derived
 categories: the restriction of `Functor.mapDerivedCategoryHomologyFunctorIso` along the
 inclusion `DerivedCategory.Plus.ι`. -/

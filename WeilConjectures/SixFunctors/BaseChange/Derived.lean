@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-!
 # The derived base change map `g^* Rf_* ⟶ Rf'_* g'^*` on `D⁺`
@@ -187,6 +188,59 @@ lemma Etale.derivedBaseChangeMapPlus_ext (sq : CommSq g' f' f g)
     Etale.rightDerivedLowerStarPlusCompUpperStarUnit, Functor.whiskerRight_app,
     Functor.associator_hom_app, comp_id, Functor.comp_obj]
   rw [hδ K, ← Etale.derivedBaseChangeMapPlus_fac_app]
+
+omit [HasSmallSiteSheafify A] in
+/-- **The derived base change map commutes with the shifts.** On complexes of injective
+sheaves it is computed by the underived base change map and the units of the right derived
+functors (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_fac_app`), all of which commute with
+the shifts; every bounded below complex is quasi-isomorphic to a complex of injective sheaves.
+In particular the derived base change map is a morphism of triangulated functors, so it
+induces morphisms of triangles and of the associated long exact sequences of homology. -/
+instance Etale.commShift_derivedBaseChangeMapPlus (sq : CommSq g' f' f g) :
+    NatTrans.CommShift (Etale.derivedBaseChangeMapPlus A sq) ℤ := by
+  let inj := (InjectiveObject.ι (Sheaf X.smallEtaleTopology A)).mapHomotopyCategoryPlus
+  let α := Etale.rightDerivedLowerStarPlusCompUpperStarUnit A f g
+  have hfac := Functor.rightDerived_fac _ α (HomotopyCategory.Plus.quasiIso _) _
+    (Etale.baseChangeMapHomotopyPlus A sq)
+  have hβ : NatTrans.CommShift (Etale.baseChangeMapHomotopyPlus A sq) ℤ := by
+    dsimp only [Etale.baseChangeMapHomotopyPlus]
+    infer_instance
+  have hα : NatTrans.CommShift α ℤ := by
+    have : α = (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight (f)_*[A].rightDerivedFunctorPlusUnit
+          ((g)^*[A]).mapDerivedCategoryPlus ≫ (Functor.associator _ _ _).hom := by
+      ext K
+      simp [α]
+    rw [this]
+    infer_instance
+  have : IsIso (Functor.whiskerLeft inj α) := by
+    refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun K ↦ ?_)
+    dsimp [α]
+    infer_instance
+  have h₁ : NatTrans.CommShift (Functor.whiskerLeft inj
+      (Functor.whiskerLeft DerivedCategory.Plus.Qh (Etale.derivedBaseChangeMapPlus A sq))) ℤ := by
+    have : Functor.whiskerLeft inj
+        (Functor.whiskerLeft DerivedCategory.Plus.Qh (Etale.derivedBaseChangeMapPlus A sq)) =
+        inv (Functor.whiskerLeft inj α) ≫ Functor.whiskerLeft inj
+          (Etale.baseChangeMapHomotopyPlus A sq) := by
+      rw [IsIso.eq_inv_comp, ← Functor.whiskerLeft_comp, Etale.derivedBaseChangeMapPlus, hfac]
+    rw [this]
+    have : NatTrans.CommShift (Functor.whiskerLeft inj α) ℤ := inferInstance
+    have : NatTrans.CommShift (inv (Functor.whiskerLeft inj α)) ℤ :=
+      NatTrans.CommShift.of_isIso _ _
+    infer_instance
+  have h₂ : NatTrans.CommShift
+      (Functor.whiskerLeft DerivedCategory.Plus.Qh (Etale.derivedBaseChangeMapPlus A sq)) ℤ := by
+    refine NatTrans.CommShift.of_whiskerLeft _ inj (fun K ↦ ?_)
+    let E := DerivedCategory.Plus.injectiveObjectEquivalence (Sheaf X.smallEtaleTopology A)
+    obtain ⟨f, hf⟩ := (DerivedCategory.Plus.Qh_map_bijective_of_isKInjective K
+      (inj.obj (E.inverse.obj (DerivedCategory.Plus.Qh.obj K)))
+      inferInstance).2 (E.counitIso.inv.app (DerivedCategory.Plus.Qh.obj K))
+    refine ⟨_, f, ?_⟩
+    rw [Functor.comp_map, hf]
+    infer_instance
+  refine NatTrans.CommShift.of_whiskerLeft _ DerivedCategory.Plus.Qh (fun K ↦ ?_)
+  exact ⟨_, (DerivedCategory.Plus.Qh.objObjPreimageIso K).inv, inferInstance⟩
 
 end Derived
 
