@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.FieldTheory.Finite.Basic
+public import WeilConjectures.Mathlib.Algebra.CharP.Algebra
 
 /-!
 # The geometric Frobenius of an algebraic extension of a finite field
@@ -27,6 +28,7 @@ automorphism that acts on étale cohomology in the Weil conjectures.
   of the geometric Frobenius fixes the image of a field with `#K ^ m` elements.
 - `FiniteField.frobeniusAlgEquivOfAlgebraic_apply_eq_self_iff`: the fixed field of the arithmetic
   Frobenius is `K`.
+- `FiniteField.X_pow_card_sub_X_eq_prod`: `X ^ q - X = ∏_{c ∈ K} (X - c)`.
 -/
 
 @[expose] public section
@@ -83,5 +85,43 @@ theorem frobeniusAlgEquivOfAlgebraic_apply_eq_self_iff {x : L} :
   rw [← himage] at hx'
   obtain ⟨a, -, rfl⟩ := Finset.mem_image.mp hx'
   exact ⟨a, rfl⟩
+
+section ArtinSchreier
+
+open Polynomial
+
+variable {k A : Type*} [Field k] [Fintype k] [CommRing A]
+
+/-- Over a finite field `k` with `q` elements, `X ^ q - X = ∏_{c ∈ k} (X - c)`. -/
+theorem X_pow_card_sub_X_eq_prod : (X ^ Fintype.card k - X : k[X]) = ∏ c, (X - C c) := by
+  have hq := Fintype.one_lt_card (α := k)
+  rw [← prod_multiset_X_sub_C_of_monic_of_roots_card_eq
+    (monic_X_pow_sub (by rw [degree_X]; exact_mod_cast hq))
+    (by rw [roots_X_pow_card_sub_X, X_pow_card_sub_X_natDegree_eq k hq]; rfl),
+    roots_X_pow_card_sub_X]
+  rfl
+
+/-- If `u ^ q = u` in a `k`-algebra, then `∏_{c ∈ k} (u - c) = 0`. -/
+theorem prod_sub_eq_zero_of_pow_card_eq (ψ : k →+* A) {u : A} (hu : u ^ Fintype.card k = u) :
+    ∏ c, (u - ψ c) = 0 := by
+  have := congrArg (eval₂ ψ u) (X_pow_card_sub_X_eq_prod (k := k))
+  simp only [eval₂_sub, eval₂_X_pow, eval₂_X, hu, sub_self, eval₂_finsetProd,
+    eval₂_C] at this
+  exact this.symm
+
+/-- If `x ^ q - x = y ^ q - y` in a `k`-algebra, then `(y - x) ^ q = y - x`. -/
+theorem sub_pow_card_eq_of_pow_card_sub_eq (ψ : k →+* A) {x y : A}
+    (h : x ^ Fintype.card k - x = y ^ Fintype.card k - y) :
+    (y - x) ^ Fintype.card k = y - x := by
+  obtain h' | h' := subsingleton_or_nontrivial A
+  · exact Subsingleton.elim _ _
+  obtain ⟨m, hp, hm⟩ := FiniteField.card k (ringChar k)
+  have := Fact.mk hp
+  have := CharP.of_ringHom_of_prime ψ hp (ringChar.Nat.cast_ringChar)
+  rw [hm] at h ⊢
+  rw [sub_pow_char_pow]
+  linear_combination -h
+
+end ArtinSchreier
 
 end FiniteField

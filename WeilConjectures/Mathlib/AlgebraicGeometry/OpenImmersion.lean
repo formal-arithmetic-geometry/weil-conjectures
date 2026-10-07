@@ -263,4 +263,24 @@ instance IsOpenImmersion.isOver_lift (H : Set.range g ⊆ Set.range f) :
 
 end LiftOver
 
+/-- Let `s : Y ⟶ X` be a section of `p : X ⟶ Y` and let `U` be an open of `X` containing the
+image of `s` such that `p ≫ s` restricts to the inclusion on `U`. Then `s` is an open immersion
+with image `U`. -/
+lemma isOpenImmersion_and_range_eq_of_section {X Y : Scheme.{u}} (p : X ⟶ Y) (s : Y ⟶ X)
+    (hs : s ≫ p = 𝟙 Y) (U : X.Opens) (hU : s ⁻¹ᵁ U = ⊤) (hpU : U.ι ≫ p ≫ s = U.ι) :
+    IsOpenImmersion s ∧ Set.range s = U := by
+  have hrange : Set.range s ⊆ Set.range U.ι := by
+    rintro _ ⟨y, rfl⟩
+    rw [U.range_ι]
+    have hy : y ∈ s ⁻¹ᵁ U := hU ▸ trivial
+    exact hy
+  have hs' : IsOpenImmersion.lift U.ι s hrange ≫ U.ι = s := IsOpenImmersion.lift_fac _ _ _
+  have : IsIso (IsOpenImmersion.lift U.ι s hrange) := by
+    refine ⟨U.ι ≫ p, ?_, ?_⟩
+    · rw [reassoc_of% hs', hs]
+    · rw [← cancel_mono U.ι, Category.assoc, Category.assoc, hs', hpU, Category.id_comp]
+  rw [← hs']
+  refine ⟨inferInstance, ?_⟩
+  rw [← Scheme.Hom.coe_opensRange, Scheme.Hom.opensRange_comp_of_isIso, U.opensRange_ι]
+
 end AlgebraicGeometry
