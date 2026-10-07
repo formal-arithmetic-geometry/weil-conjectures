@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Complements on the relative normalization
@@ -98,3 +100,145 @@ theorem isFinite_fromNormalization {K : Type u} [Field K] [IsOpenImmersion f] [Q
   sorry
 
 end AlgebraicGeometry.Scheme.Hom
+
+namespace AlgebraicGeometry.Scheme
+
+variable (X : Scheme.{u}) [IsIntegral X]
+
+/-- The *normalization* `X^ν` of an integral scheme `X` in its function field `K = k(X)`: the
+relative normalization `Spec_X(𝒪̃_X)` of `X` in the generic point `Spec K ⟶ X`, where `𝒪̃_X` is
+the integral closure of `𝒪_X` in the constant sheaf `K`. Finiteness of `X^ν ⟶ X` is a separate
+property, `AlgebraicGeometry.Scheme.isFinite_fromNormalization_of_locallyOfFiniteType`.
+(blueprint: `def-sc-normalization`) -/
+noncomputable abbrev normalization : Scheme.{u} :=
+  X.fromSpecFunctionField.normalization
+
+/-- The canonical morphism `ν : X^ν ⟶ X` from the normalization of an integral scheme `X` in its
+function field. (blueprint: `def-sc-normalization`) -/
+noncomputable abbrev fromNormalization : X.normalization ⟶ X :=
+  X.fromSpecFunctionField.fromNormalization
+
+instance isDominant_fromNormalization : IsDominant X.fromNormalization :=
+  have : IsDominant (X.fromSpecFunctionField.toNormalization ≫ X.fromNormalization) := by
+    rw [Hom.toNormalization_fromNormalization]; infer_instance
+  .of_comp X.fromSpecFunctionField.toNormalization _
+
+/-- The normalization `ν : X^ν ⟶ X` of an integral scheme in its function field is surjective:
+it is integral, hence closed, and dominant. (blueprint: `lem-sc-normalization-exists`) -/
+instance surjective_fromNormalization : Surjective X.fromNormalization :=
+  have : UniversallyClosed X.fromNormalization :=
+    (IsIntegralHom.iff_universallyClosed_and_isAffineHom.mp inferInstance).1
+  inferInstance
+
+/-- **Finiteness of the normalization.** For an integral scheme `X` locally of finite type over a
+field `k`, the normalization `ν : X^ν ⟶ X` in the function field is finite: over an affine open
+`Spec A`, the integral closure of the finitely generated `k`-domain `A` in its fraction field is a
+finite `A`-module by E. Noether's finiteness theorem. In particular `X^ν` is proper over `k` if
+`X` is. (blueprint: `lem-sc-normalization-exists`) -/
+theorem isFinite_fromNormalization_of_locallyOfFiniteType {k : Type u} [Field k]
+    (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] : IsFinite X.fromNormalization :=
+  sorry
+
+/-- **The normalization is birational.** For an integral scheme `X` locally of finite type over
+a field `k`, the normalization `ν : X^ν ⟶ X` is an isomorphism over a nonempty, hence dense,
+open subscheme of `X`. (blueprint: `lem-sc-normalization-exists`) -/
+theorem exists_isIso_fromNormalization_restrict {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
+    [LocallyOfFiniteType q] :
+    ∃ U : X.Opens, (U : Set X).Nonempty ∧ IsIso (X.fromNormalization ∣_ U) :=
+  sorry
+
+/-- **The normalization preserves dimension.** For an integral scheme `X` locally of finite type
+over a field `k`, `dim X^ν = dim X`: the finite surjective morphism `ν` lifts chains of
+specializations, and identifies no two distinct points one of which specializes to the other.
+(blueprint: `lem-sc-normalization-exists`) -/
+theorem topologicalKrullDim_normalization {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
+    [LocallyOfFiniteType q] : topologicalKrullDim X.normalization = topologicalKrullDim X := by
+  have := X.isFinite_fromNormalization_of_locallyOfFiniteType q
+  exact le_antisymm (topologicalKrullDim_le_of_continuous X.fromNormalization.continuous
+      fun _ _ h e ↦ X.fromNormalization.eq_of_specializes_of_apply_eq h e)
+    (topologicalKrullDim_le_of_specializingMap X.fromNormalization.isClosedMap.specializingMap
+      X.fromNormalization.surjective)
+
+/-- Over a nonempty affine open `V` of an integral scheme `X` with `Γ(X, V)` integrally closed,
+the normalization `ν : X^ν ⟶ X` in the function field induces an isomorphism on sections:
+`Γ(X^ν, ν⁻¹ V)` is the integral closure of `Γ(X, V)` in its fraction field `k(X)`. -/
+theorem isIso_fromNormalization_app {V : X.Opens} (hV : IsAffineOpen V) [Nonempty V]
+    [IsIntegrallyClosed Γ(X, V)] : IsIso (X.fromNormalization.app V) := by
+  let f := X.fromSpecFunctionField
+  let := (f.app V).hom.toAlgebra
+  have hx : genericPoint X ∈ V :=
+    ((genericPoint_spec X).mem_open_set_iff V.isOpen).mpr (by simpa using ‹Nonempty V›)
+  -- `Γ(Spec k(X), f⁻¹ V)` is the fraction field of `Γ(X, V)`
+  have htop : f ⁻¹ᵁ V = ⊤ := by
+    refine top_unique fun p _ ↦ ?_
+    have : f p ∈ Set.range (X.fromSpecStalk (genericPoint X)) := ⟨p, rfl⟩
+    rw [Scheme.range_fromSpecStalk] at this
+    exact (show f p ⤳ genericPoint X from this).mem_open V.isOpen hx
+  let e : X.functionField ≃+* Γ(Spec X.functionField, f ⁻¹ᵁ V) :=
+    ((ΓSpecIso X.functionField).symm ≪≫ (Spec X.functionField).presheaf.mapIso
+      (eqToIso htop).op).commRingCatIsoToRingEquiv
+  have he (a : Γ(X, V)) : e (X.germToFunctionField V a) = algebraMap Γ(X, V) _ a := by
+    change _ = (f.app V) a
+    rw [Scheme.fromSpecStalk_app hx, Subsingleton.elim (homOfLE le_top) (eqToHom htop)]
+    rfl
+  have := functionField_isFractionRing_of_isAffineOpen X V hV
+  have : IsFractionRing Γ(X, V) Γ(Spec X.functionField, f ⁻¹ᵁ V) :=
+    IsLocalization.isLocalization_of_algEquiv _
+      { e with commutes' := he }
+  rw [Hom.fromNormalization_app f hV]
+  have hbij : Function.Bijective
+      (algebraMap Γ(X, V) (integralClosure Γ(X, V) Γ(Spec X.functionField, f ⁻¹ᵁ V))) := by
+    refine ⟨fun a b h ↦ IsFractionRing.injective Γ(X, V) Γ(Spec X.functionField, f ⁻¹ᵁ V)
+      (congrArg Subtype.val h), fun x ↦ ?_⟩
+    have hx : x.1 ∈ (⊥ : Subalgebra Γ(X, V) _) := by
+      rw [← IsIntegrallyClosed.integralClosure_eq_bot_iff
+        (K := Γ(Spec X.functionField, f ⁻¹ᵁ V)) |>.mpr inferInstance]
+      exact x.2
+    obtain ⟨a, ha⟩ := Algebra.mem_bot.mp hx
+    exact ⟨a, Subtype.ext ha⟩
+  have : IsIso (CommRingCat.ofHom (algebraMap Γ(X, V)
+      (integralClosure Γ(X, V) Γ(Spec X.functionField, f ⁻¹ᵁ V)))) :=
+    (RingEquiv.ofBijective _ hbij).toCommRingCatIso.isIso_hom
+  infer_instance
+
+/-- **The normalization over the normal locus.** For every open `U` of an integral scheme `X`
+whose local rings are integrally closed, the normalization `ν : X^ν ⟶ X` restricts to an
+isomorphism `ν⁻¹ U ⟶ U`: over an affine open `Spec A ⊆ U` the ring `A` is an integrally closed
+domain, hence equal to its integral closure in `k(X)`.
+(blueprint: `lem-sc-normalization-over-normal-locus`) -/
+theorem isIso_fromNormalization_restrict (U : X.Opens)
+    (hU : ∀ x ∈ U, IsIntegrallyClosed (X.presheaf.stalk x)) :
+    IsIso (X.fromNormalization ∣_ U) := by
+  -- the case of a nonempty affine open
+  have key (V : X.affineOpens) (hVU : (V : X.Opens) ≤ U) (hne : (V : Set X).Nonempty) :
+      IsIso (X.fromNormalization ∣_ V) := by
+    have : Nonempty V.1 := hne.to_subtype
+    have hV' : IsAffineOpen (V.1.ι ''ᵁ ⊤) := by rw [Scheme.Opens.ι_image_top]; exact V.2
+    have : Nonempty (V.1.ι ''ᵁ ⊤) := by rw [Scheme.Opens.ι_image_top]; infer_instance
+    have : IsIntegrallyClosed Γ(X, V.1.ι ''ᵁ ⊤) := by
+      rw [Scheme.Opens.ι_image_top]
+      exact isIntegrallyClosed_of_isIntegrallyClosed_stalk_of_mem V fun x hx ↦ hU x (hVU hx)
+    have := X.isIso_fromNormalization_app hV'
+    have : IsAffine V.1 := V.2
+    rw [← MorphismProperty.isomorphisms.iff,
+      HasAffineProperty.iff_of_isAffine (P := MorphismProperty.isomorphisms Scheme)]
+    refine ⟨V.2.preimage X.fromNormalization, ?_⟩
+    rw [morphismRestrict_appTop]
+    infer_instance
+  rw [← MorphismProperty.isomorphisms.iff, IsZariskiLocalAtTarget.iff_of_iSup_eq_top
+    (P := MorphismProperty.isomorphisms Scheme)
+    (fun V : {V : X.affineOpens // (V : X.Opens) ≤ U ∧ (V : Set X).Nonempty} ↦ U.ι ⁻¹ᵁ V.1.1) ?_]
+  · rintro ⟨V, hVU, hne⟩
+    refine (MorphismProperty.arrow_mk_iso_iff (MorphismProperty.isomorphisms Scheme)
+      (morphismRestrictRestrict _ _ _)).mpr ?_
+    have : U.ι ''ᵁ U.ι ⁻¹ᵁ V.1 = V.1 := by
+      rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι,
+        inf_eq_right.mpr hVU]
+    rw [this]
+    exact key V hVU hne
+  · refine top_unique fun x _ ↦ ?_
+    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVU⟩ :=
+      X.isBasis_affineOpens.exists_subset_of_mem_open x.2 U.isOpen
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨⟨V, hV⟩, hVU, ⟨x.1, hxV⟩⟩, by simpa using hxV⟩
+
+end AlgebraicGeometry.Scheme

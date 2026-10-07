@@ -389,10 +389,34 @@ theorem surjective_sub_id [IsAlgClosed k] [FiniteDimensional k V] (F : V →ₚ[
 variable {k' : Type*} [Field k'] [CharP k' p] [Algebra k k']
 
 /-- A `p`-linear endomorphism `F` of `V` has exactly one `p`-linear extension to the base change
-`k' ⊗[k] V`, namely `a ⊗ₜ v ↦ a ^ p ⊗ₜ F v`. -/
+`k' ⊗[k] V`, namely `a ⊗ₜ v ↦ a ^ p ⊗ₜ F v`. This is the map `F' = F ⊗ σ_{k'}` of blueprint
+`sk-prop-av-fixed-base-change`. -/
 theorem existsUnique_baseChange (F : V →ₚ[k, p] V) :
-    ∃! F' : (k' ⊗[k] V) →ₚ[k', p] (k' ⊗[k] V), ∀ v : V, F' (1 ⊗ₜ[k] v) = 1 ⊗ₜ[k] F v :=
-  sorry
+    ∃! F' : (k' ⊗[k] V) →ₚ[k', p] (k' ⊗[k] V), ∀ v : V, F' (1 ⊗ₜ[k] v) = 1 ⊗ₜ[k] F v := by
+  let f : k' →+ V →+ k' ⊗[k] V :=
+    { toFun a := (TensorProduct.mk k k' V (a ^ p)).toAddMonoidHom.comp F.toAddMonoidHom
+      map_zero' := by ext; simp [zero_pow (Fact.out : p.Prime).ne_zero]
+      map_add' a b := by ext; simp [add_pow_char] }
+  let G := TensorProduct.liftAddHom f fun (r : k) a v ↦ by
+    change ((r • a) ^ p) ⊗ₜ[k] F v = (a ^ p) ⊗ₜ[k] F (r • v)
+    rw [map_smulₛₗ, _root_.frobenius_def, TensorProduct.tmul_smul, TensorProduct.smul_tmul',
+      smul_pow]
+  have hG (a : k') (v : V) : G (a ⊗ₜ[k] v) = (a ^ p) ⊗ₜ[k] F v := rfl
+  refine ⟨{ toFun := G, map_add' := G.map_add, map_smul' := fun c x ↦ ?_ }, fun v ↦ ?_,
+    fun F'' hF'' ↦ ?_⟩
+  · induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul a v => simp [TensorProduct.smul_tmul', hG, mul_pow, _root_.frobenius_def]
+    | add x y hx hy => simp only [smul_add, map_add] at hx hy ⊢; rw [hx, hy]
+  · simp [hG]
+  · ext x
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul a v =>
+      rw [show a ⊗ₜ[k] v = a • (1 ⊗ₜ[k] v) by simp [TensorProduct.smul_tmul'], map_smulₛₗ,
+        hF'']
+      simp [hG, TensorProduct.smul_tmul', _root_.frobenius_def]
+    | add x y hx hy => simp only [map_add, hx, hy]
 
 /-- Blueprint `sk-prop-av-fixed-base-change` (proved as `lem-sc-frobenius-fixed-invariance`):
 Fixed points are unchanged by algebraically closed base change.
