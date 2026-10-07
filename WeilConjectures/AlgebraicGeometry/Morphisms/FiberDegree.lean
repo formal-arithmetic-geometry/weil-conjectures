@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Limits
 public import WeilConjectures.Mathlib.RingTheory.Flat.LocallyFree
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
@@ -56,6 +57,8 @@ of its ring of global sections.
   to an open of the target.
 - `AlgebraicGeometry.fiberDegree_eq_finrankΓ`: over a field, the fibre degree of an affine
   morphism is the dimension of its ring of global sections.
+- `AlgebraicGeometry.Scheme.Hom.fiberDegree_genericPoint`: the fibre of a quasi-finite affine
+  morphism from an integral scheme through the generic point `η` has degree `[κ(η) : κ(f η)]`.
 - `AlgebraicGeometry.Scheme.Hom.flat_of_fiberDegree_eq`,
   `AlgebraicGeometry.Scheme.Hom.finrank_eq_of_fiberDegree_eq`: a finite morphism of finite
   presentation to a reduced scheme with constant fibre degree `n` is flat of rank `n`.
@@ -607,6 +610,87 @@ theorem fiberDegree_eq_finrankΓ {G : Scheme.{u}} (f : G ⟶ Spec (.of K)) [IsAf
   exact Module.finrank_baseChange
 
 end Field
+
+section GenericPoint
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIntegral X]
+
+/-- Every point of the fibre of a locally quasi-finite morphism `f` from an integral scheme
+through the generic point `η` of the source is `η`. -/
+lemma Scheme.Hom.eq_asFiber_genericPoint [LocallyQuasiFinite f]
+    (p : f.fiber (f (genericPoint X))) :
+    p = f.asFiber (genericPoint X) := by
+  have h : f.fiberι _ (f.asFiber (genericPoint X)) ⤳ f.fiberι _ p := by
+    rw [f.fiberι_asFiber]; exact genericPoint_specializes _
+  exact (specializes_iff_eq.mp
+    ((f.fiberι _).isEmbedding.toIsInducing.specializes_iff.mp h)).symm
+
+/-- The local rings of the fibre of a locally quasi-finite morphism `f` from an integral scheme
+through the generic point of the source are fields: they are quotients of the function field. -/
+lemma Scheme.Hom.isField_stalk_fiber_genericPoint [LocallyQuasiFinite f]
+    (p : f.fiber (f (genericPoint X))) :
+    IsField ((f.fiber (f (genericPoint X))).presheaf.stalk p) := by
+  have hp : f.fiberι _ p = genericPoint X := by
+    rw [f.eq_asFiber_genericPoint p, f.fiberι_asFiber]
+  have hK : IsField (X.presheaf.stalk (f.fiberι _ p)) := by
+    rw [hp]; exact Field.toIsField X.functionField
+  let := hK.toField
+  exact MulEquiv.isField hK (RingEquiv.ofBijective ((f.fiberι _).stalkMap p).hom
+    ⟨((f.fiberι _).stalkMap p).hom.injective, (f.fiberι _).stalkMap_surjective p⟩).symm
+
+/-- The fibre of a locally quasi-finite morphism `f` from an integral scheme through the generic
+point `η` of the source is `Spec κ(η)`. -/
+instance Scheme.Hom.isIso_asFiberHom_genericPoint [LocallyQuasiFinite f] :
+    IsIso (f.asFiberHom (genericPoint X)) := by
+  let z : Spec (X.residueField (genericPoint X)) := IsLocalRing.closedPoint _
+  have hsurj : Function.Surjective (f.asFiberHom (genericPoint X)) := fun p ↦
+    ⟨z, (f.asFiberHom_apply _ z).trans (f.eq_asFiber_genericPoint p).symm⟩
+  have : ∀ x, IsIso ((f.asFiberHom (genericPoint X)).stalkMap x) := fun x ↦ by
+    let := (f.isField_stalk_fiber_genericPoint (f.asFiberHom _ x)).toField
+    rw [ConcreteCategory.isIso_iff_bijective]
+    exact ⟨((f.asFiberHom _).stalkMap x).hom.injective, (f.asFiberHom _).stalkMap_surjective x⟩
+  have : IsOpenImmersion (f.asFiberHom (genericPoint X)) :=
+    .of_isIso_stalkMap _ ⟨(f.asFiberHom _).isEmbedding, by
+      rw [hsurj.range_eq]; exact isOpen_univ⟩
+  exact (isIso_iff_isOpenImmersion_and_surjective _).mpr ⟨this, ⟨hsurj⟩⟩
+
+/-- The degree of the fibre of a quasi-finite affine morphism `f` from an integral scheme through
+the generic point `η` of the source is the degree `[κ(η) : κ(f η)]` of the residue field
+extension. -/
+theorem Scheme.Hom.fiberDegree_genericPoint [IsAffineHom f] [LocallyQuasiFinite f] :
+    letI := (f.residueFieldMap (genericPoint X)).hom.toAlgebra
+    f.fiberDegree (f (genericPoint X)) =
+      Module.finrank (Y.residueField (f (genericPoint X))) (X.residueField (genericPoint X)) := by
+  have := Scheme.Hom.finrankΓ_eq_of_iso (Spec.map (f.residueFieldMap (genericPoint X)))
+    (f.fiberToSpecResidueField _) (asIso (f.asFiberHom (genericPoint X))) (Iso.refl _) (by simp)
+  let _ := (f.residueFieldMap (genericPoint X)).hom.toAlgebra
+  have h := Scheme.Hom.finrankΓ_SpecMap (Y.residueField (f (genericPoint X)))
+    (X.residueField (genericPoint X))
+  exact this.symm.trans h
+
+omit [IsIntegral X] in
+/-- A dominant morphism of irreducible schemes maps the generic point to the generic point. -/
+lemma Scheme.Hom.apply_genericPoint_of_isDominant [IrreducibleSpace X] [IrreducibleSpace Y]
+    [IsDominant f] : f (genericPoint X) = genericPoint Y := by
+  refine ((genericPoint_spec Y).eq ?_).symm
+  have := (genericPoint_spec X).image f.continuous
+  rwa [Set.image_univ, f.denseRange.closure_range] at this
+
+/-- Blueprint `lem-sc-finite-constant-length-flat`: Finite morphisms with constant fibre length
+are flat (degree part).
+
+If a finite morphism `f : X ⟶ Y` from an integral scheme has all fibres of degree `n`, then
+the degree `[κ(η) : κ(f η)]` of the residue field extension at the generic point `η` of `X` is
+`n`. When `Y` is integral and `f` is dominant, `f η` is the generic point of `Y`
+(`AlgebraicGeometry.Scheme.Hom.apply_genericPoint_of_isDominant`), so this is the degree
+`[k(X) : k(Y)]` of the extension of function fields: `deg f = [k(X) : k(Y)] = n`. -/
+theorem Scheme.Hom.finrank_residueField_genericPoint_of_fiberDegree_eq [IsFinite f] {n : ℕ}
+    (h : ∀ y, f.fiberDegree y = n) :
+    letI := (f.residueFieldMap (genericPoint X)).hom.toAlgebra
+    Module.finrank (Y.residueField (f (genericPoint X))) (X.residueField (genericPoint X)) = n :=
+  f.fiberDegree_genericPoint.symm.trans (h _)
+
+end GenericPoint
 
 section FlatOfFiberDegree
 
