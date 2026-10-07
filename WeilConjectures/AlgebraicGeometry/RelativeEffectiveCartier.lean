@@ -20,6 +20,9 @@ public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
+public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import WeilConjectures.Mathlib.RingTheory.RingHom.QuasiFinite
 
 /-!
 # Relative effective Cartier divisors
@@ -65,7 +68,8 @@ We state the criteria that the Picard framework needs:
 The scheme-level statements are reduced, on affine charts `Spec (B ⊗[A] κ)` of the fibres, to
 two purely algebraic forms of the local flatness criterion,
 `Algebra.exists_notMem_isRegularPrincipal_and_flat_of_fiber` (Stacks, Tags 00MF, 046Z) and
-`Algebra.exists_notMem_isRegularPrincipal_of_flat_of_fiber` (Stacks, Tag 062Y as used in 0B9D).
+`Algebra.exists_notMem_isRegularPrincipal_of_flat_of_fiber` (Stacks, Tag 062Y as used in 0B9D),
+both in `WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Fiber`.
 -/
 
 @[expose] public section
@@ -73,193 +77,6 @@ two purely algebraic forms of the local flatness criterion,
 universe u
 
 open CategoryTheory
-
-section Algebra
-
-open TensorProduct
-
-/-- **Base change of a regular element with flat quotient.** Let `A → B` be a ring map and let
-`f ∈ B` be a non-zerodivisor such that `B ⧸ (f)` is flat over `A` (here presented as a surjection
-`q : B → C` with kernel `(f)`). Then for every `A`-algebra `A'`, the element `f ⊗ 1` is a
-non-zerodivisor of `B ⊗[A] A'`: tensoring the exact sequence `0 → B → B → C → 0` (the first map
-being multiplication by `f`) with `A'` stays exact on the left as `C` is flat over `A`. -/
-theorem Algebra.TensorProduct.includeLeftRingHom_mem_nonZeroDivisors_of_flat
-    {A B C A' : Type*} [CommRing A] [CommRing B] [CommRing C] [CommRing A'] [Algebra A B]
-    [Algebra A A'] (q : B →+* C) (hq : Function.Surjective q) {f : B}
-    (hker : RingHom.ker q = Ideal.span {f}) (hflat : (q.comp (algebraMap A B)).Flat)
-    (hf : f ∈ nonZeroDivisors B) :
-    (Algebra.TensorProduct.includeLeftRingHom f : B ⊗[A] A') ∈ nonZeroDivisors (B ⊗[A] A') := by
-  let := (q.comp (algebraMap A B)).toAlgebra
-  have : Module.Flat A C := hflat
-  let qA : B →ₗ[A] C :=
-    { toFun := q
-      map_add' := map_add q
-      map_smul' := fun a b ↦ by
-        simp [Algebra.smul_def, RingHom.algebraMap_toAlgebra] }
-  have hex : Function.Exact (LinearMap.mulLeft A f) qA := fun b ↦
-    (RingHom.mem_ker (f := q)).symm.trans <| by
-      rw [hker, Ideal.mem_span_singleton']
-      simp [mul_comm]
-  have hinj := LinearMap.lTensor_injective_of_exact_of_flat qA hq (LinearMap.mulLeft A f)
-    (isRegular_iff_mem_nonZeroDivisors.mpr hf).left hex A'
-  have hcomm (x : B ⊗[A] A') :
-      (LinearMap.mulLeft A f).lTensor A' (TensorProduct.comm A B A' x) =
-        TensorProduct.comm A B A' (Algebra.TensorProduct.includeLeftRingHom f * x) := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
-    | tmul b a => simp
-    | add x y hx hy => rw [map_add, map_add, hx, hy, mul_add, map_add]
-  have key (x : B ⊗[A] A') (hx : Algebra.TensorProduct.includeLeftRingHom f * x = 0) :
-      x = 0 := by
-    have := hcomm x
-    rw [hx, map_zero, ← map_zero ((LinearMap.mulLeft A f).lTensor A')] at this
-    simpa using hinj this
-  exact mem_nonZeroDivisors_iff.mpr ⟨key, fun x hx ↦ key x (by rwa [mul_comm])⟩
-
-/-- **A divisor on a curve over a field is finite.** Let `K` be a field and `B` a finitely
-generated `K`-algebra of Krull dimension at most one. If `q : B → C` is surjective and kills a
-non-zerodivisor of `B`, then `C` has dimension zero, hence is finite and so quasi-finite over
-`K`. -/
-lemma RingHom.QuasiFinite.comp_of_ringKrullDim_le_one {K B C : Type*} [CommRing K]
-    [CommRing B] [CommRing C] (hK : IsField K) (φ : K →+* B) (hφ : φ.FiniteType)
-    (hdim : ringKrullDim B ≤ 1) (q : B →+* C) (hq : Function.Surjective q) {f : B}
-    (hf : f ∈ nonZeroDivisors B) (hqf : q f = 0) : (q.comp φ).QuasiFinite := by
-  let := hK.toField
-  let := (q.comp φ).toAlgebra
-  have : Algebra.FiniteType K C := (RingHom.FiniteType.of_surjective q hq).comp hφ
-  have h := (ringKrullDim_succ_le_of_surjective q hq hf hqf).trans hdim
-  have : Ring.KrullDimLE 0 C := by
-    rw [Ring.krullDimLE_iff]
-    cases hC : ringKrullDim C with
-    | bot => exact bot_le
-    | coe n =>
-      rw [hC] at h
-      norm_cast at h ⊢
-      cases n with
-      | top => simp at h
-      | coe m =>
-        norm_cast at h ⊢
-        omega
-  have := (Module.finite_iff_krullDimLE_zero K C).mpr this
-  exact (inferInstance : Algebra.QuasiFinite K C)
-
-/-- **The local criterion for relative effective Cartier divisors**, algebraic form (Stacks,
-Tags 00MF and 046Z; the algebraic content of Tag 062Y). Let `A → B` be flat and of finite
-presentation, let `I = (f)` be a principal ideal of `B`, let `q` be a prime of `B` and let `K`
-be a field over `A` whose kernel is the prime `q ∩ A`. Suppose that the extension of `I` to the
-fibre `B ⊗[A] K` is locally generated by a non-zerodivisor. Then there is `g ∉ q` such that,
-on `B_g`, the ideal `I` is generated by a non-zerodivisor and `B_g ⧸ I` is flat over `A`.
-
-If `f ∉ q` one takes `g = f`. Otherwise, by faithfully flat descent along `κ(q ∩ A) → K`, the
-image of `f` is a non-zerodivisor of the local ring of the fibre at `q`, and the local flatness
-criterion (Tag 00MF), made available over a non-noetherian base by noetherian approximation
-(Tag 02JO), shows that `f` is a non-zerodivisor of `B_q` and that `B_q ⧸ (f)` is flat over `A`;
-both spread out to a neighbourhood `D(g)` of `q` as `B ⧸ (f)` is of finite presentation over
-`A` (Tags 061L, 00RC). -/
-theorem Algebra.exists_notMem_isRegularPrincipal_and_flat_of_fiber {A B K : Type*}
-    [CommRing A] [CommRing B] [CommRing K] [Algebra A B] [Algebra A K] [Module.Flat A B]
-    [Algebra.FinitePresentation A B] (hK : IsField K) (I : Ideal B) (hI : I.IsPrincipal)
-    (q : Ideal B) [q.IsPrime] (hKq : RingHom.ker (algebraMap A K) = q.comap (algebraMap A B))
-    (hfib : ∀ P : Ideal (B ⊗[A] K), P.IsPrime → ∃ g ∉ P,
-      ((I.map Algebra.TensorProduct.includeLeftRingHom).map
-        (algebraMap (B ⊗[A] K) (Localization.Away g))).IsRegularPrincipal) :
-    ∃ g ∉ q, ∀ (Bg C : Type*) [CommRing Bg] [CommRing C] [Algebra B Bg]
-      [IsLocalization.Away g Bg] (r : Bg →+* C), Function.Surjective r →
-      RingHom.ker r = I.map (algebraMap B Bg) →
-      (I.map (algebraMap B Bg)).IsRegularPrincipal ∧
-        (r.comp ((algebraMap B Bg).comp (algebraMap A B))).Flat :=
-  sorry
-
-/-- **Flat closed subschemes with Cartier fibres are Cartier**, algebraic form (Stacks,
-Tag 062Y in the variant used for Tag 0B9D). Let `A → B` be flat and of finite presentation,
-and let `r : B → C` be surjective with `C` flat and of finite presentation over `A`; let `q` be
-a prime of `B` and `K` a field over `A` whose kernel is the prime `q ∩ A`. Suppose that the
-extension of `I = ker r` to the fibre `B ⊗[A] K` is locally generated by a non-zerodivisor.
-Then there is `g ∉ q` such that `I B_g` is generated by a non-zerodivisor.
-
-If `I ⊄ q` one takes `g ∈ I \ q`. Otherwise, by Nakayama's lemma on the fibre, some `f ∈ I`
-generates the fibre ideal near `q`, so by
-`Algebra.exists_notMem_isRegularPrincipal_and_flat_of_fiber`, after shrinking, `f` is a
-non-zerodivisor and `B ⧸ (f)` is flat over `A`. Then `I ⧸ (f)` is a finitely generated
-`B`-module whose fibre at `q ∩ A` vanishes (as `B ⧸ I` is flat and `B ⧸ (f) → B ⧸ I` is an
-isomorphism on fibres near `q`), so it vanishes near `q` by Nakayama's lemma. -/
-theorem Algebra.exists_notMem_isRegularPrincipal_of_flat_of_fiber {A B C K : Type*}
-    [CommRing A] [CommRing B] [CommRing C] [CommRing K] [Algebra A B] [Algebra A K]
-    [Module.Flat A B] [Algebra.FinitePresentation A B] (hK : IsField K) (r : B →+* C)
-    (hr : Function.Surjective r) (hflat : (r.comp (algebraMap A B)).Flat)
-    (hfp : (r.comp (algebraMap A B)).FinitePresentation) (q : Ideal B) [q.IsPrime]
-    (hKq : RingHom.ker (algebraMap A K) = q.comap (algebraMap A B))
-    (hfib : ∀ P : Ideal (B ⊗[A] K), P.IsPrime → ∃ g ∉ P,
-      (((RingHom.ker r).map Algebra.TensorProduct.includeLeftRingHom).map
-        (algebraMap (B ⊗[A] K) (Localization.Away g))).IsRegularPrincipal) :
-    ∃ g ∉ q, ∀ (Bg : Type*) [CommRing Bg] [Algebra B Bg] [IsLocalization.Away g Bg],
-      ((RingHom.ker r).map (algebraMap B Bg)).IsRegularPrincipal :=
-  sorry
-
-/-- **Spreading out a principal ideal from a local ring.** Let `A` be a noetherian ring, `P` a
-prime whose localization `A_P` is a domain, and `I` an ideal of `A` such that `I A_P` is
-generated by a nonzero element. Then there is `g ∉ P` such that `I A_g` is generated by a
-non-zerodivisor. -/
-lemma Ideal.exists_notMem_isRegularPrincipal_map_away {A : Type*} [CommRing A]
-    [IsNoetherianRing A] (P : Ideal A) [P.IsPrime] (Ap : Type*) [CommRing Ap] [Algebra A Ap]
-    [IsLocalization.AtPrime Ap P] [IsDomain Ap] (I : Ideal A) {t : Ap}
-    (ht : I.map (algebraMap A Ap) = Ideal.span {t}) (ht0 : t ≠ 0) :
-    ∃ g ∉ P, ∀ (Ag : Type*) [CommRing Ag] [Algebra A Ag] [IsLocalization.Away g Ag],
-      (I.map (algebraMap A Ag)).IsRegularPrincipal := by
-  classical
-  obtain ⟨⟨⟨π, hπI⟩, s⟩, hπs⟩ := (IsLocalization.mem_map_algebraMap_iff P.primeCompl Ap).mp
-    (ht ▸ Ideal.mem_span_singleton_self t)
-  have hsu : IsUnit (algebraMap A Ap s) := IsLocalization.map_units Ap s
-  have hspan : I.map (algebraMap A Ap) = Ideal.span {algebraMap A Ap π} := by
-    rw [ht, ← hπs, Ideal.span_singleton_mul_right_unit hsu]
-  have hπ0 : algebraMap A Ap π ≠ 0 := by
-    rw [← hπs]
-    exact mul_ne_zero ht0 hsu.ne_zero
-  obtain ⟨S, hS⟩ := (IsNoetherian.noetherian I : I.FG)
-  have h1 (a : A) (ha : a ∈ S) : ∃ u ∉ P, u * a ∈ Ideal.span {π} := by
-    have : algebraMap A Ap a ∈ (Ideal.span {π}).map (algebraMap A Ap) := by
-      rw [Ideal.map_span, Set.image_singleton, ← hspan]
-      exact Ideal.mem_map_of_mem _ (hS ▸ Ideal.subset_span ha)
-    obtain ⟨u, hu, h⟩ :=
-      (IsLocalization.algebraMap_mem_map_algebraMap_iff P.primeCompl Ap _ _).1 this
-    exact ⟨u, hu, h⟩
-  choose! u hu hu' using h1
-  obtain ⟨T, hT⟩ :=
-    (IsNoetherian.noetherian (RingHom.ker (algebraMap A Ap)) : (RingHom.ker _).FG)
-  have h2 (b : A) (hb : b ∈ T) : ∃ v ∉ P, v * b = 0 := by
-    have : algebraMap A Ap b = 0 := (hT ▸ Ideal.subset_span hb : b ∈ RingHom.ker _)
-    obtain ⟨⟨v, hv⟩, h⟩ := (IsLocalization.map_eq_zero_iff P.primeCompl Ap b).1 this
-    exact ⟨v, hv, h⟩
-  choose! v hv hv' using h2
-  have hg : (∏ a ∈ S, u a) * ∏ b ∈ T, v b ∉ P :=
-    P.primeCompl.mul_mem (P.primeCompl.prod_mem fun a ha => hu a ha)
-      (P.primeCompl.prod_mem fun b hb => hv b hb)
-  refine ⟨_, hg, fun Ag _ _ _ ↦
-    Ideal.isRegularPrincipal_map_away ((∏ a ∈ S, u a) * ∏ b ∈ T, v b) I π hπI ?_ ?_⟩
-  · intro a ha
-    rw [← hS] at ha
-    refine Ideal.mul_mem_of_mem_span_of_forall _ _ _ (fun a ha => ?_) ha
-    obtain ⟨c, hc⟩ := Finset.dvd_prod_of_mem u ha
-    rw [hc]
-    convert Ideal.mul_mem_right (c * ∏ b ∈ T, v b) _ (hu' a ha) using 1
-    ring
-  · intro b hb
-    have hb' : algebraMap A Ap b = 0 := by
-      have := congrArg (algebraMap A Ap) hb
-      rw [map_mul, map_zero] at this
-      exact (mul_eq_zero.1 this).resolve_left hπ0
-    have hbk : b ∈ Ideal.span (T : Set A) := by
-      rw [Ideal.span, hT]
-      exact hb'
-    have := Ideal.mul_mem_of_mem_span_of_forall (T : Set A) ⊥ ((∏ a ∈ S, u a) * ∏ b ∈ T, v b)
-      (fun t ht => by
-        obtain ⟨c, hc⟩ := Finset.dvd_prod_of_mem v ht
-        rw [hc, Ideal.mem_bot]
-        calc _ = (∏ a ∈ S, u a) * c * (v t * t) := by ring
-          _ = 0 := by rw [hv' t ht, mul_zero]) hbk
-    exact Ideal.mem_bot.1 this
-
-end Algebra
 
 namespace AlgebraicGeometry.Scheme.IdealSheafData
 

@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
 
 /-!
 # The internal hom of presheaves of modules
@@ -37,6 +38,8 @@ scheme `X : Scheme.{u}` and `M N : X.Modules` all universes are `u`, so `homObj 
 * `PresheafOfModules.homFunctor`: the internal hom bifunctor.
 * `PresheafOfModules.homObjEquiv`: the tensor-hom adjunction `(M ⊗ P ⟶ N) ≃ (P ⟶ homObj M N)`,
   natural in `P` (`PresheafOfModules.homObjEquiv_whiskerLeft_comp`).
+* `PresheafOfModules.tensorHomUncurry_id_app_bijective`: the evaluation `M ⊗ homObj M R ⟶ R` is
+  bijective on sections over `W` if `M` is free of rank one on `W`.
 
 If `N` is a sheaf, then so is `homObj M N`: this is `PresheafOfModules.isSheaf_homObj` in
 `WeilConjectures/Algebra/Category/ModuleCat/Sheaf/InternalHom.lean`.
@@ -488,6 +491,36 @@ lemma homObjEquiv_whiskerLeft_comp {M P P' N : PresheafOfModules.{u} (R ⋙ forg
   refine ModuleCat.hom_ext (LinearMap.ext fun (m : M.obj (op W.unop.left)) ↦ ?_)
   exact congrArg (fun q : P'.obj (op W.unop.left) ↦
     φ.app (op W.unop.left) (m ⊗ₜ[R.obj (op W.unop.left)] q)) (naturality_apply f W.unop.hom.op p)
+
+/-- The evaluation `M ⊗ Hom(M, R) ⟶ R` of presheaves of modules is bijective on sections over
+`W` if `M` is free of rank one on `W`: that is, if there is a section `m₀` over `W` restricting
+to a generator over every `V ⟶ W`, and a morphism `φ₀ : M|_W ⟶ R|_W` with `φ₀ m₀ = 1`. -/
+lemma tensorHomUncurry_id_app_bijective {W : C} (m₀ : M.obj (op W))
+    (φ₀ : (restrictOver R W).obj M ⟶ (restrictOver R W).obj (unit _))
+    (hφ₀ : φ₀.app (op (Over.mk (𝟙 W))) m₀ = (1 : R.obj (op W)))
+    (hgen : ∀ (V : Over W) (x : M.obj (op V.left)),
+      ∃ r : R.obj (op V.left), x = r • M.restrictₛₗ V.hom.op m₀) :
+    Function.Bijective ((tensorHomUncurry (𝟙 (homObj M (unit _)))).app (op W)) := by
+  refine TensorProduct.lift_bijective_of_forall_eq_smul _ m₀ (fun p ↦ ?_)
+    ⟨?_, fun (a : R.obj (op W)) ↦ ⟨a • φ₀, ?_⟩⟩
+  · obtain ⟨r, hr⟩ := hgen (Over.mk (𝟙 W)) p
+    refine ⟨r, hr.trans (congrArg (r • ·) ?_)⟩
+    rw [PresheafOfModules.restrictₛₗ_apply]
+    simp
+    rfl
+  · rw [injective_iff_map_eq_zero]
+    intro (q : (restrictOver R W).obj M ⟶ (restrictOver R W).obj (unit _))
+      (hq : q.app (op (Over.mk (𝟙 W))) m₀ = 0)
+    refine hom_ext fun V ↦ ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
+    obtain ⟨r, rfl⟩ := hgen V.unop x
+    have h0 : q.app V (M.restrictₛₗ V.unop.hom.op m₀) = 0 :=
+      (naturality_apply q (Over.homMk V.unop.hom : V.unop ⟶ Over.mk (𝟙 W)).op m₀).trans
+        ((congrArg _ hq).trans (map_zero _))
+    refine ((q.app V).hom.map_smul r _).trans ?_
+    rw [h0]
+    exact smul_zero _
+  · refine (LinearMap.map_smul _ a φ₀).trans ?_
+    exact (congrArg (fun y : R.obj (op W) ↦ a • y) hφ₀).trans (mul_one a)
 
 end TensorHom
 
