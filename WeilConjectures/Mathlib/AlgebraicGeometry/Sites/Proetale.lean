@@ -52,6 +52,9 @@ This file provides the site-theoretic inputs for the pro-étale six functors of 
 - `AlgebraicGeometry.Scheme.zariskiPrecoverage_le_proetalePrecoverage`: a Zariski open cover
   is a pro-étale covering family. This is what makes the two-open cover of
   `WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper` available.
+- `AlgebraicGeometry.Scheme.ProEt.mem_topology_of_openImmersion`: a sieve on `U : X.ProEt`
+  containing a jointly surjective family of open immersions `Y i ⟶ U`
+  (`AlgebraicGeometry.Scheme.ProEt.ofOpenImmersionHom`) is covering.
 - `AlgebraicGeometry.Scheme.toProEt`: the inclusion `ν : X.Etale ⥤ X.ProEt` of the small
   étale site into the small pro-étale site, which is fully faithful, representably flat and
   continuous (`AlgebraicGeometry.Scheme.isContinuous_toProEt`).
@@ -342,5 +345,44 @@ instance isContinuous_toProEt :
     etaleTopology_le_proetaleTopology
 
 end ToProEt
+
+/-! ### Open immersions into objects of the pro-étale site -/
+
+section OpenImmersion
+
+namespace ProEt
+
+variable {X : Scheme.{u}}
+
+/-- An open immersion `j : Y ⟶ U.left` into an object `U` of the small pro-étale site of `X`,
+as an object of the small pro-étale site. -/
+noncomputable def ofOpenImmersion (U : X.ProEt) {Y : Scheme.{u}} (j : Y ⟶ U.left)
+    [IsOpenImmersion j] : X.ProEt :=
+  have := U.prop
+  Scheme.ProEt.mk (j ≫ U.hom)
+
+/-- An open immersion `j : Y ⟶ U.left`, as a morphism of the small pro-étale site. -/
+noncomputable def ofOpenImmersionHom (U : X.ProEt) {Y : Scheme.{u}} (j : Y ⟶ U.left)
+    [IsOpenImmersion j] : ofOpenImmersion U j ⟶ U :=
+  MorphismProperty.Over.homMk j
+
+/-- A sieve on `U : X.ProEt` containing a jointly surjective family of open immersions is
+covering: the open immersions form a Zariski cover. -/
+lemma mem_topology_of_openImmersion {U : X.ProEt} (S : Sieve U) {ι : Type u}
+    {Y : ι → Scheme.{u}} (j : ∀ i, Y i ⟶ U.left) [∀ i, IsOpenImmersion (j i)]
+    (hj : ∀ x, ∃ i, x ∈ Set.range (j i)) (hS : ∀ i, S (ofOpenImmersionHom U (j i))) :
+    S ∈ topology X U := by
+  rw [mem_topology_iff]
+  refine ⟨.ofArrows _ fun i ↦ ofOpenImmersionHom U (j i), ?_, fun _ _ h ↦ ?_⟩
+  · rw [mem_precoverage_iff, Presieve.map_ofArrows]
+    exact zariskiPrecoverage_le_proetalePrecoverage _
+      ((Scheme.ofArrows_mem_precoverage_iff _).mpr
+        ⟨hj, fun i ↦ inferInstanceAs (IsOpenImmersion (j i))⟩)
+  · obtain ⟨i⟩ := h
+    exact hS i
+
+end ProEt
+
+end OpenImmersion
 
 end AlgebraicGeometry.Scheme

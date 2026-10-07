@@ -53,7 +53,7 @@ this is the same as a global finite stratification.
 - `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.upperStar`,
   `AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.upperStar`: pullback preserves lisse and
   constructible sheaves. Both rest on `g^* ℚ̄_ℓ ≅ ℚ̄_ℓ`
-  (`AlgebraicGeometry.ProEtale.nonempty_upperStar_adicConstantSheaf_iso`, stated with `sorry`).
+  (`AlgebraicGeometry.ProEtale.upperStarAdicConstantSheafIso`).
 - `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.biprod`,
   `AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.biprod`: binary direct sums of lisse,
   resp. constructible, sheaves are lisse, resp. constructible.
@@ -171,7 +171,7 @@ lemma nonempty_upperStar_iso_biproduct {V W : Scheme.{u}} (g : W ⟶ V)
 
 /-- The pullback of a lisse sheaf is lisse: the pullback of a trivialising cover is a
 trivialising cover, and the pullback of the constant `ℓ`-adic sheaf is the constant `ℓ`-adic
-sheaf (`AlgebraicGeometry.ProEtale.nonempty_upperStar_adicConstantSheaf_iso`). -/
+sheaf (`AlgebraicGeometry.ProEtale.upperStarAdicConstantSheafIso`). -/
 theorem IsAdicLisseSheaf.upperStar {Y : Scheme.{u}} (f : Y ⟶ X)
     {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)} (hF : IsAdicLisseSheaf F) :
     IsAdicLisseSheaf ((f)^*[WeilCoefficients.{u} l].obj F) := by
@@ -180,7 +180,7 @@ theorem IsAdicLisseSheaf.upperStar {Y : Scheme.{u}} (f : Y ⟶ X)
   rintro _ _ ⟨V, g, hg⟩
   obtain ⟨n, ⟨e⟩⟩ := h g hg
   obtain ⟨e'⟩ := nonempty_upperStar_iso_biproduct (pullback.fst g f)
-    (nonempty_upperStar_adicConstantSheaf_iso l _) e
+    ⟨upperStarAdicConstantSheafIso l _⟩ e
   exact ⟨n, ⟨(upperStarCompIso _ pullback.condition.symm).app F ≪≫ e'⟩⟩
 
 /-- The pullback of a stratified lisse sheaf is stratified lisse: the base changes of the
