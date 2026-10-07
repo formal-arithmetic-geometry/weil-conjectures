@@ -61,8 +61,7 @@ resolutions when `g^*` preserves flat sheaves, so they form a left derivability 
   when `K` or `M` does.
 
 The results depend on `sorryAx` through `AlgebraicGeometry.Etale.derivedTensor` and
-`AlgebraicGeometry.Etale.isLeftDerivedFunctor₂_derivedTensor`;
-`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_unit` is stated, not proved.
+`AlgebraicGeometry.Etale.isLeftDerivedFunctor₂_derivedTensor`.
 
 ## TODO
 
@@ -359,12 +358,18 @@ noncomputable def derivedTensorRightPullback :
   D((g)^*[A]) ⋙ derivedTensorRightFunctor A Z
 
 /-- The derived pullback preserves the unit, `Lg^* Λ_Y ≅ Λ_Z`. This is the existence of the unit
-comparison asked for in the TODO above. -/
+comparison asked for in the TODO above.
+
+The unit `Λ_Y` is the image in `D(Y_ét)` of the unit sheaf placed in degree `0`. Since `g^*` is
+exact, `Lg^*` is computed by applying `g^*` degreewise, and `g^*` sends the unit sheaf of `Y`
+to that of `Z` because it is strong monoidal. -/
 theorem nonempty_iso_leftDerivedUpperStar_unit :
     Nonempty ((L((g)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _) :=
-  -- Proof sketch: the unit `Λ_Y` is the constant sheaf placed in degree `0`, which is K-flat,
-  -- and `g^*` sends the constant sheaf of `Y` to that of `Z`.
-  sorry
+  ⟨(leftDerivedUpperStarIsoMapDerivedCategory A g).app _ ≪≫
+    ((g)^*[A].mapDerivedCategoryFactors).app _ ≪≫
+    DerivedCategory.Q.mapIso
+      (((HomologicalComplex.singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).app _) ≪≫
+        (HomologicalComplex.single _ (.up ℤ) 0).mapIso (Functor.Monoidal.εIso (g)^*[A]).symm)⟩
 
 end Etale
 
