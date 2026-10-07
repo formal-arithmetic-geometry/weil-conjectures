@@ -143,6 +143,14 @@ theorem range_homMulEquiv_comp (R : Type u) [CommRing R] [Algebra k R] :
     rw [key]
     exact (algHomMulEquiv n k R).apply_symm_apply g
 
+/-- The closed immersion `V(I) ⟶ GL_n` lands in the zero locus of `I`. -/
+theorem left_base_subgroupSchemeι_mem_zeroLocus (q : (subgroupScheme I).left) :
+    (subgroupSchemeι I).left.base q ∈ PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)) := by
+  intro a ha
+  change Ideal.Quotient.mk I a ∈ q.asIdeal
+  rw [Ideal.Quotient.eq_zero_iff_mem.2 ha]
+  exact zero_mem _
+
 theorem injective_homMulEquiv_comp (R : Type u) [CommRing R] [Algebra k R] :
     Function.Injective fun φ : (Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I ↦
       GeneralLinearGroup.homMulEquiv n k R (φ ≫ subgroupSchemeι I) :=
@@ -189,6 +197,26 @@ theorem zeroLocusMulEquiv_map {R S : Type u} [CommRing R] [Algebra k R] [CommRin
     GeneralLinearGroup.homMulEquiv_specMap_comp]
 
 end SubgroupScheme
+
+section Points
+
+variable {k : Type u} [Field k]
+
+/-- A `k`-point `φ` of `GL_n` lands, on underlying spaces, at the point `toPrimeSpectrum g` of
+`Spec k[GL_n]` given by its matrix `g`. -/
+theorem left_base_eq_toPrimeSpectrum (φ : (Spec (.of k)).asOver (Spec (.of k)) ⟶ 𝔾𝕃(n; k))
+    (s : Spec (.of k)) :
+    φ.left.base s = toPrimeSpectrum (GeneralLinearGroup.homMulEquiv n k k φ) := by
+  unfold GeneralLinearGroup at φ
+  obtain ⟨χ, rfl⟩ := Spec.mapMulEquiv.surjective φ
+  rw [GeneralLinearGroup.homMulEquiv_mapMulEquiv]
+  have heval : evalAlgHom (algHomMulEquiv n k k χ) = χ.ofConv :=
+    congrArg ofConv ((algHomMulEquiv n k k).symm_apply_apply χ)
+  refine PrimeSpectrum.ext (?_ : Ideal.comap _ s.asIdeal = RingHom.ker _)
+  rw [heval, Ideal.eq_bot_of_prime s.asIdeal]
+  rfl
+
+end Points
 
 section Inclusion
 

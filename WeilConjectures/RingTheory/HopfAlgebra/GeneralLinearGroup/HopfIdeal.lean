@@ -335,6 +335,21 @@ theorem IsConnected.isRadical {I : Ideal (CoordinateRing n k)} (h : IsConnected 
     I.IsRadical :=
   h ▸ isRadical_identityComponent I
 
+/-- The reduced identity component of `V(I)` is connected: the identity component of
+`V(identityComponent I)` is itself. -/
+theorem isConnected_identityComponent (I : Ideal (CoordinateRing n k)) :
+    IsConnected (identityComponent I) := by
+  set C := connectedComponentIn (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))
+    (toPrimeSpectrum 1)
+  unfold IsConnected identityComponent
+  rw [PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure, ← PrimeSpectrum.vanishingIdeal_closure C]
+  by_cases h1 : toPrimeSpectrum 1 ∈ closure C
+  · rw [(isPreconnected_connectedComponentIn.closure).connectedComponentIn h1]
+  · rw [connectedComponentIn_eq_empty h1]
+    have : C = ∅ := connectedComponentIn_eq_empty fun h ↦ h1 (subset_closure
+      (mem_connectedComponentIn h))
+    rw [this, closure_empty]
+
 /-- The identity component of an algebraic group over an algebraically closed field is a closed
 subgroup scheme. (blueprint: `sk-p-geometry`) -/
 instance [IsAlgClosed k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :

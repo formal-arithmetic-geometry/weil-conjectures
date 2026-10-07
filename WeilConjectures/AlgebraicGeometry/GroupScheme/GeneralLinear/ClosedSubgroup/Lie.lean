@@ -5,10 +5,13 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Lie.Matrix
+public import Mathlib.GroupTheory.NoncommCoprod
 public import Mathlib.RepresentationTheory.Semisimple
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie
+public import WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Lemmas
 
 /-!
 # The Lie algebras of the closed subgroup schemes of `GL_n`
@@ -239,14 +242,124 @@ noncomputable def mulCenterIdentityComponent (h : I ≤ J) :
       subgroupSchemeHom (identityComponent_mono I h)) ≫
     μ[subgroupScheme (identityComponent I)]
 
+/-- The multiplication morphism `Z(G°)° × H° ⟶ G°` sends a point `a` to the product of its two
+components. -/
+theorem comp_mulCenterIdentityComponent (h : I ≤ J) {X : Over (Spec (.of k))}
+    (a : X ⟶ subgroupScheme (identityComponent (center (identityComponent I))) ⊗
+        subgroupScheme (identityComponent J)) :
+    a ≫ mulCenterIdentityComponent h =
+      a ≫ fst _ _ ≫ subgroupSchemeHom ((le_center _).trans (le_identityComponent _)) *
+        a ≫ snd _ _ ≫ subgroupSchemeHom (identityComponent_mono I h) := by
+  rw [mulCenterIdentityComponent, ← lift_fst_comp_snd_comp, comp_lift_assoc, Hom.mul_def]
+
+/-- The points of `Z(G°)°` commute with the points of `G°`. -/
+theorem commute_comp_subgroupSchemeHom_identityComponent_center {X : Over (Spec (.of k))}
+    (t : X ⟶ subgroupScheme (identityComponent (center (identityComponent I))))
+    (g : X ⟶ subgroupScheme (identityComponent I)) :
+    Commute (t ≫ subgroupSchemeHom ((le_center _).trans (le_identityComponent _))) g := by
+  rw [← subgroupSchemeHom_comp (le_center _) (le_identityComponent _), ← Category.assoc]
+  exact central_subgroupSchemeHom_le_center _ (isRadical_identityComponent I) _ g
+
+/-- The multiplication morphism `Z(G°)° × H° ⟶ G°` is a homomorphism of group schemes, since
+`Z(G°)°` is central in `G°`. -/
+instance (h : I ≤ J) : IsMonHom (mulCenterIdentityComponent h) where
+  one_hom := by
+    have e {M : Over (Spec (.of k))} [MonObj M] : η[M] = (1 : 𝟙_ _ ⟶ M) := by
+      rw [Hom.one_def, toUnit_unique (toUnit _) (𝟙 _), Category.id_comp]
+    rw [e, e, comp_mulCenterIdentityComponent]
+    simp only [MonObj.one_comp, mul_one]
+  mul_hom := by
+    have e {M : Over (Spec (.of k))} [MonObj M] : μ[M] = fst M M * snd M M := by
+      rw [Hom.mul_def, lift_fst_snd, Category.id_comp]
+    let Z := subgroupScheme (identityComponent (center (identityComponent I)))
+    let H := subgroupScheme (identityComponent J)
+    have hc := commute_comp_subgroupSchemeHom_identityComponent_center
+      (snd (Z ⊗ H) (Z ⊗ H) ≫ fst Z H)
+      (fst (Z ⊗ H) (Z ⊗ H) ≫ snd Z H ≫ subgroupSchemeHom (identityComponent_mono I h))
+    rw [Category.assoc] at hc
+    rw [e (M := Z ⊗ H), ← lift_fst_comp_snd_comp, ← Hom.mul_def, comp_mulCenterIdentityComponent,
+      comp_mulCenterIdentityComponent, comp_mulCenterIdentityComponent, MonObj.mul_comp,
+      MonObj.mul_comp, hc.symm.mul_mul_mul_comm]
+
+/-- The multiplication morphism `Z(G°)° × H° ⟶ G°` sends the `k`-point `(t, x)` to the matrix
+`t x`. -/
+theorem homMulEquiv_lift_comp_mulCenterIdentityComponent (h : I ≤ J)
+    (t : zeroLocus (identityComponent (center (identityComponent I))) k)
+    (x : zeroLocus (identityComponent J) k) :
+    GeneralLinearGroup.homMulEquiv n k k
+      ((lift (zeroLocusMulEquiv _ k t) (zeroLocusMulEquiv _ k x) ≫
+        mulCenterIdentityComponent h) ≫ subgroupSchemeι (identityComponent I)) =
+      (t : GL n k) * (x : GL n k) := by
+  rw [comp_mulCenterIdentityComponent, MonObj.mul_comp, lift_fst_assoc, lift_snd_assoc,
+    Category.assoc, Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι,
+    subgroupSchemeHom_comp_subgroupSchemeι, map_mul, homMulEquiv_zeroLocusMulEquiv_comp,
+    homMulEquiv_zeroLocusMulEquiv_comp]
+
+/-- The product `t x` of a point `t` of `Z(G°)°(k)` and a point `x` of `H°(k)` lies in the image
+of the multiplication morphism `Z(G°)° × H° ⟶ G°`, read in `Spec k[GL_n]`. -/
+theorem toPrimeSpectrum_mul_mem_image_range_mulCenterIdentityComponent (h : I ≤ J)
+    (t : zeroLocus (identityComponent (center (identityComponent I))) k)
+    (x : zeroLocus (identityComponent J) k) :
+    toPrimeSpectrum ((t : GL n k) * (x : GL n k)) ∈
+      (subgroupSchemeι (identityComponent I)).left.base ''
+        Set.range (mulCenterIdentityComponent h).left.base := by
+  obtain ⟨s⟩ : Nonempty (Spec (.of k)) := inferInstance
+  have e := left_base_eq_toPrimeSpectrum
+    ((lift (zeroLocusMulEquiv _ k t) (zeroLocusMulEquiv _ k x) ≫ mulCenterIdentityComponent h) ≫
+      subgroupSchemeι (identityComponent I)) s
+  rw [homMulEquiv_lift_comp_mulCenterIdentityComponent, Over.comp_left, Over.comp_left,
+    Scheme.Hom.comp_apply, Scheme.Hom.comp_apply] at e
+  exact ⟨_, Set.mem_range_self _, e⟩
+
 variable [CharZero k]
+
+/-- The Lie algebra of `G° = V(identityComponent I)` is the sum of its centre and its derived
+subalgebra when `G°` acts semisimply on `kⁿ`: through the faithful representation
+`Lie G° ⊆ gl_n`, whose Lie submodules are the `G°`-stable subspaces by the group–Lie comparison,
+`Lie G°` has central radical. (blueprint: `sk-p-product`) -/
+theorem center_sup_derivedSeries_lie_identityComponent_eq_top
+    [Representation.IsSemisimpleRepresentation (standardRepresentation (identityComponent I))] :
+    LieAlgebra.center k (GrpObj.Lie (subgroupScheme (identityComponent I))) ⊔
+      LieAlgebra.derivedSeries k (GrpObj.Lie (subgroupScheme (identityComponent I))) 1 = ⊤ := by
+  have := connectedSpace_subgroupScheme _ (isConnected_identityComponent I)
+  let r := subgroupSchemeι (identityComponent I)
+  let φ : GrpObj.Lie (subgroupScheme (identityComponent I)) →ₗ⁅k⁆ Module.End k (n → k) :=
+    (lieEquivMatrix' (R := k) (n := n)).symm.toLieHom.comp (RationalHom.differential r)
+  have hφ : Function.Injective φ :=
+    (lieEquivMatrix' (R := k) (n := n)).symm.injective.comp
+      ((lieAlgebraEquivMatrix n k).injective.comp (GrpObj.differential_injective r))
+  let := LieRingModule.compLieHom (n → k) φ
+  have := LieModule.compLieHom (R := k) (n → k) φ
+  have : Module.Finite k (GrpObj.Lie (subgroupScheme (identityComponent I))) :=
+    Module.Finite.of_injective (φ : _ →ₗ[k] Module.End k (n → k)) hφ
+  have : LieModule.IsFaithful k (GrpObj.Lie (subgroupScheme (identityComponent I))) (n → k) :=
+    ⟨fun x y hxy ↦ hφ (LinearMap.ext fun v ↦ LinearMap.congr_fun hxy v)⟩
+  have hcomp := RationalHom.invariant_iff_differential_invariant r
+  have hbr (X : GrpObj.Lie (subgroupScheme (identityComponent I))) (w : n → k) :
+      ⁅X, w⁆ = Matrix.toLin' (RationalHom.differential r X) w :=
+    rfl
+  let e : LieSubmodule k (GrpObj.Lie (subgroupScheme (identityComponent I))) (n → k) ≃o
+      Subrepresentation (standardRepresentation (identityComponent I)) :=
+    { toFun N := ⟨N.toSubmodule, fun g v hv ↦ (hcomp N.toSubmodule).2
+        (fun X w hw ↦ Submodule.mem_comap.2 (hbr X w ▸ N.lie_mem (x := X) hw)) g hv⟩
+      invFun W := { W.toSubmodule with
+        lie_mem := fun {X} {w} hw ↦ (hbr X w).symm ▸
+          (hcomp W.toSubmodule).1 (fun g u hu ↦ W.apply_mem_toSubmodule g hu) X hw }
+      left_inv _ := rfl
+      right_inv _ := rfl
+      map_rel_iff' := Iff.rfl }
+  have : LieModule.IsSemisimple k (GrpObj.Lie (subgroupScheme (identityComponent I))) (n → k) :=
+    e.complementedLattice_iff.2 inferInstance
+  have := LieAlgebra.hasCentralRadical_of_isFaithful k
+    (GrpObj.Lie (subgroupScheme (identityComponent I))) (n → k)
+  exact LieAlgebra.center_sup_derivedSeries_eq_top k _
 
 /-- **The central–geometric product.** Let `H = V(J) ⊆ G = V(I)` be closed subgroups of `GL_n` over
 an algebraically closed field of characteristic zero such that `H` contains the commutators of `G`
 and `G°` acts semisimply on `kⁿ`. Then `G° = Z(G°)° H°`: the multiplication morphism
 `Z(G°)° × H° ⟶ G°` is surjective.
 
-Proof sketch (not formalised): the Lie algebra `𝔤 = Lie G° ⊆ 𝔤𝔩_n` is a faithful semisimple Lie
+Proof: the Lie algebra `𝔤 = Lie G° ⊆ 𝔤𝔩_n` is a faithful semisimple Lie
 representation, so `𝔤 = 𝔷(𝔤) + [𝔤, 𝔤]`; the brackets lie in `Lie H°`
 (`lie_mem_range_lieAlgebraMap_identityComponent`) and `𝔷(𝔤) = Lie Z(G°)°`
 (`range_lieAlgebraMap_identityComponent_center`), so `𝔤 = Lie Z(G°)° + Lie H°`. The multiplication
@@ -258,10 +371,94 @@ theorem surjective_mulCenterIdentityComponent (h : I ≤ J)
     [IsMonHom.ContainsCommutators (subgroupSchemeHom h)]
     [Representation.IsSemisimpleRepresentation (standardRepresentation (identityComponent I))] :
     Function.Surjective (mulCenterIdentityComponent h).left.base := by
-  sorry
+  -- The subgroup `Γ = Z(G°)°(k) H°(k)` of `GL n k` and its Zariski closure `V(L)`.
+  have hZ : zeroLocus (identityComponent (center (identityComponent I))) k ≤
+      zeroLocus (center (identityComponent I)) k :=
+    zeroLocus_anti (le_identityComponent _)
+  have hH : zeroLocus (identityComponent J) k ≤ zeroLocus (identityComponent I) k :=
+    zeroLocus_anti (identityComponent_mono I h)
+  have hcomm (t : zeroLocus (identityComponent (center (identityComponent I))) k)
+      (x : zeroLocus (identityComponent J) k) : Commute (t : GL n k) x :=
+    ((mem_zeroLocus_center_iff _).1 (hZ t.2)).2 _ (hH x.2)
+  let Γ : Subgroup (GL n k) :=
+    (MonoidHom.noncommCoprod (Subgroup.subtype _) (Subgroup.subtype _) hcomm).range
+  have hΓ : (Γ : Set (GL n k)) ⊆ zeroLocus (identityComponent I) k := by
+    rintro _ ⟨⟨t, x⟩, rfl⟩
+    exact mul_mem ((mem_zeroLocus_center_iff _).1 (hZ t.2)).1 (hH x.2)
+  have hIL : identityComponent I ≤ vanishingIdeal (Γ : Set (GL n k)) :=
+    (le_vanishingIdeal_zeroLocus _).trans (vanishingIdeal_anti hΓ)
+  have hLZ : vanishingIdeal (Γ : Set (GL n k)) ≤ identityComponent (center (identityComponent I)) :=
+    (vanishingIdeal_anti fun t ht ↦ MonoidHom.mem_range.2 ⟨(⟨t, ht⟩, 1), by simp⟩).trans
+      (vanishingIdeal_zeroLocus_le_of_isRadical _ (isRadical_identityComponent _))
+  have hLH : vanishingIdeal (Γ : Set (GL n k)) ≤ identityComponent J :=
+    (vanishingIdeal_anti fun x hx ↦ MonoidHom.mem_range.2 ⟨(1, ⟨x, hx⟩), by simp⟩).trans
+      (vanishingIdeal_zeroLocus_le_of_isRadical _ (isRadical_identityComponent _))
+  -- The Lie algebra of `V(L)` is all of `Lie G°`.
+  have hrange {K : Ideal (CoordinateRing n k)} [K.IsHopfIdeal k] (hK : identityComponent I ≤ K)
+      (hLK : vanishingIdeal (Γ : Set (GL n k)) ≤ K) :
+      (lieAlgebraMap hK).range ≤ (lieAlgebraMap hIL).range := by
+    rintro _ ⟨y, rfl⟩
+    refine ⟨lieAlgebraMap hLK y, ?_⟩
+    rw [lieAlgebraMap, lieAlgebraMap, lieAlgebraMap,
+      GrpObj.differential_congr (subgroupSchemeHom_comp hIL hLK).symm, GrpObj.differential_comp]
+    rfl
+  have htop (X : GrpObj.Lie (subgroupScheme (identityComponent I))) :
+      X ∈ (lieAlgebraMap hIL).range := by
+    have hX : X ∈ LieAlgebra.center k (GrpObj.Lie (subgroupScheme (identityComponent I))) ⊔
+        LieAlgebra.derivedSeries k (GrpObj.Lie (subgroupScheme (identityComponent I))) 1 := by
+      rw [center_sup_derivedSeries_lie_identityComponent_eq_top]
+      exact LieSubmodule.mem_top X
+    obtain ⟨Y, hY, Z, hZ, rfl⟩ := LieSubmodule.mem_sup _ _ _ |>.1 hX
+    refine add_mem (hrange ((le_center _).trans (le_identityComponent _)) hLZ ?_) ?_
+    · rw [range_lieAlgebraMap_identityComponent_center (isConnected_identityComponent I)]
+      exact hY
+    · rw [LieAlgebra.derivedSeries_def, LieAlgebra.derivedSeriesOfIdeal_succ,
+        LieAlgebra.derivedSeriesOfIdeal_zero, ← LieSubmodule.mem_toSubmodule,
+        LieSubmodule.lieIdeal_oper_eq_linear_span'] at hZ
+      refine (Submodule.span_le (p := (lieAlgebraMap hIL).range.toSubmodule)).2 ?_ hZ
+      rintro _ ⟨X, -, Y, -, rfl⟩
+      exact hrange (identityComponent_mono I h) hLH
+        (lie_mem_range_lieAlgebraMap_identityComponent h X Y)
+  -- Hence `V(L) = G°` by Cartier's theorem.
+  have hbij : Function.Bijective (lieAlgebraMap hIL) :=
+    ⟨lieAlgebraMap_injective hIL, fun X ↦ (htop X)⟩
+  have hdim : topologicalKrullDim (subgroupScheme (vanishingIdeal (Γ : Set (GL n k)))).left =
+      topologicalKrullDim (subgroupScheme (identityComponent I)).left := by
+    rw [← GrpObj.finrank_lie_eq_topologicalKrullDim, ← GrpObj.finrank_lie_eq_topologicalKrullDim,
+      (LinearEquiv.ofBijective (lieAlgebraMap hIL).toLinearMap hbij).finrank_eq]
+  have := isReduced_subgroupScheme _ (isRadical_vanishingIdeal (Γ : Set (GL n k)))
+  have := isReduced_subgroupScheme _ (isRadical_identityComponent I)
+  have := connectedSpace_subgroupScheme _ (isConnected_identityComponent I)
+  have := isIso_left_of_topologicalKrullDim_eq (subgroupSchemeHom hIL) hdim
+  -- The image of the multiplication is closed and contains `Γ`, hence contains `V(L) = G°`.
+  have hι := (subgroupSchemeι (identityComponent I)).left.isClosedEmbedding
+  have hΓR (γ : GL n k) (hγ : γ ∈ Γ) : toPrimeSpectrum γ ∈
+      (subgroupSchemeι (identityComponent I)).left.base ''
+        Set.range (mulCenterIdentityComponent h).left.base := by
+    obtain ⟨⟨t, x⟩, rfl⟩ := hγ
+    exact toPrimeSpectrum_mul_mem_image_range_mulCenterIdentityComponent h t x
+  have hcl : PrimeSpectrum.zeroLocus (vanishingIdeal (Γ : Set (GL n k)) :
+      Set (CoordinateRing n k)) ⊆ (subgroupSchemeι (identityComponent I)).left.base ''
+        Set.range (mulCenterIdentityComponent h).left.base := by
+    have e : vanishingIdeal (Γ : Set (GL n k)) =
+        PrimeSpectrum.vanishingIdeal (toPrimeSpectrum '' (Γ : Set (GL n k))) := by
+      ext a
+      simp [mem_vanishingIdeal, PrimeSpectrum.mem_vanishingIdeal, toPrimeSpectrum]
+    rw [e, PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure]
+    exact closure_minimal (by rintro _ ⟨γ, hγ, rfl⟩; exact hΓR γ hγ)
+      (hι.isClosedMap _ (isClosed_range_of_isMonHom (mulCenterIdentityComponent h)))
+  intro p
+  obtain ⟨q, rfl⟩ := (subgroupSchemeHom hIL).left.homeomorph.surjective p
+  have hq : (subgroupSchemeι (identityComponent I)).left.base
+      ((subgroupSchemeHom hIL).left.base q) ∈
+        PrimeSpectrum.zeroLocus (vanishingIdeal (Γ : Set (GL n k)) : Set (CoordinateRing n k)) := by
+    rw [← Scheme.Hom.comp_apply, ← Over.comp_left, subgroupSchemeHom_comp_subgroupSchemeι]
+    exact left_base_subgroupSchemeι_mem_zeroLocus _ q
+  obtain ⟨_, hr, e⟩ := hcl hq
+  exact hι.injective e ▸ hr
 
 /-- The central–geometric product on `k`-points: every point of `G°` is a product `t h` of a point
-`t` of `Z(G°)°` and a point `h` of `H°`. Proof sketch (not formalised): a `k`-point of `G°` lifts
+`t` of `Z(G°)°` and a point `h` of `H°`. Proof: a `k`-point of `G°` lifts
 along the surjective multiplication morphism to a `k`-point of `Z(G°)° × H°`
 (`AlgebraicGeometry.exists_points_comp_eq_of_surjective`), whose two projections are `t` and `h`.
 (blueprint: `sk-p-product`) -/
@@ -273,7 +470,10 @@ theorem exists_mul_eq_of_containsCommutators (h : I ≤ J)
       (x : points (subgroupScheme (identityComponent J)) k),
       t ≫ subgroupSchemeHom ((le_center _).trans (le_identityComponent _)) *
         x ≫ subgroupSchemeHom (identityComponent_mono I h) = g := by
-  sorry
+  obtain ⟨p, hp⟩ := exists_points_comp_eq_of_surjective _
+    (surjective_mulCenterIdentityComponent h) g
+  refine ⟨p ≫ fst _ _, p ≫ snd _ _, ?_⟩
+  rw [← hp, comp_mulCenterIdentityComponent, Category.assoc, Category.assoc]
 
 end Pair
 
