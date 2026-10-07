@@ -28,10 +28,12 @@ Given two sides `σ₁ : TwoOpenSide u O₁` and `σ₂ : TwoOpenSide u O₂`,
 - `AlgebraicGeometry.TwoOpenSide.KeyDisjoint`: the **key boundary disjointness**
   `X₁₂ ∩ (Z̄₁,₂ ×_S Z̄₂,₁) = ∅` in pointwise form (blueprint:
   `lemma:nagata-key-boundary-disjointness`);
+- `AlgebraicGeometry.TwoOpenSide.exists_comparisonFst_comparisonSnd`: a pair of
+  valuation-ring extensions of a common generic point of `O₁ ∩ O₂` to the two ambient
+  models factors through the comparison space (blueprint:
+  `lemma:nagata-valuation-pair-factors-comparison`);
 - `AlgebraicGeometry.TwoOpenSide.KeyDisjoint.avoids`: key disjointness implies that of
-  any pair of valuation-ring extensions of a common generic point of `O₁ ∩ O₂` to the
-  two ambient models, at least one avoids its forbidden boundary (blueprint:
-  `lemma:nagata-valuation-pair-factors-comparison`,
+  any such pair at least one avoids its forbidden boundary (blueprint:
   `lemma:nagata-valuation-open-closed-point`,
   `lemma:nagata-one-valuation-avoids-boundary`);
 - `AlgebraicGeometry.TwoOpenPreparation`: the bundled output of the comparison layer,
@@ -504,36 +506,21 @@ variable {A K : Type u} [CommRing A] [IsDomain A] [ValuationRing A] [Field K]
   (η : Spec (CommRingCat.of K) ⟶ (O₁ ⊓ O₂ : U.Opens).toScheme)
   (g₁ : Spec (CommRingCat.of A) ⟶ σ₁.X) (g₂ : Spec (CommRingCat.of A) ⟶ σ₂.X)
 
-/-- **One valuation extension avoids its forbidden boundary** (blueprint:
-`lemma:nagata-valuation-pair-factors-comparison`,
-`lemma:nagata-valuation-open-closed-point`,
-`lemma:nagata-one-valuation-avoids-boundary`). -/
-theorem KeyDisjoint.avoids (hkey : KeyDisjoint σ₁ σ₂)
+omit [ValuationRing A] in
+/-- **The pair of valuation extensions factors through the comparison space** (blueprint:
+`lemma:nagata-valuation-pair-factors-comparison`): if `gᵢ : Spec A ⟶ Xᵢ` extend a generic
+point `Spec K ⟶ O₁ ∩ O₂` over a common morphism to `S`, then `(g₁, g₂)` factors through
+the closed subscheme `X₁₂ ⊆ X₁ ×_S X₂`. Generically the pair lands in `V₁ ×_U V₂`, and a
+morphism from the spectrum of a domain factoring generically through a closed subscheme
+factors through it (`IsClosedImmersion.exists_lift_of_isFractionRing`). -/
+theorem exists_comparisonFst_comparisonSnd
     (hg₁ : Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ g₁ =
       η ≫ U.homOfLE inf_le_left ≫ σ₁.embX)
     (hg₂ : Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ g₂ =
       η ≫ U.homOfLE inf_le_right ≫ σ₂.embX)
     (hS : g₁ ≫ σ₁.s = g₂ ≫ σ₂.s) :
-    Set.range g₁ ⊆ (σ₁.interior : Set σ₁.X) ∨
-      Set.range g₂ ⊆ (σ₂.interior : Set σ₂.X) := by
-  have := σ₁.isOpenImmersion_υ
-  have := σ₂.isOpenImmersion_υ
-  -- it suffices that one closed point avoids its forbidden boundary
-  by_contra hcon
-  rw [not_or] at hcon
-  obtain ⟨h₁, h₂⟩ := hcon
-  have hclosed : ∀ {X₀ : Scheme.{u}} (g : Spec (CommRingCat.of A) ⟶ X₀)
-      {F : Set X₀}, IsClosed F → ¬ Set.range g ⊆ Fᶜ →
-      g (closedPoint (CommRingCat.of A)) ∈ F := by
-    intro X₀ g F hF hne
-    rw [Set.not_subset] at hne
-    obtain ⟨-, ⟨a, rfl⟩, ha⟩ := hne
-    rw [Set.mem_compl_iff, not_not] at ha
-    exact ((specializes_closedPoint a).map g.continuous).mem_closed hF ha
-  have hz₁ : g₁ (closedPoint (CommRingCat.of A)) ∈ σ₁.forbiddenBoundary :=
-    hclosed g₁ isClosed_closure h₁
-  have hz₂ : g₂ (closedPoint (CommRingCat.of A)) ∈ σ₂.forbiddenBoundary :=
-    hclosed g₂ isClosed_closure h₂
+    ∃ l : Spec (CommRingCat.of A) ⟶ comparisonSpace σ₁ σ₂,
+      l ≫ comparisonFst σ₁ σ₂ = g₁ ∧ l ≫ comparisonSnd σ₁ σ₂ = g₂ := by
   -- the pair of extensions as a morphism to `X₁ ×_S X₂`
   let ĝ : Spec (CommRingCat.of A) ⟶ pullback σ₁.s σ₂.s := pullback.lift g₁ g₂ hS
   have hĝ₁ : ĝ ≫ pullback.fst σ₁.s σ₂.s = g₁ := pullback.lift_fst _ _ _
@@ -564,26 +551,44 @@ theorem KeyDisjoint.avoids (hkey : KeyDisjoint σ₁ σ₂)
       simp only [embX]
   obtain ⟨l, hl⟩ := IsClosedImmersion.exists_lift_of_isFractionRing
     (comparisonMap σ₁ σ₂).imageι ĝ (ηV ≫ (comparisonMap σ₁ σ₂).toImage) hcomm
-  -- the closed point of the factorization violates the key disjointness
-  have hl₁ : l ≫ comparisonFst σ₁ σ₂ = g₁ := by
-    rw [comparisonFst, ← Category.assoc, hl, hĝ₁]
-  have hl₂ : l ≫ comparisonSnd σ₁ σ₂ = g₂ := by
-    rw [comparisonSnd, ← Category.assoc, hl, hĝ₂]
+  refine ⟨l, ?_, ?_⟩
+  · rw [comparisonFst, ← Category.assoc, hl, hĝ₁]
+  · rw [comparisonSnd, ← Category.assoc, hl, hĝ₂]
+
+/-- **One valuation extension avoids its forbidden boundary** (blueprint:
+`lemma:nagata-one-valuation-avoids-boundary`): the closed points of `g₁` and `g₂` cannot
+both lie in the forbidden boundaries, since the pair factors through the comparison space
+(`exists_comparisonFst_comparisonSnd`) on which the key disjointness holds; and an open of
+`Spec A` containing the closed point is everything (`IsLocalRing.closedPoint_mem_iff`,
+blueprint `lemma:nagata-valuation-open-closed-point`). -/
+theorem KeyDisjoint.avoids (hkey : KeyDisjoint σ₁ σ₂)
+    (hg₁ : Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ g₁ =
+      η ≫ U.homOfLE inf_le_left ≫ σ₁.embX)
+    (hg₂ : Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ g₂ =
+      η ≫ U.homOfLE inf_le_right ≫ σ₂.embX)
+    (hS : g₁ ≫ σ₁.s = g₂ ≫ σ₂.s) :
+    Set.range g₁ ⊆ (σ₁.interior : Set σ₁.X) ∨
+      Set.range g₂ ⊆ (σ₂.interior : Set σ₂.X) := by
+  -- it suffices that one closed point avoids its forbidden boundary
+  have hrange : ∀ {X₀ : Scheme.{u}} (g : Spec (CommRingCat.of A) ⟶ X₀) (W : X₀.Opens),
+      g (closedPoint (CommRingCat.of A)) ∈ W → Set.range g ⊆ (W : Set X₀) := by
+    rintro X₀ g W hW - ⟨a, rfl⟩
+    have ha : a ∈ g ⁻¹ᵁ W := by
+      rw [Scheme.preimage_eq_top_of_closedPoint_mem g hW]
+      trivial
+    exact ha
+  obtain ⟨l, hl₁, hl₂⟩ := exists_comparisonFst_comparisonSnd η g₁ g₂ hg₁ hg₂ hS
   have heq₁ : comparisonFst σ₁ σ₂ (l (closedPoint (CommRingCat.of A))) =
-      g₁ (closedPoint (CommRingCat.of A)) :=
-    calc comparisonFst σ₁ σ₂ (l (closedPoint (CommRingCat.of A)))
-        = (l ≫ comparisonFst σ₁ σ₂) (closedPoint (CommRingCat.of A)) :=
-          (Scheme.Hom.comp_apply _ _ _).symm
-      _ = g₁ (closedPoint (CommRingCat.of A)) := by rw [hl₁]
+      g₁ (closedPoint (CommRingCat.of A)) := by
+    rw [← Scheme.Hom.comp_apply, hl₁]
   have heq₂ : comparisonSnd σ₁ σ₂ (l (closedPoint (CommRingCat.of A))) =
-      g₂ (closedPoint (CommRingCat.of A)) :=
-    calc comparisonSnd σ₁ σ₂ (l (closedPoint (CommRingCat.of A)))
-        = (l ≫ comparisonSnd σ₁ σ₂) (closedPoint (CommRingCat.of A)) :=
-          (Scheme.Hom.comp_apply _ _ _).symm
-      _ = g₂ (closedPoint (CommRingCat.of A)) := by rw [hl₂]
-  refine hkey (l (closedPoint (CommRingCat.of A))) ?_ ?_
-  · rwa [heq₁]
-  · rwa [heq₂]
+      g₂ (closedPoint (CommRingCat.of A)) := by
+    rw [← Scheme.Hom.comp_apply, hl₂]
+  by_cases h₁ : g₁ (closedPoint (CommRingCat.of A)) ∈ σ₁.forbiddenBoundary
+  · refine Or.inr (hrange g₂ σ₂.interior ?_)
+    rw [← heq₂]
+    exact hkey _ (heq₁ ▸ h₁)
+  · exact Or.inl (hrange g₁ σ₁.interior h₁)
 
 end Avoids
 
