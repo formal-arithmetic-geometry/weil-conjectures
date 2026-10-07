@@ -12,23 +12,25 @@ public import WeilConjectures.WeilSheaf.LowerShriek
 /-!
 # Tensor products and constant twists of Weil sheaves
 
-The tensor product `F ⊗ G` of two Weil sheaves is the tensor product of the underlying étale
-sheaves on the geometric fiber `X̄`, with the Weil structure
-
-`Fr^* (F ⊗ G) ≅ Fr^* F ⊗ Fr^* G ≅ F ⊗ G`
-
-given by the monoidal structure of the pullback `Fr^*` and the two Weil structures.
+The tensor product `F ⊗ G` of a lisse Weil sheaf `F` with a Weil sheaf `G` is their tensor
+product over the sheaf of rings `ℚ̄_ℓ,X̄` of continuous `ℓ`-adic functions. Since `F` is locally
+free of finite rank over `ℚ̄_ℓ,X̄`, it is the internal hom `[F^∨, G]` out of the dual
+`F^∨ = [F, ℚ̄_ℓ]`, with the Weil structure of internal homs
+(`AlgebraicGeometry.ProEtaleWeilSheaf.ihom`). The tensor product of the underlying sheaves of
+`ℚ̄_ℓ`-modules, over the *discrete* ring `ℚ̄_ℓ`, would be the wrong object: already
+`ℚ̄_ℓ,X̄ ⊗_{ℚ̄_ℓ} ℚ̄_ℓ,X̄` is much larger than `ℚ̄_ℓ,X̄`.
 
 For a unit `b ∈ ℚ̄_ℓˣ` the *constant Weil twist* `F ⊗ 𝓑_b` of `F` is the tensor product of `F`
 with the geometrically constant Weil line `𝓑_b` on which the geometric Frobenius acts by `b`.
 Since `𝓑_b` is the unit sheaf with its Weil structure multiplied by `b`, the twist is the same
-étale sheaf as `F`, with its Weil structure `φ` replaced by `b • φ`; this is how it is defined
+underlying sheaf as `F`, with its Weil structure `φ` replaced by `b • φ`; this is how it is defined
 here. At a point with values in `𝔽_{qᵐ}` the local Frobenius of the twist is `bᵐ` times the
 local Frobenius of `F`.
 
 ## Main definitions
 
-- `AlgebraicGeometry.WeilSheaf.tensorObj`: the tensor product `F ⊗ G` of two Weil sheaves.
+- `AlgebraicGeometry.WeilSheaf.tensorObj`: the tensor product `F ⊗ G` of a lisse Weil sheaf
+  `F` and a Weil sheaf `G`.
 - `AlgebraicGeometry.WeilSheaf.constantTwist`: the constant Weil twist `F ⊗ 𝓑_b`.
 - `AlgebraicGeometry.WeilSheaf.constantTwistInvIso`: twisting by `b` and then by `b⁻¹` gives
   back `F`.
@@ -77,22 +79,16 @@ end WeilCoefficients
 
 namespace WeilSheaf
 
-/-- The tensor product `F ⊗ G` of two Weil sheaves: the tensor product of the underlying étale
-sheaves on `X̄`, with the Weil structure
-
-`Fr^* (F ⊗ G) ≅ Fr^* F ⊗ Fr^* G --φ_F ⊗ φ_G--> F ⊗ G`
-
-built from the monoidal structure `CategoryTheory.Functor.Monoidal.μIso` of the pullback
-`Fr^*` and the two Weil structures. -/
-noncomputable def tensorObj (F G : WeilSheaf k₀ l X) : WeilSheaf k₀ l X where
-  obj := .mk (F.obj.carrier ⊗ G.obj.carrier)
-    ((Functor.Monoidal.μIso (frobeniusPullback k₀ l X) _ _).symm ≪≫
-      (F.obj.str ⊗ᵢ G.obj.str))
-  property := Scheme.IsConstructibleSheaf.tensorObj F.property G.property
+/-- The tensor product `F ⊗ G` of a lisse Weil sheaf `F` and a Weil sheaf `G`: their tensor
+product over `ℚ̄_ℓ,X̄`, realized as the internal hom `[F^∨, G]` out of the dual of `F`, with the
+Weil structure of internal homs. -/
+noncomputable def tensorObj (F G : WeilSheaf k₀ l X) (hF : F.IsLisse) : WeilSheaf k₀ l X where
+  obj := ProEtaleWeilSheaf.ihom k₀ l X (F.dual hF).obj G.obj
+  property := ProEtale.IsAdicConstructibleSheaf.ihom_of_isAdicLisseSheaf hF.dual G.property
 
 /-- The constant Weil twist `F ⊗ 𝓑_b` of a Weil sheaf by a unit `b ∈ ℚ̄_ℓˣ`: the tensor product
 of `F` with the geometrically constant Weil line `𝓑_b` on which the geometric Frobenius acts
-by `b`. It is the étale sheaf of `F` with the Weil structure `b • φ`, so that at a point with
+by `b`. It is the underlying sheaf of `F` with the Weil structure `b • φ`, so that at a point with
 values in `𝔽_{qᵐ}` its local Frobenius is `bᵐ` times that of `F`, and every eigenvalue `α` of
 the local Frobenius of `F` at a closed point of degree `m` becomes `bᵐ α`.
 (blueprint: `def-wf-constant-weil-twist`) -/
@@ -118,11 +114,11 @@ theorem nonempty_equiv_stalk_constantTwist (F : WeilSheaf k₀ l X) (b : (PadicA
       ((b : PadicAlgCl l) ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1))) := by
   sorry
 
-/-- A constant twist of a lisse Weil sheaf is lisse, the underlying étale sheaf being the same. -/
+/-- A constant twist of a lisse Weil sheaf is lisse, the underlying sheaf being the same. -/
 alias ⟨_, IsLisse.constantTwist⟩ := isLisse_constantTwist
 
 /-- Twisting by `b` and then by `b⁻¹` gives back the Weil sheaf: both twists keep the
-underlying étale sheaf, and the Weil structure `b⁻¹ • b • φ` is `φ`. -/
+underlying sheaf, and the Weil structure `b⁻¹ • b • φ` is `φ`. -/
 noncomputable def constantTwistInvIso (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) :
     (F.constantTwist b).constantTwist b⁻¹ ≅ F :=
   ObjectProperty.isoMk _ (ObjectProperty.isoMk _ (Endofunctor.Algebra.isoMk (Iso.refl _) (by

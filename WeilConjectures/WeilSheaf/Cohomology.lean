@@ -6,36 +6,35 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.WeilSheaf.LowerShriek
-public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
+public import WeilConjectures.WeilSheaf.Stalk
 
 /-!
 # Compactly supported cohomology of Weil complexes
 
 Let `k₀` be a finite field with algebraic closure `k̄` and geometric Galois Frobenius
-`σ : Spec k̄ ≅ Spec k̄`. A Weil complex `(M, φ : σ^* M ≅ M)` on `Spec k₀` has cohomology
-groups `Hʳ(Spec k̄, M)`, and these carry a Frobenius
+`σ : Spec k̄ ≅ Spec k̄`. A Weil sheaf on `Spec k₀` is a constructible `ℓ`-adic sheaf `M` on
+the pro-étale site of `Spec k̄` with an isomorphism `φ : σ^* M ≅ M`; its global sections
+`Γ(Spec k̄, M)` carry the Frobenius
 
-`Hʳ(Spec k̄, M) ≅ Hʳ(Spec k̄, σ^* M) ≅ Hʳ(Spec k̄, M)`,
+`Γ(Spec k̄, M) ≅ Γ(Spec k̄, σ^* M) --Γ(φ)--> Γ(Spec k̄, M)`
 
-whose first isomorphism is the invariance of derived global sections under the automorphism
-`σ` and whose second one is induced by `φ`. The compactly supported cohomology of a Weil complex
-`K` on a `k₀`-scheme `X` with structure morphism `a : X ⟶ Spec k₀` is the cohomology
-`H_c^r(X ⊗ k̄, K) := Hʳ(Spec k̄, Ra_! K)` of its direct image with compact support
-(`AlgebraicGeometry.WeilComplex.derivedLowerShriek`), with this Frobenius.
+(`AlgebraicGeometry.WeilSheaf.globalSections`). Every pro-étale cover of `Spec k̄` splits, so
+`Γ(Spec k̄, -)` is exact and the cohomology `Hʳ(Spec k̄, M)` of a Weil complex `M` on `Spec k₀`
+is `Γ(Spec k̄, 𝓗ʳ M)`, the global sections of its `r`-th cohomology sheaf, with this Frobenius.
+
+The compactly supported cohomology of a Weil complex `K` on a `k₀`-scheme `X` with structure
+morphism `a : X ⟶ Spec k₀` is the cohomology `H_c^r(X ⊗ k̄, K) := Hʳ(Spec k̄, Ra_! K)` of its
+direct image with compact support (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`), with this
+Frobenius.
 
 ## Main declarations
 
 - `AlgebraicGeometry.WeilComplex.cohomologyFrobeniusModule`: the cohomology of a Weil complex on
-  `Spec k₀` as a Frobenius module, its Frobenius coming from the isomorphism
-  `D(σ^*) ⋙ RΓ ≅ RΓ` of `AlgebraicGeometry.Etale.upperStarCompRightDerivedGlobalSectionsIso`.
+  `Spec k₀` as a Frobenius module.
 - `AlgebraicGeometry.WeilComplex.compactlySupportedCohomology` and
   `AlgebraicGeometry.WeilSheaf.compactlySupportedCohomology`: compactly supported cohomology
   with its geometric Frobenius.
-- `AlgebraicGeometry.WeilComplex.compactlySupportedCohomologyLinearEquiv`: its identification
-  with the étale compactly supported cohomology `H_c(ā)[Λ](r)` of the underlying complex.
 
 ## Main statements
 
@@ -43,12 +42,6 @@ whose first isomorphism is the invariance of derived global sections under the a
   compactly supported cohomology of a finite `k₀`-scheme is concentrated in degree zero.
 - `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine`: the
   compactly supported cohomology of a smooth affine curve is concentrated in degrees `0, 1, 2`.
-
-## TODO
-
-Define the Frobenius from the derived pullback map on global sections (see the `TODO` of
-`WeilConjectures.SixFunctors.Etale.Derived.GlobalSections`), so that it is visibly the
-classical `F^*` on cohomology.
 -/
 
 @[expose] public section
@@ -59,45 +52,17 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-open Etale
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 namespace WeilComplex
 
-/-- The `r`-th cohomology `Hʳ(Spec k̄, M)` of the underlying complex of a Weil complex `M` on
-`Spec k₀`: the `r`-th cohomology of its derived global sections on the geometric fiber
-`Spec k̄`. -/
-noncomputable def cohomology (M : WeilComplex k₀ l (Spec (CommRingCat.of k₀))) (r : ℤ) :
-    WeilCoefficients.{u} l :=
-  (DerivedCategory.homologyFunctor _ r).obj
-    ((rightDerivedGlobalSections (WeilCoefficients.{u} l) _).obj M.obj.carrier)
-
--- TODO: prove this from the bounded constructibility of `M`. The global sections functor on
--- the small étale site of the spectrum of a separably closed field is an equivalence, so
--- `Hʳ(Spec k̄, M) ≅ Γ(Spec k̄, Hʳ M)` is a stalk of a constructible sheaf, hence finite
--- (blueprint `ex:constructible-point`).
-instance finiteDimensional_cohomology (M : WeilComplex k₀ l (Spec (CommRingCat.of k₀)))
-    (r : ℤ) : FiniteDimensional (PadicAlgCl l) ((WeilCoefficients.toModuleCat l).obj
-      (M.cohomology r)) :=
-  sorry
-
-/-- The `r`-th cohomology `Hʳ(Spec k̄, M)` of a Weil complex `(M, φ)` on `Spec k₀`, as a
-Frobenius module, with the Frobenius
-
-`Hʳ(Spec k̄, M) ≅ Hʳ(Spec k̄, σ^* M) --Hʳ(φ)--> Hʳ(Spec k̄, M)`,
-
-where `σ` is the geometric Galois Frobenius of `Spec k̄` and the first isomorphism is
-`Etale.upperStarCompRightDerivedGlobalSectionsIso`. -/
+/-- The `r`-th cohomology `Hʳ(Spec k̄, M) = Γ(Spec k̄, 𝓗ʳ M)` of a Weil complex `(M, φ)` on
+`Spec k₀`, as a Frobenius module: the global sections of its `r`-th cohomology sheaf, with the
+Frobenius induced by the Weil structure (`AlgebraicGeometry.WeilSheaf.globalSections`). -/
 noncomputable def cohomologyFrobeniusModule (M : WeilComplex k₀ l (Spec (CommRingCat.of k₀)))
     (r : ℤ) : FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
-  -- the geometric Galois Frobenius of `Spec k̄`, the geometric fiber of `Spec k₀` over itself
-  let σ := (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
-  { carrier := (WeilCoefficients.toModuleCat l).obj (M.cohomology r)
-    frobenius := WeilCoefficients.linearEquivOfIso
-      ((DerivedCategory.homologyFunctor _ r).mapIso
-        (((upperStarCompRightDerivedGlobalSectionsIso _ σ).app M.obj.carrier).symm ≪≫
-          (rightDerivedGlobalSections _ _).mapIso M.obj.str)) }
+  ((homologySheaf r).obj M).globalSections
 
 end WeilComplex
 
@@ -116,18 +81,6 @@ complex on `Spec k₀`. -/
 noncomputable def compactlySupportedCohomology (K : WeilComplex k₀ l X) (r : ℤ) :
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj K).cohomologyFrobeniusModule r
-
-/-- The underlying vector space of the compactly supported cohomology of a Weil complex `K` is
-the étale compactly supported cohomology `H_c(ā)[Λ](r)` of the underlying complex on `X ⊗ k̄`
-along the base change `ā : X ⊗ k̄ ⟶ Spec k̄` of the structure morphism; the two agree by
-definition. -/
-noncomputable def compactlySupportedCohomologyLinearEquiv (K : WeilComplex k₀ l X) (r : ℤ) :
-    -- the base change `ā : X ⊗ k̄ ⟶ Spec k̄` of the structure morphism
-    let ā := Scheme.Hom.geometricFiberMap (X ↘ Spec (CommRingCat.of k₀)) (comp_over _ _)
-    (K.compactlySupportedCohomology r).carrier ≃ₗ[PadicAlgCl l]
-      (WeilCoefficients.toModuleCat l).obj
-        ((H_c(ā)[WeilCoefficients.{u} l](r)).obj K.obj.carrier) :=
-  LinearEquiv.refl _ _
 
 end WeilComplex
 

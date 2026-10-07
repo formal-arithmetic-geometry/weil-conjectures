@@ -43,7 +43,7 @@ irreducible lisse sheaf `M'` of its Fourier partner is punctually `ι`-pure of s
 `v`. (blueprint: `sk-p-dl-a1-some-weight`) -/
 theorem exists_isPunctuallyPureOfWeight_of_isFourierPartner (ι : PadicAlgCl l →+* ℂ)
     (hψ : ψ ≠ 1) (D D' : WeilSheaf.LisseOnDenseOpen k₀ l) [Simple D.sheaf]
-    (hne : D.sheaf.IsNonexceptional ψ) {w : ℝ}
+    (hne : D.sheaf.IsNonexceptional ψ D.j) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) (hFT : D.IsFourierPartner ψ D') :
     ∃ v : ℝ, D'.sheaf.IsPunctuallyPureOfWeight ι v := by
   sorry

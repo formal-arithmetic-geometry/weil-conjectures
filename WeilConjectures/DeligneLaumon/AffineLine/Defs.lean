@@ -26,13 +26,10 @@ chart `AlgebraicGeometry.ProjectiveLine.affineChart`, `x ↦ [x : 1]`, whose com
 point `∞ = [1 : 0]`.
 
 Both conditions are phrased without the geometric fundamental group, which does not exist in
-the repository yet. Geometric constancy asks that the underlying étale sheaf be constant on
-every connected open of the geometric fiber `Ū = U ⊗ k̄`. Being unramified at infinity asks
-that the sheaf extend to a lisse Weil sheaf on `U₀ ∪ {∞} ⊆ ℙ¹_{k₀}`.
-
-Both conditions are vacuous for the present provisional coefficients, for which every Weil sheaf
-is zero (see `WeilConjectures.WeilSheaf.Category`); they gain content once Weil sheaves are
-defined as in the blueprint.
+the repository yet. Geometric constancy asks that the underlying `ℓ`-adic sheaf be constant,
+a finite sum of copies of `ℚ̄_ℓ`, on every connected open of the geometric fiber
+`Ū = U ⊗ k̄`. Being unramified at infinity asks that the sheaf extend to a lisse Weil sheaf on
+`U₀ ∪ {∞} ⊆ ℙ¹_{k₀}`.
 
 ## Main declarations
 
@@ -47,9 +44,13 @@ defined as in the blueprint.
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits
+
+attribute [local instance] Abelian.hasFiniteBiproducts
 
 namespace AlgebraicGeometry
+
+open scoped ProEtale
 
 namespace WeilSheaf
 
@@ -58,9 +59,10 @@ section Infinity
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 
-/-- A Weil sheaf `F` on `U` is *geometrically constant* if its underlying étale sheaf is
+/-- A Weil sheaf `F` on `U` is *geometrically constant* if its underlying `ℓ`-adic sheaf is
 constant on every connected open `V` of the geometric fiber `Ū = U ⊗ k̄`, where `k̄` is an
-algebraic closure of `k₀`; its Frobenius module may still be nontrivial. When the connected
+algebraic closure of `k₀`: its restriction to `V` is a finite direct sum of copies of the
+constant `ℓ`-adic sheaf `ℚ̄_ℓ`. Its Frobenius module may still be nontrivial. When the connected
 components of `Ū` are open, for instance when `U` is of finite type over `k₀`, this says that
 `F` is constant on each connected component of `Ū`. For `Ū` connected, as for `U` an open of
 `𝔸¹_{k₀}`, it is the constancy of `F` on `Ū`, which motivates the definition: the geometric
@@ -68,7 +70,8 @@ fundamental group `π₁(Ū)` acts trivially on the stalks of `F`.
 (blueprint: `sk-d-dl-a1-setup`) -/
 def IsGeometricallyConstant (F : WeilSheaf k₀ l U) : Prop :=
   ∀ V : (U ↘ Spec (CommRingCat.of k₀)).geometricFiber.Opens, ConnectedSpace V →
-    Sheaf.IsConstant V.toScheme.smallEtaleTopology ((Etale.upperStar _ V.ι).obj F.obj.carrier)
+    ∃ n : ℕ, Nonempty ((V.ι)^*[WeilCoefficients.{u} l].obj F.obj.carrier ≅
+      ⨁ fun _ : Fin n ↦ ProEtale.adicConstantSheaf l V.toScheme)
 
 /-- A lisse Weil sheaf `F` on an open `U₀` of the affine line, embedded by `j : U₀ ↪ 𝔸¹`, is
 *unramified at infinity* if it extends to a lisse Weil sheaf on `U₀ ∪ {∞} ⊆ ℙ¹`. Here `𝔸¹`
