@@ -5,15 +5,17 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.CategoryTheory.Adjunction.Limits
 public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.CategoryTheory.ModuleObjects.Bimod
 public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 
 /-!
 
-# Extension and restriction of scalars for module objects
+# Extension, restriction and coextension of scalars for module objects
 
 Let `(C, ⊗, 𝟙)` be a monoidal category and `φ : R ⟶ S` a morphism of algebra objects
 (`[IsMonHom φ]`).
@@ -31,6 +33,13 @@ Let `(C, ⊗, 𝟙)` be a monoidal category and `φ : R ⟶ S` a morphism of alg
   product of bimodules `Bimod.tensorBimod`, regarded as a left `S`-module. Concretely, `S ⊗_R M`
   is the coequalizer of the two maps `S ⊗ R ⊗ M ⇉ S ⊗ M` given by the right action of `R` on `S`
   through `φ` and the action of `R` on `M`, with `S` acting through the first factor.
+* *Coextension of scalars* along `φ` is the functor
+  `Mod.coextendScalars φ : Mod C R ⥤ Mod C S`, `N ↦ Hom_R(S, N)`, defined when `C` is closed
+  monoidal with equalizers (no commutativity or braiding is needed): `Hom_R(S, N)` is the
+  equalizer of the two maps `[S, N] ⇉ [R ⊗ S, N]` given by precomposition with the action of
+  `R` on `S` through `φ` (`Mod.coextendFst`) and by postcomposition with the action of `R` on
+  `N` (`Mod.coextendSnd`), and `S` acts on it by right multiplication on the source,
+  `(s • f)(t) = f(t s)`.
 
 The main result is the adjunction `Mod.extendRestrictAdjunction φ : extendScalars φ ⊣ comap φ`:
 an `S`-linear map `S ⊗_R M ⟶ N` is the same as an `R`-linear map `M ⟶ N` into the restriction
@@ -42,6 +51,19 @@ Maps out of `S ⊗_R M` are constructed with `Mod.extendDesc`, from a map `S ⊗
 coequalizes the two actions of `R` and is `S`-linear in the first factor; equalities between
 such maps are checked after precomposition with the epimorphism
 `Mod.extendπ φ M : S ⊗ M ⟶ S ⊗_R M` (`Mod.extendScalarsObj_hom_ext`).
+
+The second main result is the adjunction `Mod.restrictCoextendAdjunction φ : comap φ ⊣
+coextendScalars φ`: an `S`-linear map `M ⟶ Hom_R(S, N)` is the same as an `R`-linear map
+`M ⟶ N` out of the restriction of `M`. Consequently, restriction of scalars preserves colimits,
+coextension of scalars preserves limits, is additive in the preadditive setting, and is
+compatible with identities and compositions (`Mod.coextendScalarsId`, `Mod.coextendScalarsComp`),
+by uniqueness of right adjoints.
+
+Maps into `Hom_R(S, N)` are constructed with `Mod.coextendHomMk`, from a map `S ⊗ M ⟶ N` which
+is `R`-linear in the first variable and `S`-balanced; equalities between such maps are checked
+after composition with the evaluation `Mod.coextendEv φ N : S ⊗ Hom_R(S, N) ⟶ N`
+(`Mod.coextendScalarsObj_hom_ext`). All the computations are carried out on these "uncurried"
+maps, so that the internal hom only enters through `Mod.coextendLift` and `Mod.coextend_hom_ext`.
 
 The derived functor of extension of scalars is constructed in
 `WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars`.
@@ -481,6 +503,411 @@ variable [Preadditive C] [MonoidalPreadditive C]
 instance : (extendScalars φ).Additive where
   map_add {M N f g} := extendScalarsObj_hom_ext φ (by
     simp [MonoidalPreadditive.whiskerLeft_add, Preadditive.add_comp, Preadditive.comp_add])
+
+end Preadditive
+
+
+end Mod
+
+/-! ### Coextension of scalars -/
+
+namespace Mod
+
+variable [MonoidalClosed C] {R S : C} [MonObj R] [MonObj S] (φ : R ⟶ S)
+
+section Equalizer
+
+variable (N : Mod C R)
+
+/-- The map `[S, N] ⟶ [R ⊗ S, N]` precomposing with the action of `R` on `S` through `φ`:
+`f ↦ (r ⊗ s ↦ f(φ(r) s))`. -/
+noncomputable def coextendFst : (ihom S).obj N.X ⟶ (ihom (R ⊗ S)).obj N.X :=
+  (MonoidalClosed.pre (φ ▷ S ≫ μ[S])).app N.X
+
+variable (S) in
+/-- The map `[S, N] ⟶ [R ⊗ S, N]` postcomposing with the action of `R` on `N`:
+`f ↦ (r ⊗ s ↦ r • f(s))`. -/
+noncomputable def coextendSnd : (ihom S).obj N.X ⟶ (ihom (R ⊗ S)).obj N.X :=
+  MonoidalClosed.curry ((α_ R S _).hom ≫ R ◁ (ihom.ev S).app N.X ≫ γ[R,N.X])
+
+variable {N} in
+lemma uncurry_comp_coextendFst {Y : C} (g : Y ⟶ (ihom S).obj N.X) :
+    MonoidalClosed.uncurry (g ≫ coextendFst φ N) =
+      (φ ▷ S ≫ μ[S]) ▷ Y ≫ MonoidalClosed.uncurry g :=
+  MonoidalClosed.uncurry_pre_app _ _ _
+
+omit [MonObj S] in
+variable {N} in
+lemma uncurry_comp_coextendSnd {Y : C} (g : Y ⟶ (ihom S).obj N.X) :
+    MonoidalClosed.uncurry (g ≫ coextendSnd S N) =
+      (α_ R S Y).hom ≫ R ◁ MonoidalClosed.uncurry g ≫ γ[R,N.X] := by
+  rw [MonoidalClosed.uncurry_natural_left, coextendSnd, MonoidalClosed.uncurry_curry,
+    associator_naturality_right_assoc, MonoidalClosed.uncurry_eq, whiskerLeft_comp_assoc]
+
+variable {N} in
+/-- A map `g : Y ⟶ [S, N]` equalizes `coextendFst φ N` and `coextendSnd S N` if and only if the
+corresponding map `S ⊗ Y ⟶ N` is `R`-linear in the first variable. -/
+lemma comp_coextendFst_eq_comp_coextendSnd_iff {Y : C} (g : Y ⟶ (ihom S).obj N.X) :
+    g ≫ coextendFst φ N = g ≫ coextendSnd S N ↔
+      (φ ▷ S ≫ μ[S]) ▷ Y ≫ MonoidalClosed.uncurry g =
+        (α_ R S Y).hom ≫ R ◁ MonoidalClosed.uncurry g ≫ γ[R,N.X] := by
+  rw [← uncurry_comp_coextendFst, ← uncurry_comp_coextendSnd]
+  exact MonoidalClosed.uncurry_injective.eq_iff.symm
+
+omit [MonoidalClosed C] in
+variable {N} in
+/-- If `e : S ⊗ E ⟶ N` is `R`-linear in the first variable, then so is
+`(t ⊗ s ⊗ x) ↦ e(t s ⊗ x)`. -/
+lemma coextend_linear_mul {E : C} (e : S ⊗ E ⟶ N.X)
+    (he : (φ ▷ S ≫ μ[S]) ▷ E ≫ e = (α_ R S E).hom ≫ R ◁ e ≫ γ[R,N.X]) :
+    (φ ▷ S ≫ μ[S]) ▷ (S ⊗ E) ≫ (α_ S S E).inv ≫ μ[S] ▷ E ≫ e =
+      (α_ R S (S ⊗ E)).hom ≫ R ◁ ((α_ S S E).inv ≫ μ[S] ▷ E ≫ e) ≫ γ[R,N.X] := by
+  have h : (φ ▷ S ≫ μ[S]) ▷ S ≫ μ[S] = (α_ R S S).hom ≫ R ◁ μ[S] ≫ φ ▷ S ≫ μ[S] := by
+    rw [comp_whiskerRight, Category.assoc, MonObj.mul_assoc, associator_naturality_left_assoc,
+      ← whisker_exchange_assoc]
+  have he' : R ◁ e ≫ γ[R,N.X] = (α_ R S E).inv ≫ (φ ▷ S ≫ μ[S]) ▷ E ≫ e := by
+    rw [he, Iso.inv_hom_id_assoc]
+  rw [whiskerLeft_comp_assoc, whiskerLeft_comp_assoc, he', associator_inv_naturality_left_assoc,
+    ← comp_whiskerRight_assoc, h, associator_inv_naturality_middle_assoc,
+    pentagon_hom_inv_inv_inv_hom_assoc, comp_whiskerRight, comp_whiskerRight, comp_whiskerRight]
+  simp only [Category.assoc]
+
+end Equalizer
+
+variable [HasEqualizers C]
+
+section Object
+
+variable (N : Mod C R)
+
+/-- Maps into the equalizer of `coextendFst φ N` and `coextendSnd S N` are determined by their
+evaluations. -/
+lemma coextend_equalizer_hom_ext {Y : C}
+    {f g : Y ⟶ equalizer (coextendFst φ N) (coextendSnd S N)}
+    (h : S ◁ f ≫ S ◁ equalizer.ι _ _ ≫ (ihom.ev S).app N.X =
+      S ◁ g ≫ S ◁ equalizer.ι _ _ ≫ (ihom.ev S).app N.X) : f = g := by
+  rw [← cancel_mono (equalizer.ι (coextendFst φ N) (coextendSnd S N))]
+  apply MonoidalClosed.uncurry_injective
+  rw [MonoidalClosed.uncurry_natural_left, MonoidalClosed.uncurry_natural_left,
+    MonoidalClosed.uncurry_eq]
+  exact h
+
+/-- The action of `S` on the equalizer of `coextendFst φ N` and `coextendSnd S N` by right
+multiplication on the source: `(s • f)(t) = f(t s)`. -/
+noncomputable def coextendSMul :
+    S ⊗ equalizer (coextendFst φ N) (coextendSnd S N) ⟶
+      equalizer (coextendFst φ N) (coextendSnd S N) :=
+  equalizer.lift (MonoidalClosed.curry ((α_ S S _).inv ≫ μ[S] ▷ _ ≫
+    S ◁ equalizer.ι _ _ ≫ (ihom.ev S).app N.X)) (by
+      rw [comp_coextendFst_eq_comp_coextendSnd_iff, MonoidalClosed.uncurry_curry]
+      exact coextend_linear_mul φ _ ((comp_coextendFst_eq_comp_coextendSnd_iff φ _).1
+        (equalizer.condition _ _)))
+
+@[reassoc]
+lemma whiskerLeft_coextendSMul_ι_ev :
+    S ◁ coextendSMul φ N ≫ S ◁ equalizer.ι _ _ ≫ (ihom.ev S).app N.X =
+      (α_ S S _).inv ≫ μ[S] ▷ _ ≫ S ◁ equalizer.ι _ _ ≫ (ihom.ev S).app N.X := by
+  rw [← whiskerLeft_comp_assoc, coextendSMul, equalizer.lift_ι,
+    MonoidalClosed.whiskerLeft_curry_ihom_ev_app]
+
+/-- The `S`-module object `Hom_R(S, N)` of `R`-linear maps `S ⟶ N` obtained from an `R`-module
+object `N` by coextension of scalars along `φ : R ⟶ S`: it is the equalizer of the two maps
+`[S, N] ⇉ [R ⊗ S, N]` given by the action of `R` on `S` through `φ` and the action of `R` on
+`N`, with `S` acting by right multiplication on the source. -/
+noncomputable def coextendScalarsObj : Mod C S :=
+  letI : ModObj S (equalizer (coextendFst φ N) (coextendSnd S N)) :=
+    { smul := coextendSMul φ N
+      one_smul := by
+        change η[S] ▷ _ ≫ coextendSMul φ N = (λ_ _).hom
+        refine coextend_equalizer_hom_ext φ N ?_
+        rw [whiskerLeft_comp_assoc, whiskerLeft_coextendSMul_ι_ev,
+          associator_inv_naturality_middle_assoc, ← comp_whiskerRight_assoc, MonObj.mul_one,
+          triangle_assoc_comp_right_assoc]
+      mul_smul := by
+        change μ[S] ▷ _ ≫ coextendSMul φ N =
+          (α_ S S _).hom ≫ S ◁ coextendSMul φ N ≫ coextendSMul φ N
+        refine coextend_equalizer_hom_ext φ N ?_
+        rw [whiskerLeft_comp_assoc, whiskerLeft_coextendSMul_ι_ev,
+          associator_inv_naturality_middle_assoc, ← comp_whiskerRight_assoc,
+          MonObj.mul_assoc_flip, whiskerLeft_comp_assoc, whiskerLeft_comp_assoc,
+          whiskerLeft_coextendSMul_ι_ev, associator_inv_naturality_right_assoc,
+          whisker_exchange_assoc, whiskerLeft_coextendSMul_ι_ev,
+          associator_inv_naturality_left_assoc, pentagon_hom_inv_inv_inv_inv_assoc,
+          comp_whiskerRight, comp_whiskerRight]
+        simp only [Category.assoc] }
+  ⟨equalizer (coextendFst φ N) (coextendSnd S N)⟩
+
+/-- `Hom_R(S, N)` is the equalizer of the two maps `[S, N] ⇉ [R ⊗ S, N]`. -/
+lemma coextendScalarsObj_X :
+    (coextendScalarsObj φ N).X = equalizer (coextendFst φ N) (coextendSnd S N) :=
+  rfl
+
+lemma coextendScalarsObj_smul : γ[S,(coextendScalarsObj φ N).X] = coextendSMul φ N := rfl
+
+/-- The inclusion `Hom_R(S, N) ⟶ [S, N]`. -/
+noncomputable def coextendι : (coextendScalarsObj φ N).X ⟶ (ihom S).obj N.X :=
+  equalizer.ι (coextendFst φ N) (coextendSnd S N)
+
+instance : Mono (coextendι φ N) := by
+  dsimp [coextendι]
+  infer_instance
+
+@[reassoc]
+lemma coextendι_condition :
+    coextendι φ N ≫ coextendFst φ N = coextendι φ N ≫ coextendSnd S N :=
+  equalizer.condition _ _
+
+/-- The evaluation `S ⊗ Hom_R(S, N) ⟶ N`, `s ⊗ f ↦ f(s)`. -/
+noncomputable def coextendEv : S ⊗ (coextendScalarsObj φ N).X ⟶ N.X :=
+  S ◁ coextendι φ N ≫ (ihom.ev S).app N.X
+
+lemma uncurry_coextendι : MonoidalClosed.uncurry (coextendι φ N) = coextendEv φ N :=
+  rfl
+
+/-- The elements of `Hom_R(S, N)` are `R`-linear: `f(φ(r) s) = r • f(s)`. -/
+@[reassoc]
+lemma coextendEv_linear :
+    (φ ▷ S ≫ μ[S]) ▷ _ ≫ coextendEv φ N =
+      (α_ R S _).hom ≫ R ◁ coextendEv φ N ≫ γ[R,N.X] :=
+  (comp_coextendFst_eq_comp_coextendSnd_iff φ _).1 (coextendι_condition φ N)
+
+/-- The elements of `Hom_R(S, N)` are `R`-linear: `r • f(s) = f(φ(r) s)`. -/
+@[reassoc]
+lemma whiskerLeft_coextendEv_smul :
+    R ◁ coextendEv φ N ≫ γ[R,N.X] =
+      (α_ R S _).inv ≫ (φ ▷ S ≫ μ[S]) ▷ _ ≫ coextendEv φ N := by
+  rw [coextendEv_linear, Iso.inv_hom_id_assoc]
+
+/-- The action of `S` on `Hom_R(S, N)` is by right multiplication on the source:
+`(s • f)(t) = f(t s)`. -/
+@[reassoc]
+lemma whiskerLeft_smul_coextendEv :
+    S ◁ γ[S,(coextendScalarsObj φ N).X] ≫ coextendEv φ N =
+      (α_ S S _).inv ≫ μ[S] ▷ _ ≫ coextendEv φ N :=
+  whiskerLeft_coextendSMul_ι_ev φ N
+
+variable {N} in
+/-- Maps into `Hom_R(S, N)` are determined by their evaluations. -/
+lemma coextend_hom_ext {Y : C} {f g : Y ⟶ (coextendScalarsObj φ N).X}
+    (h : S ◁ f ≫ coextendEv φ N = S ◁ g ≫ coextendEv φ N) : f = g :=
+  coextend_equalizer_hom_ext φ N h
+
+variable {N} in
+/-- The morphism `Y ⟶ Hom_R(S, N)` of `C` induced by a map `g : S ⊗ Y ⟶ N` which is `R`-linear
+in the first variable. -/
+noncomputable def coextendLift {Y : C} (g : S ⊗ Y ⟶ N.X)
+    (hg : (φ ▷ S ≫ μ[S]) ▷ Y ≫ g = (α_ R S Y).hom ≫ R ◁ g ≫ γ[R,N.X]) :
+    Y ⟶ (coextendScalarsObj φ N).X :=
+  equalizer.lift (MonoidalClosed.curry g) (by
+    rw [comp_coextendFst_eq_comp_coextendSnd_iff, MonoidalClosed.uncurry_curry]
+    exact hg)
+
+variable {N} in
+@[reassoc (attr := simp)]
+lemma coextendLift_coextendι {Y : C} (g : S ⊗ Y ⟶ N.X) (hg) :
+    coextendLift φ g hg ≫ coextendι φ N = MonoidalClosed.curry g :=
+  equalizer.lift_ι _ _
+
+variable {N} in
+@[reassoc (attr := simp)]
+lemma whiskerLeft_coextendLift_coextendEv {Y : C} (g : S ⊗ Y ⟶ N.X) (hg) :
+    S ◁ coextendLift φ g hg ≫ coextendEv φ N = g := by
+  rw [coextendEv, ← whiskerLeft_comp_assoc, coextendLift_coextendι,
+    MonoidalClosed.whiskerLeft_curry_ihom_ev_app]
+
+variable {N} in
+/-- Construct an `S`-linear map `M ⟶ Hom_R(S, N)` from a map `g : S ⊗ M ⟶ N` which is `R`-linear
+in the first variable and `S`-balanced. -/
+noncomputable def coextendHomMk {M : Mod C S} (g : S ⊗ M.X ⟶ N.X)
+    (hg : (φ ▷ S ≫ μ[S]) ▷ M.X ≫ g = (α_ R S M.X).hom ≫ R ◁ g ≫ γ[R,N.X])
+    (hg' : S ◁ γ[S,M.X] ≫ g = (α_ S S M.X).inv ≫ μ[S] ▷ M.X ≫ g) :
+    M ⟶ coextendScalarsObj φ N :=
+  Hom.mk' (coextendLift φ g hg) (by
+    change γ[S,M.X] ≫ coextendLift φ g hg =
+      S ◁ coextendLift φ g hg ≫ γ[S,(coextendScalarsObj φ N).X]
+    refine coextend_hom_ext φ ?_
+    rw [whiskerLeft_comp_assoc, whiskerLeft_coextendLift_coextendEv, whiskerLeft_comp_assoc,
+      whiskerLeft_smul_coextendEv, associator_inv_naturality_right_assoc, whisker_exchange_assoc,
+      whiskerLeft_coextendLift_coextendEv, hg'])
+
+variable {N} in
+@[reassoc (attr := simp)]
+lemma whiskerLeft_coextendHomMk_hom_coextendEv {M : Mod C S} (g : S ⊗ M.X ⟶ N.X) (hg) (hg') :
+    S ◁ (coextendHomMk φ g hg hg').hom ≫ coextendEv φ N = g :=
+  whiskerLeft_coextendLift_coextendEv φ g hg
+
+variable {N} in
+lemma coextendScalarsObj_hom_ext {M : Mod C S} {f g : M ⟶ coextendScalarsObj φ N}
+    (h : S ◁ f.hom ≫ coextendEv φ N = S ◁ g.hom ≫ coextendEv φ N) : f = g :=
+  hom_ext _ _ (coextend_hom_ext φ h)
+
+end Object
+
+section Functor
+
+variable {N N' : Mod C R} (f : N ⟶ N')
+
+/-- The `S`-linear map `Hom_R(S, N) ⟶ Hom_R(S, N')` induced by an `R`-linear map `N ⟶ N'`. -/
+noncomputable def coextendScalarsMap : coextendScalarsObj φ N ⟶ coextendScalarsObj φ N' :=
+  coextendHomMk φ (coextendEv φ N ≫ f.hom)
+    (by rw [coextendEv_linear_assoc, smul_hom, whiskerLeft_comp_assoc])
+    (by rw [whiskerLeft_smul_coextendEv_assoc])
+
+@[reassoc (attr := simp)]
+lemma whiskerLeft_coextendScalarsMap_coextendEv :
+    S ◁ (coextendScalarsMap φ f).hom ≫ coextendEv φ N' = coextendEv φ N ≫ f.hom :=
+  whiskerLeft_coextendHomMk_hom_coextendEv φ _ _ _
+
+/-- Coextension of scalars along a morphism of algebra objects `φ : R ⟶ S`: the functor
+`N ↦ Hom_R(S, N)` from `R`-module objects to `S`-module objects. -/
+@[simps obj map]
+noncomputable def coextendScalars : Mod C R ⥤ Mod C S where
+  obj := coextendScalarsObj φ
+  map := coextendScalarsMap φ
+  map_id N := coextendScalarsObj_hom_ext φ (by simp)
+  map_comp f g := coextendScalarsObj_hom_ext φ (by simp)
+
+end Functor
+
+/-! ### The adjunction between restriction and coextension of scalars -/
+
+section Adjunction
+
+variable [IsMonHom φ] (N : Mod C R)
+
+/-- The counit `Hom_R(S, N) ⟶ N`, `f ↦ f(1)`, as a morphism of `C`. -/
+noncomputable def coextendCounitHom : (coextendScalarsObj φ N).X ⟶ N.X :=
+  (λ_ _).inv ≫ η[S] ▷ _ ≫ coextendEv φ N
+
+omit [IsMonHom φ] in
+/-- `(s • f)(1) = f(s)`. -/
+@[reassoc]
+lemma smul_coextendCounitHom :
+    γ[S,(coextendScalarsObj φ N).X] ≫ coextendCounitHom φ N = coextendEv φ N := by
+  change (γ[S,(coextendScalarsObj φ N).X] ≫ (λ_ _).inv ≫ η[S] ▷ _ ≫ coextendEv φ N :
+    S ⊗ _ ⟶ _) = _
+  rw [leftUnitor_inv_naturality_assoc, whisker_exchange_assoc, whiskerLeft_smul_coextendEv,
+    associator_inv_naturality_left_assoc, ← comp_whiskerRight_assoc, MonObj.one_mul,
+    leftUnitor_tensor_inv, Category.assoc, Iso.hom_inv_id_assoc, ← comp_whiskerRight_assoc,
+    Iso.inv_hom_id, id_whiskerRight, Category.id_comp]
+
+/-- The counit `Hom_R(S, N) ⟶ N` of the restriction-coextension adjunction. -/
+noncomputable def coextendCounit : (comap φ).obj (coextendScalarsObj φ N) ⟶ N :=
+  Hom.mk' (coextendCounitHom φ N) (by
+    change (φ ▷ _ ≫ γ[S,(coextendScalarsObj φ N).X]) ≫ coextendCounitHom φ N =
+      R ◁ coextendCounitHom φ N ≫ γ[R,N.X]
+    rw [Category.assoc, smul_coextendCounitHom]
+    dsimp only [coextendCounitHom]
+    rw [whiskerLeft_comp_assoc, whiskerLeft_comp_assoc, whiskerLeft_coextendEv_smul,
+      associator_inv_naturality_middle_assoc, whiskerLeft_leftUnitor_inv_associator_inv_assoc,
+      ← comp_whiskerRight_assoc, ← comp_whiskerRight_assoc, Category.assoc,
+      MonObj.rightUnitor_inv_whiskerLeft_one_whiskerRight_mul])
+
+@[simp]
+lemma coextendCounit_hom : (coextendCounit φ N).hom = coextendCounitHom φ N := rfl
+
+omit [IsMonHom φ] in
+variable {N} in
+@[reassoc (attr := simp)]
+lemma coextendHomMk_hom_coextendCounitHom {M : Mod C S} (g : S ⊗ M.X ⟶ N.X) (hg) (hg') :
+    (coextendHomMk φ g hg hg').hom ≫ coextendCounitHom φ N =
+      (λ_ M.X).inv ≫ η[S] ▷ M.X ≫ g := by
+  dsimp only [coextendCounitHom]
+  rw [leftUnitor_inv_naturality_assoc, whisker_exchange_assoc,
+    whiskerLeft_coextendHomMk_hom_coextendEv]
+
+variable {N} in
+/-- The `S`-linear map `M ⟶ Hom_R(S, N)` corresponding to an `R`-linear map `M ⟶ N`:
+`m ↦ (s ↦ f(s • m))`. -/
+noncomputable def coextendHom {M : Mod C S} (f : (comap φ).obj M ⟶ N) :
+    M ⟶ coextendScalarsObj φ N :=
+  coextendHomMk φ (γ[S,M.X] ≫ f.hom)
+    (by
+      have h : φ ▷ M.X ≫ γ[S,M.X] ≫ f.hom = R ◁ f.hom ≫ γ[R,N.X] := by
+        rw [← Category.assoc]
+        exact smul_hom f
+      rw [comp_whiskerRight, Category.assoc, mul_smul_assoc, associator_naturality_left_assoc,
+        ← whisker_exchange_assoc, whiskerLeft_comp_assoc, h])
+    (by rw [ModObj.mul_smul_self_flip_assoc])
+
+variable {N} in
+@[reassoc (attr := simp)]
+lemma whiskerLeft_coextendHom_hom_coextendEv {M : Mod C S} (f : (comap φ).obj M ⟶ N) :
+    S ◁ (coextendHom φ f).hom ≫ coextendEv φ N = γ[S,M.X] ≫ f.hom :=
+  whiskerLeft_coextendHomMk_hom_coextendEv φ _ _ _
+
+variable {N} in
+@[reassoc (attr := simp)]
+lemma coextendHom_hom_coextendCounitHom {M : Mod C S} (f : (comap φ).obj M ⟶ N) :
+    (coextendHom φ f).hom ≫ coextendCounitHom φ N = f.hom := by
+  rw [coextendHom, coextendHomMk_hom_coextendCounitHom, one_smul_assoc, Iso.inv_hom_id_assoc]
+
+/-- `R`-linear maps `M ⟶ N` correspond to `S`-linear maps `M ⟶ Hom_R(S, N)`. -/
+@[simps]
+noncomputable def coextendHomEquiv (M : Mod C S) :
+    ((comap φ).obj M ⟶ N) ≃ (M ⟶ coextendScalarsObj φ N) where
+  toFun := coextendHom φ
+  invFun g := (comap φ).map g ≫ coextendCounit φ N
+  left_inv f := hom_ext _ _ (by simp)
+  right_inv g := coextendScalarsObj_hom_ext φ (by
+    rw [whiskerLeft_coextendHom_hom_coextendEv, comp_hom', comap_map_hom, coextendCounit_hom,
+      smul_hom_assoc, smul_coextendCounitHom])
+
+/-- Restriction of scalars is left adjoint to coextension of scalars. -/
+noncomputable def restrictCoextendAdjunction : comap φ ⊣ coextendScalars φ :=
+  Adjunction.mkOfHomEquiv
+    { homEquiv M N := coextendHomEquiv φ N M
+      homEquiv_naturality_left_symm {M M' N} f g := by
+        change (comap φ).map (f ≫ g) ≫ coextendCounit φ N =
+          (comap φ).map f ≫ (comap φ).map g ≫ coextendCounit φ N
+        rw [Functor.map_comp, Category.assoc]
+      homEquiv_naturality_right {M N N'} f g := by
+        change coextendHom φ (f ≫ g) = coextendHom φ f ≫ coextendScalarsMap φ g
+        refine coextendScalarsObj_hom_ext φ ?_
+        rw [whiskerLeft_coextendHom_hom_coextendEv, comp_hom', comp_hom', whiskerLeft_comp_assoc,
+          whiskerLeft_coextendScalarsMap_coextendEv, whiskerLeft_coextendHom_hom_coextendEv_assoc] }
+
+instance : (comap φ : Mod C S ⥤ Mod C R).IsLeftAdjoint :=
+  (restrictCoextendAdjunction φ).isLeftAdjoint
+
+instance : (coextendScalars φ).IsRightAdjoint := (restrictCoextendAdjunction φ).isRightAdjoint
+
+/-- Restriction of scalars preserves colimits, being a left adjoint. -/
+noncomputable instance : PreservesColimitsOfSize.{v, u} (comap φ : Mod C S ⥤ Mod C R) :=
+  (restrictCoextendAdjunction φ).leftAdjoint_preservesColimits
+
+/-- Coextension of scalars preserves limits, being a right adjoint. -/
+noncomputable instance : PreservesLimitsOfSize.{v, u} (coextendScalars φ) :=
+  (restrictCoextendAdjunction φ).rightAdjoint_preservesLimits
+
+end Adjunction
+
+/-! ### Compatibilities of coextension of scalars -/
+
+section Compatibilities
+
+variable [IsMonHom φ]
+
+/-- Coextension of scalars along the identity is the identity. -/
+noncomputable def coextendScalarsId : coextendScalars (𝟙 R) ≅ 𝟭 (Mod C R) :=
+  (restrictCoextendAdjunction (𝟙 R)).rightAdjointUniq (Adjunction.id.ofNatIsoLeft comapId.symm)
+
+variable {T : C} [MonObj T] (ψ : S ⟶ T) [IsMonHom ψ]
+
+/-- Coextension of scalars along a composition is the composition of the coextensions. -/
+noncomputable def coextendScalarsComp :
+    coextendScalars (φ ≫ ψ) ≅ coextendScalars φ ⋙ coextendScalars ψ :=
+  (restrictCoextendAdjunction (φ ≫ ψ)).rightAdjointUniq
+    (((restrictCoextendAdjunction ψ).comp (restrictCoextendAdjunction φ)).ofNatIsoLeft
+      (comapComp φ ψ).symm)
+
+end Compatibilities
+
+section Preadditive
+
+variable [IsMonHom φ] [Preadditive C] [MonoidalPreadditive C]
+
+instance : (coextendScalars φ).Additive := (restrictCoextendAdjunction φ).right_adjoint_additive
 
 end Preadditive
 
