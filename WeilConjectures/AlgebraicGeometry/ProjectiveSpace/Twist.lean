@@ -30,8 +30,10 @@ projection of the twisting sheaf `Proj.twist` of the integral model.
   `Proj R[Tᵢ]`.
 - `AlgebraicGeometry.ProjectiveSpace.unitIsoTwistZero`: `𝒪(0)` is the structure sheaf.
 - `AlgebraicGeometry.ProjectiveSpace.isInvertible_twist`: `𝒪(m)` is invertible on `ℙ(n; S)`.
+- `AlgebraicGeometry.ProjectiveSpace.nonempty_tensorObj_twist_iso`: `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)`.
 - `AlgebraicGeometry.ProjectiveSpace.pullbackMapTwistIso`: `𝒪(m)` commutes with base change.
-- `AlgebraicGeometry.ProjectiveSpace.nonempty_twist_tensorObj_iso`: `𝒪(d) ⊗ 𝒪(e) ≅ 𝒪(d + e)`.
+- `AlgebraicGeometry.ProjectiveSpace.nonempty_twist_tensorObj_iso`: `𝒪(d) ⊗ 𝒪(e) ≅ 𝒪(d + e)`,
+  and `nonempty_tensorPow_twist_one_iso`: `𝒪(1)^{⊗ t} ≅ 𝒪(t)`.
 - `AlgebraicGeometry.Proj.epi_sigmaUnitToTwist` and
   `AlgebraicGeometry.ProjectiveSpace.generatingSectionsTwist`: for `d ≥ 0`, `𝒪(d)` is generated
   by the global sections `T_j ^ d`.
@@ -57,20 +59,26 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 variable (n : Type u)
 
+/-- The standard opens `D₊(Tᵢ)` cover `Proj R[Tᵢ]`, and `Tᵢ` has degree `1`. -/
+lemma Proj.exists_mem_basicOpen_homogeneousSubmodule (R : Type u) [CommRing R]
+    (x : Proj (MvPolynomial.homogeneousSubmodule n R)) :
+    ∃ f ∈ MvPolynomial.homogeneousSubmodule n R 1,
+      x ∈ Proj.basicOpen (MvPolynomial.homogeneousSubmodule n R) f := by
+  have h := Proj.iSup_basicOpen_eq_top' (MvPolynomial.homogeneousSubmodule n R)
+    (MvPolynomial.X : n → MvPolynomial n R) (fun i ↦ ⟨1, MvPolynomial.isHomogeneous_X R i⟩)
+    (MvPolynomial.adjoin_range_X_eq_top n R)
+  have hx : x ∈ ⨆ i, Proj.basicOpen (MvPolynomial.homogeneousSubmodule n R)
+      (MvPolynomial.X i) := by
+    rw [h]
+    trivial
+  obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+  exact ⟨_, MvPolynomial.isHomogeneous_X R i, hi⟩
+
 /-- **`𝒪(m)` is invertible on `Proj R[Tᵢ]`**: the standard opens `D₊(Tᵢ)` cover `Proj R[Tᵢ]`
 and `Tᵢ` has degree `1`. No finiteness of `n` is needed. -/
 instance Proj.isInvertible_twist_homogeneousSubmodule (R : Type u) [CommRing R] (m : ℤ) :
     (Proj.twist (MvPolynomial.homogeneousSubmodule n R) m).IsInvertible :=
-  Proj.isInvertible_twist _ m fun x ↦ by
-    have h := Proj.iSup_basicOpen_eq_top' (MvPolynomial.homogeneousSubmodule n R)
-      (MvPolynomial.X : n → MvPolynomial n R) (fun i ↦ ⟨1, MvPolynomial.isHomogeneous_X R i⟩)
-      (MvPolynomial.adjoin_range_X_eq_top n R)
-    have hx : x ∈ ⨆ i, Proj.basicOpen (MvPolynomial.homogeneousSubmodule n R)
-        (MvPolynomial.X i) := by
-      rw [h]
-      trivial
-    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
-    exact ⟨_, MvPolynomial.isHomogeneous_X R i, hi⟩
+  Proj.isInvertible_twist _ m (Proj.exists_mem_basicOpen_homogeneousSubmodule n R)
 
 namespace ProjectiveSpace
 
@@ -90,7 +98,10 @@ along the top arrow of the defining base-change square of `ℙ(n; S)`:
 ```
 
 Since `toProjInt` commutes with `map n f` for any `f : S ⟶ T`, `𝒪(m)` commutes with base
-change (`pullbackMapTwistIso`). -/
+change (`pullbackMapTwistIso`). On the standard opens `Uᵢ = D₊(xᵢ)` it is free of rank one,
+and it is glued along the transition units `ProjectiveSpace.transitionUnit`.
+
+(blueprint: `def-pc-projective-space-twist`) -/
 def twist (m : ℤ) : (ℙ(n; S)).Modules :=
   (Scheme.Modules.pullback (toProjInt n S)).obj
     (Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) m)
@@ -166,6 +177,21 @@ instance isInvertible_twist (m : ℤ) : (twist n S m).IsInvertible :=
   Scheme.Modules.IsInvertible.pullback (toProjInt n S)
     (Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) m)
 
+open MonoidalCategory in
+/-- **Twists and tensor products** on `ℙ(n; S)`: `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)`, by pulling back the
+corresponding isomorphism `Proj.nonempty_tensorObj_twist_iso` of the integral model, the pullback
+of a tensor product being the tensor product of the pullbacks.
+
+(blueprint: `lem-pc-twist-tensor`) -/
+theorem nonempty_tensorObj_twist_iso (a b : ℤ) :
+    Nonempty (twist n S a ⊗ twist n S b ≅ twist n S (a + b)) := by
+  obtain ⟨e₁⟩ := Scheme.Modules.nonempty_pullback_tensorObj_iso (toProjInt n S)
+    (Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) a)
+    (Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) b)
+  obtain ⟨e₂⟩ := Proj.nonempty_tensorObj_twist_iso _
+    (Proj.exists_mem_basicOpen_homogeneousSubmodule n (ULift.{u} ℤ)) a b
+  exact ⟨e₁.symm ≪≫ (Scheme.Modules.pullback (toProjInt n S)).mapIso e₂⟩
+
 /-- **`𝒪(m)` commutes with base change**: for `f : S ⟶ T`, the pullback of `𝒪(m)` on
 `ℙ(n; T)` along `map n f` is `𝒪(m)` on `ℙ(n; S)`. -/
 def pullbackMapTwistIso {S T : Scheme.{u}} (f : S ⟶ T) (m : ℤ) :
@@ -185,6 +211,15 @@ theorem nonempty_twist_tensorObj_iso (d e : ℤ) :
     (Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) e)
   obtain ⟨e₂⟩ := Proj.nonempty_twist_tensorObj_iso n (ULift.{u} ℤ) d e
   exact ⟨e₁.symm ≪≫ (Scheme.Modules.pullback (toProjInt n S)).mapIso e₂⟩
+
+/-- **`𝒪(1)^{⊗ t} ≅ 𝒪(t)`** on `ℙ(n; S)`, by induction from `nonempty_twist_tensorObj_iso`. -/
+theorem nonempty_tensorPow_twist_one_iso (t : ℕ) :
+    Nonempty ((twist n S 1).tensorPow t ≅ twist n S t) := by
+  induction t with
+  | zero => exact ⟨unitIsoTwistZero n S⟩
+  | succ t ih =>
+    obtain ⟨e⟩ := nonempty_twist_tensorObj_iso n S 1 t
+    exact ⟨(Iso.refl _ ⊗ᵢ ih.some) ≪≫ e ≪≫ eqToIso (by rw [add_comm]; push_cast; rfl)⟩
 
 /-- **`𝒪(d)` is generated by its global sections** on `ℙ(n; S)` for `d ≥ 0`, namely by the
 pullbacks of the sections `T_j ^ d` of `Proj.epi_sigmaUnitToTwist`. -/

@@ -1,0 +1,93 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+
+/-!
+# Extension by zero along an étale morphism
+
+Let `v : W ⟶ X` be étale. The extension by zero `v_! M` of a sheaf `M` of `Λ`-modules on
+`W_ét` is the sheafification of the presheaf
+
+`V ↦ ⨁_{s ∈ Hom_X(V, W)} M(V, s)`
+
+on `X_ét`, that is, the left Kan extension along the localization functor `W_ét ⟶ X_ét`
+followed by sheafification. It is left adjoint to the pullback `v^*`, which for an étale `v`
+is restriction. When `v` is an open immersion there is at most one lift `s`, and `v_!` is the
+extension by zero `AlgebraicGeometry.Etale.openImmersionLowerShriek`.
+
+At a geometric point `x̄` of `X` one has `(v_! M)_x̄ = ⨁_{w̄ ∈ W_x̄} M_w̄`, so `v_!` is exact;
+consequently `v^*` preserves injective sheaves.
+
+## Main definitions
+
+- `AlgebraicGeometry.Etale.etaleLowerShriek`: the extension by zero `v_!`.
+- `AlgebraicGeometry.Etale.etaleLowerShriekUpperStarAdjunction`: the adjunction `v_! ⊣ v^*`.
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.preservesFiniteLimits_etaleLowerShriek`: `v_!` is exact.
+- `AlgebraicGeometry.Etale.injective_upperStar_obj_of_etale`: `v^*` preserves injectives.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits
+
+namespace AlgebraicGeometry
+
+open Scheme Etale
+
+variable (Λ : Type (u + 1)) [CommRing Λ] {W X : Scheme.{u}} (v : W ⟶ X) (h : Etale v)
+
+/-- **Extension by zero along an étale morphism** `v : W ⟶ X`, on sheaves of `Λ`-modules: the
+sheafification of the presheaf `V ↦ ⨁_{s ∈ Hom_X(V, W)} M(V, s)` on `X_ét`, that is, the left
+Kan extension along the localization functor `W_ét ⟶ X_ét` followed by sheafification.
+(blueprint: `def-weil-pbc-etale-sum-extension`) -/
+noncomputable def Etale.etaleLowerShriek :
+    Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤
+      Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+  Functor.sheafPullbackConstruction.sheafPullback (MorphismProperty.Over.map ⊤ h)
+    (ModuleCat.{u + 1} Λ) W.smallEtaleTopology X.smallEtaleTopology
+
+/-- The adjunction `v_! ⊣ v^*` for an étale `v`: maps from the defining presheaf of `v_! M`
+to a sheaf `N` are compatible families of maps `M(V, s) ⟶ N(V)`, that is maps `M ⟶ v^* N`. -/
+noncomputable def Etale.etaleLowerShriekUpperStarAdjunction :
+    Etale.etaleLowerShriek Λ v h ⊣ (v)^*[ModuleCat.{u + 1} Λ] :=
+  have : (MorphismProperty.Over.map ⊤ h).IsContinuous W.smallEtaleTopology
+      X.smallEtaleTopology :=
+    inferInstanceAs ((MorphismProperty.Over.map ⊤ h).IsContinuous
+      (W.smallGrothendieckTopology @Etale) (X.smallGrothendieckTopology @Etale))
+  (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.map ⊤ h)
+    (ModuleCat.{u + 1} Λ) W.smallEtaleTopology X.smallEtaleTopology).ofNatIsoRight
+      (Etale.upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} Λ) v h).symm
+
+/-- **Extension by zero along an étale morphism is exact**: its stalk at a geometric point
+`x̄` is `⨁_{w̄ ∈ W_x̄} M_w̄`, geometric stalks are exact and jointly conservative, and direct
+sums of modules are exact. Left exactness is the content; right exactness holds for every
+left adjoint. -/
+theorem Etale.preservesFiniteLimits_etaleLowerShriek :
+    PreservesFiniteLimits (Etale.etaleLowerShriek Λ v h) :=
+  sorry
+
+/-- **Étale restriction preserves injectives**: for an étale `v : W ⟶ X`, the pullback `v^*`
+sends injective sheaves of `Λ`-modules to injective sheaves, since it has the exact left
+adjoint `v_!` (`AlgebraicGeometry.Etale.etaleLowerShriekUpperStarAdjunction`,
+`AlgebraicGeometry.Etale.preservesFiniteLimits_etaleLowerShriek`).
+(blueprint: `lem-weil-pbc-etale-restriction-injectives`) -/
+theorem Etale.injective_upperStar_obj_of_etale [Etale v]
+    (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective I] :
+    Injective ((v)^*[ModuleCat.{u + 1} Λ].obj I) := by
+  have := Etale.preservesFiniteLimits_etaleLowerShriek Λ v inferInstance
+  exact (Etale.etaleLowerShriekUpperStarAdjunction Λ v inferInstance).map_injective I
+    inferInstance
+
+end AlgebraicGeometry

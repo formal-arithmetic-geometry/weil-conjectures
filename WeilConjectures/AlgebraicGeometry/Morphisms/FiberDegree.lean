@@ -107,6 +107,15 @@ lemma Scheme.Hom.finrankΓ_eq_of_iso {Z Z' : Scheme.{u}} {R R' : CommRingCat.{u}
   rw [← CommRingCat.hom_comp, ← CommRingCat.hom_comp, Category.assoc, ← Scheme.Hom.comp_appTop, he',
     Scheme.Hom.comp_appTop, ← ΓSpecIso_inv_naturality_assoc]
 
+/-- The spectrum of a field `k` has `dim_k Γ(Spec k, 𝒪) = 1`. -/
+lemma Scheme.Hom.finrankΓ_id {k : Type u} [Field k] : Hom.finrankΓ (𝟙 (Spec (.of k))) = 1 := by
+  let := Hom.ΓAlgebra (𝟙 (Spec (.of k)))
+  have hb : Function.Bijective (algebraMap (CommRingCat.of k) Γ(Spec (.of k), ⊤)) := by
+    rw [Hom.algebraMap_ΓAlgebra, Hom.id_appTop, Category.comp_id]
+    exact ConcreteCategory.bijective_of_isIso _
+  exact (AlgEquiv.ofBijective (Algebra.ofId (CommRingCat.of k) _) hb).toLinearEquiv.finrank_eq.symm
+    |>.trans (Module.finrank_self k)
+
 lemma Scheme.Hom.appLE_top_top {Y X : Scheme.{u}} (f : Y ⟶ X) (h : (⊤ : Y.Opens) ≤ f ⁻¹ᵁ ⊤) :
     f.appLE ⊤ ⊤ h = f.appTop :=
   f.appLE_eq_app

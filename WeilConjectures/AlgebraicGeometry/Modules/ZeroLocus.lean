@@ -371,31 +371,6 @@ lemma Hom.map_zeroLocusIdeal_basicOpen (φ : M ⟶ N) (W : X.affineOpens) (f : �
   rw [← pow_sub_mul_pow f (hm _ (Finset.mem_image_of_mem n hgT)), mul_assoc, map_mul]
   exact Ideal.mul_mem_left _ _ (hn g (hTS hgT))
 
-/-- Conjugating the pullback of an endomorphism `f` of `𝒪_X` by `h^* 𝒪_X ≅ 𝒪_Y` gives the
-endomorphism of `𝒪_Y` whose value at `1` is `h^♯ (f 1)`. -/
-lemma pullbackObjUnitIso_conj_app_top {Y : Scheme.{u}} (h : Y ⟶ X)
-    (f : Modules.unit X ⟶ Modules.unit X) :
-    ((pullbackObjUnitIso h).inv ≫ (pullback h).map f ≫ (pullbackObjUnitIso h).hom).app ⊤
-      (1 : Γ(Y, ⊤)) = h.appTop (f.app ⊤ (1 : Γ(X, ⊤))) := by
-  set F := (pullbackObjUnitIso h).inv ≫ (pullback h).map f ≫ (pullbackObjUnitIso h).hom
-  have hF : (pullback h).map f ≫ (pullbackObjUnitIso h).hom =
-      (pullbackObjUnitIso h).hom ≫ F := by
-    simp [F]
-  have key := congrArg ((pullbackPushforwardAdjunction h).homEquiv _ _) hF
-  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right] at key
-  have h2 : (pullbackPushforwardAdjunction h).homEquiv _ _ (pullbackObjUnitIso h).hom =
-      SheafOfModules.unitToPushforwardObjUnit h.toRingCatSheafHom :=
-    SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit _
-  rw [h2] at key
-  have := congrArg (fun (φ : Modules.unit X ⟶ (pushforward h).obj (Modules.unit Y)) ↦
-    (Hom.app φ ⊤) (1 : Γ(X, ⊤))) key
-  dsimp only at this
-  simp only [Hom.comp_app, pushforward_map_app, ConcreteCategory.comp_apply] at this
-  have e1 : (Hom.app (SheafOfModules.unitToPushforwardObjUnit (Hom.toRingCatSheafHom h)) ⊤)
-      (1 : Γ(X, ⊤)) = (1 : Γ(Y, ⊤)) :=
-    map_one h.appTop.hom
-  exact (this.trans (congrArg (Hom.app F (h ⁻¹ᵁ ⊤)) e1)).symm
-
 /-- If `αP : 𝒪_Z ⟶ P|_Z` and `αQ : 𝒪_Z ≅ Q|_Z` are trivializations over an open immersion `j`,
 then `φ : P ⟶ Q` sends the generator `αP 1` to `c • αQ 1`, where `c` is the value at `1` of
 the endomorphism `αP ≫ φ|_Z ≫ αQ⁻¹` of `𝒪_Z`. -/

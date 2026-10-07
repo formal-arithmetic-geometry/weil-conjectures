@@ -284,7 +284,9 @@ lemma isPullback_baseChangeMap (f : X ⟶ S) {T T' : Over S} (g : T' ⟶ T) :
 
 /-- The Picard presheaf of a morphism of schemes `f : X ⟶ S`: it sends a scheme `T` over `S`
 to the Picard group of the fibre product `X_T = X ×[S] T`, and a morphism over `S` to the
-corresponding pullback map on Picard groups. -/
+corresponding pullback map on Picard groups.
+
+(blueprint: `def-pc-picard-presheaf`) -/
 noncomputable def picardPresheaf (f : X ⟶ S) : (Over S)ᵒᵖ ⥤ Type (u + 1) where
   obj T := (Limits.pullback f T.unop.hom).Pic
   map φ := TypeCat.ofHom (Pic.map (baseChangeMap f φ.unop))

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.Algebra.Field.ULift
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 public import Mathlib.LinearAlgebra.Dual.Defs
 public import Mathlib.LinearAlgebra.Dual.Lemmas
 
@@ -69,3 +70,14 @@ noncomputable def ModuleCat.dualDualIso {C : Type*} [Category C] {k : Type u} [F
       ψ ((K.map f).hom ((Module.evalEquiv k (K.obj i)).symm x))
     rw [Module.apply_evalEquiv_symm_apply, ← LinearMap.comp_apply ψ (K.map f).hom]
     exact (Module.apply_evalEquiv_symm_apply (f := ψ ∘ₗ (K.map f).hom) (g := x)).symm
+
+/-- Composing a linear map with isomorphisms on both sides does not change the dimension of its
+range: `dim range (a ≫ m ≫ b) = dim range m` for isomorphisms `a` and `b`. -/
+lemma ModuleCat.finrank_range_iso_comp {R : Type*} [Ring R] {M N M' N' : ModuleCat.{u} R}
+    (a : M' ≅ M) (m : M ⟶ N) (b : N ≅ N') :
+    Module.finrank R (LinearMap.range (a.hom ≫ m ≫ b.hom).hom) =
+      Module.finrank R (LinearMap.range m.hom) := by
+  rw [ModuleCat.hom_comp, ModuleCat.hom_comp, LinearMap.range_comp,
+    LinearMap.range_eq_top.2 (ConcreteCategory.bijective_of_isIso a.hom).2, Submodule.map_top,
+    LinearMap.range_comp]
+  exact b.toLinearEquiv.finrank_map_eq _
