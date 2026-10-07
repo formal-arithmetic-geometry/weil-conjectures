@@ -242,7 +242,7 @@ theorem IsConnectedCurve.exists_smooth_properCompactification [IsAlgClosed K]
   have : SmoothOfRelativeDimension 1 p :=
     (smoothOfRelativeDimension_iff_topologicalKrullDim_eq p 1).mpr
       (IsConnectedCurve.krullDim_eq_one (f := p))
-  letI : U.Over (Spec (.of K)) := ⟨p⟩
+  let : U.Over (Spec (.of K)) := ⟨p⟩
   have : GeometricallyConnected p := GeometricallyConnected.of_isSepClosed (k := K) U
   obtain ⟨c, hint, hcurve, hsm, -, -, hfin, hclosed⟩ :=
     exists_smooth_properCompactification_of_perfectField p

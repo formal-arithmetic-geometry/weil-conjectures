@@ -128,7 +128,8 @@ theorem subsingleton_cohomologicalBrauerGroup_of_smooth (f : C ⟶ Spec (.of k))
   -- each connected component is a smooth connected curve
   have : ConnectedSpace (U c) := isConnected_iff_connectedSpace.mp isConnected_connectedComponent
   have : IsCurve ((U c).ι ≫ f) :=
-    { krullDim_le_one := (topologicalKrullDim_subspace_le C (U c)).trans (IsCurve.krullDim_le_one f) }
+    { krullDim_le_one :=
+        (topologicalKrullDim_subspace_le C (U c)).trans (IsCurve.krullDim_le_one f) }
   have := subsingleton_cohomologicalBrauerGroup_of_connectedSpace ((U c).ι ≫ f)
   let e := Scheme.upperStarGmSheafIso (U c).ι
   exact (Function.LeftInverse.injective (f := Sheaf.H.map e.hom 2) (g := Sheaf.H.map e.inv 2)

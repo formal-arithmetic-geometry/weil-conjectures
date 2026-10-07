@@ -159,6 +159,48 @@ theorem topologicalKrullDim_normalization {k : Type u} [Field k] (q : X ⟶ Spec
     (topologicalKrullDim_le_of_specializingMap X.fromNormalization.isClosedMap.specializingMap
       X.fromNormalization.surjective)
 
+/-- Over a nonempty affine open `V` of an integral scheme `X` with `Γ(X, V)` integrally closed,
+the normalization `ν : X^ν ⟶ X` in the function field induces an isomorphism on sections:
+`Γ(X^ν, ν⁻¹ V)` is the integral closure of `Γ(X, V)` in its fraction field `k(X)`. -/
+theorem isIso_fromNormalization_app {V : X.Opens} (hV : IsAffineOpen V) [Nonempty V]
+    [IsIntegrallyClosed Γ(X, V)] : IsIso (X.fromNormalization.app V) := by
+  let f := X.fromSpecFunctionField
+  let := (f.app V).hom.toAlgebra
+  have hx : genericPoint X ∈ V :=
+    ((genericPoint_spec X).mem_open_set_iff V.isOpen).mpr (by simpa using ‹Nonempty V›)
+  -- `Γ(Spec k(X), f⁻¹ V)` is the fraction field of `Γ(X, V)`
+  have htop : f ⁻¹ᵁ V = ⊤ := by
+    refine top_unique fun p _ ↦ ?_
+    have : f p ∈ Set.range (X.fromSpecStalk (genericPoint X)) := ⟨p, rfl⟩
+    rw [Scheme.range_fromSpecStalk] at this
+    exact (show f p ⤳ genericPoint X from this).mem_open V.isOpen hx
+  let e : X.functionField ≃+* Γ(Spec X.functionField, f ⁻¹ᵁ V) :=
+    ((ΓSpecIso X.functionField).symm ≪≫ (Spec X.functionField).presheaf.mapIso
+      (eqToIso htop).op).commRingCatIsoToRingEquiv
+  have he (a : Γ(X, V)) : e (X.germToFunctionField V a) = algebraMap Γ(X, V) _ a := by
+    change _ = (f.app V) a
+    rw [Scheme.fromSpecStalk_app hx, Subsingleton.elim (homOfLE le_top) (eqToHom htop)]
+    rfl
+  have := functionField_isFractionRing_of_isAffineOpen X V hV
+  have : IsFractionRing Γ(X, V) Γ(Spec X.functionField, f ⁻¹ᵁ V) :=
+    IsLocalization.isLocalization_of_algEquiv _
+      { e with commutes' := he }
+  rw [Hom.fromNormalization_app f hV]
+  have hbij : Function.Bijective
+      (algebraMap Γ(X, V) (integralClosure Γ(X, V) Γ(Spec X.functionField, f ⁻¹ᵁ V))) := by
+    refine ⟨fun a b h ↦ IsFractionRing.injective Γ(X, V) Γ(Spec X.functionField, f ⁻¹ᵁ V)
+      (congrArg Subtype.val h), fun x ↦ ?_⟩
+    have hx : x.1 ∈ (⊥ : Subalgebra Γ(X, V) _) := by
+      rw [← IsIntegrallyClosed.integralClosure_eq_bot_iff
+        (K := Γ(Spec X.functionField, f ⁻¹ᵁ V)) |>.mpr inferInstance]
+      exact x.2
+    obtain ⟨a, ha⟩ := Algebra.mem_bot.mp hx
+    exact ⟨a, Subtype.ext ha⟩
+  have : IsIso (CommRingCat.ofHom (algebraMap Γ(X, V)
+      (integralClosure Γ(X, V) Γ(Spec X.functionField, f ⁻¹ᵁ V)))) :=
+    (RingEquiv.ofBijective _ hbij).toCommRingCatIso.isIso_hom
+  infer_instance
+
 /-- **The normalization over the normal locus.** For every open `U` of an integral scheme `X`
 whose local rings are integrally closed, the normalization `ν : X^ν ⟶ X` restricts to an
 isomorphism `ν⁻¹ U ⟶ U`: over an affine open `Spec A ⊆ U` the ring `A` is an integrally closed
@@ -166,7 +208,37 @@ domain, hence equal to its integral closure in `k(X)`.
 (blueprint: `lem-sc-normalization-over-normal-locus`) -/
 theorem isIso_fromNormalization_restrict (U : X.Opens)
     (hU : ∀ x ∈ U, IsIntegrallyClosed (X.presheaf.stalk x)) :
-    IsIso (X.fromNormalization ∣_ U) :=
-  sorry
+    IsIso (X.fromNormalization ∣_ U) := by
+  -- the case of a nonempty affine open
+  have key (V : X.affineOpens) (hVU : (V : X.Opens) ≤ U) (hne : (V : Set X).Nonempty) :
+      IsIso (X.fromNormalization ∣_ V) := by
+    have : Nonempty V.1 := hne.to_subtype
+    have hV' : IsAffineOpen (V.1.ι ''ᵁ ⊤) := by rw [Scheme.Opens.ι_image_top]; exact V.2
+    have : Nonempty (V.1.ι ''ᵁ ⊤) := by rw [Scheme.Opens.ι_image_top]; infer_instance
+    have : IsIntegrallyClosed Γ(X, V.1.ι ''ᵁ ⊤) := by
+      rw [Scheme.Opens.ι_image_top]
+      exact isIntegrallyClosed_of_isIntegrallyClosed_stalk_of_mem V fun x hx ↦ hU x (hVU hx)
+    have := X.isIso_fromNormalization_app hV'
+    have : IsAffine V.1 := V.2
+    rw [← MorphismProperty.isomorphisms.iff,
+      HasAffineProperty.iff_of_isAffine (P := MorphismProperty.isomorphisms Scheme)]
+    refine ⟨V.2.preimage X.fromNormalization, ?_⟩
+    rw [morphismRestrict_appTop]
+    infer_instance
+  rw [← MorphismProperty.isomorphisms.iff, IsZariskiLocalAtTarget.iff_of_iSup_eq_top
+    (P := MorphismProperty.isomorphisms Scheme)
+    (fun V : {V : X.affineOpens // (V : X.Opens) ≤ U ∧ (V : Set X).Nonempty} ↦ U.ι ⁻¹ᵁ V.1.1) ?_]
+  · rintro ⟨V, hVU, hne⟩
+    refine (MorphismProperty.arrow_mk_iso_iff (MorphismProperty.isomorphisms Scheme)
+      (morphismRestrictRestrict _ _ _)).mpr ?_
+    have : U.ι ''ᵁ U.ι ⁻¹ᵁ V.1 = V.1 := by
+      rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι,
+        inf_eq_right.mpr hVU]
+    rw [this]
+    exact key V hVU hne
+  · refine top_unique fun x _ ↦ ?_
+    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVU⟩ :=
+      X.isBasis_affineOpens.exists_subset_of_mem_open x.2 U.isOpen
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨⟨V, hV⟩, hVU, ⟨x.1, hxV⟩⟩, by simpa using hxV⟩
 
 end AlgebraicGeometry.Scheme
