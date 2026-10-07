@@ -7,8 +7,8 @@ fi
 # Verify all .lean files are imported.
 lake exe mk_all --lib WeilConjectures --git --check || exit 1
 
-# Fetch build cache
-lake exe cache get
+# Fetch build cache (not fatal: missing cache entries are compiled by the build below).
+lake exe cache get || echo "warning: lake exe cache get failed; missing modules will be built locally"
 
 # Verify everything builds.
 lake build --wfail
