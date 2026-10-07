@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Complements on morphisms locally of finite type
@@ -21,7 +22,9 @@ by the image of the global sections of the target together with finitely many el
 (`AlgebraicGeometry.exists_finset_closure_range_appTop_union_eq_top`). An integral scheme locally
 of finite type over a field has the dimension of any of its nonempty open subschemes
 (`AlgebraicGeometry.topologicalKrullDim_opens_eq`), which is finite
-(`AlgebraicGeometry.topologicalKrullDim_ne_top`).
+(`AlgebraicGeometry.topologicalKrullDim_ne_top`). More generally, a quasi-compact scheme locally
+of finite type over a field has finite dimension
+(`AlgebraicGeometry.topologicalKrullDim_ne_top_of_compactSpace`).
 -/
 
 @[expose] public section
@@ -74,16 +77,11 @@ theorem topologicalKrullDim_opens_eq {K : Type u} [Field K] {X : Scheme.{u}}
     topologicalKrullDim (U : Set X) = topologicalKrullDim X :=
   sorry
 
-/-- An integral scheme locally of finite type over a field has finite dimension: the dimension of
-any nonempty affine open subscheme, the spectrum of a finitely generated algebra. -/
-theorem topologicalKrullDim_ne_top {K : Type u} [Field K] {X : Scheme.{u}}
-    (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [IsIntegral X] :
-    topologicalKrullDim X ≠ ⊤ := by
-  obtain ⟨x⟩ := (inferInstance : Nonempty X)
-  obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
-    X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
-  have : Nonempty U := ⟨⟨x, hxU⟩⟩
-  rw [← topologicalKrullDim_opens_eq f U]
+/-- An affine open subscheme of a scheme locally of finite type over a field `K` has finite
+dimension: it is the spectrum of a finitely generated `K`-algebra. -/
+theorem IsAffineOpen.topologicalKrullDim_ne_top {K : Type u} [Field K] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] {U : X.Opens} (hU : IsAffineOpen U) :
+    topologicalKrullDim (U : Set X) ≠ ⊤ := by
   have hft : RingHom.FiniteType (f.appLE ⊤ U (by simp)).hom :=
     HasRingHomProperty.appLE (P := @LocallyOfFiniteType) f ‹_›
       ⟨⊤, isAffineOpen_top _⟩ ⟨U, hU⟩ (by simp)
@@ -94,8 +92,38 @@ theorem topologicalKrullDim_ne_top {K : Type u} [Field K] {X : Scheme.{u}}
   have : Algebra.FiniteType K Γ(X, U) := hφ
   have := IsHomeomorph.topologicalKrullDim_eq _ hU.isoSpec.hom.homeomorph.isHomeomorph
   change topologicalKrullDim (U : Set X) = topologicalKrullDim (PrimeSpectrum Γ(X, U)) at this
-  rw [this]
-  rw [PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
+  rw [this, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
   exact ringKrullDim_ne_top_of_finiteType K _
+
+/-- An integral scheme locally of finite type over a field has finite dimension: the dimension of
+any nonempty affine open subscheme, the spectrum of a finitely generated algebra. -/
+theorem topologicalKrullDim_ne_top {K : Type u} [Field K] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [IsIntegral X] :
+    topologicalKrullDim X ≠ ⊤ := by
+  obtain ⟨x⟩ := (inferInstance : Nonempty X)
+  obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
+    X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+  have : Nonempty U := ⟨⟨x, hxU⟩⟩
+  rw [← topologicalKrullDim_opens_eq f U]
+  exact hU.topologicalKrullDim_ne_top f
+
+/-- A quasi-compact scheme locally of finite type over a field has finite dimension: it is
+covered by finitely many affine open subschemes, each of finite dimension. -/
+theorem topologicalKrullDim_ne_top_of_compactSpace {K : Type u} [Field K] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [CompactSpace X] :
+    topologicalKrullDim X ≠ ⊤ := by
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun U : X.affineOpens ↦ (U : Set X))
+    (fun U ↦ U.1.isOpen) fun x _ ↦ by
+      obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
+        X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+      exact Set.mem_iUnion.mpr ⟨⟨U, hU⟩, hxU⟩
+  refine (lt_of_le_of_lt (topologicalKrullDim_le_of_iSup_eq_top (fun U : t ↦ U.1.1) ?_
+    (t.sup fun U ↦ topologicalKrullDim U.1) fun U ↦
+      Finset.le_sup (f := fun V : X.affineOpens ↦ topologicalKrullDim V.1) U.2) ?_).ne
+  · refine eq_top_iff.mpr fun x _ ↦ ?_
+    obtain ⟨U, hU, hxU⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ x))
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨U, hU⟩, hxU⟩
+  · exact (Finset.sup_lt_iff bot_lt_top).mpr fun U _ ↦
+      (U.2.topologicalKrullDim_ne_top f).lt_top
 
 end AlgebraicGeometry
