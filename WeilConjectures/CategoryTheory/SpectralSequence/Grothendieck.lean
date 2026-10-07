@@ -52,10 +52,14 @@ identification of the abutment through acyclic resolutions.
   spectral sequence, functorially in `X`.
 - `CategoryTheory.Functor.grothendieckSpectralSequence`: the Grothendieck spectral sequence.
 - `CategoryTheory.Functor.grothendieckBottomEdge`, `CategoryTheory.Functor.grothendieckLeftEdge`:
-  the edge maps `E₂^{n,0} ⟶ Hⁿ ⟶ E₂^{0,n}` of the spectral object, natural in `X`. Their
-  sources and targets are identified with `R^n G (F X)`, `R^n (F ⋙ G) X` and `G (R^n F X)` only
-  up to non-canonical isomorphisms, so the blueprint edge maps of
-  `lem-sp-grothendieck-edge-maps` are not fully constructed yet.
+  the edge maps `E₂^{n,0} ⟶ Hⁿ ⟶ E₂^{0,n}` of the spectral object, natural in `X`.
+- `CategoryTheory.Functor.grothendieckSpectralObjectHIso`,
+  `CategoryTheory.Functor.grothendieckSpectralObjectHBotTopIso`: the natural identifications
+  of the `E₂`-terms with `R^p G (R^q F X)` and of the abutment with `R^n (F ⋙ G) X`.
+- `CategoryTheory.Functor.grothendieckSpectralSequencePageTwoIso`: `E₂^{p,q} ≅ R^p G (R^q F X)`.
+- `CategoryTheory.Functor.grothendieckBottomEdgeMap`,
+  `CategoryTheory.Functor.grothendieckLeftEdgeMap`: the edge maps `R^n G (F X) ⟶ R^n (F ⋙ G) X ⟶ G (R^n F X)`, natural in `X`
+  (`lem-sp-grothendieck-edge-maps`).
 
 ## Main statements
 
@@ -231,12 +235,11 @@ theorem grothendieckSpectralSequence_abutsTo [PreservesFiniteLimits G]
 
 /-- The *bottom edge map* `E₂^{n,0} ⟶ Hⁿ` of the Grothendieck spectral sequence, as a natural
 transformation in `X : A`. Its source `H^n(RG(τ_{≥ 0} τ_{< 1} RF(X)))` is `R^n G (F X)` when `F`
-is left exact (`Functor.nonempty_grothendieckSpectralObject_H_zero_one_iso`) and its target
-`H^n(RG(RF(X)))` is `R^n (F ⋙ G) X` for a composable pair with acyclicity
-(`Functor.nonempty_grothendieckSpectralObject_H_bot_top_iso`). These identifications are not
-yet canonical or natural in `X`, so this does not yet give the blueprint edge map
-`R^n G (F X) ⟶ R^n (F ⋙ G) X`. It is the composite `E₂^{n,0} ↠ E∞^{n,0} = Fⁿ Hⁿ ↪ Hⁿ`, its image
-being the last step of the abutment filtration
+is left exact (`Functor.grothendieckBottomEdgeSourceIso`) and its target `H^n(RG(RF(X)))` is
+`R^n (F ⋙ G) X` for a composable pair with acyclicity
+(`Functor.grothendieckSpectralObjectHBotTopIso`); through these natural identifications it
+gives the blueprint edge map `Functor.grothendieckBottomEdgeMap`. It is the composite
+`E₂^{n,0} ↠ E∞^{n,0} = Fⁿ Hⁿ ↪ Hⁿ`, its image being the last step of the abutment filtration
 (`Abelian.SpectralObject.imageSubobject_bottomEdge`).
 
 (blueprint: `lem-sp-grothendieck-edge-maps`) -/
@@ -251,11 +254,10 @@ noncomputable def grothendieckBottomEdge (n : ℤ) :
 
 /-- The *left edge map* `Hⁿ ⟶ E₂^{0,n}` of the Grothendieck spectral sequence, as a natural
 transformation in `X : A`. Its source `H^n(RG(RF(X)))` is `R^n (F ⋙ G) X` for a composable pair
-with acyclicity (`Functor.nonempty_grothendieckSpectralObject_H_bot_top_iso`) and its target
+with acyclicity (`Functor.grothendieckSpectralObjectHBotTopIso`) and its target
 `H^n(RG(τ_{≥ n} τ_{< n+1} RF(X)))` is `G (R^n F X)` when `G` is left exact
-(`Functor.nonempty_grothendieckSpectralObject_H_self_succ_iso`). These identifications are not
-yet canonical or natural in `X`, so this does not yet give the blueprint edge map
-`R^n (F ⋙ G) X ⟶ G (R^n F X)`.
+(`Functor.grothendieckLeftEdgeTargetIso`); through these natural identifications it gives the
+blueprint edge map `Functor.grothendieckLeftEdgeMap`.
 
 (blueprint: `lem-sp-grothendieck-edge-maps`) -/
 noncomputable def grothendieckLeftEdge (n : ℤ) :
@@ -284,6 +286,103 @@ theorem nonempty_grothendieckSpectralObject_H_self_succ_iso [PreservesFiniteLimi
       G.obj ((F.rightDerived n).obj X)) := by
   obtain ⟨e⟩ := F.nonempty_grothendieckSpectralObject_H_iso G X 0 n n n (n + 1) (by simp) rfl rfl
   exact ⟨e ≪≫ G.rightDerivedZeroIsoSelf.app _⟩
+
+/-- The terms `H^{p+q}(RG(τ_{≥ q} τ_{< q+1} RF(X)))` of the spectral object of the
+Grothendieck spectral sequence, which give its `E₂`-page, are `R^p G (R^q F X)`, naturally in
+`X`. Indeed `τ_{≥ q} τ_{< q+1} RF(X) ≅ (R^q F X)[-q]` naturally in `X`
+(`DerivedCategory.Plus.eTruncLTCompETruncGEIso`). -/
+noncomputable def grothendieckSpectralObjectHIso (p q : ℕ) (n a b : ℤ) (hn : n = p + q)
+    (ha : a = q) (hb : b = q + 1) :
+    F.grothendieckSpectralObjectFunctor G ⋙ Abelian.SpectralObject.hFunctor n
+        (mk₁ (homOfLE (show (a : EInt) ≤ b by simp [ha, hb]))) ≅
+      F.rightDerived q ⋙ G.rightDerived p := by
+  subst hn ha hb
+  let S₀ := DerivedCategory.Plus.singleFunctor A 0 ⋙ F.rightDerivedFunctorPlus
+  let H₀ := DerivedCategory.Plus.homologyFunctor C 0
+  let RG := G.rightDerivedFunctorPlus
+  let Hq := DerivedCategory.Plus.homologyFunctor B q
+  exact Functor.isoWhiskerLeft S₀ (Functor.isoWhiskerRight
+      (DerivedCategory.Plus.eTruncLTCompETruncGEIso (q : ℤ)) (RG ⋙ H₀.shift ((p : ℤ) + q))) ≪≫
+    Functor.isoWhiskerLeft (S₀ ⋙ Hq) (Functor.isoWhiskerRight
+      ((DerivedCategory.Plus.singleFunctors B).shiftIso (-(q : ℤ)) q 0 (by simp)).symm
+      (RG ⋙ H₀.shift ((p : ℤ) + q))) ≪≫
+    Functor.isoWhiskerLeft (S₀ ⋙ Hq ⋙ DerivedCategory.Plus.singleFunctor B 0)
+      (Functor.isoWhiskerRight (RG.commShiftIso (-(q : ℤ))) (H₀.shift ((p : ℤ) + q))) ≪≫
+    Functor.isoWhiskerLeft (S₀ ⋙ Hq ⋙ DerivedCategory.Plus.singleFunctor B 0 ⋙ RG)
+      (H₀.shiftIso (-(q : ℤ)) ((p : ℤ) + q) p (by ring)) ≪≫
+    Functor.isoWhiskerLeft (S₀ ⋙ Hq)
+      (G.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p) ≪≫
+    Functor.isoWhiskerRight (F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q)
+      (G.rightDerived p)
+
+/-- The `E₂`-page of the Grothendieck spectral sequence is `E₂^{p,q} ≅ R^p G (R^q F X)`. This
+isomorphism is natural in `X`, see `Functor.grothendieckSpectralObjectHIso`. -/
+noncomputable def grothendieckSpectralSequencePageTwoIso (X : A) (p q : ℕ) :
+    ((F.grothendieckSpectralSequence G X).page 2).X (p, q) ≅
+      (G.rightDerived p).obj ((F.rightDerived q).obj X) :=
+  (F.grothendieckSpectralObject G X).E₂SpectralSequenceNatPageTwoXIso p q ≪≫
+    (F.grothendieckSpectralObjectHIso G p q (p + q : ℕ) q (q + 1) (by push_cast; rfl) rfl
+      rfl).app X
+
+/-- For a composable pair with acyclicity, the term `Hⁿ(RG(RF(X)))` of the spectral object of
+the Grothendieck spectral sequence, to which it abuts, is `R^n (F ⋙ G) X`, naturally in `X`:
+this is the composition isomorphism `R⁺(F ⋙ G) ≅ R⁺F ⋙ R⁺G`
+(`Functor.rightDerivedFunctorPlusCompIsoOfRightAcyclic`). -/
+noncomputable def grothendieckSpectralObjectHBotTopIso [PreservesFiniteLimits G]
+    (hFG : F.IsAcyclicComposablePair G) (n : ℕ) :
+    F.grothendieckSpectralObjectFunctor G ⋙ Abelian.SpectralObject.hFunctor n
+        (mk₁ (homOfLE (bot_le : (⊥ : EInt) ≤ ⊤))) ≅ (F ⋙ G).rightDerived n :=
+  Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor A 0)
+      (Functor.isoWhiskerRight (F.rightDerivedFunctorPlusCompIsoOfRightAcyclic G
+        (fun I _ q ↦ hFG I (q + 1) (by lia))).symm
+      (DerivedCategory.Plus.homologyFunctor C n)) ≪≫
+    (F ⋙ G).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso n
+
+/-- The source `E₂^{n,0}` of the bottom edge map is `R^n G (F X)`, naturally in `X`. -/
+noncomputable def grothendieckBottomEdgeSourceIso [PreservesFiniteLimits F] (n : ℕ) :
+    F.grothendieckSpectralObjectFunctor G ⋙ Abelian.SpectralObject.hFunctor n
+        (mk₁ (homOfLE (show ((0 : ℤ) : EInt) ≤ ((1 : ℤ) : EInt) by simp))) ≅
+      F ⋙ G.rightDerived n :=
+  F.grothendieckSpectralObjectHIso G n 0 n 0 1 (by simp) (by simp) (by simp) ≪≫
+    Functor.isoWhiskerRight F.rightDerivedZeroIsoSelf (G.rightDerived n)
+
+/-- The target `E₂^{0,n}` of the left edge map is `G (R^n F X)`, naturally in `X`. -/
+noncomputable def grothendieckLeftEdgeTargetIso [PreservesFiniteLimits G] (n : ℕ) :
+    F.grothendieckSpectralObjectFunctor G ⋙ Abelian.SpectralObject.hFunctor n
+        (mk₁ (homOfLE (show ((n : ℤ) : EInt) ≤ ((n + 1 : ℤ) : EInt) by simp))) ≅
+      F.rightDerived n ⋙ G :=
+  F.grothendieckSpectralObjectHIso G 0 n n n (n + 1) (by simp) rfl rfl ≪≫
+    Functor.isoWhiskerLeft (F.rightDerived n) G.rightDerivedZeroIsoSelf
+
+/-- **The bottom edge map** `R^n G (F X) ⟶ R^n (F ⋙ G) X` of the Grothendieck spectral
+sequence, natural in `X`. It is the composite `E₂^{n,0} ↠ E∞^{n,0} = Fⁿ Hⁿ ↪ Hⁿ`
+(`Functor.grothendieckBottomEdge`), read through the identifications
+`E₂^{n,0} ≅ R^n G (F X)` and `Hⁿ ≅ R^n (F ⋙ G) X`.
+
+For `F = f_*` and `G = h_*` along morphisms of sites `X ⟶ Y ⟶ Z`, this is the edge map
+`R^n h_* (f_* 𝓕) ⟶ R^n (h ∘ f)_* 𝓕`.
+
+(blueprint: `lem-sp-grothendieck-edge-maps`) -/
+noncomputable def grothendieckBottomEdgeMap [PreservesFiniteLimits F] [PreservesFiniteLimits G]
+    (hFG : F.IsAcyclicComposablePair G) (n : ℕ) :
+    F ⋙ G.rightDerived n ⟶ (F ⋙ G).rightDerived n :=
+  (F.grothendieckBottomEdgeSourceIso G n).inv ≫ F.grothendieckBottomEdge G n ≫
+    (F.grothendieckSpectralObjectHBotTopIso G hFG n).hom
+
+/-- **The left edge map** `R^n (F ⋙ G) X ⟶ G (R^n F X)` of the Grothendieck spectral sequence,
+natural in `X`. It is the composite `Hⁿ ↠ Hⁿ / F¹ Hⁿ = E∞^{0,n} ↪ E₂^{0,n}`
+(`Functor.grothendieckLeftEdge`), read through the identifications `Hⁿ ≅ R^n (F ⋙ G) X` and
+`E₂^{0,n} ≅ G (R^n F X)`.
+
+For `F = f_*` and `G = h_*` along morphisms of sites `X ⟶ Y ⟶ Z`, this is the edge map
+`R^n (h ∘ f)_* 𝓕 ⟶ h_* (R^n f_* 𝓕)`.
+
+(blueprint: `lem-sp-grothendieck-edge-maps`) -/
+noncomputable def grothendieckLeftEdgeMap [PreservesFiniteLimits G]
+    (hFG : F.IsAcyclicComposablePair G) (n : ℕ) :
+    (F ⋙ G).rightDerived n ⟶ F.rightDerived n ⋙ G :=
+  (F.grothendieckSpectralObjectHBotTopIso G hFG n).inv ≫ F.grothendieckLeftEdge G n ≫
+    (F.grothendieckLeftEdgeTargetIso G n).hom
 
 end Functor
 
