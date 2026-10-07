@@ -18,7 +18,9 @@ quasi-compact quasi-separated, deduced from the qcqs lemma
 `AlgebraicGeometry.isLocalization_basicOpen_of_qcqs`.
 
 We also record `AlgebraicGeometry.Scheme.Opens.quasiCompact_ι`: the inclusion of a
-quasi-compact open of a quasi-separated scheme is a quasi-compact morphism.
+quasi-compact open of a quasi-separated scheme is a quasi-compact morphism, and
+`AlgebraicGeometry.quasiSeparatedSpace_of_surjective`: quasi-separatedness of a scheme descends
+along a surjective quasi-compact morphism.
 -/
 
 @[expose] public section
@@ -53,5 +55,17 @@ lemma Scheme.Opens.quasiCompact_ι {X : Scheme.{u}} [QuasiSeparatedSpace X] (U :
     (hU : IsCompact (U : Set X)) : QuasiCompact U.ι :=
   have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
   inferInstance
+
+/-- Quasi-separatedness of schemes descends along surjective quasi-compact morphisms: the
+intersection of two quasi-compact opens of `Y` is the image of the intersection of their
+quasi-compact preimages. -/
+lemma quasiSeparatedSpace_of_surjective {X Y : Scheme.{u}} (f : X ⟶ Y) [Surjective f]
+    [QuasiCompact f] [QuasiSeparatedSpace X] : QuasiSeparatedSpace Y := by
+  refine ⟨fun U V hU hUc hV hVc ↦ ?_⟩
+  have h := QuasiSeparatedSpace.inter_isCompact _ _ (hU.preimage f.continuous)
+    (QuasiCompact.isCompact_preimage (f := f) U hU hUc) (hV.preimage f.continuous)
+    (QuasiCompact.isCompact_preimage (f := f) V hV hVc)
+  rw [← Set.preimage_inter] at h
+  simpa [Set.image_preimage_eq _ f.surjective] using h.image f.continuous
 
 end AlgebraicGeometry

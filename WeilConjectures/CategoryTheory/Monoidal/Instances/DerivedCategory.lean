@@ -59,4 +59,15 @@ noncomputable instance monoidalClosed_of_hasFunctorialFlatResolution
     MonoidalClosed (DerivedCategory C) :=
   monoidalClosed C
 
+/-- If `C` is braided and has functorial flat resolutions, the derived tensor product on
+`DerivedCategory C` admits a braiding: the braiding of `C`, with the Koszul sign rule on
+complexes, descends along K-flat resolutions.
+
+Only the existence of some braiding is recorded, as a `Prop`, so that statements which hold in
+any braided monoidal category can be applied to `DerivedCategory C`. The construction of the
+Koszul braiding is not yet formalised. -/
+theorem nonempty_braidedCategory [Abelian.HasFunctorialFlatResolution C] :
+    Nonempty (BraidedCategory (DerivedCategory C)) :=
+  sorry
+
 end DerivedCategory
