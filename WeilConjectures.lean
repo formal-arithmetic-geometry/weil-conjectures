@@ -26,6 +26,7 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma.Glue
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Graph
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Reduction
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Clopen
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
