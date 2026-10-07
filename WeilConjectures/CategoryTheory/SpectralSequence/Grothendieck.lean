@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.Basic
@@ -58,8 +59,11 @@ identification of the abutment through acyclic resolutions.
   of the `E₂`-terms with `R^p G (R^q F X)` and of the abutment with `R^n (F ⋙ G) X`.
 - `CategoryTheory.Functor.grothendieckSpectralSequencePageTwoIso`: `E₂^{p,q} ≅ R^p G (R^q F X)`.
 - `CategoryTheory.Functor.grothendieckBottomEdgeMap`,
-  `CategoryTheory.Functor.grothendieckLeftEdgeMap`: the edge maps `R^n G (F X) ⟶ R^n (F ⋙ G) X ⟶ G (R^n F X)`, natural in `X`
+  `CategoryTheory.Functor.grothendieckLeftEdgeMap`: the edge maps
+  `R^n G (F X) ⟶ R^n (F ⋙ G) X ⟶ G (R^n F X)`, natural in `X`
   (`lem-sp-grothendieck-edge-maps`).
+- `CategoryTheory.Functor.grothendieckE₂BaseChange`: the base change morphism
+  `γ (R^p G (R^q F X)) ⟶ R^p G' (R^q F' (α X))` on `E₂`-terms.
 
 ## Main statements
 
@@ -69,6 +73,8 @@ identification of the abutment through acyclic resolutions.
   `CategoryTheory.Functor.grothendieckSpectralSequence_abutsTo`: the `E₂`-page and the abutment.
 - `CategoryTheory.Functor.exists_grothendieckSpectralSequence`: the Grothendieck spectral
   sequence of a composable pair with acyclicity.
+- `CategoryTheory.Functor.exists_grothendieckSpectralObject_baseChange`: compatibility with base
+  change along exact functors (`thm-sp-grothendieck-base-change`). This is not proved yet.
 -/
 
 @[expose] public section
@@ -383,6 +389,62 @@ noncomputable def grothendieckLeftEdgeMap [PreservesFiniteLimits G]
     (F ⋙ G).rightDerived n ⟶ F.rightDerived n ⋙ G :=
   (F.grothendieckSpectralObjectHBotTopIso G hFG n).inv ≫ F.grothendieckLeftEdge G n ≫
     (F.grothendieckLeftEdgeTargetIso G n).hom
+
+section BaseChange
+
+universe v₄ v₅ v₆ u₄ u₅ u₆
+
+variable {A' : Type u₄} [Category.{v₄} A'] [Abelian A'] [IsGrothendieckAbelian.{v₄} A']
+  {B' : Type u₅} [Category.{v₅} B'] [Abelian B'] [IsGrothendieckAbelian.{v₅} B']
+  {C' : Type u₆} [Category.{v₆} C'] [Abelian C']
+  [HasDerivedCategory A'] [HasDerivedCategory B'] [HasDerivedCategory C']
+  (F' : A' ⥤ B') (G' : B' ⥤ C') [F'.Additive] [G'.Additive]
+  {α : A ⥤ A'} {β : B ⥤ B'} {γ : C ⥤ C'} [α.Additive] [β.Additive] [γ.Additive]
+  [PreservesFiniteLimits α] [PreservesFiniteColimits α]
+  [PreservesFiniteLimits β] [PreservesFiniteColimits β]
+  [PreservesFiniteLimits γ] [PreservesFiniteColimits γ]
+
+/-- The base change morphism `γ (R^p G (R^q F X)) ⟶ R^p G' (R^q F' (α X))` between the
+`E₂`-terms of two Grothendieck spectral sequences related by exact functors `α`, `β`, `γ` and
+isomorphisms `F ⋙ β ≅ α ⋙ F'`, `G ⋙ γ ≅ β ⋙ G'`, natural in `X`. It is assembled from the
+base change morphisms `Functor.rightDerivedBaseChange` of the classical right derived
+functors. -/
+noncomputable def grothendieckE₂BaseChange (eF : F ⋙ β ≅ α ⋙ F') (eG : G ⋙ γ ≅ β ⋙ G')
+    (p q : ℕ) :
+    (F.rightDerived q ⋙ G.rightDerived p) ⋙ γ ⟶ α ⋙ F'.rightDerived q ⋙ G'.rightDerived p :=
+  Functor.whiskerLeft (F.rightDerived q) (rightDerivedBaseChange eG p) ≫
+    Functor.whiskerRight (rightDerivedBaseChange eF q) (G'.rightDerived p)
+
+/-- **Base change for the Grothendieck spectral sequence.** Let `(F, G)` and `(F', G')` be
+composable pairs with acyclicity, related by exact functors `α : A ⥤ A'`, `β : B ⥤ B'`,
+`γ : C ⥤ C'` and isomorphisms `F ⋙ β ≅ α ⋙ F'`, `G ⋙ γ ≅ β ⋙ G'`. Then there is a morphism
+from the image under `γ` of the spectral object of the Grothendieck spectral sequence of `X` to
+the spectral object of the Grothendieck spectral sequence of `α X`, natural in `X`, which on
+the `E₂`-terms is the base change morphism
+`γ (R^p G (R^q F X)) ⟶ R^p G' (R^q F' (α X))` (`Functor.grothendieckE₂BaseChange`). Since the
+spectral sequences are those of these spectral objects, this is a morphism of spectral sequences
+which is the base change morphism on the `E₂`-pages.
+
+In the proper base change situation `α`, `β`, `γ` are the inverse images along the maps of a
+cartesian square, which are exact.
+
+(blueprint: `thm-sp-grothendieck-base-change`) -/
+theorem exists_grothendieckSpectralObject_baseChange [PreservesFiniteLimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteLimits F'] [PreservesFiniteLimits G']
+    (hFG : F.IsAcyclicComposablePair G) (hFG' : F'.IsAcyclicComposablePair G')
+    (eF : F ⋙ β ≅ α ⋙ F') (eG : G ⋙ γ ≅ β ⋙ G') :
+    ∃ φ : F.grothendieckSpectralObjectFunctor G ⋙ γ.mapSpectralObject EInt ⟶
+        α ⋙ F'.grothendieckSpectralObjectFunctor G',
+      ∀ p q : ℕ, Functor.whiskerRight φ (Abelian.SpectralObject.hFunctor (p + q : ℕ)
+          (mk₁ (homOfLE (show ((q : ℤ) : EInt) ≤ ((q + 1 : ℤ) : EInt) by simp)))) =
+        (Functor.isoWhiskerRight (F.grothendieckSpectralObjectHIso G p q (p + q : ℕ) q (q + 1)
+            (by push_cast; rfl) rfl rfl) γ).hom ≫
+          grothendieckE₂BaseChange F G F' G' eF eG p q ≫
+          (Functor.isoWhiskerLeft α (F'.grothendieckSpectralObjectHIso G' p q (p + q : ℕ) q
+            (q + 1) (by push_cast; rfl) rfl rfl)).inv := by
+  sorry
+
+end BaseChange
 
 end Functor
 
