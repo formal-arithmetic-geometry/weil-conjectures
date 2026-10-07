@@ -133,6 +133,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CurveProjection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Duality
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.MonomialCech
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
@@ -699,6 +700,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 public import WeilConjectures.Mathlib.Data.Fin.Rev
 public import WeilConjectures.Mathlib.Data.Set.Image
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
+public import WeilConjectures.Mathlib.FieldTheory.Finite.Polynomial
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.GroupTheory.Exponent

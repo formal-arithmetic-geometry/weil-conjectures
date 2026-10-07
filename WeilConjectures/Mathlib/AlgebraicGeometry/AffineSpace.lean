@@ -67,6 +67,8 @@ over a scheme `S` admits an immersion into a relative affine space `𝔸(Fin n; 
   affine-line projections.
 - `AlgebraicGeometry.Scheme.Hom.toIteratedAffineLine`: the morphism to the iterated affine line
   with prescribed coordinates (blueprint `def-zl-localized-coordinates`).
+- `AlgebraicGeometry.AffineSpace.range_zeroSection`: the image of the zero section is the common
+  zero locus of the coordinates.
 - `AlgebraicGeometry.AffineSpace.isAffine_fiber_of_isOpenImmersion`: the fibres of an open
   subscheme of the relative affine line `𝔸¹_Y` over the points of `Y` are affine.
 
@@ -840,6 +842,36 @@ instance AffineSpace.isClosedImmersion_zeroSection (n : Type u) (S : Scheme.{u})
   exact MorphismProperty.of_isPullback
     (IsPullback.of_bot hpaste (AffineSpace.zeroSection_comp_map f).symm
       (AffineSpace.isPullback_map f)) inferInstance
+
+/-- The image of the zero section of `𝔸(n; S)` is the common zero locus of the coordinates. -/
+lemma AffineSpace.range_zeroSection (n : Type u) (S : Scheme.{u}) :
+    Set.range (AffineSpace.zeroSection n S) =
+      {y | ∀ i, y ∉ 𝔸(n; S).basicOpen (AffineSpace.coord S i)} := by
+  ext y
+  constructor
+  · rintro ⟨s, rfl⟩ i hi
+    have : s ∈ AffineSpace.zeroSection n S ⁻¹ᵁ 𝔸(n; S).basicOpen (AffineSpace.coord S i) := hi
+    rw [Scheme.preimage_basicOpen_top, AffineSpace.zeroSection_appTop_coord,
+      Scheme.basicOpen_zero] at this
+    exact this
+  · intro hy
+    let f := 𝔸(n; S).fromSpecResidueField y
+    have hf (i : n) : f.appTop (AffineSpace.coord S i) = 0 := by
+      rw [← basicOpen_eq_bot_iff, ← Scheme.preimage_basicOpen_top, eq_bot_iff]
+      intro p hp
+      have hp' : f p ∈ Set.range f := ⟨p, rfl⟩
+      rw [Scheme.range_fromSpecResidueField] at hp'
+      exact hy i (hp' ▸ hp)
+    have key : f ≫ 𝔸(n; S) ↘ S ≫ AffineSpace.zeroSection n S = f := by
+      refine AffineSpace.hom_ext (by simp) fun i ↦ ?_
+      rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, Scheme.Hom.comp_appTop,
+        CommRingCat.comp_apply, AffineSpace.zeroSection_appTop_coord, map_zero, map_zero, hf]
+    obtain ⟨p⟩ : Nonempty (Spec (𝔸(n; S).residueField y)) := inferInstance
+    refine ⟨(𝔸(n; S) ↘ S) (f p), ?_⟩
+    have hp' : f p ∈ Set.range f := ⟨p, rfl⟩
+    rw [Scheme.range_fromSpecResidueField] at hp'
+    rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, key]
+    exact hp'
 
 /-- The fibre of an open subscheme `U ⊆ 𝔸¹_Y` over any point of `Y` is affine: it is an open
 subscheme of the affine line over a field, whose coordinate ring is a principal ideal domain. -/
