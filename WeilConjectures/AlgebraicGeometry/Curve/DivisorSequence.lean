@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
+public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 /-!
 # The divisor sequence of a punctured curve
@@ -55,7 +56,7 @@ this repository.
 
 universe u
 
-open CategoryTheory Limits Opposite Order
+open CategoryTheory Limits Opposite Order TopologicalSpace
 
 namespace AlgebraicGeometry
 
@@ -99,6 +100,95 @@ lemma gmSheafToLowerStarGmSheaf_comp_lowerStarGmSheafMap :
       (pullback.fst V.unop.hom g').appTop
   rw [← Scheme.Hom.comp_appTop, pullback.lift_fst, Category.comp_id]
 
+/-- **Isolating a point of a fibre and a uniformiser.** Let `g : V ⟶ X` be locally quasi-finite
+with `V` locally noetherian, `y` a point of `V` with `g y` closed, at which the local ring is a
+discrete valuation ring with uniformiser `π`. Then `π` extends to a section `s` on an open
+neighbourhood `W` of `y` such that every other point of `W` lies outside the fibre of `g y` and in
+`D(s)`. The other generisation of `y` lies in `D(s)` since `π ≠ 0`, and a noetherian argument
+(`TopologicalSpace.NoetherianSpace.exists_isOpen_inter_eq_singleton`) isolates `y`. -/
+lemma exists_opens_isolate {V X : Scheme.{u}} (g : V ⟶ X) [LocallyQuasiFinite g]
+    [IsLocallyNoetherian V] (y : V) (hyc : IsClosed {g y})
+    [IsDomain (V.presheaf.stalk y)] [IsDiscreteValuationRing (V.presheaf.stalk y)]
+    {π : V.presheaf.stalk y} (hπ : Irreducible π) :
+    ∃ (W : V.Opens) (hyW : y ∈ W) (s : Γ(V, W)), V.presheaf.germ W y hyW s = π ∧
+      ∀ y' ∈ W, y' ≠ y → g y' ≠ g y ∧ y' ∈ V.basicOpen s := by
+  obtain ⟨U₁, hyU₁, s₁, hs₁⟩ := TopCat.Presheaf.exists_germ_eq V.presheaf (x := y) π
+  obtain ⟨_, ⟨U₀, hU₀, rfl⟩, hyU₀, hU₀U₁⟩ :=
+    V.isBasis_affineOpens.exists_subset_of_mem_open hyU₁ U₁.2
+  let s := V.presheaf.map (homOfLE hU₀U₁).op s₁
+  have hs : V.presheaf.germ U₀ y hyU₀ s = π := by
+    exact (V.presheaf.germ_res_apply (homOfLE hU₀U₁) y hyU₀ s₁).trans hs₁
+  -- `y` is a closed point
+  have hy : IsClosed ({y} : Set V) := by
+    refine isClosed_iff_clusterPt.2 fun z hz ↦ ?_
+    have hyz : y ⤳ z := by
+      rw [specializes_iff_mem_closure]; exact mem_closure_iff_clusterPt.2 hz
+    have hgz : g z = g y := (hyz.map g.continuous).mem_closed hyc rfl
+    exact (g.eq_of_specializes_of_apply_eq hyz hgz.symm).symm
+  -- the generisations of `y` other than `y` lie in `D(s)` and not over `g y`
+  have hgen : ∀ z : V, z ⤳ y → z ≠ y → g z ≠ g y ∧ z ∈ V.basicOpen s := by
+    intro z hzy hne
+    refine ⟨fun h ↦ hne (g.eq_of_specializes_of_apply_eq hzy h), ?_⟩
+    have hzU₀ : z ∈ U₀ := hzy.mem_open U₀.2 hyU₀
+    have hz : z ∈ Set.range (V.fromSpecStalk y) := by
+      rw [Scheme.range_fromSpecStalk]; exact hzy
+    obtain ⟨p, rfl⟩ := hz
+    have hp : p.asIdeal = ⊥ := by
+      by_contra hbot
+      have hmax := p.isPrime.isMaximal hbot
+      exact hne (by
+        rw [show p = IsLocalRing.closedPoint _ from
+          PrimeSpectrum.ext (IsLocalRing.eq_maximalIdeal hmax), Scheme.fromSpecStalk_closedPoint])
+    have hmem : p ∈ V.fromSpecStalk y ⁻¹ᵁ V.basicOpen s := by
+      rw [Scheme.preimage_basicOpen, Scheme.fromSpecStalk_app hyU₀]
+      change p ∈ (Spec _).basicOpen ((Spec _).presheaf.map _ ((Scheme.ΓSpecIso _).inv
+        (V.presheaf.germ U₀ y hyU₀ s)))
+      rw [Scheme.basicOpen_res, hs]
+      refine ⟨hzU₀, ?_⟩
+      change p ∈ (Spec _).basicOpen ((Scheme.ΓSpecIso _).inv π)
+      rw [basicOpen_eq_of_affine]
+      change π ∉ p.asIdeal
+      rw [hp]
+      exact hπ.ne_zero
+    exact hmem
+  -- isolate `y` in the noetherian space `U₀`
+  have : NoetherianSpace U₀ := @noetherianSpace_of_isAffineOpen _ U₀ hU₀
+    (IsLocallyNoetherian.component_noetherian ⟨U₀, hU₀⟩)
+  let y₀ : U₀ := ⟨y, hyU₀⟩
+  let Z : Set U₀ := {q | g q.1 = g y ∨ q.1 ∉ V.basicOpen s}
+  have hZ : IsClosed Z := by
+    refine IsClosed.union ?_ ?_
+    · exact hyc.preimage (g.continuous.comp continuous_subtype_val)
+    · exact ((V.basicOpen s).2.preimage continuous_subtype_val).isClosed_compl
+  have hy₀ : IsClosed ({y₀} : Set U₀) := by
+    have e : ({y₀} : Set U₀) = Subtype.val ⁻¹' {y} := by
+      ext q
+      exact ⟨fun h ↦ h ▸ rfl, fun h ↦ Subtype.ext h⟩
+    rw [e]
+    exact hy.preimage continuous_subtype_val
+  obtain ⟨W₀, hW₀, hy₀W₀, hW₀Z⟩ := NoetherianSpace.exists_isOpen_inter_eq_singleton
+    (α := U₀) hZ (y := y₀) (Or.inl rfl) hy₀ fun q hq hqy ↦ by
+      by_contra hne
+      have := hgen q.1 (hqy.map continuous_subtype_val) fun h ↦ hne (Subtype.ext h)
+      rcases hq with hq | hq
+      · exact this.1 hq
+      · exact hq this.2
+  let W : V.Opens := ⟨Subtype.val '' W₀, U₀.2.isOpenMap_subtype_val W₀ hW₀⟩
+  have hWU₀ : W ≤ U₀ := by
+    rintro _ ⟨q, -, rfl⟩
+    exact q.2
+  refine ⟨W, ⟨y₀, hy₀W₀, rfl⟩, V.presheaf.map (homOfLE hWU₀).op s,
+    (V.presheaf.germ_res_apply (homOfLE hWU₀) y _ s).trans hs, ?_⟩
+  rintro _ ⟨q, hq, rfl⟩ hne
+  have hqZ : q ∉ Z := fun hqZ ↦ hne (by
+    have : q ∈ W₀ ∩ Z := ⟨hq, hqZ⟩
+    rw [hW₀Z] at this
+    rw [this])
+  have hqZ' : g q.1 ≠ g y ∧ q.1 ∈ V.basicOpen s :=
+    ⟨fun h ↦ hqZ (Or.inl h), of_not_not fun h ↦ hqZ (Or.inr h)⟩
+  refine ⟨hqZ'.1, ?_⟩
+  rw [Scheme.basicOpen_res]
+  exact ⟨⟨q, hq, rfl⟩, hqZ'.2⟩
 end Scheme
 
 namespace IsCurve
@@ -106,6 +196,38 @@ namespace IsCurve
 variable {C : Scheme.{u}} [IsIntegral C] [IsLocallyNoetherian C] [IsRegular C]
   {U : Scheme.{u}} (j : U ⟶ C) [IsOpenImmersion j] (iU : Spec C.functionField ⟶ U)
   (hiU : iU ≫ j = C.fromSpecFunctionField)
+
+omit [IsLocallyNoetherian C] [IsRegular C] [IsOpenImmersion j] in
+/-- The generic point of a one-dimensional integral scheme is not a closed point. -/
+lemma genericPoint_notMem (hC : topologicalKrullDim C = 1) {S : Set C}
+    (hSc : ∀ P ∈ S, IsClosed {P}) : genericPoint C ∉ S := by
+  intro hη
+  have h₁ : (Set.univ : Set C) = {genericPoint C} := by
+    rw [← genericPoint_spec C, (hSc _ hη).closure_eq]
+  have : Subsingleton C := ⟨fun a b ↦ by
+    have ha : a ∈ ({genericPoint C} : Set C) := h₁ ▸ Set.mem_univ a
+    have hb : b ∈ ({genericPoint C} : Set C) := h₁ ▸ Set.mem_univ b
+    rw [Set.mem_singleton_iff.1 ha, Set.mem_singleton_iff.1 hb]⟩
+  have h₂ := topologicalKrullDim_zero_of_discreteTopology C
+  rw [hC] at h₂
+  exact absurd h₂ (by decide)
+
+omit [IsLocallyNoetherian C] [IsRegular C] [IsOpenImmersion j] in
+/-- A closed point of a one-dimensional integral scheme has codimension one. -/
+lemma coheight_eq_one_of_mem (hC : topologicalKrullDim C = 1) {S : Set C}
+    (hSc : ∀ P ∈ S, IsClosed {P}) {P : C} (hP : P ∈ S) : coheight P = 1 := by
+  have hle : (coheight P : WithBot ℕ∞) ≤ 1 := hC ▸ coheight_le_topologicalKrullDim P
+  have hne : coheight P ≠ 0 := by
+    intro h0
+    have hmax : IsMax P := Order.coheight_eq_zero.1 h0
+    have h₁ : P ≤ genericPoint C :=
+      Scheme.le_iff_specializes.2 ((genericPoint_spec C).specializes (Set.mem_univ P))
+    have h₂ := hmax h₁
+    rw [Scheme.le_iff_specializes] at h₁ h₂
+    exact genericPoint_notMem hC hSc ((h₁.antisymm h₂).eq ▸ hP)
+  have hle' : coheight P ≤ 1 := by exact_mod_cast hle
+  exact le_antisymm hle' (Order.one_le_iff_ne_zero.2 hne)
+
 
 /-- **Units of order zero at the punctures extend.** Let `C` be an integral regular noetherian
 scheme of dimension one, `S` a finite set of closed points, `j : U ⟶ C` the open immersion of
@@ -126,16 +248,17 @@ lemma exists_eq_of_ord_eq_zero (hC : topologicalKrullDim C = 1) {S : Set C} (hS 
           (Scheme.Etale.ofOpensι V W)).left.appTop f.val := by
   sorry
 
+omit [IsOpenImmersion j] in
 open Classical in
 /-- **Uniformisers at the punctures.** In the situation of
 `AlgebraicGeometry.IsCurve.exists_eq_of_ord_eq_zero`, let `P ∈ S` and let `c` be an
 integer-valued function on the points of `V` over `P`. Near every point of `V` there is a unit on
 `V ×_C U` whose order is `c` at the points over `P` and `0` at the other points over `S`: a
 power of a uniformiser of the discrete valuation ring `𝒪_{V,y}`, which near `y` vanishes only
-at `y`. The proof is `sorry`.
+at `y` (`AlgebraicGeometry.Scheme.exists_opens_isolate`).
 (blueprint: `lem-sc-divisor-exact-sequence`, surjectivity) -/
 lemma exists_ord_eq_extendByZero (hC : topologicalKrullDim C = 1) {S : Set C}
-    (hS : S.Finite) (hSc : ∀ P ∈ S, IsClosed {P}) (hj : Set.range j = Sᶜ) (V : C.Etale)
+    (hSc : ∀ P ∈ S, IsClosed {P}) (hj : Set.range j = Sᶜ) (V : C.Etale)
     (y : V.left) {P : C} (hP : P ∈ S)
     (c : ↥(pullback V.hom (C.fromSpecResidueField P)) → ULift.{u + 1} ℤ) :
     ∃ (W : V.left.Opens) (_ : y ∈ W)
@@ -146,7 +269,131 @@ lemma exists_ord_eq_extendByZero (hC : topologicalKrullDim C = 1) {S : Set C}
               (by simp [hiU])).appTop f.val)) else 0) =
         Scheme.extendByZero (AddCommGrpCat.of (ULift.{u + 1} ℤ)) (C.fromSpecResidueField P) c
           (W.ι y') := by
-  sorry
+  by_cases hy : V.hom y = P
+  swap
+  · let W : V.left.Opens := ⟨(V.hom ⁻¹' {P})ᶜ,
+      ((hSc P hP).preimage V.hom.continuous).isOpen_compl⟩
+    refine ⟨W, hy, 1, fun y' ↦ ?_⟩
+    have hy' : V.hom (W.ι y') ∉ Set.range (C.fromSpecResidueField P) := by
+      rw [Scheme.range_fromSpecResidueField]
+      exact y'.2
+    rw [Scheme.extendByZero_of_notMem _ hy']
+    split_ifs
+    · rw [Units.val_one, map_one, Scheme.Etale.ord_one]
+      rfl
+    · rfl
+  have hcoh : coheight (V.hom y) = 1 := hy ▸ coheight_eq_one_of_mem hC hSc hP
+  have : IsDiscreteValuationRing (V.left.presheaf.stalk y) :=
+    Scheme.Etale.isDiscreteValuationRing_stalk V hcoh
+  let g : V.left ⟶ C := V.hom
+  have : IsLocallyNoetherian V.left := LocallyOfFiniteType.isLocallyNoetherian g
+  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible (V.left.presheaf.stalk y)
+  obtain ⟨W, hyW, t, ht, hW⟩ := Scheme.exists_opens_isolate g y (hy ▸ hSc P hP) hπ
+  obtain ⟨z₀, hz₀⟩ : ∃ z, pullback.fst V.hom (C.fromSpecResidueField P) z = y :=
+    (Set.ext_iff.1 (Scheme.Pullback.range_fst V.hom (C.fromSpecResidueField P)) y).2 (by
+      change V.hom y ∈ Set.range (C.fromSpecResidueField P)
+      rw [Scheme.range_fromSpecResidueField, hy]
+      rfl)
+  let W' := Scheme.Etale.ofOpens V W
+  let tW : Γ(W'.left, ⊤) := W.topIso.inv t
+  have hgerm (y' : W) : (W.stalkIso y').hom (W'.left.presheaf.germ ⊤ y' trivial tW) =
+      V.left.presheaf.germ W y'.1 y'.2 t := by
+    refine (congrArg (fun φ ↦ φ.hom tW)
+      (Scheme.Opens.germ_stalkIso_hom W (V := ⊤) y' trivial)).trans ?_
+    exact V.left.presheaf.germ_res_apply _ _ _ t
+  have hunit_at (q : W) (hq : q.1 ≠ y) : IsUnit (W'.left.presheaf.germ ⊤ q trivial tW) := by
+    have h₁ := (V.left.mem_basicOpen t q.1 q.2).1 (hW q.1 q.2 hq).2
+    rw [← hgerm] at h₁
+    have h₂ := h₁.map (W.stalkIso q).inv.hom
+    rwa [← ConcreteCategory.comp_apply, Iso.hom_inv_id, CategoryTheory.id_apply] at h₂
+  let a : Γ(pullback W'.hom j, ⊤) := (pullback.fst W'.hom j).appTop tW
+  have hb : (pullback W'.hom j).basicOpen a = ⊤ := by
+    rw [← Scheme.preimage_basicOpen_top]
+    rw [eq_top_iff]
+    intro p _
+    change pullback.fst W'.hom j p ∈ W'.left.basicOpen tW
+    rw [Scheme.mem_basicOpen_top]
+    refine hunit_at _ fun h ↦ ?_
+    have h₁ : W'.hom (pullback.fst W'.hom j p) = j (pullback.snd W'.hom j p) :=
+      congrArg (fun f ↦ f p) (pullback.condition (f := W'.hom) (g := j))
+    have h₂ : j (pullback.snd W'.hom j p) ∈ Sᶜ := hj ▸ Set.mem_range_self _
+    apply h₂
+    rw [← h₁]
+    change V.hom (pullback.fst W'.hom j p).1 ∈ S
+    rw [h, hy]
+    exact hP
+  have ha : IsUnit a := by
+    let X := pullback W'.hom j
+    have key : ∀ {B : X.Opens} (f₁ : (⊤ : X.Opens) ⟶ B) (f₂ : B ⟶ ⊤) (b : Γ(X, ⊤)),
+        X.presheaf.map f₁.op (X.presheaf.map f₂.op b) = b := by
+      intro B f₁ f₂ b
+      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp,
+        Subsingleton.elim (f₁ ≫ f₂) (𝟙 _), op_id, CategoryTheory.Functor.map_id,
+        CategoryTheory.id_apply]
+    have h₁ := X.toRingedSpace.isUnit_res_basicOpen a
+    have h₂ := h₁.map (X.presheaf.map (homOfLE (by rw [hb]) :
+      (⊤ : X.Opens) ⟶ X.basicOpen a).op).hom
+    convert h₂ using 1
+    exact (key _ _ a).symm
+  -- the order of `t` at the points of `W`
+  have hord (y' : W) : Scheme.Etale.ord W' y'
+      ((pullback.fst W'.hom C.fromSpecFunctionField).appTop tW) = if y'.1 = y then 1 else 0 := by
+    obtain ⟨y', hy'W⟩ := y'
+    by_cases hy'c : coheight (W'.hom ⟨y', hy'W⟩) = 1
+    · rw [Scheme.Etale.ord, if_pos hy'c, Scheme.Etale.toLocalGenericRing_fst_appTop]
+      have := Scheme.Etale.isDiscreteValuationRing_stalk W' hy'c
+      let := (Scheme.Etale.stalkToLocalGenericRing W' ⟨y', hy'W⟩).hom.toAlgebra
+      have := Scheme.Etale.isFractionRing_localGenericRing W' hy'c
+      split_ifs with hy'
+      · change y' = y at hy'
+        subst hy'
+        refine Ring.ordOf_algebraMap_of_irreducible ?_
+        have h₁ : (W.stalkIso ⟨y', hy'W⟩).hom
+            (W'.left.presheaf.germ ⊤ ⟨y', hy'W⟩ trivial tW) = π := by
+          rw [hgerm]
+          exact ht
+        have h₂ : Irreducible ((W.stalkIso ⟨y', hy'W⟩).commRingCatIsoToRingEquiv
+            (W'.left.presheaf.germ ⊤ ⟨y', hy'W⟩ trivial tW)) := h₁ ▸ hπ
+        exact (MulEquiv.irreducible_iff
+          (W.stalkIso ⟨y', hy'W⟩).commRingCatIsoToRingEquiv.toMulEquiv).1 h₂
+      · exact Ring.ordOf_algebraMap_of_isUnit (hunit_at ⟨y', hy'W⟩ hy')
+    · have hy' : y' ≠ y := fun h ↦ hy'c (by
+        change coheight (V.hom y') = 1
+        rw [h, hcoh])
+      rw [Scheme.Etale.ord_of_coheight_ne_one W' hy'c, if_neg hy']
+  refine ⟨W, hyW, ha.unit ^ (c z₀).down, fun y' ↦ ?_⟩
+  have hgen : (pullback.map W'.hom C.fromSpecFunctionField W'.hom j (𝟙 _) iU (𝟙 _) (by simp)
+      (by simp [hiU])).appTop a = (pullback.fst W'.hom C.fromSpecFunctionField).appTop tW := by
+    change ((pullback.fst W'.hom j).appTop ≫ (pullback.map W'.hom C.fromSpecFunctionField
+      W'.hom j (𝟙 _) iU (𝟙 _) (by simp) (by simp [hiU])).appTop) tW = _
+    rw [← Scheme.Hom.comp_appTop, pullback.lift_fst, Category.comp_id]
+  have hpow : (pullback.map W'.hom C.fromSpecFunctionField W'.hom j (𝟙 _) iU (𝟙 _) (by simp)
+      (by simp [hiU])).appTop ↑(ha.unit ^ (c z₀).down) =
+      ↑((Units.map (pullback.map W'.hom C.fromSpecFunctionField W'.hom j (𝟙 _) iU (𝟙 _)
+        (by simp) (by simp [hiU])).appTop.hom.toMonoidHom ha.unit) ^ (c z₀).down) := by
+    rw [← map_zpow, Units.coe_map]
+    rfl
+  rw [hpow, Scheme.Etale.ord_zpow]
+  change (if W'.hom y' ∈ S then ULift.up ((c z₀).down * Scheme.Etale.ord W' y'
+    ((pullback.map W'.hom C.fromSpecFunctionField W'.hom j (𝟙 _) iU (𝟙 _) (by simp)
+      (by simp [hiU])).appTop a)) else 0) = _
+  rw [hgen, hord]
+  by_cases hy' : y'.1 = y
+  · have hS' : W'.hom y' ∈ S := by
+      change V.hom y'.1 ∈ S
+      rw [hy', hy]
+      exact hP
+    rw [if_pos hS', if_pos hy', mul_one]
+    change _ = Scheme.extendByZero (AddCommGrpCat.of (ULift.{u + 1} ℤ))
+      (C.fromSpecResidueField P) c y'.1
+    rw [hy', ← hz₀, Scheme.extendByZero_fst]
+  · rw [if_neg hy', mul_zero]
+    have hne : V.hom (W.ι y') ∉ Set.range (C.fromSpecResidueField P) := by
+      rw [Scheme.range_fromSpecResidueField, Set.mem_singleton_iff, ← hy]
+      exact (hW y'.1 y'.2 hy').1
+    rw [Scheme.extendByZero_of_notMem _ hne]
+    split_ifs <;> rfl
+
 
 end IsCurve
 
@@ -237,7 +484,7 @@ theorem exists_shortExact_divisorSequence [IsAlgClosed k] (f : C ⟶ Spec (.of k
       ULift.ext _ _ (congrArg Additive.ofMul (Units.ext hu))⟩)
   have h₄ (x : C) := C.exists_sheafFiber_eq_desc dS c hc x fun P a ↦
     C.exists_sheafFiber_eq_pointConstantIntToPointFunctionSheaf dS P.1 (fun V y cf ↦ by
-      obtain ⟨W, hyW, g, hg⟩ := exists_ord_eq_extendByZero j iU hiU hC hS hSc hj V y P.2 cf
+      obtain ⟨W, hyW, g, hg⟩ := exists_ord_eq_extendByZero j iU hiU hC hSc hj V y P.2 cf
       exact ⟨W, hyW, ULift.up (Additive.ofMul g), funext hg⟩) x a
   have h₃ (x : C) (b) : ∃ p, (C.uliftPointSmallEtale x).sheafFiber.map ψ p =
       (C.uliftPointSmallEtale x).sheafFiber.map dS b := by
