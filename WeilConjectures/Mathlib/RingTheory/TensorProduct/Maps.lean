@@ -7,6 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.Basis.VectorSpace
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Nilpotent.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 
@@ -24,6 +25,8 @@ public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
   tensor product of algebras is detected on pairs of characters from jointly injective families.
   For quotients by the ideals of common zeros of two families of `K`-points this says that the
   product of the two families is schematically dense in the product of their Zariski closures.
+- `Algebra.TensorProduct.eq_zero_or_eq_one_of_isIdempotentElem`: if `A` has an `R`-point whose
+  kernel is nil and `B` has no idempotents other than `0` and `1`, then neither has `A ⊗[R] B`.
 -/
 
 @[expose] public section
@@ -123,5 +126,44 @@ theorem eq_zero_of_forall_liftQuotient_eq_zero {I : Ideal A} {J : Ideal B} {S T 
     exact Ideal.Quotient.eq_zero_iff_mem.2 ((hJ b).2 hv)
 
 end Field
+
+section Idempotent
+
+variable {R A B : Type*} [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
+
+/-- Let `φ : A → R` be an `R`-algebra homomorphism whose kernel consists of nilpotent elements,
+and let `B` be an `R`-algebra with no idempotents other than `0` and `1`. Then `A ⊗[R] B` has no
+idempotents other than `0` and `1`: the kernel of `φ ⊗ id : A ⊗[R] B → B` is spanned by the
+nilpotent elements `(a - φ a) ⊗ b`, so an idempotent is congruent to `0` or `1` modulo nilpotents.
+
+Geometrically: if `Spec A` is a single point with an `R`-rational structure, then the base change
+of a connected `Spec B` along it stays connected. -/
+theorem eq_zero_or_eq_one_of_isIdempotentElem (φ : A →ₐ[R] R)
+    (hφ : ∀ a, φ a = 0 → IsNilpotent a) (hB : ∀ e : B, IsIdempotentElem e → e = 0 ∨ e = 1)
+    {e : A ⊗[R] B} (he : IsIdempotentElem e) : e = 0 ∨ e = 1 := by
+  let ψ : A ⊗[R] B →ₐ[R] B := lift ((Algebra.ofId R B).comp φ) (AlgHom.id R B) fun _ _ ↦ .all _ _
+  have key (x : A ⊗[R] B) : IsNilpotent (x - includeRight (ψ x)) := by
+    induction x using _root_.TensorProduct.induction_on with
+    | zero => simp
+    | tmul a b =>
+      have hn : IsNilpotent (a - algebraMap R A (φ a)) := hφ _ (by simp)
+      have : a ⊗ₜ[R] b - includeRight (ψ (a ⊗ₜ[R] b)) =
+          includeLeft (S := R) (a - algebraMap R A (φ a)) * includeRight b := by
+        simp [ψ, Algebra.algebraMap_eq_smul_one, _root_.TensorProduct.sub_tmul,
+          _root_.TensorProduct.smul_tmul', sub_mul]
+      rw [this]
+      exact Commute.isNilpotent_mul_right (.all _ _) (hn.map (includeLeft (S := R)))
+    | add x y hx hy =>
+      rw [map_add, map_add, add_sub_add_comm]
+      exact (Commute.all _ _).isNilpotent_add hx hy
+  rcases hB (ψ e) (he.map ψ) with h | h
+  · have := key e
+    rw [h, map_zero, sub_zero] at this
+    exact .inl (he.eq_zero_of_isNilpotent this)
+  · have := key e
+    rw [h, map_one, ← neg_sub, isNilpotent_neg_iff] at this
+    exact .inr (sub_eq_zero.mp (he.one_sub.eq_zero_of_isNilpotent this)).symm
+
+end Idempotent
 
 end Algebra.TensorProduct
