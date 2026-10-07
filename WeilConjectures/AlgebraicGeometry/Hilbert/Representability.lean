@@ -60,24 +60,6 @@ namespace AlgebraicGeometry
 
 variable {X S : Scheme.{u}}
 
-/-- The four conditions defining the Hilbert functor are invariant under precomposition with an
-isomorphism. -/
-lemma isFinite_flat_finrank_iso_comp_iff {Z Z' T : Scheme.{u}} (e : Z' ⟶ Z) [IsIso e] (p : Z ⟶ T)
-    (d : ℕ) :
-    (IsFinite (e ≫ p) ∧ Flat (e ≫ p) ∧ LocallyOfFinitePresentation (e ≫ p) ∧
-      ∀ t, (e ≫ p).finrank t = d) ↔
-      IsFinite p ∧ Flat p ∧ LocallyOfFinitePresentation p ∧ ∀ t, p.finrank t = d := by
-  constructor
-  · rintro ⟨h₁, h₂, h₃, h₄⟩
-    have : IsFinite p := (MorphismProperty.cancel_left_of_respectsIso @IsFinite e p).1 h₁
-    have : Flat p := (MorphismProperty.cancel_left_of_respectsIso @Flat e p).1 h₂
-    refine ⟨‹_›, ‹_›, (MorphismProperty.cancel_left_of_respectsIso
-      @LocallyOfFinitePresentation e p).1 h₃, fun t ↦ ?_⟩
-    rw [← h₄ t, Scheme.Hom.finrank_comp_left_of_isIso]
-  · rintro ⟨h₁, h₂, h₃, h₄⟩
-    refine ⟨inferInstance, inferInstance, inferInstance, fun t ↦ ?_⟩
-    rw [Scheme.Hom.finrank_comp_left_of_isIso, h₄]
-
 /-- The condition `Z ⊆ U_T` on a closed subscheme `Z ⊆ X_T` is stable under base change. -/
 lemma Scheme.IdealSheafData.support_comap_baseChangeMap_subset (f : X ⟶ S) {T W : Over S}
     (a : W ⟶ T) {I : (pullback f T.hom).IdealSheafData} {U : Set X}
