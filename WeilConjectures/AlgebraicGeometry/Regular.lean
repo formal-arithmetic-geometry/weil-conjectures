@@ -108,6 +108,16 @@ theorem isIntegrallyClosed_stalk_of_isRegular {X : Scheme.{u}} [IsRegular X]
     (hdim : topologicalKrullDim X ≤ 1) (x : X) : IsIntegrallyClosed (X.presheaf.stalk x) :=
   IsRegularLocalRing.isIntegrallyClosed _ ((ringKrullDim_stalk_le_topologicalKrullDim x).trans hdim)
 
+/-- **Smooth curves are normal.** The local rings of a scheme of dimension at most one which is
+smooth over a field `k` are integrally closed: they are regular local rings
+(`AlgebraicGeometry.IsRegular.of_smooth`) of dimension at most one, hence fields or discrete
+valuation rings. (blueprint: `lem-sc-smooth-normal`) -/
+theorem isIntegrallyClosed_stalk_of_smooth {k : Type u} [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) [Smooth f] (hdim : topologicalKrullDim X ≤ 1) (x : X) :
+    IsIntegrallyClosed (X.presheaf.stalk x) :=
+  have := IsRegular.of_smooth f
+  isIntegrallyClosed_stalk_of_isRegular hdim x
+
 /-- A connected locally noetherian regular scheme is irreducible, since its local rings, being
 regular, are integral domains. -/
 theorem IsRegular.irreducibleSpace (X : Scheme.{u}) [IsRegular X] [IsLocallyNoetherian X]
