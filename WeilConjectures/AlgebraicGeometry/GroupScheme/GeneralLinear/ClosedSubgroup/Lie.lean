@@ -215,7 +215,17 @@ theorem lie_mem_range_lieAlgebraMap_identityComponent [IsAlgClosed k] [CharZero 
     [IsMonHom.ContainsCommutators (subgroupSchemeHom h)]
     (X Y : GrpObj.Lie (subgroupScheme (identityComponent I))) :
     ⁅X, Y⁆ ∈ (lieAlgebraMap (identityComponent_mono I h)).range := by
-  sorry
+  have hsq : (lieAlgebraMap (le_identityComponent I)).comp
+      (lieAlgebraMap (identityComponent_mono I h)) =
+        (lieAlgebraMap h).comp (lieAlgebraMap (le_identityComponent J)) := by
+    rw [← GrpObj.differential_comp, ← GrpObj.differential_comp]
+    exact GrpObj.differential_congr (by rw [subgroupSchemeHom_comp, subgroupSchemeHom_comp])
+  obtain ⟨Z, hZ⟩ := lie_mem_range_lieAlgebraMap h (lieAlgebraMap (le_identityComponent I) X)
+    (lieAlgebraMap (le_identityComponent I) Y)
+  obtain ⟨W, rfl⟩ := (lieAlgebraMap_identityComponent_bijective J).surjective Z
+  refine ⟨W, (lieAlgebraMap_identityComponent_bijective I).injective ?_⟩
+  rw [LieHom.map_lie, ← hZ]
+  exact LieHom.congr_fun hsq W
 
 /-- The standard representation of the `k`-points of `V(I)` on `kⁿ`: a point `Spec k ⟶ V(I)` acts
 through its image in `GL_n(k)` under the closed immersion `V(I) ⟶ GL_n`.
