@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Module.LocalizedModule.Submodule
 public import Mathlib.Algebra.Module.Submodule.Pointwise
 public import Mathlib.Algebra.Module.Torsion.Basic
 public import Mathlib.Algebra.Regular.SMul
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Torsion at a submonoid, localization, and torsion quotients
@@ -37,7 +38,10 @@ the strict transform of a module on an affine chart.
   short exact sequence induces a short exact sequence of torsion quotients, provided it
   stays exact modulo `s • ⊤`; `Submodule.comap_smul_top_le_of_isSMulRegular` (in
   `WeilConjectures.Mathlib.Algebra.Exact.Basic`) supplies that hypothesis when `S` acts
-  regularly on the third term.
+  regularly on the third term;
+- `IsLocalization.Away.ker_lift_comp_algebraMap_eq_comap_powTorsion`: the kernel of a ring
+  map `C → B` inverting `a`, factored through `C[1/a]`, is the `a`-saturation of its kernel,
+  i.e. the inverse image of the `a`-power torsion of the quotient.
 -/
 
 @[expose] public section
@@ -239,3 +243,37 @@ theorem torsion'QuotientMap_exact {f : M₁ →ₗ[R] M₂} {g : M₂ →ₗ[R] 
 end Functoriality
 
 end Submodule
+
+namespace IsLocalization.Away
+
+open Submodule
+
+variable {C B S : Type*} [CommRing C] [CommRing B] [CommRing S] [Algebra C S] {a : C}
+  [IsLocalization.Away a S]
+
+/-- **Affine scheme-image saturation** (blueprint:
+`lemma:nagata-scheme-image-affine-saturation`). Let `f : C → B` be a ring map with kernel
+`K` (so that `C ⧸ K → B` is injective), and let `a : C` map to a unit of `B`. Then the
+kernel of the factorization `C → C[1/a] → B` is the `a`-saturation
+`{c | ∃ n, a ^ n * c ∈ K}` of `K`, and it is the inverse image of the `a`-power torsion
+`Γ_(a)(C ⧸ K)` under `C → C ⧸ K`.
+
+On a blow-up chart this says that the scheme-theoretic image is the quotient by the
+`a`-power torsion, i.e. the strict-transform chart; the global form of that consequence is
+`AlgebraicGeometry.Scheme.Hom.ker_lift_admissibleBlowup`. -/
+theorem ker_lift_comp_algebraMap_eq_comap_powTorsion (f : C →+* B) (ha : IsUnit (f a)) :
+    (RingHom.ker ((lift a ha : S →+* B).comp (algebraMap C S)) : Set C) =
+        {c | ∃ n : ℕ, a ^ n * c ∈ RingHom.ker f} ∧
+      RingHom.ker ((lift a ha : S →+* B).comp (algebraMap C S)) =
+        (powTorsion C (C ⧸ RingHom.ker f) a).comap (RingHom.ker f).mkQ := by
+  rw [lift_comp]
+  have key (c : C) : c ∈ RingHom.ker f ↔ ∃ n : ℕ, a ^ n * c ∈ RingHom.ker f := by
+    refine ⟨fun hc ↦ ⟨0, by simpa using hc⟩, fun ⟨n, hn⟩ ↦ ?_⟩
+    rw [RingHom.mem_ker, map_mul, map_pow] at hn
+    exact (ha.pow n).mul_right_eq_zero.mp hn
+  refine ⟨Set.ext key, ?_⟩
+  ext c
+  rw [key, mem_comap, mkQ_apply, mem_powTorsion_iff]
+  simp_rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero, smul_eq_mul]
+
+end IsLocalization.Away
