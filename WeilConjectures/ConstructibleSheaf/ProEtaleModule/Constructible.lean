@@ -11,8 +11,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import WeilConjectures.CategoryTheory.ModuleObjects.Functor
-public import WeilConjectures.CategoryTheory.RingObjects.Functor
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Conv
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
 
 /-!
 
@@ -38,9 +38,9 @@ Constructibility is defined with respect to a finite stratification `X = ∐ₐ 
 closed subschemes, using the existing notion `Scheme.Stratification` (`ConstructibleSheaf.Defs`);
 restriction to a stratum is the pullback along its immersion `Xₐ ⟶ X`. Restriction along a
 morphism `g` of schemes (to a stratum, or to a member of a pro-étale cover) uses only that the
-pullback `g^*` of pro-étale sheaves is lax monoidal, which is taken as a hypothesis: it sends
-`R` to a ring object `g^* R`, `R`-modules to `g^* R`-modules (`Functor.mapMod`) and global
-sections of `R` to global sections of `g^* R` (`MonObj.Γ.mapFunctor`).
+pullback `g^*` of pro-étale sheaves is lax monoidal (`ProEtale.monoidal_upperStar`): it
+sends `R` to a ring object `g^* R`, `R`-modules to `g^* R`-modules (`Functor.mapMod`) and
+global sections of `R` to global sections of `g^* R` (`MonObj.Γ.mapFunctor`).
 
 `ProEtale.IsConstructible φ M`: there is a stratification and, for each stratum `Xₐ`, a finitely
 presented `Λ`-module `Λₐ` such that `M|_{Xₐ}` is pro-étale locally isomorphic to
@@ -67,11 +67,6 @@ instance preservesFiniteColimits_tensorLeft {Y : Scheme.{u}}
     (F : Sheaf (Scheme.ProEt.topology Y) A) :
     PreservesFiniteColimits (tensorLeft F) :=
   PreservesColimitsOfSize.preservesFiniteColimits.{0, 0} _
-
-/- Restriction along a morphism of schemes `g` (to a stratum, or to a member of a pro-étale
-cover) is the pullback `g^*` of pro-étale sheaves. It is assumed lax monoidal, which is what is
-needed to restrict ring objects, module objects and their global sections. -/
-variable [∀ {Z Y : Scheme.{u}} (g : Z ⟶ Y), (ProEtale.upperStar A g).LaxMonoidal]
 
 section Local
 

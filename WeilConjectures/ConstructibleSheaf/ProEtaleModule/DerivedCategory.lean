@@ -51,7 +51,6 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [∀ {Z Y : Scheme.{u}} (g : Z ⟶ Y), (ProEtale.upperStar A g).LaxMonoidal]
   {X : Scheme.{u}}
   {R : Sheaf (Scheme.ProEt.topology X) A} [MonObj R] [IsCommMonObj R]
   {Λ : Type w} [Ring Λ] (φ : Λ →+* Γ R)
