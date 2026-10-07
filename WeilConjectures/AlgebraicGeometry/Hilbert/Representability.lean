@@ -58,15 +58,6 @@ namespace AlgebraicGeometry
 
 variable {X S : Scheme.{u}}
 
-/-- The Hilbert functor is a Zariski sheaf, since it is an fppf sheaf. -/
-lemma isSheaf_zariskiTopology_hilbertPresheaf (f : X ⟶ S) (d : ℕ) :
-    Presheaf.IsSheaf (Scheme.zariskiTopology.over S) (hilbertPresheaf f d) := by
-  have h := isSheaf_hilbertPresheaf f d
-  rw [isSheaf_iff_isSheaf_of_type] at h ⊢
-  refine Presieve.isSheaf_of_le _ (fun T R hR ↦ ?_) h
-  rw [GrothendieckTopology.mem_over_iff] at hR ⊢
-  exact Precoverage.toGrothendieck_mono Scheme.zariskiPrecoverage_le_fppfPrecoverage _ hR
-
 /-- The four conditions defining the Hilbert functor are invariant under precomposition with an
 isomorphism. -/
 lemma isFinite_flat_finrank_iso_comp_iff {Z Z' T : Scheme.{u}} (e : Z' ⟶ Z) [IsIso e] (p : Z ⟶ T)

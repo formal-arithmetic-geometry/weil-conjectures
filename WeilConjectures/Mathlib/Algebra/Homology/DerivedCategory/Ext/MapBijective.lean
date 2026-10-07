@@ -34,6 +34,8 @@ into an injective object.
 - `CategoryTheory.Adjunction.mapExtCounit_two_injective`: it is injective in degree `2` if
   `R` maps `I ⟶ cokernel ι` to an epimorphism for a monomorphism `ι : G ⟶ I` into an injective
   object `I`.
+- `CategoryTheory.Adjunction.mapExtCounit_bijective`: it is bijective in every degree if `R` is
+  exact as well, so that `Ext A (R G) n ≃ Ext (L A) G n`.
 -/
 
 @[expose] public section
@@ -59,6 +61,16 @@ lemma mapExtCounit_apply (A : C) (G : D) (n : ℕ) (x : Ext A (R.obj G) n) :
     adj.mapExtCounit A G n x =
       (x.mapExactFunctor L).comp (Ext.mk₀ (adj.counit.app G)) (add_zero n) :=
   rfl
+
+/-- The map `CategoryTheory.Adjunction.mapExtCounit` is natural in `G`. -/
+lemma mapExtCounit_comp_mk₀ (A : C) {G G' : D} (g : G ⟶ G') {n : ℕ} (x : Ext A (R.obj G) n) :
+    adj.mapExtCounit A G' n (x.comp (Ext.mk₀ (R.map g)) (add_zero n)) =
+      (adj.mapExtCounit A G n x).comp (Ext.mk₀ g) (add_zero n) := by
+  simp only [mapExtCounit_apply, Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀]
+  rw [Ext.comp_assoc_of_second_deg_zero, Ext.comp_assoc_of_second_deg_zero, Ext.mk₀_comp_mk₀,
+    Ext.mk₀_comp_mk₀]
+  congr 2
+  exact adj.counit_naturality g
 
 /-- For a short exact sequence `S` in `C` and a morphism `φ : L S ⟶ T` to a short exact
 sequence `T` in `D`, pushing the connecting map of `S` forward along `L` and composing with
@@ -163,5 +175,68 @@ theorem mapExtCounit_two_injective (A : C) {G I : D} (ι : G ⟶ I) [Mono ι] [I
     rw [← hz, Subsingleton.elim z 0, Ext.zero_comp]
   rw [(adj.mapExtCounit_one_injective A T.X₃) (hy.trans (map_zero _).symm)]
   exact Abelian.Ext.zero_comp (X := A) (n := 1) hS.extClass 2 rfl
+
+omit [EnoughInjectives D] in
+/-- In degree `0`, the map `CategoryTheory.Adjunction.mapExtCounit` is the adjunction
+bijection `(A ⟶ R G) ≃ (L A ⟶ G)`. -/
+lemma mapExtCounit_mk₀ (A : C) (G : D) (f : A ⟶ R.obj G) :
+    adj.mapExtCounit A G 0 (Ext.mk₀ f) = Ext.mk₀ ((adj.homEquiv _ _).symm f) := by
+  rw [mapExtCounit_apply, Ext.mapExactFunctor_mk₀, Ext.mk₀_comp_mk₀, adj.homEquiv_counit]
+
+/-- **The `Ext`-adjunction.** For an adjunction `L ⊣ R` between abelian categories with both
+`L` and `R` exact, the map `Ext A (R G) n ⟶ Ext (L A) G n` is bijective in every degree: `R`
+preserves injective objects and short exact sequences, so both sides are computed by the
+adjunction bijection on an injective resolution of `G`. -/
+theorem mapExtCounit_bijective [R.Additive] [PreservesFiniteLimits R]
+    [PreservesFiniteColimits R] (A : C) (G : D) (n : ℕ) :
+    Function.Bijective (adj.mapExtCounit A G n) := by
+  have := adj.isRightAdjoint
+  have : L.PreservesMonomorphisms := inferInstance
+  have hR := Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms adj
+  induction n generalizing G with
+  | zero =>
+    refine ⟨fun x y hxy ↦ ?_, fun z ↦ ?_⟩
+    · obtain ⟨x, rfl⟩ := (Ext.mk₀_bijective _ _).2 x
+      obtain ⟨y, rfl⟩ := (Ext.mk₀_bijective _ _).2 y
+      rw [mapExtCounit_mk₀, mapExtCounit_mk₀] at hxy
+      rw [(adj.homEquiv _ _).symm.injective ((Ext.mk₀_bijective _ _).1 hxy)]
+    · obtain ⟨z, rfl⟩ := (Ext.mk₀_bijective _ _).2 z
+      exact ⟨Ext.mk₀ (adj.homEquiv _ _ z), by rw [mapExtCounit_mk₀, Equiv.symm_apply_apply]⟩
+  | succ n hn =>
+    let I : InjectivePresentation G := Classical.arbitrary _
+    have := I.injective
+    let T := ShortComplex.mk I.f (cokernel.π I.f) (cokernel.condition I.f)
+    have hT : T.ShortExact := { exact := ShortComplex.exact_cokernel I.f }
+    have hS : (T.map R).ShortExact := hT.map_of_exact R
+    let φ : (T.map R).map L ⟶ T :=
+      { τ₁ := adj.counit.app G
+        τ₂ := adj.counit.app I.J
+        τ₃ := adj.counit.app T.X₃
+        comm₁₂ := (adj.counit.naturality I.f).symm
+        comm₂₃ := (adj.counit.naturality T.g).symm }
+    have : Injective (R.obj I.J) := Functor.injective_obj R I.J
+    exact AddMonoidHom.bijective_of_surjective_of_bijective_of_right_exact
+      ((Ext.mk₀ (R.map T.g)).postcomp A (add_zero n)) (hS.extClass.postcomp A rfl)
+      ((Ext.mk₀ T.g).postcomp (L.obj A) (add_zero n)) (hT.extClass.postcomp (L.obj A) rfl)
+      (adj.mapExtCounit A I.J n) (adj.mapExtCounit A T.X₃ n) (adj.mapExtCounit A G (n + 1))
+      (AddMonoidHom.ext fun x ↦ (adj.mapExtCounit_comp_mk₀ A T.g x).symm)
+      (AddMonoidHom.ext fun y ↦ (mapExactFunctor_comp_extClass_comp_mk₀ hS hT φ y).symm)
+      ((ShortComplex.ab_exact_iff_function_exact _).mp
+        (Ext.covariant_sequence_exact₃' A hS n (n + 1) rfl))
+      ((ShortComplex.ab_exact_iff_function_exact _).mp
+        (Ext.covariant_sequence_exact₃' (L.obj A) hT n (n + 1) rfl))
+      (hn I.J).2 (hn T.X₃)
+      (fun x ↦ Ext.covariant_sequence_exact₁ _ hS x
+        (Ext.eq_zero_of_injective (I := R.obj I.J) _) rfl)
+      (fun y ↦ Ext.covariant_sequence_exact₁ _ hT y
+        (Ext.eq_zero_of_injective (I := I.J) _) rfl)
+
+/-- **The `Ext`-adjunction.** For an adjunction `L ⊣ R` between abelian categories with both
+`L` and `R` exact, `Ext A (R G) n ≃ Ext (L A) G n`, by
+`CategoryTheory.Adjunction.mapExtCounit_bijective`. -/
+noncomputable def extAddEquiv [R.Additive] [PreservesFiniteLimits R]
+    [PreservesFiniteColimits R] (A : C) (G : D) (n : ℕ) :
+    Ext A (R.obj G) n ≃+ Ext (L.obj A) G n :=
+  AddEquiv.ofBijective (adj.mapExtCounit A G n) (adj.mapExtCounit_bijective A G n)
 
 end CategoryTheory.Adjunction
