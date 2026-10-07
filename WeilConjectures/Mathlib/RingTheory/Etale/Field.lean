@@ -7,6 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.FreeModule.Finite.Matrix
 public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.RingHom.Etale
 
 /-!
 # Points of étale algebras over a separably closed field
@@ -21,6 +22,9 @@ factors; in particular there are exactly `dim_K A` of them.
 - `Algebra.Etale.natCard_algHom_eq_finrank`: `#(A →ₐ[K] L) = dim_K A`.
 - `Algebra.Etale.iff_subsingleton_kaehlerDifferential_of_field`: a finite algebra over a field
   is étale if and only if its module of Kähler differentials vanishes.
+- `Algebra.Etale.of_finite_of_isSeparable`: a finite separable field extension is étale.
+- `RingHom.Etale.of_comp_of_field`: a subextension of a finite separable field extension is
+  finite separable.
 -/
 
 @[expose] public section
@@ -92,4 +96,21 @@ theorem iff_subsingleton_kaehlerDifferential_of_field {K A : Type*} [Field K] [C
   exact ⟨.of_formallyUnramified_of_field K A,
     FinitePresentation.of_finiteType.mp inferInstance⟩
 
+/-- A finite separable field extension is étale. -/
+theorem of_finite_of_isSeparable {K L : Type*} [Field K] [Field L] [Algebra K L]
+    [Module.Finite K L] [Algebra.IsSeparable K L] : Algebra.Etale K L :=
+  ⟨.of_isSeparable K L, FinitePresentation.of_finiteType.mp inferInstance⟩
+
 end Algebra.Etale
+
+/-- If the composite `K → L → M` of field homomorphisms is étale, that is, `M` is finite separable
+over `K`, then so is `K → L`. -/
+theorem RingHom.Etale.of_comp_of_field {K L M : Type*} [Field K] [Field L] [Field M]
+    (f : K →+* L) (g : L →+* M) (h : (g.comp f).Etale) : f.Etale := by
+  algebraize [f, g.comp f]
+  let φ : L →ₐ[K] M := { toRingHom := g, commutes' := fun _ ↦ rfl }
+  have : Algebra.IsSeparable K M := (Algebra.FormallyEtale.iff_isSeparable _ _).mp inferInstance
+  have : Module.Finite K M := Algebra.FormallyUnramified.finite_of_free _ _
+  have : Algebra.IsSeparable K L := Algebra.IsSeparable.of_algHom _ _ φ
+  have : Module.Finite K L := Module.Finite.of_injective φ.toLinearMap φ.toRingHom.injective
+  exact RingHom.etale_algebraMap.mpr .of_finite_of_isSeparable

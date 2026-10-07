@@ -17,6 +17,8 @@ public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 - `AlgebraicGeometry.irreducibleSpace_of_isDomain_stalk`: a connected locally noetherian scheme
   all of whose local rings are integral domains is irreducible.
+- `AlgebraicGeometry.IsLocallyNoetherian.locallyConnectedSpace`: a locally noetherian scheme is
+  locally connected.
 - `AlgebraicGeometry.isNoetherian_of_locallyOfFiniteType`: a scheme quasi-compact and locally of
   finite type over a noetherian scheme is noetherian.
 -/
@@ -25,7 +27,7 @@ public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 universe u
 
-open TopologicalSpace
+open TopologicalSpace Topology
 
 namespace AlgebraicGeometry
 
@@ -63,6 +65,25 @@ theorem irreducibleSpace_of_isDomain_stalk (X : Scheme.{u}) [IsLocallyNoetherian
       exact (key Z₁ hZ₁ hx₁).trans (key Z₂ hZ₂ hx₂).symm
   exact ⟨((↑) : V → X) '' U, V.2.isOpenMap_subtype_val U hU, ⟨_, hxU, rfl⟩,
     hUirr.image _ continuous_subtype_val.continuousOn⟩
+
+/-- A locally noetherian scheme is locally connected, since it is covered by noetherian open
+subspaces. -/
+instance (priority := 100) IsLocallyNoetherian.locallyConnectedSpace {X : Scheme.{u}}
+    [IsLocallyNoetherian X] : LocallyConnectedSpace X := by
+  rw [locallyConnectedSpace_iff_subsets_isOpen_isConnected]
+  intro x U hU
+  obtain ⟨W, hW, hxW, -⟩ := exists_isAffineOpen_mem_and_subset (U := ⊤) (x := x) trivial
+  have := IsLocallyNoetherian.component_noetherian ⟨W, hW⟩
+  have : NoetherianSpace W := noetherianSpace_of_isAffineOpen W hW
+  have : LocallyConnectedSpace W := NoetherianSpace.locallyConnectedSpace
+  have hU' : ((↑) : W → X) ⁻¹' U ∈ 𝓝 (⟨x, hxW⟩ : W) :=
+    continuous_subtype_val.continuousAt.preimage_mem_nhds hU
+  obtain ⟨V, hVU, hV, hxV, hVc⟩ :=
+    (locallyConnectedSpace_iff_subsets_isOpen_isConnected.mp this) _ _ hU'
+  refine ⟨((↑) : W → X) '' V, ?_, W.2.isOpenMap_subtype_val _ hV, ⟨_, hxV, rfl⟩,
+    hVc.image _ continuous_subtype_val.continuousOn⟩
+  rintro _ ⟨v, hv, rfl⟩
+  exact hVU hv
 
 /-- A scheme that is quasi-compact and locally of finite type over a noetherian scheme is
 noetherian. -/

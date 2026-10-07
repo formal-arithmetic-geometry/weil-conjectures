@@ -26,6 +26,7 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma.Glue
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Graph
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Reduction
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Clopen
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
@@ -56,6 +57,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement
 public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPoints
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteLocallyConstant
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Frobenius
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
@@ -109,6 +111,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitExists
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitNeighborhood
 public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalization
@@ -228,6 +231,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.Endofunctor.Shift
@@ -803,6 +807,7 @@ public import WeilConjectures.PointCountBound
 public import WeilConjectures.RepresentationTheory.Clifford
 public import WeilConjectures.RepresentationTheory.FiniteMatrixWitness
 public import WeilConjectures.RepresentationTheory.IntegralModel
+public import WeilConjectures.RingTheory.Bialgebra.Frobenius
 public import WeilConjectures.RingTheory.Dehomogenization
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 public import WeilConjectures.RingTheory.GradedAlgebra.LinearPair

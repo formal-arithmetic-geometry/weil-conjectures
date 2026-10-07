@@ -6,7 +6,11 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+<<<<<<< HEAD
 public import Mathlib.RingTheory.Unramified.LocalRing
+=======
+public import WeilConjectures.Mathlib.RingTheory.Etale.Field
+>>>>>>> origin/slopmaster2
 
 /-!
 # The locus where two morphisms into an unramified scheme agree
@@ -32,6 +36,8 @@ is the preimage of its range under `Limits.pullback.lift a b h : T ⟶ W ×[Z] W
 - `AlgebraicGeometry.FormallyUnramified.range_subset_eqLocus` — a morphism `c : S ⟶ T` with
   `c ≫ a = c ≫ b` has its range inside it; in particular, if `a` and `b` agree at a point of
   `T` then that point lies in `eqLocus p a b h`.
+- `AlgebraicGeometry.Scheme.Hom.etale_residueFieldMap` — the residue field extensions of an
+  unramified morphism are finite separable.
 
 ## Implementation notes
 
@@ -141,5 +147,33 @@ lemma map_maximalIdeal_stalkMap {X Y : Scheme.{u}} (f : X ⟶ Y) [FormallyUnrami
   exact Algebra.FormallyUnramified.map_maximalIdeal
 
 end FormallyUnramified
+
+section residueField
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) [FormallyUnramified f] [LocallyOfFiniteType f]
+
+/-- For `f` unramified, the residue field extension `κ(x)/κ(f x)` is finite. -/
+lemma Scheme.Hom.finite_residueFieldMap (x : X) : (f.residueFieldMap x).hom.Finite := by
+  algebraize [(f.stalkMap x).hom]
+  have : IsLocalHom (algebraMap (Y.presheaf.stalk (f x)) (X.presheaf.stalk x)) :=
+    inferInstanceAs <| IsLocalHom (f.stalkMap x).hom
+  have : Algebra.EssFiniteType (Y.presheaf.stalk (f x)) (X.presheaf.stalk x) := by
+    rw [← RingHom.essFiniteType_algebraMap, RingHom.algebraMap_toAlgebra]
+    exact LocallyOfFiniteType.stalkMap f x
+  have : Algebra.FormallyUnramified (Y.presheaf.stalk (f x)) (X.presheaf.stalk x) := by
+    rw [← RingHom.formallyUnramified_algebraMap, RingHom.algebraMap_toAlgebra]
+    exact FormallyUnramified.stalkMap f x
+  exact RingHom.finite_algebraMap.mpr (inferInstance : Module.Finite
+    (IsLocalRing.ResidueField (Y.presheaf.stalk (f x)))
+    (IsLocalRing.ResidueField (X.presheaf.stalk x)))
+
+/-- For `f` unramified, the residue field extension `κ(x)/κ(f x)` is finite separable, that is,
+étale. -/
+lemma Scheme.Hom.etale_residueFieldMap (x : X) : (f.residueFieldMap x).hom.Etale := by
+  have := f.finite_residueFieldMap x
+  algebraize [(f.residueFieldMap x).hom]
+  exact RingHom.etale_algebraMap.mpr .of_finite_of_isSeparable
+
+end residueField
 
 end AlgebraicGeometry

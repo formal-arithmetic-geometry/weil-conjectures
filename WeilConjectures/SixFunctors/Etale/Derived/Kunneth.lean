@@ -9,7 +9,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
@@ -30,8 +34,8 @@ for `Rf_!`, the four product comparison maps, and the Künneth–Verdier isomorp
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.externalProduct`: `K ⊠ M = Lp^* K ⊗ᴸ Lq^* M`.
-- `AlgebraicGeometry.Etale.HasKunnethComparisons` (`sk-def-sf-kv-maps`): the four product
-  comparison assertions `Ku_!`, `α`, `β`, `κ`, one per field.
+- `AlgebraicGeometry.Etale.HasKunnethComparisons` (`sk-def-sf-kv-maps`, `def-sf-kv-maps`): the
+  four product comparison assertions `Ku_!`, `α`, `β`, `κ`, one per field.
 
 ## Main statements
 
@@ -39,6 +43,9 @@ for `Rf_!`, the four product comparison maps, and the Künneth–Verdier isomorp
   (`sk-lem-sf-kunneth-star`): `Rf_* M ⊠ Q ≅ R(f × id_Z)_* (M ⊠ Q)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct`
   (`sk-thm-sf-kunneth-relative`): `R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`.
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct`
+  (`sk-def-sf-kv-maps` (i)): the `!`-Künneth isomorphism
+  `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for a finite coefficient ring.
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_externalProduct`:
   `L(i ×_B j)^* (K ⊠ L) ≅ Li^* K ⊠ Lj^* L`.
 - `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion`:
@@ -275,7 +282,161 @@ theorem nonempty_iso_compactlySupported_externalProduct_closedImmersion
     (constructibleFiniteTor_leftDerivedUpperStar A j hL)
   exact ⟨k.symm ≪≫ (R(pullback.toBase (i ≫ f) (j ≫ g))_![A]).mapIso e.symm⟩
 
-/-- Blueprint `sk-def-sf-kv-maps`: The product comparison maps.
+section KunnethShriek
+
+/-! ### The `!`-Künneth isomorphism
+
+Item (i) of `sk-def-sf-kv-maps`: for `fᵢ : Xᵢ ⟶ Yᵢ` over `S`, the `!`-Künneth isomorphism
+`Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` is the relative product theorem over
+`B = Y₁ ×_S Y₂`, using `X₁ ×_S X₂ = (X₁ ×_{Y₁} B) ×_B (X₂ ×_{Y₂} B)`
+(`CategoryTheory.Limits.pullback.mapOverBaseIso`) and compact-support base change. -/
+
+/-- For an isomorphism `e : Y ≅ Y'` of schemes, the derived pushforward `R(e_*)` is the
+derived pullback `L((e⁻¹)^*)`: both are computed by the exact functor `e_* ≅ (e⁻¹)^*`. -/
+noncomputable def rightDerivedLowerStarIsoLeftDerivedUpperStarInv {Y Y' : Scheme.{u}}
+    (e : Y ≅ Y') : R((e.hom)_*[A]) ≅ L((e.inv)^*[A]) :=
+  have : PreservesFiniteColimits (e.hom)_*[A] :=
+    preservesFiniteColimits_of_natIso (upperStarInvIsoLowerStarHom A e)
+  Functor.rightDerivedFunctorIsoMapDerivedCategory _ ≪≫
+    Functor.mapDerivedCategoryNatIso (upperStarInvIsoLowerStarHom A e).symm ≪≫
+    (leftDerivedUpperStarIsoMapDerivedCategory A e.inv).symm
+
+variable {S X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S) (f₁ : X₁ ⟶ Y₁)
+  (f₂ : X₂ ⟶ Y₂)
+
+/-- Transport of `R(f₁ × f₂)_!` along `pullback.mapOverBaseIso`: for `Z` in
+`D((X₁ ×_S X₂)_ét)`, writing `e : X₁ ×_S X₂ ≅ (X₁ ×_{Y₁} B) ×_B (X₂ ×_{Y₂} B)` with
+`B = Y₁ ×_S Y₂` and `h` for the structure morphism of the fibre product over `B`,
+
+`R(f₁ × f₂)_! Z ≅ Rh_! (L(e⁻¹)^* Z)`. -/
+theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase
+    [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
+    [HasCompactification (pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
+      (pullback.snd f₂ (pullback.snd b₁ b₂)))]
+    (Z : _root_.DerivedCategory (Sheaf (pullback (f₁ ≫ b₁) (f₂ ≫ b₂)).smallEtaleTopology A)) :
+    Nonempty ((R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![A]).obj Z ≅
+      (R(pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
+        (pullback.snd f₂ (pullback.snd b₁ b₂)))_![A]).obj
+        ((L(((pullback.mapOverBaseIso f₁ f₂ b₁ b₂).inv)^*[A])).obj Z)) := by
+  set e := pullback.mapOverBaseIso f₁ f₂ b₁ b₂
+  set h := pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
+      (pullback.snd f₂ (pullback.snd b₁ b₂))
+  have he : e.hom ≫ h = pullback.mapOverBase f₁ f₂ b₁ b₂ :=
+    pullback.mapOverBaseIso_hom_toBase ..
+  have : HasCompactification (e.hom ≫ h) := .of_eq he.symm
+  have hcongr : ∀ (ψ : _ ⟶ _) [HasCompactification ψ], ψ = pullback.mapOverBase f₁ f₂ b₁ b₂ →
+      Nonempty (R(ψ)_![A] ≅ R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![A]) := by
+    rintro ψ _ rfl; exact ⟨Iso.refl _⟩
+  obtain ⟨c₀⟩ := hcongr _ he
+  obtain ⟨c₁⟩ := nonempty_iso_rightDerivedLowerShriek_comp A e.hom h
+  obtain ⟨c₂⟩ := nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar A e.hom
+  exact ⟨(c₀.app Z).symm ≪≫ c₁.app Z ≪≫ (R(h)_![A]).mapIso
+    (c₂.app Z ≪≫ (rightDerivedLowerStarIsoLeftDerivedUpperStarInv A e).app Z)⟩
+
+omit [HasSmallSiteSheafify A] in
+/-- The external product is compatible with `pullback.mapOverBaseIso`: writing
+`e : X₁ ×_S X₂ ≅ (X₁ ×_{Y₁} B) ×_B (X₂ ×_{Y₂} B)` with `B = Y₁ ×_S Y₂` and `hᵢ` for the
+projections `Xᵢ ×_{Yᵢ} B ⟶ Xᵢ`,
+
+`L(e⁻¹)^* (M₁ ⊠_S M₂) ≅ Lh₁^* M₁ ⊠_B Lh₂^* M₂`. -/
+theorem nonempty_iso_leftDerivedUpperStar_mapOverBaseIso_externalProduct
+    [UpperStarPreservesFlat A]
+    (M₁ : _root_.DerivedCategory (Sheaf X₁.smallEtaleTopology A))
+    (M₂ : _root_.DerivedCategory (Sheaf X₂.smallEtaleTopology A)) :
+    Nonempty ((L(((pullback.mapOverBaseIso f₁ f₂ b₁ b₂).inv)^*[A])).obj
+        (externalProduct A (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂) ≅
+      externalProduct A (pullback.snd f₁ (pullback.fst b₁ b₂))
+        (pullback.snd f₂ (pullback.snd b₁ b₂))
+        ((L((pullback.fst f₁ (pullback.fst b₁ b₂))^*[A])).obj M₁)
+        ((L((pullback.fst f₂ (pullback.snd b₁ b₂))^*[A])).obj M₂)) := by
+  set e := pullback.mapOverBaseIso f₁ f₂ b₁ b₂
+  let pb₁ := ((leftDerivedUpperStarComp A e.inv (pullback.fst _ _)).app M₁).symm ≪≫
+      (leftDerivedUpperStarComp A (pullback.fst _ _) (pullback.fst f₁ (pullback.fst b₁ b₂))
+        (e.inv ≫ pullback.fst _ _) (by simp [e])).app M₁
+  let pb₂ := ((leftDerivedUpperStarComp A e.inv (pullback.snd _ _)).app M₂).symm ≪≫
+      (leftDerivedUpperStarComp A (pullback.snd _ _) (pullback.fst f₂ (pullback.snd b₁ b₂))
+        (e.inv ≫ pullback.snd _ _) (by simp [e])).app M₂
+  exact ⟨leftDerivedUpperStarTensorIso A e.inv _ _ ≪≫ (pb₁ ⊗ᵢ pb₂)⟩
+
+/-- The `!`-Künneth isomorphism `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for
+general coefficients, given compact-support base change of `Rfᵢ_! Mᵢ` along the projections
+`Y₁ ×_S Y₂ ⟶ Yᵢ`. It is the relative product theorem
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` over
+`B = Y₁ ×_S Y₂`, transported along `pullback.mapOverBaseIso`. -/
+theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_baseChange
+    [UpperStarPreservesFlat A]
+    [HasCompactification f₁] [HasCompactification f₂] [QuasiCompact f₁] [QuasiCompact f₂]
+    [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
+    {M₁ : _root_.DerivedCategory (Sheaf X₁.smallEtaleTopology A)}
+    {M₂ : _root_.DerivedCategory (Sheaf X₂.smallEtaleTopology A)}
+    (hM₁ : DerivedCategory.constructibleFiniteTor A X₁ M₁)
+    (hM₂ : DerivedCategory.constructibleFiniteTor A X₂ M₂)
+    (hbc₁ : Nonempty ((L((pullback.fst b₁ b₂)^*[A])).obj ((R(f₁)_![A]).obj M₁) ≅
+      (R(pullback.snd f₁ (pullback.fst b₁ b₂))_![A]).obj
+        ((L((pullback.fst f₁ (pullback.fst b₁ b₂))^*[A])).obj M₁)))
+    (hbc₂ : Nonempty ((L((pullback.snd b₁ b₂)^*[A])).obj ((R(f₂)_![A]).obj M₂) ≅
+      (R(pullback.snd f₂ (pullback.snd b₁ b₂))_![A]).obj
+        ((L((pullback.fst f₂ (pullback.snd b₁ b₂))^*[A])).obj M₂))) :
+    Nonempty ((R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![A]).obj
+        (externalProduct A (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂) ≅
+      externalProduct A b₁ b₂ ((R(f₁)_![A]).obj M₁) ((R(f₂)_![A]).obj M₂)) := by
+  have he := pullback.mapOverBaseIso_hom_toBase f₁ f₂ b₁ b₂
+  have : HasCompactification (pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
+      (pullback.snd f₂ (pullback.snd b₁ b₂))) :=
+    ((HasCompactification.compactification (pullback.mapOverBase f₁ f₂ b₁ b₂)).transport
+      (pullback.mapOverBaseIso f₁ f₂ b₁ b₂) (Iso.refl _)
+      (by rw [Iso.refl_hom, Category.comp_id, he])).hasCompactification
+  obtain ⟨t⟩ := nonempty_iso_rightDerivedLowerShriek_mapOverBase A b₁ b₂ f₁ f₂
+    (externalProduct A (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂)
+  obtain ⟨p⟩ := nonempty_iso_leftDerivedUpperStar_mapOverBaseIso_externalProduct A b₁ b₂ f₁ f₂
+    M₁ M₂
+  obtain ⟨ku⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct A
+    (pullback.snd f₁ (pullback.fst b₁ b₂)) (pullback.snd f₂ (pullback.snd b₁ b₂))
+    (constructibleFiniteTor_leftDerivedUpperStar A (pullback.fst f₁ _) hM₁)
+    (constructibleFiniteTor_leftDerivedUpperStar A (pullback.fst f₂ _) hM₂)
+  obtain ⟨e₁⟩ := hbc₁
+  obtain ⟨e₂⟩ := hbc₂
+  exact ⟨t ≪≫ (R(_)_![A]).mapIso p ≪≫ ku ≪≫ (e₁.symm ⊗ᵢ e₂.symm)⟩
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
+/-- Blueprint `sk-def-sf-kv-maps` (i), `def-sf-kv-maps` (i): the `!`-Künneth isomorphism.
+
+Let `fᵢ : Xᵢ ⟶ Yᵢ` be separated of finite type between schemes over `S`, let `Λ` be a finite
+coefficient ring and `Mᵢ` in `Dctf(Xᵢ, Λ)`. Writing `f = f₁ × f₂ : X₁ ×_S X₂ ⟶ Y₁ ×_S Y₂`,
+
+`Ku_! : Rf_!(M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂`.
+
+This is the relative product theorem
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` for the base
+`B = Y₁ ×_S Y₂`, using `X₁ ×_S X₂ = (X₁ ×_{Y₁} B) ×_B (X₂ ×_{Y₂} B)`, together with
+compact-support base change `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`
+along the projections `B ⟶ Yᵢ`. The finiteness of `Λ` is the hypothesis of that base change
+theorem. -/
+theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct
+    [HasCompactification f₁] [HasCompactification f₂] [QuasiCompact f₁] [QuasiCompact f₂]
+    [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
+    {M₁ : _root_.DerivedCategory (Sheaf X₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {M₂ : _root_.DerivedCategory (Sheaf X₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hM₁ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X₁ M₁)
+    (hM₂ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X₂ M₂) :
+    Nonempty ((R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ]).obj
+        (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂) ≅
+      externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂
+        ((R(f₁)_![ModuleCat.{u + 1} Λ]).obj M₁) ((R(f₂)_![ModuleCat.{u + 1} Λ]).obj M₂)) := by
+  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ
+    (IsPullback.of_hasPullback f₁ (pullback.fst b₁ b₂))
+  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ
+    (IsPullback.of_hasPullback f₂ (pullback.snd b₁ b₂))
+  exact nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_baseChange _
+    b₁ b₂ f₁ f₂ hM₁ hM₂
+    ⟨asIso ((rightDerivedLowerShriekBaseChangeMap _
+      (IsPullback.of_hasPullback f₁ (pullback.fst b₁ b₂))).app M₁)⟩
+    ⟨asIso ((rightDerivedLowerShriekBaseChangeMap _
+      (IsPullback.of_hasPullback f₂ (pullback.snd b₁ b₂))).app M₂)⟩
+
+end KunnethShriek
+
+/-- Blueprint `sk-def-sf-kv-maps`, `def-sf-kv-maps`: The product comparison maps.
 
 The four product comparison maps of the six-functor formalism over a base scheme `S`, each
 recorded as the assertion that it is an isomorphism. All external products are taken over
@@ -285,7 +446,9 @@ recorded as the assertion that it is an isomorphism. All external products are t
   `Ku_! : Rf_! (M₁ ⊠ M₂) ⟶ Rf_{1!} M₁ ⊠ Rf_{2!} M₂` for `f = f₁ × f₂`, which is
   `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` for the base
   `Y₁ ×_S Y₂`, using `X₁ ×_S X₂ = (X₁ ×_S Y₂) ×_{Y₁ ×_S Y₂} (Y₁ ×_S X₂)`; it is an
-  isomorphism *by construction*, being built out of isomorphisms;
+  isomorphism *by construction*, being built out of isomorphisms. For a finite coefficient
+  ring this is proved, from the relative product theorem and compact-support base change, as
+  `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct`;
 * `exceptional` is the exceptional Künneth map
   `α : Rf₁^! N₁ ⊠ Rf₂^! N₂ ⟶ Rf^! (N₁ ⊠ N₂)`, the exceptional adjoint of `Ku_!` followed by
   the two counits of `Rf_{i!} ⊣ Rf_i^!`;

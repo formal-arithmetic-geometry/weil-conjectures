@@ -54,6 +54,9 @@ with coefficients in a field of characteristic zero all vanish.
 
 - `AlgebraicGeometry.ProEtale.not_isZero_adicConstantSheaf`: `ℚ̄_ℓ,X` is nonzero on a nonempty
   scheme.
+- `AlgebraicGeometry.ProEtale.lowerStar_map_deckAction_comp_lowerStarExchange`: the action of
+  an automorphism `σ` of `X` over `Y` on `g_* ℚ̄_ℓ,X` commutes with the exchange isomorphism
+  `(b⁻¹)_* g_* ℚ̄_ℓ,X ≅ g_* ℚ̄_ℓ,X` of automorphisms `a`, `b` compatible with `g` and `σ`.
 -/
 
 @[expose] public section
@@ -333,6 +336,88 @@ noncomputable def adicConstantSheafLowerStarIso {X Y : Scheme.{u}} (e : X ≅ Y)
   (fullyFaithfulSheafToPresheaf _ _).preimageIso (show _ ≅ _ from
     (Functor.isoWhiskerRight (NatIso.op (overPullbackForgetIso e.hom))
       (adicFunctionsPresheaf l)).symm)
+
+/-- The restriction maps of `ℚ̄_ℓ,X` are the pullbacks of functions along the underlying
+morphisms of schemes. -/
+lemma adicConstantSheaf_obj_map {X : Scheme.{u}} {U V : X.ProEtᵒᵖ} (f : U ⟶ V) :
+    (adicConstantSheaf l X).obj.map f = (adicFunctionsPresheaf l).map f.unop.left.op :=
+  rfl
+
+lemma adicConstantSheafLowerStarIso_inv_hom_app {X Y : Scheme.{u}} (e : X ≅ Y)
+    (V : Y.ProEtᵒᵖ) :
+    (adicConstantSheafLowerStarIso l e).inv.hom.app V =
+      (adicFunctionsPresheaf l).map (pullback.fst V.unop.hom e.hom).op :=
+  rfl
+
+lemma adicConstantSheafLowerStarIso_hom_hom_app {X Y : Scheme.{u}} (e : X ≅ Y)
+    (V : Y.ProEtᵒᵖ) :
+    (adicConstantSheafLowerStarIso l e).hom.hom.app V =
+      (adicFunctionsPresheaf l).map
+        (pullback.lift (𝟙 V.unop.left) (V.unop.hom ≫ e.inv) (by simp)).op := by
+  rw [← cancel_mono ((adicConstantSheafLowerStarIso l e).inv.hom.app V), ← NatTrans.comp_app,
+    ← ObjectProperty.FullSubcategory.comp_hom, Iso.hom_inv_id,
+    adicConstantSheafLowerStarIso_inv_hom_app, ← Functor.map_comp, ← op_comp,
+    show pullback.fst _ _ ≫ pullback.lift _ _ _ = 𝟙 _ from
+      pullback.hom_ext (by simp) (by simp [pullback.condition_assoc]), op_id,
+    (adicFunctionsPresheaf l).map_id]
+  rfl
+
+/-- Let `g : X ⟶ Y` be a morphism with automorphisms `a` of `X` and `b` of `Y` such that
+`g ≫ b⁻¹ = a⁻¹ ≫ g`, and let `σ` be an automorphism of `X` over `Y` commuting with `a`. Then
+the action of `σ` on `g_* ℚ̄_ℓ,X`, pulling back sections along `σ` and using `σ ≫ g = g`,
+
+`g_* ℚ̄_ℓ,X ⟶ g_* σ_* ℚ̄_ℓ,X ≅ (σ ≫ g)_* ℚ̄_ℓ,X = g_* ℚ̄_ℓ,X`,
+
+commutes with the isomorphism
+
+```
+str : (b⁻¹)_* g_* ℚ̄_ℓ,X ≅ (g ≫ b⁻¹)_* ℚ̄_ℓ,X = (a⁻¹ ≫ g)_* ℚ̄_ℓ,X
+        ≅ g_* (a⁻¹)_* ℚ̄_ℓ,X ≅ g_* ℚ̄_ℓ,X.
+```
+
+On sections over `V ⟶ Y` both composites pull functions back along `(v, x) ↦ (v, a σ x)`. -/
+lemma lowerStar_map_deckAction_comp_lowerStarExchange {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (a : X ≅ X) (b : Y ≅ Y) (σ : X ≅ X) (hg : g ≫ b.inv = a.inv ≫ g) (hσ : σ.hom ≫ g = g)
+    (hσa : σ.hom ≫ a.hom = a.hom ≫ σ.hom)
+    (str : (b.inv)_*[WeilCoefficients.{u} l].obj ((g)_*[WeilCoefficients.{u} l].obj
+      (adicConstantSheaf l X)) ⟶ (g)_*[WeilCoefficients.{u} l].obj (adicConstantSheaf l X))
+    (hstr : str = ((lowerStarComp _ g b.inv ≪≫ lowerStarCongr _ hg ≪≫
+          (lowerStarComp _ a.inv g).symm).app (adicConstantSheaf l X) ≪≫
+        (g)_*[WeilCoefficients.{u} l].mapIso (adicConstantSheafLowerStarIso l a.symm)).hom) :
+    (b.inv)_*[WeilCoefficients.{u} l].map
+        ((g)_*[WeilCoefficients.{u} l].map (adicConstantSheafLowerStarIso l σ).inv ≫
+          (lowerStarComp _ σ.hom g).hom.app (adicConstantSheaf l X) ≫
+          (lowerStarCongr _ hσ).hom.app (adicConstantSheaf l X)) ≫ str =
+    str ≫
+      ((g)_*[WeilCoefficients.{u} l].map (adicConstantSheafLowerStarIso l σ).inv ≫
+          (lowerStarComp _ σ.hom g).hom.app (adicConstantSheaf l X) ≫
+          (lowerStarCongr _ hσ).hom.app (adicConstantSheaf l X)) := by
+  subst hstr
+  ext V : 3
+  simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom, Functor.map_comp,
+    ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, lowerStar_map_hom_app',
+    Quiver.Hom.unop_op, unop_op, lowerStarComp_hom_app_hom_app, lowerStarComp_inv_app_hom_app,
+    lowerStarCongr_hom_app_hom_app, adicConstantSheafLowerStarIso_inv_hom_app,
+    adicConstantSheafLowerStarIso_hom_hom_app, adicConstantSheaf_obj_map]
+  simp only [← Functor.map_comp, ← op_comp]
+  congr 2
+  apply pullback.hom_ext
+  · apply pullback.hom_ext
+    · simp only [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
+        MorphismProperty.Over.mk, Functor.id_obj, Functor.const_obj_obj, Functor.comp_obj,
+        Iso.symm_inv, MorphismProperty.Over.pullbackComp_inv_app_left, pullback.map_id,
+        Category.comp_id, NatIso.ofComponents_inv_app, MorphismProperty.Over.isoMk_inv_left,
+        pullback.congrHom_inv, MorphismProperty.Over.pullbackComp_hom_app_left,
+        Category.id_comp, Category.assoc, pullbackLeftPullbackSndIso_inv_fst, limit.lift_π,
+        PullbackCone.mk_π_app, pullbackLeftPullbackSndIso_hom_fst, limit.lift_π_assoc,
+        cospan_left]
+      erw [pullbackLeftPullbackSndIso_inv_fst]
+      simp only [pullback.lift_fst]
+      exact Category.id_comp _
+    · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
+        MorphismProperty.Over.mk, reassoc_of% hσa, hσ]
+  · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
+      MorphismProperty.Over.mk, hσa]
 
 /-- The constant `ℓ`-adic sheaf on a nonempty scheme is nonzero: the constant function `1` is a
 nonzero global section. -/
