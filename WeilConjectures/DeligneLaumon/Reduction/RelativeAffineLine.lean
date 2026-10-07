@@ -235,11 +235,12 @@ theorem exists_isMixedOfWeightsAtMost_higherLowerShriek_of_isAffine_fiber
   obtain ⟨w', b, hw', hb⟩ := hw.exists_units_norm_eq ι
   let R := WeilSheaf.higherLowerShriek k₀ l h i
   -- the direct images of the real envelope are real, hence mixed
-  obtain ⟨v, hv⟩ := (isReal_higherLowerShriek_of_isAffine_fiber ι h hfib (F.realEnvelope b)
-    (hF.realEnvelope b) (WeilSheaf.isReal_realEnvelope hw' hb) (hw'.realEnvelope hb) i).isMixed
+  obtain ⟨v, hv⟩ := (isReal_higherLowerShriek_of_isAffine_fiber ι h hfib (F.realEnvelope hF b)
+    (hF.realEnvelope b) (WeilSheaf.isReal_realEnvelope hF hw' hb) (hw'.realEnvelope hF hb)
+    i).isMixed
   -- `Rⁱh₀!(F ⊗ 𝓑_b)` is a direct summand of `Rⁱh₀!E`
   have h₀ : (R.obj (F.constantTwist b)).IsMixedOfWeightsAtMost ι v :=
-    hv.of_mono (R.map (Limits.biprod.inl : F.constantTwist b ⟶ F.realEnvelope b))
+    hv.of_mono (R.map (Limits.biprod.inl : F.constantTwist b ⟶ F.realEnvelope hF b))
   obtain ⟨e⟩ := WeilSheaf.nonempty_higherLowerShriek_constantTwist_iso h F b i
   exact ⟨_, ((h₀.of_iso e).constantTwist (b := b⁻¹) rfl).of_iso
     ((R.obj F).constantTwistInvIso b)⟩

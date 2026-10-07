@@ -45,11 +45,11 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 `cᵐ`. -/
 theorem localPolynomial_stalk_biprod_constantTwist_dual {F : WeilSheaf k₀ l X}
     (hF : F.IsLisse) (c : (PadicAlgCl l)ˣ) (x : X.finitePoints) :
-    ((F ⊞ F.dual.constantTwist c).stalk x).localPolynomial =
+    ((F ⊞ (F.dual hF).constantTwist c).stalk x).localPolynomial =
       ((F.stalk x).prod ((F.stalk x).dual.rescale
         ((c : PadicAlgCl l) ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1))).localPolynomial := by
-  obtain ⟨e₁⟩ := F.nonempty_equiv_stalk_biprod (F.dual.constantTwist c) x
-  obtain ⟨e₂⟩ := F.dual.nonempty_equiv_stalk_constantTwist c x
+  obtain ⟨e₁⟩ := F.nonempty_equiv_stalk_biprod ((F.dual hF).constantTwist c) x
+  obtain ⟨e₂⟩ := (F.dual hF).nonempty_equiv_stalk_constantTwist c x
   obtain ⟨e₃⟩ := nonempty_equiv_stalk_dual hF x
   rw [e₁.localPolynomial_eq, FrobeniusModule.localPolynomial_prod,
     FrobeniusModule.localPolynomial_prod, e₂.localPolynomial_eq, (e₃.rescale _).localPolynomial_eq]
@@ -62,7 +62,7 @@ weight `w`, and `ι c = q ^ w`, then `F ⊕ (F^∨ ⊗ 𝓑_c)` is `ι`-real: at
 theorem IsPunctuallyPureOfWeight.isReal_biprod_constantTwist_dual {ι : PadicAlgCl l →+* ℂ}
     {F : WeilSheaf k₀ l X} (hF : F.IsLisse) {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w)
     {c : (PadicAlgCl l)ˣ} (hc : ι c = (((Nat.card k₀ : ℝ) ^ w : ℝ) : ℂ)) :
-    (F ⊞ F.dual.constantTwist c).IsReal ι := by
+    (F ⊞ (F.dual hF).constantTwist c).IsReal ι := by
   intro x
   refine FrobeniusModule.IsReal.of_localPolynomial_eq ?_
     (localPolynomial_stalk_biprod_constantTwist_dual hF c x)
