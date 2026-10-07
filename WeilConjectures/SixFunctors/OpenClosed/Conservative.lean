@@ -138,4 +138,27 @@ theorem Etale.isIso_of_isIso_upperStar_map {F G : Sheaf X.smallEtaleTopology A} 
     (hj : IsIso ((j)^*[A].map φ)) (hi : IsIso ((i)^*[A].map φ)) : IsIso φ :=
   (Etale.jointlyReflectIsomorphisms_upperStar A j i hij).isIso_of_pairFunctor φ hj hi
 
+include hJ in
+omit [HasSmallSiteSheafify A] in
+/-- **Restrictions along a jointly surjective family reflect isomorphisms.** If `a_i : U_i ⟶ X`
+is a family of morphisms whose images cover `X`, a morphism of `A`-valued sheaves on the small
+étale site of `X` whose restrictions along all the `a_i` are invertible is invertible: every
+point of `X` is the image of a geometric point of some `U_i`, and the fibre of the morphism at
+that geometric point is the fibre of its restriction to `U_i`. -/
+theorem Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective
+    {ι : Type u} {U : ι → Scheme.{u}} (a : ∀ i, U i ⟶ X)
+    (ha : ∀ x : X, ∃ (i : ι) (y : U i), (a i).base y = x)
+    {F G : Sheaf X.smallEtaleTopology A} (φ : F ⟶ G) (hφ : ∀ i, IsIso ((a i)^*[A].map φ)) :
+    IsIso φ := by
+  refine (((isConservativeFamilyOfPoints_ulift_pointSmallEtale_of_iUnion_range_eq_univ X
+    (Ω := fun j : Σ i, U i ↦ AlgebraicClosure ((U j.1).residueField j.2))
+    (fun j ↦ (U j.1).algClosurePoint j.2 ≫ a j.1) ?_).jointlyReflectIsomorphisms A).isIso_iff
+      φ).2 ?_
+  · refine Set.eq_univ_of_forall fun x ↦ ?_
+    obtain ⟨i, y, rfl⟩ := ha x
+    exact Set.mem_iUnion.2 ⟨⟨i, y⟩, default, by simp⟩
+  rintro ⟨-, ⟨j⟩⟩
+  exact Etale.isIso_uliftSheafFiber_comp_map_of_isIso_upperStar_map A (a j.1) φ (hφ j.1) _
+
+
 end AlgebraicGeometry

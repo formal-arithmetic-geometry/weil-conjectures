@@ -37,6 +37,8 @@ that a scheme representing `sigmaOver P` gives an `S`-scheme representing `P`.
 - `AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over`: a Zariski
   sheaf on `Over S` with small values, covered by open subfunctors which are representable, is
   representable (Stacks, Lemma 01JJ, over a base).
+- `AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over_of_isAffine`:
+  the same statement, with the hypotheses only tested on affine schemes.
 - `AlgebraicGeometry.exists_opens_of_relative_isOpenImmersion`: a subfunctor `F ⊆ P` which is
   representable by open immersions (in the sense of `MorphismProperty.relative` for
   `uliftYoneda`) is cut out, over every `T` and `x ∈ P(T)`, by an open subscheme of `T`.
@@ -397,6 +399,192 @@ theorem isRepresentable_of_isSheaf_over (hP : Presheaf.IsSheaf (zariskiTopology.
       (Sigma.ι_desc f (i t))
   have := Scheme.LocalRepresentability.isRepresentable (F := F) hf
   exact isRepresentable_of_isRepresentable_sigmaOver P
+
+section Affine
+
+variable {P} {ι : Type u} {X : ι → Over S} {ξ : ∀ i, P.obj (op (X i))}
+
+/-- The pullback of `x ∈ P(T)` along `a : W ⟶ T` comes from `X i` if and only if the
+corresponding element of `sigmaOver P` comes from `X i`. -/
+lemma exists_map_eq_iff_exists_sigmaOverMk_eq {W T : Over S} (a : W ⟶ T) (x : P.obj (op T))
+    (i : ι) : (∃ b : W ⟶ X i, P.map a.op x = P.map b.op (ξ i)) ↔
+      ∃ c : W.left ⟶ (X i).left, sigmaOverMk P a.left x = sigmaOverMk P c (ξ i) := by
+  constructor
+  · rintro ⟨b, h⟩
+    exact ⟨b.left, (sigmaOverMk_eq_iff P (W := W) _ _ (Over.w a) (Over.w b) _ _).2 h⟩
+  · rintro ⟨c, h⟩
+    have hc : c ≫ (X i).hom = W.hom := by
+      rw [← Over.w a]
+      exact (congr_arg Sigma.fst h).symm
+    exact ⟨Over.homMk c hc, (sigmaOverMk_eq_iff P (W := W) _ _ (Over.w a) hc _ _).1 h⟩
+
+/-- If the maps `h_{X i} ⟶ P` are injective on affine schemes, then the maps
+`toSigmaOver X ξ i` are injective on all schemes. -/
+lemma eq_of_sigmaOverMk_eq
+    (hinj : ∀ i {T : Over S} [IsAffine T.left] (a b : T ⟶ X i),
+      P.map a.op (ξ i) = P.map b.op (ξ i) → a = b)
+    {i : ι} {T : Scheme.{u}} {c c' : T ⟶ (X i).left}
+    (h : sigmaOverMk P c (ξ i) = sigmaOverMk P c' (ξ i)) : c = c' := by
+  refine T.affineCover.hom_ext _ _ fun j ↦ ?_
+  have h' := congr_arg ((sigmaOver P).map (T.affineCover.f j).op) h
+  rw [sigmaOver_map_sigmaOverMk, sigmaOver_map_sigmaOverMk] at h'
+  have h₁ : (T.affineCover.f j ≫ c') ≫ (X i).hom = (T.affineCover.f j ≫ c) ≫ (X i).hom :=
+    (congr_arg Sigma.fst h').symm
+  rw [sigmaOverMk_eq_iff P (W := Over.mk ((T.affineCover.f j ≫ c) ≫ (X i).hom)) _ _ rfl h₁]
+    at h'
+  have : IsAffine (Over.mk ((T.affineCover.f j ≫ c) ≫ (X i).hom)).left := by
+    dsimp
+    infer_instance
+  exact congr_arg CommaMorphism.left (hinj i _ _ h')
+
+/-- **Gluing lifts along `toSigmaOver`.** If `P` is a Zariski sheaf and the maps
+`toSigmaOver X ξ i` are injective, then an element of `sigmaOver P` over `T` comes from `X i`
+as soon as its restrictions to the members of an open cover of `T` do. -/
+lemma exists_sigmaOverMk_eq_of_openCover (hP : Presheaf.IsSheaf (zariskiTopology.over S) P)
+    (hinj : ∀ i {T : Scheme.{u}} (c c' : T ⟶ (X i).left),
+      sigmaOverMk P c (ξ i) = sigmaOverMk P c' (ξ i) → c = c')
+    {i : ι} {T : Scheme.{u}} (s : (sigmaOver P).obj (op T))
+    (𝒰 : Scheme.OpenCover.{u} T)
+    (h : ∀ j, ∃ c : 𝒰.X j ⟶ (X i).left,
+      (sigmaOver P).map (𝒰.f j).op s = sigmaOverMk P c (ξ i)) :
+    ∃ c : T ⟶ (X i).left, s = sigmaOverMk P c (ξ i) := by
+  choose c hc using h
+  have hglue (j k : 𝒰.I₀) : pullback.fst (𝒰.f j) (𝒰.f k) ≫ c j = pullback.snd _ _ ≫ c k := by
+    refine hinj i _ _ ?_
+    rw [← sigmaOver_map_sigmaOverMk, ← sigmaOver_map_sigmaOverMk, ← hc, ← hc,
+      ← Functor.map_comp_apply, ← Functor.map_comp_apply, ← op_comp, ← op_comp,
+      pullback.condition]
+  refine ⟨𝒰.glueMorphisms c hglue, ?_⟩
+  have hF := (isSheaf_iff_isSheaf_of_type _ _).1 (isSheaf_sigmaOver P hP)
+  refine (hF.isSeparated (Sieve.generate (Presieve.ofArrows 𝒰.X 𝒰.f))
+    (mem_grothendieckTopology_iff.2 ⟨𝒰, Sieve.le_generate _⟩)).ext ?_
+  rintro V _ ⟨Z, g, _, ⟨j⟩, rfl⟩
+  rw [op_comp, Functor.map_comp_apply, Functor.map_comp_apply, hc, sigmaOver_map_sigmaOverMk,
+    sigmaOver_map_sigmaOverMk, sigmaOver_map_sigmaOverMk, 𝒰.ι_glueMorphisms]
+
+/-- A variant of `exists_sigmaOverMk_eq_of_openCover` for a cover given by open neighbourhoods
+of all points. -/
+lemma exists_sigmaOverMk_eq_of_forall_mem (hP : Presheaf.IsSheaf (zariskiTopology.over S) P)
+    (hinj : ∀ i {T : Scheme.{u}} (c c' : T ⟶ (X i).left),
+      sigmaOverMk P c (ξ i) = sigmaOverMk P c' (ξ i) → c = c')
+    {i : ι} {T : Scheme.{u}} (s : (sigmaOver P).obj (op T))
+    (h : ∀ t : T, ∃ U : T.Opens, t ∈ U ∧ ∃ c : (U : Scheme.{u}) ⟶ (X i).left,
+      (sigmaOver P).map U.ι.op s = sigmaOverMk P c (ξ i)) :
+    ∃ c : T ⟶ (X i).left, s = sigmaOverMk P c (ξ i) := by
+  choose U hU c hc using h
+  let 𝒰 : Scheme.OpenCover.{u} T := {
+    I₀ := T, X t := U t, f t := (U t).ι,
+    mem₀ := by
+      rw [presieve₀_mem_precoverage_iff]
+      exact ⟨fun t ↦ ⟨t, by simpa using hU t⟩, inferInstance⟩ }
+  exact exists_sigmaOverMk_eq_of_openCover hP hinj s 𝒰 fun t ↦ ⟨c t, hc t⟩
+
+/-- **The open locus, from affine test schemes.** If the locus where an element of
+`sigmaOver P` over an affine scheme comes from `X i` is open (tested on affine schemes), then
+the same holds over arbitrary schemes, tested on arbitrary schemes. -/
+lemma exists_opens_sigmaOver (hP : Presheaf.IsSheaf (zariskiTopology.over S) P)
+    (hinj : ∀ i {T : Scheme.{u}} (c c' : T ⟶ (X i).left),
+      sigmaOverMk P c (ξ i) = sigmaOverMk P c' (ξ i) → c = c') {i : ι}
+    (hopen : ∀ (T : Scheme.{u}) [IsAffine T] (s : (sigmaOver P).obj (op T)), ∃ U : T.Opens,
+      ∀ (W : Scheme.{u}) [IsAffine W] (a : W ⟶ T),
+        (∃ c : W ⟶ (X i).left, (sigmaOver P).map a.op s = sigmaOverMk P c (ξ i)) ↔
+          Set.range a ⊆ U)
+    {T : Scheme.{u}} (s : (sigmaOver P).obj (op T)) : ∃ U : T.Opens,
+      ∀ (W : Scheme.{u}) (a : W ⟶ T),
+        (∃ c : W ⟶ (X i).left, (sigmaOver P).map a.op s = sigmaOverMk P c (ξ i)) ↔
+          Set.range a ⊆ U := by
+  let L (V : T.Opens) : Prop :=
+    ∃ c : (V : Scheme.{u}) ⟶ (X i).left, (sigmaOver P).map V.ι.op s = sigmaOverMk P c (ξ i)
+  refine ⟨sSup {V | L V}, fun W a ↦ ⟨?_, fun ha ↦ ?_⟩⟩
+  · rintro ⟨c, hc⟩ _ ⟨w, rfl⟩
+    obtain ⟨V₀ : T.Opens, hV₀, hw, -⟩ :=
+      TopologicalSpace.Opens.isBasis_iff_nbhd.1 T.isBasis_affineOpens
+        (show a w ∈ (⊤ : T.Opens) from trivial)
+    have : IsAffine V₀ := hV₀
+    obtain ⟨U₀, hU₀⟩ := hopen V₀ ((sigmaOver P).map V₀.ι.op s)
+    refine (TopologicalSpace.Opens.mem_sSup).2 ⟨V₀.ι ''ᵁ U₀, ?_, ?_⟩
+    · -- the restriction of `s` to the image of `U₀` comes from `X i`
+      obtain ⟨c', hc'⟩ : ∃ c' : (U₀ : Scheme.{u}) ⟶ (X i).left,
+          (sigmaOver P).map (U₀.ι ≫ V₀.ι).op s = sigmaOverMk P c' (ξ i) := by
+        refine exists_sigmaOverMk_eq_of_openCover hP hinj _ (U₀ : Scheme.{u}).affineCover
+          fun j ↦ ?_
+        rw [← Functor.map_comp_apply, ← op_comp, ← Category.assoc, op_comp,
+          Functor.map_comp_apply]
+        refine (hU₀ _ _).2 ?_
+        rw [Scheme.Hom.comp_base, TopCat.coe_comp, ← Scheme.Opens.range_ι U₀]
+        exact Set.range_comp_subset_range _ _
+      refine ⟨(V₀.ι.isoImage U₀).inv ≫ c', ?_⟩
+      rw [← Scheme.Hom.isoImage_inv_ι, op_comp, Functor.map_comp_apply, hc',
+        sigmaOver_map_sigmaOverMk]
+    · -- the point `a w` lies in the image of `U₀`
+      obtain ⟨W' : W.Opens, hW', hwW', hW'le⟩ :=
+        TopologicalSpace.Opens.isBasis_iff_nbhd.1 W.isBasis_affineOpens
+        (show w ∈ a ⁻¹ᵁ V₀ from hw)
+      have : IsAffine W' := hW'
+      have hr : Set.range (a.resLE V₀ W' hW'le) ⊆ U₀ := by
+        refine (hU₀ _ _).1 ⟨W'.ι ≫ c, ?_⟩
+        rw [← Functor.map_comp_apply, ← op_comp, Scheme.Hom.resLE_comp_ι, op_comp,
+          Functor.map_comp_apply, hc, sigmaOver_map_sigmaOverMk]
+      refine ⟨a.resLE V₀ W' hW'le ⟨w, hwW'⟩, hr ⟨_, rfl⟩, ?_⟩
+      simp
+  · refine exists_sigmaOverMk_eq_of_forall_mem hP hinj _ fun w ↦ ?_
+    obtain ⟨V, ⟨c, hc⟩, hV⟩ := (TopologicalSpace.Opens.mem_sSup).1 (ha ⟨w, rfl⟩)
+    refine ⟨a ⁻¹ᵁ V, hV, a.resLE V (a ⁻¹ᵁ V) le_rfl ≫ c, ?_⟩
+    rw [← Functor.map_comp_apply, ← op_comp, ← Scheme.Hom.resLE_comp_ι, op_comp,
+      Functor.map_comp_apply, hc, sigmaOver_map_sigmaOverMk]
+
+end Affine
+
+/-- **Representability is local, over a base, tested on affine schemes.** This is
+`AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over` with each of
+its three hypotheses only required for affine test schemes: the injectivity of `h_{X i} ⟶ P`
+on affine `T`, the openness of the locus where an element of `P(T)` comes from `X i` for affine
+`T`, tested against affine `W ⟶ T`, and the covering condition for affine `T`. Since `P` is a
+Zariski sheaf, the general case follows by covering `T` and `W` by affine opens. -/
+theorem isRepresentable_of_isSheaf_over_of_isAffine
+    (hP : Presheaf.IsSheaf (zariskiTopology.over S) P)
+    {ι : Type u} (X : ι → Over S) (ξ : ∀ i, P.obj (op (X i)))
+    (hinj : ∀ i {T : Over S} [IsAffine T.left] (a b : T ⟶ X i),
+      P.map a.op (ξ i) = P.map b.op (ξ i) → a = b)
+    (hopen : ∀ i (T : Over S) [IsAffine T.left] (x : P.obj (op T)), ∃ U : T.left.Opens,
+      ∀ (W : Over S) [IsAffine W.left] (a : W ⟶ T),
+        (∃ b : W ⟶ X i, P.map a.op x = P.map b.op (ξ i)) ↔ Set.range a.left ⊆ U)
+    (hcov : ∀ (T : Over S) [IsAffine T.left] (x : P.obj (op T)) (t : T.left),
+      ∃ (i : ι) (W : Over S) (a : W ⟶ T) (b : W ⟶ X i),
+        t ∈ Set.range a.left ∧ P.map a.op x = P.map b.op (ξ i)) :
+    P.IsRepresentable := by
+  have hinj' (i : ι) {T : Scheme.{u}} (c c' : T ⟶ (X i).left)
+      (h : sigmaOverMk P c (ξ i) = sigmaOverMk P c' (ξ i)) : c = c' :=
+    eq_of_sigmaOverMk_eq hinj h
+  -- an element of `sigmaOver P` over `T` is `sigmaOverMk P (𝟙 T) x` for `x ∈ P(T, s)`
+  have hmap {T : Scheme.{u}} (s : (sigmaOver P).obj (op T)) {W : Scheme.{u}} (a : W ⟶ T) :
+      (sigmaOver P).map a.op s = sigmaOverMk P (Y := Over.mk s.1) a ((equivShrink _).symm s.2) := by
+    conv_lhs => rw [← sigmaOverMk_id P s]
+    rw [sigmaOver_map_sigmaOverMk, Category.comp_id]
+  refine isRepresentable_of_isSheaf_over P hP X ξ (fun i T a b h ↦ ?_) (fun i T x ↦ ?_)
+    (fun T x t ↦ ?_)
+  · exact Over.OverMorphism.ext (hinj' i _ _
+      ((sigmaOverMk_eq_iff P (W := T) _ _ (Over.w a) (Over.w b) _ _).2 h))
+  · -- the open locus, for arbitrary `T`
+    obtain ⟨U, hU⟩ := exists_opens_sigmaOver hP hinj' (i := i) (fun T hT s ↦ by
+      obtain ⟨U, hU⟩ := @hopen i (Over.mk s.1) hT ((equivShrink _).symm s.2)
+      refine ⟨U, fun W hW a ↦ ?_⟩
+      rw [hmap]
+      exact (exists_map_eq_iff_exists_sigmaOverMk_eq _ _ i).symm.trans
+        (@hU (Over.mk (a ≫ s.1)) hW (Over.homMk a rfl))) (sigmaOverMk P (𝟙 T.left) x)
+    refine ⟨U, fun W a ↦ ?_⟩
+    rw [exists_map_eq_iff_exists_sigmaOverMk_eq, ← hU, sigmaOver_map_sigmaOverMk,
+      Category.comp_id]
+  · -- the covering condition, for arbitrary `T`
+    obtain ⟨V : T.left.Opens, hV, ht, -⟩ :=
+      TopologicalSpace.Opens.isBasis_iff_nbhd.1 T.left.isBasis_affineOpens
+        (show t ∈ (⊤ : T.left.Opens) from trivial)
+    have : IsAffine (Over.mk (V.ι ≫ T.hom)).left := hV
+    let x' := P.map (Over.homMk V.ι rfl : Over.mk (V.ι ≫ T.hom) ⟶ T).op x
+    obtain ⟨i, W, a, b, ⟨w, hw⟩, h⟩ := hcov (Over.mk (V.ι ≫ T.hom)) x' ⟨t, ht⟩
+    refine ⟨i, W, a ≫ Over.homMk V.ι rfl, b, ⟨w, ?_⟩, ?_⟩
+    · simpa using congr_arg Subtype.val hw
+    · rw [op_comp, Functor.map_comp_apply, h]
 
 end AlgebraicGeometry.Scheme.LocalRepresentability
 

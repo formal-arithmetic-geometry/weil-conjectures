@@ -55,11 +55,12 @@ yet available: the isomorphisms `Etale.leftDerivedUpperStarHomologyFunctorIso` a
 derived category, and their bounded below counterparts are not in Mathlib. Recording them
 is the first thing a file connecting these statements to the classical ones needs.
 
-Two further compatibilities asserted by the blueprint subsection `sk-def-bc` are likewise
-not stated here: compatibility of the base-change map with the composition of two
-Cartesian squares, which the reduction of the smooth base change theorem to relative
-dimension one uses, and compatibility with étale localisation. Naturality in `F`, the
-third, is `AlgebraicGeometry.Etale.baseChangeHomologyMap_naturality`.
+The compatibilities of the base-change map asserted by the blueprint subsection `sk-def-bc`
+are proved elsewhere: naturality in `F` is
+`AlgebraicGeometry.Etale.baseChangeHomologyMap_naturality` (and
+`AlgebraicGeometry.Etale.baseChange_naturality` for the derived map), while compatibility with
+the composition of two Cartesian squares and with étale localisation are in
+`WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality`.
 
 ## Main definitions
 
@@ -146,6 +147,14 @@ noncomputable def Etale.baseChangeHomologyNatTrans (sq : IsPullback e h g p) (q 
     Etale.baseChangeSourceFunctor Λ p g q ⟶ Etale.baseChangeTargetFunctor Λ e h q :=
   Functor.whiskerLeft _
     (Functor.whiskerRight (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq) _)
+
+/-- The degree-`q` base-change transformation is the degree-`q` homology of the derived
+base-change morphism, restricted to sheaves placed in degree `0`. -/
+lemma Etale.baseChangeHomologyNatTrans_eq (sq : IsPullback e h g p) (q : ℤ) :
+    Etale.baseChangeHomologyNatTrans Λ sq q =
+      Functor.whiskerLeft (DerivedCategory.Plus.singleFunctor _ 0)
+        (Functor.whiskerRight (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq)
+          (DerivedCategory.Plus.homologyFunctor _ q)) := rfl
 
 /-- The degree-`q` base-change map `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` at a sheaf `F` of
 `Λ`-modules on `T_ét`: the component at `F` of
