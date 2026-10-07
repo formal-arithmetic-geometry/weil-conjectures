@@ -9,8 +9,10 @@ public import Mathlib.Algebra.CharP.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.AlgebraicGeometry.Group.Affine
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+public import WeilConjectures.RingTheory.Bialgebra.Frobenius
 
 /-!
 # Finite group schemes over a field
@@ -48,11 +50,42 @@ variable {K : Type u} [Field K]
 /-- Blueprint `sk-prop-av-connected-order`: Connected finite group schemes have `p`-power order
 
 Let `G` be a finite group scheme over a field `K` of characteristic `p > 0`. If `G` is
-connected, then its order `|G| = dim_K Γ(G, 𝒪_G)` is a power of `p`. -/
+connected, then its order `|G| = dim_K Γ(G, 𝒪_G)` is a power of `p`.
+
+`G` is the spectrum of a finite-dimensional commutative Hopf algebra `H`, which is local since
+`Spec H` is connected; conclude by `Bialgebra.exists_finrank_eq_pow`. This also proves blueprint
+`lem-sc-connected-finite-order`. -/
 theorem exists_finrankΓ_eq_pow (p : ℕ) [Fact p.Prime] [CharP K p]
     (G : Over (Spec (.of K))) [GrpObj G] [IsFinite G.hom] [ConnectedSpace G.left] :
-    ∃ r : ℕ, G.hom.finrankΓ = p ^ r :=
-  sorry
+    ∃ r : ℕ, G.hom.finrankΓ = p ^ r := by
+  have : IsAffine G.left := isAffine_of_isAffineHom G.hom
+  obtain ⟨H, ⟨e⟩⟩ := (essImage_hopfSpec (R := .of K) (G := Grp.mk G)).2 ‹_›
+  let e' : Spec (.of H.unop) ≅ G.left := (Grp.forget _ ⋙ Over.forget _).mapIso e
+  have he : e'.hom ≫ G.hom = Spec.map (CommRingCat.ofHom (algebraMap K H.unop)) :=
+    Over.w e.hom.hom.hom
+  have hfin : G.hom.finrankΓ = Module.finrank K H.unop := by
+    rw [Scheme.Hom.finrankΓ_eq_of_iso G.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap K H.unop))) e'.symm (Iso.refl _)
+      (by rw [Iso.refl_hom, Spec.map_id, Category.comp_id, ← he, Iso.symm_hom,
+        Iso.inv_hom_id_assoc])]
+    exact Scheme.Hom.finrankΓ_SpecMap K H.unop
+  have : IsFinite (Spec.map (CommRingCat.ofHom (algebraMap K H.unop))) := by
+    rw [← he]
+    infer_instance
+  have : Module.Finite K H.unop := by
+    rw [IsFinite.SpecMap_iff] at this
+    exact RingHom.finite_algebraMap.1 this
+  have : IsArtinianRing H.unop := .of_finite K H.unop
+  have : ConnectedSpace (PrimeSpectrum H.unop) :=
+    (Scheme.homeoOfIso e'.symm).surjective.connectedSpace (Scheme.homeoOfIso e'.symm).continuous
+  have : Subsingleton (PrimeSpectrum H.unop) := subsingleton_of_preconnected_totallyDisconnected
+  have : Nontrivial H.unop := PrimeSpectrum.nonempty_iff_nontrivial.1 inferInstance
+  have : IsLocalRing H.unop := .of_unique_max_ideal <| by
+    obtain ⟨M, hM⟩ := Ideal.exists_maximal H.unop
+    exact ⟨M, hM, fun N hN ↦ congrArg PrimeSpectrum.asIdeal
+      (Subsingleton.elim (⟨N, hN.isPrime⟩ : PrimeSpectrum H.unop) ⟨M, hM.isPrime⟩)⟩
+  rw [hfin]
+  exact Bialgebra.exists_finrank_eq_pow K H.unop p
 
 /-- Blueprint `sk-prop-av-prime-p-etale`: Group schemes of order prime to `p` are étale
 

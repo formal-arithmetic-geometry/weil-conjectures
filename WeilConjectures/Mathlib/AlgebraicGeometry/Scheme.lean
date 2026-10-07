@@ -6,6 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.Topology.Sheaves.CommRingCat
+public import WeilConjectures.Mathlib.RingTheory.LocalRing.Basic
 
 /-!
 # Preimages of opens under a morphism of schemes
@@ -38,6 +40,8 @@ point lies in `D(a)`:
   `f : Γ(X, U)`, then `f` is a unit. This is the converse of `Scheme.basicOpen_of_isUnit`.
 * `AlgebraicGeometry.Scheme.Hom.range_appLE_subset_of_comp_eq`: sections in the image of
   `appLE` of a composition are in the image of `appLE` of its first factor.
+* `AlgebraicGeometry.Scheme.connectedSpace_iff_isIdempotentElem`: a nonempty scheme is connected
+  if and only if its only idempotent global sections are `0` and `1`.
 * `AlgebraicGeometry.Scheme.IsSpecOfField`: the scheme is isomorphic to the spectrum of a
   field, with the instance `AlgebraicGeometry.Scheme.isSpecOfField_Spec` for `Spec k`.
 
@@ -227,5 +231,76 @@ lemma Hom.appTop_ne_zero_iff_mem_basicOpen {R : CommRingCat.{u}} {Y : Scheme.{u}
     simp
   · rw [Scheme.basicOpen_of_isUnit (X := Spec R) (Ne.isUnit h)]
     simpa using h
+
+end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+
+open Opposite
+
+/-- A nonempty scheme is connected if and only if its only idempotent global sections are `0`
+and `1`. An idempotent `e` cuts `X` into the two disjoint opens `D(e)` and `D(1 - e)`; conversely
+a clopen `U` gives the idempotent which is `1` on `U` and `0` on its complement. -/
+theorem connectedSpace_iff_isIdempotentElem (X : Scheme.{u}) [Nonempty X] :
+    ConnectedSpace X ↔ ∀ e : Γ(X, ⊤), IsIdempotentElem e → e = 0 ∨ e = 1 := by
+  classical
+  have ext (a b : Γ(X, ⊤))
+      (h : ∀ x, X.presheaf.germ ⊤ x trivial a = X.presheaf.germ ⊤ x trivial b) : a = b :=
+    TopCat.Presheaf.section_ext X.sheaf ⊤ a b fun x _ ↦ h x
+  rw [connectedSpace_iff_clopen]
+  refine ⟨fun ⟨_, H⟩ e he ↦ ?_, fun H ↦ ⟨inferInstance, fun S hS ↦ ?_⟩⟩
+  · have hgerm (x : X) := IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem
+      (he.map (X.presheaf.germ ⊤ x trivial).hom)
+    have hcompl : (X.basicOpen e : Set X)ᶜ = X.basicOpen (1 - e) := by
+      ext x
+      simp only [Set.mem_compl_iff, SetLike.mem_coe, mem_basicOpen_top, map_sub, map_one]
+      rcases hgerm x with h | h <;> simp [h]
+    have hclopen : IsClopen (X.basicOpen e : Set X) :=
+      ⟨isOpen_compl_iff.mp (hcompl ▸ (X.basicOpen (1 - e)).isOpen), (X.basicOpen e).isOpen⟩
+    refine (H _ hclopen).imp (fun h ↦ ext _ _ fun x ↦ ?_) (fun h ↦ ext _ _ fun x ↦ ?_)
+    · have hx : x ∉ X.basicOpen e := by simp [← SetLike.mem_coe, h]
+      rw [mem_basicOpen_top] at hx
+      rcases hgerm x with h | h
+      · simpa using h
+      · exact absurd (by simp [h]) hx
+    · have hx : x ∈ X.basicOpen e := by simp [← SetLike.mem_coe, h]
+      rw [mem_basicOpen_top] at hx
+      rcases hgerm x with h | h
+      · exact absurd hx (by simp [h])
+      · simpa using h
+  · let U : X.Opens := ⟨S, hS.isOpen⟩
+    let V : X.Opens := ⟨Sᶜ, hS.isClosed.isOpen_compl⟩
+    have hUV : U ⊔ V = ⊤ := by ext x; simp [U, V]
+    have hUV' : U ⊓ V = ⊥ := by ext x; simp [U, V]
+    let s : Γ(X, U ⊔ V) := (X.sheaf.objSupIsoProdEqLocus U V).inv ⟨(1, 0),
+      TopCat.Presheaf.section_ext X.sheaf _ _ _ fun x hx ↦ by
+        rw [hUV'] at hx; exact absurd hx (by simp)⟩
+    let e : Γ(X, ⊤) := X.presheaf.map (eqToHom hUV.symm).op s
+    have hsU : X.presheaf.map (homOfLE le_sup_left).op s = 1 :=
+      X.sheaf.objSupIsoProdEqLocus_inv_fst U V _
+    have hsV : X.presheaf.map (homOfLE le_sup_right).op s = 0 :=
+      X.sheaf.objSupIsoProdEqLocus_inv_snd U V _
+    have heU : X.presheaf.map (homOfLE le_top : U ⟶ ⊤).op e = 1 := by
+      rw [← hsU, ← ConcreteCategory.comp_apply, ← Functor.map_comp]; rfl
+    have heV : X.presheaf.map (homOfLE le_top : V ⟶ ⊤).op e = 0 := by
+      rw [← hsV, ← ConcreteCategory.comp_apply, ← Functor.map_comp]; rfl
+    have hgerm (x : X) : X.presheaf.germ ⊤ x trivial e = if x ∈ S then 1 else 0 := by
+      split_ifs with hx
+      · rw [← X.presheaf.germ_res (homOfLE le_top : U ⟶ ⊤) x hx, CommRingCat.comp_apply, heU,
+          map_one]
+      · rw [← X.presheaf.germ_res (homOfLE le_top : V ⟶ ⊤) x hx, CommRingCat.comp_apply, heV,
+          map_zero]
+    have he : IsIdempotentElem e := ext _ _ fun x ↦ by
+      rw [map_mul, hgerm]; split_ifs <;> simp
+    refine (H e he).imp (fun h ↦ ?_) (fun h ↦ ?_)
+    · refine Set.eq_empty_of_forall_notMem fun x hx ↦ ?_
+      have := hgerm x
+      rw [h, map_zero, if_pos hx] at this
+      exact zero_ne_one this
+    · refine Set.eq_univ_of_forall fun x ↦ ?_
+      by_contra hx
+      have := hgerm x
+      rw [h, map_one, if_neg hx] at this
+      exact one_ne_zero this
 
 end AlgebraicGeometry.Scheme

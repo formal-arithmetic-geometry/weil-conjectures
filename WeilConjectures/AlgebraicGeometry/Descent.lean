@@ -79,6 +79,13 @@ injective, and `Z ⟶ T` is finite, flat and of finite presentation because thes
 descend along fpqc coverings
 (`AlgebraicGeometry.Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology`); the degree is read
 off on the covering.
+
+The gluing of the closed subschemes does not go through (D1): where the blueprint descends the
+quotient modules `𝒪 / I i`, we write down the descended ideal sheaf directly. Over an affine
+open of `X` the covering is refined by finitely many flat morphisms `f j : W j ⟶ U` from affine
+schemes, and `⨅ j, (I j).map (f j)` restricts to the `I j` by flat base change for ideal sheaves
+and because flat pullback commutes with finite intersections; the local ideal sheaves so
+obtained are unique, hence glue.
 -/
 
 @[expose] public section
@@ -182,24 +189,6 @@ theorem isInvertible_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.f
 
 namespace Scheme.IdealSheafData
 
-/-- **Fpqc descent for closed subschemes: existence.** Let `{p i : X' i ⟶ X}` be an fpqc
-covering and let `I i` be ideal sheaves on the `X' i` whose pullbacks agree on every scheme
-mapping compatibly to two members of the covering. Then the `I i` are the pullbacks of a single
-ideal sheaf on `X`.
-
-This is the step "descending the quotients" of the proof of
-`lem-pc-descent-finite-flat-closed-subschemes`: the quotients `𝒪 / I i` form a descent datum
-of quasi-coherent modules, which is effective by `lem-pc-fpqc-descent`.
-
-(blueprint: `lem-pc-descent-finite-flat-closed-subschemes`) -/
-theorem exists_comap_eq_of_mem_fpqcTopology {X : Scheme.{u}} {X' : ι → Scheme.{u}}
-    (p : ∀ i, X' i ⟶ X) (hp : Sieve.ofArrows X' p ∈ Scheme.fpqcTopology X)
-    (I : ∀ i, (X' i).IdealSheafData)
-    (hcompat : ∀ ⦃Y : Scheme.{u}⦄ ⦃i j : ι⦄ (a : Y ⟶ X' i) (b : Y ⟶ X' j),
-      a ≫ p i = b ≫ p j → (I i).comap a = (I j).comap b) :
-    ∃ J : X.IdealSheafData, ∀ i, J.comap (p i) = I i :=
-  sorry
-
 set_option backward.isDefEq.respectTransparency.types false in
 /-- An ideal sheaf whose pullback along every member of an fpqc covering sieve vanishes, vanishes:
 the inclusion of the closed subscheme it cuts out becomes an isomorphism after base change along
@@ -220,6 +209,20 @@ theorem eq_bot_of_comap_eq_bot_of_mem_fpqcTopology {X : Scheme.{u}} {S : Sieve X
   rw [← hab.flip.isoPullback_hom_fst]
   infer_instance
 
+/-- **Fpqc descent for closed subschemes: uniqueness**, for a covering sieve. Two ideal sheaves
+on `X` whose pullbacks along every member of an fpqc covering sieve agree are equal. -/
+theorem eq_of_forall_comap_eq_of_mem_fpqcTopology {X : Scheme.{u}} {S : Sieve X}
+    (hS : S ∈ Scheme.fpqcTopology X) {J J' : X.IdealSheafData}
+    (h : ∀ ⦃Y : Scheme.{u}⦄ (f : Y ⟶ X), S f → J.comap f = J'.comap f) : J = J' := by
+  suffices H : ∀ J J' : X.IdealSheafData,
+      (∀ ⦃Y : Scheme.{u}⦄ (f : Y ⟶ X), S f → J.comap f = J'.comap f) → J' ≤ J from
+    le_antisymm (H J' J fun _ f hf ↦ (h f hf).symm) (H J J' h)
+  intro J J' h
+  rw [← J.ker_subschemeι]
+  refine le_ker_of_comap_eq_bot _ (eq_bot_of_comap_eq_bot_of_mem_fpqcTopology
+    (Scheme.fpqcTopology.pullback_stable J.subschemeι hS) _ fun Y k hk ↦ ?_)
+  rw [← comap_comp, ← h _ hk, comap_comp, comap_subschemeι, comap_bot]
+
 /-- **Fpqc descent for closed subschemes: uniqueness.** Two ideal sheaves on `X` whose pullbacks
 along every member of an fpqc covering family agree are equal.
 
@@ -227,15 +230,75 @@ along every member of an fpqc covering family agree are equal.
 theorem eq_of_comap_eq_of_mem_fpqcTopology {X : Scheme.{u}} {X' : ι → Scheme.{u}}
     (p : ∀ i, X' i ⟶ X) (hp : Sieve.ofArrows X' p ∈ Scheme.fpqcTopology X)
     {J J' : X.IdealSheafData} (h : ∀ i, J.comap (p i) = J'.comap (p i)) : J = J' := by
-  suffices H : ∀ J J' : X.IdealSheafData, (∀ i, J.comap (p i) = J'.comap (p i)) → J' ≤ J from
-    le_antisymm (H J' J fun i ↦ (h i).symm) (H J J' h)
-  intro J J' h
-  rw [← J.ker_subschemeι]
-  refine le_ker_of_comap_eq_bot _ (eq_bot_of_comap_eq_bot_of_mem_fpqcTopology
-    (Scheme.fpqcTopology.pullback_stable J.subschemeι hp) _ fun Y k hk ↦ ?_)
-  obtain ⟨i, a, ha⟩ := (Sieve.mem_ofArrows_iff ..).mp hk
-  rw [← comap_comp, ha, comap_comp, ← h i, ← comap_comp, ← ha, comap_comp,
-    comap_subschemeι, comap_bot]
+  refine eq_of_forall_comap_eq_of_mem_fpqcTopology hp fun Y f hf ↦ ?_
+  obtain ⟨i, a, rfl⟩ := (Sieve.mem_ofArrows_iff ..).mp hf
+  rw [comap_comp, comap_comp, h i]
+
+/-- **Fpqc descent for closed subschemes: existence.** Let `{p i : X' i ⟶ X}` be an fpqc
+covering and let `I i` be ideal sheaves on the `X' i` whose pullbacks agree on every scheme
+mapping compatibly to two members of the covering. Then the `I i` are the pullbacks of a single
+ideal sheaf on `X`.
+
+This is the step "descending the quotients" of the proof of
+`lem-pc-descent-finite-flat-closed-subschemes`. Over an affine open `U` of `X` the covering is
+refined by finitely many flat morphisms `f j : W j ⟶ U` from affine schemes, and the ideal sheaf
+`⨅ j, (I j).map (f j)` on `U` restricts to the given ones by flat base change
+(`Scheme.IdealSheafData.comap_iInf_map_of_flat`); these local ideal sheaves are unique, hence
+glue (`Scheme.IdealSheafData.exists_comap_ι_eq`).
+
+(blueprint: `lem-pc-descent-finite-flat-closed-subschemes`) -/
+theorem exists_comap_eq_of_mem_fpqcTopology {X : Scheme.{u}} {X' : ι → Scheme.{u}}
+    (p : ∀ i, X' i ⟶ X) (hp : Sieve.ofArrows X' p ∈ Scheme.fpqcTopology X)
+    (I : ∀ i, (X' i).IdealSheafData)
+    (hcompat : ∀ ⦃Y : Scheme.{u}⦄ ⦃i j : ι⦄ (a : Y ⟶ X' i) (b : Y ⟶ X' j),
+      a ≫ p i = b ≫ p j → (I i).comap a = (I j).comap b) :
+    ∃ J : X.IdealSheafData, ∀ i, J.comap (p i) = I i := by
+  -- `K` is compatible with the `I i` along `v : V ⟶ X`
+  let Good (V : Scheme.{u}) (v : V ⟶ X) (K : V.IdealSheafData) : Prop :=
+    ∀ ⦃Y : Scheme.{u}⦄ (h : Y ⟶ V) (i : ι) (a : Y ⟶ X' i), h ≫ v = a ≫ p i →
+      K.comap h = (I i).comap a
+  have huniq {V : Scheme.{u}} (v : V ⟶ X) {K K' : V.IdealSheafData} (hK : Good V v K)
+      (hK' : Good V v K') : K = K' := by
+    refine eq_of_forall_comap_eq_of_mem_fpqcTopology
+      (Scheme.fpqcTopology.pullback_stable v hp) fun Y h hh ↦ ?_
+    obtain ⟨i, a, ha⟩ := (Sieve.mem_ofArrows_iff ..).mp hh
+    rw [hK h i a ha, hK' h i a ha]
+  have hcomap {V : Scheme.{u}} (v : V ⟶ X) {K : V.IdealSheafData} (hK : Good V v K)
+      {W : Scheme.{u}} (w : W ⟶ V) : Good W (w ≫ v) (K.comap w) := by
+    intro Y h i a ha
+    rw [← comap_comp]
+    exact hK _ i a (by rw [Category.assoc, ha])
+  -- the affine case
+  have hex (V : Scheme.{u}) [IsAffine V] (v : V ⟶ X) : ∃ K, Good V v K := by
+    obtain ⟨κ, W, f, _, _, _, hS, hcov⟩ := Scheme.exists_finite_affine_flat_of_mem_fpqcTopology
+      (Scheme.fpqcTopology.pullback_stable v hp)
+    choose i a ha using fun j ↦ (Sieve.mem_ofArrows_iff ..).mp (hS j)
+    let K := ⨅ j, ((I (i j)).comap (a j)).map (f j)
+    have hKf (l : κ) : K.comap (f l) = (I (i l)).comap (a l) := by
+      refine comap_iInf_map_of_flat f _ (fun k l ↦ ?_) l
+      rw [← comap_comp, ← comap_comp]
+      apply hcompat
+      rw [Category.assoc, Category.assoc, ← ha, ← ha, pullback.condition_assoc]
+    refine ⟨K, fun Y h i' a' hh ↦ ?_⟩
+    refine eq_of_forall_comap_eq_of_mem_fpqcTopology
+      (Scheme.fpqcTopology.pullback_stable h hcov) fun Z c hc ↦ ?_
+    obtain ⟨j, d, hd⟩ := (Sieve.mem_ofArrows_iff ..).mp hc
+    rw [← comap_comp, hd, comap_comp, hKf, ← comap_comp, ← comap_comp]
+    apply hcompat
+    rw [Category.assoc, ← ha, ← Category.assoc, ← hd, Category.assoc, hh, Category.assoc]
+  have hex' (U : X.affineOpens) : ∃ K, Good U.1.toScheme U.1.ι K :=
+    haveI : IsAffine U.1.toScheme := U.2
+    hex _ _
+  choose K hK using hex'
+  -- gluing
+  obtain ⟨J, hJ⟩ := exists_comap_ι_eq K fun U f ↦ huniq (X.affineBasicOpen f).1.ι
+    (by
+      have := hcomap _ (hK U) (X.homOfLE (X.basicOpen_le f))
+      rw [Scheme.homOfLE_ι] at this
+      exact this) (hK _)
+  refine ⟨J, fun i ↦ eq_of_comap_ι_eq (p i) fun U W hW ↦ ?_⟩
+  rw [← comap_comp, ← Scheme.Hom.resLE_comp_ι (p i) hW, comap_comp, hJ]
+  exact hK U _ i _ (Scheme.Hom.resLE_comp_ι (p i) hW)
 
 end Scheme.IdealSheafData
 
