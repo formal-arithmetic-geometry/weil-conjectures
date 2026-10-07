@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Group.Abelian
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
+public import WeilConjectures.AlgebraicGeometry.GeometricallyConnected
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
@@ -48,15 +49,16 @@ variable {K : Type u} [Field K]
 
 Let `G` be a group scheme over a field `K` which is proper, connected and smooth over `K`, that
 is, an abelian variety in the sense of `AlgebraicGeometry.IsAbelianVariety`. Then `G` is
-geometrically integral over `K`: it has a rational point, the unit, so connectedness gives
-geometric connectedness; a smooth morphism with geometrically connected fibres is geometrically
-irreducible; and smoothness gives geometric reducedness.
+geometrically integral over `K`: it is proper and has a rational point, the unit, so connectedness
+gives geometric connectedness (`GeometricallyConnected.of_universallyClosed_of_section`); a smooth
+morphism with geometrically connected fibres is geometrically irreducible; and smoothness gives
+geometric reducedness.
 
 This is also blueprint `lem-sc-abelian-variety-characterization`. -/
 instance IsAbelianVariety.geometricallyIntegral (G : Over (Spec (.of K))) [GrpObj G]
     [IsAbelianVariety G] : GeometricallyIntegral G.hom := by
   have hη : η[G].left ≫ G.hom = 𝟙 _ := by simp
-  have := GeometricallyConnected.of_connectedSpace_of_section G.hom η[G].left hη
+  have := GeometricallyConnected.of_universallyClosed_of_section G.hom η[G].left hη
   have := GeometricallyIrreducible.of_smooth_of_geometricallyConnected G.hom
   exact .of_geometricallyReduced_of_geometricallyIrreducible _
 
@@ -87,15 +89,16 @@ instance IsAbelianVariety.isCommMonObj (A : Over (Spec (.of K))) [GrpObj A]
 
 /-- The base change `A_L` of an abelian variety `A` over `K` along a field extension
 `Spec L ⟶ Spec K` is an abelian variety over `L`: properness and smoothness are stable under base
-change, and `A_L` is connected because `A`, being connected with a rational point (the unit), is
-geometrically connected (Stacks 04KV).
+change, and `A_L` is connected because `A`, being proper and connected with a rational point (the
+unit), is geometrically connected (Stacks 04KV,
+`GeometricallyConnected.of_universallyClosed_of_section`).
 
 This is used in the proof of blueprint `lem-sc-mult-n-finite-kernel`. -/
 instance IsAbelianVariety.pullback {L : Type u} [Field L] (g : Spec (.of L) ⟶ Spec (.of K))
     (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A] :
     IsAbelianVariety ((Over.pullback g).obj A) := by
   have hη : η[A].left ≫ A.hom = 𝟙 _ := by simp
-  have := GeometricallyConnected.of_connectedSpace_of_section A.hom η[A].left hη
+  have := GeometricallyConnected.of_universallyClosed_of_section A.hom η[A].left hη
   exact { toIsProper := inferInstanceAs (IsProper (pullback.snd _ _))
           toSmooth := inferInstanceAs (Smooth (pullback.snd _ _))
           toConnectedSpace := pullback_of_geometrically
