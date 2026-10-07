@@ -502,6 +502,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyS
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.Double
 public import WeilConjectures.Mathlib.Algebra.Homology.Embedding.Extend
@@ -513,6 +514,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Shift
 public import WeilConjectures.Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
@@ -677,6 +679,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndoFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 public import WeilConjectures.Mathlib.CategoryTheory.Presentable.Limits
+public import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.CompatiblePlus
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
@@ -710,6 +713,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Subobject.FactorThru
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.HasCardinalLT
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Lattice
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.SpectralObject
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
