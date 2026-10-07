@@ -189,6 +189,63 @@ lemma exists_opens_isolate {V X : Scheme.{u}} (g : V ⟶ X) [LocallyQuasiFinite 
   refine ⟨hqZ'.1, ?_⟩
   rw [Scheme.basicOpen_res]
   exact ⟨⟨q, hq, rfl⟩, hqZ'.2⟩
+/-- A point with a discrete valuation ring as local ring has an irreducible open
+neighbourhood. -/
+lemma exists_opens_isPreirreducible {V : Scheme.{u}} [IsLocallyNoetherian V] (y : V)
+    [IsDomain (V.presheaf.stalk y)] [IsDiscreteValuationRing (V.presheaf.stalk y)] :
+    ∃ W : V.Opens, y ∈ W ∧ IsPreirreducible (W : Set V) := by
+  obtain ⟨_, ⟨U₀, hU₀, rfl⟩, hyU₀, -⟩ :=
+    V.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ y) isOpen_univ
+  have : NoetherianSpace U₀ := @noetherianSpace_of_isAffineOpen _ U₀ hU₀
+    (IsLocallyNoetherian.component_noetherian ⟨U₀, hU₀⟩)
+  have : QuasiSober U₀ := inferInstanceAs (QuasiSober (Scheme.Opens.toScheme (X := V) U₀))
+  -- any two generisations of `y` are comparable
+  have hcomp : ∀ a b : V, a ⤳ y → b ⤳ y → a ⤳ b ∨ b ⤳ a := by
+    intro a b ha hb
+    have ha' : a ∈ Set.range (V.fromSpecStalk y) := by rw [Scheme.range_fromSpecStalk]; exact ha
+    have hb' : b ∈ Set.range (V.fromSpecStalk y) := by rw [Scheme.range_fromSpecStalk]; exact hb
+    obtain ⟨p, rfl⟩ := ha'
+    obtain ⟨q, rfl⟩ := hb'
+    have key : ∀ r : PrimeSpectrum (V.presheaf.stalk y), r.asIdeal = ⊥ ∨
+        r = IsLocalRing.closedPoint _ := fun r ↦ by
+      by_cases hr : r.asIdeal = ⊥
+      · exact Or.inl hr
+      · exact Or.inr (PrimeSpectrum.ext (IsLocalRing.eq_maximalIdeal (r.isPrime.isMaximal hr)))
+    have hle : ∀ r s : PrimeSpectrum (V.presheaf.stalk y), r.asIdeal = ⊥ → r ⤳ s := fun r s hr ↦
+      (PrimeSpectrum.le_iff_specializes r s).1 (by
+        change r.asIdeal ≤ s.asIdeal
+        rw [hr]
+        exact bot_le)
+    rcases key p with hp | hp
+    · exact Or.inl ((hle p q hp).map (V.fromSpecStalk y).continuous)
+    rcases key q with hq | hq
+    · exact Or.inr ((hle q p hq).map (V.fromSpecStalk y).continuous)
+    · rw [hp, hq]
+      exact Or.inl le_rfl
+  -- hence `y` lies in a unique irreducible component of `U₀`
+  obtain ⟨W₀, hW₀, hyW₀, hirr⟩ := NoetherianSpace.exists_isOpen_isPreirreducible
+    (α := U₀) ⟨y, hyU₀⟩ fun Z₁ hZ₁ Z₂ hZ₂ h₁ h₂ ↦ by
+      obtain ⟨g₁, hg₁⟩ := QuasiSober.sober hZ₁.1 (isClosed_of_mem_irreducibleComponents _ hZ₁)
+      obtain ⟨g₂, hg₂⟩ := QuasiSober.sober hZ₂.1 (isClosed_of_mem_irreducibleComponents _ hZ₂)
+      have hsub (a b : U₀) (ha : IsGenericPoint a Z₁) (hb : IsGenericPoint b Z₂)
+          (h : a.1 ⤳ b.1) : Z₂ ⊆ Z₁ := by
+        rw [← ha.def, ← hb.def]
+        exact specializes_iff_closure_subset.1
+          ((Topology.IsInducing.subtypeVal.specializes_iff).1 h)
+      rcases hcomp g₁.1 g₂.1 ((hg₁.specializes h₁).map continuous_subtype_val)
+          ((hg₂.specializes h₂).map continuous_subtype_val) with h | h
+      · have := hsub g₁ g₂ hg₁ hg₂ h
+        exact (hZ₂.2 hZ₁.1 this).antisymm this
+      · have hsub' (a b : U₀) (ha : IsGenericPoint a Z₂) (hb : IsGenericPoint b Z₁)
+            (h : a.1 ⤳ b.1) : Z₁ ⊆ Z₂ := by
+          rw [← ha.def, ← hb.def]
+          exact specializes_iff_closure_subset.1
+            ((Topology.IsInducing.subtypeVal.specializes_iff).1 h)
+        have := hsub' g₂ g₁ hg₂ hg₁ h
+        exact this.antisymm (hZ₁.2 hZ₂.1 this)
+  refine ⟨⟨Subtype.val '' W₀, U₀.2.isOpenMap_subtype_val W₀ hW₀⟩, ⟨_, hyW₀, rfl⟩,
+    hirr.image _ continuous_subtype_val.continuousOn⟩
+
 end Scheme
 
 namespace IsCurve
@@ -229,12 +286,100 @@ lemma coheight_eq_one_of_mem (hC : topologicalKrullDim C = 1) {S : Set C}
   exact le_antisymm hle' (Order.one_le_iff_ne_zero.2 hne)
 
 
+omit [IsLocallyNoetherian C] in
+/-- On an irreducible étale `C`-scheme `W`, a function on `W ×_C U` is determined by its image in
+the local generic ring at a point `y` of codimension one: its basic open, if nonempty, contains
+the generic point of `W ×_C U`, which is the image of the generic fibre of `Spec 𝒪_{W,y}`. -/
+lemma injective_toLocalGenericRing_appTop (W : C.Etale) [PreirreducibleSpace W.left]
+    {y : W.left} (hy : coheight (W.hom y) = 1) :
+    Function.Injective (fun a : Γ(pullback W.hom j, ⊤) ↦ Scheme.Etale.toLocalGenericRing W y
+      ((pullback.map W.hom C.fromSpecFunctionField W.hom j (𝟙 _) iU (𝟙 _) (by simp)
+        (by simp [hiU])).appTop a)) := by
+  let X := pullback W.hom j
+  let P := pullback (W.left.fromSpecStalk y ≫ W.hom) C.fromSpecFunctionField
+  let m : P ⟶ X := pullback.map _ _ _ _ (W.left.fromSpecStalk y) (𝟙 _) (𝟙 _) (by simp)
+    (by simp) ≫ pullback.map W.hom C.fromSpecFunctionField W.hom j (𝟙 _) iU (𝟙 _) (by simp)
+      (by simp [hiU])
+  have hm : (fun a : Γ(pullback W.hom j, ⊤) ↦ Scheme.Etale.toLocalGenericRing W y
+      ((pullback.map W.hom C.fromSpecFunctionField W.hom j (𝟙 _) iU (𝟙 _) (by simp)
+        (by simp [hiU])).appTop a)) = m.appTop.hom := by
+    funext a
+    simp only [m, Scheme.Hom.comp_appTop]
+    rfl
+  rw [hm]
+  refine (injective_iff_map_eq_zero _).2 fun a ha ↦ ?_
+  by_contra hne
+  -- `P` is nonempty, its local generic ring being a field
+  have : IsDiscreteValuationRing (W.left.presheaf.stalk y) :=
+    Scheme.Etale.isDiscreteValuationRing_stalk W hy
+  let := (Scheme.Etale.stalkToLocalGenericRing W y).hom.toAlgebra
+  have := Scheme.Etale.isFractionRing_localGenericRing W hy
+  have hP : Nonempty P := by
+    by_contra hP
+    rw [not_nonempty_iff] at hP
+    have : Nontrivial (Scheme.Etale.localGenericRing W y) :=
+      (IsLocalization.algEquiv (nonZeroDivisors (W.left.presheaf.stalk y))
+        (Scheme.Etale.localGenericRing W y)
+        (FractionRing (W.left.presheaf.stalk y))).toEquiv.nontrivial
+    have hs : Subsingleton Γ(P, ⊤) := inferInstance
+    exact @not_subsingleton (Scheme.Etale.localGenericRing W y) _ hs
+  obtain ⟨t₀⟩ := hP
+  -- `X` is reduced and irreducible
+  have hst : ∀ x : W.left, _root_.IsReduced (W.left.presheaf.stalk x) := fun _ ↦ inferInstance
+  have : IsReduced ((𝟭 Scheme).obj W.left) :=
+    @isReduced_of_isReduced_stalk ((𝟭 Scheme).obj W.left) hst
+  have : IsReduced X := isReduced_of_isOpenImmersion (pullback.fst W.hom j)
+  have : PreirreducibleSpace ((𝟭 Scheme).obj W.left) := ‹PreirreducibleSpace W.left›
+  have : PreirreducibleSpace X :=
+    (pullback.fst W.hom j).isOpenEmbedding.preirreducibleSpace
+  have : IrreducibleSpace X := ⟨⟨m t₀⟩⟩
+  -- `m t₀` is a maximal point of `X`
+  let h : X ⟶ C := pullback.fst W.hom j ≫ W.hom
+  have hgen (z : X) (hz : h z ⤳ genericPoint C) : h z = genericPoint C :=
+    (hz.antisymm ((genericPoint_spec C).specializes (Set.mem_univ _))).eq
+  have hmt : h (m t₀) ⤳ genericPoint C := by
+    have : h (m t₀) = C.fromSpecFunctionField
+        (pullback.snd (W.left.fromSpecStalk y ≫ W.hom) C.fromSpecFunctionField t₀) := by
+      change (m ≫ h) t₀ = _
+      have e : m ≫ h = pullback.snd (W.left.fromSpecStalk y ≫ W.hom) C.fromSpecFunctionField ≫
+          C.fromSpecFunctionField := by
+        rw [← pullback.condition]
+        simp [m, h]
+      rw [e]
+      rfl
+    rw [this]
+    have := Set.mem_range_self (f := C.fromSpecStalk (genericPoint C))
+      (pullback.snd (W.left.fromSpecStalk y ≫ W.hom) C.fromSpecFunctionField t₀)
+    rwa [Scheme.range_fromSpecStalk] at this
+  have hmax : ∀ z : X, z ⤳ m t₀ → z = m t₀ := fun z hz ↦
+    h.eq_of_specializes_of_apply_eq hz
+      ((hgen z ((hz.map h.continuous).trans hmt)).trans (hgen _ hmt).symm)
+  -- the basic open of `a` contains the generic point, hence `m t₀`
+  have hne' : X.basicOpen a ≠ ⊥ := fun h' ↦ hne ((basicOpen_eq_bot_iff a).1 h')
+  have hξ : genericPoint X ∈ X.basicOpen a :=
+    ((genericPoint_spec X).mem_open_set_iff (X.basicOpen a).2).2 (by
+      obtain ⟨w, hw⟩ : (X.basicOpen a : Set X).Nonempty :=
+        Set.nonempty_iff_ne_empty.2 fun h' ↦ hne'
+          (TopologicalSpace.Opens.ext (h'.trans TopologicalSpace.Opens.coe_bot.symm))
+      exact ⟨w, Set.mem_univ _, hw⟩)
+  have hz : m t₀ ∈ X.basicOpen a := by
+    have hspec : m t₀ ⤳ genericPoint X := by
+      rw [hmax (genericPoint X) ((genericPoint_spec X).specializes (Set.mem_univ _))]
+    exact hspec.mem_open (X.basicOpen a).2 hξ
+  have : t₀ ∈ m ⁻¹ᵁ X.basicOpen a := hz
+  rw [Scheme.preimage_basicOpen_top] at this
+  change t₀ ∈ P.basicOpen (m.appTop.hom a) at this
+  have h0 : t₀ ∈ P.basicOpen (0 : Γ(P, ⊤)) := ha ▸ this
+  simp at h0
+
+
 /-- **Units of order zero at the punctures extend.** Let `C` be an integral regular noetherian
 scheme of dimension one, `S` a finite set of closed points, `j : U ⟶ C` the open immersion of
 the complement of `S`, and `V` an étale `C`-scheme. A unit `f` on `V ×_C U` whose order at the
 points of `V` over `S` vanishes extends, near every point of `V`, to a unit of `𝒪_V`: at a point
 over `S` the local ring is a discrete valuation ring and `f` is a unit of it
-(`Ring.exists_eq_algebraMap_of_ordOf_eq_zero`). The proof is `sorry`.
+(`Ring.exists_eq_algebraMap_of_ordOf_eq_zero`); its extension agrees with `f` on the punctured
+neighbourhood by `AlgebraicGeometry.IsCurve.injective_toLocalGenericRing_appTop`.
 (blueprint: `lem-sc-divisor-exact-sequence`, exactness in the middle) -/
 lemma exists_eq_of_ord_eq_zero (hC : topologicalKrullDim C = 1) {S : Set C} (hS : S.Finite)
     (hSc : ∀ P ∈ S, IsClosed {P}) (hj : Set.range j = Sᶜ) (V : C.Etale) (y : V.left)
@@ -246,7 +391,136 @@ lemma exists_eq_of_ord_eq_zero (hC : topologicalKrullDim C = 1) {S : Set C} (hS 
       (pullback.fst (Scheme.Etale.ofOpens V W).hom j).appTop u.val =
         ((MorphismProperty.Over.pullback @Etale ⊤ j).map
           (Scheme.Etale.ofOpensι V W)).left.appTop f.val := by
-  sorry
+  have hSclosed (T : Set C) (hT : T ⊆ S) : IsClosed T := by
+    rw [← Set.biUnion_of_singleton T]
+    exact (hS.subset hT).isClosed_biUnion fun P hP ↦ hSc P (hT hP)
+  by_cases hyS : V.hom y ∈ S
+  swap
+  · -- away from the punctures `V ×_C U ⟶ V` is an isomorphism
+    let W : V.left.Opens :=
+      ⟨V.hom ⁻¹' Sᶜ, ((hSclosed S le_rfl).preimage V.hom.continuous).isOpen_compl⟩
+    let W' := Scheme.Etale.ofOpens V W
+    have : IsIso (pullback.fst W'.hom j) := by
+      rw [isIso_iff_isOpenImmersion_and_surjective]
+      refine ⟨inferInstance, ⟨fun w ↦ ?_⟩⟩
+      have hw : W'.hom w ∈ Set.range j := by rw [hj]; exact w.2
+      exact (Set.ext_iff.1 (Scheme.Pullback.range_fst W'.hom j) w).2 hw
+    let res : Γ(pullback V.hom j, ⊤) →+* Γ(pullback W'.hom j, ⊤) :=
+      ((MorphismProperty.Over.pullback @Etale ⊤ j).map (Scheme.Etale.ofOpensι V W)).left.appTop.hom
+    let inv' : Γ(pullback W'.hom j, ⊤) →+* Γ(W'.left, ⊤) :=
+      (inv (pullback.fst W'.hom j)).appTop.hom
+    refine ⟨W, hyS, Units.map inv'.toMonoidHom (Units.map res.toMonoidHom f), ?_⟩
+    change ((inv (pullback.fst W'.hom j)).appTop ≫ (pullback.fst W'.hom j).appTop) _ = _
+    rw [← Scheme.Hom.comp_appTop, IsIso.hom_inv_id, Scheme.Hom.id_appTop]
+    rfl
+  -- at a puncture, `f` is a unit of the discrete valuation ring `𝒪_{V,y}`
+  have hcoh : coheight (V.hom y) = 1 := coheight_eq_one_of_mem hC hSc hyS
+  have : IsDiscreteValuationRing (V.left.presheaf.stalk y) :=
+    Scheme.Etale.isDiscreteValuationRing_stalk V hcoh
+  let := (Scheme.Etale.stalkToLocalGenericRing V y).hom.toAlgebra
+  have := Scheme.Etale.isFractionRing_localGenericRing V hcoh
+  let genV : Γ(pullback V.hom j, ⊤) ⟶ Γ(pullback V.hom C.fromSpecFunctionField, ⊤) :=
+    (pullback.map V.hom C.fromSpecFunctionField V.hom j (𝟙 _) iU (𝟙 _) (by simp)
+      (by simp [hiU])).appTop
+  have hf₀ := hf y hyS
+  rw [Scheme.Etale.ord, if_pos hcoh] at hf₀
+  obtain ⟨r, hr⟩ := Ring.exists_eq_algebraMap_of_ordOf_eq_zero
+    (Units.map ((Scheme.Etale.toLocalGenericRing V y).hom.comp genV.hom).toMonoidHom f) hf₀
+  -- spread `r` to a unit on an irreducible neighbourhood avoiding the other punctures
+  let g : V.left ⟶ C := V.hom
+  have : IsLocallyNoetherian V.left := LocallyOfFiniteType.isLocallyNoetherian g
+  obtain ⟨U₁, hyU₁, s₁, hs₁⟩ := TopCat.Presheaf.exists_germ_eq V.left.presheaf (x := y) r.val
+  have hyD : y ∈ V.left.basicOpen s₁ := (V.left.mem_basicOpen s₁ y hyU₁).2 (hs₁ ▸ r.isUnit)
+  obtain ⟨W₁, hyW₁, hW₁⟩ := Scheme.exists_opens_isPreirreducible y
+  let T : V.left.Opens := ⟨(V.hom ⁻¹' (S \ {V.hom y}))ᶜ,
+    ((hSclosed _ Set.sdiff_subset).preimage V.hom.continuous).isOpen_compl⟩
+  let W : V.left.Opens := W₁ ⊓ V.left.basicOpen s₁ ⊓ T
+  have hyW : y ∈ W := ⟨⟨hyW₁, hyD⟩, fun h ↦ h.2 rfl⟩
+  let W' := Scheme.Etale.ofOpens V W
+  have hWirr : IsPreirreducible (W : Set V.left) :=
+    hW₁.open_subset W.2 fun _ hw ↦ hw.1.1
+  have : PreirreducibleSpace W'.left := Subtype.preirreducibleSpace hWirr
+  let y₀ : W'.left := ⟨y, hyW⟩
+  -- the unit `s₁` on `W`
+  have hWD : W ≤ V.left.basicOpen s₁ := fun _ hw ↦ hw.1.2
+  have hDU : V.left.basicOpen s₁ ≤ U₁ := V.left.basicOpen_le s₁
+  let t : Γ(W'.left, ⊤) := W.topIso.inv (V.left.presheaf.map (homOfLE (hWD.trans hDU)).op s₁)
+  have ht : IsUnit t := by
+    have h₁ := V.left.toRingedSpace.isUnit_res_basicOpen s₁
+    have h₂ := (h₁.map (V.left.presheaf.map (homOfLE hWD).op).hom).map W.topIso.inv.hom
+    have key : ∀ {A B D : V.left.Opens} (f₁ : B ⟶ A) (f₂ : D ⟶ B) (f₃ : D ⟶ A)
+        (b : Γ(V.left, A)), V.left.presheaf.map f₂.op (V.left.presheaf.map f₁.op b) =
+          V.left.presheaf.map f₃.op b := by
+      intro A B D f₁ f₂ f₃ b
+      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp,
+        Subsingleton.elim (f₂ ≫ f₁) f₃]
+    have e : t = W.topIso.inv.hom ((V.left.presheaf.map (homOfLE hWD).op).hom
+        ((V.left.presheaf.map (homOfLE hDU).op).hom s₁)) :=
+      congrArg W.topIso.inv.hom (key _ _ _ s₁).symm
+    rw [e]
+    exact h₂
+  refine ⟨W, hyW, ht.unit, ?_⟩
+  refine injective_toLocalGenericRing_appTop j iU hiU W' (y := y₀) hcoh ?_
+  simp only [IsUnit.unit_spec]
+  let φ : W' ⟶ V := Scheme.Etale.ofOpensι V W
+  -- both sides are the image of `r` in the local generic ring of `W` at `y`
+  have hgerm : W'.left.presheaf.germ ⊤ y₀ trivial t = W.ι.stalkMap y₀ r.val := by
+    have h₁ := congrArg (fun ψ ↦ ψ.hom t) (Scheme.Opens.germ_stalkIso_inv W ⊤ y₀ trivial)
+    have h₂ : V.left.presheaf.germ (W.ι ''ᵁ ⊤) y ⟨y₀, trivial, rfl⟩ t = r.val := by
+      simp only [t, Scheme.Opens.topIso_inv]
+      exact (V.left.presheaf.germ_res_apply _ _ _ _).trans
+        ((V.left.presheaf.germ_res_apply _ _ _ _).trans hs₁)
+    refine h₁.symm.trans ?_
+    change (W.stalkIso y₀).inv.hom (V.left.presheaf.germ (W.ι ''ᵁ ⊤) y _ t) = _
+    rw [h₂, Scheme.Opens.stalkIso_inv]
+    rfl
+  have hL : Scheme.Etale.toLocalGenericRing W' y₀
+      ((pullback.map W'.hom C.fromSpecFunctionField W'.hom j (𝟙 _) iU (𝟙 _) (by simp)
+        (by simp [hiU])).appTop ((pullback.fst W'.hom j).appTop t)) =
+      Scheme.Etale.stalkToLocalGenericRing W' y₀ (W.ι.stalkMap y₀ r.val) := by
+    have hgen : (pullback.map W'.hom C.fromSpecFunctionField W'.hom j (𝟙 _) iU (𝟙 _) (by simp)
+        (by simp [hiU])).appTop ((pullback.fst W'.hom j).appTop t) =
+        (pullback.fst W'.hom C.fromSpecFunctionField).appTop t := by
+      change ((pullback.fst W'.hom j).appTop ≫ (pullback.map W'.hom C.fromSpecFunctionField
+        W'.hom j (𝟙 _) iU (𝟙 _) (by simp) (by simp [hiU])).appTop) t = _
+      rw [← Scheme.Hom.comp_appTop, pullback.lift_fst, Category.comp_id]
+    rw [hgen, Scheme.Etale.toLocalGenericRing_fst_appTop, hgerm]
+  have hR : Scheme.Etale.toLocalGenericRing W' y₀
+      ((pullback.map W'.hom C.fromSpecFunctionField W'.hom j (𝟙 _) iU (𝟙 _) (by simp)
+        (by simp [hiU])).appTop (((MorphismProperty.Over.pullback @Etale ⊤ j).map
+          (Scheme.Etale.ofOpensι V W)).left.appTop f.val)) =
+      Scheme.Etale.stalkToLocalGenericRing W' y₀ (W.ι.stalkMap y₀ r.val) := by
+    have e : pullback.map W'.hom C.fromSpecFunctionField W'.hom j (𝟙 _) iU (𝟙 _) (by simp)
+        (by simp [hiU]) ≫ ((MorphismProperty.Over.pullback @Etale ⊤ j).map φ).left =
+        ((MorphismProperty.Over.pullback @Etale ⊤ C.fromSpecFunctionField).map φ).left ≫
+          pullback.map V.hom C.fromSpecFunctionField V.hom j (𝟙 _) iU (𝟙 _) (by simp)
+            (by simp [hiU]) := by
+      rw [show ((MorphismProperty.Over.pullback @Etale ⊤ j).map φ).left =
+          pullback.map _ _ _ _ φ.left (𝟙 _) (𝟙 _) (by simp) (by simp) from rfl,
+        show ((MorphismProperty.Over.pullback @Etale ⊤ C.fromSpecFunctionField).map φ).left =
+          pullback.map _ _ _ _ φ.left (𝟙 _) (𝟙 _) (by simp) (by simp) from rfl,
+        pullback.map_comp, pullback.map_comp]
+      congr 1
+    have h₁ : (pullback.map W'.hom C.fromSpecFunctionField W'.hom j (𝟙 _) iU (𝟙 _) (by simp)
+        (by simp [hiU])).appTop (((MorphismProperty.Over.pullback @Etale ⊤ j).map
+          φ).left.appTop f.val) =
+        ((MorphismProperty.Over.pullback @Etale ⊤ C.fromSpecFunctionField).map
+          φ).left.appTop (genV f.val) := by
+      exact congrArg (fun m ↦ (Scheme.Hom.appTop m).hom f.val) e
+    have h₂ := congrArg (fun ψ ↦ ψ.hom (genV f.val))
+      (Scheme.Etale.toLocalGenericRing_comp_localGenericRingMap φ y₀)
+    have h₃ : Scheme.Etale.toLocalGenericRing V y (genV f.val) =
+        Scheme.Etale.stalkToLocalGenericRing V y r.val := hr.symm
+    have h₄ := congrArg (fun ψ ↦ ψ.hom r.val)
+      (Scheme.Etale.stalkToLocalGenericRing_comp_localGenericRingMap φ y₀)
+    rw [h₁]
+    refine h₂.symm.trans ?_
+    change Scheme.Etale.localGenericRingMap φ y₀
+      (Scheme.Etale.toLocalGenericRing V y (genV f.val)) = _
+    rw [h₃]
+    exact h₄
+  exact hL.trans hR.symm
+
 
 omit [IsOpenImmersion j] in
 open Classical in
