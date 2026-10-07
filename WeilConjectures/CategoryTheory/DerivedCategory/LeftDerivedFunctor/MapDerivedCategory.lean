@@ -126,6 +126,11 @@ noncomputable def singleFunctorCompLeftDerivedFunctorIso :
       F.leftDerivedFunctorIsoMapDerivedCategory ≪≫
     F.mapDerivedCategorySingleFunctor 0
 
+/-- The total left derived functor of an additive equivalence of abelian categories is an
+equivalence of derived categories: it is isomorphic to `F.mapDerivedCategory`. -/
+instance isEquivalence_leftDerivedFunctor [F.IsEquivalence] : F.leftDerivedFunctor.IsEquivalence :=
+  isEquivalence_of_iso F.leftDerivedFunctorIsoMapDerivedCategory.symm
+
 end Compatibility
 
 section Composition
