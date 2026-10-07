@@ -6,12 +6,14 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.SpectralObject.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.ExactSequence
 
 /-!
-# Evaluation functors for spectral objects
+# Evaluation functors and exact functors on spectral objects
 
-We record the evaluation functors `SpectralObject.hFunctor n D : SpectralObject C ι ⥤ C`
-and a criterion for the map `Hⁿ(f) ⟶ Hⁿ(f ≫ g)` to be an isomorphism.
+We record the evaluation functors `SpectralObject.hFunctor n D : SpectralObject C ι ⥤ C`,
+a criterion for the map `Hⁿ(f) ⟶ Hⁿ(f ≫ g)` to be an isomorphism, and the functor
+`Functor.mapSpectralObject` induced on spectral objects by an exact functor.
 
 -/
 
@@ -43,6 +45,38 @@ lemma isIso_H_map_twoδ₂Toδ₁ (X : SpectralObject C ι)
     (X.exact₂ f g fg hfg n₁).epi_f (h₁.eq_of_tgt _ _)
   exact isIso_of_mono_of_epi _
 
+variable {C' : Type*} [Category* C'] [Abelian C']
+
+/-- The image of a spectral object under an exact functor `F`: its functors are `H n ⋙ F` and
+its connecting homomorphisms are the images under `F` of those of `X`. -/
+@[simps]
+def mapExact (X : SpectralObject C ι) (F : C ⥤ C') [F.Additive] [PreservesFiniteLimits F]
+    [PreservesFiniteColimits F] : SpectralObject C' ι where
+  H n := X.H n ⋙ F
+  δ' n₀ n₁ h := Functor.whiskerRight (X.δ' n₀ n₁ h) F
+  exact₁' n₀ n₁ h D := (X.exact₁' n₀ n₁ h D).map_mk₂ F
+  exact₂' n D := (X.exact₂' n D).map_mk₂ F
+  exact₃' n₀ n₁ h D := (X.exact₃' n₀ n₁ h D).map_mk₂ F
+
 end Abelian.SpectralObject
+
+namespace Functor
+
+variable {C C' : Type*} [Category* C] [Abelian C] [Category* C'] [Abelian C']
+
+/-- The functor on spectral objects induced by an exact functor `F : C ⥤ C'`. -/
+@[simps]
+def mapSpectralObject (F : C ⥤ C') [F.Additive] [PreservesFiniteLimits F]
+    [PreservesFiniteColimits F] (ι : Type*) [Category* ι] :
+    Abelian.SpectralObject C ι ⥤ Abelian.SpectralObject C' ι where
+  obj X := X.mapExact F
+  map {X Y} φ :=
+    { hom n := Functor.whiskerRight (φ.hom n) F
+      comm n₀ n₁ h _ _ _ f g := by
+        change F.map (X.δ f g n₀ n₁ h) ≫ F.map ((φ.hom n₁).app (mk₁ f)) =
+          F.map ((φ.hom n₀).app (mk₁ g)) ≫ F.map (Y.δ f g n₀ n₁ h)
+        rw [← F.map_comp, ← F.map_comp, φ.comm] }
+
+end Functor
 
 end CategoryTheory
