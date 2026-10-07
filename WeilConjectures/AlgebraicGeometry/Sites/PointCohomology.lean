@@ -155,8 +155,8 @@ finite set of points of `Spec (L ⊗_K L)`, since every étale `K`-scheme is dis
 that the finite set of values of `c` is closed under addition, so `c = 0`: this is the
 vanishing of `Hom(Gal(L/K), ℤ)` for the finite Galois group, without naming the group. Hence `e`
 descends to `Spec K` (`AlgebraicGeometry.Scheme.exists_app_eq_of_compatible`). -/
-theorem surjective_app_of_shortExact_constantSheaf_int {E Q : Sheaf (Spec (.of K)).smallEtaleTopology
-    AddCommGrpCat.{u + 1}}
+theorem surjective_app_of_shortExact_constantSheaf_int
+    {E Q : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}}
     (ι : (constantSheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of (ULift ℤ)) ⟶ E) (π : E ⟶ Q) (w : ι ≫ π = 0)
     (hS : (ShortComplex.mk ι π w).ShortExact) : Function.Surjective (π.hom.app (op 𝟙ₖ)) := by
@@ -176,7 +176,8 @@ theorem surjective_app_of_shortExact_constantSheaf_int {E Q : Sheaf (Spec (.of K
   have := hS'.epi_g
   have (U : (Spec (.of K)).Etaleᵒᵖ) : Limits.PreservesLimits
       ((sheafSections (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj U) :=
-    inferInstanceAs (Limits.PreservesLimits (sheafToPresheaf _ _ ⋙ (CategoryTheory.evaluation _ _).obj U))
+    inferInstanceAs
+      (Limits.PreservesLimits (sheafToPresheaf _ _ ⋙ (CategoryTheory.evaluation _ _).obj U))
   have hι (U) : Function.Injective (ι'.hom.app U) :=
     (AddCommGrpCat.mono_iff_injective _).1
       (((sheafSections (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj U).map_mono ι')

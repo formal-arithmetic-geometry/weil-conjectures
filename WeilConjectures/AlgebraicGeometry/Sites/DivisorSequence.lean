@@ -667,7 +667,7 @@ theorem injective_cohomologyMap_gmSheaf_two [IsNoetherian X] [IsRegular X] :
     (colimit.isColimit _)
   -- Step 2: the unit `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is injective on `H²`, as `H¹(X, ⨁_x i_{x*} ℤ) = 0`
   have h₃ : Subsingleton (Sheaf.H (colimit.cocone (Discrete.functor P)).pt 1) :=
-    subsingleton_H_of_isColimit_cofan X (colimit.isColimit _) 1
+    subsingleton_H_one_of_isColimit_cofan X (colimit.isColimit _)
       fun x ↦ X.subsingleton_H_one_pointConstantInt x.1
   have hα : Function.Injective (Sheaf.H.map X.toGenericGm 2) := by
     rw [injective_iff_map_eq_zero]
