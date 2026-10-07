@@ -32,14 +32,23 @@ For `k` separably closed we do not go through Galois cohomology: every étale co
 `Spec k` has a section, so the global sections functor is exact and the constant sheaf `ℤ`,
 which corepresents it, is a projective sheaf.
 
+In degree `1` and for an arbitrary field `K` we do not go through Galois cohomology either: a
+`ℤ`-torsor is trivialised over `Spec L` for a finite separable extension `L` of `K`, and the
+descent datum is a function on the finite set of points of `Spec (L ⊗_K L)` whose set of values
+is closed under addition, hence zero.
+
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.surjective_app_of_epi_of_isSepClosed`: for `k` separably closed,
   an epimorphism of abelian étale sheaves on `Spec k` is surjective on global sections.
 - `AlgebraicGeometry.Scheme.subsingleton_H_constantSheaf_of_isSepClosed`:
   `H^q(Spec k_ét, ℤ) = 0` for `q ≥ 1` and `k` separably closed.
-- `AlgebraicGeometry.Scheme.subsingleton_H_one_constantSheaf_of_isField`:
-  `H¹(Spec K_ét, ℤ) = 0` for every field `K`. The proof is `sorry`.
+- `AlgebraicGeometry.Scheme.surjective_app_of_shortExact_constantSheaf_int`: every `ℤ`-torsor
+  on `Spec K` is trivial, in the form: for `0 → ℤ → E → Q → 0` exact, `Γ(E) → Γ(Q)` is
+  surjective.
+- `AlgebraicGeometry.Scheme.subsingleton_H_one_constantSheaf_of_field` and
+  `AlgebraicGeometry.Scheme.subsingleton_H_one_constantSheaf_of_isField`:
+  `H¹(Spec K_ét, ℤ) = 0` for every field `K`.
 
 ## Blueprint references
 

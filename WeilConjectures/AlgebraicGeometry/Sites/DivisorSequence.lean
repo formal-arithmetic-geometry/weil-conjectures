@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.DivisorMap
 public import WeilConjectures.AlgebraicGeometry.Sites.StalkwiseCokernel
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Colimits
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
+public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90Etale
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
@@ -61,7 +62,7 @@ whose target is `H²(Spec k(X)_ét, 𝔾ₘ) = Br(k(X))` by
   exact, from the two previous statements.
 - `AlgebraicGeometry.Scheme.subsingleton_H_one_pointConstantInt`: `H¹(X, i_{x*} ℤ) = 0`.
 - `AlgebraicGeometry.Scheme.epi_lowerStar_map_cokernelπ_upperStar_gmSheaf`: `R¹i_* 𝔾ₘ = 0`
-  along the generic point. The proof is `sorry`.
+  along the generic point.
 - `AlgebraicGeometry.Scheme.injective_cohomologyMap_gmSheaf_two`: the map
   `Br(X) = H²(X, 𝔾ₘ) → H²(Spec k(X), 𝔾ₘ) = Br(k(X))` along the generic point is injective.
 
@@ -622,18 +623,55 @@ an injective sheaf, `i_*` maps the cokernel map of `ι` to an epimorphism (so th
 `0 ⟶ i_* i^* 𝔾ₘ ⟶ i_* I ⟶ i_* (I / i^* 𝔾ₘ) ⟶ 0` is exact and `R¹i_*(i^* 𝔾ₘ)`, its obstruction,
 is zero).
 
-The stalk of `R¹i_* 𝔾_{m,η}` at a geometric point `x̄` over `x` is `H¹(Spec S⁻¹A, 𝔾ₘ)` for the
-strict henselisation `A = 𝒪^{sh}_{X,x̄}` and `S = 𝒪_{X,x} ∖ {0}`, which by Hilbert 90 is
-`Pic(S⁻¹A)`; this vanishes since `A` is a noetherian regular local ring, hence a UFD, and so is
-its localization `S⁻¹A`. The proof is `sorry`: it needs stalks of higher direct images, Hilbert
-90 for `H¹(-, 𝔾ₘ) = Pic`, and regularity of strict henselisations, none of which is available.
+The blueprint computes the stalk of `R¹i_* 𝔾_{m,η}` at a geometric point as `Pic(S⁻¹A)` for a
+strict henselisation `A` and shows that it vanishes since `S⁻¹A` is a UFD. We argue on sections
+instead: a section of `i_* (I / 𝔾ₘ)` over an affine étale `X`-scheme `V` is a section of
+`I / 𝔾ₘ` over the generic fibre `V ×_X Spec k(X)`, which is an étale `k(X)`-scheme with
+quasi-compact underlying space, and it lifts to `I` by Hilbert 90 over such schemes
+(`AlgebraicGeometry.Scheme.surjective_app_of_shortExact_gmSheaf_of_compactSpace`). As the affine
+opens cover every étale `X`-scheme, `i_*` of the cokernel map is locally surjective. Only the
+quasi-separatedness of `X` is used.
 This is Step 3 of the proof of `lem-sc-brauer-injectivity`. -/
 theorem epi_lowerStar_map_cokernelπ_upperStar_gmSheaf [IsNoetherian X] [IsRegular X]
     {I : Sheaf (Spec X.functionField).smallEtaleTopology AddCommGrpCat.{u + 1}}
     (ι : (Etale.upperStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).obj X.gmSheaf ⟶ I)
     [Mono ι] [Injective I] :
-    Epi ((Etale.lowerStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).map (cokernel.π ι)) :=
-  sorry
+    Epi ((Etale.lowerStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).map (cokernel.π ι)) := by
+  have := X.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField
+  let g := upperStarGmSheafToGmSheaf X.fromSpecFunctionField
+  -- the sequence `0 → 𝔾ₘ → I → I / 𝔾ₘ → 0` on the small étale site of `Spec k(X)`
+  let ι' := inv g ≫ ι
+  have w : ι' ≫ cokernel.π ι = 0 := by simp [ι']
+  have hS : (ShortComplex.mk ι' (cokernel.π ι) w).ShortExact :=
+    ShortComplex.shortExact_of_iso (S₁ := ShortComplex.mk ι (cokernel.π ι) (cokernel.condition ι))
+      (ShortComplex.isoMk (asIso g) (Iso.refl _) (Iso.refl _) (by simp [ι']) (by simp))
+      (ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel ι) inferInstance inferInstance)
+  have : QuasiCompact X.fromSpecFunctionField := quasiCompact_of_compactSpace _
+  refine (Sheaf.isLocallySurjective_iff_epi' (A := AddCommGrpCat.{u + 1})
+    ((Etale.lowerStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).map (cokernel.π ι))).1
+    ⟨fun {U} s ↦ X.smallEtaleTopology.superset_covering ?_
+    ((ofArrows_mem_smallEtaleTopology_iff
+      (fun V : U.left.affineOpens ↦ Etale.ofOpensι U V.1)).2 ?_)⟩
+  · -- over an affine open `V` of `U`, the section lifts by Hilbert 90 on the generic fibre
+    refine (Sieve.generate_le_iff _ _).2 fun _ _ ⟨V⟩ ↦ ?_
+    have : CompactSpace (Etale.ofOpens U V.1).left := by
+      have : IsAffine V.1.toScheme := V.2
+      exact inferInstanceAs (CompactSpace V.1.toScheme)
+    have : CompactSpace ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤
+        X.fromSpecFunctionField).obj (Etale.ofOpens U V.1)).left :=
+      @QuasiCompact.compactSpace_of_compactSpace _ _
+        (Limits.pullback.fst (Etale.ofOpens U V.1).hom X.fromSpecFunctionField) inferInstance this
+    exact surjective_app_of_shortExact_gmSheaf_of_compactSpace ι' (cokernel.π ι) w hS
+      ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ X.fromSpecFunctionField).obj
+        (Etale.ofOpens U V.1)) _
+  · -- the affine opens cover `U`
+    refine Set.eq_univ_of_forall fun x ↦ ?_
+    obtain ⟨V, hV, hxV, -⟩ := TopologicalSpace.Opens.isBasis_iff_nbhd.1
+      (isBasis_affineOpens U.left) (show x ∈ (⊤ : U.left.Opens) from trivial)
+    refine Set.mem_iUnion.2 ⟨⟨V, hV⟩, ?_⟩
+    change x ∈ Set.range (Scheme.Opens.ι (X := U.left) V)
+    rw [Scheme.Opens.range_ι]
+    exact hxV
 
 /-- **Grothendieck's residue injection for the Brauer group.** Let `X` be an integral regular
 noetherian scheme with function field `k(X)`. Then the pullback along the generic point
@@ -655,7 +693,7 @@ The map factors as `H²(X, 𝔾ₘ) ⟶ H²(X, i_* i^* 𝔾ₘ) ⟶ H²(Spec k(X
 `i^* ⊣ i_*` followed by the edge map of the Leray spectral sequence of `i`. The first map is
 injective by the long exact cohomology sequence of the divisor sequence, since
 `H¹(X, ⨁_x i_{x*} ℤ) = 0`; the second is injective since `R¹i_*(i^* 𝔾ₘ) = 0`.
-(blueprint: `lem-sc-brauer-injectivity`) -/
+(blueprint: `lem-sc-brauer-injectivity`, and the subsection statement `sk-prop-br-inj`) -/
 theorem injective_cohomologyMap_gmSheaf_two [IsNoetherian X] [IsRegular X] :
     Function.Injective (Etale.cohomologyMap X.fromSpecFunctionField X.gmSheaf 2) := by
   have : HasColimitsOfSize.{u + 1, u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
