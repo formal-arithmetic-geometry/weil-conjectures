@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.LowerShriek
@@ -23,19 +24,22 @@ importing them, the files that phrase that vocabulary, so that the blocks that s
 one copy.
 
 `AlgebraicGeometry.WeilSheaf` and `AlgebraicGeometry.WeilComplex` are defined in
-`WeilConjectures.WeilSheaf.Category`: constructible étale `ℚ̄_ℓ`-sheaves, resp. objects of
-`D(X̄_ét)` with bounded constructible homology, on the geometric fiber `X̄ = X ×_{k₀} k̄`, with
-an isomorphism `Fr_X^* F ≅ F` for the geometric Galois Frobenius `Fr_X`. With the present
-discrete coefficients every Weil sheaf and every Weil complex is zero, and `WeilComplex` is not
-triangulated; see the implementation notes of `WeilConjectures.WeilSheaf.Category`. The
-geometric stalks with their local Frobenius, the trace function and the global sections are
-constructed in `WeilConjectures.WeilSheaf.Stalk`. The notions built on them in
+`WeilConjectures.WeilSheaf.Category`, following the blueprint (`def-weil-weil-sheaf-complex`):
+a Weil sheaf is a constructible `ℓ`-adic sheaf of `ℚ̄_ℓ`-modules on the small pro-étale site of
+the geometric fiber `X̄ = X ×_{k₀} k̄` (`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf`,
+built on the constant sheaf `ℚ̄_ℓ,X̄` of continuous `ℓ`-adic functions) with an isomorphism
+`Fr_X^* F ≅ F` for the geometric Galois Frobenius `Fr_X`; Weil complexes are the bounded
+objects with constructible cohomology of the derived category of pro-étale Weil sheaves, a
+triangulated category. The constant Weil sheaf `ℚ̄_ℓ` (`WeilConjectures.WeilSheaf.Constant`) is
+nonzero on every nonempty scheme. The geometric stalks with their local Frobenius, the trace
+function and the global sections are constructed in `WeilConjectures.WeilSheaf.Stalk`; the six
+operations are built from the pro-étale ones in `WeilConjectures.WeilSheaf.LowerStar`,
 `WeilConjectures.WeilSheaf.OpenImmersion`, `WeilConjectures.WeilSheaf.LowerShriek`,
-`WeilConjectures.WeilSheaf.Dual` and `WeilConjectures.WeilSheaf.Fourier` are still placeholders
-with `sorry` bodies, each carrying a `TODO(unify)` comment naming the blueprint node that owns
-it; nothing is proved about them.
+`WeilConjectures.WeilSheaf.Dual` and `WeilConjectures.WeilSheaf.Fourier`. Finiteness and
+compatibility statements that these constructions need, and that are not yet proved, are stated
+as separate lemmas with `sorry`.
 
-What is *not* provisional is the weight formalism they are phrased against:
+The weight formalism they are phrased against is honest as well:
 `FrobeniusModule` (`WeilConjectures.ZetaLinearAlgebra.FrobeniusModule`) is an honest
 finite-dimensional vector space with an automorphism, and purity and upper weight bounds are
 honest conditions on the eigenvalues of that automorphism under an embedding `ι : ℚ̄_ℓ →+* ℂ`.
@@ -56,8 +60,8 @@ instead, which `FrobeniusModule.IsPureOfWeightOver` names.
 ## Main declarations
 
 - `AlgebraicGeometry.WeilSheaf` and `AlgebraicGeometry.WeilComplex`: the abelian category of
-  constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme and the category of Weil complexes, both
-  provisional.
+  constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme and the triangulated category of Weil
+  complexes.
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight`,
   `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost` and `AlgebraicGeometry.WeilSheaf.IsReal`: the
   weight conditions and the reality condition.
