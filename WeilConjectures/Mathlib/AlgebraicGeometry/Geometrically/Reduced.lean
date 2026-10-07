@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 
 /-!
@@ -87,11 +88,22 @@ instance Smooth.geometricallyReduced {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f]
 
 /-- An étale morphism followed by a morphism with geometrically reduced fibres has
 geometrically reduced fibres: for a field `K` and `Spec K ⟶ Z`, the scheme `X ×_Z Spec K` is
-étale over the reduced scheme `Y ×_Z Spec K`, and a scheme étale over a reduced scheme is
-reduced. -/
+étale over the reduced scheme `Y ×_Z Spec K`, being its base change along `f`, and a scheme
+étale over a reduced scheme is reduced (`AlgebraicGeometry.isReduced_of_etale`). -/
 theorem GeometricallyReduced.comp_of_etale {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    [Etale f] [GeometricallyReduced g] : GeometricallyReduced (f ≫ g) :=
-  sorry
+    [Etale f] [GeometricallyReduced g] : GeometricallyReduced (f ≫ g) := by
+  rw [geometricallyReduced_iff, geometrically_iff_of_isClosedUnderIsomorphisms]
+  intro K _ y
+  have : IsReduced (Limits.pullback g y) :=
+    pullback_of_geometrically (GeometricallyReduced.geometrically_isReduced (f := g)) K y
+  let l : Limits.pullback (f ≫ g) y ⟶ Limits.pullback g y :=
+    Limits.pullback.lift (Limits.pullback.fst _ _ ≫ f) (Limits.pullback.snd _ _)
+      (by simp [Limits.pullback.condition])
+  have hl : IsPullback (Limits.pullback.fst (f ≫ g) y) l f (Limits.pullback.fst g y) :=
+    IsPullback.of_bot (by simpa [l] using IsPullback.of_hasPullback (f ≫ g) y)
+      (by simp [l]) (IsPullback.of_hasPullback g y)
+  have : Etale l := MorphismProperty.of_isPullback hl inferInstance
+  exact isReduced_of_etale l
 
 /-- Let `f : X ⟶ S` be flat, locally of finite presentation and with geometrically reduced
 fibres. Then there is an étale covering `p i : U i ⟶ X` of `X`, that is, a family of étale

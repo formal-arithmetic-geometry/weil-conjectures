@@ -18,6 +18,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-!
@@ -64,6 +65,9 @@ file lifts `adj` through the stages of the derived formalism:
   categories, using the identification of the left derived functor of the exact functor
   `f` with `f.mapDerivedCategory` and the compatibility of `g.rightDerivedFunctorPlus`
   with the unbounded right derived functor.
+* `Adjunction.derivedAdjunctionPlus_eq_derivedPlus`: the bounded below derived adjunction
+  agrees with `Adjunction.derivedPlus`, constructed directly on the bounded below derived
+  categories (`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction`).
 * `Adjunction.mapDerivedCategoryAdjunction` and
   `Adjunction.mapDerivedCategoryPlusAdjunction`: for `f` *and* `g` exact, the levelwise
   adjunctions `f.mapDerivedCategory ⊣ g.mapDerivedCategory` on the unbounded derived
@@ -269,6 +273,86 @@ noncomputable def Adjunction.mapDerivedCategoryPlusAdjunction {f : C ⥤ D} {g :
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     f.mapDerivedCategoryPlusCompatibility.symm
     g.mapDerivedCategoryPlusCompatibility.symm
+
+/-- The unit of the bounded below derived adjunction `Adjunction.derivedAdjunctionPlus` is
+computed on the image of a bounded below complex `K` by the unit of `adj` followed by the unit of
+the right derived functor, as for `Adjunction.derivedPlus` (`Adjunction.derivedPlus_unit_app_fac`).
+-/
+theorem Adjunction.derivedAdjunctionPlus_unit_app_fac {f : C ⥤ D} {g : D ⥤ C} (adj : f ⊣ g)
+    [f.Additive] [g.Additive] [PreservesFiniteLimits f] [PreservesFiniteColimits f]
+    [EnoughInjectives D] (K : HomotopyCategory.Plus C) :
+    adj.derivedAdjunctionPlus.unit.app (DerivedCategory.Plus.Qh.obj K) ≫
+        g.rightDerivedFunctorPlus.map (f.mapDerivedCategoryPlusFactorsh.hom.app K) =
+      DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.unit.app K) ≫
+        g.rightDerivedFunctorPlusUnit.app (f.mapHomotopyCategoryPlus.obj K) := by
+  apply DerivedCategory.Plus.ι.map_injective
+  simp only [Functor.map_comp, Adjunction.derivedAdjunctionPlus,
+    Adjunction.map_restrictFullyFaithful_unit_app, Adjunction.ofNatIsoLeft_unit]
+  have h₁ := adj.mapHomotopyCategory (ComplexShape.up ℤ) |>.derivedη_fac_app
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) f.leftDerivedFunctorCounit
+    g.rightDerivedFunctorUnit ((HomotopyCategory.Plus.ι C).obj K)
+  have h₂ := NatTrans.congr_app f.leftDerivedFunctorIsoMapDerivedCategory_hom_fac
+    ((HomotopyCategory.Plus.ι C).obj K)
+  have h₃ : g.rightDerivedFunctorPlusιUnit.app (f.mapHomotopyCategoryPlus.obj K) ≫
+      g.rightDerivedFunctorPlusCompatibility.hom.app
+        (DerivedCategory.Plus.Qh.obj (f.mapHomotopyCategoryPlus.obj K)) =
+      g.ιRightDerivedFunctorUnit.app (f.mapHomotopyCategoryPlus.obj K) := by
+    simp [Functor.rightDerivedFunctorPlusCompatibility]
+  have h₄ : DerivedCategory.Plus.ι.map
+      (g.rightDerivedFunctorPlusUnit.app (f.mapHomotopyCategoryPlus.obj K)) =
+      g.ιRightDerivedFunctorUnit.app (f.mapHomotopyCategoryPlus.obj K) ≫
+        g.rightDerivedFunctorPlusCompatibility.inv.app
+          (DerivedCategory.Plus.Qh.obj (f.mapHomotopyCategoryPlus.obj K)) := by
+    rw [← h₃, Category.assoc, Iso.hom_inv_id_app]
+    exact (Category.comp_id _).symm
+  have h₅ := g.rightDerivedFunctorPlusCompatibility.inv.naturality
+    (f.mapDerivedCategoryPlusFactorsh.hom.app K)
+  simp only [Functor.comp_map, Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app] at h₅
+  have h₆ : f.mapDerivedCategoryPlusCompatibility.symm.hom.app (DerivedCategory.Plus.Qh.obj K) =
+      𝟙 _ := rfl
+  have h₇ : DerivedCategory.Plus.ι.map
+      (DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.unit.app K)) =
+      DerivedCategory.Qh.map ((Adjunction.mapHomotopyCategory (ComplexShape.up ℤ) adj).unit.app
+        ((HomotopyCategory.Plus.ι C).obj K)) := by
+    have : (HomotopyCategory.Plus.ι C).map (adj.mapHomotopyCategoryPlus.unit.app K) =
+        (adj.mapHomotopyCategory (ComplexShape.up ℤ)).unit.app
+          ((HomotopyCategory.Plus.ι C).obj K) := by
+      dsimp only [Adjunction.mapHomotopyCategoryPlus]
+      erw [Adjunction.map_restrictFullyFaithful_unit_app]
+      erw [CategoryTheory.Functor.map_id, Category.id_comp]
+      exact Category.comp_id _
+    exact congrArg DerivedCategory.Qh.map this
+  have h₈ : (adj.derivedAdjunction.unit ≫
+      Functor.whiskerRight f.leftDerivedFunctorIsoMapDerivedCategory.hom g.rightDerivedFunctor).app
+        (DerivedCategory.Plus.ι.obj (DerivedCategory.Plus.Qh.obj K)) ≫
+      g.rightDerivedFunctor.map (f.mapDerivedCategoryFactorsh.hom.app
+        ((HomotopyCategory.Plus.ι C).obj K)) =
+      DerivedCategory.Qh.map ((Adjunction.mapHomotopyCategory (ComplexShape.up ℤ) adj).unit.app
+        ((HomotopyCategory.Plus.ι C).obj K)) ≫
+      g.rightDerivedFunctorUnit.app
+        ((f.mapHomotopyCategory (ComplexShape.up ℤ)).obj ((HomotopyCategory.Plus.ι C).obj K)) := by
+    rw [← h₁, ← h₂]
+    simp only [NatTrans.comp_app, Functor.map_comp, Category.assoc, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app]
+    rfl
+  rw [h₄, h₇]
+  dsimp only [Functor.mapDerivedCategoryPlusCompatibility, Iso.symm_hom, Iso.refl_inv,
+    NatTrans.id_app, Iso.symm_inv]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  erw [Category.assoc, ← h₅, ← Category.assoc, h₈, Category.assoc]
+  rfl
+
+/-- The two constructions of the bounded below derived adjunction
+`f.mapDerivedCategoryPlus ⊣ g.rightDerivedFunctorPlus` agree: the restriction
+`Adjunction.derivedAdjunctionPlus` of the unbounded derived adjunction is
+`Adjunction.derivedPlus`, constructed directly on the bounded below categories. Both units satisfy
+the formula characterising the unit (`Adjunction.derivedPlus_unit_eq`). -/
+theorem Adjunction.derivedAdjunctionPlus_eq_derivedPlus {f : C ⥤ D} {g : D ⥤ C} (adj : f ⊣ g)
+    [f.Additive] [g.Additive] [PreservesFiniteLimits f] [PreservesFiniteColimits f]
+    [EnoughInjectives D] :
+    adj.derivedAdjunctionPlus = adj.derivedPlus :=
+  Adjunction.ext (Adjunction.derivedPlus_unit_eq adj _
+    (adj.derivedAdjunctionPlus_unit_app_fac))
 
 end DerivedAdjunction
 

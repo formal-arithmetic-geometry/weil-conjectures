@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
@@ -46,6 +47,8 @@ space `Proj R[Xⱼ : j ∈ σ]` is an affine space over `R`.
   `MvPolynomial σ R` is of finite type over `MvPolynomial.homogeneousSubmodule σ R 0`.
 - `MvPolynomial.IsHomogeneous.eval₂Hom_const_mul` — scaling every variable by a constant `c`
   scales the value of a form of degree `n` by `c ^ n`.
+- `MvPolynomial.IsHomogeneous.det` — the determinant of an `n × n` matrix of forms of degree
+  `d` is a form of degree `n * d`.
 - `MvPolynomial.awayXRatio` — the ratio `Xₖ / Xᵢ` in the degree-zero localization
   `(R[Xⱼ]_{Xᵢ})₀`, an affine coordinate of the standard chart `D₊(Xᵢ)`.
 - `MvPolynomial.closure_range_awayXRatio_eq_top` — over a ring of integers, `(R[Xⱼ]_{Xᵢ})₀` is
@@ -413,5 +416,41 @@ theorem IsHomogeneous.aeval_mem_pow {k A ι : Type*} [CommRing k] [CommRing A] [
     exact hf (mem_support_iff.1 hd)
   rw [← hd', Finsupp.degree_apply, Finsupp.prod, ← Finset.prod_pow_eq_pow_sum]
   exact Ideal.prod_mem_prod fun i _ ↦ Ideal.pow_mem_pow (hx i) _
+
+section Forms
+
+/-- The determinant of a matrix of forms of degree `m` is a form of degree `card ι * m`. -/
+theorem IsHomogeneous.det {ι σ R : Type*} [CommRing R] [Fintype ι] [DecidableEq ι]
+    {M : Matrix ι ι (MvPolynomial σ R)} {m : ℕ} (hM : ∀ i j, (M i j).IsHomogeneous m) :
+    M.det.IsHomogeneous (Fintype.card ι * m) := by
+  rw [Matrix.det_apply]
+  refine IsHomogeneous.sum _ _ _ fun e _ => ?_
+  have := IsHomogeneous.prod Finset.univ (fun i => M (e i) i) (fun _ => m) fun i _ => hM _ _
+  rw [Finset.sum_const, Finset.card_univ, smul_eq_mul] at this
+  exact (mem_homogeneousSubmodule _ _).mp
+    (zsmul_mem ((mem_homogeneousSubmodule _ _).mpr this) _)
+
+/-- Applying a `K`-linear map `f : L → K` to the coefficients of a form over `L` gives a form of
+the same degree over `K`. -/
+theorem IsHomogeneous.sum_monomial_linearMap {σ K L : Type*} [CommRing K]
+    [CommRing L] [Algebra K L] (f : L →ₗ[K] K) {G : MvPolynomial σ L} {d : ℕ}
+    (hG : G.IsHomogeneous d) :
+    (∑ s ∈ G.support, monomial s (f (coeff s G))).IsHomogeneous d :=
+  IsHomogeneous.sum _ _ _ fun _ hs =>
+    isHomogeneous_monomial _ (hG.degree_eq_sum_deg_support hs).symm
+
+/-- Evaluating the polynomial obtained by applying a `K`-linear map `f : L → K` to the
+coefficients of `G` at a point `y` with coordinates in `K` is `f` of the value of `G` at `y`. -/
+theorem eval_sum_monomial_linearMap {σ K L : Type*} [CommRing K] [CommRing L]
+    [Algebra K L] (f : L →ₗ[K] K) (G : MvPolynomial σ L) (y : σ → K) :
+    eval y (∑ s ∈ G.support, monomial s (f (coeff s G))) = f (eval (algebraMap K L ∘ y) G) := by
+  rw [map_sum, eval_eq (algebraMap K L ∘ y) G, map_sum]
+  refine Finset.sum_congr rfl fun s _ => ?_
+  rw [eval_monomial, Finsupp.prod]
+  simp only [Function.comp_apply, ← map_pow, ← map_prod, mul_comm (coeff s G),
+    ← Algebra.smul_def, map_smul, smul_eq_mul]
+  exact mul_comm _ _
+
+end Forms
 
 end MvPolynomial
