@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Fiber maps of a morphism over a base
@@ -21,6 +22,10 @@ finite exactly when the other is.
 
 We also record that the fibers of a morphism and of its base change along an open immersion have
 the same dimension, `AlgebraicGeometry.topologicalKrullDim_fiber_of_isPullback`.
+
+Finally, the fibres of a morphism locally of finite type are locally connected, so the connected
+component of a point in its fibre is open in that fibre,
+`AlgebraicGeometry.Scheme.Hom.exists_opens_inter_preimage_subset_connectedComponentIn`.
 -/
 
 @[expose] public section
@@ -86,5 +91,36 @@ lemma topologicalKrullDim_fiber_of_isPullback {P X Y Z : Scheme.{u}} {fst : P �
     have := h.isIso_fst_of_isIso
     exact IsHomeomorph.topologicalKrullDim_eq _ F.homeomorph.isHomeomorph
   exact key (isPullback_fiberToSpecResidueField_of_isPullback h y)
+
+set_option backward.isDefEq.respectTransparency.types false in
+instance {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] (y : Y) :
+    LocallyConnectedSpace (f.fiber y) :=
+  have : LocallyOfFiniteType (f.fiberToSpecResidueField y) :=
+    MorphismProperty.pullback_snd _ _ inferInstance
+  have := LocallyOfFiniteType.isLocallyNoetherian (f.fiberToSpecResidueField y)
+  inferInstance
+
+/-- The fibres of a morphism locally of finite type are locally connected. -/
+instance {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] (y : Y) :
+    LocallyConnectedSpace (f ⁻¹' {y}) :=
+  (f.fiberHomeo y).symm.isOpenEmbedding.locallyConnectedSpace
+
+/-- The connected component of a point `x` in the fibre of a morphism `f` locally of finite type
+is open in that fibre: some open neighbourhood `U` of `x` meets the fibre inside it. -/
+theorem Scheme.Hom.exists_opens_inter_preimage_subset_connectedComponentIn {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [LocallyOfFiniteType f] (x : X) :
+    ∃ U : X.Opens, x ∈ U ∧
+      (U : Set X) ∩ f ⁻¹' {f x} ⊆ connectedComponentIn (f ⁻¹' {f x}) x := by
+  have hx : x ∈ f ⁻¹' {f x} := rfl
+  obtain ⟨t, ht, hct⟩ := isOpen_induced_iff.mp
+    (isOpen_connectedComponent (x := (⟨x, hx⟩ : f ⁻¹' {f x})))
+  refine ⟨⟨t, ht⟩, ?_, fun y ⟨hyt, hy⟩ ↦ ?_⟩
+  · change (⟨x, hx⟩ : f ⁻¹' {f x}) ∈ Subtype.val ⁻¹' t
+    rw [hct]
+    exact mem_connectedComponent
+  · rw [connectedComponentIn_eq_image hx]
+    refine ⟨⟨y, hy⟩, ?_, rfl⟩
+    rw [← hct]
+    exact hyt
 
 end AlgebraicGeometry

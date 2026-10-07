@@ -5,8 +5,10 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
+public import Mathlib.RingTheory.Unramified.LocalStructure
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
@@ -14,6 +16,7 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 ## Main statements
 
+- `AlgebraicGeometry.LocallyQuasiFinite.of_etale`: an étale morphism is locally quasi-finite.
 - `AlgebraicGeometry.Scheme.Hom.topologicalKrullDim_eq_of_surjective`: a universally closed,
   locally quasi-finite, surjective morphism of schemes (for instance a finite surjective one)
   preserves the dimension.
@@ -32,6 +35,15 @@ open CategoryTheory Limits Topology
 namespace AlgebraicGeometry
 
 variable {X Y : Scheme.{u}}
+
+/-- An étale morphism is locally quasi-finite. -/
+instance (priority := low) LocallyQuasiFinite.of_etale (f : X ⟶ Y) [Etale f] :
+    LocallyQuasiFinite f := by
+  rw [HasRingHomProperty.iff_appLE (P := @LocallyQuasiFinite)]
+  intro U V e
+  have := HasRingHomProperty.appLE (P := @Etale) f ‹_› U V e
+  algebraize [(f.appLE U V e).hom]
+  exact RingHom.quasiFinite_algebraMap.mpr inferInstance
 
 /-- A locally quasi-finite morphism identifies no two distinct points `x ⤳ x'`: its fibres are
 discrete. -/
