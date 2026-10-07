@@ -47,6 +47,10 @@ at `M` (`Rationalization.linear`), compatibly with its `R`-linear structure
 - `CategoryTheory.Rationalization.Q` : the localization functor `C ⥤ Rationalization M C`.
 - `CategoryTheory.Rationalization.linear` : the `A`-linear structure, for `A` a
   localization of `R` at `M`.
+- `CategoryTheory.Rationalization.map` : the triangulated, `A`-linear functor
+  `Rationalization M C ⥤ Rationalization M C'` induced by an `R`-linear triangulated functor
+  `F : C ⥤ C'`, with `Rationalization.mapQIso : Q ⋙ map F ≅ F ⋙ Q` and the isomorphisms
+  `Rationalization.mapId`, `Rationalization.mapComp` and `Rationalization.mapIso`.
 
 ## Main results
 
@@ -55,12 +59,14 @@ at `M` (`Rationalization.linear`), compatibly with its `R`-linear structure
 - `CategoryTheory.Rationalization.W_smul_id` : `m • 𝟙 X` lies in `W M C` for `m ∈ M`.
 - `CategoryTheory.Rationalization.isIso_smul_id` : `m • 𝟙 Y` is an isomorphism of the
   rationalization for `m ∈ M`.
+- `CategoryTheory.Rationalization.W_map` : an `R`-linear triangulated functor sends morphisms
+  with `M`-torsion mapping cone to morphisms with `M`-torsion mapping cone.
 
 -/
 
 @[expose] public section
 
-universe w' w v u
+universe w' w v v' v'' u u' u''
 
 open CategoryTheory Category Limits Pretriangulated ZeroObject
 
@@ -213,6 +219,127 @@ lemma algebraMap_smul (r : R) {X Y : Rationalization M C} (f : X ⟶ Y) :
   rw [toCatCenter, IsLocalization.lift_eq]
   change (r • 𝟙 X) ≫ f = r • f
   rw [Linear.smul_comp, id_comp]
+
+end Rationalization
+
+namespace Rationalization
+
+/-! ### Functoriality
+
+An `R`-linear triangulated functor `F : C ⥤ C'` sends `M`-torsion objects to `M`-torsion
+objects and distinguished triangles to distinguished triangles, so it sends `W M C` into
+`W M C'` and induces a functor `Rationalization.map M F` between the rationalizations. -/
+
+variable {M C} {C' : Type u'} [Category.{v'} C'] [Preadditive C'] [Linear R C']
+
+omit [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
+  [∀ n : ℤ, (shiftFunctor C n).Linear R] [Pretriangulated C] [IsTriangulated C] in
+/-- An `R`-linear functor sends `M`-torsion objects to `M`-torsion objects. -/
+lemma torsion_map (F : C ⥤ C') [F.Linear R] {X : C} (hX : torsion M C X) :
+    torsion M C' (F.obj X) := by
+  obtain ⟨m, hm, h⟩ := hX
+  exact ⟨m, hm, by rw [← F.map_id, ← F.map_smul, h, ← zero_smul R (𝟙 X), F.map_smul, zero_smul]⟩
+
+variable [HasZeroObject C'] [HasShift C' ℤ] [∀ n : ℤ, (shiftFunctor C' n).Additive]
+  [∀ n : ℤ, (shiftFunctor C' n).Linear R] [Pretriangulated C'] [IsTriangulated C']
+  {C'' : Type u''} [Category.{v''} C''] [Preadditive C''] [Linear R C'']
+  [HasZeroObject C''] [HasShift C'' ℤ] [∀ n : ℤ, (shiftFunctor C'' n).Additive]
+  [∀ n : ℤ, (shiftFunctor C'' n).Linear R] [Pretriangulated C''] [IsTriangulated C'']
+
+omit [∀ n : ℤ, (shiftFunctor C n).Linear R] [IsTriangulated C]
+  [∀ n : ℤ, (shiftFunctor C' n).Linear R] [IsTriangulated C'] in
+/-- An `R`-linear triangulated functor sends morphisms with `M`-torsion mapping cone to
+morphisms with `M`-torsion mapping cone: the mapping cone of `F f` is `F` of the mapping
+cone of `f`. -/
+lemma W_map (F : C ⥤ C') [F.CommShift ℤ] [F.IsTriangulated] [F.Linear R] {X Y : C}
+    {f : X ⟶ Y} (hf : W M C f) : W M C' (F.map f) := by
+  obtain ⟨Z, g, h, hT, hZ⟩ := hf
+  exact ObjectProperty.trW.mk _ (F.map_distinguished _ hT) (torsion_map F hZ)
+
+variable (M)
+
+/-- The functor `Rationalization M C ⥤ Rationalization M C'` induced by an `R`-linear
+triangulated functor `F : C ⥤ C'`: the functor out of the localization induced by
+`F ⋙ Q M C'`, which inverts `W M C` by `Rationalization.W_map`. -/
+noncomputable def map (F : C ⥤ C') [F.CommShift ℤ] [F.IsTriangulated] [F.Linear R] :
+    Rationalization M C ⥤ Rationalization M C' :=
+  Localization.lift (F ⋙ Q M C')
+    (fun _ _ _ hf ↦ Localization.inverts (Q M C') (W M C') _ (W_map F hf)) (Q M C)
+
+section
+
+variable (F : C ⥤ C') [F.CommShift ℤ] [F.IsTriangulated] [F.Linear R]
+
+noncomputable instance : Localization.Lifting (Q M C) (W M C) (F ⋙ Q M C') (map M F) :=
+  inferInstanceAs (Localization.Lifting _ _ _ (Localization.lift _ _ _))
+
+/-- The functor `Rationalization.map M F` is induced by `F`: `Q ⋙ map F ≅ F ⋙ Q`. -/
+noncomputable def mapQIso : Q M C ⋙ map M F ≅ F ⋙ Q M C' :=
+  Localization.Lifting.iso (Q M C) (W M C) (F ⋙ Q M C') (map M F)
+
+instance [F.Additive] : (map M F).Additive := by
+  rw [Localization.functor_additive_iff (Q M C) (W M C)]
+  exact Functor.additive_of_iso (mapQIso M F).symm
+
+noncomputable instance : (map M F).CommShift ℤ :=
+  Functor.commShiftOfLocalization (Q M C) (W M C) ℤ (F ⋙ Q M C') (map M F)
+
+instance : NatTrans.CommShift (mapQIso M F).hom ℤ :=
+  NatTrans.commShift_iso_hom_of_localization (Q M C) (W M C) ℤ (F ⋙ Q M C') (map M F)
+
+instance : (map M F).IsTriangulated := by
+  have := Localization.essSurj_mapArrow (Q M C) (W M C)
+  exact Functor.isTriangulated_of_precomp_iso (mapQIso M F)
+
+instance linear_map_of_ring : (map M F).Linear R :=
+  (Localization.functor_linear_iff (Q M C) (W M C) R (F ⋙ Q M C') (map M F)).1 inferInstance
+
+variable (A : Type w') [CommRing A] [Algebra R A] [IsLocalization M A]
+
+/-- `Rationalization.map M F` is linear over any localization `A` of `R` at `M`: an element
+`r / m` of `A` acts through `r` and the inverse of the action of `m`, both of which `map M F`
+preserves. -/
+instance linear_map : (map M F).Linear A := by
+  rw [Functor.linear_iff]
+  intro X a
+  obtain ⟨⟨r, m⟩, rfl⟩ := IsLocalization.mk'_surjective M a
+  dsimp only
+  have hsmul {Y : Rationalization M C} :
+      (m : R) • (IsLocalization.mk' A r m • 𝟙 Y) = r • 𝟙 Y := by
+    rw [← algebraMap_smul A, smul_smul, IsLocalization.mk'_spec', algebraMap_smul]
+  have hsmul' {Y : Rationalization M C'} :
+      (m : R) • (IsLocalization.mk' A r m • 𝟙 Y) = r • 𝟙 Y := by
+    rw [← algebraMap_smul A, smul_smul, IsLocalization.mk'_spec', algebraMap_smul]
+  have hinj {Y Z : Rationalization M C'} (f g : Y ⟶ Z) (h : (m : R) • f = (m : R) • g) :
+      f = g := by
+    have := isIso_smul_id m.2 Y
+    rw [← cancel_epi ((m : R) • 𝟙 Y)]
+    simpa using h
+  apply hinj
+  rw [← Functor.map_smul, hsmul, Functor.map_smul, Functor.map_id, hsmul']
+
+end
+
+/-- An isomorphism `F ≅ G` of functors induces an isomorphism `map M F ≅ map M G`. -/
+noncomputable def mapIso {F G : C ⥤ C'} [F.CommShift ℤ] [F.IsTriangulated] [F.Linear R]
+    [G.CommShift ℤ] [G.IsTriangulated] [G.Linear R] (e : F ≅ G) : map M F ≅ map M G :=
+  Localization.liftNatIso (Q M C) (W M C) (F ⋙ Q M C') (G ⋙ Q M C') _ _
+    (Functor.isoWhiskerRight e _)
+
+/-- The functor induced by the identity is the identity. -/
+noncomputable def mapId : map M (𝟭 C) ≅ 𝟭 _ :=
+  Localization.liftNatIso (Q M C) (W M C) (𝟭 C ⋙ Q M C) (Q M C) _ _ (Functor.leftUnitor _)
+
+/-- The functor induced by a composition is the composition of the induced functors. -/
+noncomputable def mapComp (F : C ⥤ C') [F.CommShift ℤ] [F.IsTriangulated] [F.Linear R]
+    (G : C' ⥤ C'') [G.CommShift ℤ] [G.IsTriangulated] [G.Linear R] :
+    map M (F ⋙ G) ≅ map M F ⋙ map M G :=
+  letI : Localization.Lifting (Q M C) (W M C) ((F ⋙ G) ⋙ Q M C'') (map M F ⋙ map M G) :=
+    ⟨(Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (mapQIso M F) _ ≪≫
+      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft F (mapQIso M G) ≪≫
+      (Functor.associator _ _ _).symm⟩
+  Localization.liftNatIso (Q M C) (W M C) ((F ⋙ G) ⋙ Q M C'') ((F ⋙ G) ⋙ Q M C'') _ _
+    (Iso.refl _)
 
 end Rationalization
 
