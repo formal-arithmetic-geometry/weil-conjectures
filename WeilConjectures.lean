@@ -639,6 +639,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProduc
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndoFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.Presentable.Limits
@@ -923,6 +924,7 @@ public import WeilConjectures.SixFunctors.OpenClosed.Stalk
 public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ClopenIdempotent
