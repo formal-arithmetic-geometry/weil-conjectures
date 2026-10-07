@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-!
@@ -72,10 +73,6 @@ lemma smul_generatorOfOverIsoUnit_injective {W : X.Opens} (h : W ≤ U) :
 
 end Generator
 
-lemma Hom.app_map {M N : X.Modules} (φ : M ⟶ N) {V W : X.Opens} (i : W ⟶ V) (m : Γ(M, V)) :
-    φ.app W (M.presheaf.map i.op m) = N.presheaf.map i.op (φ.app V m) :=
-  ConcreteCategory.congr_hom (φ.mapPresheaf.naturality i.op) m
-
 section Invertible
 
 variable (M : X.Modules) [M.IsInvertible]
@@ -96,7 +93,7 @@ theorem exists_eq_smulHom (φ : M ⟶ M) : ∃ c : Γ(X, ⊤), φ = M.smulHom c 
       rw [show homOfLE (le_refl (U x)) = 𝟙 _ from rfl, op_id, M.presheaf.map_id]
       rfl
     rw [h₁] at h₀
-    rw [eq_smul_generatorOfOverIsoUnit (e x).some hW m, Hom.app_smul, Hom.app_map, h₀,
+    rw [eq_smul_generatorOfOverIsoUnit (e x).some hW m, Hom.app_smul, Hom.app_presheaf_map, h₀,
       map_smul, smul_comm]
   have hcompat : TopCat.Presheaf.IsCompatible X.sheaf.1 U c := by
     intro x y
@@ -111,7 +108,7 @@ theorem exists_eq_smulHom (φ : M ⟶ M) : ∃ c : Γ(X, ⊤), φ = M.smulHom c 
     (fun _ ↦ homOfLE inf_le_left) (fun y hy ↦ Opens.mem_iSup.mpr ⟨y, hy, hU y⟩) _ _ fun x ↦ ?_)
   change M.presheaf.map (homOfLE inf_le_left : W ⊓ U x ⟶ W).op (φ.app W m) =
     M.presheaf.map (homOfLE inf_le_left : W ⊓ U x ⟶ W).op ((M.smulHom c₀).app W m)
-  rw [← Hom.app_map, hc x inf_le_right, smulHom_app_apply, map_smul, ← hc₀ x]
+  rw [← Hom.app_presheaf_map, hc x inf_le_right, smulHom_app_apply, map_smul, ← hc₀ x]
   congr 1
   change (X.presheaf.map _ ≫ X.presheaf.map _) c₀ = (X.presheaf.map _ ≫ X.presheaf.map _) c₀
   rw [← Functor.map_comp, ← Functor.map_comp]
