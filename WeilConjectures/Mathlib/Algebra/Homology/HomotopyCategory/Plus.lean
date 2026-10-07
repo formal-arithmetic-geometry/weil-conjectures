@@ -51,6 +51,18 @@ noncomputable def mapHomotopyCategoryPlus
     (Functor.whiskerLeft (HomotopyCategory.Plus.ι C)
       (NatTrans.mapHomotopyCategory τ (ComplexShape.up ℤ)))
 
+/-- The components of `NatTrans.mapHomotopyCategoryPlus τ`, viewed in the ambient homotopy
+category, are those of `NatTrans.mapHomotopyCategory τ`. -/
+@[simp]
+lemma ι_map_mapHomotopyCategoryPlus_app {F G : C ⥤ D} [F.Additive] [G.Additive] (τ : F ⟶ G)
+    (K : HomotopyCategory.Plus C) :
+    (HomotopyCategory.Plus.ι D).map ((NatTrans.mapHomotopyCategoryPlus τ).app K) =
+      (NatTrans.mapHomotopyCategory τ (ComplexShape.up ℤ)).app K.obj :=
+  NatTrans.congr_app (((HomotopyCategory.plus D).fullyFaithfulι.whiskeringRight
+    (HomotopyCategory.Plus C)).map_preimage (X := F.mapHomotopyCategoryPlus)
+      (Y := G.mapHomotopyCategoryPlus) (Functor.whiskerLeft (HomotopyCategory.Plus.ι C)
+        (NatTrans.mapHomotopyCategory τ (ComplexShape.up ℤ)))) K
+
 @[simp]
 lemma mapHomotopyCategoryPlus_id (F : C ⥤ D) [F.Additive] :
     NatTrans.mapHomotopyCategoryPlus (𝟙 F) = 𝟙 F.mapHomotopyCategoryPlus := by

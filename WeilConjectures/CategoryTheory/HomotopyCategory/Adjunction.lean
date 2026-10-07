@@ -208,6 +208,19 @@ lemma mapHomotopyCategory_unit_app_quotient {L : C ⥤ D} {R : D ⥤ C} (adj : L
   exact (congrArg (fun t => (HomotopyCategory.quotient C c).map
       ((adj.mapHomologicalComplex c).unit.app X) ≫ t) key).trans (Category.comp_id _)
 
+/-- The counit of `Adjunction.mapHomotopyCategory` on the image of a complex is the image of
+the counit of `Adjunction.mapHomologicalComplex`. -/
+lemma mapHomotopyCategory_counit_app_quotient {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
+    [L.Additive] [R.Additive]
+    [(HomotopyCategory.quotient D c).IsLocalization
+      (HomologicalComplex.homotopyEquivalences D c)]
+    (X : HomologicalComplex D c) :
+    (adj.mapHomotopyCategory c).counit.app ((HomotopyCategory.quotient D c).obj X) =
+      (HomotopyCategory.quotient D c).map ((adj.mapHomologicalComplex c).counit.app X) := by
+  rw [Adjunction.mapHomotopyCategory, Adjunction.localization_counit_app]
+  simp only [Functor.mapHomotopyCategoryFactors, Functor.comp_obj]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
+
 /-- The identity law for `Adjunction.mapHomotopyCategory`. -/
 lemma mapHomotopyCategory_id_unit_app (Y : HomotopyCategory C c) :
     ((Adjunction.id (C := C)).mapHomotopyCategory c).unit.app Y =
@@ -281,6 +294,18 @@ lemma ι_map_mapHomotopyCategoryPlus_unit_app {L : C ⥤ D} {R : D ⥤ C} (adj :
       (adj.mapHomotopyCategory (ComplexShape.up ℤ)).unit.app K.obj := by
   rw [Adjunction.mapHomotopyCategoryPlus, Adjunction.map_restrictFullyFaithful_unit_app]
   simp
+
+/-- The counit of `Adjunction.mapHomotopyCategoryPlus` is the restriction of the counit of
+`Adjunction.mapHomotopyCategory` along the inclusion of the bounded below subcategory. -/
+@[simp]
+lemma ι_map_mapHomotopyCategoryPlus_counit_app {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
+    [L.Additive] [R.Additive] (K : HomotopyCategory.Plus D) :
+    (HomotopyCategory.Plus.ι D).map (adj.mapHomotopyCategoryPlus.counit.app K) =
+      (adj.mapHomotopyCategory (ComplexShape.up ℤ)).counit.app K.obj := by
+  dsimp only [Adjunction.mapHomotopyCategoryPlus]
+  erw [Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Functor.map_id,
+    Category.id_comp]
+  exact Category.id_comp _
 
 /-- **The identity law for `Adjunction.mapHomotopyCategoryPlus`**: the unit of the
 adjunction induced by `Adjunction.id` is the inverse of
@@ -477,5 +502,68 @@ lemma mapHomotopyCategoryPlus_unit_app_comp_id [Limits.HasBinaryBiproducts C]
 end ConjugateId
 
 end Adjunction
+
+namespace NatTrans
+
+variable {C₁ C₂ C₃ C₄ : Type*} [Category* C₁] [Category* C₂] [Category* C₃] [Category* C₄]
+  [Preadditive C₁] [Preadditive C₂] [Preadditive C₃] [Preadditive C₄]
+  [Limits.HasBinaryBiproducts C₁] [Limits.HasBinaryBiproducts C₂]
+  [Limits.HasBinaryBiproducts C₃] [Limits.HasBinaryBiproducts C₄]
+  {L : C₂ ⥤ C₁} {R : C₁ ⥤ C₂} {L' : C₄ ⥤ C₃} {R' : C₃ ⥤ C₄}
+  {G : C₂ ⥤ C₄} {G' : C₁ ⥤ C₃}
+  [L.Additive] [R.Additive] [L'.Additive] [R'.Additive] [G.Additive] [G'.Additive]
+
+/-- **Mates on the bounded below homotopy categories.** For adjunctions `L ⊣ R` and
+`L' ⊣ R'` and a square `σ : G ⋙ L' ⟶ L ⋙ G'`, the transformation induced on the bounded below
+homotopy categories by the mate `R ⋙ G ⟶ G' ⋙ R'` of `σ` is the mate of the induced square
+with respect to the induced adjunctions `Adjunction.mapHomotopyCategoryPlus`: both are computed
+degreewise on complexes. -/
+lemma mapHomotopyCategoryPlus_mateEquiv_app (adj : L ⊣ R) (adj' : L' ⊣ R')
+    (σ : TwoSquare G L L' G') (K : HomotopyCategory.Plus C₁) :
+    (NatTrans.mapHomotopyCategoryPlus (mateEquiv adj adj' σ).natTrans).app K =
+      adj'.mapHomotopyCategoryPlus.unit.app (G.mapHomotopyCategoryPlus.obj
+          (R.mapHomotopyCategoryPlus.obj K)) ≫
+        R'.mapHomotopyCategoryPlus.map ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app
+          (R.mapHomotopyCategoryPlus.obj K)) ≫
+        R'.mapHomotopyCategoryPlus.map (G'.mapHomotopyCategoryPlus.map
+          (adj.mapHomotopyCategoryPlus.counit.app K)) := by
+  apply (HomotopyCategory.Plus.ι C₄).map_injective
+  obtain ⟨⟨X⟩, hK⟩ := K
+  rw [ι_map_mapHomotopyCategoryPlus_app]
+  erw [Functor.map_comp, Functor.map_comp, Adjunction.ι_map_mapHomotopyCategoryPlus_unit_app]
+  have e₁ : ∀ {M N : HomotopyCategory.Plus C₃} (φ : M ⟶ N),
+      (HomotopyCategory.Plus.ι C₄).map (R'.mapHomotopyCategoryPlus.map φ) =
+        (R'.mapHomotopyCategory (ComplexShape.up ℤ)).map ((HomotopyCategory.Plus.ι C₃).map φ) :=
+    fun _ => rfl
+  have e₂ : ∀ {M N : HomotopyCategory.Plus C₁} (φ : M ⟶ N),
+      (HomotopyCategory.Plus.ι C₃).map (G'.mapHomotopyCategoryPlus.map φ) =
+        (G'.mapHomotopyCategory (ComplexShape.up ℤ)).map ((HomotopyCategory.Plus.ι C₁).map φ) :=
+    fun _ => rfl
+  erw [e₁, e₁, e₂, ι_map_mapHomotopyCategoryPlus_app,
+    Adjunction.ι_map_mapHomotopyCategoryPlus_counit_app]
+  change _ = (Adjunction.mapHomotopyCategory (ComplexShape.up ℤ) adj').unit.app
+    ((HomotopyCategory.quotient C₄ (ComplexShape.up ℤ)).obj _) ≫ _ ≫
+      (R'.mapHomotopyCategory (ComplexShape.up ℤ)).map
+        ((G'.mapHomotopyCategory (ComplexShape.up ℤ)).map
+          ((Adjunction.mapHomotopyCategory (ComplexShape.up ℤ) adj).counit.app
+            ((HomotopyCategory.quotient C₁ (ComplexShape.up ℤ)).obj X)))
+  rw [Adjunction.mapHomotopyCategory_unit_app_quotient,
+    Adjunction.mapHomotopyCategory_counit_app_quotient]
+  change (HomotopyCategory.quotient C₄ (ComplexShape.up ℤ)).map _ =
+    (HomotopyCategory.quotient C₄ (ComplexShape.up ℤ)).map _ ≫
+      (HomotopyCategory.quotient C₄ (ComplexShape.up ℤ)).map _ ≫
+        (HomotopyCategory.quotient C₄ (ComplexShape.up ℤ)).map _
+  erw [← Functor.map_comp, ← Functor.map_comp]
+  congr 1
+  ext n
+  simp only [mateEquiv_apply, HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+    NatTrans.mapHomologicalComplex_app_f, Adjunction.mapHomologicalComplex_unit_app_f,
+    Adjunction.mapHomologicalComplex_counit_app_f, NatTrans.comp_app, Functor.comp_obj,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
+    Category.id_comp, Functor.comp_map, Functor.map_comp]
+  exact congrArg (fun t => _ ≫ _ ≫ t) (Category.comp_id _)
+
+end NatTrans
 
 end CategoryTheory
