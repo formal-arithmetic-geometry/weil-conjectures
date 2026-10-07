@@ -279,6 +279,11 @@ lemma isFractionRing_localGenericRing (V : X.Etale) {y : V.left}
       (congrArg (fun g ↦ g.hom o) hG).symm
   exact IsLocalization.isLocalization_of_algEquiv (nonZeroDivisors O) F
 
+omit [IsRegular X] in
+lemma ord_zpow (V : X.Etale) (y : V.left) (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ)
+    (n : ℤ) : ord V y ↑(f ^ n) = n * ord V y f :=
+  congrArg ULift.down (congrFun (map_zsmul (ordHom V) n (Additive.ofMul f)) y)
+
 /-- **Naturality of the order of vanishing.** For a morphism `φ : W ⟶ V` of étale
 `X`-schemes over an integral regular locally noetherian scheme `X`, a point `y` of `W` and a
 unit `f` on the generic fibre of `V`, the order of the pullback of `f` at `y` is the order of
