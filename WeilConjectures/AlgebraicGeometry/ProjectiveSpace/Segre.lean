@@ -61,6 +61,8 @@ closed immersion because closed immersions are stable under base change.
   the locus `D₊(W_{k,l})` is the product of the loci `D₊(Xₖ)` and `D₊(Yₗ)`.
 - `AlgebraicGeometry.Proj.segreCover_f_comp_segre` — on the chart `D₊(Xᵢ) ×_ℤ D₊(Yⱼ)`, the
   Segre morphism is `segreChartHom i j`.
+- `AlgebraicGeometry.Proj.segre_appLE_awayToSection_awayXRatio` — the Segre morphism pulls the
+  transition function `W_{k,l} / W_{k',l'}` back to `(Xₖ / Xₖ') · (Yₗ / Yₗ')`.
 - `AlgebraicGeometry.ProjectiveSpace.isPullback_segre` — the relative Segre morphism is the
   base change of the Segre morphism of the integral models.
 - `AlgebraicGeometry.ProjectiveSpace.isClosedImmersion_segre` — the relative Segre morphism is
@@ -460,6 +462,73 @@ instance isClosedImmersion_segre : IsClosedImmersion (segre n m) := by
   rwa [opensRange_awayι] at H
 
 end ClosedImmersion
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- **The Segre morphism on the transition functions.** On the chart `D₊(Xₖ') ×_ℤ D₊(Yₗ')`, the
+Segre morphism pulls the function `W_{k,l} / W_{k',l'}` back to `(Xₖ / Xₖ') · (Yₗ / Yₗ')`. -/
+lemma segre_appLE_awayToSection_awayXRatio (k k' : n) (l l' : m) :
+    (segre n m).appLE (basicOpen _ (X (k', l')))
+        (pullback.fst (terminal.from (projectiveSpaceOverAffine n (ULift.{u} ℤ)))
+            (terminal.from (projectiveSpaceOverAffine m (ULift.{u} ℤ))) ⁻¹ᵁ
+          basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (X k') ⊓
+        pullback.snd (terminal.from (projectiveSpaceOverAffine n (ULift.{u} ℤ)))
+            (terminal.from (projectiveSpaceOverAffine m (ULift.{u} ℤ))) ⁻¹ᵁ
+          basicOpen (homogeneousSubmodule m (ULift.{u} ℤ)) (X l'))
+        (segre_preimage_basicOpen k' l').ge
+        (awayToSection _ _ (awayXRatio (ULift.{u} ℤ) (k', l') (k, l))) =
+      (pullback.fst (terminal.from (projectiveSpaceOverAffine n (ULift.{u} ℤ)))
+          (terminal.from (projectiveSpaceOverAffine m (ULift.{u} ℤ)))).appLE
+          (basicOpen _ (X k')) _ inf_le_left
+          (awayToSection _ _ (awayXRatio (ULift.{u} ℤ) k' k)) *
+        (pullback.snd (terminal.from (projectiveSpaceOverAffine n (ULift.{u} ℤ)))
+          (terminal.from (projectiveSpaceOverAffine m (ULift.{u} ℤ)))).appLE
+          (basicOpen _ (X l')) _ inf_le_right
+          (awayToSection _ _ (awayXRatio (ULift.{u} ℤ) l' l)) := by
+  set c := (segreCover n m).f (k', l')
+  have hc : c ''ᵁ ⊤ = pullback.fst (terminal.from (projectiveSpaceOverAffine n (ULift.{u} ℤ)))
+            (terminal.from (projectiveSpaceOverAffine m (ULift.{u} ℤ))) ⁻¹ᵁ
+          basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (X k') ⊓
+        pullback.snd (terminal.from (projectiveSpaceOverAffine n (ULift.{u} ℤ)))
+            (terminal.from (projectiveSpaceOverAffine m (ULift.{u} ℤ))) ⁻¹ᵁ
+          basicOpen (homogeneousSubmodule m (ULift.{u} ℤ)) (X l') := by
+    rw [Scheme.Hom.image_top_eq_opensRange, opensRange_segreCover_f]
+  have hle : ⊤ ≤ c ⁻¹ᵁ (c ''ᵁ ⊤) := (Scheme.Hom.preimage_image_eq c ⊤).ge
+  have hcongr : ∀ {Y : Scheme.{u}} {f g : (segreCover n m).X (k', l') ⟶ Y} (h : f = g) (U) (e),
+      f.appLE U ⊤ e = g.appLE U ⊤ (h ▸ e) := by
+    rintro Y f g rfl U e
+    rfl
+  have hinj : Function.Injective (c.appLE _ ⊤ (hc ▸ hle)) := by
+    have e : c.appLE _ ⊤ (hc ▸ hle) =
+        ((pullback (terminal.from (projectiveSpaceOverAffine n (ULift.{u} ℤ)))
+          (terminal.from (projectiveSpaceOverAffine m (ULift.{u} ℤ)))).presheaf.map
+            (eqToHom hc).op) ≫ c.appLE (c ''ᵁ ⊤) ⊤ hle := by
+      rw [Scheme.Hom.map_appLE]
+    have e' : c.appLE (c ''ᵁ ⊤) ⊤ hle = (c.appIso ⊤).hom := by
+      rw [Scheme.Hom.appIso_hom, Scheme.Hom.appLE]
+      rfl
+    rw [e, e']
+    exact (ConcreteCategory.bijective_of_isIso (c.appIso ⊤).hom).1.comp
+      (ConcreteCategory.bijective_of_isIso
+        ((pullback (terminal.from (projectiveSpaceOverAffine n (ULift.{u} ℤ)))
+          (terminal.from (projectiveSpaceOverAffine m (ULift.{u} ℤ)))).presheaf.map
+            (eqToHom hc).op)).1
+  obtain ⟨q, hq, hqv⟩ := exists_comp_awayι_eq_fromOfGlobalSections
+    (homogeneousSubmodule (n × m) (ULift.{u} ℤ))
+    (ProjectiveSpace.evalSections (segreChartSection k' l'))
+    (ProjectiveSpace.map_irrelevant_evalSections_eq_top _
+      (span_range_segreChartSection_eq_top k' l'))
+    Nat.one_pos (X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) (k', l'))
+    (by rw [ProjectiveSpace.evalSections_X, segreChartSection_self])
+  apply hinj
+  rw [map_mul, ← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
+    ← ConcreteCategory.comp_apply, Scheme.Hom.appLE_comp_appLE, Scheme.Hom.appLE_comp_appLE,
+    Scheme.Hom.appLE_comp_appLE, hcongr ((segreCover_f_comp_segre k' l').trans hq.symm),
+    hcongr (segreCoverFst_awayι k' l').symm, hcongr (segreCoverSnd_awayι k' l').symm,
+]
+  erw [comp_awayι_appLE_awayToSection, comp_awayι_appLE_awayToSection,
+    comp_awayι_appLE_awayToSection]
+  rw [awayXRatio, hqv, ProjectiveSpace.evalSections_X]
+  rfl
 
 end AlgebraicGeometry.Proj
 
