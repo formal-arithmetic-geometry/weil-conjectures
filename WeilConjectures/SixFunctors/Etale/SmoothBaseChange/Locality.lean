@@ -9,6 +9,7 @@ public import Mathlib
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
 public import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
+public import WeilConjectures.Mathlib.CategoryTheory.EpiMono
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
 
@@ -22,7 +23,9 @@ smooth morphisms of relative dimension one:
 
 - composition (blueprint `sbc-lem-base-change-composition`, Stacks 0EZS): the base-change map of
   a composite square is the composite of the base-change maps of the two squares, so it is an
-  isomorphism when they are, both for the derived base-change map and degreewise;
+  isomorphism when they are, both for the derived base-change map and degreewise; in particular
+  the derived base-change map of a square whose horizontal sides are isomorphisms is an
+  isomorphism, as pasting it with the inverse square gives an identity square;
 - étale locality (blueprint `sbc-lem-etale-locality`, Stacks 0EZR): if `X` is covered by étale
   `U_i ⟶ X` such that `U_i ⟶ S` factors as `f_i : U_i ⟶ V_i` followed by an étale
   `V_i ⟶ S`, the base-change map of a square on `X ⟶ S` is an isomorphism as soon as those of
@@ -48,6 +51,8 @@ restrictions along a jointly surjective family reflect isomorphisms
 - `AlgebraicGeometry.Etale.BaseChangeProperty.comp`: stability of `BC(p, Λ, q)` under
   composition.
 - `AlgebraicGeometry.Etale.baseChangeProperty_of_isIso`: isomorphisms satisfy `BC(p, Λ, q)`.
+- `AlgebraicGeometry.Etale.isIso_baseChange_app_of_inverses`: the derived base-change map of a
+  square whose horizontal sides are isomorphisms is an isomorphism.
 
 ## Implementation notes
 
@@ -206,6 +211,116 @@ theorem Etale.isIso_baseChangeHomologyMap_of_paste_horiz {e : Y ⟶ T} {p : X �
       ((isIso_map_app_comp_obj_iff _ _ _ _ _).2 hF₁))
 
 end Composition
+
+section IsoSquares
+
+variable {X Z S T Y₂ Y : Scheme.{u}} {g : T ⟶ S} {p₂ : Z ⟶ S} {e₂ : Y₂ ⟶ T} {h₂ : Y₂ ⟶ Z}
+  {p₁ : X ⟶ Z} {e₁ : Y ⟶ Y₂} {h₁ : Y ⟶ X}
+
+/-- The pasting law `AlgebraicGeometry.Etale.baseChange_app_paste_horiz` for a composite square
+whose horizontal sides are only equal to the composites `e₁ ≫ e₂` and `p₁ ≫ p₂`; the
+composition isomorphisms of the pullbacks are taken along these sides. -/
+theorem Etale.baseChange_app_paste_horiz_of_eq (sq₂ : CommSq e₂ h₂ g p₂)
+    (sq₁ : CommSq e₁ h₁ h₂ p₁) {e : Y ⟶ T} {p : X ⟶ S} (sq : CommSq e h₁ g p)
+    (he : e₁ ≫ e₂ = e) (hp : p₁ ≫ p₂ = p)
+    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app K =
+      (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) p₁ p₂ p hp.symm).hom.app
+          (((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.obj K) ≫
+        ((p₁)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
+          ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq₂).app K) ≫
+        (Etale.baseChange (ModuleCat.{u + 1} Λ) sq₁).app
+          (((e₂)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K) ≫
+        ((h₁)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.map
+          ((Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) e₁ e₂ e he.symm).inv.app K) := by
+  subst he hp
+  exact Etale.baseChange_app_paste_horiz Λ sq₂ sq₁ sq K
+
+variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+
+/-- The derived base-change map of an identity square is an isomorphism
+(`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id`). -/
+lemma Etale.isIso_baseChange_app_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 Y))
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app K) := by
+  have : IsIso (Etale.baseChange (ModuleCat.{u + 1} Λ) sq) := by
+    rw [Etale.baseChange_eq_derivedBaseChangeMapPlus, Etale.derivedBaseChangeMapPlus_id]
+    infer_instance
+  infer_instance
+
+/- The inverses of the horizontal sides are given explicitly rather than through `inv`: with
+`inv` the kernel unfolds the derived functors when checking the pasted squares. -/
+private lemma isSplitEpi_baseChange_app_upperStar_upperStar (sq : CommSq g' f' f g)
+    (i' : X ⟶ X') (i : Y ⟶ Y') (hi'₁ : g' ≫ i' = 𝟙 X') (hi'₂ : i' ≫ g' = 𝟙 X)
+    (hi₁ : g ≫ i = 𝟙 Y')
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsSplitEpi ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app
+      (((i')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj
+        (((g')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K))) := by
+  have sqi : CommSq i' f f' i := ⟨by
+    calc i' ≫ f' = i' ≫ f' ≫ g ≫ i := by rw [hi₁, Category.comp_id]
+      _ = i' ≫ g' ≫ f ≫ i := by rw [← Category.assoc f' g i, ← sq.w, Category.assoc]
+      _ = f ≫ i := by rw [← Category.assoc, hi'₂, Category.id_comp]⟩
+  have sqid : CommSq (𝟙 X') f' f' (𝟙 Y') := ⟨by rw [Category.id_comp, Category.comp_id]⟩
+  have hp := Etale.baseChange_app_paste_horiz_of_eq Λ sqi sq sqid hi'₁ hi₁
+    (((g')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K)
+  have hiso := Etale.isIso_baseChange_app_id Λ f' sqid
+    (((g')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K)
+  rw [hp] at hiso
+  exact isSplitEpi_of_isIso_comp _ _ _ _ hiso
+
+/-- The derived base-change map of a square whose horizontal sides `g'` and `g` have inverses
+`i'` and `i` is a split epimorphism: pasting the square with the inverse square gives an
+identity square, whose derived base-change map is an isomorphism. -/
+lemma Etale.isSplitEpi_baseChange_app_of_inverses (sq : CommSq g' f' f g) (i' : X ⟶ X')
+    (i : Y ⟶ Y') (hi'₁ : g' ≫ i' = 𝟙 X') (hi'₂ : i' ≫ g' = 𝟙 X) (hi₁ : g ≫ i = 𝟙 Y')
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsSplitEpi ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app K) := by
+  have := isSplitEpi_baseChange_app_upperStar_upperStar Λ sq i' i hi'₁ hi'₂ hi₁ K
+  let e : K ≅ ((i')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj
+      (((g')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K) :=
+    (Etale.upperStarIdDerivedPlus (ModuleCat.{u + 1} Λ) X).symm.app K ≪≫
+      (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) i' g' (𝟙 X) hi'₂.symm).app K
+  have hn := (Etale.baseChange (ModuleCat.{u + 1} Λ) sq).naturality e.hom
+  have key : (Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app K =
+      (((f)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus ⋙
+          ((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus).map e.hom ≫
+        (Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app _ ≫
+        (((g')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ⋙
+          ((f')_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus).map e.inv := by
+    rw [← Category.assoc, hn, Category.assoc, ← Functor.map_comp, e.hom_inv_id,
+      CategoryTheory.Functor.map_id, Category.comp_id]
+  rw [key]
+  infer_instance
+
+/-- The derived base-change map of a square whose horizontal sides `g'` and `g` have inverses
+`i'` and `i` is an isomorphism. Pasting the square with the inverse square gives an identity
+square, so the pullback along `i` of the base-change map is a split monomorphism; it is also a
+split epimorphism by `AlgebraicGeometry.Etale.isSplitEpi_baseChange_app_of_inverses`, and the
+pullback along `i` reflects isomorphisms. -/
+lemma Etale.isIso_baseChange_app_of_inverses (sq : CommSq g' f' f g) (i' : X ⟶ X')
+    (i : Y ⟶ Y') (hi'₁ : g' ≫ i' = 𝟙 X') (hi'₂ : i' ≫ g' = 𝟙 X) (hi₁ : g ≫ i = 𝟙 Y')
+    (hi₂ : i ≫ g = 𝟙 Y)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app K) := by
+  have sqi : CommSq i' f f' i := ⟨by
+    calc i' ≫ f' = i' ≫ f' ≫ g ≫ i := by rw [hi₁, Category.comp_id]
+      _ = i' ≫ g' ≫ f ≫ i := by rw [← Category.assoc f' g i, ← sq.w, Category.assoc]
+      _ = f ≫ i := by rw [← Category.assoc, hi'₂, Category.id_comp]⟩
+  have sqid : CommSq (𝟙 X) f f (𝟙 Y) := ⟨by rw [Category.id_comp, Category.comp_id]⟩
+  have hp := Etale.baseChange_app_paste_horiz_of_eq Λ sq sqi sqid hi'₂ hi₂ K
+  have hiso := Etale.isIso_baseChange_app_id Λ f sqid K
+  rw [hp] at hiso
+  have := Etale.isSplitEpi_baseChange_app_of_inverses Λ sq i' i hi'₁ hi'₂ hi₁ K
+  have hx := isIso_of_isIso_comp_of_isSplitEpi _ _ _ _ hiso
+  let e : 𝟭 _ ≅ ((i)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ⋙
+      ((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus :=
+    (Etale.upperStarIdDerivedPlus (ModuleCat.{u + 1} Λ) Y').symm ≪≫
+      Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) g i (𝟙 Y') hi₁.symm
+  exact (NatIso.isIso_map_iff e ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app K)).2
+    (Functor.map_isIso ((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus _)
+
+end IsoSquares
 
 section Locality
 

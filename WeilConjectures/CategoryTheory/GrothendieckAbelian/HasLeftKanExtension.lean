@@ -35,8 +35,14 @@ makes the presheaf-level left Kan extension left exact
 (`SmallSite.preservesFiniteLimits_op_lan_overMap`), being pointwise either an evaluation or
 a zero object. The cancellation `P (α ≫ f) → P f → P α` it uses is
 `MorphismProperty.HasOfPostcompProperty P P`, available both for `P = @Etale` and for
-`P = @WeaklyEtale`. All uses of the localization lower shriek in the `SixFunctors` folder
-are along open immersions, which are monomorphisms.
+`P = @WeaklyEtale`.
+
+For an arbitrary `f` the indexing comma category at `W` is the disjoint union, over the
+lifts `α` of `W` through `f`, of categories with terminal object: the inclusion of the
+discrete category of lifts is final. The presheaf-level left Kan extension is then
+pointwise the direct sum `⨁_α F(α)`, hence left exact when direct sums in `A` are exact
+(`SmallSite.preservesFiniteLimits_op_lan_overMap_of_isGrothendieckAbelian`). This is the
+left exactness of extension by zero along an étale morphism.
 
 Base change `MorphismProperty.Over.pullback P ⊤ g` along an *arbitrary* morphism
 `g : Z ⟶ Y` sends `W : P.Over ⊤ Y` to the left edge of the cartesian square
@@ -177,6 +183,86 @@ private noncomputable def isTerminalCostructuredArrow (h : P f) [Mono f]
       apply_fun (fun z => z.unop.left) at hw
       exact (Category.id_comp _).symm.trans hw)
 
+omit [P.HasOfPostcompProperty P] in
+/-- The lift of `W` extracted from an object of the indexing comma category is constant along
+the morphisms of the comma category. -/
+private lemma ofCostructuredArrow_eq_of_hom (h : P f)
+    {s t : CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W)} (m : s ⟶ t) :
+    ofCostructuredArrow h W s = ofCostructuredArrow h W t := by
+  apply Subtype.ext
+  have hw : s.hom.unop.left = t.hom.unop.left ≫ m.left.unop.left := by
+    have := congrArg (fun z ↦ z.unop.left) (CostructuredArrow.w m)
+    exact this.symm
+  change s.hom.unop.left ≫ s.left.unop.hom = t.hom.unop.left ≫ t.left.unop.hom
+  rw [hw, Category.assoc, MorphismProperty.Over.w m.left.unop]
+
+/-- The lift of `W` extracted from the comma object associated with a lift `α` is `α`. -/
+private lemma ofCostructuredArrow_costructuredArrow (h : P f) (α : LiftIndex f W) :
+    ofCostructuredArrow h W (α.costructuredArrow h) = α :=
+  Subtype.ext (Category.id_comp _)
+
+/-- A morphism of the indexing comma category into the comma object associated with a lift
+`α`, from an object inducing the lift `α`. -/
+private def homCostructuredArrow (h : P f) (α : LiftIndex f W)
+    (s : CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W))
+    (hs : ofCostructuredArrow h W s = α) : s ⟶ α.costructuredArrow h :=
+  CostructuredArrow.homMk
+    (Quiver.Hom.op
+      (MorphismProperty.Over.homMk s.hom.unop.left (congrArg Subtype.val hs) :
+        α.toOver h ⟶ s.left.unop))
+    (by
+      apply Quiver.Hom.unop_inj
+      apply MorphismProperty.Over.Hom.ext
+      exact Category.id_comp _)
+
+/-- There is at most one morphism of the indexing comma category into the comma object
+associated with a lift. -/
+private lemma subsingleton_hom_costructuredArrow (h : P f) (α : LiftIndex f W)
+    (s : CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W)) :
+    Subsingleton (s ⟶ α.costructuredArrow h) := by
+  refine ⟨fun m m' ↦ ?_⟩
+  ext
+  apply Quiver.Hom.unop_inj
+  apply MorphismProperty.Over.Hom.ext
+  have hw := congrArg (fun z ↦ z.unop.left) m.w
+  have hw' := congrArg (fun z ↦ z.unop.left) m'.w
+  exact ((Category.id_comp _).symm.trans hw).trans
+    (((Category.id_comp _).symm.trans hw').symm)
+
+/-- The functor sending a lift `α` of `W` through `f` to the associated object of the indexing
+comma category. -/
+private def discreteFunctor (h : P f) :
+    Discrete (LiftIndex f W) ⥤ CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W) :=
+  Discrete.functor (costructuredArrow h)
+
+/-- The functor sending an object of the indexing comma category to the lift of `W` it
+induces. -/
+private def toDiscrete (h : P f) :
+    CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W) ⥤ Discrete (LiftIndex f W) where
+  obj s := ⟨ofCostructuredArrow h W s⟩
+  map m := Discrete.eqToHom (ofCostructuredArrow_eq_of_hom h m)
+
+/-- The indexing comma category is the disjoint union, over the lifts `α` of `W` through `f`,
+of categories with terminal object `α.costructuredArrow h`: sending an object to its lift is
+left adjoint to `LiftIndex.discreteFunctor`. -/
+private def toDiscreteAdjunction (h : P f) :
+    toDiscrete (W := W) h ⊣ discreteFunctor h :=
+  Adjunction.mkOfHomEquiv
+    { homEquiv s α :=
+        have := subsingleton_hom_costructuredArrow h α.as s
+        { toFun e := homCostructuredArrow h α.as s (Discrete.eq_of_hom e)
+          invFun m := Discrete.eqToHom ((ofCostructuredArrow_eq_of_hom h m).trans
+            (ofCostructuredArrow_costructuredArrow h α.as))
+          left_inv _ := Subsingleton.elim _ _
+          right_inv _ := (subsingleton_hom_costructuredArrow h α.as s).elim _ _ }
+      homEquiv_naturality_left_symm _ _ := Subsingleton.elim _ _
+      homEquiv_naturality_right {s _ α} _ _ :=
+        (subsingleton_hom_costructuredArrow h α.as s).elim _ _ }
+
+/-- The inclusion of the lifts of `W` into the indexing comma category is final. -/
+private lemma final_discreteFunctor (h : P f) : (discreteFunctor (W := W) h).Final :=
+  Functor.final_of_adjunction (toDiscreteAdjunction h)
+
 end LiftIndex
 
 end LiftIndex
@@ -228,6 +314,21 @@ lemma preservesFiniteLimits_op_lan_overMap (h : P f) [Mono f] :
       ((P.Over ⊤ V)ᵒᵖ ⥤ A) ⥤ (P.Over ⊤ U)ᵒᵖ ⥤ A) :=
   Functor.preservesFiniteLimits_lan_of_essImage_or_isEmpty _
     (mem_essImage_or_isEmpty_costructuredArrow_op_overMap h)
+
+/-- The presheaf-level left Kan extension along the opposite of the localization functor
+of `h : P f`, for an arbitrary `f`, is left exact: at `W` it is the direct sum, over the lifts
+`α` of `W` through `f`, of the values at `α`, because the indexing comma category is a
+disjoint union of categories with terminal objects; direct sums are exact in the Grothendieck
+abelian category `A`. -/
+lemma preservesFiniteLimits_op_lan_overMap_of_isGrothendieckAbelian (h : P f)
+    [∀ F : (P.Over ⊤ V)ᵒᵖ ⥤ A,
+      (MorphismProperty.Over.map ⊤ h).op.HasPointwiseLeftKanExtension F] :
+    PreservesFiniteLimits ((MorphismProperty.Over.map ⊤ h).op.lan :
+      ((P.Over ⊤ V)ᵒᵖ ⥤ A) ⥤ (P.Over ⊤ U)ᵒᵖ ⥤ A) :=
+  have : HasCoproducts.{u} A := hasCoproducts_shrink.{u, u + 1}
+  have : AB4OfSize.{u} A := AB4OfSize_shrink.{u, u + 1} A
+  Functor.preservesFiniteLimits_lan_of_final.{u} _
+    fun W ↦ ⟨_, _, LiftIndex.final_discreteFunctor (W := W.unop) h⟩
 
 end OverMap
 

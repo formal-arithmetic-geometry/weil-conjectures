@@ -1,0 +1,44 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.CategoryTheory.EpiMono
+
+/-!
+# Split epimorphisms in composites with isomorphisms
+
+If a composite `a ≫ b ≫ φ ≫ c` is an isomorphism and `c` is an isomorphism, then `φ` is a split
+epimorphism. If moreover `b` is a split epimorphism and `a` is an isomorphism, then `b` is an
+isomorphism.
+-/
+
+@[expose] public section
+
+universe v u
+
+namespace CategoryTheory
+
+variable {C : Type u} [Category.{v} C] {A B D E F : C}
+
+/-- If `a ≫ b ≫ φ ≫ c` is an isomorphism and `c` is an isomorphism, then `φ` is a split
+epimorphism, with section `c ≫ (a ≫ b ≫ φ ≫ c)⁻¹ ≫ a ≫ b`. -/
+lemma isSplitEpi_of_isIso_comp (a : A ⟶ B) (b : B ⟶ D) (φ : D ⟶ E) (c : E ⟶ F) [IsIso c]
+    (h : IsIso (a ≫ b ≫ φ ≫ c)) : IsSplitEpi φ :=
+  IsSplitEpi.mk' ⟨c ≫ inv (a ≫ b ≫ φ ≫ c) ≫ a ≫ b, by
+    rw [← cancel_mono c]
+    simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id, Category.id_comp]⟩
+
+/-- If `a ≫ x ≫ y ≫ c` is an isomorphism, `a` and `c` are isomorphisms and `x` is a split
+epimorphism, then `x` is an isomorphism: it is a monomorphism since `x ≫ y` is one. -/
+lemma isIso_of_isIso_comp_of_isSplitEpi (a : A ⟶ B) (x : B ⟶ D) (y : D ⟶ E) (c : E ⟶ F)
+    [IsIso a] [IsIso c] [IsSplitEpi x] (h : IsIso (a ≫ x ≫ y ≫ c)) : IsIso x := by
+  have : IsIso (x ≫ y ≫ c) := IsIso.of_isIso_comp_left a _
+  have : IsIso ((x ≫ y) ≫ c) := by rwa [Category.assoc]
+  have : IsIso (x ≫ y) := IsIso.of_isIso_comp_right (x ≫ y) c
+  have : Mono x := mono_of_mono x y
+  exact isIso_of_mono_of_isSplitEpi x
+
+end CategoryTheory

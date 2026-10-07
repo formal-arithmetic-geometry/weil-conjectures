@@ -70,13 +70,23 @@ noncomputable def Etale.etaleLowerShriekUpperStarAdjunction :
     (ModuleCat.{u + 1} Λ) W.smallEtaleTopology X.smallEtaleTopology).ofNatIsoRight
       (Etale.upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} Λ) v h).symm
 
-/-- **Extension by zero along an étale morphism is exact**: its stalk at a geometric point
-`x̄` is `⨁_{w̄ ∈ W_x̄} M_w̄`, geometric stalks are exact and jointly conservative, and direct
-sums of modules are exact. Left exactness is the content; right exactness holds for every
-left adjoint. -/
+/-- **Extension by zero along an étale morphism is exact.** Left exactness is the content;
+right exactness holds for every left adjoint. On presheaves, `v_!` sends `M` to
+`V ↦ ⨁_{s ∈ Hom_X(V, W)} M(V, s)`, which is left exact because direct sums of modules are
+exact (`AlgebraicGeometry.SmallSite.preservesFiniteLimits_op_lan_overMap_of_isGrothendieckAbelian`),
+and sheafification is left exact. -/
 theorem Etale.preservesFiniteLimits_etaleLowerShriek :
-    PreservesFiniteLimits (Etale.etaleLowerShriek Λ v h) :=
-  sorry
+    PreservesFiniteLimits (Etale.etaleLowerShriek Λ v h) := by
+  have heq : Etale.etaleLowerShriek Λ v h =
+      sheafToPresheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙
+        (MorphismProperty.Over.map ⊤ h).op.lan ⋙
+          presheafToSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+    rfl
+  have : PreservesFiniteLimits ((MorphismProperty.Over.map ⊤ h).op.lan :
+      (W.Etaleᵒᵖ ⥤ ModuleCat.{u + 1} Λ) ⥤ X.Etaleᵒᵖ ⥤ ModuleCat.{u + 1} Λ) :=
+    SmallSite.preservesFiniteLimits_op_lan_overMap_of_isGrothendieckAbelian _ h
+  rw [heq]
+  exact comp_preservesFiniteLimits _ _
 
 /-- **Étale restriction preserves injectives**: for an étale `v : W ⟶ X`, the pullback `v^*`
 sends injective sheaves of `Λ`-modules to injective sheaves, since it has the exact left

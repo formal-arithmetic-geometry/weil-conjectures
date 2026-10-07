@@ -5,7 +5,9 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 public import Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
+public import Mathlib.CategoryTheory.Limits.Final
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
@@ -38,12 +40,18 @@ exact.
   evaluating the left Kan extension at `L.obj X` is evaluation at `X`.
 - `CategoryTheory.Functor.preservesLimitsOfShape_lan_of_essImage_or_isEmpty`: the exactness
   statement.
+- `CategoryTheory.Functor.lanCompEvaluationIsoColimOfFinal`: if `s : K ⥤ CostructuredArrow L Y`
+  is final, evaluating the left Kan extension at `Y` is the colimit over `K`.
+- `CategoryTheory.Functor.preservesFiniteLimits_lan_of_final`: left Kan extension is left exact
+  if every comma category `CostructuredArrow L Y` receives a final functor from a discrete
+  category and coproducts are exact (`AB4`). This is the abstract form of the exactness of
+  extension by zero along an étale morphism, which is pointwise a direct sum.
 
 -/
 
 @[expose] public section
 
-universe v₁ v₂ v₃ u₁ u₂ u₃
+universe w v₁ v₂ v₃ u₁ u₂ u₃
 
 namespace CategoryTheory
 
@@ -118,6 +126,62 @@ lemma preservesFiniteLimits_lan_of_essImage_or_isEmpty [L.Full] [L.Faithful] [Ha
     (hL : ∀ Y : D, (∃ X : C, Nonempty (L.obj X ≅ Y)) ∨ IsEmpty (CostructuredArrow L Y)) :
     PreservesFiniteLimits (L.lan : (C ⥤ H) ⥤ D ⥤ H) where
   preservesFiniteLimits _ := L.preservesLimitsOfShape_lan_of_essImage_or_isEmpty hL _
+
+section Final
+
+variable [∀ F : C ⥤ H, L.HasPointwiseLeftKanExtension F]
+
+/-- If `s : K ⥤ CostructuredArrow L Y` is final, evaluating the left Kan extension along `L` at
+`Y` is the colimit over `K` of the composition of `s` with the projection: the pointwise left
+Kan extension is a colimit over `CostructuredArrow L Y`, which may be computed along `s`. -/
+noncomputable def lanCompEvaluationIsoColimOfFinal {K : Type*} [Category* K] {Y : D}
+    (s : K ⥤ CostructuredArrow L Y) [s.Final] [HasColimitsOfShape K H] :
+    L.lan ⋙ (evaluation D H).obj Y ≅
+      (whiskeringLeft _ _ H).obj (s ⋙ CostructuredArrow.proj L Y) ⋙ colim :=
+  NatIso.ofComponents (fun F ↦
+    ((Final.isColimitWhiskerEquiv s _).symm
+      (L.isPointwiseLeftKanExtensionLeftKanExtensionUnit F Y)).coconePointUniqueUpToIso
+      (colimit.isColimit _))
+    (fun {F₁ F₂} φ ↦ by
+      apply ((Final.isColimitWhiskerEquiv s _).symm
+        (L.isPointwiseLeftKanExtensionLeftKanExtensionUnit F₁ Y)).hom_ext
+      intro k
+      have h₁ := fun (F : C ⥤ H) ↦ IsColimit.comp_coconePointUniqueUpToIso_hom
+        ((Final.isColimitWhiskerEquiv s _).symm
+          (L.isPointwiseLeftKanExtensionLeftKanExtensionUnit F Y)) (colimit.isColimit _) k
+      have h₂ := congr_app (L.lanUnit.naturality φ) (s.obj k).left
+      dsimp only [Cocone.whisker_ι, NatTrans.comp_app, Functor.comp_obj, Functor.comp_map,
+        whiskeringLeft_obj_obj, colim_obj, colim_map, evaluation_obj_map,
+        Functor.whiskerLeft_app] at h₁ h₂ ⊢
+      erw [reassoc_of% (h₁ F₁), ι_colimMap]
+      have h₃ := h₁ F₂
+      simp only [colimit.cocone_ι] at h₃
+      erw [← h₃]
+      have key : (L.leftKanExtensionUnit F₁).app (s.obj k).left ≫
+          (L.lan.map φ).app (L.obj (s.obj k).left) =
+            φ.app (s.obj k).left ≫ (L.leftKanExtensionUnit F₂).app (s.obj k).left := h₂.symm
+      have nat := (L.lan.map φ).naturality (s.obj k).hom
+      erw [Category.assoc, reassoc_of% nat]
+      exact ((Category.assoc _ _ _).symm.trans ((key =≫ _).trans (Category.assoc _ _ _))).trans
+        (congrArg (_ ≫ ·) (Category.assoc _ _ _).symm))
+
+/-- Left Kan extension along `L` is left exact if every comma category `CostructuredArrow L Y`
+receives a final functor from a discrete category `Discrete ι` and coproducts indexed by such
+`ι` are exact (`AB4`): evaluated at `Y`, the left Kan extension is then a coproduct of
+evaluations, `(L.lan.obj F).obj Y ≅ ∐ᵢ F.obj (s i).left`.
+
+This is the abstract form of the left exactness of extension by zero along an étale
+morphism: on the presheaf level, the extension of `F` is `⨁ₛ F(V, s)` over the lifts `s`. -/
+lemma preservesFiniteLimits_lan_of_final [HasFiniteLimits H] [HasCoproducts.{w} H]
+    [AB4OfSize.{w} H]
+    (hL : ∀ Y : D, ∃ (ι : Type w) (s : Discrete ι ⥤ CostructuredArrow L Y), s.Final) :
+    PreservesFiniteLimits (L.lan : (C ⥤ H) ⥤ D ⥤ H) where
+  preservesFiniteLimits J _ _ := by
+    refine preservesLimitsOfShape_of_evaluation _ _ fun Y ↦ ?_
+    obtain ⟨ι, s, _⟩ := hL Y
+    exact preservesLimitsOfShape_of_natIso (L.lanCompEvaluationIsoColimOfFinal s).symm
+
+end Final
 
 end Functor
 
