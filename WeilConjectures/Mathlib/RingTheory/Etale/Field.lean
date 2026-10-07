@@ -19,6 +19,8 @@ factors; in particular there are exactly `dim_K A` of them.
 
 - `Algebra.Etale.finrank_eq_natCard_primeSpectrum`: `dim_K A` is the number of primes of `A`.
 - `Algebra.Etale.natCard_algHom_eq_finrank`: `#(A →ₐ[K] L) = dim_K A`.
+- `Algebra.Etale.iff_subsingleton_kaehlerDifferential_of_field`: a finite algebra over a field
+  is étale if and only if its module of Kähler differentials vanishes.
 -/
 
 @[expose] public section
@@ -72,5 +74,22 @@ theorem natCard_algHom_eq_finrank (L : Type v) [Field L] [Algebra K L] :
   have := finite_primeSpectrum K A
   rw [finrank_eq_natCard_primeSpectrum]
   exact Nat.card_le_card_of_injective _ (algHomOfPrimeSpectrum_injective K A L)
+
+end Algebra.Etale
+
+namespace Algebra.Etale
+
+/-- A finite algebra `A` over a field `K` is étale if and only if `Ω[A⁄K] = 0`.
+
+Part of blueprint `lem-sc-finite-etale-algebra-criterion`. A finite `K`-algebra is of finite
+presentation, and over a field formally unramified algebras of finite type are formally
+étale. -/
+theorem iff_subsingleton_kaehlerDifferential_of_field {K A : Type*} [Field K] [CommRing A]
+    [Algebra K A] [Module.Finite K A] :
+    Algebra.Etale K A ↔ Subsingleton Ω[A⁄K] := by
+  refine ⟨fun _ ↦ inferInstance, fun h ↦ ?_⟩
+  have : Algebra.FormallyUnramified K A := ⟨h⟩
+  exact ⟨.of_formallyUnramified_of_field K A,
+    FinitePresentation.of_finiteType.mp inferInstance⟩
 
 end Algebra.Etale
