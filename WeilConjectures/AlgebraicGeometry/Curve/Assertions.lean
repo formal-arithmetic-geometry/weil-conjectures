@@ -47,7 +47,15 @@ Spec k' -ι-> Spec k
 
 - `AlgebraicGeometry.Scheme.IsPrimaryTorsionSheaf`: a sheaf whose geometric stalks are
   `p`-primary torsion groups.
+- `AlgebraicGeometry.IsCurve.VanishingAboveTwo`, …,
+  `AlgebraicGeometry.IsCurve.SurjectiveRestrictionTwo`: the eight assertions `C₁, …, C₈`, each
+  as a separate predicate.
 - `AlgebraicGeometry.IsCurve.Assertions`: the conjunction `C(X, F)` of the eight assertions.
+
+## Main statements
+
+- `AlgebraicGeometry.IsCurve.assertions_iff`: `C(X, F)` holds if and only if each of the eight
+  assertions `C₁(X, F), …, C₈(X, F)` holds.
 -/
 
 @[expose] public section
@@ -61,11 +69,82 @@ namespace AlgebraicGeometry
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- A sheaf `F` of `Λ`-modules on the small étale site of `X` is *`p`-primary torsion* if
-every element of every geometric stalk of `F` is killed by a power of `p`. -/
+every element of every geometric stalk of `F` is killed by a power of `p`
+(blueprint: `def-weil-pbc-primary-torsion`; the companion condition *prime to `p`* is
+`AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder (Spec k)`). -/
 def Scheme.IsPrimaryTorsionSheaf {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (p : ℕ) : Prop :=
   ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
     (x : ↥((pointSmallEtale s).sheafFiber.obj F)), ∃ n : ℕ, p ^ n • x = 0
+
+namespace IsCurve
+
+variable {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
+  (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+
+/-- **Assertion `C₁`**: `Hᵠ(X, F) = 0` for every `q > 2`, where `Hᵠ(X, F)` is the cohomology of
+the underlying abelian sheaf of `F`. (blueprint: `def-weil-pbc-C1`) -/
+def VanishingAboveTwo : Prop :=
+  ∀ q : ℕ, 2 < q → Subsingleton (Sheaf.H
+    ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)
+
+/-- **Assertion `C₂`**: if `X` is affine, then `Hᵠ(X, F) = 0` for every `q > 1`.
+(blueprint: `def-weil-pbc-C2`) -/
+def VanishingAboveOneOfIsAffine : Prop :=
+  ∀ [IsAffine X] (q : ℕ), 1 < q → Subsingleton (Sheaf.H
+    ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)
+
+/-- **Assertion `C₃`**: for a field `k`, if `char k = p > 0` and `F` is
+`p`-primary torsion, then `Hᵠ(X, F) = 0` for every `q > 1`. (blueprint: `def-weil-pbc-C3`) -/
+def VanishingAboveOneOfIsPrimaryTorsionSheaf (k : Type u) [Field k] : Prop :=
+  ∀ (p : ℕ) [Fact p.Prime] [CharP k p], Scheme.IsPrimaryTorsionSheaf Λ F p →
+    ∀ q : ℕ, 1 < q → Subsingleton (Sheaf.H
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)
+
+/-- **Assertion `C₄`**: for a field `k`, if `F` is constructible with
+torsion prime to `char k`, then every `Hᵠ(X, F)` is finite. (blueprint: `def-weil-pbc-C4`) -/
+def FiniteOfInvertibleOrder (k : Type u) [Field k] : Prop :=
+  ∀ [Scheme.IsConstructibleSheaf F] [Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F]
+    (q : ℕ), Finite (Sheaf.H
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)
+
+/-- **Assertion `C₅`**: if `f : X ⟶ Spec k` is proper and `F` is constructible, then every
+`Hᵠ(X, F)` is finite. (blueprint: `def-weil-pbc-C5`) -/
+def FiniteOfIsProper : Prop :=
+  ∀ [IsProper f] [Scheme.IsConstructibleSheaf F] (q : ℕ), Finite (Sheaf.H
+    ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)
+
+/-- **Assertion `C₆`**: if the torsion of `F` is prime to `char k`, then for every
+algebraically closed extension `k'/k`, given by a cartesian square
+`X' ⟶ X, X' ⟶ Spec k', Spec k' ⟶ Spec k` over `f`, the pullback map
+`Hᵠ(X, F) ⟶ Hᵠ(X', F|_{X'})` (blueprint: `def-weil-pbc-extension-pullback`) is bijective for
+every `q`. (blueprint: `def-weil-pbc-C6`) -/
+def BaseChangeOfInvertibleOrder : Prop :=
+  ∀ [Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F]
+    (k' : Type u) [Field k'] [IsAlgClosed k'] {X' : Scheme.{u}} {ι : Spec (.of k') ⟶ Spec (.of k)}
+    {f' : X' ⟶ Spec (.of k')} {ι' : X' ⟶ X}, IsPullback ι' f' f ι → ∀ q : ℕ,
+    Function.Bijective (Etale.cohomologyMap ι'
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)
+
+/-- **Assertion `C₇`**: if `f : X ⟶ Spec k` is proper, then for every algebraically closed
+extension `k'/k`, given by a cartesian square over `f`, the pullback map
+`Hᵠ(X, F) ⟶ Hᵠ(X', F|_{X'})` (blueprint: `def-weil-pbc-extension-pullback`) is bijective for
+every `q`, without a restriction on the torsion of `F`. (blueprint: `def-weil-pbc-C7`) -/
+def BaseChangeOfIsProper : Prop :=
+  ∀ [IsProper f]
+    (k' : Type u) [Field k'] [IsAlgClosed k'] {X' : Scheme.{u}} {ι : Spec (.of k') ⟶ Spec (.of k)}
+    {f' : X' ⟶ Spec (.of k')} {ι' : X' ⟶ X}, IsPullback ι' f' f ι → ∀ q : ℕ,
+    Function.Bijective (Etale.cohomologyMap ι'
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)
+
+/-- **Assertion `C₈`**: for every open immersion `a : W ⟶ X`, the restriction map
+`H²(X, F) ⟶ H²(W, a⁻¹F)` is surjective. (blueprint: `def-weil-pbc-C8`) -/
+def SurjectiveRestrictionTwo : Prop :=
+  ∀ {W : Scheme.{u}} (a : W ⟶ X) [IsOpenImmersion a],
+    Function.Surjective (Etale.cohomologyMap a
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) 2)
+
+end IsCurve
 
 /-- **The eight curve-cohomology assertions** `C(X, F) = C₁(X, F) ∧ ⋯ ∧ C₈(X, F)` for a
 `k`-scheme `f : X ⟶ Spec k` and a sheaf `F` of `Λ`-modules on `X_ét`, where `Hᵠ(X, F)` is the
@@ -117,5 +196,20 @@ structure IsCurve.Assertions {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ 
   surjective_cohomologyMap_of_isOpenImmersion {W : Scheme.{u}} (a : W ⟶ X) [IsOpenImmersion a] :
     Function.Surjective (Etale.cohomologyMap a
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) 2)
+
+/-- **Detailed form of the eight curve-cohomology assertions**: `C(X, F)` is the conjunction
+of the eight assertions `C₁(X, F), …, C₈(X, F)`.
+(blueprint: `def-weil-pbc-eight-curve-assertions`,
+`sk-curve-calculations-pbc-for-the-projective-line--remark-1`) -/
+theorem IsCurve.assertions_iff {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsCurve.Assertions Λ f F ↔
+      IsCurve.VanishingAboveTwo Λ F ∧ IsCurve.VanishingAboveOneOfIsAffine Λ F ∧
+        IsCurve.VanishingAboveOneOfIsPrimaryTorsionSheaf Λ F k ∧
+        IsCurve.FiniteOfInvertibleOrder Λ F k ∧ IsCurve.FiniteOfIsProper Λ f F ∧
+        IsCurve.BaseChangeOfInvertibleOrder Λ f F ∧ IsCurve.BaseChangeOfIsProper Λ f F ∧
+        IsCurve.SurjectiveRestrictionTwo Λ F :=
+  ⟨fun h ↦ ⟨h.1, @h.2, h.3, @h.4, @h.5, @h.6, @h.7, @h.8⟩,
+    fun ⟨h₁, h₂, h₃, h₄, h₅, h₆, h₇, h₈⟩ ↦ ⟨h₁, @h₂, h₃, @h₄, @h₅, @h₆, @h₇, @h₈⟩⟩
 
 end AlgebraicGeometry
