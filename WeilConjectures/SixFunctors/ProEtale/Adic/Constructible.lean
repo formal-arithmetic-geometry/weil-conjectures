@@ -9,7 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
-public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Biproducts
+public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
 
 /-!
 # Lisse and constructible `ℓ`-adic sheaves on the pro-étale site
@@ -49,11 +50,16 @@ this is the same as a global finite stratification.
 ## Main results
 
 - `AlgebraicGeometry.ProEtale.isAdicLisseSheaf_adicConstantSheaf`: `ℚ̄_ℓ,X` is lisse.
-- The constructible sheaves contain `0` and are closed under isomorphisms, kernels, cokernels,
-  finite products and extensions; the last four are Bhatt–Scholze, Lemma 6.8.? / the blueprint
-  `def-weil-constructible-heart`, stated here with `sorry`.
-- `AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.upperStar`: pullback preserves
-  constructibility (stated with `sorry`).
+- `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.upperStar`,
+  `AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.upperStar`: pullback preserves lisse and
+  constructible sheaves. Both rest on `g^* ℚ̄_ℓ ≅ ℚ̄_ℓ`
+  (`AlgebraicGeometry.ProEtale.upperStarAdicConstantSheafIso`).
+- `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.biprod`,
+  `AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.biprod`: binary direct sums of lisse,
+  resp. constructible, sheaves are lisse, resp. constructible.
+- The constructible sheaves contain `0` and are closed under isomorphisms and finite products.
+  They are also closed under kernels, cokernels and extensions (the blueprint
+  `def-weil-constructible-heart`); these three are stated here with `sorry`.
 -/
 
 @[expose] public section
@@ -63,6 +69,7 @@ universe u
 open CategoryTheory Limits ZeroObject
 
 attribute [local instance] Abelian.hasFiniteBiproducts
+  preservesBinaryBiproducts_of_preservesBiproducts
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -152,13 +159,44 @@ lemma isAdicConstructibleSheaf_adicConstantSheaf (X : Scheme.{u}) :
     IsAdicConstructibleSheaf (adicConstantSheaf l X) :=
   (isAdicLisseSheaf_adicConstantSheaf X).isAdicConstructibleSheaf
 
+/-- Pulling back a trivialisation: if `g^* ℚ̄_ℓ,V ≅ ℚ̄_ℓ,W` and `F ≅ ℚ̄_ℓ,Vⁿ`, then
+`g^* F ≅ ℚ̄_ℓ,Wⁿ`. -/
+lemma nonempty_upperStar_iso_biproduct {V W : Scheme.{u}} (g : W ⟶ V)
+    (hg : Nonempty ((g)^*[WeilCoefficients.{u} l].obj (adicConstantSheaf l V) ≅
+      adicConstantSheaf l W))
+    {F : Sheaf (Scheme.ProEt.topology V) (WeilCoefficients.{u} l)} {n : ℕ}
+    (e : F ≅ ⨁ fun _ : Fin n ↦ adicConstantSheaf l V) :
+    Nonempty ((g)^*[WeilCoefficients.{u} l].obj F ≅ ⨁ fun _ : Fin n ↦ adicConstantSheaf l W) :=
+  ⟨(g)^*[_].mapIso e ≪≫ (g)^*[_].mapBiproduct _ ≪≫ biproduct.mapIso fun _ ↦ hg.some⟩
+
 /-- The pullback of a lisse sheaf is lisse: the pullback of a trivialising cover is a
 trivialising cover, and the pullback of the constant `ℓ`-adic sheaf is the constant `ℓ`-adic
-sheaf. -/
+sheaf (`AlgebraicGeometry.ProEtale.upperStarAdicConstantSheafIso`). -/
 theorem IsAdicLisseSheaf.upperStar {Y : Scheme.{u}} (f : Y ⟶ X)
     {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)} (hF : IsAdicLisseSheaf F) :
-    IsAdicLisseSheaf ((f)^*[WeilCoefficients.{u} l].obj F) :=
-  sorry
+    IsAdicLisseSheaf ((f)^*[WeilCoefficients.{u} l].obj F) := by
+  obtain ⟨R, hR, h⟩ := hF
+  refine ⟨R.pullbackArrows f, Precoverage.pullbackArrows_mem f hR, ?_⟩
+  rintro _ _ ⟨V, g, hg⟩
+  obtain ⟨n, ⟨e⟩⟩ := h g hg
+  obtain ⟨e'⟩ := nonempty_upperStar_iso_biproduct (pullback.fst g f)
+    ⟨upperStarAdicConstantSheafIso l _⟩ e
+  exact ⟨n, ⟨(upperStarCompIso _ pullback.condition.symm).app F ≪≫ e'⟩⟩
+
+/-- The pullback of a stratified lisse sheaf is stratified lisse: the base changes of the
+strata are strata, and the restrictions to them are pullbacks of lisse sheaves. -/
+theorem IsAdicStratifiedLisseSheaf.upperStar {Y : Scheme.{u}} (f : Y ⟶ X)
+    {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
+    (hF : IsAdicStratifiedLisseSheaf F) :
+    IsAdicStratifiedLisseSheaf ((f)^*[WeilCoefficients.{u} l].obj F) := by
+  obtain ⟨ι, hι, Z, i, hi, hcover, h⟩ := hF
+  refine ⟨ι, hι, fun k ↦ pullback (i k) f, fun k ↦ pullback.snd (i k) f, fun k ↦ inferInstance,
+    fun y ↦ ?_, fun k ↦ ((h k).upperStar (pullback.fst (i k) f)).of_iso
+      ((upperStarCompIso _ pullback.condition).app F)⟩
+  obtain ⟨k, ⟨z, hz⟩, hk⟩ := hcover (f y)
+  obtain ⟨t, -, ht⟩ := Scheme.Pullback.exists_preimage_pullback z y hz
+  refine ⟨k, ⟨t, ht⟩, fun k' ⟨t', ht'⟩ ↦ hk k' ⟨pullback.fst (i k') f t', ?_⟩⟩
+  rw [← ht', ← Scheme.Hom.comp_apply, pullback.condition, Scheme.Hom.comp_apply]
 
 /-- The pullback of a constructible sheaf is constructible: the preimages of the open
 neighbourhoods and of the strata are open neighbourhoods and strata, given by the base changes
@@ -166,14 +204,79 @@ of the immersions, and the restrictions to them are pullbacks of lisse sheaves. 
 theorem IsAdicConstructibleSheaf.upperStar {Y : Scheme.{u}} (f : Y ⟶ X)
     {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
     (hF : IsAdicConstructibleSheaf F) :
-    IsAdicConstructibleSheaf ((f)^*[WeilCoefficients.{u} l].obj F) :=
-  sorry
+    IsAdicConstructibleSheaf ((f)^*[WeilCoefficients.{u} l].obj F) := by
+  intro y
+  obtain ⟨W, j, hj, ⟨w, hw⟩, h⟩ := hF (f y)
+  obtain ⟨t, -, ht⟩ := Scheme.Pullback.exists_preimage_pullback w y hw
+  exact ⟨pullback j f, pullback.snd j f, inferInstance, ⟨t, ht⟩,
+    (h.upperStar (pullback.fst j f)).of_iso ((upperStarCompIso _ pullback.condition).app F)⟩
 
 /-- A finite direct sum of lisse sheaves is lisse: refine the two trivialising covers. -/
 theorem IsAdicLisseSheaf.biprod
     {F G : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)} (hF : IsAdicLisseSheaf F)
-    (hG : IsAdicLisseSheaf G) : IsAdicLisseSheaf (F ⊞ G) :=
-  sorry
+    (hG : IsAdicLisseSheaf G) : IsAdicLisseSheaf (F ⊞ G) := by
+  obtain ⟨R, hR, hRF⟩ := hF
+  obtain ⟨R', hR', hR'G⟩ := hG
+  obtain ⟨ι, V, f, rfl⟩ := R.exists_eq_ofArrows
+  obtain ⟨ι', V', f', rfl⟩ := R'.exists_eq_ofArrows
+  refine ⟨_, Precoverage.comp_mem_coverings f hR (fun i j ↦ pullback.fst (f i) (f' j))
+    (fun i ↦ Precoverage.mem_coverings_of_isPullback f' hR' (f i) _ _
+      fun j ↦ IsPullback.of_hasPullback (f i) (f' j)), ?_⟩
+  rintro _ _ ⟨⟨i, j⟩⟩
+  have := Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hR (.mk i)
+  have := Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hR' (.mk j)
+  obtain ⟨n, ⟨e⟩⟩ := hRF (f i) (.mk i)
+  obtain ⟨m, ⟨e'⟩⟩ := hR'G (f' j) (.mk j)
+  obtain ⟨e₁⟩ := nonempty_upperStar_iso_biproduct (pullback.fst (f i) (f' j))
+    ⟨upperStarAdicConstantSheafIsoOfWeaklyEtale l _⟩ e
+  obtain ⟨e₂⟩ := nonempty_upperStar_iso_biproduct (pullback.snd (f i) (f' j))
+    ⟨upperStarAdicConstantSheafIsoOfWeaklyEtale l _⟩ e'
+  refine ⟨n + m, ⟨(_)^*[_].mapBiprod F G ≪≫ biprod.mapIso
+    ((upperStarComp _ _ _).app F ≪≫ e₁)
+    ((upperStarCongr _ pullback.condition).app G ≪≫ (upperStarComp _ _ _).app G ≪≫ e₂) ≪≫
+    biprodBiproductSumIso (fun _ ↦ adicConstantSheaf l _) ≪≫
+      biproduct.whiskerEquiv finSumFinEquiv (g := fun _ ↦ adicConstantSheaf l _)
+        (fun _ ↦ Iso.refl _)⟩⟩
+
+/-- A binary direct sum of stratified lisse sheaves is stratified lisse: on the common
+refinement of the two stratifications both summands are lisse. -/
+theorem IsAdicStratifiedLisseSheaf.biprod
+    {F G : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
+    (hF : IsAdicStratifiedLisseSheaf F) (hG : IsAdicStratifiedLisseSheaf G) :
+    IsAdicStratifiedLisseSheaf (F ⊞ G) := by
+  obtain ⟨ι, hι, Z, i, hi, hcover, h⟩ := hF
+  obtain ⟨ι', hι', Z', i', hi', hcover', h'⟩ := hG
+  refine ⟨ι × ι', inferInstance, fun k ↦ pullback (i k.1) (i' k.2),
+    fun k ↦ pullback.fst (i k.1) (i' k.2) ≫ i k.1, fun k ↦ inferInstance, fun x ↦ ?_,
+    fun k ↦ ?_⟩
+  · obtain ⟨k, ⟨z, hz⟩, hk⟩ := hcover x
+    obtain ⟨k', ⟨z', hz'⟩, hk'⟩ := hcover' x
+    obtain ⟨t, ht, -⟩ := Scheme.Pullback.exists_preimage_pullback z z' (hz.trans hz'.symm)
+    refine ⟨(k, k'), ⟨t, by rw [Scheme.Hom.comp_apply, ht, hz]⟩, fun m ⟨t', ht'⟩ ↦ ?_⟩
+    refine Prod.ext (hk m.1 ⟨_, ht'⟩) (hk' m.2 ⟨pullback.snd (i m.1) (i' m.2) t', ?_⟩)
+    rw [← ht', ← Scheme.Hom.comp_apply, ← pullback.condition, Scheme.Hom.comp_apply]
+  · exact (((h k.1).upperStar _).biprod (((h' k.2).upperStar
+      (pullback.snd (i k.1) (i' k.2))).of_iso
+        ((upperStarCompIso _ pullback.condition.symm).app G))).of_iso
+      ((upperStarComp _ _ _).app _ ≪≫ (_)^*[_].mapIso ((_)^*[_].mapBiprod F G) ≪≫
+        (_)^*[_].mapBiprod _ _).symm
+
+/-- A binary direct sum of constructible sheaves is constructible: on the intersection of the
+two open neighbourhoods both summands are stratified lisse. -/
+theorem IsAdicConstructibleSheaf.biprod
+    {F G : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
+    (hF : IsAdicConstructibleSheaf F) (hG : IsAdicConstructibleSheaf G) :
+    IsAdicConstructibleSheaf (F ⊞ G) := by
+  intro x
+  obtain ⟨W, j, hj, ⟨w, hw⟩, h⟩ := hF x
+  obtain ⟨W', j', hj', ⟨w', hw'⟩, h'⟩ := hG x
+  obtain ⟨t, ht, -⟩ := Scheme.Pullback.exists_preimage_pullback w w' (hw.trans hw'.symm)
+  refine ⟨pullback j j', pullback.fst j j' ≫ j, inferInstance,
+    ⟨t, by rw [Scheme.Hom.comp_apply, ht, hw]⟩, ?_⟩
+  exact ((h.upperStar _).biprod ((h'.upperStar (pullback.snd j j')).of_iso
+      ((upperStarCompIso _ pullback.condition.symm).app G))).of_iso
+    ((upperStarComp _ _ _).app _ ≪≫ (_)^*[_].mapIso ((_)^*[_].mapBiprod F G) ≪≫
+      (_)^*[_].mapBiprod _ _).symm
 
 /-- A sheaf of `ℚ̄_ℓ`-modules on the small pro-étale site of `X` is an *irreducible `ℓ`-adic local
 system* if it is lisse and nonzero, and every lisse subsheaf of it is zero or all of it. For
@@ -219,10 +322,16 @@ instance : (adicConstructibleSheaf l X).IsClosedUnderKernels :=
 instance : (adicConstructibleSheaf l X).IsClosedUnderCokernels :=
   sorry
 
-/-- **Finite products of constructible sheaves are constructible**: refine the
-stratifications. -/
-instance : (adicConstructibleSheaf l X).IsClosedUnderFiniteProducts :=
-  sorry
+/-- **Finite products of constructible sheaves are constructible**: the empty product is `0`,
+and a binary product is a binary direct sum
+(`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.biprod`). -/
+instance : (adicConstructibleSheaf l X).IsClosedUnderFiniteProducts := by
+  have : (adicConstructibleSheaf l X).IsClosedUnderBinaryProducts := by
+    refine ⟨fun Y ⟨p⟩ ↦ ?_⟩
+    exact ((p.prop_diag_obj ⟨.left⟩).biprod (p.prop_diag_obj ⟨.right⟩)).of_iso
+      (biprod.isoProd _ _ ≪≫ (HasLimit.isoOfNatIso (diagramIsoPair _)).symm ≪≫
+        (p.isLimit.conePointUniqueUpToIso (limit.isLimit _)).symm)
+  exact .mk'
 
 /-- **Extensions of constructible sheaves are constructible**: on a common stratification an
 extension of lisse sheaves is lisse, an extension of continuous representations of the

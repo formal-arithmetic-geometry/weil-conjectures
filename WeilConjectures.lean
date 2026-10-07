@@ -260,6 +260,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.CategoryTheory.Sites.Point.Flat
+public import WeilConjectures.CategoryTheory.Sites.PullbackIsoOfLocallyGenerated
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlus
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlusSheaf
@@ -555,6 +556,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreti
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
@@ -644,6 +646,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProduc
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndoFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.Presentable.Limits
@@ -730,6 +733,7 @@ public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
 public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueFieldBaseChange
 public import WeilConjectures.Mathlib.RingTheory.Etale.Section
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
+public import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
 public import WeilConjectures.Mathlib.RingTheory.Extension.Presentation.Submersive
 public import WeilConjectures.Mathlib.RingTheory.Flat.DescentAlgebra
 public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
@@ -812,6 +816,7 @@ public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Exterior
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdeal
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.IdentityComponent
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Kronecker
+public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
@@ -931,6 +936,7 @@ public import WeilConjectures.SixFunctors.OpenClosed.Stalk
 public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ClopenIdempotent
