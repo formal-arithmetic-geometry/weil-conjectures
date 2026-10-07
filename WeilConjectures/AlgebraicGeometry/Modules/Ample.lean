@@ -75,6 +75,8 @@ leading coefficient whenever that function is a numerical polynomial of degree a
   module on a connected proper curve has positive degree.
 - `AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`: an ample invertible module on a proper
   curve has positive degree.
+- `AlgebraicGeometry.IsAmple.isEmpty_iso_unit`: an ample invertible module on a proper curve is
+  not trivial.
 - `AlgebraicGeometry.IsAmple.isEmpty_tensorPow_iso_unit`: no positive tensor power of an ample
   invertible module on a proper curve is trivial.
 - `AlgebraicGeometry.Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow`: twisting the
@@ -508,6 +510,21 @@ theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)
   have := topologicalKrullDim_zero_of_discreteTopology X
   rw [hdim] at this
   exact absurd this (by decide)
+
+/-- **An ample module on a proper curve is not trivial.** Let `K` be algebraically closed, `X` a
+proper curve over `K` and `L` an ample invertible `𝒪_X`-module. Then `L ≇ 𝒪_X`: `L` has positive
+degree (`AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`), whereas `𝒪_X` has degree `0`.
+
+This is the last assertion of blueprint `lem-sc-ample-positive-degree`. -/
+theorem IsAmple.isEmpty_iso_unit [IsAlgClosed K] {f : X ⟶ Spec (.of K)} [IsProper f]
+    (hdim : topologicalKrullDim X = 1) {L : X.Modules} [L.IsInvertible] (hL : IsAmple f L) :
+    IsEmpty (L ≅ 𝟙_ X.Modules) := by
+  let : X.Over (Spec (.of K)) := ⟨f⟩
+  refine ⟨fun e ↦ ?_⟩
+  have := f.degree_pos_of_isAmple hdim L hL
+  rw [Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one f hdim,
+    Scheme.Modules.degree_congr K e] at this
+  exact this.ne' (Scheme.Modules.degree_unit K)
 
 /-- **No positive tensor power of an ample module on a proper curve is trivial.** Let `K` be
 algebraically closed, `X` a proper curve over `K` and `L` an ample invertible `𝒪_X`-module. For

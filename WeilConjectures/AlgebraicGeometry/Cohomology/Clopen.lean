@@ -120,35 +120,56 @@ theorem preservesFiniteColimits_sheafPushforward (hU : IsClosed (U : Set X)) :
   have := Functor.preservesHomology_of_preservesEpis_and_kernels U.sheafPushforward
   exact Functor.preservesFiniteColimits_of_preservesHomology _
 
-/-- If `U` is also closed, `H^n(X, (U.ι)_* N) ≅ H^n(U, N)` for every abelian sheaf `N` on `U`: this
-is the `Ext`-adjunction `CategoryTheory.Adjunction.extAddEquiv` for the exact functors
-`U.sheafRestrict ⊣ U.sheafPushforward`, together with the identification of the restriction of
-the constant sheaf `ℤ`. -/
-noncomputable def sheafHPushforwardAddEquiv (hU : IsClosed (U : Set X))
+/-- The isomorphism `AlgebraicGeometry.Scheme.Opens.sheafHPushforwardAddEquiv` for `F = (U.ι)_* N`
+itself. -/
+noncomputable def sheafHPushforwardAddEquivAux (hU : IsClosed (U : Set X))
     (N : Sheaf (Opens.grothendieckTopology U.toScheme) AddCommGrpCat.{u}) (n : ℕ) :
     Sheaf.H (U.sheafPushforward.obj N) n ≃+ Sheaf.H N n :=
   have := U.preservesFiniteColimits_sheafPushforward hU
   (U.sheafRestrictAdjunction.extAddEquiv _ N n).trans
     (Ext.precompAddEquiv (U.sheafRestrictConstantSheafIso.app _).symm N n)
 
-lemma sheafHPushforwardAddEquiv_apply (hU : IsClosed (U : Set X))
-    (N : Sheaf (Opens.grothendieckTopology U.toScheme) AddCommGrpCat.{u}) (n : ℕ)
-    (x : Sheaf.H (U.sheafPushforward.obj N) n) :
-    U.sheafHPushforwardAddEquiv hU N n x =
-      (Ext.mk₀ (U.sheafRestrictConstantSheafIso.app _).inv).comp
-        (U.sheafRestrictAdjunction.mapExtCounit _ N n x) (zero_add n) :=
-  rfl
-
-/-- The isomorphism `AlgebraicGeometry.Scheme.Opens.sheafHPushforwardAddEquiv` is natural in
-the sheaf. -/
-lemma sheafHPushforwardAddEquiv_map (hU : IsClosed (U : Set X))
+lemma sheafHPushforwardAddEquivAux_map (hU : IsClosed (U : Set X))
     {N N' : Sheaf (Opens.grothendieckTopology U.toScheme) AddCommGrpCat.{u}} (g : N ⟶ N')
     (n : ℕ) (x : Sheaf.H (U.sheafPushforward.obj N) n) :
-    U.sheafHPushforwardAddEquiv hU N' n (Sheaf.H.map (U.sheafPushforward.map g) n x) =
-      Sheaf.H.map g n (U.sheafHPushforwardAddEquiv hU N n x) := by
-  rw [sheafHPushforwardAddEquiv_apply, sheafHPushforwardAddEquiv_apply, Sheaf.H.map_apply,
-    Sheaf.H.map_apply, Adjunction.mapExtCounit_comp_mk₀]
+    U.sheafHPushforwardAddEquivAux hU N' n (Sheaf.H.map (U.sheafPushforward.map g) n x) =
+      Sheaf.H.map g n (U.sheafHPushforwardAddEquivAux hU N n x) := by
+  change (Ext.mk₀ (U.sheafRestrictConstantSheafIso.app _).inv).comp
+      (U.sheafRestrictAdjunction.mapExtCounit _ N' n _) (zero_add n) =
+    Sheaf.H.map g n ((Ext.mk₀ (U.sheafRestrictConstantSheafIso.app _).inv).comp
+      (U.sheafRestrictAdjunction.mapExtCounit _ N n x) (zero_add n))
+  rw [Sheaf.H.map_apply, Sheaf.H.map_apply, Adjunction.mapExtCounit_comp_mk₀]
   exact (Ext.comp_assoc _ _ _ (zero_add n) (add_zero n) (by omega)).symm
+
+/-- If `U` is also closed, `H^n(X, (U.ι)_* N) ≅ H^n(U, N)` for every abelian sheaf `N` on `U`: this
+is the `Ext`-adjunction `CategoryTheory.Adjunction.extAddEquiv` for the exact functors
+`U.sheafRestrict ⊣ U.sheafPushforward`, together with the identification of the restriction of
+the constant sheaf `ℤ`. For flexibility, the source is any sheaf `F` with an isomorphism
+`α : F ≅ (U.ι)_* N`. -/
+noncomputable def sheafHPushforwardAddEquiv (hU : IsClosed (U : Set X))
+    {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
+    {N : Sheaf (Opens.grothendieckTopology U.toScheme) AddCommGrpCat.{u}}
+    (α : F ≅ U.sheafPushforward.obj N) (n : ℕ) :
+    Sheaf.H F n ≃+ Sheaf.H N n :=
+  ({ toFun := Sheaf.H.map α.hom n
+     invFun := Sheaf.H.map α.inv n
+     left_inv x := by rw [← Sheaf.H.map_comp_apply, α.hom_inv_id, Sheaf.H.map_id_apply]
+     right_inv y := by rw [← Sheaf.H.map_comp_apply, α.inv_hom_id, Sheaf.H.map_id_apply]
+     map_add' := map_add _ } : Sheaf.H F n ≃+ Sheaf.H (U.sheafPushforward.obj N) n).trans
+    (U.sheafHPushforwardAddEquivAux hU N n)
+
+/-- The isomorphism `AlgebraicGeometry.Scheme.Opens.sheafHPushforwardAddEquiv` is natural. -/
+lemma sheafHPushforwardAddEquiv_map (hU : IsClosed (U : Set X))
+    {F F' : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
+    {N N' : Sheaf (Opens.grothendieckTopology U.toScheme) AddCommGrpCat.{u}}
+    (α : F ≅ U.sheafPushforward.obj N) (α' : F' ≅ U.sheafPushforward.obj N') (φ : F ⟶ F')
+    (g : N ⟶ N') (h : φ ≫ α'.hom = α.hom ≫ U.sheafPushforward.map g) (n : ℕ)
+    (x : Sheaf.H F n) :
+    U.sheafHPushforwardAddEquiv hU α' n (Sheaf.H.map φ n x) =
+      Sheaf.H.map g n (U.sheafHPushforwardAddEquiv hU α n x) := by
+  change U.sheafHPushforwardAddEquivAux hU N' n (Sheaf.H.map α'.hom n (Sheaf.H.map φ n x)) =
+    Sheaf.H.map g n (U.sheafHPushforwardAddEquivAux hU N n (Sheaf.H.map α.hom n x))
+  rw [← Sheaf.H.map_comp_apply, h, Sheaf.H.map_comp_apply, sheafHPushforwardAddEquivAux_map]
 
 end Opens
 
@@ -172,46 +193,60 @@ lemma smulHom_pushforward_ι (N : U.toScheme.Modules) (a : Γ(X, ⊤)) :
   rw [← CategoryTheory.comp_apply, U.ι.naturality]
   rfl
 
-/-- The isomorphism `AlgebraicGeometry.Scheme.Opens.sheafHPushforwardAddEquiv` is natural in the
-sheaf of modules. -/
-lemma sheafHPushforwardAddEquiv_H_map (hU : IsClosed (U : Set X)) {N N' : U.toScheme.Modules}
-    (g : N ⟶ N') (n : ℕ) (x : ((pushforward U.ι).obj N).H n) :
-    U.sheafHPushforwardAddEquiv hU ((SheafOfModules.toSheaf _).obj N') n
-        (H.map ((pushforward U.ι).map g) n x) =
-      H.map g n (U.sheafHPushforwardAddEquiv hU ((SheafOfModules.toSheaf _).obj N) n x) :=
-  Opens.sheafHPushforwardAddEquiv_map U hU ((SheafOfModules.toSheaf _).map g) n x
+variable (hU : IsClosed (U : Set X))
+
+/-- If `U` is an open and closed subscheme of `X`, then `H^n(X, (U.ι)_* N) ≅ H^n(U, N)` for every
+`𝒪_U`-module `N`, by `AlgebraicGeometry.Scheme.Opens.sheafHPushforwardAddEquiv`. -/
+noncomputable def H.pushforwardιAddEquiv (N : U.toScheme.Modules) (n : ℕ) :
+    ((pushforward U.ι).obj N).H n ≃+ N.H n :=
+  (U.sheafHPushforwardAddEquiv hU (N := (SheafOfModules.toSheaf _).obj N)
+    (Iso.refl _ : (SheafOfModules.toSheaf _).obj ((pushforward U.ι).obj N) ≅
+      U.sheafPushforward.obj ((SheafOfModules.toSheaf _).obj N)) n :
+    Sheaf.H ((SheafOfModules.toSheaf _).obj ((pushforward U.ι).obj N)) n ≃+
+      Sheaf.H ((SheafOfModules.toSheaf _).obj N) n)
+
+/-- The isomorphism `AlgebraicGeometry.Scheme.Modules.H.pushforwardιAddEquiv` is compatible with
+multiplication by global functions. -/
+lemma H.pushforwardιAddEquiv_map_smulHom (N : U.toScheme.Modules) (n : ℕ) (a : Γ(X, ⊤))
+    (x : ((pushforward U.ι).obj N).H n) :
+    H.pushforwardιAddEquiv U hU N n (H.map (((pushforward U.ι).obj N).smulHom a) n x) =
+      H.map (N.smulHom (U.ι.appTop a)) n (H.pushforwardιAddEquiv U hU N n x) := by
+  rw [smulHom_pushforward_ι]
+  exact U.sheafHPushforwardAddEquiv_map hU _ _ _ _
+    ((Category.comp_id _).trans (Category.id_comp _).symm) n x
 
 variable (k : Type u) [Field k] [X.Over (Spec (.of k))]
 
 /-- **Cohomology of an open and closed subscheme.** If `U` is an open and closed subscheme of a
 `k`-scheme `X`, then `H^n(X, (U.ι)_* N) ≅ H^n(U, N)` as `k`-vector spaces, for every
 `𝒪_U`-module `N`. Here `U` is a `k`-scheme through `X`. -/
-noncomputable def H.pushforwardιLinearEquiv (hU : IsClosed (U : Set X))
-    (N : U.toScheme.Modules) (n : ℕ) :
+noncomputable def H.pushforwardιLinearEquiv (N : U.toScheme.Modules) (n : ℕ) :
     letI : U.toScheme.Over (Spec (.of k)) := ⟨U.ι ≫ X ↘ Spec (.of k)⟩
     ((pushforward U.ι).obj N).H n ≃ₗ[k] N.H n :=
   letI : U.toScheme.Over (Spec (.of k)) := ⟨U.ι ≫ X ↘ Spec (.of k)⟩
-  { U.sheafHPushforwardAddEquiv hU ((SheafOfModules.toSheaf _).obj N) n with
+  { H.pushforwardιAddEquiv U hU N n with
     map_smul' c x := by
-      change U.sheafHPushforwardAddEquiv hU ((SheafOfModules.toSheaf _).obj N) n
-          (H.map (((pushforward U.ι).obj N).smulHom (globalSectionsRingHom k c)) n x) =
-        H.map (N.smulHom (globalSectionsRingHom k (X := U.toScheme) c)) n
-          (U.sheafHPushforwardAddEquiv hU ((SheafOfModules.toSheaf _).obj N) n x)
       have hc : globalSectionsRingHom k (X := U.toScheme) c =
           U.ι.appTop (globalSectionsRingHom k c) := by
         change ((ΓSpecIso _).inv ≫ (U.ι ≫ X ↘ Spec (.of k)).appTop).hom c =
           U.ι.appTop (((ΓSpecIso _).inv ≫ (X ↘ Spec (.of k)).appTop).hom c)
         rw [Scheme.Hom.comp_appTop]
         rfl
-      rw [smulHom_pushforward_ι, sheafHPushforwardAddEquiv_H_map, hc] }
+      change H.pushforwardιAddEquiv U hU N n
+          (H.map (((pushforward U.ι).obj N).smulHom (globalSectionsRingHom k c)) n x) =
+        H.map (N.smulHom (globalSectionsRingHom k (X := U.toScheme) c)) n
+          (H.pushforwardιAddEquiv U hU N n x)
+      rw [hc]
+      exact H.pushforwardιAddEquiv_map_smulHom U hU N n _ x }
 
+include hU in
 /-- If `U` is an open and closed subscheme of a `k`-scheme `X`, then
 `h^n(X, (U.ι)_* N) = h^n(U, N)` for every `𝒪_U`-module `N`. -/
-theorem finrankH_pushforward_ι (hU : IsClosed (U : Set X)) (N : U.toScheme.Modules) (n : ℕ) :
+theorem finrankH_pushforward_ι (N : U.toScheme.Modules) (n : ℕ) :
     ((pushforward U.ι).obj N).finrankH k n =
       letI : U.toScheme.Over (Spec (.of k)) := ⟨U.ι ≫ X ↘ Spec (.of k)⟩
       N.finrankH k n :=
-  (H.pushforwardιLinearEquiv U k hU N n).finrank_eq
+  (H.pushforwardιLinearEquiv U hU k N n).finrank_eq
 
 end Pushforward
 

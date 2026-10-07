@@ -242,7 +242,7 @@ private theorem finrankH_eq_sum_of_pairwise_disjoint_aux {ι : Type} [Fintype ι
   rw [finrankH_congr k φ q, finrankH_of_isBilimit k (biproduct.isBilimit N) q]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   let : (U i).toScheme.Over (Spec (.of k)) := ⟨(U i).ι ≫ X ↘ Spec (.of k)⟩
-  exact (finrankH_pushforward_ι (U i) k (hclosed i) _ q).trans
+  exact (finrankH_pushforward_ι (U i) (hclosed i) k _ q).trans
     (finrankH_congr k ((restrictFunctorIsoPullback (U i).ι).app M) q)
 
 /-- **Cohomology of a finite disjoint union.** If `X` is the disjoint union of finitely many
