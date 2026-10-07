@@ -8,6 +8,7 @@ module
 public import Mathlib.Topology.Connected.LocallyConnected
 public import Mathlib.Topology.NoetherianSpace
 public import Mathlib.Topology.Separation.Connected
+public import Mathlib.Topology.Sober
 
 /-!
 # Connected components of a noetherian space
@@ -143,5 +144,35 @@ instance (priority := 100) locallyConnectedSpace : LocallyConnectedSpace α := b
   intro F hF x hx
   rw [connectedComponentIn_eq_image hx]
   exact hF.isOpenMap_subtype_val _ (isOpen_connectedComponent _)
+
+/-- **Isolating a point of a closed set.** In a noetherian quasi-sober space, a closed point `y`
+of a closed set `Z` which has no other generisation in `Z` has an open neighbourhood meeting `Z`
+only in `y`: the irreducible components of `Z` containing `y` are the closures of points
+generalising `y`, hence equal to `{y}`, and the finitely many other ones are closed and avoid
+`y`. -/
+theorem exists_isOpen_inter_eq_singleton [QuasiSober α] {Z : Set α} (hZ : IsClosed Z) {y : α}
+    (hy : y ∈ Z) (hyc : IsClosed {y}) (h : ∀ z ∈ Z, z ⤳ y → z = y) :
+    ∃ W : Set α, IsOpen W ∧ y ∈ W ∧ W ∩ Z = {y} := by
+  obtain ⟨S, hSf, hSc, hSi, rfl⟩ := exists_finite_set_isClosed_irreducible hZ
+  have hfin : Set.Finite {t | t ∈ S ∧ y ∉ t} := hSf.subset fun _ ht ↦ ht.1
+  have hcl : IsClosed (⋃₀ {t | t ∈ S ∧ y ∉ t}) := by
+    rw [Set.sUnion_eq_biUnion]
+    exact hfin.isClosed_biUnion fun t ht ↦ hSc t ht.1
+  refine ⟨(⋃₀ {t | t ∈ S ∧ y ∉ t})ᶜ, hcl.isOpen_compl, fun hy' ↦ ?_, ?_⟩
+  · obtain ⟨t, ht, hyt⟩ := hy'
+    exact ht.2 hyt
+  refine Set.eq_singleton_iff_unique_mem.2 ⟨⟨fun hy' ↦ ?_, hy⟩, ?_⟩
+  · obtain ⟨t, ht, hyt⟩ := hy'
+    exact ht.2 hyt
+  rintro z ⟨hzW, t, ht, hzt⟩
+  have hyt : y ∈ t := by
+    by_contra hyt
+    exact hzW ⟨t, ⟨ht, hyt⟩, hzt⟩
+  obtain ⟨g, hg⟩ := QuasiSober.sober (hSi t ht) (hSc t ht)
+  have hgy : g = y := h g ⟨t, ht, hg.mem⟩ (hg.specializes hyt)
+  subst hgy
+  have : t = {g} := by rw [← hg.def, hyc.closure_eq]
+  rw [this] at hzt
+  exact hzt
 
 end TopologicalSpace.NoetherianSpace
