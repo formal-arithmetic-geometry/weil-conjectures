@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicGeometry.OrderOfVanishing
 public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
+public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Duality
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.AlgebraicGeometry.Regular
@@ -293,13 +295,33 @@ section FiniteDuality
 
 variable [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
 
+/-- **Trace identification along a finite flat morphism to `ℙ¹`.** Let `X` be a smooth curve
+over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. Then
+`Hom_{𝒪_{ℙ¹}}(f_* ℳ, Ω¹_{ℙ¹_k/k}) ≅ f_* Hom_{𝒪_X}(ℳ, Ω¹_{X/k})` as sheaves of modules on `ℙ¹_k`,
+naturally in finite locally free `ℳ`. This is the combination of the adjunction
+`Hom(f_* ℳ, 𝒢) ≅ f_* Hom(ℳ, Hom(f_* 𝒪_X, 𝒢))` of the finite morphism `f` with the trace
+identification `Hom(f_* 𝒪_X, Ω¹_{ℙ¹}) ≅ f_* Ω¹_{X/k}` (the codifferent of a finite flat extension
+of discrete valuation rings), i.e. Grothendieck duality `f^! Ω¹_{ℙ¹} ≅ Ω¹_{X/k}` for `f`.
+
+(blueprint: `lem-sc-finite-duality`, the sheaf-level statement) -/
+theorem nonempty_homObj_pushforward_iso_pushforward_homObj (f : X ⟶ ProjectiveLine (Spec (.of k)))
+    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
+    Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
+        (Modules.pushforward f).op ⋙
+        (SheafOfModules.homFunctor (ProjectiveLine (Spec (.of k))).sheaf).flip.obj
+          (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials ≅
+      (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
+        (SheafOfModules.homFunctor X.sheaf).flip.obj (X ↘ Spec (.of k)).relativeDifferentials ⋙
+          Modules.pushforward f) :=
+  sorry
+
 /-- **Duality along a finite flat morphism to `ℙ¹`.** Let `X` be a smooth curve over `k` and
 `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. Then
 `Hom_{𝒪_{ℙ¹}}(f_* ℳ, Ω¹_{ℙ¹_k/k}) ≅ H⁰(X, ℳᵛ ⊗ Ω¹_{X/k})`, naturally in finite locally free
-`ℳ`. It is the composite of the adjunction
-`Hom(f_* ℳ, 𝒢) ≅ Hom(ℳ, Hom(f_* 𝒪_X, 𝒢))` of the finite morphism `f`, the trace identification
-`Hom(f_* 𝒪_X, Ω¹_{ℙ¹}) ≅ f_* Ω¹_{X/k}` (the codifferent of a finite flat extension of discrete
-valuation rings) and `Hom(ℳ, Ω¹_{X/k}) ≅ ℳᵛ ⊗ Ω¹_{X/k}`.
+`ℳ`. Taking global sections in `nonempty_homObj_pushforward_iso_pushforward_homObj` gives
+`Hom(f_* ℳ, Ω¹_{ℙ¹}) ≅ H⁰(ℙ¹, f_* Hom(ℳ, Ω¹_{X/k})) = H⁰(X, Hom(ℳ, Ω¹_{X/k}))`
+(`Modules.pushforwardCompCohomologyFunctorZeroIso`), and `Hom(ℳ, Ω¹_{X/k}) ≅ ℳᵛ ⊗ Ω¹_{X/k}`
+since `Ω¹_{X/k}` is invertible (`Modules.dualTensorHomIso`).
 
 (blueprint: `lem-sc-finite-duality`) -/
 theorem nonempty_homObj_pushforward_iso (f : X ⟶ ProjectiveLine (Spec (.of k)))
@@ -310,8 +332,17 @@ theorem nonempty_homObj_pushforward_iso (f : X ⟶ ProjectiveLine (Spec (.of k))
           (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials ⋙
         Modules.cohomologyFunctor k 0 ≅
       (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
-        tensorRight (X ↘ Spec (.of k)).relativeDifferentials ⋙ Modules.cohomologyFunctor k 0) :=
-  sorry
+        tensorRight (X ↘ Spec (.of k)).relativeDifferentials ⋙ Modules.cohomologyFunctor k 0) := by
+  obtain ⟨E⟩ := nonempty_homObj_pushforward_iso_pushforward_homObj f
+  have := Hom.isInvertible_relativeDifferentials (X ↘ Spec (.of k))
+  have := Modules.IsInvertible.of_sheafOfModules (X ↘ Spec (.of k)).relativeDifferentials
+  exact ⟨Functor.isoWhiskerRight E (Modules.cohomologyFunctor k 0) ≪≫
+    Functor.isoWhiskerLeft ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
+      (SheafOfModules.homFunctor X.sheaf).flip.obj (X ↘ Spec (.of k)).relativeDifferentials)
+      (Modules.pushforwardCompCohomologyFunctorZeroIso k f) ≪≫
+    Functor.isoWhiskerLeft (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op
+      (Functor.isoWhiskerRight (Modules.dualTensorHomIso (X ↘ Spec (.of k)).relativeDifferentials)
+        (Modules.cohomologyFunctor k 0)).symm⟩
 
 end FiniteDuality
 
