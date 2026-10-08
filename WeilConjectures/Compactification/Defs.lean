@@ -28,7 +28,15 @@ We derive the properties of the morphisms involved in a compactification:
 - `Compactification.isProper_openImmersion`, `Compactification.isClosedImmersion_openImmersion`
   and `Compactification.isClopen_range_openImmersion`: if `f` is proper, then `i` is proper,
   hence a closed immersion with clopen range;
-- `Compactification.ofIsProper`: a proper morphism is a compactification of itself.
+- `Compactification.ofIsProper`: a proper morphism is a compactification of itself;
+- `Compactification.copy` and `HasCompactification.of_eq`: a compactification of `f` is one
+  of any morphism equal to `f`;
+- `Compactification.transport`: a compactification transports along isomorphisms of the
+  source and the target;
+- `Compactification.precomp` and `HasCompactification.comp_of_isOpenImmersion`:
+  compactifiability is inherited by open subschemes of the source.
+- `Compactification.postcomp` and `HasCompactification.comp_of_isProper`: compactifiability
+  is preserved by postcomposition with a proper morphism.
 
 Finally, we define the class `AlgebraicGeometry.HasCompactification f`, asserting
 `Nonempty (Compactification f)`. Nagata's compactification theorem asserts
@@ -57,8 +65,11 @@ structure Compactification {X Y : Scheme.{u}} (f : X ⟶ Y) where
   g : Z ⟶ Y
   /-- The open immersion of `X` into the compactification. -/
   i : X ⟶ Z
+  /-- `f` factors as the open immersion `i` followed by the structure morphism `g`. -/
   comm : f = i ≫ g
+  /-- The structure morphism `g` is proper. -/
   isProper : IsProper g
+  /-- The morphism `i` is an open immersion. -/
   isOpenImmersion : IsOpenImmersion i
 
 attribute [instance] Compactification.isProper Compactification.isOpenImmersion
@@ -76,7 +87,72 @@ def ofIsProper (f : X ⟶ Y) [IsProper f] : Compactification f where
   isProper := inferInstance
   isOpenImmersion := inferInstance
 
-variable {f : X ⟶ Y} (c : Compactification f)
+variable {f : X ⟶ Y}
+
+/-- Transport a compactification along an equality of morphisms: if `f' = f`, then a
+compactification of `f` is one of `f'`, with the same data. -/
+@[simps]
+def copy (c : Compactification f) {f' : X ⟶ Y} (h : f' = f) : Compactification f' where
+  Z := c.Z
+  g := c.g
+  i := c.i
+  comm := h.trans c.comm
+  isProper := c.isProper
+  isOpenImmersion := c.isOpenImmersion
+
+/-- The compactification of `f'` transported from a compactification `X ⟶[i] Z ⟶[g] Y` of `f`
+along isomorphisms `eX : X ≅ X'`, `eY : Y ≅ Y'` with `f ≫ eY = eX ≫ f'`;
+its open immersion and its proper morphism are the composites
+```
+X' --eX⁻¹--> X --i--> Z --g--> Y --eY--> Y'
+```
+-/
+@[simps]
+def transport {X' Y' : Scheme.{u}} {f' : X' ⟶ Y'} (eX : X ≅ X') (eY : Y ≅ Y')
+    (w : f ≫ eY.hom = eX.hom ≫ f') (c : Compactification f) : Compactification f' where
+  Z := c.Z
+  g := c.g ≫ eY.hom
+  i := eX.inv ≫ c.i
+  comm := by
+    rw [Category.assoc, ← Category.assoc c.i, ← c.comm, w, Iso.inv_hom_id_assoc]
+  isProper := inferInstance
+  isOpenImmersion := inferInstance
+
+/-- **Compactifications restrict to open subschemes**: if `c` is a compactification of
+`f : X ⟶ Y` and `e : X' ⟶ X` is an open immersion, then composing `e` with the open
+immersion of `c` exhibits a compactification of `e ≫ f`, with the same ambient scheme. -/
+@[simps]
+def precomp {X' : Scheme.{u}} (c : Compactification f) (e : X' ⟶ X) [IsOpenImmersion e] :
+    Compactification (e ≫ f) where
+  Z := c.Z
+  g := c.g
+  i := e ≫ c.i
+  comm := by rw [Category.assoc, ← c.comm]
+  isProper := c.isProper
+  isOpenImmersion := inferInstance
+
+/-- **Postcomposing a compactification with a proper morphism**: if `c` is a compactification
+of `f : X ⟶ Y` and `p : Y ⟶ S` is proper, then composing `c.g` with `p` exhibits a
+compactification of `f ≫ p`, with the same ambient scheme.
+```
+  X --c.i--> c.Z
+    \         |
+   f ≫ p    c.g ≫ p
+      \       ↓
+       -----> S
+```
+-/
+@[simps]
+def postcomp {S : Scheme.{u}} (c : Compactification f) (p : Y ⟶ S) [IsProper p] :
+    Compactification (f ≫ p) where
+  Z := c.Z
+  g := c.g ≫ p
+  i := c.i
+  comm := by rw [← Category.assoc, ← c.comm]
+  isProper := inferInstance
+  isOpenImmersion := inferInstance
+
+variable (c : Compactification f)
 include c
 
 /-- A morphism admitting a compactification is separated. -/
@@ -132,6 +208,7 @@ variable {X Y : Scheme.{u}}
 /-- A morphism `f : X ⟶ Y` has a compactification if it factors as an open
 immersion followed by a proper morphism. -/
 class HasCompactification (f : X ⟶ Y) : Prop where
+  /-- Some compactification of `f` exists. -/
   nonempty_compactification : Nonempty (Compactification f)
 
 attribute [instance low] HasCompactification.nonempty_compactification
@@ -152,6 +229,10 @@ namespace HasCompactification
 instance (priority := 100) of_isProper (f : X ⟶ Y) [IsProper f] : HasCompactification f :=
   ⟨⟨.ofIsProper f⟩⟩
 
+/-- Compactifiability transports along an equality of morphisms. -/
+lemma of_eq {f g : X ⟶ Y} [HasCompactification f] (h : f = g) : HasCompactification g :=
+  h ▸ ‹_›
+
 variable (f : X ⟶ Y) [hf : HasCompactification f]
 
 /-- A morphism admitting a compactification is separated. -/
@@ -159,6 +240,19 @@ instance isSeparated : IsSeparated f := hf.compactification.isSeparated
 
 /-- A morphism admitting a compactification is locally of finite type. -/
 instance locallyOfFiniteType : LocallyOfFiniteType f := hf.compactification.locallyOfFiniteType
+
+/-- **Compactifiability is inherited by open subschemes**: if `f : X ⟶ Y` admits a
+compactification, then so does its restriction `e ≫ f` along any open immersion
+`e : X' ⟶ X`. -/
+theorem comp_of_isOpenImmersion {X' : Scheme.{u}} (e : X' ⟶ X) [IsOpenImmersion e] :
+    HasCompactification (e ≫ f) :=
+  ((compactification f).precomp e).hasCompactification
+
+/-- **Compactifiability is preserved by proper postcomposition**: if `f : X ⟶ Y` admits a
+compactification and `p : Y ⟶ S` is proper, then `f ≫ p` admits one too. -/
+theorem comp_of_isProper {S : Scheme.{u}} (p : Y ⟶ S) [IsProper p] :
+    HasCompactification (f ≫ p) :=
+  ((compactification f).postcomp p).hasCompactification
 
 end HasCompactification
 

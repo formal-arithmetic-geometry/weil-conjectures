@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Blowup.FiniteDegree
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 
 /-!
@@ -33,8 +34,8 @@ The proof is chart-local, with the algebraic core the universal property of the
 
 On the scheme side we prove, for a quasi-coherent ideal `I` on `X`:
 
-- `Scheme.IdealSheafData.comap_mul`: inverse images commute with products of ideal
-  sheaves (for arbitrary morphisms);
+- `Scheme.IdealSheafData.comap_pow`: inverse images commute with powers of ideal
+  sheaves (for arbitrary morphisms), from `Scheme.IdealSheafData.comap_mul`;
 - the invertible-ideal lemma kit: local presentations on a basis
   (`IsInvertible.exists_presentation_le`), stability under products, factors of
   products (`IsInvertible.of_mul_left/right`, the "factor of an invertible product
@@ -317,7 +318,7 @@ section ChartRingExt
 Two ring maps out of the chart ring at a homogeneous element `t = τ·Xᵈ` of the Rees
 algebra that agree on the base and take a nonzerodivisor value on `τ` are equal: every
 chart fraction `g/τⁿ` satisfies `(g/τⁿ)·τⁿ = g`, and division by the nonzerodivisor
-`φ τ` is unique. -/
+image of `τ` is unique. -/
 
 namespace AffineBlowup
 
@@ -380,8 +381,9 @@ namespace AffineBlowup
 variable {A : Type u} [CommRing A] (I₀ : Ideal A)
 
 /-- **The chart section map preserves nonzerodivisors**: the image in the `a`-chart
-ring of a nonzerodivisor of the base is a nonzerodivisor. Generalizes
-`isRegular_awayAlgebraMap_reesX` (the case `s = a`). -/
+ring of a nonzerodivisor of the base is a nonzerodivisor. This does not generalize
+`isRegular_awayAlgebraMap_reesX`, which places no hypothesis on `a`: the two overlap
+only in the case `s = a` with `a` itself a nonzerodivisor of `A`. -/
 theorem awayAlgebraMap_mem_nonZeroDivisors_of_mem {a : A} (ha : a ∈ I₀) {s : A}
     (hs : s ∈ nonZeroDivisors A) :
     awayAlgebraMap I₀ (reesX I₀ a ha) s ∈
@@ -437,26 +439,13 @@ lemma exists_affineOpens_le_preimage (f : Y ⟶ X) (y : Y) :
     (show y ∈ ((f ⁻¹ᵁ V.1 : Y.Opens) : Set Y) from hV) (f ⁻¹ᵁ V.1).isOpen
   exact ⟨V, ⟨W₀, hW₀⟩, fun z hz ↦ hsub hz, hyW₀⟩
 
-/-- **Inverse images of ideal sheaves commute with products** (for arbitrary
-morphisms). -/
-theorem Scheme.IdealSheafData.comap_mul (f : Y ⟶ X) (I J : X.IdealSheafData) :
-    (I * J).comap f = I.comap f * J.comap f := by
-  refine Scheme.IdealSheafData.ext_of_iSup_eq_top
-    (ι := {p : X.affineOpens × Y.affineOpens // p.2.1 ≤ f ⁻¹ᵁ p.1.1})
-    (fun p ↦ p.1.2) ?_ ?_
-  · rw [eq_top_iff]
-    intro y _
-    obtain ⟨V, W, hle, hyW⟩ := exists_affineOpens_le_preimage f y
-    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨(V, W), hle⟩, hyW⟩
-  · rintro ⟨⟨V, W⟩, hle⟩
-    have hmul : (I * J).ideal V = I.ideal V * J.ideal V := by
-      rw [Scheme.IdealSheafData.ideal_mul, Pi.mul_apply]
-    have hmul' : (I.comap f * J.comap f).ideal W =
-        (I.comap f).ideal W * (J.comap f).ideal W := by
-      rw [Scheme.IdealSheafData.ideal_mul, Pi.mul_apply]
-    rw [Scheme.IdealSheafData.ideal_comap_appLE (I * J) f V W hle, hmul, hmul',
-      Ideal.map_mul, Scheme.IdealSheafData.ideal_comap_appLE I f V W hle,
-      Scheme.IdealSheafData.ideal_comap_appLE J f V W hle]
+/-- **Inverse images of ideal sheaves commute with powers** (for arbitrary
+morphisms), by induction from `Scheme.IdealSheafData.comap_mul`. -/
+theorem Scheme.IdealSheafData.comap_pow (f : Y ⟶ X) (I : X.IdealSheafData) (n : ℕ) :
+    (I ^ n).comap f = I.comap f ^ n := by
+  induction n with
+  | zero => simp [Scheme.IdealSheafData.comap_top]
+  | succ n ih => rw [pow_succ, pow_succ, Scheme.IdealSheafData.comap_mul, ih]
 
 end ComapAffineLocality
 
@@ -471,7 +460,6 @@ blow-up maps. -/
 variable {Y : Scheme.{u}}
 
 namespace Scheme.IdealSheafData.IsInvertible
-
 /-- A span-nonzerodivisor presentation of an ideal sheaf on an affine open restricts to
 a span-nonzerodivisor presentation on any of its affine basic opens. -/
 theorem presentation_restrict_basicOpen {K : Y.IdealSheafData} {U : Y.affineOpens}

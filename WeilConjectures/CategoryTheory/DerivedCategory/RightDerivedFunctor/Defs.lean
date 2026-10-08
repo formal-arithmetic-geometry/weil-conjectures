@@ -194,6 +194,21 @@ example (K : CochainComplex C ℤ) [K.IsKInjective] :
     IsIso (F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj K)) := by
   infer_instance
 
+open ZeroObject in
+/-- The right derived functor sends zero objects to zero objects: the zero complex is
+K-injective, so the derived functor is computed on it by the additive functor `F`. -/
+lemma isZero_rightDerivedFunctor_obj {X : DerivedCategory C} (hX : IsZero X) :
+    IsZero (F.rightDerivedFunctor.obj X) := by
+  have : (0 : CochainComplex C ℤ).IsKInjective :=
+    ⟨fun f _ ↦ ⟨Homotopy.ofEq ((isZero_zero _).eq_of_tgt _ _)⟩⟩
+  have h₀ := (HomotopyCategory.quotient C (ComplexShape.up ℤ)).map_isZero
+    (isZero_zero (CochainComplex C ℤ))
+  have h₁ : IsZero (DerivedCategory.Qh.obj ((HomotopyCategory.quotient C _).obj 0)) :=
+    DerivedCategory.Qh.map_isZero h₀
+  have h₂ := ((F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).map_isZero
+    h₀).of_iso (asIso (F.rightDerivedFunctorUnit.app _)).symm
+  exact h₂.of_iso (F.rightDerivedFunctor.mapIso (hX.iso h₁))
+
 end Functor
 
 end CategoryTheory

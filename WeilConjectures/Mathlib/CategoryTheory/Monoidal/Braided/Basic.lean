@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.CategoryTheory.Limits.Preserves.Basic
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 
 /-!
@@ -21,6 +22,14 @@ through the adjunction.
 
 - `CategoryTheory.Adjunction.rightAdjointLaxBraided`: the lax braided structure on the
   right adjoint of a braided functor.
+- `CategoryTheory.BraidedCategory.tensorRightEquivalence`: in a braided category, tensoring
+  with an object `X` with `X ⊗ Y ≅ 𝟙_ C` is an autoequivalence.
+
+## Main results
+
+- `CategoryTheory.BraidedCategory.preservesColimitsOfShape_flip_curriedTensor_obj`: in a
+  braided category, tensoring on the right with `X` preserves the colimits of shape `J` that
+  tensoring on the left with `X` preserves, the two functors being identified by the braiding.
 -/
 
 @[expose] public section
@@ -50,3 +59,30 @@ def rightAdjointLaxBraided : G.LaxBraided where
       Category.assoc, Functor.Monoidal.μ_δ_assoc]
 
 end CategoryTheory.Adjunction
+
+namespace CategoryTheory.BraidedCategory
+
+open Limits MonoidalCategory
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [BraidedCategory C]
+  {J : Type*} [Category* J]
+
+/-- In a braided monoidal category, if tensoring on the left with any object preserves
+colimits of shape `J`, then so does tensoring on the right, since the braiding identifies
+`tensorLeft X` with `tensorRight X`. -/
+instance preservesColimitsOfShape_flip_curriedTensor_obj
+    [∀ X : C, PreservesColimitsOfShape J (tensorLeft X)] (X : C) :
+    PreservesColimitsOfShape J ((curriedTensor C).flip.obj X) :=
+  preservesColimitsOfShape_of_natIso (tensorLeftIsoTensorRight X)
+
+/-- **Tensoring with an invertible object is an autoequivalence.** If `X ⊗ Y ≅ 𝟙_ C` in a
+braided monoidal category, then `tensorRight X` is an equivalence, with inverse
+`tensorRight Y`: both composites are tensoring with `X ⊗ Y ≅ Y ⊗ X ≅ 𝟙_ C`. -/
+@[simps! functor inverse]
+def tensorRightEquivalence (X Y : C) (e : X ⊗ Y ≅ 𝟙_ C) : C ≌ C :=
+  Equivalence.mk (tensorRight X) (tensorRight Y)
+    ((rightUnitorNatIso C).symm ≪≫ (tensoringRight C).mapIso e.symm ≪≫ tensorRightTensor X Y)
+    ((tensorRightTensor Y X).symm ≪≫ (tensoringRight C).mapIso (β_ Y X ≪≫ e) ≪≫
+      rightUnitorNatIso C)
+
+end CategoryTheory.BraidedCategory

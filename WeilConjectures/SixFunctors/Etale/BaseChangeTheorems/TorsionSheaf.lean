@@ -7,6 +7,7 @@ module
 
 public import Mathlib
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 
@@ -26,6 +27,12 @@ torsion conditions entering the statement of the proper base change theorem:
 - `AlgebraicGeometry.Etale.DerivedCategory.Plus.torsionHomology`: the property of an
   object of the bounded below derived category of étale sheaves of `Λ`-modules that all
   its cohomology sheaves are torsion.
+- `AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder`: the refinement of
+  `IsTorsionSheaf` in which the orders are required to be invertible on a second scheme
+  `S`. This is the coefficient condition of the smooth base change theorem, and it
+  implies `IsTorsionSheaf`. Such a sheaf is the filtered colimit of subsheaves killed by
+  integers invertible on `S`
+  (`AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder.exists_isColimit`).
 
 Torsion refers throughout to the underlying abelian group, not to the `Λ`-module
 structure: for `Λ = ℤ` the definition specializes to torsion abelian sheaves, the
@@ -88,11 +95,112 @@ instance {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : IsTorsionSheaf F :=
   .of_isTorsion isAddTorsion_of_finite F
 
+/-- A quotient of a torsion sheaf is torsion. -/
+lemma Scheme.IsTorsionSheaf.of_epi {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
+    {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (π : F ⟶ G) [Epi π]
+    [IsTorsionSheaf F] : IsTorsionSheaf G where
+  isTorsion_sheafFiber Ω _ _ s x := by
+    have : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+      hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+    have :=
+      ((pointSmallEtale s).skyscraperSheafAdjunction (A := ModuleCat.{u + 1} Λ)).isLeftAdjoint
+    obtain ⟨y, rfl⟩ := (ModuleCat.epi_iff_surjective
+      ((pointSmallEtale s).sheafFiber.map π)).mp inferInstance x
+    obtain ⟨n, hn, hy⟩ := isOfFinAddOrder_iff_nsmul_eq_zero.1
+      (IsTorsionSheaf.isTorsion_sheafFiber (F := F) Ω s y)
+    exact isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨n, hn, by rw [← map_nsmul, hy, map_zero]⟩
+
+open Etale in
+/-- The pullback of a torsion sheaf of `Λ`-modules is torsion: the stalk of `f^* F` at a
+geometric point `s` is the stalk of `F` at `s ≫ f`. -/
+instance isTorsionSheaf_upperStar {Λ : Type (u + 1)} [CommRing Λ] {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf F] :
+    IsTorsionSheaf ((f)^*[ModuleCat.{u + 1} Λ].obj F) where
+  isTorsion_sheafFiber Ω _ _ s :=
+    IsAddTorsion.of_surjective
+      (f := ((Etale.upperStarCompSheafFiberIso _ f s).app F).toLinearEquiv.symm.toAddMonoidHom)
+      (LinearEquiv.surjective _) (IsTorsionSheaf.isTorsion_sheafFiber Ω (s ≫ f))
+
+/-- A sheaf `F` of `Λ`-modules on the small étale site of `T` is *torsion of orders
+invertible on `S`*, for a second scheme `S`, if every element of every geometric stalk of
+`F` is killed by a positive integer which is invertible on `S`, i.e. which is a unit of
+`Γ(S, ⊤)`.
+
+This strengthening of `AlgebraicGeometry.Scheme.IsTorsionSheaf` is the coefficient
+condition of the smooth base change theorem, where `T` lies over `S` along the morphism
+`g : T ⟶ S` of the Cartesian square and the smooth morphism is the one with target `S`.
+For `Λ = ℤ/nℤ` with `n` invertible on `S` every sheaf of `Λ`-modules satisfies it, and a
+general such sheaf is the filtered union of its `n`-torsion subsheaves over the integers
+`n` invertible on `S`. -/
+class Scheme.IsTorsionSheafOfInvertibleOrder {Λ : Type (u + 1)} [CommRing Λ] (S : Scheme.{u})
+    {T : Scheme.{u}} (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop where
+  exists_isUnit_nsmul_eq_zero (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ T)
+    (x : ↥((pointSmallEtale s).sheafFiber.obj F)) :
+    ∃ n : ℕ, 0 < n ∧ IsUnit (n : Γ(S, ⊤)) ∧ n • x = 0
+
+/-- A sheaf which is torsion of orders invertible on some scheme `S` is in particular a
+torsion sheaf, so that the coefficients allowed by smooth base change are among those
+allowed by proper base change. This is not an instance: the scheme `S` cannot be
+recovered from the conclusion. -/
+lemma Scheme.IsTorsionSheaf.of_isTorsionSheafOfInvertibleOrder
+    {Λ : Type (u + 1)} [CommRing Λ] (S : Scheme.{u}) {T : Scheme.{u}}
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [Scheme.IsTorsionSheafOfInvertibleOrder S F] : IsTorsionSheaf F where
+  isTorsion_sheafFiber Ω _ _ s x := by
+    obtain ⟨n, hn, -, hx⟩ :=
+      Scheme.IsTorsionSheafOfInvertibleOrder.exists_isUnit_nsmul_eq_zero (S := S) Ω s x
+    exact isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨n, hn, hx⟩
+
+/-- A torsion sheaf `F` of `Λ`-modules is the point of a colimit cocone over a filtered diagram
+of sheaves, each of which is killed by some positive integer.
+
+This is blueprint `lemma-weil-pbc-torsion-filtered-union`: `F` is the colimit of its
+`n`-torsion subsheaves `F[n] = ker (n : F ⟶ F)` over the positive integers ordered by
+divisibility, because every local section of `F` is, locally, killed by a positive integer;
+this lemma only records the existence of some such diagram, which is the form in which it is
+used. -/
+theorem Scheme.IsTorsionSheaf.exists_isColimit (Λ : Type (u + 1)) [CommRing Λ] {T : Scheme.{u}}
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheaf F] :
+    ∃ (J : Type) (_ : SmallCategory J) (_ : IsFiltered J)
+      (D : J ⥤ Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (c : Cocone D)
+      (_ : IsColimit c), c.pt = F ∧ ∀ j, ∃ n : ℕ, 0 < n ∧ n • 𝟙 (D.obj j) = 0 :=
+  sorry
+
+/-- A sheaf `F` of `Λ`-modules which is torsion of orders invertible on `S` is the point of a
+colimit cocone over a filtered diagram of sheaves, each of which is killed by some positive
+integer `n` invertible on `S`.
+
+This follows from blueprint `lemma-weil-pbc-torsion-filtered-union`, which says that `F` is the
+colimit of its `n`-torsion subsheaves `F[n] = ker (n : F ⟶ F)` over the positive integers
+ordered by divisibility; this lemma only records the existence of some such diagram, which is
+the form in which it is used. -/
+theorem Scheme.IsTorsionSheafOfInvertibleOrder.exists_isColimit
+    (Λ : Type (u + 1)) [CommRing Λ] (S : Scheme.{u}) {T : Scheme.{u}}
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [Scheme.IsTorsionSheafOfInvertibleOrder S F] :
+    ∃ (J : Type) (_ : SmallCategory J) (_ : IsFiltered J)
+      (D : J ⥤ Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (c : Cocone D)
+      (_ : IsColimit c), c.pt = F ∧
+        ∀ j, ∃ n : ℕ, 0 < n ∧ IsUnit (n : Γ(S, ⊤)) ∧ n • 𝟙 (D.obj j) = 0 :=
+  sorry
+
 end TorsionSheaf
 
 section TorsionHomology
 
-variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
+variable (Λ : Type (u + 1)) [CommRing Λ]
+
+/-- `ℤ`-indexed colimits of `Λ`-modules are exact: `ℤ` is a filtered category, and
+`ModuleCat.{u + 1} Λ` is Grothendieck abelian, hence satisfies `AB5` for shapes of size
+`u + 1`; `AB5OfSize_of_univLE` brings that down to the shapes of size `0` in which `ℤ`
+lives. It is not an instance in mathlib because in that generality instance search would
+climb the universes. -/
+instance : HasExactColimitsOfShape ℤ (ModuleCat.{u + 1} Λ) := by
+  have : AB5OfSize.{0, 0} (ModuleCat.{u + 1} Λ) :=
+    AB5OfSize_of_univLE.{0, 0, u + 1, u + 1} (ModuleCat.{u + 1} Λ)
+  infer_instance
+
+variable (X : Scheme.{u})
   [HasDerivedCategory.{w} (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))]
 
 /-- An object of the bounded below derived category of étale sheaves of `Λ`-modules has
@@ -112,6 +220,24 @@ lemma Etale.DerivedCategory.Plus.torsionHomology_of_isTorsion (hΛ : IsAddTorsio
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Etale.DerivedCategory.Plus.torsionHomology Λ X K :=
   fun _ ↦ .of_isTorsion hΛ _
+
+/-- A torsion sheaf placed in degree `0` has torsion cohomology: its cohomology sheaf in
+degree `0` is the sheaf itself, and all its other cohomology sheaves vanish. -/
+lemma Etale.DerivedCategory.Plus.torsionHomology_singleFunctor_obj
+    (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf I] :
+    Etale.DerivedCategory.Plus.torsionHomology Λ X
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj I) := by
+  intro n
+  by_cases hn : n = 0
+  · subst hn
+    exact IsTorsionSheaf.of_epi (F := I)
+      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).inv.app I)
+  · have hZ : IsZero ((DerivedCategory.Plus.homologyFunctor _ n).obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj I)) :=
+      IsZero.of_iso (HomologicalComplex.isZero_single_obj_homology _ _ _ _ hn)
+        ((DerivedCategory.homologyFunctorFactors _ n).app _)
+    have := hZ.epi (0 : I ⟶ _)
+    exact IsTorsionSheaf.of_epi (0 : I ⟶ _)
 
 end TorsionHomology
 

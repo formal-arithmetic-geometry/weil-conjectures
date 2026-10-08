@@ -51,6 +51,10 @@ vanishing of both sides off the range of `i`, which is where closedness of that 
 
 - `AlgebraicGeometry.Etale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar`: the
   restriction `i^*` of the comparison is an isomorphism, for *any* open immersion `i`.
+- `AlgebraicGeometry.Etale.unit_map_openImmersionLowerShriekToLowerStar_app_counit` and
+  `AlgebraicGeometry.Etale.openImmersionLowerShriek_lowerStar_hom_ext`: the transpose of the
+  comparison under `i_! ⊣ i^*` and `i^* ⊣ i_*` is the identity, and maps `i_! F ⟶ i_* G` are
+  determined by such transposes.
 - `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar_of_isIso`: the formal reduction of
   the comparison for `f` to the comparison for the open immersion of its compactification.
 
@@ -67,6 +71,7 @@ namespace AlgebraicGeometry
 open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 
 open Etale
 
@@ -89,6 +94,7 @@ noncomputable def Etale.openImmersionLowerShriekToLowerStar :
     (Functor.rightUnitor _).hom
 
 set_option backward.isDefEq.respectTransparency false in
+omit [HasSmallSiteSheafify A] in
 /-- The components of the comparison `j_! ⟶ j_*`: the unitors and the associator in its
 definition are identities, so at `F` it is `j_!` of the inverted counit of `j^* ⊣ j_*`,
 followed by the counit of `j_! ⊣ j^*` at `j_* F`. -/
@@ -118,6 +124,65 @@ instance Etale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar
   rw [Etale.openImmersionLowerShriekToLowerStar_app, Functor.map_comp]
   infer_instance
 
+
+omit [HasSmallSiteSheafify A] in
+/-- The unit of `j_! ⊣ j^*` is the unit of `j_! ⊣ j^*_{res}` followed by the identification
+`j^*_{res} ≅ j^*`. -/
+lemma Etale.openImmersionLowerShriekUpperStarAdjunction_unit_app
+    (F : Sheaf U.smallEtaleTopology A) :
+    (Etale.openImmersionLowerShriekUpperStarAdjunction A j).unit.app F =
+      (Etale.openImmersionLowerShriekAdjunction A j).unit.app F ≫
+        (Etale.upperStarIsoOpenImmersionRestriction A j).inv.app _ :=
+  rfl
+
+omit [HasSmallSiteSheafify A] in
+/-- For an open immersion `j`, the counit of `j^* ⊣ j_*` is the identification
+`j^* ≅ j^*_{res}` followed by the counit of `j^*_{res} ⊣ j_*`. -/
+lemma Etale.upperStarLowerStarAdjunction_counit_app_of_isOpenImmersion
+    (F : Sheaf U.smallEtaleTopology A) :
+    (Etale.upperStarLowerStarAdjunction A j).counit.app F =
+      (Etale.upperStarIsoOpenImmersionRestriction A j).hom.app _ ≫
+        (Etale.openImmersionRestrictionLowerStarAdjunction A j).counit.app F :=
+  (Adjunction.leftAdjointUniq_hom_app_counit _ _ F).symm
+
+/-- For an open immersion `j`, the counit of `j^* ⊣ j_*` is an isomorphism. -/
+instance Etale.isIso_upperStarLowerStarAdjunction_counit_app_of_isOpenImmersion
+    (F : Sheaf U.smallEtaleTopology A) :
+    IsIso ((Etale.upperStarLowerStarAdjunction A j).counit.app F) := by
+  rw [Etale.upperStarLowerStarAdjunction_counit_app_of_isOpenImmersion]
+  infer_instance
+
+omit [HasSmallSiteSheafify A] in
+/-- The comparison `j_! ⟶ j_*` is characterized by its transpose under `j_! ⊣ j^*` and
+`j^* ⊣ j_*` being the identity. -/
+@[reassoc (attr := simp)]
+lemma Etale.unit_map_openImmersionLowerShriekToLowerStar_app_counit
+    (F : Sheaf U.smallEtaleTopology A) :
+    (Etale.openImmersionLowerShriekUpperStarAdjunction A j).unit.app F ≫
+        (j)^*[A].map ((Etale.openImmersionLowerShriekToLowerStar A j).app F) ≫
+          (Etale.upperStarLowerStarAdjunction A j).counit.app F = 𝟙 F := by
+  rw [Etale.openImmersionLowerShriekUpperStarAdjunction_unit_app,
+    Etale.upperStarLowerStarAdjunction_counit_app_of_isOpenImmersion, assoc,
+    NatTrans.naturality_assoc, Iso.inv_hom_id_app_assoc,
+    Etale.openImmersionLowerShriekToLowerStar_app, Functor.map_comp, assoc]
+  dsimp only [Functor.id_obj, Functor.comp_obj]
+  rw [Adjunction.unit_naturality_assoc, Adjunction.right_triangle_components_assoc]
+  simp
+
+omit [HasSmallSiteSheafify A] in
+/-- Two maps `j_! X ⟶ j_* Y` agree as soon as their transposes `X ⟶ Y` under `j_! ⊣ j^*` and
+`j^* ⊣ j_*` agree. -/
+lemma Etale.openImmersionLowerShriek_lowerStar_hom_ext {X Y : Sheaf U.smallEtaleTopology A}
+    {f₁ f₂ : (j)_!open[A].obj X ⟶ (j)_*[A].obj Y}
+    (h : (Etale.openImmersionLowerShriekUpperStarAdjunction A j).unit.app X ≫
+        (j)^*[A].map f₁ ≫ (Etale.upperStarLowerStarAdjunction A j).counit.app Y =
+      (Etale.openImmersionLowerShriekUpperStarAdjunction A j).unit.app X ≫
+        (j)^*[A].map f₂ ≫ (Etale.upperStarLowerStarAdjunction A j).counit.app Y) :
+    f₁ = f₂ := by
+  apply ((Etale.openImmersionLowerShriekUpperStarAdjunction A j).homEquiv _ _).injective
+  rw [← cancel_mono ((Etale.upperStarLowerStarAdjunction A j).counit.app Y)]
+  simpa [Adjunction.homEquiv_unit] using h
+
 end OpenImmersion
 
 section Comparison
@@ -137,6 +202,7 @@ noncomputable def Etale.lowerShriekToLowerStar :
       (HasCompactification.compactification f).g).hom ≫
     eqToHom (by rw [← (HasCompactification.compactification f).comm])
 
+omit [HasSmallSiteSheafify A] in
 /-- The comparison `ι_f` is an isomorphism as soon as the comparison for the open immersion
 `i` of the chosen compactification is: the remaining two factors of `ι_f` are an isomorphism
 and an `eqToHom` by construction, and whiskering preserves isomorphisms.

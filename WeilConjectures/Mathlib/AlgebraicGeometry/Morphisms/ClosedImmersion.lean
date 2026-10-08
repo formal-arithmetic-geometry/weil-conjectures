@@ -6,16 +6,20 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Complements on closed immersions
 
-Two unrelated groups of small results.
+Three unrelated groups of small results.
 
-The first is about **open immersions that are universally closed**. An open immersion whose
-underlying map is closed — for instance a proper one — is also a closed immersion, and its
-range is a clopen subset of the target. Such a morphism is what is classically called a
-*clopen immersion*: it identifies the source with a connected-component union of the target.
+The first is about **immersions that are universally closed**. A preimmersion whose underlying
+map is closed — for instance a proper one — is already a closed immersion. In the special case
+of an open immersion, the range is moreover a clopen subset of the target: such a morphism is
+what is classically called a *clopen immersion*, and it identifies the source with a
+connected-component union of the target.
 
 The second completes the API of `AlgebraicGeometry.IsClosedImmersion.lift`, the comparison
 morphism into a closed subscheme whose ideal sheaf is contained in another. Mathlib supplies
@@ -28,10 +32,21 @@ scheme-theoretic image in the form stated in the Nagata blueprint
 the scheme-theoretic image is the smallest closed subscheme of the target through which
 the morphism factors.
 
+The third is the **factorization of a point through a closed immersion**: a morphism from a
+reduced scheme whose set-theoretic image lands in the range of a closed immersion factors
+uniquely through it. The case that gets used is a morphism from the spectrum of a field.
+
+The third is an **affine descent criterion**: a morphism into a fibre product of affine
+schemes is a closed immersion as soon as the target ring is generated, as a ring, by the
+images of the two structure maps.  It is stated ring-theoretically, in terms of a
+`Subring.closure`, so that it can be applied without providing algebra instances.
+
 ## Main results
 
 - `AlgebraicGeometry.IsClosedImmersion.of_isOpenImmersion` — an open immersion with closed
   range is a closed immersion;
+- `AlgebraicGeometry.IsClosedImmersion.of_universallyClosed` — a universally closed
+  preimmersion, e.g. a proper immersion, is a closed immersion;
 - `AlgebraicGeometry.Scheme.Hom.isClopen_range` — an open immersion that is universally
   closed has clopen range;
 - `AlgebraicGeometry.isClosedImmersion_lift` — the lift of a closed immersion through a
@@ -43,7 +58,19 @@ the morphism factors.
   `AlgebraicGeometry.Scheme.Hom.ker_le_ker_imageι_comp` supplying its hypothesis;
 - `AlgebraicGeometry.Scheme.Hom.ker_le_ker_iff_existsUnique_fac` — a closed subscheme
   contains the scheme-theoretic image of `g` if and only if `g` factors through it, and
-  then uniquely.
+  then uniquely;
+- `AlgebraicGeometry.IsClosedImmersion.existsUnique_fac_of_range_subset_range` — a morphism
+  from a reduced scheme whose range is contained in the range of a closed immersion factors
+  uniquely through it, with `AlgebraicGeometry.IsClosedImmersion.existsUnique_fac_of_field`
+  the special case of a morphism from the spectrum of a field;
+- `AlgebraicGeometry.Scheme.range_base_subset_of_closedPoint_mem` — a morphism from the
+  spectrum of a field has its whole range inside any set containing the image of the closed
+  point, the observation which turns the pointwise hypothesis of the previous statement into
+  a hypothesis on ranges.
+
+- `AlgebraicGeometry.isClosedImmersion_pullbackLift_spec` — a morphism
+  `Spec W ⟶ Spec S ×_{Spec R} Spec T` is a closed immersion if `W` is generated as a ring
+  by the images of `S` and `T`.
 -/
 
 @[expose] public section
@@ -60,6 +87,13 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 lemma IsClosedImmersion.of_isOpenImmersion [IsOpenImmersion f] (hf : IsClosed (Set.range f)) :
     IsClosedImmersion f :=
   .of_isPreimmersion f hf
+
+/-- A preimmersion that is universally closed is a closed immersion. In particular this applies
+to a proper immersion, since `IsImmersion` extends `IsPreimmersion`. -/
+@[stacks 01IQ]
+lemma IsClosedImmersion.of_universallyClosed [IsPreimmersion f] [UniversallyClosed f] :
+    IsClosedImmersion f :=
+  .of_isPreimmersion f f.isClosedMap.isClosed_range
 
 /-- An open immersion that is universally closed is a closed immersion. In particular this
 applies to a proper open immersion. -/
@@ -130,5 +164,91 @@ theorem Scheme.Hom.ker_le_ker_iff_existsUnique_fac (g : X ⟶ Y) (z : Z ⟶ Y)
     exact Scheme.Hom.le_ker_comp h z
 
 end Lift
+
+section Point
+
+variable {Z : Scheme.{u}}
+
+/-- A morphism `s : X ⟶ Y` from a **reduced** scheme whose set-theoretic image is contained in
+the range of a closed immersion `i : Z ⟶ Y` factors uniquely through `i`.
+
+Reducedness of the source is needed: for `X = Y = Spec k[ε]` and `Z` the reduced point, the
+identity of `X` has image the single point of `Z` but does not factor through `Z`. -/
+theorem IsClosedImmersion.existsUnique_fac_of_range_subset_range [IsReduced X] (i : Z ⟶ Y)
+    [IsClosedImmersion i] (s : X ⟶ Y) (hs : Set.range s.base ⊆ Set.range i.base) :
+    ∃! t : X ⟶ Z, t ≫ i = s :=
+  (Scheme.Hom.ker_le_ker_iff_existsUnique_fac s i).mp
+    ((Scheme.IdealSheafData.le_ker_iff_range_subset_support i.ker s).mpr
+      (hs.trans (Scheme.Hom.range_subset_ker_support i)))
+
+/-- The spectrum of a field has a single point, so a morphism `s : Spec K ⟶ Y` has its whole
+range inside any set containing the image of the closed point. -/
+lemma Scheme.range_base_subset_of_closedPoint_mem {K : Type u} [Field K]
+    (s : Spec (CommRingCat.of K) ⟶ Y) {S : Set Y}
+    (hs : s.base (IsLocalRing.closedPoint K) ∈ S) : Set.range s.base ⊆ S := by
+  rintro _ ⟨p, rfl⟩
+  rwa [Subsingleton.elim p (IsLocalRing.closedPoint K)]
+
+/-- A morphism from the spectrum of a field whose unique point lies in the range of a closed
+immersion `i` factors uniquely through `i`.
+(blueprint: `lemma:openclosed-point-factors`) -/
+theorem IsClosedImmersion.existsUnique_fac_of_field {K : Type u} [Field K] (i : Z ⟶ Y)
+    [IsClosedImmersion i] (s : Spec (CommRingCat.of K) ⟶ Y)
+    (hs : s.base (IsLocalRing.closedPoint K) ∈ Set.range i.base) :
+    ∃! t : Spec (CommRingCat.of K) ⟶ Z, t ≫ i = s :=
+  IsClosedImmersion.existsUnique_fac_of_range_subset_range i s
+    (Scheme.range_base_subset_of_closedPoint_mem s hs)
+
+end Point
+
+section AffineDescent
+
+open Limits
+
+/-- **Affine descent of closed immersions along a pushout of rings**: if a ring `W`
+receives maps `u : S →+* W` and `v : T →+* W` agreeing on `R` and is generated as a ring by
+their images, then the induced morphism `Spec W ⟶ Spec S ×_{Spec R} Spec T` is a closed
+immersion. -/
+lemma isClosedImmersion_pullbackLift_spec {R S T W : Type u} [CommRing R] [CommRing S]
+    [CommRing T] [CommRing W] (f : R →+* S) (g : R →+* T) (u : S →+* W) (v : T →+* W)
+    (hcomm : u.comp f = v.comp g)
+    (hgen : Subring.closure (Set.range u ∪ Set.range v) = ⊤) :
+    IsClosedImmersion
+      (pullback.lift (Spec.map (CommRingCat.ofHom u)) (Spec.map (CommRingCat.ofHom v))
+        (by rw [← Spec.map_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
+          ← CommRingCat.ofHom_comp, hcomm]) :
+        Spec (.of W) ⟶
+          pullback (Spec.map (CommRingCat.ofHom f)) (Spec.map (CommRingCat.ofHom g))) := by
+  have hw : CommRingCat.ofHom f ≫ CommRingCat.ofHom u =
+      CommRingCat.ofHom g ≫ CommRingCat.ofHom v := by
+    rw [← CommRingCat.ofHom_comp, ← CommRingCat.ofHom_comp, hcomm]
+  set d : pushout (CommRingCat.ofHom f) (CommRingCat.ofHom g) ⟶ CommRingCat.of W :=
+    pushout.desc (CommRingCat.ofHom u) (CommRingCat.ofHom v) hw with hd
+  have hsurj : Function.Surjective d.hom := by
+    rw [← RingHom.range_eq_top, eq_top_iff, ← hgen, Subring.closure_le]
+    rintro z (⟨b, rfl⟩ | ⟨c, rfl⟩)
+    · refine ⟨(pushout.inl (CommRingCat.ofHom f) (CommRingCat.ofHom g)).hom b, ?_⟩
+      rw [hd, ← CommRingCat.comp_apply, pushout.inl_desc]
+      rfl
+    · refine ⟨(pushout.inr (CommRingCat.ofHom f) (CommRingCat.ofHom g)).hom c, ?_⟩
+      rw [hd, ← CommRingCat.comp_apply, pushout.inr_desc]
+      rfl
+  have hsq := isPullback_SpecMap_pushout (CommRingCat.ofHom f) (CommRingCat.ofHom g)
+  have heq : (pullback.lift (Spec.map (CommRingCat.ofHom u)) (Spec.map (CommRingCat.ofHom v))
+      (by rw [← Spec.map_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
+        ← CommRingCat.ofHom_comp, hcomm]) :
+      Spec (.of W) ⟶
+        pullback (Spec.map (CommRingCat.ofHom f)) (Spec.map (CommRingCat.ofHom g))) =
+      Spec.map d ≫ hsq.isoPullback.hom := by
+    refine pullback.hom_ext ?_ ?_
+    · rw [pullback.lift_fst, Category.assoc, IsPullback.isoPullback_hom_fst, ← Spec.map_comp,
+        hd, pushout.inl_desc]
+    · rw [pullback.lift_snd, Category.assoc, IsPullback.isoPullback_hom_snd, ← Spec.map_comp,
+        hd, pushout.inr_desc]
+  rw [heq]
+  have : IsClosedImmersion (Spec.map d) := IsClosedImmersion.spec_of_surjective d hsurj
+  infer_instance
+
+end AffineDescent
 
 end AlgebraicGeometry

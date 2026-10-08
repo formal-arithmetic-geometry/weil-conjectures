@@ -9,7 +9,9 @@ public import Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Localization.Adjunction
 public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import Mathlib.CategoryTheory.Monad.Adjunction
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
@@ -24,7 +26,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 Given an adjunction `adj : f ⊣ g` of additive functors between abelian categories, this
 file lifts `adj` through the stages of the derived formalism:
 
-* `Adjunction.mapHomotopyCategory`: the induced adjunction
+* `Adjunction.mapHomotopyCategory` (in
+  `WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction`): the induced adjunction
   `f.mapHomotopyCategory c ⊣ g.mapHomotopyCategory c` between the homotopy categories,
   whenever the quotient functors to the homotopy categories are localizations with
   respect to homotopy equivalences (which holds, in particular, for the complex shapes
@@ -73,6 +76,9 @@ file lifts `adj` through the stages of the derived formalism:
   make the identification of `g.rightDerivedFunctor` with `g.mapDerivedCategory`
   hypothesis-free: it still goes through the K-injective resolutions used to define the
   total right derived functor.
+* `Adjunction.isIso_mapDerivedCategoryAdjunction_unit` and
+  `Adjunction.isIso_mapDerivedCategoryAdjunction_counit`: the unit (respectively counit) of
+  `f.mapDerivedCategory ⊣ g.mapDerivedCategory` is an isomorphism if that of `f ⊣ g` is.
 -/
 
 @[expose] public section
@@ -98,21 +104,9 @@ instance Functor.catCommSqMapHomotopyCategory (c : ComplexShape ι) :
       (HomotopyCategory.quotient W c) (f.mapHomotopyCategory c) :=
   ⟨(f.mapHomotopyCategoryFactors c).symm⟩
 
-/-- An adjunction `f ⊣ g` between additive functors induces an adjunction
-between the induced functors on homotopy categories, whenever the quotient
-functors to the homotopy categories are localizations with respect to
-homotopy equivalences. This holds, in particular, for cochain complexes
-indexed by `ℤ` (`ComplexShape.up ℤ`). -/
-noncomputable def Adjunction.mapHomotopyCategory (adj : f ⊣ g) (c : ComplexShape ι)
-    [(HomotopyCategory.quotient V c).IsLocalization
-      (HomologicalComplex.homotopyEquivalences V c)]
-    [(HomotopyCategory.quotient W c).IsLocalization
-      (HomologicalComplex.homotopyEquivalences W c)] :
-    f.mapHomotopyCategory c ⊣ g.mapHomotopyCategory c :=
-  (adj.mapHomologicalComplex c).localization
-    (HomotopyCategory.quotient V c) (HomologicalComplex.homotopyEquivalences V c)
-    (HomotopyCategory.quotient W c) (HomologicalComplex.homotopyEquivalences W c)
-    (f.mapHomotopyCategory c) (g.mapHomotopyCategory c)
+/-! The adjunction `f.mapHomotopyCategory c ⊣ g.mapHomotopyCategory c` induced on the
+homotopy categories is `CategoryTheory.Adjunction.mapHomotopyCategory` of
+`WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction`. -/
 
 end MapHomotopyCategory
 
@@ -144,12 +138,9 @@ instance isLeftDerivedFunctor_leftDerivedFunctor_comp_rightDerivedFunctor :
       ((Functor.associator _ _ _).inv ≫
         whiskerRight f.leftDerivedFunctorCounit g.rightDerivedFunctor)
       (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) :=
-  (HomotopyCategory.quasiIso C
-    (ComplexShape.up ℤ)).localizerMorphismKFlat.isLeftDerivedFunctor_of_isLeftDerivabilityStructure
-      _ (fun P ↦ by
-        have := f.derives_kFlat.isIso_of_isLeftDerivedFunctor f.leftDerivedFunctorCounit P
-        exact inferInstanceAs
-          (IsIso (𝟙 _ ≫ g.rightDerivedFunctor.map (f.leftDerivedFunctorCounit.app _))))
+  (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)).localizerMorphismKFlat
+    |>.isLeftDerivedFunctor_comp_of_isLeftDerivabilityStructure _
+      (fun P ↦ f.derives_kFlat.isIso_of_isLeftDerivedFunctor _ P) _
 
 /-- The composition `g.rightDerivedFunctor ⋙ f.leftDerivedFunctor` is the
 right derived functor of `(g.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
@@ -161,14 +152,10 @@ instance isRightDerivedFunctor_rightDerivedFunctor_comp_leftDerivedFunctor :
       (whiskerRight g.rightDerivedFunctorUnit f.leftDerivedFunctor ≫
         (Functor.associator _ _ _).hom)
       (HomotopyCategory.quasiIso D (ComplexShape.up ℤ)) :=
-  (HomotopyCategory.KInjectives.localizerMorphism
-    D).isRightDerivedFunctor_of_isRightDerivabilityStructure
-      _ (fun I ↦ by
-        have := (HomotopyCategory.KInjectives.localizerMorphism_derives
-          (g.mapHomotopyCategory (ComplexShape.up ℤ) ⋙
-            DerivedCategory.Qh)).isIso_of_isRightDerivedFunctor g.rightDerivedFunctorUnit I
-        exact inferInstanceAs
-          (IsIso (f.leftDerivedFunctor.map (g.rightDerivedFunctorUnit.app _) ≫ 𝟙 _)))
+  (HomotopyCategory.KInjectives.localizerMorphism D)
+    |>.isRightDerivedFunctor_comp_of_isRightDerivabilityStructure _
+      (fun I ↦ (HomotopyCategory.KInjectives.localizerMorphism_derives
+        _).isIso_of_isRightDerivedFunctor _ I) _
 
 end Functor
 
@@ -229,6 +216,40 @@ noncomputable def Adjunction.mapDerivedCategoryAdjunction {f : C ⥤ D} {g : D �
     f.mapDerivedCategory ⊣ g.mapDerivedCategory :=
   (adj.derivedAdjunction.ofNatIsoLeft f.leftDerivedFunctorIsoMapDerivedCategory).ofNatIsoRight
     g.rightDerivedFunctorIsoMapDerivedCategory
+
+/-- The unit of `f.mapDerivedCategory ⊣ g.mapDerivedCategory` is an isomorphism if the unit
+of `f ⊣ g` is. -/
+instance Adjunction.isIso_mapDerivedCategoryAdjunction_unit {f : C ⥤ D} {g : D ⥤ C}
+    (adj : f ⊣ g) [f.Additive] [g.Additive]
+    [PreservesFiniteLimits f] [PreservesFiniteColimits f]
+    [PreservesFiniteLimits g] [PreservesFiniteColimits g] [IsIso adj.unit] :
+    IsIso adj.mapDerivedCategoryAdjunction.unit := by
+  -- `f.mapDerivedCategory ⋙ g.mapDerivedCategory ≅ (f ⋙ g).mapDerivedCategory ≅ 𝟭`, so
+  -- `f.mapDerivedCategory` is fully faithful.
+  have h := adj.mapDerivedCategoryAdjunction.fullyFaithfulLOfCompIsoId
+    ((Functor.mapDerivedCategoryCompIso f g).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (asIso adj.unit).symm ≪≫
+        Functor.mapDerivedCategoryIdIso C)
+  have := h.full
+  have := h.faithful
+  infer_instance
+
+/-- The counit of `f.mapDerivedCategory ⊣ g.mapDerivedCategory` is an isomorphism if the
+counit of `f ⊣ g` is. -/
+instance Adjunction.isIso_mapDerivedCategoryAdjunction_counit {f : C ⥤ D} {g : D ⥤ C}
+    (adj : f ⊣ g) [f.Additive] [g.Additive]
+    [PreservesFiniteLimits f] [PreservesFiniteColimits f]
+    [PreservesFiniteLimits g] [PreservesFiniteColimits g] [IsIso adj.counit] :
+    IsIso adj.mapDerivedCategoryAdjunction.counit := by
+  -- `g.mapDerivedCategory ⋙ f.mapDerivedCategory ≅ (g ⋙ f).mapDerivedCategory ≅ 𝟭`, so
+  -- `g.mapDerivedCategory` is fully faithful.
+  have h := adj.mapDerivedCategoryAdjunction.fullyFaithfulROfCompIsoId
+    ((Functor.mapDerivedCategoryCompIso g f).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (asIso adj.counit) ≪≫
+        Functor.mapDerivedCategoryIdIso D)
+  have := h.full
+  have := h.faithful
+  infer_instance
 
 /-- The bounded below levelwise derived adjunction of an adjoint pair `adj : f ⊣ g` of
 *exact* functors between abelian categories:

@@ -40,6 +40,9 @@ of `P`-schemes over `V`.
   `AlgebraicGeometry.Scheme.isContinuous_overMap` and
   `AlgebraicGeometry.Scheme.isCocontinuous_overMap`: the localization functor is continuous
   and cocontinuous for the small `Q`-topologies, with instances for `Q = P`.
+- `AlgebraicGeometry.Scheme.isContinuous_overMap_comp_overPullback` and
+  `AlgebraicGeometry.Scheme.isContinuous_overPullback_comp_overMap`: the two composites of
+  base change and localization are continuous for the small `P`-topologies.
 
 -/
 
@@ -187,5 +190,25 @@ instance {P : MorphismProperty Scheme} {V U : Scheme} {f : V ⟶ U} (h : P f)
     (MorphismProperty.Over.map ⊤ h).IsContinuous
       (V.smallGrothendieckTopology P) (U.smallGrothendieckTopology P) :=
   isContinuous_overMap h le_rfl
+
+/-- The localization functor along `h : P f` followed by base change along `g : W ⟶ U` is
+continuous for the small `P`-topologies, as a composite of continuous functors. -/
+instance isContinuous_overMap_comp_overPullback {P : MorphismProperty Scheme}
+    [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P] [P.IsMultiplicative]
+    {V U W : Scheme} {f : V ⟶ U} (h : P f) (g : W ⟶ U) :
+    (MorphismProperty.Over.map ⊤ h ⋙ MorphismProperty.Over.pullback P ⊤ g).IsContinuous
+      (V.smallGrothendieckTopology P) (W.smallGrothendieckTopology P) :=
+  have := isContinuous_overPullback P P le_rfl g
+  Functor.isContinuous_comp _ _ _ (U.smallGrothendieckTopology P) _
+
+/-- Base change along `g : W ⟶ U` followed by the localization functor along `h : P f` is
+continuous for the small `P`-topologies, as a composite of continuous functors. -/
+instance isContinuous_overPullback_comp_overMap {P : MorphismProperty Scheme}
+    [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P] [P.IsMultiplicative]
+    {V U W : Scheme} (g : W ⟶ U) {f : W ⟶ V} (h : P f) :
+    (MorphismProperty.Over.pullback P ⊤ g ⋙ MorphismProperty.Over.map ⊤ h).IsContinuous
+      (U.smallGrothendieckTopology P) (V.smallGrothendieckTopology P) :=
+  have := isContinuous_overPullback P P le_rfl g
+  Functor.isContinuous_comp _ _ _ (W.smallGrothendieckTopology P) _
 
 end AlgebraicGeometry.Scheme

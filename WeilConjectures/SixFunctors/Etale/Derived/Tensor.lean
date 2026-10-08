@@ -28,12 +28,22 @@ product* `- ⊗ᴸ -`, the total left derived functor of `- ⊗ -` in two variab
 
 - `AlgebraicGeometry.Etale.derivedTensor` : the derived tensor product
   `- ⊗ᴸ - : D(X_ét) ⥤ D(X_ét) ⥤ D(X_ét)`, with scoped notation `(X)⊗ᴸ[A]`.
+- `AlgebraicGeometry.Etale.derivedTensorRight` : tensoring on the right with a fixed
+  complex, `K ↦ K ⊗ᴸ N`, and `AlgebraicGeometry.Etale.derivedTensorRightFunctor`, the same
+  construction read as a functor of `N`.
 
 ## Main results
 
 - `AlgebraicGeometry.Etale.isLeftDerivedFunctor₂_derivedTensor` : the derived tensor product
   really is the total left derived functor of the tensor product of étale sheaves, in two
   variables.
+
+- `AlgebraicGeometry.Etale.additive_derivedTensor_obj`,
+  `AlgebraicGeometry.Etale.additive_derivedTensor_flip_obj`,
+  `AlgebraicGeometry.Etale.linear_derivedTensor_obj` and
+  `AlgebraicGeometry.Etale.linear_derivedTensor_flip_obj` : the derived tensor product is
+  additive and `Λ`-linear in each variable, by `DerivedCategory.monoidalPreadditive` and
+  `DerivedCategory.monoidalLinear`.
 
 - `AlgebraicGeometry.Etale.laxMonoidal_Q` : the localization functor
   `Q : C(X_ét) ⥤ D(X_ét)` is lax monoidal.
@@ -88,6 +98,27 @@ noncomputable def derivedTensor :
 @[inherit_doc derivedTensor]
 scoped notation "-⊗ᴸ-(" X ")[" A "]" => derivedTensor A X
 
+/-- Tensoring on the right with a fixed complex `N` on `X`: the functor `K ↦ K ⊗ᴸ N` on
+`D(X_ét)`. -/
+noncomputable def derivedTensorRight
+    (N : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
+      DerivedCategory (Sheaf X.smallEtaleTopology A) :=
+  (-⊗ᴸ-(X)[A]).flip.obj N
+
+/-- `AlgebraicGeometry.Etale.derivedTensorRight` as a functor of the fixed complex: it sends
+`N` to `K ↦ K ⊗ᴸ N`. -/
+noncomputable def derivedTensorRightFunctor :
+    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
+      DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
+        DerivedCategory (Sheaf X.smallEtaleTopology A) :=
+  (-⊗ᴸ-(X)[A]).flip
+
+@[simp]
+lemma derivedTensorRightFunctor_obj (N : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (derivedTensorRightFunctor A X).obj N = derivedTensorRight A X N :=
+  rfl
+
 noncomputable instance laxMonoidal_Q :
     (DerivedCategory.Q (C := Sheaf X.smallEtaleTopology A)).LaxMonoidal :=
   DerivedCategory.laxMonoidalQ (Sheaf X.smallEtaleTopology A)
@@ -102,6 +133,32 @@ instance isLeftDerivedFunctor₂_derivedTensor :
       (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ))
       (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ)) :=
   DerivedCategory.isLeftDerivedFunctor₂CurriedTensor (Sheaf X.smallEtaleTopology A)
+
+section Linear
+
+variable {A X} (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+
+/-- Tensoring with a fixed object `K` of `D(X_ét)`, `M ↦ K ⊗ᴸ M`, is additive. -/
+instance additive_derivedTensor_obj : ((derivedTensor A X).obj K).Additive :=
+  inferInstanceAs (tensorLeft K).Additive
+
+/-- Tensoring with a fixed object `K` of `D(X_ét)`, `M ↦ M ⊗ᴸ K`, is additive. -/
+instance additive_derivedTensor_flip_obj : ((derivedTensor A X).flip.obj K).Additive :=
+  inferInstanceAs (tensorRight K).Additive
+
+variable (Λ : Type*) [Ring Λ] [Linear Λ A] [MonoidalLinear Λ A]
+
+/-- If the tensor product of `A` is `Λ`-linear, tensoring with a fixed object `K` of `D(X_ét)`,
+`M ↦ K ⊗ᴸ M`, is `Λ`-linear. -/
+instance linear_derivedTensor_obj : ((derivedTensor A X).obj K).Linear Λ :=
+  inferInstanceAs ((tensorLeft K).Linear Λ)
+
+/-- If the tensor product of `A` is `Λ`-linear, tensoring with a fixed object `K` of `D(X_ét)`,
+`M ↦ M ⊗ᴸ K`, is `Λ`-linear. -/
+instance linear_derivedTensor_flip_obj : ((derivedTensor A X).flip.obj K).Linear Λ :=
+  inferInstanceAs ((tensorRight K).Linear Λ)
+
+end Linear
 
 end Etale
 

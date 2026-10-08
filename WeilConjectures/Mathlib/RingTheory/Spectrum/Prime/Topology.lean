@@ -8,12 +8,18 @@ module
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
-# Points in the closure of the range of `PrimeSpectrum.comap`
+# Complements on the topology of the prime spectrum
 
 `PrimeSpectrum.exists_specializes_of_mem_closure_range_comap`: a prime in the closure of
 the range of `PrimeSpectrum.comap f` is a specialization of a prime in that range. This is
 the statement about prime spectra underlying Stacks Project Tag 02JQ, whose scheme-theoretic
 form is `AlgebraicGeometry.exists_specializes_of_mem_closure_range`.
+
+`PrimeSpectrum.mem_genericPoints_iff`: the generic points of the irreducible components of
+`Spec R` are the minimal primes of `R`.
+
+`PrimeSpectrum.isDomain_of_irreducibleSpace`: a reduced ring with irreducible spectrum is a
+domain.
 -/
 
 @[expose] public section
@@ -33,5 +39,21 @@ theorem exists_specializes_of_mem_closure_range_comap (f : R →+* S) {z : Prime
   obtain ⟨q, -, hq, hle⟩ := z.asIdeal.exists_ideal_comap_le_prime (f := f) ⊥
     (by rwa [← RingHom.ker_eq_comap_bot])
   exact ⟨⟨q, hq⟩, (le_iff_specializes _ z).mp hle⟩
+
+/-- A point of `Spec R` is the generic point of an irreducible component if and only if the
+corresponding prime ideal is a minimal prime of `R`. -/
+@[stacks 00ES]
+theorem mem_genericPoints_iff {p : PrimeSpectrum R} :
+    p ∈ genericPoints (PrimeSpectrum R) ↔ p.asIdeal ∈ minimalPrimes R := by
+  change closure ({p} : Set (PrimeSpectrum R)) ∈ irreducibleComponents (PrimeSpectrum R) ↔ _
+  rw [closure_singleton, zeroLocus_ideal_mem_irreducibleComponents, p.2.radical]
+
+/-- A reduced ring whose spectrum is irreducible is a domain: the nilradical `⊥` is prime.
+(blueprint: `lem-wf-affine-dimension-drop`, first claim) -/
+theorem isDomain_of_irreducibleSpace (R : Type*) [CommRing R] [IsReduced R]
+    [IrreducibleSpace (PrimeSpectrum R)] : IsDomain R := by
+  have := irreducibleSpace_iff_isPrime_nilradical.mp ‹_›
+  rw [nilradical_eq_zero] at this
+  exact IsDomain.of_bot_isPrime R
 
 end PrimeSpectrum

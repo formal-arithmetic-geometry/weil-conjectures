@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 Nailin Guan. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Nailin Guan
+Authors: Nailin Guan, Christian Merten
 -/
 module
 
@@ -23,6 +23,9 @@ abelian. Since the site has `Hom`-types in `u`, the sheaf category again has `Ho
 
 The small étale site and the small pro-étale site are essentially small in `u + 1`, so this
 applies to both.
+
+The small `Q`-sites of `P`-schemes and their localizations are essentially small too, and
+the instances for them are recorded here as well.
 
 -/
 
@@ -46,6 +49,17 @@ instance (priority := high) isGrothendieckAbelian_sheaf_of_essentiallySmall (A :
   have : HasLimitsOfSize.{u, u + 1} A := hasLimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} A
   exact Sheaf.isGrothendieckAbelian_of_essentiallySmall _ _
 
+/-- The category of `A`-valued sheaves on the small `Q`-site of `P`-schemes over a scheme
+`U` is Grothendieck abelian: the site is essentially `u + 1`-small, so this is a case of
+the instance above. -/
+instance isGrothendieckAbelian_sheaf_smallGrothendieckTopology (A : Type u')
+    [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+    [HasSmallSiteSheafify A] (P Q : MorphismProperty Scheme.{u})
+    [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
+    (U : Scheme.{u}) :
+    IsGrothendieckAbelian.{u + 1} (Sheaf (U.smallGrothendieckTopology Q (Q := P)) A) :=
+  Sheaf.isGrothendieckAbelian_of_hasSmallSiteSheafify A _
+
 /-- The category of `A`-valued sheaves on the small étale site is Grothendieck abelian:
 the instance above applied to the essentially small small étale site. -/
 instance (priority := high) isGrothendieckAbelian_sheaf_smallEtaleTopology (A : Type u')
@@ -59,5 +73,16 @@ instance (priority := high) isGrothendieckAbelian_sheaf_proEtTopology (A : Type 
     [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] (X : Scheme.{u}) :
     IsGrothendieckAbelian.{u + 1} (Sheaf (Scheme.ProEt.topology X) A) :=
   inferInstance
+
+/-- The category of `A`-valued sheaves on the localization at `V` of the small `Q`-site of
+`P`-schemes over `U` is Grothendieck abelian: the slice of the site at `V` is again
+essentially `u + 1`-small. -/
+instance isGrothendieckAbelian_sheaf_over_smallGrothendieckTopology (A : Type u')
+    [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+    [HasSmallSiteSheafify A] (P Q : MorphismProperty Scheme.{u})
+    [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
+    (U : Scheme.{u}) (V : P.Over ⊤ U) :
+    IsGrothendieckAbelian.{u + 1} (Sheaf ((U.smallGrothendieckTopology Q (Q := P)).over V) A) :=
+  Sheaf.isGrothendieckAbelian_of_hasSmallSiteSheafify A _
 
 end CategoryTheory.GrothendieckTopology

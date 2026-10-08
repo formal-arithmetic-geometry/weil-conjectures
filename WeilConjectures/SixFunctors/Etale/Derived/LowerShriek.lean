@@ -14,27 +14,28 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 
 /-!
 
 # Derived Lower Shriek
 
-# Main Results
+## Main results
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactification` : `Rf_!` with respect
-  to a compcatification `c`, with scoped notation `Rf_!(c)[A]`.
+  to a compactification `c`, with scoped notation `Rf_!(c)[A]`.
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlus` : `Rf_!`
-  on bounded below derived category with respect to a compcatification `c`, with scoped
+  on bounded below derived category with respect to a compactification `c`, with scoped
   notation `Rf_!(c)[A]+`.
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriek` : `Rf_!`
-  specifying to the chosen compcatification `HasCompactification.compactification`, with
+  specifying to the chosen compactification `HasCompactification.compactification`, with
   scoped notation `R(f)_![A]`.
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlus` : `Rf_!` on bounded below derived
-  category specifying to the chosen compcatification `HasCompactification.compactification`,
+  category specifying to the chosen compactification `HasCompactification.compactification`,
   with scoped notation `R(f)_![A]+`.
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility` and
@@ -44,6 +45,14 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 
 - `AlgebraicGeometry.Etale.compactlySupportedCohomology` : `H_c`, with scoped notation
   `H_c(f)[A](i)`.
+
+The hypothesis `HasCompactification f` of `rightDerivedLowerShriek` and of the functors
+built from it is discharged by Nagata's compactification theorem (the instance registered in
+`WeilConjectures.Compactification.NagataCompactification`, which this file imports through
+`WeilConjectures.SixFunctors.Etale.LowerShriek.Defs`): `Rf_!` is available for every separated,
+quasi-compact morphism locally of finite type over a quasi-compact quasi-separated base,
+with no compactification supplied by hand. The `example` after
+`rightDerivedLowerShriekPlus_eq` records this.
 
 -/
 
@@ -60,6 +69,7 @@ namespace AlgebraicGeometry
 open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 
 section DerivedLowerShriek
 
@@ -118,6 +128,19 @@ noncomputable def rightDerivedLowerShriekOfCompactificationPlusCompatibility :
       R((c.g)_*[A]) ≪≫
     Functor.associator _ _ _
 
+/-- The derived lower shriek attached to a compactification is additive. -/
+instance : Rf_!(c)[A].Additive :=
+  -- `D(i_!)` is additive, and so is `R(g_*)`, being a right adjoint
+  have := (Etale.mapDerivedUpperStarLowerStarAdjunction A c.g).right_adjoint_additive
+  inferInstance
+
+variable (Λ : Type*) [Ring Λ] [Linear Λ A] in
+/-- If `A` is `Λ`-linear, the derived lower shriek `D(i_!) ⋙ Rg_*` attached to a compactification
+`(i, g)` is `Λ`-linear: `D(i_!)` is induced by the `Λ`-linear exact functor `i_!`, and `Rg_*` is
+`Λ`-linear by `AlgebraicGeometry.Etale.linear_rightDerivedLowerStar`. -/
+instance linear_rightDerivedLowerShriekOfCompactification : Rf_!(c)[A].Linear Λ :=
+  inferInstanceAs ((D((c.i)_!open[A]) ⋙ R((c.g)_*[A])).Linear Λ)
+
 end Etale
 
 end OfCompactification
@@ -151,9 +174,11 @@ noncomputable def rightDerivedLowerShriekPlus :
 scoped notation "R(" f ")_![" A "]+" =>
   rightDerivedLowerShriekPlus A f
 
+omit [HasSmallSiteSheafify A] in
 lemma rightDerivedLowerShriek_eq : R(f)_![A] =
     Rf_!(HasCompactification.compactification f)[A] := rfl
 
+omit [HasSmallSiteSheafify A] in
 lemma rightDerivedLowerShriekPlus_eq : R(f)_![A]+ =
     Rf_!(HasCompactification.compactification f)[A]+ := rfl
 
@@ -165,6 +190,17 @@ noncomputable def rightDerivedLowerShriekPlusCompatibility :
   rightDerivedLowerShriekOfCompactificationPlusCompatibility A
     (HasCompactification.compactification f)
 
+/-- The derived lower shriek along a morphism admitting a compactification is additive. -/
+instance : R(f)_![A].Additive :=
+  inferInstanceAs (Rf_!(HasCompactification.compactification f)[A]).Additive
+
+variable (Λ : Type*) [Ring Λ] [Linear Λ A] in
+/-- If `A` is `Λ`-linear, the derived lower shriek `Rf_!` is `Λ`-linear, by
+`AlgebraicGeometry.Etale.linear_rightDerivedLowerShriekOfCompactification` for the chosen
+compactification. -/
+instance linear_rightDerivedLowerShriek : R(f)_![A].Linear Λ :=
+  inferInstanceAs ((Rf_!(HasCompactification.compactification f)[A]).Linear Λ)
+
 end Etale
 
 end DerivedLowerShriek
@@ -174,6 +210,7 @@ end AlgebraicGeometry
 namespace AlgebraicGeometry
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 
 section DerivedGlobalSections
 
