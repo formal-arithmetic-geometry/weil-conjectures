@@ -43,6 +43,8 @@ The part of the additive group structure of relative affine space that is used e
 - `AlgebraicGeometry.AffineSpace.smul`: the scaling `x ↦ c x` by a global function `c`.
 - `AlgebraicGeometry.AffineSpace.translation`: the translation `x ↦ x + a`.
 - `AlgebraicGeometry.AffineSpace.stdPairing`: the standard pairing on `𝔸(n; S) ×_S 𝔸(n; S)`.
+- `AlgebraicGeometry.AffineSpace.zeroLeft`, `AlgebraicGeometry.AffineSpace.zeroRight`: the
+  slices `{0} ×_S 𝔸(n; S)` and `𝔸(n; S) ×_S {0}` of `𝔸(n; S) ×_S 𝔸(n; S)`.
 
 -/
 
@@ -577,6 +579,88 @@ variable (n S)
 the fibre product. -/
 def stdPairing [Fintype n] : Γ(Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) :=
   ∑ i : n, (pr₁).appTop (coord S i) * (pr₂).appTop (coord S i)
+
+/-- The slice `{0} ×_S 𝔸(n; S)` of `𝔸(n; S) ×_S 𝔸(n; S)`: the section `ξ ↦ (0, ξ)` of the
+second projection. -/
+def zeroLeft : 𝔸(n; S) ⟶ Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) :=
+  Limits.pullback.lift (𝔸(n; S) ↘ S ≫ zeroSection n S) (𝟙 _) (by simp)
+
+/-- The slice `𝔸(n; S) ×_S {0}` of `𝔸(n; S) ×_S 𝔸(n; S)`: the section `x ↦ (x, 0)` of the
+first projection. -/
+def zeroRight : 𝔸(n; S) ⟶ Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) :=
+  Limits.pullback.lift (𝟙 _) (𝔸(n; S) ↘ S ≫ zeroSection n S) (by simp)
+
+@[reassoc (attr := simp)]
+lemma zeroLeft_fst : zeroLeft n S ≫ pr₁ = 𝔸(n; S) ↘ S ≫ zeroSection n S :=
+  Limits.pullback.lift_fst _ _ _
+
+@[reassoc (attr := simp)]
+lemma zeroLeft_snd : zeroLeft n S ≫ pr₂ = 𝟙 _ :=
+  Limits.pullback.lift_snd _ _ _
+
+@[reassoc (attr := simp)]
+lemma zeroRight_fst : zeroRight n S ≫ pr₁ = 𝟙 _ :=
+  Limits.pullback.lift_fst _ _ _
+
+@[reassoc (attr := simp)]
+lemma zeroRight_snd : zeroRight n S ≫ pr₂ = 𝔸(n; S) ↘ S ≫ zeroSection n S :=
+  Limits.pullback.lift_snd _ _ _
+
+/-- `{0} ×_S 𝔸(n; S)` is the base change of the zero section along the first projection:
+
+```
+             zeroLeft
+   𝔸(n; S) ──────────▶ 𝔸(n; S) ×_S 𝔸(n; S)
+      │                       │
+      │                       │ pr₁
+      ▼                       ▼
+      S ───zeroSection───▶ 𝔸(n; S)
+```
+-/
+lemma isPullback_zeroLeft :
+    IsPullback (zeroLeft n S) (𝔸(n; S) ↘ S) pr₁ (zeroSection n S) := by
+  refine IsPullback.of_right ?_ (zeroLeft_fst n S) (IsPullback.of_hasPullback _ _).flip
+  rw [zeroLeft_snd, zeroSection_over]
+  exact IsPullback.of_horiz_isIso ⟨by simp⟩
+
+/-- `𝔸(n; S) ×_S {0}` is the base change of the zero section along the second projection. -/
+lemma isPullback_zeroRight :
+    IsPullback (zeroRight n S) (𝔸(n; S) ↘ S) pr₂ (zeroSection n S) := by
+  refine IsPullback.of_right ?_ (zeroRight_snd n S) (IsPullback.of_hasPullback _ _)
+  rw [zeroRight_fst, zeroSection_over]
+  exact IsPullback.of_horiz_isIso ⟨by simp⟩
+
+/-- The standard pairing vanishes on any family of points whose first coordinate is the
+origin. -/
+lemma appTop_stdPairing_of_fst_eq [Fintype n] {X : Scheme.{u}}
+    (g : X ⟶ Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)) (h : X ⟶ S)
+    (hg : g ≫ pr₁ = h ≫ zeroSection n S) : g.appTop (stdPairing n S) = 0 := by
+  simp only [stdPairing, map_sum, map_mul, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop,
+    hg]
+  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, zeroSection_appTop_coord, map_zero,
+    zero_mul, Finset.sum_const_zero]
+
+/-- The standard pairing vanishes on any family of points whose second coordinate is the
+origin. -/
+lemma appTop_stdPairing_of_snd_eq [Fintype n] {X : Scheme.{u}}
+    (g : X ⟶ Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)) (h : X ⟶ S)
+    (hg : g ≫ pr₂ = h ≫ zeroSection n S) : g.appTop (stdPairing n S) = 0 := by
+  simp only [stdPairing, map_sum, map_mul, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop,
+    hg]
+  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, zeroSection_appTop_coord, map_zero,
+    mul_zero, Finset.sum_const_zero]
+
+variable {n S} in
+/-- A point of `𝔸(n; S)` outside the image of the zero section has a nonzero coordinate: if all
+coordinates of `ξ : T ⟶ 𝔸(n; S)` vanish, then `ξ` factors through the zero section. -/
+lemma exists_appTop_coord_ne_zero {T : Scheme.{u}} (ξ : T ⟶ 𝔸(n; S)) (t : T)
+    (ht : ξ.base t ∉ Set.range (zeroSection n S).base) : ∃ i, ξ.appTop (coord S i) ≠ 0 := by
+  by_contra! h
+  have : ξ = (ξ ≫ 𝔸(n; S) ↘ S) ≫ zeroSection n S :=
+    hom_ext (by simp) fun i ↦ by
+      rw [h i, Scheme.Hom.comp_appTop, CommRingCat.comp_apply, zeroSection_appTop_coord, map_zero]
+  rw [this] at ht
+  exact ht ⟨(ξ ≫ 𝔸(n; S) ↘ S).base t, by simp⟩
 
 end GroupLaw
 

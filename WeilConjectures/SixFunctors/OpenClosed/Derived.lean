@@ -44,6 +44,8 @@ total left derived functors `L(g^*)` through the isomorphism
   `AlgebraicGeometry.Etale.isZero_mapDerivedCategoryUpperStar_obj_\
   openImmersionLowerShriek_of_disjoint_range`
   (blueprint: `lemma:openclosed-vanishing-lowerShriek-derived`).
+- `AlgebraicGeometry.Etale.isZero_of_isZero_leftDerivedUpperStar_algClosurePoint`: a complex
+  whose derived pullbacks to all geometric points vanish is zero.
 - `AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_closedComplement_map` and
   `AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_closedComplement_obj_\
   openImmersionLowerShriek`: the two results for `i = j.closedComplement`.
@@ -185,5 +187,33 @@ lemma isZero_leftDerivedUpperStar_closedComplement_obj_openImmersionLowerShriek
     A j j.closedComplement (by rw [j.range_closedComplement]; exact disjoint_compl_left) K
 
 end Vanishing
+
+section GeometricPoints
+
+/-- **Geometric points detect vanishing in the derived category.** A complex `K ∈ D(X_ét, Λ)`
+whose derived pullback to the geometric point `Spec κ(x)‾ ⟶ X` vanishes for every point `x` of
+`X` is zero: each cohomology sheaf of `K` has vanishing pullbacks to all these geometric
+points, since pulling back is exact, so it vanishes by
+`AlgebraicGeometry.Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective`. -/
+theorem isZero_of_isZero_leftDerivedUpperStar_algClosurePoint (Λ : Type (u + 1)) [CommRing Λ]
+    {X : Scheme.{u}}
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (h : ∀ x : X, IsZero ((L((X.algClosurePoint x)^*[ModuleCat.{u + 1} Λ])).obj K)) :
+    IsZero K := by
+  rw [_root_.DerivedCategory.isZero_iff]
+  intro q
+  set F := (_root_.DerivedCategory.homologyFunctor _ q).obj K
+  have : IsIso (0 : F ⟶ F) :=
+    Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ)
+      (fun x : X ↦ X.algClosurePoint x) (fun x ↦ ⟨x, default, by simp⟩) _ fun x ↦ by
+        have hF := (Functor.map_isZero (_root_.DerivedCategory.homologyFunctor _ q) (h x)).of_iso
+          ((leftDerivedUpperStarHomologyFunctorIso _ (X.algClosurePoint x) q).app K)
+        exact ⟨⟨0, hF.eq_of_src _ _, hF.eq_of_src _ _⟩⟩
+  rw [IsZero.iff_id_eq_zero]
+  have h0 := IsIso.hom_inv_id (0 : F ⟶ F)
+  rw [zero_comp] at h0
+  exact h0.symm
+
+end GeometricPoints
 
 end AlgebraicGeometry.Etale

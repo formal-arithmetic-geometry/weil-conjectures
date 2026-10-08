@@ -26,6 +26,8 @@ These belong to the framework, not to any one chapter: the finiteness statements
 - `AlgebraicGeometry.Etale.DerivedCategoryModule`: the derived category `D(X_ét, Λ)`.
 - `AlgebraicGeometry.Etale.constantComplex`: the constant complex `Λ_X`, the unit of the
   derived tensor product.
+- `AlgebraicGeometry.Etale.constantComplexIsoUnit`, `AlgebraicGeometry.Etale.singleUnitIso`:
+  `Λ_X` is the monoidal unit, and so is the unit sheaf placed in degree `0`.
 - `AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeIn`: Tor amplitude in `[a, b]`.
   Finite Tor amplitude is `AlgebraicGeometry.Etale.DerivedCategory.finiteTorAmplitude` of
   `WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude`, for `A = ModuleCat Λ`.
@@ -59,6 +61,19 @@ It is the coefficient object every statement of the purity chapter is normalized
 noncomputable def constantComplex :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   𝟙_ _
+
+/-- The constant complex `Λ_X` is the monoidal unit of `D(X_ét, Λ)`. It is an identity, but
+stating it as an isomorphism spares the elaborator unfolding the unit when the two are
+compared. -/
+noncomputable def constantComplexIsoUnit : constantComplex Λ X ≅ 𝟙_ _ :=
+  Iso.refl _
+
+/-- The unit sheaf `Λ` placed in degree `0` is the monoidal unit of `D(X_ét, Λ)`; by
+construction the unit of the derived category is the image of the unit complex. -/
+noncomputable def singleUnitIso :
+    (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+      0).obj (𝟙_ _) ≅ 𝟙_ _ :=
+  Iso.refl _
 
 /-- Blueprint `sk-def-sf-setting`: Coefficients and sites
 

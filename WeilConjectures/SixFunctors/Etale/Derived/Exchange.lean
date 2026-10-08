@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 
 /-!
 # Compact-support base change, the projection formula and finite reduction
@@ -50,6 +52,8 @@ The exchange `Ex_*` for `Rf_*` does already exist in this repository, as
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`,
   `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerStar`
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_leftDerivedUpperStar`
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_leftDerivedUpperStar_of_isZero`: a
+  complex vanishing off a closed subscheme is the pushforward of its restriction to it.
 -/
 
 @[expose] public section
@@ -233,6 +237,41 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar (f : X ⟶ Y) [IsDo
   sorry
 
 end LowerStar
+
+section Supported
+
+/-- **A complex vanishing off a closed subscheme lives on it.** Let `i : Z ⟶ X` be a closed
+immersion with complementary open immersion `j : U ⟶ X`, and `Λ` finite. If `Lj^* K = 0`, then
+
+`K ≅ Ri_* Li^* K`.
+
+The supported localization triangle `Ri_! Ri^! K ⟶ K ⟶ Rj_* Lj^* K ⟶` has vanishing third
+term, so `K ≅ Ri_! N` with `N = Ri^! K`; and `Li^* Ri_! N ≅ N` by compact-support base change
+along the cartesian square `Z ×_X Z = Z` of the monomorphism `i`. Finally `Ri_! = Ri_*`, `i`
+being proper. -/
+theorem nonempty_iso_rightDerivedLowerStar_leftDerivedUpperStar_of_isZero [Finite Λ]
+    {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : IsZero ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K)) :
+    Nonempty (K ≅ R((i)_*[ModuleCat.{u + 1} Λ]).obj
+      ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
+  have hT := supportedLocalizationTriangle_mem_distTriang (ModuleCat.{u + 1} Λ) i j hij K
+  have h₁ : IsIso ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app K) :=
+    (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hT).1 (Functor.map_isZero _ hK)
+  have sq : IsPullback (𝟙 Z) (𝟙 Z) i i := IsKernelPair.id_of_mono i
+  have h₂ := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
+  let N := (R(i)^![ModuleCat.{u + 1} Λ]).obj K
+  -- `Li^* Ri_! N ≅ N`
+  let e₁ : (L((i)^*[ModuleCat.{u + 1} Λ])).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj N) ≅ N :=
+    (asIso (rightDerivedLowerShriekBaseChangeMap _ sq)).app N ≪≫
+      (rightDerivedLowerShriekId _ Z).app _ ≪≫ (leftDerivedUpperStarId _ Z).app N
+  let e₂ : K ≅ (R(i)_![ModuleCat.{u + 1} Λ]).obj N :=
+    (asIso ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app K)).symm
+  exact ⟨e₂ ≪≫ (R(i)_![_]).mapIso (e₁.symm ≪≫ (L((i)^*[_])).mapIso e₂.symm) ≪≫
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar _ i).app _⟩
+
+end Supported
 
 end Etale
 

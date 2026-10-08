@@ -491,4 +491,22 @@ theorem nonempty_iso_artinSchreierSheafOf_inv (Ψ : AddChar k Λ) (f : Γ(X, ⊤
 
 end Properties
 
+section ZModVanishing
+
+/-- The Artin–Schreier sheaf of a function is trivial on a locus where the function vanishes:
+for a morphism `g : X' ⟶ X` with `g^* f = 0`, `g^* ℒ_{Ψ, f} ≅ Λ`. Here `X'` is viewed as a scheme
+over `𝔽_p` through `g`, so that no characteristic hypothesis on `X'` is needed. -/
+theorem nonempty_iso_upperStar_artinSchreierSheafZMod_of_appTop_eq_zero {p : ℕ}
+    [Fact p.Prime] [Invertible (p : Λ)] {X X' : Scheme.{u}} [CharP Γ(X, ⊤) p] (g : X' ⟶ X)
+    (Ψ : AddChar (ZMod p) Λ) (f : Γ(X, ⊤)) (hf : g.appTop f = 0) :
+    Nonempty ((g)^*[ModuleCat Λ].obj (artinSchreierSheafZMod X Ψ f) ≅ 𝟙_ _) := by
+  let := X.overSpecZModOfCharP p
+  let : X'.Over (Spec (.of (ULift.{u} (ZMod p)))) := ⟨g ≫ X ↘ Spec _⟩
+  have : g.IsOver (Spec (.of (ULift.{u} (ZMod p)))) := ⟨rfl⟩
+  obtain ⟨e⟩ := nonempty_iso_artinSchreierSheafOf_zero (Λ := Λ) X'
+    (Ψ.compAddMonoidHom AddEquiv.ulift.toAddMonoidHom)
+  exact ⟨artinSchreierSheafOfPullbackIso g _ f ≪≫ eqToIso (by rw [hf]) ≪≫ e⟩
+
+end ZModVanishing
+
 end AlgebraicGeometry.Etale

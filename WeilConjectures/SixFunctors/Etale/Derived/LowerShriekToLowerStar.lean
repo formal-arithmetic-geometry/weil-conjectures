@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-!
 # The derived comparison from extension by zero to pushforward
@@ -36,6 +37,10 @@ of the unit `K ⟶ D(j^*) D(j_!) K`, which is an isomorphism
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`: `Rf_! ≅ Rf_*` for
   a proper `f`.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekTranspose`
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarId`,
+  `AlgebraicGeometry.Etale.rightDerivedLowerStarId` and
+  `AlgebraicGeometry.Etale.rightDerivedLowerShriekId`: the derived functors of the identity
+  morphism are the identity.
 
 ## Main statements
 
@@ -164,6 +169,31 @@ noncomputable def rightDerivedLowerShriekTranspose
   (((derivedUpperStarLowerStarAdjunction A _).comp
     (derivedUpperStarLowerStarAdjunction A _)).homEquiv _ _).symm
       (γ ≫ (rightDerivedLowerShriekToLowerStarComp A f).app N)
+
+/-- The derived pullback along the identity is the identity, `L(𝟙 X)^* ≅ 𝟭`: the derived
+functor of `Etale.upperStarId`, followed by `L(𝟭) ≅ D(𝟭) ≅ 𝟭`. -/
+noncomputable def leftDerivedUpperStarId (X : Scheme.{u}) : L((𝟙 X)^*[A]) ≅ 𝟭 _ :=
+  Functor.leftDerivedFunctorNatIso _ (Etale.upperStarId A X) ≪≫
+    (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
+
+/-- The derived pushforward along the identity is the identity, `R(𝟙 X)_* ≅ 𝟭`: both are right
+adjoint to `L(𝟙 X)^* ≅ 𝟭`. -/
+noncomputable def rightDerivedLowerStarId (X : Scheme.{u}) : R(((𝟙 X))_*[A]) ≅ 𝟭 _ :=
+  ((derivedUpperStarLowerStarAdjunction A (𝟙 X)).ofNatIsoLeft
+    (leftDerivedUpperStarId A X)).rightAdjointUniq Adjunction.id
+
+/-- The compactly supported direct image along the identity is the identity,
+`R(𝟙 X)_! ≅ R(𝟙 X)_* ≅ 𝟭`, the identity being proper. -/
+noncomputable def rightDerivedLowerShriekId (X : Scheme.{u}) : R(𝟙 X)_![A] ≅ 𝟭 _ :=
+  rightDerivedLowerShriekIsoRightDerivedLowerStar A (𝟙 X) ≪≫ rightDerivedLowerStarId A X
+
+/-- The compactly supported direct image along an endomorphism equal to the identity is the
+identity. This is `AlgebraicGeometry.Etale.rightDerivedLowerShriekId` transported along
+`f = 𝟙 X`, for an `f` such as `s ≫ p` with `s` a section of `p`. -/
+theorem nonempty_iso_rightDerivedLowerShriek_of_eq_id {X : Scheme.{u}} (f : X ⟶ X)
+    [HasCompactification f] (hf : f = 𝟙 X) : Nonempty (R(f)_![A] ≅ 𝟭 _) := by
+  subst hf
+  exact ⟨rightDerivedLowerShriekId A X⟩
 
 end Etale
 
