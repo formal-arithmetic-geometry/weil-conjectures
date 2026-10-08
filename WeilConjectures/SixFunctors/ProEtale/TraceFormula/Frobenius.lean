@@ -63,10 +63,11 @@ they are needed. The `coeff` field is a plain morphism rather than an isomorphis
 `WeilComplex` covers both a Weil datum (add `IsIso W.coeff`) and the arbitrary *Frobenius
 coefficient morphism* that the coefficient continuation of the argument needs.
 
-`isUniversalHomeomorphism_relativeFrobenius` is not proved because the cancellation lemma
-it needs — if `g ≫ f` and `f` are universal homeomorphisms then so is `g` — is missing;
-the corresponding cancellation for finite morphisms is `AlgebraicGeometry.IsFinite.of_comp`
-and makes `isFinite_relativeFrobenius` a theorem.
+`isFinite_relativeFrobenius` and `isUniversalHomeomorphism_relativeFrobenius` follow from
+`r_m ≫ p_m = Φ_X` by the cancellation lemmas `AlgebraicGeometry.IsFinite.of_comp` and
+`AlgebraicGeometry.IsUniversalHomeomorphism.of_comp`, since `p_m` is a base change of `Φ_Y`.
+That the Frobenius morphisms themselves are finite universal homeomorphisms (the absolute
+Frobenius step of the blueprint proof) enters as hypotheses, as explained above.
 
 `isEquivalence_leftDerivedUpperStar` is stated on the whole unbounded `D(Y, A) ⥤ D(X, A)`,
 whereas the blueprint states topological invariance on `Dᵇctf`; the generalisation is the
@@ -343,13 +344,17 @@ instance isFinite_relativeFrobenius (f : X ⟶ Y) (frobX : X ⟶ X) (frobY : Y �
   exact .of_comp _ (pullback.snd frobY f)
 
 /-- The relative Frobenius of a morphism between schemes whose Frobenius morphisms are
-finite universal homeomorphisms is a universal homeomorphism
-(blueprint: `sk-i-relative-frob`). -/
+finite universal homeomorphisms is a universal homeomorphism: its composite with the
+projection `p_m`, a base change of `Φ_Y`, is `Φ_X` (blueprint: `sk-i-relative-frob`). -/
 theorem isUniversalHomeomorphism_relativeFrobenius (f : X ⟶ Y) (frobX : X ⟶ X)
     (frobY : Y ⟶ Y) (h : f ≫ frobY = frobX ≫ f) [IsFinite frobX] [IsFinite frobY]
     [IsUniversalHomeomorphism frobX] [IsUniversalHomeomorphism frobY] :
-    IsUniversalHomeomorphism (relativeFrobenius f frobX frobY h) :=
-  sorry
+    IsUniversalHomeomorphism (relativeFrobenius f frobX frobY h) := by
+  have : IsUniversalHomeomorphism
+      (relativeFrobenius f frobX frobY h ≫ pullback.snd frobY f) := by
+    rw [relativeFrobenius_comp_snd]
+    infer_instance
+  exact .of_comp _ (pullback.snd frobY f)
 
 /-- Topological invariance: for a finite universal homeomorphism `r : X ⟶ Y`, pullback is
 an equivalence `Lr^* : D(Y, A) ≌ D(X, A)`, with inverse `Rr_* = Rr_!` and invertible unit
