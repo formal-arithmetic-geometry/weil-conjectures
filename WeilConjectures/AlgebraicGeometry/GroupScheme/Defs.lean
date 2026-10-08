@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Group.Abelian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
@@ -18,16 +19,20 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
 Following Mathlib, a group scheme over a base scheme `S` is an object `G` of `Over S` equipped
 with `CategoryTheory.GrpObj G`, multiplication by `n` being the `n`-th power `𝟙 G ^ n` of the
 identity in the group `G ⟶ G` of `CategoryTheory.GrpObj.Hom.group`. This file introduces the
-`n`-torsion subgroup scheme and isogenies over an arbitrary base; the order of a finite group
-scheme over a field `K` is `AlgebraicGeometry.Scheme.Hom.finrankΓ` of its structure morphism,
-and the degree of an isogeny is only defined over a field.
+`n`-torsion subgroup scheme, isogenies and their degree over an arbitrary base. The degree of
+an isogeny is the rank of its finite locally free kernel, a locally constant function on the
+base (`AlgebraicGeometry.isogenyDegreeAt`); over a field it is a number
+(`AlgebraicGeometry.isogenyDegree`), the order `dim_K Γ(ker f, 𝒪)` of the kernel
+(`AlgebraicGeometry.isogenyDegree_eq_finrank_Γ`).
 
 ## Main definitions
 
 - `AlgebraicGeometry.torsionSubgroupScheme`: the `n`-torsion subgroup scheme `G[n]`.
   Being a kernel, it is itself a group scheme (`CategoryTheory.GrpObj.instGrpObjKer`).
-- `AlgebraicGeometry.IsIsogeny`: a surjective homomorphism of group schemes with finite kernel.
-- `AlgebraicGeometry.isogenyDegree`: the degree of an isogeny, the order of its kernel.
+- `AlgebraicGeometry.IsIsogeny`: a surjective homomorphism of group schemes with finite locally
+  free kernel.
+- `AlgebraicGeometry.isogenyDegreeAt`, `AlgebraicGeometry.isogenyDegree`: the degree of an
+  isogeny at a point of the base, the rank of its kernel there, and its value over a field.
 
 ## Main statements
 
@@ -35,8 +40,10 @@ and the degree of an isogeny is only defined over a field.
   homomorphism.
 - `AlgebraicGeometry.isClosedImmersion_kerι`: the kernel of a homomorphism of group schemes is
   a closed subgroup scheme.
-- `AlgebraicGeometry.fiberDegree_eq_finrankΓ`: the order of a group scheme over a field is the
-  fibre degree of its structure morphism.
+- `AlgebraicGeometry.isLocallyConstant_isogenyDegreeAt`: the degree of an isogeny is locally
+  constant on the base.
+- `AlgebraicGeometry.isogenyDegree_eq_finrank_Γ`: over a field the degree of an isogeny is the
+  order of its kernel.
 -/
 
 @[expose] public section
@@ -68,18 +75,6 @@ theorem isClosedImmersion_kerι {A B : Over S} [GrpObj A] [GrpObj B] [IsSeparate
     IsClosedImmersion (GrpObj.kerι f).left :=
   sorry
 
-/-- The order `f.finrankΓ` of a finite group scheme over a field is the fibre degree of its
-structure morphism at the unique point of `Spec K`; the two degree notions of the project agree
-on group schemes over a field.
-
-This is a statement about an arbitrary affine morphism to the spectrum of a field, so it belongs
-in `WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree`; it is stated here only to keep
-that file free of `sorry`. -/
-theorem fiberDegree_eq_finrankΓ {G : Scheme.{u}} (f : G ⟶ Spec (.of K)) [IsAffineHom f]
-    (x : Spec (.of K)) :
-    f.fiberDegree x = f.finrankΓ :=
-  sorry
-
 /-- Blueprint `sk-def-av-mult-n`: Multiplication by `n` and `n`-torsion.
 
 The `n`-torsion subgroup scheme `G[n]` of a group scheme `G` over a base `S` is the kernel of
@@ -104,24 +99,60 @@ noncomputable instance (G : Over S) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
 /-- Blueprint `sk-def-av-isogeny`: Isogenies and their degree.
 
 An *isogeny* `f : A ⟶ B` of group schemes over a base `S` is a surjective homomorphism whose
-kernel is finite over `S`. The blueprint defines isogenies between abelian varieties; the
-definition makes sense for arbitrary group schemes over any base, but it is only for abelian
-varieties that `AlgebraicGeometry.isogenyDegree` is the degree of `f` as a finite flat morphism
-(see `AlgebraicGeometry.IsIsogeny.finrank_eq`). -/
+kernel is finite locally free over `S`, that is finite, flat and locally of finite presentation.
+The blueprint defines isogenies between abelian varieties, where the kernel of a surjective
+homomorphism with finite kernel is automatically finite locally free; the definition makes
+sense for arbitrary group schemes over any base, and it is the finite local freeness of the
+kernel that makes its rank `AlgebraicGeometry.isogenyDegreeAt` a locally constant function on
+`S`. It is only for abelian schemes that this is the degree of `f` itself as a finite flat
+morphism (see `AlgebraicGeometry.IsIsogeny.finrank_eq`). -/
 class IsIsogeny {A B : Over S} [GrpObj A] [GrpObj B] (f : A ⟶ B) : Prop
     extends IsMonHom f, Surjective f.left where
   /-- The kernel of an isogeny is a finite group scheme. -/
   isFinite_ker : IsFinite (GrpObj.ker f).hom
+  /-- The kernel of an isogeny is flat over the base. -/
+  flat_ker : Flat (GrpObj.ker f).hom
+  /-- The kernel of an isogeny is locally of finite presentation over the base. -/
+  locallyOfFinitePresentation_ker : LocallyOfFinitePresentation (GrpObj.ker f).hom
 
-attribute [instance] IsIsogeny.isFinite_ker
+attribute [instance] IsIsogeny.isFinite_ker IsIsogeny.flat_ker
+  IsIsogeny.locallyOfFinitePresentation_ker
 
-/-- The degree of an isogeny `f : A ⟶ B` of group schemes over a field `K`: the order of its
-kernel.
+/-- Blueprint `sk-def-av-isogeny`: Isogenies and their degree.
 
-This is only the degree of `f` as a finite flat morphism when `f` is an isogeny of abelian
-varieties; outside that range it is the order of the kernel and nothing more. -/
+The degree of a homomorphism `f : A ⟶ B` of group schemes over `S` at a point `s : S`: the rank
+`AlgebraicGeometry.Scheme.Hom.finrank` at `s` of the kernel of `f` over `S`, that is, the rank of
+the `𝒪_{S, s}`-module `(𝒪_{ker f})_s`. For an isogeny the kernel is finite locally free, so
+this is a locally constant function of `s`
+(`AlgebraicGeometry.isLocallyConstant_isogenyDegreeAt`); for other homomorphisms it is a
+number without meaning. -/
+noncomputable def isogenyDegreeAt {A B : Over S} [GrpObj A] [GrpObj B] (f : A ⟶ B) (s : S) :
+    ℕ :=
+  (GrpObj.ker f).hom.finrank s
+
+/-- The degree of an isogeny is a locally constant function on the base, the rank of a finite
+locally free morphism being locally constant. -/
+theorem isLocallyConstant_isogenyDegreeAt {A B : Over S} [GrpObj A] [GrpObj B] (f : A ⟶ B)
+    [IsIsogeny f] : IsLocallyConstant (isogenyDegreeAt f) :=
+  (GrpObj.ker f).hom.isLocallyConstant_finrank
+
+/-- Blueprint `sk-def-av-isogeny`: Isogenies and their degree.
+
+The degree of a homomorphism `f : A ⟶ B` of group schemes over a field `K`: the value of
+`AlgebraicGeometry.isogenyDegreeAt f` at the unique point of `Spec K`. For an isogeny it is the
+order of the kernel (`AlgebraicGeometry.isogenyDegree_eq_finrank_Γ`). -/
 noncomputable def isogenyDegree {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B] (f : A ⟶ B) :
     ℕ :=
-  (GrpObj.ker f).hom.finrankΓ
+  isogenyDegreeAt f default
+
+/-- Over a field `K` the degree of an isogeny `f` is the order of its kernel, the `K`-dimension
+of `Γ(ker f, 𝒪)`: the kernel is finite over `Spec K`, and the rank of a finite morphism to the
+spectrum of a field at its unique point is the dimension of its ring of global sections
+(`AlgebraicGeometry.Scheme.Hom.finrank_eq_finrank_Γ`). -/
+theorem isogenyDegree_eq_finrank_Γ {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B] (f : A ⟶ B)
+    [IsIsogeny f] :
+    letI := (GrpObj.ker f).hom.ΓAlgebra
+    isogenyDegree f = Module.finrank K Γ((GrpObj.ker f).left, ⊤) :=
+  (GrpObj.ker f).hom.finrank_eq_finrank_Γ _
 
 end AlgebraicGeometry

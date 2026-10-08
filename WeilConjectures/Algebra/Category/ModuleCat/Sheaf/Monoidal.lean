@@ -39,6 +39,8 @@ internal hom `PresheafOfModules.homObj F N`, which is a sheaf when `N` is.
 - `SheafOfModules.symmetricCategory`: it is symmetric.
 - `SheafOfModules.tensorObjIsoSheafification`: `M ⊗ N` is the sheafification of the tensor
   product of the underlying presheaves of modules.
+- `SheafOfModules.homObjEval`: the evaluation morphism `M ⊗ homObj M N ⟶ N` of the internal hom
+  `SheafOfModules.homObj`.
 
 The sheafification functor is a braided monoidal functor for these structures.
 -/
@@ -194,5 +196,26 @@ noncomputable def tensorObjIsoSheafification (M N : SheafOfModules.{u} 𝓡) :
       M.val N.val
 
 end
+
+section Evaluation
+
+variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] {R : Sheaf J CommRingCat.{u}}
+  [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
+
+attribute [local instance] monoidalCategory
+
+/-- The evaluation morphism `M ⊗ homObj M N ⟶ N` of the internal hom, sending `m ⊗ φ` to
+`φ m`: it is the sheafification of the evaluation `PresheafOfModules.tensorHomUncurry (𝟙 _)` of
+the underlying presheaves of modules, composed with the identification
+`SheafOfModules.tensorObjIsoSheafification` of `M ⊗ homObj M N` with the sheafification of the
+presheaf tensor product and the counit of the sheafification adjunction at `N`. -/
+noncomputable def homObjEval (M N : SheafOfModules.{u} 𝓡) : M ⊗ homObj M N ⟶ N :=
+  (tensorObjIsoSheafification M (homObj M N)).hom ≫
+    (𝓢).map (PresheafOfModules.tensorHomUncurry
+      (𝟙 (PresheafOfModules.homObj (R := R.obj) M.val N.val))) ≫
+    (PresheafOfModules.sheafificationAdjunction.{u} (𝟙 (𝓡).obj)).counit.app N
+
+end Evaluation
 
 end SheafOfModules

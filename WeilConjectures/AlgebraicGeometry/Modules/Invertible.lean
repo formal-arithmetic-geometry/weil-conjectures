@@ -26,11 +26,18 @@ An `𝒪_X`-module is *invertible* if it is locally isomorphic to `𝒪_X`.
 - `AlgebraicGeometry.Scheme.Modules.tensorPow`: the tensor power `M^{⊗ n}`.
 - `AlgebraicGeometry.Scheme.Modules.overPullback`: pullback along a morphism of schemes over a
   base.
+- `AlgebraicGeometry.Scheme.Modules.inv`: the inverse `M⁻¹ = ℋom_{𝒪_X}(M, 𝒪_X)` of an
+  `𝒪_X`-module, with the evaluation morphism `AlgebraicGeometry.Scheme.Modules.evaluation`
+  `M ⊗ M⁻¹ ⟶ 𝒪_X` and, for `M` invertible, the canonical isomorphism
+  `AlgebraicGeometry.Scheme.Modules.evaluationIso : M ⊗ M⁻¹ ≅ 𝒪_X`.
 
 ## Main results
 
 - `AlgebraicGeometry.Scheme.Modules.IsInvertible.pullback`: the pullback of an invertible module
   along any morphism of schemes is invertible.
+- `AlgebraicGeometry.Scheme.Modules.IsInvertible.isIso_evaluation`,
+  `AlgebraicGeometry.Scheme.Modules.IsInvertible.inv`: for `M` invertible the evaluation
+  `M ⊗ M⁻¹ ⟶ 𝒪_X` is an isomorphism and `M⁻¹` is invertible.
 -/
 
 @[expose] public section
@@ -116,6 +123,45 @@ lemma tensorPow_zero (M : X.Modules) : M.tensorPow 0 = 𝟙_ X.Modules :=
 
 lemma tensorPow_succ (M : X.Modules) (n : ℕ) : M.tensorPow (n + 1) = M ⊗ M.tensorPow n :=
   rfl
+
+/-- The *inverse* `M⁻¹ = ℋom_{𝒪_X}(M, 𝒪_X)` of an `𝒪_X`-module `M`: the internal hom
+`SheafOfModules.homObj M 𝒪_X`, whose sections over `U` are the `𝒪_U`-linear maps `M|_U ⟶ 𝒪_U`.
+For `M` invertible it is an inverse of `M` for the tensor product, the evaluation
+`AlgebraicGeometry.Scheme.Modules.evaluation : M ⊗ M⁻¹ ⟶ 𝒪_X` being an isomorphism
+(`AlgebraicGeometry.Scheme.Modules.evaluationIso`). Being an internal hom it involves no choice,
+so that isomorphisms built from it are canonical. -/
+noncomputable def inv (M : X.Modules) : X.Modules :=
+  SheafOfModules.homObj (R := X.sheaf) M (𝟙_ X.Modules)
+
+/-- The inverse `AlgebraicGeometry.Scheme.Modules.inv` of an `𝒪_X`-module, written `M⁻¹`. -/
+noncomputable instance : Inv X.Modules :=
+  ⟨inv⟩
+
+lemma inv_def (M : X.Modules) :
+    M⁻¹ = SheafOfModules.homObj (R := X.sheaf) M (𝟙_ X.Modules) :=
+  rfl
+
+/-- The evaluation morphism `M ⊗ M⁻¹ ⟶ 𝒪_X`, `m ⊗ φ ↦ φ m`
+(`SheafOfModules.homObjEval`). -/
+noncomputable def evaluation (M : X.Modules) : M ⊗ M⁻¹ ⟶ 𝟙_ X.Modules :=
+  SheafOfModules.homObjEval (R := X.sheaf) M (𝟙_ X.Modules)
+
+/-- For `M` invertible the evaluation `M ⊗ M⁻¹ ⟶ 𝒪_X` is an isomorphism: locally on `X` one
+has `M ≅ 𝒪_X`, hence `M⁻¹ ≅ ℋom(𝒪_X, 𝒪_X) ≅ 𝒪_X`, and the evaluation becomes the
+multiplication `𝒪_X ⊗ 𝒪_X ≅ 𝒪_X`. -/
+instance IsInvertible.isIso_evaluation (M : X.Modules) [M.IsInvertible] :
+    IsIso (evaluation M) :=
+  sorry
+
+/-- The canonical isomorphism `M ⊗ M⁻¹ ≅ 𝒪_X` for an invertible `𝒪_X`-module `M`, given by
+evaluation. -/
+noncomputable def evaluationIso (M : X.Modules) [M.IsInvertible] : M ⊗ M⁻¹ ≅ 𝟙_ X.Modules :=
+  asIso (evaluation M)
+
+/-- The inverse of an invertible module is invertible: locally `M ≅ 𝒪_X`, and
+`ℋom(𝒪_X, 𝒪_X) ≅ 𝒪_X`. -/
+instance IsInvertible.inv (M : X.Modules) [M.IsInvertible] : M⁻¹.IsInvertible :=
+  sorry
 
 end Scheme.Modules
 

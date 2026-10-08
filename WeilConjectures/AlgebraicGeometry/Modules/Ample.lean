@@ -21,7 +21,9 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 An `𝒪_X`-module is *very ample* relative to `f : X ⟶ S` if it is the pullback of `𝒪(1)` along
 a closed immersion of `X` into a projective space `ℙ(n; S)` over `S`; it is then invertible. An
-invertible module on a `K`-scheme is *ample* if some positive tensor power of it is very ample.
+invertible module on `X` is *ample* relative to `f : X ⟶ S` if some positive tensor power of it
+is very ample relative to `f`; both notions make sense over an arbitrary base `S`, and over a
+field they are the usual very ample and ample modules on a `K`-scheme.
 For an ample invertible module `M` on a proper `K`-scheme `X` of dimension `g`, the function
 `m ↦ χ(X, M^{⊗ m})` is a numerical polynomial of degree at most `g`, and the *degree of `X` with
 respect to `M`* is `g!` times its leading coefficient.
@@ -35,7 +37,8 @@ leading coefficient whenever that function is a numerical polynomial of degree a
 
 ## Main definitions
 
-- `AlgebraicGeometry.IsVeryAmple`, `AlgebraicGeometry.IsAmple`: very ample and ample modules.
+- `AlgebraicGeometry.IsVeryAmple`, `AlgebraicGeometry.IsAmple`: very ample and ample modules
+  relative to a morphism `f : X ⟶ S`.
 - `AlgebraicGeometry.Scheme.Hom.hilbertFunction`: the Hilbert function `m ↦ χ(X, M^{⊗ m})`.
 - `AlgebraicGeometry.Scheme.Hom.degree`: the degree of a proper scheme with respect to an ample
   invertible module.
@@ -84,8 +87,15 @@ lemma IsVeryAmple.isInvertible {S : Scheme.{u}} {f : X ⟶ S} {M : X.Modules}
 
 /-- Blueprint `sk-def-av-ample-degree`: Ample modules and the Hilbert degree.
 
-An invertible `𝒪_X`-module is *ample* if some positive tensor power of it is very ample. -/
-def IsAmple (f : X ⟶ Spec (.of K)) (M : X.Modules) : Prop :=
+An invertible `𝒪_X`-module `M` is *ample* relative to `f : X ⟶ S` (or *`f`-ample*, or
+*relatively ample*) if some positive tensor power of it is very ample relative to `f`. Over a
+field `S = Spec K` this is the usual notion of an ample module on a `K`-scheme.
+
+Like `AlgebraicGeometry.IsVeryAmple`, this is the "projective" variant of the notion: for a
+proper `f` over an affine base it agrees with relative ampleness in the sense of EGA II (4.6.1)
+and Stacks `01VG`, by Stacks `0B45`, while over a general base it asks in addition that the
+embedding of some tensor power be into a trivial projective space `ℙ(n; S)`. -/
+def IsAmple {S : Scheme.{u}} (f : X ⟶ S) (M : X.Modules) : Prop :=
   ∃ m : ℕ, 0 < m ∧ IsVeryAmple f (M.tensorPow m)
 
 /-- The Hilbert function `m ↦ χ(X, M^{⊗ m})` of an `𝒪_X`-module `M` on a `K`-scheme `X`, with

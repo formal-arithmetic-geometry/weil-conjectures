@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
+public import WeilConjectures.AlgebraicGeometry.AbelianScheme.Defs
 public import WeilConjectures.AlgebraicGeometry.Curve
 
 /-!

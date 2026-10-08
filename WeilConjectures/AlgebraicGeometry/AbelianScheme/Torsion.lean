@@ -9,7 +9,7 @@ public import Mathlib.Algebra.CharP.Defs
 public import Mathlib.Algebra.Module.Torsion.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
+public import WeilConjectures.AlgebraicGeometry.AbelianScheme.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 
 /-!
@@ -47,6 +47,10 @@ open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj
 namespace AlgebraicGeometry
 
 variable {S : Scheme.{u}} {K : Type u} [Field K]
+
+/- `AlgebraicGeometry.IsAbelianScheme.isCommMonObj` is a theorem, not an instance; it is made a
+local instance here so that the points `T ⟶ A` of an abelian scheme form an additive group. -/
+attribute [local instance] IsAbelianScheme.isCommMonObj
 
 /-- Blueprint `sk-prop-av-ntorsion-etale`: The `n`-torsion of an abelian variety is étale.
 

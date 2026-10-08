@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import Mathlib.AlgebraicGeometry.Limits
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiberDegree
 
@@ -22,15 +23,13 @@ of its ring of global sections.
 
 - `AlgebraicGeometry.Scheme.Hom.ΓAlgebra`: for `h : Z ⟶ Spec R`, the ring of global sections
   of `Z` as an `R`-algebra.
-- `AlgebraicGeometry.Scheme.Hom.finrankΓ`: the `R`-dimension of that algebra. For a finite
-  group scheme over a field this is its order.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree`: the degree of the fibre of an affine morphism
   at a point.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Hom.finrankΓ_eq_of_iso`: `finrankΓ` is invariant under an
-  isomorphism of schemes over an isomorphism of affine bases.
+- `AlgebraicGeometry.Scheme.Hom.finrank_Γ_eq_of_iso`: the `R`-dimension of `Γ(Z, 𝒪_Z)` is
+  invariant under an isomorphism of schemes over an isomorphism of affine bases.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree_of_isPullback`: the fibre degree is invariant under
   base change.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree_of_isIso`: an isomorphism has fibre degree `1`.
@@ -42,6 +41,20 @@ of its ring of global sections.
   `Ideal.fiberDegree`.
 - `AlgebraicGeometry.Scheme.Hom.fiberDegree_morphismRestrict`: compatibility with restriction
   to an open of the target.
+- `AlgebraicGeometry.Scheme.Hom.fiberDegree_eq_finrank`: for a finite flat morphism over an
+  arbitrary base the fibre degree agrees with Mathlib's rank function
+  `AlgebraicGeometry.Scheme.Hom.finrank`.
+- `AlgebraicGeometry.Scheme.Hom.finrank_eq_finrank_Γ`: over a field `K`, the rank of a finite
+  morphism `G ⟶ Spec K` at the unique point is `dim_K Γ(G, 𝒪_G)`. For a finite group scheme
+  over a field this is its order.
+
+## Fibre degree versus rank
+
+`AlgebraicGeometry.Scheme.Hom.finrank f s` is the local rank of `f_* 𝒪_X` at `s`, designed for
+finite flat morphisms, whereas `fiberDegree f s` is the literal dimension of the fibre. Without
+flatness they need not agree: for `Spec (ℤ/2) ⟶ Spec ℤ` the module `ℤ/2` has rank `0` at the
+prime `2` while the fibre degree there is `1`. The fibre degree is therefore the right invariant
+for an arbitrary affine morphism, in particular for étale morphisms, which are not finite.
 -/
 
 @[expose] public section
@@ -66,19 +79,15 @@ lemma Scheme.Hom.algebraMap_ΓAlgebra (h : Z ⟶ Spec R) :
     algebraMap R Γ(Z, ⊤) = ((Scheme.ΓSpecIso R).inv ≫ h.appTop).hom :=
   rfl
 
-/-- The `R`-dimension of the ring of global sections of a scheme over `Spec R`.
-
-For a finite group scheme `G` over a field `K` this is its *order* `|G| = dim_K Γ(G, 𝒪_G)`. -/
-noncomputable def Scheme.Hom.finrankΓ (h : Z ⟶ Spec R) : ℕ :=
-  letI := h.ΓAlgebra
-  Module.finrank R Γ(Z, ⊤)
-
 /-- An isomorphism of schemes over an isomorphism of affine bases induces an isomorphism of
-rings of global sections compatible with the algebra structures. -/
-lemma Scheme.Hom.finrankΓ_eq_of_iso {Z Z' : Scheme.{u}} {R R' : CommRingCat.{u}}
+rings of global sections compatible with the algebra structures, so the dimensions of the rings
+of global sections agree. -/
+lemma Scheme.Hom.finrank_Γ_eq_of_iso {Z Z' : Scheme.{u}} {R R' : CommRingCat.{u}}
     (h : Z ⟶ Spec R) (h' : Z' ⟶ Spec R') (e : Z ≅ Z') (i : R ≅ R')
     (he : e.hom ≫ h' ≫ Spec.map i.hom = h) :
-    h.finrankΓ = h'.finrankΓ := by
+    letI := h.ΓAlgebra
+    letI := h'.ΓAlgebra
+    Module.finrank R Γ(Z, ⊤) = Module.finrank R' Γ(Z', ⊤) := by
   let _ := h.ΓAlgebra
   let _ := h'.ΓAlgebra
   refine Algebra.finrank_eq_of_equiv_equiv i.commRingCatIsoToRingEquiv
@@ -182,6 +191,33 @@ lemma Scheme.Hom.fiberDegree_morphismRestrict (V : X.Opens) (x : V) :
     (g ∣_ V).fiberDegree x = g.fiberDegree x :=
   g.fiberDegree_of_isPullback (isPullback_morphismRestrict g V).flip x
 
+/-- For a finite flat morphism `f : X ⟶ S` over an arbitrary base, the fibre degree at `s` is
+Mathlib's rank `AlgebraicGeometry.Scheme.Hom.finrank f s` of the finite locally free module
+`f_* 𝒪_X` at `s`: both sides are invariant under base change
+(`AlgebraicGeometry.Scheme.Hom.fiberDegree_of_isPullback`,
+`AlgebraicGeometry.Scheme.Hom.finrank_of_isPullback`), so one may assume `S = Spec R` affine,
+where `X = Spec A` for the finite flat `R`-algebra `A = Γ(X, 𝒪_X)`, and the fibre degree
+`dim_{κ(s)} (κ(s) ⊗[R] A)` is the rank of `A` at `s` (`Module.rankAtStalk_eq`).
+
+Flatness is essential: for `Spec (ℤ/2) ⟶ Spec ℤ` the two sides differ at the prime `2`. -/
+lemma Scheme.Hom.fiberDegree_eq_finrank {X S : Scheme.{u}} (f : X ⟶ S) [IsFinite f] [Flat f]
+    (s : S) :
+    f.fiberDegree s = f.finrank s :=
+  sorry
+
+/-- Over a field `K`, the rank `AlgebraicGeometry.Scheme.Hom.finrank` of a finite morphism
+`f : G ⟶ Spec K` at the unique point of `Spec K` is the `K`-dimension of `Γ(G, 𝒪_G)`: `G` is
+affine and `f` is `Spec` of the finite `K`-algebra `Γ(G, 𝒪_G)` up to the isomorphism
+`G ≅ Spec Γ(G, 𝒪_G)`, and the rank of a free module at a point is its dimension
+(`Module.rankAtStalk_eq_finrank_of_free`).
+
+For a finite group scheme `G` over `K` this is its *order* `|G| = dim_K Γ(G, 𝒪_G)`. -/
+lemma Scheme.Hom.finrank_eq_finrank_Γ {G : Scheme.{u}} {K : Type u} [Field K]
+    (f : G ⟶ Spec (.of K)) [IsFinite f] (x : Spec (.of K)) :
+    letI := f.ΓAlgebra
+    f.finrank x = Module.finrank K Γ(G, ⊤) :=
+  sorry
+
 section Etale
 
 /-- The fibre of an étale morphism is a finite algebra over the residue field. -/
@@ -204,11 +240,11 @@ omit [IsAffineHom g] in
 lemma Scheme.Hom.fiberDegree_of_isIso [IsIso g] : g.fiberDegree x = 1 := by
   have : IsIso (g.fiberToSpecResidueField x) :=
     inferInstanceAs (IsIso (pullback.snd g (X.fromSpecResidueField x)))
-  have h := Scheme.Hom.finrankΓ_eq_of_iso (g.fiberToSpecResidueField x) (𝟙 _)
+  have h := Scheme.Hom.finrank_Γ_eq_of_iso (g.fiberToSpecResidueField x) (𝟙 _)
     (asIso (g.fiberToSpecResidueField x)) (Iso.refl _) (by simp)
   refine h.trans ?_
   let _ := Scheme.Hom.ΓAlgebra (𝟙 (Spec (X.residueField x)))
-  rw [Scheme.Hom.finrankΓ, Algebra.finrank_eq_of_equiv_equiv (RingEquiv.refl _)
+  rw [Algebra.finrank_eq_of_equiv_equiv (RingEquiv.refl _)
     (Scheme.ΓSpecIso (X.residueField x)).commRingCatIsoToRingEquiv (S₁ := X.residueField x) ?_,
     Module.finrank_self]
   refine RingHom.ext fun y ↦ ?_
@@ -320,7 +356,7 @@ of the fibre of `g` over the corresponding open. -/
 lemma Scheme.Hom.fiberDegree_comp_ι (V : U.Opens) [IsAffineHom (V.ι ≫ g)] :
     letI := (((g.fiberι x) ⁻¹ᵁ V).ι ≫ g.fiberToSpecResidueField x).ΓAlgebra
     (V.ι ≫ g).fiberDegree x = Module.finrank (X.residueField x) Γ(((g.fiberι x) ⁻¹ᵁ V), ⊤) :=
-  Scheme.Hom.finrankΓ_eq_of_iso _ _ (g.fiberRestrictIso x V) (Iso.refl _) (by
+  Scheme.Hom.finrank_Γ_eq_of_iso _ _ (g.fiberRestrictIso x V) (Iso.refl _) (by
     simpa using g.fiberRestrictIso_hom_ι_fiberToSpecResidueField x V)
 
 include h in
@@ -392,7 +428,7 @@ lemma Scheme.Hom.fiberDegree_SpecMap :
     change a.hom.left ≫ _ = _
     rw [← Category.assoc, hw, Category.assoc, ← Spec.map_comp, Iso.hom_inv_id, Spec.map_id,
       Category.comp_id]
-  have h1 := Scheme.Hom.finrankΓ_eq_of_iso (g.fiberToSpecResidueField x)
+  have h1 := Scheme.Hom.finrank_Γ_eq_of_iso (g.fiberToSpecResidueField x)
     (Spec.map (CommRingCat.ofHom (algebraMap x.asIdeal.ResidueField (x.asIdeal.Fiber S))))
     (Arrow.leftFunc.mapIso a) i he
   refine h1.trans ?_
