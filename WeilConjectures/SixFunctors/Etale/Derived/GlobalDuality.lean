@@ -8,7 +8,12 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.ProjectionPairing
+public import WeilConjectures.Mathlib.CategoryTheory.Shift.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
+public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 /-!
@@ -82,6 +87,8 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
 
 namespace Etale
 
+section GlobalDuality
+
 variable {X S : Scheme.{u}} (aX : X ⟶ S) [IsProper aX] (d : ℕ)
   [SmoothOfRelativeDimension d aX] [GeometricallyConnected aX]
 
@@ -102,6 +109,7 @@ theorem nonempty_iso_coefficientDual_rightDerivedLowerShriek
       (R((aX)_*[A])).obj ((verdierDual A aX).obj (op K))) :=
   sorry
 
+omit [SmoothOfRelativeDimension d aX] in
 /-- Blueprint `sk-thm-sf-identification`: The derived Poincaré pairing is the duality
 isomorphism.
 
@@ -114,13 +122,161 @@ again written one step earlier, with `Ra_{X*}` and `Ra_{X!}` in `D(S_ét)`. The 
 identifies this isomorphism with the tensor–internal-hom adjoint of the derived Poincaré
 pairing `β_K`, and concludes that `β_K` is perfect; see the module docstring. -/
 theorem nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation
-    (o : Orientation A aX d)
+    [SmoothOfRelativeDimension d aX] (o : Orientation A aX d)
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hK : DerivedCategory.constructibleFiniteTor A X K) (hKperf : IsDualizable K) :
     Nonempty (((R((aX)_*[A])).obj
         ((DerivedCategory.coefficientDual A X).obj (op K) ⊗ o.twist))⟦(2 * d : ℤ)⟧ ≅
-      (DerivedCategory.coefficientDual A S).obj (op ((R(aX)_![A]).obj K))) :=
-  sorry
+      (DerivedCategory.coefficientDual A S).obj (op ((R(aX)_![A]).obj K))) := by
+  obtain ⟨e₁⟩ := nonempty_iso_coefficientDual_rightDerivedLowerShriek A aX hK
+  obtain ⟨e₂⟩ := Orientation.nonempty_iso_verdierDual_coefficientDual A aX o hKperf
+  exact ⟨((R((aX)_*[A])).commShiftIso (2 * d : ℤ)).symm.app _ ≪≫
+    (R((aX)_*[A])).mapIso ((((derivedTensor A X).obj
+      ((DerivedCategory.coefficientDual A X).obj (op K))).commShiftIso (2 * d : ℤ)).symm.app
+        o.twist ≪≫ e₂.symm) ≪≫ e₁.symm⟩
+
+end GlobalDuality
+
+section Perfectness
+
+variable [Etale.UpperStarPreservesFlat A]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
+variable {X Y : Scheme.{u}}
+
+omit [ConcreteCategory A FA] [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)] in
+/-- For a perfect `K`, the twisted evaluation `K ⊗ᴸ (K^∨ ⊗ᴸ T) ⟶ T` is a counit: every map
+`K ⊗ᴸ Z ⟶ T` factors uniquely as `K ⊗ᴸ y` followed by the twisted evaluation, for a map
+`y : Z ⟶ K^∨ ⊗ᴸ T`. In other words `K^∨ ⊗ᴸ T` is the internal hom `RHom(K, T)`. -/
+theorem bijective_derivedTensor_map_comp_twistedEvaluation
+    {T K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)
+    (Z : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    Function.Bijective (fun y : Z ⟶ ((derivedTensor A X).obj
+        ((DerivedCategory.coefficientDual A X).obj (op K))).obj T ↦
+      ((derivedTensor A X).obj K).map y ≫ twistedEvaluation T K) := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨_⟩ := DerivedCategory.nonempty_exactPairing_swap K Kᘁ
+  have hi : IsIso (MonoidalClosed.ihomUnitTensorToIhom K T) :=
+    MonoidalClosed.isIso_ihomUnitTensorToIhom Kᘁ K T
+  have ht : twistedEvaluation T K =
+      MonoidalClosed.uncurry (MonoidalClosed.ihomUnitTensorToIhom K T) := by
+    rw [MonoidalClosed.ihomUnitTensorToIhom, MonoidalClosed.uncurry_curry]
+    rfl
+  have he : (fun y : Z ⟶ ((derivedTensor A X).obj
+        ((DerivedCategory.coefficientDual A X).obj (op K))).obj T ↦
+      ((derivedTensor A X).obj K).map y ≫ twistedEvaluation T K) =
+      MonoidalClosed.uncurry ∘ (fun y ↦ y ≫ MonoidalClosed.ihomUnitTensorToIhom K T) := by
+    funext y
+    rw [ht]
+    exact (MonoidalClosed.uncurry_natural_left _ _).symm
+  rw [he]
+  exact Function.Bijective.comp ⟨MonoidalClosed.uncurry_injective,
+    fun g ↦ ⟨MonoidalClosed.curry g, MonoidalClosed.uncurry_curry g⟩⟩
+    ((isIso_iff_yoneda_map_bijective _).1 hi _)
+
+variable (a : X ⟶ Y) [HasCompactification a] {d : ℕ}
+
+omit [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A] in
+/-- The adjoint description of the evaluation part of the derived Poincaré pairing: for `K`
+perfect and any `N`, maps `h : N ⟶ Ra_*(K^∨ ⊗ᴸ T)` correspond bijectively to maps
+`K ⊗ᴸ La^* N ⟶ T`, through `K ⊗ᴸ La^* h`, `K ⊗ᴸ` the counit of `La^* ⊣ Ra_*` and the twisted
+evaluation. -/
+theorem bijective_derivedTensor_map_comp_counit_comp_twistedEvaluation (o : Orientation A a d)
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)
+    (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    Function.Bijective (fun h : N ⟶ (R((a)_*[A])).obj (((derivedTensor A X).obj
+        ((DerivedCategory.coefficientDual A X).obj (op K))).obj o.twist) ↦
+      ((derivedTensor A X).obj K).map ((L((a)^*[A])).map h) ≫
+        ((derivedTensor A X).obj K).map ((derivedUpperStarLowerStarAdjunction A a).counit.app _) ≫
+          twistedEvaluation o.twist K) := by
+  have e : (fun h : N ⟶ (R((a)_*[A])).obj (((derivedTensor A X).obj
+        ((DerivedCategory.coefficientDual A X).obj (op K))).obj o.twist) ↦
+      ((derivedTensor A X).obj K).map ((L((a)^*[A])).map h) ≫
+        ((derivedTensor A X).obj K).map ((derivedUpperStarLowerStarAdjunction A a).counit.app _) ≫
+          twistedEvaluation o.twist K) =
+      (fun y ↦ ((derivedTensor A X).obj K).map y ≫ twistedEvaluation o.twist K) ∘
+        ((derivedUpperStarLowerStarAdjunction A a).homEquiv _ _).symm := by
+    funext h
+    simp [Adjunction.homEquiv_counit]
+  rw [e]
+  exact (bijective_derivedTensor_map_comp_twistedEvaluation A hK _).comp (Equiv.bijective _)
+
+omit [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A] in
+set_option backward.isDefEq.respectTransparency false in
+/-- The trace part of the derived Poincaré pairing is a counit: maps `z : U ⟶ T` correspond
+bijectively to maps `Ra_!(U[2d]) ⟶ Λ_Y`, through `Ra_!(z[2d])` followed by the smooth trace
+`Tr_o`. This is the adjunction `Ra_! ⊣ Ra^!` read through `T[2d] ≅ Ra^! Λ_Y`. -/
+theorem bijective_rightDerivedLowerShriek_map_shift_comp_smoothTrace (o : Orientation A a d)
+    (e : (L((a)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _)
+    (U : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    Function.Bijective (fun z : U ⟶ o.twist ↦ (R(a)_![A]).map (z⟦(2 * d : ℤ)⟧') ≫
+      smoothTrace o e) := by
+  have e' : (fun z : U ⟶ o.twist ↦ (R(a)_![A]).map (z⟦(2 * d : ℤ)⟧') ≫ smoothTrace o e) =
+      ((rightDerivedUpperShriekAdjunction A a).homEquiv _ _).symm ∘
+        (fun z' ↦ z' ≫ (o.dualizingComplexIso e).hom) ∘ (fun z ↦ z⟦(2 * d : ℤ)⟧') := by
+    funext z
+    simp only [Function.comp_apply, Adjunction.homEquiv_counit, smoothTrace, Functor.map_comp,
+      Category.assoc]
+  rw [e']
+  exact (Equiv.bijective _).comp (((isIso_iff_yoneda_map_bijective _).1 inferInstance _).comp
+    ⟨(shiftFunctor _ _).map_injective, (shiftFunctor _ _).map_surjective⟩)
+
+omit [HasSmallSiteSheafify A] in
+/-- Blueprint `thm-sf-identification`: the pairing is the duality isomorphism.
+
+**The derived Poincaré pairing is perfect.** Let `a : X ⟶ Y` admit a compactification, let `o`
+be an orientation of `a` of relative dimension `d` with twist `T`, and let `K` be perfect over
+`Λ_X`. If the projection map `Ra_! K ⊗ᴸ N ⟶ Ra_!(K ⊗ᴸ La^* N)` is an isomorphism at every test
+object `N` of a class `S` detecting isomorphisms after the shift by `2d`, then the derived
+Poincaré pairing `β_K : Ra_! K ⊗ᴸ (Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ Λ_Y`
+(`AlgebraicGeometry.Etale.poincarePairing`) is perfect: its tensor–internal-hom adjoint
+`(Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ (Ra_! K)^∨` is an isomorphism.
+
+Over `Y = Spec k` this is `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`. Following the blueprint, the
+adjoint is identified on test objects `N[2d]` with the chain of bijections
+```
+(N ⟶ Ra_*(K^∨ ⊗ᴸ T)) ≃ (La^* N ⟶ K^∨ ⊗ᴸ T) ≃ (K ⊗ᴸ La^* N ⟶ T) ≃ ((K ⊗ᴸ La^* N)[2d] ⟶ Ra^! Λ_Y)
+  ≃ (Ra_!(K ⊗ᴸ La^* N)[2d] ⟶ Λ_Y) ≃ ((Ra_! K ⊗ᴸ N)[2d] ⟶ Λ_Y) ≃ (N[2d] ⟶ (Ra_! K)^∨)
+```
+given by the adjunctions `La^* ⊣ Ra_*`, `K ⊗ᴸ - ⊣ K^∨ ⊗ᴸ -`, `Ra_! ⊣ Ra^!`, the orientation
+`T[2d] ≅ Ra^! Λ_Y` and the projection formula; see
+`CategoryTheory.MonoidalClosed.isIso_curry_of_projection`. -/
+theorem isPerfectPairing_poincarePairing_of_isDetecting (o : Orientation A a d)
+    (e : (L((a)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _)
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)
+    (S : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A) → Prop)
+    (hS : ∀ ⦃P Q : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)⦄ (u : P ⟶ Q),
+      (∀ N, S N → Function.Bijective (fun g : N⟦(2 * d : ℤ)⟧ ⟶ P ↦ g ≫ u)) → IsIso u)
+    (hPF : ∀ N, S N → HasProjectionFormula A a K N) :
+    IsPerfectPairing (poincarePairing a o e K) := by
+  constructor
+  rw [poincarePairing, poincarePairingEvaluation, mixedSupportCupProduct]
+  exact MonoidalClosed.isIso_curry_of_projection _ _ _ _ _ _ _ _ _ S hS hPF
+    (bijective_derivedTensor_map_comp_counit_comp_twistedEvaluation A a o hK)
+    (bijective_rightDerivedLowerShriek_map_shift_comp_smoothTrace A a o e)
+
+omit [HasSmallSiteSheafify A] in
+/-- Blueprint `thm-sf-identification`: the pairing is the duality isomorphism.
+
+The derived Poincaré pairing of a perfect `K` is perfect whenever the projection formula
+holds for `a` at `K` and every object of `D(Y_ét)`
+(`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isDetecting` with all objects as
+test objects). -/
+theorem isPerfectPairing_poincarePairing_of_hasProjectionFormula (o : Orientation A a d)
+    (e : (L((a)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _)
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)
+    (hPF : ∀ N, HasProjectionFormula A a K N) :
+    IsPerfectPairing (poincarePairing a o e K) :=
+  isPerfectPairing_poincarePairing_of_isDetecting A a o e hK (fun _ ↦ True)
+    (fun _ _ u hu ↦ isIso_of_bijective_comp_shift (2 * d : ℤ) u fun N ↦ hu N trivial)
+    (fun N _ ↦ hPF N)
+
+end Perfectness
 
 end Etale
 
