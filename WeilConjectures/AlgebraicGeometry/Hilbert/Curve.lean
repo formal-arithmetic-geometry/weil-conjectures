@@ -510,18 +510,6 @@ section FieldCase
 
 variable {K : Type u} [Field K]
 
-/-- The global sections of a scheme finite over a field `K` form a finite `K`-algebra. -/
-lemma finite_sections_top_of_isFinite {Z : Scheme.{u}} (g : Z ⟶ Spec (.of K)) [IsFinite g] :
-    letI := ((Scheme.ΓSpecIso (.of K)).inv ≫ g.appLE ⊤ ⊤ le_top).hom.toAlgebra
-    Module.Finite K Γ(Z, ⊤) := by
-  have hfin := (HasAffineProperty.iff_of_isAffine (P := @IsFinite) (f := g)).mp inferInstance
-  rw [Scheme.Hom.appLE_top_top]
-  have h2 : RingHom.Finite ((Scheme.ΓSpecIso (.of K)).inv ≫ g.appTop).hom := by
-    rw [CommRingCat.hom_comp]
-    exact hfin.2.comp (RingHom.Finite.of_surjective _
-      (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of K)).inv).2)
-  exact h2
-
 /-- `Scheme.Hom.finrankΓ` computed with the algebra structure given by `appLE ⊤ ⊤`. -/
 lemma Scheme.Hom.finrankΓ_eq_finrank_appLE {Z : Scheme.{u}} {R : CommRingCat.{u}}
     (g : Z ⟶ Spec R) : g.finrankΓ =
@@ -529,18 +517,6 @@ lemma Scheme.Hom.finrankΓ_eq_finrank_appLE {Z : Scheme.{u}} {R : CommRingCat.{u
       Module.finrank R Γ(Z, ⊤) := by
   rw [Scheme.Hom.appLE_top_top]
   rfl
-
-/-- A scheme finite over a field is a finite discrete space. -/
-lemma finite_and_discreteTopology_of_isFinite {Z : Scheme.{u}} (g : Z ⟶ Spec (.of K))
-    [IsFinite g] : Finite Z ∧ DiscreteTopology Z := by
-  have : IsAffine Z := isAffine_of_isAffineHom g
-  let _ := ((Scheme.ΓSpecIso (.of K)).inv ≫ g.appLE ⊤ ⊤ le_top).hom.toAlgebra
-  have := finite_sections_top_of_isFinite g
-  have : IsArtinianRing Γ(Z, ⊤) := .of_finite K Γ(Z, ⊤)
-  let e := Scheme.homeoOfIso Z.isoSpec
-  have : Finite (Spec Γ(Z, ⊤)) := inferInstanceAs (Finite (PrimeSpectrum Γ(Z, ⊤)))
-  have : DiscreteTopology (Spec Γ(Z, ⊤)) := inferInstanceAs (DiscreteTopology (PrimeSpectrum _))
-  exact ⟨Finite.of_injective e e.injective, e.isEmbedding.discreteTopology⟩
 
 /-- **Additivity of the degree over a field.** Let `Y` be a scheme over a field `K` and let
 `I, J` be invertible ideal sheaves on `Y` whose closed subschemes, and that of `I * J`, are finite

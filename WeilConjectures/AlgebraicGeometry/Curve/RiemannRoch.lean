@@ -19,6 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.DensePoints
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+public import WeilConjectures.AlgebraicGeometry.FiniteOverField
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
@@ -219,13 +220,41 @@ section FiniteScheme
 
 variable {k : Type u} [Field k] {D : Scheme.{u}} [D.Over (Spec (.of k))]
 
+/-- **`h⁰(D, 𝒪_D) = dim_k Γ(D, 𝒪_D)`**, using `H⁰(D, 𝒪_D) = Γ(D, 𝒪_D)`. -/
+theorem Modules.finrankH_unit_zero_eq_finrankΓ :
+    (𝟙_ D.Modules).finrankH k 0 = (D ↘ Spec (.of k)).finrankΓ := by
+  let _ := (D ↘ Spec (.of k)).ΓAlgebra
+  let e : (𝟙_ D.Modules).H 0 ≃ₗ[k] Γ(D, ⊤) :=
+    { (H.zeroLinearEquiv (𝟙_ D.Modules)).toAddEquiv with
+      map_smul' c x := (H.zeroLinearEquiv (𝟙_ D.Modules)).map_smul (globalSectionsRingHom k c) x }
+  exact e.finrank_eq
+
 /-- **Invertible modules on a finite `k`-scheme.** Let `D` be finite over a field `k` and `N` an
 invertible `𝒪_D`-module. Then `h⁰(D, N) = dim_k Γ(D, 𝒪_D)`: the ring `Γ(D, 𝒪_D)` is artinian,
-hence a finite product of local rings, over which the invertible module `Γ(D, N)` is free of
-rank one. -/
+hence `D` is a finite discrete space (`AlgebraicGeometry.finite_and_discreteTopology_of_isFinite`).
+Cohomology splits over its points
+(`AlgebraicGeometry.Scheme.Modules.finrankH_eq_sum_of_pairwise_disjoint`), and on each of these
+one-point schemes `N` is trivial
+(`AlgebraicGeometry.Scheme.Modules.IsInvertible.nonempty_iso_unit`). -/
 theorem Modules.finrankH_zero_eq_finrankΓ_of_isFinite [IsFinite (D ↘ Spec (.of k))]
-    (N : D.Modules) [N.IsInvertible] : N.finrankH k 0 = (D ↘ Spec (.of k)).finrankΓ :=
-  sorry
+    (N : D.Modules) [N.IsInvertible] : N.finrankH k 0 = (D ↘ Spec (.of k)).finrankΓ := by
+  obtain ⟨_, _⟩ := finite_and_discreteTopology_of_isFinite (D ↘ Spec (.of k))
+  have : Fintype D := Fintype.ofFinite D
+  -- `D` is the disjoint union of its finitely many points, on which `N` is trivial
+  let U (p : D) : D.Opens := ⟨{p}, isOpen_discrete _⟩
+  have hU : _root_.Pairwise (Function.onFun Disjoint U) := fun p q hpq ↦ by
+    change Disjoint (U p) (U q)
+    rw [← TopologicalSpace.Opens.coe_disjoint]
+    exact Set.disjoint_singleton.mpr hpq
+  have hcover : ⨆ p, U p = ⊤ :=
+    eq_top_iff.mpr fun p _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨p, rfl⟩
+  rw [finrankH_eq_sum_of_pairwise_disjoint k U hU hcover N 0,
+    ← finrankH_unit_zero_eq_finrankΓ, finrankH_eq_sum_of_pairwise_disjoint k U hU hcover _ 0]
+  refine Finset.sum_congr rfl fun p _ ↦ ?_
+  let : (U p).toScheme.Over (Spec (.of k)) := ⟨(U p).ι ≫ D ↘ Spec (.of k)⟩
+  have : Subsingleton (U p) := ⟨fun a b ↦ Subtype.ext (a.2.trans b.2.symm)⟩
+  obtain ⟨e⟩ := IsInvertible.nonempty_iso_unit (⟨p, rfl⟩ : U p) ((pullback (U p).ι).obj N)
+  exact finrankH_congr k (e ≪≫ (pullbackObjUnitIso (U p).ι).symm) 0
 
 end FiniteScheme
 
