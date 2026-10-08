@@ -18,6 +18,12 @@ colimits that occur are indexed by categories with objects in `Type (u + 1)` and
 `CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize_of_succ` and
 `CategoryTheory.IsGrothendieckAbelian.ab5OfSize_of_succ` at that size, so that they need
 not be carried as hypotheses alongside `IsGrothendieckAbelian.{u + 1} A`.
+
+It also records that coproducts indexed by a `w`-small type exist and are exact in a
+Grothendieck abelian category relative to `w`
+(`CategoryTheory.IsGrothendieckAbelian.hasColimitsOfShape_discrete`,
+`CategoryTheory.IsGrothendieckAbelian.hasExactColimitsOfShape_discrete`), e.g. those indexed
+by `ℤ`.
 -/
 
 @[expose] public section
@@ -43,5 +49,27 @@ colimits of size `(u, u + 1)`. -/
 instance ab5OfSize_of_succ (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] : AB5OfSize.{u, u + 1} A :=
   AB5OfSize_of_univLE.{u, u + 1, u + 1, u + 1} A
+
+section Discrete
+
+universe w v w'
+
+variable (C : Type u') [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
+  (J : Type w') [Small.{w} J]
+
+/-- A Grothendieck abelian category relative to `w` has coproducts indexed by `w`-small
+types. -/
+lemma hasColimitsOfShape_discrete : HasColimitsOfShape (Discrete J) C :=
+  hasColimitsOfShape_of_equivalence (Discrete.equivalence (equivShrink.{w} J).symm)
+
+/-- In a Grothendieck abelian category relative to `w`, coproducts indexed by `w`-small types
+are exact (`AB4`). -/
+lemma hasExactColimitsOfShape_discrete :
+    haveI := hasColimitsOfShape_discrete C J
+    HasExactColimitsOfShape (Discrete J) C :=
+  HasExactColimitsOfShape.of_domain_equivalence C
+    (Discrete.equivalence (equivShrink.{w} J).symm)
+
+end Discrete
 
 end CategoryTheory.IsGrothendieckAbelian

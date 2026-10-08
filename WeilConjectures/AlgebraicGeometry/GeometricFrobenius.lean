@@ -282,8 +282,8 @@ theorem geometricFiberMap_of_isStableUnderBaseChange {P : MorphismProperty Schem
     P (geometricFiberMap φ h) :=
   P.of_isPullback (isPullback_geometricFiberMap φ h).flip hφ
 
-/-! The base change to `k̄` of an open immersion, separated, quasi-compact or locally of finite
-type morphism is again one, these properties being stable under base change. -/
+/-! The base change to `k̄` of an open immersion, separated, quasi-compact, quasi-separated or
+locally of finite type morphism is again one, these properties being stable under base change. -/
 
 instance (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) [IsOpenImmersion φ] :
     IsOpenImmersion (geometricFiberMap φ h) :=
@@ -296,6 +296,10 @@ instance (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) [IsSeparated φ] :
 instance (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) [QuasiCompact φ] :
     QuasiCompact (geometricFiberMap φ h) :=
   geometricFiberMap_of_isStableUnderBaseChange (P := @QuasiCompact) φ h ‹_›
+
+instance (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) [QuasiSeparated φ] :
+    QuasiSeparated (geometricFiberMap φ h) :=
+  geometricFiberMap_of_isStableUnderBaseChange (P := @QuasiSeparated) φ h ‹_›
 
 instance (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) [LocallyOfFiniteType φ] :
     LocallyOfFiniteType (geometricFiberMap φ h) :=

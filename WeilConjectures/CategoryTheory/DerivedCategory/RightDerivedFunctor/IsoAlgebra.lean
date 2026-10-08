@@ -68,7 +68,8 @@ variable {D : Type u'} [Category.{v'} D] [Abelian D] {G : D ⥤ D} [G.Additive] 
   {L : C ⥤ D} [L.Additive] (e : L ⋙ G ≅ F ⋙ L)
   [HasDerivedCategory.{w} (IsoAlgebra F)] [HasDerivedCategory.{w'} (IsoAlgebra G)]
   [HasDerivedCategory.{w} C] [HasDerivedCategory.{w'} D]
-  [Abelian.HasKInjectiveResolutions (IsoAlgebra F)] [Abelian.HasKInjectiveResolutions (IsoAlgebra G)]
+  [Abelian.HasKInjectiveResolutions (IsoAlgebra F)]
+  [Abelian.HasKInjectiveResolutions (IsoAlgebra G)]
   [Abelian.HasKInjectiveResolutions C]
 
 /-- **Right derivation commutes with forgetting the algebra structures.** For an additive
@@ -83,6 +84,7 @@ noncomputable def rightDerivedFunctorMapOfNatIsoCompForgetIso :
   (Functor.rightDerivedFunctorCompMapDerivedCategoryIso (mapOfNatIso e) (forget G)).symm ≪≫
     Functor.rightDerivedFunctorNatIso (mapOfNatIsoCompForgetIso e) ≪≫
     Functor.rightDerivedFunctorCompIso (forget F) L ≪≫
-    Functor.isoWhiskerRight (forget F).rightDerivedFunctorIsoMapDerivedCategory L.rightDerivedFunctor
+    Functor.isoWhiskerRight (forget F).rightDerivedFunctorIsoMapDerivedCategory
+      L.rightDerivedFunctor
 
 end CategoryTheory.Endofunctor.IsoAlgebra
