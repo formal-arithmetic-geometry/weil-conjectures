@@ -86,7 +86,16 @@ attribute [local instance] Sheaf.monoidalCategory
 
 /-- The tensor map `μ` of the lax monoidal pushforward `F_*` of sheaves, read on underlying
 presheaves after `μ` of the lax monoidal functor `sheafToPresheaf`, is the restriction along
-`F.op` of `μ` of `sheafToPresheaf`. -/
+`F.op` of `μ` of `sheafToPresheaf`. Writing `ι` for `sheafToPresheaf`, the square
+
+```
+ι (F_* P) ⊗ ι (F_* Q) --μ_ι--> ι (F_* P ⊗ F_* Q) --ι μ_{F_*}--> ι (F_* (P ⊗ Q))
+          ‖                                                          ‖
+(ι P) ∘ F ⊗ (ι Q) ∘ F ----μ----> (ι P ⊗ ι Q) ∘ F -----μ_ι ∘ F-----> ι (P ⊗ Q) ∘ F
+```
+
+commutes, where `- ∘ F` is the restriction `(whiskeringLeft _ _ A).obj F.op` and the bottom
+`μ` is its tensor map. -/
 lemma μ_sheafToPresheaf_comp_map_μ_sheafPushforwardContinuous (P Q : Sheaf K A) :
     μ (sheafToPresheaf J A) ((F.sheafPushforwardContinuous A J K).obj P)
         ((F.sheafPushforwardContinuous A J K).obj Q) ≫
