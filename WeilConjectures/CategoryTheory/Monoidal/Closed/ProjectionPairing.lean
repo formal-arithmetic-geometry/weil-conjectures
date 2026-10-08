@@ -53,7 +53,21 @@ variable {C D : Type*} [Category C] [Category D]
   isomorphism as soon as composition with `u` is bijective on morphisms out of `N[n]` for
   all `N` in `S`;
 * `h ↦ P h ≫ c ≫ w` is a bijection `(N ⟶ M) ≃ (P N ⟶ W)` for all `N`;
-* `z ↦ F(z[n]) ≫ t` is a bijection `(U ⟶ W) ≃ (F(U[n]) ⟶ 𝟙_ D)` for all `U`. -/
+* `z ↦ F(z[n]) ≫ t` is a bijection `(U ⟶ W) ≃ (F(U[n]) ⟶ 𝟙_ D)` for all `U`.
+
+Write `β` for the pairing. The proof checks that for `N` in `S` the square
+```
+            h ↦ h[n] ≫ curry β
+(N ⟶ M) ─────────────────────────▶ (N[n] ⟶ [R, 𝟙_ D])
+   │                                         ▲
+   │ h ↦ P h ≫ c ≫ w                         │ curry
+   ▼                                         │
+(P N ⟶ W) ──▶ (F(P N[n]) ⟶ 𝟙_ D) ──▶ (R ⊗ N[n] ⟶ 𝟙_ D)
+     f ↦ F(f[n]) ≫ t        v ↦ (π_N)[n] ≫ v
+```
+commutes (with the shift isomorphisms of `R ⊗ -` and `F` absorbed in the bottom right map), so
+that the top map is a bijection; as `h ↦ h[n]` is a bijection, composition with `curry β` is
+bijective on morphisms out of `N[n]`. -/
 theorem isIso_curry_of_projection {_ : HasShift C ℤ} {_ : HasShift D ℤ}
     {_ : MonoidalCategory D} {_ : MonoidalClosed D} (R : D)
     {_ : ((curriedTensor D).obj R).CommShift ℤ}
