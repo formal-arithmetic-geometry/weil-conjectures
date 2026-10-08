@@ -1,0 +1,54 @@
++++
+id = "lem-pc-linear-pair-morphism-gluing"
+kind = "lemma"
+title = "Gluing of the morphism determined by two linear forms"
+order = 650
+uses = ["def-pc-linear-pair-morphism", "def-pc-proj", "def-pc-scheme", "def-pc-standard-graded-algebra", "def-sc-p1-standard"]
++++
+Let $S$ be a standard graded
+$k$-algebra, and let $l_0,l_1\in S_1$ satisfy
+$D_+(l_0)\cup D_+(l_1)=\operatorname{Proj}(S)$. Then the two affine
+descriptions of [def-pc-linear-pair-morphism] agree on the overlap
+$D_+(l_0)\cap D_+(l_1)$ and glue to a morphism
+$\pi_{l_0,l_1}:\operatorname{Proj}(S)\to\mathbf P^1_k$.
+
+## Proof
+
+Write $X=\operatorname{Proj}(S)$ and $U_i=D_+(l_i)$, and let
+$U'_0=D_+(x_0)=\operatorname{Spec}(k[t])$,
+$U'_1=D_+(x_1)=\operatorname{Spec}(k[t^{-1}])$ be the standard affine
+cover of $\mathbf P^1_k$, so that
+$U'_0\cap U'_1=\operatorname{Spec}(k[t,t^{-1}])$
+([def-sc-p1-standard]); by [def-pc-proj] the open $U_i$ is the
+affine scheme $\operatorname{Spec}(S_{(l_i)})$, and the hypothesis says
+$X=U_0\cup U_1$.
+
+*Agreement on the overlap.* Since $l_0,l_1$ are homogeneous of
+positive degree and the points of $\operatorname{Proj}(S)$ are prime
+ideals, $D_+(l_0l_1)=D_+(l_0)\cap D_+(l_1)$; by [def-pc-proj] the
+overlap $U_{01}=U_0\cap U_1$ is the affine scheme
+$\operatorname{Spec}(S_{(l_0l_1)})$, and by [def-pc-proj] the
+restriction map $S_{(l_0)}\to S_{(l_0l_1)}$ is the graded localization
+inverting $l_1/l_0$. Hence the restriction to $U_{01}$ of the first
+affine description of [def-pc-linear-pair-morphism] is the morphism
+$U_{01}\to U'_0$ corresponding to $k[t]\to S_{(l_0l_1)}$,
+$t\mapsto l_1/l_0$; this ring map factors through
+$k[t,t^{-1}]\to S_{(l_0l_1)}$, $t\mapsto l_1/l_0$, because $l_1/l_0$ is a
+unit of $S_{(l_0l_1)}$, so that restriction is the morphism
+$U_{01}\to U'_0\cap U'_1$ given by that ring map. Symmetrically, the
+restriction to $U_{01}$ of the second affine description is the morphism
+$U_{01}\to U'_0\cap U'_1$ corresponding to
+$k[t,t^{-1}]\to S_{(l_0l_1)}$, $t^{-1}\mapsto l_0/l_1$. Since
+$t\mapsto l_1/l_0$ and $t^{-1}\mapsto l_0/l_1$ determine one and the same
+ring map out of $k[t,t^{-1}]$, the two restrictions are equal.
+
+*Gluing.* A morphism out of $X=U_0\cup U_1$ is determined by its
+restrictions to $U_0$ and $U_1$, and a pair of morphisms $f_i:U_i\to \mathbf P^1_k$ agreeing on $U_{01}$ glues to a morphism $f:X\to\mathbf P^1_k$: the underlying map of sets, equal to $f_i$ on $U_i$, is well
+defined by the agreement on $U_{01}$; it is continuous because
+$f^{-1}(W)=f_0^{-1}(W)\cup f_1^{-1}(W)$ for open $W\subseteq\mathbf P^1_k$;
+the map of structure sheaves is obtained by gluing the maps
+$f_i^\sharp$ over the cover $U_0,U_1$, which is possible because the
+$f_i^\sharp$ agree on $U_{01}$ and $\mathcal O_X$ is a sheaf of rings
+([def-pc-scheme]); and the induced maps on stalks are those of
+$f_0$ or of $f_1$, hence local. Applying this to the two affine
+descriptions gives the required morphism $\pi_{l_0,l_1}$.

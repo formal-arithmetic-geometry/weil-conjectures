@@ -1,0 +1,29 @@
++++
+id = "cor-pod-untwisted-similitude"
+kind = "theorem"
+title = "Untwisted similitude"
+order = 2446
+tags = ["latex:corollary"]
+uses = ["def-coefficient-twists-detailed", "def-pod-dual-tate-datum", "def-pur-tate-datum", "def-weil-frobenius-coefficient-twists", "def-weil-global-geometric-frobenius", "prop-pod-degree-of-the-pairing", "thm-pod-equivariance-of-the-twisted-pairing"]
++++
+In the Poincare duality conventions of this chapter (the fixed setting), strict Weil complex with $K$ perfect. The untwisted, line-valued pairing of Proposition 9.21 takes values in $A(-d)$, on which geometric Frobenius acts by $q^d$, and it satisfies
+
+$$
+\bigl\langle F_{c,K}x,\; F_{K^\vee }y\bigr\rangle _i^{\mathrm{untw}} =q^d\langle x,y\rangle _i^{\mathrm{untw}} \qquad \bigl(x\in H_c^i(X,K),\  y\in H^{2d-i}(X,K^\vee )\bigr).
+$$
+
+In particular, for $K=K_X=\Lambda_X$ the constant sheaf with its canonical datum and $K^\vee \cong K_X$ canonically, applying the operator $F$ to both arguments gives
+
+$$
+\langle Fx,Fy\rangle _i=q^d\langle x,y\rangle _i.
+$$
+
+## Proof
+
+Step 1: eliminate the twist. The second factor of the twisted pairing is $H^{2d-i}(X,K^\vee (d))$, which is identified with $H^{2d-i}(X,K^\vee )\otimes _A\Lambda (d)$ by the definition of the twist in [def-coefficient-twists-detailed] (twisting a complex commutes with global sections; this is the identification of [prop-pod-degree-of-the-pairing]), and the datum $\varphi _{K^\vee (d)}=\varphi _{K^\vee }\otimes \tau _d$ of [def-pod-dual-tate-datum] consists of the contragredient datum on $K^\vee$ together with the scalar $q^{-d}$ on the twist line by [def-pur-tate-datum]. Step 2: write $y=y_0\otimes \xi _d$ under that identification; then $F_{K^\vee (d)}y=F_{K^\vee }y_0\otimes q^{-d}\xi _d$, and the identity of [thm-pod-equivariance-of-the-twisted-pairing] reads
+
+$$
+\langle F_{c,K}x,\; F_{K^\vee }y_0\rangle _i^{\mathrm{untw}}\cdot (c_d) =q^d\, \langle x,y_0\rangle _i^{\mathrm{untw}}\cdot (c_d),
+$$
+
+where the untwisted pairing is the morphism into $A(-d)$ of [prop-pod-degree-of-the-pairing] and $\cdot (c_d)$ denotes evaluation of the $A(-d)$-line on a generator; the two sides are therefore equal in $A(-d)$. Step 3: by [def-weil-frobenius-coefficient-twists] the geometric Frobenius acts on $A(-m)$ by $q^m$, so on $A(-d)$ it acts by $q^d$; this is the normalization of the value line and gives the identity of the statement. Step 4: for the constant sheaf $K=K_X$ with its canonical datum, $K^\vee \cong K_X$ canonically, the contragredient datum of the canonical datum is the canonical datum (the canonical structure is symmetric, by [def-pod-dual-tate-datum]), so both operators are the same global geometric Frobenius operator $F$ of [def-weil-global-geometric-frobenius], on the constant sheaf, and the display specialises to the stated identity.

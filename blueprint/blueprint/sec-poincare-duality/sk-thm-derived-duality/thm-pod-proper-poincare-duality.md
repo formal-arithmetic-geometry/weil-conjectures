@@ -1,0 +1,40 @@
++++
+id = "thm-pod-proper-poincare-duality"
+kind = "theorem"
+title = "Proper Poincare duality"
+order = 2441
+uses = ["cor-cbc-proper-coincidence", "def-pod-derived-poincare-pairing", "prop-pod-degree-of-the-pairing", "thm-pod-degreewise-perfectness-over-a-field", "thm-pod-derived-poincare-duality"]
++++
+In the Poincare duality conventions of this chapter (the fixed setting), assume in addition that $X_0$ is proper, let $\Lambda \in \{ A,\mathcal O_E,E,\overline{\mathbf Q}_{\ell }\}$ with $A=A_{E,n}$, let $K\in D^b_{ctf}(X,\Lambda )$ be perfect over $\Lambda _X$, let $K^\vee$ be the coefficient dual with Tate twist $K^\vee (d)$, and let $\beta _K$ be the derived Poincare pairing (mixed-support cup product, evaluation, normalized smooth trace). Since $X$ is proper, the canonical comparison $R\Gamma _c(X,K)\cong R\Gamma (X,K)$ of proper compact-support comparison (the proper case of $Rf_!\cong Rf_*$, $f=a_X$) identifies $\beta _K$ with a perfect pairing
+
+$$
+R\Gamma (X,K)\otimes _A^LR\Gamma \bigl(X,K^\vee (d)\bigr)[2d] \longrightarrow A,
+$$
+
+whose adjoint has inverse the canonical isomorphism
+
+$$
+R\Gamma (X,K)^\vee \xrightarrow {\  \sim \  } R\Gamma \bigl(X,K^\vee (d)\bigr)[2d].
+$$
+
+Over a field this gives perfect degreewise pairings
+
+$$
+H^i(X,K)\times H^{2d-i}\bigl(X,K^\vee (d)\bigr)\longrightarrow \Lambda ,
+$$
+
+and the line-valued form
+
+$$
+H^i(X,K)\times H^{2d-i}(X,K^\vee )\longrightarrow \Lambda (-d).
+$$
+
+## Proof
+
+Step 1: the comparison of the global-section functors. Since $X_0$ is proper by hypothesis, so is its base change $X$, and the structure morphism $a_X$ is proper; so by [cor-cbc-proper-coincidence] the canonical comparison $Ra_{X!}\to Ra_{X*}$ is an isomorphism, giving the canonical identification $R\Gamma _c(X,K)\cong R\Gamma (X,K)$ of [def-pod-derived-poincare-pairing] used in the construction. Step 2: transport of the pairing. The derived Poincare pairing $\beta _K$ of [thm-pod-derived-poincare-duality] is a morphism of the complex $R\Gamma _c(X,K)\otimes ^L_A R\Gamma (X,K^\vee (d))[2d]$ into $A$, so it transports along the identification of the first factor to the displayed pairing of $R\Gamma (X,K)\otimes _A^LR\Gamma (X,K^\vee (d))[2d]\to A$. Step 3: the adjoint. The adjoint of the transported pairing is the transported adjoint (the tensor–internal-Hom adjunction is functorial in both variables, and the identification of the first factor is transported back and forth by that canonical isomorphism), so the inverse of the transported adjoint
+
+$$
+R\Gamma (X,K)^\vee \xrightarrow {\  \sim \  }R\Gamma \bigl(X,K^\vee (d)\bigr)[2d]
+$$
+
+is the canonical isomorphism of [thm-pod-derived-poincare-duality] read through the identification, in particular it is a canonical isomorphism. Step 4: the degreewise forms. These are the field-stage part of [thm-pod-derived-poincare-duality], namely [thm-pod-degreewise-perfectness-over-a-field], with the twist elimination of [prop-pod-degree-of-the-pairing]; the finite dimensionality and the perfectness statements of the theorem are the ones of those two statements (for the proper $X$, $H_c^i=H^i$), so no further input is needed.
