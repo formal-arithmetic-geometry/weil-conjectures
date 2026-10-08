@@ -60,6 +60,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   {d : ℕ} (f : X ⟶ Y) [IsSeparated f] [SmoothOfRelativeDimension d f] [HasCompactification f]
   [HasInvertibleExponent Λ X]
 
+include d in
 /-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
 
 *Clause (a).* For `f` smooth separated of pure relative dimension `d` the dualizing complex
@@ -70,6 +71,7 @@ theorem isInvertible_dualizingComplex :
     DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) f) :=
   sorry
 
+include d in
 /-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
 
 *Clause (b), the tensor formula.* For `f` smooth separated of pure relative dimension `d` and
@@ -90,6 +92,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) :=
   sorry
 
+include d in
 /-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
 
 *Clause (c), smooth base change for `R^!`.* In the cartesian square
