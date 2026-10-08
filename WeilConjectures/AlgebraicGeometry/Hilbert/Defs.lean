@@ -17,6 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.Descent
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 
 /-!
 # The Hilbert functor
@@ -39,8 +40,8 @@ are in `WeilConjectures.AlgebraicGeometry.Hilbert.Curve`.
 
 That the defining condition is stable under base change — `IsHilbertSubscheme.comap` — is the
 one obligation in the construction of `hilbertPresheaf`. Finiteness, flatness and local finite
-presentation are `MorphismProperty.IsStableUnderBaseChange` in Mathlib; the invariance of
-`Scheme.Hom.finrank` is not, and is what the `sorry` on that lemma stands for.
+presentation are `MorphismProperty.IsStableUnderBaseChange` in Mathlib, and the rank is invariant
+under base change by `AlgebraicGeometry.Scheme.Hom.finrank_of_isPullback`.
 
 ## Main definitions
 
@@ -84,13 +85,24 @@ def IsHilbertSubscheme (f : X ⟶ S) (d : ℕ) (T : Over S)
 /-- The defining condition of the Hilbert functor is stable under base change along a morphism
 `φ : T' ⟶ T` of `S`-schemes.
 
-Finiteness, flatness and local finite presentation are stable under base change in Mathlib; the
-remaining content is that `AlgebraicGeometry.Scheme.Hom.finrank` is unchanged, which is a
-statement about `finrank` alone and should move next to it once proved. -/
+Finiteness, flatness and local finite presentation are stable under base change, and so is the
+rank `AlgebraicGeometry.Scheme.Hom.finrank`, since the closed subscheme cut out by the pullback
+ideal sheaf is the base change of the one cut out by `I`. -/
 theorem IsHilbertSubscheme.comap {f : X ⟶ S} {d : ℕ} {T T' : Over S} (φ : T' ⟶ T)
     {I : (Limits.pullback f T.hom).IdealSheafData} (hI : IsHilbertSubscheme f d T I) :
-    IsHilbertSubscheme f d T' (I.comap (baseChangeMap f φ)) :=
-  sorry
+    IsHilbertSubscheme f d T' (I.comap (baseChangeMap f φ)) := by
+  -- the closed subscheme cut out by the pullback is the base change of the one cut out by `I`
+  have hsq : IsPullback ((I.comapIso (baseChangeMap f φ)).hom ≫ pullback.snd _ _)
+      ((I.comap (baseChangeMap f φ)).subschemeι ≫ pullback.snd f T'.hom)
+      (I.subschemeι ≫ pullback.snd f T.hom) φ.left :=
+    ((IsPullback.of_hasPullback (baseChangeMap f φ) I.subschemeι).flip.paste_vert
+      (isPullback_baseChangeMap f φ)).of_iso' (I.comapIso _) (Iso.refl _) (Iso.refl _)
+      (Iso.refl _) (by simp) (by simp) (by simp) (by simp)
+  obtain ⟨h₁, h₂, h₃, h₄⟩ := hI
+  refine ⟨MorphismProperty.of_isPullback hsq h₁, MorphismProperty.of_isPullback hsq h₂,
+    MorphismProperty.of_isPullback hsq h₃, fun t ↦ ?_⟩
+  rw [Scheme.Hom.finrank_of_isPullback _ _ _ _ hsq]
+  exact h₄ _
 
 /-- **The points of the Hilbert functor of a smooth curve are divisors.** If `f : X ⟶ S` is
 smooth of relative dimension `1`, then every point of `Hilb^d_{X/S}(T)` is a relative effective
@@ -111,8 +123,21 @@ both lie in `Hilb^d_{X/S}(T)`, then `Z = Z'`: the surjection `𝒪_{Z'} ⟶ 𝒪
 free `𝒪_T`-modules of the same rank `d` is an isomorphism. -/
 theorem IsHilbertSubscheme.eq_of_le {f : X ⟶ S} {d : ℕ} {T : Over S}
     {I J : (Limits.pullback f T.hom).IdealSheafData} (hI : IsHilbertSubscheme f d T I)
-    (hJ : IsHilbertSubscheme f d T J) (h : I ≤ J) : I = J :=
-  sorry
+    (hJ : IsHilbertSubscheme f d T J) (h : I ≤ J) : I = J := by
+  obtain ⟨hI₁, hI₂, -, hI₄⟩ := hI
+  obtain ⟨-, hJ₂, -, hJ₄⟩ := hJ
+  have e : Scheme.IdealSheafData.inclusion h ≫ I.subschemeι ≫ pullback.snd f T.hom =
+      J.subschemeι ≫ pullback.snd f T.hom :=
+    Scheme.IdealSheafData.inclusion_subschemeι_assoc h _
+  have : IsClosedImmersion (Scheme.IdealSheafData.inclusion h) :=
+    .of_comp_isClosedImmersion _ I.subschemeι
+  have : Flat (Scheme.IdealSheafData.inclusion h ≫ I.subschemeι ≫ pullback.snd f T.hom) := by
+    rwa [e]
+  have : IsIso (Scheme.IdealSheafData.inclusion h) :=
+    Scheme.Hom.isIso_of_isClosedImmersion_of_finrank_eq _ (I.subschemeι ≫ pullback.snd f T.hom)
+      fun t ↦ by rw [e, hI₄, hJ₄]
+  rw [← I.ker_subschemeι, ← J.ker_subschemeι,
+    ← Scheme.IdealSheafData.inclusion_subschemeι h, Scheme.Hom.ker_comp_of_isIso]
 
 /-- The Hilbert functor. For `f : X ⟶ S` and `d : ℕ`, `Hilb^d_{X/S}` sends an `S`-scheme `T` to
 the set of closed subschemes `Z ⊆ X_T = X ×[S] T`, encoded as quasi-coherent ideal sheaves `I`
