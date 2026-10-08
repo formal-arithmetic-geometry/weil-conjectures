@@ -20,10 +20,13 @@ generic point, and `Scheme.fromSpecStalk` turns a stalk into a morphism from its
 This file names the composite, the canonical morphism `Spec k(X) ⟶ X`, and shows that for an
 integral scheme `X` it is dominant and stays scheme-theoretically dominant after flat base
 change: for a flat `U ⟶ X`, functions on `U` are determined by their restriction to the
-generic fibre `U ×_X Spec k(X)`. It also shows that the sections of an integral scheme with
-integrally closed local rings over a nonempty open form an integrally closed domain
-(`AlgebraicGeometry.Scheme.isIntegrallyClosed_of_isIntegrallyClosed_stalk`), and that if moreover
-the function field is separably closed then all local rings are strictly henselian
+generic fibre `U ×_X Spec k(X)`. An element of the function field lying in the local rings at
+all points of a nonempty open `U` is a section over `U`
+(`AlgebraicGeometry.Scheme.exists_germToFunctionField_eq`). It also shows that the sections of
+an integral scheme with integrally closed local rings over a nonempty open form an integrally
+closed domain (`AlgebraicGeometry.Scheme.isIntegrallyClosed_of_isIntegrallyClosed_stalk`), and
+that if moreover the function field is separably closed then all local rings are strictly
+henselian
 (`AlgebraicGeometry.Scheme.henselianLocalRing_stalk_of_isSepClosed_functionField`,
 `AlgebraicGeometry.Scheme.isSepClosed_residueField_of_isSepClosed_functionField`).
 -/
@@ -79,6 +82,36 @@ theorem isIntegrallyClosed_of_isIntegrallyClosed_stalk_of_mem {X : Scheme.{u}} [
     rw [RingHom.algebraMap_toAlgebra, ← ht y, ← hs y]
     exact (X.presheaf.germ_res_apply _ _ _ s).symm
   exact .of_isIntegrallyClosedIn Γ(X, U) X.functionField
+
+/-- An element `g` of the function field of an integral scheme `X` which lies in the local ring of
+every point of a nonempty open `U` is a section over `U`: the local representatives of `g` agree
+on overlaps, since `X` is irreducible and the restriction maps to the function field are
+injective, so they glue. -/
+theorem exists_germToFunctionField_eq {X : Scheme.{u}} [IsIntegral X] (U : X.Opens)
+    [Nonempty U] (g : X.functionField)
+    (hg : ∀ x ∈ U, g ∈ Set.range (algebraMap (X.presheaf.stalk x) X.functionField)) :
+    ∃ s : Γ(X, U), X.germToFunctionField U s = g := by
+  have H (y : U) : ∃ (V : X.Opens) (hyV : (y : X) ∈ V) (hVU : V ≤ U) (t : Γ(X, V)),
+      @Scheme.germToFunctionField X _ V ⟨⟨y, hyV⟩⟩ t = g := by
+    obtain ⟨s, hs⟩ := hg y y.2
+    obtain ⟨W, hyW, t, rfl⟩ := X.presheaf.exists_germ_eq s
+    have : Nonempty W := ⟨⟨y, hyW⟩⟩
+    refine ⟨W ⊓ U, ⟨hyW, y.2⟩, inf_le_right, X.presheaf.map (homOfLE inf_le_left).op t, ?_⟩
+    rw [← hs, Scheme.algebraMap_germ_eq_germToFunctionField]
+    exact X.presheaf.germ_res_apply _ _ _ t
+  choose V hyV hVU t ht using H
+  obtain ⟨s, hs, -⟩ := X.sheaf.existsUnique_gluing' V U (fun y ↦ homOfLE (hVU y))
+    (fun y hy ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨y, hy⟩, hyV _⟩) t fun i j ↦ by
+      obtain ⟨z, hz⟩ := nonempty_preirreducible_inter (V i).isOpen (V j).isOpen
+        ⟨i, hyV i⟩ ⟨j, hyV j⟩
+      have : Nonempty (V i ⊓ V j : X.Opens) := ⟨⟨z, hz⟩⟩
+      apply X.germToFunctionField_injective (V i ⊓ V j)
+      exact (X.presheaf.germ_res_apply _ _ _ _).trans
+        ((ht i).trans ((ht j).symm.trans (X.presheaf.germ_res_apply _ _ _ _).symm))
+  obtain ⟨y⟩ := ‹Nonempty U›
+  refine ⟨s, ?_⟩
+  rw [← ht y, ← hs y]
+  exact (X.presheaf.germ_res_apply _ _ _ s).symm
 
 /-- The sections of an integral scheme with integrally closed local rings over a nonempty open
 `U` form an integrally closed domain; see

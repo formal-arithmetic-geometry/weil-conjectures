@@ -28,13 +28,16 @@ and if `Y` is locally of finite type over a field then `f.fromNormalization` is 
   rings.
 - `AlgebraicGeometry.Scheme.Hom.isFinite_fromNormalization`: the normalization of a scheme
   locally of finite type over a field in a quasi-compact integral open subscheme is finite.
+- `AlgebraicGeometry.Scheme.normalizationIn`: the normalization of an integral scheme in a field
+  extension of its function field, and `AlgebraicGeometry.Scheme.isFinite_fromNormalizationIn`:
+  it is finite over a scheme locally of finite type over a field if the extension is finite.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits IsLocalRing
 
 namespace AlgebraicGeometry.Scheme.Hom
 
@@ -240,5 +243,144 @@ theorem isIso_fromNormalization_restrict (U : X.Opens)
     obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVU⟩ :=
       X.isBasis_affineOpens.exists_subset_of_mem_open x.2 U.isOpen
     exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨⟨V, hV⟩, hVU, ⟨x.1, hxV⟩⟩, by simpa using hxV⟩
+
+section FiniteExtension
+
+variable (L : Type u) [Field L] [Algebra X.functionField L]
+
+/-- The morphism `Spec L ⟶ X` through the generic point of an integral scheme `X`, for a field
+extension `L` of its function field `K = k(X)`: the composite of `Spec L ⟶ Spec K` with
+`Spec K ⟶ X`. -/
+noncomputable abbrev fromSpecOfAlgebraFunctionField : Spec (.of L) ⟶ X :=
+  Spec.map (CommRingCat.ofHom (algebraMap X.functionField L)) ≫ X.fromSpecFunctionField
+
+/-- The *normalization* `X^L` of an integral scheme `X` in a field extension `L` of its function
+field `K`: the relative normalization of `X` in `Spec L ⟶ X`, that is the relative spectrum of
+the integral closure of `𝒪_X` in `L`. Over an affine open `Spec B` of `X` it is
+`Spec B'` with `B'` the integral closure of `B` in `L`. For `L = K` this is
+`AlgebraicGeometry.Scheme.normalization`. Finiteness of `X^L ⟶ X` is not part of the
+definition; it is `AlgebraicGeometry.Scheme.isFinite_fromNormalizationIn`.
+(blueprint: `def-fin-normalization-extension`) -/
+noncomputable abbrev normalizationIn : Scheme.{u} :=
+  (X.fromSpecOfAlgebraFunctionField L).normalization
+
+/-- The canonical morphism `X^L ⟶ X` from the normalization of an integral scheme `X` in a field
+extension `L` of its function field. (blueprint: `def-fin-normalization-extension`) -/
+noncomputable abbrev fromNormalizationIn : X.normalizationIn L ⟶ X :=
+  (X.fromSpecOfAlgebraFunctionField L).fromNormalization
+
+/-- **Finiteness of the normalization in a finite extension.** Let `X` be an integral scheme
+locally of finite type over a field `k` and `L` a finite extension of its function field `K`.
+Then the normalization `X^L ⟶ X` of `X` in `L` is finite: over an affine open `Spec B`, the
+integral closure of the finitely generated `k`-domain `B` in `L` is a finite `B`-module
+(E. Noether's finiteness theorem, Stacks `0359`; `L / K` need not be separable).
+(blueprint: `lem-fin-normalization-extension-finite`) -/
+theorem isFinite_fromNormalizationIn {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
+    [LocallyOfFiniteType q] [FiniteDimensional X.functionField L] :
+    IsFinite (X.fromNormalizationIn L) :=
+  sorry
+
+/-- **The function field of the normalization in `L` is `L`.** For an integral scheme `X` and
+an algebraic extension `L` of its function field, the morphism `Spec L ⟶ X^L` is the generic
+point of the normalization `X^L` of `X` in `L`, and it identifies `L` with the function field of
+`X^L`: over an affine open `Spec B` of `X`, every element of `L` is a quotient of an element of
+the integral closure `B'` of `B` in `L` by a nonzero element of `B`, so `Frac(B') = L`. -/
+theorem exists_iso_toNormalization_normalizationIn
+    [Algebra.IsAlgebraic X.functionField L] :
+    ∃ e : Spec (.of L) ≅ Spec (X.normalizationIn L).functionField,
+      e.hom ≫ (X.normalizationIn L).fromSpecFunctionField =
+        (X.fromSpecOfAlgebraFunctionField L).toNormalization := by
+  set φ := X.fromSpecOfAlgebraFunctionField L
+  set Y := X.normalizationIn L
+  set g := φ.toNormalization
+  set pt := closedPoint L
+  -- `g` maps the point of `Spec L` to the generic point of `Y`
+  have hq : g pt = genericPoint Y := by
+    have hd : DenseRange g := g.denseRange
+    have : closure ({g pt} : Set Y) = Set.univ := by
+      rw [← hd.closure_range]
+      congr 1
+      ext y
+      exact ⟨fun h ↦ ⟨pt, h.symm⟩, fun ⟨x, hx⟩ ↦ by rw [← hx, Subsingleton.elim x pt]; rfl⟩
+    exact (show IsGenericPoint (g pt) ⊤ from this).eq (genericPoint_spec Y)
+  -- the stalk of `Y` at `g pt` is a field
+  have hfield : IsField (Y.presheaf.stalk (g pt)) := by
+    rw [hq]; exact Field.toIsField Y.functionField
+  set ψ := stalkClosedPointTo g
+  -- an affine open of `X` containing the image of the point
+  obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open
+    (Set.mem_univ (φ pt)) isOpen_univ
+  have hU' : g pt ∈ φ.fromNormalization ⁻¹ᵁ U := by
+    change (g ≫ φ.fromNormalization) pt ∈ U
+    rwa [Hom.toNormalization_fromNormalization]
+  have hηU : genericPoint X ∈ U :=
+    ((genericPoint_spec X).specializes (Set.mem_univ (φ pt))).mem_open U.isOpen hxU
+  have : Nonempty U := ⟨⟨_, hηU⟩⟩
+  -- the identification `θ : Γ(Spec L, φ⁻¹ U) ≅ L`
+  have hφU : φ ⁻¹ᵁ U = ⊤ := preimage_eq_top_of_closedPoint_mem φ hxU
+  let θ : Γ(Spec (.of L), φ ⁻¹ᵁ U) ≅ .of L :=
+    (Spec (.of L)).presheaf.mapIso (eqToIso hφU.symm).op ≪≫ ΓSpecIso (.of L)
+  -- `θ ∘ φ^*` is the inclusion `Γ(X, U) → k(X) → L`
+  have hθφ : φ.app U ≫ θ.hom =
+      X.germToFunctionField U ≫ CommRingCat.ofHom (algebraMap X.functionField L) := by
+    have h1 := germ_stalkClosedPointTo φ U hxU
+    have h2 := germ_stalkClosedPointTo_Spec_fromSpecStalk
+      (CommRingCat.ofHom (algebraMap X.functionField L)) U hxU
+    exact h1.symm.trans h2
+  let : Algebra Γ(X, U) L := (φ.app U ≫ θ.hom).hom.toAlgebra
+  -- every element of `L` integral over `Γ(X, U)` lies in the image of `ψ`
+  have hint (m : L) (hm : _root_.IsIntegral Γ(X, U) m) : m ∈ Set.range ψ.hom := by
+    let : Algebra Γ(X, U) Γ(Spec (.of L), φ ⁻¹ᵁ U) := (φ.app U).hom.toAlgebra
+    have ht : _root_.IsIntegral Γ(X, U) (θ.inv m) := by
+      refine IsIntegral.map_of_comp_eq (RingHom.id _) θ.inv.hom ?_ hm
+      ext b
+      change φ.app U b = θ.inv ((φ.app U ≫ θ.hom) b)
+      rw [← ConcreteCategory.comp_apply, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+    set s := (φ.normalizationObjIso hU).inv ⟨θ.inv m, ht⟩
+    have hs := congr($(φ.normalizationObjIso_hom_val hU) s)
+    simp only [s, CommRingCat.comp_apply, Iso.inv_hom_id_apply] at hs
+    have h1 := congr($(germ_stalkClosedPointTo g _ hU') s)
+    refine ⟨(Y.presheaf.germ _ _ hU') s, h1.trans ?_⟩
+    have key : g.app (φ.fromNormalization ⁻¹ᵁ U) ≫
+        ((Spec (.of L)).presheaf.mapIso (eqToIso (preimage_eq_top_of_closedPoint_mem g hU').symm).op
+          ≪≫ ΓSpecIso (.of L)).hom =
+        g.appLE (φ.fromNormalization ⁻¹ᵁ U) (φ ⁻¹ᵁ U)
+          (le_top.trans (preimage_eq_top_of_closedPoint_mem g hU').ge) ≫ θ.hom := by
+      simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.op_hom, eqToIso.hom, Hom.appLE, θ,
+        Category.assoc, ← Functor.map_comp_assoc]
+      rfl
+    rw [key, CommRingCat.comp_apply, ← hs]
+    exact θ.inv_hom_id_apply m
+  -- `ψ` is surjective
+  have hfrac := functionField_isFractionRing_of_isAffineOpen X U hU
+  have : IsScalarTower Γ(X, U) X.functionField L := IsScalarTower.of_algebraMap_eq' <| by
+    change (φ.app U ≫ θ.hom).hom = _
+    rw [hθφ]
+    rfl
+  let := hfield.toField
+  have hsurj : Function.Surjective ψ.hom := by
+    intro l
+    have hl : IsAlgebraic Γ(X, U) l := (IsFractionRing.isAlgebraic_iff Γ(X, U) X.functionField L).2
+      (Algebra.IsAlgebraic.isAlgebraic l)
+    obtain ⟨y, hy0, hyint⟩ := hl.exists_integral_multiple
+    obtain ⟨a, ha⟩ := hint _ hyint
+    obtain ⟨b, hb⟩ := hint (algebraMap Γ(X, U) L y) isIntegral_algebraMap
+    have hy : algebraMap Γ(X, U) L y ≠ 0 := by
+      rw [IsScalarTower.algebraMap_apply Γ(X, U) X.functionField L, map_ne_zero]
+      exact (IsFractionRing.to_map_ne_zero_of_mem_nonZeroDivisors
+        (mem_nonZeroDivisors_of_ne_zero hy0))
+    refine ⟨a * b⁻¹, ?_⟩
+    rw [map_mul, map_inv₀, ha, hb, Algebra.smul_def, mul_comm]
+    exact inv_mul_cancel_left₀ hy l
+  have hiso : IsIso ψ := (ConcreteCategory.isIso_iff_bijective ψ).2 ⟨ψ.hom.injective, hsurj⟩
+  have hgψ : Spec.map ψ ≫ Y.fromSpecStalk (g pt) = g := Spec_stalkClosedPointTo_fromSpecStalk g
+  clear_value ψ
+  clear hsurj hint
+  revert ψ hiso hgψ
+  rw [hq]
+  intro ψ _ hgψ
+  exact ⟨asIso (Spec.map ψ), hgψ⟩
+
+end FiniteExtension
 
 end AlgebraicGeometry.Scheme
