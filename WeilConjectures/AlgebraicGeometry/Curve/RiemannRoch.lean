@@ -27,6 +27,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
@@ -881,13 +882,27 @@ theorem degree_tensorObj_pullback_fst
 local notation "𝔭" => Limits.pullback.fst (X ↘ Spec (CommRingCat.of k))
   (Spec.map (CommRingCat.ofHom (algebraMap k K)))
 
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
 /-- **The base change of a rational point has degree one.** For a `k`-rational point `x` of `X`,
 the closed subscheme of `X_K` cut out by the pullback `(ker x) · 𝒪_{X_K}` of the ideal sheaf of
 `x` is `Spec k ×_X X_K = Spec k ×_k Spec K = Spec K`, so it has `dim_K Γ = 1`. -/
 theorem finrankΓ_subschemeι_comap_ker_fieldPoints (x : (X ↘ Spec (.of k)).fieldPoints k) :
     ((x.1.ker.comap 𝔭).subschemeι ≫ Limits.pullback (X ↘ Spec (.of k))
-      (Spec.map (CommRingCat.ofHom (algebraMap k K))) ↘ Spec (.of K)).finrankΓ = 1 :=
-  sorry
+      (Spec.map (CommRingCat.ofHom (algebraMap k K))) ↘ Spec (.of K)).finrankΓ = 1 := by
+  have hsq := (x.1.ker.isPullback_comap 𝔭).flip.paste_vert
+    (IsPullback.of_hasPullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+  -- the closed subscheme of `x` maps isomorphically to `Spec k`
+  have hx : x.1 ≫ X ↘ Spec (.of k) = 𝟙 _ := by
+    rw [x.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]
+  have he : x.1.ker.subschemeι ≫ X ↘ Spec (.of k) = inv x.1.toImage := by
+    rw [← cancel_epi x.1.toImage, ← Category.assoc, Hom.toImage_imageι, hx, IsIso.hom_inv_id]
+  have : IsIso (x.1.ker.subschemeι ≫ X ↘ Spec (.of k)) := by
+    rw [he]
+    infer_instance
+  have := hsq.isIso_snd_of_isIso
+  rw [← Hom.finrankΓ_id (k := K)]
+  exact Hom.finrankΓ_eq_of_iso _ _ (asIso ((x.1.ker.comap 𝔭).subschemeι ≫ pullback.snd _ _))
+    (Iso.refl _) (by simp)
 
 /-- **A section not vanishing at a point survives restriction to it.** Let `ℒ` be an invertible
 sheaf on `X_K`, let `s : 𝒪_{X_K} ⟶ ℒ` be a global section and let `x` be a `k`-rational point

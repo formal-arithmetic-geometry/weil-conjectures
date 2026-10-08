@@ -407,4 +407,17 @@ lemma map_comap_of_subset_range [IsOpenImmersion j] (I : Y.IdealSheafData)
 
 end OpenImmersion
 
+section Pullback
+
+open Limits
+
+/-- The base change of the closed subscheme of `I` along `h : Y' ⟶ Y` is the closed subscheme of
+the pulled back ideal sheaf `I.comap h`. -/
+lemma isPullback_comap {Y Y' : Scheme.{u}} (I : Y.IdealSheafData) (h : Y' ⟶ Y) :
+    IsPullback (I.comap h).subschemeι ((I.comapIso h).hom ≫ pullback.snd h I.subschemeι) h
+      I.subschemeι :=
+  IsPullback.of_iso_pullback ⟨by simp⟩ (I.comapIso h) (by simp) rfl
+
+end Pullback
+
 end AlgebraicGeometry.Scheme.IdealSheafData

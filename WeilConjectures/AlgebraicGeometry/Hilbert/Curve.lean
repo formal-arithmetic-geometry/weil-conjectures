@@ -674,14 +674,6 @@ lemma Scheme.Hom.finrank_eq_fiberDegree {X Y : Scheme.{u}} (g : X ⟶ Y) [IsFini
   rw [← Scheme.Hom.finrank_pullback_snd, ← g.fiberDegree_of_isPullback (.of_hasPullback g i),
     Scheme.Hom.finrank_eq_fiberDegree_of_isAffine]
 
-/-- The base change of the closed subscheme of `I` along `h : Y' ⟶ Y` is the closed subscheme of
-the pulled back ideal sheaf `I.comap h`. -/
-lemma Scheme.IdealSheafData.isPullback_comap {Y Y' : Scheme.{u}} (I : Y.IdealSheafData)
-    (h : Y' ⟶ Y) :
-    IsPullback (I.comap h).subschemeι ((I.comapIso h).hom ≫ pullback.snd h I.subschemeι) h
-      I.subschemeι :=
-  IsPullback.of_iso_pullback ⟨by simp⟩ (I.comapIso h) (by simp) rfl
-
 /-- The rank at `t` of a finite flat closed subscheme `V(I) ⊆ Y` over `T` is the dimension over
 `κ(t)` of the closed subscheme `V(I) ∩ Y_t` of the fibre `Y_t`. -/
 lemma Scheme.IdealSheafData.finrank_subschemeι_comp_eq_finrankΓ {Y T : Scheme.{u}} (π : Y ⟶ T)
