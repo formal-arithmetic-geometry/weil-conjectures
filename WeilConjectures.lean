@@ -290,7 +290,9 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.CategoryTheory.Sites.Point.Flat
+public import WeilConjectures.CategoryTheory.Sites.Point.Linear
 public import WeilConjectures.CategoryTheory.Sites.PullbackIsoOfLocallyGenerated
+public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlus
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlusSheaf
@@ -389,6 +391,7 @@ public import WeilConjectures.FieldTheory.Cr
 public import WeilConjectures.FieldTheory.Tsen
 public import WeilConjectures.FourierTransform.AffineSpace
 public import WeilConjectures.FourierTransform.ArtinSchreier
+public import WeilConjectures.FourierTransform.ArtinSchreierCohomology
 public import WeilConjectures.FourierTransform.Classical
 public import WeilConjectures.FourierTransform.Defs
 public import WeilConjectures.FourierTransform.Inversion
@@ -1004,7 +1007,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Finite.BaseChange
+public import WeilConjectures.SixFunctors.Finite.ConstantSheafEnd
 public import WeilConjectures.SixFunctors.Finite.Exact
+public import WeilConjectures.SixFunctors.Finite.GlobalSections
 public import WeilConjectures.SixFunctors.Finite.Stalk
 public import WeilConjectures.SixFunctors.Integral.BaseChange
 public import WeilConjectures.SixFunctors.Integral.Exact
@@ -1071,6 +1076,7 @@ public import WeilConjectures.Topology.Sheaves.CechCriterion
 public import WeilConjectures.Topology.Sheaves.SpectralRestriction
 public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.Topology.StratificationDense
+public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
