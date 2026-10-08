@@ -7,12 +7,13 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
 
 /-!
-# Stalks, trace functions and weights of Weil sheaves
+# Stalks, trace functions and weights of Weil sheaves and Weil complexes
 
 Let `F` be a Weil sheaf on a `k₀`-scheme `X`: a constructible `ℓ`-adic pro-étale sheaf on the
 geometric fiber `X̄ = X ×_{k₀} k̄` with an isomorphism `φ : Fr^* F ≅ F`, where `Fr = 𝟙 × σ` is the
@@ -55,6 +56,8 @@ function is computed by the local Frobenius at the closed points,
   geometric Frobenius `Fₓ`.
 - `AlgebraicGeometry.WeilSheaf.support`: the closed points with nonzero stalk.
 - `AlgebraicGeometry.WeilSheaf.traceFunction`: the trace function `t_{F,n}`.
+- `AlgebraicGeometry.WeilComplex.traceFunction`: the trace function `t_K` of a Weil complex, the
+  alternating sum of the trace functions of its cohomology sheaves.
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight`,
   `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost` and `AlgebraicGeometry.WeilSheaf.IsReal`: the
   weight conditions and the reality condition.
@@ -68,6 +71,8 @@ function is computed by the local Frobenius at the closed points,
   polynomial of the local Frobenius does not depend on the geometric point.
 - `AlgebraicGeometry.WeilSheaf.traceFunction_eq_trace_frobeniusEnd_stalk_pow`: the trace
   function at an `𝔽_{qⁿ}`-point over a closed point `x` is `Tr(Fₓ^{n / e_x})`.
+- `AlgebraicGeometry.WeilComplex.traceFunction_eq_sum`: the alternating sum defining the trace
+  function of a Weil complex is finite.
 - `AlgebraicGeometry.WeilSheaf.globalSectionsToStalkObj_frobenius`: restriction of global
   sections to a stalk intertwines the two Frobenii.
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.upperStar`: pullback preserves punctual
@@ -81,10 +86,10 @@ scalars (`AlgebraicGeometry.WeilCoefficients.toModuleCat`).
 
 ## TODO
 
-- Prove the statements of this file stated with `sorry`: the finiteness of stalks and global
-  sections, the independence of the local Frobenius of the geometric point, the comparison of
-  the trace function with the local Frobenius, and the compatibility of restriction to a stalk
-  with the Frobenius.
+- Prove the statements of this file stated with `sorry`: the detection of global sections by
+  finitely many geometric stalks, the independence of the local Frobenius of the geometric
+  point, the comparison of the trace function with the local Frobenius, and the compatibility
+  of restriction to a stalk with the Frobenius.
 - Derive `AlgebraicGeometry.WeilSheaf.exists_nontrivial_stalk_of_not_isZero` from two
   independent facts: a nonzero constructible `ℓ`-adic sheaf has a nonzero stalk at a geometric
   point, its support being a nonempty constructible set; and a nonempty locally closed subset of
@@ -117,13 +122,14 @@ noncomputable def stalkObj
     WeilCoefficients.{u} l :=
   (Sheaf.Γ _ _).obj ((s)^*[WeilCoefficients.{u} l].obj F.obj.carrier)
 
-/-- The stalks of a Weil sheaf are finite-dimensional: on a stratum through the image of `s`
-the underlying sheaf is lisse, so its pullback to `Spec k̄` is a finite sum of copies of
-`ℚ̄_ℓ`, whose global sections are `ℚ̄_ℓ`. -/
+/-- The stalks of a Weil sheaf are finite-dimensional: the pullback of the underlying sheaf to
+`Spec k̄` is constructible, hence a finite sum of copies of `ℚ̄_ℓ`, whose global sections are
+`ℚ̄_ℓ` (`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.finiteDimensional_globalSections`).
+-/
 theorem finiteDimensional_stalkObj
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
     FiniteDimensional (PadicAlgCl l) ((WeilCoefficients.toModuleCat l).obj (F.stalkObj s)) :=
-  sorry
+  (F.isAdicConstructibleSheaf_carrier.upperStar s).finiteDimensional_globalSections
 
 /-- The isomorphism `F_{s ≫ Frᵐ} ≅ ((Frᵐ)^* F)_s ≅ F_s`: the first isomorphism is the
 composition of pullbacks `(s ≫ Frᵐ)^* ≅ s^* (Frᵐ)^*` together with `(Frᵐ)^* ≅ (Fr⁻ᵐ)_*`, the
@@ -239,6 +245,20 @@ noncomputable def traceFunction (n : ℕ)
       (Scheme.Hom.geometricFiberPoint_fieldPoints_comp_geometricGaloisFrobenius_pow
         (X ↘ Spec (CommRingCat.of k₀)) n IsAlgClosed.lift x)).frobeniusEnd
 
+/-- The trace function of a zero Weil sheaf vanishes: its stalks are zero. -/
+theorem traceFunction_eq_zero_of_isZero (hF : IsZero F) (n : ℕ)
+    (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
+    F.traceFunction n x = 0 := by
+  have h (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
+      IsZero ((WeilCoefficients.toModuleCat l).obj (F.stalkObj s)) :=
+    (WeilCoefficients.toModuleCat l).map_isZero ((Sheaf.Γ _ _).map_isZero
+      ((s)^*[WeilCoefficients.{u} l].map_isZero (isZero_iff_isZero_carrier.mp hF)))
+  have key (s) (m : ℕ) (hs) :
+      LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s m hs).frobeniusEnd = 0 := by
+    have : Subsingleton (F.stalkAt s m hs).carrier := ModuleCat.subsingleton_of_isZero (h s)
+    exact (congrArg _ (Subsingleton.elim _ 0)).trans (map_zero _)
+  exact key _ _ _
+
 /-- The trace function at an `𝔽_{qⁿ}`-rational point `y` over a closed point `x` is the trace
 of the `n / e_x`-th power of the local geometric Frobenius `Fₓ`, `e_x = [κ(x) : k₀]`. -/
 theorem traceFunction_eq_trace_frobeniusEnd_stalk_pow (n : ℕ)
@@ -308,14 +328,47 @@ theorem nonempty_equiv_stalk_biprod (G : WeilSheaf k₀ l X) (x : X.finitePoints
 
 section GlobalSections
 
+/-- The restriction `Γ(X̄, F) ⟶ Γ(Spec k̄, s^* F) = F_s` of global sections to the stalk at a
+geometric point `s`: global sections of the unit `F ⟶ s_* s^* F` of the adjunction
+`s^* ⊣ s_*`, followed by `Γ(X̄, s_* G) ≅ Γ(Spec k̄, G)`. -/
+noncomputable def globalSectionsToStalkObj
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
+    (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj F.obj.carrier ⟶ F.stalkObj s :=
+  (Sheaf.Γ _ _).map ((ProEtale.upperStarLowerStarAdjunction _ s).unit.app F.obj.carrier) ≫
+    (ProEtale.globalSectionsLowerStarIso _ s).hom.app _
+
 /-- The global sections of a Weil sheaf on a quasi-compact `k₀`-scheme locally of finite type
-are finite-dimensional. -/
+are detected by finitely many geometric stalks: the restriction
+`Γ(X̄, F) ⟶ ∏ᵢ F_{sᵢ}` is injective for suitable geometric points `s₁, …, sₙ`.
+
+The geometric fiber `X̄` is noetherian, so `F` is lisse on the strata `Z₁, …, Zₘ` of a finite
+stratification of `X̄`, each with finitely many connected components. A section vanishing at
+the geometric stalks vanishes on every stratum, and a section of a lisse sheaf on a connected
+scheme is determined by its stalk at any geometric point; every nonempty stratum, of finite
+type over `k̄`, has a `k̄`-point. -/
+theorem exists_injective_globalSectionsToStalkObj
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    ∃ (n : ℕ)
+      (s : Fin n → (Spec (.of (AlgebraicClosure k₀)) ⟶
+        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)),
+      Function.Injective fun a ↦ fun i ↦
+        ((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj (s i))).hom a :=
+  sorry
+
+/-- The global sections of a Weil sheaf on a quasi-compact `k₀`-scheme locally of finite type
+are finite-dimensional: they inject into finitely many geometric stalks
+(`AlgebraicGeometry.WeilSheaf.exists_injective_globalSectionsToStalkObj`), which are
+finite-dimensional (`AlgebraicGeometry.WeilSheaf.finiteDimensional_stalkObj`). -/
 theorem finiteDimensional_globalSections [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     FiniteDimensional (PadicAlgCl l)
       ((WeilCoefficients.toModuleCat l).obj ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj
-        F.obj.carrier)) :=
-  sorry
+        F.obj.carrier)) := by
+  obtain ⟨n, s, hs⟩ := F.exists_injective_globalSectionsToStalkObj
+  have (i : Fin n) := F.finiteDimensional_stalkObj (s i)
+  exact Module.Finite.of_injective (LinearMap.pi fun i ↦
+    ((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj (s i))).hom) hs
 
 /-- The global sections `Γ(X̄, F)` of a Weil sheaf, with the Frobenius
 
@@ -336,15 +389,6 @@ noncomputable def globalSections [QuasiCompact (X ↘ Spec (CommRingCat.of k₀)
       (((ProEtale.globalSectionsLowerStarIso _
         (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).app F.obj.carrier).symm ≪≫
         (Sheaf.Γ _ _).mapIso F.obj.str) }
-
-/-- The restriction `Γ(X̄, F) ⟶ Γ(Spec k̄, s^* F) = F_s` of global sections to the stalk at a
-geometric point `s`: global sections of the unit `F ⟶ s_* s^* F` of the adjunction
-`s^* ⊣ s_*`, followed by `Γ(X̄, s_* G) ≅ Γ(Spec k̄, G)`. -/
-noncomputable def globalSectionsToStalkObj
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
-    (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj F.obj.carrier ⟶ F.stalkObj s :=
-  (Sheaf.Γ _ _).map ((ProEtale.upperStarLowerStarAdjunction _ s).unit.app F.obj.carrier) ≫
-    (ProEtale.globalSectionsLowerStarIso _ s).hom.app _
 
 /-- The restriction of global sections to the stalk at a geometric point `s` with
 `s ≫ Fr = σ ≫ s`, for instance a point over a `k₀`-rational point, intertwines the Frobenius of
@@ -374,3 +418,49 @@ theorem globalSectionsToStalkObj_frobenius [QuasiCompact (X ↘ Spec (CommRingCa
 end GlobalSections
 
 end AlgebraicGeometry.WeilSheaf
+
+namespace AlgebraicGeometry.WeilComplex
+
+variable {l : ℕ} [Fact l.Prime]
+variable {k₀ : Type u} [Field k₀] [Finite k₀] [Fact (ringChar k₀ ≠ l)]
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+variable (K : WeilComplex k₀ l X)
+
+/-- A Weil complex has only finitely many nonzero cohomology sheaves, being bounded. -/
+theorem exists_finset_isZero_homologySheaf :
+    ∃ S : Finset ℤ, ∀ j ∉ S, IsZero ((homologySheaf j).obj K) := by
+  obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := K.property.1
+  refine ⟨Finset.Icc a b, fun j hj ↦ ?_⟩
+  refine IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) _ ?_
+  rw [Finset.mem_Icc, not_and_or, not_le, not_le] at hj
+  rcases hj with hj | hj
+  · exact _root_.DerivedCategory.isZero_of_isGE (hX := ha) _ a j hj
+  · exact _root_.DerivedCategory.isZero_of_isLE (hX := hb) _ b j hj
+
+/-- The *trace function* `t_K` of a Weil complex `K`: at an `𝔽_{qⁿ}`-rational point `x`, the
+alternating sum
+
+`t_K(x) = Tr(F_x^{(n)} | K_x̄) = ∑ⱼ (-1)ʲ Tr(F_x^{(n)} | 𝓗ʲ(K)_x̄)`
+
+of the trace functions of the cohomology sheaves `𝓗ʲ(K)`
+(`AlgebraicGeometry.WeilSheaf.traceFunction`), computed with the local Frobenius on the
+stalks. The sum is finite, `K` being bounded
+(`AlgebraicGeometry.WeilComplex.traceFunction_eq_sum`).
+(blueprint: `def-fd-trace-function`; sketch blueprint: `sk-def-trace`) -/
+noncomputable def traceFunction (n : ℕ)
+    (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
+    PadicAlgCl l :=
+  ∑ᶠ j : ℤ, (j.negOnePow : ℤ) • ((homologySheaf j).obj K).traceFunction n x
+
+/-- The trace function of a Weil complex is the alternating sum of the trace functions of its
+cohomology sheaves over any finite set of degrees outside of which the cohomology vanishes. -/
+theorem traceFunction_eq_sum (S : Finset ℤ) (hS : ∀ j ∉ S, IsZero ((homologySheaf j).obj K))
+    (n : ℕ)
+    (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
+    K.traceFunction n x =
+      ∑ j ∈ S, (j.negOnePow : ℤ) • ((homologySheaf j).obj K).traceFunction n x := by
+  refine finsum_eq_sum_of_support_subset _ fun j hj ↦ ?_
+  by_contra h
+  exact hj (by simp only [WeilSheaf.traceFunction_eq_zero_of_isZero _ (hS j h), smul_zero])
+
+end AlgebraicGeometry.WeilComplex
