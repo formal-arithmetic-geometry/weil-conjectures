@@ -249,7 +249,7 @@ end Proper
 
 section ModuleCat
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasInvertibleExponent Λ Y]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- Blueprint `thm-pod-derived-poincare-duality`: Derived Poincaré duality.
 
@@ -261,12 +261,13 @@ invertible on `Y`, an orientation `o` of `a : X ⟶ Y` with twist `T`, and
 `(Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ (Ra_! K)^∨`
 
 is an isomorphism. Over `Y = Spec k` this is `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`. -/
-theorem isPerfectPairing_poincarePairing (o : Orientation (ModuleCat.{u + 1} Λ) a d)
+theorem isPerfectPairing_poincarePairing [HasInvertibleExponent Λ Y]
+    (o : Orientation (ModuleCat.{u + 1} Λ) a d)
     (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _) {K : DerivedCategoryModule Λ X}
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (hKd : IsDualizable K) :
+    (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (hKd : IsDualizable K) :
     IsPerfectPairing (poincarePairing a o e K) :=
   isPerfectPairing_poincarePairing_of_hasProjectionFormula o e hKd fun L ↦
-    hasProjectionFormula_of_finite Λ a K L hK.1
+    hasProjectionFormula_of_finite Λ a K L
 
 /-- Blueprint `thm-pod-proper-poincare-duality`: Proper Poincaré duality.
 
@@ -277,7 +278,7 @@ For `a` proper, a finite coefficient ring `Λ` whose exponent is invertible on `
 
 (`AlgebraicGeometry.Etale.properPoincarePairing`), is perfect. Over `Y = Spec k` this is
 `RΓ(X, K^∨(d))[2d] ≅ RΓ(X, K)^∨`. -/
-theorem isPerfectPairing_properPoincarePairing [IsProper a]
+theorem isPerfectPairing_properPoincarePairing [IsProper a] [HasInvertibleExponent Λ Y]
     (o : Orientation (ModuleCat.{u + 1} Λ) a d)
     (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _) {K : DerivedCategoryModule Λ X}
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (hKd : IsDualizable K) :
