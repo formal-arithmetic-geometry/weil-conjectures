@@ -443,7 +443,7 @@ of the inverse of `Lg^* γ_{f,K}`, the base-change identification
 where `γ` and `γ'` are the smooth purity maps of `f` and of `f'`
 (`AlgebraicGeometry.Etale.smoothPurityIso`). It is distinct from the mate of the
 compact-support base change. -/
-noncomputable def smoothPullbackExchange (_sq : IsPullback g f' f v)
+noncomputable def smoothPullbackExchange (sq : IsPullback g f' f v)
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K)
@@ -455,7 +455,7 @@ noncomputable def smoothPullbackExchange (_sq : IsPullback g f' f v)
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f').obj
         ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K) :=
   (L((g)^*[ModuleCat.{u + 1} Λ])).mapIso γ.symm ≪≫
-    leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f _sq.toCommSq K ≪≫ γ'
+    leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K ≪≫ γ'
 
 omit [Finite Λ] [IsSeparated f] [SmoothOfRelativeDimension d f] [HasInvertibleExponent Λ X] in
 /-- Blueprint `thm-pur-smooth-base-change-coherence`: Smooth base-change coherence
