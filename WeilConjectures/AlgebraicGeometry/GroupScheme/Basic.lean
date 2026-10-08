@@ -61,6 +61,7 @@ the whole group.
 ## Blueprint
 
 - `sk-p-geometry`: the identity component, images of homomorphisms and the dimension criterion.
+- `def-wf-algebraic-components`: the identity component `GrpObj.identityComponent`.
 -/
 
 @[expose] public section
@@ -136,8 +137,9 @@ section IdentityComponent
 variable (G : Over (Spec (.of k))) [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom]
 
 /-- The identity component `G°` of a group scheme `G` of finite type over a field, as a scheme
-over `k`: the open subscheme of `G` on the connected component of the identity point.
-(blueprint: `sk-p-geometry`) -/
+over `k`: the open subscheme of `G` on the connected component of the identity point. The set
+`π₀(G)` of connected components is `ConnectedComponents G.left`.
+(blueprint: `sk-p-geometry`, `def-wf-algebraic-components`) -/
 noncomputable abbrev GrpObj.identityComponent : Over (Spec (.of k)) :=
   Over.mk ((GrpObj.identityComponentOpens G).ι ≫ G.hom)
 
