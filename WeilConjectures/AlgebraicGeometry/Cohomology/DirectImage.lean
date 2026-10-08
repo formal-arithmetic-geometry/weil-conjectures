@@ -109,6 +109,8 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
   change.
 - `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`: coherence of the
   higher direct images over a locally Noetherian base.
+- `AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`: the cohomology of a
+  coherent sheaf on a proper scheme over a field is finite-dimensional.
 - `AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber` and
   `exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant`: semicontinuity of
   the fibre dimension, and Grauert's theorem over a reduced base.
@@ -1393,5 +1395,51 @@ theorem isQuasicoherent_pushforward_of_isAffineHom (f : X ⟶ T) [IsAffineHom f]
     (isQuasicoherent_higherDirectImage f ℱ 0)
 
 end AffineMorphism
+
+section Finiteness
+
+variable {k : Type u} [Field k] [X.Over (Spec (.of k))]
+
+/-- **Finiteness of coherent cohomology.** On a scheme `X` proper over a field `k`, the
+cohomology groups `H^q(X, ℱ)` of a coherent `𝒪_X`-module `ℱ` are finite-dimensional over `k`.
+Coherence is spelled as quasi-coherence together with finite presentation.
+
+This is the case `T = Spec k` of the finiteness of the higher direct images along a proper
+morphism to a Noetherian affine scheme
+(`AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage`), transported along the
+identification `Γ(Spec k, R^q f_* ℱ) ≅ H^q(X, ℱ)`
+(`AlgebraicGeometry.Scheme.Modules.exists_bijective_semilinearMap_sections_higherDirectImage_H`).
+-/
+@[stacks 02O5]
+theorem finiteDimensional_H_of_isProper [IsProper (X ↘ Spec (.of k))] (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] (q : ℕ) :
+    FiniteDimensional k (ℱ.H q) := by
+  classical
+  have := isGrothendieckAbelian X
+  have : IsNoetherianRing Γ(Spec (.of k), ⊤) :=
+    isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso (.of k)).commRingCatIsoToRingEquiv.symm
+  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H
+    (X ↘ Spec (.of k)) ℱ q
+  obtain ⟨s, hs⟩ := (finite_sections_higherDirectImage (X ↘ Spec (.of k)) ℱ q).fg_top
+  have key (x) (hx : x ∈ Submodule.span Γ(Spec (.of k), ⊤) (s : Set _)) :
+      e x ∈ Submodule.span k (e '' s) := by
+    induction hx using Submodule.span_induction with
+    | mem x hx => exact Submodule.subset_span ⟨x, hx, rfl⟩
+    | zero => simp
+    | add x y _ _ hx hy => simpa using add_mem hx hy
+    | smul a x _ hx =>
+      obtain ⟨c, rfl⟩ := (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of k)).inv).2 a
+      have hc : c • e x = e ((Scheme.ΓSpecIso (.of k)).inv c • x) := by
+        rw [smul_H_eq_globalSectionsRingHom_smul, e.map_smulₛₗ]
+        rfl
+      rw [← hc]
+      exact Submodule.smul_mem _ c hx
+  refine ⟨⟨s.image e, eq_top_iff.2 fun y _ ↦ ?_⟩⟩
+  obtain ⟨x, rfl⟩ := he.2 y
+  rw [Finset.coe_image]
+  exact key x (hs ▸ Submodule.mem_top)
+
+end Finiteness
 
 end AlgebraicGeometry.Scheme.Modules
