@@ -29,12 +29,19 @@ the six-functor formalism (`AlgebraicGeometry.Etale.TateOrientation.toOrientatio
 - `AlgebraicGeometry.Etale.TateOrientation.smoothTrace`,
   `AlgebraicGeometry.Etale.TateOrientation.poincarePairing`: the smooth trace and the derived
   Poincaré pairing of a Tate orientation.
+- `AlgebraicGeometry.Etale.TateOrientation.properPoincarePairing`: the derived Poincaré pairing
+  of a proper morphism, read through `Ra_! ≅ Ra_*`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`
-  (`sk-thm-derived-duality`): at finite coefficients, the derived Poincaré pairing of a Tate
-  orientation is perfect for `K` constructible of finite Tor amplitude and dualizable.
+  (`thm-pod-derived-poincare-duality`): at finite coefficients, the derived Poincaré pairing of
+  a Tate orientation is perfect for `K` constructible of finite Tor amplitude and dualizable.
+- `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_properPoincarePairing`
+  (`thm-pod-proper-poincare-duality`): the same for proper `a`, with `Ra_! ≅ Ra_*`.
+
+The degreewise consequences over a field (`sk-thm-derived-duality`) are in
+`WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise`.
 
 ## Implementation notes
 
@@ -117,7 +124,7 @@ noncomputable def poincarePairing (γ : TateOrientation Λ a d)
         (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (twistedDual Λ d K))⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
   Etale.poincarePairing a γ.toOrientation (leftDerivedUpperStarConstantComplexIso Λ a) K
 
-/-- Blueprint `sk-thm-derived-duality`: Derived Poincaré duality.
+/-- Blueprint `thm-pod-derived-poincare-duality`: Derived Poincaré duality.
 
 The derived Poincaré pairing of a Tate orientation is perfect, for a finite coefficient ring
 `Λ` whose exponent is invertible on `Y` and `K ∈ D^b_{ctf}(X, Λ)` dualizable

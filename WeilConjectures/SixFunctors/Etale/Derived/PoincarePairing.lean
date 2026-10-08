@@ -36,21 +36,30 @@ Composing them gives the *derived Poincaré pairing*
 
 `β_K : Ra_! K ⊗ᴸ (Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ Λ_Y`,
 
-which over `Y = Spec k` is `RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ`. Its perfectness
-(`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`) is stated at finite coefficients
-`ModuleCat Λ`, where the projection formula for `Ra_!` is available.
+which over `Y = Spec k` is `RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ`. It is perfect as soon as `K`
+is dualizable and the projection formula holds for `Ra_!` at `K`
+(`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_hasProjectionFormula`); in
+particular at finite coefficients `ModuleCat Λ`
+(`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`).
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.mixedSupportCupProduct` (`sk-def-pairing-data`): `⌣_c`.
 - `AlgebraicGeometry.Etale.smoothTrace` (`sk-def-pairing-data`): `Tr_o`.
 - `AlgebraicGeometry.Etale.poincarePairing` (`sk-def-pairing`): `β_K`.
+- `AlgebraicGeometry.Etale.properPoincarePairing`: `β_K` read through `Ra_! ≅ Ra_*` for proper
+  `a`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing` (`sk-thm-derived-duality`): at
-  finite coefficients, the derived Poincaré pairing of an orientation is perfect for `K`
-  constructible of finite Tor amplitude and dualizable.
+- `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_hasProjectionFormula`: the
+  derived Poincaré pairing of a dualizable `K` is perfect if the projection formula holds.
+- `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`
+  (`thm-pod-derived-poincare-duality`): at finite coefficients, the derived Poincaré pairing of
+  an orientation is perfect for `K` constructible of finite Tor amplitude and dualizable.
+- `AlgebraicGeometry.Etale.isPerfectPairing_properPoincarePairing`
+  (`thm-pod-proper-poincare-duality`): the same for the pairing of a proper morphism read
+  through `Ra_! ≅ Ra_*`.
 
 ## Implementation notes
 
@@ -64,6 +73,15 @@ the derived pullback is not yet monoidal as a functor, so there is no canonical 
 All objects are written with `AlgebraicGeometry.Etale.derivedTensor` rather than `⊗`, so that
 the definitions can be specialised to `A = ModuleCat Λ` and composed there with other maps
 written with `derivedTensor`; see `WeilConjectures.SixFunctors.Etale.Derived.TensorStructure`.
+
+The mixed-support cup product, the twisted evaluation and the derived Poincaré pairing are the
+instances at `La^* ⊣ Ra_*` and `Ra_! ⊣ Ra^!` of the constructions
+`CategoryTheory.Adjunction.mixedCupProduct`, `CategoryTheory.MonoidalClosed.twistedEvaluation`
+and `CategoryTheory.Adjunction.poincarePairing` for abstract adjunctions, and perfectness is
+`CategoryTheory.Adjunction.isPerfectPairing_poincarePairing`. Proving it directly in `D(X_ét)`
+is impractical: unfolding the definitions there produces composites whose implicit objects
+differ by auxiliary proof terms, which the kernel only compares after unfolding the composition
+of the derived category.
 -/
 
 @[expose] public section
@@ -233,7 +251,7 @@ section ModuleCat
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasInvertibleExponent Λ Y]
 
-/-- Blueprint `sk-thm-derived-duality`: Derived Poincaré duality.
+/-- Blueprint `thm-pod-derived-poincare-duality`: Derived Poincaré duality.
 
 **The derived pairing is perfect.** For a finite coefficient ring `Λ` whose exponent is
 invertible on `Y`, an orientation `o` of `a : X ⟶ Y` with twist `T`, and
