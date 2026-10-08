@@ -19,7 +19,7 @@ Let `C` be a closed symmetric monoidal Grothendieck abelian category whose tenso
 additive, and let `R : C` be a commutative algebra object. Since `C` is closed, tensoring on
 either side preserves colimits, so the category `Mod C R` of `R`-module objects is abelian
 (`WeilConjectures.CategoryTheory.ModuleObjects.Abelian`) and symmetric monoidal for the relative
-tensor product `⊗_R` (`WeilConjectures.CategoryTheory.ModuleObjects.Braided`). Hence it has an
+tensor product `⊗_R` (`WeilConjectures.CategoryTheory.ModuleObjects.Symmetric`). Hence it has an
 ordinary derived category
 ```
 D(Mod_R(C)) = DerivedCategory (Mod C R),

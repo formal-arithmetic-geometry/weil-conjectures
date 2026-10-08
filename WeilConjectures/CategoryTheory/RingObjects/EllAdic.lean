@@ -39,7 +39,7 @@ structure given by the sheafification of the objectwise tensor product
   converging to `0` in `ℚ̄_ℓ` extends to a continuous map on the Stone–Čech compactification
   of `ℕ`, which is w-contractible). Accordingly `ℚ̄_ℓ,X` is defined as the sheafification of
   the presheaf of rings `U ↦ {f ∈ C(U, ℚ̄_ℓ) | f takes values in a finite subextension}`
-  (`PadicAlgCl.finiteSubextensionValued`, `ProEtale.padicAlgClSheaf`). This presheaf is the
+  (`PadicAlgCl.finiteIntermediateFieldValued`, `ProEtale.padicAlgClSheaf`). This presheaf is the
   union of the presheaves `U ↦ C(U, E)` over the finite subextensions `E ⊆ ℚ̄_ℓ`, so that
   `ℚ̄_ℓ,X = colim_E E_X` as sheaves of rings, which is the `ℚ̄_ℓ`-sheaf of Bhatt–Scholze
   (this identification with the colimit is not formalized here). It is defined directly as a
@@ -81,7 +81,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (U : Type*) [TopologicalSpace U]
 /-- The subring of `C(U, ℚ̄_ℓ)` of continuous maps whose values lie in some finite subextension
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. Sums and products of such maps take values in the compositum of the two
 subextensions, which is again finite. -/
-def finiteSubextensionValued : Subring C(U, PadicAlgCl ℓ) where
+def finiteIntermediateFieldValued : Subring C(U, PadicAlgCl ℓ) where
   carrier := {f | ∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),
     FiniteDimensional ℚ_[ℓ] E ∧ ∀ x, f x ∈ E}
   mul_mem' := by
@@ -100,8 +100,8 @@ def finiteSubextensionValued : Subring C(U, PadicAlgCl ℓ) where
     rintro f ⟨E, hE, hf⟩
     exact ⟨E, hE, fun x ↦ neg_mem (hf x)⟩
 
-lemma mem_finiteSubextensionValued_iff (f : C(U, PadicAlgCl ℓ)) :
-    f ∈ finiteSubextensionValued ℓ U ↔
+lemma mem_finiteIntermediateFieldValued_iff (f : C(U, PadicAlgCl ℓ)) :
+    f ∈ finiteIntermediateFieldValued ℓ U ↔
       ∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ), FiniteDimensional ℚ_[ℓ] E ∧ ∀ x, f x ∈ E :=
   Iff.rfl
 
@@ -237,19 +237,19 @@ end Integers
 `X_proét`, the union over the finite subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` of the presheaves
 `U ↦ C(U, E)`. Its sheafification is the ring object `ℚ̄_ℓ,X`. -/
 noncomputable def padicAlgClRingPresheaf : X.ProEtᵒᵖ ⥤ RingCat.{u + 1} where
-  obj U := RingCat.of (ULift.{u + 1} (PadicAlgCl.finiteSubextensionValued ℓ U.unop.left))
+  obj U := RingCat.of (ULift.{u + 1} (PadicAlgCl.finiteIntermediateFieldValued ℓ U.unop.left))
   map f := RingCat.ofHom
     (ULift.ringEquiv.symm.toRingHom.comp
       (((((ContinuousMap.compRightAlgHom ℤ (PadicAlgCl ℓ) f.unop.left.base.hom).toRingHom).comp
-          (PadicAlgCl.finiteSubextensionValued ℓ _).subtype).codRestrict
-          (PadicAlgCl.finiteSubextensionValued ℓ _) (fun g ↦ by
+          (PadicAlgCl.finiteIntermediateFieldValued ℓ _).subtype).codRestrict
+          (PadicAlgCl.finiteIntermediateFieldValued ℓ _) (fun g ↦ by
             obtain ⟨E, hE, hg⟩ := g.2
             exact ⟨E, hE, fun x ↦ hg _⟩)).comp ULift.ringEquiv.toRingHom))
   map_id _ := rfl
   map_comp _ _ := rfl
 
 lemma padicAlgClRingPresheaf_map_apply {U V : X.ProEtᵒᵖ} (f : U ⟶ V)
-    (g : ULift.{u + 1} (PadicAlgCl.finiteSubextensionValued ℓ U.unop.left)) :
+    (g : ULift.{u + 1} (PadicAlgCl.finiteIntermediateFieldValued ℓ U.unop.left)) :
     ((padicAlgClRingPresheaf X ℓ).map f g).down.1 = g.down.1.comp f.unop.left.base.hom :=
   rfl
 
@@ -263,7 +263,7 @@ noncomputable abbrev padicAlgClSheaf : Sheaf (ProEt.topology X) Ab.{u + 1} :=
 
 instance : IsCommMonObj (padicAlgClSheaf X ℓ) :=
   haveI := (padicAlgClRingPresheaf X ℓ).isCommMonObj_compForget₂ fun U
-    (a b : ULift.{u + 1} (PadicAlgCl.finiteSubextensionValued ℓ U.unop.left)) ↦ mul_comm a b
+    (a b : ULift.{u + 1} (PadicAlgCl.finiteIntermediateFieldValued ℓ U.unop.left)) ↦ mul_comm a b
   inferInstance
 
 section ToPadicAlgCl
@@ -279,7 +279,7 @@ noncomputable def continuousMapRingPresheafToPadicAlgCl :
     continuousMapRingPresheaf X T ⟶ padicAlgClRingPresheaf X ℓ where
   app _ := RingCat.ofHom
     (ULift.ringEquiv.symm.toRingHom.comp
-      (((ψ.compLeftContinuous _ hψ).codRestrict (PadicAlgCl.finiteSubextensionValued ℓ _)
+      (((ψ.compLeftContinuous _ hψ).codRestrict (PadicAlgCl.finiteIntermediateFieldValued ℓ _)
           (fun g ↦ by
             obtain ⟨E, hE, h⟩ := hE
             exact ⟨E, hE, fun x ↦ h (g x)⟩)).comp ULift.ringEquiv.toRingHom))
