@@ -264,6 +264,28 @@ theorem isInvertible_of_forall_over_unit {M : SheafOfModules.{u} R} {I : Type u�
     (h : ∀ i, Nonempty (M.over (X i) ≅ unit (R.over (X i)))) : M.IsInvertible :=
   (localGeneratorsDataOfUnitIso X hX h).isInvertible
 
+/-- A sheaf of modules is finite locally free of rank `r` if and only if it is isomorphic to the
+free module of rank `r` over each object of a family covering the terminal object. -/
+theorem isFiniteLocallyFreeOfRank_iff_exists_over_iso_free {M : SheafOfModules.{u} R} {r : ℕ} :
+    M.IsFiniteLocallyFreeOfRank r ↔ ∃ (I : Type u₁) (X : I → C), J.CoversTop X ∧
+      ∀ i, Nonempty (M.over (X i) ≅ free (ULift.{u} (Fin r))) := by
+  constructor
+  · rintro ⟨q, hq, hr⟩
+    refine ⟨q.I, q.X, q.coversTop, fun i ↦ ⟨?_⟩⟩
+    exact (asIso (q.generators i).π).symm ≪≫ freeFunctor.mapIso
+      ((hr i).some.trans Equiv.ulift.symm).toIso
+  · rintro ⟨I, X, hX, h⟩
+    let q : M.LocalGeneratorsData :=
+      { I := I
+        X := X
+        coversTop := hX
+        generators i := (free.generatingSections _).ofEpi (h i).some.inv }
+    have : q.IsLocallyFreeData := ⟨fun i ↦ by
+      dsimp [q]
+      rw [GeneratingSections.ofEpi_π]
+      infer_instance⟩
+    exact ⟨q, this, fun i ↦ ⟨Equiv.ulift⟩⟩
+
 end
 
 section
