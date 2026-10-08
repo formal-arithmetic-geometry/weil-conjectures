@@ -60,6 +60,11 @@ class IsRegular (X : Scheme.{u}) : Prop where
 
 attribute [instance] IsRegular.isRegularLocalRing_stalk
 
+/-- The spectrum of a field is regular: its local ring is the localization of the field at its
+zero ideal. -/
+instance IsRegular.spec_field (k : Type u) [Field k] : IsRegular (Spec (.of k)) :=
+  ⟨fun z ↦ IsRegularLocalRing.of_ringEquiv (Spec.stalkIso (.of k) z).commRingCatIsoToRingEquiv.symm⟩
+
 /-- A scheme étale over a regular scheme is regular: an étale local homomorphism of local rings
 is flat with regular (indeed trivial) closed fibre, so it preserves regularity. -/
 theorem isRegularLocalRing_stalk_of_etale {X Y : Scheme.{u}} (f : X ⟶ Y) [Etale f]
