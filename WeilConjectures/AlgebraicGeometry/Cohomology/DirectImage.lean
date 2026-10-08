@@ -21,6 +21,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
@@ -42,12 +43,10 @@ and it is what lets the statements of this file be combined with the ones phrase
 ## Implementation notes
 
 Every derived-functor statement below needs injective resolutions in `X.Modules`, carried as
-an instance hypothesis `[HasInjectiveResolutions X.Modules]`. Nothing in Mathlib can discharge
-it: there is no `IsGrothendieckAbelian` instance for `SheafOfModules` anywhere. The missing
-prerequisite is recorded as the explicit statement
-`AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`; once it is proved and made an
-instance, `EnoughInjectives` and hence `HasInjectiveResolutions` follow, and the hypothesis can
-be dropped from every statement here and downstream.
+an instance hypothesis `[HasInjectiveResolutions X.Modules]`. It can be discharged by
+`AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`, which gives `EnoughInjectives` and
+hence `HasInjectiveResolutions`; it is not an instance, so the hypothesis is kept in the
+statements here and downstream.
 
 Mathlib has no `IsCoherent` class for sheaves of modules. Over a locally Noetherian base
 coherence is equivalent to being quasi-coherent and of finite presentation, so that is what the
@@ -146,14 +145,13 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X T : Scheme.{u}}
 
-/-- `X.Modules` is a Grothendieck abelian category.
+/-- `X.Modules` is a Grothendieck abelian category (`SheafOfModules.isGrothendieckAbelian`).
 
-This is the missing prerequisite of the whole file: together with
-`CategoryTheory.IsGrothendieckAbelian.enoughInjectives` it supplies the
+Together with `CategoryTheory.IsGrothendieckAbelian.enoughInjectives` it supplies the
 `HasInjectiveResolutions X.Modules` instance that every statement below, and every statement
-about the Picard functor `F` downstream, currently has to assume. -/
+about the Picard functor `F` downstream, assumes. -/
 theorem isGrothendieckAbelian (X : Scheme.{u}) : IsGrothendieckAbelian.{u} X.Modules :=
-  sorry
+  SheafOfModules.isGrothendieckAbelian X.ringCatSheaf
 
 /-- The `q`-th **higher direct image** functor `R^q f_*` along a morphism of schemes
 `f : X ⟶ T`: the `q`-th right derived functor of the pushforward functor
