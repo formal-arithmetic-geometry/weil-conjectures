@@ -483,6 +483,7 @@ public import WeilConjectures.GroupTheory.WeilGroup
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 public import WeilConjectures.Mathlib.Algebra.Algebra.Hom
 public import WeilConjectures.Mathlib.Algebra.BigOperators.GroupWithZero.Finset
+public import WeilConjectures.Mathlib.Algebra.BigOperators.Intervals
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Adjunctions
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Colimits
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
@@ -492,6 +493,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
