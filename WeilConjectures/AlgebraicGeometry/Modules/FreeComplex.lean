@@ -100,6 +100,55 @@ lemma finrank_moduleSpecΓFunctor_obj_free {R : CommRingCat.{u}} (hR : IsField R
     (appLinearEquivOfIso e ⊤).finrank_eq, (freeSectionsEquiv J).finrank_eq,
     Module.finrank_fintype_fun_eq_card]
 
+/-- Over a field `R`, an `𝒪_{Spec R}`-module with finite dimensional global sections vanishes if
+and only if its global sections do. -/
+theorem isZero_iff_finrank_moduleSpecΓFunctor_obj_eq_zero {R : CommRingCat.{u}} (hR : IsField R)
+    (M : (Spec R).Modules)
+    [Module.Finite R ((moduleSpecΓFunctor (R := R)).obj M)] :
+    IsZero M ↔ finrank R ((moduleSpecΓFunctor (R := R)).obj M) = 0 := by
+  have := isEquivalence_moduleSpecΓFunctor hR
+  let := hR.toField
+  rw [Module.finrank_zero_iff]
+  refine ⟨fun h ↦ ModuleCat.subsingleton_of_isZero ((moduleSpecΓFunctor (R := R)).map_isZero h),
+    fun h ↦ ?_⟩
+  let F := (moduleSpecΓFunctor (R := R)).asEquivalence
+  have : Subsingleton (F.functor.obj M) := h
+  exact (F.inverse.map_isZero (ModuleCat.isZero_of_subsingleton (F.functor.obj M))).of_iso
+    (F.unitIso.app M)
+
+/-- Over a field `R`, an `𝒪_{Spec R}`-module with finite dimensional global sections is finite
+locally free of rank `r` if and only if its global sections have dimension `r`. -/
+theorem isFiniteLocallyFreeOfRank_iff_finrank_moduleSpecΓFunctor_obj {R : CommRingCat.{u}}
+    (hR : IsField R)
+    (M : (Spec R).Modules) [Module.Finite R ((moduleSpecΓFunctor (R := R)).obj M)] (r : ℕ) :
+    M.IsFiniteLocallyFreeOfRank r ↔ finrank R ((moduleSpecΓFunctor (R := R)).obj M) = r := by
+  have := isEquivalence_moduleSpecΓFunctor hR
+  let := hR.toField
+  obtain ⟨hN, hNfin⟩ := finrank_moduleSpecΓFunctor_obj_free hR
+    (Iso.refl (SheafOfModules.free (R := (Spec R).ringCatSheaf) (ULift.{u} (Fin r))))
+  simp only [Fintype.card_ulift, Fintype.card_fin] at hN
+  constructor
+  · intro h
+    obtain ⟨ι, U, hU, e⟩ := IsFiniteLocallyFreeOfRank.exists_restrict_iso_free M (r := r)
+    obtain ⟨x⟩ : Nonempty (Spec R) := inferInstance
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.1
+      (hU.ge (Set.mem_univ x) : x ∈ ⨆ i, U i)
+    have : Subsingleton (Spec (.of R)) := inferInstance
+    have hUi : U i = ⊤ := by
+      refine eq_top_iff.2 fun y _ ↦ ?_
+      rwa [Subsingleton.elim y x]
+    have he := e i
+    rw [hUi] at he
+    have : IsIso (⊤ : (Spec R).Opens).ι := inferInstanceAs (IsIso (Spec R).topIso.hom)
+    have := (finrank_moduleSpecΓFunctor_obj_free hR (isoFreeOfRestrictIso M _ he.some)).1
+    simpa using this
+  · intro h
+    have : Module.Finite R ((moduleSpecΓFunctor (R := R)).obj
+      (SheafOfModules.free (R := (Spec R).ringCatSheaf) (ULift.{u} (Fin r)))) := hNfin
+    let e := (LinearEquiv.ofFinrankEq _ _ (h.trans hN.symm)).toModuleIso
+    exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso
+      ((moduleSpecΓFunctor (R := R)).preimageIso e).symm
+
 /-- **The fibre cohomology of a complex of finite free modules.** Let `P` be a complex of free
 modules `P^n ≅ 𝒪_Y^{r_n}` with differentials of matrices `A_n`, and `g : Spec R ⟶ Y` a point with
 values in a field `R`. Then `dim_R H^q(g^* P) + rank A_q(g) + rank A_{q-1}(g) = r_q`. -/
@@ -133,6 +182,25 @@ theorem finrank_homology_pullback_add_rank_add_rank {P : CochainComplex Y.Module
   change finrank R (F.obj (Q.homology q)) + _ + _ = _
   rw [h₁, ← h₂, ← h₃, ← h₄]
   exact this
+
+/-- The fibre `H^q(g^* P)` of the cohomology of a complex of finite free modules at a point
+`g : Spec R ⟶ Y` with values in a field is finite dimensional. -/
+theorem finite_moduleSpecΓFunctor_obj_homology_pullback {P : CochainComplex Y.Modules ℤ}
+    (hP : ∀ n, ∃ r : ℕ, Nonempty (P.X n ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))
+    {R : CommRingCat.{u}} (hR : IsField R) (g : Spec R ⟶ Y) (q : ℤ) :
+    Module.Finite R ((moduleSpecΓFunctor (R := R)).obj
+        ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q)) := by
+  have := isEquivalence_moduleSpecΓFunctor hR
+  let F := moduleSpecΓFunctor (R := R)
+  let Q := ((Modules.pullback g).mapHomologicalComplex _).obj P
+  let S := (Q.sc' (q - 1) q (q + 1)).map F
+  obtain ⟨r, ⟨e⟩⟩ := hP q
+  obtain ⟨-, hfin⟩ := finrank_moduleSpecΓFunctor_obj_free hR
+    ((Modules.pullback g).mapIso e ≪≫ pullbackFreeIso g _)
+  let := hR.toField
+  have : FiniteDimensional R S.X₂ := hfin
+  exact Module.Finite.equiv (F.mapIso (Q.homologyIsoSc' (q - 1) q (q + 1) (by simp) (by simp)) ≪≫
+    ((Q.sc' (q - 1) q (q + 1)).mapHomologyIso F).symm).toLinearEquiv.symm
 
 /-- **Upper semicontinuity of the fibre cohomology of a complex of finite free modules.** Let `P`
 be a complex of `𝒪_Y`-modules whose terms are free of finite rank, and `g : Spec R ⟶ Y` a point

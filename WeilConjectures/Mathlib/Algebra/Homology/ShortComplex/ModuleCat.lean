@@ -165,6 +165,13 @@ namespace CategoryTheory.ShortComplex
 
 variable {K : Type*} [Field K] (S : ShortComplex (ModuleCat K)) [FiniteDimensional K S.X₂]
 
+/-- The homology of a short complex of vector spaces with finite dimensional `X₂` is finite
+dimensional. -/
+instance finiteDimensional_homology : FiniteDimensional K S.homology :=
+  let e : (LinearMap.ker S.g.hom ⧸ LinearMap.range S.moduleCatToCycles) ≃ₗ[K] S.homology :=
+    S.moduleCatHomologyIso.toLinearEquiv.symm
+  Module.Finite.equiv e
+
 /-- `dim H(S) + rank g + rank f = dim X₂` for a short complex `S` of vector spaces with
 `X₂` finite dimensional. -/
 theorem finrank_homology_add_finrank_range_add_finrank_range :
