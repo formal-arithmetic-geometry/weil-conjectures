@@ -287,6 +287,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Subcomplex
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.ProjectionPairing
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
@@ -714,6 +715,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndoFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 public import WeilConjectures.Mathlib.CategoryTheory.Presentable.Limits
+public import WeilConjectures.Mathlib.CategoryTheory.Shift.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.CompatiblePlus
@@ -967,6 +969,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.Package
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
+public import WeilConjectures.SixFunctors.Etale.Derived.Point
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability

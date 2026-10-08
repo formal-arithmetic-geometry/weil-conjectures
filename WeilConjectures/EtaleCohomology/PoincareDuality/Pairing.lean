@@ -34,7 +34,7 @@ the six-functor formalism (`AlgebraicGeometry.Etale.TateOrientation.toOrientatio
 
 - `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`
   (`sk-thm-derived-duality`): at finite coefficients, the derived Poincaré pairing of a Tate
-  orientation is perfect for `K` constructible of finite Tor amplitude and dualizable.
+  orientation is perfect for `K` dualizable.
 
 ## Implementation notes
 
@@ -120,13 +120,11 @@ noncomputable def poincarePairing (γ : TateOrientation Λ a d)
 /-- Blueprint `sk-thm-derived-duality`: Derived Poincaré duality.
 
 The derived Poincaré pairing of a Tate orientation is perfect, for a finite coefficient ring
-`Λ` whose exponent is invertible on `Y` and `K ∈ D^b_{ctf}(X, Λ)` dualizable
-(`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`). -/
-theorem isPerfectPairing_poincarePairing [Finite Λ] [HasInvertibleExponent Λ Y]
-    (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X}
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (hKd : IsDualizable K) :
+`Λ` and `K` dualizable (`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`). -/
+theorem isPerfectPairing_poincarePairing [Finite Λ] (γ : TateOrientation Λ a d)
+    {K : DerivedCategoryModule Λ X} (hKd : IsDualizable K) :
     IsPerfectPairing (γ.poincarePairing K) :=
-  Etale.isPerfectPairing_poincarePairing a Λ _ _ hK hKd
+  Etale.isPerfectPairing_poincarePairing a Λ _ _ hKd
 
 end TateOrientation
 
