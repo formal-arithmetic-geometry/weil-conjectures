@@ -239,6 +239,20 @@ noncomputable def traceFunction (n : ℕ)
       (Scheme.Hom.geometricFiberPoint_fieldPoints_comp_geometricGaloisFrobenius_pow
         (X ↘ Spec (CommRingCat.of k₀)) n IsAlgClosed.lift x)).frobeniusEnd
 
+/-- The trace function of a zero Weil sheaf vanishes: its stalks are zero. -/
+theorem traceFunction_eq_zero_of_isZero (hF : IsZero F) (n : ℕ)
+    (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
+    F.traceFunction n x = 0 := by
+  have h (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
+      IsZero ((WeilCoefficients.toModuleCat l).obj (F.stalkObj s)) :=
+    (WeilCoefficients.toModuleCat l).map_isZero ((Sheaf.Γ _ _).map_isZero
+      ((s)^*[WeilCoefficients.{u} l].map_isZero (isZero_iff_isZero_carrier.mp hF)))
+  have key (s) (m : ℕ) (hs) :
+      LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s m hs).frobeniusEnd = 0 := by
+    have : Subsingleton (F.stalkAt s m hs).carrier := ModuleCat.subsingleton_of_isZero (h s)
+    exact (congrArg _ (Subsingleton.elim _ 0)).trans (map_zero _)
+  exact key _ _ _
+
 /-- The trace function at an `𝔽_{qⁿ}`-rational point `y` over a closed point `x` is the trace
 of the `n / e_x`-th power of the local geometric Frobenius `Fₓ`, `e_x = [κ(x) : k₀]`. -/
 theorem traceFunction_eq_trace_frobeniusEnd_stalk_pow (n : ℕ)
@@ -374,3 +388,49 @@ theorem globalSectionsToStalkObj_frobenius [QuasiCompact (X ↘ Spec (CommRingCa
 end GlobalSections
 
 end AlgebraicGeometry.WeilSheaf
+
+namespace AlgebraicGeometry.WeilComplex
+
+variable {l : ℕ} [Fact l.Prime]
+variable {k₀ : Type u} [Field k₀] [Finite k₀] [Fact (ringChar k₀ ≠ l)]
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+variable (K : WeilComplex k₀ l X)
+
+/-- A Weil complex has only finitely many nonzero cohomology sheaves, being bounded. -/
+theorem exists_finset_isZero_homologySheaf :
+    ∃ S : Finset ℤ, ∀ j ∉ S, IsZero ((homologySheaf j).obj K) := by
+  obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := K.property.1
+  refine ⟨Finset.Icc a b, fun j hj ↦ ?_⟩
+  refine IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) _ ?_
+  rw [Finset.mem_Icc, not_and_or, not_le, not_le] at hj
+  rcases hj with hj | hj
+  · exact _root_.DerivedCategory.isZero_of_isGE (hX := ha) _ a j hj
+  · exact _root_.DerivedCategory.isZero_of_isLE (hX := hb) _ b j hj
+
+/-- The *trace function* `t_K` of a Weil complex `K`: at an `𝔽_{qⁿ}`-rational point `x`, the
+alternating sum
+
+`t_K(x) = Tr(F_x^{(n)} | K_x̄) = ∑ⱼ (-1)ʲ Tr(F_x^{(n)} | 𝓗ʲ(K)_x̄)`
+
+of the trace functions of the cohomology sheaves `𝓗ʲ(K)`
+(`AlgebraicGeometry.WeilSheaf.traceFunction`), computed with the local Frobenius on the
+stalks. The sum is finite, `K` being bounded
+(`AlgebraicGeometry.WeilComplex.traceFunction_eq_sum`).
+(blueprint: `def-fd-trace-function`; sketch blueprint: `sk-def-trace`) -/
+noncomputable def traceFunction (n : ℕ)
+    (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
+    PadicAlgCl l :=
+  ∑ᶠ j : ℤ, (j.negOnePow : ℤ) • ((homologySheaf j).obj K).traceFunction n x
+
+/-- The trace function of a Weil complex is the alternating sum of the trace functions of its
+cohomology sheaves over any finite set of degrees outside of which the cohomology vanishes. -/
+theorem traceFunction_eq_sum (S : Finset ℤ) (hS : ∀ j ∉ S, IsZero ((homologySheaf j).obj K))
+    (n : ℕ)
+    (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
+    K.traceFunction n x =
+      ∑ j ∈ S, (j.negOnePow : ℤ) • ((homologySheaf j).obj K).traceFunction n x := by
+  refine finsum_eq_sum_of_support_subset _ fun j hj ↦ ?_
+  by_contra h
+  exact hj (by simp only [WeilSheaf.traceFunction_eq_zero_of_isZero _ (hS j h), smul_zero])
+
+end AlgebraicGeometry.WeilComplex
