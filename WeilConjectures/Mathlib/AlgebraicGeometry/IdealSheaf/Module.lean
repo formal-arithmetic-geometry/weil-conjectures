@@ -145,10 +145,4 @@ over every open subset, not merely a categorical monomorphism. -/
 lemma injective_toModulesι_app (U : X.Opens) : Function.Injective (J.toModulesι.app U) :=
   Scheme.Modules.injective_map_kernelι U J.toPushforwardSubscheme
 
-/-- **`𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)}` is an epimorphism**: on every affine open `U` it is the quotient
-map `Γ(X, U) ⟶ Γ(X, U) ⧸ J(U)`, which is surjective, so it is locally surjective. Hence
-`0 ⟶ J ⟶ 𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)} ⟶ 0` is short exact. -/
-instance epi_toPushforwardSubscheme : Epi J.toPushforwardSubscheme :=
-  sorry
-
 end AlgebraicGeometry.Scheme.IdealSheafData

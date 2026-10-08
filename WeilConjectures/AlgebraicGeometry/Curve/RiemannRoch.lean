@@ -23,6 +23,7 @@ public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
@@ -160,6 +161,17 @@ end Sections
 section DivisorRestriction
 
 variable {X : Scheme.{u}}
+
+/-- **`𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)}` is an epimorphism**: on every affine open `V` it is the map
+`Γ(X, V) ⟶ Γ(V(J), ι⁻¹ V)`, which is surjective since `ι` is a closed immersion. Hence
+`0 ⟶ J ⟶ 𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)} ⟶ 0` is short exact. -/
+instance IdealSheafData.epi_toPushforwardSubscheme (J : X.IdealSheafData) :
+    Epi J.toPushforwardSubscheme := by
+  refine Modules.epi_of_forall_exists_app_eq _ fun W y x hx ↦ ?_
+  obtain ⟨V, hV, hxV, hVW⟩ := exists_isAffineOpen_mem_and_subset (U := W) hx
+  obtain ⟨z, hz⟩ := J.subschemeι.app_surjective V hV (J.subscheme.presheaf.map
+    ((TopologicalSpace.Opens.map J.subschemeι.base).map (homOfLE hVW)).op y)
+  exact ⟨V, hVW, hxV, z, hz⟩
 
 /-- **The restriction of a module to a closed subscheme.** For a quasi-coherent ideal sheaf `J`
 with closed subscheme `ι : D ⟶ X` and an invertible `𝒪_X`-module `M`, the cokernel of
