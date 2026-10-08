@@ -349,6 +349,15 @@ lemma leftDerivedUpperStarTensorIso_hom
       ((leftDerivedUpperStarTensorComparison A g).app K).app M :=
   rfl
 
+/-- Tensoring with a fixed complex `M` commutes with the derived pullback:
+`Lg^*(K ⊗ᴸ M) ≅ Lg^*K ⊗ᴸ Lg^*M`, naturally in `K`. -/
+noncomputable def derivedTensorRightCompLeftDerivedUpperStarIso
+    (M : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    derivedTensorRight A Y M ⋙ L((g)^*[A]) ≅
+      L((g)^*[A]) ⋙ derivedTensorRight A Z (L((g)^*[A]).obj M) :=
+  NatIso.ofComponents (fun K ↦ leftDerivedUpperStarTensorIso A g K M)
+    fun f ↦ NatTrans.congr_app ((leftDerivedUpperStarTensorComparison A g).naturality f) M
+
 end
 
 /-- Tensoring with a complex pulled back along `g : Z ⟶ Y`, as a functor of the complex

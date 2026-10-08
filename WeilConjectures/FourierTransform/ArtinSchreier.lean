@@ -42,7 +42,8 @@ classical case is `k = ℤ/p`.
   of a global function `f` on a `k`-scheme, with its pullback compatibility
   `AlgebraicGeometry.Etale.artinSchreierSheafOfPullbackIso`.
 - `AlgebraicGeometry.Etale.artinSchreierSheafZMod`: the case `k = ℤ/p`, for a scheme of
-  characteristic `p`.
+  characteristic `p`, with its pullback compatibility
+  `AlgebraicGeometry.Etale.artinSchreierSheafZModPullbackIso`.
 
 ## Main statements
 
@@ -304,6 +305,28 @@ def artinSchreierSheafZMod {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)] (X : S
     Sheaf X.smallEtaleTopology (ModuleCat Λ) :=
   letI := X.overSpecZModOfCharP p
   artinSchreierSheafOf X (Ψ.compAddMonoidHom AddEquiv.ulift.toAddMonoidHom) f
+
+/-- The Artin–Schreier sheaf of a scheme of characteristic `p` is compatible with pullback: for
+a morphism `h : X' ⟶ X` of schemes of characteristic `p`, `h^* ℒ_{Ψ, f} ≅ ℒ_{Ψ, h^* f}`. Every
+such morphism is a morphism over `𝔽_p`, so this is
+`AlgebraicGeometry.Etale.artinSchreierSheafOfPullbackIso`.
+(sketch blueprint: `sk-def-kernel`, used in `sk-prop-base-change`) -/
+def artinSchreierSheafZModPullbackIso {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
+    {X X' : Scheme.{u}} [CharP Γ(X, ⊤) p] [CharP Γ(X', ⊤) p] (h : X' ⟶ X)
+    (Ψ : AddChar (ZMod p) Λ) (f : Γ(X, ⊤)) :
+    (h)^*[ModuleCat Λ].obj (artinSchreierSheafZMod X Ψ f) ≅
+      artinSchreierSheafZMod X' Ψ (h.appTop f) :=
+  letI := X.overSpecZModOfCharP p
+  letI := X'.overSpecZModOfCharP p
+  haveI : h.IsOver (Spec (.of (ULift.{u} (ZMod p)))) := by
+    rw [Scheme.Hom.isOver_iff]
+    change h ≫ X.toSpecΓ ≫ Spec.map _ = X'.toSpecΓ ≫ Spec.map _
+    rw [Scheme.toSpecΓ_naturality_assoc, ← Spec.map_comp]
+    congr 2
+    ext ⟨n⟩
+    obtain ⟨k, rfl⟩ := ZMod.intCast_surjective n
+    simp
+  artinSchreierSheafOfPullbackIso (k := ULift.{u} (ZMod p)) h _ f
 
 end ZMod
 
