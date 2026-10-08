@@ -124,7 +124,8 @@ noncomputable def isTerminalEtalePoint : IsTerminal (etalePoint k) :=
 /-- The map `Λ_k ⟶ G` from the constant sheaf `Λ` on `Spec k` to an étale sheaf of
 `Λ`-modules `G` corresponding to a global section `s` of `G`. -/
 noncomputable def homOfGlobalSection
-    {G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)} (s : G.obj.obj (op (etalePoint k))) :
+    {G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (s : G.obj.obj (op (etalePoint k))) :
     (constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
       (ModuleCat.of Λ Λ) ⟶ G :=
   ((constantSheafAdj _ _ isTerminalEtalePoint).homEquiv
@@ -134,7 +135,8 @@ omit [IsSepClosed k] in
 /-- Composing the map attached to a global section `s` with `ψ : G ⟶ G'` gives the map attached
 to the global section `ψ(s)`. -/
 theorem homOfGlobalSection_comp
-    {G G' : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)} (s : G.obj.obj (op (etalePoint k))) (ψ : G ⟶ G') :
+    {G G' : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (s : G.obj.obj (op (etalePoint k))) (ψ : G ⟶ G') :
     homOfGlobalSection s ≫ ψ = homOfGlobalSection (ψ.hom.app _ s) := by
   rw [homOfGlobalSection, homOfGlobalSection, ← Adjunction.homEquiv_naturality_right_symm]
   congr 1
@@ -144,7 +146,8 @@ theorem homOfGlobalSection_comp
 omit [IsSepClosed k] in
 /-- The map attached to a nonzero global section is nonzero. -/
 theorem homOfGlobalSection_ne_zero
-    {G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)} {s : G.obj.obj (op (etalePoint k))} (hs : s ≠ 0) : homOfGlobalSection s ≠ 0 := by
+    {G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    {s : G.obj.obj (op (etalePoint k))} (hs : s ≠ 0) : homOfGlobalSection s ≠ 0 := by
   intro h
   apply hs
   have := congrArg (fun f : (constantSheaf (Spec (.of k)).smallEtaleTopology
