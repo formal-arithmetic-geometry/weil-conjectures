@@ -36,8 +36,8 @@ repeated for `Ab.{u}` with `ℤ`-linear maps.
   `M ⊗ N = M ⊗[ℤ] N` and unit `ULift ℤ`.
 * `AddCommGrpCat.symmetricCategory`, `AddCommGrpCat.monoidalPreadditive`: it is symmetric and
   additive in each variable.
-* `AddCommGrpCat.monoidalClosed`: it is closed, with internal hom `Hom(M, N)` (currently
-  `sorry`). Closedness is what makes the localized monoidal structure on sheaves available
+* `AddCommGrpCat.monoidalClosed`: it is closed, with internal hom `Hom(M, N) = (M ⟶ N)`.
+  Closedness is what makes the localized monoidal structure on sheaves available
   (`CategoryTheory.GrothendieckTopology.W.monoidal`).
 * `AddCommGrpCat.ringMonObj`: a ring `R` is a monoid object of `Ab`, with unit the map
   `ℤ ⟶ R` and multiplication the `ℤ`-bilinear map `R ⊗ R ⟶ R`. A ring homomorphism is a
@@ -230,10 +230,51 @@ instance monoidalPreadditive : MonoidalPreadditive Ab.{u} where
   add_whiskerRight f g := hom_ext_toIntLinearMap (TensorProduct.ext' fun x y ↦
     (TensorProduct.add_tmul (R := ℤ) (f.hom x) (g.hom x) y :))
 
-/-- The tensor product of abelian groups is closed: the internal hom is `Hom(M, N)` with its
-pointwise group structure. -/
-noncomputable instance monoidalClosed : MonoidalClosed Ab.{u} :=
-  sorry
+/-- (implementation) the bijection `(M ⊗ N ⟶ P) ≃ (N ⟶ Hom(M, P))` exhibiting `Hom(M, -)` as
+right adjoint to `M ⊗ -` -/
+def monoidalClosedHomEquiv (M N P : Ab.{u}) :
+    ((tensorLeft M).obj N ⟶ P) ≃ (N ⟶ (preadditiveCoyoneda.obj (op M)).obj P) where
+  toFun f := ofHom
+    { toFun n := ofHom (AddMonoidHom.mk' (fun m ↦ f.hom (m ⊗ₜ[ℤ] n)) fun _ _ ↦
+        (congrArg f.hom (add_tmul _ _ n)).trans (map_add f.hom _ _))
+      map_zero' := hom_ext (AddMonoidHom.ext fun m ↦
+        (congrArg f.hom (tmul_zero N m)).trans (map_zero f.hom))
+      map_add' _ _ := hom_ext (AddMonoidHom.ext fun m ↦
+        (congrArg f.hom (tmul_add m _ _)).trans (map_add f.hom _ _)) }
+  invFun g := ofHom (TensorProduct.lift (LinearMap.mk₂ ℤ (fun m n ↦ (g.hom n).hom m)
+    (fun _ _ _ ↦ by simp) (fun _ _ _ ↦ by simp) (fun _ _ _ ↦ by rw [map_add]; rfl)
+    (fun _ _ _ ↦ by rw [map_zsmul]; rfl))).toAddMonoidHom
+  left_inv _ := hom_ext_toIntLinearMap (TensorProduct.ext' fun _ _ ↦ rfl)
+  right_inv _ := by ext; rfl
+
+/-- The tensor product of abelian groups is closed: the internal hom `Hom(M, N)` is the group of
+morphisms `M ⟶ N` with its pointwise group structure. -/
+instance monoidalClosed : MonoidalClosed Ab.{u} where
+  closed M :=
+    { rightAdj := preadditiveCoyoneda.obj (op M)
+      adj := Adjunction.mkOfHomEquiv
+        { homEquiv := monoidalClosedHomEquiv M
+          homEquiv_naturality_left_symm _ _ :=
+            hom_ext_toIntLinearMap (TensorProduct.ext' fun _ _ ↦ rfl)
+          homEquiv_naturality_right _ _ := rfl } }
+
+theorem ihom_obj (M N : Ab.{u}) : (ihom M).obj N = of (M ⟶ N) :=
+  rfl
+
+theorem ihom_map_apply {M N P : Ab.{u}} (f : N ⟶ P) (g : M ⟶ N) :
+    ((ihom M).map f).hom g = g ≫ f :=
+  rfl
+
+@[simp]
+theorem monoidalClosed_curry {M N P : Ab.{u}} (f : M ⊗ N ⟶ P) (m : M) (n : N) :
+    ((MonoidalClosed.curry f).hom n).hom m = f.hom (m ⊗ₜ[ℤ] n) :=
+  rfl
+
+@[simp]
+theorem monoidalClosed_uncurry {M N P : Ab.{u}} (f : N ⟶ (ihom M).obj P) (m : M) (n : N) :
+    (MonoidalClosed.uncurry f).hom (m ⊗ₜ[ℤ] n) = (f.hom n).hom m :=
+  rfl
+
 
 section Ring
 
