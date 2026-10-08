@@ -10,6 +10,7 @@ public import WeilConjectures.FourierTransform.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
+public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 
 /-!
@@ -341,8 +342,85 @@ theorem nonempty_iso_fourierTransform_baseChange [Finite Λ]
     Nonempty (D((u)^*[ModuleCat.{u + 1} Λ]) ⋙
           fourierTransform Λ ρ ρ' Ψ
             (pairingBaseChange π π' b g ρ ρ' u u' hu.w hu'.w) r ≅
-        fourierTransform Λ π π' Ψ b r ⋙ D((u')^*[ModuleCat.{u + 1} Λ])) :=
-  sorry
+        fourierTransform Λ π π' Ψ b r ⋙ D((u')^*[ModuleCat.{u + 1} Λ])) := by
+  -- the induced morphism `h : W ×_{S'} W' ⟶ V ×_S V'` of fibre products
+  let h : pullback ρ ρ' ⟶ pullback π π' := pullback.map ρ ρ' π π' u u' g hu.w.symm hu'.w.symm
+  -- the square of `h` over `u'` is cartesian: pasted with the square of `V ×_S V'` it is the
+  -- square of `W ×_{S'} W'` pasted with the cartesian square of `u`
+  have hsq : IsPullback h (pullback.snd ρ ρ') (pullback.snd π π') u' := by
+    refine IsPullback.of_right ?_ (pullback.lift_snd _ _ _) (IsPullback.of_hasPullback π π')
+    rw [pullback.lift_fst, hu'.w]
+    exact (IsPullback.of_hasPullback ρ ρ').paste_horiz hu
+  have : QuasiCompact (pullback.snd ρ ρ') :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact) hsq inferInstance
+  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ hsq
+  have hb : pairingBaseChange π π' b g ρ ρ' u u' hu.w hu'.w = h.appTop b := by
+    unfold pairingBaseChange; rfl
+  rw [hb]
+  -- the kernel pulls back to the kernel: `Lh^* 𝒦_ψ ≅ 𝒦'_ψ`
+  let eK : L((h)^*[ModuleCat.{u + 1} Λ]).obj
+        ((DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) ≅
+      (DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ ρ ρ' Ψ (h.appTop b)) :=
+    (leftDerivedUpperStarIsoMapDerivedCategory _ h).app _ ≪≫
+      ((h)^*[ModuleCat.{u + 1} Λ].mapDerivedCategorySingleFunctor 0).app _ ≪≫
+      (DerivedCategory.singleFunctor _ 0).mapIso (artinSchreierSheafZModPullbackIso h Ψ b)
+  refine ⟨?_⟩
+  calc D((u)^*[ModuleCat.{u + 1} Λ]) ⋙ D((pullback.fst ρ ρ')^*[ModuleCat.{u + 1} Λ]) ⋙
+        derivedTensorRight (ModuleCat.{u + 1} Λ) (pullback ρ ρ')
+          ((DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ ρ ρ' Ψ (h.appTop b))) ⋙
+        R(pullback.snd ρ ρ')_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ r
+      _ ≅ L((u)^*[ModuleCat.{u + 1} Λ]) ⋙ L((pullback.fst ρ ρ')^*[ModuleCat.{u + 1} Λ]) ⋙
+          derivedTensorRight (ModuleCat.{u + 1} Λ) (pullback ρ ρ')
+          ((DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ ρ ρ' Ψ (h.appTop b))) ⋙
+          R(pullback.snd ρ ρ')_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ r :=
+        Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory _ u).symm _ ≪≫
+          Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight
+            (leftDerivedUpperStarIsoMapDerivedCategory _ (pullback.fst ρ ρ')).symm _)
+      _ ≅ L((pullback.fst π π')^*[ModuleCat.{u + 1} Λ]) ⋙ L((h)^*[ModuleCat.{u + 1} Λ]) ⋙
+          derivedTensorRight (ModuleCat.{u + 1} Λ) (pullback ρ ρ')
+          ((DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ ρ ρ' Ψ (h.appTop b))) ⋙
+          R(pullback.snd ρ ρ')_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ r :=
+        (Functor.associator _ _ _).symm ≪≫
+          Functor.isoWhiskerRight ((leftDerivedUpperStarComp _ (pullback.fst ρ ρ') u).symm ≪≫
+            leftDerivedUpperStarComp _ h (pullback.fst π π') _ (pullback.lift_fst _ _ _).symm) _ ≪≫
+          Functor.associator _ _ _
+      _ ≅ L((pullback.fst π π')^*[ModuleCat.{u + 1} Λ]) ⋙ L((h)^*[ModuleCat.{u + 1} Λ]) ⋙
+          derivedTensorRight _ _ (L((h)^*[ModuleCat.{u + 1} Λ]).obj
+            ((DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b))) ⋙
+          R(pullback.snd ρ ρ')_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ r :=
+        Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
+          (Functor.isoWhiskerRight ((derivedTensor _ _).flip.mapIso eK.symm) _))
+      _ ≅ L((pullback.fst π π')^*[ModuleCat.{u + 1} Λ]) ⋙
+          derivedTensorRight (ModuleCat.{u + 1} Λ) (pullback π π')
+          ((DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) ⋙
+          L((h)^*[ModuleCat.{u + 1} Λ]) ⋙ R(pullback.snd ρ ρ')_![ModuleCat.{u + 1} Λ] ⋙
+          shiftFunctor _ r :=
+        Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
+          Functor.isoWhiskerRight (derivedTensorRightCompLeftDerivedUpperStarIso _ h _).symm _ ≪≫
+          Functor.associator _ _ _)
+      _ ≅ L((pullback.fst π π')^*[ModuleCat.{u + 1} Λ]) ⋙
+          derivedTensorRight (ModuleCat.{u + 1} Λ) (pullback π π')
+          ((DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) ⋙
+          R(pullback.snd π π')_![ModuleCat.{u + 1} Λ] ⋙ L((u')^*[ModuleCat.{u + 1} Λ]) ⋙
+          shiftFunctor _ r :=
+        Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
+          Functor.isoWhiskerRight (asIso (rightDerivedLowerShriekBaseChangeMap _ hsq)).symm _ ≪≫
+          Functor.associator _ _ _))
+      _ ≅ L((pullback.fst π π')^*[ModuleCat.{u + 1} Λ]) ⋙
+          derivedTensorRight (ModuleCat.{u + 1} Λ) (pullback π π')
+          ((DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) ⋙
+          R(pullback.snd π π')_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ r ⋙
+          L((u')^*[ModuleCat.{u + 1} Λ]) :=
+        Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
+          (L((u')^*[ModuleCat.{u + 1} Λ]).commShiftIso r).symm))
+      _ ≅ D((pullback.fst π π')^*[ModuleCat.{u + 1} Λ]) ⋙
+          derivedTensorRight (ModuleCat.{u + 1} Λ) (pullback π π')
+          ((DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) ⋙
+          R(pullback.snd π π')_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ r ⋙
+          D((u')^*[ModuleCat.{u + 1} Λ]) :=
+        Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory _ _) _ ≪≫
+          Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
+            (Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory _ u'))))
 
 end BaseChange
 
