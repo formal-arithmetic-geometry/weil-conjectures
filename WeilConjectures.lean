@@ -1081,6 +1081,7 @@ public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.Operations
+public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.Realizable
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.TateTwist
@@ -1105,6 +1106,7 @@ public import WeilConjectures.ZetaLinearAlgebra.RationalityCriterion
 public import WeilConjectures.ZetaLinearAlgebra.Reciprocity
 public import WeilConjectures.ZetaLinearAlgebra.Recovery
 public import WeilConjectures.ZetaLinearAlgebra.ShiftSpan
+public import WeilConjectures.ZetaLinearAlgebra.TraceCup
 public import WeilConjectures.ZetaLinearAlgebra.TraceDatum
 public import WeilConjectures.ZetaLinearAlgebra.WeightStrata
 public import WeilConjectures.ZetaLinearAlgebra.Weights

@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.LowerStar
+public import WeilConjectures.WeilSheaf.PoincareDuality
 
 /-!
 # Finiteness of the cohomology of Weil complexes and Frobenius
@@ -21,11 +22,6 @@ proper over `k₀` they agree, Frobenius-equivariantly. For the constant Weil sh
 vanish outside `[0, 2e]`, `e` the dimension of `X ⊗ k̄`, and if `X` is geometrically connected
 then `H⁰(X ⊗ k̄, ℚ̄_ℓ)` is `ℚ̄_ℓ` with trivial Frobenius.
 
-## Main definitions
-
-- `AlgebraicGeometry.WeilComplex.cohomology`: the ordinary cohomology `Hʳ(X ⊗ k̄, K)` of a Weil
-  complex, with its geometric Frobenius.
-
 ## Main statements
 
 All of them are blueprint `prop-cohomological-finiteness`.
@@ -36,8 +32,8 @@ All of them are blueprint `prop-cohomological-finiteness`.
 - `AlgebraicGeometry.WeilComplex.nonempty_equiv_compactlySupportedCohomology_cohomology`: for
   `X` proper, `Hʳ_c(X ⊗ k̄, K) ≅ Hʳ(X ⊗ k̄, K)` compatibly with Frobenius.
 - `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_adicConstant`,
-  `AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant`: the cohomology of the
-  constant Weil sheaf vanishes outside `[0, 2e]`.
+  `AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant_of_isProper`: the
+  cohomology of the constant Weil sheaf vanishes outside `[0, 2e]`.
 - `AlgebraicGeometry.WeilSheaf.finrank_cohomology_zero_adicConstant`,
   `AlgebraicGeometry.WeilSheaf.frobenius_cohomology_zero_adicConstant`: for `X` geometrically
   connected, `H⁰(X ⊗ k̄, ℚ̄_ℓ)` is one-dimensional with trivial Frobenius.
@@ -67,13 +63,6 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
 namespace WeilComplex
-
-/-- The ordinary cohomology `Hʳ(X ⊗ k̄, K) := Hʳ(Spec k̄, Ra_* K)` of a Weil complex `K` on a
-`k₀`-scheme `a : X ⟶ Spec k₀` of finite type, with its geometric Frobenius: the cohomology of
-the derived direct image of `K` along `a`, a Weil complex on `Spec k₀`. -/
-noncomputable def cohomology (K : WeilComplex k₀ l X) (r : ℤ) :
-    FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
-  ((derivedLowerStar (X ↘ Spec (CommRingCat.of k₀))).obj K).cohomologyFrobeniusModule r
 
 /-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
 
@@ -115,7 +104,7 @@ connected scheme `X ⊗ k̄`, whose invariants are `ℚ̄_ℓ`. Neither properne
 needed. -/
 theorem finrank_cohomology_zero_adicConstant
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
-    Module.finrank (PadicAlgCl l) ((toComplex.obj (adicConstant k₀ l X)).cohomology 0).carrier =
+    Module.finrank (PadicAlgCl l) ((adicConstant k₀ l X).cohomology 0).carrier =
       1 :=
   sorry
 
@@ -126,7 +115,7 @@ If `X` is geometrically connected over `k₀`, the geometric Frobenius acts as t
 constants. -/
 theorem frobenius_cohomology_zero_adicConstant
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
-    ((toComplex.obj (adicConstant k₀ l X)).cohomology 0).frobenius = LinearEquiv.refl _ _ :=
+    ((adicConstant k₀ l X).cohomology 0).frobenius = LinearEquiv.refl _ _ :=
   sorry
 
 end WeilSheaf
@@ -160,12 +149,12 @@ variable (k₀ l X)
 
 If `X` is proper over `k₀` and the geometric fiber `X ⊗ k̄` has dimension at most `e`, the
 cohomology `Hʳ(X ⊗ k̄, ℚ̄_ℓ)` of the constant Weil sheaf vanishes for `r < 0` and for `r > 2e`.
-For `X` smooth, proper and geometrically connected of pure dimension `d` this is
-`Hʳ(X ⊗ k̄, ℚ̄_ℓ) = 0` for `r ∉ [0, 2d]`. -/
-theorem subsingleton_cohomology_adicConstant (e : ℕ)
+For `X` smooth of pure dimension `d` the same vanishing, without properness, is
+`AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant`. -/
+theorem subsingleton_cohomology_adicConstant_of_isProper (e : ℕ)
     (he : topologicalKrullDim (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
     (r : ℤ) (hr : r < 0 ∨ 2 * (e : ℤ) < r) :
-    Subsingleton ((toComplex.obj (adicConstant k₀ l X)).cohomology r).carrier :=
+    Subsingleton ((adicConstant k₀ l X).cohomology r).carrier :=
   sorry
 
 end WeilSheaf
