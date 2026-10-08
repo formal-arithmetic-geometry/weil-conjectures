@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Field.ULift
 public import Mathlib.Algebra.Group.AddChar
 public import Mathlib.Data.ZMod.Basic
+public import Mathlib.NumberTheory.LegendreSymbol.AddCharacter
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.CategoryTheory.Sites.Point.Linear
@@ -873,6 +874,92 @@ theorem nonempty_iso_artinSchreierSheafOf_inv (Ψ : AddChar k Λ) (f : Γ(X, ⊤
   obtain ⟨e⟩ := nonempty_iso_artinSchreierSheafOf_mul X Ψ Ψ⁻¹ f
   obtain ⟨e'⟩ := nonempty_iso_artinSchreierSheafOf_one X (Λ := Λ) (k := k) f
   exact ⟨e ≪≫ eqToIso (congrArg (artinSchreierSheafOf X · f) (mul_inv_cancel Ψ)) ≪≫ e'⟩
+
+/-- The Artin–Schreier sheaf of `-f` is that of `f` for the inverse character:
+`ℒ_{Ψ, -f} ≅ ℒ_{Ψ⁻¹, f}`, the pullback along `f` of `(-1)^* ℒ_Ψ ≅ ℒ_{Ψ⁻¹}`
+(`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_smul`).
+(blueprint: `lem-fd-as-characters`, `lem-fd-as-lisse`) -/
+theorem nonempty_iso_artinSchreierSheafOf_neg_inv (Ψ : AddChar k Λ) (f : Γ(X, ⊤)) :
+    Nonempty (artinSchreierSheafOf X Ψ (-f) ≅ artinSchreierSheafOf X Ψ⁻¹ f) := by
+  obtain ⟨e⟩ := nonempty_iso_artinSchreierSheaf_smul Ψ (-1)
+  rw [Units.val_neg, Units.val_one, map_neg, map_one, AffineSpace.smul_neg_one,
+    ← AddChar.inv_mulShift] at e
+  have h : (AffineSpace.homOfVector (X ↘ Spec (.of k)) fun _ ↦ -f) =
+      (AffineSpace.homOfVector (X ↘ Spec (.of k)) fun _ ↦ f) ≫
+        AffineSpace.neg PUnit (Spec (.of k)) :=
+    AffineSpace.hom_ext (by simp) fun _ ↦ by
+      rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.neg_appTop_coord, map_neg,
+        AffineSpace.homOfVector_appTop_coord, AffineSpace.homOfVector_appTop_coord]
+  exact ⟨(upperStarComp _ _ _ _ h).app (artinSchreierSheaf Ψ) ≪≫
+    (AffineSpace.homOfVector (X ↘ Spec (.of k)) fun _ ↦ f)^*[ModuleCat Λ].mapIso e⟩
+
+/-- **The affine-line Artin–Schreier covering.** The Artin–Schreier sheaf of the coordinate
+function `x` of `𝔸¹_k` is `ℒ_Ψ` itself: the Artin–Schreier covering of `x` is
+`AS_q : 𝔸¹_k ⟶ 𝔸¹_k`, `y ↦ y ^ q - y`, on which `k` acts by the translations `y ↦ y + a`, since
+the function `x : 𝔸¹_k ⟶ 𝔸¹_k` is the identity.
+(blueprint: `lem-fd-as-cover-affine-line`) -/
+def artinSchreierSheafOfCoordIso (Ψ : AddChar k Λ) :
+    artinSchreierSheafOf 𝔸¹[k] Ψ (AffineSpace.coord _ PUnit.unit) ≅ artinSchreierSheaf Ψ :=
+  eqToIso (by
+    rw [artinSchreierSheafOf, show (AffineSpace.homOfVector (𝔸¹[k] ↘ Spec (.of k))
+        fun _ ↦ AffineSpace.coord (Spec (.of k)) PUnit.unit) = 𝟙 _ from
+      AffineSpace.hom_ext (by simp) fun _ ↦ by simp]
+    rfl) ≪≫
+    (upperStarId (ModuleCat Λ) 𝔸¹[k]).app _
+
+attribute [local instance] Abelian.hasFiniteBiproducts in
+open AddChar in
+/-- **Isotypic decomposition of the Artin–Schreier pushforward.** For a primitive additive
+character `Ψ` of `k` with values in a domain `Λ`, the characters of `k` are the `Ψ(b ·)`,
+`b ∈ k`, and the pushforward `(AS_q)_* Λ` is the direct sum of their isotypic components:
+`(AS_q)_* Λ ≅ ⨁_{b ∈ k} ℒ_{Ψ(b ·)}`. The idempotents `e_{Ψ(b ·)}` are orthogonal and sum to the
+identity, by the orthogonality relations for `Ψ`. Each summand is lisse of rank one
+(`AlgebraicGeometry.Etale.artinSchreierSheafUpperStarIso`), and the summand of `b = 0` is the
+constant sheaf (`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_one`).
+(blueprint: `lem-fd-as-characters`) -/
+theorem nonempty_iso_biproduct_artinSchreierSheaf [IsDomain Λ] (Ψ : AddChar k Λ)
+    (hΨ : Ψ.IsPrimitive) :
+    Nonempty ((AS[k])_*[ModuleCat Λ].obj (𝟙_ _) ≅
+      ⨁ fun b : k ↦ artinSchreierSheaf (Ψ.mulShift b)) := by
+  classical
+  have hsum (c : k) : ∑ a : k, ⅟(Fintype.card k : Λ) * Ψ (a * c) = if c = 0 then 1 else 0 := by
+    rw [← Finset.mul_sum, sum_mulShift c hΨ]
+    split_ifs <;> simp
+  have horth (b b' : k) : image.ι (artinSchreierIdempotent (Ψ.mulShift b)) ≫
+      artinSchreierIdempotent (Ψ.mulShift b') =
+        if b = b' then image.ι (artinSchreierIdempotent (Ψ.mulShift b)) else 0 := by
+    rw [show artinSchreierIdempotent (Ψ.mulShift b') = ∑ a : k,
+      (⅟(Fintype.card k : Λ) * Ψ.mulShift b' (-a)) • artinSchreierTranslationAction Λ k a from rfl]
+    simp only [Preadditive.comp_sum, Linear.comp_smul,
+      image_ι_artinSchreierIdempotent_comp_artinSchreierTranslationAction, smul_smul,
+      ← Finset.sum_smul]
+    have h (a : k) : ⅟(Fintype.card k : Λ) * Ψ.mulShift b' (-a) * Ψ.mulShift b a =
+        ⅟(Fintype.card k : Λ) * Ψ (a * (b - b')) := by
+      rw [mul_assoc, mulShift_apply, mulShift_apply, ← map_add_eq_mul]
+      ring_nf
+    simp only [h, hsum, sub_eq_zero]
+    split_ifs <;> simp
+  have hcompl : ∑ b : k, artinSchreierIdempotent (Ψ.mulShift b) = 𝟙 _ := by
+    simp only [artinSchreierIdempotent]
+    rw [Finset.sum_comm]
+    simp only [← Finset.sum_smul, mulShift_apply]
+    have h (a : k) : ∑ b : k, ⅟(Fintype.card k : Λ) * Ψ (b * -a) =
+        if a = 0 then 1 else 0 := by
+      rw [hsum, neg_eq_zero]
+    simp only [h, ite_smul, one_smul, zero_smul, Finset.sum_ite_eq', Finset.mem_univ, if_true,
+      artinSchreierTranslationAction_zero]
+  let c : Bicone fun b : k ↦ artinSchreierSheaf (Ψ.mulShift b) :=
+    { pt := (AS[k])_*[ModuleCat Λ].obj (𝟙_ _)
+      π := fun b ↦ factorThruImage (artinSchreierIdempotent (Ψ.mulShift b))
+      ι := fun b ↦ image.ι (artinSchreierIdempotent (Ψ.mulShift b))
+      ι_π := fun b b' ↦ by
+        split_ifs with hb
+        · subst hb
+          exact image_ι_comp_factorThruImage_artinSchreierIdempotent _
+        · rw [← cancel_mono (image.ι (artinSchreierIdempotent (Ψ.mulShift b'))),
+            Category.assoc, image.fac, horth, if_neg hb, zero_comp] }
+  exact ⟨biproduct.uniqueUpToIso _
+    (isBilimitOfTotal c ((Finset.sum_congr rfl fun b _ ↦ image.fac _).trans hcompl))⟩
 
 end Properties
 
