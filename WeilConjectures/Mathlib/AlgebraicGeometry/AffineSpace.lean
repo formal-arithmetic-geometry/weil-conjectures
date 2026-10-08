@@ -46,8 +46,11 @@ The part of the additive group structure of relative affine space that is used e
 - `AlgebraicGeometry.AffineSpace.smul`: the scaling `x ↦ c x` by a global function `c`.
 - `AlgebraicGeometry.AffineSpace.translation`: the translation `x ↦ x + a`.
 - `AlgebraicGeometry.AffineSpace.stdPairing`: the standard pairing on `𝔸(n; S) ×_S 𝔸(n; S)`.
-- `AlgebraicGeometry.AffineSpace.convolutionShear`: the shear `(x, ξ, y) ↦ (ξ, x - y)` of the
-  triple product, which computes the convolution of Fourier kernels.
+- `AlgebraicGeometry.AffineSpace.convolutionShear`: the shear `(x, ξ, y) ↦ (ξ, d(x, y))` of the
+  triple product, which computes the convolution of Fourier kernels for `d = x ∓ y`.
+- `AlgebraicGeometry.AffineSpace.negSnd`: the reflection `(x, y) ↦ (x, -y)` of
+  `𝔸(n; S) ×_S 𝔸(n; S)`; the fibre of the addition over the zero section is the
+  anti-diagonal (`AlgebraicGeometry.AffineSpace.isPullback_diagonal_negSnd_add`).
 
 -/
 
@@ -582,6 +585,70 @@ lemma isPullback_diagonal_sub :
     · simp [hc]
   · rw [← h₂, Category.assoc, pullback.diagonal_fst, Category.comp_id]
 
+/-- The reflection `(x, y) ↦ (x, -y)` of `𝔸(n; S) ×_S 𝔸(n; S)`, that is `id × ι` for the
+reflection `ι = AlgebraicGeometry.AffineSpace.neg`. -/
+def negSnd :
+    Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ⟶ Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) :=
+  pullback.map _ _ _ _ (𝟙 _) (neg n S) (𝟙 S) (by simp) (by simp)
+
+@[reassoc (attr := simp)]
+lemma negSnd_fst : negSnd n S ≫ pr₁ = pr₁ := by
+  simp [negSnd]
+
+@[reassoc (attr := simp)]
+lemma negSnd_snd : negSnd n S ≫ pr₂ = pr₂ ≫ neg n S := by
+  simp [negSnd]
+
+@[simp]
+lemma negSnd_comp_negSnd : negSnd n S ≫ negSnd n S = 𝟙 _ := by
+  refine pullback.hom_ext ?_ ?_
+  · simp
+  · simp
+
+instance : IsIso (negSnd n S) :=
+  ⟨⟨negSnd n S, negSnd_comp_negSnd n S, negSnd_comp_negSnd n S⟩⟩
+
+/-- The anti-diagonal `x ↦ (x, -x)`, the image of the diagonal under `id × ι`, is the fibre of
+the addition over the zero section: the square
+
+```
+   𝔸(n; S) ──Δ ≫ (id × ι)──▶ 𝔸(n; S) ×_S 𝔸(n; S)
+      │                            │
+      │                            │ add
+      ▼                            ▼
+      S ───────zeroSection──────▶ 𝔸(n; S)
+```
+
+is cartesian. -/
+lemma isPullback_diagonal_negSnd_add :
+    IsPullback (𝔸(n; S) ↘ S) (pullback.diagonal (𝔸(n; S) ↘ S) ≫ negSnd n S) (zeroSection n S)
+      (add n S) := by
+  have hw : (𝔸(n; S) ↘ S) ≫ zeroSection n S =
+      (pullback.diagonal (𝔸(n; S) ↘ S) ≫ negSnd n S) ≫ add n S := by
+    refine hom_ext (by simp) fun i ↦ ?_
+    simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, zeroSection_appTop_coord,
+      map_zero, add_appTop_coord, map_add]
+    simp only [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, negSnd_fst,
+      negSnd_snd, pullback.diagonal_snd_assoc]
+    simp
+  refine ⟨⟨hw⟩, ⟨PullbackCone.IsLimit.mk hw (fun s ↦ s.snd ≫ pr₁) (fun s ↦ ?_) (fun s ↦ ?_)
+    (fun s m h₁ h₂ ↦ ?_)⟩⟩
+  · have := s.condition =≫ (𝔸(n; S) ↘ S)
+    simp only [Category.assoc, zeroSection_over, Category.comp_id, add_over] at this
+    simp [this]
+  · have hc : s.snd ≫ pr₁ ≫ neg n S = s.snd ≫ pr₂ := by
+      refine hom_ext (by simp [pullback.condition]) fun i ↦ ?_
+      have := congrArg (fun f ↦ f.appTop (coord S i)) s.condition
+      simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, zeroSection_appTop_coord,
+        map_zero, add_appTop_coord, map_add] at this
+      simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, neg_appTop_coord, map_neg]
+      exact (eq_neg_of_add_eq_zero_right this.symm).symm
+    refine pullback.hom_ext ?_ ?_
+    · simp
+    · simp [hc]
+  · rw [← h₂, Category.assoc, Category.assoc, negSnd_fst, pullback.diagonal_fst,
+      Category.comp_id]
+
 /-- The scaling `x ↦ c x` of `𝔸(n; S)` by a global function `c` on `S`. -/
 def smul (c : Γ(S, ⊤)) : 𝔸(n; S) ⟶ 𝔸(n; S) :=
   homOfVector (𝔸(n; S) ↘ S) fun i ↦ (𝔸(n; S) ↘ S).appTop c * coord S i
@@ -644,24 +711,31 @@ set_option hygiene false in
 /-- The projection `r₁₃` of the triple product. -/
 local notation "r₁₃" => Limits.pullback.tripleProj₁₃ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)
 
-/-- The shear `(x, ξ, y) ↦ (ξ, x - y)` from the triple product
-`𝔸(n; S) ×_S 𝔸(n; S) ×_S 𝔸(n; S)`, realised as `(𝔸 ×_S 𝔸) ×_𝔸 (𝔸 ×_S 𝔸)`, to
-`𝔸(n; S) ×_S 𝔸(n; S)`. It pulls the standard pairing back to `⟨x, ξ⟩ - ⟨ξ, y⟩`
-(`AlgebraicGeometry.AffineSpace.convolutionShear_appTop_stdPairing`), and exhibits the
-projection `r₁₃` as the base change of the second projection along the subtraction
-(`AlgebraicGeometry.AffineSpace.isPullback_convolutionShear`). -/
-def convolutionShear :
+variable {n S} in
+/-- For a morphism `d : 𝔸(n; S) ×_S 𝔸(n; S) ⟶ 𝔸(n; S)` over `S`, the shear
+`(x, ξ, y) ↦ (ξ, d(x, y))` from the triple product `𝔸(n; S) ×_S 𝔸(n; S) ×_S 𝔸(n; S)`, realised
+as `(𝔸 ×_S 𝔸) ×_𝔸 (𝔸 ×_S 𝔸)`, to `𝔸(n; S) ×_S 𝔸(n; S)`. It exhibits the projection `r₁₃` as
+the base change of the second projection along `d`
+(`AlgebraicGeometry.AffineSpace.isPullback_convolutionShear`). For `d` the subtraction or the
+addition it pulls the standard pairing back to `⟨x, ξ⟩ - ⟨ξ, y⟩`, resp. `⟨x, ξ⟩ + ⟨ξ, y⟩`
+(`AlgebraicGeometry.AffineSpace.convolutionShear_sub_appTop_stdPairing`,
+`AlgebraicGeometry.AffineSpace.convolutionShear_add_appTop_stdPairing`). -/
+def convolutionShear (d : Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ⟶ 𝔸(n; S))
+    (hd : d ≫ 𝔸(n; S) ↘ S = pr₁ ≫ 𝔸(n; S) ↘ S) :
     Limits.pullback pr₂ pr₁ ⟶ Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) :=
-  pullback.lift (r₁₂ ≫ pr₂) (r₁₃ ≫ sub n S) (by
-    simp only [Category.assoc, sub_over, pullback.tripleProj₁₃_fst_assoc]
+  pullback.lift (r₁₂ ≫ pr₂) (r₁₃ ≫ d) (by
+    simp only [Category.assoc, hd, pullback.tripleProj₁₃_fst_assoc]
     rw [← pullback.condition])
 
+variable {n S} (d : Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ⟶ 𝔸(n; S))
+  (hd : d ≫ 𝔸(n; S) ↘ S = pr₁ ≫ 𝔸(n; S) ↘ S)
+
 @[reassoc (attr := simp)]
-lemma convolutionShear_fst : convolutionShear n S ≫ pr₁ = r₁₂ ≫ pr₂ :=
+lemma convolutionShear_fst : convolutionShear d hd ≫ pr₁ = r₁₂ ≫ pr₂ :=
   pullback.lift_fst _ _ _
 
 @[reassoc (attr := simp)]
-lemma convolutionShear_snd : convolutionShear n S ≫ pr₂ = r₁₃ ≫ sub n S :=
+lemma convolutionShear_snd : convolutionShear d hd ≫ pr₂ = r₁₃ ≫ d :=
   pullback.lift_snd _ _ _
 
 /-- The square
@@ -672,32 +746,32 @@ lemma convolutionShear_snd : convolutionShear n S ≫ pr₂ = r₁₃ ≫ sub n 
           │                              │
        r₁₃│                              │ pr₂
           ▼                              ▼
-   𝔸(n; S) ×_S 𝔸(n; S) ───sub──────▶  𝔸(n; S)
+   𝔸(n; S) ×_S 𝔸(n; S) ────d───────▶  𝔸(n; S)
 ```
 
 is cartesian: a point `(x, ξ, y)` is the same as a pair `(x, y)` and a pair `(ξ, z)` with
-`z = x - y`. -/
+`z = d(x, y)`. -/
 lemma isPullback_convolutionShear :
-    IsPullback (convolutionShear n S) r₁₃ pr₂ (sub n S) := by
-  have h₁ (s : PullbackCone pr₂ (sub n S)) :
+    IsPullback (convolutionShear d hd) r₁₃ pr₂ d := by
+  have h₁ (s : PullbackCone pr₂ d) :
       (s.snd ≫ pr₁) ≫ 𝔸(n; S) ↘ S = (s.fst ≫ pr₁) ≫ 𝔸(n; S) ↘ S := by
     have := s.condition =≫ (𝔸(n; S) ↘ S)
-    simp only [Category.assoc, sub_over] at this
+    simp only [Category.assoc, hd] at this
     rw [Category.assoc, ← this, Category.assoc, pullback.condition]
-  have h₂ (s : PullbackCone pr₂ (sub n S)) :
+  have h₂ (s : PullbackCone pr₂ d) :
       (s.fst ≫ pr₁) ≫ 𝔸(n; S) ↘ S = (s.snd ≫ pr₂) ≫ 𝔸(n; S) ↘ S := by
     have := s.condition =≫ (𝔸(n; S) ↘ S)
-    simp only [Category.assoc, sub_over] at this
+    simp only [Category.assoc, hd] at this
     rw [Category.assoc, pullback.condition, this, Category.assoc, pullback.condition]
-  let l (s : PullbackCone pr₂ (sub n S)) : s.pt ⟶ Limits.pullback pr₂ pr₁ :=
+  let l (s : PullbackCone pr₂ d) : s.pt ⟶ Limits.pullback pr₂ pr₁ :=
     pullback.lift (pullback.lift (s.snd ≫ pr₁) (s.fst ≫ pr₁) (h₁ s))
       (pullback.lift (s.fst ≫ pr₁) (s.snd ≫ pr₂) (h₂ s))
       (by rw [pullback.lift_snd, pullback.lift_fst])
-  have hl (s : PullbackCone pr₂ (sub n S)) : l s ≫ r₁₃ = s.snd := by
+  have hl (s : PullbackCone pr₂ d) : l s ≫ r₁₃ = s.snd := by
     refine pullback.hom_ext ?_ ?_
     · rw [Category.assoc, pullback.tripleProj₁₃_fst, pullback.lift_fst_assoc, pullback.lift_fst]
     · rw [Category.assoc, pullback.tripleProj₁₃_snd, pullback.lift_snd_assoc, pullback.lift_snd]
-  refine ⟨⟨convolutionShear_snd n S⟩, ⟨PullbackCone.IsLimit.mk (convolutionShear_snd n S)
+  refine ⟨⟨convolutionShear_snd d hd⟩, ⟨PullbackCone.IsLimit.mk (convolutionShear_snd d hd)
     l (fun s ↦ ?_) hl (fun s m h₁ h₂ ↦ ?_)⟩⟩
   · refine pullback.hom_ext ?_ ?_
     · rw [Category.assoc, convolutionShear_fst, pullback.lift_fst_assoc, pullback.lift_snd]
@@ -718,16 +792,33 @@ lemma isPullback_convolutionShear :
     · simp only [l, Category.assoc]
       rw [h₂₃, pullback.lift_snd_assoc, pullback.lift_snd]
 
-/-- The shear pulls the standard pairing back to `⟨x, ξ⟩ - ⟨ξ, y⟩`: the pairing of
-`(ξ, x - y)` is `∑ᵢ ξᵢ (xᵢ - yᵢ)`. -/
-lemma convolutionShear_appTop_stdPairing [Fintype n] :
-    (convolutionShear n S).appTop (stdPairing n S) =
+variable (n S)
+
+/-- The shear by the subtraction pulls the standard pairing back to `⟨x, ξ⟩ - ⟨ξ, y⟩`: the
+pairing of `(ξ, x - y)` is `∑ᵢ ξᵢ (xᵢ - yᵢ)`. -/
+lemma convolutionShear_sub_appTop_stdPairing [Fintype n] :
+    (convolutionShear (sub n S) (sub_over n S)).appTop (stdPairing n S) =
       (r₁₂).appTop (stdPairing n S) - (r₂₃).appTop (stdPairing n S) := by
   simp only [stdPairing, map_sum, map_mul, ← Finset.sum_sub_distrib]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   simp only [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, convolutionShear_fst,
     convolutionShear_snd]
   simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, sub_appTop_coord, map_sub]
+  simp only [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, pullback.tripleProj₁₃_fst,
+    pullback.tripleProj₁₃_snd, ← pullback.condition]
+  ring
+
+
+/-- The shear by the addition pulls the standard pairing back to `⟨x, ξ⟩ + ⟨ξ, y⟩`: the
+pairing of `(ξ, x + y)` is `∑ᵢ ξᵢ (xᵢ + yᵢ)`. -/
+lemma convolutionShear_add_appTop_stdPairing [Fintype n] :
+    (convolutionShear (add n S) (add_over n S)).appTop (stdPairing n S) =
+      (r₁₂).appTop (stdPairing n S) + (r₂₃).appTop (stdPairing n S) := by
+  simp only [stdPairing, map_sum, map_mul, ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  simp only [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, convolutionShear_fst,
+    convolutionShear_snd]
+  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, add_appTop_coord, map_add]
   simp only [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, pullback.tripleProj₁₃_fst,
     pullback.tripleProj₁₃_snd, ← pullback.condition]
   ring

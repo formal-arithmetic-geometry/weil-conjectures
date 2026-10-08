@@ -1103,6 +1103,15 @@ section ZModProperties
 
 variable {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)] (X : Scheme.{u}) [CharP Γ(X, ⊤) p]
 
+/-- The case `k = ℤ/p` of `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_add`:
+`ℒ_{Ψ, f} ⊗ ℒ_{Ψ, g} ≅ ℒ_{Ψ, f + g}` on a scheme of characteristic `p`.
+(sketch blueprint: `sk-lem-as-properties`, used in `sk-prop-convolution-kernel`) -/
+theorem nonempty_iso_artinSchreierSheafZMod_add (Ψ : AddChar (ZMod p) Λ) (f g : Γ(X, ⊤)) :
+    Nonempty (artinSchreierSheafZMod X Ψ f ⊗ artinSchreierSheafZMod X Ψ g ≅
+      artinSchreierSheafZMod X Ψ (f + g)) :=
+  let _ := X.overSpecZModOfCharP p
+  nonempty_iso_artinSchreierSheafOf_add X _ f g
+
 /-- The case `k = ℤ/p` of `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_sub`:
 `ℒ_{Ψ, f} ⊗ ℒ_{Ψ⁻¹, g} ≅ ℒ_{Ψ, f - g}` on a scheme of characteristic `p`.
 (sketch blueprint: `sk-lem-as-properties`, used in `sk-prop-convolution-kernel`) -/
