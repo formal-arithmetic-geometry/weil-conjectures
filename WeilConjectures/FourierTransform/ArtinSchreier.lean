@@ -702,13 +702,63 @@ theorem nonempty_iso_artinSchreierSheaf_one :
   have := isIso_of_isIso_upperStar_map_artinSchreierMap Λ v
   exact ⟨(asIso v).symm⟩
 
+open Functor.LaxMonoidal Functor.OplaxMonoidal in
 /-- The Artin–Schreier sheaf turns multiplication of characters into tensor product of
 sheaves, `ℒ_Ψ ⊗ ℒ_{Ψ'} ≅ ℒ_{Ψ Ψ'}`.
 (sketch blueprint: `sk-lem-as-properties`) -/
 theorem nonempty_iso_artinSchreierSheaf_mul (Ψ Ψ' : AddChar k Λ) :
-    Nonempty (artinSchreierSheaf Ψ ⊗ artinSchreierSheaf Ψ' ≅ artinSchreierSheaf (Ψ * Ψ')) :=
-  -- both sides are isotypic components of the pushforward along the same covering
-  sorry
+    Nonempty (artinSchreierSheaf Ψ ⊗ artinSchreierSheaf Ψ' ≅ artinSchreierSheaf (Ψ * Ψ')) := by
+  -- the product `s_Ψ ⊗ s_Ψ' ⟶ (AS_q)_* Λ` of the inclusions is `Ψ Ψ'`-isotypic, so it factors
+  -- through `ℒ_{Ψ Ψ'}`, and its adjoint `AS_q^* (ℒ_Ψ ⊗ ℒ_Ψ') ⟶ Λ` is an isomorphism
+  obtain ⟨u, hu_def⟩ : ∃ u, u = (image.ι (artinSchreierIdempotent Ψ) ⊗ₘ
+      image.ι (artinSchreierIdempotent Ψ')) ≫ lowerStarConstantSheafMul (Λ := Λ) AS[k] :=
+    ⟨_, rfl⟩
+  have hu (a : k) : u ≫ artinSchreierTranslationAction Λ k a = (Ψ a * Ψ' a) • u := by
+    have hm : lowerStarConstantSheafMul (Λ := Λ) AS[k] ≫ artinSchreierTranslationAction Λ k a =
+        (artinSchreierTranslationAction Λ k a ⊗ₘ artinSchreierTranslationAction Λ k a) ≫
+          lowerStarConstantSheafMul AS[k] :=
+      lowerStarConstantSheafMul_comp_lowerStarConstantSheafEndOfOver _ _ _
+    rw [hu_def, Category.assoc, hm, ← Category.assoc, tensorHom_comp_tensorHom,
+      image_ι_artinSchreierIdempotent_comp_artinSchreierTranslationAction,
+      image_ι_artinSchreierIdempotent_comp_artinSchreierTranslationAction]
+    simp only [tensorHom_def, MonoidalLinear.smul_whiskerRight, MonoidalLinear.whiskerLeft_smul,
+      Linear.smul_comp,
+      Linear.comp_smul, smul_smul, mul_comm (Ψ' a)]
+  have hue : u ≫ artinSchreierIdempotent (Ψ * Ψ') = u := by
+    simp only [artinSchreierIdempotent, Preadditive.comp_sum, Linear.comp_smul, hu, smul_smul]
+    have h (a : k) : ⅟(Fintype.card k : Λ) * (Ψ * Ψ') (-a) * (Ψ a * Ψ' a) =
+        ⅟(Fintype.card k : Λ) := by
+      have h1 : Ψ (-a) * Ψ a = 1 := by
+        rw [← AddChar.map_add_eq_mul, neg_add_cancel, AddChar.map_zero_eq_one]
+      have h1' : Ψ' (-a) * Ψ' a = 1 := by
+        rw [← AddChar.map_add_eq_mul, neg_add_cancel, AddChar.map_zero_eq_one]
+      rw [AddChar.mul_apply]
+      linear_combination (⅟(Fintype.card k : Λ) * Ψ' (-a) * Ψ' a) * h1 +
+        ⅟(Fintype.card k : Λ) * h1'
+    simp only [h, Finset.sum_const, Finset.card_univ, ← Nat.cast_smul_eq_nsmul Λ, smul_smul,
+      mul_invOf_self, one_smul]
+  set v := u ≫ factorThruImage (artinSchreierIdempotent (Ψ * Ψ'))
+  have hu' : (AS[k])^*[ModuleCat.{u + 1} Λ].map u ≫
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) AS[k]).counit.app (𝟙_ _) =
+      δ (AS[k])^*[ModuleCat.{u + 1} Λ] _ _ ≫
+        ((artinSchreierSheafUpperStarIso Ψ).hom ⊗ₘ (artinSchreierSheafUpperStarIso Ψ').hom) ≫
+          (λ_ _).hom := by
+    have hn := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) AS[k]).counit.naturality
+      (λ_ (𝟙_ (Sheaf 𝔸¹[k].smallEtaleTopology (ModuleCat.{u + 1} Λ)))).hom
+    simp only [Functor.comp_map, Functor.id_map] at hn
+    simp only [hu_def, lowerStarConstantSheafMul, Functor.map_comp, Category.assoc, hn,
+      Adjunction.map_μ_comp_counit_app_tensor_assoc, ← δ_natural_assoc,
+      artinSchreierSheafUpperStarIso_hom, tensorHom_comp_tensorHom_assoc]
+    rfl
+  have : IsIso ((AS[k])^*[ModuleCat.{u + 1} Λ].map v) := by
+    have : IsIso ((AS[k])^*[ModuleCat.{u + 1} Λ].map v ≫
+        (artinSchreierSheafUpperStarIso (Ψ * Ψ')).hom) := by
+      rw [artinSchreierSheafUpperStarIso_hom, ← Category.assoc,
+        ← CategoryTheory.Functor.map_comp, Category.assoc, image.fac, hue, hu']
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ (artinSchreierSheafUpperStarIso (Ψ * Ψ')).hom
+  have := isIso_of_isIso_upperStar_map_artinSchreierMap Λ v
+  exact ⟨asIso v⟩
 
 /-- The pullback of the Artin–Schreier sheaf along the scaling `[c] : x ↦ c x` by a unit
 `c ∈ kˣ` is the Artin–Schreier sheaf of the character `Ψ(c ·)`: `[c]^* ℒ_Ψ ≅ ℒ_{Ψ(c ·)}`.
