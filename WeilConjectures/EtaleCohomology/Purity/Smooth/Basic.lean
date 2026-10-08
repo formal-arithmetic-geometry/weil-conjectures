@@ -5,8 +5,11 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
 # Cohomological smoothness and finite-coefficient smooth purity
@@ -146,10 +149,11 @@ section Twist
 
 variable (X) in
 /-- The twist-and-shift of the constant complex is the shifted twisting object:
-`Λ_X(m)[2m] = (Λ_X ⊗ Λ_X(m))[2m] ≅ Λ_X(m)[2m]`, by the left unitor. -/
+`Λ_X(m)[2m] = (Λ_X ⊗ Λ_X(m))[2m] ≅ Λ_X(m)[2m]`, by the left unitor
+(`AlgebraicGeometry.Etale.derivedTensorLeftUnitor`). -/
 noncomputable def twistShiftConstantComplexIso (m : ℤ) :
     (twistShift Λ X m).obj (constantComplex Λ X) ≅ (tateObject Λ X m)⟦2 * m⟧ :=
-  (shiftFunctor _ (2 * m)).mapIso (λ_ (tateObject Λ X m))
+  (shiftFunctor _ (2 * m)).mapIso (derivedTensorLeftUnitor _ X (tateObject Λ X m))
 
 variable (X) in
 /-- Blueprint `def-coefficient-twists-detailed`: the twist reassociation
@@ -292,10 +296,10 @@ theorem nonempty_iso_dualizingComplex_twistShift :
       zeroSection := AffineSpace.zeroSection _ X
       zeroSection_comp_proj := AffineSpace.zeroSection_over _ X
       isClosedImmersion_zeroSection := inferInstance
-      smoothOfRelativeDimension_proj :=
-        hd ▸ (inferInstance : SmoothOfRelativeDimension (Nat.card (ULift.{u} (Fin d)))
-          (𝔸(ULift.{u} (Fin d); X) ↘ X)) }
-  have : HasCompactification N.proj := AffineSpace.hasCompactification _ X
+      smoothOfRelativeDimension_proj := by
+        have := AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin d)) X
+        rwa [hd] at this }
+  have : HasCompactification N.proj := AffineSpace.hasCompactification X
   obtain ⟨e₁⟩ := nonempty_iso_sectionInvariant_diagonal Λ (d := d) f
   obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_normalCone Λ d (pullback.fst f f)
     (pullback.diagonal f) (pullback.diagonal_fst f) N
@@ -350,9 +354,9 @@ theorem nonempty_iso_rightDerivedUpperShriek_twistShift
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K ≅
       (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
-  obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ f
+  obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f
   obtain ⟨φ⟩ := nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor Λ (d := d) f K hK
-  exact ⟨(smoothPurityIso Λ f K θ φ).symm⟩
+  exact ⟨(smoothPurityIso Λ (d := d) f K θ φ).symm⟩
 
 /-! ### Base change -/
 
@@ -402,8 +406,9 @@ noncomputable def smoothPullbackExchange (_sq : IsPullback g f' f v)
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f').obj
         ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K) :=
   (L((g)^*[ModuleCat.{u + 1} Λ])).mapIso γ.symm ≪≫
-    leftDerivedUpperStarTwistShiftBaseChangeIso Λ f d _sq.toCommSq K ≪≫ γ'
+    leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f _sq.toCommSq K ≪≫ γ'
 
+omit [Finite Λ] [IsSeparated f] [SmoothOfRelativeDimension d f] [HasInvertibleExponent Λ X] in
 /-- Blueprint `thm-pur-smooth-base-change-coherence`: Smooth base-change coherence
 
 For a cartesian square `g ≫ f = f' ≫ v` with `f` smooth of relative dimension `d`, the pullback
@@ -426,7 +431,7 @@ theorem leftDerivedUpperStar_map_comp_smoothPullbackExchange_hom (sq : IsPullbac
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f').obj
         ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) :
     (L((g)^*[ModuleCat.{u + 1} Λ])).map γ.hom ≫ (smoothPullbackExchange Λ f sq K γ γ').hom =
-      (leftDerivedUpperStarTwistShiftBaseChangeIso Λ f d sq.toCommSq K).hom ≫ γ'.hom := by
+      (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K).hom ≫ γ'.hom := by
   simp [smoothPullbackExchange, ← Functor.map_comp_assoc]
 
 end BaseChange
