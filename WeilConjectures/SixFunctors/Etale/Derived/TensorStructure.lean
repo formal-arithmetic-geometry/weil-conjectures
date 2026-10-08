@@ -13,9 +13,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 # The monoidal structure of `D(X_ét)` in terms of the derived tensor product
 
 The derived tensor product `AlgebraicGeometry.Etale.derivedTensor` is the tensor product of
-the monoidal structure on `D(X_ét)`. This file restates the associator, the left unitor,
-invertibility and perfectness of pairings in terms of `derivedTensor`, for a general coefficient
-category `A`.
+the monoidal structure on `D(X_ét)`. This file restates the associator, the left unitor, the
+symmetry, invertibility and perfectness of pairings in terms of `derivedTensor`, for a general
+coefficient category `A`.
 
 ## Implementation notes
 
@@ -37,6 +37,7 @@ involves no comparison at all.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`: the symmetry `K ⊗ᴸ M ≅ M ⊗ᴸ K`.
 - `AlgebraicGeometry.Etale.isPerfectPairing_iff`,
   `AlgebraicGeometry.Etale.isInvertible_iff_exists_derivedTensor`: the comparison with
   `CategoryTheory.MonoidalClosed.IsPerfectPairing` and `CategoryTheory.IsInvertible`.
@@ -80,6 +81,18 @@ noncomputable def derivedTensorRightUnitor
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ((derivedTensor A X).obj K).obj (𝟙_ _) ≅ K :=
   ρ_ K
+
+/-- The symmetry `K ⊗ᴸ M ≅ M ⊗ᴸ K` of the derived tensor product, natural in both variables:
+an isomorphism between `- ⊗ᴸ -` and the flipped bifunctor `(K, M) ↦ M ⊗ᴸ K`. The derived
+tensor product is symmetric monoidal (blueprint `sk-def-sf-operations`, remark
+`rem-sf-summary`); this is the existence of its symmetry.
+
+Not proved yet: the symmetry should be the derived functor of the symmetry of the tensor
+product of complexes, which carries the Koszul sign, and the monoidal structure on the
+category of complexes is not braided yet. -/
+theorem nonempty_iso_derivedTensor_flip :
+    Nonempty (derivedTensor A X ≅ (derivedTensor A X).flip) :=
+  sorry
 
 variable {A X}
 
