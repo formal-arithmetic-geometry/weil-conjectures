@@ -12,6 +12,8 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!
 # The Lie algebra of a group scheme
@@ -231,11 +233,34 @@ noncomputable def infDerivation (v : Scheme.dualNumbersOver S ⟶ G) :
       (Scheme.Modules.unitModule S)).val.Derivation' G.hom.pullbackPresheafHom where
   d {V} :=
     { toFun := fun a ↦ (v.left.app V.unop a).snd
-      map_zero' := by sorry
-      map_add' := by sorry }
-  d_mul := by sorry
-  d_map := by sorry
-  d_app := by sorry
+      map_zero' := by rw [map_zero]; rfl
+      map_add' x y := by rw [map_add]; rfl }
+  d_mul {V} a b := by
+    change (v.left.app V.unop (a * b)).snd =
+      (v.left.app V.unop a).fst * (v.left.app V.unop b).snd +
+        (v.left.app V.unop b).fst * (v.left.app V.unop a).snd
+    rw [map_mul, snd_mul, smul_eq_mul, op_smul_eq_mul, mul_comm (v.left.app V.unop a).snd]
+  d_map {X Y} f x := by
+    have h := ConcreteCategory.congr_hom (v.left.c.naturality f) x
+    exact (congr_arg snd h).trans (DualNumber.snd_mapRingHom _ _)
+  d_app {X} a := by
+    let ε₀ : (TopCat.Presheaf.pushforward CommRingCat v.left.base).obj
+        (Scheme.dualNumbersOver S).left.presheaf ⟶
+        (TopCat.Presheaf.pushforward CommRingCat v.left.base).obj
+          (Scheme.dualNumbersOver S).left.presheaf :=
+      Functor.whiskerLeft ((TopologicalSpace.Opens.map v.left.base).op ⋙ S.presheaf)
+        (CommRingCat.dualNumberFst ≫ CommRingCat.dualNumberInl)
+    have key : (G.hom.pullbackPresheafHom ≫ v.left.c) ≫ ε₀ =
+        G.hom.pullbackPresheafHom ≫ v.left.c := by
+      simp only [Scheme.Hom.pullbackPresheafHom, ← Adjunction.homEquiv_naturality_right_symm]
+      congr 1
+      ext U b
+      have hb : ((v.left ≫ G.hom).app U b).snd = 0 := by
+        rw [Scheme.Hom.congr_app (Over.w v) U]
+        exact (DualNumber.snd_mapRingHom _ _).trans (map_zero _)
+      exact TrivSqZeroExt.ext rfl hb.symm
+    have h := ConcreteCategory.congr_hom (congr_app key X) a
+    exact (congr_arg snd h).symm.trans rfl
 
 /-- The morphism `(i ≫ v)^*Ω¹_{G/S} ⟶ 𝒪_S` attached to a point `v : S[ε] ⟶ G`: the derivation
 `d_v` through the universal property of `Ω¹_{G/S}` and the adjunction `(i ≫ v)^* ⊣ (i ≫ v)_*`. -/
@@ -283,7 +308,16 @@ theorem mem_mixedPoints {z : Scheme.dualNumbers₂Over S ⟶ G} :
 
 /-- The map `μ : infPoints G → mixedPoints G` induced by `η ↦ εδ`. -/
 noncomputable def toMixed (v : infPoints G) : mixedPoints G :=
-  ⟨Scheme.dualNumbersMulOver S ≫ v.1, by sorry⟩
+  ⟨Scheme.dualNumbersMulOver S ≫ v.1, by
+    have hv := (mem_infPoints G).1 v.2
+    rw [mem_mixedPoints, Scheme.dualNumbersιεOver_comp_dualNumbersMulOver_assoc,
+      Scheme.dualNumbersιδOver_comp_dualNumbersMulOver_assoc, hv, MonObj.comp_one]
+    exact ⟨rfl, rfl⟩⟩
+
+@[simp]
+theorem coe_toMixed (v : infPoints G) :
+    (toMixed G v : Scheme.dualNumbers₂Over S ⟶ G) = Scheme.dualNumbersMulOver S ≫ v.1 :=
+  rfl
 
 /-- `η ↦ εδ` identifies the infinitesimal points with the points over `S[ε][δ]` trivial for
 `ε = 0` and for `δ = 0`: such a point has `z^♯(a) = e^♯(a) + εδ d(a)` for a derivation `d`. -/
@@ -499,7 +533,7 @@ theorem mem_tangentGroup {x : points G (DualNumber R)} :
 /-- The isomorphism `(Spec R)[ε] ⟶ Spec R[ε]` as a morphism over `Spec R`. -/
 noncomputable def dualNumbersToSpecOver :
     Scheme.dualNumbersOver (Spec (.of R)) ⟶ (Spec (.of (DualNumber R))).asOver (Spec (.of R)) :=
-  Over.homMk (Scheme.dualNumbersToSpec (.of R)) (by sorry)
+  Over.homMk (Scheme.dualNumbersToSpec (.of R)) (Scheme.dualNumbersToSpec_comp_specMap (.of R))
 
 instance : IsIso (dualNumbersToSpecOver (R := R)) := by
   sorry

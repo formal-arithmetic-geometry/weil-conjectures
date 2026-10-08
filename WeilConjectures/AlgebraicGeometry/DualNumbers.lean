@@ -101,6 +101,18 @@ def mulRingHom : R[ε] →+* (R[ε])[ε] where
   map_zero' := by sorry
   map_add' := by sorry
 
+/-- Setting `δ = 0` in `a + εδ b` gives `a`. -/
+theorem fstHom_comp_mulRingHom :
+    (fstHom R[ε] R[ε] R[ε]).toRingHom.comp mulRingHom =
+      (inlHom R R).comp (fstHom R R R).toRingHom := by
+  ext x <;> simp [mulRingHom, algebraMap_eq_inl]
+
+/-- Setting `ε = 0` in `a + εδ b` gives `a`. -/
+theorem mapRingHom_fstHom_comp_mulRingHom :
+    (mapRingHom (fstHom R R R).toRingHom).comp mulRingHom =
+      (inlHom R R).comp (fstHom R R R).toRingHom := by
+  ext x <;> simp [mulRingHom, algebraMap_eq_inl]
+
 end DualNumber
 
 namespace CommRingCat
@@ -213,6 +225,35 @@ theorem dualNumbersMul_comp_proj (X : Scheme.{u}) :
     X.dualNumbersMul ≫ X.dualNumbersProj = X.dualNumbers.dualNumbersProj ≫ X.dualNumbersProj := by
   sorry
 
+/-- Setting `δ = 0` in `η ↦ εδ`: the composite `X[ε] ⟶ X[ε][δ] ⟶ X[η]` factors through `X`. -/
+@[reassoc]
+theorem dualNumbersι_comp_dualNumbersMul (X : Scheme.{u}) :
+    X.dualNumbers.dualNumbersι ≫ X.dualNumbersMul = X.dualNumbersProj ≫ X.dualNumbersι := by
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  rw [Subsingleton.elim (eqToHom _) (𝟙 _), CategoryTheory.op_id]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  simp only [dualNumbersProj, dualNumbersι, Hom.comp_base, dualNumbersMul, Opens.map_comp_obj,
+    Hom.app, TopCat.Presheaf.comp_app, Functor.comp_obj, TopCat.Presheaf.pushforward_obj_obj,
+    Functor.whiskerLeft_app, TopCat.Presheaf.Pushforward.id_inv_app, Category.comp_id,
+    Functor.id_obj, Hom.comp_app]
+  ext1
+  exact DualNumber.fstHom_comp_mulRingHom
+
+/-- Setting `ε = 0` in `η ↦ εδ`: the composite `X[δ] ⟶ X[ε][δ] ⟶ X[η]` factors through `X`. -/
+@[reassoc]
+theorem Hom.dualNumbers_dualNumbersι_comp_dualNumbersMul (X : Scheme.{u}) :
+    X.dualNumbersι.dualNumbers ≫ X.dualNumbersMul = X.dualNumbersProj ≫ X.dualNumbersι := by
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  rw [Subsingleton.elim (eqToHom _) (𝟙 _), CategoryTheory.op_id]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  simp only [dualNumbersProj, dualNumbersι, Hom.comp_base, Hom.dualNumbers, dualNumbersMul,
+    Opens.map_comp_obj, Hom.app, TopCat.Presheaf.comp_app, Functor.comp_obj,
+    TopCat.Presheaf.pushforward_obj_obj, Functor.whiskerLeft_app,
+    TopCat.Presheaf.Pushforward.id_inv_app, Category.comp_id, Functor.whiskerRight_app,
+    Functor.id_obj, Hom.comp_app]
+  ext1
+  exact DualNumber.mapRingHom_fstHom_comp_mulRingHom
+
 /-! ### Scaling the infinitesimal -/
 
 variable (X) in
@@ -298,6 +339,24 @@ noncomputable def dualNumbersιδOver : dualNumbersOver S ⟶ dualNumbers₂Over
 /-- The map `S[ε][δ] ⟶ S[η]`, `η ↦ εδ`, as a morphism over `S`. -/
 noncomputable def dualNumbersMulOver : dualNumbers₂Over S ⟶ dualNumbersOver S :=
   Over.homMk S.dualNumbersMul (by sorry)
+
+/-- Setting `δ = 0` in `η ↦ εδ` factors through the `S`-point `ε ↦ 0` of `S[η]`. -/
+@[reassoc]
+theorem dualNumbersιεOver_comp_dualNumbersMulOver :
+    dualNumbersιεOver S ≫ dualNumbersMulOver S =
+      CartesianMonoidalCategory.toUnit (dualNumbersOver S) ≫ dualNumbersιOver S := by
+  ext1
+  simpa [dualNumbersιεOver, dualNumbersMulOver, Over.toUnit_left] using
+    S.dualNumbersι_comp_dualNumbersMul
+
+/-- Setting `ε = 0` in `η ↦ εδ` factors through the `S`-point `ε ↦ 0` of `S[η]`. -/
+@[reassoc]
+theorem dualNumbersιδOver_comp_dualNumbersMulOver :
+    dualNumbersιδOver S ≫ dualNumbersMulOver S =
+      CartesianMonoidalCategory.toUnit (dualNumbersOver S) ≫ dualNumbersιOver S := by
+  ext1
+  simpa [dualNumbersιδOver, dualNumbersMulOver, Over.toUnit_left] using
+    Hom.dualNumbers_dualNumbersι_comp_dualNumbersMul S
 
 /-- Scaling the infinitesimal by a global section `c` of `𝒪_S`, as an endomorphism of `S[ε]`
 over `S`. -/
