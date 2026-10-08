@@ -344,7 +344,8 @@ into multiplication by their images in `Γ(X, ⊤)`
 (`AlgebraicGeometry.Scheme.Modules.higherDirectImage_map_smulHom`).
 
 Over `T = Spec κ` for a field `κ`, this is the identification of the `q`-th direct image to a
-point with `H^q` as `κ`-vector spaces, used in the local model of the proof of `thm-pc-semicontinuity-base-change`. -/
+point with `H^q` as `κ`-vector spaces, used in the local model of the proof of
+`thm-pc-semicontinuity-base-change`. -/
 theorem exists_bijective_semilinearMap_sections_higherDirectImage_H [IsAffine T] [QuasiCompact f]
     [IsSeparated f] [HasInjectiveResolutions X.Modules]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
