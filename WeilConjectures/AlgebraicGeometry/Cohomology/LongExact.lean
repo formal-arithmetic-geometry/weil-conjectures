@@ -44,20 +44,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}} {S : ShortComplex X.Modules}
 
-variable (X) in
-/-- The forgetful functor from `𝒪_X`-modules to abelian sheaves on `X`. -/
-noncomputable abbrev toAb : X.Modules ⥤ Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} :=
-  SheafOfModules.toSheaf.{u} X.ringCatSheaf
-
-instance : (toAb X).PreservesZeroMorphisms :=
-  inferInstanceAs (SheafOfModules.toSheaf.{u} X.ringCatSheaf).PreservesZeroMorphisms
-
-instance : PreservesFiniteLimits (toAb X) :=
-  inferInstanceAs (PreservesFiniteLimits (SheafOfModules.toSheaf.{u} X.ringCatSheaf))
-
-instance : PreservesFiniteColimits (toAb X) :=
-  inferInstanceAs (PreservesFiniteColimits (SheafOfModules.toSheaf.{u} X.ringCatSheaf))
-
 /-- The image of a short exact sequence of `𝒪_X`-modules among abelian sheaves is short exact,
 since `SheafOfModules.toSheaf` is exact. -/
 lemma shortExact_map_toSheaf (hS : S.ShortExact) : (S.map (toAb X)).ShortExact :=

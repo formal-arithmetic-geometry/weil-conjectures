@@ -185,7 +185,8 @@ theorem IdealSheafData.nonempty_cokernel_whiskerRight_iso (J : X.IdealSheafData)
     [M.IsInvertible] :
     Nonempty (cokernel (J.toModulesι ▷ M) ≅
       (Modules.pushforward J.subschemeι).obj ((Modules.pullback J.subschemeι).obj M)) := by
-  let F := (Modules.tensorRightEquivalence M).functor
+  let F := (BraidedCategory.tensorRightEquivalence M Mᵛ
+    (Modules.nonempty_tensorObj_dual_iso_unit M).some).functor
   let e₁ : cokernel J.toModulesι ≅
       (Modules.pushforward J.subschemeι).obj (𝟙_ J.subscheme.Modules) :=
     (colimit.isColimit _).coconePointUniqueUpToIso
@@ -1040,10 +1041,11 @@ theorem finrankΓ_subschemeι_comap_ker_fieldPoints (x : (X ↘ Spec (.of k)).fi
 
 /-- **A section not vanishing at a point survives restriction to it.** Let `ℒ` be an invertible
 sheaf on `X_K`, let `s : 𝒪_{X_K} ⟶ ℒ` be a global section and let `x` be a `k`-rational point
-of `X` such that `s` does not vanish at `x_K`. Then the global section `s` of `ℒ` has non-zero
+of `X` such that `s` does not vanish at `x_K`. Then some global section `z` of `ℒ` has non-zero
 image in `H⁰(X_K, ℒ|_{x_K})`, where `ℒ|_{x_K}` is the cokernel of `𝓘 ⊗ ℒ ⟶ 𝒪_{X_K} ⊗ ℒ` for the
-ideal sheaf `𝓘 = (ker x) · 𝒪_{X_K}` of `x_K`: its value `s(x_K)` in the fibre of `ℒ` is
-non-zero. -/
+ideal sheaf `𝓘 = (ker x) · 𝒪_{X_K}` of `x_K`.
+
+One can take `z` to be the class of `s`: its value `s(x_K)` in the fibre of `ℒ` is non-zero. -/
 theorem exists_map_cokernel_π_ne_zero
     (L : (Limits.pullback (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules) [L.IsInvertible]
