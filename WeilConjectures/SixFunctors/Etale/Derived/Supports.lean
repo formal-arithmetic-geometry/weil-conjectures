@@ -126,7 +126,7 @@ lemma subsingleton_hom_rightDerivedLowerStar_of_isZero (j : U ⟶ X)
 omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] in
 /-- Every object of the derived category of étale sheaves on an empty scheme is zero. -/
-lemma isZero_of_isEmpty (E : Scheme.{u}) [IsEmpty E]
+lemma isZero_derivedCategory_of_isEmpty (E : Scheme.{u}) [IsEmpty E]
     (K : DerivedCategory (Sheaf E.smallEtaleTopology A)) : IsZero K :=
   DerivedCategory.isZero_of_forall_isZero (Scheme.Etale.isZero_sheaf_of_isEmpty ·) K
 
@@ -231,7 +231,7 @@ theorem existsUnique_comp_counit_of_range_eq_univ (i : Z ⟶ U) [IsClosedImmersi
       ψ ≫ (rightDerivedUpperShriekAdjunction A i).counit.app L = φ := by
   have : IsEmpty i.openComplement.toScheme := ⟨fun x ↦ x.2 (hi ▸ Set.mem_univ _)⟩
   exact existsUnique_comp_counit_of_isZero A i i.openComplement.ι
-    i.range_eq_compl_range_openComplement_ι (isZero_of_isEmpty A _ _) φ
+    i.range_eq_compl_range_openComplement_ι (isZero_derivedCategory_of_isEmpty A _ _) φ
 
 /-- The lift `K ⟶ Ri_! Ri^! L` of a morphism `φ : K ⟶ L` along a surjective closed immersion
 `i`, through the counit of `Ri_! ⊣ Ri^!`.
@@ -378,7 +378,7 @@ theorem existsUnique_supportedRestriction (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' �
   rw [Set.disjoint_left]
   rintro _ ⟨z, rfl⟩ ⟨x, hx⟩
   apply x.2
-  rw [hg.range_snd]
+  rw [Scheme.range_snd_of_isPullback hg]
   exact ⟨z, hx.symm⟩
 
 /-- The *restriction of supports* `Le^* (Ri_! Ri^! L) ⟶ Ri'_! Ri'^! L'` along `e : U ⟶ X`, for

@@ -522,6 +522,7 @@ public import WeilConjectures.Mathlib.Algebra.Exact.Basic
 public import WeilConjectures.Mathlib.Algebra.FiveLemma
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map

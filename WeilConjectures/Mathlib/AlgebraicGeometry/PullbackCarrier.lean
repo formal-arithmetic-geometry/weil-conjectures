@@ -17,7 +17,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPu
 In a pullback square of schemes whose bottom is an open immersion, the top is an open
 immersion with range the preimage of the range of the bottom. In any pullback square the
 range of a projection is the preimage of the range of the opposite side
-(`CategoryTheory.IsPullback.range_snd`).
+(`AlgebraicGeometry.Scheme.range_snd_of_isPullback`).
 
 We also show that being a cartesian square is local on the target
 (`AlgebraicGeometry.isPullback_of_iSup_opensRange_eq_top`, with the two-chart version
@@ -71,7 +71,7 @@ lemma _root_.CategoryTheory.IsPullback.opensRange_fst [IsOpenImmersion g]
 
 /-- In a pullback square of schemes, the range of the projection `snd` is the preimage under
 `g` of the range of `f`. -/
-lemma _root_.CategoryTheory.IsPullback.range_snd (h : IsPullback fst snd f g) :
+lemma Scheme.range_snd_of_isPullback (h : IsPullback fst snd f g) :
     Set.range snd = g ⁻¹' Set.range f := by
   refine subset_antisymm ?_ fun y ⟨x, hx⟩ ↦ ?_
   · rintro _ ⟨p, rfl⟩
