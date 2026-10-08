@@ -60,7 +60,8 @@ and geometric points detect vanishing. A complex vanishing off the origin is the
 its restriction to the origin (supported localization), and that restriction is
 `Rπ_! Λ [r] ≅ Λ(-r)[-2r][r]` by compact-support base change along the zero section and
 `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_affineSpace`), which needs `Λ` finite with exponent invertible on `S`. The twist `(-r)` is moved onto the
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_affineSpace`), which needs
+`Λ` finite with exponent invertible on `S`. The twist `(-r)` is moved onto the
 skyscraper by the projection formula for the zero section. The transform of the skyscraper is
 computed by proper base change of `δ₀` along `p₁`, which gives the constant sheaf on the slice
 `s : {0} ×_S 𝔸(n; S) ⟶ 𝔸(n; S) ×_S 𝔸(n; S)`, the projection formula for the closed immersion
