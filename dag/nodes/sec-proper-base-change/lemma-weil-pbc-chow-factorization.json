@@ -1,0 +1,120 @@
+{
+ "id": "lemma-weil-pbc-chow-factorization",
+ "kind": "statement",
+ "title": "Chow and projective factorization",
+ "statement": "Let $f:X\\to Y$ be a proper [def-weil-pbc-scheme-conventions] morphism with\n$Y$ affine. There exist a proper surjection $\\pi:\\widetilde X\\to X$, an\ninteger $n\\geq0$, and a closed immersion\n\n$$\n i:\\widetilde X\\hookrightarrow\\mathbf P^n_Y\n$$\n\nwith $f\\circ\\pi=p\\circ i$, where $p:\\mathbf P^n_Y\\to Y$ is the structure\nmorphism. No noetherian or finite-presentation hypothesis is imposed on $Y$ or\n$f$. The assertion is stable under base change on $Y$: for any morphism\n$Y'\\to Y$ the pulled-back data are such data for $X\\times_YY'\\to Y'$.\n\n(For $Y$ noetherian this is also [cor-chow-lemma-proper], which moreover makes\n$\\pi$ an isomorphism over a dense open subscheme of $X$.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lemma-weil-pbc-chow-factorization.md",
+  "place": "node lemma-weil-pbc-chow-factorization, order 1064"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "cor-chow-lemma-proper"
+ ],
+ "proof": [
+  {
+   "text": "Here $\\mathbf P^n_S$ denotes $\\mathbf P(\\{0,\\dots,n\\};S)$ of\n[def-nagata-projective-space-base-change]. Since it is defined as\n$S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$, associativity\nof fibre products gives, for every morphism $S'\\to S$, a canonical isomorphism\n$\\mathbf P^n_S\\times_SS'=\\mathbf P^n_{S'}$ over $S'$; and\n$\\mathbf P^n_S\\to S$ is proper, in particular separated, by\n[lemma-nagata-projective-space-base-change-proper]. We also use freely that\nproper morphisms, surjective morphisms, immersions and closed immersions are\nstable under base change (for properness this is\n[lem-weil-pbc-proper-base-change]), and that a closed immersion followed by an\nimmersion is an immersion.",
+   "uses": [
+    "def-nagata-projective-space-base-change",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 1: a separated finitely presented envelope.* The scheme $Y$ is affine,\nhence quasi-compact and quasi-separated, and $f$ is separated and of finite\ntype. By [prop-nagata-finite-type-closed-in-fp] the envelope\n$\\mathsf{Env}_{\\mathrm{fp}}(X/Y)=(X^{\\mathrm{fp}},i^{\\mathrm{fp}})$ of\n[def-nagata-finite-type-closed-in-fp] consists of a separated $Y$-scheme\n$g:X^{\\mathrm{fp}}\\to Y$ of finite presentation and a closed immersion\n$i^{\\mathrm{fp}}:X\\hookrightarrow X^{\\mathrm{fp}}$ over $Y$, so\n$g\\circ i^{\\mathrm{fp}}=f$. (The scheme $X^{\\mathrm{fp}}$ need not be proper\nover $Y$; only $X$ is.)",
+   "uses": [
+    "prop-nagata-finite-type-closed-in-fp",
+    "def-nagata-finite-type-closed-in-fp"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: a noetherian model of the envelope.* Apply the descended model of\n[def-nagata-final-descended-model] to the separated finitely presented\nmorphism $g$. By [lemma-nagata-final-descended-model] this gives a noetherian\nscheme $Y_0$ (a member of the noetherian approximation system of $Y$), a\nmorphism $Y\\to Y_0$, a separated morphism of finite presentation\n$g_0:X^{\\mathrm{fp}}_0\\to Y_0$, and an isomorphism of $Y$-schemes\n\n$$\n \\epsilon:X^{\\mathrm{fp}}_0\\times_{Y_0}Y\\xrightarrow{\\ \\sim\\ }X^{\\mathrm{fp}}.\n$$",
+   "uses": [
+    "def-nagata-final-descended-model",
+    "lemma-nagata-final-descended-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3: Chow's lemma on the model.* The morphism $g_0$ is separated and of\nfinite type over the noetherian scheme $Y_0$, so [thm-chow-lemma] supplies an\ninteger $n\\geq0$, a proper surjective morphism\n$\\pi_0:X'_0\\to X^{\\mathrm{fp}}_0$ and an immersion\n$i_0:X'_0\\to\\mathbf P^n_{Y_0}$ of $Y_0$-schemes, i.e.\n$g_0\\circ\\pi_0=p_0\\circ i_0$ with $p_0:\\mathbf P^n_{Y_0}\\to Y_0$.",
+   "uses": [
+    "thm-chow-lemma"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4: base change to $Y$.* Put $X'':=X'_0\\times_{Y_0}Y$ and let\n$\\pi'':=\\epsilon\\circ(\\pi_0\\times_{Y_0}\\operatorname{id}_Y):X''\\to\nX^{\\mathrm{fp}}$ and\n$i'':=i_0\\times_{Y_0}\\operatorname{id}_Y:X''\\to\\mathbf P^n_{Y_0}\\times_{Y_0}Y\n=\\mathbf P^n_Y$. Then $\\pi''$ is proper and surjective, $i''$ is an\nimmersion, and both are morphisms over $Y$, so that\n$g\\circ\\pi''=p\\circ i''$ (base change of the identity of Step 3).",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 5: restriction to $X$.* Define $\\widetilde X$ as the preimage of the\nclosed subscheme $X$ under $\\pi''$:\n\n$$\n \\widetilde X:=X''\\times_{X^{\\mathrm{fp}}}X,\n \\qquad \\pi:=\\operatorname{pr}_2:\\widetilde X\\to X,\n \\qquad k:=\\operatorname{pr}_1:\\widetilde X\\hookrightarrow X'',\n$$\n\nthe fibre product being formed with $\\pi''$ and $i^{\\mathrm{fp}}$. Then $\\pi$\nis the base change of $\\pi''$ along $i^{\\mathrm{fp}}$, hence proper and\nsurjective, and $k$ is the base change of the closed immersion\n$i^{\\mathrm{fp}}$ along $\\pi''$, hence a closed immersion. Set\n$i:=i''\\circ k:\\widetilde X\\to\\mathbf P^n_Y$, an immersion. It is a morphism\nover $Y$ with\n\n$$\n p\\circ i=p\\circ i''\\circ k=g\\circ\\pi''\\circ k\n =g\\circ i^{\\mathrm{fp}}\\circ\\pi=f\\circ\\pi,\n$$\n\nusing the cartesian square $\\pi''\\circ k=i^{\\mathrm{fp}}\\circ\\pi$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 6: $i$ is a closed immersion.* The composite $f\\circ\\pi$ is proper by\n[lem-weil-pbc-proper-composition], since $\\pi$ and $f$ are proper. So\n$\\widetilde X$ is proper over $Y$, and $i$ is a $Y$-morphism to the separated\n$Y$-scheme $\\mathbf P^n_Y$; by [lem-weil-pbc-proper-to-separated] the morphism\n$i$ is proper. A proper immersion is a closed immersion\n[lem-weil-pbc-proper-immersion-closed]. Hence $(\\pi,n,i)$ has all the required\nproperties.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 7: base-change stability.* Given such data $(\\pi,n,i)$ for $f$ and any\nmorphism $Y'\\to Y$, the base changes\n$\\pi\\times_Y Y':\\widetilde X\\times_YY'\\to X\\times_YY'$ and\n$i\\times_YY':\\widetilde X\\times_YY'\\to\\mathbf P^n_Y\\times_YY'=\\mathbf\nP^n_{Y'}$ are a proper surjection and a closed immersion, and the identity\n$f\\circ\\pi=p\\circ i$ of morphisms over $Y$ base changes to the corresponding\nidentity over $Y'$. $\\square$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "## Remark\n\nThe proof never descends $X$ itself: when $f$ is not of finite presentation\nno descent $X=X_0\\times_{Y_0}Y$ need exist. Only the separated finitely presented\nenvelope $X^{\\mathrm{fp}}$ is descended, Chow's lemma is applied to its\nnoetherian model, which is merely separated of finite type, and properness of\nthe resulting closed immersion is recovered on $X$ in Step 6.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-proper-base-change",
+  "prop-nagata-finite-type-closed-in-fp",
+  "def-nagata-finite-type-closed-in-fp",
+  "def-nagata-final-descended-model",
+  "lemma-nagata-final-descended-model",
+  "thm-chow-lemma",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-proper-immersion-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lemma-weil-pbc-chow-factorization.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "embedded_statements",
+  "cites_outside_uses"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1064,
+ "blueprint_uses": [
+  "def-nagata-final-descended-model",
+  "def-nagata-finite-type-closed-in-fp",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-proper-to-separated",
+  "lemma-nagata-final-descended-model",
+  "lemma-nagata-projective-space-base-change-proper",
+  "prop-nagata-finite-type-closed-in-fp",
+  "thm-chow-lemma"
+ ],
+ "proof_split_by": "labels"
+}

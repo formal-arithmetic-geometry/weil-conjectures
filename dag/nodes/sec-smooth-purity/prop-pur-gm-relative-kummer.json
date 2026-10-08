@@ -1,0 +1,114 @@
+{
+ "id": "prop-pur-gm-relative-kummer",
+ "kind": "statement",
+ "title": "The affine line and the punctured line over a base",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $\\Lambda=A=A_{E,n}$, let $Y$ be a separated finite-type $k$-scheme,\nand use the affine-line datum of [def-pur-affine-line-datum]: the\nprojection $p:\\mathbf A^1_Y\\to Y$, the zero section $s$, the open\ncomplement $j:\\mathbf G_{m,Y}\\hookrightarrow\\mathbf A^1_Y$, the composite\n$\\pi=pj:\\mathbf G_{m,Y}\\to Y$, the finite-level twist\n$\\Lambda(1)=\\mu_{\\ell^N}\\otimes_{\\mathbf Z/\\ell^N}A$, and the Kummer class\n$\\kappa(t)\\in H^1(\\mathbf G_{m,Y},\\Lambda(1))$ of the coordinate. Write\n$R^m\\pi_*=\\mathcal H^m R\\pi_*$ for the cohomology sheaves of\n[def-weil-derived-cohomology-sheaves]. Then:\n\n1. *(Acyclicity of the affine line.)* The units\n$\\Lambda_Y\\to Rp_*\\Lambda_{\\mathbf A^1_Y}$ and\n$\\Lambda_Y(1)\\to Rp_*\\Lambda_{\\mathbf A^1_Y}(1)$ are isomorphisms; so\n$R^mp_*\\Lambda(1)=0$ for $m>0$.\n1. *(The Kummer generator.)* The unit\n$\\Lambda_Y(1)\\to R^0\\pi_*\\Lambda(1)$ — equivalently, restriction along $j$\ncomposed with the pullback $p^*$ — is an isomorphism, and the map\n$$\n\\Lambda_Y\\longrightarrow R^1\\pi_*\\Lambda(1),\\qquad 1\\longmapsto\\kappa(t),\n$$\nsending $1$ to the image of $\\kappa(t)$ under the edge map\n$H^1(\\mathbf G_{m,Y},\\Lambda(1))=H^1(Y,R\\pi_*\\Lambda(1))\\to\n\\Gamma(Y,R^1\\pi_*\\Lambda(1))$, is an isomorphism: $R^1\\pi_*\\Lambda(1)$\nis free of rank one on $\\kappa(t)$.\n1. *(Vanishing above degree one.)* $R^m\\pi_*\\Lambda(1)=0$ for $m\\geq2$.\n1. *(Base change.)* For every morphism $g:Y'\\to Y$ of separated\nfinite-type $k$-schemes, with base changes\n$p':\\mathbf A^1_{Y'}\\to Y'$, $\\pi':\\mathbf G_{m,Y'}\\to Y'$ and\n$g':\\mathbf G_{m,Y'}\\to\\mathbf G_{m,Y}$, the pullback of the Kummer class\nis the Kummer class, $g'^*\\kappa(t)=\\kappa(t')$, and the base-change\nmorphisms\n$$\ng^*Rp_*\\Lambda(1)\\to Rp'_*\\Lambda(1),\\qquad\ng^*R\\pi_*\\Lambda(1)\\to R\\pi'_*\\Lambda(1)\n$$\nare isomorphisms.\n\nIn particular, taking $Y'=\\bar y$ a geometric point, (1)–(3) are\nequivalent to the corresponding statements for $\\mathbf A^1$ and\n$\\mathbf G_m$ over an algebraically closed field, which are\n[thm-pur-kummer-affine-line].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.md",
+  "place": "node prop-pur-gm-relative-kummer, order 1935"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-affine-line-datum",
+  "def-weil-derived-cohomology-sheaves",
+  "thm-pur-kummer-affine-line"
+ ],
+ "proof": [
+  {
+   "text": "We follow the reduction to a geometric fibre by smooth base change;\nnothing below uses the exceptional inverse image of the zero section.\nThroughout, $\\Lambda(1)_{\\mathbf A^1_Y}=p^*\\Lambda_Y(1)$ and\n$\\Lambda(1)_{\\mathbf G_{m,Y}}=\\pi^*\\Lambda_Y(1)$, since $\\mu_{\\ell^N}$ and\nthe coefficient extension by $A$ are compatible with pullback\n([lem-pur-finite-kummer-level], [def-coefficient-twists-detailed]).\nSince the base field $k$ of [def-pur-conventions] is algebraically\nclosed, a primitive $\\ell^N$-th root of unity $\\zeta\\in k$ trivializes\n$\\mu_{\\ell^N}$, hence $\\Lambda(1)\\cong\\Lambda$, on every $k$-scheme,\ncompatibly with pullback. We compute on the small etale site; the\ncomparison inverse image commutes with the derived direct images of\n[def-weil-derived-direct-image] ([prop-weil-pbc-comparison-direct-image])\nand is fully faithful on bounded-below complexes\n([thm-weil-pbc-site-comparison]), so the units, the classes and the\nisomorphisms below transport to the pro-etale site.",
+   "uses": [
+    "lem-pur-finite-kummer-level",
+    "def-coefficient-twists-detailed",
+    "def-pur-conventions",
+    "def-weil-derived-direct-image",
+    "prop-weil-pbc-comparison-direct-image",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 1: clause (1). The untwisted statement is\n[lem-pur-a1-direct-image] with $B=Y$. Under the trivialization by\n$\\zeta$ the twisted unit $\\Lambda_Y(1)\\to Rp_*p^*\\Lambda_Y(1)$ of\n[fix-prop-adjunctions] is the untwisted unit\n$\\Lambda_Y\\to Rp_*\\Lambda_{\\mathbf A^1_Y}$, hence an isomorphism; so\n$R^mp_*\\Lambda(1)=0$ for $m>0$.",
+   "uses": [
+    "lem-pur-a1-direct-image",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 2: clauses (2) and (3), on stalks. Let $\\bar y$ be a geometric\npoint of $Y$ and $S'=Y_{(\\bar y)}$ the strict henselization, a\n$k$-scheme. As $\\pi$ is quasi-compact and quasi-separated and\n$\\mathbf G_{m,Y}\\times_YS'=\\mathbf G_{m,S'}$, the stalk formula\n[prop-weil-pbc-strict-henselization-stalk-formula] gives\n$$\n(R\\pi_*\\Lambda(1))_{\\bar y}\\simeq R\\Gamma(\\mathbf G_{m,S'},\\Lambda(1)),\n$$\ncompatibly with the unit (on the left) and pullback of constants along\n$e:\\mathbf G_{m,S'}\\to S'$ (on the right), and compatibly with global\nclasses: the stalk at $\\bar y$ of the section of\n$R^1\\pi_*\\Lambda(1)$ defined by a class in\n$H^1(\\mathbf G_{m,Y},\\Lambda(1))$ is its restriction to\n$\\mathbf G_{m,S'}$.\nNow $\\mathbf G_{m,S'}=\\mathbf G_{m,k}\\times_kS'$. The smooth base change\ntheorem [sbc-thm-smooth-base-change], for the square with smooth side\n$f:\\mathbf G_{m,k}\\to\\operatorname{Spec}k$, affine side\n$g:S'\\to\\operatorname{Spec}k$, projections\n$h:\\mathbf G_{m,S'}\\to\\mathbf G_{m,k}$ and $e$, and the constant sheaf\n$\\Lambda(1)_{S'}$ (torsion prime to $p$), gives\n$f^{-1}R^qg_*\\Lambda(1)\\cong R^qh_*\\Lambda(1)$ for all $q$. As $S'$ is\nstrictly henselian, $R^qg_*\\Lambda(1)=H^q(S',\\Lambda(1))$ is\n$\\Lambda(1)(k)$ for $q=0$ and $0$ for $q>0$\n([sbc-lem-strict-henselian-constant-cohomology]); so\n$\\Lambda(1)_{\\mathbf G_{m,k}}\\to Rh_*\\Lambda(1)_{\\mathbf G_{m,S'}}$ is an\nisomorphism and, by the composition of derived direct images\n[lem-weil-derived-direct-image-composition] (item (5)), pullback along\n$h$ is an isomorphism\n$$\nh^*:R\\Gamma(\\mathbf G_{m,k},\\Lambda(1))\\xrightarrow{\\ \\sim\\ }\nR\\Gamma(\\mathbf G_{m,S'},\\Lambda(1)).\n$$\nBy [thm-pur-kummer-affine-line](2),(3), the left side has $H^0=A$\n(the constants), $H^1$ free of rank one on the Kummer class of the\ncoordinate of $\\mathbf G_{m,k}$, and no other cohomology. The Kummer\nboundary and the coefficient extension of [def-pur-affine-line-datum]\ncommute with pullback, and the coordinate $t$ restricts to the\ncoordinate on $\\mathbf G_{m,S'}$ and on $\\mathbf G_{m,k}$; so the\nrestriction of $\\kappa(t)$ to $\\mathbf G_{m,S'}$ is $h^*$ of the Kummer\nclass of the coordinate of $\\mathbf G_{m,k}$. Consequently, at every\ngeometric point $\\bar y$ (writing $R^m\\pi_*$ for the cohomology\nsheaves of [def-weil-derived-cohomology-sheaves]):\n$(R^m\\pi_*\\Lambda(1))_{\\bar y}=0$ for $m\\geq2$; the stalk of the unit\n$\\Lambda_Y(1)\\to R^0\\pi_*\\Lambda(1)$ is an isomorphism (constants go to\nconstants); and the stalk of $\\Lambda_Y\\to R^1\\pi_*\\Lambda(1)$,\n$1\\mapsto\\kappa(t)$, sends $1$ to a generator of a free rank-one\nmodule, hence is an isomorphism. Geometric stalks being conservative\n([lemma-weil-pbc-geometric-stalk-conservative]), this proves (3) and both\nhalves of (2). By [fix-prop-adjunctions](3) the unit of $\\pi=pj$ is\nthe unit of $p$ followed by $Rp_*$ of the unit of $j$, i.e. by\nrestriction along $j$; with Step 1 this identifies the unit\n$\\Lambda_Y(1)\\to R^0\\pi_*\\Lambda(1)$ with restriction along $j$\ncomposed with $p^*$, as stated.",
+   "uses": [
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "sbc-thm-smooth-base-change",
+    "sbc-lem-strict-henselian-constant-cohomology",
+    "lem-weil-derived-direct-image-composition",
+    "thm-pur-kummer-affine-line",
+    "def-pur-affine-line-datum",
+    "def-weil-derived-cohomology-sheaves",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 3: clause (4). The Kummer sequence of\n[def-pur-affine-line-datum], its boundary map, and the coefficient\nextension by $A$ are compatible with pullback along\n$g':\\mathbf G_{m,Y'}\\to\\mathbf G_{m,Y}$, and $g'^*t=t'$ is the coordinate\nof $\\mathbf G_{m,Y'}$; hence $g'^*\\kappa(t)=\\kappa(t')$. The base-change\nmorphism $g^*Rf_*\\to Rf'_*g'^*$ (for $f\\in\\{p,\\pi\\}$) is the mate of the\nequality $f'^*g^*=g'^*f^*$ under the adjunctions of\n[fix-prop-adjunctions], and it is compatible with the units, i.e. its\ncomposite with $g^*$ of the unit $\\Lambda_Y(1)\\to Rf_*\\Lambda(1)$ is the\nunit $\\Lambda_{Y'}(1)\\to Rf'_*\\Lambda(1)$; it is also compatible with\npullback of cohomology classes, so on $\\mathcal H^1$ for $f=\\pi$ it\nsends $g^*$ of the section $\\kappa(t)$ to the section $g'^*\\kappa(t)=\n\\kappa(t')$. By (1)–(3) over $Y$ and over $Y'$, both sides of each\nbase-change morphism have cohomology sheaves only in degrees $0$ (for\n$p$) resp. $0$ and $1$ (for $\\pi$); in degree $0$ they are\n$\\Lambda_{Y'}(1)$ via the units, and in degree $1$ they are free of rank\none on $g^*\\kappa(t)$ resp. $\\kappa(t')$. The morphism therefore induces\nisomorphisms on all cohomology sheaves ($g^*$ being exact), and is an\nisomorphism. For $Y'=\\bar y$ a geometric point with algebraically closed\nfield, $Rf'_*$ is the cohomology of $\\mathbf A^1_{\\bar y}$ resp.\n$\\mathbf G_{m,\\bar y}$, and the resulting stalk statements are exactly\nthose of [thm-pur-kummer-affine-line].",
+   "uses": [
+    "def-pur-affine-line-datum",
+    "fix-prop-adjunctions",
+    "thm-pur-kummer-affine-line"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-kummer-level",
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-weil-derived-direct-image",
+  "prop-weil-pbc-comparison-direct-image",
+  "thm-weil-pbc-site-comparison",
+  "lem-pur-a1-direct-image",
+  "fix-prop-adjunctions",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "sbc-thm-smooth-base-change",
+  "sbc-lem-strict-henselian-constant-cohomology",
+  "lem-weil-derived-direct-image-composition",
+  "thm-pur-kummer-affine-line",
+  "def-pur-affine-line-datum",
+  "def-weil-derived-cohomology-sheaves",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1935,
+ "blueprint_uses": [
+  "def-coefficient-twists-detailed",
+  "def-pur-affine-line-datum",
+  "def-pur-conventions",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-direct-image",
+  "fix-prop-adjunctions",
+  "lem-pur-a1-direct-image",
+  "lem-pur-finite-kummer-level",
+  "lem-weil-derived-direct-image-composition",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "sbc-lem-strict-henselian-constant-cohomology",
+  "sbc-thm-smooth-base-change",
+  "thm-pur-kummer-affine-line",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "paragraphs"
+}

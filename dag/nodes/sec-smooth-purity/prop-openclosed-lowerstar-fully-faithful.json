@@ -1,0 +1,95 @@
+{
+ "id": "prop-openclosed-lowerstar-fully-faithful",
+ "kind": "statement",
+ "title": "$i_*$ is fully faithful",
+ "statement": "Let $i\\colon Z\\to X$ be a closed immersion. Then the counit\n\n$$\n\\varepsilon\\colon i^*i_*\\Longrightarrow\\mathrm{id}_{\\shv{\\et Z}}\n$$\n\nis an isomorphism; equivalently, $i_*$ is fully faithful.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-openclosed-lowerstar-fully-faithful.md",
+  "place": "node prop-openclosed-lowerstar-fully-faithful, order 1522"
+ },
+ "stmt_deps": [
+  "def-kun-separably-closed"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\mathcal H\\in\\shv{\\et Z}$. By [lemma-openclosed-point-ulift] it is\nenough to show that $\\varepsilon_{\\mathcal H}$ is an isomorphism on the stalk\nat every geometric point $\\bar z$ of $Z$. So fix $\\bar z$ and write\n$\\Phi_{\\bar z}$ for its stalk functor on $\\shv{\\et Z}$; recall that\n$\\Phi_{\\bar z}$ is left adjoint to the skyscraper functor\n$M\\mapsto\\mathrm{sky}_{\\bar z}(M)$ of $\\bar z$.\n\nThe stalk of $i^*i_*\\mathcal H$ is never computed. Instead:",
+   "uses": [
+    "lemma-openclosed-point-ulift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 1.* A morphism is invertible as soon as precomposition with it is\nbijective on morphisms into every object $M$ of $\\mathcal A$. So it suffices\nto show that\n\n$$\n(-)\\circ\\Phi_{\\bar z}(\\varepsilon_{\\mathcal H})\\colon\n\\Hom(\\Phi_{\\bar z}(\\mathcal H),M)\\to\n\\Hom(\\Phi_{\\bar z}(i^*i_*\\mathcal H),M)\n$$\n\nis bijective for every $M$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 2.* The composite of $i^*\\dashv i_*$ with\n$\\Phi_{\\bar z}\\dashv\\mathrm{sky}_{\\bar z}$ is an adjunction\n$i^*\\circ\\Phi_{\\bar z}\\dashv\\mathrm{sky}_{\\bar z}\\circ\\,i_*$ (note\n$\\Phi_{\\bar z}(i^*-)$ is the source of the map in Step 1 read at\n$i_*\\mathcal H$). Transposing along it turns precomposition with\n$\\Phi_{\\bar z}(\\varepsilon_{\\mathcal H})$ into\n\n$$\ni_*\\colon\n\\Hom(\\mathcal H,\\mathrm{sky}_{\\bar z}(M))\\to\n\\Hom(i_*\\mathcal H,i_*\\mathrm{sky}_{\\bar z}(M));\n$$\n\nthis is a formal identity of the two adjunctions, the triangle identity of\n$i^*\\dashv i_*$ read through the naturality of the unit of\n$\\Phi_{\\bar z}\\dashv\\mathrm{sky}_{\\bar z}$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 3.* Pushing forward a skyscraper along $i_*$ gives a skyscraper:\n$i_*\\mathrm{sky}_{\\bar z}(M)$ is, on the nose, the skyscraper sheaf at the\npoint $i\\circ\\bar z$ of $\\et X$ obtained from $\\bar z$ by base change.\nTherefore the map of Step 2 is, after transposing back along\n$\\Phi_{i\\circ\\bar z}\\dashv\\mathrm{sky}_{i\\circ\\bar z}$, precomposition with\nthe stalk comparison\n\n$$\n(i_*\\mathcal H)_{i\\circ\\bar z}\\xrightarrow{\\ \\sim\\ }\\mathcal H_{\\bar z}\n$$\n\nof [lemma-openclosed-stalk-lowerstar], which is an isomorphism.\nPrecomposition with an isomorphism is bijective, so the map of Step 1 is\nbijective and $(\\varepsilon_{\\mathcal H})_{\\bar z}$ is an isomorphism.\n\nHence $\\varepsilon_{\\mathcal H}$ is an isomorphism for every $\\mathcal H$,\nthat is, $\\varepsilon$ is an isomorphism and $i_*$ is fully faithful.\n\nThe only step that is not formal is Step 3, and there the only thing to check\nby hand is the compatibility of the stalk comparison with the canonical maps\nfrom the sections over a pointed étale neighbourhood; that is where the\ninitiality of [lemma-openclosed-stalk-lowerstar] enters.",
+   "uses": [
+    "lemma-openclosed-stalk-lowerstar"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-openclosed-point-ulift",
+  "lemma-openclosed-stalk-lowerstar",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-openclosed-lowerstar-fully-faithful.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "long_proof_few_deps",
+  "lean_multiple"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1522,
+ "blueprint_uses": [
+  "def-kun-separably-closed",
+  "lemma-openclosed-point-ulift",
+  "lemma-openclosed-stalk-lowerstar",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion",
+  "declaration": "AlgebraicGeometry.Etale.fullyFaithfulLowerStar",
+  "branch": "slopmaster2",
+  "line": 249,
+  "sorry_free": true,
+  "body_lines": 1,
+  "others": [
+   {
+    "module": "WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion",
+    "declaration": "AlgebraicGeometry.Etale.isIso_upperStarLowerStarAdjunction_counit",
+    "branch": "slopmaster2",
+    "line": 243,
+    "sorry_free": true,
+    "body_lines": 1
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.fullyFaithfulLowerStar",
+  "AlgebraicGeometry.Etale.isIso_upperStarLowerStarAdjunction_counit"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-kun-separably-closed",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_split_by": "labels"
+}

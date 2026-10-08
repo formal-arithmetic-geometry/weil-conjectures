@@ -1,0 +1,85 @@
+{
+ "id": "lem-cbc-proetale-stalk-conservative",
+ "kind": "statement",
+ "title": "Detecting isomorphisms on the pro-etale site",
+ "statement": "Let $\\Lambda$ be a finite discrete ring and let $T$ be a scheme.\n\n1. *locality for covering families.* A morphism\n$F\\to G$ of complexes of $\\Lambda$-module sheaves on\n$T_{\\Proet}$ is an isomorphism if and only if its inverse image\nalong every member of one\npro-etale covering family\nof $T$ is an isomorphism. Equivalently: a complex on\n$T_{\\Proet}$ is acyclic if and only if its cohomology sheaves\nvanish, and a sheaf on $T_{\\Proet}$ vanishes if and only if it\nvanishes after inverse image along the members of a covering family.\n1. *detection on the affine ind-etale basis.* For affine\n$T$, a sheaf on $T_{\\Proet}$ vanishes if and only if its sections\non every object of the affine ind-etale basis\n[def-weil-pbc-ind-etale-basis] vanish; consequently a morphism\nof complexes on $T_{\\Proet}$ is an isomorphism if and only if it\ninduces a quasi-isomorphism of sections on every object of that\nbasis. For general $T$ the same holds with the bases of the\nmembers of an affine open cover.\n1. *complexes of etale origin.* Let\n$\\nu_T:T_{\\Proet}\\to T_{\\Et}$ be the comparison morphism of\n[def-weil-pbc-site-comparison-morphism] and let\n$F'\\to G'$ be a morphism of bounded-below complexes of etale\n$\\Lambda$-sheaves. Then $\\nu_T^*F'\\to\\nu_T^*G'$ is an\nisomorphism if and only if it is an isomorphism at every geometric\npoint of $T$. In particular the geometric-point stalks are\njointly conservative on the bounded constructible objects\n$\\Dbc(T_{\\Proet},\\Lambda)$, which are of etale origin by\n[def-weil-pbc-proetale-modules].\n1. *warning.* None of this extends to arbitrary pro-etale\nsheaves: the collection of geometric-point stalks is *not*\nconservative on $\\Sh(T_{\\Proet})$. For\n$T=\\operatorname{Spec}k$ with $k$ algebraically closed and a\nnonzero abelian group $A$, the sheafified quotient of functions\nmodulo locally constant functions, $\\mathcal F(U)=\\{\\text{functions } U\\to A\\}/\\{\\text{locally constant functions}\\}$, has\n$\\mathcal F(T)=0$ while $\\mathcal F\\neq0$, the site\n$T_{\\Proet}$ containing affine objects with infinitely many points\n(Stacks Project, Pro-étale Cohomology, Section 61.18,\n[Tag 0991](https://stacks.math.columbia.edu/tag/0991)).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-comparison/lem-cbc-proetale-stalk-conservative.md",
+  "place": "node lem-cbc-proetale-stalk-conservative, order 1650",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0991"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1 (clause (1)).* A morphism of complexes is an\nisomorphism if and only if its cone is acyclic, and a complex is\nacyclic if and only if all its cohomology sheaves vanish: this is the\ndefinition of the derived category of\n[def-weil-pbc-proetale-modules] as the localization at the\nquasi-isomorphisms. Vanishing of a sheaf is a local condition for the\ntopology. Indeed, if $\\mathcal H$ is a sheaf on $T_{\\Proet}$ whose\ninverse images along the members of a covering family vanish, then for\nevery object $V$ the sheaf axiom presents $\\mathcal H(V)$ as the\nequalizer of two maps between products of groups\n$\\mathcal H(V\\times_TU_i)$ that are zero, the family being a\ncovering; hence $\\mathcal H(V)=0$, and the converse is functoriality\nof inverse image. Applying this to the cohomology sheaves of the cone\ngives the equivalence of the first sentence.",
+   "uses": [
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2 (clause (2)).* This is\n[lem-weil-pbc-ind-etale-basis]: restriction to the affine\nind-etale basis of [def-weil-pbc-ind-etale-basis] determines a\nsheaf and its morphisms uniquely and detects isomorphisms of sheaves.\nRestriction of a complex is exact and degreewise, so a morphism of\ncomplexes is a quasi-isomorphism if and only if its restriction is\none. A general $T$ is covered by its affine opens, and clause (1)\nreduces the statement to the affine case.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "def-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3 (clause (3)).* Let $\\mathcal G'$ be a bounded-below\ncomplex of etale $\\Lambda$-sheaves. The etale neighbourhoods of a\ngeometric point $\\bar t$ of $T$ are cofinal among its weakly etale\nneighbourhoods, by [def-weil-pbc-proetale-site] and\n[def-weil-pbc-site-comparison-morphism], the inverse image of the\ncomparison morphism being computed on the common objects; hence\n$(\\nu_T^*\\mathcal G')_{\\bar t}=\\mathcal G'_{\\bar t}$, naturally in\n$\\mathcal G'$. If $\\nu_T^*F'\\to\\nu_T^*G'$ is an isomorphism at\nevery geometric point, then $F'\\to G'$ is an isomorphism at every\ngeometric point, hence an isomorphism by\n[lemma-weil-pbc-geometric-stalk-conservative]; applying the functor\n$\\nu_T^*$ exhibits $\\nu_T^*F'\\to\\nu_T^*G'$ as an isomorphism. The\nconverse follows from functoriality. For bounded-below complexes one\napplies this degreewise to the cohomology sheaves, inverse image being\nexact and the identification of stalks being natural. The final\nassertion of the clause is the definition: the bounded constructible\nobjects of [def-weil-pbc-proetale-modules] are by definition the\npullbacks of the bounded constructible etale objects. Full\nfaithfulness of $\\nu_T^*$ on bounded-below complexes,\n[thm-weil-pbc-site-comparison], is not needed for this argument,\nbut it shows that the etale model of a morphism of etale origin is\nunique.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-site-comparison-morphism",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-proetale-modules",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4 (clause (4)).* The replacement for the false general\nstatement is the displayed reference. Concretely, on\n$T=\\operatorname{Spec}k$ the single geometric point of $T$ is the\nonly point of the small pro-etale site that comes from a strictly\nhenselian local ring, while the site contains the affine objects\n$U=\\operatorname{Spec}(\\operatorname{colim}\\operatorname{Map}(E_n,k))$\nfor $E=\\varprojlim E_n$ an inverse limit of finite sets with\nsurjective transition maps; such a $U$ is ind-Zariski, hence weakly\netale, over $k$ and has infinitely many points, so the sheaf\n$\\mathcal F$ of the statement has a nonzero value there while\n$\\mathcal F(T)=0$. No clause of this lemma asserts conservativity\nof geometric-point stalks beyond clause (3), and clause (3) confines\nthe failure to complexes that are not of etale origin.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-comparison/lem-cbc-proetale-stalk-conservative.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1650,
+ "blueprint_uses": [
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-ind-etale-basis",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_split_by": "labels"
+}

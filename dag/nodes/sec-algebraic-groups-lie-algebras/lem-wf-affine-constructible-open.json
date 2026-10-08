@@ -1,0 +1,53 @@
+{
+ "id": "lem-wf-affine-constructible-open",
+ "kind": "statement",
+ "title": "Chevalley constructibility and open pieces of constructible sets",
+ "statement": "Let $k$ be a field.\n\n1. (Chevalley.) If $f:X\\to Y$ is a morphism of affine schemes of\n   finite type over $k$, then the image of every constructible subset of\n   $X$ is a constructible subset of $Y$. In particular $f(X)$ is\n   constructible.\n2. If $S$ is a nonempty constructible subset of an affine scheme $Y$ of\n   finite type over $k$, then $S$ contains a nonempty open subset of its\n   closure $\\overline S$. In particular, a dense constructible subset of\n   $Y$ contains a nonempty open subset of $Y$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-geometry/lem-wf-affine-constructible-open.md",
+  "place": "node lem-wf-affine-constructible-open, order 2486"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "(1) The coordinate map $k[Y]\\to k[X]$ is of finite type, hence of\nfinite presentation because $k[Y]$ is Noetherian\n([lem-wf-affine-noetherian-components]). Chevalley's theorem says that\nfor a ring map of finite presentation the induced map on spectra sends\nconstructible subsets to constructible subsets (in Mathlib:\n`PrimeSpectrum.isConstructible_comap_image`). On the Noetherian space\n$Y$, constructible in this sense is the same as a finite union of\nintersections of an open and a closed subset.",
+   "uses": [
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(2) Write $S=\\bigcup_{i=1}^rS_i$ with $S_i=U_i\\cap F_i$, $U_i$ open and\n$F_i$ closed, all $S_i$ nonempty. Put $Z=\\overline S$; then\n$Z=\\bigcup_i\\overline{S_i}$. The space $Z$ is a closed subset of $Y$,\nhence has finitely many irreducible components\n([lem-wf-affine-noetherian-components], applied to\n$\\operatorname{Spec}$ of the corresponding quotient of $k[Y]$), and it\nis nonempty. Choose one, $C$. Since $C=\\bigcup_i(C\\cap\\overline{S_i})$\nis irreducible, $C\\subseteq\\overline{S_i}$ for some $i$. Let $\\Omega$ be\nthe complement in $Z$ of the union of the other irreducible components.\nIt is open in $Z$, contained in $C$, and nonempty because $C$ is not\ncontained in the union of finitely many other components (it would lie\nin one of them, contradicting maximality). So $\\Omega$ is a nonempty\nopen subset of $Z$ with $\\Omega\\subseteq\\overline{S_i}$; in particular\nit is open in $\\overline{S_i}$ and therefore meets the dense subset\n$S_i$ of $\\overline{S_i}$.",
+   "uses": [
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "As $\\overline{S_i}\\subseteq F_i$, we have\n$S_i=U_i\\cap\\overline{S_i}$, so\n$S_i\\cap\\Omega=U_i\\cap\\Omega$, which is open in $Z$. It is nonempty by\nthe previous paragraph and contained in $S$. This is the required\nnonempty open subset of $\\overline S$. When $S$ is dense, $\\overline\nS=Y$.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-affine-noetherian-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-geometry/lem-wf-affine-constructible-open.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "mentions_mathlib"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2486,
+ "blueprint_uses": [
+  "lem-wf-affine-noetherian-components"
+ ],
+ "proof_split_by": "paragraphs"
+}

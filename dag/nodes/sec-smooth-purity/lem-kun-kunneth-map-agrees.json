@@ -1,0 +1,99 @@
+{
+ "id": "lem-kun-kunneth-map-agrees",
+ "kind": "statement",
+ "title": "Compatibility of the Kunneth map with Leray, proper base change and the projection formula",
+ "statement": "Let $k$ be a separably closed field, $X$ a proper scheme over\n$k$ and $Y$ a scheme over $k$. Denote $f:X\\to\\Spec(k)$,\n$g:Y\\to\\Spec(k)$ and $c=f\\circ\\operatorname{pr}_1=g\\circ \\operatorname{pr}_2$ on $X\\times_kY$.\n\n1. **(a)** Let $E\\in\\Dplus(X_{\\Et})$ have torsion cohomology and\n$K\\in\\Dplus(Y_{\\Et})$. Let $\\theta$ be the composite\n$$\n\\begin{aligned}\n&\\RGamma\\bigl((X\\times_kY)_{\\Et},\n\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K\\bigr)\\\\\n&\\quad\\xrightarrow[\\Cref{lem-kun-leray-bdd}]{\\ \\sim\\ }\n\\RGamma\\bigl(Y_{\\Et},R\\operatorname{pr}_{2,*}\n(\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K)\\bigr)\\\\\n&\\quad\\xrightarrow[\\Cref{lem-kun-0f0f}]{\\ \\sim\\ }\n\\RGamma\\bigl(Y_{\\Et},R\\operatorname{pr}_{2,*}\\pr_1^{-1}E\n\\kunotimes{\\mathbf Z}K\\bigr)\\\\\n&\\quad\\xrightarrow[\\Cref{thm-weil-pbc-bounded-below}]{\\ \\sim\\ }\n\\RGamma\\bigl(Y_{\\Et},\\underline{\\RGamma(X_{\\Et},E)}\n\\kunotimes{\\mathbf Z}K\\bigr)\\\\\n&\\quad\\xrightarrow[\\Cref{lem-kun-0f0e}]{\\ \\sim\\ }\n\\RGamma(Y_{\\Et},K)\\kunotimes{\\mathbf Z}\\RGamma(X_{\\Et},E)\\\\\n&\\quad\\xrightarrow[\\Cref{lem-kun-tensor-sym}]{\\ \\sim\\ }\n\\RGamma(X_{\\Et},E)\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K).\n\\end{aligned}\n$$\nThen $\\theta\\circ\\kappa_{E,K}=\\mathrm{id}$, where $\\kappa_{E,K}$\nis the Kunneth map of [def-kun-kunneth-map]; in particular\n$\\kappa_{E,K}$ is an isomorphism.\n1. **(b)** Let $n\\ge1$ be invertible in $k$, let $Y$ be of\nfinite type over $k$, let $E\\in D(X_{\\Et},\\kunZn)$ and\n$K\\in D(Y_{\\Et},\\kunZn)$, and let $\\theta$ be the same composite\nwith $\\kunotimes{\\kunZn}$-products, where the first arrow uses\n[lem-kun-leray-unbdd] and [lem-kun-0f10], the second\n[lem-kun-0f0g], the third [lem-kun-0f0c], the fourth\n[lem-kun-0f12], and the fifth [lem-kun-tensor-sym]. Then\n$\\theta\\circ\\kappa_{E,K}=\\mathrm{id}$ and $\\kappa_{E,K}$ is an\nisomorphism.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.md",
+  "place": "node lem-kun-kunneth-map-agrees, order 1743"
+ },
+ "stmt_deps": [
+  "def-kun-kunneth-map",
+  "lem-kun-leray-unbdd",
+  "lem-kun-0f10",
+  "lem-kun-0f0g",
+  "lem-kun-0f0c",
+  "lem-kun-0f12",
+  "lem-kun-tensor-sym"
+ ],
+ "proof": [
+  {
+   "text": "We verify (a); the proof of (b) is identical, replacing\n[lem-kun-0f0f] by [lem-kun-0f0g], [thm-weil-pbc-bounded-below]\nby [lem-kun-0f0c], [lem-kun-0f0e] by\n[lem-kun-0f12] and [lem-kun-leray-bdd] by\n[lem-kun-leray-unbdd]. It suffices to compare adjoints under\n$c^{-1}\\dashv Rc_*$ (writing $c:X\\times_kY\\to\\Spec(k)$). By\n[def-kun-kunneth-map] the adjoint of $\\kappa_{E,K}$ is\n$(\\varepsilon_f\\otimes\\varepsilon_g)\\circ\\mathrm{mon}$. Each arrow\nin the definition of $\\theta$ is the mate of an identification\nbuilt from the adjunction data of\n[def-weil-pbc-inverse-image] and of\n[def-kun-derived-tensor]: the first is the comparison\n$\\RGamma\\circ R\\operatorname{pr}_{2,*}\\cong\\RGamma$ (an instance of\nthe Leray composition [lem-kun-leray-bdd]); the second is the\nprojection formula map of [lem-kun-0f0f], which is by\ndefinition the mate of the unit–monoidality composite of\n[lem-kun-inverse-image-monoidal]; the third is\nthe inverse of the proper base change map of\n[thm-weil-pbc-bounded-below], itself the mate of\n$\\varepsilon_f$ by [def-kun-unbounded-exchange]; the fourth is\nthe map of [lem-kun-0f0e], whose mate is\n$\\mathrm{id}\\otimes\\eta_g$ for the unit $\\eta_g$ of\n[def-weil-pbc-inverse-image] (using\n[lem-kun-tensor-unit] and [lem-kun-pullback-constant] for\nthe constant objects); the fifth is the symmetry\n[lem-kun-tensor-sym], whose mate is again the symmetry.\nApplying $c^{-1}$ to $\\theta\\circ\\kappa_{E,K}$ therefore yields the\ncomposite of the corresponding mates, and an elementary cancellation\nof each unit against the adjacent counit – all compatibilities being\ninstances of the pasting law\n[lem-weil-pbc-exchange-identity-pasting] and of the naturality of\n[lem-kun-unbounded-exchange-natural] – leaves exactly\n$(\\varepsilon_f\\otimes\\varepsilon_g)\\circ\\mathrm{mon}$, the adjoint\nof $\\mathrm{id}$. Since the adjunction bijection is injective,\n$\\theta\\circ\\kappa_{E,K}=\\mathrm{id}$, and as $\\theta$ is an\nisomorphism so is $\\kappa_{E,K}$.",
+   "uses": [
+    "lem-kun-0f0f",
+    "lem-kun-0f0g",
+    "thm-weil-pbc-bounded-below",
+    "lem-kun-0f0c",
+    "lem-kun-0f0e",
+    "lem-kun-0f12",
+    "lem-kun-leray-bdd",
+    "lem-kun-leray-unbdd",
+    "def-kun-kunneth-map",
+    "def-weil-pbc-inverse-image",
+    "def-kun-derived-tensor",
+    "lem-kun-inverse-image-monoidal",
+    "def-kun-unbounded-exchange",
+    "lem-kun-tensor-unit",
+    "lem-kun-pullback-constant",
+    "lem-kun-tensor-sym",
+    "lem-weil-pbc-exchange-identity-pasting",
+    "lem-kun-unbounded-exchange-natural"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-0f0f",
+  "lem-kun-0f0g",
+  "thm-weil-pbc-bounded-below",
+  "lem-kun-0f0c",
+  "lem-kun-0f0e",
+  "lem-kun-0f12",
+  "lem-kun-leray-bdd",
+  "lem-kun-leray-unbdd",
+  "def-kun-kunneth-map",
+  "def-weil-pbc-inverse-image",
+  "def-kun-derived-tensor",
+  "lem-kun-inverse-image-monoidal",
+  "def-kun-unbounded-exchange",
+  "lem-kun-tensor-unit",
+  "lem-kun-pullback-constant",
+  "lem-kun-tensor-sym",
+  "lem-weil-pbc-exchange-identity-pasting",
+  "lem-kun-unbounded-exchange-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1743,
+ "blueprint_uses": [
+  "def-kun-derived-tensor",
+  "def-kun-kunneth-map",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-inverse-image",
+  "lem-kun-0f0c",
+  "lem-kun-0f0e",
+  "lem-kun-0f0f",
+  "lem-kun-0f0g",
+  "lem-kun-0f10",
+  "lem-kun-0f12",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-leray-bdd",
+  "lem-kun-leray-unbdd",
+  "lem-kun-pullback-constant",
+  "lem-kun-tensor-sym",
+  "lem-kun-tensor-unit",
+  "lem-kun-unbounded-exchange-natural",
+  "lem-weil-pbc-exchange-identity-pasting",
+  "thm-weil-pbc-bounded-below"
+ ],
+ "proof_split_by": "paragraphs"
+}

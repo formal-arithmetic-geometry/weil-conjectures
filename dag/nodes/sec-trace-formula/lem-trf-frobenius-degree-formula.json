@@ -1,0 +1,65 @@
+{
+ "id": "lem-trf-frobenius-degree-formula",
+ "kind": "statement",
+ "title": "Degree formula for the local Frobenius",
+ "statement": "Let $x\\in|X_0|$ be a closed point with degree\n$d_x=[\\kappa(x):\\Fq]$, let $m$ be divisible by $d_x$, let\n$x_m\\in X_0(\\mathbf F_{q^{d_x}})$ be a point above $x$, and put\n$F_x=F_{x_m,d_x}$, the *one-circuit local Frobenius* (well\ndefined up to conjugation by\n[lem-trf-local-frobenius-conjugacy]). Then for every\n$y\\in X_0(\\mathbf F_{q^m})$ above $x$,\n\n$$\n\\operatorname{tr}_A\\bigl(F_{y,m}\\mid K_{\\bar y}\\bigr)\n=\n\\operatorname{tr}_A\\bigl(F_x^{\\,m/d_x}\\mid K_{\\bar x}\\bigr)\n$$\n\nin $A$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-frobenius-degree-formula.md",
+  "place": "node lem-trf-frobenius-degree-formula, order 2345"
+ },
+ "stmt_deps": [
+  "lem-trf-local-frobenius-conjugacy"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1: iteration at one lift.* Let $\\bar x$ be the geometric\npoint of the lift $x_m$, and suppose first that\n$m=r\\cdot d_x$. For a fixed point $\\bar z$ of $\\Phi^d$ the\ntransport $\\tau_{z,d}$ of [def-trf-frobenius-operators] is the\ncanonical identification $K_{\\bar z}\\cong K_{g_\\gamma^d\\bar z}\\cong K_{\\bar z}$ of [prop-trf-scheme-galois-comparison] and the\nfixed-point property (the same two identifications and the universal\nhomeomorphism invariance used in the proof of\n[lem-trf-local-frobenius-conjugacy]); the same holds for\n$\\tau_{z,m}$, and the composite identification for $m=rd$ is the\n$r$-fold iteration of the one for $d$ (the functoriality of the\npullback under $g_\\gamma^{d}$-iterates, i.e. $g_\\gamma^{m}=g_\\gamma^{d}\\circ\\cdots\\circ g_\\gamma^{d}$). Hence,\nwith the iterated Weil isomorphisms $\\varphi^{[m]}$ of\n[def-trf-iterated-weil-map],\n\n$$\n\\begin{aligned}\nF_{z,m}\n&=\\varphi^{[m]}_{\\bar z}\\circ\\tau_{z,m}\n=\\varphi^{[d]}_{\\bar z}\\circ\nLg_\\gamma^{d*}\\bigl(\\varphi^{[(r-1)d]}\\bigr)_{\\bar z}\n\\circ\\tau_{z,d}\\circ\\tau_{z,(r-1)d}\\\\\n&=\\bigl(\\varphi^{[d]}_{\\bar z}\\circ\\tau_{z,d}\\bigr)\n\\circ\\bigl(\\varphi^{[(r-1)d]}_{\\bar z}\\circ\\tau_{z,(r-1)d}\\bigr)\n=F_{z,d}\\circ F_{z,(r-1)d},\n\\end{aligned}\n$$\n\nwhere the second equality is the cocycle identity\n$\\varphi^{[rd]}=\\varphi^{[d]}\\circ Lg_\\gamma^{d*}\\varphi^{[(r-1)d]}$\nof [lem-trf-iterated-weil-cocycle] together with the naturality of the\ncanonical stalk identifications (the two ways around the fixed-point\nidentifications agree, exactly as in the proof of\n[lem-trf-local-frobenius-conjugacy], (3)); induction on $r$\ngives\n\n$$\nF_{z,m}=F_{z,d}^{\\,r}\n$$\n\nas endomorphisms of $K_{\\bar z}$.",
+   "uses": [
+    "def-trf-frobenius-operators",
+    "prop-trf-scheme-galois-comparison",
+    "lem-trf-local-frobenius-conjugacy",
+    "def-trf-iterated-weil-map",
+    "lem-trf-iterated-weil-cocycle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: changing the lift.* For a general\n$y\\in X_0(\\mathbf F_{q^m})$ above $x$, let\n$\\bar y=\\bar z_i=g_\\gamma^i(\\bar x)$ ($i$ well defined modulo\n$d_x$) and let $T_i:K_{\\bar y}\\xrightarrow{\\sim}K_{\\bar x}$ be the\ncanonical transport of\n[lem-trf-local-frobenius-conjugacy], (2). By the conjugacy part\n(3) of [lem-trf-local-frobenius-conjugacy] and Step 1,\n\n$$\nF_{y,m}=T_i^{-1}F_{z,m}T_i=T_i^{-1}F_{z,d}^{\\,r}T_i\n=\\bigl(T_i^{-1}F_{z,d}T_i\\bigr)^{r},\n$$\n\nand by the same conjugacy $T_i^{-1}F_{z,d}T_i=F_{x_m,d_x}$ (the\none-circuit operator at the lift $x_m$); this holds for every\n$y$ above $x$, so\n\n$$\n\\operatorname{tr}_A(F_{y,m}\\mid K_{\\bar y})\n=\\operatorname{tr}_A\\bigl(F_{x_m,d_x}^{\\,r}\\mid K_{\\bar x}\\bigr),\n$$\n\nthe traces being equal because the conjugating isomorphisms are\nisomorphisms of the perfect complexes\n([prop-trf-trace-formal-laws], (1)), and\n$K_{\\bar y}\\in D^b_{\\mathrm{fin}}(A)$. This is the displayed\nidentity with $r=m/d_x$.",
+   "uses": [
+    "lem-trf-local-frobenius-conjugacy",
+    "prop-trf-trace-formal-laws"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-frobenius-operators",
+  "prop-trf-scheme-galois-comparison",
+  "lem-trf-local-frobenius-conjugacy",
+  "def-trf-iterated-weil-map",
+  "lem-trf-iterated-weil-cocycle",
+  "prop-trf-trace-formal-laws"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-frobenius-degree-formula.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "in_cycle"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2345,
+ "blueprint_uses": [
+  "def-trf-frobenius-operators",
+  "def-trf-iterated-weil-map",
+  "lem-trf-iterated-weil-cocycle",
+  "lem-trf-local-frobenius-conjugacy",
+  "prop-trf-scheme-galois-comparison",
+  "prop-trf-trace-formal-laws"
+ ],
+ "proof_split_by": "labels"
+}

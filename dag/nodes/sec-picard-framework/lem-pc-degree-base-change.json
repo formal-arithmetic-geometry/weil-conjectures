@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-degree-base-change",
+ "kind": "statement",
+ "title": "Degree: base change and tensor products",
+ "statement": "Let $k$ be a field, $X$ a proper scheme over $k$ of dimension $\\le1$\n(a proper curve), and let $\\mathcal{L},\\mathcal{M}$ be invertible\n$\\mathcal{O}_X$-modules.\n\n1. (Base change) For a field extension $K/k$:\n$\\deg_{X_K}(\\mathcal{L}\\otimes_kK)=\\deg_X(\\mathcal{L})$.\n1. (Tensor with an effective divisor) If $D\\subset X$ is an\neffective Cartier divisor and $\\mathcal{M}=\\mathcal{O}_X(D)$, then\n$$\n\\chi(X,\\mathcal{L}\\otimes\\mathcal{M})=\\deg(\\mathcal{L})+\\chi(X,\\mathcal{M}),\\qquad\n\\deg(\\mathcal{L}\\otimes\\mathcal{M})=\\deg(\\mathcal{L})+\\deg(\\mathcal{M}),\n$$\nand for a finite sum $D=\\sum_in_i[P_i]$ of $k$-rational points\n$\\deg(\\mathcal{O}_X(D))=\\sum_in_i$.\n1. (Additivity) For a short exact sequence of coherent modules\n$0\\to\\mathcal{F}_1\\to\\mathcal{F}_2\\to\\mathcal{F}_3\\to0$:\n$\\chi(X,\\mathcal{F}_2)=\\chi(X,\\mathcal{F}_1)+\\chi(X,\\mathcal{F}_3)$\n([lem-pc-euler-additive]).\n\n(The general formula of Varieties, Lemma 33.44.5, Tag\n[0AYV](https://stacks.math.columbia.edu/tag/0AYV), is used below\nonly through the effective-divisor case (2) and the case of a pullback\nfrom a point, which is explicit in the base change part (1) and in\n[lem-pc-degree-agrees-sc].)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-degree-base-change.md",
+  "place": "node lem-pc-degree-base-change, order 740",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0AYV"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "lem-pc-euler-additive",
+  "lem-pc-degree-agrees-sc",
+  "def-pc-dimension",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "*(3).* This is exactly [lem-pc-euler-additive].",
+   "uses": [
+    "lem-pc-euler-additive"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(1).* For the field extension $K/k$ put $X_K:=X\\times_{\\operatorname{Spec}(k)}\\operatorname{Spec}(K)$ ([def-pc-base-change]).\nalong the flat morphism $\\operatorname{Spec}(K)\\to\\operatorname{Spec}(k)$) one has\n$H^i(X_K,\\mathcal{L}\\otimes_kK)=H^i(X,\\mathcal{L})\\otimes_kK$ and\n$H^i(X_K,\\mathcal{O}_{X_K})=H^i(X,\\mathcal{O}_X)\\otimes_kK$ for all $i$; the $H^i$ are\nfinite-dimensional ($X$ proper over $k$: the well-definedness of the\nEuler characteristic, [lem-pc-euler-characteristic-well-defined],\nwith the finiteness of the support of the higher direct images of the\nproper morphism: the standard statement, which is also the content of\n[lem-pc-finite-support-hi]), and $X_K$ is proper over $K$\n([lem-pc-proper-base-change]), so\n[def-pc-euler-characteristic] and [def-pc-degree-line-bundle]\napply and give\n\n$$\n\\deg_{X_K}(\\mathcal{L}_K)\n=\\sum_i(-1)^i\\dim_K\\bigl(H^i(X,\\mathcal{L})\\otimes_kK\\bigr)\n-\\sum_i(-1)^i\\dim_K\\bigl(H^i(X,\\mathcal{O}_X)\\otimes_kK\\bigr)\n=\\deg_X(\\mathcal{L}),\n$$\n\nbecause $\\dim_K(V\\otimes_kK)=\\dim_kV$ for a finite-dimensional\n$k$-vector space $V$.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-pc-euler-characteristic-well-defined",
+    "lem-pc-finite-support-hi",
+    "lem-pc-proper-base-change",
+    "def-pc-euler-characteristic",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(2).* Let $D\\subset X$ be an effective Cartier divisor\n([def-sc-effective-cartier-divisor]) and put $\\mathcal{M}=\\mathcal{O}_X(D)$\n([def-pc-divisor-line-bundle]). The canonical section $\\mathbf 1_D$\ngives the exact\nsequence\n\n$$\n0\\to\\mathcal{O}_X\\to\\mathcal{O}_X(D)\\to\\mathcal{O}_X(D)\\otimes\\mathcal{O}_D\\to0 .\n$$\n\nThe module $\\mathcal{O}_X(D)\\otimes\\mathcal{O}_D$ is the restriction of the line\nbundle $\\mathcal{O}_X(D)$ to the $0$-dimensional closed subscheme $D$; a\nlocally free rank one module on a $0$-dimensional scheme is trivial\n(the local rings of $D$ are Artinian, so the restriction is free of\nrank one at every stalk, and the scheme $D$ is a finite union of the\n$\\operatorname{Spec}$'s of the Artinian quotient rings), hence\n\n$$\n\\mathcal{O}_X(D)\\otimes\\mathcal{O}_D\\cong\\mathcal{O}_D .\n$$\n\nTensoring with the invertible $\\mathcal{L}$ (invertible implies flat, so the\nsequence stays exact) gives\n\n$$\n0\\to\\mathcal{L}\\to\\mathcal{L}\\otimes\\mathcal{O}_X(D)\\to\\mathcal{L}\\otimes\\mathcal{O}_D\\to0\n$$\n\nwith $\\mathcal{L}\\otimes\\mathcal{O}_D\\cong\\mathcal{O}_D$ (again a line bundle restricted to\n$D$, $0$-dimensional). The sheaf $\\mathcal{O}_D$ is a finite direct sum of\nskyscraper sheaves with Artinian stalks (for each $P\\in D$, the stalk\nis the Artinian local ring $\\mathcal{O}_{D,P}$); such a skyscraper\n$i_*M$, $i:\\{P\\}\\hookrightarrow X$, is flasque (its sections over an\nopen are $M$ if it contains $P$ and $0$ otherwise, so all restriction\nmaps are surjective), hence $H^i(X,\\mathcal{O}_D)=0$ for $i\\ge1$ and\n\n$$\n\\chi(X,\\mathcal{O}_D)=\\dim_kH^0(X,\\mathcal{O}_D)=\\sum_{P\\in D}\\dim_k\\mathcal{O}_{D,P}\n=\\sum_{P\\in D}\\ell(\\mathcal{O}_{D,P}),\n$$\n\nthe sum of the lengths. For the divisor $D=\\sum_Pn_P[P]$ on the\nsmooth curve, the local structure is\n$\\mathcal{O}_{D,P}=\\mathcal{O}_{X,P}/\\mathfrak m_P^{n_P}$ (the ideal of $[P]$ is the\nideal of the closed point, generated by a uniformizer\n[lem-sc-point-cartier], and the DVR structure\n[rem-pc-regularity-sc]), so\n$\\ell(\\mathcal{O}_{D,P})=n_P\\cdot[\\kappa(P):k]$; this is the classical\ndegree-of-a-divisor formula\n\n$$\n\\deg(\\mathcal{O}_X(D))=\\chi(X,\\mathcal{O}_D)=\\sum_Pn_P[\\kappa(P):k]\n$$\n\n(the degree of [def-sc-divisor] for algebraically closed $k$: for a\nsmooth connected curve $X$ the module $\\mathcal{O}_X(D)$ used here is the\nmodule of the divisor $\\sum_Pn_P[P]$ of [def-sc-divisor] by\n[lem-pc-divisor-line-bundle-agrees-sc]).\nBy the additivity (3) one gets\n\n$$\n\\chi\\bigl(X,\\mathcal{L}\\otimes\\mathcal{O}_X(D)\\bigr)=\\chi(X,\\mathcal{L})+\\chi(X,\\mathcal{O}_D),\n$$\n\nand with [def-pc-degree-line-bundle] ($\\deg=\\chi-\\chi(\\mathcal{O}_X)$):\n\n$$\n\\deg\\bigl(\\mathcal{L}\\otimes\\mathcal{O}_X(D)\\bigr)\n=\\deg(\\mathcal{L})+\\bigl(\\chi(\\mathcal{O}_X(D))-\\chi(\\mathcal{O}_X)\\bigr)\n=\\deg(\\mathcal{L})+\\deg(\\mathcal{O}_X(D)),\n$$\n\nand\n\n$$\n\\chi\\bigl(X,\\mathcal{L}\\otimes\\mathcal{O}_X(D)\\bigr)\n=\\deg(\\mathcal{L})+\\chi\\bigl(X,\\mathcal{O}_X(D)\\bigr),\n$$\n\nwhich is the first displayed formula of (2) (the second formula is the\nfirst one with $\\mathcal{L}$ replaced by the trivial module, or directly from\nthe same computation; note $\\deg\\mathcal{M}=\\deg(\\mathcal{O}_X(D))$\n[def-pc-degree-line-bundle]). For the last assertion: for a\n$k$-rational point $P$ with its reduced structure the exact sequence\nabove gives $\\chi(X,\\mathcal{O}_X([P]))=\\chi(X,\\mathcal{O}_X)+1$ (the locus $[P]$ has\nlength $1$: $\\mathcal{O}_{[P],P}=\\kappa(P)=k$), so\n$\\deg(\\mathcal{O}_X([P]))=1$ and by the additivity already established\n$\\deg(\\mathcal{O}_X(D))=\\sum_in_i\\deg(\\mathcal{O}_X([P_i]))=\\sum_in_i$.",
+   "uses": [
+    "def-sc-effective-cartier-divisor",
+    "def-pc-divisor-line-bundle",
+    "lem-sc-point-cartier",
+    "def-sc-divisor",
+    "lem-pc-divisor-line-bundle-agrees-sc",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-euler-additive",
+  "def-pc-base-change",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-finite-support-hi",
+  "lem-pc-proper-base-change",
+  "def-pc-euler-characteristic",
+  "def-pc-degree-line-bundle",
+  "def-sc-effective-cartier-divisor",
+  "def-pc-divisor-line-bundle",
+  "lem-sc-point-cartier",
+  "def-sc-divisor",
+  "lem-pc-divisor-line-bundle-agrees-sc",
+  "lem-pc-affine-vanishing",
+  "lem-pc-flat-base-change-cohom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-degree-base-change.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "cites_remark",
+  "in_cycle"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 740,
+ "blueprint_uses": [
+  "def-pc-base-change",
+  "def-pc-degree-line-bundle",
+  "def-pc-dimension",
+  "def-pc-divisor-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-sc-divisor",
+  "def-sc-effective-cartier-divisor",
+  "def-sc-invertible-module",
+  "lem-pc-affine-vanishing",
+  "lem-pc-euler-additive",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-finite-support-hi",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-divisor-line-bundle-agrees-sc",
+  "lem-pc-proper-base-change",
+  "lem-sc-point-cartier",
+  "rem-pc-regularity-sc"
+ ],
+ "uses_not_cited": [
+  "def-pc-dimension",
+  "def-sc-invertible-module",
+  "lem-pc-affine-vanishing",
+  "lem-pc-flat-base-change-cohom"
+ ],
+ "proof_split_by": "labels"
+}

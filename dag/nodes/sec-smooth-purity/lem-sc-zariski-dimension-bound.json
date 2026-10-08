@@ -1,0 +1,79 @@
+{
+ "id": "lem-sc-zariski-dimension-bound",
+ "kind": "statement",
+ "title": "The Zariski dimension bound",
+ "statement": "Let $X$ be a Noetherian\nscheme of finite dimension $d$.\nFor every abelian sheaf $F$ on [def-sc-zariski-site],\n\n$$\nH^q(X_{\\rm Zar},F)=0\\quad(q>d),\n$$\n\nwith cohomology as in [def-sc-zariski-cohomology].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-zariski-dimension-bound.md",
+  "place": "node lem-sc-zariski-dimension-bound, order 1557"
+ },
+ "stmt_deps": [
+  "def-sc-zariski-site",
+  "def-sc-zariski-cohomology",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "We induct on $d$. When $d=0$, the Noetherian scheme\nhas a finite discrete underlying space, so its section\nfunctor is a finite product of exact stalk functors.\nLet $d>0$, and let $\\eta_1,\\ldots,\\eta_m$ be the\ngeneric points of the finitely many irreducible components.\nWrite $u_i:\\{\\eta_i\\}\\to X$ for inclusion of the one-point\ntopological space. Put\n\n$$\nT(F)=\\prod_{i=1}^m u_{i*}F_{\\eta_i}.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "On an open $V$, this is the product of $F_{\\eta_i}$\nover the generic points belonging to $V$.\nRestriction maps are projections, so this is flasque\nin the sense of [def-sc-zariski-flasque].\nThe adjunction map $F\\to T(F)$ is the identity at each\ngeneric stalk. At $\\eta_i$, the other factors have\nzero stalk: remove the other irreducible components\nin a neighborhood of $\\eta_i$.",
+   "uses": [
+    "def-sc-zariski-flasque"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "We first treat a sheaf $G$ whose generic stalks all vanish.\nFor a closed $Z$ avoiding the $\\eta_i$, put\n$G_Z=\\ker(G\\to j_*G|_{X\\setminus Z})$.\nThen $G=\\varinjlim_ZG_Z$. Indeed a section on an open\n$V$ has an open zero locus, so its support is closed in\n$V$ and avoids every generic point in $V$.\nThe closure of this support in $X$ still avoids all\n$\\eta_i$. For $\\eta_i\\in V$, use the open neighborhood\nwhere the section vanishes. If $\\eta_i\\notin V$, then\n$V$ misses its whole irreducible component; remove the\nother finitely many components near $\\eta_i$.\nThis gives a suitable $Z$ for each section.\nFinite unions make the closed sets $Z$ directed.\nEvery such $Z$ has dimension at most $d-1$:\na chain of irreducible closed subsets of $Z$ can be\nextended by a component of $X$ strictly containing its\nlargest member.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Give $Z$ its reduced closed subscheme structure, which\nhas the same underlying Noetherian space and dimension.\nFor $i:Z\\to X$, the sheaf $G_Z$ equals $i_*i^{-1}G_Z$\non stalks. Closed direct image on topological sheaves is\nexact, as its stalk is the given stalk on $Z$ and zero\noutside $Z$; it preserves injectives since inverse image\nis exact. Consequently its cohomology on $X$ is the\ncohomology on $Z$. Induction and\n[lem-sc-zariski-filtered-cohomology] give\n$H^q(X,G)=0$ for $q>d-1$.",
+   "uses": [
+    "lem-sc-zariski-filtered-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply this result to the kernel $K$ and cokernel $C$\nof $F\\to T(F)$, and let $I$ be its image.\nSince $T(F)$ is acyclic by\n[lem-sc-zariski-flasque-acyclic], the sequence\n$0\\to I\\to T(F)\\to C\\to0$ gives\n$H^q(X,I)\\simeq H^{q-1}(X,C)$ for $q\\geq2$.\nIt is zero for $q>d$. The long exact sequence of\n$0\\to K\\to F\\to I\\to0$ now gives the same vanishing for\n$F$, proving the induction.",
+   "uses": [
+    "lem-sc-zariski-flasque-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-zariski-flasque",
+  "lem-sc-zariski-filtered-cohomology",
+  "lem-sc-zariski-flasque-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-zariski-dimension-bound.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1557,
+ "blueprint_uses": [
+  "def-sc-zariski-cohomology",
+  "def-sc-zariski-flasque",
+  "def-sc-zariski-site",
+  "def-weil-pbc-scheme-conventions",
+  "lem-sc-zariski-filtered-cohomology",
+  "lem-sc-zariski-flasque-acyclic"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs"
+}

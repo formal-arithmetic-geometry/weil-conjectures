@@ -1,0 +1,90 @@
+{
+ "id": "thm-weil-pbc-integral-truncations",
+ "kind": "statement",
+ "title": "Truncations of the integral category",
+ "statement": "Let the adic datum be $A=\\mathcal O_E$, $I=(\\varpi)$, $P_n=A_{E,n}$, and let\n$T$ be noetherian of finite dimension with the torsion orders invertible.\nFor $K\\in\\Dbc(T_{\\Proet},A)$ [def-weil-pbc-bounded-constructible-complete],\nwith its canonical reduction tower $K_\\bullet$ (uniformly bounded\nconstructible with compatible etale-origin witnesses). *Assume that the\nTor-compatibility condition (1) of [prop-weil-pbc-levelwise-truncations]\nholds for $K_\\bullet$ above every level, equivalently that the cohomology\nsheaves of the local models are flat over $A_T$*, and define\n$$\n \\tau^{\\le m}K:=\\Rlim\\tau^{\\le m}K_\\bullet,\\qquad\n \\tau^{\\ge m+1}K:=\\Rlim\\tau^{\\ge m+1}K_\\bullet,\n$$\nthe derived limits of the towers of\n[prop-weil-pbc-levelwise-truncations]. Then\n$\\tau^{\\le m}K,\\tau^{\\ge m+1}K\\in\\Dbc(T_{\\Proet},A)$, and:\n\n1. *reductions:* there are canonical isomorphisms\n   $$\n    (\\tau^{\\le m}K)\\otimes^L_AP_n\\xrightarrow{\\sim}\\tau^{\\le m}K_n,\n    \\qquad\n    (\\tau^{\\ge m+1}K)\\otimes^L_AP_n\\xrightarrow{\\sim}\\tau^{\\ge m+1}K_n,\n   $$\n   compatible with the normalization maps;\n2. *cohomology and universality:*\n   $$\n    \\mathcal H^i(\\tau^{\\le m}K)=\\mathcal H^i(K)\\ (i\\le m),\\qquad\n    \\mathcal H^i(\\tau^{\\le m}K)=0\\ (i>m),\n   $$\n   $$\n    \\mathcal H^i(\\tau^{\\ge m+1}K)=\\mathcal H^i(K)\\ (i\\ge m+1),\\qquad\n    \\mathcal H^i(\\tau^{\\ge m+1}K)=0\\ (i\\le m),\n   $$\n   so that $\\tau^{\\le m},\\tau^{\\ge m+1}$ are additive endofunctors of\n   $\\Dbc(T_{\\Proet},A)$ characterized by the vanishing of these cohomology\n   sheaves; they coincide with the canonical truncations of the ambient\n   derived category;\n3. *truncation triangles:* the levelwise triangles assemble into\n   distinguished triangles\n   $$\n    \\tau^{\\le m}K\\longrightarrow K\n    \\longrightarrow\\tau^{\\ge m+1}K\n    \\longrightarrow\\tau^{\\le m}K[1],\n   $$\n   functorial in $K$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
+  "place": "node thm-weil-pbc-integral-truncations, order 1430",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0118"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 08J5"
+   }
+  ],
+  "note": [
+   "*Source note:* no Stacks Project entry states this form: the truncation\nfunctors of the derived complete category are built from the canonical\ntruncations of complexes, Homological Algebra, Section 12.15 ([Tag\n0118](https://stacks.math.columbia.edu/tag/0118)), and their triangle,\nRemark 13.12.4 ([Tag 08J5](https://stacks.math.columbia.edu/tag/08J5)),\nneither of which knows a coefficient tower or a completeness condition on\nthe middle term; the blueprint adds the construction of $\\tau^{\\le m}K$ and\n$\\tau^{\\ge m+1}K$ as derived limits of the levelwise truncation towers,\ntogether with their reductions, their cohomology and their truncation\ntriangles."
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
+  "prop-weil-pbc-levelwise-truncations",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-derived-inverse-limit",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Take the reduction tower and its local models. By\n[prop-weil-pbc-levelwise-truncations] (whose Tor-compatibility condition (1)\nholds here by the hypothesis of the statement, namely that the cohomology\nsheaves of the local models are flat over the discrete valuation ring $A_T$,\nequivalently $\\varpi$-torsion-free, which is exactly the sufficient\ncondition of that proposition), $\\tau^{\\le m}K_\\bullet$ is an adic tower\nwhich is uniformly bounded constructible and has compatible etale-origin\nwitnesses, so by the reconstruction lemma for uniform towers its derived\nlimit $\\tau^{\\le m}K$ is derived $I$-complete, has no cohomology outside the\nmodel interval, and satisfies the reduction isomorphisms of (i) by the\nfinite-reduction reconstruction lemma; the same holds for\n$\\tau^{\\ge m+1}K$. Hence both objects lie in $\\Dbc(T_{\\Proet},A)$ of\n[def-weil-pbc-bounded-constructible-complete]. The cohomology formulas of\n(ii) follow from (i) and the cohomology formulas of\n[prop-weil-pbc-levelwise-truncations] (iii) at the reduction level, together\nwith the long exact cohomology sequence of the triangle of (iii) (the end\nterms of the triangle are the two objects just constructed, with the\nvanishing cohomology of (ii)); the functoriality and additivity are those of\nthe levelwise truncations and of the functor $\\Rlim$. Since a truncation\ntriangle is characterized by the vanishing properties of its end terms, the\nconstructed truncations are the canonical truncations of the ambient\ncategory. For (iii), the levelwise truncation triangles form a compatible\nfamily under the normalization isomorphisms of\n[prop-weil-pbc-levelwise-truncations] (i) (both the triangles and the\nisomorphisms being canonical), hence a triangle in\n$D(\\operatorname{Tow}_A(T))$, whose image under the triangulated functor\n$\\Rlim$ is the displayed triangle; its functoriality is inherited from the\nlevelwise functoriality.",
+   "uses": [
+    "prop-weil-pbc-levelwise-truncations",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source records that audit item BC-03 was resolved for this theorem by\ndefining $\\tau^{\\le m}K$ as the derived limit of the truncated tower and\nobtaining the reduction isomorphisms of (i) from the two reconstruction\nlemmas, rather than asserting that the ambient truncation commutes with\nreduction.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-levelwise-truncations",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-weil-pbc-finite-reduction-reconstruction",
+  "lem-weil-pbc-reconstruction-uniform-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1430,
+ "blueprint_uses": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-derived-inverse-limit",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-finite-reduction-reconstruction",
+  "lem-weil-pbc-reconstruction-uniform-tower",
+  "prop-weil-pbc-levelwise-truncations"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-derived-inverse-limit",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-finite-reduction-reconstruction",
+  "lem-weil-pbc-reconstruction-uniform-tower"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_notes": [
+  {
+   "label": "source_note",
+   "text": "*Source note:* no Stacks Project entry states this form: the truncation\nfunctors of the derived complete category are built from the canonical\ntruncations of complexes, Homological Algebra, Section 12.15 ([Tag\n0118](https://stacks.math.columbia.edu/tag/0118)), and their triangle,\nRemark 13.12.4 ([Tag 08J5](https://stacks.math.columbia.edu/tag/08J5)),\nneither of which knows a coefficient tower or a completeness condition on\nthe middle term; the blueprint adds the construction of $\\tau^{\\le m}K$ and\n$\\tau^{\\ge m+1}K$ as derived limits of the levelwise truncation towers,\ntogether with their reductions, their cohomology and their truncation\ntriangles.",
+   "where": "statement"
+  }
+ ]
+}

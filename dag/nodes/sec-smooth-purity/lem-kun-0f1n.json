@@ -1,0 +1,114 @@
+{
+ "id": "lem-kun-0f1n",
+ "kind": "statement",
+ "title": "Base change for pushforward tensored with an arbitrary complex",
+ "statement": "Let $K$ be a field and $n\\ge1$ an integer invertible in $K$.\nConsider a commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\xleftarrow{\\;p\\;}&X'&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle e}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\n\nof schemes of finite type over $K$ with\n$X'=X\\times_{\\Spec(K)}S'$ and $Y=X'\\times_{S'}T$. The canonical\nmap\n\n$$\np^{-1}E\\kunotimes{\\kunZn}(f')^{-1}Rg_*F\n\\longrightarrow\nRh_*\\bigl(h^{-1}p^{-1}E\\kunotimes{\\kunZn}e^{-1}F\\bigr)\n$$\n\nis an isomorphism for all $E\\in D(X_{\\Et},\\kunZn)$ and\n$F\\in D(T_{\\Et},\\kunZn)$. (*Source:* Stacks Project, Tag\n[0F1N](https://stacks.math.columbia.edu/tag/0F1N).)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.md",
+  "place": "node lem-kun-0f1n, order 1779",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F1N"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "We reduce this to [lem-kun-0f1j] using that our functors\ncommute with direct sums. Recall that the derived tensor product\ncommutes with direct sums and that (derived) pullback commutes with\ndirect sums ([lem-kun-derived-tensor-direct-sums],\n[def-kun-derived-tensor]); recall that $Rh_*$ and $Rg_*$\ncommute with direct sums: since $h$ and $g$ are quasi-compact\nquasi-separated morphisms of finite type schemes over $K$,\n[lem-kun-0f10](1) gives\n$\\kuncd(h),\\kuncd(g)<\\infty$, and then\n[lem-kun-0f11](1) applies.",
+   "uses": [
+    "lem-kun-0f1j",
+    "lem-kun-derived-tensor-direct-sums",
+    "def-kun-derived-tensor",
+    "lem-kun-0f10",
+    "lem-kun-0f11"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "To finish the proof we argue as follows. First we write\n$E=\\operatorname{hocolim}_N\\tau_{\\le N}E$\n([lem-kun-hocolim-truncations]). Since our functors commute\nwith direct sums, they commute with homotopy colimits\n([lem-kun-functor-preserves-hocolim]). Hence it suffices to\nprove the lemma for $E$ bounded above. Similarly for $F$ we may\nassume $F$ is bounded above.",
+   "uses": [
+    "lem-kun-hocolim-truncations",
+    "lem-kun-functor-preserves-hocolim"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a bounded-above complex representing $E$ and, using\n[lem-kun-bounded-flat-replacement], replace it by a\nbounded-above complex $\\mathcal E^\\bullet$ of flat sheaves of\n$\\kunZn$-modules. Then\n$\\mathcal E^\\bullet=\\varinjlim_N\\sigma_{\\ge-N}\\mathcal E^\\bullet$\n(stupid truncations, [def-kun-truncations]); the filtered\ncolimit of complexes is a homotopy colimit\n([lem-kun-complex-colimit-hocolim]), and our functors commute\nwith homotopy colimits, so we may assume\n$\\mathcal E^\\bullet$ is a bounded complex of flat sheaves. In\nparticular it belongs to $\\Dplus(X_{\\Et},\\kunZn)$ and has tor\namplitude in $[a,\\infty)$, where $a$ is its lowest nonzero degree\n([lem-kun-flat-bounded-tor-amplitude] and\n[def-kun-tor-amplitude]).",
+   "uses": [
+    "lem-kun-bounded-flat-replacement",
+    "def-kun-truncations",
+    "lem-kun-complex-colimit-hocolim",
+    "lem-kun-flat-bounded-tor-amplitude",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For $F$, choose merely a bounded-above complex\n$\\mathcal F^\\bullet$ representing it ([def-weil-pbc-derived-categories]);\nno flatness hypothesis on $F$ is needed. Writing\n$\\mathcal F^\\bullet=\\varinjlim_N\\sigma_{\\ge-N}\\mathcal F^\\bullet$\nand using [def-kun-truncations] and\n[lem-kun-complex-colimit-hocolim] in the same way reduces to a\nbounded complex, hence to an object of\n$\\Dplus(T_{\\Et},\\kunZn)$. We have therefore reached exactly the\nhypotheses of [lem-kun-0f1j], which proves the canonical map\nis an isomorphism.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "def-kun-truncations",
+    "lem-kun-complex-colimit-hocolim",
+    "lem-kun-0f1j"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-0f1j",
+  "lem-kun-derived-tensor-direct-sums",
+  "def-kun-derived-tensor",
+  "lem-kun-0f10",
+  "lem-kun-0f11",
+  "lem-kun-hocolim-truncations",
+  "lem-kun-functor-preserves-hocolim",
+  "lem-kun-bounded-flat-replacement",
+  "def-kun-truncations",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1779,
+ "blueprint_uses": [
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "def-kun-truncations",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-0f10",
+  "lem-kun-0f11",
+  "lem-kun-0f1j",
+  "lem-kun-bounded-flat-replacement",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-kun-derived-tensor-direct-sums",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "lem-kun-functor-preserves-hocolim",
+  "lem-kun-hocolim-truncations"
+ ],
+ "uses_not_cited": [
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs"
+}

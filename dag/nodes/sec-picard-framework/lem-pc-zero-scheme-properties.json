@@ -1,0 +1,76 @@
+{
+ "id": "lem-pc-zero-scheme-properties",
+ "kind": "statement",
+ "title": "Properties of the zero scheme",
+ "statement": "Let $X$ be a scheme, $\\mathcal{M}$ a\ninvertible $\\mathcal{O}_X$-module and\n$s\\in H^0(X,\\mathcal{M})$.\n\n1. $Z(s)$ is a closed subscheme of $X$ (a locally principal closed\nsubscheme), and affine-locally, for $U=\\operatorname{Spec}(A)$ with $\\mathcal{M}$ free on\n$e$ and $s|_U=a\\cdot e$, $Z(s)\\cap U=\\operatorname{Spec}(A/(a))$.\n1. For a flat morphism $g:Y\\to X$ with\n$s_Y=g^*s\\in H^0(Y,g^*\\mathcal{M})$: $Z(s_Y)=Z(s)\\times_XY$, i.e. $g^*\\mathcal{I}_{Z(s)}=\\mathcal{I}_{Z(s_Y)}$.\n1. $Z(s)=X$ if and only if $s=0$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-lem-picard-zero-dictionary/lem-pc-zero-scheme-properties.md",
+  "place": "node lem-pc-zero-scheme-properties, order 826"
+ },
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pc-scheme",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "(1) $\\mathcal{I}_{Z(s)}=\\operatorname{im}(s^\\vee)$ is a quasi-coherent\n$\\mathcal{O}_X$-module (an image of a quasi-coherent module in a\nquasi-coherent module is quasi-coherent) and an ideal sheaf (the image\nof $\\mathcal{M}^\\vee\\to\\mathcal{O}_X$ is a submodule of $\\mathcal{O}_X$), so it defines a closed\nsubscheme. Locally: $\\mathcal{M}|_U=\\mathcal{O}_U\\cdot e$, $s^\\vee$ sends the dual\nbasis $e^\\vee$ to $a$; hence the image is $a\\cdot\\mathcal{O}_U$ and\n$Z(s)\\cap U=\\operatorname{Spec}(A/(a))$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "(2) $g^*$ is right exact, so\n$g^*\\mathcal{I}_{Z(s)}=g^*\\operatorname{im}(s^\\vee)=\\operatorname{im}(g^*(s^\\vee)) =\\operatorname{im}((g^*s)^\\vee)=\\mathcal{I}_{Z(s_Y)}$, where\n$g^*(s^\\vee)=(g^*s)^\\vee$ is the canonical identification of the pullback\nof the dual with the dual of the pullback (valid for $\\mathcal{M}$ invertible,\nsee the local check in [lem-pc-divisor-line-bundle-properties]).",
+   "uses": [
+    "lem-pc-divisor-line-bundle-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(3) If $s=0$, then $s^\\vee=0$ and $\\mathcal{I}_{Z(s)}=0$, so $Z(s)=X$. If\n$s\\neq0$, choose $x\\in X$ with $s_x\\neq0$ in $\\mathcal{M}_x\\cong\\mathcal{O}_x$ after a\ntrivialization; then $s_x$ is a unit of $\\mathcal{O}_x$ and\n$(\\mathcal{I}_{Z(s)})_x=\\mathcal{O}_x$, so $x otin Z(s)$. (Contrapositive: if\n$Z(s)=X$, then $\\mathcal{I}=0$, $s^\\vee=0$, and $s=0$ because the canonical map\n$\\mathcal{M}\\to\\mathcal{M}^{\\vee\\vee}$ is an isomorphism\n([lem-pc-tensor-dual-invertible]) and its\ncomposition with $s^{\\vee\\vee}$ is the original $s$.)",
+   "uses": [
+    "lem-pc-tensor-dual-invertible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-divisor-line-bundle-properties",
+  "lem-pc-tensor-dual-invertible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-lem-picard-zero-dictionary/lem-pc-zero-scheme-properties.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 826,
+ "blueprint_uses": [
+  "def-pc-base-change",
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "lem-pc-divisor-line-bundle-properties",
+  "lem-pc-tensor-dual-invertible"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme",
+  "declaration": "AlgebraicGeometry.exists_isEffectiveCartierCenter_hilbertPresheaf",
+  "branch": "slopmaster2",
+  "line": 475,
+  "sorry_free": true,
+  "body_lines": 2
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.exists_isEffectiveCartierCenter_hilbertPresheaf"
+ ],
+ "uses_not_cited": [
+  "def-pc-base-change",
+  "def-pc-scheme",
+  "def-sc-invertible-module"
+ ],
+ "proof_split_by": "paragraphs"
+}

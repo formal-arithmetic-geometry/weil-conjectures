@@ -1,0 +1,26 @@
+{
+ "id": "sk-prop-injectivity",
+ "kind": "section",
+ "title": "Injectivity of the critical map",
+ "text": "*Proposition (sketch).*\n\nLet $q\\ge1$ and assume $\\mathrm{BC}(f,n,q-1)$ of [sk-def-bc] holds.\nThen for every square and every $\\Z/n\\Z$-sheaf $\\mathcal F$ as there:\n\n1. the base-change map\n$f^{-1}R^qg_*\\mathcal F\\to R^qh_*e^{-1}\\mathcal F$ is *injective*;\n1. if $\\mathcal F\\subseteq\\mathcal G$ with $\\mathcal G$ annihilated by\n$n$, the cokernel for $\\mathcal F$ is contained in the cokernel for\n$\\mathcal G$;\n1. if moreover $\\mathcal G$ is an injective sheaf of\n$\\Z/n\\Z$-modules, that cokernel is contained in\n$R^qh_*e^{-1}\\mathcal G$.\n\nConsequently a failure of $\\mathrm{BC}(f,n,q)$ is witnessed by a nonzero\nelement of the cokernel in the stalk at a geometric point of $X$. The\ndegree-$(q-1)$ hypothesis is not decorative: it is exactly what makes\ntwo of the vertical arrows in the proof isomorphisms.\n\n## Proof\n\n*Step 1 (embed in an injective).* Choose a short exact sequence\n$0\\to\\mathcal F\\to\\mathcal I\\to\\mathcal Q\\to0$ with $\\mathcal I$ an\ninjective sheaf of $\\Z/n\\Z$-modules on $T_{\\Et}$. An injective object\nis its own injective resolution, so $R^qg_*\\mathcal I=0$ for $q>0$.\n\n*Step 2 (compare the two long exact sequences).* The functors\n$f^{-1}$ and $e^{-1}$ are exact, so applying $f^{-1}R^\\bullet g_*$ to\nthe sequence and $R^\\bullet h_*$ to its $e^{-1}$-image gives two exact\nrows, and the base-change maps of [sk-def-bc] are natural, hence give\nthe vertical arrows of\n\n$$\n\\begin{array}{ccccccc}\nf^{-1}R^{q-1}g_*\\mathcal I&\\to&f^{-1}R^{q-1}g_*\\mathcal Q&\\to&\nf^{-1}R^{q}g_*\\mathcal F&\\to&0\\\\\n\\downarrow&&\\downarrow&&\\downarrow&&\\\\\nR^{q-1}h_*e^{-1}\\mathcal I&\\to&R^{q-1}h_*e^{-1}\\mathcal Q&\\to&\nR^{q}h_*e^{-1}\\mathcal F&\\to&R^{q}h_*e^{-1}\\mathcal I .\n\\end{array}\n$$\n\nThe top right entry is $f^{-1}R^qg_*\\mathcal I=0$ by Step 1, so the top\nrow exhibits $f^{-1}R^qg_*\\mathcal F$ as the cokernel of its left map.\nThe two left-hand verticals are isomorphisms by\n$\\mathrm{BC}(f,n,q-1)$, so that cokernel is identified with the cokernel\nof the bottom left map, which is the image of\n$R^{q-1}h_*e^{-1}\\mathcal Q\\to R^qh_*e^{-1}\\mathcal F$. The middle\nvertical is therefore the inclusion of that image: this is (1).\n\n*Step 3 (the cokernel).* Exactness of the bottom row continues the\nidentification: the quotient of $R^qh_*e^{-1}\\mathcal F$ by that image\ninjects into $R^qh_*e^{-1}\\mathcal I$, which is (3). For (2), run the\nsame diagram for $0\\to\\mathcal F\\to\\mathcal G\\to\\mathcal G/\\mathcal F\\to0$\nwith $\\mathcal F\\subseteq\\mathcal G\\subseteq\\mathcal I$; the\ndegree-$(q-1)$ isomorphisms again give the inclusion of the cokernel for\n$\\mathcal F$ into the one for $\\mathcal G$.\n\n*Step 4 (a failure is a cokernel element at a point).* By (1) the\nbase-change map is an isomorphism if and only if its cokernel vanishes,\nand a sheaf vanishes if and only if all its stalks do; so if\n$\\mathrm{BC}(f,n,q)$ fails there is a geometric point $\\bar x$ of $X$\nand an element of $(R^qh_*e^{-1}\\mathcal F)_{\\bar x}$ outside the image.\nThis is the form in which the statement is used in\n[sk-lem-failure-field].\n\nThis is Stacks, Étale Cohomology, Lemma 59.88.2\n([`0F03`](https://stacks.math.columbia.edu/tag/0F03)); the detailed form is Blueprint 07,\n`sbc-lem-bc-injectivity`, whose acyclicity input is Blueprint 02,\n`lemma-weil-pbc-leray-acyclicity`, and whose long exact sequences\nare `lemma-weil-pbc-five-lemma-transfer`.\n\nUses: [sk-def-bc]",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-injectivity/_section.md",
+  "place": "order 1383"
+ },
+ "cites": [
+  "sk-def-bc",
+  "sk-lem-failure-field",
+  "sbc-lem-bc-injectivity",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lemma-weil-pbc-five-lemma-transfer"
+ ],
+ "blueprint_uses": [
+  "sk-def-bc"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.mono_baseChangeHomologyMap",
+  "AlgebraicGeometry.Etale.mono_cokernelMap",
+  "AlgebraicGeometry.Etale.mono_cokernelDesc"
+ ],
+ "blueprint_tags": []
+}

@@ -1,0 +1,110 @@
+{
+ "id": "thm-weil-final-functional-equation",
+ "kind": "statement",
+ "title": "Weil conjectures V: functional equation",
+ "statement": "Fix a finite field\n$k_0=\\mathbf F_q$ of characteristic $p$, with algebraic closure\n$k=\\overline{\\mathbf F}_q$.\nLet $X_0/k_0$ be\nsmooth, proper and geometrically\nconnected of pure dimension $d\\geq0$, and put $X=X_0\\times_{k_0}k$.\nLet $P_i\\in\\mathbf Z[T]$, $0\\leq i\\leq2d$, be the\nintegral Frobenius factors\nprovided by [thm-weil-final-integrality]: $P_i(0)=1$, and for\nevery $\\ell\\neq p$,\n\n$$\nP_i^{(\\ell)}(T)=\\det(1-TF_{i,\\ell}\\mid H^i(X,\\mathbf Q_\\ell)),\n$$\n\nwhere $F_{i,\\ell}$ is\ngeometric Frobenius\non ordinary cohomology,\nand $P_i^{(\\ell)}$ means coefficientwise extension\n$\\mathbf Z\\to\\mathbf Q_\\ell$.\nLet $Z(X_0,T)$ denote the\npoint-count zeta series.\nIf\n$P(T)=\\sum_{m\\geq0}c_mT^m$, write\n$[T^m]P(T)=c_m$. For every integer $i$ with $0\\leq i\\leq2d$, define the\ndeterminant constants\n\n$$\nD_i=(-1)^{b_i}[T^{b_i}]P_i(T),\n$$\n\nwith $b_i=\\deg P_i$ as in [thm-weil-final-betti], and set the Euler\ncharacteristic\n\n$$\n\\chi=\\sum_{i=0}^{2d}(-1)^ib_i.\n$$\n\nThen $d\\chi$ is even and, for every integer $i$ with $0\\leq i\\leq2d$,\n\n$$\nP_{2d-i}(q^{-d}T^{-1})\n=(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T),\n$$\n\nand\n\n$$\nZ(X_0,q^{-d}T^{-1})\n=\\varepsilon q^{d\\chi/2}T^\\chi Z(X_0,T)\n$$\n\nfor the sign\n\n$$\n\\varepsilon=\n(-1)^\\chi q^{-d\\chi/2}\n\\prod_{i=0}^{2d}D_i^{(-1)^i}\n\\in\\{1,-1\\}.\n$$\n\nThe sign $\\varepsilon$ is the\nnormalized functional-equation\nsign.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil5/thm-weil-final-functional-equation.md",
+  "place": "node thm-weil-final-functional-equation, order 2937"
+ },
+ "stmt_deps": [
+  "thm-weil-final-integrality",
+  "thm-weil-final-betti",
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use the determinant definitions in [def-weil-determinant-constants].\nThe reciprocity calculation [prop-duality-reciprocity], whose duality\ninput is [prop-poincare-pairing], gives\n\n$$\nP_{2d-i}(q^{-d}T^{-1})\n=(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T),\n\\qquad D_iD_{2d-i}=q^{db_i}.\n$$",
+   "uses": [
+    "def-weil-determinant-constants",
+    "prop-duality-reciprocity",
+    "prop-poincare-pairing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pairing $i$ with $2d-i$, and using the middle-degree alternating-form\ncase in [prop-duality-reciprocity], shows that $d\\chi$ is even. Thus\nthe sign is defined by [def-weil-functional-equation-sign]. Finally,\nsubstitution into the rational factorization of the\n[def-weil-point-counts-zeta] zeta series and reindexing gives exactly\nthe functional-equation identity in [prop-functional-equation],\nwith $\\chi$ and $b_i$ as in [def-weil-betti-numbers].",
+   "uses": [
+    "prop-duality-reciprocity",
+    "def-weil-functional-equation-sign",
+    "def-weil-point-counts-zeta",
+    "prop-functional-equation",
+    "def-weil-betti-numbers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-determinant-constants",
+  "prop-duality-reciprocity",
+  "prop-poincare-pairing",
+  "def-weil-functional-equation-sign",
+  "def-weil-point-counts-zeta",
+  "prop-functional-equation",
+  "def-weil-betti-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil5/thm-weil-final-functional-equation.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_multiple"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2937,
+ "blueprint_uses": [
+  "def-weil-betti-numbers",
+  "def-weil-determinant-constants",
+  "def-weil-finite-field-fiber",
+  "def-weil-functional-equation-sign",
+  "def-weil-geometric-hypotheses",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-point-counts-zeta",
+  "prop-duality-reciprocity",
+  "prop-functional-equation",
+  "prop-poincare-pairing",
+  "thm-weil-final-betti",
+  "thm-weil-final-integrality"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Statement",
+  "declaration": "AlgebraicGeometry.Scheme.weil_conjectures",
+  "branch": "master",
+  "line": 92,
+  "sorry_free": false,
+  "body_lines": 1,
+  "others": [
+   {
+    "module": "Comparator.Weil.Definitions",
+    "declaration": "AlgebraicGeometry.WeilFunctionalEquation",
+    "branch": "master",
+    "line": 130,
+    "sorry_free": true,
+    "body_lines": 2
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.weil_conjectures",
+  "AlgebraicGeometry.WeilFunctionalEquation"
+ ],
+ "uses_not_cited": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof_split_by": "paragraphs"
+}

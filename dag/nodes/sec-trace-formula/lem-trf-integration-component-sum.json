@@ -1,0 +1,81 @@
+{
+ "id": "lem-trf-integration-component-sum",
+ "kind": "statement",
+ "title": "Integration splits over the open–closed components",
+ "statement": "Fix the coefficient\nconventions, $A=A_{E,n}$, $s=\\Spec k$, and let $T$ be a\nseparated finite-type scheme over $s$ which is a finite disjoint union\n\n$$\nT=\\coprod_{\\beta\\in B}\\beta\n$$\n\nof open-and-closed subschemes $j_\\beta:\\beta\\hookrightarrow T$, each\nproper over $s$. Then $T$ is proper over $s$. For\n$\\tau:A_T\\to\\omega_{T,A}$ and $\\beta\\in B$ define the *restriction*\n\n$$\n\\tau|_\\beta:\nA_\\beta\\xrightarrow{\\ \\sim\\ }Lj_\\beta^*A_T\n\\xrightarrow{Lj_\\beta^*\\tau}Lj_\\beta^*\\omega_{T,A}\n\\cong Rj_\\beta^!\\omega_{T,A}\\cong\\omega_{\\beta,A},\n$$\n\nusing the equality $Rj_\\beta^!\\cong Lj_\\beta^*$ for the open immersion\n$j_\\beta$ ([prop-functor-package], item (6), relative dimension $0$)\nand the identification of [thm-trf-dualizing-complex-composition]\n(this restriction makes sense without any properness). Then\n\n$$\n\\int_T\\tau=\\sum_{\\beta\\in B}\\int_\\beta(\\tau|_\\beta),\n$$\n\nwhere $\\int_T,\\int_\\beta$ are the integrations of\n[def-trf-integration] and $\\omega_{T,A}$ is the\ndualizing complex of\n[def-trf-dualizing-complex]; for $B=\\emptyset$ both sides are $0$.\nIn particular, if $c$ is an admissible correspondence whose fixed\nscheme $F=\\operatorname{Fix}(c)$ of [def-trf-fixed-scheme] has\nfinitely many open-and-closed components $\\beta\\in\\pi_0(F)$, each\nproper over $s$, then $F$ is proper and\n$\\int_F\\tau=\\sum_{\\beta\\in\\pi_0(F)}\\int_\\beta(\\tau|_\\beta)$, the\nrestrictions being those of [def-trf-local-term].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/lem-trf-integration-component-sum.md",
+  "place": "node lem-trf-integration-component-sum, order 2348"
+ },
+ "stmt_deps": [
+  "prop-functor-package",
+  "thm-trf-dualizing-complex-composition",
+  "def-trf-integration",
+  "def-trf-dualizing-complex",
+  "def-trf-fixed-scheme",
+  "def-trf-local-term",
+  "def-trf-coefficient-conventions",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "*Properness.* The morphism $a_T:T\\to s$ is separated and of finite\ntype. It is universally closed: for any $s'\\to s$ the base change\n$T_{s'}=\\coprod_\\beta\\beta_{s'}$ is a finite disjoint union of\nopen-and-closed pieces, a closed subset $Z\\subseteq T_{s'}$ is the\nfinite union of the closed subsets $Z\\cap\\beta_{s'}$ of the\n$\\beta_{s'}$, and its image in $s'$ is the finite union of their\nimages, which are closed because each $\\beta\\to s$ is universally\nclosed. Hence $T$ is proper over $s$ and $\\int_T$ of\n[def-trf-integration] is defined.",
+   "uses": [
+    "def-trf-integration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Splitting.* The pro-etale site of a disjoint union of schemes is the\ndisjoint union of the sites ([def-weil-pbc-proetale-site]), so\n$D(T,A)\\cong\\prod_{\\beta}D(\\beta,A)$ via $(Lj_\\beta^*)_\\beta$, and the\nsix operations decompose\naccordingly: in particular\n$R\\Gamma(T,-)\\cong\\prod_\\beta R\\Gamma(\\beta,-)$ (the product is a direct\nsum over the finite set $B$),\nthe unit $A\\to R\\Gamma(T,A_T)$ of [def-trf-integration] is the\ntuple of the units of the components, and the counit\n$\\varepsilon_{a_T}$ is the tuple of the counits\n$\\varepsilon_{a_\\beta}$ (the adjunctions of [def-trf-integration]\ndecompose with the products, by the compatibility of the six-functor\nformalism with disjoint unions; here $a_\\beta=a_Tj_\\beta$ and\n$Rj_\\beta^!=Lj_\\beta^*$). Under this decomposition $\\omega_{T,A}$\ncorresponds to the tuple of the $Lj_\\beta^*\\omega_{T,A}\\cong\n\\omega_{\\beta,A}$ of [thm-trf-dualizing-complex-composition], and\n$\\tau$ to the tuple of its restrictions $\\tau|_\\beta$ defined above.\nHence the composite displayed in\n[def-trf-integration] for $\\int_T\\tau$ is the tuple of the\ncomposites defining the $\\int_\\beta(\\tau|_\\beta)$; the unit\n$A\\to\\bigoplus_\\beta R\\Gamma(\\beta,A_\\beta)$ is the diagonal and the\ncounit $\\bigoplus_\\beta R\\Gamma(\\beta,\\omega_{\\beta,A})\\to A$ is the sum\nmap, so the composite is the sum of the component composites, which is\nthe displayed identity. If $B=\\emptyset$ then $T=\\emptyset$,\n$R\\Gamma(T,-)=0$ and both sides vanish.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-trf-integration",
+    "thm-trf-dualizing-complex-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The fixed-scheme case.* For $T=F$ and $B=\\pi_0(F)$, finite by\nhypothesis ([def-trf-fixed-scheme]), the restriction $\\tau|_\\beta$\nabove is literally the composite used in [def-trf-local-term], so the\nlast assertion is the special case just proved.",
+   "uses": [
+    "def-trf-fixed-scheme",
+    "def-trf-local-term"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integration",
+  "def-weil-pbc-proetale-site",
+  "thm-trf-dualizing-complex-composition",
+  "def-trf-fixed-scheme",
+  "def-trf-local-term"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/lem-trf-integration-component-sum.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2348,
+ "blueprint_uses": [
+  "def-trf-coefficient-conventions",
+  "def-trf-dualizing-complex",
+  "def-trf-fixed-scheme",
+  "def-trf-integration",
+  "def-trf-local-term",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "prop-functor-package",
+  "thm-trf-dualizing-complex-composition"
+ ],
+ "uses_not_cited": [
+  "def-trf-coefficient-conventions",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "labels"
+}

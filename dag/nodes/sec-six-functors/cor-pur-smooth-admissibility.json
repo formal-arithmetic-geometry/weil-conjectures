@@ -1,0 +1,103 @@
+{
+ "id": "cor-pur-smooth-admissibility",
+ "kind": "statement",
+ "title": "Smooth morphisms satisfy the preservation clauses",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $f:X\\to Y$ be smooth separated of pure relative dimension $d$.\nThe\nambient exceptional right\nadjoint datum of [def-weil-ambient-exceptional-adjoint] was the\nhypothesis under which this corollary was formerly stated; it is not assumed\nhere, being on the bounded constructible and finite-Tor coefficients that the\ntwo clauses below quantify over the theorem\n[cor-sf-ambient-adjoint-discharge]. Then $f$ satisfies the\ntwo preservation clauses of\n[def-weil-exceptional-adjoint-admissibility], with\n$c_f^-=c_f^+=-2d$ in the signed convention of that definition:\n\n1. *constructibility.* For all integers $a\\leq b$,\n$$\nL\\in D_c^{[a,b]}(Y,A)\\quad\\Longrightarrow\\quad\nRf^!L\\in D_c^{[a-2d,b-2d]}(X,A).\n$$\n1. *finite Tor amplitude.* If $K\\in D^b_{ctf}(Y,A)$ has\nfinite Tor amplitude in\n$[a,b]$, then $Rf^!K$ has finite Tor amplitude in\n$[a-2d,b-2d]$; in particular $Rf^!$ carries $D^b_{ctf}(Y,A)$\ninto $D^b_{ctf}(X,A)$.\n\nThus every smooth morphism is\nexceptional-adjoint admissible at $A=A_{E,n}$ in the constructible sense —\nthe three clauses of [def-weil-exceptional-adjoint-admissibility] read on the\ncomplexes of the blueprint's coefficient class that the two clauses below\nquantify over; the unrestricted clause (1) of that definition, on all\npro-etale sheaves, is false in general and is not asserted —: the\npreservation\nclauses are consequences of purity, not hypotheses of it, and the ambient\ndatum that the earlier form of this corollary assumed is not an assumption\neither, by [cor-sf-ambient-adjoint-discharge]. The weaker statement\n``admissible at $\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$'' demands in addition the\nuniformity of the two clauses over the finite stages and the\nfinite-reduction and scalar-extension compatibilities of the right adjoints;\nthose are the coefficient transport of the transport section at the end of\nthis chapter, and they are *not* asserted here.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
+  "place": "node cor-pur-smooth-admissibility, order 2077"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-ambient-exceptional-adjoint",
+  "cor-sf-ambient-adjoint-discharge",
+  "def-weil-exceptional-adjoint-admissibility",
+  "def-sbc-smooth-morphisms",
+  "def-weil-constructible-intervals",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "By [cor-pur-dualizing-object-purity] the right adjoint $Rf^!$, whose\nexistence on the coefficients used here is the theorem\n[cor-sf-ambient-adjoint-discharge], is\nidentified with $Lf^*(-)(d)[2d]$ on finite-Tor objects. For a\nbounded constructible complex $L$ without finite Tor amplitude, use\nthe tensor formula on all ordinary etale complexes of\n[thm-asd-smooth-tensor], the orientation at $\\Lambda$ of\n[thm-pur-diagonal-dualizing-object], and the comparison\n[thm-sf-ambient-adjoint-class]. They give the same identification\nfor $L$; no site-perfectness of $L$ is assumed. The criterion below is\napplied at the finite etale level and transported to the small pro-etale\nsite along [thm-cbc-finite-level-proetale], as elsewhere in this\nchapter.\nStep 1: (1). The inverse image of [prop-weil-pbc-inverse-image-exact] is exact.\nIt preserves constructibility: pull back each finite stratification\nand each finite locally constant sheaf on its strata, as in\n[def-weil-finite-torsion-constructibility]. Thus for\n$L\\in D_c^{[a,b]}(Y,A)$ the complex $Lf^*L$ is bounded constructible\nwith $\\mathcal H^r(Lf^*L)\\cong f^*\\mathcal H^r(L)$, which vanishes for\n$r\\notin[a,b]$; the [def-coefficient-twists-detailed] twist preserves the\nvanishing degrees by [prop-weil-twist-preserves], and the shift moves them, by the convention\n$\\mathcal H^r(C[2d])=\\mathcal H^{r+2d}(C)$, to $[a-2d,b-2d]$.\nStep 2: (2). Test the finite Tor amplitude of $Rf^!K$ by the residue\nfield criterion of [lem-exc-residue-tor-test]: it is equivalent to\nthe complex $\\mathcal H^\\bullet\\bigl(Rf^!K\\otimes^L_A\\kappa\\bigr)$ being\nconcentrated in $[a-2d,b-2d]$. Substituting the purity\nidentification and the associativity of the derived tensor product,\n\n$$\nRf^!K\\otimes^L_A\\kappa\n\\;\\cong\\;\\bigl(Lf^*K\\otimes^L_A\\kappa\\bigr)(d)[2d]\n\\;\\cong\\;Lf^*\\bigl(K\\otimes^L_A\\kappa\\bigr)(d)[2d].\n$$",
+   "uses": [
+    "cor-pur-dualizing-object-purity",
+    "cor-sf-ambient-adjoint-discharge",
+    "thm-asd-smooth-tensor",
+    "thm-pur-diagonal-dualizing-object",
+    "thm-sf-ambient-adjoint-class",
+    "thm-cbc-finite-level-proetale",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-finite-torsion-constructibility",
+    "def-coefficient-twists-detailed",
+    "prop-weil-twist-preserves",
+    "lem-exc-residue-tor-test"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By the same criterion applied to $K$, the complex\n$K\\otimes^L_A\\kappa$ has cohomology in $[a,b]$; the inverse image\n$Lf^*$ is exact, so $Lf^*(K\\otimes^L_A\\kappa)$ has cohomology in\n$[a,b]$, and the twist by the locally constant free rank-one sheaf\n$\\Lambda(d)$ preserves the vanishing degrees. The shift therefore puts\nthe cohomology in $[a-2d,b-2d]$, which is the assertion. At field\ncoefficients the assertion is the case already recorded in\n[lem-weil-field-tor-amplitude].",
+   "uses": [
+    "lem-weil-field-tor-amplitude"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "cor-pur-dualizing-object-purity",
+  "cor-sf-ambient-adjoint-discharge",
+  "thm-asd-smooth-tensor",
+  "thm-pur-diagonal-dualizing-object",
+  "thm-sf-ambient-adjoint-class",
+  "thm-cbc-finite-level-proetale",
+  "prop-weil-pbc-inverse-image-exact",
+  "def-weil-finite-torsion-constructibility",
+  "def-coefficient-twists-detailed",
+  "prop-weil-twist-preserves",
+  "lem-exc-residue-tor-test",
+  "lem-weil-field-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2077,
+ "blueprint_uses": [
+  "cor-pur-dualizing-object-purity",
+  "cor-sf-ambient-adjoint-discharge",
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-ambient-exceptional-adjoint",
+  "def-weil-constructible-intervals",
+  "def-weil-exceptional-adjoint-admissibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-scheme-morphism-properties",
+  "lem-exc-residue-tor-test",
+  "lem-weil-field-tor-amplitude",
+  "prop-weil-pbc-inverse-image-exact",
+  "prop-weil-twist-preserves",
+  "thm-asd-smooth-tensor",
+  "thm-cbc-finite-level-proetale",
+  "thm-pur-diagonal-dualizing-object",
+  "thm-sf-ambient-adjoint-class"
+ ],
+ "blueprint_tags": [
+  "latex:corollary"
+ ],
+ "uses_not_cited": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-constructible-intervals",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs"
+}

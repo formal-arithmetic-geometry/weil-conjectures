@@ -1,0 +1,90 @@
+{
+ "id": "lem-sc-affine-generic-second",
+ "kind": "statement",
+ "title": "Second cohomology of a generic extension on an affine curve",
+ "statement": "Let $C/k$ be a smooth integral affine\nconnected curve over algebraically closed $k$\nand $\\eta:\\operatorname{Spec}k(C)\\to C$ its\ngeneric point.\nFor every torsion etale sheaf\n$M$ on $\\operatorname{Spec}k(C)$, one has\n$H^2(C,\\eta_*M)=0$, with\netale cohomology.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "node lem-sc-affine-generic-second, order 1017"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-function-field",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "First let $M$ be finite $\\ell$-primary. Use\n[lem-exc-field-discrete-modules], [lem-sc-sylow-module-filtration]\nto choose a finite separable extension $K'/K$, $K=k(C)$,\nof degree $d$ prime to $\\ell$, such that $M'=M|_{K'}$\nhas a filtration by trivial $\\mathbf F_\\ell$-modules.\nWrite $a:\\eta'=\\operatorname{Spec}K'\\to\\eta$.\nThe finite etale trace on the field is the sum over the $d$\ngeometric points of its fibre. The unit and this sum give\n\n$$\nM\\longrightarrow a_*a^*M\\longrightarrow M\n$$\n\nwith composite $d\\,\\mathrm{id}$. Multiplication by $d$ is\ninvertible, so this is a splitting after rescaling the sum.\nNo trace for a ramified morphism is being asserted.",
+   "uses": [
+    "lem-exc-field-discrete-modules",
+    "lem-sc-sylow-module-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-sc-finite-extension-affine-model] to obtain\n$h:C'\\to C$ and the generic point map $b:\\eta'\\to C'$.\nThe equality $h b=\\eta a$ gives\n$\\eta_*a_*M'=h_*b_*M'$. Applying $\\eta_*$ to the splitting\nmakes $\\eta_*M$ a direct summand of this sheaf.\nFinite direct image is exact by\n[lemma-weil-pbc-finite-direct-image-exact], so it remains to\nprove $H^2(C',b_*M')=0$.",
+   "uses": [
+    "lem-sc-finite-extension-affine-model",
+    "lemma-weil-pbc-finite-direct-image-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a filtration step $0\\to M_1\\to M_2\\to M_3\\to0$, put\n$G_i=b_*M_i$ and $I=\\operatorname{im}(G_2\\to G_3)$.\nAlthough $b_*$ need not be exact, its left exactness gives\n$0\\to G_1\\to G_2\\to I\\to0$, and $G_3/I$ has zero generic\nrestriction. By [lem-sc-zero-generic-acyclic],\n$H^2(C',I)\\simeq H^2(C',G_3)$.\nThe other long exact sequence shows that vanishing for $G_1$\nand $G_3$ implies vanishing for $G_2$.\nFor a trivial quotient, $b_*\\mathbf F_\\ell=\\mathbf F_\\ell$:\neach connected normal etale curve is integral, so a locally\nconstant function on its generic point extends uniquely.\nThe base case is [lem-sc-affine-constant-second].\nInduction through the filtration proves the finite case.",
+   "uses": [
+    "lem-sc-zero-generic-acyclic",
+    "lem-sc-affine-constant-second"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A general torsion $G_K$-module is the directed union of finite\nstable submodules: each orbit is finite by continuity, and a\nfinite set of torsion generators generates a finite group.\nSeparate the finitely many primary parts of each finite module.\nThe functor $\\eta_*$ commutes with this union. Indeed, on a\nquasi-compact etale test curve the generic fibre is a finite\ndisjoint union of spectra of finite separable extensions;\nsections are a finite product of invariant groups. Invariants\ncommute with directed unions of submodules, directly from their\ndefinition. Finally\n[lem-weil-pbc-cohomology-filtered-colimit] proves the\nassertion for the union.",
+   "uses": [
+    "lem-weil-pbc-cohomology-filtered-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-field-discrete-modules",
+  "lem-sc-sylow-module-filtration",
+  "lem-sc-finite-extension-affine-model",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-sc-zero-generic-acyclic",
+  "lem-sc-affine-constant-second",
+  "lem-weil-pbc-cohomology-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1017,
+ "blueprint_uses": [
+  "def-sc-curves",
+  "def-sc-function-field",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-sheaves",
+  "lem-exc-field-discrete-modules",
+  "lem-sc-affine-constant-second",
+  "lem-sc-finite-extension-affine-model",
+  "lem-sc-sylow-module-filtration",
+  "lem-sc-zero-generic-acyclic",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lemma-weil-pbc-finite-direct-image-exact"
+ ],
+ "uses_not_cited": [
+  "def-sc-curves",
+  "def-sc-function-field",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof_split_by": "paragraphs"
+}

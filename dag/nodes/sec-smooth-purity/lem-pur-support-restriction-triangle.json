@@ -1,0 +1,66 @@
+{
+ "id": "lem-pur-support-restriction-triangle",
+ "kind": "statement",
+ "title": "Restriction triangle inside a closed support",
+ "statement": "Let $T$ be a scheme, let $B,C\\subseteq T$ be\nclosed subschemes, and\nput $V=T\\setminus C$, with open immersion $v:V\\hookrightarrow T$.\nLet $F$ be a bounded-below complex of module sheaves on the\nsmall etale site.\nWrite $R\\Gamma_B(T,F)$ for the derived functor of the\nsections supported on $B$,\nwhose cohomology is the\ncohomology with support.\nThere is a natural distinguished triangle in the\nderived category of modules:\n\n$$\nR\\Gamma_{B\\cap C}(T,F)\\longrightarrow R\\Gamma_B(T,F)\n\\longrightarrow R\\Gamma_{B\\cap V}(V,v^*F)\\longrightarrow\nR\\Gamma_{B\\cap C}(T,F)[1].\n$$\n\nThe third support is closed in $V$; its ambient scheme is $V$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-restriction-triangle.md",
+  "place": "node lem-pur-support-restriction-triangle, order 1936"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded-below injective resolution $F\\to I^\\bullet$\nas in [def-weil-pbc-kinjective-resolutions].\nFor the closed immersion $i:B\\hookrightarrow T$, the\n[def-pur-flasque-support] functor $i^!$ is right adjoint to\nthe exact functor $i_*$; hence $i^!$ preserves injectives.\nThe functor $i_*$ also preserves injectives, since it is right\nadjoint to the exact restriction $i^*$.\nConsequently $\\mathcal G_BI=i_*i^!I$ is injective whenever $I$\nis injective. An injective sheaf has surjective restriction of\nsections to an open subset: apply its lifting property to the\nmonomorphism from the free module sheaf of that open subset to\nthe constant free module sheaf.\nRestriction to $V$ is exact and commutes with the support kernel,\nso\n\n$$\n(\\mathcal G_BI)|_V=\\mathcal G_{B\\cap V}(I|_V).\n$$",
+   "uses": [
+    "def-weil-pbc-kinjective-resolutions",
+    "def-pur-flasque-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The kernel of the resulting surjection\n$\\Gamma_B(T,I)\\to\\Gamma_{B\\cap V}(V,I|_V)$ consists precisely of\nsections supported on both $B$ and $C$, namely\n$\\Gamma_{B\\cap C}(T,I)$.\nThis gives a short exact sequence of complexes of sections.\nBy the exactness of extension by zero in\n[def-weil-open-closed-recollement], the restriction $v^*$\npreserves injectives. Thus all three complexes compute the\nderived support functors of [def-pur-support-cohomology].\nThe cone triangle of the short exact sequence proves the assertion.\nAll maps come from support inclusion and restriction, so the\ncomparison theorem for injective resolutions makes the triangle\nnatural in $F$.",
+   "uses": [
+    "def-weil-open-closed-recollement",
+    "def-pur-support-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kinjective-resolutions",
+  "def-pur-flasque-support",
+  "def-weil-open-closed-recollement",
+  "def-pur-support-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-restriction-triangle.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1936,
+ "blueprint_uses": [
+  "def-pur-flasque-support",
+  "def-pur-support-cohomology",
+  "def-weil-open-closed-recollement",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs"
+}

@@ -1,0 +1,65 @@
+{
+ "id": "lem-trf-fixed-map-proper",
+ "kind": "statement",
+ "title": "The induced map of fixed schemes is proper",
+ "statement": "Let $(f,g):(C,c)\\to(D,b)$ be a proper pushforward diagram of\n[def-trf-coefficient-pushforward], with induced map\n$h:F_c=\\operatorname{Fix}(c)\\to F_b=\\operatorname{Fix}(b)$. Then:\n\n1. $h$ factors as\n$$\nh:\\ F_c\\xrightarrow{\\ \\kappa\\ }C\\times_DF_b\\xrightarrow{\\ \\pi\\ }F_b,\n$$\nwhere $\\pi$ is the base change of $g$ along $i_b:F_b\\to D$, and\n$\\kappa$ is a base change of the relative diagonal\n$\\Delta_{X/Y}:X\\to X\\times_YX$, hence a closed immersion;\n1. $h$ and $q=f\\times f:X\\times_sX\\to Y\\times_sY$ are proper.\n\nConsequently, for a correspondence $u$ on $(X,K)$ supported on $c$, with\nthe exceptional admissibility of $h$ and of the structure morphisms of\n$F_c,F_b$, the *proper pushforward of the trace class*\n\n$$\nh_*\\operatorname{Tr}_c(u):A_{F_b}\\longrightarrow\\omega_{F_b}\n$$\n\nis defined: it is the Borel–Moore pushforward of\n[def-trf-borel-moore-pushforward] of the Borel–Moore section\n$\\operatorname{Tr}_c(u)$ of [def-trf-trace-class].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-proper-pushforward/lem-trf-fixed-map-proper.md",
+  "place": "node lem-trf-fixed-map-proper, order 2327"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-pushforward",
+  "def-trf-borel-moore-pushforward",
+  "def-trf-trace-class"
+ ],
+ "proof": [
+  {
+   "text": "Put $G=C\\times_DF_b$, with projections $\\pi:G\\to F_b$ and\n$j:G\\to C$. By [def-trf-fixed-scheme],\n$F_b=D\\times_{Y\\times_sY,\\Delta_Y}Y$, so a $T$-point of $G$ is a pair\n$(t,y)$ of $t\\in C(T)$ and $y\\in Y(T)$ with $b(g(t))=(y,y)$, i.e. with\n$fc_1(t)=y=fc_2(t)$. Hence $(c_1,c_2)\\circ j$ factors through\n$X\\times_YX\\subset X\\times_sX$, giving a morphism $\\lambda:G\\to X\\times_YX$.\nThe morphism $X\\times_YX\\to X\\times_sX$ is a monomorphism (it is the base\nchange of the monomorphism $\\Delta_Y$). Therefore a $T$-point of\n$G\\times_{X\\times_YX,\\lambda,\\Delta_{X/Y}}X$ is a pair $((t,y),x)$ with\n$(c_1t,c_2t)=(x,x)$, and then $y=fx$ is determined; that is, exactly a\npair $(t,x)$ with $c(t)=\\Delta_X(x)$, which is a $T$-point of\n$F_c=C\\times_{X\\times_sX,c,\\Delta_X}X$. These identifications are natural\nin $T$, so\n\n$$\nF_c\\cong G\\times_{X\\times_YX,\\Delta_{X/Y}}X,\n$$\n\nand the first projection $\\kappa:F_c\\to G$, $\\kappa=(i_c,f d_c)$, is the\nbase change of $\\Delta_{X/Y}$. Since $\\pi\\kappa=(g i_c,fd_c)$ as a map to\n$D\\times_{Y\\times_sY}Y$, the identities $i_bh=gi_c$, $d_bh=fd_c$ of\n[def-trf-coefficient-pushforward] give $\\pi\\kappa=h$. This is (1),\nexcept for the closed immersion claim.",
+   "uses": [
+    "def-trf-fixed-scheme",
+    "def-trf-coefficient-pushforward"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proper $f$ is separated, so $\\Delta_{X/Y}$ is a closed immersion\n([def-weil-scheme-morphism-properties]), and so is its base change\n$\\kappa$. Closed immersions are proper\n([lem-weil-pbc-closed-immersion-proper]); $\\pi$ is proper as a base change\nof the proper $g$, and $h=\\pi\\kappa$ is proper as a composite\n([lem-kun-proper-stability]). Finally\n$q=(f\\times\\operatorname{id}_Y)\\circ(\\operatorname{id}_X\\times f)$ is a\ncomposite of base changes of $f$, hence proper by\n[lem-kun-proper-stability]. This proves (2). The last assertion is the\ndefinition of [def-trf-borel-moore-pushforward] applied to the proper $h$,\n$T=F_c$, $T'=F_b$ and $\\alpha=\\operatorname{Tr}_c(u)$.",
+   "uses": [
+    "def-weil-scheme-morphism-properties",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-kun-proper-stability",
+    "def-trf-borel-moore-pushforward"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fixed-scheme",
+  "def-trf-coefficient-pushforward",
+  "def-weil-scheme-morphism-properties",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-kun-proper-stability",
+  "def-trf-borel-moore-pushforward"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-proper-pushforward/lem-trf-fixed-map-proper.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2327,
+ "blueprint_uses": [
+  "def-trf-borel-moore-pushforward",
+  "def-trf-coefficient-pushforward",
+  "def-trf-fixed-scheme",
+  "def-trf-trace-class",
+  "def-weil-scheme-morphism-properties",
+  "lem-kun-proper-stability",
+  "lem-weil-pbc-closed-immersion-proper"
+ ],
+ "proof_split_by": "paragraphs"
+}

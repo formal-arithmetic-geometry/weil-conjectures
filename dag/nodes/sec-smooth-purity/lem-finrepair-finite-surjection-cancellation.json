@@ -1,0 +1,87 @@
+{
+ "id": "lem-finrepair-finite-surjection-cancellation",
+ "kind": "statement",
+ "title": "Constructibility descends through a finite surjection",
+ "statement": "Let $f:X\\to S$ be a morphism between schemes of finite type over $k$,\nand let $\\pi:Y\\to X$ be finite and surjective, in the sense of\n[def-weil-pbc-scheme-conventions]. If $\\mathcal C(f\\pi)$ holds,\nthen $\\mathcal C(f)$ holds, with $\\mathcal C$ as in\n[def-finrepair-property-c].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-finite-surjection-cancellation.md",
+  "place": "node lem-finrepair-finite-surjection-cancellation, order 1598"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-finrepair-property-c"
+ ],
+ "proof": [
+  {
+   "text": "Let $Q_0=F$ be any constructible $\\Lambda$-sheaf on $X$.\nFor every sheaf $Q$, the unit\n$Q\\to\\pi_*\\pi^*Q$ is injective: by\n[lemma-weil-pbc-finite-stalk-formula], at a geometric point\n$\\bar x$ it is the diagonal map\n\n$$\nQ_{\\bar x}\\longrightarrow\n\\prod_{\\bar y\\in Y_{\\bar x}}Q_{\\bar x},\n$$\n\nand the finite indexing set is nonempty by surjectivity.\nUse [lemma-weil-pbc-geometric-stalk-conservative] to detect\nthis injectivity.\nThe pullback of a constructible sheaf is constructible, by pulling\nback its finite locally closed stratification. Thus\n[lem-fin-finite-morphism] shows that $\\pi_*\\pi^*Q$ is\nconstructible whenever $Q$ is.\nDefine recursively\n\n$$\nG^a=\\pi_*\\pi^*Q_a,\\qquad Q_{a+1}=\\operatorname{coker}(Q_a\\to G^a).\n$$",
+   "uses": [
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-fin-finite-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every $G^a$ and $Q_{a+1}$ is constructible by induction and\n[thm-constructible-serre]. Define the differential\n$G^a\\to G^{a+1}$ as the quotient $G^a\\to Q_{a+1}$ followed by\nthe injective unit $Q_{a+1}\\to G^{a+1}$.\nIts kernel is the image of $Q_a$, and the preceding differential\nhas precisely that image. We have therefore constructed an exact\naugmented complex\n\n$$\n0\\longrightarrow F\\longrightarrow G^0\\longrightarrow\nG^1\\longrightarrow G^2\\longrightarrow\\cdots .\n$$",
+   "uses": [
+    "thm-constructible-serre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite morphism $\\pi$ has exact direct image by\n[lem-fin-finite-morphism]. The composition spectral sequence of\n[lem-weil-pbc-grothendieck-spectral-sequence] consequently gives\n\n$$\nR^bf_*G^a=R^b(f\\pi)_*(\\pi^*Q_a).\n$$",
+   "uses": [
+    "lem-fin-finite-morphism",
+    "lem-weil-pbc-grothendieck-spectral-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each such sheaf is constructible by the hypothesis\n$\\mathcal C(f\\pi)$ of [def-finrepair-property-c].\nApply the Cartan–Eilenberg spectral sequence\n[thm-sp-if-e1] to the displayed resolution, indexing it here as\n\n$$\nE_1^{a,b}=R^bf_*G^a\\Longrightarrow R^{a+b}f_*F\n\\qquad(a,b\\geq0).\n$$",
+   "uses": [
+    "def-finrepair-property-c",
+    "thm-sp-if-e1"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every successive page is formed by kernels and cokernels of maps\nbetween constructible sheaves, so all its terms are constructible by\n[thm-constructible-serre].\nFor fixed total degree $n$, only $0\\leq a,b\\leq n$ can contribute,\nand differentials entering or leaving these terms vanish for\nsufficiently large page number by the first-quadrant condition.\nThe abutment has a finite filtration whose quotients are those\nstable terms, so it is constructible by the extension clause of the\nsame weak-Serre lemma. This proves $\\mathcal C(f)$.\nThe resolution is unbounded to the right; this argument makes no\nclaim of a uniform vanishing bound.",
+   "uses": [
+    "thm-constructible-serre"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-fin-finite-morphism",
+  "thm-constructible-serre",
+  "lem-weil-pbc-grothendieck-spectral-sequence",
+  "def-finrepair-property-c",
+  "thm-sp-if-e1"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-finite-surjection-cancellation.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1598,
+ "blueprint_uses": [
+  "def-finrepair-property-c",
+  "def-weil-pbc-scheme-conventions",
+  "lem-fin-finite-morphism",
+  "lem-weil-pbc-grothendieck-spectral-sequence",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-constructible-serre",
+  "thm-sp-if-e1"
+ ],
+ "proof_split_by": "paragraphs"
+}

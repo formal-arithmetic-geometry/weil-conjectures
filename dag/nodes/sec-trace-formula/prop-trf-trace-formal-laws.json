@@ -1,0 +1,104 @@
+{
+ "id": "prop-trf-trace-formal-laws",
+ "kind": "statement",
+ "title": "Formal laws for the categorical trace",
+ "statement": "Fix the global finite-field datum\nand the coefficient\nconventions. The categorical\ntrace has the following properties, all with $A=A_{E,n}$ and\n$\\Lambda\\in\\{E,\\Qlb\\}$ when infinite coefficients occur:\n\n1. *Conjugacy invariance.* If $w:P_1\\xrightarrow{\\sim}P_2$ is\nan isomorphism and $v_2\\circ w=w\\circ v_1$, then\n$\\operatorname{tr}_A(v_1\\mid P_1)=\\operatorname{tr}_A(v_2\\mid P_2)$.\n1. *Filtered (triangle) additivity.* Let $P'\\to P\\to P''\\to P'[1]$ be a\ndistinguished triangle in $D^b_{\\mathrm{fin}}(A)$ and $(v',v,v'')$ an\nendomorphism of it *of filtered origin*: the triangle is the cofibre\nsequence of a two-step filtered object $P'\\subset P$ with graded pieces\n$P'$ and $P''$, and $(v',v,v'')$ is induced by an endomorphism of this\nfiltered object in the filtered derived category $DF(A)$ (for instance by\na chain endomorphism of a short exact sequence $0\\to P'\\to P\\to P''\\to0$\nof bounded complexes of finite projective modules, strictly compatible\nwith the maps). Then\n$$\n\\operatorname{tr}_A(v\\mid P)=\n\\operatorname{tr}_A(v'\\mid P')+\\operatorname{tr}_A(v''\\mid P'').\n$$\nThe filtered origin cannot be dropped: for an endomorphism of a\ndistinguished triangle in the Verdier derived category whose squares\ncommute only up to unspecified homotopy, additivity fails (Ferrand's\nexample, cf. [Stacks, Tag 087J](https://stacks.math.columbia.edu/tag/087J):\nover $R=\\mathbf Z/4$, the sequence $0\\to R[-1]\\to[R\\xrightarrow{2}R]\\to R\\to0$\nwith $(v',v,v'')=(0,(0,2),0)$, where $(0,2)$ is $0$ in degree $0$ and\n$2$ in degree $1$, has $\\operatorname{tr}_A(v\\mid P)=-2\\neq0$).\n1. *Scalar extension.* For a ring homomorphism\n$\\rho:A\\to B$, $\\rho\\bigl(\\operatorname{tr}_A(v\\mid P)\\bigr) =\\operatorname{tr}_B\\bigl(v\\otimes_A^LB\\mid P\\otimes_A^LB\\bigr)$.\n1. *Supertrace over a field.* For\n$\\Lambda\\in\\{E,\\Qlb\\}$ and $P\\in D^b_{\\mathrm{fin}}(\\Lambda)$,\n$$\n\\operatorname{tr}_\\Lambda(v\\mid P)=\n\\sum_{i\\in\\mathbf Z}(-1)^i\\operatorname{Tr}\n\\bigl(H^i(v)\\mid H^i(P)\\bigr).\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.md",
+  "place": "node prop-trf-trace-formal-laws, order 2307",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 087J"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03TJ"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "In this proof all traces are the categorical traces of\n[def-trf-categorical-trace], computed with the explicit model\nconventions of [lem-trf-chain-supertrace]; throughout, $w^\\vee$\ndenotes the natural isomorphism\n$R\\operatorname{Hom}_A(w,A):P_2^\\vee\\xrightarrow{\\sim}P_1^\\vee$ induced\nby an isomorphism $w:P_1\\xrightarrow{\\sim}P_2$ (the internal Hom is a\nbifunctor of the derived category, [def-weil-derived-tensor]).",
+   "uses": [
+    "def-trf-categorical-trace",
+    "lem-trf-chain-supertrace",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(1) Conjugacy invariance.* The duality data\n$\\operatorname{coev}_{P_i},\\operatorname{ev}_{P_i}$ are natural in\nisomorphisms: the squares\n\n$$\n\\begin{array}{ccc}\nA & \\xrightarrow{\\operatorname{coev}_{P_1}} & P_1\\otimes^LP_1^\\vee\\\\\n\\| & & \\downarrow w\\otimes^L(w^\\vee)^{-1}\\\\\nA & \\xrightarrow{\\operatorname{coev}_{P_2}} & P_2\\otimes^LP_2^\\vee\n\\end{array}\n\\qquad\n\\begin{array}{ccc}\nP_1^\\vee\\otimes^LP_1 & \\xrightarrow{\\operatorname{ev}_{P_1}} & A\\\\\n\\downarrow (w^\\vee)^{-1}\\otimes^Lw & & \\|\\\\\nP_2^\\vee\\otimes^LP_2 & \\xrightarrow{\\operatorname{ev}_{P_2}} & A\n\\end{array}\n$$\n\ncommute, and the braiding\n$\\operatorname{sim}$ is natural in both variables; these are the\ncompatibilities of the tensor–internal-Hom adjunction and of the\nsymmetric monoidal structure with the identification\n$P^\\vee=R\\operatorname{Hom}_A(P,A)$. Hence, if\n$v_2\\circ w=w\\circ v_1$, then with the abbreviations\n$\\iota_w=w\\otimes^L(w^\\vee)^{-1}$ and\n$\\iota^w=(w^\\vee)^{-1}\\otimes^Lw$:\n\n$$\n\\begin{aligned}\n\\operatorname{tr}_A(v_2\\mid P_2)\n&=\\operatorname{ev}_{P_2}\\circ\\operatorname{sym}\\circ\n(v_2\\otimes^L1)\\circ\\operatorname{coev}_{P_2}\\\\\n&=\\operatorname{ev}_{P_2}\\circ\\operatorname{sym}\\circ\n\\iota_w\\circ(v_1\\otimes^L1)\\circ\\operatorname{coev}_{P_1}\\\\\n&=\\operatorname{ev}_{P_1}\\circ\\operatorname{sym}\\circ\n(v_1\\otimes^L1)\\circ\\operatorname{coev}_{P_1}\n=\\operatorname{tr}_A(v_1\\mid P_1),\n\\end{aligned}\n$$\n\nwhere the second equality uses $v_2\\otimes^L1=\\iota_w\\circ(v_1\\otimes^L1) \\circ\\iota_w^{-1}$ together with the first square, and the third the\nnaturality of $\\operatorname{sym}$ and the second square.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*(2) Filtered additivity.* This is the additivity of the trace on the\nfiltered derived category of perfect complexes,\n[Stacks, Tag 03TJ](https://stacks.math.columbia.edu/tag/03TJ). Concretely,\nan object of $DF(A)$ with a two-step filtration and perfect graded pieces is\nrepresented by a filtered bounded complex of finite projective modules\n$M'\\subset M$ with $M'$ and $M''=M/M'$ bounded complexes of finite\nprojectives (the sequence $0\\to M'\\to M\\to M''\\to0$ is then degreewise\nsplit), and a morphism in $DF(A)$ between such filtered complexes is\nrepresented by a strict morphism of filtered complexes (filtered\nquasi-isomorphisms are inverted, and a filtered map out of a filtered\ncomplex of projectives with projective graded pieces lifts along a filtered\nquasi-isomorphism). A strict endomorphism $\\bar v$ of $M'\\subset M$ is, in\ndegree $n$ and for a splitting $M^n=M'^n\\oplus M''^n$, block triangular,\n\n$$\n\\bar v^n=\\begin{pmatrix}\\beta^n & s^n\\\\ 0 & \\alpha^n\\end{pmatrix},\n$$\n\nwith $\\beta$ the restricted chain endomorphism of $M'$, which represents\n$v'$, $\\alpha$ the induced chain endomorphism of $M''$, which represents\n$v''$, and $s^n:M''^n\\to M'^n$ some family of maps. The trace of a\nblock-triangular matrix is the sum of the traces of its diagonal blocks, so\nby the chain-level formula of [lem-trf-chain-supertrace]\n\n$$\n\\begin{gathered}\n\\operatorname{tr}_A(v\\mid P)\n=\\sum_i(-1)^i\\operatorname{Tr}(\\bar v^i\\mid M^i)\\\\\n=\\sum_i(-1)^i\\operatorname{Tr}(\\beta^i\\mid M'^i)\n+\\sum_i(-1)^i\\operatorname{Tr}(\\alpha^i\\mid M''^i)\n=\\operatorname{tr}_A(v'\\mid P')+\\operatorname{tr}_A(v''\\mid P''),\n\\end{gathered}\n$$\n\nthe traces being independent of the chosen representatives by (1) and\n[lem-trf-chain-supertrace]. The flaw of the naive argument for an\narbitrary endomorphism $(v',v,v'')$ of the triangle in the plain derived\ncategory is visible here: one then only knows that $v$ is represented by a\nchain map $M\\to M$ whose squares with $M'\\to M$ and $M\\to M''$ commute up\nto homotopy, and such a map need not be block triangular with diagonal\nblocks representing $v'$ and $v''$. In Ferrand's example above every chain\nrepresentative of $v$ acts on the subcomplex $M'=R[-1]$ by $2$, which\nrepresents $2\\neq v'=0$ (the square commutes only up to the homotopy\n$\\mathrm{id}:M'^1\\to M^0$), and the supertraces differ by $-2$.",
+   "uses": [
+    "lem-trf-chain-supertrace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(3) Scalar extension.* The derived scalar extension\n$F=-\\otimes_A^LB:D(A)\\to D(B)$ is exact (it is the derived tensor\nproduct with the $K$-flat complex $B$) and monoidal: the canonical\ncomparison isomorphism\n\n$$\nF(P)\\otimes_B^LF(Q)=(P\\otimes_A^LB)\\otimes_B^L(Q\\otimes_A^LB)\n\\xrightarrow{\\ \\sim\\ }(P\\otimes_A^LQ)\\otimes_A^LB=F(P\\otimes_A^LQ)\n$$\n\nis the associativity of the derived tensor product (no flatness of\n$B$ over $A$ is needed in the derived setting, as both sides\ncompute the same absolute derived tensor $P\\otimes_A^LQ\\otimes_A^LB$),\nand it is compatible with the braidings, with the shifts, and with\ndistinguished triangles. It also carries the duals: the canonical\nisomorphism\n\n$$\nF(P)^\\vee=R\\operatorname{Hom}_B(P\\otimes_A^LB,B)\n\\xrightarrow{\\ \\sim\\ }R\\operatorname{Hom}_A(P,A)\\otimes_A^LB=F(P^\\vee)\n$$\n\n(the standard base-change statement for finite projective modules,\nwith the derived-tensor form valid for all $P\\in D^b_{\\mathrm{fin}}(A)$\nvia the projective resolution), and it identifies\n$\\operatorname{coev}_{F(P)}$, $\\operatorname{ev}_{F(P)}$,\nand the braiding with the $F$-images of\n$\\operatorname{coev}_P,\\operatorname{ev}_P$ and the braiding;\nconsequently the composite of\n[def-trf-categorical-trace] for $F(P)$ is the $F$-image\nof the composite for $P$, and identifying\n$\\operatorname{End}_{D(B)}(B)\\cong B$ with the application of\n$\\rho:\\operatorname{End}_{D(A)}(A)\\cong A\\to B$ gives\n$\\rho(\\operatorname{tr}_A(v\\mid P))= \\operatorname{tr}_B(v\\otimes_A^LB\\mid P\\otimes_A^LB)$.\nThe same argument applies to the scalar extensions\n$A\\to A_{E'\\!,n'}$, $A\\to\\mathcal O_E$, $\\mathcal O_E\\to E$, and\n$E\\to\\Qlb$ of the coefficient passages of Blueprints 01 and 02,\nthe latter two being the monoidal functors of the rationalized\n([def-weil-rationalization-karoubi]) and common-stage\n([def-weil-algebraically-closed-coefficients])\nconstructions.",
+   "uses": [
+    "def-trf-categorical-trace",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(4) Supertrace over a field.* Let $\\Lambda\\in\\{E,\\Qlb\\}$ (for\n$\\Lambda=E$, $D^b_{\\mathrm{fin}}(E)$ is the bounded derived category\nof finite-dimensional $E$-vector spaces by\n[def-weil-finite-coefficient-point]). Every\n$P\\in D^b_{\\mathrm{fin}}(\\Lambda)$ is represented by a bounded\ncomplex $P^\\bullet$ of finite-dimensional $\\Lambda$-vector spaces\ntogether with a chain map $v^\\bullet$ inducing $v$. For an integer\n$i$ let $P^{\\leq i}$ be the canonical truncation\n\n$$\nP^{\\leq i}=\\bigl(\\cdots\\to P^{i-2}\\to P^{i-1}\\to\\ker d^i\\to0\\bigr)\n$$\n\n(a subcomplex stable under $v^\\bullet$), so that\n$P^{\\leq i+1}/P^{\\leq i}$ is the two-term complex\n\n$$\nC_i=\\bigl(\\operatorname{im}d^i\\xrightarrow{d}\\ker d^{i+1}\\bigr)\n\\qquad\\text{(degrees }i,i+1\\text{)}\n$$\n\nwith the induced endomorphism; it carries the induced endomorphism\nand is quasi-isomorphic to\n$\\mathcal H^{i+1}(P)[-(i+1)]$ because the arrow\n$\\operatorname{im}d^i\\hookrightarrow\\ker d^{i+1}$ is injective with\ncokernel $\\mathcal H^{i+1}(P)$. Since all terms are vector spaces,\nthe short exact sequences\n\n$$\n0\\to P^{\\leq i}\\to P^{\\leq i+1}\\to C_i\\to0\n$$\n\nare degreewise split short exact sequences of complexes with strictly\ncompatible chain endomorphisms, hence give distinguished triangles of\n$D^b_{\\mathrm{fin}}(\\Lambda)$ with endomorphisms of filtered origin in the\nsense of (2). By (2), and by the chain-level computation of\n[lem-trf-chain-supertrace] applied to $C_i$,\n\n$$\n\\begin{aligned}\n\\operatorname{tr}_\\Lambda(v\\mid P^{\\leq i+1})\n&=\\operatorname{tr}_\\Lambda(v\\mid P^{\\leq i})\n+\\operatorname{tr}_\\Lambda(v\\mid C_i)\\\\\n&=\\operatorname{tr}_\\Lambda(v\\mid P^{\\leq i})\n+(-1)^i\\operatorname{Tr}\\bigl(v\\mid\\operatorname{im}d^i\\bigr)\n+(-1)^{i+1}\\operatorname{Tr}\\bigl(v\\mid\\ker d^{i+1}\\bigr)\\\\\n&=\\operatorname{tr}_\\Lambda(v\\mid P^{\\leq i})\n+(-1)^{i+1}\\operatorname{Tr}\n\\bigl(\\mathcal H^{i+1}(v)\\mid\\mathcal H^{i+1}(P)\\bigr),\n\\end{aligned}\n$$\n\nthe last equality using the split exact sequence\n$0\\to\\operatorname{im}d^i\\to\\ker d^{i+1}\\to\\mathcal H^{i+1}(P)\\to0$\nof vector spaces with the induced endomorphisms, which gives\n$\\operatorname{Tr}(v\\mid\\ker d^{i+1})- \\operatorname{Tr}(v\\mid\\operatorname{im}d^i)= \\operatorname{Tr}(\\mathcal H^{i+1}(v))$. Induction over the finite\ncohomological range of $P^\\bullet$ (starting from\n$P^{\\leq i}=0$ below the lowest degree) gives\n\n$$\n\\operatorname{tr}_\\Lambda(v\\mid P)\n=\\sum_{i\\in\\mathbf Z}(-1)^i\\operatorname{Tr}\n\\bigl(\\mathcal H^{i}(v)\\mid\\mathcal H^{i}(P)\\bigr),\n$$\n\nwhich is the displayed formula.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "lem-trf-chain-supertrace"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-categorical-trace",
+  "lem-trf-chain-supertrace",
+  "def-weil-derived-tensor",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-coefficient-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2307,
+ "blueprint_uses": [
+  "def-trf-categorical-trace",
+  "def-trf-coefficient-conventions",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-tensor",
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-field-fiber",
+  "def-weil-rationalization-karoubi",
+  "lem-trf-chain-supertrace"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-trf-coefficient-conventions",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof_split_by": "labels"
+}

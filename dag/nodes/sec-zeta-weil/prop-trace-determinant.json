@@ -1,0 +1,65 @@
+{
+ "id": "prop-trace-determinant",
+ "kind": "statement",
+ "title": "Trace-to-determinant factorization",
+ "statement": "Let $K$ be a characteristic-zero field, fix an indeterminate $T$, let\n$I\\subset\\mathbf Z$ be finite, and let\n$(V_i,u_i)_{i\\in I}$ be a finite graded family of finite-dimensional vector\nspaces and endomorphisms over $K$. Put\n\n$$\nP_i(T)=\\det(1-Tu_i\\mid V_i),\n\\qquad\n\\Delta(T)=\\prod_iP_i(T)^{(-1)^{i+1}}.\n$$\n\nThen, for every $i\\in I$,\n\n$$\n-\\log P_i(T)=\n\\sum_{n\\geq1}\\Tr(u_i^n\\mid V_i)\\frac{T^n}{n},\n$$\n\nand, with the displayed parity signs,\n\n$$\n\\log\\Delta(T)=\n\\sum_{n\\geq1}\\left(\\sum_{i\\in I}(-1)^i\\Tr(u_i^n\\mid V_i)\\right)\n\\frac{T^n}{n}.\n$$\n\nFor the geometric application, let $d\\in\\mathbf Z_{\\geq0}$, take\n$I=\\{0,\\ldots,2d\\}$, and use the\nfinite-field datum; fix a prime\n$p$, an integer $a\\geq1$, put $q=p^a$, and set\n$k_0=\\Fq$, and let $k=\\Fbar$ be the fixed algebraic closure of $k_0$.\nChoose a prime $\\ell\\neq p$, write\n$\\Ql=\\mathbf Q_\\ell$, and let\n$X_0/k_0$ be smooth, proper,\ngeometrically connected of pure dimension $d\\in\\mathbf Z_{\\geq0}$. Put\n$X=X_0\\times_{k_0}k$, $V_i=H^i(X,\\Ql)$, and $u_i=F_{i,\\ell}$, where\n$(V_{i,\\ell},F_{i,\\ell})$ is the\nsmooth-proper\ncohomological family. The\npoint-count and zeta series and the\nordinary cohomology\nconstruction give, after coefficient extension\n$\\mathbf Q[[T]]\\to\\Ql[[T]]$, the identity\n\n$$\nZ(X_0,T)=\n\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}.\n$$\n\nThis identity belongs to $\\Ql(T)\\cap\\Ql[[T]]$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-trace-determinant.md",
+  "place": "node prop-trace-determinant, order 2884"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Over an algebraic closure of $K$, let\n$\\lambda_{i,1},\\ldots,\\lambda_{i,n_i}$ denote the eigenvalues of\n$u_i$, counted with algebraic multiplicity, where\n$n_i=\\dim_KV_i$. Then $P_i(T)=\\prod_j(1-\\lambda_{i,j}T)$ and, in the\nring of formal power series,\n\n$$\n-\\log P_i(T)\n=\\sum_j\\sum_{n\\geq1}\\lambda_{i,j}^n\\frac{T^n}{n}\n=\\sum_{n\\geq1}\\operatorname{Tr}_K(u_i^n\\mid V_i)\\frac{T^n}{n},\n$$\n\nthe last equality because the trace is the sum of the eigenvalues after\nscalar extension. Summing over $i$ with the parity signs in\n$\\Delta(T)=\\prod_iP_i(T)^{(-1)^{i+1}}$ gives\n\n$$\n\\log\\Delta(T)=\\sum_{n\\geq1}\\Bigl(\\sum_{i\\in I}(-1)^i\n\\operatorname{Tr}_K(u_i^n\\mid V_i)\\Bigr)\\frac{T^n}{n},\n$$\n\nwhich proves the linear-algebra part of the statement.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "For the geometric application, $Z(X_0,T)$ is the point-count zeta\nseries of [def-weil-point-counts-zeta], and by\n[prop-every-iterate-trace] applied to the constant Weil sheaf on\nthe smooth proper geometrically connected $X_0$,\n\n$$\nN_n(X_0)=\\sum_{i=0}^{2d}(-1)^i\n\\operatorname{Tr}_{\\Ql}(F_{i,\\ell}^n\\mid V_{i,\\ell})\n$$\n\nfor every $n\\geq1$, where $(V_{i,\\ell},F_{i,\\ell})$ is the\nsmooth-proper cohomological family of\n[def-weil-smooth-proper-cohomological-family]. Hence\n$\\log Z(X_0,T)$ equals the logarithm of\n$\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}$ after the coefficient\nextension $\\mathbf Q[[T]]\\to\\Ql[[T]]$, and exponentiating gives the\ndisplayed identity. Both sides are Taylor expansions of rational\nfunctions, so the identity belongs to\n$\\Ql(T)\\cap\\Ql[[T]]$.",
+   "uses": [
+    "def-weil-point-counts-zeta",
+    "prop-every-iterate-trace",
+    "def-weil-smooth-proper-cohomological-family"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-point-counts-zeta",
+  "prop-every-iterate-trace",
+  "def-weil-smooth-proper-cohomological-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-trace-determinant.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2884,
+ "blueprint_uses": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-point-counts-zeta",
+  "def-weil-smooth-proper-cohomological-family",
+  "prop-every-iterate-trace"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof_split_by": "paragraphs"
+}

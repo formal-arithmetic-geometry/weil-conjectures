@@ -1,0 +1,104 @@
+{
+ "id": "sbc-thm-smooth-base-change",
+ "kind": "statement",
+ "title": "Smooth base change",
+ "statement": "Consider a cartesian diagram of\nschemes\n\n$$\n\\begin{array}{ccc}\nX & \\xleftarrow{\\;h\\;} & Y\\\\\nf\\big\\downarrow & & \\big\\downarrow e\\\\\nS & \\xleftarrow{\\;g\\;} & T\n\\end{array}\n$$\n\nwhere $f$ is smooth and $g$ is\nquasi-compact and\nquasi-separated. Then\n\n$$\nf^{-1}R^qg_*\\mathcal F=R^qh_*e^{-1}\\mathcal F\n$$\n\nfor any $q$ and any abelian sheaf $\\mathcal F$ on $T_{\\Et}$ all of\nwhose stalks at geometric points are torsion of orders invertible on\n$S$, the isomorphism being the base-change map of\n[sbc-def-base-change-map].\n(*Stacks Project, Etale Cohomology, Theorem 59.89.2, [Tag `0EYU`](https://stacks.math.columbia.edu/tag/0EYU); this chapter follows the second, shorter proof\nof that theorem.*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-smooth-base-change/sbc-thm-smooth-base-change.md",
+  "place": "node sbc-thm-smooth-base-change, order 1417",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0EYU"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sbc-def-base-change-map",
+  "def-weil-pbc-scheme-conventions",
+  "sbc-def-base-change-square"
+ ],
+ "proof": [
+  {
+   "text": "The case $q=0$ is [sbc-lem-degree-zero-flat-base-change], since by\n[sbc-lem-smooth-criterion] a\nsmooth morphism is flat of finite presentation and by\n[sbc-lem-smooth-geometrically-reduced] it has geometrically\nreduced fibres. We now assume $q>0$ and the theorem in all degrees\n$<q$.",
+   "uses": [
+    "sbc-lem-degree-zero-flat-base-change",
+    "sbc-lem-smooth-criterion",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(Filtered torsion.)* For every $n\\geq1$ invertible on $S$, let\n$\\mathcal F[n]$ be the subsheaf of sections of $\\mathcal F$ annihilated\nby $n$; by [lemma-weil-pbc-torsion-filtered-union]\n$\\mathcal F=\\varinjlim_n\\mathcal F[n]$ with $n$ ranging over the\nintegers invertible on $S$. Inverse images ($f^{-1}$, $h^{-1}$,\n$e^{-1}$) commute with filtered colimits as left adjoints, and the\nhigher direct images $R^qg_*$, $R^qh_*$ commute with filtered colimits\nby [lemma-weil-pbc-direct-image-filtered-colimit] (the morphisms\n$g$, $h$ being quasi-compact and quasi-separated), so the assertion\nfor $\\mathcal F$ reduces to the case of a sheaf $\\mathcal F$\nannihilated by some $n$ invertible on $S$; fix such an $n$.",
+   "uses": [
+    "lemma-weil-pbc-torsion-filtered-union",
+    "lemma-weil-pbc-direct-image-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(Etale locality and the normal form.)* By\n[sbc-lem-etale-locality] the question is etale local on $X$ and\n$S$. By [sbc-thm-etale-local-normal-form] (the local structure of\nsmooth morphisms) we may assume $X$ and $S$ are affine and that $X\\to S$\nfactors through an etale morphism $X\\to\\mathbf A^d_S$. Writing $X\\to S$\nas the composition\n$X\\to\\mathbf A^{d-1}_S\\to\\mathbf A^{d-2}_S\\to\\dots\\to\\mathbf A^1_S\\to S$,\n[sbc-lem-base-change-composition] shows that the theorem need\nonly be proved when $X$ and $S$ are affine and $X\\to S$ has relative\ndimension one.",
+   "uses": [
+    "sbc-lem-etale-locality",
+    "sbc-thm-etale-local-normal-form",
+    "sbc-lem-base-change-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(The induction step.)* For the affine smooth morphism of relative\ndimension one $f:X\\to S$, the induction hypothesis (the theorem in\ndegrees $<q$) gives $\\mathrm{BC}(f,n,q')$ universally for all\n$q'\\leq q-1$ in the sense of [sbc-def-base-change-property]: every base\nchange $f'$ of $f$ along a morphism $S'\\to S$ is again smooth\n(smoothness being stable under base change, as is immediate from\n[def-sbc-smooth-morphisms])\nand $n$ is invertible on $S'$, so the theorem in degrees $<q$ applies to\n$f'$ and every quasi-compact quasi-separated $g:T\\to S'$;\n[sbc-lem-rel-dim-one-induction] then gives $\\mathrm{BC}(f,n,q)$\nuniversally, in particular $\\mathrm{BC}(f,n,q)$, and (a degree-$q$ statement being etale local and stable under\ncomposition, by the first two steps) the theorem holds in degree $q$\nfor every smooth $f$, every quasi-compact quasi-separated $g$, and\nevery $n$-torsion $\\mathcal F$. Running the filtered colimit back over\nthe $n$'s gives the theorem in degree $q$ for every torsion $\\mathcal F$\nwith orders invertible on $S$; induction on $q$ finishes the proof.",
+   "uses": [
+    "sbc-def-base-change-property",
+    "def-sbc-smooth-morphisms",
+    "sbc-lem-rel-dim-one-induction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-degree-zero-flat-base-change",
+  "sbc-lem-smooth-criterion",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lemma-weil-pbc-torsion-filtered-union",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "sbc-lem-etale-locality",
+  "sbc-thm-etale-local-normal-form",
+  "sbc-lem-base-change-composition",
+  "sbc-def-base-change-property",
+  "def-sbc-smooth-morphisms",
+  "sbc-lem-rel-dim-one-induction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-smooth-base-change/sbc-thm-smooth-base-change.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1417,
+ "blueprint_uses": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "lemma-weil-pbc-torsion-filtered-union",
+  "sbc-def-base-change-map",
+  "sbc-def-base-change-property",
+  "sbc-def-base-change-square",
+  "sbc-lem-base-change-composition",
+  "sbc-lem-degree-zero-flat-base-change",
+  "sbc-lem-etale-locality",
+  "sbc-lem-rel-dim-one-induction",
+  "sbc-lem-smooth-criterion",
+  "sbc-lem-smooth-geometrically-reduced",
+  "sbc-thm-etale-local-normal-form"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions",
+  "sbc-def-base-change-square"
+ ],
+ "proof_split_by": "labels"
+}

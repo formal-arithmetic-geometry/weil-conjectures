@@ -1,0 +1,74 @@
+{
+ "id": "prop-wf-weil-sheaf-representation-equivalence",
+ "kind": "statement",
+ "title": "The lisse sheaf–representation equivalence",
+ "statement": "Throughout, $C_0$ is the curve and $C$ its base\nchange to $k$; $P=\\pi_1(C)$ is the geometric fundamental group, $W(C_0)$ the\nWeil group with degree map and chosen degree-one lift $\\gamma$, and\n$E\\subset\\Qlb$ a finite coefficient field with valuation ring\n$\\mathcal O_E$ and maximal ideal $\\mathfrak m_E$, all as in\n[def-wf-weil-group]. A lisse Weil sheaf $\\mathcal F$ on $C_0$ has geometric\ngeneric stalk $\\mathcal F_{\\bar\\eta}$.\n\nThe functor $\\mathcal F\\mapsto(V,\\rho)=(\\mathcal F_{\\bar\\eta}, \\rho_{\\mathcal F})$, the representation of [def-wf-fundamental-representation] (continuous by [lem-wf-weil-fundamental-representation]), is an exact tensor equivalence between lisse Weil sheaves\non $C_0$ and the representations of [def-wf-weil-group]: a short exact\nsequence $0\\to\\mathcal F'\\to\\mathcal F\\to\\mathcal F''\\to0$ corresponds to\n$0\\to V'\\to V\\to V''\\to0$. Subobjects, quotients and subquotients therefore\nmatch on the two sides, in both directions.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-sheaves/prop-wf-weil-sheaf-representation-equivalence.md",
+  "place": "node prop-wf-weil-sheaf-representation-equivalence, order 2584"
+ },
+ "stmt_deps": [
+  "def-wf-weil-group",
+  "def-wf-fundamental-representation",
+  "lem-wf-weil-fundamental-representation"
+ ],
+ "proof": [
+  {
+   "text": "*Finite level.* Each $\\mathcal O_E/\\mathfrak m_E^n$ is a finite ring, so\n[cor-galois-lisse-representations] identifies locally constant sheaves of finite free\n$\\mathcal O_E/\\mathfrak m_E^n$-modules on $C$ with finite free modules over\nthat ring carrying a continuous $P$-action. Rank is a property of the stalk\nand is constant because $C$ is connected.",
+   "uses": [
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Integral and rational levels.* A lisse adic model has surjective\ntransition maps, so the stalks $M_n$ form a surjective system whose limit is\nfinite free over $\\mathcal O_E$, with continuous action because the\n$\\mathfrak m_E$-adic topology is the limit of the discrete quotient\ntopologies; levelwise reduction inverts the construction. Morphism groups\nare the limits of their finite-level counterparts,\n$\\Hom_{\\mathcal O_E[P]}(M,N)=\\varprojlim_n\\Hom_P(M_n,N_n)$: a map of adic\nsystems is by definition a compatible family of finite-level maps, while\n$\\Hom_{\\mathcal O_E}(M,N)$ is finite free with reductions $\\Hom(M_n,N_n)$\nand $P$-invariants commute with inverse limits. The transition maps of\nthis tower need not be surjective (for $E=\\mathbf Q_3(\\zeta_3)$,\n$\\pi=\\zeta_3-1$, a trivial lattice and the lattice of a cubic Kummer\ncharacter agree modulo $\\pi$, but every equivariant map between them modulo\n$\\pi^2$ satisfies $\\pi a=0$ and reduces to zero), but each\n$\\Hom_P(M_n,N_n)$ is a finite group, so the tower is Mittag–Leffler and\n$\\varprojlim^1$ vanishes; this is all the inverse-limit argument needs: a\ncompatible family of finite-level maps has a unique lift, and two maps\nagreeing at every level are equal. Hence the functor is fully faithful.\nInverting the uniformizer on morphisms and passing to the filtered colimit\nover the finite $E\\subset\\Qlb$ are each given by a universal property and are\nperformed the same way on both sides, so the equivalence descends to the\ncoefficients of [d-real-setup].",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Frobenius descent.* Geometric Frobenius is an automorphism of the\nscheme $C$, so $\\Frob^*$ is an autoequivalence of lisse sheaves on $C$;\ncomparing the stalks at $\\bar\\eta$ and $\\Frob(\\bar\\eta)$ along the\ndegree-one lift $\\gamma$ turns it into a twist of $\\rho$ by the conjugation\n$c_\\gamma(g)=\\gamma g\\gamma^{-1}$ of $P$, and the comparison is oriented\nso that the twist is $\\rho\\mapsto\\rho\\circ c_\\gamma^{-1}$,\n$g\\mapsto\\rho(\\gamma^{-1}g\\gamma)$ (the opposite orientation amounts to\nreplacing $\\gamma$ by the degree $-1$ lift $\\gamma^{-1}$). A Weil\nstructure $\\varphi:\\Frob^*\\mathcal F\\to\\mathcal F$ is therefore an\nautomorphism $\\Phi$ of $V$ with\n$\\Phi\\,\\rho(g)\\,\\Phi^{-1}=\\rho(\\gamma g\\gamma^{-1})$ for $g\\in P$, which is\nexactly the relation making $g\\gamma^{n}\\mapsto\\rho(g)\\Phi^{n}$\nmultiplicative; since every element of $W(C_0)$ is uniquely $g\\gamma^{n}$\nby [def-wf-weil-group], setting $\\rho(\\gamma)=\\Phi$ extends $\\rho$ to\n$W(C_0)$. (With the relation written as\n$\\Phi\\,\\rho(\\gamma g\\gamma^{-1})\\,\\Phi^{-1}=\\rho(g)$ one would be forced to\nset $\\rho(\\gamma)=\\Phi^{-1}$ instead.) The choice $\\rho(\\gamma)=\\Phi$ is\nthe geometric Frobenius normalization of [def-wf-weil-group]: at a closed\npoint $x$ with $k(x)=\\Fq$ the operator induced by $\\varphi$ on\n$\\mathcal F_{\\bar x}$ is the geometric Frobenius $F_x$, because $\\Frob$\ncomposed with the arithmetic Frobenius of $k$ is the absolute Frobenius of\n$C$, which acts trivially on etale sheaves, and $F_x$ has degree $+1$; so\nthe degree-one elements $g\\gamma$ of $W(C_0)$ act through $\\Phi$, not\n$\\Phi^{-1}$, in agreement with $F=\\rho(\\gamma)$ and with the Tate line\n$\\Qlb(1)=\\mathcal B_{q^{-1}}$ (geometric Frobenius acts on $\\Qlb(1)$ by\n$q^{-1}$), in the notation of the constant Weil twist\n[def-wf-constant-weil-twist]. Another lift changes\n$\\Phi$ by an element of $\\rho(P)$ and gives an isomorphic representation. The\nmorphism condition $u\\varphi=\\psi\\,\\Frob^{*}u$ says on stalks that $u$\nintertwines the two operators $\\Phi$, which with $P$-equivariance is exactly\n$W(C_0)$-equivariance; hence full faithfulness.",
+   "uses": [
+    "def-wf-weil-group",
+    "def-wf-constant-weil-twist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Exactness.* Exactness and tensor products are levelwise for adic\nsystems and survive the localization and the filtered colimit, and Weil\nkernels and cokernels are computed on the underlying sheaves. The matching\nof subobjects, quotients and subquotients follows.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "cor-galois-lisse-representations",
+  "def-wf-weil-group",
+  "def-wf-constant-weil-twist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-sheaves/prop-wf-weil-sheaf-representation-equivalence.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "cites_remark",
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2584,
+ "blueprint_uses": [
+  "cor-galois-lisse-representations",
+  "d-real-setup",
+  "def-wf-fundamental-representation",
+  "def-wf-weil-group",
+  "lem-wf-weil-fundamental-representation"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "labels"
+}

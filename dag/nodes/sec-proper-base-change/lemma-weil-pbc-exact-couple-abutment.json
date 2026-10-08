@@ -1,0 +1,74 @@
+{
+ "id": "lemma-weil-pbc-exact-couple-abutment",
+ "kind": "statement",
+ "title": "Finite rows and the abutment comparison",
+ "statement": "In total degree $n$, the map on the abutments of the spectral sequences of\n[def-weil-pbc-hypercohomology-filtrations] is\n\n$$\n \\mathcal H^n(\\Ex_{\\square,K}):\n g^{-1}\\mathcal H^n(Rf_*K)\\longrightarrow\n \\mathcal H^n(Rf'_*g'^{-1}K),\n$$\n\nwith the image filtrations of\n[def-weil-pbc-truncation-exact-couples].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-exact-couple-abutment.md",
+  "place": "node lemma-weil-pbc-exact-couple-abutment, order 1318"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-hypercohomology-filtrations",
+  "def-weil-pbc-truncation-exact-couples",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "Choose $a$ with $\\mathcal H^q(K)=0$ for $q<a$. In both couples of\n[def-weil-pbc-truncation-exact-couples], their terms $D^{p,q}$ vanish\nfor $q<a$, since $\\tau_{\\leq q}K=0$. The $E_2^{p,q}$ terms vanish for $q<a$\nand for $p<0$, the latter because right-derived direct image on a sheaf has no\nnegative cohomology. Thus the hypotheses of the half-plane convergence theorem\nhold for both couples. By the couple-morphism lemma, their morphism induces,\nfor every $n$, a map of the abutments of the two spectral sequences of\n[def-weil-pbc-hypercohomology-filtrations] respecting their filtered\nstructures. The abutments are $\\mathcal H^n(g^{-1}Rf_*K)$ and $\\mathcal\nH^n(Rf'_*g'^{-1}K)$ with the image filtrations supplied by the truncation\ntriangles of [def-weil-pbc-truncation-exact-couples]. More\nexplicitly, the canonical abutment is $D^{0,n}$, and its map is the component\n$t_D^{0,n}$, obtained by applying the exchange morphism of\n[def-weil-pbc-derived-exchange] to $\\tau_{\\leq n}K$. Both functors carry\n$\\tau_{\\geq n+1}K$ to complexes with no cohomology in degrees $\\leq n$, so the\ntruncation triangle identifies these $D^{0,n}$ terms with the displayed\ndegree-$n$ cohomology of the whole complexes. Naturality of exchange in\n$\\tau_{\\leq n}K\\to K$ identifies $t_D^{0,n}$ with $\\mathcal\nH^n(\\Ex_{\\square,K})$, as required.",
+   "uses": [
+    "def-weil-pbc-truncation-exact-couples",
+    "def-weil-pbc-hypercohomology-filtrations",
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-truncation-exact-couples",
+  "def-weil-pbc-hypercohomology-filtrations",
+  "def-weil-pbc-derived-exchange",
+  "lem-sp-couple-morphism",
+  "lemma-weil-pbc-hypercohomology-convergence",
+  "thm-sp-half-plane-convergence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-exact-couple-abutment.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1318,
+ "blueprint_uses": [
+  "def-sp-convergence",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-hypercohomology-filtrations",
+  "def-weil-pbc-truncation-exact-couples",
+  "lem-sp-couple-morphism",
+  "lemma-weil-pbc-hypercohomology-convergence",
+  "thm-sp-half-plane-convergence"
+ ],
+ "uses_not_cited": [
+  "def-sp-convergence",
+  "lem-sp-couple-morphism",
+  "lemma-weil-pbc-hypercohomology-convergence",
+  "thm-sp-half-plane-convergence"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "In total degree $n$, the two exact couples have only the finite row range\n$a\\leq q\\leq n$. Their induced abutment map is the cohomology map\n\n$$\n\\mathcal H^n(g^{-1}Rf_*K)\\longrightarrow\n\\mathcal H^n(Rf'_*g'^{-1}K)\n$$\n\nof the derived exchange morphism, with the image filtrations of Definition\n[def-weil-pbc-hypercohomology-filtrations].",
+   "proof": "On $\\mathcal E_1^{p,q}$ one has $p\\geq0$ and $q\\geq a$. The equality\n$p+q=n$ therefore forces $a\\leq q\\leq n$. On a hypercover total complex,\nonly these finitely many filtered quotients contribute to degree $n$.\nConsequently direct-sum and product totalization agree in that degree, the\nfiltration is finite and separated, and passage from a finite skeleton to\nthe full hypercover changes none of its graded terms.\n\nThe maps $e_q:A_q\\to B_q$ commute with\n$\\tau_{\\leq q}K\\to K$. For $q\\geq n$, the omitted cohomology sheaves of\n$K$ have degrees greater than $n$; after a nonnegative right-derived\nfunctor they cannot contribute to total degree $n$. Hence\n\n$$\n\\mathcal H^n(A_q)\\xrightarrow{\\sim}\n\\mathcal H^n(g^{-1}Rf_*K),\\qquad\n\\mathcal H^n(B_q)\\xrightarrow{\\sim}\n\\mathcal H^n(Rf'_*g'^{-1}K).\n$$\n\nUnder these identifications, $\\mathcal H^n(e_q)$ is\n$\\mathcal H^n(\\operatorname{Ex}_{\\square,K})$ by naturality of exchange in\nthe truncation map. Its filtration is the image of\n$\\mathcal H^n(A_q)$ and maps to the image of $\\mathcal H^n(B_q)$, exactly\nthe two filtrations defined earlier. Thus the exact-couple abutment map is\nthe specified derived exchange map, rather than an unnamed filtered\nisomorphism.",
+   "cites": [
+    "def-weil-pbc-hypercohomology-filtrations"
+   ]
+  }
+ ]
+}

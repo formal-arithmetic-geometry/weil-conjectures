@@ -1,0 +1,90 @@
+{
+ "id": "thm-fin-projective-line-constructible",
+ "kind": "statement",
+ "title": "Constructible coefficients on the projective line",
+ "statement": "Let $S$ be of finite type\nover $k$, and let $\\Lambda$ be the finite ring killed by an\ninteger invertible in $k$ of [sbc-def-coefficient-conventions].\nFor every constructible\n$\\Lambda$-sheaf $F$ on $\\mathbf P^1_S$, every\nhigher direct image\n$R^q\\pi_*F$, for $\\pi:\\mathbf P^1_S\\to S$, is constructible.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
+  "place": "node thm-fin-projective-line-constructible, order 1618"
+ },
+ "stmt_deps": [
+  "sbc-def-coefficient-conventions",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "First regard $F$ as a sheaf of $\\mathbf Z/N$-modules.\nApply [lem-fin-finite-type-pushforward-embedding] to embed it\ninto a finite sum $G^0$ of finite pushforwards of constant finite\ngroups killed by $N$.\nThe sheaf $G^0$ is constructible by [lem-fin-finite-morphism];\nits cokernel $Q_1$ is constructible by\n[thm-constructible-serre].\nRepeat with $Q_1$, and inductively with every subsequent cokernel.\nFactoring the differentials through those cokernels produces an exact\naugmented complex\n\n$$\n0\\to F\\to G^0\\to G^1\\to\\cdots ,\n\\qquad G^a=\\bigoplus_i(h_{ai})_*\\underline {M_{ai}},\n$$\n\nwith each $h_{ai}:Y_{ai}\\to\\mathbf P^1_S$ finite.\nBy [lem-fin-finite-over-projective], $Y_{ai}\\to S$ is projective.\nIts geometric fibres have dimension at most one, since they are\nfinite over a projective line. Thus\n[cor-fin-projective-curve-finite-group] applies to $M_{ai}$.\nFinite exactness and the composition sequence of\n[lem-fin-finite-morphism], [lem-weil-pbc-grothendieck-spectral-sequence]\ngive\n\n$$\nR^b\\pi_*G^a\n=\\bigoplus_i R^b(\\pi h_{ai})_*\\underline {M_{ai}},\n$$\n\nwhich is constructible in every degree.",
+   "uses": [
+    "lem-fin-finite-type-pushforward-embedding",
+    "lem-fin-finite-morphism",
+    "thm-constructible-serre",
+    "lem-fin-finite-over-projective",
+    "cor-fin-projective-curve-finite-group",
+    "lem-weil-pbc-grothendieck-spectral-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Now use [thm-sp-if-e1] for the ordinary bounded-below resolution:\n\n$$\nE_1^{a,b}=R^b\\pi_*G^a\\Longrightarrow R^{a+b}\\pi_*F,\n\\qquad a,b\\geq0.\n$$",
+   "uses": [
+    "thm-sp-if-e1"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All pages are constructible by kernels and cokernels.\nFor any fixed total degree, first-quadrant convergence supplies\na finite filtration by stable terms of this spectral sequence.\nExtensions therefore prove constructibility of the abutment by\n[thm-constructible-serre].\nThis step establishes constructibility degree by degree.",
+   "uses": [
+    "thm-constructible-serre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finally these are also the underlying abelian higher direct images\nof the original $\\Lambda$-sheaf. Here is an explicit simultaneous\ncomputation. Choose a conservative family $P$ of geometric points\nof $\\mathbf P^1_S$, let $e^*$ take the family of stalks, and set\n$e_*((M_x))=\\prod_{x\\in P}x_*M_x$.\nBoth $e_*$ and $\\pi_*e_*$ are exact on families of modules:\non any etale object their sections are products of the module\ncoordinates, and products of surjections of modules are surjective.\nAlso $e_*$ preserves injectives, being right adjoint to the exact\nstalk functor $e^*$.\nThe ordinary composition spectral sequence therefore makes every\n$e_*((M_x))$ acyclic for $\\pi_*$.\nIterate the injective unit $E\\to e_*e^*E$ on its successive\ncokernels. This is an acyclic resolution, with all maps\n$\\Lambda$-linear; it remains an acyclic resolution on underlying\nabelian sheaves by the identical argument.\nThus it computes both higher direct images, with the same\nunderlying abelian cohomology.\nThis argument uses products of modules in an explicit section\ncalculation, and does not assert that arbitrary products of\nepimorphisms of sheaves are epimorphisms.\nOn each finite locally constant abelian stratum the finitely many\nscalar actions are maps of finite locally constant sheaves.\nA common etale refinement makes their values constant. The given\nmodule identities then identify the stratum with a constant finite\n$\\Lambda$-module, proving the module constructibility required\nby [def-weil-pbc-constructible-complexes].",
+   "uses": [
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fin-finite-type-pushforward-embedding",
+  "lem-fin-finite-morphism",
+  "thm-constructible-serre",
+  "lem-fin-finite-over-projective",
+  "cor-fin-projective-curve-finite-group",
+  "lem-weil-pbc-grothendieck-spectral-sequence",
+  "thm-sp-if-e1",
+  "def-weil-pbc-constructible-complexes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1618,
+ "blueprint_uses": [
+  "cor-fin-projective-curve-finite-group",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions",
+  "lem-fin-finite-morphism",
+  "lem-fin-finite-over-projective",
+  "lem-fin-finite-type-pushforward-embedding",
+  "lem-weil-pbc-grothendieck-spectral-sequence",
+  "sbc-def-coefficient-conventions",
+  "thm-constructible-serre",
+  "thm-sp-if-e1"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs"
+}

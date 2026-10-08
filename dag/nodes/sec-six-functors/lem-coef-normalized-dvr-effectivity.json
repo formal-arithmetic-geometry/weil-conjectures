@@ -1,0 +1,72 @@
+{
+ "id": "lem-coef-normalized-dvr-effectivity",
+ "kind": "statement",
+ "title": "Effectivity of a normalized DVR tower",
+ "statement": "For a tower in [def-coef-normalized-dvr-tower], put\n$M=R\\varprojlim_m\\operatorname{Res}_m M_m$. Then the canonical\ncounit comparisons give coherent isomorphisms\n\n$$\nM\\otimes_R^L A_n\\xrightarrow{\\sim}M_n\n\\qquad(n\\geq1).\n$$\n\nIn particular $M$ is derived complete in the sense of\n[def-weil-derived-complete]. No constructibility or boundedness\nis required for this effectivity assertion.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-normalized-dvr-effectivity.md",
+  "place": "node lem-coef-normalized-dvr-effectivity, order 2132"
+ },
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-weil-derived-complete"
+ ],
+ "proof": [
+  {
+   "text": "Fix $n$, and discard the finitely many indices $m<n$.\nThe coefficient complex\n\n$$\nC_{m,n}=A_m\\otimes_R^L A_n\n=[A_m\\xrightarrow{\\pi^n}A_m]\n$$\n\nis in degrees $[-1,0]$. Its augmentation to $A_n$ has\nfiber $(\\pi^{m-n}A_m)[1]\\cong A_n[1]$, as an object of\n$D(A_m)$. This identification uses multiplication by\n$\\pi^{m-n}$; its inverse on the fiber is determined by the\nsingle nonzero cohomology module. For $m'\\geq m\\geq n$,\ncoefficient reduction sends the generator $\\pi^{m'-n}$ to\n$\\pi^{m'-m}\\pi^{m-n}$. Thus the fiber transition, expressed\nin these copies of $A_n[1]$, is multiplication by\n$\\pi^{m'-m}$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Tensor this coefficient triangle with $M_m$ over $A_m$.\nThe normalization and cocycle of\n[def-coef-normalized-dvr-tower] give a tower of triangles\n\n$$\nM_n[1]\\longrightarrow M_m\\otimes_R^L A_n\n\\longrightarrow M_n\\longrightarrow .\n$$",
+   "uses": [
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The right-hand tower is constant, with identity transitions. The\nleft-hand transition for $m'\\to m$ is multiplication by\n$\\pi^{m'-m}$: this follows by tensoring the just computed\ncoefficient map and using the same normalization cocycle. The\ncalculation is made in strict coefficient complexes and their\nderived tensor products, so these are compatible triangles of\ntowers, not independently chosen cones.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Every $n$ successive left-hand transitions compose to zero.\nIn its Roos triangle of [prop-weil-pbc-roos-triangle], the\nshift $s$ on the derived product therefore satisfies $s^n=0$.\nThe inverse of $1-s$ is $1+s+\\cdots+s^{n-1}$, so this\nfiber tower has zero derived limit. The quotient $A_n$ has\nthe bounded finite-free $R_X$-resolution\n$[R_X\\xrightarrow{\\pi^n}R_X]$. Tensoring with it commutes\nwith derived products and fibers, hence with the derived limit\nin the Roos triangle. Taking limits in the displayed triangles\nnow proves\n\n$$\nM\\otimes_R^L A_n\n\\cong R\\varprojlim_m(M_m\\otimes_R^L A_n)\n\\xrightarrow{\\sim}M_n.\n$$",
+   "uses": [
+    "prop-weil-pbc-roos-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every map is induced by the tower projections and coefficient\naugmentations, so these isomorphisms have the stated cocycle.\nThey identify the original tower with the quotient tower of\n$M$; its limit is $M$, proving completeness by\n[def-weil-derived-complete].\nFor the coefficient tower itself, its derived limit is the\ncompleted coefficient sheaf $R_X$ in degree zero: on a\nweakly contractible quasi-compact pro-etale basis object, sections\nare exact and the maps between the finite constant coefficient\nsheaves are surjective on sections. The Roos computation therefore\nhas no higher inverse-limit term, and its ordinary limit is\n$R_X$. This also verifies the completeness of the coefficient\nobject used below.",
+   "uses": [
+    "def-weil-derived-complete"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "prop-weil-pbc-roos-triangle",
+  "def-weil-derived-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-normalized-dvr-effectivity.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2132,
+ "blueprint_uses": [
+  "def-coef-normalized-dvr-tower",
+  "def-weil-derived-complete",
+  "prop-weil-pbc-roos-triangle"
+ ],
+ "proof_split_by": "paragraphs"
+}

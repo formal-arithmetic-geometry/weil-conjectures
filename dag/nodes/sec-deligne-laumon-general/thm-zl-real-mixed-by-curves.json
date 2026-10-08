@@ -1,0 +1,119 @@
+{
+ "id": "thm-zl-real-mixed-by-curves",
+ "kind": "statement",
+ "title": "Mixedness of real sheaves by reduction to the proved curve case",
+ "statement": "Every constructible $\\iota$-real $\\Qlb$-Weil sheaf on a separated\nfinite-type scheme over a finite field is $\\iota$-mixed, with a\nfinite filtration in the sense of [def-weil-punctual-weights].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.md",
+  "place": "node thm-zl-real-mixed-by-curves, order 2834"
+ },
+ "stmt_deps": [
+  "def-weil-punctual-weights"
+ ],
+ "proof": [
+  {
+   "text": "First suppose $X_0$ is smooth geometrically connected affine of\npositive dimension and $\\mathcal G$ is lisse in\n[def-weil-pbc-constructible-complexes] and real in\n[def-wf-iota-real]. We construct the finite Weil filtration\nrequired by [def-weil-punctual-weights]. By\n[lem-zl-geometric-constituents-any-base], after one finite\nconstant extension its Weil filtration has geometrically irreducible\nquotients $\\mathcal S_1,\\ldots,\\mathcal S_r$.\nThe extension preserves reality: local Frobenius becomes a positive\nintegral power of the old one, and powering preserves conjugation-stable\nspectra. Work over this new finite field.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "def-wf-iota-real",
+    "def-weil-punctual-weights",
+    "lem-zl-geometric-constituents-any-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix a closed point $x_*\\in X_0$. For any other closed point\n$x$, apply [lem-zl-curve-testing-irreducibility] through chosen\ngeometric points above $x_*$ and $x$. On the resulting smooth\ngeometrically connected affine curve, over a further finite field,\n$\\mathcal G$ is real and each $\\mathcal S_j$ remains geometrically,\nhence arithmetically, irreducible. Pullback is exact, so it is an\nirreducible constituent of the restricted real sheaf. The already\nproved curve theorem [thm-rp-real-lisse-purity-affine] makes it\npunctually pure there.",
+   "uses": [
+    "lem-zl-curve-testing-irreducibility",
+    "thm-rp-real-lisse-purity-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The weight obtained on this curve is independent of the curve.\nIndeed, if its point over $x_*$ has residue degree $e$ over\n$\\kappa(x_*)$, its Frobenius eigenvalues are $\\alpha^e$, where\n$\\alpha$ runs through the eigenvalues of $\\mathcal S_j$ at\n$x_*$; its residue cardinality is $q_{x_*}^e$. Thus curve purity\nforces all those $\\alpha$ to have one common modulus and fixes the\nweight as\n\n$$\nw_j=2\\log_{q_{x_*}}|\\iota(\\alpha)|.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The same power calculation at $x$ proves that every eigenvalue\nthere has modulus $q_x^{w_j/2}$. As $x$ was arbitrary,\n$\\mathcal S_j$ is pure of weight $w_j$ on all of $X_0$.\nThe actual Weil filtration, rather than separately chosen stalk\nfiltrations, now proves that $\\mathcal G$ is mixed.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "To descend the initial constant extension $g:X'_0\\to X_0$, push\nthis filtration forward. Finite pushforward is exact and preserves\npure weights by [lem-zl-finite-pushforward]. The diagonal unit\n$\\eta:\\mathcal G\\to g_*g^*\\mathcal G$ is split as follows.\nWrite $d=\\deg(g)$. Etale-locally the finite etale map $g$ is a\ndisjoint union of $d$ copies of the base, so summation on the copies\ndefines a map $\\operatorname{Tr}:g_*g^*\\mathcal G\\to\\mathcal G$.\nSummation is unchanged by permuting the copies; hence these local maps\nglue and commute with Frobenius. They satisfy\n$\\operatorname{Tr}\\circ\\eta=d\\operatorname{id}$.\nSince $d$ is invertible in $\\Qlb$,\n$d^{-1}\\operatorname{Tr}$ is a Weil-equivariant retraction. Thus\n[lem-a1-mixed-direct-summand] descends mixedness.",
+   "uses": [
+    "lem-zl-finite-pushforward",
+    "lem-a1-mixed-direct-summand"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a general constructible sheaf, pass by [i-topology] to the reduction of the\ngeometric scheme and form a finite chain of reduced closed subschemes\n\n$$\nX=Z_0\\supset Z_1\\supset\\cdots\\supset Z_t=\\varnothing\n$$\n\nsuch that $U_a=Z_a\\setminus Z_{a+1}$ is a disjoint union of smooth\nconnected affine pieces on which the sheaf is lisse. To construct a\nstep, take in each irreducible component of $Z_a$ a dense smooth\naffine open inside the lisse locus, avoiding all the other components.\nTheir disjoint union is open in $Z_a$; its closed complement has\nsmaller dimension. Constructibility and Noetherian induction give\nthe finite chain. This also arranges the frontier condition needed\nfor successive open–closed gluing.",
+   "uses": [
+    "i-topology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All these finitely many subschemes, affine pieces, and inclusions are\nof finite presentation over $\\overline{\\mathbf F}_q$. Their\ndefining equations therefore descend to one finite constant-field\nextension. Choose that extension large enough to define each\ngeometric component individually. Its Frobenius is a power of the\noriginal Frobenius and preserves every piece, so restriction of the\noriginal Weil structure supplies the required Weil structures there.\nThe pieces are geometrically connected over this field. The preceding\nargument applies to those of positive dimension; in dimension zero a\nJordan filtration of each invertible Frobenius operator gives pure\nfactors of weights $2\\log_{q_x}|\\iota(\\alpha)|$. On a finite disjoint\nunion, extend the filtrations of its components by zero and concatenate\nthem; this gives a mixed filtration even if their weights differ.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Mixed filtrations glue across a closed complement: for an open\n$j:U_0\\hookrightarrow X_0$ and closed complement $i:Z_0\\hookrightarrow X_0$, use the exact sequence\n\n$$\n0\\longrightarrow j_!j^*\\mathcal G\\longrightarrow\\mathcal G\n\\longrightarrow i_*i^*\\mathcal G\\longrightarrow0.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Both $j_!$ and $i_*$ are exact and preserve purity of a sheaf\nalready pure on its support, since their other stalks are zero.\nSplice the resulting finite filtrations using inverse images under\nthe quotient map. Apply this to each pair\n$U_a\\subset Z_a$, with closed complement $Z_{a+1}$, starting\nat the last nonempty member of the chain. All inclusions are defined\nover the chosen finite field, so every extension and inverse image is\nWeil-equivariant. The finite induction gives a global finite Weil\nfiltration. Finally descend the common constant extension as above.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constructible-complexes",
+  "def-wf-iota-real",
+  "def-weil-punctual-weights",
+  "lem-zl-geometric-constituents-any-base",
+  "lem-zl-curve-testing-irreducibility",
+  "thm-rp-real-lisse-purity-affine",
+  "lem-zl-finite-pushforward",
+  "lem-a1-mixed-direct-summand",
+  "i-topology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2834,
+ "blueprint_uses": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-punctual-weights",
+  "def-wf-iota-real",
+  "i-topology",
+  "lem-a1-mixed-direct-summand",
+  "lem-zl-curve-testing-irreducibility",
+  "lem-zl-finite-pushforward",
+  "lem-zl-geometric-constituents-any-base",
+  "thm-rp-real-lisse-purity-affine"
+ ],
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.Reduction.RealSheaves",
+  "declaration": "AlgebraicGeometry.WeilSheaf.IsReal.isMixed",
+  "branch": "slopmaster2",
+  "line": 99,
+  "sorry_free": false,
+  "body_lines": 1
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.WeilSheaf.IsReal.isMixed"
+ ],
+ "proof_split_by": "paragraphs"
+}

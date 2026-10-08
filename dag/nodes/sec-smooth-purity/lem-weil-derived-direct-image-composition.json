@@ -1,0 +1,94 @@
+{
+ "id": "lem-weil-derived-direct-image-composition",
+ "kind": "statement",
+ "title": "Composition of derived direct images",
+ "statement": "Let $X\\xrightarrow{f}Y\\xrightarrow{g}Z$ be morphisms of schemes on which\n$\\ell$ is invertible, and use the derived direct images of\n[def-weil-derived-direct-image]. There is a canonical isomorphism\n\n$$\n c_{g,f}:R(g\\circ f)_*\\xrightarrow{\\ \\sim\\ }Rg_*\\circ Rf_*\n$$\n\nat each coefficient stage of that definition:\n\n1. at finite level $A_{E,n}$, as functors\n$D(X_{\\mathrm{proet}},A_{E,n})\\to D(Z_{\\mathrm{proet}},A_{E,n})$;\n1. for $\\Lambda=\\mathcal O_E$, on those $K\\in D^b_c(X,\\mathcal O_E)$ with\n$Rf_*K\\in D^b_c(Y,\\mathcal O_E)$ (so that the right side is defined);\n1. for $\\Lambda=E$, on the rationalized category of\n[def-weil-rationalization-karoubi], for the same $K$;\n1. for $\\Lambda=\\Qlb$, on the common-stage category of\n[def-weil-algebraically-closed-coefficients], for objects $(E,K)$ with $K$\nas in (3);\n1. on the small étale site, for any ring $A$, as functors\n$D(X_{\\mathrm{et}},A)\\to D(Z_{\\mathrm{et}},A)$ between the ordinary\nderived categories of étale sheaves of $A$-modules.\n\nThe isomorphism $c_{g,f}$ is natural in $K$, is the identity when $f$ or $g$\nis an identity, and is associative: for a further morphism $h:Z\\to W$ the\ntwo isomorphisms $R(hgf)_*\\cong Rh_*Rg_*Rf_*$ built from $c$ agree. In\nparticular it is compatible with transport of structure along automorphisms\nof $X,Y,Z$ commuting with $f$ and $g$ (such as Frobenius), since the direct\nimage along an automorphism $\\sigma$ is the inverse image along\n$\\sigma^{-1}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-derived-direct-image-composition.md",
+  "place": "node lem-weil-derived-direct-image-composition, order 1470"
+ },
+ "stmt_deps": [
+  "def-weil-derived-direct-image",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "*Finite level.* Put $A=A_{E,n}$. The constant sheaves satisfy\n$f^{-1}A_Y=A_X$, so the sheaf-level inverse image $f^{-1}$ of\n[def-weil-derived-pullback-tensor-hom] is an exact left adjoint of\n$f_*:\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(Y_{\\mathrm{proet}},A)$. Hence $f_*$\ncarries K-injective complexes [def-weil-pbc-kinjective-resolutions] to\nK-injective complexes: for an acyclic $B$ one has\n$\\operatorname{Hom}(B,f_*I)=\\operatorname{Hom}(f^{-1}B,I)$, and $f^{-1}B$ is\nacyclic. This is the argument of\n[lem-weil-pbc-direct-image-preserves-injectives], applied to complexes and\non the pro-etale site. If $K\\to I$ is a K-injective resolution, then $f_*I$\nis a K-injective complex computing $Rf_{*,n}K$, so\n$Rg_{*,n}Rf_{*,n}K=g_*f_*I=(gf)_*I=R(gf)_{*,n}K$. By the well-definedness\nand functoriality of K-injective resolutions\n([lem-sp-kinjective-computes], part (1)), the resulting isomorphism does not\ndepend on $I$ and is natural in $K$. Identity and associativity hold because\n$(hg)f=h(gf)$ already holds for the sheaf-level functors on the same\nrepresentative $I$. The same argument applies verbatim on the small étale site with any\ncoefficient ring (item (5)) and to sheaves of abelian groups, and for $\\widehat{\\mathcal O}_E$-modules it gives the composition\nisomorphism for the derived functor $Rh^{\\wedge}_*$ of\n$h_*:\\Sh(-,\\mathcal O_E)\\to\\Sh(-,\\mathcal O_E)$ in the following form. The\nderived direct image of modules over a sheaf of rings is computed on the\nunderlying abelian sheaves, since a K-injective complex of modules is K-limp\nand so acyclic for the direct image of abelian sheaves. The canonical map\n$R(gf)^{\\wedge}_*\\to Rg^{\\wedge}_*Rf^{\\wedge}_*$ given by the universal\nproperty of right derived functors therefore becomes the abelian-sheaf\nisomorphism after the forgetful functor to abelian sheaves. That functor\nreflects isomorphisms, so the map is an isomorphism.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-pbc-kinjective-resolutions",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Integral stage.* Let $h$ be any of $f,g,gf$ and let $K$ be derived complete\n[def-weil-derived-complete]. First, $Rh^{\\wedge}_*$ commutes with\n$\\operatorname{Res}_n$: the functor $\\operatorname{Res}_n$ is exact\n([lem-weil-restriction-of-scalars-exact]) and commutes with $h_*$ on sheaves.\nBoth $\\operatorname{Res}_nRh_{*,n}$ and $Rh^{\\wedge}_*\\operatorname{Res}_n$\nare computed on underlying abelian sheaves by the previous paragraph, so the\ncanonical comparison\n$\\operatorname{Res}_nRh_{*,n}\\to Rh^{\\wedge}_*\\operatorname{Res}_n$ is an\nisomorphism. Second, $Rh^{\\wedge}_*$ commutes with countable products,\nbecause a product of K-injective complexes is K-injective and $h_*$\ncommutes with products termwise. It is also exact, so it carries the Roos\ntriangle of [def-weil-derived-limit] for the system\n$(\\operatorname{Res}_nK_n)$ to a Roos triangle for\n$(Rh^{\\wedge}_*\\operatorname{Res}_nK_n)$. Combining these facts with\nderived completeness $K\\xrightarrow{\\sim}R\\varprojlim_n\\operatorname{Res}_nK_n$\ngives\n\n$$\n Rh_*K=R\\varprojlim_n\\operatorname{Res}_nRh_{*,n}K_n\n \\cong R\\varprojlim_nRh^{\\wedge}_*\\operatorname{Res}_nK_n\n \\cong Rh^{\\wedge}_*R\\varprojlim_n\\operatorname{Res}_nK_n\n \\cong Rh^{\\wedge}_*K ,\n$$\n\nso the direct image of [def-weil-derived-direct-image] is the derived functor\n$Rh^{\\wedge}_*$ on derived-complete objects. For $K\\in D^b_c(X,\\mathcal O_E)$\nwith $Rf_*K\\in D^b_c(Y,\\mathcal O_E)$, both $K$ and $Rf_*K$ are derived\ncomplete ([def-weil-derived-complete-integral-detailed]). Applying this\nidentification for $h=gf$, $f$ and $g$ therefore gives\n\n$$\n R(gf)_*K\\cong R(gf)^{\\wedge}_*K\\cong Rg^{\\wedge}_*Rf^{\\wedge}_*K\n \\cong Rg_*Rf_*K,\n$$\n\nthe middle step being the composition isomorphism for $\\widehat{\\mathcal\nO}_E$-modules. Naturality, identity and associativity are inherited from the\nmodule level.",
+   "uses": [
+    "def-weil-derived-complete",
+    "lem-weil-restriction-of-scalars-exact",
+    "def-weil-derived-limit",
+    "def-weil-derived-direct-image",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Rational stage.* By [def-weil-rationalization-karoubi], $D^b_c(-,E)$ has the\nsame objects as $D^b_c(-,\\mathcal O_E)$ and\n$\\operatorname{Hom}\\otimes_{\\mathcal O_E}E$ as morphisms, and $Rf_*$ on it is\nthe $\\mathcal O_E$-linear integral functor followed by $-\\otimes_{\\mathcal\nO_E}E$ on morphisms. The integral isomorphism $c_{g,f}$ is a natural\nisomorphism of $\\mathcal O_E$-linear functors, so its image is a natural\nisomorphism of the rationalized functors. The identity and associativity\nequations are preserved.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Algebraically closed stage.* In the common-stage category of\n[def-weil-algebraically-closed-coefficients], an object $(E,K)$ has direct\nimage $(E,Rf_*K)$, and a morphism is represented at some finite $L\\supset E$\nafter scalar extension. Take $c_{g,f}$ at stage $E$ on objects. It is\ncompatible with scalar extension to $L$, which is what naturality for\nmorphisms represented at $L$ requires. Indeed, on integral representatives\n$-\\otimes_{\\mathcal O_E}\\mathcal O_L$ is, as an $\\widehat{\\mathcal\nO}_E$-module, a finite direct sum of copies of the identity ($\\mathcal O_L$\nbeing finite free over $\\mathcal O_E$). The derived functors $Rh^{\\wedge}_*$\nand the composition isomorphism commute with finite direct sums and with the\nforgetful functors along $\\widehat{\\mathcal O}_E\\to\\widehat{\\mathcal O}_L$,\nsince all of them are computed on underlying abelian sheaves. The iterated\nextensions agree by [lem-weil-scalar-extension-composition]. Hence $c_{g,f}$\nat stage $E$ and at stage $L$ correspond under scalar extension, giving a\nnatural isomorphism in $D^b_c(Z,\\Qlb)$ with the stated identity and\nassociativity properties.\n\nFinally, for an automorphism $\\sigma$ the direct image $R\\sigma_*$ is\ninverse to $R(\\sigma^{-1})_*$ by the identity and associativity properties.\nAn automorphism of the diagram $X\\to Y\\to Z$ therefore transports $c_{g,f}$\nto itself by associativity, which is the asserted compatibility with\ntransport of structure.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "lem-sp-kinjective-computes",
+  "def-weil-derived-complete",
+  "lem-weil-restriction-of-scalars-exact",
+  "def-weil-derived-limit",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-derived-direct-image-composition.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1470,
+ "blueprint_uses": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-limit",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-rationalization-karoubi",
+  "lem-sp-kinjective-computes",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "lem-weil-restriction-of-scalars-exact",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_split_by": "labels"
+}

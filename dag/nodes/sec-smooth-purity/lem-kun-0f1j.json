@@ -1,0 +1,139 @@
+{
+ "id": "lem-kun-0f1j",
+ "kind": "statement",
+ "title": "Base change for pushforward tensored with a bounded-below complex of finite tor amplitude",
+ "statement": "Let $K$ be a field and $n\\ge1$ an integer invertible in $K$.\nConsider a commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\xleftarrow{\\;p\\;}&X'&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle e}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\n\nof schemes with $X'=X\\times_{\\Spec(K)}S'$ and\n$Y=X'\\times_{S'}T$ and with $g$ quasi-compact and\nquasi-separated. The canonical map\n\n$$\np^{-1}E\\kunotimes{\\kunZn}(f')^{-1}Rg_*F\n\\longrightarrow\nRh_*\\bigl(h^{-1}p^{-1}E\\kunotimes{\\kunZn}e^{-1}F\\bigr)\n$$\n\n(adjoint to the map\n$h^{-1}p^{-1}E\\kunotimes{\\kunZn}e^{-1}g^{-1}Rg_*F\\to h^{-1}p^{-1}E\\kunotimes{\\kunZn}e^{-1}F$\ninduced by the counit of [def-weil-pbc-inverse-image]) is an\nisomorphism for every $E\\in\\Dplus(X_{\\Et},\\kunZn)$ of\ntor amplitude in $[a,\\infty)$ for\nsome $a\\in\\mathbf Z$ and every $F\\in\\Dplus(T_{\\Et},\\kunZn)$.\n(*Source:* Stacks Project, Tag\n[0F1J](https://stacks.math.columbia.edu/tag/0F1J).)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1j.md",
+  "place": "node lem-kun-0f1j, order 1778",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F1J"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "*Reduction to a single flat module.* By [lem-kun-0f1m]\n(the tor-amplitude criterion of [def-kun-tor-amplitude]) we may\nrepresent $E$ by a bounded-below K-flat complex\n$\\mathcal E^\\bullet$ of flat $\\kunZn$-module sheaves, with\n$\\mathcal E^i=0$ for $i<a$. Choose an integer $b$ such that\n$\\mathcal H^i(F)=0$ for $i<b$. Choose a large integer $N$ and\nconsider the short exact sequence\n\n$$\n0\\to\\sigma_{\\ge N+1}\\mathcal E^\\bullet\\to\\mathcal E^\\bullet\\to\n\\sigma_{\\le N}\\mathcal E^\\bullet\\to0\n$$\n\nof stupid truncations ([def-kun-truncations]). This produces a\ndistinguished triangle $E''\\to E\\to E'\\to E''[1]$ in\n$D(X_{\\Et},\\kunZn)$. For fixed $F$, both sides of the arrow in\nthe statement of the lemma are triangulated functors in $E$\n([lem-kun-derived-tensor-triangulated],\n[def-kun-derived-tensor],\n[def-weil-pbc-direct-image]). By\n[lem-kun-derived-tensor-t-est] (and\n[lem-kun-tensor-t-est] for the right hand side), the objects\n\n$$\np^{-1}E''\\kunotimes{\\kunZn}(f')^{-1}Rg_*F\n\\quad\\text{and}\\quad\nRh_*\\bigl(h^{-1}p^{-1}E''\\kunotimes{\\kunZn}e^{-1}F\\bigr)\n$$\n\nare sitting in degrees $\\ge N+b$. Hence, if we can prove the lemma\nfor the object $E'$, then comparing the two distinguished triangles\n(five lemma on the long exact cohomology sequences) shows that the\nlemma holds for $E$ in degrees $\\le N+b$, and letting\n$N\\to\\infty$ we conclude. Thus we may assume $E$ is represented\nby a bounded complex of flat $\\kunZn$-module sheaves. Doing another\nargument of the same nature (decomposing the bounded complex through\nits stupid truncation triangles, using that both sides are\ntriangulated functors in $E$), we may assume $E$ is given by a\nsingle flat $\\kunZn$-module sheaf $\\mathcal E$.",
+   "uses": [
+    "lem-kun-0f1m",
+    "def-kun-tor-amplitude",
+    "def-kun-truncations",
+    "lem-kun-derived-tensor-triangulated",
+    "def-kun-derived-tensor",
+    "def-weil-pbc-direct-image",
+    "lem-kun-derived-tensor-t-est",
+    "lem-kun-tensor-t-est"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Reduction of $F$.* Next, we use the same arguments for the\nvariable $F$ to reduce to the case where $F$ is given by a single\nsheaf of $\\kunZn$-modules $\\mathcal F$: truncate $F$ with\n$\\tau_{\\le M}$ ([def-kun-truncations]) and compare degrees,\nthen represent the bounded complex $\\tau_{\\le M}F$ by a bounded\ncomplex and split it into its single sheaves through stupid\ntruncation triangles.",
+   "uses": [
+    "def-kun-truncations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Reduction to prime torsion.* Say $\\mathcal F$ is annihilated\nby an integer $m\\mid n$. If $\\ell$ is a prime number dividing\n$m$ and $m>\\ell$, then we can look at the short exact sequence\n$0\\to\\mathcal F[\\ell]\\to\\mathcal F\\to\\mathcal F/\\mathcal F[\\ell]\\to0$\nand reduce to smaller $m$ (both sides of the asserted map are\ntriangulated functors in $F$, and $\\mathcal F[\\ell]$ is\nannihilated by $\\ell$ while $\\mathcal F/\\mathcal F[\\ell]$ is\nannihilated by $m/\\ell$). This finally reduces us to the case\nwhere $\\mathcal F$ is annihilated by a prime $\\ell\\mid n$,\ni.e. $\\mathcal F$ is a sheaf of $\\kunFl$-vector spaces. In this\ncase observe that\n\n$$\np^{-1}\\mathcal E\\kunotimes{\\kunZn}(f')^{-1}Rg_*\\mathcal F\n\\;\\cong\\;\np^{-1}(\\mathcal E/\\ell\\mathcal E)\\kunotimes{\\kunFl}\n(f')^{-1}Rg_*\\mathcal F\n$$\n\nby the flatness of $\\mathcal E$ and\n[lem-kun-change-of-rings-tensor], and similarly for the other\nterm. This reduces us to the case where we work with sheaves of\n$\\kunFl$-vector spaces, which we now discuss.",
+   "uses": [
+    "lem-kun-change-of-rings-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The $\\kunFl$-vector space case.* Assume $\\ell$ is a prime\ninvertible in $K$ and $\\mathcal E$, $\\mathcal F$ are sheaves of\n$\\kunFl$-vector spaces on $X_{\\Et}$ and $T_{\\Et}$. We want to\nshow that\n\n$$\np^{-1}\\mathcal E\\kunotimes{\\kunFl}(f')^{-1}R^qg_*\\mathcal F\n\\longrightarrow\nR^qh_*\\bigl(h^{-1}p^{-1}\\mathcal E\\kunotimes{\\kunFl}e^{-1}\\mathcal F\\bigr)\n$$\n\nis an isomorphism for every $q\\ge0$ (the map induced on $\\mathcal H^q$ by the asserted map, see [def-kun-unbounded-exchange] and\n[lem-kun-bc-base-change]; the tensor product is underived\nbecause $\\kunFl$-vector spaces are flat).\n\nThis question is local on $X$ ([lem-kun-stalk-faithful-derived]),\nhence we may assume $X$ is affine. We can write\n$\\mathcal E$ as a filtered colimit of constructible sheaves of\n$\\kunFl$-vector spaces on $X_{\\Et}$\n([lem-kun-03sa], with the Noetherian ring\n$\\Lambda=\\kunFl$). Since tensor products commute with filtered\ncolimits and since higher direct images do too\n([lemma-weil-pbc-direct-image-filtered-colimit]), we may assume\n$\\mathcal E$ is a constructible sheaf of $\\kunFl$-vector spaces\non $X_{\\Et}$. Then [lemma-weil-pbc-constructible-finite-pushforward],\nwith $\\Lambda=\\kunFl$, gives an integer $m$, finite and finitely\npresented morphisms $\\pi_i:X_i\\to X$, and a monomorphism\n\n$$\n\\mathcal E\\longrightarrow P:=\\bigoplus_{i=1}^m\\pi_{i,*}\\underline{\\kunFl}.\n$$\n\nEach summand is constructible by\n[lem-kun-095r] and [lem-kun-constant-constructible]; hence\n$P$ and the cokernel of $\\mathcal E\\to P$ are constructible by\n[thm-constructible-serre]. We first prove the assertion for each\n$\\pi_{i,*}\\underline{\\kunFl}$; finite additivity gives it for\n$P$, after which the dimension-shifting argument recovers the\nassertion for $\\mathcal E$.\n\nTo prove this case we extend the diagram of the lemma to\n\n$$\n\\begin{array}{ccccc}\nX_i&\\longleftarrow&X'_i&\\longleftarrow&Y_i\\\\\n\\Big\\uparrow{\\scriptstyle \\pi_i}&&\\Big\\uparrow{\\scriptstyle \\pi'_i}&&\\Big\\uparrow{\\scriptstyle \\rho_i}\\\\\nX&\\longleftarrow&X'&\\longleftarrow&Y\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle e}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\n\nwith all squares cartesian (so $X'_i=X_i\\times_XX'$ and\n$Y_i=X'_i\\times_{X'}Y$; here $\\rho_i:Y_i\\to Y$ and the unlabelled\nmaps are the projections). In the equations below we use that\n$R\\pi_{i,*}=\\pi_{i,*}$ and similarly for $\\pi'_i$ and $\\rho_i$\n(finite morphisms, [lemma-weil-pbc-finite-direct-image-exact]);\nwe use the Leray spectral sequence through the finite morphisms\n([lem-kun-leray-finite]); we use\n[lemma-weil-pbc-finite-exchange] and [lem-kun-0f0g] (the\nprojection formula, almost trivial for finite morphisms) for\n$\\pi_i$, $\\pi'_i$, $\\rho_i$. Doing so we see that\n\n$$\n\\begin{aligned}\n&p^{-1}\\pi_{i,*}\\underline{\\kunFl}\\kunotimes{\\kunFl}\n(f')^{-1}R^qg_*\\mathcal F\\\\\n&\\qquad=\\pi'_{i,*}\\underline{\\kunFl}\\kunotimes{\\kunFl}\n(f')^{-1}R^qg_*\\mathcal F\\bigr)\\qquad(\\text{\\Cref{lemma-weil-pbc-finite-exchange}})\\\\\n&\\qquad=\\pi'_{i,*}\\bigl((\\pi'_i)^{-1}(f')^{-1}R^qg_*\\mathcal F\\bigr)\n\\qquad(\\text{\\Cref{lem-kun-0f0g}}).\n\\end{aligned}\n$$\n\nSimilarly,\n\n$$\n\\begin{aligned}\n&R^qh_*\\bigl(h^{-1}p^{-1}\\pi_{i,*}\\underline{\\kunFl}\n\\kunotimes{\\kunFl}e^{-1}\\mathcal F\\bigr)\\\\\n&\\qquad=R^qh_*\\bigl(\\rho_{i,*}\\underline{\\kunFl}\n\\kunotimes{\\kunFl}e^{-1}\\mathcal F\\bigr)\n\\qquad(\\text{\\Cref{lemma-weil-pbc-finite-exchange}})\\\\\n&\\qquad=R^qh_*\\bigl(\\rho_{i,*}\\rho_i^{-1}e^{-1}\\mathcal F\\bigr)\n\\qquad(\\text{\\Cref{lem-kun-0f0g}})\\\\\n&\\qquad=\\pi'_{i,*}R^qh_{i,*}\\rho_i^{-1}e^{-1}\\mathcal F\n\\qquad(\\text{\\Cref{lem-kun-leray-finite}}).\n\\end{aligned}\n$$\n\nSince\n$R^qh_{i,*}\\rho_i^{-1}e^{-1}\\mathcal F=(\\pi'_i)^{-1}(f')^{-1}R^qg_*\\mathcal F$\nby [lem-kun-0f1i] (applied to the upper square, with base\nscheme $X_i$ of finite type over $K$ and the sheaf\n$\\mathcal F$, a sheaf of $\\kunFl$-vector spaces whose stalks are\n$\\ell$-torsion with $\\ell\\mid n$\ninvertible in $K$, hence of orders invertible in $K$ by\n[lem-kun-zn-sheaf-invertible-orders]), we conclude by\n[lem-kun-proj-formula-natural], which identifies the asserted\nmap with the identity under the displayed isomorphisms.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "lem-kun-bc-base-change",
+    "lem-kun-stalk-faithful-derived",
+    "lem-kun-03sa",
+    "lemma-weil-pbc-direct-image-filtered-colimit",
+    "lemma-weil-pbc-constructible-finite-pushforward",
+    "lem-kun-095r",
+    "lem-kun-constant-constructible",
+    "thm-constructible-serre",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-kun-leray-finite",
+    "lemma-weil-pbc-finite-exchange",
+    "lem-kun-0f0g",
+    "lem-kun-0f1i",
+    "lem-kun-zn-sheaf-invertible-orders",
+    "lem-kun-proj-formula-natural"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-0f1m",
+  "def-kun-tor-amplitude",
+  "def-kun-truncations",
+  "lem-kun-derived-tensor-triangulated",
+  "def-kun-derived-tensor",
+  "def-weil-pbc-direct-image",
+  "lem-kun-derived-tensor-t-est",
+  "lem-kun-tensor-t-est",
+  "lem-kun-change-of-rings-tensor",
+  "def-kun-unbounded-exchange",
+  "lem-kun-bc-base-change",
+  "lem-kun-stalk-faithful-derived",
+  "lem-kun-03sa",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "lemma-weil-pbc-constructible-finite-pushforward",
+  "lem-kun-095r",
+  "lem-kun-constant-constructible",
+  "thm-constructible-serre",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-kun-leray-finite",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-kun-0f0g",
+  "lem-kun-0f1i",
+  "lem-kun-zn-sheaf-invertible-orders",
+  "lem-kun-proj-formula-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1j.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1778,
+ "blueprint_uses": [
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "def-kun-truncations",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "lem-kun-03sa",
+  "lem-kun-095r",
+  "lem-kun-0f0g",
+  "lem-kun-0f1i",
+  "lem-kun-0f1m",
+  "lem-kun-bc-base-change",
+  "lem-kun-change-of-rings-tensor",
+  "lem-kun-constant-constructible",
+  "lem-kun-derived-tensor-t-est",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-kun-leray-finite",
+  "lem-kun-proj-formula-natural",
+  "lem-kun-stalk-faithful-derived",
+  "lem-kun-tensor-t-est",
+  "lem-kun-zn-sheaf-invertible-orders",
+  "lemma-weil-pbc-constructible-finite-pushforward",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-exchange",
+  "thm-constructible-serre"
+ ],
+ "proof_split_by": "labels"
+}

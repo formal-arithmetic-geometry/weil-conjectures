@@ -1,0 +1,64 @@
+{
+ "id": "lem-sc-cd-affine-limit",
+ "kind": "statement",
+ "title": "Passing a uniform torsion bound to an affine limit",
+ "statement": "Let $X=\\varprojlim_i X_i$ be a filtered inverse limit of\nquasi-compact\nquasi-separated schemes with affine transition maps.\nIf $\\operatorname{cd}_{\\rm tor}(X_i)\\leq c$ for every $i$,\nthen $\\operatorname{cd}_{\\rm tor}(X)\\leq c$, with bounds as in\n[def-sc-etale-torsion-cd].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-cd-affine-limit.md",
+  "place": "node lem-sc-cd-affine-limit, order 1547"
+ },
+ "stmt_deps": [
+  "def-sc-etale-torsion-cd",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Let $p_i:X\\to X_i$, and first let $F$ be killed by a fixed\ninteger $n>0$. Set $F_i=p_{i*}F$; for $j\\geq i$\nthe adjunction maps give transition arrows\n$p_{ji}^*F_i\\to F_j$, and hence arrows\n$p_i^*F_i\\to p_j^*F_j$ on $X$.\nThe canonical map $\\varinjlim_i p_i^*F_i\\to F$ is an\nisomorphism. To verify it, use quasi-compact etale objects\nof finite presentation: every such object and every morphism\nbetween two of them descends to a stage of the inverse system.\nA section of $F$ on a descended object is, by definition,\na section of $p_{i*}F$ on that object at stage $i$, proving\nsurjectivity locally. If two representatives agree after\npullback, their equality is witnessed on a finite etale covering;\nthe covering and the finitely many maps in it descend to a\nlater stage. This proves injectivity after sheafification.\nThese are the same finite-presentation descent and finite-cover\narguments used in [lemma-weil-pbc-etale-cohomology-continuity].",
+   "uses": [
+    "lemma-weil-pbc-etale-cohomology-continuity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each fixed $i$, that theorem gives\n\n$$\nH^q(X,p_i^*F_i)=\\varinjlim_{j\\geq i}\nH^q(X_j,p_{ji}^*F_i)=0\\quad(q>c).\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Now apply [lem-weil-pbc-cohomology-filtered-colimit] to\nthe preceding sheaf colimit. Finally remove the fixed exponent\nusing [lemma-weil-pbc-torsion-filtered-union] and the same\ncommutation of cohomology with filtered colimits.",
+   "uses": [
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lemma-weil-pbc-torsion-filtered-union"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-etale-cohomology-continuity",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lemma-weil-pbc-torsion-filtered-union"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-cd-affine-limit.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1547,
+ "blueprint_uses": [
+  "def-sc-etale-torsion-cd",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lemma-weil-pbc-etale-cohomology-continuity",
+  "lemma-weil-pbc-torsion-filtered-union"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs"
+}

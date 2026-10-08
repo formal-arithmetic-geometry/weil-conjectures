@@ -1,0 +1,105 @@
+{
+ "id": "lem-chow-affine-through-generic-points",
+ "kind": "statement",
+ "title": "An affine open containing a point and all generic points",
+ "statement": "Let $X$ be quasi-separated, let $Z_1,\\dots,Z_n$ be pairwise distinct\nirreducible components of $X$ with generic points $\\eta_i$, and let $x\\in X$.\nThen there is an affine open $U\\subseteq X$ containing $x$ and all the\n$\\eta_i$.\n(Stacks Project, Properties, Tag\n[01ZX](https://stacks.math.columbia.edu/tag/01ZX) = Lemma 28.30.4.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-affine-cover/lem-chow-affine-through-generic-points.md",
+  "place": "node lem-chow-affine-through-generic-points, order 317",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01ZX"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 00EV"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01I5"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "After renumbering, let $x\\in Z_i$ precisely for $i\\leq r$, so that $x\\notin\nZ_k$ for $k>r$.\n\n*Step 1: an affine open $W$ around $x$ avoiding the components not through\n$x$.* For $k>r$, the complement $X\\setminus Z_k$ is an open neighbourhood of\n$x$, hence so is the finite intersection $O:=\\bigcap_{k>r}(X\\setminus Z_k)$.\nSince the affine open subschemes form a basis of the topology, we may choose\nan affine open $W$ with $x\\in W\\subseteq O$; then $W\\cap Z_k=\\emptyset$ for\n$k>r$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 2: the generic points $\\eta_i$, $i\\leq r$, lie in $W$.* For $i\\leq r$\nthe intersection $W\\cap Z_i$ is nonempty (it contains $x$) and is an open\nsubset of the irreducible space $Z_i$; every nonempty open subset of an\nirreducible space contains its generic point, so $\\eta_i\\in W\\cap Z_i\\subseteq\nW$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 3: disjoint affine opens around $\\eta_{r+1},\\dots,\\eta_n$.* Apply\n[lem-chow-disjoint-affines] to the components\n$Z_{r+1},\\dots,Z_n$: for every $k>r$ there is an affine open $V_k\\ni\\eta_k$\nwith $V_k\\cap Z_l=\\emptyset$ for $l>r,\\ l\\neq k$, and the $V_k$ are pairwise\ndisjoint.",
+   "uses": [
+    "lem-chow-disjoint-affines"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4: shrinking the $V_k$ away from $W$.* Let $k>r$. Quasi-separatedness of\n$X$ means that the diagonal $X\\to X\\times_{\\mathbf Z}X$ is quasi-compact; the\nopen $W\\cap V_k$ is the base change of the diagonal along $W\\times_{\\mathbf\nZ}V_k\\to X\\times_{\\mathbf Z}X$, so $W\\cap V_k\\to W\\times_{\\mathbf Z}V_k$ is\nquasi-compact, and the target is affine, whence $W\\cap V_k$ is quasi-compact.\nWriting $V_k=\\operatorname{Spec}R_k$, the point $\\eta_k$ corresponds to a\nminimal prime $\\mathfrak p_k$ of $R_k$: indeed $Z_k\\cap V_k$ is an irreducible\ncomponent of $V_k$ (otherwise its closure in $X$ would contain a closed\nirreducible subset strictly larger than $Z_k$), and it is the closure of\n$\\{\\eta_k\\}$, so $\\mathfrak p_k$ is a minimal prime. By Algebra, Lemma 10.26.4\n(Stacks Project, Tag [00EV](https://stacks.math.columbia.edu/tag/00EV)),\napplied to $R:=R_k$, the minimal prime $\\mathfrak p_k$, and the quasi-compact\nopen $W\\cap V_k\\subseteq\\operatorname{Spec}R_k$ which does not contain\n$\\mathfrak p_k$ (as $W\\cap Z_k=\\emptyset$), there is $f_k\\in\nR_k\\setminus\\mathfrak p_k$ with $D(f_k)\\cap(W\\cap V_k)=\\emptyset$. Put\n$V_k':=D(f_k)\\subseteq V_k$: this is an affine open containing $\\eta_k$ and\ndisjoint from $W$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 5: the union.* The opens $W$ and $V_k'$ ($k>r$) are pairwise disjoint\nand each is affine, so their union\n\n$$\n U:=W\\cup\\bigcup_{k>r}V_k'\n$$\n\nis affine: by Schemes, Lemma 26.6.8 (Tag\n[01I5](https://stacks.math.columbia.edu/tag/01I5)) a disjoint union of two\naffine opens is affine, and we iterate. It contains $x$ and all\n$\\eta_1,\\dots,\\eta_n$, as required.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lem-chow-disjoint-affines"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-affine-cover/lem-chow-affine-through-generic-points.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 317,
+ "blueprint_uses": [
+  "def-weil-pbc-scheme-conventions",
+  "lem-chow-disjoint-affines"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Properties",
+  "declaration": "AlgebraicGeometry.exists_isAffineOpen_mem_of_subset_genericPoints",
+  "branch": "slopmaster2",
+  "line": 180,
+  "sorry_free": true,
+  "body_lines": 40
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.exists_isAffineOpen_mem_of_subset_genericPoints"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_sketch": [
+  {
+   "statement": "Let $X$ be a quasi-separated scheme, let $Z_1,\\dots,Z_n$ be pairwise distinct\nirreducible components of $X$ with generic points $\\eta_i$, and let $x\\in X$.\nThen there is an affine open $U\\subseteq X$ containing $x$ and all the\n$\\eta_i$.",
+   "proof": "After renumbering we may assume $x\\in Z_i$ for $i\\leq r$ and $x\\notin Z_k$ for\n$k>r$. Then $\\bigcap_{k>r}(X\\setminus Z_k)$ is an open neighbourhood of $x$,\nso there is an affine open $W$ with\n$x\\in W\\subseteq\\bigcap_{k>r}(X\\setminus Z_k)$; thus $W\\cap Z_k=\\emptyset$ for\n$k>r$. For $i\\leq r$ the set $W\\cap Z_i$ is a nonempty open subset of the\nirreducible space $Z_i$, hence contains its generic point, so $\\eta_i\\in W$.\n\nBy [lem-chow-disjoint-affines] applied to $Z_{r+1},\\dots,Z_n$ there are\npairwise disjoint affine opens $U_k\\ni\\eta_k$ for $k>r$. Fix $k>r$. Since $X$\nis quasi-separated, $W\\cap U_k$ is a quasi-compact open of $U_k$, and it does\nnot contain $\\eta_k$ because $\\eta_k\\in Z_k$ while $W\\cap Z_k=\\emptyset$. As\nin the proof of [lem-chow-disjoint-affines], $\\eta_k$ is a minimal prime\nof the affine scheme $U_k$, so 00EV provides a standard affine\nopen $U_k'\\subseteq U_k$ with $\\eta_k\\in U_k'$ and $U_k'\\cap W=\\emptyset$.\n\nThe opens $W$ and $U_k'$ for $k>r$ are pairwise disjoint and affine, so\n\n$$\nU:=W\\cup\\bigcup_{k>r}U_k'\n$$\n\nis affine by 01I5, and it contains $x$ and all the $\\eta_i$.",
+   "cites": [
+    "lem-chow-disjoint-affines"
+   ]
+  }
+ ]
+}

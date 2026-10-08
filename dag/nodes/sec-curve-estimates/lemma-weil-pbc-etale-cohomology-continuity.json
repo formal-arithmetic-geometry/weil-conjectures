@@ -1,0 +1,81 @@
+{
+ "id": "lemma-weil-pbc-etale-cohomology-continuity",
+ "kind": "statement",
+ "title": "Etale cohomology continuity",
+ "statement": "Let $(X_i)_{i\\in I}$ be a cofiltered inverse system of quasi-compact\nquasi-separated schemes [def-weil-pbc-scheme-conventions] with affine\ntransition maps and limit $X$. Let $F_i$ be a torsion sheaf\n[def-weil-pbc-etale-sheaves] on $X_i$, and write $F_j$ and $F$ for its\npullbacks to later stages and to $X$. Then\n\n$$\n \\varinjlim_{j\\geq i}H^q(X_j,F_j)\n \\xrightarrow{\\sim}H^q(X,F)\n \\qquad(q\\geq0).\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "node lemma-weil-pbc-etale-cohomology-continuity, order 955",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03Q6"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Let a class in $H^q(X,F)$ be given. By\n[thm-weil-pbc-hypercover-cohomology], it is represented by a cocycle in\n$C^q(U,F)$ on a hypercover finite in each degree. Descend the truncation\nthrough degree $q+1$ using [lemma-weil-pbc-finite-hypercover-descent]. By\n[lem-weil-pbc-etale-section-continuity], its cocycle descends to a section at\na later stage, and the equation $\\delta z=0$ holds at a further stage. That\ncocycle represents a class in $H^q(X_j,F_j)$. This proves surjectivity of the\ncomparison.",
+   "uses": [
+    "thm-weil-pbc-hypercover-cohomology",
+    "lemma-weil-pbc-finite-hypercover-descent",
+    "lem-weil-pbc-etale-section-continuity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For injectivity, represent a stagewise class by a hypercover cocycle, again\nusing [thm-weil-pbc-hypercover-cohomology]. If its pullback vanishes on $X$,\nthat theorem and [lem-weil-pbc-hypercover-refinement] give a refinement of\nthe pulled-back hypercover on which the cocycle is a boundary. Descend the\ntruncation of the refinement, its map to the original hypercover, its\nprimitive, and the boundary equation, using the same two descent lemmas. The\nclass is then zero at a later stage. For degree zero, replace the primitive\nby the assertion that the section is zero; section continuity applies\ndirectly. All the maps are pullbacks of sections, so the isomorphism is the\ncanonical restriction map in the statement and is natural in the sheaf and in\nthe inverse system.",
+   "uses": [
+    "thm-weil-pbc-hypercover-cohomology",
+    "lem-weil-pbc-hypercover-refinement"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-weil-pbc-hypercover-cohomology",
+  "lemma-weil-pbc-finite-hypercover-descent",
+  "lem-weil-pbc-etale-section-continuity",
+  "lem-weil-pbc-hypercover-refinement",
+  "lemma-weil-pbc-fibre-product-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 955,
+ "blueprint_uses": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-etale-section-continuity",
+  "lem-weil-pbc-hypercover-refinement",
+  "lemma-weil-pbc-fibre-product-limit",
+  "lemma-weil-pbc-finite-hypercover-descent",
+  "thm-weil-pbc-hypercover-cohomology"
+ ],
+ "uses_not_cited": [
+  "lemma-weil-pbc-fibre-product-limit"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "Let $(X_i)$ be a cofiltered inverse system of quasi-compact and\nquasi-separated schemes with affine transition maps and limit $X_\\infty$.\nFor a torsion sheaf $F_i$ descending to one stage, the natural map\n\n$$\n\\varinjlim_{j\\geq i}H^q(X_j,F_j)\\longrightarrow\nH^q(X_\\infty,F_\\infty)\n$$\n\nis an isomorphism.",
+   "proof": "We first recall why finite hypercover data compute the required cohomology.\nFor an etale hypercover $U_\\bullet\\to Z$, put\n\n$$\nC^r(U_\\bullet,F)=\\Gamma(U_r,F),\\qquad\nd=\\sum_{a=0}^{r+1}(-1)^a\\partial_a^*.\n$$\n\nOrder split hypercovers by common refinement and set\n$H^q_{\\mathrm{hyp}}(Z,F)= \\varinjlim_{U_\\bullet}H^q(C^\\bullet(U_\\bullet,F))$.\nThe sheaf equalizer gives $H^0_{\\mathrm{hyp}}(Z,F)=\\Gamma(Z,F)$. A short\nexact sequence of sheaves gives connecting maps after refining so that each\nof the finitely many local lifts of a cocycle exists. The resulting functors\nform a cohomological delta functor. They are effaceable in positive degree:\ngiven a $q$-cocycle, cover its finitely many degree-$q$ components so that\nthey lift through a chosen monomorphism into an injective sheaf, then fill the\nmatching objects successively through degree $q+1$; on this refinement the\ncocycle is a coboundary. Hence this delta functor is the universal derived\nfunctor of global sections. Therefore\n\n$$\nH^q_{\\mathrm{hyp}}(Z,F)=H^q_{\\mathrm{et}}(Z,F).\n$$\n\nThe construction also shows that a degree-$q$ class and a witness that it is\nzero use only the $(q+1)$-skeleton of one split hypercover.\n\nLet $\\alpha\\in H^q(X_\\infty,F_\\infty)$. Represent it by a cocycle\n$c\\in C^q(U_\\bullet,F_\\infty)$ on a split hypercover with finite qcqs\n$(q+1)$-skeleton. By the preceding lemma, this skeleton descends to some\n$X_j$. Each component of $c$ is, by the definition of the inverse-image\nsheaf, locally represented by a section at a finite stage. Refine the finite\ndegree-$q$ cover once and choose one stage dominating all those\nrepresentatives. The equation $dc=0$ consists of finitely many equalities on\nthe degree-$(q+1)$ components; these equalities descend after one further\nincrease of the stage. We obtain a cocycle $c_j$ and hence a class\n$\\alpha_j\\in H^q(X_j,F_j)$ mapping to $\\alpha$. This proves surjectivity.\n\nFor injectivity, suppose $\\alpha_j\\in H^q(X_j,F_j)$ maps to zero on\n$X_\\infty$. Choose a finite split hypercover and cocycle $c_j$ representing\nit. Vanishing on the limit supplies a refinement\n$V_\\bullet\\to U_\\bullet\\times_{X_j}X_\\infty$ and a cochain\n$b\\in C^{q-1}(V_\\bullet,F_\\infty)$ with $db=c_j|_V$. Only the\n$(q+1)$-skeleton, the refinement maps, the components of $b$, and the finite\nlist of equations $db=c_j|_V$ are used. Descend that entire list to one\nstage $X_k$ by the preceding lemma and the same section argument. It gives a\nnull-homotopy for the image of $c_j$ on $X_k$, so $\\alpha_j$ is zero in the\nfiltered colimit. The comparison map is therefore injective.\n\nAll constructions commute with restriction and with the transition maps,\nso the resulting bijection is the canonical map in the statement. This\nexpands the continuity input of Tag `03Q6`; neither the hypercover nor\nthe common finite stage is suppressed.",
+   "cites": []
+  }
+ ]
+}

@@ -1,0 +1,76 @@
+{
+ "id": "lem-trf-weil-shriek-iterates",
+ "kind": "statement",
+ "title": "Iterates of the Weil $!$-pushforward",
+ "statement": "In the setting of [def-trf-weil-shriek-pushforward], let\n$K\\in D^b_{ctf}(X,A)$ and $m,n\\geq1$.\n\n1. *Base-change composition.* After the pullback composition\nidentifications $L\\Phi^{(m+n)*}\\simeq L\\Phi^{m*}L\\Phi^{n*}$ on $X$\nand on $Y$,\n$$\n\\theta_{f,m+n,K}=\\theta_{f,m,L\\Phi_X^{n*}K}\\circ\nL\\Phi_Y^{m*}\\theta_{f,n,K}:\nL\\Phi_Y^{(m+n)*}Rf_!K\\longrightarrow Rf_!L\\Phi_X^{(m+n)*}K .\n$$\n1. *Iterates.* Let $u:L\\Phi_X^*K\\to K$ be a Frobenius coefficient\nmorphism, with iterates $u_m$ of\n[def-trf-frobenius-coefficient-morphism], and let\n$\\psi=Rf_!u\\circ\\theta_{f,1}$ be the Weil $!$-pushforward. Then the\niterates $\\psi_m$ of the Frobenius coefficient morphism $\\psi$ on\n$Rf_!K$ satisfy\n$$\n\\psi_m=Rf_!u_m\\circ\\theta_{f,m}\\qquad(m\\geq1).\n$$\n\nNeither statement uses invertibility of $u$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-iterates.md",
+  "place": "node lem-trf-weil-shriek-iterates, order 2365"
+ },
+ "stmt_deps": [
+  "def-trf-weil-shriek-pushforward",
+  "def-trf-frobenius-coefficient-morphism"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1: factorizing the relative Frobenius.* Paste the Cartesian\nsquare defining $X'_n$ of [d-relative-frob] with the Cartesian\nsquare obtained by pulling $f'_n:X'_n\\to Y$ back along $\\Phi_Y^m$.\nSince $\\Phi_Y^n\\Phi_Y^m=\\Phi_Y^{m+n}$, the outer rectangle identifies\n$$\nX'_{m+n}=Y\\times_{\\Phi_Y^m,Y,f'_n}X'_n,\n\\qquad f'_{m+n}=\\text{first projection},\\qquad\np_{m+n}=p_nq,\n$$\nwhere $q:X'_{m+n}\\to X'_n$ is the second projection. On test points,\n$(y,x)\\in X'_m$ means $\\Phi_Y^my=f(x)$, and\n$t(y,x)=(y,r_n(x))=(y,(f(x),\\Phi_X^nx))$ defines a map\n$t:X'_m\\to X'_{m+n}$. The square\n$$\n\\begin{array}{ccc}\nX'_m&\\xrightarrow{\\ p_m\\ }&X\\\\\n{\\scriptstyle t}\\downarrow&&\\downarrow{\\scriptstyle r_n}\\\\\nX'_{m+n}&\\xrightarrow{\\ q\\ }&X'_n\n\\end{array}\n$$\nis Cartesian: a point of the fiber product is $(y,(y',x'),x)$ with\n$(y',x')=(f(x),\\Phi_X^nx)$, which is exactly a point $(y,x)$ of\n$X'_m$. Moreover $f'_{m+n}t=f'_m$, and\n$$\ntr_m(x)=(f(x),(f(x),\\Phi_X^{m+n}x))=r_{m+n}(x),\n$$\nso $r_{m+n}=t\\circ r_m$, with $t$ finite as a base change of $r_n$.",
+   "uses": [
+    "d-relative-frob"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: the comparison.* Put $M=L\\Phi_X^{n*}K=Lr_n^*Lp_n^*K$.\nExpand the right-hand side of (1) using the three arrows of\n[def-trf-weil-shriek-pushforward]. The second factor is\n$L\\Phi_Y^{m*}$ of $\\operatorname{Ex}_!$ for the $\\Phi_Y^n$-square,\nfollowed by $L\\Phi_Y^{m*}Rf'_{n!}(\\eta_{r_n})$ and the composition\nidentification $Rf'_{n!}Rr_{n*}\\simeq Rf_!$. For the first factor,\nwrite the Cartesian square of $f$ along $\\Phi_Y^m$ as the vertical\npasting of the $t$-square above and the square of $f'_n$ along\n$\\Phi_Y^m$. By the pasting identity and the compatibility with the\ncomposition law of [fix-lem-exchanges], clauses (2) and (4), its\n$\\operatorname{Ex}_!$ is the $\\operatorname{Ex}_!$ for $f'_n$ followed\nby the exchange for $r_n$ along $q$. The latter is the ordinary\nexchange $\\operatorname{Ex}_*:Lq^*Rr_{n*}\\to Rt_*Lp_m^*$ of\n[def-exchange-projection], because $r_n$ is proper and one may use\nthe trivial compactification; it is invertible by proper base change\n([prop-functor-package], clause (4)).\n\nBy naturality of $\\operatorname{Ex}_!$ in the coefficient complex\n([fix-lem-exchanges], clause (1)), move\n$\\operatorname{Ex}_!$ for $f'_n$ past $\\eta_{r_n}$. The two\nexchanges for the $\\Phi_Y^n$- and $\\Phi_Y^m$-squares then paste, by\n[fix-lem-exchanges], clause (2), to the exchange for the outer\nrectangle, which is the first arrow of $\\theta_{f,m+n}$. What remains\non $N=Lp_{m+n}^*K=Lq^*Lp_n^*K$ is\n$$\nN\\xrightarrow{Lq^*\\eta_{r_n}}Lq^*Rr_{n*}Lr_n^*Lp_n^*K\n\\xrightarrow{\\operatorname{Ex}_*}Rt_*Lp_m^*Lr_n^*Lp_n^*K\n\\simeq Rt_*Lt^*N\n\\xrightarrow{Rt_*\\eta_{r_m}Lt^*}Rt_*Rr_{m*}Lr_m^*Lt^*N .\n$$\nBy the definition of $\\operatorname{Ex}_*$ as the adjoint of the\ncounit composite in [def-exchange-projection], and the triangle\nidentities of $Lr_n^*\\dashv Rr_{n*}$ of\n[def-weil-derived-direct-image], the composite of the first two\narrows is the unit $\\eta_t$ at $N$, after $Lp_m^*Lr_n^*\\simeq\nLt^*Lq^*$ from $r_np_m=qt$\n([def-weil-derived-pullback-tensor-hom]). The unit of the composite\nadjunction for $r_{m+n}=tr_m$ is $Rt_*\\eta_{r_m}Lt^*\\circ\\eta_t$.\nHence the displayed composite is $\\eta_{r_{m+n}}$ at $N$. Finally,\nall remaining arrows are composition identifications for $Rh_!$ and\n$Lh^*$ ([prop-functor-package], clause (3), and\n[def-weil-derived-pullback-tensor-hom]), which are coherent for\n$f'_{m+n}tr_m=f$ and $p_nqtr_m=\\Phi_X^{m+n}$. Therefore the\nright-hand side of (1) equals the defining composite of\n$\\theta_{f,m+n,K}$, proving (1).",
+   "uses": [
+    "def-trf-weil-shriek-pushforward",
+    "fix-lem-exchanges",
+    "def-exchange-projection",
+    "prop-functor-package",
+    "def-weil-derived-direct-image",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3: iterates.* For $m=1$, $\\psi_1=\\psi=Rf_!u\\circ\\theta_{f,1}$\nis the definition. Assume the formula for $m$. By\n[def-trf-frobenius-coefficient-morphism],\n$\\psi_{m+1}=\\psi\\circ L\\Phi_Y^*\\psi_m$ after the pullback\ncomposition identification. Thus\n$$\n\\psi_{m+1}=Rf_!u\\circ\\theta_{f,1,K}\\circ L\\Phi_Y^*Rf_!u_m\n\\circ L\\Phi_Y^*\\theta_{f,m,K}.\n$$\nNaturality of $\\theta_{f,1}$ in $K$\n([def-trf-weil-shriek-pushforward]) gives\n$\\theta_{f,1,K}\\circ L\\Phi_Y^*Rf_!u_m\n=Rf_!L\\Phi_X^*u_m\\circ\\theta_{f,1,L\\Phi_X^{m*}K}$. Hence\n$$\n\\psi_{m+1}=Rf_!(u\\circ L\\Phi_X^*u_m)\\circ\n\\theta_{f,1,L\\Phi_X^{m*}K}\\circ L\\Phi_Y^*\\theta_{f,m,K}\n=Rf_!u_{m+1}\\circ\\theta_{f,m+1,K},\n$$\nusing the recursive definition of $u_{m+1}$ in\n[def-trf-frobenius-coefficient-morphism] and (1) with the pair\n$(1,m)$. This proves (2) by induction.",
+   "uses": [
+    "def-trf-frobenius-coefficient-morphism",
+    "def-trf-weil-shriek-pushforward"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "d-relative-frob",
+  "def-trf-weil-shriek-pushforward",
+  "fix-lem-exchanges",
+  "def-exchange-projection",
+  "prop-functor-package",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-trf-frobenius-coefficient-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-iterates.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2365,
+ "blueprint_uses": [
+  "d-relative-frob",
+  "def-exchange-projection",
+  "def-trf-frobenius-coefficient-morphism",
+  "def-trf-weil-shriek-pushforward",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "fix-lem-exchanges",
+  "prop-functor-package"
+ ],
+ "proof_split_by": "labels"
+}

@@ -1,0 +1,112 @@
+{
+ "id": "thm-weil-grothendieck-lefschetz-trace",
+ "kind": "statement",
+ "title": "Grothendieck–Lefschetz trace formula",
+ "statement": "Fix the finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, and choose a prime $\\ell\\neq p$;\nwrite $\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of\n$\\Ql$, and let $Y_0$ be a\nseparated finite-type\n$k_0$-scheme and put $Y=Y_0\\times_{k_0}k$. Let\n$K\\in D^b_{c,\\mathrm W}(Y,\\Qlb)$ be a\nWeil complex; choose a finite\nextension $E/\\Ql$ contained in $\\Qlb$ and a model\n$K_E\\in D^b_{c,\\mathrm W}(Y,E)$ with scalar extension\n$K_E\\otimes_E\\Qlb=K$. These coefficients are formed on the\nsmall pro-etale site, and the\ncommon-stage\ncoefficient construction supplies the scalar extension. Use the\ngeometric Frobenius convention; the induced\ncohomological action $F$ is the\nglobal geometric-Frobenius\naction. Use the\nlocal Frobenius operators and the\ncompact-support cohomology\ndefined for this complex.\nFor every integer $n\\geq1$ and each point\n$x\\in Y_0(\\mathbf F_{q^n})$, choose a\ngeometric point\n$\\bar x\\to Y$ over $x$, iterate its local Weil isomorphism $n$ times,\nand write $K_{E,\\bar x}= L\\bar x^*\\operatorname{For}(K_E)$, using the\nderived pullback. The trace\nidentity is\nunderstood after mapping the left-hand $E$-valued traces to $\\Qlb$ along\nthe chosen inclusion $E\\hookrightarrow\\Qlb$, and is explicitly\n\n$$\n\\sum_{x\\in Y_0(\\mathbf F_{q^n})}\\sum_{j\\in\\mathbf Z}(-1)^j\n\\Tr\\bigl(F_x^{(n)}\\mid\n\\mathcal H^j(\\operatorname{For}K_E)_{\\bar x}\\bigr)\n=\n\\sum_{i\\in\\mathbf Z}(-1)^i\\Tr(F^n\\mid H_c^i(Y,K)).\n$$\n\nFor $K_E=E_Y$, so that $K=(\\Qlb)_Y$, and\nproper $Y_0$, the\npoint-count convention specializes to\n\n$$\n\\#Y_0(\\mathbf F_{q^n})\n=\\sum_{i\\in\\mathbf Z}(-1)^i\\Tr(F^n\\mid H^i(Y,\\Qlb)).\n$$\n\nHere $F_x^{(n)}$ and $K_{\\bar x}$ are the\nlocal Frobenius and stalk\nconstructions, and $H_c^i$ is\ncompact-support cohomology.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/thm-weil-grothendieck-lefschetz-trace.md",
+  "place": "node thm-weil-grothendieck-lefschetz-trace, order 2880"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "*Step 1: the identity.* The local data of the interface are the\nlocal Frobenius operators $F_x^{(n)}$ and the stalk complexes\n$K_{\\bar x}=L\\bar x^*\\operatorname{For}(K_E)$ of\n[def-weil-local-frobenius-trace], computed with the derived\npullback of [def-weil-derived-pullback-tensor-hom] and traced\nalternately over the cohomology sheaves of\n[def-weil-derived-cohomology-sheaves]; the\nglobal side is the compact-support cohomology of\n[def-weil-ordinary-compact-cohomology] with the geometric-Frobenius\noperator of [def-weil-global-geometric-frobenius]. The identity\nis the trace formula of the trace-formula chapter: at the finite coefficient stage\nit is [thm-trf-grothendieck-lefschetz-finite-ring] (whose finite\nring, finite field, and trace-class hypotheses are the ones recorded in\nthe interface), the $E$-valued form is [thm-trf-trace-formula-e],\nand the $\\Qlb$-form over the common-stage coefficients of\n[def-weil-algebraically-closed-coefficients] is\n[thm-trf-grothendieck-lefschetz-qbar]; the local terms are the\nfixed-point and local-term computations of\n[thm-trf-frobenius-fixed-points] and\n[thm-trf-frobenius-local-term] through the\n[thm-trf-lefschetz-verdier] comparison on the projective line, in the\ntrace-formula chapter's reduction to curves (affine line, Weil\n$!$-pushforward along the relative Frobenius, localization),\nwith the trace classes of\n[def-trf-karoubi-trace] and the independence of\n[prop-trf-karoubi-independence]. This step inherits the inputs of\nthe finite-ring trace formula, the construction of the Verdier local trace\nand its compatibility with extension by zero to the projective line, both\nof which are proved in the trace-formula chapter.\nThe properness hypothesis in the Lefschetz–Verdier comparison cannot be\ndropped for an arbitrary correspondence on a non-proper scheme.\nThe displayed identity,\nunderstood after the mapping of the $E$-valued traces along\n$E\\hookrightarrow\\Qlb$, is exactly the one of\n[thm-trf-grothendieck-lefschetz-qbar] transcribed to the\ninterface's notation, and the induced Frobenius operators on the\ngeometric stalks are those of the local Frobenius construction\n[def-trf-frobenius-operators].",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-global-geometric-frobenius",
+    "thm-trf-grothendieck-lefschetz-finite-ring",
+    "thm-trf-trace-formula-e",
+    "def-weil-algebraically-closed-coefficients",
+    "thm-trf-grothendieck-lefschetz-qbar",
+    "thm-trf-frobenius-fixed-points",
+    "thm-trf-frobenius-local-term",
+    "thm-trf-lefschetz-verdier",
+    "def-trf-karoubi-trace",
+    "prop-trf-karoubi-independence",
+    "def-trf-frobenius-operators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: the point-count specialization.* For\n$K_E=E_Y$, $K=(\\Qlb)_Y$, and proper $Y_0$, the\ninterface's constant-sheaf clause is [cor-trf-point-counting],\nwhose second form replaces compact-support by ordinary cohomology via\nthe proper coincidence of [prop-weil-proper-compact-coincidence];\nthe point-count convention is the one of\n[def-weil-point-counts-zeta].",
+   "uses": [
+    "cor-trf-point-counting",
+    "prop-weil-proper-compact-coincidence",
+    "def-weil-point-counts-zeta"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3: the determinant form.* In the smooth-proper\ngeometrically connected case the same trace formula is the input of\nthe trace-to-determinant identity [thm-zl-lefschetz-weil-identity]\nof the zeta chapter, which converts the per-iterate point counts into the\ndeterminant factorization of the zeta series; this is the form used\nin the final theorem's trace-to-determinant step.",
+   "uses": [
+    "thm-zl-lefschetz-weil-identity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-local-frobenius-trace",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-global-geometric-frobenius",
+  "thm-trf-grothendieck-lefschetz-finite-ring",
+  "thm-trf-trace-formula-e",
+  "def-weil-algebraically-closed-coefficients",
+  "thm-trf-grothendieck-lefschetz-qbar",
+  "thm-trf-frobenius-fixed-points",
+  "thm-trf-frobenius-local-term",
+  "thm-trf-lefschetz-verdier",
+  "def-trf-karoubi-trace",
+  "prop-trf-karoubi-independence",
+  "def-trf-frobenius-operators",
+  "cor-trf-point-counting",
+  "prop-weil-proper-compact-coincidence",
+  "def-weil-point-counts-zeta",
+  "thm-zl-lefschetz-weil-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/thm-weil-grothendieck-lefschetz-trace.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "padded_uses"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2880,
+ "blueprint_uses": [
+  "cor-trf-point-counting",
+  "def-trf-frobenius-operators",
+  "def-trf-karoubi-trace",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-local-frobenius-trace",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-pbc-proetale-site",
+  "def-weil-point-counts-zeta",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-weil-sheaf-complex",
+  "prop-trf-karoubi-independence",
+  "prop-weil-proper-compact-coincidence",
+  "thm-trf-frobenius-fixed-points",
+  "thm-trf-frobenius-local-term",
+  "thm-trf-grothendieck-lefschetz-finite-ring",
+  "thm-trf-grothendieck-lefschetz-qbar",
+  "thm-trf-lefschetz-verdier",
+  "thm-trf-trace-formula-e",
+  "thm-zl-lefschetz-weil-identity"
+ ],
+ "proof_split_by": "labels"
+}

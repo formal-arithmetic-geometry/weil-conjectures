@@ -1,0 +1,170 @@
+{
+ "id": "lem-kun-0f1h",
+ "kind": "statement",
+ "title": "Base change for open immersions",
+ "statement": "Let $K$ be a field. Let $j:U\\to X$ be an open immersion of\nschemes of finite type over $K$ and let $Y$ be a scheme of finite\ntype over $K$. Consider the diagram\n\n$$\n\\begin{array}{ccc}\nY\\times_{\\Spec(K)}X&\\xleftarrow{\\;h\\;}&Y\\times_{\\Spec(K)}U\\\\\n\\Big\\downarrow{\\scriptstyle q}&&\\Big\\downarrow{\\scriptstyle p}\\\\\nX&\\xleftarrow{\\;j\\;}&U .\n\\end{array}\n$$\n\nThen the exchange morphism of\n[def-kun-unbounded-exchange],\n$q^{-1}Rj_*F\\to Rh_*p^{-1}F$, is an isomorphism for every abelian\nsheaf $F$ on $U_{\\Et}$ whose stalks are torsion of orders\ninvertible in $K$. (*Source:* Stacks Project, Tag\n[0F1H](https://stacks.math.columbia.edu/tag/0F1H).)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1h.md",
+  "place": "node lem-kun-0f1h, order 1771",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F1H"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-kun-unbounded-exchange"
+ ],
+ "proof": [
+  {
+   "text": "*Reduction to $\\kunZn$-coefficients.* Write $F=\\varinjlim F[n]$ where the colimit is over the multiplicative system of integers\ninvertible in $K$ ([def-kun-torsion-invertible] and\n[lem-kun-invertible-orders-colimit]). Both sides\nof the exchange morphism of [def-kun-unbounded-exchange] commute\nwith filtered colimits in $F$: $Rj_*$ and $Rh_*$ by the\nsheaf-level filtered-colimit property of\n[lemma-weil-pbc-direct-image-filtered-colimit] in each degree\n(together with the truncation triangles of\n[def-kun-truncations]), and the inverse images are exact.\nHence it suffices to prove the lemma for each $F[n]$, a sheaf of\n$\\kunZn$-modules which has orders invertible in $K$ by\n[lem-kun-zn-sheaf-invertible-orders]; that is, we may assume that\n$F$ is a sheaf of $\\kunZn$-modules for some $n$ invertible in\n$K$.",
+   "uses": [
+    "def-kun-torsion-invertible",
+    "lem-kun-invertible-orders-colimit",
+    "def-kun-unbounded-exchange",
+    "lemma-weil-pbc-direct-image-filtered-colimit",
+    "def-kun-truncations",
+    "lem-kun-zn-sheaf-invertible-orders"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Induction.* We prove the lemma by induction on\n$\\kundim X+\\kundim Y$, finite by [lem-kun-dimension-finite-type], (well-founded induction on the pair of\ndimensions). If $\\kundim X\\le0$, then $X$ is a finite discrete\nset of points ([lem-kun-finite-closed-subscheme]: every\nirreducible component of $X$ is a point, hence closed), so $U$ is\nopen and closed in $X$, and the claim follows from\n[lem-kun-base-change-open-closed]. This covers the base of the\ninduction.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "lem-kun-finite-closed-subscheme",
+    "lem-kun-base-change-open-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Stalks over points with positive transcendence degree.*\nChoose a point $z\\in X\\times_KY$; we will show that the exchange\nmorphism is an isomorphism on the stalk at every geometric point\n$\\bar z$ over $z$ ([lem-kun-stalk-faithful-derived]).\n\nSuppose first that $z$ maps to $x\\in X$ with\n$\\operatorname{trdeg}_K\\kappa(x)>0$. Set\n$X'=\\Spec(\\mathcal O^{\\mathrm{sh}}_{X,x})$ and denote\n$U'\\subset X'$ the inverse image of $U$. Consider the base change\n\n$$\n\\begin{array}{ccc}\nY\\times_KX'&\\xleftarrow{\\;h'\\;}&Y\\times_KU'\\\\\n\\Big\\downarrow{\\scriptstyle q'}&&\\Big\\downarrow{\\scriptstyle p'}\\\\\nX'&\\xleftarrow{\\;j'\\;}&U'\n\\end{array}\n$$\n\nof our diagram by $X'\\to X$. The morphism $X'\\to X$ is a filtered\ncolimit of etale (in particular smooth) morphisms\n([def-weil-pbc-strict-henselization-limit]), so by smooth base\nchange in the form of [lem-kun-0f09] applied to\n$q:Y\\times_KX\\to X$ with $E:=Rj_*F$, and to\n$h:Y\\times_KU\\to Y\\times_KX$ with $E:=p^{-1}F$ (both\n$E$ lie in $\\Dplus$ with stalks of torsion orders invertible on\nthe base), the pullback of the exchange morphism to\n$Y\\times_KX'$ is, by [lem-kun-bc-base-change], the exchange\nmorphism\n$(q')^{-1}Rj'_*F'\\to Rh'_*(p')^{-1}F'$, where $F'$ is the pullback\nof $F$ to $U'$. So it suffices to show that the latter map is an\nisomorphism, for then the original map is an isomorphism on stalks at\n$\\bar z$ (stalks are computed by pullback,\n[lem-kun-stalk-as-pullback]).\n\nBy [lem-kun-0f0u] there is a separably closed field $L/K$ such\nthat $X'=\\varprojlim_iX_i$ with $X_i$ affine of finite type over\n$L$ and $\\kundim X_i<\\kundim X$ (using\n$\\operatorname{trdeg}_K\\kappa(x)>0$). For $i$ large enough there\nexists an open $U_i\\subset X_i$ restricting to $U'$ in $X'$\n([lem-kun-descent-limit-open]), and the sheaf $F'$ is a\nfiltered colimit of pullbacks of sheaves on the $U_i$\n([lem-kun-descent-limit]). We apply the induction hypothesis to\nthe diagrams\n\n$$\n\\begin{array}{ccc}\nY\\times_KX_i&\\xleftarrow{\\;h_i\\;}&Y\\times_KU_i\\\\\n\\Big\\downarrow{\\scriptstyle q_i}&&\\Big\\downarrow{\\scriptstyle p_i}\\\\\nX_i&\\xleftarrow{\\;j_i\\;}&U_i\n\\end{array}\n\\qquad\\text{equal to}\\qquad\n\\begin{array}{ccc}\nY_L\\times_LX_i&\\xleftarrow{\\;h_i\\;}&Y_L\\times_LU_i\\\\\n\\Big\\downarrow{\\scriptstyle q_i}&&\\Big\\downarrow{\\scriptstyle p_i}\\\\\nX_i&\\xleftarrow{\\;j_i\\;}&U_i\n\\end{array}\n$$\n\nover the field $L$ and to the pullbacks of $F$ to these diagrams:\nhere $\\kundim X_i+\\kundim Y_L<\\kundim X+\\kundim Y$ by\n[lem-kun-dimension-extension], so the induction hypothesis\napplies and the exchange morphisms at the finite levels are isomorphisms. By [lem-kun-0ezt], applied to the affine limit\nsystem $X_i$, we conclude that the map\n$(q')^{-1}Rj'_*F'\\to Rh'_*(p')^{-1}F'$ is an isomorphism.\n\nSuppose now that $z$ maps to $y\\in Y$ with\n$\\operatorname{trdeg}_K\\kappa(y)>0$. Let\n$Y'=\\Spec(\\mathcal O^{\\mathrm{sh}}_{Y,y})$. By\n[lem-kun-0f0u] there is a separably closed field $L/K$ with\n$Y'=\\varprojlim_iY_i$, $Y_i$ affine of finite type over $L$ and\n$\\kundim Y_i<\\kundim Y$; in particular $Y'$ is a scheme over $L$.\nDenote with a subscript $L$ base change from schemes over $K$ to\nschemes over $L$. Consider the commutative diagrams\n\n$$\n\\begin{array}{ccccc}\nY'\\times_KX&\\xleftarrow{\\;h'\\;}&Y'\\times_KU\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle f'}\\\\\nY\\times_KX&\\xleftarrow{\\;h\\;}&Y\\times_KU\\\\\n\\Big\\downarrow{\\scriptstyle q}&&\\Big\\downarrow{\\scriptstyle p}\\\\\nX&\\xleftarrow{\\;j\\;}&U\n\\end{array}\n\\qquad\\text{and}\\qquad\n\\begin{array}{ccccc}\nY'\\times_LX_L&\\xleftarrow{\\;h'\\;}&Y'\\times_LU_L\\\\\n\\Big\\downarrow{\\scriptstyle q'}&&\\Big\\downarrow{\\scriptstyle p'}\\\\\nX_L&\\xleftarrow{\\;j_L\\;}&U_L\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{}\\\\\nX&\\xleftarrow{\\;j\\;}&U\n\\end{array}\n$$\n\nand observe that the top rows are the same on the left and on the\nright (canonical identifications of fibre products,\n[lem-kun-fibre-product-limits]). By smooth base change\n([lem-kun-0f09], applied to the square\n$Y'\\times_KU\\to Y'\\times_KX$ over $Y'\\to Y$) we see that\n$f^{-1}Rh_*p^{-1}F=Rh'_*(f')^{-1}p^{-1}F$. By smooth base change\nfor $\\Spec(L)\\to\\Spec(K)$ in the form of [lem-kun-0f1c] we see that $Rj_{L,*}F_L$ is the pullback of $Rj_*F$ to $X_L$.\nCombining these two observations, and using that a vertical\ncomposition of exchange morphisms is an exchange morphism\n([lem-weil-pbc-exchange-identity-pasting]) we conclude that it suffices to prove that the\nexchange morphism for the upper square in the second diagram is an\nisomorphism, in order to prove that our original map is an\nisomorphism on stalks at $\\bar z$. Then, using that\n$Y'=\\varprojlim_iY_i$ and arguing exactly as in the previous\nparagraph ([lem-kun-descent-limit],\n[lem-kun-descent-limit-open], the induction hypothesis – since\n$\\kundim X_L+\\kundim Y_i<\\kundim X+\\kundim Y$ by\n[lem-kun-dimension-extension] – and [lem-kun-0ezt]), we\nsee that the induction hypothesis forces our map over\n$Y'\\times_KX$ to be an isomorphism.",
+   "uses": [
+    "lem-kun-stalk-faithful-derived",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-kun-0f09",
+    "lem-kun-bc-base-change",
+    "lem-kun-stalk-as-pullback",
+    "lem-kun-0f0u",
+    "lem-kun-descent-limit-open",
+    "lem-kun-descent-limit",
+    "lem-kun-dimension-extension",
+    "lem-kun-0ezt",
+    "lem-kun-fibre-product-limits",
+    "lem-kun-0f1c",
+    "lem-weil-pbc-exchange-identity-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Minimal counterexample.* Thus any counterexample with\n$\\kundim X+\\kundim Y$ minimal would have the exchange morphism an\nisomorphism on all stalks at non-closed points of $X\\times_KY$,\nbecause by [lem-kun-closed-points-of-product] a point $z$ of\n$X\\times_KY$ is closed if and only if both of its images in $X$\nand $Y$ are closed. Since it is enough to prove the isomorphism\nafter base change along open immersions of the factors\n([lem-kun-stalk-faithful-derived]; the base change along the\nopen immersions $X_0\\to X$, $Y_0\\to Y$ is a smooth base change\napplied to the exchang morphism by [lem-kun-0f09] and\n[lem-kun-bc-base-change]), we may assume $X$ and $Y$ are\naffine, after replacing them by affine open neighbourhoods of the\nimages of a closed point where the map is not an isomorphism; the dimension sum cannot increase. However, then we can choose a dense open immersion $Y\\to Y'$ with $Y'$ projective over $K$\n([lem-kun-compactification-affine]); we have\n$\\kundim Y'=\\kundim Y$ ([lem-kun-dimension-extension]), so we\nget a minimal counterexample with $Y$ projective over $K$ (and\nwith the exchange morphism an isomorphism at all non-closed points).\nIn the next paragraph we show that this cannot happen.",
+   "uses": [
+    "lem-kun-closed-points-of-product",
+    "lem-kun-stalk-faithful-derived",
+    "lem-kun-0f09",
+    "lem-kun-bc-base-change",
+    "lem-kun-compactification-affine",
+    "lem-kun-dimension-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The projective case.* Consider a diagram as in the statement\nof the lemma such that\n$q^{-1}Rj_*F\\to Rh_*p^{-1}F$ is an isomorphism at all non-closed\npoints of $X\\times_KY$ and such that $Y$ is projective over $K$.\nThe restriction of the map to $(X\\times_KY)_{K^{\\mathrm{sep}}}$ is\nthe corresponding map for the diagram of the lemma base changed to\n$K^{\\mathrm{sep}}$ ([lem-kun-0f1c] and\n[lem-kun-bc-base-change]), so by\n[lem-kun-0f1h-sep-reduction] we may and do assume $K$ is\nseparably closed. Choose a distinguished triangle\n\n$$\nq^{-1}Rj_*F\\to Rh_*p^{-1}F\\to Q\\to(q^{-1}Rj_*F)[1]\n$$\n\nin $D((X\\times_KY)_{\\Et})$. Since the first map is an isomorphism\non stalks at all non-closed points, $Q$ has nonzero stalks only at\nclosed points of $X\\times_KY$, so by [lem-kun-0f1g] it\nsuffices to prove $H^i((X\\times_KY)_{\\Et},Q)=0$ for all $i$.\nThus it suffices to prove that\n$q^{-1}Rj_*F\\to Rh_*p^{-1}F$ induces an isomorphism on cohomology.\nRecall that $F$ is annihilated by $n$ invertible in $K$. By the\nKunneth formula of [lem-kun-0f14b] (with proper factor $Y$,\nwhich is projective hence proper by\n[lem-kun-projective-implies-proper] and\n[lem-kun-proper-stability], and $E=\\underline{\\kunZn}$; here\n$Rj_*F\\in D(X_{\\Et},\\kunZn)$), we have\n\n$$\n\\begin{aligned}\n\\RGamma\\bigl((X\\times_KY)_{\\Et},q^{-1}Rj_*F\\bigr)\n&\\cong\\RGamma(X_{\\Et},Rj_*F)\\kunotimes{\\kunZn}\n\\RGamma(Y_{\\Et},\\underline{\\kunZn})\\\\\n&\\cong\\RGamma(U_{\\Et},F)\\kunotimes{\\kunZn}\n\\RGamma(Y_{\\Et},\\underline{\\kunZn}),\n\\end{aligned}\n$$\n\nusing [lem-kun-tensor-unit]\nfor $q^{-1}Rj_*F\\cong\\pr_1^{-1}\\underline{\\kunZn}\\kunotimes{\\kunZn} \\pr_2^{-1}Rj_*F$ and [lem-kun-leray-bdd]\nfor the second line, and\n\n$$\n\\RGamma\\bigl((X\\times_KY)_{\\Et},Rh_*p^{-1}F\\bigr)\n\\cong\\RGamma\\bigl((U\\times_KY)_{\\Et},p^{-1}F\\bigr)\n\\cong\\RGamma(U_{\\Et},F)\\kunotimes{\\kunZn}\n\\RGamma(Y_{\\Et},\\underline{\\kunZn})\n$$\n\n(using [lem-kun-leray-bdd] for $h$ and\n[lem-kun-0f14b] for the pair $(Y,U)$). By\n[lem-kun-bc-kunneth-compat], $\\RGamma$ of the exchange\nmorphism is, under these identifications, the identity, hence an\nisomorphism. This finishes the proof.",
+   "uses": [
+    "lem-kun-0f1c",
+    "lem-kun-bc-base-change",
+    "lem-kun-0f1h-sep-reduction",
+    "lem-kun-0f1g",
+    "lem-kun-0f14b",
+    "lem-kun-projective-implies-proper",
+    "lem-kun-proper-stability",
+    "lem-kun-tensor-unit",
+    "lem-kun-leray-bdd",
+    "lem-kun-bc-kunneth-compat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-torsion-invertible",
+  "lem-kun-invertible-orders-colimit",
+  "def-kun-unbounded-exchange",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "def-kun-truncations",
+  "lem-kun-zn-sheaf-invertible-orders",
+  "lem-kun-dimension-finite-type",
+  "lem-kun-finite-closed-subscheme",
+  "lem-kun-base-change-open-closed",
+  "lem-kun-stalk-faithful-derived",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-kun-0f09",
+  "lem-kun-bc-base-change",
+  "lem-kun-stalk-as-pullback",
+  "lem-kun-0f0u",
+  "lem-kun-descent-limit-open",
+  "lem-kun-descent-limit",
+  "lem-kun-dimension-extension",
+  "lem-kun-0ezt",
+  "lem-kun-fibre-product-limits",
+  "lem-kun-0f1c",
+  "lem-weil-pbc-exchange-identity-pasting",
+  "lem-kun-closed-points-of-product",
+  "lem-kun-compactification-affine",
+  "lem-kun-0f1h-sep-reduction",
+  "lem-kun-0f1g",
+  "lem-kun-0f14b",
+  "lem-kun-projective-implies-proper",
+  "lem-kun-proper-stability",
+  "lem-kun-tensor-unit",
+  "lem-kun-leray-bdd",
+  "lem-kun-bc-kunneth-compat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1h.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1771,
+ "blueprint_uses": [
+  "def-kun-torsion-invertible",
+  "def-kun-truncations",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-kun-0ezt",
+  "lem-kun-0f09",
+  "lem-kun-0f0u",
+  "lem-kun-0f14b",
+  "lem-kun-0f1c",
+  "lem-kun-0f1g",
+  "lem-kun-0f1h-sep-reduction",
+  "lem-kun-base-change-open-closed",
+  "lem-kun-bc-base-change",
+  "lem-kun-bc-kunneth-compat",
+  "lem-kun-closed-points-of-product",
+  "lem-kun-compactification-affine",
+  "lem-kun-descent-limit",
+  "lem-kun-descent-limit-open",
+  "lem-kun-dimension-extension",
+  "lem-kun-dimension-finite-type",
+  "lem-kun-fibre-product-limits",
+  "lem-kun-finite-closed-subscheme",
+  "lem-kun-invertible-orders-colimit",
+  "lem-kun-leray-bdd",
+  "lem-kun-projective-implies-proper",
+  "lem-kun-proper-stability",
+  "lem-kun-stalk-as-pullback",
+  "lem-kun-stalk-faithful-derived",
+  "lem-kun-tensor-unit",
+  "lem-kun-zn-sheaf-invertible-orders",
+  "lem-weil-pbc-exchange-identity-pasting",
+  "lemma-weil-pbc-direct-image-filtered-colimit"
+ ],
+ "proof_split_by": "labels"
+}

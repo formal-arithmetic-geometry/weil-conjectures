@@ -1,0 +1,67 @@
+{
+ "id": "lem-exc-comparison-tor-interval",
+ "kind": "statement",
+ "title": "Site comparison preserves and detects Tor intervals",
+ "statement": "Let $A$ be finite and let $K\\in D^+(T_{\\Et},A)$.\nFor integers $a\\leq b$, $K$ has\nTor amplitude\nin $[a,b]$ if and only if its\npullback\n$\\nu_T^*K$ has Tor amplitude in the same interval on\nthe full pro-etale site. The derived categories are the\nordinary ones of [def-weil-pbc-derived-categories].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-cor-sf-direct-image-ctf/lem-exc-comparison-tor-interval.md",
+  "place": "node lem-exc-comparison-tor-interval, order 2193"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "We record the bounded-flat-model argument. If $K$ has\nTor amplitude $[a,b]$, take a bounded-above flat\nresolution $P$ with $P^q=0$ for $q>b$.\nSuch a resolution is constructed by free module sheaves\non site objects, successively covering cycles and kernels.\nIt is exact in degrees below $a$. Put\n$Q=\\operatorname{coker}(P^{a-1}\\to P^a)$.\nFor every module sheaf $N$, the flat resolution ending\nin $P^a\\to Q$ computes\n\n$$\n\\operatorname{Tor}_1(Q,N)\n=\\mathcal H^{a-1}(P\\otimes N)=0,\n$$\n\nby [def-weil-finite-tor-amplitude]. Hence $Q$\nis flat, and $[Q\\to P^{a+1}\\to\\cdots\\to P^b]$\nis a flat representative of $K$ in precisely this interval.\nBy [lem-exc-constant-inverse-image-flat], its termwise\npullback is still flat. Exactness in\n[prop-weil-pbc-site-comparison-finite-level] makes it\na representative of $\\nu_T^*K$. Tensoring this bounded\nflat complex with any pro-etale module sheaf gives no\ncohomology outside $[a,b]$, proving one implication.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "lem-exc-constant-inverse-image-flat",
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the converse, testing $\\nu_T^*K$ with the coefficient\nring first gives its cohomological bound $[a,b]$.\nExactness of $\\nu_T^*$ and the sheaf unit isomorphism\nin [prop-weil-pbc-site-comparison-finite-level] make\n$\\nu_T^*$ conservative on sheaves, hence give the same\ncohomological bound for $K$. Take a bounded-above flat\nresolution of $K$ and of an arbitrary etale module\nsheaf $N$. Their pullbacks remain flat by\n[lem-exc-constant-inverse-image-flat].\nExact inverse image commutes with ordinary tensor and\nthe direct sums in these resolutions, giving\n\n$$\n\\nu_T^*(K\\otimes_A^LN)\n=\\nu_T^*K\\otimes_A^L\\nu_T^*N\n$$\n\nfor the derived tensor in [def-weil-derived-tensor].\nThe right side has the stipulated Tor bound. Conservativity\non its cohomology sheaves gives that bound on the left\nbefore pullback as well. This applies to every $N$,\nproving the converse. The derived comparison used here\nis the ordinary one of [thm-weil-pbc-site-comparison].",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-exc-constant-inverse-image-flat",
+    "def-weil-derived-tensor",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-tor-amplitude",
+  "lem-exc-constant-inverse-image-flat",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "def-weil-derived-tensor",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-cor-sf-direct-image-ctf/lem-exc-comparison-tor-interval.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2193,
+ "blueprint_uses": [
+  "def-weil-derived-tensor",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-exc-constant-inverse-image-flat",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof_split_by": "paragraphs"
+}

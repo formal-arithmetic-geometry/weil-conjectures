@@ -1,0 +1,100 @@
+{
+ "id": "thm-weil-etale-geometric-biduality",
+ "kind": "statement",
+ "title": "Finite-stage etale Verdier biduality",
+ "statement": "For every separated finite-type $X/k$, the natural map\n\n$$\n\\delta_K:K\\longrightarrow D_XD_XK\n\\qquad(K\\in D^b_{ctf}(X_{\\Et},A))\n$$\n\nis an isomorphism. Consequently $D_X$ is an exact contravariant\nanti-equivalence of $D^b_{ctf}(X_{\\Et},A)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+  "place": "node thm-weil-etale-geometric-biduality, order 2128"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Induct on $d=\\dim X$, simultaneously for all algebraically closed\nfields of characteristic different from $\\ell$. Dimension zero\nreduces to finitely many geometric points, since nilpotent thickenings\ndo not change the etale site. There the assertion is perfect derived\ncoefficient biduality, [lem-weil-coefficient-frobenius].",
+   "uses": [
+    "lem-weil-coefficient-frobenius"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [lem-weil-delta-restriction] the assertion is local on $X$.\nWe may first choose an affine open and then a proper compactification\n$j:X\\hookrightarrow\\overline X$, using\n[thm-nagata-compactification], and replace $\\overline X$ by the\nscheme-theoretic closure of $X$. Its dimension is $d$. Extension by zero\n$j_!K$ is bounded constructible with the same Tor interval, as is\nchecked on stalks. Restriction of its double-dual map is the original\nmap. It therefore suffices to prove the assertion for proper $X$\nof dimension $d$.",
+   "uses": [
+    "lem-weil-delta-restriction",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set $\\Delta=\\operatorname{Cone}(\\delta_K)$. Preservation from\n[lem-weil-verdier-preservation-strata] makes $\\Delta$ bounded\nconstructible. We show that every cohomology sheaf of $\\Delta$\nvanishes at every nonclosed point $x$. Choose an affine open\n$V\\ni x$. Since $x$ is nonclosed, $\\kappa(x)/k$ has positive\ntranscendence degree. Among a finite set of algebra generators of\n$\\Gamma(V,\\mathcal O_V)$, some $t$ has transcendental image in\n$\\kappa(x)$. The resulting map $V\\to\\mathbf A^1_k$ sends\n$x$ to the generic point. Its generic fibre has dimension at most\n$d-1$, by the dimension argument of\n[lem-fin-coordinate-generic-dimension]: components with constant\n$t$ disappear, and a dominant component loses one dimension.\nAlgebraic field extension preserves this dimension bound.",
+   "uses": [
+    "lem-weil-verdier-preservation-strata",
+    "lem-fin-coordinate-generic-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The induction hypothesis over $\\overline{k(t)}$, together with\n[lem-weil-geometric-generic-duality], says that the restriction of\n$\\delta_{K|_V}$ to the geometric generic fibre is an isomorphism.\nEvery geometric point above $x$ factors through such a fibre after\nchoosing an algebraic closure of $k(t)$ in its algebraically closed\nresidue field. Hence $\\Delta$ has zero stalk at $x$.\nEach of its finitely many cohomology sheaves has constructible support,\nand a constructible subset of a Noetherian finite-type $k$-scheme\ncontaining only closed points is finite: in a finite locally closed\ndecomposition, a positive-dimensional piece would contain a nonclosed\ngeneric point. Thus all the cohomology of $\\Delta$ is supported\non one finite set of closed points.",
+   "uses": [
+    "lem-weil-geometric-generic-duality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write $a:X\\to\\operatorname{Spec}k$. The direct-image preservation\nin [thm-sf-direct-image-tor-amplitude], with\n[lem-sf-etale-direct-image-vanishing], makes $Ra_*K$ a perfect\ncoefficient complex. Its double-dual map is an isomorphism by\n[lem-weil-coefficient-frobenius]. Proper compatibility of\nevaluation, [lem-weil-delta-proper-pushforward], therefore gives\n$Ra_*\\Delta=0$. For a sheaf supported on finitely many closed\npoints over the algebraically closed field $k$, global sections are\nthe finite direct sum of its stalks and higher cohomology vanishes.\nThe truncation spectral sequence of [thm-sp-truncation-e2] thus\nidentifies\n\n$$\nH^qRa_*\\Delta=\\Gamma(X,\\mathcal H^q\\Delta)\n=\\bigoplus_x(\\mathcal H^q\\Delta)_{\\bar x}.\n$$",
+   "uses": [
+    "thm-sf-direct-image-tor-amplitude",
+    "lem-sf-etale-direct-image-vanishing",
+    "lem-weil-coefficient-frobenius",
+    "lem-weil-delta-proper-pushforward",
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every summand vanishes, so $\\Delta=0$. This completes the induction.\nPreservation was proved before the induction; together with the natural\nevaluation of [lem-weil-duality-pairing], $D_X^2\\cong\\mathrm{id}$\ntherefore gives the claimed anti-equivalence.",
+   "uses": [
+    "lem-weil-duality-pairing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-coefficient-frobenius",
+  "lem-weil-delta-restriction",
+  "thm-nagata-compactification",
+  "lem-weil-verdier-preservation-strata",
+  "lem-fin-coordinate-generic-dimension",
+  "lem-weil-geometric-generic-duality",
+  "thm-sf-direct-image-tor-amplitude",
+  "lem-sf-etale-direct-image-vanishing",
+  "lem-weil-delta-proper-pushforward",
+  "thm-sp-truncation-e2",
+  "lem-weil-duality-pairing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2128,
+ "blueprint_uses": [
+  "lem-fin-coordinate-generic-dimension",
+  "lem-sf-etale-direct-image-vanishing",
+  "lem-weil-coefficient-frobenius",
+  "lem-weil-delta-proper-pushforward",
+  "lem-weil-delta-restriction",
+  "lem-weil-duality-pairing",
+  "lem-weil-geometric-generic-duality",
+  "lem-weil-verdier-preservation-strata",
+  "thm-nagata-compactification",
+  "thm-sf-direct-image-tor-amplitude",
+  "thm-sp-truncation-e2"
+ ],
+ "proof_split_by": "paragraphs"
+}

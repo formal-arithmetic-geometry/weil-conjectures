@@ -1,0 +1,106 @@
+{
+ "id": "prop-weil-pbc-preservation-constructible",
+ "kind": "statement",
+ "title": "Preservation before constructible restriction",
+ "statement": "Let $\\square$ be the cartesian square [def-weil-pbc-cartesian-square] with\n$X,Y,X',Y'$ noetherian of finite dimension, $f$ and $f'$ proper, and suppose\nthere is a positive integer $N$ annihilating $A/I$ which is invertible on\nall four schemes. Assume that the geometric fibers of $f$ have dimension at\nmost $e\\in\\mathbf Z_{\\geq0}$; put $c=2e$.\n\nThen, for every $K\\in\\Dbc(X_{\\Proet},A)$ whose reductions have a common\ncohomological interval $[a,b]$, one has\n$$\n \\begin{aligned}\n  Rf_*K&\\in\\Dbc(Y_{\\Proet},A),&\n  Lg^*_{\\mathrm{comp}}Rf_*K&\\in\\Dbc(Y'_{\\Proet},A),\\\\\n  Lg'^*_{\\mathrm{comp}}K&\\in\\Dbc(X'_{\\Proet},A),&\n  Rf'_*Lg'^*_{\\mathrm{comp}}K&\\in\\Dbc(Y'_{\\Proet},A).\n \\end{aligned}\n$$\nThe two pullbacks have reduction amplitude $[a,b]$ and the two direct images\nhave reduction amplitude contained in $[a,b+c]$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.md",
+  "place": "node prop-weil-pbc-preservation-constructible, order 1355",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09C1"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09C7"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 095U"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0GL0"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09C2"
+   }
+  ],
+  "note": [
+   "*Source note:* no Stacks Project entry states this preservation: the\nconstructibility of the four outputs is the adic constructibility of\nDefinition 61.29.1 ([Tag 09C1](https://stacks.math.columbia.edu/tag/09C1))\nand Proposition 61.29.7 ([Tag\n09C7](https://stacks.math.columbia.edu/tag/09C7)), and the amplitude bounds\nare those of Lemma 59.92.2 ([Tag\n095U](https://stacks.math.columbia.edu/tag/095U)) and Theorem 63.14.5 ([Tag\n0GL0](https://stacks.math.columbia.edu/tag/0GL0)), each stated for a single\ncomplex on a Noetherian scheme; the closest packaged form is Lemma 61.29.2\n([Tag 09C2](https://stacks.math.columbia.edu/tag/09C2)), which realizes one\nconstructible $K$ as $\\Rlim K_n$ with a common interval and etale origins\nbut says nothing about functors. The blueprint adds the simultaneous\nstatement for the completed pullbacks and direct images of\n$\\Dbc(X_{\\Proet},A)$ whose reductions share the interval $[a,b]$."
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "By [thm-weil-pbc-amplification-proper] the three conditions\n$$\n \\mathrm{AMP}(\\square;2e),\\qquad\\mathrm{WIT}(\\square),\\qquad\\mathrm{TOW}(\\square)\n$$\nof [def-weil-pbc-finite-level-amplification],\n[def-weil-pbc-witness-compatibility] and [def-weil-pbc-tower-preservation]\nhold for $c=2e$, so the argument below applies. Let\n$K\\in\\Dbc(X_{\\Proet},A)$ have all reductions supported in $[a,b]$, so that\nits reduction tower is uniformly bounded constructible in the sense of\n[def-weil-pbc-bounded-constructible-complete] with compatible etale-origin\nwitnesses. By the amplification $\\mathrm{AMP}(\\square;c)$ and the tower\npreservation $\\mathrm{TOW}(\\square)$, the levelwise tower functors carry\nthis tower to uniformly bounded constructible towers whose local models have\namplitude compatible with the containments, and by the witness compatibility\nof [def-weil-pbc-witness-compatibility] the compatible etale-origin\nwitnesses are carried to compatible witnesses. By the reconstruction lemma\nfor uniform towers each of the four derived limits is then realized by its\nlocal models, hence lies in the bounded constructible complete category, is\nderived complete and has the stated reduction amplitude; and by the\ndirect-image-limits proposition the four limits are exactly $Rf_*K$,\n$Lg^*_{\\mathrm{comp}}Rf_*K$, $Lg'^*_{\\mathrm{comp}}K$ and\n$Rf'_*Lg'^*_{\\mathrm{comp}}K$, which proves the assertions.",
+   "uses": [
+    "thm-weil-pbc-amplification-proper",
+    "def-weil-pbc-finite-level-amplification",
+    "def-weil-pbc-witness-compatibility",
+    "def-weil-pbc-tower-preservation",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-weil-pbc-amplification-proper",
+  "def-weil-pbc-finite-level-amplification",
+  "def-weil-pbc-witness-compatibility",
+  "def-weil-pbc-tower-preservation",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-weil-pbc-reconstruction-uniform-tower",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1355,
+ "blueprint_uses": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-finite-level-amplification",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-tower-preservation",
+  "def-weil-pbc-witness-compatibility",
+  "lem-weil-pbc-reconstruction-uniform-tower",
+  "prop-weil-pbc-direct-image-limits",
+  "thm-weil-pbc-amplification-proper"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-reconstruction-uniform-tower",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_notes": [
+  {
+   "label": "source_note",
+   "text": "*Source note:* no Stacks Project entry states this preservation: the\nconstructibility of the four outputs is the adic constructibility of\nDefinition 61.29.1 ([Tag 09C1](https://stacks.math.columbia.edu/tag/09C1))\nand Proposition 61.29.7 ([Tag\n09C7](https://stacks.math.columbia.edu/tag/09C7)), and the amplitude bounds\nare those of Lemma 59.92.2 ([Tag\n095U](https://stacks.math.columbia.edu/tag/095U)) and Theorem 63.14.5 ([Tag\n0GL0](https://stacks.math.columbia.edu/tag/0GL0)), each stated for a single\ncomplex on a Noetherian scheme; the closest packaged form is Lemma 61.29.2\n([Tag 09C2](https://stacks.math.columbia.edu/tag/09C2)), which realizes one\nconstructible $K$ as $\\Rlim K_n$ with a common interval and etale origins\nbut says nothing about functors. The blueprint adds the simultaneous\nstatement for the completed pullbacks and direct images of\n$\\Dbc(X_{\\Proet},A)$ whose reductions share the interval $[a,b]$.",
+   "where": "statement"
+  }
+ ]
+}

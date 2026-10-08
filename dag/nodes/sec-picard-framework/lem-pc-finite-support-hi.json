@@ -1,0 +1,60 @@
+{
+ "id": "lem-pc-finite-support-hi",
+ "kind": "statement",
+ "title": "Finite support of higher direct images",
+ "statement": "Let $f:X\\to S$ be a quasi-compact, quasi-separated morphism of schemes.\nFor every quasi-coherent $\\mathcal{O}_X$-module $\\mathcal{F}$:\n\n1. the $R^if_*\\mathcal{F}$ are quasi-coherent;\n1. if $S$ is quasi-compact, there is an integer $n=n(X,S,f)$ such\nthat $R^pf_*\\mathcal{F}=0$ for all $p\\ge n$ and all quasi-coherent $\\mathcal{F}$; the\nsame integer works for every base change\n$S'\\to S$ (i.e. $R^p(f')_*\\mathcal{F}'=0$ for $p\\ge n$ and quasi-coherent\n$\\mathcal{F}'$ on $X'=S'\\times_SX$).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-finite-support-hi.md",
+  "place": "node lem-pc-finite-support-hi, order 642",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01XJ"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "It suffices to prove the statements on affine open subschemes\n$V=\\operatorname{Spec}(A)$ of $S$ (the sheaf $R^if_*\\mathcal{F}$ is determined by its\nsections on affines, and $(R^if_*\\mathcal{F})|_V=R^i(f|_V)_*\\mathcal{F}|$): after\nreplacing $S$ by $V$ and $X$ by $f^{-1}(V)$ we have an affine $S$,\nand $X$ is quasi-compact and quasi-separated. Choose a finite affine\nopen covering $X=U_1\\cup\\dots\\cup U_t$ (quasi-compactness) with all\nintersections affine (quasi-separatedness: the intersection of two\naffine open subschemes of a quasi-separated scheme is affine; or\nrefine). We prove by induction on $t$ the assertion\n$P(t)$: $H^p(X,\\mathcal{F})=0$ for $p\\ge t$ and $H^p(X,\\mathcal{F})=\\check H^p(\\mathcal U,\\mathcal{F})$\nfor all $p$, for every quasi-coherent $\\mathcal{F}$. For $t=1$, $X$ affine and\n$P(1)$ is [lem-pc-affine-vanishing]. For $t>1$ write\n$U=U_1$, $V=U_2\\cup\\cdots\\cup U_t$ ($V$ is quasi-compact, covered by\n$t-1$ affine opens with affine intersections) and consider the short\nexact sequence of sheaves on $X$\n\n$$\n0\\to\\mathcal{F}\\longrightarrow j_{U,*}\\mathcal{F}|_U\\oplus j_{V,*}\\mathcal{F}|_V\n\\longrightarrow j_{U\\cap V,*}\\mathcal{F}|_{U\\cap V}\\to0\n$$\n\n(exactness is immediate on stalks: at $x$, the sequence is\n$0\\to\\mathcal{F}_x\\to\\mathcal{F}_x\\oplus\\mathcal{F}_x\\to\\mathcal{F}_x\\to0$ for $x\\in U\\cap V$, and\n$0\\to\\mathcal{F}_x\\to\\mathcal{F}_x\\to0\\to0$ otherwise, with the maps the diagonal and\nthe difference). Its long exact cohomology sequence, together with\n$H^p(U,\\cdot)=H^p(V,\\cdot)=0$ for $p\\ge t-1$ and the identifications\n$H^p(U,\\mathcal{F})=\\check H^p(U,\\mathcal{F})$ etc. (the induction hypothesis applied\nto $U$ ($t=1$) and to $V$ ($t-1$ opens) and the standard equality for\na two-open cover), gives $H^p(X,\\mathcal{F})=0$ for $p\\ge t$ and the Cech\nidentification for lower $p$ (the classical devissage of Cohomology of\nSchemes, Lemma 30.4.5, Tag [01XJ](https://stacks.math.columbia.edu/tag/01XJ),\nwhich also uses [lem-pc-cech-computes] for the Cech comparison).\nThis proves (1) and the first statement of (2) (the integer $n=t$).\nThe base-change uniformity: the same $t$ bounds the coverings obtained\nby base change $S'\\to S$: the $U_i$'s pull back to affine opens of\n$X'$ with affine intersections covering $X'$ (base change of affine\nalong $S'\\to S$ is affine; $\\mathcal{F}$ replaced by an arbitrary\nquasi-coherent $\\mathcal{F}'$), so the same induction proves $R^p(f')_*\\mathcal{F}'=0$\nfor $p\\ge t$. This proves (2).",
+   "uses": [
+    "lem-pc-affine-vanishing",
+    "lem-pc-cech-computes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-vanishing",
+  "lem-pc-cech-computes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-finite-support-hi.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 642,
+ "blueprint_uses": [
+  "def-pc-morphism-conventions",
+  "def-pc-scheme",
+  "lem-pc-affine-vanishing",
+  "lem-pc-cech-computes"
+ ],
+ "uses_not_cited": [
+  "def-pc-morphism-conventions",
+  "def-pc-scheme"
+ ],
+ "proof_split_by": "paragraphs"
+}

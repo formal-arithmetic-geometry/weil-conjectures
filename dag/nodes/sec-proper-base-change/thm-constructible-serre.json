@@ -1,0 +1,149 @@
+{
+ "id": "thm-constructible-serre",
+ "kind": "statement",
+ "title": "Constructible sheaves form a weak Serre subcategory",
+ "statement": "Let $X$ be a scheme and $\\Lambda$ a finite ring. The category of\nconstructible $\\Lambda$-module sheaves on $X_{\\Et}$ is closed under\nkernels, cokernels, and extensions inside $\\Mod(X_{\\Et},\\Lambda)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-constructible-serre.md",
+  "place": "node thm-constructible-serre, order 1299",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03RZ"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09AI"
+   }
+  ],
+  "note": [
+   "*Source:* Stacks Project, Etale Cohomology, Lemma 59.71.6, [Tag\n03RZ](https://stacks.math.columbia.edu/tag/03RZ). The pro-etale counterpart\nof the weak-Serre assertion, stated there for a Noetherian coefficient ring,\nis Stacks Project, Section 61.27, [Tag\n09AI](https://stacks.math.columbia.edu/tag/09AI); the form used here is the\netale statement just cited, for a finite ring $\\Lambda$."
+  ]
+ },
+ "stmt_deps": [
+  "def-constructible-constructible",
+  "def-constructible-finite-locally-constant",
+  "def-constructible-refines",
+  "def-constructible-stratification",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "This is [thm-constructible-serre] of the proper-base-change chapter,\nrestated in the notation of this chapter.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lemma-constructible-common-refinement",
+  "lemma-constructible-flc-biproduct",
+  "lemma-constructible-flc-serre",
+  "lemma-constructible-iso-invariance",
+  "lemma-constructible-of-refines",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-constructible-pullback",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-constructible-serre.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "multiple_detailed_forms",
+  "self_citation",
+  "lean_multiple",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1299,
+ "blueprint_uses": [
+  "def-constructible-constructible",
+  "def-constructible-finite-locally-constant",
+  "def-constructible-refines",
+  "def-constructible-stratification",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site",
+  "lemma-constructible-common-refinement",
+  "lemma-constructible-flc-biproduct",
+  "lemma-constructible-flc-serre",
+  "lemma-constructible-iso-invariance",
+  "lemma-constructible-of-refines",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-constructible-pullback",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "lean": {
+  "module": "WeilConjectures.ConstructibleSheaf.KernelCokernel",
+  "declaration": "AlgebraicGeometry.Scheme.IsConstructibleSheaf.cokernel",
+  "branch": "slopmaster2",
+  "line": 366,
+  "sorry_free": true,
+  "body_lines": 20,
+  "others": [
+   {
+    "module": "WeilConjectures.ConstructibleSheaf.KernelCokernel",
+    "declaration": "AlgebraicGeometry.Scheme.IsConstructibleSheaf.kernel",
+    "branch": "slopmaster2",
+    "line": 342,
+    "sorry_free": true,
+    "body_lines": 20
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.IsConstructibleSheaf.cokernel",
+  "AlgebraicGeometry.Scheme.IsConstructibleSheaf.kernel"
+ ],
+ "uses_not_cited": [
+  "def-constructible-constructible",
+  "def-constructible-finite-locally-constant",
+  "def-constructible-refines",
+  "def-constructible-stratification",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site",
+  "lemma-constructible-common-refinement",
+  "lemma-constructible-flc-biproduct",
+  "lemma-constructible-flc-serre",
+  "lemma-constructible-iso-invariance",
+  "lemma-constructible-of-refines",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-constructible-pullback",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "Let $\\mathcal A=\\mathrm{Mod}_\\Lambda$ with $\\Lambda$ a finite ring. The\nkernel and the cokernel of a morphism between constructible sheaves on\n$\\et X$, finite direct sums of constructible sheaves, and the middle term of\na short exact sequence whose outer terms are constructible, are\nconstructible. Consequently the constructible sheaves form a weak Serre\nsubcategory of $\\shv{\\et X}$. (The kernel and cokernel statements are\nformalised, for any ring $\\Lambda$, as are the instances\n`IsClosedUnderKernels` and `IsClosedUnderCokernels` of\n`Etale.constructibleSheaf`; the extension statement is not.)",
+   "proof": "Let $\\varphi\\colon\\mathcal F\\to\\mathcal F'$ be a morphism of constructible\nsheaves. By [lemma-constructible-common-refinement] and\n[lemma-constructible-of-refines] there is one stratification\n$(\\iota_k\\colon Z_k\\to X)_k$ such that all $\\iota_k^*\\mathcal F$ and\n$\\iota_k^*\\mathcal F'$ are finite locally constant. Since $\\iota_k^*$ is\nexact, $\\iota_k^*\\ker\\varphi=\\ker(\\iota_k^*\\varphi)$ and\n$\\iota_k^*\\operatorname{coker}\\varphi=\\operatorname{coker}(\\iota_k^*\\varphi)$\nare finite locally constant by [lemma-constructible-flc-serre], so\n$\\ker\\varphi$ and $\\operatorname{coker}\\varphi$ are constructible with\nrespect to the same stratification. The same argument, using exactness of\n$\\iota_k^*$ and the extension part of [lemma-constructible-flc-serre],\nhandles extensions, and [lemma-constructible-flc-biproduct] handles\nfinite direct sums. A full subcategory of an abelian category closed under\nkernels, cokernels and extensions is a weak Serre subcategory.",
+   "cites": [
+    "lemma-constructible-common-refinement",
+    "lemma-constructible-of-refines",
+    "lemma-constructible-flc-serre",
+    "lemma-constructible-flc-biproduct"
+   ]
+  },
+  {
+   "statement": "For a scheme $T$ and a finite ring $\\Lambda$, the constructible\n$\\Lambda$-module sheaves on $T_{\\Et}$ form a weak Serre subcategory of\n$\\Mod(T_{\\Et},\\Lambda)$: kernels, cokernels, and extensions of constructible\nsheaves are constructible.\n\n*Source:* Stacks Project, Etale Cohomology, Lemma 59.71.6, [Tag\n03RZ](https://stacks.math.columbia.edu/tag/03RZ). The pro-etale counterpart\nof the weak-Serre assertion, stated there for a Noetherian coefficient ring,\nis Stacks Project, Section 61.27, [Tag\n09AI](https://stacks.math.columbia.edu/tag/09AI); the form used here is the\netale statement just cited, for a finite ring $\\Lambda$.",
+   "proof": "Work on an affine open of $T$, and refine the finitely many partitions of\nthe given constructible sheaves to one common partition, as in the\ndefinition of a constructible complex. Inverse image to a part is exact, by\nthe stalkwise exactness of geometric stalks. It suffices to prove the\nassertions for finite locally constant sheaves on each part, locally for the\ntopology of the small etale site.\n\nFor a map between two such sheaves, trivialize both near a geometric point.\nThe images of the finitely many elements of the first constant module are\nsections of the second. After an etale refinement each is a specified\nconstant section. The map is then induced by a map of finite modules, whose\nkernel and cokernel give the constant kernel and cokernel sheaves. These\ndescriptions prove the first two assertions.\n\nConsider an extension $0\\to F'\\to F\\to F''\\to0$ with $F'$ and $F''$ finite\nlocally constant. Fix a geometric point $\\bar t$ and trivialize both outer\nsheaves on an etale neighbourhood. By the exactness of geometric stalks, the\nmiddle stalk $B=F_{\\bar t}$ is an extension of two finite modules and is\nfinite. Represent each of its finitely many elements by a section of $F$ on\na common pointed etale neighbourhood. All addition, zero and\nscalar-multiplication relations of $B$ hold after a further common\nrefinement: there are only finitely many relations since $B$ and $\\Lambda$\nare finite, and equality in a stalk means equality on such a neighbourhood.\nAlso impose the finitely many equalities identifying the chosen sections of\nthe submodule with the constant sections of $F'$, and their images with the\nconstant sections of $F''$. We obtain a map from the constant exact sequence\nof stalk modules to the given exact sequence, which is the identity on the\nouter terms. The kernel--cokernel argument for a map of short exact\nsequences makes the middle map an isomorphism; equivalently, apply the same\nargument on every stalk and conservativity of geometric stalks. Thus $F$ is\nfinite locally constant near every point. Applying this on the common\npartition proves extension closure and completes the proof.",
+   "cites": []
+  }
+ ],
+ "blueprint_notes": [
+  {
+   "label": "source",
+   "text": "*Source:* Stacks Project, Etale Cohomology, Lemma 59.71.6, [Tag\n03RZ](https://stacks.math.columbia.edu/tag/03RZ). The pro-etale counterpart\nof the weak-Serre assertion, stated there for a Noetherian coefficient ring,\nis Stacks Project, Section 61.27, [Tag\n09AI](https://stacks.math.columbia.edu/tag/09AI); the form used here is the\netale statement just cited, for a finite ring $\\Lambda$.",
+   "where": "sketch statement"
+  }
+ ]
+}

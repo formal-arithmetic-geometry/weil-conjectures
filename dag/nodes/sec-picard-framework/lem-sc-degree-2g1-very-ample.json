@@ -1,0 +1,79 @@
+{
+ "id": "lem-sc-degree-2g1-very-ample",
+ "kind": "statement",
+ "title": "Line bundles of large degree are very ample",
+ "statement": "Let $C$ be a proper smooth connected curve of\ngenus $g$ ([def-sc-genus]) over an algebraically closed\nfield $k$, and $\\mathcal M$ a line bundle on $C$ with\n$\\deg\\mathcal M\\geq2g+1$ ([def-sc-pic0]). Then\n$\\mathcal M$ is very ample.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-degree-2g1-very-ample.md",
+  "place": "node lem-sc-degree-2g1-very-ample, order 718",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 02OG"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sc-genus",
+  "def-sc-pic0",
+  "def-sc-ample",
+  "def-sc-curves"
+ ],
+ "proof": [
+  {
+   "text": "Write $d=\\deg\\mathcal M$. By [lem-sc-riemann-roch-large-degree], every\nline bundle $\\mathcal N$ on $C$ of degree at least $2g-1$ satisfies\n$\\dim H^0(C,\\mathcal N)=\\deg\\mathcal N+1-g$. For points $P,Q\\in C$\n(possibly equal), $\\deg$ is a homomorphism with $\\deg\\mathcal O_C(P)=1$\n([def-sc-pic0]), so $\\mathcal M$, $\\mathcal M(-P)$ and $\\mathcal M(-P-Q)$\nhave degrees $d\\geq2g+1$, $d-1\\geq2g$ and $d-2\\geq2g-1$. Hence\n\n$$\n\\dim H^0(C,\\mathcal M(-P))=\\dim H^0(C,\\mathcal M)-1,\\qquad\n\\dim H^0(C,\\mathcal M(-P-Q))=\\dim H^0(C,\\mathcal M)-2.\n$$",
+   "uses": [
+    "lem-sc-riemann-roch-large-degree",
+    "def-sc-pic0"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "These\ndimension drops say exactly that the complete linear system\n$|\\mathcal M|$ is base point free and separates points and\ntangent vectors: the drop for $\\mathcal M(-P)$ gives a section\nnot vanishing at $P$; the drop for $\\mathcal M(-P-Q)$ with\n$P\\neq Q$ gives a section vanishing at $P$ but not at $Q$\n(and one vanishing at $Q$ but not at $P$); and with $P=Q$ it\ngives a section vanishing at $P$ to order exactly one.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "We now prove that these properties make the map\n$\\varphi:C\\to\\mathbf P^N$ associated to the complete linear\nsystem $|\\mathcal M|$ a closed immersion. A section vanishing\nat $P$ but not at $Q$ shows $\\varphi(P)\\neq\\varphi(Q)$. A\nsection vanishing at $P$ to order exactly one shows that\n$d\\varphi_P$ is injective (a tangent direction at $P$ is a\nfirst-order deformation of $P$, and such a section separates it\nfrom the trivial deformation), and the injectivity of\n$d\\varphi_P$ for all $P$ is equivalent to\n$\\Omega_{C/\\mathbf P^N}=0$ (the fibre of\n$\\Omega_{C/\\mathbf P^N}$ at $P$ is the dual of the cokernel of\nthe tangent map; *reference: Stacks Project, Morphisms of\nSchemes: unramified morphisms*), i.e. $\\varphi$ is unramified.\nAn unramified morphism has finite fibres (a scheme of finite type\nover a field with vanishing sheaf of differentials is a finite\ndisjoint union of points: its irreducible components have function\nfields with no differentials, hence are algebraic over the base\nfield, so the dimension is zero and\n[lem-sc-dim0-finite] applies). Thus $\\varphi$ is proper\n(a morphism of proper schemes) with finite fibres, hence finite\n([thm-pqf-finite-iff-proper-finite-fibres] of the quasi-finite chapter;\n*reference: Stacks Project, Cohomology of Schemes,\n[Tag 02OG](https://stacks.math.columbia.edu/tag/02OG): proper and quasi-finite implies finite*).\nFinally, $\\varphi$ is finite and injective on closed points: its\nimage $\\varphi(C)\\subset\\mathbf P^N$ is closed, and for\n$y=\\varphi(P)\\in\\varphi(C)$ the fibre is the single point $P$\nwith residue field $k$ ($k$ algebraically closed), so\n$(\\varphi_*\\mathcal O_C)_y\\otimes k(y)=k$; by Nakayama's lemma\n$\\mathcal O_{\\mathbf P^N,y}\\to(\\varphi_*\\mathcal O_C)_y$ is\nsurjective, hence an isomorphism (it is injective because\n$\\varphi$ is dominant onto $\\varphi(C)$), and $\\varphi$ is\nan isomorphism onto $\\varphi(C)$, i.e. a closed immersion.\nHence $\\mathcal M$ is very ample.",
+   "uses": [
+    "lem-sc-dim0-finite",
+    "thm-pqf-finite-iff-proper-finite-fibres"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-riemann-roch-large-degree",
+  "def-sc-pic0",
+  "lem-sc-dim0-finite",
+  "thm-pqf-finite-iff-proper-finite-fibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-degree-2g1-very-ample.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 718,
+ "blueprint_uses": [
+  "def-sc-ample",
+  "def-sc-curves",
+  "def-sc-genus",
+  "def-sc-pic0",
+  "lem-sc-dim0-finite",
+  "lem-sc-riemann-roch-large-degree",
+  "thm-pqf-finite-iff-proper-finite-fibres"
+ ],
+ "uses_not_cited": [
+  "def-sc-ample",
+  "def-sc-curves"
+ ],
+ "proof_split_by": "paragraphs"
+}

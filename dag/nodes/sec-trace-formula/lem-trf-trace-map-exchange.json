@@ -1,0 +1,97 @@
+{
+ "id": "lem-trf-trace-map-exchange",
+ "kind": "statement",
+ "title": "Exchange of the trace maps: evaluation and support",
+ "statement": "Let $(f,g):(C,c)\\to(D,b)$ be a proper pushforward diagram of\n[def-trf-coefficient-pushforward] (no Cartesian leg square, no properness\nover $s$), with the notation and admissibility of\n[def-trf-kernel-pushforward-maps]. Then:\n\n1. *(evaluation)* as maps $Rq_*P_X\\to R\\Delta_{Y*}\\omega_Y$,\n$$\n\\delta_{K'}\\circ\\rho_f=R\\Delta_{Y*}\\tau_f\\circ Rq_*\\delta_K ;\n$$\n1. *(support)* as maps\n$Rg_*Ri_{c*}\\omega_{F_c}=Ri_{b*}Rh_*\\omega_{F_c}\\to Rb^!R\\Delta_{Y*}\\omega_Y$,\n$$\nRb^!\\bigl(R\\Delta_{Y*}\\tau_f\\bigr)\\circ\\mathsf E\\circ Rg_*\\zeta_c\n=\\zeta_b\\circ Ri_{b*}\\tau_h ,\n$$\nwhere the source identification is $gi_c=i_bh$.\n\nMoreover, for a Cartesian square $(\\beta',\\alpha',\\beta,\\alpha)$\n($\\beta:V\\to W$, $\\alpha:U\\to W$ proper, $V'=V\\times_WU$) the exceptional\nadjoint of the right-adjoint base-change isomorphism\n$R\\alpha'_*R\\beta'^!\\cong R\\beta^!R\\alpha_*$ (the mate of\n$\\operatorname{Ex}_!$) is\n$R\\beta_!R\\alpha'_*R\\beta'^!\\cong R\\alpha_!R\\beta'_!R\\beta'^!\n\\xrightarrow{\\varepsilon}R\\alpha_*$, the composition law followed by the\ncounit of $\\beta'$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.md",
+  "place": "node lem-trf-trace-map-exchange, order 2331"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-pushforward",
+  "def-trf-kernel-pushforward-maps"
+ ],
+ "proof": [
+  {
+   "text": "*The last assertion.* The base-change isomorphism is the mate of\n$\\operatorname{Ex}_!:\\alpha^*R\\beta_!\\cong R\\beta'_!\\alpha'^*$ under the four\nadjunctions ([fix-prop-adjunctions], item 4). Taking the exceptional adjoint\nof a mate and using the triangle identities (the mate calculus of\n[lem-sf-mate]) expresses it through $\\operatorname{Ex}_!$, the unit of\n$\\alpha$ and the counits of $\\alpha'$ and $\\beta'$; since $\\alpha,\\alpha'$ are\nproper, $\\operatorname{Ex}_!=\\operatorname{Ex}_*$ is compatible with the\ncomposition law $R\\beta_!R\\alpha'_!\\cong R\\alpha_!R\\beta'_!$\n([fix-lem-exchanges], items 1 and 4; [thm-sf-comp-composition]), and the\nunit–counit pair of $\\alpha'$ cancels. What remains is the displayed\ncomposite.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "lem-sf-mate",
+    "fix-lem-exchanges",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Evaluation (1).* Both sides are maps into $R\\Delta_{Y*}\\omega_Y$, so it\nsuffices to compare their adjoints for $\\Delta_Y^*\\dashv R\\Delta_{Y*}$. The\nadjoint of $\\delta_{K'}$ is $\\mathrm{ev}_{K'}\\circ\\mathrm{sym}:K'\\otimes\nD_YK'\\to\\omega_Y$, so the left side has adjoint\n$\\mathrm{ev}_{K'}\\circ\\mathrm{sym}\\circ(1\\otimes\\chi_f)\\circ\\Delta_Y^*\\Pi_f^{-1}$.\nThe adjoint of the right side is\n$\\tau_f\\circ Rf_*(\\mathrm{ev}_K\\circ\\mathrm{sym})\\circ\\mathrm{Ex}$, where\n$\\mathrm{Ex}:\\Delta_Y^*Rq_*\\to Rf_*\\Delta_X^*$ is the exchange map of the\ncommutative square $q\\Delta_X=\\Delta_Yf$ (adjoint to\n$f^*\\Delta_Y^*Rq_*=\\Delta_X^*q^*Rq_*\\xrightarrow{\\varepsilon_q}\\Delta_X^*$, as in\n[def-exchange-projection]). We claim\n\n$$\n\\mathrm{Ex}\\circ\\Delta_Y^*\\Pi_f=\\mu_f:\nRf_*K\\otimes Rf_*D_XK\\longrightarrow Rf_*(K\\otimes D_XK).\n$$\n\nIndeed $\\mathrm{Ku}_!$ of [def-sf-kv-maps] (i) is the composite of\n[thm-sf-kunneth-relative], built from the composition law, two projection\nformulas and one base change; for proper maps these are the direct-image\nprojection maps and $\\operatorname{Ex}_*$ (compatibility with $Rf_!\\cong Rf_*$,\n[thm-sf-kunneth-relative], with the projection formula,\n[lem-sf-kunneth-coherence] (iv), [fix-prop-projection-formula]), each adjoint to a\ncounit ([def-exchange-projection]). By naturality and the triangle\nidentities ([fix-prop-adjunctions]) the inverse $\\Pi_f$ is therefore the\nadjoint of $q^*(K'\\boxtimes Rf_*D_XK)=f^*Rf_*K\\boxtimes f^*Rf_*D_XK\n\\xrightarrow{\\varepsilon_f\\boxtimes\\varepsilon_f}K\\boxtimes D_XK$, i.e.\n$\\varepsilon_q\\circ q^*\\Pi_f=\\varepsilon_f\\boxtimes\\varepsilon_f$. Then\n$\\mathrm{Ex}\\circ\\Delta_Y^*\\Pi_f$ is adjoint to\n$\\Delta_X^*(\\varepsilon_q\\circ q^*\\Pi_f)=\\varepsilon_f\\otimes\\varepsilon_f$,\nwhich is the defining adjoint of $\\mu_f$. With the claim, the adjoint of\nthe right side composed with $\\Delta_Y^*\\Pi_f$ is\n$\\tau_f\\circ Rf_*(\\mathrm{ev}_K\\circ\\mathrm{sym})\\circ\\mu_f$, and by the\ndefinition of $\\chi_f$ (after the symmetry, which commutes with $\\mu_f$) this\nis $\\mathrm{ev}_{K'}\\circ\\mathrm{sym}\\circ(1\\otimes\\chi_f)$. Since $\\Pi_f$ is\nan isomorphism, the two adjoints agree, proving (1).",
+   "uses": [
+    "def-exchange-projection",
+    "def-sf-kv-maps",
+    "thm-sf-kunneth-relative",
+    "lem-sf-kunneth-coherence",
+    "fix-prop-projection-formula",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Support (2).* Both sides are maps into $Rb^!(-)$; compare their exceptional\nadjoints for $Rb_!\\dashv Rb^!$, which are maps\n$Rb_!Ri_{b*}Rh_*\\omega_{F_c}\\to R\\Delta_{Y*}\\omega_Y$. The fixed squares of $c$\nand $b$ are Cartesian ([prop-trf-fixed-square-cartesian]), $i_c,i_b$ are closed\nimmersions (base changes of the diagonals of the separated $X$, $Y$), and\n$\\zeta_c,\\zeta_b$ are built from the right-adjoint base change of\n[thm-trf-fixed-point-base-change] and\n[thm-trf-dualizing-complex-composition]. By the last assertion, the exceptional\nadjoint of $\\zeta_c$ is\n$Rc_!Ri_{c*}\\omega_{F_c}\\cong Rc_!Ri_{c!}Rd_c^!\\omega_X\\cong R\\Delta_{X*}Rd_{c!}Rd_c^!\\omega_X\n\\xrightarrow{\\varepsilon_{d_c}}R\\Delta_{X*}\\omega_X$, and likewise for\n$\\zeta_b$.\n\nFor the left side, the definition of $\\mathsf E$ gives\n$\\varepsilon_b\\circ Rb_!\\mathsf E=Rq_*\\varepsilon_c\\circ\\Xi$, so its adjoint is\n\n$$\nR\\Delta_{Y*}\\tau_f\\circ Rq_*\\bigl(\\varepsilon_c\\circ Rc_!\\zeta_c\\bigr)\\circ\\Xi\n=R\\Delta_{Y*}\\bigl(\\tau_f\\circ Rf_*\\varepsilon_{d_c}\\bigr)\n$$\n\nafter the composition-law identifications, and\n$\\tau_f\\circ Rf_*\\varepsilon_{d_c}$ is the counit of $R(fd_c)_!\\dashv R(fd_c)^!$\nat $\\omega_Y$ ([fix-prop-adjunctions], item 3), with\n$\\omega_{F_c}\\cong R(fd_c)^!\\omega_Y$ by\n[thm-trf-dualizing-complex-composition]. For the right side, its adjoint is\n$R\\Delta_{Y*}\\bigl(\\varepsilon_{d_b}\\circ Rd_{b*}\\tau_h\\bigr)$, and\n$\\varepsilon_{d_b}\\circ Rd_{b*}\\tau_h$ is the counit for $d_bh$ at $\\omega_Y$\nby the same pasting. Since $fd_c=d_bh$ ([def-trf-coefficient-pushforward]),\nthese are the counit for one and the same morphism, and the two\ncomposition-law identifications of the source with\n$R\\Delta_{Y*}R(fd_c)_!\\omega_{F_c}$ agree by the associativity of\n[thm-sf-comp-composition] (the maps $h$, $q$, $g$ being proper by\n[lem-trf-fixed-map-proper]). Hence the adjoints agree, proving (2). Only the\ntwo fixed squares are used as Cartesian squares.",
+   "uses": [
+    "prop-trf-fixed-square-cartesian",
+    "thm-trf-fixed-point-base-change",
+    "thm-trf-dualizing-complex-composition",
+    "fix-prop-adjunctions",
+    "def-trf-coefficient-pushforward",
+    "thm-sf-comp-composition",
+    "lem-trf-fixed-map-proper"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "fix-prop-adjunctions",
+  "lem-sf-mate",
+  "fix-lem-exchanges",
+  "thm-sf-comp-composition",
+  "def-exchange-projection",
+  "def-sf-kv-maps",
+  "thm-sf-kunneth-relative",
+  "lem-sf-kunneth-coherence",
+  "fix-prop-projection-formula",
+  "prop-trf-fixed-square-cartesian",
+  "thm-trf-fixed-point-base-change",
+  "thm-trf-dualizing-complex-composition",
+  "def-trf-coefficient-pushforward",
+  "lem-trf-fixed-map-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2331,
+ "blueprint_uses": [
+  "def-exchange-projection",
+  "def-sf-kv-maps",
+  "def-trf-coefficient-pushforward",
+  "def-trf-kernel-pushforward-maps",
+  "fix-lem-exchanges",
+  "fix-prop-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-sf-kunneth-coherence",
+  "lem-sf-mate",
+  "lem-trf-fixed-map-proper",
+  "prop-trf-fixed-square-cartesian",
+  "thm-sf-comp-composition",
+  "thm-sf-kunneth-relative",
+  "thm-trf-dualizing-complex-composition",
+  "thm-trf-fixed-point-base-change"
+ ],
+ "proof_split_by": "labels"
+}

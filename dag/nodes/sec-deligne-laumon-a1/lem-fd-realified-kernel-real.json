@@ -1,0 +1,95 @@
+{
+ "id": "lem-fd-realified-kernel-real",
+ "kind": "statement",
+ "title": "The realified kernel is $\\iota$-real",
+ "statement": "Let $j:U_0\\hookrightarrow\\mathbf A^1_{k_0}$ be a dense open immersion with\n$U_0=\\mathbf A^1_{k_0}\\setminus S_0$, and let $\\mathcal M$ be an\nirreducible lisse Weil\nsheaf on $U_0$, unramified at infinity,\npunctually $\\iota$-pure of weight\n$w$, with irreducible geometric fundamental representation of\n[def-wf-fundamental-representation] and\nmiddle extension that is\nFourier-nonexceptional. Put\n\n$$\nb:=\\iota^{-1}(q^w),\\qquad\\text{so that}\\qquad \\iota(b)=q^w ,\n\\qquad\n\\mathcal M^\\dagger:=\\mathcal M^\\vee\\otimes\\mathcal B_b ,\n$$\n\nthe linear dual twisted by the constant\nWeil twist, and let\n\n$$\n\\mathcal K:=p_1^*(j_!\\mathcal M)\\otimes^L\\mathcal K_\\psi\n\\;\\oplus\\;\np_1^*\\bigl(j_!(\\mathcal M^\\dagger)\\bigr)\\otimes^L\\mathcal K_{\\psi^{-1}}\n$$\n\nbe the *realified kernel* on the Fourier square, the projections and\nthe Fourier kernel being those of\n[def-fd-kernel] and the transform normalizations those of\n[def-fd-transform]. Then $\\mathcal K$ is\n$\\iota$-real in the sense of\n[def-wf-iota-real]. More generally, the same conclusion holds, with\n$b$, $\\mathcal M^\\dagger$ and $\\mathcal K$ formed in the same way, for\n*every* lisse Weil sheaf $\\mathcal M$ on $U_0$ which is punctually\n$\\iota$-pure of weight $w$: the irreducibility, unramifiedness and\nnonexceptionality hypotheses are not needed for the reality of the kernel.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.md",
+  "place": "node lem-fd-realified-kernel-real, order 2774"
+ },
+ "stmt_deps": [
+  "def-wf-fundamental-representation",
+  "def-fd-kernel",
+  "def-fd-transform",
+  "def-wf-iota-real",
+  "def-fd-nonexceptional",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-punctual-weights",
+  "def-wf-constant-weil-twist",
+  "def-wf-middle-extension"
+ ],
+ "proof": [
+  {
+   "text": "Only the punctual purity of $\\mathcal M$ is used below, which gives the\nmore general form of the statement.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Step 1 (the two summands are mutual conjugates). By\n[lem-wf-pure-realizable] the local factor of\n$\\mathcal M^\\dagger=\\mathcal M^\\vee\\otimes\\mathcal B_b$ at a closed point\n$x$ of $U_0$ of degree $m$ has eigenvalues\n$\\iota(b^m\\alpha^{-1})=q^{mw}\\iota(\\alpha)^{-1}=\\overline{\\iota(\\alpha)}$,\nwhere $\\alpha$ runs through the eigenvalues of $F_x$ on\n$\\mathcal M_{\\bar x}$: the eigenvalues of the twisted dual are exactly\nthe $\\iota$-conjugates of those of $\\mathcal M$, at every closed point.\nThe same computation applies to the extension by zero, since the stalk of\n$j_!\\mathcal M$ at a closed point of $\\mathbf A^1_{k_0}$ is either the\nstalk of $\\mathcal M$ (over $U_0$) or zero. For the kernel factors, the\nArtin–Schreier sheaf $\\mathcal K_\\psi$ of [def-fd-kernel] is lisse\nof rank one ([lem-fd-as-lisse]) and punctually $\\iota$-pure of\nweight $0$ ([lem-fd-as-purity]), so its unique local eigenvalue\n$\\lambda$ at a closed point of the square satisfies\n$|\\iota(\\lambda)|=1$ and therefore\n$\\overline{\\iota(\\lambda)}=|\\iota(\\lambda)|^2\\iota(\\lambda)^{-1} =\\iota(\\lambda)^{-1}$; by\n$(\\mathcal L_{\\psi,f})^{-1}\\cong\\mathcal L_{\\psi,-f}\\cong\\mathcal L_{\\psi^{-1},f}$ of\n[lem-fd-as-characters] the sheaf $\\mathcal K_{\\psi^{-1}}$ is the\ninverse of $\\mathcal K_\\psi$ [prop-kernel-lisse], so its local eigenvalue at the same point\nis $\\lambda^{-1}$.",
+   "uses": [
+    "lem-wf-pure-realizable",
+    "def-fd-kernel",
+    "lem-fd-as-lisse",
+    "lem-fd-as-purity",
+    "lem-fd-as-characters",
+    "prop-kernel-lisse"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 2 (the realified kernel is real). Let $z$ be a closed point of the\nFourier square with first coordinate $x=p_1(z)$. If $x\\in S_0$ then both\nsummands of $\\mathcal K$ have zero stalk at $z$, because $j_!\\mathcal M$\nand $j_!(\\mathcal M^\\dagger)$ are extensions by zero from $U_0$; the\nlocal factor of $\\mathcal K$ at $z$ is then $1$, which is real. If\n$x\\in U_0$, let $e$ be the degree of $\\kappa(z)$ over $\\kappa(x)$ and let\n$E$ be the multiset of eigenvalues of $F_x$ on $\\mathcal M_{\\bar x}$.\nThe local eigenvalues of the first summand at $z$ are\n$\\{\\alpha^e\\lambda:\\alpha\\in E\\}$ — pullback along $p_1$ raises the local\nFrobenius to the $e$-th power, which is the degree formula for the local\nFrobenius [lem-trf-frobenius-degree-formula] relating the local\noperator at a point to a power of the operator below it, and\n$\\mathcal K_\\psi$ is of rank one with\neigenvalue $\\lambda$ — and those of the second are\n$\\{\\overline{\\iota(\\alpha)}^e\\lambda^{-1}:\\alpha\\in E\\}$ by Step 1.\nSince conjugation of the complex numbers commutes with the $e$-th power,\n\n$$\n\\overline{\\iota(\\alpha^e\\lambda)}\n=\\overline{\\iota(\\alpha)}^e\\,\\overline{\\iota(\\lambda)}\n=\\overline{\\iota(\\alpha)}^e\\lambda^{-1},\n$$\n\nthe conjugation map carries the eigenvalue multiset of the first summand\nbijectively onto that of the second, and the total multiset of\n$\\mathcal K$ at $z$ is conjugation-stable. Hence $\\mathcal K$ is\n$\\iota$-real in the sense of [def-wf-iota-real], which is the\nassertion of the lemma.",
+   "uses": [
+    "lem-trf-frobenius-degree-formula",
+    "def-wf-iota-real"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-pure-realizable",
+  "def-fd-kernel",
+  "lem-fd-as-lisse",
+  "lem-fd-as-purity",
+  "lem-fd-as-characters",
+  "prop-kernel-lisse",
+  "lem-trf-frobenius-degree-formula",
+  "def-wf-iota-real"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2774,
+ "blueprint_uses": [
+  "def-fd-kernel",
+  "def-fd-nonexceptional",
+  "def-fd-transform",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-punctual-weights",
+  "def-wf-constant-weil-twist",
+  "def-wf-fundamental-representation",
+  "def-wf-iota-real",
+  "def-wf-middle-extension",
+  "lem-fd-as-characters",
+  "lem-fd-as-lisse",
+  "lem-fd-as-purity",
+  "lem-trf-frobenius-degree-formula",
+  "lem-wf-pure-realizable",
+  "prop-kernel-lisse"
+ ],
+ "uses_not_cited": [
+  "def-fd-nonexceptional",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-punctual-weights",
+  "def-wf-constant-weil-twist",
+  "def-wf-middle-extension"
+ ],
+ "proof_split_by": "paragraphs"
+}

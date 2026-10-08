@@ -1,0 +1,99 @@
+{
+ "id": "lem-pur-a1-direct-image",
+ "kind": "statement",
+ "title": "The affine line has no higher direct images",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $B$ be a separated\nfinite-type $k$-scheme and let $\\pi:\\mathbf A^1_B\\to B$ be the\nprojection, with the adjunction $L\\pi^*\\dashv R\\pi_*$ and unit\n$\\eta_\\pi$ of [fix-prop-adjunctions]. Then\n\n$$\n\\eta_\\pi(\\Lambda_B):\\quad\n\\Lambda_B\\xrightarrow{\\ \\sim\\ }R\\pi_*\\Lambda_{\\mathbf A^1_B}\n$$\n\nis an isomorphism: the affine line has no higher direct images for the\nconstant coefficients, and its $H^0$ is the unit.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-a1-direct-image.md",
+  "place": "node lem-pur-a1-direct-image, order 1934"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "fix-prop-adjunctions"
+ ],
+ "proof": [
+  {
+   "text": "We argue on the small etale site and transport at the end. The base\nfield $k$ of [def-pur-conventions] is algebraically closed, and\n$\\Lambda=A$ is finite with $\\ell^NA=0$ for some $N$, $\\ell\\neq p$.",
+   "uses": [
+    "def-pur-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 1: stalks. Let $\\bar b$ be a geometric point of $B$ and let\n$S'=B_{(\\bar b)}=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{B,\\bar b}$\nbe the strict henselization. Since $\\pi$ is quasi-compact and\nquasi-separated and $\\mathbf A^1_B\\times_BS'=\\mathbf A^1_{S'}$, the\nstalk formula [prop-weil-pbc-strict-henselization-stalk-formula] gives\n$$\n(R\\pi_*\\Lambda_{\\mathbf A^1_B})_{\\bar b}\\simeq\nR\\Gamma(\\mathbf A^1_{S'},\\Lambda),\n$$\nand under it the stalk of $\\eta_\\pi(\\Lambda_B)$ is the pullback\n$\\Lambda=\\Gamma(S',\\Lambda)\\to R\\Gamma(\\mathbf A^1_{S'},\\Lambda)$ along\nthe projection $e:\\mathbf A^1_{S'}\\to S'$.",
+   "uses": [
+    "prop-weil-pbc-strict-henselization-stalk-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 2: smooth base change to the geometric affine line. The scheme\n$S'$ is a $k$-scheme, and $\\mathbf A^1_{S'}=\\mathbf A^1_k\\times_kS'$.\nApply the smooth base change theorem [sbc-thm-smooth-base-change] to\nthe cartesian square with smooth side $f:\\mathbf A^1_k\\to\\operatorname{Spec}k$,\nquasi-compact quasi-separated side $g:S'\\to\\operatorname{Spec}k$\n(affine), and the projections $h:\\mathbf A^1_{S'}\\to\\mathbf A^1_k$,\n$e:\\mathbf A^1_{S'}\\to S'$, and to the constant sheaf $\\Lambda$ on\n$S'$ (torsion of order prime to $p$): the base-change maps of\n[sbc-def-base-change-map]\n$$\nf^{-1}R^qg_*\\Lambda\\xrightarrow{\\ \\sim\\ }R^qh_*\\Lambda\n$$\nare isomorphisms for all $q$. As $k$ is algebraically closed, $R^qg_*\\Lambda$ is the\nconstant sheaf $H^q(S',\\Lambda)$ on $\\operatorname{Spec}k$, which is $\\Lambda$\nfor $q=0$ and $0$ for $q>0$ because $S'$ is strictly henselian\n([sbc-lem-strict-henselian-constant-cohomology]). Hence the map\n$\\Lambda_{\\mathbf A^1_k}\\to Rh_*\\Lambda_{\\mathbf A^1_{S'}}$ adjoint to\nthe pullback along $h$ is an isomorphism, and by the composition of derived direct images\n[lem-weil-derived-direct-image-composition] (item (5)) the pullback\n$$\nh^*:R\\Gamma(\\mathbf A^1_k,\\Lambda)\\xrightarrow{\\ \\sim\\ }\nR\\Gamma(\\mathbf A^1_{S'},\\Lambda)\n$$\nis an isomorphism.",
+   "uses": [
+    "sbc-thm-smooth-base-change",
+    "sbc-def-base-change-map",
+    "sbc-lem-strict-henselian-constant-cohomology",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 3: the geometric fibre. By [thm-pur-kummer-affine-line](1) (with\ntrivial twist: over the algebraically closed field $k$ a primitive\n$\\ell^N$-th root of unity trivializes $\\mu_{\\ell^N}$, so the\nstatement for $\\Lambda(1)$ is the statement for $\\Lambda$),\n$H^q(\\mathbf A^1_k,\\Lambda)=0$ for $q>0$ and $H^0(\\mathbf A^1_k,\\Lambda)=\\Lambda$,\nthe constants. With Steps 1–2, $(R^q\\pi_*\\Lambda)_{\\bar b}=0$ for\n$q>0$ and the stalk of $\\eta_\\pi(\\Lambda_B)$ in degree $0$ is the\nisomorphism of $\\Lambda$ onto the constants of\n$H^0(\\mathbf A^1_{S'},\\Lambda)$ (the constants of $\\mathbf A^1_k$ pull\nback to the constants). Since geometric stalks are conservative\n([lemma-weil-pbc-geometric-stalk-conservative]), applied to the\ncohomology sheaves, $\\eta_\\pi(\\Lambda_B)$ is an isomorphism on the\netale site.",
+   "uses": [
+    "thm-pur-kummer-affine-line",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 4: transport. The unit of [fix-prop-adjunctions] on the\npro-etale site is the image of the etale unit under the comparison\nfunctor: by [prop-weil-pbc-comparison-direct-image] the comparison\ninverse image commutes with the derived direct image of\n[def-weil-derived-direct-image], and it is fully faithful on\nbounded-below complexes by [thm-weil-pbc-site-comparison]. Hence the\npro-etale unit $\\eta_\\pi(\\Lambda_B)$ is an isomorphism as well.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "prop-weil-pbc-comparison-direct-image",
+    "def-weil-derived-direct-image",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-conventions",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "sbc-thm-smooth-base-change",
+  "sbc-def-base-change-map",
+  "sbc-lem-strict-henselian-constant-cohomology",
+  "lem-weil-derived-direct-image-composition",
+  "thm-pur-kummer-affine-line",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "fix-prop-adjunctions",
+  "prop-weil-pbc-comparison-direct-image",
+  "def-weil-derived-direct-image",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-a1-direct-image.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1934,
+ "blueprint_uses": [
+  "def-pur-conventions",
+  "def-weil-derived-direct-image",
+  "fix-prop-adjunctions",
+  "lem-weil-derived-direct-image-composition",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "sbc-def-base-change-map",
+  "sbc-lem-strict-henselian-constant-cohomology",
+  "sbc-thm-smooth-base-change",
+  "thm-pur-kummer-affine-line",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_split_by": "paragraphs"
+}

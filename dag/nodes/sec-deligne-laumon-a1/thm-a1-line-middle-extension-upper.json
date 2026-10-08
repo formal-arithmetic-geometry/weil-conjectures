@@ -1,0 +1,152 @@
+{
+ "id": "thm-a1-line-middle-extension-upper",
+ "kind": "statement",
+ "title": "Deligne–Laumon affine-line estimate for the middle extension",
+ "statement": "In the conventions of [rem-dl-a1-conventions], let\n$j:U_0\\hookrightarrow A_0=\\mathbf A^1_{k_0}$ be a dense open immersion\nand let $\\mathcal F$ be a lisse Weil sheaf on $U_0$, punctually\n$\\iota$-pure of weight $w$ ([def-weil-punctual-weights]) and\nunramified at infinity. Then, for the ordinary middle extension\n$j_*\\mathcal F$ of [def-wf-middle-extension] and the compactly\nsupported cohomology of [def-weil-ordinary-compact-cohomology], for\nevery integer $r$\n\n$$\nH_c^r(A,j_*\\mathcal F)\\quad\\text{has weights at most }w+r\n$$\n\nin the sense of [def-weil-frobenius-module-weights]. More precisely,\n$H_c^0(A,j_*\\mathcal F)=0$, $H_c^2(A,j_*\\mathcal F)$ is $\\iota$-pure of\nweight $w+2$ (possibly zero), $H_c^r(A,j_*\\mathcal F)=0$ for\n$r\\notin\\{0,1,2\\}$, and $H_c^1(A,j_*\\mathcal F)$ has weights at most\n$w+1$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-line-middle-extension-upper.md",
+  "place": "node thm-a1-line-middle-extension-upper, order 2806"
+ },
+ "stmt_deps": [
+  "def-weil-punctual-weights",
+  "def-wf-middle-extension",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-frobenius-module-weights"
+ ],
+ "proof": [
+  {
+   "text": "*Degrees other than one.* $A_0$ is a smooth geometrically connected\naffine curve, so [lem-a1-middle-extension-endpoints] applied to $j$\ngives $H_c^0(A,j_*\\mathcal F)=0$, the vanishing outside degrees\n$0,1,2$, and the purity of weight $w+2$ of $H_c^2(A,j_*\\mathcal F)$.\nThese are the assertions in all degrees $r\\neq1$.",
+   "uses": [
+    "lem-a1-middle-extension-endpoints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 1: a finite constant extension is harmless.* Let\n$k'_0=\\mathbf F_{q^m}$ and replace $U_0\\subset A_0$ and $\\mathcal F$\nby their base changes to $k'_0$. The geometric objects $U\\subset A$,\nthe geometric generic stalk with its geometric monodromy, the sheaf\n$j_*\\mathcal F$ on $A$ and the group $H_c^1(A,j_*\\mathcal F)$ do not\nchange; only the Weil structure is replaced by its $m$-th power, so\nthe Frobenius on $H_c^1$ becomes $F^m$. The base-changed sheaf is still\nlisse, punctually $\\iota$-pure of weight $w$ (a closed point over $x$\nof degree $e$ over $\\kappa(x)$ has local Frobenius $F_x^e$ and norm\n$q_x^e$) and unramified at infinity (the inertia at $\\infty$ is a\nsubgroup of the unchanged geometric fundamental group). By\n[lem-a1-weight-bound-constant-extension] with $b=w+1$, a bound $w+1$\nfor $H_c^1(A,j_*\\mathcal F)$ over $k'_0$ implies the bound over\n$k_0$. We may therefore pass to finite constant extensions freely.",
+   "uses": [
+    "lem-a1-weight-bound-constant-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: a composition filtration.* By\n[lem-a1-geometric-constituent-reduction], after a finite constant\nextension $\\mathcal F$ has a finite filtration by lisse Weil subsheaves\n\n$$\n0=\\mathcal F^0\\subset\\mathcal F^1\\subset\\cdots\\subset\\mathcal F^n=\\mathcal F\n$$\n\nwhose graded pieces $\\mathcal M_i=\\mathcal F^i/\\mathcal F^{i-1}$, after\ndiscarding repeated terms, are nonzero, geometrically irreducible and\npunctually $\\iota$-pure of weight $w$. Each $\\mathcal F^i$ is\npunctually $\\iota$-pure of weight $w$ as well: at a closed point $x$\nthe stalk $\\mathcal F^i_{\\bar x}$ is an $F_x$-stable subspace of\n$\\mathcal F_{\\bar x}$, so its eigenvalues are among those of\n$\\mathcal F_{\\bar x}$ by [lem-a1-spectrum-exact-sequence]. Each\n$\\mathcal M_i$ is unramified at infinity: the inertia group at\n$\\infty$ acts trivially on $\\mathcal F_{\\bar\\eta}$, hence on its\nsubquotient $(\\mathcal M_i)_{\\bar\\eta}$\n([def-wf-fundamental-representation]).",
+   "uses": [
+    "lem-a1-geometric-constituent-reduction",
+    "lem-a1-spectrum-exact-sequence",
+    "def-wf-fundamental-representation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3: exactness of the middle extension along the filtration.* For\neach $i$ the sequence $0\\to\\mathcal F^{i-1}\\to\\mathcal F^i\\to\n\\mathcal M_i\\to0$ consists of lisse Weil sheaves on $U_0$ that are all\npunctually $\\iota$-pure of weight $w$. By [p-dl-a1-exact] (with\n$C_0=A_0$),\n\n$$\n0\\longrightarrow j_*\\mathcal F^{i-1}\\longrightarrow j_*\\mathcal F^i\n\\longrightarrow j_*\\mathcal M_i\\longrightarrow0\n$$\n\nis an exact sequence of Weil sheaves on $A_0$. Its long exact\nsequence of compactly supported cohomology, which is\nFrobenius-equivariant because it comes from a triangle of Weil\ncomplexes, contains the exact segment\n\n$$\nH_c^1(A,j_*\\mathcal F^{i-1})\\longrightarrow H_c^1(A,j_*\\mathcal F^{i})\n\\longrightarrow H_c^1(A,j_*\\mathcal M_i).\n$$\n\nHence $H_c^1(A,j_*\\mathcal F^i)$ is an extension of a\nFrobenius-stable subobject of $H_c^1(A,j_*\\mathcal M_i)$ by a\nFrobenius-stable quotient of $H_c^1(A,j_*\\mathcal F^{i-1})$. By\n[lem-a1-subquotient-extension-bounds] and [lem-a1-extension-bounds],\ninduction on $i$ (starting from $H_c^1(A,j_*\\mathcal F^0)=0$) shows\nthat the bound $w+1$ for $H_c^1(A,j_*\\mathcal F)$ follows from the\nsame bound for every $H_c^1(A,j_*\\mathcal M_i)$. No splitting of the\nfiltration is used.",
+   "uses": [
+    "p-dl-a1-exact",
+    "lem-a1-subquotient-extension-bounds",
+    "lem-a1-extension-bounds"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4: one factor.* Let $\\mathcal M=\\mathcal M_i$; it is a nonzero\nlisse Weil sheaf on $U_0$, geometrically irreducible, punctually\n$\\iota$-pure of weight $w$ and unramified at infinity. A\ngeometrically irreducible sheaf is irreducible as a Weil sheaf, since a\nWeil-stable subspace of $\\mathcal M_{\\bar\\eta}$ is stable under the\ngeometric fundamental group.\n\n(a) *$\\mathcal M$ geometrically constant.* The geometric fundamental\nrepresentation is then trivial and irreducible, so $\\mathcal M$ has\nrank one and is a constant Weil twist in the sense of\n[def-wf-constant-weil-twist]. By [lem-a1-exceptional-constituents]\n(the case without Artin–Schreier factor), $H_c^1(U,\\mathcal M)$ has\nweights at most $w+1$. The boundary sequence\n[prop-a1-curve-boundary-sequence] for $j$ gives a\nFrobenius-equivariant surjection\n$H_c^1(U,\\mathcal M)\\twoheadrightarrow H_c^1(A,j_*\\mathcal M)$, so\n$H_c^1(A,j_*\\mathcal M)$ has weights at most $w+1$ by\n[lem-a1-subquotient-extension-bounds]. (In fact $j_*\\mathcal M$ is the\nlisse constant twist on $A_0$ and $H_c^1(A,j_*\\mathcal M)=0$, as in\nStep 1 of the proof of [lem-a1-exceptional-constituents]; only the\nbound is needed.)\n\n(b) *$\\mathcal M$ not geometrically constant.* Since $\\mathcal M$ is\nirreducible, unramified at infinity and not geometrically constant,\nit is constituent-nonexceptional by\n[lem-a1-unramified-nonexceptional]; by part (1) of\n[lem-a1-constituent-nonexceptional-comparison] its middle extension\n$j_*\\mathcal M$ is Fourier-nonexceptional. Thus $\\mathcal M$ is an\nirreducible lisse Weil sheaf on $U_0$, unramified at infinity,\npunctually $\\iota$-pure of weight $w$, with irreducible geometric\nfundamental representation and Fourier-nonexceptional middle\nextension, and [cor-a1-fourier-middle-hc1] shows that\n$H_c^1(A,j_*\\mathcal M)$ has weights at most $w+1$.",
+   "uses": [
+    "def-wf-constant-weil-twist",
+    "lem-a1-exceptional-constituents",
+    "prop-a1-curve-boundary-sequence",
+    "lem-a1-subquotient-extension-bounds",
+    "lem-a1-unramified-nonexceptional",
+    "lem-a1-constituent-nonexceptional-comparison",
+    "cor-a1-fourier-middle-hc1"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Conclusion.* By Step 4 every factor satisfies the bound $w+1$; by\nStep 3 so does $H_c^1(A,j_*\\mathcal F)$ over the extended field, and\nby Step 1 over $k_0$. Together with the degrees other than one this\nproves the theorem.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-middle-extension-endpoints",
+  "lem-a1-weight-bound-constant-extension",
+  "lem-a1-geometric-constituent-reduction",
+  "lem-a1-spectrum-exact-sequence",
+  "def-wf-fundamental-representation",
+  "p-dl-a1-exact",
+  "lem-a1-subquotient-extension-bounds",
+  "lem-a1-extension-bounds",
+  "def-wf-constant-weil-twist",
+  "lem-a1-exceptional-constituents",
+  "prop-a1-curve-boundary-sequence",
+  "lem-a1-unramified-nonexceptional",
+  "lem-a1-constituent-nonexceptional-comparison",
+  "cor-a1-fourier-middle-hc1"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-line-middle-extension-upper.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_remark",
+  "lean_multiple"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2806,
+ "blueprint_uses": [
+  "cor-a1-fourier-middle-hc1",
+  "def-weil-frobenius-module-weights",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-punctual-weights",
+  "def-wf-constant-weil-twist",
+  "def-wf-fundamental-representation",
+  "def-wf-middle-extension",
+  "lem-a1-constituent-nonexceptional-comparison",
+  "lem-a1-exceptional-constituents",
+  "lem-a1-extension-bounds",
+  "lem-a1-geometric-constituent-reduction",
+  "lem-a1-middle-extension-endpoints",
+  "lem-a1-spectrum-exact-sequence",
+  "lem-a1-subquotient-extension-bounds",
+  "lem-a1-unramified-nonexceptional",
+  "lem-a1-weight-bound-constant-extension",
+  "p-dl-a1-exact",
+  "prop-a1-curve-boundary-sequence",
+  "rem-dl-a1-conventions"
+ ],
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.AffineLine.Upper",
+  "declaration": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_compactlySupportedCohomology_directImage",
+  "branch": "slopmaster2",
+  "line": 63,
+  "sorry_free": false,
+  "body_lines": 1,
+  "others": [
+   {
+    "module": "WeilConjectures.DeligneLaumon.AffineLine.Upper",
+    "declaration": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.subsingleton_compactlySupportedCohomology_directImage_zero",
+    "branch": "slopmaster2",
+    "line": 71,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.DeligneLaumon.AffineLine.Upper",
+    "declaration": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isPureOfWeightOver_compactlySupportedCohomology_directImage_two",
+    "branch": "slopmaster2",
+    "line": 78,
+    "sorry_free": false,
+    "body_lines": 1
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_compactlySupportedCohomology_directImage",
+  "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.subsingleton_compactlySupportedCohomology_directImage_zero",
+  "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isPureOfWeightOver_compactlySupportedCohomology_directImage_two"
+ ],
+ "proof_split_by": "labels"
+}

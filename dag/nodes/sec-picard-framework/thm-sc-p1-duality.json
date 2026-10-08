@@ -1,0 +1,80 @@
+{
+ "id": "thm-sc-p1-duality",
+ "kind": "statement",
+ "title": "Duality on the projective line",
+ "statement": "Let $k$ be an algebraically closed field. For every coherent\n$\\mathcal O_{\\mathbf P^1_k}$-module $\\mathcal G$, with\n\n$$\n\\omega_{\\mathbf P^1}:=\\Omega^1_{\\mathbf P^1_k/k}\\cong\\mathcal O(-2)\n$$\n\n([def-sc-kahler-differentials],\n[lem-sc-p1-monomial](iii)), there are canonical isomorphisms\n\n$$\nH^1(\\mathbf P^1_k,\\mathcal G)^{\\vee}\\;\\cong\\;\n\\operatorname{Hom}_{\\mathcal O_{\\mathbf P^1}}\\bigl(\\mathcal G,\n\\omega_{\\mathbf P^1}\\bigr),\n$$\n\n$$\nH^0(\\mathbf P^1_k,\\mathcal G)^{\\vee}\\;\\cong\\;\n\\operatorname{Ext}^1_{\\mathbf P^1}\\bigl(\\mathcal G,\n\\omega_{\\mathbf P^1}\\bigr)\n$$\n\n(with $\\operatorname{Ext}$ of [def-sc-ext-sheaf]; all groups\ninvolved are finite-dimensional, the cohomology of coherent modules\non a proper scheme over a field being finite-dimensional: *Source:\nStacks Project, Cohomology of Schemes, Proposition 30.19.1,\n[Tag 02O5](https://stacks.math.columbia.edu/tag/02O5)*).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/thm-sc-p1-duality.md",
+  "place": "node thm-sc-p1-duality, order 696",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 02O5"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sc-kahler-differentials",
+  "lem-sc-p1-monomial",
+  "def-sc-ext-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1: the twisted structure sheaves.* For\n$\\mathcal E=\\bigoplus_j\\mathcal O(d_j)$ both statements are\nadditive in $\\mathcal E$, so it suffices to check $\\mathcal O(d)$,\n$d\\in\\mathbf Z$. For $\\mathcal O(d)$, the Cech computation of\n[lem-sc-p1-monomial] gives the monomial duality: with the bases\n\n$$\nH^1(\\mathbf P^1_k,\\mathcal O(d))=\\bigoplus_{j=d+1}^{-1}k\\cdot[t^{j}],\n\\qquad\nH^0(\\mathbf P^1_k,\\mathcal O(-2-d))=\\bigoplus_{j=d+1}^{-1}k\\cdot\nx_0^{j-d-1}x_1^{-1-j}\n$$\n\n(for $d\\leq-2$; both are zero otherwise), the pairing\n$\\langle[t^{j}],x_0^{j-d-1}x_1^{-1-j}\\rangle=1$ is perfect (the case $n=1$, $A=k$ of [lem-pc-projective-space-serre-pairing]), because\nthe product class is the basis element $[t^{-1}]$ of\n$H^1(\\mathbf P^1_k,\\mathcal O(-2))\\cong k$. Hence, for $d\\leq-2$,\n\n$$\nH^1(\\mathbf P^1_k,\\mathcal O(d))^{\\vee}\\cong\nH^0(\\mathbf P^1_k,\\mathcal O(-2-d))\n\\cong\\operatorname{Hom}(\\mathcal O(d),\\mathcal O(-2))\n\\cong\\operatorname{Hom}(\\mathcal O(d),\\omega_{\\mathbf P^1}),\n$$\n\nthe second isomorphism being\n$\\mathcal H om(\\mathcal O(d),\\mathcal O(-2))=\\mathcal O(-2-d)$\nfor the line bundles of [def-sc-p1-standard], which are\ninvertible by [lem-sc-p1-twist-exists] (the dual of\n$\\mathcal O(d)$ is $\\mathcal O(-d)$, from the glueing of\n[def-sc-p1-standard]), and both sides are zero for $d\\geq-1$.\nSimilarly, by\n$\\operatorname{Ext}^i(\\mathcal F,\\mathcal G)=H^i(\\mathcal F^{\\vee}\\otimes\\mathcal G)$\nfor finite locally free $\\mathcal F$\n([lem-sc-ext-locally-free], the $\\operatorname{Ext}$ of\n[def-sc-ext-sheaf]):\n\n$$\nH^0(\\mathbf P^1_k,\\mathcal O(d))^{\\vee}\\cong\nH^1(\\mathbf P^1_k,\\mathcal O(-2-d))\\cong\n\\operatorname{Ext}^1(\\mathcal O(d),\\omega_{\\mathbf P^1})\n$$\n\nfor all $d$ (for $d\\leq-2$ both sides are zero, for $d\\geq0$\nthey have dimension $d+1$ by (i), (ii) of\n[lem-sc-p1-monomial]). So Step 1 holds for all $\\mathcal E$.",
+   "uses": [
+    "lem-sc-p1-monomial",
+    "lem-pc-projective-space-serre-pairing",
+    "def-sc-p1-standard",
+    "lem-sc-p1-twist-exists",
+    "lem-sc-ext-locally-free",
+    "def-sc-ext-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: the devissage.* The isomorphisms of Step 1 are\nnatural, and both pairings defining them (the pairing of the Cech\nclass with the monomial, and the Yoneda pairing\n$\\operatorname{Ext}^1(\\mathcal G,\\omega)\\times H^0(\\mathcal G)\\to \\operatorname{Ext}^1(\\mathcal O_{\\mathbf P^1},\\omega) =H^1(\\mathbf P^1_k,\\omega)\\cong k$) are natural in the sheaf and\ncompatible with the connecting maps of the long exact sequences\n(standard homological algebra: the pairings are induced by\ncompositions in the derived category of $\\mathcal O_{\\mathbf P^1}$-modules). Fix a coherent $\\mathcal G$ and choose a\nresolution $0\\to\\mathcal E_2\\to\\mathcal E_1\\to\\mathcal E_0\\to \\mathcal G\\to0$ as in [lem-sc-p1-graded-resolution]; put\n$\\mathcal K:=\\operatorname{coker}(\\mathcal E_2\\to\\mathcal E_1)$,\nso that\n\n$$\n0\\to\\mathcal E_2\\to\\mathcal E_1\\to\\mathcal K\\to0,\\qquad\n0\\to\\mathcal K\\to\\mathcal E_0\\to\\mathcal G\\to0\n$$\n\nare exact. For a short exact sequence\n$0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C\\to0$ of coherent\nmodules the cohomology sequence ends with $H^2=0$\n([lem-sc-p1-hi-vanishing]), so, dualizing the six-term sequence\n(finite-dimensional vector spaces, all finite-dimensional as noted\nin the statement),\n\n$$\n0\\to H^1(\\mathcal C)^{\\vee}\\to H^1(\\mathcal B)^{\\vee}\\to\nH^1(\\mathcal A)^{\\vee}\\to H^0(\\mathcal C)^{\\vee}\\to\nH^0(\\mathcal B)^{\\vee}\\to H^0(\\mathcal A)^{\\vee}\\to0\n$$\n\nis exact; and the long exact Ext sequence, truncated (the groups\n$\\operatorname{Ext}^i(\\mathcal F,\\mathcal G)$ for coherent\n$\\mathcal F$ on the smooth curve $\\mathbf P^1_k$ vanish for\n$i\\geq2$: the Exts are Zariski-local in $\\mathcal F$, and the\nlocal rings $\\mathcal O_{\\mathbf P^1,x}$ are regular of dimension\none, in which every module has projective dimension at most one –\nhomological algebra), gives the exact sequence\n\n$$\n0\\to\\operatorname{Hom}(\\mathcal C,\\omega)\\to\n\\operatorname{Hom}(\\mathcal B,\\omega)\\to\n\\operatorname{Hom}(\\mathcal A,\\omega)\\to\n\\operatorname{Ext}^1(\\mathcal C,\\omega)\\to\n\\operatorname{Ext}^1(\\mathcal B,\\omega)\\to\n\\operatorname{Ext}^1(\\mathcal A,\\omega)\\to0,\n$$\n\n$\\omega:=\\omega_{\\mathbf P^1}$. The maps of Step 1 and the\ncompatibility make the vertical maps of these two exact sequences a\nmorphism of exact sequences. Applying [lem-sc-four-lemma]\nfirst with $(\\mathcal A,\\mathcal B,\\mathcal C)= (\\mathcal E_2,\\mathcal E_1,\\mathcal K)$ and then with\n$(\\mathcal A,\\mathcal B,\\mathcal C)= (\\mathcal K,\\mathcal E_0,\\mathcal G)$ proves the two\nisomorphisms of the statement for $\\mathcal K$, then for\n$\\mathcal G$: in both applications the columns $2,3,5,6$ are\nisomorphic (Step 1 for the $\\mathcal E_i$, and for the second\napplication the two isomorphisms just proved for $\\mathcal K$).",
+   "uses": [
+    "lem-sc-p1-graded-resolution",
+    "lem-sc-p1-hi-vanishing",
+    "lem-sc-four-lemma"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-monomial",
+  "lem-pc-projective-space-serre-pairing",
+  "def-sc-p1-standard",
+  "lem-sc-p1-twist-exists",
+  "lem-sc-ext-locally-free",
+  "def-sc-ext-sheaf",
+  "lem-sc-p1-graded-resolution",
+  "lem-sc-p1-hi-vanishing",
+  "lem-sc-four-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/thm-sc-p1-duality.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 696,
+ "blueprint_uses": [
+  "def-sc-ext-sheaf",
+  "def-sc-kahler-differentials",
+  "def-sc-p1-standard",
+  "lem-pc-projective-space-serre-pairing",
+  "lem-sc-ext-locally-free",
+  "lem-sc-four-lemma",
+  "lem-sc-p1-graded-resolution",
+  "lem-sc-p1-hi-vanishing",
+  "lem-sc-p1-monomial",
+  "lem-sc-p1-twist-exists"
+ ],
+ "proof_split_by": "labels"
+}

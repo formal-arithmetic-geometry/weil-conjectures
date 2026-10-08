@@ -1,0 +1,68 @@
+{
+ "id": "lemma-weil-pbc-eight-curve-devissage",
+ "kind": "statement",
+ "title": "Short-exact devissage for the eight assertions",
+ "statement": "Let\n\n$$\n 0\\longrightarrow F_1\\longrightarrow F\\longrightarrow F_2\n \\longrightarrow0\n$$\n\nbe exact in $\\Ab(C_{\\Et})$. If $\\mathcal C(C,F_1)$ and $\\mathcal C(C,F_2)$\nhold in the sense of [def-weil-pbc-eight-curve-assertions], then\n$\\mathcal C(C,F)$ holds. In particular, the class of torsion sheaves\nsatisfying all eight implications is closed under extensions.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-eight-curve-devissage.md",
+  "place": "node lemma-weil-pbc-eight-curve-devissage, order 1151",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A5C"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "For $1\\leq j\\leq7$, the assertion $\\mathcal C_j$ is preserved by short exact\nsequences: the long exact cohomology sequences of $0\\to F_1\\to F\\to F_2\\to0$\nand the five lemma pass the vanishing statements (C1)--(C3) to $F$, give\nfiniteness of the middle group in (C4) and (C5) (cokernels and kernels of maps\nof finite groups are finite), and give the isomorphism statements (C6) and\n(C7) once the pullback maps $\\rho^q_{k'/k}$ form a natural map of the two long\nexact sequences.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "For (C8), fix any open immersion $a:U\\hookrightarrow C$ and a class $b\\in\nH^2(U,a^{-1}F)$. Denote its image in $H^2(U,a^{-1}F_2)$ by $b_2$. Assertion\n(C8) for $F_2$ gives $c_2\\in H^2(C,F_2)$ with $a^*c_2=b_2$. The obstruction to\nlifting $c_2$ to $H^2(C,F)$ lies in $H^3(C,F_1)$, which is zero by (C1) for\n$F_1$. Choose a lift $c\\in H^2(C,F)$. Naturality of the long exact sequences\nunder restriction shows that $b-a^*c$ maps to zero in $H^2(U,a^{-1}F_2)$.\nExactness therefore gives $b_1\\in H^2(U,a^{-1}F_1)$ whose image is $b-a^*c$.\nApply (C8) for $F_1$ to choose $c_1\\in H^2(C,F_1)$ restricting to $b_1$. If\n$\\iota_*:H^2(C,F_1)\\to H^2(C,F)$ is induced by $F_1\\hookrightarrow F$, then\n\n$$\n a^*(c+\\iota_*c_1)=a^*c+(b-a^*c)=b.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "This proves (C8) for $F$, without a hypothesis on the components of $U$. Thus\n$\\mathcal C(C,F)$ holds.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-eight-curve-devissage.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1151,
+ "blueprint_uses": [
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "Let\n\n$$\n0\\longrightarrow F_1\\xrightarrow{a}F\\xrightarrow{b}F_2\\longrightarrow0\n$$\n\nbe exact. If all applicable assertions $\\mathcal C_r(X,F_i)$ hold for\n$i=1,2$, then all applicable assertions hold for $F$.",
+   "proof": "Pullback to an extension field is exact, so the displayed sequence and its\nbase change give natural long exact cohomology sequences.\n\nFor (1), (2), and (3), in every degree above the stated bound the exact\nsegment\n\n$$\nH^q(X,F_1)\\xrightarrow{a_*}H^q(X,F)\n\\xrightarrow{b_*}H^q(X,F_2)\n$$\n\nhas zero end terms. Hence its middle term is zero. The hypotheses on\naffineness and characteristic are unchanged, and in (3) an extension of two\n$p$-power torsion sheaves is again killed by a power of $p$.\n\nFor (4) and (5), constructible sheaves form a Serre subcategory: on a common\nfinite stratification the stalk sequence is an exact sequence of finite\ngroups. Prime-to-characteristic torsion is also preserved by extensions.\nExactness identifies $H^q(X,F)$ as an extension of\n$\\operatorname{im}a_*$ by $\\operatorname{im}b_*$; these are respectively a\nquotient of the finite group $H^q(X,F_1)$ and a subgroup of the finite group\n$H^q(X,F_2)$. Thus $H^q(X,F)$ is finite.\n\nFor (6) and (7), write the long exact sequence for $F_1,F,F_2$ above its\nbase-changed sequence. Every square commutes because restriction commutes\nwith $a$, $b$, and the boundary map obtained from an injective resolution.\nFor fixed $q$, the four outer vertical arrows in the five-term portion\n\n$$\nH^{q-1}(F_2)\\to H^q(F_1)\\to H^q(F)\\to H^q(F_2)\\to H^{q+1}(F_1)\n$$\n\nare isomorphisms; the five lemma makes the middle arrow an isomorphism.\n\nFor (8), let $c\\in H^2(W,F|_W)$ and put $c_2=b_*(c)$. Choose\n$x_2\\in H^2(X,F_2)$ restricting to $c_2$. Its boundary lies in\n$H^3(X,F_1)=0$ by (1), so exactness gives\n$x\\in H^2(X,F)$ with $b_*(x)=x_2$. The difference\n$c-x|_W$ maps to zero in $H^2(W,F_2|_W)$, hence equals $a_*(d_1)$ for some\n$d_1\\in H^2(W,F_1|_W)$. Choose $y_1\\in H^2(X,F_1)$ restricting to $d_1$.\nThen $x+a_*(y_1)$ restricts to $c$. This proves the eighth assertion and\ncompletes all eight cases compressed in Tag `0A5C`.",
+   "cites": []
+  }
+ ]
+}

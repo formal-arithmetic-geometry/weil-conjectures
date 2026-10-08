@@ -1,0 +1,47 @@
+{
+ "id": "lem-trf-adjoint-mate",
+ "kind": "statement",
+ "title": "Mates along an isomorphism of left adjoints",
+ "statement": "Let $(\\mathcal C_i,\\mathcal T_i)$ be triangulated categories with\n$T_i:\\mathcal C_i\\to\\mathcal C_i$ the shifts, and let\n$F_i:\\mathcal C_1\\to\\mathcal C_2$, $G_i:\\mathcal C_2\\to\\mathcal C_1$\nbe exact functors with adjunctions\n$F_1\\dashv G_1$ (unit $\\eta_1$, counit $\\varepsilon_1$) and\n$F_2\\dashv G_2$ (unit $\\eta_2$, counit $\\varepsilon_2$), and let\n$\\alpha:F_1\\xrightarrow{\\ \\sim\\ }F_2$ be a natural isomorphism.\n\n1. There is a unique natural isomorphism\n$\\beta:G_1\\xrightarrow{\\ \\sim\\ }G_2$ compatible with the adjunctions,\ngiven explicitly by the composite\n$$\n\\beta:\\quad G_1\n\\xrightarrow{\\ \\eta_2G_1\\ }\nG_2F_2G_1\n\\xrightarrow{\\ G_2\\alpha^{-1}G_1\\ }\nG_2F_1G_1\n\\xrightarrow{\\ G_2\\varepsilon_1\\ }\nG_2\n$$\nand its inverse\n$$\n\\beta^{-1}:\\quad G_2\n\\xrightarrow{\\ \\eta_1G_2\\ }\nG_1F_1G_2\n\\xrightarrow{\\ G_1\\alpha G_2\\ }\nG_1F_2G_2\n\\xrightarrow{\\ G_1\\varepsilon_2\\ }\nG_1.\n$$\n1. The units and counits are carried to each other: the two\ncomposite morphisms\n$$\n\\operatorname{id}\\xrightarrow{\\ \\eta_1\\ }G_1F_1\n\\xrightarrow{\\ \\beta F_1\\ }G_2F_1\n\\xrightarrow{\\ G_2\\alpha\\ }G_2F_2,\n\\qquad\n\\operatorname{id}\\xrightarrow{\\ \\eta_2\\ }G_2F_2,\n$$\nare equal, and the two composites\n$$\nF_1G_1\\xrightarrow{\\ F_1\\beta\\ }F_1G_2\n\\xrightarrow{\\ \\alpha G_2\\ }F_2G_2\n\\xrightarrow{\\ \\varepsilon_2\\ }\\operatorname{id},\n\\qquad\nF_1G_1\\xrightarrow{\\ \\varepsilon_1\\ }\\operatorname{id},\n$$\nare equal; the analogous identities hold with the roles of the two\nadjunctions exchanged. In particular the unit-compatibility reads\n$$\nG_2\\alpha\\circ\\beta F_1\\circ\\eta_1=\\eta_2,\n$$\nas morphisms $\\operatorname{id}\\to G_2F_2$ after the canonical\nidentification $G_2F_1\\xrightarrow{G_2\\alpha}G_2F_2$.\n1. *Uniqueness.* Any natural isomorphism\n$\\beta':G_1\\xrightarrow{\\sim}G_2$ satisfying the unit compatibility\nof (2) together with its counit analogue is equal to $\\beta$; in\nparticular the identification of $G_1$ with $G_2$ is canonical\nonce $\\alpha$ is.\n\nAll functors and natural transformations are in the\nclassical framework.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/lem-trf-adjoint-mate.md",
+  "place": "node lem-trf-adjoint-mate, order 2299"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "In the framework of [rem-trf-classical-framework], for every\n$x\\in\\mathcal C_1$, $y\\in\\mathcal C_2$, the adjunctions give\nnatural bijections\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}(x,G_1y)\n&\\simeq\\operatorname{Hom}(F_1x,y)\\\\\n&\\xrightarrow{\\ h\\mapsto h\\circ\\alpha_x^{-1}\\ }\n\\operatorname{Hom}(F_2x,y)\n\\simeq\\operatorname{Hom}(x,G_2y).\n\\end{aligned}\n$$\n\nYoneda gives a unique natural isomorphism $\\beta:G_1\\to G_2$.\nApplying the bijection to $x=G_1y$ and\n$\\operatorname{id}_{G_1y}$ gives exactly the formula for $\\beta_y$\nin (1). Replacing $\\alpha^{-1}$ with $\\alpha$ in the reversed\nbijection gives the displayed formula for $\\beta^{-1}$; these maps\nare inverse because the two Hom-bijections are inverse.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The unit $\\eta_{1,x}$ corresponds to\n$\\operatorname{id}_{F_1x}$. The displayed bijection sends it to the\nadjoint of $\\alpha_x^{-1}:F_2x\\to F_1x$, namely\n$G_2(\\alpha_x^{-1})\\eta_{2,x}$.\nConsequently $\\beta_{F_1x}\\eta_{1,x} =G_2(\\alpha_x^{-1})\\eta_{2,x}$, which proves the unit formula.\nThe counit corresponds to the identity of $G_1y$. Hence\n$\\beta_y$ is adjoint to\n$\\varepsilon_{1,y}\\alpha_{G_1y}^{-1}$, giving\n\n$$\n\\varepsilon_{2,y}F_2(\\beta_y)\n=\\varepsilon_{1,y}\\alpha_{G_1y}^{-1}.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Precompose with $\\alpha_{G_1y}$ and use naturality of $\\alpha$ to\nobtain\n$\\varepsilon_{2,y}\\alpha_{G_2y}F_1(\\beta_y)=\\varepsilon_{1,y}$,\nthe counit formula of (2). The reversed bijections give the analogous\nidentities for the inverse. Finally, either adjunction compatibility\nforces the displayed Hom-bijection, so Yoneda proves uniqueness.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/lem-trf-adjoint-mate.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_remark"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2299,
+ "blueprint_uses": [
+  "rem-trf-classical-framework"
+ ],
+ "proof_split_by": "paragraphs"
+}

@@ -1,0 +1,71 @@
+{
+ "id": "thm-sc-finite-type-torsion-cd",
+ "kind": "statement",
+ "title": "Torsion cohomological dimension of a finite-type scheme",
+ "statement": "Let $K$ be a field with $\\operatorname{cd}_{\\rm tor}(K)\\leq c$,\nand let $X$ be a finite-type\n$K$-scheme of dimension $d$.\nThen $\\operatorname{cd}_{\\rm tor}(X)\\leq2d+c$, in the sense of\n[def-sc-etale-torsion-cd].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-finite-type-torsion-cd.md",
+  "place": "node thm-sc-finite-type-torsion-cd, order 1558"
+ },
+ "stmt_deps": [
+  "def-sc-etale-torsion-cd",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Restrict etale sheaves to Zariski opens to obtain the direct\nimage $\\epsilon_*:\\operatorname{Ab}(X_{\\rm et})\\to \\operatorname{Ab}(X_{\\rm Zar})$, using [def-sc-zariski-site].\nIts inverse image is exact: the geometric stalk of\n$\\epsilon^{-1}G$ over $x$ is the ordinary Zariski stalk\n$G_x$, an exact functor. Thus $\\epsilon_*$ preserves\ninjectives, and [thm-sp-grothendieck] gives\n\n$$\nH^p(X_{\\rm Zar},R^q\\epsilon_*F)\n\\ \\Longrightarrow\\ H^{p+q}(X_{\\rm et},F).\n$$",
+   "uses": [
+    "def-sc-zariski-site",
+    "thm-sp-grothendieck"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "This is the composite of the two ordinary section functors\nof [def-sc-zariski-cohomology].",
+   "uses": [
+    "def-sc-zariski-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Zariski stalk of $R^q\\epsilon_*F$ at $x$ is\n$\\varinjlim_{x\\in V}H^q(V_{\\rm et},F|_V)$.\nTo see this, restrict an injective etale resolution to\neach open $V$; it remains injective because extension\nby zero from an open is exact. Then take the exact\nfiltered colimit over $V$.\nAffine opens are cofinal among neighborhoods of $x$.\nThey have dimension at most $d$, so\n[thm-sc-affine-torsion-cd] makes the stalk zero for\n$q>d+c$. Hence $R^q\\epsilon_*F=0$ in these degrees.\nOn the other hand\n[lem-sc-zariski-dimension-bound] kills the spectral\nsequence for $p>d$, without needing its entries to be\nconstructible or torsion. All surviving total degrees\nare at most $d+(d+c)=2d+c$.\nThis proves the ordinary etale bound for every torsion $F$;\nno identification with compactly supported cohomology is used.",
+   "uses": [
+    "thm-sc-affine-torsion-cd",
+    "lem-sc-zariski-dimension-bound"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-zariski-site",
+  "thm-sp-grothendieck",
+  "def-sc-zariski-cohomology",
+  "thm-sc-affine-torsion-cd",
+  "lem-sc-zariski-dimension-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-finite-type-torsion-cd.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1558,
+ "blueprint_uses": [
+  "def-sc-etale-torsion-cd",
+  "def-sc-zariski-cohomology",
+  "def-sc-zariski-site",
+  "def-weil-pbc-scheme-conventions",
+  "lem-sc-zariski-dimension-bound",
+  "thm-sc-affine-torsion-cd",
+  "thm-sp-grothendieck"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs"
+}

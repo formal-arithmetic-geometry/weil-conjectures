@@ -1,0 +1,98 @@
+{
+ "id": "lem-fd-convolution-kernel",
+ "kind": "statement",
+ "title": "The convolution of the Fourier kernels is the delta kernel",
+ "statement": "Let $S=\\Spec k$ and $V=\\mathbf A^r_k$. Then\n\n$$\n\\mathcal K_{\\psi^{-1}}\\ast\\mathcal K_\\psi\\cong\n\\Delta_*\\overline{\\mathbf Q}_\\ell(-r)[-2r],\n\\qquad\n\\mathcal K_\\psi\\ast\\mathcal K_\\psi\\cong\n(\\operatorname{id}\\times\\iota')_*\\Delta_*\\overline{\\mathbf Q}_\\ell(-r)[-2r],\n$$\n\nwhere $\\Delta:V\\to V\\times_SV$ is the diagonal and $\\iota'$ is the inverse\nof the addition.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.md",
+  "place": "node lem-fd-convolution-kernel, order 2714"
+ },
+ "stmt_deps": [
+  "def-wf-tate-twist"
+ ],
+ "proof": [
+  {
+   "text": "Let $(\\bar x,\\bar y)$ be a geometric point of $V\\times_SV$. By the same\nstalk computation as in [lem-fd-stalk-formula] – the fibre of $r_{13}$\nover $(\\bar x,\\bar y)$ is $\\mathbf A^r_{\\bar k}$, and the kernel restricts\nto the product of the two values of $\\psi$ – the stalk of\n$\\mathcal K_{\\psi^{-1}}\\ast\\mathcal K_\\psi$ at $(\\bar x,\\bar y)$ is the\ncompactly supported cohomology\n\n$$\nH^*_c\\bigl(\\mathbf A^r_{\\bar k},\\,\n\\mathcal L_{\\psi(\\langle\\xi,x\\rangle)}\\otimes^L\n\\mathcal L_{\\psi^{-1}(\\langle\\xi,y\\rangle)}\\bigr)\n=H^*_c\\bigl(\\mathbf A^r_{\\bar k},\\,\n\\mathcal L_{\\psi(\\langle\\xi,x-y\\rangle)}\\bigr),\n$$\n\nthe identification being the multiplicativity and the inverse formula of\n[prop-kernel-lisse], [lem-fd-as-lisse]. If $x\\neq y$ the linear form\n$\\xi\\mapsto\\langle\\xi,x-y\\rangle$ is nonzero: choose linear coordinates on\n$\\mathbf A^r_{\\bar k}$ whose first coordinate is $t=\\langle\\xi,c\\rangle$\nwith $c=x-y$, so that $\\mathbf A^r_{\\bar k}=\\mathbf A^1_t\\times\\mathbf A^{r-1}$\nand the sheaf is $\\mathrm{pr}^*\\mathcal L_{\\psi(t)}$ for the projection\n$\\mathrm{pr}:\\mathbf A^r\\to\\mathbf A^1_t$, a trivial vector bundle of rank\n$r-1$. The vector-bundle Thom isomorphism [thm-pur-vector-bundle-thom] (in\nthe $\\overline{\\mathbf Q}_\\ell$ transport of [def-pur-conventions]) gives\n$R\\mathrm{pr}_!\\overline{\\mathbf Q}_\\ell\\cong\n\\overline{\\mathbf Q}_\\ell(-(r-1))[-2(r-1)]$, so the projection formula\n[fix-prop-projection-formula] gives\n\n$$\nR\\Gamma_c\\bigl(\\mathbf A^r_{\\bar k},\\mathrm{pr}^*\\mathcal L_{\\psi(t)}\\bigr)\n\\cong R\\Gamma_c\\bigl(\\mathbf A^1_{\\bar k},\n\\mathcal L_{\\psi(t)}\\otimes R\\mathrm{pr}_!\\overline{\\mathbf Q}_\\ell\\bigr)\n\\cong R\\Gamma_c\\bigl(\\mathbf A^1_{\\bar k},\\mathcal L_{\\psi(t)}\\bigr)\n(-(r-1))[-2(r-1)].\n$$",
+   "uses": [
+    "lem-fd-stalk-formula",
+    "prop-kernel-lisse",
+    "lem-fd-as-lisse",
+    "thm-pur-vector-bundle-thom",
+    "def-pur-conventions",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The last complex vanishes by the degreewise Poincare duality of\n[thm-pod-degreewise-perfectness-over-a-field] for the smooth, separated (not\nproper) curve $\\mathbf A^1$ at the field stage $\\overline{\\mathbf Q}_\\ell$,\napplied to the lisse rank-one, hence perfect\n([def-pod-perfect-complex-on-x]), sheaf $\\mathcal L_{\\psi(t)}$: it gives\n$H^i_c(\\mathbf A^1,\\mathcal L_{\\psi(t)})^\\vee\\cong\nH^{2-i}(\\mathbf A^1,\\mathcal L_{\\psi(t)}^\\vee(1))$, and the coefficient dual\n$\\mathcal L_{\\psi(t)}^\\vee=\\mathcal L_{\\psi(-t)}$ ([lem-fd-as-lisse]) is the\nexponential sheaf of a nonzero linear function, whose ordinary cohomology\nvanishes by [lem-fd-cohomology-affine-line-character]. If $x=y$ the\nintegrand is the constant sheaf, and\n$R\\Gamma_c(\\mathbf A^r_{\\bar k},\\overline{\\mathbf Q}_\\ell)\n=\\overline{\\mathbf Q}_\\ell(-r)[-2r]$, Frobenius-compatibly, by the same Thom\nisomorphism [thm-pur-vector-bundle-thom] for the trivial rank-$r$ bundle over\nthe point. The stalk\ncomputation therefore identifies the convolution with the constant sheaf with\ntwist $(-r)$ and shift $[-2r]$ extended by zero along the diagonal, which\nis the first displayed isomorphism; the support is closed because the diagonal\nis a closed immersion. The same-character computation replaces $x-y$ by\n$x+y$, so the vanishing locus is the anti-diagonal $\\{x+y=0\\}$, the image\nof the diagonal under $\\operatorname{id}\\times\\iota'$, which gives the\nsecond isomorphism.",
+   "uses": [
+    "thm-pod-degreewise-perfectness-over-a-field",
+    "def-pod-perfect-complex-on-x",
+    "lem-fd-as-lisse",
+    "lem-fd-cohomology-affine-line-character",
+    "thm-pur-vector-bundle-thom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fd-stalk-formula",
+  "prop-kernel-lisse",
+  "lem-fd-as-lisse",
+  "thm-pur-vector-bundle-thom",
+  "def-pur-conventions",
+  "fix-prop-projection-formula",
+  "thm-pod-degreewise-perfectness-over-a-field",
+  "def-pod-perfect-complex-on-x",
+  "lem-fd-cohomology-affine-line-character",
+  "lem-fd-as-cover-affine-line",
+  "lem-fd-kernel-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "text search of the local Mathlib checkout (0df444a360)",
+   "query": "AlgebraicGeometry.Etale.fourierKernelConvolutionIso",
+   "results": [],
+   "date": "2026-10-08"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2714,
+ "blueprint_uses": [
+  "def-pod-perfect-complex-on-x",
+  "def-pur-conventions",
+  "def-wf-tate-twist",
+  "fix-prop-projection-formula",
+  "lem-fd-as-cover-affine-line",
+  "lem-fd-as-lisse",
+  "lem-fd-cohomology-affine-line-character",
+  "lem-fd-kernel-composition",
+  "lem-fd-stalk-formula",
+  "prop-kernel-lisse",
+  "thm-pod-degreewise-perfectness-over-a-field",
+  "thm-pur-vector-bundle-thom"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.fourierKernelConvolutionIso"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.Etale.fourierKernelConvolutionIso"
+ ],
+ "uses_not_cited": [
+  "def-wf-tate-twist",
+  "lem-fd-as-cover-affine-line",
+  "lem-fd-kernel-composition"
+ ],
+ "proof_split_by": "paragraphs"
+}

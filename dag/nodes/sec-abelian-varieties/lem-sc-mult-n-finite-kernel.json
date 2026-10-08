@@ -1,0 +1,108 @@
+{
+ "id": "lem-sc-mult-n-finite-kernel",
+ "kind": "statement",
+ "title": "Multiplication by $n$ is finite",
+ "statement": "Let $A$ be an abelian variety\nover a field $k$, and let $n\\geq1$. Then the map $[n]$ of\n[def-sc-mult-n] is a finite homomorphism of\ngroup schemes, and its kernel\n$A[n]$ is a finite group scheme over $k$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-finite/lem-sc-mult-n-finite-kernel.md",
+  "place": "node lem-sc-mult-n-finite-kernel, order 552",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03RP"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0BFG"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 04KV"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 02OG"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sc-mult-n",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "*Reference: Stacks Project, Groupoid Schemes, Proposition\n39.9.11 (3) and (5), [Tag 03RP](https://stacks.math.columbia.edu/tag/03RP), whose proof is Lemma 39.9.8,\n[Tag 0BFG](https://stacks.math.columbia.edu/tag/0BFG).* We give\nthe argument of loc. cit. The map $[n]$ of [def-sc-mult-n] is\na homomorphism of group schemes: the group law of $A$ is commutative\nby [lem-sc-av-commutative], and for a commutative group scheme the\n$n$-fold sum map is a homomorphism by\n[lem-sc-mult-n-homomorphism].",
+   "uses": [
+    "def-sc-mult-n",
+    "lem-sc-av-commutative",
+    "lem-sc-mult-n-homomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(i) Finiteness of the kernel.* By\n[lem-sc-abelian-variety-projective] and\n[lem-sc-ample-tensor] there is an ample invertible module\n$\\mathcal N$ on $A$ with $[-1]^*\\mathcal N\\cong\\mathcal N$,\nand by [lem-sc-mult-n-pullback]\n$[n]^*\\mathcal N\\cong\\mathcal N^{\\otimes n^2}$. Since\n[lem-sc-ample-positive-degree] is stated over an algebraically closed\nfield, we first reduce to that case. Let $\\bar k$ be an algebraic\nclosure of $k$. Then $A_{\\bar k}$ is an abelian variety over $\\bar k$\n($A$ is connected with a rational point, hence geometrically\nconnected, Stacks Project, Varieties, Lemma 33.7.14,\n[Tag 04KV](https://stacks.math.columbia.edu/tag/04KV)), $[n]$\nbase-changes to $[n]$ of $A_{\\bar k}$, the isomorphism\n$[n]^*\\mathcal N\\cong\\mathcal N^{\\otimes n^2}$ base-changes, and\n$\\mathcal N_{\\bar k}$ is ample (a closed immersion\n$A\\hookrightarrow\\mathbf P^N_k$ with\n$\\mathcal N^{\\otimes m}\\cong\\mathcal O(1)|_A$ base-changes to one of\n$A_{\\bar k}$). If all fibres of $[n]_{\\bar k}$ are finite, so are those\nof $[n]$: the fibre of $[n]$ over $y\\in A$ is the image of the fibre of\n$[n]_{\\bar k}$ over any point $\\bar y$ above $y$, the latter being the\nbase change of the former along $\\kappa(y)\\subseteq\\kappa(\\bar y)$, and\nsuch a base change is surjective on points. So assume $k$ algebraically\nclosed. As the quasi-finite locus of $[n]$ is open and $A$ is\nJacobson, it suffices to treat the fibres over closed points $y$, which\nare closed subschemes of $A$. If such a fibre\n$[n]^{-1}(y)$ had positive dimension, it would contain a proper\ncurve $C$ (a positive-dimensional scheme of finite type over a\nfield contains an integral closed subscheme of dimension one), and\non $C$ the morphism $[n]$ is constant, so\n$\\mathcal O_C\\cong[n]^*\\mathcal N|_C\\cong\\mathcal N^{\\otimes n^2}|_C$; but the restriction of an ample module to a closed\nsubscheme is ample, and an ample module on a proper curve has\npositive degree ([lem-sc-ample-positive-degree]), in particular it is not trivial – a\ncontradiction. Hence every fibre of $[n]$ is finite. The\nmorphism $[n]$ is proper ($A$ is proper and the target is\nseparated), so $[n]$ is proper and quasi-finite, hence finite\n([thm-pqf-finite-iff-proper-finite-fibres] of the quasi-finite chapter;\n*reference: Stacks Project, Cohomology of Schemes,\n[Tag 02OG](https://stacks.math.columbia.edu/tag/02OG): proper\nand quasi-finite implies finite*). In particular the kernel\n$A[n]=[n]^{-1}(e)$ is finite.",
+   "uses": [
+    "lem-sc-abelian-variety-projective",
+    "lem-sc-ample-tensor",
+    "lem-sc-mult-n-pullback",
+    "lem-sc-ample-positive-degree",
+    "thm-pqf-finite-iff-proper-finite-fibres"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-mult-n",
+  "lem-sc-av-commutative",
+  "lem-sc-mult-n-homomorphism",
+  "lem-sc-abelian-variety-projective",
+  "lem-sc-ample-tensor",
+  "lem-sc-mult-n-pullback",
+  "lem-sc-ample-positive-degree",
+  "thm-pqf-finite-iff-proper-finite-fibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-finite/lem-sc-mult-n-finite-kernel.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 552,
+ "blueprint_uses": [
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-sc-mult-n",
+  "lem-sc-abelian-variety-projective",
+  "lem-sc-ample-positive-degree",
+  "lem-sc-ample-tensor",
+  "lem-sc-av-commutative",
+  "lem-sc-mult-n-homomorphism",
+  "lem-sc-mult-n-pullback",
+  "thm-pqf-finite-iff-proper-finite-fibres"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny",
+  "declaration": "AlgebraicGeometry.isFinite_npow_id",
+  "branch": "slopmaster2",
+  "line": 145,
+  "sorry_free": true,
+  "body_lines": 18
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.isFinite_npow_id"
+ ],
+ "uses_not_cited": [
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme"
+ ],
+ "proof_split_by": "paragraphs"
+}

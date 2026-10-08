@@ -1,0 +1,96 @@
+{
+ "id": "thm-fin-open-degree-zero",
+ "kind": "statement",
+ "title": "Constructibility of the degree-zero open direct image",
+ "statement": "Let $X$ be of finite type over a field, let\n$j:U\\hookrightarrow X$ be an\nopen immersion,\nand let $F$ be a\nconstructible\nmodule sheaf over a finite commutative ring on $U_{\\Et}$.\nThen $j_*F$ is\nconstructible on $X_{\\Et}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-fin-open-degree-zero.md",
+  "place": "node thm-fin-open-degree-zero, order 1909"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "We prove the assertion for every open in $X$ by Noetherian\ninduction on the ambient closed subset. Reduction of the\nambient scheme causes no change, by\n[thm-weil-pbc-universal-homeomorphism-invariance].\nThe inverse-image equivalences for reduction commute with\nopen restriction; adjunction then identifies their direct\nimages as well. Thus take $X$ reduced.\nIf $U$ is not dense, factor it through the proper closed\nsubset $\\overline U$, use induction there, and use\n[lem-fin-closed-immersion] to push to $X$.",
+   "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-fin-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Suppose $U$ is dense. There are finitely many irreducible\ncomponents $X_a$, by\n[lem-weil-pbc-noetherian-finite-components]. The finite\npartition of $F$ in\n[def-weil-pbc-constructible-complexes] contains a lisse\nopen near each generic point. Inside it choose a normal\nnonempty open $V_a\\subset X_a$, using\n[lem-fin-dense-normal-open], and remove all other\ncomponents. Each $V_a$ is then open in $X$, lies in\n$U$, and the $V_a$'s are disjoint. Put\n$V=\\coprod V_a$, $h:V\\hookrightarrow U$, $k=jh$,\nand $L=h^*F$. For each component,\n[lem-fin-normal-open-lisse-image] gives a constructible\ndirect image on $X_a$; then\n[lem-fin-closed-immersion] and the finite product give\nconstructibility of $k_*L$ on $X$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finite-components",
+    "def-weil-pbc-constructible-complexes",
+    "lem-fin-dense-normal-open",
+    "lem-fin-normal-open-lisse-image",
+    "lem-fin-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let $K=\\ker(F\\to h_*L)$. This subsheaf of $F$ is\nconstructible by\n[lem-weil-pbc-constructible-subobjects-noetherian],\nand its restriction to $V$ is zero. Put $W=X\\setminus V$,\n$W_U=W\\cap U$, with immersions $i:W\\hookrightarrow X$,\n$i':W_U\\hookrightarrow U$, and $j_W:W_U\\hookrightarrow W$.\nThe closed unit identifies $K=i'_*K'$, where\n$K'=i'^*K$: this is an isomorphism on all stalks by\n[lemma-weil-pbc-finite-stalk-formula] and hence by\n[lemma-weil-pbc-geometric-stalk-conservative].\nDirect-image composition in\n[def-weil-pbc-direct-image] gives\n$j_*K=i_*j_{W,*}K'$. Since $W$ is a proper closed\nsubset, induction and [lem-fin-closed-immersion] make\nthis sheaf constructible.",
+   "uses": [
+    "lem-weil-pbc-constructible-subobjects-noetherian",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-direct-image",
+    "lem-fin-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Left exactness identifies the kernel of\n$j_*F\\to j_*h_*L=k_*L$ with $j_*K$.\nIts image $I$, being a subsheaf of the constructible\n$k_*L$, is constructible by\n[lem-weil-pbc-constructible-subobjects-noetherian].\nFinally the short exact sequence\n\n$$\n0\\longrightarrow j_*K\\longrightarrow j_*F\n\\longrightarrow I\\longrightarrow0\n$$\n\nand [thm-constructible-serre] prove the claim.\nThis argument uses only the left exactness of $j_*$.",
+   "uses": [
+    "lem-weil-pbc-constructible-subobjects-noetherian",
+    "thm-constructible-serre"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-fin-closed-immersion",
+  "lem-weil-pbc-noetherian-finite-components",
+  "def-weil-pbc-constructible-complexes",
+  "lem-fin-dense-normal-open",
+  "lem-fin-normal-open-lisse-image",
+  "lem-weil-pbc-constructible-subobjects-noetherian",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-direct-image",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-fin-open-degree-zero.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1909,
+ "blueprint_uses": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions",
+  "lem-fin-closed-immersion",
+  "lem-fin-dense-normal-open",
+  "lem-fin-normal-open-lisse-image",
+  "lem-weil-pbc-constructible-subobjects-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-constructible-serre",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs"
+}

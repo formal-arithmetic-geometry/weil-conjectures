@@ -1,0 +1,72 @@
+{
+ "id": "lem-sc-mult-n-pullback",
+ "kind": "statement",
+ "title": "Pullback of symmetric modules under multiplication by $n$",
+ "statement": "Let $A$ be an abelian variety\nover a field $k$, let $\\mathcal N$ be an invertible\n$\\mathcal O_A$-module with\n$[-1]^*\\mathcal N\\cong\\mathcal N$, and let $n\\geq1$. Then\n\n$$\n[n]^*\\mathcal N\\cong\\mathcal N^{\\otimes n^2},\n$$\n\nwhere $[n]$ is the multiplication map of\n[def-sc-mult-n].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-n-pullback/lem-sc-mult-n-pullback.md",
+  "place": "node lem-sc-mult-n-pullback, order 482",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0BFF"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sc-mult-n",
+  "def-sc-abelian-variety"
+ ],
+ "proof": [
+  {
+   "text": "*Reference: Stacks Project, Groupoid Schemes, Lemma 39.9.7,\n[Tag 0BFF](https://stacks.math.columbia.edu/tag/0BFF).* Pull\nthe relation of [thm-sc-theorem-of-cube] back along\n$x\\mapsto(x,x,-x)$: since $m_{123}(x,x,-x)=x$,\n$m_1(x,x,-x)=m_2(x,x,-x)=x$, $m_3(x,x,-x)=-x$,\n$m_{12}(x,x,-x)=2x$, and\n$m_{13}(x,x,-x)=m_{23}(x,x,-x)=0$, one gets\n$\\mathcal L^{\\otimes3}\\otimes[-1]^*\\mathcal L\\cong[2]^*\\mathcal L$ for every $\\mathcal L$, hence\n$[2]^*\\mathcal N\\cong\\mathcal N^{\\otimes4}$ for symmetric\n$\\mathcal N$. Next pull the relation back along\n$x\\mapsto(x,x,[n-1]x)$: $m_{123}(x,x,[n-1]x)=[n+1]x$,\n$m_1=m_2=\\mathrm{id}$, $m_3=[n-1]$, $m_{12}=[2]$, and\n$m_{13}=m_{23}=[n]$, so\n\n$$\n[n+1]^*\\mathcal N\\otimes\\mathcal N^{\\otimes2}\\otimes\n[n-1]^*\\mathcal N\n\\cong[2]^*\\mathcal N\\otimes[n]^*\\mathcal N^{\\otimes2}.\n$$",
+   "uses": [
+    "thm-sc-theorem-of-cube"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By induction on $n$ (the case $n=2$ was just done, and\n$n=1$ is the identity), the induction hypothesis\n$[m]^*\\mathcal N\\cong\\mathcal N^{\\otimes m^2}$ for $m\\leq n$\ngives\n\n$$\n[n+1]^*\\mathcal N\\cong\\mathcal N^{\\otimes(4+2n^2-2-(n-1)^2)}\n=\\mathcal N^{\\otimes(n+1)^2},\n$$\n\nas required.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "thm-sc-theorem-of-cube"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-n-pullback/lem-sc-mult-n-pullback.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 482,
+ "blueprint_uses": [
+  "def-sc-abelian-variety",
+  "def-sc-mult-n",
+  "thm-sc-theorem-of-cube"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Cube",
+  "declaration": "AlgebraicGeometry.nonempty_iso_overPullback_npow_id",
+  "branch": "slopmaster2",
+  "line": 154,
+  "sorry_free": true,
+  "body_lines": 42
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.nonempty_iso_overPullback_npow_id"
+ ],
+ "uses_not_cited": [
+  "def-sc-abelian-variety"
+ ],
+ "proof_split_by": "paragraphs"
+}

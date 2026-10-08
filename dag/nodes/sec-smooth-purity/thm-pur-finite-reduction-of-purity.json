@@ -1,0 +1,95 @@
+{
+ "id": "thm-pur-finite-reduction-of-purity",
+ "kind": "statement",
+ "title": "Finite reduction of purity",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\n$m\\leq n$, and write $\\operatorname{red}_{n,m,T}$ for the finite\nreduction functor\n\n$$\nK\\mapsto K\\otimes^L_{A_{E,n}}A_{E,m}:\\\nD^b_{ctf}(T,A_{E,n})\\longrightarrow D^b_{ctf}(T,A_{E,m})\n$$\n\non a $k$-scheme $T$. For a smooth separated $f:X\\to Y$ of relative\ndimension $d$ and $K\\in D^b_{ctf}(Y,A_{E,n})$, the square\n\n$$\n\\begin{array}{ccc}\n\\operatorname{red}_{n,m,X}\\bigl(Lf^*K(d)[2d]\\bigr)\n& \\xrightarrow{\\ \\operatorname{red}_{n,m}(\\gamma_{f,K})\\ }\n& \\operatorname{red}_{n,m,X}(Rf^!K)\\\\\n\\big\\downarrow\\ \\sim\n& & \\big\\downarrow\\ \\sim\\\\\nLf^*\\operatorname{red}_{n,m,Y}K(d)[2d]\n& \\xrightarrow{\\ \\gamma_{f,\\operatorname{red}_{n,m}K}\\ }\n& Rf^!_{A_{E,m}}\\operatorname{red}_{n,m,Y}K\n\\end{array}\n$$\n\ncommutes, the vertical isomorphisms being the finite-reduction\ncompatibilities of the six-operations package. The same is true for the\naffine orientations of [thm-pur-affine-line-orientation], the smooth\ntraces of [def-pur-smooth-trace], the composition coherence of\n[thm-pur-composition-coherence], and the base-change squares of\n[thm-pur-smooth-base-change-coherence].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-finite-reduction-of-purity.md",
+  "place": "node thm-pur-finite-reduction-of-purity, order 2022"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "thm-pur-affine-line-orientation",
+  "def-pur-smooth-trace",
+  "thm-pur-composition-coherence",
+  "thm-pur-smooth-base-change-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Step 1: the purity map is determined fibrewise, so the comparison may be\nmade on the geometric fibres. The value of the smooth purity map\n[def-pur-smooth-purity-map] over a geometric point $\\bar y\\to Y$\nis prescribed by the purity of the geometric fibre $X_{\\bar y}$, which\nis the affine-space case [cor-pur-affine-space-zero-section-purity]\ntogether with the rank-one computation\n[thm-pur-affine-line-orientation]. Two natural transformations\nbetween the same pair of exact functors of $K$ that agree on every\ngeometric fibre agree: the strict henselizations of $Y$ at its\ngeometric points are pro-etale over $Y$ and jointly surjective, hence\nform a pro-etale covering family, and isomorphy of a morphism of\ncomplexes of pro-etale sheaves is local for covering families, clause\n(1) of [lem-cbc-proetale-stalk-conservative]; it is\ntherefore enough to compare the two composites of the square fibrewise,\nwhich the compatibilities below do.\nStep 2: the reduction compatibilities of the operations. All these\nconstructions are built from the operations of the six-operations\npackage, whose finite-reduction compatibilities\n\n$$\n(Lf^*K)_m\\cong Lf_m^*K_m,\\qquad\n(Rf^!K)_m\\cong Rf_m^!K_m,\\qquad\n(K(d))_m\\cong K_m(d)\n$$\n\nare natural in $K$ and in the morphism, by\n[def-weil-derived-tensor] and\n[def-weil-derived-pullback-tensor-hom] (finite reduction is the derived tensor product along\n$A_{E,n}\\to A_{E,m}$; this ring map need not be flat, and the\nfinite-Tor condition is essential for boundedness). The reduction\nfunctor does land in $D^b_{ctf}(T,A_{E,m})$ with the same Tor interval:\nif $K$ has Tor amplitude in $[a,b]$ it has a bounded flat model in\ndegrees $[a,b]$ by [lem-sf-flat-model], and the reduction of that model\nis a bounded flat model of $K_m$ in $[a,b]$ by\n[lem-sf-reduction-flat-model]. Compatibility\nwith pullback and the invertible twist follows from associativity\nof derived tensor. For the smooth exceptional inverse image use\nthe previously constructed tensor formula and its coefficient\ncompatibility, rather than flat base change. The composition\nidentifications are those of\n[def-weil-exceptional-inverse-image] (the functoriality of\n$R^!$ and of the composition isomorphisms), and by\n[def-coefficient-twists-detailed] (the coefficient twists are reduced\ncoefficient twists). Step 3: the glueing data reduce. The sheaf\naxiom gluing used in [thm-pur-dnc-invariance] is a statement\nabout finite locally constant rank-one sheaves, and the reduction of a\nfinite locally constant rank-one sheaf is again one; the local\nnormalizations of [thm-pur-dnc-invariance] are the reductions of\nthe normalizations, the lisse-uniqueness of\n[lem-pur-lisse-uniqueness] reduces, and the splitting-principle\ndescent of one element of an abelian group used in\n[thm-pur-diagonal-dualizing-object] reduces for the same reason\n(the Künneth and supported-cohomology groups of\n[lem-pur-kunneth-supported] are compatible with the coefficient\nreduction, the boundary of the Kummer class reducing to the boundary\nof the reduced Kummer class). Hence the vertical isomorphisms of the\nsquare identify $\\operatorname{red}_{n,m}(\\gamma_{f,K})$ with\n$\\gamma_{f,\\operatorname{red}_{n,m}K}$, which is the commutativity\nof the displayed square. Step 4: the remaining statements. The\naffine orientations of [thm-pur-affine-line-orientation] are\nconstructed from the Kummer boundary, whose reduction is the boundary\nof the reduced Kummer class, i.e. the reduction of the orientation;\nthe smooth trace of [def-pur-smooth-trace] reduces because the\ncounit of the adjunction reduces (the adjunction itself is compatible\nwith the finite reduction of the coefficient ring); the composition\nand base-change coherence statements are the compatible systems\nobtained from Steps 1–3 applied to the constituents of the two\nsquares.",
+   "uses": [
+    "def-pur-smooth-purity-map",
+    "cor-pur-affine-space-zero-section-purity",
+    "thm-pur-affine-line-orientation",
+    "lem-cbc-proetale-stalk-conservative",
+    "def-weil-derived-tensor",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-sf-flat-model",
+    "lem-sf-reduction-flat-model",
+    "def-weil-exceptional-inverse-image",
+    "def-coefficient-twists-detailed",
+    "thm-pur-dnc-invariance",
+    "lem-pur-lisse-uniqueness",
+    "thm-pur-diagonal-dualizing-object",
+    "lem-pur-kunneth-supported",
+    "def-pur-smooth-trace"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-smooth-purity-map",
+  "cor-pur-affine-space-zero-section-purity",
+  "thm-pur-affine-line-orientation",
+  "lem-cbc-proetale-stalk-conservative",
+  "def-weil-derived-tensor",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-sf-flat-model",
+  "lem-sf-reduction-flat-model",
+  "def-weil-exceptional-inverse-image",
+  "def-coefficient-twists-detailed",
+  "thm-pur-dnc-invariance",
+  "lem-pur-lisse-uniqueness",
+  "thm-pur-diagonal-dualizing-object",
+  "lem-pur-kunneth-supported",
+  "def-pur-smooth-trace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-finite-reduction-of-purity.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "padded_uses"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2022,
+ "blueprint_uses": [
+  "cor-pur-affine-space-zero-section-purity",
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-pur-smooth-purity-map",
+  "def-pur-smooth-trace",
+  "def-sbc-smooth-morphisms",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "lem-cbc-proetale-stalk-conservative",
+  "lem-pur-kunneth-supported",
+  "lem-pur-lisse-uniqueness",
+  "lem-sf-flat-model",
+  "lem-sf-reduction-flat-model",
+  "thm-pur-affine-line-orientation",
+  "thm-pur-composition-coherence",
+  "thm-pur-diagonal-dualizing-object",
+  "thm-pur-dnc-invariance",
+  "thm-pur-smooth-base-change-coherence"
+ ],
+ "proof_split_by": "paragraphs"
+}

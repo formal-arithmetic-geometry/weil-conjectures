@@ -1,0 +1,90 @@
+{
+ "id": "lem-kun-0f09",
+ "kind": "statement",
+ "title": "Smooth base change for limits of smooth schemes",
+ "statement": "Let $S$ be a scheme and $S'=\\varprojlim_iS_i$ a directed inverse\nlimit of schemes $S_i$ which are\nsmooth, quasi-compact and\nquasi-separated over $S$, with affine transition morphisms. Let\n$f:X\\to S$ be quasi-compact\nand quasi-separated and form the\ncartesian square\n\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{\\;g'\\;}&X\\\\\n\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle f}\\\\\nS'&\\xrightarrow{\\;g\\;}&S .\n\\end{array}\n$$\n\nThen $g^{-1}Rf_*E=Rf'_*(g')^{-1}E$ for any\n$E\\in\\Dplus(X_{\\Et})$ whose cohomology sheaves have stalks which are\ntorsion of orders invertible on $S$, in the sense of\n[def-kun-torsion-invertible].\n(*Source:* Stacks Project,\n[Tag\n`0F09`](https://stacks.math.columbia.edu/tag/0F09), in the case used in this chapter, in which every $S_i$ is\nquasi-compact and quasi-separated over $S$; the proof below assembles that\ncase from the smooth base change theorem of the Kunneth chapter and the limit\nstatement [lem-kun-0ezt].)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f09.md",
+  "place": "node lem-kun-0f09, order 1754",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F09"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-kun-torsion-invertible",
+  "lem-kun-0ezt",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1 (the sheaf case).* Let $F$ be an abelian sheaf on\n$X_{\\Et}$ with torsion stalks of orders invertible on $S$, and fix\n$p\\ge0$. For every $i$ form the cartesian square\n\n$$\n\\begin{array}{ccc}\nX&\\xleftarrow{\\;g'_i\\;}&X\\times_SS_i\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle f_i}\\\\\nS&\\xleftarrow{\\;g_i\\;}&S_i\n\\end{array}\n$$\n\nwith $g_i:S_i\\to S$ smooth and quasi-compact and quasi-separated\n([def-sbc-smooth-morphisms],\n[def-weil-pbc-scheme-conventions]) and\n$f_i=f\\times_S\\id_{S_i}$. The schemes $X\\times_SS_i$ form an inverse\nsystem with affine transition morphisms whose limit is\n$X'=X\\times_SS'$, by\n[lem-kun-fibre-product-limits] (limits and fibre products commute), so\nthe squares displayed above form an inverse system of cartesian squares, in\nthe sense of [lem-kun-0ezt], with limit the square of the\nstatement.\n\nSince $g_i$ is smooth and $f$ is quasi-compact and quasi-separated, the\nsmooth base change theorem [sbc-thm-smooth-base-change] of the smooth-base-change chapter,\napplied to the displayed square in the transposed orientation, gives\n\n$$\ng_i^{-1}R^pf_*F\\xrightarrow{\\ \\sim\\ }R^pf_{i,*}(g'_i)^{-1}F ,\n$$\n\nthe coefficient $F$ having torsion stalks of orders invertible on $S$,\nhence on the smooth $S$-scheme $S_i$. The sheaves\n$F_i:=(g'_i)^{-1}F$ form a compatible system with\n$\\varinjlim_ip_i^{-1}F_i=(g')^{-1}F$, so the higher-direct-image form\n[lem-kun-0ezt] of the limit statement, applied for the fixed $p$,\nyields\n\n$$\ng^{-1}R^pf_*F\\xrightarrow{\\ \\sim\\ }R^pf'_*(g')^{-1}F .\n$$",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-weil-pbc-scheme-conventions",
+    "lem-kun-fibre-product-limits",
+    "lem-kun-0ezt",
+    "sbc-thm-smooth-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2 (the complex case).* Let $E\\in\\Dplus(X_{\\Et})$ be as in the\nstatement. By [def-weil-pbc-hypercohomology-filtrations] the two\nhypercohomology spectral sequences\n\n$$\nE_2^{p,q}=R^pf_*\\mathcal H^q(E)\\Longrightarrow\\mathcal H^{p+q}(Rf_*E),\n\\qquad\nE_2'^{p,q}=R^pf'_*(g')^{-1}\\mathcal H^q(E)\n\\Longrightarrow\\mathcal H^{p+q}(Rf'_*(g')^{-1}E)\n$$\n\nare defined by the truncation filtrations, and by\n[lemma-weil-pbc-hypercohomology-convergence] the induced filtrations in\neach degree are finite, exhaustive and separated. The exchange morphism\n$g^{-1}Rf_*E\\to Rf'_*(g')^{-1}E$ of [def-kun-unbounded-exchange] is\nnatural in the coefficient object\n([lem-kun-bc-base-change]), so it is compatible with the truncation\ntriangles and induces a morphism of filtered objects, hence a morphism of\nthe two spectral sequences which on $E_2^{p,q}$ is the base-change map\n$g^{-1}R^pf_*\\mathcal H^q(E)\\to R^pf'_*(g')^{-1}\\mathcal H^q(E)$. By Step\n1 this is an isomorphism for every $(p,q)$; a morphism of spectral\nsequences which is an isomorphism on $E_2$ is an isomorphism on every\n$E_r$ and hence on the associated graded objects of the abutments. Since\nthe filtrations are finite, [lem-sp-finite-filtration-induction]\nupgrades this to an isomorphism of the abutments in every degree, i.e. to\n\n$$\n\\mathcal H^n\\bigl(g^{-1}Rf_*E\\bigr)\\xrightarrow{\\ \\sim\\ }\n\\mathcal H^n\\bigl(Rf'_*(g')^{-1}E\\bigr)\\qquad(n\\in\\mathbf Z).\n$$\n\nA morphism in $D(S'_{\\Et})$ which is an isomorphism on all cohomology\nsheaves is an isomorphism ([def-weil-pbc-derived-categories]), which is\nthe assertion.",
+   "uses": [
+    "def-weil-pbc-hypercohomology-filtrations",
+    "lemma-weil-pbc-hypercohomology-convergence",
+    "def-kun-unbounded-exchange",
+    "lem-kun-bc-base-change",
+    "lem-sp-finite-filtration-induction",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-fibre-product-limits",
+  "lem-kun-0ezt",
+  "sbc-thm-smooth-base-change",
+  "def-weil-pbc-hypercohomology-filtrations",
+  "lemma-weil-pbc-hypercohomology-convergence",
+  "def-kun-unbounded-exchange",
+  "lem-kun-bc-base-change",
+  "lem-sp-finite-filtration-induction",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f09.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1754,
+ "blueprint_uses": [
+  "def-kun-torsion-invertible",
+  "def-kun-unbounded-exchange",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-hypercohomology-filtrations",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-0ezt",
+  "lem-kun-bc-base-change",
+  "lem-kun-fibre-product-limits",
+  "lem-sp-finite-filtration-induction",
+  "lemma-weil-pbc-hypercohomology-convergence",
+  "sbc-thm-smooth-base-change"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof_split_by": "labels"
+}

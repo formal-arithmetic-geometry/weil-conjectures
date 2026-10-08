@@ -1,0 +1,128 @@
+{
+ "id": "lem-a1-middle-extension-endpoints",
+ "kind": "statement",
+ "title": "Degree zero and degree two",
+ "statement": "Let $j:U_0\\hookrightarrow C_0$ be a dense open immersion, with $C_0$ a\nsmooth geometrically connected affine curve over $k_0=\\mathbf F_q$, and\nlet $\\mathcal F$ be a lisse Weil sheaf on $U_0$ with generic geometric\nrepresentation $V$ ([def-wf-fundamental-representation]). For the\nmiddle extension $j_*\\mathcal F$ of [def-wf-middle-extension], in the\ncompactly supported cohomology of [def-weil-ordinary-compact-cohomology],\n\n$$\nH_c^0(C,j_*\\mathcal F)=0,\\qquad\nH_c^2(C,j_*\\mathcal F)\\simeq V_{\\pi_1(U)}(-1)\n$$\n\nFrobenius-equivariantly, and $H_c^r(C,j_*\\mathcal F)=0$ for\n$r\\notin\\{0,1,2\\}$. If $\\mathcal F$ is punctually $\\iota$-pure of weight\n$w$, then $H_c^2(C,j_*\\mathcal F)$ is $\\iota$-pure of weight $w+2$\n(possibly zero).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-middle-extension-endpoints.md",
+  "place": "node lem-a1-middle-extension-endpoints, order 2736"
+ },
+ "stmt_deps": [
+  "def-wf-fundamental-representation",
+  "def-wf-middle-extension",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-punctual-weights"
+ ],
+ "proof": [
+  {
+   "text": "As a dense open subscheme of the irreducible affine curve $C_0$ (and\nlikewise after base change to $k$), $U_0$ is a smooth geometrically\nconnected affine curve: the complement $Z_0=C_0\\setminus U_0$ is a\nfinite set of closed points, and the complement of finitely many closed\npoints in an affine curve is affine. So the results on affine curves\napply to $(U_0,\\mathcal F)$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Degree zero.* A class in $H_c^0(C,j_*\\mathcal F)$ is a global section\n$s$ of $j_*\\mathcal F$ over $C$ whose support is proper over $k$. By\ndefinition of the ordinary direct image,\n$\\Gamma(C,j_*\\mathcal F)=\\Gamma(U,\\mathcal F)$, so $s$ corresponds to a\nsection $s|_U$ of the lisse sheaf $\\mathcal F$ on $U$, and $s=0$ if and\nonly if $s|_U=0$. If $s\\neq0$, then $s|_U$ is a nonzero section of a\nlisse sheaf on the connected curve $U$, hence has nonzero germ at every\npoint of $U$ (as in the proof of [lem-a1-affine-hc0]). The support of\n$s$ is closed in $C$ and contains $U$, hence is all of $C$, since $U$ is\ndense. But $C$ is an affine curve, so it is not proper over $k$. Thus\n$s=0$ and $H_c^0(C,j_*\\mathcal F)=0$.",
+   "uses": [
+    "lem-a1-affine-hc0"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Degree two and the range.* The boundary localization triangle\n[prop-a1-curve-boundary-sequence] for $j$, with $i:Z\\hookrightarrow C$,\n\n$$\nR\\Gamma_c(U,\\mathcal F)\\longrightarrow\nR\\Gamma_c(C,j_*\\mathcal F)\\longrightarrow\nR\\Gamma_c(Z,i^*j_*\\mathcal F)\\longrightarrow,\n$$\n\nhas its third term concentrated in degree zero. Its long exact\nsequence therefore gives isomorphisms\n$H_c^r(U,\\mathcal F)\\xrightarrow{\\sim}H_c^r(C,j_*\\mathcal F)$ for all\n$r\\geq2$ and for all $r<0$. The lisse sheaf $\\mathcal F$ is\nconstructible, so [lem-zl-affine-curve-range] on the affine curve\n$U_0$ gives $H_c^r(U,\\mathcal F)=0$ for $r\\notin\\{0,1,2\\}$; hence\n$H_c^r(C,j_*\\mathcal F)=0$ for $r\\notin\\{0,1,2\\}$. For $r=2$, composing\nwith the canonical Frobenius-equivariant isomorphism of\n[lem-a1-affine-hc2] on $U_0$ gives\n\n$$\nH_c^2(C,j_*\\mathcal F)\\;\\simeq\\;H_c^2(U,\\mathcal F)\\;\\simeq\\;\nV_{\\pi_1(U)}(-1).\n$$\n\nThe triangle is formed from Weil complexes over $k_0$, so the\nisomorphism $H_c^2(U,\\mathcal F)\\to H_c^2(C,j_*\\mathcal F)$ commutes\nwith the Frobenius operators, and the composite is\nFrobenius-equivariant.",
+   "uses": [
+    "prop-a1-curve-boundary-sequence",
+    "lem-zl-affine-curve-range",
+    "lem-a1-affine-hc2"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Purity.* Suppose $\\mathcal F$ is punctually $\\iota$-pure of weight\n$w$. By [lem-a1-geometric-coinvariants-pure] the coinvariant quotient\n$W=V_{\\pi_1(U)}$ with its induced Frobenius $F_W$ is $\\iota$-pure of\nweight $w$. On the twist $W(-1)$ the Frobenius is $q\\,F_W$, by the\nstalk formula of [lem-wf-tate-twist-frobenius] for $E(-1)$ over\n$k_0=\\mathbf F_q$. So every eigenvalue of Frobenius on $W(-1)$ has\n$\\iota$-modulus $q\\cdot q^{w/2}=q^{(w+2)/2}$, and $W(-1)$, hence\n$H_c^2(C,j_*\\mathcal F)$, is $\\iota$-pure of weight $w+2$ in the sense\nof [def-weil-frobenius-module-weights]. It may be zero, which happens\nexactly when $V$ has no nonzero geometrically constant quotient.",
+   "uses": [
+    "lem-a1-geometric-coinvariants-pure",
+    "lem-wf-tate-twist-frobenius",
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-affine-hc0",
+  "prop-a1-curve-boundary-sequence",
+  "lem-zl-affine-curve-range",
+  "lem-a1-affine-hc2",
+  "lem-a1-geometric-coinvariants-pure",
+  "lem-wf-tate-twist-frobenius",
+  "def-weil-frobenius-module-weights"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-middle-extension-endpoints.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_multiple"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2736,
+ "blueprint_uses": [
+  "def-weil-frobenius-module-weights",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-punctual-weights",
+  "def-wf-fundamental-representation",
+  "def-wf-middle-extension",
+  "lem-a1-affine-hc0",
+  "lem-a1-affine-hc2",
+  "lem-a1-geometric-coinvariants-pure",
+  "lem-wf-tate-twist-frobenius",
+  "lem-zl-affine-curve-range",
+  "prop-a1-curve-boundary-sequence"
+ ],
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.AffineLine.Endpoints",
+  "declaration": "AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage",
+  "branch": "slopmaster2",
+  "line": 78,
+  "sorry_free": false,
+  "body_lines": 1,
+  "others": [
+   {
+    "module": "WeilConjectures.DeligneLaumon.AffineLine.Endpoints",
+    "declaration": "AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage_zero",
+    "branch": "slopmaster2",
+    "line": 89,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.DeligneLaumon.AffineLine.Endpoints",
+    "declaration": "AlgebraicGeometry.nonempty_equiv_compactlySupportedCohomology_directImage_two",
+    "branch": "slopmaster2",
+    "line": 109,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.DeligneLaumon.AffineLine.Endpoints",
+    "declaration": "AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two",
+    "branch": "slopmaster2",
+    "line": 120,
+    "sorry_free": false,
+    "body_lines": 1
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage",
+  "AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage_zero",
+  "AlgebraicGeometry.nonempty_equiv_compactlySupportedCohomology_directImage_two",
+  "AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two"
+ ],
+ "uses_not_cited": [
+  "def-weil-punctual-weights"
+ ],
+ "proof_split_by": "labels"
+}

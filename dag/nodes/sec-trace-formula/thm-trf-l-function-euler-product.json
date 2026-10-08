@@ -1,0 +1,151 @@
+{
+ "id": "thm-trf-l-function-euler-product",
+ "kind": "statement",
+ "title": "Euler-product form of the trace formula",
+ "statement": "Fix the global finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, let $X_0$ be a separated finite-type\n$k_0$-scheme, and put $X=X_0\\times_{k_0}k$. Let\n$\\Lambda\\in\\{E,\\Qlb\\}$ and let $K$ be a Weil complex with\ncoefficients in $\\Lambda$ satisfying the hypotheses of\n[thm-trf-trace-formula-e] (if $\\Lambda=E$) or of\n[thm-trf-grothendieck-lefschetz-qbar] (if $\\Lambda=\\Qlb$). These are\nonly the finite-level hypotheses (explicit etale-origin witnesses and\ncompactification admissibility for the reductions of a lattice of an\n$E$-representative $K_E$). The Weil map $\\varphi_E$ of $K_E$ is an\nisomorphism of $D^b_c(X,E)$, but it need not be integral, or invertible\non any lattice after any rescaling. Write\n$F=F^{\\,1}_{c,K}$ for the global geometric Frobenius on\n$H_c^i(X,K)$, and for a closed point $x\\in|X_0|$ of degree\n$e_x=[\\kappa(x):\\Fq]$ write $F_x$ for the one-circuit local Frobenius\non the stalk $K_{\\bar x}$ (well defined up to conjugation). Put\n\n$$\n\\det\\bigl(1-T^{e_x}F_x\\mid K_{\\bar x}\\bigr)\n:=\\prod_{j\\in\\mathbf Z}\n\\det\\bigl(1-T^{e_x}F_x\\mid H^j(K_{\\bar x})\\bigr)^{(-1)^j},\n\\qquad\nL(X_0,K,T)=\\prod_{x\\in|X_0|}\n\\det\\bigl(1-T^{e_x}F_x\\mid K_{\\bar x}\\bigr)^{-1}.\n$$\n\nThen:\n\n1. The product defining $L(X_0,K,T)$ is locally finite for the\n$T$-adic topology, and $L(X_0,K,T)\\in1+T\\Lambda[[T]]$.\n1. As formal power series in $\\Lambda[[T]]$,\n$$\nL(X_0,K,T)=\\prod_{i\\in\\mathbf Z}\n\\det\\bigl(1-TF\\mid H_c^i(X,K)\\bigr)^{(-1)^{i+1}},\n$$\nthe product being finite.\n1. If $\\dim X_0\\leq1$ and $K$ is a sheaf placed in degree zero, then\n$H_c^i(X,K)=0$ for $i\\notin\\{0,1,2\\}$, so the product in (2) runs\nover $0\\leq i\\leq2$:\n$$\nL(X_0,K,T)=\n\\frac{\\det(1-TF\\mid H_c^1(X,K))}\n{\\det(1-TF\\mid H_c^0(X,K))\\,\\det(1-TF\\mid H_c^2(X,K))}.\n$$\n1. For every field embedding $\\iota:\\Qlb\\to\\mathbf C$, applying\n$\\iota$ coefficientwise carries the identity (2) (for $\\Lambda=\\Qlb$)\nto the corresponding identity in $\\mathbf C[[T]]$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.md",
+  "place": "node thm-trf-l-function-euler-product, order 2400"
+ },
+ "stmt_deps": [
+  "thm-trf-trace-formula-e",
+  "thm-trf-grothendieck-lefschetz-qbar",
+  "def-trf-frobenius-operators",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "*Step 0: the determinant–trace identity.* For an endomorphism $G$ of a\nfinite-dimensional $\\Lambda$-vector space $V$,\n\n$$\n\\det(1-TG\\mid V)^{-1}\n=\\exp\\Bigl(\\sum_{r\\geq1}\\operatorname{Tr}(G^r\\mid V)\\frac{T^r}{r}\\Bigr),\n$$\n\nby [lem-zl-euler-product-identity] (after extending scalars to\n$\\overline{\\mathbf Q}_\\ell\\supseteq\\Lambda$, which changes neither side; $\\exp$ and\n$\\log$ are mutually inverse bijections $T\\Lambda[[T]]\\leftrightarrows1+T\\Lambda[[T]]$\ncarrying sums, including $T$-adically convergent infinite sums, to products). Substituting $T^e$ for\n$T$ gives the same identity with $T^{er}$ in place of $T^r$. For a\ngraded endomorphism of a bounded complex with finite-dimensional\ncohomology, taking the alternating product over the degrees gives\n\n$$\n\\prod_j\\det\\bigl(1-TG\\mid H^j\\bigr)^{(-1)^{j+1}}\n=\\exp\\Bigl(\\sum_{r\\geq1}\\Bigl(\\sum_j(-1)^j\n\\operatorname{Tr}(G^r\\mid H^j)\\Bigr)\\frac{T^r}{r}\\Bigr).\n\\tag{$*$}\n$$",
+   "uses": [
+    "lem-zl-euler-product-identity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 1: powers and finiteness.* We argue at the stage $E$, for the\n$E$-representative $(K_E,\\varphi_E)$ and its operators of\n[prop-trf-rational-frobenius-integral-model]. The $\\Qlb$-operators are\ntheir scalar extensions ([thm-trf-grothendieck-lefschetz-qbar]), and scalar\nextension preserves composition and conjugacy. No integrality of\n$\\varphi_E$ is used in this step.",
+   "uses": [
+    "prop-trf-rational-frobenius-integral-model",
+    "thm-trf-grothendieck-lefschetz-qbar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Global powers.* By definition\n$\\varphi_E^{[m]}=\\varphi_E\\circ Lg_\\gamma^*\\varphi_E^{[m-1]}$ after the\ncomposition isomorphisms of the rationalized pullbacks. This is the\ncocycle identity of [lem-trf-iterated-weil-cocycle], whose proof uses only\nassociativity of composition and naturality of the pullback\nidentifications, so it holds in $D^b_c(X,E)$. The base-change\nisomorphisms at the stage $E$ are rationalizations of the integral ones\n([prop-weil-pbc-rational-transport]). They are therefore natural,\n$g^{*}_{\\gamma,c}\\circ R\\Gamma_c(X,f)=R\\Gamma_c(X,Lg_\\gamma^*f)\\circ g^{*}_{\\gamma,c}$,\nand compatible with composition,\n$g^{*}_{\\gamma,c}\\circ g^{m-1,*}_{\\gamma,c}=g^{m,*}_{\\gamma,c}$. Hence\n\n$$\nF^1_{c,K_E}\\circ F^{\\,m-1}_{c,K_E}\n=R\\Gamma_c(X,\\varphi_E)\\circ R\\Gamma_c(X,Lg_\\gamma^*\\varphi_E^{[m-1]})\\circ\ng^{*}_{\\gamma,c}\\circ g^{m-1,*}_{\\gamma,c}\n=R\\Gamma_c(X,\\varphi_E^{[m]})\\circ g^{m,*}_{\\gamma,c}=F^{\\,m}_{c,K_E},\n$$\n\nand by induction $F^m_{c,K}=(F^1_{c,K})^m$.",
+   "uses": [
+    "lem-trf-iterated-weil-cocycle",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Local powers.* Consider the proofs of the conjugacy lemma\n[lem-trf-local-frobenius-conjugacy] and the degree formula\n[lem-trf-frobenius-degree-formula]. They use only four inputs:\n(a) the cocycle identity;\n(b) the canonical stalk identifications\n$(Lf^*M)_{\\bar z}\\cong M_{f\\bar z}$ and the fixed-point identifications\nentering $\\tau$, natural in $M$ and compatible with composition;\n(c) invertibility of the Weil map, for the inverse transports $T_i^{-1}$;\n(d) conjugacy invariance of traces.\n\nAll four hold at the stage $E$:\n(a) as just shown;\n(b) the $E$-stage identifications are rationalizations of the integral\nones ([prop-weil-pbc-rational-transport]), hence natural and compatible;\n(c) $\\varphi_E$ is an isomorphism of $D^b_c(X,E)$ because $K$ is a Weil\ncomplex;\n(d) is [prop-trf-trace-formal-laws], item (1), over $E$.\n\nSo those proofs apply verbatim to $(K_E,\\varphi_E)$. The one-circuit local\nFrobenius $F_x=F_{x_{e_x},e_x}$ is well defined up to conjugation by\n$E$-linear isomorphisms of stalk complexes. Moreover, for every\n$y\\in X_0(\\mathbf F_{q^m})$ above $x$ ($e_x\\mid m$), the operator $F_{y,m}$\non $K_{\\bar y}$ is conjugate to $F_x^{\\,m/e_x}$ on $K_{\\bar x}$ by such an\nisomorphism.",
+   "uses": [
+    "lem-trf-local-frobenius-conjugacy",
+    "lem-trf-frobenius-degree-formula",
+    "prop-weil-pbc-rational-transport",
+    "prop-trf-trace-formal-laws"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Finiteness.* By the finiteness clause of [thm-trf-trace-formula-e] (and,\nfor $\\Lambda=\\Qlb$, scalar extension), the spaces $H_c^i(X,K)$ and\n$H^j(K_{\\bar x})$ are finite-dimensional over $\\Lambda$ and nonzero for only\nfinitely many $i$, $j$. Hence each local factor lies in\n$1+T^{e_x}\\Lambda[[T]]$, its determinant being invariant under\nconjugation of $F_x$, and the product in (2) is finite.",
+   "uses": [
+    "thm-trf-trace-formula-e"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: local finiteness.* A closed point of degree $e$ has\nexactly $e$ points of $X_0(\\mathbf F_{q^e})$ above it, and\n$X_0(\\mathbf F_{q^e})$ is finite because $X_0$ is of finite type\n([def-weil-scheme-morphism-properties]); so for each $N$ only\nfinitely many $x\\in|X_0|$ have $e_x\\leq N$. As the factor at $x$ is\n$\\equiv1\\bmod T^{e_x}$, the product $L(X_0,K,T)$ converges\n$T$-adically, lies in $1+T\\Lambda[[T]]$, and\n$\\log L(X_0,K,T)=\\sum_x\\log\\det(1-T^{e_x}F_x\\mid K_{\\bar x})^{-1}$ is\na convergent sum. This is (1).",
+   "uses": [
+    "def-weil-scheme-morphism-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3: grouping by closed points.* Let $m\\geq1$. The points of\n$X_0(\\mathbf F_{q^m})$ lie over the closed points $x$ with\n$e_x\\mid m$, exactly $e_x$ of them over each such $x$. By Step 1,\n$F_{y,m}$ on $K_{\\bar y}$ is conjugate to $F_x^{\\,m/e_x}$ on $K_{\\bar x}$\nby an isomorphism of complexes of $\\Lambda$-vector spaces, for every $y$\nabove $x$. The induced maps on each $H^j$ are therefore conjugate, and\ntheir ordinary traces agree. Hence the right-hand side of the trace\nformula of\n[thm-trf-trace-formula-e] (for $\\Lambda=E$) or\n[thm-trf-grothendieck-lefschetz-qbar] (for $\\Lambda=\\Qlb$) is\n\n$$\n\\sum_{y\\in X_0(\\mathbf F_{q^m})}\\sum_j(-1)^j\n\\operatorname{Tr}\\bigl(F_{y,m}\\mid H^j(K_{\\bar y})\\bigr)\n=\\sum_{\\substack{x\\in|X_0|\\\\e_x\\mid m}}e_x\n\\sum_j(-1)^j\\operatorname{Tr}\\bigl(F_x^{\\,m/e_x}\\mid H^j(K_{\\bar x})\\bigr).\n$$",
+   "uses": [
+    "thm-trf-trace-formula-e",
+    "thm-trf-grothendieck-lefschetz-qbar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4: the identity (2).* Multiply the trace formula by $T^m/m$ and\nsum over $m\\geq1$. On the cohomology side, $(*)$ applied to\n$G=F$ on the complex with cohomology $H_c^i(X,K)$ (Step 1:\n$F^m_{c,K}=F^m$) gives the logarithm of the right-hand side of (2).\nOn the point side, writing $m=re_x$,\n\n$$\n\\sum_{m\\geq1}\\frac{T^m}{m}\\sum_{e_x\\mid m}e_x\\,t_x(m/e_x)\n=\\sum_{x\\in|X_0|}\\sum_{r\\geq1}t_x(r)\\frac{T^{e_xr}}{r},\n\\qquad\nt_x(r)=\\sum_j(-1)^j\\operatorname{Tr}\\bigl(F_x^{\\,r}\\mid H^j(K_{\\bar x})\\bigr),\n$$\n\nthe rearrangement being legitimate because only finitely many\n$x$ contribute to each coefficient (Step 2); by $(*)$ with $T^{e_x}$ in\nplace of $T$, the inner sum is\n$\\log\\det(1-T^{e_x}F_x\\mid K_{\\bar x})^{-1}$, so the total is\n$\\log L(X_0,K,T)$ (Step 2). Applying $\\exp$ gives (2).",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 5: curves.* Let $\\dim X_0\\leq1$ and $K$ a sheaf in degree zero;\nthe groups $H_c^i(X,K)$ depend only on $K$, so for $\\Lambda=\\Qlb$ we\nmay compute them from the $E$-representative, and we may take\n$\\Lambda=E$. Let $K_{\\mathcal O_E}$ be a lattice of $K$ (one exists by\n[thm-trf-trace-formula-e]). In\nthe rational category [def-weil-pbc-rational-category] a morphism\nwhose cone has cohomology sheaves killed by a power of $\\varpi$ is an\nisomorphism (on a bounded cone with cohomology killed by $\\varpi^N$ in\n$b-a+1$ degrees, $\\varpi^{N(b-a+1)}$ kills the identity, by the\ntruncation triangles). The cohomology sheaves $\\mathcal H^j$ of\n$K_{\\mathcal O_E}$ for $j\\neq0$ and the $\\varpi$-power torsion of\n$\\mathcal H^0$ vanish after inverting $\\varpi$ and, being\nconstructible, are killed by a power of $\\varpi$; so\n$K\\cong M[1/\\varpi]$ for the $\\varpi$-torsion-free constructible\n$\\mathcal O_E$-sheaf $M=\\mathcal H^0(K_{\\mathcal O_E})/(\\text{torsion})$,\nand $H_c^i(X,K)=H^i(R\\Gamma_c(X,M))\\otimes_{\\mathcal O_E}E$. The\nlevels $M\\otimes^L_{\\mathcal O_E}A_n=M/\\varpi^nM$ of the reduction tower of\n$M$ are constructible sheaves in degree zero, since $M$ is torsion-free. By\nthe argument of Step 0 of [thm-trf-trace-formula-e] they lie in\n$D^b_{ctf}(X,A_n)$ and form a normalized $A_\\bullet$-system. Items (1) and\n(2) of [prop-trf-adic-coefficient-morphism-systems] need no Weil\nstructure, and they give that $P=R\\Gamma_c(X,M)$ is represented by a\nbounded complex of finite free $\\mathcal O_E$-modules with\n$P\\otimes^L_{\\mathcal O_E}A_1\\cong R\\Gamma_c(X,M/\\varpi M)$. For a perfect\ncomplex over the discrete valuation ring $\\mathcal O_E$, the universal\ncoefficient sequence gives\n$\\dim_E H^i(P)\\otimes E=\\operatorname{rank}H^i(P)\n\\leq\\dim_{A_1}H^i(P\\otimes^LA_1)$. Finally choose a compactification\n$j:X\\hookrightarrow\\bar X$ over $k_0$ by [thm-nagata-compactification];\nthen $\\dim\\bar X\\leq1$ after replacing $\\bar X$ by the closure of $X$,\nand $R\\Gamma_c(X,M/\\varpi M)\\cong R\\Gamma(\\bar X,j_!(M/\\varpi M))$ by\n[lem-trf-compactification-cohomology]. The cohomology of the sheaf\n$j_!(M/\\varpi M)$ vanishes in negative degrees, and in degrees $>2$ by\n[thm-sc-finite-type-torsion-cd] applied over the algebraically closed\nfield $k$, whose torsion cohomological dimension is $0$ by\n[lem-sf-separably-closed-torsion-cd]. Hence $H_c^i(X,K)=0$ for\n$i\\notin\\{0,1,2\\}$, which is (3).",
+   "uses": [
+    "thm-trf-trace-formula-e",
+    "def-weil-pbc-rational-category",
+    "prop-trf-adic-coefficient-morphism-systems",
+    "thm-nagata-compactification",
+    "lem-trf-compactification-cohomology",
+    "thm-sc-finite-type-torsion-cd",
+    "lem-sf-separably-closed-torsion-cd"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 6: the embedding.* A field embedding $\\iota$ is a ring\nhomomorphism; applied coefficientwise it is a ring homomorphism\n$\\Qlb[[T]]\\to\\mathbf C[[T]]$, continuous for the $T$-adic topologies,\nso it carries the finite product in (2), each determinant (a\npolynomial in the matrix entries) and the convergent product\n$L(X_0,K,T)$ to the corresponding expressions for the matrices\n$\\iota(F)$, $\\iota(F_x)$. This is (4).",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-euler-product-identity",
+  "prop-trf-rational-frobenius-integral-model",
+  "thm-trf-grothendieck-lefschetz-qbar",
+  "lem-trf-iterated-weil-cocycle",
+  "prop-weil-pbc-rational-transport",
+  "lem-trf-local-frobenius-conjugacy",
+  "lem-trf-frobenius-degree-formula",
+  "prop-trf-trace-formal-laws",
+  "thm-trf-trace-formula-e",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-rational-category",
+  "prop-trf-adic-coefficient-morphism-systems",
+  "thm-nagata-compactification",
+  "lem-trf-compactification-cohomology",
+  "thm-sc-finite-type-torsion-cd",
+  "lem-sf-separably-closed-torsion-cd"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2400,
+ "blueprint_uses": [
+  "def-trf-frobenius-operators",
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-rational-category",
+  "def-weil-scheme-morphism-properties",
+  "lem-sf-separably-closed-torsion-cd",
+  "lem-trf-compactification-cohomology",
+  "lem-trf-frobenius-degree-formula",
+  "lem-trf-iterated-weil-cocycle",
+  "lem-trf-local-frobenius-conjugacy",
+  "lem-zl-euler-product-identity",
+  "prop-trf-adic-coefficient-morphism-systems",
+  "prop-trf-rational-frobenius-integral-model",
+  "prop-trf-trace-formal-laws",
+  "prop-weil-pbc-rational-transport",
+  "thm-nagata-compactification",
+  "thm-sc-finite-type-torsion-cd",
+  "thm-trf-grothendieck-lefschetz-qbar",
+  "thm-trf-trace-formula-e"
+ ],
+ "uses_not_cited": [
+  "def-trf-frobenius-operators",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof_split_by": "labels"
+}

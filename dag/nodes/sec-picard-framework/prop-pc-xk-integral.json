@@ -1,0 +1,92 @@
+{
+ "id": "prop-pc-xk-integral",
+ "kind": "statement",
+ "title": "Base changes of $X$ are smooth projective curves",
+ "statement": "Let $k$ be a separably closed field\nand let $X$ be a smooth\nprojective curve over $k$ with a\n$k$-rational point $\\sigma$. Then:\n\n1. $H^0(X,\\mathcal{O}_X)=k$ and $f_*\\mathcal{O}_X=\\mathcal{O}_k$ (where $f:X\\to\\operatorname{Spec} k$);\n1. for every field extension $K/k$, the\nbase change $X_K$ is a smooth\nprojective curve over $K$ (in particular $X_K$ is integral, and $X$ is\ngeometrically integral), with $H^0(X_K,\\mathcal{O}_{X_K})=K$ and\n$\\dim_KH^1(X_K,\\mathcal{O}_{X_K})=\\dim_kH^1(X,\\mathcal{O}_X)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-twist/prop-pc-xk-integral.md",
+  "place": "node prop-pc-xk-integral, order 760"
+ },
+ "stmt_deps": [
+  "def-pc-rational-point",
+  "def-pc-separably-closed",
+  "def-pc-smooth-projective-curve"
+ ],
+ "proof": [
+  {
+   "text": "Since $X$ is a proper variety (projective $\\Rightarrow$ proper,\n[lem-pc-projective-proper]; a curve is a variety, hence integral,\n[def-pc-curve]), the ring $k':=H^0(X,\\mathcal{O}_X)$ is a finite field\nextension of $k$ by [lem-pc-h0-proper-variety] (1). The section\n$\\sigma$ gives a $k$-algebra homomorphism $\\sigma^\\#:H^0(X,\\mathcal{O}_X)\\to H^0(\\operatorname{Spec}(k),\\mathcal{O}_k)=k$, and a field homomorphism $k'\\to k$ over $k$ is\ninjective; hence $[k':k]=1$, i.e. $k'=k$; since $H^0(X,\\mathcal{O}_X)=k$ the\nquasi-coherent $\\mathcal{O}_k$-module $f_*\\mathcal{O}_X$ is free of rank one, so\n$f_*\\mathcal{O}_X=\\mathcal{O}_k$. This proves (1).",
+   "uses": [
+    "lem-pc-projective-proper",
+    "def-pc-curve",
+    "lem-pc-h0-proper-variety"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For (2): let $K/k$ be a field extension and let\n$g:\\operatorname{Spec}(K)\\to\\operatorname{Spec}(k)$. The base change $g$ is flat\n([lem-pc-flat-field]), and $f$ is quasi-compact and quasi-separated\n(proper, [lem-pc-projective-proper]), so by\n[lem-pc-flat-base-change-cohom] applied to $\\mathcal{F}=\\mathcal{O}_X$,\n\n$$\ng^*f_*\\mathcal{O}_X\\;\\cong\\;f_{K,*}\\mathcal{O}_{X_K},\n$$\n\nhence $f_{K,*}\\mathcal{O}_{X_K}=\\mathcal{O}_K$ and $H^0(X_K,\\mathcal{O}_{X_K})=K$; likewise\n$H^1(X_K,\\mathcal{O}_{X_K})\\cong H^1(X,\\mathcal{O}_X)\\otimes_kK$, whence\n$\\dim_K H^1(X_K,\\mathcal{O}_{X_K})=\\dim_kH^1(X,\\mathcal{O}_X)$.\nThe morphism $X_K\\to\\operatorname{Spec}(K)$ is smooth (base change of smooth,\n[lem-pc-proper-base-change]) and proper (base change of proper,\n[lem-pc-proper-base-change]), so $X_K$ is regular\n([lem-sc-smooth-regular]), hence normal ([rem-pc-regular-normal])\nand reduced. Moreover $X_K$ is geometrically reduced: for every $K'/K$,\n$X_{K'}$ is smooth over $K'$, hence regular, hence reduced; and $X_K$ is\nproper, so [lem-pc-h0-geom-connected] (with $k$ replaced by $K$ and\n$X$ by $X_K$) shows that $X_K$ is geometrically connected, in particular\nconnected. A Noetherian normal connected scheme is irreducible by\n[rem-pc-regular-normal]: the normal scheme $X_K$ is a finite disjoint\nunion of normal integral schemes, and connectedness forces a single\ncomponent. Hence $X_K$ is integral. By [lem-pc-dim-base-change]\nthe dimension of $X_K$ is $1$, and $X_K\\to\\operatorname{Spec}(K)$ is of finite type and\nseparated (base changes of finite type and separated morphisms), so $X_K$\nis a variety of dimension $1$, i.e. a curve ([def-pc-curve]).\nFinally $X_K$ is projective: the closed immersion\n$i:X\\to\\mathbf{P}^n_k$ base changes to a closed immersion\n$i_K:X_K\\to\\mathbf{P}^n_K$ ([lem-pc-closed-imm-base-change]). This proves\n(2); applying (2) to $K=k$ (and all extensions) gives geometric\nintegrality of $X$.",
+   "uses": [
+    "lem-pc-flat-field",
+    "lem-pc-projective-proper",
+    "lem-pc-flat-base-change-cohom",
+    "lem-pc-proper-base-change",
+    "lem-sc-smooth-regular",
+    "lem-pc-h0-geom-connected",
+    "lem-pc-dim-base-change",
+    "def-pc-curve",
+    "lem-pc-closed-imm-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "def-pc-curve",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-flat-field",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-proper-base-change",
+  "lem-sc-smooth-regular",
+  "lem-pc-h0-geom-connected",
+  "lem-pc-dim-base-change",
+  "lem-pc-closed-imm-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-twist/prop-pc-xk-integral.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_remark"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 760,
+ "blueprint_uses": [
+  "def-pc-curve",
+  "def-pc-rational-point",
+  "def-pc-separably-closed",
+  "def-pc-smooth-projective-curve",
+  "lem-pc-closed-imm-base-change",
+  "lem-pc-dim-base-change",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-flat-field",
+  "lem-pc-h0-geom-connected",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-projective-proper",
+  "lem-pc-proper-base-change",
+  "lem-sc-smooth-regular",
+  "rem-pc-regular-normal"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-pc-rational-point",
+  "def-pc-separably-closed",
+  "def-pc-smooth-projective-curve"
+ ],
+ "proof_split_by": "paragraphs"
+}

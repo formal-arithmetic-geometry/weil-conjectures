@@ -1,0 +1,100 @@
+{
+ "id": "thm-zl-lefschetz-weil-identity",
+ "kind": "statement",
+ "title": "Trace-to-determinant identity",
+ "statement": "Fix the finite-field datum\n$(p,a,q,k_0,k)$, where $q=p^a$, and a prime $\\ell\\neq p$; write\n$\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of $\\Ql$,\nand interpret the $\\Qlb$-objects in the\nalgebraically closed\ncoefficient category. Let $X_0/k_0$ be\nsmooth, proper, geometrically\nconnected of pure dimension $d\\in\\mathbf Z_{\\geq0}$, put\n$X=X_0\\times_{k_0}k$, and let $(\\Qlb)_X$ be the constant\nWeil sheaf with its canonical Weil\nstructure. Let $F$ be the\nglobal geometric Frobenius\non the ordinary and\ncompact-support cohomology of $(\\Qlb)_X$, in the\ngeometric-Frobenius convention. For every\n$0\\leq i\\leq2d$, put\n\n$$\nV_i=H^i(X,\\Qlb),\\qquad F_i=F\\vert_{V_i},\\qquad\nP_{i,\\ell}(T)=\\det(1-TF_i\\mid V_i)\\in\\Qlb[T],\n$$\n\nthe data obtained from the\nsmooth-proper\ncohomological family by scalar extension. Let $Z(X_0,T)$ be the\npoint-count zeta series, and assume\nthe point-counting trace formula\n[cor-trf-point-counting] of the trace-formula chapter for the constant Weil\nsheaf. Then\n\n$$\n\\boxed{\nZ(X_0,T)=\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}}\n\\quad\\text{in }\\Qlb[[T]].\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/thm-zl-lefschetz-weil-identity.md",
+  "place": "node thm-zl-lefschetz-weil-identity, order 2879"
+ },
+ "stmt_deps": [
+  "cor-trf-point-counting",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-geometric-hypotheses",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof": [
+  {
+   "text": "Step 1: the point-count identity. The scheme $X_0$ is proper, so by\n[cor-trf-point-counting] applied to the constant Weil sheaf\n$(\\Qlb)_X$, for every $n\\geq1$,\n\n$$\nN_n:=\\#X_0(\\mathbf F_{q^n})\n=\\sum_{i\\in\\mathbf Z}(-1)^i\\Tr\\bigl(F^n\\mid H^i(X,\\Qlb)\\bigr)\n=\\sum_{i=0}^{2d}(-1)^i\\Tr(F_i^n\\mid V_i),\n$$\n\nthe second identity being the finite-dimensionality, the vanishing\noutside $0\\leq i\\leq2d$, and the identification\n$V_i=H^i(X,\\Qlb)$, $F_i=F|_{V_i}$, supplied by\n[def-weil-ordinary-compact-cohomology] (compactly supported\ncohomology being the ordinary one for proper $X_0$, per that\ndefinition) and by [def-weil-smooth-proper-cohomological-family]\nafter scalar extension to $\\Qlb$.",
+   "uses": [
+    "cor-trf-point-counting",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-smooth-proper-cohomological-family"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 2: the logarithm of the zeta series. By\n[def-weil-point-counts-zeta],\n\n$$\nZ(X_0,T)=\\exp\\left(\\sum_{n\\geq1}N_n\\frac{T^n}{n}\\right),\n$$\n\nso that, the formal logarithm and the exponential being mutually\ninverse on $T\\Qlb[[T]]$ and $1+T\\Qlb[[T]]$,\n\n$$\n\\log Z(X_0,T)=\\sum_{n\\geq1}N_n\\frac{T^n}{n}.\n$$",
+   "uses": [
+    "def-weil-point-counts-zeta"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 3: substitution and interchange. Inserting Step 1 and using that\nthe sum over $i=0,\\ldots,2d$ is finite while the coefficientwise sums\nover $n$ are formal,\n\n$$\n\\log Z(X_0,T)\n=\\sum_{n\\geq1}\\sum_{i=0}^{2d}(-1)^i\\Tr(F_i^n\\mid V_i)\\frac{T^n}{n}\n=\\sum_{i=0}^{2d}(-1)^i\n\\left(\\sum_{n\\geq1}\\Tr(F_i^n\\mid V_i)\\frac{T^n}{n}\\right).\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Step 4: the per-degree logarithm. For every $i$, the pair\n$(V_i,F_i)$ is a Frobenius module, so [lem-zl-log-det-identity]\ngives\n\n$$\n\\sum_{n\\geq1}\\Tr(F_i^n\\mid V_i)\\frac{T^n}{n}\n=-\\log P_{i,\\ell}(T).\n$$",
+   "uses": [
+    "lem-zl-log-det-identity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Hence, by the additivity of the formal logarithm on finite products of\nseries with constant coefficient $1$,\n\n$$\n\\log Z(X_0,T)\n=\\sum_{i=0}^{2d}(-1)^{i+1}\\log P_{i,\\ell}(T)\n=\\log\\left(\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}\\right).\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Step 5: exponentiation. Both sides of the identity of Step 4 have the\nsame logarithm and lie in $1+T\\Qlb[[T]]$, so applying the formal\nexponential, which is inverse to the logarithm on that set, gives the\ndisplayed identity.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "cor-trf-point-counting",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-point-counts-zeta",
+  "lem-zl-log-det-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/thm-zl-lefschetz-weil-identity.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2879,
+ "blueprint_uses": [
+  "cor-trf-point-counting",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-geometric-hypotheses",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-point-counts-zeta",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-weil-sheaf-complex",
+  "lem-zl-log-det-identity"
+ ],
+ "uses_not_cited": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-geometric-hypotheses",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_split_by": "paragraphs"
+}

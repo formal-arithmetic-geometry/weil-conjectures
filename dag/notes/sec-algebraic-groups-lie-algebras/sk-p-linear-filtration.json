@@ -1,0 +1,21 @@
+{
+ "id": "sk-p-linear-filtration",
+ "kind": "section",
+ "title": "Characteristic polynomials along a filtration",
+ "text": "*Proposition (sketch).*\n\nLet $f$ be an endomorphism of a finite-dimensional\n$k$-space $V$ preserving a filtration with graded\npieces $\\mathrm{gr}_j$. Then\n\n$$\n\\det(1-Tf\\mid V)=\\prod_j\\det\\bigl(1-Tf\\mid\\mathrm{gr}_j\\bigr).\n$$\n\nIn particular the eigenvalues of $f$ on any subquotient occur among those\non $V$, with multiplicity; so a scalar acting on a nonzero invariant\nsubquotient is an eigenvalue on the ambient space.\nlem:filtration-constituent;lem:scalar-subquotient-eigenvalue\n\n## Proof\n\nIt is enough to treat one invariant subspace and iterate along the\nfiltration. For $S\\subseteq V$ with $f(S)\\subseteq S$, choose a basis of\n$S$ and extend it to $V$; over the polynomial ring $k[T]$ the matrix of\n$1-Tf$ is then block upper triangular, with diagonal blocks those of\n$1-Tf$ on $S$ and on $V/S$, so its determinant is the product of the two\nblock determinants. Induction on the length of the filtration gives the\ndisplayed formula. A subquotient $S/U$ sits in the flag\n$0\\subseteq U\\subseteq S\\subseteq V$, so $\\det(1-Tf\\mid S/U)$ divides\n$\\det(1-Tf\\mid V)$, which is the statement about eigenvalues with\nmultiplicity. If $f$ acts on $S/U\\ne0$ by the scalar $c$, apply the same\nfactorization to $B=f-c$: the middle factor is the determinant of the zero\nmap on a space of positive dimension, hence zero, so\n$\\det(f-c\\operatorname{id}_V)=0$ and $c$ is an eigenvalue on $V$.\nThe determinant factorization along an invariant subspace is Mathlib's\n`LinearMap.det_eq_det_mul_det`, in matrix form\n`Matrix.charpoly_fromBlocks_zero`$_{12}$; what is not available\nis the statement above, Mathlib having only the direct-sum case\n`LinearMap.charpoly_prodMap`.\n\nUses: [sk-d-linear]",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-linear-filtration/_section.md",
+  "place": "order 2548"
+ },
+ "cites": [
+  "sk-d-linear"
+ ],
+ "blueprint_uses": [
+  "sk-d-linear"
+ ],
+ "blueprint_lean": [
+  "LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ",
+  "Module.End.hasEigenvalue_of_subquotient"
+ ],
+ "blueprint_tags": []
+}

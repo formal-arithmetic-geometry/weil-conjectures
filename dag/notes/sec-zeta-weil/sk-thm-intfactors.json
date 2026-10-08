@@ -1,0 +1,37 @@
+{
+ "id": "sk-thm-intfactors",
+ "kind": "section",
+ "title": "Integral Frobenius factors",
+ "text": "*Theorem (sketch).*\n\nFor every $0\\le i\\le2d$ there is a unique polynomial $P_i(T)\\in\\Z[T]$ with\n$P_i(0)=1$ such that for *every* prime $\\ell\\ne p$\n\n$$\nP_i^{(\\ell)}(T)=\\det\\bigl(1-TF_{i,\\ell}\\mid H^{i}(X,\\Ql)\\bigr),\n$$\n\nand then\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}},\n$$\n\na factorization that is independent of $\\ell$.\n\n## Proof\n\nBy [sk-thm-rationality], $Z\\in\\Q(T)\\cap(1+T\\Z[[T]])$. *Fatou's\nlemma* (Fatou, Acta Math. 30 (1906); in the expanded blueprint\n`prop-weil-integral-rational-series`) upgrades this to a\nnormalized integral presentation: a rational power series with\n*integer* coefficients can be written $Z=A/B$ with $A,B\\in\\Z[T]$,\n$B(0)=1$ and $\\gcd(A,B)=1$ in $\\Q[T]$, and then $A(0)=Z(0)=1$. Sketch:\nthe coefficients $z_n$ satisfy a linear recurrence, and since they are\nintegers the shift operator on the span of the shifted sequences has an\ninteger matrix $M$ in a basis of the lattice they generate, so\n$Z=e\\,\\operatorname{adj}(I-TM)v/\\det(I-TM)$ with integral numerator and\ndenominator of constant term $1$; by Gauss's lemma their greatest common\ndivisor can be taken primitive in $\\Z[T]$, and it then divides both in\n$\\Z[T]$ and has constant term $\\pm1$, so cancelling it leaves a coprime\nintegral presentation. The presentation is unique, by coprimality and the\nnormalization of the constant terms. By [sk-prop-rootpurity] the\nreciprocal roots of the $\\ell$-adic factors carry the weights $q^{i/2}$,\nwhich are pairwise distinct for distinct $i$, so [sk-prop-separation]\nseparates the factors: $A/B$ and the parity presentation $N_\\ell/D_\\ell$ of\n[sk-prop-separation] are both coprime presentations of $Z$ with constant\nterms $1$, hence $A=N_\\ell$ and $B=D_\\ell$ in $\\Ql[T]$, so the roots of $A$,\nresp. $B$, are the ordinary roots of the $P_{j,\\ell}$ with $j$ odd, resp.\neven, and the multiplicity of each root in $A$ or $B$ determines its weight,\nhence its index $j$: a root of $A$ or $B$ is an ordinary root\n$\\beta=\\alpha^{-1}$ with $\\alpha$ an eigenvalue of $F$ on some $V_{j,\\ell}$,\nand $j$ is determined by $|\\iota(\\alpha)|=q^{j/2}$, which is\n[sk-prop-rootpurity]. Two points have to be supplied to conclude\n$P_i\\in\\Z[T]$. *(i) Rationality.* $\\Gal(\\overline\\Q/\\Q)$ permutes the\nroots of the rational polynomials $A$ and $B$, and it preserves each weight\nstratum, because the weight of $\\alpha$ is intrinsic:\n$|\\tau(\\alpha)|=q^{j/2}$ for *every* embedding $\\tau$ of $\\Q(\\alpha)$.\nHence the submultiset of roots of weight $j$ is Galois-stable, so the product\nof the corresponding factors $(1-\\alpha T)$ lies in $\\Q[T]$; with $P_i(0)=1$\nthis is the sought $P_i$, whose $\\ell$-adic extension is $P_{i,\\ell}$.\n*(ii) Integrality.* Since $A,B\\in\\Z[T]$ have constant term $1$, the\nreciprocal polynomials $A^{\\#}(U)=U^{\\deg A}A(U^{-1})$ and $B^{\\#}$ are\nmonic with integer coefficients, so every reciprocal root $\\alpha$ — the\nroots of $A^{\\#}$ and $B^{\\#}$ are exactly the reciprocal roots of the\n$P_{j,\\ell}$, by $A=N_\\ell$, $B=D_\\ell$ — is an algebraic integer. Write\n$P_i(T)=\\prod_\\alpha(1-\\alpha T)$, the product over the weight-$i$ stratum;\nits coefficients are elementary symmetric functions of algebraic integers,\nhence algebraic integers, and rational by (i), hence in $\\Z$; so\n$P_i\\in\\Z[T]$. (Equivalently: $P_i\\in\\Q[T]$ with $P_i(0)=1$ divides the\nprimitive $A$ or $B$ in $\\Q[T]$, so $P_i\\in\\Z[T]$ by Gauss's lemma. Note\nthat Frobenius-stability of the lattice $H^{i}(X,\\Z_\\ell)$ would give only\n$\\Z_{(\\ell)}$-integrality; integrality at $p$ comes from Fatou's lemma, that\nis, from the point counts being integers.) Uniqueness is clear from the\ndeterminant formula, and independence of $\\ell$ follows because the\npresentation $A/B$ and the weight grouping do not mention $\\ell$.\n*Provenance.* The realization-independence step — that the\nfactorization is common to all $\\ell$ — is the deepest *algebraic*\nstep of this layer, and the two points above compress seven statements of the\nexpanded blueprint: `thm-weil-realization-independence` with\n`lem-embedding-extension` for the intrinsic weight and the\nembedding transport, `prop-galois-weight-strata`,\n`prop-galois-weight-strata-integrality` and\n`prop-galois-weight-strata-identification` for the Galois stability,\nintegrality and identification of the strata, and\n`prop-integral-recovery` with\n`lem-weil-finite-coordinate-detection` for the recovery of the\nintegral factors. These are pure algebra: no geometric input enters beyond\n[sk-prop-rootpurity].\n\nUses: [sk-def-cohfamily], [sk-def-roots], [sk-prop-rootpurity], [sk-prop-separation], [sk-thm-rationality]",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/_section.md",
+  "place": "order 2901"
+ },
+ "cites": [
+  "sk-thm-rationality",
+  "prop-weil-integral-rational-series",
+  "sk-prop-rootpurity",
+  "sk-prop-separation",
+  "thm-weil-realization-independence",
+  "lem-embedding-extension",
+  "prop-galois-weight-strata",
+  "prop-galois-weight-strata-integrality",
+  "prop-galois-weight-strata-identification",
+  "prop-integral-recovery",
+  "lem-weil-finite-coordinate-detection",
+  "sk-def-cohfamily",
+  "sk-def-roots"
+ ],
+ "blueprint_uses": [
+  "sk-def-cohfamily",
+  "sk-def-roots",
+  "sk-prop-rootpurity",
+  "sk-prop-separation",
+  "sk-thm-rationality"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.IsWeilFactorization.unique",
+  "TraceDatum.exists_isWeilFactorization"
+ ],
+ "blueprint_tags": []
+}

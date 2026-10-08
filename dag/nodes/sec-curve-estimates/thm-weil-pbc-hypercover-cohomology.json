@@ -1,0 +1,73 @@
+{
+ "id": "thm-weil-pbc-hypercover-cohomology",
+ "kind": "statement",
+ "title": "Cohomology is computed after hypercover refinement",
+ "statement": "For a quasi-compact quasi-separated scheme $X$, an abelian etale sheaf $F$,\nand $q\\geq0$, there is a natural isomorphism\n\n$$\n \\varinjlim_{U}H^q(C^\\bullet(U,F))\n \\xrightarrow{\\sim} H^q(X_{\\Et},F).\n$$\n\nThe limit is over refinements, modulo simplicial homotopy, of the hypercovers\nfinite in each degree [def-weil-pbc-finite-split-hypercover]. The right side\nis the derived cohomology of [def-weil-pbc-etale-cohomology]. A\nrepresentative, and a relation between representatives, use only finitely\nmany degrees. The same assertion holds for sheaves of modules over a fixed\nconstant ring, with cohomology derived in that module category.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-weil-pbc-hypercover-cohomology.md",
+  "place": "node thm-weil-pbc-hypercover-cohomology, order 949",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01H0"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-split-hypercover",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Choose an injective resolution $F\\to I^\\bullet$, in degrees $r\\geq0$, to\ncompute the cohomology of [def-weil-pbc-etale-cohomology]. For each $U$, form\nthe first-quadrant double complex $D^{p,r}=I^r(U_p)$ with total differential\n$\\delta+(-1)^p d_I$. By [lem-weil-pbc-hypercover-free-resolution], its\naugmented rows are exact. Taking horizontal cohomology first therefore shows\nthat\n\n$$\n \\Gamma(X,I^\\bullet)\\longrightarrow\\operatorname{Tot}D\n$$\n\nis a quasi-isomorphism. This uses only finite sums in each total degree. The\ninclusion $F\\to I^\\bullet$ now gives the asserted map from hypercover\ncohomology to derived cohomology.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-hypercover-free-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "We prove its surjectivity without declaring a single hypercover acyclic for\n$F$. Represent a degree-$q$ class by a total cocycle. Its component in\nbidegree $(0,q)$, if $q>0$, is $d_I$-closed. Exactness of the resolution as a\ncomplex of sheaves makes it locally a $d_I$-boundary. By\n[lem-weil-pbc-hypercover-refinement], refine to choose a primitive, and\nsubtract its total coboundary. The component $(0,q)$ is now zero. The cocycle\nequation makes the component $(1,q-1)$ vertically closed. If $q-1>0$, repeat,\nwith the sign $(-1)^1$ in its primitive. After the finitely many positions\n$(p,q-p)$ with $q-p>0$, only $(q,0)$ remains. It is vertically closed, hence\nlies in $F(U_q)$, and its horizontal differential is zero. It is the required\nrepresentative in $C^\\bullet(U,F)$.",
+   "uses": [
+    "lem-weil-pbc-hypercover-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For injectivity, suppose a degree-$q$ cocycle in this last complex is a total\nboundary. Choose a total primitive of degree $q-1$. Its positive\nvertical-degree components are vertically closed in the same successive\norder, because its differential has only vertical degree zero. After\nrefinement subtract total coboundaries from the primitive to remove these\ncomponents. The remaining primitive lies in $F(U_{q-1})$. Thus the original\ncocycle is already a boundary after refinement. For $q=0$, injectivity\ninstead follows directly from the injectivity of $F\\to I^0$. For two\nrepresentatives first take a common refinement and apply this argument to\ntheir difference. Homotopic refinements induce equal cohomology maps by the\nprism identity in [lem-weil-pbc-hypercover-refinement]. This proves the\ndisplayed isomorphism and its naturality. All operations used only a finite\ntruncation as defined in [def-weil-pbc-finite-split-hypercover]; the cocycle\ncondition uses degree $q+1$. This gives the finite-cover version of\n[Stacks Project, Tag 01H0](https://stacks.math.columbia.edu/tag/01H0). The\ncolimit here is taken on cohomology groups; no colimit of complexes indexed\nby the homotopy category is used. For module coefficients, take an injective\nresolution in the module category and use the free-module version of\n[lem-weil-pbc-hypercover-free-resolution]; every subsequent local lifting and\ndouble-complex calculation is unchanged.",
+   "uses": [
+    "lem-weil-pbc-hypercover-refinement",
+    "def-weil-pbc-finite-split-hypercover",
+    "lem-weil-pbc-hypercover-free-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-hypercover-free-resolution",
+  "lem-weil-pbc-hypercover-refinement",
+  "def-weil-pbc-finite-split-hypercover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-weil-pbc-hypercover-cohomology.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 949,
+ "blueprint_uses": [
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-finite-split-hypercover",
+  "lem-weil-pbc-hypercover-free-resolution",
+  "lem-weil-pbc-hypercover-refinement"
+ ],
+ "proof_split_by": "paragraphs"
+}

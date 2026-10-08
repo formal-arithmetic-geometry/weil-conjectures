@@ -1,0 +1,90 @@
+{
+ "id": "thm-amb-p1-adjunction",
+ "kind": "statement",
+ "title": "The full projective-line adjunction",
+ "statement": "On the whole ordinary derived categories of etale $A$-modules,\n\n$$\nRq_*\\dashv q^*(1)[2]\n\\qquad(q:\\mathbf P^1_S\\to S).\n$$\n\nThe counit is $\\epsilon$ of [def-amb-p1-trace].\nThe notation refers to the projective line, and Tate twists.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+  "place": "node thm-amb-p1-adjunction, order 1573"
+ },
+ "stmt_deps": [
+  "def-amb-p1-trace",
+  "def-coefficient-twists-detailed",
+  "def-sc-p1-standard",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Write $F=Rq_*$, $G=q^*(1)[2]$. Use the notation\nand the map $\\delta$ of\n[lem-amb-p1-diagonal-integrals]. For an arbitrary\ncomplex $M$ on $P$, define\n\n$$\n\\eta_M:M=R(p_2)_*\\Delta_*M\n\\xrightarrow{R(p_2)_*(\\delta\\otimes p_1^*M)}\nR(p_2)_*p_1^*M(1)[2]\n\\xrightarrow{\\sim} q^*Rq_*M(1)[2]=GFM.\n$$",
+   "uses": [
+    "lem-amb-p1-diagonal-integrals"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Here $\\Delta_*M\\cong\\Delta_*A\\otimes_A^Lp_1^*M$\nby the closed-immersion projection formula (or directly on\ngeometric stalks), and the last arrow is proper base change\n[cor-weil-pbc-geometric-fiber-finite], extended to\ncomplexes as in [lem-amb-proper-coproducts-projection].\nThus $\\eta$ is a natural transformation on all complexes.\nSet $\\epsilon$ equal to the natural transformation in\n[def-amb-p1-trace].",
+   "uses": [
+    "cor-weil-pbc-geometric-fiber-finite",
+    "lem-amb-proper-coproducts-projection",
+    "def-amb-p1-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "We verify both triangles, keeping track of the coordinate\nintegrated in each. For the first triangle, the composite\n$\\epsilon_{FM}\\circ F\\eta_M$, after proper base change,\nthe projection formula and the composition\n$R(qp_1)_*\\cong Rq_*Rp_{1*}$ of\n[lem-weil-derived-direct-image-composition] (item (5)), is\n\n$$\n\\begin{split}\nRq_*M\n&=R(qp_1)_*\\Delta_*M\\\\\n&\\longrightarrow R(qp_1)_*p_1^*M(1)[2]\\\\\n&\\cong Rq_*\\bigl(M\\otimes_A^LR(p_1)_*A_W(1)[2]\\bigr)\\\\\n&\\xrightarrow{Rq_*(1_M\\otimes t_{p_1})}Rq_*M.\n\\end{split}\n$$\n\nBy the base-change compatibility of\n[thm-amb-p1-decomposition], $t_{p_1}$ is the\npullback of $t_q$ along $q:P\\to S$, under\nthe proper base-change identification for $p_1$.\nIndeed $\\eta$ first sums over the first coordinate,\nwhereas $\\epsilon_{FM}$ then integrates the second\ncoordinate. The equality $qp_1=qp_2$ and the\ncomposition isomorphism for derived direct images interchange\nthese two operations; the exchange map is obtained from the\nsame pullback counits on the Cartesian square. Naturality\nof the tensor projection map identifies the resulting first\narrow with $1_M\\otimes R(p_1)_*\\delta$.\nConsequently the whole composite is $Rq_*$ of $1_M$\ntensored with\n$t_{p_1}\\circ R(p_1)_*\\delta$. This is the identity\nby [lem-amb-p1-diagonal-integrals].",
+   "uses": [
+    "lem-weil-derived-direct-image-composition",
+    "thm-amb-p1-decomposition",
+    "lem-amb-p1-diagonal-integrals"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the other triangle, substitute $M=GK$ in $\\eta$.\nSince $p_1^*q^*K=p_2^*q^*K$, the projection formula\npulls this common coefficient out of $R(p_2)_*$.\nThe map $G\\epsilon_K$ integrates the first coordinate\nof $W$, and is therefore $t_{p_2}$ on the remaining\nkernel factor. Hence\n\n$$\nG\\epsilon_K\\circ\\eta_{GK}\n=1_{q^*K(1)[2]}\\otimes\n\\bigl(t_{p_2}\\circ R(p_2)_*\\delta\\bigr)\n=1_{GK}.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The rearranged shifts are all even, so these rearrangements\nintroduce no Koszul sign. This proves the second triangle.\nIn these calculations the exchange and projection maps are\nthe canonical ones, not unspecified isomorphisms: their\ncompatibility is obtained by substituting their definitions\nfrom pullback counits before applying derived direct image.\nBoth expressions use the same counit once in each coordinate.\nThe two verified triangles prove the stated adjunction.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-p1-diagonal-integrals",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "lem-amb-proper-coproducts-projection",
+  "def-amb-p1-trace",
+  "lem-weil-derived-direct-image-composition",
+  "thm-amb-p1-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1573,
+ "blueprint_uses": [
+  "cor-weil-pbc-geometric-fiber-finite",
+  "def-amb-p1-trace",
+  "def-coefficient-twists-detailed",
+  "def-sc-p1-standard",
+  "def-weil-pbc-derived-categories",
+  "lem-amb-p1-diagonal-integrals",
+  "lem-amb-proper-coproducts-projection",
+  "lem-weil-derived-direct-image-composition",
+  "thm-amb-p1-decomposition"
+ ],
+ "uses_not_cited": [
+  "def-coefficient-twists-detailed",
+  "def-sc-p1-standard",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_split_by": "paragraphs"
+}

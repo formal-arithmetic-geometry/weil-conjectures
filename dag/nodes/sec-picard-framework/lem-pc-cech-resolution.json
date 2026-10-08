@@ -1,0 +1,64 @@
+{
+ "id": "lem-pc-cech-resolution",
+ "kind": "statement",
+ "title": "The Cech resolution and derived direct image",
+ "statement": "Let $S=\\operatorname{Spec}(A)$, let $f:X\\to S$ be a separated,\nquasi-compact morphism, and choose a finite affine open cover\n$X=\\bigcup_{i=1}^t U_i$. For a quasi-coherent $\\mathcal O_X$-module\n$\\mathcal F$, write $U_J=\\bigcap_{j\\in J}U_j$ and $j_J:U_J\\to X$.\nThe augmented alternating Cech complex of sheaves\n\n$$\n0\\longrightarrow\\mathcal F\\longrightarrow\n\\prod_i j_{i,*}(\\mathcal F|_{U_i})\\longrightarrow\n\\prod_{i<j}j_{ij,*}(\\mathcal F|_{U_{ij}})\\longrightarrow\\cdots\n$$\n\nis exact. Its non-augmented terms are $f_*$-acyclic, so applying\n$f_*$ to it computes $Rf_*\\mathcal F$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+  "place": "node lem-pc-cech-resolution, order 670"
+ },
+ "stmt_deps": [
+  "def-pc-derived-direct-image",
+  "def-pc-morphism-conventions",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Fix a point of $X$ and a covering open $U_i$ containing it.\nRestrict the augmented complex to $U_i$. This restricted cover\ncontains the entire space $U_i$ as one member; insertion of that\nindex gives a contracting homotopy of the augmented Cech complex.\nThus the complex is locally exact, and hence exact as a complex\nof sheaves. This argument does not identify a boundary stalk of\nan open direct image with zero.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The intersections $U_J$ are affine: for two affine opens this follows\nby pulling the closed diagonal of $X/S$ back to their affine\nproduct over $S$, and the general case follows by induction.\nEach $j_J$ is an affine morphism, since its inverse image in every\naffine open of $X$ is again such an affine intersection.\nBy [lem-pc-affine-morphism-hi],\n$R^qj_{J,*}(\\mathcal F|_{U_J})=0$ for $q>0$.\nFor an affine open $V\\subseteq S$, the inverse image\n$U_J\\times_S V$ is affine. The Leray spectral sequence for $j_J$\nrestricted over $V$, together with the preceding vanishing and\n[lem-pc-affine-vanishing], gives\n\n$$\nH^q(f^{-1}V,j_{J,*}(\\mathcal F|_{U_J}))\n=H^q(U_J\\times_S V,\\mathcal F)=0\\quad(q>0).\n$$",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "lem-pc-affine-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine opens form a basis on $S$, so all higher direct images under\n$f$ of these Cech terms vanish. A finite resolution by acyclic\nobjects computes the right derived functor (apply $f_*$ to an\ninjective double resolution and use its two spectral sequences).\nThis proves the assertion.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-morphism-hi",
+  "lem-pc-affine-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 670,
+ "blueprint_uses": [
+  "def-pc-derived-direct-image",
+  "def-pc-morphism-conventions",
+  "def-pc-scheme",
+  "lem-pc-affine-morphism-hi",
+  "lem-pc-affine-vanishing"
+ ],
+ "uses_not_cited": [
+  "def-pc-derived-direct-image",
+  "def-pc-morphism-conventions",
+  "def-pc-scheme"
+ ],
+ "proof_split_by": "paragraphs"
+}

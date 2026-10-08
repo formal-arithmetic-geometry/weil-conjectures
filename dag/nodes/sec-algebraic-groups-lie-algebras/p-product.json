@@ -1,0 +1,121 @@
+{
+ "id": "p-product",
+ "kind": "statement",
+ "title": "The central--geometric product",
+ "statement": "For a semisimple represented degree datum ([d-monodromy]), the\nidentity components and center satisfy\n\n$$\nG^\\circ=Z(G^\\circ)^\\circ H^\\circ.\n$$\n\nThis applies to the Weil representation of a lisse Weil sheaf whose Weil\nrepresentation is semisimple.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-product/p-product.md",
+  "place": "node p-product, order 2523"
+ },
+ "stmt_deps": [
+  "d-monodromy"
+ ],
+ "proof": [
+  {
+   "text": "Use the defining representation of [d-monodromy]. By\n[lem-ag-closure-semisimple], $V$ is a semisimple $G^\\circ$-module:\n$V=\\bigoplus_iM_i$ with each $M_i$ a simple $G^\\circ$-module. Set\n$\\mathfrak g=\\operatorname{Lie}(G^\\circ)\\subseteq\\operatorname{End}(V)$,\n$\\mathfrak h=\\operatorname{Lie}(H^\\circ)$ and $T=Z(G^\\circ)^\\circ$.\nApply [lem-ag-lie-stable-subspace] to the connected group $G^\\circ$ and\nits inclusion $r:G^\\circ\\to\\operatorname{GL}(V)$, whose differential is\nthe inclusion $dr:\\mathfrak g\\subseteq\\operatorname{End}(V)$: a subspace\nof $V$ is $G^\\circ$-stable if and only if it is $\\mathfrak g$-stable.\nHence each $M_i$ is $\\mathfrak g$-stable, and its $\\mathfrak g$-stable\nsubspaces are exactly its $G^\\circ$-stable subspaces, so $M_i$ has no\n$\\mathfrak g$-stable subspaces other than $0$ and $M_i$. Thus the Lie\nrepresentation $\\mathfrak g\\subseteq\\operatorname{End}(V)$ is semisimple,\nand it is faithful because it is an inclusion. By\n[lem-ag-faithful-semisimple-lie-central-radical],\n$\\mathfrak g=Z(\\mathfrak g)+[\\mathfrak g,\\mathfrak g]$, and\n[lem-ag-closure-commutators] and [lem-ag-lie-centre] give\n\n$$\n\\mathfrak g=Z(\\mathfrak g)+[\\mathfrak g,\\mathfrak g]\n           =Z(\\mathfrak g)+\\mathfrak h\n           =\\operatorname{Lie}(T)+\\operatorname{Lie}(H^\\circ).\n$$",
+   "uses": [
+    "d-monodromy",
+    "lem-ag-closure-semisimple",
+    "lem-ag-lie-stable-subspace",
+    "lem-ag-faithful-semisimple-lie-central-radical",
+    "lem-ag-closure-commutators",
+    "lem-ag-lie-centre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Here the middle equality holds because\n$[\\mathfrak g,\\mathfrak g]\\subseteq\\mathfrak h\\subseteq\\mathfrak g$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The group $H^\\circ$ is connected and contains $1$, and $H\\subseteq G$, so\n$H^\\circ\\subseteq G^\\circ$ ([lem-wf-algebraic-component-cosets]); the\ncentral subgroup $T$ of $G^\\circ$ commutes with it. The product\n$T\\times H^\\circ$, embedded block-diagonally in\n$\\operatorname{GL}(V\\oplus V)$, is a closed matrix group, and the\nmultiplication map\n\n$$\n\\mu:T\\times H^\\circ\\to G^\\circ,\\qquad(t,h)\\mapsto th,\n$$\n\nis a morphism of varieties and, since $T$ is central, a group\nhomomorphism: $tht'h'=tt'hh'$. By [lem-ag-homomorphism-image-closed] its\nimage $K=TH^\\circ$ is a closed subgroup of $G^\\circ$. It is connected:\n$T$ and $H^\\circ$ are connected and contain $1$, so both lie in the\nidentity component $K^\\circ$ ([lem-wf-algebraic-component-cosets]),\nand hence $K=TH^\\circ\\subseteq K^\\circ$. Its Lie algebra is a subspace\ncontaining $\\operatorname{Lie}(T)$ and $\\operatorname{Lie}(H^\\circ)$,\nhence equals $\\mathfrak g$. Thus [lem-wf-same-lie-closed-subgroup]\ngives $K=G^\\circ$.",
+   "uses": [
+    "lem-wf-algebraic-component-cosets",
+    "lem-ag-homomorphism-image-closed",
+    "lem-wf-same-lie-closed-subgroup"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "d-monodromy",
+  "lem-ag-closure-semisimple",
+  "lem-ag-lie-stable-subspace",
+  "lem-ag-faithful-semisimple-lie-central-radical",
+  "lem-ag-closure-commutators",
+  "lem-ag-lie-centre",
+  "lem-wf-algebraic-component-cosets",
+  "lem-ag-homomorphism-image-closed",
+  "lem-wf-same-lie-closed-subgroup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-product/p-product.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_multiple"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2523,
+ "blueprint_uses": [
+  "d-monodromy",
+  "lem-ag-closure-commutators",
+  "lem-ag-closure-semisimple",
+  "lem-ag-faithful-semisimple-lie-central-radical",
+  "lem-ag-homomorphism-image-closed",
+  "lem-ag-lie-centre",
+  "lem-ag-lie-stable-subspace",
+  "lem-wf-algebraic-component-cosets",
+  "lem-wf-same-lie-closed-subgroup"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie",
+  "declaration": "AlgebraicGeometry.GeneralLinearGroup.surjective_mulCenterIdentityComponent",
+  "branch": "slopmaster2",
+  "line": 427,
+  "sorry_free": false,
+  "body_lines": 1,
+  "others": [
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie",
+    "declaration": "AlgebraicGeometry.GeneralLinearGroup.exists_mul_eq_of_containsCommutators",
+    "branch": "slopmaster2",
+    "line": 438,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+    "declaration": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy",
+    "branch": "slopmaster2",
+    "line": 567,
+    "sorry_free": true,
+    "body_lines": 2
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+    "declaration": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq",
+    "branch": "slopmaster2",
+    "line": 578,
+    "sorry_free": false,
+    "body_lines": 2
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.GeneralLinearGroup.surjective_mulCenterIdentityComponent",
+  "AlgebraicGeometry.GeneralLinearGroup.exists_mul_eq_of_containsCommutators",
+  "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy",
+  "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "paragraphs"
+}

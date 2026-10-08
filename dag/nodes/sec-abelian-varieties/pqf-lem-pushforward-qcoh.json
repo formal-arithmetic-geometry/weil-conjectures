@@ -1,0 +1,69 @@
+{
+ "id": "pqf-lem-pushforward-qcoh",
+ "kind": "statement",
+ "title": "Pushforward of quasi-coherent modules",
+ "statement": "Let $f:X\\to S$ be a quasi-compact and quasi-separated morphism of\nschemes. Then $f_*$ transforms quasi-coherent $\\mathcal O_X$-modules\ninto quasi-coherent $\\mathcal O_S$-modules.\n(*Stacks Project, Schemes, Lemma 26.24.1, Tag\n[01LC](https://stacks.math.columbia.edu/tag/01LC).*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-pushforward-qcoh.md",
+  "place": "node pqf-lem-pushforward-qcoh, order 542",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01LC"
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Work over an affine open $S_0=\\operatorname{Spec}A\\subset S$ and put\n$X_0=f^{-1}(S_0)$. By quasi-compactness in\n[def-weil-pbc-scheme-conventions], choose finitely many affine\nopens $U_i=\\operatorname{Spec}B_i$ covering $X_0$, small enough that\n$\\mathcal F|_{U_i}=\\widetilde{M_i}$ as in\n[pqf-def-coherent]. For each pair $i,j$, the intersection\n$U_i\\cap U_j$ is quasi-compact: it is the inverse image of the affine\n$U_i\\times_{S_0}U_j$ under the quasi-compact diagonal of $f$.\nChoose a finite affine cover $W_{ijk}=\\operatorname{Spec}C_{ijk}$\nof this intersection, again with\n$\\mathcal F|_{W_{ijk}}=\\widetilde{N_{ijk}}$.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheaf gluing axiom gives an exact sequence at its first two terms\n\n$$\n0\\longrightarrow\\Gamma(X_0,\\mathcal F)\n\\longrightarrow\\prod_i M_i\n\\xrightarrow{\\delta}\\prod_{i,j,k}N_{ijk},\n$$\n\nwhere $\\delta$ is the difference of the two restrictions.\nIndeed, a tuple of sections on the $U_i$ glues precisely when its\nrestrictions agree on every member $W_{ijk}$ covering every overlap.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "For $a\\in A$, pull these two finite covers back to $D(a)$. The same\ngluing axiom computes $\\Gamma(f^{-1}(D(a)),\\mathcal F)$ as the kernel\nof the resulting restriction-difference map. By\n[pqf-lem-associated-sections-localize], its two terms and its\nmap are obtained from the displayed sequence by $-\\otimes_AA_a$.\nLocalization is exact and commutes with finite products, hence\n\n$$\n\\Gamma(f^{-1}(D(a)),\\mathcal F)\n\\cong\\Gamma(X_0,\\mathcal F)\\otimes_AA_a.\n$$",
+   "uses": [
+    "pqf-lem-associated-sections-localize"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "These isomorphisms commute with further principal localization,\nsince every map used is restriction of sections. Thus on the basis\nof principal opens of $S_0$, the sheaf $f_*\\mathcal F$ agrees with\n$\\widetilde{\\Gamma(X_0,\\mathcal F)}$. It is quasi-coherent on $S_0$\nby [pqf-def-coherent]; varying $S_0$ proves the assertion.",
+   "uses": [
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "pqf-lem-associated-sections-localize"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-pushforward-qcoh.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 542,
+ "blueprint_uses": [
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "pqf-lem-associated-sections-localize"
+ ],
+ "proof_split_by": "paragraphs"
+}

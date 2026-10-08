@@ -1,0 +1,92 @@
+{
+ "id": "thm-weil-karoubian-bounded-t",
+ "kind": "statement",
+ "title": "Bounded t-structures are Karoubian",
+ "statement": "If a triangulated category $\\mathcal T$ has a bounded t-structure, then\n$\\mathcal T$ is idempotent complete: every idempotent $e:K\\to K$ of $\\mathcal\nT$ splits, and the canonical fully faithful functor $\\mathcal T\\to\\Kar(\\mathcal\nT)$ of [def-weil-karoubi-envelope] is an exact equivalence.\n\n(*Source note:* no Stacks Project entry states this form: Stacks has no\nt-structure (hence no bounded t-structure and no heart) and no idempotent\ncompletion of a triangulated category; its Karoubianity entries are the\ndefinition of the Karoubian property (Definition 12.4.1, Tag\n[09SG](https://stacks.math.columbia.edu/tag/09SG)), the splitting criterion\nof Lemma 12.4.2 (Tag [09SH](https://stacks.math.columbia.edu/tag/09SH)) and\nthe criteria of Lemma 12.4.3 (Tag\n[05QV](https://stacks.math.columbia.edu/tag/05QV): countable products and\nkernels of maps which have a right inverse, or dually countable coproducts\nand cokernels of maps which have a left inverse), which are sufficient\nconditions of a different kind and are not stated for triangulated\ncategories. The blueprint adds the Karoubianity of a triangulated category\ncarrying a bounded t-structure, the input used for the finite-stage and\n$\\Qlb$ coefficient categories of this manuscript.*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-karoubian-bounded-t.md",
+  "place": "node thm-weil-karoubian-bounded-t, order 1427",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09SG"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09SH"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 05QV"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-karoubi-envelope"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-karoubi-envelope-triangulated] the envelope $\\mathcal\nT^\\natural=\\Kar(\\mathcal T)$ of [def-weil-karoubi-envelope] is triangulated\nand, by [lem-weil-envelope-tstructure], carries the extended t-structure\n$((\\mathcal T^\\natural)^{\\le0},(\\mathcal T^\\natural)^{\\ge0})$, which is\nbounded because every object of $\\mathcal T^\\natural$ is a retract of an\nobject of $\\mathcal T$, of finite t-amplitude in the bounded t-structure of\n$\\mathcal T$. We show that every $Y\\in\\mathcal T^\\natural$ is isomorphic to\nan object of $\\mathcal T$; full faithfulness of $\\mathcal T\\to\\mathcal\nT^\\natural$, which is [lem-weil-karoubi-envelope-fully-faithful], then makes\nit an equivalence, and every idempotent of $\\mathcal T$ splits because its\nimage in $\\mathcal T^\\natural$ splits in the envelope that is idempotent\ncomplete by [lem-weil-karoubi-envelope-idempotent-complete], and a splitting\ntransported back through the equivalence splits it in $\\mathcal T$.",
+   "uses": [
+    "lem-weil-karoubi-envelope-triangulated",
+    "def-weil-karoubi-envelope",
+    "lem-weil-envelope-tstructure",
+    "lem-weil-karoubi-envelope-fully-faithful",
+    "lem-weil-karoubi-envelope-idempotent-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since the extended t-structure is bounded, replacing $Y$ by a shift (which\npreserves the property of being isomorphic to an object of $\\mathcal T$), we\nmay assume $Y\\in(\\mathcal T^\\natural)^{\\ge0}$. Let $n\\ge0$ be minimal with\n$Y\\in(\\mathcal T^\\natural)^{\\le n}$, and argue by induction on $n$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "If $n=0$, then $Y$ lies in the heart of $\\mathcal T^\\natural$, which by\n[lem-weil-envelope-tstructure] is equivalent to $\\Kar(\\mathcal H(\\mathcal\nT))$; by [prop-weil-heart-abelian] the heart $\\mathcal H(\\mathcal T)$ is\nabelian and hence idempotent complete, so $\\Kar(\\mathcal H(\\mathcal\nT))=\\mathcal H(\\mathcal T)$ via the canonical functor, and $Y$ is isomorphic\nto an object of $\\mathcal H(\\mathcal T)\\subset\\mathcal T$.",
+   "uses": [
+    "lem-weil-envelope-tstructure",
+    "prop-weil-heart-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assume $n>0$. The top truncation triangle of [def-weil-t-structure] in\n$\\mathcal T^\\natural$ is\n\n$$\n A:=\\tau^{\\le n-1}Y\\longrightarrow Y\\longrightarrow\n B:=\\mathcal H^n(Y)[-n]\\longrightarrow A[1],\n$$\n\nwith $A\\in(\\mathcal T^\\natural)^{\\ge0}\\cap(\\mathcal T^\\natural)^{\\le n-1}$\n(the truncation triangle and $\\mathcal T^\\natural$'s $\\ge0$-part being closed\nunder kernels in the triangulated sense: $Y,B\\in(\\mathcal T^\\natural)^{\\ge0}$\nand the connecting morphism argument gives $A\\in(\\mathcal\nT^\\natural)^{\\ge0}$). By the induction hypothesis $A$ is isomorphic to an\nobject of $\\mathcal T$. By [lem-weil-envelope-tstructure] the object $\\mathcal\nH^n(Y)$ lies in the heart of $\\mathcal T^\\natural$, which is equivalent to\n$\\mathcal H(\\mathcal T)$ by the $n=0$ case; hence $B$ is isomorphic to an\nobject of $\\mathcal T$. Since $\\mathcal T\\to\\mathcal T^\\natural$ is fully\nfaithful, the connecting morphism $\\delta:B\\to A[1]$ is the image of a\nmorphism of $\\mathcal T$. Complete $\\delta$ to a distinguished triangle in\n$\\mathcal T$ and rotate it to obtain\n\n$$\n A\\longrightarrow C\\longrightarrow B\\overset{\\delta}{\\longrightarrow}A[1]\n$$\n\nwith the displayed connecting morphism $\\delta$. This triangle is\ndistinguished in $\\mathcal T^\\natural$ as well. It and the truncation\ntriangle are cone triangles for the same morphism $\\delta$ in $\\mathcal\nT^\\natural$, so by uniqueness of cones (any two cone triangles of a morphism\nare isomorphic by a morphism of triangles whose first two components are\nidentities) there is an isomorphism of triangles fixing $A$ and $B$; in\nparticular $Y\\cong C$ in $\\mathcal T^\\natural$, with $C\\in\\mathcal T$. This\ncompletes the induction and the proof.",
+   "uses": [
+    "def-weil-t-structure",
+    "lem-weil-envelope-tstructure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-karoubi-envelope-triangulated",
+  "def-weil-karoubi-envelope",
+  "lem-weil-envelope-tstructure",
+  "lem-weil-karoubi-envelope-fully-faithful",
+  "lem-weil-karoubi-envelope-idempotent-complete",
+  "prop-weil-heart-abelian",
+  "def-weil-t-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-karoubian-bounded-t.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1427,
+ "blueprint_uses": [
+  "def-weil-karoubi-envelope",
+  "def-weil-t-structure",
+  "lem-weil-envelope-tstructure",
+  "lem-weil-karoubi-envelope-fully-faithful",
+  "lem-weil-karoubi-envelope-idempotent-complete",
+  "lem-weil-karoubi-envelope-triangulated",
+  "prop-weil-heart-abelian"
+ ],
+ "proof_split_by": "paragraphs"
+}

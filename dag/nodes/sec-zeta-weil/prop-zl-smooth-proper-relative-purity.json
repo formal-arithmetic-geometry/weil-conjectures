@@ -1,0 +1,112 @@
+{
+ "id": "prop-zl-smooth-proper-relative-purity",
+ "kind": "statement",
+ "title": "Relative smooth-proper purity",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$, where $q=p^a$, a prime\n$\\ell\\neq p$, an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$ and an\nisomorphism $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$. Let\n$f_0:X_0\\to Y_0$ be a smooth proper morphism of separated finite-type\n$k_0$-schemes of pure relative dimension $d\\in\\mathbf Z_{\\geq0}$ (no\nadmissibility hypothesis on $f_0$ or the structure morphisms: the exceptional\ninverse images are the constructible ones, defined for every separated\nfinite-type morphism, so the operations of [prop-weil-operations] apply), and let\n$\\mathcal F_0$ be a lisse $\\Qlb$-Weil sheaf on $X_0$ which is punctually\n$\\iota$-pure of weight $w\\in\\mathbf R$ in the sense of\n[def-weil-punctual-weights]. Then for every $i\\in\\mathbf Z$:\n\n1. **(a)** the canonical map\n$R^{i}f_{0!}\\mathcal F_0\\to R^{i}f_{0*}\\mathcal F_0$ is an isomorphism of\nWeil sheaves, and this sheaf is lisse;\n1. **(b)** it is punctually $\\iota$-pure of weight $w+i$: for every closed\npoint $y\\in|Y_0|$, with $q_y=\\#\\kappa(y)$, every eigenvalue $\\alpha$ of the\nlocal geometric Frobenius $F_y$ on\n$(R^{i}f_{0*}\\mathcal F_0)_{\\bar y}=H^{i}(X_{\\bar y},\\mathcal F)$\n([cor-weil-pbc-geometric-fiber-qbar]) satisfies\n$|\\iota(\\alpha)|=q_y^{(w+i)/2}$.\n\nIn the absolute case $Y_0=\\Spec k_0$, $\\mathcal F_0=(\\Qlb)_{X_0}$ ($w=0$)\nclause (b) says that every eigenvalue $\\alpha$ of geometric Frobenius on\n$H^{i}(X,\\Qlb)$ satisfies $|\\iota(\\alpha)|=q^{i/2}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/prop-zl-smooth-proper-relative-purity.md",
+  "place": "node prop-zl-smooth-proper-relative-purity, order 2868"
+ },
+ "stmt_deps": [
+  "prop-weil-operations",
+  "def-weil-punctual-weights",
+  "cor-weil-pbc-geometric-fiber-qbar"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:X\\to Y$ for the geometric fiber of $f_0$ and $\\mathcal F$ for the\nunderlying sheaf of $\\mathcal F_0$. The upper bound on weights is the\ndirect-image theorem [cor-zl-rfshriek-sheaf]; the content here is that\nrelative duality supplies the matching lower bound.",
+   "uses": [
+    "cor-zl-rfshriek-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 1 (coincidence and local constancy).* Since $f$ is proper, the\ncompactification $j=\\operatorname{id}$, $p=f$ gives the canonical\nidentification $Rf_!\\xrightarrow{\\sim}Rf_*$ of\n[cor-cbc-proper-coincidence], and under it the exchange map\n$\\operatorname{Ex}_!$ defining the Weil structure on $Rf_!\\mathcal F$ is the\nexchange map $\\operatorname{Ex}_*$ defining the Weil structure on\n$Rf_*\\mathcal F$ ([cor-cbc-proper-coincidence], and the description of the\nWeil isomorphisms in [prop-weil-operations]). Hence\n$R^{i}f_{0!}\\mathcal F_0\\to R^{i}f_{0*}\\mathcal F_0$ is an isomorphism of\nWeil sheaves for every $i$; this is the first half of (a).\n\nFor local constancy, choose a lattice for $\\mathcal F$ over the ring of\nintegers $\\mathcal O_E$ of a finite extension $E/\\Ql$, with reductions\n$\\mathcal F_n$ modulo $\\lambda^{n}$; since $\\mathcal F$ is lisse, each\n$\\mathcal F_n$ is a finite locally constant sheaf of\n$\\mathcal O_E/\\lambda^{n}$-modules, of $\\ell$-power torsion with $\\ell$\ninvertible on $Y$. By [thm-fin-proper-constructibility-complete] the sheaves\n$R^{q}f_*\\mathcal F_n$ are constructible, and a constructible sheaf all of\nwhose specialization maps are isomorphisms is locally constant; so it\nsuffices to show that for a geometric point $\\bar s$ of $Y$ and a geometric\npoint $\\bar t$ of the strict henselization $Y'=Y_{(\\bar s)}$ the\nspecialization map\n$(R^{q}f_*\\mathcal F_n)_{\\bar s}\\to(R^{q}f_*\\mathcal F_n)_{\\bar t}$ is an\nisomorphism. Proper base change\n[prop-weil-proet-finite-proper-base-change] along $Y'\\to Y$ lets us replace\n$f$ by its base change $f':X'\\to Y'$, which is again smooth and proper, with\nclosed point $\\bar s$; then\n$(R^{q}f'_*\\mathcal F_n)_{\\bar s}=H^{q}(X',\\mathcal F_n)$ ($Y'$ being strictly\nlocal), the geometric-fibre formula [cor-weil-pbc-geometric-fiber-finite]\nidentifies $(R^{q}f'_*\\mathcal F_n)_{\\bar t}$ with\n$H^{q}(X'_{\\bar t},\\mathcal F_n)$, and the specialization map becomes the\nrestriction along $h:X'_{\\bar t}\\to X'$. We show that\n$\\mathcal F_n\\to Rh_*h^{-1}\\mathcal F_n$ restricts to an isomorphism on the\nclosed fibre $X'_{\\bar s}$. The question is étale local on $X'$ and\n$R^{q}h_*$ commutes with étale restriction, so we may pass to an étale\n$U\\to X'$ on which $\\mathcal F_n$ is constant, with value $M$; the composite\n$U\\to Y'$ is smooth, and smooth base change [sbc-thm-smooth-base-change],\napplied to the cartesian square formed by $U\\to Y'$ and the\nquasi-compact quasi-separated $\\bar t:\\Spec\\Omega\\to Y'$ and to the\nconstant sheaf $M$ on $\\Spec\\Omega$, gives\n$R^{q}h_{U*}M\\cong(U\\to Y')^{-1}R^{q}\\bar t_*M$. As $Y'$ is strictly local,\nthe stalk of $R^{q}\\bar t_*M$ at $\\bar s$ is $H^{q}(\\Spec\\Omega,M)$, which is\n$M$ for $q=0$ and $0$ for $q>0$ since $\\Omega$ is separably closed. Thus\n$(Rh_*h^{-1}\\mathcal F_n)|_{X'_{\\bar s}}\\cong\\mathcal F_n|_{X'_{\\bar s}}$.\nApplying [cor-weil-pbc-geometric-fiber-finite] at the closed point\n$\\bar s$ of the strictly local $Y'$ twice, to\n$K=Rh_*h^{-1}\\mathcal F_n\\in D^+(X',\\mathcal O_E/\\lambda^{n})$ and to\n$\\mathcal F_n$, we get\n\n$$\nH^{q}(X'_{\\bar t},\\mathcal F_n)=H^{q}(X',Rh_*h^{-1}\\mathcal F_n)\n\\cong H^{q}\\bigl(X'_{\\bar s},(Rh_*h^{-1}\\mathcal F_n)|_{X'_{\\bar s}}\\bigr)\n\\cong H^{q}(X'_{\\bar s},\\mathcal F_n)\\cong H^{q}(X',\\mathcal F_n),\n$$\n\ncompatibly with restriction along $h$. So every specialization map is an\nisomorphism, and every $R^{q}f_*\\mathcal F_n$ is finite locally constant.\nNo separate local-acyclicity theorem is needed: the vanishing of\n$R^{q}h_*$ along the closed fibre is exactly what smooth base change\nsupplies. The complexes $Rf_*\\mathcal F_n$ form the reduction tower of\n$Rf_*$ of the lattice; passing to the limit and inverting $\\lambda$, with\nthe stalks computed by [cor-weil-pbc-geometric-fiber-qbar], the\nspecialization maps of $R^{i}f_*\\mathcal F$ are isomorphisms of\nfinite-dimensional $\\Qlb$-vector spaces and $R^{i}f_*\\mathcal F$ is lisse.\nThis completes (a).",
+   "uses": [
+    "cor-cbc-proper-coincidence",
+    "prop-weil-operations",
+    "thm-fin-proper-constructibility-complete",
+    "prop-weil-proet-finite-proper-base-change",
+    "cor-weil-pbc-geometric-fiber-finite",
+    "sbc-thm-smooth-base-change",
+    "cor-weil-pbc-geometric-fiber-qbar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2 (upper bound).* A punctually $\\iota$-pure sheaf of weight $w$ is\n$\\iota$-mixed of weights at most $w$ in the sense of\n[def-weil-punctual-weights] (take $m=1$, $w_1=w$). Hence\n[cor-zl-rfshriek-sheaf], applied to the separated finite-type\n$f_0$, shows that $R^{i}f_{0!}\\mathcal F_0=R^{i}f_{0*}\\mathcal F_0$ is\n$\\iota$-mixed of weights at most $w+i$. Taking the stalk at $\\bar y$ of the\nfiltration in [def-weil-punctual-weights] is exact and $F_y$-equivariant,\nso every eigenvalue $\\alpha$ of $F_y$ on $(R^{i}f_{0*}\\mathcal F_0)_{\\bar y}$\nis an eigenvalue on a graded piece of some weight $w_r\\leq w+i$, whence\n$|\\iota(\\alpha)|\\leq q_y^{(w+i)/2}$.",
+   "uses": [
+    "def-weil-punctual-weights",
+    "cor-zl-rfshriek-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3 (lower bound by relative Verdier duality).* Let\n$\\mathcal F_0^\\vee=R\\mathcal H om(\\mathcal F_0,\\Qlb)$ be the coefficient dual\nof $\\mathcal F_0$: since $\\mathcal F$ is lisse, it is locally on the site a\nfinite free $\\Qlb$-module, so by [lem-sf-hom-finite-projective]\n$\\mathcal F^\\vee$ is concentrated in degree $0$, lisse, and a Weil sheaf by\n[prop-weil-operations]; its local Frobenius at a closed point $x$ is the\ncontragredient of that of $\\mathcal F_0$, so its eigenvalues are the\n$\\beta^{-1}$ with $\\beta$ an eigenvalue of $F_x$ on $\\mathcal F_{\\bar x}$,\nand as $|\\iota(\\beta^{-1})|=|\\iota(\\beta)|^{-1}=q_x^{-w/2}$ it is\npunctually $\\iota$-pure of weight $-w$. By\n[lem-wf-tate-twist-frobenius] the local Frobenius on $\\Qlb(d)_{\\bar x}$\nis $q_x^{-d}$, so $\\mathcal F_0^\\vee(d)$ is lisse and punctually\n$\\iota$-pure of weight $-w-2d$.\n\nThe relative duality isomorphism is assembled from three canonical\nisomorphisms, each a morphism of Weil complexes by [prop-weil-operations]\n(composition, purity and duality isomorphisms are Weil). First, the\ntensor–Hom form of the Verdier exchange [lem-sf-tensor-hom], applied to\n$f$ with $M=\\mathcal F$ and $N=\\Qlb_Y$, together with $Rf_!=Rf_*$\nfrom Step 1:\n\n$$\nRf_*R\\mathcal H om_X\\bigl(\\mathcal F,Rf^!\\Qlb_Y\\bigr)\\xrightarrow{\\ \\sim\\ }\nR\\mathcal H om_Y\\bigl(Rf_*\\mathcal F,\\Qlb_Y\\bigr).\n$$\n\nSecond, the smooth orientation: [thm-pur-rational-and-qbar-purity], for the\nsmooth separated $f$ of relative dimension $d$ and $K=\\Qlb_Y$ at the\n$\\Qlb$-stage, gives $\\Qlb_X(d)[2d]=Lf^*\\Qlb_Y(d)[2d]\\xrightarrow{\\sim}Rf^!\\Qlb_Y$.\nThird, the perfect form of duality: $\\mathcal F$ is perfect over\n$\\Qlb_X$, so [lem-sf-twist-interchange] with $m=d$, $n=2d$ gives\n$R\\mathcal H om_X(\\mathcal F,\\Qlb_X(d)[2d])\\cong\\mathcal F^\\vee(d)[2d]$.\nComposing,\n\n$$\nR\\mathcal H om_Y\\bigl(Rf_*\\mathcal F,\\Qlb_Y\\bigr)\\;\\cong\\;\nRf_*\\bigl(\\mathcal F^\\vee(d)\\bigr)[2d]\n$$\n\nas Weil complexes on $Y$. By Step 1 the cohomology sheaves\n$R^{j}f_*\\mathcal F$ of $Rf_*\\mathcal F$ are lisse; for a lisse sheaf\n$\\mathcal L$ on $Y$, [lem-sf-hom-finite-projective] (locally on the site\n$\\mathcal L$ is finite free) gives\n$\\mathcal E xt^{r}(\\mathcal L,\\Qlb_Y)=0$ for $r>0$ and\n$\\mathcal H om(\\mathcal L,\\Qlb_Y)=\\mathcal L^\\vee$ lisse, with stalks the\nlinear duals of those of $\\mathcal L$. Induction on the truncation\ntriangles of the bounded complex $Rf_*\\mathcal F$ therefore identifies the\ncohomology sheaf in degree $-i$ of the left side with\n$(R^{i}f_*\\mathcal F)^\\vee$. Taking $\\mathcal H^{-i}$ of both sides gives the\nFrobenius-equivariant isomorphism of lisse sheaves\n\n$$\n\\bigl(R^{i}f_{0*}\\mathcal F_0\\bigr)^{\\vee}\n\\;\\cong\\;\nR^{2d-i}f_{0*}\\bigl(\\mathcal F_0^{\\vee}(d)\\bigr).\n$$\n\nNow fix a closed point $y\\in|Y_0|$ and $\\bar y$ over it. Step 2 applied to\nthe lisse, punctually pure $\\mathcal F_0^\\vee(d)$ of weight $-w-2d$ in degree\n$2d-i$ bounds every eigenvalue $\\gamma$ of $F_y$ on the right-hand stalk by\n$|\\iota(\\gamma)|\\leq q_y^{(-w-2d+2d-i)/2}=q_y^{(-w-i)/2}$. The left-hand\nsheaf being the dual of a lisse sheaf, its stalk at $\\bar y$ is the\nlinear dual of $(R^{i}f_{0*}\\mathcal F_0)_{\\bar y}$ with the contragredient\naction of $F_y$, whose eigenvalues are the $\\alpha^{-1}$ with $\\alpha$ an\neigenvalue of $F_y$ on $(R^{i}f_{0*}\\mathcal F_0)_{\\bar y}$. Hence\n$|\\iota(\\alpha)|^{-1}\\leq q_y^{(-w-i)/2}$, i.e.\n\n$$\n|\\iota(\\alpha)|\\geq q_y^{(w+i)/2}.\n$$\n\nWith Step 2 this gives $|\\iota(\\alpha)|=q_y^{(w+i)/2}$ for every\neigenvalue of every $F_y$, which is punctual $\\iota$-purity of weight $w+i$.\nThis proves (b).",
+   "uses": [
+    "lem-sf-hom-finite-projective",
+    "prop-weil-operations",
+    "lem-wf-tate-twist-frobenius",
+    "lem-sf-tensor-hom",
+    "thm-pur-rational-and-qbar-purity",
+    "lem-sf-twist-interchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*What the upgrade costs.* Steps 1 and 3 use only smoothness, properness and\nduality; no no-cancellation argument enters, because purity is read off\neigenvalue by eigenvalue. All the arithmetic sits in\n[cor-zl-rfshriek-sheaf]: without it Step 3 bounds nothing, and with it both\ninequalities are automatic.",
+   "uses": [
+    "cor-zl-rfshriek-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "cor-zl-rfshriek-sheaf",
+  "cor-cbc-proper-coincidence",
+  "prop-weil-operations",
+  "thm-fin-proper-constructibility-complete",
+  "prop-weil-proet-finite-proper-base-change",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "sbc-thm-smooth-base-change",
+  "cor-weil-pbc-geometric-fiber-qbar",
+  "def-weil-punctual-weights",
+  "lem-sf-hom-finite-projective",
+  "lem-wf-tate-twist-frobenius",
+  "lem-sf-tensor-hom",
+  "thm-pur-rational-and-qbar-purity",
+  "lem-sf-twist-interchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/prop-zl-smooth-proper-relative-purity.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2868,
+ "blueprint_uses": [
+  "cor-cbc-proper-coincidence",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "cor-weil-pbc-geometric-fiber-qbar",
+  "cor-zl-rfshriek-sheaf",
+  "def-weil-punctual-weights",
+  "lem-sf-hom-finite-projective",
+  "lem-sf-tensor-hom",
+  "lem-sf-twist-interchange",
+  "lem-wf-tate-twist-frobenius",
+  "prop-weil-operations",
+  "prop-weil-proet-finite-proper-base-change",
+  "sbc-thm-smooth-base-change",
+  "thm-fin-proper-constructibility-complete",
+  "thm-pur-rational-and-qbar-purity"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "labels"
+}

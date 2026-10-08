@@ -1,0 +1,84 @@
+{
+ "id": "lem-wf-same-lie-closed-subgroup",
+ "kind": "statement",
+ "title": "Smoothness, dimension and Lie algebras of matrix groups",
+ "statement": "Let $K$ be a closed matrix group over $\\overline{\\mathbf Q}_\\ell$.\n\n1. If $K$ is connected, then $K$ is irreducible. Moreover, if $K$ is\n   connected, $L\\subseteq K$ is a closed algebraic subgroup and\n   $\\operatorname{Lie}(L)=\\operatorname{Lie}(K)$, then $L=K$.\n2. $K$ is smooth, and\n   $\\dim\\operatorname{Lie}(K)=\\dim K$.\n3. The identity component $K^\\circ$ of [def-wf-algebraic-components]\n   is open (and closed) in $K$, and\n   $\\operatorname{Lie}(K^\\circ)=\\operatorname{Lie}(K)$.\n4. The differential at $(1,1)$ of the multiplication\n   $K\\times K\\to K$ is the map\n   $\\operatorname{Lie}(K)\\oplus\\operatorname{Lie}(K)\\to\\operatorname{Lie}(K)$,\n   $(X,Y)\\mapsto X+Y$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+  "place": "node lem-wf-same-lie-closed-subgroup, order 2491",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01V5"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-wf-algebraic-components"
+ ],
+ "proof": [
+  {
+   "text": "*Smoothness.* A reduced finite-type variety over the characteristic-zero field\n$\\overline{\\mathbf Q}_\\ell$ has a nonempty smooth locus by the\nelementary Jacobian criterion. In an algebraic group, translation\ncarries a smooth point to the identity and then the identity to every\nother point. Thus every closed point of the reduced closed matrix groups $K$ and\n$L$ is a smooth point; since the nonsmooth locus is closed\n([Stacks 01V5](https://stacks.math.columbia.edu/tag/01V5)) and a\nnonempty closed subset of a finite-type $\\overline{\\mathbf Q}_\\ell$-scheme\ncontains a closed point, $K$ and $L$ are smooth. In particular every local ring of $K$ is regular, hence\nis an integral domain. If two distinct irreducible components of\n$K$ met at a point $x$, the local ring $\\mathcal O_{K,x}$ would\nhave at least two minimal prime ideals, one from each component, and\ncould not be a domain. Therefore the finitely many irreducible\ncomponents of $K$ are pairwise disjoint\n([lem-wf-smooth-components-disjoint]); each is consequently both\nopen and closed.",
+   "uses": [
+    "lem-wf-smooth-components-disjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Dimension.* Smoothness at the identity makes\n$\\mathcal O_{K,1}$ regular, so\n$\\dim_k\\mathfrak m_1/\\mathfrak m_1^2=\\dim\\mathcal O_{K,1}$, and the\nleft side is the dimension of the tangent space at the identity, which\nis $\\operatorname{Lie}(K)$ by [def-wf-lie-algebra-derivation].\nTranslations are automorphisms of the variety $K$\n([lem-sc-translation-automorphism]), so the local\ndimensions $\\dim\\mathcal O_{K,g}$ at all closed points $g$ agree, and\nthe dimension of $K$ is their maximum. Hence\n$\\dim\\operatorname{Lie}(K)=\\dim K$, and likewise\n$\\dim\\operatorname{Lie}(L)=\\dim L$. This proves (2).",
+   "uses": [
+    "def-wf-lie-algebra-derivation",
+    "lem-sc-translation-automorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Identity component.* Let $K_1$ be the unique irreducible component\ncontaining the identity.\nThe image of the irreducible variety $K_1\\times K_1$ under\nmultiplication is irreducible and contains the identity, so its closure\nlies in the unique component $K_1$. Hence $K_1K_1\\subseteq K_1$.\nInversion sends $K_1$ to an irreducible component containing the\nidentity, hence to $K_1$. Thus $K_1$ is a subgroup. Translation by\n$g\\in K$ sends $K_1$ onto the irreducible component containing\n$g$. Since $K_1$ is irreducible, it is connected; being open and\nclosed, it is the connected component of the identity, so\n$K^\\circ=K_1$ is open and closed in $K$. The local ring of the open\nsubscheme $K^\\circ$ at the identity is $\\mathcal O_{K,1}$, so its\ntangent space at the identity is unchanged:\n$\\operatorname{Lie}(K^\\circ)=\\operatorname{Lie}(K)$. This proves (3).\nIf $K$ is connected in the sense of [def-wf-algebraic-components], the\nnonempty open and closed subset $K_1$ must be all of $K$; thus $K$ is\nirreducible.",
+   "uses": [
+    "def-wf-algebraic-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Equal Lie algebras.* Let $K$ be connected, hence irreducible, and\n$L\\subseteq K$ with $\\operatorname{Lie}(L)=\\operatorname{Lie}(K)$.\nBy (2), equality of Lie algebras gives $\\dim L=\\dim K$, so\n[lem-ag-equal-dimension-subgroup], applied to the irreducible matrix\ngroup $K$ and its closed subgroup $L$, gives $L=K$.\nThis proves (1).",
+   "uses": [
+    "lem-ag-equal-dimension-subgroup"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Multiplication.* The tangent space at the identity is the space of\n$X$ with $1+\\varepsilon X\\in K(k[\\varepsilon]/\\varepsilon^2)$ lying\nover the identity. Points of a product with values in\n$k[\\varepsilon]/\\varepsilon^2$ are pairs of such points, so the tangent\nspace of $K\\times K$ at $(1,1)$ is\n$\\operatorname{Lie}(K)\\oplus\\operatorname{Lie}(K)$. Multiplication\nsends the pair $(1+\\varepsilon X,1+\\varepsilon Y)$ to\n\n$$\n(1+\\varepsilon X)(1+\\varepsilon Y)=1+\\varepsilon(X+Y),\n$$\n\nsince $\\varepsilon^2=0$. Hence its differential at $(1,1)$ is\n$(X,Y)\\mapsto X+Y$, which proves (4).",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-smooth-components-disjoint",
+  "def-wf-lie-algebra-derivation",
+  "lem-sc-translation-automorphism",
+  "def-wf-algebraic-components",
+  "lem-ag-equal-dimension-subgroup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2491,
+ "blueprint_uses": [
+  "def-wf-algebraic-components",
+  "def-wf-lie-algebra-derivation",
+  "lem-ag-equal-dimension-subgroup",
+  "lem-sc-translation-automorphism",
+  "lem-wf-smooth-components-disjoint"
+ ],
+ "proof_split_by": "labels"
+}

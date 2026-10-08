@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-finite-compact-projection-formula",
+ "kind": "statement",
+ "title": "Finite-coefficient compact-support projection formula",
+ "statement": "Fix the finite-field datum\nand finite coefficient ring $A=A_{E,n}$.\nLet $f:X\\to Y$ be a\nseparated finite-type\nmorphism of finite-type $k$-schemes.\nOn the small etale sites, let\n$K\\in D^b_c(X_{\\mathrm{et}},A)$ and\n$L\\in D^b_c(Y_{\\mathrm{et}},A)$, in the\nderived categories of\nbounded complexes with constructible cohomology.\nAssume $L$ has\nfinite Tor amplitude,\nusing the same tensor-vanishing definition on the etale site.\nThe projection transformation,\nformed with the\nderived tensor and pullback\nand the compact-support\ndirect image, is an isomorphism:\n\n$$\nRf_!K\\otimes_A^L L\n\\xrightarrow{\\ \\sim\\ } Rf_!(K\\otimes_A^L Lf^*L).\n$$\n\nIt is natural in $K,L$.\nThe same assertion holds for their pro-etale realizations equipped\nwith etale-origin witnesses,\nwhere the representatives satisfy the displayed hypotheses.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-sf-pf-finite/lem-weil-finite-compact-projection-formula.md",
+  "place": "node lem-weil-finite-compact-projection-formula, order 1878"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "First work on the etale site. Choose a compactification\n$f=p\\circ j$. By [def-compact-support-direct-image-detailed],\n$Rf_!=Rp_*j_!$. The map of [def-exchange-projection]\nis the composite of the direct-image projection map for $p$\nand\n\n$$\nj_!K\\otimes_A^L p^*L\n\\cong j_!(K\\otimes_A^L f^*L).\n$$",
+   "uses": [
+    "def-compact-support-direct-image-detailed",
+    "def-exchange-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The latter isomorphism can be checked on etale stalks: on the open\nsubset both maps are the identity, and off it both terms are zero.\nThe same calculation works with K-flat representatives for the\n[def-weil-derived-pullback-tensor-hom] derived tensor product.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point,\nlet $X_{\\bar y}=X\\times_Y\\operatorname{Spec}\\Omega$, and write\n$K_{\\bar y}^{\\mathrm{fib}}$ for the pullback of $K$ to this fiber\nand $P=L_{\\bar y}\\in D(A)$.\nCompact-support base change [thm-cbc-finite-torsion]\nand exactness of geometric stalks identify the stalk of the\ndisplayed projection map with\n\n$$\nR\\Gamma_c(X_{\\bar y},K_{\\bar y}^{\\mathrm{fib}})\\otimes_A^L P\n\\longrightarrow\nR\\Gamma_c(X_{\\bar y},\nK_{\\bar y}^{\\mathrm{fib}}\\otimes_A^L\\underline P).\n$$",
+   "uses": [
+    "thm-cbc-finite-torsion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Here $\\underline P$ is the pullback of the complex of $A$-modules\n$P$ from $\\operatorname{Spec}\\Omega$.\nBoth base-change applications are legitimate: finite Tor amplitude\nof $L$ makes $K\\otimes_A^L f^*L$ bounded below.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "This identification concerns the actual projection map.\nIndeed the exchange map in [def-cbc-exchange-map] is obtained\nfrom proper base change and the open-immersion base-change map.\nFor the proper part, transposing either order of exchange and\nprojection gives the same composite: pull back\n$Rp_*j_!K\\otimes L$, apply the counit\n$p^*Rp_*j_!K\\to j_!K$ to the first factor, and retain the\npullback of $L$ in the second factor.\nFor the open part, both composites are the identity on the open\nstalks and zero on the complementary stalks. Thus the exchange\nidentifications carry the chosen projection map to the fiber map.",
+   "uses": [
+    "def-cbc-exchange-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stalk-perfectness lemma [fix-lem-finite-tor-perfect]\ngives a bounded finite-free representative of $P$.\nFor fixed $K_{\\bar y}^{\\mathrm{fib}}$, the two sides of the fiber\nmap are exact functors of $P$ on bounded complexes of finite\nprojective $A$-modules, and the displayed map is a natural\ntransformation of these functors.\nFor $P=A$ it is the unit identification, hence an isomorphism.\nIt remains an isomorphism after finite direct sums, shifts,\nmapping cones, and direct summands: for cones use the long exact\ncohomology sequences, and for summands restrict the inverse along\nthe splitting maps.\nSuccessive truncation by terms builds every bounded finite-free\ncomplex from finite sums of shifts of $A$.\nIt follows that the fiber map is an isomorphism for this $P$.\nEvery geometric stalk of the cone of the original projection map\ntherefore vanishes. Conservativity on the etale site,\n[lemma-weil-pbc-geometric-stalk-conservative], proves that its\ncone is zero. Naturality follows from the construction.",
+   "uses": [
+    "fix-lem-finite-tor-perfect",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the pro-etale assertion, use the specified representatives in\n[def-weil-pbc-etale-origin-witness].\nThe exact comparison inverse image of\n[thm-weil-pbc-site-comparison] commutes with tensor and\npullback, while the compact-support comparison used in\n[thm-cbc-finite-level-proetale] identifies the transported\n$Rp_*j_!$ and its exchange maps.\nThe same counit computation above identifies the transported\nprojection map with the pro-etale one. Transporting the etale\nisomorphism proves the assertion for these realizations.",
+   "uses": [
+    "def-weil-pbc-etale-origin-witness",
+    "thm-weil-pbc-site-comparison",
+    "thm-cbc-finite-level-proetale"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-compact-support-direct-image-detailed",
+  "def-exchange-projection",
+  "def-weil-derived-pullback-tensor-hom",
+  "thm-cbc-finite-torsion",
+  "def-cbc-exchange-map",
+  "fix-lem-finite-tor-perfect",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-etale-origin-witness",
+  "thm-weil-pbc-site-comparison",
+  "thm-cbc-finite-level-proetale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-sf-pf-finite/lem-weil-finite-compact-projection-formula.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1878,
+ "blueprint_uses": [
+  "def-cbc-exchange-map",
+  "def-compact-support-direct-image-detailed",
+  "def-exchange-projection",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-scheme-morphism-properties",
+  "fix-lem-finite-tor-perfect",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-cbc-finite-level-proetale",
+  "thm-cbc-finite-torsion",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "uses_not_cited": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs"
+}

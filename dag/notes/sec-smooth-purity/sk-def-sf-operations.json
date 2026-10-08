@@ -1,0 +1,34 @@
+{
+ "id": "sk-def-sf-operations",
+ "kind": "section",
+ "title": "The six operations: ambient typing",
+ "text": "*Definition (sketch).*\n\nFor a separated finite-type $f:X\\to Y$ the six operations are the following\nfunctors of ambient categories, with the framework and proper-base-change\nchapters supplying the definitions:\n\n3pt\n1. **(i)** the derived pullback, the derived tensor product and the derived\ninternal Hom\n$$\n\\begin{aligned}\nLf^*&:D(Y,\\Lambda)\\longrightarrow D(X,\\Lambda),\\\\\n-\\otimes^L_\\Lambda-&:D(Y,\\Lambda)\\times D(Y,\\Lambda)\\longrightarrow D(Y,\\Lambda),\\\\\n\\RHom_\\Lambda(-,-)&:D(Y,\\Lambda)^{\\mathrm{op}}\\times D(Y,\\Lambda)\\longrightarrow D(Y,\\Lambda),\n\\end{aligned}\n$$\nas in def:weil-derived-pullback-tensor-hom;\n1. **(ii)** the derived direct image\n$Rf_*:D^+(X,\\Lambda)\\to D^+(Y,\\Lambda)$, as in\ndef:weil-derived-direct-image;\n1. **(iii)** extension by zero $j_!:D^+(U,\\Lambda)\\to D^+(X,\\Lambda)$ for an\nopen immersion $j:U\\hookrightarrow X$, as in def:weil-extension-by-zero;\n1. **(iv)** the compact-support direct image $Rf_!=R\\bar f_*j_!$ attached to a\ncompactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$, as a functor of\nambient categories, the compactification-independence being asserted only on\nthe étale-origin complexes of def:compact-support-direct-image;\n1. **(v)** *the ambient exceptional right adjoint* $Rf^{\\times}$, an\n*optional and conditional* notion that nothing downstream uses. It is\nnot defined, it is *assumed*: a functor of ambient categories\n$$\nRf^{\\times}:D(Y,\\Lambda)\\longrightarrow D(X,\\Lambda)\n$$\nwhich is right adjoint to $Rf_!$ of (iv). Its *existence* — together\nwith $\\operatorname{FullCD}$ for the proper part of the compactification and\nthe compatibility of units and counits with refinements, and with no\nassertion about its values — is the *ambient exceptional right adjoint\ndatum*, clause (1) of [sk-def-sf-admissible]. The stronger\n*admissibility datum* of [sk-def-sf-admissible] adds the two\npreservation clauses (2)–(3); nothing in (v) uses them. *Warning.*\nThe existence hypothesis of this datum, $\\operatorname{FullCD}$ on\n*every* pro-étale sheaf of $A$-modules, *fails* already for the\nstructure morphism of an elliptic curve $E$ over $\\overline{\\mathbf F}_p$ with\n$A=\\mathbf F_r$, $r\\neq p$: there is a pro-étale $A$-module sheaf\n$\\mathcal F$ on $E$ with $H^n(E_{\\Proet},\\mathcal F)\\neq0$ for every\n$n\\ge1$, and for that morphism $Rf_!=Rf_*$ does not preserve the coproduct\n$\\bigoplus_n\\mathcal F[n]$ and has no right adjoint on $D(E_{\\Proet},A)$,\nnor on $D^+$ ([sk-rem-sf-fullcd-scope]). Accordingly the datum\nis never a hypothesis of a result used on the proof chain to the final\ntheorems [sk-thm-weil1]–[sk-thm-weil5]; $Rf^{\\times}$ is kept only as\nthe name of the functor whose existence [sk-def-sf-admissible] (1) would\nassert, in the two ambient statements [sk-lem-sf-mate] (a) and\n[sk-thm-sf-package] (1);\n1. **(vi)** *the exceptional inverse image* $Rf^!$, a functor of the\nsmall categories\n$$\nRf^!:\\Dctf(Y,\\Lambda)\\longrightarrow\\Dctf(X,\\Lambda),\n$$\n*defined unconditionally* for every separated finite-type morphism\n$f:X\\to Y$ of finite-type $k$-schemes, as follows. At a finite stage\n$\\Lambda=A=A_{E,n}$ let $f^{\\times}:D(Y_{\\Et},A)\\to D(X_{\\Et},A)$ be the\nright adjoint of the étale compact-support functor $Rf^{\\Et}_!$, which\nexists unconditionally by [sk-prop-sf-existence] (a) (Brown\nrepresentability on the ordinary étale derived categories of the Noetherian\nschemes $X$, $Y$). Every object of $\\Dctf(Y,A)$ is of étale origin,\n$L\\cong\\nu_Y^*G$ with $G\\in\\Dctf(Y_{\\Et},A)$ unique up to unique isomorphism\n([09AK](https://stacks.math.columbia.edu/tag/09AK), [sk-prop-sf-comparison]), and one *defines*\n$$\nRf^!L:=\\nu_X^*\\,f^{\\times}G\\;=\\;\\nu_X^*\\,f^{\\times}R\\nu_{Y,*}L ,\n$$\nthe étale right adjoint transported along the étale/pro-étale\ncomparison (the second formula makes sense on all of $D^+(Y_{\\Proet},A)$ and\nagrees with the first on $\\Dctf$, since $G\\to R\\nu_{Y,*}\\nu_Y^*G$ is an\nisomorphism by the full faithfulness of $\\nu_Y^*$ on $D^+$). Its two\ndefining properties are *theorems*, not hypotheses: the\n*adjunction*\n$\\operatorname{Hom}_Y(Rf_!K,L)\\cong\\operatorname{Hom}_X(K,Rf^!L)$,\nnatural in every bounded-below $K$ of étale origin — in particular every\n$K\\in\\Dctf(X,A)$ — and every bounded-below $L$, with units and counits\ncompatible with refinements of the compactification\n([sk-prop-sf-existence] (c)); and the *preservation*\n$Rf^!\\Dctf(Y,A)\\subseteq\\Dctf(X,A)$, with explicit bounds on the\nconstructible interval and on the Tor amplitude\n([sk-prop-sf-rf-shriek-preservation], [sk-thm-sf-ctf-stability] (v); the\nprimary source for the preservation of constructibility and of finite Tor\ndimension with the non-regular coefficient rings $\\mathcal O_E/\\varpi_E^n$ is\nZheng, arXiv:1006.3810, Prop. 2.29(2), 3.16, 3.21 and Lemma 3.18). At the\nadic stages $\\mathcal O_E$, $E$, $\\Qlb$ the functor is defined levelwise on\nthe normalized systems, $Rf^!(L_n)_n=(Rf^!_nL_n)_n$, the finite-reduction\nisomorphisms $Rf^!_n(L_n)\\otimes^L_{A_{E,n}}A_{E,m}\\cong Rf^!_m(L_m)$\n($m\\le n$) of [sk-thm-sf-ctf-stability] (vii) making the result a normalized\nsystem again, followed by rationalization and the common-stage construction\n(def:weil-exceptional-inverse-image,\nprop:coef-integral-exceptional-adjoint,\nlem:coef-rational-operations). Thus in this blueprint $Rf^!$ always\ndenotes this constructible exceptional adjoint, and $Rf^{\\times}$ the\nhypothetical ambient functor of (v); when the latter exists and satisfies the\npreservation clauses, its restriction to $\\Dctf$ agrees with $Rf^!$ by\nuniqueness of adjoints, but nothing below needs this.\n\nThe exchange and projection transformations of [sk-def-sf-exchanges] are\nnatural transformations between composites of these functors, and are\ntherefore typed by the above. Whether an operation descends to a small\ncategory is *not* part of this definition; it is [sk-rem-sf-typing].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/_section.md",
+  "place": "order 1453"
+ },
+ "cites": [
+  "sk-def-sf-admissible",
+  "sk-rem-sf-fullcd-scope",
+  "sk-thm-weil1",
+  "sk-thm-weil5",
+  "sk-lem-sf-mate",
+  "sk-thm-sf-package",
+  "sk-prop-sf-existence",
+  "sk-prop-sf-comparison",
+  "sk-prop-sf-rf-shriek-preservation",
+  "sk-thm-sf-ctf-stability",
+  "sk-def-sf-exchanges",
+  "sk-rem-sf-typing"
+ ],
+ "blueprint_uses": [],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.upperStar",
+  "AlgebraicGeometry.Etale.rightDerivedLowerShriek",
+  "AlgebraicGeometry.Etale.rightDerivedUpperShriek",
+  "AlgebraicGeometry.Etale.derivedTensor",
+  "AlgebraicGeometry.Etale.derivedHom",
+  "AlgebraicGeometry.Etale.openImmersionLowerShriek"
+ ],
+ "blueprint_tags": []
+}

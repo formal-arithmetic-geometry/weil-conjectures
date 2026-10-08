@@ -1,0 +1,42 @@
+{
+ "id": "lem-galois-object-exists",
+ "kind": "statement",
+ "title": "Galois objects dominate connected objects",
+ "statement": "Let $(\\mathcal C,F)$ be a Galois category and $X$ a connected object.\nThen there is a Galois object $Z$ and a morphism $Z\\to X$. (The\nconstruction: the symmetric group acts on the $n$-fold fibre power\n$X^n$, and one takes a connected component whose fibre consists of tuples\nof pairwise distinct elements.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-object-exists.md",
+  "place": "node lem-galois-object-exists, order 971"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Let $(\\mathcal C,F)$ be a Galois category as in\n[def-galois-category] and let $X$ be connected. Write\n$n=\\#F(X)$ and consider $X^n$ with the action of $S_n$ by\npermutation of the factors. By axiom (2) write\n$X^n=\\coprod_{t\\in T}Z_t$ with $Z_t$ connected. Fix an enumeration\n$s_1,\\dots,s_n$ of $F(X)$; then $(s_1,\\dots,s_n)\\in F(X)^n=F(X^n)$\nlies in $F(Z_t)$ for some $t$.\nClaim 1: every element $(s_1',\\dots,s_n')\\in F(Z_t)$ consists of pairwise\ndistinct elements. Otherwise $s_i'=s_j'$ for some $i\\neq j$, and then\n$Z_t$ is the image of a connected component of $X^{n-1}$ under the\ndiagonal $\\Delta_{ij}$; as a morphism from a connected object,\n$\\Delta_{ij}$ is an epimorphism by [lem-galois-axioms](4) and hence\ninduces a surjection on fibres, giving $s_i=s_j$, a contradiction.\nClaim 2: the stabilizer $G=\\{g\\in S_n:g(Z_t)=Z_t\\}$ acts transitively on\n$F(Z_t)$. Indeed, for $(s_i')\\in F(Z_t)$ the $s_i'$ are pairwise\ndistinct by Claim 1, so there is $g\\in S_n$ with\n$g(s_1,\\dots,s_n)=(s_1',\\dots,s_n')$, and then\n$g(s_1,\\dots,s_n)\\in F(Z_t)$ forces $g(Z_t)=Z_t$.\nStep 3: conclusion. Each $g\\in G$ induces an automorphism of $Z_t$, and\n$G\\to\\operatorname{Aut}(Z_t)$ is injective by\n[lem-galois-axioms](6) applied to $Z_t$ and $(s_1,\\dots,s_n)$.\nHence $\\operatorname{Aut}(Z_t)$ acts transitively on $F(Z_t)$ by\nClaim 2, so $\\#\\operatorname{Aut}(Z_t)\\ge\\#F(Z_t)$, while\n$\\#\\operatorname{Aut}(Z_t)\\le\\#F(Z_t)$ by [lem-galois-axioms](6);\nequality holds and $Z_t$ is Galois. The projection $X^n\\to X$ to the\nfirst factor restricts to $Z_t\\to X$.",
+   "uses": [
+    "def-galois-category",
+    "lem-galois-axioms"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-galois-category",
+  "lem-galois-axioms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-object-exists.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 971,
+ "blueprint_uses": [
+  "def-galois-category",
+  "lem-galois-axioms"
+ ],
+ "proof_split_by": "paragraphs"
+}

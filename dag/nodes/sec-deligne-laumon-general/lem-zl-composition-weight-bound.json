@@ -1,0 +1,71 @@
+{
+ "id": "lem-zl-composition-weight-bound",
+ "kind": "statement",
+ "title": "Composition preserves the direct-image weight bound",
+ "statement": "Let $h:X_0\\to Z_0$ and $g:Z_0\\to Y_0$ be separated finite-type\nmorphisms of separated finite-type $k_0$-schemes. Suppose the\ndirect-image weight assertion holds for $h$ and for $g$: for every\nreal $v$, every $\\iota$-mixed Weil sheaf of weights at most $v$ on the\nsource has its $i$th higher direct image with compact support\n$\\iota$-mixed of weights at most $v+i$, for every $i$. Then the same\nassertion holds for $gh$: if $\\mathcal F$ is an $\\iota$-mixed Weil\nsheaf on $X_0$ of weights at most $w$, then $R^n(gh)_!\\mathcal F$ is\n$\\iota$-mixed of weights at most $w+n$ for every $n$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-composition-weight-bound.md",
+  "place": "node lem-zl-composition-weight-bound, order 2821"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "By [lem-zl-shriek-composition] there is a Frobenius-compatible\nisomorphism $R(gh)_!\\mathcal F\\simeq Rg_!(Rh_!\\mathcal F)$. Apply the\nhypercohomology spectral sequence of the truncation construction\n[def-weil-pbc-hypercohomology-filtrations] to the exact functor $Rg_!$\nand the bounded complex $K=Rh_!\\mathcal F$, whose cohomology sheaves\nare $\\mathcal H^b(K)=R^bh_!\\mathcal F$. This is the compact-support\nLeray spectral sequence\n\n$$\nE_2^{a,b}=R^ag_!\\bigl(R^bh_!\\mathcal F\\bigr)\n\\ \\Longrightarrow\\ R^{a+b}(gh)_!\\mathcal F,\n$$\n\na spectral sequence of Weil sheaves (all maps are Frobenius-compatible,\n[def-weil-pbc-qbar-category]), with only finitely many nonzero terms\nand a finite abutment filtration\n([lemma-weil-pbc-hypercohomology-convergence]).",
+   "uses": [
+    "lem-zl-shriek-composition",
+    "def-weil-pbc-hypercohomology-filtrations",
+    "def-weil-pbc-qbar-category",
+    "lemma-weil-pbc-hypercohomology-convergence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By the assertion for $h$, the sheaf $R^bh_!\\mathcal F$ is $\\iota$-mixed\nof weights at most $w+b$. By the assertion for $g$, applied with\n$v=w+b$, the term $E_2^{a,b}$ is $\\iota$-mixed of weights at most\n$w+a+b$. Each later page $E_{r+1}^{a,b}$ is a subquotient of\n$E_r^{a,b}$, so $E_\\infty^{a,b}$ is a subquotient of $E_2^{a,b}$, and\nthe abutment $R^n(gh)_!\\mathcal F$ carries a finite filtration whose\ngraded pieces are the $E_\\infty^{a,b}$ with $a+b=n$; all of these are\nconstructible Weil sheaves and all maps are maps of Weil sheaves. For\n$a+b=n$ the sheaf $E_2^{a,b}$ is $\\iota$-mixed of weights at most\n$w+n$, so by the sheaf-level stability of mixedness under Weil\nsubsheaves and quotients, [lem-a1-mixed-direct-summand](1), applied\npage by page, so is $E_\\infty^{a,b}$. Stability under extensions,\n[lem-a1-mixed-direct-summand](2), applied along the finite filtration,\ngives the same bound for $R^n(gh)_!\\mathcal F$, in the sense of\n[def-weil-punctual-weights].",
+   "uses": [
+    "lem-a1-mixed-direct-summand",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-shriek-composition",
+  "def-weil-pbc-hypercohomology-filtrations",
+  "def-weil-pbc-qbar-category",
+  "lemma-weil-pbc-hypercohomology-convergence",
+  "lem-a1-mixed-direct-summand",
+  "def-weil-punctual-weights"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-composition-weight-bound.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2821,
+ "blueprint_uses": [
+  "def-weil-pbc-hypercohomology-filtrations",
+  "def-weil-pbc-qbar-category",
+  "def-weil-punctual-weights",
+  "lem-a1-mixed-direct-summand",
+  "lem-zl-shriek-composition",
+  "lemma-weil-pbc-hypercohomology-convergence"
+ ],
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+  "declaration": "AlgebraicGeometry.HasDirectImageWeightBound.comp",
+  "branch": "slopmaster2",
+  "line": 163,
+  "sorry_free": true,
+  "body_lines": 1
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.HasDirectImageWeightBound.comp"
+ ],
+ "proof_split_by": "paragraphs"
+}

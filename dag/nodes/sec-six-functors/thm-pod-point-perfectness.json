@@ -1,0 +1,122 @@
+{
+ "id": "thm-pod-point-perfectness",
+ "kind": "statement",
+ "title": "Point perfectness of global sections",
+ "statement": "Fix the finite-field datum and the coefficient stages\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$ of the Poincare duality\nconventions [def-pod-conventions], but let $X_0$ be an arbitrary\nseparated finite-type $k_0$-scheme: neither properness nor smoothness\nof $X_0$ is assumed. Put $X=X_0\\times_{k_0}k$, let\n$a_X:X\\to s=\\Spec k$ be the structure morphism, and let\n$d\\geq\\dim X$. Let $K\\in D^b_{ctf}(X,\\Lambda )$. Then the four\ncomplexes\n\n$$\nR\\Gamma (X,K),\\qquad R\\Gamma _c(X,K),\\qquad R\\Gamma (X,K)^\\vee,\\qquad R\\Gamma _c(X,K)^\\vee\n$$\n\nare perfect point complexes at every coefficient stage, in the\nfollowing sense.\n\n1. At finite level $\\Lambda=A=A_{E,n}$ they are bounded with finite\ncohomology modules and finite Tor amplitude, i.e. quasi-isomorphic to\nbounded complexes of finite free $A$-modules\n([def-pod-perfect-point-complex]). If $K$ has Tor amplitude in\n$[a,b]$, then $R\\Gamma(X,K)$ and $R\\Gamma_c(X,K)$ have Tor amplitude\nin $[a,b+2d]$ and their duals in $[-b-2d,-a]$.\n1. At the stage $\\mathcal O_E$ they lie in\n$D^b_{\\mathrm{fg}}(\\mathcal O_E)$ and are perfect; their reductions\nmodulo $\\varpi_E^n$ are the corresponding finite-level complexes of the\nreductions $K_n=K\\otimes^L_{\\mathcal O_E}A_{E,n}$, and these are\nperfect with one common amplitude independent of $n$.\n1. At the stages $E$ and $\\Qlb$ they are bounded with\nfinite-dimensional cohomology.\n\nIf $X_0$ is proper, the canonical comparison\n$R\\Gamma_c(X,K)\\xrightarrow{\\sim}R\\Gamma(X,K)$ of\n[def-weil-ordinary-compact-cohomology] identifies the two cases; in\nparticular this applies in the fixed setting of\n[def-pod-conventions]. (Source: the finiteness theorems of etale\ncohomology, Milne, Lectures on Etale Cohomology, Sections 19 and 29,\nfor the finiteness and the perfectness at the point. The finite-level\ncompact-support membership $R\\Gamma _c(X,K)\\in D^b_{\\mathrm{fin}}(A)$\nis recorded in [prop-trf-compact-support-perfectness].)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.md",
+  "place": "node thm-pod-point-perfectness, order 2249"
+ },
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-pod-perfect-point-complex",
+  "def-weil-ordinary-compact-cohomology",
+  "prop-trf-compact-support-perfectness"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1: the finite level.* Let $\\Lambda=A=A_{E,n}$ and let\n$K\\in D^b_{ctf}(X,A)$ have Tor amplitude in $[a,b]$\n([def-weil-finite-torsion-constructibility],\n[def-weil-finite-tor-amplitude]). At the geometric point $s$ a bounded\nconstructible complex is a bounded complex of $A$-modules with finite\ncohomology ([def-weil-finite-coefficient-point]), and the Tor\namplitude of a complex on $s$ is the Tor amplitude of the underlying\n$A$-module complex, since the sheaves of $A$-modules on $s$ are the\n$A$-modules.\n\nFor ordinary cohomology, apply [cor-sf-direct-image-ctf-proetale]\nto the separated finite-type morphism $a_X:X\\to s$: the complex\n$Ra_{X,*}K$ is bounded constructible with Tor amplitude in\n$[a,b+2d]$. Hence $R\\Gamma(X,K)$ is bounded, has finite cohomology\nmodules, and has Tor amplitude in $[a,b+2d]$. No properness is used.\n\nFor compact support, choose a compactification $a_X=\\bar a\\circ j$\nwith $j:X\\hookrightarrow\\bar X$ an open immersion and $\\bar a$ proper\n([def-compact-support-direct-image-detailed]); replacing $\\bar X$ by\nthe scheme-theoretic closure of $X$ we may assume $\\dim\\bar X\\leq d$.\nThen $Ra_{X,!}K=R\\bar a_*j_!K$. Extension by zero is exact and\ncommutes with derived tensor product, as one checks on stalks, so\n$j_!K$ is bounded constructible with Tor amplitude in $[a,b]$, and\n[cor-sf-direct-image-ctf-proetale] applied to $\\bar a$ gives Tor\namplitude in $[a,b+2d]$ for $R\\Gamma_c(X,K)$. The finiteness and\nboundedness of its cohomology is\n[prop-trf-compact-support-perfectness].\n\nBy [lem-trf-finite-tor-amplitude-perfect], a bounded complex of\n$A$-modules with finite cohomology and Tor amplitude in $[a',b']$ is\nquasi-isomorphic to a complex $P^\\bullet$ of finite free $A$-modules\nwith $P^i=0$ for $i\\notin[a',b']$. Hence $R\\Gamma(X,K)$ and\n$R\\Gamma_c(X,K)$ are represented by bounded complexes of finite free\n$A$-modules in degrees $[a,b+2d]$. For such a $P^\\bullet$ the derived\ndual $P^{\\bullet\\vee}=R\\operatorname{Hom}_A(P^\\bullet,A)$ is computed\ntermwise, $P^\\bullet$ being a bounded complex of projectives, and is\nthe complex of finite free modules $\\operatorname{Hom}_A(P^{-i},A)$\nin degrees $[-b-2d,-a]$. Thus all four complexes are perfect point\ncomplexes in the sense of [def-pod-perfect-point-complex], with the\nstated amplitudes.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude",
+    "def-weil-finite-coefficient-point",
+    "cor-sf-direct-image-ctf-proetale",
+    "def-compact-support-direct-image-detailed",
+    "prop-trf-compact-support-perfectness",
+    "lem-trf-finite-tor-amplitude-perfect",
+    "def-pod-perfect-point-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: the stage $\\mathcal O_E$.* Put $R=\\mathcal O_E$,\n$A_n=A_{E,n}$, $\\kappa=A_1$, and let $K\\in D^b_c(X,R)$ be a\nderived-complete integral object\n([def-weil-derived-complete-integral-detailed]) with reductions\n$K_n=K\\otimes^L_RA_n$. By [lem-coef-integral-residue-tor] all the\n$K_n$ have Tor amplitude in one interval $[a,b]$, namely the\ncohomological range of $K_1$. By Step 1 every\n$R\\Gamma(X,K_n)$ and $R\\Gamma_c(X,K_n)$ is a bounded complex of finite\nfree $A_n$-modules in the common interval $[a',b']=[a,b+2d]$.\n\nFor compact support, [lem-coef-integral-compact-support] applied to\n$a_X$ gives $R\\Gamma_c(X,K)\\in D^b_c(s,R)$ with\n$R\\Gamma_c(X,K)\\otimes^L_RA_n\\cong R\\Gamma_c(X,K_n)$, these\nreductions having the uniform Tor interval $[a,b+2d]$; the integral\ncompact support is the one of\n[def-weil-integral-rational-qbar-compact-support].\n\nFor ordinary cohomology, by [def-weil-derived-direct-image]\n$R\\Gamma(X,K)=R\\varprojlim_nR\\Gamma(X,K_n)$. The coefficient\ncomparisons of [lem-coef-finite-direct-image], applied to the\nquotients $A_m\\to A_n$ ($m\\geq n$), are isomorphisms\n$R\\Gamma(X,K_m)\\otimes^L_{A_m}A_n\\xrightarrow{\\sim}R\\Gamma(X,K_n)$\ncompatible with successive quotients, so\n$(R\\Gamma(X,K_n))_n$ is a normalized DVR tower on the point\n([def-coef-normalized-dvr-tower]).\n[lem-coef-normalized-dvr-effectivity] then gives\n$R\\Gamma(X,K)\\otimes^L_RA_n\\cong R\\Gamma(X,K_n)$ for all $n$, and\n$R\\Gamma(X,K)$ is derived complete.\n\nIt remains to see that a derived-complete $R$-complex $C$ whose\nreductions $C_n=C\\otimes^L_RA_n$ are perfect with amplitude in\n$[a',b']$ is perfect. The triangle\n$C\\xrightarrow{\\varpi_E}C\\to C_1\\to$ gives exact sequences\n\n$$\n0\\to H^i(C)/\\varpi_EH^i(C)\\to H^i(C_1)\\to H^{i+1}(C)[\\varpi_E]\\to0 .\n$$\n\nEach $H^i(C)$ is a derived-complete $R$-module, the cohomology modules\nof a derived-complete complex being derived complete. By the derived\nNakayama lemma for the ideal $(\\varpi_E)$ of the Noetherian ring $R$,\na derived-complete module $M$ with $M/\\varpi_EM=0$ vanishes, and one\nwith $M/\\varpi_EM$ finitely generated is finitely generated. Hence\n$H^i(C)=0$ for $i\\notin[a',b']$ and every $H^i(C)$ is a finitely\ngenerated $R$-module, i.e. $C\\in D^b_{\\mathrm{fg}}(R)$. Since $R$ is\na discrete valuation ring, every finitely generated $R$-module has a\ntwo-term resolution by finite free modules and every complex over $R$\nis quasi-isomorphic to the sum of its shifted cohomology modules;\ntherefore $C$ is quasi-isomorphic to a bounded complex of finite free\n$R$-modules, i.e. it is perfect ([def-pod-perfect-point-complex]),\nand its reductions are the perfect complexes $C_n$ of common\namplitude $[a',b']$. Applied to $C=R\\Gamma(X,K)$ and\n$C=R\\Gamma_c(X,K)$ this proves the assertion for these two complexes.\n\nFor the duals, if $P^\\bullet$ is a bounded complex of finite free\n$R$-modules representing $C$, then $C^\\vee$ is the termwise dual\ncomplex, again bounded and finite free, and\n$C^\\vee\\otimes^L_RA_n\\cong\\operatorname{Hom}_{A_n}(P^\\bullet\\otimes_RA_n,A_n)=C_n^\\vee$;\nby Step 1 these reductions are perfect in the common interval\n$[-b',-a']$.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-coef-integral-residue-tor",
+    "lem-coef-integral-compact-support",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-derived-direct-image",
+    "lem-coef-finite-direct-image",
+    "def-coef-normalized-dvr-tower",
+    "lem-coef-normalized-dvr-effectivity",
+    "def-pod-perfect-point-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3: the field stages.* For $\\Lambda=E$, the object is the\nrationalization of an integral object $K_R$\n([def-weil-rationalization-karoubi]), possibly up to a direct\nsummand, and the operations $R\\Gamma$ and $R\\Gamma_c$ at the stage $E$\nare the rationalizations of the integral ones\n([def-weil-derived-direct-image],\n[def-weil-integral-rational-qbar-compact-support]). By Step 2 they\nare $C\\otimes_RE$ with $C$ a perfect $R$-complex; since\n$R\\to E$ is flat, $H^i(C\\otimes_RE)=H^i(C)\\otimes_RE$ is\nfinite-dimensional and vanishes outside the bounded interval of $C$,\nand $(C\\otimes_RE)^\\vee=C^\\vee\\otimes_RE$ has the same property. A\ndirect summand of a bounded complex with finite-dimensional cohomology\nis again one. For $\\Lambda=\\Qlb$, the object is represented at a\nfinite stage $E'/\\Ql$ ([def-weil-algebraically-closed-coefficients]),\nand all four complexes are obtained from the $E'$-stage complexes by\nthe exact extension of scalars $-\\otimes_{E'}\\Qlb$, which preserves\nboundedness, finite-dimensionality and commutes with the dual of a\ncomplex with finite-dimensional total cohomology. This proves the\nfield-stage assertions.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-direct-image",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4: the proper case.* If $X_0$ is proper, then $a_X$ is proper\nand the comparison $R\\Gamma_c(X,K)\\to R\\Gamma(X,K)$ of\n[def-weil-ordinary-compact-cohomology] is an isomorphism at each\nstage, compatible with the constructions above; in the setting of\n[def-pod-conventions] this applies when $X_0$ is in addition proper.",
+   "uses": [
+    "def-weil-ordinary-compact-cohomology",
+    "def-pod-conventions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-coefficient-point",
+  "cor-sf-direct-image-ctf-proetale",
+  "def-compact-support-direct-image-detailed",
+  "prop-trf-compact-support-perfectness",
+  "lem-trf-finite-tor-amplitude-perfect",
+  "def-pod-perfect-point-complex",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-coef-integral-residue-tor",
+  "lem-coef-integral-compact-support",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-direct-image",
+  "lem-coef-finite-direct-image",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-normalized-dvr-effectivity",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-ordinary-compact-cohomology",
+  "def-pod-conventions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2249,
+ "blueprint_uses": [
+  "cor-sf-direct-image-ctf-proetale",
+  "def-coef-normalized-dvr-tower",
+  "def-compact-support-direct-image-detailed",
+  "def-pod-conventions",
+  "def-pod-perfect-point-complex",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-finite-direct-image",
+  "lem-coef-integral-compact-support",
+  "lem-coef-integral-residue-tor",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-trf-finite-tor-amplitude-perfect",
+  "prop-trf-compact-support-perfectness"
+ ],
+ "proof_split_by": "labels"
+}

@@ -1,0 +1,64 @@
+{
+ "id": "lem-sc-lang-steinberg",
+ "kind": "statement",
+ "title": "Lang–Steinberg for vector spaces",
+ "statement": "Let $k$ be an algebraically closed field of characteristic\n$p>0$, $V$ a finite-dimensional $k$-vector space and\n$F:V\\to V$ a $p$-linear endomorphism. Then\n\n$$\nF-1:V\\longrightarrow V\n$$\n\nis surjective.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-lang-steinberg/lem-sc-lang-steinberg.md",
+  "place": "node lem-sc-lang-steinberg, order 565",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0ASV"
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "*Step 1: the skew polynomial ring.* Let $k[\\tau]$ be the\nskew polynomial ring with $\\tau\\lambda=\\lambda^p\\tau$ for\n$\\lambda\\in k$. It is a left Euclidean domain: for\n$f,g\\in k[\\tau]$ with $g\\neq0$ and $\\deg f\\geq\\deg g$, write\n$f=c\\tau^{\\deg f-\\deg g}g+f'$ where $c\\in k$ is chosen so that\nthe leading terms cancel (the leading coefficient of\n$\\tau^mg$ with $g$ of leading term $a\\tau^n$ is\n$c\\,a^{p^m}$, and every element of the algebraically closed field\n$k$ has a $p^m$-th root, so $c$ exists) and $f'$ has smaller\ndegree. Hence every finitely generated torsion $k[\\tau]$-module\nis a direct sum of cyclic modules $k[\\tau]/k[\\tau]p(\\tau)$\n(the structure theorem for finitely generated torsion modules over\na principal ideal domain: *reference: Stacks Project, More on\nAlgebra, Lemma 15.126.9, [Tag 0ASV](https://stacks.math.columbia.edu/tag/0ASV); its proof reduces first to the\ntorsion case – automatic here, since for every nonzero\n$m\\in V$ the elements $m,\\tau m,\\tau^2m,\\dots$ lie in the\nfinite-dimensional $k$-vector space $k[\\tau]m\\subseteq V$, so\nthe first $k$-linear dependence\n$\\tau^dm=\\sum_{i=1}^da_i\\tau^{i-1}m$ yields the annihilator\n$p(\\tau)=\\tau^d-\\sum_{i=1}^da_i\\tau^{i-1}$ – and the induction\nof loc. cit. splits off cyclic direct summands using only the\ndivision algorithm, which carries over verbatim to the left\nEuclidean ring $k[\\tau]$ because every step involves only the\ndivision algorithm and left ideals*).",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 2: reduction to blocks.* The $p$-linear endomorphism\n$F$ makes $V$ a $k[\\tau]$-module via $\\tau\\cdot v:=F(v)$\n(indeed $\\tau\\cdot(\\lambda v)=F(\\lambda v)=\\lambda^pF(v)= \\tau\\lambda\\cdot v$). By Step 1, $V$ decomposes into cyclic\nblocks $k[\\tau]v\\cong k[\\tau]/k[\\tau]p(\\tau)$ with\n$p(\\tau)=\\tau^m-\\sum_{i=1}^ma_i\\tau^{i-1}$, $m\\leq\\dim_kV$. In\nthe basis $v,F(v),\\dots,F^{m-1}(v)$ of the block, with coordinates\n$(x_1,\\dots,x_m)$ (so that the element is\n$x_1v+x_2F(v)+\\cdots+x_mF^{m-1}(v)$), the relation\n$p(\\tau)v=0$ gives\n$F^m(v)=\\sum_ia_iF^{i-1}(v)$, and therefore\n\n$$\nF(x_1,\\dots,x_m)=\\bigl(a_1x_m^p,\\,\nx_1^p+a_2x_m^p,\\,x_2^p+a_3x_m^p,\\,\\dots,\\,\nx_{m-1}^p+a_mx_m^p\\bigr),\n$$\n\nbecause $F\\bigl(\\sum_ix_iF^{i-1}(v)\\bigr)=\\sum_ix_i^pF^i(v)$\nwith $F^m(v)$ expanded by the relation.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 3: solving on each block.* The equation\n$F(x)-x=w$ on a block reads\n\n$$\na_1x_m^p-x_1=w_1,\\qquad\nx_{i-1}^p+a_ix_m^p-x_i=w_i\\quad(2\\leq i\\leq m).\n$$\n\nThe first $m-1$ equations express\nthe $x_i$ in terms of $x_m$ by\n\n$$\nx_1=a_1x_m^p-w_1,\\qquad\nx_i=x_{i-1}^p+a_ix_m^p-w_i\\quad(2\\leq i\\leq m),\n$$\n\nso each $x_i$ is a polynomial in $x_m$ with coefficients in\n$k$: explicitly\n\n$$\nx_i=\\sum_{k=1}^{i}a_k^{p^{\\,i-k}}x_m^{p^{\\,i-k+1}}\n-\\sum_{k=1}^{i}w_k^{p^{\\,i-k}}\n\\qquad(1\\leq i\\leq m),\n$$\n\nas one checks by induction on $i$ using $(u+v)^p=u^p+v^p$\nin characteristic $p$. Substituting into the last equation\n($i=m$) gives\n\n$$\n\\varphi(x_m):=x_m-\\sum_{k=1}^{m}a_k^{p^{\\,m-k}}x_m^{p^{\\,m-k+1}}\n+\\sum_{k=1}^{m-1}w_k^{p^{\\,m-k}}+w_m=0,\n$$\n\na polynomial equation in the single variable $x_m$ with\ncoefficients in $k$: the linear coefficient of $\\varphi$ is\n$1$, so $\\varphi$ is a nonzero polynomial of degree at most\n$p^m$, which has a root because $k$ is algebraically\nclosed. The remaining coordinates are then recovered by\nback-substitution. Hence $F-1:V\\to V$ is surjective.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-lang-steinberg/lem-sc-lang-steinberg.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 565,
+ "blueprint_uses": [],
+ "lean": {
+  "module": "WeilConjectures.LinearAlgebra.SemilinearFrobenius",
+  "declaration": "LinearMap.Frobenius.surjective_sub_id",
+  "branch": "slopmaster2",
+  "line": 365,
+  "sorry_free": true,
+  "body_lines": 21
+ },
+ "blueprint_lean": [
+  "LinearMap.Frobenius.surjective_sub_id"
+ ],
+ "proof_split_by": "labels"
+}

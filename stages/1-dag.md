@@ -1,0 +1,57 @@
+# Stage 1: the natural-language DAG
+
+**Produces:** `dag/nodes/`, a DAG of definitions and statements with complete natural-language proofs, from the targets down to results in Mathlib. No Lean is written.
+
+## 1. Nodes
+
+A node is one definition or one statement, in one JSON file, in any layout. It records:
+
+- an id, never reused;
+- whether it is a definition, a statement or a target;
+- the statement in words and where it comes from;
+- the nodes needed to state it (statement dependencies);
+- for a statement that is not in Mathlib, a complete proof in steps, each step naming the nodes it uses (proof dependencies) or marked elementary;
+- whether the proof follows a document, with the document and the place, or was written by an agent;
+- the Mathlib searches made, with tool, query, results and date, and the Mathlib match if there is one;
+
+A node has no history field: the file's git history is the node's history. A change that needs a reason is one line in `coord/ledger.md` (date, id, what changed, why); nothing is copied into the node for the record.
+
+A statement is a proposition that can be judged true or false, or the definition of one mathematical object. It introduces its own objects rather than pointing at the objects another node constructed, and its source is a document and a place in it.
+
+Nodes are never deleted. Two nodes that state the same thing are merged: one is marked as merged into the other, and its users point to the other. A node that no target reaches stays in the graph and is not an item of any stage: when a parent's proof stops using a node, nothing else is done to it.
+
+## 2. Who does what
+
+An item of this stage is a node that a target reaches and that is not split yet. This stage goes from the targets downward. A node is split when what it is built from is written as nodes: the notions its statement uses and the steps of its proof, each step naming the nodes it uses (§3). A definition is as far from Mathlib as the notions it is built from. A Mathlib leaf is not split further. The stage is finished with a node in two cases only: every branch below it ends in a Mathlib leaf; or the node's own Lean is written and compiles, its declaration with a body of at most ten lines, a definition's body or a statement's proof, that uses nothing but Mathlib and says exactly what the node's statement says (§6). Such a node is not split further. Stage 2 may state a node as soon as it is split, while the nodes below it are still being split (`roles/maintainer.md` §6).
+
+- The **maintainer** keeps the queue: the nodes that are neither Mathlib leaves nor split, nearest to a target first. If `SETUP.md` asks for an early review of the target statements, the nodes needed to state the targets come before all others. It starts with the targets. There is no Lean to build in this stage; in each cycle the maintainer brings the queue up to date, checks the new nodes against §6, and commits.
+- A **lead** claims nodes and gives each to a worker.
+- A **worker** splits its node by one level (§3) and writes the nodes directly into `dag/nodes/`. It changes no node that is not its own; what it finds wrong in another node goes into its report.
+- The lead reviews the node: the proof follows its source, every step names what it uses, every new node was searched in Mathlib, and no new node repeats an existing one.
+
+## 3. Splitting
+
+1. For a target, start from the statement and proof in the paper.
+2. For a definition, name the notions it is built from as its statement dependencies; one that Mathlib does not have becomes a definition node of its own.
+3. For a statement, write its proof in steps (§4), and name for every step the definitions and results it uses.
+4. For each of these, look for an existing node with the same statement, the same place in the literature or the same Mathlib match, and point to it. If there is none, create a node.
+5. Search Mathlib for every new node. If Mathlib has it for the same kind of object, or has a generalization that specializes in one line, record the match: the node is a leaf. Otherwise record the search, and the node joins the queue.
+
+The stage goes on until every branch ends in a Mathlib leaf or in a node whose Lean is written (§2). The graph stays acyclic.
+
+## 4. Proofs and the literature
+
+- Download every document a proof relies on into `literature/` and list it in `literature/LIST.md`: the paper, what it cites for a step, and the references for the textbook results the DAG splits.
+- A proof follows its source exactly and cites the document and the place. It is not written from memory.
+- A reference is not a proof: the steps go into the node. Where the source omits a step or calls it obvious or standard, write the step out.
+- A proof written by a human is preferred to one written by an agent. When you cannot obtain a document, add it to the wanted documents in `literature/LIST.md`, so that the human is asked for it. Until it arrives, write the proof yourself and mark the node as written by an agent. When it arrives, rewrite the proof from it and remove the mark.
+
+## 5. After this stage
+
+The DAG keeps changing while statements and proofs are formalized. Nodes are added and revised under the same rules. A node is updated from Lean twice: when its statement is formalized, with the module, the declaration and the Lean statement; when its proof is done, with the proof dependencies the Lean proof uses.
+
+## 6. Finished when
+
+- every target has a node, and every branch of statement and proof dependencies ends in a Mathlib leaf or in a node whose Lean is written (§2);
+- every other statement has a complete proof, and every step of it names the nodes it uses or is marked elementary, unless its Lean is written (§2);
+- the graph is acyclic, and no node points to a missing or merged node.

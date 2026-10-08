@@ -1,0 +1,28 @@
+{
+ "id": "sk-l-dl-a1-energy",
+ "kind": "section",
+ "title": "Weight detection by trace energy",
+ "text": "*Lemma (sketch).*\n\nLet $N\\ne0$ be pure of weight $v$ and lisse on a smooth geometrically\nconnected affine curve $V_0$. Put\n\n$$\nS_n(V_0,N)=\\sum_{x\\in V_0(\\mathbf F_{q^n})}\n|\\iota\\Tr(\\DLAFr_x\\mid N_{\\bar x})|^2,\n$$\n\nwhere $\\DLAFr_x$ means Frobenius relative to $\\mathbf F_{q^n}$.\nIf $S_n(V_0,N)\\le Cq^{nB}$ for every $n\\ge1$, with $C$ independent of\n$n$, then $v\\le B-1$.\n\n## Proof\n\nLet $T_v$ be the constant Weil line whose Frobenius has realization\n$q^v$, and set $N^c=N^\\vee\\otimes T_v$. The line $T_v$ has weight\n$2v$, while $N^c$ has weight $v$ and conjugate realized local spectra.\nThus $D=N\\otimes N^c$ has weight $2v$ and point traces\n$|\\iota t_{N,n}(x)|^2$. The trace formula and the determinant identity give\n\n$$\nE_N(T):=\\exp\\left(\\sum_{n\\ge1}S_n(V_0,N)\\frac{T^n}{n}\\right)\n=\\frac{\\iota\\det(1-T\\DLAFr_q\\mid H_c^1(V,D))}\n{\\iota\\det(1-T\\DLAFr_q\\mid H_c^2(V,D))}.\n$$\n\nThere is a closed point with a nonzero stalk. Some positive power of its\ninvertible Frobenius has nonzero trace; otherwise the determinant\nidentity would make its characteristic polynomial constant. Hence some\n$S_n$ is positive. All $S_n$ are nonnegative, so the exponential has\ninfinitely many nonzero coefficients: a positive coefficient in its\nexponent contributes positively in arbitrarily high powers.\nConsequently the rational function $E_N$ is not a polynomial and has\nat least one surviving finite pole.\n\nBy [sk-l-dl-a1-endpoints], $H_c^2(V,D)$ is pure of weight $2v+2$,\nso every possible denominator pole has modulus $q^{-(v+1)}$.\nThe assumed energy bound makes the series in the exponential converge\nfor $|T|<q^{-B}$. Its analytic exponential is holomorphic there and\nagrees with the rational germ; therefore the surviving pole cannot lie\nin that disk. Thus $q^{-(v+1)}\\ge q^{-B}$, or $v\\le B-1$.\nThis argument uses no weight estimate for $H_c^1(V,D)$ and requires\nonly one surviving pole, rather than noncancellation of every factor.\n\nUses: [sk-d-dl-a1-setup], [sk-l-dl-a1-endpoints], [sk-prop-logdet], [sk-thm-trace-transport]",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/_section.md",
+  "place": "order 2756"
+ },
+ "cites": [
+  "sk-l-dl-a1-endpoints",
+  "sk-d-dl-a1-setup",
+  "sk-prop-logdet",
+  "sk-thm-trace-transport"
+ ],
+ "blueprint_uses": [
+  "sk-d-dl-a1-setup",
+  "sk-l-dl-a1-endpoints",
+  "sk-p-linear-spectra",
+  "sk-prop-logdet",
+  "sk-thm-trace-transport"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.WeilSheaf.traceEnergy",
+  "AlgebraicGeometry.WeilSheaf.le_sub_one_of_traceEnergy_le"
+ ],
+ "blueprint_tags": []
+}

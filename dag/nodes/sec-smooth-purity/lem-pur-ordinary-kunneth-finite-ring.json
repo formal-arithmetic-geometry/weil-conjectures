@@ -1,0 +1,85 @@
+{
+ "id": "lem-pur-ordinary-kunneth-finite-ring",
+ "kind": "statement",
+ "title": "Ordinary Kunneth at a finite coefficient ring",
+ "statement": "Let $k$ be the algebraically closed field of\n[def-weil-finite-field-fiber], and let $X,Y$ be\nseparated finite-type\n$k$-schemes. Put $A=\\mathcal O_E/\\varpi_E^n$, for $E/\\mathbf Q_\\ell$ finite, $n\\geq1$, and $\\ell\\neq\\operatorname{char}(k)$.\nFor $K\\in D(X_{\\mathrm{et}},A)$ and\n$L\\in D(Y_{\\mathrm{et}},A)$ in the\nderived categories,\nwrite $K\\boxtimes_A^L L=p_X^*K\\otimes_A^Lp_Y^*L$, using the\nderived tensor product.\nThe exterior-product map is an isomorphism\n\n$$\nR\\Gamma(X,K)\\otimes_A^LR\\Gamma(Y,L)\n\\longrightarrow R\\Gamma(X\\times_kY,K\\boxtimes_A^L L).\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-ordinary-kunneth-finite-ring.md",
+  "place": "node lem-pur-ordinary-kunneth-finite-ring, order 1937"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-derived-categories",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "First consider a finite residue field $\\kappa$ of characteristic\n$\\ell$. Forget to $\\mathbf F_\\ell$-coefficients and apply\n[thm-kun-0f1p] with $n=\\ell$.\nThe resulting Kunneth map has a natural action of\n$\\kappa\\otimes_{\\mathbf F_\\ell}\\kappa$.\nSince finite fields are separable, there is a central idempotent\n$e$ in this algebra with\n$e(\\kappa\\otimes_{\\mathbf F_\\ell}\\kappa)\\cong\\kappa$, the factor\non which the two $\\kappa$-actions agree.\nFor example, writing $\\kappa=\\mathbf F_\\ell[\\theta]$ with\nseparable minimal polynomial $g$, the decomposition of\n$\\kappa[t]/(g)$ into the $t-\\theta$ factor and its coprime\ncomplement gives $e$ by the Chinese remainder theorem.\nFor any two complexes of $\\kappa$-vector spaces or sheaves,\n\n$$\ne(P\\otimes_{\\mathbf F_\\ell}^L Q)\\cong P\\otimes_\\kappa^L Q.\n$$",
+   "uses": [
+    "thm-kun-0f1p"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "This follows termwise for vector spaces and then for K-flat\nrepresentatives of the tensor product in\n[def-kun-derived-tensor].\nThe same direct-summand operation commutes with derived sections.\nApplying $e$ to the $\\mathbf F_\\ell$-isomorphism proves the\n$\\kappa$-coefficient assertion, for arbitrary complexes.",
+   "uses": [
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Now let $\\kappa=A/(\\varpi_E)$.\nAll three schemes have finite cohomological dimension by\n[lem-kun-0f10]. The constant-tensor comparison\n[lem-kun-0f12], applied with the $A$-module $\\kappa$,\ngives\n\n$$\nR\\Gamma(T,H)\\otimes_A^L\\kappa\n\\cong R\\Gamma(T,H\\otimes_A^L\\underline\\kappa)\n\\qquad(T=X,Y,X\\times_kY).\n$$",
+   "uses": [
+    "lem-kun-0f10",
+    "lem-kun-0f12"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "These comparisons identify the reduction of the $A$-Kunneth map\nwith the $\\kappa$-Kunneth map for\n$K\\otimes_A^L\\kappa,L\\otimes_A^L\\kappa$: both maps are induced by\nthe tensor product of the two pulled-back counits in\n[def-kun-kunneth-map], and derived scalar extension commutes\nwith that tensor product. These reductions need not be bounded;\nthe preceding field-coefficient result permits arbitrary complexes.",
+   "uses": [
+    "def-kun-kunneth-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let $D$ be the cone of the $A$-Kunneth map.\nWe have proved $D\\otimes_A^L\\kappa=0$.\nThe finite filtration\n$A\\supset\\varpi_EA\\supset\\cdots\\supset\\varpi_E^nA=0$\nhas quotients finite-dimensional over $\\kappa$.\nBy derived tensor associativity,\n$D\\otimes_A^L Q=0$ for every such quotient $Q$.\nTensor the short exact sequences of this filtration with $D$\nand use their distinguished triangles, starting at the zero term.\nInduction gives $D\\otimes_A^L A=0$, hence $D=0$.\nThis proves the stated isomorphism and its naturality.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "thm-kun-0f1p",
+  "def-kun-derived-tensor",
+  "lem-kun-0f10",
+  "lem-kun-0f12",
+  "def-kun-kunneth-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-ordinary-kunneth-finite-ring.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1937,
+ "blueprint_uses": [
+  "def-kun-derived-tensor",
+  "def-kun-kunneth-map",
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-derived-categories",
+  "def-weil-scheme-morphism-properties",
+  "lem-kun-0f10",
+  "lem-kun-0f12",
+  "thm-kun-0f1p"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs"
+}

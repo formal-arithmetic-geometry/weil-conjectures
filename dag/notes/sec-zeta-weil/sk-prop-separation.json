@@ -1,0 +1,27 @@
+{
+ "id": "sk-prop-separation",
+ "kind": "section",
+ "title": "Weight separation and the parity factorization",
+ "text": "*Proposition (sketch).*\n\nAssume [sk-prop-rootpurity]. Then for $i\\ne j$ the polynomials\n$P_{i,\\ell}$ and $P_{j,\\ell}$ are coprime in $\\Qlb[T]$, and with the parity\nproducts\n\n$$\nN_\\ell(T)=\\prod_{i\\ \\text{odd}}P_{i,\\ell}(T),\\qquad\nD_\\ell(T)=\\prod_{i\\ \\text{even}}P_{i,\\ell}(T)\n$$\n\none has $\\gcd(N_\\ell,D_\\ell)=1$, $N_\\ell(0)=D_\\ell(0)=1$, and\n\n$$\nZ(X_0,T)=\\frac{N_\\ell(T)}{D_\\ell(T)}\n\\qquad\\text{after coefficient extension to }\\Ql[[T]] .\n$$\n\nMore precisely, the ordinary-root multiset of each $P_{i,\\ell}$ is exactly the\nsubmultiset of roots of the appropriate parity product whose reciprocal\n$\\alpha$ satisfies $|\\iota(\\alpha)|=q^{i/2}$ for the fixed $\\iota$.\n\n## Proof\n\nA common ordinary root $\\beta$ of $P_{i,\\ell}$ and $P_{j,\\ell}$ with $i\\ne j$\nwould give reciprocal roots $\\alpha=\\beta^{-1}$ with $|\\iota(\\alpha)|=q^{i/2}$\nand $=q^{j/2}$ simultaneously, impossible since $q\\ne1$. Coprimality of the\nparity products follows because a common root would come from some pair\n$i\\ne j$ of opposite parity; constant terms are $1$ because\n$P_{i,\\ell}(0)=1=\\det(1)$. Evaluating\n[sk-thm-tracetodeterminant] with the even exponents\n$(-1)^{i+1}=-1$ and odd exponents $+1$ gives\n$Z=\\prod_{i\\ \\text{odd}}P_{i,\\ell}\\big/\\prod_{i\\ \\text{even}}P_{i,\\ell} =N_\\ell/D_\\ell$. The last assertion restates\n[sk-prop-rootpurity] root by root, the weights separating the factors\nuniquely because $q^{i/2}\\ne q^{j/2}$ for $i\\ne j$.\n\nUses: [sk-def-cohfamily], [sk-def-roots], [sk-prop-rootpurity], [sk-thm-tracetodeterminant]",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-separation/_section.md",
+  "place": "order 2898"
+ },
+ "cites": [
+  "sk-prop-rootpurity",
+  "sk-thm-tracetodeterminant",
+  "sk-def-cohfamily",
+  "sk-def-roots"
+ ],
+ "blueprint_uses": [
+  "sk-def-cohfamily",
+  "sk-def-roots",
+  "sk-prop-rootpurity",
+  "sk-thm-tracetodeterminant"
+ ],
+ "blueprint_lean": [
+  "Polynomial.isCoprime_prod_odd_prod_even",
+  "Polynomial.prod_odd_eq_map_and_prod_even_eq_map"
+ ],
+ "blueprint_tags": []
+}

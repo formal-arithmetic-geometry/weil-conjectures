@@ -1,0 +1,82 @@
+{
+ "id": "prop-weil-pbc-roos-triangle",
+ "kind": "statement",
+ "title": "Roos triangle and Milnor exact sequence",
+ "statement": "For every $M_\\bullet\\in D(\\operatorname{Tow}_{A}(T))$, the tower category\nbeing that of [def-weil-pbc-adic-coefficient-datum], the transition maps\ndefine an endomorphism $s$ of $R\\!\\prod_nM_n$, and the defining Roos triangle\nof [def-weil-pbc-derived-inverse-limit] is the functorial distinguished\ntriangle\n\n$$\n \\Rlim M_\\bullet\\longrightarrow R\\!\\prod_nM_n\n \\xrightarrow{1-s}R\\!\\prod_nM_n\n \\longrightarrow(\\Rlim M_\\bullet)[1].\n$$\n\nIf $U$ is a weakly contractible quasi-compact object of $T_{\\Proet}$, then\nfor every $i\\in\\mathbf Z$ this triangle induces the functorial exact sequence\n\n$$\n 0\\to\\varprojlim{}^1_nH^{i-1}(U,M_n)\n \\to H^i(U,\\Rlim M_\\bullet)\n \\to\\varprojlim_nH^i(U,M_n)\\to0.\n$$\n\n(*Source note:* the canonical triangle is Stacks Project, More on Algebra,\nLemma 15.88.9 (Tag [07KX](https://stacks.math.columbia.edu/tag/07KX)): for\n$K=(K_n^\\bullet)$ in $D(\\textit{Ab}(\\mathbf N))$ there is a canonical\ndistinguished triangle $R\\lim K\\to\\prod_nK_n^\\bullet\\to\\prod_nK_n^\\bullet\\to\nR\\lim K[1]$, so that $R\\lim K$ is a derived limit in the sense of Definition\n13.34.1 (Tag [08TC](https://stacks.math.columbia.edu/tag/08TC)); the\nassociated short exact sequences are Lemma 15.88.10 (Tag\n[07KY](https://stacks.math.columbia.edu/tag/07KY): the long exact cohomology\nsequence breaks up into $0\\to R^1\\lim_nH^{p-1}(K_n^\\bullet)\\to H^p(R\\lim\nK)\\to\\lim_nH^p(K_n^\\bullet)\\to0$), and the representation of $\\Rlim$ by the\ntwo-term complex $\\prod A_n\\to\\prod A_n$, $(x_n)\\mapsto(x_n-f_{n+1}(x_{n+1}))$,\nin degrees $0,1$, together with $R^p\\lim A_n=0$ for $p>1$, is Lemma 15.88.1\n(Tag [07KW](https://stacks.math.columbia.edu/tag/07KW)). The Stacks entries\nare stated for towers of abelian groups; the blueprint states the same\ntriangle for the tower category $\\operatorname{Tow}_A(T)$ over $T_{\\Proet}$\nwith $A_T$-coefficients, where the two derived products are those of\n[prop-weil-pbc-derived-product-representation], and it evaluates the Milnor\nsequence at a weakly contractible quasi-compact $U\\in T_{\\Proet}$, which is\nthe form in which it is used below.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-roos-triangle.md",
+  "place": "node prop-weil-pbc-roos-triangle, order 1246",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 07KX"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 08TC"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 07KY"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 07KW"
+   },
+   {
+    "document": "Milnor",
+    "place": "This exhibits $\\varprojlim$ as the kernel of $1-s$ and $\\varprojlim^1$ as its cokernel; the *Roos resolution* is the two-term complex $$ \\prod_nM_n\\xrightarrow{\\ 1-s\\ }\\prod_nM_n $$ placed in degrees $0,1$, whose cohomology is $\\varprojlim$ in degree $0$ and $\\varprojlim^1$ in degree $1$ — and whose higher cohomology vanishes because, for a tower of module sheaves, the higher derived limits $\\varp"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-derived-inverse-limit",
+  "prop-weil-pbc-derived-product-representation",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "The triangle is the definition of $\\Rlim$ in\n[def-weil-pbc-derived-inverse-limit], namely the defining Roos triangle for\nthe system $(\\operatorname{ev}_nM_\\bullet)$, with the endomorphism $1-s$\ninduced by the transition maps; the identification of its middle term with\n$R\\!\\prod_nM_n$ is the representability statement of the derived-limit\nexistence lemma. For the exact sequence the functor $\\varprojlim$ is the\nkernel of $1-s$ on the product; the cokernel of $1-s$ is the *first derived\nlimit* $\\varprojlim^1M_n$, an exact-in-general cokernel, so the ordinary\nsequence\n\n$$\n 0\\to\\varprojlim_nM_n\\to\\prod_nM_n\n \\xrightarrow{1-s}\\prod_nM_n\\to\\varprojlim^1_nM_n\\to0\n$$\n\nis exact (the left exactness of $\\varprojlim$ with the cokernel\n$\\varprojlim^1$ recorded rather than zero) in the evaluation categories of\n[def-weil-pbc-adic-coefficient-datum]. This exhibits $\\varprojlim$ as the\nkernel of $1-s$ and $\\varprojlim^1$ as its cokernel; the *Roos resolution* is\nthe two-term complex\n\n$$\n \\prod_nM_n\\xrightarrow{\\ 1-s\\ }\\prod_nM_n\n$$\n\nplaced in degrees $0,1$, whose cohomology is $\\varprojlim$ in degree $0$ and\n$\\varprojlim^1$ in degree $1$ — and whose higher cohomology vanishes because,\nfor a tower of module sheaves, the higher derived limits $\\varprojlim^i$\nvanish for $i\\geq2$ (the Roos/Mittag-Leffler chain: $\\varprojlim^1$ of a\ncountable tower of modules is computed by the cokernel of $1-s$, and\n$\\varprojlim^i=0$ for $i\\geq2$; this is the classical Milnor exact sequence\nof Stacks Project, More on Algebra, Lemma 15.88.1, Tag\n[07KW](https://stacks.math.columbia.edu/tag/07KW), which represents $\\Rlim$\nby the two-term complex $\\prod\\to\\prod$ sitting in degrees $0,1$, and the\nresulting derived-limit triangle of Lemma 15.88.9, Tag\n[07KX](https://stacks.math.columbia.edu/tag/07KX), with the short exact\nsequences of Lemma 15.88.10, Tag\n[07KY](https://stacks.math.columbia.edu/tag/07KY)); that triangle is exactly\nthe triangle displayed in the statement. For a weakly contractible\nquasi-compact $U\\in T_{\\Proet}$, the functor $\\Gamma(U,-)$ is exact on\n$\\Mod(T_{\\Proet},A_T)$, preserves the products and limits involved and the\nmaps $1-s$, so the long exact cohomology sequence of the triangle is the\ndisplayed functorial exact sequence, with $\\varprojlim{}^1$ arising as the\ncohomology of $1-s$ in the degree below.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-limit",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-inverse-limit",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-derived-limit-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-roos-triangle.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1246,
+ "blueprint_uses": [
+  "def-weil-derived-limit",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-derived-inverse-limit",
+  "lem-weil-derived-limit-existence",
+  "prop-weil-pbc-derived-product-representation"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-weil-derived-limit",
+  "lem-weil-derived-limit-existence"
+ ],
+ "proof_split_by": "paragraphs"
+}

@@ -1,0 +1,92 @@
+{
+ "id": "lem-pd-degree-locally-constant",
+ "kind": "statement",
+ "title": "The fibrewise degree is a locally constant function, and is a base-change invariant",
+ "statement": "In the situation of [def-pd-fibrewise-degree]:\n\n1. the function $t\\mapsto\\deg_T(\\mathcal{L})(t)$ is locally constant on $T$;\n1. for every invertible\n$\\mathcal{O}_T$-module $\\mathcal{N}$ one has\n$\\deg_T(\\mathcal{L}\\otimes_{\\mathcal{O}_{C_T}}f_T^*\\mathcal{N}) =\\deg_T(\\mathcal{L})$, where $f_T:C_T\\to T$ is the structure morphism;\n1. for every morphism $g:T'\\to T$ of $k$-schemes one has\n$\\deg_{T'}\\bigl(g_{C}^*\\mathcal{L}\\bigr)=\\deg_T(\\mathcal{L})\\circ g$,\nwhere $g_C:C_{T'}\\to C_T$ is the\nbase change of $g$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-degree-decomposition/lem-pd-degree-locally-constant.md",
+  "place": "node lem-pd-degree-locally-constant, order 842"
+ },
+ "stmt_deps": [
+  "def-pd-fibrewise-degree",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "We work throughout in the situation of [def-pd-fibrewise-degree], so\nthat the degree is the [def-pc-degree-line-bundle] and $\\chi$ is the\n[def-pc-euler-characteristic] of the fibre, and fibre products are those\nof [def-pc-base-change].",
+   "uses": [
+    "def-pd-fibrewise-degree",
+    "def-pc-degree-line-bundle",
+    "def-pc-euler-characteristic",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(1) Local constancy.* Let $f_T:C_T\\to T$ be the structure morphism. It\nis the base change of the projective morphism $C\\to\\Spec(k)$, hence\nproper, flat and of finite presentation; $\\mathcal{L}$ is invertible,\nhence of finite presentation and (as $C_T$ is flat over $T$) flat over\n$T$. We use the local model from the proof of\n[thm-pc-semicontinuity-base-change]. By [lem-pc-rf-perfect-base-change]\nthe object $E=Rf_{T,*}\\mathcal{L}$ is perfect and its formation commutes\nwith arbitrary base change. Fix $t\\in T$. By [def-pc-perfect-complex],\nafter shrinking to an affine open $U=\\Spec(A)\\ni t$ (and making the\nfinitely many projective terms free on a principal open), $E|_U$ is\nrepresented by a bounded complex $K$ with $K^i\\cong A^{n_i}$. For\n$s\\in U$ the terms of $K$ are flat, so by\n[lem-pc-flat-complex-derived-pullback] the derived pullback of $E$ along\n$\\Spec\\kappa(s)\\to T$ is $K\\otimes_A\\kappa(s)$, and by the base-change\nisomorphism it computes $H^*(C_{\\kappa(s)},\\mathcal{L}_s)$. Therefore\n\n$$\n\\chi\\bigl(C_{\\kappa(s)},\\mathcal{L}_s\\bigr)\n=\\sum_i(-1)^i\\dim_{\\kappa(s)}H^i(K\\otimes_A\\kappa(s))\n=\\sum_i(-1)^i\\dim_{\\kappa(s)}\\bigl(K^i\\otimes_A\\kappa(s)\\bigr)\n=\\sum_i(-1)^in_i ,\n$$\n\nthe middle equality being the Euler characteristic of a bounded complex\nof finite dimensional vector spaces. So $s\\mapsto\\chi(C_{\\kappa(s)},\\mathcal{L}_s)$\nis constant on $U$, hence locally constant on $T$. The same argument for\n$\\mathcal{O}_{C_T}$ shows that\n$s\\mapsto\\chi(C_{\\kappa(s)},\\mathcal{O}_{C_{\\kappa(s)}})$ is locally\nconstant. Subtracting gives (1).",
+   "uses": [
+    "thm-pc-semicontinuity-base-change",
+    "lem-pc-rf-perfect-base-change",
+    "def-pc-perfect-complex",
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(2) Twisting by a pullback.* By [lem-pc-degree-base-change](1)\nthe fibrewise degree is unchanged by extension of the base field, so it\nsuffices to compute at a point $t$ after base change to $\\kappa(t)$. Over the\nfield $\\kappa(t)$ the projection formula in the form of\n[lem-pc-degree-base-change](2) gives\n$\\chi\\bigl(C_t,\\mathcal{L}_t\\otimes f_t^*\\mathcal{N}_t\\bigr) =\\chi\\bigl(C_t,\\mathcal{L}_t\\bigr)$, because\n$f_t^*\\mathcal{N}_t$ is the pullback of an invertible module on\n$\\Spec\\kappa(t)$ and hence trivial. The asserted equality follows, and\n[lem-pc-euler-additive] supplies the additivity of $\\chi$ used here.",
+   "uses": [
+    "lem-pc-degree-base-change",
+    "lem-pc-euler-additive"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(3) Base change.* For $t'\\in T'$ with image $t\\in T$ the residue field\n$\\kappa(t')$ is an extension of $\\kappa(t)$ and\n$(g_C^*\\mathcal{L})_{t'}=(\\mathcal{L}_t)_{\\kappa(t')}$; the equality is\n[lem-pc-degree-base-change](1) applied to the field extension\n$\\kappa(t')\\big/\\kappa(t)$.",
+   "uses": [
+    "lem-pc-degree-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pd-fibrewise-degree",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-pc-base-change",
+  "thm-pc-semicontinuity-base-change",
+  "lem-pc-rf-perfect-base-change",
+  "def-pc-perfect-complex",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-degree-base-change",
+  "lem-pc-euler-additive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-degree-decomposition/lem-pd-degree-locally-constant.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 842,
+ "blueprint_uses": [
+  "def-pc-base-change",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-pd-fibrewise-degree",
+  "def-sc-invertible-module",
+  "def-pc-perfect-complex",
+  "lem-pc-degree-base-change",
+  "lem-pc-euler-additive",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-rf-perfect-base-change",
+  "thm-pc-semicontinuity-base-change"
+ ],
+ "uses_not_cited": [
+  "def-sc-invertible-module"
+ ],
+ "proof_split_by": "labels"
+}

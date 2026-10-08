@@ -1,0 +1,98 @@
+{
+ "id": "thm-sc-constant-invariance",
+ "kind": "statement",
+ "title": "Base-change invariance for constant sheaves",
+ "statement": "Let $k\\subseteq k'$ be algebraically closed, let $C$ be a\nsmooth separated connected curve over $k$, let\n$\\overline C$ be a compactification of $C$\n([lem-sc-compactification]; thus $\\overline C=C$ when $C$\nis proper), and let\n$g:=g(\\overline C)$ ([def-sc-genus]). Let $n\\geq1$ be\nprime to $\\operatorname{char}k$.\nFor every $q\\geq0$, the pullback map of\n[def-sc-field-extension]\n\n$$\n\\rho^q_{k'/k}(C,\\mathbf F_n):H^q(C_{\\Et},\\mathbf F_n)\n\\longrightarrow H^q((C_{k'})_{\\Et},\\mathbf F_n)\n$$\n\nis an isomorphism; if $C$ is proper it is compatible with the\nidentifications of [lem-sc-pic-proper-ntorsion] and\n[lem-sc-genus-invariant], and if $C$ is affine with the\nidentifications of [lem-sc-pic-affine].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "node thm-sc-constant-invariance, order 1031"
+ },
+ "stmt_deps": [
+  "lem-sc-compactification",
+  "def-sc-genus",
+  "def-sc-field-extension",
+  "lem-sc-pic-proper-ntorsion",
+  "lem-sc-genus-invariant",
+  "lem-sc-pic-affine",
+  "def-sc-curves"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-base-change-curve], $C_{k'}$ is a smooth separated\nconnected curve over $k'$.",
+   "uses": [
+    "lem-sc-base-change-curve"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Proper case.* The nonvanishing cohomology groups of\n[thm-sc-proper-cohomology] over $k$ and over $k'$ are\n$\\mathbf Z/n\\mathbf Z$, $(\\mathbf Z/n\\mathbf Z)^{2g}$ and\n$\\mathbf Z/n\\mathbf Z$, identified by $\\theta_\\zeta$\n([lem-sc-primitive-root]: the image of $\\zeta$ in $k'$ is\nprimitive), by $g(C_{k'})=g(C)$ ([lem-sc-genus-invariant])\nand by the etale group scheme $J_C[n]$\n([thm-av-final](b),(c): the canonical base change map\n$J_C[n](k)\\to J_C[n](k')$ is an isomorphism, and\n$J_{C_{k'}}\\cong(J_C)_{k'}$ by\n[thm-sc-jacobian-representability]); these identifications are\ncompatible with the pullback maps $\\rho^q$, because all maps\ninvolved are the canonical base change maps and the Kummer long\nexact sequence of [lem-sc-kummer-les] is natural in the base\nfield. Hence each $\\rho^q$ is an isomorphism.",
+   "uses": [
+    "thm-sc-proper-cohomology",
+    "lem-sc-primitive-root",
+    "lem-sc-genus-invariant",
+    "thm-av-final",
+    "thm-sc-jacobian-representability",
+    "lem-sc-kummer-les"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Affine case.* For $H^0$: $\\mu_n(k)=\\mu_n(k')$\n([lem-sc-primitive-root]). For $H^1$: by\n[lem-sc-kummer-les] there are canonical exact sequences\n\n$$\n0\\to\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^\\times{}^{\\,n}\n\\to H^1(C,\\mu_n)\\to\\operatorname{Pic}(C)[n]\\to0\n$$\n\nand the analogous one over $k'$, all maps being the canonical\npullbacks. The right-hand terms are identified by the argument\nbelow (the quotient descriptions of [lem-sc-pic-affine]); the\nleft-hand terms are identified as follows. With the compactification\n$\\overline C$ and the finite deleted set $S=\\overline C\\setminus C$\n(the same finite set over $k'$, as $S_{k'}=S$), a unit\n$u\\in\\mathcal O_C(C)^\\times$ is a function on $\\overline C$ whose\ndivisor is supported on $S$, and the association\n$u\\mapsto\\operatorname{div}(u)$ identifies\n$\\mathcal O_C(C)^\\times/k^\\times$ with the subgroup of the\ndegree-zero divisors supported on $S$ whose class in\n$J_{\\overline C}$ is zero. This subgroup is finitely generated free;\nit is unchanged by base change $k\\to k'$, because\n$J_{\\overline C}(k)\\to J_{\\overline C}(k')$ is injective, so a\ndegree-zero divisor supported at the same $k$-rational set $S$ is\nprincipal over $k$ if and only if it is principal over $k'$. As\n$k^\\times$ and $k'^\\times$ are both $n$-divisible, the natural maps\n\n$$\n\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^\\times{}^{\\,n}\n\\to\\mathcal O_{C_{k'}}(C_{k'})^\\times/\n\\mathcal O_{C_{k'}}(C_{k'})^\\times{}^{\\,n}\n$$\n\nare isomorphisms. The five lemma now shows that the\nmiddle maps $H^1(C,\\mu_n)\\to H^1(C_{k'},\\mu_n)$ are isomorphisms.\nFor the right-hand identification: under the quotient descriptions\nof [lem-sc-pic-affine] for $C$ and\n$C_{k'}$ (the compactification of $C_{k'}$ is\n$\\overline C_{k'}$ by [lem-sc-base-change-curve], and the\ndeleted set $S$ is the same finite set, since\n$S_{k'}=S\\otimes_kk'=S$), the pullback map is\n$x+\\Lambda\\mapsto x+\\Lambda$. This is an isomorphism on\n$n$-torsion: injectivity is clear; for surjectivity, let\n$y\\in J_{\\overline C}(k')$ with $ny\\in\\Lambda\\subset J_{\\overline C}(k)$; by divisibility of $J_{\\overline C}(k)$\n([thm-av-final](d)) there is $z\\in J_{\\overline C}(k)$ with $ny=nz$, so\n$y-z\\in J_{\\overline C}[n](k')=J_{\\overline C}[n](k)\\subset J_{\\overline C}(k)$ ([thm-av-final](c)), whence\n$y\\in J_{\\overline C}(k)$. For $H^2$: both groups vanish\n([lem-sc-brauer-zero] over $k$ and over $k'$), and for\n$q>2$ both groups vanish by\n[lem-sc-cohomological-dimension] (over $k$ and over\n$k'$).",
+   "uses": [
+    "lem-sc-primitive-root",
+    "lem-sc-kummer-les",
+    "lem-sc-pic-affine",
+    "lem-sc-base-change-curve",
+    "thm-av-final",
+    "lem-sc-brauer-zero",
+    "lem-sc-cohomological-dimension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-base-change-curve",
+  "thm-sc-proper-cohomology",
+  "lem-sc-primitive-root",
+  "lem-sc-genus-invariant",
+  "thm-av-final",
+  "thm-sc-jacobian-representability",
+  "lem-sc-kummer-les",
+  "lem-sc-pic-affine",
+  "lem-sc-brauer-zero",
+  "lem-sc-cohomological-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1031,
+ "blueprint_uses": [
+  "def-sc-curves",
+  "def-sc-field-extension",
+  "def-sc-genus",
+  "lem-sc-base-change-curve",
+  "lem-sc-brauer-zero",
+  "lem-sc-cohomological-dimension",
+  "lem-sc-compactification",
+  "lem-sc-genus-invariant",
+  "lem-sc-kummer-les",
+  "lem-sc-pic-affine",
+  "lem-sc-pic-proper-ntorsion",
+  "lem-sc-primitive-root",
+  "thm-av-final",
+  "thm-sc-jacobian-representability",
+  "thm-sc-proper-cohomology"
+ ],
+ "uses_not_cited": [
+  "def-sc-curves"
+ ],
+ "proof_split_by": "labels"
+}

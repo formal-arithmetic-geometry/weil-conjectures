@@ -1,0 +1,20 @@
+{
+ "id": "sk-prop-picard-schemes-criterion",
+ "kind": "section",
+ "title": "The general representability criterion",
+ "text": "*Proposition (sketch).*\n\nLet $G:(\\Sch/S)^{\\mathrm{op}}\\to\\mathsf{Set}$ be a Zariski sheaf and\n$(F_i)_{i\\in I}$ representable subfunctors, each representable by\nopen immersions, with $G=\\bigcup_iF_i$ in the sense that for every\n$T$ and $\\xi\\in G(T)$ there is an open covering $T=\\bigcup_aT_a$ and\nindices $i_a$ with $\\xi|_{T_a}\\in F_{i_a}(T_a)$. Then $G$ is\nrepresentable.\n\n## Proof\n\n*Step 1 (charts and transition maps).* Let $X_i$ represent $F_i$,\nwith universal element $\\xi_i\\in F_i(X_i)\\subseteq G(X_i)$, and let\n$U_{ij}\\subseteq X_i$ be the open subscheme provided by the\nrepresentability of $F_j\\subseteq G$ by open immersions: a morphism\n$T\\to X_i$ factors through $U_{ij}$ precisely when the pullback of\n$\\xi_i$ lies in $F_j(T)$. In particular\n$\\xi_i|_{U_{ij}}\\in F_j(U_{ij})$, so it is induced by a unique\n$\\varphi_{ij}:U_{ij}\\to X_j$ with\n$\\varphi_{ij}^*\\xi_j=\\xi_i|_{U_{ij}}$, and the same universal property\nfor $F_i\\subseteq G$ makes $\\varphi_{ij}$ factor through $U_{ji}$.\n\n*Step 2 (the charts glue).* The composite\n$\\varphi_{ji}\\circ\\varphi_{ij}$ pulls $\\xi_i$ back to $\\xi_i|_{U_{ij}}$,\nhence is the identity by the uniqueness of the representing morphism;\nsymmetrically for the other composite, so\n$\\varphi_{ij}:U_{ij}\\to U_{ji}$ are mutually inverse isomorphisms. The\nglueing compatibility\n$\\varphi_{ij}^{-1}(U_{ji}\\cap U_{jk})=U_{ij}\\cap U_{ik}$ holds because\nboth sides are the largest open $W\\subseteq U_{ij}$ with\n$\\xi_i|_W\\in F_k(W)$, and the cocycle condition holds because both\ncomposites pull $\\xi_k$ back to $\\xi_i$ and that morphism is unique.\nThe glueing lemma for schemes then gives a scheme $X$ over $S$ with open\nimmersions $X_i\\hookrightarrow X$ intersecting in the $U_{ij}$.\n\n*Step 3 ($X$ represents $G$).* The $\\xi_i$ agree on the overlaps,\nso the Zariski sheaf property of $G$ produces a unique $\\xi\\in G(X)$\nwith $\\xi|_{X_i}=\\xi_i$, i.e. a natural transformation $h_X\\to G$,\n$a\\mapsto a^*\\xi$. It is injective: for $a,b:T\\to X$ with\n$a^*\\xi=b^*\\xi$ the open $a^{-1}(X_i)$ is the largest open over which\nthe pullback of $\\xi$ lies in $F_i$, hence depends only on $a^*\\xi$;\nover it both $a$ and $b$ factor through $X_i$ and agree because $\\xi_i$\nis universal, and $h_X$ is a Zariski sheaf. It is surjective: for\n$t\\in G(T)$ the largest opens $T_i\\subseteq T$ with\n$t|_{T_i}\\in F_i(T_i)$ cover $T$ by the covering hypothesis, each\n$t|_{T_i}$ comes from a unique $a_i:T_i\\to X_i$, these agree on overlaps\nby the same uniqueness, and glue to the required $a:T\\to X$ with\n$a^*\\xi=t$.\n\nThis is Stacks, Schemes, Lemma 26.15.4\n([`01JJ`](https://stacks.math.columbia.edu/tag/01JJ)), the glueing input being Schemes,\nLemma 26.14.2; the detailed form is Blueprint 50,\n`lem-pc-schemes-criterion`.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-schemes-criterion/_section.md",
+  "place": "order 775"
+ },
+ "cites": [
+  "lem-pc-schemes-criterion"
+ ],
+ "blueprint_uses": [
+  "sk-def-av-jacobian"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable"
+ ],
+ "blueprint_tags": []
+}

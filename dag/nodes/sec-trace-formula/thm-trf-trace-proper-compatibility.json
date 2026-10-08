@@ -1,0 +1,105 @@
+{
+ "id": "thm-trf-trace-proper-compatibility",
+ "kind": "statement",
+ "title": "Proper global trace comparison; Varshavsky 1.2.5",
+ "statement": "Let $(C,c,u)$ be an admissible correspondence on $(X,K)$, with\n$K\\in D^b_{ctf}(X,A)$, and let $(f,g):(C,c)\\to(D,b)$ be a proper pushforward\ndiagram of [def-trf-coefficient-pushforward]: $f:X\\to Y$ and $g:C\\to D$ are\nproper and $b_ig=fc_i$ for $i=1,2$. Assume the exceptional admissibility of\n[def-trf-kernel-pushforward-maps]. Let\n$h:F_c=\\operatorname{Fix}(c)\\to F_b=\\operatorname{Fix}(b)$ be the induced\nmap, proper by [lem-trf-fixed-map-proper]. Then\n\n$$\nh_*\\operatorname{Tr}_c(u)\n=\n\\operatorname{Tr}_b\\bigl([f,g]_!u\\bigr)\n\\qquad\\text{in }\\operatorname{Hom}(A_{F_b},\\omega_{F_b}),\n$$\n\nwhere $\\operatorname{Tr}$ is the trace class of [def-trf-trace-class] and\n$h_*$ is the Borel–Moore pushforward of [def-trf-borel-moore-pushforward].\nNo properness over $s$ of $X,Y,C,D$ and no Cartesian leg square is\nrequired.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-proper/thm-trf-trace-proper-compatibility.md",
+  "place": "node thm-trf-trace-proper-compatibility, order 2332",
+  "external": [
+   {
+    "document": "SGA 5",
+    "place": "Throughout, $Rc_!$ and $Rb_!$ are retained, so the proper-support hypothesis of SGA 5, III, Theorem 4.4 is not imposed."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-pushforward",
+  "def-trf-kernel-pushforward-maps",
+  "lem-trf-fixed-map-proper",
+  "def-trf-trace-class",
+  "def-trf-borel-moore-pushforward"
+ ],
+ "proof": [
+  {
+   "text": "Write $u'=[f,g]_!u$ and use the notation of\n[def-trf-kernel-pushforward-maps].",
+   "uses": [
+    "def-trf-kernel-pushforward-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 1: the trace class in adjoint form.* By [def-trf-trace-class] and the\nconstruction of $\\mathfrak t_{c,K}$ in\n[lem-trf-trace-map-from-external-duality] (recalled at the end of\n[def-trf-kernel-pushforward-maps]), $\\operatorname{Tr}_c(u)$ is the\n$i_c^*\\dashv Ri_{c*}$ adjoint of\n\n$$\nT_c:A_C\\xrightarrow{\\widetilde u}\\mathcal H_c(K)\\cong Rc^!P_X\n\\xrightarrow{Rc^!\\delta_K}Rc^!R\\Delta_{X*}\\omega_X\n\\xrightarrow{\\zeta_c^{-1}}Ri_{c*}\\omega_{F_c},\n$$\n\nthat is, $T_c=Ri_{c*}\\operatorname{Tr}_c(u)\\circ\\eta_{i_c}$; similarly\n$T_b=Ri_{b*}\\operatorname{Tr}_b(u')\\circ\\eta_{i_b}$. By the definition of the\nkernel class, the exceptional adjoint of $\\zeta_cT_c$ is\n$\\delta_K\\circ[u]_P:Rc_!A_C\\to R\\Delta_{X*}\\omega_X$, and that of $\\zeta_bT_b$\nis $\\delta_{K'}\\circ[u']_P$. (This is the diagonal dictionary of\n[prop-trf-pairing-point-normalization], read before restriction to the\ndiagonal.)",
+   "uses": [
+    "def-trf-trace-class",
+    "lem-trf-trace-map-from-external-duality",
+    "def-trf-kernel-pushforward-maps",
+    "prop-trf-pairing-point-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: transport along $g$.* For any $\\varphi:A_C\\to Rc^!M$ with\nexceptional adjoint $\\varphi^\\flat$, the exceptional adjoint of\n$\\mathsf E\\circ Rg_*\\varphi\\circ\\eta_g:A_D\\to Rb^!Rq_*M$ is\n$Rq_*\\varphi^\\flat\\circ\\Xi\\circ Rb_!\\eta_g$: indeed\n$\\varepsilon_b\\circ Rb_!\\mathsf E=Rq_*\\varepsilon_c\\circ\\Xi$ by the definition\nof $\\mathsf E$, and $\\Xi$ is natural. Moreover postcomposition with $Rb^!\\psi$\ncorresponds to postcomposition with $\\psi$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 3: the kernel calculations.* By [lem-trf-trace-source-exchange] and\npart (1) of [lem-trf-trace-map-exchange],\n\n$$\n\\delta_{K'}[u']_P=\\delta_{K'}\\rho_f\\,Rq_*[u]_P\\,\\Xi\\,Rb_!\\eta_g\n=R\\Delta_{Y*}\\tau_f\\circ Rq_*\\bigl(\\delta_K[u]_P\\bigr)\\circ\\Xi\\circ Rb_!\\eta_g .\n$$\n\nBy Step 1 and Step 2 (with $\\varphi=\\zeta_cT_c$, $M=R\\Delta_{X*}\\omega_X$,\n$\\psi=R\\Delta_{Y*}\\tau_f$), the right side is the exceptional adjoint of\n$Rb^!(R\\Delta_{Y*}\\tau_f)\\circ\\mathsf E\\circ Rg_*(\\zeta_cT_c)\\circ\\eta_g$, while\nthe left side is the exceptional adjoint of $\\zeta_bT_b$. Hence, using part\n(2) of [lem-trf-trace-map-exchange],\n\n$$\n\\zeta_bT_b\n=Rb^!(R\\Delta_{Y*}\\tau_f)\\,\\mathsf E\\,Rg_*\\zeta_c\\circ Rg_*T_c\\circ\\eta_g\n=\\zeta_b\\circ Ri_{b*}\\tau_h\\circ Rg_*T_c\\circ\\eta_g ,\n$$\n\nand cancelling the isomorphism $\\zeta_b$,\n$T_b=Ri_{b*}\\tau_h\\circ Rg_*T_c\\circ\\eta_g$.",
+   "uses": [
+    "lem-trf-trace-source-exchange",
+    "lem-trf-trace-map-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4: the unit identities.* The units of composite adjunctions are the\ncomposite units ([fix-prop-adjunctions], item 3), and\n$gi_c=i_bh$ ([def-trf-coefficient-pushforward]), so, with the composition\nisomorphisms of [thm-sf-comp-composition],\n\n$$\nRg_*\\eta_{i_c}\\circ\\eta_g=\\eta_{gi_c}=\\eta_{i_bh}=Ri_{b*}\\eta_h\\circ\\eta_{i_b}.\n$$\n\nSubstituting $T_c=Ri_{c*}\\operatorname{Tr}_c(u)\\circ\\eta_{i_c}$ and using the\nnaturality of $\\eta$,\n\n$$\nT_b=Ri_{b*}\\bigl(\\tau_h\\circ Rh_*\\operatorname{Tr}_c(u)\\circ\\eta_h\\bigr)\\circ\\eta_{i_b}.\n$$\n\nComparing with $T_b=Ri_{b*}\\operatorname{Tr}_b(u')\\circ\\eta_{i_b}$ and taking\n$i_b^*\\dashv Ri_{b*}$ adjoints,\n\n$$\n\\operatorname{Tr}_b([f,g]_!u)=\\tau_h\\circ Rh_*\\operatorname{Tr}_c(u)\\circ\\eta_h .\n$$\n\nThe right side is the composite defining $h_*\\operatorname{Tr}_c(u)$ in\n[def-trf-borel-moore-pushforward] ($\\eta_h$, then $Rh_*$ of the section, then\n$Rh_*\\omega_{F_c}\\cong Rh_!Rh^!\\omega_{F_b}\\to\\omega_{F_b}$, which is\n$\\tau_h$). This proves the theorem. Throughout, $Rc_!$ and $Rb_!$ are\nretained, so the proper-support hypothesis of SGA 5, III, Theorem 4.4 is not\nimposed.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "def-trf-coefficient-pushforward",
+    "thm-sf-comp-composition",
+    "def-trf-borel-moore-pushforward"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-kernel-pushforward-maps",
+  "def-trf-trace-class",
+  "lem-trf-trace-map-from-external-duality",
+  "prop-trf-pairing-point-normalization",
+  "lem-trf-trace-source-exchange",
+  "lem-trf-trace-map-exchange",
+  "fix-prop-adjunctions",
+  "def-trf-coefficient-pushforward",
+  "thm-sf-comp-composition",
+  "def-trf-borel-moore-pushforward"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-proper/thm-trf-trace-proper-compatibility.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2332,
+ "blueprint_uses": [
+  "def-trf-borel-moore-pushforward",
+  "def-trf-coefficient-pushforward",
+  "def-trf-kernel-pushforward-maps",
+  "def-trf-trace-class",
+  "fix-prop-adjunctions",
+  "lem-trf-fixed-map-proper",
+  "lem-trf-trace-map-exchange",
+  "lem-trf-trace-map-from-external-duality",
+  "lem-trf-trace-source-exchange",
+  "prop-trf-pairing-point-normalization",
+  "thm-sf-comp-composition"
+ ],
+ "proof_split_by": "labels"
+}

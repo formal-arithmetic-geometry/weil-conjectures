@@ -1,0 +1,68 @@
+{
+ "id": "lem-wf-geometric-jacobian-galois-action",
+ "kind": "statement",
+ "title": "Canonical semilinear Galois action on the geometric Jacobian",
+ "statement": "Let $C_0/k_0$ be a smooth projective geometrically connected curve, put\n$C=C_0\\times_{k_0}\\overline{k}_0$, and let $J$ be the\nJacobian of $C$, which exists by\n[thm-sc-jacobian-representability] because $C$ is a smooth projective\ncurve over the separably closed field $\\overline{k}_0$ and is geometrically\nintegral ($C_0$ is smooth, hence geometrically reduced, and geometrically\nconnected by hypothesis). For every\n$\\sigma\\in\\operatorname{Gal}(\\overline{k}_0/k_0)$ there is a canonical\nisomorphism\n\n$$\n\\sigma_J:\\;J\\longrightarrow J\n\\qquad\\text{over}\\qquad\n\\sigma:\\operatorname{Spec}\\overline{k}_0\\longrightarrow\n\\operatorname{Spec}\\overline{k}_0,\n$$\n\nwhich preserves the group laws and is compatible with the identification\n$\\operatorname{Pic}^0(C)=J(\\overline{k}_0)$; the assignment\n$\\sigma\\mapsto\\sigma_J$ is an action of\n$\\operatorname{Gal}(\\overline{k}_0/k_0)$, so that $J(\\overline{k}_0)$ is a\nGalois module and $T_\\ell J$ a\n$\\mathbf Z_\\ell[\\operatorname{Gal}(\\overline{k}_0/k_0)]$-module for the Tate\nmodule of [def-wf-abelian-tate-module]. Moreover, if $J_0$ is the\nJacobian of $C_0$ over $k_0$ of [thm-pd-jacobian-general-field], then\nunder the isomorphism $J\\cong J_0\\times_{k_0}\\overline{k}_0$ of that\ntheorem one has $\\sigma_J=\\mathrm{id}_{J_0}\\times\\sigma$; hence the action\non $J(\\overline{k}_0)=J_0(\\overline{k}_0)$ is the one through the\n$k_0$-structure of $J_0$, and the identification\n$J_0[\\ell^n](\\overline{k}_0)\\cong\\operatorname{Pic}^0(C)[\\ell^n]$ is\n$\\operatorname{Gal}(\\overline{k}_0/k_0)$-equivariant for every $\\ell$ and\n$n$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-geometric-jacobian-galois-action.md",
+  "place": "node lem-wf-geometric-jacobian-galois-action, order 2609"
+ },
+ "stmt_deps": [
+  "thm-sc-jacobian-representability",
+  "def-wf-abelian-tate-module",
+  "thm-pd-jacobian-general-field"
+ ],
+ "proof": [
+  {
+   "text": "The automorphism $\\sigma$ of $\\overline{k}_0$ over $k_0$ defines the\nautomorphism $\\sigma_C:=\\mathrm{id}_{C_0}\\times\\sigma$ of $C$ over\n$\\sigma$, hence an isomorphism of functors\n$\\sigma_C^*:\\operatorname{Pic}^0_{C/\\overline{k}_0}\\to \\operatorname{Pic}^0_{C/\\overline{k}_0}$ on\n$(\\mathit{Sch}/\\overline{k}_0)_{fppf}$\n([def-sc-picard-functor]). Since $J$ represents\n$\\operatorname{Pic}^0_{C/\\overline{k}_0}$\n([thm-sc-jacobian-representability], [def-sc-jacobian]), this\nisomorphism of functors is induced by a unique isomorphism $\\sigma_J:J\\to J$\nover $\\sigma$, by Yoneda together with the uniqueness of representing\nobjects ([lem-pc-representable-unique],\n[lem-sc-jacobian-unique]); it preserves the group laws because\n$\\sigma_C^*$ is an isomorphism of group-valued functors. Functoriality of\nbase change gives $(\\sigma\\tau)_C^*=\\sigma_C^*\\tau_C^*$ and\n$\\mathrm{id}_C^*=\\mathrm{id}$, so $\\sigma\\mapsto\\sigma_J$ is an action;\npassing to geometric points and to torsion gives the Galois module structure\non $J(\\overline{k}_0)$ and on the Tate module of\n[def-wf-abelian-tate-module].",
+   "uses": [
+    "def-sc-picard-functor",
+    "thm-sc-jacobian-representability",
+    "def-sc-jacobian",
+    "lem-pc-representable-unique",
+    "lem-sc-jacobian-unique",
+    "def-wf-abelian-tate-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the comparison with $J_0$: by [thm-pd-jacobian-general-field] the\nscheme $J_0\\times_{k_0}\\overline{k}_0$ represents\n$\\operatorname{Pic}^0_{C_0/k_0}\\times_{k_0}\\overline{k}_0=\n\\operatorname{Pic}^0_{C/\\overline{k}_0}$, through the base change of the\nisomorphism $h_{J_0}\\cong\\operatorname{Pic}^0_{C_0/k_0}$. That isomorphism\nis a natural transformation of functors on $k_0$-schemes, and\n$\\mathrm{id}_{C_0}\\times\\sigma$ and $\\mathrm{id}_{J_0}\\times\\sigma$ are the\nmaps induced on the base changes by the $k_0$-morphism\n$\\sigma:\\operatorname{Spec}\\overline{k}_0\\to\\operatorname{Spec}\\overline{k}_0$;\nhence $\\mathrm{id}_{J_0}\\times\\sigma$ is an isomorphism over $\\sigma$\ninducing $\\sigma_C^*$ on the represented functor. By the uniqueness in\nthe Yoneda argument above it equals $\\sigma_J$ (after transport along\n$J\\cong J_0\\times_{k_0}\\overline{k}_0$, which is compatible with the\nrepresenting isomorphisms by [lem-sc-jacobian-unique]). On\n$\\overline{k}_0$-points, $\\mathrm{id}_{J_0}\\times\\sigma$ acts on\n$J_0(\\overline{k}_0)=\\operatorname{Hom}_{k_0}(\\operatorname{Spec}\\overline{k}_0,J_0)$\nthrough the $k_0$-structure of $J_0$, and the equivariance of the torsion\nidentification is the torsion clause of [thm-pd-jacobian-general-field].",
+   "uses": [
+    "thm-pd-jacobian-general-field",
+    "lem-sc-jacobian-unique"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-functor",
+  "thm-sc-jacobian-representability",
+  "def-sc-jacobian",
+  "lem-pc-representable-unique",
+  "lem-sc-jacobian-unique",
+  "def-wf-abelian-tate-module",
+  "thm-pd-jacobian-general-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-geometric-jacobian-galois-action.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2609,
+ "blueprint_uses": [
+  "def-sc-jacobian",
+  "def-sc-picard-functor",
+  "def-wf-abelian-tate-module",
+  "lem-pc-representable-unique",
+  "lem-sc-jacobian-unique",
+  "thm-pd-jacobian-general-field",
+  "thm-sc-jacobian-representability"
+ ],
+ "proof_split_by": "paragraphs"
+}

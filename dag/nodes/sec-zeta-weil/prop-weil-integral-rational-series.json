@@ -1,0 +1,75 @@
+{
+ "id": "prop-weil-integral-rational-series",
+ "kind": "statement",
+ "title": "Normalized integral fraction for an integral rational series",
+ "statement": "Let $Z(T)\\in1+T\\mathbf Z[[T]]$ be rational over $\\mathbf Q$.\nThen $Z$ has a unique\nnormalized reduced\nintegral presentation: there are unique $A,B\\in\\mathbf Z[T]$\nsuch that $A(0)=B(0)=1$, $\\gcd(A,B)=1$ in $\\mathbf Q[T]$,\nand $BZ=A$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-weil-integral-rational-series.md",
+  "place": "node prop-weil-integral-rational-series, order 2902"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Write $Z=\\sum_{n\\geq0}z_nT^n$ and\n$R_j=(z_{j+s})_{s\\geq0}$. By\n[prop-weil-rationality-criterion], their rational span $V$\nis finite-dimensional. Left shift $S(v)_n=v_{n+1}$ preserves $V$,\nsince $S(R_j)=R_{j+1}$.\nPut $L=V\\cap\\mathbf Z^{\\mathbf Z_{\\geq0}}$.\nThis subgroup contains every $R_j$, spans $V$ over $\\mathbf Q$,\nand is preserved by $S$.",
+   "uses": [
+    "prop-weil-rationality-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a finite coordinate set $J$ using\n[lem-weil-finite-coordinate-detection]. Evaluation embeds $L$\nin $\\mathbf Z^J$. A subgroup of $\\mathbf Z^r$ is finite free:\ninduct on $r$, project to the last coordinate, and write the image\nas $d\\mathbf Z$. If the image is zero, apply induction in\n$\\mathbf Z^{r-1}$. Otherwise choose one lift of $d$; it splits\noff a copy of $\\mathbf Z$, with kernel a subgroup of\n$\\mathbf Z^{r-1}$. This proves the assertion and supplies a finite\nbasis of $L$.",
+   "uses": [
+    "lem-weil-finite-coordinate-detection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In this basis $S|_L$ has an integer matrix $M$, $R_0$ has an\ninteger coordinate column $v$, and evaluation at coordinate zero\nhas an integer row $e$. Thus\n\n$$\nz_n=eM^nv,\\qquad\nZ(T)=e(I-TM)^{-1}v\n=\\frac{e\\,\\operatorname{adj}(I-TM)v}{\\det(I-TM)}.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The inverse identity is a formal power series identity:\n$(I-TM)\\sum_{n\\geq0}T^nM^n=I$ coefficient by coefficient.\nLet $A_0=e\\,\\operatorname{adj}(I-TM)v$ and\n$B_0=\\det(I-TM)$. They are integer polynomials and\n$B_0(0)=1$, $A_0(0)=ev=z_0=1$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Choose a primitive integer polynomial $G$ representing the greatest\ncommon divisor of $A_0,B_0$ over $\\mathbf Q[T]$.\nGauss' lemma says that a primitive integer polynomial dividing an\ninteger polynomial over $\\mathbf Q[T]$ already divides it over\n$\\mathbf Z[T]$. Hence $A_0=GA$ and $B_0=GB$ with integral\nquotients. The equality $1=B_0(0)=G(0)B(0)$ forces\n$G(0)=\\pm1$. Choose its sign so that $G(0)=1$; then\n$A(0)=B(0)=1$, and the two quotients are coprime.\nThey give the presentation of [def-weil-normalized-integral-fraction].",
+   "uses": [
+    "def-weil-normalized-integral-fraction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If $A/B=A'/B'$ are two such reduced fractions, $AB'=A'B$.\nCoprimality implies $B\\mid B'$ and $B'\\mid B$ in\n$\\mathbf Q[T]$, so $B'=cB$ for $c\\in\\mathbf Q^\\times$.\nTheir constant terms force $c=1$, and then $A'=A$.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-rationality-criterion",
+  "lem-weil-finite-coordinate-detection",
+  "def-weil-normalized-integral-fraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-weil-integral-rational-series.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2902,
+ "blueprint_uses": [
+  "def-weil-normalized-integral-fraction",
+  "lem-weil-finite-coordinate-detection",
+  "prop-weil-rationality-criterion"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "paragraphs"
+}

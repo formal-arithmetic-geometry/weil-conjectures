@@ -1,0 +1,48 @@
+{
+ "id": "pqf-lem-leray",
+ "kind": "statement",
+ "title": "Leray spectral sequence",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and $\\mathcal F$ a\nquasi-coherent $\\mathcal O_X$-module. There is a spectral sequence\n\n$$\nE_2^{p,q}=\\mathrm H^p\\bigl(Y,R^qf_*\\mathcal F\\bigr)\n\\quad\\Longrightarrow\\quad \\mathrm H^{p+q}(X,\\mathcal F).\n$$\n\n(*Stacks Project, Cohomology of Sheaves, Lemma 20.13.4, Tag\n[01F2](https://stacks.math.columbia.edu/tag/01F2).*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-leray.md",
+  "place": "node pqf-lem-leray, order 536",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01F2"
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply the Grothendieck spectral sequence\n[thm-sp-grothendieck] of the spectral-sequence chapter to the composable pair of\nleft exact functors $F=f_*:\\mathcal O_X$-mod$\\to\\mathcal O_Y$-mod\n(which is left exact: the functor of sections over the open\nsubschemes, exactness of $f_*$ on the left being the sheaf property)\nand $G=\\Gamma(Y,-):\\mathcal O_Y$-mod$\\to\\mathbf{Ab}$.\nThe acyclicity condition holds: every injective\n$\\mathcal O_X$-module $\\mathcal I$ is flasque (classical: for\n$j:U\\hookrightarrow X$ open, injectivity applied to the canonical\nmap $j_{!}\\mathcal I|_U\\to\\mathcal I$ extends sections of\n$\\mathcal I$ over $U$ to all of $X$; equivalently, every\n$\\mathcal O_X$-module is a submodule of an injective module and\ninjective modules are the extension-closed objects), and a flasque\n$\\mathcal O_X$-module $\\mathcal J$ is $f_*$-acyclic: its stalk\n$(R^qf_*\\mathcal J)_y=\\varinjlim_{y\\in V}\\mathrm H^q(f^{-1}(V),\\mathcal J)$ vanishes for $q>0$ since flasque\n$\\mathcal O_X$-modules are acyclic for $\\Gamma$ on every open\nsubscheme (the standard flasque resolutions). By\n[thm-sp-grothendieck] there is a functorial first-quadrant\nspectral sequence with\n\n$$\nE_2^{p,q}=R^pG\\bigl(R^qF(\\mathcal F)\\bigr)\n=\\mathrm H^p\\bigl(Y,R^qf_*\\mathcal F\\bigr)\n\\;\\Longrightarrow\\;\nR^{p+q}(G\\circ F)(\\mathcal F)=\\mathrm H^{p+q}(X,\\mathcal F),\n$$\n\n$G\\circ F=\\Gamma(Y,-)\\circ f_*=\\Gamma(X,-)$ being the global\nsections of the source, and $R^qF(\\mathcal F)=R^qf_*\\mathcal F$,\n$R^pG(-)=\\mathrm H^p(Y,-)$ as the right derived functors fixed in\n[pqf-def-cohomology]. This is the displayed spectral\nsequence.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-sp-grothendieck",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-leray.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 536,
+ "blueprint_uses": [
+  "pqf-def-cohomology",
+  "thm-sp-grothendieck"
+ ],
+ "proof_split_by": "paragraphs"
+}

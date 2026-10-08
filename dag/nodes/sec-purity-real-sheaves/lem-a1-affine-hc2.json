@@ -1,0 +1,100 @@
+{
+ "id": "lem-a1-affine-hc2",
+ "kind": "statement",
+ "title": "Description of $H_c^2$ on an affine curve",
+ "statement": "Let $U_0$ be a smooth geometrically connected affine curve, let\n$U=U_0\\times_{k_0}k$, and let $\\mathcal F$ be a lisse Weil sheaf on\n$U_0$ with local generic fiber $V=\\mathcal F_{\\bar\\eta}$ (a\ngeometric generic stalk of [def-wf-fundamental-representation]).\nIn the compactly\nsupported cohomology of\n[def-weil-ordinary-compact-cohomology] there is a canonical\nFrobenius-equivariant isomorphism\n\n$$\nH_c^2(U,\\mathcal F)\\;\\simeq\\;V_{\\pi_1(U)}(-1),\n$$\n\nwhere the coinvariants are formed for the geometric monodromy action of\n[def-wf-monodromy-data] and $(-1)$ is the\nTate twist $(-1)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-a1-affine-hc2.md",
+  "place": "node lem-a1-affine-hc2, order 2653"
+ },
+ "stmt_deps": [
+  "def-wf-fundamental-representation",
+  "def-weil-ordinary-compact-cohomology",
+  "def-wf-monodromy-data"
+ ],
+ "proof": [
+  {
+   "text": "We work through a smooth compactification (global Verdier duality\nwould also apply directly on $U$, which need not be proper, but the\nargument below only needs it on $\\bar C$). By [lem-wf-curve-normal-smooth-compactification]\nthere are a smooth projective geometrically connected curve $\\bar C_0$\nover $k_0$ and a dense open immersion $j_0:U_0\\hookrightarrow\\bar C_0$\nwith finite boundary; put $\\bar C=\\bar C_0\\times_{k_0}k$, let\n$j:U\\hookrightarrow\\bar C$ be the base change of $j_0$, and let\n$a_U=a_{\\bar C}\\circ j$ be the structure morphisms. Then $\\bar C_0$\nsatisfies the hypotheses of the Poincare duality conventions of\n[def-pod-conventions] with $d=1$, and we use its canonical orientation\n$\\eta_{\\bar C}:\\omega_{\\bar C}\\xrightarrow{\\sim}E_{\\bar C}(1)[2]$.",
+   "uses": [
+    "lem-wf-curve-normal-smooth-compactification",
+    "def-pod-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 1 (compact support through $\\bar C$).* For the open immersion\n$j$ the identity of $\\bar C$ is a compactification, so the compact-support\ndirect image of [def-compact-support-direct-image-detailed] is\n$Rj_!=j_!$, the extension by zero of [def-weil-extension-by-zero]. The\ncomposition law for compact-support direct images ([fix-lem-exchanges])\ngives $Ra_{U!}\\mathcal F\\simeq Ra_{\\bar C!}\\,j_!\\mathcal F$, hence, by\n[def-weil-ordinary-compact-cohomology],\n\n$$\nR\\Gamma_c(U,\\mathcal F)\\simeq R\\Gamma_c(\\bar C,j_!\\mathcal F),\n$$\n\nwhere $j_!\\mathcal F$ is a constructible (not lisse) sheaf on the proper\ncurve $\\bar C$.",
+   "uses": [
+    "def-compact-support-direct-image-detailed",
+    "def-weil-extension-by-zero",
+    "fix-lem-exchanges",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2 (duality on $\\bar C$).* Apply [thm-pod-global-verdier-duality]\non the proper $\\bar C$ to $K=j_!\\mathcal F$, which that theorem allows\nsince it is stated for every $K\\in D^b_{ctf}(\\bar C,\\Lambda)$:\n\n$$\nR\\Gamma_c(\\bar C,j_!\\mathcal F)^\\vee\\simeq\nR\\Gamma\\bigl(\\bar C,\\mathbb D_{\\bar C}(j_!\\mathcal F)\\bigr).\n$$\n\nThe Verdier-duality exchange [fix-cor-verdier-exchange] for $f=j$ gives\n$\\mathbb D_{\\bar C}(j_!\\mathcal F)\\simeq Rj_*\\mathbb D_U\\mathcal F$\nwith $\\mathbb D_U=R\\mathcal Hom(-,\\omega_U)$ and\n$\\omega_U\\simeq Rj^!\\omega_{\\bar C}$ (step 1 of its proof). For an open\nimmersion the right adjoint of $j_!$ is $j^*$\n([prop-exc-open-adjoint]), so $\\omega_U\\simeq j^*\\omega_{\\bar C}$, and\n$j^*\\eta_{\\bar C}$ gives $\\omega_U\\simeq E_U(1)[2]$. As $\\mathcal F$ is\nlisse, $R\\mathcal Hom(\\mathcal F,E_U)=\\mathcal F^\\vee$, so\n$\\mathbb D_U\\mathcal F\\simeq\\mathcal F^\\vee(1)[2]$. Finally\n$Ra_{\\bar C*}Rj_*\\simeq Ra_{U*}$ by the composition isomorphism\n[lem-weil-derived-direct-image-composition] for $a_U=a_{\\bar C}\\circ j$,\nwhich applies because $Rj_*\\mathbb D_U\\mathcal F\\simeq\n\\mathbb D_{\\bar C}(j_!\\mathcal F)$ is constructible. Hence\n\n$$\nR\\Gamma_c(U,\\mathcal F)^\\vee\\simeq\nR\\Gamma\\bigl(U,\\mathcal F^\\vee(1)\\bigr)[2].\n$$",
+   "uses": [
+    "thm-pod-global-verdier-duality",
+    "fix-cor-verdier-exchange",
+    "prop-exc-open-adjoint",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3 (degree $-2$).* Taking $H^{-2}$ (over the field $E$ or $\\Qlb$\ndualizing commutes with cohomology) gives\n$H_c^2(U,\\mathcal F)^\\vee\\simeq H^0(U,\\mathcal F^\\vee(1))$. Global\nsections of a lisse sheaf are the invariants of the geometric\nrepresentation of [def-wf-fundamental-representation] [p-real-sections],\nso $H^0(U,\\mathcal F^\\vee(1))=(V^\\vee(1))^{\\pi_1(U)}$, the geometric\nmonodromy action being that of [def-wf-monodromy-data]. Dualizing turns\ninvariants of $V^\\vee$ into coinvariants of $V$, and turns the twist\n$(1)$ into $(-1)$, which gives the displayed isomorphism. All maps above\nare canonical and $\\bar C$, $j$, $\\eta_{\\bar C}$ are base changed from\n$k_0$, so the isomorphism commutes with the Frobenius operators induced\nby the Weil structures, with the twist normalized as in\n[def-wf-tate-twist].",
+   "uses": [
+    "def-wf-fundamental-representation",
+    "p-real-sections",
+    "def-wf-monodromy-data",
+    "def-wf-tate-twist"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-curve-normal-smooth-compactification",
+  "def-pod-conventions",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-extension-by-zero",
+  "fix-lem-exchanges",
+  "def-weil-ordinary-compact-cohomology",
+  "thm-pod-global-verdier-duality",
+  "fix-cor-verdier-exchange",
+  "prop-exc-open-adjoint",
+  "lem-weil-derived-direct-image-composition",
+  "def-wf-fundamental-representation",
+  "p-real-sections",
+  "def-wf-monodromy-data",
+  "def-wf-tate-twist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-a1-affine-hc2.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2653,
+ "blueprint_uses": [
+  "def-compact-support-direct-image-detailed",
+  "def-pod-conventions",
+  "def-weil-extension-by-zero",
+  "def-weil-ordinary-compact-cohomology",
+  "def-wf-fundamental-representation",
+  "def-wf-monodromy-data",
+  "def-wf-tate-twist",
+  "fix-cor-verdier-exchange",
+  "fix-lem-exchanges",
+  "lem-weil-derived-direct-image-composition",
+  "lem-wf-curve-normal-smooth-compactification",
+  "p-real-sections",
+  "prop-exc-open-adjoint",
+  "thm-pod-global-verdier-duality"
+ ],
+ "proof_split_by": "labels"
+}

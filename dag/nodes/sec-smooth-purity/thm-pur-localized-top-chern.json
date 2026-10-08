@@ -1,0 +1,103 @@
+{
+ "id": "thm-pur-localized-top-chern",
+ "kind": "statement",
+ "title": "Localized top Chern class",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $F$ be a rank-$r$ vector bundle on $T$, let $s$ be a regular\nsection, and write $i:Z(s)\\hookrightarrow T$. There is a canonical\nmorphism\n\n$$\nc_r(F,s):i_*\\Lambda_{Z(s)}\\longrightarrow\\Lambda_T(r)[2r]\n$$\n\nwith the following properties:\n\n1. *(L1)* for $r=1$ it is the localized Kummer class of the\nCartier divisor of $s$ (of [lem-pur-divisor-class]);\n1. *(L2)* it commutes with base change whenever the\npulled-back section is still regular, in particular with\narbitrary base change for the tautological section on the total\nspace of a vector bundle;\n1. *(L3)* for a transverse direct sum of sections it is the\ncup product of the two localized classes;\n1. *(L4)* after forgetting support it is $c_r(F)$.\n\nIts construction uses only ordinary cohomology-with-support groups\nand the projective-bundle formula.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.md",
+  "place": "node thm-pur-localized-top-chern, order 1987"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "lem-pur-divisor-class",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "The line-bundle class in the proposed construction is the divisor class of [lem-pur-divisor-class]; products have their twists identified by [def-coefficient-twists-detailed].\nStep 1: the flag-bundle pullback is injective. Write the group in\nthe form\n\n$$\nH^{2r}_{Z(s)}(T,\\Lambda(r))\n:=\\operatorname{Hom}_{D(T,\\Lambda)}\n\\bigl(i_*\\Lambda_{Z(s)},\\Lambda_T(r)[2r]\\bigr).\n$$",
+   "uses": [
+    "lem-pur-divisor-class",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull $F$ back to its complete flag bundle $p:T'\\to T$. Iterating\n[thm-pur-projective-bundle-formula] gives a direct-sum\ndecomposition of $Rp_*\\Lambda_{T'}$ whose degree-zero summand is\n$\\Lambda_T$; projection to this summand with the projection formula\nis a left inverse to\n\n$$\np^*:H^{2r}_{Z(s)}(T,\\Lambda(r))\n\\longrightarrow\nH^{2r}_{Z(s)\\times_TT'}(T',\\Lambda(r)),\n$$\n\nso this pullback is injective: the ordinary splitting principle for the\ndisplayed abelian group.",
+   "uses": [
+    "thm-pur-projective-bundle-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 2: the class on the flag bundle. On $T'$ the flag quotients are\nline bundles; successively take the localized Kummer classes of the\ninduced line-bundle sections on their successive zero loci and cup them,\nobtaining an element\n$\\operatorname{cl}_{T'}\\in H^{2r}_{Z(s)\\times_TT'}(T',\\Lambda(r))$.\nThe result is unchanged under a refinement of the flag: expanding the\nproduct and using the additivity of\n[lem-pur-kummer-additivity]\n($c_1(L\\otimes M)=c_1(L)+c_1(M)$) shows that it is the symmetric\nelementary polynomial of degree $r$ in the Chern roots.",
+   "uses": [
+    "lem-pur-kummer-additivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 3: the class descends, by localizing on the base. The following\ngives a well-defined class on every open $T_0\\subseteq T$ over which $F$\nis trivial, and it is here that the descent is justified — by\n[lem-pur-frame-independence], not by the degree-zero summand of the\nprojective-bundle decomposition. Choose an isomorphism\n$F|_{T_0}\\cong\\mathcal O_{T_0}^r$ and write\n$s|_{T_0}=(s_1,\\dots,s_r)$ with $s_i\\in\\Gamma(T_0,\\mathcal O)$; the\nregularity of $s$ says exactly that $s_1,\\dots,s_r$ is a frame of the\nideal of $Z(s)$ in the sense of [def-pur-frame-class], so put\n\n$$\nc_r(F,s)|_{T_0}=\\kappa(s_1)\\cup\\cdots\\cup\\kappa(s_r)\n\\in H^{2r}_{Z(s)}(T_0,\\Lambda(r)).\n$$",
+   "uses": [
+    "lem-pur-frame-independence",
+    "def-pur-frame-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A second trivialization is related to the first by an invertible matrix over\n$T_0$, so by [lem-pur-frame-independence] the class depends only on\nthe ideal of $Z(s)$, hence only on the open and on $s$; on an overlap\nthe two frames frame the same ideal, so the classes agree and glue, and\nbecause $H^{2r}_{Z(s)}(-,\\Lambda(r))$ is computed by the sheaf-theoretic\noperations of [def-pur-support-cohomology] they give an element\n$c_r(F,s)\\in H^{2r}_{Z(s)}(T,\\Lambda(r))$. Now compare with\n$\\operatorname{cl}_{T'}$. Over a trivializing open $T_0$ the flag\nbundle is $T_0\\times_kG/B$, and there the universal filtration of the\ntrivialized bundle has line quotients whose sections are the images of the\ncomponents $s_i$ of the frame; the zero locus of such a section is the\npreimage of $V(s_i)$, so by the functoriality of the Kummer class and of\nthe supported product the successive construction of Step 2 restricts to\nthe pullback of $\\kappa(s_1)\\cup\\cdots\\cup\\kappa(s_r)$, that is, to\n$p^*(c_r(F,s)|_{T_0})$. The trivializing opens cover $T$, so\n$p^*c_r(F,s)=\\operatorname{cl}_{T'}$. In particular the class of Step 2\ndoes lie in the image of the injective pullback $p^*$ of Step 1, which is\nwhat had to be shown, and $c_r(F,s)$ is the unique element with that\npullback.",
+   "uses": [
+    "lem-pur-frame-independence",
+    "def-pur-support-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 4: the four properties. They follow after the injective\nflag-bundle pullback, where they reduce respectively to the rank-one\nKummer construction, the functoriality of a local equation, the\nassociativity and direct-sum behaviour of the cup product (with the\ntransversality as in [lem-pur-kunneth-supported]), and the usual\nsplitting-principle definition of $c_r(F)$. This is descent of one\nelement along a split injection of abelian groups, not descent of\nderived categories or derived objects.",
+   "uses": [
+    "lem-pur-kunneth-supported"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-divisor-class",
+  "def-coefficient-twists-detailed",
+  "thm-pur-projective-bundle-formula",
+  "lem-pur-kummer-additivity",
+  "lem-pur-frame-independence",
+  "def-pur-frame-class",
+  "def-pur-support-cohomology",
+  "lem-pur-kunneth-supported"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1987,
+ "blueprint_uses": [
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-pur-frame-class",
+  "def-pur-support-cohomology",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-tensor",
+  "lem-pur-divisor-class",
+  "lem-pur-frame-independence",
+  "lem-pur-kummer-additivity",
+  "lem-pur-kunneth-supported",
+  "thm-pur-projective-bundle-formula"
+ ],
+ "uses_not_cited": [
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-tensor"
+ ],
+ "proof_split_by": "paragraphs"
+}

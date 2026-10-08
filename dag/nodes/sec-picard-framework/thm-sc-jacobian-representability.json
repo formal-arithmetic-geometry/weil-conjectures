@@ -1,0 +1,144 @@
+{
+ "id": "thm-sc-jacobian-representability",
+ "kind": "statement",
+ "title": "The Jacobian over a separably closed field",
+ "statement": "Let $k$ be a separably closed field and let $C$ be a\nsmooth projective curve over $k$\nwhich is geometrically integral,\nof genus $g=g(C)=\\dim_kH^1(C,\\mathcal O_C)$ ([def-pc-genus]). There is\nan abelian variety $J_C$ over\n$k$, the *Jacobian* of $C$ in the sense of [def-sc-jacobian], of dimension $g$, together\nwith a natural isomorphism of group-valued functors\n\n$$\n\\operatorname{Pic}^0_{C/k}\\cong h_{J_C},\n$$\n\nwhere $\\operatorname{Pic}^0_{C/k}$ is the degree-zero part of the\nPicard functor; its $k$-points are the\ninvertible modules of degree $0$ on $C$, and for algebraically closed\n$k$ they are the $\\operatorname{Pic}^0(C)$ of [def-sc-pic0], so that\n$\\operatorname{Pic}^0(C)=J_C(k)$ canonically in that case. Moreover $J_C$\nis compatible with base change along extensions of separably closed fields:\n$J_{C_{k'}}\\cong(J_C)_{k'}$ for $k\\subseteq k'$ separably closed.\nThe scope of this result, and the case of a general ground field, are\ndiscussed in a remark below in this chapter.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian/thm-sc-jacobian-representability.md",
+  "place": "node thm-sc-jacobian-representability, order 850",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0B9Z"
+   },
+   {
+    "document": "Milne",
+    "place": "Milne, Abelian Varieties, Ch. 12."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-genus",
+  "def-sc-jacobian",
+  "def-sc-pic0",
+  "def-pc-geometrically-irreducible",
+  "def-pc-smooth-projective-curve"
+ ],
+ "proof": [
+  {
+   "text": "[thm-pc-picard-representable] of the Picard chapter – the Picard functor\nof a smooth projective curve over a separably closed field is\nrepresentable, with the full decomposition carried out there (*reference: Stacks Project, Picard Schemes of Curves, Proposition 44.6.6, [Tag 0B9Z](https://stacks.math.columbia.edu/tag/0B9Z)*); cf. Mumford, Abelian Varieties; Milne, Abelian Varieties, Ch. 12. We outline the\nclassical construction; the existence and property statements are\ntheorems of the sources above.",
+   "uses": [
+    "thm-pc-picard-representable"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(1) The Picard functor.* $\\operatorname{Pic}_{C/k}$ and\n$\\operatorname{Pic}^0_{C/k}\\subseteq\\operatorname{Pic}_{C/k}$ are\nas in [def-sc-picard-functor]; for $k$ algebraically closed, $C$ is a\nsmooth connected curve in the sense of [def-sc-pic0] by\n[lem-pc-curves-are-sc], and\n$\\operatorname{Pic}^0_{C/k}(k)=\\operatorname{Pic}^0(C)$ of\n[def-sc-pic0].",
+   "uses": [
+    "def-sc-picard-functor",
+    "def-sc-pic0",
+    "lem-pc-curves-are-sc"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(2) Representability.* The theorem of Grothendieck states\nthat $\\operatorname{Pic}_{C/k}$ (which is the functor of [def-pc-picard-functor] by [lem-pc-picard-functor-agrees-sc]) is represented by a group scheme\nlocally of finite type over $k$ ([thm-pc-picard-representable] of the Picard chapter; *reference: Stacks Project, Picard Schemes of Curves, Proposition 44.6.6, [Tag 0B9Z](https://stacks.math.columbia.edu/tag/0B9Z)*). The\nsubfunctor $\\operatorname{Pic}^0_{C/k}$ is represented by an open\nand closed subgroup scheme ([prop-pd-picard-degree-decomposition],\nparts (2) and (3)).",
+   "uses": [
+    "def-pc-picard-functor",
+    "lem-pc-picard-functor-agrees-sc",
+    "thm-pc-picard-representable",
+    "prop-pd-picard-degree-decomposition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(3) Smoothness and the tangent space.* By\n[lem-sc-pic-tangent-space], the tangent space of\n$\\operatorname{Pic}_{C/k}$ at the identity is\n$H^1(C,\\mathcal O_C)$, of dimension $g$ ([def-pc-genus]);\nby [thm-sc-theorem-of-the-base],\n$\\operatorname{Pic}_{C/k}$ is a disjoint union of smooth\nvarieties of dimension $g$.",
+   "uses": [
+    "lem-sc-pic-tangent-space",
+    "def-pc-genus",
+    "thm-sc-theorem-of-the-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(4) Properness.* $\\operatorname{Pic}^0_{C/k}$ is proper by\n[thm-sc-theorem-of-the-base] (the ``theorem of the base'').",
+   "uses": [
+    "thm-sc-theorem-of-the-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(5) Abelian variety and base change.* By (2)–(4),\n$J_C:=\\operatorname{Pic}^0_{C/k}$ is a proper smooth connected\ngroup scheme, i.e. an abelian variety\n([def-sc-abelian-variety]), of dimension $g$. For\n$k$ algebraically closed, $J_C(k)=\\operatorname{Pic}^0(C)$\n([def-sc-picard-functor], [def-sc-pic0]) by\nrepresentability, and base change\ncompatibility $J_{C_{k'}}\\cong(J_C)_{k'}$ holds because the Picard\nfunctor commutes with base change. Finally, $J_C$ is projective\nby [lem-sc-abelian-variety-projective].\n\nThe hypothesis that $k$ is separably closed enters this proof exactly as in\nthe Picard chapter: it is what produces a $k$-rational point of $C$, from\nwhich the representability theorem [thm-pc-picard-representable] of that\nchapter deduces the fppf sheaf property of the naive Picard presheaf and hence\nrepresentability. For a curve over a general ground field the conclusion is\nnot asserted in this blueprint; see [rem-sc-jacobian-scope].",
+   "uses": [
+    "def-sc-abelian-variety",
+    "def-sc-picard-functor",
+    "def-sc-pic0",
+    "lem-sc-abelian-variety-projective",
+    "thm-pc-picard-representable"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-pc-picard-representable",
+  "def-sc-picard-functor",
+  "def-sc-pic0",
+  "lem-pc-curves-are-sc",
+  "def-pc-picard-functor",
+  "lem-pc-picard-functor-agrees-sc",
+  "prop-pd-picard-degree-decomposition",
+  "lem-sc-pic-tangent-space",
+  "def-pc-genus",
+  "thm-sc-theorem-of-the-base",
+  "def-sc-abelian-variety",
+  "lem-sc-abelian-variety-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian/thm-sc-jacobian-representability.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "cites_remark",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 850,
+ "blueprint_uses": [
+  "def-pc-genus",
+  "def-pc-geometrically-irreducible",
+  "def-pc-smooth-projective-curve",
+  "def-sc-abelian-variety",
+  "def-sc-jacobian",
+  "def-sc-pic0",
+  "def-sc-picard-functor",
+  "lem-pc-curves-are-sc",
+  "lem-pc-picard-functor-agrees-sc",
+  "lem-sc-abelian-variety-projective",
+  "lem-sc-pic-tangent-space",
+  "prop-pd-picard-degree-decomposition",
+  "thm-pc-picard-representable",
+  "thm-sc-theorem-of-the-base"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+  "declaration": "AlgebraicGeometry.exists_jacobian",
+  "branch": "slopmaster2",
+  "line": 691,
+  "sorry_free": true,
+  "body_lines": 9
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.exists_jacobian"
+ ],
+ "uses_not_cited": [
+  "def-pc-geometrically-irreducible",
+  "def-pc-smooth-projective-curve"
+ ],
+ "proof_split_by": "labels"
+}

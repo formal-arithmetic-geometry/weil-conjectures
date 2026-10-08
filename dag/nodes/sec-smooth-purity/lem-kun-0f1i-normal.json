@@ -1,0 +1,84 @@
+{
+ "id": "lem-kun-0f1i-normal",
+ "kind": "statement",
+ "title": "The normal integral case",
+ "statement": "Let $K$ be a field and let $n\\ge1$ be an integer invertible in\n$K$. Let $X$ be a scheme of finite type over $K$, let $S'$\nbe an affine, integral and normal $K$-scheme with algebraically\nclosed function field $L$, set $X'=X\\times_KS'$,\n$Y=X'\\times_{S'}\\Spec(L)$, and let $h:Y\\to X'$ be the projection.\nThen $R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for all $q>0$\nand all $d\\mid n$. (*Source:* Stacks Project, Tag\n[0F1I](https://stacks.math.columbia.edu/tag/0F1I), final\nreduction.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1i-normal.md",
+  "place": "node lem-kun-0f1i-normal, order 1776",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F1I"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-kun-constant-sheaf",
+  "def-kun-separably-closed",
+  "def-kun-torsion-invertible",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Write $S'=\\Spec(B)$, so that $L$ is the fraction field of $B$.\nBy [lem-kun-algebra-union] write $B=\\bigcup_{i\\in I}B_i$ as the\nunion of its finite type $K$-subalgebras $B_i$. Let $J$ be the\nset of pairs $(i,g)$ with $i\\in I$ and $g\\in B_i$ nonzero,\nordered by $(i',g')\\ge(i,g)$ if and only if $B_i\\subset B_{i'}$\nand $g$ maps to an invertible element of $(B_{i'})_{g'}$. Then\n$L=\\varinjlim_{(i,g)\\in J}(B_i)_g$ by\n[lem-kun-colim-of-localizations]. For $j=(i,g)\\in J$ set\n$S_j=\\Spec(B_i)$ and $U_j=\\Spec((B_i)_g)$. Then the diagram\n\n$$\n\\begin{array}{ccc}\nX'&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{}\\\\\nS'&\\longleftarrow&\\Spec(L)\n\\end{array}\n\\qquad\\text{is the limit of}\\qquad\n\\begin{array}{ccc}\nX\\times_KS_j&\\xleftarrow{\\;h_j\\;}&X\\times_KU_j\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{}\\\\\nS_j&\\longleftarrow&U_j\n\\end{array}\n$$\n\nby [lem-kun-fibre-product-limits] (limits and fibre products\ncommute) and [lem-kun-colim-of-localizations]: the rings $(B_i)_g$\nhave filtered colimit $L$, so their spectra have limit $\\Spec(L)$, and\nthe resulting maps exhibit the diagram $S'\\leftarrow\\Spec(L)$ as the\nlimit of the diagrams $S_j\\leftarrow U_j$. Thus we may\napply [lem-kun-0ezt] to see that it suffices to prove that the\nexchange morphisms (of [def-kun-unbounded-exchange]) hold in the\ndiagrams on the right. Each right-hand diagram is the diagram of\n[lem-kun-0f1h] for the open immersion $j:U_j\\to S_j$ of finite\ntype $K$-schemes and the scheme $X$ of finite type over $K$,\napplied to the sheaf $\\underline{\\mathbf Z/d\\mathbf Z}$, a sheaf of\n$\\mathbf Z/d\\mathbf Z$-modules whose stalks are $d$-torsion, with\n$d\\mid n$ invertible in $K$, hence of orders invertible in $K$\nby [lem-kun-zn-sheaf-invertible-orders].\nHence [lem-kun-0f1h] gives\n\n$$\n(X\\times_KS_j\\to S_j)^{-1}R^q(U_j\\to S_j)_*\\underline{\\mathbf Z/d\\mathbf Z}\n\\;\\cong\\;R^qh_{j,*}\\underline{\\mathbf Z/d\\mathbf Z}\n$$\n\nfor all $q\\ge0$. Passing to the limit with\n[lem-kun-0ezt] we obtain\n\n$$\n(X'\\to S')^{-1}R^q(\\Spec(L)\\to S')_*\\underline{\\mathbf Z/d\\mathbf Z}\n\\;\\cong\\;R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}\n$$\n\nfor all $q$. But $\\Spec(L)$ is integral and normal with\nalgebraically closed (hence separably closed) function field, so\n$R^q(\\Spec(L)\\to S')_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for\n$q>0$ by [lem-kun-0ezp]. Hence\n$R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for $q>0$, as\ndesired.",
+   "uses": [
+    "lem-kun-algebra-union",
+    "lem-kun-colim-of-localizations",
+    "lem-kun-fibre-product-limits",
+    "lem-kun-0ezt",
+    "def-kun-unbounded-exchange",
+    "lem-kun-0f1h",
+    "lem-kun-zn-sheaf-invertible-orders",
+    "lem-kun-0ezp"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-algebra-union",
+  "lem-kun-colim-of-localizations",
+  "lem-kun-fibre-product-limits",
+  "lem-kun-0ezt",
+  "def-kun-unbounded-exchange",
+  "lem-kun-0f1h",
+  "lem-kun-zn-sheaf-invertible-orders",
+  "lem-kun-0ezp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1i-normal.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1776,
+ "blueprint_uses": [
+  "def-kun-constant-sheaf",
+  "def-kun-separably-closed",
+  "def-kun-torsion-invertible",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-0ezp",
+  "lem-kun-0ezt",
+  "lem-kun-0f1h",
+  "lem-kun-algebra-union",
+  "lem-kun-colim-of-localizations",
+  "lem-kun-fibre-product-limits",
+  "lem-kun-zn-sheaf-invertible-orders"
+ ],
+ "uses_not_cited": [
+  "def-kun-constant-sheaf",
+  "def-kun-separably-closed",
+  "def-kun-torsion-invertible",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs"
+}

@@ -1,0 +1,94 @@
+{
+ "id": "prop-sf-closed-unit-all-stages",
+ "kind": "statement",
+ "title": "Closed direct image is fully faithful at every coefficient stage",
+ "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion of separated finite-type\n$k$-schemes and let $\\Lambda$ be one of the coefficient stages\n$A_{E,n},\\mathcal O_E,E,\\Qlb$, with the categories $D^b_c(-,\\Lambda)$ of\n[def-weil-derived-complete-integral-detailed],\n[def-weil-rationalization-karoubi],\n[def-weil-algebraically-closed-coefficients] and the direct image\n$i_*=Ri_*=Ri_!$ of [def-weil-derived-direct-image]. Then\n\n$$\ni_*:D^b_c(Z,\\Lambda)\\longrightarrow D^b_c(X,\\Lambda)\n$$\n\nis fully faithful. Consequently, at every stage at which $i_*$ has a right\nadjoint $Ri^!$ on these categories (the exceptional inverse image of\n[def-weil-exceptional-inverse-image]), the adjunction unit is an isomorphism\n\n$$\nQ\\xrightarrow{\\ \\sim\\ }Ri^!i_*Q\\qquad(Q\\in D^b_c(Z,\\Lambda)).\n$$\n\nAt $\\Lambda=A_{E,n}$ the right adjoint exists on the ambient categories and\nthis is [prop-sf-closed-immersion-unit].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.md",
+  "place": "node prop-sf-closed-unit-all-stages, order 1861"
+ },
+ "stmt_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-direct-image",
+  "def-weil-exceptional-inverse-image",
+  "prop-sf-closed-immersion-unit"
+ ],
+ "proof": [
+  {
+   "text": "*Finite stage.* By [prop-weil-open-closed-recollement-adjunctions] the\ncounit $i^*i_*\\to\\operatorname{id}$ of $i^*\\dashv i_*$ is an isomorphism, so\n$i_*$ is fully faithful on the ambient categories and hence on the full\nsubcategories $D^b_c$.",
+   "uses": [
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Integral stage.* Put $R=\\mathcal O_E$ and $A_n=R/\\varpi_E^n$. For\n$P,Q\\in D^b_c(Z,R)$ one has $Q\\cong R\\varprojlim_n\\operatorname{Res}_nQ_n$\nand, by [prop-weil-pbc-direct-image-limits],\n$i_*Q\\cong R\\varprojlim_n\\operatorname{Res}_ni_*Q_n$ with\n$(i_*P)_n\\cong i_*P_n$. Extension and restriction of scalars give\n$\\operatorname{Hom}(P[m],\\operatorname{Res}_nQ_n)\n=\\operatorname{Hom}_{A_n}(P_n[m],Q_n)$ and\n$\\operatorname{Hom}(i_*P[m],\\operatorname{Res}_ni_*Q_n)\n=\\operatorname{Hom}_{A_n}(i_*P_n[m],i_*Q_n)$, and $i_*$ identifies the two by\nthe finite stage, compatibly with the transition maps. Apply\n$\\operatorname{Hom}(P[m],-)$ and $\\operatorname{Hom}(i_*P[m],-)$ to the two\nRoos triangles of [prop-weil-pbc-roos-triangle]; the map induced by $i_*$ is\nan isomorphism on the two product terms for all $m$, so by the five lemma\n$\\operatorname{Hom}(P,Q)\\to\\operatorname{Hom}(i_*P,i_*Q)$ is bijective.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "prop-weil-pbc-roos-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Rational stage.* Hom groups in $D^b_c(-,E)$ are the integral ones tensored\nwith $E$ ([def-weil-rationalization-karoubi]), and $i_*$ is the\nrationalized integral functor, so bijectivity persists.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Algebraically closed stage.* Hom groups in $D^b_c(-,\\Qlb)$ are filtered\ncolimits over finite extensions $L$ of Hom groups at the stage $L$\n([def-weil-algebraically-closed-coefficients]), and $i_*$ commutes with\nfinite scalar extension ([prop-weil-pbc-scalar-extension]); a colimit of\nbijections is a bijection.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The unit.* Given a right adjoint $Ri^!$ at the stage $\\Lambda$, fix $Q$.\nFor every $P$ the composite of $\\eta_Q\\circ-:\\operatorname{Hom}(P,Q)\\to\n\\operatorname{Hom}(P,Ri^!i_*Q)$ with the adjunction bijection onto\n$\\operatorname{Hom}(i_*P,i_*Q)$ is, by a triangle identity, $g\\mapsto i_*g$,\nwhich is bijective by full faithfulness. So $\\eta_Q\\circ-$ is bijective,\nnaturally in $P$, and Yoneda makes $\\eta_Q$ an isomorphism, exactly as in\n[prop-sf-closed-immersion-unit].",
+   "uses": [
+    "prop-sf-closed-immersion-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-open-closed-recollement-adjunctions",
+  "prop-weil-pbc-direct-image-limits",
+  "prop-weil-pbc-roos-triangle",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "prop-weil-pbc-scalar-extension",
+  "prop-sf-closed-immersion-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1861,
+ "blueprint_uses": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-rationalization-karoubi",
+  "prop-sf-closed-immersion-unit",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "prop-weil-pbc-direct-image-limits",
+  "prop-weil-pbc-roos-triangle",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "labels"
+}

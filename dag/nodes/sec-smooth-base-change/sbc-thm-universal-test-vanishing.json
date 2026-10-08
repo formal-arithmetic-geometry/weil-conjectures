@@ -1,0 +1,89 @@
+{
+ "id": "sbc-thm-universal-test-vanishing",
+ "kind": "statement",
+ "title": "Vanishing in the universal curve test",
+ "statement": "Let\n\n$$\n\\begin{array}{ccc}\nX & \\xleftarrow{\\;h\\;} & Y\\\\\nf\\big\\downarrow & & \\big\\downarrow e\\\\\nS & \\xleftarrow{\\;g\\;} & \\operatorname{Spec}K\n\\end{array}\n$$\n\nbe a base-change square where\n$X\\to S$ is an affine smooth morphism of relative dimension one (in\nthe sense of [def-sbc-smooth-morphisms]) and $X$ is affine, $S$ is\nthe spectrum of a\nnormal domain $A$ with\nalgebraically closed fraction\nfield $L$, and $K/L$ is an extension of algebraically closed fields.\nLet $d$ be an integer invertible on $S$. Then\n\n$$\nR^qh_*(\\mathbf Z/d\\mathbf Z)=0\\qquad(q\\geq1).\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-universal-test-vanishing.md",
+  "place": "node sbc-thm-universal-test-vanishing, order 1413"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "sbc-def-base-change-square"
+ ],
+ "proof": [
+  {
+   "text": "By [sbc-lem-higher-direct-image-presheaf] the sheaf\n$R^qh_*\\mathbf Z/d\\mathbf Z$ is associated with\n\n$$\nU\\longmapsto H^q\\bigl(U\\times_X Y,\\mathbf Z/d\\mathbf Z\\bigr)\n=H^q\\bigl(U\\times_S\\operatorname{Spec}K,\\mathbf Z/d\\mathbf Z\\bigr)\n$$\n\non $X_{\\Et}$. The remaining assertion is: given an affine $U\\to X$ etale\nand $\\xi\\in H^q(U\\times_S\\operatorname{Spec}K,\\mathbf Z/d\\mathbf Z)$,\nthere is an etale covering $\\{U_i\\to U\\}$ such that $\\xi$ dies in\n$H^q(U_i\\times_S\\operatorname{Spec}K,\\mathbf Z/d\\mathbf Z)$.",
+   "uses": [
+    "sbc-lem-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For $q>1$: $U\\times_S\\operatorname{Spec}K$ is a smooth affine curve\nover the algebraically closed field $K$ (it is affine, of finite type,\nsmooth and of dimension one), so the group vanishes by\n[sbc-thm-cohomological-dimension-of-an-affine-curve] applied over $K$.",
+   "uses": [
+    "sbc-thm-cohomological-dimension-of-an-affine-curve"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "It remains to treat $q=1$. By [sbc-lem-slicing] we may replace $U$\nby the members of an etale covering such that $U\\to S$ factors as\n$U\\to V\\to S$ with $U\\to V$ affine smooth, with\ngeometrically connected\nfibres in the sense of [def-sbc-normal-dominant-galois] and\na section $\\sigma:V\\to U$, and $V\\to S$ etale; by\n[sbc-lem-etale-over-normal] (the scheme $S$ is integral\nnormal in the sense of [def-sbc-normal-dominant-galois] with\nalgebraically closed, hence separably closed, function field $L$) the\nseparated etale $V\\to S$ is a finite disjoint union of open\nsubschemes of $S$; replacing $S$ by one of these opens and $U$ by the\ncorresponding component does not change the fraction field $L$ of $S$,\nso we may assume $X=U$ and $X\\to S$ is affine smooth of relative\ndimension one with geometrically connected fibres and a section\n$\\sigma:S\\to X$, and $\\xi\\in H^1(Y,\\mathbf Z/d\\mathbf Z)$ with\n$Y=X\\times_S\\operatorname{Spec}K$.",
+   "uses": [
+    "sbc-lem-slicing",
+    "def-sbc-normal-dominant-galois",
+    "sbc-lem-etale-over-normal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [sbc-thm-algebraically-closed-invariance] applied to the\nsmooth separated curve $X_L=X\\times_S\\operatorname{Spec}L$ over $L$\nand the extension $L\\subseteq K$,\n\n$$\nH^1(X_L,\\mathbf Z/d\\mathbf Z)\\xrightarrow{\\ \\sim\\ }H^1(Y,\\mathbf Z/d\\mathbf Z),\n$$\n\nso $\\xi$ corresponds to a class $\\bar\\xi$ on $X_L$. By\n[sbc-prop-torsors-h1] and the finite-etale correspondence, $\\bar\\xi$\ncorresponds to a $\\mathbf Z/d\\mathbf Z$-torsor $P\\to X_L$; the torsor\n$P$ is a finite etale Galois cover of $X_L$ with group $\\mathbf Z/d\\mathbf Z$.\nOver the $L$-rational point $\\sigma(\\eta)$ (the generic point\n$\\eta$ of $S$ has $\\kappa(\\eta)=L$), the restriction\n$P_{\\sigma(\\eta)}$ is a $\\mathbf Z/d\\mathbf Z$-torsor over\n$\\operatorname{Spec}L$; since $L$ is algebraically closed\n$H^1(\\operatorname{Spec}L,\\mathbf Z/d\\mathbf Z)=0$, so this torsor is\ntrivial and $P$ has an $L$-point above $\\sigma(\\eta)$. The spreading\ntheorem [sbc-thm-spreading-finite-etale-galois] (with\n$C=X$, $G=\\mathbf Z/d\\mathbf Z$, whose order $d$ is invertible on $S$)\ngives a finite etale Galois cover $X'\\to X$ with group\n$\\mathbf Z/d\\mathbf Z$ whose restriction to $X_L$ is $P$. Then\n$X'\\times_XY=X'\\times_{X_L}Y$ is the pullback of the torsor $P$ along\n$P$ itself, hence has the diagonal section; the class of $\\xi$ in\n$H^1(X'\\times_XY,\\mathbf Z/d\\mathbf Z)$ is the pullback of its\ntorsor-class, hence is zero: $\\{X'\\to X\\}$ is the required etale\ncovering, and the associated sheaf is zero.",
+   "uses": [
+    "sbc-thm-algebraically-closed-invariance",
+    "sbc-prop-torsors-h1",
+    "sbc-thm-spreading-finite-etale-galois"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-higher-direct-image-presheaf",
+  "sbc-thm-cohomological-dimension-of-an-affine-curve",
+  "sbc-lem-slicing",
+  "def-sbc-normal-dominant-galois",
+  "sbc-lem-etale-over-normal",
+  "sbc-thm-algebraically-closed-invariance",
+  "sbc-prop-torsors-h1",
+  "sbc-thm-spreading-finite-etale-galois"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-universal-test-vanishing.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1413,
+ "blueprint_uses": [
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "sbc-def-base-change-square",
+  "sbc-lem-etale-over-normal",
+  "sbc-lem-higher-direct-image-presheaf",
+  "sbc-lem-slicing",
+  "sbc-prop-torsors-h1",
+  "sbc-thm-algebraically-closed-invariance",
+  "sbc-thm-cohomological-dimension-of-an-affine-curve",
+  "sbc-thm-spreading-finite-etale-galois"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions",
+  "sbc-def-base-change-square"
+ ],
+ "proof_split_by": "paragraphs"
+}

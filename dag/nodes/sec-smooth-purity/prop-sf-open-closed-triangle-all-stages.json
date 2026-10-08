@@ -1,0 +1,141 @@
+{
+ "id": "prop-sf-open-closed-triangle-all-stages",
+ "kind": "statement",
+ "title": "The open–closed triangle at every coefficient stage",
+ "statement": "Let $X$ be a separated finite-type $k$-scheme, let $i:Z\\hookrightarrow X$ be\na closed immersion and $j:U\\hookrightarrow X$ the complementary open\nimmersion. Let $\\Lambda$ be one of the coefficient stages\n$A_{E,n},\\mathcal O_E,E,\\Qlb$, with the categories $D^b_c(-,\\Lambda)$\n([def-weil-derived-complete-integral-detailed],\n[def-weil-rationalization-karoubi],\n[def-weil-algebraically-closed-coefficients]), the pullbacks $i^*,j^*$ of\n[def-weil-derived-pullback-tensor-hom], the direct image $i_*=Ri_*$ of\n[def-weil-derived-direct-image] and the extension by zero $j_!=Rj_!$ of\n[def-weil-integral-rational-qbar-compact-support]. For\n$K\\in D^b_c(X,\\Lambda)$ the open counit and the closed unit extend to a\ndistinguished triangle, the open–closed recollement triangle of\n[def-weil-open-closed-recollement],\n$$\nj_!j^*K\\longrightarrow K\\longrightarrow i_*i^*K\n\\longrightarrow j_!j^*K[1].\n$$\nMoreover $\\operatorname{Hom}(j_!j^*K[m],i_*i^*K)=0$ for all $m$; hence the\nthird arrow is uniquely determined by the other two and the triangle is\nfunctorial in $K$. If $X=X_0\\otimes_{k_0}k$, $Z$, $U$ come from\n$k_0$-schemes, $\\Lambda\\in\\{E,\\Qlb\\}$ and $K$ is a Weil complex\n([def-weil-weil-sheaf-complex]), then all three arrows are\nWeil-equivariant.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+  "place": "node prop-sf-open-closed-triangle-all-stages, order 1851"
+ },
+ "stmt_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-open-closed-recollement",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof": [
+  {
+   "text": "*Finite stage.* Let $A=A_{E,n}$. By [lem-sf-proetale-constructible-origin]\nwrite $K\\cong\\nu_X^*G$ with $G$ a bounded constructible complex on the étale\nsite. The étale triangle $j_!j^{-1}G\\to G\\to i_*i^{-1}G\\to$ is\n[lem-cbc-open-closed-recollement]. Apply the exact functor $\\nu_X^*$\n([prop-weil-pbc-site-comparison-finite-level]). The comparisons of\n[lem-cbc-proetale-extension-zero-comparison] (for $j_!$),\n[lem-weil-pbc-comparison-pullback] (for $j^*,i^*$) and\n[prop-weil-pbc-comparison-direct-image] (for the finite, hence\nquasi-compact, $i$) identify its vertices with $j_!j^*K$, $K$, $i_*i^*K$.\nThese comparisons are those of the adjunctions of\n[prop-weil-open-closed-recollement-adjunctions], so the first two arrows\nbecome the pro-étale open counit and closed unit. Hom vanishing: by\n[prop-weil-open-closed-recollement-adjunctions] $j_!\\dashv j^*$, and\n$j^*i_*=0$ (the closed fibre of an object over $U$ is empty), so\n$\\operatorname{Hom}(j_!N[m],i_*M)=\\operatorname{Hom}(N[m],j^*i_*M)=0$. Two\ncompletions of the first two arrows differ by an automorphism $h$ of the third\nvertex with $h-\\operatorname{id}$ factoring through $i_*i^*K\\to\nj_!j^*K[1]$, hence through a zero map; so $h=\\operatorname{id}$.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-cbc-open-closed-recollement",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-comparison-pullback",
+    "prop-weil-pbc-comparison-direct-image",
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Integral stage.* Put $R=\\mathcal O_E$, $A_n=R/\\varpi_E^n$,\n$K_n=K\\otimes^L_RA_n$. The operations have the finite reductions:\n$(j^*K)_n\\cong j^*K_n$ and $(i^*K)_n\\cong i^*K_n$ by\n[lemma-weil-pbc-completed-pullback-reduction];\n$(i_*M)_n\\cong i_*M_n$, with $i_*M$ derived complete, by\n[prop-weil-pbc-direct-image-limits]; and for the extension by zero,\n[lem-cbc-completed-extension-zero-comparison] applied to the identity square\nshows that $j_!N$ is derived complete with $(j_!N)_n\\cong j_!N_n$, so it is\nthe derived limit $R\\varprojlim_n\\operatorname{Res}_nj_!N_n$ of\n[def-weil-integral-rational-qbar-compact-support]. Define the counit\n$j_!j^*K\\to K$ and the unit $K\\to i_*i^*K$ as the derived limits of the\nfinite counits and units, using $K\\cong R\\varprojlim_n\\operatorname{Res}_nK_n$;\ntheir reductions are the finite maps.\n\nHom vanishing. If $P$ is integral and\n$M=R\\varprojlim_n\\operatorname{Res}_nM_n$, then\n$\\operatorname{Hom}(P[m],\\operatorname{Res}_nM_n)=\n\\operatorname{Hom}_{A_n}(P_n[m],M_n)$ by extension and restriction of\nscalars; if these vanish for all $m,n$, the Roos triangle of\n[prop-weil-pbc-roos-triangle] gives $\\operatorname{Hom}(P[m],M)=0$. With\n$P=j_!j^*K$, $M=i_*i^*K$ the finite vanishing gives the integral one.\n\nCompletion criterion. Let $u:A\\to B$, $v:B\\to C$ be maps of derived complete\nobjects with $A,B\\in D^b_c(X,R)$, $\\operatorname{Hom}(A[m],C)=0$ for all\n$m$, and reductions $A_n\\to B_n\\to C_n$ extending to distinguished\ntriangles. Then $vu=0$, because $\\operatorname{Hom}(A,C)=0$. Choose a\ncone $B\\xrightarrow{w}C'\\to A[1]$ of $u$; then $v=\\varphi w$ for a unique\n$\\varphi:C'\\to C$. Modulo $\\varpi_E^n$, TR3 and the finite uniqueness make\n$\\varphi_n$ an isomorphism, so the cone of $\\varphi$ is derived complete with\nzero reductions, hence zero by [def-weil-derived-complete]. Thus\n$A\\to B\\to C\\to A[1]$ is distinguished. Applied to the counit and unit this\ngives the integral triangle, and $i_*i^*K\\in D^b_c(X,R)$.",
+   "uses": [
+    "lemma-weil-pbc-completed-pullback-reduction",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-cbc-completed-extension-zero-comparison",
+    "def-weil-integral-rational-qbar-compact-support",
+    "prop-weil-pbc-roos-triangle",
+    "def-weil-derived-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Rational stage.* By [def-weil-rationalization-karoubi] the objects of\n$D^b_c(-,E)$ are the integral ones, and by\n[prop-weil-pbc-rational-transport] the exact $R$-linear functors\n$i^*,j^*,i_*,j_!$ and the two maps are the rationalized integral ones. The\nimage of a distinguished integral triangle is distinguished, and Hom groups\nbecome $\\operatorname{Hom}\\otimes_RE=0$.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Algebraically closed stage.* An object of $D^b_c(-,\\Qlb)$ is a pair\n$(E,K)$ ([def-weil-algebraically-closed-coefficients]). The operations are\nthe descended functors of [prop-weil-pbc-descent-functors], built from the\nscalar-extension compatibilities of [prop-weil-pbc-scalar-extension] (for\n$j_!$, the finite-stage compact-support functor of\n[def-weil-integral-rational-qbar-compact-support]); the two maps descend as\ncompatible transformations. The finite-stage inclusions are exact by\n[thm-weil-pbc-verdier-axioms], so the $E$-stage triangle gives the\n$\\Qlb$-triangle, and Hom groups are filtered colimits of vanishing\n$E$-stage groups.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "prop-weil-pbc-descent-functors",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-integral-rational-qbar-compact-support",
+    "thm-weil-pbc-verdier-axioms"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Weil structures.* The geometric Frobenius $g_X$ of\n[def-weil-frobenius-detailed] restricts to $g_U$ and $g_Z$, and the squares\nformed by $j$, $i$ and these automorphisms are cartesian. The exchange maps\nof [fix-lem-exchanges] for these automorphism squares are isomorphisms\n(their inverses come from the inverse squares), and they give the Weil\nstructures on $j_!$ and $i_*$; the pullbacks use $g_U^*j^*=j^*g_X^*$ and\n$g_Z^*i^*=i^*g_X^*$. The counit and unit are equivariant, since the exchange\nmaps are built from, and paste with, the same units and counits\n([fix-lem-exchanges]). Transporting the triangle along $g_X^*$ and the Weil\nisomorphisms gives a distinguished triangle with the same first two arrows;\nby the uniqueness above it has the same third arrow, which is therefore\nequivariant.",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-constructible-origin",
+  "lem-cbc-open-closed-recollement",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-cbc-completed-extension-zero-comparison",
+  "def-weil-integral-rational-qbar-compact-support",
+  "prop-weil-pbc-roos-triangle",
+  "def-weil-derived-complete",
+  "def-weil-rationalization-karoubi",
+  "prop-weil-pbc-rational-transport",
+  "def-weil-algebraically-closed-coefficients",
+  "prop-weil-pbc-descent-functors",
+  "prop-weil-pbc-scalar-extension",
+  "thm-weil-pbc-verdier-axioms",
+  "def-weil-frobenius-detailed",
+  "fix-lem-exchanges"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1851,
+ "blueprint_uses": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-frobenius-detailed",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-open-closed-recollement",
+  "def-weil-rationalization-karoubi",
+  "def-weil-weil-sheaf-complex",
+  "fix-lem-exchanges",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-cbc-open-closed-recollement",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-comparison-pullback",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-descent-functors",
+  "prop-weil-pbc-direct-image-limits",
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-roos-triangle",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-weil-pbc-verdier-axioms"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "labels"
+}

@@ -1,0 +1,85 @@
+{
+ "id": "lem-sc-arbitrary-curve-cd",
+ "kind": "statement",
+ "title": "The torsion bound on an arbitrary algebraic curve",
+ "statement": "Let $X$ be a\nseparated finite-type\nscheme of dimension at most one over an algebraically closed\nfield. Put $e=1$ if $X$ is affine, and $e=2$ otherwise.\nThen $\\operatorname{cd}_{\\rm tor}(X)\\leq e$, in the sense of\n[def-sc-etale-torsion-cd].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-arbitrary-curve-cd.md",
+  "place": "node lem-sc-arbitrary-curve-cd, order 1546",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 00TV"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sc-etale-torsion-cd",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Reduction is a universal homeomorphism, so\n[thm-weil-pbc-universal-homeomorphism-invariance] allows us\nto assume $X$ reduced. Normalize each of its finitely many\nirreducible components in its own function field and take their\ndisjoint union $h:X'\\to X$. This map is finite by\n[lem-fin-normalization-extension-finite]. It is an\nisomorphism off a finite set $S$: on each component, finite\ngenerators of the normalization have a common nonzero\ndenominator; remove its zero locus and the intersections with\nthe other components. These closed subsets have dimension zero.",
+   "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-fin-normalization-extension-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every one-dimensional component of $X'$ is regular by\n[lem-sc-normal-dim1-dvr], including its generic field\nlocal ring. Regular finite-type schemes over the perfect\nground field are smooth, by the local algebra criterion\n[Tag 00TV](https://stacks.math.columbia.edu/tag/00TV).\nThe zero-dimensional components are spectra of the ground field.\nIf $X$ is affine then $X'$ is affine, since $h$ is finite.",
+   "uses": [
+    "lem-sc-normal-dim1-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any torsion $F$, the kernel and cokernel of\n$F\\to h_*h^*F$ are supported on $S$.\nSuch sheaves equal their direct images from $S$, by checking\nstalks, and are acyclic by\n[lemma-weil-pbc-finite-direct-image-exact], [lem-weil-pbc-zero-dimensional-cohomology].\nThe two long exact sequences give\n$H^q(X,F)\\simeq H^q(X,h_*h^*F)$ for $q\\geq2$.\nFinite direct image gives\n$H^q(X,h_*h^*F)=H^q(X',h^*F)$.\nApply [lem-sc-cohomological-dimension], [lem-sc-affine-cohomological-dimension]\nto its smooth curve components and\n[lem-weil-pbc-zero-dimensional-cohomology] to its points.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-zero-dimensional-cohomology",
+    "lem-sc-cohomological-dimension",
+    "lem-sc-affine-cohomological-dimension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-fin-normalization-extension-finite",
+  "lem-sc-normal-dim1-dvr",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "lem-sc-cohomological-dimension",
+  "lem-sc-affine-cohomological-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-arbitrary-curve-cd.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1546,
+ "blueprint_uses": [
+  "def-sc-etale-torsion-cd",
+  "def-weil-pbc-scheme-conventions",
+  "lem-fin-normalization-extension-finite",
+  "lem-sc-affine-cohomological-dimension",
+  "lem-sc-cohomological-dimension",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs"
+}

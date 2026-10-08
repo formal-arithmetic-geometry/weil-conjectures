@@ -1,0 +1,82 @@
+{
+ "id": "lemma-openclosed-stalk-lowerstar",
+ "kind": "statement",
+ "title": "Stalks of $i_*$ on $Z$",
+ "statement": "Let $i\\colon Z\\to X$ be a closed immersion, let $\\bar z$ be a geometric point\nof $Z$ and write $\\bar x:=i\\circ\\bar z$ for the corresponding geometric point\nof $X$. Then the base-change functor\n\n$$\n\\Phi\\colon\\mathrm N(\\bar x)\\to\\mathrm N(\\bar z),\n\\qquad(V,\\bar v)\\mapsto(V\\times_XZ,\\bar z),\n$$\n\non the categories $\\mathrm N(\\bar x)$, $\\mathrm N(\\bar z)$ of pointed étale\nneighbourhoods is initial. Consequently, for every\n$\\mathcal H\\in\\shv{\\et Z}$,\n\n$$\n(i_*\\mathcal H)_{\\bar x}\\cong\\mathcal H_{\\bar z},\n$$\n\nnaturally in $\\mathcal H$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lemma-openclosed-stalk-lowerstar.md",
+  "place": "node lemma-openclosed-stalk-lowerstar, order 1521"
+ },
+ "stmt_deps": [
+  "def-kun-separably-closed"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathrm N(\\bar x)$ for the cofiltered category of étale\nneighbourhoods $(V,\\bar v)$ of $\\bar x$ in $\\et X$ and $\\mathrm N(\\bar z)$\nfor that of $\\bar z$ in $\\et Z$. By the formula for $i_*$,\n\n$$\n(i_*\\mathcal H)_{\\bar x}\n=\\colim_{(V,\\bar v)\\in\\mathrm N(\\bar x)^{\\mathrm{op}}}(i_*\\mathcal H)(V)\n=\\colim_{(V,\\bar v)\\in\\mathrm N(\\bar x)^{\\mathrm{op}}}\n\\mathcal H(V\\times_XZ),\n$$\n\nso the displayed isomorphism is the comparison of colimits induced by\n$\\Phi$, and it suffices to prove that $\\Phi$ is initial.\n\nNo connectedness argument is written by hand. Both $\\mathrm N(\\bar x)$ and\n$\\mathrm N(\\bar z)$ are cofiltered, being categories of étale\nneighbourhoods of a point, and for a functor between cofiltered categories\ninitiality follows from the two conditions:\n\n1. every object $d$ of $\\mathrm N(\\bar z)$ is dominated: there is an object\n$c$ of $\\mathrm N(\\bar x)$ and a morphism $\\Phi(c)\\to d$;\n1. any two morphisms $\\sigma,\\sigma'\\colon\\Phi(c)\\to d$ are equalised\nafter precomposing with $\\Phi(\\tau)$ for some\n$\\tau\\colon c'\\to c$ in $\\mathrm N(\\bar x)$.\n\nOnly these two are proved.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Domination.* This is [lemma-openclosed-etale-lifts-locally] in its\npointed form, applied to $W\\to Z$ and $\\bar w$ for $d=(W,\\bar w)$: it produces\n$V$ étale over $X$ and a $Z$-morphism $V\\times_XZ\\to W$ through which\n$\\bar w$ factors. The factorisation supplies the lift $\\bar v$ of $\\bar x$ to\n$V$, so $c=(V,\\bar v)$ is an object of $\\mathrm N(\\bar x)$ and the morphism is\none of pointed étale neighbourhoods $\\Phi(c)\\to d$.",
+   "uses": [
+    "lemma-openclosed-etale-lifts-locally"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Equalisation.* Let $\\sigma,\\sigma'\\colon\\Phi(V,\\bar v)=V\\times_XZ\\to W$\nbe two morphisms of pointed étale neighbourhoods; both send the marked point\n$p$ of $V\\times_XZ$ to the marked point of $W$, and both are morphisms over\n$Z$. Now $W\\to Z$ is étale, hence unramified, so its diagonal is an open\nimmersion and the locus in $V\\times_XZ$ where two $Z$-morphisms into $W$ agree\nis open; it contains $p$ because $\\sigma$ and $\\sigma'$ agree there. Finally\n$V\\times_XZ\\to V$ is a closed immersion, hence inducing on the underlying\nspaces, so that agreement locus is the trace of an open subscheme\n$V_0\\subseteq V$, which contains the marked point of $V$. Then\n$c'=(V_0,\\bar v)$ is again an object of $\\mathrm N(\\bar x)$ and the inclusion\n$\\tau\\colon c'\\to c$ has $\\Phi(\\tau)$ landing in the agreement locus, so\n$\\Phi(\\tau)\\circ\\sigma=\\Phi(\\tau)\\circ\\sigma'$.\n\nThe second condition is precisely where the shrinking that\n[rmk-openclosed-no-dense-subsite] says is unavailable to the\ndense-subsite argument is harmless: in a colimit over neighbourhoods one is\nallowed to pass to $V_0$. Note also that the fibre product $V_1\\times_XV_2$ of\ntwo neighbourhoods, which a hand-written connectedness argument would have to\nconstruct, is exactly what the cofilteredness of $\\mathrm N(\\bar x)$ supplies.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lemma-openclosed-etale-lifts-locally"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lemma-openclosed-stalk-lowerstar.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "cites_remark",
+  "long_proof_few_deps",
+  "lean_multiple"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1521,
+ "blueprint_uses": [
+  "def-kun-separably-closed",
+  "lemma-openclosed-etale-lifts-locally"
+ ],
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.OpenClosed.Stalk",
+  "declaration": "AlgebraicGeometry.Etale.lowerStarCompSheafFiberIso",
+  "branch": "slopmaster2",
+  "line": 106,
+  "sorry_free": true,
+  "body_lines": 1,
+  "others": [
+   {
+    "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint",
+    "declaration": "AlgebraicGeometry.Scheme.initial_pointSmallEtaleElementsBaseChange",
+    "branch": "slopmaster2",
+    "line": 425,
+    "sorry_free": true,
+    "body_lines": 3
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.lowerStarCompSheafFiberIso",
+  "AlgebraicGeometry.Scheme.initial_pointSmallEtaleElementsBaseChange"
+ ],
+ "uses_not_cited": [
+  "def-kun-separably-closed"
+ ],
+ "proof_split_by": "labels"
+}

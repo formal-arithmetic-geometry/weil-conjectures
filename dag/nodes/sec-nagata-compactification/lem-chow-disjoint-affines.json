@@ -1,0 +1,80 @@
+{
+ "id": "lem-chow-disjoint-affines",
+ "kind": "statement",
+ "title": "Disjoint affine neighbourhoods of generic points",
+ "statement": "Let $X$ be quasi-separated, let $Z_1,\\dots,Z_n$ be pairwise distinct\nirreducible components of $X$, and let $\\eta_i\\in Z_i$ be their generic\npoints. Then for every $i$ there is an affine open $V_i\\subseteq X$ containing\n$\\eta_i$ such that $V_i\\cap Z_k=\\emptyset$ for $k\\neq i$; in particular the\n$V_i$ are pairwise disjoint.\n(Stacks Project, Properties, Tag\n[01ZV](https://stacks.math.columbia.edu/tag/01ZV) = Lemma 28.30.1.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-affine-cover/lem-chow-disjoint-affines.md",
+  "place": "node lem-chow-disjoint-affines, order 316",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01ZV"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "For $k\\neq i$ the point $\\eta_i$ does not lie in the closed set $Z_k$, since\nthe $Z_l$ are pairwise distinct irreducible components and $\\eta_i\\in Z_i$;\nhence $X\\setminus Z_k$ is an open neighbourhood of $\\eta_i$, as is the finite\nintersection\n\n$$\n W_i:=\\bigcap_{k\\neq i}(X\\setminus Z_k),\n$$\n\nwhich satisfies $W_i\\cap Z_k=\\emptyset$ for all $k\\neq i$. The affine open\nsubschemes of a scheme form a basis for its topology (every scheme is locally\n$\\operatorname{Spec}$ of a ring, in which the distinguished opens form a\nbasis), so there is an affine open $V_i$ with $\\eta_i\\in V_i\\subseteq W_i$;\nthis gives $V_i\\cap Z_k=\\emptyset$ for $k\\neq i$. For $i\\neq j$ the open set\n$V_i$ avoids $Z_j$, whereas $V_j\\ni\\eta_j\\in Z_j$, so $V_i\\cap V_j=\\emptyset$,\ni.e. the $V_i$ are pairwise disjoint.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-affine-cover/lem-chow-disjoint-affines.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "lean_multiple",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 316,
+ "blueprint_uses": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Properties",
+  "declaration": "AlgebraicGeometry.exists_isAffineOpen_of_subset_genericPoints",
+  "branch": "slopmaster2",
+  "line": 169,
+  "sorry_free": true,
+  "body_lines": 3,
+  "others": [
+   {
+    "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Properties",
+    "declaration": "AlgebraicGeometry.exists_isAffineOpen_pairwise_disjoint",
+    "branch": "slopmaster2",
+    "line": 121,
+    "sorry_free": true,
+    "body_lines": 38
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.exists_isAffineOpen_of_subset_genericPoints",
+  "AlgebraicGeometry.exists_isAffineOpen_pairwise_disjoint"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "Let $X$ be a quasi-separated scheme, let $Z_1,\\dots,Z_n$ be pairwise distinct\nirreducible components of $X$ and let $\\eta_i\\in Z_i$ be their generic points.\nThen there are affine opens $U_i\\subseteq X$ with $\\eta_i\\in U_i$ and\n$U_i\\cap U_j=\\emptyset$ for $i\\neq j$. Consequently\n$U_1\\cup\\dots\\cup U_n$ is an affine open containing all the $\\eta_i$.",
+   "proof": "For $k\\neq i$ we have $\\eta_i\\notin Z_k$: otherwise\n$Z_i=\\overline{\\{\\eta_i\\}}\\subseteq Z_k$, contradicting that $Z_i$ and $Z_k$\nare distinct irreducible components. Hence\n$\\bigcap_{k\\neq i}(X\\setminus Z_k)$ is an open neighbourhood of $\\eta_i$, and\nsince the affine opens form a basis of the topology we may choose an affine\nopen $V_i$ with\n\n$$\n\\eta_i\\in V_i\\subseteq\\bigcap_{k\\neq i}(X\\setminus Z_k).\n$$\n\nIn particular $V_i\\cap Z_k=\\emptyset$, and a fortiori $\\eta_k\\notin V_i$, for\nall $k\\neq i$.\n\nFix $i$ and put $W_i:=\\bigcup_{j\\neq i}(V_i\\cap V_j)$. Each $V_i\\cap V_j$ is\nquasi-compact because $X$ is quasi-separated, so $W_i$ is a quasi-compact open\nsubset of $V_i$, and $\\eta_i\\notin W_i$ because $\\eta_i\\notin V_j$ for\n$j\\neq i$. Write $V_i=\\Spec R_i$. The irreducible components of the open\nsubscheme $V_i$ are the nonempty intersections $C\\cap V_i$ with $C$ an\nirreducible component of $X$, so $Z_i\\cap V_i$ is an irreducible component of\n$V_i$ with generic point $\\eta_i$; equivalently $\\eta_i$ corresponds to a\nminimal prime $\\mathfrak p_i\\subseteq R_i$. By 00EV applied to\n$R_i$, the minimal prime $\\mathfrak p_i$ and the quasi-compact open\n$W_i\\subseteq\\Spec R_i$, there is $f_i\\in R_i\\setminus\\mathfrak p_i$ with\n$D(f_i)\\cap W_i=\\emptyset$. Put $U_i:=D(f_i)$. Then $U_i$ is an affine open\ncontaining $\\eta_i$, and for $j\\neq i$ we have\n$U_i\\cap V_j\\subseteq V_i\\cap V_j\\subseteq W_i$, whence\n$U_i\\cap V_j=\\emptyset$ and in particular $U_i\\cap U_j=\\emptyset$.\n\nFinally, a scheme that is the disjoint union of two affine opens is affine by\n01I5; iterating, $U_1\\cup\\dots\\cup U_n$ is affine.",
+   "cites": []
+  }
+ ]
+}

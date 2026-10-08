@@ -1,0 +1,93 @@
+{
+ "id": "lemma-weil-pbc-completed-map-reduction",
+ "kind": "statement",
+ "title": "Finite reduction of the completed map",
+ "statement": "For every $n$, reduction of $\\Ex^{\\mathrm{comp}}_{\\square,K}$ of\n[def-weil-pbc-completed-base-change-map] modulo $I^n$, conjugated by\nthe canonical reduction isomorphisms, is exactly\n$$\n \\Ex_{\\square,K_n}:Lg_n^*Rf_*K_n\n \\xrightarrow{\\sim}Rf'_*Lg_n'^*K_n.\n$$\nThese reduction squares commute with $n+1\\to n$ and with compatible\nendomorphisms.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-map-reduction.md",
+  "place": "node lemma-weil-pbc-completed-map-reduction, order 1347",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 099N"
+   }
+  ],
+  "note": [
+   "*Source note:* the reduction of the completed pullback is the formula\n$Lf^*_{comp}M=\\Rlim Lf^*(M\\otimes^L_\\Lambda\\underline{\\Lambda/I^n})$ of\nStacks Project, Lemma 61.20.2 ([Tag\n099N](https://stacks.math.columbia.edu/tag/099N)), whose $n$-th level is\n$Lf_n^*$ of the $n$-th level; Stacks states the formula for the completed\npullback of one object of $D(\\mathcal C,\\Lambda)$, whereas the displayed\nstatement reduces the completed base-change exchange map of\n[def-weil-pbc-completed-base-change-map], which the verified entries\ndo not construct, and the blueprint adds that reduction together with its\ncompatibility with the transitions and with compatible endomorphisms."
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-completed-base-change-map",
+  "def-weil-pbc-completed-frobenius-structures",
+  "def-weil-pbc-completed-reduction-square"
+ ],
+ "proof": [
+  {
+   "text": "Tensoring the defining composite of\n[def-weil-pbc-completed-base-change-map] with $P_n$ and using the\nfinite-reduction identifications of the reconstruction lemma and of the\ncompleted-pullback reduction collapses it to the $n$-th component of the\nrectangle equality of [lem-weil-pbc-rectangle-derived-limit], which is the\nfinite-level exchange isomorphism; the compatibilities with the transitions\nfollow from the tower structures.",
+   "uses": [
+    "def-weil-pbc-completed-base-change-map",
+    "lem-weil-pbc-rectangle-derived-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-completed-base-change-map",
+  "lem-weil-pbc-rectangle-derived-limit",
+  "lem-weil-pbc-finite-reduction-reconstruction",
+  "lemma-weil-pbc-completed-frobenius-equivariance",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lemma-weil-pbc-frobenius-tower-compatibility",
+  "lemma-weil-pbc-level-map-derived-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-map-reduction.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1347,
+ "blueprint_uses": [
+  "def-weil-pbc-completed-base-change-map",
+  "def-weil-pbc-completed-frobenius-structures",
+  "def-weil-pbc-completed-reduction-square",
+  "lem-weil-pbc-finite-reduction-reconstruction",
+  "lem-weil-pbc-rectangle-derived-limit",
+  "lemma-weil-pbc-completed-frobenius-equivariance",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lemma-weil-pbc-frobenius-tower-compatibility",
+  "lemma-weil-pbc-level-map-derived-limit"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-completed-frobenius-structures",
+  "def-weil-pbc-completed-reduction-square",
+  "lem-weil-pbc-finite-reduction-reconstruction",
+  "lemma-weil-pbc-completed-frobenius-equivariance",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lemma-weil-pbc-frobenius-tower-compatibility",
+  "lemma-weil-pbc-level-map-derived-limit"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "For every $n$, the diagram\n\n$$\n\\begin{CD}\nS\\otimes^LP_n @>{\\overline\\xi_n}>> T\\otimes^LP_n\\\\\n@V{\\alpha_n}V{\\sim}V @VV{\\delta_n}V{\\sim}\\\\\nB_n @>{v'_n}>> D_n\n\\end{CD}\n$$\n\ncommutes. Hence reduction of\n$\\operatorname{Ex}^{\\mathrm{comp}}_{\\square,K}$ modulo $I^n$, conjugated\nby the displayed canonical reduction isomorphisms, is exactly the S8\ntransported finite-level exchange map $v'_n=\\operatorname{Ex}_{\\square,K_n}$.\nThe squares for $n+1\\to n$ commute, and the assertion is natural for\ncompatible tower endomorphisms. Under a Frobenius-equivariant datum, use\n$\\Phi_{Y'}P_n=P_n$ to give the two reductions their induced Weil structures.\nThen\n\n$$\n\\begin{aligned}\n\\alpha_n(\\Theta_S\\otimes1)\n&=\\Theta_{B,n}\\Phi_{Y'}(\\alpha_n),\\\\\n\\delta_n(\\Theta_T\\otimes1)\n&=\\Theta_{D,n}\\Phi_{Y'}(\\delta_n),\n\\end{aligned}\n$$\n\nand the displayed reduction square is a square of Weil objects.",
+   "proof": "Under $S=A_\\infty$ and the direct-image completion identification\n$T\\simeq C_\\infty$, the completed exchange map is both limit composites\n\n$$\nV'H=H'V:A_\\infty\\longrightarrow D_\\infty,\n$$\n\nfollowed by the inverse of direct-image/limit commutation. More explicitly,\nif $d:T\\to D_\\infty$ is direct-image/limit commutation and\n$c:C_\\infty\\to T$ is direct-image completion, then its construction gives\n$dc=H'$. Functorial finite\nreduction and the component equations of the limit rectangle give\n\n$$\n\\tau_n\\overline\\xi_n=v_n\\sigma_n.\n$$\n\nConsequently the two composites around the completed reduction square are\n\n$$\n\\delta_n\\overline\\xi_n\n=h'_n\\tau_n\\overline\\xi_n=h'_nv_n\\sigma_n\n$$\n\nand\n\n$$\nv'_n\\alpha_n=v'_nh_n\\sigma_n.\n$$\n\nThey are equal term by term because $h'_nv_n=v'_nh_n$ in the finite-level\nrectangle. Naturality of finite reduction makes $\\sigma_n$ and $\\tau_n$\ncommute with $n+1\\to n$, and functoriality of tensor reduction does the same\nfor $\\overline\\xi_n$. Together with the four transition equations, this\nshows that the completed squares commute with $K_{n+1}\\to K_n$ on every\ncorner. The limit construction and all four reduction edges are\noperator-equivariant, so the conjugated equality is operator-natural as well.\n\nFor Frobenius, the definition of $\\Theta_S$ transports\n$\\Theta_{A,\\infty}$ across $s$, and the $n$th product-cone component followed\nby $h_n$ is $\\alpha_n$. This gives the first displayed Weil equation. The\ndefinition of $\\Theta_T$ transports $\\Theta_{D,\\infty}$ across $t$, and its\n$n$th component is $\\delta_n$, giving the second. The completed Frobenius\nequation for $\\overline\\xi_n$, together with finite-level equivariance of\n$v'_n$, now says that every arrow of the reduction square is a Weil morphism.",
+   "cites": []
+  }
+ ],
+ "blueprint_notes": [
+  {
+   "label": "source_note",
+   "text": "*Source note:* the reduction of the completed pullback is the formula\n$Lf^*_{comp}M=\\Rlim Lf^*(M\\otimes^L_\\Lambda\\underline{\\Lambda/I^n})$ of\nStacks Project, Lemma 61.20.2 ([Tag\n099N](https://stacks.math.columbia.edu/tag/099N)), whose $n$-th level is\n$Lf_n^*$ of the $n$-th level; Stacks states the formula for the completed\npullback of one object of $D(\\mathcal C,\\Lambda)$, whereas the displayed\nstatement reduces the completed base-change exchange map of\n[def-weil-pbc-completed-base-change-map], which the verified entries\ndo not construct, and the blueprint adds that reduction together with its\ncompatibility with the transitions and with compatible endomorphisms.",
+   "where": "statement"
+  }
+ ]
+}

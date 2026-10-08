@@ -1,0 +1,88 @@
+{
+ "id": "lem-asd-smooth-generic-direct-image",
+ "kind": "statement",
+ "title": "A smooth source with locally constant coefficients",
+ "statement": "Let $S$ be integral and of finite type over a field $k$, let\n$\\ell\\ne\\operatorname{char}(k)$, let $f:X\\to S$ be a\nseparated smooth morphism of\nfinite type, and let $L$ be a finite locally constant\n$\\mathbf F_\\ell$-sheaf. There is a nonempty open $U\\subset S$\nsuch that $Rf_{U,*}L|_{X_U}$ is bounded with finite locally\nconstant cohomology, and for every $v:T\\to U$ with Noetherian $T$ the ordinary\nbase-change morphism\n\n$$\nv^*Rf_{U,*}L|_{X_U}\\longrightarrow Rf_{T,*}L|_{X_T}\n$$\n\nis an isomorphism.\nThe notation refers to ordinary derived categories.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+  "place": "node lem-asd-smooth-generic-direct-image, order 1632"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-derived-categories",
+  "sbc-def-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\lambda=\\mathbf F_\\ell$. The relative dimension is\nlocally constant by\n[sbc-lem-smooth-relative-dimension-locally-constant]; the\nfinitely many occurring dimensions give a finite disjoint open\ndecomposition, so we may treat one dimension at a time.\nPut $\\omega_f=f^\\times\\lambda_S$. The ambient smooth theorem\n[thm-asd-smooth-tensor] says that $\\omega_f$ is locally an\ninvertible sheaf in degree $-2d$, that\n$f^\\times M=\\omega_f\\otimes f^*M$. Its compatibility with\nNoetherian base change is [prop-asd-smooth-base-change]. In particular\n$N=L^\\vee\\otimes\\omega_f$ is bounded constructible and the\nfinite-dimensional evaluation isomorphism gives\n\n$$\nR\\mathcal Hom_X(N,\\omega_f)=L.\n$$",
+   "uses": [
+    "sbc-lem-smooth-relative-dimension-locally-constant",
+    "thm-asd-smooth-tensor",
+    "prop-asd-smooth-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The internal adjunction proved on the ambient categories in\n[prop-asd-internal-adjunction] therefore identifies\n\n$$\nRf_*L\n=R\\mathcal Hom_S(Rf_!N,\\lambda_S).\n\\tag{\\(\\ast\\)}\n$$\n\nThis invokes neither preservation of a constructible subcategory\nby $f^!$ nor ordinary direct-image finiteness.",
+   "uses": [
+    "prop-asd-internal-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [lem-fin-compact-bounded-and-base-change], $C=Rf_!N$\nis bounded constructible. Each of its finitely many nonzero\ncohomology sheaves is finite locally constant on some nonempty\nopen of the integral scheme $S$: take the stratum containing\nthe generic point in the constructible stratification of\n[def-weil-pbc-constructible-complexes], and then its open\nneighborhood. Intersect these finitely many opens to obtain $U$.\nApply [lem-fin-lisse-field-dual] to $C|_U$; equation\n$(\\ast)$ gives the claimed bounded locally constant cohomology.",
+   "uses": [
+    "lem-fin-compact-bounded-and-base-change",
+    "def-weil-pbc-constructible-complexes",
+    "lem-fin-lisse-field-dual"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For $v:T\\to U$ with Noetherian $T$, the ambient smooth theorem identifies\n$v_X^*N$ with the coefficient complex used for $f_T$.\nCompact-support base change identifies\n$v^*C$ with $Rf_{T,!}v_X^*N$, and\n[lem-fin-lisse-field-dual] permits pullback through its\ninternal dual. Thus the pullback of $(\\ast)$ is the same\nisomorphism $(\\ast)$ for $f_T$. Naturality of internal\nadjunction with respect to its unit and counit identifies this\ncomposite with the ordinary base-change morphism. Hence the\nspecified morphism, and not merely two abstract objects, is an\nisomorphism. Intersect the opens obtained for the finitely many\nrelative dimensions to finish.",
+   "uses": [
+    "lem-fin-lisse-field-dual"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "thm-asd-smooth-tensor",
+  "prop-asd-smooth-base-change",
+  "prop-asd-internal-adjunction",
+  "lem-fin-compact-bounded-and-base-change",
+  "def-weil-pbc-constructible-complexes",
+  "lem-fin-lisse-field-dual"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1632,
+ "blueprint_uses": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-categories",
+  "lem-fin-compact-bounded-and-base-change",
+  "lem-fin-lisse-field-dual",
+  "prop-asd-internal-adjunction",
+  "prop-asd-smooth-base-change",
+  "sbc-def-base-change-map",
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "thm-asd-smooth-tensor"
+ ],
+ "uses_not_cited": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-derived-categories",
+  "sbc-def-base-change-map"
+ ],
+ "proof_split_by": "paragraphs"
+}

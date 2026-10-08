@@ -1,0 +1,28 @@
+{
+ "id": "sk-prop-cd",
+ "kind": "section",
+ "title": "Vanishing in high degrees",
+ "text": "*Proposition (sketch).*\n\nFor $C$ as in [sk-def-curve], $n$ prime to $\\operatorname{char}k$,\nand every sheaf $F$ of $\\Z/n$-modules on $C_{\\Et}$ (more generally\nevery torsion sheaf whose torsion is prime to $\\operatorname{char}k$):\n$H^q(C,F)=0$ for $q\\ge3$ (the étale cohomological dimension of a\ncurve over an algebraically closed field is $\\le2$; the sharper\nbound $\\le1$ for $C$ affine is [sk-prop-cd-affine], and the\n$p$-primary bound in characteristic $p$ goes through the\nArtin–Schreier sequence). Consequently, for a complex $F$ in\n$D^b(C_{\\Et},\\Z/n)$ with $\\mathcal H^i(F)=0$ for $i>b$, one has\n$H^q(C,F)=0$ for $q>b+2$; the shift cannot be dropped, since\n$F=(\\Z/2)[-3]$ on $\\Pone$ has $H^3(\\Pone,F)=H^0(\\Pone,\\Z/2)\\neq0$.\n\n## Proof\n\nWe first treat a single torsion sheaf $F$. The complex form then\nfollows from the hypercohomology spectral sequence\n$E_2^{a,i}=H^a(C,\\mathcal H^i(F))\\Rightarrow H^{a+i}(C,F)$: its\n$E_2$-terms vanish for $a\\ge3$ by the sheaf case and for $i>b$ by\nhypothesis, so $H^q(C,F)=0$ for $q>b+2$ (the shift $b$ stays in the\nbound; it does not become $q\\ge3$).\nThe argument of Blueprint 06b/06c runs at the generic point; it does\n*not* pass through [sk-prop-cd-affine], so there is no circularity.\n\n*Step 1 (reduce to a smooth integral curve).* Reduction is a\nuniversal homeomorphism, so it does not change the étale site, and we may\ntake $C$ reduced. Normalize each of the finitely many irreducible\ncomponents in its own function field and let $h:C'\\to C$ be the disjoint\nunion of the normalizations. It is finite and an isomorphism away from a\nfinite set $S$ of closed points, so the kernel and cokernel of\n$F\\to h_*h^*F$ live on $S$; a sheaf on a finite set of points over an\nalgebraically closed field is acyclic, so the two long exact sequences give\n$H^q(C,F)\\cong H^q(C',h^*F)$ for $q\\ge2$, finite direct image being exact.\nThe one-dimensional components of $C'$ are regular, hence smooth over the\nperfect ground field, and the zero-dimensional ones are points. So assume\n$C$ smooth and integral.\n\n*Step 2 (push to the generic point).* Let\n$\\eta:\\Spec k(C)\\to C$ be the generic point and $M=\\eta^*F$. The kernel and\ncokernel of $F\\to\\eta_*M$ have zero generic stalk. Such a sheaf is the\nfiltered union of its subsheaves vanishing off a finite set of closed\npoints, hence is again acyclic, and as in Step 1\n$H^q(C,F)\\cong H^q(C,\\eta_*M)$ for $q\\ge2$.\n\n*Step 3 (the function field has cohomological dimension $\\le1$).*\nThis is where Tsen enters. By [sk-prop-tsen] every finite extension $E$\nof $k(C)$ is again $C_1$, so $\\Br(E)=0$ ([sk-def-br]). On $\\Spec E$ the\nKummer sequence ([sk-prop-kummer-exact]) together with\n$H^1(E,\\mathbb G_m)=\\Pic(\\Spec E)=0$ ([sk-prop-hilbert90]) embeds\n$H^2(E,\\mu_\\ell)$ into $\\Br(E)$, so $H^2(G_E,\\mathbf F_\\ell)=0$ for every\nopen subgroup $G_E$ of the absolute Galois group. A profinite group with\nthat property has $\\ell$-cohomological dimension $\\le1$: a Sylow\nfiltration reduces finite $\\ell$-primary coefficients to $\\mathbf F_\\ell$,\nrestriction followed by corestriction is multiplication by a prime-to-$\\ell$\nindex and hence invertible, and dimension shifting through coinduced\nmodules carries the vanishing of $H^2$ to all $q\\ge2$. Therefore\n$H^q(L,M)=0$ for $q\\ge2$ and every algebraic extension $L$ of $k(C)$.\n\n*Step 4 (the higher direct images of $\\eta$).* At a closed point of\nthe smooth curve the strict local ring is a discrete valuation ring, and\nits fraction field is an algebraic extension of $k(C)$, a strict\nhenselization being a filtered union of étale neighbourhoods. The stalk\nof $R^q\\eta_*M$ there is the cohomology of that fraction field, so\n$R^q\\eta_*M=0$ for $q\\ge2$ by Step 3. The remaining sheaf $R^1\\eta_*M$ has\nzero generic restriction, hence is acyclic by Step 2.\n\n*Step 5 (assemble).* The Grothendieck spectral sequence for sections\ncomposed with $\\eta_*$ reads\n$H^a(C,R^b\\eta_*M)\\Rightarrow H^{a+b}(k(C),M)$. By Step 4 only $b=0$ and\n$b=1$ occur, and the row $b=1$ contributes only at $a=0$; so in total\ndegree $q\\ge3$ no differential meets $H^q(C,\\eta_*M)$, which therefore\nequals $H^q(k(C),M)=0$ by Step 3. With Step 2 this gives $H^q(C,F)=0$ for\n$q\\ge3$. The $p$-primary part in characteristic $p$ is the\nArtin–Schreier bound, where $H^q(C,\\mathcal O_C)$ is computed on the\nétale site by descent for quasi-coherent modules.\n\nUses: [sk-def-br], [sk-def-curve], [sk-prop-hilbert90], [sk-prop-kummer-exact], [sk-prop-tsen]",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/_section.md",
+  "place": "order 987"
+ },
+ "cites": [
+  "sk-def-curve",
+  "sk-prop-cd-affine",
+  "sk-prop-tsen",
+  "sk-def-br",
+  "sk-prop-kummer-exact",
+  "sk-prop-hilbert90"
+ ],
+ "blueprint_uses": [
+  "sk-def-av-pic",
+  "sk-def-br",
+  "sk-def-curve",
+  "sk-prop-hilbert90",
+  "sk-prop-kummer-exact",
+  "sk-prop-tsen"
+ ],
+ "blueprint_lean": [],
+ "blueprint_tags": []
+}

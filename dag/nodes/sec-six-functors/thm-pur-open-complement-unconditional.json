@@ -1,0 +1,120 @@
+{
+ "id": "thm-pur-open-complement-unconditional",
+ "kind": "statement",
+ "title": "The open-complement condition is unconditional and uniform in the coefficient ring",
+ "statement": "Let $k$ be a separably closed field, let $A$ be a finite commutative ring\nannihilated by a power of a prime $\\ell\\neq\\operatorname{char}(k)$, let\n$T$ be a finite-type\n$k$-scheme of dimension at most $d$, and let\n$j:V\\hookrightarrow T$ be a\nquasi-compact open immersion.\nThen the pair $(V,T)$ satisfies the open-complement condition of\n[def-exc-open-complement-bound] with $c=2d$, and it does so for\n*every* finite coefficient ring $A$ of that shape at once: both\nclauses hold — the vanishing $R^qj_*M=0$ for every $q>2d$ and every\nsheaf $M$ of $A$-modules on $V_{\\Et}$, and the\nconstructibility of\n$R^qj_*F$ in every degree for every constructible $A$-sheaf $F$ — and\nthe constant $2d$ depends on $T$ alone, not on $A$. In particular, in\nthe setting of the global finite-field datum with $k=\\Fbar$ and at the\nfinite coefficient stages $A=A_{E,n}$ of [def-pur-conventions], the\ncondition holds for every $n\\geq1$ with the same constant $2d$; for the\nchart complements $W_U\\subseteq\\mathbf A^{d_U}_V$ of the assembly\n[thm-pur-general-admissibility], where\n$d_U+\\dim V\\leq d_U+\\dim Y$, it holds with\n$c_U=2(d_U+\\dim V)$, again independent of $n$. The special cases\nrecorded in [lem-exc-open-complement-known] — dimension zero, where an\nopen immersion of a zero-dimensional Noetherian scheme is also closed, and\ndimension at most one, by\n[thm-exc-curve-open-dimension-general], [thm-exc-curve-open-constructible-general]\n— are independent computations of the same condition and are neither used\nnor superseded here.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-pur-open-complement-unconditional.md",
+  "place": "node thm-pur-open-complement-unconditional, order 2080"
+ },
+ "stmt_deps": [
+  "def-exc-open-complement-bound",
+  "def-pur-conventions",
+  "thm-pur-general-admissibility",
+  "lem-exc-open-complement-known",
+  "thm-exc-curve-open-dimension-general",
+  "thm-exc-curve-open-constructible-general",
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The argument is that of [lem-exc-open-complement-known], repeated with\nits two hypotheses weakened and its constant tracked; no step of it uses more\nabout $k$ or about $A$ than the hypotheses of the statement, which is why\nthe conclusion is uniform in the coefficient ring.",
+   "uses": [
+    "lem-exc-open-complement-known"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 1: the direct-image input over $k$.* The field $k$ is\nseparably closed, so both clauses of the direct-image finiteness input\n[def-exc-direct-image-input] hold over $k$ by\n[thm-exc-direct-image-input-holds], for $N$ the exponent annihilating\n$A$ and every finite commutative ring annihilated by $N$.",
+   "uses": [
+    "def-exc-direct-image-input",
+    "thm-exc-direct-image-input-holds"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: the constructibility clause.* The open immersion $j$ is\nquasi-compact and $T$ is of finite type over $k$, so $j$ is a morphism\nof finite type between finite-type $k$-schemes; clause (1) of the input\ntherefore gives, for every constructible $A$-sheaf $F$ on $V_{\\Et}$ and\nevery $q\\geq0$, the constructibility of $R^qj_*F$ on $T_{\\Et}$. This is\nthe second clause of the open-complement condition, and it uses\n[thm-dg-finite-type-constructibility] through that input.",
+   "uses": [
+    "thm-dg-finite-type-constructibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3: the vanishing clause.* Fix a geometric point\n$\\bar t\\to T$. The strict-henselization stalk formula\n[prop-weil-pbc-strict-henselization-stalk-formula] identifies the stalk of\nthe higher direct image with the cohomology of the open complement over the\nstrict henselization at $\\bar t$,\n\n$$\n\\bigl(R^qj_*M\\bigr)_{\\bar t}\\cong H^q\\bigl(V\\times_TT_{(\\bar t)},M\\bigr),\n$$\n\na filtered colimit of the groups $H^q(V\\times_TU,M)$ over the pointed\nétale neighbourhoods $U\\to T$ of $\\bar t$. Each $V\\times_TU$ is an\nopen subscheme of the étale $T$-scheme $U$, hence a finite-type\n$k$-scheme of dimension at most $\\dim U=\\dim T\\leq d$; the sheaf $M$ of\n$A$-modules is a torsion sheaf of abelian groups, $A$ being finite and\nannihilated by a power of $\\ell\\neq\\operatorname{char}(k)$, and $k$ is\nseparably closed with characteristic prime to that power, so clause (2) of\nthe input gives $H^q(V\\times_TU,M)=0$ for every $q>2d$. A filtered\ncolimit of zero groups is zero, so every geometric stalk of $R^qj_*M$\nvanishes for $q>2d$, and the conservativity of geometric stalks\n[lemma-weil-pbc-geometric-stalk-conservative] makes the sheaf itself zero.\nThis is the first clause of the open-complement condition, with $c=2d$.",
+   "uses": [
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4: uniformity in the coefficient ring.* Steps 2 and 3 use of\n$A$ exactly its finiteness and the annihilation by a power of a prime\n$\\ell\\neq\\operatorname{char}(k)$: the constructibility clause is clause (1)\nof the input, whose only coefficient hypothesis is that $A$ is finite and\nannihilated by an integer invertible in $k$, and the vanishing clause is\nclause (2), which is quantified over all torsion sheaves and mentions no\ncoefficient ring. The integer $d=\\dim T$ likewise depends on the scheme\nalone. Hence both clauses hold with the constant $2d$ for every finite ring\n$A$ of the stated shape, which is the uniformity assertion. In the global\nfinite-field datum one has $k=\\Fbar$, separably closed with\n$\\operatorname{char}(k)=p$, and $A_{E,n}$ is annihilated by the power\n$\\varpi_E^n$ of the prime $\\ell\\neq p$, so the condition holds at every\nstage $n\\geq1$ with the constant $2d$; for the chart complement\n$W_U$ of the closed subscheme $U\\subseteq\\mathbf A^{d_U}_V$ of\n[def-sbc-affine-space] the ambient scheme is of dimension\n$d_U+\\dim V\\leq d_U+\\dim Y$, giving $c_U=2(d_U+\\dim V)$ independently of\n$n$. This is the assertion of the second half of the statement, and the\nfinal sentence records the two independent computations of the same condition\nin [lem-exc-open-complement-known].",
+   "uses": [
+    "def-sbc-affine-space",
+    "lem-exc-open-complement-known"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-open-complement-known",
+  "def-exc-direct-image-input",
+  "thm-exc-direct-image-input-holds",
+  "thm-dg-finite-type-constructibility",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-sbc-affine-space",
+  "lem-kun-cd-sep-closed-point",
+  "thm-sc-finite-type-torsion-cd"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-pur-open-complement-unconditional.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2080,
+ "blueprint_uses": [
+  "def-exc-direct-image-input",
+  "def-exc-open-complement-bound",
+  "def-pur-conventions",
+  "def-sbc-affine-space",
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-scheme-conventions",
+  "lem-exc-open-complement-known",
+  "lem-kun-cd-sep-closed-point",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "thm-dg-finite-type-constructibility",
+  "thm-exc-curve-open-constructible-general",
+  "thm-exc-curve-open-dimension-general",
+  "thm-exc-direct-image-input-holds",
+  "thm-pur-general-admissibility",
+  "thm-sc-finite-type-torsion-cd"
+ ],
+ "uses_not_cited": [
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-cd-sep-closed-point",
+  "thm-sc-finite-type-torsion-cd"
+ ],
+ "proof_split_by": "labels"
+}

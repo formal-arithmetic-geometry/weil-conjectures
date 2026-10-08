@@ -1,0 +1,123 @@
+{
+ "id": "thm-trf-trace-formula-e",
+ "kind": "statement",
+ "title": "Trace formula over a finite extension",
+ "statement": "Fix the global finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, and the\ncoefficient conventions of [def-trf-coefficient-conventions], with\n$A_n=A_{E,n}=\\mathcal O_E/\\varpi^n$. Let $X_0$ be\nseparated finite-type\nover $k_0$ ([def-weil-scheme-morphism-properties]), put\n$X=X_0\\times_{k_0}k$, let\n$K_E\\in D^b_c(X,E)$ be an object of the\nrationalized\n$E$-coefficient category ([def-weil-rationalization-karoubi],\n[def-weil-pbc-rational-category]), and let\n\n$$\n\\varphi_E:Lg_\\gamma^*K_E\\longrightarrow K_E\n$$\n\nbe an arbitrary morphism of $D^b_c(X,E)$, for instance the Weil\nstructure of an $E$-Weil complex. No invertibility of $\\varphi_E$, no\ninvertibility of a rescaling $c\\,\\varphi_E$ on a lattice, and no\nintegral Weil presentation is assumed. Let $F^{\\,m}_{c,K_E}$ on\n$R\\Gamma_c(X,K_E)$ and $F_{y,m}$ on $K_{E,\\bar y}$ be the $E$-stage\nFrobenius operators of $(K_E,\\varphi_E)$ defined in\n[prop-trf-rational-frobenius-integral-model] (the stalk being\n$K_{\\mathcal O,\\bar y}\\otimes_{\\mathcal O_E}E$ for a lattice\n$K_{\\mathcal O}$, as there).\n\n*Lattice and finite-level hypotheses.* Let $K_{\\mathcal O}\\in\nD^b_c(X,\\mathcal O_E)$ ([def-weil-derived-complete-integral-detailed])\ntogether with an isomorphism $\\alpha:K_{\\mathcal O}\\xrightarrow{\\sim}K_E$\nof $D^b_c(X,E)$ be a lattice of $K_E$. One always exists: the objects of\n$D^b_c(X,E)$ are those of $D^b_c(X,\\mathcal O_E)$, so one may take\n$K_{\\mathcal O}=K_E$ and $\\alpha=\\operatorname{id}$. Put\n$K_n=K_{\\mathcal O}\\otimes^L_{\\mathcal O_E}A_n$. Assume at every finite\nlevel $n$ the finite-level hypotheses of\n[thm-trf-coefficient-morphism-trace-formula] for $K_n$. These are an\nexplicit etale-origin witness for $K_n$\n([def-weil-pbc-etale-origin-witness]) and the exceptional-adjoint\nadmissibility of [def-trf-admissibility] for the graph correspondences of\nthe iterates $\\Phi^m$ and the fixed-point base changes on a chosen\ncompactification defined over $k_0$. They concern $K_n$ and the geometry\nof $X_0$ only, not $\\varphi_E$; they are the data \"assumed at each\nfinite level\" in the source and are not proved here.\n\nThen the $E$-vector spaces $H_c^i(X,K_E)$ and $H^j(K_{E,\\bar y})$ are\nfinite-dimensional and nonzero for only finitely many $i$, $j$, and for\nevery $m\\geq1$,\n\n$$\n\\sum_{i\\in\\mathbf Z}(-1)^i\n\\operatorname{Tr}\\bigl(F_{c,K_E}^m\\mid H_c^i(X,K_E)\\bigr)\n=\n\\sum_{y\\in X_0(\\mathbf F_{q^m})}\n\\sum_{j\\in\\mathbf Z}(-1)^j\n\\operatorname{Tr}\\bigl(F_{y,m}\\mid H^j(K_{E,\\bar y})\\bigr)\n$$\n\nin $E$. For any clearing of denominators $\\varphi_E=\\varpi^{-N}u$ on the\nlattice, the two sides are $\\varpi^{-Nm}$ times the images under\n$\\mathcal O_E\\to E$ of the two sides of the integral identity of\n[thm-trf-integral-adic-coefficient-morphism-trace-formula], item (2), and\nthey agree with the corresponding $E$-valued categorical traces by the\nsupertrace law over the field $E$ of [prop-trf-trace-formal-laws].\n\nThis covers the Weil structure of every $E$-Weil complex. It also covers\nWeil maps that are not invertible after any rescaling on any lattice, such\nas $\\varphi_E=\\operatorname{diag}(1,\\ell)$ on $E^2$ over\n$X_0=\\Spec\\mathbf F_q$ (the example of\n[prop-trf-rational-frobenius-integral-model]). The earlier hypothesis of a\nstrict integral Weil presentation of some rescaling $c\\,\\varphi_E$ is a\nspecial case and is no longer needed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-trace-formula-e.md",
+  "place": "node thm-trf-trace-formula-e, order 2396"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "prop-trf-rational-frobenius-integral-model",
+  "def-weil-derived-complete-integral-detailed",
+  "thm-trf-coefficient-morphism-trace-formula",
+  "def-weil-pbc-etale-origin-witness",
+  "def-trf-admissibility",
+  "thm-trf-integral-adic-coefficient-morphism-trace-formula",
+  "prop-trf-trace-formal-laws",
+  "def-trf-categorical-trace",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "*Step 0: the reduction tower.* By\n[def-weil-derived-complete-integral-detailed] each $K_n$ lies in\n$D^b_c(X,A_n)$, and the cohomological supports\n([def-weil-cohomological-support]) of all $K_n$ lie in one interval\n$[r,s]$. Each $K_n$ has Tor amplitude in $[r,s]$, hence lies in\n$D^b_{ctf}(X,A_n)$. Indeed, let $N$ be an $A_n$-module. The subquotients\n$N'$ of the finite filtration $\\varpi^iN$ are $A_1$-modules, and\n$K_n\\otimes^L_{A_n}N'\\cong(K_n\\otimes^L_{A_n}A_1)\\otimes^L_{A_1}N'\n\\cong K_1\\otimes_{A_1}N'$ by associativity of the derived tensor product\n($K_n\\otimes^L_{A_n}A_1\\cong K_{\\mathcal O}\\otimes^L_{\\mathcal O_E}A_1=K_1$).\nSince $A_1$ is a field, $N'$ is free, so this is a direct sum of copies of\n$K_1$, with cohomology sheaves in degrees $[r,s]$. The distinguished\ntriangles of the filtration give the same bound for\n$K_n\\otimes^L_{A_n}N$. The associativity isomorphisms\n$K_{n}\\otimes^L_{A_{n}}A_j\\cong K_j$ ($j\\leq n$) and the transitions of the\nfunctorial reduction tower of [def-weil-pbc-adic-coefficient-datum] make\n$K_\\bullet$ a normalized $A_\\bullet$-system of [def-trf-adic-system]. In\nparticular $K_{\\mathcal O}$ satisfies the hypotheses of\n[prop-trf-rational-frobenius-integral-model].",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-cohomological-support",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-trf-adic-system",
+    "prop-trf-rational-frobenius-integral-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 1: reduction to $\\alpha=\\operatorname{id}$.* Put\n$\\varphi_{\\mathcal O}=\\alpha^{-1}\\circ\\varphi_E\\circ Lg_\\gamma^*\\alpha:\nLg_\\gamma^*K_{\\mathcal O}\\to K_{\\mathcal O}$ in $D^b_c(X,E)$. By induction\non $m$ and functoriality of the rationalized pullbacks,\n$\\varphi_{\\mathcal O}^{[m]}=\\alpha^{-1}\\circ\\varphi_E^{[m]}\\circ\nLg_\\gamma^{m*}\\alpha$. The base-change isomorphisms $g_{\\gamma,c}^{m,*}$ and\nthe stalk transports $\\tau_{y,m}$ at the stage $E$ are rationalizations of\nnatural integral transformations ([prop-weil-pbc-rational-transport]),\nhence natural. So the operators of\n[prop-trf-rational-frobenius-integral-model] for\n$(K_{\\mathcal O},\\varphi_{\\mathcal O})$ are\n$R\\Gamma_c(X,\\alpha)^{-1}\\circ F^{\\,m}_{c,K_E}\\circ R\\Gamma_c(X,\\alpha)$ and\n$\\alpha_{\\bar y}^{-1}\\circ F_{y,m}\\circ\\alpha_{\\bar y}$. Passing to\ncohomology, these are conjugate to the operators for\n$(K_E,\\varphi_E)$ by $E$-linear isomorphisms, which changes neither the\ndimensions nor the traces. We may therefore assume $K_E=K_{\\mathcal O}$\n(viewed in $D^b_c(X,E)$) and $\\alpha=\\operatorname{id}$.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "prop-trf-rational-frobenius-integral-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: the integral model.* By\n[prop-trf-rational-frobenius-integral-model], item (1), choose $N\\geq0$ and\nan integral $u:Lg_\\gamma^*K_{\\mathcal O}\\to K_{\\mathcal O}$ with\n$\\varphi_E=\\varpi^{-N}u$. By its item (2), $\\psi_n=u_n\\circ\\kappa_{K_n}$ is a\ncompatible system of Frobenius coefficient morphisms on $K_\\bullet$, not\nnecessarily invertible. By its items (3) and (4), the integral operators\n$U_m$ on $R\\Gamma_c(X,K_{\\mathcal O})$ and $U_{y,m}$ on\n$K_{\\mathcal O,\\bar y}$ satisfy\n\n$$\nF^{\\,m}_{c,K_E}=\\varpi^{-Nm}\\bigl(U_m\\otimes_{\\mathcal O_E}E\\bigr),\n\\qquad\nF_{y,m}=\\varpi^{-Nm}\\bigl(U_{y,m}\\otimes_{\\mathcal O_E}E\\bigr).\n$$\n\nBy item (2) of [prop-trf-adic-coefficient-morphism-systems], applied to\nthe reduction tower $K_\\bullet$ (for which\n$P_{\\mathcal O}=R\\Gamma_c(X,K_{\\mathcal O})$ and\n$P_{\\bar y,\\mathcal O}=K_{\\mathcal O,\\bar y}$), both complexes are\nrepresented by bounded complexes of finite free $\\mathcal O_E$-modules.\nHence $R\\Gamma_c(X,K_E)=R\\Gamma_c(X,K_{\\mathcal O})\\otimes_{\\mathcal O_E}E$\n([def-weil-integral-rational-qbar-compact-support]) and\n$K_{E,\\bar y}=K_{\\mathcal O,\\bar y}\\otimes_{\\mathcal O_E}E$ are bounded\ncomplexes of finite-dimensional $E$-vector spaces, which is the finiteness\nassertion.",
+   "uses": [
+    "prop-trf-rational-frobenius-integral-model",
+    "prop-trf-adic-coefficient-morphism-systems",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3: the integral identity.* The finite-level hypotheses assumed in the\nstatement are those of\n[thm-trf-integral-adic-coefficient-morphism-trace-formula] for\n$(K_\\bullet,\\psi_\\bullet)$: they do not involve $\\psi_n$. Its item (2)\ngives\n\n$$\n\\operatorname{tr}_{\\mathcal O_E}\\bigl(U_m\\mid R\\Gamma_c(X,K_{\\mathcal O})\\bigr)\n=\\sum_{y\\in X_0(\\mathbf F_{q^m})}\n\\operatorname{tr}_{\\mathcal O_E}\\bigl(U_{y,m}\\mid K_{\\mathcal O,\\bar y}\\bigr)\n\\quad\\text{in }\\mathcal O_E .\n$$",
+   "uses": [
+    "thm-trf-integral-adic-coefficient-morphism-trace-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4: rationalization.* Let $\\rho:\\mathcal O_E\\to E$ be the inclusion.\nSince $E$ is flat over $\\mathcal O_E$, $P\\otimes^L_{\\mathcal O_E}E=P\\otimes\n_{\\mathcal O_E}E$ for the complexes of Step 2, and the scalar-extension law\nof [prop-trf-trace-formal-laws], item (3), gives\n$\\rho\\bigl(\\operatorname{tr}_{\\mathcal O_E}(U_m)\\bigr)\n=\\operatorname{tr}_E\\bigl(U_m\\otimes E\\mid R\\Gamma_c(X,K_E)\\bigr)$, and\nlikewise for each $U_{y,m}$ (directly: by the chain-level computation of\n[lem-trf-chain-supertrace] over $\\mathcal O_E$ and over $E$, both sides\nequal $\\sum_i(-1)^i\\operatorname{Tr}(U_m^i\\mid M^i)$ for a finite free\nmodel $M$ of Step 2 and a chain representative of $U_m$). By the\nsupertrace law over the field $E$,\nitem (4) of the same proposition,\n$\\operatorname{tr}_E(U_m\\otimes E)=\\sum_i(-1)^i\\operatorname{Tr}\n\\bigl(H^i(U_m\\otimes E)\\mid H_c^i(X,K_E)\\bigr)$, and likewise for the stalks.\nThe cohomology functors $H^i$ are $E$-linear on morphisms and the ordinary\ntrace is $E$-linear, so by Step 2\n\n$$\n\\sum_i(-1)^i\\operatorname{Tr}\\bigl(F^{\\,m}_{c,K_E}\\mid H_c^i(X,K_E)\\bigr)\n=\\varpi^{-Nm}\\rho\\Bigl(\\operatorname{tr}_{\\mathcal O_E}\\bigl(U_m\\mid\nR\\Gamma_c(X,K_{\\mathcal O})\\bigr)\\Bigr),\n$$\n\nand likewise\n$\\sum_j(-1)^j\\operatorname{Tr}(F_{y,m}\\mid H^j(K_{E,\\bar y}))\n=\\varpi^{-Nm}\\rho\\bigl(\\operatorname{tr}_{\\mathcal O_E}(U_{y,m}\\mid\nK_{\\mathcal O,\\bar y})\\bigr)$. The set $X_0(\\mathbf F_{q^m})$ is finite\n($X_0$ is of finite type over $k_0$) and $\\rho$ is additive. Applying $\\rho$\nto the identity of Step 3 and multiplying by $\\varpi^{-Nm}$ gives the\ndisplayed identity. The result does not depend on the choice of $(N,u)$:\nreplacing it by $(N+1,\\varpi u)$ multiplies $U_m$, $U_{y,m}$ by $\\varpi^m$\nand leaves $\\varpi^{-Nm}(U_m\\otimes E)$ unchanged\n([prop-trf-rational-frobenius-integral-model]).",
+   "uses": [
+    "prop-trf-trace-formal-laws",
+    "lem-trf-chain-supertrace",
+    "prop-trf-rational-frobenius-integral-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-cohomological-support",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-trf-adic-system",
+  "prop-trf-rational-frobenius-integral-model",
+  "prop-weil-pbc-rational-transport",
+  "prop-trf-adic-coefficient-morphism-systems",
+  "def-weil-integral-rational-qbar-compact-support",
+  "thm-trf-integral-adic-coefficient-morphism-trace-formula",
+  "prop-trf-trace-formal-laws",
+  "lem-trf-chain-supertrace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-trace-formula-e.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2396,
+ "blueprint_uses": [
+  "def-trf-adic-system",
+  "def-trf-admissibility",
+  "def-trf-categorical-trace",
+  "def-trf-coefficient-conventions",
+  "def-weil-cohomological-support",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-field-fiber",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-rational-category",
+  "def-weil-rationalization-karoubi",
+  "def-weil-scheme-morphism-properties",
+  "lem-trf-chain-supertrace",
+  "prop-trf-adic-coefficient-morphism-systems",
+  "prop-trf-rational-frobenius-integral-model",
+  "prop-trf-trace-formal-laws",
+  "prop-weil-pbc-rational-transport",
+  "thm-trf-coefficient-morphism-trace-formula",
+  "thm-trf-integral-adic-coefficient-morphism-trace-formula"
+ ],
+ "uses_not_cited": [
+  "def-trf-categorical-trace",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof_split_by": "labels"
+}

@@ -1,0 +1,155 @@
+{
+ "id": "thm-sc-serre-duality-curve",
+ "kind": "statement",
+ "title": "Serre duality for smooth proper curves",
+ "statement": "Let $k$ be an algebraically closed field, $C$ a\nproper smooth connected curve over $k$ and\n$\\mathcal M$ a finite locally free $\\mathcal O_C$-module (a\nquasi-coherent module Zariski-locally isomorphic to\n$\\mathcal O_C^{\\oplus r}$ for some $r\\ge0$), with dual\n$\\mathcal M^{\\vee}:=\\mathcal H om_{\\mathcal O_C}(\\mathcal M,\\mathcal O_C)$.\nPut $n:=\\dim C\\in\\{0,1\\}$ and $\\omega_C:=\\Omega^n_{C/k}$, where\n$\\Omega^1_{C/k}$ is the sheaf of Kähler differentials of $C$\nover $k$ ([def-sc-kahler-differentials]) and\n$\\Omega^0_{C/k}=\\mathcal O_C$. Then all groups\n$H^q(C,\\mathcal M)$ and $H^q(C,\\mathcal M^{\\vee}\\otimes\\omega_C)$\nare finite-dimensional $k$-vector spaces (coherent cohomology of a\nproper scheme over a field is finite-dimensional: *Source:\nStacks Project, Cohomology of Schemes, Proposition 30.19.1,\n[Tag 02O5](https://stacks.math.columbia.edu/tag/02O5)*), and\nfor every $q\\in\\mathbf Z$ there is a canonical isomorphism\n\n$$\nH^q(C,\\mathcal M)^{\\vee}\\;\\cong\\;\nH^{n-q}\\bigl(C,\\;\\mathcal M^{\\vee}\\otimes\\omega_C\\bigr)\n$$\n\n(both sides vanish unless $0\\le q\\le n$). In particular, for\n$n=1$ and an invertible $\\mathcal M$ ([def-sc-invertible-module],\nso $\\mathcal M^{\\vee}\\cong\\mathcal M^{-1}$ by\n[lem-sc-invertible-dual]):\n\n$$\nH^1(C,\\mathcal M)^{\\vee}\\;\\cong\\;\nH^0\\bigl(C,\\;\\Omega^1_{C/k}\\otimes\\mathcal M^{-1}\\bigr),\n\\qquad\nH^0(C,\\mathcal M)^{\\vee}\\;\\cong\\;\nH^1\\bigl(C,\\;\\Omega^1_{C/k}\\otimes\\mathcal M^{-1}\\bigr).\n$$\n\nThis is Serre duality $H^q(X,\\mathcal F)^{\\vee}\\cong H^{n-q}(X,\\mathcal F^{\\vee}\\otimes\\omega_X)$\nfor a smooth proper $X$ of dimension $n\\le1$ over an algebraically\nclosed field and a finite locally free $\\mathcal F$. For a coherent\n$\\mathcal F$ which is not locally free the right hand side must be\nreplaced by $\\operatorname{Ext}^{n-q}(\\mathcal F,\\omega_X)$, as in\n[thm-sc-p1-duality]: e.g. for the skyscraper\n$\\mathcal F=\\kappa(x)$ at a closed point $x$ of a curve,\n$H^0(C,\\mathcal F)^{\\vee}=k$ but $\\mathcal F^{\\vee}=0$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/thm-sc-serre-duality-curve.md",
+  "place": "node thm-sc-serre-duality-curve, order 702",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 02O5"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 00OY"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sc-kahler-differentials",
+  "def-sc-invertible-module",
+  "lem-sc-invertible-dual",
+  "thm-sc-p1-duality"
+ ],
+ "proof": [
+  {
+   "text": "The sheaf $\\Omega^1_{C/k}$ is a line bundle\n([lem-sc-canonical-sheaf]), so in both cases $\\omega_C$ is a line\nbundle and $\\mathcal M^{\\vee}\\otimes\\omega_C$ is again finite locally\nfree (on an open trivializing $\\mathcal M$ and $\\omega_C$ it is\n$\\mathcal O^{\\oplus r}$). All modules below are finite locally free,\nhence coherent on the Noetherian scheme $C$ ([pqf-def-coherent]),\nwhich gives the finite-dimensionality.",
+   "uses": [
+    "lem-sc-canonical-sheaf",
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Reduction to $q=n$.* For finite locally free $\\mathcal M$ the\ncanonical maps $\\mathcal M\\to\\mathcal M^{\\vee\\vee}$ and\n$\\omega_C^{\\vee}\\otimes\\omega_C\\to\\mathcal O_C$ are isomorphisms\n(check on opens where the modules are free), so\n$(\\mathcal M^{\\vee}\\otimes\\omega_C)^{\\vee}\\otimes\\omega_C\\cong\\mathcal M$.\nHence, once the isomorphism\n$H^n(C,\\mathcal N)^{\\vee}\\cong H^0(C,\\mathcal N^{\\vee}\\otimes\\omega_C)$\nis proved for every finite locally free $\\mathcal N$, applying it to\n$\\mathcal N:=\\mathcal M^{\\vee}\\otimes\\omega_C$ gives\n$H^n(C,\\mathcal M^{\\vee}\\otimes\\omega_C)^{\\vee}\\cong H^0(C,\\mathcal M)$,\nand dualizing (finite-dimensional spaces) gives the case $q=0$,\n$H^0(C,\\mathcal M)^{\\vee}\\cong H^n(C,\\mathcal M^{\\vee}\\otimes\\omega_C)$.\nFor $n=0$ the cases $q=0$ and $q=n$ coincide. It remains to show\nthe vanishing $H^q(C,\\mathcal N)=0$ for $q\\notin\\{0,\\dots,n\\}$ and\nevery finite locally free $\\mathcal N$ (for $q<0$ this is the\nconvention for derived functors), and the case $q=n$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Case $\\dim C=0$.* The finite-type scheme $C$ has\nfinitely many points (it is Noetherian of dimension zero), so the\nmorphism $C\\to\\operatorname{Spec}k$ is proper with finite fibres,\nhence finite by [thm-pqf-finite-iff-proper-finite-fibres]\n(the quasi-finite chapter); thus $H^0(C,\\mathcal O_C)$ is a\nfinite-dimensional\n$k$-algebra, reduced because $C$ is smooth, and connected\nbecause $C$ is connected, hence equal to $k$ (a reduced\nfinite-dimensional algebra over the algebraically closed field $k$\nis a product of finitely many copies of $k$, and connectedness\nleaves one factor). So $C=\\operatorname{Spec}k$: then\n$H^q(C,\\mathcal N)=0$ for $q>0$ by [pqf-lem-affine-vanishing]\n($\\operatorname{Spec}k$ is affine, $\\mathcal N$ quasi-coherent),\nand a finite locally free $\\mathcal N$ is the sheaf associated with\na finite-dimensional $k$-vector space $V=H^0(C,\\mathcal N)$, with\n$\\mathcal N^{\\vee}\\otimes\\omega_C=\\mathcal N^{\\vee}$ associated with\n$\\operatorname{Hom}_k(V,k)=V^{\\vee}$; so\n$H^0(C,\\mathcal N)^{\\vee}=V^{\\vee}=H^0(C,\\mathcal N^{\\vee}\\otimes\\omega_C)$,\nthe case $q=n=0$. (Also $\\Omega^1_{C/k}=0$: the module of\nKähler differentials of $k$ over $k$ is zero, the universal\nderivation of the identity being $d=0$; this is why the sheaf\n$\\omega_C=\\Omega^{\\dim C}_{C/k}$ is $\\mathcal O_C$ here.)",
+   "uses": [
+    "thm-pqf-finite-iff-proper-finite-fibres",
+    "pqf-lem-affine-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Case $\\dim C=1$.* The connected smooth curve $C$ is\nintegral: its local rings are domains ([lem-sc-smooth-regular]),\nso its irreducible components are pairwise disjoint (a point\nbelonging to two components would have a local ring with two minimal\nprimes), and connectedness leaves a single component. The function\nfield $k(C)$\n([def-sc-function-field]) has transcendence degree one over\n$k$: for an integral scheme of finite type over a field,\n$\\dim X=\\operatorname{trdeg}_k k(X)$, by Noether normalization\n(*Source: Stacks Project, Commutative Algebra,\n[Tag 00OY](https://stacks.math.columbia.edu/tag/00OY)*; as in the\nproof of [lem-sc-deg-principal-zero]). Choose\n$t\\in k(C)\\setminus k$ (a transcendental element, since\n$k\\subset k(C)$ is a field extension and $k$ is algebraically\nclosed), and let $f:=\\pi_t:C\\to\\mathbf P^1_k$ be the morphism of\n[lem-sc-morphism-from-function]: finite, surjective and flat,\nof degree $d:=[k(C):k(t)]$.",
+   "uses": [
+    "lem-sc-smooth-regular",
+    "def-sc-function-field",
+    "lem-sc-deg-principal-zero",
+    "lem-sc-morphism-from-function"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Transfer of the cohomology.* The morphism $f$ is proper\n(finite morphisms of schemes are proper,\n[lem-weil-pbc-finite-proper] of the ambient-foundations chapter), and its fibres\nare finite ([pqf-lem-finite-qf] and\n[pqf-lem-qf-finitefibres] of the quasi-finite chapter); $\\mathbf P^1_k$\nis locally Noetherian (of finite type over the field $k$). Let\n$\\mathcal M$ be finite locally free. It is coherent (on the locally\nNoetherian scheme $C$, a locally free module of finite type is\ncoherent: [pqf-def-coherent]), so [pqf-lem-fff-vanishing] gives\n$(R^p f_*\\mathcal M)_y=0$ for all $p>0$ and all\n$y\\in\\mathbf P^1_k$, i.e. $R^pf_*\\mathcal M=0$ for $p>0$\n([pqf-lem-sheaf-zero-stalks]). The Leray spectral sequence\n$E_2^{p,q}=H^p(\\mathbf P^1_k,R^qf_*\\mathcal M)\\Rightarrow H^{p+q}(C,\\mathcal M)$\n([pqf-lem-leray]) is therefore concentrated on the row $q=0$ and\ndegenerates, giving $H^p(C,\\mathcal M)\\cong H^p(\\mathbf P^1_k,f_*\\mathcal M)$\nfor all $p$; in degree one this is the low-degree exact sequence of\n[pqf-lem-leray-lowdegree]:\n\n$$\nH^1(C,\\mathcal M)\\cong H^1(\\mathbf P^1_k,f_*\\mathcal M),\n\\qquad\nH^p(C,\\mathcal M)\\cong H^p(\\mathbf P^1_k,f_*\\mathcal M)=0\\quad(p\\ge2),\n$$\n\nthe vanishing by [lem-sc-p1-hi-vanishing]. This is the vanishing\noutside $\\{0,1\\}$ required in the reduction step.\n\nMoreover $f_*\\mathcal M$ is a finite locally free\n$\\mathcal O_{\\mathbf P^1_k}$-module (of rank $d$): over an affine\nopen $U=\\operatorname{Spec}R\\subset\\mathbf P^1_k$ the preimage\n$f^{-1}(U)=\\operatorname{Spec}B$ is affine with $B$ a finite\nlocally free $R$-algebra (finite flat), and\n$f_*\\mathcal M|_U$ is the finite locally free $R$-module\n$\\Gamma(f^{-1}(U),\\mathcal M)$: the sections of a finite locally\nfree module on the affine scheme $\\operatorname{Spec}B$ form a\nfinitely generated projective $B$-module, which is a finitely\ngenerated projective $R$-module because $B$ is one (a direct summand\nof $B^{\\oplus m}$, and $B^{\\oplus m}$ is finite projective over $R$);\nif $\\mathcal M$ has rank $r$, the generic rank is\n$rd$, $d= \\dim_{k(t)}k(C)$.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "pqf-lem-finite-qf",
+    "pqf-lem-qf-finitefibres",
+    "pqf-def-coherent",
+    "pqf-lem-fff-vanishing",
+    "pqf-lem-sheaf-zero-stalks",
+    "pqf-lem-leray",
+    "pqf-lem-leray-lowdegree",
+    "lem-sc-p1-hi-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Duality.* Since $f_*\\mathcal M$ is finite locally free,\nhence coherent, [thm-sc-p1-duality] gives\n\n$$\nH^1(\\mathbf P^1_k,f_*\\mathcal M)^{\\vee}\n\\cong\n\\operatorname{Hom}_{\\mathcal O_{\\mathbf P^1}}\n\\bigl(f_*\\mathcal M,\\omega_{\\mathbf P^1}\\bigr),\n$$\n\nand since $f$ is finite flat, [lem-sc-finite-duality] gives\n\n$$\n\\operatorname{Hom}_{\\mathcal O_{\\mathbf P^1}}\n\\bigl(f_*\\mathcal M,\\omega_{\\mathbf P^1}\\bigr)\n\\cong\nH^0\\bigl(C,\\omega_C\\otimes\\mathcal M^{\\vee}\\bigr).\n$$\n\nComposing (the three isomorphisms are compatible with the\nidentification $\\omega_C=\\Omega^1_{C/k}$):\n\n$$\nH^1(C,\\mathcal M)^{\\vee}\n\\cong H^1(\\mathbf P^1_k,f_*\\mathcal M)^{\\vee}\n\\cong \\operatorname{Hom}_{\\mathcal O_{\\mathbf P^1}}\n\\bigl(f_*\\mathcal M,\\omega_{\\mathbf P^1}\\bigr)\n\\cong H^0\\bigl(C,\\mathcal M^{\\vee}\\otimes\\Omega^1_{C/k}\\bigr),\n$$\n\nwhich is the case $q=n=1$; by the reduction step this proves the\ntheorem. For invertible $\\mathcal M$, [lem-sc-invertible-dual]\nidentifies $\\mathcal M^{\\vee}$ with $\\mathcal M^{-1}$, which gives\nthe two displayed particular cases.",
+   "uses": [
+    "thm-sc-p1-duality",
+    "lem-sc-finite-duality",
+    "lem-sc-invertible-dual"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-canonical-sheaf",
+  "pqf-def-coherent",
+  "thm-pqf-finite-iff-proper-finite-fibres",
+  "pqf-lem-affine-vanishing",
+  "lem-sc-smooth-regular",
+  "def-sc-function-field",
+  "lem-sc-deg-principal-zero",
+  "lem-sc-morphism-from-function",
+  "lem-weil-pbc-finite-proper",
+  "pqf-lem-finite-qf",
+  "pqf-lem-qf-finitefibres",
+  "pqf-lem-fff-vanishing",
+  "pqf-lem-sheaf-zero-stalks",
+  "pqf-lem-leray",
+  "pqf-lem-leray-lowdegree",
+  "lem-sc-p1-hi-vanishing",
+  "thm-sc-p1-duality",
+  "lem-sc-finite-duality",
+  "lem-sc-invertible-dual"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/thm-sc-serre-duality-curve.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "padded_uses",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 702,
+ "blueprint_uses": [
+  "def-sc-curves",
+  "def-sc-function-field",
+  "def-sc-invertible-module",
+  "def-sc-kahler-differentials",
+  "lem-sc-canonical-sheaf",
+  "lem-sc-deg-principal-zero",
+  "lem-sc-finite-duality",
+  "lem-sc-invertible-dual",
+  "lem-sc-morphism-from-function",
+  "lem-sc-p1-hi-vanishing",
+  "lem-sc-smooth-regular",
+  "lem-weil-pbc-finite-proper",
+  "pqf-def-coherent",
+  "pqf-lem-affine-vanishing",
+  "pqf-lem-fff-vanishing",
+  "pqf-lem-finite-qf",
+  "pqf-lem-leray",
+  "pqf-lem-leray-lowdegree",
+  "pqf-lem-qf-finitefibres",
+  "pqf-lem-sheaf-zero-stalks",
+  "thm-pqf-finite-iff-proper-finite-fibres",
+  "thm-sc-p1-duality"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+  "declaration": "AlgebraicGeometry.Scheme.serreDuality",
+  "branch": "slopmaster2",
+  "line": 407,
+  "sorry_free": true,
+  "body_lines": 3
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.serreDuality"
+ ],
+ "proof_split_by": "labels"
+}

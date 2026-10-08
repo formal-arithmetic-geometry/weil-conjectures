@@ -1,0 +1,92 @@
+{
+ "id": "prop-compactification-coherence-detailed",
+ "kind": "statement",
+ "title": "Compactification coherence",
+ "statement": "Let $K_0$ be a field, let $X,Y$ be\nfinite-type $K_0$-schemes, and let\n$f:X\\to Y$ be a\nseparated finite-type\n$K_0$-morphism. Fix a prime $\\ell$, write $\\Ql=\\mathbf Q_\\ell$, and\nrequire that its image in $K_0$ is invertible. Choose a finite extension\n$E/\\Ql$, an integer $n\\in\\mathbf Z_{\\geq1}$,\nand put $A=A_{E,n}$. The coefficient $A$ is used with the\nfinite-torsion\nconstructibility condition. For objects\n$c_i=(j_i,\\bar f_i)\\in\\operatorname{Comp}(f)$ in the\ncompactification category\nand a refinement\n$u:c_1\\to c_2$, the canonical transformation between the\ncompact-support candidates\n\n$$\nR\\bar f_{1*,n}j_{1!}\n\\xrightarrow{\\sim}\nR\\bar f_{2*,n}j_{2!}\n$$\n\nis the composite of the proper-composition isomorphism with the isomorphism\n\n$$\nRu_*j_{1!}\\xrightarrow{\\sim}j_{2!}\n$$\n\non the ambient derived category. These transformations are identities for\nidentity refinements and are transitive under composition. For any two\ncompactifications $c_1,c_2$, comparison through a common refinement gives\na natural isomorphism\n\n$$\nRf_{!,n}^{c_1}\\xrightarrow{\\sim}Rf_{!,n}^{c_2}.\n$$\n\nHere $R\\bar f_{i*,n}$ and $j_{i!}$ are respectively the\nderived direct image and\nextension-by-zero functors. A common\nrefinement may be chosen for any finite collection of\ncompactifications; the resulting comparison is independent of that choice\nand satisfies the cocycle condition for triples of compactifications.\nThe comparison is asserted on the domain declared in\n[def-weil-compact-support-candidate]: the complexes of the pro-etale\nsite that come from the etale site with an\netale-origin witness. It is\nnot asserted, and not claimed anywhere in the blueprint, on the whole of\n$D(X_{\\mathrm{proet}},A)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/prop-compactification-coherence.md",
+  "place": "node prop-compactification-coherence-detailed, order 1485"
+ },
+ "stmt_deps": [
+  "def-weil-compact-support-candidate",
+  "def-weil-extension-by-zero",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "We prove coherence on the full subcategory of complexes\n$K=\\nu_X^*L$ with $L\\in D^+(X_{\\Et},A)$, using the comparison\npullback of [def-weil-pbc-site-comparison-morphism].\nThis includes bounded constructible complexes coming from the etale\nsite. A refinement satisfies $u j_1=j_2$\nby [def-weil-compactifications-refinements]. Use the inverse of\nthe canonical isomorphism of\n[lem-weil-pbc-proper-open-comparison-proetale]:\n\n$$\n\\alpha_u^{-1}:Ru_*j_{1!}\\xrightarrow{\\sim}j_{2!}.\n$$",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-compactifications-refinements",
+    "lem-weil-pbc-proper-open-comparison-proetale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The composition isomorphism for derived direct images at finite level,\n[lem-weil-derived-direct-image-composition] (1), gives\n$R\\bar f_{1*,n}\\simeq R\\bar f_{2*,n}Ru_*$.\nComposing with $R\\bar f_{2*,n}(\\alpha_u^{-1})$ therefore gives the\nclaimed map of candidates from [def-weil-compact-support-candidate].\nIt is the identity for an identity refinement, and the composition law\nfor $\\alpha$ makes these maps transitive.",
+   "uses": [
+    "lem-weil-derived-direct-image-composition",
+    "def-weil-compact-support-candidate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finally, [prop-compactification-refinement] gives a common\nrefinement $d$ of any two compactifications. If\n$t_i:Rf_{!,n}^{d}\\xrightarrow{\\sim}Rf_{!,n}^{c_i}$ are its maps,\nthe comparison from $c_1$ to $c_2$ is $t_2t_1^{-1}$.\nGiven another choice $d'$, choose a refinement mapping to both.\nThe two resulting maps to each $c_i$ can be made equal by the\nparallel-refinement clause; do this for the two $c_i$ successively.\nTransitivity then makes the two expressions $t_2t_1^{-1}$ equal.\nFor three compactifications choose one common refinement, so that\n$(t_3t_2^{-1})(t_2t_1^{-1})=t_3t_1^{-1}$.\nThis proves independence and the cocycle condition on the indicated\nfull subcategory.",
+   "uses": [
+    "prop-compactification-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The statement on all of $D(X_{\\mathrm{proet}},A)$ is no longer part of\nthe claim: the domain declared in\n[def-weil-compact-support-candidate] is the subcategory of complexes\ncoming from the etale site with a witness, which is exactly the domain on\nwhich the comparison above is proved, so the proposition is complete on its\ndeclared domain. A comparison on complexes without an etale origin would\nneed proper base change for the complex itself; every proper base-change\nstatement of the proper-base-change chapter assumes either torsion cohomology and boundedness\nbelow on the etale site or an etale-origin witness, so no such extension is\navailable, and none is used.",
+   "uses": [
+    "def-weil-compact-support-candidate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-compactifications-refinements",
+  "lem-weil-pbc-proper-open-comparison-proetale",
+  "lem-weil-derived-direct-image-composition",
+  "def-weil-compact-support-candidate",
+  "prop-compactification-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/prop-compactification-coherence.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1485,
+ "blueprint_uses": [
+  "def-weil-compact-support-candidate",
+  "def-weil-compactifications-refinements",
+  "def-weil-extension-by-zero",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-scheme-morphism-properties",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-proper-open-comparison-proetale",
+  "prop-compactification-refinement"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-weil-extension-by-zero",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs"
+}

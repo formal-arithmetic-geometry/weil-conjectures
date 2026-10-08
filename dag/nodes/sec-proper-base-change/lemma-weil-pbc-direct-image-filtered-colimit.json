@@ -1,0 +1,67 @@
+{
+ "id": "lemma-weil-pbc-direct-image-filtered-colimit",
+ "kind": "statement",
+ "title": "Filtered colimits and higher direct image",
+ "statement": "If $u:U\\to V$ is quasi-compact and quasi-separated\n[def-weil-pbc-scheme-conventions] and $(F_i)$ is a filtered system of torsion\netale sheaves [def-weil-pbc-etale-sheaves], then for every $q\\geq0$ the\ncanonical map\n\n$$\n \\varinjlim_iR^qu_*F_i\\xrightarrow{\\sim}R^qu_*(\\varinjlim_iF_i)\n$$\n\ninvolving the higher direct image [def-weil-pbc-direct-image] is an\nisomorphism. The same assertion holds after arbitrary base change.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-direct-image-filtered-colimit.md",
+  "place": "node lemma-weil-pbc-direct-image-filtered-colimit, order 1087"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "The higher direct image of [def-weil-pbc-direct-image] is the sheafification\nof $W\\mapsto H^q(W\\times_VU,F|)$ by\n[lem-weil-pbc-qcqs-higher-direct-image], the morphism $u$ being quasi-compact\nand quasi-separated.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-qcqs-higher-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the basis of affine etale $W\\to V$. Then $W\\times_VU$ is quasi-compact\nand quasi-separated, so [lem-weil-pbc-cohomology-filtered-colimit] applies to\nthe displayed presheaf on every basis object. Inverse image to $W\\times_VU$\ncommutes with filtered colimits. Finally, sheafification preserves colimits,\nand filtered colimits are exact. Sheafifying the resulting isomorphisms\nproves the assertion. Quasi-compactness and quasi-separatedness are preserved\nby base change, so this argument also proves the last sentence.",
+   "uses": [
+    "lem-weil-pbc-cohomology-filtered-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-qcqs-higher-direct-image",
+  "lem-weil-pbc-cohomology-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-direct-image-filtered-colimit.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1087,
+ "blueprint_uses": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-qcqs-higher-direct-image"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "For a quasi-compact and quasi-separated morphism of schemes $h:W\\to V$ and a\nfiltered system of torsion sheaves $(F_i)$, the canonical map\n\n$$\n\\varinjlim_i R^qh_*F_i\\longrightarrow R^qh_*(\\varinjlim_iF_i)\n$$\n\nis an isomorphism for every $q$.",
+   "proof": "For $q=0$, sections on a quasi-compact etale object are the equalizer of a\nfinite covering diagram after a finite quasi-compact refinement; filtered\ncolimits commute with this finite limit. For $q>0$, represent a class by a\ndegree-$q$ cocycle on a split etale hypercover with finite $(q+1)$-skeleton.\nEach of its finitely many sections is represented in some $F_i$, and the\nfinite list of face-map equalities holds at one later index because the system\nis filtered. This proves surjectivity of\n$\\varinjlim_iH^q(W,F_i)\\to H^q(W,\\varinjlim_iF_i)$.\n\nIf a class from $F_i$ dies after the colimit, choose a finite hypercover\nrefinement and a degree-$(q-1)$ null-homotopy on the limit. Its finitely many\nsections, refinement maps, and equations descend to one index $j\\geq i$;\nthere the class is already a coboundary. Thus the map is injective. The\nsame argument applies after every quasi-compact etale base change\n$U\\to V$, so the cohomology-sheaf description of $R^qh_*$ identifies the\ndisplayed sheaves. This is the derived filtered-colimit argument, with no\nunbounded injective replacement required.",
+   "cites": []
+  }
+ ]
+}

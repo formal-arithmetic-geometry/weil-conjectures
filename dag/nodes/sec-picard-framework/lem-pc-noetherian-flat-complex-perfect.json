@@ -1,0 +1,62 @@
+{
+ "id": "lem-pc-noetherian-flat-complex-perfect",
+ "kind": "statement",
+ "title": "A bounded flat complex with finite cohomology over a Noetherian ring",
+ "statement": "Let $A$ be a Noetherian ring and let $C$ be an object of the\nderived category\n$D(A\\text{-}\\mathrm{Mod})$. Suppose that $C$ has a bounded\nrepresentative by flat $A$-modules and that every $H^i(C)$ is a\nfinite $A$-module. Then $C$ is represented by a bounded complex\nof finite projective $A$-modules, hence is\nperfect.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-noetherian-flat-complex-perfect.md",
+  "place": "node lem-pc-noetherian-flat-complex-perfect, order 672"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose a flat representative $F^\\bullet$ concentrated in degrees\n$[a,b]$. In particular, for every $A$-module $N$, the complex\n$F^\\bullet\\otimes_A N$ has no cohomology in degrees less than $a$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "We first construct a bounded-above complex $P^\\bullet$ of finite\nfree modules, with $P^i=0$ for $i>b$, and a quasi-isomorphism\n$P^\\bullet\\to F^\\bullet$. Here are the steps of the construction.\nChoose finitely many cycles representing generators of $H^b(F)$.\nThey give a map from a finite free module placed in degree $b$\nto $F$. Its cone has zero cohomology in degrees at least $b$ and\nfinite cohomology in every degree: this follows from the long\nexact sequence and the fact that kernels and cokernels of maps\nbetween finite modules over a Noetherian ring are finite.\nSuppose finite free terms in degrees $r,\\ldots,b$ and a map from\nthat truncated complex to $F$ have been chosen so that its cone\nhas no cohomology in degrees at least $r$. Choose finitely many\ncycles generating the cone's cohomology in degree $r-1$.\nA cone cycle consists of a vector in the existing degree-$r$\nterm and a vector of $F^{r-1}$ satisfying the cone cycle\nequations. Use these vectors to define the differential from a\nnew finite free degree-$(r-1)$ term and its map to $F^{r-1}$.\nThe cone equations give both $d^2=0$ and the chain-map identity.\nThe new cone has zero cohomology in degrees at least $r-1$,\nand still has finite cohomology in every degree by the same\nlong exact sequence. Continuing downward gives $P$; in each\nfixed degree the terms and maps stabilize, and the resulting\ncone is acyclic. This proves the asserted quasi-isomorphism in\nthe derived category of [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A bounded-above complex of flat modules computes derived tensor\nproducts. Indeed, its tensor product with an acyclic complex\nis acyclic by applying the usual finite-complex argument to\nsuccessively longer bounded truncations and taking their\nfiltered colimit; tensor products and filtered colimits of\nmodules are exact in this calculation. Thus both $P$ and $F$\ncompute $C\\otimes_A^{\\mathbf L}N$.\nPut $Q=\\operatorname{coker}(P^{a-1}\\to P^a)$. Since $P$ has no\ncohomology below $a$, its left tail\n\n$$\n\\cdots\\longrightarrow P^{a-2}\\longrightarrow P^{a-1}\n\\longrightarrow P^a\\longrightarrow Q\\longrightarrow0\n$$\n\nis a free resolution of $Q$. For every module $N$ it gives\n\n$$\n\\operatorname{Tor}_1^A(Q,N)\n=H^{a-1}(P^\\bullet\\otimes_A N)\n=H^{a-1}(F^\\bullet\\otimes_A N)=0 .\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The Tor criterion for flatness makes $Q$ flat. It is finitely\npresented, being the cokernel of a map between finite free\nmodules, so it is finite projective. Replacing the part of $P$\nin degrees at most $a$ by $Q$ in degree $a$ gives a\nquasi-isomorphic complex concentrated in $[a,b]$, all of whose\nterms are finite projective, as required.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-noetherian-flat-complex-perfect.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 672,
+ "blueprint_uses": [
+  "def-pc-perfect-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "uses_not_cited": [
+  "def-pc-perfect-complex"
+ ],
+ "proof_split_by": "paragraphs"
+}

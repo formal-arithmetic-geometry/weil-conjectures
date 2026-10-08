@@ -1,0 +1,74 @@
+{
+ "id": "lem-sc-kernel-subgroup",
+ "kind": "statement",
+ "title": "Kernels are closed subgroup schemes",
+ "statement": "Let $f:G\\to H$ be a homomorphism of\ngroup schemes over a field $k$, and let $e_H$ be the unit\nsection of $H$. Then\n\n$$\nN:=G\\times_{H,f,e_H}\\Spec k,\n$$\n\nthe kernel of $f$ in the sense of [def-sc-group-scheme], is a\ngroup scheme over $k$ with $N(R)=\\ker\\bigl(f(R)\\bigr)$ for every\n$k$-algebra $R$, and the projection $N\\to G$ exhibits $N$ as a\nclosed subgroup scheme of\n$G$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-group-scheme/lem-sc-kernel-subgroup.md",
+  "place": "node lem-sc-kernel-subgroup, order 425"
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "First, every $k$-rational point $s:\\Spec k\\to X$ of a\n$k$-scheme $X$ is a closed immersion (in the sense of\n[def-weil-pbc-scheme-conventions]). Let $x$ be the image point of\n$s$. For an affine open $U=\\Spec B\\subseteq X$ containing $x$, the\nmorphism $s$ corresponds to a $k$-algebra map $B\\to k$, which is\nsurjective because it is $k$-linear and sends $1$ to $1$; so\n$s^{-1}(U)=\\Spec k\\to U$ is a closed immersion and $x$ is closed in\n$U$ (its prime is the kernel of $B\\to k$, a maximal ideal). The point\n$x$ is closed in $X$: if $y\\in\\overline{\\{x\\}}$ and $V$ is an affine\nopen containing $y$, then $V$ meets $\\{x\\}$, so $x\\in V$ and $y$ lies\nin the closure of $x$ in $V$, which is $\\{x\\}$. Hence for an affine\nopen $U$ not containing $x$ we have $s^{-1}(U)=\\emptyset$, and $s$ is\naffine and locally induced by surjective ring maps, i.e. a closed\nimmersion. Applying this to $e_H:\\Spec k\\to H$, the unit section is a\nclosed immersion, and its base change $N\\to G$ is a closed immersion.\n(In particular no separatedness hypothesis on $H$ is needed.)",
+   "uses": [
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a $k$-algebra $R$, the $R$-points of $N$ are the pairs\n$(\\varphi,\\psi)$ with $\\varphi:\\Spec R\\to G$,\n$\\psi:\\Spec R\\to\\Spec k$ and $f\\circ\\varphi=e_H\\circ\\psi$; the\nsecond component is unique, so $N(R)=\\{g\\in G(R):f(R)(g)=e_H\\}$.\nSince $f$ is a\nhomomorphism of group schemes, $f(R)$\nis a homomorphism of groups ([def-sc-group-scheme]), so $N(R)$\nis a subgroup of $G(R)$ and $N(R)\\to G(R)$ is injective.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "It remains to see that $N$ carries a group scheme structure. Let\n$R$ be a $k$-algebra and let $\\varphi,\\psi:\\Spec R\\to N$ be\n$R$-points, with images $g,g'\\in N(R)\\subseteq G(R)$. The composite\n$\\Spec R\\xrightarrow{(\\varphi,\\psi)}N\\times_kN\\to G\\times_kG \\xrightarrow{m_G}G$ is a morphism $t:\\Spec R\\to G$ with\n\n$$\nf\\circ t=m_H\\circ(f\\circ\\varphi,f\\circ\\psi)\n=m_H\\circ(e_H,e_H)=e_H,\n$$\n\nthe last equality being the unit axiom for the group scheme $H$. By\nthe universal property of the fibre product $N$, the morphism $t$\nfactors uniquely through $N\\to G$; this defines\n$m_N:N\\times_kN\\to N$ with $j\\circ m_N=m_G\\circ(j\\times j)$, where\n$j:N\\to G$ is the closed immersion. The same argument applied to\n$i_G$ and $e_G$ (using $i_H\\circ e_H=e_H$ and\n$m_H\\circ(e_H,e_H)=e_H$) defines $i_N:N\\to N$ and\n$e_N:\\Spec k\\to N$ with $j\\circ i_N=i_G\\circ j$ and\n$j\\circ e_N=e_G$. The associativity, unit and inverse axioms for\n$(m_N,i_N,e_N)$ follow from those of $G$ after composing with the\nmonomorphism $j$; hence $N$ is a group scheme\n([def-sc-group-scheme]) and $j$ is a homomorphism, so $N$ is a\nclosed subgroup scheme of\n$G$, that is, a subgroup scheme of $G$ in the sense of\n[def-sc-group-scheme-subgroup] whose structure morphism is a closed\nimmersion.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-group-scheme/lem-sc-kernel-subgroup.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "long_proof_few_deps",
+  "in_cycle"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 425,
+ "blueprint_uses": [
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp",
+  "declaration": "CategoryTheory.GrpObj.ker",
+  "branch": "slopmaster2",
+  "line": 83,
+  "sorry_free": true,
+  "body_lines": 1
+ },
+ "blueprint_lean": [
+  "CategoryTheory.GrpObj.ker"
+ ],
+ "proof_split_by": "paragraphs"
+}

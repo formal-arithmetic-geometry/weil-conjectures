@@ -1,0 +1,74 @@
+{
+ "id": "sbc-lem-bc-failure-field",
+ "kind": "statement",
+ "title": "A failure is detected on the generic fibre",
+ "statement": "With $f:X\\to S$ and $n$ as in [sbc-def-base-change-property] assume for\nsome $q\\geq1$ that $\\mathrm{BC}(f,n,q')$ holds universally for all\n$q'\\leq q-1$, but $\\mathrm{BC}(f,n,q)$ does not hold universally. Then there exist a commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX & \\longleftarrow & X' & \\longleftarrow & Y\\\\\nf\\big\\downarrow & & \\big\\downarrow f' & & \\big\\downarrow e\\\\\nS & \\longleftarrow & S' & \\longleftarrow & \\operatorname{Spec}K\n\\end{array}\n$$\n\nwhere $X'=X\\times_SS'$, $Y=X'\\times_{S'}\\operatorname{Spec}K$, $S'$ is\nan affine scheme, $K$ is a\nfield, and $\\mathcal F$ is an abelian sheaf on\n$\\operatorname{Spec}K$ annihilated by $n$ such that\n\n$$\nf'^{-1}R^qg_*\\mathcal F\\longrightarrow R^qh_*e^{-1}\\mathcal F\n$$\n\nis not an isomorphism. If $S$ is separated, then moreover\n$S'\\to S$ is an affine morphism.\n(*Stacks Project, Lemma 59.88.6, [Tag `0F07`](https://stacks.math.columbia.edu/tag/0F07).*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-bc-failure-field.md",
+  "place": "node sbc-lem-bc-failure-field, order 1391",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F07"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sbc-def-base-change-property"
+ ],
+ "proof": [
+  {
+   "text": "Choose a counterexample, i.e. a morphism $S'\\to S$ with base change\n$f':X'=X\\times_SS'\\to S'$ for which $\\mathrm{BC}(f',n,q)$ fails: a\nquasi-compact quasi-separated $g:T\\to S'$ with $Y=X'\\times_{S'}T$ and\n$\\mathcal F$ annihilated by $n$ such that the map of\n[sbc-def-base-change-map] is not an isomorphism. Being an isomorphism\nis local on $X'$, and for an open $U\\subset S'$ the formation of\n$R^qg_*$, $R^qh_*$ and of the base-change map commutes with\nrestriction to $U$, $X'_U$ (restriction to an open is the pullback\nalong an etale morphism and the higher direct images are the\nsheafified cohomology presheaves); so the map already fails to be an\nisomorphism over some affine open $U\\subset S'$ and we may replace\n$S'$ by $U$, $T$ by $T\\times_{S'}U$. Thus $S'$ is affine, and $T$,\nbeing quasi-compact and quasi-separated over the affine $S'$, is\nquasi-compact and quasi-separated. By\n[sbc-lem-bc-injectivity] (for the base change $f'$ along $g$) the map\nis injective, so there is a\ngeometric point $\\bar x$ of $X'$ and an element $\\xi$ of\n$(R^qh_*e^{-1}\\mathcal F)_{\\bar x}$ not in the image of\n$(f'^{-1}R^qg_*\\mathcal F)_{\\bar x}$. For a morphism\n$\\pi:T'\\to T$ let $\\mathcal F'=\\pi^{-1}\\mathcal F$ and define\n$P(T')$ to be the property: the image $\\xi'$ of $\\xi$ in\n$(R^qh'_*(e')^{-1}\\mathcal F')_{\\bar x}$ is not in the image of\n$(f'^{-1}R^qg'_*\\mathcal F')_{\\bar x}$. We apply\n[sbc-lem-bc-minimal-counterexample] to $P$.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "sbc-lem-bc-injectivity",
+    "sbc-lem-bc-minimal-counterexample"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "- *(1) Thickenings.* By [sbc-lem-thickening-etale-site]\nthe etale site of a scheme and of a thickening of it are the\nsame, so the cohomology sheaves involved are unchanged and\n$P(T'')$ iff $P(T')$.\n- *(2) Limits.* For $T'=\\varprojlim T_i$ with affine\ntransitions, $\\mathcal F'$ is the colimit of the pullbacks of\n$\\mathcal F_i$, and\n[sbc-lem-higher-direct-image-limit] gives\n$\\varinjlim R^qh'_{i,*}e_i^{-1}\\mathcal F_i =R^qh'_*e'^{-1}\\mathcal F'$ and the analogue for\n$g'$-side; hence $P(T_i)$ for all $i$ implies $P(T')$.\n- *(3) Closed–open split.* Let $T'$ be with $P(T')$ and\n$Z\\subset T'$ closed with quasi-compact complement $V$. Choose an\ninjection $j^{-1}\\mathcal F'\\to\\mathcal J$ with $\\mathcal J$ an\ninjective sheaf of $\\mathbf Z/n\\mathbf Z$-modules on $V$, where\n$j:V\\hookrightarrow T'$; then\n$\\mathcal F'\\to j_*\\mathcal J\\oplus i_*i^{-1}\\mathcal F'$ is\ninjective (check on stalks, with $i:Z\\hookrightarrow T'$ the closed\nimmersion), so by\n[sbc-lem-bc-injectivity] (2), for the base change $f'$ along\n$g':T'\\to S'$ (quasi-compact and quasi-separated since $T'$ is and $S'$\nis affine), the image of $\\xi'$ is nonzero in\nthe direct-sum cokernel for\n$\\mathcal G=j_*\\mathcal J\\oplus i_*i^{-1}\\mathcal F'$. If it is\nnonzero in the second summand, then, since\n$i_*$ (also $i'_*$) is exact for closed immersions,\n$R^qg'_*i_*i^{-1}\\mathcal F'=R^q(g'\\circ i)_*i^{-1}\\mathcal F'$\nand $R^qh'_*e'^{-1}i_*i^{-1}\\mathcal F'=R^qh''_*e_Z^{-1} i^{-1}\\mathcal F'$ (Grothendieck spectral sequence), so\n$P(Z)$ holds. If it is nonzero in the first summand, then\napplying, for every $a\\leq q-1$, the property\n$\\mathrm{BC}(e',n,a)$ of the base change $e':Y'=X'\\times_{S'}T'\\to T'$\nof $f$ (along $T'\\to S'\\to S$) to the square with horizontal side the\nopen immersion $j:V\\to T'$ (quasi-compact as $V$ is quasi-compact and\n$T'$ quasi-separated, and separated) (this is where the universal\ncumulative hypothesis in all degrees $\\leq q-1$ is used) gives\n$e'^{-1}j_*\\mathcal J=j'_*e_V^{-1}\\mathcal J$ (degree $a=0$) and,\ntogether with $R^aj_*\\mathcal J=0$ for $a\\geq1$ ($\\mathcal J$ being\ninjective), the vanishing of the higher direct images\n$R^aj'_*e_V^{-1}\\mathcal J$ for $a=1,\\dots,q-1$; the\nrelative Leray spectral sequence for $h'\\circ j'$ shows\n$$\nR^qh'_*e'^{-1}j_*\\mathcal J\\longrightarrow\nR^q(h'\\circ j')_*e_V^{-1}\\mathcal J\n$$\nis injective, and applying\n[sbc-lem-bc-injectivity] (3), for the base change $f'$ along\n$g'\\circ j:V\\to S'$, to\n$j^{-1}\\mathcal F'\\subset\\mathcal J$ gives $P(V)$.\n- *(4) Empty scheme.* If $T'=\\emptyset$ then $Y'=X'\\times_{S'}T'=\\emptyset$,\nso $R^qh'_*(e')^{-1}\\mathcal F'=0$; hence $\\xi'=0$ lies in the image and\n$P(\\emptyset)$ fails.",
+   "uses": [
+    "sbc-lem-thickening-etale-site",
+    "sbc-lem-higher-direct-image-limit",
+    "sbc-lem-bc-injectivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [sbc-lem-bc-minimal-counterexample], $P(\\operatorname{Spec}K)$\nholds for some field $K$ with a morphism $\\operatorname{Spec}K\\to T\\to S'$,\nwhich is the assertion, with $S'$ the affine scheme chosen at the start.\nFinally, let $S$ be separated. Then the diagonal $S\\to S\\times S$ is a\nclosed immersion, hence affine, and any morphism from an affine\nscheme to $S$ is affine: for $V\\subset S$ affine open,\n$S'\\times_SV=(S'\\times V)\\times_{S\\times S}S$ is affine over the affine\nscheme $S'\\times V$, hence affine; so $S'\\to S$ is affine.",
+   "uses": [
+    "sbc-lem-bc-minimal-counterexample"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-def-base-change-map",
+  "sbc-lem-bc-injectivity",
+  "sbc-lem-bc-minimal-counterexample",
+  "sbc-lem-thickening-etale-site",
+  "sbc-lem-higher-direct-image-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-bc-failure-field.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1391,
+ "blueprint_uses": [
+  "sbc-def-base-change-map",
+  "sbc-def-base-change-property",
+  "sbc-lem-bc-injectivity",
+  "sbc-lem-bc-minimal-counterexample",
+  "sbc-lem-higher-direct-image-limit",
+  "sbc-lem-thickening-etale-site"
+ ],
+ "proof_split_by": "paragraphs"
+}

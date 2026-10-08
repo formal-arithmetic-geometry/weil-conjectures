@@ -1,0 +1,35 @@
+{
+ "id": "sk-p-proper",
+ "kind": "section",
+ "title": "Proper pushforward compatibility",
+ "text": "*Proposition (sketch).*\n\nLet $(C,c,u)$ be an endocorrespondence on $(X,K)$ and\nlet $(f,g):(C,c)\\to(D,b)$ be a\nproper pushforward diagram, with\n$f:X\\to Y$ and $g:C\\to D$ proper and $b_i g=fc_i$ for $i=1,2$.\nPut $F_c=\\Fix(c)$, $F_b=\\Fix(b)$, and let $h:F_c\\to F_b$ be the induced map.\nThen the trace classes satisfy\n\n$$\n\\boxed{h_*\\Tr_c(u)=\\Tr_b([f,g]_!u)}\n\\quad\\text{in }\\operatorname{Hom}(A_{F_b},\\omega_{F_b}),\n$$\n\nwhere $h_*$ is Borel–Moore pushforward.\nNo properness over $s$ of $X,Y,C,D$ and no Cartesian leg square are required.\n\n## Proof\n\nFor the diagram of [sk-d-proper-pushforward], factor\n\n$$\nh:F_c\\xrightarrow{\\kappa}C\\times_D F_b\\xrightarrow{\\pi}F_b.\n$$\n\nThe map $\\pi$ is the base change of the proper map $g$.\nThe middle scheme maps to $X\\times_YX$ by $(c_1,c_2)$, and $\\kappa$ is\nthe base change of the diagonal $\\Delta_f:X\\to X\\times_YX$:\nthe fiber product imposes exactly the equality of the two legs defining\n$F_c$ in [sk-d-corr]. Since $f$ is proper, its diagonal is a closed\nimmersion. Thus $\\kappa$ and $h$ are proper, so the pushforward of\n[sk-d-integral] is defined.\n\nPut $q=f\\times f$, $K'=Rf_*K$, $P_X=K\\boxt D_XK$ and\n$P_Y=K'\\boxt D_YK'$. In the package of [sk-thm-sf-package], let\n$\\tau_f:Rf_*\\omega_X\\to\\omega_Y$ be the exceptional counit and\n$\\mu_f:Rf_*M\\otimes Rf_*N\\to Rf_*(M\\otimes N)$ the ordinary\nadjoint of $\\varepsilon_f^*\\otimes\\varepsilon_f^*$.\nDefine $\\chi_f:Rf_*D_XK\\to D_YK'$ by taking the tensor–Hom\nadjoint of $\\tau_f\\,Rf_*\\overline{\\mathrm{ev}}_K\\,\\mu_f$.\nWith the comparison of [sk-def-sf-kv-maps], set\n\n$$\n\\Pi_f=\\mathrm{Ku}_!(f,f;K,D_XK)^{-1},\\qquad\n\\rho_f=(1\\boxt\\chi_f)\\Pi_f^{-1}:Rq_*P_X\\to P_Y.\n$$\n\nLet $\\delta_K:P_X\\to R\\Delta_{X*}\\omega_X$ be adjoint to\n$\\overline{\\mathrm{ev}}_K$, and define $\\delta_{K'}$ similarly.\nHere evaluation is preceded by tensor symmetry.\n\nThe proof has two kernel calculations. Writing\n$\\widetilde u=\\kappa_X^{-1}[u]$ using [sk-d-corr], [sk-thm-sf-kunneth-verdier], they give\n\n$$\n\\begin{aligned}\n\\widetilde{[f,g]_!u}\n&=\\rho_f\\,Rq_*\\widetilde u\\,Rb_!\\eta_g^*,\\\\\n\\delta_{K'}\\rho_f\n&=R\\Delta_{Y*}\\tau_f\\,Rq_*\\delta_K.\n\\end{aligned}\n$$\n\nFor the first, tensor–Hom and exceptional adjunctions turn kernel\ntransport into the coefficient composite defining $[f,g]_!u$ in\n[sk-d-proper-pushforward]. Compatibility with the specified\nKünneth–Verdier maps is checked after the same two adjunctions:\nboth paths evaluate $f^*K'\\to K$ against $D_XK$, then apply the\nstructural counit. For the second, take the ordinary diagonal adjoint.\nThe diagonal pullback of $\\Pi_f$, followed by ordinary exchange,\nis $\\mu_f$, so both paths are the defining evaluation of $\\chi_f$.\nThese are the two evaluation calculations of SGA 5, III,\n(4.4.3)–(4.4.5), using only the data of [sk-thm-sf-package].\n\nFor the support calculation write $j:F_c\\to C$, $a:F_c\\to X$,\n$i:F_b\\to D$, $a_b:F_b\\to Y$. Right-adjoint $!$-base change gives\n$\\zeta_c:Rj_*\\omega_{F_c}\\simeq Rc^!R\\Delta_{X*}\\omega_X$\nand $\\zeta_b$ similarly. Define\n$\\mathsf E:Rg_*Rc^!\\to Rb^!Rq_*$ to be adjoint to\n$Rb_!Rg_*Rc^!\\simeq Rq_*Rc_!Rc^!\\to Rq_*$.\nThen\n\n$$\nRb^!(R\\Delta_{Y*}\\tau_f)\\,\\mathsf E\\,Rg_*\\zeta_c\n=\\zeta_b\\,Ri_*\\tau_h.\n$$\n\nIndeed, after $Rb_!\\dashv Rb^!$ both sides are exceptional\ncounits for the same composite $fa=a_bh$, pushed along $\\Delta_Y$.\nThis verifies the support comparison of SGA 5, III, (4.4.6)–(4.4.7).\nOnly the two defining fixed squares are used as Cartesian squares.\n\nFinally insert the diagonal dictionary of [sk-p-pairing] into\nthese three identities. The remaining ordinary units satisfy\n\n$$\nRg_*\\eta_j^*\\,\\eta_g^*=\\eta_{gj}^*\n=\\eta_{ih}^*=Ri_*\\eta_h^*\\,\\eta_i^*.\n$$\n\nCancel $\\zeta_b$ and take $i^*\\dashv Ri_*$ adjoints. The result is\n\n$$\n\\Tr_b([f,g]_!u)=\\tau_h\\,Rh_*\\Tr_c(u)\\,\\eta_h^*,\n$$\n\nwhich is precisely [sk-d-integral]. Throughout, $Rc_!$ and $Rb_!$\nare retained: the additional proper-support hypothesis in the statement\nof SGA 5, III, Theorem 4.4 is not imposed. The full blueprint proves\nthe three comparisons separately; general trace compatibility is no\nlonger an external input.\n\nUses: [sk-d-corr], [sk-d-integral], [sk-d-proper-pushforward], [sk-d-trace-class], [sk-def-sf-kv-maps], [sk-p-pairing], [sk-thm-sf-kunneth-verdier], [sk-thm-sf-package]",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-proper/_section.md",
+  "place": "order 2329"
+ },
+ "cites": [
+  "sk-d-proper-pushforward",
+  "sk-d-corr",
+  "sk-d-integral",
+  "sk-thm-sf-package",
+  "sk-def-sf-kv-maps",
+  "sk-thm-sf-kunneth-verdier",
+  "sk-p-pairing",
+  "sk-d-trace-class"
+ ],
+ "blueprint_uses": [
+  "sk-d-corr",
+  "sk-d-integral",
+  "sk-d-proper-pushforward",
+  "sk-d-trace-class",
+  "sk-def-sf-kv-maps",
+  "sk-p-pairing",
+  "sk-thm-sf-comp-composition",
+  "sk-thm-sf-kunneth-verdier",
+  "sk-thm-sf-package"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.ProEtale.GeometricOperations.borelMoorePushforward_traceClass"
+ ],
+ "blueprint_tags": []
+}

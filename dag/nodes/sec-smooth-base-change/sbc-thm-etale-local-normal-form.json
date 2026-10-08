@@ -1,0 +1,83 @@
+{
+ "id": "sbc-thm-etale-local-normal-form",
+ "kind": "statement",
+ "title": "Etale-local normal form of a smooth morphism",
+ "statement": "Let $g:Y'\\to Y$ be\nsmooth at $y'\\in Y'$. After\nreplacing $Y,Y'$ by affine neighbourhoods, there are $d\\geq0$ and an\netale morphism\n\n$$\ne:Y'\\longrightarrow\\mathbf A^d_Y\n$$\n\nsuch that $g$ is $e$ followed by the projection\n$p_d:\\mathbf A^d_Y\\to Y$ of [def-sbc-affine-space].\n(*Stacks Project, Morphisms, [Tag `054L`](https://stacks.math.columbia.edu/tag/054L) = Lemma\n29.37.21.*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-normal-form/sbc-thm-etale-local-normal-form.md",
+  "place": "node sbc-thm-etale-local-normal-form, order 1400",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 054L"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 00TN"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 00TA"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sbc-affine-space"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine neighbourhoods $Y=\\operatorname{Spec}R$ and\n$Y'=\\operatorname{Spec}C$ of the specified points, small enough\nthat $g$ is smooth on the latter. We use the ordinary\ncommutative-algebra infinitesimal criterion: a finitely presented\nformally smooth algebra is smooth\n([Stacks, Tag 00TN](https://stacks.math.columbia.edu/tag/00TN)),\nand near any prime it has a presentation\n\n$$\nC=R[x_1,\\ldots,x_N]/(F_1,\\ldots,F_c),\\qquad\n\\det\\left(\\frac{\\partial F_a}{\\partial x_b}\\right)_{a,b\\leq c}\n\\in C^\\times.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The latter is the standard-presentation lemma of commutative\nalgebra ([Tag 00TA](https://stacks.math.columbia.edu/tag/00TA)).\nIts algebraic mechanism is to choose a basis of the projective\nconormal module, then a nonzero minor of its split injection into\nthe free module of differentials. Localizing at that minor and\nusing Nakayama on the finitely generated relation ideal gives the\ndisplayed generators; a localization is incorporated by adjoining\none variable and its inverse relation. These operations replace\nthe source by an affine open containing the selected point.\nThis is an application of the ring lifting criterion to the local\nlifting condition in [def-sbc-smooth-morphisms].",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put $d=N-c$ and regard the last $d$ variables as base\ncoordinates: let $P=R[x_{c+1},\\ldots,x_N]$. The same presentation\nis now a $P$-algebra presentation with $c$ variables and $c$\nrelations, and its square Jacobian determinant is invertible.\nIt is exactly a presentation of [def-exc-jacobian-presentation].\nFor clarity, the lifting assertion for this new base can also be\nread directly from the equations. Given a square-zero ideal\n$J\\subset Q$, a $P$-algebra map $C\\to Q/J$ determines\narbitrary lifts $q_b$ of the first $c$ variables. Its errors\n$F_a(q)$ lie in $J$. A correction $v\\in J^c$ must satisfy\n\n$$\n(\\partial F_a/\\partial x_b)(q)\\,v_b=-F_a(q).\n$$",
+   "uses": [
+    "def-exc-jacobian-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "There is exactly one solution because the determinant is a unit:\nit is a unit modulo a nilpotent ideal and hence a unit in $Q$.\nTaylor expansion has no higher correction terms since $J^2=0$.\nThis constructs the unique lift fixing all the base coordinates.\nSuccessive square-zero quotients treat a general nilpotent ideal.\nConsequently [lem-exc-etale-jacobian-presentation] makes\n$\\operatorname{Spec}C\\to\\operatorname{Spec}P$ etale.\nBy [def-sbc-affine-space], $\\operatorname{Spec}P=\\mathbf A^d_Y$.\nThe composite with its projection is induced by the original\nring homomorphism $R\\to C$, and is therefore exactly $g$.\nThis constructs the required factorization.",
+   "uses": [
+    "lem-exc-etale-jacobian-presentation",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-exc-jacobian-presentation",
+  "lem-exc-etale-jacobian-presentation",
+  "def-sbc-affine-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-normal-form/sbc-thm-etale-local-normal-form.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1400,
+ "blueprint_uses": [
+  "def-exc-jacobian-presentation",
+  "def-sbc-affine-space",
+  "def-sbc-smooth-morphisms",
+  "lem-exc-etale-jacobian-presentation"
+ ],
+ "proof_split_by": "paragraphs"
+}

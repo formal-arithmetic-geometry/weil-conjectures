@@ -1,0 +1,120 @@
+{
+ "id": "prop-trf-graph-frobenius-operator",
+ "kind": "statement",
+ "title": "Graph construction of the global Frobenius operator",
+ "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, and let $(K,\\varphi)$ be a\nstrict Weil complex of\n[def-trf-strict-weil-complex]. For $m\\in\\mathbf Z_{\\geq1}$ let\n$\\Phi^m$ be the $m$-fold iterate of the\nscheme Frobenius of\n[def-trf-scheme-frobenius] and\n$u_m:L\\Phi^{m*}K\\to K$ the\nscheme-Frobenius map of\n[def-trf-iterated-weil-map], and consider the\ngraph correspondence\n$c=(\\operatorname{id}_X,\\Phi^m)$ with $u_m$. Then its\nglobal operator $T_c(u_m)$ of\n[def-trf-global-operator], identified as in\n[prop-trf-graph-operator], equals the $m$-th iterate of the\nglobal geometric Frobenius:\n\n$$\nT_c(u_m)=F_{c,K}^{\\,m}:\nR\\Gamma_c(X,K)\\longrightarrow R\\Gamma_c(X,K),\n$$\n\nwhere $F_{c,K}^{\\,m}$ is the endomorphism of the\nglobal geometric Frobenius\noperator of [def-trf-frobenius-operators] (equivalently the\nglobal geometric Frobenius action of\n[def-weil-global-geometric-frobenius]). The equality is natural in\n$(K,\\varphi)$ and compatible with the cocycle law in $m$.\n\nMore generally, let $K\\in D^b_{ctf}(X,A)$ carry no Weil structure and\nlet $v:Lg_\\gamma^{m*}K\\to K$ be an arbitrary morphism, not necessarily\ninvertible. Then the graph correspondence $c=(\\operatorname{id}_X,\\Phi^m)$\nwith coefficient map $v\\circ\\kappa^{(m)}_K:L\\Phi^{m*}K\\to K$ has\n\n$$\nT_c\\bigl(v\\circ\\kappa^{(m)}_K\\bigr)\n=R\\Gamma_c(X,v)\\circ g_{\\gamma,c}^{m,*}:\nR\\Gamma_c(X,K)\\longrightarrow R\\Gamma_c(X,K),\n$$\n\nwhere $g_{\\gamma,c}^{m,*}:R\\Gamma_c(X,K)\\xrightarrow{\\sim}R\\Gamma_c(X,Lg_\\gamma^{m*}K)$\nis the compact-support base-change isomorphism along $g_\\gamma^m$; the\ndisplayed identity $T_c(u_m)=F_{c,K}^{\\,m}$ is the case $v=\\varphi^{[m]}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.md",
+  "place": "node prop-trf-graph-frobenius-operator, order 2300"
+ },
+ "stmt_deps": [
+  "def-trf-strict-weil-complex",
+  "def-trf-scheme-frobenius",
+  "def-trf-iterated-weil-map",
+  "def-trf-global-operator",
+  "prop-trf-graph-operator",
+  "def-trf-frobenius-operators",
+  "def-weil-global-geometric-frobenius",
+  "def-trf-coefficient-conventions",
+  "def-trf-graph-correspondence",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "By [prop-trf-graph-operator] applied to $h=\\Phi^m$ (finite,\nhence proper, by [def-trf-scheme-frobenius]) and to $v=u_m$,\nthe operator $T_c(u_m)$ is the composite\n\n$$\nR\\Gamma_c(X,K)\\xrightarrow{\\ \\eta_{\\Phi^m}\\ }\nR\\Gamma_c(X,L\\Phi^{m*}K)\\xrightarrow{R\\Gamma_c(X,u_m)}R\\Gamma_c(X,K),\n$$\n\nwhere $\\eta_{\\Phi^m}$ is the unit of\n$L\\Phi^{m*}\\dashv R\\Phi^{m}_*$ composed with the identification\n$R\\Phi^{m}_*\\cong R\\Phi^{m}_!$ and the composition law for the\ncompact-support direct image ([def-trf-global-operator],\n[prop-trf-graph-operator], [prop-functor-package],\nitem (3)).",
+   "uses": [
+    "prop-trf-graph-operator",
+    "def-trf-scheme-frobenius",
+    "def-trf-global-operator",
+    "prop-functor-package"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 1: the identification of the functors and of the units.*\nAs $L\\Phi^{m*}$ and $Lg_\\gamma^{m*}$ are left adjoints to\n$R\\Phi^{m}_*$ and $Rg_\\gamma^{m,*}$, respectively, with the\nadjunction data of (the derived direct image of)\n[prop-functor-package], and as\n[prop-trf-scheme-galois-comparison] supplies the natural isomorphism\n\n$$\n\\kappa^{(m)}:L\\Phi^{m*}\\xrightarrow{\\ \\sim\\ }Lg_\\gamma^{m*},\n$$\n\nthe mate lemma [lem-trf-adjoint-mate] supplies the canonical\nnatural isomorphism\n\n$$\n\\beta:R\\Phi^{m}_*\\xrightarrow{\\ \\sim\\ }Rg_\\gamma^{m,*}\n$$\n\n(unique subject to the unit and counit compatibilities, by (3) of\n[lem-trf-adjoint-mate]), together with the unit compatibility\nin the form\n\n$$\nRg_\\gamma^{m,*}\\kappa^{(m)}\\circ\\beta L\\Phi^{m*}\\circ\\eta_{\\Phi^m}\n=\\eta_{\\gamma^m},\n$$\n\nwhere $\\eta_{\\gamma^m}$ is the unit of\n$Lg_\\gamma^{m*}\\dashv Rg_\\gamma^{m,*}$. Hence the *transported\nunit* of $T_c(u_m)$ is the geometric-Frobenius unit, and the diagram\n\n$$\n\\begin{array}{ccc}\nR\\Gamma_c(X,K) & \\xrightarrow{\\ \\eta_{\\Phi^m}\\ }\n& R\\Gamma_c(X,L\\Phi^{m*}K)\\\\\n& & \\ \\ \\downarrow{\\scriptstyle R\\Gamma_c(X,\\kappa^{(m)})}\\\\\n& & R\\Gamma_c(X,Lg_\\gamma^{m*}K)\n\\end{array}\n$$\n\ncommutes with the corresponding composite starting from\n$\\eta_{\\gamma^m}$ after the identification of the targets along\n$R\\Gamma_c(X,R\\Phi^{m}_*L\\Phi^{m*}K)\\cong R\\Gamma_c(X,Rg_\\gamma^{m,*}Lg_\\gamma^{m*}K)$ supplied by $\\beta$.",
+   "uses": [
+    "prop-functor-package",
+    "prop-trf-scheme-galois-comparison",
+    "lem-trf-adjoint-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: identification with the compact-support base change.*\nThe composite\n\n$$\nR\\Gamma_c(X,K)\\xrightarrow{\\ \\eta_{\\gamma^m}\\ }\nR\\Gamma_c(X,Rg_\\gamma^{m,*}Lg_\\gamma^{m*}K)\n\\xrightarrow{\\ \\sim\\ }R\\Gamma_c(X,Lg_\\gamma^{m*}K)\n$$\n\n(the identification $Rg_\\gamma^{m,*}\\cong Rg_\\gamma^{m,!}$ for the\nproper, indeed finite, automorphism $g_\\gamma^m$ together with the\ncompact-support composition law) is, by the construction of\n[def-weil-global-geometric-frobenius], the first arrow of the\ncompact-support base-change identification $g_{\\gamma,c}^{m,*}$\n(the exchange $\\operatorname{Ex}_!$ of\n[def-exchange-projection] along the automorphism $g_\\gamma^m$,\ncomposed with the canonical identification of the compact-support\ncohomology of an isomorphism-fixed scheme and the naturality of\n$R\\Gamma_c$); and the compatibility of this exchange with the\nadjunction data and with the identifications of Step 1 is part of the\nadjunction-compatibility and coherence records of the package\n([def-exchange-projection] and [prop-functor-package]).\nTherefore the first arrow of the composite defining $T_c(u_m)$ equals\nthe arrow $g_{\\gamma,c}^{m,*}$, and the last arrow is\n$R\\Gamma_c(X,\\varphi^{[m]})\\circ R\\Gamma_c(X,\\kappa^{(m)})$,\nwhence\n\n$$\nT_c(u_m)=R\\Gamma_c(X,\\varphi^{[m]})\\circ g_{\\gamma,c}^{m,*}\n=F_{c,K}^{\\,m}\n$$\n\nby [lem-trf-frobenius-operator-compact-description], where\n$F_{c,K}^{\\,m}$ is the $m$-th iterate of the global geometric\nFrobenius of [def-trf-frobenius-operators] and\n$\\varphi^{[m]}$ is the iterated Weil isomorphism of\n[def-trf-iterated-weil-map]. Naturality in $(K,\\varphi)$ is\nthe naturality of $\\kappa^{(m)}$ of [prop-trf-scheme-galois-comparison]\nand of the base-change identification. The compatibility with the\ncocycle law in $m$: for $m,n\\geq1$, the base-change identifications\nalong the automorphisms compose as\n\n$$\ng_{\\gamma,c}^{m+n,*}\n=\\bigl(g_{\\gamma,c}^{m,*}\\bigr)_{Lg_\\gamma^{n*}K}\\circ g_{\\gamma,c}^{n,*}\n$$\n\n(transitivity of the compact-support base change, from\n$g_\\gamma^{m+n}=g_\\gamma^m\\circ g_\\gamma^n$), and the base-change\nidentification is natural in the coefficient complex, so by the cocycle\nidentity $\\varphi^{[m+n]}=\\varphi^{[m]}\\circ Lg_\\gamma^{m*}\\varphi^{[n]}$\nof [lem-trf-iterated-weil-cocycle] one has\n\n$$\n\\begin{aligned}\nF_{c,K}^{\\,m+n}\n&=R\\Gamma_c(X,\\varphi^{[m+n]})\\circ g_{\\gamma,c}^{m+n,*}\\\\\n&=R\\Gamma_c(X,\\varphi^{[m]})\\circ R\\Gamma_c(X,Lg_\\gamma^{m*}\\varphi^{[n]})\n\\circ\\bigl(g_{\\gamma,c}^{m,*}\\bigr)_{Lg_\\gamma^{n*}K}\\circ g_{\\gamma,c}^{n,*}\\\\\n&=R\\Gamma_c(X,\\varphi^{[m]})\\circ g_{\\gamma,c}^{m,*}\n\\circ R\\Gamma_c(X,\\varphi^{[n]})\\circ g_{\\gamma,c}^{n,*}\n=F_{c,K}^{\\,m}\\circ F_{c,K}^{\\,n},\n\\end{aligned}\n$$\n\nwhich is the claimed cocycle compatibility (the third equality uses the\nnaturality of $g^{m,*}$ in the coefficient complex; multiplicativity of\nthe $\\kappa^{(m)\\,}$s of [prop-trf-scheme-galois-comparison]\ntransports the same identity to the scheme-Frobenius side).",
+   "uses": [
+    "def-weil-global-geometric-frobenius",
+    "def-exchange-projection",
+    "prop-functor-package",
+    "lem-trf-frobenius-operator-compact-description",
+    "def-trf-frobenius-operators",
+    "def-trf-iterated-weil-map",
+    "prop-trf-scheme-galois-comparison",
+    "lem-trf-iterated-weil-cocycle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3: general coefficient maps.* Steps 1 and 2 concern only the\nobject $K$ and the functors $L\\Phi^{m*}$, $Lg_\\gamma^{m*}$, $R\\Gamma_c$:\nneither the Weil structure $\\varphi$ nor any inverse of a coefficient map\nenters them. For an arbitrary $K\\in D^b_{ctf}(X,A)$ they give that the\ncomposite\n\n$$\nR\\Gamma_c(X,K)\\xrightarrow{\\ \\eta_{\\Phi^m}\\ }R\\Gamma_c(X,L\\Phi^{m*}K)\n\\xrightarrow{R\\Gamma_c(X,\\kappa^{(m)}_K)}R\\Gamma_c(X,Lg_\\gamma^{m*}K)\n$$\n\nis $g_{\\gamma,c}^{m,*}$. For $v:Lg_\\gamma^{m*}K\\to K$ arbitrary,\n[prop-trf-graph-operator] applied to $h=\\Phi^m$ and to the coefficient\nmap $v\\circ\\kappa^{(m)}_K$, together with functoriality of\n$R\\Gamma_c(X,-)$, gives\n\n$$\nT_c\\bigl(v\\circ\\kappa^{(m)}_K\\bigr)\n=R\\Gamma_c(X,v)\\circ R\\Gamma_c(X,\\kappa^{(m)}_K)\\circ\\eta_{\\Phi^m}\n=R\\Gamma_c(X,v)\\circ g_{\\gamma,c}^{m,*},\n$$\n\nwhich is the general assertion; for $v=\\varphi^{[m]}$ it is the identity\n$T_c(u_m)=F_{c,K}^{\\,m}$ proved above.",
+   "uses": [
+    "prop-trf-graph-operator"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-trf-graph-operator",
+  "def-trf-scheme-frobenius",
+  "def-trf-global-operator",
+  "prop-functor-package",
+  "prop-trf-scheme-galois-comparison",
+  "lem-trf-adjoint-mate",
+  "def-weil-global-geometric-frobenius",
+  "def-exchange-projection",
+  "lem-trf-frobenius-operator-compact-description",
+  "def-trf-frobenius-operators",
+  "def-trf-iterated-weil-map",
+  "lem-trf-iterated-weil-cocycle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2300,
+ "blueprint_uses": [
+  "def-exchange-projection",
+  "def-trf-coefficient-conventions",
+  "def-trf-frobenius-operators",
+  "def-trf-global-operator",
+  "def-trf-graph-correspondence",
+  "def-trf-iterated-weil-map",
+  "def-trf-scheme-frobenius",
+  "def-trf-strict-weil-complex",
+  "def-weil-finite-field-fiber",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-scheme-morphism-properties",
+  "lem-trf-adjoint-mate",
+  "lem-trf-frobenius-operator-compact-description",
+  "lem-trf-iterated-weil-cocycle",
+  "prop-functor-package",
+  "prop-trf-graph-operator",
+  "prop-trf-scheme-galois-comparison"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-trf-coefficient-conventions",
+  "def-trf-graph-correspondence",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "labels"
+}

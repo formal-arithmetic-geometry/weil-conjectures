@@ -1,0 +1,110 @@
+{
+ "id": "thm-pqf-finite-iff-proper-finite-fibres",
+ "kind": "statement",
+ "title": "Finite = proper with finite fibres; Stacks Lemma 30.21.1",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes, where $S$ is\nlocally Noetherian. The following are\nequivalent:\n\n1. **(1)** $f$ is\nfinite;\n1. **(2)** $f$ is\nproper with finite\nfibres, in the sense of\n[pqf-def-quasifinite].\n\n(*Stacks Project, Cohomology of Schemes, Lemma 30.21.1, Tag\n[02OG](https://stacks.math.columbia.edu/tag/02OG).*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-pqf-finite-iff-proper-finite-fibres.md",
+  "place": "node thm-pqf-finite-iff-proper-finite-fibres, order 546",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 02OG"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "pqf-def-quasifinite",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "*(1) $\\Rightarrow$ (2).* If $f$ is finite, then $f$ is proper by\n[lem-weil-pbc-finite-proper] of the ambient-foundations chapter, and $f$ is\nquasi-finite by [pqf-lem-finite-qf]. A quasi-finite morphism has\nfinite fibres by [pqf-lem-qf-finitefibres]. Hence $f$ is proper\nwith finite fibres.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "pqf-lem-finite-qf",
+    "pqf-lem-qf-finitefibres"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(2) $\\Rightarrow$ (1).* Assume $f$ is proper with finite fibres.\nIt suffices to prove that $f$ is affine: if $f$ is affine, then $f$ is\nuniversally closed by [pqf-lem-proper-basic] (it is proper), so\n$f$ is integral by [pqf-lem-integral-univclosed]; since $f$ is\nproper it is of finite type, hence locally of finite type, by\n[def-weil-pbc-scheme-conventions]; therefore $f$ is finite by\n[pqf-lem-integral-lft-finite].\n\nTo prove that $f$ is affine, by\n[pqf-lem-affine-local-target] we may assume that $S$ is affine,\nand our goal is to show that $X$ is affine. Since $f$ is proper, $X$\nis separated and quasi-compact by [pqf-lem-proper-basic], so we\nmay use [pqf-lem-serre-criterion] to prove that $X$ is affine.\nLet $\\mathcal I\\subset\\mathcal O_X$ be a quasi-coherent sheaf of\nideals of finite type. First, $X$ is locally Noetherian: $f$ is of\nfinite type by [def-weil-pbc-scheme-conventions] and $S$ is\nlocally Noetherian, so [pqf-lem-locnoeth-lft] applies. Hence\n$\\mathcal I$, being quasi-coherent of finite type on the locally\nNoetherian scheme $X$, is coherent by\n[pqf-lem-coherent-ft-locnoeth]. By\n[pqf-lem-fff-vanishing] applied to the coherent sheaf\n$\\mathcal I$ we get $(R^1f_*\\mathcal I)_s=0$ for all $s\\in S$\n(the fibre $f^{-1}(\\{s\\})$ is finite by assumption), i.e. the sheaf\n$R^1f_*\\mathcal I$ has vanishing stalks at every point, so\n$R^1f_*\\mathcal I=0$ by [pqf-lem-sheaf-zero-stalks]. From the\nLeray spectral sequence [pqf-lem-leray] of the morphism $f$, more\nprecisely from its low degree terms\n[pqf-lem-leray-lowdegree], we obtain\n\n$$\n\\mathrm H^1(X,\\mathcal I)\\cong\\mathrm H^1(S,f_*\\mathcal I).\n$$\n\nNow $f$ is quasi-compact and quasi-separated by\n[pqf-lem-proper-basic], so $f_*\\mathcal I$ is quasi-coherent by\n[pqf-lem-pushforward-qcoh]. Since $S$ is affine,\n[pqf-lem-affine-vanishing] gives\n$\\mathrm H^1(S,f_*\\mathcal I)=0$. Hence\n$\\mathrm H^1(X,\\mathcal I)=0$ for every quasi-coherent ideal of finite\ntype, and [pqf-lem-serre-criterion] shows that $X$ is affine.\nSince $S$ is affine as well, $f$ is affine by\n[pqf-def-affine-morphism], which finishes the proof.",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "pqf-lem-integral-univclosed",
+    "def-weil-pbc-scheme-conventions",
+    "pqf-lem-integral-lft-finite",
+    "pqf-lem-affine-local-target",
+    "pqf-lem-serre-criterion",
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-lem-fff-vanishing",
+    "pqf-lem-sheaf-zero-stalks",
+    "pqf-lem-leray",
+    "pqf-lem-leray-lowdegree",
+    "pqf-lem-pushforward-qcoh",
+    "pqf-lem-affine-vanishing",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-proper",
+  "pqf-lem-finite-qf",
+  "pqf-lem-qf-finitefibres",
+  "pqf-lem-proper-basic",
+  "pqf-lem-integral-univclosed",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-lem-integral-lft-finite",
+  "pqf-lem-affine-local-target",
+  "pqf-lem-serre-criterion",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-fff-vanishing",
+  "pqf-lem-sheaf-zero-stalks",
+  "pqf-lem-leray",
+  "pqf-lem-leray-lowdegree",
+  "pqf-lem-pushforward-qcoh",
+  "pqf-lem-affine-vanishing",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-pqf-finite-iff-proper-finite-fibres.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 546,
+ "blueprint_uses": [
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-finite-proper",
+  "pqf-def-affine-morphism",
+  "pqf-def-locnoeth",
+  "pqf-def-quasifinite",
+  "pqf-lem-affine-local-target",
+  "pqf-lem-affine-vanishing",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-fff-vanishing",
+  "pqf-lem-finite-qf",
+  "pqf-lem-integral-lft-finite",
+  "pqf-lem-integral-univclosed",
+  "pqf-lem-leray",
+  "pqf-lem-leray-lowdegree",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-proper-basic",
+  "pqf-lem-pushforward-qcoh",
+  "pqf-lem-qf-finitefibres",
+  "pqf-lem-serre-criterion",
+  "pqf-lem-sheaf-zero-stalks"
+ ],
+ "uses_not_cited": [
+  "pqf-def-locnoeth"
+ ],
+ "proof_split_by": "labels"
+}

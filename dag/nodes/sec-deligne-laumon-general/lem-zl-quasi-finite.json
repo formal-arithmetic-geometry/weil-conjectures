@@ -1,0 +1,109 @@
+{
+ "id": "lem-zl-quasi-finite",
+ "kind": "statement",
+ "title": "Quasi-finite morphisms: exactness and upper-weight bound",
+ "statement": "Let $g:Z_0\\to Y_0$ be a separated quasi-finite morphism of separated\nfinite-type $k_0$-schemes.\n\n1. For a $\\Qlb$-Weil sheaf $\\mathcal F$ on $Z_0$ (a Weil complex\nconcentrated in degree $0$) one has $R^ig_!\\mathcal F=0$ for $i>0$.\nHence $g_!=\\mathcal H^0Rg_!$ is exact on $\\Qlb$-Weil sheaves, and\n$\\mathcal H^j(Rg_!K)=g_!\\mathcal H^j(K)$ for every Weil complex $K$\nand every $j$.\n1. If $K\\in D_{\\le w}(Z_0)$, then $Rg_!K\\in D_{\\le w}(Y_0)$.\n\nIn particular $g_!$ preserves mixedness and upper weight bounds: if\n$\\mathcal F$ is a mixed $\\Qlb$-Weil sheaf (of weights $\\le w$), then so\nis $g_!\\mathcal F=Rg_!\\mathcal F$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.md",
+  "place": "node lem-zl-quasi-finite, order 2818"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Since $Y_0$ is of finite type over a field, it is quasi-compact and\nquasi-separated, so Zariski's main theorem in the form of the\nquasi-finite factorization [thm-pqf-zmt-factorization] factors $g$\nglobally as\n\n$$\nZ_0\\xrightarrow{\\ j_0\\ }\\overline Z_0\\xrightarrow{\\ \\bar g\\ }Y_0\n$$\n\nwith $j_0$ a quasi-compact open immersion and $\\bar g$ finite; in\nparticular $\\overline Z_0$ is again a separated finite-type\n$k_0$-scheme. The factorization is defined over $k_0$, so it base\nchanges to $k$ and is compatible with the geometric Frobenius\nautomorphisms; all functors below therefore carry Weil structures. By\nthe composition isomorphism and the properness law of\n[prop-functor-package] (clause 3), and since a finite morphism is\nproper,\n\n$$\nRg_!\\simeq R\\bar g_!\\,j_{0!}\\simeq R\\bar g_*\\,j_{0!}.\n$$",
+   "uses": [
+    "thm-pqf-zmt-factorization",
+    "prop-functor-package"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(1).* Extension by zero [def-weil-extension-by-zero] is exact: its\nstalk at a geometric point of $Z$ is the stalk of the input, and at a\ngeometric point of the complement it is $0$. The finite direct image\n$\\bar g_*$ is exact by [lemma-weil-pbc-finite-direct-image-exact], so\n$R\\bar g_*=\\bar g_*$. Both statements hold at every finite coefficient\nstage and hence, by the common-stage construction of\n[def-weil-pbc-qbar-category], for $\\Qlb$-coefficients. Thus for a Weil\nsheaf $\\mathcal F$ we get $Rg_!\\mathcal F\\simeq\\bar g_*j_{0!}\\mathcal F$,\na complex concentrated in degree $0$, i.e. $R^ig_!\\mathcal F=0$ for\n$i\\neq0$. Applying the exact functor $\\bar g_*j_{0!}$ termwise gives\n$\\mathcal H^j(Rg_!K)=\\bar g_*j_{0!}\\mathcal H^j(K)=g_!\\mathcal H^j(K)$.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(2).* By (1) and the composition isomorphism it suffices to treat the\ntwo pieces. For $j_0$: a closed point of $\\overline Z_0$ either lies in\n$Z_0$, where $j_{0!}K$ has the same stalk with the same local\nFrobenius as $K$, or lies outside, where the stalk is $0$; so each\n$\\mathcal H^j(j_{0!}K)=j_{0!}\\mathcal H^j(K)$ receives, from a\nfiltration of $\\mathcal H^j(K)$ with punctually pure quotients of\nweights $\\le w+j$ as in [def-weil-complex-weights], the filtration\nby the (exact) extensions by zero, whose quotients are again punctually\npure of the same weights. Hence $j_{0!}K\\in D_{\\le w}(\\overline Z_0)$.\nFor $\\bar g$: the finite pushforward bound [lem-zl-finite-pushforward]\ngives $R\\bar g_*j_{0!}K\\in D_{\\le w}(Y_0)$.",
+   "uses": [
+    "def-weil-complex-weights",
+    "lem-zl-finite-pushforward"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*In particular.* A mixed Weil sheaf $\\mathcal F$ has a finite\nfiltration with punctually pure quotients; if $w$ is the largest of\ntheir weights, then $\\mathcal F\\in D_{\\le w}(Z_0)$ by\n[def-weil-complex-weights]. By (2), $Rg_!\\mathcal F\\in D_{\\le w}(Y_0)$,\nand by (1) this complex is the sheaf $g_!\\mathcal F$ in degree $0$;\nso $g_!\\mathcal F$ is mixed of weights $\\le w$.",
+   "uses": [
+    "def-weil-complex-weights"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-pqf-zmt-factorization",
+  "prop-functor-package",
+  "def-weil-extension-by-zero",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-weil-pbc-qbar-category",
+  "def-weil-complex-weights",
+  "lem-zl-finite-pushforward"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_multiple"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2818,
+ "blueprint_uses": [
+  "def-weil-complex-weights",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-qbar-category",
+  "lem-zl-finite-pushforward",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "prop-functor-package",
+  "thm-pqf-zmt-factorization"
+ ],
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+  "declaration": "AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite",
+  "branch": "slopmaster2",
+  "line": 558,
+  "sorry_free": false,
+  "body_lines": 1,
+  "others": [
+   {
+    "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+    "declaration": "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite",
+    "branch": "slopmaster2",
+    "line": 566,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+    "declaration": "AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite",
+    "branch": "slopmaster2",
+    "line": 576,
+    "sorry_free": false,
+    "body_lines": 1
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite",
+  "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite",
+  "AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite"
+ ],
+ "proof_split_by": "labels"
+}

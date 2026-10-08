@@ -1,0 +1,59 @@
+{
+ "id": "lemma-weil-pbc-finite-refinement-etale-cover",
+ "kind": "statement",
+ "title": "Finite refinement of a surjective etale morphism",
+ "statement": "Let $u:U\\to T$ be a surjective etale morphism\n[def-weil-pbc-scheme-conventions] and assume that $T$ is quasi-compact and\nquasi-separated. There exist a finite set $J$, a finite, finitely presented,\nsurjective morphism\n\n$$\n r:T'\\longrightarrow T,\n$$\n\na finite open covering $T'=\\bigcup_{a\\in J}W_a$, and $T$-morphisms\n$\\phi_a:W_a\\to U$ such that\n\n$$\n u\\circ\\phi_a=r|_{W_a}:W_a\\longrightarrow T\n \\qquad(a\\in J).\n$$\n\nEquivalently, $r$ factors through $u$ Zariski locally on $T'$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-finite-refinement-etale-cover.md",
+  "place": "node lemma-weil-pbc-finite-refinement-etale-cover, order 1074",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09Z0"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "This is the input of the finite refinement of surjective etale morphisms: for\na surjective etale morphism $u:U\\to T$ with $T$ quasi-compact and\nquasi-separated, there are a finite, finitely presented, surjective morphism\n$r:T'\\to T$, a finite open covering $T'=\\bigcup_{a\\in J}W_a$, and\n$T$-morphisms $\\phi_a:W_a\\to U$ with $u\\circ\\phi_a=r|_{W_a}$ for every $a\\in\nJ$, i.e. $r$ factors through $u$ Zariski locally on $T'$ (Stacks Project,\nLemma 37.45.7, Tag [09Z0](https://stacks.math.columbia.edu/tag/09Z0)). The\nblueprint records this single assertion in the displayed form and proves\nseparately all of its consequences (the degree-zero comparisons over\nhenselian pairs); the proof, which refines the affine Zariski covering of $T$\nand uses the local structure of etale morphisms, is not decomposed here.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-finite-refinement-etale-cover.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1074,
+ "blueprint_uses": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "Let $U\\to T$ be surjective and etale, with $T$ quasi-compact and\nquasi-separated. There is a finite, finitely presented, surjective morphism\n$r:T'\\to T$ and a finite open covering $T'=\\bigcup_aW_a$ such that every\n$W_a\\to T$ factors through $U\\to T$.",
+   "proof": "Choose finitely many affine opens $U_a\\subset U$ whose images cover $T$ and\nreplace $U$ by their disjoint union. The resulting map is quasi-compact,\nseparated, etale, and has a finite upper bound $d$ on the cardinalities of\nits geometric fibres. We induct on $d$. If $d=1$, the map is radicial and\netale, hence an open immersion; surjectivity makes it an isomorphism.\n\nFor $d>1$, apply the affine form of Zariski's Main Theorem to the separated\nquasi-finite map $U\\to T$: adjoining to $\\mathcal O_T$ the integral elements\nof the quasi-coherent algebra $u_*\\mathcal O_U$ gives an integral\n$\\pi:\\widetilde T\\to T$ and a quasi-compact open immersion\n$j:U\\hookrightarrow\\widetilde T$. Replace $\\widetilde T$ by the\nscheme-theoretic closure of $U$, so $U$ is schematically dense. The diagonal\nsection gives an open-and-closed decomposition\n\n$$\nU\\times_T\\widetilde T=U\\amalg W.\n$$\n\nThe image $V$ of $W\\to\\widetilde T$ is open and contains\n$\\widetilde T\\setminus U$. Over a point of the dense open $U$, the fibre of\n$W\\to V$ is the fibre of $U\\to T$ with the diagonal point removed, so it has\nfewer than $d$ points. The number of points in a separated etale fibre\ncannot increase under specialization: after writing the map locally as a\nfinite disjoint union of Jacobian etale algebra presentations, distinct idempotents at a\nspecialization lift to distinct idempotents at a generization. Thus every\ngeometric fibre of $W\\to V$ has cardinality $<d$.\n\nBy induction there is an integral surjection $Z\\to V$, locally factoring\nthrough $W$. Apply the same integral-closure construction to\n$Z\\to\\widetilde T$ and take the closure $Z'$ of $Z$; then\n$Z'\\times_{\\widetilde T}V=Z$. If $C$ is the reduced closed complement\n$\\widetilde T\\setminus V$, then $C\\subset U$, and\n$Z'\\amalg C\\to T$ is integral and surjective. Near a point of $Z$ it\nfactors through $W\\to U$; near a point of $Z'\\setminus Z$ it factors through\n$C\\subset U$. Hence it locally factors through the original cover.\n\nFinally write this integral morphism as the inverse limit of its finite\nfinitely presented $T$-subalgebras. Choose finitely many affine opens on\nwhich the factorization through $U$ is defined. Each open, each map to $U$,\nthe equalities over $T$, and surjectivity descend to a common finite stage:\nthe first three assertions are finite-presentation data, while failure of\nsurjectivity has quasi-compact open image and would persist after pullback to\nthe limit. That common stage is the required $T'$. This is the construction\nlocated at Tag `09Z0`, with the degree induction and final finite stage\nmade explicit.",
+   "cites": []
+  }
+ ]
+}

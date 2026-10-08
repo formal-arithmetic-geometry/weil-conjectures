@@ -1,0 +1,94 @@
+{
+ "id": "prop-ag-det-weight-two-factor-tensor",
+ "kind": "statement",
+ "title": "Determinant weights of a tensor product of two sheaves (conditional)",
+ "statement": "Fix a real weight character $\\lambda$ as in [d-weights]. Let\n$\\mathcal V_0$ and $\\mathcal E_0$ be nonzero lisse Weil sheaves on the\nsame normal geometrically connected curve $X_0$, with Weil\nrepresentations $V$ and $E$. Choose composition series in the sense of\n[def-mg-weil-composition-series], with simple factors\n$V_1,\\ldots,V_t$ of $V$ and $E_1,\\ldots,E_u$ of $E$. Assume that every\n$V_i$, every $E_j$, and every Jordan–Holder constituent of\n$V\\otimes E$ has finite geometric determinant. Then for every\nJordan–Holder constituent $Q$ of $V\\otimes E$ there is a pair $(i,j)$\nwith\n\n$$\n\\dw_\\lambda(Q)=\\dw_\\lambda(V_i)+\\dw_\\lambda(E_j).\n$$\n\nConversely, every such sum occurs for at least one constituent. Neither\n$V$, $E$ nor $V\\otimes E$ is assumed semisimple.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-tensor/prop-ag-det-weight-two-factor-tensor.md",
+  "place": "node prop-ag-det-weight-two-factor-tensor, order 2559"
+ },
+ "stmt_deps": [
+  "d-weights",
+  "def-mg-weil-composition-series"
+ ],
+ "proof": [
+  {
+   "text": "The multisets $\\{V_i\\}$ and $\\{E_j\\}$ do not depend on the chosen\nseries by [lem-mg-jordan-holder]. Form the Weil semisimplifications\n$V^{\\mathrm{ss}}=\\bigoplus_iV_i$ and $E^{\\mathrm{ss}}=\\bigoplus_jE_j$\nof [def-mg-weil-semisimplification]; both are semisimple Weil\nrepresentations on the same curve. Apply\n[lem-mg-common-positive-central-element] to the pair\n$V^{\\mathrm{ss}},E^{\\mathrm{ss}}$, i.e. to\n$\\rho=V^{\\mathrm{ss}}\\oplus E^{\\mathrm{ss}}$, and let $z$ be the\nresulting central element of degree $m>0$. Each $V_i$ and each $E_j$\nis a Weil-stable direct summand, hence a subquotient, of $\\rho$, so by\n[lem-mg-degree-component-functoriality] the image of $z$ on it is\ncentral of degree $m$; by [lem-wf-schur-scalar] it acts on $V_i$ by a\nscalar $c_i$ and on $E_j$ by a scalar $d_j$. Since $V_i$ and $E_j$\nhave finite geometric determinant, [cor-mg-central-determinant-weight]\ngives\n\n$$\n\\dw_\\lambda(V_i)=\\frac{\\lambda(c_i)}{m},\\qquad\n\\dw_\\lambda(E_j)=\\frac{\\lambda(d_j)}{m}.\n$$",
+   "uses": [
+    "lem-mg-jordan-holder",
+    "def-mg-weil-semisimplification",
+    "lem-mg-common-positive-central-element",
+    "lem-mg-degree-component-functoriality",
+    "lem-wf-schur-scalar",
+    "cor-mg-central-determinant-weight"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [lem-mg-filtered-tensor-product], $V\\otimes E$ has a Weil-stable\nfiltration whose successive quotients are the representations\n$V_i\\otimes E_j$, each pair $(i,j)$ occurring once. Each\n$V_i\\otimes E_j$ is a tensor product of two subquotients of $\\rho$, so\n[lem-mg-degree-component-functoriality] applies to it and to its\niterated subquotients, and the image of $z$ acts on $V_i\\otimes E_j$\nby $c_id_j$. By [lem-mg-filtration-refinement], every constituent $Q$\nof $V\\otimes E$ is a composition factor of some $V_i\\otimes E_j$. The\nimage of $z$ on $Q$ is central of degree $m$ by the same\nfunctoriality, acts by the scalar $c_id_j$, and $Q$ has finite\ngeometric determinant by hypothesis; therefore\n[cor-mg-central-determinant-weight] and the fact that $\\lambda$ is a\nhomomorphism give\n\n$$\n\\dw_\\lambda(Q)=\\frac{\\lambda(c_id_j)}{m}\n=\\frac{\\lambda(c_i)}{m}+\\frac{\\lambda(d_j)}{m}\n=\\dw_\\lambda(V_i)+\\dw_\\lambda(E_j).\n$$",
+   "uses": [
+    "lem-mg-filtered-tensor-product",
+    "lem-mg-degree-component-functoriality",
+    "lem-mg-filtration-refinement",
+    "cor-mg-central-determinant-weight"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely, each $V_i\\otimes E_j$ is nonzero, so it has a composition\nseries by [lem-mg-composition-series-exists]; its factors are\nconstituents of $V\\otimes E$ by [lem-mg-filtration-refinement], and\neach has determinant weight $\\dw_\\lambda(V_i)+\\dw_\\lambda(E_j)$.",
+   "uses": [
+    "lem-mg-composition-series-exists",
+    "lem-mg-filtration-refinement"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-mg-jordan-holder",
+  "def-mg-weil-semisimplification",
+  "lem-mg-common-positive-central-element",
+  "lem-mg-degree-component-functoriality",
+  "lem-wf-schur-scalar",
+  "cor-mg-central-determinant-weight",
+  "lem-mg-filtered-tensor-product",
+  "lem-mg-filtration-refinement",
+  "lem-mg-composition-series-exists"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-tensor/prop-ag-det-weight-two-factor-tensor.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2559,
+ "blueprint_uses": [
+  "cor-mg-central-determinant-weight",
+  "d-weights",
+  "def-mg-weil-composition-series",
+  "def-mg-weil-semisimplification",
+  "lem-mg-common-positive-central-element",
+  "lem-mg-composition-series-exists",
+  "lem-mg-degree-component-functoriality",
+  "lem-mg-filtered-tensor-product",
+  "lem-mg-filtration-refinement",
+  "lem-mg-jordan-holder",
+  "lem-wf-schur-scalar"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights",
+  "declaration": "Representation.exists_detWeight_eq_add_of_subquotient_tprod",
+  "branch": "slopmaster2",
+  "line": 843,
+  "sorry_free": true,
+  "body_lines": 8
+ },
+ "blueprint_lean": [
+  "Representation.exists_detWeight_eq_add_of_subquotient_tprod"
+ ],
+ "proof_split_by": "paragraphs"
+}

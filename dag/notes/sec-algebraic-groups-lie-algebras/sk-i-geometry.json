@@ -1,0 +1,28 @@
+{
+ "id": "sk-i-geometry",
+ "kind": "section",
+ "title": "Basic affine geometry",
+ "text": "*Proposition (sketch).*\n\nFinite-type affine schemes over $k$ are Noetherian (descending chains\nof closed sets stabilize). They have finitely many irreducible\ncomponents. Closed points have residue field $k$, and a function on\na reduced affine variety vanishing at every $k$-point is zero.\nImages of finite-type morphisms are constructible; a dense\nconstructible subset contains a nonempty open subset of its closure.\nA proper closed subset of an irreducible variety has strictly smaller\ndimension. Regular local rings are domains, so irreducible components\nof a smooth variety do not meet.\nA product of reduced affine varieties over $k$ is again a reduced affine\nvariety; the vanishing principle above therefore applies to it, so a\nregular function on such a product vanishing at all its $k$-points is\nzero. This is what lets a morphism defined on a product, such as a\ncommutator map, be tested on rational points in each variable\nseparately. These are the affine-geometric facts\nused below with [sk-d-geometry], [sk-d-tangent].\nthm:ag-noetherian;thm:ag-nullstellensatz;thm:ag-chevalley;lem:ag-constructible-open;thm:ag-dimension-drop;thm:ag-regular-domain\n\n## Proof\n\n*Noetherianity and components.* A finite-type coordinate algebra is a\nquotient of $k[t_1,\\ldots,t_n]$, Noetherian by the Hilbert basis theorem,\nand quotients inherit the ascending chain condition. The correspondence\nbetween closed sets and radical ideals of [sk-d-geometry] turns a\ndescending chain of closed sets into an ascending chain of ideals, which\nstabilizes. In a Noetherian space, a closed set admitting no finite\nexpression as a union of irreducible closed sets may be chosen minimal; it\nis then reducible, and both of its proper closed pieces do admit such\nexpressions, a contradiction. Discarding redundant members of an\nexpression for the whole space leaves exactly the maximal irreducible\nclosed subsets, finitely many of them.\n\n*Points and the vanishing principle.* Over the algebraically closed\n$k$ the Nullstellensatz gives $I(V(I))=\\sqrt I$. Evaluation at a closed\npoint is therefore onto $k$, so its residue field is $k$; and a function\non a reduced variety vanishing at every $k$-point has a representative in\n$\\sqrt J=J$, hence is zero. Consequently a regular map whose values on\n$k$-points lie in a closed subvariety $Z$ factors uniquely through $Z$.\n\n*Constructibility.* Chevalley's theorem gives constructibility of the\nimage, the coordinate map of a finite-type morphism being finitely\npresented. If a constructible set $S=\\bigcup_i(U_i\\cap F_i)$ is dense,\nchoose an irreducible component $C$; it lies in one $\\overline{S_i}$,\nsince a finite closed cover of an irreducible space has a member equal to\nthe whole space. The complement $\\Omega$ of the remaining components is a\nnonempty open subset of the ambient space contained in\n$C\\subseteq\\overline{S_i}$. As $S_i$ is open in its closure and dense\nthere, $S_i\\cap\\Omega$ is the required nonempty open set.\n\n*Dimension drop.* For irreducible $X$ the algebra $k[X]$ is a domain:\nif $ab=0$ then $X=V(a)\\cup V(b)$, so one factor vanishes at every\n$k$-point and is zero by the vanishing principle. If $Y\\subsetneq X$ is\nclosed with radical ideal $I\\ne0$, every prime chain of length $r$ in\n$k[X]/I$ pulls back to a chain of primes containing $I$, and prepending\n$(0)$ gives a chain of length $r+1$ in $k[X]$. Since $\\dim k[X]$ is a\nfinite integer, $\\dim Y\\le\\dim X-1$. The empty case is the convention\n$\\dim\\varnothing=-1$.\n\n*Products.* A nonzero $t=\\sum_{i\\le r}a_i\\otimes b_i$ with the $b_i$\nlinearly independent has some $a_i\\ne0$, hence some $x$ with\n$a_i(x)\\ne0$ by the vanishing principle; then $\\sum_ia_i(x)b_i\\ne0$ in\nthe second coordinate algebra, so $t(x,y)\\ne0$ for some $y$. Thus\n$A\\otimes_kB$ embeds into functions on its $k$-points and is reduced, and\nthe vanishing principle applies to it. This is what lets a morphism\ndefined on a product, such as a commutator map, be tested on rational\npoints in each variable separately.\n\nThe Nullstellensatz and Chevalley's theorem are Mathlib\n(`MvPolynomial.vanishingIdeal_zeroLocus_eq_radical`,\n`PrimeSpectrum.isConstructible_comap_image`); compare Milne,\n[Algebraic Groups](https://www.jmilne.org/math/Books/iAG2017.pdf)\n(2017), Corollary 1.35 and Appendix Ag, for the product and\nvanishing-ideal clauses, whose proof uses that $k$ is algebraically closed,\nhence perfect. One clause is quoted rather than proved: that a regular\nlocal ring is a domain (00NP), one of the four foundational\ninputs the full source retains. It is used only to see that the\nirreducible components of a smooth variety are disjoint, and again for the\nreducedness clause of [sk-i-cartier].\n\nUses: [sk-d-geometry], [sk-d-tangent]",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-geometry/_section.md",
+  "place": "order 2482"
+ },
+ "cites": [
+  "sk-d-geometry",
+  "sk-d-tangent",
+  "sk-i-cartier"
+ ],
+ "blueprint_uses": [
+  "sk-d-geometry",
+  "sk-d-tangent"
+ ],
+ "blueprint_lean": [
+  "iInf_ker_algHom_eq_nilradical",
+  "exists_algHom_ker_eq_of_isMaximal",
+  "exists_isOpen_inter_subset_of_isConstructible",
+  "ringKrullDim_quotient_lt_of_finiteType",
+  "IsRegularLocalRing.isDomain",
+  "isReduced_tensorProduct_of_perfectField"
+ ],
+ "blueprint_tags": []
+}

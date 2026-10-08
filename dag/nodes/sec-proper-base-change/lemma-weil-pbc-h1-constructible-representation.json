@@ -1,0 +1,61 @@
+{
+ "id": "lemma-weil-pbc-h1-constructible-representation",
+ "kind": "statement",
+ "title": "Constructible representation of an $H^1$ class",
+ "statement": "Let $I$ be an injective sheaf of $\\mathbf F_r$-modules on $X=\\mathbf P^1_A$.\nEvery class $c\\in H^1(X_0,I_0)$ is the image of a finite tuple of classes\nbelonging to sheaves\n\n$$\n (h_i)_*\\underline{M_i},\n$$\n\nwhere $h_i:V_i\\to X$ is finite and finitely presented and $M_i$ is a finite\n$\\mathbf F_r$-module.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-h1-constructible-representation.md",
+  "place": "node lemma-weil-pbc-h1-constructible-representation, order 1136"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "View $c$ as the isomorphism class of an $I_0$-torsor. It is trivial on a\nquasi-compact etale cover, so choosing local origins gives a Cech cocycle with\nfinitely many components; [lemma-weil-pbc-constructible-approximation] supplies\na constructible $\\mathbf F_r$-module sheaf $F$, a map $F\\to I$, and lifts of\nthe finitely many cocycle components and equations.\n[lemma-weil-pbc-constructible-finite-pushforward] gives a monomorphism\n$F\\hookrightarrow\\bigoplus_i(h_i)_*\\underline{M_i}$, and injectivity of $I$\nextends the map $F\\to I$ across it. The image of the lifted tuple in\n$\\bigoplus_iH^1(X_0,(h_i)_*\\underline{M_i}|_{X_0})$ maps to $c$, as the Cech\ncomplexes are compatible.",
+   "uses": [
+    "lemma-weil-pbc-constructible-approximation",
+    "lemma-weil-pbc-constructible-finite-pushforward"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-constructible-approximation",
+  "lemma-weil-pbc-constructible-finite-pushforward"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-h1-constructible-representation.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1136,
+ "blueprint_uses": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-scheme-conventions",
+  "lemma-weil-pbc-constructible-approximation",
+  "lemma-weil-pbc-constructible-finite-pushforward"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "For an injective sheaf $I$ of $\\mathbf F_\\ell$-modules on $\\mathbf P^1_A$,\nevery class\n$c\\in H^1(X_0,I_0)$ admits finite $\\mathbf F_\\ell$-modules $M_i$, finite finitely presented\nmorphisms $h_i:V_i\\to X$, and a map\n$\\bigoplus_i(h_i)_*\\underline{M_i}\\to I$ such that $c$ is the image of a\ntuple of classes in\n$\\bigoplus_iH^1(X_0,(h_i)_*\\underline{M_i}|_{X_0})$.",
+   "proof": "View $c$ as the isomorphism class of an $I_0$-torsor. It is trivial on an\netale cover; quasi-compactness of $X_0$ selects finitely many members\n$U_a\\to X_0$. Choosing local origins gives a Cech cocycle\n$z=(z_{ab})$ with\n\n$$\nz_{ab}\\in I_0(U_a\\times_{X_0}U_b),\\qquad\nz_{bc}-z_{ac}+z_{ab}=0\n$$\n\non every triple overlap. There are finitely many sections and equations.\nConstructible approximation therefore supplies a constructible sheaf $F$, a\nmap $\\alpha:F\\to I$, and lifts $\\widetilde z_{ab}\\in F_0(U_{ab})$\nsatisfying the same equations and mapping to $z_{ab}$.\n\nThe finite-pushforward lemma gives a monomorphism\n$\\iota:F\\hookrightarrow F'=\\bigoplus_{i=1}^r(h_i)_*\\underline{M_i}$.\nInjectivity of $I$ extends $\\alpha$ across $\\iota$ to a map\n$\\psi:F'\\to I$. The sheaf square and the three relevant terms of the Cech\ncomplex form the commuting three-row diagram\n\n$$\n\\begin{CD}\nF @>{\\iota}>> F' @>>> \\operatorname{coker}(\\iota)\\\\\n@V{\\alpha}VV @V{\\psi}VV @VVV\\\\\nI @= I @>>> 0\\\\[2pt]\n@VVV @VVV @VVV\\\\\n\\prod_a I_0(U_a) @>{d^0}>>\n\\prod_{a,b} I_0(U_{ab}) @>{d^1}>>\n\\prod_{a,b,c} I_0(U_{abc}).\n\\end{CD}\n$$\n\nHere the bottom vertical maps mean restriction followed by the indicated\nCech cochain inclusion; commutativity in degrees $0,1,2$ follows from\nfunctoriality of restriction. The cocycle $\\iota(\\widetilde z)$ defines\n$c'\\in H^1(X_0,F'_0)$ and $\\psi_0(c')=c$.\n\nFinite direct sums commute with $H^1$, while exact finite direct image and\nLeray give\n\n$$\nH^1(X_0,F'_0)=\n\\bigoplus_{i=1}^rH^1(X_0,(h_i)_*\\underline{M_i}|_{X_0})\n=\\bigoplus_{i=1}^rH^1((V_i)_0,\\underline{M_i}).\n$$\n\nThus $c'$ is the required finite tuple, and the displayed map $F'\\to I$\nsends that tuple to the original class.",
+   "cites": []
+  }
+ ]
+}

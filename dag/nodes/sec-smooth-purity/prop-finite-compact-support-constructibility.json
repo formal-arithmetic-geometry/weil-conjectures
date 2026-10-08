@@ -1,0 +1,122 @@
+{
+ "id": "prop-finite-compact-support-constructibility",
+ "kind": "statement",
+ "title": "Finite-level bounded constructibility for proper support",
+ "statement": "Let $K_0$ be a field, let $X,Y$ be\nfinite-type $K_0$-schemes, and let\n$f:X\\to Y$ be a\nseparated finite-type\n$K_0$-morphism. Fix a prime $\\ell$, write $\\Ql=\\mathbf Q_\\ell$, and\nrequire that its image in $K_0$ is invertible. Choose a finite extension\n$E/\\Ql$, an integer $n\\in\\mathbf Z_{\\geq1}$,\nand put $A=A_{E,n}$. Let $Rf_{!,n}$ be the coherent finite-level\ncompact-support direct image\nfunctor associated to the\ncompactification candidates.\nThe comparison maps for refinements are identities and satisfy the cocycle\ncondition, and $D^b_c(X,A)$ uses\nfinite-torsion\nconstructibility. For $a,b\\in\\mathbf Z$ with $a\\leq b$, write\n\n$$\nD_c^{[a,b]}(X,A)=\\{K\\in D^b_c(X,A):\n\\mathcal H^r(K)=0\\text{ for }r\\notin[a,b]\\},\n$$\n\nwhere $D^b_c(X,A)$ has the\nfinite-torsion\nconstructibility condition, and $\\mathcal H^r$ is the\ncohomology-sheaf functor.\nThe ambient\nderived direct-image functor\n$Rf_{!,n}$ restricts to an exact triangulated functor\n\n$$\nRf_{!,n}:D^b_c(X,A_{E,n})\n\\longrightarrow D^b_c(Y,A_{E,n}).\n$$\n\nFor each cohomological interval\n$[a,b]$ with $a,b\\in\\mathbf Z$ and\n$a\\leq b$, and each integer $e\\geq0$ such that every\ngeometric fiber of $f$ has\ndimension at most $e$, there\nare integers $a'\\leq b'$, independent of the compactification, such that\nfor every $K\\in D_c^{[a,b]}(X,A_{E,n})$ one has\n\n$$\nRf_{!,n}K\\in D_c^{[a',b']}(Y,A_{E,n}).\n$$\n\nThe restriction and its amplitude bound commute with finite coefficient\nreduction.\n(*Source: the finiteness of compact-support direct images of\nconstructible torsion sheaves: Stacks Project, More Étale Cohomology,\nSection 63.14 (Complexes with constructible cohomology), Theorem 63.14.5,\n[Tag `0GL0`](https://stacks.math.columbia.edu/tag/0GL0);\nthe fibre-dimension amplitude bounds are the finiteness bounds of the\nsame formalism, cf. Stacks Project, Etale Cohomology, Lemma 59.92.2,\n[Tag `095U`](https://stacks.math.columbia.edu/tag/095U).*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.md",
+  "place": "node prop-finite-compact-support-constructibility, order 1643",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0GL0"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 095U"
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "*Step 1 (the compactification form).* By\n[def-weil-compact-support-candidate] a compactification of $f$\nis a factorisation $f=\\bar f\\circ j$ with $j:X\\hookrightarrow\\bar X$\nan open immersion ([def-weil-scheme-morphism-properties]) and\n$\\bar f:\\bar X\\to Y$ proper ([def-weil-scheme-morphism-properties]),\nand the candidate\nattached to it is $R\\bar f_*\\circ j_!$, formed with the\nderived direct image ([def-weil-derived-direct-image]); the functor\n$Rf_{!,n}$ of\n[def-compact-support-direct-image-detailed] is the coherent choice of a\ncandidate in the compactification category\n[def-weil-compactifications-refinements], and by the hypothesis\nrecalled in the statement its comparison maps are identities satisfying\nthe cocycle condition. It therefore suffices to bound the candidate of\na single compactification, and the bound produced below involves only\nthe amplitude interval of $K$ and the fibre bound $e$, so that it is\nindependent of the choice.",
+   "uses": [
+    "def-weil-compact-support-candidate",
+    "def-weil-scheme-morphism-properties",
+    "def-weil-derived-direct-image",
+    "def-compact-support-direct-image-detailed",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2 (transport to the étale site).* The functor is defined on\nthe pro-étale categories. Under the comparison morphism of sites\n$\\nu$ of [def-weil-pbc-site-comparison-morphism] the direct images\ncorrespond, $\\nu^*Ru_{{\\mathrm{et}},*}\\cong Ru_{{\\mathrm{proet}},*}\\nu^*$\n([prop-weil-pbc-comparison-direct-image]), and constructibility on\nthe pro-étale site is by definition the inverse image of\nconstructibility on the étale site\n([def-weil-pbc-constructible-direct-image-finiteness]). It is\naccordingly enough to prove the assertion for the étale direct image,\nwhich is what the two classical finiteness theorems below provide.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "prop-weil-pbc-comparison-direct-image",
+    "def-weil-pbc-constructible-direct-image-finiteness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3 (extension by zero and the proper case).* For\n$K\\in D^b_c(X,A)$ the object $j_!K$ lies in $D^b_c(\\bar X,A)$ with\nconstructible cohomology\nsheaves ([def-weil-derived-cohomology-sheaves]) in the same degrees: extension by zero\nis exact and preserves\n[def-weil-finite-torsion-constructibility]\n([def-weil-extension-by-zero], [lem-fin-extension-by-zero]).\nThe geometric fibres of $\\bar f$ have dimension at most $e$, so\n[obl-fin-comparison] applies to $\\bar f$: for every constructible\n$A$-sheaf $F$ on $\\bar X_{{\\mathrm{et}}}$ the sheaves\n$R^q\\bar f_*F$ are constructible and vanish for $q>2e$. For a\ncomplex whose cohomology sheaves lie in degrees $[a,b]$ the conclusion\nholds degreewise, the constructible sheaves forming a weak Serre\nsubcategory ([thm-constructible-serre]), so that\n$Rf_{!,n}K\\in D_c^{[a,b+2e]}(Y,A)$ for the\nconstructible cohomological\ninterval ([def-weil-constructible-intervals]) $D_c^{[a,b+2e]}(Y,A)$.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-extension-by-zero",
+    "lem-fin-extension-by-zero",
+    "obl-fin-comparison",
+    "thm-constructible-serre",
+    "def-weil-constructible-intervals"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4 (the finite-type form).* The same bound is available\nwithout compactifying. By [sbc-thm-finiteness-finite-type],\napplied to the finite-type morphism $f$ over the field $K_0$ whose\ngeometric fibres have dimension at most $e$, the sheaves $R^qf_!F$\nare constructible for every $q$ and vanish for $q>2e$, for every\nconstructible $A$-sheaf $F$; the case of a complex follows as in\nStep 3.",
+   "uses": [
+    "sbc-thm-finiteness-finite-type"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 5 (exactness and reduction).* The restriction is a\ntriangulated functor, $j_!$ and $R\\bar f_*$ being exact and\ntriangulated on the bounded constructible categories, and it commutes\nwith finite coefficient reduction because the finite-level direct image\ndoes, the reduction being compatible with the comparison morphisms that\nenter the definition ([def-compact-support-direct-image-detailed]).",
+   "uses": [
+    "def-compact-support-direct-image-detailed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-compact-support-candidate",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-direct-image",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-site-comparison-morphism",
+  "prop-weil-pbc-comparison-direct-image",
+  "def-weil-pbc-constructible-direct-image-finiteness",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-extension-by-zero",
+  "lem-fin-extension-by-zero",
+  "obl-fin-comparison",
+  "thm-constructible-serre",
+  "def-weil-constructible-intervals",
+  "sbc-thm-finiteness-finite-type"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1643,
+ "blueprint_uses": [
+  "def-compact-support-direct-image-detailed",
+  "def-weil-compact-support-candidate",
+  "def-weil-compactifications-refinements",
+  "def-weil-constructible-intervals",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-direct-image",
+  "def-weil-extension-by-zero",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-constructible-direct-image-finiteness",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-scheme-morphism-properties",
+  "lem-fin-extension-by-zero",
+  "obl-fin-comparison",
+  "prop-weil-pbc-comparison-direct-image",
+  "sbc-thm-finiteness-finite-type",
+  "thm-constructible-serre"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "labels"
+}

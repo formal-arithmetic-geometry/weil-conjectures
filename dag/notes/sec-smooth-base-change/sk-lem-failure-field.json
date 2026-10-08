@@ -1,0 +1,23 @@
+{
+ "id": "sk-lem-failure-field",
+ "kind": "section",
+ "title": "A failure is detected on the generic fibre",
+ "text": "*Lemma (sketch).*\n\n(Stacks Project, Lemma 59.88.6, Tag `0F07`.) Let $q\\ge1$. If\n$\\mathrm{UBC}^{\\le q-1}(f,n)$ holds ([sk-def-bc]: base change in\nall degrees $\\le q-1$, after every preliminary base change of $f$)\nbut $\\mathrm{BC}(f,n,q)$ does not hold universally — it fails for\n$f$ itself or for some base change $f_{S_1}$, $S_1\\to S$ — then\nthere is a counterexample over a field: a morphism $S'\\to S$ with\n$S'$ an affine scheme (so that $S'\\to S$ is an affine morphism when\n$S$ is separated), the base change $f':X'=X\\times_SS'\\to S'$,\n$T=\\Spec K$ with $K$ a field and $g:\\Spec K\\to S'$, and a\n$\\Z/n\\Z$-sheaf $\\mathcal F$ on $\\Spec K$ with\n$f'^{-1}R^qg_*\\mathcal F\\to R^qh_*e^{-1}\\mathcal F$ not an\nisomorphism. (The conclusion concerns one degree after one\npreliminary base change; the hypothesis has to be the universal\ncumulative one, see the closed–open step of the proof.)\n\n## Proof\n\nReplacing $f$ by the base change $f_{S_1}$, which again satisfies\n$\\mathrm{UBC}^{\\le q-1}$, we may assume that $\\mathrm{BC}(f,n,q)$\nitself fails. Let $g:T\\to S$, $\\mathcal F$ be a failing datum, so $g$ is a\nquasi-compact quasi-separated *morphism* ([sk-def-bc]) but $T$\nneed not be a qcqs scheme, as [sk-lem-minimal] requires. Being an\nisomorphism is local on $X$, and restriction to an affine open\n$S'\\subseteq S$ is pullback along an étale map, with which\n$R^qg_*$, $R^qh_*$ and the base-change map commute; so the map already\nfails over some affine open $S'$, and replacing $S$ by $S'$, $X$ by\n$X\\times_SS'$ and $T$ by $T\\times_SS'$ we may assume $S$ affine (this\nis the $S'$ of the statement). Now $T$, being qcqs over the affine\n$S$, is a qcqs scheme. Apply [sk-lem-minimal] to the property ``the chosen cokernel\nelement survives'' (an element $\\xi$ of the stalk of\n$R^qh_*e^{-1}\\mathcal F$ at a geometric point $\\bar x$ not in the\nimage): it fails for the empty scheme, over which the stalk of\n$R^qh_*e^{-1}\\mathcal F$ is $0$, so the image of $\\xi$ is $0$ and\nlies in the image; thickenings do not change the étale site; limits work by\nthe limit theorem for higher direct images. For the closed–open\nsplit let $i:Z\\to T'$ be closed with quasi-compact open complement\n$j:V\\to T'$, and let $\\mathcal J$ be an injective $\\Z/n\\Z$-sheaf on\n$V$ containing $j^{-1}\\mathcal F'$; the injectivity of\n[sk-prop-injectivity] (2) applied to the embedding\n$\\mathcal F'\\to j_*\\mathcal J\\oplus i_*i^{-1}\\mathcal F'$ puts the\nsurviving element into one of the two summands. The closed summand\nis handled by the exactness of $i_*$. For the open summand one\ncannot use exactness of $j_*$, which fails in general\n($R^1j_*(\\Z/\\ell)\\neq0$ for $j:\\gm\\hookrightarrow\\Aaf^1$); instead\nlet $e':Y'=X\\times_ST'\\to T'$ be the base change of $f$ along\n$T'\\to S$ and $j':V\\times_{T'}Y'\\to Y'$. The hypothesis\n$\\mathrm{UBC}^{\\le q-1}(f,n)$ applied to $e'$ and the qcqs morphism\n$j$ — this is where the property after a *preliminary* base\nchange, $T'\\to S$, and in *all* degrees $\\le q-1$ is consumed\n— gives $e'^{-1}j_*\\mathcal J\\cong j'_*e_V^{-1}\\mathcal J$ (degree\n$0$) and $R^aj'_*e_V^{-1}\\mathcal J\\cong e'^{-1}R^aj_*\\mathcal J=0$\nfor $1\\le a\\le q-1$ ($\\mathcal J$ is injective). The relative Leray\nspectral sequence for $h'\\circ j'$ then makes\n$R^qh'_*e'^{-1}j_*\\mathcal J\\to R^q(h'\\circ j')_*e_V^{-1}\\mathcal J$\ninjective, and [sk-prop-injectivity] (3) for the square of $f$\nalong $g'\\circ j:V\\to S$ and $j^{-1}\\mathcal F'\\subseteq\\mathcal J$\nshows that the element survives on $V$.\n\nUses: [sk-def-bc]",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/_section.md",
+  "place": "order 1387"
+ },
+ "cites": [
+  "sk-def-bc",
+  "sk-lem-minimal",
+  "sk-prop-injectivity"
+ ],
+ "blueprint_uses": [
+  "sk-def-bc"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.FieldFailure",
+  "AlgebraicGeometry.Etale.nonempty_fieldFailure"
+ ],
+ "blueprint_tags": []
+}

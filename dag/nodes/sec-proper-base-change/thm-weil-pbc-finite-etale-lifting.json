@@ -1,0 +1,68 @@
+{
+ "id": "thm-weil-pbc-finite-etale-lifting",
+ "kind": "statement",
+ "title": "Finite-etale lifting over a proper henselian pair",
+ "statement": "Let $(A,I)$ be henselian, let $Y\\to\\operatorname{Spec}A$ be proper, and let\n$Y_0=Y\\times_AA/I$. Restriction is an equivalence\n\n$$\n \\mathsf{FEt}(Y)\\xrightarrow{\\sim}\\mathsf{FEt}(Y_0).\n$$\n\nIt lifts morphisms and finite group actions uniquely.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
+  "place": "node thm-weil-pbc-finite-etale-lifting, order 1138",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A0C"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A3S"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}A$ and $S_0=\\operatorname{Spec}(A/I)$, so\n$Y_0=Y\\times_SS_0$. For a finite etale $Z\\to Y$ the composite $Z\\to S$ is\nproper: $Z\\to Y$ is finite, hence proper, and $Y\\to S$ is proper by\nhypothesis, so composition applies. Let $\\pi:Z\\to Y$ be finite etale. The\n$Y$-morphisms $Y\\to Z$ are the inclusions of a member of a decomposition\n$Z=Z_e\\amalg Z_{1-e}$ into open and closed $Y$-subschemes, i.e. the\nidempotents $e$ of $H^0(Z,O_Z)$ whose piece $Z_e$ has rank one (an affine\nfinite etale algebra is a product of finite etale pieces, and a piece of rank\none is $Y$-isomorphic to $Y$); here $O_Z$ is the structure sheaf of $Z$, an\netale abelian ring sheaf, and $H^0(Z,O_Z)=\\Gamma(Y,\\pi_*O_Z)$. By\n[thm-weil-pbc-henselian-idempotent-lifting], the idempotent-lifting interface\nfor the structure sheaf of a proper scheme over a henselian pair applied to\nthe proper $Z\\to S$, restriction induces a bijection between the idempotents\nof $H^0(Z,O_Z)$ and those of $H^0(Z_0,O_{Z_0})$, and it matches the open and\nclosed subschemes of $Z$ with those of $Z_0$: an idempotent $e$ cuts out the\nclopen $Z_e\\subseteq Z$, and its image cuts out $Z_{0,e_0}=(Z_e)_0$. The\ncondition that $Z_e$ have rank one over $Y$ is therefore equivalent to the\nsame condition for $(Z_e)_0$ over $Y_0$: the rank of the finite locally free\n$\\mathcal O_Y$-module $\\pi_*O_{Z_e}$ is locally constant on $Y$, and $Y_0\\to\nY$ is surjective, so it is determined by its values on the image of $Y_0$,\nwhich are the ranks of $(Z_e)_0$. This is not the torsion-sheaf comparison,\nwhose hypothesis of torsion coefficients the structure sheaf does not satisfy,\nand it is the object-level half of the finite-etale lifting recorded as Tags\n0A0C and 0A3S; the map on idempotents is restriction, hence multiplicative,\nand it transports the decompositions, so\n\n$$\n Z(Y)\\xrightarrow{\\sim}Z_0(Y_0),\n$$\n\nnatural in $Z$. For finite etale $X,W\\to Y$, the set\n$\\operatorname{Hom}_Y(X,W)$ is $(W\\times_YX)(X)$, and\n$(W\\times_YX)_0=W_0\\times_{Y_0}X_0$, the former scheme being finite etale and\nproper over $S$; therefore\n\n$$\n \\operatorname{Hom}_Y(X,W)\\xrightarrow{\\sim}\n \\operatorname{Hom}_{Y_0}(X_0,W_0),\n$$\n\nby restriction. The restriction functor $\\mathsf{FEt}(Y)\\to\\mathsf{FEt}(Y_0)$\nis thus fully faithful and lifts morphisms uniquely: a morphism $f_0:V_0\\to\nW_0$ is the restriction of a unique $f:V\\to W$, and a finite group action on\n$W_0$ lifts by lifting the automorphisms of its generating set and using\nuniqueness for the group relations. Every finite etale $Y_0$-scheme is the\nrestriction of a finite etale $Y$-scheme, the lifting input of the\nhenselian-pair proper-base-change package (Stacks Project, Section 59.91: Tag\n[0A0C](https://stacks.math.columbia.edu/tag/0A0C) and Tag\n[0A3S](https://stacks.math.columbia.edu/tag/0A3S)), so restriction is onto the\nobject set and the three assertions hold.",
+   "uses": [
+    "thm-weil-pbc-henselian-idempotent-lifting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-weil-pbc-henselian-idempotent-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1138,
+ "blueprint_uses": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions",
+  "thm-weil-pbc-henselian-idempotent-lifting"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_notes": [
+  {
+   "label": "status",
+   "text": "**Status.** The former proof invoked the torsion degree-zero comparison for\nthe map $H^0(Z,\\mathcal O_Z)\\to H^0(Z_0,\\mathcal O_{Z_0})$ on structure\nsheaves; that citation applies in neither reading, since the structure sheaf\nis not torsion and the two sheaves are different objects. The needed statement\nis the idempotent lifting interface\n[thm-weil-pbc-henselian-idempotent-lifting], which the proof now cites. The\nrest of the proof — properness of $Z$ over $S$, the dictionary between\n$Y$-morphisms $Y\\to Z$ and rank-one idempotents, the Hom-computation, and\nuniqueness of the lifted group action — is proved here and depends on no\nfurther input.",
+   "where": "statement"
+  }
+ ]
+}

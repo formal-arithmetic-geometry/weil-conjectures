@@ -1,0 +1,86 @@
+{
+ "id": "lem-wf-curve-kummer-jacobian-tate-module",
+ "kind": "statement",
+ "title": "Kummer identifies curve cohomology with the Jacobian Tate module",
+ "statement": "Let $C_0/k_0$ be a smooth projective geometrically connected curve, put\n$C=C_0\\times_{k_0}\\overline{k}_0$, and let $J$ be its\nJacobian, equipped with the canonical semilinear\n$\\operatorname{Gal}(\\overline{k}_0/k_0)$-action of\n[lem-wf-geometric-jacobian-galois-action]. For\n$\\ell\\ne\\operatorname{char}k_0$, the\nKummer twist gives natural\nGalois-equivariant isomorphisms\n\n$$\nH^1(C,A_n(1))\\xrightarrow{\\sim}J[\\ell^n](\\overline{k}_0).\n$$\n\nHere $A_n=\\mathbf Z/\\ell^n\\mathbf Z$, and these isomorphisms are\ncompatible with the transition maps.\nThe Jacobian, Tate module, and twist in this display are those of\n[def-sc-jacobian], [def-wf-abelian-tate-module], [def-coefficient-twists-detailed].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-curve-kummer-jacobian-tate-module.md",
+  "place": "node lem-wf-curve-kummer-jacobian-tate-module, order 2610"
+ },
+ "stmt_deps": [
+  "lem-wf-geometric-jacobian-galois-action",
+  "def-sc-jacobian",
+  "def-wf-abelian-tate-module",
+  "def-coefficient-twists-detailed"
+ ],
+ "proof": [
+  {
+   "text": "For every $n\\geq1$, the Kummer sequence of\n[def-sc-kummer-sequence] with exponent $\\ell^n$ is\n\n$$\n1\\longrightarrow\\mu_{\\ell^n}\\longrightarrow\\mathbf G_m\n\\xrightarrow{(\\cdot)^{\\ell^n}}\\mathbf G_m\\longrightarrow1.\n$$",
+   "uses": [
+    "def-sc-kummer-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "It is exact by [lem-sc-kummer-exact]. The relevant beginning of its\nlong exact cohomology sequence is\n\n$$\nH^0(C,\\mathbf G_m)\\xrightarrow{\\ell^n}H^0(C,\\mathbf G_m)\n\\longrightarrow H^1(C,\\mu_{\\ell^n})\n\\longrightarrow H^1(C,\\mathbf G_m)\n\\xrightarrow{\\ell^n}H^1(C,\\mathbf G_m).\n$$",
+   "uses": [
+    "lem-sc-kummer-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [lem-sc-global-functions],\n$H^0(C,\\mathbf G_m)=\\overline{k}_0^\\times$, and the first arrow is\nsurjective because $\\overline{k}_0$ is algebraically closed. The\nidentification $H^1(C,\\mathbf G_m)=\\operatorname{Pic}(C)$ of\n[lem-sc-h1-gm-pic] therefore gives\n\n$$\nH^1(C,\\mu_{\\ell^n})\\xrightarrow{\\sim}\n\\operatorname{Pic}(C)[\\ell^n].\n\\tag{1}\n$$\n\nIf $L^{\\otimes\\ell^n}\\cong\\mathcal O_C$, then\n$\\ell^n\\deg L=0$ in $\\mathbf Z$, hence $\\deg L=0$. By the\ndegree-zero definition in [def-sc-pic0], the right side of $(1)$ is\ntherefore $\\operatorname{Pic}^0(C)[\\ell^n]$. Since $J$ is the Jacobian of\nthe smooth projective curve $C$ over the separably closed field\n$\\overline{k}_0$, its points are the degree-zero invertible modules on\n$C$, so\n[thm-sc-jacobian-representability] identifies this group with\n$J[\\ell^n](\\overline{k}_0)$; the identification is induced by the\nrepresenting isomorphism and is therefore canonical, hence equivariant for the\nsemilinear action of [lem-wf-geometric-jacobian-galois-action].",
+   "uses": [
+    "lem-sc-global-functions",
+    "lem-sc-h1-gm-pic",
+    "def-sc-pic0",
+    "thm-sc-jacobian-representability",
+    "lem-wf-geometric-jacobian-galois-action"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The transition map on the Kummer side is induced by\n$\\mu_{\\ell^{n+1}}\\to\\mu_{\\ell^n}$, $z\\mapsto z^\\ell$; under $(1)$ it\nis multiplication by $\\ell$ on the torsion of the Jacobian. Thus the\nfinite-level isomorphisms form the compatible inverse system defining\n$T_\\ell J$ in [def-wf-abelian-tate-module]; no separate\n$\\mathbf Z_\\ell$-sheaf comparison is being assumed.\nAll arrows in the Kummer sequence, the connecting map to the Picard group,\nand the identification of the Jacobian are natural under automorphisms\nof $\\overline{k}_0/k_0$, the last one by\n[lem-wf-geometric-jacobian-galois-action]; hence the isomorphism is\nGalois equivariant.\nThe displayed finite-level identifications are compatible with reduction;\nwhenever rational or $E$-coefficients are used below, they mean the\ncorresponding scalar extension of this compatible system.",
+   "uses": [
+    "def-wf-abelian-tate-module",
+    "lem-wf-geometric-jacobian-galois-action"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-kummer-sequence",
+  "lem-sc-kummer-exact",
+  "lem-sc-global-functions",
+  "lem-sc-h1-gm-pic",
+  "def-sc-pic0",
+  "thm-sc-jacobian-representability",
+  "lem-wf-geometric-jacobian-galois-action",
+  "def-wf-abelian-tate-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-curve-kummer-jacobian-tate-module.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2610,
+ "blueprint_uses": [
+  "def-coefficient-twists-detailed",
+  "def-sc-jacobian",
+  "def-sc-kummer-sequence",
+  "def-sc-pic0",
+  "def-wf-abelian-tate-module",
+  "lem-sc-global-functions",
+  "lem-sc-h1-gm-pic",
+  "lem-sc-kummer-exact",
+  "lem-wf-geometric-jacobian-galois-action",
+  "thm-sc-jacobian-representability"
+ ],
+ "proof_split_by": "paragraphs"
+}

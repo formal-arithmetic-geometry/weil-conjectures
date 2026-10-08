@@ -1,0 +1,98 @@
+{
+ "id": "thm-weil-final-betti",
+ "kind": "statement",
+ "title": "Weil conjectures IV: Betti symmetry",
+ "statement": "Fix a finite field\n$k_0=\\mathbf F_q$ of characteristic $p$, with algebraic closure\n$k=\\overline{\\mathbf F}_q$.\nLet $X_0/k_0$ be\nsmooth, proper and geometrically\nconnected of pure dimension $d\\geq0$, and put $X=X_0\\times_{k_0}k$.\nLet $P_i\\in\\mathbf Z[T]$, $0\\leq i\\leq2d$, be the\nintegral Frobenius factors\nprovided by [thm-weil-final-integrality]: $P_i(0)=1$, and for\nevery $\\ell\\neq p$,\n\n$$\nP_i^{(\\ell)}(T)=\\det(1-TF_{i,\\ell}\\mid H^i(X,\\mathbf Q_\\ell)),\n$$\n\nwhere $F_{i,\\ell}$ is\ngeometric Frobenius\non ordinary cohomology,\nand $P_i^{(\\ell)}$ means coefficientwise extension\n$\\mathbf Z\\to\\mathbf Q_\\ell$.\nFor every integer $i$ with $0\\leq i\\leq2d$, set\n$b_i=\\deg P_i$; these are the\nBetti numbers. Then\n\n$$\nb_i=\\dim_{\\Ql}H^i(X,\\Ql)\n\\quad\\text{for every prime }\\ell\\neq p,\n\\qquad b_i=b_{2d-i},\n\\qquad b_0=b_{2d}=1,\n$$\n\nwhere $H^i(X,\\Ql)$ is the\nordinary cohomology group;\nso the first dimension is independent of $\\ell$. Moreover\n\n$$\nP_0(T)=1-T,\n\\qquad\nP_{2d}(T)=1-q^dT.\n$$\n\nIn particular, the rational function\n$Z(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}\\in\\mathbf Q(T)$ of\n[thm-weil-final-integrality] has a pole of order exactly $1$ at $T=1$\nand, if $d\\geq1$, a pole of order exactly $1$ at $T=q^{-d}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+  "place": "node thm-weil-final-betti, order 2935"
+ },
+ "stmt_deps": [
+  "thm-weil-final-integrality",
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "The definition of the common Betti numbers is\n[def-weil-betti-numbers]. The comparison in\n[prop-weil-betti-comparison] gives\n$b_i=\\dim_{\\Ql}H^i(X,\\Ql)$, independently of $\\ell$. The perfect pairing\nhas its canonical exceptional-inverse-image orientation supplied by\n[thm-weil-six-operations] for the smooth proper structure morphism;\nthe duality interface [thm-weil-poincare-duality] and the pairing assembled in\n[prop-poincare-pairing] together give $b_i=b_{2d-i}$; the endpoint calculation\n[prop-endpoints] gives $b_0=b_{2d}=1$ and the two endpoint factors,\nidentified with $P_0,P_{2d}$ by [prop-integral-recovery].",
+   "uses": [
+    "def-weil-betti-numbers",
+    "prop-weil-betti-comparison",
+    "thm-weil-six-operations",
+    "thm-weil-poincare-duality",
+    "prop-poincare-pairing",
+    "prop-endpoints",
+    "prop-integral-recovery"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the poles, use the factorization\n$Z(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}$ of\n[thm-weil-final-integrality]. Over $\\overline{\\mathbf Q}$ write\n$P_i(T)=\\prod_{r=1}^{b_i}(1-\\alpha_{i,r}T)$, the $\\alpha_{i,r}$ being the\nreciprocal roots. For $c\\in\\overline{\\mathbf Q}^\\times$, the order of\nvanishing of $P_i$ at $T=c^{-1}$ is the number of $r$ with\n$\\alpha_{i,r}=c$. By [thm-weil-final-rh], every $\\alpha_{i,r}$ satisfies\n$|\\tau(\\alpha_{i,r})|=q^{i/2}$ for every complex embedding $\\tau$.",
+   "uses": [
+    "thm-weil-final-integrality",
+    "thm-weil-final-rh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take $c=1$. Since $q>1$, $q^{i/2}=1$ only for $i=0$, so\n$P_i(1)\\neq0$ for $1\\leq i\\leq2d$, while $P_0(T)=1-T$ vanishes to\norder exactly $1$ at $T=1$. As $P_0$ occurs with exponent $(-1)^{0+1}=-1$,\n$Z(X_0,T)$ has a pole of order exactly $1$ at $T=1$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Take $c=q^d$ with $d\\geq1$. Since $|\\tau(q^d)|=q^d=q^{i/2}$ only for\n$i=2d$, one has $P_i(q^{-d})\\neq0$ for $0\\leq i<2d$ (for $i=0$ this is\nalso visible from $P_0(q^{-d})=1-q^{-d}\\neq0$), while\n$P_{2d}(T)=1-q^dT$ vanishes to order exactly $1$ at $T=q^{-d}$. As\n$2d$ is even, $P_{2d}$ occurs with exponent $-1$, so $Z(X_0,T)$ has a\npole of order exactly $1$ at $T=q^{-d}$. (For $d=0$ the two points\ncoincide and $Z(X_0,T)=(1-T)^{-1}$.)",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "def-weil-betti-numbers",
+  "prop-weil-betti-comparison",
+  "thm-weil-six-operations",
+  "thm-weil-poincare-duality",
+  "prop-poincare-pairing",
+  "prop-endpoints",
+  "prop-integral-recovery",
+  "thm-weil-final-integrality",
+  "thm-weil-final-rh"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2935,
+ "blueprint_uses": [
+  "def-weil-betti-numbers",
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-ordinary-compact-cohomology",
+  "prop-endpoints",
+  "prop-integral-recovery",
+  "prop-poincare-pairing",
+  "prop-weil-betti-comparison",
+  "thm-weil-final-integrality",
+  "thm-weil-final-rh",
+  "thm-weil-poincare-duality",
+  "thm-weil-six-operations"
+ ],
+ "uses_not_cited": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof_split_by": "paragraphs"
+}

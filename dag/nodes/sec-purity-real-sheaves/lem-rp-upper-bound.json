@@ -1,0 +1,130 @@
+{
+ "id": "lem-rp-upper-bound",
+ "kind": "statement",
+ "title": "Upper bound via the largest determinant weight",
+ "statement": "Let $U_0$ be a smooth geometrically connected affine curve, let\n$U=U_0\\times_{k_0}k$, let $\\mathcal G_0$ be a lisse\nWeil sheaf on $U_0$ which is\n$\\iota$-real, and let $\\beta$ be the\nmaximum of the determinant weights of $\\mathcal G_0$ (for the fixed\n$\\iota$). Then for every closed point $x\\in|U_0|$ and every\neigenvalue $\\alpha$ of the local Frobenius $F_x$ on\n$\\mathcal G_{0,\\bar x}$,\n\n$$\n|\\iota(\\alpha)|^2\\le q_x^{\\beta}.\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-upper-bound.md",
+  "place": "node lem-rp-upper-bound, order 2664"
+ },
+ "stmt_deps": [
+  "def-wf-determinantal-weight",
+  "def-wf-weil-category"
+ ],
+ "proof": [
+  {
+   "text": "If $\\mathcal G_0=0$ there is nothing to prove, so assume it is\nnonzero. Choose a composition series as in\n[def-mg-weil-composition-series]. At every closed point, local\nFrobenius is block upper triangular in a basis adapted to that series,\nso its characteristic polynomial is the product ([p-linear-filtration]) of those of the\nsuccessive quotients. Therefore replacing $\\mathcal G_0$ by the\ndirect sum of those quotients, its Weil semisimplification in\n[def-mg-weil-semisimplification], leaves all local characteristic\npolynomials, hence $\\iota$-reality in\n[def-wf-iota-real], unchanged. It also leaves the\ndeterminant-weight multiset unchanged, by its definition in\n[def-mg-determinantal-weight-multiset] together with\n[lem-mg-semisimplification-independent].\nWe make this replacement and keep the same notation. The resulting\nrepresentation is geometrically semisimple by\n[lem-mg-normal-restriction-semisimple].",
+   "uses": [
+    "def-mg-weil-composition-series",
+    "p-linear-filtration",
+    "def-mg-weil-semisimplification",
+    "def-wf-iota-real",
+    "def-mg-determinantal-weight-multiset",
+    "lem-mg-semisimplification-independent",
+    "lem-mg-normal-restriction-semisimple"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix $k\\ge1$ and put\n$\\mathcal G^{(2k)}_0:=\\mathcal G_0^{\\otimes 2k}$, the tensor power of\n[def-real-weil-representation-operations]. By\n[cor-mg-det-weight-finite-tensor], whose geometric-semisimplicity\nhypothesis has just been verified, the largest determinant weight of\n$\\mathcal G^{(2k)}_0$ is $2k\\beta$.\nStep 1 (the $H_c^2$-factor). If $\\lambda$ is an eigenvalue of the\nglobal Frobenius $F$ on $H_c^2(U,\\mathcal G^{(2k)})$, then\n[lem-rp-hc2-eigenvalue-determinant-weight] gives a determinant weight\n\n$$\n\\frac{\\log\\bigl(|\\iota(\\lambda q^{-1})|^2\\bigr)}{\\log(q)}\n$$\n\nof $\\mathcal G^{(2k)}_0$. It is therefore at most $2k\\beta$, and\n\n$$\n|\\iota(\\lambda)|^2\\le q^{2k\\beta+2}.\n$$",
+   "uses": [
+    "def-real-weil-representation-operations",
+    "cor-mg-det-weight-finite-tensor",
+    "lem-rp-hc2-eigenvalue-determinant-weight"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Consequently every zero of the coefficientwise complex polynomial\n$\\iota\\det(1-Ft,H_c^2(U,\\mathcal G^{(2k)}))$ has modulus at least\n\n$$\nR_k:=q^{-k\\beta-1}.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Step 2 (formal Euler product and local zero-freeness). Apply\n[cor-rp-euler-product] to $\\mathcal G^{(2k)}_0$ and then apply\n$\\iota$ coefficientwise. The resulting formal series is\n\n$$\n\\prod_{x\\in|U_0|} f_x(t),\\qquad\nf_x(t):=\\iota\\det(1-F_xt^{d(x)},\\mathcal G^{(2k)}_{0,\\bar x})^{-1}.\n$$",
+   "uses": [
+    "cor-rp-euler-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The family is locally finite in each coefficient because only finitely many\nclosed points have a fixed degree [d-real-cohom]. By\n[lem-rp-even-tensor-positivity], every $f_x$ lies in\n$1+t\\mathbf R_{\\ge0}[[t]]$. The Euler identity identifies the formal\nproduct with the Taylor series at $0$ of the rational function\n\n$$\n\\frac{\\iota\\det(1-Ft,H_c^1(U,\\mathcal G^{(2k)}))}\n{\\iota\\det(1-Ft,H_c^2(U,\\mathcal G^{(2k)}))}.\n$$",
+   "uses": [
+    "d-real-cohom",
+    "lem-rp-even-tensor-positivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 1 shows that this function is holomorphic on $|t|<R_k$. Hence\n[lem-rp-positive-product-radius] applies and says that every local\npolynomial\n$\\iota\\det(1-F_xt^{d(x)},\\mathcal G^{(2k)}_{0,\\bar x})$ is zero-free\non that disc.",
+   "uses": [
+    "lem-rp-positive-product-radius"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 3 (the estimate). Let $\\alpha$ be an eigenvalue of $F_x$ on\n$\\mathcal G_{0,\\bar x}$. Then by [p-linear-spectra] $\\alpha^{2k}$ is an eigenvalue of the\n$2k$-fold tensor Frobenius, so\n$t^{d(x)}\\iota(\\alpha)^{2k}=1$ has a root of modulus\n$|\\iota(\\alpha)|^{-2k/d(x)}$. The local zero-freeness from Step 2 gives\n\n$$\n|\\iota(\\alpha)|^{-2k/d(x)}\\ge R_k=q^{-k\\beta-1},\n$$\n\nand therefore\n\n$$\n|\\iota(\\alpha)|^2\\le q^{d(x)(2k\\beta+2)/(2k)}\n=q_x^{\\beta+1/k}.\n$$",
+   "uses": [
+    "p-linear-spectra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Letting $k\\to\\infty$ proves\n$|\\iota(\\alpha)|^2\\le q_x^\\beta$.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "def-mg-weil-composition-series",
+  "p-linear-filtration",
+  "def-mg-weil-semisimplification",
+  "def-wf-iota-real",
+  "def-mg-determinantal-weight-multiset",
+  "lem-mg-semisimplification-independent",
+  "lem-mg-normal-restriction-semisimple",
+  "def-real-weil-representation-operations",
+  "cor-mg-det-weight-finite-tensor",
+  "lem-rp-hc2-eigenvalue-determinant-weight",
+  "cor-rp-euler-product",
+  "d-real-cohom",
+  "lem-rp-even-tensor-positivity",
+  "lem-rp-positive-product-radius",
+  "p-linear-spectra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-upper-bound.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2664,
+ "blueprint_uses": [
+  "cor-mg-det-weight-finite-tensor",
+  "cor-rp-euler-product",
+  "d-real-cohom",
+  "def-mg-determinantal-weight-multiset",
+  "def-mg-weil-composition-series",
+  "def-mg-weil-semisimplification",
+  "def-real-weil-representation-operations",
+  "def-wf-determinantal-weight",
+  "def-wf-iota-real",
+  "def-wf-weil-category",
+  "lem-mg-normal-restriction-semisimple",
+  "lem-mg-semisimplification-independent",
+  "lem-rp-even-tensor-positivity",
+  "lem-rp-hc2-eigenvalue-determinant-weight",
+  "lem-rp-positive-product-radius",
+  "p-linear-filtration",
+  "p-linear-spectra"
+ ],
+ "uses_not_cited": [
+  "def-wf-determinantal-weight",
+  "def-wf-weil-category"
+ ],
+ "proof_split_by": "paragraphs"
+}

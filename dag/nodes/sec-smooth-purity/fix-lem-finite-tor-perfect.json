@@ -1,0 +1,86 @@
+{
+ "id": "fix-lem-finite-tor-perfect",
+ "kind": "statement",
+ "title": "Geometric-stalk perfectness at finite and field coefficients",
+ "statement": "Let $\\Lambda=A_{E,n}$, let $M\\in D^b_{ctf}(Y,\\Lambda)$ be a\nbounded constructible\ncomplex of finite Tor amplitude\non the coefficient site,\nand let $\\bar y\\to Y$ be a\ngeometric point.\nThen $M_{\\bar y}\\in D(\\Lambda)$ is quasi-isomorphic to a bounded\ncomplex of finite free $\\Lambda$-modules. The same conclusion\nholds on the small etale site with the corresponding constructibility\nand derived-tensor\nTor-amplitude conditions.\nSeparately, for a bounded constructible complex at a\nfield coefficient stage\n$E$, or in the\ncommon-stage\n$\\Qlb$-category, its geometric stalk is a bounded complex of\nfinite-dimensional vector spaces over that field and is perfect.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/fix-lem-finite-tor-perfect.md",
+  "place": "node fix-lem-finite-tor-perfect, order 1825"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=M_{\\bar y}$, using [def-weil-pbc-geometric-stalks].\nConstructibility in [def-weil-finite-torsion-constructibility]\nmakes each $H^r(C)$ finite over $\\Lambda$, and only finitely\nmany are nonzero. Choose $[a,b]$ as in\n[def-weil-finite-tor-amplitude]. For an arbitrary\n$\\Lambda$-module $N$, use its constant sheaf $\\underline N$\non $Y$. The exact stalk functor commutes with the\n[def-weil-derived-tensor] derived tensor product, so\n\n$$\nH^r(C\\otimes_\\Lambda^L N)\n=\\mathcal H^r(M\\otimes_\\Lambda^L\\underline N)_{\\bar y}=0\n\\qquad(r\\notin[a,b]).\n$$",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Taking $N=\\Lambda$ also gives $H^r(C)=0$ outside $[a,b]$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The ring $\\Lambda=\\mathcal O_E/\\varpi_E^n$ is Noetherian and local.\nConstruct a bounded-above finite-free resolution $P^\\bullet\\to C$\nwith $P^r=0$ for $r>b$. The construction proceeds downwards:\nchoose finitely many generators of the highest cohomology, lift\nthem to cycles, and map a finite free module in that degree to a\nrepresentative of $C$. The cone has zero cohomology in that degree\nand finitely generated cohomology in lower degrees; Noetherianity\nensures finite generation of the new kernels. Repeating this step\nconstructs the resolution, which stabilizes in each fixed degree.\nBeing bounded above and free, $P^\\bullet$ is K-flat.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Put $Q=\\operatorname{coker}(P^{a-1}\\xrightarrow{d^{a-1}}P^a)$.\nSince $H^r(P^\\bullet)=0$ for $r<a$, the augmented sequence\n\n$$\n\\cdots\\longrightarrow P^{a-2}\\longrightarrow P^{a-1}\n\\longrightarrow P^a\\longrightarrow Q\\longrightarrow0\n$$\n\nis a free resolution of $Q$. Hence, for every $\\Lambda$-module\n$N$, with no finiteness restriction,\n\n$$\n\\operatorname{Tor}^{\\Lambda}_1(Q,N)\n=\n\\frac{\\ker(P^{a-1}\\otimes N\\longrightarrow P^a\\otimes N)}\n{\\operatorname{im}(P^{a-2}\\otimes N\\longrightarrow P^{a-1}\\otimes N)}\n=H^{a-1}(P^\\bullet\\otimes_\\Lambda N)=0.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Thus $Q$ is flat. It is finitely presented, as a cokernel of\nfinite free modules, so is projective and therefore finite free\nover the local ring $\\Lambda$. The differential $d^a$ factors\nthrough $Q$, and the quotient map to\n\n$$\n0\\longrightarrow Q\\longrightarrow P^{a+1}\n\\longrightarrow\\cdots\\longrightarrow P^b\\longrightarrow0\n$$\n\nwith $Q$ in degree $a$ is a quasi-isomorphism.\nThis proves the finite-coefficient assertion on either site.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "At a field coefficient $F$, the constructible stalk is instead a\nbounded complex with finite-dimensional cohomology over $F$.\nSplitting cycles and boundaries as vector subspaces gives\n$\\bigoplus_r H^r(C)[-r]\\xrightarrow{\\sim}C$, with a finite direct\nsum, and proves perfectness directly at the rational stage of\n[def-weil-rationalization-karoubi].\nFor $\\Qlb$, choose a finite field of definition from\n[def-weil-algebraically-closed-coefficients] and extend this\nfinite-dimensional complex to $\\Qlb$.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-tensor",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/fix-lem-finite-tor-perfect.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1825,
+ "blueprint_uses": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-tensor",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-proetale-site",
+  "def-weil-rationalization-karoubi"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof_split_by": "paragraphs"
+}

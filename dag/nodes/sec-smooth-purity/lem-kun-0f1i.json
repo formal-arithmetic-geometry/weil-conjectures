@@ -1,0 +1,132 @@
+{
+ "id": "lem-kun-0f1i",
+ "kind": "statement",
+ "title": "Base change towards spectra of fields",
+ "statement": "Let $K$ be a field and let $X$ be a scheme of finite type over\n$K$. For any commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\longleftarrow&X'&\\longleftarrow&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle h}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\longleftarrow&T\n\\end{array}\n$$\n\nof schemes over $K$ with $X'=X\\times_{\\Spec(K)}S'$ and\n$Y=X'\\times_{S'}T$ and with $g:T\\to S'$ quasi-compact and quasi-separated, and for every abelian sheaf $F$ on $T_{\\Et}$ whose\nstalks are torsion of orders invertible in $K$, the exchange\nmorphism\n\n$$\n(f')^{-1}Rg_*F\\longrightarrow Rh_*e^{-1}F\n$$\n\nis an isomorphism. (*Source:* Stacks Project, Tag\n[0F1I](https://stacks.math.columbia.edu/tag/0F1I), in the case\nused in this chapter, namely with $X$ of finite type over $K$; the\ngeneral case of that tag reduces to this one by the approximation of a\nquasi-compact quasi-separated scheme by finite type models, which is not\nneeded here.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1i.md",
+  "place": "node lem-kun-0f1i, order 1777",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F1I"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-kun-separably-closed",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "*Reduction to affine $X$.* The question is local on $X$\n([lem-kun-stalk-faithful-derived] and\n[lem-kun-bc-base-change]), hence we may assume $X$ is affine.",
+   "uses": [
+    "lem-kun-stalk-faithful-derived",
+    "lem-kun-bc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Reduction to $\\kunZn$-coefficients.* Similarly, we may\nwrite $F=\\varinjlim_{n\\in I_K}F[n]$\n([def-kun-torsion-invertible] and\n[lem-kun-invertible-orders-colimit]); since both sides of the exchange\nmorphism commute with filtered colimits in $F$\n([lemma-weil-pbc-direct-image-filtered-colimit] for the\nquasi-compact quasi-separated $g,h$, and exactness of the\ninverse images), the same argument reduces us to the case where\n$F$ is a sheaf of $\\kunZn$-modules for some $n$ invertible in\n$K$, which has orders invertible in $K$ by\n[lem-kun-zn-sheaf-invertible-orders].",
+   "uses": [
+    "def-kun-torsion-invertible",
+    "lem-kun-invertible-orders-colimit",
+    "lemma-weil-pbc-direct-image-filtered-colimit",
+    "lem-kun-zn-sheaf-invertible-orders"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Passage to the algebraic closure.* We may replace $K$ by\nits algebraic closure $\\bar K$: formation of the direct image\ncommutes with base change to $\\bar K$ by [lem-kun-0f1c]\n(this works for both $g$ and $h$), the exchange morphism is\ncompatible with this base change\n([lem-kun-bc-base-change]), and it suffices to prove the\nagreement after restriction to $X'_{\\bar K}$ by\n[lem-kun-sep-closure-conservative].",
+   "uses": [
+    "lem-kun-0f1c",
+    "lem-kun-bc-base-change",
+    "lem-kun-sep-closure-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Reduction of $X$.* Next, we may replace $X$ by its\nreduction, because étale cohomology is invariant under universal\nhomeomorphisms ([thm-weil-pbc-universal-homeomorphism-invariance]).\nAfter this replacement the morphism $X\\to\\Spec(K)$ is flat, of\nfinite presentation, with geometrically reduced fibres, and the same\nholds for any base change, in particular for $X'\\to S'$\n([lem-kun-geometric-reduced-perfect], where $K$ is\nalgebraically closed hence perfect). Hence\n$f^{-1}g_*F\\to h_*e^{-1}F$ is an isomorphism by\n[lem-kun-0eys]; in the notation of\n[def-kun-bc-property] this is $BC(f',n,0)$, the identification\nof the sheaf-level map with the zeroth cohomology sheaf of the derived\nexchange morphism being [lem-kun-unbounded-exchange-agrees].",
+   "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-kun-geometric-reduced-perfect",
+    "lem-kun-0eys",
+    "def-kun-bc-property",
+    "lem-kun-unbounded-exchange-agrees"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Conclusion by contraposition.* Suppose for contradiction\nthat the derived exchange morphism is not an isomorphism for some\n$F$ as above. By the spectral sequences of\n[def-weil-pbc-hypercohomology-filtrations] (and\n[lem-kun-bc-base-change] together with\n[lem-kun-bc-map-on-cohomology], which identify the induced maps on\n$\\mathcal H^q$ with the maps of\n[def-kun-bc-property]), there is a minimal $q\\ge1$ such that\n$BC(f',n,q)$ fails while $BC(f',n,q-1)$ holds. At this point we\nmay apply [lem-kun-0f1d] to see that it suffices to prove:\ngiven a commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\longleftarrow&X'&\\longleftarrow&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{}&&\\Big\\downarrow{\\scriptstyle h}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\longleftarrow&\\Spec(L)\n\\end{array}\n$$\n\nwith both squares cartesian, where $S'$ is affine, integral, and\nnormal with algebraically closed function field $L$, then\n$R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for $q>0$ and\n$d\\mid n$. (Indeed, if some $BC(f',n,q)$ failed,\n[lem-kun-0f1d] would produce such a diagram with\n$R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}\\ne0$; note that\n$X''=X'\\times_{S'}S''=X\\times_KS''$ since\n$X'=X\\times_KS'$.) But this vanishing is exactly\n[lem-kun-0f1i-normal], which is already proved. This\ncontradiction shows that the derived exchange morphism is an\nisomorphism for every $F$, as desired.",
+   "uses": [
+    "def-weil-pbc-hypercohomology-filtrations",
+    "lem-kun-bc-base-change",
+    "lem-kun-bc-map-on-cohomology",
+    "def-kun-bc-property",
+    "lem-kun-0f1d",
+    "lem-kun-0f1i-normal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-stalk-faithful-derived",
+  "lem-kun-bc-base-change",
+  "def-kun-torsion-invertible",
+  "lem-kun-invertible-orders-colimit",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "lem-kun-zn-sheaf-invertible-orders",
+  "lem-kun-0f1c",
+  "lem-kun-sep-closure-conservative",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-kun-0eys",
+  "def-kun-bc-property",
+  "lem-kun-unbounded-exchange-agrees",
+  "def-weil-pbc-hypercohomology-filtrations",
+  "lem-kun-bc-map-on-cohomology",
+  "lem-kun-0f1d",
+  "lem-kun-0f1i-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1i.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1777,
+ "blueprint_uses": [
+  "def-kun-bc-property",
+  "def-kun-separably-closed",
+  "def-kun-torsion-invertible",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-hypercohomology-filtrations",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-0eys",
+  "lem-kun-0f1c",
+  "lem-kun-0f1d",
+  "lem-kun-0f1i-normal",
+  "lem-kun-bc-base-change",
+  "lem-kun-bc-map-on-cohomology",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-kun-invertible-orders-colimit",
+  "lem-kun-sep-closure-conservative",
+  "lem-kun-stalk-faithful-derived",
+  "lem-kun-unbounded-exchange-agrees",
+  "lem-kun-zn-sheaf-invertible-orders",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "uses_not_cited": [
+  "def-kun-separably-closed",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "labels"
+}

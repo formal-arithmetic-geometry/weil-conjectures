@@ -1,0 +1,80 @@
+{
+ "id": "thm-pc-criterion",
+ "kind": "statement",
+ "title": "The representability criterion",
+ "statement": "(Picard Schemes of Curves, Lemma 44.5.1, Tag\n[0B9Q](https://stacks.math.columbia.edu/tag/0B9Q).)\nLet $k$ be a field and let\n$G:(\\mathit{Sch}/k)^{\\mathrm{op}}\\to\\textit{Groups}$ be a functor. With the\nterminology of\nDefinition [def-pc-subfunctor], assume:\n\n1. **(1)** $G$ satisfies the sheaf property for the Zariski topology ([def-pc-zariski-sheaf-property]);\n1. **(2)(a)** there exists a subfunctor $F\\subseteq G$ such that $F$ is\nrepresentable;\n1. **(2)(b)** $F\\subseteq G$ is representable by open immersions ([def-pc-open-subfunctor]);\n1. **(2)(c)** for every field extension $K$ of $k$ and every\n$g\\in G(K)$ there exists $g'\\in G(k)$ such that $g'g\\in F(K)$.\n\nThen $G$ is representable by a group scheme over $k$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-criterion/thm-pc-criterion.md",
+  "place": "node thm-pc-criterion, order 835",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0B9Q"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-subfunctor",
+  "def-pc-zariski-sheaf-property",
+  "def-pc-open-subfunctor"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pc-schemes-criterion] with $S=\\operatorname{Spec}(k)$ and $I=G(k)$: for\n$i=g'\\in I$ let $F_i\\subseteq G$ be the subfunctor\n\n$$\nF_i(T):=\\{g\\in G(T):g'g\\in F(T)\\}.\n$$",
+   "uses": [
+    "lem-pc-schemes-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Then $F_i\\cong F$ via multiplication by $g'$ (a natural isomorphism\nbecause $G$ is a functor with values in groups), so $F_i$ is\nrepresentable by (2)(a), and $F_i\\subseteq G$ is representable by open\nimmersions: the map $F_i\\to G$ is isomorphic (via multiplication by\n$g'$) to the inclusion $F\\to G$ of (2)(b), and the base change of a\nnatural isomorphism is a natural isomorphism. The family\n$(F_i)_{i\\in I}$ covers $G$ ([def-pc-cover]): given $g\\in G(T)$, for each point $t\\in T$\nlet $\\kappa=\\kappa(t)$ and let $j:\\operatorname{Spec}\\kappa\\to T$; by (2)(c) applied to\n$j^*g\\in G(\\kappa)$ there is $g'\\in G(k)$ with\n$g'j^*g\\in F(\\kappa)$, i.e. $j^*g\\in F_{g'}(\\kappa)$. By (2)(b) (the\nopen-immersion property for the pair $(T,\\xi)$ with $\\xi=g$, in the sense\nof [def-pc-subfunctor]) there is an open\n$U_\\xi^{g'}\\subseteq T$ such that a morphism $u:T'\\to T$ factors through\n$U_\\xi^{g'}$ iff $u^*g\\in F_{g'}(T')$; taking $T'=\\operatorname{Spec}\\kappa$ with\n$j$ and noting that $j$ factors through the open $U$ iff the image point\n$t$ lies in $U$, we find $t\\in U_g^{g'}$ for the suitable $g'$, so the\nopen sets $U_g^{g'}$ ($g'\\in G(k)$) cover $T$, and\n$g|_{U_g^{g'}}\\in F_{g'}(U_g^{g'})$ by the criterion. This verifies\n(2)(c) of [lem-pc-schemes-criterion] (in the form of the covering\ncondition [def-pc-subfunctor]), while (2)(a), (2)(b) for the family\n$(F_i)$ are what we just proved and (1) is the hypothesis; hence $G$ is\nrepresentable by a scheme. As $G$ takes values in groups and the\nrepresenting object is unique up to unique isomorphism, the group\nstructure on $G$ makes it a group scheme (the group-valued sheaf\nstructure is given; see the usual Yoneda argument, cf. [def-pc-representable-functor]).",
+   "uses": [
+    "def-pc-cover",
+    "def-pc-subfunctor",
+    "lem-pc-schemes-criterion",
+    "def-pc-representable-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-schemes-criterion",
+  "def-pc-cover",
+  "def-pc-subfunctor",
+  "def-pc-representable-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-criterion/thm-pc-criterion.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 835,
+ "blueprint_uses": [
+  "def-pc-cover",
+  "def-pc-open-subfunctor",
+  "def-pc-representable-functor",
+  "def-pc-subfunctor",
+  "def-pc-zariski-sheaf-property",
+  "lem-pc-schemes-criterion"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Picard.Representability",
+  "declaration": "AlgebraicGeometry.isRepresentable_of_representable_open_subfunctor",
+  "branch": "slopmaster2",
+  "line": 256,
+  "sorry_free": true,
+  "body_lines": 69
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.isRepresentable_of_representable_open_subfunctor"
+ ],
+ "proof_split_by": "paragraphs"
+}

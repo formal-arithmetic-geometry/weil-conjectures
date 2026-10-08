@@ -1,0 +1,107 @@
+{
+ "id": "lem-pc-perfect-locus",
+ "kind": "statement",
+ "title": "The perfect locus with fixed degree",
+ "statement": "Let $X$ be a scheme and let $E\\in D(\\mathcal{O}_X)$ be\nperfect. Given $i,r\\in\\mathbb{Z}$ there is\nan open subscheme $U\\subseteq X$ characterized by the property: a\nmorphism $f:Y\\to X$ factors through $U$ if and only if $Lf^*E$ is\nisomorphic to a locally free $\\mathcal{O}_Y$-module of rank $r$ placed in\ndegree $i$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "node lem-pc-perfect-locus, order 681"
+ },
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-invertible-in-degree-zero",
+  "def-pc-morphism-conventions"
+ ],
+ "proof": [
+  {
+   "text": "If $r<0$, take $U=\\varnothing$. Otherwise let $x\\in X$. By\n[def-pc-perfect-complex], near $x$ the object $E$ is represented\nby a bounded complex $M^\\bullet$ of finite free modules: the finitely\nmany projective terms can all be made free after shrinking.\nOver the local ring $\\mathcal O_{X,x}$, if a matrix of a differential\nhas a unit entry, row and column operations put that entry in a\n$1\\times1$ identity block. The equations $d^{j+1}d^j=0$ and\n$d^jd^{j-1}=0$ force the adjacent maps into and out of this block\nto be zero. Hence a contractible two-term summand splits off.\nEach operation decreases the sum of the ranks of the terms by two,\nso after finitely many operations the remaining complex has every\ndifferential matrix in the maximal ideal.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Its residue-field differential is zero. Therefore, if\n$H^j(E\\otimes^{\\mathbf L}\\kappa(x))$ vanishes for $j\\ne i$ and\nhas dimension $r$ in degree $i$, the remaining free terms have\nrank zero except in degree $i$, where the rank is $r$.\nAll the changes of bases and the inverses of unit entries used in\nthis finite calculation are defined on an open neighbourhood of\n$x$. On that neighbourhood $E$ is consequently quasi-isomorphic\nto $\\mathcal O^{\\oplus r}[-i]$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Define $U$ to be the set of points satisfying this residue-field\ncohomology condition. The preceding construction proves that $U$\nis open and that $E|_U$ is locally a free rank-$r$ module in degree\n$i$. Such local descriptions agree on overlaps through the\ncohomology sheaf $H^i(E)|_U$, which is therefore locally free of\nrank $r$, with $E|_U\\simeq H^i(E)|_U[-i]$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "If $f:Y\\to X$ factors through $U$, these finite free descriptions\npull back to show that $Lf^*E$ has the required form. Conversely,\nif $Lf^*E$ has that form, for any $y\\in Y$ with image $x$ its\nderived fibre equals\n$(E\\otimes^{\\mathbf L}\\kappa(x))\\otimes_{\\kappa(x)}\\kappa(y)$.\nExtension of fields is faithfully flat and preserves dimensions,\nso $x$ satisfies exactly the defining condition of $U$. Thus the\nimage of $f$ is contained in $U$, which is equivalent to factoring\nthrough that open subscheme.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "long_proof_few_deps",
+  "lean_multiple",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 681,
+ "blueprint_uses": [
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-invertible-in-degree-zero",
+  "def-pc-morphism-conventions",
+  "def-pc-perfect-complex"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isOpen_setOf_hFiber_le",
+  "branch": "slopmaster2",
+  "line": 761,
+  "sorry_free": true,
+  "body_lines": 17,
+  "others": [
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_restrict",
+    "branch": "slopmaster2",
+    "line": 903,
+    "sorry_free": true,
+    "body_lines": 6
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_higherDirectImage_restrict",
+    "branch": "slopmaster2",
+    "line": 959,
+    "sorry_free": true,
+    "body_lines": 6
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.Modules.isOpen_setOf_hFiber_le",
+  "AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_restrict",
+  "AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_higherDirectImage_restrict"
+ ],
+ "uses_not_cited": [
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-invertible-in-degree-zero",
+  "def-pc-morphism-conventions"
+ ],
+ "proof_split_by": "paragraphs"
+}

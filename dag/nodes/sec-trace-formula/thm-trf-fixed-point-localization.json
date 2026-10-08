@@ -1,0 +1,123 @@
+{
+ "id": "thm-trf-fixed-point-localization",
+ "kind": "statement",
+ "title": "Fixed-point localization",
+ "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, $A=A_{E,n}$, put $s=\\Spec k$, and let $X$ be a\nproper finite-type scheme.\nLet $c=(c_1,c_2):C\\to X\\times_sX$ be an\nadmissible\ncohomological correspondence with\n$c_2$ proper and with\nfixed scheme\n$F=\\operatorname{Fix}(c)$ proper over $s$. For\n$K\\in D^b_{ctf}(X,A)$, the\ncategorical trace of the\nglobal operator equals the integral of\nthe trace class:\n\n$$\n\\operatorname{tr}_A\\bigl(T_c(u)\\mid R\\Gamma_c(X,K)\\bigr)\n=\\int_F\\operatorname{Tr}_c(u)\n\\quad\\text{in }A,\n$$\n\nwhere $T_c(u)$ is the global operator of\n[def-trf-global-operator], $\\operatorname{Tr}_c(u)$ the trace class\nof [def-trf-trace-class], and $\\int_F$ the integration of\n[def-trf-integration].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
+  "place": "node thm-trf-fixed-point-localization, order 2346"
+ },
+ "stmt_deps": [
+  "def-trf-global-operator",
+  "def-trf-trace-class",
+  "def-trf-integration",
+  "def-trf-admissibility",
+  "def-trf-categorical-trace",
+  "def-trf-coefficient-conventions",
+  "def-trf-correspondence",
+  "def-trf-fixed-scheme",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "All morphisms below are separated and of finite type between separated\nfinite-type $k$-schemes, hence exceptionally admissible at the finite\nstage ([thm-sf-preservation-class]).",
+   "uses": [
+    "thm-sf-preservation-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The pushforward to the point.* Since $a_C=a_Xc_2$ with $a_X$ and $c_2$\nproper, $C$ is proper over $s$, and $a_C=a_Xc_1$ as well. Let\n$b=(\\operatorname{id}_s,\\operatorname{id}_s):s\\to s\\times_ss$ be the\npoint correspondence. Then $(f,g)=(a_X,a_C):(C,c)\\to(s,b)$ is a proper\npushforward diagram of [def-trf-coefficient-pushforward]\n($b_ig=a_C=a_Xc_i$). Its fixed scheme is $\\operatorname{Fix}(b)=s$, and\nthe induced map of fixed schemes is the structure morphism\n$h=a_F:F\\to s$. Put $K'=Ra_{X*}K$; since $a_X$ is proper,\n$Ra_{X*}=Ra_{X!}$ ([prop-functor-package], clause (3)), so\n$K'=R\\Gamma_c(X,K)$, a perfect $A$-complex by\n[prop-trf-compact-support-perfectness].",
+   "uses": [
+    "def-trf-coefficient-pushforward",
+    "prop-functor-package",
+    "prop-trf-compact-support-perfectness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The pushed coefficient map is the global operator.* In\n[def-trf-coefficient-pushforward], the ordinary half $\\gamma$ is the unit\n$\\eta_{a_C}$ followed by $Ra_{C*}c_2^*\\varepsilon_{a_X}$. Because\n$a_C=a_Xc_2$, the unit $\\eta_{a_C}$ is $\\eta_{a_X}$ followed by\n$Ra_{X*}\\eta_{c_2}a_X^*$, and the triangle identity\n$(Ra_{X*}\\varepsilon_{a_X})\\circ(\\eta_{a_X}Ra_{X*})=\\operatorname{id}$ of\n[fix-prop-adjunctions] cancels the counit; hence\n$\\gamma=Ra_{X*}\\eta_{c_2}$, followed by $Ra_{X*}Rc_{2*}=Ra_{C*}$ and\n$Rc_{2*}=Rc_{2!}$. These are the first two arrows of\n[def-trf-global-operator]. For $b_1=\\operatorname{id}_s$ the exceptional\nadjoint in the exceptional half is the identity, so $\\delta$ is the\ncomposition isomorphism $\\Xi_1$ of [thm-sf-comp-composition] followed by\n$Ra_{X!}\\varepsilon_{c_1}$, which are the last two arrows of\n[def-trf-global-operator]. Therefore\n\n$$\n[a_X,a_C]_!u=T_c(u):R\\Gamma_c(X,K)\\longrightarrow R\\Gamma_c(X,K)\n$$\n\nas an endocorrespondence of $K'$ with support $s$.",
+   "uses": [
+    "def-trf-coefficient-pushforward",
+    "fix-prop-adjunctions",
+    "def-trf-global-operator",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Proper pushforward compatibility.* By\n[thm-trf-trace-proper-compatibility],\n\n$$\n(a_F)_*\\operatorname{Tr}_c(u)=\\operatorname{Tr}_b\\bigl(T_c(u)\\bigr)\n\\qquad\\text{in }\\operatorname{Hom}(A_s,\\omega_s)=A .\n$$\n\nSince $F$ is proper over $s$, the left side is the integral\n$\\int_F\\operatorname{Tr}_c(u)$ by [lem-trf-integration-as-pushforward].",
+   "uses": [
+    "thm-trf-trace-proper-compatibility",
+    "lem-trf-integration-as-pushforward"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Point normalization.* The correspondence $b$ is the diagonal of $s$, so\nby [lem-trf-trace-class-diagonal-pairing] the trace class\n$\\operatorname{Tr}_b(T_c(u))$ is the supported pairing\n$\\langle T_c(u),1_{K'}\\rangle_{\\mathrm{LV}}$, and by\n[prop-trf-pairing-point-normalization], applied to the perfect complex\n$P=K'$ with $u=T_c(u)$ and $v=1_{K'}$, this pairing is\n$\\operatorname{tr}_A(T_c(u)\\mid R\\Gamma_c(X,K))$. Combining the three\ndisplays gives\n\n$$\n\\operatorname{tr}_A\\bigl(T_c(u)\\mid R\\Gamma_c(X,K)\\bigr)\n=\\int_F\\operatorname{Tr}_c(u).\n$$",
+   "uses": [
+    "lem-trf-trace-class-diagonal-pairing",
+    "prop-trf-pairing-point-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-sf-preservation-class",
+  "def-trf-coefficient-pushforward",
+  "prop-functor-package",
+  "prop-trf-compact-support-perfectness",
+  "fix-prop-adjunctions",
+  "def-trf-global-operator",
+  "thm-sf-comp-composition",
+  "thm-trf-trace-proper-compatibility",
+  "lem-trf-integration-as-pushforward",
+  "lem-trf-trace-class-diagonal-pairing",
+  "prop-trf-pairing-point-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2346,
+ "blueprint_uses": [
+  "def-trf-admissibility",
+  "def-trf-categorical-trace",
+  "def-trf-coefficient-conventions",
+  "def-trf-coefficient-pushforward",
+  "def-trf-correspondence",
+  "def-trf-fixed-scheme",
+  "def-trf-global-operator",
+  "def-trf-integration",
+  "def-trf-trace-class",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "fix-prop-adjunctions",
+  "lem-trf-integration-as-pushforward",
+  "lem-trf-trace-class-diagonal-pairing",
+  "prop-functor-package",
+  "prop-trf-compact-support-perfectness",
+  "prop-trf-pairing-point-normalization",
+  "thm-sf-comp-composition",
+  "thm-sf-preservation-class",
+  "thm-trf-trace-proper-compatibility"
+ ],
+ "uses_not_cited": [
+  "def-trf-admissibility",
+  "def-trf-categorical-trace",
+  "def-trf-coefficient-conventions",
+  "def-trf-correspondence",
+  "def-trf-fixed-scheme",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "labels"
+}

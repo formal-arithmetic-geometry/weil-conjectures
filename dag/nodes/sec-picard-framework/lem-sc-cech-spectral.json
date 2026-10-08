@@ -1,0 +1,59 @@
+{
+ "id": "lem-sc-cech-spectral",
+ "kind": "statement",
+ "title": "The Cech-to-cohomology spectral sequence",
+ "statement": "Let $X$ be a scheme, $\\mathfrak U=\\{U_i\\to X\\}$ an etale covering\n(or any covering of a site; we apply the statement below also to the\nZariski site), and $F$ an abelian sheaf on $X_{\\Et}$. There is\na convergent spectral sequence\n\n$$\nE_2^{pq}=\\check H^p(\\mathfrak U,\\underline H^q(F))\n\\Longrightarrow H^{p+q}(X_{\\Et},F),\n$$\n\nwhere $\\underline H^q(F)$ is the presheaf\n$V\\mapsto H^q(V_{\\Et},F)$ and $\\check H^p(\\mathfrak U,-)$ is\nCech cohomology with respect to the covering $\\mathfrak U$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/lem-sc-cech-spectral.md",
+  "place": "node lem-sc-cech-spectral, order 600"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Choose an injective resolution $F\\to I^{\\bullet}$ and consider the\ndouble complex $C^{pq}:=C^p(\\mathfrak U,I^q)$, where\n$C^p(\\mathfrak U,-)$ is the (alternating) Cech complex of the\ncovering $\\mathfrak U$. Its cohomology in the first direction is\n$C^p(\\mathfrak U,\\underline H^q(F))$, because taking cohomology\ncommutes with the finite direct products defining the Cech complex;\nso the first spectral sequence of the double complex\n[thm-sp-double-complex-spectral-sequences] has\n\n$$\nE_1^{pq}=C^p(\\mathfrak U,\\underline H^q(F)),\\qquad\nE_2^{pq}=\\check H^p(\\mathfrak U,\\underline H^q(F)).\n$$",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The total complex of $C^{\\bullet\\bullet}$ computes\n$H^{p+q}(X_{\\Et},F)$: for each $q$, the complex\n$C^{\\bullet}(\\mathfrak U,I^q)$ is the Cech resolution of the\ninjective sheaf $I^q$, and an injective sheaf is acyclic for Cech\ncohomology with respect to every covering (the Cech complex of a\ncovering applied to an injective sheaf computes its cohomology,\nwhich vanishes in positive degrees by injectivity), so the natural\nmap from the complex $F\\to I^{\\bullet}$ to the total complex is a\nquasi-isomorphism, and the total cohomology is the hypercohomology\n$H^{p+q}(X_{\\Et},F)$. This is the first spectral sequence of\na double complex, which converges to the cohomology of the total\ncomplex by [thm-sp-double-complex-spectral-sequences] (*reference: Stacks Project, Homological\nAlgebra: spectral sequences of double complexes*).",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/lem-sc-cech-spectral.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 600,
+ "blueprint_uses": [
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech",
+  "declaration": "CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence",
+  "branch": "slopmaster2",
+  "line": 72,
+  "sorry_free": false,
+  "body_lines": 1
+ },
+ "blueprint_lean": [
+  "CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence"
+ ],
+ "proof_split_by": "paragraphs"
+}

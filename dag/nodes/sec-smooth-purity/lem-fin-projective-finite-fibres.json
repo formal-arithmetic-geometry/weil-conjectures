@@ -1,0 +1,85 @@
+{
+ "id": "lem-fin-projective-finite-fibres",
+ "kind": "statement",
+ "title": "Projective morphisms with finite fibres are finite",
+ "statement": "Let $f:D\\to T$ be a\nprojective morphism with\nNoetherian target.\nIf every geometric fibre has only finitely many points, then $f$\nis finite.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-projective-finite-fibres.md",
+  "place": "node lem-fin-projective-finite-fibres, order 1596"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Fix $t\\in T$. By [def-pc-projective-morphism], after\nrestriction to an affine neighbourhood\n$T_0=\\operatorname{Spec}A$ of $t$, choose a closed immersion\n$D_{T_0}\\hookrightarrow\\mathbf P^N_A$.\nWrite $\\mathfrak p$ for the prime of $A$ corresponding to $t$,\nand put $\\kappa=\\kappa(t)$.",
+   "uses": [
+    "def-pc-projective-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fibre $D_t$ is a finite $\\kappa$-scheme. Here finiteness\nfollows directly from the fibre hypothesis: a positive-dimensional\nfinite-type scheme over an algebraically closed field has infinitely\nmany closed points, by Noether normalization on a positive-dimensional\naffine component. Thus $D_t$ is zero-dimensional. Its finitely\nmany points are all closed, so its topology is discrete. Each point\nhas an affine neighbourhood, which can be restricted to that\nsingleton. Its Noetherian zero-dimensional local ring is Artinian.\nIts residue field is finite over $\\kappa$ by Zariski's lemma, and\nits finite filtration by powers of the maximal ideal has finite\ndimensional residue-field quotients. Consequently this local ring\nis a finite dimensional $\\kappa$-algebra. Taking the finite\ndisjoint union proves that $D_t$ is affine and finite over $\\kappa$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Let $I_t$ be the coherent ideal of\n$D_t\\hookrightarrow\\mathbf P^N_\\kappa$.\nFor all sufficiently large $m>0$,\n[lem-pc-projective-space-serre-vanishing] gives\n$H^1(\\mathbf P^N_\\kappa,I_t(m))=0$. The ideal exact sequence,\nwith the twist of [def-pc-projective-space-twist], therefore\ngives a surjection\n\n$$\nH^0(\\mathbf P^N_\\kappa,\\mathcal O(m))\n\\longrightarrow H^0(D_t,\\mathcal O(m)|_{D_t}).\n$$",
+   "uses": [
+    "lem-pc-projective-space-serre-vanishing",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An invertible module over the Artinian ring of $D_t$ is free\nof rank one on each local factor, hence free of rank one on the\nproduct. Choose a generator of $\\mathcal O(m)|_{D_t}$, and\nlift it by this surjection to a homogeneous polynomial $P_t$.\nIf $D_t$ is empty, take any homogeneous polynomial of positive\ndegree instead. In both cases $P_t$ has no zero on $D_t$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The finitely many coefficients of $P_t$ belong to\n$\\kappa=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$.\nLift them to $A_{\\mathfrak p}$ and clear their finitely many\ndenominators, all of which lie outside $\\mathfrak p$.\nThis gives $a\\notin\\mathfrak p$ and a homogeneous polynomial\n$P$ over $A_a$ restricting to $P_t$.\nThe closed subscheme\n\n$$\nE=D_{A_a}\\cap V_+(P)\\subseteq\\mathbf P^N_{A_a}\n$$\n\nis projective, hence proper by [lem-pc-projective-proper].\nIts image in $\\operatorname{Spec}A_a$ is closed by\n[lem-weil-pbc-proper-closed-image], and does not contain $t$.\nChoose a principal affine neighbourhood $V$ of $t$ inside\nthe complement of that image. Then $D_V$ is contained in the\nstandard affine open $D_+(P)$ of projective space over $V$.\nIt is closed in that affine open, and is therefore affine.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-weil-pbc-proper-closed-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The morphism $D_V\\to V$ is still projective. Apply the\nalready proved [lem-pc-projective-coherent-finiteness] to\n$\\mathcal O_{D_V}$: the coordinate algebra\n$\\Gamma(D_V,\\mathcal O_{D_V})$ is a finite module over the\ncoordinate ring of $V$. Thus $D_V\\to V$ is finite by\n[def-weil-pbc-scheme-conventions].\nEvery $t$ has such a neighbourhood. The affine-local\ncriterion for finiteness in the same definition proves that\n$f$ is finite.",
+   "uses": [
+    "lem-pc-projective-coherent-finiteness",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-morphism",
+  "lem-pc-projective-space-serre-vanishing",
+  "def-pc-projective-space-twist",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-pc-projective-coherent-finiteness",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-projective-finite-fibres.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1596,
+ "blueprint_uses": [
+  "def-pc-projective-morphism",
+  "def-pc-projective-space-twist",
+  "def-weil-pbc-scheme-conventions",
+  "lem-pc-projective-coherent-finiteness",
+  "lem-pc-projective-proper",
+  "lem-pc-projective-space-serre-vanishing",
+  "lem-weil-pbc-proper-closed-image"
+ ],
+ "proof_split_by": "paragraphs"
+}

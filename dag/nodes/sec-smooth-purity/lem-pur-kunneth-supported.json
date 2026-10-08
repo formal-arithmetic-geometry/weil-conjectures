@@ -1,0 +1,98 @@
+{
+ "id": "lem-pur-kunneth-supported",
+ "kind": "statement",
+ "title": "Kunneth for cohomology with closed support",
+ "statement": "Let $k$ be the algebraically closed field of\n[def-weil-finite-field-fiber], put\n$A=\\mathcal O_E/\\varpi_E^n$, and let $Z\\subset X,W\\subset Y$\nbe closed subschemes of\nseparated finite-type\n$k$-schemes.\nLet $K\\in D^b(X_{\\mathrm{et}},A)$ and\n$L\\in D^b(Y_{\\mathrm{et}},A)$ be\nbounded complexes,\nwith $L$ of\nfinite Tor amplitude.\nThen the supported\nexterior product is an isomorphism:\n\n$$\n\\kappa^{Z,W}_{K,L}:\nR\\Gamma_Z(X,K)\\otimes_A^LR\\Gamma_W(Y,L)\n\\xrightarrow{\\ \\sim\\ }\nR\\Gamma_{Z\\times W}(X\\times_kY,K\\boxtimes_A^L L).\n$$\n\nHere $R\\Gamma_Z,R\\Gamma_W$ are the\nderived support functors.\nThe assertion also holds for the pro-etale realizations of these\ncomplexes equipped with\netale-origin witnesses.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-kunneth-supported.md",
+  "place": "node lem-pur-kunneth-supported, order 1939"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-kun-tor-amplitude",
+  "def-pur-support-cohomology",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Put $U=X\\setminus Z$, $V=Y\\setminus W$ and\n$F=K\\boxtimes_A^L L$.\nFinite Tor amplitude makes $F$ and its restrictions bounded below.\nApply [lem-pur-support-restriction-triangle] on $Y$ with\n$B=Y,C=W$, and tensor its triangle with $R\\Gamma(X,K)$.\nCompare it with the support triangle on $X\\times Y$ for\n$X\\times W$. The ordinary Kunneth maps on $X\\times Y$ and\n$X\\times V$ are isomorphisms by\n[lem-pur-ordinary-kunneth-finite-ring].\nThey commute with restriction because both maps pull back and\ntensor the two sections ([lem-kun-kunneth-map-natural]). The induced map of the first terms is\ntherefore an isomorphism:\n\n$$\nR\\Gamma(X,K)\\otimes_A^LR\\Gamma_W(Y,L)\n\\xrightarrow{\\sim}R\\Gamma_{X\\times W}(X\\times Y,F).\n$$",
+   "uses": [
+    "lem-pur-support-restriction-triangle",
+    "lem-pur-ordinary-kunneth-finite-ring",
+    "lem-kun-kunneth-map-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The same argument with $U$ in place of $X$ gives\n\n$$\nR\\Gamma(U,K|_U)\\otimes_A^LR\\Gamma_W(Y,L)\n\\xrightarrow{\\sim}R\\Gamma_{U\\times W}(U\\times Y,F|_{U\\times Y}).\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Next apply [lem-pur-support-restriction-triangle] with\n$T=X\\times Y$, $B=X\\times W$, $C=Z\\times Y$, and\nopen complement $U\\times Y$.\nCompare this triangle with the support triangle for $Z\\subset X$\ntensored with $R\\Gamma_W(Y,L)$.\nThe second and third terms are identified by the preceding two\nisomorphisms. Exactness of derived tensor from\n[def-kun-derived-tensor] and the long exact cohomology\nsequences show that the first-term map is an isomorphism.\nOn the injective support-resolution model, this map sends the\ntensor of two supported sections to their exterior product; hence\nit is the map of [def-pur-supported-exterior-product].\nThis also proves its naturality and compatibility with restriction.",
+   "uses": [
+    "lem-pur-support-restriction-triangle",
+    "def-kun-derived-tensor",
+    "def-pur-supported-exterior-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the pro-etale assertion, the exact comparison functor in\n[thm-weil-pbc-site-comparison] commutes with pullback by\n[lem-weil-pbc-comparison-pullback].\nIt also preserves derived sections and the open direct images by\n[prop-weil-pbc-comparison-direct-image].\nConsequently the ordinary localization triangles\n$R\\Gamma_Z(X,K)\\to R\\Gamma(X,K)\\to R\\Gamma(U,K|_U)$\nand their product diagrams identify the etale and pro-etale\nsupport objects for the specified witnesses.\nTensor and the two counits are transported as well, so the\nresulting supported exterior-product map is the pro-etale map.\nTransporting the proved isomorphism establishes the assertion.",
+   "uses": [
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-comparison-pullback",
+    "prop-weil-pbc-comparison-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-support-restriction-triangle",
+  "lem-pur-ordinary-kunneth-finite-ring",
+  "lem-kun-kunneth-map-natural",
+  "def-kun-derived-tensor",
+  "def-pur-supported-exterior-product",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-comparison-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-kunneth-supported.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1939,
+ "blueprint_uses": [
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "def-pur-support-cohomology",
+  "def-pur-supported-exterior-product",
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-scheme-morphism-properties",
+  "lem-kun-kunneth-map-natural",
+  "lem-pur-ordinary-kunneth-finite-ring",
+  "lem-pur-support-restriction-triangle",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-comparison-direct-image",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "uses_not_cited": [
+  "def-kun-tor-amplitude",
+  "def-pur-support-cohomology",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs"
+}

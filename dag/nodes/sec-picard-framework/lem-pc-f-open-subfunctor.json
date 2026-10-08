@@ -1,0 +1,86 @@
+{
+ "id": "lem-pc-f-open-subfunctor",
+ "kind": "statement",
+ "title": "$F$ is an open subfunctor",
+ "statement": "(Picard Schemes of Curves, Lemma 44.6.2, Tag\n[0B9V](https://stacks.math.columbia.edu/tag/0B9V).)\nLet $k$ be a field, let $X$ be a\nsmooth projective curve over\n$k$ with a $k$-rational point $\\sigma$, and let\n$F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ be the\nsubfunctor\n\n$$\nF(T):=\\{\\mathcal{L}\\in\\operatorname{Pic}_{X/k,\\sigma}(T):Rf_{T,*}\\mathcal{L}\\text{ is isomorphic to an\ninvertible }\\mathcal{O}_T\\text{-module placed in degree }0\\}.\n$$\n\nThen $F$ is a subfunctor of $\\operatorname{Pic}_{X/k,\\sigma}$ and the inclusion\n$F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ is\nrepresentable by open immersions.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-lem-picard-f-open/lem-pc-f-open-subfunctor.md",
+  "place": "node lem-pc-f-open-subfunctor, order 824",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0B9V"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-f-subfunctor",
+  "def-pc-pic-sigma-functor"
+ ],
+ "proof": [
+  {
+   "text": "$F$ is a subfunctor: if $\\mathcal{L}\\in F(T)$ and $u:T'\\to T$ is a morphism, then\n$\\mathcal{L}_{T'}=u_X^*\\mathcal{L}$ satisfies\n$Rf_{T',*}\\mathcal{L}_{T'}\\cong Lu^*(Rf_{T,*}\\mathcal{L})$ (base change, [lem-pc-rf-base-change-flat-module];\nthe morphism $f_T:X_T\\to T$ is proper of finite presentation, being the\nbase change of $X\\to\\operatorname{Spec} k$, and $\\mathcal{L}$ is of finite presentation and\nflat over $T$: $\\mathcal{L}$ is locally free, $f_T$ is smooth hence flat\n[lem-pc-smooth-flat], and flat morphisms compose, so $\\mathcal{L}$ is flat\nover $T$), so $Rf_{T',*}\\mathcal{L}_{T'}\\cong u^*\\mathcal{N}[0]\\cong(u^*\\mathcal{N})[0]$ with\n$u^*\\mathcal{N}$ invertible, i.e. $\\mathcal{L}_{T'}\\in F(T')$.",
+   "uses": [
+    "lem-pc-rf-base-change-flat-module",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "It remains to verify the open-immersion property of\n[def-pc-subfunctor]. Apply [lem-pc-flat-rf-open] with\n$f=f_T:X_T\\to T$, $\\mathcal{F}=\\mathcal{L}$, $i=0$, $r=1$: there is an open $U\\subseteq T$\nsuch that a morphism $u:T'\\to T$ factors through $U$ if and only if\n$Rf_{T',*}\\mathcal{L}_{T'}$ is isomorphic to a finite locally free\n$\\mathcal{O}_{T'}$-module of rank $1$ placed in degree $0$, i.e. if and only if\n$u^*\\mathcal{L}\\in F(T')$ (a finite locally free module of rank $1$ is an\ninvertible module, [def-sc-invertible-module]). Taking $U=U_\\xi$\nfor $\\xi=\\mathcal{L}$ gives exactly the property required.",
+   "uses": [
+    "def-pc-subfunctor",
+    "lem-pc-flat-rf-open",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-rf-base-change-flat-module",
+  "lem-pc-smooth-flat",
+  "def-pc-subfunctor",
+  "lem-pc-flat-rf-open",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-lem-picard-f-open/lem-pc-f-open-subfunctor.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 824,
+ "blueprint_uses": [
+  "def-pc-derived-category",
+  "def-pc-f-subfunctor",
+  "def-pc-pic-sigma-functor",
+  "def-pc-subfunctor",
+  "def-sc-invertible-module",
+  "lem-pc-flat-rf-open",
+  "lem-pc-rf-base-change-flat-module",
+  "lem-pc-smooth-flat"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Picard.Representability",
+  "declaration": "AlgebraicGeometry.isOpenImmersion_picardFunctorInvertibleDirectImage_ι",
+  "branch": "slopmaster2",
+  "line": 214,
+  "sorry_free": true,
+  "body_lines": 3
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.isOpenImmersion_picardFunctorInvertibleDirectImage_ι"
+ ],
+ "uses_not_cited": [
+  "def-pc-derived-category",
+  "def-pc-f-subfunctor",
+  "def-pc-pic-sigma-functor"
+ ],
+ "proof_split_by": "paragraphs"
+}

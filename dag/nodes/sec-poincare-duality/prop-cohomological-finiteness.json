@@ -1,0 +1,134 @@
+{
+ "id": "prop-cohomological-finiteness",
+ "kind": "statement",
+ "title": "Compact-support finiteness and Frobenius",
+ "statement": "Fix the finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, choose a prime $\\ell\\neq p$, write\n$\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of $\\Ql$, and\nchoose a finite extension $E/\\Ql$ contained in $\\Qlb$. Let $Y_0$ be a\nseparated finite-type\n$k_0$-scheme, put $Y=Y_0\\times_{k_0}k$, and choose\n$K\\in D^b_{c,\\mathrm W}(Y,E)$, a\nWeil complex. Write $E_Y$ for the constant\nWeil sheaf. Then the\n$E$-coefficient abbreviations mean\n$H^i(Y,E)=H^i(Y,E_Y)$ and $H_c^i(Y,E)=H_c^i(Y,E_Y)$. The\nordinary and compact-support\ncohomology groups, in particular $H_c^i(Y,K)$ meaning\n$H_c^i(Y,\\operatorname{For}K)$, are finite-dimensional, vanish outside a\nfinite interval, and carry the\ngeometric Frobenius\nautomorphism. If $Y_0$ is\nproper, the\ncanonical isomorphism\n\n$$\nH_c^i(Y,K)\\xrightarrow{\\sim}H^i(Y,K)\n$$\n\nis Frobenius-equivariant.\nIf $Y$ has dimension $e\\in\\mathbf Z_{\\geq0}$ and $K=E_Y$ is the\nconstant Weil sheaf, then\n\n$$\nH_c^i(Y,E)=0\\qquad\\text{for }i<0\\text{ or }i>2e.\n$$\n\nFor proper $Y$, the\nordinary cohomology also\nsatisfies $H^i(Y,E)=0$ for $i<0$ or $i>2e$. In\nparticular, if $X_0/\\Fq$ is smooth,\nproper, geometrically connected of pure dimension\n$d\\in\\mathbf Z_{\\geq0}$, and $X=X_0\\times_{\\Fq}k$, then\n\n$$\nH^i(X,\\Ql)=0\\qquad\\text{for }i\\notin[0,2d].\n$$\n\nMoreover, if $Y_0$ is geometrically connected (neither properness nor\nsmoothness is needed), then $H^0(Y,E)\\cong E$, and the\ngeometric Frobenius acts as the\nidentity on this group; in particular $H^0(X,\\Ql)\\cong\\Ql$ with\n$F=\\mathrm{id}$ for every smooth, separated finite-type, geometrically\nconnected $X_0$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+  "place": "node prop-cohomological-finiteness, order 2431"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "*Step 1 (the finite level).* Work with the\nfinite-field datum ([def-weil-finite-field-fiber]) $p,a,q,k_0,k$ of\nthe statement, the\nsmall pro-etale site ([def-weil-pbc-proetale-site]) of $Y$, and\nthe geometric hypotheses ([def-weil-geometric-hypotheses]) imposed on\n$Y_0$. Write $a_Y:Y\\to s=\\Spec k$ for the\nstructure morphism, a\nseparated morphism of finite\ntype ([def-weil-scheme-morphism-properties]) over the field\n$k$ whose geometric fibres ([def-weil-scheme-morphism-properties])\nhave dimension at most $e$, and let\n$\\mathcal R$ be the amplitude interval of the Weil complex $K$. By\n[def-weil-rationalization-karoubi] the $E$-category has the same\nobjects as the derived-complete integral category\n$D^b_c(Y,\\mathcal O_E)$ of [def-weil-derived-complete-integral-detailed];\nchoose an integral model $K_{\\mathcal O}$ of $K$ and let\n$K_n=K_{\\mathcal O}\\otimes^L_{\\mathcal O_E}A_{E,n}\\in D^b_{ctf}(Y,A_{E,n})$ be its finite-level reductions, objects of the\nfinite-torsion\nconstructible category ([def-weil-finite-torsion-constructibility]) forming a uniformly\nbounded tower with common amplitude $\\mathcal R$\n([def-weil-finite-tor-amplitude]).",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-weil-pbc-proetale-site",
+    "def-weil-geometric-hypotheses",
+    "def-weil-scheme-morphism-properties",
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2 (compact-support finiteness at finite level).* Apply\n[prop-finite-compact-support-constructibility] to $a_Y$: there\nare integers $u\\leq v$, depending only on $\\mathcal R$ and on $e$,\nsuch that $Ra_{Y,!,n}K_n\\in D_c^{[u,v]}(s,A_{E,n})$ for every $n$.\nBy [def-weil-finite-coefficient-point] the category\n$D^b_c(s,A_{E,n})$ is $D^b_{\\mathrm{fin}}(A_{E,n})$, so each\n$H^i_c(Y,K_n)$ is a finite $A_{E,n}$-module vanishing outside\n$[u,v]$, and by [def-weil-ordinary-compact-cohomology] these\nmodules are the compact-support cohomology of $Y$ with coefficients in\n$K_n$.",
+   "uses": [
+    "prop-finite-compact-support-constructibility",
+    "def-weil-finite-coefficient-point",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3 (ordinary cohomology at finite level).* By the\nconstructibility clause of [sbc-thm-finiteness-finite-type] the\nsheaves $R^qa_{Y,*}F$ are constructible on $s_{{\\mathrm{et}}}$ for\nevery constructible $A_{E,n}$-sheaf $F$, hence finite at the\ngeometric point $\\bar s$\n([def-weil-finite-coefficient-point]); the fibre is the cohomology\ngroup in the proper case by\n[cor-weil-pbc-geometric-fiber-finite]. The vanishing\n$H^i(Y,F)=0$ for $i>2e$ is\n[fin4-lem-fibrewise-cohomological-dimension], and for $i<0$ it is\nimmediate from the definition of the cohomology groups.",
+   "uses": [
+    "sbc-thm-finiteness-finite-type",
+    "def-weil-finite-coefficient-point",
+    "cor-weil-pbc-geometric-fiber-finite",
+    "fin4-lem-fibrewise-cohomological-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4 (the stage $E$).* The $E$-coefficient cohomology is the\nrationalization of the $\\mathcal O_E$-object\n([def-weil-rationalization-karoubi]); the uniform boundedness of\nStep 2 makes the $\\mathcal O_E$-cohomology finitely generated over the\nNoetherian ring $\\mathcal O_E$, and tensoring along the flat map\n$\\mathcal O_E\\to E$ gives finite-dimensional $E$-vector spaces with\nthe same vanishing range. This is the asserted finiteness,\nboundedness and finite-dimensionality of $H^i_c(Y,K)$ and\n$H^i(Y,K)$.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 5 (Frobenius).* The Weil structure of $K$ is the datum\n$\\varphi_K:Lg_\\gamma^*K\\to K$ of\n[def-weil-weil-sheaf-complex], natural in $K$; transported along\nthe functoriality of the direct image it gives the geometric-Frobenius\nautomorphism of [def-weil-global-geometric-frobenius] on the\nordinary and on the compact-support groups, as asserted.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "def-weil-global-geometric-frobenius"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 6 (the proper case).* If $Y_0$ is proper, then\n$a_Y$ is proper and the canonical comparison\n$R\\Gamma_c(Y,K)\\to R\\Gamma(Y,K)$ of\n[def-weil-ordinary-compact-cohomology] is an isomorphism; it is\nFrobenius-equivariant because both operators are those of Step 5.",
+   "uses": [
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 7 (the constant sheaf).* For $K=E_Y$ Step 2 gives\n$H^i_c(Y,E)=0$ for $i>2e$, with $e=\\dim Y$, and\n[fin4-lem-fibrewise-cohomological-dimension] gives\n$H^i(Y,E)=0$ for $i>2e$; for $i<0$ both vanish by definition, and\nin the proper case Step 6 transfers the statement to $H^i$. The\nspecialisation $Y=X$, $e=d$, $E=\\Ql$ is the vanishing\n$H^i(X,\\Ql)=0$ for $i\\notin[0,2d]$. Finally, if $Y_0$ is\ngeometrically connected then $Y$ is connected, and the constant sheaf is\nthe lisse sheaf of the trivial representation of the fundamental group\n([thm-galois-fundamental],\n[cor-galois-lisse-representations]); its space of invariants is all\nof $E$, so $H^0(Y,E)\\cong E$, and the geometric Frobenius acts\nas the identity on this group, since the Weil structure of the constant\nWeil sheaf is the identity on the constants ([def-weil-weil-sheaf-complex]).\nThis argument uses only the connectedness of $Y$, not properness or\nsmoothness; the case $Y_0=X_0$, $E=\\Ql$ gives $H^0(X,\\Ql)\\cong\\Ql$.",
+   "uses": [
+    "fin4-lem-fibrewise-cohomological-dimension",
+    "thm-galois-fundamental",
+    "cor-galois-lisse-representations",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-proetale-site",
+  "def-weil-geometric-hypotheses",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "prop-finite-compact-support-constructibility",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology",
+  "sbc-thm-finiteness-finite-type",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "fin4-lem-fibrewise-cohomological-dimension",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-global-geometric-frobenius",
+  "thm-galois-fundamental",
+  "cor-galois-lisse-representations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2431,
+ "blueprint_uses": [
+  "cor-galois-lisse-representations",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-geometric-hypotheses",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-pbc-proetale-site",
+  "def-weil-rationalization-karoubi",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-weil-sheaf-complex",
+  "fin4-lem-fibrewise-cohomological-dimension",
+  "prop-finite-compact-support-constructibility",
+  "sbc-thm-finiteness-finite-type",
+  "thm-galois-fundamental"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "labels"
+}

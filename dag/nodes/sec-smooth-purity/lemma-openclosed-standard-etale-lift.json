@@ -1,0 +1,59 @@
+{
+ "id": "lemma-openclosed-standard-etale-lift",
+ "kind": "statement",
+ "title": "Lifting a standard étale algebra along a quotient",
+ "statement": "Let $R$ be a commutative ring and $I\\subseteq R$ an ideal. Recall that a\n*standard étale pair* over a ring $S$ is a pair of polynomials\n$(f,g)$ in $S[T]$ with $f$ monic and $g^n\\in(f',f)$ for some $n$, and that\nits algebra is $S[T][1/g]/(f)$, which is étale over $S$.\n\nLet $(\\bar f,\\bar g)$ be a standard étale pair over $R/I$. Then there is a\nstandard étale pair $(F,H)$ over $R$ and an isomorphism of $R/I$-algebras\n\n$$\n(R/I)\\otimes_R\\bigl(R[T][1/H]/(F)\\bigr)\n\\cong(R/I)[T][1/\\bar g]/(\\bar f).\n$$\n\nIn words: every standard étale algebra over $R/I$ is the base change of a\nstandard étale algebra over $R$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lemma-openclosed-standard-etale-lift.md",
+  "place": "node lemma-openclosed-standard-etale-lift, order 1519"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "No witness of the standard-étale condition is lifted; lifting one naively\ndoes not work, since a lift of the identity witnessing the condition only\nholds modulo $I$. Instead the pair over $R$ is chosen so that the condition\nholds for free, using two observations.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*For a monic $f$ and an arbitrary $g$, the pair $(f,g\\cdot f')$ is\nstandard étale.* Indeed $f'$ divides $(g f')^1$, so the condition\n$g^n\\in(f',f)$ holds with $n=1$ and the witness $(g,0)$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Replacing $g$ by $g\\cdot f'$ does not change the algebra:*\n\n$$\nS[T][1/(g f')]/(f)\\cong S[T][1/g]/(f),\n$$\n\nbecause $f'$ is already invertible in $S[T][1/g]/(f)$ — that is exactly the\nstandard-étale condition for $(f,g)$ — so inverting it again changes\nnothing. Formally, the image of $T$ on either side satisfies the universal\nproperty of the other standard étale algebra, and the two induced maps are\nmutually inverse.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Now lift $\\bar f$ to a monic $F\\in R[T]$ of the same degree, lift $\\bar g$ to\nan *arbitrary* $G\\in R[T]$, and put $H:=G\\cdot F'$. By the first\nobservation $(F,H)$ is a standard étale pair over $R$, and the algebra of a\nstandard étale pair base changes to the algebra of the pair with reduced\ncoefficients. The reduction of $(F,H)$ along $R\\to R/I$ is\n$(\\bar f,\\bar g\\cdot\\bar f')$, whose algebra is $(R/I)[T][1/\\bar g]/(\\bar f)$\nby the second observation. That is the asserted isomorphism.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lemma-openclosed-standard-etale-lift.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1519,
+ "blueprint_uses": [],
+ "lean": {
+  "module": "WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale",
+  "declaration": "Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor",
+  "branch": "slopmaster2",
+  "line": 286,
+  "sorry_free": true,
+  "body_lines": 3
+ },
+ "blueprint_lean": [
+  "Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor"
+ ],
+ "proof_split_by": "paragraphs"
+}

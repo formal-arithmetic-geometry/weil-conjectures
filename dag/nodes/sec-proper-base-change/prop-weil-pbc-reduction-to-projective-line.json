@@ -1,0 +1,96 @@
+{
+ "id": "prop-weil-pbc-reduction-to-projective-line",
+ "kind": "statement",
+ "title": "Reduction of proper base change to $\\mathbf P^1$",
+ "statement": "Assume that $\\mathbf P^1_S\\to S$ satisfies $\\mathrm{PBC}$ in the sense of\n[def-weil-pbc-property] for every scheme $S$. Then every proper morphism of\nschemes satisfies $\\mathrm{PBC}$; no finite-presentation hypothesis is\nneeded, because the Chow factorization [lemma-weil-pbc-chow-factorization]\nholds for every proper morphism over an affine base.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/prop-weil-pbc-reduction-to-projective-line.md",
+  "place": "node prop-weil-pbc-reduction-to-projective-line, order 1204"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-property",
+  "lemma-weil-pbc-chow-factorization",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "By [lemma-weil-pbc-target-locality] the assertion is local on the target, so we\nwork over an affine $Y$, where [lemma-weil-pbc-chow-factorization] supplies $\\pi$, $i_Y$, and\nthe two closed embeddings $i_Y$ and $i_X$ of\n[lem-weil-pbc-projective-embedding]. At every use of composition or\ncancellation below, first convert all $\\mathrm{PBC}$ inputs to $\\mathrm{IA}$,\napply the lemma, and convert back. The projective-space projections $\\mathbf\nP^n_S\\to S$ have $\\mathrm{PBC}$ by\n[lem-weil-pbc-reduction-projective-space]. The Chow map factors as $\\pi=q_X\\circ\ni_X$, where $i_X$ is finite and hence has $\\mathrm{PBC}$ by\n[prop-weil-pbc-finite-morphism], and $q_X:\\mathbf P^n_X\\to X$ has\n$\\mathrm{PBC}$; composition by [prop-weil-pbc-composition-stability] gives\n$\\mathrm{PBC}$ for $\\pi$. Likewise $f\\pi=q_Y\\circ i_Y$ has $\\mathrm{PBC}$.\nSince $\\pi$ is proper and surjective, [lemma-weil-pbc-cancellation] applied to\n$\\pi$ and $f$ gives $\\mathrm{PBC}$ for $f$.",
+   "uses": [
+    "lemma-weil-pbc-target-locality",
+    "lemma-weil-pbc-chow-factorization",
+    "lem-weil-pbc-projective-embedding",
+    "lem-weil-pbc-reduction-projective-space",
+    "prop-weil-pbc-finite-morphism",
+    "prop-weil-pbc-composition-stability",
+    "lemma-weil-pbc-cancellation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-target-locality",
+  "lemma-weil-pbc-chow-factorization",
+  "lem-weil-pbc-projective-embedding",
+  "lem-weil-pbc-reduction-projective-space",
+  "prop-weil-pbc-finite-morphism",
+  "prop-weil-pbc-composition-stability",
+  "lemma-weil-pbc-cancellation",
+  "lemma-weil-pbc-chow-embedding-over-x",
+  "lemma-weil-pbc-composition",
+  "lemma-weil-pbc-property-iff-acyclicity",
+  "lemma-weil-pbc-symmetric-product-p1"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/prop-weil-pbc-reduction-to-projective-line.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1204,
+ "blueprint_uses": [
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-property",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-projective-embedding",
+  "lem-weil-pbc-reduction-projective-space",
+  "lemma-weil-pbc-cancellation",
+  "lemma-weil-pbc-chow-embedding-over-x",
+  "lemma-weil-pbc-chow-factorization",
+  "lemma-weil-pbc-composition",
+  "lemma-weil-pbc-property-iff-acyclicity",
+  "lemma-weil-pbc-symmetric-product-p1",
+  "lemma-weil-pbc-target-locality",
+  "prop-weil-pbc-composition-stability",
+  "prop-weil-pbc-finite-morphism"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-scheme-conventions",
+  "lemma-weil-pbc-chow-embedding-over-x",
+  "lemma-weil-pbc-composition",
+  "lemma-weil-pbc-property-iff-acyclicity",
+  "lemma-weil-pbc-symmetric-product-p1"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "If every projection $\\mathbf P^1_S\\to S$ satisfies $\\mathsf{PBC}$ for every\nbase scheme $S$, then every proper morphism satisfies $\\mathsf{PBC}$.",
+   "proof": "Use target locality and the Chow factorization. The closed immersion\n$X'\\hookrightarrow\\mathbf P^n_Y$ is proper and finite onto its image, so\nfinite base change plus composition reduces $X'\\to Y$ to\n$\\mathbf P^n_Y\\to Y$. The finite surjective map $\\sigma_n$ and cancellation\nreduce this projection to $(\\mathbf P^1_Y)^n\\to Y$. Repeated base change and\ncomposition reduce the product projection to the one-dimensional projection.\nFinally cancellation along $\\pi$ transfers the property from $X'$ and\n$X'\\to Y$ to $X\\to Y$. Every comparison used is the named exchange map of\nDefinition [def-weil-pbc-derived-exchange].",
+   "cites": [
+    "def-weil-pbc-derived-exchange"
+   ]
+  }
+ ]
+}

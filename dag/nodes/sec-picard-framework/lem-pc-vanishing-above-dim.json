@@ -1,0 +1,112 @@
+{
+ "id": "lem-pc-vanishing-above-dim",
+ "kind": "statement",
+ "title": "Vanishing above the dimension of a curve",
+ "statement": "Let $k$ be a field and let $X$ be a\ncurve over $k$ which is smooth and\nprojective. For every\nquasi-coherent $\\mathcal{O}_X$-module $\\mathcal{F}$ one has\n\n$$\nH^i(X,\\mathcal{F})=0\\qquad\\text{for all }i\\ge2 .\n$$\n\n(EGA III$_1$, (3.2.1): cohomology of a Noetherian scheme of\ndimension $d$ vanishes above $d$; here $d=1$.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-twist/lem-pc-vanishing-above-dim.md",
+  "place": "node lem-pc-vanishing-above-dim, order 759",
+  "external": [
+   {
+    "document": "EGA III",
+    "place": "For every quasi-coherent $\\mathcal{O}_X$-module $\\mathcal{F}$ one has $$ H^i(X,\\mathcal{F})=0\\qquad\\text{for all }i\\ge2 . $$ (EGA III$_1$, (3.2.1): cohomology of a Noetherian scheme of dimension $d$ vanishes above $d$; here $d=1$.) *Step 1: the point $P$ and the first affine open.* The curve $X$ is proper (a projective morphism is proper, [lem-pc-projective-proper]), nonempty (an integral scheme, "
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-projective-morphism",
+  "def-pc-smooth-projective-curve"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1: the point $P$ and the first affine open.* The curve $X$\nis proper (a projective morphism is proper,\n[lem-pc-projective-proper]), nonempty (an integral scheme,\n[def-pc-curve]) and of finite\ntype over $k$, hence has a closed point: any nonempty open affine\n$\\operatorname{Spec}(A)\\subseteq X$ has $A$ a nonzero\nfinite type $k$-algebra, so\n$A$ has a maximal ideal (the classical Nullstellensatz: a maximal\nideal exists in a nonzero finitely generated algebra over a field),\nand the closed points of $\\operatorname{Spec}(A)$ are exactly its maximal ideals.\nPick a closed point $P\\in X$.\n\nThe local ring $\\mathcal{O}_{X,P}$ is a regular local ring of dimension one\n([lem-sc-smooth-regular]: smooth over a field; the curve is\none-dimensional because $\\dim\\mathcal{O}_{X,P}=\\dim X=1$ for the closed point\n$P$, [def-pc-dimension]), hence a discrete valuation ring\n([lem-sc-regular-dim1-dvr]). By the argument of\n[lem-sc-point-cartier] (the same proof works over an arbitrary\nbase field: it only uses the two lemmas just cited) the closed point\n$P$ with its reduced structure is an effective Cartier divisor\n([def-sc-effective-cartier-divisor]); write\n$D:=[P]$ and $\\mathcal{L}:=\\mathcal{O}_X(D)$\n([def-pc-divisor-line-bundle]), so that the support of $D$ is\n$\\{P\\}$.\n\nThe exact sequence\n\n$$\n0\\to\\mathcal{O}_X\\to\\mathcal{O}_X(D)\\to\\mathcal{O}_X(D)\\otimes\\mathcal{O}_P\\to0\n$$\n\n(the first map is multiplication by the canonical section $1_D$;\n$\\mathcal{O}_X(D)\\otimes\\mathcal{O}_P\\cong k(P)$, the structure sheaf of the closed\npoint) is exact, $\\mathcal{O}_X(D)\\otimes\\mathcal{O}_P$ is the skyscraper $k(P)$,\nwhich is flasque, hence has no higher cohomology\n($H^i(X,k(P))=0$ for $i\\ge1$), and its $H^0$ is\n$k(P)$, a $[k(P):k]$-dimensional $k$-vector space. By the additivity\nof the Euler characteristic ([lem-pc-euler-additive]) and\n[def-pc-degree-line-bundle],\n\n$$\n\\deg\\mathcal{L}=\\deg[\\mathcal{O}_X(D)]=\\chi(\\mathcal{O}_X(D))-\\chi(\\mathcal{O}_X)\n=[k(P):k]\\ge1 .\n$$\n\nHence $\\mathcal{L}$ is ample ([lem-pc-ample-positive-degree]: positive\ndegree is equivalent to ampleness), and by\n[lem-sc-ample-complement-affine] (the complement of an ample\nCartier divisor is affine, [def-sc-ample] for the ampleness\nhypothesis) the open subscheme\n\n$$\nU_1:=X\\setminus\\{P\\}=X\\setminus D\n$$\n\nis affine.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "def-pc-curve",
+    "lem-sc-smooth-regular",
+    "def-pc-dimension",
+    "lem-sc-regular-dim1-dvr",
+    "lem-sc-point-cartier",
+    "def-sc-effective-cartier-divisor",
+    "def-pc-divisor-line-bundle",
+    "lem-pc-euler-additive",
+    "def-pc-degree-line-bundle",
+    "lem-pc-ample-positive-degree",
+    "lem-sc-ample-complement-affine",
+    "def-sc-ample"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: the second affine open.* By the standard fact that\nevery point of a scheme has an affine open neighbourhood, choose an\naffine open $V\\subseteq X$ with $P\\in V$; write $V=\\operatorname{Spec}(A)$ with\n$A:=\\mathcal{O}_X(V)$. The ring $A$ is a finitely generated $k$-algebra and\nan integral domain (an affine chart of the integral scheme $X$,\n[def-pc-curve]), of Krull dimension one (a nonempty open\nsubscheme of the one-dimensional $X$; [def-pc-dimension]), and\n$P$ corresponds to a maximal ideal $\\mathfrak m\\subset A$ (the closed\npoints of $\\operatorname{Spec} A$ are the maximal ideals).",
+   "uses": [
+    "def-pc-curve",
+    "def-pc-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Claim: $V\\setminus\\{P\\}$ is affine.* We show\n$\\operatorname{Spec}(A)\\setminus\\{\\mathfrak m\\}$ is a principal open: since\n$\\dim A=1$, the ideal $\\mathfrak m$ is nonzero, so choose\n$0\\neq f\\in\\mathfrak m$. By Krull's principal ideal theorem every\nminimal prime over $(f)$ has height $\\le1$; it is nonzero because\n$(f)\\neq0$ and $A$ is a domain; hence it has height exactly $1$, so it\nis maximal ($\\dim A=1$). Let\n$\\mathfrak m_1,\\dots,\\mathfrak m_r$ be the finitely many (Noetherian\nring) minimal primes over $(f)$; they are maximal ideals and\n$\\mathfrak m\\in\\{\\mathfrak m_1,\\dots,\\mathfrak m_r\\}$ because\n$f\\in\\mathfrak m$. If $r=1$ put $g:=f$; otherwise\n$\\mathfrak m\\nsubseteq\\mathfrak m_1\\cup\\cdots\\cup\\mathfrak m_r$\n(a maximal ideal $\\neq\\mathfrak m_j$ is not contained in\n$\\mathfrak m_j$, and an ideal contained in a finite union of prime\nideals is contained in one of them: prime avoidance; this applies\nsince all $\\mathfrak m_j$ are prime), so there is\n$g\\in\\mathfrak m\\setminus(\\mathfrak m_1\\cup\\cdots\\cup\\mathfrak m_r)$.\nIn both cases $V(g)=\\{\\mathfrak m\\}$: a prime\n$\\mathfrak p\\supseteq(g)$ contains a minimal prime over $(g)$\n(Noetherianity), which has height one, hence is one of the maximal\nideals $\\mathfrak m_1,\\dots,\\mathfrak m_r$; among them only\n$\\mathfrak m$ contains $g$ (for $r\\ge2$ by the choice of $g$; for\n$r=1$ because $\\mathfrak m_1=\\mathfrak m$ since $f\\in\\mathfrak m$ with\n$V(f)=\\{\\mathfrak m_1\\}$), so $\\mathfrak p=\\mathfrak m$ as\n$\\mathfrak m$ is maximal. Therefore\n\n$$\nV\\setminus\\{P\\}=\\operatorname{Spec}(A)\\setminus\\{\\mathfrak m\\}=D(g)=\\operatorname{Spec}(A_g)\n$$\n\nis affine, as claimed.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 3: the two-member cover computes.* The open subschemes\n$U_1$ (Step 1) and $U_2:=V$ (Step 2) cover $X$: every point of $X$\ndifferent from $P$ lies in $U_1$, and $P\\in V$. The finite\nintersections of the members are affine: $U_1$ by Step 1, $U_2$ by\nconstruction, and $U_1\\cap U_2=V\\setminus\\{P\\}$ by the claim of Step\n2. By [lem-pc-cech-computes] (the Cech complex of an open\naffine covering computes sheaf cohomology of quasi-coherent modules\nwhenever all finite intersections are affine),\n\n$$\nH^i(X,\\mathcal{F})=\\check H^i(\\{U_1,U_2\\},\\mathcal{F})\\qquad\\text{for all }i\\ge0 .\n$$\n\nIn the alternating Cech complex of a two-member cover the $i$-th term\nis the product over the $(i+1)$-element subsets of $\\{1,2\\}$; there\nare none as soon as $i\\ge2$:\n\n$$\n\\check C^i(\\{U_1,U_2\\},\\mathcal{F})=0\\qquad\\text{for }i\\ge2 ,\n$$\n\nso $\\check H^i(\\{U_1,U_2\\},\\mathcal{F})=0$ for all $i\\ge2$, and hence\n$H^i(X,\\mathcal{F})=0$ for all $i\\ge2$.",
+   "uses": [
+    "lem-pc-cech-computes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "def-pc-curve",
+  "lem-sc-smooth-regular",
+  "def-pc-dimension",
+  "lem-sc-regular-dim1-dvr",
+  "lem-sc-point-cartier",
+  "def-sc-effective-cartier-divisor",
+  "def-pc-divisor-line-bundle",
+  "lem-pc-euler-additive",
+  "def-pc-degree-line-bundle",
+  "lem-pc-ample-positive-degree",
+  "lem-sc-ample-complement-affine",
+  "def-sc-ample",
+  "lem-pc-cech-computes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-twist/lem-pc-vanishing-above-dim.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 759,
+ "blueprint_uses": [
+  "def-pc-curve",
+  "def-pc-degree-line-bundle",
+  "def-pc-dimension",
+  "def-pc-divisor-line-bundle",
+  "def-pc-projective-morphism",
+  "def-pc-smooth-projective-curve",
+  "def-sc-ample",
+  "def-sc-effective-cartier-divisor",
+  "lem-pc-ample-positive-degree",
+  "lem-pc-cech-computes",
+  "lem-pc-euler-additive",
+  "lem-pc-projective-proper",
+  "lem-sc-ample-complement-affine",
+  "lem-sc-point-cartier",
+  "lem-sc-regular-dim1-dvr",
+  "lem-sc-smooth-regular"
+ ],
+ "uses_not_cited": [
+  "def-pc-projective-morphism",
+  "def-pc-smooth-projective-curve"
+ ],
+ "proof_split_by": "labels"
+}

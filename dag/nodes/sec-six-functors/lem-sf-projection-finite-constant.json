@@ -1,0 +1,68 @@
+{
+ "id": "lem-sf-projection-finite-constant",
+ "kind": "statement",
+ "title": "The projection formula with a finitely presented constant coefficient",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes, let $A$ be a Noetherian\ncommutative ring, assume $R^qf_*F=0$ for every sheaf of $A$-modules\n$F$ and every $q>N$, for one integer $N\\geq0$, and let\n$K\\in D^-(X_{\\Et},A)$. Let $M$ be a finitely\npresented $A$-module, with $M_X,M_Y$ the associated constant sheaves.\nThen the canonical projection map\n\n$$\nRf_*K\\otimes^L_AM_Y\\longrightarrow Rf_*\\bigl(K\\otimes^L_AM_X\\bigr)\n$$\n\nis an isomorphism, the direct image and the tensor product being those of\n[def-weil-pbc-direct-image] and [def-weil-derived-tensor] on the\nsmall étale sites. The map is natural in $M$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-projection-finite-constant.md",
+  "place": "node lem-sf-projection-finite-constant, order 2065"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-derived-tensor",
+  "def-sf-uniform-direct-image-vanishing"
+ ],
+ "proof": [
+  {
+   "text": "Specify the map first: it is the mate, under the adjunction\n$Lf^*\\dashv Rf_*$ of [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image],\nof the composite\n\n$$\nLf^*\\bigl(Rf_*K\\otimes^L_AM_Y\\bigr)\n\\cong Lf^*Rf_*K\\otimes^L_ALf^*M_Y\n\\xrightarrow{\\ \\epsilon\\otimes\\operatorname{id}\\ }\nK\\otimes^L_AM_X,\n$$\n\nin which the first isomorphism is the compatibility of the derived pullback\nwith the derived tensor product of [def-weil-derived-pullback-tensor-hom],\nthe identification $Lf^*M_Y\\cong M_X$ is the pullback of a constant\nsheaf, and $\\epsilon$ is the counit of the adjunction.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both functors of $M$, namely\n$M\\mapsto Rf_*K\\otimes^L_AM_Y$ and\n$M\\mapsto Rf_*(K\\otimes^L_AM_X)$, are triangulated: the constant-sheaf\nfunctor is exact, the derived pullback and the derived tensor product are\nexact, and $Rf_*$ is triangulated. The map specified above is natural in\n$M$. For $M=A$ it is the identification\n$Rf_*K\\otimes^L_AA_Y\\cong Rf_*K\\cong Rf_*(K\\otimes^L_AA_X)$ of the unit,\nand for a finite free module $M=A^r$ it is the direct sum of $r$ copies\nof that identification, hence an isomorphism. It follows by finite cones\nand shifts that it is an isomorphism for every bounded complex of finite\nfree $A$-modules.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Choose a free resolution $P\\to M$ in nonpositive degrees, with each\n$P^i$ finite free; Noetherianity supplies the finite syzygies. Put\n$P_m=\\sigma_{\\geq-m}P$, the brutal truncation. The cone $C_m$ of\n$P_m\\to M$ belongs to $D^{\\leq-m-1}(A)$. Choose $b$ with\n$K\\in D^{\\leq b}$. The assumed bound on all sheaves, applied by the\ntruncation spectral sequence of [thm-sp-truncation-e2], gives\n$Rf_*D^{\\leq t}\\subseteq D^{\\leq t+N}$ on bounded-above complexes.\nConsequently both\n\n$$\nRf_*K\\otimes_A^L(C_m)_Y,\n\\qquad Rf_*\\bigl(K\\otimes_A^L(C_m)_X\\bigr)\n$$\n\nlie in $D^{\\leq b+N-m-1}$. Here the tensor bound follows from\nbounded-above flat resolutions. For any fixed degree $r$, choose $m$\nso large that $b+N-m-1<r-1$. The two maps from the expressions with\n$P_m$ to the expressions with $M$ then induce isomorphisms on\n$\\mathcal H^r$. The projection map for $P_m$ is an isomorphism by\nthe bounded finite free case. Naturality therefore proves the projection\nmap for $M$ is an isomorphism on $\\mathcal H^r$. This holds for every\n$r$, proving the assertion. A finite presentation alone is not a\ndistinguished triangle; the infinite resolution is controlled here by the\nuniform cohomological-dimension bound.",
+   "uses": [
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "thm-sp-truncation-e2"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-projection-finite-constant.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2065,
+ "blueprint_uses": [
+  "def-sf-uniform-direct-image-vanishing",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "thm-sp-truncation-e2"
+ ],
+ "uses_not_cited": [
+  "def-sf-uniform-direct-image-vanishing"
+ ],
+ "proof_split_by": "paragraphs"
+}

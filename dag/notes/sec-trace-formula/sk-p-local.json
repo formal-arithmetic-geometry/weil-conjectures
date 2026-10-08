@@ -1,0 +1,30 @@
+{
+ "id": "sk-p-local",
+ "kind": "section",
+ "title": "Decomposition into local terms",
+ "text": "*Proposition (sketch).*\n\nSuppose the intersection support of an opposite pair is\na finite disjoint union $E=\\coprod_{\\beta\\in B}\\beta$ of clopen\nsubschemes, each proper over $s$. Then integration\nof the pairing is the sum of its\nlocal terms:\n\n$$\n\\int_E\\langle u,v\\rangle_{\\mathrm{LV}}\n=\\sum_{\\beta\\in B}\\LT_\\beta(u,v).\n$$\n\n## Proof\n\nFirst $E$ is proper: after any base change, the image of a closed set\nis the finite union of its closed images from the proper pieces.\nEach $j_\\beta$ is both open and closed, so\n[sk-thm-sf-package] identifies $Rj_{\\beta!}=Rj_{\\beta*}$ and\n$j_\\beta^!=j_\\beta^*$.\nFor $L=A_E,\\omega_E$ define the two specified maps\n\n$$\nR_L:\\bigoplus_\\beta Rj_{\\beta*}j_\\beta^*L\\longrightarrow L,\n\\qquad S_L:L\\longrightarrow\\bigoplus_\\beta Rj_{\\beta*}j_\\beta^*L\n$$\n\nby exceptional counits and ordinary units, respectively.\nBase change gives $j_\\gamma^*Rj_{\\beta*}=0$ for\n$\\beta\\ne\\gamma$ and the identity for $\\beta=\\gamma$.\nThus $R_L$ is an isomorphism by local detection. To identify its\ninverse, take the ordinary $j_\\gamma$-adjoint of each matrix entry\nof $S_LR_L$. Off the diagonal its source is zero; on the diagonal\nthe triangle identity and open-counit compatibility make it the\ntranspose of the identity. Hence $S_L=R_L^{-1}$.\n\nLet $\\alpha=\\langle u,v\\rangle_{\\mathrm{LV}}$ from [sk-d-pairing].\nNaturality of the counits and the finite biproduct identity now give\n\n$$\n\\alpha=R_{\\omega_E}\\Bigl(\\bigoplus_\\beta Rj_{\\beta*}(\\alpha|_\\beta)\\Bigr)S_{A_E}\n=\\sum_\\beta(j_\\beta)_*(\\alpha|_\\beta).\n$$\n\nThe last pushforwards are precisely those in [sk-d-integral];\nthis proves an equality of global morphisms, not merely equality\nafter open restriction.\n\nIntegration in [sk-d-integral] is additive, since direct image\nis additive and composition is bilinear. Moreover, for proper\n$h:T\\to T'$ between proper schemes, the identities\n\n$$\n\\eta_{a_{T'}h}^*=Ra_{T'*}\\eta_h^*\\,\\eta_{a_{T'}}^*,\\qquad\n\\varepsilon_{a_{T'}h}^!=\\varepsilon_{a_{T'}}^!\\,Ra_{T'!}\\varepsilon_h^!\n$$\n\nfrom [sk-thm-sf-package] give $\\int_{T'}h_*\\gamma=\\int_T\\gamma$.\nConsequently\n\n$$\n\\int_E\\alpha=\\sum_\\beta\\int_E(j_\\beta)_*(\\alpha|_\\beta)\n=\\sum_\\beta\\int_\\beta\\alpha|_\\beta\n=\\sum_\\beta\\LT_\\beta(u,v)\n$$\n\nby [sk-d-local-term]. Empty support gives the empty sum $0$.\nFor $s$, its structure map and the inclusion of its sole component\nare identities. Both integration adjunction maps are identities,\nso the normalization of [sk-p-pairing] also gives\n$\\LT_s(w)=\\tr_A(w)$ for a perfect complex.\n\nUses: [sk-d-corr], [sk-d-integral], [sk-d-local-term], [sk-d-pairing], [sk-p-pairing], [sk-thm-sf-package]",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/_section.md",
+  "place": "order 2347"
+ },
+ "cites": [
+  "sk-thm-sf-package",
+  "sk-d-pairing",
+  "sk-d-integral",
+  "sk-d-local-term",
+  "sk-p-pairing",
+  "sk-d-corr"
+ ],
+ "blueprint_uses": [
+  "sk-d-corr",
+  "sk-d-integral",
+  "sk-d-local-term",
+  "sk-d-pairing",
+  "sk-p-pairing",
+  "sk-thm-sf-package"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.ProEtale.GeometricOperations.integral_eq_sum_localTerm"
+ ],
+ "blueprint_tags": []
+}

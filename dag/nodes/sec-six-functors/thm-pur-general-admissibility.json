@@ -1,0 +1,87 @@
+{
+ "id": "thm-pur-general-admissibility",
+ "kind": "statement",
+ "title": "Preservation for an affine base, modulo the open-complement condition",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $f:X\\to Y$ be a\nseparated finite-type\nmorphism. The\nambient exceptional right\nadjoint datum of [def-weil-ambient-exceptional-adjoint] was the\nhypothesis under which this theorem was formerly stated; it is not assumed\nhere, the right adjoints $Rf^{\\times}$, $R(\\pi_U)^{\\times}$,\n$R(i_U)^{\\times}$ that the proof forms being available on the bounded\nconstructible and finite-Tor coefficients of the two clauses below by\n[cor-sf-ambient-adjoint-discharge]. Cover $Y$ by finitely\nmany affine opens $V\\subseteq Y$; for each $V$, $f^{-1}(V)$ is\ncovered by finitely many affine opens $U\\subseteq f^{-1}(V)$, and each\n$U\\to V$ is affine of finite type, hence a closed subscheme of\n$\\mathbf A^{d_U}_V$ for some $d_U\\in\\mathbf Z_{\\geq0}$, with open\ncomplement $W_U=\\mathbf A^{d_U}_V\\setminus U$ in the\n[def-sbc-affine-space] affine space. Assume the open-complement\ncondition of [def-exc-open-complement-bound] for every pair\n$(W_U,\\mathbf A^{d_U}_V)$ over the finitely many charts, with constants\n$c_U$, and put $D=\\max_U d_U$ and\n$c=\\max_U\\bigl(c_U+1+2(D-d_U)\\bigr)$. Then $f$\nsatisfies the two preservation clauses of\n[def-weil-exceptional-adjoint-admissibility]:\n\n1. for all integers $a\\leq b$,\n$$\nL\\in D_c^{[a,b]}(Y,A)\\quad\\Longrightarrow\\quad\nRf^!L\\in D_c^{[a-2D,b-2D+c]}(X,A);\n$$\n1. if $K\\in D^b_{ctf}(Y,A)$ has\nfinite Tor amplitude in\n$[a,b]$, then $Rf^!K$ has finite Tor amplitude in\n$[a-2D,b-2D+c]$; in particular $Rf^!$ carries\n$D^b_{ctf}(Y,A)$ into $D^b_{ctf}(X,A)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-pur-general-admissibility.md",
+  "place": "node thm-pur-general-admissibility, order 2078"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-ambient-exceptional-adjoint",
+  "cor-sf-ambient-adjoint-discharge",
+  "def-sbc-affine-space",
+  "def-exc-open-complement-bound",
+  "def-weil-exceptional-adjoint-admissibility",
+  "def-weil-constructible-intervals",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "On a chart $U\\subseteq f^{-1}(V)$ with $V$ affine the morphism\n$U\\to V$ is affine of finite type, so the presentation of its\ncoordinate ring as a quotient of a polynomial algebra over\n$\\mathcal O_V(V)$ exhibits it as a closed subscheme\n$i_U:U\\hookrightarrow\\mathbf A^{d_U}_V$ ([def-sbc-affine-space]);\nwrite $\\pi_U:\\mathbf A^{d_U}_V\\to V$ for the projection and\n$u_U:U\\hookrightarrow X$ for the open immersion (an open immersion, since\n$U\\subseteq f^{-1}(V)\\subseteq X$), so that $fu_U=\\pi_Ui_U$.\nStep 1: the right adjoint of the chart. The compact-support direct image\nof a composite is the composite of the compact-support direct images, and\nthe right adjoint of a composite of functors is the composite of their\nright adjoints, so\n\n$$\nR(fu_U)^{\\times}\\;\\cong\\;R(i_U)^{\\times}\\circ R(\\pi_U)^{\\times},\n\\qquad\nLu_U^*\\circ Rf^{\\times}\\;\\cong\\;R(fu_U)^{\\times},\n$$\n\nthe second because $R(u_U)_!=u_{U!}$ has right adjoint $Lu_U^*$ by\n[prop-exc-open-adjoint]. Hence it suffices to bound\n$R(i_U)^{\\times}R(\\pi_U)^{\\times}$.\nStep 2: the chartwise bounds. Fix $V$ and a chart $U\\subseteq f^{-1}(V)$, and write $d=d_U$, $c'=c_U$. The projection $\\pi_U$ is\nsmooth of pure relative dimension $d$, so\n[cor-pur-smooth-admissibility] gives, for\n$L\\in D_c^{[a,b]}(V,A)$,\n\n$$\nR(\\pi_U)^{\\times}L\\in D_c^{[a-2d,b-2d]}(\\mathbf A^{d}_V,A),\n$$\n\nand for $K$ with finite Tor amplitude in $[a,b]$, finite Tor amplitude\nin $[a-2d,b-2d]$; the closed immersion $i_U$ has ambient right\nadjoint $R(i_U)^{\\times}$ by [lem-exc-closed-ambient], and the\nclosed-support computations [lem-exc-closed-amplitude] and\n[prop-exc-closed-tor], applied to the pair $(i_U,W_U)$ under the\nassumed open-complement condition, move the interval to\n$[a-2d,b-2d+c'+1]$. The exact restriction $Lu_U^*$ preserves both\nkinds of bound ([thm-exc-explicit-preservation] for the open immersion $u_U$), so each chart carries the interval\n$[a-2d_U,b-2d_U+c_U+1]$, which is contained in\n$[a-2D,b-2D+c]$ by the choice of $D$ and $c$.\nStep 3: passage from the affine opens of the base to the base. For an\naffine open $V\\subseteq Y$ with open immersion $g_V:V\\hookrightarrow Y$\nand $f_V:f^{-1}(V)\\to V$, the base-change comparison for the open\nimmersion $g_V$ is an isomorphism by\n[cor-exc-base-change-open-immersion-general], i.e.\n$Rf_V^{\\times}\\cong Lg_V^*\\circ Rf^{\\times}$; that statement is read on the\ncoefficients of the present theorem, where the ambient datum it displays as a\nhypothesis is the theorem [cor-sf-ambient-adjoint-discharge], so that\nthe comparison used here is unconditional, and both sides are applied only to\nthe bounded constructible complexes $Lg_V^*K$ with\n$K\\in D_c^{[a,b]}(Y,A)$. Applying Step 2 to the\nseparated finite-type morphism $f_V$ over the affine scheme $V$\ntherefore bounds $Lg_V^*(Rf^{\\times}K)\\cong Rf_V^{\\times}(Lg_V^*K)$ on\n$f^{-1}(V)$, hence on each chart $U\\subseteq f^{-1}(V)$.\nStep 4: conclusion. Vanishing of a cohomology sheaf, and vanishing of the\ncohomology of a complex tensored with a coefficient sheaf, are local on the\nsite, and the charts $U$ cover $X$; hence the chartwise bounds of\nSteps 2–3 give the two displayed assertions for the global object\n$Rf^{\\times}K$.",
+   "uses": [
+    "def-sbc-affine-space",
+    "prop-exc-open-adjoint",
+    "cor-pur-smooth-admissibility",
+    "lem-exc-closed-ambient",
+    "lem-exc-closed-amplitude",
+    "prop-exc-closed-tor",
+    "thm-exc-explicit-preservation",
+    "cor-exc-base-change-open-immersion-general",
+    "cor-sf-ambient-adjoint-discharge"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "prop-exc-open-adjoint",
+  "cor-pur-smooth-admissibility",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-amplitude",
+  "prop-exc-closed-tor",
+  "thm-exc-explicit-preservation",
+  "cor-exc-base-change-open-immersion-general",
+  "cor-sf-ambient-adjoint-discharge"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-pur-general-admissibility.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "in_cycle"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2078,
+ "blueprint_uses": [
+  "cor-exc-base-change-open-immersion-general",
+  "cor-pur-smooth-admissibility",
+  "cor-sf-ambient-adjoint-discharge",
+  "def-exc-open-complement-bound",
+  "def-pur-conventions",
+  "def-sbc-affine-space",
+  "def-weil-ambient-exceptional-adjoint",
+  "def-weil-constructible-intervals",
+  "def-weil-exceptional-adjoint-admissibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-amplitude",
+  "prop-exc-closed-tor",
+  "prop-exc-open-adjoint",
+  "thm-exc-explicit-preservation"
+ ],
+ "uses_not_cited": [
+  "def-weil-constructible-intervals",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs"
+}

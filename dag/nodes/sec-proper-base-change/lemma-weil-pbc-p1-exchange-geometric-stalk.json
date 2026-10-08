@@ -1,0 +1,65 @@
+{
+ "id": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+ "kind": "statement",
+ "title": "Exchange on a geometric stalk",
+ "statement": "Let $p:\\mathbf P^1_S\\to S$, let $g:T\\to S$, and let $\\bar t\\to T$ have image\n$\\bar s\\to S$. For a torsion sheaf $F$ and every $q$, the stalk of the\nexchange morphism [def-weil-pbc-derived-exchange] is the canonical restriction\n\n$$\n H^q(\\mathbf P^1_{\\kappa(\\bar s)},F|)\n \\longrightarrow\n H^q(\\mathbf P^1_{\\kappa(\\bar t)},F|),\n$$\n\nwhere both residue fields are separably closed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-p1-exchange-geometric-stalk.md",
+  "place": "node lemma-weil-pbc-p1-exchange-geometric-stalk, order 1149"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "The strict-henselization stalk formula\n[prop-weil-pbc-strict-henselization-stalk-formula] identifies the source and\ntarget stalks with cohomology over the two strict local bases, and the\nstrict-local comparison of [prop-weil-pbc-strict-local-exchange] identifies\nthose with the cohomologies of the closed fibres displayed above; expanding\nthe unit--$\\theta_\\square$--counit composite of\n[def-weil-pbc-derived-exchange] shows that the induced map is the\nfield-extension pullback.",
+   "uses": [
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "prop-weil-pbc-strict-local-exchange",
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "prop-weil-pbc-strict-local-exchange",
+  "def-weil-pbc-derived-exchange",
+  "prop-weil-pbc-p1-strict-henselian-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-p1-exchange-geometric-stalk.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1149,
+ "blueprint_uses": [
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-etale-sheaves",
+  "prop-weil-pbc-p1-strict-henselian-comparison",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "prop-weil-pbc-strict-local-exchange"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-etale-sheaves",
+  "prop-weil-pbc-p1-strict-henselian-comparison"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "For $p:\\mathbf P^1_S\\to S$, a base change $g:T\\to S$, and\n$\\bar t\\to T$ with image $\\bar s\\to S$, the stalk of\n$\\operatorname{Ex}_{\\square,F}$ is the restriction map\n\n$$\nH^q(\\mathbf P^1_{\\kappa(\\bar s)},F|)\n\\longrightarrow H^q(\\mathbf P^1_{\\kappa(\\bar t)},F|).\n$$",
+   "proof": "Let $\\bar t\\to T$ be represented by an algebraically closed field $\\Omega$,\nand let $\\bar s\\to S$ be its composite. Put\n$S^{\\mathrm{sh}}=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{S,\\bar s}$ and\n$T^{\\mathrm{sh}}=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{T,\\bar t}$.\nThe map $T\\to S$ induces a local map $T^{\\mathrm{sh}}\\to S^{\\mathrm{sh}}$\nand a separably closed residue-field extension\n$\\kappa(\\bar s)\\hookrightarrow\\kappa(\\bar t)$. For an injective\nresolution $F\\to I^\\bullet$, the strict-henselization construction gives\nthe following diagram in $D^+(\\mathbf{Ab})$:\n\n$$\n\\begin{CD}\n(g^{-1}Rp_*F)_{\\bar t}\n@>{(\\operatorname{Ex}_{\\square,F})_{\\bar t}}>>\n(Rp'_*g'^{-1}F)_{\\bar t}\\\\\n@V{\\Phi_S}V{\\sim}V @VV{\\Phi_T}V{\\sim}V\\\\\nR\\Gamma(\\mathbf P^1_{S^{\\mathrm{sh}}},I|)\n@>{\\lambda}>>\nR\\Gamma(\\mathbf P^1_{T^{\\mathrm{sh}}},I|)\\\\\n@V{\\rho_S}V{\\sim}V @VV{\\rho_T}V{\\sim}V\\\\\nR\\Gamma(\\mathbf P^1_{\\kappa(\\bar s)},I_{\\bar s})\n@>{\\kappa(\\bar s)\\subset\\kappa(\\bar t)}>>\nR\\Gamma(\\mathbf P^1_{\\kappa(\\bar t)},I_{\\bar t}).\n\\end{CD}\n$$\n\nThe maps $\\Phi_S$ and $\\Phi_T$ are the stalk-to-strict-local maps from the\nstrict-henselization formula. The maps $\\rho_S$ and $\\rho_T$ are the S4\nrestriction quasi-isomorphisms, applied after replacing $\\mathbf P^1$ by its\nbase change to the indicated strict local ring. The bottom arrow is induced\nby the residue-field map.\n\nTo check the upper square, take a representative section of $I^r$ on an\naffine pointed etale neighbourhood $V\\to S$. The left route first applies\nthe unit $I^r\\to g'_*g'^{-1}I^r$ and then restricts along\n$\\mathbf P^1_T\\times_T(V\\times_ST)$. The right route first restricts to\n$\\mathbf P^1_{S^{\\mathrm{sh}}}$ and then along $T^{\\mathrm{sh}}\\to S^{\\mathrm{sh}}$. Both are the same section on\n$\\mathbf P^1_{T^{\\mathrm{sh}}}\\times_{T^{\\mathrm{sh}}}V$, so the square\ncommutes degree by degree and hence in the derived category. The lower\nsquare is the identical calculation after passing to the closed geometric\nfibres. Therefore the stalk of the named S0 exchange is exactly the field\nextension map displayed in the bottom row, not an abstract replacement.",
+   "cites": []
+  }
+ ]
+}

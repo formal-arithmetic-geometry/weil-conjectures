@@ -1,0 +1,101 @@
+{
+ "id": "lemma-nagata-dense-affine-cover-exists",
+ "kind": "statement",
+ "title": "Existence of a finite affine cover with dense total intersection",
+ "statement": "Let $X$ be quasi-compact and quasi-separated and assume that $X$ has only\nfinitely many irreducible components $Z_1,\\dots,Z_r$ with generic points\n$\\eta_j$. Then there is a finite affine open covering\n\n$$\n X=U_1\\cup\\dots\\cup U_m\n$$\n\nsuch that $\\eta_j\\in U_i$ for every $i,j$. If moreover $X\\to Y$ is of finite\ntype with $Y$ affine, one may take each $U_i$ affine of finite type over $Y$.\nIn particular the open subscheme $U:=U_1\\cap\\dots\\cap U_m$ is dense in $X$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-affine-cover/lemma-nagata-dense-affine-cover-exists.md",
+  "place": "node lemma-nagata-dense-affine-cover-exists, order 318"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-chow-affine-through-generic-points] applied to the finite list\n$\\eta_1,\\dots,\\eta_r$, for every $x\\in X$ there is an affine open $U_x$\ncontaining $x$ and all the $\\eta_j$. Quasi-compactness of $X$ lets us pick a\nfinite subcover $U_1,\\dots,U_m$ among them. If $X\\to Y$ is of finite type, an\nopen subscheme of $X$ is again of finite type over $Y$ (open immersions are of\nfinite type), so each $U_i$ is affine of finite type over $Y$. Finally $U\\cap\nZ_j$ is a nonempty open subset of the irreducible space $Z_j$ (it contains\n$\\eta_j$), hence dense in $Z_j$; since this holds for all $j$ and\n$X=Z_1\\cup\\dots\\cup Z_r$, the open $U$ is dense in $X$.",
+   "uses": [
+    "lem-chow-affine-through-generic-points"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-chow-affine-through-generic-points",
+  "lemma-nagata-affine-neighbourhood-generic-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-affine-cover/lemma-nagata-dense-affine-cover-exists.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "multiple_detailed_forms",
+  "lean_multiple",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 318,
+ "blueprint_uses": [
+  "def-weil-pbc-scheme-conventions",
+  "lem-chow-affine-through-generic-points",
+  "lemma-nagata-affine-neighbourhood-generic-points"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Properties",
+  "declaration": "AlgebraicGeometry.exists_isAffineOpen_cover_genericPoints_subset",
+  "branch": "slopmaster2",
+  "line": 232,
+  "sorry_free": true,
+  "body_lines": 10,
+  "others": [
+   {
+    "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Limits",
+    "declaration": "AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter",
+    "branch": "slopmaster2",
+    "line": 170,
+    "sorry_free": true,
+    "body_lines": 11
+   },
+   {
+    "module": "WeilConjectures.Mathlib.Topology.Sober",
+    "declaration": "dense_iInf_of_genericPoints_subset",
+    "branch": "slopmaster2",
+    "line": 45,
+    "sorry_free": true,
+    "body_lines": 2
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.exists_isAffineOpen_cover_genericPoints_subset",
+  "AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter",
+  "dense_iInf_of_genericPoints_subset"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions",
+  "lemma-nagata-affine-neighbourhood-generic-points"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "Let $X$ be quasi-compact and quasi-separated and assume that it has finitely\nmany irreducible components, with generic points\n$\\eta_1,\\ldots,\\eta_r$. There is a finite affine open cover\n$(U_1,\\ldots,U_n)$ whose total intersection is dense in $X$.",
+   "proof": "For every $x\\in X$, apply\n[lemma-nagata-affine-neighbourhood-generic-points] to obtain an affine\nopen containing $x$ and every $\\eta_i$. Quasi-compactness gives a finite\nsubcover. Its total intersection contains the generic point of every\nirreducible component, and is therefore dense.",
+   "cites": [
+    "lemma-nagata-affine-neighbourhood-generic-points"
+   ]
+  },
+  {
+   "statement": "Let $X$ be a quasi-compact and quasi-separated scheme with finitely many\nirreducible components $Z_1,\\dots,Z_r$, with generic points $\\eta_j$. Then\nthere is a finite affine open covering $X=U_1\\cup\\dots\\cup U_m$ such that\n$\\eta_j\\in U_i$ for all $i$ and $j$. For any such covering the open\n\n$$\nU:=U_1\\cap\\dots\\cap U_m\n$$\n\nis dense in $X$.",
+   "proof": "By [lem-chow-affine-through-generic-points] every $x\\in X$ has an affine\nopen neighbourhood containing all the $\\eta_j$; since $X$ is quasi-compact,\nfinitely many of them cover $X$. For the density statement note that\n$U\\cap Z_j$ is an open subset of $Z_j$ containing $\\eta_j$, hence is dense in\nthe irreducible space $Z_j$; as $X=Z_1\\cup\\dots\\cup Z_r$, the closure of $U$\ncontains every $Z_j$ and therefore equals $X$.",
+   "cites": [
+    "lem-chow-affine-through-generic-points"
+   ]
+  }
+ ]
+}

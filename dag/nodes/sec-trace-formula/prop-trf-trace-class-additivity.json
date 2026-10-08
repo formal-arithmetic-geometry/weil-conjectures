@@ -1,0 +1,105 @@
+{
+ "id": "prop-trf-trace-class-additivity",
+ "kind": "statement",
+ "title": "Additivity of trace classes",
+ "statement": "1. Let $i:Z\\hookrightarrow X$ be a closed subscheme with open complement\n$j:U\\hookrightarrow X$ which is $c$-invariant, $c_2(c_1^{-1}(Z))\\subset Z$,\nlet\n$$\nK'=j_!j^*K\\longrightarrow K\\longrightarrow K''=Ri_*i^*K\\longrightarrow K'[1]\n$$\nbe its open–closed triangle, and let $(u',u,u'')$ be the induced morphism\nof the corresponding triangles of the functors $Lc_2^*$ and $Rc_1^!$, with\n$u'=[j]_!(u|_U)$ and $u''=[i]_!(u|_Z)$ the induced coefficient morphisms of\n[lem-trf-trace-triangle-compatibility] (an arbitrary morphism of\ndistinguished triangles is not enough, see there). Then\n$$\n\\operatorname{Tr}_c(u)=\n\\operatorname{Tr}_c(u')+\\operatorname{Tr}_c(u'')\n$$\nin $\\operatorname{Hom}_{D(F,A)}(A_F,\\omega_{F,A})$; if $F$ is\nproper over $s$ with\nfinitely many components in the sense of\n[def-trf-fixed-scheme], the same identity holds for the\nlocal terms.\n1. *(Curve pieces.)* In the setting of [d-curve-pieces] ($m\\geq1$,\n$x\\in X_0(\\mathbf F_{q^m})$, $c=(\\operatorname{id}_X,\\Phi_m)$ the\ngraph correspondence), let $v:\\Phi_m^*K\\to K$ be the scheme-Frobenius\nmap $\\varphi_m$ or an arbitrary Frobenius coefficient morphism, with\npieces $u^Z,u^U$. Then $(u^U,v,u^Z)$ is a morphism of the\nopen–closed triangles $K^U\\to K\\to K^Z\\to K^U[1]$ under\n$L\\Phi_m^*$ and $Rc_1^!=\\operatorname{id}$, and hence\n$$\n\\operatorname{Tr}_c(v)=\\operatorname{Tr}_c(u^Z)+\\operatorname{Tr}_c(u^U),\n\\qquad\n\\operatorname{LT}_\\beta(v)=\\operatorname{LT}_\\beta(u^Z)+\\operatorname{LT}_\\beta(u^U)\n$$\nfor every component $\\beta$ of $F=\\operatorname{Fix}(\\Phi_m)$.\nInvertibility of $v$ is not required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-additivity/prop-trf-trace-class-additivity.md",
+  "place": "node prop-trf-trace-class-additivity, order 2354"
+ },
+ "stmt_deps": [
+  "lem-trf-trace-triangle-compatibility",
+  "def-trf-fixed-scheme",
+  "d-curve-pieces",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "The first assertion of (1) is exactly\n[lem-trf-trace-triangle-compatibility]. For the second, suppose\n$F$ proper over $s$ with finitely many open-and-closed components\n$\\beta\\in\\pi_0(F)$; the local terms of\n[def-trf-local-term] are the integrals\n$\\operatorname{LT}_\\beta(u)=\\int_\\beta\\operatorname{Tr}_c(u)|_\\beta$\nof [def-trf-integration], and integration is $A$-linear by\n[lem-trf-integration-linear], so\nadditivity of the classes gives\n$\\operatorname{LT}_\\beta(u)=\\operatorname{LT}_\\beta(u')+ \\operatorname{LT}_\\beta(u'')$ for every $\\beta$.",
+   "uses": [
+    "lem-trf-trace-triangle-compatibility",
+    "def-trf-local-term",
+    "def-trf-integration",
+    "lem-trf-integration-linear"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For (2), write $\\Phi=\\Phi_m$ and let\n$$\nK^U\\xrightarrow{\\ \\varepsilon\\ }K\\xrightarrow{\\ \\eta\\ }K^Z\n\\xrightarrow{\\ \\delta\\ }K^U[1]\n$$\nbe the open–closed triangle of [prop-sf-open-closed-triangle-all-stages],\nwith $\\varepsilon$ the counit of $j_!\\dashv j^*$ and $\\eta$ the unit of\n$i^*\\dashv Ri_*$. The functor $L\\Phi^*$ is exact, so it carries this\ntriangle to a distinguished triangle, and $Rc_1^!=\\operatorname{id}$.\nLet $b:L\\Phi^*j_!\\xrightarrow{\\sim}j_!L\\Phi_U^*$ be the open base-change\nisomorphism used in $u^U$ ([prop-functor-package], clause (4)), and\n$\\gamma$ the ordinary half used in $u^Z$, as in [d-curve-pieces].",
+   "uses": [
+    "prop-sf-open-closed-triangle-all-stages",
+    "prop-functor-package",
+    "d-curve-pieces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(a) $\\varepsilon\\circ u^U=v\\circ L\\Phi^*\\varepsilon$. By the adjunction\n$j_!\\dashv j^*$ of [prop-weil-open-closed-recollement-adjunctions] it\nsuffices to compare the restrictions to $U$ of the two maps\n$L\\Phi^*j_!j^*K\\cong j_!L\\Phi_U^*j^*K\\to K$. There $b$ restricts to the\npullback identification and $j^*\\varepsilon$ to the identity, so both\nrestrictions equal $j^*v$ composed with\n$L\\Phi_U^*j^*\\cong j^*L\\Phi^*$.",
+   "uses": [
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(b) $u^Z\\circ L\\Phi^*\\eta=\\eta\\circ v$. By the adjunction $i^*\\dashv Ri_*$\nit suffices to compare the adjoint maps $i^*L\\Phi^*K\\to i^*K$. The\nadjoint of $\\eta\\circ v$ is $i^*v$. By the construction of $\\gamma$ as\nunit followed by counit, the triangle identities make the adjoint of\n$u^Z\\circ L\\Phi^*\\eta=Ri_*v_{\\bar x}\\circ\\gamma\\circ L\\Phi^*\\eta$\nequal to $v_{\\bar x}$ precomposed with $i^*L\\Phi^*K\\cong(\\Phi i)^*K=i^*K$;\nthis is $i^*v$, by the definition of the stalk map $v_{\\bar x}$\n($i^*$ being the stalk at $\\bar x$).",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "(c) $u^U[1]\\circ L\\Phi^*\\delta=\\delta\\circ u^Z$. By (a), (b) and the\naxiom of morphisms of triangles there is\n$w:L\\Phi^*K^Z\\to K^Z$ with $w\\circ L\\Phi^*\\eta=\\eta\\circ v$ and\n$\\delta\\circ w=u^U[1]\\circ L\\Phi^*\\delta$. Then\n$(w-u^Z)\\circ L\\Phi^*\\eta=0$, so $w-u^Z$ factors through\n$L\\Phi^*\\delta$ as $d\\circ L\\Phi^*\\delta$ with\n$d:L\\Phi^*K^U[1]\\to K^Z$. Via $b$ the source of $d$ is\n$j_!N[1]$ with $N=L\\Phi_U^*j^*K$, and\n$\\operatorname{Hom}(j_!N[1],Ri_*i^*K)=\\operatorname{Hom}(N[1],j^*Ri_*i^*K)=0$\nbecause $j^*Ri_*=0$ ([prop-weil-open-closed-recollement-adjunctions],\nas in the Hom vanishing of [prop-sf-open-closed-triangle-all-stages]).\nHence $w=u^Z$.",
+   "uses": [
+    "prop-weil-open-closed-recollement-adjunctions",
+    "prop-sf-open-closed-triangle-all-stages"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Thus $(u^U,v,u^Z)$ is the induced morphism of the open–closed triangles\nfor the closed point $Z=\\{\\bar x\\}$, which is $c$-invariant because\n$c_1=\\operatorname{id}$ and $\\Phi(\\bar x)=\\bar x$, and $u^U,u^Z$ are the\ninduced coefficient morphisms $[j]_!(v|_U)$, $[i]_!(v|_Z)$ of\n[lem-trf-trace-triangle-compatibility]; so (1) gives the identity of trace\nclasses. The fixed scheme $F=\\operatorname{Fix}(\\Phi)$\nis a finite disjoint union of copies of $\\operatorname{Spec}k$ by\n[thm-trf-frobenius-fixed-points], hence proper over $s$ with finitely\nmany open-and-closed components, so (1) also gives the identity of local\nterms. No step inverts $v$.",
+   "uses": [
+    "lem-trf-trace-triangle-compatibility",
+    "thm-trf-frobenius-fixed-points"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-trace-triangle-compatibility",
+  "def-trf-local-term",
+  "def-trf-integration",
+  "lem-trf-integration-linear",
+  "prop-sf-open-closed-triangle-all-stages",
+  "prop-functor-package",
+  "d-curve-pieces",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "thm-trf-frobenius-fixed-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-additivity/prop-trf-trace-class-additivity.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2354,
+ "blueprint_uses": [
+  "d-curve-pieces",
+  "def-trf-fixed-scheme",
+  "def-trf-integration",
+  "def-trf-local-term",
+  "def-weil-scheme-morphism-properties",
+  "lem-trf-integration-linear",
+  "lem-trf-trace-triangle-compatibility",
+  "prop-functor-package",
+  "prop-sf-open-closed-triangle-all-stages",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "thm-trf-frobenius-fixed-points"
+ ],
+ "uses_not_cited": [
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs"
+}

@@ -1,0 +1,97 @@
+{
+ "id": "lem-kun-0f14a",
+ "kind": "statement",
+ "title": "Kunneth formula, one proper factor, integer coefficients",
+ "statement": "Let $k$ be a separably closed\nfield. Let $X$ be a\nproper scheme over $k$\nand let $Y$ be a\nquasi-compact and\nquasi-separated scheme over $k$. If $E\\in\\Dplus(X_{\\Et})$ has\ntorsion cohomology and\n$K\\in\\Dplus(Y_{\\Et})$, then the Kunneth map of\n[def-kun-kunneth-map] for the square\n\n$$\n\\begin{array}{ccc}\nX\\times_kY&\\xrightarrow{\\;\\operatorname{pr}_2\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle \\operatorname{pr}_1}&&\\Big\\downarrow{\\scriptstyle a_Y}\\\\\nX&\\xrightarrow{\\;a_X\\;}&\\Spec(k)\n\\end{array}\n$$\n\n$$\n\\kappa_{E,K}:\n\\RGamma(X_{\\Et},E)\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K)\n\\longrightarrow\n\\RGamma\\bigl((X\\times_kY)_{\\Et},\n\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K\\bigr)\n$$\n\nis an isomorphism. (*Source:* Stacks Project, Tag\n[0F14](https://stacks.math.columbia.edu/tag/0F14), part (1).)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f14a.md",
+  "place": "node lem-kun-0f14a, order 1763",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F14"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-kun-kunneth-map",
+  "def-kun-separably-closed",
+  "def-kun-torsion-invertible",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-kun-proper-stability] the projection\n$\\operatorname{pr}_2:X\\times_kY\\to Y$ is proper (base change of the\nproper morphism $X\\to\\Spec(k)$). The object\n$\\pr_1^{-1}E$ has torsion cohomology and lies in\n$\\Dplus((X\\times_kY)_{\\Et})$, so by [lem-kun-0f0f] the\nprojection formula gives\n\n$$\nR\\operatorname{pr}_{2,*}\n\\bigl(\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K\\bigr)\n\\cong\nR\\operatorname{pr}_{2,*}\\pr_1^{-1}E\\kunotimes{\\mathbf Z}K .\n$$",
+   "uses": [
+    "lem-kun-proper-stability",
+    "lem-kun-0f0f"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By proper base change in the form of\n[thm-weil-pbc-bounded-below], applied to the cartesian square of\nthe statement, we have\n\n$$\nR\\operatorname{pr}_{2,*}\\pr_1^{-1}E\\cong\n\\underline{\\RGamma(X_{\\Et},E)}\n$$\n\n(the pullback of a constant object is constant by\n[lem-kun-pullback-constant], and the derived global sections of\n[def-kun-rgamma-unbounded] compute the sections of\n$Ra_{X,*}E$); here $\\RGamma(X_{\\Et},E)\\in\\Dplus(\\mathbf Z)$ is\nbounded below because $E$ is. By [lem-kun-leray-bdd],\n\n$$\n\\RGamma\\bigl((X\\times_kY)_{\\Et},\n\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K\\bigr)\n\\cong\n\\RGamma\\bigl(Y_{\\Et},\n\\underline{\\RGamma(X_{\\Et},E)}\\kunotimes{\\mathbf Z}K\\bigr) .\n$$",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
+    "lem-kun-pullback-constant",
+    "def-kun-rgamma-unbounded",
+    "lem-kun-leray-bdd"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Applying [lem-kun-0f0e] (with $E:=K$ and the constant complex\n$\\underline{\\RGamma(X_{\\Et},E)}\\in\\Dplus(\\mathbf Z)$) and then the\nsymmetry [lem-kun-tensor-sym] we obtain an isomorphism $\\theta$\nfrom\n$\\RGamma((X\\times_kY)_{\\Et},\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K)$\nto\n$\\RGamma(X_{\\Et},E)\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K)$. By\n[lem-kun-kunneth-map-agrees](a),\n$\\theta\\circ\\kappa_{E,K}=\\mathrm{id}$ (with $\\kappa_{E,K}$ the\nKunneth map of [def-kun-kunneth-map]), so $\\kappa_{E,K}$ is an\nisomorphism, as desired.",
+   "uses": [
+    "lem-kun-0f0e",
+    "lem-kun-tensor-sym",
+    "lem-kun-kunneth-map-agrees",
+    "def-kun-kunneth-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-proper-stability",
+  "lem-kun-0f0f",
+  "thm-weil-pbc-bounded-below",
+  "lem-kun-pullback-constant",
+  "def-kun-rgamma-unbounded",
+  "lem-kun-leray-bdd",
+  "lem-kun-0f0e",
+  "lem-kun-tensor-sym",
+  "lem-kun-kunneth-map-agrees",
+  "def-kun-kunneth-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f14a.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1763,
+ "blueprint_uses": [
+  "def-kun-kunneth-map",
+  "def-kun-rgamma-unbounded",
+  "def-kun-separably-closed",
+  "def-kun-torsion-invertible",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-0f0e",
+  "lem-kun-0f0f",
+  "lem-kun-kunneth-map-agrees",
+  "lem-kun-leray-bdd",
+  "lem-kun-proper-stability",
+  "lem-kun-pullback-constant",
+  "lem-kun-tensor-sym",
+  "thm-weil-pbc-bounded-below"
+ ],
+ "uses_not_cited": [
+  "def-kun-separably-closed",
+  "def-kun-torsion-invertible",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs"
+}

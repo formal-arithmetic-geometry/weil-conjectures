@@ -1,0 +1,62 @@
+{
+ "id": "lemma-nagata-relative-proj-exists",
+ "kind": "statement",
+ "title": "Existence and affine compatibility of relative Proj",
+ "statement": "The relative Proj construction in\n[def-nagata-relative-proj] exists as a scheme, is independent up to a\nunique isomorphism compatible with the chosen affine-chart\nidentifications, and restricts over every affine open $V\\subseteq X$ to\n$\\operatorname{Proj}(\\Gamma(V,\\mathcal A))$. These restriction\nisomorphisms commute with further restriction and with the structural maps.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/lemma-nagata-relative-proj-exists.md",
+  "place": "node lemma-nagata-relative-proj-exists, order 13"
+ },
+ "stmt_deps": [
+  "def-nagata-relative-proj",
+  "def-nagata-affine-proj"
+ ],
+ "proof": [
+  {
+   "text": "Choose the index set of all affine opens $V\\subseteq X$. For each $V$ put\n$P_V=\\operatorname{Proj}(\\Gamma(V,\\mathcal A))$. If $W\\subseteq V$ is a\nprincipal affine open, quasi-coherence gives the coefficientwise graded\nlocalization\n\n$$\n\\Gamma(V,\\mathcal A)[s^{-1}]\\;\\xrightarrow{\\sim}\\;\n\\Gamma(W,\\mathcal A),\n$$\n\nand the affine Proj construction gives an isomorphism from $P_W$ onto the\ninverse image of $W$ in $P_V$. To cover an arbitrary overlap $V\\cap V'$,\nindex the gluing datum by triples $(V,V',W)$ with $W$ affine and\n$W\\subseteq V\\cap V'$, together with a principal refinement inside $W$.\nThe associated isomorphism is the map on each standard chart induced by the\ndisplayed localization. Every overlap is covered by such indices, and the\nmaps are isomorphisms because localization is transitive.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The identity and inverse axioms are the cases $V=V'$ and exchange of the two\naffine indices. On a triple overlap all routes send a fraction\n$x/s^m$ to its image in the localization at the product of the three\ndenominators; hence the cocycle axiom is exactly\n[lemma-nagata-proj-chart-ring-cocycle]. The datum therefore satisfies\nthe scheme-gluing axioms, so the Mathlib\nconstruction `AlgebraicGeometry.Scheme.GlueData.glued` produces a\nscheme $P$ and a morphism $P\\to X$ (the degree-zero maps agree on every\noverlap). Its restriction to $V$ is the specified $P_V$ by the restriction\nfield of the same gluing construction. A second affine cover produces the\nsame overlap datum after passing to the common refinement by affine opens;\nthe uniqueness field of `Scheme.GlueData.glued` gives a unique\nisomorphism over $X$ that\nrespects all the local identifications. (No uniqueness among arbitrary\nautomorphisms over $X$ is asserted.) The same argument on a third\nrefinement proves compatibility with further restrictions.",
+   "uses": [
+    "lemma-nagata-proj-chart-ring-cocycle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-proj-chart-ring-cocycle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/lemma-nagata-relative-proj-exists.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "bypassed",
+  "mentions_mathlib"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 13,
+ "blueprint_uses": [
+  "def-nagata-affine-proj",
+  "def-nagata-relative-proj",
+  "lemma-nagata-proj-chart-ring-cocycle"
+ ],
+ "uses_not_cited": [
+  "def-nagata-affine-proj"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_notes": [
+  {
+   "label": "status",
+   "text": "**Status.** Bypassed by the formalized route: no separate relative-Proj\nprimitive was formalized. The blow-up is glued from the affine Proj charts\n(`AlgebraicGeometry.Proj.basicOpenIsoSpec`,\n`AlgebraicGeometry.Proj.iSup_basicOpen_eq_top`) with\n`AlgebraicGeometry.Scheme.Cover.RelativeGluingData`.",
+   "where": "statement"
+  }
+ ]
+}

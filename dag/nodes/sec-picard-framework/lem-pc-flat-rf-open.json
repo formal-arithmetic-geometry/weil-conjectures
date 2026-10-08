@@ -1,0 +1,75 @@
+{
+ "id": "lem-pc-flat-rf-open",
+ "kind": "statement",
+ "title": "The open locus of invertible $Rf_*$",
+ "statement": "(Derived Categories of Schemes, Lemma 36.32.3, Tag\n[0B9S](https://stacks.math.columbia.edu/tag/0B9S).) Let\n$f:X\\to S$ be a proper morphism of finite presentation and let $\\mathcal{F}$ be an\n$\\mathcal{O}_X$-module of finite presentation, flat over $S$. Fix $i,r\\in\\mathbb{Z}$.\nThen there exists an open subscheme $U\\subset S$ such that a morphism\n$T\\to S$ factors through $U$ if and only if $Rf_{T,*}\\mathcal{F}_T$ is isomorphic\nto a finite locally free $\\mathcal{O}_T$-module of rank $r$ placed in degree $i$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-flat-rf-open.md",
+  "place": "node lem-pc-flat-rf-open, order 682",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0B9S"
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Put $E=Rf_*\\mathcal{F}\\in D(\\mathcal{O}_S)$ (see [def-pc-derived-category]).\nBy [lem-pc-rf-perfect-base-change], $E$ is perfect and for every\n$g:T\\to S$ the canonical map $Lg^*E\\to Rf_{T,*}\\mathcal{F}_T$ is an\nisomorphism, with $Lg^*$ the [def-pc-derived-pullback]. For $s\\in S$\nwrite $\\beta^q(s)=\\dim_{\\kappa(s)}H^q(X_s,\\mathcal{F}_s)$.",
+   "uses": [
+    "def-pc-derived-category",
+    "lem-pc-rf-perfect-base-change",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The locus.* Let $U\\subseteq S$ be the set of points $s$ with\n$\\beta^q(s)=0$ for all $q\\neq i$ and $\\beta^i(s)=r$. We show $U$ is\nopen. Fix $t\\in S$. As in the proof of\n[thm-pc-semicontinuity-base-change], by [def-pc-perfect-complex] there is\nan affine open $V=\\operatorname{Spec}(A)\\ni t$ on which $E|_V$ is\nrepresented by a bounded complex\n$K:\\;0\\to K^a\\to\\cdots\\to K^b\\to0$ with $K^q\\cong A^{n_q}$, and for\n$s\\in V$, since the terms of $K$ are flat,\n[lem-pc-flat-complex-derived-pullback] and the base-change isomorphism\ngive\n\n$$\nH^q(X_s,\\mathcal{F}_s)\\cong H^q(K\\otimes_A\\kappa(s)).\n$$\n\nIn particular $\\beta^q\\equiv0$ on $V$ for $q\\notin[a,b]$, so on $V$ only\nthe finitely many conditions with $q\\in[a,b]$ matter. By\n[thm-pc-semicontinuity-base-change](2) each $\\beta^q$ is upper\nsemicontinuous, so\n\n$$\nW=\\{s\\in V:\\ \\beta^q(s)\\le0\\ (q\\neq i,\\ a\\le q\\le b),\\ \\beta^i(s)\\le r\\}\n$$\n\nis a finite intersection of open subsets of $V$, hence open. For $s\\in W$\nthe complex $K\\otimes_A\\kappa(s)$ of finite dimensional vector spaces has\ncohomology only in degree $i$, so\n\n$$\n(-1)^i\\beta^i(s)=\\sum_q(-1)^q\\dim_{\\kappa(s)}H^q(K\\otimes_A\\kappa(s))\n=\\sum_q(-1)^qn_q ,\n$$\n\nwhich does not depend on $s\\in V$. Hence $\\beta^i$ is constant on $W$,\nand $U\\cap V$ is either $W$ or empty. In either case it is open, and\nsince such $V$ cover $S$, $U$ is open.",
+   "uses": [
+    "thm-pc-semicontinuity-base-change",
+    "def-pc-perfect-complex",
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The functorial characterization.* Let $U_E$ be the open subscheme\nattached to the perfect object $E$ and to $i,r$ by [lem-pc-perfect-locus].\nA point $s\\in S$ lies in $U_E$ iff $g_s:\\operatorname{Spec}\\kappa(s)\\to S$\nfactors through $U_E$, i.e. iff\n$Lg_s^*E\\cong Rf_{s,*}\\mathcal{F}_s$ is isomorphic to $\\kappa(s)^{r}$\nplaced in degree $i$. As $\\operatorname{Spec}\\kappa(s)$ is a point, the\ncohomology of $Rf_{s,*}\\mathcal{F}_s$ is $H^*(X_s,\\mathcal{F}_s)$, and a\ncomplex over a field is quasi-isomorphic to the sum of its shifted\ncohomology groups; so this holds iff $s\\in U$. Thus $U=U_E$ as sets, and\nwe give $U$ the open subscheme structure. By [lem-pc-perfect-locus] a\nmorphism $g:T\\to S$ factors through $U$ iff $Lg^*E$ is isomorphic to a\nfinite locally free $\\mathcal{O}_T$-module of rank $r$ placed in degree\n$i$, i.e. by the base-change isomorphism iff $Rf_{T,*}\\mathcal{F}_T$ is.\nOn $U$ itself this gives (Nakayama, as in [lem-pc-perfect-locus]) that\n$Rf_*\\mathcal{F}|_U$ is locally a free module of rank $r$ in degree $i$;\nno reducedness of $S$ is needed.",
+   "uses": [
+    "lem-pc-perfect-locus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "lem-pc-rf-perfect-base-change",
+  "def-pc-derived-pullback",
+  "thm-pc-semicontinuity-base-change",
+  "def-pc-perfect-complex",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-perfect-locus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-flat-rf-open.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 682,
+ "blueprint_uses": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-perfect-locus",
+  "lem-pc-rf-perfect-base-change",
+  "thm-pc-semicontinuity-base-change"
+ ],
+ "proof_split_by": "labels"
+}

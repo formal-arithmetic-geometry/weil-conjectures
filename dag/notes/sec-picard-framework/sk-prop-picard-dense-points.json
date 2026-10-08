@@ -1,0 +1,24 @@
+{
+ "id": "sk-prop-picard-dense-points",
+ "kind": "section",
+ "title": "Zariski density of rational points",
+ "text": "*Proposition (sketch).*\n\nLet $X$ be a smooth scheme over a separably closed field $k$ with\n$X(k)\\neq\\emptyset$. Then $X(k)$ is Zariski dense in $X$; in\nparticular, for a smooth projective curve $X$ over separably closed\n$k$, the set $X(k)$ is infinite (and, by density, for every\nnon-zero global section of a line bundle on $X_K$, $K=k$ or a\nfield extension, there is $x\\in X(k)$ at which the section does not\nvanish, provided it does not vanish identically).\n\n## Proof\n\n*Step 1 (rationally defined closed points are dense).* Over any\nfield $k$, a smooth $X$ has a dense set of closed points $x$ with\n$\\kappa(x)/k$ finite separable. The claim is Zariski-local, so it is\nenough to find one such point in each nonempty open $V$. Smoothness\nmakes some nonempty open $U\\subseteq V$ admit an étale\n$\\pi:U\\to\\mathbf A^d_k$: a standard smooth presentation\n$k[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ has an invertible Jacobian\nsubdeterminant, which says exactly that the projection to the remaining\n$n-c$ coordinates is étale. Étale morphisms are open, so $\\pi(U)$\nis a nonempty open of $\\mathbf A^d_k$; shrinking it to a complement\n$\\mathbf A^d_k\\setminus V(f)$ with $f\\ne0$ and using that\n$k^{\\mathrm{sep}}$ is infinite, $f$ cannot vanish at every\n$(a_1,\\dots,a_d)\\in(k^{\\mathrm{sep}})^d$, which produces a closed point\n$w\\in\\pi(U)$ with $\\kappa(w)/k$ finite separable. Any $x\\in U$ over $w$\nhas $\\kappa(x)/\\kappa(w)$ finite separable, $\\pi$ being étale hence\nunramified, so $\\kappa(x)/k$ is finite separable; and $x$ is closed\nbecause a point whose residue field is finite over $k$ on a scheme\nlocally of finite type over $k$ is closed.\n\n*Step 2 (separable closedness).* A finite separable extension\n$K/k$ of a separably closed field is trivial: it is simple,\n$K=k[\\alpha]$, and the minimal polynomial of $\\alpha$ is irreducible and\nseparable, hence has a root in $k$, hence is linear. So the points of\nStep 1 satisfy $\\kappa(x)=k$, i.e. they are $k$-rational, and $X(k)$ is\ndense. In particular $X(k)\\ne\\emptyset$ as soon as $X\\ne\\emptyset$, so\nthat hypothesis of the statement is automatic.\n\n*Step 3 (a curve has infinitely many rational points).* On a\nsmooth projective curve a finite set of closed points is not dense, $X$\nbeing integral of dimension one, so Step 2 forces $X(k)$ to be infinite.\nFor a field extension $K/k$ and $x\\in X(k)$ the pullback\n$x_K=\\Spec K\\times_kx$ is a $K$-rational point of $X_K$, and the family\n$(x_K)_{x\\in X(k)}$ is Zariski dense in $X_K$: it is infinite and $X_K$\nis again an integral curve, so a closed subset containing infinitely\nmany closed points is all of $X_K$.\n\n*Step 4 (non-vanishing).* For $0\\ne s\\in H^0(X_K,\\cL)$ the germ of\n$s$ at the generic point is nonzero, $X_K$ being integral, so the zero\nscheme $Z(s)$ is a proper closed subset of a one-dimensional Noetherian\nscheme and hence a finite set of closed points. By Step 3 there is an\n$x\\in X(k)$ with $x_K\\notin Z(s)$, i.e. $s$ does not vanish at $x_K$.\n\nSteps 1–2 are Blueprint 50, `lem-pc-rational-points-dense`,\nresting on `lem-pc-dense-separable-points` (Stacks, Varieties,\nLemma 33.25.6, [`056U`](https://stacks.math.columbia.edu/tag/056U)) and\n`lem-pc-sepclosed-finite-sep-trivial`; Steps 3–4 are Step 3 of\n`lem-pc-twist` there.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-dense-points/_section.md",
+  "place": "order 746"
+ },
+ "cites": [
+  "lem-pc-rational-points-dense",
+  "lem-pc-dense-separable-points",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "lem-pc-twist"
+ ],
+ "blueprint_uses": [
+  "sk-def-av-jacobian",
+  "sk-def-av-pic"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.Hom.denseRange_fieldPoints"
+ ],
+ "blueprint_tags": []
+}

@@ -1,0 +1,139 @@
+{
+ "id": "lem-ag-cartier-reduced",
+ "kind": "statement",
+ "title": "Cartier: group schemes in characteristic zero are smooth and reduced",
+ "statement": "Let $\\mathcal G\\subseteq\\operatorname{GL}(V)$ over\n$k=\\overline{\\mathbf Q}_\\ell$ be a closed subscheme of finite type, cut\nout by a finitely generated, possibly nonradical, ideal, such that the\nmultiplication and inversion of $\\operatorname{GL}(V)$ restrict to it.\nThen $\\mathcal G$ is smooth and reduced, so\n$\\mathcal G=\\mathcal G_{\\mathrm{red}}$ is a (smooth) closed matrix group. In particular, if a closed subgroup (a\nstabilizer, a centralizer, or the kernel of a regular homomorphism) is\ngiven by explicit equations, its Lie algebra in the sense of\n[def-wf-lie-algebra-derivation] is the space of $X$ such that\n$1+\\varepsilon X$ satisfies those equations over\n$k[\\varepsilon]/\\varepsilon^2$; no passage to the reduced structure\nchanges the tangent space.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-ag-cartier-reduced.md",
+  "place": "node lem-ag-cartier-reduced, order 2492",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 00NP"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0B8X"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01V5"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 00TV"
+   },
+   {
+    "document": "Milne",
+    "place": "Compare Milne, *Algebraic Groups* (2017), Cartier's Theorem 3.23."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [],
+ "proof_deps": [
+  "lem-wf-affine-product-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-wf-same-lie-closed-subgroup"
+ ],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "text search of the local Mathlib checkout (0df444a360)",
+   "query": "Matrix.GeneralLinearGroup.lieAlgebra_identityComponent",
+   "results": [],
+   "date": "2026-10-08"
+  },
+  {
+   "tool": "text search of the local Mathlib checkout (0df444a360)",
+   "query": "Matrix.GeneralLinearGroup.finrank_lieAlgebra_eq_ringKrullDim",
+   "results": [],
+   "date": "2026-10-08"
+  },
+  {
+   "tool": "text search of the local Mathlib checkout (0df444a360)",
+   "query": "Matrix.GeneralLinearGroup.dualUnit_add",
+   "results": [],
+   "date": "2026-10-08"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [
+  "undischarged_input",
+  "partial_undischarged_input",
+  "proof_cites_literature",
+  "lean_multiple",
+  "lean_not_found"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2492,
+ "blueprint_uses": [
+  "def-wf-lie-algebra-derivation",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-wf-affine-product-reduced",
+  "lem-wf-same-lie-closed-subgroup"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Cartier",
+  "declaration": "AlgebraicGeometry.isReduced_of_grpObj",
+  "branch": "slopmaster2",
+  "line": 98,
+  "sorry_free": true,
+  "body_lines": 9,
+  "others": [
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Cartier",
+    "declaration": "AlgebraicGeometry.smooth_of_grpObj_of_charZero",
+    "branch": "slopmaster2",
+    "line": 112,
+    "sorry_free": true,
+    "body_lines": 7
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.isReduced_of_grpObj",
+  "AlgebraicGeometry.smooth_of_grpObj_of_charZero",
+  "Matrix.GeneralLinearGroup.lieAlgebra_identityComponent",
+  "Matrix.GeneralLinearGroup.finrank_lieAlgebra_eq_ringKrullDim",
+  "Matrix.GeneralLinearGroup.dualUnit_add"
+ ],
+ "blueprint_lean_not_found": [
+  "Matrix.GeneralLinearGroup.lieAlgebra_identityComponent",
+  "Matrix.GeneralLinearGroup.finrank_lieAlgebra_eq_ringKrullDim",
+  "Matrix.GeneralLinearGroup.dualUnit_add"
+ ],
+ "blueprint_proof_text": "*Reduction and smoothness of reduced groups.* The reduction\n$\\mathcal G_{\\mathrm{red}}$ has the same $k$-points as $\\mathcal G$, since\nnilpotents die in $k$, and those points form a subgroup. Its\nmultiplication is defined on a product of reduced varieties, which is\nreduced by [lem-wf-affine-product-reduced], so multiplication and\ninversion factor through the reduction by the vanishing principle\n([lem-wf-affine-nullstellensatz-vanishing]); thus $\\mathcal G_{\\mathrm{red}}$ is a reduced\nclosed matrix group. Such a group is smooth by (2) of\n[lem-wf-same-lie-closed-subgroup].\n\n*Cartier's step.* Write $A=k[\\mathcal G]$, $N=\\sqrt0$ and\n$\\mathfrak m=\\mathfrak m_e$. Then $N\\subseteq\\mathfrak m^2$. Indeed, let\n$b\\in N$ be nonzero in $A_{\\mathfrak m}$ with least nilpotence exponent\n$n\\ge2$ there, arranged so that $b^n=0$ in $A$. The counit identities\ngive $\\Delta(b)=b\\otimes1+1\\otimes b+w$ with\n$w\\in\\mathfrak m\\otimes_k\\mathfrak m$. Expanding $0=\\Delta(b)^n$ modulo\n$A\\otimes\\mathfrak m^2$ kills every term with two factors from\n$1\\otimes b+w$ and leaves\n$nb^{n-1}\\otimes b+n(b^{n-1}\\otimes1)w=0$; passing further to\n$A/(b^{n-1}\\mathfrak m)$ in the first coordinate leaves\n$n\\,\\overline{b^{n-1}}\\otimes\\overline b=0$ with both factors nonzero.\nSince $n\\ne0$ in characteristic zero, this is a contradiction, and the\ndegenerate case $b=0$ in $A_{\\mathfrak m}$ gives $b\\in\\mathfrak m^2$\ndirectly. Hence\n$\\mathfrak m/\\mathfrak m^2\\simeq(\\mathfrak m/N)/(\\mathfrak m/N)^2$, so\n$\\mathcal G$ and its reduction have the same cotangent space at $e$;\nprimes contain nilpotents, so they also have the same local dimension.\nSmoothness of the reduction therefore makes the local ring of\n$\\mathcal G$ at $e$ regular, and translations carry this to every closed\npoint.\n\n*Reducedness.* A regular local ring is a domain\n([Stacks 00NP](https://stacks.math.columbia.edu/tag/00NP)), so every\nlocal ring of $\\mathcal G$ at a maximal ideal is reduced; a nonzero\nglobal nilpotent would have a proper annihilator, hence survive in some\nlocalization. Thus $\\mathcal G$ is reduced, so\n$\\mathcal G=\\mathcal G_{\\mathrm{red}}$, which is smooth by (2) of\n[lem-wf-same-lie-closed-subgroup].\n\n*Subgroup schemes.* Stabilizer, centralizer and kernel loci are closed\nsubgroup schemes, so the reducedness just proved applies to them\nverbatim: their defining equations already compute the tangent space,\nand no passage to the reduced structure is involved.\n\nCompare Milne, *Algebraic Groups* (2017), Cartier's Theorem 3.23.\nQuoted rather than proved, all general geometry: density\n([Stacks 0B8X](https://stacks.math.columbia.edu/tag/0B8X)) and openness\n([Stacks 01V5](https://stacks.math.columbia.edu/tag/01V5)) of the smooth\nlocus over a perfect field, with the regularity criterion\n([Stacks 00TV](https://stacks.math.columbia.edu/tag/00TV)), and the\nregular-local-domain theorem.",
+ "blueprint_proof_steps": [
+  {
+   "text": "*Reduction and smoothness of reduced groups.* The reduction\n$\\mathcal G_{\\mathrm{red}}$ has the same $k$-points as $\\mathcal G$, since\nnilpotents die in $k$, and those points form a subgroup. Its\nmultiplication is defined on a product of reduced varieties, which is\nreduced by [lem-wf-affine-product-reduced], so multiplication and\ninversion factor through the reduction by the vanishing principle\n([lem-wf-affine-nullstellensatz-vanishing]); thus $\\mathcal G_{\\mathrm{red}}$ is a reduced\nclosed matrix group. Such a group is smooth by (2) of\n[lem-wf-same-lie-closed-subgroup].",
+   "uses": [
+    "lem-wf-affine-product-reduced",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-wf-same-lie-closed-subgroup"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Cartier's step.* Write $A=k[\\mathcal G]$, $N=\\sqrt0$ and\n$\\mathfrak m=\\mathfrak m_e$. Then $N\\subseteq\\mathfrak m^2$. Indeed, let\n$b\\in N$ be nonzero in $A_{\\mathfrak m}$ with least nilpotence exponent\n$n\\ge2$ there, arranged so that $b^n=0$ in $A$. The counit identities\ngive $\\Delta(b)=b\\otimes1+1\\otimes b+w$ with\n$w\\in\\mathfrak m\\otimes_k\\mathfrak m$. Expanding $0=\\Delta(b)^n$ modulo\n$A\\otimes\\mathfrak m^2$ kills every term with two factors from\n$1\\otimes b+w$ and leaves\n$nb^{n-1}\\otimes b+n(b^{n-1}\\otimes1)w=0$; passing further to\n$A/(b^{n-1}\\mathfrak m)$ in the first coordinate leaves\n$n\\,\\overline{b^{n-1}}\\otimes\\overline b=0$ with both factors nonzero.\nSince $n\\ne0$ in characteristic zero, this is a contradiction, and the\ndegenerate case $b=0$ in $A_{\\mathfrak m}$ gives $b\\in\\mathfrak m^2$\ndirectly. Hence\n$\\mathfrak m/\\mathfrak m^2\\simeq(\\mathfrak m/N)/(\\mathfrak m/N)^2$, so\n$\\mathcal G$ and its reduction have the same cotangent space at $e$;\nprimes contain nilpotents, so they also have the same local dimension.\nSmoothness of the reduction therefore makes the local ring of\n$\\mathcal G$ at $e$ regular, and translations carry this to every closed\npoint.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Reducedness.* A regular local ring is a domain\n([Stacks 00NP](https://stacks.math.columbia.edu/tag/00NP)), so every\nlocal ring of $\\mathcal G$ at a maximal ideal is reduced; a nonzero\nglobal nilpotent would have a proper annihilator, hence survive in some\nlocalization. Thus $\\mathcal G$ is reduced, so\n$\\mathcal G=\\mathcal G_{\\mathrm{red}}$, which is smooth by (2) of\n[lem-wf-same-lie-closed-subgroup].",
+   "uses": [
+    "lem-wf-same-lie-closed-subgroup"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Subgroup schemes.* Stabilizer, centralizer and kernel loci are closed\nsubgroup schemes, so the reducedness just proved applies to them\nverbatim: their defining equations already compute the tangent space,\nand no passage to the reduced structure is involved.\n\nCompare Milne, *Algebraic Groups* (2017), Cartier's Theorem 3.23.\nQuoted rather than proved, all general geometry: density\n([Stacks 0B8X](https://stacks.math.columbia.edu/tag/0B8X)) and openness\n([Stacks 01V5](https://stacks.math.columbia.edu/tag/01V5)) of the smooth\nlocus over a perfect field, with the regularity criterion\n([Stacks 00TV](https://stacks.math.columbia.edu/tag/00TV)), and the\nregular-local-domain theorem.",
+   "uses": [],
+   "elementary": null
+  }
+ ]
+}

@@ -1,0 +1,59 @@
+{
+ "id": "lemma-nagata-scheme-image-ideal-qc",
+ "kind": "statement",
+ "title": "Mathlib scheme-theoretic image interface",
+ "statement": "For a morphism $g\\colon T\\to Y$, Mathlib defines its scheme-theoretic image\nas the closed subscheme cut out by the ideal sheaf $\\operatorname{ker}(g)$.\nIt also supplies the closed immersion\n$g_{\\mathrm{im}}\\colon\\operatorname{SIm}(g)\\hookrightarrow Y$ and the\nfactor map $g^{\\mathrm{im}}\\colon T\\to\\operatorname{SIm}(g)$.\nWhen $g$ is quasi-compact, the stalk maps of $g^{\\mathrm{im}}$ are\ninjective and the support of $\\operatorname{ker}(g)$ is the closure of the\ntopological range of $g$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/lemma-nagata-scheme-image-ideal-qc.md",
+  "place": "node lemma-nagata-scheme-image-ideal-qc, order 64"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "This block records the existing Mathlib construction. The closed\nsubscheme is `Scheme.Hom.image g`, its inclusion is the declaration\n`Scheme.Hom.imageι g`, and the factor map is\n`Scheme.Hom.toImage g`; the displayed composite is the theorem\n`Scheme.Hom.toImage_imageι`. The additional quasi-compact\nassertions are exactly the two declarations named in the implementation\nnote, so no direct-image calculation is silently imported here.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/lemma-nagata-scheme-image-ideal-qc.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "text search of the local Mathlib checkout (0df444a360)",
+   "query": "AlgebraicGeometry.Scheme.Hom.image",
+   "results": [
+    "Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme:662 (abbrev)"
+   ],
+   "date": "2026-10-08"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found",
+  "mentions_mathlib",
+  "lean_names_mathlib_declaration"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 64,
+ "blueprint_uses": [],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.Hom.image"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.Scheme.Hom.image"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_notes": [
+  {
+   "label": "implementation_note",
+   "text": "*Implementation note.* The verified declarations are\n`AlgebraicGeometry.Scheme.Hom.image`, `Scheme.Hom.imageι`,\n`Scheme.Hom.toImage`, `Scheme.Hom.toImage_imageι`,\n`Scheme.Hom.toImage_app_injective` (under quasi-compactness), and\n`AlgebraicGeometry.Scheme.IdealSheafData.support_map` together with\n`Scheme.IdealSheafData.map_bot` (under quasi-compactness). No\ninvented `Scheme.Hom.support_ker` or\n`schemeTheoreticImageIdeal_isQuasiCoherent` declaration is assumed.",
+   "where": "statement"
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "id": "sk-thm-picard-cech",
+ "kind": "section",
+ "title": "Čech-to-derived",
+ "text": "*Theorem (sketch).*\n\nLet $\\mathcal C$ be a site with fibre products, $X\\in\\Ob(\\mathcal C)$\nand $\\mathfrak U=\\{U_i\\to X\\}_{i\\in I}$ a covering. For\n$F\\in\\Sh(X)$ there is a first-quadrant spectral sequence\n\n$$\nE_2^{p,q}=\\Cech^p\\bigl(\\mathfrak U,\\ \\mathcal H^q(F)\\bigr)\n\\ \\Longrightarrow\\ H^{p+q}(X,F),\n$$\n\nwhere $\\mathcal H^q(F)$ is the presheaf $V\\mapsto H^q(V,F)$.\n\n## Proof\n\nWrite $C^\\bullet(\\mathfrak U,-)$ for the (alternating) Čech complex of\nthe covering,\n\n$$\nC^p(\\mathfrak U,G)=\\prod_{i_0,\\dots,i_p}\nG\\bigl(U_{i_0}\\times_X\\dots\\times_XU_{i_p}\\bigr),\n$$\n\nso that $\\Cech^p(\\mathfrak U,G)=H^p\\bigl(C^\\bullet(\\mathfrak U,G)\\bigr)$.\n\n*Step 1 (the double complex).* Choose an injective resolution\n$F\\to I^\\bullet$ of abelian sheaves on $\\mathcal C/X$ and put\n$D^{p,q}=C^p(\\mathfrak U,I^q)$, a first-quadrant double complex of\nabelian groups. By [sk-def-groth-ss] its two filtrations give two\nspectral sequences, both abutting to $H^\\bullet(\\operatorname{Tot}D)$\nwith the image filtration, which is finite in each degree.\n\n*Step 2 (one filtration gives the $E_2$-page).* Fix $p$ and take\ncohomology of $D^{p,\\bullet}$ in the $q$-direction. Products of\ncomplexes of abelian groups have the product of the cohomologies, and for\neach $V=U_{i_0}\\times_X\\dots\\times_XU_{i_p}$ the restriction\n$I^\\bullet|_V$ is again an injective resolution, restriction along the\nlocalization $\\mathcal C/V\\to\\mathcal C/X$ having an exact left adjoint.\nHence $H^q\\bigl(I^\\bullet(V)\\bigr)=H^q(V,F)$ and\n\n$$\nE_1^{p,q}=C^p\\bigl(\\mathfrak U,\\mathcal H^q(F)\\bigr),\\qquad\nE_2^{p,q}=\\Cech^p\\bigl(\\mathfrak U,\\mathcal H^q(F)\\bigr),\n$$\n\nfor the presheaf $\\mathcal H^q(F)$ of the statement.\n\n*Step 3 (the other filtration gives the abutment).* Fix $q$ and\nconsider the column $C^\\bullet(\\mathfrak U,I^q)$. An injective abelian\nsheaf is injective as a *presheaf*\n([Stacks `03F6`](https://stacks.math.columbia.edu/tag/03F6)),\nthe Čech complex only sees presheaf values, and the Čech complex\nof an injective presheaf is acyclic in positive degrees: it is\n$\\Hom(\\Z_{\\mathfrak U,\\bullet},-)$ applied to the complex of free\npresheaves of the covering, and $\\Hom(-,I^q)$ is exact. So\n$C^\\bullet(\\mathfrak U,I^q)$ has cohomology $I^q(X)$ in degree $0$ and\n$0$ above\n([Stacks `03AW`](https://stacks.math.columbia.edu/tag/03AW)).\nThis filtration therefore collapses onto the bottom edge and\n\n$$\nH^n(\\operatorname{Tot}D)\\cong H^n\\bigl(I^\\bullet(X)\\bigr)=H^n(X,F).\n$$\n\n*Step 4 (the edge map).* Combining Steps 2 and 3 gives the\ndisplayed sequence. When $\\mathcal H^q(F)$ vanishes for $q>0$ the\nsequence collapses onto the row $q=0$ instead, and the edge maps\n$\\Cech^q(\\mathfrak U,F)\\to H^q(X,F)$ are isomorphisms; this is the\ncollapse used in [sk-lem-picard-cech-computes].\n\nThis is Stacks, Cohomology on Sites, Lemma 21.10.6\n([`03AZ`](https://stacks.math.columbia.edu/tag/03AZ)); the\ndetailed form is Blueprint 06, `lem-sc-cech-spectral`.\n\nUses: [sk-def-groth-ss]",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+  "place": "order 599"
+ },
+ "cites": [
+  "sk-def-groth-ss",
+  "sk-lem-picard-cech-computes",
+  "lem-sc-cech-spectral"
+ ],
+ "blueprint_uses": [
+  "sk-def-groth-ss"
+ ],
+ "blueprint_lean": [
+  "CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence"
+ ],
+ "blueprint_tags": []
+}

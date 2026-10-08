@@ -1,0 +1,139 @@
+{
+ "id": "prop-trf-trace-additivity-open-closed",
+ "kind": "statement",
+ "title": "Additivity of the Frobenius traces along an open–closed decomposition",
+ "statement": "Fix the global finite-field datum\nand the coefficient conventions, $A=A_{E,n}$. Let $X_0$ be a\nseparated finite-type $k_0$-scheme, let $i_0:Z_0\\hookrightarrow X_0$\nbe a closed immersion with complementary open immersion\n$j_0:U_0\\hookrightarrow X_0$, and let $i:Z\\hookrightarrow X$,\n$j:U\\hookrightarrow X$ be their base changes to $k$. Let\n$(K,\\varphi)\\in D^b_{ctf,\\mathrm W}(X,A)$ be a strict Weil complex\nof [def-trf-strict-weil-complex].\n\n1. For $h\\in\\{i,j\\}$ with source $W\\in\\{Z,U\\}$, one has\n$h\\,g_W=g_X\\,h$, and the composite\n$$\nh^*\\varphi:\\;\nLg_W^*Lh^*K\\xrightarrow{\\ \\sim\\ }Lh^*Lg_X^*K\n\\xrightarrow{\\ Lh^*\\varphi\\ }Lh^*K\n$$\nof the canonical pullback identification with $Lh^*\\varphi$ makes\n$(Lh^*K,h^*\\varphi)$ a strict Weil complex on $W$; its iterates of\n[def-trf-iterated-weil-map] are\n$(h^*\\varphi)^{[m]}=Lh^*\\varphi^{[m]}\\circ c_{h,m}$, with\n$c_{h,m}:Lg_W^{m*}Lh^*\\xrightarrow{\\sim}Lh^*Lg_X^{m*}$ the canonical\nidentification.\n1. For every $m\\geq1$, with $F_{c,-}^{\\,m}$ the global geometric\nFrobenius operators of [def-trf-frobenius-operators] for these\nWeil structures,\n$$\n\\operatorname{tr}_A\\bigl(F_{c,K}^{\\,m}\\mid R\\Gamma_c(X,K)\\bigr)\n=\n\\operatorname{tr}_A\\bigl(F_{c,j^*K}^{\\,m}\\mid R\\Gamma_c(U,j^*K)\\bigr)\n+\n\\operatorname{tr}_A\\bigl(F_{c,i^*K}^{\\,m}\\mid R\\Gamma_c(Z,i^*K)\\bigr)\n$$\nin $A$. These are categorical traces of perfect complexes in the\nsense of [def-trf-categorical-trace]; no trace of an individual\ncohomology module occurs.\n1. *(Frobenius coefficient morphisms.)* Let instead\n$K\\in D^b_{ctf}(X,A)$ carry an arbitrary Frobenius coefficient\nmorphism $\\psi:L\\Phi_X^*K\\to K$ of\n[def-trf-frobenius-coefficient-morphism], with no Weil structure and no\ninvertibility. For $h\\in\\{i,j\\}$ with source $W$ one has\n$h\\,\\Phi_W=\\Phi_X\\,h$, the composite\n$h^*\\psi:L\\Phi_W^*Lh^*K\\xrightarrow{\\sim}Lh^*L\\Phi_X^*K\n\\xrightarrow{Lh^*\\psi}Lh^*K$ is a Frobenius coefficient morphism on\n$W$ with iterates $(h^*\\psi)_m=Lh^*\\psi_m\\circ c'_{h,m}$, where\n$c'_{h,m}:L\\Phi_W^{m*}Lh^*\\xrightarrow{\\sim}Lh^*L\\Phi_X^{m*}$ is the\ncanonical identification, and for every $m\\geq1$ the global operators\n$F_{c,m}$ of [def-trf-frobenius-coefficient-morphism] satisfy\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(X,K)\\bigr)\n=\n\\operatorname{tr}_A\\bigl(F_{c,m}(j^*\\psi)\\mid R\\Gamma_c(U,j^*K)\\bigr)\n+\n\\operatorname{tr}_A\\bigl(F_{c,m}(i^*\\psi)\\mid R\\Gamma_c(Z,i^*K)\\bigr).\n$$\n\nThe proof below uses the Weil maps only as morphisms: the\ninvertibility of $\\varphi$ is used only to stay inside the category\n$D^b_{ctf,\\mathrm W}$ on which $F_{c,-}^{\\,m}$ is defined.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.md",
+  "place": "node prop-trf-trace-additivity-open-closed, order 2373"
+ },
+ "stmt_deps": [
+  "def-trf-strict-weil-complex",
+  "def-trf-iterated-weil-map",
+  "def-trf-frobenius-operators",
+  "def-trf-categorical-trace",
+  "def-trf-frobenius-coefficient-morphism"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1: restricted Weil structures.* Write\n$g_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$ and\nlikewise for $U,Z$. The automorphism $g_X$ maps $U=U_0\\times_{k_0}k$\nand $Z=Z_0\\times_{k_0}k$ onto themselves, with restrictions $g_U$ and\n$g_Z$. For the open square this is\n[lem-trf-frobenius-open-square]; for the closed square the same\nargument applies, since the inverse image of the closed subscheme\n$Z$ under the isomorphism $g_X$ is the closed subscheme\n$Z_0\\times_{k_0}k$ with its restricted structure sheaf. Hence\n$h\\,g_W=g_X\\,h$ and both squares are Cartesian. The complexes\n$Lh^*K$ lie in $D^b_{ctf}(W,A)$ by [thm-sf-ctf-stability](i),\nand $h^*\\varphi$ is a composite of two isomorphisms, so\n$(Lh^*K,h^*\\varphi)$ is a strict Weil complex. The iterate formula\nfollows by induction on $m$ from the product formula of\n[def-trf-iterated-weil-map]: the inductive step is naturality of\nthe pullback identifications in the coefficient together with their\ncocycle law for the composite $g_X^{m+1}=g_X\\circ g_X^m$.",
+   "uses": [
+    "lem-trf-frobenius-open-square",
+    "thm-sf-ctf-stability",
+    "def-trf-iterated-weil-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: the triangle is Frobenius-compatible.* Fix $m\\geq1$, write\n$g=g_X^m$ and $\\psi_K=\\varphi^{[m]}:Lg^*K\\to K$. For the other two\nvertices of the open–closed triangle of\n[prop-sf-open-closed-triangle-all-stages],\n\n$$\nj_!j^*K\\xrightarrow{\\ \\varepsilon\\ }K\\xrightarrow{\\ \\eta\\ }\ni_*i^*K\\xrightarrow{\\ \\delta\\ }j_!j^*K[1],\n$$\n\nput\n$\\psi_U=j_!(j^*\\varphi)^{[m]}\\circ b_g:Lg^*j_!j^*K\\to j_!j^*K$ (the $m$-th iterate of the Weil extension by zero [def-trf-weil-extension-zero] of $(j^*K,j^*\\varphi)$), with\n$b_g$ the open-square exchange of [lem-trf-open-square-exchange],\nand $\\psi_Z=i_*(i^*\\varphi)^{[m]}\\circ e_g:Lg^*i_*i^*K\\to i_*i^*K$,\nwith $e_g:Lg^*i_*\\xrightarrow{\\sim}i_*Lg_Z^{m*}$ the proper\nbase-change isomorphism for the closed immersion $i$\n([prop-functor-package], clause (4)).\n\n(a) $\\varepsilon\\circ\\psi_U=\\psi_K\\circ Lg^*\\varepsilon$. Both sides\nare maps $Lg^*j_!j^*K\\cong j_!Lg_U^{m*}j^*K\\to K$, the identification\nbeing $b_g$. By the adjunction $j_!\\dashv j^*$ of\n[prop-weil-open-closed-recollement-adjunctions] it suffices to\ncompare their restrictions to $U$. There $b_g$ is the identity\n([lem-trf-open-square-exchange]) and $j^*\\varepsilon$ is the\nidentity after the unit identification, so both restrictions equal\n$j^*\\varphi^{[m]}\\circ c_{j,m}=(j^*\\varphi)^{[m]}$, by Step 1.\n\n(b) $\\psi_Z\\circ Lg^*\\eta=\\eta\\circ\\psi_K$. Both sides are maps\n$Lg^*K\\to i_*i^*K$. By the adjunction $i^*\\dashv i_*$ of\n[prop-weil-open-closed-recollement-adjunctions] it suffices to\ncompare the adjoint maps $i^*Lg^*K\\to i^*K$. Since $e_g$ is the\nexchange of the Cartesian closed square, its adjoint is the\ncanonical identification $c_{i,m}$, and the counit $i^*i_*\\to\\mathrm{id}$\nis an isomorphism; both adjoints therefore equal\n$i^*\\varphi^{[m]}\\circ c_{i,m}=(i^*\\varphi)^{[m]}$, by Step 1.\n\n(c) $\\psi_U[1]\\circ Lg^*\\delta=\\delta\\circ\\psi_Z$. The functor\n$Lg^*$ is exact, so the image of the triangle under $Lg^*$ is\ndistinguished. By (a) and (b), the pair $(\\psi_U,\\psi_K)$ is\ncompatible with the first arrows; by the axiom of morphisms of\ntriangles there is $\\psi':Lg^*i_*i^*K\\to i_*i^*K$ with\n$\\psi'\\circ Lg^*\\eta=\\eta\\circ\\psi_K$ and\n$\\delta\\circ\\psi'=\\psi_U[1]\\circ Lg^*\\delta$. Then\n$(\\psi'-\\psi_Z)\\circ Lg^*\\eta=0$ by (b), so $\\psi'-\\psi_Z$ factors\nas $d\\circ Lg^*\\delta$ with $d:Lg^*j_!j^*K[1]\\to i_*i^*K$. Via\n$b_g$ the source of $d$ is $j_!N[1]$ with $N=Lg_U^{m*}j^*K$, and\n$\\operatorname{Hom}(j_!N[1],i_*i^*K)=\\operatorname{Hom}(N[1],j^*i_*i^*K)=0$\nsince $j^*i_*=0$ ([prop-weil-open-closed-recollement-adjunctions],\nas in the Hom vanishing of\n[prop-sf-open-closed-triangle-all-stages]). Hence $\\psi'=\\psi_Z$,\nproving (c). Invertibility of the $\\psi$ was not used.",
+   "uses": [
+    "prop-sf-open-closed-triangle-all-stages",
+    "def-trf-weil-extension-zero",
+    "lem-trf-open-square-exchange",
+    "prop-functor-package",
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3: an endomorphism of a triangle of perfect complexes.* By\n[lem-trf-frobenius-operator-compact-description],\n$F_{c,K}^{\\,m}=R\\Gamma_c(X,\\psi_K)\\circ g_{\\gamma,c}^{m,*}$, where\n$g_{\\gamma,c}^{m,*}:R\\Gamma_c(X,-)\\to R\\Gamma_c(X,Lg^*-)$ is the\ncompact-support base change along the automorphism $g$ of the\nCartesian square over $g_s^m$. This exchange is a natural\ntransformation between exact functors, natural in the coefficient\n([fix-lem-exchanges], (1)), and it commutes with the connecting\nmorphisms because it is built from units, counits and pullback\nidentifications of exact functors. Applying the exact functor\n$R\\Gamma_c(X,-)$ to the triangle and using Step 2, the three\nendomorphisms\n\n$$\nE_V=R\\Gamma_c(X,\\psi_V)\\circ g_{\\gamma,c}^{m,*},\n\\qquad V\\in\\{j_!j^*K,\\;K,\\;i_*i^*K\\},\n$$\n\n(with $\\psi_{j_!j^*K}=\\psi_U$, $\\psi_{i_*i^*K}=\\psi_Z$) form an\nendomorphism of the distinguished triangle\n\n$$\nR\\Gamma_c(X,j_!j^*K)\\to R\\Gamma_c(X,K)\\to R\\Gamma_c(X,i_*i^*K)\\to .\n$$\n\nMore precisely, they form an endomorphism of this triangle *of filtered\norigin*: the open–closed triangle is the cofibre sequence of the inclusion\n$j_!j^*K\\to K$, a two-step filtered object with graded pieces $j_!j^*K$ and\n$i_*i^*K$; the maps $\\psi_U,\\psi_K,\\psi_Z$ are the components of one\nendomorphism of this filtered object (Step 2 exhibits $\\psi_U$ as the\nrestriction of $\\psi_K$ to the subobject and $\\psi_Z$ as the induced map on\nthe quotient, with the identifications $b_g$, $e_g$ natural in the\ncoefficient); and $R\\Gamma_c(X,-)\\circ g^{m,*}_{\\gamma,c}$ is a natural\ntransformation of exact functors, so it carries this filtered endomorphism\nto an endomorphism of the two-step filtered perfect complex\n$R\\Gamma_c(X,j_!j^*K)\\subset R\\Gamma_c(X,K)$ in the filtered derived\ncategory $DF(A)$. This filtered origin is what Step 5 uses; an endomorphism\nof the distinguished triangle in the plain derived category, with its three\nsquares commuting only up to unspecified homotopies, would not suffice\n([prop-trf-trace-formal-laws], item (2)).",
+   "uses": [
+    "lem-trf-frobenius-operator-compact-description",
+    "fix-lem-exchanges",
+    "prop-trf-trace-formal-laws"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4: identification with the operators on $U$ and $Z$.* By the\ncomposition law and $Ri_!=Ri_*$ for the proper $i$\n([prop-functor-package], clause (3)),\n$R\\Gamma_c(X,j_!-)\\cong R\\Gamma_c(U,-)$ and\n$R\\Gamma_c(X,i_*-)\\cong R\\Gamma_c(Z,-)$. Under these identifications\nthe compact-support base change $g_{\\gamma,c}^{m,*}$ on $X$, followed\nby $b_g$ resp. $e_g$, is the compact-support base change on $U$\nresp. $Z$ along $g_U^m$ resp. $g_Z^m$: this is the pasting law of\n[fix-lem-exchanges], (2), for the Cartesian squares\n$W\\to X\\to\\operatorname{Spec}k$ over $g_W^m,g,g_s^m$, together with\nits compatibility with the composition law, [fix-lem-exchanges], (4);\nfor $j$ the exchange of the inner square is $b_g$ by construction of\n$\\operatorname{Ex}_!$ via extension by zero, for $i$ it is $e_g$\nbecause $i$ is proper. Hence, by\n[lem-trf-frobenius-operator-compact-description] on $U$ and $Z$ and\nStep 1, $E_{j_!j^*K}$ is conjugate to $F_{c,j^*K}^{\\,m}$ and\n$E_{i_*i^*K}$ to $F_{c,i^*K}^{\\,m}$, and $E_K=F_{c,K}^{\\,m}$.",
+   "uses": [
+    "prop-functor-package",
+    "fix-lem-exchanges",
+    "lem-trf-frobenius-operator-compact-description"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 5: traces.* All three complexes are perfect by\n[prop-trf-compact-support-perfectness], applied to\n$K$, $j^*K$ and $i^*K$, which lie in $D^b_{ctf}$ by Step 1.\nFiltered additivity [prop-trf-trace-formal-laws](2) applied to\nthe filtered endomorphism of Step 3 gives\n$\\operatorname{tr}_A(E_K)=\\operatorname{tr}_A(E_{j_!j^*K})+\\operatorname{tr}_A(E_{i_*i^*K})$,\nand conjugacy invariance [prop-trf-trace-formal-laws](1) together\nwith Step 4 converts the right-hand side to the traces on\n$R\\Gamma_c(U,j^*K)$ and $R\\Gamma_c(Z,i^*K)$. This is the asserted\nidentity.",
+   "uses": [
+    "prop-trf-compact-support-perfectness",
+    "prop-trf-trace-formal-laws"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 6: Frobenius coefficient morphisms (item 3).* Repeat Steps 1–5\nwith the automorphism $g=g_X^m$ replaced by the finite morphism\n$\\Phi=\\Phi_X^m$ and $\\psi_K=\\varphi^{[m]}$ replaced by the iterate\n$\\psi_m$, with the following changes. In Step 1, $\\Phi_X$ is the base\nchange of the absolute Frobenius of $X_0$ ([def-trf-scheme-frobenius]),\nwhich commutes with every morphism, so $h\\Phi_W=\\Phi_Xh$; the formula\nfor the iterates of $h^*\\psi$ follows by induction on $m$ from the\nrecursion of [def-trf-frobenius-coefficient-morphism], exactly as the\niterate formula of Step 1. The open square is Cartesian by\n[lem-trf-frobenius-open-square]. The closed square $i\\Phi_Z^m=\\Phi i$\nneed not be Cartesian, since $\\Phi^{-1}(Z)$ may be a nilpotent\nthickening of $Z$; in Step 2 replace $e_g$ by the ordinary base-change\nmorphism $e:L\\Phi^*Ri_*\\to Ri_*L\\Phi_Z^{m*}$ of this commutative square\n(unit of $L\\Phi_Z^{m*}\\dashv R\\Phi^m_{Z*}$ followed by the counit of\n$i^*\\dashv Ri_*$, as in [def-exchange-projection]). Its adjoint is again\nthe canonical identification $c'_{i,m}$, and it is an isomorphism on\nevery geometric stalk: $\\Phi$ is a universal homeomorphism with\n$\\Phi^{-1}(Z)=Z$ as sets, so both sides have stalk $N_{\\Phi(\\bar z)}$ at\n$\\bar z\\in Z$ and stalk $0$ off $Z$. With these substitutions the\narguments (a)–(c) of Step 2 apply verbatim, and invertibility of\n$\\psi$ is not used.\n\nIn Steps 3 and 4, replace [lem-trf-frobenius-operator-compact-description]\nby [prop-trf-graph-operator]: $F_{c,m}(\\psi)=R\\Gamma_c(X,\\psi_m)\\circ\\Phi^\\sharp$,\nwhere\n$\\Phi^\\sharp:R\\Gamma_c(X,-)\\to R\\Gamma_c(X,L\\Phi^*-)$ is induced by the\nunit of $L\\Phi^*\\dashv R\\Phi_*$, the identification\n$R\\Phi_*\\simeq R\\Phi_!$ for the finite $\\Phi$ and the composition law\nfor $a_X\\Phi=a_X$ ([prop-functor-package], clause (3)). It is a natural\ntransformation between exact functors, built from units and\nidentifications, so it commutes with the connecting morphisms and\nStep 3 applies. For Step 4, the unit of the composite adjunction for\n$\\Phi h=h\\Phi_W^m$ can be computed in either order, and $b_g$ (for $j$,\nnow the open-square exchange $b$ of [lem-trf-open-square-exchange]\nfor $\\Phi$) and $e$ are the mates of the resulting equality\n$h^*R\\Phi_*=R\\Phi^m_{W*}h^*$ on the open, respectively the\nadjoint description on the closed, piece; the unit compatibility of\nmates ([lem-trf-adjoint-mate], item (2)) therefore identifies\n$\\Phi^\\sharp$ on $R\\Gamma_c(X,h_!-)\\cong R\\Gamma_c(W,-)$, followed by\n$b$ or $e$, with $(\\Phi_W^m)^\\sharp$ on $W$, compatibly with the\ncomposition law ([fix-lem-exchanges], (2) and (4)). By\n[prop-trf-graph-operator] on $U$ and $Z$ the three endomorphisms of\nStep 3 are then conjugate to $F_{c,m}(\\psi)$, $F_{c,m}(j^*\\psi)$ and\n$F_{c,m}(i^*\\psi)$. Step 5 applies without change, the complexes being\nperfect by [prop-trf-compact-support-perfectness]. This proves item 3.",
+   "uses": [
+    "def-trf-scheme-frobenius",
+    "def-trf-frobenius-coefficient-morphism",
+    "lem-trf-frobenius-open-square",
+    "def-exchange-projection",
+    "lem-trf-frobenius-operator-compact-description",
+    "prop-trf-graph-operator",
+    "prop-functor-package",
+    "lem-trf-open-square-exchange",
+    "lem-trf-adjoint-mate",
+    "fix-lem-exchanges",
+    "prop-trf-compact-support-perfectness"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-frobenius-open-square",
+  "thm-sf-ctf-stability",
+  "def-trf-iterated-weil-map",
+  "prop-sf-open-closed-triangle-all-stages",
+  "def-trf-weil-extension-zero",
+  "lem-trf-open-square-exchange",
+  "prop-functor-package",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "lem-trf-frobenius-operator-compact-description",
+  "fix-lem-exchanges",
+  "prop-trf-trace-formal-laws",
+  "prop-trf-compact-support-perfectness",
+  "def-trf-scheme-frobenius",
+  "def-trf-frobenius-coefficient-morphism",
+  "def-exchange-projection",
+  "prop-trf-graph-operator",
+  "lem-trf-adjoint-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2373,
+ "blueprint_uses": [
+  "def-exchange-projection",
+  "def-trf-categorical-trace",
+  "def-trf-frobenius-coefficient-morphism",
+  "def-trf-frobenius-operators",
+  "def-trf-iterated-weil-map",
+  "def-trf-scheme-frobenius",
+  "def-trf-strict-weil-complex",
+  "def-trf-weil-extension-zero",
+  "fix-lem-exchanges",
+  "lem-trf-adjoint-mate",
+  "lem-trf-frobenius-open-square",
+  "lem-trf-frobenius-operator-compact-description",
+  "lem-trf-open-square-exchange",
+  "prop-functor-package",
+  "prop-sf-open-closed-triangle-all-stages",
+  "prop-trf-compact-support-perfectness",
+  "prop-trf-graph-operator",
+  "prop-trf-trace-formal-laws",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "thm-sf-ctf-stability"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "labels"
+}

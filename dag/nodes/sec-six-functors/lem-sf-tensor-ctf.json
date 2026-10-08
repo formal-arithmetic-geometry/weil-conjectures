@@ -1,0 +1,84 @@
+{
+ "id": "lem-sf-tensor-ctf",
+ "kind": "statement",
+ "title": "The derived tensor product on the finite-Tor subcategories",
+ "statement": "Fix the global finite-field datum, a prime $\\ell\\ne p$, $n\\geq1$, put\n$A=A_{E,n}$, and let $X$ be a\nfinite-type\n$k$-scheme. Let $K\\in D^b_{ctf}(X,A)$ have\nfinite Tor amplitude in $[a,b]$,\nand let $M\\in D^b_c(X,A)$ be\nbounded constructible.\nThen:\n\n1. **(i)** $K\\otimes_A^LM$ belongs to $D^b_c(X,A)$;\n1. **(ii)** if in addition $M\\in D^b_{ctf}(X,A)$ has finite Tor amplitude\nin $[c,d]$, then $K\\otimes_A^LM$ belongs to $D^b_{ctf}(X,A)$, with\nfinite Tor amplitude in $[a+c,b+d]$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.md",
+  "place": "node lem-sf-tensor-ctf, order 2119"
+ },
+ "stmt_deps": [
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sf-flat-model] fix an isomorphism $K\\cong P$ with $P$ a\nbounded complex of flat $A_X$-module sheaves, $P^q=0$ for\n$q\\notin[a,b]$. Such a $P$ is K-flat, so by\n[def-weil-derived-tensor] the object $K\\otimes_A^LM$ is computed by\nthe ordinary tensor complex $P\\otimes_AM$.",
+   "uses": [
+    "lem-sf-flat-model",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(ii).* Apply [lem-sf-flat-model] again to obtain a bounded flat\nmodel $Q$ of $M$ with $Q^r=0$ for $r\\notin[c,d]$. Then\n$K\\otimes_A^LM\\cong P\\otimes_AQ$, the total complex of the double complex\nwith terms $P^q\\otimes_AQ^r$; each of these terms is flat, the tensor\nproduct of a flat sheaf with a flat sheaf being flat, and they occur only in\ntotal degree $q+r\\in[a+c,b+d]$. So $P\\otimes_AQ$ is a bounded complex of\nflat sheaves concentrated in $[a+c,b+d]$, and [lem-sf-flat-model]\ngives finite Tor amplitude in $[a+c,b+d]$ for $K\\otimes_A^LM$;\nbounded constructibility is (i).",
+   "uses": [
+    "lem-sf-flat-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(i), boundedness.* Since $M$ is bounded constructible, its\ncohomology sheaves vanish outside an interval $[c',d']$, and the\ntruncation $\\sigma_{\\geq c'}\\sigma_{\\leq d'}M$ is a bounded complex $C$ of\n$A_X$-module sheaves with $M\\cong C$ and $C^i=0$ for\n$i\\notin[c',d']$. Then $K\\otimes_A^LM\\cong P\\otimes_AC$, a complex whose\nterms occur only in the finite range $[a+c',b+d']$; hence\n$K\\otimes_A^LM$ is bounded.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*(i), constructibility.* The functor $-\\otimes_A^L-$ is exact on\ntriangulated categories, and a bounded constructible complex is built from\nthe shifts $\\mathcal H^p(K)[-p]$, respectively $\\mathcal H^q(M)[-q]$, of\nits constructible cohomology sheaves by finitely many extensions, the\nsuccessive quotients of the filtration by the truncations $\\tau_{\\geq p}$.\nIt therefore suffices to show that\n$\\mathcal H^r(F\\otimes_A^LG)$ is constructible for constructible sheaves\n$F$ and $G$ in single degrees: this is\n[lem-sf-tor-sheaf-constructible]. The propagation through the\nextensions is the long exact cohomology sequence of a distinguished\ntriangle, in which each cohomology sheaf of the middle term is an extension\nof a subobject of a cohomology sheaf of one outer term by a quotient of a\ncohomology sheaf of the other; constructible sheaves are closed under\nkernels, cokernels and extensions, which is the weak Serre property of\n[thm-constructible-serre] of the proper-base-change chapter,\nin the definition-level form of\n[def-weil-finite-torsion-constructibility] on the pro-étale site\n(local constancy is a condition local for the topology, and the constant\nsheaves form an abelian category). Hence $\\mathcal H^r(K\\otimes_A^LM)$ is\nconstructible for every $r$, which with the boundedness just proved is\n(i).",
+   "uses": [
+    "lem-sf-tor-sheaf-constructible",
+    "thm-constructible-serre",
+    "def-weil-finite-torsion-constructibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-flat-model",
+  "def-weil-derived-tensor",
+  "lem-sf-tor-sheaf-constructible",
+  "thm-constructible-serre",
+  "def-weil-finite-torsion-constructibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2119,
+ "blueprint_uses": [
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-tensor",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "lem-sf-flat-model",
+  "lem-sf-tor-sheaf-constructible",
+  "thm-constructible-serre"
+ ],
+ "uses_not_cited": [
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "labels"
+}

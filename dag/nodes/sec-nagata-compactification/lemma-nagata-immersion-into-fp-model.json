@@ -1,0 +1,79 @@
+{
+ "id": "lemma-nagata-immersion-into-fp-model",
+ "kind": "statement",
+ "title": "Immersion into a finite-presentation model, [stacks-project]",
+ "statement": "Let $S$ be quasi-compact and quasi-separated and let $f\\colon X\\to S$ be\nquasi-compact and locally of finite type with $X$ quasi-compact and\nquasi-separated. Then there exist a scheme $Y$, a morphism $p\\colon Y\\to S$\nof finite presentation, and an immersion $i\\colon X\\to Y$ over $S$, that is,\nwith $p\\circ i=f$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-fp-models/lemma-nagata-immersion-into-fp-model.md",
+  "place": "node lemma-nagata-immersion-into-fp-model, order 383",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01ZE"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-nagata-noetherian-inverse-system"
+ ],
+ "proof": [
+  {
+   "text": "This is the argument of Tag 01ZE. It uses only a Noetherian approximation of\n$X$ itself, not the relative stage data of\n[def-nagata-relative-stage-morphism-data].",
+   "uses": [
+    "def-nagata-relative-stage-morphism-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write $X=\\varprojlim_j X_j$ for a Noetherian approximation of $X$\n([prop-nagata-noetherian-inverse-system]): every $X_j$ is of finite type\nover $\\mathbf Z$ and all transition morphisms, hence also all projections\n$\\pi_j\\colon X\\to X_j$, are affine. For an index $k$ put\n$Y=X_k\\times_{\\operatorname{Spec}\\mathbf Z}S$ and\n$i=(\\pi_k,f)\\colon X\\to Y$, and let $p\\colon Y\\to S$ be the second\nprojection. Then $p\\circ i=f$, and $p$ is the base change of\n$X_k\\to\\operatorname{Spec}\\mathbf Z$, which is of finite presentation because\n$X_k$ is of finite type over the Noetherian ring $\\mathbf Z$.",
+   "uses": [
+    "prop-nagata-noetherian-inverse-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "It remains to choose $k$ so large that $i$ is an immersion. Cover $X$ by\nfinitely many affine opens $W_a$ such that $f(W_a)\\subseteq V_a$ for affine\nopens $V_a\\subseteq S$. As $X$ is the limit of the $X_j$, after enlarging the\nindex we may write $W_a=\\pi_j^{-1}(U_a)$ with $U_a\\subseteq X_j$ affine open.\nEach $\\Gamma(W_a)$ is a finitely generated $\\Gamma(V_a)$-algebra, and its\nfinitely many generators are defined at some common stage $k$, that is, they\nlie in the image of $\\Gamma(U_a^{(k)})\\to\\Gamma(W_a)$, where $U_a^{(k)}$\ndenotes the preimage of $U_a$ in $X_k$. Put\n$O_a=\\mathrm{pr}_1^{-1}(U_a^{(k)})\\cap\\mathrm{pr}_2^{-1}(V_a)$, an affine open\nof $Y$. Then $i^{-1}(O_a)=W_a$, and the map $\\Gamma(O_a)\\to\\Gamma(W_a)$ is\nsurjective, since its image is a $\\Gamma(V_a)$-subalgebra of $\\Gamma(W_a)$\ncontaining the chosen generators. So $i$ restricts to a closed immersion\n$W_a\\to O_a$ for every $a$. The opens $O_a$ cover the image of $i$, and being\nan immersion is local on the target, so $i$ is an immersion.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-relative-stage-morphism-data",
+  "prop-nagata-noetherian-inverse-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-fp-models/lemma-nagata-immersion-into-fp-model.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "proof_cites_literature",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 383,
+ "blueprint_uses": [
+  "def-nagata-noetherian-inverse-system",
+  "prop-nagata-noetherian-inverse-system"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_isImmersion_locallyOfFinitePresentation",
+  "branch": "slopmaster2",
+  "line": 4063,
+  "sorry_free": true,
+  "body_lines": 105
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.Hom.exists_isImmersion_locallyOfFinitePresentation"
+ ],
+ "uses_not_cited": [
+  "def-nagata-noetherian-inverse-system"
+ ],
+ "proof_split_by": "paragraphs"
+}

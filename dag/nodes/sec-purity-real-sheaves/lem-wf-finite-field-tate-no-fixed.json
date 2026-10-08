@@ -1,0 +1,75 @@
+{
+ "id": "lem-wf-finite-field-tate-no-fixed",
+ "kind": "statement",
+ "title": "Arithmetic Frobenius has no fixed vector on the Jacobian Tate module",
+ "statement": "Let $C_0/\\mathbf F_Q$ be a smooth projective geometrically connected curve,\nput $C=C_0\\times_{\\mathbf F_Q}\\overline{\\mathbf F}_Q$, and let $J$ be its\nJacobian, equipped with the canonical semilinear\naction of arithmetic Frobenius $\\sigma_Q:z\\mapsto z^Q$\n([lem-wf-geometric-jacobian-galois-action]). If $\\ell\\nmid Q$, then\n\n$$\n(T_\\ell J)^{\\sigma_Q=1}=0,\n$$\n\nand $\\sigma_Q-1$ is an automorphism of the\nrational Tate module $V_\\ell J$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-finite-field-tate-no-fixed.md",
+  "place": "node lem-wf-finite-field-tate-no-fixed, order 2622"
+ },
+ "stmt_deps": [
+  "lem-wf-geometric-jacobian-galois-action"
+ ],
+ "proof": [
+  {
+   "text": "Let $J_0$ be the Jacobian of $C_0$ over $\\mathbf F_Q$ given by\n[thm-pd-jacobian-general-field] (which applies since $C_0$ is smooth,\nprojective and geometrically connected), so that\n$J\\cong J_0\\times_{\\mathbf F_Q}\\overline{\\mathbf F}_Q$. We check that $J_0$ is an\nabelian variety over $k_0=\\mathbf F_Q$ in the sense of [d-ab-field], with\n$q=Q$ and $p$ the characteristic, so that $\\ell\\ne p$ as $\\ell\\nmid Q$. By\n[thm-pd-jacobian-general-field] it is an abelian variety over $\\mathbf F_Q$,\nhence a proper (in particular finite-type) group scheme. It is commutative:\nit represents the group-valued functor $\\operatorname{Pic}^0_{C_0/\\mathbf F_Q}$,\nwhose values are abelian groups, so by Yoneda its group law is commutative.\nIts base change $J_0\\times_{\\mathbf F_Q}\\overline{\\mathbf F}_Q\\cong J$ is an\nabelian variety over $\\overline{\\mathbf F}_Q$ ([def-sc-jacobian]), hence\nconnected and smooth, so its local rings are regular; thus $J_0$ is smooth and\ngeometrically connected in the sense of [d-ab-field].",
+   "uses": [
+    "thm-pd-jacobian-general-field",
+    "d-ab-field",
+    "def-sc-jacobian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [lem-wf-geometric-jacobian-galois-action], under\n$J\\cong J_0\\times_{\\mathbf F_Q}\\overline{\\mathbf F}_Q$ the canonical action of\n$\\sigma_Q$ is $\\mathrm{id}_{J_0}\\times\\sigma_Q$, which on\n$J(\\overline{\\mathbf F}_Q)=J_0(\\overline{\\mathbf F}_Q)$ is the action through the\n$\\mathbf F_Q$-structure of $J_0$, i.e. by coordinates. Thus $\\sigma_Q$ acts on\n$A:=J_0(\\overline{\\mathbf F}_Q)$ as the arithmetic Frobenius $\\sigma$ of\n[d-ab-field] or as its inverse $F$ (according to the convention for composing\npoints with $\\operatorname{Spec}\\sigma_Q$); either way it has the same fixed\nvectors as $\\sigma$ and as $F$. The Tate module of [def-wf-abelian-tate-module]\nis the Tate module of the abelian group $J(\\overline{\\mathbf F}_Q)=A$\n([def-tate-module-abelian-group]), and the action is componentwise. Hence\n[prop-av-tate-no-frobenius-fixed], applied to the abelian variety $J_0/\\mathbf F_Q$,\ngives $(T_\\ell J)^{\\sigma_Q=1}=(T_\\ell A)^\\sigma=0$, proving the first\nassertion.",
+   "uses": [
+    "lem-wf-geometric-jacobian-galois-action",
+    "d-ab-field",
+    "def-wf-abelian-tate-module",
+    "def-tate-module-abelian-group",
+    "prop-av-tate-no-frobenius-fixed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [thm-av-final](c),\n$J[\\ell^n](\\overline{\\mathbf F}_Q)\\cong (\\mathbf Z/\\ell^n\\mathbf Z)^{2\\dim J}$; with the multiplication-by-$\\ell$\ntransition maps this makes $T_\\ell J$ finite free ([thm-av-final](d)) and $V_\\ell J$\nfinite-dimensional. If a vector of $V_\\ell J$ is killed by $\\sigma_Q-1$,\nmultiplying it by a power of $\\ell$ puts it in $T_\\ell J$, where the first\nassertion kills it. Hence $\\sigma_Q-1$ is injective on the\nfinite-dimensional vector space $V_\\ell J$, and elementary linear algebra\nmakes it surjective as well.",
+   "uses": [
+    "thm-av-final"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-pd-jacobian-general-field",
+  "d-ab-field",
+  "def-sc-jacobian",
+  "lem-wf-geometric-jacobian-galois-action",
+  "def-wf-abelian-tate-module",
+  "def-tate-module-abelian-group",
+  "prop-av-tate-no-frobenius-fixed",
+  "thm-av-final"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-finite-field-tate-no-fixed.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2622,
+ "blueprint_uses": [
+  "d-ab-field",
+  "def-sc-jacobian",
+  "def-tate-module-abelian-group",
+  "def-wf-abelian-tate-module",
+  "lem-wf-geometric-jacobian-galois-action",
+  "prop-av-tate-no-frobenius-fixed",
+  "thm-av-final",
+  "thm-pd-jacobian-general-field"
+ ],
+ "proof_split_by": "paragraphs"
+}

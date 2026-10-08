@@ -1,0 +1,135 @@
+{
+ "id": "thm-a1-affine-curve-upper",
+ "kind": "statement",
+ "title": "Affine compact-support upper bound",
+ "statement": "Let $C_0$ be a smooth geometrically connected affine curve and let\n$\\mathcal F$ be a lisse Weil sheaf that is punctually $\\iota$-pure of\nweight $w$. Then every\ncompactly supported cohomology group\n$H_c^i(C,\\mathcal F)$ has weights at most $w+i$. More precisely,\n$H_c^0(C,\\mathcal F)=0$, $H_c^2(C,\\mathcal F)$ is $\\iota$-pure of\nweight $w+2$, and $H_c^i(C,\\mathcal F)=0$ for $i\\notin\\{0,1,2\\}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-affine-curve-upper.md",
+  "place": "node thm-a1-affine-curve-upper, order 2807"
+ },
+ "stmt_deps": [
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-punctual-weights"
+ ],
+ "proof": [
+  {
+   "text": "The bounds in degrees zero and two are\n[lem-a1-affine-hc0], [lem-a1-curve-hc2-bound]; the first is the\nvanishing $H_c^0(C,\\mathcal F)=0$, and the purity of weight $w+2$ in\ndegree two is [lem-a1-affine-hc2-pure].\nThere is no cohomology outside degrees zero through two, by the\ncohomological range [lem-zl-affine-curve-range] of an affine curve\napplied to the (constructible) lisse sheaf $\\mathcal F$.",
+   "uses": [
+    "lem-a1-affine-hc0",
+    "lem-a1-curve-hc2-bound",
+    "lem-a1-affine-hc2-pure",
+    "lem-zl-affine-curve-range"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For degree one choose the finite map of\n[lem-a1-finite-map-curve]. By\n[lem-a1-reduction-composition], the cohomology to be bounded is\n$H_c^1(\\mathbf A^1,\\mathcal K)$, where\n$\\mathcal K=g_*j_!\\mathcal F$.\nOn the open\n$W_0=\\mathbf A^1\\setminus(B\\cup g(C'_0\\setminus C_0))$\nthe restriction of the transported complex is lisse and pure of weight\n$w$, by [lem-a1-reduction-lisse-pure].\nFor the inclusion $a:W_0\\hookrightarrow\\mathbf A^1$,\nthe open–closed triangle of [def-weil-open-closed-recollement] (at $\\Qlb$ for Weil complexes,\n[prop-sf-open-closed-triangle-all-stages]) and the finite-boundary\nvanishing [lem-a1-finite-boundary-cohomology] give\n\n$$\nH_c^1(W,a^*\\mathcal K)\\twoheadrightarrow\nH_c^1(\\mathbf A^1,\\mathcal K).\n$$",
+   "uses": [
+    "lem-a1-finite-map-curve",
+    "lem-a1-reduction-composition",
+    "lem-a1-reduction-lisse-pure",
+    "def-weil-open-closed-recollement",
+    "prop-sf-open-closed-triangle-all-stages",
+    "lem-a1-finite-boundary-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "It suffices to bound the source.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Apply [lem-a1-unramified-at-infinity] to the lisse sheaf\n$a^*\\mathcal K$ on $W_0$. After a finite constant extension it gives a\ndense open $v:V_0\\hookrightarrow\\mathbf A^1$ and a lisse sheaf\n$\\mathcal E$ on $V_0$, punctually $\\iota$-pure of weight $w$ and\nunramified at infinity, with a Frobenius-equivariant surjection\n$H_c^1(V,\\mathcal E)\\twoheadrightarrow H_c^1(W,a^*\\mathcal K)$. It\nsuffices to bound $H_c^1(V,\\mathcal E)$ by $w+1$.",
+   "uses": [
+    "lem-a1-unramified-at-infinity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pass to the middle extension $v_*\\mathcal E$, as in the sketch. Let\n$i:Z_0\\hookrightarrow\\mathbf A^1$ be the finite complement of $V_0$.\nThe boundary sequence [prop-a1-curve-boundary-sequence] for $v$ gives\nthe Frobenius-equivariant exact sequence\n\n$$\nH_c^0(Z,i^*v_*\\mathcal E)\\longrightarrow H_c^1(V,\\mathcal E)\n\\longrightarrow H_c^1(\\mathbf A^1,v_*\\mathcal E)\\longrightarrow0 .\n$$",
+   "uses": [
+    "prop-a1-curve-boundary-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stalks of $i^*v_*\\mathcal E$ have weights at most $w$ by the\nboundary semicontinuity [lem-wf-boundary-semicontinuity] (with\n$\\beta=w$), so $H_c^0(Z,i^*v_*\\mathcal E)$, and hence its image in\n$H_c^1(V,\\mathcal E)$, has weights at most $w$ by\n[lem-a1-finite-boundary-weights] and\n[lem-a1-subquotient-extension-bounds]. The right-hand group has\nweights at most $w+1$ by the affine-line estimate for the middle\nextension [thm-a1-line-middle-extension-upper]; this is where the\ncomposition filtration, the exactness of the middle extension at a\nfixed pure weight, and the Fourier bound of each factor enter. By\n[lem-a1-extension-bounds], $H_c^1(V,\\mathcal E)$ has weights at most\n$w+1$.",
+   "uses": [
+    "lem-wf-boundary-semicontinuity",
+    "lem-a1-finite-boundary-weights",
+    "lem-a1-subquotient-extension-bounds",
+    "thm-a1-line-middle-extension-upper",
+    "lem-a1-extension-bounds"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The successive surjections preserve this bound by\n[lem-a1-subquotient-extension-bounds].\nFinally finite constant extensions preserve and reflect weight\nbounds, as verified in [lem-a1-weight-bound-constant-extension].\nThis proves the degree-one assertion over the original field and\ncompletes the proof.",
+   "uses": [
+    "lem-a1-subquotient-extension-bounds",
+    "lem-a1-weight-bound-constant-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-affine-hc0",
+  "lem-a1-curve-hc2-bound",
+  "lem-a1-affine-hc2-pure",
+  "lem-zl-affine-curve-range",
+  "lem-a1-finite-map-curve",
+  "lem-a1-reduction-composition",
+  "lem-a1-reduction-lisse-pure",
+  "def-weil-open-closed-recollement",
+  "prop-sf-open-closed-triangle-all-stages",
+  "lem-a1-finite-boundary-cohomology",
+  "lem-a1-unramified-at-infinity",
+  "prop-a1-curve-boundary-sequence",
+  "lem-wf-boundary-semicontinuity",
+  "lem-a1-finite-boundary-weights",
+  "lem-a1-subquotient-extension-bounds",
+  "thm-a1-line-middle-extension-upper",
+  "lem-a1-extension-bounds",
+  "lem-a1-weight-bound-constant-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-affine-curve-upper.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2807,
+ "blueprint_uses": [
+  "def-weil-open-closed-recollement",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-punctual-weights",
+  "lem-a1-affine-hc0",
+  "lem-a1-affine-hc2-pure",
+  "lem-a1-curve-hc2-bound",
+  "lem-a1-extension-bounds",
+  "lem-a1-finite-boundary-cohomology",
+  "lem-a1-finite-boundary-weights",
+  "lem-a1-finite-map-curve",
+  "lem-a1-reduction-composition",
+  "lem-a1-reduction-lisse-pure",
+  "lem-a1-subquotient-extension-bounds",
+  "lem-a1-unramified-at-infinity",
+  "lem-a1-weight-bound-constant-extension",
+  "lem-wf-boundary-semicontinuity",
+  "lem-zl-affine-curve-range",
+  "prop-a1-curve-boundary-sequence",
+  "prop-sf-open-closed-triangle-all-stages",
+  "thm-a1-line-middle-extension-upper"
+ ],
+ "uses_not_cited": [
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-punctual-weights"
+ ],
+ "proof_split_by": "paragraphs"
+}

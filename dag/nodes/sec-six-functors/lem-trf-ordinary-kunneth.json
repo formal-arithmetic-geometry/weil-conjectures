@@ -1,0 +1,82 @@
+{
+ "id": "lem-trf-ordinary-kunneth",
+ "kind": "statement",
+ "title": "Ordinary Kunneth for a general morphism",
+ "statement": "Use the finite coefficient ring $A=A_{E,n}$ of\n[def-trf-coefficient-conventions]. Let $f:X\\to Y$ be a morphism of\nseparated finite-type\nschemes, let $Z$ be an auxiliary such scheme, and let $L\\in D^b_{ctf}(X,A)$, $Q\\in D^b_{ctf}(Z,A)$ in the\nfinite-Tor constructible\ncategory. Then the canonical comparison\n\n$$\nRf_*L\\boxtimes_A^{\\mathrm L} Q\n\\xrightarrow{\\ \\sim\\ }\nR(f\\times\\operatorname{id}_Z)_*\\bigl(L\\boxtimes_A^{\\mathrm L} Q\\bigr)\n$$\n\nis an isomorphism, natural in $L$ and $Q$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.md",
+  "place": "node lem-trf-ordinary-kunneth, order 2218",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F1N"
+   },
+   {
+    "document": "SGA 5",
+    "place": "(*Provenance:* Stacks Project, Étale Cohomology, Lemma 59.97.8, [Tag `0F1N`](https://stacks.math.columbia.edu/tag/0F1N), which is [lem-kun-0f1n] here, together with SGA 5, III, 1.1 and 1.6.4 for the coefficient and site generality used here.)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Consider the Cartesian square\n\n$$\n\\begin{gathered}\nX\\times Z \\xrightarrow{f\\times\\operatorname{id}_Z} Y\\times Z,\\\\\np_X:X\\times Z\\to X,\\qquad p_Y:Y\\times Z\\to Y,\\qquad\np_Z:X\\times Z\\to Z,\\qquad p'_Z:Y\\times Z\\to Z,\n\\end{gathered}\n$$\n\nwith $p_Z=p'_Z\\circ(f\\times\\operatorname{id}_Z)$. Writing the external\nproduct as\n$L\\boxtimes_A^{\\mathrm L}Q=p_X^*L\\otimes_A^{\\mathrm L}p_Z^*Q =p_X^*L\\otimes_A^{\\mathrm L}(f\\times\\operatorname{id}_Z)^*\\bigl(p'_Z{}^*Q\\bigr)$,\nthe canonical comparison is the composite\n\n$$\n\\begin{aligned}\nRf_*L\\boxtimes_A^{\\mathrm L}Q\n= p_Y^*Rf_*L\\otimes_A^{\\mathrm L}p'_Z{}^*Q\n&\\longrightarrow\nR(f\\times\\operatorname{id}_Z)_*\\bigl(p_X^*L\\bigr)\n\\otimes_A^{\\mathrm L}p'_Z{}^*Q\\\\\n&\\longrightarrow\nR(f\\times\\operatorname{id}_Z)_*\\bigl(L\\boxtimes_A^{\\mathrm L}Q\\bigr)\n\\end{aligned}\n$$\n\nof the base-change map along $p_Y$ and the projection map for the ordinary\ndirect image $R(f\\times\\operatorname{id}_Z)_*$. Neither map is an isomorphism\nby a general theorem: $Z$ is an arbitrary finite-type scheme, so $p_Y$ is\nsmooth only when $Z$ is and smooth base change does not apply, and the\nprojection formula for $Rf_*$ (as opposed to $Rf_!$) is not an isomorphism in\ngeneral.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 1: $\\mathbf Z/N$-coefficients.* Put $N=\\ell^n$, so that $A$ is a\n$\\mathbf Z/N$-algebra. With $K=k$, $X\\leftarrow X'\\leftarrow Y$ and\n$\\Spec K\\leftarrow S'\\leftarrow T$ of [lem-kun-0f1n] taken to be\n$Z\\leftarrow Z\\times Y\\leftarrow Z\\times X$ and\n$\\Spec k\\leftarrow Y\\xleftarrow{f}X$, that lemma says precisely that for\nevery $E\\in D(Z_{\\Et},\\mathbf Z/N)$ and $F\\in D(X_{\\Et},\\mathbf Z/N)$ the\ncanonical map\n\n$$\np'_Z{}^{*}E\\otimes^{\\mathrm L}_{\\mathbf Z/N}p_Y^*Rf_*F\n\\longrightarrow\nR(f\\times\\operatorname{id}_Z)_*\\bigl(p_Z^*E\\otimes^{\\mathrm L}_{\\mathbf Z/N}p_X^*F\\bigr)\n$$\n\nis an isomorphism (its bounded form is [lem-kun-0f1j]). This is the\nassertion for $\\mathbf Z/N$-coefficients, up to the symmetry of the tensor\nproduct.",
+   "uses": [
+    "lem-kun-0f1n",
+    "lem-kun-0f1j"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: coefficient transport to $A$.* Let $P$ be the bounded flat\n$A$-model of $L$ given by [lem-sf-flat-model]. Both sides of the\ncomparison are exact in $Q$, so the finite $\\varpi_E$-adic filtration\n$Q\\supseteq\\varpi_EQ\\supseteq\\dots$ of a bounded complex (equivalently, the\ntriangles $\\varpi_E^{i+1}\\mathcal H^q\\to\\varpi_E^{i}\\mathcal H^q\\to\n\\varpi_E^{i}\\mathcal H^q/\\varpi_E^{i+1}\\mathcal H^q$ on the cohomology\nsheaves, together with the truncation triangles) reduces the assertion to\nthe case where $Q$ is a single sheaf of $\\kappa$-modules,\n$\\kappa=A/(\\varpi_E)$. For such $Q$,\n$P\\otimes_A Q=(P\\otimes_A\\kappa)\\otimes_\\kappa Q$ with $P\\otimes_A\\kappa$ a\ncomplex of flat $\\kappa$-module sheaves, and the comparison for\n$(L,Q)$ over $A$ is the comparison for $(P\\otimes_A\\kappa,Q)$ over the\nfinite field $\\kappa$. Step 1 and the proof of [lem-kun-0f1j] are linear\nover the coefficient field — truncations, flat resolutions, filtered colimits\nof constructible sheaves, the embedding of a constructible sheaf into a\nfinite sum of $\\pi_{i*}$ of constant sheaves for finite $\\pi_i$, and dimension\nshifting — and apply verbatim with the finite field $\\kappa$ in place of\n$\\mathbf F_\\ell$; alternatively, $\\kappa$ is a finite free\n$\\mathbf F_\\ell$-module, so $\\kappa$-linear constructible sheaves are\n$\\mathbf F_\\ell$-constructible sheaves with a $\\kappa$-action and the\n$\\kappa$-linear comparison is a direct summand of the $\\mathbf F_\\ell$-linear\none.\n\nThe composite is the canonical comparison, since both maps are natural in\ntheir variables; naturality in $L$ and $Q$ follows from the functoriality of\nthe base-change and projection maps.\n(*Provenance:* Stacks Project, Étale Cohomology, Lemma 59.97.8,\n[Tag `0F1N`](https://stacks.math.columbia.edu/tag/0F1N), which is\n[lem-kun-0f1n] here, together with SGA 5, III, 1.1 and 1.6.4 for the\ncoefficient and site generality used here.)",
+   "uses": [
+    "lem-sf-flat-model",
+    "lem-kun-0f1j",
+    "lem-kun-0f1n"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-0f1n",
+  "lem-kun-0f1j",
+  "lem-sf-flat-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2218,
+ "blueprint_uses": [
+  "def-trf-coefficient-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "lem-kun-0f1j",
+  "lem-kun-0f1n",
+  "lem-sf-flat-model"
+ ],
+ "uses_not_cited": [
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "labels"
+}
