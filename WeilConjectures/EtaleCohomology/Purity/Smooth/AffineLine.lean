@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Compactification.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
@@ -61,6 +62,7 @@ Two clauses of the blueprint are stated only in part, and are TODOs.
   `AlgebraicGeometry.Etale.injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf`
 - `AlgebraicGeometry.Etale.eq_of_leftDerivedUpperStar_oneSection_eq`
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpaceZero`
+- `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`
 -/
 
 @[expose] public section
@@ -225,6 +227,24 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero {k : Type u} [Field
         ((twistShift Λ 𝔸(ULift.{u} (Fin c); B) c).obj
           (constantComplex Λ 𝔸(ULift.{u} (Fin c); B))) ≅
       constantComplex Λ B) :=
+  sorry
+
+/-- Blueprint `cor-pur-vector-bundle-purity`: Vector-bundle purity
+
+*The `Rπ^!`-form of `sk-prop-an` (ii), for the trivial bundle.* For the projection
+`π : 𝔸(n; B) ⟶ B` of relative affine space in `c = #n` variables,
+
+`ω_π = Rπ^! Λ_B ≅ Λ_{𝔸(n; B)}(c)[2c]`.
+
+This is the case `K = Λ_B` of affine-space purity (`cor-pur-affine-space-purity`), and the
+case of a trivial bundle of vector-bundle purity; the projection is compactified by projective
+space (`AlgebraicGeometry.AffineSpace.hasCompactification`). The blueprint proves it by
+induction on `c` from the affine-line purity, the integration map of `𝔸¹_B` being the
+transpose of the trace of `ℙ¹_B`. -/
+theorem nonempty_iso_dualizingComplex_affineSpace (n : Type u) [Finite n] (B : Scheme.{u})
+    [HasInvertibleExponent Λ B] :
+    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (𝔸(n; B) ↘ B) ≅
+      (twistShift Λ 𝔸(n; B) (Nat.card n)).obj (constantComplex Λ 𝔸(n; B))) :=
   sorry
 
 end Etale
