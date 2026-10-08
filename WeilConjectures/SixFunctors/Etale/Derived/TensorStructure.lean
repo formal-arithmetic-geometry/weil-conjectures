@@ -87,12 +87,14 @@ an isomorphism between `- ⊗ᴸ -` and the flipped bifunctor `(K, M) ↦ M ⊗�
 tensor product is symmetric monoidal (blueprint `sk-def-sf-operations`, remark
 `rem-sf-summary`); this is the existence of its symmetry.
 
-Not proved yet: the symmetry should be the derived functor of the symmetry of the tensor
-product of complexes, which carries the Koszul sign, and the monoidal structure on the
-category of complexes is not braided yet. -/
+It is the braiding of `D(X_ét)` given by `DerivedCategory.nonempty_braidedCategory`. -/
 theorem nonempty_iso_derivedTensor_flip :
-    Nonempty (derivedTensor A X ≅ (derivedTensor A X).flip) :=
-  sorry
+    Nonempty (derivedTensor A X ≅ (derivedTensor A X).flip) := by
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
+    (Sheaf X.smallEtaleTopology A)
+  exact ⟨NatIso.ofComponents (fun K ↦ NatIso.ofComponents (fun M ↦ β_ K M)
+    (fun g ↦ BraidedCategory.braiding_naturality_right K g))
+    (fun f ↦ by ext M; exact BraidedCategory.braiding_naturality_left f M)⟩
 
 variable {A X}
 
