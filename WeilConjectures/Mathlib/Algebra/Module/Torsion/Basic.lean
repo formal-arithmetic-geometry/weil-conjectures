@@ -29,6 +29,8 @@ the structural input that makes the Tate module of an abelian variety a free `�
   prime `ℓ ∣ n`, then `D[n] ≃+ (Fin r → ZMod n)`.
 - `AddSubgroup.exists_exact_torsionBy_quotient`: for a subgroup `Λ` of an `n`-divisible group
   `G`, the exact sequence `0 → G[n] / Λ[n] → (G / Λ)[n] → Λ / nΛ → 0`.
+- `AddMonoidHom.finite_quotient_range_zsmul_of_ker_le`: `A / nA` is finite if `A` maps to a
+  finitely generated group with kernel divisible by `n`.
 
 ## Implementation notes
 
@@ -388,3 +390,51 @@ theorem finite_torsionBy_quotient (Λ : AddSubgroup G) {n : ℕ} (hn : n ≠ 0)
 end Quotient
 
 end AddSubgroup
+
+/-- Let `D : A →+ F` be a homomorphism of abelian groups with `F` finitely generated, and `n ≠ 0`.
+If every element of the kernel of `D` is divisible by `n`, then `A / nA` is finite: it embeds
+into `D(A) / n D(A)`, a finitely generated `n`-torsion group. -/
+theorem AddMonoidHom.finite_quotient_range_zsmul_of_ker_le {A F : Type*} [AddCommGroup A]
+    [AddCommGroup F] [Module.Finite ℤ F] (D : A →+ F) {n : ℕ} (hn : n ≠ 0)
+    (hker : D.ker ≤ (zsmulAddGroupHom (α := A) n).range) :
+    Finite (A ⧸ (zsmulAddGroupHom (α := A) n).range) := by
+  set N := (zsmulAddGroupHom (α := A) n).range
+  set Λ := D.range
+  set M := (zsmulAddGroupHom (α := Λ) n).range
+  have : Module.Finite ℤ Λ :=
+    Module.Finite.iff_fg.2 (IsNoetherian.noetherian (AddSubgroup.toIntSubmodule Λ))
+  have : Module.Finite ℤ (Λ ⧸ M) := by
+    rw [Module.Finite.iff_addGroup_fg]
+    have : AddGroup.FG Λ := Module.Finite.iff_addGroup_fg.1 inferInstance
+    exact AddGroup.fg_of_surjective (QuotientAddGroup.mk'_surjective M)
+  have : Finite (Λ ⧸ M) := Module.finite_of_fg_torsion _ fun x ↦ by
+    induction x using QuotientAddGroup.induction_on with
+    | H l =>
+    refine ⟨⟨(n : ℤ), mem_nonZeroDivisors_of_ne_zero (by exact_mod_cast hn)⟩, ?_⟩
+    change (n : ℤ) • (QuotientAddGroup.mk l : Λ ⧸ M) = 0
+    rw [← QuotientAddGroup.mk_zsmul, QuotientAddGroup.eq_zero_iff]
+    exact ⟨l, rfl⟩
+  let φ : A →+ Λ ⧸ M := (QuotientAddGroup.mk' M).comp D.rangeRestrict
+  have hN : N ≤ φ.ker := by
+    rintro _ ⟨a, rfl⟩
+    rw [AddMonoidHom.mem_ker]
+    change (QuotientAddGroup.mk (D.rangeRestrict ((n : ℤ) • a)) : Λ ⧸ M) = 0
+    rw [QuotientAddGroup.eq_zero_iff]
+    exact ⟨D.rangeRestrict a, by simp⟩
+  refine Finite.of_injective (QuotientAddGroup.lift N φ hN) ?_
+  rw [← AddMonoidHom.ker_eq_bot_iff, eq_bot_iff]
+  intro x hx
+  induction x using QuotientAddGroup.induction_on with
+  | H a =>
+  rw [AddMonoidHom.mem_ker, QuotientAddGroup.lift_mk] at hx
+  change (QuotientAddGroup.mk (D.rangeRestrict a) : Λ ⧸ M) = 0 at hx
+  rw [QuotientAddGroup.eq_zero_iff] at hx
+  obtain ⟨⟨_, b, rfl⟩, hb⟩ := hx
+  have hb' : D ((n : ℤ) • b) = D a := by
+    rw [map_zsmul]; exact congrArg Subtype.val hb
+  obtain ⟨c, hc⟩ := hker (show a - (n : ℤ) • b ∈ D.ker by
+    rw [AddMonoidHom.mem_ker, map_sub, hb', sub_self])
+  rw [AddSubgroup.mem_bot, QuotientAddGroup.eq_zero_iff]
+  refine ⟨c + b, ?_⟩
+  simp only [zsmulAddGroupHom_apply] at hc ⊢
+  rw [smul_add, hc, sub_add_cancel]

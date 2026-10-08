@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
+public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
@@ -118,8 +120,115 @@ subgroup `Λ` of the free abelian group `ℤ^S`, and `𝒪(C)ˣ / 𝒪(C)ˣⁿ �
 (blueprint: `lem-sc-affine-unit-quotient`) -/
 theorem finite_units_quotient (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]
     [IsAffine C] (n : ℕ) (hn : 0 < n) :
-    Finite (Additive Γ(C, ⊤)ˣ ⧸ (zsmulAddGroupHom (α := Additive Γ(C, ⊤)ˣ) n).range) :=
-  sorry
+    Finite (Additive Γ(C, ⊤)ˣ ⧸ (zsmulAddGroupHom (α := Additive Γ(C, ⊤)ˣ) n).range) := by
+  obtain ⟨c, hZ, hsm, hfin, hcl⟩ := IsConnectedCurve.exists_smooth_properCompactification f
+  have := c.isProper
+  have := c.isOpenImmersion
+  have := IsConnectedCurve.connectedSpace' c.g
+  have := IsConnectedCurve.nonempty f
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : IsRegular c.Z := IsRegular.of_smooth c.g
+  have : IrreducibleSpace c.Z := IsRegular.irreducibleSpace c.Z
+  have : IsReduced c.Z := isReduced_of_isReduced_stalk c.Z
+  have : IsIntegral c.Z := isIntegral_of_irreducibleSpace_of_isReduced c.Z
+  have : SmoothOfRelativeDimension 1 c.g :=
+    (smoothOfRelativeDimension_iff_topologicalKrullDim_eq c.g 1).mpr
+      (IsConnectedCurve.krullDim_eq_one (f := c.g))
+  set V : c.Z.Opens := c.i ''ᵁ ⊤
+  obtain ⟨x₀⟩ := ‹Nonempty C›
+  have : Nonempty V := ⟨⟨c.i x₀, x₀, trivial, rfl⟩⟩
+  have : Nonempty (⊤ : c.Z.Opens) := ⟨⟨c.i x₀, trivial⟩⟩
+  -- the inclusion `ρ : Γ(C, 𝒪) ⟶ k(C̄)`
+  let ρ : Γ(C, ⊤) ⟶ c.Z.functionField := (c.i.appIso ⊤).inv ≫ c.Z.germToFunctionField V
+  have hρ : Function.Injective ρ := by
+    intro a b h
+    exact (c.i.appIso ⊤).commRingCatIsoToRingEquiv.symm.injective
+      (c.Z.germToFunctionField_injective V h)
+  have hρ0 (u : Γ(C, ⊤)ˣ) : ρ u ≠ 0 := (u.isUnit.map ρ.hom).ne_zero
+  -- sections over `C` lie in the local rings of `C̄` at points of `C`
+  have hρV (a : Γ(C, ⊤)) (x : c.Z) (hx : x ∈ V) :
+      ρ a ∈ Set.range (algebraMap (c.Z.presheaf.stalk x) c.Z.functionField) :=
+    ⟨c.Z.presheaf.germ V x hx ((c.i.appIso ⊤).inv a),
+      Scheme.algebraMap_germ_eq_germToFunctionField _ hx _⟩
+  -- the points of the boundary
+  set S := {x : c.Z // x ∉ V}
+  have : Finite S := by
+    refine Set.Finite.to_subtype (s := {x | x ∉ V}) (hfin.subset fun x hx hr ↦ hx ?_)
+    obtain ⟨y, hy⟩ := hr
+    exact ⟨y, trivial, hy⟩
+  have hS (P : S) : IsClosed {P.1} := hcl P.1 fun ⟨y, hy⟩ ↦ P.2 ⟨y, trivial, hy⟩
+  have hS1 (P : S) : Order.coheight P.1 = 1 := by
+    have h := ringKrullDim_stalk_eq_coheight P.1
+    rw [Scheme.ringKrullDim_stalk_eq_one_of_isClosed c.g (hS P)] at h
+    exact_mod_cast h.symm
+  -- the divisor map `Γ(C, 𝒪)ˣ ⟶ ℤ^S`
+  let D : Additive Γ(C, ⊤)ˣ →+ (S → ℤ) :=
+    { toFun u P := c.Z.ord (ρ u.toMul) P.1
+      map_zero' := by
+        ext P
+        simp only [toMul_zero, Units.val_one, map_one, Pi.zero_apply]
+        have h := Scheme.ord_mul (X := c.Z) (x := P.1) (one_ne_zero (α := c.Z.functionField))
+          one_ne_zero
+        rw [_root_.mul_one] at h
+        omega
+      map_add' u v := by
+        ext P
+        simp only [toMul_add, Units.val_mul, map_mul, Pi.add_apply]
+        exact Scheme.ord_mul (hρ0 _) (hρ0 _) }
+  -- the constants
+  let : c.Z.Over (Spec (.of k)) := ⟨c.g⟩
+  have : IsProper (c.Z ↘ Spec (.of k)) := c.isProper
+  let κ : k →+* Γ(C, ⊤) := ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom
+  have hκ (b : k) : ρ (κ b) =
+      c.Z.germToFunctionField ⊤ (Scheme.globalSectionsRingHom k (X := c.Z) b) := by
+    have e : c.Z.presheaf.map (homOfLE (le_top : V ≤ ⊤)).op ≫ (c.i.appIso ⊤).hom =
+        c.i.appTop := by
+      rw [Scheme.Hom.appIso_hom', Scheme.Hom.map_appLE, Scheme.Hom.appTop,
+        Scheme.Hom.app_eq_appLE]
+      rfl
+    have e' : (c.i.appIso ⊤).inv (κ b) =
+        c.Z.presheaf.map (homOfLE (le_top : V ≤ ⊤)).op
+          (Scheme.globalSectionsRingHom k (X := c.Z) b) := by
+      rw [← Iso.eq_comp_inv] at e
+      change (c.i.appIso ⊤).inv (f.appTop _) = _
+      rw [congrArg Scheme.Hom.appTop c.comm, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+        ← CommRingCat.comp_apply _ (c.i.appIso ⊤).inv, ← e]
+      rfl
+    change c.Z.germToFunctionField V ((c.i.appIso ⊤).inv (κ b)) = _
+    rw [e']
+    exact c.Z.presheaf.germ_res_apply _ _ _ _
+  -- the kernel of `D` consists of constants, which are `n`-th powers
+  have hker : D.ker ≤ (zsmulAddGroupHom (α := Additive Γ(C, ⊤)ˣ) n).range := by
+    intro u hu
+    rw [AddMonoidHom.mem_ker] at hu
+    have hg (x : c.Z) (_ : x ∈ (⊤ : c.Z.Opens)) :
+        ρ u.toMul ∈ Set.range (algebraMap (c.Z.presheaf.stalk x) c.Z.functionField) := by
+      by_cases hx : x ∈ V
+      · exact hρV _ x hx
+      · let P : S := ⟨x, hx⟩
+        have h0 : c.Z.ord (ρ u.toMul) x = 0 := congr_fun hu P
+        obtain ⟨_, _⟩ := Scheme.isDiscreteValuationRing_stalk_of_isClosed c.g (hS P)
+        rw [Scheme.ord_eq_iff (hS1 P) (hρ0 _)] at h0
+        have hmem : ρ u.toMul ∈ MonoidHom.mker (Ring.ordFrac (c.Z.presheaf.stalk x)) := h0
+        rw [Ring.mker_ordFrac_eq_isUnitSubmonoid] at hmem
+        obtain ⟨r, -, hr⟩ := hmem
+        exact ⟨r, hr⟩
+    obtain ⟨s, hs⟩ := Scheme.exists_germToFunctionField_eq ⊤ _ hg
+    obtain ⟨a, rfl⟩ := (Scheme.GlobalSectionsBijective.bijective_globalSectionsRingHom
+      (k := k) (X := c.Z)).2 s
+    have hu' : (u.toMul : Γ(C, ⊤)) = κ a := hρ (hs.symm.trans (hκ a).symm)
+    obtain ⟨b, hb⟩ := IsAlgClosed.exists_pow_nat_eq a hn
+    have hb0 : b ≠ 0 := by
+      rintro rfl
+      apply hρ0 u.toMul
+      rw [hu', ← hb, zero_pow hn.ne', map_zero, map_zero]
+    refine ⟨.ofMul (hb0.isUnit.map κ).unit, ?_⟩
+    rw [zsmulAddGroupHom_apply, natCast_zsmul, ← ofMul_pow]
+    change Additive.ofMul _ = Additive.ofMul u.toMul
+    congr 1
+    ext
+    rw [Units.val_pow_eq_pow_val, IsUnit.unit_spec, ← map_pow, hb, hu']
+  exact AddMonoidHom.finite_quotient_range_zsmul_of_ker_le D hn.ne' hker
 
 /-- **`Pic` of an affine curve as a quotient of the Jacobian.** Let `C` be a smooth affine
 connected curve over an algebraically closed field `k`. Then there are a smooth proper connected
