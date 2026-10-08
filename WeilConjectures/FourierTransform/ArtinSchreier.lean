@@ -42,7 +42,8 @@ classical case is `k = ℤ/p`.
   of a global function `f` on a `k`-scheme, with its pullback compatibility
   `AlgebraicGeometry.Etale.artinSchreierSheafOfPullbackIso`.
 - `AlgebraicGeometry.Etale.artinSchreierSheafZMod`: the case `k = ℤ/p`, for a scheme of
-  characteristic `p`.
+  characteristic `p`, with its pullback compatibility
+  `AlgebraicGeometry.Etale.artinSchreierSheafZModPullbackIso`.
 
 ## Main statements
 
@@ -304,6 +305,38 @@ def artinSchreierSheafZMod {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)] (X : S
     Sheaf X.smallEtaleTopology (ModuleCat Λ) :=
   letI := X.overSpecZModOfCharP p
   artinSchreierSheafOf X (Ψ.compAddMonoidHom AddEquiv.ulift.toAddMonoidHom) f
+
+/-- Every morphism between schemes of characteristic `p` is a morphism over `𝔽_p`, for the
+structure morphisms of `AlgebraicGeometry.Scheme.overSpecZModOfCharP`: a ring map out of
+`ℤ/p` is unique. -/
+lemma _root_.AlgebraicGeometry.Scheme.Hom.isOver_overSpecZModOfCharP {p : ℕ}
+    {X X' : Scheme.{u}} [CharP Γ(X, ⊤) p] [CharP Γ(X', ⊤) p] (g : X' ⟶ X) :
+    letI := X.overSpecZModOfCharP p
+    letI := X'.overSpecZModOfCharP p
+    g.IsOver (Spec (.of (ULift.{u} (ZMod p)))) := by
+  rw [Scheme.Hom.isOver_iff]
+  change g ≫ X.toSpecΓ ≫ Spec.map _ = X'.toSpecΓ ≫ Spec.map _
+  rw [Scheme.toSpecΓ_naturality_assoc, ← Spec.map_comp]
+  congr 2
+  ext ⟨x⟩
+  exact congrArg (· x) (RingHom.ext_zmod
+    (g.appTop.hom.comp (ZMod.castHom dvd_rfl Γ(X, ⊤))) (ZMod.castHom dvd_rfl Γ(X', ⊤)))
+
+/-- The Artin–Schreier sheaf of a scheme of characteristic `p` is compatible with pullback:
+for any morphism `g : X' ⟶ X`, `g^* ℒ_{Ψ, f} ≅ ℒ_{Ψ, g^* f}`. This is
+`AlgebraicGeometry.Etale.artinSchreierSheafOfPullbackIso`, every morphism being one over
+`𝔽_p` (`AlgebraicGeometry.Scheme.Hom.isOver_overSpecZModOfCharP`): the Artin–Schreier
+covering is compatible with base change.
+(sketch blueprint: `sk-def-as`; blueprint: `def-fd-kernel`) -/
+def artinSchreierSheafZModPullbackIso {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
+    {X X' : Scheme.{u}} [CharP Γ(X, ⊤) p] [CharP Γ(X', ⊤) p] (g : X' ⟶ X)
+    (Ψ : AddChar (ZMod p) Λ) (f : Γ(X, ⊤)) :
+    (g)^*[ModuleCat Λ].obj (artinSchreierSheafZMod X Ψ f) ≅
+      artinSchreierSheafZMod X' Ψ (g.appTop f) :=
+  letI := X.overSpecZModOfCharP p
+  letI := X'.overSpecZModOfCharP p
+  haveI := g.isOver_overSpecZModOfCharP (p := p)
+  artinSchreierSheafOfPullbackIso g _ f
 
 end ZMod
 
