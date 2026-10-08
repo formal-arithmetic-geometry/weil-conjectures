@@ -352,7 +352,8 @@ lemma leftDerivedUpperStarTensorIso_hom
   rfl
 
 /-- For a fixed complex `M` on `Y`, the derived pullback commutes with tensoring by `M`:
-`Lg^*(K ⊗ᴸ M) ≅ Lg^*K ⊗ᴸ Lg^*M`, naturally in `K`. This is
+`Lg^*(K ⊗ᴸ M) ≅ Lg^*K ⊗ᴸ Lg^*M`, naturally in `K`. That is, it compares the two functors
+`K ↦ Lg^*(K ⊗ᴸ M)` and `K ↦ Lg^*K ⊗ᴸ Lg^*M` from `D(Y_ét)` to `D(Z_ét)`. This is
 `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorNatIso` with its second variable fixed. -/
 noncomputable def derivedTensorRightCompLeftDerivedUpperStarIso
     (M : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :

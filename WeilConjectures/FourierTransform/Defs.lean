@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.FourierTransform.ArtinSchreier
 public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 
 /-!
 
@@ -42,6 +43,10 @@ compact-support direct image along `p₂` is the transform, before the shift.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.torAmplitudeIn_fourierKernel`: over a finite ring the kernel, being
+  flat, has Tor amplitude in `[0, 0]`.
+- `AlgebraicGeometry.Etale.isTriangulated_fourierTransform`: the transform is a triangulated
+  functor.
 - `AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible`:
   the transform preserves the bounded constructible derived category.
 
@@ -99,14 +104,16 @@ with no invertibility of the exponent (SGA 4 XVII 5.3.6). Once
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek` is stated in that
 generality, drop the field and `[HasInvertibleExponent Λ S]` here.
 
-## Deferred clauses
+The tensor factor preserves `Dᵇc` because the kernel is constructible over a finite `Λ`
+(`AlgebraicGeometry.Etale.isConstructibleSheaf_fourierKernel`): an Artin–Schreier sheaf is
+lisse, and its stalks are finite, being invertible `Λ`-modules.
 
-Two clauses of `sk-prop-kernel-lisse` and `sk-prop-well-defined` are deferred. That the
-kernel is of *finite Tor amplitude* cannot be stated yet: the repository has no notion of
-Tor amplitude for an object of `D(X_ét)`. That the transform is *triangulated* is not recorded
-either. Its factors commute with shifts (`Functor.CommShift` instances for `Rf_!`, `Lg^*` and
-`(derivedTensor A X).flip.obj K` are in `WeilConjectures.SixFunctors.Etale.Derived.Shift`),
-but triangulatedness of the derived tensor product and of `Rf_!` is not yet available.
+`AlgebraicGeometry.Etale.isTriangulated_fourierTransform` is stated for the transform on the
+whole derived category, the subcategory `Dᵇc(V, Λ)` not yet being known to be triangulated:
+that needs the closure of constructible sheaves under extensions (blueprint
+`thm:constructible-serre`). Since the transform preserves `Dᵇc`, its restriction
+`AlgebraicGeometry.Etale.fourierTransformBoundedConstructible` sends the distinguished
+triangles of `Dᵇc` to distinguished triangles.
 
 -/
 
@@ -141,6 +148,33 @@ noncomputable def fourierKernel [CharP Γ(pullback π π', ⊤) p] (Ψ : AddChar
     (b : Γ(pullback π π', ⊤)) :
     Sheaf (pullback π π').smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
   artinSchreierSheafZMod (pullback π π') Ψ b
+
+/-- Over a finite coefficient ring the Fourier kernel is constructible, being an Artin–Schreier
+sheaf. (sketch blueprint: `sk-prop-kernel-lisse`) -/
+instance isConstructibleSheaf_fourierKernel [Finite Λ] [CharP Γ(pullback π π', ⊤) p]
+    (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) :
+    Scheme.IsConstructibleSheaf (fourierKernel Λ π π' Ψ b) := by
+  let := (pullback π π').overSpecZModOfCharP p
+  exact isConstructibleSheaf_artinSchreierSheafOf _ _ _
+
+/-- The Fourier kernel is flat, having a tensor inverse, the Artin–Schreier sheaf of `-b`
+(`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg`).
+(sketch blueprint: `sk-prop-kernel-lisse`) -/
+theorem flat_fourierKernel [CharP Γ(pullback π π', ⊤) p] (Ψ : AddChar (ZMod p) Λ)
+    (b : Γ(pullback π π', ⊤)) :
+    ObjectProperty.flat (fourierKernel Λ π π' Ψ b) := by
+  let := (pullback π π').overSpecZModOfCharP p
+  obtain ⟨e⟩ := nonempty_iso_artinSchreierSheafOf_neg (pullback π π')
+    (Ψ.compAddMonoidHom AddEquiv.ulift.toAddMonoidHom) b
+  exact ObjectProperty.flat_of_tensorIso e
+
+/-- Over a finite coefficient ring the Fourier kernel, placed in degree `0`, has Tor amplitude
+in `[0, 0]`, being a flat constructible sheaf. (sketch blueprint: `sk-prop-kernel-lisse`) -/
+theorem torAmplitudeIn_fourierKernel [Finite Λ] [CharP Γ(pullback π π', ⊤) p]
+    (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) :
+    DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) (pullback π π') 0 0
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) :=
+  torAmplitudeIn_singleFunctor_obj_of_flat Λ _ (flat_fourierKernel Λ π π' Ψ b)
 
 /-- For a pairing `b ∈ Γ(V ×_S V', 𝒪)` between two `S`-schemes, the *Fourier integrand* is the
 functor `ℱ_ψ(K) = p₁^* K ⊗ᴸ 𝒦_ψ` from `D(V_ét)` to `D((V ×_S V')_ét)`, `p₁` being the first
@@ -188,12 +222,39 @@ lemma fourierTransform_eq_fourierIntegrand_comp [CharP Γ(pullback π π', ⊤) 
         shiftFunctor _ r :=
   rfl
 
+/-- The Fourier–Deligne transform commutes with shifts, being a kernel transform. -/
+noncomputable instance commShiftFourierTransform [CharP Γ(pullback π π', ⊤) p]
+    [HasCompactification (pullback.snd π π')] (Ψ : AddChar (ZMod p) Λ)
+    (b : Γ(pullback π π', ⊤)) (r : ℤ) :
+    (fourierTransform Λ π π' Ψ b r).CommShift ℤ :=
+  inferInstanceAs ((kernelTransform (ModuleCat.{u + 1} Λ) π π'
+    ((DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) r).CommShift ℤ)
+
+/-- **The Fourier–Deligne transform is triangulated**: `FT_ψ` is the composite of the pullback
+`p₁^*`, the derived tensor product with the kernel, the compact-support direct image `Rp₂,!`
+and the shift by `r`, which are triangulated functors.
+
+Together with
+`AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible`
+this is the statement of `sk-prop-well-defined`, the restriction
+`AlgebraicGeometry.Etale.fourierTransformBoundedConstructible` to `Dᵇc` being then exact.
+
+Class: general; no hypothesis on the coefficients.
+(sketch blueprint: `sk-prop-well-defined`) -/
+instance isTriangulated_fourierTransform [CharP Γ(pullback π π', ⊤) p]
+    [HasCompactification (pullback.snd π π')] (Ψ : AddChar (ZMod p) Λ)
+    (b : Γ(pullback π π', ⊤)) (r : ℤ) :
+    (fourierTransform Λ π π' Ψ b r).IsTriangulated :=
+  inferInstanceAs ((kernelTransform (ModuleCat.{u + 1} Λ) π π'
+    ((DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) r).IsTriangulated)
+
 section BoundedConstructible
 
 variable [Finite Λ] [HasInvertibleExponent Λ S]
   [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
   [LocallyOfFiniteType (pullback.snd π π')] [QuasiCompact (pullback.snd π π')]
 
+omit [QuasiCompact (pullback.snd π π')] in
 /-- For `V'` locally of finite type over a field `k`, the Fourier–Deligne transform sends the
 bounded constructible derived category `Dᵇc(V, Λ)` into `Dᵇc(V', Λ)`.
 
@@ -207,8 +268,15 @@ theorem boundedConstructible_fourierTransform_obj_of_boundedConstructible {k : T
     (K : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V'
-      ((fourierTransform Λ π π' Ψ b r).obj K) :=
-  sorry
+      ((fourierTransform Λ π π' Ψ b r).obj K) := by
+  have := HasInvertibleExponent.of_hom (Λ := Λ) (pullback.fst π π' ≫ π)
+  have h₁ := hK.mapDerivedCategory_upperStar (pullback.fst π π')
+  have h₂ := boundedConstructible_tensor (ModuleCat.{u + 1} Λ) _ h₁
+    (DerivedCategory.boundedConstructible_singleFunctor_obj (fourierKernel Λ π π' Ψ b) 0)
+    ⟨0, 0, torAmplitudeIn_fourierKernel Λ π π' Ψ b⟩
+  have h₃ := boundedConstructible_rightDerivedLowerShriek Λ (pullback.snd π π')
+    (pullback.snd π π' ≫ aV') aV' rfl _ h₂
+  exact (DerivedCategory.boundedConstructible _ V').le_shift r _ h₃
 
 /-- For `V'` locally of finite type over a field, the Fourier–Deligne transform as a functor
 `Dᵇc(V, Λ) ⥤ Dᵇc(V', Λ)`, the functor whose existence `sk-prop-well-defined` asserts.
