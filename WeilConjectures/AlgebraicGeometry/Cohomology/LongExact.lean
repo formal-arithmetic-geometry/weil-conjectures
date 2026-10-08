@@ -231,8 +231,8 @@ theorem eulerChar_eq_add_of_shortExact (hS : S.ShortExact) (N : ℕ)
     have := hM q this
     exact hq (by simp [finrankH, Module.finrank_zero_of_subsingleton])
   simp only [eulerChar]
-  rw [finsum_eq_sum_of_support_subset _ (hsupp _ h₁), finsum_eq_sum_of_support_subset _ (hsupp _ h₂),
-    finsum_eq_sum_of_support_subset _ (hsupp _ h₃)]
+  rw [finsum_eq_sum_of_support_subset _ (hsupp _ h₁),
+    finsum_eq_sum_of_support_subset _ (hsupp _ h₂), finsum_eq_sum_of_support_subset _ (hsupp _ h₃)]
   have := key N
   rw [hcN, mul_zero] at this
   simp only [mul_sub, Finset.sum_sub_distrib] at this

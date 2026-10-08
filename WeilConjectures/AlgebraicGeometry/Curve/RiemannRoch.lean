@@ -13,6 +13,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
@@ -171,23 +172,80 @@ theorem Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (M : X.Modules) :
   simp [Finset.sum_range_succ]
   ring
 
+variable (k) in
+include k in
+/-- **Vanishing above the dimension of a curve.** On a smooth proper curve `X` over `k`,
+`H^q(X, ℱ) = 0` for every sheaf of modules `ℱ` and every `q ≥ 2`: `X` is noetherian of
+dimension at most one, so this is Grothendieck vanishing
+`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`.
+
+(blueprint: `lem-pc-vanishing-above-dim`) -/
+theorem Modules.subsingleton_H_of_two_le (ℱ : X.Modules) {q : ℕ} (hq : 2 ≤ q) :
+    Subsingleton (ℱ.H q) := by
+  have := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
+  refine subsingleton_H_of_topologicalKrullDim_lt ℱ
+    ((topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1).trans_lt ?_)
+  exact_mod_cast hq
+
+/-- **A line bundle restricted to an effective divisor, finiteness.** Let `D` be an effective
+Cartier divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf `J = 𝒪_X(-D)`,
+and `M` an invertible `𝒪_X`-module. The cokernel `M|_D` of `J ⊗ M ⟶ 𝒪_X ⊗ M` has
+finite-dimensional cohomology: it is the pushforward of the invertible module `M|_D` on the
+finite `k`-scheme `D`. -/
+theorem IdealSheafData.IsInvertible.finiteDimensional_H_cokernel_whiskerRight
+    {J : X.IdealSheafData} (hJ : J.IsInvertible) (M : X.Modules) [M.IsInvertible] (q : ℕ) :
+    FiniteDimensional k ((cokernel (J.toModulesι ▷ M)).H q) :=
+  sorry
+
+/-- **A line bundle restricted to an effective divisor, Euler characteristic.** Let `D` be an
+effective Cartier divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf
+`J = 𝒪_X(-D)`, and `M` an invertible `𝒪_X`-module. The cokernel `M|_D` of `J ⊗ M ⟶ 𝒪_X ⊗ M` has
+`χ(M|_D) = deg D = dim_k Γ(D, 𝒪_D)`.
+
+`M|_D` is the pushforward of the restriction of `M` to the finite `k`-scheme `D`, which is affine,
+so its higher cohomology vanishes. The restriction of a line bundle to `D` is trivial, since
+`Γ(D, 𝒪_D)` is artinian, hence semilocal, so `h⁰(M|_D) = h⁰(𝒪_D) = deg D`.
+
+(blueprint: `lem-pc-degree-base-change`, part (2)) -/
+theorem IdealSheafData.IsInvertible.eulerChar_cokernel_whiskerRight {J : X.IdealSheafData}
+    (hJ : J.IsInvertible) (M : X.Modules) [M.IsInvertible] :
+    (cokernel (J.toModulesι ▷ M)).eulerChar k = (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ :=
+  sorry
+
 /-- **The degree of a line bundle twisted by an effective divisor.** Let `D` be an effective
 Cartier divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf `J = 𝒪_X(-D)`,
 and `ℒ` an invertible `𝒪_X`-module. Then `χ(ℒ ⊗ 𝒪_X(D)) = χ(ℒ) + deg D`, where
 `deg D = dim_k Γ(D, 𝒪_D)`.
 
-Twisting `0 → 𝒪_X → 𝒪_X(D) → 𝒪_X(D)|_D → 0` by `ℒ` gives
-`0 → ℒ → ℒ ⊗ 𝒪_X(D) → ℒ|_D → 0`. The restriction `ℒ|_D` of a line bundle to the finite
-scheme `D` is trivial, and `𝒪_D` is a finite sum of skyscraper sheaves, which have no higher
-cohomology, so `χ(ℒ|_D) = h⁰(𝒪_D) = deg D`; conclude by additivity of `χ` in short exact
-sequences.
+Write `M = ℒ ⊗ 𝒪_X(D)`. Tensoring `0 → J → 𝒪_X → 𝒪_D → 0` with `M` gives the short exact
+sequence `0 → J ⊗ M → M → M|_D → 0`, where `J ⊗ M ≅ ℒ` since `J ⊗ 𝒪_X(D) ≅ 𝒪_X`. The Euler
+characteristic is additive in short exact sequences
+(`AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact`), and `χ(M|_D) = deg D`
+(`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_cokernel_whiskerRight`).
 
 (blueprint: `lem-pc-degree-base-change`, part (2)) -/
 theorem IdealSheafData.IsInvertible.eulerChar_tensorObj_dual_toModules {J : X.IdealSheafData}
     (hJ : J.IsInvertible) (ℒ : X.Modules) [ℒ.IsInvertible] :
     (ℒ ⊗ J.toModulesᵛ).eulerChar k =
-      ℒ.eulerChar k + (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ :=
-  sorry
+      ℒ.eulerChar k + (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ := by
+  have := hJ.isInvertible_toModules
+  have := hJ.isInvertible_dual_toModules
+  let M := ℒ ⊗ J.toModulesᵛ
+  let S := ShortComplex.mk (J.toModulesι ▷ M) (cokernel.π _) (cokernel.condition _)
+  have hS : S.ShortExact := .mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+  have e₂ : S.X₂ ≅ M := λ_ M
+  have : S.X₂.IsInvertible := Modules.IsInvertible.of_iso e₂.symm
+  have := hJ.finiteDimensional_H_cokernel_whiskerRight (k := k) M
+  have h := Modules.eulerChar_eq_add_of_shortExact k hS 1
+    (fun q hq ↦ Modules.subsingleton_H_of_two_le k _ (by omega))
+    (fun q hq ↦ Modules.subsingleton_H_of_two_le k _ (by omega))
+    (fun q hq ↦ Modules.subsingleton_H_of_two_le k _ (by omega))
+  obtain ⟨d⟩ := Modules.nonempty_tensorObj_dual_iso_unit J.toModules
+  have e₁ : S.X₁ ≅ ℒ := (α_ _ _ _).symm ≪≫ whiskerRightIso (β_ _ _) _ ≪≫ α_ _ _ _ ≪≫
+    whiskerLeftIso ℒ d ≪≫ ρ_ ℒ
+  rw [Modules.eulerChar_congr k e₁, Modules.eulerChar_congr k e₂,
+    hJ.eulerChar_cokernel_whiskerRight] at h
+  exact h
 
 /-- **Riemann–Roch for curves, divisor degree.** Let `D` be an effective Cartier divisor on a
 smooth proper curve `X` over `k`, with invertible ideal sheaf `J = 𝒪_X(-D)`. Then the χ-degree
@@ -277,21 +335,6 @@ theorem Modules.degree_tensorPow (ℒ : X.Modules) [ℒ.IsInvertible] (n : ℕ) 
     rw [Modules.tensorPow_succ, Modules.degree_tensorObj, ih]
     push_cast
     ring
-
-variable (k) in
-include k in
-/-- **Vanishing above the dimension of a curve.** On a smooth proper curve `X` over `k`,
-`H^q(X, ℱ) = 0` for every sheaf of modules `ℱ` and every `q ≥ 2`: `X` is noetherian of
-dimension at most one, so this is Grothendieck vanishing
-`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`.
-
-(blueprint: `lem-pc-vanishing-above-dim`) -/
-theorem Modules.subsingleton_H_of_two_le (ℱ : X.Modules) {q : ℕ} (hq : 2 ≤ q) :
-    Subsingleton (ℱ.H q) := by
-  have := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
-  refine subsingleton_H_of_topologicalKrullDim_lt ℱ
-    ((topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1).trans_lt ?_)
-  exact_mod_cast hq
 
 omit [IsProper (X ↘ Spec (.of k))] in
 /-- **Rational points are Cartier divisors on smooth curves.** The ideal sheaf `ker x` of a
