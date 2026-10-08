@@ -26,6 +26,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
@@ -291,13 +292,15 @@ theorem Modules.subsingleton_H_of_two_le (ℱ : X.Modules) {q : ℕ} (hq : 2 ≤
 
 /-- **Effective divisors on curves are finite.** Let `D` be an effective Cartier divisor on a
 smooth proper curve `X` over `k`, with invertible ideal sheaf `J`. Then `D` is finite over `k`:
-it is proper over `k`, being closed in `X`, and of dimension `0`, since a local equation of `D` is
-a non-zerodivisor, so that `D` contains no generic point of `X`.
+it is proper over `k`, being closed in `X`, and quasi-finite, since a local equation of `D` is a
+non-zerodivisor
+(`IdealSheafData.IsInvertible.locallyQuasiFinite_subschemeι_comp_of_field`).
 
 (blueprint: `def-sc-effective-cartier-divisor`) -/
 theorem IdealSheafData.IsInvertible.isFinite_subschemeι_comp {J : X.IdealSheafData}
     (hJ : J.IsInvertible) : IsFinite (J.subschemeι ≫ X ↘ Spec (.of k)) :=
-  sorry
+  have := hJ.locallyQuasiFinite_subschemeι_comp_of_field (X ↘ Spec (.of k))
+  IsFinite.of_isProper_of_locallyQuasiFinite _
 
 omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
 /-- **A line bundle restricted to an effective divisor, finiteness.** Let `D` be an effective
