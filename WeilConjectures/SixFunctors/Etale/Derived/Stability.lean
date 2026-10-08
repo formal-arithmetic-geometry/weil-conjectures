@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.CategoryTheory.ObjectProperty.Retract
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
@@ -59,6 +60,8 @@ restrictions of `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!` and `𝔻_X` to `Dctf`.
   (`sk-thm-sf-ctf-stability`, clauses (i)–(v)).
 - `AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek`
   (`sk-lem-sf-ctf-generation`).
+- `AlgebraicGeometry.Etale.torAmplitudeIn_singleFunctor_obj_of_flat`: a flat constructible
+  sheaf in degree `0` has Tor amplitude in `[0, 0]`.
 
 ## Implementation notes
 
@@ -373,10 +376,13 @@ theorem constructibleFiniteTor_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X �
 subcategories.
 
 Clause (ii), constructibility: the derived tensor product of two bounded constructible
-complexes is bounded constructible. -/
+complexes, one of them of finite Tor amplitude, is bounded constructible. Finite Tor amplitude
+of one factor is needed for boundedness: over `ℤ/ℓ²` on a point, `ℤ/ℓ ⊗ᴸ ℤ/ℓ` has a nonzero
+`Tor_i` for every `i ≥ 0`. -/
 theorem boundedConstructible_tensor (X : Scheme.{u})
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hK : boundedConstructible A X K) (hM : boundedConstructible A X M) :
+    (hK : boundedConstructible A X K) (hM : boundedConstructible A X M)
+    (hMt : finiteTorAmplitude A X M) :
     boundedConstructible A X (((-⊗ᴸ-(X)[A]).obj K).obj M) :=
   sorry
 
@@ -402,7 +408,7 @@ theorem constructibleFiniteTor_tensor (X : Scheme.{u})
     constructibleFiniteTor A X (((-⊗ᴸ-(X)[A]).obj K).obj M) := by
   obtain ⟨hKbc, a, b, hKt⟩ := hK
   obtain ⟨hMbc, c, d, hMt⟩ := hM
-  exact ⟨boundedConstructible_tensor A X hKbc hMbc,
+  exact ⟨boundedConstructible_tensor A X hKbc hMbc ⟨c, d, hMt⟩,
     a + c, b + d, torAmplitudeIn_tensor A X a b c d hKt hMt⟩
 
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
@@ -499,6 +505,44 @@ noncomputable def DerivedCategoryFiniteTor.verdierDual {S : Scheme.{u}} (a : X �
     fun K ↦ constructibleFiniteTor_verdierDual A a K.unop.property
 
 end Functors
+
+/-! ### Tor amplitude of a flat sheaf -/
+
+section FlatSheaf
+
+variable (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
+
+/-- Tor amplitude in the sense of `AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeIn`,
+tested on one homology sheaf at a time, is Tor amplitude in the sense of
+`AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeIn`, tested through the canonical
+t-structure. -/
+lemma torAmplitudeIn_of_hasTorAmplitudeIn {a b : ℤ}
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (h : DerivedCategory.hasTorAmplitudeIn Λ X a b K) :
+    torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K := fun F ↦ by
+  rw [_root_.DerivedCategory.homologyConcentratedIn_iff]
+  exact ⟨(_root_.DerivedCategory.isGE_iff _ a).2 fun q hq ↦ h F q (.inl hq),
+    (_root_.DerivedCategory.isLE_iff _ b).2 fun q hq ↦ h F q (.inr hq)⟩
+
+/-- A flat constructible sheaf placed in degree `0` has Tor amplitude in `[0, 0]`: the single
+complex is its own bounded flat model
+(`AlgebraicGeometry.Etale.hasTorAmplitudeIn_iff_exists_flatModel`). -/
+theorem torAmplitudeIn_singleFunctor_obj_of_flat
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F]
+    (hF : ObjectProperty.flat F) :
+    torAmplitudeIn (ModuleCat.{u + 1} Λ) X 0 0
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj F) := by
+  refine torAmplitudeIn_of_hasTorAmplitudeIn Λ ((hasTorAmplitudeIn_iff_exists_flatModel Λ 0 0
+    le_rfl _ (DerivedCategory.boundedConstructible_singleFunctor_obj F 0)).2
+    ⟨(HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj F, ⟨fun q hq ↦ ?_, fun q ↦ ?_⟩,
+      ⟨(_root_.DerivedCategory.singleFunctorIsoCompQ _ 0).app F⟩⟩)
+  · exact HomologicalComplex.isZero_single_obj_X _ _ _ _ (by omega)
+  · by_cases hq : q = 0
+    · subst hq
+      exact ObjectProperty.prop_of_iso _ (HomologicalComplex.singleObjXSelf _ 0 F).symm hF
+    · exact ObjectProperty.flat_of_isZero (HomologicalComplex.isZero_single_obj_X _ _ _ _ hq)
+
+end FlatSheaf
 
 /-! ### Generation of `Dctf` -/
 

@@ -52,7 +52,9 @@ resolutions when `g^*` preserves flat sheaves, so they form a left derivability 
   `Lg^*(K ⊗ᴸ M) ⟶ Lg^*K ⊗ᴸ Lg^*M`, obtained by deriving the oplax monoidal structure of `g^*`
   with `CategoryTheory.Functor.leftDerived₂NatTrans`.
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorNatIso g`: it is a natural isomorphism,
-  with components `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso g K M`.
+  with components `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso g K M`, and
+  `AlgebraicGeometry.Etale.derivedTensorRightCompLeftDerivedUpperStarIso g M`, the same for
+  fixed `M` as an isomorphism of functors of `K`.
 - `AlgebraicGeometry.Etale.derivedTensorRightPullback g`: tensoring with a complex pulled
   back along `g`, `N ↦ (K ↦ K ⊗ᴸ g^* N)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_unit`: `Lg^* Λ_Y ≅ Λ_Z`.
@@ -381,6 +383,17 @@ lemma leftDerivedUpperStarTensorIso_hom
     (leftDerivedUpperStarTensorIso A g K M).hom =
       ((leftDerivedUpperStarTensorComparison A g).app K).app M :=
   rfl
+
+/-- For a fixed complex `M` on `Y`, the derived pullback commutes with tensoring by `M`:
+`Lg^*(K ⊗ᴸ M) ≅ Lg^*K ⊗ᴸ Lg^*M`, naturally in `K`. That is, it compares the two functors
+`K ↦ Lg^*(K ⊗ᴸ M)` and `K ↦ Lg^*K ⊗ᴸ Lg^*M` from `D(Y_ét)` to `D(Z_ét)`. This is
+`AlgebraicGeometry.Etale.leftDerivedUpperStarTensorNatIso` with its second variable fixed. -/
+noncomputable def derivedTensorRightCompLeftDerivedUpperStarIso
+    (M : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    derivedTensorRight A Y M ⋙ L((g)^*[A]) ≅
+      L((g)^*[A]) ⋙ derivedTensorRight A Z (L((g)^*[A]).obj M) :=
+  NatIso.ofComponents (fun K ↦ leftDerivedUpperStarTensorIso A g K M) fun φ ↦
+    NatTrans.congr_app ((leftDerivedUpperStarTensorNatIso A g).hom.naturality φ) M
 
 end
 
