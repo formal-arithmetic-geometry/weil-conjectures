@@ -60,6 +60,10 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
+public import WeilConjectures.CategoryTheory.RingObjects.Ab
+public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
+public import WeilConjectures.CategoryTheory.RingObjects.EllAdic
+public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Compactification.BoundaryPreparation
 public import WeilConjectures.Compactification.Defs
@@ -155,6 +159,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.QuotientTwo
 public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
+public import WeilConjectures.Mathlib.Algebra.Category.Ring.Limits
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
 public import WeilConjectures.Mathlib.Algebra.Exact.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -194,6 +199,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Conv
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mon
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.CommaSites
