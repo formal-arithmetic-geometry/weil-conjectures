@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
@@ -47,7 +48,7 @@ of `AlgebraicGeometry.Etale.projectionMapOfCompactification` is an isomorphism, 
   coefficient ring, on the whole unbounded derived categories, as an isomorphism of bifunctors.
 - `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite` : its objectwise form, a
   strengthening of `sk-thm-sf-pf-finite`.
-- `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper` : the
+- `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerStar_of_finite` : the
   projection formula for `Rf_*`, `f` proper, at a finite coefficient ring.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp_derivedTensorRight`,
   `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek` : where the
@@ -271,8 +272,10 @@ theorem hasProjectionFormula_of_finite [Finite Λ] (f : X ⟶ Y) [HasCompactific
 /-- The projection formula for the direct image along a proper morphism `f` at a finite
 coefficient ring, `Rf_* K ⊗ᴸ L ≅ Rf_*(K ⊗ᴸ Lf^* L)`: for proper `f`, `Rf_! ≅ Rf_*`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), so this is
-`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`. -/
-theorem nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper [Finite Λ] (f : X ⟶ Y)
+`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`. Unlike
+`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper` it needs
+no base field. -/
+theorem nonempty_iso_derivedTensor_rightDerivedLowerStar_of_finite [Finite Λ] (f : X ⟶ Y)
     [IsProper f] (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty (((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj (R((f)_*[ModuleCat.{u + 1} Λ]).obj K)).obj L ≅

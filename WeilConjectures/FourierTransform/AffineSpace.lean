@@ -62,10 +62,11 @@ its restriction to the origin (supported localization), and that restriction is
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_affineSpace`), which needs
 `Λ` finite with exponent invertible on `S`. The twist `(-r)` is moved onto the
 skyscraper by the projection formula for the zero section
-(`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper`). The
+(`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerStar_of_finite`). The
 transform of the skyscraper is computed by proper base change of `δ₀` along `p₁`, which gives
-the constant sheaf on the slice `s : {0} ×_S 𝔸(n; S) ⟶ 𝔸(n; S) ×_S 𝔸(n; S)`, the projection formula for the closed immersion
-`s`, on whose image the kernel is trivial, and `Rp₂,! Rs_* = R(s ≫ p₂)_! = R(𝟙)_!`.
+the constant sheaf on the slice `s : {0} ×_S 𝔸(n; S) ⟶ 𝔸(n; S) ×_S 𝔸(n; S)`, the projection
+formula for the closed immersion `s`, on whose image the kernel is trivial, and
+`Rp₂,! Rs_* = R(s ≫ p₂)_! = R(𝟙)_!`.
 The comparison of the transforms for `ψ` and `ψ⁻¹` is base change of `Rp₂,!` along the
 isomorphism `ι × 1`; it compares the chosen compactifications of `p₂` and of its conjugate by
 `ι × 1`.
@@ -227,7 +228,7 @@ omit [Fintype n] [CharP Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) 
 theorem nonempty_iso_tateTwist_skyscraperZero [Finite Λ] [HasTateTwist Λ] (m : ℤ) :
     Nonempty ((tateTwist Λ (𝔸(n; S)) m).obj (skyscraperZero Λ n S) ≅
       R((zeroSection n S)_*[ModuleCat.{u + 1} Λ]).obj (tateObject Λ S m)) := by
-  obtain ⟨pf⟩ := nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper Λ
+  obtain ⟨pf⟩ := nonempty_iso_derivedTensor_rightDerivedLowerStar_of_finite Λ
     (zeroSection n S) (𝟙_ _) (tateObject Λ (𝔸(n; S)) m)
   exact ⟨pf ≪≫
       R((_)_*[_]).mapIso (((-⊗ᴸ-(_)[_]).obj _).mapIso (leftDerivedUpperStarTateObjectIso _ _) ≪≫
@@ -264,7 +265,7 @@ theorem nonempty_iso_derivedTensor_fourierKernel_zeroLeft [Finite Λ]
   obtain ⟨u₂⟩ := nonempty_iso_upperStar_artinSchreierSheafZMod_of_appTop_eq_zero
     (zeroLeft n S) Ψ (stdPairing n S)
     (appTop_stdPairing_of_fst_eq n S _ (𝔸(n; S) ↘ S) (zeroLeft_fst n S))
-  obtain ⟨pf⟩ := nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper Λ
+  obtain ⟨pf⟩ := nonempty_iso_derivedTensor_rightDerivedLowerStar_of_finite Λ
     (zeroLeft n S) (𝟙_ _) ((DerivedCategory.singleFunctor _ 0).obj
       (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S)))
   exact ⟨pf ≪≫
