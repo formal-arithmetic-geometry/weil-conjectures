@@ -358,6 +358,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
 public import WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine
 public import WeilConjectures.DeligneLaumon.Reduction.RelativeLineStep
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
@@ -1079,6 +1080,7 @@ public import WeilConjectures.WeilSheaf.LocalFrobenius
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.OpenImmersion
+public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.Realizable
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.TateTwist
