@@ -51,11 +51,20 @@ derived on the category of pro-étale Weil sheaves (`AlgebraicGeometry.WeilCompl
 
 The compatibility of the translation action with the Weil structure of `AS_* ℚ̄_ℓ` is the
 general `AlgebraicGeometry.ProEtale.lowerStar_map_deckAction_comp_lowerStarExchange`, the
-translations commuting with the geometric Frobenius. That `ℒ_ψ` is lisse, the compatibility of
-the internal hom of pro-étale Weil sheaves with morphisms in the second variable, and the
-constructibility statements which make the transforms land in Weil complexes are stated as
-separate lemmas with `sorry`; for the tensor product with a lisse sheaf the latter is reduced by
-dévissage to the case of a single Weil sheaf.
+translations commuting with the geometric Frobenius.
+
+That `ℒ_ψ` is lisse (`AlgebraicGeometry.WeilSheaf.isLisse_image_artinSchreierIdempotent`) is
+checked on the pro-étale cover `ĀS` itself. The geometric Artin–Schreier map is a `k₀`-torsor
+(`AlgebraicGeometry.affineLine.isIso_sigmaDesc_lift_geometricTranslation`), so for
+`v : V ⟶ 𝔸¹_{k̄}` the fibre product `V ×_{𝔸¹_{k̄}} 𝔸¹_{k̄}` is a disjoint union of `#k₀` copies
+of `V`. The sections of `ĀS^* ĀS_* ℚ̄_ℓ` over `V` are the locally finite functions on it, and
+there the projector `e_ψ` factors as an averaging map to the sections of `ℚ̄_ℓ` followed by a
+splitting map, a split epi–mono factorisation; hence the image of `e_ψ` becomes `ℚ̄_ℓ`.
+
+The constructibility statement which makes the tensor product with a lisse sheaf land in Weil
+complexes is reduced by dévissage to the case of a single Weil sheaf, and there to the higher
+derived functors `RⁿHom(F, G)`, `n > 0`
+(`AlgebraicGeometry.WeilSheaf.exists_rightDerived_ihomFunctor`, stated with `sorry`).
 -/
 
 @[expose] public section

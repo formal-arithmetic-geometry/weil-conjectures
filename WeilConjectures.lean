@@ -661,6 +661,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
 public import WeilConjectures.Mathlib.CategoryTheory.EpiMono
 public import WeilConjectures.Mathlib.CategoryTheory.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
+public import WeilConjectures.Mathlib.CategoryTheory.Extensive
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
