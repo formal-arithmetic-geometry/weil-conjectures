@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 /-!
 # Compact-support base change, the projection formula and finite reduction
@@ -34,10 +35,10 @@ defined for `f'` quasi-compact, and it goes through the comparison isomorphism
 not expected to hold on unbounded derived categories in this generality. Both the hypothesis
 `[QuasiCompact f']` and this dependence should disappear once `Ex_!` is constructed on `D⁺`.
 
-The projection map `PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)` is not
-constructed yet, so the projection formula below asserts that the two objects in question are
-isomorphic. It should be restated as `IsIso PF`, in the style of
-`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`.
+The projection formula is stated as the invertibility of the projection map
+`PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)` of `AlgebraicGeometry.Etale.projectionMap`
+(`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`); the objectwise form
+`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek` follows.
 
 The exchange `Ex_*` for `Rf_*` does already exist in this repository, as
 `AlgebraicGeometry.Etale.baseChange` and `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`.
@@ -46,7 +47,8 @@ The exchange `Ex_*` for `Rf_*` does already exist in this repository, as
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite`
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`
-- `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`
+- `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`,
+  `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`,
   `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerStar`
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_leftDerivedUpperStar`
@@ -142,27 +144,53 @@ variable (f : X ⟶ Y) [HasCompactification f]
 
 /-- Blueprint `sk-thm-sf-pf-finite`: Projection formula, finite coefficients
 
+**The projection map is an isomorphism at finite coefficients.** For `Λ` a finite coefficient
+ring whose exponent is invertible on `Y`, `f : X ⟶ Y` separated of finite type and `K` bounded
+constructible on `X`, the projection map
+
+`PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)`
+
+(`AlgebraicGeometry.Etale.projectionMap`) is an isomorphism for every `L` in `D(Y_ét, Λ)`.
+
+For `L` bounded constructible of finite Tor amplitude this is the fibrewise argument of the
+blueprint. The general case follows: by proper base change the stalk of `PF` at a geometric
+point `ȳ` is the comparison `RΓ(Z_ȳ, M) ⊗^L L_ȳ ⟶ RΓ(Z_ȳ, M ⊗^L L_ȳ)` for the proper fibre `Z_ȳ`
+of a compactification and `M` the extension by zero of `K`. Both sides are triangulated
+functors of `L_ȳ ∈ D(Λ)` commuting with direct sums (`Z_ȳ` has finite cohomological
+dimension), and they agree on `L_ȳ = Λ`, which generates `D(Λ)`. -/
+theorem hasProjectionFormula_of_finite [Finite Λ] [HasInvertibleExponent Λ Y]
+    [LocallyOfFiniteType f]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
+  sorry
+
+/-- Blueprint `sk-thm-sf-pf-finite`: Projection formula, finite coefficients
+
 **The projection formula at finite coefficients.** For `Λ` a finite coefficient ring whose
 exponent is invertible on `Y`, `f : X ⟶ Y` separated of finite type, `K` bounded constructible
 on `X` and `L` bounded constructible *of finite Tor amplitude* on `Y`, the projection map
 
 `PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)`
 
-is an isomorphism, naturally in `K` and `L`. The finite Tor amplitude of `L` is essential: the
-fibrewise argument represents the stalks of `L` by bounded complexes of finite free modules. -/
--- TODO(unify): def:exchange-projection — restate as `IsIso (PF f K L)`.
+is an isomorphism, naturally in `K` and `L`; here in the objectwise form
+`Rf_! K ⊗^L L ≅ Rf_!(K ⊗^L Lf^* L)`. It is the case of
+`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite` treated by the fibrewise argument of
+the blueprint, which represents the stalks of `L` by bounded complexes of finite free modules;
+the hypothesis on `L` is not needed for the conclusion. -/
 theorem nonempty_iso_derivedTensor_rightDerivedLowerShriek [Finite Λ]
     [HasInvertibleExponent Λ Y] [LocallyOfFiniteType f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
-    (hL : DerivedCategory.boundedConstructibleFiniteTor Λ Y L) :
+    (_hL : DerivedCategory.boundedConstructibleFiniteTor Λ Y L) :
     Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj
           ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj L ≅
       (R(f)_![ModuleCat.{u + 1} Λ]).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
           ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L))) :=
-  sorry
+  ⟨@asIso _ _ _ _ _ (hasProjectionFormula_of_finite Λ f K L hK)⟩
 
 /-- Blueprint `sk-prop-sf-pf-reduction`: Projection formula: compatibility with finite
 reduction

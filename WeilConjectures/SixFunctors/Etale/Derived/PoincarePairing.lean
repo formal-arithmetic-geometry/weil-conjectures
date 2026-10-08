@@ -6,10 +6,14 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.PoincarePairing
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
@@ -110,9 +114,8 @@ Ra_! K ⊗ᴸ Ra_* L ───────────────────�
 noncomputable def mixedSupportCupProduct (K L : 𝐃(X, A)) :
     ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).obj ((R((a)_*[A])).obj L) ⟶
       (R(a)_![A]).obj (((derivedTensor A X).obj K).obj L) :=
-  ((projectionMap A a).app K).app ((R((a)_*[A])).obj L) ≫
-    (R(a)_![A]).map (((derivedTensor A X).obj K).map
-      ((derivedUpperStarLowerStarAdjunction A a).counit.app L))
+  (derivedUpperStarLowerStarAdjunction A a).mixedCupProduct (R(a)_![A])
+    ((projectionMap A a).app K) L
 
 variable {A a}
 
@@ -141,9 +144,7 @@ noncomputable def twistedEvaluation (T K : 𝐃(X, A)) :
     ((derivedTensor A X).obj K).obj
         (((derivedTensor A X).obj ((DerivedCategory.coefficientDual A X).obj (op K))).obj T) ⟶
       T :=
-  (derivedTensorAssociator A X _ _ _).inv ≫
-    ((derivedTensor A X).map (DerivedCategory.coefficientEvaluation K)).app T ≫
-      (derivedTensorLeftUnitor A X T).hom
+  MonoidalClosed.twistedEvaluation K T
 
 variable (a)
 
@@ -181,9 +182,52 @@ noncomputable def poincarePairing (o : Orientation A a d) (e : (L((a)^*[A])).obj
     ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).obj
         (((R((a)_*[A])).obj (((derivedTensor A X).obj
           ((DerivedCategory.coefficientDual A X).obj (op K))).obj o.twist))⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
-  (((derivedTensor A Y).obj ((R(a)_![A]).obj K)).commShiftIso (2 * d : ℤ)).hom.app _ ≫
-    (poincarePairingEvaluation a o.twist K)⟦(2 * d : ℤ)⟧' ≫
-      ((R(a)_![A]).commShiftIso (2 * d : ℤ)).inv.app _ ≫ smoothTrace o e
+  (derivedUpperStarLowerStarAdjunction A a).poincarePairing (R(a)_![A])
+    ((projectionMap A a).app K) (rightDerivedUpperShriekAdjunction A a) (2 * d : ℤ) o.twist
+    (o.dualizingComplexIso e)
+
+omit [HasSmallSiteSheafify A] in
+variable {a} in
+/-- Derived Poincaré duality for a general coefficient category: if `K` is dualizable and the
+projection formula holds for `a` at `K` and every object of `D(Y_ét)`, then the derived
+Poincaré pairing `β_K` is perfect. This is
+`CategoryTheory.Adjunction.isPerfectPairing_poincarePairing`, the formal Yoneda argument. -/
+theorem isPerfectPairing_poincarePairing_of_hasProjectionFormula (o : Orientation A a d)
+    (e : (L((a)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _) {K : 𝐃(X, A)} (hK : IsDualizable K)
+    (hPF : ∀ L, HasProjectionFormula A a K L) :
+    IsPerfectPairing (poincarePairing a o e K) := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨_⟩ := DerivedCategory.nonempty_exactPairing_swap K Kᘁ
+  exact Adjunction.isPerfectPairing_poincarePairing _ _ _ _ _ _ _ Kᘁ hPF
+
+section Proper
+
+variable [IsProper a]
+
+/-- The derived Poincaré pairing of a proper morphism `a`, read through the identification
+`Ra_! ≅ Ra_*` of `AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`:
+
+`Ra_* K ⊗ᴸ (Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ Λ_Y`,
+
+that is `RΓ(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ` over `Y = Spec k`. -/
+noncomputable def properPoincarePairing (o : Orientation A a d)
+    (e : (L((a)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _) (K : 𝐃(X, A)) :
+    ((derivedTensor A Y).obj ((R((a)_*[A])).obj K)).obj
+        (((R((a)_*[A])).obj (((derivedTensor A X).obj
+          ((DerivedCategory.coefficientDual A X).obj (op K))).obj o.twist))⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
+  (rightDerivedLowerShriekIsoRightDerivedLowerStar A a).inv.app K ▷ _ ≫ poincarePairing a o e K
+
+omit [HasSmallSiteSheafify A] in
+variable {a} in
+/-- If the derived Poincaré pairing of a proper morphism is perfect, so is the pairing
+`AlgebraicGeometry.Etale.properPoincarePairing` read through `Ra_! ≅ Ra_*`. -/
+theorem IsPerfectPairing.properPoincarePairing {o : Orientation A a d}
+    {e : (L((a)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _} {K : 𝐃(X, A)}
+    (h : IsPerfectPairing (poincarePairing a o e K)) :
+    IsPerfectPairing (properPoincarePairing a o e K) :=
+  MonoidalClosed.IsPerfectPairing.whiskerRight_comp h _
+
+end Proper
 
 section ModuleCat
 
@@ -203,14 +247,24 @@ theorem isPerfectPairing_poincarePairing (o : Orientation (ModuleCat.{u + 1} Λ)
     (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _) {K : DerivedCategoryModule Λ X}
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (hKd : IsDualizable K) :
     IsPerfectPairing (poincarePairing a o e K) :=
-  -- Proof sketch: the adjoint is the composite of `K^∨ ⊗ᴸ T[2d] ≅ RHom(K, Ra^! Λ_Y) = 𝔻_X K`,
-  -- by the orientation and the dualizability of `K`, with global Verdier duality
-  -- `Ra_* RHom(K, Ra^! Λ_Y) ≅ RHom(Ra_! K, Λ_Y)`, the adjunction `Ra_! ⊣ Ra^!` internalised by
-  -- the projection formula
-  -- `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`.
-  -- The projection formula is what needs `Λ` finite, its exponent invertible on `Y` and `K`
-  -- constructible.
-  sorry
+  isPerfectPairing_poincarePairing_of_hasProjectionFormula o e hKd fun L ↦
+    hasProjectionFormula_of_finite Λ a K L hK.1
+
+/-- Blueprint `thm-pod-proper-poincare-duality`: Proper Poincaré duality.
+
+For `a` proper, a finite coefficient ring `Λ` whose exponent is invertible on `Y` and
+`K ∈ D^b_{ctf}(X, Λ)` dualizable, the derived Poincaré pairing read through `Ra_! ≅ Ra_*`,
+
+`Ra_* K ⊗ᴸ (Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ Λ_Y`
+
+(`AlgebraicGeometry.Etale.properPoincarePairing`), is perfect. Over `Y = Spec k` this is
+`RΓ(X, K^∨(d))[2d] ≅ RΓ(X, K)^∨`. -/
+theorem isPerfectPairing_properPoincarePairing [IsProper a]
+    (o : Orientation (ModuleCat.{u + 1} Λ) a d)
+    (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _) {K : DerivedCategoryModule Λ X}
+    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (hKd : IsDualizable K) :
+    IsPerfectPairing (properPoincarePairing a o e K) :=
+  (isPerfectPairing_poincarePairing a Λ o e hK hKd).properPoincarePairing
 
 end ModuleCat
 

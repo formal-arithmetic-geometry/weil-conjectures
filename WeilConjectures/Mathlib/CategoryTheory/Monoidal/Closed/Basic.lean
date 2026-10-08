@@ -25,7 +25,9 @@ compare `CategoryTheory.MonoidalClosed.ofEquiv`, which transports the closed str
 monoidal equivalence.
 
 A pairing `b : X ⊗ Y ⟶ 𝟙_ C` is *perfect* (`CategoryTheory.MonoidalClosed.IsPerfectPairing`)
-if its adjoint `Y ⟶ [X, 𝟙_ C]` is an isomorphism.
+if its adjoint `Y ⟶ [X, 𝟙_ C]` is an isomorphism. Perfectness is preserved by precomposition
+with an isomorphism in the first variable
+(`CategoryTheory.MonoidalClosed.IsPerfectPairing.whiskerRight_comp`).
 -/
 
 @[expose] public section
@@ -208,5 +210,18 @@ structure IsPerfectPairing {X Y : C} (b : X ⊗ Y ⟶ 𝟙_ C) : Prop where
 noncomputable def IsPerfectPairing.iso {X Y : C} {b : X ⊗ Y ⟶ 𝟙_ C}
     (h : IsPerfectPairing b) : Y ≅ (ihom X).obj (𝟙_ C) :=
   @asIso _ _ _ _ _ h.isIso
+
+instance isIso_pre {X X' : C} (f : X' ⟶ X) [IsIso f] : IsIso (pre f) :=
+  ⟨pre (inv f), by rw [← pre_map, IsIso.inv_hom_id, pre_id],
+    by rw [← pre_map, IsIso.hom_inv_id, pre_id]⟩
+
+/-- Precomposing a perfect pairing `b : X ⊗ Y ⟶ 𝟙_ C` with an isomorphism `f : X' ⟶ X` in the
+first variable gives a perfect pairing `X' ⊗ Y ⟶ 𝟙_ C`. -/
+lemma IsPerfectPairing.whiskerRight_comp {X X' Y : C} {b : X ⊗ Y ⟶ 𝟙_ C}
+    (h : IsPerfectPairing b) (f : X' ⟶ X) [IsIso f] : IsPerfectPairing (f ▷ Y ≫ b) :=
+  ⟨by
+    have := h.isIso
+    rw [← curry_pre_app]
+    infer_instance⟩
 
 end CategoryTheory.MonoidalClosed
