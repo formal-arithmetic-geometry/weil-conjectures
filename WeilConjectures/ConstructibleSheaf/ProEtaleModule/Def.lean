@@ -15,20 +15,17 @@ public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
 
 /-!
 
-# Lisse and constructible sheaves of modules on the pro-étale site
+# Constructible sheaves of modules on the pro-étale site
 
 Let `A` be a closed symmetric monoidal Grothendieck abelian category, `X` a scheme and `R` a
 ring object of `Sheaf (Scheme.ProEt.topology X) A`, so that `R`-module objects are the sheaves of
 `R`-modules on `X_proét`.
 
-## Local conditions
+## Local finite presentation
 
-* `ProEtale.IsLisse R M`: `M` is *locally free of finite rank*, i.e. there is a pro-étale
-  cover `{Uᵢ ⟶ X}` with `M|_{Uᵢ} ≅ (R|_{Uᵢ})^{rᵢ}`. For `R = E_X` such sheaves are the lisse
-  `E`-sheaves (`E`-local systems).
-* `ProEtale.IsLocallyFinitelyPresented R M`: there is a pro-étale cover `{Uᵢ ⟶ X}` with
-  `M|_{Uᵢ}` finitely presented, i.e. the cokernel of a morphism
-  `(R|_{Uᵢ})^{mᵢ} ⟶ (R|_{Uᵢ})^{nᵢ}` of free modules of finite rank. Torsion is allowed.
+`ProEtale.IsLocallyFinitelyPresented R M`: there is a pro-étale cover `{Uᵢ ⟶ X}` with
+`M|_{Uᵢ}` finitely presented, i.e. the cokernel of a morphism
+`(R|_{Uᵢ})^{mᵢ} ⟶ (R|_{Uᵢ})^{nᵢ}` of free modules of finite rank. Torsion is allowed.
 
 ## Constructibility
 
@@ -65,13 +62,6 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 section Local
 
 variable {X : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology X) A) [MonObj R]
-
-/-- A sheaf of `R`-modules on `X_proét` is *lisse* (locally free of finite rank) if it is
-pro-étale locally isomorphic to a free module of finite rank. -/
-def IsLisse (M : Mod (Sheaf (Scheme.ProEt.topology X) A) R) : Prop :=
-  ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,
-    Mod.IsFree ((ProEtale.upperStar A (𝒰.f i)).obj R)
-      (((ProEtale.upperStar A (𝒰.f i)).mapMod R).obj M)
 
 /-- A sheaf of `R`-modules on `X_proét` is *locally finitely presented* if there is a pro-étale
 cover `{Uᵢ ⟶ X}` such that each `M|_{Uᵢ}` is the cokernel of a morphism
