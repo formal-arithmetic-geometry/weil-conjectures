@@ -360,6 +360,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.RelativeLineStep
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
+public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceIsomorphism
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Transport
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
@@ -1080,6 +1081,7 @@ public import WeilConjectures.WeilSheaf.Realizable
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.TateTwist
 public import WeilConjectures.WeilSheaf.Tensor
+public import WeilConjectures.WeilSheaf.TraceIsomorphism
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.ZetaFunction.ClassicalFunctionalEquation
