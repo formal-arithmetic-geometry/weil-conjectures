@@ -16,6 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 
 /-!
@@ -45,6 +46,8 @@ resolutions.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.isTriangulated_kernelTransform`: the kernel transform is a
+  triangulated functor, being a composite of four triangulated functors.
 - `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_shift`: shifting the kernel shifts the
   kernel transform.
 - `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_comp`: composition of kernel
@@ -145,6 +148,25 @@ noncomputable def kernelTransform [HasCompactification (pullback.snd π π')]
       DerivedCategory (Sheaf V'.smallEtaleTopology A) :=
   D((pullback.fst π π')^*[A]) ⋙ derivedTensorRight A (pullback π π') 𝒦 ⋙
     R(pullback.snd π π')_![A] ⋙ shiftFunctor _ a
+
+/-- The kernel transform commutes with shifts, as the composite of `D(p₁^*)`, `- ⊗ᴸ 𝒦`, `Rp₂,!`
+and the shift by `a`, each of which does. -/
+noncomputable instance commShiftKernelTransform [HasCompactification (pullback.snd π π')]
+    (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a : ℤ) :
+    (kernelTransform A π π' 𝒦 a).CommShift ℤ :=
+  inferInstanceAs ((D((pullback.fst π π')^*[A]) ⋙ derivedTensorRight A (pullback π π') 𝒦 ⋙
+    R(pullback.snd π π')_![A] ⋙ shiftFunctor _ a).CommShift ℤ)
+
+/-- The kernel transform is a triangulated functor: the pullback `D(p₁^*)`, the derived tensor
+product `- ⊗ᴸ 𝒦`, the compact-support direct image `Rp₂,!` and the shift by `a` are
+triangulated.
+
+Class: general; it holds at every coefficient category `A`. -/
+instance isTriangulated_kernelTransform [HasCompactification (pullback.snd π π')]
+    (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a : ℤ) :
+    (kernelTransform A π π' 𝒦 a).IsTriangulated :=
+  inferInstanceAs ((D((pullback.fst π π')^*[A]) ⋙ derivedTensorRight A (pullback π π') 𝒦 ⋙
+    R(pullback.snd π π')_![A] ⋙ shiftFunctor _ a).IsTriangulated)
 
 /-- Shifting the kernel shifts the kernel transform: the kernel transform of `𝒦[a]` with shift
 `c` is the kernel transform of `𝒦` with shift `a + c`.
@@ -430,8 +452,8 @@ theorem nonempty_iso_kernelTransform_comp_of_nonempty_iso
         derivedTensorRight A _
           ((D((pullback.fst (pullback.snd π π') (pullback.fst π' π''))^*[A])).obj 𝒦) :=
     Functor.isoWhiskerLeft _ (ι _).symm ≪≫
-      ((flipFunctor _ _ _).mapIso (leftDerivedUpperStarTensorNatIso A
-        (pullback.fst (pullback.snd π π') (pullback.fst π' π'')))).app 𝒦 ≪≫
+      derivedTensorRightCompLeftDerivedUpperStarIso A
+        (pullback.fst (pullback.snd π π') (pullback.fst π' π'')) 𝒦 ≪≫
       Functor.isoWhiskerRight (ι (pullback.fst (pullback.snd π π') (pullback.fst π' π'')))
         (derivedTensorRight A _
           ((L((pullback.fst (pullback.snd π π') (pullback.fst π' π''))^*[A])).obj 𝒦)) ≪≫

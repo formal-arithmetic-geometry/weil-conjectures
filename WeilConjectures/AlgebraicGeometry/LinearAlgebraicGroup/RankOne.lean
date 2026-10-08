@@ -58,7 +58,7 @@ abstract Weil group `AlgebraicGeometry.WeilGroup` of
 `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic`, which takes a topological group with
 a surjective degree map to `ℤ` as data attached to a curve; `MonoidHom.weilGroup` with
 `MonoidHom.weilGroupDeg` constructs the underlying group and degree map from a fundamental group
-and its Frobenius, once the latter exist.
+and its Frobenius, as in `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`.
 -/
 
 @[expose] public section
