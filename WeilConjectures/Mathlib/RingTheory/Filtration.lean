@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 public import Mathlib.RingTheory.Filtration
 public import Mathlib.RingTheory.Flat.Tensor
@@ -357,5 +359,218 @@ theorem of_flat_quotient_of_lTensor_injective {S : Type*} [CommRing S] [Algebra 
     rw [← algebraMap_smul S r y]
     exact Submodule.smul_mem_smul (Ideal.mem_map_of_mem _ hr) trivial
   rwa [hkrull] at this
+
+section Element
+
+variable {S : Type*} [CommRing S] [Algebra R S] [Module S M] [IsScalarTower R S M]
+
+omit [Flat (R ⧸ I) (M ⧸ I • (⊤ : Submodule R M))] in
+/-- An element `s` acting injectively on `M ⧸ I M`, `I` maximal and `M` flat, acts injectively on
+`M ⊗ N` for every module `N` killed by `I`. -/
+private lemma rTensor_toLinearMap_injective_of_smul_eq_zero [Flat R M] [I.IsMaximal] (s : S)
+    (hs : ∀ m : M, s • m ∈ I • (⊤ : Submodule R M) → m ∈ I • (⊤ : Submodule R M))
+    {N : Type*} [AddCommGroup N] [Module R N] (hN : ∀ i ∈ I, ∀ n : N, i • n = 0) :
+    Function.Injective ((DistribSMul.toLinearMap R M s).rTensor N) := by
+  let := Ideal.Quotient.field I
+  set P := I • (⊤ : Submodule R M)
+  set φ := DistribSMul.toLinearMap R M s
+  have hφP : P ≤ P.comap φ := by
+    rw [Submodule.smul_le]
+    intro i hi m _
+    change s • (i • m) ∈ P
+    rw [smul_comm]
+    exact Submodule.smul_mem_smul hi trivial
+  let φ' : (M ⧸ P) →ₗ[R] (M ⧸ P) := P.mapQ P φ hφP
+  have hφ' : Function.Injective φ' := by
+    rw [injective_iff_map_eq_zero]
+    intro x hx
+    induction x using Submodule.Quotient.induction_on with
+    | H m =>
+      rw [Submodule.mapQ_apply, Submodule.Quotient.mk_eq_zero] at hx
+      rw [Submodule.Quotient.mk_eq_zero]
+      exact hs m hx
+  have hβ := bijective_rTensor_mkQ_of_smul_eq_zero (M := M) I hN
+  have hcomm : (P.mkQ.rTensor N).comp (φ.rTensor N) = (φ'.rTensor N).comp (P.mkQ.rTensor N) := by
+    ext; rfl
+  suffices h : Function.Injective (φ'.rTensor N) by
+    have := h.comp hβ.1
+    rw [← LinearMap.coe_comp, ← hcomm, LinearMap.coe_comp] at this
+    exact this.of_comp
+  have hNt : Module.IsTorsionBySet R N I := fun n i ↦ hN i i.2 n
+  let := hNt.module
+  have hsurj : Function.Surjective (algebraMap R (R ⧸ I)) := Ideal.Quotient.mk_surjective
+  have : CompatibleSMul R (R ⧸ I) (M ⧸ P) N :=
+    CompatibleSMul.of_algebraMap_surjective _ _ hsurj
+  let ψ : (M ⧸ P) →ₗ[R ⧸ I] (M ⧸ P) :=
+    { toFun := φ'
+      map_add' := by simp
+      map_smul' := by
+        rintro ⟨r⟩ n
+        exact φ'.map_smul r n }
+  have : Module.Free (R ⧸ I) N := Module.Free.of_divisionRing _ _
+  have hψ : Function.Injective (ψ.rTensor N) :=
+    Flat.rTensor_preserves_injective_linearMap ψ hφ'
+  let e := equivOfCompatibleSMul R (R ⧸ I) R (M ⧸ P) N
+  have key : φ'.rTensor N = e.toLinearMap ∘ₗ (ψ.rTensor N).restrictScalars R ∘ₗ
+      e.symm.toLinearMap := by
+    ext m n
+    rfl
+  rw [key]
+  simpa using hψ
+
+omit [Flat (R ⧸ I) (M ⧸ I • (⊤ : Submodule R M))] in
+/-- **The local criterion for a single element** (Stacks, Tag 00ME). Let `R → S` be a map of
+rings with `S` noetherian, `I` a maximal ideal of `R` with `I S` contained in the Jacobson
+radical of `S`, `M` a finite `S`-module which is flat over `R`, and `s ∈ S` acting injectively
+on `M ⧸ I M`. Then `s` acts injectively on `M ⊗ N` for every finite `R`-module `N`. -/
+theorem rTensor_toLinearMap_injective [IsNoetherianRing S] [Module.Finite S M] [Flat R M]
+    [I.IsMaximal] (hIS : I.map (algebraMap R S) ≤ Ideal.jacobson ⊥) (s : S)
+    (hs : ∀ m : M, s • m ∈ I • (⊤ : Submodule R M) → m ∈ I • (⊤ : Submodule R M))
+    (N : Type*) [AddCommGroup N] [Module R N] [Module.Finite R N] :
+    Function.Injective ((DistribSMul.toLinearMap R M s).rTensor N) := by
+  set φ := DistribSMul.toLinearMap R M s
+  -- Step 1: modules killed by a power of `I`.
+  have step1 (n : ℕ) : ∀ (N : Type u_4) [AddCommGroup N] [Module R N],
+      (∀ i ∈ I ^ n, ∀ x : N, i • x = 0) → Function.Injective (φ.rTensor N) := by
+    induction n with
+    | zero =>
+      intro N _ _ hN
+      have : Subsingleton N := ⟨fun x y ↦ by
+        rw [← one_smul R x, ← one_smul R y, hN 1 (by simp) x, hN 1 (by simp) y]⟩
+      intro x y _
+      exact Subsingleton.elim _ _
+    | succ n ih =>
+      intro N _ _ hN
+      set N₁ := I • (⊤ : Submodule R N)
+      have hN₁ : ∀ i ∈ I ^ n, ∀ x : N₁, i • x = 0 := by
+        rintro i hi ⟨x, hx⟩
+        apply Subtype.ext
+        change i • x = 0
+        induction hx using Submodule.smul_induction_on' with
+        | smul r hr x _ =>
+          rw [smul_smul]
+          exact hN _ (by rw [pow_succ]; exact Ideal.mul_mem_mul hi hr) x
+        | add x _ y _ hx hy => rw [smul_add, hx, hy, add_zero]
+      have hN₂ : ∀ i ∈ I, ∀ x : N ⧸ N₁, i • x = 0 := by
+        intro i hi x
+        induction x using Submodule.Quotient.induction_on with
+        | H x =>
+          rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero]
+          exact Submodule.smul_mem_smul hi trivial
+      have h₁ := ih N₁ hN₁
+      have h₂ := rTensor_toLinearMap_injective_of_smul_eq_zero I s hs hN₂
+      have hinc : Function.Injective (N₁.subtype.lTensor M) :=
+        Flat.lTensor_preserves_injective_linearMap _ Subtype.val_injective
+      have hex := _root_.lTensor_exact M (LinearMap.exact_subtype_mkQ N₁)
+        (Submodule.mkQ_surjective N₁)
+      rw [injective_iff_map_eq_zero]
+      intro x hx
+      have hx' : φ.rTensor _ (N₁.mkQ.lTensor M x) = 0 := by
+        rw [← LinearMap.comp_apply, LinearMap.rTensor_comp_lTensor,
+          ← LinearMap.lTensor_comp_rTensor, LinearMap.comp_apply, hx, map_zero]
+      obtain ⟨y, rfl⟩ := (hex x).1 (h₂ (hx'.trans (map_zero _).symm))
+      have hy : φ.rTensor _ y = 0 := by
+        apply hinc
+        rw [map_zero, ← LinearMap.comp_apply, LinearMap.lTensor_comp_rTensor,
+          ← LinearMap.rTensor_comp_lTensor, LinearMap.comp_apply, hx]
+      rw [h₁ (hy.trans (map_zero _).symm), map_zero]
+  -- Step 2: Krull's intersection theorem.
+  rw [injective_iff_map_eq_zero]
+  intro x hx
+  have h2 (n : ℕ) : x ∈ I ^ n • (⊤ : Submodule R (M ⊗[R] N)) := by
+    set Nn := I ^ n • (⊤ : Submodule R N)
+    have hNn : ∀ i ∈ I ^ n, ∀ y : N ⧸ Nn, i • y = 0 := by
+      intro i hi y
+      induction y using Submodule.Quotient.induction_on with
+      | H y =>
+        rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero]
+        exact Submodule.smul_mem_smul hi trivial
+    have hinj := step1 n (N ⧸ Nn) hNn
+    have hex := _root_.lTensor_exact M (LinearMap.exact_subtype_mkQ Nn)
+      (Submodule.mkQ_surjective Nn)
+    have h0 : Nn.mkQ.lTensor M x = 0 := by
+      apply hinj
+      rw [map_zero, ← LinearMap.comp_apply, LinearMap.rTensor_comp_lTensor,
+        ← LinearMap.lTensor_comp_rTensor, LinearMap.comp_apply, hx, map_zero]
+    obtain ⟨y, rfl⟩ := (hex x).1 h0
+    exact range_lTensor_smul_top_subtype_le (I ^ n) ⟨y, rfl⟩
+  have hfin : Module.Finite S (M ⊗[R] N) :=
+    Module.Finite.equiv (TensorProduct.AlgebraTensorModule.cancelBaseChange R S S M N)
+  have hkrull := Ideal.iInf_pow_smul_eq_bot_of_le_jacobson (M := M ⊗[R] N) _ hIS
+  have : x ∈ (⨅ i : ℕ, I.map (algebraMap R S) ^ i • ⊤ : Submodule S (M ⊗[R] N)) := by
+    rw [Submodule.mem_iInf]
+    intro n
+    rw [← Ideal.map_pow]
+    refine Submodule.smul_induction_on (h2 n) (fun r hr y _ ↦ ?_)
+      (fun _ _ ↦ Submodule.add_mem _)
+    rw [← algebraMap_smul S r y]
+    exact Submodule.smul_mem_smul (Ideal.mem_map_of_mem _ hr) trivial
+  rwa [hkrull] at this
+
+end Element
+
+omit [Flat (R ⧸ I) (M ⧸ I • (⊤ : Submodule R M))] in
+/-- Elements of `I M` are the images of `M ⊗ I → M`. -/
+lemma exists_rid_lTensor_eq_of_mem_smul_top {m : M} (hm : m ∈ I • (⊤ : Submodule R M)) :
+    ∃ y : M ⊗[R] I, TensorProduct.rid R M (I.subtype.lTensor M y) = m := by
+  induction hm using Submodule.smul_induction_on' with
+  | smul r hr m _ => exact ⟨m ⊗ₜ ⟨r, hr⟩, by simp⟩
+  | add m _ m' _ h h' =>
+    obtain ⟨y, hy⟩ := h
+    obtain ⟨y', hy'⟩ := h'
+    exact ⟨y + y', by rw [map_add, map_add, hy, hy']⟩
+
+/-- **Flatness of a cokernel** (Stacks, Tag 00HD). If `M` is flat and `φ : M → M` stays injective
+modulo every ideal, i.e. `φ m ∈ J M` implies `m ∈ J M`, then `M ⧸ φ(M)` is flat. -/
+theorem quotient_range [Flat R M] (φ : M →ₗ[R] M)
+    (h : ∀ (J : Ideal R) (m : M), φ m ∈ J • (⊤ : Submodule R M) → m ∈ J • (⊤ : Submodule R M)) :
+    Flat R (M ⧸ LinearMap.range φ) := by
+  rw [iff_lTensor_injective']
+  intro J
+  set C := M ⧸ LinearMap.range φ
+  set π := (LinearMap.range φ).mkQ
+  have hnat (y : M ⊗[R] J) : π (TensorProduct.rid R M (J.subtype.lTensor M y)) =
+      TensorProduct.rid R C (J.subtype.lTensor C (π.rTensor J y)) := by
+    induction y with
+    | zero => simp
+    | add y y' h h' => simp only [map_add] at h h' ⊢; rw [h, h']
+    | tmul m j => simp
+  have hφnat (y : M ⊗[R] J) : φ (TensorProduct.rid R M (J.subtype.lTensor M y)) =
+      TensorProduct.rid R M (J.subtype.lTensor M (φ.rTensor J y)) := by
+    induction y with
+    | zero => simp
+    | add y y' h h' => simp only [map_add] at h h' ⊢; rw [h, h']
+    | tmul m j => simp
+  rw [injective_iff_map_eq_zero]
+  intro z hz
+  obtain ⟨y, rfl⟩ := LinearMap.rTensor_surjective J (Submodule.mkQ_surjective (LinearMap.range φ)) z
+  have hα : Function.Injective (J.subtype.lTensor M) :=
+    Flat.lTensor_preserves_injective_linearMap _ Subtype.val_injective
+  set a := TensorProduct.rid R M (J.subtype.lTensor M y)
+  have ha : a ∈ LinearMap.range φ := by
+    rw [← Submodule.Quotient.mk_eq_zero, ← Submodule.mkQ_apply]
+    change π a = 0
+    rw [hnat, hz, map_zero]
+  obtain ⟨m, hm⟩ := ha
+  have haJ : a ∈ J • (⊤ : Submodule R M) := by
+    have hy : J.subtype.lTensor M y ∈ J • (⊤ : Submodule R (M ⊗[R] R)) := by
+      have hJ : (J • (⊤ : Submodule R R)) = J := by simp [smul_eq_mul]
+      have : J.subtype = (J • (⊤ : Submodule R R)).subtype ∘ₗ
+          (LinearEquiv.ofEq _ _ hJ.symm).toLinearMap := rfl
+      rw [this, LinearMap.lTensor_comp, LinearMap.comp_apply]
+      exact range_lTensor_smul_top_subtype_le (M := M) J ⟨_, rfl⟩
+    have := Submodule.smul_top_le_comap_smul_top J (TensorProduct.rid R M).toLinearMap hy
+    simpa [a] using this
+  obtain ⟨y', hy'⟩ := exists_rid_lTensor_eq_of_mem_smul_top J (h J m (hm ▸ haJ))
+  have hyy' : y = φ.rTensor J y' := by
+    apply hα
+    apply (TensorProduct.rid R M).injective
+    change a = _
+    rw [← hm, ← hy', hφnat]
+  rw [hyy', ← LinearMap.comp_apply, ← LinearMap.rTensor_comp]
+  have : π ∘ₗ φ = 0 := by
+    ext m
+    simp [π]
+  rw [this, LinearMap.rTensor_zero, LinearMap.zero_apply]
 
 end Module.Flat
