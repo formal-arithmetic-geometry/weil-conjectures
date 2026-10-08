@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
-public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Basic
 
 /-!
 # Universal sections of a presheaf of modules
@@ -167,11 +166,16 @@ lemma isIso_app_of_freeYoneda
     IsIso (α.app M) := by
   have h₁ : PreservesColimitsOfSize.{0, 0} Φ := preservesColimitsOfSize_shrink.{0, u, 0, u} Φ
   have h₂ : PreservesColimitsOfSize.{0, 0} Ψ := preservesColimitsOfSize_shrink.{0, u, 0, u} Ψ
-  have hcop : ∀ (N : PresheafOfModules.{u} S), IsIso (α.app N.freeYonedaCoproduct) := fun N ↦
-    isIso_app_of_isColimit α (colimit.isColimit (Discrete.functor (Elements.freeYoneda (M := N))))
-      (fun _ ↦ h _)
-  exact isIso_app_of_isColimit α M.isColimitFreeYonedaCoproductsCokernelCofork
-    (fun j ↦ by obtain (_ | _) := j <;> apply hcop)
+  have hcop : ∀ (N : PresheafOfModules.{u} S), IsIso (α.app N.freeYonedaCoproduct) := fun N ↦ by
+    let K := Discrete.functor (Elements.freeYoneda (M := N))
+    have : ∀ j, IsIso ((Functor.whiskerLeft K α).app j) := fun _ ↦ h _
+    have : IsIso (Functor.whiskerLeft K α) := NatIso.isIso_of_isIso_app _
+    exact isIso_app_coconePt_of_preservesColimit K α _ (colimit.isColimit K)
+  let K := parallelPair M.toFreeYonedaCoproduct 0
+  have : ∀ j, IsIso ((Functor.whiskerLeft K α).app j) := fun j ↦ by
+    obtain (_ | _) := j <;> apply hcop
+  have : IsIso (Functor.whiskerLeft K α) := NatIso.isIso_of_isIso_app _
+  exact isIso_app_coconePt_of_preservesColimit K α _ M.isColimitFreeYonedaCoproductsCokernelCofork
 
 end Induction
 
