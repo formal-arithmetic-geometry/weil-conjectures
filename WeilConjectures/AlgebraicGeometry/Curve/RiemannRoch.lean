@@ -19,6 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.DensePoints
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+public import WeilConjectures.AlgebraicGeometry.EffectiveCartierSum
 public import WeilConjectures.AlgebraicGeometry.FiniteOverField
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
@@ -145,6 +146,32 @@ theorem Modules.exists_ne_zero_of_nontrivial_H_zero {X : Scheme.{u}} (M : X.Modu
   rw [show (homOfLE le_top : (⊤ : X.Opens) ⟶ ⊤) = 𝟙 _ from Subsingleton.elim _ _, op_id,
     M.val.map_id] at h1
   exact h1
+
+/-- **A morphism `𝒪_X ⟶ N` is determined by the image of `1`.** If `σ : 𝒪_X ⟶ N` sends the
+global section `1` to `0`, then `σ = 0`: every section of `𝒪_X` is a multiple of a restriction
+of `1`. -/
+theorem Modules.eq_zero_of_app_top_one {X : Scheme.{u}} {N : X.Modules} (σ : 𝟙_ X.Modules ⟶ N)
+    (h : σ.app ⊤ (1 : Γ(X, ⊤)) = 0) : σ = 0 := by
+  refine hom_ext _ _ fun U ↦ ?_
+  ext r
+  obtain ⟨a, rfl⟩ := ((isFreeGenerator_one (X := X) ⊤).map (le_top : U ≤ ⊤)).exists_smul_eq r
+  rw [Hom.app_smul]
+  erw [Hom.app_presheaf_map σ (homOfLE (le_top : U ≤ ⊤)) (1 : Γ(X, ⊤)), h]
+  simp
+
+/-- **A morphism `𝒪_X ⟶ N` which vanishes on `H⁰` is zero.** Under `H⁰(X, -) = Γ(X, -)` the
+map `H⁰(σ)` sends `1` to the image of `1` under `σ`. -/
+theorem Modules.eq_zero_of_forall_H_map_zero {X : Scheme.{u}} {N : X.Modules}
+    (σ : 𝟙_ X.Modules ⟶ N) (h : ∀ z, H.map σ 0 z = 0) : σ = 0 := by
+  refine eq_zero_of_app_top_one σ ?_
+  have := Sheaf.H.equiv₀_naturality (hT := isTerminalTop)
+    ((SheafOfModules.toSheaf X.ringCatSheaf).map σ)
+    ((Sheaf.H.equiv₀ ((SheafOfModules.toSheaf X.ringCatSheaf).obj (𝟙_ X.Modules))
+      isTerminalTop).symm (1 : Γ(X, ⊤)))
+  rw [AddEquiv.apply_symm_apply] at this
+  refine this.trans ?_
+  erw [h]
+  exact map_zero _
 
 /-- **A rational point has degree one.** The closed subscheme of a `k`-rational point
 `x : Spec k ⟶ X`, cut out by the ideal sheaf `ker x`, has `dim_k Γ(x, 𝒪) = 1`. -/
@@ -1039,21 +1066,55 @@ theorem finrankΓ_subschemeι_comap_ker_fieldPoints (x : (X ↘ Spec (.of k)).fi
   exact Hom.finrankΓ_eq_of_iso _ _ (asIso ((x.1.ker.comap 𝔭).subschemeι ≫ pullback.snd _ _))
     (Iso.refl _) (by simp)
 
+omit [IsProper (X ↘ Spec (.of k))] in
 /-- **A section not vanishing at a point survives restriction to it.** Let `ℒ` be an invertible
 sheaf on `X_K`, let `s : 𝒪_{X_K} ⟶ ℒ` be a global section and let `x` be a `k`-rational point
 of `X` such that `s` does not vanish at `x_K`. Then some global section `z` of `ℒ` has non-zero
 image in `H⁰(X_K, ℒ|_{x_K})`, where `ℒ|_{x_K}` is the cokernel of `𝓘 ⊗ ℒ ⟶ 𝒪_{X_K} ⊗ ℒ` for the
 ideal sheaf `𝓘 = (ker x) · 𝒪_{X_K}` of `x_K`.
 
-One can take `z` to be the class of `s`: its value `s(x_K)` in the fibre of `ℒ` is non-zero. -/
+One can take `z` to be the class of `s`. Otherwise `s` factors through `𝓘 ⊗ ℒ ⟶ ℒ`, by left
+exactness, so the zero scheme of `s` contains that of `𝓘 ⊗ ℒ ⟶ 𝒪 ⊗ ℒ`, which is `x_K`. -/
 theorem exists_map_cokernel_π_ne_zero
     (L : (Limits.pullback (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules) [L.IsInvertible]
     (s : 𝟙_ _ ⟶ L) (x : (X ↘ Spec (.of k)).fieldPoints k)
     (hx : ((X ↘ Spec (.of k)).baseChangeFieldPoint K x).1.base default ∉ s.zeroLocus.support) :
     ∃ z : L.H 0, Modules.H.map
-      ((λ_ L).inv ≫ cokernel.π ((x.1.ker.comap 𝔭).toModulesι ▷ L)) 0 z ≠ 0 :=
-  sorry
+      ((λ_ L).inv ≫ cokernel.π ((x.1.ker.comap 𝔭).toModulesι ▷ L)) 0 z ≠ 0 := by
+  by_contra! h
+  have : Flat (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+    Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
+  have hJ := (Hom.isInvertible_ker_fieldPoints x).comap_of_flat 𝔭
+  have := hJ.isInvertible_toModules
+  set I := x.1.ker.comap 𝔭
+  -- the class of `s` in `H⁰(ℒ|_{x_K})` vanishes, so `s` factors through `𝓘 ⊗ ℒ`
+  have h0 : s ≫ (λ_ L).inv ≫ cokernel.π (I.toModulesι ▷ L) = 0 :=
+    Modules.eq_zero_of_forall_H_map_zero _ fun z ↦ by
+      rw [Modules.H.map_comp_apply]
+      exact h _
+  let S := ShortComplex.mk (I.toModulesι ▷ L) (cokernel.π _) (cokernel.condition _)
+  have hS : S.Exact := ShortComplex.exact_cokernel _
+  let t := hS.lift (s ≫ (λ_ L).inv) (by simpa using h0)
+  have ht : t ≫ I.toModulesι ▷ L = s ≫ (λ_ L).inv := hS.lift_f _ _
+  -- hence `Z(s) ⊇ Z(𝓘 ⊗ ℒ ⟶ 𝒪 ⊗ ℒ) = Z(𝓘 ⟶ 𝒪) = x_K`
+  have := Modules.IsInvertible.sheafOfModules_isInvertible L
+  have := Modules.IsInvertible.sheafOfModules_isInvertible (𝟙_ (Limits.pullback
+    (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules)
+  have := Modules.IsInvertible.sheafOfModules_isInvertible (I.toModules ⊗ L)
+  have := Modules.IsInvertible.sheafOfModules_isInvertible (𝟙_ (Limits.pullback
+    (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules ⊗ L)
+  have := Modules.IsInvertible.sheafOfModules_isInvertible I.toModules
+  have hle : Modules.Hom.zeroLocus s ≤ I := by
+    rw [Modules.Hom.zeroLocus_eq_of_arrowIso s (s ≫ (λ_ L).inv)
+      (Arrow.isoMk (Iso.refl _) (λ_ L).symm), ← ht]
+    refine (Modules.Hom.zeroLocus_comp_le _ _).trans ?_
+    rw [Modules.Hom.zeroLocus_whiskerRight, hJ.zeroLocus_toModulesι]
+  refine hx (IdealSheafData.support_antitone hle ?_)
+  rw [← SetLike.mem_coe, IdealSheafData.coe_support_comap, Set.mem_preimage,
+    Scheme.Hom.support_ker]
+  rw [Hom.baseChangeFieldPoint, ← Scheme.Hom.comp_apply, pullback.lift_fst, Scheme.Hom.comp_apply]
+  exact subset_closure ⟨_, rfl⟩
 
 /-- **Removing a rational point.** Let `ℒ` be an invertible sheaf on `X_K`, let `s : 𝒪_{X_K} ⟶ ℒ`
 be a global section and let `x` be a `k`-rational point of `X` such that `s` does not vanish at
