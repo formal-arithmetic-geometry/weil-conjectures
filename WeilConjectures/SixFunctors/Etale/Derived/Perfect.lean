@@ -6,9 +6,11 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 
 /-!
 
@@ -40,8 +42,8 @@ product `- ⊗ᴸ -` and internal hom `RHom(-, -)`. The *coefficient dual* of a 
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_derivedHom_tensor`
   (`sk-lem-sf-twist-interchange`): the internal hom commutes with an invertible twist.
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_leftDerivedUpperStar_derivedHom`
-  (`sk-thm-sf-internal-hom-pullback`): the internal hom with a dualizable first variable
-  commutes with pullback.
+  (`sk-thm-sf-internal-hom-pullback`, `thm-trf-internal-hom-pullback`): the internal hom with
+  a dualizable first variable commutes with pullback.
 
 ## Implementation notes
 
@@ -174,20 +176,30 @@ theorem nonempty_iso_derivedHom_tensor
   sorry
 
 /-- Blueprint `sk-thm-sf-internal-hom-pullback`: Internal Hom versus pullback for a
-site-perfect first variable.
+site-perfect first variable. This is also blueprint `thm-trf-internal-hom-pullback`.
 
 For a morphism of schemes `g : Y' ⟶ X`, a dualizable `M` and any `N` in `D(X_ét)`, the
 canonical comparison
 
 `Lg^* RHom_Λ(M, N) ⟶ RHom_Λ(Lg^* M, Lg^* N)`
 
-is an isomorphism. -/
-theorem nonempty_iso_leftDerivedUpperStar_derivedHom {Y' : Scheme.{u}} (g : Y' ⟶ X)
+is an isomorphism. Writing `M^∨` for a left dual of `M`, this is the chain
+`Lg^* RHom(M, N) ≅ Lg^*(M^∨ ⊗ᴸ N) ≅ Lg^* M^∨ ⊗ᴸ Lg^* N ≅ RHom(Lg^* M, Lg^* N)`, the last step
+because the monoidal functor `Lg^*` sends the duality between `M^∨` and `M` to a duality
+between `Lg^* M^∨` and `Lg^* M`. -/
+theorem nonempty_iso_leftDerivedUpperStar_derivedHom [Etale.UpperStarPreservesFlat A]
+    {Y' : Scheme.{u}} (g : Y' ⟶ X)
     {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hM : IsDualizable M)
     (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     Nonempty ((L((g)^*[A])).obj ((RHom(X)[A].obj (op M)).obj N) ≅
-      (RHom(Y')[A].obj (op ((L((g)^*[A])).obj M))).obj ((L((g)^*[A])).obj N)) :=
-  sorry
+      (RHom(Y')[A].obj (op ((L((g)^*[A])).obj M))).obj ((L((g)^*[A])).obj N)) := by
+  obtain ⟨_⟩ := hM
+  obtain ⟨_⟩ := nonempty_exactPairing_swap M Mᘁ
+  obtain ⟨_⟩ := nonempty_monoidal_leftDerivedUpperStar A g
+  let _ := ExactPairing.map L((g)^*[A]) Mᘁ M
+  exact ⟨L((g)^*[A]).mapIso (MonoidalClosed.ihomObjIsoTensor Mᘁ M N) ≪≫
+    (Functor.Monoidal.μIso L((g)^*[A]) Mᘁ N).symm ≪≫
+    (MonoidalClosed.ihomObjIsoTensor _ _ _).symm⟩
 
 end Etale.DerivedCategory
 
