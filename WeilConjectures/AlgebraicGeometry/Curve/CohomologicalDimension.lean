@@ -10,6 +10,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.Affine
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
+public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
@@ -43,6 +44,276 @@ to it (`AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine_of_forall`
 universe u
 
 open CategoryTheory
+
+namespace AlgebraicGeometry
+
+open Etale TopologicalSpace Limits
+
+/-- The residue field of a closed point of a scheme locally of finite type over an algebraically
+closed field `k` is algebraically closed: it is a finite extension of `k`. -/
+lemma Scheme.isAlgClosed_residueField_of_isClosed {k : Type u} [Field k] [IsAlgClosed k]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] (x : X)
+    (hx : IsClosed ({x} : Set X)) : IsAlgClosed (X.residueField x) := by
+  let := (f.residueFieldAlgebraMap x).toAlgebra
+  have := isClosed_singleton_iff_isClosedImmersion.mp hx
+  have := (isFinite_iff_locallyOfFiniteType_of_jacobsonSpace
+    (f := X.fromSpecResidueField x ≫ f)).mpr inferInstance
+  rw [← f.specMap_residueFieldAlgebraMap, IsFinite.SpecMap_iff] at this
+  have : Module.Finite k (X.residueField x) := this
+  exact IsAlgClosed.of_ringEquiv k _ (RingEquiv.ofBijective (algebraMap k _)
+    (IsAlgClosed.algebraMap_bijective_of_isIntegral (k := k)))
+
+
+variable {k : Type u} [Field k] [IsAlgClosed k]
+
+/-- An irreducible `T₀` space of dimension at most zero is a single point. -/
+lemma subsingleton_of_topologicalKrullDim_le_zero {X : Type*} [TopologicalSpace X]
+    [IrreducibleSpace X] [QuasiSober X] [T0Space X] (h : topologicalKrullDim X ≤ 0) :
+    Subsingleton X := by
+  refine ⟨fun x y ↦ ?_⟩
+  have key (z : X) : closure {z} = (Set.univ : Set X) := by
+    let A : IrreducibleCloseds X := ⟨closure {z}, isIrreducible_singleton.closure, isClosed_closure⟩
+    let B : IrreducibleCloseds X := ⟨Set.univ, IrreducibleSpace.isIrreducible_univ X, isClosed_univ⟩
+    exact congr(($(IrreducibleCloseds.eq_of_le_of_topologicalKrullDim_le_zero h
+      (show A ≤ B from Set.subset_univ _)) : Set X))
+  refine (inseparable_iff_closure_eq.mpr ((key x).trans (key y).symm)).eq
+
+/-- **One component of the reduction to smooth curves.** Let `Z` be an integral affine curve
+over an algebraically closed field `k`, and assume that `H²` of torsion sheaves vanishes on
+smooth affine connected curves over `k`. Then every torsion sheaf `G` on `Z` admits a finite
+morphism `n : Y ⟶ Z`, an isomorphism over a nonempty open `W`, with `H²(Y, n^* G) = 0`: the
+normalization if `Z` has dimension one, the identity if `Z` is a point. -/
+lemma IsCurve.exists_isFinite_isIso_subsingleton_sheafH_two {Z : Scheme.{u}} [IsIntegral Z]
+    [IsAffine Z] (g : Z ⟶ Spec (.of k)) [IsCurve g]
+    (H : ∀ (C' : Scheme.{u}) (f' : C' ⟶ Spec (.of k)), IsConnectedCurve f' → Smooth f' →
+      IsAffine C' → ∀ F' : Sheaf C'.smallEtaleTopology AddCommGrpCat.{u + 1}, F'.IsTorsion →
+        Subsingleton (Sheaf.H F' 2))
+    (G : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : G.IsTorsion) :
+    ∃ (Y : Scheme.{u}) (n : Y ⟶ Z) (_ : IsFinite n) (W : Z.Opens), (W : Set Z).Nonempty ∧
+      IsIso (n ∣_ W) ∧ Subsingleton (Sheaf.H ((n)^*[AddCommGrpCat.{u + 1}].obj G) 2) := by
+  by_cases hdim : topologicalKrullDim Z = 1
+  · have := Z.isFinite_fromNormalization_of_locallyOfFiniteType g
+    obtain ⟨W, hW, hiso⟩ := Z.exists_isIso_fromNormalization_restrict g
+    refine ⟨Z.normalization, Z.fromNormalization, this, W, hW, hiso, ?_⟩
+    have : Smooth (Z.fromNormalization ≫ g) := Scheme.smooth_fromNormalization_comp g hdim
+    have : IsAffine Z.normalization := isAffine_of_isAffineHom Z.fromNormalization
+    have : IsIntegral Z.normalization := inferInstanceAs (IsIntegral Z.fromSpecFunctionField.normalization)
+    have hdim' : topologicalKrullDim Z.normalization = 1 :=
+      (Z.topologicalKrullDim_normalization g).trans hdim
+    have : IsConnectedCurve (Z.fromNormalization ≫ g) :=
+      { krullDim_le_one := hdim'.le
+        connectedSpace := inferInstance
+        krullDim_eq_one := hdim' }
+    exact H _ _ this inferInstance inferInstance _ (isTorsion_upperStar _ hG)
+  · refine ⟨Z, 𝟙 Z, inferInstance, ⊤, ⟨Classical.arbitrary Z, trivial⟩, ?_, ?_⟩
+    · rw [morphismRestrict_id]
+      exact IsIso.id _
+    have h0 : topologicalKrullDim Z ≤ 0 := by
+      have h1 : topologicalKrullDim Z < ((0 : ℕ) : WithBot ℕ∞) + 1 :=
+        lt_of_le_of_ne (IsCurve.krullDim_le_one (f := g)) hdim
+      exact ENat.WithBot.lt_add_one_iff.1 h1
+    have : Subsingleton Z := subsingleton_of_topologicalKrullDim_le_zero h0
+    let x : Z := Classical.arbitrary Z
+    have hx : IsClosed ({x} : Set Z) := by
+      rw [show ({x} : Set Z) = Set.univ from Set.eq_univ_of_forall fun y ↦ Subsingleton.elim y x]
+      exact isClosed_univ
+    have := Scheme.isAlgClosed_residueField_of_isClosed g x hx
+    have := isClosed_singleton_iff_isClosedImmersion.mp hx
+    have : Surjective (Z.fromSpecResidueField x) :=
+      ⟨fun y ↦ ⟨IsLocalRing.closedPoint _, Subsingleton.elim _ _⟩⟩
+    have : IsIso (Z.fromSpecResidueField x) := isIso_of_isClosedImmersion_of_surjective _
+    have hb := cohomologyMap_bijective (Z.fromSpecResidueField x)
+      ((𝟙 Z)^*[AddCommGrpCat.{u + 1}].obj G) 2
+    have := Scheme.subsingleton_H_of_isSepClosed (Z.residueField x)
+      ((Z.fromSpecResidueField x)^*[AddCommGrpCat.{u + 1}].obj
+        ((𝟙 Z)^*[AddCommGrpCat.{u + 1}].obj G)) 1
+    exact hb.injective.subsingleton
+
+/-- **Reduction to smooth connected curves, affine case `Spec R`.** This is
+`AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine_of_forall` for `C = Spec R`.
+
+Let `Zₚ = Spec (R ⧸ p)` be the irreducible components, for the finitely many minimal primes
+`p`, and `νₚ : Yₚ ⟶ Spec R` their normalizations (or `Zₚ` itself if it is a point,
+`AlgebraicGeometry.IsCurve.exists_isFinite_isIso_subsingleton_sheafH_two`). Away from the
+finite set `S` of closed points where two components meet or where some `Yₚ ⟶ Zₚ` is not an
+isomorphism, `Spec R` is the disjoint union of the open pieces `Vₚ` of the components, over which
+`νₚ` is a universal homeomorphism. So the units assemble to a map `F ⟶ ⨁ₚ νₚ_* νₚ^* F` which is
+an isomorphism away from `S`, hence bijective on `H²`
+(`AlgebraicGeometry.Etale.bijective_H_map_of_isIso_upperStar_map`), and
+`H²(Spec R, νₚ_* νₚ^* F) = H²(Yₚ, νₚ^* F) = 0`. -/
+theorem IsCurve.subsingleton_sheafH_two_spec_of_forall {R : CommRingCat.{u}}
+    (g : Spec R ⟶ Spec (.of k)) [IsCurve g]
+    (F : Sheaf (Spec R).smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion)
+    (H : ∀ (C' : Scheme.{u}) (f' : C' ⟶ Spec (.of k)), IsConnectedCurve f' → Smooth f' →
+      IsAffine C' → ∀ F' : Sheaf C'.smallEtaleTopology AddCommGrpCat.{u + 1}, F'.IsTorsion →
+        Subsingleton (Sheaf.H F' 2)) :
+    Subsingleton (Sheaf.H F 2) := by
+  classical
+  have : IsLocallyNoetherian (Spec R) := LocallyOfFiniteType.isLocallyNoetherian g
+  have : IsNoetherianRing R := isLocallyNoetherian_Spec.1 inferInstance
+  let ι := ↥(minimalPrimes R)
+  have : Finite ι := (minimalPrimes.finite_of_isNoetherianRing R).to_subtype
+  have := Fintype.ofFinite ι
+  have hprime (p : ι) : p.1.IsPrime := Ideal.IsMinimalPrime.isPrime p.2
+  -- the irreducible components `Z p = Spec (R ⧸ p)`
+  let Z (p : ι) : Scheme.{u} := Spec (.of (R ⧸ p.1))
+  let c (p : ι) : Z p ⟶ Spec R := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk p.1))
+  have hint (p : ι) : IsIntegral (Z p) := by
+    have := hprime p
+    exact inferInstanceAs (IsIntegral (Spec (.of (R ⧸ p.1))))
+  have hcurve (p : ι) : IsCurve (c p ≫ g) :=
+    { krullDim_le_one := ((c p).isClosedEmbedding.isInducing.topologicalKrullDim_le).trans
+        (IsCurve.krullDim_le_one (f := g)) }
+  have hrange (p : ι) : Set.range (c p).base = PrimeSpectrum.zeroLocus p.1 := by
+    change Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk p.1)) = _
+    rw [range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective,
+      Ideal.mk_ker]
+  -- every point lies on a component
+  have hcov (x : Spec R) : ∃ p : ι, x ∈ PrimeSpectrum.zeroLocus p.1 := by
+    have := x.isPrime
+    obtain ⟨p, hp, hpx⟩ := Ideal.exists_minimalPrimes_le (I := ⊥) (J := x.asIdeal) bot_le
+    exact ⟨⟨p, hp⟩, hpx⟩
+  -- the components and their finite modifications
+  choose Y n hn W hW hiso hY using fun p ↦ IsCurve.exists_isFinite_isIso_subsingleton_sheafH_two
+    (c p ≫ g) H ((c p)^*[AddCommGrpCat.{u + 1}].obj F) (isTorsion_upperStar _ hF)
+  -- the good locus of each component: where it meets no other component and `n p` is an iso
+  let O (p : ι) : Set (Z p) := (W p : Set (Z p)) ∩
+    ⋂ q ∈ Finset.univ.filter (· ≠ p), ((c p).base ⁻¹' PrimeSpectrum.zeroLocus q.1)ᶜ
+  have hOopen (p : ι) : IsOpen (O p) := by
+    refine (W p).isOpen.inter (isOpen_biInter_finset fun q _ ↦ ?_)
+    exact ((PrimeSpectrum.isClosed_zeroLocus _).preimage (c p).continuous).isOpen_compl
+  have hOne (p : ι) : (O p).Nonempty := by
+    have := hprime p
+    -- the generic point `(0)` of `Spec (R ⧸ p)`, lying over `p`
+    let z₀ : Z p := ⟨⊥, Ideal.isPrime_bot⟩
+    have hz₀ : ((c p).base z₀).asIdeal = p.1 := by
+      change Ideal.comap (Ideal.Quotient.mk p.1) ⊥ = p.1
+      rw [← RingHom.ker_eq_comap_bot, Ideal.mk_ker]
+    obtain ⟨w, hw⟩ := hW p
+    refine ⟨z₀, ?_, ?_⟩
+    · exact ((PrimeSpectrum.le_iff_specializes z₀ w).1 bot_le).mem_open (W p).isOpen hw
+    · simp only [Set.mem_iInter, Finset.mem_filter, Finset.mem_univ, true_and]
+      intro q hqp hmem
+      have hle : q.1 ≤ p.1 := hz₀ ▸ hmem
+      exact hqp (Subtype.ext (le_antisymm hle (p.2.2 ⟨hprime q, bot_le⟩ hle)))
+  have hdimZ (p : ι) : topologicalKrullDim (Z p) ≤ 1 := IsCurve.krullDim_le_one (f := c p ≫ g)
+  have hOfin (p : ι) : (O p)ᶜ.Finite :=
+    (hOopen p).finite_compl_of_topologicalKrullDim_le_one (hdimZ p) (hOne p)
+  have hOcl (p : ι) (z : Z p) (hz : z ∉ O p) : IsClosed ({z} : Set (Z p)) :=
+    (hOopen p).isClosed_singleton_of_mem_compl (hdimZ p) (hOne p) hz
+  -- the bad set `S`
+  let S : Set (Spec R) := ⋃ p, (c p).base '' (O p)ᶜ
+  have hSfin : S.Finite := Set.finite_iUnion fun p ↦ (hOfin p).image _
+  have hScl (x : Spec R) (hx : x ∈ S) : IsClosed ({x} : Set (Spec R)) := by
+    obtain ⟨p, z, hz, rfl⟩ := Set.mem_iUnion.1 hx
+    simpa using (c p).isClosedEmbedding.isClosedMap _ (hOcl p z hz)
+  have hSclosed : IsClosed S := by
+    rw [← Set.biUnion_of_singleton S]
+    exact hSfin.isClosed_biUnion hScl
+  let U : (Spec R).Opens := ⟨Sᶜ, hSclosed.isOpen_compl⟩
+  -- the pieces `V p` of `U`, away from the other components
+  let V (p : ι) : (Spec R).Opens := ⟨Sᶜ ∩ ⋂ q ∈ Finset.univ.filter (· ≠ p),
+    (PrimeSpectrum.zeroLocus q.1)ᶜ, hSclosed.isOpen_compl.inter
+      (isOpen_biInter_finset fun q _ ↦ (PrimeSpectrum.isClosed_zeroLocus _).isOpen_compl)⟩
+  have hVU (p : ι) : V p ≤ U := fun _ hx ↦ hx.1
+  have hVZ (p : ι) (x : Spec R) (hx : x ∈ V p) : x ∈ Set.range (c p).base := by
+    obtain ⟨q, hq⟩ := hcov x
+    by_cases hqp : q = p
+    · exact hqp ▸ (hrange q).symm ▸ hq
+    · refine absurd hq ?_
+      have := hx.2
+      simp only [Set.mem_iInter, Finset.mem_filter, Finset.mem_univ, true_and] at this
+      exact this q hqp
+  have hVO (p : ι) (z : Z p) (hz : (c p).base z ∈ V p) : z ∈ O p := by
+    by_contra h
+    exact hz.1 (Set.mem_iUnion.2 ⟨p, z, h, rfl⟩)
+  have hUV (x : Spec R) (hx : x ∈ U) : ∃ p, x ∈ V p := by
+    obtain ⟨p, hp⟩ := hcov x
+    refine ⟨p, hx, ?_⟩
+    simp only [Set.mem_iInter, Finset.mem_filter, Finset.mem_univ, true_and]
+    intro q hqp hxq
+    obtain ⟨z, rfl⟩ : x ∈ Set.range (c p).base := (hrange p).symm ▸ hp
+    refine hx (Set.mem_iUnion.2 ⟨p, z, fun hz ↦ ?_, rfl⟩)
+    have := hz.2
+    simp only [Set.mem_iInter, Finset.mem_filter, Finset.mem_univ, true_and] at this
+    exact this q hqp hxq
+  have hdisj (p q : ι) (hqp : q ≠ p) :
+      Disjoint (Set.range (V p).ι.base) (Set.range (n q ≫ c q).base) := by
+    rw [Scheme.Opens.range_ι, Set.disjoint_right]
+    rintro _ ⟨y, rfl⟩ hy
+    have := hy.2
+    simp only [Set.mem_iInter, Finset.mem_filter, Finset.mem_univ, true_and] at this
+    refine this q hqp ?_
+    rw [← hrange q]
+    exact ⟨(n q).base y, rfl⟩
+  have huh (p : ι) : IsUniversalHomeomorphism ((n p ≫ c p) ∣_ V p) := by
+    rw [morphismRestrict_comp]
+    have : IsIso (n p ∣_ (c p ⁻¹ᵁ V p)) :=
+      isIso_morphismRestrict_of_le (n p) (fun z hz ↦ (hVO p z hz).1) (hiso p)
+    have : Surjective (c p ∣_ V p) := by
+      refine ⟨fun y ↦ ?_⟩
+      obtain ⟨z, hz⟩ := hVZ p y.1 y.2
+      refine ⟨⟨z, show (c p).base z ∈ V p from hz ▸ y.2⟩, Subtype.ext ?_⟩
+      exact (morphismRestrict_base_coe _ _ _).trans hz
+    have : IsClosedImmersion (c p ∣_ V p) :=
+      IsZariskiLocalAtTarget.restrict (inferInstanceAs (IsClosedImmersion (c p))) _
+    have h1 : IsUniversalHomeomorphism (n p ∣_ (c p ⁻¹ᵁ V p)) := { }
+    have h2 : IsUniversalHomeomorphism (c p ∣_ V p) := inferInstance
+    exact @IsUniversalHomeomorphism.comp _ _ _ _ _ h1 h2
+  -- the comparison map `F ⟶ ⨁ₚ νₚ_* νₚ^* F`
+  have : HasFiniteBiproducts (Sheaf (Spec R).smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+    HasFiniteBiproducts.of_hasFiniteProducts
+  let ν (p : ι) : Y p ⟶ Spec R := n p ≫ c p
+  let adj (p : ι) := upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (ν p)
+  let G (p : ι) : Sheaf (Spec R).smallEtaleTopology AddCommGrpCat.{u + 1} :=
+    (ν p)_*[AddCommGrpCat.{u + 1}].obj ((ν p)^*[AddCommGrpCat.{u + 1}].obj F)
+  let φ : F ⟶ ⨁ G := biproduct.lift fun p ↦ (adj p).unit.app F
+  have hG (p : ι) : Subsingleton (Sheaf.H (G p) 2) := by
+    have : Subsingleton ((Sheaf.functorH (Y p).smallEtaleTopology 2).obj
+      (((c p)^*[AddCommGrpCat.{u + 1}] ⋙ (n p)^*[AddCommGrpCat.{u + 1}]).obj F)) := hY p
+    have : Subsingleton (Sheaf.H ((ν p)^*[AddCommGrpCat.{u + 1}].obj F) 2) :=
+      ((Sheaf.functorH _ 2).mapIso ((upperStarComp AddCommGrpCat.{u + 1} (n p) (c p)).app
+        F)).addCommGroupIsoToAddEquiv.toEquiv.subsingleton
+    have : Subsingleton (Sheaf.H ((𝟭 (Sheaf (Y p).smallEtaleTopology AddCommGrpCat.{u + 1})).obj
+        ((ν p)^*[AddCommGrpCat.{u + 1}].obj F)) 2) := this
+    exact (bijective_edgeMap_of_isFinite (ν p) _ 2).injective.subsingleton
+  have hφ : IsIso ((U.ι)^*[AddCommGrpCat.{u + 1}].map φ) := by
+    refine isIso_of_isIso_upperStar_map_of_jointlySurjective AddCommGrpCat.{u + 1}
+      (fun p ↦ (Spec R).homOfLE (hVU p)) (fun x ↦ ?_) _ fun p ↦ ?_
+    · obtain ⟨p, hp⟩ := hUV x.1 x.2
+      exact ⟨p, ⟨x.1, hp⟩, Subtype.ext (Scheme.homOfLE_apply _ _)⟩
+    have e := upperStarComp AddCommGrpCat.{u + 1} ((Spec R).homOfLE (hVU p)) U.ι (V p).ι
+      (Scheme.homOfLE_ι _ _).symm
+    change IsIso (((U.ι)^*[AddCommGrpCat.{u + 1}] ⋙
+      ((Spec R).homOfLE (hVU p))^*[AddCommGrpCat.{u + 1}]).map φ)
+    rw [← NatIso.isIso_map_iff e φ]
+    let P := ((V p).ι)^*[AddCommGrpCat.{u + 1}]
+    have hz (q : ι) (hqp : q ≠ p) : IsZero (P.obj (G q)) :=
+      isZero_upperStar_lowerStar_of_disjoint_range _ (V p).ι (ν q) (hdisj p q hqp) _
+    have hπ : IsIso (P.map (biproduct.π G p)) := by
+      refine ⟨P.map (biproduct.ι G p), ?_, ?_⟩
+      · rw [← P.map_comp, ← P.map_id, ← IsBilimit.total (biproduct.isBilimit G), P.map_sum,
+          Finset.sum_eq_single p (fun q _ hqp ↦ ?_) (by simp)]
+        rw [P.map_comp, (hz q hqp).eq_zero_of_tgt (P.map (biproduct.π G q)), zero_comp]
+      · rw [← P.map_comp, biproduct.ι_π_self, P.map_id]
+    have : IsUniversalHomeomorphism (ν p ∣_ V p) := huh p
+    have hunit : IsIso (P.map ((adj p).unit.app F)) :=
+      isIso_upperStar_map_unit_of_isUniversalHomeomorphism (ν p) (V p) F
+    have : IsIso (P.map φ ≫ P.map (biproduct.π G p)) := by
+      rw [← P.map_comp, biproduct.lift_π]
+      exact hunit
+    exact @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ hπ this
+  have hSU : (U : Set (Spec R))ᶜ = S := compl_compl S
+  have hsep (x : Spec R) (hx : x ∉ U) : IsSepClosed ((Spec R).residueField x) := by
+    have := Scheme.isAlgClosed_residueField_of_isClosed g x (hScl x (hSU ▸ hx))
+    infer_instance
+  have hb := bijective_H_map_of_isIso_upperStar_map U (hSU ▸ hSfin)
+    (fun x hx ↦ hScl x (hSU ▸ hx)) hsep φ hφ 0
+  have : Subsingleton (Sheaf.H (⨁ G) 2) :=
+    (Abelian.Ext.addEquivBiproduct _ (biproduct.isBilimit G) 2).toEquiv.subsingleton
+  exact hb.injective.subsingleton
+
+end AlgebraicGeometry
 
 namespace AlgebraicGeometry.IsCurve
 
@@ -96,8 +367,13 @@ theorem subsingleton_sheafH_two_of_isAffine_of_forall (f : C ⟶ Spec (.of k)) [
     (H : ∀ (C' : Scheme.{u}) (f' : C' ⟶ Spec (.of k)), IsConnectedCurve f' → Smooth f' →
       IsAffine C' → ∀ F' : Sheaf C'.smallEtaleTopology AddCommGrpCat.{u + 1}, F'.IsTorsion →
         Subsingleton (Sheaf.H F' 2)) :
-    Subsingleton (Sheaf.H F 2) :=
-  sorry
+    Subsingleton (Sheaf.H F 2) := by
+  have : IsCurve (C.isoSpec.inv ≫ f) :=
+    { krullDim_le_one := C.isoSpec.inv.isOpenEmbedding.isInducing.topologicalKrullDim_le.trans
+        (IsCurve.krullDim_le_one (f := f)) }
+  have := subsingleton_sheafH_two_spec_of_forall (C.isoSpec.inv ≫ f)
+    ((Etale.upperStar AddCommGrpCat.{u + 1} C.isoSpec.inv).obj F) (Etale.isTorsion_upperStar _ hF) H
+  exact (Etale.cohomologyMap_bijective C.isoSpec.inv F 2).injective.subsingleton
 
 end IsCurve
 
