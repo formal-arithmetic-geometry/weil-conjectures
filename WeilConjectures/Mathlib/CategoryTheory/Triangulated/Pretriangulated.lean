@@ -20,6 +20,10 @@ category. A morphism `φ : Y ⟶ Y'` with `X ⟶ Y ⟶ Y' ⟶ Z'` zero extends t
   extension.
 - `CategoryTheory.Pretriangulated.triangleHom_ext_of_subsingleton`: uniqueness of the
   extension.
+- `CategoryTheory.Pretriangulated.exists_distTriang_counit_of_subsingleton`: the counit of an
+  adjunction with fully faithful left adjoint completes to a distinguished triangle with the
+  second map of a triangle whose first vertex is in the essential image and whose third vertex
+  is right orthogonal to it.
 -/
 
 @[expose] public section
@@ -78,6 +82,72 @@ theorem triangleHom_ext_of_subsingleton {T T' : Triangle C} (hT : T ∈ distTria
   · exact Triangle.cancel_mor₁_of_subsingleton hT' (by rw [← τ.comm₁, ← τ'.comm₁, h])
   · exact h
   · exact Triangle.cancel_mor₂_of_subsingleton hT (by rw [τ.comm₂, τ'.comm₂, h])
+
+section Adjunction
+
+variable {D : Type*} [Category* D]
+
+/-- **Completing a counit by a triangle.** Let `F ⊣ G` with `F` fully faithful, and let
+`K ⟶ L ⟶ R ⟶ K⟦1⟧` be a distinguished triangle whose first vertex `K` lies in the essential
+image of `F` and whose third vertex receives no maps from the shifts of objects of that
+essential image. Then the counit `F G L ⟶ L` and the second map `L ⟶ R` extend to a
+distinguished triangle `F G L ⟶ L ⟶ R ⟶ (F G L)⟦1⟧`.
+
+Indeed `F G L ⟶ L` factors through `K ⟶ L` by a map `b`, and composition with `b` is bijective on
+maps out of the essential image of `F`: composition with `K ⟶ L` is bijective there, by the
+long exact sequence of the triangle, and so is composition with the counit, by full faithfulness
+of `F`. As both ends of `b` lie in the essential image, `b` is an isomorphism. -/
+theorem exists_distTriang_counit_of_subsingleton {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
+    (hF : F.FullyFaithful) {T : Triangle C} (hT : T ∈ distTriang C)
+    (h₃ : ∀ (M : D) (n : ℤ), Subsingleton ((F.obj M)⟦n⟧ ⟶ T.obj₃))
+    (h₁ : F.essImage T.obj₁) :
+    ∃ w, Triangle.mk (adj.counit.app T.obj₂) T.mor₂ w ∈ distTriang C := by
+  have h₀ (M : D) : Subsingleton (F.obj M ⟶ T.obj₃) :=
+    have := h₃ M 0
+    ((shiftFunctorZero C ℤ).app (F.obj M)).homFromEquiv.symm.subsingleton
+  obtain ⟨b, hb⟩ := Triangle.coyoneda_exact₂ T hT (adj.counit.app T.obj₂)
+    ((h₀ (G.obj T.obj₂)).elim _ _)
+  -- composing with `T.mor₁` is bijective on maps out of the essential image
+  have ha (M : D) : Function.Bijective (fun x : F.obj M ⟶ T.obj₁ ↦ x ≫ T.mor₁) := by
+    refine ⟨fun x y hxy ↦ ?_, fun y ↦ ?_⟩
+    · have := h₃ M 1
+      exact Triangle.cancel_mor₁_of_subsingleton hT hxy
+    · exact (Triangle.coyoneda_exact₂ T hT y ((h₀ M).elim _ _)).imp fun x hx ↦ hx.symm
+  have hε (M : D) : Function.Bijective
+      (fun x : F.obj M ⟶ F.obj (G.obj T.obj₂) ↦ x ≫ adj.counit.app T.obj₂) := by
+    have : (fun x : F.obj M ⟶ F.obj (G.obj T.obj₂) ↦ x ≫ adj.counit.app T.obj₂) =
+        (adj.homEquiv _ _).symm ∘ hF.preimage := by
+      ext x
+      simp [Adjunction.homEquiv_counit]
+    rw [this]
+    exact (adj.homEquiv _ _).symm.bijective.comp hF.homEquiv.symm.bijective
+  have hb' (M : D) : Function.Bijective
+      (fun x : F.obj M ⟶ F.obj (G.obj T.obj₂) ↦ x ≫ b) := by
+    refine (Function.Bijective.of_comp_iff' (ha M) _).1 ?_
+    have : ((fun x : F.obj M ⟶ T.obj₁ ↦ x ≫ T.mor₁) ∘
+        fun x : F.obj M ⟶ F.obj (G.obj T.obj₂) ↦ x ≫ b) =
+        fun x ↦ x ≫ adj.counit.app T.obj₂ := by
+      funext x
+      simp [hb]
+    rw [this]
+    exact hε M
+  obtain ⟨N, ⟨e⟩⟩ := h₁
+  obtain ⟨s, hs⟩ := (hb' N).2 e.hom
+  have hsb : e.inv ≫ s ≫ b = 𝟙 _ := by simp [hs]
+  have hbs : b ≫ e.inv ≫ s = 𝟙 _ :=
+    (hb' (G.obj T.obj₂)).1 (by dsimp; rw [Category.assoc, Category.assoc, hsb]; simp)
+  let eb : F.obj (G.obj T.obj₂) ≅ T.obj₁ := ⟨b, e.inv ≫ s, hbs, by rw [Category.assoc, hsb]⟩
+  refine ⟨T.mor₃ ≫ eb.inv⟦(1 : ℤ)⟧', isomorphic_distinguished _ hT _ ?_⟩
+  refine Triangle.isoMk _ _ eb (Iso.refl _) (Iso.refl _) ?_ ?_ ?_
+  · change adj.counit.app T.obj₂ ≫ 𝟙 _ = b ≫ T.mor₁
+    rw [hb, Category.comp_id]
+  · change T.mor₂ ≫ 𝟙 _ = 𝟙 _ ≫ T.mor₂
+    rw [Category.comp_id, Category.id_comp]
+  · change (T.mor₃ ≫ eb.inv⟦(1 : ℤ)⟧') ≫ eb.hom⟦(1 : ℤ)⟧' = 𝟙 _ ≫ T.mor₃
+    rw [Category.assoc, ← Functor.map_comp, eb.inv_hom_id, Functor.map_id, Category.comp_id,
+      Category.id_comp]
+
+end Adjunction
 
 end Pretriangulated
 
