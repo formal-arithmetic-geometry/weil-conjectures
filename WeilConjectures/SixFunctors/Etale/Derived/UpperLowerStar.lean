@@ -281,6 +281,11 @@ noncomputable def leftDerivedUpperStarIsoMapDerivedCategory :
     L((g)^*[A]) ≅ D((g)^*[A]) :=
   (g)^*[A].leftDerivedFunctorIsoMapDerivedCategory
 
+/-- The derived pullback `Lg^*` is additive: it is isomorphic to the functor `D(g^*)` induced by
+the additive exact functor `g^*`. -/
+instance additive_leftDerivedUpperStar : (L((g)^*[A])).Additive :=
+  Functor.additive_of_iso (leftDerivedUpperStarIsoMapDerivedCategory A g).symm
+
 variable (Λ : Type*) [Ring Λ] [Linear Λ A] in
 /-- If `A` is `Λ`-linear, the derived pullback `Lg^*` is `Λ`-linear: it is isomorphic to the
 functor `D(g^*)` induced by the `Λ`-linear exact functor `g^*`. -/
