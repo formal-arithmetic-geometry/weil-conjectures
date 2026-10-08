@@ -57,7 +57,7 @@ resolutions when `g^*` preserves flat sheaves, so they form a left derivability 
   fixed `M` as an isomorphism of functors of `K`.
 - `AlgebraicGeometry.Etale.derivedTensorRightPullback g`: tensoring with a complex pulled
   back along `g`, `N ↦ (K ↦ K ⊗ᴸ g^* N)`.
-- `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_unit`: `Lg^* Λ_Y ≅ Λ_Z`.
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso g`: the canonical `Lg^* Λ_Y ≅ Λ_Z`.
 - `AlgebraicGeometry.Etale.nonempty_monoidal_leftDerivedUpperStar`: `Lg^*` is a monoidal
   functor (currently `sorry`, see the TODO below).
 - `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_left` and
@@ -372,19 +372,24 @@ noncomputable def derivedTensorRightPullback :
         DerivedCategory (Sheaf Z.smallEtaleTopology A) :=
   D((g)^*[A]) ⋙ derivedTensorRightFunctor A Z
 
-/-- The derived pullback preserves the unit, `Lg^* Λ_Y ≅ Λ_Z`. This is the existence of the unit
-comparison asked for in the TODO above.
+/-- The canonical identification `Lg^* Λ_Y ≅ Λ_Z` of the units, the unit comparison asked for
+in the TODO above.
 
 The unit `Λ_Y` is the image in `D(Y_ét)` of the unit sheaf placed in degree `0`. Since `g^*` is
 exact, `Lg^*` is computed by applying `g^*` degreewise, and `g^*` sends the unit sheaf of `Y`
 to that of `Z` because it is strong monoidal. -/
-theorem nonempty_iso_leftDerivedUpperStar_unit :
-    Nonempty ((L((g)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _) :=
-  ⟨(leftDerivedUpperStarIsoMapDerivedCategory A g).app _ ≪≫
+noncomputable def leftDerivedUpperStarUnitIso : (L((g)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _ :=
+  (leftDerivedUpperStarIsoMapDerivedCategory A g).app _ ≪≫
     ((g)^*[A].mapDerivedCategoryFactors).app _ ≪≫
     DerivedCategory.Q.mapIso
       (((HomologicalComplex.singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).app _) ≪≫
-        (HomologicalComplex.single _ (.up ℤ) 0).mapIso (Functor.Monoidal.εIso (g)^*[A]).symm)⟩
+        (HomologicalComplex.single _ (.up ℤ) 0).mapIso (Functor.Monoidal.εIso (g)^*[A]).symm)
+
+/-- The derived pullback preserves the unit, `Lg^* Λ_Y ≅ Λ_Z`
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso`). -/
+theorem nonempty_iso_leftDerivedUpperStar_unit :
+    Nonempty ((L((g)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _) :=
+  ⟨leftDerivedUpperStarUnitIso A g⟩
 
 /-- The derived pullback `Lg^* : D(Y_ét) ⥤ D(Z_ét)` is a monoidal functor for the derived tensor
 products. This is the monoidality of derived pullback in blueprint

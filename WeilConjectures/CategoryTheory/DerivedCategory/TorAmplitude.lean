@@ -55,6 +55,13 @@ lemma torAmplitudeIn.mono {a b a' b' : ℤ} (ha : a' ≤ a) (hb : b ≤ b') {M :
     (hM : torAmplitudeIn C a b M) : torAmplitudeIn C a' b' M :=
   fun F ↦ (hM F).mono ha hb
 
+/-- Tor amplitude is invariant under isomorphism. -/
+instance (a b : ℤ) : (torAmplitudeIn C a b).IsClosedUnderIsomorphisms where
+  of_iso e hM F := by
+    obtain ⟨h₁, h₂⟩ := hM F
+    exact ⟨TStructure.t.isGE_of_iso (whiskerRightIso e _) a,
+      TStructure.t.isLE_of_iso (whiskerRightIso e _) b⟩
+
 variable (C)
 
 /-- An object of `D(C)` has *finite Tor amplitude* if it has Tor amplitude in some interval

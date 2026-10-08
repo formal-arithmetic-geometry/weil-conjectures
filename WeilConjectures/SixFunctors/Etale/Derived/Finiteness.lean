@@ -37,9 +37,10 @@ of `R¹f_*` in characteristic `p`.
 ## Implementation notes
 
 `sk-prop-sf-trace-perfectness` concludes that `RΓ_c(X, K)` is *perfect*: bounded, with finite
-cohomology modules, and of finite Tor amplitude. The first two are stated below; the third is
-not, because the repository has no Tor-amplitude notion for objects of `D(ModuleCat Λ)` — only
-for complexes of sheaves. The geometric-stalk half of the same subsection is likewise omitted.
+cohomology modules, and of finite Tor amplitude. The three are stated separately below, finite
+Tor amplitude in the sense of `DerivedCategory.finiteTorAmplitude` for `D(ModuleCat Λ)`; they
+are assembled into perfectness in `WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect`.
+The geometric-stalk half of the same subsection is omitted.
 
 ## Main statements
 
@@ -48,6 +49,7 @@ for complexes of sheaves. The geometric-stalk half of the same subsection is lik
   `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_padicAlgCl`
 - `AlgebraicGeometry.Etale.isZero_compactlySupportedCohomology_of_lt`
 - `AlgebraicGeometry.Etale.finite_compactlySupportedCohomology`
+- `AlgebraicGeometry.Etale.finiteTorAmplitude_compactlySupportedGlobalSections`
 - `AlgebraicGeometry.Etale.hasTorAmplitudeIn_iff_exists_flatModel`
 - `AlgebraicGeometry.Etale.hasTorAmplitudeIn_iff_exists_flatConstructibleModel`
 - `AlgebraicGeometry.Etale.nonempty_iso_kunneth`
@@ -175,6 +177,21 @@ theorem finite_compactlySupportedCohomology
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (q : ℤ) :
     Module.Finite Λ ((H_c(aX)[ModuleCat.{u + 1} Λ](q)).obj K) :=
+  sorry
+
+/-- Blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
+geometric stalks
+
+**Finite Tor amplitude of compactly supported cohomology.** In the situation of
+`AlgebraicGeometry.Etale.isZero_compactlySupportedCohomology_of_lt`, the complex of
+`Λ`-modules `RΓ_c(X, K)` has finite Tor amplitude: by the projection formula
+`RΓ_c(X, K) ⊗ᴸ M ≅ RΓ_c(X, K ⊗ᴸ M_X)` for a `Λ`-module `M`, and the cohomological amplitude of
+`Ra_{X!}` on complexes of Tor amplitude in a fixed interval. -/
+theorem finiteTorAmplitude_compactlySupportedGlobalSections
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :
+    _root_.DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} Λ)
+      ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K) :=
   sorry
 
 end Perfectness

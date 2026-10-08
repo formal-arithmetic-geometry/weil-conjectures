@@ -105,7 +105,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems.
+/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems. Also
+blueprint `cor-galois-lisse-representations`: Lisse sheaves and continuous representations.
 
 The steps *sheaves and covers* and *linear structure* of the proof, for a named fundamental
 group: let `Y` be a connected scheme, `s : Spec Ω ⟶ Y` a geometric point, `Λ` a finite ring
