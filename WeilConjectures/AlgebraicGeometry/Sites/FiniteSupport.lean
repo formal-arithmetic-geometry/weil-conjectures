@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
+public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyBijective
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-!
 # Étale sheaves supported on finitely many closed points
@@ -22,6 +25,11 @@ acyclic: it is the direct sum of the direct images of its restrictions to the po
 - `AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar`: a sheaf whose restriction to the
   complement of a finite set of closed points with separably closed residue fields vanishes has
   no cohomology in positive degrees.
+- `AlgebraicGeometry.Etale.bijective_H_map_of_isIso_upperStar_map`: a morphism of sheaves which
+  is an isomorphism away from such a finite set induces bijections in degrees at least two.
+- `AlgebraicGeometry.Etale.isIso_upperStar_map_unit_of_isUniversalHomeomorphism`: the unit
+  `F ⟶ ν_* ν^* F` of a finite morphism `ν` is an isomorphism over every open over which `ν` is a
+  universal homeomorphism.
 -/
 
 @[expose] public section
@@ -93,8 +101,7 @@ theorem subsingleton_H_of_isZero_upperStar (U : X.Opens) (hfin : (U : Set X)ᶜ.
       · exact ⟨none, ⟨y, hy⟩, rfl⟩
       · exact ⟨some ⟨y, hy⟩, IsLocalRing.closedPoint _, X.fromSpecResidueField_apply _ _⟩
     rcases o with _ | x
-    ·
-      let P := (U.ι)^*[AddCommGrpCat.{u + 1}]
+    · let P := (U.ι)^*[AddCommGrpCat.{u + 1}]
       have hz (x : ι) : IsZero (P.obj (G' x)) :=
         isZero_upperStar_lowerStar_of_disjoint_range _ U.ι (X.fromSpecResidueField x.1)
           (by
@@ -140,6 +147,48 @@ theorem subsingleton_H_of_isZero_upperStar (U : X.Opens) (hfin : (U : Set X)ᶜ.
   refine (Function.LeftInverse.injective (f := Sheaf.H.map φ (n + 1))
     (g := Sheaf.H.map (inv φ) (n + 1)) fun x ↦ ?_).subsingleton
   rw [← Sheaf.H.map_comp_apply, IsIso.hom_inv_id, Sheaf.H.map_id_apply]
+
+/-- **Isomorphisms away from finitely many closed points.** Let `U` be an open subset of a
+scheme `X` whose complement is a finite set of closed points with separably closed residue
+fields, and `φ : F ⟶ G` a morphism of abelian étale sheaves on `X` which is an isomorphism over
+`U`. Then `Hⁿ(X, F) → Hⁿ(X, G)` is bijective for `n ≥ 2`: the kernel and the cokernel of `φ`
+vanish over `U`, hence have no cohomology in positive degrees. -/
+theorem bijective_H_map_of_isIso_upperStar_map (U : X.Opens) (hfin : (U : Set X)ᶜ.Finite)
+    (hcl : ∀ x ∉ U, IsClosed ({x} : Set X))
+    (hsep : ∀ x ∉ U, IsSepClosed (X.residueField x))
+    {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G)
+    (hφ : IsIso ((U.ι)^*[AddCommGrpCat.{u + 1}].map φ)) (n : ℕ) :
+    Function.Bijective (Sheaf.H.map φ (n + 2)) := by
+  let P := (U.ι)^*[AddCommGrpCat.{u + 1}]
+  refine Sheaf.H.bijective_map_of_subsingleton φ (fun i ↦ ?_) (fun i ↦ ?_) n
+  · refine subsingleton_H_of_isZero_upperStar U hfin hcl hsep _ ?_ i
+    exact (isZero_kernel_of_mono (P.map φ)).of_iso (PreservesKernel.iso P φ)
+  · refine subsingleton_H_of_isZero_upperStar U hfin hcl hsep _ ?_ i
+    exact (isZero_cokernel_of_epi (P.map φ)).of_iso (PreservesCokernel.iso P φ)
+
+/-- Let `ν : Y ⟶ X` be finite and `U` an open subset of `X` over which `ν` is a universal
+homeomorphism. Then the unit `F ⟶ ν_* ν^* F` is an isomorphism over `U`: by finite base change
+its restriction to `U` is the unit of the restriction `ν⁻¹ U ⟶ U` of `ν`, whose pullback is an
+equivalence by topological invariance of the étale site. -/
+theorem isIso_upperStar_map_unit_of_isUniversalHomeomorphism {Y : Scheme.{u}} (ν : Y ⟶ X)
+    [IsFinite ν] (U : X.Opens) [IsUniversalHomeomorphism (ν ∣_ U)]
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    IsIso ((U.ι)^*[AddCommGrpCat.{u + 1}].map
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} ν).unit.app F)) := by
+  have sq := (isPullback_morphismRestrict ν U).flip
+  have hBC := Etale.isIso_baseChangeMap_of_isFinite AddCommGrpCat.{u + 1} sq
+  have := isEquivalence_upperStar AddCommGrpCat.{u + 1} (ν ∣_ U)
+  have key := map_unit_baseChangeMap_app AddCommGrpCat.{u + 1} sq.toCommSq F
+  have : IsIso (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (ν ∣_ U)).unit :=
+    Adjunction.unit_isIso_of_L_fully_faithful _
+  have : IsIso ((U.ι)^*[AddCommGrpCat.{u + 1}].map
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} ν).unit.app F) ≫
+        (baseChangeMap AddCommGrpCat.{u + 1} sq.toCommSq).app
+          ((ν)^*[AddCommGrpCat.{u + 1}].obj F)) := by
+    rw [key]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _
+    ((baseChangeMap AddCommGrpCat.{u + 1} sq.toCommSq).app ((ν)^*[AddCommGrpCat.{u + 1}].obj F))
 
 end Etale
 
