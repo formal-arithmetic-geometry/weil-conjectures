@@ -50,9 +50,13 @@ values in the ring `k[ε]`.
 
 ## Implementation notes
 
-The sheaf condition, the locality of the stalks, the local affineness of `X[ε]` and the locality
-of the morphisms constructed here are not yet proved. They are the obligations of the next
-milestone of the blueprint and are recorded as `sorry`.
+The thickening is first built as a locally ringed space,
+`AlgebraicGeometry.LocallyRingedSpace.dualNumbers`: the stalks of `𝒪_X[ε]` are the dual numbers
+over the stalks of `𝒪_X` (`TopCat.Presheaf.stalkDualNumberHom`). It is a scheme since the
+thickening of an affine scheme `Z` is affine (`LocallyRingedSpace.isIso_toΓSpec_dualNumbers`):
+dual numbers commute with localization, so the stalks of `Z[ε]` are the localizations of
+`Γ(Z)[ε]`. The locality of some of the morphisms constructed here, and several compatibilities
+between them, are not yet proved and are recorded as `sorry`.
 
 ## Blueprint
 
@@ -113,13 +117,15 @@ theorem isLocalization_mapRingHom [Algebra R S] (M : Submonoid R) [IsLocalizatio
     exact IsLocalization.map_units S ⟨m.fst, hm⟩
   · obtain ⟨⟨r₁, m₁⟩, h₁⟩ := IsLocalization.surj M z.fst
     obtain ⟨⟨r₂, m₂⟩, h₂⟩ := IsLocalization.surj M z.snd
-    refine ⟨(inl (r₁ * m₂) + inr (r₂ * m₁), ⟨inl ((m₁ * m₂ : M) : R), by simpa using M.mul_mem m₁.2 m₂.2⟩), ?_⟩
+    refine ⟨(inl (r₁ * m₂) + inr (r₂ * m₁),
+      ⟨inl ((m₁ * m₂ : M) : R), by simpa using M.mul_mem m₁.2 m₂.2⟩), ?_⟩
     simp only [hA] at h₁ h₂ ⊢
     ext
-    · simp only [fst_mul, fst_mapRingHom, fst_inl, fst_add, fst_inr, add_zero, Submonoid.coe_mul, map_mul] at h₁ ⊢
+    · simp only [fst_mul, fst_mapRingHom, fst_inl, fst_add, fst_inr, add_zero, Submonoid.coe_mul,
+        map_mul] at h₁ ⊢
       linear_combination (algebraMap R S m₂) * h₁
-    · simp only [snd_mul, fst_mapRingHom, snd_mapRingHom, fst_inl, snd_inl, snd_add, snd_inr, Submonoid.coe_mul,
-        map_mul, map_zero, mul_zero, zero_add] at h₂ ⊢
+    · simp only [snd_mul, fst_mapRingHom, snd_mapRingHom, fst_inl, snd_inl, snd_add, snd_inr,
+        Submonoid.coe_mul, map_mul, map_zero, mul_zero, zero_add] at h₂ ⊢
       linear_combination (algebraMap R S m₁) * h₂
   · have h₁ := congr(fst $h)
     have h₂ := congr(snd $h)
@@ -135,6 +141,7 @@ theorem isLocalization_mapRingHom [Algebra R S] (M : Submonoid R) [IsLocalizatio
       simp only at e₂
       simp only [zero_mul, add_zero]
       rw [mul_assoc, e₂, ← mul_assoc]
+
 /-- The ring homomorphism `R[η] → R[ε][δ]`, `a + ηb ↦ a + εδ b`, recording the mixed infinitesimal
 term of the two-parameter dual numbers `R[ε][δ] = R[ε, δ]/(ε², δ²)`. -/
 def mulRingHom : R[ε] →+* (R[ε])[ε] where
@@ -350,7 +357,8 @@ theorem isIso_toΓSpec_dualNumbers (Z : Scheme.{u}) [IsAffine Z] :
         ((isAffineOpen_top Z).primeIdealOf ⟨y, trivial⟩).asIdeal)
     let _ : Algebra (DualNumber Γ(Z, ⊤)) (DualNumber (Z.presheaf.stalk y)) :=
       (DualNumber.mapRingHom (Z.presheaf.Γgerm y).hom).toAlgebra
-    have h₁ := DualNumber.isLocalization_mapRingHom (S := Z.presheaf.stalk y) q.asIdeal.primeCompl rfl
+    have h₁ :=
+      DualNumber.isLocalization_mapRingHom (S := Z.presheaf.stalk y) q.asIdeal.primeCompl rfl
     let P := Y.toΓSpecFun y
     let e : Y.presheaf.stalk y ≃+* DualNumber (Z.presheaf.stalk y) :=
       RingEquiv.ofBijective (Z.presheaf.stalkDualNumberHom y).hom
@@ -364,7 +372,8 @@ theorem isIso_toΓSpec_dualNumbers (Z : Scheme.{u}) [IsAffine Z] :
         exact (Z.presheaf.stalkDualNumberHom_germ y ⊤ trivial g).symm
     let _ : Algebra (Γ.obj (op Y)) (Y.presheaf.stalk y) := (Y.presheaf.Γgerm y).hom.toAlgebra
     have h₂' : IsLocalization P.asIdeal.primeCompl (Y.presheaf.stalk y) := by
-      have hM : P.asIdeal.primeCompl = q.asIdeal.primeCompl.comap (fstHom Γ(Z, ⊤) Γ(Z, ⊤) Γ(Z, ⊤)) := by
+      have hM : P.asIdeal.primeCompl =
+          q.asIdeal.primeCompl.comap (fstHom Γ(Z, ⊤) Γ(Z, ⊤) Γ(Z, ⊤)) := by
         ext g
         simp only [P, hpt]
         rfl
