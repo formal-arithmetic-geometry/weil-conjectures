@@ -8,8 +8,11 @@ module
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
@@ -200,14 +203,50 @@ theorem Scheme.Hom.exists_etale_to_affineSpace_of_mem_smoothLocus {X Y : Scheme.
   exact ⟨_, _, _, hU'', hV'', (le_resLE_preimage_iff g hVU U' V').mp hVU' hxV'', hxV'', _, e,
     he, hge⟩
 
-/-- An irreducible scheme `X` smooth over a field `K` is smooth of relative dimension `n` over
-`K` if and only if `X` has dimension `n`: the relative dimension of a smooth morphism at a point
-is the dimension of the fibre at that point, and an irreducible scheme locally of finite type
-over a field has the same dimension at all of its points. -/
-theorem smoothOfRelativeDimension_iff_topologicalKrullDim_eq {K : Type u} [Field K]
-    {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) [Smooth f] [IrreducibleSpace X] (n : ℕ) :
-    SmoothOfRelativeDimension n f ↔ topologicalKrullDim X = n :=
-  sorry
+open Order in
+/-- Let `φ : K[X₁, …, Xₙ] ⟶ A` be an étale ring map over a field `K`. Every point of `Spec A`
+has codimension at most `n`, and every closed point has codimension exactly `n`: the étale map
+`Spec A ⟶ 𝔸ⁿ_K` preserves codimension and maps closed points to closed points, and maximal
+ideals of `K[X₁, …, Xₙ]` have height `n`. -/
+theorem coheight_le_of_etale_mvPolynomial {K : Type u} [Field K] {A : CommRingCat.{u}} {n : ℕ}
+    (φ : MvPolynomial (Fin n) K →+* A) (hφ : φ.Etale) (y : Spec A) :
+    coheight y ≤ n ∧ (IsClosed {y} → coheight y = n) := by
+  let g := Spec.map (CommRingCat.ofHom φ)
+  have : Etale g := HasRingHomProperty.Spec_iff.mpr hφ
+  rw [← g.coheight_apply_of_flat y, ← idealHeight_eq_coheight]
+  refine ⟨?_, fun hy ↦ ?_⟩
+  · have h := Ideal.height_le_ringKrullDim_of_ne_top (g y).2.ne_top
+    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field] at h
+    simp only [Nat.card_eq_fintype_card, Fintype.card_fin, zero_add] at h
+    exact_mod_cast h
+  · have : (g y).asIdeal.IsMaximal := (PrimeSpectrum.isClosed_singleton_iff_isMaximal _).mp
+      (g.closePoints_subset_preimage_closedPoints hy)
+    exact MvPolynomial.height_eq_of_isMaximal n _
+
+/-- A scheme `X` smooth of relative dimension `n` over a field `K` is covered by affine opens
+`V` such that `Γ(X, V)` is étale over the polynomial ring `K[X₁, …, Xₙ]`. -/
+theorem SmoothOfRelativeDimension.exists_etale_mvPolynomial_of_field {K : Type u} [Field K]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) (n : ℕ) [SmoothOfRelativeDimension n f] (x : X) :
+    ∃ (V : X.Opens) (_ : IsAffineOpen V) (_ : x ∈ V) (φ : MvPolynomial (Fin n) K →+* Γ(X, V)),
+      φ.Etale := by
+  obtain ⟨U, -, V, hV, hx, hVU, H⟩ :=
+    SmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension (n := n) (f := f) x
+  obtain rfl : U = ⊤ := eq_top_iff.mpr fun z _ ↦ Subsingleton.elim (f x) z ▸ hVU hx
+  obtain ⟨φ, -, hφ⟩ := H.exists_etale_mvPolynomial
+  let e : MvPolynomial (Fin n) K ≃+* MvPolynomial (Fin n) Γ(Spec (.of K), ⊤) :=
+    MvPolynomial.mapEquiv _ (Scheme.ΓSpecIso (.of K)).symm.commRingCatIsoToRingEquiv
+  exact ⟨V, hV, hx, φ.comp e.toRingHom, RingHom.Etale.respectsIso.2 _ _ hφ⟩
+
+open Order in
+/-- Every point of a scheme smooth of relative dimension `n` over a field has codimension at
+most `n`. -/
+theorem coheight_le_of_smoothOfRelativeDimension {K : Type u} [Field K] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of K)) (n : ℕ) [SmoothOfRelativeDimension n f] (x : X) :
+    coheight x ≤ n := by
+  obtain ⟨V, hV, hx, φ, hφ⟩ := SmoothOfRelativeDimension.exists_etale_mvPolynomial_of_field f n x
+  obtain ⟨y, rfl⟩ : ∃ y, hV.fromSpec y = x := ⟨_, hV.fromSpec_primeIdealOf ⟨x, hx⟩⟩
+  rw [coheight_eq_of_isOpenImmersion]
+  exact (coheight_le_of_etale_mvPolynomial φ hφ _).1
 
 /-- A scheme smooth of relative dimension `n` over a field has dimension at most `n`. It is
 normal and locally noetherian, so its connected components are open and irreducible; each of
@@ -215,16 +254,29 @@ them is smooth of relative dimension `n`, hence of dimension `n` by
 `AlgebraicGeometry.smoothOfRelativeDimension_iff_topologicalKrullDim_eq`. -/
 theorem topologicalKrullDim_le_of_smoothOfRelativeDimension {K : Type u} [Field K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) (n : ℕ) [SmoothOfRelativeDimension n f] :
-    topologicalKrullDim X ≤ n :=
-  sorry
+    topologicalKrullDim X ≤ n := by
+  rw [topologicalKrullDim, Order.krullDim_eq_of_orderIso irreducibleSetEquivPoints,
+    Order.krullDim_eq_iSup_coheight]
+  exact iSup_le fun x ↦ by exact_mod_cast coheight_le_of_smoothOfRelativeDimension f n x
 
 /-- A nonempty scheme smooth of relative dimension `n` over a field has dimension exactly `n`:
 each of its connected components is irreducible and smooth of relative dimension `n`, hence of
 dimension `n` by `AlgebraicGeometry.smoothOfRelativeDimension_iff_topologicalKrullDim_eq`. -/
 theorem topologicalKrullDim_eq_of_smoothOfRelativeDimension {K : Type u} [Field K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) (n : ℕ) [SmoothOfRelativeDimension n f]
-    [Nonempty X] : topologicalKrullDim X = n :=
-  sorry
+    [Nonempty X] : topologicalKrullDim X = n := by
+  refine le_antisymm (topologicalKrullDim_le_of_smoothOfRelativeDimension f n) ?_
+  obtain ⟨x⟩ := ‹Nonempty X›
+  obtain ⟨V, hV, hx, φ, hφ⟩ := SmoothOfRelativeDimension.exists_etale_mvPolynomial_of_field f n x
+  obtain ⟨M, hM, -⟩ := Ideal.exists_le_maximal _ (hV.primeIdealOf ⟨x, hx⟩).2.ne_top
+  let y : Spec Γ(X, V) := ⟨M, hM.isPrime⟩
+  have := (coheight_le_of_etale_mvPolynomial φ hφ y).2
+    ((PrimeSpectrum.isClosed_singleton_iff_isMaximal _).mpr hM)
+  rw [← coheight_eq_of_isOpenImmersion hV.fromSpec] at this
+  have h := Order.coheight_le_krullDim (hV.fromSpec y)
+  rw [this] at h
+  rw [topologicalKrullDim, Order.krullDim_eq_of_orderIso irreducibleSetEquivPoints]
+  exact_mod_cast h
 
 open Limits in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -317,6 +369,45 @@ theorem Smooth.exists_smoothOfRelativeDimension_resLE {X Y : Scheme.{u}} (f : X 
       (RingHom.Locally (RingHom.IsStandardSmoothOfRelativeDimension P.dimension)))
       (arrowResLEAppIso f U V e)).mpr
     (RingHom.locally_of RingHom.isStandardSmoothOfRelativeDimension_respectsIso _ hd)
+
+/-- An irreducible scheme `X` smooth over a field `K` is smooth of relative dimension `n` over
+`K` if and only if `X` has dimension `n`: the relative dimension of a smooth morphism at a point
+is the dimension of the fibre at that point, and an irreducible scheme locally of finite type
+over a field has the same dimension at all of its points. -/
+theorem smoothOfRelativeDimension_iff_topologicalKrullDim_eq {K : Type u} [Field K]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) [Smooth f] [IrreducibleSpace X] (n : ℕ) :
+    SmoothOfRelativeDimension n f ↔ topologicalKrullDim X = n := by
+  refine ⟨fun _ ↦ topologicalKrullDim_eq_of_smoothOfRelativeDimension f n, fun h ↦ ?_⟩
+  have key (x : X) : ∃ (V : X.Opens) (_ : x ∈ V) (d : ℕ),
+      SmoothOfRelativeDimension d (V.ι ≫ f) := by
+    obtain ⟨U, V, -, -, hx, e, d, hd⟩ := Smooth.exists_smoothOfRelativeDimension_resLE f x
+    refine ⟨V, hx, d, ?_⟩
+    rw [← Scheme.Hom.resLE_comp_ι f e]
+    have : SmoothOfRelativeDimension (d + 0) (f.resLE U V e ≫ U.ι) := inferInstance
+    simpa using this
+  choose V hxV d hd using key
+  have hres {W W' : X.Opens} (hWW' : W ≤ W') (m : ℕ) [SmoothOfRelativeDimension m (W'.ι ≫ f)] :
+      SmoothOfRelativeDimension m (W.ι ≫ f) := by
+    rw [← X.homOfLE_ι hWW', Category.assoc]
+    have : SmoothOfRelativeDimension (0 + m) (X.homOfLE hWW' ≫ W'.ι ≫ f) := inferInstance
+    simpa using this
+  obtain ⟨x₀⟩ := (inferInstance : Nonempty X)
+  have hd₀ (x : X) : d x = d x₀ := by
+    obtain ⟨z, hz⟩ := nonempty_preirreducible_inter (V x).isOpen (V x₀).isOpen
+      ⟨x, hxV x⟩ ⟨x₀, hxV x₀⟩
+    have : Nonempty (V x ⊓ V x₀ : X.Opens) := ⟨⟨z, hz⟩⟩
+    have := hres (inf_le_left : V x ⊓ V x₀ ≤ V x) (d x)
+    have h₁ := topologicalKrullDim_eq_of_smoothOfRelativeDimension ((V x ⊓ V x₀).ι ≫ f) (d x)
+    have := hres (inf_le_right : V x ⊓ V x₀ ≤ V x₀) (d x₀)
+    have h₂ := topologicalKrullDim_eq_of_smoothOfRelativeDimension ((V x ⊓ V x₀).ι ≫ f) (d x₀)
+    exact_mod_cast h₁.symm.trans h₂
+  have : SmoothOfRelativeDimension (d x₀) f := by
+    refine IsZariskiLocalAtSource.of_iSup_eq_top V ?_ fun x ↦ hd₀ x ▸ hd x
+    exact eq_top_iff.mpr fun x _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hxV x⟩
+  have hn := topologicalKrullDim_eq_of_smoothOfRelativeDimension f (d x₀)
+  rw [h] at hn
+  obtain rfl : n = d x₀ := by exact_mod_cast hn
+  exact this
 
 /-- A scheme `X` smooth of relative dimension `n` over a field has local dimension `n` at every
 point: every open neighbourhood of a point is a nonempty scheme smooth of relative dimension `n`
