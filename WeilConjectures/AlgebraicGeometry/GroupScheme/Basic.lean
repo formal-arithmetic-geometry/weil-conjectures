@@ -34,6 +34,11 @@ the whole group.
 
 - `AlgebraicGeometry.GrpObj.onePoint`: the identity point of `G`, the image of the unit section.
 - `AlgebraicGeometry.GrpObj.mulLeft`: left translation by a rational point `g` of `G`.
+- `AlgebraicGeometry.GrpObj.mulRight`, `AlgebraicGeometry.GrpObj.conjBy`,
+  `AlgebraicGeometry.GrpObj.translate`: right translation, conjugation and the translate of a
+  closed subgroup scheme by a rational point.
+- `AlgebraicGeometry.GrpObj.mulLeftIso`, `AlgebraicGeometry.GrpObj.mulRightIso`: the
+  translations as automorphisms, with inverses the translations by `g⁻¹`.
 - `AlgebraicGeometry.GrpObj.identityComponentOpens`: the identity component `G°`, as an open
   subset of `G`.
 - `AlgebraicGeometry.GrpObj.identityComponent`: the identity component `G°` as an open subgroup
@@ -102,6 +107,101 @@ theorem GrpObj.isIso_mulLeft_left (G : Over (Spec (.of k))) [GrpObj G]
     ⟨GrpObj.mulLeft G g⁻¹, by rw [hcomp, inv_mul_cancel, hone],
       by rw [hcomp, mul_inv_cancel, hone]⟩
   exact inferInstanceAs (IsIso ((Over.forget _).map (GrpObj.mulLeft G g)))
+
+section Translation
+
+variable (G : Over (Spec (.of k))) [GrpObj G]
+
+/-- In the group `G ⟶ G` of endomorphisms, left translation by `g` is `g * id`. -/
+lemma GrpObj.mulLeft_eq_mul (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    GrpObj.mulLeft G g = (toUnit G ≫ g) * 𝟙 G := rfl
+
+/-- Right translation `x ↦ x * g` on a group scheme `G` over `k` by a rational point `g`.
+(blueprint: `def-sc-group-scheme-translate`) -/
+noncomputable def GrpObj.mulRight (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : G ⟶ G :=
+  lift (𝟙 G) (toUnit G ≫ g) ≫ μ[G]
+
+lemma GrpObj.mulRight_eq_mul (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    GrpObj.mulRight G g = 𝟙 G * (toUnit G ≫ g) := rfl
+
+lemma GrpObj.mulLeft_comp_mulLeft (g h : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    GrpObj.mulLeft G g ≫ GrpObj.mulLeft G h = GrpObj.mulLeft G (h * g) := by
+  rw [mulLeft_eq_mul, mulLeft_eq_mul, mulLeft_eq_mul, MonObj.comp_mul, ← Category.assoc,
+    toUnit_unique (_ ≫ toUnit G), Category.comp_id, ← mul_assoc, MonObj.comp_mul]
+
+lemma GrpObj.mulRight_comp_mulRight (g h : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    GrpObj.mulRight G g ≫ GrpObj.mulRight G h = GrpObj.mulRight G (g * h) := by
+  rw [mulRight_eq_mul, mulRight_eq_mul, mulRight_eq_mul, MonObj.comp_mul, ← Category.assoc,
+    toUnit_unique (_ ≫ toUnit G), Category.comp_id, mul_assoc, MonObj.comp_mul]
+
+lemma GrpObj.mulLeft_one : GrpObj.mulLeft G 1 = 𝟙 G := by
+  rw [mulLeft_eq_mul, MonObj.comp_one, one_mul]
+
+lemma GrpObj.mulRight_one : GrpObj.mulRight G 1 = 𝟙 G := by
+  rw [mulRight_eq_mul, MonObj.comp_one, mul_one]
+
+/-- Left translation by `g` as an automorphism of `G`, with inverse the left translation by
+`g⁻¹`. (blueprint: `lem-sc-translation-automorphism`) -/
+@[simps]
+noncomputable def GrpObj.mulLeftIso (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : G ≅ G where
+  hom := GrpObj.mulLeft G g
+  inv := GrpObj.mulLeft G g⁻¹
+  hom_inv_id := by rw [mulLeft_comp_mulLeft, inv_mul_cancel, mulLeft_one]
+  inv_hom_id := by rw [mulLeft_comp_mulLeft, mul_inv_cancel, mulLeft_one]
+
+/-- Right translation by `g` as an automorphism of `G`, with inverse the right translation by
+`g⁻¹`. (blueprint: `lem-sc-translation-automorphism`) -/
+@[simps]
+noncomputable def GrpObj.mulRightIso (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : G ≅ G where
+  hom := GrpObj.mulRight G g
+  inv := GrpObj.mulRight G g⁻¹
+  hom_inv_id := by rw [mulRight_comp_mulRight, mul_inv_cancel, mulRight_one]
+  inv_hom_id := by rw [mulRight_comp_mulRight, inv_mul_cancel, mulRight_one]
+
+/-- Conjugation `c_g = L_g ∘ R_{g⁻¹}`, `x ↦ g * x * g⁻¹`, by a rational point `g`.
+(blueprint: `def-sc-group-scheme-translate`) -/
+noncomputable def GrpObj.conjBy (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : G ⟶ G :=
+  GrpObj.mulRight G g⁻¹ ≫ GrpObj.mulLeft G g
+
+lemma GrpObj.comp_conjBy {X : Over (Spec (.of k))} (f : X ⟶ G)
+    (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    f ≫ GrpObj.conjBy G g = (toUnit X ≫ g) * f * (toUnit X ≫ g⁻¹) := by
+  rw [conjBy, mulRight_eq_mul, mulLeft_eq_mul, ← Category.assoc, MonObj.comp_mul,
+    MonObj.comp_mul, ← Category.assoc, ← Category.assoc, toUnit_unique (_ ≫ toUnit G),
+    toUnit_unique (_ ≫ toUnit _), Category.comp_id, Category.comp_id, mul_assoc]
+
+/-- Conjugation by a rational point is a homomorphism of group schemes:
+`c_g ∘ m = m ∘ (c_g × c_g)` and `c_g ∘ e = e`. (blueprint: `lem-sc-translation-automorphism`) -/
+instance GrpObj.isMonHom_conjBy (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    IsMonHom (GrpObj.conjBy G g) where
+  one_hom := by
+    have h1 : (η[G] : 𝟙_ _ ⟶ G) = 1 := by rw [Hom.one_def, toUnit_unit, Category.id_comp]
+    rw [comp_conjBy, toUnit_unit, Category.id_comp, Category.id_comp, h1, mul_one,
+      mul_inv_cancel]
+  mul_hom := by
+    have hμ : μ[G] = fst G G * snd G G := by rw [Hom.mul_def, lift_fst_snd, Category.id_comp]
+    have hinv : toUnit (G ⊗ G) ≫ g⁻¹ = (toUnit (G ⊗ G) ≫ g)⁻¹ := by
+      rw [Hom.inv_def, Hom.inv_def, Category.assoc]
+    rw [comp_conjBy, hμ, MonObj.comp_mul, tensorHom_fst, tensorHom_snd, comp_conjBy,
+      comp_conjBy, hinv]
+    group
+
+/-- The translate `gZ ⊆ G` of a closed subgroup scheme `j : Z ⟶ G` by a rational point `g`,
+recorded as the closed immersion `L_g ∘ j : Z ⟶ G` whose image it is.
+(blueprint: `def-sc-group-scheme-translate`) -/
+noncomputable def GrpObj.translate {Z : Over (Spec (.of k))} (j : Z ⟶ G)
+    (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : Z ⟶ G :=
+  j ≫ GrpObj.mulLeft G g
+
+/-- The translate of a closed subscheme by a rational point is again a closed subscheme. -/
+theorem GrpObj.isClosedImmersion_translate {Z : Over (Spec (.of k))} (j : Z ⟶ G)
+    [IsClosedImmersion j.left] (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    IsClosedImmersion (GrpObj.translate G j g).left := by
+  have := GrpObj.isIso_mulLeft_left G g
+  rw [GrpObj.translate, Over.comp_left]
+  infer_instance
+
+end Translation
 
 /-- The underlying scheme of a group scheme of finite type over a field is noetherian. -/
 theorem isNoetherian_left (G : Over (Spec (.of k))) [LocallyOfFiniteType G.hom]

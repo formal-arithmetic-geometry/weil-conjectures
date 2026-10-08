@@ -6,25 +6,19 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 
 /-!
 # Detecting isomorphisms in the point category
 
-Let `k` be a separably closed field and `s = Spec k`. Every étale `k`-scheme is covered by its
-`k`-points, so an étale sheaf on `s` is determined by its global sections. In the derived
-category `D(s_ét, Λ)` of étale sheaves of `Λ`-modules, the *point category*, the shifts
-`Λ_s[r]` of the constant complex therefore detect isomorphisms.
+Let `k` be a separably closed field and `s = Spec k`. An étale sheaf on `s` is determined by its
+global sections (`AlgebraicGeometry.Scheme.isZero_of_subsingleton_sections_of_isSepClosed`). In
+the derived category `D(s_ét, Λ)` of étale sheaves of `Λ`-modules, the *point category*, the
+shifts `Λ_s[r]` of the constant complex therefore detect isomorphisms.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.eq_of_forall_restrict_eq_of_isSepClosed`: two sections of an étale
-  sheaf on `Spec k` agreeing at every `k`-point are equal.
-- `AlgebraicGeometry.Scheme.isZero_of_subsingleton_sections_of_isSepClosed`: an étale sheaf of
-  modules on `Spec k` without nonzero global sections is zero.
 - `AlgebraicGeometry.Etale.isIso_iff_bijective_comp_of_isSepClosed` (`lem-sf-detection`): a
   morphism `u : P ⟶ Q` of the point category is an isomorphism if and only if
   `Hom(Λ_s[r], u)` is bijective for every `r : ℤ`.
@@ -35,130 +29,6 @@ category `D(s_ét, Λ)` of étale sheaves of `Λ`-modules, the *point category*,
 universe u
 
 open CategoryTheory Limits Opposite
-
-namespace AlgebraicGeometry.Scheme
-
-variable (k : Type u) [Field k] [IsSepClosed k]
-
-/-- The terminal object `𝟙 : Spec k ⟶ Spec k` of the small étale site of `Spec k`. -/
-local notation "𝟙ₑ" => MorphismProperty.Over.mk ⊤ (𝟙 (Spec (CommRingCat.of k)))
-  (MorphismProperty.id_mem @AlgebraicGeometry.Etale (Spec (CommRingCat.of k)))
-
-
-/-- The terminal object `𝟙 : Spec k ⟶ Spec k` of the small étale site of `Spec k`, as an object
-of `(Spec k).Etale`. -/
-noncomputable def etalePoint : (Spec (.of k)).Etale := 𝟙ₑ
-
-variable {k}
-
-variable {A : Type*} [Category A] {FA : A → A → Type*} {CA : A → Type*}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
-  [(Spec (.of k)).smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
-
-/-- Over a separably closed field `k`, two sections of an étale sheaf on `Spec k` over an étale
-`k`-scheme `U` are equal as soon as they agree after restriction along every morphism
-`V ⟶ U` from an étale `k`-scheme `V ≅ Spec k`: the `k`-points of `U` form an étale covering of
-`U`. -/
-theorem eq_of_forall_restrict_eq_of_isSepClosed (F : Sheaf (Spec (.of k)).smallEtaleTopology A)
-    {U : (Spec (.of k)).Etale} {x y : ToType (F.obj.obj (op U))}
-    (h : ∀ (V : (Spec (.of k)).Etale) (_ : IsIso V.hom) (f : V ⟶ U),
-      F.obj.map f.op x = F.obj.map f.op y) :
-    x = y := by
-  have : AlgebraicGeometry.Etale U.hom := U.prop
-  let pts := {l : Spec (.of k) ⟶ U.left // l ≫ U.hom = 𝟙 _}
-  let T : (Spec (.of k)).Etale := etalePoint k
-  let g : ∀ l : pts, T ⟶ U := fun l ↦ MorphismProperty.Over.homMk (A := T) (B := U) l.1
-    (l.2.trans rfl)
-  refine Sheaf.isSeparated F U (Sieve.ofArrows (fun _ : pts ↦ T) g) ?_ x y ?_
-  · rw [ofArrows_mem_smallEtaleTopology_iff]
-    ext z
-    simp only [Set.mem_iUnion, Set.mem_range, Set.mem_univ, iff_true]
-    obtain ⟨l, hl, hz⟩ := exists_fac_of_etale_of_isSepClosed U.hom (𝟙 _) z
-      (Subsingleton.elim (α := Spec (.of k)) _ _)
-    exact ⟨⟨l, hl⟩, (default : Spec (.of k)), hz⟩
-  · rintro V f ⟨W, f', _, ⟨l⟩, rfl⟩
-    simp only [op_comp, Functor.map_comp, ConcreteCategory.comp_apply,
-      h T (inferInstanceAs (IsIso (𝟙 (Spec (.of k)))))]
-
-omit [IsSepClosed k] in
-/-- An étale `k`-scheme `V` whose structure morphism is an isomorphism is isomorphic, in the
-small étale site of `Spec k`, to the terminal object `𝟙 : Spec k ⟶ Spec k`. -/
-noncomputable def etaleIsoOfIsIso (V : (Spec (.of k)).Etale) (hV : IsIso V.hom) :
-    V ≅ etalePoint k :=
-  MorphismProperty.Over.isoMk (@asIso _ _ _ _ V.hom hV) (Category.comp_id V.hom)
-
-variable {Λ : Type (u + 1)} [Ring Λ]
-
-/-- Over a separably closed field `k`, an étale sheaf of `Λ`-modules on `Spec k` whose global
-sections vanish is zero. -/
-theorem isZero_of_subsingleton_sections_of_isSepClosed
-    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (h : Subsingleton (F.obj.obj (op (etalePoint k)))) : IsZero F := by
-  have := h
-  have hU : ∀ U, Subsingleton (F.obj.obj (op U)) := fun U ↦ ⟨fun x y ↦
-    eq_of_forall_restrict_eq_of_isSepClosed F fun V hV f ↦ by
-      have : Subsingleton (F.obj.obj (op V)) :=
-        (F.obj.mapIso (etaleIsoOfIsIso V hV).op).toLinearEquiv.toEquiv.symm.subsingleton
-      exact Subsingleton.elim _ _⟩
-  rw [IsZero.iff_id_eq_zero]
-  ext U x
-  exact Subsingleton.elim _ _
-
-/-- Over a separably closed field `k`, an epimorphism of étale sheaves of `Λ`-modules on `Spec k`
-is surjective on global sections. -/
-theorem surjective_app_sections_of_epi_of_isSepClosed
-    {F G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : F ⟶ G) [Epi φ] :
-    Function.Surjective (φ.hom.app (op (etalePoint k))) := by
-  have := (Sheaf.isLocallySurjective_iff_epi' (A := ModuleCat.{u + 1} Λ) φ).2 inferInstance
-  intro s
-  obtain ⟨t, ht⟩ := id_mem_of_mem_smallEtaleTopology_of_isSepClosed k _
-    (Presheaf.imageSieve_mem (Spec (.of k)).smallEtaleTopology φ.hom
-      (U := op (etalePoint k)) s)
-  exact ⟨t, ht.trans (by erw [G.obj.map_id]; rfl)⟩
-
-omit [IsSepClosed k] in
-/-- `𝟙 : Spec k ⟶ Spec k` is the terminal object of the small étale site of `Spec k`. -/
-noncomputable def isTerminalEtalePoint : IsTerminal (etalePoint k) :=
-  MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale (Spec (.of k))
-
-/-- The map `Λ_k ⟶ G` from the constant sheaf `Λ` on `Spec k` to an étale sheaf of
-`Λ`-modules `G` corresponding to a global section `s` of `G`. -/
-noncomputable def homOfGlobalSection
-    {G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    (s : G.obj.obj (op (etalePoint k))) :
-    (constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-      (ModuleCat.of Λ Λ) ⟶ G :=
-  ((constantSheafAdj _ _ isTerminalEtalePoint).homEquiv
-    _ _).symm (ModuleCat.ofHom (LinearMap.toSpanSingleton Λ _ s))
-
-omit [IsSepClosed k] in
-/-- Composing the map attached to a global section `s` with `ψ : G ⟶ G'` gives the map attached
-to the global section `ψ(s)`. -/
-theorem homOfGlobalSection_comp
-    {G G' : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    (s : G.obj.obj (op (etalePoint k))) (ψ : G ⟶ G') :
-    homOfGlobalSection s ≫ ψ = homOfGlobalSection (ψ.hom.app _ s) := by
-  rw [homOfGlobalSection, homOfGlobalSection, ← Adjunction.homEquiv_naturality_right_symm]
-  congr 1
-  ext
-  simp
-
-omit [IsSepClosed k] in
-/-- The map attached to a nonzero global section is nonzero. -/
-theorem homOfGlobalSection_ne_zero
-    {G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    {s : G.obj.obj (op (etalePoint k))} (hs : s ≠ 0) : homOfGlobalSection s ≠ 0 := by
-  intro h
-  apply hs
-  have := congrArg (fun f : (constantSheaf (Spec (.of k)).smallEtaleTopology
-      (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ) ⟶ G ↦ ModuleCat.Hom.hom
-    (((constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
-      isTerminalEtalePoint).homEquiv (ModuleCat.of Λ Λ) G) f) (1 : Λ)) h
-  simp only [homOfGlobalSection, Equiv.apply_symm_apply, Adjunction.homEquiv_unit, Functor.map_zero,
-    comp_zero] at this
-  simpa using this
-
-end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Etale
 
@@ -182,7 +52,7 @@ theorem exists_ne_zero_of_not_isZero_homology
   obtain ⟨s, hs⟩ : ∃ s : (K.homology n).obj.obj (op (etalePoint k)), s ≠ 0 := by
     by_contra! h
     exact hK (isZero_of_subsingleton_sections_of_isSepClosed _ ⟨fun x y ↦ by rw [h x, h y]⟩)
-  obtain ⟨t, rfl⟩ := surjective_app_sections_of_epi_of_isSepClosed (K.homologyπ n) s
+  obtain ⟨t, rfl⟩ := surjective_app_of_epi_of_isSepClosed k (K.homologyπ n) s
   let f : (HomologicalComplex.single _ (ComplexShape.up ℤ) n).obj ((constantSheaf
       (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)) ⟶ K :=
     HomologicalComplex.mkHomFromSingle (homOfGlobalSection t ≫ K.iCycles n) (by simp)
