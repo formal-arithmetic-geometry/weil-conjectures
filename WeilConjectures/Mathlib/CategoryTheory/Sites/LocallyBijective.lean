@@ -29,6 +29,8 @@ refinement.
   types.
 - `CategoryTheory.Sheaf.isIso_of_isIso_app_of_generate_mem`: the criterion for sheaves with
   values in a concrete category.
+- `CategoryTheory.Presheaf.bijective_app_of_forall_mem`: a locally bijective morphism of
+  presheaves is bijective at an object all of whose covering sieves contain the identity.
 -/
 
 @[expose] public section
@@ -116,5 +118,19 @@ lemma Sheaf.isIso_of_isIso_app_of_generate_mem (s : A ⥤ Type (max v₁ u₁)) 
     exact isIso_of_reflects_iso _ s
   have : IsIso ((sheafToPresheaf J A).map φ) := NatIso.isIso_of_isIso_app φ.hom
   exact isIso_of_reflects_iso φ (sheafToPresheaf J A)
+
+/-- A locally injective and locally surjective morphism of presheaves `φ : F ⟶ G` is bijective
+on sections over an object `X` all of whose covering sieves contain the identity of `X`: the
+equalizer sieve of two sections with the same image and the image sieve of a section of `G` are
+covering, hence contain `𝟙 X`. -/
+lemma Presheaf.bijective_app_of_forall_mem {D : Type*} [Category* D] {FD : D → D → Type*}
+    {CD : D → Type*} [∀ X Y, FunLike (FD X Y) (CD X) (CD Y)] [ConcreteCategory D FD]
+    {F G : Cᵒᵖ ⥤ D} (φ : F ⟶ G) [Presheaf.IsLocallyInjective J φ]
+    [Presheaf.IsLocallySurjective J φ] {X : C} (hX : ∀ S ∈ J X, S (𝟙 X)) :
+    Function.Bijective (φ.app (op X)) := by
+  refine ⟨fun x y h ↦ ?_, fun s ↦ ?_⟩
+  · simpa using hX _ (Presheaf.equalizerSieve_mem J φ x y h)
+  · obtain ⟨t, ht⟩ := hX _ (Presheaf.imageSieve_mem J φ s)
+    exact ⟨t, by simpa using ht⟩
 
 end CategoryTheory

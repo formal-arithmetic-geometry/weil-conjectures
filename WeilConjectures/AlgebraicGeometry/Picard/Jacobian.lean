@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
@@ -21,6 +22,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallyBijective
 
 /-!
 # The Jacobian of a smooth projective curve
@@ -248,6 +250,33 @@ theorem mem_picardSubfunctorDegree_iff (f : X ⟶ Spec (.of k)) [IsProper f]
   · obtain ⟨s⟩ : Nonempty (Spec (.of K)) := inferInstance
     rw [picardFibreDegree_eq_picardPresheafDegree f L t s]
     exact h _
+
+/-- **The degree-`d` subfunctor is compatible with base change along a field extension.** Let
+`f' : X' ⟶ Spec K` be the base change of `f : X ⟶ Spec k` along `Spec K ⟶ Spec k`. Through the
+identification `AlgebraicGeometry.picardPresheafIsoOfIsPullback` of the Picard presheaves, a class
+has all its fibrewise degrees equal to `d` exactly when its transport does, so the restriction of
+the degree-`d` subfunctor of `f` to schemes over `K` is the degree-`d` subfunctor of `f'`. -/
+noncomputable def picardSubfunctorDegreeIsoOfIsPullback {K : Type u} [Field K] [Algebra k K]
+    {X' : Scheme.{u}} {f : X ⟶ Spec (.of k)} {f' : X' ⟶ Spec (.of K)} {g' : X' ⟶ X}
+    [IsProper f] [LocallyOfFinitePresentation f]
+    (h : IsPullback g' f' f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (d : ℤ) :
+    (Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
+      (picardSubfunctorDegree f d).toFunctor ≅ (picardSubfunctorDegree f' d).toFunctor :=
+  have : IsProper f' := MorphismProperty.of_isPullback (P := @IsProper) h ‹_›
+  have : LocallyOfFinitePresentation f' :=
+    MorphismProperty.of_isPullback (P := @LocallyOfFinitePresentation) h ‹_›
+  NatIso.ofComponents
+    (fun T ↦ (Equiv.subtypeEquiv ((picardPresheafIsoOfIsPullback h).app T).toEquiv
+      fun L ↦ by
+        refine (mem_picardSubfunctorDegree_iff f d (T := (Over.map _).obj T.unop) L).trans
+          (Iff.trans ?_ (mem_picardSubfunctorDegree_iff f' d (T := T.unop) _).symm)
+        refine forall_congr' fun t ↦ ?_
+        exact Iff.of_eq (congrArg (· = d)
+          (picardPresheafDegree_picardPresheafIsoOfIsPullback f (T := T.unop) h L t).symm)).toIso)
+    fun φ ↦ by
+      ext L
+      apply Subtype.ext
+      exact NatTrans.naturality_apply (picardPresheafIsoOfIsPullback h).hom φ L.1
 
 end DegreeSubfunctor
 
@@ -781,7 +810,9 @@ theorem nonempty_picardFunctorDegree_iso_of_isPullback {K : Type u} [Field K] [A
     Nonempty ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
       (picardFunctorDegree (C ↘ Spec (.of k)) d).obj ≅
         (picardFunctorDegree (C' ↘ Spec (.of K)) d).obj) :=
-  sorry
+  ⟨((sheafToPresheaf _ _).mapIso ((presheafToSheaf _ _).mapIso
+    (picardSubfunctorDegreeIsoOfIsPullback h d).symm ≪≫
+      Functor.sheafifyCompIso _ _ (Over.map _) _)).symm⟩
 
 omit [Field k] in
 lemma specMap_algebraMap_comp_specMap_algebraMap (k K L : Type u) [CommRing k] [CommRing K]
@@ -891,6 +922,40 @@ theorem nonempty_representableBy_picardFunctorDegree_of_isPullback {K : Type u} 
     Nonempty ((picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J) :=
   sorry
 
+/-- Over an algebraically closed field `K`, every fppf covering sieve of `Spec K`, viewed as a
+scheme over `S`, contains the identity: it contains a nonempty `K`-scheme locally of finite type,
+which has a `K`-point by the Nullstellensatz. -/
+lemma id_mem_of_mem_fppfTopology_over_of_isAlgClosed {S : Scheme.{u}} {K : Type u} [Field K]
+    [IsAlgClosed K] (φ : Spec (.of K) ⟶ S) {R : Sieve (Over.mk φ)}
+    (hR : R ∈ fppfTopology.over S (Over.mk φ)) : R (𝟙 _) := by
+  obtain ⟨s⟩ : Nonempty (Spec (.of K)) := inferInstance
+  obtain ⟨Z, g, hg, -, hg₂, z, -⟩ := exists_flat_mem_of_mem_fppfTopology_over hR s
+  have : JacobsonSpace (Over.mk φ).left := inferInstanceAs (JacobsonSpace (Spec (.of K)))
+  have : JacobsonSpace Z.left := LocallyOfFiniteType.jacobsonSpace g.left
+  obtain ⟨x, -, hx⟩ := nonempty_inter_closedPoints ⟨z, Set.mem_univ z⟩
+    (isClosed_univ (X := Z.left)).isLocallyClosed
+  have hσ : Over.homMk (pointOfClosedPoint g.left x hx)
+      (by rw [← Over.w g, pointOfClosedPoint_comp_assoc]) ≫ g = 𝟙 (Over.mk φ) := by
+    ext1
+    exact pointOfClosedPoint_comp g.left x hx
+  rw [← hσ]
+  exact R.downward_closed hg _
+
+/-- The degree of an invertible module on a proper scheme over a field `K` is the difference of
+the fibre Euler characteristics of the module and of the structure sheaf at the point of
+`Spec K`. -/
+lemma degree_eq_eulerCharFiber_sub {K : Type u} [Field K] {C : Scheme.{u}} [C.Over (Spec (.of K))]
+    [IsProper (C ↘ Spec (.of K))] (L : C.Pic) (s : Spec (.of K)) :
+    Modules.degree K ((fromSkeleton _).obj L.val) =
+      Modules.eulerCharFiber ((fromSkeleton _).obj L.val) (C ↘ Spec (.of K)) s -
+        Modules.eulerCharFiber (SheafOfModules.unit C.ringCatSheaf) (C ↘ Spec (.of K)) s := by
+  have := Pic.isInvertible L
+  have : ((fromSkeleton _).obj L.val).IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  have : (SheafOfModules.unit C.ringCatSheaf).IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  rw [Modules.degree, Modules.eulerCharFiber_eq_eulerChar, Modules.eulerCharFiber_eq_eulerChar]
+
 /-- **The geometric points of `Pic^0_{C₀/k₀}`.** Let `C₀` be a smooth projective geometrically
 integral curve over `k₀`, let `K` be an algebraically closed extension of `k₀` and let `C` be the
 base change of `C₀` to `K`. Then the value of `Pic^0_{C₀/k₀}` on `Spec K` is `Pic^0(C)`, and the
@@ -918,8 +983,69 @@ theorem exists_picardZero_equiv_picardFunctorDegree {k₀ K : Type u} [Field k�
         ∃ act : picardZero K C → picardZero K C,
           (∀ L, (act L).1 = Pic.map γ L.1) ∧
             ∀ L, Φ (act L) =
-              (picardFunctorDegree (C₀ ↘ Spec (.of k₀)) 0).obj.map (specAlgEquivOver σ).op (Φ L) :=
-  sorry
+            (picardFunctorDegree (C₀ ↘ Spec (.of k₀)) 0).obj.map (specAlgEquivOver σ).op (Φ L) := by
+  have : IsProper (C ↘ Spec (.of K)) := MorphismProperty.of_isPullback (P := @IsProper) hC ‹_›
+  have : LocallyOfFinitePresentation (C ↘ Spec (.of K)) :=
+    MorphismProperty.of_isPullback (P := @LocallyOfFinitePresentation) hC inferInstance
+  obtain ⟨s⟩ : Nonempty (Spec (.of K)) := inferInstance
+  let T₀ := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k₀ K)))
+  let ψ := hC.isoPullback
+  -- Step 10: a class on `C` has degree `0` iff its transport to `C₀ ×_{k₀} K` lies in the
+  -- degree-zero subfunctor.
+  have hdeg (L : C.Pic) (t : T₀.left) :
+      picardPresheafDegree (C₀ ↘ Spec (.of k₀)) (T := T₀) (Pic.map ψ.inv L) t =
+        Modules.degree K ((fromSkeleton _).obj L.val) := by
+    rw [degree_eq_eulerCharFiber_sub L t]
+    exact eulerCharFiber_sub_eulerCharFiber_unit_map_of_isPullback
+      (IsPullback.of_horiz_isIso ⟨by simp [ψ]⟩ :
+        IsPullback ψ.inv (pullback.snd _ _) (C ↘ Spec (.of K)) (𝟙 _)) L t
+  let e₀ : picardZero K C ≃
+      (picardSubfunctorDegree (C₀ ↘ Spec (.of k₀)) 0).toFunctor.obj (.op T₀) :=
+    Equiv.subtypeEquiv
+      ⟨Pic.map ψ.inv, Pic.map ψ.hom,
+        fun L ↦ by rw [← Pic.map_comp, Iso.hom_inv_id, Pic.map_id],
+        fun L ↦ by rw [← Pic.map_comp, Iso.inv_hom_id, Pic.map_id]⟩
+      fun L ↦ by
+        rw [mem_picardSubfunctorDegree_iff]
+        exact ⟨fun h t ↦ (hdeg L t).trans h, fun h ↦ (hdeg L s).symm.trans (h s)⟩
+  -- Step 9: every fppf covering of `Spec K` has a section, so the sections of the
+  -- sheafification over `Spec K` are those of the subfunctor.
+  let e₁ := Equiv.ofBijective _ (Presheaf.bijective_app_of_forall_mem
+    (fppfTopology.over (Spec (.of k₀)))
+    (toSheafify (fppfTopology.over (Spec (.of k₀)))
+      (picardSubfunctorDegree (C₀ ↘ Spec (.of k₀)) 0).toFunctor) (X := T₀)
+    fun _ hR ↦ id_mem_of_mem_fppfTopology_over_of_isAlgClosed _ hR)
+  refine ⟨e₀.trans e₁, fun σ ↦ ?_⟩
+  -- the automorphism `γ` of `C` over `C₀` lying over `Spec σ`
+  have hσg : Spec.map (CommRingCat.ofHom σ.toAlgHom.toRingHom) ≫
+      Spec.map (CommRingCat.ofHom (algebraMap k₀ K)) =
+        Spec.map (CommRingCat.ofHom (algebraMap k₀ K)) :=
+    Over.w (specAlgEquivOver σ)
+  let γ : C ⟶ C := hC.lift p ((C ↘ Spec (.of K)) ≫
+    Spec.map (CommRingCat.ofHom σ.toAlgHom.toRingHom)) (by rw [Category.assoc, hσg, hC.w])
+  have hγp : γ ≫ p = p := hC.lift_fst _ _ _
+  have hγs : γ ≫ (C ↘ Spec (.of K)) =
+      (C ↘ Spec (.of K)) ≫ Spec.map (CommRingCat.ofHom σ.toAlgHom.toRingHom) :=
+    hC.lift_snd _ _ _
+  have hγ : IsPullback γ (C ↘ Spec (.of K)) (C ↘ Spec (.of K))
+      (Spec.map (CommRingCat.ofHom σ.toAlgHom.toRingHom)) :=
+    IsPullback.of_right (by rwa [hγp, hσg]) hγs hC
+  have hdegγ (L : C.Pic) : Modules.degree K ((fromSkeleton _).obj (Pic.map γ L).val) =
+      Modules.degree K ((fromSkeleton _).obj L.val) := by
+    rw [degree_eq_eulerCharFiber_sub _ s, degree_eq_eulerCharFiber_sub L
+      ((Spec.map (CommRingCat.ofHom σ.toAlgHom.toRingHom)) s)]
+    exact eulerCharFiber_sub_eulerCharFiber_unit_map_of_isPullback hγ L s
+  have hbc : baseChangeMap (C₀ ↘ Spec (.of k₀)) (specAlgEquivOver σ) ≫ ψ.inv = ψ.inv ≫ γ := by
+    refine hC.hom_ext ?_ ?_
+    · simp [ψ, hγp, baseChangeMap]
+    · simp [ψ, hγs, baseChangeMap, specAlgEquivOver]
+  refine ⟨γ, hγp, hγs, fun L ↦ ⟨Pic.map γ L.1, (hdegγ L.1).trans L.2⟩, fun L ↦ rfl, fun L ↦ ?_⟩
+  refine Eq.trans ?_ (NatTrans.naturality_apply (toSheafify (fppfTopology.over (Spec (.of k₀)))
+    (picardSubfunctorDegree (C₀ ↘ Spec (.of k₀)) 0).toFunctor) (specAlgEquivOver σ).op (e₀ L))
+  have key : Pic.map ψ.inv (Pic.map γ L.1) =
+      Pic.map (baseChangeMap _ (specAlgEquivOver σ)) (Pic.map ψ.inv L.1) := by
+    rw [← Pic.map_comp, ← hbc, Pic.map_comp]
+  exact congrArg e₁ (Subtype.ext key)
 
 omit [Field k] in
 lemma isFinite_specMap_algebraMap (k K : Type u) [Field k] [Field K] [Algebra k K]

@@ -104,6 +104,53 @@ theorem picardPresheafDegree_map [IsProper f] [LocallyOfFinitePresentation f] {T
       ((Modules.pullback (baseChangeMap f g)).obj ((fromSkeleton _).obj (Pic.val L))))]
   rfl
 
+omit f in
+/-- **The fibrewise degree of an invertible module is invariant under base change.** For a
+pullback square
+```
+X' --a--> X
+|         |
+f'        f
+v         v
+T' --b--> T
+```
+with `f` proper and locally of finite presentation and `ℒ ∈ Pic X`, the difference
+`χ(X'_{t'}, (a^* ℒ)_{t'}) - χ(X'_{t'}, 𝒪)` of fibre Euler characteristics at `t'` is the
+corresponding difference for `ℒ` at `b t'`. -/
+theorem eulerCharFiber_sub_eulerCharFiber_unit_map_of_isPullback {X' T T' : Scheme.{u}}
+    {f : X ⟶ T} {f' : X' ⟶ T'} {a : X' ⟶ X} {b : T' ⟶ T} [IsProper f]
+    [LocallyOfFinitePresentation f] (sq : IsPullback a f' f b) (L : X.Pic) (t : T') :
+    Modules.eulerCharFiber ((fromSkeleton _).obj (Pic.map a L).val) f' t -
+        Modules.eulerCharFiber (SheafOfModules.unit X'.ringCatSheaf) f' t =
+      Modules.eulerCharFiber ((fromSkeleton _).obj L.val) f (b t) -
+        Modules.eulerCharFiber (SheafOfModules.unit X.ringCatSheaf) f (b t) := by
+  have := Modules.isGrothendieckAbelian X
+  have := Pic.isInvertible L
+  have : (SheafOfModules.unit X.ringCatSheaf).IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  rw [← Modules.eulerCharFiber_pullback_of_isPullback _ _ _ _ _ sq,
+    ← Modules.eulerCharFiber_pullback_of_isPullback _ _ _ _ _ sq,
+    Modules.eulerCharFiber_congr (Modules.pullbackObjUnitIso _),
+    ← Modules.eulerCharFiber_congr (fromSkeletonToSkeletonIso
+      ((Modules.pullback a).obj ((fromSkeleton _).obj L.val)))]
+  rfl
+
+/-- **The fibrewise degree is compatible with base change of `f`.** For a pullback square `h`
+exhibiting `f' : X' ⟶ S'` as the base change of `f` along `g : S' ⟶ S`, a scheme `T` over `S'`
+and `ℒ ∈ Pic (X ×_S T)`, the fibrewise degree of the corresponding class of
+`Pic (X' ×_{S'} T)` (through `AlgebraicGeometry.picardPresheafIsoOfIsPullback`) is the fibrewise
+degree of `ℒ`. -/
+theorem picardPresheafDegree_picardPresheafIsoOfIsPullback [IsProper f]
+    [LocallyOfFinitePresentation f] {X' S' : Scheme.{u}} {g : S' ⟶ S} {f' : X' ⟶ S'}
+    {g' : X' ⟶ X} (h : IsPullback g' f' f g) {T : Over S'}
+    (L : (picardPresheaf f).obj (.op ((Over.map g).obj T))) (t : T.left) :
+    picardPresheafDegree f' ((picardPresheafIsoOfIsPullback h).hom.app (.op T) L) t =
+      picardPresheafDegree f L t :=
+  eulerCharFiber_sub_eulerCharFiber_unit_map_of_isPullback
+    (IsPullback.of_horiz_isIso ⟨by simp [pullbackIsoOfIsPullback]⟩ :
+      IsPullback (pullbackIsoOfIsPullback h T).hom (pullback.snd f' T.hom)
+        (pullback.snd f ((Over.map g).obj T).hom) (𝟙 T.left)) L t
+
 /-- **The fibrewise degree is locally constant** when `f` is proper, flat and locally of finite
 presentation: the fibre Euler characteristics of `ℒ` and of `𝒪_{X_T}` are locally constant on `T`
 since both modules are invertible, hence of finite presentation and flat over `T`.

@@ -709,6 +709,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Comap
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Conservative
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech

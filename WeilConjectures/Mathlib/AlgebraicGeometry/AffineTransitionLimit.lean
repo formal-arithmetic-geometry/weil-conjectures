@@ -3543,8 +3543,13 @@ theorem Scheme.exists_pullback_hom_of_isLimit [∀ i, CompactSpace (D.obj i)]
     ∃ (j : I) (f : j ⟶ i) (ψj : pullback pV (D.map f) ⟶ W),
       ψj ≫ pW = pullback.fst pV (D.map f) ≫ pV ∧
         pullback.map pV (c.π.app i) pV (D.map f) (𝟙 V) (c.π.app j) (𝟙 _) (by simp)
-          (by simp) ≫ ψj = ψ :=
-  sorry
+          (by simp) ≫ ψj = ψ := by
+  have : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace pV
+  have : QuasiSeparatedSpace V := quasiSeparatedSpace_of_quasiSeparated pV
+  obtain ⟨k, g, hg, hgW⟩ := Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation
+    (baseChangeDiagram D pV) (baseChangeDiagramStructure D pV) pW (baseChangeCone D c pV)
+    (isLimitBaseChangeCone D c pV hc) ψ (by ext j; simp [hψ])
+  exact ⟨k.left, k.hom, g, hgW, hg⟩
 
 include hc in
 /-- **Equalities of morphisms between schemes of finite presentation descend to a finite stage**
@@ -3561,8 +3566,15 @@ theorem Scheme.exists_pullback_fst_comp_eq_of_isLimit [∀ i, CompactSpace (D.ob
     [LocallyOfFinitePresentation pW] [QuasiCompact pW] [QuasiSeparated pW] (ψ χ : V ⟶ W)
     (hψ : ψ ≫ pW = pV) (hχ : χ ≫ pW = pV)
     (h : pullback.fst pV (c.π.app i) ≫ ψ = pullback.fst pV (c.π.app i) ≫ χ) :
-    ∃ (j : I) (f : j ⟶ i), pullback.fst pV (D.map f) ≫ ψ = pullback.fst pV (D.map f) ≫ χ :=
-  sorry
+    ∃ (j : I) (f : j ⟶ i), pullback.fst pV (D.map f) ≫ ψ = pullback.fst pV (D.map f) ≫ χ := by
+  have : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace pV
+  obtain ⟨k, hk, heq⟩ := Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType
+    (baseChangeDiagram D pV) (baseChangeDiagramStructure D pV) pW (baseChangeCone D c pV)
+    (isLimitBaseChangeCone D c pV hc) (i := Over.mk (𝟙 i))
+    (pullback.fst _ _ ≫ ψ) (pullback.fst _ _ ≫ χ) (by simp [hψ]) (by simp [hχ])
+    (by simpa using h)
+  refine ⟨k.left, k.hom, ?_⟩
+  simpa using heq
 
 end Descent
 
