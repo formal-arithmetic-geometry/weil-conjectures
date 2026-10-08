@@ -27,6 +27,9 @@ through the adjunction.
 
 ## Main results
 
+- `CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ_comp_map_braiding`: the lax monoidal
+  structure `Adjunction.rightAdjointLaxMonoidal` on the right adjoint of a braided functor is
+  compatible with the braidings.
 - `CategoryTheory.BraidedCategory.preservesColimitsOfShape_flip_curriedTensor_obj`: in a
   braided category, tensoring on the right with `X` preserves the colimits of shape `J` that
   tensoring on the left with `X` preserves, the two functors being identified by the braiding.
@@ -57,6 +60,33 @@ def rightAdjointLaxBraided : G.LaxBraided where
       map_μ_comp_counit_app_tensor_assoc, map_μ_comp_counit_app_tensor,
       BraidedCategory.braiding_naturality, Functor.map_braiding, Category.assoc,
       Category.assoc, Functor.Monoidal.μ_δ_assoc]
+
+section
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [BraidedCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D] [BraidedCategory D]
+  {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) [F.Braided]
+
+/-- The right adjoint of a braided monoidal functor, with its lax monoidal structure
+`Adjunction.rightAdjointLaxMonoidal`, is compatible with the braidings: the square
+```
+  G X ⊗ G Y ──μ──▶ G (X ⊗ Y)
+      │                │
+   β_(G X, G Y)     G (β_(X, Y))
+      ▼                ▼
+  G Y ⊗ G X ──μ──▶ G (Y ⊗ X)
+```
+commutes. -/
+lemma rightAdjointLaxMonoidal_μ_comp_map_braiding (X Y : D) :
+    letI := adj.rightAdjointLaxMonoidal
+    μ G X Y ≫ G.map (β_ X Y).hom = (β_ (G.obj X) (G.obj Y)).hom ≫ μ G Y X := by
+  let := adj.rightAdjointLaxMonoidal
+  rw [rightAdjointLaxMonoidal_μ, rightAdjointLaxMonoidal_μ, homEquiv_unit, homEquiv_unit,
+    Category.assoc, ← G.map_comp, ← adj.unit_naturality_assoc, ← G.map_comp]
+  congr 2
+  simp
+
+end
 
 end CategoryTheory.Adjunction
 

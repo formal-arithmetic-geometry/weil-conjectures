@@ -93,6 +93,7 @@ public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.RankOne
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
+public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
@@ -104,6 +105,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
@@ -138,6 +141,7 @@ public import WeilConjectures.AlgebraicGeometry.PoincareDualitySetting
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CurveProjection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials
@@ -532,6 +536,7 @@ public import WeilConjectures.Mathlib.Algebra.Lie.LieTheorem
 public import WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Defs
 public import WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Lemmas
 public import WeilConjectures.Mathlib.Algebra.Lie.Solvable
+public import WeilConjectures.Mathlib.Algebra.Module.LocalizedModule.Exact
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Basic
@@ -649,6 +654,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shap
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Multiequalizer
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.PiProd
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Preorder.Basic

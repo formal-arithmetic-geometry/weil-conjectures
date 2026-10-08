@@ -39,6 +39,8 @@ internal hom `PresheafOfModules.homObj F N`, which is a sheaf when `N` is.
 - `SheafOfModules.symmetricCategory`: it is symmetric.
 - `SheafOfModules.tensorObjIsoSheafification`: `M ⊗ N` is the sheafification of the tensor
   product of the underlying presheaves of modules.
+- `SheafOfModules.sheafificationMonoidal`, `SheafOfModules.sheafificationBraided`: the
+  sheafification functor is monoidal and braided, as named definitions.
 
 The sheafification functor is a braided monoidal functor for these structures.
 -/
@@ -192,6 +194,34 @@ noncomputable def tensorObjIsoSheafification (M N : SheafOfModules.{u} 𝓡) :
       (asIso (PresheafOfModules.sheafificationAdjunction.{u} (𝟙 (𝓡).obj)).counit).app N).symm ≪≫
     Functor.Monoidal.μIso 𝓢
       M.val N.val
+
+end
+
+section
+
+variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] (R : Sheaf J CommRingCat.{u})
+  [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
+
+attribute [local instance] monoidalCategory symmetricCategory
+
+/-- The sheafification functor from presheaves of modules over `R` to sheaves of modules is
+monoidal for `SheafOfModules.monoidalCategory`. This names the instance above, which instance
+search does not find for the structure sheaf of a scheme. -/
+@[instance_reducible]
+noncomputable def sheafificationMonoidal :
+    (PresheafOfModules.sheafification.{u}
+      (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).Monoidal :=
+  inferInstance
+
+/-- The sheafification functor from presheaves of modules over `R` to sheaves of modules is
+braided for `SheafOfModules.symmetricCategory`. -/
+@[instance_reducible]
+noncomputable def sheafificationBraided :
+    letI := sheafificationMonoidal R
+    (PresheafOfModules.sheafification.{u}
+      (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).Braided :=
+  inferInstance
 
 end
 

@@ -307,6 +307,29 @@ noncomputable def IsFreeGenerator.overIso {U : X.Opens} {e : Γ(M, U)} (he : IsF
     exact isIso_of_reflects_iso φ (SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _)
   (asIso φ).symm
 
+/-- The image of a free generator under a morphism which is bijective on all sections over
+opens `V ⊆ U` is a free generator. -/
+lemma IsFreeGenerator.app_of_bijective (φ : M ⟶ N) {U : X.Opens} {e : Γ(M, U)}
+    (he : IsFreeGenerator e) (hφ : ∀ V ≤ U, Function.Bijective (φ.app V)) :
+    IsFreeGenerator (φ.app U e) := by
+  intro V h
+  have : (fun r : Γ(X, V) ↦ r • N.presheaf.map (homOfLE h).op (φ.app U e)) =
+      φ.app V ∘ fun r : Γ(X, V) ↦ r • M.presheaf.map (homOfLE h).op e := by
+    funext r
+    simp [Hom.app_smul, Hom.app_presheaf_map]
+  rw [this]
+  exact (hφ V h).comp (he V h)
+
+/-- The section `1` is a free generator of the structure sheaf on every open. -/
+lemma isFreeGenerator_one (U : X.Opens) :
+    IsFreeGenerator (M := Modules.unit X) (U := U) (1 : Γ(X, U)) := by
+  intro V h
+  have key (r : Γ(X, V)) : r • (Modules.unit X).presheaf.map
+      (homOfLE h).op (1 : Γ(X, U)) = r :=
+    (congrArg (r * ·) (map_one (X.presheaf.map (homOfLE h).op).hom)).trans (mul_one r)
+  refine ⟨fun a b hab ↦ ?_, fun b ↦ ⟨b, key b⟩⟩
+  exact (key a).symm.trans (hab.trans (key b))
+
 end Modules
 
 end AlgebraicGeometry.Scheme
