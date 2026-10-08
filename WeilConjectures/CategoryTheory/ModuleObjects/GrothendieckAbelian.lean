@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
-public import WeilConjectures.CategoryTheory.ModuleObjects.Braided
+public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 
 /-!
@@ -19,7 +19,7 @@ Let `C` be a closed symmetric monoidal Grothendieck abelian category whose tenso
 additive, and let `R : C` be a commutative algebra object. The category `Mod C R` of
 `R`-module objects is abelian (`WeilConjectures.CategoryTheory.ModuleObjects.Abelian`) and
 symmetric monoidal for the relative tensor product `⊗_R`
-(`WeilConjectures.CategoryTheory.ModuleObjects.Braided`). This file records that `Mod C R`
+(`WeilConjectures.CategoryTheory.ModuleObjects.Symmetric`). This file records that `Mod C R`
 inherits the remaining properties of `C` needed by the K-flat machinery:
 
 * `Mod.monoidalClosed`: `Mod C R` is closed monoidal;
