@@ -670,6 +670,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformat
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.CommaSites
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Composition
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Limits

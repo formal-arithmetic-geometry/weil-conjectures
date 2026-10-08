@@ -56,6 +56,8 @@ resolutions when `g^*` preserves flat sheaves, so they form a left derivability 
 - `AlgebraicGeometry.Etale.derivedTensorRightPullback g`: tensoring with a complex pulled
   back along `g`, `N ↦ (K ↦ K ⊗ᴸ g^* N)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_unit`: `Lg^* Λ_Y ≅ Λ_Z`.
+- `AlgebraicGeometry.Etale.nonempty_monoidal_leftDerivedUpperStar`: `Lg^*` is a monoidal
+  functor (currently `sorry`, see the TODO below).
 - `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_left` and
   `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_right`: `K ⊗ᴸ M` vanishes
   when `K` or `M` does.
@@ -370,6 +372,17 @@ theorem nonempty_iso_leftDerivedUpperStar_unit :
     DerivedCategory.Q.mapIso
       (((HomologicalComplex.singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).app _) ≪≫
         (HomologicalComplex.single _ (.up ℤ) 0).mapIso (Functor.Monoidal.εIso (g)^*[A]).symm)⟩
+
+/-- The derived pullback `Lg^* : D(Y_ét) ⥤ D(Z_ét)` is a monoidal functor for the derived tensor
+products. This is the monoidality of derived pullback in blueprint
+`def-weil-derived-pullback-tensor-hom` (within `sk-def-sf-operations`).
+
+The structure isomorphisms are `leftDerivedUpperStarTensorIso` and the unit comparison of
+`nonempty_iso_leftDerivedUpperStar_unit`; what is missing is their compatibility with the
+associators and unitors of the derived tensor products, see the TODO in the module docstring. -/
+theorem nonempty_monoidal_leftDerivedUpperStar [Etale.UpperStarPreservesFlat A] :
+    Nonempty (L((g)^*[A])).Monoidal :=
+  sorry
 
 end Etale
 
