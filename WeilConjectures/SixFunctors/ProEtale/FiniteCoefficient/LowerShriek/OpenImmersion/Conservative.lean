@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.CategoryTheory.NatIso
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Restriction along a pro-étale cover is conservative
@@ -22,7 +22,8 @@ This file proves that a morphism of sheaves on the small pro-étale site of `X` 
 invertible after restricting along every `g i` is itself invertible
 (`AlgebraicGeometry.ProEtale.isIso_of_isIso_localizationRestriction`). Here restriction is
 the functor `AlgebraicGeometry.ProEtale.localizationRestriction` of
-`WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs`, which for an open
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Defs`, which for
+an open
 immersion is `AlgebraicGeometry.ProEtale.openImmersionRestriction`.
 
 Note the difference with the étale statement: joint surjectivity of the `g i` is *not*
