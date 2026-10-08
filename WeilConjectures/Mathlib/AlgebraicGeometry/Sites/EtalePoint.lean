@@ -83,6 +83,9 @@ of an open of `V`.
   geometric points of `S`.
 - `AlgebraicGeometry.Scheme.isIso_of_isIso_sheafFiber_map`: a morphism of `A`-valued sheaves
   on the small étale site of `S` which is invertible on all these fibres is invertible.
+- `AlgebraicGeometry.Scheme.sheafHom_ext_of_sheafFiber_map_algClosurePoint`: two morphisms of
+  `A`-valued sheaves on the small étale site of `S` which agree on all these fibres are
+  equal.
 - `AlgebraicGeometry.Scheme.initial_pointSmallEtaleElementsBaseChange`: for a closed
   immersion `i`, base change is initial on pointed étale neighbourhoods.
 
@@ -174,6 +177,23 @@ lemma isIso_of_isIso_sheafFiber_map {F G : Sheaf S.smallEtaleTopology A} (φ : F
     (by
       rintro ⟨-, ⟨s⟩⟩
       exact h s)
+
+include hJ in
+/-- Two morphisms of `A`-valued sheaves on the small étale site of `S` which agree on the
+fibres at the geometric points `S.algClosurePoint s` of `S` are equal. -/
+lemma sheafHom_ext_of_sheafFiber_map_algClosurePoint [HasColimitsOfSize.{u, u} A]
+    [AB5OfSize.{u + 1, u + 1} A] [HasFiniteLimits A] {F G : Sheaf S.smallEtaleTopology A}
+    {φ ψ : F ⟶ G}
+    (h : ∀ s : S, (pointSmallEtale (S.algClosurePoint s)).sheafFiber.map φ =
+      (pointSmallEtale (S.algClosurePoint s)).sheafFiber.map ψ) : φ = ψ := by
+  refine ((isConservativeFamilyOfPoints_ulift_pointSmallEtale S).jointlyFaithful A).map_injective
+    ?_
+  rintro ⟨-, ⟨s⟩⟩
+  dsimp only [uliftPointSmallEtale]
+  have e := GrothendieckTopology.Point.uliftSheafFiberIso.{u + 1}
+    (pointSmallEtale (S.algClosurePoint s)) A
+  rw [← Iso.cancel_iso_hom_right _ _ (e.app G), Iso.app_hom, e.hom.naturality,
+    e.hom.naturality, h s]
 
 end Ulift
 

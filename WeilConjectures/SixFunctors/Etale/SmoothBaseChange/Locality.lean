@@ -542,12 +542,15 @@ theorem Etale.BaseChangeProperty.comp {Z : Scheme.{u}} {p₁ : X ⟶ Z} {p₂ : 
   exact Etale.isIso_baseChangeHomologyMap_of_paste_horiz Λ sq₂ sq₁ sq he rfl q F
     (h₂ g _ _ sq₂ F) (h₁ _ _ _ sq₁ _)
 
-/-- An isomorphism `p` satisfies the base-change property `BC(p, Λ, q)` in every degree: for
-a Cartesian square on an isomorphism, the base-change map is an isomorphism. This is the
-elementary case where `p` is an isomorphism, so that `R^q p_*` is `p_*` (up to the pullback
-isomorphism) in degree `0` and vanishes in the other degrees. -/
+/-- An isomorphism `p` satisfies the base-change property `BC(p, Λ, q)` in every degree: an
+isomorphism is étale, and for a Cartesian square on an étale morphism the derived base-change
+map is an isomorphism (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale`), hence
+so is its degree-`q` homology. -/
 theorem Etale.baseChangeProperty_of_isIso (p : X ⟶ S) [IsIso p] (q : ℤ) :
-    Etale.BaseChangeProperty Λ p q :=
-  sorry
+    Etale.BaseChangeProperty Λ p q := by
+  intro T Y g e h _ _ sq F
+  rw [Etale.isIso_baseChangeHomologyMap_iff, Etale.baseChange_eq_derivedBaseChangeMapPlus]
+  have := Etale.isIso_derivedBaseChangeMapPlus_of_etale Λ sq
+  infer_instance
 
 end AlgebraicGeometry
