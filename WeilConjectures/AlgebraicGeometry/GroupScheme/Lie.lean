@@ -215,7 +215,11 @@ theorem isMulCommutative_infPoints : IsMulCommutative (infPoints G) := by
 
 /-- The identity point, as a morphism of schemes, is the identity section. -/
 theorem one_left : (1 : Over.mk (𝟙 S) ⟶ G).left = unitSection G := by
-  sorry
+  rw [Hom.one_def, Over.comp_left, unitSection]
+  have : (SemiCartesianMonoidalCategory.toUnit (Over.mk (𝟙 S))).left = 𝟙 S :=
+    (Category.comp_id _).symm.trans (Over.w _)
+  rw [this]
+  exact Category.id_comp _
 
 theorem ι_comp_left_eq {v : Scheme.dualNumbersOver S ⟶ G} (hv : v ∈ infPoints G) :
     S.dualNumbersι ≫ v.left = unitSection G := by
@@ -295,6 +299,10 @@ theorem lieEquiv_mul (v w : infPoints G) : lieEquiv G (v * w) = lieEquiv G v + l
 theorem lieEquiv_one : lieEquiv G 1 = 0 := by
   sorry
 
+theorem lieEquiv_symm_add (x y : Lie G) :
+    (lieEquiv G).symm (x + y) = (lieEquiv G).symm x * (lieEquiv G).symm y :=
+  (lieEquiv G).injective (by simp [lieEquiv_mul])
+
 /-! ### The bracket as the mixed term of the commutator -/
 
 /-- The points of `G` over `S[ε][δ]` reducing to the identity both for `ε = 0` and for `δ = 0`. -/
@@ -370,6 +378,84 @@ noncomputable instance : LieRing (Lie G) where
 noncomputable instance : LieAlgebra Γ(S, ⊤) (Lie G) where
   lie_smul := by sorry
 
+/-! ### Rescaling infinitesimal points -/
+
+omit [GrpObj G] in
+/-- The morphism `g^*Ω¹_{G/S} ⟶ 𝒪_S` attached to a derivation `d : 𝒪_G → g_*𝒪_S` over `f⁻¹𝒪_S`,
+for a morphism `g : S ⟶ G`: the universal property of `Ω¹_{G/S}` and the adjunction
+`g^* ⊣ g_*`. -/
+noncomputable def homOfDerivation (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) :
+    (Scheme.Modules.pullback g).obj G.hom.cotangentSheaf ⟶ Scheme.Modules.unitModule S :=
+  ((Scheme.Modules.pullbackPushforwardAdjunction _).homEquiv _ _).symm
+    ((PresheafOfModules.sheafificationHomEquiv (𝟙 _)).symm
+      ((PresheafOfModules.DifferentialsConstruction.isUniversal' _).desc D))
+
+omit [GrpObj G] in
+theorem omegaHom_eq_homOfDerivation (v : Scheme.dualNumbersOver S ⟶ G) :
+    omegaHom G v = homOfDerivation G _ (infDerivation G v) :=
+  rfl
+
+omit [GrpObj G] in
+/-- Multiplying the morphism attached to a derivation by a global function `r` multiplies the
+derivation by `r`. -/
+theorem homOfDerivation_comp_unitSmul (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) (r : Γ(S, ⊤)) :
+    homOfDerivation G g D ≫ Scheme.Modules.unitSmul r = homOfDerivation G g
+      (D.postcomp ((Scheme.Modules.pushforward g).map (Scheme.Modules.unitSmul r)).val) := by
+  rw [homOfDerivation, homOfDerivation, ← Adjunction.homEquiv_naturality_right_symm,
+    ← PresheafOfModules.Derivation.Universal.desc_comp]
+  exact congrArg _ (PresheafOfModules.sheafificationHomEquiv_symm_comp _ _ _).symm
+
+/-- The morphisms `ω_{G/S} ⟶ 𝒪_S` attached to derivations along two morphisms `g₁ = g₂ = e` agree
+if the derivations do. -/
+theorem pullbackCongr_inv_comp_homOfDerivation {g₁ g₂ : S ⟶ G.left} (h₁ : g₁ = unitSection G)
+    (h₂ : g₂ = unitSection G)
+    (D₁ : ((Scheme.Modules.pushforward g₁).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom)
+    (D₂ : ((Scheme.Modules.pushforward g₂).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom)
+    (hD : ∀ {V : (TopologicalSpace.Opens G.left)ᵒᵖ} (a : Γ(G.left, V.unop)), D₁.d a ≍ D₂.d a) :
+    (Scheme.Modules.pullbackCongr h₁).inv.app G.hom.cotangentSheaf ≫ homOfDerivation G g₁ D₁ =
+      (Scheme.Modules.pullbackCongr h₂).inv.app G.hom.cotangentSheaf ≫
+        homOfDerivation G g₂ D₂ := by
+  subst h₁ h₂
+  obtain rfl : D₁ = D₂ := by
+    ext V a
+    exact eq_of_heq (hD a)
+  rfl
+
+theorem dualNumbersScaleOver_comp_mem_infPoints (r : Γ(S, ⊤))
+    {v : Scheme.dualNumbersOver S ⟶ G} (hv : v ∈ infPoints G) :
+    Scheme.dualNumbersScaleOver S r ≫ v ∈ infPoints G := by
+  rw [mem_infPoints] at hv ⊢
+  rw [Scheme.dualNumbersιOver_comp_scaleOver_assoc, hv]
+
+/-- The rescaling `v ↦ v(rε)` of an infinitesimal point by a global function `r`. It is the
+multiplication by `r` on the Lie algebra (`toLie_infPointsScale`). -/
+noncomputable def infPointsScale (r : Γ(S, ⊤)) (v : infPoints G) : infPoints G :=
+  ⟨Scheme.dualNumbersScaleOver S r ≫ v.1, dualNumbersScaleOver_comp_mem_infPoints G r v.2⟩
+
+theorem toLie_infPointsScale (r : Γ(S, ⊤)) (v : infPoints G) :
+    toLie G (infPointsScale G r v) = r • toLie G v := by
+  rw [Scheme.Modules.homUnit_smul_def, toLie, toLie, Category.assoc, omegaHom_eq_homOfDerivation,
+    omegaHom_eq_homOfDerivation, homOfDerivation_comp_unitSmul]
+  refine pullbackCongr_inv_comp_homOfDerivation G _ _ _ _ fun {V} a ↦ heq_of_eq ?_
+  rw [PresheafOfModules.Derivation.postcomp_d_apply]
+  change (DualNumber.scale _ (v.1.left.app V.unop a)).snd =
+    (v.1.left.app V.unop a).snd * S.presheaf.map (homOfLE le_top).op r
+  rw [DualNumber.snd_scale, mul_comm]
+  rfl
+
+theorem lieEquiv_symm_smul (r : Γ(S, ⊤)) (x : Lie G) :
+    (lieEquiv G).symm (r • x) = infPointsScale G r ((lieEquiv G).symm x) := by
+  rw [Equiv.symm_apply_eq]
+  change _ = toLie G _
+  rw [toLie_infPointsScale]
+  exact congrArg (r • ·) ((lieEquiv G).apply_symm_apply x).symm
+
 /-! ### Functoriality -/
 
 variable {G} {H : Over S} [GrpObj H]
@@ -437,9 +523,17 @@ variable {G} {H : Over (Spec (.of R))} [GrpObj H]
 (blueprint: `sk-d-tangent`) -/
 noncomputable def differential (f : G ⟶ H) [IsMonHom f] : Lie G →ₗ⁅R⁆ Lie H where
   toFun x := lieEquiv H (infPointsMap f ((lieEquiv G).symm x))
-  map_add' := by sorry
-  map_smul' := by sorry
-  map_lie' := by sorry
+  map_add' x y := by
+    simp only [lieEquiv_symm_add, map_mul, lieEquiv_mul]
+  map_smul' c x := by
+    change _ = c • lieEquiv H _
+    rw [show c • x = (Scheme.ΓSpecIso (.of R)).inv.hom c • x from rfl, lieEquiv_symm_smul,
+      show infPointsMap f (infPointsScale G _ ((lieEquiv G).symm x)) =
+        infPointsScale H _ (infPointsMap f ((lieEquiv G).symm x)) from
+          Subtype.ext ((coe_infPointsMap_apply _ _).trans (Category.assoc _ _ _))]
+    exact toLie_infPointsScale H _ _
+  map_lie' {x y} := by
+    simp only [lie_def, Equiv.symm_apply_apply, infPointsMap_infBracket]
 
 theorem differential_apply (f : G ⟶ H) [IsMonHom f] (x : Lie G) :
     differential f x = lieEquiv H (infPointsMap f ((lieEquiv G).symm x)) :=
@@ -536,16 +630,52 @@ noncomputable def dualNumbersToSpecOver :
   Over.homMk (Scheme.dualNumbersToSpec (.of R)) (Scheme.dualNumbersToSpec_comp_specMap (.of R))
 
 instance : IsIso (dualNumbersToSpecOver (R := R)) := by
-  sorry
+  have : IsIso ((Over.forget _).map (dualNumbersToSpecOver (R := R))) :=
+    Scheme.isIso_dualNumbersToSpec (.of R)
+  exact isIso_of_reflects_iso _ (Over.forget _)
+
+/-- The point `ε ↦ 0` of `Spec R[ε]` is the closed immersion `i : S ⟶ S[ε]` through
+`(Spec R)[ε] ≅ Spec R[ε]`. -/
+theorem specMap_fstHom_asOver_eq :
+    (Spec.map (CommRingCat.ofHom (fstHom R R R).toRingHom)).asOver (Spec (.of R)) =
+      CartesianMonoidalCategory.toUnit _ ≫ Scheme.dualNumbersιOver (Spec (.of R)) ≫
+        dualNumbersToSpecOver := by
+  ext1
+  simp [dualNumbersToSpecOver, Scheme.ι_comp_dualNumbersToSpec, Over.toUnit_left,
+    specOverSpec_over]
+  rfl
+
+/-- An infinitesimal point gives a point of the tangent group through `(Spec R)[ε] ≅ Spec R[ε]`. -/
+theorem GrpObj.inv_dualNumbersToSpecOver_comp_mem_tangentGroup
+    {v : Scheme.dualNumbersOver (Spec (.of R)) ⟶ G} (hv : v ∈ GrpObj.infPoints G) :
+    inv dualNumbersToSpecOver ≫ v ∈ tangentGroup G := by
+  rw [mem_tangentGroup, points.map, specMap_fstHom_asOver_eq]
+  simp only [Category.assoc, IsIso.hom_inv_id_assoc]
+  rw [(GrpObj.mem_infPoints G).1 hv, MonObj.comp_one]
+
+/-- A point of the tangent group gives an infinitesimal point through `(Spec R)[ε] ≅ Spec R[ε]`. -/
+theorem GrpObj.dualNumbersToSpecOver_comp_mem_infPoints {x : points G (DualNumber R)}
+    (hx : x ∈ tangentGroup G) :
+    dualNumbersToSpecOver ≫ x ∈ GrpObj.infPoints G := by
+  rw [mem_tangentGroup, points.map, specMap_fstHom_asOver_eq] at hx
+  let s : Over.mk (𝟙 (Spec (.of R))) ⟶ (Spec (.of R)).asOver (Spec (.of R)) :=
+    Over.homMk (𝟙 _) (by simp [specOverSpec_over])
+  have e : s ≫ CartesianMonoidalCategory.toUnit _ = 𝟙 _ := CartesianMonoidalCategory.toUnit_unique _ _
+  simp only [Category.assoc] at hx
+  have h := congrArg (s ≫ ·) hx
+  simp only [MonObj.comp_one] at h
+  rw [← Category.assoc s, e, Category.id_comp] at h
+  exact (GrpObj.mem_infPoints G).2 h
 
 /-- The infinitesimal points of `G` are the points with values in the ring of dual numbers reducing
 to the identity, through `(Spec R)[ε] ≅ Spec R[ε]`. -/
 noncomputable def GrpObj.infPointsEquivTangentGroup : GrpObj.infPoints G ≃* tangentGroup G where
-  toFun v := ⟨inv dualNumbersToSpecOver ≫ v.1, by sorry⟩
-  invFun x := ⟨dualNumbersToSpecOver ≫ x.1, by sorry⟩
-  left_inv _ := by sorry
-  right_inv _ := by sorry
-  map_mul' _ _ := by sorry
+  toFun v :=
+    ⟨inv dualNumbersToSpecOver ≫ v.1, GrpObj.inv_dualNumbersToSpecOver_comp_mem_tangentGroup G v.2⟩
+  invFun x := ⟨dualNumbersToSpecOver ≫ x.1, GrpObj.dualNumbersToSpecOver_comp_mem_infPoints G x.2⟩
+  left_inv v := Subtype.ext (IsIso.hom_inv_id_assoc dualNumbersToSpecOver v.1)
+  right_inv x := Subtype.ext (IsIso.inv_hom_id_assoc dualNumbersToSpecOver x.1)
+  map_mul' _ _ := Subtype.ext (MonObj.comp_mul _ _ _)
 
 @[simp]
 theorem GrpObj.coe_infPointsEquivTangentGroup_apply (v : GrpObj.infPoints G) :
