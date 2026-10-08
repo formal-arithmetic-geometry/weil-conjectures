@@ -46,7 +46,7 @@ orientation is.
 The coefficients are `ModuleCat Λ` for a commutative ring `Λ` with a Tate twist datum. With
 `[Finite Λ]` and the exponent of `Λ` invertible on the base, this is the finite stage `A_{E,n}`
 of the blueprint; the other stages are discussed in
-`WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise`.
+`WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect`.
 -/
 
 @[expose] public section
