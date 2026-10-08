@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
@@ -125,5 +126,20 @@ theorem topologicalKrullDim_ne_top_of_compactSpace {K : Type u} [Field K] {X : S
     exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨U, hU⟩, hxU⟩
   · exact (Finset.sup_lt_iff bot_lt_top).mpr fun U _ ↦
       (U.2.topologicalKrullDim_ne_top f).lt_top
+
+/-- A scheme which is quasi-compact and locally of finite type over a field has finite
+dimension. -/
+lemma exists_topologicalKrullDim_le {K : Type u} [Field K] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [QuasiCompact f] :
+    ∃ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) := by
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have h := topologicalKrullDim_ne_top_of_compactSpace f
+  generalize topologicalKrullDim X = n at h
+  induction n using WithBot.recBotCoe with
+  | bot => exact ⟨0, bot_le⟩
+  | coe n =>
+    induction n using ENat.recTopCoe with
+    | top => exact absurd rfl h
+    | coe n => exact ⟨n, le_rfl⟩
 
 end AlgebraicGeometry
