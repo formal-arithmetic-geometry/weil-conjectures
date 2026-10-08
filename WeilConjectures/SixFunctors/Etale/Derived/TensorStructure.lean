@@ -20,7 +20,7 @@ category `A`.
 ## Implementation notes
 
 Statements about a concrete coefficient category such as `ModuleCat Λ` should use these
-declarations rather than `α_`, `λ_`, `CategoryTheory.IsInvertible` or
+declarations rather than `α_`, `λ_`, `ρ_`, `CategoryTheory.IsInvertible` or
 `CategoryTheory.MonoidalClosed.IsPerfectPairing` directly. There, the monoidal instance on
 `D(X_ét)` found by instance search is a different term from the one inside `derivedTensor`.
 The two are equal, but the kernel does not decide this in reasonable time: already
@@ -32,6 +32,7 @@ involves no comparison at all.
 
 - `AlgebraicGeometry.Etale.derivedTensorAssociator`: `(K ⊗ᴸ M) ⊗ᴸ N ≅ K ⊗ᴸ (M ⊗ᴸ N)`.
 - `AlgebraicGeometry.Etale.derivedTensorLeftUnitor`: `Λ_X ⊗ᴸ K ≅ K`.
+- `AlgebraicGeometry.Etale.derivedTensorRightUnitor`: `K ⊗ᴸ Λ_X ≅ K`.
 - `AlgebraicGeometry.Etale.IsPerfectPairing`: perfectness of a pairing `C ⊗ᴸ D ⟶ Λ_X`.
 
 ## Main statements
@@ -72,6 +73,13 @@ noncomputable def derivedTensorLeftUnitor
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ((derivedTensor A X).obj (𝟙_ _)).obj K ≅ K :=
   λ_ K
+
+/-- The right unitor `K ⊗ᴸ Λ_X ≅ K` of the derived tensor product, `Λ_X = 𝟙_` being the
+constant complex. -/
+noncomputable def derivedTensorRightUnitor
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ((derivedTensor A X).obj K).obj (𝟙_ _) ≅ K :=
+  ρ_ K
 
 variable {A X}
 
