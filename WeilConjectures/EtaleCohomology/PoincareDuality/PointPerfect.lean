@@ -42,15 +42,18 @@ bounded constructible of Tor amplitude in one common interval:
 - `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral`,
   `AlgebraicGeometry.Etale.isPerfect_rightDerivedGlobalSections_integral` and the duals.
 
-At the rational stage `E`, the cohomology of these complexes tensored up to `E`:
+At the rational stage `E`, the cohomology of these complexes and of their duals tensored up to
+`E`:
 
-- `AlgebraicGeometry.Etale.finiteDimensional_rationalHomology_of_isPerfect`,
-  `AlgebraicGeometry.Etale.exists_subsingleton_rationalHomology_of_isPerfect`.
+- `AlgebraicGeometry.Etale.rationalHomology_globalSections`.
 
-At `ℚ̄_ℓ`, for pro-étale complexes with constructible `ℓ`-adic cohomology sheaves:
+At `ℚ̄_ℓ`, for `ℓ` different from the characteristic of `k` and pro-étale complexes with
+constructible `ℓ`-adic cohomology sheaves:
 
 - `AlgebraicGeometry.ProEtale.isPerfect_compactlySupportedGlobalSections_adic`,
-  `AlgebraicGeometry.ProEtale.isPerfect_rightDerivedGlobalSections_adic` and the duals.
+  `AlgebraicGeometry.ProEtale.isPerfect_rightDerivedGlobalSections_adic`,
+  `AlgebraicGeometry.ProEtale.isPerfect_ihom_compactlySupportedGlobalSections_adic`,
+  `AlgebraicGeometry.ProEtale.isPerfect_ihom_rightDerivedGlobalSections_adic`.
 
 ## Implementation notes
 
@@ -90,38 +93,6 @@ namespace AlgebraicGeometry
 open Scheme
 
 namespace Etale
-
-section General
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A]
-
-/-- For a proper morphism `f : X ⟶ Y`, compactly supported and ordinary global sections agree,
-`RΓ_c(X/Y, -) ≅ RΓ(X, -)`: the composite of `Rf_! ≅ Rf_*` with the Leray isomorphism
-`RΓ(Y, Rf_* -) ≅ RΓ(X, -)`. -/
-noncomputable def compactlySupportedGlobalSectionsIsoOfIsProper {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [IsProper f] :
-    compactlySupportedGlobalSections A f ≅ rightDerivedGlobalSections A X :=
-  Functor.isoWhiskerRight (rightDerivedLowerShriekIsoRightDerivedLowerStar A f) _ ≪≫
-    rightDerivedLowerStarCompRightDerivedGlobalSectionsIso A f
-
-end General
-
-/-- A scheme which is quasi-compact and locally of finite type over a field has finite
-dimension. -/
-lemma exists_topologicalKrullDim_le {k : Type u} [Field k] {X : Scheme.{u}}
-    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] :
-    ∃ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) := by
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
-  have h := topologicalKrullDim_ne_top_of_compactSpace aX
-  generalize topologicalKrullDim X = n at h
-  induction n using WithBot.recBotCoe with
-  | bot => exact ⟨0, bot_le⟩
-  | coe n =>
-    induction n using ENat.recTopCoe with
-    | top => exact absurd rfl h
-    | coe n => exact ⟨n, le_rfl⟩
 
 section Finite
 
@@ -349,13 +320,14 @@ namespace ProEtale
 
 section Adic
 
-variable (l : ℕ) [Fact l.Prime] {k : Type u} [Field k] [IsSepClosed k]
+variable (l : ℕ) [Fact l.Prime] {k : Type u} [Field k] [IsSepClosed k] [Fact (ringChar k ≠ l)]
   {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
   [HasCompactification aX]
 
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
 
-**`RΓ_c(X, K)` is perfect at `ℚ̄_ℓ`.** For `K ∈ D^b_c(X, ℚ̄_ℓ)`, the compactly supported
+**`RΓ_c(X, K)` is perfect at `ℚ̄_ℓ`.** Let `ℓ` be different from the characteristic of `k`.
+For `K ∈ D^b_c(X, ℚ̄_ℓ)`, the compactly supported
 cohomology `RΓ_c(X, K)` is a perfect complex of `ℚ̄_ℓ`-vector spaces: bounded with finite
 dimensional cohomology. The complex `K` is defined over the ring of integers of a finite
 extension `E/ℚ_ℓ`, and the statement follows from the integral stage
@@ -369,7 +341,8 @@ theorem isPerfect_compactlySupportedGlobalSections_adic
 
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
 
-**`RΓ(X, K)` is perfect at `ℚ̄_ℓ`.** For `K ∈ D^b_c(X, ℚ̄_ℓ)`, the cohomology `RΓ(X, K)` is a
+**`RΓ(X, K)` is perfect at `ℚ̄_ℓ`.** Let `ℓ` be different from the characteristic of `k`.
+For `K ∈ D^b_c(X, ℚ̄_ℓ)`, the cohomology `RΓ(X, K)` is a
 perfect complex of `ℚ̄_ℓ`-vector spaces, by flat extension of scalars from
 `AlgebraicGeometry.Etale.isPerfect_rightDerivedGlobalSections_integral`. -/
 theorem isPerfect_rightDerivedGlobalSections_adic [QuasiCompact aX]
@@ -377,6 +350,26 @@ theorem isPerfect_rightDerivedGlobalSections_adic [QuasiCompact aX]
     (hK : DerivedCategory.boundedAdicConstructible l X K) :
     ((rightDerivedGlobalSections (WeilCoefficients.{u} l) X).obj K).IsPerfect :=
   sorry
+
+/-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
+
+**The dual of `RΓ_c(X, K)` is perfect at `ℚ̄_ℓ`.** -/
+theorem isPerfect_ihom_compactlySupportedGlobalSections_adic
+    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)))
+    (hK : DerivedCategory.boundedAdicConstructible l X K) :
+    ((ihom ((compactlySupportedGlobalSections (WeilCoefficients.{u} l) aX).obj K)).obj
+      (𝟙_ _)).IsPerfect :=
+  (isPerfect_compactlySupportedGlobalSections_adic l aX K hK).ihom_unit
+
+/-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
+
+**The dual of `RΓ(X, K)` is perfect at `ℚ̄_ℓ`.** -/
+theorem isPerfect_ihom_rightDerivedGlobalSections_adic [QuasiCompact aX]
+    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)))
+    (hK : DerivedCategory.boundedAdicConstructible l X K) :
+    ((ihom ((rightDerivedGlobalSections (WeilCoefficients.{u} l) X).obj K)).obj
+      (𝟙_ _)).IsPerfect :=
+  (isPerfect_rightDerivedGlobalSections_adic l aX K hK).ihom_unit
 
 end Adic
 

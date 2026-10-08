@@ -28,8 +28,6 @@ The conjugacy class of the local Frobenius does not depend on the embedding `ι`
 - `AlgebraicGeometry.WeilComplex.stalkAtGeometricFiberPoint` (`def-weil-local-frobenius-trace`):
   the stalk `𝓗ʲ(K)_x̄` with the local Frobenius `F_x^{(m)}`, at the geometric point attached to
   a point with values in a field with `qᵐ` elements and an embedding of that field into `k̄`.
-- `AlgebraicGeometry.WeilComplex.traceFunction` (`def-weil-local-frobenius-trace`): the local
-  alternating trace `Tr(F_x^{(n)} | K_x̄)` at an `𝔽_{qⁿ}`-rational point.
 
 ## Main statements
 
@@ -40,9 +38,10 @@ The conjugacy class of the local Frobenius does not depend on the embedding `ι`
 ## Implementation notes
 
 The blueprint defines `K_x̄ := L x̄^* For(K)` and its trace as the alternating sum of the traces
-on the cohomology sheaves. The latter is taken as the definition of
-`AlgebraicGeometry.WeilComplex.traceFunction`: the derived stalk is not used. The sum is a
-`finsum`; it is a finite sum because a Weil complex is bounded.
+on the cohomology sheaves. The local alternating trace `Tr(F_x^{(n)} | K_x̄)` of
+`def-weil-local-frobenius-trace` is `AlgebraicGeometry.WeilComplex.traceFunction`
+(`WeilConjectures.WeilSheaf.Stalk`), which takes that alternating sum as the definition: the
+derived stalk is not used.
 
 The remark `rem-ptr-weil-local-frobenius-trace-1` of the blueprint only points to
 `AlgebraicGeometry.WeilComplex.nonempty_equiv_stalkAtGeometricFiberPoint`.
@@ -133,16 +132,6 @@ theorem nonempty_equiv_stalkAtGeometricFiberPoint (j : ℤ) {K' : Type u} [Field
     Nonempty ((K.stalkAtGeometricFiberPoint j ι g hg m hK).Equiv
       (K.stalkAtGeometricFiberPoint j ι' g hg m hK)) :=
   ((homologySheaf j).obj K).nonempty_equiv_stalkAtGeometricFiberPoint ι ι' g hg m hK
-
-/-- Blueprint `def-weil-local-frobenius-trace`: Local Frobenius and local alternating trace.
-
-The local alternating trace `Tr(F_x^{(n)} | K_x̄) = ∑_j (-1)ʲ Tr(F_x^{(n)} | 𝓗ʲ(For K)_x̄)` of a
-Weil complex at an `𝔽_{qⁿ}`-rational point `x`, the alternating sum of the trace functions
-(`AlgebraicGeometry.WeilSheaf.traceFunction`) of its cohomology sheaves. -/
-noncomputable def traceFunction (n : ℕ)
-    (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
-    PadicAlgCl l :=
-  ∑ᶠ j : ℤ, ((j.negOnePow : ℤ) : PadicAlgCl l) * ((homologySheaf j).obj K).traceFunction n x
 
 end WeilComplex
 

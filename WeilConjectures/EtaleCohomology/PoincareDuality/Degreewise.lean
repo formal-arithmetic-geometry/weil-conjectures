@@ -83,31 +83,37 @@ local notation "𝐃(" Y ", " A ")" =>
       λ⁻¹               x ⊗ y                     ≅                 ≅            β
 S ─────────▶ Λ_Y ⊗ᴸ S ────────▶ C[i] ⊗ᴸ D[-i] ─────▶ (C ⊗ᴸ D)[i - i] ─────▶ C ⊗ᴸ D ─────▶ Λ_Y
 ``` -/
-noncomputable def pairingAux {C D S : 𝐃(Y, A)} (β : ((derivedTensor A Y).obj C).obj D ⟶ 𝟙_ _)
-    {i : ℤ} (x : 𝟙_ _ ⟶ C⟦i⟧) (y : S ⟶ D⟦-i⟧) : S ⟶ 𝟙_ _ :=
+noncomputable def degreeZeroPairingOfPairingAux {C D S : 𝐃(Y, A)}
+    (β : ((derivedTensor A Y).obj C).obj D ⟶ 𝟙_ _) {i : ℤ} (x : 𝟙_ _ ⟶ C⟦i⟧) (y : S ⟶ D⟦-i⟧) :
+    S ⟶ 𝟙_ _ :=
   (derivedTensorLeftUnitor A Y S).inv ≫ ((derivedTensor A Y).map x).app S ≫
     ((derivedTensor A Y).obj (C⟦i⟧)).map y ≫ (derivedTensorShiftIso A C D i (-i)).hom ≫
       (shiftFunctorZero' _ (i + -i) (add_neg_cancel i)).hom.app _ ≫ β
 
-lemma pairingAux_add_left {C D S : 𝐃(Y, A)} (β : ((derivedTensor A Y).obj C).obj D ⟶ 𝟙_ _)
-    {i : ℤ} (x x' : 𝟙_ _ ⟶ C⟦i⟧) (y : S ⟶ D⟦-i⟧) :
-    pairingAux β (x + x') y = pairingAux β x y + pairingAux β x' y := by
-  simp [pairingAux, derivedTensor]
+lemma degreeZeroPairingOfPairingAux_add_left {C D S : 𝐃(Y, A)}
+    (β : ((derivedTensor A Y).obj C).obj D ⟶ 𝟙_ _) {i : ℤ} (x x' : 𝟙_ _ ⟶ C⟦i⟧) (y : S ⟶ D⟦-i⟧) :
+    degreeZeroPairingOfPairingAux β (x + x') y =
+      degreeZeroPairingOfPairingAux β x y + degreeZeroPairingOfPairingAux β x' y := by
+  simp [degreeZeroPairingOfPairingAux, derivedTensor]
 
-lemma pairingAux_add_right {C D S : 𝐃(Y, A)} (β : ((derivedTensor A Y).obj C).obj D ⟶ 𝟙_ _)
-    {i : ℤ} (x : 𝟙_ _ ⟶ C⟦i⟧) (y y' : S ⟶ D⟦-i⟧) :
-    pairingAux β x (y + y') = pairingAux β x y + pairingAux β x y' := by
-  simp [pairingAux, derivedTensor, MonoidalPreadditive.whiskerLeft_add]
+lemma degreeZeroPairingOfPairingAux_add_right {C D S : 𝐃(Y, A)}
+    (β : ((derivedTensor A Y).obj C).obj D ⟶ 𝟙_ _) {i : ℤ} (x : 𝟙_ _ ⟶ C⟦i⟧) (y y' : S ⟶ D⟦-i⟧) :
+    degreeZeroPairingOfPairingAux β x (y + y') =
+      degreeZeroPairingOfPairingAux β x y + degreeZeroPairingOfPairingAux β x y' := by
+  simp [degreeZeroPairingOfPairingAux, derivedTensor, MonoidalPreadditive.whiskerLeft_add]
 
 /-- The degree-zero part of a pairing `β : C ⊗ᴸ D ⟶ Λ_Y` in degree `i`, as a biadditive map
-`Hom(Λ_Y, C[i]) × Hom(S, D[-i]) ⟶ Hom(S, Λ_Y)` (`AlgebraicGeometry.Etale.pairingAux`). -/
-noncomputable def pairing {C D : 𝐃(Y, A)} (β : ((derivedTensor A Y).obj C).obj D ⟶ 𝟙_ _)
-    (i : ℤ) (S : 𝐃(Y, A)) :
+`Hom(Λ_Y, C[i]) × Hom(S, D[-i]) ⟶ Hom(S, Λ_Y)`
+(`AlgebraicGeometry.Etale.degreeZeroPairingOfPairingAux`). -/
+noncomputable def degreeZeroPairingOfPairing {C D : 𝐃(Y, A)}
+    (β : ((derivedTensor A Y).obj C).obj D ⟶ 𝟙_ _) (i : ℤ) (S : 𝐃(Y, A)) :
     ((𝟙_ 𝐃(Y, A)) ⟶ C⟦i⟧) →+ (S ⟶ D⟦-i⟧) →+ (S ⟶ 𝟙_ 𝐃(Y, A)) :=
-  AddMonoidHom.mk' (fun x ↦ AddMonoidHom.mk' (pairingAux β x) (pairingAux_add_right β x))
+  AddMonoidHom.mk'
+    (fun x ↦ AddMonoidHom.mk' (degreeZeroPairingOfPairingAux β x)
+      (degreeZeroPairingOfPairingAux_add_right β x))
     fun x x' ↦ by
       ext y
-      exact pairingAux_add_left β x x' y
+      exact degreeZeroPairingOfPairingAux_add_left β x x' y
 
 end General
 
@@ -127,7 +133,7 @@ noncomputable def degreeZeroPairing (γ : TateOrientation Λ a d) (K : DerivedCa
       ((𝟙_ (DerivedCategoryModule Λ Y)) ⟶
         (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (twistedDual Λ d K))⟦(2 * d : ℤ)⟧)⟦-i⟧) →+
       ((𝟙_ (DerivedCategoryModule Λ Y)) ⟶ 𝟙_ (DerivedCategoryModule Λ Y)) :=
-  pairing (γ.poincarePairing K) i _
+  degreeZeroPairingOfPairing (γ.poincarePairing K) i _
 
 /-- Blueprint `prop-pod-degree-of-the-pairing`: Degree of the pairing.
 
@@ -195,7 +201,7 @@ noncomputable def untwistedDegreewisePairing (γ : TateOrientation Λ a d)
       ((𝟙_ (DerivedCategoryModule Λ Y)) ⟶ ((R((a)_*[ModuleCat.{u + 1} Λ])).obj
         ((DerivedCategory.coefficientDual _ X).obj (op K)))⟦j⟧) →+
       ((𝟙_ (DerivedCategoryModule Λ Y)) ⟶ tateObject Λ Y (-d)) :=
-  ((pairing (γ.poincarePairing K) i (tateObject Λ Y d)).compl₂
+  ((degreeZeroPairingOfPairing (γ.poincarePairing K) i (tateObject Λ Y d)).compl₂
     ((Preadditive.rightComp _ ((shiftFunctorAdd' _ (2 * d : ℤ) (-i) j (by lia)).hom.app _)).comp
       (untwistClass K j))).compr₂
     ((Preadditive.leftComp _ (constantComplexIsoTateObjectTensor Y d).hom).comp
