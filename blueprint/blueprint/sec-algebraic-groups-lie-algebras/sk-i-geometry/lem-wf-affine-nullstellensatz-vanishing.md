@@ -1,0 +1,46 @@
++++
+id = "lem-wf-affine-nullstellensatz-vanishing"
+kind = "lemma"
+title = "Residue fields of closed points and the vanishing principle"
+order = 2484
++++
+Let $k$ be an algebraically closed field and $A$ a finitely generated
+commutative $k$-algebra, $X=\operatorname{Spec}A$.
+
+1. Every closed point $x\in X$, i.e. every maximal ideal
+   $\mathfrak m_x\subset A$, has residue field $A/\mathfrak m_x=k$;
+   thus closed points are the same as $k$-points, i.e. $k$-algebra
+   homomorphisms $A\to k$.
+2. (Vanishing principle.) If $A$ is reduced, a function $f\in A$ whose
+   value $f(x)\in k$ vanishes at every $k$-point $x$ is zero.
+3. Consequently, if $\varphi:X\to Y$ is a regular map of affine
+   varieties and $Z\subseteq Y$ is a closed subvariety with
+   $\varphi(x)\in Z$ for every $k$-point $x$ of $X$, then $\varphi$
+   factors uniquely through $Z$.
+
+## Proof
+
+(1) For a maximal ideal $\mathfrak m$, the field $A/\mathfrak m$ is a
+finitely generated $k$-algebra, hence a finite extension of $k$ by
+Zariski's lemma. As $k$ is algebraically closed, the structure map
+$k\to A/\mathfrak m$ is an isomorphism, so evaluation at $x$ is a
+surjection $A\to k$ with kernel $\mathfrak m_x$. Conversely, the kernel
+of a $k$-algebra homomorphism $A\to k$ is a maximal ideal, and the two
+constructions are mutually inverse.
+
+(2) By (1), $f(x)=0$ means $f\in\mathfrak m_x$. So $f$ lies in every
+maximal ideal of $A$. By the Nullstellensatz (in the form: a finitely
+generated algebra over a field is a Jacobson ring, so every prime ideal
+is an intersection of maximal ideals), the intersection of the maximal
+ideals of $A$ equals the intersection of its prime ideals, which is the
+nilradical $\sqrt0$. Since $A$ is reduced, $\sqrt0=0$, hence $f=0$.
+Equivalently, for any ideal $I\subseteq A$ the functions vanishing on the
+$k$-points of $V(I)$ form $\sqrt I$; this is the form
+$I(V(I))=\sqrt I$ of the Nullstellensatz.
+
+(3) Write $Z=V(J)$ with $J\subseteq k[Y]$ radical, so that
+$k[Z]=k[Y]/J$. For $g\in J$ and a $k$-point $x$ of $X$, one has
+$(\varphi^*g)(x)=g(\varphi(x))=0$ because $\varphi(x)\in Z$. The
+coordinate algebra $k[X]$ is reduced, so $\varphi^*g=0$ by (2). Thus
+$\varphi^*:k[Y]\to k[X]$ kills $J$ and factors through $k[Y]/J$; the
+factorization is unique because $k[Y]\to k[Y]/J$ is surjective.
