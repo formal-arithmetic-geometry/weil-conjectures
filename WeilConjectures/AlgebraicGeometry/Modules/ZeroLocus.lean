@@ -65,6 +65,9 @@ Further properties:
   is an effective Cartier divisor, then `N ≅ 𝒪_X(D) ⊗ M`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.exists_zeroLocus_eq`: an effective
   Cartier divisor `D` is the zero scheme of the canonical section of `𝒪_X(D)`.
+- `AlgebraicGeometry.Scheme.Modules.IsFreeGenerator.isFreeGenerator_dual`: the dual generator
+  `e^∨` of a free generator `e` of `M` on `U`, sending `r • e` to `r`, is a free generator of
+  `Mᵛ` on `U`.
 -/
 
 @[expose] public section
@@ -604,6 +607,128 @@ theorem Hom.nonempty_iso_dual_toModules_tensorObj (φ : M ⟶ N) (hφ : φ.zeroL
 
 end Properties
 
+section DualGenerator
+
+open Opposite
+
+variable {U : X.Opens} {e : Γ(M, U)}
+
+/-- Restricting a section along two composable inclusions of opens. -/
+lemma presheaf_map_map_homOfLE {V W : X.Opens} (h : V ≤ U) (h' : W ≤ V) (x : Γ(M, U)) :
+    M.presheaf.map (homOfLE h').op (M.presheaf.map (homOfLE h).op x) =
+      M.presheaf.map (homOfLE (h'.trans h)).op x :=
+  Modules.presheaf_map_map_apply _ _ x
+
+/-- The coefficient of `m` with respect to a free generator is compatible with restriction. -/
+lemma IsFreeGenerator.coeff_map' (he : IsFreeGenerator e) {V W : X.Opens} (hV : V ≤ U)
+    (hW : W ≤ U) (h : W ≤ V) (m : Γ(M, V)) :
+    (he.map hW).coeff (M.presheaf.map (homOfLE h).op m) =
+      X.presheaf.map (homOfLE h).op ((he.map hV).coeff m) := by
+  rw [coeff_eq_iff]
+  conv_rhs => rw [← (he.map hV).coeff_smul m]
+  rw [map_smul, presheaf_map_map_homOfLE]
+
+/-- The dual generator `e^∨` of a free generator `e` of `M` on `U`: the morphism `M|_U ⟶ 𝒪_U`
+sending `r • e` to `r`. -/
+noncomputable def IsFreeGenerator.dualHom (he : IsFreeGenerator e) :
+    (PresheafOfModules.restrictOver X.sheaf.obj U).obj M.val ⟶
+      (PresheafOfModules.restrictOver X.sheaf.obj U).obj (SheafOfModules.unit X.ringCatSheaf).val
+    where
+  app W := ModuleCat.ofHom
+    { toFun m := (he.map (leOfHom W.unop.hom)).coeff m
+      map_add' := coeff_add _
+      map_smul' := coeff_smul_left _ }
+  naturality {W W'} g := by
+    ext m
+    exact (he.coeff_map' (leOfHom W.unop.hom) (leOfHom W'.unop.hom) (leOfHom g.unop.left) m)
+
+/-- The dual generator `e^∨ ∈ Γ(Mᵛ, U)` of a free generator `e` of `M` on `U`. -/
+noncomputable def IsFreeGenerator.dual (he : IsFreeGenerator e) : Γ(Mᵛ, U) :=
+  he.dualHom
+
+/-- A section of `Mᵛ` over `U`, as a morphism `M|_U ⟶ 𝒪_U` of presheaves of modules on the
+opens contained in `U`. -/
+noncomputable abbrev dualSectionHom (φ : Γ(Mᵛ, U)) :
+    (PresheafOfModules.restrictOver X.sheaf.obj U).obj M.val ⟶
+      (PresheafOfModules.restrictOver X.sheaf.obj U).obj (SheafOfModules.unit X.ringCatSheaf).val :=
+  φ
+
+/-- The value `φ(m)` of a section `φ` of `Mᵛ` over `U` at a section `m` of `M` over `U`. -/
+noncomputable def dualEval (φ : Γ(Mᵛ, U)) (m : Γ(M, U)) : Γ(X, U) :=
+  (dualSectionHom φ).app (op (Over.mk (𝟙 U))) m
+
+/-- `e^∨(e) = 1`. -/
+lemma IsFreeGenerator.dualEval_dual (he : IsFreeGenerator e) : dualEval he.dual e = 1 := by
+  change (he.map _).coeff e = 1
+  rw [coeff_eq_iff, one_smul]
+  exact presheaf_map_id_apply _ _
+
+/-- A section of `Mᵛ` over `U` is determined by its value at a free generator. -/
+lemma IsFreeGenerator.dual_ext (he : IsFreeGenerator e) {φ ψ : Γ(Mᵛ, U)}
+    (h : dualEval φ e = dualEval ψ e) : φ = ψ := by
+  change dualSectionHom φ = dualSectionHom ψ
+  refine PresheafOfModules.hom_ext fun W ↦ ?_
+  ext m
+  obtain ⟨c, rfl⟩ := (he.map (leOfHom W.unop.hom)).exists_smul_eq m
+  let g : W.unop ⟶ Over.mk (𝟙 U) := Over.homMk W.unop.hom (Category.comp_id _)
+  have hφ := PresheafOfModules.naturality_apply (dualSectionHom φ) g.op e
+  have hψ := PresheafOfModules.naturality_apply (dualSectionHom ψ) g.op e
+  refine (LinearMap.map_smul _ c _).trans ((congrArg (c • ·) ?_).trans
+    (LinearMap.map_smul _ c _).symm)
+  exact hφ.trans ((congrArg _ h).trans hψ.symm)
+
+/-- `(r • φ)(m) = r φ(m)`. -/
+lemma dualEval_smul (r : Γ(X, U)) (φ : Γ(Mᵛ, U)) (m : Γ(M, U)) :
+    dualEval (r • φ) m = r * dualEval φ m := by
+  change X.sheaf.obj.map (𝟙 U).op r * _ = _
+  rw [op_id, CategoryTheory.Functor.map_id]
+  rfl
+
+/-- On `W ⊆ U`, the dual generator `e^∨` sends `m` to its coefficient with respect to `e|_W`. -/
+lemma IsFreeGenerator.dualEval_map_dual (he : IsFreeGenerator e) {W : X.Opens} (h : W ≤ U)
+    (m : Γ(M, W)) :
+    dualEval (Mᵛ.presheaf.map (homOfLE h).op he.dual) m = (he.map h).coeff m :=
+  rfl
+
+/-- **The dual generator is a free generator** of `Mᵛ` on `U`. -/
+lemma IsFreeGenerator.isFreeGenerator_dual (he : IsFreeGenerator e) :
+    IsFreeGenerator he.dual := by
+  intro W h
+  have key (r : Γ(X, W)) :
+      dualEval (r • Mᵛ.presheaf.map (homOfLE h).op he.dual) (M.presheaf.map (homOfLE h).op e) =
+        r := by
+    rw [dualEval_smul, he.dualEval_map_dual, ((he.map h).coeff_eq_iff _ _).mpr (one_smul _ _),
+      mul_one]
+  refine ⟨fun r r' hr ↦ (key r).symm.trans ((congrArg (dualEval · _) hr).trans (key r')),
+    fun φ ↦ ⟨dualEval φ (M.presheaf.map (homOfLE h).op e), (he.map h).dual_ext ?_⟩⟩
+  exact key _
+
+/-- The section of `Mᵛ` given by a morphism `φ : M ⟶ 𝒪_X`. -/
+noncomputable def dualSection (φ : M ⟶ 𝟙_ X.Modules) :
+    𝟙_ X.Modules ⟶ Mᵛ :=
+  (Mᵛ).unitHomEquiv.symm ((SheafOfModules.homObjSectionsEquiv M (𝟙_ X.Modules)).symm φ)
+
+/-- The section of `Mᵛ` given by `φ : M ⟶ 𝒪_X` evaluates to `φ`. -/
+lemma dualEval_dualSection_app (φ : M ⟶ 𝟙_ X.Modules) (U : X.Opens)
+    (m : Γ(M, U)) : dualEval ((dualSection φ).app U (unitSectionsEquiv U 1)) m = φ.app U m := by
+  have h := congrArg (fun σ : (Mᵛ).sections ↦ σ.val (op U))
+    ((Mᵛ).unitHomEquiv.apply_symm_apply
+      ((SheafOfModules.homObjSectionsEquiv M (𝟙_ X.Modules)).symm φ))
+  rw [SheafOfModules.unitHomEquiv_apply_coe] at h
+  exact (congrArg (fun ψ : Γ(Mᵛ, U) ↦ dualEval ψ m) h).trans rfl
+
+/-- On an open `U` on which `M` has a free generator `e`, the section of `Mᵛ` given by
+`φ : M ⟶ 𝒪_X` is `φ(e) • e^∨`. -/
+lemma IsFreeGenerator.dualSection_app (he : IsFreeGenerator e)
+    (φ : M ⟶ 𝟙_ X.Modules) :
+    (dualSection φ).app U (unitSectionsEquiv U 1) =
+      (unitSectionsEquiv U).symm (φ.app U e) • he.dual := by
+  refine he.dual_ext ?_
+  rw [dualEval_dualSection_app, dualEval_smul, he.dualEval_dual, mul_one]
+  rfl
+
+end DualGenerator
+
 end Modules
 
 /-- **The canonical section of `𝒪_X(D)`.** For an effective Cartier divisor `D`, with invertible
@@ -614,7 +739,25 @@ the transpose of the inclusion `J ⟶ 𝒪_X`, whose zero scheme is `D`: on an a
 
 (blueprint: the canonical section `1` of `𝒪(D)` in `lem-pc-universal-adjoint-section`) -/
 theorem IdealSheafData.IsInvertible.exists_zeroLocus_eq {X : Scheme.{u}} {J : X.IdealSheafData}
-    (hJ : J.IsInvertible) : ∃ s : 𝟙_ X.Modules ⟶ J.toModulesᵛ, Modules.Hom.zeroLocus s = J :=
-  sorry
+    (hJ : J.IsInvertible) : ∃ s : 𝟙_ X.Modules ⟶ J.toModulesᵛ, Modules.Hom.zeroLocus s = J := by
+  have := hJ.isInvertible_toModules
+  have := hJ.isInvertible_dual_toModules
+  have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ X.Modules) :=
+    Modules.IsInvertible.sheafOfModules_isInvertible _
+  have : SheafOfModules.IsInvertible.{u, u, u} J.toModulesᵛ :=
+    Modules.IsInvertible.sheafOfModules_isInvertible _
+  refine ⟨Modules.dualSection J.toModulesι, ?_⟩
+  choose V hxV hV using id hJ
+  refine IdealSheafData.ext_of_iSup_eq_top V
+    (eq_top_iff.mpr fun x _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hxV x⟩) fun x ↦ ?_
+  obtain ⟨b, hb, hVb⟩ := hV x
+  obtain ⟨w, hw⟩ := J.exists_toModulesι_app_eq (hVb ▸ Ideal.mem_span_singleton_self b)
+  have hwf := hJ.isFreeGenerator w fun W h ↦ by
+    rw [hw, ← J.map_ideal h, hVb, Ideal.map_span, Set.image_singleton]
+    rfl
+  rw [Modules.Hom.ideal_zeroLocus _ (V x) (Modules.isFreeGenerator_one _)
+    hwf.isFreeGenerator_dual (hwf.dualSection_app _), hVb, ← hw]
+  rfl
+
 
 end AlgebraicGeometry.Scheme
