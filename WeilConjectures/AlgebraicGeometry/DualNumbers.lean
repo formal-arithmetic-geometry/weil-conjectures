@@ -298,7 +298,18 @@ noncomputable def dualNumbersProj : X.dualNumbers ⟶ X where
   base := 𝟙 _
   c := Functor.whiskerLeft X.presheaf CommRingCat.dualNumberInl ≫
     (TopCat.Presheaf.Pushforward.id _).inv
-  prop := by sorry
+  prop x := by
+    constructor
+    intro s hs
+    obtain ⟨U, hxU, g, rfl⟩ := X.presheaf.exists_germ_eq s
+    rw [PresheafedSpace.stalkMap_germ_apply] at hs
+    obtain ⟨V, i, hxV, hV⟩ := RingedSpace.isUnit_res_of_isUnit_germ
+      X.toLocallyRingedSpace.dualNumbers.toRingedSpace _ _ _ _ hs
+    replace hV := isUnit_iff_isUnit_fst.mp hV
+    erw [CommRingCat.fst_dualNumber_map] at hV
+    have := (hV.map (X.presheaf.germ V x hxV).hom)
+    erw [TopCat.Presheaf.germ_res_apply] at this
+    exact this
 
 /-- The closed immersion `i : X ⟶ X[ε]`, `ε ↦ 0`: the identity on points and the augmentation
 `𝒪_X[ε] → 𝒪_X` on functions. Its ideal is the square-zero ideal `ε𝒪_X`. -/
@@ -318,7 +329,25 @@ noncomputable def dualNumbersMul : X.dualNumbers.dualNumbers ⟶ X.dualNumbers w
   base := 𝟙 _
   c := Functor.whiskerLeft X.presheaf CommRingCat.dualNumberMul ≫
     (TopCat.Presheaf.Pushforward.id _).inv
-  prop := by sorry
+  prop x := by
+    constructor
+    intro s hs
+    obtain ⟨U, hxU, g, rfl⟩ := X.dualNumbers.presheaf.exists_germ_eq s
+    rw [PresheafedSpace.stalkMap_germ_apply] at hs
+    obtain ⟨V, i, hxV, hV⟩ := RingedSpace.isUnit_res_of_isUnit_germ
+      X.dualNumbers.dualNumbers.toRingedSpace _ _ _ _ hs
+    replace hV := isUnit_iff_isUnit_fst.mp hV
+    erw [CommRingCat.fst_dualNumber_map] at hV
+    replace hV := isUnit_iff_isUnit_fst.mp hV
+    erw [CommRingCat.fst_dualNumber_map] at hV
+    have hV' : IsUnit (X.dualNumbers.presheaf.map i.op g) := by
+      refine isUnit_iff_isUnit_fst.mpr ?_
+      erw [CommRingCat.fst_dualNumber_map]
+      convert hV using 2
+      exact (congr(fst $(DualNumber.fst_mulRingHom g)).trans (fst_inl _ _)).symm
+    have := (hV'.map (X.dualNumbers.presheaf.germ V x hxV).hom)
+    erw [TopCat.Presheaf.germ_res_apply] at this
+    exact this
 
 variable {X} {Y : Scheme.{u}}
 
@@ -349,7 +378,12 @@ theorem Hom.dualNumbers_comp {Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
 @[reassoc (attr := simp)]
 theorem dualNumbersMul_comp_proj (X : Scheme.{u}) :
     X.dualNumbersMul ≫ X.dualNumbersProj = X.dualNumbers.dualNumbersProj ≫ X.dualNumbersProj := by
-  sorry
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  ext a : 2
+  simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
+  erw [eqToHom_refl, Category.comp_id]
+  change (DualNumber.mulRingHom (inl a) : DualNumber (DualNumber Γ(X, U))) = inl (inl a)
+  ext <;> simp
 
 /-! ### Scaling the infinitesimal -/
 
@@ -435,7 +469,7 @@ noncomputable def dualNumbersιδOver : dualNumbersOver S ⟶ dualNumbers₂Over
 
 /-- The map `S[ε][δ] ⟶ S[η]`, `η ↦ εδ`, as a morphism over `S`. -/
 noncomputable def dualNumbersMulOver : dualNumbers₂Over S ⟶ dualNumbersOver S :=
-  Over.homMk S.dualNumbersMul (by sorry)
+  Over.homMk S.dualNumbersMul S.dualNumbersMul_comp_proj
 
 /-- Scaling the infinitesimal by a global section `c` of `𝒪_S`, as an endomorphism of `S[ε]`
 over `S`. -/
