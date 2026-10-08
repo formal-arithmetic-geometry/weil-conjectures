@@ -130,7 +130,7 @@ theorem charP_appTop_pullback_comp {Ω : Type u} [Field Ω] (ξ : Spec (.of Ω) 
     ⟨⟨a.base default, trivial⟩⟩
   rw [CharP.charP_iff_prime_eq_zero (Fact.out : p.Prime)]
   let ψ : pullback (𝔸(n; S) ↘ S) (ξ ≫ 𝔸(n; S) ↘ S) ⟶ pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) :=
-    pullback.lift (pullback.fst _ _) (pullback.snd _ _ ≫ ξ) (by simp [pullback.condition])
+    pullback.lift (pullback.fst _ _) (pullback.snd _ _ ≫ ξ) (by simp)
   rw [← map_natCast ψ.appTop.hom, CharP.cast_eq_zero, map_zero]
 
 omit [CharP Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) p]
