@@ -7,8 +7,10 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
+public import Mathlib.CategoryTheory.Monoidal.Mon
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
+public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 
@@ -25,6 +27,8 @@ The identification `g^* Λ ≅ Λ` is the unit isomorphism of the strong monoida
 - `AlgebraicGeometry.Etale.lowerStarConstantSheafEndOfOver`: for `f : Y ⟶ X` and
   `g : Y ⟶ Y` with `g ≫ f = f`, the endomorphism of `f_* Λ` given by pulling back sections
   along `g`.
+- `AlgebraicGeometry.Etale.lowerStarConstantSheafMul`: the multiplication
+  `f_* Λ ⊗ f_* Λ ⟶ f_* Λ` of the monoid object `f_* Λ`.
 
 ## Main results
 
@@ -34,6 +38,9 @@ The identification `g^* Λ ≅ Λ` is the unit isomorphism of the strong monoida
   `AlgebraicGeometry.Etale.lowerStarConstantSheafEndOfOver_eq`, to the compatibility of the
   unit `ε` of the lax monoidal pushforwards with the identity and composition isomorphisms
   (`AlgebraicGeometry.Etale.ε_lowerStar_id` and `AlgebraicGeometry.Etale.ε_lowerStar_comp`).
+- `AlgebraicGeometry.Etale.lowerStarConstantSheafMul_comp_lowerStarConstantSheafEndOfOver`:
+  pulling back sections is multiplicative, the composition isomorphisms of pushforwards being
+  monoidal.
 
 -/
 
@@ -41,7 +48,9 @@ The identification `g^* Λ ≅ Λ` is the unit isomorphism of the strong monoida
 
 universe u
 
-open CategoryTheory MonoidalCategory
+open CategoryTheory MonoidalCategory Functor.LaxMonoidal
+
+open scoped CategoryTheory.Obj
 
 noncomputable section
 
@@ -154,6 +163,56 @@ lemma lowerStarConstantSheafEndOfOver_of_eq_comp {X Y : Scheme.{u}} (f : Y ⟶ X
       lowerStarConstantSheafEndOfOver f g' h' ≫ lowerStarConstantSheafEndOfOver f g h := by
   subst hg
   exact lowerStarConstantSheafEndOfOver_comp f g g' h h'
+
+/-- The composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of pushforwards of sheaves of
+`Λ`-modules is monoidal. -/
+instance isMonoidal_lowerStarComp_hom {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (h₁₂ : T ⟶ R) (hh : h₁₂ = h₁ ≫ h₂) :
+    NatTrans.IsMonoidal (lowerStarComp (ModuleCat.{u + 1} Λ) h₁ h₂ h₁₂ hh).hom := by
+  unfold lowerStarComp
+  infer_instance
+
+/-- The multiplication `f_* Λ ⊗ f_* Λ ⟶ f_* Λ` of functions: the multiplication of the monoid
+object `f_* Λ`, the image of the monoid object `Λ` under the lax monoidal functor `f_*`. -/
+def lowerStarConstantSheafMul {X Y : Scheme.{u}} (f : Y ⟶ X) :
+    (f)_*[ModuleCat.{u + 1} Λ].obj (𝟙_ _) ⊗ (f)_*[ModuleCat.{u + 1} Λ].obj (𝟙_ _) ⟶
+      (f)_*[ModuleCat.{u + 1} Λ].obj (𝟙_ _) :=
+  μ (f)_*[ModuleCat.{u + 1} Λ] (𝟙_ _) (𝟙_ _) ≫ (f)_*[ModuleCat.{u + 1} Λ].map (λ_ _).hom
+
+/-- Pulling back sections along `g` is multiplicative:
+
+```
+f_* Λ ⊗ f_* Λ ---mul---> f_* Λ
+      |                    |
+ g^♯ ⊗ g^♯                g^♯
+      v                    v
+f_* Λ ⊗ f_* Λ ---mul---> f_* Λ
+```
+
+The unit `ε : Λ ⟶ g_* Λ` is a morphism of monoids, `f_*` preserves these, and the composition
+isomorphism `g_* ⋙ f_* ≅ f_*` is monoidal. -/
+lemma lowerStarConstantSheafMul_comp_lowerStarConstantSheafEndOfOver {X Y : Scheme.{u}}
+    (f : Y ⟶ X) (g : Y ⟶ Y) (h : g ≫ f = f) :
+    lowerStarConstantSheafMul (Λ := Λ) f ≫ lowerStarConstantSheafEndOfOver f g h =
+      (lowerStarConstantSheafEndOfOver f g h ⊗ₘ lowerStarConstantSheafEndOfOver f g h) ≫
+        lowerStarConstantSheafMul f := by
+  have hε : (λ_ (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))).hom ≫
+      ε (g)_*[ModuleCat.{u + 1} Λ] =
+      (ε (g)_*[ModuleCat.{u + 1} Λ] ⊗ₘ ε (g)_*[ModuleCat.{u + 1} Λ]) ≫
+        μ (g)_*[ModuleCat.{u + 1} Λ] (𝟙_ _) (𝟙_ _) ≫
+          (g)_*[ModuleCat.{u + 1} Λ].map (λ_ _).hom := by
+    simpa using IsMonHom.mul_hom (ε (g)_*[ModuleCat.{u + 1} Λ])
+  have hC := NatTrans.IsMonoidal.tensor
+    (τ := (lowerStarComp (ModuleCat.{u + 1} Λ) g f f h.symm).hom)
+    (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (𝟙_ _)
+  rw [comp_μ] at hC
+  have hn := (lowerStarComp (ModuleCat.{u + 1} Λ) g f f h.symm).hom.naturality
+    (λ_ (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))).hom
+  simp only [Functor.comp_map] at hn
+  simp only [lowerStarConstantSheafEndOfOver_eq, lowerStarConstantSheafMul, Category.assoc,
+    ← Functor.map_comp_assoc, hε]
+  rw [Functor.map_comp_assoc, ← μ_natural_assoc, Functor.map_comp_assoc, hn, reassoc_of% hC,
+    tensorHom_comp_tensorHom_assoc]
 
 end AlgebraicGeometry.Etale
 
