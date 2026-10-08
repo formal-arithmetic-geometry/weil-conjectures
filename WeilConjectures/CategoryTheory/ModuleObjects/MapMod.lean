@@ -208,6 +208,39 @@ def comapIsoOfEq (h : φ = ψ) : (comap φ : Mod C S ⥤ Mod C R) ≅ comap ψ :
 
 end Mod
 
+/-! ### Change of scalars along an isomorphism -/
+
+namespace Mod
+
+variable [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
+  [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)]
+  [BraidedCategory C] [MonoidalClosed C] [HasEqualizers C]
+  {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
+
+/-- Restriction of scalars along an isomorphism of algebra objects is an equivalence, with
+inverse the restriction of scalars along the inverse isomorphism. -/
+noncomputable def comapEquivalenceOfIsIso : Mod C S ≌ Mod C R :=
+  Equivalence.mk (comap φ) (comap (asIso φ).inv)
+    (comapId.symm ≪≫ comapIsoOfEq (by simp) ≪≫ comapComp (asIso φ).inv φ)
+    ((comapComp φ (asIso φ).inv).symm ≪≫ comapIsoOfEq (by simp) ≪≫ comapId)
+
+/-- Extension of scalars along an isomorphism of algebra objects is restriction of scalars
+along the inverse isomorphism, by uniqueness of left adjoints. -/
+noncomputable def extendScalarsIsoComapInv : extendScalars φ ≅ comap (asIso φ).inv :=
+  (extendRestrictAdjunction φ).leftAdjointUniq (comapEquivalenceOfIsIso φ).symm.toAdjunction
+
+/-- Coextension of scalars along an isomorphism of algebra objects is restriction of scalars
+along the inverse isomorphism, by uniqueness of right adjoints. -/
+noncomputable def coextendScalarsIsoComapInv : coextendScalars φ ≅ comap (asIso φ).inv :=
+  (restrictCoextendAdjunction φ).rightAdjointUniq (comapEquivalenceOfIsIso φ).toAdjunction
+
+/-- Along an isomorphism of algebra objects, extension and coextension of scalars agree: both
+are the restriction of scalars along the inverse isomorphism. -/
+noncomputable def extendScalarsIsoCoextendScalars : extendScalars φ ≅ coextendScalars φ :=
+  extendScalarsIsoComapInv φ ≪≫ (coextendScalarsIsoComapInv φ).symm
+
+end Mod
+
 /-! ### Transport of `IsMonHom` along equalities of algebra object structures -/
 
 /-- An algebra object morphism remains one when the algebra object structures of its source and

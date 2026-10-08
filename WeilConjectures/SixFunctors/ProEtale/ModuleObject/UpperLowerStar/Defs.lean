@@ -44,6 +44,9 @@ finiteness or completeness hypothesis on `T`.
   `A_X(T) ⊗_{f^* A_Y(T)} f^* M`; `ProEtale.ContinuousMapRing.preservesFiniteColimits_upperStar`:
   `f^*` is right exact. It is not left exact in general.
 - `ProEtale.ContinuousMapRing.upperStarLowerStarAdjunction`: the adjunction `f^* ⊣ f_*`.
+- `ProEtale.ContinuousMapRing.linearLowerStar`: the linear pushforward
+  `Mod_{f^* A_Y(T)} ⥤ Mod_{A_Y(T)}`, of which `f_*` is the composition with the restriction of
+  scalars along `α_f`.
 
 -/
 
@@ -147,18 +150,44 @@ instance preservesFiniteColimits_upperStar : PreservesFiniteColimits (f)^*⟦T�
 
 end UpperStar
 
-/-! ### The adjunction `f^* ⊣ f_*` -/
+/-! ### The linear pushforward and the adjunction `f^* ⊣ f_*` -/
 
 section Adjunction
 
-/-- The pushforward `f_*` on module objects is the right adjoint of the lift of the monoidal
-adjunction `f^* ⊣ f_*` to module objects, restricted along `α_f`: restricting scalars along
-`α_f`, then along `f_* α_f` and the unit `A_Y(T) ⟶ f_* f^* A_Y(T)`, is restricting scalars along
-their composition `η_f`. -/
+/-- The *linear* pushforward `Mod_{f^* A_Y(T)} ⥤ Mod_{A_Y(T)}` of module objects over `C(-, T)`:
+`mapMod(f_*)` followed by restriction of scalars along the unit `A_Y(T) ⟶ f_* f^* A_Y(T)`. Its
+underlying sheaf functor is `f_*`, and `f_*` on module objects over `A_X(T)` is its composition
+with the restriction of scalars along `α_f`
+(`ProEtale.ContinuousMapRing.comapPullbackHomCompIso`). It is the pushforward that enters the
+exceptional operations, see
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek`. -/
+noncomputable def linearLowerStar :
+    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      ((f)^*[Ab.{u + 1}].obj (continuousMapRingObj T Y)) ⥤
+      Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (continuousMapRingObj T Y) :=
+  (f)_*[Ab.{u + 1}].mapMod ⋙
+    Mod.comap ((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom
+      (continuousMapRingObj T Y))
+
+/-- The underlying sheaf of the linear pushforward is the pushforward. -/
+lemma linearLowerStar_comp_forget :
+    linearLowerStar T f ⋙ Mod.forget (continuousMapRingObj T Y) =
+      Mod.forget _ ⋙ (f)_*[Ab.{u + 1}] := rfl
+
+instance linearLowerStar_additive : (linearLowerStar T f).Additive := by
+  unfold linearLowerStar
+  infer_instance
+
+/-- The linear pushforward is left exact. -/
+instance preservesFiniteLimits_linearLowerStar : PreservesFiniteLimits (linearLowerStar T f) := by
+  unfold linearLowerStar
+  infer_instance
+
+/-- The pushforward `f_*` on module objects over `A_X(T)` is the restriction of scalars along
+`α_f` followed by the linear pushforward: restricting scalars along `α_f`, then along `f_* α_f`
+and the unit `A_Y(T) ⟶ f_* f^* A_Y(T)`, is restricting scalars along their composition `η_f`. -/
 noncomputable def comapPullbackHomCompIso :
-    Mod.comap (continuousMapPullbackHom T f) ⋙ ((f)_*[Ab.{u + 1}].mapMod ⋙
-      Mod.comap ((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom
-        (continuousMapRingObj T Y))) ≅ (f)_*⟦T⟧ :=
+    Mod.comap (continuousMapPullbackHom T f) ⋙ linearLowerStar T f ≅ (f)_*⟦T⟧ :=
   (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight ((f)_*[Ab.{u + 1}].mapModComapIso (continuousMapPullbackHom T f)) _ ≪≫
     Functor.associator _ _ _ ≪≫
