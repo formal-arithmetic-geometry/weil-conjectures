@@ -461,6 +461,92 @@ theorem Smooth.isLocallyConstant_topologicalKrullDimAt_asFiber {X Y : Scheme.{u}
   exact @topologicalKrullDimAt_eq_of_smoothOfRelativeDimension _ _ _
     (W.ι ≫ f.fiberToSpecResidueField (f x')) d this ⟨_, hW⟩
 
+/-- Smoothness of relative dimension `n` is local on the source: if every point of `X` has an
+open neighbourhood `V` such that `V ⟶ Y` is smooth of relative dimension `n`, then so is
+`f : X ⟶ Y`. -/
+theorem smoothOfRelativeDimension_of_forall_exists_mem {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
+    (H : ∀ x : X, ∃ V : X.Opens, x ∈ V ∧ SmoothOfRelativeDimension n (V.ι ≫ f)) :
+    SmoothOfRelativeDimension n f := by
+  choose V hxV hV using H
+  exact IsZariskiLocalAtSource.of_iSup_eq_top V
+    (eq_top_iff.mpr fun x _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hxV x⟩) hV
+
+/-- The relative dimension of a smooth morphism from a nonempty scheme to the spectrum of a
+field is unique: it is the dimension of the source. -/
+theorem SmoothOfRelativeDimension.eq_of_field {K : Type u} [Field K] {X : Scheme.{u}}
+    [Nonempty X] (f : X ⟶ Spec (.of K)) {m n : ℕ} (hm : SmoothOfRelativeDimension m f)
+    (hn : SmoothOfRelativeDimension n f) : m = n := by
+  have h₁ := topologicalKrullDim_eq_of_smoothOfRelativeDimension f m
+  have h₂ := topologicalKrullDim_eq_of_smoothOfRelativeDimension f n
+  exact_mod_cast h₁.symm.trans h₂
+
+/-- **The relative dimension of a smooth morphism is read off its fibres.** A smooth morphism
+`f : X ⟶ Y` whose fibres `X_y ⟶ Spec κ(y)` are all smooth of relative dimension `n` is smooth of
+relative dimension `n`. -/
+theorem smoothOfRelativeDimension_of_fiberToSpecResidueField {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [Smooth f] (n : ℕ) (h : ∀ y, SmoothOfRelativeDimension n (f.fiberToSpecResidueField y)) :
+    SmoothOfRelativeDimension n f := by
+  refine smoothOfRelativeDimension_of_forall_exists_mem f n fun x ↦ ?_
+  obtain ⟨U, V, -, -, hx, e, d, hd⟩ := Smooth.exists_smoothOfRelativeDimension_resLE f x
+  have : SmoothOfRelativeDimension d (V.ι ≫ f) := by
+    rw [← Scheme.Hom.resLE_comp_ι f e]
+    have : SmoothOfRelativeDimension (d + 0) (f.resLE U V e ≫ U.ι) := inferInstance
+    simpa using this
+  let W := (f.fiberι (f x)) ⁻¹ᵁ V
+  have hW : f.asFiber x ∈ W := by
+    change f.fiberι _ (f.asFiber x) ∈ V
+    rwa [Scheme.Hom.fiberι_asFiber]
+  have : Nonempty W := ⟨⟨_, hW⟩⟩
+  have hpb : IsPullback (f.fiberι (f x) ∣_ V) (W.ι ≫ f.fiberToSpecResidueField (f x))
+      (V.ι ≫ f) (Y.fromSpecResidueField (f x)) :=
+    (isPullback_morphismRestrict (f.fiberι (f x)) V).paste_vert (IsPullback.of_hasPullback _ _)
+  have h₁ : SmoothOfRelativeDimension d (W.ι ≫ f.fiberToSpecResidueField (f x)) := by
+    have := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
+    exact MorphismProperty.of_isPullback hpb inferInstance
+  have h₂ : SmoothOfRelativeDimension n (W.ι ≫ f.fiberToSpecResidueField (f x)) := by
+    have := h (f x)
+    have : SmoothOfRelativeDimension (0 + n) (W.ι ≫ f.fiberToSpecResidueField (f x)) :=
+      inferInstance
+    simpa using this
+  obtain rfl := SmoothOfRelativeDimension.eq_of_field _ h₁ h₂
+  exact ⟨V, hx, inferInstance⟩
+
+/-- Over a field, the relative dimension of a smooth morphism `f : X ⟶ Spec K` can be computed
+after composing with a universally closed, locally quasi-finite surjection `u : X' ⟶ X`: such
+a `u` preserves the dimension of open subschemes. -/
+theorem smoothOfRelativeDimension_of_comp_of_surjective_of_field {K : Type u} [Field K]
+    {X' X : Scheme.{u}} (u : X' ⟶ X) (f : X ⟶ Spec (.of K)) [Smooth f] [UniversallyClosed u]
+    [LocallyQuasiFinite u] [Surjective u] (n : ℕ) [SmoothOfRelativeDimension n (u ≫ f)] :
+    SmoothOfRelativeDimension n f := by
+  refine smoothOfRelativeDimension_of_forall_exists_mem f n fun x ↦ ?_
+  obtain ⟨U, V, -, -, hx, e, d, hd⟩ := Smooth.exists_smoothOfRelativeDimension_resLE f x
+  have : SmoothOfRelativeDimension d (V.ι ≫ f) := by
+    rw [← Scheme.Hom.resLE_comp_ι f e]
+    have : SmoothOfRelativeDimension (d + 0) (f.resLE U V e ≫ U.ι) := inferInstance
+    simpa using this
+  have : Nonempty V := ⟨⟨x, hx⟩⟩
+  obtain ⟨x', hx'⟩ := u.surjective x
+  have : Nonempty (u ⁻¹ᵁ V) := ⟨⟨x', by simpa [hx'] using hx⟩⟩
+  have : SmoothOfRelativeDimension n ((u ⁻¹ᵁ V).ι ≫ u ≫ f) := by
+    have : SmoothOfRelativeDimension (0 + n) ((u ⁻¹ᵁ V).ι ≫ u ≫ f) := inferInstance
+    simpa using this
+  have : Surjective (u ∣_ V) :=
+    MorphismProperty.of_isPullback (P := @Surjective) (isPullback_morphismRestrict u V).flip ‹_›
+  have h := (u ∣_ V).topologicalKrullDim_eq_of_surjective
+  rw [topologicalKrullDim_eq_of_smoothOfRelativeDimension ((u ⁻¹ᵁ V).ι ≫ u ≫ f) n,
+    topologicalKrullDim_eq_of_smoothOfRelativeDimension (V.ι ≫ f) d] at h
+  obtain rfl : n = d := by exact_mod_cast h
+  exact ⟨V, hx, inferInstance⟩
+
+/-- **Smoothness descends along flat surjections** (Stacks, Tag 05B5). Let `u : X' ⟶ X` be
+flat, surjective and locally of finite presentation, and let `f : X ⟶ S`. If `u ≫ f` is smooth,
+then so is `f`. -/
+@[stacks 05B5]
+theorem Smooth.of_comp_of_flat_of_surjective {X' X S : Scheme.{u}} (u : X' ⟶ X) (f : X ⟶ S)
+    [Flat u] [Surjective u] [LocallyOfFinitePresentation u] [Smooth (u ≫ f)] : Smooth f :=
+  sorry
+
+open Limits in
 /-- **Smoothness descends along finite locally free surjections.** Let `u : X' ⟶ X` be finite,
 flat, locally of finite presentation and surjective, and let `f : X ⟶ S`. If `u ≫ f` is smooth of
 relative dimension `n`, then so is `f`.
@@ -471,7 +557,20 @@ fibres of `u ≫ f` and of `f` have the same local dimensions. -/
 theorem smoothOfRelativeDimension_of_comp_of_isFinite_of_surjective {X' X S : Scheme.{u}}
     (u : X' ⟶ X) (f : X ⟶ S) [IsFinite u] [Flat u] [LocallyOfFinitePresentation u]
     [Surjective u] (n : ℕ) [SmoothOfRelativeDimension n (u ≫ f)] :
-    SmoothOfRelativeDimension n f :=
-  sorry
+    SmoothOfRelativeDimension n f := by
+  have : Smooth (u ≫ f) := SmoothOfRelativeDimension.smooth n _
+  have : Smooth f := Smooth.of_comp_of_flat_of_surjective u f
+  refine smoothOfRelativeDimension_of_fiberToSpecResidueField f n fun s ↦ ?_
+  let g := S.fromSpecResidueField s
+  have : Smooth (f.fiberToSpecResidueField s) := inferInstanceAs (Smooth (pullback.snd f g))
+  have : SmoothOfRelativeDimension n
+      (pullback.snd u (pullback.fst f g) ≫ f.fiberToSpecResidueField s) := by
+    change SmoothOfRelativeDimension n (pullback.snd u (pullback.fst f g) ≫ pullback.snd f g)
+    rw [← pullbackRightPullbackFstIso_hom_snd]
+    have : SmoothOfRelativeDimension (0 + n)
+        ((pullbackRightPullbackFstIso f g u).hom ≫ pullback.snd (u ≫ f) g) := inferInstance
+    simpa using this
+  exact smoothOfRelativeDimension_of_comp_of_surjective_of_field
+    (pullback.snd u (pullback.fst f g)) (f.fiberToSpecResidueField s) n
 
 end AlgebraicGeometry
