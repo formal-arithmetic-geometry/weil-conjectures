@@ -56,8 +56,9 @@ classical case is `k = ℤ/p`.
   automorphisms of the Artin–Schreier covering are the translations.
 - `AlgebraicGeometry.Etale.artinSchreierSheafUpperStarIso`: `AS_q^* ℒ_Ψ ≅ Λ`, so that `ℒ_Ψ` is
   lisse of rank one (`AlgebraicGeometry.Etale.isLocallyConstantSheaf_artinSchreierSheaf`).
-- `AlgebraicGeometry.Etale.nonempty_iso_biproduct_artinSchreierSheaf`: for a primitive `Ψ` with
-  values in a domain, `(AS_q)_* Λ ≅ ⨁_{b ∈ k} ℒ_{Ψ(b ·)}`.
+- `AlgebraicGeometry.Etale.artinSchreierPushforwardIsoBiproduct`: for a primitive `Ψ` with
+  values in a domain, the decomposition `(AS_q)_* Λ ≅ ⨁_{b ∈ k} ℒ_{Ψ(b ·)}` given by the
+  orthogonal idempotents `e_{Ψ(b ·)}`.
 - `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_zero`: the rigidification
   `Λ ≅ 0^* ℒ_Ψ`.
 - `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_add`:
@@ -118,8 +119,10 @@ reflects isomorphisms, so a morphism into `ℒ_χ` whose adjoint is an isomorphi
 one; this gives `zero`, `one` and `mul`.
 
 The isomorphisms `zero`, `add`, `one`, `mul` and `smul` are stated as `Nonempty` theorems
-rather than as `def`s because they are not yet constructed, and the repository does not allow
-a data `def` with a `sorry` body. Once constructed they should become `def`s: the Fourier
+rather than as `def`s. For `add` and `smul` this is because they are not yet constructed, and
+the repository does not allow a data `def` with a `sorry` body; `zero`, `one` and `mul` are
+constructed, and are still `Nonempty` only to keep the statements uniform until `add` and
+`smul` are done. All of them should become `def`s: the Fourier
 inversion and base change arguments need the specific rigidification
 `ε_Ψ : Λ ≅ 0^* ℒ_Ψ` and the unique `m^* ℒ_Ψ ≅ u₁^* ℒ_Ψ ⊗ u₂^* ℒ_Ψ` restricting to it, with
 their coherences.
@@ -956,59 +959,95 @@ def artinSchreierSheafOfCoordIso (Ψ : AddChar k Λ) :
     rfl) ≪≫
     (upperStarId (ModuleCat Λ) 𝔸¹[k]).app _
 
-attribute [local instance] Abelian.hasFiniteBiproducts in
 open AddChar in
+/-- For a primitive character `Ψ`, the normalised character sums over `k` detect zero:
+`q⁻¹ ∑_a Ψ(a c) = 1` if `c = 0` and `0` otherwise. -/
+private lemma sum_invOf_card_mul_apply_mul [IsDomain Λ] [DecidableEq k] {Ψ : AddChar k Λ}
+    (hΨ : Ψ.IsPrimitive) (c : k) :
+    ∑ a : k, ⅟(Fintype.card k : Λ) * Ψ (a * c) = if c = 0 then 1 else 0 := by
+  rw [← Finset.mul_sum, sum_mulShift c hΨ]
+  split_ifs <;> simp
+
+open AddChar in
+/-- The character idempotents are orthogonal: on the image of `e_{Ψ(b ·)}`, the idempotent
+`e_{Ψ(b' ·)}` is the identity if `b = b'` and zero otherwise.
+(blueprint: `lem-fd-as-characters`) -/
+lemma image_ι_artinSchreierIdempotent_mulShift_comp [IsDomain Λ] [DecidableEq k]
+    {Ψ : AddChar k Λ} (hΨ : Ψ.IsPrimitive) (b b' : k) :
+    image.ι (artinSchreierIdempotent (Ψ.mulShift b)) ≫
+      artinSchreierIdempotent (Ψ.mulShift b') =
+        if b = b' then image.ι (artinSchreierIdempotent (Ψ.mulShift b)) else 0 := by
+  rw [show artinSchreierIdempotent (Ψ.mulShift b') = ∑ a : k,
+    (⅟(Fintype.card k : Λ) * Ψ.mulShift b' (-a)) • artinSchreierTranslationAction Λ k a from rfl]
+  simp only [Preadditive.comp_sum, Linear.comp_smul,
+    image_ι_artinSchreierIdempotent_comp_artinSchreierTranslationAction, smul_smul,
+    ← Finset.sum_smul]
+  have h (a : k) : ⅟(Fintype.card k : Λ) * Ψ.mulShift b' (-a) * Ψ.mulShift b a =
+      ⅟(Fintype.card k : Λ) * Ψ (a * (b - b')) := by
+    rw [mul_assoc, mulShift_apply, mulShift_apply, ← map_add_eq_mul]
+    ring_nf
+  simp only [h, sum_invOf_card_mul_apply_mul hΨ, sub_eq_zero]
+  split_ifs <;> simp
+
+open AddChar in
+/-- The character idempotents sum to the identity: `∑_{b ∈ k} e_{Ψ(b ·)} = 1`.
+(blueprint: `lem-fd-as-characters`) -/
+lemma sum_artinSchreierIdempotent_mulShift [IsDomain Λ] {Ψ : AddChar k Λ}
+    (hΨ : Ψ.IsPrimitive) : ∑ b : k, artinSchreierIdempotent (Ψ.mulShift b) = 𝟙 _ := by
+  classical
+  simp only [artinSchreierIdempotent]
+  rw [Finset.sum_comm]
+  simp only [← Finset.sum_smul, mulShift_apply]
+  have h (a : k) : ∑ b : k, ⅟(Fintype.card k : Λ) * Ψ (b * -a) =
+      if a = 0 then 1 else 0 := by
+    rw [sum_invOf_card_mul_apply_mul hΨ, neg_eq_zero]
+  simp only [h, ite_smul, one_smul, zero_smul, Finset.sum_ite_eq', Finset.mem_univ, if_true,
+    artinSchreierTranslationAction_zero]
+
+attribute [local instance] Abelian.hasFiniteBiproducts in
 /-- **Isotypic decomposition of the Artin–Schreier pushforward.** For a primitive additive
 character `Ψ` of `k` with values in a domain `Λ`, the characters of `k` are the `Ψ(b ·)`,
 `b ∈ k`, and the pushforward `(AS_q)_* Λ` is the direct sum of their isotypic components:
-`(AS_q)_* Λ ≅ ⨁_{b ∈ k} ℒ_{Ψ(b ·)}`. The idempotents `e_{Ψ(b ·)}` are orthogonal and sum to the
-identity, by the orthogonality relations for `Ψ`. Each summand is lisse of rank one
-(`AlgebraicGeometry.Etale.artinSchreierSheafUpperStarIso`), and the summand of `b = 0` is the
-constant sheaf (`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_one`).
+`(AS_q)_* Λ ≅ ⨁_{b ∈ k} ℒ_{Ψ(b ·)}`, with inclusions the inclusions of the images of the
+idempotents `e_{Ψ(b ·)}` and projections the corestrictions of these idempotents. The
+idempotents are orthogonal and sum to the identity, by the orthogonality relations for `Ψ`.
+Each summand is lisse of rank one (`AlgebraicGeometry.Etale.artinSchreierSheafUpperStarIso`),
+and the summand of `b = 0` is the constant sheaf
+(`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_one`).
 (blueprint: `lem-fd-as-characters`) -/
-theorem nonempty_iso_biproduct_artinSchreierSheaf [IsDomain Λ] (Ψ : AddChar k Λ)
+noncomputable def artinSchreierPushforwardIsoBiproduct [IsDomain Λ] (Ψ : AddChar k Λ)
     (hΨ : Ψ.IsPrimitive) :
-    Nonempty ((AS[k])_*[ModuleCat Λ].obj (𝟙_ _) ≅
-      ⨁ fun b : k ↦ artinSchreierSheaf (Ψ.mulShift b)) := by
-  classical
-  have hsum (c : k) : ∑ a : k, ⅟(Fintype.card k : Λ) * Ψ (a * c) = if c = 0 then 1 else 0 := by
-    rw [← Finset.mul_sum, sum_mulShift c hΨ]
-    split_ifs <;> simp
-  have horth (b b' : k) : image.ι (artinSchreierIdempotent (Ψ.mulShift b)) ≫
-      artinSchreierIdempotent (Ψ.mulShift b') =
-        if b = b' then image.ι (artinSchreierIdempotent (Ψ.mulShift b)) else 0 := by
-    rw [show artinSchreierIdempotent (Ψ.mulShift b') = ∑ a : k,
-      (⅟(Fintype.card k : Λ) * Ψ.mulShift b' (-a)) • artinSchreierTranslationAction Λ k a from rfl]
-    simp only [Preadditive.comp_sum, Linear.comp_smul,
-      image_ι_artinSchreierIdempotent_comp_artinSchreierTranslationAction, smul_smul,
-      ← Finset.sum_smul]
-    have h (a : k) : ⅟(Fintype.card k : Λ) * Ψ.mulShift b' (-a) * Ψ.mulShift b a =
-        ⅟(Fintype.card k : Λ) * Ψ (a * (b - b')) := by
-      rw [mul_assoc, mulShift_apply, mulShift_apply, ← map_add_eq_mul]
-      ring_nf
-    simp only [h, hsum, sub_eq_zero]
-    split_ifs <;> simp
-  have hcompl : ∑ b : k, artinSchreierIdempotent (Ψ.mulShift b) = 𝟙 _ := by
-    simp only [artinSchreierIdempotent]
-    rw [Finset.sum_comm]
-    simp only [← Finset.sum_smul, mulShift_apply]
-    have h (a : k) : ∑ b : k, ⅟(Fintype.card k : Λ) * Ψ (b * -a) =
-        if a = 0 then 1 else 0 := by
-      rw [hsum, neg_eq_zero]
-    simp only [h, ite_smul, one_smul, zero_smul, Finset.sum_ite_eq', Finset.mem_univ, if_true,
-      artinSchreierTranslationAction_zero]
-  let c : Bicone fun b : k ↦ artinSchreierSheaf (Ψ.mulShift b) :=
+    (AS[k])_*[ModuleCat Λ].obj (𝟙_ _) ≅ ⨁ fun b : k ↦ artinSchreierSheaf (Ψ.mulShift b) :=
+  biproduct.uniqueUpToIso _ (b :=
     { pt := (AS[k])_*[ModuleCat Λ].obj (𝟙_ _)
       π := fun b ↦ factorThruImage (artinSchreierIdempotent (Ψ.mulShift b))
       ι := fun b ↦ image.ι (artinSchreierIdempotent (Ψ.mulShift b))
       ι_π := fun b b' ↦ by
+        classical
         split_ifs with hb
         · subst hb
           exact image_ι_comp_factorThruImage_artinSchreierIdempotent _
         · rw [← cancel_mono (image.ι (artinSchreierIdempotent (Ψ.mulShift b'))),
-            Category.assoc, image.fac, horth, if_neg hb, zero_comp] }
-  exact ⟨biproduct.uniqueUpToIso _
-    (isBilimitOfTotal c ((Finset.sum_congr rfl fun b _ ↦ image.fac _).trans hcompl))⟩
+            Category.assoc, image.fac, image_ι_artinSchreierIdempotent_mulShift_comp hΨ,
+            if_neg hb, zero_comp] })
+    (isBilimitOfTotal _ ((Finset.sum_congr rfl fun b _ ↦ image.fac _).trans
+      (sum_artinSchreierIdempotent_mulShift hΨ)))
+
+attribute [local instance] Abelian.hasFiniteBiproducts in
+@[reassoc (attr := simp)]
+lemma artinSchreierPushforwardIsoBiproduct_hom_π [IsDomain Λ] (Ψ : AddChar k Λ)
+    (hΨ : Ψ.IsPrimitive) (b : k) :
+    (artinSchreierPushforwardIsoBiproduct Ψ hΨ).hom ≫ biproduct.π _ b =
+      factorThruImage (artinSchreierIdempotent (Ψ.mulShift b)) :=
+  biproduct.lift_π _ _
+
+attribute [local instance] Abelian.hasFiniteBiproducts in
+@[reassoc (attr := simp)]
+lemma ι_artinSchreierPushforwardIsoBiproduct_inv [IsDomain Λ] (Ψ : AddChar k Λ)
+    (hΨ : Ψ.IsPrimitive) (b : k) :
+    biproduct.ι _ b ≫ (artinSchreierPushforwardIsoBiproduct Ψ hΨ).inv =
+      image.ι (artinSchreierIdempotent (Ψ.mulShift b)) :=
+  biproduct.ι_desc _ _
 
 end Properties
 

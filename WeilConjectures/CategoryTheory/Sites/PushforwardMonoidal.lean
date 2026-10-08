@@ -48,7 +48,15 @@ attribute [local instance] Sheaf.monoidalCategory
 /-- Two morphisms out of a tensor product `P ⊗ Q` of sheaves agree as soon as they agree on
 underlying presheaves after the map `μ : P.obj ⊗ Q.obj ⟶ (P ⊗ Q).obj` of the lax monoidal functor
 `sheafToPresheaf`: this map is adjoint to the isomorphism
-`sheafify (P.obj ⊗ Q.obj) ≅ sheafify P.obj ⊗ sheafify Q.obj ≅ P ⊗ Q`. -/
+`sheafify (P.obj ⊗ Q.obj) ≅ sheafify P.obj ⊗ sheafify Q.obj ≅ P ⊗ Q`. That is, `a = b` as
+soon as the two composites
+
+```
+P.obj ⊗ Q.obj --μ--> (P ⊗ Q).obj ==a.obj==> G.obj
+                                 ==b.obj==>
+```
+
+agree. -/
 lemma Sheaf.hom_ext_of_μ_comp {P Q G : Sheaf J A} {a b : P ⊗ Q ⟶ G}
     (h : μ (sheafToPresheaf J A) P Q ≫ (sheafToPresheaf J A).map a =
       μ (sheafToPresheaf J A) P Q ≫ (sheafToPresheaf J A).map b) : a = b := by
@@ -108,7 +116,17 @@ lemma μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app (P Q : Sheaf
 variable {A J K} in
 /-- For continuous functors `F`, `G` and `FG ≅ F ⋙ G`, the identification `G_* ⋙ F_* ≅ FG_*`
 of `CategoryTheory.Functor.sheafPushforwardContinuousComp'` is compatible with the tensor maps
-`μ` of the lax monoidal pushforwards. -/
+`μ` of the lax monoidal pushforwards: the square
+
+```
+F_* G_* X ⊗ F_* G_* Y --μ_F--> F_* (G_* X ⊗ G_* Y) --F_* μ_G--> F_* G_* (X ⊗ Y)
+        |                                                             |
+     c_X ⊗ c_Y                                                     c_{X ⊗ Y}
+        v                                                             v
+  FG_* X ⊗ FG_* Y ---------------------μ_FG----------------------> FG_* (X ⊗ Y)
+```
+
+commutes, where `c : G_* ⋙ F_* ≅ FG_*` is `sheafPushforwardContinuousComp' e`. -/
 lemma μ_sheafPushforwardContinuous_of_iso_comp {E : Type*} [Category E]
     (L : GrothendieckTopology E) [(L.W (A := A)).IsMonoidal] [HasWeakSheafify L A]
     {F : C ⥤ D} {G : D ⥤ E} {FG : C ⥤ E} (e : F ⋙ G ≅ FG) [hF : F.IsContinuous J K]

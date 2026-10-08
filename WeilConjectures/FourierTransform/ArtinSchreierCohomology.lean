@@ -30,8 +30,9 @@ when `a ≠ 0`, while for `a = 0` it is the constant sheaf, whose cohomology is 
 
 ## Implementation notes
 
-The cohomology `H^q(X, F)` of an étale sheaf `F` of `Λ`-modules is the `q`-th cohomology of the
-derived global sections `RΓ(X, F)` of `AlgebraicGeometry.Etale.rightDerivedGlobalSections`.
+The cohomology `H^q(X, F)` of an étale sheaf `F` of `Λ`-modules is
+`AlgebraicGeometry.Etale.cohomology` applied to `F` placed in degree `0`, the `q`-th cohomology
+of the derived global sections `RΓ(X, F)`.
 The blueprint works with `ℚ̄_ℓ`-coefficients; here the coefficients are a finite domain `Λ` in
 which `q` is invertible, a finite level of the `ℓ`-adic coefficients.
 -/
@@ -55,14 +56,6 @@ def affineLineOverOfAlgebra (k Ω : Type u) [Field k] [Field Ω] [Algebra k Ω] 
   ⟨𝔸(PUnit; Spec (CommRingCat.of Ω)) ↘ Spec (.of Ω) ≫
     Spec.map (CommRingCat.ofHom (algebraMap k Ω))⟩
 
-/-- The `q`-th étale cohomology `H^q(X, F)` of an étale sheaf `F` of `Λ`-modules on `X`: the
-`q`-th cohomology of the derived global sections `RΓ(X, F)`. -/
-abbrev sheafCohomology (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (q : ℤ) : ModuleCat.{u + 1} Λ :=
-  (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) q).obj
-    ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj
-      ((DerivedCategory.singleFunctor _ 0).obj F))
-
 variable (Λ) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
 
 /-- **Constant cohomology of the affine line.** For an algebraically closed field `Ω` of
@@ -71,10 +64,11 @@ characteristic `p` and a finite coefficient ring `Λ` in which `p` is invertible
 cohomological dimension is one, and `H^1(𝔸¹_Ω, ℤ/n) ≅ Pic(𝔸¹_Ω)[n] = 0` for `n` prime to `p`.
 (blueprint: `lem-fd-affine-line-constant-cohomology`) -/
 theorem cohomology_affineLine_unit [Finite Λ] (p : ℕ) [CharP Ω p] [Invertible (p : Λ)] :
-    Nonempty (sheafCohomology (Λ := Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω)) (𝟙_ _) 0 ≅
-        ModuleCat.of Λ Λ) ∧
+    Nonempty ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω)) 0).obj
+        ((DerivedCategory.singleFunctor _ 0).obj (𝟙_ _)) ≅ ModuleCat.of Λ Λ) ∧
       ∀ q : ℤ, q ≠ 0 →
-        IsZero (sheafCohomology (Λ := Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω)) (𝟙_ _) q) :=
+        IsZero ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω)) q).obj
+          ((DerivedCategory.singleFunctor _ 0).obj (𝟙_ _))) :=
   -- `H^0` is `Λ` as `𝔸¹_Ω` is connected; `H^q = 0` for `q ≥ 2` by the cohomological dimension
   -- of an affine curve (`sbc-thm-cohomological-dimension-of-an-affine-curve`); and
   -- `H^1 = 0` by the Kummer sequence (`thm-sc-affine-cohomology`), the units of `Ω[x]` being
@@ -102,8 +96,9 @@ Artin–Schreier covering `y ↦ y ^ q - y` and the isotypic decomposition, the 
 and only the trivial character contributes, in degree `0`. -/
 theorem isZero_cohomology_affineLine_artinSchreierSheafOf [IsDomain Λ] [Finite Λ]
     (Ψ : AddChar k Λ) (hΨ : Ψ.IsPrimitive) {a : k} (ha : a ≠ 0) (q : ℤ) :
-    IsZero (sheafCohomology 𝔸(PUnit; Spec (CommRingCat.of Ω))
-      (artinSchreierSheafOf _ Ψ (affineLineLinearFunction a)) q) :=
+    IsZero ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω)) q).obj
+      ((DerivedCategory.singleFunctor _ 0).obj
+        (artinSchreierSheafOf _ Ψ (affineLineLinearFunction a)))) :=
   sorry
 
 /-- **Cohomology of an affine line with an exponential sheaf.** Let `Ψ` be a primitive additive
@@ -112,12 +107,15 @@ character of `k` with values in a finite domain `Λ`, and `a ∈ k`. On `𝔸¹_
 (blueprint: `lem-fd-cohomology-affine-line-character`) -/
 theorem cohomology_affineLine_artinSchreierSheafOf [IsDomain Λ] [Finite Λ] (Ψ : AddChar k Λ)
     (hΨ : Ψ.IsPrimitive) (a : k) :
-    (a ≠ 0 → ∀ q, IsZero (sheafCohomology 𝔸(PUnit; Spec (CommRingCat.of Ω))
-      (artinSchreierSheafOf _ Ψ (affineLineLinearFunction a)) q)) ∧
-    (a = 0 → Nonempty (sheafCohomology 𝔸(PUnit; Spec (CommRingCat.of Ω))
-        (artinSchreierSheafOf _ Ψ (affineLineLinearFunction a)) 0 ≅ ModuleCat.of Λ Λ) ∧
-      ∀ q : ℤ, q ≠ 0 → IsZero (sheafCohomology 𝔸(PUnit; Spec (CommRingCat.of Ω))
-        (artinSchreierSheafOf _ Ψ (affineLineLinearFunction a)) q)) := by
+    (a ≠ 0 → ∀ q, IsZero ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω))
+      q).obj ((DerivedCategory.singleFunctor _ 0).obj
+        (artinSchreierSheafOf _ Ψ (affineLineLinearFunction a))))) ∧
+    (a = 0 → Nonempty ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω))
+        0).obj ((DerivedCategory.singleFunctor _ 0).obj
+          (artinSchreierSheafOf _ Ψ (affineLineLinearFunction a))) ≅ ModuleCat.of Λ Λ) ∧
+      ∀ q : ℤ, q ≠ 0 → IsZero ((cohomology (ModuleCat.{u + 1} Λ)
+        𝔸(PUnit; Spec (CommRingCat.of Ω)) q).obj ((DerivedCategory.singleFunctor _ 0).obj
+          (artinSchreierSheafOf _ Ψ (affineLineLinearFunction a))))) := by
   refine ⟨fun ha q ↦ isZero_cohomology_affineLine_artinSchreierSheafOf Λ Ψ hΨ ha q,
     fun ha ↦ ?_⟩
   subst ha
@@ -132,9 +130,8 @@ theorem cohomology_affineLine_artinSchreierSheafOf [IsDomain Λ] [Finite Λ] (Ψ
     exact isUnit_of_invertible _
   let : Invertible (ringChar k : Λ) := ((isUnit_pow_iff m.ne_zero).mp hu).invertible
   obtain ⟨⟨e₀⟩, hq⟩ := cohomology_affineLine_unit (Ω := Ω) Λ (ringChar k)
-  let E (q : ℤ) := (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) q).mapIso
-    ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) _).mapIso
-      ((DerivedCategory.singleFunctor _ 0).mapIso e))
+  let E (q : ℤ) := (cohomology (ModuleCat.{u + 1} Λ) _ q).mapIso
+    ((DerivedCategory.singleFunctor _ 0).mapIso e)
   exact ⟨⟨(E 0) ≪≫ e₀⟩, fun q hq0 ↦ (hq q hq0).of_iso (E q)⟩
 
 end AlgebraicGeometry.Etale
