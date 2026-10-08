@@ -7,25 +7,24 @@ module
 
 public import Mathlib.CategoryTheory.Shift.Basic
 public import Mathlib.CategoryTheory.Yoneda
-public import Mathlib.Algebra.Group.Int.Defs
 
 /-!
 # Detecting isomorphisms on shifted test objects
 
-A morphism `f : X ⟶ Y` in a category with a shift by `ℤ` is an isomorphism as soon as
-composition with `f` is bijective on morphisms out of every shifted object `Z⟦n⟧`, for a
-fixed `n`: every object is isomorphic to a shifted one.
+A morphism `f : X ⟶ Y` in a category with a shift by an additive group `A` is an isomorphism as
+soon as composition with `f` is bijective on morphisms out of every shifted object `Z⟦n⟧`, for a
+fixed `n : A`: every object is isomorphic to a shifted one.
 -/
 
 @[expose] public section
 
 namespace CategoryTheory
 
-variable {C : Type*} [Category* C] [HasShift C ℤ]
+variable {C : Type*} [Category* C] {A : Type*} [AddGroup A] [HasShift C A]
 
-/-- A morphism `f : X ⟶ Y` is an isomorphism if, for a fixed `n : ℤ`, composition with `f` is a
+/-- A morphism `f : X ⟶ Y` is an isomorphism if, for a fixed `n : A`, composition with `f` is a
 bijection `(Z⟦n⟧ ⟶ X) → (Z⟦n⟧ ⟶ Y)` for every object `Z`. -/
-lemma isIso_of_bijective_shift_comp {X Y : C} (f : X ⟶ Y) (n : ℤ)
+lemma isIso_of_bijective_shift_comp {X Y : C} (f : X ⟶ Y) (n : A)
     (hf : ∀ Z : C, Function.Bijective (fun t : Z⟦n⟧ ⟶ X ↦ t ≫ f)) : IsIso f := by
   refine isIso_of_yoneda_map_bijective f fun Z ↦ ?_
   let i : (Z⟦-n⟧)⟦n⟧ ≅ Z := (shiftFunctorCompIsoId C (-n) n (neg_add_cancel n)).app Z

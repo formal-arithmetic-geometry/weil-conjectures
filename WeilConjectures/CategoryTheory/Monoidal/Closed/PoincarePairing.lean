@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Group.Int.Defs
 public import Mathlib.CategoryTheory.Shift.CommShift
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
@@ -63,6 +64,15 @@ and a projection map `pf : F K ⊗ - ⟶ F (K ⊗ P -)`: the projection map foll
 noncomputable def mixedCupProduct (L : C) : F.obj K ⊗ G.obj L ⟶ F.obj (K ⊗ L) :=
   pf.app (G.obj L) ≫ F.map (K ◁ adj.counit.app L)
 
+/-- The mixed cup product after `F K ◁ t`, for `t : Z ⟶ G L`, is the projection map at `Z`
+followed by `F` of `K ◁ t♭`, for the adjoint `t♭ : P Z ⟶ L` of `t`:
+```
+              F K ◁ t                    mixedCupProduct
+F K ⊗ Z ─────────────▶ F K ⊗ G L ───────────────▶ F (K ⊗ L)
+   │                                                  ‖
+   │ pf_Z                       F (K ◁ t♭)            ‖
+   └──────────▶ F (K ⊗ P Z) ─────────────────────▶ F (K ⊗ L)
+``` -/
 @[reassoc]
 lemma whiskerLeft_comp_mixedCupProduct {L : C} {Z : D} (t : Z ⟶ G.obj L) :
     F.obj K ◁ t ≫ adj.mixedCupProduct F pf L =
@@ -86,6 +96,17 @@ noncomputable def poincarePairing :
     (adj.mixedCupProduct F pf _ ≫ F.map (twistedEvaluation K T))⟦n⟧' ≫
       (F.commShiftIso n).inv.app T ≫ F.map γ.hom ≫ adj'.counit.app (𝟙_ D)
 
+/-- The Poincaré pairing after `F K ◁ t⟦n⟧`, for `t : Z ⟶ G (K^∨ ⊗ T)`, is the shifted
+projection map at `Z` followed by the `adj'`-adjoint of the shifted twisted evaluation of the
+`adj`-adjoint `t♭ : P Z ⟶ K^∨ ⊗ T` of `t`, composed with the orientation `γ`:
+```
+                 F K ◁ t⟦n⟧                                   poincarePairing
+F K ⊗ Z⟦n⟧ ───────────▶ F K ⊗ (G (K^∨ ⊗ T))⟦n⟧ ──────────────────▶ 𝟙
+    │ ≅                                                                ‖
+    ▼            (pf_Z)⟦n⟧                    ≅              (adj'-adjoint of g)
+(F K ⊗ Z)⟦n⟧ ─────────▶ (F (K ⊗ P Z))⟦n⟧ ─────▶ F ((K ⊗ P Z)⟦n⟧) ─────────────▶ 𝟙
+```
+where `g = (K ◁ t♭ ≫ twistedEvaluation K T)⟦n⟧ ≫ γ : (K ⊗ P Z)⟦n⟧ ⟶ F' 𝟙`. -/
 lemma whiskerLeft_shift_comp_poincarePairing {Z : D}
     (t : Z ⟶ G.obj ((ihom K).obj (𝟙_ C) ⊗ T)) :
     F.obj K ◁ t⟦n⟧' ≫ adj.poincarePairing F pf adj' n T γ =

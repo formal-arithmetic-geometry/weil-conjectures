@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
@@ -29,6 +30,15 @@ perfect objects of `D(R)` are the *perfect point complexes*.
 
 - `DerivedCategory.isPerfect_iff` (`lem-pod-perfect-point-complex-field`): over a field, `C`
   is perfect if and only if it is bounded with finite-dimensional cohomology.
+- `DerivedCategory.IsPerfect.bounded`, `DerivedCategory.IsPerfect.finite_homology`: a perfect
+  complex over a Noetherian ring is bounded with finitely generated cohomology.
+- `DerivedCategory.isPerfect_of_finiteTorAmplitude` (`sk-lem-finite`, Step 2): conversely, over a
+  Noetherian ring a bounded complex with finitely generated cohomology and finite Tor amplitude
+  is perfect.
+- `DerivedCategory.IsPerfect.tensor_homology` (`sk-lem-finite`, Step 3): after a flat extension
+  of scalars to a field the cohomology is finite dimensional and bounded.
+- `DerivedCategory.IsPerfect.ihom_unit` (`sk-lem-finite`, Step 3): the dual
+  `C^∨ = RHom_R(C, R)` of a perfect complex is perfect.
 - `DerivedCategory.IsPerfect.isIso_toIhomIhomUnit` (`prop-pod-biduality-at-the-point`): for
   any braiding of `D(R)`, the canonical biduality map `C ⟶ C^∨∨` is an isomorphism for a
   perfect `C`, where `C^∨ = RHom_R(C, R)`.
@@ -55,6 +65,8 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory
 
+open scoped TensorProduct
+
 namespace DerivedCategory
 
 variable {R : Type u} [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)]
@@ -66,6 +78,103 @@ finitely generated projective `R`-modules. -/
 def IsPerfect (C : DerivedCategory (ModuleCat.{u} R)) : Prop :=
   ∃ (P : CochainComplex (ModuleCat.{u} R) ℤ) (a b : ℤ), P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧
     (∀ i, Module.Projective R (P.X i) ∧ Module.Finite R (P.X i)) ∧ Nonempty (C ≅ Q.obj P)
+
+/-- Perfectness is invariant under isomorphism. -/
+theorem IsPerfect.of_iso {C D : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect)
+    (e : C ≅ D) : D.IsPerfect := by
+  obtain ⟨P, a, b, ha, hb, hP, ⟨e'⟩⟩ := hC
+  exact ⟨P, a, b, ha, hb, hP, ⟨e.symm ≪≫ e'⟩⟩
+
+/-- The cohomology of `Q.obj L` in degree `i` is that of the complex `L`. -/
+private noncomputable def homologyQObjIso (L : CochainComplex (ModuleCat.{u} R) ℤ) (i : ℤ) :
+    (homologyFunctor (ModuleCat.{u} R) i).obj (Q.obj L) ≅ L.homology i :=
+  (homologyFunctorFactors _ i).app L
+
+/-- A perfect complex is bounded: its cohomology is concentrated in some interval `[a, b]`. -/
+theorem IsPerfect.exists_homologyConcentratedIn {C : DerivedCategory (ModuleCat.{u} R)}
+    (hC : C.IsPerfect) : ∃ a b : ℤ, homologyConcentratedIn a b C := by
+  obtain ⟨P, a, b, ha, hb, -, ⟨e⟩⟩ := hC
+  let eH : ∀ i, (homologyFunctor (ModuleCat.{u} R) i).obj C ≅ P.homology i := fun i ↦
+    (homologyFunctor (ModuleCat.{u} R) i).mapIso e ≪≫ homologyQObjIso P i
+  refine ⟨a, b, ?_, ?_⟩
+  · change C.IsGE a
+    rw [isGE_iff]
+    intro i hi
+    exact (P.exactAt_of_isGE a i hi).isZero_homology.of_iso (eH i)
+  · change C.IsLE b
+    rw [isLE_iff]
+    intro i hi
+    exact (P.exactAt_of_isLE b i hi).isZero_homology.of_iso (eH i)
+
+/-- A perfect complex is bounded for the canonical t-structure. -/
+theorem IsPerfect.bounded {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
+    TStructure.t.bounded C :=
+  (exists_homologyConcentratedIn_iff_bounded C).1 hC.exists_homologyConcentratedIn
+
+/-- The cohomology modules of a perfect complex over a Noetherian ring are finitely generated:
+`H^i(P)` is a quotient of the submodule of cycles of the finitely generated module `P^i`. -/
+theorem IsPerfect.finite_homology [IsNoetherianRing R] {C : DerivedCategory (ModuleCat.{u} R)}
+    (hC : C.IsPerfect) (i : ℤ) :
+    Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj C) := by
+  obtain ⟨P, a, b, -, -, hP, ⟨e⟩⟩ := hC
+  let eH : (homologyFunctor (ModuleCat.{u} R) i).obj C ≅ P.homology i :=
+    (homologyFunctor (ModuleCat.{u} R) i).mapIso e ≪≫ homologyQObjIso P i
+  have := (hP i).2
+  have : Module.Finite R (P.cycles i) :=
+    Module.Finite.of_injective (P.iCycles i).hom
+      ((ModuleCat.mono_iff_injective _).1 inferInstance)
+  have : Module.Finite R (P.homology i) :=
+    Module.Finite.of_surjective (P.homologyπ i).hom
+      ((ModuleCat.epi_iff_surjective _).1 inferInstance)
+  exact Module.Finite.equiv eH.toLinearEquiv.symm
+
+/-- Blueprint `sk-lem-finite` (Step 3 of its proof): flat extension of scalars to a field.
+
+For a perfect complex `C` over a Noetherian ring `R` and an `R`-algebra `E` which is a field
+(such as `E = Frac 𝒪_E` over `𝒪_E`), the spaces `E ⊗_R Hⁱ(C)` are finite dimensional and vanish
+outside a finite interval. For `E` flat over `R` they are the cohomology spaces of
+`C ⊗ᴸ_R E`, so this says that `C ⊗ᴸ_R E` is a perfect complex of `E`-vector spaces
+(`DerivedCategory.isPerfect_iff`). -/
+theorem IsPerfect.tensor_homology [IsNoetherianRing R] (E : Type*) [Field E] [Algebra R E]
+    {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
+    (∀ i, FiniteDimensional E (E ⊗[R] (homologyFunctor (ModuleCat.{u} R) i).obj C)) ∧
+      ∃ a b : ℤ, ∀ i, i < a ∨ b < i →
+        Subsingleton (E ⊗[R] (homologyFunctor (ModuleCat.{u} R) i).obj C) := by
+  refine ⟨fun i ↦ have := hC.finite_homology i; inferInstance, ?_⟩
+  obtain ⟨a, b, ha, hb⟩ := hC.exists_homologyConcentratedIn
+  refine ⟨a, b, fun i hi ↦ ?_⟩
+  have hz : IsZero ((homologyFunctor (ModuleCat.{u} R) i).obj C) := by
+    rcases hi with hi | hi
+    · exact C.isZero_of_isGE a i hi
+    · exact C.isZero_of_isLE b i hi
+  have := (ModuleCat.isZero_iff_subsingleton).1 hz
+  refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+  induction x using TensorProduct.induction_on with
+  | zero => rfl
+  | tmul e m => rw [Subsingleton.elim m 0, TensorProduct.tmul_zero]
+  | add x y hx hy => rw [hx, hy, add_zero]
+
+/-- Blueprint `sk-lem-finite` (Step 2 of its proof): perfectness over a Noetherian ring.
+
+Over a Noetherian ring `R`, a bounded complex `C` with finitely generated cohomology modules and
+finite Tor amplitude is perfect. Take a bounded above resolution of `C` by finitely generated
+free modules and truncate it in the lowest degree `a` of the Tor amplitude: the cokernel in
+degree `a` is finitely presented of Tor dimension zero, hence flat, hence projective. -/
+theorem isPerfect_of_finiteTorAmplitude [IsNoetherianRing R]
+    {C : DerivedCategory (ModuleCat.{u} R)} (hC : TStructure.t.bounded C)
+    (hfin : ∀ i, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj C))
+    (hTor : finiteTorAmplitude (ModuleCat.{u} R) C) : C.IsPerfect :=
+  sorry
+
+/-- Blueprint `sk-lem-finite` (Step 3 of its proof): the dual of a perfect point complex.
+
+The dual `C^∨ = RHom_R(C, R)` of a perfect complex `C` is perfect: if `C` is represented by a
+bounded complex `P` of finitely generated projective modules, `C^∨` is represented by the
+termwise dual complex `Hom_R(P^{-i}, R)`, again bounded with finitely generated projective
+terms. -/
+theorem IsPerfect.ihom_unit {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
+    ((ihom C).obj (𝟙_ _)).IsPerfect :=
+  sorry
 
 section Field
 
@@ -101,11 +210,6 @@ private theorem exists_quasiIso_of_zero_differential (L : CochainComplex (Module
       Category.assoc, hs, Category.comp_id, IsIso.hom_inv_id_assoc]
   rw [this]
   infer_instance
-
-/-- The cohomology of `Q.obj L` in degree `i` is that of the complex `L`. -/
-private noncomputable def homologyQObjIso (L : CochainComplex (ModuleCat.{u} K) ℤ) (i : ℤ) :
-    (homologyFunctor (ModuleCat.{u} K) i).obj (Q.obj L) ≅ L.homology i :=
-  (homologyFunctorFactors _ i).app L
 
 /-- Blueprint `lem-pod-perfect-point-complex-field`: perfect point complexes over a field.
 

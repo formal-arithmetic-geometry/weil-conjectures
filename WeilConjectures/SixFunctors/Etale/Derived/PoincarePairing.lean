@@ -49,6 +49,8 @@ particular at finite coefficients `ModuleCat Λ`
 - `AlgebraicGeometry.Etale.poincarePairing` (`sk-def-pairing`): `β_K`.
 - `AlgebraicGeometry.Etale.properPoincarePairing`: `β_K` read through `Ra_! ≅ Ra_*` for proper
   `a`.
+- `AlgebraicGeometry.Etale.poincarePairingOfTrace`: the pairing
+  `Ra_! K ⊗ᴸ (Ra_* K^∨)[n] ⟶ T` of a trace `(Ra_! Λ_X)[n] ⟶ T`.
 
 ## Main statements
 
@@ -247,6 +249,29 @@ theorem IsPerfectPairing.properPoincarePairing {o : Orientation A a d}
 
 end Proper
 
+/-- The *pairing of a trace* `t : (Ra_! Λ_X)[n] ⟶ T`,
+
+`Ra_! K ⊗ᴸ (Ra_* K^∨)[n] ⟶ T`:
+
+the shift is moved out, then come the mixed-support cup product, `Ra_!` of the evaluation
+`ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X` and `t`,
+```
+                          shift out                             (⌣_c)[n]
+Ra_! K ⊗ᴸ (Ra_* K^∨)[n] ─────────▶ (Ra_! K ⊗ᴸ Ra_* K^∨)[n] ─────────▶
+                                (Ra_!(ev_K))[n]                t
+  (Ra_!(K ⊗ᴸ K^∨))[n] ─────────────────▶ (Ra_! Λ_X)[n] ──────▶ T
+```
+For the untwisted smooth trace `(Ra_! Λ_X)[2d] ⟶ Λ_Y(-d)` of a Tate orientation this is the
+untwisted, line-valued Poincaré pairing
+(`AlgebraicGeometry.Etale.TateOrientation.untwistedPoincarePairing`). -/
+noncomputable def poincarePairingOfTrace (K : 𝐃(X, A)) {T : 𝐃(Y, A)} (n : ℤ)
+    (t : ((R(a)_![A]).obj (𝟙_ _))⟦n⟧ ⟶ T) :
+    ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).obj
+        (((R((a)_*[A])).obj ((DerivedCategory.coefficientDual A X).obj (op K)))⟦n⟧) ⟶ T :=
+  ((((derivedTensor A Y).obj ((R(a)_![A]).obj K)).commShiftIso n).hom.app _ ≫
+    (mixedSupportCupProduct A a K _ ≫
+      (R(a)_![A]).map (DerivedCategory.coefficientEvaluation K))⟦n⟧') ≫ t
+
 section ModuleCat
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
@@ -260,7 +285,11 @@ invertible on `Y`, an orientation `o` of `a : X ⟶ Y` with twist `T`, and
 
 `(Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ (Ra_! K)^∨`
 
-is an isomorphism. Over `Y = Spec k` this is `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`. -/
+is an isomorphism. Over `Y = Spec k` this is `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`.
+
+The hypotheses `[HasInvertibleExponent Λ Y]` and `K ∈ D^b_{ctf}(X, Λ)` of the blueprint are kept
+but not used by the proof: the projection formula
+`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite` needs neither. -/
 theorem isPerfectPairing_poincarePairing [HasInvertibleExponent Λ Y]
     (o : Orientation (ModuleCat.{u + 1} Λ) a d)
     (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _) {K : DerivedCategoryModule Λ X}
