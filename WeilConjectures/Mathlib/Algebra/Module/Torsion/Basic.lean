@@ -11,6 +11,7 @@ public import Mathlib.Data.ZMod.Basic
 public import Mathlib.Algebra.Module.Torsion.Basic
 public import Mathlib.FieldTheory.Finiteness
 public import Mathlib.GroupTheory.Divisible
+public import Mathlib.GroupTheory.FiniteAbelian.Basic
 public import Mathlib.LinearAlgebra.Dimension.Free
 public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 
@@ -26,6 +27,8 @@ the structural input that makes the Tate module of an abelian variety a free `�
 - `AddSubgroup.nonempty_addEquiv_torsionBy_of_natCard_eq`: `D[ℓ ^ n] ≃+ (Fin r → ZMod (ℓ ^ n))`.
 - `AddSubgroup.nonempty_addEquiv_torsionBy_of_forall_prime`: if `|D[ℓ]| = ℓ ^ r` for every
   prime `ℓ ∣ n`, then `D[n] ≃+ (Fin r → ZMod n)`.
+- `AddSubgroup.exists_exact_torsionBy_quotient`: for a subgroup `Λ` of an `n`-divisible group
+  `G`, the exact sequence `0 → G[n] / Λ[n] → (G / Λ)[n] → Λ / nΛ → 0`.
 
 ## Implementation notes
 
@@ -256,5 +259,132 @@ theorem nonempty_addEquiv_torsionBy_of_forall_prime (D : Type*) [AddCommGroup D]
       { (Equiv.arrowProdEquivProdArrow _ _ _).symm with map_add' := fun _ _ ↦ rfl }
     exact ⟨e.trans ((ea.prodCongr eb).trans (arrow.trans
       (AddEquiv.piCongrRight fun _ ↦ (ZMod.chineseRemainder hab).toAddEquiv).symm))⟩
+
+section Quotient
+
+variable {G : Type*} [AddCommGroup G]
+
+/-- **Torsion in a quotient of a divisible group.** Let `Λ` be a subgroup of an abelian group
+`G` on which multiplication by `n` is surjective. Then there is a short exact sequence
+`0 → G[n] / Λ[n] → (G / Λ)[n] → Λ / nΛ → 0`, whose second map sends the class of `g` with
+`n • g ∈ Λ` to the class of `n • g`.
+(blueprint: `lem-sc-divisible-quotient-torsion`) -/
+theorem exists_exact_torsionBy_quotient (Λ : AddSubgroup G) (n : ℤ)
+    (hG : Function.Surjective (zsmulAddGroupHom (α := G) n)) :
+    ∃ (α : G[n] ⧸ Λ.addSubgroupOf G[n] →+ (G ⧸ Λ)[n])
+      (δ : (G ⧸ Λ)[n] →+ Λ ⧸ (zsmulAddGroupHom (α := Λ) n).range),
+      Function.Injective α ∧ Function.Exact α δ ∧ Function.Surjective δ ∧
+        ∀ (x : (G ⧸ Λ)[n]) (g : G), (g : G ⧸ Λ) = x →
+          ∃ hg : n • g ∈ Λ, δ x = QuotientAddGroup.mk (⟨n • g, hg⟩ : Λ) := by
+  classical
+  -- the map `G[n] → (G/Λ)[n]`
+  let ι : G[n] →+ (G ⧸ Λ)[n] :=
+    { toFun x := ⟨(x.1 : G ⧸ Λ), (Submodule.mem_torsionBy_iff _ _).2 <| by
+        rw [← QuotientAddGroup.mk_zsmul, (Submodule.mem_torsionBy_iff _ _).1 x.2]; rfl⟩
+      map_zero' := rfl
+      map_add' _ _ := rfl }
+  have hker : ι.ker = Λ.addSubgroupOf G[n] := by
+    ext x
+    rw [AddMonoidHom.mem_ker, AddSubgroup.mem_addSubgroupOf, Subtype.ext_iff]
+    exact QuotientAddGroup.eq_zero_iff _
+  let α := QuotientAddGroup.lift (Λ.addSubgroupOf G[n]) ι (hker ▸ le_rfl)
+  -- the connecting map
+  have hmem (x : (G ⧸ Λ)[n]) (g : G) (hg : (g : G ⧸ Λ) = x) : n • g ∈ Λ := by
+    have := (Submodule.mem_torsionBy_iff _ _).1 x.2
+    rw [← hg, ← QuotientAddGroup.mk_zsmul, QuotientAddGroup.eq_zero_iff] at this
+    exact this
+  let lift (x : (G ⧸ Λ)[n]) : G := (QuotientAddGroup.mk_surjective x.1).choose
+  have hlift (x : (G ⧸ Λ)[n]) : (lift x : G ⧸ Λ) = x :=
+    (QuotientAddGroup.mk_surjective x.1).choose_spec
+  let N := (zsmulAddGroupHom (α := Λ) n).range
+  have key (x : (G ⧸ Λ)[n]) (g g' : G) (hg : (g : G ⧸ Λ) = x) (hg' : (g' : G ⧸ Λ) = x) :
+      (QuotientAddGroup.mk (⟨n • g, hmem x g hg⟩ : Λ) : Λ ⧸ N) =
+        QuotientAddGroup.mk (⟨n • g', hmem x g' hg'⟩ : Λ) := by
+    rw [QuotientAddGroup.eq]
+    have h : -g + g' ∈ Λ := by
+      rw [← QuotientAddGroup.eq, hg, hg']
+    refine ⟨⟨-g + g', h⟩, ?_⟩
+    ext
+    simp [smul_add, smul_neg]
+  let δ : (G ⧸ Λ)[n] →+ Λ ⧸ N :=
+    { toFun x := QuotientAddGroup.mk (⟨n • lift x, hmem x _ (hlift x)⟩ : Λ)
+      map_zero' := by
+        rw [key 0 (lift 0) 0 (hlift 0) (by simp), QuotientAddGroup.eq_zero_iff]
+        exact ⟨0, by ext; simp⟩
+      map_add' x y := by
+        rw [key (x + y) (lift (x + y)) (lift x + lift y) (hlift _)
+          (by simp [hlift])]
+        rw [← QuotientAddGroup.mk_add]
+        congr 1
+        ext
+        simp [smul_add] }
+  have hδ (x : (G ⧸ Λ)[n]) (g : G) (hg : (g : G ⧸ Λ) = x) :
+      δ x = QuotientAddGroup.mk (⟨n • g, hmem x g hg⟩ : Λ) :=
+    key x _ _ (hlift x) hg
+  refine ⟨α, δ, ?_, ?_, ?_, fun x g hg ↦ ⟨hmem x g hg, hδ x g hg⟩⟩
+  · rw [← AddMonoidHom.ker_eq_bot_iff, QuotientAddGroup.ker_lift, hker]
+    simp
+  · intro x
+    constructor
+    · intro hx
+      rw [hδ x _ (hlift x), QuotientAddGroup.eq_zero_iff] at hx
+      obtain ⟨l, hl⟩ := hx
+      refine ⟨QuotientAddGroup.mk ⟨lift x - l, (Submodule.mem_torsionBy_iff _ _).2 ?_⟩, ?_⟩
+      · have := congrArg Subtype.val hl
+        simp only [zsmulAddGroupHom_apply, AddSubgroup.coe_zsmul] at this
+        rw [smul_sub, this, sub_self]
+      · ext
+        change ((lift x - l : G) : G ⧸ Λ) = x
+        rw [QuotientAddGroup.mk_sub, hlift x, (QuotientAddGroup.eq_zero_iff _).2 l.2, sub_zero]
+    · rintro ⟨y, rfl⟩
+      induction y using QuotientAddGroup.induction_on with
+      | H y =>
+      rw [hδ _ y.1 rfl, QuotientAddGroup.eq_zero_iff]
+      refine ⟨0, ?_⟩
+      ext
+      simp [(Submodule.mem_torsionBy_iff _ _).1 y.2]
+  · intro z
+    induction z using QuotientAddGroup.induction_on with
+    | H l =>
+    obtain ⟨g, hg⟩ := hG l
+    refine ⟨⟨(g : G ⧸ Λ), (Submodule.mem_torsionBy_iff _ _).2 ?_⟩, ?_⟩
+    · rw [← QuotientAddGroup.mk_zsmul, QuotientAddGroup.eq_zero_iff]
+      simp only [zsmulAddGroupHom_apply] at hg
+      rw [hg]; exact l.2
+    · rw [hδ _ g rfl]
+      congr 1
+      ext
+      simpa using hg
+
+
+/-- Let `Λ` be a finitely generated subgroup of an abelian group `G` on which multiplication by
+`n ≠ 0` is surjective, and assume that `G[n]` is finite. Then `(G / Λ)[n]` is finite: it is an
+extension of the finite group `Λ / nΛ` by a quotient of `G[n]`
+(`AddSubgroup.exists_exact_torsionBy_quotient`). -/
+theorem finite_torsionBy_quotient (Λ : AddSubgroup G) {n : ℕ} (hn : n ≠ 0)
+    (hG : Function.Surjective (zsmulAddGroupHom (α := G) n)) [Finite G[n]] (hΛ : Λ.FG) :
+    Finite (G ⧸ Λ)[n] := by
+  obtain ⟨α, δ, -, hαδ, hδ, -⟩ := exists_exact_torsionBy_quotient Λ n hG
+  let N := (zsmulAddGroupHom (α := Λ) n).range
+  have : AddGroup.FG Λ := (AddGroup.fg_iff_addSubgroup_fg Λ).2 hΛ
+  have : Module.Finite ℤ (Λ ⧸ N) := by
+    rw [Module.Finite.iff_addGroup_fg]
+    exact AddGroup.fg_of_surjective (QuotientAddGroup.mk'_surjective N)
+  have : Finite (Λ ⧸ N) := Module.finite_of_fg_torsion _ fun x ↦ by
+    induction x using QuotientAddGroup.induction_on with
+    | H l =>
+    refine ⟨⟨(n : ℤ), mem_nonZeroDivisors_of_ne_zero (by exact_mod_cast hn)⟩, ?_⟩
+    change (n : ℤ) • (QuotientAddGroup.mk l : Λ ⧸ N) = 0
+    rw [← QuotientAddGroup.mk_zsmul, QuotientAddGroup.eq_zero_iff]
+    exact ⟨l, rfl⟩
+  have : Finite α.range := Set.finite_range _
+  have : Finite ((G ⧸ Λ)[n] ⧸ α.range) := by
+    have h : α.range = δ.ker := by
+      ext x; exact (hαδ x).symm
+    rw [h]
+    exact .of_equiv _ (QuotientAddGroup.quotientKerEquivOfSurjective δ hδ).toEquiv.symm
+  exact .of_addSubgroup_quotient (H := α.range)
+
+end Quotient
 
 end AddSubgroup

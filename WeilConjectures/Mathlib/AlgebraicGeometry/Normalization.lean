@@ -28,6 +28,9 @@ and if `Y` is locally of finite type over a field then `f.fromNormalization` is 
   rings.
 - `AlgebraicGeometry.Scheme.Hom.isFinite_fromNormalization`: the normalization of a scheme
   locally of finite type over a field in a quasi-compact integral open subscheme is finite.
+- `AlgebraicGeometry.Scheme.normalizationIn`: the normalization of an integral scheme in a field
+  extension of its function field, and `AlgebraicGeometry.Scheme.isFinite_fromNormalizationIn`:
+  it is finite over a scheme locally of finite type over a field if the extension is finite.
 -/
 
 @[expose] public section
@@ -240,5 +243,55 @@ theorem isIso_fromNormalization_restrict (U : X.Opens)
     obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVU⟩ :=
       X.isBasis_affineOpens.exists_subset_of_mem_open x.2 U.isOpen
     exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨⟨V, hV⟩, hVU, ⟨x.1, hxV⟩⟩, by simpa using hxV⟩
+
+section FiniteExtension
+
+variable (L : Type u) [Field L] [Algebra X.functionField L]
+
+/-- The morphism `Spec L ⟶ X` through the generic point of an integral scheme `X`, for a field
+extension `L` of its function field `K = k(X)`: the composite of `Spec L ⟶ Spec K` with
+`Spec K ⟶ X`. -/
+noncomputable abbrev fromSpecOfAlgebraFunctionField : Spec (.of L) ⟶ X :=
+  Spec.map (CommRingCat.ofHom (algebraMap X.functionField L)) ≫ X.fromSpecFunctionField
+
+/-- The *normalization* `X^L` of an integral scheme `X` in a field extension `L` of its function
+field `K`: the relative normalization of `X` in `Spec L ⟶ X`, that is the relative spectrum of
+the integral closure of `𝒪_X` in `L`. Over an affine open `Spec B` of `X` it is
+`Spec B'` with `B'` the integral closure of `B` in `L`. For `L = K` this is
+`AlgebraicGeometry.Scheme.normalization`. Finiteness of `X^L ⟶ X` is not part of the
+definition; it is `AlgebraicGeometry.Scheme.isFinite_fromNormalizationIn`.
+(blueprint: `def-fin-normalization-extension`) -/
+noncomputable abbrev normalizationIn : Scheme.{u} :=
+  (X.fromSpecOfAlgebraFunctionField L).normalization
+
+/-- The canonical morphism `X^L ⟶ X` from the normalization of an integral scheme `X` in a field
+extension `L` of its function field. (blueprint: `def-fin-normalization-extension`) -/
+noncomputable abbrev fromNormalizationIn : X.normalizationIn L ⟶ X :=
+  (X.fromSpecOfAlgebraFunctionField L).fromNormalization
+
+/-- **Finiteness of the normalization in a finite extension.** Let `X` be an integral scheme
+locally of finite type over a field `k` and `L` a finite extension of its function field `K`.
+Then the normalization `X^L ⟶ X` of `X` in `L` is finite: over an affine open `Spec B`, the
+integral closure of the finitely generated `k`-domain `B` in `L` is a finite `B`-module
+(E. Noether's finiteness theorem, Stacks `0359`; `L / K` need not be separable).
+(blueprint: `lem-fin-normalization-extension-finite`) -/
+theorem isFinite_fromNormalizationIn {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
+    [LocallyOfFiniteType q] [FiniteDimensional X.functionField L] :
+    IsFinite (X.fromNormalizationIn L) :=
+  sorry
+
+/-- **The function field of the normalization in `L` is `L`.** For an integral scheme `X` and
+an algebraic extension `L` of its function field, the morphism `Spec L ⟶ X^L` is the generic
+point of the normalization `X^L` of `X` in `L`, and it identifies `L` with the function field of
+`X^L`: over an affine open `Spec B` of `X`, every element of `L` is a quotient of an element of
+the integral closure `B'` of `B` in `L` by a nonzero element of `B`, so `Frac(B') = L`. -/
+theorem exists_iso_toNormalization_normalizationIn
+    [Algebra.IsAlgebraic X.functionField L] :
+    ∃ e : Spec (.of L) ≅ Spec (X.normalizationIn L).functionField,
+      e.hom ≫ (X.normalizationIn L).fromSpecFunctionField =
+        (X.fromSpecOfAlgebraFunctionField L).toNormalization :=
+  sorry
+
+end FiniteExtension
 
 end AlgebraicGeometry.Scheme

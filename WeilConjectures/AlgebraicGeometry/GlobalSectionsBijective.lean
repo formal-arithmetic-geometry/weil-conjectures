@@ -44,6 +44,8 @@ connected `X` over a separably closed field.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyIntegral` and
   `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_isSepClosed`: the geometrically integral
   case and the case of a smooth connected scheme over a separably closed field.
+- `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_isAlgClosed`: a proper, reduced and
+  connected scheme over an algebraically closed field has `H⁰(X, 𝒪_X) = k`.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.pullback`: `H⁰(X, 𝒪_X) = k` is stable under
   base change along a field extension `K/k`, for quasi-compact quasi-separated `X`.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.isIso_appTop_pullback_snd`: more generally
@@ -147,6 +149,29 @@ instance GlobalSectionsBijective.of_geometricallyConnected [IsProper (X ↘ Spec
   have hA : Module.finrank k A = 1 := by
     rw [← hB, ← e.finrank_eq, Module.finrank_baseChange]
   have : Nontrivial A := Module.nontrivial_of_finrank_eq_succ hA
+  refine ⟨⟨(globalSectionsRingHom k (X := X)).injective, ?_⟩⟩
+  exact (LinearMap.injective_iff_surjective_of_finrank_eq_finrank
+    (f := Algebra.linearMap k A) (by rw [hA, Module.finrank_self])).1
+    (algebraMap k A).injective
+
+/-- **Global functions on a proper curve.** A proper, reduced and connected scheme `X` over an
+algebraically closed field `k` has `H⁰(X, 𝒪_X) = k`: the ring `Γ(X, 𝒪_X)` is a finite reduced
+`k`-algebra (`AlgebraicGeometry.Scheme.finite_globalSectionsRingHom_of_isProper`) without
+nontrivial idempotents, hence equal to `k` (`IsAlgClosed.finrank_eq_one_of_isReduced`).
+
+The blueprint states this for proper connected curves; reducedness is needed, as the proper
+connected curve `ℙ¹_k ×_k Spec k[ε]/(ε²)` has `H⁰ = k[ε]/(ε²)`. It holds for the smooth curves to
+which the blueprint applies it.
+(blueprint: `lem-sc-global-functions`) -/
+instance GlobalSectionsBijective.of_isAlgClosed [IsAlgClosed k] [IsProper (X ↘ Spec (.of k))]
+    [IsReduced X] [ConnectedSpace X] : GlobalSectionsBijective k X := by
+  let A := Γ(X, ⊤)
+  let : Algebra k A := (globalSectionsRingHom k (X := X)).toAlgebra
+  have : Module.Finite k A := finite_globalSectionsRingHom_of_isProper
+  obtain ⟨x⟩ : Nonempty X := inferInstance
+  have : Nonempty (⊤ : X.Opens) := ⟨⟨x, trivial⟩⟩
+  have hA : Module.finrank k A = 1 := IsAlgClosed.finrank_eq_one_of_isReduced
+    ((connectedSpace_iff_isIdempotentElem X).1 inferInstance)
   refine ⟨⟨(globalSectionsRingHom k (X := X)).injective, ?_⟩⟩
   exact (LinearMap.injective_iff_surjective_of_finrank_eq_finrank
     (f := Algebra.linearMap k A) (by rw [hA, Module.finrank_self])).1

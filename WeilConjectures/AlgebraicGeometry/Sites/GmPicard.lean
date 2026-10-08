@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
 
@@ -27,13 +28,14 @@ All three classify torsors: an invertible module `L` gives the `𝔾ₘ`-torsor 
   `Pic(X) ≃ H¹(X_Zar, 𝒪_Xˣ) ≃ H¹(X_ét, 𝔾ₘ)`.
 - `AlgebraicGeometry.Scheme.nonempty_equiv_cohomologicalPicardGroup`: there is a bijection
   `Pic(X) ≃ H¹(X_ét, 𝔾ₘ)`.
+- `AlgebraicGeometry.Scheme.nonempty_addEquiv_cohomologicalPicardGroup`: there is an isomorphism
+  of groups `Pic(X) ≃+ H¹(X_ét, 𝔾ₘ)`; its proof is `sorry`.
 
 ## TODO
 
-`AlgebraicGeometry.Scheme.Pic` carries no group structure yet, and the torsor classification is
-recorded as the existence of bijections, so the comparisons are bijections of sets. Replace
-them by the canonical additive equivalences `L ↦ [Isom(𝒪, L)]`, of type `≃+`, once both are
-available.
+The torsor classification is recorded as the existence of bijections, so the comparisons above
+are bijections of sets. Replace them by the canonical additive equivalence `L ↦ [Isom(𝒪, L)]`,
+and prove `AlgebraicGeometry.Scheme.nonempty_addEquiv_cohomologicalPicardGroup` with it.
 -/
 
 @[expose] public section
@@ -105,5 +107,16 @@ theorem nonempty_equiv_cohomologicalPicardGroup :
     Nonempty (X.Pic ≃ X.CohomologicalPicardGroup) :=
   let h := X.nonempty_equiv_H_one_unitsSheaf
   ⟨h.1.some.trans h.2.some⟩
+
+/-- **The Picard group is `H¹(X, 𝔾ₘ)` as a group.** For a scheme `X` the group `Pic(X)` of
+invertible `𝒪_X`-modules up to isomorphism, under tensor product, is isomorphic to the
+cohomological Picard group `H¹(X_ét, 𝔾ₘ)`. The canonical isomorphism sends `ℒ` to the class of
+the `𝔾ₘ`-torsor `Isom(𝒪_X, ℒ)`, and the tensor product of invertible modules corresponds to the
+contracted product of torsors, i.e. to the sum in `H¹`; this upgrades the bijection
+`AlgebraicGeometry.Scheme.nonempty_equiv_cohomologicalPicardGroup`.
+(blueprint: `lem-sc-h1-gm-pic`) -/
+theorem nonempty_addEquiv_cohomologicalPicardGroup :
+    Nonempty (Additive X.Pic ≃+ X.CohomologicalPicardGroup) :=
+  sorry
 
 end AlgebraicGeometry.Scheme
