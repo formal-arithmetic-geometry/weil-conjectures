@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.FourierTransform.Properties
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
