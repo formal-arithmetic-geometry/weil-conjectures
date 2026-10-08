@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Compactification.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
@@ -22,9 +21,11 @@ on `Y`, and `p : 𝔸¹_Y → Y` is the projection, `s : Y → 𝔸¹_Y` the zer
 * consequently `Rs^! Λ(1)[2] ≅ Λ_Y`, the *fundamental class* of the zero section
   (`sk-prop-a1`);
 * a complex on `𝔸¹_Y` that is a pullback is determined by its restriction to `t = 1`, so its
-  fibres at `t = 0` and `t = 1` agree (`sk-prop-a1-inv`);
-* iterating the one-dimensional case through Künneth gives the model purity
-  `Rz^! Λ(c)[2c] ≅ Λ_B` for the zero section of `𝔸^c_B` (`sk-prop-an`).
+  fibres at `t = 0` and `t = 1` agree (`sk-prop-a1-inv`).
+
+Iterating the one-dimensional case gives the model purity `Rz^! Λ(c)[2c] ≅ Λ_B` for the zero
+section of `𝔸^c_B` (`sk-prop-an`), in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace`.
 
 The invertibility hypothesis is not decorative: for `Λ = ℤ/p` over a base of characteristic
 `p` the Artin–Schreier sequence gives `H¹(𝔸¹_k, ℤ/p) = k[t]/(F − 1)k[t] ≠ 0`, so the affine
@@ -46,10 +47,6 @@ Two clauses of the blueprint are stated only in part, and are TODOs.
 * Of `sk-prop-a1-inv` (ii) only the uniqueness half is stated; the gluing half — that
   normalized local comparisons over an étale cover of `Y` glue — needs a formalisation of
   étale-local data on `Y` that this file does not set up.
-* `sk-prop-an` is stated only in the model case `𝔸^c_B`. The vector-bundle Thom class for a
-  general rank-`c` bundle is not, Mathlib having no vector bundles over a scheme; the normal
-  cone datum of `WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion` records
-  instead that the cone is smooth of relative dimension `c`.
 
 ## Main statements
 
@@ -61,8 +58,6 @@ Two clauses of the blueprint are stated only in part, and are TODOs.
 - `AlgebraicGeometry.Etale.injective_upperStar_map_of_isFiniteLocallyConstantSheaf`,
   `AlgebraicGeometry.Etale.injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf`
 - `AlgebraicGeometry.Etale.eq_of_leftDerivedUpperStar_oneSection_eq`
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpaceZero`
-- `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`
 -/
 
 @[expose] public section
@@ -208,44 +203,6 @@ theorem eq_of_leftDerivedUpperStar_oneSection_eq
   sorry
 
 end
-
-/-- Blueprint `sk-prop-an`: `𝔸¹ ⇒ 𝔸ⁿ`: the model purity
-
-For the zero section `z : B ↪ 𝔸^c_B` of relative affine `c`-space,
-
-`Rz^! Λ(c)[2c] ≅ Λ_B`,
-
-canonically and compatibly with base change, the generator being the `c`-fold exterior
-product of the fundamental class of `sk-prop-a1`. The proof writes `𝔸^c_B` as a `c`-fold
-fibre product of copies of `𝔸¹_B`, applies Künneth for cohomology with supports, and uses
-`Λ(c)[2c] = (Λ(1)[2])^{⊗c}`. -/
-theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero {k : Type u} [Field k] (c : ℕ)
-    (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
-    [HasInvertibleExponent Λ B] :
-    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
-          (AffineSpace.zeroSection (ULift.{u} (Fin c)) B)).obj
-        ((twistShift Λ 𝔸(ULift.{u} (Fin c); B) c).obj
-          (constantComplex Λ 𝔸(ULift.{u} (Fin c); B))) ≅
-      constantComplex Λ B) :=
-  sorry
-
-/-- Blueprint `cor-pur-vector-bundle-purity`: Vector-bundle purity
-
-*The `Rπ^!`-form of `sk-prop-an` (ii), for the trivial bundle.* For the projection
-`π : 𝔸(n; B) ⟶ B` of relative affine space in `c = #n` variables,
-
-`ω_π = Rπ^! Λ_B ≅ Λ_{𝔸(n; B)}(c)[2c]`.
-
-This is the case `K = Λ_B` of affine-space purity (`cor-pur-affine-space-purity`), and the
-case of a trivial bundle of vector-bundle purity; the projection is compactified by projective
-space (`AlgebraicGeometry.AffineSpace.hasCompactification`). The blueprint proves it by
-induction on `c` from the affine-line purity, the integration map of `𝔸¹_B` being the
-transpose of the trace of `ℙ¹_B`. -/
-theorem nonempty_iso_dualizingComplex_affineSpace (n : Type u) [Finite n] (B : Scheme.{u})
-    [HasInvertibleExponent Λ B] :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (𝔸(n; B) ↘ B) ≅
-      (twistShift Λ 𝔸(n; B) (Nat.card n)).obj (constantComplex Λ 𝔸(n; B))) :=
-  sorry
 
 end Etale
 

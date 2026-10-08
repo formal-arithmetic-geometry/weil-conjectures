@@ -19,10 +19,14 @@ public import Mathlib.Topology.LocallyConstant.Basic
 public import Mathlib.Topology.Semicontinuity.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.Mathlib.Algebra.BigOperators.Intervals
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 
 /-!
 # Higher direct images, and cohomology and base change
@@ -42,12 +46,10 @@ and it is what lets the statements of this file be combined with the ones phrase
 ## Implementation notes
 
 Every derived-functor statement below needs injective resolutions in `X.Modules`, carried as
-an instance hypothesis `[HasInjectiveResolutions X.Modules]`. Nothing in Mathlib can discharge
-it: there is no `IsGrothendieckAbelian` instance for `SheafOfModules` anywhere. The missing
-prerequisite is recorded as the explicit statement
-`AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`; once it is proved and made an
-instance, `EnoughInjectives` and hence `HasInjectiveResolutions` follow, and the hypothesis can
-be dropped from every statement here and downstream.
+an instance hypothesis `[HasInjectiveResolutions X.Modules]`. It can be discharged by
+`AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`, which gives `EnoughInjectives` and
+hence `HasInjectiveResolutions`; it is not an instance, so the hypothesis is kept in the
+statements here and downstream.
 
 Mathlib has no `IsCoherent` class for sheaves of modules. Over a locally Noetherian base
 coherence is equivalent to being quasi-coherent and of finite presentation, so that is what the
@@ -107,6 +109,8 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
   change.
 - `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`: coherence of the
   higher direct images over a locally Noetherian base.
+- `AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`: the cohomology of a
+  coherent sheaf on a proper scheme over a field is finite-dimensional.
 - `AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber` and
   `exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant`: semicontinuity of
   the fibre dimension, and Grauert's theorem over a reduced base.
@@ -146,14 +150,13 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X T : Scheme.{u}}
 
-/-- `X.Modules` is a Grothendieck abelian category.
+/-- `X.Modules` is a Grothendieck abelian category (`SheafOfModules.isGrothendieckAbelian`).
 
-This is the missing prerequisite of the whole file: together with
-`CategoryTheory.IsGrothendieckAbelian.enoughInjectives` it supplies the
+Together with `CategoryTheory.IsGrothendieckAbelian.enoughInjectives` it supplies the
 `HasInjectiveResolutions X.Modules` instance that every statement below, and every statement
-about the Picard functor `F` downstream, currently has to assume. -/
+about the Picard functor `F` downstream, assumes. -/
 theorem isGrothendieckAbelian (X : Scheme.{u}) : IsGrothendieckAbelian.{u} X.Modules :=
-  sorry
+  SheafOfModules.isGrothendieckAbelian X.ringCatSheaf
 
 /-- The `q`-th **higher direct image** functor `R^q f_*` along a morphism of schemes
 `f : X ⟶ T`: the `q`-th right derived functor of the pushforward functor
@@ -165,6 +168,30 @@ instance hypothesis. -/
 noncomputable def higherDirectImage (f : X ⟶ T) [HasInjectiveResolutions X.Modules] (q : ℕ) :
     X.Modules ⥤ T.Modules :=
   (pushforward f).rightDerived q
+
+/-- The pushforward of multiplication by `f^♯ a` is multiplication by `a`. -/
+lemma pushforward_map_smulHom (f : X ⟶ T) (M : X.Modules) (a : Γ(T, ⊤)) :
+    (pushforward f).map (M.smulHom (f.appTop a)) = ((pushforward f).obj M).smulHom a := by
+  ext U x
+  simp only [pushforward_map_app, smulHom_app_apply]
+  erw [smulHom_app_apply]
+  change _ = f.app U (T.presheaf.map (homOfLE le_top).op a) • (show Γ(M, f ⁻¹ᵁ U) from x)
+  congr 1
+  rw [Scheme.Hom.appTop, ← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
+    Scheme.Hom.naturality]
+  rfl
+
+/-- **The higher direct images are linear over the base.** Applying `R^q f_*` to multiplication
+by `f^♯ a` on `M` gives multiplication by `a` on `R^q f_* M`. -/
+lemma higherDirectImage_map_smulHom (f : X ⟶ T) [HasInjectiveResolutions X.Modules] (q : ℕ)
+    (M : X.Modules)
+    (a : Γ(T, ⊤)) :
+    (higherDirectImage f q).map (M.smulHom (f.appTop a)) =
+      ((higherDirectImage f q).obj M).smulHom a :=
+  (pushforward f).rightDerived_map_app_eq
+    { app M := M.smulHom (f.appTop a), naturality _ _ φ := (smulHom_naturality φ _).symm }
+    { app N := N.smulHom a, naturality _ _ φ := (smulHom_naturality φ _).symm }
+    (fun M ↦ pushforward_map_smulHom f M a) q M
 
 /-- `ℱ.IsFlatOver f` says that the `𝒪_X`-module `ℱ` is **flat over the base** of the morphism
 `f : X ⟶ T`: for every affine open `V` of `T` and every affine open `U` of `X` contained in
@@ -287,22 +314,52 @@ theorem perfectLocusOfRank_subset (ℱ : X.Modules) (f : X ⟶ T) (i r : ℕ) :
 
 variable (f : X ⟶ T) (ℱ : X.Modules)
 
+/-- **The sections of the higher direct images over an affine base, naturally.** Over an affine
+base, for `f` quasi-compact and separated, the global sections of `R^q f_* ℱ` are the sheaf
+cohomology `H^q(X, ℱ)`, by additive isomorphisms natural in the quasi-coherent module `ℱ`.
+
+This is the comparison between the right derived functors of `f_*` inside `X.Modules` and the
+`Ext`-groups in abelian sheaves of `AlgebraicGeometry.Scheme.Modules.H`. It holds because
+injective `𝒪_X`-modules are flasque, the pushforward of a flasque module is flasque, flasque
+sheaves are acyclic for `H`, and, `T` being affine and `R^p f_* ℱ` quasi-coherent, the global
+sections functor of `T` is exact on them [Stacks, Tags 01XJ and 0BDY]. -/
+theorem exists_addEquiv_sections_higherDirectImage_H [IsAffine T] [QuasiCompact f]
+    [IsSeparated f] [HasInjectiveResolutions X.Modules] (q : ℕ) :
+    ∃ e : ∀ (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ],
+        Γ((higherDirectImage f q).obj ℱ, ⊤) ≃+ ℱ.H q,
+      ∀ (ℱ 𝒢 : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+        [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) 𝒢] (φ : ℱ ⟶ 𝒢)
+        (x : Γ((higherDirectImage f q).obj ℱ, ⊤)),
+        e 𝒢 (((higherDirectImage f q).map φ).app ⊤ x) = H.map φ q (e ℱ x) :=
+  sorry
+
 /-- **The sections of the higher direct images over an affine base, linearly.** Over an affine
 base the global sections of the `q`-th higher direct image are the sheaf cohomology of `ℱ`,
 `Γ(T, R^q f_* ℱ) ≅ H^q(X, ℱ)`, by an isomorphism which is linear along `f^♯ : Γ(T, ⊤) → Γ(X, ⊤)`.
 
 This is the comparison between the two cohomology theories used in the Picard-framework block:
 the right derived functors of `f_*` inside `X.Modules` on the one hand, and the `Ext`-groups in
-abelian sheaves of `AlgebraicGeometry.Scheme.Modules.H` on the other. It holds because
-injective objects of `X.Modules` are `Γ`-acyclic, and the comparison is natural in `ℱ`, hence
-compatible with multiplication by global functions of `T`. Over `T = Spec κ` for a field `κ`, this
-is the identification of the `q`-th direct image to a point with `H^q` as `κ`-vector spaces, used
-in the local model of the proof of `thm-pc-semicontinuity-base-change`. -/
+abelian sheaves of `AlgebraicGeometry.Scheme.Modules.H` on the other. The additive comparison
+is `AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H`; being natural
+in `ℱ`, it is compatible with multiplication by global functions of `T`, which `R^q f_*` turns
+into multiplication by their images in `Γ(X, ⊤)`
+(`AlgebraicGeometry.Scheme.Modules.higherDirectImage_map_smulHom`).
+
+Over `T = Spec κ` for a field `κ`, this is the identification of the `q`-th direct image to a
+point with `H^q` as `κ`-vector spaces, used in the local model of the proof of
+`thm-pc-semicontinuity-base-change`. -/
 theorem exists_bijective_semilinearMap_sections_higherDirectImage_H [IsAffine T] [QuasiCompact f]
     [IsSeparated f] [HasInjectiveResolutions X.Modules]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
-    ∃ e : Γ((higherDirectImage f q).obj ℱ, ⊤) →ₛₗ[f.appTop.hom] ℱ.H q, Function.Bijective e :=
-  sorry
+    ∃ e : Γ((higherDirectImage f q).obj ℱ, ⊤) →ₛₗ[f.appTop.hom] ℱ.H q, Function.Bijective e := by
+  obtain ⟨e, he⟩ := exists_addEquiv_sections_higherDirectImage_H f q
+  refine ⟨{ toFun := e ℱ, map_add' := map_add _, map_smul' := fun a x ↦ ?_ }, (e ℱ).bijective⟩
+  have h : a • x = ((higherDirectImage f q).map (ℱ.smulHom (f.appTop a))).app ⊤ x := by
+    rw [higherDirectImage_map_smulHom, smulHom_app_apply]
+    congr 1
+    exact (congrArg (fun φ ↦ φ a) (T.presheaf.map_id _)).symm
+  rw [h, he]
+  rfl
 
 /-- Over an affine base the global sections of the `q`-th higher direct image are the sheaf
 cohomology of `ℱ`: `Γ(T, R^q f_* ℱ) ≅ H^q(X, ℱ)`. See
@@ -617,6 +674,43 @@ theorem isFinitePresentation_higherDirectImage [IsLocallyNoetherian T]
   exact (iSup_congr fun V ↦ IsAffineOpen.opensRange_fromSpec V.2).trans
     (iSup_affineOpens_eq_top T)
 
+omit [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
+  [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation] in
+/-- A point `s` of an open `U` of `T` lifts to a morphism `Spec κ(s) ⟶ U`. -/
+lemma exists_comp_ι_eq_fromSpecResidueField {U : T.Opens} {s : T} (hs : s ∈ U) :
+    ∃ g : Spec (T.residueField s) ⟶ U.toScheme, g ≫ U.ι = T.fromSpecResidueField s := by
+  have hrange : Set.range (T.fromSpecResidueField s).base ⊆ Set.range U.ι.base := by
+    rw [Scheme.Opens.range_ι, Scheme.range_fromSpecResidueField]
+    simpa using hs
+  exact ⟨IsOpenImmersion.lift U.ι (T.fromSpecResidueField s) hrange,
+    IsOpenImmersion.lift_fac _ _ _⟩
+
+omit [LocallyOfFinitePresentation f] [HasInjectiveResolutions X.Modules] in
+/-- At a point `s` of an open `U` of the base over which `R f_* ℱ` is computed by a complex `P`
+compatibly with base change, the fibre dimension `h^q(s)` is the dimension of the cohomology of
+the fibre `P ⊗ κ(s)` of `P`. -/
+theorem hFiber_eq_finrank_homology {U : T.Opens} {P : CochainComplex U.toScheme.Modules ℤ}
+    (hbc : ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
+        [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
+        Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
+          (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)))
+    {s : T} (g : Spec (T.residueField s) ⟶ U.toScheme) (hg : g ≫ U.ι = T.fromSpecResidueField s)
+    (q : ℕ) :
+    ℱ.hFiber f q s =
+      Module.finrank (T.residueField s) ((moduleSpecΓFunctor (R := T.residueField s)).obj
+        ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q)) := by
+  have := isGrothendieckAbelian (f.fiber s)
+  have sq : IsPullback (f.fiberι s) (f.fiberToSpecResidueField s) f (g ≫ U.ι) := by
+    rw [hg]
+    exact IsPullback.of_hasPullback _ _
+  obtain ⟨e⟩ := hbc g _ _ sq q
+  rw [hFiber_eq_finrank_sections_higherDirectImage f ℱ s q,
+    ← (appLinearEquivOfIso e ⊤).finrank_eq]
+  have h := finrank_eq_of_coe_eq
+    ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q) ⊤ ⊤ rfl
+  rw [finrank_top, finrank_top] at h
+  exact h.symm
+
 /-- **Semicontinuity of the fibre dimension.** With `f : X ⟶ T` proper of finite presentation
 and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the fibre dimension
 `t ↦ dim_{κ(t)} H^q(X_t, ℱ_t)` is upper semicontinuous on `T`.
@@ -640,24 +734,9 @@ theorem upperSemicontinuous_hFiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) :
   have key (s : T) (hs : s ∈ U) : ∃ g : Spec (T.residueField s) ⟶ U.toScheme,
       g ≫ U.ι = T.fromSpecResidueField s ∧ ℱ.hFiber f q s =
         Module.finrank (T.residueField s) ((moduleSpecΓFunctor (R := T.residueField s)).obj
-          ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q)) := by
-    have hrange : Set.range (T.fromSpecResidueField s).base ⊆ Set.range U.ι.base := by
-      rw [Scheme.Opens.range_ι, Scheme.range_fromSpecResidueField]
-      simpa using hs
-    let g := IsOpenImmersion.lift U.ι (T.fromSpecResidueField s) hrange
-    have hg : g ≫ U.ι = T.fromSpecResidueField s := IsOpenImmersion.lift_fac _ _ _
-    refine ⟨g, hg, ?_⟩
-    have := isGrothendieckAbelian (f.fiber s)
-    have sq : IsPullback (f.fiberι s) (f.fiberToSpecResidueField s) f (g ≫ U.ι) := by
-      rw [hg]
-      exact IsPullback.of_hasPullback _ _
-    obtain ⟨e⟩ := hbc g _ _ sq q
-    rw [hFiber_eq_finrank_sections_higherDirectImage f ℱ s q,
-      ← (appLinearEquivOfIso e ⊤).finrank_eq]
-    have h := finrank_eq_of_coe_eq
-      ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q) ⊤ ⊤ rfl
-    rw [finrank_top, finrank_top] at h
-    exact h.symm
+          ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q)) :=
+    have ⟨g, hg⟩ := exists_comp_ι_eq_fromSpecResidueField hs
+    ⟨g, hg, hFiber_eq_finrank_homology f ℱ hbc g hg q⟩
   obtain ⟨g, hg, hgt⟩ := key t htU
   obtain ⟨V, hV, hle⟩ := exists_finrank_homology_pullback_le hP.exists_iso_free q
     (Field.toIsField _) g
@@ -787,6 +866,7 @@ theorem isOpen_perfectLocus (hℱ : ℱ.IsFlatOver f) (i : ℕ) : IsOpen (ℱ.pe
   simp only [Set.mem_iUnion, Set.mem_ofPred_eq]
   exact ⟨fun ht ↦ ⟨_, ht, le_rfl⟩, fun ⟨_, ht, _⟩ ↦ ht⟩
 
+omit [LocallyOfFinitePresentation f] [HasInjectiveResolutions X.Modules] in
 /-- **The fibre dimension is invariant under base change.** Let `f' : X' ⟶ T'` and `g' : X' ⟶ X`
 be the base change of `f` along `g : T' ⟶ T`, in the cartesian square `sq`
 ```
@@ -803,9 +883,44 @@ and let `ℱ'` be the pullback of `ℱ` to `X'`. Then `h^q_{ℱ'}(t') = h^q_ℱ(
 (blueprint: `sk-thm-picard-perfect`) -/
 theorem hFiber_pullback_of_isPullback {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X)
     (f' : X' ⟶ T') (sq : IsPullback g' f' f g) (q : ℕ) (t' : T') :
-    ((Modules.pullback g').obj ℱ).hFiber f' q t' = ℱ.hFiber f q (g.base t') :=
-  sorry
+    ((Modules.pullback g').obj ℱ).hFiber f' q t' = ℱ.hFiber f q (g.base t') := by
+  let K := T.residueField (g.base t')
+  let L := T'.residueField t'
+  let : Algebra K L := (g.residueFieldMap t').hom.toAlgebra
+  have hsq := isPullback_fiberToSpecResidueField_of_isPullback sq t'
+  let := f.fiberOverSpecResidueField (g.base t')
+  let := f'.fiberOverSpecResidueField t'
+  have : QuasiCompact (f.fiber (g.base t') ↘ Spec (.of K)) := by
+    change QuasiCompact (f.fiberToSpecResidueField _)
+    unfold Scheme.Hom.fiberToSpecResidueField
+    infer_instance
+  have : QuasiSeparated (f.fiber (g.base t') ↘ Spec (.of K)) := by
+    change QuasiSeparated (f.fiberToSpecResidueField _)
+    unfold Scheme.Hom.fiberToSpecResidueField
+    infer_instance
+  have h := Modules.finrankH_pullback (k := K) L ((Modules.pullback (f.fiberι (g.base t'))).obj ℱ) q
+  let φ := Spec.map (CommRingCat.ofHom (algebraMap K L))
+  have hsq' : IsPullback (pullback.map f' (T'.fromSpecResidueField t') f
+      (T.fromSpecResidueField (g.base t')) g' (Spec.map (g.residueFieldMap t')) g
+      (by simp [sq.w]) (Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField g t').symm)
+      (f'.fiberToSpecResidueField t') (f.fiber (g.base t') ↘ Spec (.of K)) φ := hsq
+  let e : f'.fiber t' ≅ Limits.pullback (f.fiber (g.base t') ↘ Spec (.of K)) φ :=
+    hsq'.isoPullback
+  have : e.hom.IsOver (Spec (.of L)) := by
+    rw [Scheme.Hom.isOver_iff]
+    exact hsq'.isoPullback_hom_snd
+  have hcomp : f'.fiberι t' ≫ g' =
+      e.hom ≫ pullback.fst _ _ ≫ f.fiberι (g.base t') := by
+    rw [← Category.assoc, hsq'.isoPullback_hom_fst]
+    simp [Scheme.Hom.fiberι]
+  change ((Modules.pullback (f'.fiberι t')).obj ((Modules.pullback g').obj ℱ)).finrankH L q =
+    ((Modules.pullback (f.fiberι (g.base t'))).obj ℱ).finrankH K q
+  rw [← h, ← finrankH_pullback_of_isIso (k := L) e.hom]
+  exact finrankH_congr _ ((pullbackComp _ _).app ℱ ≪≫ (pullbackCongr hcomp).app ℱ ≪≫
+    ((pullbackComp _ _).app ℱ).symm ≪≫ (Modules.pullback e.hom).mapIso
+      ((pullbackComp _ _).app ℱ).symm) q
 
+omit [LocallyOfFinitePresentation f] [HasInjectiveResolutions X.Modules] in
 /-- **The fibre Euler characteristic is invariant under base change**, in the situation of
 `AlgebraicGeometry.Scheme.Modules.hFiber_pullback_of_isPullback`. -/
 theorem eulerCharFiber_pullback_of_isPullback {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X)
@@ -825,8 +940,63 @@ of its cohomology.
 
 (blueprint: `sk-thm-picard-perfect`) -/
 theorem isLocallyConstant_eulerCharFiber (hℱ : ℱ.IsFlatOver f) :
-    IsLocallyConstant (ℱ.eulerCharFiber f) :=
-  sorry
+    IsLocallyConstant (ℱ.eulerCharFiber f) := by
+  rw [IsLocallyConstant.iff_eventually_eq]
+  intro t
+  obtain ⟨U, P, d, htU, hP, hbc⟩ := exists_isFiniteFreeComplex_higherDirectImage f ℱ hℱ t
+  choose r e using hP.exists_iso_free
+  let e' n := (e n).some
+  suffices h : ∀ s ∈ U, ℱ.eulerCharFiber f s =
+      ∑ q ∈ Finset.range (d + 1), (-1) ^ q * (r q : ℤ) by
+    filter_upwards [U.isOpen.mem_nhds htU] with s hs
+    rw [h s hs, h t htU]
+  intro s hs
+  -- the fibre dimension in each degree, through the fibre `P ⊗ κ(s)`
+  obtain ⟨g, hg⟩ := exists_comp_ι_eq_fromSpecResidueField hs
+  have hh := hFiber_eq_finrank_homology f ℱ hbc g hg
+  have hκ : IsField (T.residueField s) := Field.toIsField _
+  have hf := finrank_homology_pullback_add_rank_add_rank e' hκ g
+  let a : ℤ → ℕ := fun n ↦
+    ((freeMatrix ((e' n).inv ≫ P.d n (n + 1) ≫ (e' (n + 1)).hom)).map g.appTop).rank
+  have ha (n m : ℤ) (h : n + 1 = m) : a n =
+      ((freeMatrix ((e' n).inv ≫ P.d n m ≫ (e' m).hom)).map g.appTop).rank := by
+    subst h
+    rfl
+  have hq (q : ℕ) : (ℱ.hFiber f q s : ℤ) = r q - a q - a (q - 1) := by
+    have := hf q
+    rw [← ha (q - 1) q (by omega)] at this
+    change _ + a q + _ = _ at this
+    rw [hh q]
+    omega
+  have hzero (n : ℤ) (hn : IsZero (P.X n) ∨ IsZero (P.X (n + 1))) : a n = 0 := by
+    have : P.d n (n + 1) = 0 := hn.elim (fun h ↦ h.eq_of_src _ _) (fun h ↦ h.eq_of_tgt _ _)
+    simp [a, this, freeMatrix_zero]
+  have hP₀ := hP.isStrictlyGE
+  have hP₁ := hP.isStrictlyLE
+  have ha₀ : a (-1) = 0 := hzero _ (.inl (P.isZero_of_isStrictlyGE 0 (-1) (by omega)))
+  have ha₁ : a d = 0 := hzero _ (.inr (P.isZero_of_isStrictlyLE d (d + 1) (by omega)))
+  have hvan (q : ℕ) (hq : d < q) : ℱ.hFiber f q s = 0 := by
+    rw [hh q]
+    have hX : IsZero (((Modules.pullback g).mapHomologicalComplex _).obj P |>.X q) :=
+      (Modules.pullback g).map_isZero (P.isZero_of_isStrictlyLE d q (by omega))
+    have hH : IsZero ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q) :=
+      ShortComplex.isZero_homology_of_isZero_X₂ _ hX
+    have := ModuleCat.subsingleton_of_isZero
+      ((moduleSpecΓFunctor (R := T.residueField s)).map_isZero hH)
+    exact Module.finrank_zero_of_subsingleton
+  rw [eulerCharFiber, finsum_eq_sum_of_support_subset (s := Finset.range (d + 1))]
+  · have := Finset.sum_range_neg_one_pow_mul_add_sub_one (fun n ↦ (a n : ℤ)) d
+    simp only [ha₀, ha₁, Nat.cast_zero, mul_zero, zero_add] at this
+    rw [← sub_zero (∑ q ∈ Finset.range (d + 1), (-1) ^ q * (r q : ℤ)), ← this,
+      ← Finset.sum_sub_distrib]
+    refine Finset.sum_congr rfl fun q _ ↦ ?_
+    rw [hq]
+    ring
+  · intro q hq
+    simp only [Function.mem_support, ne_eq, mul_eq_zero, not_or] at hq
+    simp only [Finset.coe_range, Set.mem_Iio]
+    by_contra h
+    exact hq.2 (by rw [hvan q (by omega)]; simp)
 
 /-- **The fibre dimension is locally constant on the perfect locus.** On the perfect locus `U_i`
 the fibre dimension `t ↦ dim_{κ(t)} H^i(X_t, ℱ_t)` is locally constant: there it equals
@@ -868,6 +1038,97 @@ theorem isOpen_setOf_hFiber_eq (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
     IsOpen {t : T | (∀ q ≠ i, ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r} :=
   isOpen_perfectLocusOfRank f ℱ hℱ i r
 
+omit [LocallyOfFinitePresentation f] [HasInjectiveResolutions X.Modules] in
+/-- At a point `s` of an open `U` of the base over which `R f_* ℱ` is computed by a bounded
+complex `P` of finite free modules compatibly with base change, the fibre `P ⊗ κ(s)` is a finite
+locally free module of rank `r` placed in degree `i` if and only if `s` lies in the rank-`r`
+perfect locus `U_{i,r}`. -/
+theorem isFiniteLocallyFreeInDegree_homology_pullback_iff {U : T.Opens}
+    {P : CochainComplex U.toScheme.Modules ℤ} {d : ℕ} (hP : IsFiniteFreeComplex P d)
+    (hbc : ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
+        [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
+        Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
+          (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)))
+    {s : T} (g : Spec (T.residueField s) ⟶ U.toScheme) (hg : g ≫ U.ι = T.fromSpecResidueField s)
+    (i r : ℕ) :
+    IsFiniteLocallyFreeInDegree
+        (fun q : ℕ ↦ (((Modules.pullback g).mapHomologicalComplex _).obj P).homology q) i r ↔
+      s ∈ ℱ.perfectLocusOfRank f i r := by
+  have hκ : IsField (T.residueField s) := Field.toIsField _
+  have (q : ℕ) := finite_moduleSpecΓFunctor_obj_homology_pullback hP.exists_iso_free hκ g q
+  simp only [mem_perfectLocusOfRank, mem_perfectLocus, hFiber_eq_finrank_homology f ℱ hbc g hg]
+  refine ⟨fun ⟨hz, hl⟩ ↦ ⟨fun q hq ↦ (isZero_iff_finrank_moduleSpecΓFunctor_obj_eq_zero hκ _).1
+      (hz q hq), (isFiniteLocallyFreeOfRank_iff_finrank_moduleSpecΓFunctor_obj hκ _ r).1 hl⟩,
+    fun ⟨hz, hl⟩ ↦ ⟨fun q hq ↦ (isZero_iff_finrank_moduleSpecΓFunctor_obj_eq_zero hκ _).2
+      (hz q hq), (isFiniteLocallyFreeOfRank_iff_finrank_moduleSpecΓFunctor_obj hκ _ r).2 hl⟩⟩
+
+omit [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
+  [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation] in
+/-- In the situation of `isFiniteLocallyFreeInDegree_homology_pullback_iff`, let `f' : X' ⟶ T'`
+be the base change of `f` along `g : T' ⟶ T`, and `V` an open of `T'` which `g` maps into `U`.
+Then the restriction of `R^q f'_* ℱ'` to `V` is the cohomology of the pullback of `P` to `V`. -/
+theorem nonempty_restrict_higherDirectImage_iso_homology {U : T.Opens}
+    {P : CochainComplex U.toScheme.Modules ℤ}
+    (hbc : ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
+        [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
+        Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
+          (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)))
+    {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
+    [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g) (V : T'.Opens)
+    (gV : V.toScheme ⟶ U.toScheme) (hgV : gV ≫ U.ι = V.ι ≫ g) (q : ℕ) :
+    Nonempty (((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)).restrict V.ι ≅
+      (((Modules.pullback gV).mapHomologicalComplex _).obj P).homology q) := by
+  have := isGrothendieckAbelian (f' ⁻¹ᵁ V).toScheme
+  have sq' : IsPullback (f' ⁻¹ᵁ V).ι (f' ∣_ V) f' V.ι := (isPullback_morphismRestrict f' V).flip
+  obtain ⟨e₁⟩ := nonempty_higherDirectImage_iso_restrict f' ((Modules.pullback g').obj ℱ) V.ι _ _
+    sq' q
+  have sq'' : IsPullback ((f' ⁻¹ᵁ V).ι ≫ g') (f' ∣_ V) f (gV ≫ U.ι) := by
+    rw [hgV]
+    exact sq'.paste_horiz sq
+  obtain ⟨e₂⟩ := hbc gV _ _ sq'' q
+  exact ⟨e₁.symm ≪≫ (higherDirectImage (f' ∣_ V) q).mapIso
+    ((Modules.pullbackComp _ _).app ℱ) ≪≫ e₂.symm⟩
+
+/-- **`R f'_* ℱ'` is locally finite locally free in one degree over `U_{i,r}`.** Let `f' : X' ⟶ T'`
+be the base change of `f` along `g : T' ⟶ T`, and `t'` a point of `T'` mapped into the rank-`r`
+perfect locus `U_{i,r}`. Then `t'` has an open neighbourhood `V` over which `R f'_* ℱ'` is a finite
+locally free module of rank `r` placed in degree `i`. -/
+theorem exists_mem_isFiniteLocallyFreeInDegree_restrict (hℱ : ℱ.IsFlatOver f) {i r : ℕ}
+    {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
+    [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g) (t' : T')
+    (ht' : g.base t' ∈ ℱ.perfectLocusOfRank f i r) :
+    ∃ V : T'.Opens, t' ∈ V ∧ IsFiniteLocallyFreeInDegree
+      (fun q ↦ ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)).restrict V.ι) i r := by
+  obtain ⟨U, P, d, hsU, hP, hbc⟩ := exists_isFiniteFreeComplex_higherDirectImage f ℱ hℱ (g.base t')
+  obtain ⟨UP, hUP⟩ := hP.exists_opens_range_subset_iff i r
+  obtain ⟨gs, hgs⟩ := exists_comp_ι_eq_fromSpecResidueField hsU
+  have hs : Set.range gs.base ⊆ UP :=
+    (hUP gs).2 ((isFiniteLocallyFreeInDegree_homology_pullback_iff f ℱ hP hbc gs hgs i r).2 ht')
+  obtain ⟨x⟩ : Nonempty (Spec (T.residueField (g.base t'))) := inferInstance
+  have hx : U.ι.base (gs.base x) = g.base t' := by
+    rw [← Scheme.Hom.comp_apply, hgs]
+    exact (Scheme.range_fromSpecResidueField (g.base t')).subset ⟨x, rfl⟩
+  let V := g ⁻¹ᵁ (U.ι ''ᵁ UP)
+  have hV : t' ∈ V := ⟨gs.base x, hs ⟨x, rfl⟩, hx⟩
+  have hgV : Set.range (V.ι ≫ g).base ⊆ Set.range U.ι.base := by
+    rintro _ ⟨w, rfl⟩
+    obtain ⟨u, -, hu⟩ := w.2
+    exact ⟨u, by simpa using hu⟩
+  let gV := IsOpenImmersion.lift U.ι (V.ι ≫ g) hgV
+  have hgV' : gV ≫ U.ι = V.ι ≫ g := IsOpenImmersion.lift_fac _ _ _
+  have hrange : Set.range gV.base ⊆ UP := by
+    rintro _ ⟨w, rfl⟩
+    obtain ⟨u, hu, hu'⟩ := w.2
+    have : U.ι.base (gV.base w) = U.ι.base u := by
+      rw [← Scheme.Hom.comp_apply, hgV', Scheme.Hom.comp_apply]
+      exact hu'.symm
+    rwa [U.ι.isOpenEmbedding.injective this]
+  have h := (hUP gV).1 hrange
+  have e q := (nonempty_restrict_higherDirectImage_iso_homology f ℱ hbc g g' f' sq V gV hgV' q).some
+  exact ⟨V, hV, fun q hq ↦ (h.isZero q hq).of_iso (e q),
+    have := h.isFiniteLocallyFreeOfRank
+    SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso (e i).symm⟩
+
 /-- **Vanishing off degree `i` after base change to the perfect locus.** Let `g : T' ⟶ T` have
 image in the perfect locus `U_i`, and let `f' : X' ⟶ T'` and `g' : X' ⟶ X` be the base change of
 `f` along `g`, in the cartesian square `sq`
@@ -891,8 +1152,11 @@ theorem isZero_higherDirectImage_of_isPullback (hℱ : ℱ.IsFlatOver f) {i : �
     {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
     (hg : Set.range g.base ⊆ ℱ.perfectLocus f i) {q : ℕ} (hq : q ≠ i) :
-    IsZero ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) :=
-  sorry
+    IsZero ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) := by
+  choose V hV h using fun t' ↦ exists_mem_isFiniteLocallyFreeInDegree_restrict f ℱ hℱ g g' f' sq
+    t' (r := ℱ.hFiber f i (g.base t')) ⟨hg ⟨t', rfl⟩, rfl⟩
+  exact isZero_of_iSup_eq_top _ V (eq_top_iff.2 fun t' _ ↦
+    TopologicalSpace.Opens.mem_iSup.2 ⟨t', hV t'⟩) fun t' ↦ (h t').isZero q hq
 
 /-- **The higher direct images vanish off degree `i` over the perfect locus.** Over an open
 subscheme `U` of `T` contained in the rank-`r` perfect locus `U_{i,r}`, the higher direct images
@@ -946,8 +1210,11 @@ theorem isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback (hℱ : ℱ.Is
     {i r : ℕ} {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
     (hg : Set.range g.base ⊆ ℱ.perfectLocusOfRank f i r) :
-    ((higherDirectImage f' i).obj ((Modules.pullback g').obj ℱ)).IsFiniteLocallyFreeOfRank r :=
-  sorry
+    ((higherDirectImage f' i).obj ((Modules.pullback g').obj ℱ)).IsFiniteLocallyFreeOfRank r := by
+  choose V hV h using fun t' ↦ exists_mem_isFiniteLocallyFreeInDegree_restrict f ℱ hℱ g g' f' sq
+    t' (hg ⟨t', rfl⟩)
+  exact isFiniteLocallyFreeOfRank_of_iSup_eq_top _ V (eq_top_iff.2 fun t' _ ↦
+    TopologicalSpace.Opens.mem_iSup.2 ⟨t', hV t'⟩) fun t' ↦ (h t').isFiniteLocallyFreeOfRank
 
 /-- **The `i`-th higher direct image is finite locally free over the perfect locus.** Over an
 open subscheme `U` of `T` contained in the rank-`r` perfect locus `U_{i,r}`, the higher direct
@@ -995,8 +1262,31 @@ theorem range_subset_perfectLocusOfRank_of_isPullback (hℱ : ℱ.IsFlatOver f) 
     (h₀ : ∀ q ≠ i, IsZero ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)))
     (h₁ : ((higherDirectImage f' i).obj ((Modules.pullback g').obj ℱ)).IsFiniteLocallyFreeOfRank
       r) :
-    Set.range g.base ⊆ ℱ.perfectLocusOfRank f i r :=
-  sorry
+    Set.range g.base ⊆ ℱ.perfectLocusOfRank f i r := by
+  rintro _ ⟨t', rfl⟩
+  obtain ⟨U, P, d, hsU, hP, hbc⟩ := exists_isFiniteFreeComplex_higherDirectImage f ℱ hℱ (g.base t')
+  obtain ⟨UP, hUP⟩ := hP.exists_opens_range_subset_iff i r
+  obtain ⟨gs, hgs⟩ := exists_comp_ι_eq_fromSpecResidueField hsU
+  rw [← isFiniteLocallyFreeInDegree_homology_pullback_iff f ℱ hP hbc gs hgs i r]
+  refine (hUP gs).1 ?_
+  -- the base change of `P` to `V = g⁻¹ U` computes `R f'_* ℱ'` there
+  let V := g ⁻¹ᵁ U
+  have hgV : Set.range (V.ι ≫ g).base ⊆ Set.range U.ι.base := by
+    rintro _ ⟨w, rfl⟩
+    exact ⟨⟨_, w.2⟩, rfl⟩
+  let gV := IsOpenImmersion.lift U.ι (V.ι ≫ g) hgV
+  have hgV' : gV ≫ U.ι = V.ι ≫ g := IsOpenImmersion.lift_fac _ _ _
+  have e q := (nonempty_restrict_higherDirectImage_iso_homology f ℱ hbc g g' f' sq V gV hgV' q).some
+  have hV : Set.range gV.base ⊆ UP := (hUP gV).2
+    ⟨fun q hq ↦ ((restrictFunctor V.ι).map_isZero (h₀ q hq)).of_iso (e q).symm,
+      SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso (e i)⟩
+  rintro _ ⟨x, rfl⟩
+  have : gs.base x = gV.base ⟨t', hsU⟩ := by
+    refine U.ι.isOpenEmbedding.injective ?_
+    rw [← Scheme.Hom.comp_apply, hgs, ← Scheme.Hom.comp_apply, hgV']
+    exact (Scheme.range_fromSpecResidueField (g.base t')).subset ⟨x, rfl⟩
+  rw [this]
+  exact hV ⟨_, rfl⟩
 
 /-- **Functorial characterisation of the rank-`r` perfect locus.** In the situation of
 `AlgebraicGeometry.Scheme.Modules.range_subset_perfectLocusOfRank_of_isPullback`, the image of
@@ -1105,5 +1395,51 @@ theorem isQuasicoherent_pushforward_of_isAffineHom (f : X ⟶ T) [IsAffineHom f]
     (isQuasicoherent_higherDirectImage f ℱ 0)
 
 end AffineMorphism
+
+section Finiteness
+
+variable {k : Type u} [Field k] [X.Over (Spec (.of k))]
+
+/-- **Finiteness of coherent cohomology.** On a scheme `X` proper over a field `k`, the
+cohomology groups `H^q(X, ℱ)` of a coherent `𝒪_X`-module `ℱ` are finite-dimensional over `k`.
+Coherence is spelled as quasi-coherence together with finite presentation.
+
+This is the case `T = Spec k` of the finiteness of the higher direct images along a proper
+morphism to a Noetherian affine scheme
+(`AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage`), transported along the
+identification `Γ(Spec k, R^q f_* ℱ) ≅ H^q(X, ℱ)`
+(`AlgebraicGeometry.Scheme.Modules.exists_bijective_semilinearMap_sections_higherDirectImage_H`).
+-/
+@[stacks 02O5]
+theorem finiteDimensional_H_of_isProper [IsProper (X ↘ Spec (.of k))] (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] (q : ℕ) :
+    FiniteDimensional k (ℱ.H q) := by
+  classical
+  have := isGrothendieckAbelian X
+  have : IsNoetherianRing Γ(Spec (.of k), ⊤) :=
+    isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso (.of k)).commRingCatIsoToRingEquiv.symm
+  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H
+    (X ↘ Spec (.of k)) ℱ q
+  obtain ⟨s, hs⟩ := (finite_sections_higherDirectImage (X ↘ Spec (.of k)) ℱ q).fg_top
+  have key (x) (hx : x ∈ Submodule.span Γ(Spec (.of k), ⊤) (s : Set _)) :
+      e x ∈ Submodule.span k (e '' s) := by
+    induction hx using Submodule.span_induction with
+    | mem x hx => exact Submodule.subset_span ⟨x, hx, rfl⟩
+    | zero => simp
+    | add x y _ _ hx hy => simpa using add_mem hx hy
+    | smul a x _ hx =>
+      obtain ⟨c, rfl⟩ := (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of k)).inv).2 a
+      have hc : c • e x = e ((Scheme.ΓSpecIso (.of k)).inv c • x) := by
+        rw [smul_H_eq_globalSectionsRingHom_smul, e.map_smulₛₗ]
+        rfl
+      rw [← hc]
+      exact Submodule.smul_mem _ c hx
+  refine ⟨⟨s.image e, eq_top_iff.2 fun y _ ↦ ?_⟩⟩
+  obtain ⟨x, rfl⟩ := he.2 y
+  rw [Finset.coe_image]
+  exact key x (hs ▸ Submodule.mem_top)
+
+end Finiteness
 
 end AlgebraicGeometry.Scheme.Modules

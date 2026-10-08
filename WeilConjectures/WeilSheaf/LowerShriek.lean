@@ -120,6 +120,16 @@ theorem WeilComplex.objectProperty_rightDerivedLowerShriek (f : X ⟶ Y)
     WeilComplex.objectProperty k₀ l Y ((ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f
       (HasCompactification.compactification f)).obj K) := by
   let c := HasCompactification.compactification f
+  -- `c.Z` is noetherian, being proper over the noetherian `Y`; so the open immersion `c.i` is
+  -- quasi-compact.
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
+  have : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (CommRingCat.of k₀))
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  have : IsNoetherian c.Z := ⟨⟩
+  have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
   have hK' : WeilComplex.objectProperty k₀ l c.Z
       ((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategory.obj K) :=
     ⟨(ProEtaleWeilSheaf.extensionByZero k₀ l c.i).bounded_mapDerivedCategory_obj hK.1,

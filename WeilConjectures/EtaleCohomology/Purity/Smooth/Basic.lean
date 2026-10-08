@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Compactification.BaseChange
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
@@ -147,14 +147,6 @@ theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek {X' Y' : 
 section Twist
 
 variable (X) in
-/-- The twist-and-shift of the constant complex is the shifted twisting object:
-`Λ_X(m)[2m] = (Λ_X ⊗ Λ_X(m))[2m] ≅ Λ_X(m)[2m]`, by the left unitor
-(`AlgebraicGeometry.Etale.derivedTensorLeftUnitor`). -/
-noncomputable def twistShiftConstantComplexIso (m : ℤ) :
-    (twistShift Λ X m).obj (constantComplex Λ X) ≅ (tateObject Λ X m)⟦2 * m⟧ :=
-  (shiftFunctor _ (2 * m)).mapIso (derivedTensorLeftUnitor _ X (tateObject Λ X m))
-
-variable (X) in
 /-- Blueprint `def-coefficient-twists-detailed`: the twist reassociation
 
 `M(m)[2m] = (M ⊗ Λ_X(m))[2m] ≅ M ⊗ Λ_X(m)[2m]`,
@@ -169,23 +161,6 @@ noncomputable def twistShiftObjIso (m : ℤ)
   ((((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).commShiftIso (2 * m)).app
       (tateObject Λ X m)).symm ≪≫
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).mapIso (twistShiftConstantComplexIso Λ X m).symm
-
-/-- Blueprint `def-coefficient-twists-detailed`: the twist-and-shift commutes with pullback,
-
-`Lg^*(M(m)[2m]) ≅ (Lg^* M)(m)[2m]`,
-
-through the shift compatibility of `Lg^*`, its monoidal structure and the identification
-`Lg^* Λ_X(m) ≅ Λ_{X'}(m)` of the Tate twist datum. -/
-noncomputable def leftDerivedUpperStarTwistShiftIso {X' : Scheme.{u}} (g : X' ⟶ X) (m : ℤ)
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (L((g)^*[ModuleCat.{u + 1} Λ])).obj ((twistShift Λ X m).obj M) ≅
-      (twistShift Λ X' m).obj ((L((g)^*[ModuleCat.{u + 1} Λ])).obj M) :=
-  ((L((g)^*[ModuleCat.{u + 1} Λ])).commShiftIso (2 * m)).app _ ≪≫
-    (shiftFunctor _ (2 * m)).mapIso
-      (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) g M (tateObject Λ X m) ≪≫
-        ((derivedTensor (ModuleCat.{u + 1} Λ) X').obj
-          ((L((g)^*[ModuleCat.{u + 1} Λ])).obj M)).mapIso (leftDerivedUpperStarTateObjectIso g m))
-
 end Twist
 
 /-! ### The diagonal -/
@@ -242,27 +217,30 @@ theorem nonempty_iso_sectionInvariant_diagonal :
 
 /-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
 
-*Step 3, the standard pair.* For the projection `π : 𝔸(n; B) ⟶ B` of a trivial vector bundle
-of rank `c = #n` with zero section `0`, the section invariant is the Tate twist:
+*Step 3, the standard pair.* For the projection `π : 𝔸^c_B ⟶ B` of a trivial vector bundle of
+rank `c` with zero section `0`, over a separated scheme of finite type over a field, the
+section invariant is the Tate twist:
 
 `𝒞(π, 0) = L0^* ω_π ≅ L0^* Λ(c)[2c] ≅ Λ_B(c)[2c]`,
 
-by vector-bundle purity
-(`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`) and the compatibility
-of the twist with pullback. -/
-theorem nonempty_iso_sectionInvariant_affineSpace (n : Type u) [Finite n] (B : Scheme.{u})
+by affine-space purity (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`)
+and the compatibility of the twist with pullback. -/
+theorem nonempty_iso_sectionInvariant_affineSpace {k : Type u} [Field k] (c : ℕ)
+    (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
     [HasInvertibleExponent Λ B] :
-    Nonempty (sectionInvariant Λ (𝔸(n; B) ↘ B) (AffineSpace.zeroSection n B) ≅
-      (twistShift Λ B (Nat.card n)).obj (constantComplex Λ B)) := by
-  obtain ⟨e⟩ := nonempty_iso_dualizingComplex_affineSpace Λ n B
-  exact ⟨(L((AffineSpace.zeroSection n B)^*[ModuleCat.{u + 1} Λ])).mapIso
+    Nonempty (sectionInvariant Λ (𝔸(ULift.{u} (Fin c); B) ↘ B)
+        (AffineSpace.zeroSection (ULift.{u} (Fin c)) B) ≅
+      (twistShift Λ B c).obj (constantComplex Λ B)) := by
+  obtain ⟨e⟩ := nonempty_iso_dualizingComplex_affineSpace Λ c B aB
+  exact ⟨(L((AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^*[ModuleCat.{u + 1} Λ])).mapIso
       (e ≪≫ twistShiftConstantComplexIso Λ _ _) ≪≫
     leftDerivedUpperStarTateShiftIso Λ _ _ ≪≫ (twistShiftConstantComplexIso Λ B _).symm⟩
 
 /-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
 
 **Smooth purity, finite coefficients.** For `f : X ⟶ Y` smooth separated of pure relative
-dimension `d` and a finite coefficient ring `Λ` whose exponent is invertible on `X`,
+dimension `d`, `Y` separated of finite type over a field, and a finite coefficient ring `Λ`
+whose exponent is invertible on `X`,
 
 `ω_f = Rf^! Λ_Y ≅ Λ_X(d)[2d]`,
 
@@ -277,18 +255,23 @@ smooth projection `p₁`.
 2. The deformation to the normal cone (`sk-thm-dnc`,
    `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`) identifies `𝒞(p₁, Δ)`
    with the section invariant of a rank-`d` vector bundle with its zero section.
-3. That section invariant is `Λ_X(d)[2d]` by vector-bundle purity
-   (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`).
+3. That section invariant is `Λ_X(d)[2d]` by affine-space purity
+   (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`), which needs `X` of
+   finite type over the field.
 
 The normal bundle of `Δ` is the relative tangent bundle `T_{X/Y}`, which is étale-locally
 trivial of rank `d` (`sk-lem-diag-reg`). Mathlib has neither vector bundles nor `T_{X/Y}`, so
 the normal cone datum is recorded through `AlgebraicGeometry.Scheme.Hom.NormalConeData`, which
 only asks for a smooth rank-`d` projection with a closed zero section; the trivial bundle
 `𝔸^d_X` is used in step 2, for which step 3 is affine-space purity. -/
-theorem nonempty_iso_dualizingComplex_twistShift :
+theorem nonempty_iso_dualizingComplex_twistShift {k : Type u} [Field k]
+    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
       (twistShift Λ X d).obj (constantComplex Λ X)) := by
-  have hd : Nat.card (ULift.{u} (Fin d)) = d := by simp
+  -- TODO: the normal cone datum of `Δ` should be its normal bundle `T_{X/Y}`, as in blueprint
+  -- `thm-pur-dnc-invariance`, and step 3 vector-bundle purity for it. `NormalConeData` does not
+  -- tie the datum to the immersion, so the trivial bundle `𝔸^d_X` is accepted here; undo this
+  -- shortcut once the datum is pinned down.
   let N : (pullback.diagonal f).NormalConeData d :=
     { scheme := 𝔸(ULift.{u} (Fin d); X)
       proj := 𝔸(ULift.{u} (Fin d); X) ↘ X
@@ -297,13 +280,12 @@ theorem nonempty_iso_dualizingComplex_twistShift :
       isClosedImmersion_zeroSection := inferInstance
       smoothOfRelativeDimension_proj := by
         have := AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin d)) X
-        rwa [hd] at this }
-  have : HasCompactification N.proj := AffineSpace.hasCompactification X
+        rwa [show Nat.card (ULift.{u} (Fin d)) = d by simp] at this }
+  have : HasCompactification N.proj := HasCompactification.affineSpace_over _ X
   obtain ⟨e₁⟩ := nonempty_iso_sectionInvariant_diagonal Λ (d := d) f
   obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_normalCone Λ d (pullback.fst f f)
     (pullback.diagonal f) (pullback.diagonal_fst f) N
-  obtain ⟨e₃⟩ := nonempty_iso_sectionInvariant_affineSpace Λ (ULift.{u} (Fin d)) X
-  rw [hd] at e₃
+  obtain ⟨e₃⟩ := nonempty_iso_sectionInvariant_affineSpace Λ d X (f ≫ aY)
   exact ⟨e₁.symm ≪≫ e₂ ≪≫ e₃⟩
 
 /-! ### The smooth purity map -/
@@ -348,32 +330,15 @@ dimension `d` and every `K ∈ D^b_{ctf}(Y, Λ)`,
 This is also blueprint `thm-pur-finite-coefficient-smooth-purity` and
 `cor-pur-dualizing-object-purity`: the isomorphism is the smooth purity map
 `AlgebraicGeometry.Etale.smoothPurityIso` built from the two identifications. -/
-theorem nonempty_iso_rightDerivedUpperShriek_twistShift
+theorem nonempty_iso_rightDerivedUpperShriek_twistShift {k : Type u} [Field k]
+    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K ≅
       (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
-  obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f
+  obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f aY
   obtain ⟨φ⟩ := nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor Λ (d := d) f K hK
   exact ⟨(smoothPurityIso Λ (d := d) f K θ φ).symm⟩
-
-/-- Blueprint `prop-pur-smooth-purity-naturality-cover`: Naturality and independence of the
-smooth purity map
-
-The smooth purity isomorphism is natural in `K`: for `f` smooth separated of pure relative
-dimension `d`, the functors `K ↦ Lf^* K(d)[2d]` and `K ↦ Rf^! K` on `D^b_{ctf}(Y, Λ)` are
-naturally isomorphic. In the blueprint the natural isomorphism is the smooth purity map
-`γ_{f,-}`, natural because the tensor formula, the twist isomorphisms and the identification
-`ω_f ≅ Λ_X(d)[2d]` are. Here the tensor formula is only available objectwise
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor`), so the
-statement records the existence of a natural isomorphism; independence of choices has no
-content without the canonical maps. -/
-theorem nonempty_iso_twistShift_rightDerivedUpperShriek :
-    Nonempty ((DerivedCategory.boundedConstructibleFiniteTor Λ Y).ι ⋙
-        L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ twistShift Λ X d ≅
-      (DerivedCategory.boundedConstructibleFiniteTor Λ Y).ι ⋙
-        rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f) :=
-  sorry
 
 include d in
 /-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
@@ -390,16 +355,17 @@ relative dimension `e` and `f` relative dimension `d`, all three objects are Tat
 `ω_{g ≫ f} ≅ Λ_W(e + d)[2(e + d)]`, `ω_g ≅ Λ_W(e)[2e]` and `Lg^* ω_f ≅ Λ_W(d)[2d]`, and
 `Λ_W(e)[2e] ⊗ Λ_W(d)[2d] ≅ Λ_W(e + d)[2(e + d)]`
 (`AlgebraicGeometry.Etale.shiftTateObjectAddIso`). -/
-theorem nonempty_iso_dualizingComplex_comp {W : Scheme.{u}} {e : ℕ} (g : W ⟶ X)
+theorem nonempty_iso_dualizingComplex_comp {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k))
+    [IsSeparated aY] [LocallyOfFiniteType aY] {W : Scheme.{u}} {e : ℕ} (g : W ⟶ X)
     [IsSeparated g] [SmoothOfRelativeDimension e g] [HasCompactification g]
     [HasCompactification (g ≫ f)] [HasInvertibleExponent Λ W] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (g ≫ f) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) W).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) g)).obj
         ((L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f))) := by
-  obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := e + d) (g ≫ f)
-  obtain ⟨θg⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := e) g
-  obtain ⟨θf⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f
+  obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := e + d) (g ≫ f) aY
+  obtain ⟨θg⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := e) g (f ≫ aY)
+  obtain ⟨θf⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f aY
   exact ⟨θ ≪≫ twistShiftConstantComplexIso Λ W _ ≪≫ eqToIso (by push_cast; rfl) ≪≫
     (shiftTateObjectAddIso Λ W e d).symm ≪≫
     ((derivedTensor _ W).mapIso (θg ≪≫ twistShiftConstantComplexIso Λ W e).symm).app _ ≪≫
@@ -440,22 +406,31 @@ pullback exchange is the composite
 
 of the inverse of `Lg^* γ_{f,K}`, the base-change identification
 `AlgebraicGeometry.Etale.leftDerivedUpperStarTwistShiftBaseChangeIso` and `γ_{f',Lv^* K}`,
-where `γ` and `γ'` are the smooth purity maps of `f` and of `f'`
-(`AlgebraicGeometry.Etale.smoothPurityIso`). It is distinct from the mate of the
-compact-support base change. -/
+where `γ = smoothPurityIso f K θ φ` and `γ' = smoothPurityIso f' (Lv^* K) θ' φ'` are the smooth
+purity maps of `f` and of `f'` (`AlgebraicGeometry.Etale.smoothPurityIso`), built from the
+identifications `θ, θ'` of the dualizing complexes and the tensor formulas `φ, φ'`. It is
+distinct from the mate of the compact-support base change. -/
 noncomputable def smoothPullbackExchange (sq : IsPullback g f' f v)
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
+    (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+      (twistShift Λ X d).obj (constantComplex Λ X))
+    (φ : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
+          (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K)
-    (γ' : (twistShift Λ X' d).obj ((L((f')^*[ModuleCat.{u + 1} Λ])).obj
-        ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅
+    (θ' : dualizingComplex (ModuleCat.{u + 1} Λ) f' ≅
+      (twistShift Λ X' d).obj (constantComplex Λ X'))
+    (φ' : ((derivedTensor (ModuleCat.{u + 1} Λ) X').obj
+        ((L((f')^*[ModuleCat.{u + 1} Λ])).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K))).obj
+          (dualizingComplex (ModuleCat.{u + 1} Λ) f') ≅
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f').obj
         ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) :
     (L((g)^*[ModuleCat.{u + 1} Λ])).obj ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) ≅
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f').obj
         ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K) :=
-  (L((g)^*[ModuleCat.{u + 1} Λ])).mapIso γ.symm ≪≫
-    leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K ≪≫ γ'
+  (L((g)^*[ModuleCat.{u + 1} Λ])).mapIso (smoothPurityIso Λ f K θ φ).symm ≪≫
+    leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K ≪≫
+      smoothPurityIso Λ f' _ θ' φ'
 
 omit [Finite Λ] [IsSeparated f] [SmoothOfRelativeDimension d f] [HasInvertibleExponent Λ X] in
 /-- Blueprint `thm-pur-smooth-base-change-coherence`: Smooth base-change coherence
@@ -473,14 +448,23 @@ Lf'^* Lv^* K(d)[2d] ──γ_{f',Lv^*K}──▶ Rf'^! Lv^* K
 commutes. -/
 theorem leftDerivedUpperStar_map_comp_smoothPullbackExchange_hom (sq : IsPullback g f' f v)
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
+    (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+      (twistShift Λ X d).obj (constantComplex Λ X))
+    (φ : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
+          (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K)
-    (γ' : (twistShift Λ X' d).obj ((L((f')^*[ModuleCat.{u + 1} Λ])).obj
-        ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅
+    (θ' : dualizingComplex (ModuleCat.{u + 1} Λ) f' ≅
+      (twistShift Λ X' d).obj (constantComplex Λ X'))
+    (φ' : ((derivedTensor (ModuleCat.{u + 1} Λ) X').obj
+        ((L((f')^*[ModuleCat.{u + 1} Λ])).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K))).obj
+          (dualizingComplex (ModuleCat.{u + 1} Λ) f') ≅
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f').obj
         ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) :
-    (L((g)^*[ModuleCat.{u + 1} Λ])).map γ.hom ≫ (smoothPullbackExchange Λ f sq K γ γ').hom =
-      (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K).hom ≫ γ'.hom := by
+    (L((g)^*[ModuleCat.{u + 1} Λ])).map (smoothPurityIso Λ f K θ φ).hom ≫
+        (smoothPullbackExchange Λ f sq K θ φ θ' φ').hom =
+      (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K).hom ≫
+        (smoothPurityIso Λ f' _ θ' φ').hom := by
   simp [smoothPullbackExchange, ← Functor.map_comp_assoc]
 
 end BaseChange

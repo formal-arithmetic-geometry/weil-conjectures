@@ -209,6 +209,38 @@ instance : (Etale.DerivedCategory.boundedConstructible A X).IsStableUnderShift �
 
 variable {A X}
 
+/-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
+
+At a finite coefficient stage, `Dᵇc(X, A)` is stable under the truncation `τ^{≤ n}` of the
+canonical t-structure: the homology sheaves of `τ^{≤ n} K` are those of `K` in degrees `≤ n`,
+and zero above. So the canonical truncations restrict to `Dᵇc(X, A)`. -/
+lemma Etale.DerivedCategory.boundedConstructible_truncLE
+    [PreservesFiniteLimits (CategoryTheory.forget A)]
+    {K : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hK : Etale.DerivedCategory.boundedConstructible A X K) (n : ℤ) :
+    Etale.DerivedCategory.boundedConstructible A X
+      ((DerivedCategory.TStructure.t.truncLE n).obj K) := by
+  obtain ⟨⟨⟨a, ha⟩, -⟩, hc⟩ := hK
+  refine ⟨⟨⟨a, inferInstance⟩, ⟨n, inferInstance⟩⟩, ?_⟩
+  rw [Etale.DerivedCategory.constructibleHomology_eq] at hc ⊢
+  exact DerivedCategory.homologyProperty_truncLE hc n
+
+/-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
+
+At a finite coefficient stage, `Dᵇc(X, A)` is stable under the truncation `τ^{≥ n}` of the
+canonical t-structure: the homology sheaves of `τ^{≥ n} K` are those of `K` in degrees `≥ n`,
+and zero below. -/
+lemma Etale.DerivedCategory.boundedConstructible_truncGE
+    [PreservesFiniteLimits (CategoryTheory.forget A)]
+    {K : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hK : Etale.DerivedCategory.boundedConstructible A X K) (n : ℤ) :
+    Etale.DerivedCategory.boundedConstructible A X
+      ((DerivedCategory.TStructure.t.truncGE n).obj K) := by
+  obtain ⟨⟨-, ⟨b, hb⟩⟩, hc⟩ := hK
+  refine ⟨⟨⟨n, inferInstance⟩, ⟨b, inferInstance⟩⟩, ?_⟩
+  rw [Etale.DerivedCategory.constructibleHomology_eq] at hc ⊢
+  exact DerivedCategory.homologyProperty_truncGE hc n
+
 /-- A constructible sheaf placed in degree `n` is a bounded constructible complex: its only
 nonzero homology sheaf is itself, in degree `n`. -/
 lemma Etale.DerivedCategory.boundedConstructible_singleFunctor_obj

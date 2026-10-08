@@ -44,6 +44,11 @@ of `AlgebraicGeometry.Etale.projectionMapOfCompactification` is an isomorphism, 
   finite Tor amplitude.
 - `AlgebraicGeometry.Etale.isIso_projectionMap_of_finite` : the projection formula at a finite
   coefficient ring, on the whole unbounded derived categories, as an isomorphism of bifunctors.
+- `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite` : its objectwise form, a
+  strengthening of `sk-thm-sf-pf-finite`.
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp_derivedTensorRight`,
+  `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek` : where the
+  projection formula holds, the projection map is a natural isomorphism in either variable.
 - `AlgebraicGeometry.Etale.hasProjectionFormula_id`,
   `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`,
   `AlgebraicGeometry.Etale.hasProjectionFormula_comp`,
@@ -142,6 +147,30 @@ def HasProjectionFormula (f : X ⟶ Y) [HasCompactification f]
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) : Prop :=
   HasProjectionFormulaOfCompactification A (HasCompactification.compactification f) K L
 
+omit [HasSmallSiteSheafify A] in
+/-- If the projection formula holds for `f` at every `K` and a fixed `L`, the projection map is
+a natural isomorphism `Rf_!(-) ⊗ᴸ L ≅ Rf_!(- ⊗ᴸ Lf^* L)` of functors `D(X_ét) ⥤ D(Y_ét)`. -/
+theorem nonempty_iso_rightDerivedLowerShriek_comp_derivedTensorRight (f : X ⟶ Y)
+    [HasCompactification f] (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A))
+    (h : ∀ K, HasProjectionFormula A f K L) :
+    Nonempty (R(f)_![A] ⋙ derivedTensorRight A Y L ≅
+      derivedTensorRight A X ((L((f)^*[A])).obj L) ⋙ R(f)_![A]) :=
+  have : ∀ K, IsIso ((((flipFunctor _ _ _).map (projectionMap A f)).app L).app K) := h
+  have := NatIso.isIso_of_isIso_app (((flipFunctor _ _ _).map (projectionMap A f)).app L)
+  ⟨asIso (((flipFunctor _ _ _).map (projectionMap A f)).app L)⟩
+
+omit [HasSmallSiteSheafify A] in
+/-- If the projection formula holds for `f` at a fixed `K` and every `L`, the projection map is
+a natural isomorphism `Rf_! K ⊗ᴸ - ≅ Rf_!(K ⊗ᴸ Lf^*(-))` of functors `D(Y_ét) ⥤ D(Y_ét)`. -/
+theorem nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek (f : X ⟶ Y)
+    [HasCompactification f] (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (h : ∀ L, HasProjectionFormula A f K L) :
+    Nonempty ((derivedTensor A Y).obj ((R(f)_![A]).obj K) ≅
+      L((f)^*[A]) ⋙ (derivedTensor A X).obj K ⋙ R(f)_![A]) :=
+  have : ∀ L, IsIso (((projectionMap A f).app K).app L) := h
+  have := NatIso.isIso_of_isIso_app ((projectionMap A f).app K)
+  ⟨asIso ((projectionMap A f).app K)⟩
+
 end Defs
 
 section Integral
@@ -222,6 +251,19 @@ colimits reducing `M` to `Λ`. -/
 theorem isIso_projectionMap_of_finite [Finite Λ] (f : X ⟶ Y) [HasCompactification f] :
     IsIso (projectionMap (ModuleCat.{u + 1} Λ) f) :=
   sorry
+
+/-- The projection formula at finite coefficients, objectwise: for a finite coefficient ring
+`Λ`, the projection formula holds for `f` at all `K` and `L`.
+
+This is a strengthening of the blueprint node `sk-thm-sf-pf-finite`, which asks for `K`
+bounded constructible, `L` of finite Tor amplitude and `Λ = A_{E,n}`. It is read off from
+`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`. -/
+theorem hasProjectionFormula_of_finite [Finite Λ] (f : X ⟶ Y) [HasCompactification f]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L := by
+  have := isIso_projectionMap_of_finite Λ f
+  exact inferInstanceAs (IsIso (((projectionMap _ f).app K).app L))
 
 end Finite
 
