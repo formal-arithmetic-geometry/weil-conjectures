@@ -12,6 +12,7 @@ public import Mathlib.NumberTheory.LegendreSymbol.AddCharacter
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.CategoryTheory.Sites.Point.Linear
+public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
@@ -59,6 +60,8 @@ classical case is `k = ℤ/p`.
 - `AlgebraicGeometry.Etale.artinSchreierPushforwardIsoBiproduct`: for a primitive `Ψ` with
   values in a domain, the decomposition `(AS_q)_* Λ ≅ ⨁_{b ∈ k} ℒ_{Ψ(b ·)}` given by the
   orthogonal idempotents `e_{Ψ(b ·)}`.
+- `AlgebraicGeometry.Etale.isConstructibleSheaf_artinSchreierSheafOf`: over a finite `Λ`,
+  `ℒ_{Ψ, f}` is constructible.
 - `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_zero`: the rigidification
   `Λ ≅ 0^* ℒ_Ψ`.
 - `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_add`:
@@ -832,6 +835,26 @@ theorem nonempty_iso_artinSchreierSheaf_inv (Ψ : AddChar k Λ) :
   obtain ⟨e⟩ := nonempty_iso_artinSchreierSheaf_mul Ψ Ψ⁻¹
   obtain ⟨e'⟩ := nonempty_iso_artinSchreierSheaf_one (k := k) (Λ := Λ)
   exact ⟨e ≪≫ eqToIso (congrArg artinSchreierSheaf (mul_inv_cancel Ψ)) ≪≫ e'⟩
+
+/-- Over a finite coefficient ring the Artin–Schreier sheaf has finite stalks: it has the tensor
+inverse `ℒ_{Ψ⁻¹}`, so its stalks are invertible modules over the finite ring `Λ`.
+(sketch blueprint: `sk-prop-kernel-lisse`) -/
+instance isFiniteSheaf_artinSchreierSheaf [Finite Λ] (Ψ : AddChar k Λ) :
+    Scheme.IsFiniteSheaf (artinSchreierSheaf Ψ) :=
+  .of_tensorIso (nonempty_iso_artinSchreierSheaf_inv Ψ).some
+
+/-- Over a finite coefficient ring the Artin–Schreier sheaf is constructible, being finite
+locally constant. (sketch blueprint: `sk-prop-kernel-lisse`) -/
+instance isConstructibleSheaf_artinSchreierSheaf [Finite Λ] (Ψ : AddChar k Λ) :
+    Scheme.IsConstructibleSheaf (artinSchreierSheaf Ψ) :=
+  Scheme.IsFiniteLocallyConstantSheaf.isConstructibleSheaf {}
+
+/-- Over a finite coefficient ring the Artin–Schreier sheaf `ℒ_{Ψ, f}` is constructible, as the
+pullback of a constructible sheaf. (sketch blueprint: `sk-prop-kernel-lisse`) -/
+instance isConstructibleSheaf_artinSchreierSheafOf [Finite Λ] (X : Scheme.{u})
+    [X.Over (Spec (.of k))] (Ψ : AddChar k Λ) (f : Γ(X, ⊤)) :
+    Scheme.IsConstructibleSheaf (artinSchreierSheafOf X Ψ f) :=
+  Scheme.IsConstructibleSheaf.upperStar _ _
 
 /-- The inverse of `ℒ_Ψ` is also `(-1)^* ℒ_Ψ`, the pullback along the reflection `x ↦ -x`,
 since `(-1)^* ℒ_Ψ ≅ ℒ_{Ψ⁻¹}` by `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_smul`.

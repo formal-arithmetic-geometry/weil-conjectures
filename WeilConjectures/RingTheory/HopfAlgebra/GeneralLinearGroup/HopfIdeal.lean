@@ -105,6 +105,8 @@ then specialised to the coordinate ring of `GL_n`: elaborating them directly at 
 
 - `sk-d-geometry`: matrix algebraic groups as reduced closed subgroups of `GL(V)`, their identity
   component and centre.
+- `def-wf-algebraic-components`: the identity component `identityComponent`, with its `k`-points
+  `identityComponentSubgroup`.
 - `lem-wf-zariski-closure-subgroup`: the Zariski closure of a subgroup of `GL n k` is a closed
   subgroup.
 - `sk-i-restriction`: the Zariski closure of a subgroup of `GL n k` is an algebraic group, and
@@ -714,8 +716,9 @@ theorem toPrimeSpectrum_injective :
   exact (sub_eq_zero.1 (by simpa [toPrimeSpectrum] using hmem)).symm
 
 /-- The ideal of the reduced identity component `G°` of the closed subscheme `V(I)` of `GL_n`: the
-functions vanishing on the connected component of `V(I)` containing the identity matrix.
-(blueprint: `sk-d-geometry`) -/
+functions vanishing on the connected component of `V(I)` containing the identity matrix. The set
+`π₀(G)` of connected components is Mathlib's `ConnectedComponents` of the underlying space.
+(blueprint: `sk-d-geometry`, `def-wf-algebraic-components`) -/
 noncomputable def identityComponent (I : Ideal (CoordinateRing n k)) :
     Ideal (CoordinateRing n k) :=
   PrimeSpectrum.vanishingIdeal
@@ -946,7 +949,8 @@ section IdentityComponent
 
 variable (I) in
 /-- The `k`-points of the identity component `G°` of `G = V(I)`, as a subgroup of `GL n k`: the
-matrices whose point lies in the connected component of `V(I)` containing the identity. -/
+matrices whose point lies in the connected component of `V(I)` containing the identity.
+(blueprint: `def-wf-algebraic-components`) -/
 noncomputable def identityComponentSubgroup : Subgroup (GL n k) where
   carrier := {g | toPrimeSpectrum g ∈ connectedComponentIn
     (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) (toPrimeSpectrum 1)}
