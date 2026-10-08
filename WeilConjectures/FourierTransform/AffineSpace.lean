@@ -74,7 +74,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-open AffineSpace
+open AlgebraicGeometry.AffineSpace
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
 variable (n : Type u) [Fintype n] (S : Scheme.{u})
