@@ -20,3 +20,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-08, lean: a node has `lean` only when a declaration of its blueprint `lean` list was found in the source text of the repository (branch `master` first, then `slopmaster2`); `sorry_free` says the text of that declaration contains no `sorry`, nothing more. Names not found are in `blueprint_lean_not_found`.
 - 2026-10-08, tools/dag_queue.py: its `FIELDS` table is unchanged; the nodes use the names it already reads.
 - 2026-10-08, tools: added `import_blueprint.py` and `check_dag.py` (tools/README.md).
+- 2026-10-09, tools: added `export_snapshot.py`, which writes the DAG as the snapshot file of the graph viewer in `site/` (not committed: the viewer is the blueprint site's code).
