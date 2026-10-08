@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.Affine
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
@@ -42,19 +43,6 @@ to it (`AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine_of_forall`
 universe u
 
 open CategoryTheory
-
-namespace AlgebraicGeometry
-
-/-- The pullback `g^* F` of a torsion étale sheaf `F` along a morphism of schemes `g` is torsion.
-Since sections over infinite disjoint unions are products, a torsion sheaf in the sense of
-`CategoryTheory.Sheaf.IsTorsion` is killed by a single integer `N ≠ 0`; then so is `g^* F`, as
-`g^*` is additive. -/
-theorem Etale.isTorsion_upperStar {X Y : Scheme.{u}} (g : X ⟶ Y)
-    {F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}} (hF : F.IsTorsion) :
-    ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj F).IsTorsion :=
-  sorry
-
-end AlgebraicGeometry
 
 namespace AlgebraicGeometry.IsCurve
 
