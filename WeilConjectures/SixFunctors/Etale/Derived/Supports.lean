@@ -134,9 +134,14 @@ lemma isZero_derivedCategory_of_isEmpty (E : Scheme.{u}) [IsEmpty E]
 `j : U ⟶ X`, and let `K` be supported on `Z`, i.e. `Lj^* K = 0`. Every `φ : K ⟶ L` factors
 uniquely through the counit `ε : Ri_! Ri^! L ⟶ L`.
 
-Apply `Hom(K, -)` to the supported localization triangle
-`Ri_! Ri^! L ⟶ L ⟶ Rj_* Lj^* L ⟶ (Ri_! Ri^! L)[1]`: by adjunction `Hom(K, Rj_* Lj^* L)` and
-`Hom(K[1], Rj_* Lj^* L)` vanish, which gives existence and uniqueness. -/
+```
+                    K
+              ψ  ↙  │ φ
+Ri_! Ri^! L ──ε──→ L ──→ Rj_* Lj^* L ──→ (Ri_! Ri^! L)[1]
+```
+Apply `Hom(K, -)` to the supported localization triangle in the bottom row: by adjunction
+`Hom(K, Rj_* Lj^* L)` and `Hom(K[1], Rj_* Lj^* L)` vanish, which gives existence and
+uniqueness. -/
 theorem existsUnique_comp_counit_of_isZero (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i]
     [IsOpenImmersion j] (hij : Set.range i = (Set.range j)ᶜ)
     {K L : DerivedCategory (Sheaf X.smallEtaleTopology A)}
@@ -159,8 +164,13 @@ theorem existsUnique_comp_counit_of_isZero (i : Z ⟶ X) (j : U ⟶ X) [IsClosed
 `X` with disjoint ranges, and `a`, `b` the open immersions of their complements. An object `T`
 with `La^* T = 0` and `Lb^* T = 0` is zero.
 
-By the supported localization triangles the counits `Rc_! Rc^! T ⟶ T` and `Rd_! Rd^! T ⟶ T`
-are isomorphisms. With `Rc_! ≅ Rc_*` (`c` is proper), `Hom(T, T)` becomes
+By the supported localization triangles
+```
+Rc_! Rc^! T ──ε──→ T ──→ Ra_* La^* T = 0
+Rd_! Rd^! T ──ε──→ T ──→ Rb_* Lb^* T = 0
+```
+the counits `Rc_! Rc^! T ⟶ T` and `Rd_! Rd^! T ⟶ T` are isomorphisms. With `Rc_! ≅ Rc_*`
+(`c` is proper), `Hom(T, T)` becomes
 `Hom(Rd_! Rd^! T, Rc_* Rc^! T) ≅ Hom(Lc^* Rd_! Rd^! T, Rc^! T)`, which vanishes as
 `Lc^* Rd_! = 0`. -/
 lemma isZero_of_isZero_leftDerivedUpperStar_of_disjoint

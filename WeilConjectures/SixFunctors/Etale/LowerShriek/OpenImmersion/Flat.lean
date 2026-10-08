@@ -45,10 +45,6 @@ namespace Etale
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-instance isIso_openImmersionLowerShriekUpperStarAdjunction_unit :
-    IsIso (openImmersionLowerShriekUpperStarAdjunction A j).unit :=
-  inferInstance
-
 /-- For an open immersion `j`, tensoring with `j^* F` is `j^* (F ⊗ j_! -)`. -/
 noncomputable def tensorLeftUpperStarIso (F : Sheaf X.smallEtaleTopology A) :
     tensorLeft ((j)^*[A].obj F) ≅ (j)_!open[A] ⋙ tensorLeft F ⋙ (j)^*[A] :=
