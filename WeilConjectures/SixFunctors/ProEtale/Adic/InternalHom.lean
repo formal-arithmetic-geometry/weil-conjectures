@@ -299,4 +299,89 @@ theorem adicConstantSheaf_apply_eq_mul (j : Under (op U))
 
 end Endomorphisms
 
+section Ihom
+
+variable (l X)
+
+/-- Multiplication by a section `f` of `ℚ̄_ℓ` over `U`, as an endomorphism of the restriction of
+`ℚ̄_ℓ` to `X.ProEt / U`. -/
+noncomputable def adicConstantSheafMulNatTrans {U : X.ProEt}
+    (f : (adicConstantSheaf l X).obj.obj (op U)) :
+    Under.forget (op U) ⋙ (adicConstantSheaf l X).obj ⟶
+      Under.forget (op U) ⋙ (adicConstantSheaf l X).obj where
+  app j := ModuleCat.ofHom
+    { toFun s := adicConstantSheafMul ((adicConstantSheaf l X).obj.map j.hom f) s
+      map_add' _ _ := adicConstantSheaf_ext fun _ ↦ mul_add _ _ _
+      map_smul' _ _ := adicConstantSheaf_ext fun _ ↦ mul_left_comm _ _ _ }
+  naturality j j' a := by
+    ext s : 2
+    refine adicConstantSheaf_ext fun y ↦ ?_
+    change f.down.1 (j'.hom.unop.left y) * s.down.1 (a.right.unop.left y) =
+      f.down.1 (j.hom.unop.left (a.right.unop.left y)) * s.down.1 (a.right.unop.left y)
+    rw [← Under.w a]
+    rfl
+
+/-- Evaluation at the unit section, from the internal hom `[ℚ̄_ℓ, ℚ̄_ℓ]` of presheaves to
+`ℚ̄_ℓ`. -/
+noncomputable def adicConstantSheafEval :
+    functorEnrichedHom (WeilCoefficients.{u} l) (adicConstantSheaf l X).obj
+        (adicConstantSheaf l X).obj ⟶ (adicConstantSheaf l X).obj where
+  app V := ModuleCat.ofHom
+    { toFun e := (ModuleCat.enrichedHomApp e (Under.mk (𝟙 V))) (adicConstantSheafOne V.unop)
+      map_add' e e' := by simp only [map_add]; rfl
+      map_smul' c e := by simp only [map_smul]; rfl }
+  naturality V V' f := by
+    ext e : 2
+    have := ConcreteCategory.congr_hom (ModuleCat.enrichedHomApp_naturality e
+      (Under.homMk f (by simp) : Under.mk (𝟙 V) ⟶ (Under.map f).obj (Under.mk (𝟙 V'))))
+      (adicConstantSheafOne V.unop)
+    refine (congrArg (fun g ↦ g (adicConstantSheafOne V'.unop))
+      (ModuleCat.enrichedHomApp_precompEnrichedHom' (F₁ := Under.forget V ⋙ _)
+        (F₂ := Under.forget V ⋙ _) (F₁' := Under.forget V' ⋙ _) (F₂' := Under.forget V' ⋙ _)
+        (Under.map f) (Iso.refl _) (Iso.refl _) e (Under.mk (𝟙 V')))).trans ?_
+    exact this
+
+variable {l X}
+
+lemma adicConstantSheafEval_app_apply (V : X.ProEtᵒᵖ)
+    (e : (functorEnrichedHom (WeilCoefficients.{u} l) (adicConstantSheaf l X).obj
+      (adicConstantSheaf l X).obj).obj V) :
+    (adicConstantSheafEval l X).app V e =
+      (ModuleCat.enrichedHomApp e (Under.mk (𝟙 V))) (adicConstantSheafOne V.unop) :=
+  rfl
+
+/-- Evaluation at the unit section is bijective: an element of the internal hom is a natural
+endomorphism of `ℚ̄_ℓ` over `U`, which is multiplication by its value on the unit section
+(`AlgebraicGeometry.ProEtale.adicConstantSheaf_apply_eq_mul`). -/
+instance (V : X.ProEtᵒᵖ) : IsIso ((adicConstantSheafEval l X).app V) := by
+  rw [ConcreteCategory.isIso_iff_bijective]
+  obtain ⟨U⟩ := V
+  refine ⟨fun e e' h ↦ ModuleCat.enrichedHom_ext fun j ↦ ?_, fun f ↦ ?_⟩
+  · refine ModuleCat.hom_ext (LinearMap.ext fun s ↦ adicConstantSheaf_ext fun y ↦ ?_)
+    have h₁ := adicConstantSheaf_apply_eq_mul (ModuleCat.enrichedHomEquiv _ _ e) j s y
+    have h₂ := adicConstantSheaf_apply_eq_mul (ModuleCat.enrichedHomEquiv _ _ e') j s y
+    simp only [ModuleCat.enrichedHomEquiv_apply_app] at h₁ h₂
+    rw [adicConstantSheafEval_app_apply, adicConstantSheafEval_app_apply] at h
+    exact h₁.trans (h ▸ h₂.symm)
+  · refine ⟨(ModuleCat.enrichedHomEquiv _ _).symm (adicConstantSheafMulNatTrans l X f), ?_⟩
+    rw [adicConstantSheafEval_app_apply, ModuleCat.enrichedHomApp_enrichedHomEquiv_symm]
+    have : adicConstantSheafMul ((adicConstantSheaf l X).obj.map (𝟙 (op U)) f)
+        (adicConstantSheafOne U) = f :=
+      adicConstantSheaf_ext fun y ↦ mul_one (f.down.1 y)
+    exact this
+
+instance : IsIso (adicConstantSheafEval l X) :=
+  NatIso.isIso_of_isIso_app _
+
+variable (l X) in
+/-- **The internal hom `[ℚ̄_ℓ, ℚ̄_ℓ]` is `ℚ̄_ℓ`**: evaluation at the unit section is an
+isomorphism, a `ℚ̄_ℓ`-linear endomorphism of `ℚ̄_ℓ` over `U` being multiplication by a section
+(`AlgebraicGeometry.ProEtale.adicConstantSheaf_apply_eq_mul`). -/
+noncomputable def ihomAdicConstantSheafIso :
+    (ihom (adicConstantSheaf l X)).obj (adicConstantSheaf l X) ≅ adicConstantSheaf l X :=
+  (fullyFaithfulSheafToPresheaf _ _).preimageIso
+    (GrothendieckTopology.sheafToPresheafIhomIso _ _ _ ≪≫ asIso (adicConstantSheafEval l X))
+
+end Ihom
+
 end AlgebraicGeometry.ProEtale
