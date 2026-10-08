@@ -157,6 +157,66 @@ theorem Hom.finrankΓ_subschemeι_ker_fieldPoints {k : Type u} [Field k] {X : Sc
 
 end Sections
 
+section DivisorRestriction
+
+variable {X : Scheme.{u}}
+
+/-- **The restriction of a module to a closed subscheme.** For a quasi-coherent ideal sheaf `J`
+with closed subscheme `ι : D ⟶ X` and an invertible `𝒪_X`-module `M`, the cokernel of
+`J ⊗ M ⟶ 𝒪_X ⊗ M` is `ι_* ι^* M`.
+
+Tensoring with the invertible `M` is an equivalence, so it preserves the cokernel
+`ι_* 𝒪_D` of `J ⟶ 𝒪_X`, and `ι_* 𝒪_D ⊗ M ≅ ι_* ι^* M` is the projection formula. -/
+theorem IdealSheafData.nonempty_cokernel_whiskerRight_iso (J : X.IdealSheafData) (M : X.Modules)
+    [M.IsInvertible] :
+    Nonempty (cokernel (J.toModulesι ▷ M) ≅
+      (Modules.pushforward J.subschemeι).obj ((Modules.pullback J.subschemeι).obj M)) := by
+  let F := (Modules.tensorRightEquivalence M).functor
+  let e₁ : cokernel J.toModulesι ≅
+      (Modules.pushforward J.subschemeι).obj (𝟙_ J.subscheme.Modules) :=
+    (colimit.isColimit _).coconePointUniqueUpToIso
+      (Abelian.epiIsCokernelOfKernel _ (kernelIsKernel J.toPushforwardSubscheme))
+  let e₂ : cokernel (J.toModulesι ▷ M) ≅ F.obj (cokernel J.toModulesι) :=
+    (PreservesCokernel.iso F J.toModulesι).symm
+  obtain ⟨e₃⟩ := Modules.nonempty_pushforward_pullback_iso J.subschemeι M
+  exact ⟨e₂ ≪≫ whiskerRightIso e₁ M ≪≫ e₃.symm⟩
+
+variable (k : Type u) [Field k] [X.Over (Spec (.of k))]
+
+/-- **The cohomology of the restriction of a module to a closed subscheme.** For a closed
+subscheme `ι : D ⟶ X` of a `k`-scheme with ideal sheaf `J` and an invertible `M`, the cohomology
+of the cokernel `M|_D` of `J ⊗ M ⟶ 𝒪_X ⊗ M` is that of `ι^* M` on `D`: `M|_D ≅ ι_* ι^* M`
+(`AlgebraicGeometry.Scheme.IdealSheafData.nonempty_cokernel_whiskerRight_iso`), and pushforward
+along the affine morphism `ι` does not change the cohomology of quasi-coherent modules. -/
+theorem IdealSheafData.nonempty_H_cokernel_whiskerRight_linearEquiv (J : X.IdealSheafData)
+    (M : X.Modules) [M.IsInvertible] (q : ℕ) :
+    letI : J.subscheme.Over (Spec (.of k)) := ⟨J.subschemeι ≫ X ↘ Spec (.of k)⟩
+    Nonempty ((cokernel (J.toModulesι ▷ M)).H q ≃ₗ[k]
+      ((Modules.pullback J.subschemeι).obj M).H q) := by
+  let : J.subscheme.Over (Spec (.of k)) := ⟨J.subschemeι ≫ X ↘ Spec (.of k)⟩
+  have : J.subschemeι.IsOver (Spec (.of k)) := ⟨rfl⟩
+  obtain ⟨e⟩ := J.nonempty_cokernel_whiskerRight_iso M
+  obtain ⟨e'⟩ := Modules.nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom k
+    J.subschemeι q
+  exact ⟨((Modules.cohomologyFunctor k q).mapIso e).toLinearEquiv ≪≫ₗ
+    (e'.app ⟨(Modules.pullback J.subschemeι).obj M, inferInstance⟩).toLinearEquiv.symm⟩
+
+end DivisorRestriction
+
+section FiniteScheme
+
+variable {k : Type u} [Field k] {D : Scheme.{u}} [D.Over (Spec (.of k))]
+
+/-- **Invertible modules on a finite `k`-scheme.** Let `D` be finite over a field `k` and `N` an
+invertible `𝒪_D`-module. Then `h⁰(D, N) = dim_k Γ(D, 𝒪_D)`: the ring `Γ(D, 𝒪_D)` is artinian,
+hence a finite product of local rings, over which the invertible module `Γ(D, N)` is free of
+rank one. -/
+theorem Modules.finrankH_zero_eq_finrankΓ_of_isFinite [IsFinite (D ↘ Spec (.of k))]
+    (N : D.Modules) [N.IsInvertible] : N.finrankH k 0 = (D ↘ Spec (.of k)).finrankΓ :=
+  sorry
+
+end FiniteScheme
+
 section Curve
 
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
@@ -188,42 +248,72 @@ theorem Modules.subsingleton_H_of_two_le (ℱ : X.Modules) {q : ℕ} (hq : 2 ≤
     ((topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1).trans_lt ?_)
   exact_mod_cast hq
 
+/-- **Effective divisors on curves are finite.** Let `D` be an effective Cartier divisor on a
+smooth proper curve `X` over `k`, with invertible ideal sheaf `J`. Then `D` is finite over `k`:
+it is proper over `k`, being closed in `X`, and of dimension `0`, since a local equation of `D` is
+a non-zerodivisor, so that `D` contains no generic point of `X`.
+
+(blueprint: `def-sc-effective-cartier-divisor`) -/
+theorem IdealSheafData.IsInvertible.isFinite_subschemeι_comp {J : X.IdealSheafData}
+    (hJ : J.IsInvertible) : IsFinite (J.subschemeι ≫ X ↘ Spec (.of k)) :=
+  sorry
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
 /-- **A line bundle restricted to an effective divisor, finiteness.** Let `D` be an effective
 Cartier divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf `J = 𝒪_X(-D)`,
 and `M` an invertible `𝒪_X`-module. The cokernel `M|_D` of `J ⊗ M ⟶ 𝒪_X ⊗ M` has
-finite-dimensional cohomology: it is the pushforward of the invertible module `M|_D` on the
-finite `k`-scheme `D`. -/
+finite-dimensional cohomology: it is the cohomology of the invertible module `ι^* M` on the
+proper `k`-scheme `D`. -/
 theorem IdealSheafData.IsInvertible.finiteDimensional_H_cokernel_whiskerRight
-    {J : X.IdealSheafData} (hJ : J.IsInvertible) (M : X.Modules) [M.IsInvertible] (q : ℕ) :
-    FiniteDimensional k ((cokernel (J.toModulesι ▷ M)).H q) :=
-  sorry
+    {J : X.IdealSheafData} (_hJ : J.IsInvertible) (M : X.Modules) [M.IsInvertible] (q : ℕ) :
+    FiniteDimensional k ((cokernel (J.toModulesι ▷ M)).H q) := by
+  let : J.subscheme.Over (Spec (.of k)) := ⟨J.subschemeι ≫ X ↘ Spec (.of k)⟩
+  have : IsProper (J.subscheme ↘ Spec (.of k)) :=
+    inferInstanceAs (IsProper (J.subschemeι ≫ X ↘ Spec (.of k)))
+  obtain ⟨e⟩ := J.nonempty_H_cokernel_whiskerRight_linearEquiv k M q
+  exact e.symm.finiteDimensional
 
 variable (k) in
 include k in
 /-- **A line bundle restricted to an effective divisor, vanishing of `H¹`.** Let `D` be an
 effective Cartier divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf
 `J = 𝒪_X(-D)`, and `M` an invertible `𝒪_X`-module. The cokernel `M|_D` of `J ⊗ M ⟶ 𝒪_X ⊗ M` has
-`H¹(X, M|_D) = 0`: it is the pushforward of a module on the finite, hence affine, `k`-scheme `D`
-along the affine morphism `D ⟶ X`. -/
+`H¹(X, M|_D) = 0`: its cohomology is that of `ι^* M` on the finite, hence affine, `k`-scheme `D`
+(`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.isFinite_subschemeι_comp`). -/
 theorem IdealSheafData.IsInvertible.subsingleton_H_one_cokernel_whiskerRight
     {J : X.IdealSheafData} (hJ : J.IsInvertible) (M : X.Modules) [M.IsInvertible] :
-    Subsingleton ((cokernel (J.toModulesι ▷ M)).H 1) :=
-  sorry
+    Subsingleton ((cokernel (J.toModulesι ▷ M)).H 1) := by
+  have := hJ.isFinite_subschemeι_comp (k := k)
+  have : IsAffine J.subscheme := isAffine_of_isAffineHom (J.subschemeι ≫ X ↘ Spec (.of k))
+  have := Modules.subsingleton_H_succ_of_isAffine ((Modules.pullback J.subschemeι).obj M) 0
+  obtain ⟨e⟩ := J.nonempty_H_cokernel_whiskerRight_linearEquiv k M 1
+  exact e.toEquiv.subsingleton
 
 /-- **A line bundle restricted to an effective divisor, Euler characteristic.** Let `D` be an
 effective Cartier divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf
 `J = 𝒪_X(-D)`, and `M` an invertible `𝒪_X`-module. The cokernel `M|_D` of `J ⊗ M ⟶ 𝒪_X ⊗ M` has
 `χ(M|_D) = deg D = dim_k Γ(D, 𝒪_D)`.
 
-`M|_D` is the pushforward of the restriction of `M` to the finite `k`-scheme `D`, which is affine,
-so its higher cohomology vanishes. The restriction of a line bundle to `D` is trivial, since
-`Γ(D, 𝒪_D)` is artinian, hence semilocal, so `h⁰(M|_D) = h⁰(𝒪_D) = deg D`.
+Its cohomology is that of `ι^* M` on the finite `k`-scheme `D`, which vanishes in positive
+degrees, and `h⁰(D, ι^* M) = dim_k Γ(D, 𝒪_D)`
+(`AlgebraicGeometry.Scheme.Modules.finrankH_zero_eq_finrankΓ_of_isFinite`).
 
 (blueprint: `lem-pc-degree-base-change`, part (2)) -/
 theorem IdealSheafData.IsInvertible.eulerChar_cokernel_whiskerRight {J : X.IdealSheafData}
     (hJ : J.IsInvertible) (M : X.Modules) [M.IsInvertible] :
-    (cokernel (J.toModulesι ▷ M)).eulerChar k = (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ :=
-  sorry
+    (cokernel (J.toModulesι ▷ M)).eulerChar k = (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ := by
+  let : J.subscheme.Over (Spec (.of k)) := ⟨J.subschemeι ≫ X ↘ Spec (.of k)⟩
+  have : IsFinite (J.subscheme ↘ Spec (.of k)) := hJ.isFinite_subschemeι_comp (k := k)
+  have := hJ.subsingleton_H_one_cokernel_whiskerRight k M
+  obtain ⟨e⟩ := J.nonempty_H_cokernel_whiskerRight_linearEquiv k M 0
+  have h₀ : Modules.finrankH k (cokernel (J.toModulesι ▷ M)) 0 =
+      (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ := by
+    rw [Modules.finrankH, e.finrank_eq]
+    exact Modules.finrankH_zero_eq_finrankΓ_of_isFinite _
+  have h₁ : Modules.finrankH k (cokernel (J.toModulesι ▷ M)) 1 = 0 :=
+    Module.finrank_zero_of_subsingleton
+  rw [Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one, h₀, h₁]
+  simp
 
 /-- **The degree of a line bundle twisted by an effective divisor.** Let `D` be an effective
 Cartier divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf `J = 𝒪_X(-D)`,
