@@ -331,7 +331,12 @@ adjoint is identified on test objects `N[2d]` with the chain of bijections
 ```
 given by the adjunctions `La^* ⊣ Ra_*`, `K ⊗ᴸ - ⊣ K^∨ ⊗ᴸ -`, `Ra_! ⊣ Ra^!`, the orientation
 `T[2d] ≅ Ra^! Λ_Y` and the projection formula; see
-`CategoryTheory.MonoidalClosed.isIso_curry_of_projection`. -/
+`CategoryTheory.MonoidalClosed.isIso_curry_of_projection`.
+
+This is only the "in particular, `β_K` is perfect" part of `thm-sf-identification`. The
+identification of the inverse of the adjoint with the global-duality isomorphism composed with
+`𝔻_X K ≅ K^∨(d)[2d]` is not formalised yet, since those isomorphisms are only known to exist
+(`Nonempty`). -/
 theorem isPerfectPairing_poincarePairing_of_isDetecting (o : Orientation A a d)
     (e : (L((a)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _)
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)

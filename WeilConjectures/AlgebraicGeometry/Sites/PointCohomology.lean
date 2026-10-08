@@ -204,7 +204,6 @@ sections vanish is zero. -/
 theorem isZero_of_subsingleton_sections_of_isSepClosed
     (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (h : Subsingleton (F.obj.obj (op (etalePoint k)))) : IsZero F := by
-  have := h
   have hU : ∀ U, Subsingleton (F.obj.obj (op U)) := fun U ↦ ⟨fun x y ↦
     eq_of_forall_restrict_eq_of_isSepClosed F fun V hV f ↦ by
       have : Subsingleton (F.obj.obj (op V)) :=

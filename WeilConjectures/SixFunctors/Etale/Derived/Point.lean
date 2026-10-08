@@ -38,7 +38,7 @@ variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [Ring Λ]
 
 /-- If the `n`-th cohomology sheaf of an object `C` of the point category is nonzero, then
 there is a nonzero morphism `Λ_s[-n] ⟶ C`. -/
-theorem exists_ne_zero_of_not_isZero_homology
+theorem exists_ne_zero_of_not_isZero_homology_of_isSepClosed
     (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (n : ℤ) (hC : ¬ IsZero ((DerivedCategory.homologyFunctor _ n).obj C)) :
     ∃ g : ((DerivedCategory.singleFunctor _ 0).obj ((constantSheaf
@@ -91,7 +91,7 @@ The blueprint deduces this from the equivalence of the point category with compl
 `Λ`-modules. Here the cone `C` of `u` is shown to be zero directly: `Hom(Λ_s[r], C) = 0` for all
 `r` by the long exact sequence, and a nonzero cohomology sheaf `H^n(C)` would give a nonzero
 morphism `Λ_s[-n] ⟶ C`, since an étale sheaf on `Spec k` is determined by its global sections
-(`AlgebraicGeometry.Etale.exists_ne_zero_of_not_isZero_homology`). -/
+(`AlgebraicGeometry.Etale.exists_ne_zero_of_not_isZero_homology_of_isSepClosed`). -/
 theorem isIso_iff_bijective_comp_of_isSepClosed
     {P Q : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (u : P ⟶ Q) :
@@ -126,7 +126,7 @@ theorem isIso_iff_bijective_comp_of_isSepClosed
     have : IsIso (0 : C ⟶ 0) := (DerivedCategory.isIso_iff _ _).2 fun n ↦ by
       have hn : IsZero ((DerivedCategory.homologyFunctor _ n).obj C) := by
         by_contra hn
-        obtain ⟨g, hg⟩ := exists_ne_zero_of_not_isZero_homology C n hn
+        obtain ⟨g, hg⟩ := exists_ne_zero_of_not_isZero_homology_of_isSepClosed C n hn
         exact hg (hzero _ g)
       exact isIso_of_source_target_iso_zero _ hn.isoZero
         ((Functor.map_isZero _ (isZero_zero _)).isoZero)
