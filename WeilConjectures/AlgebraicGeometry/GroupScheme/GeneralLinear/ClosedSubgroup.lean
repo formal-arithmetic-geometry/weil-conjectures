@@ -31,6 +31,10 @@ definition, and it is the only place where the scheme and the matrix groups meet
   induced by an inclusion `I ≤ J` of Hopf ideals.
 - `AlgebraicGeometry.GeneralLinearGroup.zeroLocusMulEquiv`: the group of `R`-points
   `Spec R ⟶ V(I)` is the matrix group `zeroLocus I R`.
+- `AlgebraicGeometry.GeneralLinearGroup.conjHom`,
+  `AlgebraicGeometry.GeneralLinearGroup.subgroupSchemeConjIso`: conjugation by a `k`-point of
+  `GL_n`, as an endomorphism of the group scheme `𝔾𝕃(n; k)` and as an automorphism of a closed
+  subgroup scheme `V(I)` that it preserves.
 - `AlgebraicGeometry.GeneralLinearGroup.derivedIdeal`: the Hopf ideal of the derived subgroup
   `[V(I), V(I)]`, the smallest closed subgroup scheme of `V(I)` with commutative quotient.
 
@@ -256,6 +260,115 @@ theorem containsCommutators_subgroupSchemeHom
   sorry
 
 end Inclusion
+
+section Conjugation
+
+variable (g : GL n k)
+
+/-- Conjugation `x ↦ g * x * g⁻¹` by a `k`-point `g` of `𝔾𝕃(n; k)`, as an endomorphism of the group
+scheme: the spectrum of the bialgebra endomorphism `conjBialgHom g` of the coordinate ring. -/
+noncomputable def conjHom : 𝔾𝕃(n; k) ⟶ 𝔾𝕃(n; k) :=
+  (Spec.map (CommRingCat.ofHom (translate g g⁻¹).toRingHom)).asOver (Spec (.of k))
+
+instance : IsMonHom (conjHom g) :=
+  inferInstanceAs (IsMonHom ((bialgSpec (.of k)).map
+    (CommBialgCat.ofHom (conjBialgHom g)).op).hom)
+
+/-- On `R`-points, `conjHom g` is conjugation by the image of `g` in `GL n R`. -/
+theorem homMulEquiv_comp_conjHom {R : Type u} [CommRing R] [Algebra k R]
+    (φ : (Spec (.of R)).asOver (Spec (.of k)) ⟶ 𝔾𝕃(n; k)) :
+    GeneralLinearGroup.homMulEquiv n k R (φ ≫ conjHom g) =
+      map (algebraMap k R) g * GeneralLinearGroup.homMulEquiv n k R φ *
+        map (algebraMap k R) g⁻¹ := by
+  unfold GeneralLinearGroup at φ
+  obtain ⟨χ, rfl⟩ := Spec.mapMulEquiv.surjective φ
+  have h : Spec.mapMulEquiv χ ≫ conjHom g =
+      Spec.mapMulEquiv (toConv (χ.ofConv.comp (translate g g⁻¹))) := by
+    apply Over.OverMorphism.ext
+    change Spec.map _ ≫ Spec.map _ = Spec.map _
+    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
+    rfl
+  rw [h, GeneralLinearGroup.homMulEquiv_mapMulEquiv, GeneralLinearGroup.homMulEquiv_mapMulEquiv]
+  apply (algHomMulEquiv n k R).symm.injective
+  have hχ : evalAlgHom (algHomMulEquiv n k R χ) = χ.ofConv :=
+    congrArg ofConv ((algHomMulEquiv n k R).symm_apply_apply χ)
+  rw [MulEquiv.symm_apply_apply, algHomMulEquiv_symm_apply, ← evalAlgHom_comp_translate, hχ]
+
+variable {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k]
+  (hg : ∀ a ∈ I, translate g g⁻¹ a ∈ I) (hg' : ∀ a ∈ I, translate g⁻¹ g a ∈ I)
+
+include hg in
+/-- A matrix `x` over `R` satisfying the equations of `I` is conjugated by `g` to such a
+matrix, when conjugation by `g` preserves `I`. -/
+theorem mul_mul_inv_mem_zeroLocus {R : Type u} [CommRing R] [Algebra k R] {x : GL n R}
+    (hx : x ∈ zeroLocus I R) :
+    map (algebraMap k R) g * x * map (algebraMap k R) g⁻¹ ∈ zeroLocus I R := fun a ha ↦ by
+  rw [← evalAlgHom_comp_translate, AlgHom.comp_apply]
+  exact hx _ (hg a ha)
+
+/-- Conjugation by `g` as an automorphism of the closed subgroup scheme `V(I)`, when it preserves
+the Hopf ideal `I` together with conjugation by `g⁻¹`: the spectrum of the automorphism of
+`k[GL_n] ⧸ I` induced by `translate g g⁻¹`. -/
+noncomputable def subgroupSchemeConjIso : subgroupScheme I ≅ subgroupScheme I where
+  hom := (Spec.map (CommRingCat.ofHom
+    (Ideal.quotientMapₐ (I := I) I (translate g g⁻¹) hg).toRingHom)).asOver (Spec (.of k))
+  inv := (Spec.map (CommRingCat.ofHom
+    (Ideal.quotientMapₐ (I := I) I (translate g⁻¹ g) hg').toRingHom)).asOver (Spec (.of k))
+  hom_inv_id := by
+    apply Over.OverMorphism.ext
+    change Spec.map _ ≫ Spec.map _ = 𝟙 _
+    rw [← Spec.map_comp, ← Spec.map_id]
+    congr 1
+    refine CommRingCat.hom_ext (Ideal.Quotient.ringHom_ext (RingHom.ext fun a ↦ ?_))
+    change Ideal.Quotient.mk I (translate g g⁻¹ (translate g⁻¹ g a)) = Ideal.Quotient.mk I a
+    rw [← AlgHom.comp_apply, translate_comp_translate, inv_mul_cancel, translate_one_one,
+      AlgHom.id_apply]
+  inv_hom_id := by
+    apply Over.OverMorphism.ext
+    change Spec.map _ ≫ Spec.map _ = 𝟙 _
+    rw [← Spec.map_comp, ← Spec.map_id]
+    congr 1
+    refine CommRingCat.hom_ext (Ideal.Quotient.ringHom_ext (RingHom.ext fun a ↦ ?_))
+    change Ideal.Quotient.mk I (translate g⁻¹ g (translate g g⁻¹ a)) = Ideal.Quotient.mk I a
+    rw [← AlgHom.comp_apply, translate_comp_translate, mul_inv_cancel, translate_one_one,
+      AlgHom.id_apply]
+
+/-- The automorphism `subgroupSchemeConjIso` of `V(I)` is the restriction of the conjugation
+`conjHom g` of `𝔾𝕃(n; k)`. -/
+@[reassoc]
+theorem subgroupSchemeConjIso_hom_comp_subgroupSchemeι :
+    (subgroupSchemeConjIso g hg hg').hom ≫ subgroupSchemeι I =
+      subgroupSchemeι I ≫ conjHom g := by
+  apply Over.OverMorphism.ext
+  change Spec.map _ ≫ Spec.map _ = Spec.map _ ≫ Spec.map _
+  rw [← Spec.map_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp, ← CommRingCat.ofHom_comp]
+  rfl
+
+/-- Conjugation by `g` is an automorphism of the group scheme `V(I)`. -/
+instance : IsMonHom (subgroupSchemeConjIso g hg hg').hom where
+  one_hom := by
+    rw [← cancel_mono (subgroupSchemeι I), Category.assoc,
+      subgroupSchemeConjIso_hom_comp_subgroupSchemeι, IsMonHom.one_hom_assoc, IsMonHom.one_hom,
+      IsMonHom.one_hom]
+  mul_hom := by
+    rw [← cancel_mono (subgroupSchemeι I), Category.assoc,
+      subgroupSchemeConjIso_hom_comp_subgroupSchemeι, IsMonHom.mul_hom_assoc, IsMonHom.mul_hom,
+      Category.assoc, IsMonHom.mul_hom, tensorHom_comp_tensorHom_assoc,
+      tensorHom_comp_tensorHom_assoc, subgroupSchemeConjIso_hom_comp_subgroupSchemeι]
+
+/-- On `R`-points, the automorphism `subgroupSchemeConjIso` of `V(I)` is conjugation by the image
+of `g` in `GL n R`. -/
+theorem zeroLocusMulEquiv_comp_subgroupSchemeConjIso_hom {R : Type u} [CommRing R]
+    [Algebra k R] (x : zeroLocus I R) :
+    zeroLocusMulEquiv I R x ≫ (subgroupSchemeConjIso g hg hg').hom =
+      zeroLocusMulEquiv I R ⟨_, mul_mul_inv_mem_zeroLocus g hg x.2⟩ := by
+  apply injective_homMulEquiv_comp I R
+  dsimp only
+  rw [Category.assoc, subgroupSchemeConjIso_hom_comp_subgroupSchemeι, ← Category.assoc,
+    homMulEquiv_comp_conjHom, homMulEquiv_zeroLocusMulEquiv_comp,
+    homMulEquiv_zeroLocusMulEquiv_comp]
+
+end Conjugation
 
 section Derived
 
