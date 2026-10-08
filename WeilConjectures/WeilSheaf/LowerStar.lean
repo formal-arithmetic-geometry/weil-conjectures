@@ -34,8 +34,9 @@ to the case of a single Weil sheaf,
 and the underived `AlgebraicGeometry.WeilSheaf.isAdicConstructibleSheaf_lowerStar` only concern
 the underlying pro-étale sheaves on the geometric fibres: forgetting the Weil structure commutes
 with right derivation
-(`CategoryTheory.Endofunctor.IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso`), so both follow from the finiteness theorem for `ℓ`-adic pro-étale sheaves over the algebraically
-closed field `k̄` (`WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar`).
+(`CategoryTheory.Endofunctor.IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso`),
+so both follow from the finiteness theorem for `ℓ`-adic pro-étale sheaves over the
+algebraically closed field `k̄` (`WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar`).
 
 ## Main definitions
 
