@@ -9,21 +9,18 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoida
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
 
 /-!
-# The pushforward of presheaves of modules is lax braided
+# The pushforward of presheaves of modules is lax monoidal
 
 Let `F : C ⥤ D` be a functor, `R : Dᵒᵖ ⥤ CommRingCat` and `S : Cᵒᵖ ⥤ CommRingCat` presheaves
 of commutative rings, and `φ : S ⋙ forget₂ _ _ ⟶ (F.op ⋙ R) ⋙ forget₂ _ _` a morphism of the
-underlying presheaves of rings. We show that `PresheafOfModules.pushforward φ` is lax braided
-(in particular lax monoidal): it is the composition of the (strong) monoidal functor
-`PresheafOfModules.pushforward₀OfCommRingCat F R`, which we show is braided, with the lax
-braided functor `PresheafOfModules.restrictScalars φ`.
+underlying presheaves of rings. We show that `PresheafOfModules.pushforward φ` is lax monoidal:
+it is the composition of the (strong) monoidal functor
+`PresheafOfModules.pushforward₀OfCommRingCat F R` with the lax monoidal functor
+`PresheafOfModules.restrictScalars φ`.
 
 ## Main declarations
 
-* `PresheafOfModules.pushforward₀OfCommRingCatBraided`: `pushforward₀OfCommRingCat F R` is
-  braided;
-* `PresheafOfModules.pushforwardLaxMonoidal` and `PresheafOfModules.pushforwardLaxBraided`:
-  `pushforward φ` is lax monoidal, and even lax braided;
+* `PresheafOfModules.pushforwardLaxMonoidal`: `pushforward φ` is lax monoidal;
 * `PresheafOfModules.pushforward_ε_app`, `PresheafOfModules.pushforward_μ_app` and
   `PresheafOfModules.pushforward_μ_app_tmul` identify the structure maps objectwise.
 
@@ -46,15 +43,6 @@ open CategoryTheory MonoidalCategory Functor.LaxMonoidal
 namespace PresheafOfModules
 
 variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
-
-open ModuleCat.MonoidalCategory in
-/-- The pushforward of presheaves of modules along a functor `F` is braided: its structure
-map `μ` is objectwise the identity. -/
-noncomputable instance pushforward₀OfCommRingCatBraided
-    (F : C ⥤ D) (R : Dᵒᵖ ⥤ CommRingCat.{u}) : (pushforward₀OfCommRingCat.{u} F R).Braided where
-  braided M₁ M₂ := by
-    ext1 X
-    exact tensor_ext fun _ _ ↦ rfl
 
 variable {F : C ⥤ D} {R : Dᵒᵖ ⥤ CommRingCat.{u}} {S : Cᵒᵖ ⥤ CommRingCat.{u}}
   (φ : S ⋙ forget₂ CommRingCat RingCat ⟶ (F.op ⋙ R) ⋙ forget₂ CommRingCat RingCat)
@@ -92,12 +80,5 @@ lemma pushforward_μ_app_tmul (M₁ M₂ : PresheafOfModules.{u} (R ⋙ forget�
   rw [pushforward_μ_app]
   erw [ModuleCat.restrictScalars_μ_tmul]
   rfl
-
-/-- The pushforward of presheaves of modules along `φ` is lax braided, i.e. lax symmetric
-monoidal, being the composition of a braided functor with a lax braided one. -/
-noncomputable instance pushforwardLaxBraided :
-    (pushforward.{u} (F := F) (R := R ⋙ forget₂ CommRingCat RingCat)
-      (S := S ⋙ forget₂ CommRingCat RingCat) φ).LaxBraided :=
-  inferInstanceAs ((pushforward₀OfCommRingCat F R ⋙ restrictScalars φ).LaxBraided)
 
 end PresheafOfModules

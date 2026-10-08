@@ -212,7 +212,11 @@ noncomputable def δNatTransRight (M : PresheafOfModules.{u} (S ⋙ forget₂ Co
   naturality _ _ f := (δ_natural_right _ M f).symm
 
 /-- The cotensorator of the pullback functor of presheaves of modules is an isomorphism, as
-soon as the underlying functor between the two categories preserves binary products. -/
+soon as the underlying functor between the two categories preserves binary products:
+```
+δ M N : f^*(M ⊗ N) ⟶ f^*M ⊗ f^*N
+```
+-/
 instance isIso_δ_pullbackOfCommRingCat
     (M N : PresheafOfModules.{u} (S ⋙ forget₂ CommRingCat RingCat)) :
     IsIso (δ (pullbackOfCommRingCat φ) M N) := by
@@ -225,7 +229,11 @@ instance isIso_δ_pullbackOfCommRingCat
   exact isIso_app_of_freeYoneda (δNatTransRight φ M) (fun W ↦ h W M) N
 
 /-- The counit of the pullback functor of presheaves of modules is an isomorphism, as soon as
-the underlying functor between the two categories preserves the terminal object. -/
+the underlying functor between the two categories preserves the terminal object:
+```
+η : f^*(𝟙_) ⟶ 𝟙_
+```
+-/
 instance isIso_η_pullbackOfCommRingCat [HasTerminal C] [HasTerminal D]
     [PreservesLimitsOfShape (Discrete PEmpty.{1}) F] :
     IsIso (η (pullbackOfCommRingCat φ)) := by

@@ -493,7 +493,6 @@ public import WeilConjectures.Mathlib.Algebra.Category.Grp.ForgetCorepresentable
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal

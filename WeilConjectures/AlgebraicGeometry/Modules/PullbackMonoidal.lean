@@ -76,7 +76,12 @@ noncomputable instance :
   ⟨SheafOfModules.sheafificationCompPullback f.toRingCatSheafHom⟩
 
 /-- **The pullback of `𝒪`-modules is monoidal**: `f^* 𝒪_Y ≅ 𝒪_X` and
-`f^* (M ⊗ N) ≅ f^* M ⊗ f^* N`, naturally and compatibly with the associators and unitors. -/
+`f^* (M ⊗ N) ≅ f^* M ⊗ f^* N`, naturally and compatibly with the associators and unitors.
+The comparison maps are
+```
+δ M N : f^*(M ⊗ N) ⟶ f^*M ⊗ f^*N        η : f^* 𝒪_Y ⟶ 𝒪_X
+```
+both isomorphisms. -/
 noncomputable instance pullbackMonoidal : (pullback f).Monoidal :=
   @Localization.Monoidal.functorMonoidalOfComp _ _ _ _ _ _ (presheafMonoidalCategory Y) _ _
     (sheafification Y)

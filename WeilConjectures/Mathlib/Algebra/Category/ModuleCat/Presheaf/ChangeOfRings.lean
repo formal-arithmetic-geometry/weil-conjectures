@@ -7,24 +7,22 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 
 /-!
-# The restriction of scalars of presheaves of modules is lax braided
+# The restriction of scalars of presheaves of modules is lax monoidal
 
 Let `R` and `R'` be presheaves of commutative rings on a category `C`. For a morphism
 `α : R ⋙ forget₂ _ _ ⟶ R' ⋙ forget₂ _ _` of the underlying presheaves of rings, we
 show that the restriction of scalars functor
 `PresheafOfModules.restrictScalars α : PresheafOfModules (R' ⋙ forget₂ _ _) ⥤
-PresheafOfModules (R ⋙ forget₂ _ _)` is lax monoidal, and even lax braided (the two
-categories being symmetric monoidal). The structure maps are obtained objectwise from the
-lax monoidal structure on `ModuleCat.restrictScalars`, and the content of the statement is
-their naturality in the object of `C`.
+PresheafOfModules (R ⋙ forget₂ _ _)` is lax monoidal. The structure maps are obtained
+objectwise from the lax monoidal structure on `ModuleCat.restrictScalars`, and the content of
+the statement is their naturality in the object of `C`.
 
 ## Main declarations
 
 * `PresheafOfModules.restrictScalarsLaxMonoidal`: `restrictScalars α` is lax monoidal;
-* `PresheafOfModules.restrictScalarsLaxBraided`: it is even lax braided;
 * `PresheafOfModules.restrictScalars_ε_app` and `PresheafOfModules.restrictScalars_μ_app`
   identify the structure maps objectwise.
 
@@ -108,13 +106,5 @@ lemma restrictScalars_μ_app
     (μ (restrictScalars.{u} α) M₁ M₂).app X =
       μ (ModuleCat.restrictScalars (α.app X).hom) (M₁.obj X) (M₂.obj X) :=
   rfl
-
-/-- The restriction of scalars along a morphism `α` of presheaves of rings is lax braided,
-i.e. lax symmetric monoidal: this holds objectwise, by `ModuleCat.restrictScalarsLaxBraided`. -/
-noncomputable instance restrictScalarsLaxBraided : (restrictScalars.{u} α).LaxBraided where
-  braided M₁ M₂ := by
-    ext1 X
-    exact Functor.LaxBraided.braided (F := ModuleCat.restrictScalars (α.app X).hom)
-      (M₁.obj X) (M₂.obj X)
 
 end PresheafOfModules
