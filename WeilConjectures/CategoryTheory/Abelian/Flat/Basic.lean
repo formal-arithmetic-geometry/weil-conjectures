@@ -13,9 +13,9 @@ public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 
 # Flat objects of a braided closed monoidal category
 
-Two elementary properties of `CategoryTheory.ObjectProperty.flat` that are not part of
-`WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic`, both used by the flat
-separator criterion of
+Three elementary properties of `CategoryTheory.ObjectProperty.flat` that are not part of
+`WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic`. The first two are used by the
+flat separator criterion of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution`.
 
 The first one says that in a *closed* monoidal category only left exactness has to be
@@ -26,11 +26,16 @@ The second one says that flat objects are stable under coproducts in a Grothendi
 abelian category. This is what makes the functorial flat cover `∐_{g : G ⟶ X} G` attached
 to a flat separator `G` flat.
 
+The third one says that a `⊗`-invertible object is flat, tensoring with it being an
+equivalence. It makes the derived tensor product with a lisse sheaf of rank one, such as an
+Artin–Schreier sheaf, computable on sheaves.
+
 ## Main results
 
 - `CategoryTheory.ObjectProperty.flat_iff_preservesFiniteLimits`: flatness is left
   exactness of tensoring.
 - `CategoryTheory.ObjectProperty.flat_coproduct`: a coproduct of flat objects is flat.
+- `CategoryTheory.ObjectProperty.flat_of_tensorIsoUnit`: a `⊗`-invertible object is flat.
 
 -/
 
@@ -77,5 +82,16 @@ lemma flat_coproduct {I : Type u} (f : I → A) (hf : ∀ i, flat (f i)) :
     preservesFiniteLimits_of_evaluation _ (fun j ↦
       inferInstanceAs (PreservesFiniteLimits (tensorLeft (f j.as))))
   exact preservesFiniteLimits_of_natIso e.symm
+
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
+/-- A `⊗`-invertible object is flat: if `X ⊗ Y ≅ 𝟙`, then tensoring with `X` is an
+equivalence, with quasi-inverse tensoring with `Y`, so it is exact. -/
+lemma flat_of_tensorIsoUnit {X Y : A} (e : X ⊗ Y ≅ 𝟙_ A) : flat X := by
+  rw [flat_iff_preservesFiniteLimits]
+  let E : A ≌ A := Equivalence.mk (tensorLeft X) (tensorLeft Y)
+    ((leftUnitorNatIso A).symm ≪≫ (tensoringLeft A).mapIso (β_ Y X ≪≫ e).symm ≪≫
+      tensorLeftTensor Y X)
+    ((tensorLeftTensor X Y).symm ≪≫ (tensoringLeft A).mapIso e ≪≫ leftUnitorNatIso A)
+  exact inferInstanceAs (PreservesFiniteLimits E.functor)
 
 end CategoryTheory.ObjectProperty

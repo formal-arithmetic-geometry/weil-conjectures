@@ -56,6 +56,8 @@ resolutions when `g^*` preserves flat sheaves, so they form a left derivability 
 - `AlgebraicGeometry.Etale.derivedTensorRightPullback g`: tensoring with a complex pulled
   back along `g`, `N ↦ (K ↦ K ⊗ᴸ g^* N)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_unit`: `Lg^* Λ_Y ≅ Λ_Z`.
+- `AlgebraicGeometry.Etale.derivedTensorSingleIsoOfFlat`: `F[0] ⊗ᴸ G[0] ≅ (F ⊗ G)[0]` for a
+  flat sheaf `G`.
 - `AlgebraicGeometry.Etale.nonempty_monoidal_leftDerivedUpperStar`: `Lg^*` is a monoidal
   functor (currently `sorry`, see the TODO below).
 - `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_left` and
@@ -207,6 +209,37 @@ lemma isIso_μNatTrans_Qh_app_app_of_kFlat {X : Scheme.{u}}
   exact (MorphismProperty.id_prod_kFlat_derives_curriedTensor
     (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (.up ℤ))
       Qh).isIso_of_isLeftDerivabilityStructure (LF := -⊗ᴸ-(X)[A]) (μNatTrans Qh) K ⟨_, hM⟩
+
+variable {A} in
+/-- The derived tensor product of two sheaves placed in degree `0` is their tensor product
+placed in degree `0`, when the second one is flat:
+
+`F[0] ⊗ᴸ G[0] ≅ (F ⊗ G)[0]`.
+
+A flat sheaf in degree `0` is K-flat, so the lax monoidal structure of `Qh` is an isomorphism
+there (`AlgebraicGeometry.Etale.isIso_μNatTrans_Qh_app_app_of_kFlat`), and the tensor product
+of two single complexes is the single complex of the tensor product. -/
+noncomputable def derivedTensorSingleIsoOfFlat {X : Scheme.{u}}
+    (F G : Sheaf X.smallEtaleTopology A) (hG : ObjectProperty.flat G) :
+    ((-⊗ᴸ-(X)[A]).obj ((singleFunctor _ 0).obj F)).obj ((singleFunctor _ 0).obj G) ≅
+      (singleFunctor _ 0).obj (F ⊗ G) :=
+  -- `F[0]` as the image of the single complex in the homotopy category
+  let e (F : Sheaf X.smallEtaleTopology A) : (singleFunctor _ 0).obj F ≅
+      Qh.obj ((HomotopyCategory.quotient _ _).obj
+        ((HomologicalComplex.single _ (.up ℤ) 0).obj F)) :=
+    (singleFunctorIsoCompQ _ 0).app F ≪≫
+      (quotientCompQhIso _).symm.app ((HomologicalComplex.single _ (.up ℤ) 0).obj F)
+  have := isIso_μNatTrans_Qh_app_app_of_kFlat
+    ((HomotopyCategory.quotient _ _).obj ((HomologicalComplex.single _ (.up ℤ) 0).obj F))
+    ((HomotopyCategory.quotient _ _).obj ((HomologicalComplex.single _ (.up ℤ) 0).obj G))
+    ((HomotopyCategory.kFlat_quotient_obj_iff _).2
+      ((CochainComplex.kFlat_single_obj_iff_flat G 0).2 hG))
+  ((-⊗ᴸ-(X)[A]).mapIso (e F)).app _ ≪≫ ((-⊗ᴸ-(X)[A]).obj _).mapIso (e G) ≪≫
+    asIso (((μNatTrans Qh).app _).app _) ≪≫
+    Qh.mapIso ((HomotopyCategory.quotient _ _).mapIso
+      (CochainComplex.mapBifunctorSingle₁Iso (curriedTensor _) F _ ≪≫
+        (HomologicalComplex.singleMapHomologicalComplex ((curriedTensor _).obj F) (.up ℤ) 0).app
+          G)) ≪≫ (e (F ⊗ G)).symm
 
 section
 

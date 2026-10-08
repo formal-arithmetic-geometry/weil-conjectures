@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Field.ULift
 public import Mathlib.Algebra.Group.AddChar
 public import Mathlib.Data.ZMod.Basic
+public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.ConstructibleSheaf.Pullback
@@ -42,7 +43,8 @@ classical case is `k = ℤ/p`.
   of a global function `f` on a `k`-scheme, with its pullback compatibility
   `AlgebraicGeometry.Etale.artinSchreierSheafOfPullbackIso`.
 - `AlgebraicGeometry.Etale.artinSchreierSheafZMod`: the case `k = ℤ/p`, for a scheme of
-  characteristic `p`.
+  characteristic `p`, with its pullback compatibility
+  `AlgebraicGeometry.Etale.artinSchreierSheafZModPullbackIso`.
 
 ## Main statements
 
@@ -68,6 +70,10 @@ classical case is `k = ℤ/p`.
 - `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg` and
   `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv`: the inverse of `ℒ_{Ψ, f}` is
   both `ℒ_{Ψ, -f}` and `ℒ_{Ψ⁻¹, f}`.
+- `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_sub`:
+  `ℒ_{Ψ, f} ⊗ ℒ_{Ψ⁻¹, g} ≅ ℒ_{Ψ, f - g}`.
+- `AlgebraicGeometry.Etale.flat_artinSchreierSheafOf`: `ℒ_{Ψ, f}` is flat, being
+  `⊗`-invertible.
 
 ## Blueprint
 
@@ -305,6 +311,28 @@ def artinSchreierSheafZMod {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)] (X : S
   letI := X.overSpecZModOfCharP p
   artinSchreierSheafOf X (Ψ.compAddMonoidHom AddEquiv.ulift.toAddMonoidHom) f
 
+/-- The Artin–Schreier sheaf of a scheme of characteristic `p` is compatible with pullback: for
+a morphism `h : X' ⟶ X` of schemes of characteristic `p`, `h^* ℒ_{Ψ, f} ≅ ℒ_{Ψ, h^* f}`. Every
+such morphism is a morphism over `𝔽_p`, so this is
+`AlgebraicGeometry.Etale.artinSchreierSheafOfPullbackIso`.
+(sketch blueprint: `sk-def-kernel`, used in `sk-prop-base-change`) -/
+def artinSchreierSheafZModPullbackIso {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
+    {X X' : Scheme.{u}} [CharP Γ(X, ⊤) p] [CharP Γ(X', ⊤) p] (h : X' ⟶ X)
+    (Ψ : AddChar (ZMod p) Λ) (f : Γ(X, ⊤)) :
+    (h)^*[ModuleCat Λ].obj (artinSchreierSheafZMod X Ψ f) ≅
+      artinSchreierSheafZMod X' Ψ (h.appTop f) :=
+  letI := X.overSpecZModOfCharP p
+  letI := X'.overSpecZModOfCharP p
+  haveI : h.IsOver (Spec (.of (ULift.{u} (ZMod p)))) := by
+    rw [Scheme.Hom.isOver_iff]
+    change h ≫ X.toSpecΓ ≫ Spec.map _ = X'.toSpecΓ ≫ Spec.map _
+    rw [Scheme.toSpecΓ_naturality_assoc, ← Spec.map_comp]
+    congr 2
+    ext ⟨n⟩
+    obtain ⟨k, rfl⟩ := ZMod.intCast_surjective n
+    simp
+  artinSchreierSheafOfPullbackIso (k := ULift.{u} (ZMod p)) h _ f
+
 end ZMod
 
 section Properties
@@ -489,6 +517,53 @@ theorem nonempty_iso_artinSchreierSheafOf_inv (Ψ : AddChar k Λ) (f : Γ(X, ⊤
   obtain ⟨e'⟩ := nonempty_iso_artinSchreierSheafOf_one X (Λ := Λ) (k := k) f
   exact ⟨e ≪≫ eqToIso (congrArg (artinSchreierSheafOf X · f) (mul_inv_cancel Ψ)) ≪≫ e'⟩
 
+/-- Twisting by the inverse character subtracts functions:
+`ℒ_{Ψ, f} ⊗ ℒ_{Ψ⁻¹, g} ≅ ℒ_{Ψ, f - g}`, from `ℒ_{Ψ, f} ≅ ℒ_{Ψ, f - g} ⊗ ℒ_{Ψ, g}` and
+`ℒ_{Ψ, g} ⊗ ℒ_{Ψ⁻¹, g} ≅ Λ`. On the triple product this is the identification of the
+integrand of the convolution of the Fourier kernels of `ψ` and `ψ⁻¹`.
+(sketch blueprint: `sk-lem-as-properties`, used in `sk-prop-convolution-kernel`) -/
+theorem nonempty_iso_artinSchreierSheafOf_sub (Ψ : AddChar k Λ) (f g : Γ(X, ⊤)) :
+    Nonempty (artinSchreierSheafOf X Ψ f ⊗ artinSchreierSheafOf X Ψ⁻¹ g ≅
+      artinSchreierSheafOf X Ψ (f - g)) := by
+  obtain ⟨e⟩ := nonempty_iso_artinSchreierSheafOf_add X Ψ (f - g) g
+  obtain ⟨e'⟩ := nonempty_iso_artinSchreierSheafOf_inv X Ψ g
+  exact ⟨whiskerRightIso (eqToIso (by rw [sub_add_cancel]) ≪≫ e.symm) _ ≪≫
+    α_ _ _ _ ≪≫ whiskerLeftIso _ e' ≪≫ ρ_ _⟩
+
+/-- The Artin–Schreier sheaf `ℒ_{Ψ, f}` is flat: it is `⊗`-invertible, with inverse
+`ℒ_{Ψ⁻¹, f}` (`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv`). So derived
+tensor products with it are computed on sheaves. -/
+theorem flat_artinSchreierSheafOf (Ψ : AddChar k Λ) (f : Γ(X, ⊤)) :
+    ObjectProperty.flat (artinSchreierSheafOf X Ψ f) :=
+  ObjectProperty.flat_of_tensorIsoUnit (nonempty_iso_artinSchreierSheafOf_inv X Ψ f).some
+
 end Properties
+
+section ZModProperties
+
+variable {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)] (X : Scheme.{u}) [CharP Γ(X, ⊤) p]
+
+/-- The case `k = ℤ/p` of `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_sub`:
+`ℒ_{Ψ, f} ⊗ ℒ_{Ψ⁻¹, g} ≅ ℒ_{Ψ, f - g}` on a scheme of characteristic `p`.
+(sketch blueprint: `sk-lem-as-properties`, used in `sk-prop-convolution-kernel`) -/
+theorem nonempty_iso_artinSchreierSheafZMod_sub (Ψ : AddChar (ZMod p) Λ) (f g : Γ(X, ⊤)) :
+    Nonempty (artinSchreierSheafZMod X Ψ f ⊗ artinSchreierSheafZMod X Ψ⁻¹ g ≅
+      artinSchreierSheafZMod X Ψ (f - g)) := by
+  let _ := X.overSpecZModOfCharP p
+  have h : (Ψ⁻¹).compAddMonoidHom (AddEquiv.ulift (α := ZMod p)).toAddMonoidHom =
+      (Ψ.compAddMonoidHom AddEquiv.ulift.toAddMonoidHom)⁻¹ := by
+    ext a
+    simp [AddChar.inv_apply]
+  unfold artinSchreierSheafZMod
+  rw [h]
+  exact nonempty_iso_artinSchreierSheafOf_sub X _ f g
+
+/-- The Artin–Schreier sheaf `ℒ_{Ψ, f}` of a scheme of characteristic `p` is flat. -/
+theorem flat_artinSchreierSheafZMod (Ψ : AddChar (ZMod p) Λ) (f : Γ(X, ⊤)) :
+    ObjectProperty.flat (artinSchreierSheafZMod X Ψ f) :=
+  letI := X.overSpecZModOfCharP p
+  flat_artinSchreierSheafOf X _ f
+
+end ZModProperties
 
 end AlgebraicGeometry.Etale
