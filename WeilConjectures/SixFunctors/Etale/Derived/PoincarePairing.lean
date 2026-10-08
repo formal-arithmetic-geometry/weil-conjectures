@@ -41,6 +41,8 @@ which over `Y = Spec k` is `RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ`. Its
 - `AlgebraicGeometry.Etale.mixedSupportCupProduct` (`sk-def-pairing-data`): `⌣_c`.
 - `AlgebraicGeometry.Etale.smoothTrace` (`sk-def-pairing-data`): `Tr_o`.
 - `AlgebraicGeometry.Etale.poincarePairing` (`sk-def-pairing`): `β_K`.
+- `AlgebraicGeometry.Etale.poincarePairingOfTrace`: the pairing
+  `Ra_! K ⊗ᴸ (Ra_* K^∨)[n] ⟶ T` of a trace `(Ra_! Λ_X)[n] ⟶ T`.
 
 ## Main statements
 
@@ -184,6 +186,29 @@ noncomputable def poincarePairing (o : Orientation A a d) (e : (L((a)^*[A])).obj
   (((derivedTensor A Y).obj ((R(a)_![A]).obj K)).commShiftIso (2 * d : ℤ)).hom.app _ ≫
     (poincarePairingEvaluation a o.twist K)⟦(2 * d : ℤ)⟧' ≫
       ((R(a)_![A]).commShiftIso (2 * d : ℤ)).inv.app _ ≫ smoothTrace o e
+
+/-- The *pairing of a trace* `t : (Ra_! Λ_X)[n] ⟶ T`,
+
+`Ra_! K ⊗ᴸ (Ra_* K^∨)[n] ⟶ T`:
+
+the shift is moved out, then come the mixed-support cup product, `Ra_!` of the evaluation
+`ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X` and `t`,
+```
+                          shift out                             (⌣_c)[n]
+Ra_! K ⊗ᴸ (Ra_* K^∨)[n] ─────────▶ (Ra_! K ⊗ᴸ Ra_* K^∨)[n] ─────────▶
+                                (Ra_!(ev_K))[n]                t
+  (Ra_!(K ⊗ᴸ K^∨))[n] ─────────────────▶ (Ra_! Λ_X)[n] ──────▶ T
+```
+For the untwisted smooth trace `(Ra_! Λ_X)[2d] ⟶ Λ_Y(-d)` of a Tate orientation this is the
+untwisted, line-valued Poincaré pairing
+(`AlgebraicGeometry.Etale.TateOrientation.untwistedPoincarePairing`). -/
+noncomputable def poincarePairingOfTrace (K : 𝐃(X, A)) {T : 𝐃(Y, A)} (n : ℤ)
+    (t : ((R(a)_![A]).obj (𝟙_ _))⟦n⟧ ⟶ T) :
+    ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).obj
+        (((R((a)_*[A])).obj ((DerivedCategory.coefficientDual A X).obj (op K)))⟦n⟧) ⟶ T :=
+  ((((derivedTensor A Y).obj ((R(a)_![A]).obj K)).commShiftIso n).hom.app _ ≫
+    (mixedSupportCupProduct A a K _ ≫
+      (R(a)_![A]).map (DerivedCategory.coefficientEvaluation K))⟦n⟧') ≫ t
 
 section ModuleCat
 
