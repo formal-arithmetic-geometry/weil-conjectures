@@ -9,7 +9,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import Mathlib.RingTheory.PicardGroup
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 
 /-!
 # Tensor products and duals of constructible sheaves
@@ -20,6 +22,8 @@ Let `Λ` be a commutative ring. For sheaves of `Λ`-modules on the small étale 
 - a finite locally constant sheaf is constructible, for the trivial stratification, and a
   constructible sheaf has finite stalks; so a sheaf is finite locally constant if and only if it
   is constructible and locally constant;
+- over a finite ring, a sheaf with a tensor inverse is finite: its stalks are invertible
+  modules, hence finitely generated;
 - the tensor product of two constructible sheaves is constructible: on the strata of a common
   refinement of stratifications the pullback of `F ⊗ G` is the tensor product of two finite
   locally constant sheaves, the pullback being monoidal;
@@ -37,6 +41,7 @@ constructible without finiteness hypotheses on `X`: for an open immersion `j` it
 - `AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.isConstructibleSheaf`
 - `AlgebraicGeometry.Scheme.IsConstructibleSheaf.isFiniteSheaf`
 - `AlgebraicGeometry.Scheme.IsConstructibleSheaf.tensorObj`
+- `AlgebraicGeometry.Scheme.IsFiniteSheaf.of_tensorIso`
 - `AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.ihom_unit`
 
 ## TODO
@@ -86,6 +91,20 @@ end General
 section Modules
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+
+/-- Over a finite ring `Λ`, a sheaf of `Λ`-modules `F` with a tensor inverse, `F ⊗ G ≅ Λ`, is
+finite: at a geometric point `s` the stalks satisfy `F_s ⊗ G_s ≅ Λ`, so `F_s` is an invertible
+`Λ`-module, hence finitely generated, hence finite. -/
+theorem IsFiniteSheaf.of_tensorIso [Finite Λ] (e : F ⊗ G ≅ 𝟙_ _) : IsFiniteSheaf F where
+  finite_sheafFiber Ω _ _ s := by
+    let P := (pointSmallEtale s).ulift.{u + 1}.sheafFiber (A := ModuleCat.{u + 1} Λ)
+    let e' : P.obj F ⊗ P.obj G ≅ 𝟙_ (ModuleCat.{u + 1} Λ) :=
+      (Etale.sheafFiberTensorIso s F G).symm ≪≫ P.mapIso e ≪≫ Etale.sheafFiberUnitIso _ s
+    have : Module.Invertible Λ (P.obj F) := .left e'.toLinearEquiv
+    have : Finite (P.obj F) := Module.finite_of_finite Λ
+    exact Finite.of_equiv _
+      (((pointSmallEtale s).uliftSheafFiberIso (ModuleCat.{u + 1} Λ)).app
+        F).toLinearEquiv.toEquiv
 
 /-- The tensor product of two finite locally constant sheaves of modules is finite locally
 constant: on a common trivialising cover it is the constant sheaf at the tensor product of two

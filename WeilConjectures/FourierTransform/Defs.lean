@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.FourierTransform.ArtinSchreier
+public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform
 
 /-!
@@ -42,6 +44,13 @@ compact-support direct image along `p₂` is the transform, before the shift.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.nonempty_iso_fourierKernel_mul`,
+  `AlgebraicGeometry.Etale.nonempty_iso_fourierKernel_inv`: `𝒦_ψ ⊗ 𝒦_ψ' ≅ 𝒦_{ψψ'}` and
+  `𝒦_ψ ⊗ 𝒦_{ψ⁻¹} ≅ Λ`.
+- `AlgebraicGeometry.Etale.constructibleFiniteTor_fourierKernel`,
+  `AlgebraicGeometry.Etale.isDualizable_fourierKernel`: the kernel in degree zero is
+  constructible, of finite Tor amplitude and dualizable. Together with local constancy these
+  make it lisse (`AlgebraicGeometry.Etale.isLisse_fourierKernel`).
 - `AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible`:
   the transform preserves the bounded constructible derived category.
 
@@ -101,10 +110,8 @@ generality, drop the field and `[HasInvertibleExponent Λ S]` here.
 
 ## Deferred clauses
 
-Two clauses of `sk-prop-kernel-lisse` and `sk-prop-well-defined` are deferred. That the
-kernel is of *finite Tor amplitude* cannot be stated yet: the repository has no notion of
-Tor amplitude for an object of `D(X_ét)`. That the transform is *triangulated* is not recorded
-either. Its factors commute with shifts (`Functor.CommShift` instances for `Rf_!`, `Lg^*` and
+One clause of `sk-prop-well-defined` is deferred: that the transform is *triangulated*. Its
+factors commute with shifts (`Functor.CommShift` instances for `Rf_!`, `Lg^*` and
 `(derivedTensor A X).flip.obj K` are in `WeilConjectures.SixFunctors.Etale.Derived.Shift`),
 but triangulatedness of the derived tensor product and of `Rf_!` is not yet available.
 
@@ -141,6 +148,93 @@ noncomputable def fourierKernel [CharP Γ(pullback π π', ⊤) p] (Ψ : AddChar
     (b : Γ(pullback π π', ⊤)) :
     Sheaf (pullback π π').smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
   artinSchreierSheafZMod (pullback π π') Ψ b
+
+section Kernel
+
+variable [CharP Γ(pullback π π', ⊤) p]
+
+/-- The Fourier kernel `𝒦_ψ` is locally constant, as the pullback of the Artin–Schreier sheaf.
+(sketch blueprint: `sk-prop-kernel-lisse`; blueprint: `prop-kernel-lisse`) -/
+instance isLocallyConstantSheaf_fourierKernel (Ψ : AddChar (ZMod p) Λ)
+    (b : Γ(pullback π π', ⊤)) :
+    Scheme.IsLocallyConstantSheaf (fourierKernel Λ π π' Ψ b) := by
+  let := (pullback π π').overSpecZModOfCharP p
+  exact isLocallyConstantSheaf_artinSchreierSheafOf _ _ b
+
+/-- The Fourier kernel is multiplicative in the character: `𝒦_ψ ⊗ 𝒦_ψ' ≅ 𝒦_{ψ ψ'}`, the value
+of the character being additive in the defining function.
+(sketch blueprint: `sk-prop-kernel-lisse`; blueprint: `prop-kernel-lisse`) -/
+theorem nonempty_iso_fourierKernel_mul (Ψ Ψ' : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) :
+    Nonempty (fourierKernel Λ π π' Ψ b ⊗ fourierKernel Λ π π' Ψ' b ≅
+      fourierKernel Λ π π' (Ψ * Ψ') b) := by
+  let := (pullback π π').overSpecZModOfCharP p
+  exact nonempty_iso_artinSchreierSheafOf_mul _ _ _ b
+
+/-- The tensor inverse of the Fourier kernel `𝒦_ψ` is the kernel `𝒦_{ψ⁻¹}` of the inverse
+character: `𝒦_ψ ⊗ 𝒦_{ψ⁻¹} ≅ Λ`.
+(sketch blueprint: `sk-prop-kernel-lisse`; blueprint: `prop-kernel-lisse`) -/
+theorem nonempty_iso_fourierKernel_inv (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) :
+    Nonempty (fourierKernel Λ π π' Ψ b ⊗ fourierKernel Λ π π' Ψ⁻¹ b ≅ 𝟙_ _) := by
+  let := (pullback π π').overSpecZModOfCharP p
+  have : Ψ⁻¹.compAddMonoidHom AddEquiv.ulift.toAddMonoidHom =
+      (Ψ.compAddMonoidHom AddEquiv.ulift.toAddMonoidHom)⁻¹ := by
+    ext; simp
+  unfold fourierKernel artinSchreierSheafZMod
+  rw [this]
+  exact nonempty_iso_artinSchreierSheafOf_inv _ _ b
+
+/-- The Fourier kernel `𝒦_{ψ⁻¹}` of the inverse character is also a left tensor inverse of
+`𝒦_ψ`: `𝒦_{ψ⁻¹} ⊗ 𝒦_ψ ≅ Λ`. -/
+theorem nonempty_iso_fourierKernel_inv_tensor (Ψ : AddChar (ZMod p) Λ)
+    (b : Γ(pullback π π', ⊤)) :
+    Nonempty (fourierKernel Λ π π' Ψ⁻¹ b ⊗ fourierKernel Λ π π' Ψ b ≅ 𝟙_ _) := by
+  simpa only [inv_inv] using nonempty_iso_fourierKernel_inv Λ π π' Ψ⁻¹ b
+
+/-- Over a finite coefficient ring, the Fourier kernel is finite locally constant: its stalks
+are invertible modules over the finite ring `Λ`.
+(sketch blueprint: `sk-prop-kernel-lisse`; blueprint: `prop-kernel-lisse`) -/
+instance isFiniteLocallyConstantSheaf_fourierKernel [Finite Λ] (Ψ : AddChar (ZMod p) Λ)
+    (b : Γ(pullback π π', ⊤)) :
+    Scheme.IsFiniteLocallyConstantSheaf (fourierKernel Λ π π' Ψ b) where
+  toIsFiniteSheaf :=
+    Scheme.IsFiniteSheaf.of_tensorIso (nonempty_iso_fourierKernel_inv Λ π π' Ψ b).some
+
+/-- Over a finite coefficient ring, the Fourier kernel is constructible, for the trivial
+stratification. -/
+instance isConstructibleSheaf_fourierKernel [Finite Λ] (Ψ : AddChar (ZMod p) Λ)
+    (b : Γ(pullback π π', ⊤)) :
+    Scheme.IsConstructibleSheaf (fourierKernel Λ π π' Ψ b) :=
+  Scheme.IsFiniteLocallyConstantSheaf.isConstructibleSheaf inferInstance
+
+/-- The Fourier kernel, placed in degree zero, has Tor amplitude in `[0, 0]`: having a tensor
+inverse, it is flat. (sketch blueprint: `sk-prop-kernel-lisse`; blueprint:
+`prop-kernel-lisse`, `def-weil-finite-tor-amplitude`) -/
+theorem torAmplitudeIn_fourierKernel (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) :
+    DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) (pullback π π') 0 0
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) :=
+  torAmplitudeIn_singleFunctor_obj_of_flat _
+    (ObjectProperty.flat_of_tensorIso (nonempty_iso_fourierKernel_inv Λ π π' Ψ b).some
+      (nonempty_iso_fourierKernel_inv_tensor Λ π π' Ψ b).some)
+
+/-- Over a finite coefficient ring, the Fourier kernel placed in degree zero lies in
+`Dctf(V ×_S V', Λ)`: it is constructible and of finite Tor amplitude.
+(sketch blueprint: `sk-prop-kernel-lisse`; blueprint: `prop-kernel-lisse`) -/
+theorem constructibleFiniteTor_fourierKernel [Finite Λ] (Ψ : AddChar (ZMod p) Λ)
+    (b : Γ(pullback π π', ⊤)) :
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) (pullback π π')
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) :=
+  ⟨DerivedCategory.boundedConstructible_singleFunctor_obj _ 0, 0, 0,
+    torAmplitudeIn_fourierKernel Λ π π' Ψ b⟩
+
+/-- The Fourier kernel placed in degree zero is dualizable in `D((V ×_S V')_ét)`, with dual the
+kernel `𝒦_{ψ⁻¹}` of the inverse character.
+(sketch blueprint: `sk-prop-kernel-lisse`; blueprint: `prop-kernel-lisse`) -/
+theorem isDualizable_fourierKernel (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) :
+    IsDualizable ((_root_.DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) :=
+  isDualizable_singleFunctor_obj_of_tensorIso (nonempty_iso_fourierKernel_inv Λ π π' Ψ b).some
+    (nonempty_iso_fourierKernel_inv_tensor Λ π π' Ψ b).some
+
+end Kernel
 
 /-- For a pairing `b ∈ Γ(V ×_S V', 𝒪)` between two `S`-schemes, the *Fourier integrand* is the
 functor `ℱ_ψ(K) = p₁^* K ⊗ᴸ 𝒦_ψ` from `D(V_ét)` to `D((V ×_S V')_ét)`, `p₁` being the first

@@ -21,6 +21,10 @@ tensor inverse.
 
 - `CategoryTheory.IsDualizable`: `X` admits a right dual.
 - `CategoryTheory.IsInvertible`: `X` admits a tensor inverse.
+- `CategoryTheory.exactPairingOfTensorIso`: the exact pairing of an object with a two-sided
+  tensor inverse.
+- `CategoryTheory.tensorLeftEquivalence`, `CategoryTheory.tensorRightEquivalence`: tensoring
+  with an object with a two-sided tensor inverse is an equivalence.
 - `CategoryTheory.MonoidalClosed.ihomIsoTensorLeft`: for an exact pairing of `Y` and `X`, the
   internal hom `ihom X` is `Y ⊗ -`.
 - `CategoryTheory.MonoidalClosed.ihomUnitTensorToIhom`: the canonical comparison map
@@ -28,6 +32,8 @@ tensor inverse.
 
 ## Main statements
 
+- `CategoryTheory.isDualizable_of_tensorIso`: an object with a two-sided tensor inverse is
+  dualizable.
 - `CategoryTheory.MonoidalClosed.curry_evaluation`: the transpose `Y ⟶ (ihom X).obj (𝟙_ C)` of
   the evaluation of an exact pairing of `Y` and `X` is an isomorphism.
 - `CategoryTheory.MonoidalClosed.isIso_ihomUnitTensorToIhom`: the comparison map is an
@@ -70,6 +76,82 @@ def IsInvertible (X : C) : Prop :=
 
 theorem isInvertible_unit : IsInvertible (𝟙_ C) :=
   ⟨𝟙_ C, ⟨λ_ _⟩⟩
+
+/-- Two morphisms into the unit can be applied in either order: `f ⊗ g` computed as
+`f ▷ B` followed by `g`, or as `A ◁ g` followed by `f`. -/
+lemma whiskerRight_comp_leftUnitor_hom_comp {A B : C} (f : A ⟶ 𝟙_ C) (g : B ⟶ 𝟙_ C) :
+    f ▷ B ≫ (λ_ B).hom ≫ g = A ◁ g ≫ (ρ_ A).hom ≫ f := by
+  rw [← leftUnitor_naturality, ← whisker_exchange_assoc, ← rightUnitor_naturality,
+    unitors_equal]
+
+/-- If `X ⊗ Y ≅ 𝟙_ C`, then `- ▷ X` is injective on morphisms. -/
+lemma whiskerRight_injective_of_tensorIso {X Y : C} (e : X ⊗ Y ≅ 𝟙_ C) {Z Z' : C}
+    {f g : Z ⟶ Z'} (h : f ▷ X = g ▷ X) : f = g := by
+  have key (k : Z ⟶ Z') : k = (ρ_ Z).inv ≫ Z ◁ e.inv ≫ (α_ Z X Y).inv ≫ (k ▷ X) ▷ Y ≫
+      (α_ Z' X Y).hom ≫ Z' ◁ e.hom ≫ (ρ_ Z').hom := by
+    rw [← whiskerRight_tensor_assoc, ← whisker_exchange_assoc, ← whiskerLeft_comp_assoc,
+      e.inv_hom_id, whiskerLeft_id, Category.id_comp, rightUnitor_naturality,
+      Iso.inv_hom_id_assoc]
+  rw [key f, key g, h]
+
+/-- An object `X` with a two-sided tensor inverse `Y`, `X ⊗ Y ≅ 𝟙_ C ≅ Y ⊗ X`, forms an exact
+pairing with `Y`. The coevaluation is the inverse of `X ⊗ Y ≅ 𝟙_ C`; the evaluation is
+`Y ⊗ X ≅ 𝟙_ C` corrected by an automorphism of `X` so that the first zigzag identity holds,
+and the second zigzag identity then follows, since `- ▷ X` is injective. -/
+@[instance_reducible]
+noncomputable def exactPairingOfTensorIso {X Y : C} (e : X ⊗ Y ≅ 𝟙_ C) (e' : Y ⊗ X ≅ 𝟙_ C) :
+    ExactPairing X Y :=
+  let φ : X ⟶ X := (λ_ X).inv ≫ e.inv ▷ X ≫ (α_ X Y X).hom ≫ X ◁ e'.hom ≫ (ρ_ X).hom
+  let ε : Y ⊗ X ⟶ 𝟙_ C := Y ◁ inv φ ≫ e'.hom
+  have zig : (λ_ X).inv ≫ e.inv ▷ X ≫ (α_ X Y X).hom ≫ X ◁ ε ≫ (ρ_ X).hom = 𝟙 X := by
+    have : (λ_ X).inv ≫ e.inv ▷ X ≫ (α_ X Y X).hom ≫ X ◁ ε ≫ (ρ_ X).hom = inv φ ≫ φ := by
+      simp only [ε, φ, MonoidalCategory.whiskerLeft_comp, Category.assoc]
+      rw [← associator_naturality_right_assoc, ← whisker_exchange_assoc,
+        leftUnitor_inv_naturality_assoc]
+    rw [this, IsIso.inv_hom_id]
+  have zag : (ρ_ Y).inv ≫ Y ◁ e.inv ≫ (α_ Y X Y).inv ≫ ε ▷ Y ≫ (λ_ Y).hom = 𝟙 Y := by
+    apply whiskerRight_injective_of_tensorIso e
+    rw [id_whiskerRight, ← cancel_mono ε, Category.id_comp]
+    calc _ = (ρ_ Y).inv ▷ X ≫ (Y ◁ e.inv) ▷ X ≫ (α_ Y X Y).inv ▷ X ≫ (α_ (Y ⊗ X) Y X).hom ≫
+          ε ▷ (Y ⊗ X) ≫ (λ_ (Y ⊗ X)).hom ≫ ε := by monoidal
+      _ = (ρ_ Y).inv ▷ X ≫ (Y ◁ e.inv) ▷ X ≫ (α_ Y X Y).inv ▷ X ≫ (α_ (Y ⊗ X) Y X).hom ≫
+          (Y ⊗ X) ◁ ε ≫ (ρ_ (Y ⊗ X)).hom ≫ ε := by
+        rw [whiskerRight_comp_leftUnitor_hom_comp]
+      _ = Y ◁ ((λ_ X).inv ≫ e.inv ▷ X ≫ (α_ X Y X).hom ≫ X ◁ ε ≫ (ρ_ X).hom) ≫ ε := by
+        monoidal
+      _ = ε := by rw [zig, whiskerLeft_id, Category.id_comp]
+  { coevaluation' := e.inv
+    evaluation' := ε
+    coevaluation_evaluation' := by
+      rw [← cancel_epi (ρ_ Y).inv, ← cancel_mono (λ_ Y).hom]
+      simpa using zag
+    evaluation_coevaluation' := by
+      rw [← cancel_epi (λ_ X).inv, ← cancel_mono (ρ_ X).hom]
+      simpa using zig }
+
+/-- An object with a two-sided tensor inverse is dualizable. -/
+theorem isDualizable_of_tensorIso {X Y : C} (e : X ⊗ Y ≅ 𝟙_ C) (e' : Y ⊗ X ≅ 𝟙_ C) :
+    IsDualizable X :=
+  letI := exactPairingOfTensorIso e e'
+  ⟨⟨Y⟩⟩
+
+/-- Tensoring on the left with an object `X` with a two-sided tensor inverse `Y` is an
+equivalence, with inverse the tensor product with `Y`. -/
+@[simps! functor inverse]
+noncomputable def tensorLeftEquivalence {X Y : C} (e : X ⊗ Y ≅ 𝟙_ C) (e' : Y ⊗ X ≅ 𝟙_ C) :
+    C ≌ C :=
+  .mk (tensorLeft X) (tensorLeft Y)
+    ((leftUnitorNatIso C).symm ≪≫ (tensoringLeft C).mapIso e'.symm ≪≫ tensorLeftTensor Y X)
+    ((tensorLeftTensor X Y).symm ≪≫ (tensoringLeft C).mapIso e ≪≫ leftUnitorNatIso C)
+
+/-- Tensoring on the right with an object `X` with a two-sided tensor inverse `Y` is an
+equivalence, with inverse the tensor product with `Y`. -/
+@[simps! functor inverse]
+noncomputable def tensorRightEquivalence {X Y : C} (e : X ⊗ Y ≅ 𝟙_ C) (e' : Y ⊗ X ≅ 𝟙_ C) :
+    C ≌ C :=
+  .mk (tensorRight X) (tensorRight Y)
+    ((rightUnitorNatIso C).symm ≪≫ (tensoringRight C).mapIso e.symm ≪≫ tensorRightTensor X Y)
+    ((tensorRightTensor Y X).symm ≪≫ (tensoringRight C).mapIso e' ≪≫ rightUnitorNatIso C)
 
 /-- The counit of `tensorLeftAdjunction Y X : tensorLeft X ⊣ tensorLeft Y` at `Z` is the composite
 ```
