@@ -23,10 +23,10 @@ dimension `d` and a finite coefficient ring `Λ` whose exponent is invertible on
 * *smooth purity* (`sk-thm-smooth-purity`): `ω_f ≅ Λ_X(d)[2d]`, hence
   `Rf^! K ≅ Lf^* K(d)[2d]`.
 
-The route is the blueprint's: the model case is the `𝔸ⁿ`-purity of
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpaceZero`, transported
-along the deformation to the normal cone of the diagonal, which is a regular immersion of
-codimension `d` by `AlgebraicGeometry.isRegularImmersion_diagonal`.
+The route is the blueprint's: the model case is affine-space purity
+`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`, transported along the
+deformation to the normal cone (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`)
+of the diagonal, a closed section of the first projection `X ×_Y X ⟶ X`.
 
 ## Implementation notes
 
@@ -34,16 +34,35 @@ The blueprint asserts that each isomorphism below is *canonical*: `sk-prop-cohsm
 the mate `φ_K : Lf^* K ⊗ ω_f ⟶ Rf^! K` of the projection formula, and `sk-thm-smooth-purity`
 about the normalized comparison. Neither map exists in the repository — the projection map
 itself is a TODO of `WeilConjectures.SixFunctors.Etale.Derived.Exchange` — so each statement
-records the existence of the isomorphism only, with a `TODO(unify)` marker.
+records the existence of the isomorphism only, with a `TODO(unify)` marker. For the same
+reason the smooth purity map `γ_{f,K}` and the smooth pullback exchange are built from their
+constituent isomorphisms, which are arguments of the constructions.
+
+The statements of `sk-prop-cohsm` carry `include d in`: their statements do not mention the
+relative dimension `d`, and without it the hypothesis `[SmoothOfRelativeDimension d f]` would
+silently be dropped.
+
+## Main definitions
+
+- `AlgebraicGeometry.Etale.twistShiftObjIso`: the twist reassociation
+  `M(m)[2m] ≅ M ⊗ Λ_X(m)[2m]`.
+- `AlgebraicGeometry.Etale.smoothPurityIso`: the smooth purity map
+  `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`.
+- `AlgebraicGeometry.Etale.smoothPullbackExchange`: the smooth pullback exchange
+  `Lg^* Rf^! K ≅ Rf'^! Lv^* K`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isInvertible_dualizingComplex`
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor`
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek`
-- `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_comp`
-- `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_twistShift`
+- `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`: `𝒞(p₁, Δ) ≅ ω_f`.
+- `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`: `ω_f ≅ Λ_X(d)[2d]`.
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_twistShift`:
+  `Rf^! K ≅ Lf^* K(d)[2d]`.
+- `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_comp`: `ω_{g ≫ f} ≅ ω_g ⊗ Lg^* ω_f`.
+- `AlgebraicGeometry.Etale.leftDerivedUpperStar_map_comp_smoothPullbackExchange_hom`: smooth
+  base-change coherence.
 -/
 
 @[expose] public section
@@ -121,26 +140,6 @@ theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek {X' Y' : 
         L((g')^*[ModuleCat.{u + 1} Λ]) ≅
       L((g)^*[ModuleCat.{u + 1} Λ]) ⋙
         rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f') :=
-  sorry
-
-include d in
-/-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
-
-**Additivity of the dualizing complex under composition.** For composable smooth separated
-morphisms `g : W ⟶ X` and `f : X ⟶ Y`,
-
-`ω_{g ≫ f} ≅ ω_g ⊗^L Lg^* ω_f`,
-
-which is the multiplicativity of the twist that `sk-thm-regular` divides one dualizing complex
-into another with. It is the mate of the composition law `R(g ≫ f)^! ≅ Rf^! ⋙ Rg^!` of
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp` applied to `Λ_Y`. -/
-theorem nonempty_iso_dualizingComplex_comp {W : Scheme.{u}} {e : ℕ} (g : W ⟶ X)
-    [IsSeparated g] [SmoothOfRelativeDimension e g] [HasCompactification g]
-    [HasCompactification (g ≫ f)] [HasInvertibleExponent Λ W] :
-    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (g ≫ f) ≅
-      ((derivedTensor (ModuleCat.{u + 1} Λ) W).obj
-          (dualizingComplex (ModuleCat.{u + 1} Λ) g)).obj
-        ((L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f))) :=
   sorry
 
 /-! ### The twist reassociation and its compatibility with pullback -/
@@ -357,6 +356,56 @@ theorem nonempty_iso_rightDerivedUpperShriek_twistShift
   obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f
   obtain ⟨φ⟩ := nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor Λ (d := d) f K hK
   exact ⟨(smoothPurityIso Λ (d := d) f K θ φ).symm⟩
+
+/-- Blueprint `prop-pur-smooth-purity-naturality-cover`: Naturality and independence of the
+smooth purity map
+
+The smooth purity isomorphism is natural in `K`: for `f` smooth separated of pure relative
+dimension `d`, the functors `K ↦ Lf^* K(d)[2d]` and `K ↦ Rf^! K` on `D^b_{ctf}(Y, Λ)` are
+naturally isomorphic. In the blueprint the natural isomorphism is the smooth purity map
+`γ_{f,-}`, natural because the tensor formula, the twist isomorphisms and the identification
+`ω_f ≅ Λ_X(d)[2d]` are. Here the tensor formula is only available objectwise
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor`), so the
+statement records the existence of a natural isomorphism; independence of choices has no
+content without the canonical maps. -/
+theorem nonempty_iso_twistShift_rightDerivedUpperShriek :
+    Nonempty ((DerivedCategory.boundedConstructibleFiniteTor Λ Y).ι ⋙
+        L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ twistShift Λ X d ≅
+      (DerivedCategory.boundedConstructibleFiniteTor Λ Y).ι ⋙
+        rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f) :=
+  sorry
+
+include d in
+/-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
+
+**Additivity of the dualizing complex under composition.** For composable smooth separated
+morphisms `g : W ⟶ X` and `f : X ⟶ Y`,
+
+`ω_{g ≫ f} ≅ ω_g ⊗^L Lg^* ω_f`,
+
+which is the multiplicativity of the twist that `sk-thm-regular` divides one dualizing complex
+into another with. This is the dualizing-object form of blueprint
+`thm-pur-composition-coherence`. It is the twist additivity of smooth purity: if `g` has
+relative dimension `e` and `f` relative dimension `d`, all three objects are Tate twists,
+`ω_{g ≫ f} ≅ Λ_W(e + d)[2(e + d)]`, `ω_g ≅ Λ_W(e)[2e]` and `Lg^* ω_f ≅ Λ_W(d)[2d]`, and
+`Λ_W(e)[2e] ⊗ Λ_W(d)[2d] ≅ Λ_W(e + d)[2(e + d)]`
+(`AlgebraicGeometry.Etale.shiftTateObjectAddIso`). -/
+theorem nonempty_iso_dualizingComplex_comp {W : Scheme.{u}} {e : ℕ} (g : W ⟶ X)
+    [IsSeparated g] [SmoothOfRelativeDimension e g] [HasCompactification g]
+    [HasCompactification (g ≫ f)] [HasInvertibleExponent Λ W] :
+    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (g ≫ f) ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) W).obj
+          (dualizingComplex (ModuleCat.{u + 1} Λ) g)).obj
+        ((L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f))) := by
+  obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := e + d) (g ≫ f)
+  obtain ⟨θg⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := e) g
+  obtain ⟨θf⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f
+  exact ⟨θ ≪≫ twistShiftConstantComplexIso Λ W _ ≪≫ eqToIso (by push_cast; rfl) ≪≫
+    (shiftTateObjectAddIso Λ W e d).symm ≪≫
+    ((derivedTensor _ W).mapIso (θg ≪≫ twistShiftConstantComplexIso Λ W e).symm).app _ ≪≫
+    ((derivedTensor _ W).obj (dualizingComplex _ g)).mapIso
+      ((L((g)^*[ModuleCat.{u + 1} Λ])).mapIso (θf ≪≫ twistShiftConstantComplexIso Λ X d) ≪≫
+        leftDerivedUpperStarTateShiftIso Λ g d).symm⟩
 
 /-! ### Base change -/
 
