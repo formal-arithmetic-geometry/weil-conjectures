@@ -99,6 +99,16 @@ lemma isAdicLisseSheaf_adicConstantSheaf (X : Scheme.{u}) :
   exact ⟨1, ⟨(upperStarId _ X).app _ ≪≫ (biproduct.isoProduct
     (fun _ : Fin 1 ↦ adicConstantSheaf l X) ≪≫ productUniqueIso _).symm⟩⟩
 
+/-- The zero sheaf is lisse: it is the empty direct sum of copies of `ℚ̄_ℓ`. -/
+lemma IsAdicLisseSheaf.of_isZero {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
+    (hF : IsZero F) : IsAdicLisseSheaf F := by
+  refine ⟨.singleton (𝟙 X), Precoverage.mem_coverings_of_isIso _, fun V f hf ↦ ?_⟩
+  obtain ⟨⟩ := hf
+  refine ⟨0, ⟨IsZero.iso ?_ ?_⟩⟩
+  · exact Functor.map_isZero _ hF
+  · exact ⟨fun _ ↦ ⟨⟨⟨0⟩, fun _ ↦ biproduct.hom_ext' _ _ fun j ↦ Fin.elim0 j⟩⟩,
+      fun _ ↦ ⟨⟨⟨0⟩, fun _ ↦ biproduct.hom_ext _ _ fun j ↦ Fin.elim0 j⟩⟩⟩
+
 /-- A sheaf of `ℚ̄_ℓ`-modules on the small pro-étale site of `X` is *stratified lisse* if `X` is
 the disjoint union of finitely many locally closed subschemes `Z_k`, given by immersions
 `i_k : Z_k ⟶ X` whose images partition `X`, such that each restriction `i_k^* F` is lisse. -/
@@ -302,14 +312,8 @@ instance : (adicConstructibleSheaf l X).IsClosedUnderIsomorphisms where
   of_iso e hF := IsAdicConstructibleSheaf.of_iso e hF
 
 instance : (adicConstructibleSheaf l X).ContainsZero where
-  exists_zero := by
-    refine ⟨0, isZero_zero _, IsAdicLisseSheaf.isAdicConstructibleSheaf
-      ⟨.singleton (𝟙 X), Precoverage.mem_coverings_of_isIso _, fun V f hf ↦ ?_⟩⟩
-    obtain ⟨⟩ := hf
-    refine ⟨0, ⟨IsZero.iso ?_ ?_⟩⟩
-    · exact Functor.map_isZero _ (isZero_zero _)
-    · exact ⟨fun _ ↦ ⟨⟨⟨0⟩, fun _ ↦ biproduct.hom_ext' _ _ fun j ↦ Fin.elim0 j⟩⟩,
-        fun _ ↦ ⟨⟨⟨0⟩, fun _ ↦ biproduct.hom_ext _ _ fun j ↦ Fin.elim0 j⟩⟩⟩
+  exists_zero := ⟨0, isZero_zero _,
+    (IsAdicLisseSheaf.of_isZero (isZero_zero _)).isAdicConstructibleSheaf⟩
 
 /-- **Kernels of constructible sheaves are constructible** (Bhatt–Scholze, §6.8): after
 refining the stratifications, a morphism of constructible sheaves is a morphism of lisse
