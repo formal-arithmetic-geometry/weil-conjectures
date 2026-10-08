@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Abelian.Flat.Invertible
+public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 
@@ -15,12 +16,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 
 Let `L` be a flat `A`-valued étale sheaf on a scheme `X`, placed in degree zero in `D(X_ét)`.
 Its derived tensor product with any sheaf `F` in degree zero is the underived tensor product
-`L ⊗ F` in degree zero, because the complex `L[0]` is K-flat. Consequently `L[0]` has Tor
-amplitude in `[0, 0]`.
+`L ⊗ F` in degree zero, because the complex `L[0]` is K-flat.
 
-If `L` moreover has a two-sided tensor inverse `L'` — as a lisse sheaf of rank one does — then
-`L` and `L'` are flat (`CategoryTheory.ObjectProperty.flat_of_tensorIso`), so `L[0] ⊗ᴸ L'[0]`
-is `(L ⊗ L')[0] ≅ 𝟙[0]`, the unit of `D(X_ét)`, and `L[0]` is dualizable.
+If `L` moreover has a tensor inverse `L'` — as a lisse sheaf of rank one does — then `L` and
+`L'` are flat (`CategoryTheory.ObjectProperty.flat_of_tensorIso`), so `L[0] ⊗ᴸ L'[0]` is
+`(L ⊗ L')[0] ≅ 𝟙[0]`, the unit of `D(X_ét)`, and `L[0]` is dualizable.
 
 ## Main definitions
 
@@ -31,10 +31,8 @@ is `(L ⊗ L')[0] ≅ 𝟙[0]`, the unit of `D(X_ét)`, and `L[0]` is dualizable
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.torAmplitudeIn_singleFunctor_obj_of_flat`: a flat sheaf in degree
-  zero has Tor amplitude in `[0, 0]`.
 - `AlgebraicGeometry.Etale.isDualizable_singleFunctor_obj_of_tensorIso`: a sheaf with a
-  two-sided tensor inverse, placed in degree zero, is dualizable.
+  tensor inverse, placed in degree zero, is dualizable.
 
 -/
 
@@ -128,25 +126,16 @@ noncomputable def singleFunctorObjTensorIso (L F : Sheaf X.smallEtaleTopology A)
       ((HomologicalComplex.singleMapHomologicalComplex (tensorLeft L) (.up ℤ) 0).app F))) ≪≫
     (singleFunctorObjIsoQh (L ⊗ F)).symm
 
-/-- A flat sheaf `L` placed in degree zero has Tor amplitude in `[0, 0]`: for every sheaf `F`,
-`L[0] ⊗ᴸ F[0] ≅ (L ⊗ F)[0]` is concentrated in degree zero. -/
-theorem torAmplitudeIn_singleFunctor_obj_of_flat (L : Sheaf X.smallEtaleTopology A)
-    (hL : ObjectProperty.flat L) :
-    DerivedCategory.torAmplitudeIn A X 0 0
-      ((_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj L) :=
-  fun F ↦ ⟨(_root_.DerivedCategory.TStructure.t).isGE_of_iso
-      (singleFunctorObjTensorIso L F hL).symm 0,
-    (_root_.DerivedCategory.TStructure.t).isLE_of_iso (singleFunctorObjTensorIso L F hL).symm 0⟩
-
-/-- A sheaf `L` with a two-sided tensor inverse `L'`, placed in degree zero, is dualizable in
-`D(X_ét)`: both are flat, so `L[0] ⊗ᴸ L'[0] ≅ (L ⊗ L')[0] ≅ 𝟙[0]` and symmetrically. -/
+/-- A sheaf `L` with a tensor inverse `L'`, placed in degree zero, is dualizable in `D(X_ét)`:
+both are flat, so `L[0] ⊗ᴸ L'[0] ≅ (L ⊗ L')[0] ≅ 𝟙[0]`, and symmetrically using the braiding. -/
 theorem isDualizable_singleFunctor_obj_of_tensorIso {L L' : Sheaf X.smallEtaleTopology A}
-    (e : L ⊗ L' ≅ 𝟙_ _) (e' : L' ⊗ L ≅ 𝟙_ _) :
+    (e : L ⊗ L' ≅ 𝟙_ _) :
     IsDualizable ((_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj L) :=
   isDualizable_of_tensorIso
-    (singleFunctorObjTensorIso L L' (ObjectProperty.flat_of_tensorIso e e') ≪≫
+    (singleFunctorObjTensorIso L L' (ObjectProperty.flat_of_tensorIso e) ≪≫
       (_root_.DerivedCategory.singleFunctor _ 0).mapIso e ≪≫ singleFunctorObjUnitIso A X)
-    (singleFunctorObjTensorIso L' L (ObjectProperty.flat_of_tensorIso e' e) ≪≫
-      (_root_.DerivedCategory.singleFunctor _ 0).mapIso e' ≪≫ singleFunctorObjUnitIso A X)
+    (singleFunctorObjTensorIso L' L (ObjectProperty.flat_of_tensorIso (β_ L' L ≪≫ e)) ≪≫
+      (_root_.DerivedCategory.singleFunctor _ 0).mapIso (β_ L' L ≪≫ e) ≪≫
+      singleFunctorObjUnitIso A X)
 
 end AlgebraicGeometry.Etale

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 public import Mathlib.CategoryTheory.Shift.Localization
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
@@ -36,6 +37,10 @@ The proof goes as follows.
 
 The same argument applies to `- ⊗ᴸ K`.
 
+With these structures `- ⊗ᴸ K` is moreover a triangulated functor: for `P` K-flat,
+`- ⊗ᴸ Qh.obj P` is induced through the triangulated localization `Qh` by the triangulated
+functor `(- ⊗ P) ⋙ Qh`, and triangulatedness is transported along `Qh.obj P ≅ K`.
+
 ## Main definitions
 
 - `DerivedCategory.commShiftTensorLeft` : the instance
@@ -43,6 +48,9 @@ The same argument applies to `- ⊗ᴸ K`.
 - `DerivedCategory.commShiftTensorRight` : the instance
   `((curriedTensor (DerivedCategory C)).flip.obj K).CommShift ℤ`.
 - `DerivedCategory.shiftTensorShiftIso` : the isomorphism `X⟦a⟧ ⊗ᴸ Y⟦b⟧ ≅ (X ⊗ᴸ Y)⟦a + b⟧`.
+- `DerivedCategory.isTriangulated_tensorRight` : `- ⊗ᴸ K` is a triangulated functor, and
+  `DerivedCategory.isTriangulated_tensorRightOfHasFunctorialFlatResolution` its form under the
+  hypotheses of `DerivedCategory.commShiftTensorRightOfHasFunctorialFlatResolution`.
 - `DerivedCategory.commShiftTensorLeftOfHasFunctorialFlatResolution`,
   `DerivedCategory.commShiftTensorRightOfHasFunctorialFlatResolution` : the same instances
   under the hypotheses of `DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory`
@@ -53,7 +61,7 @@ The same argument applies to `- ⊗ᴸ K`.
 
 The K-flat complex `P` in step 2 is chosen noncanonically (via `Exists.choose`), so the
 commutation isomorphisms of `K ⊗ᴸ -` depend on this choice; no compatibility of the two
-structures with each other, nor with the triangulated structure, is established here.
+structures with each other is established here.
 -/
 
 @[expose] public section
@@ -155,6 +163,33 @@ noncomputable instance commShiftTensorRight (K : DerivedCategory C) :
   Functor.CommShift.ofIso
     ((curriedTensor _).flip.mapIso (exists_kFlat_iso K).choose_spec.2.some) ℤ
 
+/-- For a K-flat complex `P`, the functor `- ⊗ᴸ Qh.obj P` is triangulated: it is induced
+through the triangulated localization `Qh` by the triangulated functor `(- ⊗ P) ⋙ Qh`. -/
+lemma isTriangulated_tensorRightQhObj
+    (hP : (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)).kFlat P) :
+    letI := commShiftTensorRightQhObj P hP
+    ((curriedTensor (DerivedCategory C)).flip.obj (Qh.obj P)).IsTriangulated := by
+  let := commShiftTensorRightQhObj P hP
+  have := isIso_tensorRightCounit P hP
+  let : Localization.Lifting Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
+      ((curriedTensor _).flip.obj P ⋙ Qh) ((curriedTensor _).flip.obj (Qh.obj P)) :=
+    ⟨asIso (tensorRightCounit P)⟩
+  have := Localization.essSurj_mapArrow Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
+  exact Functor.isTriangulated_of_precomp_iso
+    (Localization.Lifting.iso Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
+      ((curriedTensor _).flip.obj P ⋙ Qh) ((curriedTensor _).flip.obj (Qh.obj P)))
+
+/-- The derived tensor product `- ⊗ᴸ K` is a triangulated functor, for the commutation with
+shifts `commShiftTensorRight`. -/
+instance isTriangulated_tensorRight (K : DerivedCategory C) :
+    ((curriedTensor (DerivedCategory C)).flip.obj K).IsTriangulated := by
+  let := commShiftTensorRightQhObj _ (exists_kFlat_iso K).choose_spec.1
+  have := isTriangulated_tensorRightQhObj _ (exists_kFlat_iso K).choose_spec.1
+  have := Functor.CommShift.ofIso_compatibility
+    ((curriedTensor (DerivedCategory C)).flip.mapIso (exists_kFlat_iso K).choose_spec.2.some) ℤ
+  exact Functor.isTriangulated_of_iso
+    ((curriedTensor (DerivedCategory C)).flip.mapIso (exists_kFlat_iso K).choose_spec.2.some)
+
 /-- The derived tensor product, as `X⟦a⟧ ⊗ᴸ Y⟦b⟧ ≅ (X ⊗ᴸ Y)⟦a + b⟧`. -/
 noncomputable def shiftTensorShiftIso (X Y : DerivedCategory C) (a b : ℤ) :
     X⟦a⟧ ⊗ Y⟦b⟧ ≅ (X ⊗ Y)⟦a + b⟧ :=
@@ -186,6 +221,12 @@ noncomputable instance commShiftTensorRightOfHasFunctorialFlatResolution
     (K : DerivedCategory C) :
     ((curriedTensor (DerivedCategory C)).flip.obj K).CommShift ℤ :=
   commShiftTensorRight K
+
+/-- For a monoidal closed braided Grothendieck abelian category `C` with functorial flat
+resolutions, `- ⊗ᴸ K` is a triangulated functor on `DerivedCategory C`. -/
+instance isTriangulated_tensorRightOfHasFunctorialFlatResolution (K : DerivedCategory C) :
+    ((curriedTensor (DerivedCategory C)).flip.obj K).IsTriangulated :=
+  isTriangulated_tensorRight K
 
 end GrothendieckAbelian
 
