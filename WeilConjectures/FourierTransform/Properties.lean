@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.FourierTransform.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
@@ -72,15 +73,16 @@ with the *chosen* compactification of the base changed projection
 quasi-compact: it is a base change of `π`, resp. of `pullback.snd π π'`, which are assumed
 quasi-compact.
 
-Base linearity is the projection formula for `Rp₂,!`. The statement is over the whole
-unbounded derived categories, while the project's projection formula
+Base linearity is the base linearity of kernel transforms
+(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor`), that is, the projection
+formula for `Rp₂,!`. The statement is over the whole unbounded derived categories, while the
+project's projection formula
 `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek` only covers a
-bounded constructible `K` and an `N` of finite Tor amplitude. The unbounded form holds for
-finite `Λ`: the projection map is an isomorphism for `j_!` of an open immersion formally, and
-for a proper morphism because its direct image then has finite cohomological dimension and so
-commutes with the colimits reducing to bounded complexes. `[HasInvertibleExponent Λ S]` is
-inherited from the project's projection formula; the classical projection formula for `Rf_!`
-holds for all torsion coefficients (SGA 4 XVII 5.2.9).
+bounded constructible `K` and an `N` of finite Tor amplitude. It therefore uses the unbounded
+projection formula `AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`, which holds for
+all finite `Λ` (SGA 4 XVII 5.2.9): the projection map is an isomorphism for `j_!` of an open
+immersion formally, and for a proper morphism because its direct image then has finite
+cohomological dimension and so commutes with the colimits reducing to bounded complexes.
 
 TODO: upgrade these back to `Iso` constructions once the exchange isomorphisms they are
 built from exist as data.
@@ -346,8 +348,7 @@ end BaseChange
 
 section BaseLinear
 
-variable [Finite Λ] [HasInvertibleExponent Λ S] [CharP Γ(pullback π π', ⊤) p]
-  [HasCompactification (pullback.snd π π')] [LocallyOfFiniteType (pullback.snd π π')]
+variable [Finite Λ] [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
 
 /-- Tensoring the input with a complex pulled back from the base `S` along `π : V ⟶ S` is
 the same as tensoring the output with the same complex pulled back along `π' : V' ⟶ S`:
@@ -368,16 +369,18 @@ naturally in `K` **and** in `N`: the statement below asserts that the two functo
 In particular `FT_ψ(π^* N) ≅ FT_ψ(Λ) ⊗ᴸ π'^* N`, so the transform of a complex pulled back
 from the base is determined by the transform of the unit.
 
-Class: torsion; decided by the projection formula for `Rp₂,!`, which needs
-`[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `sk-prop-base-linear`) -/
+Class: torsion; decided by the projection formula for `Rp₂,!` on the unbounded derived
+categories (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`), which needs `[Finite Λ]`.
+The proof is that of `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor`.
+(sketch blueprint: `sk-prop-base-linear`; blueprint: `prop-base-linear`) -/
 theorem nonempty_iso_fourierTransform_tensor (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
     Nonempty (derivedTensorRightPullback (ModuleCat.{u + 1} Λ) π ⋙
           (Functor.whiskeringRight _ _ _).obj (fourierTransform Λ π π' Ψ b r) ≅
         derivedTensorRightPullback (ModuleCat.{u + 1} Λ) π' ⋙
           (Functor.whiskeringLeft _ _ _).obj (fourierTransform Λ π π' Ψ b r)) :=
-  sorry
+  have := isIso_projectionMap_of_finite Λ (pullback.snd π π')
+  nonempty_iso_kernelTransform_tensor (ModuleCat.{u + 1} Λ) π π' _ r
 
 /-- The Fourier–Deligne transform commutes with the Tate twist: `FT_ψ(K(m)) ≅ FT_ψ(K)(m)`
 for every `m : ℤ`, naturally in `K`:
@@ -396,9 +399,8 @@ with an invertible complex pulled back from the base: it is
 with the identifications `π^* Λ_S(m) ≅ Λ_V(m)` and `π'^* Λ_S(m) ≅ Λ_{V'}(m)`.
 
 Class: torsion; decided by the projection formula for `Rp₂,!`, through
-`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor`, which needs
-`[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `sk-prop-base-linear`) -/
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor`, which needs `[Finite Λ]`.
+(sketch blueprint: `sk-prop-base-linear`; blueprint: `prop-base-linear`, clause (2)) -/
 theorem nonempty_iso_fourierTransform_tateTwist [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r m : ℤ) :
     Nonempty (tateTwist Λ V m ⋙ fourierTransform Λ π π' Ψ b r ≅

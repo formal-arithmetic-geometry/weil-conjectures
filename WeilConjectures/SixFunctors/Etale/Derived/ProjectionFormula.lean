@@ -42,6 +42,8 @@ of `AlgebraicGeometry.Etale.projectionMapOfCompactification` is an isomorphism, 
 - `AlgebraicGeometry.Etale.hasProjectionFormula_field` (`sk-thm-sf-pf-field`) : the
   projection formula over a field of coefficients, for bounded constructible objects of
   finite Tor amplitude.
+- `AlgebraicGeometry.Etale.isIso_projectionMap_of_finite` : the projection formula at a finite
+  coefficient ring, on the whole unbounded derived categories, as an isomorphism of bifunctors.
 - `AlgebraicGeometry.Etale.hasProjectionFormula_id`,
   `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`,
   `AlgebraicGeometry.Etale.hasProjectionFormula_comp`,
@@ -194,6 +196,34 @@ theorem hasProjectionFormula_field (f : X ⟶ Y) [HasCompactification f]
   sorry
 
 end Field
+
+section Finite
+
+variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
+
+/-- **The projection formula at finite coefficients, unbounded.** For a finite coefficient
+ring `Λ` and `f : X ⟶ Y` admitting a compactification, the projection map
+
+`PF : Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)`
+
+of `AlgebraicGeometry.Etale.projectionMap` is an isomorphism of bifunctors on the whole
+unbounded derived categories, with no boundedness, constructibility or Tor amplitude
+hypothesis on `K` and `L`.
+
+This is the unbounded form of clause (5) of `prop-functor-package` that the base linearity of
+kernel transforms (and of the Fourier–Deligne transform, `sk-prop-base-linear`) consumes.
+It holds for torsion coefficients (SGA 4 XVII 5.2.9): for the open immersion `i` of the
+compactification `PF` is an isomorphism formally
+(`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso`), and for the proper
+map `g` one checks on geometric stalks with unbounded proper base change, where it becomes
+`RΓ(X_ȳ, K) ⊗ᴸ M ≅ RΓ(X_ȳ, K ⊗ᴸ M)` for a complex `M` of `Λ`-modules; this holds because
+`RΓ(X_ȳ, -)` has finite cohomological dimension on torsion sheaves, so commutes with the
+colimits reducing `M` to `Λ`. -/
+theorem isIso_projectionMap_of_finite [Finite Λ] (f : X ⟶ Y) [HasCompactification f] :
+    IsIso (projectionMap (ModuleCat.{u + 1} Λ) f) :=
+  sorry
+
+end Finite
 
 section Coherence
 
