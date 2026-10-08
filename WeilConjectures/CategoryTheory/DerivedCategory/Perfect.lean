@@ -35,6 +35,8 @@ perfect objects of `D(R)` are the *perfect point complexes*.
 - `DerivedCategory.IsPerfect.isIso_ihomUnitTensorToIhom` (`prop-pod-biduality-at-the-point`):
   the canonical comparison `C^∨ ⊗ᴸ_R D ⟶ RHom_R(C, D)` is an isomorphism for a perfect `C` and
   any `D`.
+- `DerivedCategory.IsPerfect.nonempty_iso_homology_ihom`
+  (`lem-pod-cohomology-of-dual-over-field`): over a field, `H^{-i}(C^∨) ≅ H^i(C)^∨`.
 
 ## Implementation notes
 
@@ -198,5 +200,26 @@ theorem IsPerfect.isIso_ihomUnitTensorToIhom {C : DerivedCategory (ModuleCat.{u}
   exact MonoidalClosed.isIso_ihomUnitTensorToIhom Cᘁ C D
 
 end Biduality
+
+section CohomologyDual
+
+/-- Blueprint `lem-pod-cohomology-of-dual-over-field`: cohomology of the dual of a finite complex
+over a field.
+
+Over a field `R`, for a perfect point complex `C` (a bounded complex of finite-dimensional
+vector spaces) with dual `C^∨ = RHom_R(C, R)`, the cohomology of the dual is the dual of the
+cohomology: `H^{-i}(C^∨) ≅ H^i(C)^∨` for every `i`. Biduality `C ≅ C^∨∨`, the other half of
+the node, is `DerivedCategory.IsPerfect.isIso_toIhomIhomUnit`.
+
+The blueprint splits `C ≅ ⊕_j H^j(C)[-j]` and dualises summandwise. The field is a commutative
+ring `R` with `IsField R`, so that the statement applies to the module categories of the
+coefficient rings of the six-functor formalism, which are commutative rings. -/
+theorem IsPerfect.nonempty_iso_homology_ihom (hR : IsField R)
+    {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) (i : ℤ) :
+    Nonempty ((homologyFunctor (ModuleCat.{u} R) (-i)).obj ((ihom C).obj (𝟙_ _)) ≅
+      ModuleCat.of R (Module.Dual R ((homologyFunctor (ModuleCat.{u} R) i).obj C))) :=
+  sorry
+
+end CohomologyDual
 
 end DerivedCategory
