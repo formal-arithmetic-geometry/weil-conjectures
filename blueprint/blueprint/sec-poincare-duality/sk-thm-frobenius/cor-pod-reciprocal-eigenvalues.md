@@ -1,0 +1,31 @@
++++
+id = "cor-pod-reciprocal-eigenvalues"
+kind = "theorem"
+title = "Reciprocal eigenvalues"
+order = 2447
+tags = ["latex:corollary"]
+uses = ["cor-pod-untwisted-similitude", "def-weil-finite-coefficient-point", "thm-pod-degreewise-perfectness-over-a-field", "thm-pod-proper-poincare-duality"]
++++
+In the Poincare duality conventions of this chapter (the fixed setting), strict Weil complex with $K$ perfect, at a *field* coefficient stage $\Lambda \in \{ E,\overline{\mathbf Q}_{\ell }\}$ (the hypothesis of [thm-pod-degreewise-perfectness-over-a-field]; the statement fails over $\mathcal O_E$, where the degreewise pairing need not be perfect). Relative to the perfect pairing of Theorem 9.23, the operator $F_{K^\vee }$ on $H^{2d-i}(X,K^\vee )$ is conjugate to
+
+$$
+q^d\, \bigl(F_{c,K}^{-1}\bigr)^{\mathsf t}.
+$$
+
+Thus an eigenvalue $\alpha$ of $F_{c,K}$ on $H_c^i(X,K)$ with algebraic multiplicity $m$ corresponds, with the same multiplicity, to the eigenvalue $q^d/\alpha$ of $F_{K^\vee }$ on $H^{2d-i}(X,K^\vee )$. If $X_0$ is proper, the first space is $H^i(X,K)$.
+
+## Proof
+
+Step 1: the adjoint identification. By [thm-pod-degreewise-perfectness-over-a-field] the degreewise pairing is perfect, so the bilinear form $b:H_c^i(X,K)\times H^{2d-i}(X,K^\vee )\to \Lambda$ is nondegenerate and the map
+
+$$
+\Phi :H^{2d-i}(X,K^\vee )\longrightarrow H_c^i(X,K)^\vee , \qquad \Phi (y)(x)=\langle x,y\rangle ^{\mathrm{untw}}_i,
+$$
+
+is an isomorphism of $\Lambda$-vector spaces, the field-stage dual being the ordinary dual, by [def-weil-finite-coefficient-point]. Step 2: the similitude translates. The untwisted similitude of [cor-pod-untwisted-similitude], $b(F_{c,K}x,F_{K^\vee }y)=q^db(x,y)$, says precisely that
+
+$$
+\Phi \circ F_{K^\vee }=q^d\, \bigl(F_{c,K}^{-1}\bigr)^{\mathsf t}\circ \Phi ,
+$$
+
+where $\bigl(F_{c,K}^{-1}\bigr)^{\mathsf t}$ is the transpose of the inverse operator on the dual $H_c^i(X,K)^\vee$. Therefore $F_{K^\vee }=q^d\Phi ^{-1}\bigl(F_{c,K}^{-1}\bigr)^{\mathsf t}\Phi$, i.e. $F_{K^\vee }$ is conjugate to $q^d\bigl(F_{c,K}^{-1}\bigr)^{\mathsf t}$. Step 3: eigenvalues. A linear operator on a finite-dimensional vector space and its transpose have the same characteristic polynomial, and conjugation does not change it, so the eigenvalues of $F_{K^\vee }$ are the eigenvalues of $q^dF_{c,K}^{-1}$; on the finite-dimensional space $H_c^i(X,K)$ (Step 1 and the finite-dimensionality of [thm-pod-degreewise-perfectness-over-a-field]) the eigenvalues of an automorphism are the inverses of the eigenvalues of the operator, each with the same algebraic multiplicity, so the eigenvalues of $F_{K^\vee }$ are the $q^d/\alpha$ with the multiplicities of the eigenvalues $\alpha$ of $F_{c,K}$. Step 4: the last assertion is the proper comparison $H_c^i=H^i$ of [thm-pod-proper-poincare-duality], which requires $X_0$ proper.
