@@ -50,6 +50,10 @@ connected `X` over a separably closed field.
   base change along a field extension `K/k`, for quasi-compact quasi-separated `X`.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.isIso_appTop_pullback_snd`: more generally
   `Γ(X ×_k U, 𝒪) = Γ(U, 𝒪_U)` for every affine `k`-scheme `U`.
+- `AlgebraicGeometry.Scheme.GlobalSectionsBijective.isIso_app_of_isPullback`: for a base change
+  `π : X ×_k B ⟶ B`, `Γ(B, A) ≅ Γ(X ×_k B, π⁻¹ A)` for every affine open `A ⊆ B`.
+- `AlgebraicGeometry.Scheme.Hom.bijective_app_of_comp_eq_id`: if moreover `π` has a section,
+  then `Γ(B, V) ≅ Γ(X ×_k B, π⁻¹ V)` for every open `V ⊆ B`.
 -/
 
 @[expose] public section
@@ -265,5 +269,74 @@ theorem Modules.finrankH_unit_zero [GlobalSectionsBijective k X] :
         exact (map_mul φ.symm (φ c) (Modules.H.zeroLinearEquiv O x : Γ(X, ⊤))).trans
           (congrArg (· * _) (φ.symm_apply_apply c)) }
   exact e.finrank_eq.trans (Module.finrank_self k)
+
+section BaseChange
+
+/-- **Flat base change of `H⁰(X, 𝒪_X) = k` over an affine open.** Let `X` be a quasi-compact
+quasi-separated `k`-scheme with `H⁰(X, 𝒪_X) = k`, and let `P = X ×_k B` be a base change of `X`.
+Then for every affine open `A ⊆ B` the projection `π : P ⟶ B` induces an isomorphism
+`Γ(B, A) ≅ Γ(P, π⁻¹ A)`: by flat base change, `Γ(P, π⁻¹ A) = Γ(X, 𝒪_X) ⊗_k Γ(B, A)`. -/
+theorem GlobalSectionsBijective.isIso_app_of_isPullback [CompactSpace X] [QuasiSeparatedSpace X]
+    [GlobalSectionsBijective k X] {P B : Scheme.{u}} {ρ : P ⟶ X} {π : P ⟶ B}
+    {g : B ⟶ Spec (.of k)} (H : IsPullback ρ π (X ↘ Spec (.of k)) g) {A : B.Opens}
+    (hA : IsAffineOpen A) : IsIso (π.app A) := by
+  have hUY : π ⁻¹ᵁ A = ρ ⁻¹ᵁ ⊤ ⊓ π ⁻¹ᵁ A := by simp
+  have hiso := isIso_pushoutSection_of_isQuasiSeparated_of_flat_right H (US := ⊤) (UT := A)
+    (UX := ⊤) le_top le_top hUY (isAffineOpen_top _) hA isCompact_univ isQuasiSeparated_univ
+  have hpush := (isIso_pushoutSection_iff _ _ _ _).mp hiso
+  have hX : IsIso ((X ↘ Spec (.of k)).appLE ⊤ ⊤ le_top) := by
+    have h := GlobalSectionsBijective.bijective_globalSectionsRingHom (k := k) (X := X)
+    rw [globalSectionsRingHom, ← ConcreteCategory.isIso_iff_bijective] at h
+    have : IsIso (X ↘ Spec (.of k)).appTop :=
+      IsIso.of_isIso_comp_left (Scheme.ΓSpecIso (.of k)).inv _
+    simpa [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE] using this
+  have := hpush.isIso_inr_of_isIso
+  rw [Scheme.Hom.app_eq_appLE]
+  exact this
+
+/-- If `π : P ⟶ B` has a section `σ` and `π` induces isomorphisms `Γ(B, A) ≅ Γ(P, π⁻¹ A)` on
+affine opens `A`, then it induces bijections `Γ(B, V) ≅ Γ(P, π⁻¹ V)` on all opens `V`. -/
+theorem Hom.bijective_app_of_comp_eq_id {P B : Scheme.{u}} (π : P ⟶ B) (σ : B ⟶ P)
+    (hσ : σ ≫ π = 𝟙 B) (h : ∀ A : B.Opens, IsAffineOpen A → IsIso (π.app A)) (V : B.Opens) :
+    Function.Bijective (π.app V) := by
+  have hle (W : B.Opens) : W ≤ σ ⁻¹ᵁ π ⁻¹ᵁ W := by
+    rw [← Scheme.Hom.comp_preimage, hσ]
+    exact le_rfl
+  have gen (f : B ⟶ B) (hf : f = 𝟙 B) (W : B.Opens) (hW : W ≤ f ⁻¹ᵁ W) (a : Γ(B, W)) :
+      B.presheaf.map (homOfLE hW).op (f.app W a) = a := by
+    subst hf
+    change B.presheaf.map (𝟙 (Opposite.op W)) a = a
+    rw [B.presheaf.map_id]
+    rfl
+  have key (W : B.Opens) (a : Γ(B, W)) :
+      B.presheaf.map (homOfLE (hle W)).op (σ.app _ (π.app W a)) = a :=
+    gen (σ ≫ π) hσ W (hle W) a
+  refine ⟨fun a b hab ↦ by rw [← key V a, ← key V b, hab], fun f ↦ ?_⟩
+  refine ⟨B.presheaf.map (homOfLE (hle V)).op (σ.app _ f), ?_⟩
+  refine TopCat.Sheaf.eq_of_locally_eq' P.sheaf
+    (fun A : {A : B.Opens // IsAffineOpen A ∧ A ≤ V} ↦ π ⁻¹ᵁ A.1) (π ⁻¹ᵁ V)
+    (fun A ↦ homOfLE (π.preimage_mono A.2.2)) ?_ _ _ fun A ↦ ?_
+  · intro x hx
+    obtain ⟨A, hA, hxA, hAV⟩ := exists_isAffineOpen_mem_and_subset (x := π x) (U := V) hx
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨A, hA, hAV⟩, hxA⟩
+  · have := h A.1 A.2.1
+    obtain ⟨b, hb⟩ := (ConcreteCategory.bijective_of_isIso (π.app A.1)).2
+      (P.presheaf.map (homOfLE (π.preimage_mono A.2.2)).op f)
+    change P.presheaf.map _ (π.app V _) = P.presheaf.map _ f
+    have e1 (y : Γ(B, V)) : P.presheaf.map (homOfLE (π.preimage_mono A.2.2)).op (π.app V y) =
+        π.app A.1 (B.presheaf.map (homOfLE A.2.2).op y) :=
+      (ConcreteCategory.congr_hom (π.naturality (homOfLE A.2.2).op) y).symm
+    have e2 : σ.app (π ⁻¹ᵁ A.1) (P.presheaf.map (homOfLE (π.preimage_mono A.2.2)).op f) =
+        B.presheaf.map (homOfLE (σ.preimage_mono (π.preimage_mono A.2.2))).op
+          (σ.app (π ⁻¹ᵁ V) f) :=
+      ConcreteCategory.congr_hom (σ.naturality (homOfLE (π.preimage_mono A.2.2)).op) f
+    rw [e1, ← hb]
+    congr 1
+    rw [← key A.1 b, hb, e2]
+    simp only [← ConcreteCategory.comp_apply]
+    rw [Category.assoc, Category.assoc, ← Functor.map_comp, ← Functor.map_comp]
+    rfl
+
+end BaseChange
 
 end AlgebraicGeometry.Scheme
