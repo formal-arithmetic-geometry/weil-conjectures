@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Pullbacks
+public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
@@ -40,7 +41,8 @@ for `Rf_!`, the four product comparison maps, and the Künneth–Verdier isomorp
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedLowerStar`
-  (`sk-lem-sf-kunneth-star`): `Rf_* M ⊠ Q ≅ R(f × id_Z)_* (M ⊠ Q)`.
+  (`sk-lem-sf-kunneth-star`, `lem-trf-ordinary-kunneth`): `Rf_* M ⊠ Q ≅ R(f × id_Z)_* (M ⊠ Q)`
+  over a field, for a finite coefficient ring of invertible exponent.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct`
   (`sk-thm-sf-kunneth-relative`): `R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct`
@@ -125,35 +127,47 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [HasSmallSiteSheafify A]
 
-/-- Blueprint `sk-lem-sf-kunneth-star`: Ordinary Künneth with an identity factor.
+/-- Blueprint `sk-lem-sf-kunneth-star` (detailed node `lem-trf-ordinary-kunneth`): Ordinary
+Künneth with an identity factor.
 
-Let `f : X ⟶ Y` be separated of finite type between schemes over a base `S`, where `X` is
-viewed over `S` through `f ≫ b`, and let `c : Z ⟶ S` be a further such scheme, so that `f`
-induces `f × 𝟙_Z` across the square
+Let `k` be a field, `Λ` a finite coefficient ring whose exponent is invertible in `k` (for
+instance the finite stage `A_{E,n}`), and let `f : X ⟶ Y` be a morphism of separated
+finite-type `k`-schemes, where `Y` has structure morphism `b` and `X` is viewed over `k`
+through `f ≫ b`. Let `c : Z ⟶ Spec k` be a further separated finite-type `k`-scheme, so that
+`f` induces `f × 𝟙_Z` across the square
 
 ```
-  X ×_S Z --f × 𝟙--> Y ×_S Z --pr--> Y
+  X ×_k Z --f × 𝟙--> Y ×_k Z --pr--> Y
      |                  |            |
      |                  |            f
      v                  v            v
-     Z ------c------->  S <----b---- Y
+     Z ------c------> Spec k <--b--- Y
 ```
 
-For `M` in `Dctf(X, A)` and `Q` in `Dctf(Z, A)` the canonical comparison
+For `M` in `Dctf(X, Λ)` and `Q` in `Dctf(Z, Λ)` the canonical comparison
 
 `Rf_* M ⊠ Q ⟶ R(f × id_Z)_* (M ⊠ Q)`
 
-is an isomorphism. Here both external products are taken over `S`. -/
-theorem nonempty_iso_externalProduct_rightDerivedLowerStar
-    {S Z : Scheme.{u}} (b : Y ⟶ S) (c : Z ⟶ S) (f : X ⟶ Y)
+is an isomorphism. Here both external products are taken over `Spec k`.
+
+The base has to be a field and the exponent of `Λ` invertible: over the base `𝔸¹_k`, with
+`Z` the origin and `f` the inclusion of `𝔾_m`, the right-hand side vanishes while the
+left-hand side is the stalk of `Rf_* Λ` at the origin; and for `Λ = 𝔽_p` in characteristic
+`p` the Artin–Schreier cohomology of the affine line already defeats the formula. -/
+theorem nonempty_iso_externalProduct_rightDerivedLowerStar (Λ : Type (u + 1)) [CommRing Λ]
+    [Finite Λ] {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {Z : Scheme.{u}}
+    (b : Y ⟶ Spec (.of k)) (c : Z ⟶ Spec (.of k)) (f : X ⟶ Y)
+    [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b]
+    [IsSeparated c] [LocallyOfFiniteType c] [QuasiCompact c]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    {Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)}
-    (hM : DerivedCategory.constructibleFiniteTor A X M)
-    (hQ : DerivedCategory.constructibleFiniteTor A Z Q) :
-    Nonempty (externalProduct A b c ((R((f)_*[A])).obj M) Q ≅
-      (R((pullback.mapOverBaseRight f b c)_*[A])).obj
-        (externalProduct A (f ≫ b) c M Q)) :=
+    {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M)
+    (hQ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z Q) :
+    Nonempty (externalProduct (ModuleCat.{u + 1} Λ) b c
+        ((R((f)_*[ModuleCat.{u + 1} Λ])).obj M) Q ≅
+      (R((pullback.mapOverBaseRight f b c)_*[ModuleCat.{u + 1} Λ])).obj
+        (externalProduct (ModuleCat.{u + 1} Λ) (f ≫ b) c M Q)) :=
   sorry
 
 /-- Blueprint `sk-thm-sf-kunneth-relative`: Relative product theorem.
