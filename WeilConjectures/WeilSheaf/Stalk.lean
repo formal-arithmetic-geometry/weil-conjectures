@@ -86,10 +86,10 @@ scalars (`AlgebraicGeometry.WeilCoefficients.toModuleCat`).
 
 ## TODO
 
-- Prove the statements of this file stated with `sorry`: the finiteness of stalks and global
-  sections, the independence of the local Frobenius of the geometric point, the comparison of
-  the trace function with the local Frobenius, and the compatibility of restriction to a stalk
-  with the Frobenius.
+- Prove the statements of this file stated with `sorry`: the detection of global sections by
+  finitely many geometric stalks, the independence of the local Frobenius of the geometric
+  point, the comparison of the trace function with the local Frobenius, and the compatibility
+  of restriction to a stalk with the Frobenius.
 - Derive `AlgebraicGeometry.WeilSheaf.exists_nontrivial_stalk_of_not_isZero` from two
   independent facts: a nonzero constructible `ℓ`-adic sheaf has a nonzero stalk at a geometric
   point, its support being a nonempty constructible set; and a nonempty locally closed subset of
@@ -328,14 +328,47 @@ theorem nonempty_equiv_stalk_biprod (G : WeilSheaf k₀ l X) (x : X.finitePoints
 
 section GlobalSections
 
+/-- The restriction `Γ(X̄, F) ⟶ Γ(Spec k̄, s^* F) = F_s` of global sections to the stalk at a
+geometric point `s`: global sections of the unit `F ⟶ s_* s^* F` of the adjunction
+`s^* ⊣ s_*`, followed by `Γ(X̄, s_* G) ≅ Γ(Spec k̄, G)`. -/
+noncomputable def globalSectionsToStalkObj
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
+    (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj F.obj.carrier ⟶ F.stalkObj s :=
+  (Sheaf.Γ _ _).map ((ProEtale.upperStarLowerStarAdjunction _ s).unit.app F.obj.carrier) ≫
+    (ProEtale.globalSectionsLowerStarIso _ s).hom.app _
+
 /-- The global sections of a Weil sheaf on a quasi-compact `k₀`-scheme locally of finite type
-are finite-dimensional. -/
+are detected by finitely many geometric stalks: the restriction
+`Γ(X̄, F) ⟶ ∏ᵢ F_{sᵢ}` is injective for suitable geometric points `s₁, …, sₙ`.
+
+The geometric fiber `X̄` is noetherian, so `F` is lisse on the strata `Z₁, …, Zₘ` of a finite
+stratification of `X̄`, each with finitely many connected components. A section vanishing at
+the geometric stalks vanishes on every stratum, and a section of a lisse sheaf on a connected
+scheme is determined by its stalk at any geometric point; every nonempty stratum, of finite
+type over `k̄`, has a `k̄`-point. -/
+theorem exists_injective_globalSectionsToStalkObj
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    ∃ (n : ℕ)
+      (s : Fin n → (Spec (.of (AlgebraicClosure k₀)) ⟶
+        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)),
+      Function.Injective fun a ↦ fun i ↦
+        ((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj (s i))).hom a :=
+  sorry
+
+/-- The global sections of a Weil sheaf on a quasi-compact `k₀`-scheme locally of finite type
+are finite-dimensional: they inject into finitely many geometric stalks
+(`AlgebraicGeometry.WeilSheaf.exists_injective_globalSectionsToStalkObj`), which are
+finite-dimensional (`AlgebraicGeometry.WeilSheaf.finiteDimensional_stalkObj`). -/
 theorem finiteDimensional_globalSections [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     FiniteDimensional (PadicAlgCl l)
       ((WeilCoefficients.toModuleCat l).obj ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj
-        F.obj.carrier)) :=
-  sorry
+        F.obj.carrier)) := by
+  obtain ⟨n, s, hs⟩ := F.exists_injective_globalSectionsToStalkObj
+  have (i : Fin n) := F.finiteDimensional_stalkObj (s i)
+  exact Module.Finite.of_injective (LinearMap.pi fun i ↦
+    ((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj (s i))).hom) hs
 
 /-- The global sections `Γ(X̄, F)` of a Weil sheaf, with the Frobenius
 
@@ -356,15 +389,6 @@ noncomputable def globalSections [QuasiCompact (X ↘ Spec (CommRingCat.of k₀)
       (((ProEtale.globalSectionsLowerStarIso _
         (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).app F.obj.carrier).symm ≪≫
         (Sheaf.Γ _ _).mapIso F.obj.str) }
-
-/-- The restriction `Γ(X̄, F) ⟶ Γ(Spec k̄, s^* F) = F_s` of global sections to the stalk at a
-geometric point `s`: global sections of the unit `F ⟶ s_* s^* F` of the adjunction
-`s^* ⊣ s_*`, followed by `Γ(X̄, s_* G) ≅ Γ(Spec k̄, G)`. -/
-noncomputable def globalSectionsToStalkObj
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
-    (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj F.obj.carrier ⟶ F.stalkObj s :=
-  (Sheaf.Γ _ _).map ((ProEtale.upperStarLowerStarAdjunction _ s).unit.app F.obj.carrier) ≫
-    (ProEtale.globalSectionsLowerStarIso _ s).hom.app _
 
 /-- The restriction of global sections to the stalk at a geometric point `s` with
 `s ≫ Fr = σ ≫ s`, for instance a point over a `k₀`-rational point, intertwines the Frobenius of
