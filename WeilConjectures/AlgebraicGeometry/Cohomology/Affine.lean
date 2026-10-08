@@ -375,6 +375,16 @@ theorem finrankH_pushforward_of_isAffineHom (g : X ⟶ Y) [g.IsOver (Spec (.of k
   obtain ⟨e⟩ := nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom k g q
   exact ((e.app ⟨ℱ, inferInstance⟩).toLinearEquiv.finrank_eq).symm
 
+/-- `h^q` is invariant under pullback along an isomorphism of `k`-schemes. -/
+theorem finrankH_pullback_of_isIso {k : Type u} [Field k] {Y Z : Scheme.{u}}
+    [Y.Over (Spec (.of k))] [Z.Over (Spec (.of k))] (e : Y ⟶ Z) [IsIso e]
+    [e.IsOver (Spec (.of k))] (M : Z.Modules) [M.IsQuasicoherent] (q : ℕ) :
+    ((Modules.pullback e).obj M).finrankH k q = M.finrankH k q := by
+  have : (inv e).IsOver (Spec (.of k)) := by
+    rw [Scheme.Hom.isOver_iff, IsIso.inv_comp_eq, (Scheme.Hom.isOver_iff _).1 ‹e.IsOver _›]
+  rw [finrankH_congr k ((pullbackIsoPushforwardInv e).app M) q,
+    finrankH_pushforward_of_isAffineHom k (inv e) M q]
+
 /-- The Euler characteristic is invariant under pushforward along an affine morphism:
 `χ(Y, g_* ℱ) = χ(X, ℱ)` for a quasi-coherent `𝒪_X`-module `ℱ`. -/
 theorem eulerChar_pushforward_of_isAffineHom (g : X ⟶ Y) [g.IsOver (Spec (.of k))]
