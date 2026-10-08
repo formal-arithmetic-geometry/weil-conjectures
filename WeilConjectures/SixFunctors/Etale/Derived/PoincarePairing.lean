@@ -38,9 +38,9 @@ which over `Y = Spec k` is `RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ`. Its
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.mixedSupportCupProduct` (`sk-def-pairing-data`): `⌣_c`.
+- `AlgebraicGeometry.Etale.mixedSupportCupProduct` (`sk-def-pairing-data`, `def-sf-cup`): `⌣_c`.
 - `AlgebraicGeometry.Etale.smoothTrace` (`sk-def-pairing-data`): `Tr_o`.
-- `AlgebraicGeometry.Etale.poincarePairing` (`sk-def-pairing`): `β_K`.
+- `AlgebraicGeometry.Etale.poincarePairing` (`sk-def-pairing`, `def-sf-pairing`): `β_K`.
 
 ## Main statements
 
@@ -93,7 +93,8 @@ namespace Etale
 
 variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a] {d : ℕ}
 
-/-- Blueprint `sk-def-pairing-data`: The pairing data.
+/-- Blueprint `sk-def-pairing-data`: The pairing data. This is also blueprint `def-sf-cup`
+(Mixed-support cup product).
 
 The *mixed-support cup product* of the pairing data,
 
@@ -160,7 +161,9 @@ noncomputable def poincarePairingEvaluation (T K : 𝐃(X, A)) :
       (R(a)_![A]).obj T :=
   mixedSupportCupProduct A a _ _ ≫ (R(a)_![A]).map (twistedEvaluation T K)
 
-/-- Blueprint `sk-def-pairing`: The derived pairing, and perfectness of a pairing.
+/-- Blueprint `sk-def-pairing`: The derived pairing, and perfectness of a pairing. This is also
+blueprint `def-sf-pairing` (Derived Poincaré pairing); perfectness of a pairing is
+`AlgebraicGeometry.Etale.IsPerfectPairing`.
 
 The *derived Poincaré pairing* of an orientation `o` with twist `T`,
 
