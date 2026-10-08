@@ -186,6 +186,20 @@ noncomputable def dualNumbersι : X ⟶ X.dualNumbers where
 theorem dualNumbersι_comp_proj : X.dualNumbersι ≫ X.dualNumbersProj = 𝟙 X := by
   sorry
 
+variable {X} in
+/-- A morphism `X[ε] ⟶ Y` whose functions have no `ε`-part factors through the projection
+`X[ε] ⟶ X`. -/
+theorem eq_dualNumbersProj_comp_of_snd_eq_zero (φ : X.dualNumbers ⟶ Y)
+    (h : ∀ U (a : Γ(Y, U)), (φ.app U a).snd = 0) :
+    φ = X.dualNumbersProj ≫ X.dualNumbersι ≫ φ := by
+  refine Scheme.Hom.ext' (LocallyRingedSpace.Hom.ext' (PresheafedSpace.ext _ _ rfl ?_))
+  ext U a
+  simp only [Functor.comp_obj, Functor.op_obj, eqToHom_refl, Functor.whiskerRight_id',
+    TopCat.Presheaf.comp_app, TopCat.Presheaf.pushforward_obj_obj, NatTrans.id_app,
+    Category.comp_id]
+  change φ.app U a = inl (φ.app U a).fst
+  exact TrivSqZeroExt.ext rfl (h _ a)
+
 /-- The map `X[ε][δ] ⟶ X[η]`, `η ↦ εδ`: the identity on points, and on functions
 `a + ηb ↦ a + εδb`. -/
 noncomputable def dualNumbersMul : X.dualNumbers.dualNumbers ⟶ X.dualNumbers where
