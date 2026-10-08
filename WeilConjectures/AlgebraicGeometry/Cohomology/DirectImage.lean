@@ -26,6 +26,7 @@ public import WeilConjectures.Mathlib.Algebra.BigOperators.Intervals
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 
 /-!
 # Higher direct images, and cohomology and base change
@@ -166,6 +167,30 @@ noncomputable def higherDirectImage (f : X ⟶ T) [HasInjectiveResolutions X.Mod
     X.Modules ⥤ T.Modules :=
   (pushforward f).rightDerived q
 
+/-- The pushforward of multiplication by `f^♯ a` is multiplication by `a`. -/
+lemma pushforward_map_smulHom (f : X ⟶ T) (M : X.Modules) (a : Γ(T, ⊤)) :
+    (pushforward f).map (M.smulHom (f.appTop a)) = ((pushforward f).obj M).smulHom a := by
+  ext U x
+  simp only [pushforward_map_app, smulHom_app_apply]
+  erw [smulHom_app_apply]
+  change _ = f.app U (T.presheaf.map (homOfLE le_top).op a) • (show Γ(M, f ⁻¹ᵁ U) from x)
+  congr 1
+  rw [Scheme.Hom.appTop, ← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
+    Scheme.Hom.naturality]
+  rfl
+
+/-- **The higher direct images are linear over the base.** Applying `R^q f_*` to multiplication
+by `f^♯ a` on `M` gives multiplication by `a` on `R^q f_* M`. -/
+lemma higherDirectImage_map_smulHom (f : X ⟶ T) [HasInjectiveResolutions X.Modules] (q : ℕ)
+    (M : X.Modules)
+    (a : Γ(T, ⊤)) :
+    (higherDirectImage f q).map (M.smulHom (f.appTop a)) =
+      ((higherDirectImage f q).obj M).smulHom a :=
+  (pushforward f).rightDerived_map_app_eq
+    { app M := M.smulHom (f.appTop a), naturality _ _ φ := (smulHom_naturality φ _).symm }
+    { app N := N.smulHom a, naturality _ _ φ := (smulHom_naturality φ _).symm }
+    (fun M ↦ pushforward_map_smulHom f M a) q M
+
 /-- `ℱ.IsFlatOver f` says that the `𝒪_X`-module `ℱ` is **flat over the base** of the morphism
 `f : X ⟶ T`: for every affine open `V` of `T` and every affine open `U` of `X` contained in
 `f ⁻¹ᵁ V`, the sections `Γ(ℱ, U)` form a flat `Γ(T, V)`-module, the module structure being
@@ -287,22 +312,51 @@ theorem perfectLocusOfRank_subset (ℱ : X.Modules) (f : X ⟶ T) (i r : ℕ) :
 
 variable (f : X ⟶ T) (ℱ : X.Modules)
 
+/-- **The sections of the higher direct images over an affine base, naturally.** Over an affine
+base, for `f` quasi-compact and separated, the global sections of `R^q f_* ℱ` are the sheaf
+cohomology `H^q(X, ℱ)`, by additive isomorphisms natural in the quasi-coherent module `ℱ`.
+
+This is the comparison between the right derived functors of `f_*` inside `X.Modules` and the
+`Ext`-groups in abelian sheaves of `AlgebraicGeometry.Scheme.Modules.H`. It holds because
+injective `𝒪_X`-modules are flasque, the pushforward of a flasque module is flasque, flasque
+sheaves are acyclic for `H`, and, `T` being affine and `R^p f_* ℱ` quasi-coherent, the global
+sections functor of `T` is exact on them [Stacks, Tags 01XJ and 0BDY]. -/
+theorem exists_addEquiv_sections_higherDirectImage_H [IsAffine T] [QuasiCompact f]
+    [IsSeparated f] [HasInjectiveResolutions X.Modules] (q : ℕ) :
+    ∃ e : ∀ (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ],
+        Γ((higherDirectImage f q).obj ℱ, ⊤) ≃+ ℱ.H q,
+      ∀ (ℱ 𝒢 : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+        [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) 𝒢] (φ : ℱ ⟶ 𝒢)
+        (x : Γ((higherDirectImage f q).obj ℱ, ⊤)),
+        e 𝒢 (((higherDirectImage f q).map φ).app ⊤ x) = H.map φ q (e ℱ x) :=
+  sorry
+
 /-- **The sections of the higher direct images over an affine base, linearly.** Over an affine
 base the global sections of the `q`-th higher direct image are the sheaf cohomology of `ℱ`,
 `Γ(T, R^q f_* ℱ) ≅ H^q(X, ℱ)`, by an isomorphism which is linear along `f^♯ : Γ(T, ⊤) → Γ(X, ⊤)`.
 
 This is the comparison between the two cohomology theories used in the Picard-framework block:
 the right derived functors of `f_*` inside `X.Modules` on the one hand, and the `Ext`-groups in
-abelian sheaves of `AlgebraicGeometry.Scheme.Modules.H` on the other. It holds because
-injective objects of `X.Modules` are `Γ`-acyclic, and the comparison is natural in `ℱ`, hence
-compatible with multiplication by global functions of `T`. Over `T = Spec κ` for a field `κ`, this
-is the identification of the `q`-th direct image to a point with `H^q` as `κ`-vector spaces, used
-in the local model of the proof of `thm-pc-semicontinuity-base-change`. -/
+abelian sheaves of `AlgebraicGeometry.Scheme.Modules.H` on the other. The additive comparison
+is `AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H`; being natural
+in `ℱ`, it is compatible with multiplication by global functions of `T`, which `R^q f_*` turns
+into multiplication by their images in `Γ(X, ⊤)`
+(`AlgebraicGeometry.Scheme.Modules.higherDirectImage_map_smulHom`).
+
+Over `T = Spec κ` for a field `κ`, this is the identification of the `q`-th direct image to a
+point with `H^q` as `κ`-vector spaces, used in the local model of the proof of `thm-pc-semicontinuity-base-change`. -/
 theorem exists_bijective_semilinearMap_sections_higherDirectImage_H [IsAffine T] [QuasiCompact f]
     [IsSeparated f] [HasInjectiveResolutions X.Modules]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
-    ∃ e : Γ((higherDirectImage f q).obj ℱ, ⊤) →ₛₗ[f.appTop.hom] ℱ.H q, Function.Bijective e :=
-  sorry
+    ∃ e : Γ((higherDirectImage f q).obj ℱ, ⊤) →ₛₗ[f.appTop.hom] ℱ.H q, Function.Bijective e := by
+  obtain ⟨e, he⟩ := exists_addEquiv_sections_higherDirectImage_H f q
+  refine ⟨{ toFun := e ℱ, map_add' := map_add _, map_smul' := fun a x ↦ ?_ }, (e ℱ).bijective⟩
+  have h : a • x = ((higherDirectImage f q).map (ℱ.smulHom (f.appTop a))).app ⊤ x := by
+    rw [higherDirectImage_map_smulHom, smulHom_app_apply]
+    congr 1
+    exact (congrArg (fun φ ↦ φ a) (T.presheaf.map_id _)).symm
+  rw [h, he]
+  rfl
 
 /-- Over an affine base the global sections of the `q`-th higher direct image are the sheaf
 cohomology of `ℱ`: `Γ(T, R^q f_* ℱ) ≅ H^q(X, ℱ)`. See
