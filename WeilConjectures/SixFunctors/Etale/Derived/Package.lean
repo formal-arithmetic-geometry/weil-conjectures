@@ -153,8 +153,9 @@ structure SixOperationsPackage : Prop where
   /-- (6) Verdier biduality on `Dctf(X, A)`. -/
   biduality : ∀ K, DerivedCategory.constructibleFiniteTor A X K →
     Nonempty (K ≅ (verdierDual A (f ≫ aY)).obj (op ((verdierDual A (f ≫ aY)).obj (op K))))
-  /-- (6) The Verdier exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X`. -/
-  verdierExchange : ∀ M, DerivedCategory.constructibleFiniteTor A X M →
+  /-- (6) The Verdier exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X`, when `ω_Y` lies in `Dctf(Y, A)`. -/
+  verdierExchange : DerivedCategory.constructibleFiniteTor A Y (dualizingComplex A aY) →
+    ∀ M, DerivedCategory.constructibleFiniteTor A X M →
     Nonempty ((verdierDual A aY).obj (op ((R(f)_![A]).obj M)) ≅
       (R((f)_*[A])).obj ((verdierDual A (f ≫ aY)).obj (op M)))
   /-- (7) The four Künneth comparisons over `S` are isomorphisms. -/
@@ -197,7 +198,7 @@ theorem sixOperationsPackage [IsNoetherian Y] : SixOperationsPackage A f aY wher
   lowerShriekIsoLowerStarOfProper _ := sorry
   orientation _ _ := sorry
   biduality _ hK := nonempty_iso_verdierDual_verdierDual A (f ≫ aY) hK
-  verdierExchange _ hM := nonempty_iso_verdierDual_rightDerivedLowerShriek A f aY hM
+  verdierExchange hω _ hM := nonempty_iso_verdierDual_rightDerivedLowerShriek A f aY hω hM
   kunneth := hasKunnethComparisons A S
   ctfLeftDerivedUpperStar _ hK := constructibleFiniteTor_leftDerivedUpperStar A f hK
   ctfTensor _ _ hK hM := constructibleFiniteTor_tensor A X hK hM
