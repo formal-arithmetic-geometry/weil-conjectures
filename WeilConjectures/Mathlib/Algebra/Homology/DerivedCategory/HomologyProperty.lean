@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
+public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
 # Complexes with homology in a weak Serre class form a triangulated subcategory
@@ -24,6 +26,11 @@ in `P` (`DerivedCategory.homologyProperty P`) form a triangulated subcategory
 (`DerivedCategory.homologyProperty_isTriangulated`): for a distinguished
 triangle `K ⟶ L ⟶ M ⟶ K⟦1⟧` the long exact homology sequence
 `Hⁿ⁻¹ M ⟶ Hⁿ K ⟶ Hⁿ L ⟶ Hⁿ M ⟶ Hⁿ⁺¹ K` is five-term exact.
+
+For any `P` containing zero and closed under isomorphisms, `homologyProperty P` is stable under
+the truncations `τ^{≤ n}` and `τ^{≥ n}` of the canonical t-structure
+(`DerivedCategory.homologyProperty_truncLE`, `DerivedCategory.homologyProperty_truncGE`): the
+homology of a truncation is that of the complex in the surviving degrees and zero elsewhere.
 
 -/
 
@@ -114,5 +121,35 @@ instance homologyProperty_isTriangulatedClosed₂ [P.IsClosedUnderIsomorphisms]
 instance homologyProperty_isTriangulated [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
     [P.IsClosedUnderKernels] [P.IsClosedUnderCokernels] [P.IsClosedUnderExtensions] :
     (homologyProperty P).IsTriangulated where
+
+variable {P}
+
+/-- The truncation `τ^{≤ n} M` of an object whose homology objects satisfy `P` has homology
+objects satisfying `P`: they are those of `M` in degrees `≤ n`, and zero above. -/
+lemma homologyProperty_truncLE [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
+    {M : DerivedCategory A} (hM : homologyProperty P M) (n : ℤ) :
+    homologyProperty P ((TStructure.t.truncLE n).obj M) := by
+  intro m
+  by_cases hm : m ≤ n
+  · have : ((TStructure.t.triangleLEGT n).obj M).obj₃.IsGE (n + 1) :=
+      (inferInstance : TStructure.t.IsGE ((TStructure.t.truncGT n).obj M) (n + 1))
+    have := isIso_homologyMap_mor₁ _ (TStructure.t.triangleLEGT_distinguished n M) (m - 1) m
+      (by lia) (isZero_of_isGE _ (n + 1) _ (by lia)) (isZero_of_isGE _ (n + 1) _ (by lia))
+    exact P.prop_of_iso (asIso ((homologyFunctor A m).map
+      ((TStructure.t.triangleLEGT n).obj M).mor₁)).symm (hM m)
+  · exact P.prop_of_isZero (isZero_of_isLE _ n _ (by lia))
+
+/-- The truncation `τ^{≥ n} M` of an object whose homology objects satisfy `P` has homology
+objects satisfying `P`: they are those of `M` in degrees `≥ n`, and zero below. -/
+lemma homologyProperty_truncGE [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
+    {M : DerivedCategory A} (hM : homologyProperty P M) (n : ℤ) :
+    homologyProperty P ((TStructure.t.truncGE n).obj M) := by
+  intro m
+  by_cases hm : n ≤ m
+  · have := isIso_homologyMap_mor₂ _ (TStructure.t.triangleLTGE_distinguished n M) m (m + 1)
+      rfl (isZero_of_isLE _ (n - 1) _ (by lia)) (isZero_of_isLE _ (n - 1) _ (by lia))
+    exact P.prop_of_iso (asIso ((homologyFunctor A m).map
+      ((TStructure.t.triangleLTGE n).obj M).mor₂)) (hM m)
+  · exact P.prop_of_isZero (isZero_of_isGE _ n _ (by lia))
 
 end DerivedCategory
