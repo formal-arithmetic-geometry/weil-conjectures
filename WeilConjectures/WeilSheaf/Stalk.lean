@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
@@ -121,13 +122,14 @@ noncomputable def stalkObj
     WeilCoefficients.{u} l :=
   (Sheaf.Γ _ _).obj ((s)^*[WeilCoefficients.{u} l].obj F.obj.carrier)
 
-/-- The stalks of a Weil sheaf are finite-dimensional: on a stratum through the image of `s`
-the underlying sheaf is lisse, so its pullback to `Spec k̄` is a finite sum of copies of
-`ℚ̄_ℓ`, whose global sections are `ℚ̄_ℓ`. -/
+/-- The stalks of a Weil sheaf are finite-dimensional: the pullback of the underlying sheaf to
+`Spec k̄` is constructible, hence a finite sum of copies of `ℚ̄_ℓ`, whose global sections are
+`ℚ̄_ℓ` (`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.finiteDimensional_globalSections`).
+-/
 theorem finiteDimensional_stalkObj
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
     FiniteDimensional (PadicAlgCl l) ((WeilCoefficients.toModuleCat l).obj (F.stalkObj s)) :=
-  sorry
+  (F.isAdicConstructibleSheaf_carrier.upperStar s).finiteDimensional_globalSections
 
 /-- The isomorphism `F_{s ≫ Frᵐ} ≅ ((Frᵐ)^* F)_s ≅ F_s`: the first isomorphism is the
 composition of pullbacks `(s ≫ Frᵐ)^* ≅ s^* (Frᵐ)^*` together with `(Frᵐ)^* ≅ (Fr⁻ᵐ)_*`, the
