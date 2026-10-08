@@ -19,6 +19,7 @@ public import Mathlib.Topology.LocallyConstant.Basic
 public import Mathlib.Topology.Semicontinuity.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.Algebra.BigOperators.Intervals
@@ -808,6 +809,7 @@ theorem isOpen_perfectLocus (hℱ : ℱ.IsFlatOver f) (i : ℕ) : IsOpen (ℱ.pe
   simp only [Set.mem_iUnion, Set.mem_ofPred_eq]
   exact ⟨fun ht ↦ ⟨_, ht, le_rfl⟩, fun ⟨_, ht, _⟩ ↦ ht⟩
 
+omit [LocallyOfFinitePresentation f] [HasInjectiveResolutions X.Modules] in
 /-- **The fibre dimension is invariant under base change.** Let `f' : X' ⟶ T'` and `g' : X' ⟶ X`
 be the base change of `f` along `g : T' ⟶ T`, in the cartesian square `sq`
 ```
@@ -824,9 +826,44 @@ and let `ℱ'` be the pullback of `ℱ` to `X'`. Then `h^q_{ℱ'}(t') = h^q_ℱ(
 (blueprint: `sk-thm-picard-perfect`) -/
 theorem hFiber_pullback_of_isPullback {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X)
     (f' : X' ⟶ T') (sq : IsPullback g' f' f g) (q : ℕ) (t' : T') :
-    ((Modules.pullback g').obj ℱ).hFiber f' q t' = ℱ.hFiber f q (g.base t') :=
-  sorry
+    ((Modules.pullback g').obj ℱ).hFiber f' q t' = ℱ.hFiber f q (g.base t') := by
+  let K := T.residueField (g.base t')
+  let L := T'.residueField t'
+  let : Algebra K L := (g.residueFieldMap t').hom.toAlgebra
+  have hsq := isPullback_fiberToSpecResidueField_of_isPullback sq t'
+  let := f.fiberOverSpecResidueField (g.base t')
+  let := f'.fiberOverSpecResidueField t'
+  have : QuasiCompact (f.fiber (g.base t') ↘ Spec (.of K)) := by
+    change QuasiCompact (f.fiberToSpecResidueField _)
+    unfold Scheme.Hom.fiberToSpecResidueField
+    infer_instance
+  have : QuasiSeparated (f.fiber (g.base t') ↘ Spec (.of K)) := by
+    change QuasiSeparated (f.fiberToSpecResidueField _)
+    unfold Scheme.Hom.fiberToSpecResidueField
+    infer_instance
+  have h := Modules.finrankH_pullback (k := K) L ((Modules.pullback (f.fiberι (g.base t'))).obj ℱ) q
+  let φ := Spec.map (CommRingCat.ofHom (algebraMap K L))
+  have hsq' : IsPullback (pullback.map f' (T'.fromSpecResidueField t') f
+      (T.fromSpecResidueField (g.base t')) g' (Spec.map (g.residueFieldMap t')) g
+      (by simp [sq.w]) (Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField g t').symm)
+      (f'.fiberToSpecResidueField t') (f.fiber (g.base t') ↘ Spec (.of K)) φ := hsq
+  let e : f'.fiber t' ≅ Limits.pullback (f.fiber (g.base t') ↘ Spec (.of K)) φ :=
+    hsq'.isoPullback
+  have : e.hom.IsOver (Spec (.of L)) := by
+    rw [Scheme.Hom.isOver_iff]
+    exact hsq'.isoPullback_hom_snd
+  have hcomp : f'.fiberι t' ≫ g' =
+      e.hom ≫ pullback.fst _ _ ≫ f.fiberι (g.base t') := by
+    rw [← Category.assoc, hsq'.isoPullback_hom_fst]
+    simp [Scheme.Hom.fiberι]
+  change ((Modules.pullback (f'.fiberι t')).obj ((Modules.pullback g').obj ℱ)).finrankH L q =
+    ((Modules.pullback (f.fiberι (g.base t'))).obj ℱ).finrankH K q
+  rw [← h, ← finrankH_pullback_of_isIso (k := L) e.hom]
+  exact finrankH_congr _ ((pullbackComp _ _).app ℱ ≪≫ (pullbackCongr hcomp).app ℱ ≪≫
+    ((pullbackComp _ _).app ℱ).symm ≪≫ (Modules.pullback e.hom).mapIso
+      ((pullbackComp _ _).app ℱ).symm) q
 
+omit [LocallyOfFinitePresentation f] [HasInjectiveResolutions X.Modules] in
 /-- **The fibre Euler characteristic is invariant under base change**, in the situation of
 `AlgebraicGeometry.Scheme.Modules.hFiber_pullback_of_isPullback`. -/
 theorem eulerCharFiber_pullback_of_isPullback {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X)
