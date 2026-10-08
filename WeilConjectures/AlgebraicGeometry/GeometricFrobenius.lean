@@ -41,7 +41,7 @@ a_X          a_X
 Spec k̄ --σ--> Spec k̄
 ```
 
-is Cartesian (`AlgebraicGeometry.Scheme.Hom.isPullback_geometricGaloisFrobenius`). This
+is Cartesian (`AlgebraicGeometry.Scheme.Hom.isPullback_geometricFrobenius`). This
 square is the input for the compact-support base change isomorphisms which transport Weil
 structures through `Rf_!` later on.
 
@@ -66,14 +66,14 @@ trace formula, whose intersection-theoretic side requires the `k̄`-linear endom
   `X = X₀ ×_{Spec k} Spec k̄` of a scheme over `k`, with its projection
   `geometricFiberProj` to the model and its structure morphism
   `geometricFiberToAlgebraicClosure` over `k̄`.
-- `AlgebraicGeometry.specGeometricFrobenius`: the automorphism `σ` of `Spec k̄` induced by
+- `AlgebraicGeometry.geometricFrobeniusField`: the automorphism `σ` of `Spec k̄` induced by
   the geometric Frobenius of the algebraic closure of a finite field.
-- `AlgebraicGeometry.Scheme.Hom.geometricGaloisFrobenius`: the geometric Galois Frobenius
+- `AlgebraicGeometry.Scheme.Hom.geometricFrobenius`: the geometric Galois Frobenius
   `g_X = 𝟙 X₀ × σ` of the geometric fiber.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Hom.isPullback_geometricGaloisFrobenius`: the Frobenius square
+- `AlgebraicGeometry.Scheme.Hom.isPullback_geometricFrobenius`: the Frobenius square
   is Cartesian.
 
 -/
@@ -140,17 +140,17 @@ variable (k : Type u) [Field k] [Finite k]
 closure of a finite field `k`, the image under `Spec` of the ring isomorphism
 `FiniteField.geometricFrobenius`. All Frobenius operators of the Weil formalism are built
 from this single automorphism. -/
-def specGeometricFrobenius :
+def geometricFrobeniusField :
     Spec (.of (AlgebraicClosure k)) ≅ Spec (.of (AlgebraicClosure k)) :=
   Scheme.Spec.mapIso
     (geometricFrobenius k (AlgebraicClosure k)).toRingEquiv.toCommRingCatIso.op
 
 /-- The underlying morphism of the automorphism `σ` of `Spec k̄` is the image under `Spec`
 of the geometric Frobenius. This is not a `simp` lemma: the composites of `σ` are
-simplified by `specGeometricFrobenius_hom_comp_specAlgebraicClosure` and by the
-`Scheme.Hom.geometricGaloisFrobenius` lemmas instead. -/
-theorem specGeometricFrobenius_hom :
-    (specGeometricFrobenius k).hom =
+simplified by `geometricFrobeniusField_hom_comp_specAlgebraicClosure` and by the
+`Scheme.Hom.geometricFrobenius` lemmas instead. -/
+theorem geometricFrobeniusField_hom :
+    (geometricFrobeniusField k).hom =
       Spec.map (CommRingCat.ofHom
         (geometricFrobenius k (AlgebraicClosure k)).toRingEquiv.toRingHom) :=
   rfl
@@ -158,9 +158,9 @@ theorem specGeometricFrobenius_hom :
 /-- The geometric Frobenius on `Spec k̄` is an automorphism over `Spec k`: the geometric
 Frobenius of the algebraic closure fixes the finite base field pointwise. -/
 @[reassoc (attr := simp)]
-theorem specGeometricFrobenius_hom_comp_specAlgebraicClosure :
-    (specGeometricFrobenius k).hom ≫ specAlgebraicClosure k = specAlgebraicClosure k := by
-  simp only [specGeometricFrobenius_hom, specAlgebraicClosure, ← Spec.map_comp]
+theorem geometricFrobeniusField_hom_comp_specAlgebraicClosure :
+    (geometricFrobeniusField k).hom ≫ specAlgebraicClosure k = specAlgebraicClosure k := by
+  simp only [geometricFrobeniusField_hom, specAlgebraicClosure, ← Spec.map_comp]
   congr 1
   ext x
   simp
@@ -173,21 +173,21 @@ variable {k} {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 `X = X₀ ×_{Spec k} Spec k̄` of a scheme over a finite field, acting through the geometric
 Frobenius on the coefficients only. It is an automorphism of `X` semilinear over `k̄`: it
 commutes with the projection to the model `X₀`
-(`geometricGaloisFrobenius_hom_comp_geometricFiberProj`) but commutes with the structure
+(`geometricFrobenius_hom_comp_geometricFiberProj`) but commutes with the structure
 morphism `a_X` only up to `σ`
-(`geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure`). It is not the
+(`geometricFrobenius_hom_comp_geometricFiberToAlgebraicClosure`). It is not the
 relative `#k`-power Frobenius of `X` over `k̄`, see the module implementation notes. -/
-def geometricGaloisFrobenius : f.geometricFiber ≅ f.geometricFiber :=
+def geometricFrobenius : f.geometricFiber ≅ f.geometricFiber :=
   asIso (pullback.map f (specAlgebraicClosure k) f (specAlgebraicClosure k)
-    (𝟙 X₀) (specGeometricFrobenius k).hom (𝟙 (Spec (.of k)))
+    (𝟙 X₀) (geometricFrobeniusField k).hom (𝟙 (Spec (.of k)))
     (by simp) (by simp))
 
 /-- The geometric Galois Frobenius of the geometric fiber commutes with the projection to
 the model: `g_X ≫ p_X = p_X`. -/
 @[reassoc (attr := simp)]
-theorem geometricGaloisFrobenius_hom_comp_geometricFiberProj :
-    f.geometricGaloisFrobenius.hom ≫ f.geometricFiberProj = f.geometricFiberProj := by
-  simp [geometricGaloisFrobenius, geometricFiberProj]
+theorem geometricFrobenius_hom_comp_geometricFiberProj :
+    f.geometricFrobenius.hom ≫ f.geometricFiberProj = f.geometricFiberProj := by
+  simp [geometricFrobenius, geometricFiberProj]
 
 /-- The geometric Galois Frobenius of the geometric fiber is semilinear over `k̄`: the
 square
@@ -203,10 +203,10 @@ Spec k̄ --σ--> Spec k̄
 
 commutes, that is `g_X ≫ a_X = a_X ≫ σ`. -/
 @[reassoc (attr := simp)]
-theorem geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure :
-    f.geometricGaloisFrobenius.hom ≫ f.geometricFiberToAlgebraicClosure =
-      f.geometricFiberToAlgebraicClosure ≫ (specGeometricFrobenius k).hom := by
-  simp [geometricGaloisFrobenius, geometricFiberToAlgebraicClosure]
+theorem geometricFrobenius_hom_comp_geometricFiberToAlgebraicClosure :
+    f.geometricFrobenius.hom ≫ f.geometricFiberToAlgebraicClosure =
+      f.geometricFiberToAlgebraicClosure ≫ (geometricFrobeniusField k).hom := by
+  simp [geometricFrobenius, geometricFiberToAlgebraicClosure]
 
 /-- The Frobenius square
 
@@ -222,16 +222,16 @@ Spec k̄ --σ--> Spec k̄
 is Cartesian: the geometric Galois Frobenius of the geometric fiber is the base change of
 the geometric Frobenius of `Spec k̄`. This is the square whose compact-support base change
 isomorphism transports Weil structures through `Rf_!`. -/
-theorem isPullback_geometricGaloisFrobenius :
-    IsPullback f.geometricGaloisFrobenius.hom f.geometricFiberToAlgebraicClosure
-      f.geometricFiberToAlgebraicClosure (specGeometricFrobenius k).hom :=
-  have h : IsPullback (f.geometricGaloisFrobenius.hom ≫ f.geometricFiberProj)
+theorem isPullback_geometricFrobenius :
+    IsPullback f.geometricFrobenius.hom f.geometricFiberToAlgebraicClosure
+      f.geometricFiberToAlgebraicClosure (geometricFrobeniusField k).hom :=
+  have h : IsPullback (f.geometricFrobenius.hom ≫ f.geometricFiberProj)
       f.geometricFiberToAlgebraicClosure f
-      ((specGeometricFrobenius k).hom ≫ specAlgebraicClosure k) := by
-    rw [f.geometricGaloisFrobenius_hom_comp_geometricFiberProj,
-      specGeometricFrobenius_hom_comp_specAlgebraicClosure]
+      ((geometricFrobeniusField k).hom ≫ specAlgebraicClosure k) := by
+    rw [f.geometricFrobenius_hom_comp_geometricFiberProj,
+      geometricFrobeniusField_hom_comp_specAlgebraicClosure]
     exact IsPullback.of_hasPullback f (specAlgebraicClosure k)
-  h.of_right f.geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure
+  h.of_right f.geometricFrobenius_hom_comp_geometricFiberToAlgebraicClosure
     (IsPullback.of_hasPullback f (specAlgebraicClosure k))
 
 end Scheme.Hom

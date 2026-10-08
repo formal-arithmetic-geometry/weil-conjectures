@@ -24,7 +24,7 @@ underlying sheaves or complexes commuting with the structure isomorphisms.
 
 The intended application is the following. Let `X₀` be a scheme over a finite field `k`
 with structure morphism `f : X₀ ⟶ Spec k`, let `X = f.geometricFiber` be its geometric
-fiber and let `e = f.geometricGaloisFrobenius` be the geometric Galois Frobenius of `X`
+fiber and let `e = f.geometricFrobenius` be the geometric Galois Frobenius of `X`
 (see `WeilConjectures.AlgebraicGeometry.GeometricFrobenius`). Classically the resulting
 data are called Weil sheaves and Weil complexes *on `X₀`*: the underlying sheaf lives on
 the geometric fiber `X`, while the Frobenius structure isomorphism is what remains of a
@@ -41,6 +41,12 @@ together with the coherently iterated structure isomorphisms
 `e^*` on sheaves is exact, its action on the derived category is the localization of its
 termwise action on complexes (`CategoryTheory.Functor.mapDerivedCategory`); no unbounded
 left derived functor machinery is needed.
+
+More generally, for any endofunctor `F : C ⥤ C`, a *Weil object* of `C` with respect to `F`,
+that is an object `K` of `C` together with an isomorphism `F K ≅ K` as structure data, is
+exactly an object of `CategoryTheory.Endofunctor.IsoAlgebra F`. Weil sheaves and Weil
+complexes are the cases where `F` is the pullback `e^*` on étale sheaves and on their
+derived category.
 
 Two layers are provided, each with its forgetful functor to the underlying category:
 
