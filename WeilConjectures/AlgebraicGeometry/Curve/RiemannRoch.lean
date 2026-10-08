@@ -289,12 +289,34 @@ theorem IdealSheafData.IsInvertible.degree_dual_toModules_eq_one {J : X.IdealShe
   rw [hJ.degree_dual_toModules, h, Nat.cast_one]
 
 include k in
+/-- **Every line bundle has a section with divisorial zeros after a twist.** For every invertible
+sheaf `ℒ` on a smooth proper curve there is an effective Cartier divisor `D₂`, with invertible
+ideal sheaf `J₂ = 𝒪_X(-D₂)`, and a global section `s` of `ℒ ⊗ 𝒪_X(D₂)` whose zero scheme is an
+effective Cartier divisor, i.e. `s` does not vanish identically on any connected component.
+
+Choose a closed point on each of the finitely many connected components of `X` and let `D` be
+their sum. On each component, `χ(ℒ ⊗ 𝒪_X(nD)) = χ(ℒ) + n deg D` grows with `n`
+(`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_tensorObj_dual_toModules`), so
+`h⁰ ≥ χ > 0` there for `n ≫ 0`. A section which is non-zero on each component, which is
+integral, has invertible zero scheme
+(`AlgebraicGeometry.Scheme.IdealSheafData.IsLocallyPrincipal.isInvertible`).
+
+(blueprint: `lem-sc-line-bundle-rational-section`) -/
+theorem Modules.exists_isInvertible_zeroLocus_tensorObj_dual (ℒ : X.Modules) [ℒ.IsInvertible] :
+    ∃ J₂ : X.IdealSheafData, J₂.IsInvertible ∧
+      ∃ s : 𝟙_ X.Modules ⟶ ℒ ⊗ J₂.toModulesᵛ, (Modules.Hom.zeroLocus s).IsInvertible :=
+  sorry
+
+include k in
 /-- **Every line bundle comes from a divisor.** Every invertible sheaf `ℒ` on a smooth proper
 curve is `𝒪_X(D₁) ⊗ 𝒪_X(D₂)⁻¹` for effective Cartier divisors `D₁` and `D₂`, given by
 invertible ideal sheaves `J₁ = 𝒪_X(-D₁)` and `J₂ = 𝒪_X(-D₂)`: `ℒ ⊗ 𝒪_X(D₂) ≅ 𝒪_X(D₁)`.
 
-On a connected component, a nonzero rational section `s` of `ℒ` gives `ℒ ≅ 𝒪_X(div s)`, and
-`div s = D₁ - D₂` is the difference of its divisors of zeros and of poles.
+Twisting by a suitable `D₂`, the invertible sheaf `ℒ ⊗ 𝒪_X(D₂)` has a global section `s` whose
+zero scheme `D₁` is an effective Cartier divisor
+(`AlgebraicGeometry.Scheme.Modules.exists_isInvertible_zeroLocus_tensorObj_dual`), and then
+`ℒ ⊗ 𝒪_X(D₂) ≅ 𝒪_X(D₁)`
+(`AlgebraicGeometry.Scheme.Modules.Hom.nonempty_iso_dual_toModules_tensorObj`).
 
 With `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules` and
 `AlgebraicGeometry.Scheme.Modules.degree_tensorObj` this gives `deg ℒ = deg D₁ - deg D₂`: the
@@ -303,8 +325,13 @@ With `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules
 (blueprint: `sk-thm-picard-rr`, `lem-sc-line-bundle-rational-section`) -/
 theorem Modules.exists_tensorObj_dual_toModules_iso (ℒ : X.Modules) [ℒ.IsInvertible] :
     ∃ J₁ J₂ : X.IdealSheafData, J₁.IsInvertible ∧ J₂.IsInvertible ∧
-      Nonempty (ℒ ⊗ₘ J₂.toModulesᵛ ≅ J₁.toModulesᵛ) :=
-  sorry
+      Nonempty (ℒ ⊗ₘ J₂.toModulesᵛ ≅ J₁.toModulesᵛ) := by
+  obtain ⟨J₂, h₂, s, hs⟩ := Modules.exists_isInvertible_zeroLocus_tensorObj_dual (k := k) ℒ
+  have := h₂.isInvertible_dual_toModules
+  have := Modules.IsInvertible.sheafOfModules_isInvertible (ℒ ⊗ J₂.toModulesᵛ)
+  have := Modules.IsInvertible.sheafOfModules_isInvertible (𝟙_ X.Modules)
+  obtain ⟨e⟩ := Modules.Hom.nonempty_iso_dual_toModules_tensorObj s hs
+  exact ⟨_, J₂, hs, h₂, ⟨e ≪≫ ρ_ _⟩⟩
 
 /-- **The degree is additive.** `deg (ℒ ⊗ ℳ) = deg ℒ + deg ℳ` for invertible sheaves on a smooth
 proper curve.
