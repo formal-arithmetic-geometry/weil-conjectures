@@ -69,7 +69,7 @@ for each `P` with `U P`, the property holds on a neighbourhood of `P` in `V(P)`.
 neighbourhood `D(g)` of each prime where it holds. -/
 theorem Ideal.exists_notMem_forall_of_isNoetherianRing {S : Type*} [CommRing S]
     [IsNoetherianRing S] (U : Ideal S → Prop)
-    (hgen : ∀ P Q : Ideal S, Q.IsPrime → Q ≤ P → U P → U Q)
+    (hgen : ∀ P Q : Ideal S, P.IsPrime → Q.IsPrime → Q ≤ P → U P → U Q)
     (hloc : ∀ P : Ideal S, P.IsPrime → U P →
       ∃ g ∉ P, ∀ Q : Ideal S, Q.IsPrime → P ≤ Q → g ∉ Q → U Q)
     (P : Ideal S) [P.IsPrime] (hP : U P) :
@@ -110,7 +110,7 @@ theorem Ideal.exists_notMem_forall_of_isNoetherianRing {S : Type*} [CommRing S]
   have hV : ∀ Q : Ideal S, Q.IsPrime → J ≤ Q → ¬ U Q := by
     intro Q hQ hJQ hUQ
     obtain ⟨Q₀, hQ₀, hQ₀le⟩ := Ideal.exists_minimalPrimes_le hJQ
-    exact hmin Q₀ hQ₀ (hgen Q Q₀ hQ₀.1.1 hQ₀le hUQ)
+    exact hmin Q₀ hQ₀ (hgen Q Q₀ hQ hQ₀.1.1 hQ₀le hUQ)
   obtain ⟨g, hgJ, hgP⟩ := SetLike.not_le_iff_exists.mp fun hle ↦ hV P ‹_› hle hP
   refine ⟨g, hgP, fun Q hQ hgQ ↦ ?_⟩
   by_contra hUQ
