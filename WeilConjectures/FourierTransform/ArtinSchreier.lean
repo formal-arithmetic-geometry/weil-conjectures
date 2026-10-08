@@ -51,7 +51,12 @@ classical case is `k = ℤ/p`.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isIdempotentElem_artinSchreierIdempotent`: `e_Ψ` is idempotent.
-- `AlgebraicGeometry.Etale.isLocallyConstantSheaf_artinSchreierSheaf`: `ℒ_Ψ` is lisse.
+- `AlgebraicGeometry.Etale.exists_eq_artinSchreierTranslation_of_comp_artinSchreierMap`: the
+  automorphisms of the Artin–Schreier covering are the translations.
+- `AlgebraicGeometry.Etale.artinSchreierSheafUpperStarIso`: `AS_q^* ℒ_Ψ ≅ Λ`, so that `ℒ_Ψ` is
+  lisse of rank one (`AlgebraicGeometry.Etale.isLocallyConstantSheaf_artinSchreierSheaf`).
+- `AlgebraicGeometry.Etale.nonempty_iso_biproduct_artinSchreierSheaf`: for a primitive `Ψ` with
+  values in a domain, `(AS_q)_* Λ ≅ ⨁_{b ∈ k} ℒ_{Ψ(b ·)}`.
 - `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_zero`: the rigidification
   `Λ ≅ 0^* ℒ_Ψ`.
 - `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_add`:
@@ -69,21 +74,24 @@ classical case is `k = ℤ/p`.
   `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_one`: for functions `f, g` on
   `X`, `ℒ_{Ψ, f} ⊗ ℒ_{Ψ, g} ≅ ℒ_{Ψ, f + g}`, `ℒ_{Ψ, 0} ≅ Λ`, `ℒ_{Ψ, f} ⊗ ℒ_{Ψ', f} ≅ ℒ_{Ψ Ψ', f}`
   and `ℒ_{1, f} ≅ Λ`.
-- `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg` and
-  `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv`: the inverse of `ℒ_{Ψ, f}` is
-  both `ℒ_{Ψ, -f}` and `ℒ_{Ψ⁻¹, f}`.
+- `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg`,
+  `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv` and
+  `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg_inv`: the inverse of
+  `ℒ_{Ψ, f}` is both `ℒ_{Ψ, -f}` and `ℒ_{Ψ⁻¹, f}`, and `ℒ_{Ψ, -f} ≅ ℒ_{Ψ⁻¹, f}`.
 
 ## Blueprint
 
 The `sk-*` labels quoted below are block names of the *sketch* blueprint, a separate
 repository; they are not labels of `blueprint/src` and so are not checked by the build.
 
-The subsection `sk-lem-as-properties` also contains the decomposition `(AS_q)_* Λ ≅ ⨁_χ ℒ_χ`
-of the pushforward, the trace function of `ℒ_{Ψ, a f}` and the cohomology of the affine line
-with coefficients in `ℒ_{Ψ, a x}`. Those are deferred: they are the inputs to the *proofs* of
-the statements of this block. The orthogonality `e_χ e_{χ'} = 0` and completeness
-`∑_χ e_χ = 1` of the character projectors are not stated: they fail for a general `Λ` (the
-first when `Λ` has zero divisors, the second when `Λ` lacks the `p`-th roots of unity).
+The subsection `sk-lem-as-properties` also contains the trace function of `ℒ_{Ψ, a x}`
+(`AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier`, stated for the `ℓ`-adic Weil sheaf
+`AlgebraicGeometry.artinSchreier`, where trace functions are defined) and the cohomology of the
+affine line with coefficients in `ℒ_{Ψ, a x}`
+(`WeilConjectures.FourierTransform.ArtinSchreierCohomology`). The orthogonality
+`e_χ e_{χ'} = 0` and completeness `∑_χ e_χ = 1` of the character projectors fail for a general
+`Λ` (the first when `Λ` has zero divisors, the second when `Λ` lacks the `p`-th roots of unity);
+the isotypic decomposition is stated for a primitive character with values in a domain.
 
 ## Implementation notes
 
@@ -99,6 +107,14 @@ isomorphism `Functor.Monoidal.εIso` of the strong monoidal structure
 `AlgebraicGeometry.Etale.monoidal_upperStar`. The action of `σ_a` on `(AS_q)_* Λ` is the
 general `AlgebraicGeometry.Etale.lowerStarConstantSheafEndOfOver` for the endomorphism `σ_a`
 of `𝔸¹_k` over `AS_q`, so the group law of the action reduces to that of the translations.
+
+The proofs go through the trivialization `AS_q^* ℒ_Ψ ≅ Λ`, the adjoint of the inclusion
+`ℒ_Ψ ⟶ (AS_q)_* Λ`, which is checked on stalks: at a geometric point `t` of the source, the
+stalk of `(AS_q)_* Λ` at `t ≫ AS_q` is the product of copies of `Λ` indexed by the geometric
+fibre, a `k`-torsor (`AlgebraicGeometry.Etale.exists_eq_comp_artinSchreierTranslation`), and a
+`Ψ`-isotypic germ is determined by its value at `t`. Since `AS_q` is surjective, `AS_q^*`
+reflects isomorphisms, so a morphism into `ℒ_χ` whose adjoint is an isomorphism is itself
+one; this gives `zero`, `one` and `mul`.
 
 The isomorphisms `zero`, `add`, `one`, `mul` and `smul` are stated as `Nonempty` theorems
 rather than as `def`s because they are not yet constructed, and the repository does not allow
