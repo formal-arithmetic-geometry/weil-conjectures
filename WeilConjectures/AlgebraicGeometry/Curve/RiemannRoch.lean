@@ -611,18 +611,59 @@ theorem finrankH_zero_eq [GlobalSectionsBijective k X] (ℒ : X.Modules) [ℒ.Is
     Modules.finrankH_one_eq_zero_of_degree ℒ hd]
   ring
 
+/-- **The criterion for very ampleness on a curve.** Let `k` be algebraically closed and `ℳ` a
+line bundle on a smooth proper curve with `H⁰(X, 𝒪_X) = k`. Suppose that twisting by the ideal
+sheaf of a rational point lowers `h⁰` by one, and twisting by the ideal sheaves of two rational
+points `P` and `Q`, possibly equal, lowers `h⁰` by two. Then `ℳ` is very ample.
+
+Since `k` is algebraically closed, every closed point is rational. The first condition says that
+the complete linear system `|ℳ|` is base point free, so it defines a morphism `φ : X ⟶ ℙ^N`. The
+second condition with `P ≠ Q` gives a section vanishing at `P` but not at `Q`, so `φ` is
+injective, and with `P = Q` a section vanishing to order exactly one at `P`, so `φ` is unramified.
+Being proper with finite fibres, `φ` is finite, and a finite morphism which is injective and
+unramified, with trivial residue field extensions, is a closed immersion (Nakayama).
+
+(blueprint: `lem-sc-degree-2g1-very-ample`, second part of the proof) -/
+theorem isVeryAmple_of_finrankH_zero_tensorObj_toModules_ker [IsAlgClosed k]
+    [GlobalSectionsBijective k X] (ℳ : X.Modules) [ℳ.IsInvertible]
+    (h₁ : ∀ x : (X ↘ Spec (.of k)).fieldPoints k,
+      Modules.finrankH k (ℳ ⊗ x.1.ker.toModules) 0 + 1 = ℳ.finrankH k 0)
+    (h₂ : ∀ x y : (X ↘ Spec (.of k)).fieldPoints k,
+      Modules.finrankH k ((ℳ ⊗ x.1.ker.toModules) ⊗ y.1.ker.toModules) 0 + 2 =
+        ℳ.finrankH k 0) :
+    IsVeryAmple (X ↘ Spec (.of k)) ℳ :=
+  sorry
+
 /-- **A line bundle of degree `≥ 2g + 1` is very ample.** Let `k` be algebraically closed and
 `ℳ` a line bundle of degree `d ≥ 2g + 1` on a smooth proper curve with `H⁰(X, 𝒪_X) = k` of
 genus `g`. For closed points `P, Q`, Riemann–Roch in degree `≥ 2g - 1`
 (`AlgebraicGeometry.Scheme.finrankH_zero_eq`) gives `h⁰(ℳ(-P)) = h⁰(ℳ) - 1` and
 `h⁰(ℳ(-P-Q)) = h⁰(ℳ) - 2`: the complete linear system `|ℳ|` is base point free and separates
-points and tangent vectors, so it defines a closed immersion into projective space.
+points and tangent vectors, so it defines a closed immersion into projective space
+(`AlgebraicGeometry.Scheme.isVeryAmple_of_finrankH_zero_tensorObj_toModules_ker`).
 
 (blueprint: `lem-sc-degree-2g1-very-ample`) -/
 theorem isVeryAmple_of_degree [IsAlgClosed k] [GlobalSectionsBijective k X] (ℳ : X.Modules)
     [ℳ.IsInvertible] (hd : 2 * (arithmeticGenus k X : ℤ) + 1 ≤ ℳ.degree k) :
-    IsVeryAmple (X ↘ Spec (.of k)) ℳ :=
-  sorry
+    IsVeryAmple (X ↘ Spec (.of k)) ℳ := by
+  have h₀ := finrankH_zero_eq (k := k) ℳ (by omega)
+  refine isVeryAmple_of_finrankH_zero_tensorObj_toModules_ker ℳ (fun x ↦ ?_) fun x y ↦ ?_
+  · have := (Hom.isInvertible_ker_fieldPoints x).isInvertible_toModules
+    have hdx : (ℳ ⊗ x.1.ker.toModules).degree k = ℳ.degree k - 1 := by
+      rw [Modules.degree_tensorObj (k := k), degree_toModules_ker_fieldPoints]
+      ring
+    have h := finrankH_zero_eq (k := k) (ℳ ⊗ x.1.ker.toModules) (by omega)
+    omega
+  · have := (Hom.isInvertible_ker_fieldPoints x).isInvertible_toModules
+    have := (Hom.isInvertible_ker_fieldPoints y).isInvertible_toModules
+    have hdx : ((ℳ ⊗ x.1.ker.toModules) ⊗ y.1.ker.toModules).degree k = ℳ.degree k - 2 := by
+      rw [Modules.degree_tensorObj (k := k), Modules.degree_tensorObj (k := k),
+        degree_toModules_ker_fieldPoints,
+        degree_toModules_ker_fieldPoints]
+      ring
+    have h := finrankH_zero_eq (k := k) ((ℳ ⊗ x.1.ker.toModules) ⊗ y.1.ker.toModules)
+      (by omega)
+    omega
 
 /-- **Positive degree implies ample, over an algebraically closed field.** If `deg ℒ > 0` then
 `deg ℒ^{⊗ m} = m deg ℒ ≥ 2g + 1` for `m = 2g + 1`, so `ℒ^{⊗ m}` is very ample
