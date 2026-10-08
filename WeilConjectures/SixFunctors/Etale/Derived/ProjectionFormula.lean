@@ -43,8 +43,10 @@ of `AlgebraicGeometry.Etale.projectionMapOfCompactification` is an isomorphism, 
 - `AlgebraicGeometry.Etale.hasProjectionFormula_field` (`sk-thm-sf-pf-field`) : the
   projection formula over a field of coefficients, for bounded constructible objects of
   finite Tor amplitude.
-- `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite` (`sk-thm-sf-pf-finite`) : the
-  projection formula at finite coefficients, for all complexes.
+- `AlgebraicGeometry.Etale.isIso_projectionMap_of_finite` : the projection formula at a finite
+  coefficient ring, on the whole unbounded derived categories, as an isomorphism of bifunctors.
+- `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite` : its objectwise form, a
+  strengthening of `sk-thm-sf-pf-finite`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp_derivedTensorRight`,
   `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek` : where the
   projection formula holds, the projection map is a natural isomorphism in either variable.
@@ -227,28 +229,42 @@ end Field
 
 section Finite
 
-variable (Λ : Type (u + 1)) [CommRing Λ]
+variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
 
-variable {X Y : Scheme.{u}}
+/-- **The projection formula at finite coefficients, unbounded.** For a finite coefficient
+ring `Λ` and `f : X ⟶ Y` admitting a compactification, the projection map
 
-/-- Blueprint `sk-thm-sf-pf-finite`: Projection formula, finite coefficients.
+`PF : Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)`
 
-The projection formula on the unbounded derived categories: for a finite coefficient ring `Λ`
-whose exponent is invertible on `Y`, the projection map
-`PF : Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism at all `K` and `L`.
+of `AlgebraicGeometry.Etale.projectionMap` is an isomorphism of bifunctors on the whole
+unbounded derived categories, with no boundedness, constructibility or Tor amplitude
+hypothesis on `K` and `L`.
 
-The blueprint states it for `K` bounded constructible and `L` of finite Tor amplitude, which is
-`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`. At finite
-coefficients no boundedness is needed (SGA 4 XVII 5.2.9): for the open immersion of a
-compactification the projection map is an isomorphism formally, and for its proper part `g`
-the derived direct image `Rg_*` has finite cohomological dimension and commutes with
-direct sums, so the projection map is an isomorphism because it is one on stalks. -/
-theorem hasProjectionFormula_of_finite [Finite Λ] [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
-    [HasCompactification f]
+This is the unbounded form of clause (5) of `prop-functor-package` that the base linearity of
+kernel transforms (and of the Fourier–Deligne transform, `sk-prop-base-linear`) consumes.
+It holds for torsion coefficients (SGA 4 XVII 5.2.9): for the open immersion `i` of the
+compactification `PF` is an isomorphism formally
+(`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso`), and for the proper
+map `g` one checks on geometric stalks with unbounded proper base change, where it becomes
+`RΓ(X_ȳ, K) ⊗ᴸ M ≅ RΓ(X_ȳ, K ⊗ᴸ M)` for a complex `M` of `Λ`-modules; this holds because
+`RΓ(X_ȳ, -)` has finite cohomological dimension on torsion sheaves, so commutes with the
+colimits reducing `M` to `Λ`. -/
+theorem isIso_projectionMap_of_finite [Finite Λ] (f : X ⟶ Y) [HasCompactification f] :
+    IsIso (projectionMap (ModuleCat.{u + 1} Λ) f) :=
+  sorry
+
+/-- The projection formula at finite coefficients, objectwise: for a finite coefficient ring
+`Λ`, the projection formula holds for `f` at all `K` and `L`.
+
+This is a strengthening of the blueprint node `sk-thm-sf-pf-finite`, which asks for `K`
+bounded constructible, `L` of finite Tor amplitude and `Λ = A_{E,n}`. It is read off from
+`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`. -/
+theorem hasProjectionFormula_of_finite [Finite Λ] (f : X ⟶ Y) [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
-  sorry
+    HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L := by
+  have := isIso_projectionMap_of_finite Λ f
+  exact inferInstanceAs (IsIso (((projectionMap _ f).app K).app L))
 
 end Finite
 

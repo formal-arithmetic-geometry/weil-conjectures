@@ -128,6 +128,9 @@ Class: torsion; decided by the convolution computation
 `AlgebraicGeometry.Etale.nonempty_iso_fourierKernel_convolution` (cohomology of `𝔸^r`), which
 needs `[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-thm-inversion`) -/
+-- TODO: discharge the `HasCompactification` hypothesis: the composite is a morphism
+-- `𝔸^{3n}_S ⟶ 𝔸^n_S`, which is compactified through projective space by
+-- `AlgebraicGeometry.Compactification.ofIsImmersionAffineSpace`, with no need for Nagata.
 theorem nonempty_iso_affineFourierTransform_comp_inv [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ]
     [HasCompactification (pullback.tripleProj₁₃ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ≫
