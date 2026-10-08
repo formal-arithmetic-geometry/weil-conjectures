@@ -478,6 +478,7 @@ public import WeilConjectures.GroupTheory.WeilGroup
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 public import WeilConjectures.Mathlib.Algebra.Algebra.Hom
 public import WeilConjectures.Mathlib.Algebra.BigOperators.GroupWithZero.Finset
+public import WeilConjectures.Mathlib.Algebra.BigOperators.Intervals
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Adjunctions
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Colimits
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup

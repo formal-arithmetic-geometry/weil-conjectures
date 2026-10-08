@@ -268,6 +268,12 @@ noncomputable def freeMatrix {I J : Type u} [DecidableEq J]
     (φ : free (R := X.ringCatSheaf) I ⟶ free J) : Matrix J I Γ(X, ⊤) :=
   Matrix.of fun j i ↦ Hom.app (ιFree i ≫ φ ≫ freeπ j) ⊤ (1 : Γ(X, ⊤))
 
+@[simp]
+lemma freeMatrix_zero {I J : Type u} [DecidableEq J] :
+    freeMatrix (0 : free (R := X.ringCatSheaf) I ⟶ free J) = 0 := by
+  ext j i
+  simp [freeMatrix]
+
 /-- The pullback of a free module is free. -/
 noncomputable def pullbackFreeIso (g : Y ⟶ X) (I : Type u) :
     (pullback g).obj (free (R := X.ringCatSheaf) I) ≅ free I :=

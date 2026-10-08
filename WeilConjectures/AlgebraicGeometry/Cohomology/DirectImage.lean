@@ -21,6 +21,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.Mathlib.Algebra.BigOperators.Intervals
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -615,6 +616,43 @@ theorem isFinitePresentation_higherDirectImage [IsLocallyNoetherian T]
   exact (iSup_congr fun V ↦ IsAffineOpen.opensRange_fromSpec V.2).trans
     (iSup_affineOpens_eq_top T)
 
+omit [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
+  [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation] in
+/-- A point `s` of an open `U` of `T` lifts to a morphism `Spec κ(s) ⟶ U`. -/
+lemma exists_comp_ι_eq_fromSpecResidueField {U : T.Opens} {s : T} (hs : s ∈ U) :
+    ∃ g : Spec (T.residueField s) ⟶ U.toScheme, g ≫ U.ι = T.fromSpecResidueField s := by
+  have hrange : Set.range (T.fromSpecResidueField s).base ⊆ Set.range U.ι.base := by
+    rw [Scheme.Opens.range_ι, Scheme.range_fromSpecResidueField]
+    simpa using hs
+  exact ⟨IsOpenImmersion.lift U.ι (T.fromSpecResidueField s) hrange,
+    IsOpenImmersion.lift_fac _ _ _⟩
+
+omit [LocallyOfFinitePresentation f] [HasInjectiveResolutions X.Modules] in
+/-- At a point `s` of an open `U` of the base over which `R f_* ℱ` is computed by a complex `P`
+compatibly with base change, the fibre dimension `h^q(s)` is the dimension of the cohomology of
+the fibre `P ⊗ κ(s)` of `P`. -/
+theorem hFiber_eq_finrank_homology {U : T.Opens} {P : CochainComplex U.toScheme.Modules ℤ}
+    (hbc : ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
+        [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
+        Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
+          (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)))
+    {s : T} (g : Spec (T.residueField s) ⟶ U.toScheme) (hg : g ≫ U.ι = T.fromSpecResidueField s)
+    (q : ℕ) :
+    ℱ.hFiber f q s =
+      Module.finrank (T.residueField s) ((moduleSpecΓFunctor (R := T.residueField s)).obj
+        ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q)) := by
+  have := isGrothendieckAbelian (f.fiber s)
+  have sq : IsPullback (f.fiberι s) (f.fiberToSpecResidueField s) f (g ≫ U.ι) := by
+    rw [hg]
+    exact IsPullback.of_hasPullback _ _
+  obtain ⟨e⟩ := hbc g _ _ sq q
+  rw [hFiber_eq_finrank_sections_higherDirectImage f ℱ s q,
+    ← (appLinearEquivOfIso e ⊤).finrank_eq]
+  have h := finrank_eq_of_coe_eq
+    ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q) ⊤ ⊤ rfl
+  rw [finrank_top, finrank_top] at h
+  exact h.symm
+
 /-- **Semicontinuity of the fibre dimension.** With `f : X ⟶ T` proper of finite presentation
 and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the fibre dimension
 `t ↦ dim_{κ(t)} H^q(X_t, ℱ_t)` is upper semicontinuous on `T`.
@@ -638,24 +676,9 @@ theorem upperSemicontinuous_hFiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) :
   have key (s : T) (hs : s ∈ U) : ∃ g : Spec (T.residueField s) ⟶ U.toScheme,
       g ≫ U.ι = T.fromSpecResidueField s ∧ ℱ.hFiber f q s =
         Module.finrank (T.residueField s) ((moduleSpecΓFunctor (R := T.residueField s)).obj
-          ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q)) := by
-    have hrange : Set.range (T.fromSpecResidueField s).base ⊆ Set.range U.ι.base := by
-      rw [Scheme.Opens.range_ι, Scheme.range_fromSpecResidueField]
-      simpa using hs
-    let g := IsOpenImmersion.lift U.ι (T.fromSpecResidueField s) hrange
-    have hg : g ≫ U.ι = T.fromSpecResidueField s := IsOpenImmersion.lift_fac _ _ _
-    refine ⟨g, hg, ?_⟩
-    have := isGrothendieckAbelian (f.fiber s)
-    have sq : IsPullback (f.fiberι s) (f.fiberToSpecResidueField s) f (g ≫ U.ι) := by
-      rw [hg]
-      exact IsPullback.of_hasPullback _ _
-    obtain ⟨e⟩ := hbc g _ _ sq q
-    rw [hFiber_eq_finrank_sections_higherDirectImage f ℱ s q,
-      ← (appLinearEquivOfIso e ⊤).finrank_eq]
-    have h := finrank_eq_of_coe_eq
-      ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q) ⊤ ⊤ rfl
-    rw [finrank_top, finrank_top] at h
-    exact h.symm
+          ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q)) :=
+    have ⟨g, hg⟩ := exists_comp_ι_eq_fromSpecResidueField hs
+    ⟨g, hg, hFiber_eq_finrank_homology f ℱ hbc g hg q⟩
   obtain ⟨g, hg, hgt⟩ := key t htU
   obtain ⟨V, hV, hle⟩ := exists_finrank_homology_pullback_le hP.exists_iso_free q
     (Field.toIsField _) g
@@ -823,8 +846,63 @@ of its cohomology.
 
 (blueprint: `sk-thm-picard-perfect`) -/
 theorem isLocallyConstant_eulerCharFiber (hℱ : ℱ.IsFlatOver f) :
-    IsLocallyConstant (ℱ.eulerCharFiber f) :=
-  sorry
+    IsLocallyConstant (ℱ.eulerCharFiber f) := by
+  rw [IsLocallyConstant.iff_eventually_eq]
+  intro t
+  obtain ⟨U, P, d, htU, hP, hbc⟩ := exists_isFiniteFreeComplex_higherDirectImage f ℱ hℱ t
+  choose r e using hP.exists_iso_free
+  let e' n := (e n).some
+  suffices h : ∀ s ∈ U, ℱ.eulerCharFiber f s =
+      ∑ q ∈ Finset.range (d + 1), (-1) ^ q * (r q : ℤ) by
+    filter_upwards [U.isOpen.mem_nhds htU] with s hs
+    rw [h s hs, h t htU]
+  intro s hs
+  -- the fibre dimension in each degree, through the fibre `P ⊗ κ(s)`
+  obtain ⟨g, hg⟩ := exists_comp_ι_eq_fromSpecResidueField hs
+  have hh := hFiber_eq_finrank_homology f ℱ hbc g hg
+  have hκ : IsField (T.residueField s) := Field.toIsField _
+  have hf := finrank_homology_pullback_add_rank_add_rank e' hκ g
+  let a : ℤ → ℕ := fun n ↦
+    ((freeMatrix ((e' n).inv ≫ P.d n (n + 1) ≫ (e' (n + 1)).hom)).map g.appTop).rank
+  have ha (n m : ℤ) (h : n + 1 = m) : a n =
+      ((freeMatrix ((e' n).inv ≫ P.d n m ≫ (e' m).hom)).map g.appTop).rank := by
+    subst h
+    rfl
+  have hq (q : ℕ) : (ℱ.hFiber f q s : ℤ) = r q - a q - a (q - 1) := by
+    have := hf q
+    rw [← ha (q - 1) q (by omega)] at this
+    change _ + a q + _ = _ at this
+    rw [hh q]
+    omega
+  have hzero (n : ℤ) (hn : IsZero (P.X n) ∨ IsZero (P.X (n + 1))) : a n = 0 := by
+    have : P.d n (n + 1) = 0 := hn.elim (fun h ↦ h.eq_of_src _ _) (fun h ↦ h.eq_of_tgt _ _)
+    simp [a, this, freeMatrix_zero]
+  have hP₀ := hP.isStrictlyGE
+  have hP₁ := hP.isStrictlyLE
+  have ha₀ : a (-1) = 0 := hzero _ (.inl (P.isZero_of_isStrictlyGE 0 (-1) (by omega)))
+  have ha₁ : a d = 0 := hzero _ (.inr (P.isZero_of_isStrictlyLE d (d + 1) (by omega)))
+  have hvan (q : ℕ) (hq : d < q) : ℱ.hFiber f q s = 0 := by
+    rw [hh q]
+    have hX : IsZero (((Modules.pullback g).mapHomologicalComplex _).obj P |>.X q) :=
+      (Modules.pullback g).map_isZero (P.isZero_of_isStrictlyLE d q (by omega))
+    have hH : IsZero ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q) :=
+      ShortComplex.isZero_homology_of_isZero_X₂ _ hX
+    have := ModuleCat.subsingleton_of_isZero
+      ((moduleSpecΓFunctor (R := T.residueField s)).map_isZero hH)
+    exact Module.finrank_zero_of_subsingleton
+  rw [eulerCharFiber, finsum_eq_sum_of_support_subset (s := Finset.range (d + 1))]
+  · have := Finset.sum_range_neg_one_pow_mul_add_sub_one (fun n ↦ (a n : ℤ)) d
+    simp only [ha₀, ha₁, Nat.cast_zero, mul_zero, zero_add] at this
+    rw [← sub_zero (∑ q ∈ Finset.range (d + 1), (-1) ^ q * (r q : ℤ)), ← this,
+      ← Finset.sum_sub_distrib]
+    refine Finset.sum_congr rfl fun q _ ↦ ?_
+    rw [hq]
+    ring
+  · intro q hq
+    simp only [Function.mem_support, ne_eq, mul_eq_zero, not_or] at hq
+    simp only [Finset.coe_range, Set.mem_Iio]
+    by_contra h
+    exact hq.2 (by rw [hvan q (by omega)]; simp)
 
 /-- **The fibre dimension is locally constant on the perfect locus.** On the perfect locus `U_i`
 the fibre dimension `t ↦ dim_{κ(t)} H^i(X_t, ℱ_t)` is locally constant: there it equals
