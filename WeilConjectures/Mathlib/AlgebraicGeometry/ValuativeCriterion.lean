@@ -87,7 +87,7 @@ theorem IsAffineOpen.of_universallyClosed {X S : Scheme.{u}} (f : X ⟶ S) [Univ
     rw [Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top_assoc, ← Scheme.toSpecΓ_naturality_assoc,
       IsIso.hom_inv_id, Category.comp_id]
   have memU (x : U.toScheme) : U.ι x ∈ U := by
-    show U.ι x ∈ (U : Set X)
+    change U.ι x ∈ (U : Set X)
     rw [← Scheme.Opens.range_ι U]
     exact ⟨x, rfl⟩
   have capp {A B C : Scheme.{u}} (p : A ⟶ B) (q : B ⟶ C) (x : Γ(C, ⊤)) :
