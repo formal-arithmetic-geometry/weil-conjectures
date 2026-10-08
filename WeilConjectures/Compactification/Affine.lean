@@ -31,6 +31,8 @@ proof starts from an affine open of the scheme to be compactified.
 
 ## Main results
 
+- `AlgebraicGeometry.HasCompactification.affineSpace_over`: the projection `𝔸(n; S) ⟶ S` is
+  compactifiable for finite `n`.
 - `AlgebraicGeometry.HasCompactification.of_isQuasiAffine`: a quasi-compact, locally of
   finite type morphism `f : X ⟶ S` with `X` quasi-affine admits a compactification. In
   particular this holds for `X` affine, and the hypothesis `QuasiCompact f` is automatic as
@@ -78,5 +80,11 @@ theorem HasCompactification.of_isQuasiAffine (f : X ⟶ S) [X.IsQuasiAffine]
     [LocallyOfFiniteType f] [QuasiCompact f] : HasCompactification f := by
   obtain ⟨n, i, hi, hii⟩ := exists_immersion_affineSpace_of_quasiAffine f
   exact (Compactification.ofIsImmersionAffineSpace i hi).hasCompactification
+
+/-- The projection of relative affine space in finitely many coordinates is compactifiable, by
+its open immersion into relative projective space. -/
+instance HasCompactification.affineSpace_over (n : Type u) [Finite n] (S : Scheme.{u}) :
+    HasCompactification (𝔸(n; S) ↘ S) :=
+  (Compactification.ofIsImmersionAffineSpace (𝟙 _) (Category.id_comp _)).hasCompactification
 
 end AlgebraicGeometry
