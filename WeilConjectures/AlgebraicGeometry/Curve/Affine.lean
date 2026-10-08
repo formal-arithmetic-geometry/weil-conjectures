@@ -188,7 +188,8 @@ over an algebraically closed field `k` and `ℓ` a prime. Then `H²(C_ét, ℤ/�
 If `ℓ ≠ char k`, a primitive `ℓ`-th root of unity identifies `ℤ/ℓ` with `μ_ℓ`
 (`AlgebraicGeometry.Scheme.constantZModIsoRootsOfUnitySheaf`), and the Kummer sequence gives
 `H²(C, μ_ℓ) ≅ Pic(C) / ℓ`
-(`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two`), which vanishes as `Pic(C)` is `ℓ`-divisible
+(`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two`), which vanishes
+as `Pic(C)` is `ℓ`-divisible
 (`AlgebraicGeometry.IsConnectedCurve.surjective_zsmul_pic_and_finite_torsionBy`). If
 `ℓ = char k`, this is the Artin–Schreier vanishing
 `AlgebraicGeometry.Scheme.subsingleton_sheafH_constantZMod_of_isAffine`.
