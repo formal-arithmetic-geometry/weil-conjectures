@@ -9,7 +9,6 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
 public import WeilConjectures.FourierTransform.Properties
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
@@ -62,9 +61,10 @@ its restriction to the origin (supported localization), and that restriction is
 `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_affineSpace`), which needs
 `Λ` finite with exponent invertible on `S`. The twist `(-r)` is moved onto the
-skyscraper by the projection formula for the zero section. The transform of the skyscraper is
-computed by proper base change of `δ₀` along `p₁`, which gives the constant sheaf on the slice
-`s : {0} ×_S 𝔸(n; S) ⟶ 𝔸(n; S) ×_S 𝔸(n; S)`, the projection formula for the closed immersion
+skyscraper by the projection formula for the zero section
+(`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper`). The
+transform of the skyscraper is computed by proper base change of `δ₀` along `p₁`, which gives
+the constant sheaf on the slice `s : {0} ×_S 𝔸(n; S) ⟶ 𝔸(n; S) ×_S 𝔸(n; S)`, the projection formula for the closed immersion
 `s`, on whose image the kernel is trivial, and `Rp₂,! Rs_* = R(s ≫ p₂)_! = R(𝟙)_!`.
 The comparison of the transforms for `ψ` and `ψ⁻¹` is base change of `Rp₂,!` along the
 isomorphism `ι × 1`; it compares the chosen compactifications of `p₂` and of its conjugate by
@@ -89,7 +89,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-open _root_.AlgebraicGeometry.AffineSpace
+open AlgebraicGeometry.AffineSpace
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
 variable (n : Type u) [Fintype n] (S : Scheme.{u})
@@ -224,11 +224,12 @@ omit [Fintype n] [CharP Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) 
   [HasCompactification (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))] in
 /-- The Tate twist of the skyscraper is the pushforward of the twist on the base,
 `δ₀(m) ≅ Rz_* Λ_S(m)`, by the projection formula for the closed immersion `z`. -/
-theorem nonempty_iso_tateTwist_skyscraperZero [HasTateTwist Λ] (m : ℤ) :
+theorem nonempty_iso_tateTwist_skyscraperZero [Finite Λ] [HasTateTwist Λ] (m : ℤ) :
     Nonempty ((tateTwist Λ (𝔸(n; S)) m).obj (skyscraperZero Λ n S) ≅
       R((zeroSection n S)_*[ModuleCat.{u + 1} Λ]).obj (tateObject Λ S m)) := by
-  have := isIso_rightDerivedLowerStarProjectionMap_of_isClosedImmersion Λ (zeroSection n S)
-  exact ⟨((asIso (rightDerivedLowerStarProjectionMap _ _)).app _).app _ ≪≫
+  obtain ⟨pf⟩ := nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper Λ
+    (zeroSection n S) (𝟙_ _) (tateObject Λ (𝔸(n; S)) m)
+  exact ⟨pf ≪≫
       R((_)_*[_]).mapIso (((-⊗ᴸ-(_)[_]).obj _).mapIso (leftDerivedUpperStarTateObjectIso _ _) ≪≫
         derivedTensorLeftUnitor _ _ _)⟩
 
@@ -250,7 +251,8 @@ omit [HasCompactification (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))] 
 /-- The kernel is trivial on the slice `{0} ×_S 𝔸(n; S)`, so tensoring the constant sheaf of
 the slice with it does nothing: `Rs_* Λ ⊗ᴸ 𝒦_ψ ≅ Rs_* Λ` for `s` the inclusion of the slice,
 by the projection formula for the closed immersion `s`. -/
-theorem nonempty_iso_derivedTensor_fourierKernel_zeroLeft (Ψ : AddChar (ZMod p) Λ) :
+theorem nonempty_iso_derivedTensor_fourierKernel_zeroLeft [Finite Λ]
+    (Ψ : AddChar (ZMod p) Λ) :
     Nonempty (((-⊗ᴸ-(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))[ModuleCat.{u + 1} Λ]).obj
       (R((zeroLeft n S)_*[ModuleCat.{u + 1} Λ]).obj (𝟙_ _))).obj
       ((DerivedCategory.singleFunctor _ 0).obj
@@ -262,8 +264,10 @@ theorem nonempty_iso_derivedTensor_fourierKernel_zeroLeft (Ψ : AddChar (ZMod p)
   obtain ⟨u₂⟩ := nonempty_iso_upperStar_artinSchreierSheafZMod_of_appTop_eq_zero
     (zeroLeft n S) Ψ (stdPairing n S)
     (appTop_stdPairing_of_fst_eq n S _ (𝔸(n; S) ↘ S) (zeroLeft_fst n S))
-  have := isIso_rightDerivedLowerStarProjectionMap_of_isClosedImmersion Λ (zeroLeft n S)
-  exact ⟨((asIso (rightDerivedLowerStarProjectionMap _ _)).app _).app _ ≪≫
+  obtain ⟨pf⟩ := nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper Λ
+    (zeroLeft n S) (𝟙_ _) ((DerivedCategory.singleFunctor _ 0).obj
+      (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S)))
+  exact ⟨pf ≪≫
       R((_)_*[_]).mapIso (((-⊗ᴸ-(_)[_]).obj _).mapIso
         ((singleFunctorCompLeftDerivedUpperStarIso _ _).app _ ≪≫
           (DerivedCategory.singleFunctor _ 0).mapIso u₂ ≪≫ singleUnitIso Λ _) ≪≫
