@@ -323,7 +323,7 @@ theorem degreewise_duality (γ : TateOrientation Λ a d) {K : DerivedCategoryMod
     · rw [_root_.DerivedCategory.isLE_iff]
       exact fun q hq ↦ hb q (Or.inr hq)
   obtain ⟨eA⟩ := nonempty_iso_rightDerivedGlobalSections_of_isPerfectPairing Λ
-    (γ.isPerfectPairing_poincarePairing hK hKd)
+    (γ.isPerfectPairing_poincarePairing hKd)
   obtain ⟨eB⟩ := hP.nonempty_iso_homology_ihom hΛ i
   let e := (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) (2 * d - i)).mapIso
       ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ a).app _).symm ≪≫

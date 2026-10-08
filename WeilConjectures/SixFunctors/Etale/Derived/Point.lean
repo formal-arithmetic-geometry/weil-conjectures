@@ -1,0 +1,136 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+
+/-!
+# Detecting isomorphisms in the point category
+
+Let `k` be a separably closed field and `s = Spec k`. An étale sheaf on `s` is determined by its
+global sections (`AlgebraicGeometry.Scheme.isZero_of_subsingleton_sections_of_isSepClosed`). In
+the derived category `D(s_ét, Λ)` of étale sheaves of `Λ`-modules, the *point category*, the
+shifts `Λ_s[r]` of the constant complex therefore detect isomorphisms.
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.isIso_iff_bijective_comp_of_isSepClosed` (`lem-sf-detection`): a
+  morphism `u : P ⟶ Q` of the point category is an isomorphism if and only if
+  `Hom(Λ_s[r], u)` is bijective for every `r : ℤ`.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits Opposite
+
+namespace AlgebraicGeometry.Etale
+
+open Scheme Pretriangulated ZeroObject
+
+variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [Ring Λ]
+
+/-- If the `n`-th cohomology sheaf of an object `C` of the point category is nonzero, then
+there is a nonzero morphism `Λ_s[-n] ⟶ C`. -/
+theorem exists_ne_zero_of_not_isZero_homology_of_isSepClosed
+    (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (n : ℤ) (hC : ¬ IsZero ((DerivedCategory.homologyFunctor _ n).obj C)) :
+    ∃ g : ((DerivedCategory.singleFunctor _ 0).obj ((constantSheaf
+      (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)))⟦-n⟧ ⟶ C,
+      g ≠ 0 := by
+  let e := DerivedCategory.Q.objObjPreimageIso C
+  set K := DerivedCategory.Q.objPreimage C
+  have hK : ¬ IsZero (K.homology n) := fun h ↦ hC (IsZero.of_iso h
+    ((DerivedCategory.homologyFunctor _ n).mapIso e.symm ≪≫
+      (DerivedCategory.homologyFunctorFactors _ n).app K))
+  obtain ⟨s, hs⟩ : ∃ s : (K.homology n).obj.obj (op (etalePoint k)), s ≠ 0 := by
+    by_contra! h
+    exact hK (isZero_of_subsingleton_sections_of_isSepClosed _ ⟨fun x y ↦ by rw [h x, h y]⟩)
+  obtain ⟨t, rfl⟩ := surjective_app_of_epi_of_isSepClosed k (K.homologyπ n) s
+  let f : (HomologicalComplex.single _ (ComplexShape.up ℤ) n).obj ((constantSheaf
+      (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)) ⟶ K :=
+    HomologicalComplex.mkHomFromSingle (homOfGlobalSection t ≫ K.iCycles n) (by simp)
+  have hf : (HomologicalComplex.singleObjHomologySelfIso _ _ _).inv ≫
+      HomologicalComplex.homologyMap f n = homOfGlobalSection t ≫ K.homologyπ n := by
+    rw [← HomologicalComplex.singleObjCyclesSelfIso_inv_homologyπ, Category.assoc,
+      HomologicalComplex.homologyπ_naturality, ← Category.assoc]
+    congr 1
+    rw [← cancel_mono (K.iCycles n), Category.assoc, HomologicalComplex.cyclesMap_i,
+      HomologicalComplex.singleObjCyclesSelfIso_inv_iCycles_assoc,
+      HomologicalComplex.mkHomFromSingle_f, Iso.inv_hom_id_assoc]
+  have hQf : DerivedCategory.Q.map f ≠ 0 := by
+    intro h0
+    have := DerivedCategory.homologyFunctorFactors_hom_naturality f n
+    rw [h0, Functor.map_zero, zero_comp] at this
+    have hzero : HomologicalComplex.homologyMap f n = 0 :=
+      (cancel_epi ((DerivedCategory.homologyFunctorFactors _ n).hom.app _)).1
+        (this.symm.trans comp_zero.symm)
+    apply homOfGlobalSection_ne_zero hs
+    rw [← homOfGlobalSection_comp, ← hf, hzero, comp_zero]
+  refine ⟨((DerivedCategory.singleFunctors _).shiftIso (-n) n 0 (by omega)).hom.app _ ≫
+    DerivedCategory.Q.map f ≫ e.hom, ?_⟩
+  intro h0
+  apply hQf
+  rw [← cancel_mono e.hom, zero_comp]
+  exact (cancel_epi (((DerivedCategory.singleFunctors _).shiftIso (-n) n 0 (by omega)).hom.app
+    _)).1 (h0.trans comp_zero.symm)
+
+/-- Blueprint `lem-sf-detection`: Detection of isomorphisms at the point.
+
+Let `k` be a separably closed field and `s = Spec k`. A morphism `u : P ⟶ Q` of the point
+category `D(s_ét, Λ)` is an isomorphism if and only if `Hom(Λ_s[r], u)` is bijective for every
+`r : ℤ`, where `Λ_s` is the constant sheaf `Λ` placed in degree `0`.
+
+The blueprint deduces this from the equivalence of the point category with complexes of
+`Λ`-modules. Here the cone `C` of `u` is shown to be zero directly: `Hom(Λ_s[r], C) = 0` for all
+`r` by the long exact sequence, and a nonzero cohomology sheaf `H^n(C)` would give a nonzero
+morphism `Λ_s[-n] ⟶ C`, since an étale sheaf on `Spec k` is determined by its global sections
+(`AlgebraicGeometry.Etale.exists_ne_zero_of_not_isZero_homology_of_isSepClosed`). -/
+theorem isIso_iff_bijective_comp_of_isSepClosed
+    {P Q : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (u : P ⟶ Q) :
+    IsIso u ↔ ∀ r : ℤ, Function.Bijective (fun g : ((DerivedCategory.singleFunctor _ 0).obj
+      ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        (ModuleCat.of Λ Λ)))⟦r⟧ ⟶ P ↦ g ≫ u) := by
+  refine ⟨fun hu r ↦ (isIso_iff_yoneda_map_bijective u).1 hu _, fun h ↦ ?_⟩
+  set T := (DerivedCategory.singleFunctor _ 0).obj
+    ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+      (ModuleCat.of Λ Λ))
+  obtain ⟨C, v, w, hT⟩ := distinguished_cocone_triangle u
+  -- composition with `u⟦1⟧'` is injective on morphisms out of `T⟦r⟧`
+  have hinj : ∀ (r : ℤ) (x : T⟦r⟧ ⟶ P⟦(1 : ℤ)⟧), x ≫ u⟦(1 : ℤ)⟧' = 0 → x = 0 := by
+    intro r x hx
+    let E : T⟦r⟧ ≅ (T⟦r - 1⟧)⟦(1 : ℤ)⟧ := (shiftFunctorAdd' _ (r - 1) 1 r (by omega)).app T
+    obtain ⟨y, hy⟩ := (shiftFunctor _ (1 : ℤ)).map_surjective (E.inv ≫ x)
+    have hyu : y ≫ u = 0 := by
+      apply (shiftFunctor _ (1 : ℤ)).map_injective
+      rw [Functor.map_comp, hy, Functor.map_zero, Category.assoc, hx, comp_zero]
+    have hy0 : y = 0 := (h (r - 1)).1 (hyu.trans zero_comp.symm)
+    rw [← cancel_epi E.inv, ← hy, hy0, Functor.map_zero, comp_zero]
+  have hw : w ≫ u⟦(1 : ℤ)⟧' = 0 := comp_distTriang_mor_zero₃₁ _ hT
+  have huv : u ≫ v = 0 := comp_distTriang_mor_zero₁₂ _ hT
+  have hzero : ∀ (r : ℤ) (g : T⟦r⟧ ⟶ C), g = 0 := by
+    intro r g
+    obtain ⟨g', hg'⟩ := Triangle.coyoneda_exact₃ _ hT g
+      (hinj r (g ≫ w) (by rw [Category.assoc, hw, comp_zero]))
+    obtain ⟨g'', rfl⟩ := (h r).2 g'
+    change g = (g'' ≫ u) ≫ v at hg'
+    rw [hg', Category.assoc, huv, comp_zero]
+  have hC : IsZero C := by
+    have : IsIso (0 : C ⟶ 0) := (DerivedCategory.isIso_iff _ _).2 fun n ↦ by
+      have hn : IsZero ((DerivedCategory.homologyFunctor _ n).obj C) := by
+        by_contra hn
+        obtain ⟨g, hg⟩ := exists_ne_zero_of_not_isZero_homology_of_isSepClosed C n hn
+        exact hg (hzero _ g)
+      exact isIso_of_source_target_iso_zero _ hn.isoZero
+        ((Functor.map_isZero _ (isZero_zero _)).isoZero)
+    exact IsZero.of_iso (isZero_zero _) (asIso (0 : C ⟶ 0))
+  exact (Triangle.isZero₃_iff_isIso₁ _ hT).1 hC
+
+end AlgebraicGeometry.Etale

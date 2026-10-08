@@ -59,6 +59,13 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl 
   [Small.{u + 1} E] {X Y : Scheme.{u}} {d : ℕ} (f : X ⟶ Y) [IsSeparated f]
   [SmoothOfRelativeDimension d f] [HasCompactification f]
 
+/-- The small étale site of a scheme is essentially small. Instance search does not find this
+in the presence of the imports of this file. -/
+local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+  have : LocallySmall.{u + 1} X.Etale :=
+    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+  essentiallySmall_of_small_of_locallySmall _
+
 /-- Blueprint `sk-thm-purity-transport`: Smooth purity over `𝒪_E`, `E` and `ℚ̄_ℓ`
 
 **`Rf^!` preserves derived completeness.** Let `f : X ⟶ Y` be smooth separated of pure

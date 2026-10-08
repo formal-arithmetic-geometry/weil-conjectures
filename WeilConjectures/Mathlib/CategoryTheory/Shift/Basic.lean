@@ -7,33 +7,35 @@ module
 
 public import Mathlib.CategoryTheory.Shift.Basic
 public import Mathlib.CategoryTheory.Yoneda
+public import Mathlib.Algebra.Group.Int.Defs
 
 /-!
 # Detecting isomorphisms on shifted test objects
 
-A morphism `f : X ⟶ Y` in a category with a shift by an additive group `A` is an isomorphism as
-soon as composition with `f` is bijective on morphisms out of every shifted object `Z⟦n⟧`, for a
-fixed `n : A`: every object is isomorphic to a shifted one.
+In a category with a shift by `ℤ`, every object is isomorphic to a shift `N⟦n⟧` (namely of
+`N = X⟦-n⟧`). Hence a morphism `u` is an isomorphism as soon as composition with `u` is bijective
+on morphisms out of all objects of the form `N⟦n⟧`
+(`CategoryTheory.isIso_of_bijective_comp_shift`).
 -/
 
 @[expose] public section
 
 namespace CategoryTheory
 
-variable {C : Type*} [Category* C] {A : Type*} [AddGroup A] [HasShift C A]
+variable {C : Type*} [Category C] [HasShift C ℤ]
 
-/-- A morphism `f : X ⟶ Y` is an isomorphism if, for a fixed `n : A`, composition with `f` is a
-bijection `(Z⟦n⟧ ⟶ X) → (Z⟦n⟧ ⟶ Y)` for every object `Z`. -/
-lemma isIso_of_bijective_shift_comp {X Y : C} (f : X ⟶ Y) (n : A)
-    (hf : ∀ Z : C, Function.Bijective (fun t : Z⟦n⟧ ⟶ X ↦ t ≫ f)) : IsIso f := by
-  refine isIso_of_yoneda_map_bijective f fun Z ↦ ?_
-  let i : (Z⟦-n⟧)⟦n⟧ ≅ Z := (shiftFunctorCompIsoId C (-n) n (neg_add_cancel n)).app Z
-  have h : (fun t : Z ⟶ X ↦ t ≫ f) =
-      (fun s ↦ i.inv ≫ s) ∘ (fun t : (Z⟦-n⟧)⟦n⟧ ⟶ X ↦ t ≫ f) ∘ (fun t ↦ i.hom ≫ t) := by
-    ext t
+/-- A morphism `u : X ⟶ Y` is an isomorphism as soon as composition with `u` is bijective on
+morphisms out of every shifted object `N⟦n⟧`, for a fixed `n : ℤ`. -/
+theorem isIso_of_bijective_comp_shift (n : ℤ) {X Y : C} (u : X ⟶ Y)
+    (h : ∀ N : C, Function.Bijective (fun g : N⟦n⟧ ⟶ X ↦ g ≫ u)) : IsIso u := by
+  refine isIso_of_yoneda_map_bijective u (fun Z ↦ ?_)
+  let e : (Z⟦-n⟧)⟦n⟧ ≅ Z := (shiftFunctorCompIsoId C (-n) n (by omega)).app Z
+  have hc : (fun x : Z ⟶ X ↦ x ≫ u) =
+      (fun g : (Z⟦-n⟧)⟦n⟧ ⟶ Y ↦ e.inv ≫ g) ∘ (fun g ↦ g ≫ u) ∘ (fun x ↦ e.hom ≫ x) := by
+    funext x
     simp
-  rw [h]
-  exact (i.homFromEquiv (Z := Y)).bijective.comp
-    ((hf _).comp (i.homFromEquiv (Z := X)).symm.bijective)
+  rw [hc]
+  exact ((isIso_iff_coyoneda_map_bijective e.inv).1 inferInstance _).comp
+    ((h _).comp ((isIso_iff_coyoneda_map_bijective e.hom).1 inferInstance _))
 
 end CategoryTheory

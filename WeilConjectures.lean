@@ -110,6 +110,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+public import WeilConjectures.AlgebraicGeometry.Modules.Rigidification
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
@@ -286,8 +287,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.SerpeSmallObjec
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Subcomplex
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-public import WeilConjectures.CategoryTheory.Monoidal.Closed.PoincarePairing
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.ProjectionPairing
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
@@ -386,6 +387,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
@@ -969,6 +971,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.Package
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
+public import WeilConjectures.SixFunctors.Etale.Derived.Point
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
@@ -1048,6 +1051,7 @@ public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison

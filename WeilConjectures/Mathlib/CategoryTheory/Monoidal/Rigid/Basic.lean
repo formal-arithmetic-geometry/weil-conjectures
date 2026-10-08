@@ -28,8 +28,6 @@ tensor inverse.
   internal hom `ihom X` is `Y ⊗ -`.
 - `CategoryTheory.MonoidalClosed.ihomUnitTensorToIhom`: the canonical comparison map
   `(ihom X).obj (𝟙_ C) ⊗ Z ⟶ (ihom X).obj Z`.
-- `CategoryTheory.MonoidalClosed.twistedEvaluation`: the evaluation
-  `X ⊗ ((ihom X).obj (𝟙_ C) ⊗ Z) ⟶ Z`, uncurried from the comparison map.
 
 ## Main statements
 
@@ -39,9 +37,6 @@ tensor inverse.
   the evaluation of an exact pairing of `Y` and `X` is an isomorphism.
 - `CategoryTheory.MonoidalClosed.isIso_ihomUnitTensorToIhom`: the comparison map is an
   isomorphism when `X` has a left dual.
-- `CategoryTheory.MonoidalClosed.bijective_whiskerLeft_comp_twistedEvaluation`: when `X` has a
-  left dual, morphisms `M ⟶ (ihom X).obj (𝟙_ C) ⊗ Z` correspond to morphisms `X ⊗ M ⟶ Z` through
-  the twisted evaluation.
 
 -/
 
@@ -207,42 +202,6 @@ theorem isIso_ihomUnitTensorToIhom (Y X : C) [ExactPairing Y X] (Z : C) :
     IsIso (ihomUnitTensorToIhom X Z) := by
   rw [ihomUnitTensorToIhom_eq Y X]
   infer_instance
-
-/-- The *twisted evaluation* `X ⊗ ((ihom X).obj (𝟙_ C) ⊗ Z) ⟶ Z`,
-```
-                       α⁻¹                                 ev ▷ Z             λ
-X ⊗ ([X, 𝟙] ⊗ Z) ─────────▶ (X ⊗ [X, 𝟙]) ⊗ Z ─────────▶ 𝟙_ C ⊗ Z ─────▶ Z
-```
-the uncurried form of `CategoryTheory.MonoidalClosed.ihomUnitTensorToIhom`. -/
-noncomputable def twistedEvaluation (X Z : C) : X ⊗ ((ihom X).obj (𝟙_ C) ⊗ Z) ⟶ Z :=
-  (α_ _ _ _).inv ≫ (ihom.ev X).app (𝟙_ C) ▷ Z ≫ (λ_ Z).hom
-
-/-- The twisted evaluation after `X ◁ s` is the uncurried form of `s` followed by the comparison
-map `CategoryTheory.MonoidalClosed.ihomUnitTensorToIhom`:
-```
-           X ◁ s                         twistedEvaluation
-X ⊗ M ─────────▶ X ⊗ ([X, 𝟙] ⊗ Z) ──────────────────▶ Z
-  ‖                                                      ‖
-X ⊗ M ─────────────── uncurry (s ≫ ihomUnitTensorToIhom) ───▶ Z
-``` -/
-lemma whiskerLeft_comp_twistedEvaluation (X : C) {M Z : C}
-    (s : M ⟶ (ihom X).obj (𝟙_ C) ⊗ Z) :
-    X ◁ s ≫ twistedEvaluation X Z = uncurry (s ≫ ihomUnitTensorToIhom X Z) := by
-  rw [ihomUnitTensorToIhom, uncurry_natural_left, uncurry_curry, twistedEvaluation]
-
-/-- If `X` has a left dual, the twisted evaluation induces a bijection between morphisms
-`M ⟶ (ihom X).obj (𝟙_ C) ⊗ Z` and morphisms `X ⊗ M ⟶ Z`, `s ↦ (X ◁ s) ≫ ev`. -/
-lemma bijective_whiskerLeft_comp_twistedEvaluation (Y X : C) [ExactPairing Y X] (M Z : C) :
-    Function.Bijective (fun s : M ⟶ (ihom X).obj (𝟙_ C) ⊗ Z ↦
-      X ◁ s ≫ twistedEvaluation X Z) := by
-  have := isIso_ihomUnitTensorToIhom Y X Z
-  have h : (fun s : M ⟶ (ihom X).obj (𝟙_ C) ⊗ Z ↦ X ◁ s ≫ twistedEvaluation X Z) =
-      ((ihom.adjunction X).homEquiv _ _).symm ∘ (fun s ↦ s ≫ ihomUnitTensorToIhom X Z) := by
-    ext s
-    exact whiskerLeft_comp_twistedEvaluation X s
-  rw [h]
-  exact ((ihom.adjunction X).homEquiv _ _).symm.bijective.comp
-    (asIso (ihomUnitTensorToIhom X Z)).homToEquiv.bijective
 
 end MonoidalClosed
 
