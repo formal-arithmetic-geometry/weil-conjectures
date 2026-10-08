@@ -781,6 +781,7 @@ public import WeilConjectures.Mathlib.RingTheory.Artinian.Ring
 public import WeilConjectures.Mathlib.RingTheory.Derivation.Basic
 public import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import WeilConjectures.Mathlib.RingTheory.DualNumber
 public import WeilConjectures.Mathlib.RingTheory.Etale.Basic
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiberDegree
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
