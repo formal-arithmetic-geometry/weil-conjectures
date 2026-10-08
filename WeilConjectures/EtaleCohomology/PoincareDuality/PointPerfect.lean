@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
-public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
 
 /-!
@@ -73,8 +73,8 @@ perfectness (`DerivedCategory.isPerfect_iff`).
 
 At `ℚ̄_ℓ` the coefficients are the pro-étale `ℚ̄_ℓ`-sheaves `WeilCoefficients l` of the Weil
 sheaf formalism, and bounded constructible means bounded with cohomology sheaves
-`ℓ`-adically constructible (`AlgebraicGeometry.ProEtale.adicConstructibleSheaf`), as in the
-definition of `AlgebraicGeometry.WeilComplex`.
+`ℓ`-adically constructible (`ProEtale.DerivedCategory.boundedAdicConstructible`),
+as in the definition of `AlgebraicGeometry.WeilComplex`.
 -/
 
 @[expose] public section
@@ -352,14 +352,6 @@ section Adic
 variable (l : ℕ) [Fact l.Prime] {k : Type u} [Field k] [IsSepClosed k]
   {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
   [HasCompactification aX]
-
-/-- The `ℚ̄_ℓ`-stage `D^b_c(X, ℚ̄_ℓ)`, as an object property of `D(X_proét, ℚ̄_ℓ)`: bounded,
-with `ℓ`-adically constructible cohomology sheaves. -/
-def DerivedCategory.boundedAdicConstructible (X : Scheme.{u}) :
-    ObjectProperty
-      (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l))) :=
-  _root_.DerivedCategory.TStructure.t.bounded ⊓
-    _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l X)
 
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
 
