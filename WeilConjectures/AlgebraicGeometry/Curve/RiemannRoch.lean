@@ -197,6 +197,18 @@ theorem IdealSheafData.IsInvertible.finiteDimensional_H_cokernel_whiskerRight
     FiniteDimensional k ((cokernel (J.toModulesι ▷ M)).H q) :=
   sorry
 
+variable (k) in
+include k in
+/-- **A line bundle restricted to an effective divisor, vanishing of `H¹`.** Let `D` be an
+effective Cartier divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf
+`J = 𝒪_X(-D)`, and `M` an invertible `𝒪_X`-module. The cokernel `M|_D` of `J ⊗ M ⟶ 𝒪_X ⊗ M` has
+`H¹(X, M|_D) = 0`: it is the pushforward of a module on the finite, hence affine, `k`-scheme `D`
+along the affine morphism `D ⟶ X`. -/
+theorem IdealSheafData.IsInvertible.subsingleton_H_one_cokernel_whiskerRight
+    {J : X.IdealSheafData} (hJ : J.IsInvertible) (M : X.Modules) [M.IsInvertible] :
+    Subsingleton ((cokernel (J.toModulesι ▷ M)).H 1) :=
+  sorry
+
 /-- **A line bundle restricted to an effective divisor, Euler characteristic.** Let `D` be an
 effective Cartier divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf
 `J = 𝒪_X(-D)`, and `M` an invertible `𝒪_X`-module. The cokernel `M|_D` of `J ⊗ M ⟶ 𝒪_X ⊗ M` has
@@ -842,6 +854,29 @@ theorem degree_tensorObj_pullback_fst
 local notation "𝔭" => Limits.pullback.fst (X ↘ Spec (CommRingCat.of k))
   (Spec.map (CommRingCat.ofHom (algebraMap k K)))
 
+/-- **The base change of a rational point has degree one.** For a `k`-rational point `x` of `X`,
+the closed subscheme of `X_K` cut out by the pullback `(ker x) · 𝒪_{X_K}` of the ideal sheaf of
+`x` is `Spec k ×_X X_K = Spec k ×_k Spec K = Spec K`, so it has `dim_K Γ = 1`. -/
+theorem finrankΓ_subschemeι_comap_ker_fieldPoints (x : (X ↘ Spec (.of k)).fieldPoints k) :
+    ((x.1.ker.comap 𝔭).subschemeι ≫ Limits.pullback (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K))) ↘ Spec (.of K)).finrankΓ = 1 :=
+  sorry
+
+/-- **A section not vanishing at a point survives restriction to it.** Let `ℒ` be an invertible
+sheaf on `X_K`, let `s : 𝒪_{X_K} ⟶ ℒ` be a global section and let `x` be a `k`-rational point
+of `X` such that `s` does not vanish at `x_K`. Then the global section `s` of `ℒ` has non-zero
+image in `H⁰(X_K, ℒ|_{x_K})`, where `ℒ|_{x_K}` is the cokernel of `𝓘 ⊗ ℒ ⟶ 𝒪_{X_K} ⊗ ℒ` for the
+ideal sheaf `𝓘 = (ker x) · 𝒪_{X_K}` of `x_K`: its value `s(x_K)` in the fibre of `ℒ` is
+non-zero. -/
+theorem exists_map_cokernel_π_ne_zero
+    (L : (Limits.pullback (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules) [L.IsInvertible]
+    (s : 𝟙_ _ ⟶ L) (x : (X ↘ Spec (.of k)).fieldPoints k)
+    (hx : ((X ↘ Spec (.of k)).baseChangeFieldPoint K x).1.base default ∉ s.zeroLocus.support) :
+    ∃ z : L.H 0, Modules.H.map
+      ((λ_ L).inv ≫ cokernel.π ((x.1.ker.comap 𝔭).toModulesι ▷ L)) 0 z ≠ 0 :=
+  sorry
+
 /-- **Removing a rational point.** Let `ℒ` be an invertible sheaf on `X_K`, let `s : 𝒪_{X_K} ⟶ ℒ`
 be a global section and let `x` be a `k`-rational point of `X` such that `s` does not vanish at
 `x_K`. Then twisting by the ideal sheaf `𝒪_X(-x) = ker x` lowers `h⁰` by exactly one:
@@ -860,8 +895,60 @@ theorem finrankH_zero_tensorObj_pullback_toModules_ker_add_one
     (hx : ((X ↘ Spec (.of k)).baseChangeFieldPoint K x).1.base default ∉ s.zeroLocus.support) :
     Modules.finrankH K (L ⊗ (Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj x.1.ker.toModules) 0 + 1 =
-      Modules.finrankH K L 0 :=
-  sorry
+      Modules.finrankH K L 0 := by
+  have := smoothOfRelativeDimension_baseChange (k := k) (X := X) K 1
+  have := isProper_baseChange (k := k) (X := X) K
+  have : Flat (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+    Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
+  have hI := Hom.isInvertible_ker_fieldPoints x
+  have hJ := hI.comap_of_flat 𝔭
+  have := hJ.isInvertible_toModules
+  obtain ⟨e₀⟩ := hI.nonempty_pullback_toModules_iso 𝔭 hJ
+  -- the short exact sequence `0 ⟶ 𝓘 ⊗ ℒ ⟶ 𝒪 ⊗ ℒ ⟶ ℒ|_{x_K} ⟶ 0`
+  let S := ShortComplex.mk ((x.1.ker.comap 𝔭).toModulesι ▷ L) (cokernel.π _)
+    (cokernel.condition _)
+  have hS : S.ShortExact := .mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+  have e₁ : L ⊗ (Modules.pullback 𝔭).obj x.1.ker.toModules ≅ S.X₁ :=
+    whiskerLeftIso L e₀ ≪≫ β_ _ _
+  have e₂ : S.X₂ ≅ L := λ_ L
+  have : S.X₂.IsInvertible := Modules.IsInvertible.of_iso e₂.symm
+  have := hJ.finiteDimensional_H_cokernel_whiskerRight (k := K) L 0
+  -- `h⁰(ℒ|_{x_K}) = 1`
+  have h3 : Modules.finrankH K S.X₃ 0 = 1 := by
+    have := hJ.subsingleton_H_one_cokernel_whiskerRight K L
+    have h := hJ.eulerChar_cokernel_whiskerRight (k := K) L
+    have h1 : Modules.finrankH K (cokernel ((x.1.ker.comap 𝔭).toModulesι ▷ L)) 1 = 0 :=
+      Module.finrank_zero_of_subsingleton
+    rw [finrankΓ_subschemeι_comap_ker_fieldPoints,
+      Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one, h1] at h
+    simp only [Nat.cast_zero, sub_zero, Nat.cast_one, Nat.cast_eq_one] at h
+    exact h
+  -- the image of `H⁰(ℒ) ⟶ H⁰(ℒ|_{x_K})` is non-zero, hence everything
+  let f := Modules.H.mapLinearMap K S.f 0
+  let g := Modules.H.mapLinearMap K S.g 0
+  have hf : LinearMap.ker f = ⊥ :=
+    LinearMap.ker_eq_bot.mpr (Modules.H.injective_map_zero_of_shortExact hS)
+  have hg : LinearMap.ker g = LinearMap.range f := by
+    ext y
+    exact SetLike.ext_iff.mp (Modules.H.ker_map_g_eq_range_map_f hS 0) y
+  have hrg : Module.finrank K (LinearMap.range g) = 1 := by
+    refine le_antisymm ((Submodule.finrank_le _).trans h3.le) ?_
+    obtain ⟨z, hz⟩ := exists_map_cokernel_π_ne_zero K L s x hx
+    refine Nat.one_le_iff_ne_zero.mpr fun h0 ↦ hz ?_
+    rw [Submodule.finrank_eq_zero] at h0
+    have : g (Modules.H.map (λ_ L).inv 0 z) ∈ LinearMap.range g := ⟨_, rfl⟩
+    rw [h0] at this
+    rw [Modules.H.map_comp_apply]
+    exact (Submodule.mem_bot K).mp this
+  have hrf : Module.finrank K (LinearMap.range f) = Modules.finrankH K S.X₁ 0 := by
+    have := LinearMap.finrank_range_add_finrank_ker f
+    rw [hf, finrank_bot] at this
+    exact this.trans rfl
+  have h2 := LinearMap.finrank_range_add_finrank_ker g
+  rw [hg, hrg, hrf] at h2
+  rw [Modules.finrankH_congr K e₁, ← Modules.finrankH_congr K e₂]
+  change Modules.finrankH K S.X₁ 0 + 1 = Module.finrank K (S.X₂.H 0)
+  omega
 
 /-- **Descending induction on `h⁰`.** Let `ℒ` be an invertible sheaf on `X_K` and `ℳ` an
 invertible sheaf on `X` with `h⁰(X_K, ℒ ⊗ ℳ_K) = t + 1` and `h¹(X_K, ℒ ⊗ ℳ_K) = 0`. Then there is
