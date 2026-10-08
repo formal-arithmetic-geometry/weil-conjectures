@@ -159,8 +159,7 @@ section Adjunction
 underlying sheaf functor is `f_*`, and `f_*` on module objects over `A_X(T)` is its composition
 with the restriction of scalars along `α_f`
 (`ProEtale.ContinuousMapRing.comapPullbackHomCompIso`). It is the pushforward that enters the
-exceptional operations, see
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek`. -/
+exceptional operations. -/
 noncomputable def linearLowerStar :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       ((f)^*[Ab.{u + 1}].obj (continuousMapRingObj T Y)) ⥤

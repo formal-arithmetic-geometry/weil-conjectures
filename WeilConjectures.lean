@@ -267,11 +267,6 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMap
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
