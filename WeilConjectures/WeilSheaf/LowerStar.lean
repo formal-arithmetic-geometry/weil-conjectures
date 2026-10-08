@@ -29,10 +29,13 @@ quasi-separated and of finite type and `Y` locally of finite type over `k₀`, a
 derived pushforward `Y` quasi-compact over `k₀`; these are hypotheses of the definitions below.
 The finiteness statement for Weil complexes,
 `AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerStar`, is reduced by dévissage
-to the case of a single Weil sheaf; that case,
-`AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerStar_singleFunctor`, and the
-underived `AlgebraicGeometry.WeilSheaf.isAdicConstructibleSheaf_lowerStar` are stated with
-`sorry`.
+to the case of a single Weil sheaf,
+`AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerStar_singleFunctor`. That case
+and the underived `AlgebraicGeometry.WeilSheaf.isAdicConstructibleSheaf_lowerStar` only concern
+the underlying pro-étale sheaves on the geometric fibres: forgetting the Weil structure commutes
+with right derivation
+(`CategoryTheory.Endofunctor.IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso`), so both follow from the finiteness theorem for `ℓ`-adic pro-étale sheaves over the algebraically
+closed field `k̄` (`WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar`).
 
 ## Main definitions
 

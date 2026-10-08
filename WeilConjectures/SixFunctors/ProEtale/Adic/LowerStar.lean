@@ -5,8 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
@@ -27,12 +28,16 @@ blueprint `sk-prop-sf-finiteness`) asserts that for a constructible `ℓ`-adic s
 - every higher direct image `Rⁿf_* F`, the `n`-th cohomology sheaf of the total derived
   pushforward `Rf_*(F[0])`, is constructible
   (`AlgebraicGeometry.ProEtale.isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar`);
-- if moreover `Y` is quasi-compact, then `Rf_*(F[0])` is bounded: the cohomological dimension of
-  `f_*` is at most twice the dimension of the fibres, which is bounded on a quasi-compact `Y`
-  (`AlgebraicGeometry.ProEtale.bounded_rightDerivedFunctor_lowerStar`).
+- if moreover `Y` is quasi-compact, then `Rf_*(F[0])` is bounded
+  (`AlgebraicGeometry.ProEtale.bounded_rightDerivedFunctor_lowerStar`). It is concentrated in
+  degrees `≥ 0`, and bounded above since the cohomological dimension of `f_*` is at most twice
+  the dimension of the fibres, which is bounded on a quasi-compact `Y`
+  (`AlgebraicGeometry.ProEtale.exists_isLE_rightDerivedFunctor_lowerStar`).
 
 These are the inputs for the finiteness of the pushforward of Weil sheaves and Weil complexes
-(`WeilConjectures.WeilSheaf.LowerStar`), and are stated here with `sorry`. Their proof
+(`WeilConjectures.WeilSheaf.LowerStar`). The first is deduced from the second in degree `0`;
+boundedness below holds for any sheaf. The constructibility of the higher direct images and
+the upper bound are stated here with `sorry`. Their proof
 (blueprint `sk-prop-sf-finiteness`) proceeds by generic constructibility for open immersions
 (Deligne's dévissage), the proper case, and a Čech argument for a finite affine cover of `X`.
 -/
@@ -48,17 +53,6 @@ namespace AlgebraicGeometry.ProEtale
 variable {l : ℕ} [Fact l.Prime] {K : Type u} [Field K] [IsAlgClosed K] {X Y : Scheme.{u}}
   (s : Y ⟶ Spec (.of K)) (f : X ⟶ Y)
 
-/-- **Finiteness for the pushforward of a constructible `ℓ`-adic sheaf** (SGA 4½,
-*Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`, the pushforward
-of a constructible `ℓ`-adic sheaf along a quasi-compact quasi-separated morphism locally of
-finite type, with target locally of finite type, is constructible. -/
-theorem IsAdicConstructibleSheaf.lowerStar (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
-    [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
-    {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
-    (hF : IsAdicConstructibleSheaf F) :
-    IsAdicConstructibleSheaf ((f)_*[WeilCoefficients.{u} l].obj F) :=
-  sorry
-
 /-- **Finiteness for the higher direct images of a constructible `ℓ`-adic sheaf** (SGA 4½,
 *Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`, the higher direct
 images `Rⁿf_* F` of a constructible `ℓ`-adic sheaf along a quasi-compact quasi-separated
@@ -72,10 +66,41 @@ theorem isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar (hK : ri
         ((DerivedCategory.singleFunctor _ 0).obj F))) :=
   sorry
 
+/-- **Finiteness for the pushforward of a constructible `ℓ`-adic sheaf** (SGA 4½,
+*Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`, the pushforward
+of a constructible `ℓ`-adic sheaf along a quasi-compact quasi-separated morphism locally of
+finite type, with target locally of finite type, is constructible: it is the degree `0` case
+of `AlgebraicGeometry.ProEtale.isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar`,
+`f_*` being left exact. -/
+theorem IsAdicConstructibleSheaf.lowerStar (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
+    [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
+    {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
+    (hF : IsAdicConstructibleSheaf F) :
+    IsAdicConstructibleSheaf ((f)_*[WeilCoefficients.{u} l].obj F) :=
+  (isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar s f hK hF 0).of_iso
+    ((f)_*[WeilCoefficients.{u} l].homologyRightDerivedFunctorObjSingleFunctorIso F 0 ≪≫
+      (f)_*[WeilCoefficients.{u} l].rightDerivedZeroIsoSelf.app F)
+
+/-- **Cohomological dimension of the pushforward of a constructible `ℓ`-adic sheaf**
+(SGA 4½, *Th. finitude*; SGA 4, Exp. X): over an algebraically closed field of characteristic
+`≠ ℓ`, the higher direct images `Rⁿf_* F` of a constructible `ℓ`-adic sheaf along a
+quasi-compact quasi-separated morphism locally of finite type, with target quasi-compact and
+locally of finite type, vanish in large degrees: the cohomological dimension of `f_*` is at
+most twice the dimension of the fibres, which is bounded on a quasi-compact target. -/
+theorem exists_isLE_rightDerivedFunctor_lowerStar (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
+    [QuasiCompact s] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
+    {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
+    (hF : IsAdicConstructibleSheaf F) :
+    ∃ b : ℤ, ((f)_*[WeilCoefficients.{u} l].rightDerivedFunctor.obj
+      ((DerivedCategory.singleFunctor _ 0).obj F)).IsLE b :=
+  sorry
+
 /-- **Boundedness of the derived pushforward of a constructible `ℓ`-adic sheaf** (SGA 4½,
 *Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`, the derived
 pushforward of a constructible `ℓ`-adic sheaf along a quasi-compact quasi-separated morphism
-locally of finite type, with target quasi-compact and locally of finite type, is bounded. -/
+locally of finite type, with target quasi-compact and locally of finite type, is bounded. It is
+concentrated in degrees `≥ 0`, and bounded above by
+`AlgebraicGeometry.ProEtale.exists_isLE_rightDerivedFunctor_lowerStar`. -/
 theorem bounded_rightDerivedFunctor_lowerStar (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [QuasiCompact s] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
     {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
@@ -83,6 +108,7 @@ theorem bounded_rightDerivedFunctor_lowerStar (hK : ringChar K ≠ l) [LocallyOf
     DerivedCategory.TStructure.t.bounded
       ((f)_*[WeilCoefficients.{u} l].rightDerivedFunctor.obj
         ((DerivedCategory.singleFunctor _ 0).obj F)) :=
-  sorry
+  ⟨⟨0, (f)_*[WeilCoefficients.{u} l].isGE_rightDerivedFunctor_obj_singleFunctor F⟩,
+    exists_isLE_rightDerivedFunctor_lowerStar s f hK hF⟩
 
 end AlgebraicGeometry.ProEtale
