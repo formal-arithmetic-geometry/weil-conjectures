@@ -30,19 +30,19 @@ arbitrary algebraically closed extension: any two algebraic closures of `k₀` a
 over `k₀`, so nothing is lost, and the condition becomes a property of `M` alone.
 
 The proof that the transform is a middle extension runs in the curve perverse heart: `(j_*M)[1]`
-is simple there (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.simple_middleExtension`), the
+is simple there (`AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.simple_middleExtension`), the
 transform preserves simple objects (`AlgebraicGeometry.simple_fourierTransform_obj`), the simple
-objects are punctual or middle extensions (`AlgebraicGeometry.WeilComplex.simple_iff`),
+objects are punctual or middle extensions (`AlgebraicGeometry.LAdicWeilComplex.simple_iff`),
 and nonexceptionality excludes the punctual case.
 
 ## Main declarations
 
-- `AlgebraicGeometry.WeilSheaf.IsNonexceptional`: the nonexceptionality condition, on the
+- `AlgebraicGeometry.LAdicWeilSheaf.IsNonexceptional`: the nonexceptionality condition, on the
   geometric irreducible constituents.
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.IsFourierNonexceptional`: the condition on the
+- `AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.IsFourierNonexceptional`: the condition on the
   whole geometric sheaf, and its comparison
-  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isFourierNonexceptional_of_isNonexceptional`.
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.IsFourierPartner`: the relation
+  `AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.isFourierNonexceptional_of_isNonexceptional`.
+- `AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.IsFourierPartner`: the relation
   `FT_ψ((j_*M)[1]) ≃ (j'_*M')[1]` between a datum and its transform.
 - `AlgebraicGeometry.exists_middleExtension_fourierTransform`: the transform of an irreducible
   nonexceptional middle extension is a middle extension.
@@ -57,7 +57,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-namespace WeilSheaf
+namespace LAdicWeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
@@ -66,7 +66,7 @@ constituents is a linear Artin–Schreier sheaf `ℒ_{ψ(a x)}|_U`, for any `a` 
 closure of `k₀`, the value `a = 0` included; for `a = 0` the excluded constituent is the trivial
 rank-one sheaf. (blueprint: `sk-p-dl-a1-middle`, `def-a1-constituent-nonexceptional`) -/
 def IsNonexceptional {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l U) (ψ : AddChar k₀ (PadicAlgCl l)) : Prop :=
+    (F : LAdicWeilSheaf k₀ l U) (ψ : AddChar k₀ (PadicAlgCl l)) : Prop :=
   ∀ a : AlgebraicClosure k₀, ¬ F.HasLinearArtinSchreierConstituent ψ a
 
 /-- The middle extension `j_*M` of a lisse sheaf `M` on a dense open `j : U₀ ↪ 𝔸¹` is
@@ -158,13 +158,13 @@ have a linear character as a geometric constituent.
 (blueprint: `prop-a1-fourier-middle-extension`, Steps 2 and 3) -/
 theorem isEmpty_iso_fourierTransform_middleExtension_toComplex (hψ : ψ ≠ 1)
     (hD : D.sheaf.IsIrreducibleLisse) (hne : D.sheaf.IsNonexceptional ψ)
-    (G : WeilSheaf k₀ l (affineLine k₀)) (hG : (WeilSheaf.support G).Finite) :
-    IsEmpty ((fourierTransform ψ).obj D.middleExtension ≅ WeilSheaf.toComplex.obj G) := by
+    (G : LAdicWeilSheaf k₀ l (affineLine k₀)) (hG : (LAdicWeilSheaf.support G).Finite) :
+    IsEmpty ((fourierTransform ψ).obj D.middleExtension ≅ LAdicWeilSheaf.toComplex.obj G) := by
   sorry
 
 end LisseOnDenseOpen
 
-end WeilSheaf
+end LAdicWeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable (ψ : AddChar k₀ (PadicAlgCl l))
@@ -181,22 +181,22 @@ lisse Weil sheaf `M'` on it whose middle extension is the transform:
                FT_ψ
     (j_*M)[1] ──────≃──────▶ (j'_*M')[1]
 ```
-Irreducibility is meant among lisse sheaves (`AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse`),
+Irreducibility is meant among lisse sheaves (`AlgebraicGeometry.LAdicWeilSheaf.IsIrreducibleLisse`),
 not simplicity in the category of all Weil sheaves: a nonzero lisse sheaf on a curve is never
 simple there. A lisse `M` with `[Simple M]` is irreducible lisse by
-`AlgebraicGeometry.WeilSheaf.IsLisse.isIrreducibleLisse`.
+`AlgebraicGeometry.LAdicWeilSheaf.IsLisse.isIrreducibleLisse`.
 
 The object `(j_*M)[1]` is simple in the curve perverse heart, hence so is its transform; a simple
 perverse object is punctual or a middle extension, and the punctual case is excluded by
 nonexceptionality. (blueprint: `sk-p-dl-a1-middle`, `prop-a1-fourier-middle-extension`) -/
 theorem exists_middleExtension_fourierTransform (hψ : ψ ≠ 1)
-    (D : WeilSheaf.LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
+    (D : LAdicWeilSheaf.LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
     (hne : D.sheaf.IsNonexceptional ψ) :
-    ∃ D' : WeilSheaf.LisseOnDenseOpen k₀ l, D'.sheaf.IsIrreducibleLisse ∧
+    ∃ D' : LAdicWeilSheaf.LisseOnDenseOpen k₀ l, D'.sheaf.IsIrreducibleLisse ∧
       D.IsFourierPartner ψ D' := by
   have := D.simple_middleExtension hD
   have := simple_fourierTransform_obj ψ hψ ⟨D.middleExtension, D.isCurvePerverse_middleExtension⟩
-  rcases (WeilComplex.simple_iff ⟨(fourierTransform ψ).obj D.middleExtension,
+  rcases (LAdicWeilComplex.simple_iff ⟨(fourierTransform ψ).obj D.middleExtension,
       (isCurvePerverse_fourierTransform_obj_iff ψ hψ _).2 D.isCurvePerverse_middleExtension⟩).1
         this with ⟨G, -, hG, ⟨e⟩⟩ | ⟨D', hD', ⟨e⟩⟩
   · exact ((D.isEmpty_iso_fourierTransform_middleExtension_toComplex ψ hψ hD hne G hG).false
@@ -209,7 +209,7 @@ excluded by their ramification at infinity, and a geometric constant constituent
 irreducible Weil representation forces geometric constancy. Only arithmetic irreducibility is
 used. (blueprint: `sk-p-dl-a1-middle`, `lem-a1-unramified-nonexceptional`) -/
 theorem isNonexceptional_of_isUnramifiedAtInfinity (hψ : ψ ≠ 1)
-    (D : WeilSheaf.LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
+    (D : LAdicWeilSheaf.LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
     (hinf : D.IsUnramifiedAtInfinity) (hconst : ¬ D.IsGeometricallyConstant) :
     D.sheaf.IsNonexceptional ψ := by
   intro a ha

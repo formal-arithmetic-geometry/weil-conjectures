@@ -38,9 +38,9 @@ than the scaffold it is stated in.
 
 ## Main declarations
 
-- `AlgebraicGeometry.WeilSheaf.IsGeometricallyConstant`: constancy on the geometric fiber.
-- `AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity`: extension to a lisse sheaf at `∞ ∈ ℙ¹`.
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen`: a dense open immersion `j : U₀ ↪ 𝔸¹_{k₀}`
+- `AlgebraicGeometry.LAdicWeilSheaf.IsGeometricallyConstant`: constancy on the geometric fiber.
+- `AlgebraicGeometry.LAdicWeilSheaf.IsUnramifiedAtInfinity`: extension to a lisse sheaf at `∞ ∈ ℙ¹`.
+- `AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen`: a dense open immersion `j : U₀ ↪ 𝔸¹_{k₀}`
   together with a lisse Weil sheaf on `U₀`, with its direct image, its extension by zero, its
   boundary sheaf and its curve perverse middle extension.
 -/
@@ -53,7 +53,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-namespace WeilSheaf
+namespace LAdicWeilSheaf
 
 section Infinity
 
@@ -68,7 +68,7 @@ components of `Ū` are open, for instance when `U` is of finite type over `k₀`
 `𝔸¹_{k₀}`, it is the constancy of `F` on `Ū`, which motivates the definition: the geometric
 fundamental group `π₁(Ū)` acts trivially on the stalks of `F`.
 (blueprint: `sk-d-dl-a1-setup`) -/
-def IsGeometricallyConstant (F : WeilSheaf k₀ l U) : Prop :=
+def IsGeometricallyConstant (F : LAdicWeilSheaf k₀ l U) : Prop :=
   ∀ V : (U ↘ Spec (CommRingCat.of k₀)).geometricFiber.Opens, ConnectedSpace V →
     Sheaf.IsConstant V.toScheme.smallEtaleTopology ((Etale.upperStar _ V.ι).obj F.obj.carrier)
 
@@ -89,12 +89,12 @@ The choice of chart does not matter: two open immersions `𝔸¹ ↪ ℙ¹` of `
 a `k₀`-automorphism of `ℙ¹`. This condition is equivalent to the inertia group at `∞` acting
 trivially on the geometric generic fiber of `F`.
 (blueprint: `sk-d-dl-a1-setup`) -/
-def IsUnramifiedAtInfinity (F : WeilSheaf k₀ l U) (j : U ⟶ affineLine k₀) [IsOpenImmersion j]
+def IsUnramifiedAtInfinity (F : LAdicWeilSheaf k₀ l U) (j : U ⟶ affineLine k₀) [IsOpenImmersion j]
     [j.IsOver (Spec (CommRingCat.of k₀))] : Prop :=
   let ι := ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))
   ∃ (W : (ProjectiveLine (Spec (CommRingCat.of k₀))).Opens) (hW : ι ⁻¹ᵁ W = j.opensRange),
-    ι.opensRange ⊔ W = ⊤ ∧ ∃ G : WeilSheaf k₀ l W, G.IsLisse ∧
-      Nonempty ((WeilSheaf.upperStar (IsOpenImmersion.lift W.ι (j ≫ ι) (by
+    ι.opensRange ⊔ W = ⊤ ∧ ∃ G : LAdicWeilSheaf k₀ l W, G.IsLisse ∧
+      Nonempty ((LAdicWeilSheaf.upperStar (IsOpenImmersion.lift W.ι (j ≫ ι) (by
         rintro _ ⟨x, rfl⟩
         rw [Scheme.Opens.range_ι]
         exact (hW ▸ j.mem_opensRange.2 ⟨x, rfl⟩ : j x ∈ ι ⁻¹ᵁ W)))).obj G ≅ F)
@@ -117,7 +117,7 @@ structure LisseOnDenseOpen (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) 
   [isOver : j.IsOver (Spec (CommRingCat.of k₀))]
   [isDominant : IsDominant j]
   /-- The lisse Weil sheaf on `U₀`. -/
-  sheaf : WeilSheaf k₀ l U
+  sheaf : LAdicWeilSheaf k₀ l U
   /-- The sheaf is lisse. -/
   lisse : sheaf.IsLisse
 
@@ -135,28 +135,28 @@ def IsUnramifiedAtInfinity : Prop := D.sheaf.IsUnramifiedAtInfinity D.j
 def IsGeometricallyConstant : Prop := D.sheaf.IsGeometricallyConstant
 
 /-- The ordinary direct image `j_*M` of the datum, a Weil sheaf on the whole affine line. -/
-noncomputable def directImage : WeilSheaf k₀ l (affineLine k₀) :=
-  (WeilSheaf.directImage D.j).obj D.sheaf
+noncomputable def directImage : LAdicWeilSheaf k₀ l (affineLine k₀) :=
+  (LAdicWeilSheaf.directImage D.j).obj D.sheaf
 
 /-- The extension by zero `j_!M` of the datum. -/
-noncomputable def extensionByZero : WeilSheaf k₀ l (affineLine k₀) :=
-  (WeilSheaf.extensionByZero D.j).obj D.sheaf
+noncomputable def extensionByZero : LAdicWeilSheaf k₀ l (affineLine k₀) :=
+  (LAdicWeilSheaf.extensionByZero D.j).obj D.sheaf
 
 /-- The curve perverse middle extension `j_{!*}(M[1]) = (j_*M)[1]` of the datum. -/
-noncomputable def middleExtension : WeilComplex k₀ l (affineLine k₀) :=
-  (WeilSheaf.toComplex.obj D.directImage)⟦(1 : ℤ)⟧
+noncomputable def middleExtension : LAdicWeilComplex k₀ l (affineLine k₀) :=
+  (LAdicWeilSheaf.toComplex.obj D.directImage)⟦(1 : ℤ)⟧
 
 /-- The boundary sheaf `B = j_*M / j_!M`: the cokernel of the canonical map `j_!M → j_*M`, a
 punctual sheaf supported on the finite complement of `U₀`. -/
-noncomputable def boundarySheaf : WeilSheaf k₀ l (affineLine k₀) :=
-  Limits.cokernel ((WeilSheaf.extensionByZeroToDirectImage D.j).app D.sheaf)
+noncomputable def boundarySheaf : LAdicWeilSheaf k₀ l (affineLine k₀) :=
+  Limits.cokernel ((LAdicWeilSheaf.extensionByZeroToDirectImage D.j).app D.sheaf)
 
 /-- The shifted zero extension `j_!M[1]`, a curve perverse sheaf. -/
-noncomputable def shiftedExtensionByZero : WeilComplex k₀ l (affineLine k₀) :=
-  (WeilSheaf.toComplex.obj D.extensionByZero)⟦(1 : ℤ)⟧
+noncomputable def shiftedExtensionByZero : LAdicWeilComplex k₀ l (affineLine k₀) :=
+  (LAdicWeilSheaf.toComplex.obj D.extensionByZero)⟦(1 : ℤ)⟧
 
 end LisseOnDenseOpen
 
-end WeilSheaf
+end LAdicWeilSheaf
 
 end AlgebraicGeometry

@@ -24,7 +24,7 @@ underlying sheaves or complexes commuting with the structure isomorphisms.
 
 The intended application is the following. Let `X₀` be a scheme over a finite field `k`
 with structure morphism `f : X₀ ⟶ Spec k`, let `X = f.geometricFiber` be its geometric
-fiber and let `e = f.geometricGaloisFrobenius` be the geometric Galois Frobenius of `X`
+fiber and let `e = f.geometricFrobenius` be the geometric Galois Frobenius of `X`
 (see `WeilConjectures.AlgebraicGeometry.GeometricFrobenius`). Classically the resulting
 data are called Weil sheaves and Weil complexes *on `X₀`*: the underlying sheaf lives on
 the geometric fiber `X`, while the Frobenius structure isomorphism is what remains of a
@@ -50,13 +50,13 @@ derived category.
 
 Two layers are provided, each with its forgetful functor to the underlying category:
 
-- `AlgebraicGeometry.WeilObject.WeilSheaf`, for étale sheaves on `X`;
-- `AlgebraicGeometry.WeilObject.WeilComplex`, for the derived category of étale sheaves on `X`.
+- `AlgebraicGeometry.WeilSheaf`, for étale sheaves on `X`;
+- `AlgebraicGeometry.WeilComplex`, for the derived category of étale sheaves on `X`.
 
 Since `e^*` is t-exact, a Weil complex induces for every `n` a Weil sheaf structure
 `e^* Hⁿ(K) ≅ Hⁿ(e^* K) ≅ Hⁿ(K)` on its `n`-th homology sheaf. This is packaged as the
-functor `AlgebraicGeometry.WeilObject.WeilComplex.homologyFunctor` into
-`AlgebraicGeometry.WeilObject.WeilSheaf`, built from the general transport of algebras
+functor `AlgebraicGeometry.WeilComplex.homologyFunctor` into `AlgebraicGeometry.WeilSheaf`,
+built from the general transport of algebras
 `CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso` along the homology commutation isomorphism
 `CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso` of the exact functor `e^*`.
 
@@ -65,12 +65,6 @@ from `X₀` and the transport of Weil structures through `Rf_!` are subsequent l
 on top of these definitions.
 
 ## Implementation notes
-
-The declarations live in the namespace `AlgebraicGeometry.WeilObject`: the concrete Weil
-sheaves and Weil complexes over a finite field with `ℓ`-adic coefficients of
-`WeilConjectures.WeilSheaf.Category` are `AlgebraicGeometry.WeilSheaf` and
-`AlgebraicGeometry.WeilComplex`, and the generic versions here for an arbitrary scheme with
-an automorphism are kept apart from them.
 
 Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
 Grothendieck abelian category with `Hom`-types in the universe `u + 1`, one above the
@@ -86,9 +80,9 @@ still owed.
 
 ## Main definitions
 
-- `AlgebraicGeometry.WeilObject.WeilSheaf`: the category of Weil sheaves for a scheme with an
+- `AlgebraicGeometry.WeilSheaf`: the category of Weil sheaves for a scheme with an
   automorphism, with its forgetful functor `WeilSheaf.forget` to étale sheaves.
-- `AlgebraicGeometry.WeilObject.WeilComplex`: the category of Weil complexes, with its forgetful
+- `AlgebraicGeometry.WeilComplex`: the category of Weil complexes, with its forgetful
   functor `WeilComplex.forget` to the derived category of étale sheaves and with the
   Weil sheaf structure `WeilComplex.homologyFunctor` on its homology sheaves.
 
@@ -100,7 +94,7 @@ universe u u'
 
 open CategoryTheory Endofunctor
 
-namespace AlgebraicGeometry.WeilObject
+namespace AlgebraicGeometry
 
 open Scheme
 
@@ -158,6 +152,6 @@ end WeilComplex
 
 end
 
-end AlgebraicGeometry.WeilObject
+end AlgebraicGeometry
 
 end

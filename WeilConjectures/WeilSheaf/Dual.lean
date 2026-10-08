@@ -33,19 +33,19 @@ The geometric coinvariants of `F` are the dual of the global sections of `F^∨`
 
 ## Main declarations
 
-- `AlgebraicGeometry.WeilSheaf.dual`: the dual `F^∨ = [F, ℚ̄_ℓ]` of a lisse Weil sheaf, with
-  the Weil structure `AlgebraicGeometry.WeilSheaf.dualStr`.
-- `AlgebraicGeometry.WeilSheaf.dualStr_ev`: the evaluation `F ⊗ F^∨ ⟶ ℚ̄_ℓ` is compatible
+- `AlgebraicGeometry.LAdicWeilSheaf.dual`: the dual `F^∨ = [F, ℚ̄_ℓ]` of a lisse Weil sheaf, with
+  the Weil structure `AlgebraicGeometry.LAdicWeilSheaf.dualStr`.
+- `AlgebraicGeometry.LAdicWeilSheaf.dualStr_ev`: the evaluation `F ⊗ F^∨ ⟶ ℚ̄_ℓ` is compatible
   with the Weil structures.
-- `AlgebraicGeometry.WeilSheaf.geometricCoinvariants`: the geometric coinvariants of a lisse
+- `AlgebraicGeometry.LAdicWeilSheaf.geometricCoinvariants`: the geometric coinvariants of a lisse
   Weil sheaf, with the Frobenius induced from the Weil structure.
-- `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants`: the geometric
+- `AlgebraicGeometry.LAdicWeilSheaf.isPureOfWeightOver_geometricCoinvariants`: the geometric
   coinvariants of a punctually pure lisse sheaf are pure of the same weight.
 
 ## TODO
 
 - The quotient map `F_s̄ ↠ geometricCoinvariants F` at a geometric point `s̄`, the dual of
-  `AlgebraicGeometry.WeilSheaf.globalSectionsToStalkObj` for `F^∨` composed with
+  `AlgebraicGeometry.LAdicWeilSheaf.globalSectionsToStalkObj` for `F^∨` composed with
   `(F^∨)_s̄ ≅ (F_s̄)^∨`, together with its compatibility with the Frobenius at closed points.
 -/
 
@@ -60,7 +60,7 @@ namespace AlgebraicGeometry
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
-namespace WeilSheaf
+namespace LAdicWeilSheaf
 
 /-- The Weil structure of the dual `F^∨ = [F, ℚ̄_ℓ]` of a Weil sheaf `F`, the composite
 ```
@@ -69,7 +69,7 @@ namespace WeilSheaf
 of the comparison `CategoryTheory.Functor.Monoidal.ihomObjIso` for the monoidal equivalence
 `Fr^*`, the inverse of the Weil structure `φ : Fr^* F ≅ F` in the first variable and the unit
 isomorphism `Fr^* ℚ̄_ℓ ≅ ℚ̄_ℓ` in the second. -/
-noncomputable def dualStr (F : WeilSheaf k₀ l X) :
+noncomputable def dualStr (F : LAdicWeilSheaf k₀ l X) :
     (frobeniusPullback k₀ l X).obj ((ihom F.obj.carrier).obj (𝟙_ _)) ≅
       (ihom F.obj.carrier).obj (𝟙_ _) :=
   Functor.Monoidal.ihomObjIso (frobeniusPullback k₀ l X) _ _ ≪≫
@@ -78,11 +78,11 @@ noncomputable def dualStr (F : WeilSheaf k₀ l X) :
 
 -- TODO(unify): sk-d-real-operations
 /-- The dual `F^∨ = [F, ℚ̄_ℓ]` of a lisse Weil sheaf: the internal hom into the unit sheaf on
-`X̄`, with the Weil structure `AlgebraicGeometry.WeilSheaf.dualStr`.
+`X̄`, with the Weil structure `AlgebraicGeometry.LAdicWeilSheaf.dualStr`.
 
 It is defined for every Weil sheaf, but it is the duality functor only for lisse `F`. The dual
 of a general constructible `F` is its Verdier dual `RHom(F, ℚ̄_ℓ(d)[2d])`, a Weil complex. -/
-noncomputable def dual (F : WeilSheaf k₀ l X) : WeilSheaf k₀ l X where
+noncomputable def dual (F : LAdicWeilSheaf k₀ l X) : LAdicWeilSheaf k₀ l X where
   obj := .mk ((ihom F.obj.carrier).obj (𝟙_ _)) F.dualStr
   -- with the present coefficients `F` is zero, hence so is the internal hom out of it, and the
   -- zero sheaf is constructible
@@ -98,7 +98,7 @@ noncomputable def dual (F : WeilSheaf k₀ l X) : WeilSheaf k₀ l X where
      F ⊗ [F, ℚ̄_ℓ] ──────────────────────ev──────────────────────▶   ℚ̄_ℓ
 ```
 -/
-lemma dualStr_ev (F : WeilSheaf k₀ l X) :
+lemma dualStr_ev (F : LAdicWeilSheaf k₀ l X) :
     (F.obj.str.hom ⊗ₘ F.dualStr.hom) ≫ (ihom.ev F.obj.carrier).app (𝟙_ _) =
       Functor.LaxMonoidal.μ (frobeniusPullback k₀ l X) _ _ ≫
         (frobeniusPullback k₀ l X).map ((ihom.ev F.obj.carrier).app (𝟙_ _)) ≫
@@ -115,7 +115,7 @@ lemma dualStr_ev (F : WeilSheaf k₀ l X) :
 -- TODO(unify): sk-d-real-operations
 /-- The geometric coinvariants of a lisse Weil sheaf `F`: the dual `Γ(X̄, F^∨)^∨` of the global
 sections of the dual `F^∨`, with the dual of the Frobenius of
-`AlgebraicGeometry.WeilSheaf.globalSections`.
+`AlgebraicGeometry.LAdicWeilSheaf.globalSections`.
 
 For a lisse `F` on a geometrically connected `X`, with geometric generic fibre `V` a
 representation of `π₁(X̄)`, the global sections are
@@ -126,21 +126,21 @@ components.
 
 The universe `max (u + 1) 0 = u + 1` of `FrobeniusModule.dual` agrees with that of the global
 sections, since the coefficients `ℚ̄_ℓ` live in universe `0`. -/
-noncomputable def geometricCoinvariants (F : WeilSheaf k₀ l X) :
+noncomputable def geometricCoinvariants (F : LAdicWeilSheaf k₀ l X) :
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   FrobeniusModule.dual (globalSections F.dual)
 
 -- TODO(adic): the internal hom of a locally constant sheaf of finite rank into the constant
 -- sheaf is locally constant.
 /-- The dual of a lisse Weil sheaf is lisse. -/
-theorem IsLisse.dual {F : WeilSheaf k₀ l X} (hF : F.IsLisse) : F.dual.IsLisse := by
+theorem IsLisse.dual {F : LAdicWeilSheaf k₀ l X} (hF : F.IsLisse) : F.dual.IsLisse := by
   sorry
 
 -- TODO(adic): for `F` lisse, hence locally free of finite rank, the stalk of the internal hom
 -- `[F, ℚ̄_ℓ]` is the dual of the stalk of `F`, with the inverse transpose Frobenius.
 /-- The stalk of the dual of a lisse Weil sheaf is the dual of its stalk: the local Frobenius
 of `F^∨` at `x` is the inverse transpose of that of `F`. -/
-theorem nonempty_equiv_stalk_dual {F : WeilSheaf k₀ l X} (hF : F.IsLisse)
+theorem nonempty_equiv_stalk_dual {F : LAdicWeilSheaf k₀ l X} (hF : F.IsLisse)
     (x : X.finitePoints) : Nonempty ((F.dual.stalk x).Equiv (F.stalk x).dual) := by
   sorry
 
@@ -157,11 +157,11 @@ rank-one sheaf need not be pure of every weight.
 (blueprint: `lem-a1-geometric-coinvariants-pure`) -/
 theorem isPureOfWeightOver_geometricCoinvariants
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ)
-    (F : WeilSheaf k₀ l X) (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
+    (F : LAdicWeilSheaf k₀ l X) (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
     F.geometricCoinvariants.IsPureOfWeightOver k₀ ι w := by
   -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
   sorry
 
-end WeilSheaf
+end LAdicWeilSheaf
 
 end AlgebraicGeometry

@@ -25,7 +25,7 @@ punctual purity, upper weight bounds and reality on the stalks.
 ## The local Frobenius
 
 For a geometric point `s : Spec k̄ ⟶ X̄`, the iterated Weil structure
-`φ_m : (Frᵐ)^* F ≅ F` (`AlgebraicGeometry.WeilSheaf.frobeniusPowIso`) induces
+`φ_m : (Frᵐ)^* F ≅ F` (`AlgebraicGeometry.LAdicWeilSheaf.frobeniusPowIso`) induces
 `F_{s ≫ Frᵐ} ≅ ((Frᵐ)^* F)_s ≅ F_s`. The point `s ≫ Frᵐ` is not `s` itself: its second
 component `Spec k̄ ⟶ Spec k̄` is `σᵐ` instead of the identity. If `s` lies over a point with
 values in a field with `qᵐ` elements, then `s ≫ Frᵐ = σᵐ ≫ s`
@@ -35,42 +35,42 @@ the reparametrisation `σᵐ ≫ s` of `s` is an isomorphic point of the étale 
 
 `F_s ≅ F_{σᵐ ≫ s} = F_{s ≫ Frᵐ} ≅ F_s`
 
-is the local Frobenius `F_x^{(m)}` on the stalk, `AlgebraicGeometry.WeilSheaf.stalkAt`.
+is the local Frobenius `F_x^{(m)}` on the stalk, `AlgebraicGeometry.LAdicWeilSheaf.stalkAt`.
 
 At a closed point `x` of `X` with residue field `κ(x)` of degree `e_x` over `k₀`, the
 geometric point is `Spec k̄ ⟶ Spec κ(x) ⟶ X` for a `k₀`-embedding `κ(x) ↪ k̄`, chosen by
 `IsAlgClosed.lift`, lifted to `X̄`; at an `𝔽_{qⁿ}`-rational point the same construction is
 made with an embedding `𝔽_{qⁿ} ↪ k̄`. The choice of the point does not change the
 characteristic polynomial of the Frobenius
-(`AlgebraicGeometry.WeilSheaf.charpoly_frobeniusEnd_stalkAt_of_dvd`), so that the trace
+(`AlgebraicGeometry.LAdicWeilSheaf.charpoly_frobeniusEnd_stalkAt_of_dvd`), so that the trace
 function is computed by the local Frobenius at the closed points,
 `F_y^{(n)} = F_x^{n / e_x}`
-(`AlgebraicGeometry.WeilSheaf.traceFunction_eq_trace_frobeniusEnd_stalk_pow`).
+(`AlgebraicGeometry.LAdicWeilSheaf.traceFunction_eq_trace_frobeniusEnd_stalk_pow`).
 
 ## Main declarations
 
-- `AlgebraicGeometry.WeilSheaf.stalkAt`: the stalk at a geometric point fixed by `Frᵐ`, up to
+- `AlgebraicGeometry.LAdicWeilSheaf.stalkAt`: the stalk at a geometric point fixed by `Frᵐ`, up to
   reparametrisation, with its Frobenius.
-- `AlgebraicGeometry.WeilSheaf.stalk`: the geometric stalk at a closed point with its local
+- `AlgebraicGeometry.LAdicWeilSheaf.stalk`: the geometric stalk at a closed point with its local
   geometric Frobenius `Fₓ`.
-- `AlgebraicGeometry.WeilSheaf.support`: the closed points with nonzero stalk.
-- `AlgebraicGeometry.WeilSheaf.traceFunction`: the trace function `t_{F,n}`.
-- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight`,
-  `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost` and `AlgebraicGeometry.WeilSheaf.IsReal`: the
-  weight conditions and the reality condition.
-- `AlgebraicGeometry.WeilSheaf.globalSections`: the global sections `Γ(X̄, F)` with the
-  Frobenius induced by `φ`, and `AlgebraicGeometry.WeilSheaf.globalSectionsToStalkObj`, their
+- `AlgebraicGeometry.LAdicWeilSheaf.support`: the closed points with nonzero stalk.
+- `AlgebraicGeometry.LAdicWeilSheaf.traceFunction`: the trace function `t_{F,n}`.
+- `AlgebraicGeometry.LAdicWeilSheaf.IsPunctuallyPureOfWeight`,
+  `AlgebraicGeometry.LAdicWeilSheaf.HasWeightsAtMost` and `AlgebraicGeometry.LAdicWeilSheaf.IsReal`:
+  the weight conditions and the reality condition.
+- `AlgebraicGeometry.LAdicWeilSheaf.globalSections`: the global sections `Γ(X̄, F)` with the
+  Frobenius induced by `φ`, and `AlgebraicGeometry.LAdicWeilSheaf.globalSectionsToStalkObj`, their
   restriction to a stalk.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.charpoly_frobeniusEnd_stalkAt_of_dvd`: the characteristic
+- `AlgebraicGeometry.LAdicWeilSheaf.charpoly_frobeniusEnd_stalkAt_of_dvd`: the characteristic
   polynomial of the local Frobenius does not depend on the geometric point.
-- `AlgebraicGeometry.WeilSheaf.traceFunction_eq_trace_frobeniusEnd_stalk_pow`: the trace
+- `AlgebraicGeometry.LAdicWeilSheaf.traceFunction_eq_trace_frobeniusEnd_stalk_pow`: the trace
   function at an `𝔽_{qⁿ}`-point over a closed point `x` is `Tr(Fₓ^{n / e_x})`.
-- `AlgebraicGeometry.WeilSheaf.globalSectionsToStalkObj_frobenius`: restriction of global
+- `AlgebraicGeometry.LAdicWeilSheaf.globalSectionsToStalkObj_frobenius`: restriction of global
   sections to a stalk intertwines the two Frobenii.
-- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.upperStar`: pullback preserves punctual
+- `AlgebraicGeometry.LAdicWeilSheaf.IsPunctuallyPureOfWeight.upperStar`: pullback preserves punctual
   purity (blueprint: `lem-tw-punctual-rescaling`).
 
 ## Implementation notes
@@ -81,8 +81,8 @@ form in which the coefficients `AlgebraicGeometry.WeilCoefficients` take stalks.
 (`AlgebraicGeometry.WeilCoefficients.toModuleCat`).
 
 With the present discrete coefficients every Weil sheaf is zero
-(`AlgebraicGeometry.WeilSheaf.isZero_carrier` and `AlgebraicGeometry.WeilSheaf.isZero`, see
-`WeilConjectures.WeilSheaf.Category`). This is how the stalks and the global sections are shown
+(`AlgebraicGeometry.LAdicWeilSheaf.isZero_carrier` and `AlgebraicGeometry.LAdicWeilSheaf.isZero`,
+see `WeilConjectures.WeilSheaf.Category`). This is how the stalks and the global sections are shown
 to be finite-dimensional, and it is also how the comparison statements of this file are proved:
 they hold because both sides vanish.
 They record the properties that the definitions must keep once Weil sheaves are redefined with
@@ -95,12 +95,12 @@ universe u
 
 open CategoryTheory Limits Opposite
 
-namespace AlgebraicGeometry.WeilSheaf
+namespace AlgebraicGeometry.LAdicWeilSheaf
 
 variable {l : ℕ} [Fact l.Prime]
 variable {k₀ : Type u} [Field k₀] [Finite k₀] [Fact (ringChar k₀ ≠ l)]
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-variable (F : WeilSheaf k₀ l X)
+variable (F : LAdicWeilSheaf k₀ l X)
 
 -- `Fact (ringChar k₀ ≠ l)` is used, through the type of `F`; the linter does not see this
 set_option linter.unusedSectionVars false in
@@ -111,7 +111,7 @@ theorem isZero_carrier : IsZero F.obj.carrier :=
   Scheme.IsConstructibleSheaf.isZero F.obj.carrier
 
 /-- A Weil sheaf is zero, its underlying étale sheaf being zero
-(`AlgebraicGeometry.WeilSheaf.isZero_carrier`). -/
+(`AlgebraicGeometry.LAdicWeilSheaf.isZero_carrier`). -/
 theorem isZero : IsZero F :=
   ⟨fun _ ↦ ⟨⟨0⟩, fun _ ↦ ObjectProperty.hom_ext _ <| ObjectProperty.hom_ext _ <|
       Endofunctor.Algebra.Hom.ext <| F.isZero_carrier.eq_of_src _ _⟩,
@@ -127,7 +127,7 @@ noncomputable def stalkObj
     WeilCoefficients.{u} l :=
   ((Scheme.pointSmallEtale s).ulift.{u + 1}).sheafFiber.obj F.obj.carrier
 
-/-- The stalks of a Weil sheaf are zero, see `AlgebraicGeometry.WeilSheaf.isZero_carrier`. -/
+/-- The stalks of a Weil sheaf are zero, see `AlgebraicGeometry.LAdicWeilSheaf.isZero_carrier`. -/
 theorem isZero_stalkObj
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
     IsZero (F.stalkObj s) :=
@@ -148,7 +148,7 @@ theorem finiteDimensional_stalkObj
 stalk of a pullback with the stalk at the image point
 (`AlgebraicGeometry.Etale.upperStarCompUliftSheafFiberIso`), the second is the stalk at `s` of
 the iterated Weil structure `φ_m : (Frᵐ)^* F ≅ F`
-(`AlgebraicGeometry.WeilSheaf.frobeniusPowIso`). -/
+(`AlgebraicGeometry.LAdicWeilSheaf.frobeniusPowIso`). -/
 noncomputable def stalkObjFrobeniusPowIso (m : ℕ)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
     F.stalkObj (s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom) ≅
@@ -173,8 +173,8 @@ Frobenius, the composite
   F_s ------------> F_{σᵐ ≫ s} ============ F_{s ≫ Frᵐ} ----------> F_s
 ```
 
-of `AlgebraicGeometry.WeilSheaf.stalkObjSpecFrobeniusPowIso` inverted and
-`AlgebraicGeometry.WeilSheaf.stalkObjFrobeniusPowIso`. For `s` over a point with values in a
+of `AlgebraicGeometry.LAdicWeilSheaf.stalkObjSpecFrobeniusPowIso` inverted and
+`AlgebraicGeometry.LAdicWeilSheaf.stalkObjFrobeniusPowIso`. For `s` over a point with values in a
 field with `qᵐ` elements this is the local Frobenius relative to that field. -/
 noncomputable def stalkAt
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
@@ -188,7 +188,7 @@ noncomputable def stalkAt
         F.stalkObjFrobeniusPowIso m s) }
 
 /-- The carrier of the stalk at a geometric point is zero, see
-`AlgebraicGeometry.WeilSheaf.isZero_stalkObj`. -/
+`AlgebraicGeometry.LAdicWeilSheaf.isZero_stalkObj`. -/
 instance subsingleton_stalkAt_carrier
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
@@ -238,7 +238,7 @@ def support : Set X.finitePoints :=
 variable {F} in
 /-- Isomorphic Weil sheaves have the same support: an isomorphism induces isomorphisms of the
 geometric stalks. -/
-theorem support_congr {G : WeilSheaf k₀ l X} (e : F ≅ G) : F.support = G.support := by
+theorem support_congr {G : LAdicWeilSheaf k₀ l X} (e : F ≅ G) : F.support = G.support := by
   ext x
   let e' : (F.stalk x).carrier ≃ₗ[PadicAlgCl l] (G.stalk x).carrier :=
     WeilCoefficients.linearEquivOfIso
@@ -277,24 +277,24 @@ theorem traceFunction_eq_trace_frobeniusEnd_stalk_pow (n : ℕ)
 /-- `F` is punctually `ι`-pure of weight `w`: at every closed point `x`, every eigenvalue `α`
 of the local Frobenius `Fₓ` satisfies `|ι α| = q_x ^ (w / 2)`, with `q_x` the residue
 cardinality at `x`. (blueprint: `def-weil-punctual-weights`) -/
-def IsPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (w : ℝ) : Prop :=
+def IsPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) (F : LAdicWeilSheaf k₀ l X) (w : ℝ) : Prop :=
   ∀ x : X.finitePoints,
     (F.stalk x).IsPureOfWeight ι ((X ↘ Spec (CommRingCat.of k₀)).residueCard x.1) w
 
 /-- `F` has weights at most `w`: at every closed point `x`, every eigenvalue `α` of the local
 Frobenius `Fₓ` satisfies `|ι α| ≤ q_x ^ (w / 2)`. -/
-def HasWeightsAtMost (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (w : ℝ) : Prop :=
+def HasWeightsAtMost (ι : PadicAlgCl l →+* ℂ) (F : LAdicWeilSheaf k₀ l X) (w : ℝ) : Prop :=
   ∀ x : X.finitePoints,
     (F.stalk x).HasWeightsAtMost ι ((X ↘ Spec (CommRingCat.of k₀)).residueCard x.1) w
 
 /-- A punctually pure sheaf has weights at most its weight. -/
 theorem IsPunctuallyPureOfWeight.hasWeightsAtMost {ι : PadicAlgCl l →+* ℂ}
-    {F : WeilSheaf k₀ l X} {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) :
+    {F : LAdicWeilSheaf k₀ l X} {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) :
     F.HasWeightsAtMost ι w :=
   fun x ↦ (h x).hasWeightsAtMost
 
 /-- Weights at most `w` are weights at most any `w' ≥ w`. -/
-theorem HasWeightsAtMost.mono {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X} {w w' : ℝ}
+theorem HasWeightsAtMost.mono {ι : PadicAlgCl l →+* ℂ} {F : LAdicWeilSheaf k₀ l X} {w w' : ℝ}
     (h : F.HasWeightsAtMost ι w) (hww' : w ≤ w') : F.HasWeightsAtMost ι w' :=
   fun x ↦ (h x).mono (Nat.one_le_pow _ _ Nat.card_pos) hww'
 
@@ -308,7 +308,7 @@ The blueprint states this for the inclusion `X_y ⟶ X` of the fibre of a morphi
 closed point `y`, with purity on `X_y` relative to `κ(y)`; since residue cardinalities do not
 depend on the base field, purity relative to `κ(y)` and relative to `k₀` agree
 (blueprint: `lem-tw-punctual-rescaling`). -/
-theorem IsPunctuallyPureOfWeight.upperStar {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
+theorem IsPunctuallyPureOfWeight.upperStar {ι : PadicAlgCl l →+* ℂ} {F : LAdicWeilSheaf k₀ l X}
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {X' : Scheme.{u}}
     [X'.Over (Spec (CommRingCat.of k₀))] (φ : X' ⟶ X) [φ.IsOver (Spec (CommRingCat.of k₀))] :
     ((upperStar φ).obj F).IsPunctuallyPureOfWeight ι w :=
@@ -317,25 +317,25 @@ theorem IsPunctuallyPureOfWeight.upperStar {ι : PadicAlgCl l →+* ℂ} {F : We
 /-- `F` is `ι`-*real* if at every closed point `x` the stalk `F_x̄` with its local Frobenius is
 `ι`-real (`FrobeniusModule.IsReal`): the realization under `ι` of the local polynomial
 `P_x(F, T) = det(1 - T Fₓ | F_x̄)` has real coefficients. -/
-def IsReal (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : Prop :=
+def IsReal (ι : PadicAlgCl l →+* ℂ) (F : LAdicWeilSheaf k₀ l X) : Prop :=
   ∀ x : X.finitePoints, (F.stalk x).IsReal ι
 
 /-- `F` is `ι`-*realizable* if it is a direct summand of an `ι`-real lisse Weil sheaf
 (Deligne, Weil II, (1.2.13)). (blueprint: `def-wf-iota-real`) -/
-def IsRealizable (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : Prop :=
-  ∃ (G : WeilSheaf k₀ l X) (i : F ⟶ G) (r : G ⟶ F), G.IsLisse ∧ G.IsReal ι ∧ i ≫ r = 𝟙 F
+def IsRealizable (ι : PadicAlgCl l →+* ℂ) (F : LAdicWeilSheaf k₀ l X) : Prop :=
+  ∃ (G : LAdicWeilSheaf k₀ l X) (i : F ⟶ G) (r : G ⟶ F), G.IsLisse ∧ G.IsReal ι ∧ i ≫ r = 𝟙 F
 
 -- TODO(adic): with pro-étale coefficients the stalk functor is additive, and the Weil
 -- structure of `F ⊞ G` is the sum of those of `F` and `G`.
 /-- The stalk of a direct sum is the direct sum of the stalks, with the diagonal Frobenius. -/
-theorem nonempty_equiv_stalk_biprod (G : WeilSheaf k₀ l X) (x : X.finitePoints) :
+theorem nonempty_equiv_stalk_biprod (G : LAdicWeilSheaf k₀ l X) (x : X.finitePoints) :
     Nonempty (((F ⊞ G).stalk x).Equiv ((F.stalk x).prod (G.stalk x))) := by
   sorry
 
 section GlobalSections
 
 /-- The global sections of a Weil sheaf are zero, see
-`AlgebraicGeometry.WeilSheaf.isZero_carrier`. -/
+`AlgebraicGeometry.LAdicWeilSheaf.isZero_carrier`. -/
 theorem isZero_globalSectionsObj :
     IsZero ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj F.obj.carrier) :=
   (Sheaf.Γ _ _).map_isZero (isZero_carrier F)
@@ -411,4 +411,4 @@ theorem globalSectionsToStalkObj_frobenius
 
 end GlobalSections
 
-end AlgebraicGeometry.WeilSheaf
+end AlgebraicGeometry.LAdicWeilSheaf

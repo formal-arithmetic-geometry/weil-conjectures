@@ -29,26 +29,27 @@ of weights at most `w`, by the hypercohomology spectral sequence.
 ## Main statements
 
 - `AlgebraicGeometry.HasDirectImageWeightBound.comp`: blueprint `sk-l-dl-general-composition`,
-  through its form `AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_comp` for
-  a single sheaf.
-- `AlgebraicGeometry.WeilSheaf.exists_filtration_higherLowerShriek_comp`: the abutment filtration
-  of the compact-support Leray spectral sequence, used in `lem-zl-composition-weight-bound`.
+  through its form `AlgebraicGeometry.LAdicWeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_comp`
+  for a single sheaf.
+- `AlgebraicGeometry.LAdicWeilSheaf.exists_filtration_higherLowerShriek_comp`: the abutment
+  filtration of the compact-support Leray spectral sequence, used in
+  `lem-zl-composition-weight-bound`.
 - `AlgebraicGeometry.HasDirectImageWeightBound.of_openClosed`: blueprint
   `sk-l-dl-general-excision`.
-- `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.of_openClosed`: blueprint
+- `AlgebraicGeometry.LAdicWeilComplex.IsMixedOfWeightsAtMost.of_openClosed`: blueprint
   `lem-zl-open-closed-weight`.
 - `AlgebraicGeometry.HasDirectImageComplexWeightBound.of_openClosed`,
   `AlgebraicGeometry.HasDirectImageWeightBound.of_openClosed_target`,
   `AlgebraicGeometry.HasDirectImageComplexWeightBound.of_openClosed_target` and
-  `AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_of_shortExact`: blueprint
-  `lem-zl-morphism-open-closed-reduction`, the open–closed reductions on the source and on the
-  target and the reduction along short exact sequences of coefficients.
+  `AlgebraicGeometry.LAdicWeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_of_shortExact`:
+  blueprint `lem-zl-morphism-open-closed-reduction`, the open–closed reductions on the source and on
+  the target and the reduction along short exact sequences of coefficients.
 - `AlgebraicGeometry.HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek`:
   blueprint `lem-zl-sheaves-to-complexes`.
 - `AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite`,
-  `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite` and
-  `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`: blueprint
-  `sk-l-dl-general-quasifinite`, and its consequence
+  `AlgebraicGeometry.LAdicWeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`
+  and `AlgebraicGeometry.LAdicWeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`:
+  blueprint `sk-l-dl-general-quasifinite`, and its consequence
   `AlgebraicGeometry.HasDirectImageWeightBound.of_locallyQuasiFinite`.
 
 ## References
@@ -88,8 +89,8 @@ theorem HasDirectImageWeightBound.of_eq {X Y : Scheme.{u}} [X.Over (Spec (CommRi
 The blueprint argument for the composition step runs through the composition isomorphism
 `R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!` and the compact-support Leray spectral sequence
 `E₂^{a,b} = Rᵃg₀!Rᵇf₀!F ⇒ Rᵃ⁺ᵇ(f ≫ g)₀!F`. With the present scaffold
-`AlgebraicGeometry.WeilComplex` is not triangulated, so this spectral sequence cannot be set up;
-its output needed here — the finite abutment filtration by subquotients of the `E₂`-terms — is
+`AlgebraicGeometry.LAdicWeilComplex` is not triangulated, so this spectral sequence cannot be set
+up; its output needed here — the finite abutment filtration by subquotients of the `E₂`-terms — is
 stated as an open black box. The composition step itself is derived from it as in the blueprint.
 -/
 
@@ -116,14 +117,15 @@ quotients `E_∞^{a,b}`, `a + b = n`, are subquotients of the `E₂`-terms `Rᵃ
 of subobjects of them (blueprint: `lem-zl-composition-weight-bound`, from
 `lem-zl-shriek-composition`, `def-weil-pbc-hypercohomology-filtrations` and
 `lemma-weil-pbc-hypercohomology-convergence`). -/
-theorem WeilSheaf.exists_filtration_higherLowerShriek_comp (F : WeilSheaf k₀ l X) (n : ℕ) :
-    ∃ (m : ℕ) (G : Fin (m + 1) → WeilSheaf k₀ l Y) (φ : ∀ i : Fin m, G i.castSucc ⟶ G i.succ),
+theorem LAdicWeilSheaf.exists_filtration_higherLowerShriek_comp (F : LAdicWeilSheaf k₀ l X)
+    (n : ℕ) :
+    ∃ (m : ℕ) (G : Fin (m + 1) → LAdicWeilSheaf k₀ l Y) (φ : ∀ i : Fin m, G i.castSucc ⟶ G i.succ),
       IsZero (G 0) ∧
-        IsIsomorphic (G (Fin.last m)) ((WeilSheaf.higherLowerShriek k₀ l (f ≫ g) n).obj F) ∧
+        IsIsomorphic (G (Fin.last m)) ((LAdicWeilSheaf.higherLowerShriek k₀ l (f ≫ g) n).obj F) ∧
         (∀ i : Fin m, Mono (φ i)) ∧
-        ∀ i : Fin m, ∃ a b : ℕ, a + b = n ∧ ∃ (S : WeilSheaf k₀ l Y)
-          (j : S ⟶ (WeilSheaf.higherLowerShriek k₀ l g a).obj
-            ((WeilSheaf.higherLowerShriek k₀ l f b).obj F))
+        ∀ i : Fin m, ∃ a b : ℕ, a + b = n ∧ ∃ (S : LAdicWeilSheaf k₀ l Y)
+          (j : S ⟶ (LAdicWeilSheaf.higherLowerShriek k₀ l g a).obj
+            ((LAdicWeilSheaf.higherLowerShriek k₀ l f b).obj F))
           (p : S ⟶ cokernel (φ i)), Mono j ∧ Epi p :=
   sorry -- TODO(adic)
 
@@ -137,14 +139,15 @@ sheaf).
 The `E₂`-term `Rᵃg₀!Rᵇf₀!F` of the compact-support Leray spectral sequence is mixed of weights
 at most `w + b + a`, so its subquotients `E_∞^{a,b}` are, and the abutment `Rⁿ(f ≫ g)₀!F` is
 filtered by these. -/
-theorem WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_comp {w : ℝ} {F : WeilSheaf k₀ l X}
+theorem LAdicWeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_comp {w : ℝ}
+    {F : LAdicWeilSheaf k₀ l X}
     (hF : ∀ b : ℕ,
-      ((WeilSheaf.higherLowerShriek k₀ l f b).obj F).IsMixedOfWeightsAtMost ι (w + b))
+      ((LAdicWeilSheaf.higherLowerShriek k₀ l f b).obj F).IsMixedOfWeightsAtMost ι (w + b))
     (hg : HasDirectImageWeightBound k₀ ι g) (n : ℕ) :
-    ((WeilSheaf.higherLowerShriek k₀ l (f ≫ g) n).obj F).IsMixedOfWeightsAtMost ι (w + n) := by
+    ((LAdicWeilSheaf.higherLowerShriek k₀ l (f ≫ g) n).obj F).IsMixedOfWeightsAtMost ι (w + n) := by
   obtain ⟨m, G, φ, h0, hlast, hmono, hφ⟩ :=
-    WeilSheaf.exists_filtration_higherLowerShriek_comp (l := l) f g F n
-  refine WeilSheaf.IsMixedOfWeightsAtMost.of_filtration G φ h0 hlast fun i ↦ ?_
+    LAdicWeilSheaf.exists_filtration_higherLowerShriek_comp (l := l) f g F n
+  refine LAdicWeilSheaf.IsMixedOfWeightsAtMost.of_filtration G φ h0 hlast fun i ↦ ?_
   obtain ⟨a, b, hab, S, j, p, _, _⟩ := hφ i
   have hE := hg (w + b) _ (hF b) a
   rw [show w + (b : ℝ) + a = w + n by rw [← hab]; push_cast; ring] at hE
@@ -162,7 +165,7 @@ X --- f ---> Z --- g ---> Y
 (blueprint: `sk-l-dl-general-composition`, proved as `lem-zl-composition-weight-bound`). -/
 theorem HasDirectImageWeightBound.comp (hf : HasDirectImageWeightBound k₀ ι f)
     (hg : HasDirectImageWeightBound k₀ ι g) : HasDirectImageWeightBound k₀ ι (f ≫ g) :=
-  fun w F hF ↦ WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_comp (hf w F hF) hg
+  fun w F hF ↦ LAdicWeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_comp (hf w F hF) hg
 
 end Composition
 
@@ -170,10 +173,10 @@ end Composition
 
 The blueprint argument for the open–closed reduction runs through the open–closed triangle
 `j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶ K[1]`, the long exact cohomology sequence of a triangle and compact
-support base change. With the present scaffold `AlgebraicGeometry.WeilComplex` is not
+support base change. With the present scaffold `AlgebraicGeometry.LAdicWeilComplex` is not
 triangulated, so the inputs that need this structure — the restriction of weight bounds, the
 exact sequences of direct images and the base change isomorphisms below — are proved from the
-vanishing of every Weil sheaf (`AlgebraicGeometry.WeilSheaf.isZero`). The reductions themselves
+vanishing of every Weil sheaf (`AlgebraicGeometry.LAdicWeilSheaf.isZero`). The reductions themselves
 are derived from these inputs as in the blueprint; the inputs must be reproved once Weil sheaves
 have pro-étale coefficients.
 -/
@@ -185,12 +188,12 @@ the filtration, a closed point of `W` being a closed point of `X` with the same 
 stalk and local Frobenius (blueprint: `lem-zl-morphism-open-closed-reduction`, restriction).
 
 With the present scaffold this holds because every Weil sheaf is zero. -/
-theorem WeilSheaf.IsMixedOfWeightsAtMost.upperStar {W X : Scheme.{u}}
+theorem LAdicWeilSheaf.IsMixedOfWeightsAtMost.upperStar {W X : Scheme.{u}}
     [W.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))] (h : W ⟶ X)
-    [IsImmersion h] [h.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ} {F : WeilSheaf k₀ l X}
+    [IsImmersion h] [h.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ} {F : LAdicWeilSheaf k₀ l X}
     (_hF : F.IsMixedOfWeightsAtMost ι w) :
-    ((WeilSheaf.upperStar h).obj F).IsMixedOfWeightsAtMost ι w :=
-  WeilSheaf.isMixedOfWeightsAtMost_of_isZero (WeilSheaf.isZero _) _
+    ((LAdicWeilSheaf.upperStar h).obj F).IsMixedOfWeightsAtMost ι w :=
+  LAdicWeilSheaf.isMixedOfWeightsAtMost_of_isZero (LAdicWeilSheaf.isZero _) _
 
 /-- Pulling back along an immersion `h : W ⟶ X` carries Weil complexes mixed of weights at most
 `w` to Weil complexes mixed of weights at most `w`: `h^*` is exact, so it commutes with taking
@@ -198,12 +201,12 @@ cohomology sheaves, and it preserves mixed upper bounds of sheaves
 (blueprint: `lem-zl-morphism-open-closed-reduction`, restriction).
 
 With the present scaffold this holds because every Weil sheaf is zero. -/
-theorem WeilComplex.IsMixedOfWeightsAtMost.upperStar {W X : Scheme.{u}}
+theorem LAdicWeilComplex.IsMixedOfWeightsAtMost.upperStar {W X : Scheme.{u}}
     [W.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))] (h : W ⟶ X)
-    [IsImmersion h] [h.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ} {K : WeilComplex k₀ l X}
+    [IsImmersion h] [h.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ} {K : LAdicWeilComplex k₀ l X}
     (_hK : K.IsMixedOfWeightsAtMost ι w) :
-    ((WeilComplex.upperStar h).obj K).IsMixedOfWeightsAtMost ι w :=
-  fun _ ↦ WeilSheaf.isMixedOfWeightsAtMost_of_isZero (WeilSheaf.isZero _) _
+    ((LAdicWeilComplex.upperStar h).obj K).IsMixedOfWeightsAtMost ι w :=
+  fun _ ↦ LAdicWeilSheaf.isMixedOfWeightsAtMost_of_isZero (LAdicWeilSheaf.isZero _) _
 
 /-- Extension by zero `j₀!` along an open immersion `j : U ⟶ X` carries Weil complexes mixed of
 weights at most `w` to Weil complexes mixed of weights at most `w`: it has the same stalks at the
@@ -211,15 +214,15 @@ points of `U` and zero stalks elsewhere, and extends filtrations by zero
 (blueprint: `lem-zl-morphism-open-closed-reduction`, part 2).
 
 With the present scaffold this holds because every Weil sheaf is zero. -/
-theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek_of_isOpenImmersion
+theorem LAdicWeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek_of_isOpenImmersion
     {U X : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
     (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] {w : ℝ} {K : WeilComplex k₀ l U}
+    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] {w : ℝ} {K : LAdicWeilComplex k₀ l U}
     (_hK : K.IsMixedOfWeightsAtMost ι w) :
-    ((WeilComplex.derivedLowerShriek k₀ l j).obj K).IsMixedOfWeightsAtMost ι w :=
-  fun _ ↦ WeilSheaf.isMixedOfWeightsAtMost_of_isZero (WeilSheaf.isZero _) _
+    ((LAdicWeilComplex.derivedLowerShriek k₀ l j).obj K).IsMixedOfWeightsAtMost ι w :=
+  fun _ ↦ LAdicWeilSheaf.isMixedOfWeightsAtMost_of_isZero (LAdicWeilSheaf.isZero _) _
 
 /-- The direct image `i₀*` along a closed immersion `i : Z ⟶ X` carries Weil complexes mixed of
 weights at most `w` to Weil complexes mixed of weights at most `w`, the case of a closed
@@ -227,12 +230,12 @@ immersion of the finite pushforward bound (blueprint: `lem-zl-finite-pushforward
 `lem-zl-morphism-open-closed-reduction`, part 2).
 
 With the present scaffold this holds because every Weil sheaf is zero. -/
-theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isClosedImmersion
+theorem LAdicWeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isClosedImmersion
     {Z X : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
     (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ}
-    {K : WeilComplex k₀ l Z} (_hK : K.IsMixedOfWeightsAtMost ι w) :
-    ((WeilComplex.derivedLowerStar i).obj K).IsMixedOfWeightsAtMost ι w :=
-  fun _ ↦ WeilSheaf.isMixedOfWeightsAtMost_of_isZero (WeilSheaf.isZero _) _
+    {K : LAdicWeilComplex k₀ l Z} (_hK : K.IsMixedOfWeightsAtMost ι w) :
+    ((LAdicWeilComplex.derivedLowerStar i).obj K).IsMixedOfWeightsAtMost ι w :=
+  fun _ ↦ LAdicWeilSheaf.isMixedOfWeightsAtMost_of_isZero (LAdicWeilSheaf.isZero _) _
 
 /-- Let `j : U ⟶ X` be an open immersion whose closed complement is `i : Z ⟶ X`. If the two
 outer terms `j₀!j₀^*K` and `i₀*i₀^*K` of the localization triangle
@@ -240,10 +243,10 @@ outer terms `j₀!j₀^*K` and `i₀*i₀^*K` of the localization triangle
 (blueprint: `lem-zl-open-closed-weight`).
 
 The blueprint argument is the extension stability of complex weights along the localization
-triangle. With the present scaffold `AlgebraicGeometry.WeilComplex` is not triangulated, so this
-triangle cannot be formed; instead every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf.isZero`),
-so the cohomology sheaves of `K` are mixed of every weight. -/
-theorem WeilComplex.IsMixedOfWeightsAtMost.of_openClosed {U X Z : Scheme.{u}}
+triangle. With the present scaffold `AlgebraicGeometry.LAdicWeilComplex` is not triangulated, so
+this triangle cannot be formed; instead every Weil sheaf is zero
+(`AlgebraicGeometry.LAdicWeilSheaf.isZero`), so the cohomology sheaves of `K` are mixed of every
+weight. -/ theorem LAdicWeilComplex.IsMixedOfWeightsAtMost.of_openClosed {U X Z : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
     [Z.Over (Spec (CommRingCat.of k₀))] {j : U ⟶ X} [IsOpenImmersion j] [QuasiCompact j]
     [j.IsOver (Spec (CommRingCat.of k₀))] {i : Z ⟶ X} [IsClosedImmersion i]
@@ -251,13 +254,13 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.of_openClosed {U X Z : Scheme.{u}}
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
-    (_hij : IsCompl (Set.range j.base) (Set.range i.base)) {w : ℝ} {K : WeilComplex k₀ l X}
-    (_hU : ((WeilComplex.derivedLowerShriek k₀ l j).obj
-      ((WeilComplex.upperStar j).obj K)).IsMixedOfWeightsAtMost ι w)
-    (_hZ : ((WeilComplex.derivedLowerStar i).obj
-      ((WeilComplex.upperStar i).obj K)).IsMixedOfWeightsAtMost ι w) :
+    (_hij : IsCompl (Set.range j.base) (Set.range i.base)) {w : ℝ} {K : LAdicWeilComplex k₀ l X}
+    (_hU : ((LAdicWeilComplex.derivedLowerShriek k₀ l j).obj
+      ((LAdicWeilComplex.upperStar j).obj K)).IsMixedOfWeightsAtMost ι w)
+    (_hZ : ((LAdicWeilComplex.derivedLowerStar i).obj
+      ((LAdicWeilComplex.upperStar i).obj K)).IsMixedOfWeightsAtMost ι w) :
     K.IsMixedOfWeightsAtMost ι w :=
-  fun _ ↦ WeilSheaf.isMixedOfWeightsAtMost_of_isZero (WeilSheaf.isZero _) _
+  fun _ ↦ LAdicWeilSheaf.isMixedOfWeightsAtMost_of_isZero (LAdicWeilSheaf.isZero _) _
 
 /-- Let `G` be a Weil sheaf on `X`, let `j : U ⟶ X` be an open immersion whose closed complement
 is `i : Z ⟶ X`, and suppose that `j₀^*G` and `i₀^*G` are mixed of weights at most `w`. Then `G`
@@ -265,16 +268,16 @@ is mixed of weights at most `w` (blueprint: `lem-zl-morphism-open-closed-reducti
 
 The blueprint argument applies `lem-zl-open-closed-weight` to `G` placed in degree zero. With the
 present scaffold this holds because every Weil sheaf is zero. -/
-theorem WeilSheaf.IsMixedOfWeightsAtMost.of_openClosed {U X Z : Scheme.{u}}
+theorem LAdicWeilSheaf.IsMixedOfWeightsAtMost.of_openClosed {U X Z : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
     [Z.Over (Spec (CommRingCat.of k₀))] {j : U ⟶ X} [IsOpenImmersion j]
     [j.IsOver (Spec (CommRingCat.of k₀))] {i : Z ⟶ X} [IsClosedImmersion i]
     [i.IsOver (Spec (CommRingCat.of k₀))]
-    (_hij : IsCompl (Set.range j.base) (Set.range i.base)) {w : ℝ} {G : WeilSheaf k₀ l X}
-    (_hU : ((WeilSheaf.upperStar j).obj G).IsMixedOfWeightsAtMost ι w)
-    (_hZ : ((WeilSheaf.upperStar i).obj G).IsMixedOfWeightsAtMost ι w) :
+    (_hij : IsCompl (Set.range j.base) (Set.range i.base)) {w : ℝ} {G : LAdicWeilSheaf k₀ l X}
+    (_hU : ((LAdicWeilSheaf.upperStar j).obj G).IsMixedOfWeightsAtMost ι w)
+    (_hZ : ((LAdicWeilSheaf.upperStar i).obj G).IsMixedOfWeightsAtMost ι w) :
     G.IsMixedOfWeightsAtMost ι w :=
-  WeilSheaf.isMixedOfWeightsAtMost_of_isZero (WeilSheaf.isZero _) _
+  LAdicWeilSheaf.isMixedOfWeightsAtMost_of_isZero (LAdicWeilSheaf.isZero _) _
 
 /-- Let `j : U ⟶ X` be an open immersion whose closed complement is `i : Z ⟶ X`, and let
 `f : X ⟶ Y`. Applying `Rf₀!` to the open–closed triangle of a Weil sheaf `F` and taking
@@ -283,7 +286,7 @@ cohomology sheaves gives exact sequences
 (blueprint: `lem-zl-morphism-open-closed-reduction`, part 1, using `lem-sp-long-exact-of-triangle`).
 
 With the present scaffold this holds because every Weil sheaf is zero. -/
-theorem WeilSheaf.exists_exact_higherLowerShriek_of_openClosed {U X Z Y : Scheme.{u}}
+theorem LAdicWeilSheaf.exists_exact_higherLowerShriek_of_openClosed {U X Z Y : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
     [Z.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     {j : U ⟶ X} [IsOpenImmersion j] [QuasiCompact j]
@@ -294,14 +297,14 @@ theorem WeilSheaf.exists_exact_higherLowerShriek_of_openClosed {U X Z Y : Scheme
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
-    (_hij : IsCompl (Set.range j.base) (Set.range i.base)) (F : WeilSheaf k₀ l X) (r : ℕ) :
-    ∃ S : ShortComplex (WeilSheaf k₀ l Y), S.Exact ∧
-      Nonempty (S.X₁ ≅ (WeilSheaf.higherLowerShriek k₀ l (j ≫ f) r).obj
-        ((WeilSheaf.upperStar j).obj F)) ∧
-      Nonempty (S.X₂ ≅ (WeilSheaf.higherLowerShriek k₀ l f r).obj F) ∧
-      Nonempty (S.X₃ ≅ (WeilSheaf.higherLowerShriek k₀ l (i ≫ f) r).obj
-        ((WeilSheaf.upperStar i).obj F)) :=
-  ⟨ShortComplex.mk 0 0 comp_zero, ShortComplex.exact_of_isZero_X₂ _ (WeilSheaf.isZero _),
+    (_hij : IsCompl (Set.range j.base) (Set.range i.base)) (F : LAdicWeilSheaf k₀ l X) (r : ℕ) :
+    ∃ S : ShortComplex (LAdicWeilSheaf k₀ l Y), S.Exact ∧
+      Nonempty (S.X₁ ≅ (LAdicWeilSheaf.higherLowerShriek k₀ l (j ≫ f) r).obj
+        ((LAdicWeilSheaf.upperStar j).obj F)) ∧
+      Nonempty (S.X₂ ≅ (LAdicWeilSheaf.higherLowerShriek k₀ l f r).obj F) ∧
+      Nonempty (S.X₃ ≅ (LAdicWeilSheaf.higherLowerShriek k₀ l (i ≫ f) r).obj
+        ((LAdicWeilSheaf.upperStar i).obj F)) :=
+  ⟨ShortComplex.mk 0 0 comp_zero, ShortComplex.exact_of_isZero_X₂ _ (LAdicWeilSheaf.isZero _),
     ⟨Iso.refl _⟩, ⟨Iso.refl _⟩, ⟨Iso.refl _⟩⟩
 
 /-- Compact support base change for the higher direct images: for a pullback square
@@ -317,7 +320,7 @@ of `k₀`-schemes, `h₀^*Rʳf₀!F ≅ Rʳf'₀!g₀^*F`
 part 2).
 
 With the present scaffold this holds because every Weil sheaf is zero. -/
-theorem WeilSheaf.nonempty_upperStar_higherLowerShriek_iso {X Y X' Y' : Scheme.{u}}
+theorem LAdicWeilSheaf.nonempty_upperStar_higherLowerShriek_iso {X Y X' Y' : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [X'.Over (Spec (CommRingCat.of k₀))] [Y'.Over (Spec (CommRingCat.of k₀))]
     {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
@@ -330,11 +333,11 @@ theorem WeilSheaf.nonempty_upperStar_higherLowerShriek_iso {X Y X' Y' : Scheme.{
     [QuasiCompact (Y' ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y' ↘ Spec (CommRingCat.of k₀))]
     {g : X' ⟶ X} [g.IsOver (Spec (CommRingCat.of k₀))] {h : Y' ⟶ Y}
-    [h.IsOver (Spec (CommRingCat.of k₀))] (_H : IsPullback g f' f h) (F : WeilSheaf k₀ l X)
+    [h.IsOver (Spec (CommRingCat.of k₀))] (_H : IsPullback g f' f h) (F : LAdicWeilSheaf k₀ l X)
     (r : ℕ) :
-    Nonempty ((WeilSheaf.upperStar h).obj ((WeilSheaf.higherLowerShriek k₀ l f r).obj F) ≅
-      (WeilSheaf.higherLowerShriek k₀ l f' r).obj ((WeilSheaf.upperStar g).obj F)) :=
-  ⟨(WeilSheaf.isZero _).iso (WeilSheaf.isZero _)⟩
+    Nonempty ((LAdicWeilSheaf.upperStar h).obj ((LAdicWeilSheaf.higherLowerShriek k₀ l f r).obj F) ≅
+      (LAdicWeilSheaf.higherLowerShriek k₀ l f' r).obj ((LAdicWeilSheaf.upperStar g).obj F)) :=
+  ⟨(LAdicWeilSheaf.isZero _).iso (LAdicWeilSheaf.isZero _)⟩
 
 /-- Compact support base change for the total direct image: for a pullback square
 ```
@@ -349,7 +352,7 @@ as soon as `Rf'₀!g₀^*K` is (blueprint: `prop-functor-package`, item 4, used 
 `lem-zl-morphism-open-closed-reduction`, part 2).
 
 With the present scaffold this holds because every Weil sheaf is zero. -/
-theorem WeilComplex.IsMixedOfWeightsAtMost.upperStar_derivedLowerShriek_of_isPullback
+theorem LAdicWeilComplex.IsMixedOfWeightsAtMost.upperStar_derivedLowerShriek_of_isPullback
     {X Y X' Y' : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [X'.Over (Spec (CommRingCat.of k₀))] [Y'.Over (Spec (CommRingCat.of k₀))]
@@ -364,12 +367,12 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.upperStar_derivedLowerShriek_of_isPul
     [QuasiSeparated (Y' ↘ Spec (CommRingCat.of k₀))]
     {g : X' ⟶ X} [g.IsOver (Spec (CommRingCat.of k₀))] {h : Y' ⟶ Y}
     [h.IsOver (Spec (CommRingCat.of k₀))] (_H : IsPullback g f' f h) {w : ℝ}
-    {K : WeilComplex k₀ l X}
-    (_hK : ((WeilComplex.derivedLowerShriek k₀ l f').obj
-      ((WeilComplex.upperStar g).obj K)).IsMixedOfWeightsAtMost ι w) :
-    ((WeilComplex.upperStar h).obj
-      ((WeilComplex.derivedLowerShriek k₀ l f).obj K)).IsMixedOfWeightsAtMost ι w :=
-  fun _ ↦ WeilSheaf.isMixedOfWeightsAtMost_of_isZero (WeilSheaf.isZero _) _
+    {K : LAdicWeilComplex k₀ l X}
+    (_hK : ((LAdicWeilComplex.derivedLowerShriek k₀ l f').obj
+      ((LAdicWeilComplex.upperStar g).obj K)).IsMixedOfWeightsAtMost ι w) :
+    ((LAdicWeilComplex.upperStar h).obj
+      ((LAdicWeilComplex.derivedLowerShriek k₀ l f).obj K)).IsMixedOfWeightsAtMost ι w :=
+  fun _ ↦ LAdicWeilSheaf.isMixedOfWeightsAtMost_of_isZero (LAdicWeilSheaf.isZero _) _
 
 /-- Applying `Rʳf₀!` to a short exact sequence `0 ⟶ F' ⟶ F ⟶ F'' ⟶ 0` of Weil sheaves gives an
 exact sequence `Rʳf₀!F' ⟶ Rʳf₀!F ⟶ Rʳf₀!F''`, a piece of the long exact sequence of the
@@ -378,15 +381,15 @@ distinguished triangle `F' ⟶ F ⟶ F'' ⟶ F'[1]`
 `lem-zl-morphism-open-closed-reduction`, part 3).
 
 With the present scaffold this holds because every Weil sheaf is zero. -/
-theorem WeilSheaf.exact_map_higherLowerShriek {X Y : Scheme.{u}}
+theorem LAdicWeilSheaf.exact_map_higherLowerShriek {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
     [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] {S : ShortComplex (WeilSheaf k₀ l X)}
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] {S : ShortComplex (LAdicWeilSheaf k₀ l X)}
     (_hS : S.ShortExact) (r : ℕ) :
-    (S.map (WeilSheaf.higherLowerShriek k₀ l f r)).Exact :=
-  ShortComplex.exact_of_isZero_X₂ _ (WeilSheaf.isZero _)
+    (S.map (LAdicWeilSheaf.higherLowerShriek k₀ l f r)).Exact :=
+  ShortComplex.exact_of_isZero_X₂ _ (LAdicWeilSheaf.isZero _)
 
 /-- Let `j : U ⟶ X` be an open immersion whose closed complement is `i : Z ⟶ X`. If the
 direct-image weight assertion holds for `j ≫ f` and for `i ≫ f`, then it holds for `f`:
@@ -420,8 +423,8 @@ theorem HasDirectImageWeightBound.of_openClosed {U X Z Y : Scheme.{u}}
   -- has outer terms mixed of weights at most `w + r`, hence so is the middle term.
   intro w F hF r
   obtain ⟨S, hS, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ :=
-    WeilSheaf.exists_exact_higherLowerShriek_of_openClosed (f := f) hij F r
-  exact (WeilSheaf.IsMixedOfWeightsAtMost.of_exact hS
+    LAdicWeilSheaf.exists_exact_higherLowerShriek_of_openClosed (f := f) hij F r
+  exact (LAdicWeilSheaf.IsMixedOfWeightsAtMost.of_exact hS
     ((hU w _ (hF.upperStar j) r).of_iso e₁.symm)
     ((hZ w _ (hF.upperStar i) r).of_iso e₃.symm)).of_iso e₂
 
@@ -431,8 +434,8 @@ form of the direct-image weight assertion holds for `j ≫ f` and for `i ≫ f`,
 
 The blueprint argument applies `Rf₀!` to the open–closed triangle of `K` and uses the extension
 stability of complex weights (`lem-zl-complex-extension`). With the present scaffold
-`AlgebraicGeometry.WeilComplex` is not triangulated, so this triangle cannot be formed; instead
-every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf.isZero`), so the cohomology sheaves of
+`AlgebraicGeometry.LAdicWeilComplex` is not triangulated, so this triangle cannot be formed; instead
+every Weil sheaf is zero (`AlgebraicGeometry.LAdicWeilSheaf.isZero`), so the cohomology sheaves of
 `Rf₀!K` are mixed of every weight. -/
 theorem HasDirectImageComplexWeightBound.of_openClosed {U X Z Y : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
@@ -449,7 +452,7 @@ theorem HasDirectImageComplexWeightBound.of_openClosed {U X Z Y : Scheme.{u}}
     (_hU : HasDirectImageComplexWeightBound k₀ ι (j ≫ f))
     (_hZ : HasDirectImageComplexWeightBound k₀ ι (i ≫ f)) :
     HasDirectImageComplexWeightBound k₀ ι f :=
-  fun _ _ _ _ ↦ WeilSheaf.isMixedOfWeightsAtMost_of_isZero (WeilSheaf.isZero _) _
+  fun _ _ _ _ ↦ LAdicWeilSheaf.isMixedOfWeightsAtMost_of_isZero (LAdicWeilSheaf.isZero _) _
 
 section Target
 
@@ -488,9 +491,9 @@ theorem HasDirectImageWeightBound.of_openClosed_target
   have : IsOpenImmersion g_V := MorphismProperty.of_isPullback H_V.flip ‹_›
   have : IsClosedImmersion g_T := MorphismProperty.of_isPullback H_T.flip ‹_›
   intro w F hF r
-  obtain ⟨e_V⟩ := WeilSheaf.nonempty_upperStar_higherLowerShriek_iso H_V F r
-  obtain ⟨e_T⟩ := WeilSheaf.nonempty_upperStar_higherLowerShriek_iso H_T F r
-  exact WeilSheaf.IsMixedOfWeightsAtMost.of_openClosed hij
+  obtain ⟨e_V⟩ := LAdicWeilSheaf.nonempty_upperStar_higherLowerShriek_iso H_V F r
+  obtain ⟨e_T⟩ := LAdicWeilSheaf.nonempty_upperStar_higherLowerShriek_iso H_T F r
+  exact LAdicWeilSheaf.IsMixedOfWeightsAtMost.of_openClosed hij
     ((h_V w _ (hF.upperStar g_V) r).of_iso e_V.symm)
     ((h_T w _ (hF.upperStar g_T) r).of_iso e_T.symm)
 
@@ -510,7 +513,7 @@ theorem HasDirectImageComplexWeightBound.of_openClosed_target
   have : IsOpenImmersion g_V := MorphismProperty.of_isPullback H_V.flip ‹_›
   have : IsClosedImmersion g_T := MorphismProperty.of_isPullback H_T.flip ‹_›
   intro w K hK
-  exact WeilComplex.IsMixedOfWeightsAtMost.of_openClosed hij
+  exact LAdicWeilComplex.IsMixedOfWeightsAtMost.of_openClosed hij
     (.derivedLowerShriek_of_isOpenImmersion j
       (.upperStar_derivedLowerShriek_of_isPullback H_V (h_V w _ (hK.upperStar g_V))))
     (.derivedLowerStar_of_isClosedImmersion i
@@ -521,20 +524,20 @@ end Target
 /-- Let `0 ⟶ F' ⟶ F ⟶ F'' ⟶ 0` be a short exact sequence of Weil sheaves on `X`. If `Rʳf₀!F'`
 and `Rʳf₀!F''` are mixed of weights at most `w + r` for every `r`, then so is `Rʳf₀!F`
 (blueprint: `lem-zl-morphism-open-closed-reduction`, part 3). -/
-theorem WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_of_shortExact {X Y : Scheme.{u}}
+theorem LAdicWeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_of_shortExact {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
     [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] {S : ShortComplex (WeilSheaf k₀ l X)}
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] {S : ShortComplex (LAdicWeilSheaf k₀ l X)}
     (hS : S.ShortExact) {w : ℝ}
-    (h₁ : ∀ r : ℕ, ((WeilSheaf.higherLowerShriek k₀ l f r).obj S.X₁).IsMixedOfWeightsAtMost ι
+    (h₁ : ∀ r : ℕ, ((LAdicWeilSheaf.higherLowerShriek k₀ l f r).obj S.X₁).IsMixedOfWeightsAtMost ι
       (w + r))
-    (h₃ : ∀ r : ℕ, ((WeilSheaf.higherLowerShriek k₀ l f r).obj S.X₃).IsMixedOfWeightsAtMost ι
+    (h₃ : ∀ r : ℕ, ((LAdicWeilSheaf.higherLowerShriek k₀ l f r).obj S.X₃).IsMixedOfWeightsAtMost ι
       (w + r))
     (r : ℕ) :
-    ((WeilSheaf.higherLowerShriek k₀ l f r).obj S.X₂).IsMixedOfWeightsAtMost ι (w + r) :=
-  WeilSheaf.IsMixedOfWeightsAtMost.of_exact (WeilSheaf.exact_map_higherLowerShriek f hS r)
+    ((LAdicWeilSheaf.higherLowerShriek k₀ l f r).obj S.X₂).IsMixedOfWeightsAtMost ι (w + r) :=
+  LAdicWeilSheaf.IsMixedOfWeightsAtMost.of_exact (LAdicWeilSheaf.exact_map_higherLowerShriek f hS r)
     (h₁ r) (h₃ r)
 
 end OpenClosed
@@ -546,8 +549,8 @@ constructible Weil complexes mixed of weights at most `w` to complexes mixed of 
 The blueprint argument is the hypercohomology spectral sequence
 `E₂^{a,b} = Rᵃf₀!𝓗ᵇ(K) ⇒ 𝓗ᵃ⁺ᵇ(Rf₀!K)`: its `E₂`-terms are mixed of weights at most `w + a + b` by
 the hypothesis, and the abutment is filtered by subquotients of them. With the present
-scaffold `AlgebraicGeometry.WeilComplex` is not triangulated, so this spectral sequence cannot be
-set up; instead every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf.isZero`), so the
+scaffold `AlgebraicGeometry.LAdicWeilComplex` is not triangulated, so this spectral sequence cannot
+be set up; instead every Weil sheaf is zero (`AlgebraicGeometry.LAdicWeilSheaf.isZero`), so the
 cohomology sheaves of `Rf₀!K` are mixed of every weight. The proof must be redone along the
 spectral sequence once Weil sheaves have pro-étale coefficients. -/
 theorem HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek
@@ -556,10 +559,10 @@ theorem HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek
     [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
-    (_hf : HasDirectImageWeightBound k₀ ι f) {w : ℝ} {K : WeilComplex k₀ l X}
+    (_hf : HasDirectImageWeightBound k₀ ι f) {w : ℝ} {K : LAdicWeilComplex k₀ l X}
     (_hK : K.IsMixedOfWeightsAtMost ι w) :
-    ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w :=
-  fun _ ↦ WeilSheaf.isMixedOfWeightsAtMost_of_isZero (WeilSheaf.isZero _) _
+    ((LAdicWeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w :=
+  fun _ ↦ LAdicWeilSheaf.isMixedOfWeightsAtMost_of_isZero (LAdicWeilSheaf.isZero _) _
 
 section QuasiFinite
 
@@ -572,27 +575,27 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the higher direct images
 with compact support `Rʳf₀!` vanish for `r > 0` (blueprint: `sk-l-dl-general-quasifinite`). -/
-theorem isZero_higherLowerShriek_of_quasiFinite (r : ℕ) (hr : 0 < r) (F : WeilSheaf k₀ l X) :
-    IsZero ((WeilSheaf.higherLowerShriek k₀ l f r).obj F) :=
+theorem isZero_higherLowerShriek_of_quasiFinite (r : ℕ) (hr : 0 < r) (F : LAdicWeilSheaf k₀ l X) :
+    IsZero ((LAdicWeilSheaf.higherLowerShriek k₀ l f r).obj F) :=
   -- Compact-support base change identifies the stalks of `Rʳf₀!F` with the cohomology of a
   -- finite geometric fibre, which is concentrated in degree zero.
   sorry
 
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the exact functor `f₀!`
 preserves mixed upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`). -/
-theorem WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : ℝ}
-    {F : WeilSheaf k₀ l X} (h : F.IsMixedOfWeightsAtMost ι w) :
-    ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).IsMixedOfWeightsAtMost ι w :=
+theorem LAdicWeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : ℝ}
+    {F : LAdicWeilSheaf k₀ l X} (h : F.IsMixedOfWeightsAtMost ι w) :
+    ((LAdicWeilSheaf.higherLowerShriek k₀ l f 0).obj F).IsMixedOfWeightsAtMost ι w :=
   -- `f₀!` is exact by `isZero_higherLowerShriek_of_quasiFinite`, so it transports a mixed
   -- filtration; its quotients stay punctually pure of the same weight by the orbit computation
-  -- of `WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`.
+  -- of `LAdicWeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`.
   sorry
 
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the exact functor `f₀!`
 preserves punctual upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`). -/
-theorem WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : ℝ}
-    {F : WeilSheaf k₀ l X} (h : F.HasWeightsAtMost ι w) :
-    ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).HasWeightsAtMost ι w :=
+theorem LAdicWeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : ℝ}
+    {F : LAdicWeilSheaf k₀ l X} (h : F.HasWeightsAtMost ι w) :
+    ((LAdicWeilSheaf.higherLowerShriek k₀ l f 0).obj F).HasWeightsAtMost ι w :=
   -- At a closed point `y` Frobenius permutes the stalk summands; on an orbit of length `e` an
   -- eigenvalue `α` upstairs contributes eigenvalues `β` with `βᵉ = α` downstairs, whose
   -- normalized weights agree because `q_x = q_yᵉ`.
@@ -605,7 +608,7 @@ theorem HasDirectImageWeightBound.of_locallyQuasiFinite : HasDirectImageWeightBo
   intro w F hF r
   rcases Nat.eq_zero_or_pos r with rfl | hr
   · simpa using hF.higherLowerShriek_zero_of_quasiFinite f
-  · exact WeilSheaf.isMixedOfWeightsAtMost_of_isZero
+  · exact LAdicWeilSheaf.isMixedOfWeightsAtMost_of_isZero
       (isZero_higherLowerShriek_of_quasiFinite f r hr F) _
 
 end QuasiFinite

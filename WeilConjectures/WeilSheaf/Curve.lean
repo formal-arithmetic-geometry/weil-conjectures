@@ -19,7 +19,7 @@ connected curve `U`, which is not proper.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_zero`
+- `AlgebraicGeometry.LAdicWeilSheaf.subsingleton_compactlySupportedCohomology_zero`
 -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-namespace WeilSheaf
+namespace LAdicWeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
@@ -51,11 +51,11 @@ as soon as it vanishes at one geometric point; the support of a nonzero section 
 all of `U`, which is not proper. -/
 theorem subsingleton_compactlySupportedCohomology_zero [IsAffine U]
     [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]
-    [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U)
+    [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))] (F : LAdicWeilSheaf k₀ l U)
     (hF : F.IsLisse) :
     Subsingleton (F.compactlySupportedCohomology 0).carrier := by
   sorry
 
-end WeilSheaf
+end LAdicWeilSheaf
 
 end AlgebraicGeometry

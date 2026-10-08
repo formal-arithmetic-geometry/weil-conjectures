@@ -33,18 +33,18 @@ this subsection adds is that the equivalence is exact for the perverse t-structu
 
 ## Main declarations
 
-- `AlgebraicGeometry.WeilComplex.IsCurvePerverseUpper`,
-  `AlgebraicGeometry.WeilComplex.IsCurvePerverseLower`,
-  `AlgebraicGeometry.WeilComplex.IsCurvePerverse`: the two truncation classes on a curve and
+- `AlgebraicGeometry.LAdicWeilComplex.IsCurvePerverseUpper`,
+  `AlgebraicGeometry.LAdicWeilComplex.IsCurvePerverseLower`,
+  `AlgebraicGeometry.LAdicWeilComplex.IsCurvePerverse`: the two truncation classes on a curve and
   the perverse heart.
-- `AlgebraicGeometry.WeilComplex.IsCurvePerverseLE`: the shifted upper classes `ᵖD^{≤n}`.
-- `AlgebraicGeometry.WeilComplex.isCurvePerverseLower_iff_forall_hom_eq_zero`: on a smooth
+- `AlgebraicGeometry.LAdicWeilComplex.IsCurvePerverseLE`: the shifted upper classes `ᵖD^{≤n}`.
+- `AlgebraicGeometry.LAdicWeilComplex.isCurvePerverseLower_iff_forall_hom_eq_zero`: on a smooth
   curve the lower class is the right orthogonal of `ᵖD^{≤-1}`, the t-structure axiom of
   `thm-a1-curve-perverse-heart`.
-- `AlgebraicGeometry.WeilComplex.simple_iff`: the simple curve perverse sheaves on the affine
+- `AlgebraicGeometry.LAdicWeilComplex.simple_iff`: the simple curve perverse sheaves on the affine
   line (`prop-a1-curve-perverse-simples`), and
-  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.simple_middleExtension`: the middle extension of
-  an irreducible lisse sheaf is simple.
+  `AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.simple_middleExtension`: the middle extension
+  of an irreducible lisse sheaf is simple.
 - `AlgebraicGeometry.isCurvePerverseLE_fourierTransform_obj`,
   `AlgebraicGeometry.isCurvePerverseLE_fourierTransform_inv_obj`: `FT_ψ` and its inverse
   preserve the upper classes (`thm-a1-fourier-t-exact`).
@@ -60,7 +60,7 @@ classes above. The support and cosupport conditions are formalised on the étale
 `WeilConjectures.SixFunctors.Etale.Perverse.Basic`; for Weil complexes, which have no Verdier
 dual yet, the curve classes are taken as the definition, and parts (1) and (3) of the theorem
 hold by definition. Part (5), on short exact sequences in the heart, is not stated: the
-provisional `AlgebraicGeometry.WeilComplex` is not triangulated, so its curve perverse heart
+provisional `AlgebraicGeometry.LAdicWeilComplex` is not triangulated, so its curve perverse heart
 carries no abelian structure.
 
 Following the blueprint, the lower class is reached through orthogonality: `FT_ψ` and its
@@ -75,56 +75,56 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-namespace WeilComplex
+namespace LAdicWeilComplex
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The upper truncation class of the perverse t-structure on a smooth curve: `𝓗ᵃK = 0` for
 `a > 0`, and `𝓗⁰K` has finite support. (blueprint: `sk-p-dl-a1-perverse`) -/
-def IsCurvePerverseUpper (K : WeilComplex k₀ l X) : Prop :=
+def IsCurvePerverseUpper (K : LAdicWeilComplex k₀ l X) : Prop :=
   (∀ a : ℤ, 0 < a → IsZero ((homologySheaf a).obj K)) ∧
-    (WeilSheaf.support ((homologySheaf (0 : ℤ)).obj K)).Finite
+    (LAdicWeilSheaf.support ((homologySheaf (0 : ℤ)).obj K)).Finite
 
 /-- The lower truncation class of the perverse t-structure on a smooth curve: `𝓗ᵃK = 0` for
 `a < -1`, and `𝓗⁻¹K` has no nonzero subsheaf of finite support.
 (blueprint: `sk-p-dl-a1-perverse`) -/
-def IsCurvePerverseLower (K : WeilComplex k₀ l X) : Prop :=
+def IsCurvePerverseLower (K : LAdicWeilComplex k₀ l X) : Prop :=
   (∀ a : ℤ, a < -1 → IsZero ((homologySheaf a).obj K)) ∧
-    ∀ (G : WeilSheaf k₀ l X) (i : G ⟶ (homologySheaf (-1 : ℤ)).obj K), Mono i →
-      (WeilSheaf.support G).Finite → IsZero G
+    ∀ (G : LAdicWeilSheaf k₀ l X) (i : G ⟶ (homologySheaf (-1 : ℤ)).obj K), Mono i →
+      (LAdicWeilSheaf.support G).Finite → IsZero G
 
 /-- A Weil complex on a smooth curve is *curve perverse* if it lies in both truncation classes.
 (blueprint: `sk-p-dl-a1-perverse`) -/
-def IsCurvePerverse (K : WeilComplex k₀ l X) : Prop :=
+def IsCurvePerverse (K : LAdicWeilComplex k₀ l X) : Prop :=
   K.IsCurvePerverseUpper ∧ K.IsCurvePerverseLower
 
 /-- The shifted upper class `ᵖD^{≤n} = ᵖD^{≤0}[-n]` of the perverse t-structure on a smooth
 curve: `𝓗ᵃK = 0` for `a > n`, and `𝓗ⁿK` has finite support.
 (blueprint: `thm-a1-curve-perverse-heart`) -/
-def IsCurvePerverseLE (n : ℤ) (K : WeilComplex k₀ l X) : Prop :=
+def IsCurvePerverseLE (n : ℤ) (K : LAdicWeilComplex k₀ l X) : Prop :=
   (∀ a : ℤ, n < a → IsZero ((homologySheaf a).obj K)) ∧
-    (WeilSheaf.support ((homologySheaf n).obj K)).Finite
+    (LAdicWeilSheaf.support ((homologySheaf n).obj K)).Finite
 
-theorem isCurvePerverseUpper_iff_isCurvePerverseLE_zero (K : WeilComplex k₀ l X) :
+theorem isCurvePerverseUpper_iff_isCurvePerverseLE_zero (K : LAdicWeilComplex k₀ l X) :
     K.IsCurvePerverseUpper ↔ K.IsCurvePerverseLE 0 :=
   Iff.rfl
 
 /-- Curve perversity is invariant under isomorphism: the cohomology sheaves of isomorphic
 complexes are isomorphic, hence have the same support. -/
 instance : ObjectProperty.IsClosedUnderIsomorphisms
-    (IsCurvePerverse : ObjectProperty (WeilComplex k₀ l X)) where
+    (IsCurvePerverse : ObjectProperty (LAdicWeilComplex k₀ l X)) where
   of_iso {K K'} e h := by
     refine ⟨⟨fun a ha ↦ (h.1.1 a ha).of_iso ((homologySheaf a).mapIso e).symm, ?_⟩,
       ⟨fun a ha ↦ (h.2.1 a ha).of_iso ((homologySheaf a).mapIso e).symm,
         fun G i _ hG ↦ h.2.2 G (i ≫ (homologySheaf (-1 : ℤ)).map e.inv) inferInstance hG⟩⟩
-    rw [← WeilSheaf.support_congr ((homologySheaf (0 : ℤ)).mapIso e)]
+    rw [← LAdicWeilSheaf.support_congr ((homologySheaf (0 : ℤ)).mapIso e)]
     exact h.1.2
 
-theorem IsCurvePerverseLE.of_iso {n : ℤ} {K L : WeilComplex k₀ l X} (e : K ≅ L)
+theorem IsCurvePerverseLE.of_iso {n : ℤ} {K L : LAdicWeilComplex k₀ l X} (e : K ≅ L)
     (hK : K.IsCurvePerverseLE n) : L.IsCurvePerverseLE n :=
   ⟨fun a ha ↦ (hK.1 a ha).of_iso ((homologySheaf a).mapIso e).symm,
-    WeilSheaf.support_congr ((homologySheaf n).mapIso e) ▸ hK.2⟩
+    LAdicWeilSheaf.support_congr ((homologySheaf n).mapIso e) ▸ hK.2⟩
 
 section Curve
 
@@ -136,9 +136,9 @@ variable [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
 receives no nonzero morphism from an object of `ᵖD^{≤-1}`. Together with the truncation
 triangles this is the statement that the two curve classes form a t-structure.
 (blueprint: `thm-a1-curve-perverse-heart`) -/
-theorem isCurvePerverseLower_iff_forall_hom_eq_zero (K : WeilComplex k₀ l X) :
+theorem isCurvePerverseLower_iff_forall_hom_eq_zero (K : LAdicWeilComplex k₀ l X) :
     K.IsCurvePerverseLower ↔
-      ∀ M : WeilComplex k₀ l X, M.IsCurvePerverseLE (-1) → ∀ f : M ⟶ K, f = 0 :=
+      ∀ M : LAdicWeilComplex k₀ l X, M.IsCurvePerverseLE (-1) → ∀ f : M ⟶ K, f = 0 :=
   -- TODO(adic): `Hom(A, B) = Hom(𝓗⁰A, 𝓗⁰B)` for `A ∈ D^{≤0}`, `B ∈ D^{≥0}`, and the
   -- truncation by the largest punctual subsheaf of `𝓗⁰`
   sorry
@@ -146,16 +146,16 @@ theorem isCurvePerverseLower_iff_forall_hom_eq_zero (K : WeilComplex k₀ l X) :
 /-- **Basic objects of the curve perverse heart**: a Weil sheaf of finite support, placed in
 degree zero, is curve perverse; these are the objects `i_{x*}E` of the blueprint and their
 finite sums. (blueprint: `thm-a1-curve-perverse-heart`) -/
-theorem isCurvePerverse_toComplex_obj (G : WeilSheaf k₀ l X) (hG : G.support.Finite) :
-    (WeilSheaf.toComplex.obj G).IsCurvePerverse :=
+theorem isCurvePerverse_toComplex_obj (G : LAdicWeilSheaf k₀ l X) (hG : G.support.Finite) :
+    (LAdicWeilSheaf.toComplex.obj G).IsCurvePerverse :=
   -- TODO(adic): the cohomology sheaves of a sheaf placed in degree zero
   sorry
 
 end Curve
 
-end WeilComplex
+end LAdicWeilComplex
 
-namespace WeilSheaf
+namespace LAdicWeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
@@ -167,15 +167,15 @@ theorem LisseOnDenseOpen.isCurvePerverse_middleExtension (D : LisseOnDenseOpen k
   -- TODO(adic): `j_*M` has no nonzero punctual subsheaf, a lisse sheaf having none
   sorry
 
-end WeilSheaf
+end LAdicWeilSheaf
 
-namespace WeilComplex
+namespace LAdicWeilComplex
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 /-- The curve perverse Weil complexes on the affine line, as a full subcategory: the heart
 `Perv(A₀)` of the perverse t-structure. -/
-abbrev curvePerverse : ObjectProperty (WeilComplex k₀ l (affineLine k₀)) :=
+abbrev curvePerverse : ObjectProperty (LAdicWeilComplex k₀ l (affineLine k₀)) :=
   IsCurvePerverse
 
 /-- **Simple perverse sheaves on the affine line**: a curve perverse Weil complex is simple in
@@ -185,24 +185,25 @@ of an irreducible lisse sheaf `N` on a dense open. (blueprint: `prop-a1-curve-pe
 -/
 theorem simple_iff (P : (curvePerverse (k₀ := k₀) (l := l)).FullSubcategory) :
     Simple P ↔
-      (∃ G : WeilSheaf k₀ l (affineLine k₀), Simple G ∧ G.support.Finite ∧
-        Nonempty (P.obj ≅ WeilSheaf.toComplex.obj G)) ∨
-      ∃ D : WeilSheaf.LisseOnDenseOpen k₀ l, D.sheaf.IsIrreducibleLisse ∧
+      (∃ G : LAdicWeilSheaf k₀ l (affineLine k₀), Simple G ∧ G.support.Finite ∧
+        Nonempty (P.obj ≅ LAdicWeilSheaf.toComplex.obj G)) ∨
+      ∃ D : LAdicWeilSheaf.LisseOnDenseOpen k₀ l, D.sheaf.IsIrreducibleLisse ∧
         Nonempty (P.obj ≅ D.middleExtension) :=
   -- TODO(adic): the exact sequences of the heart and the surjectivity of `π₁(U') → π₁(U)`
   sorry
 
-end WeilComplex
+end LAdicWeilComplex
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 /-- The middle extension `(j_*M)[1]` of an irreducible lisse sheaf is a simple object of the
 curve perverse heart. (blueprint: `prop-a1-curve-perverse-simples`) -/
-theorem WeilSheaf.LisseOnDenseOpen.simple_middleExtension (D : WeilSheaf.LisseOnDenseOpen k₀ l)
+theorem LAdicWeilSheaf.LisseOnDenseOpen.simple_middleExtension
+    (D : LAdicWeilSheaf.LisseOnDenseOpen k₀ l)
     (hD : D.sheaf.IsIrreducibleLisse) :
     Simple (⟨D.middleExtension, D.isCurvePerverse_middleExtension⟩ :
-      WeilComplex.curvePerverse.FullSubcategory) :=
-  (WeilComplex.simple_iff _).2 (.inr ⟨D, hD, ⟨Iso.refl _⟩⟩)
+      LAdicWeilComplex.curvePerverse.FullSubcategory) :=
+  (LAdicWeilComplex.simple_iff _).2 (.inr ⟨D, hD, ⟨Iso.refl _⟩⟩)
 
 /-- **The Fourier transform is perverse t-exact on the line**, upper classes: for a nontrivial
 `ψ`, the transform `FT_ψ` carries `ᵖD^{≤n}(A₀)` into `ᵖD^{≤n}(A'₀)`. Its stalks are computed by
@@ -211,7 +212,7 @@ the stalk formula, its degree-zero cohomology sheaf has finite support because a
 representation of `𝓖`, and a sheaf of finite support transforms into a lisse sheaf shifted by
 one. (blueprint: `thm-a1-fourier-t-exact`) -/
 theorem isCurvePerverseLE_fourierTransform_obj (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1)
-    {n : ℤ} {K : WeilComplex k₀ l (affineLine k₀)} (hK : K.IsCurvePerverseLE n) :
+    {n : ℤ} {K : LAdicWeilComplex k₀ l (affineLine k₀)} (hK : K.IsCurvePerverseLE n) :
     ((fourierTransform ψ).obj K).IsCurvePerverseLE n :=
   -- TODO(adic): the stalk formula, the coinvariant description of `H_c²` and the linear
   -- independence of distinct characters
@@ -222,7 +223,7 @@ the inverse of the equivalence `FT_ψ`, which is `FT_{ψ⁻¹}(-)(1)` by Fourier
 `ᵖD^{≤n}(A'₀)` into `ᵖD^{≤n}(A₀)`, by the argument for `FT_{ψ⁻¹}` and the twist being the
 tensor product with a lisse sheaf of rank one. (blueprint: `thm-a1-fourier-t-exact`) -/
 theorem isCurvePerverseLE_fourierTransform_inv_obj (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1)
-    {n : ℤ} {K : WeilComplex k₀ l (affineLine k₀)} (hK : K.IsCurvePerverseLE n) :
+    {n : ℤ} {K : LAdicWeilComplex k₀ l (affineLine k₀)} (hK : K.IsCurvePerverseLE n) :
     haveI := isEquivalence_fourierTransform (l := l) ψ hψ
     ((fourierTransform ψ).inv.obj K).IsCurvePerverseLE n :=
   -- TODO(adic): Fourier inversion `FT_{ψ⁻¹} ∘ FT_ψ ≅ (-)(-1)` and the argument for `FT_{ψ⁻¹}`
@@ -241,7 +242,7 @@ when its transform is.
 (blueprint: `sk-p-dl-a1-perverse`)
 -/
 theorem isCurvePerverse_fourierTransform_obj_iff (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1)
-    (K : WeilComplex k₀ l (affineLine k₀)) :
+    (K : LAdicWeilComplex k₀ l (affineLine k₀)) :
     ((fourierTransform ψ).obj K).IsCurvePerverse ↔ K.IsCurvePerverse := by
   have := isEquivalence_fourierTransform (l := l) ψ hψ
   have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
@@ -250,14 +251,14 @@ theorem isCurvePerverse_fourierTransform_obj_iff (ψ : AddChar k₀ (PadicAlgCl 
   · rintro ⟨hU, hL⟩
     refine ⟨(isCurvePerverseLE_fourierTransform_inv_obj ψ hψ hU).of_iso
       ((fourierTransform ψ).asEquivalence.unitIso.app K).symm, ?_⟩
-    rw [WeilComplex.isCurvePerverseLower_iff_forall_hom_eq_zero] at hL ⊢
+    rw [LAdicWeilComplex.isCurvePerverseLower_iff_forall_hom_eq_zero] at hL ⊢
     intro M hM f
     apply (fourierTransform ψ).map_injective
     rw [hL _ (isCurvePerverseLE_fourierTransform_obj ψ hψ hM) ((fourierTransform ψ).map f),
       Functor.map_zero]
   · rintro ⟨hU, hL⟩
     refine ⟨isCurvePerverseLE_fourierTransform_obj ψ hψ hU, ?_⟩
-    rw [WeilComplex.isCurvePerverseLower_iff_forall_hom_eq_zero] at hL ⊢
+    rw [LAdicWeilComplex.isCurvePerverseLower_iff_forall_hom_eq_zero] at hL ⊢
     intro M hM f
     let e := (fourierTransform ψ).asEquivalence.counitIso.app M
     obtain ⟨g, hg⟩ := (fourierTransform ψ).map_surjective (e.hom ≫ f)
@@ -271,13 +272,13 @@ theorem isCurvePerverse_fourierTransform_obj_iff (ψ : AddChar k₀ (PadicAlgCl 
 autoequivalence of the heart, and equivalences preserve simple objects.
 (blueprint: `prop-a1-fourier-middle-extension`, Step 1) -/
 theorem simple_fourierTransform_obj (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1)
-    (K : (WeilComplex.curvePerverse (k₀ := k₀) (l := l)).FullSubcategory) [Simple K] :
+    (K : (LAdicWeilComplex.curvePerverse (k₀ := k₀) (l := l)).FullSubcategory) [Simple K] :
     Simple (⟨(fourierTransform ψ).obj K.obj,
       (isCurvePerverse_fourierTransform_obj_iff ψ hψ K.obj).2 K.property⟩ :
-        WeilComplex.curvePerverse.FullSubcategory) := by
+        LAdicWeilComplex.curvePerverse.FullSubcategory) := by
   have := isEquivalence_fourierTransform (l := l) ψ hψ
-  have hP : WeilComplex.curvePerverse.inverseImage (fourierTransform ψ).asEquivalence.functor =
-      WeilComplex.curvePerverse :=
+  have hP : LAdicWeilComplex.curvePerverse.inverseImage (fourierTransform ψ).asEquivalence.functor =
+      LAdicWeilComplex.curvePerverse :=
     funext fun K ↦ propext (isCurvePerverse_fourierTransform_obj_iff ψ hψ K)
   exact simple_obj ((fourierTransform ψ).asEquivalence.congrFullSubcategory hP).functor K
 

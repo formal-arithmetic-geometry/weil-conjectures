@@ -37,15 +37,15 @@ pushforward of the constant sheaf along the Artin–Schreier cover `u^q - u = a 
 Galois over the line with group `k₀`, so that its isotypic components are indexed by the
 additive characters of `k₀`. It is lisse of rank one and of weight zero. -/
 noncomputable def artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
-    WeilSheaf k₀ l (affineLine k₀) := sorry
+    LAdicWeilSheaf k₀ l (affineLine k₀) := sorry
 
 -- TODO(unify): sk-def-ft
 /-- The Fourier–Deligne transform `FT_ψ` from Weil complexes on the affine line to Weil
 complexes on the dual affine line, with Laumon's shift by the relative dimension one. In the
 blueprint it is a triangulated functor between the bounded derived categories of Weil sheaves;
-the provisional `AlgebraicGeometry.WeilComplex` is not triangulated. -/
+the provisional `AlgebraicGeometry.LAdicWeilComplex` is not triangulated. -/
 noncomputable def fourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) :
-    WeilComplex k₀ l (affineLine k₀) ⥤ WeilComplex k₀ l (affineLine k₀) := sorry
+    LAdicWeilComplex k₀ l (affineLine k₀) ⥤ LAdicWeilComplex k₀ l (affineLine k₀) := sorry
 
 -- TODO(unify): sk-def-ft
 instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).Additive := sorry
@@ -66,7 +66,7 @@ linear Artin–Schreier sheaf `ℒ_{ψ(a x)}`, for `a` in the algebraic closure 
 irreducible constituent of the pullback of `F` to `U ⊗_{k₀} k`. The geometric sheaf is defined
 over the finite subextension `k₀(a)`, where it is `AlgebraicGeometry.artinSchreier` for the
 character `ψ ∘ Tr`; only its pullback to the geometric affine line is used here. -/
-def WeilSheaf.HasLinearArtinSchreierConstituent (F : WeilSheaf k₀ l U)
+def LAdicWeilSheaf.HasLinearArtinSchreierConstituent (F : LAdicWeilSheaf k₀ l U)
     (ψ : AddChar k₀ (PadicAlgCl l)) (a : AlgebraicClosure k₀) : Prop := sorry
 
 end AlgebraicGeometry

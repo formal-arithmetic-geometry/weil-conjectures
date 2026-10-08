@@ -28,14 +28,14 @@ local Frobenius of `F`.
 
 ## Main definitions
 
-- `AlgebraicGeometry.WeilSheaf.tensorObj`: the tensor product `F ⊗ G` of two Weil sheaves.
-- `AlgebraicGeometry.WeilSheaf.constantTwist`: the constant Weil twist `F ⊗ 𝓑_b`.
-- `AlgebraicGeometry.WeilSheaf.constantTwistInvIso`: twisting by `b` and then by `b⁻¹` gives
+- `AlgebraicGeometry.LAdicWeilSheaf.tensorObj`: the tensor product `F ⊗ G` of two Weil sheaves.
+- `AlgebraicGeometry.LAdicWeilSheaf.constantTwist`: the constant Weil twist `F ⊗ 𝓑_b`.
+- `AlgebraicGeometry.LAdicWeilSheaf.constantTwistInvIso`: twisting by `b` and then by `b⁻¹` gives
   back `F`.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.nonempty_higherLowerShriek_constantTwist_iso`: the projection
+- `AlgebraicGeometry.LAdicWeilSheaf.nonempty_higherLowerShriek_constantTwist_iso`: the projection
   formula `Rⁱf₀!(F ⊗ 𝓑_b) ≅ Rⁱf₀!F ⊗ 𝓑_b` for a constant twist
   (blueprint: `lem-wf-constant-twist-cohomology`).
 -/
@@ -75,7 +75,7 @@ noncomputable def smulIso (b : (PadicAlgCl l)ˣ) (M : Sheaf J (WeilCoefficients.
 
 end WeilCoefficients
 
-namespace WeilSheaf
+namespace LAdicWeilSheaf
 
 /-- The tensor product `F ⊗ G` of two Weil sheaves: the tensor product of the underlying étale
 sheaves on `X̄`, with the Weil structure
@@ -84,7 +84,7 @@ sheaves on `X̄`, with the Weil structure
 
 built from the monoidal structure `CategoryTheory.Functor.Monoidal.μIso` of the pullback
 `Fr^*` and the two Weil structures. -/
-noncomputable def tensorObj (F G : WeilSheaf k₀ l X) : WeilSheaf k₀ l X where
+noncomputable def tensorObj (F G : LAdicWeilSheaf k₀ l X) : LAdicWeilSheaf k₀ l X where
   obj := .mk (F.obj.carrier ⊗ G.obj.carrier)
     ((Functor.Monoidal.μIso (frobeniusPullback k₀ l X) _ _).symm ≪≫
       (F.obj.str ⊗ᵢ G.obj.str))
@@ -99,23 +99,23 @@ by `b`. It is the étale sheaf of `F` with the Weil structure `b • φ`, so tha
 values in `𝔽_{qᵐ}` its local Frobenius is `bᵐ` times that of `F`, and every eigenvalue `α` of
 the local Frobenius of `F` at a closed point of degree `m` becomes `bᵐ α`.
 (blueprint: `def-wf-constant-weil-twist`) -/
-noncomputable def constantTwist (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) :
-    WeilSheaf k₀ l X where
+noncomputable def constantTwist (F : LAdicWeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) :
+    LAdicWeilSheaf k₀ l X where
   obj := .mk F.obj.carrier (F.obj.str ≪≫ WeilCoefficients.smulIso b F.obj.carrier)
   property := F.property
 
 /-- A constant Weil twist of `F` is lisse exactly when `F` is: it has the same underlying étale
 sheaf. -/
 @[simp]
-theorem isLisse_constantTwist {F : WeilSheaf k₀ l X} {b : (PadicAlgCl l)ˣ} :
+theorem isLisse_constantTwist {F : LAdicWeilSheaf k₀ l X} {b : (PadicAlgCl l)ˣ} :
     (F.constantTwist b).IsLisse ↔ F.IsLisse :=
   Iff.rfl
 
 -- TODO(adic): the Weil structure of `F ⊗ 𝓑_b` is `b • φ`, so the iterated structure at a
--- point of degree `m` is `bᵐ • φ_m` (`AlgebraicGeometry.WeilSheaf.frobeniusPowIso`).
+-- point of degree `m` is `bᵐ • φ_m` (`AlgebraicGeometry.LAdicWeilSheaf.frobeniusPowIso`).
 /-- At a closed point `x` of degree `m`, the stalk of the constant twist `F ⊗ 𝓑_b` is the stalk
 of `F` with its local Frobenius multiplied by `bᵐ`. (blueprint: `def-wf-constant-weil-twist`) -/
-theorem nonempty_equiv_stalk_constantTwist (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ)
+theorem nonempty_equiv_stalk_constantTwist (F : LAdicWeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ)
     (x : X.finitePoints) :
     Nonempty (((F.constantTwist b).stalk x).Equiv ((F.stalk x).rescale
       ((b : PadicAlgCl l) ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1))) := by
@@ -123,7 +123,7 @@ theorem nonempty_equiv_stalk_constantTwist (F : WeilSheaf k₀ l X) (b : (PadicA
 
 /-- Twisting by `b` and then by `b⁻¹` gives back the Weil sheaf: both twists keep the
 underlying étale sheaf, and the Weil structure `b⁻¹ • b • φ` is `φ`. -/
-noncomputable def constantTwistInvIso (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) :
+noncomputable def constantTwistInvIso (F : LAdicWeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) :
     (F.constantTwist b).constantTwist b⁻¹ ≅ F :=
   ObjectProperty.isoMk _ (ObjectProperty.isoMk _ (Endofunctor.Algebra.isoMk (Iso.refl _) (by
     change _ ≫ F.obj.str.hom = ((F.obj.str ≪≫ WeilCoefficients.smulIso b F.obj.carrier) ≪≫
@@ -136,7 +136,7 @@ noncomputable def constantTwistInvIso (F : WeilSheaf k₀ l X) (b : (PadicAlgCl 
 
 -- TODO(adic): needs the projection formula for `Rf₀!` and constant Weil sheaves
 /-- The projection formula for a constant twist: for a morphism `f : X ⟶ Y` of `k₀`-schemes as
-in `AlgebraicGeometry.WeilSheaf.higherLowerShriek` and a unit `b ∈ ℚ̄_ℓˣ`,
+in `AlgebraicGeometry.LAdicWeilSheaf.higherLowerShriek` and a unit `b ∈ ℚ̄_ℓˣ`,
 `Rⁱf₀!(F ⊗ 𝓑_b) ≅ Rⁱf₀!F ⊗ 𝓑_b`: the constant Weil line `𝓑_b` is pulled back from `Y`, so it
 comes out of the direct image (blueprint: `lem-wf-constant-twist-cohomology`). -/
 theorem nonempty_higherLowerShriek_constantTwist_iso {Y : Scheme.{u}}
@@ -144,12 +144,12 @@ theorem nonempty_higherLowerShriek_constantTwist_iso {Y : Scheme.{u}}
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X)
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (F : LAdicWeilSheaf k₀ l X)
     (b : (PadicAlgCl l)ˣ) (i : ℕ) :
     Nonempty ((higherLowerShriek k₀ l f i).obj (F.constantTwist b) ≅
       ((higherLowerShriek k₀ l f i).obj F).constantTwist b) :=
   sorry
 
-end WeilSheaf
+end LAdicWeilSheaf
 
 end AlgebraicGeometry

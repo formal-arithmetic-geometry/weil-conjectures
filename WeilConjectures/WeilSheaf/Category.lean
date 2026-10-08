@@ -33,25 +33,26 @@ full subcategories of the categories `CategoryTheory.Endofunctor.IsoAlgebra` of 
 pullback endofunctor `Fr_X^*` and of its derived functor.
 
 Weil sheaves form an abelian category, Weil complexes a preadditive category with a shift. A
-Weil sheaf is a Weil complex concentrated in degree zero (`WeilSheaf.toComplex`), the
-cohomology sheaves `𝓗ᵃ` of a Weil complex are Weil sheaves (`WeilComplex.homologySheaf`),
-and both notions pull back along morphisms of `k₀`-schemes (`WeilSheaf.upperStar`,
-`WeilComplex.upperStar`), the base change `X̄ ⟶ Ȳ` commuting with the Frobenii.
+Weil sheaf is a Weil complex concentrated in degree zero (`LAdicWeilSheaf.toComplex`), the
+cohomology sheaves `𝓗ᵃ` of a Weil complex are Weil sheaves (`LAdicWeilComplex.homologySheaf`),
+and both notions pull back along morphisms of `k₀`-schemes (`LAdicWeilSheaf.upperStar`,
+`LAdicWeilComplex.upperStar`), the base change `X̄ ⟶ Ȳ` commuting with the Frobenii.
 
 ## Main definitions
 
 - `AlgebraicGeometry.WeilCoefficients`: the category of modules over `ℚ̄_ℓ`, lifted to the
   universe of the étale sites, and `AlgebraicGeometry.WeilCoefficients.toModuleCat`, the
   underlying `ℚ̄_ℓ`-vector spaces.
-- `AlgebraicGeometry.WeilSheaf` and `AlgebraicGeometry.WeilComplex`: the category of
+- `AlgebraicGeometry.LAdicWeilSheaf` and `AlgebraicGeometry.LAdicWeilComplex`: the category of
   constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme and the category of Weil complexes.
-- `AlgebraicGeometry.WeilSheaf.toComplex` and `AlgebraicGeometry.WeilComplex.homologySheaf`.
-- `AlgebraicGeometry.WeilSheaf.frobeniusPowIso`: the iterated Weil structure
+- `AlgebraicGeometry.LAdicWeilSheaf.toComplex` and
+  `AlgebraicGeometry.LAdicWeilComplex.homologySheaf`.
+- `AlgebraicGeometry.LAdicWeilSheaf.frobeniusPowIso`: the iterated Weil structure
   `φ_m : (Fr_Xᵐ)^* F ≅ F`.
-- `AlgebraicGeometry.WeilSheaf.IsLisse`: the underlying sheaf is locally constant.
-- `AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse`: a simple object of the category of lisse
+- `AlgebraicGeometry.LAdicWeilSheaf.IsLisse`: the underlying sheaf is locally constant.
+- `AlgebraicGeometry.LAdicWeilSheaf.IsIrreducibleLisse`: a simple object of the category of lisse
   Weil sheaves.
-- `AlgebraicGeometry.WeilSheaf.upperStar` and `AlgebraicGeometry.WeilComplex.upperStar`.
+- `AlgebraicGeometry.LAdicWeilSheaf.upperStar` and `AlgebraicGeometry.LAdicWeilComplex.upperStar`.
 
 ## Implementation notes
 
@@ -62,7 +63,7 @@ every Weil complex is zero, and statements quantified over them are vacuous. Dis
 `ℚ̄_ℓ`-coefficients would be wrong even with finite-dimensional stalks: lisse sheaves would have
 finite monodromy. The blueprint (`sk-d-real-weil`) takes constructible pro-étale `E_X`-modules
 for a finite extension `E` of `ℚ_ℓ`, and it defines Weil complexes as a Verdier localization of
-complexes of Weil sheaves, which is triangulated; the category `WeilComplex` here is not (see
+complexes of Weil sheaves, which is triangulated; the category `LAdicWeilComplex` here is not (see
 its docstring). Both definitions are to be redone once pro-étale constructible `E_X`-modules
 exist. Only the interface, the names and the transport of Frobenius structures along
 `φ̄^*` are meant to survive.
@@ -117,7 +118,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 
 /-- The pullback `Fr_X^*` of étale sheaves on the geometric fiber `X̄` along its geometric
 Galois Frobenius `Fr_X`. -/
-noncomputable abbrev WeilSheaf.frobeniusPullback :
+noncomputable abbrev LAdicWeilSheaf.frobeniusPullback :
     Sheaf (X ↘ Spec (CommRingCat.of k₀)).geometricFiber.smallEtaleTopology
         (WeilCoefficients.{u} l) ⥤
       Sheaf (X ↘ Spec (CommRingCat.of k₀)).geometricFiber.smallEtaleTopology
@@ -125,28 +126,28 @@ noncomputable abbrev WeilSheaf.frobeniusPullback :
   ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l]
 
 /-- The pullback `Fr_X^*` along the automorphism `Fr_X` of `X̄` is an equivalence. -/
-instance : (WeilSheaf.frobeniusPullback k₀ l X).IsEquivalence :=
+instance : (LAdicWeilSheaf.frobeniusPullback k₀ l X).IsEquivalence :=
   Etale.isEquivalence_upperStar _ _
 
 /-- The property of a sheaf `F` on `X̄` with an isomorphism `Fr_X^* F ≅ F` that `F` is
 constructible; it cuts out the Weil sheaves. -/
-noncomputable abbrev WeilSheaf.objectProperty :
-    ObjectProperty (IsoAlgebra (WeilSheaf.frobeniusPullback k₀ l X)) :=
+noncomputable abbrev LAdicWeilSheaf.objectProperty :
+    ObjectProperty (IsoAlgebra (LAdicWeilSheaf.frobeniusPullback k₀ l X)) :=
   (Etale.constructibleSheaf (WeilCoefficients.{u} l)
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).inverseImage (IsoAlgebra.forget _)
 
 /-- The derived pullback `D(Fr_X^*)` along the geometric Galois Frobenius of `X̄`. -/
-noncomputable abbrev WeilComplex.frobeniusPullback :
+noncomputable abbrev LAdicWeilComplex.frobeniusPullback :
     DerivedCategory (Sheaf (X ↘ Spec (CommRingCat.of k₀)).geometricFiber.smallEtaleTopology
         (WeilCoefficients.{u} l)) ⥤
       DerivedCategory (Sheaf (X ↘ Spec (CommRingCat.of k₀)).geometricFiber.smallEtaleTopology
         (WeilCoefficients.{u} l)) :=
-  (WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategory
+  (LAdicWeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategory
 
 /-- The property of an object `K` of `D(X̄_ét)` with an isomorphism `D(Fr_X^*) K ≅ K` that `K`
 is bounded with constructible homology; it cuts out the Weil complexes. -/
-noncomputable abbrev WeilComplex.objectProperty :
-    ObjectProperty (IsoAlgebra (WeilComplex.frobeniusPullback k₀ l X)) :=
+noncomputable abbrev LAdicWeilComplex.objectProperty :
+    ObjectProperty (IsoAlgebra (LAdicWeilComplex.frobeniusPullback k₀ l X)) :=
   (Etale.DerivedCategory.boundedConstructible (WeilCoefficients.{u} l)
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).inverseImage (IsoAlgebra.forget _)
 
@@ -160,10 +161,10 @@ This is a scaffold and it is degenerate: a constructible sheaf has finite stalks
 `ℚ̄_ℓ`-vector space with finitely many elements is zero, so every Weil sheaf is zero. The
 blueprint (`sk-d-real-weil`) takes constructible pro-étale `E_X`-modules instead, which are
 not formalised yet. -/
-def WeilSheaf (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
+def LAdicWeilSheaf (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :
     Type (u + 2) :=
-  (WeilSheaf.objectProperty k₀ l X).FullSubcategory
+  (LAdicWeilSheaf.objectProperty k₀ l X).FullSubcategory
 
 /-- The category of Weil complexes on a `k₀`-scheme `X`: objects `K` of the derived category
 of étale sheaves of `ℚ̄_ℓ`-modules on the geometric fiber `X̄` with bounded constructible
@@ -172,56 +173,56 @@ geometric Galois Frobenius of `X̄`.
 
 This is a scaffold and it differs from the blueprint (`sk-d-real-weil`) in two ways. Its
 homology sheaves are constructible `ℚ̄_ℓ`-sheaves, hence zero, so every Weil complex is zero
-(see `AlgebraicGeometry.WeilSheaf`). And the blueprint defines Weil complexes as the Verdier
+(see `AlgebraicGeometry.LAdicWeilSheaf`). And the blueprint defines Weil complexes as the Verdier
 localization of the homotopy category of complexes of Weil sheaves, while this category only
 records an isomorphism `Fr_X^* K ≅ K` in the derived category. Cones are not functorial in
 `D(X̄_ét)`, so this category is not triangulated, and its morphisms are not those of the
 blueprint category. Statements that need distinguished triangles of Weil complexes, such as
-`WeilComplex.derivedLowerShriek`, `fourierTransform` and the open–closed triangle,
+`LAdicWeilComplex.derivedLowerShriek`, `fourierTransform` and the open–closed triangle,
 cannot be stated on it faithfully. -/
-def WeilComplex (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
+def LAdicWeilComplex (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :
     Type (u + 2) :=
-  (WeilComplex.objectProperty k₀ l X).FullSubcategory
+  (LAdicWeilComplex.objectProperty k₀ l X).FullSubcategory
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))]
 
-noncomputable instance : Category (WeilSheaf k₀ l X) :=
-  inferInstanceAs (Category (WeilSheaf.objectProperty k₀ l X).FullSubcategory)
+noncomputable instance : Category (LAdicWeilSheaf k₀ l X) :=
+  inferInstanceAs (Category (LAdicWeilSheaf.objectProperty k₀ l X).FullSubcategory)
 
 /-- The closure of the Weil sheaf property under finite products. It is found by search, but
-within the search for `Abelian (WeilSheaf k₀ l X)` it exceeds the default
+within the search for `Abelian (LAdicWeilSheaf k₀ l X)` it exceeds the default
 `synthInstance.maxSize`, so it is recorded as an instance. -/
-instance : (WeilSheaf.objectProperty k₀ l X).IsClosedUnderFiniteProducts :=
+instance : (LAdicWeilSheaf.objectProperty k₀ l X).IsClosedUnderFiniteProducts :=
   inferInstance
 
-noncomputable instance : Abelian (WeilSheaf k₀ l X) :=
-  inferInstanceAs (Abelian (WeilSheaf.objectProperty k₀ l X).FullSubcategory)
+noncomputable instance : Abelian (LAdicWeilSheaf k₀ l X) :=
+  inferInstanceAs (Abelian (LAdicWeilSheaf.objectProperty k₀ l X).FullSubcategory)
 
-noncomputable instance : Category (WeilComplex k₀ l X) :=
-  inferInstanceAs (Category (WeilComplex.objectProperty k₀ l X).FullSubcategory)
+noncomputable instance : Category (LAdicWeilComplex k₀ l X) :=
+  inferInstanceAs (Category (LAdicWeilComplex.objectProperty k₀ l X).FullSubcategory)
 
-noncomputable instance : Preadditive (WeilComplex k₀ l X) :=
-  inferInstanceAs (Preadditive (WeilComplex.objectProperty k₀ l X).FullSubcategory)
+noncomputable instance : Preadditive (LAdicWeilComplex k₀ l X) :=
+  inferInstanceAs (Preadditive (LAdicWeilComplex.objectProperty k₀ l X).FullSubcategory)
 
-noncomputable instance : HasShift (WeilComplex k₀ l X) ℤ :=
-  inferInstanceAs (HasShift (WeilComplex.objectProperty k₀ l X).FullSubcategory ℤ)
+noncomputable instance : HasShift (LAdicWeilComplex k₀ l X) ℤ :=
+  inferInstanceAs (HasShift (LAdicWeilComplex.objectProperty k₀ l X).FullSubcategory ℤ)
 
-namespace WeilSheaf
+namespace LAdicWeilSheaf
 
 /-- A Weil sheaf, viewed as a Weil complex concentrated in degree zero. -/
-noncomputable def toComplex : WeilSheaf k₀ l X ⥤ WeilComplex k₀ l X :=
+noncomputable def toComplex : LAdicWeilSheaf k₀ l X ⥤ LAdicWeilComplex k₀ l X :=
   ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ IsoAlgebra.mapOfNatIso
-      ((WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategorySingleFunctor 0))
+      ((LAdicWeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategorySingleFunctor 0))
     fun F ↦
       have : Scheme.IsConstructibleSheaf F.obj.carrier := F.property
       Etale.DerivedCategory.boundedConstructible_singleFunctor_obj F.obj.carrier 0
 
 instance : (toComplex (k₀ := k₀) (l := l) (X := X)).Additive :=
-  IsoAlgebra.additive_lift_mapOfNatIso (P := WeilSheaf.objectProperty k₀ l X)
-    (Q := WeilComplex.objectProperty k₀ l X) _ _
+  IsoAlgebra.additive_lift_mapOfNatIso (P := LAdicWeilSheaf.objectProperty k₀ l X)
+    (Q := LAdicWeilComplex.objectProperty k₀ l X) _ _
 
 /-- The iterated Weil structure `φ_m : (Fr_Xᵐ)^* F ≅ F` of a Weil sheaf, the ordered composite
 
@@ -230,7 +231,7 @@ instance : (toComplex (k₀ := k₀) (l := l) (X := X)).Additive :=
 built from `Fr_X^{m+1} = Fr_X ≫ Fr_Xᵐ`, with `φ_0` the identification `𝟙^* F ≅ F`. At a
 geometric point fixed by `Fr_Xᵐ` up to reparametrisation it induces the Frobenius relative to
 `𝔽_{qᵐ}` on the stalk. -/
-noncomputable def frobeniusPowIso (F : WeilSheaf k₀ l X) (m : ℕ) :
+noncomputable def frobeniusPowIso (F : LAdicWeilSheaf k₀ l X) (m : ℕ) :
     (Etale.upperStar (WeilCoefficients.{u} l)
       ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom).obj F.obj.carrier ≅
         F.obj.carrier :=
@@ -245,12 +246,12 @@ noncomputable def frobeniusPowIso (F : WeilSheaf k₀ l X) (m : ℕ) :
 /-- A Weil sheaf is *lisse* if its underlying étale sheaf is locally constant; it is then
 finite locally constant, being constructible. The blueprint notion, lisse of finite rank for
 `E_X`-modules, awaits pro-étale coefficients. -/
-def IsLisse (F : WeilSheaf k₀ l X) : Prop :=
+def IsLisse (F : LAdicWeilSheaf k₀ l X) : Prop :=
   Scheme.IsLocallyConstantSheaf F.obj.carrier
 
 /-- A direct sum of lisse Weil sheaves is lisse: the underlying étale sheaf of `F ⊞ G` is the
 direct sum of those of `F` and `G`. -/
-theorem IsLisse.biprod {F G : WeilSheaf k₀ l X} (hF : F.IsLisse) (hG : G.IsLisse) :
+theorem IsLisse.biprod {F G : LAdicWeilSheaf k₀ l X} (hF : F.IsLisse) (hG : G.IsLisse) :
     (F ⊞ G).IsLisse := by
   let Φ := ObjectProperty.ι (objectProperty k₀ l X) ⋙ IsoAlgebra.forget (frobeniusPullback k₀ l X)
   have : Scheme.IsLocallyConstantSheaf (Φ.obj F) := hF
@@ -268,13 +269,13 @@ irreducible.
 This is weaker than simplicity in the category of all Weil sheaves: a nonzero lisse sheaf `M`
 on a curve `U₀` is never simple there, since for a closed point `x` the extension by zero of
 `M|_{U₀ ∖ x}` is a nonzero proper subsheaf. (blueprint: `rem-dl-a1-conventions`) -/
-def IsIrreducibleLisse (F : WeilSheaf k₀ l X) : Prop :=
+def IsIrreducibleLisse (F : LAdicWeilSheaf k₀ l X) : Prop :=
   F.IsLisse ∧ ¬ IsZero F ∧
-    ∀ (G : WeilSheaf k₀ l X) (i : G ⟶ F), Mono i → G.IsLisse → IsZero G ∨ IsIso i
+    ∀ (G : LAdicWeilSheaf k₀ l X) (i : G ⟶ F), Mono i → G.IsLisse → IsZero G ∨ IsIso i
 
 /-- A lisse Weil sheaf which is simple in the category of all Weil sheaves is irreducible
 lisse. -/
-theorem IsLisse.isIrreducibleLisse {F : WeilSheaf k₀ l X} (hF : F.IsLisse) [Simple F] :
+theorem IsLisse.isIrreducibleLisse {F : LAdicWeilSheaf k₀ l X} (hF : F.IsLisse) [Simple F] :
     F.IsIrreducibleLisse := by
   refine ⟨hF, Simple.not_isZero F, fun G i _ _ ↦ ?_⟩
   by_cases h : i = 0
@@ -285,25 +286,25 @@ theorem IsLisse.isIrreducibleLisse {F : WeilSheaf k₀ l X} (hF : F.IsLisse) [Si
 /-- A Weil sheaf `F` is *geometrically irreducible* if its underlying étale sheaf on the
 geometric fiber `X̄` is an irreducible local system: for `X̄` connected, the geometric fundamental
 representation `π₁(X̄) → GL(F_η̄)` is irreducible. -/
-def IsGeometricallyIrreducible (F : WeilSheaf k₀ l X) : Prop :=
+def IsGeometricallyIrreducible (F : LAdicWeilSheaf k₀ l X) : Prop :=
   Scheme.IsIrreducibleLocalSystem F.obj.carrier
 
-end WeilSheaf
+end LAdicWeilSheaf
 
-namespace WeilComplex
+namespace LAdicWeilComplex
 
 /-- The `a`-th cohomology sheaf `𝓗ᵃK` of a Weil complex, in cohomological indexing, with the
 Weil structure induced by that of `K`. -/
-noncomputable def homologySheaf (a : ℤ) : WeilComplex k₀ l X ⥤ WeilSheaf k₀ l X :=
+noncomputable def homologySheaf (a : ℤ) : LAdicWeilComplex k₀ l X ⥤ LAdicWeilSheaf k₀ l X :=
   ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ IsoAlgebra.mapOfNatIso
-      ((WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategoryHomologyFunctorIso a))
+      ((LAdicWeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategoryHomologyFunctorIso a))
     fun K ↦ K.property.2 a
 
 instance (a : ℤ) : (homologySheaf (k₀ := k₀) (l := l) (X := X) a).Additive :=
-  IsoAlgebra.additive_lift_mapOfNatIso (P := WeilComplex.objectProperty k₀ l X)
-    (Q := WeilSheaf.objectProperty k₀ l X) _ _
+  IsoAlgebra.additive_lift_mapOfNatIso (P := LAdicWeilComplex.objectProperty k₀ l X)
+    (Q := LAdicWeilSheaf.objectProperty k₀ l X) _ _
 
-end WeilComplex
+end LAdicWeilComplex
 
 section UpperStar
 
@@ -312,7 +313,7 @@ variable (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
 /-- The pullback `φ^*` of Weil sheaves along a morphism `φ : X ⟶ Y` of `k₀`-schemes: the
 pullback along the base change `φ̄ : X̄ ⟶ Ȳ`, with the Weil structure transported along
 `Etale.upperStarGeometricFiberMapCompFrobeniusIso`. -/
-noncomputable def WeilSheaf.upperStar : WeilSheaf k₀ l Y ⥤ WeilSheaf k₀ l X :=
+noncomputable def LAdicWeilSheaf.upperStar : LAdicWeilSheaf k₀ l Y ⥤ LAdicWeilSheaf k₀ l X :=
   ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ IsoAlgebra.mapOfNatIso
       (Etale.upperStarGeometricFiberMapCompFrobeniusIso _ φ (comp_over φ _)))
     fun F ↦
@@ -320,21 +321,21 @@ noncomputable def WeilSheaf.upperStar : WeilSheaf k₀ l Y ⥤ WeilSheaf k₀ l 
       Scheme.IsConstructibleSheaf.upperStar (Scheme.Hom.geometricFiberMap φ (comp_over φ _))
         F.obj.carrier
 
-instance : (WeilSheaf.upperStar (k₀ := k₀) (l := l) φ).Additive :=
-  IsoAlgebra.additive_lift_mapOfNatIso (P := WeilSheaf.objectProperty k₀ l Y)
-    (Q := WeilSheaf.objectProperty k₀ l X) _ _
+instance : (LAdicWeilSheaf.upperStar (k₀ := k₀) (l := l) φ).Additive :=
+  IsoAlgebra.additive_lift_mapOfNatIso (P := LAdicWeilSheaf.objectProperty k₀ l Y)
+    (Q := LAdicWeilSheaf.objectProperty k₀ l X) _ _
 
 /-- The pullback `φ^*` of Weil complexes along a morphism `φ : X ⟶ Y` of `k₀`-schemes: the
 derived pullback along the base change `φ̄ : X̄ ⟶ Ȳ`, with the Weil structure transported along
 `Etale.mapDerivedCategoryUpperStarGeometricFiberMapCompFrobeniusIso`. -/
-noncomputable def WeilComplex.upperStar : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X :=
+noncomputable def LAdicWeilComplex.upperStar : LAdicWeilComplex k₀ l Y ⥤ LAdicWeilComplex k₀ l X :=
   ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ IsoAlgebra.mapOfNatIso
       (Etale.mapDerivedCategoryUpperStarGeometricFiberMapCompFrobeniusIso _ φ (comp_over φ _)))
     fun K ↦ K.property.mapDerivedCategory_upperStar _
 
-instance : (WeilComplex.upperStar (k₀ := k₀) (l := l) φ).Additive :=
-  IsoAlgebra.additive_lift_mapOfNatIso (P := WeilComplex.objectProperty k₀ l Y)
-    (Q := WeilComplex.objectProperty k₀ l X) _ _
+instance : (LAdicWeilComplex.upperStar (k₀ := k₀) (l := l) φ).Additive :=
+  IsoAlgebra.additive_lift_mapOfNatIso (P := LAdicWeilComplex.objectProperty k₀ l Y)
+    (Q := LAdicWeilComplex.objectProperty k₀ l X) _ _
 
 end UpperStar
 

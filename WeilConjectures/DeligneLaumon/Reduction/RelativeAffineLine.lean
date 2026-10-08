@@ -45,8 +45,8 @@ the coordinates: `𝔸(PUnit; Y)` is the relative affine line — the same spell
   a rational point of `C` to infinity by an automorphism of `ℙ¹`, so that the ordinary middle
   extension of `F` to the new affine line is unramified at the new infinity and the affine-line
   estimate `hasWeightsAtMost_compactlySupportedCohomology_directImage` of
-  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen` applies; then compare `j₀!F` with `j₀*F` through
-  their finite-support quotient.
+  `AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen` applies; then compare `j₀!F` with `j₀*F`
+  through their finite-support quotient.
 - For `AlgebraicGeometry.isMixedOfWeightsAtMost_higherLowerShriek_of_affineLine`: the projection
   `h : U ⟶ Y` is smooth of relative dimension one with affine fibres
   (`AlgebraicGeometry.AffineSpace.isAffine_fiber_of_isOpenImmersion`), so the relative-curve step
@@ -54,7 +54,7 @@ the coordinates: `𝔸(PUnit; Y)` is the relative affine line — the same spell
   step follows Kiehl–Weissauer I.7: compact-support base change and the curve estimate give the
   punctual bound on every fibre; the direct images of the real envelope `F⁰ ⊕ (F⁰)^∨` have
   reduced local `L`-fractions with real numerator and denominator, so they are `ι`-real and
-  `AlgebraicGeometry.WeilSheaf.IsReal.isMixed` applies; the direct image of `F` is a twisted
+  `AlgebraicGeometry.LAdicWeilSheaf.IsReal.isMixed` applies; the direct image of `F` is a twisted
   direct summand, hence mixed, and the punctual bound cuts its weights down to `w + r`.
 
 ## Main statements
@@ -111,7 +111,7 @@ theorem hasWeightsAtMost_compactlySupportedCohomology_of_projectiveLine {C : Sch
     [Nonempty C] [C.Over (Spec (CommRingCat.of k₀))]
     (c : C ⟶ ℙ(ULift.{u} (Fin 2); Spec (CommRingCat.of k₀))) [IsOpenImmersion c]
     [c.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l C) (hF : F.IsLisse) (w : ℝ) (hpure : F.IsPunctuallyPureOfWeight ι w)
+    (F : LAdicWeilSheaf k₀ l C) (hF : F.IsLisse) (w : ℝ) (hpure : F.IsPunctuallyPureOfWeight ι w)
     (r : ℤ) :
     -- `C ↘ Spec k₀` is separated and locally of finite type, being `c` followed by `ℙ¹ ↘ Spec k₀`
     haveI : IsSeparated (C ↘ Spec (CommRingCat.of k₀)) := by rw [← comp_over c]; infer_instance
@@ -127,7 +127,7 @@ extension of `k₀`, this is the degree-two endpoint estimate, and purity descen
 finite constant extension (blueprint: `lem-zl-affine-curve-hc2-purity`). -/
 theorem isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine {C : Scheme.{u}}
     [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
-    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))] (E : WeilSheaf k₀ l C)
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))] (E : LAdicWeilSheaf k₀ l C)
     (hE : E.IsLisse) (hpure : E.IsPunctuallyPureOfWeight ι 0) :
     -- `C ↘ Spec k₀` is locally of finite type, being smooth
     haveI := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
@@ -139,8 +139,8 @@ theorem isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine {C : Sch
 for which there is a unit `b ∈ ℚ̄_ℓˣ` with `|ι b| = q ^ (-w' / 2)`: if `F` has a local
 Frobenius eigenvalue `α` at a closed point of degree `d`, then `|ι α| = q ^ (d w / 2)` and a
 `d`-th root of `α⁻¹` will do; otherwise `F` is pure of every weight, and `w' = 0`, `b = 1`. -/
-theorem WeilSheaf.IsPunctuallyPureOfWeight.exists_units_norm_eq {X : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X} {w : ℝ}
+theorem LAdicWeilSheaf.IsPunctuallyPureOfWeight.exists_units_norm_eq {X : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] {F : LAdicWeilSheaf k₀ l X} {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) :
     ∃ (w' : ℝ) (b : (PadicAlgCl l)ˣ), F.IsPunctuallyPureOfWeight ι w' ∧
       ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w' / 2) := by
@@ -188,14 +188,14 @@ morphism of relative dimension one with affine fibres, and let `F` be a lisse We
 punctually `ι`-pure of weight `w`. Then `Rⁱh₀!F` has weights at most `w + i`: by compactly
 supported base change its stalk at a closed point `y` is `H_c^i(U_ȳ, F)`, the restriction of
 `F` to the fibre is pure of weight `w` relative to `κ(y)`
-(`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.upperStar`), and the curve estimate
+(`AlgebraicGeometry.LAdicWeilSheaf.IsPunctuallyPureOfWeight.upperStar`), and the curve estimate
 applies to each geometric component of the affine fibre
 (blueprint: `lem-zl-relative-curve-punctual`). -/
 theorem hasWeightsAtMost_higherLowerShriek_of_isAffine_fiber
-    (hfib : ∀ y, IsAffine (h.fiber y)) (F : WeilSheaf k₀ l U) (hF : F.IsLisse) {w : ℝ}
+    (hfib : ∀ y, IsAffine (h.fiber y)) (F : LAdicWeilSheaf k₀ l U) (hF : F.IsLisse) {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) (i : ℕ) :
     haveI := SmoothOfRelativeDimension.smooth 1 h
-    ((WeilSheaf.higherLowerShriek k₀ l h i).obj F).HasWeightsAtMost ι (w + i) :=
+    ((LAdicWeilSheaf.higherLowerShriek k₀ l h i).obj F).HasWeightsAtMost ι (w + i) :=
   -- TODO(adic): needs compactly supported base change for Weil sheaves and the curve estimate
   -- over the residue fields of `Y`
   sorry
@@ -211,10 +211,10 @@ fraction is reduced (`Polynomial.isCoprime_of_norm_inv_roots`) and both factors 
 (`Polynomial.map_conj_eq_self_of_isCoprime`)
 (blueprint: `lem-zl-relative-envelope-factor-reality`). -/
 theorem isReal_higherLowerShriek_of_isAffine_fiber (hfib : ∀ y, IsAffine (h.fiber y))
-    (E : WeilSheaf k₀ l U) (hE : E.IsLisse) (hreal : E.IsReal ι)
+    (E : LAdicWeilSheaf k₀ l U) (hE : E.IsLisse) (hreal : E.IsReal ι)
     (hpure : E.IsPunctuallyPureOfWeight ι 0) (i : ℕ) :
     haveI := SmoothOfRelativeDimension.smooth 1 h
-    ((WeilSheaf.higherLowerShriek k₀ l h i).obj E).IsReal ι :=
+    ((LAdicWeilSheaf.higherLowerShriek k₀ l h i).obj E).IsReal ι :=
   -- TODO(adic): needs compactly supported base change and the trace formula on the fibres
   sorry
 
@@ -223,24 +223,24 @@ theorem isReal_higherLowerShriek_of_isAffine_fiber (hfib : ∀ y, IsAffine (h.fi
 Weil sheaf on `U`, punctually `ι`-pure of weight `w`. Then each `Rⁱh₀!F` is `ι`-mixed of
 weights at most some `v`. The direct images of the real envelope `E = F⁰ ⊕ (F⁰)^∨` of `F` are
 real (`AlgebraicGeometry.isReal_higherLowerShriek_of_isAffine_fiber`), hence mixed
-(`AlgebraicGeometry.WeilSheaf.IsReal.isMixed`); `Rⁱh₀!F⁰` is a direct summand of `Rⁱh₀!E`, and
+(`AlgebraicGeometry.LAdicWeilSheaf.IsReal.isMixed`); `Rⁱh₀!F⁰` is a direct summand of `Rⁱh₀!E`, and
 `Rⁱh₀!F` is its constant twist back by the projection formula
 (blueprint: `lem-zl-relative-curve-mixedness`). -/
 theorem exists_isMixedOfWeightsAtMost_higherLowerShriek_of_isAffine_fiber
-    (hfib : ∀ y, IsAffine (h.fiber y)) (F : WeilSheaf k₀ l U) (hF : F.IsLisse) {w : ℝ}
+    (hfib : ∀ y, IsAffine (h.fiber y)) (F : LAdicWeilSheaf k₀ l U) (hF : F.IsLisse) {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) (i : ℕ) :
     haveI := SmoothOfRelativeDimension.smooth 1 h
-    ∃ v : ℝ, ((WeilSheaf.higherLowerShriek k₀ l h i).obj F).IsMixedOfWeightsAtMost ι v := by
+    ∃ v : ℝ, ((LAdicWeilSheaf.higherLowerShriek k₀ l h i).obj F).IsMixedOfWeightsAtMost ι v := by
   have := SmoothOfRelativeDimension.smooth 1 h
   obtain ⟨w', b, hw', hb⟩ := hw.exists_units_norm_eq ι
-  let R := WeilSheaf.higherLowerShriek k₀ l h i
+  let R := LAdicWeilSheaf.higherLowerShriek k₀ l h i
   -- the direct images of the real envelope are real, hence mixed
   obtain ⟨v, hv⟩ := (isReal_higherLowerShriek_of_isAffine_fiber ι h hfib (F.realEnvelope b)
-    (hF.realEnvelope b) (WeilSheaf.isReal_realEnvelope hw' hb) (hw'.realEnvelope hb) i).isMixed
+    (hF.realEnvelope b) (LAdicWeilSheaf.isReal_realEnvelope hw' hb) (hw'.realEnvelope hb) i).isMixed
   -- `Rⁱh₀!(F ⊗ 𝓑_b)` is a direct summand of `Rⁱh₀!E`
   have h₀ : (R.obj (F.constantTwist b)).IsMixedOfWeightsAtMost ι v :=
     hv.of_mono (R.map (Limits.biprod.inl : F.constantTwist b ⟶ F.realEnvelope b))
-  obtain ⟨e⟩ := WeilSheaf.nonempty_higherLowerShriek_constantTwist_iso h F b i
+  obtain ⟨e⟩ := LAdicWeilSheaf.nonempty_higherLowerShriek_constantTwist_iso h F b i
   exact ⟨_, ((h₀.of_iso e).constantTwist (b := b⁻¹) rfl).of_iso
     ((R.obj F).constantTwistInvIso b)⟩
 
@@ -253,13 +253,13 @@ sheaf on `U`, punctually `ι`-pure of weight `w`. Then `Rⁱh₀!F` is `ι`-mixe
 local Frobenius eigenvalues have weights at most `w + i`
 (`AlgebraicGeometry.hasWeightsAtMost_higherLowerShriek_of_isAffine_fiber`), and the punctual
 bound cuts the mixed filtration down
-(`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost`)
+(`AlgebraicGeometry.LAdicWeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost`)
 (blueprint: `thm-zl-relative-affine-curve-core`). -/
 theorem isMixedOfWeightsAtMost_higherLowerShriek_of_isAffine_fiber
-    (hfib : ∀ y, IsAffine (h.fiber y)) (F : WeilSheaf k₀ l U) (hF : F.IsLisse) {w : ℝ}
+    (hfib : ∀ y, IsAffine (h.fiber y)) (F : LAdicWeilSheaf k₀ l U) (hF : F.IsLisse) {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) (i : ℕ) :
     haveI := SmoothOfRelativeDimension.smooth 1 h
-    ((WeilSheaf.higherLowerShriek k₀ l h i).obj F).IsMixedOfWeightsAtMost ι (w + i) := by
+    ((LAdicWeilSheaf.higherLowerShriek k₀ l h i).obj F).IsMixedOfWeightsAtMost ι (w + i) := by
   have := SmoothOfRelativeDimension.smooth 1 h
   obtain ⟨v, hv⟩ :=
     exists_isMixedOfWeightsAtMost_higherLowerShriek_of_isAffine_fiber ι h hfib F hF hw i
@@ -288,9 +288,9 @@ theorem isMixedOfWeightsAtMost_higherLowerShriek_of_affineLine {U Y : Scheme.{u}
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (u : U ⟶ 𝔸(PUnit.{u + 1}; Y))
     [IsOpenImmersion u] [QuasiCompact u] [u.IsOver (Spec (CommRingCat.of k₀))]
-    (hu : Surjective (u ≫ 𝔸(PUnit.{u + 1}; Y) ↘ Y)) (F : WeilSheaf k₀ l U) (hF : F.IsLisse)
+    (hu : Surjective (u ≫ 𝔸(PUnit.{u + 1}; Y) ↘ Y)) (F : LAdicWeilSheaf k₀ l U) (hF : F.IsLisse)
     (w : ℝ) (hpure : F.IsPunctuallyPureOfWeight ι w) (r : ℕ) :
-    ((WeilSheaf.higherLowerShriek k₀ l (u ≫ 𝔸(PUnit.{u + 1}; Y) ↘ Y) r).obj
+    ((LAdicWeilSheaf.higherLowerShriek k₀ l (u ≫ 𝔸(PUnit.{u + 1}; Y) ↘ Y) r).obj
       F).IsMixedOfWeightsAtMost ι (w + r) := by
   -- `h = u ≫ 𝔸¹_Y ↘ Y` is smooth of relative dimension `0 + 1` with affine fibres
   have : SmoothOfRelativeDimension 1 (u ≫ 𝔸(PUnit.{u + 1}; Y) ↘ Y) := by

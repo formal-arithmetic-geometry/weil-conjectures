@@ -26,14 +26,14 @@ gluing by the long exact sequences of the open–closed triangles.
 
 ## Main definitions
 
-- `AlgebraicGeometry.WeilSheaf.HasRelativeLineStratification`: a stratification of a Weil sheaf
+- `AlgebraicGeometry.LAdicWeilSheaf.HasRelativeLineStratification`: a stratification of a Weil sheaf
   over `S` into quasi-finite pieces and pure lisse relative-line pieces, glued along open–closed
   decompositions.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.hasRelativeLineStratification`: blueprint
-  `thm-zl-relative-line-stratification`.
+- `AlgebraicGeometry.LAdicWeilSheaf.IsPunctuallyPureOfWeight.hasRelativeLineStratification`:
+  blueprint `thm-zl-relative-line-stratification`.
 - `AlgebraicGeometry.hasDirectImageWeightBound_affineLine` and
   `AlgebraicGeometry.hasDirectImageComplexWeightBound_affineLine`: blueprint
   `thm-zl-relative-line-step`, in its sheaf and its complex form.
@@ -75,15 +75,15 @@ X --- v ---> 𝔸¹_V --- ↘ ---> V --- c ---> S
 
 (blueprint: `thm-zl-relative-line-stratification`, the finite stratifications of source and target
 refined to open–closed filtrations). -/
-inductive WeilSheaf.HasRelativeLineStratification :
+inductive LAdicWeilSheaf.HasRelativeLineStratification :
     ∀ {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] (h : X ⟶ S)
-      [h.IsOver (Spec (CommRingCat.of k₀))], WeilSheaf k₀ l X → Prop
+      [h.IsOver (Spec (CommRingCat.of k₀))], LAdicWeilSheaf k₀ l X → Prop
   /-- A separated quasi-finite piece. -/
   | quasiFinite {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] (h : X ⟶ S)
       [h.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated h] [LocallyQuasiFinite h]
-      [LocallyOfFiniteType h] [QuasiCompact h] (F : WeilSheaf k₀ l X)
+      [LocallyOfFiniteType h] [QuasiCompact h] (F : LAdicWeilSheaf k₀ l X)
       (hF : F.IsMixedOfWeightsAtMost ι w) :
-      WeilSheaf.HasRelativeLineStratification h F
+      LAdicWeilSheaf.HasRelativeLineStratification h F
   /-- A piece open in a relative affine line, carrying a lisse sheaf punctually pure of
   weight `w`. -/
   | affineLine {X V : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -94,18 +94,18 @@ inductive WeilSheaf.HasRelativeLineStratification :
       (hv : Surjective (v ≫ 𝔸(PUnit.{u + 1}; V) ↘ V)) (c : V ⟶ S) [IsImmersion c]
       [QuasiCompact c] [c.IsOver (Spec (CommRingCat.of k₀))] (h : X ⟶ S)
       [h.IsOver (Spec (CommRingCat.of k₀))] (hh : h = (v ≫ 𝔸(PUnit.{u + 1}; V) ↘ V) ≫ c)
-      (F : WeilSheaf k₀ l X) (hF : F.IsLisse) (hpure : F.IsPunctuallyPureOfWeight ι w) :
-      WeilSheaf.HasRelativeLineStratification h F
+      (F : LAdicWeilSheaf k₀ l X) (hF : F.IsLisse) (hpure : F.IsPunctuallyPureOfWeight ι w) :
+      LAdicWeilSheaf.HasRelativeLineStratification h F
   /-- Gluing along an open immersion `j` and its closed complement `i`. -/
   | openClosed {U X Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
       [X.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ X)
       [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] (i : Z ⟶ X)
       [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
       (hij : IsCompl (Set.range j.base) (Set.range i.base)) (h : X ⟶ S)
-      [h.IsOver (Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X) :
-      WeilSheaf.HasRelativeLineStratification (j ≫ h) ((WeilSheaf.upperStar j).obj F) →
-      WeilSheaf.HasRelativeLineStratification (i ≫ h) ((WeilSheaf.upperStar i).obj F) →
-      WeilSheaf.HasRelativeLineStratification h F
+      [h.IsOver (Spec (CommRingCat.of k₀))] (F : LAdicWeilSheaf k₀ l X) :
+      LAdicWeilSheaf.HasRelativeLineStratification (j ≫ h) ((LAdicWeilSheaf.upperStar j).obj F) →
+      LAdicWeilSheaf.HasRelativeLineStratification (i ≫ h) ((LAdicWeilSheaf.upperStar i).obj F) →
+      LAdicWeilSheaf.HasRelativeLineStratification h F
 
 variable [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (S ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (S ↘ Spec (CommRingCat.of k₀))]
@@ -117,25 +117,25 @@ variable {ι w} in
 composed with the quasi-finite immersion `c`, and through the gluing by the exact sequences of
 the open–closed triangles (blueprint: `thm-zl-relative-line-step`, the reassembly of the
 strata). -/
-theorem WeilSheaf.HasRelativeLineStratification.isMixedOfWeightsAtMost
+theorem LAdicWeilSheaf.HasRelativeLineStratification.isMixedOfWeightsAtMost
     {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] {h : X ⟶ S}
-    [h.IsOver (Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X}
+    [h.IsOver (Spec (CommRingCat.of k₀))] {F : LAdicWeilSheaf k₀ l X}
     (H : F.HasRelativeLineStratification ι w h) :
     ∀ [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (r : ℕ),
-      ((WeilSheaf.higherLowerShriek k₀ l h r).obj F).IsMixedOfWeightsAtMost ι (w + r) := by
+      ((LAdicWeilSheaf.higherLowerShriek k₀ l h r).obj F).IsMixedOfWeightsAtMost ι (w + r) := by
   induction H with
   | quasiFinite h F hF =>
     exact fun r ↦ HasDirectImageWeightBound.of_locallyQuasiFinite h w F hF r
   | affineLine v hv c h hh F hF hpure =>
     subst hh
-    exact fun r ↦ WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_comp
+    exact fun r ↦ LAdicWeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_comp
       (isMixedOfWeightsAtMost_higherLowerShriek_of_affineLine ι v hv F hF w hpure)
       (.of_locallyQuasiFinite c) r
   | openClosed j i hij h F _ _ ihU ihZ =>
     intro _ _ _ r
     obtain ⟨S', hS', ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ :=
-      WeilSheaf.exists_exact_higherLowerShriek_of_openClosed (f := h) hij F r
-    exact (WeilSheaf.IsMixedOfWeightsAtMost.of_exact hS' ((ihU r).of_iso e₁.symm)
+      LAdicWeilSheaf.exists_exact_higherLowerShriek_of_openClosed (f := h) hij F r
+    exact (LAdicWeilSheaf.IsMixedOfWeightsAtMost.of_exact hS' ((ihU r).of_iso e₁.symm)
       ((ihZ r).of_iso e₃.symm)).of_iso e₂
 
 end Stratification
@@ -156,8 +156,8 @@ Over an integral affine open `Spec B` of `S`, the complement of the lissity locu
 out by an ideal of `B[T]` containing a nonzero polynomial; over the principal open of its leading
 coefficient it is finite, and its complement is open in the relative affine line with nonempty
 fibres. Noetherian induction on `S` covers the rest. -/
-theorem WeilSheaf.IsPunctuallyPureOfWeight.hasRelativeLineStratification {w : ℝ}
-    {F : WeilSheaf k₀ l 𝔸(PUnit.{u + 1}; S)} (hF : F.IsPunctuallyPureOfWeight ι w) :
+theorem LAdicWeilSheaf.IsPunctuallyPureOfWeight.hasRelativeLineStratification {w : ℝ}
+    {F : LAdicWeilSheaf k₀ l 𝔸(PUnit.{u + 1}; S)} (hF : F.IsPunctuallyPureOfWeight ι w) :
     F.HasRelativeLineStratification ι w (𝔸(PUnit.{u + 1}; S) ↘ S) :=
   sorry
 
@@ -169,29 +169,29 @@ form).
 
 The weight filtration of `F` and the long exact sequences of `Rp₀!` reduce to a punctually pure
 graded piece, which has a relative-line stratification
-(`WeilSheaf.IsPunctuallyPureOfWeight.hasRelativeLineStratification`). -/
+(`LAdicWeilSheaf.IsPunctuallyPureOfWeight.hasRelativeLineStratification`). -/
 theorem hasDirectImageWeightBound_affineLine :
     HasDirectImageWeightBound k₀ ι (𝔸(PUnit.{u + 1}; S) ↘ S) := by
   intro w F hF r
   obtain ⟨n, G, φ, h0, hlast, hmono, hpure⟩ := hF
   -- Induction along the filtration, whose successive quotients are punctually pure.
   have key : ∀ (i : ℕ) (hi : i < n + 1) (r : ℕ),
-      ((WeilSheaf.higherLowerShriek k₀ l (𝔸(PUnit.{u + 1}; S) ↘ S) r).obj
+      ((LAdicWeilSheaf.higherLowerShriek k₀ l (𝔸(PUnit.{u + 1}; S) ↘ S) r).obj
         (G ⟨i, hi⟩)).IsMixedOfWeightsAtMost ι (w + r) := by
     intro i
     induction i with
     | zero =>
-      exact fun _ r ↦ WeilSheaf.isMixedOfWeightsAtMost_of_isZero (Functor.map_isZero _ h0) _
+      exact fun _ r ↦ LAdicWeilSheaf.isMixedOfWeightsAtMost_of_isZero (Functor.map_isZero _ h0) _
     | succ i ih =>
       intro hi
       have := hmono ⟨i, by omega⟩
       obtain ⟨v, hv, hvpure⟩ := hpure ⟨i, by omega⟩
-      exact WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_of_shortExact _
+      exact LAdicWeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_of_shortExact _
         (.mk' (ShortComplex.cokernelSequence_exact (φ ⟨i, by omega⟩)) this inferInstance)
         (ih (by omega)) fun r ↦
           (hvpure.hasRelativeLineStratification.isMixedOfWeightsAtMost r).mono_weight
             (by linarith)
-  exact (key n (by omega) r).of_iso ((WeilSheaf.higherLowerShriek k₀ l _ r).mapIso hlast.some)
+  exact (key n (by omega) r).of_iso ((LAdicWeilSheaf.higherLowerShriek k₀ l _ r).mapIso hlast.some)
 
 variable (S) in
 /-- For the projection `p : 𝔸¹_S ⟶ S` of the relative affine line over a separated `k₀`-scheme

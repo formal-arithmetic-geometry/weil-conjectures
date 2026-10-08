@@ -18,15 +18,16 @@ The projection onto the first summand exhibits `F` as `ι`-realizable.
 
 The eigenvalue computation is
 `FrobeniusModule.IsPureOfWeight.isReal_prod_rescale_dual`; the stalks of a direct sum, of a dual
-and of a constant twist are described by `AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_biprod`,
-`AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_dual` and
-`AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_constantTwist`.
+and of a constant twist are described by
+`AlgebraicGeometry.LAdicWeilSheaf.nonempty_equiv_stalk_biprod`,
+`AlgebraicGeometry.LAdicWeilSheaf.nonempty_equiv_stalk_dual` and
+`AlgebraicGeometry.LAdicWeilSheaf.nonempty_equiv_stalk_constantTwist`.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.isReal_biprod_constantTwist_dual`: the
+- `AlgebraicGeometry.LAdicWeilSheaf.IsPunctuallyPureOfWeight.isReal_biprod_constantTwist_dual`: the
   sum `F ⊕ (F^∨ ⊗ 𝓑_c)` is `ι`-real.
-- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.isRealizable`: `F` is `ι`-realizable.
+- `AlgebraicGeometry.LAdicWeilSheaf.IsPunctuallyPureOfWeight.isRealizable`: `F` is `ι`-realizable.
 -/
 
 @[expose] public section
@@ -35,7 +36,7 @@ universe u
 
 open CategoryTheory Limits
 
-namespace AlgebraicGeometry.WeilSheaf
+namespace AlgebraicGeometry.LAdicWeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -43,7 +44,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 /-- At a closed point `x` of degree `m`, the local polynomial of `F ⊕ (F^∨ ⊗ 𝓑_c)` is that of
 `F_x̄ ⊕ (F_x̄)^∨(cᵐ)`, the sum of the stalk and of its dual with the Frobenius rescaled by
 `cᵐ`. -/
-theorem localPolynomial_stalk_biprod_constantTwist_dual {F : WeilSheaf k₀ l X}
+theorem localPolynomial_stalk_biprod_constantTwist_dual {F : LAdicWeilSheaf k₀ l X}
     (hF : F.IsLisse) (c : (PadicAlgCl l)ˣ) (x : X.finitePoints) :
     ((F ⊞ F.dual.constantTwist c).stalk x).localPolynomial =
       ((F.stalk x).prod ((F.stalk x).dual.rescale
@@ -60,7 +61,7 @@ weight `w`, and `ι c = q ^ w`, then `F ⊕ (F^∨ ⊗ 𝓑_c)` is `ι`-real: at
 `ι (cᵐ) = q_x ^ w`, so `FrobeniusModule.IsPureOfWeight.isReal_prod_rescale_dual` applies.
 (blueprint: `lem-wf-pure-realizable`) -/
 theorem IsPunctuallyPureOfWeight.isReal_biprod_constantTwist_dual {ι : PadicAlgCl l →+* ℂ}
-    {F : WeilSheaf k₀ l X} (hF : F.IsLisse) {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w)
+    {F : LAdicWeilSheaf k₀ l X} (hF : F.IsLisse) {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w)
     {c : (PadicAlgCl l)ˣ} (hc : ι c = (((Nat.card k₀ : ℝ) ^ w : ℝ) : ℂ)) :
     (F ⊞ F.dual.constantTwist c).IsReal ι := by
   intro x
@@ -76,11 +77,11 @@ theorem IsPunctuallyPureOfWeight.isReal_biprod_constantTwist_dual {ι : PadicAlg
 /-- **A pure lisse sheaf is realizable.** A lisse Weil sheaf `F` which is punctually `ι`-pure of
 weight `w` is a direct summand of the `ι`-real lisse sheaf `F ⊕ (F^∨ ⊗ 𝓑_c)`, for any `c` with
 `ι c = q ^ w`. (blueprint: `lem-wf-pure-realizable`) -/
-theorem IsPunctuallyPureOfWeight.isRealizable {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
+theorem IsPunctuallyPureOfWeight.isRealizable {ι : PadicAlgCl l →+* ℂ} {F : LAdicWeilSheaf k₀ l X}
     (hF : F.IsLisse) {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {c : (PadicAlgCl l)ˣ}
     (hc : ι c = (((Nat.card k₀ : ℝ) ^ w : ℝ) : ℂ)) :
     F.IsRealizable ι :=
   ⟨_, biprod.inl, biprod.fst, hF.biprod (isLisse_constantTwist.2 hF.dual),
     h.isReal_biprod_constantTwist_dual hF hc, biprod.inl_fst⟩
 
-end AlgebraicGeometry.WeilSheaf
+end AlgebraicGeometry.LAdicWeilSheaf

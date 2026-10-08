@@ -34,10 +34,10 @@ along the structure morphism `X ⟶ Spec k₀`.
 
 ## Main declarations
 
-- `AlgebraicGeometry.WeilComplex.rightDerivedLowerShriekFrobeniusIso`:
+- `AlgebraicGeometry.LAdicWeilComplex.rightDerivedLowerShriekFrobeniusIso`:
   `Rf̄_! ⋙ D(Fr_Y^*) ≅ D(Fr_X^*) ⋙ Rf̄_!`.
-- `AlgebraicGeometry.WeilSheaf.higherLowerShriek` and
-  `AlgebraicGeometry.WeilComplex.derivedLowerShriek`: the higher direct images with compact
+- `AlgebraicGeometry.LAdicWeilSheaf.higherLowerShriek` and
+  `AlgebraicGeometry.LAdicWeilComplex.derivedLowerShriek`: the higher direct images with compact
   support `Rʳf₀!` and the total derived one `Rf₀!`.
 -/
 
@@ -69,13 +69,13 @@ D(Fr_X^*)       D(Fr_Y^*)
 D(X̄) --Rf̄_!--> D(Ȳ)
 ```
 -/
-noncomputable def WeilComplex.rightDerivedLowerShriekFrobeniusIso (f : X ⟶ Y)
+noncomputable def LAdicWeilComplex.rightDerivedLowerShriekFrobeniusIso (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
     [QuasiCompact f] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
     R(Scheme.Hom.geometricFiberMap f (comp_over f _))_![WeilCoefficients.{u} l] ⋙
-        WeilComplex.frobeniusPullback k₀ l Y ≅
-      WeilComplex.frobeniusPullback k₀ l X ⋙
+        LAdicWeilComplex.frobeniusPullback k₀ l Y ≅
+      LAdicWeilComplex.frobeniusPullback k₀ l X ⋙
         R(Scheme.Hom.geometricFiberMap f (comp_over f _))_![WeilCoefficients.{u} l] :=
   -- the independence isomorphism `Rf̄_!(c) ≅ Rf̄_!(c')` for the transported compactification
   -- `c' = (X̄ ⟶[Fr_X⁻¹ ≫ i] Z ⟶[g ≫ Fr_Y] Ȳ)`, followed by the transport isomorphism
@@ -92,15 +92,15 @@ variable (k₀ l) in
 morphism `f : X ⟶ Y` locally of finite type of `k₀`-schemes, with `Y` of finite type and
 quasi-separated over `k₀`: the derived lower shriek `Rf̄_!` along the base change
 `f̄ : X̄ ⟶ Ȳ`, with the Weil structure transported along
-`WeilComplex.rightDerivedLowerShriekFrobeniusIso`. -/
-noncomputable def WeilComplex.derivedLowerShriek (f : X ⟶ Y)
+`LAdicWeilComplex.rightDerivedLowerShriekFrobeniusIso`. -/
+noncomputable def LAdicWeilComplex.derivedLowerShriek (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
     [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
-    WeilComplex k₀ l X ⥤ WeilComplex k₀ l Y :=
+    LAdicWeilComplex k₀ l X ⥤ LAdicWeilComplex k₀ l Y :=
   ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ IsoAlgebra.mapOfNatIso
-      (WeilComplex.rightDerivedLowerShriekFrobeniusIso k₀ l f))
+      (LAdicWeilComplex.rightDerivedLowerShriekFrobeniusIso k₀ l f))
     fun K ↦
       have : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by
         rw [← comp_over f]
@@ -115,13 +115,14 @@ variable (k₀ l) in
 morphism locally of finite type of `k₀`-schemes, with target of finite type and
 quasi-separated over `k₀`: the `r`-th cohomology sheaf of `Rf₀!`, in cohomological
 indexing. -/
-noncomputable def WeilSheaf.higherLowerShriek (f : X ⟶ Y)
+noncomputable def LAdicWeilSheaf.higherLowerShriek (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
     [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (r : ℕ) :
-    WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l Y :=
-  WeilSheaf.toComplex ⋙ WeilComplex.derivedLowerShriek k₀ l f ⋙ WeilComplex.homologySheaf r
+    LAdicWeilSheaf k₀ l X ⥤ LAdicWeilSheaf k₀ l Y :=
+  LAdicWeilSheaf.toComplex ⋙ LAdicWeilComplex.derivedLowerShriek k₀ l f ⋙
+    LAdicWeilComplex.homologySheaf r
 
 -- TODO(unify): sk-thm-sf-package
 instance (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f]
@@ -129,9 +130,9 @@ instance (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
-    (WeilComplex.derivedLowerShriek k₀ l f).Additive :=
-  IsoAlgebra.additive_lift_mapOfNatIso (P := WeilComplex.objectProperty k₀ l X)
-    (Q := WeilComplex.objectProperty k₀ l Y) _ _
+    (LAdicWeilComplex.derivedLowerShriek k₀ l f).Additive :=
+  IsoAlgebra.additive_lift_mapOfNatIso (P := LAdicWeilComplex.objectProperty k₀ l X)
+    (Q := LAdicWeilComplex.objectProperty k₀ l Y) _ _
 
 -- TODO(unify): sk-thm-sf-package
 instance (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f]
@@ -139,9 +140,9 @@ instance (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (r : ℕ) :
-    (WeilSheaf.higherLowerShriek k₀ l f r).Additive :=
-  inferInstanceAs (WeilSheaf.toComplex ⋙ WeilComplex.derivedLowerShriek k₀ l f ⋙
-    WeilComplex.homologySheaf r).Additive
+    (LAdicWeilSheaf.higherLowerShriek k₀ l f r).Additive :=
+  inferInstanceAs (LAdicWeilSheaf.toComplex ⋙ LAdicWeilComplex.derivedLowerShriek k₀ l f ⋙
+    LAdicWeilComplex.homologySheaf r).Additive
 
 end LowerShriek
 

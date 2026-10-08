@@ -34,7 +34,7 @@ whenever the bounded constructible Weil complex `K` is.
   affine-line projection is handled by the relative affine-line step
   `AlgebraicGeometry.hasDirectImageWeightBound_affineLine`; the composition lemma assembles them.
   Composing with immersions of the target avoids any stratification of the target.
-- For `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek`: the finite
+- For `AlgebraicGeometry.LAdicWeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek`: the finite
   hypercohomology spectral sequence `Rᵃf₀!𝓗ᵇ(K) ⇒ 𝓗ᵃ⁺ᵇ(Rf₀!K)`, whose left-hand term is mixed of
   weights at most `w + a + b` by the theorem above
   (`AlgebraicGeometry.HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek`).
@@ -45,7 +45,7 @@ whenever the bounded constructible Weil complex `K` is.
   `sk-thm-dl-general-sheaf` and `cor-zl-rfshriek-sheaf`.
 - `AlgebraicGeometry.exists_hasDirectImageWeightBound_opensι_comp`: the generic step of its
   Noetherian induction.
-- `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek`: blueprint
+- `AlgebraicGeometry.LAdicWeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek`: blueprint
   `sk-cor-dl-general-complex`.
 
 ## References
@@ -323,13 +323,13 @@ theorem hasDirectImageWeightBound_over_finiteField (ι : PadicAlgCl l →+* ℂ)
 /-- If `K` is a bounded constructible Weil complex on `X` mixed of weights at most `w`, then
 `Rf₀!K` is mixed of weights at most `w` (blueprint: `sk-cor-dl-general-complex`,
 `thm-zl-wme-deligne-estimate`). -/
-theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
-    {K : WeilComplex k₀ l X} (hK : K.IsMixedOfWeightsAtMost ι w) (f : X ⟶ Y)
+theorem LAdicWeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
+    {K : LAdicWeilComplex k₀ l X} (hK : K.IsMixedOfWeightsAtMost ι w) (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] :
-    ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w :=
+    ((LAdicWeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w :=
   (hasDirectImageWeightBound_over_finiteField ι f).isMixedOfWeightsAtMost_derivedLowerShriek hK
 
 end AlgebraicGeometry

@@ -37,7 +37,7 @@ semisimplicity theorem for pure sheaves is used.
 
 ## Main statements
 
-In the namespace `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen`:
+In the namespace `AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen`:
 
 - `hasWeightsAtMost_compactlySupportedCohomology_directImage`: the affine-line estimate.
 - `subsingleton_compactlySupportedCohomology_directImage_zero` and
@@ -53,7 +53,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-namespace WeilSheaf.LisseOnDenseOpen
+namespace LAdicWeilSheaf.LisseOnDenseOpen
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
@@ -81,6 +81,6 @@ theorem isPureOfWeightOver_compactlySupportedCohomology_directImage_two
     (D.directImage.compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι (w + 2) := by
   sorry
 
-end WeilSheaf.LisseOnDenseOpen
+end LAdicWeilSheaf.LisseOnDenseOpen
 
 end AlgebraicGeometry

@@ -25,16 +25,16 @@ at the boundary points together with the weight zero of the Artin–Schreier ker
 at most `w`.
 
 The datum of that sequence together with the two comparison isomorphisms is bundled as
-`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection`, so that the correction sheaf
+`AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.FourierCorrection`, so that the correction sheaf
 `B'` and its rank can be named in the weight estimate of
 `WeilConjectures.DeligneLaumon.AffineLine.FourierWeight`.
 
 ## Main declarations
 
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection`: the exact sequence and the
+- `AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.FourierCorrection`: the exact sequence and the
   two comparison isomorphisms.
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_fourierCorrection`: it exists.
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.isLisse` and
+- `AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.nonempty_fourierCorrection`: it exists.
+- `AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.FourierCorrection.isLisse` and
   `…FourierCorrection.hasWeightsAtMost`: the correction sheaf is lisse of weights at most `w`.
 -/
 
@@ -46,7 +46,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-namespace WeilSheaf.LisseOnDenseOpen
+namespace LAdicWeilSheaf.LisseOnDenseOpen
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable (ψ : AddChar k₀ (PadicAlgCl l))
@@ -66,17 +66,17 @@ is the boundary sheaf of `D`.
 -/
 structure FourierCorrection (D D' : LisseOnDenseOpen k₀ l) where
   /-- The short exact sequence `0 → B' → G → j'_*M' → 0` on the dual line. -/
-  seq : ShortComplex (WeilSheaf k₀ l (affineLine k₀))
+  seq : ShortComplex (LAdicWeilSheaf k₀ l (affineLine k₀))
   /-- The sequence is short exact. -/
   shortExact : seq.ShortExact
   /-- Its third term is the middle extension of the Fourier partner. -/
   isoDirectImage : seq.X₃ ≅ D'.directImage
   /-- The transform of the shifted zero extension is the shifted middle term. -/
   isoExtensionByZero : (fourierTransform ψ).obj D.shiftedExtensionByZero ≅
-    (WeilSheaf.toComplex.obj seq.X₂)⟦(1 : ℤ)⟧
+    (LAdicWeilSheaf.toComplex.obj seq.X₂)⟦(1 : ℤ)⟧
   /-- The transform of the boundary sheaf is the shifted first term. -/
-  isoBoundary : (fourierTransform ψ).obj (WeilSheaf.toComplex.obj D.boundarySheaf) ≅
-    (WeilSheaf.toComplex.obj seq.X₁)⟦(1 : ℤ)⟧
+  isoBoundary : (fourierTransform ψ).obj (LAdicWeilSheaf.toComplex.obj D.boundarySheaf) ≅
+    (LAdicWeilSheaf.toComplex.obj seq.X₁)⟦(1 : ℤ)⟧
 
 -- with the present coefficients every Weil sheaf is zero, and the proof needs no hypothesis
 set_option linter.unusedVariables false in
@@ -87,22 +87,22 @@ theorem nonempty_fourierCorrection (hψ : ψ ≠ 1) (D D' : LisseOnDenseOpen k�
     Nonempty (FourierCorrection ψ D D') := by
   -- Step 5 of the blueprint: `G = 𝓗⁻¹ FT_ψ(j_!M[1])` and `B' = 𝓗⁻¹ FT_ψ(B)`. The maps of the
   -- sequence come from the rotated triangle `B'[1] → FT_ψ(j_!M[1]) → (j'_*M')[1] →`, which
-  -- cannot be formed since `WeilComplex` is not triangulated. With the present coefficients
-  -- every Weil sheaf and Weil complex is zero (`AlgebraicGeometry.WeilSheaf.isZero`,
-  -- `AlgebraicGeometry.WeilComplex.isZero`), so the zero maps are the only maps, the sequence
+  -- cannot be formed since `LAdicWeilComplex` is not triangulated. With the present coefficients
+  -- every Weil sheaf and Weil complex is zero (`AlgebraicGeometry.LAdicWeilSheaf.isZero`,
+  -- `AlgebraicGeometry.LAdicWeilComplex.isZero`), so the zero maps are the only maps, the sequence
   -- is short exact and the comparison isomorphisms are those between zero objects.
-  let G := (WeilComplex.homologySheaf (-1)).obj
+  let G := (LAdicWeilComplex.homologySheaf (-1)).obj
     ((fourierTransform ψ).obj D.shiftedExtensionByZero)
-  let B' := (WeilComplex.homologySheaf (-1)).obj
-    ((fourierTransform ψ).obj (WeilSheaf.toComplex.obj D.boundarySheaf))
-  have := (WeilSheaf.isZero B').mono (0 : B' ⟶ G)
-  have := (WeilSheaf.isZero D'.directImage).epi (0 : G ⟶ D'.directImage)
+  let B' := (LAdicWeilComplex.homologySheaf (-1)).obj
+    ((fourierTransform ψ).obj (LAdicWeilSheaf.toComplex.obj D.boundarySheaf))
+  have := (LAdicWeilSheaf.isZero B').mono (0 : B' ⟶ G)
+  have := (LAdicWeilSheaf.isZero D'.directImage).epi (0 : G ⟶ D'.directImage)
   exact ⟨{
     seq := ShortComplex.mk (0 : B' ⟶ G) (0 : G ⟶ D'.directImage) Limits.zero_comp
-    shortExact := { exact := ShortComplex.exact_of_isZero_X₂ _ (WeilSheaf.isZero G) }
+    shortExact := { exact := ShortComplex.exact_of_isZero_X₂ _ (LAdicWeilSheaf.isZero G) }
     isoDirectImage := Iso.refl _
-    isoExtensionByZero := (WeilComplex.isZero _).iso (WeilComplex.isZero _)
-    isoBoundary := (WeilComplex.isZero _).iso (WeilComplex.isZero _) }⟩
+    isoExtensionByZero := (LAdicWeilComplex.isZero _).iso (LAdicWeilComplex.isZero _)
+    isoBoundary := (LAdicWeilComplex.isZero _).iso (LAdicWeilComplex.isZero _) }⟩
 
 /-- The correction sheaf `B'` is lisse on the entire dual line: it is a sum of Artin–Schreier
 kernels. (blueprint: `sk-p-dl-a1-correction`) -/
@@ -110,7 +110,7 @@ theorem FourierCorrection.isLisse {D D' : LisseOnDenseOpen k₀ l}
     (c : FourierCorrection ψ D D') : c.seq.X₁.IsLisse :=
   -- Step 3 of the blueprint: `B'` is a sum of finite direct images of Artin–Schreier twists
   -- along the finite étale maps `A'_s → A'`. With the present coefficients `B'` is zero
-  -- (`AlgebraicGeometry.WeilSheaf.isZero_carrier`), hence locally constant.
+  -- (`AlgebraicGeometry.LAdicWeilSheaf.isZero_carrier`), hence locally constant.
   Scheme.IsLocallyConstantSheaf.of_isZero c.seq.X₁.isZero_carrier
 
 -- with the present coefficients the stalks vanish, and the proof needs no hypothesis
@@ -123,14 +123,14 @@ theorem FourierCorrection.hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ)
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) : c.seq.X₁.HasWeightsAtMost ι w := by
   -- Step 4 of the blueprint bounds the eigenvalues of `F_y` on `B'_ȳ` through the boundary
   -- semicontinuity and the weight zero of the Artin–Schreier sheaves. With the present
-  -- coefficients the stalks of `B'` are zero (`AlgebraicGeometry.WeilSheaf.isZero_stalkObj`),
+  -- coefficients the stalks of `B'` are zero (`AlgebraicGeometry.LAdicWeilSheaf.isZero_stalkObj`),
   -- so `F_y` has no eigenvalue.
   intro x α hα
   have : Subsingleton (c.seq.X₁.stalk x).carrier :=
-    WeilSheaf.subsingleton_stalkAt_carrier _ _ _ _
+    LAdicWeilSheaf.subsingleton_stalkAt_carrier _ _ _ _
   obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
   exact (hv.2 (Subsingleton.elim v 0)).elim
 
-end WeilSheaf.LisseOnDenseOpen
+end LAdicWeilSheaf.LisseOnDenseOpen
 
 end AlgebraicGeometry

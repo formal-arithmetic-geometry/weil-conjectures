@@ -12,7 +12,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
 # The upper bound on the weight of the Fourier partner
 
 Let `r` be the rank of `M` and `b` the rank of the correction sheaf `B'` of
-`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection`. Purity bounds each trace of
+`AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.FourierCorrection`. Purity bounds each trace of
 `M` by `r q^{nw/2}` and the line has `qⁿ` rational points, so Plancherel applied to `j_!M[1]`
 bounds the trace energy of `G` by `r² q^{n(w+2)}`; the weight bound for `B'` bounds its trace
 energy by `b² q^{n(w+1)}`. Trace additivity `t_{M'} = t_G - t_{B'}` on `U'₀` and
@@ -21,7 +21,7 @@ energy by `b² q^{n(w+1)}`. Trace additivity `t_{M'} = t_G - t_{B'}` on `U'₀` 
 `S_n(U'₀, M') ≤ 2r² q^{n(w+2)} + 2b² q^{n(w+1)} ≤ 2(r² + b²) q^{n(w+2)}`,
 
 and the trace-energy criterion
-`AlgebraicGeometry.WeilSheaf.le_sub_one_of_traceEnergy_le` with `B = w + 2` gives `v ≤ w + 1`.
+`AlgebraicGeometry.LAdicWeilSheaf.le_sub_one_of_traceEnergy_le` with `B = w + 2` gives `v ≤ w + 1`.
 
 ## Main statements
 
@@ -44,7 +44,7 @@ variable (ψ : AddChar k₀ (PadicAlgCl l))
 sheaf `M'` of the Fourier partner of `M` is pure of weight `v`, then `v ≤ w + 1`.
 (blueprint: `sk-p-dl-a1-fourier-weight`) -/
 theorem le_add_one_of_isFourierPartner (ι : PadicAlgCl l →+* ℂ) (hψ : ψ ≠ 1)
-    (D D' : WeilSheaf.LisseOnDenseOpen k₀ l) [Simple D.sheaf]
+    (D D' : LAdicWeilSheaf.LisseOnDenseOpen k₀ l) [Simple D.sheaf]
     (hne : D.sheaf.IsNonexceptional ψ) {w v : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) (hFT : D.IsFourierPartner ψ D')
     (hv : D'.sheaf.IsPunctuallyPureOfWeight ι v) :

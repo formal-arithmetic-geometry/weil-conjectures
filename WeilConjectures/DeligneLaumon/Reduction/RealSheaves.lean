@@ -11,9 +11,9 @@ public import WeilConjectures.DeligneLaumon.Reduction.Weights
 /-!
 # Real Weil sheaves on an arbitrary base are mixed
 
-A constructible Weil sheaf is `ι`-*real* (`AlgebraicGeometry.WeilSheaf.IsReal`) if the realization
-under `ι` of every local Frobenius characteristic polynomial has real coefficients. Over a curve
-this forces purity on a dense open, which is the content of the blueprint section
+A constructible Weil sheaf is `ι`-*real* (`AlgebraicGeometry.LAdicWeilSheaf.IsReal`) if the
+realization under `ι` of every local Frobenius characteristic polynomial has real coefficients. Over
+a curve this forces purity on a dense open, which is the content of the blueprint section
 `sec-purity-real-sheaves`; this file states the extension of that statement to an arbitrary
 separated finite-type `k₀`-scheme, which is the input the Deligne–Laumon reduction needs in order
 to turn the reality of a local `L`-factor into a weight bound.
@@ -26,8 +26,8 @@ curve sections on which each constituent becomes pure of a weight independent of
 mixedness then descends along finite constant extensions and is spliced back along the open–closed
 sequence.
 
-With the present scaffold every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf.isZero`), and
-`AlgebraicGeometry.WeilSheaf.IsReal.isMixed` is proved by the filtration of length zero. The
+With the present scaffold every Weil sheaf is zero (`AlgebraicGeometry.LAdicWeilSheaf.isZero`), and
+`AlgebraicGeometry.LAdicWeilSheaf.IsReal.isMixed` is proved by the filtration of length zero. The
 geometric and group-theoretic inputs of the reduction are stated and proved separately:
 `AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback` (Bertini),
 `Representation.exists_forall_isIrreducible_baseChange_of_congr` (finite matrix witnesses) and
@@ -36,9 +36,9 @@ testing for geometric irreducibility below.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`:
+- `AlgebraicGeometry.LAdicWeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`:
   blueprint `lem-zl-curve-testing-irreducibility`.
-- `AlgebraicGeometry.WeilSheaf.IsReal.isMixed`: blueprint `sk-i-dl-general-real` and
+- `AlgebraicGeometry.LAdicWeilSheaf.IsReal.isMixed`: blueprint `sk-i-dl-general-real` and
   `thm-zl-real-mixed-by-curves`.
 
 ## References
@@ -71,12 +71,13 @@ With the present scaffold every Weil sheaf is zero, so the restrictions of the `
 irreducible and only `r = 0` is not vacuous; the curve is then provided by
 `AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback` for `d ≥ 2`,
 and is `X` itself for `d = 1`. -/
-theorem WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar {k₀ : Type u}
+theorem LAdicWeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar {k₀ : Type u}
     [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X₀ : Scheme.{u}}
     [X₀.Over (Spec (CommRingCat.of k₀))] [IsAffine X₀] {d : ℕ} (hd : 1 ≤ d)
     [SmoothOfRelativeDimension d (X₀ ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X₀ ↘ Spec (CommRingCat.of k₀))] {r : ℕ}
-    (𝒮 : Fin r → WeilSheaf k₀ l X₀) (h𝒮 : ∀ j, Scheme.IsIrreducibleLocalSystem (𝒮 j).obj.carrier)
+    (𝒮 : Fin r → LAdicWeilSheaf k₀ l X₀)
+    (h𝒮 : ∀ j, Scheme.IsIrreducibleLocalSystem (𝒮 j).obj.carrier)
     (S : Finset
       (Spec (.of (AlgebraicClosure k₀)) ⟶ (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber))
     (hS : S.Nonempty)
@@ -116,17 +117,17 @@ set_option linter.unusedVariables false in
 /-- Every constructible `ι`-real Weil sheaf on a separated finite-type `k₀`-scheme is `ι`-mixed
 (blueprint: `sk-i-dl-general-real`, `thm-zl-real-mixed-by-curves`).
 
-With the present scaffold every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf.isZero`), and
+With the present scaffold every Weil sheaf is zero (`AlgebraicGeometry.LAdicWeilSheaf.isZero`), and
 the filtration of length zero exhibits `F` as mixed; the reduction of the blueprint to lisse
 sheaves on curves through `Representation.exists_filtration_isIrreducible_restrict` and
-`AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar` is
+`AlgebraicGeometry.LAdicWeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar` is
 not needed. -/
-theorem WeilSheaf.IsReal.isMixed {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+theorem LAdicWeilSheaf.IsReal.isMixed {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] {ι : PadicAlgCl l →+* ℂ} {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X} (hF : F.IsReal ι) :
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {F : LAdicWeilSheaf k₀ l X} (hF : F.IsReal ι) :
     F.IsMixed ι :=
-  (WeilSheaf.isMixedOfWeightsAtMost_of_isZero F.isZero 0).isMixed
+  (LAdicWeilSheaf.isMixedOfWeightsAtMost_of_isZero F.isZero 0).isMixed
 
 end AlgebraicGeometry

@@ -16,19 +16,19 @@ pushforward `Rφ̄_*` along its base change `φ̄ : X̄ ⟶ Ȳ` to the geometric
 Frobenius pullbacks (`Etale.lowerStarGeometricFiberMapCompFrobeniusIso`,
 `Etale.rightDerivedLowerStarGeometricFiberMapCompFrobeniusIso`), so they carry Weil sheaves and
 Weil complexes on `X` to Weil sheaves and Weil complexes on `Y`. This mirrors the pullbacks
-`WeilSheaf.upperStar` and `WeilComplex.upperStar`. No compactification is involved.
+`LAdicWeilSheaf.upperStar` and `LAdicWeilComplex.upperStar`. No compactification is involved.
 
 That the results are again constructible, respectively bounded constructible, is the finiteness
 theorem (SGA 4½, *Th. finitude*). It needs `φ` quasi-compact, quasi-separated and of finite
 type, which are hypotheses of the definitions below, and `X` and `Y` of finite type over `k₀`,
-which the scaffold `WeilSheaf` does not record. These constructibility statements are left as
+which the scaffold `LAdicWeilSheaf` does not record. These constructibility statements are left as
 `sorry`.
 
 ## Main definitions
 
-- `AlgebraicGeometry.WeilSheaf.lowerStar`: `φ_*` on Weil sheaves.
-- `AlgebraicGeometry.WeilComplex.derivedLowerStar`: `Rφ_*` on Weil complexes.
-- `AlgebraicGeometry.WeilSheaf.higherLowerStar`: the higher direct images `Rⁱφ_*` of Weil
+- `AlgebraicGeometry.LAdicWeilSheaf.lowerStar`: `φ_*` on Weil sheaves.
+- `AlgebraicGeometry.LAdicWeilComplex.derivedLowerStar`: `Rφ_*` on Weil complexes.
+- `AlgebraicGeometry.LAdicWeilSheaf.higherLowerStar`: the higher direct images `Rⁱφ_*` of Weil
   sheaves, the cohomology sheaves of `Rφ_*`.
 -/
 
@@ -55,9 +55,9 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 /-- The pushforward `φ_*` of Weil sheaves along a morphism `φ : X ⟶ Y` of `k₀`-schemes: the
 pushforward along the base change `φ̄ : X̄ ⟶ Ȳ`, with the Weil structure transported along
 `Etale.lowerStarGeometricFiberMapCompFrobeniusIso`. -/
-noncomputable def WeilSheaf.lowerStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+noncomputable def LAdicWeilSheaf.lowerStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
     [QuasiCompact φ] [QuasiSeparated φ] [LocallyOfFiniteType φ] :
-    WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l Y :=
+    LAdicWeilSheaf k₀ l X ⥤ LAdicWeilSheaf k₀ l Y :=
   ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ IsoAlgebra.mapOfNatIso
       (Etale.lowerStarGeometricFiberMapCompFrobeniusIso _ φ (comp_over φ _)))
     -- TODO: the finiteness theorem for `φ̄_*` (SGA 4½, Th. finitude).
@@ -67,10 +67,10 @@ noncomputable def WeilSheaf.lowerStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingC
 `k₀`-schemes: the total right derived pushforward along the base change `φ̄ : X̄ ⟶ Ȳ`, with
 the Weil structure transported along
 `Etale.rightDerivedLowerStarGeometricFiberMapCompFrobeniusIso`. -/
-noncomputable def WeilComplex.derivedLowerStar (φ : X ⟶ Y)
+noncomputable def LAdicWeilComplex.derivedLowerStar (φ : X ⟶ Y)
     [φ.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact φ] [QuasiSeparated φ]
     [LocallyOfFiniteType φ] :
-    WeilComplex k₀ l X ⥤ WeilComplex k₀ l Y :=
+    LAdicWeilComplex k₀ l X ⥤ LAdicWeilComplex k₀ l Y :=
   ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ IsoAlgebra.mapOfNatIso
       (Etale.rightDerivedLowerStarGeometricFiberMapCompFrobeniusIso _ φ (comp_over φ _)))
     -- TODO: the finiteness theorem for `Rφ̄_*` (SGA 4½, Th. finitude).
@@ -79,24 +79,24 @@ noncomputable def WeilComplex.derivedLowerStar (φ : X ⟶ Y)
 /-- The higher direct image `Rⁱφ_*` of Weil sheaves along a morphism `φ : X ⟶ Y` of
 `k₀`-schemes: the cohomology sheaf `𝓗ⁱ` (indexed by `ℤ`, with `i : ℕ` coerced) of the derived
 pushforward `Rφ_*` of a Weil sheaf placed in degree zero. -/
-noncomputable def WeilSheaf.higherLowerStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+noncomputable def LAdicWeilSheaf.higherLowerStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
     [QuasiCompact φ] [QuasiSeparated φ] [LocallyOfFiniteType φ] (i : ℕ) :
-    WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l Y :=
-  toComplex ⋙ WeilComplex.derivedLowerStar φ ⋙ WeilComplex.homologySheaf i
+    LAdicWeilSheaf k₀ l X ⥤ LAdicWeilSheaf k₀ l Y :=
+  toComplex ⋙ LAdicWeilComplex.derivedLowerStar φ ⋙ LAdicWeilComplex.homologySheaf i
 
 variable (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact φ] [QuasiSeparated φ]
   [LocallyOfFiniteType φ]
 
-namespace WeilSheaf
+namespace LAdicWeilSheaf
 
 @[simp]
-lemma lowerStar_obj_obj_carrier (F : WeilSheaf k₀ l X) :
+lemma lowerStar_obj_obj_carrier (F : LAdicWeilSheaf k₀ l X) :
     ((lowerStar φ).obj F).obj.carrier =
       (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].obj F.obj.carrier :=
   rfl
 
 @[simp]
-lemma lowerStar_obj_obj_str (F : WeilSheaf k₀ l X) :
+lemma lowerStar_obj_obj_str (F : LAdicWeilSheaf k₀ l X) :
     ((lowerStar φ).obj F).obj.str =
       (Etale.lowerStarGeometricFiberMapCompFrobeniusIso _ φ (comp_over φ _)).app
           F.obj.carrier ≪≫
@@ -104,19 +104,19 @@ lemma lowerStar_obj_obj_str (F : WeilSheaf k₀ l X) :
   IsoAlgebra.mapOfNatIso_obj_str _ _
 
 @[simp]
-lemma lowerStar_map_hom_hom_f {F G : WeilSheaf k₀ l X} (α : F ⟶ G) :
+lemma lowerStar_map_hom_hom_f {F G : LAdicWeilSheaf k₀ l X} (α : F ⟶ G) :
     ((lowerStar φ).map α).hom.hom.f =
       (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].map α.hom.hom.f :=
   rfl
 
 instance : (lowerStar (k₀ := k₀) (l := l) φ).Additive :=
-  IsoAlgebra.additive_lift_mapOfNatIso (P := WeilSheaf.objectProperty k₀ l X)
-    (Q := WeilSheaf.objectProperty k₀ l Y) _ _
+  IsoAlgebra.additive_lift_mapOfNatIso (P := LAdicWeilSheaf.objectProperty k₀ l X)
+    (Q := LAdicWeilSheaf.objectProperty k₀ l Y) _ _
 
-end WeilSheaf
+end LAdicWeilSheaf
 
-instance : (WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) φ).Additive :=
-  IsoAlgebra.additive_lift_mapOfNatIso (P := WeilComplex.objectProperty k₀ l X)
-    (Q := WeilComplex.objectProperty k₀ l Y) _ _
+instance : (LAdicWeilComplex.derivedLowerStar (k₀ := k₀) (l := l) φ).Additive :=
+  IsoAlgebra.additive_lift_mapOfNatIso (P := LAdicWeilComplex.objectProperty k₀ l X)
+    (Q := LAdicWeilComplex.objectProperty k₀ l Y) _ _
 
 end AlgebraicGeometry

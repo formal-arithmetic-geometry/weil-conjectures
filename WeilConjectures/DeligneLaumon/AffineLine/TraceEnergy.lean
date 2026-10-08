@@ -42,20 +42,20 @@ passing to the normalized real envelope `N⁰ ⊕ (N⁰)^∨` of the constant tw
 
 ## Main declarations
 
-- `AlgebraicGeometry.WeilSheaf.traceEnergy`: the sum `S_n(X₀, N)`.
-- `AlgebraicGeometry.WeilSheaf.l2Weight`: the `L²`-weight parameter `‖F‖`.
-- `AlgebraicGeometry.WeilSheaf.l2Series`: the `L²`-series `φ_F(t) = ∑ S_m t^{m - 1}`.
-- `AlgebraicGeometry.WeilSheaf.realEnvelope`: the normalized real envelope, lisse for lisse `F`
-  (`AlgebraicGeometry.WeilSheaf.IsLisse.realEnvelope`).
-- `AlgebraicGeometry.WeilSheaf.lt_l2Weight_iff`: the radius of `φ_F` is `q^{-‖F‖ - 1}`.
-- `AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isPunctuallyPureOfWeight`: `‖G‖ = w` for a nonzero
-  lisse sheaf pure of weight `w`.
-- `AlgebraicGeometry.WeilSheaf.le_sub_one_of_traceEnergy_le`: the weight bound it detects.
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.l2Weight_directImage`: `‖j_*M‖ = ‖M‖ = w`.
+- `AlgebraicGeometry.LAdicWeilSheaf.traceEnergy`: the sum `S_n(X₀, N)`.
+- `AlgebraicGeometry.LAdicWeilSheaf.l2Weight`: the `L²`-weight parameter `‖F‖`.
+- `AlgebraicGeometry.LAdicWeilSheaf.l2Series`: the `L²`-series `φ_F(t) = ∑ S_m t^{m - 1}`.
+- `AlgebraicGeometry.LAdicWeilSheaf.realEnvelope`: the normalized real envelope, lisse for lisse `F`
+  (`AlgebraicGeometry.LAdicWeilSheaf.IsLisse.realEnvelope`).
+- `AlgebraicGeometry.LAdicWeilSheaf.lt_l2Weight_iff`: the radius of `φ_F` is `q^{-‖F‖ - 1}`.
+- `AlgebraicGeometry.LAdicWeilSheaf.l2Weight_eq_of_isPunctuallyPureOfWeight`: `‖G‖ = w` for a
+  nonzero lisse sheaf pure of weight `w`.
+- `AlgebraicGeometry.LAdicWeilSheaf.le_sub_one_of_traceEnergy_le`: the weight bound it detects.
+- `AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.l2Weight_directImage`: `‖j_*M‖ = ‖M‖ = w`.
 
 ## Implementation notes
 
-With the present coefficients every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf.isZero`):
+With the present coefficients every Weil sheaf is zero (`AlgebraicGeometry.LAdicWeilSheaf.isZero`):
 trace functions, trace energies and stalks vanish. The statements about traces of twists,
 envelopes and tensor products are proved this way, and the statements about a nonzero sheaf
 hold vacuously. The analytic part (the `L²`-weight, its radius characterisation and the energy
@@ -72,7 +72,7 @@ open scoped PowerSeries.WithPiTopology
 
 namespace AlgebraicGeometry
 
-namespace WeilSheaf
+namespace LAdicWeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -82,46 +82,46 @@ level `n`, the squared `L²`-norm of its trace function on the `𝔽_{qⁿ}`-poi
 `0` if `X₀` has infinitely many `𝔽_{qⁿ}`-points. The intended situation is that of
 `AlgebraicGeometry.Scheme.Hom.finite_fieldPoints`, where `X₀` is of finite type over the finite
 field `k₀` and the index type is finite. (blueprint: `sk-l-dl-a1-energy`) -/
-noncomputable def traceEnergy (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (n : ℕ) : ℝ :=
+noncomputable def traceEnergy (ι : PadicAlgCl l →+* ℂ) (F : LAdicWeilSheaf k₀ l X) (n : ℕ) : ℝ :=
   ∑ᶠ x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n),
     ‖ι (F.traceFunction n x)‖ ^ 2
 
 /-- The trace function of a Weil sheaf vanishes: with the present coefficients the stalks are
-zero (`AlgebraicGeometry.WeilSheaf.isZero_stalkObj`). -/
-theorem traceFunction_eq_zero (F : WeilSheaf k₀ l X) (n : ℕ)
+zero (`AlgebraicGeometry.LAdicWeilSheaf.isZero_stalkObj`). -/
+theorem traceFunction_eq_zero (F : LAdicWeilSheaf k₀ l X) (n : ℕ)
     (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
     F.traceFunction n x = 0 := by
   simp only [traceFunction, Subsingleton.elim _ (0 : Module.End _ _), map_zero]
 
 /-- The trace energy of a Weil sheaf vanishes, its trace function being zero
-(`AlgebraicGeometry.WeilSheaf.traceFunction_eq_zero`). -/
-theorem traceEnergy_eq_zero (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (n : ℕ) :
+(`AlgebraicGeometry.LAdicWeilSheaf.traceFunction_eq_zero`). -/
+theorem traceEnergy_eq_zero (ι : PadicAlgCl l →+* ℂ) (F : LAdicWeilSheaf k₀ l X) (n : ℕ) :
     F.traceEnergy ι n = 0 := by
   simp [traceEnergy, traceFunction_eq_zero]
 
 /-- The trace energy is nonnegative, as a sum of squares. -/
-theorem traceEnergy_nonneg (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (n : ℕ) :
+theorem traceEnergy_nonneg (ι : PadicAlgCl l →+* ℂ) (F : LAdicWeilSheaf k₀ l X) (n : ℕ) :
     0 ≤ F.traceEnergy ι n :=
   finsum_nonneg fun _ ↦ sq_nonneg _
 
 /-- The *`L²`-weight parameter* `‖F‖` of a Weil sheaf, the exponent of growth of its trace
-energies `S_m = ‖f_F‖²_m` (`AlgebraicGeometry.WeilSheaf.traceEnergy`):
+energies `S_m = ‖f_F‖²_m` (`AlgebraicGeometry.LAdicWeilSheaf.traceEnergy`):
 
 `‖F‖ = sup {β ∈ ℝ | limsup_{m → ∞} S_m / q^{m(β + 1)} > 0}`,
 
 the supremum of the empty set being `-∞`, the exponent `1` being the dimension of the curve on
 which `F` is intended to live. The `limsup` is taken in `ℝ≥0∞`.
 (blueprint: `def-wf-l2-norm`) -/
-noncomputable def l2Weight (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : EReal :=
+noncomputable def l2Weight (ι : PadicAlgCl l →+* ℂ) (F : LAdicWeilSheaf k₀ l X) : EReal :=
   ⨆ (β : ℝ) (_ : 0 < limsup (fun m : ℕ ↦ ENNReal.ofReal
     (F.traceEnergy ι m / (Nat.card k₀ : ℝ) ^ ((m : ℝ) * (β + 1)))) atTop), (β : EReal)
 
 /-- The *`L²`-series* `φ_F(t) = ∑_{m ≥ 1} S_m t^{m - 1}` of a Weil sheaf, the power series whose
-coefficients are the trace energies `S_m` (`AlgebraicGeometry.WeilSheaf.traceEnergy`). Its
+coefficients are the trace energies `S_m` (`AlgebraicGeometry.LAdicWeilSheaf.traceEnergy`). Its
 radius of convergence determines the `L²`-weight parameter
-(`AlgebraicGeometry.WeilSheaf.lt_l2Weight_iff`).
+(`AlgebraicGeometry.LAdicWeilSheaf.lt_l2Weight_iff`).
 (blueprint: `def-wf-l2-series`) -/
-noncomputable def l2Series (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) :
+noncomputable def l2Series (ι : PadicAlgCl l →+* ℂ) (F : LAdicWeilSheaf k₀ l X) :
     FormalMultilinearSeries ℝ ℝ ℝ :=
   FormalMultilinearSeries.ofScalars ℝ fun m ↦ F.traceEnergy ι (m + 1)
 
@@ -216,7 +216,7 @@ end Growth
 /-- The trace energy bound `S_m ≤ C q^{mB}` for `m ≥ 1` bounds the `L²`-weight parameter:
 `‖F‖ ≤ B - 1`. For `β > B - 1` the ratios `S_m / q^{m(β + 1)} ≤ C q^{m(B - β - 1)}` tend to
 `0`. -/
-theorem l2Weight_le_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X)
+theorem l2Weight_le_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ) (F : LAdicWeilSheaf k₀ l X)
     {C B : ℝ} (hS : ∀ n : ℕ, 1 ≤ n → F.traceEnergy ι n ≤ C * (Nat.card k₀ : ℝ) ^ ((n : ℝ) * B)) :
     F.l2Weight ι ≤ ((B - 1 : ℝ) : EReal) := by
   refine iSup₂_le fun β hβ ↦ EReal.coe_le_coe_iff.2 (not_lt.1 fun hlt ↦ hβ.ne' ?_)
@@ -226,7 +226,7 @@ theorem l2Weight_le_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ) (F : WeilShe
 `‖F‖` are related by `r_F = q^{-‖F‖ - 1}`, equivalently `‖F‖ = -1 - log_q r_F`, with the
 conventions `q^{-∞} = 0` and `q^{∞} = ∞`. This is stated as: for every real `β`,
 `β < ‖F‖` if and only if `r_F < q^{-(β + 1)}`. (blueprint: `lem-wf-l2-radius`) -/
-theorem lt_l2Weight_iff (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (β : ℝ) :
+theorem lt_l2Weight_iff (ι : PadicAlgCl l →+* ℂ) (F : LAdicWeilSheaf k₀ l X) (β : ℝ) :
     (β : EReal) < F.l2Weight ι ↔
       (F.l2Series ι).radius < ENNReal.ofReal ((Nat.card k₀ : ℝ) ^ (-(β + 1))) := by
   have hq : 1 < (Nat.card k₀ : ℝ) := by exact_mod_cast Finite.one_lt_card
@@ -249,7 +249,7 @@ theorem lt_l2Weight_iff (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (
 
 /-- If the trace energies of `F'` are those of `F` divided by `q^{mw}`, then
 `‖F'‖ = ‖F‖ - w`: the defining ratio of `F'` at `β` is that of `F` at `β + w`. -/
-theorem l2Weight_eq_sub_of_traceEnergy_eq (ι : PadicAlgCl l →+* ℂ) (F F' : WeilSheaf k₀ l X)
+theorem l2Weight_eq_sub_of_traceEnergy_eq (ι : PadicAlgCl l →+* ℂ) (F F' : LAdicWeilSheaf k₀ l X)
     {w : ℝ} (h : ∀ m : ℕ, F'.traceEnergy ι m =
       F.traceEnergy ι m / (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w)) :
     F'.l2Weight ι = F.l2Weight ι - w := by
@@ -279,7 +279,7 @@ theorem l2Weight_eq_sub_of_traceEnergy_eq (ι : PadicAlgCl l →+* ℂ) (F F' : 
 
 /-- If the trace energies of `E` are bounded by a constant multiple of those of `F`, then
 `‖E‖ ≤ ‖F‖`: a positive `limsup` for `E` at `β` forces a positive `limsup` for `F` at `β`. -/
-theorem l2Weight_le_of_traceEnergy_le_mul (ι : PadicAlgCl l →+* ℂ) (E F : WeilSheaf k₀ l X)
+theorem l2Weight_le_of_traceEnergy_le_mul (ι : PadicAlgCl l →+* ℂ) (E F : LAdicWeilSheaf k₀ l X)
     {K : ℝ} (hK : 0 ≤ K) (h : ∀ m : ℕ, E.traceEnergy ι m ≤ K * F.traceEnergy ι m) :
     E.l2Weight ι ≤ F.l2Weight ι :=
   iSup₂_le fun β hβ ↦ le_iSup₂_of_le β
@@ -289,8 +289,8 @@ theorem l2Weight_le_of_traceEnergy_le_mul (ι : PadicAlgCl l →+* ℂ) (E F : W
 /-- If the trace energies of `E` are bounded by those of `F`, then `‖E‖ ≤ ‖F‖`; here `E` and
 `F` may live on different schemes, e.g. a sheaf on a dense open and its direct image. -/
 theorem l2Weight_le_l2Weight_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ)
-    {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))] (E : WeilSheaf k₀ l X)
-    (F : WeilSheaf k₀ l Y) (h : ∀ m : ℕ, E.traceEnergy ι m ≤ F.traceEnergy ι m) :
+    {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))] (E : LAdicWeilSheaf k₀ l X)
+    (F : LAdicWeilSheaf k₀ l Y) (h : ∀ m : ℕ, E.traceEnergy ι m ≤ F.traceEnergy ι m) :
     E.l2Weight ι ≤ F.l2Weight ι :=
   iSup₂_le fun β hβ ↦ le_iSup₂_of_le β (pos_iff_ne_zero.2 fun h0 ↦ hβ.ne'
     (limsup_eq_zero_of_le_mul (Nat.cast_nonneg _) zero_le_one (fun m ↦ (one_mul
@@ -300,8 +300,8 @@ theorem l2Weight_le_l2Weight_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ)
 `‖E‖ ≤ max ‖F‖ (B - 1)`: for `β` above both bounds the defining ratio of `E` at `β` is at most
 that of `F`, of `limsup` zero, plus `C q^{m(B - β - 1)}`, which tends to zero. -/
 theorem l2Weight_le_max_of_traceEnergy_le_add (ι : PadicAlgCl l →+* ℂ)
-    {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))] (E : WeilSheaf k₀ l X)
-    (F : WeilSheaf k₀ l Y) {C B : ℝ} (h : ∀ m : ℕ, E.traceEnergy ι m ≤
+    {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))] (E : LAdicWeilSheaf k₀ l X)
+    (F : LAdicWeilSheaf k₀ l Y) {C B : ℝ} (h : ∀ m : ℕ, E.traceEnergy ι m ≤
       F.traceEnergy ι m + C * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * B)) :
     E.l2Weight ι ≤ max (F.l2Weight ι) ((B - 1 : ℝ) : EReal) := by
   have hq : 1 < (Nat.card k₀ : ℝ) := by exact_mod_cast Finite.one_lt_card
@@ -326,23 +326,24 @@ theorem l2Weight_le_max_of_traceEnergy_le_add (ι : PadicAlgCl l →+* ℂ)
 section Envelope
 
 /-- The *normalized real envelope* `Env_ι(F; b) = F⁰ ⊕ (F⁰)^∨` of a Weil sheaf, where
-`F⁰ = F ⊗ 𝓑_b` is the constant Weil twist `AlgebraicGeometry.WeilSheaf.constantTwist` by
+`F⁰ = F ⊗ 𝓑_b` is the constant Weil twist `AlgebraicGeometry.LAdicWeilSheaf.constantTwist` by
 `b`. It is meant for `F` punctually `ι`-pure of weight `w` and `|ι b| = q^{-w/2}`, for instance
 `b = ι⁻¹(q^{-w/2})` when `ι` is an isomorphism; then `F⁰` is pure of weight `0` and the
-envelope is `ι`-real (`AlgebraicGeometry.WeilSheaf.isReal_realEnvelope`).
+envelope is `ι`-real (`AlgebraicGeometry.LAdicWeilSheaf.isReal_realEnvelope`).
 (blueprint: `def-wf-normalized-real-envelope`) -/
-noncomputable def realEnvelope (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) : WeilSheaf k₀ l X :=
+noncomputable def realEnvelope (F : LAdicWeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) :
+    LAdicWeilSheaf k₀ l X :=
   F.constantTwist b ⊞ (F.constantTwist b).dual
 
 /-- The stalks of a Weil sheaf at closed points are zero, see
-`AlgebraicGeometry.WeilSheaf.isZero_stalkObj`. -/
-instance subsingleton_stalk_carrier (F : WeilSheaf k₀ l X) (x : X.finitePoints) :
+`AlgebraicGeometry.LAdicWeilSheaf.isZero_stalkObj`. -/
+instance subsingleton_stalk_carrier (F : LAdicWeilSheaf k₀ l X) (x : X.finitePoints) :
     Subsingleton (F.stalk x).carrier :=
   subsingleton_stalkAt_carrier _ _ _ _
 
 /-- The local polynomials of a Weil sheaf are `1`, its stalks being zero
-(`AlgebraicGeometry.WeilSheaf.isZero_stalkObj`). -/
-theorem localPolynomial_stalk_eq_one (F : WeilSheaf k₀ l X) (x : X.finitePoints) :
+(`AlgebraicGeometry.LAdicWeilSheaf.isZero_stalkObj`). -/
+theorem localPolynomial_stalk_eq_one (F : LAdicWeilSheaf k₀ l X) (x : X.finitePoints) :
     (F.stalk x).localPolynomial = 1 := by
   rw [FrobeniusModule.localPolynomial, LinearMap.charpolyRev_def,
     LinearMap.charpoly_eq_one_of_subsingleton]
@@ -354,7 +355,7 @@ set_option linter.unusedVariables false in
 constant twist `F ⊗ 𝓑_b` is punctually `ι`-pure of weight `w + c`: at a closed point of degree
 `m` every eigenvalue `α` of the local Frobenius becomes `bᵐ α`, of absolute value
 `q^{mc/2} q^{mw/2}`. (blueprint: `lem-wf-constant-twist-weight`) -/
-theorem IsPunctuallyPureOfWeight.constantTwist {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
+theorem IsPunctuallyPureOfWeight.constantTwist {ι : PadicAlgCl l →+* ℂ} {F : LAdicWeilSheaf k₀ l X}
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ} {c : ℝ}
     (hb : 2 * Real.logb (Nat.card k₀) ‖ι b‖ = c) :
     (F.constantTwist b).IsPunctuallyPureOfWeight ι (w + c) := by
@@ -370,7 +371,7 @@ set_option linter.unusedVariables false in
 `|ι β_j| = 1`, so those of the dual summand are `ι(β_j⁻¹) = conj (ι β_j)`, and the local
 eigenvalue multiset is stable under complex conjugation.
 (blueprint: `lem-wf-envelope-real`) -/
-theorem isReal_realEnvelope {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X} {w : ℝ}
+theorem isReal_realEnvelope {ι : PadicAlgCl l →+* ℂ} {F : LAdicWeilSheaf k₀ l X} {w : ℝ}
     (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ}
     (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) :
     (F.realEnvelope b).IsReal ι := by
@@ -383,7 +384,7 @@ theorem isReal_realEnvelope {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l 
 /-- The envelope `Env_ι(F; b) = F⁰ ⊕ (F⁰)^∨` of a lisse sheaf is lisse: the twist `F⁰` has the
 étale sheaf of `F`, and duals and finite direct sums of lisse sheaves are lisse
 (blueprint: `lem-wf-envelope-real`). -/
-theorem IsLisse.realEnvelope {F : WeilSheaf k₀ l X} (hF : F.IsLisse) (b : (PadicAlgCl l)ˣ) :
+theorem IsLisse.realEnvelope {F : LAdicWeilSheaf k₀ l X} (hF : F.IsLisse) (b : (PadicAlgCl l)ˣ) :
     (F.realEnvelope b).IsLisse :=
   sorry
 
@@ -391,10 +392,10 @@ theorem IsLisse.realEnvelope {F : WeilSheaf k₀ l X} (hF : F.IsLisse) (b : (Pad
 set_option linter.unusedVariables false in
 /-- The envelope of a punctually `ι`-pure sheaf of weight `w`, with `|ι b| = q^{-w/2}`, is
 punctually `ι`-pure of weight `0`: `F⁰` is by
-`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.constantTwist`, its dual has the inverse
+`AlgebraicGeometry.LAdicWeilSheaf.IsPunctuallyPureOfWeight.constantTwist`, its dual has the inverse
 eigenvalues, of absolute value `1`, and a direct sum of pure sheaves of weight `0` is pure of
 weight `0`. -/
-theorem IsPunctuallyPureOfWeight.realEnvelope {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
+theorem IsPunctuallyPureOfWeight.realEnvelope {ι : PadicAlgCl l →+* ℂ} {F : LAdicWeilSheaf k₀ l X}
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ}
     (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) :
     (F.realEnvelope b).IsPunctuallyPureOfWeight ι 0 := by
@@ -408,7 +409,7 @@ set_option linter.unusedVariables false in
 /-- The trace energies of the constant twist `F ⊗ 𝓑_b` with `|ι b| = q^{-w/2}` are those of `F`
 divided by `q^{mw}`: the twist has trace function `t_{F ⊗ 𝓑_b}(y) = bᵐ t_F(y)` at
 `y ∈ X₀(𝔽_{qᵐ})`. -/
-theorem traceEnergy_constantTwist (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X)
+theorem traceEnergy_constantTwist (ι : PadicAlgCl l →+* ℂ) (F : LAdicWeilSheaf k₀ l X)
     {b : (PadicAlgCl l)ˣ} {w : ℝ} (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) (m : ℕ) :
     (F.constantTwist b).traceEnergy ι m =
       F.traceEnergy ι m / (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) := by
@@ -420,7 +421,7 @@ set_option linter.unusedVariables false in
 /-- The trace energies of the envelope are at most four times those of `F⁰ = F ⊗ 𝓑_b`, for `F`
 punctually pure of weight `w` and `|ι b| = q^{-w/2}`: the trace of the envelope is
 `t_{F⁰} + conj t_{F⁰} = 2 Re t_{F⁰}`, and `|Re z|² ≤ |z|²`. -/
-theorem traceEnergy_realEnvelope_le (ι : PadicAlgCl l →+* ℂ) {F : WeilSheaf k₀ l X} {w : ℝ}
+theorem traceEnergy_realEnvelope_le (ι : PadicAlgCl l →+* ℂ) {F : LAdicWeilSheaf k₀ l X} {w : ℝ}
     (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ}
     (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) (m : ℕ) :
     (F.realEnvelope b).traceEnergy ι m ≤ 4 * (F.constantTwist b).traceEnergy ι m := by
@@ -432,11 +433,11 @@ theorem traceEnergy_realEnvelope_le (ι : PadicAlgCl l →+* ℂ) {F : WeilSheaf
 `d` with nonzero stalk, then `|ι α| = q^{dw/2}`, and `b` can be taken to be a `d`-th root of
 `α⁻¹`. -/
 theorem exists_norm_eq_of_isPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ)
-    (F : WeilSheaf k₀ l X) (hF : ¬ Limits.IsZero F) {w : ℝ}
+    (F : LAdicWeilSheaf k₀ l X) (hF : ¬ Limits.IsZero F) {w : ℝ}
     (h : F.IsPunctuallyPureOfWeight ι w) :
     ∃ b : (PadicAlgCl l)ˣ, ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2) := by
   -- a nonzero Weil sheaf has a nonzero stalk at some closed point; with the present
-  -- coefficients there is no nonzero Weil sheaf (`AlgebraicGeometry.WeilSheaf.isZero`)
+  -- coefficients there is no nonzero Weil sheaf (`AlgebraicGeometry.LAdicWeilSheaf.isZero`)
   obtain ⟨x, hx⟩ : ∃ x : X.finitePoints, Nontrivial (F.stalk x).carrier :=
     (hF F.isZero).elim
   obtain ⟨α, hα⟩ := Module.End.exists_eigenvalue (F.stalk x).frobeniusEnd
@@ -473,14 +474,14 @@ set_option linter.unusedVariables false in
 geometrically connected affine curve `X₀`, punctually `ι`-mixed of weights at most `w`, then
 `‖F‖ ≤ w`. At `y ∈ X₀(𝔽_{qᵐ})` the eigenvalues of the Frobenius have absolute value at most
 `q^{mw/2}`, so `S_m ≤ r² · #X₀(𝔽_{qᵐ}) · q^{mw} ≤ C q^{m(w + 1)}`, and
-`AlgebraicGeometry.WeilSheaf.l2Weight_le_of_traceEnergy_le` applies.
+`AlgebraicGeometry.LAdicWeilSheaf.l2Weight_le_of_traceEnergy_le` applies.
 (blueprint: `lem-wf-l2-upper`) -/
 theorem l2Weight_le_of_hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]
     [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (V ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (V ↘ Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l V) (hlisse : F.IsLisse) {w : ℝ} (h : F.HasWeightsAtMost ι w) :
+    (F : LAdicWeilSheaf k₀ l V) (hlisse : F.IsLisse) {w : ℝ} (h : F.HasWeightsAtMost ι w) :
     F.l2Weight ι ≤ w := by
   -- with the present coefficients the trace energies vanish, so the bound holds with `C = 0`
   have := F.l2Weight_le_of_traceEnergy_le ι (C := 0) (B := w + 1)
@@ -492,7 +493,7 @@ sheaf, the product over the closed points of `X₀` of the inverses of the local
 `FrobeniusModule.localPolynomial` of the stalks, transported to `ℂ` along `ι` and substituted
 into `t^{d(x)}` for the degree `d(x) = [κ(x) : k₀]`. It is taken in the product topology on
 `ℂ⟦t⟧`, in which it converges for `X₀` of finite type over `k₀`. -/
-noncomputable def lSeries (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : PowerSeries ℂ :=
+noncomputable def lSeries (ι : PadicAlgCl l →+* ℂ) (F : LAdicWeilSheaf k₀ l X) : PowerSeries ℂ :=
   ∏' x : X.finitePoints, ((((F.stalk x).localPolynomial.map ι).comp
     (Polynomial.X ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1) : Polynomial ℂ) :
       PowerSeries ℂ)⁻¹
@@ -508,14 +509,14 @@ set_option linter.unusedVariables false in
 
 and consequently the `L²`-series `φ_F(t) = ∑_{m ≥ 1} S_m t^{m - 1}` is the logarithmic
 derivative `L'/L` of the `L`-series `L(X₀, F ⊗ F̄, t)`
-(`AlgebraicGeometry.WeilSheaf.lSeries`), the Euler-product form of the Grothendieck–Lefschetz
+(`AlgebraicGeometry.LAdicWeilSheaf.lSeries`), the Euler-product form of the Grothendieck–Lefschetz
 trace formula: `φ_F · L = L'`. (blueprint: `lem-wf-conjugate-tensor-traces`) -/
 theorem traceFunction_tensorObj_and_l2Series_mul_lSeries (ι : PadicAlgCl l →+* ℂ)
     {V : Scheme.{u}} [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]
     [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (V ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (V ↘ Spec (CommRingCat.of k₀))]
-    (F F' : WeilSheaf k₀ l V) (hlisse : F.IsLisse)
+    (F F' : LAdicWeilSheaf k₀ l V) (hlisse : F.IsLisse)
     (hconj : ∀ x : V.finitePoints, (F'.stalk x).localPolynomial.map ι =
       ((F.stalk x).localPolynomial.map ι).map (starRingEnd ℂ)) :
     (∀ (n : ℕ) (y : (V ↘ Spec (CommRingCat.of k₀)).fieldPoints
@@ -543,15 +544,15 @@ smooth geometrically connected affine curve `X₀`, punctually `ι`-pure of weig
 The proof in the blueprint writes `φ_G = L'/L` with `L` the ratio of the determinants of the
 Frobenius on `H_c¹` and `H_c²` of `G ⊗ G`; the denominator is pure of weight `2w + 2` by the
 endpoint lemma, positivity of the local factors forces a surviving pole on `|t| = q^{-w-1}`,
-and the radius `q^{-w-1}` gives `‖G‖ = w` by `AlgebraicGeometry.WeilSheaf.lt_l2Weight_iff`.
-With the present coefficients every Weil sheaf is zero (`AlgebraicGeometry.WeilSheaf.isZero`),
+and the radius `q^{-w-1}` gives `‖G‖ = w` by `AlgebraicGeometry.LAdicWeilSheaf.lt_l2Weight_iff`.
+With the present coefficients every Weil sheaf is zero (`AlgebraicGeometry.LAdicWeilSheaf.isZero`),
 so the hypothesis `G ≠ 0` cannot hold. (blueprint: `thm-wf-l2-dictionary`) -/
 theorem l2Weight_eq_of_isReal (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]
     [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (V ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (V ↘ Spec (CommRingCat.of k₀))]
-    (G : WeilSheaf k₀ l V) (hG : ¬ Limits.IsZero G) (hlisse : G.IsLisse) (hreal : G.IsReal ι)
+    (G : LAdicWeilSheaf k₀ l V) (hG : ¬ Limits.IsZero G) (hlisse : G.IsLisse) (hreal : G.IsReal ι)
     {w : ℝ} (hpure : G.IsPunctuallyPureOfWeight ι w) :
     G.l2Weight ι = w :=
   (hG G.isZero).elim
@@ -559,18 +560,18 @@ theorem l2Weight_eq_of_isReal (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
 /-- The *`L²`-weight of a punctually pure lisse sheaf equals its weight*: let `G` be a nonzero
 lisse Weil sheaf on the smooth geometrically connected affine curve `X₀`, punctually `ι`-pure
 of weight `w`. Then `‖G‖ = w`; the reality hypothesis of
-`AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isReal` is not needed.
+`AlgebraicGeometry.LAdicWeilSheaf.l2Weight_eq_of_isReal` is not needed.
 
 The twist `G⁰ = G ⊗ 𝓑_b` with `|ι b| = q^{-w/2}` has `‖G⁰‖ = ‖G‖ - w`; its envelope `E` is
 real and pure of weight `0`, so `‖E‖ = 0`; the traces of `E` are `2 Re t_{G⁰}`, so
-`‖E‖ ≤ ‖G⁰‖`; and `‖G⁰‖ ≤ 0` by `AlgebraicGeometry.WeilSheaf.l2Weight_le_of_hasWeightsAtMost`.
+`‖E‖ ≤ ‖G⁰‖`; and `‖G⁰‖ ≤ 0` by `AlgebraicGeometry.LAdicWeilSheaf.l2Weight_le_of_hasWeightsAtMost`.
 (blueprint: `lem-wf-l2-purity-rigidity`) -/
 theorem l2Weight_eq_of_isPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]
     [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (V ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (V ↘ Spec (CommRingCat.of k₀))]
-    (G : WeilSheaf k₀ l V) (hG : ¬ Limits.IsZero G) (hlisse : G.IsLisse) {w : ℝ}
+    (G : LAdicWeilSheaf k₀ l V) (hG : ¬ Limits.IsZero G) (hlisse : G.IsLisse) {w : ℝ}
     (hpure : G.IsPunctuallyPureOfWeight ι w) :
     G.l2Weight ι = w := by
   obtain ⟨b, hb⟩ := G.exists_norm_eq_of_isPunctuallyPureOfWeight ι hG hpure
@@ -610,15 +611,15 @@ over `k₀` and punctually `ι`-pure of weight `v`. If the trace energies satisf
 `S_n(V₀, N) ≤ C q^{nB}` for every `n ≥ 1`, with `0 < C` independent of `n`, then `v ≤ B - 1`.
 
 The energy bound bounds the `L²`-weight parameter `‖N‖` by `B - 1`
-(`AlgebraicGeometry.WeilSheaf.l2Weight_le_of_traceEnergy_le`), and `‖N‖ = v` by the
-`L²`-rigidity `AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isPunctuallyPureOfWeight`.
+(`AlgebraicGeometry.LAdicWeilSheaf.l2Weight_le_of_traceEnergy_le`), and `‖N‖ = v` by the
+`L²`-rigidity `AlgebraicGeometry.LAdicWeilSheaf.l2Weight_eq_of_isPunctuallyPureOfWeight`.
 (blueprint: `sk-l-dl-a1-energy`) -/
 theorem le_sub_one_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]
     [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (V ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (V ↘ Spec (CommRingCat.of k₀))]
-    (N : WeilSheaf k₀ l V) (hN : ¬ Limits.IsZero N) (hlisse : N.IsLisse) {v : ℝ}
+    (N : LAdicWeilSheaf k₀ l V) (hN : ¬ Limits.IsZero N) (hlisse : N.IsLisse) {v : ℝ}
     (hpure : N.IsPunctuallyPureOfWeight ι v) {C B : ℝ} (hC : 0 < C)
     (hS : ∀ n : ℕ, 1 ≤ n → N.traceEnergy ι n ≤ C * (Nat.card k₀ : ℝ) ^ ((n : ℝ) * B)) :
     v ≤ B - 1 := by
@@ -632,7 +633,7 @@ namespace LisseOnDenseOpen
 open immersion and `M` a nonzero lisse Weil sheaf on the smooth geometrically connected affine
 curve `U₀`, punctually `ι`-pure of weight `w`. Then `‖j_*M‖ = ‖M‖ = w`.
 
-The rigidity `AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isPunctuallyPureOfWeight` gives
+The rigidity `AlgebraicGeometry.LAdicWeilSheaf.l2Weight_eq_of_isPunctuallyPureOfWeight` gives
 `‖M‖ = w`. The trace energies of `j_*M` are those of `M` plus the boundary contribution
 `E_m = ∑_{y ∈ S₀(𝔽_{qᵐ})} |t_{j_*M}(y)|² ≥ 0`, which is at most `D r² q^{mw}` by the boundary
 semicontinuity, with `D = ∑_{s ∈ S₀} d(s)` and `r` the rank of `M`. Hence `‖M‖ ≤ ‖j_*M‖` and
@@ -659,6 +660,6 @@ theorem l2Weight_directImage (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen
 
 end LisseOnDenseOpen
 
-end WeilSheaf
+end LAdicWeilSheaf
 
 end AlgebraicGeometry

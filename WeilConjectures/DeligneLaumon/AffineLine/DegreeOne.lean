@@ -29,9 +29,9 @@ bound holds for every irreducible, non-geometrically-constant `M` unramified at 
 
 - `AlgebraicGeometry.nonempty_equiv_stalk_homologySheaf_fourierTransform_origin`: the stalk of
   `FT_ψ(K)` at the origin of the dual line is `RΓ_c(A, K)[1]`.
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`: boundary
+- `AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`: boundary
   semicontinuity of weights for the direct image `j_*M` on the affine line.
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`:
+- `LAdicWeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`:
   the stationary-phase identification `H_c^1(A, j_*M) ≃ (j'_*M')_{0'}` and the vanishing of
   `H_c^2(A, j_*M)`.
 - `AlgebraicGeometry.hasWeightsAtMost_compactlySupportedCohomology_one`: the degree-one bound
@@ -81,8 +81,8 @@ kernel `ℒ_{ψ(x · 0)}` is constant, so the stalk formula identifies the fibre
 `0'` with `RΓ_c(𝔸¹, K)[1]`: in each degree `r`, the stalk of `𝓗^r FT_ψ(K)` at `0'` is
 `H_c^{r+1}(𝔸¹ ⊗ k̄, K)`, Frobenius-equivariantly. (blueprint: `lem-fd-stalk-at-origin`) -/
 theorem nonempty_equiv_stalk_homologySheaf_fourierTransform_origin
-    (K : WeilComplex k₀ l (affineLine k₀)) (r : ℤ) :
-    Nonempty ((((WeilComplex.homologySheaf r).obj ((fourierTransform ψ).obj K)).stalk
+    (K : LAdicWeilComplex k₀ l (affineLine k₀)) (r : ℤ) :
+    Nonempty ((((LAdicWeilComplex.homologySheaf r).obj ((fourierTransform ψ).obj K)).stalk
       (affineLine.origin k₀)).Equiv (K.compactlySupportedCohomology (r + 1))) :=
   -- TODO(adic): the stalk formula `lem-fd-stalk-formula` at the origin
   sorry
@@ -91,21 +91,21 @@ theorem nonempty_equiv_stalk_homologySheaf_fourierTransform_origin
 fibre of `FT_ψ((j_*M)[1])` at the origin has cohomology only in degrees `-1` and `0`, namely
 `H_c^1(𝔸¹ ⊗ k̄, j_*M)` and `H_c^2(𝔸¹ ⊗ k̄, j_*M)`; the group `H_c^0` vanishes.
 (blueprint: `lem-fd-stalk-at-origin`) -/
-theorem WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_fourierTransform_middleExtension_origin
-    (D : WeilSheaf.LisseOnDenseOpen k₀ l) :
-    Nonempty ((((WeilComplex.homologySheaf (-1)).obj
+theorem LAdicWeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_fourierTransform_middleExtension_origin
+    (D : LAdicWeilSheaf.LisseOnDenseOpen k₀ l) :
+    Nonempty ((((LAdicWeilComplex.homologySheaf (-1)).obj
       ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).Equiv
         (D.directImage.compactlySupportedCohomology 1)) ∧
-    Nonempty ((((WeilComplex.homologySheaf 0).obj
+    Nonempty ((((LAdicWeilComplex.homologySheaf 0).obj
       ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).Equiv
         (D.directImage.compactlySupportedCohomology 2)) ∧
-    ∀ r : ℤ, r ∉ ({-1, 0} : Set ℤ) → Subsingleton ((((WeilComplex.homologySheaf r).obj
+    ∀ r : ℤ, r ∉ ({-1, 0} : Set ℤ) → Subsingleton ((((LAdicWeilComplex.homologySheaf r).obj
       ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).carrier) :=
   -- TODO(adic): the case of `nonempty_equiv_stalk_homologySheaf_fourierTransform_origin` for
   -- `K = (j_*M)[1]`, and `H_c^0(𝔸¹, j_*M) = 0`
   sorry
 
-namespace WeilSheaf.LisseOnDenseOpen
+namespace LAdicWeilSheaf.LisseOnDenseOpen
 
 -- the stalks of the provisional Weil sheaves are zero, and the proof needs no hypothesis
 set_option linter.unusedVariables false in
@@ -116,10 +116,10 @@ singular. This is the case of the affine line of the blueprint lemma, which hold
 smooth geometrically connected curve. (blueprint: `lem-wf-boundary-semicontinuity`) -/
 theorem hasWeightsAtMost_directImage (D : LisseOnDenseOpen k₀ l) {ι : PadicAlgCl l →+* ℂ}
     {β : ℝ} (hβ : D.sheaf.HasWeightsAtMost ι β) : D.directImage.HasWeightsAtMost ι β :=
-  -- the stalks of `j_*M` are zero, see `WeilSheaf.isZero_stalkObj`
+  -- the stalks of `j_*M` are zero, see `LAdicWeilSheaf.isZero_stalkObj`
   fun x α hα ↦ by
     have : Subsingleton (D.directImage.stalk x).carrier :=
-      WeilSheaf.subsingleton_stalkAt_carrier _ _ _ _
+      LAdicWeilSheaf.subsingleton_stalkAt_carrier _ _ _ _
     obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
     exact absurd (Subsingleton.elim v 0) hv.2
 
@@ -141,22 +141,22 @@ theorem nonempty_equiv_stalk_origin_of_isFourierPartner (ψ : AddChar k₀ (Padi
     Nonempty ((D.directImage.compactlySupportedCohomology 1).Equiv
         (D'.directImage.stalk (affineLine.origin k₀))) ∧
       Subsingleton (D.directImage.compactlySupportedCohomology 2).carrier := by
-  -- both sides are zero, see `WeilComplex.subsingleton_compactlySupportedCohomology_carrier`
-  -- and `WeilSheaf.subsingleton_stalkAt_carrier`
+  -- both sides are zero, see `LAdicWeilComplex.subsingleton_compactlySupportedCohomology_carrier`
+  -- and `LAdicWeilSheaf.subsingleton_stalkAt_carrier`
   have h :=
-    (WeilSheaf.toComplex.obj D.directImage).subsingleton_compactlySupportedCohomology_carrier
+    (LAdicWeilSheaf.toComplex.obj D.directImage).subsingleton_compactlySupportedCohomology_carrier
   have : Subsingleton (D.directImage.compactlySupportedCohomology 1).carrier := h 1
   have : Subsingleton (D'.directImage.stalk (affineLine.origin k₀)).carrier :=
-    WeilSheaf.subsingleton_stalkAt_carrier _ _ _ _
+    LAdicWeilSheaf.subsingleton_stalkAt_carrier _ _ _ _
   exact ⟨⟨⟨LinearEquiv.ofSubsingleton _ _, fun _ ↦ Subsingleton.elim _ _⟩⟩, h 2⟩
 
-end WeilSheaf.LisseOnDenseOpen
+end LAdicWeilSheaf.LisseOnDenseOpen
 
 /-- If `M` is irreducible, nonexceptional for a nontrivial `ψ` and punctually `ι`-pure of
 weight `w` on a dense open `U₀` of the affine line, then `H_c^1(A, j_*M)` has weights at most
 `w + 1`. (blueprint: `sk-c-dl-a1-hc1`, `cor-a1-fourier-middle-hc1`) -/
 theorem hasWeightsAtMost_compactlySupportedCohomology_one (ι : PadicAlgCl l →+* ℂ)
-    (hψ : ψ ≠ 1) (D : WeilSheaf.LisseOnDenseOpen k₀ l) [Simple D.sheaf]
+    (hψ : ψ ≠ 1) (D : LAdicWeilSheaf.LisseOnDenseOpen k₀ l) [Simple D.sheaf]
     (hne : D.sheaf.IsNonexceptional ψ) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
     (D.directImage.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
