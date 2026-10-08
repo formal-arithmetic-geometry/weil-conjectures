@@ -387,6 +387,7 @@ public import WeilConjectures.FieldTheory.Cr
 public import WeilConjectures.FieldTheory.Tsen
 public import WeilConjectures.FourierTransform.AffineSpace
 public import WeilConjectures.FourierTransform.ArtinSchreier
+public import WeilConjectures.FourierTransform.Classical
 public import WeilConjectures.FourierTransform.Defs
 public import WeilConjectures.FourierTransform.Inversion
 public import WeilConjectures.FourierTransform.Perverse

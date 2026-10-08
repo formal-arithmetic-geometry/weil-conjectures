@@ -12,7 +12,7 @@ public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
 
 /-!
-# Stalks, trace functions and weights of Weil sheaves
+# Stalks, trace functions and weights of Weil sheaves and Weil complexes
 
 Let `F` be a Weil sheaf on a `k₀`-scheme `X`: a constructible `ℓ`-adic pro-étale sheaf on the
 geometric fiber `X̄ = X ×_{k₀} k̄` with an isomorphism `φ : Fr^* F ≅ F`, where `Fr = 𝟙 × σ` is the
@@ -55,6 +55,8 @@ function is computed by the local Frobenius at the closed points,
   geometric Frobenius `Fₓ`.
 - `AlgebraicGeometry.WeilSheaf.support`: the closed points with nonzero stalk.
 - `AlgebraicGeometry.WeilSheaf.traceFunction`: the trace function `t_{F,n}`.
+- `AlgebraicGeometry.WeilComplex.traceFunction`: the trace function `t_K` of a Weil complex, the
+  alternating sum of the trace functions of its cohomology sheaves.
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight`,
   `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost` and `AlgebraicGeometry.WeilSheaf.IsReal`: the
   weight conditions and the reality condition.
@@ -68,6 +70,8 @@ function is computed by the local Frobenius at the closed points,
   polynomial of the local Frobenius does not depend on the geometric point.
 - `AlgebraicGeometry.WeilSheaf.traceFunction_eq_trace_frobeniusEnd_stalk_pow`: the trace
   function at an `𝔽_{qⁿ}`-point over a closed point `x` is `Tr(Fₓ^{n / e_x})`.
+- `AlgebraicGeometry.WeilComplex.traceFunction_eq_sum`: the alternating sum defining the trace
+  function of a Weil complex is finite.
 - `AlgebraicGeometry.WeilSheaf.globalSectionsToStalkObj_frobenius`: restriction of global
   sections to a stalk intertwines the two Frobenii.
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.upperStar`: pullback preserves punctual
