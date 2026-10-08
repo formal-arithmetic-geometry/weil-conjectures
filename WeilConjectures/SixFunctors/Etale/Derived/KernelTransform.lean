@@ -178,6 +178,22 @@ noncomputable def kernelConvolution
         ((D((pullback.snd (pullback.snd π π') (pullback.fst π' π''))^*[A])).obj 𝒦')).obj
       ((D((pullback.fst (pullback.snd π π') (pullback.fst π' π''))^*[A])).obj 𝒦))
 
+set_option maxHeartbeats 4000000 in
+-- The kernel compares the stored body of `kernelConvolution`, whose proof arguments are
+-- auxiliary lemmas, with the elaborated right-hand side; this takes a few minutes, done once here.
+/-- The convolution unfolded: `𝒦' ∗ 𝒦 = r₁₃,!(r₁₂^* 𝒦 ⊗ᴸ r₂₃^* 𝒦')`. Rewriting with this lemma
+avoids unfolding `AlgebraicGeometry.Etale.kernelConvolution` at specific coefficients, which is
+much slower in the kernel. -/
+theorem kernelConvolution_eq [HasCompactification (pullback.tripleProj₁₃ π π' π'')]
+    (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A))
+    (𝒦' : DerivedCategory (Sheaf (pullback π' π'').smallEtaleTopology A)) :
+    kernelConvolution A π π' π'' 𝒦 𝒦' =
+      (R(pullback.tripleProj₁₃ π π' π'')_![A]).obj
+        ((derivedTensorRight A (pullback (pullback.snd π π') (pullback.fst π' π''))
+            ((D((pullback.snd (pullback.snd π π') (pullback.fst π' π''))^*[A])).obj 𝒦')).obj
+          ((D((pullback.fst (pullback.snd π π') (pullback.fst π' π''))^*[A])).obj 𝒦)) :=
+  rfl
+
 variable [Etale.UpperStarPreservesFlat A]
   {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]

@@ -6,6 +6,9 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.FourierTransform.AffineSpace
+public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 /-!
 
@@ -58,9 +61,248 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-open AffineSpace
+open _root_.AlgebraicGeometry.AffineSpace
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
+
+section ConvolutionKernel
+
+variable (n : Type u) [Fintype n] (S : Scheme.{u})
+
+/-- The compactly supported direct image of the Fourier kernel along the second projection is
+the skyscraper at the origin, Tate twisted by `(-r)` and shifted by `-2r`, `r = #n`:
+
+`Rp₂,! 𝒦_ψ ≅ δ₀(-r)[-2r]`.
+
+At a geometric point `c` this is `RΓ_c(𝔸^r, ℒ_{ψ(⟨ξ, c⟩)})`, which vanishes for `c ≠ 0` and is
+`Λ(-r)[-2r]` for `c = 0`. It is the transform of the constant sheaf
+(`AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_unit`) with the shift `[r]` of the
+transform removed, `p₁^* Λ ⊗ᴸ 𝒦_ψ` being `𝒦_ψ`.
+(sketch blueprint: `sk-prop-convolution-kernel`, proof) -/
+theorem nonempty_iso_rightDerivedLowerShriek_fourierKernel [Finite Λ]
+    [HasInvertibleExponent Λ S] [HasTateTwist Λ]
+    [CharP Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) p]
+    [HasCompactification (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))]
+    (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
+    Nonempty ((R(pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))_![ModuleCat.{u + 1} Λ]).obj
+        ((DerivedCategory.singleFunctor _ 0).obj
+          (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S))) ≅
+      (shiftFunctor _ (-2 * (Fintype.card n : ℤ))).obj
+        ((tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj (skyscraperZero Λ n S))) := by
+  obtain ⟨e⟩ := nonempty_iso_affineFourierTransform_unit Λ n S Ψ hΨ
+  -- `p₁^* Λ ⊗ᴸ 𝒦_ψ ≅ 𝒦_ψ`
+  let c : ((derivedTensor (ModuleCat.{u + 1} Λ) _).obj
+        ((D((pullback.fst (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))^*[ModuleCat.{u + 1} Λ])).obj
+          (𝟙_ _))).obj
+        ((DerivedCategory.singleFunctor _ 0).obj
+          (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S))) ≅
+      (DerivedCategory.singleFunctor _ 0).obj
+        (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S)) :=
+    ((derivedTensor (ModuleCat.{u + 1} Λ) _).mapIso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ _).symm.app (𝟙_ _) ≪≫
+        leftDerivedUpperStarConstantComplexIso Λ _)).app _ ≪≫ λ_ _
+  let e' : (shiftFunctor _ (Fintype.card n : ℤ)).obj
+        ((R(pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))_![ModuleCat.{u + 1} Λ]).obj
+          ((DerivedCategory.singleFunctor _ 0).obj
+            (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S)))) ≅
+      (shiftFunctor _ (-(Fintype.card n : ℤ))).obj
+        ((tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj (skyscraperZero Λ n S)) :=
+    (shiftFunctor _ _).mapIso
+      ((R(pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))_![ModuleCat.{u + 1} Λ]).mapIso c.symm) ≪≫ e
+  exact ⟨(shiftFunctorCompIsoId _ (Fintype.card n : ℤ) _ (add_neg_cancel _)).symm.app _ ≪≫
+    (shiftFunctor _ _).mapIso e' ≪≫ (shiftFunctorAdd' _ _ _ _ (by ring)).symm.app _⟩
+
+/-- Pulling back a skyscraper along a cartesian square gives a pushforward: for a cartesian
+square of schemes
+
+```
+    W ───δ───▶ P
+    │          │
+   π│          │ d
+    ▼          ▼
+    S ───z───▶ V
+```
+
+with `z` and `δ` proper, every twist `m` and shift `a`,
+
+`d^*((z_* Λ)(m)[a]) ≅ (δ_* Λ(m))[a]`.
+
+This is compact-support base change for `z` (`z_* = z_!`), followed by the projection formula
+for `δ`.
+
+Class: torsion; decided by compact-support base change and the projection formula at finite
+coefficients, which need `[Finite Λ]`.
+(sketch blueprint: `sk-prop-convolution-kernel`, proof) -/
+theorem nonempty_iso_leftDerivedUpperStar_tateTwist_of_isPullback [Finite Λ] [HasTateTwist Λ]
+    {S W P V : Scheme.{u}} {π : W ⟶ S} {δ : W ⟶ P} {z : S ⟶ V} {d : P ⟶ V}
+    (hsq : IsPullback π δ z d) [IsProper z] [IsProper δ] (m a : ℤ) :
+    Nonempty ((L((d)^*[ModuleCat.{u + 1} Λ])).obj
+        ((shiftFunctor _ a).obj ((tateTwist Λ V m).obj
+          ((R((z)_*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _)))) ≅
+      (shiftFunctor _ a).obj ((R((δ)_*[ModuleCat.{u + 1} Λ])).obj (tateObject Λ W m))) := by
+  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ hsq
+  have := isIso_projectionMap_of_finite Λ δ
+  -- `d^* z_* Λ ≅ δ_! Λ`, by base change for `z`
+  let a₁ : (L((d)^*[ModuleCat.{u + 1} Λ])).obj ((R((z)_*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _)) ≅
+      (R(δ)_![ModuleCat.{u + 1} Λ]).obj (𝟙_ _) :=
+    (L((d)^*[ModuleCat.{u + 1} Λ])).mapIso
+        ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ z).symm.app (𝟙_ _)) ≪≫
+      (asIso (rightDerivedLowerShriekBaseChangeMap _ hsq)).app (𝟙_ _) ≪≫
+      (R(δ)_![ModuleCat.{u + 1} Λ]).mapIso (leftDerivedUpperStarConstantComplexIso Λ π)
+  -- `d^*(z_* Λ ⊗ᴸ Λ(m)) ≅ δ_! Λ ⊗ᴸ Λ(m) ≅ δ_!(δ^* Λ(m)) ≅ δ_* Λ(m)`
+  let a₂ : (L((d)^*[ModuleCat.{u + 1} Λ])).obj
+        ((tateTwist Λ V m).obj ((R((z)_*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _))) ≅
+      (R((δ)_*[ModuleCat.{u + 1} Λ])).obj (tateObject Λ W m) :=
+    leftDerivedUpperStarTensorIso _ d _ _ ≪≫
+      ((derivedTensor (ModuleCat.{u + 1} Λ) _).mapIso a₁).app _ ≪≫
+      ((derivedTensor (ModuleCat.{u + 1} Λ) _).obj _).mapIso
+        (leftDerivedUpperStarTateObjectIso d m) ≪≫
+      ((asIso (projectionMap _ δ)).app (𝟙_ _)).app _ ≪≫
+      (R(δ)_![ModuleCat.{u + 1} Λ]).mapIso
+        (((derivedTensor (ModuleCat.{u + 1} Λ) _).obj (𝟙_ _)).mapIso
+          (leftDerivedUpperStarTateObjectIso δ m) ≪≫ λ_ _) ≪≫
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar _ _).app _
+  exact ⟨((L((d)^*[ModuleCat.{u + 1} Λ])).commShiftIso a).app _ ≪≫
+    (shiftFunctor _ a).mapIso a₂⟩
+
+omit [Fintype n] in
+/-- Pulling the skyscraper at the origin back along the subtraction `(x, y) ↦ x - y` gives the
+constant sheaf on the diagonal: for every twist `m` and shift `a`,
+
+`sub^*(δ₀(m)[a]) ≅ (Δ_* Λ(m))[a]`,
+
+since the diagonal is the fibre of the subtraction over the zero section
+(`AlgebraicGeometry.AffineSpace.isPullback_diagonal_sub`).
+(sketch blueprint: `sk-prop-convolution-kernel`, proof) -/
+theorem nonempty_iso_leftDerivedUpperStar_sub_skyscraperZero [Finite Λ] [HasTateTwist Λ]
+    (m a : ℤ) :
+    Nonempty ((L((sub n S)^*[ModuleCat.{u + 1} Λ])).obj
+        ((shiftFunctor _ a).obj ((tateTwist Λ (𝔸(n; S)) m).obj (skyscraperZero Λ n S))) ≅
+      (shiftFunctor _ a).obj
+        ((R((pullback.diagonal (𝔸(n; S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
+          (tateObject Λ (𝔸(n; S)) m))) :=
+  -- The target of the diagonal is `pullback.diagonalObj`; naming it `pullback` here keeps the
+  -- derived tensor products over a single scheme, which the kernel compares much faster.
+  nonempty_iso_leftDerivedUpperStar_tateTwist_of_isPullback Λ
+    (P := pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)) (isPullback_diagonal_sub n S) m a
+
+/-- The compactly supported direct image of an integrand of Artin–Schreier sheaves along a
+cartesian square: for a cartesian square
+
+```
+    T ───σ───▶ P
+    │          │
+ r₁₃│          │ p₂
+    ▼          ▼
+    Q ───d───▶ V
+```
+
+of schemes of characteristic `p`, two maps `r₁₂, r₂₃ : T ⟶ P` and a function `b` on `P` with
+`σ^* b = r₁₂^* b - r₂₃^* b`,
+
+`Rr₁₃,!(r₁₂^* ℒ_{ψ, b} ⊗ᴸ r₂₃^* ℒ_{ψ⁻¹, b}) ≅ d^* Rp₂,! ℒ_{ψ, b}`.
+
+The integrand is `ℒ_{ψ, r₁₂^* b - r₂₃^* b} = σ^* ℒ_{ψ, b}`
+(`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafZMod_sub`, the sheaves being flat), and
+compact-support base change concludes. The sheaves are passed as `F`, `F'` together with
+equations, so that the statement can be applied to sheaves that are only definitionally
+Artin–Schreier sheaves, such as the Fourier kernels.
+
+Class: torsion; decided by compact-support base change, which needs `[Finite Λ]`.
+(sketch blueprint: `sk-prop-convolution-kernel`, proof) -/
+theorem nonempty_iso_rightDerivedLowerShriek_artinSchreierSheafZMod_of_isPullback [Finite Λ]
+    {T P Q V : Scheme.{u}} [CharP Γ(P, ⊤) p] [CharP Γ(T, ⊤) p]
+    (r₁₂ r₂₃ σ : T ⟶ P) (r₁₃ : T ⟶ Q) (p₂ : P ⟶ V) (d : Q ⟶ V)
+    (hsq : IsPullback σ r₁₃ p₂ d) [HasCompactification p₂] [HasCompactification r₁₃]
+    [QuasiCompact r₁₃] (Ψ : AddChar (ZMod p) Λ) (b : Γ(P, ⊤))
+    (hb : σ.appTop b = r₁₂.appTop b - r₂₃.appTop b)
+    (F F' : Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hF : F = artinSchreierSheafZMod P Ψ b) (hF' : F' = artinSchreierSheafZMod P Ψ⁻¹ b) :
+    Nonempty ((R(r₁₃)_![ModuleCat.{u + 1} Λ]).obj
+        ((derivedTensorRight (ModuleCat.{u + 1} Λ) T
+          ((D((r₂₃)^*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.singleFunctor _ 0).obj F'))).obj
+          ((D((r₁₂)^*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.singleFunctor _ 0).obj F))) ≅
+      (L((d)^*[ModuleCat.{u + 1} Λ])).obj ((R(p₂)_![ModuleCat.{u + 1} Λ]).obj
+        ((DerivedCategory.singleFunctor _ 0).obj F))) := by
+  subst hF hF'
+  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ hsq
+  obtain ⟨m⟩ := nonempty_iso_artinSchreierSheafZMod_sub T Ψ (r₁₂.appTop b) (r₂₃.appTop b)
+  -- the integrand is the pullback of `ℒ_{ψ, b}` along `σ`
+  let k : (derivedTensorRight (ModuleCat.{u + 1} Λ) T
+          ((D((r₂₃)^*[ModuleCat.{u + 1} Λ])).obj
+            ((DerivedCategory.singleFunctor _ 0).obj (artinSchreierSheafZMod P Ψ⁻¹ b)))).obj
+          ((D((r₁₂)^*[ModuleCat.{u + 1} Λ])).obj
+            ((DerivedCategory.singleFunctor _ 0).obj (artinSchreierSheafZMod P Ψ b))) ≅
+      (D((σ)^*[ModuleCat.{u + 1} Λ])).obj
+        ((DerivedCategory.singleFunctor _ 0).obj (artinSchreierSheafZMod P Ψ b)) :=
+    (derivedTensorRight (ModuleCat.{u + 1} Λ) T _).mapIso
+        (((r₁₂)^*[ModuleCat.{u + 1} Λ].mapDerivedCategorySingleFunctor 0).app _ ≪≫
+          (DerivedCategory.singleFunctor _ 0).mapIso
+            (artinSchreierSheafZModPullbackIso r₁₂ Ψ b)) ≪≫
+      ((derivedTensor (ModuleCat.{u + 1} Λ) T).obj _).mapIso
+        (((r₂₃)^*[ModuleCat.{u + 1} Λ].mapDerivedCategorySingleFunctor 0).app _ ≪≫
+          (DerivedCategory.singleFunctor _ 0).mapIso
+            (artinSchreierSheafZModPullbackIso r₂₃ Ψ⁻¹ b)) ≪≫
+      derivedTensorSingleIsoOfFlat _ _ (flat_artinSchreierSheafZMod T Ψ⁻¹ _) ≪≫
+      (DerivedCategory.singleFunctor _ 0).mapIso
+        (m ≪≫ eqToIso (by rw [hb]) ≪≫ (artinSchreierSheafZModPullbackIso σ Ψ b).symm) ≪≫
+      (((σ)^*[ModuleCat.{u + 1} Λ].mapDerivedCategorySingleFunctor 0).app _).symm
+  exact ⟨(R(r₁₃)_![ModuleCat.{u + 1} Λ]).mapIso
+      (k ≪≫ (leftDerivedUpperStarIsoMapDerivedCategory _ σ).symm.app _) ≪≫
+    (asIso (rightDerivedLowerShriekBaseChangeMap _ hsq)).symm.app _⟩
+
+/-- The convolution of the Fourier kernels of `ψ` and `ψ⁻¹` is the pullback along the
+subtraction `(x, y) ↦ x - y` of the compactly supported direct image of the Fourier kernel:
+
+`𝒦_{ψ⁻¹} ∗ 𝒦_ψ ≅ sub^* Rp₂,! 𝒦_ψ`.
+
+On the triple product the integrand `r₁₂^* 𝒦_ψ ⊗ᴸ r₂₃^* 𝒦_{ψ⁻¹}` is the Artin–Schreier sheaf
+of `⟨x, ξ⟩ - ⟨ξ, y⟩ = ⟨ξ, x - y⟩`, the pullback of `𝒦_ψ` along the shear
+`(x, ξ, y) ↦ (ξ, x - y)`, which exhibits `r₁₃` as a base change of `p₂` along the subtraction
+(`AlgebraicGeometry.AffineSpace.isPullback_convolutionShear`).
+
+Class: torsion; decided by compact-support base change, which needs `[Finite Λ]`.
+(sketch blueprint: `sk-prop-convolution-kernel`, proof) -/
+theorem nonempty_iso_kernelConvolution_fourierKernel [Finite Λ]
+    [CharP Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) p]
+    [HasCompactification (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))]
+    [HasCompactification
+      (pullback.tripleProj₁₃ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))]
+    (Ψ : AddChar (ZMod p) Λ) :
+    Nonempty (kernelConvolution (ModuleCat.{u + 1} Λ) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)
+          ((DerivedCategory.singleFunctor _ 0).obj
+            (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S)))
+          ((DerivedCategory.singleFunctor _ 0).obj
+            (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ⁻¹ (stdPairing n S))) ≅
+        (L((sub n S)^*[ModuleCat.{u + 1} Λ])).obj
+          ((R(pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))_![ModuleCat.{u + 1} Λ]).obj
+            ((DerivedCategory.singleFunctor _ 0).obj
+              (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S))))) := by
+  -- the triple product has characteristic `p`: it maps to `𝔸 ×_S 𝔸` and has a section over it
+  have : CharP Γ(pullback (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))
+      (pullback.fst (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)), ⊤) p := by
+    let σ : pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ⟶
+        pullback (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))
+          (pullback.fst (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)) :=
+      pullback.lift (𝟙 _) (pullback.lift (pullback.snd _ _) (pullback.snd _ _) rfl)
+        (by rw [pullback.lift_fst, Category.id_comp])
+    refine ⟨fun x ↦ ⟨fun h ↦ ?_, fun h ↦ ?_⟩⟩
+    · have h' := congrArg σ.appTop h
+      rw [map_natCast, map_zero] at h'
+      exact (CharP.cast_eq_zero_iff _ p x).1 h'
+    · have h' := congrArg (pullback.fst (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))
+        (pullback.fst (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))).appTop
+          ((CharP.cast_eq_zero_iff _ p x).2 h)
+      rwa [map_natCast, map_zero] at h'
+  have hsq := isPullback_convolutionShear n S
+  have : QuasiCompact (pullback.tripleProj₁₃ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact) hsq inferInstance
+  -- unfolding `kernelConvolution` here directly is very slow in the kernel
+  rw [kernelConvolution_eq]
+  exact nonempty_iso_rightDerivedLowerShriek_artinSchreierSheafZMod_of_isPullback Λ _ _ _ _ _ _
+    hsq Ψ _ (convolutionShear_appTop_stdPairing n S) _ _ rfl rfl
+
+end ConvolutionKernel
 
 section Inversion
 
@@ -94,8 +336,12 @@ theorem nonempty_iso_fourierKernel_convolution [Finite Λ] [HasInvertibleExponen
             (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ⁻¹ (stdPairing n S))) ≅
         (shiftFunctor _ (-2 * (Fintype.card n : ℤ))).obj
           ((R((pullback.diagonal (𝔸(n; S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
-            (tateObject Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))))) :=
-  sorry
+            (tateObject Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))))) := by
+  obtain ⟨e₁⟩ := nonempty_iso_kernelConvolution_fourierKernel Λ n S Ψ
+  obtain ⟨e₂⟩ := nonempty_iso_rightDerivedLowerShriek_fourierKernel Λ n S Ψ hΨ
+  obtain ⟨e₃⟩ := nonempty_iso_leftDerivedUpperStar_sub_skyscraperZero Λ n S
+    (-(Fintype.card n : ℤ)) (-2 * (Fintype.card n : ℤ))
+  exact ⟨e₁ ≪≫ (L((sub n S)^*[ModuleCat.{u + 1} Λ])).mapIso e₂ ≪≫ e₃⟩
 
 /-- **Fourier inversion.** On `𝔸(n; S)` the Fourier–Deligne transform for the inverse
 character inverts the Fourier–Deligne transform up to the Tate twist `(-r)`,
