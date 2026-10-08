@@ -39,6 +39,27 @@ lemma presheaf_map_app_unitSectionsEquiv_one {L : X.Modules} (φ : 𝟙_ X.Modul
       φ.app W (unitSectionsEquiv W 1) := by
   rw [← Hom.app_presheaf_map, presheaf_map_unitSectionsEquiv, map_one]
 
+/-- **A positive power of a section vanishes where the section does**: for `m > 0`, the zero
+scheme of `s^{⊗ m}` has the same support as the zero scheme of `s`. On an affine open where `ℒ`
+has a free generator `e` and `s = f • e`, one has `s^{⊗ m} = f ^ m • e^{⊗ m}`, and
+`D(f ^ m) = D(f)`. -/
+lemma compl_support_zeroLocus_tensorPowSection (L : X.Modules) [L.IsInvertible]
+    (s : 𝟙_ X.Modules ⟶ L) {m : ℕ} (hm : 0 < m) :
+    (Hom.zeroLocus (tensorPowSection s m)).support.compl = (Hom.zeroLocus s).support.compl := by
+  have := IsInvertible.sheafOfModules_isInvertible L
+  have := IsInvertible.sheafOfModules_isInvertible (L.tensorPow m)
+  ext x
+  obtain ⟨V, hxV, -, e, he⟩ := exists_isFreeGenerator L (x := x) (W := ⊤) trivial
+  obtain ⟨f, hf⟩ := he.exists_smul_eq (s.app V.1 (unitSectionsEquiv _ 1))
+  obtain ⟨E, hE, hsE⟩ := exists_tensorPowSectionOne_eq_pow_smul s he hf.symm m
+  have h₁ := basicOpen_coeff_eq s V he
+  have h₂ := basicOpen_coeff_eq (tensorPowSection s m) V hE
+  rw [(he.coeff_eq_iff _ _).mpr hf] at h₁
+  rw [(hE.coeff_eq_iff _ _).mpr hsE.symm, X.basicOpen_pow _ hm, h₁] at h₂
+  have := congrArg (x ∈ ·) h₂
+  simp only [TopologicalSpace.Opens.mem_inf, eq_iff_iff] at this
+  exact ⟨fun h ↦ (this.mpr ⟨hxV, h⟩).2, fun h ↦ (this.mp ⟨hxV, h⟩).2⟩
+
 /-- **The non-vanishing locus of a section is affine.** Let `f : X ⟶ S` be universally closed
 with `S` affine, and let `ℒ` be an invertible `𝒪_X`-module with finitely many global sections
 `x j` whose non-vanishing loci `X_{x j}` are affine and cover `X`. Then the non-vanishing locus

@@ -16,10 +16,12 @@ public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+public import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SegreTwist
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
@@ -478,8 +480,50 @@ theorem isAffine_compl_of_isAmple_dual_toModules {k : Type u} [Field k]
     (f : X ⟶ Spec (.of k)) [IsProper f] {J : X.IdealSheafData} (hJ : J.IsInvertible)
     (hample : IsAmple f J.toModulesᵛ) {V : Scheme.{u}} (j : V ⟶ X) [IsOpenImmersion j]
     (hj : Set.range j.base = (J.support : Set X)ᶜ) :
-    IsAffine V :=
-  sorry
+    IsAffine V := by
+  have := hJ.isInvertible_dual_toModules
+  obtain ⟨m, hm, n, i, hn, hi, -, ⟨e⟩⟩ := hample
+  obtain ⟨s, hs⟩ := hJ.exists_zeroLocus_eq
+  let L := ProjectiveSpace.twistRestrict i 1
+  have : L.IsInvertible := Scheme.Modules.IsInvertible.of_iso e.symm
+  have := Scheme.Modules.IsInvertible.sheafOfModules_isInvertible L
+  have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ X.Modules) :=
+    Scheme.Modules.IsInvertible.sheafOfModules_isInvertible _
+  have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ (ℙ(n; Spec (.of k))).Modules) :=
+    Scheme.Modules.IsInvertible.sheafOfModules_isInvertible _
+  -- The pullbacks `x l` of the coordinate sections, with non-vanishing loci `i⁻¹ D₊(T_l)`.
+  let x (l : n) : 𝟙_ X.Modules ⟶ L := (Scheme.Modules.pullbackObjUnitIso i).inv ≫
+    (Scheme.Modules.pullback i).map (ProjectiveSpace.coordinateSection n _ l)
+  have hx (l : n) : (Scheme.Modules.Hom.zeroLocus (x l)).support.compl =
+      i ⁻¹ᵁ ProjectiveSpace.standardOpen n _ l := by
+    have h₁ : (x l).zeroLocus =
+        ((Scheme.Modules.pullback i).map (ProjectiveSpace.coordinateSection n _ l)).zeroLocus :=
+      Scheme.Modules.Hom.zeroLocus_eq_of_arrowIso _ _
+        (Arrow.isoMk (Scheme.Modules.pullbackObjUnitIso _).symm (Iso.refl _)
+          (Category.comp_id _).symm)
+    rw [h₁, ← Scheme.Modules.Hom.comap_zeroLocus,
+      ← ProjectiveSpace.compl_support_zeroLocus_coordinateSection]
+    exact (congrArg TopologicalSpace.Closeds.compl
+      (Scheme.IdealSheafData.support_comap _ i)).trans rfl
+  -- The `m`-th power `t` of the canonical section of `𝒪_X(D)`, with non-vanishing locus `X \ D`.
+  let t : 𝟙_ X.Modules ⟶ L := Scheme.Modules.tensorPowSection s m ≫ e.inv
+  have ht : (Scheme.Modules.Hom.zeroLocus t).support.compl = J.support.compl := by
+    have h₁ : (Scheme.Modules.tensorPowSection s m).zeroLocus = t.zeroLocus :=
+      Scheme.Modules.Hom.zeroLocus_eq_of_arrowIso _ _
+        (Arrow.isoMk (Iso.refl _) e.symm (by simp [t]))
+    rw [← h₁, Scheme.Modules.compl_support_zeroLocus_tensorPowSection _ s hm, hs]
+  have hU := Scheme.Modules.isAffineOpen_compl_support_zeroLocus f L x
+    (fun l ↦ hx l ▸ (ProjectiveSpace.isAffineOpen_standardOpen n _ l).preimage i)
+    (eq_top_iff.mpr fun p _ ↦ by
+      obtain ⟨l, hl⟩ := TopologicalSpace.Opens.mem_iSup.mp
+        ((ProjectiveSpace.iSup_standardOpen n (Spec (.of k))).ge (Set.mem_univ (i p)))
+      exact TopologicalSpace.Opens.mem_iSup.mpr ⟨l, by rw [hx]; exact hl⟩) t
+  have hr : j.opensRange = J.support.compl := by
+    ext1
+    exact hj
+  rw [ht, ← hr] at hU
+  have : IsAffine j.opensRange.toScheme := hU
+  exact IsAffine.of_isIso j.isoOpensRange.hom
 
 /-- **An ample module on a connected proper curve has positive degree.** Let `K` be
 algebraically closed, `X` a connected proper curve over `K` and `L` an ample invertible
