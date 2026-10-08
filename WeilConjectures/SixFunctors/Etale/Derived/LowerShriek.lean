@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -200,6 +201,15 @@ variable (Λ : Type*) [Ring Λ] [Linear Λ A] in
 compactification. -/
 instance linear_rightDerivedLowerShriek : R(f)_![A].Linear Λ :=
   inferInstanceAs ((Rf_!(HasCompactification.compactification f)[A]).Linear Λ)
+
+/-- The derived lower shriek `Rf_! = D(i_!) ⋙ Rg_*` commutes with the shift: both factors do. -/
+noncomputable instance : R(f)_![A].CommShift ℤ :=
+  inferInstanceAs ((Rf_!(HasCompactification.compactification f)[A]).CommShift ℤ)
+
+/-- The derived lower shriek `Rf_! = D(i_!) ⋙ Rg_*` is a triangulated functor: both factors
+are. -/
+instance : R(f)_![A].IsTriangulated :=
+  inferInstanceAs ((Rf_!(HasCompactification.compactification f)[A]).IsTriangulated)
 
 end Etale
 

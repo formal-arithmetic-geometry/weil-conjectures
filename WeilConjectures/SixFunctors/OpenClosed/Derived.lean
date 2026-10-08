@@ -33,6 +33,8 @@ total left derived functors `L(g^*)` through the isomorphism
 
 ## Main results
 
+- `AlgebraicGeometry.Etale.isZero_of_isZero_mapDerivedCategoryUpperStar`: an object killed by
+  `D(j^*)` and `D(i^*)` is zero.
 - `AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_leftDerivedUpperStar`: the pair
   `(Lj^*, Li^*)` jointly reflects isomorphisms, with the two-hypothesis form
   `AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_map` and the levelwise versions
@@ -66,6 +68,20 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 section Conservative
 
 variable {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
+
+/-- **Derived open–closed detection**: an object `E` of `D(X_ét)` with `D(j^*) E = 0` and
+`D(i^*) E = 0` is zero. On homology sheaves this is
+`AlgebraicGeometry.Etale.isZero_of_isZero_upperStar`, since `H^n (D(g^*) E) ≅ g^* (H^n E)` for
+`g = j, i`. -/
+theorem isZero_of_isZero_mapDerivedCategoryUpperStar
+    (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    {E : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hj : IsZero (D((j)^*[A]).obj E)) (hi : IsZero (D((i)^*[A]).obj E)) : IsZero E :=
+  (DerivedCategory.isZero_iff _).2 fun n ↦ Etale.isZero_of_isZero_upperStar A j i hij
+    (((DerivedCategory.isZero_iff _).1 hj n).of_iso
+      (((j)^*[A].mapDerivedCategoryHomologyFunctorIso n).app E))
+    (((DerivedCategory.isZero_iff _).1 hi n).of_iso
+      (((i)^*[A].mapDerivedCategoryHomologyFunctorIso n).app E))
 
 variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]

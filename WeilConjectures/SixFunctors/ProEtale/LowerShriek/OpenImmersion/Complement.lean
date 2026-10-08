@@ -81,18 +81,26 @@ variable {U W X : Scheme.{u}} (j : U ⟶ X) (k : W ⟶ X) [IsOpenImmersion j] [I
 
 open ProEtale
 
+omit [IsOpenImmersion j] in
 set_option backward.isDefEq.respectTransparency false in
 /-- For `T` weakly étale over `W`, the fibre product `T ×_X U` is empty when the ranges of `j`
-and `k` are disjoint: `T` maps into the range of `k`, which misses the range of `j`. -/
+and `k` are disjoint: `T` maps into the range of `k`, which misses the range of `j`. Only `k`
+needs to be an open immersion. -/
 lemma Scheme.ProEt.isEmpty_left_pullback_map
     (hjk : Set.range j.base ∩ Set.range k.base = ∅) (T : W.ProEt) :
     IsEmpty ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).obj
       ((MorphismProperty.Over.map ⊤ (inferInstance : @WeaklyEtale _ _ k)).obj T)).left := by
-  refine isEmpty_pullback_of_disjoint_range (T.hom ≫ k) j (Set.eq_empty_of_subset_empty ?_)
-  rintro x ⟨⟨t, rfl⟩, hx⟩
-  rw [← hjk]
-  exact ⟨hx, ⟨T.hom.base t, rfl⟩⟩
+  refine ⟨fun x ↦ ?_⟩
+  have hmem : j.base ((pullback.snd (T.hom ≫ k) j).base x) ∈
+      Set.range j.base ∩ Set.range k.base := by
+    refine ⟨⟨_, rfl⟩, T.hom.base ((pullback.fst (T.hom ≫ k) j).base x), ?_⟩
+    have h := congrArg (fun φ ↦ φ.base x) (pullback.condition (f := T.hom ≫ k) (g := j))
+    simp only [Scheme.Hom.comp_apply] at h
+    exact h
+  rw [hjk] at hmem
+  exact hmem
 
+omit [IsOpenImmersion j] in
 set_option backward.isDefEq.respectTransparency false in
 /-- The sections of `k^* j_* F` over `T : W.ProEt` are `F(T ×_X U) = F(∅)`, hence terminal. -/
 noncomputable def ProEtale.isTerminalSections_openImmersionRestriction_lowerStar
@@ -106,7 +114,7 @@ noncomputable def ProEtale.isTerminalSections_openImmersionRestriction_lowerStar
       ((MorphismProperty.Over.map ⊤ (inferInstance : @WeaklyEtale _ _ k)).obj T))
 
 set_option backward.isDefEq.respectTransparency false in
-omit [IsGrothendieckAbelian.{u + 1} A] in
+omit [IsGrothendieckAbelian.{u + 1} A] [IsOpenImmersion j] in
 /-- **`k^* j_* F` vanishes.** All its sections are terminal, hence zero. -/
 lemma ProEtale.isZero_openImmersionRestriction_lowerStar
     (hjk : Set.range j.base ∩ Set.range k.base = ∅) (F : Sheaf (Scheme.ProEt.topology U) A) :
