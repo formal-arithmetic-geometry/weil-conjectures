@@ -85,7 +85,8 @@ monodromy groups and read on `k`-points.
 
 `DegreeDatum`, `RepresentedDegreeDatum` and the attached definitions, among them
 `RepresentedDegreeDatum.arithmeticMonodromy` and `RepresentedDegreeDatum.geometricMonodromy`,
-implement `sk-d-monodromy`;
+implement `sk-d-monodromy`; `RepresentedDegreeDatum.geometricMonodromy` also implements
+`def-wf-geometric-monodromy-group`;
 `RepresentedDegreeDatum.IsPositiveCentralPair` implements `sk-d-central`;
 `RepresentedDegreeDatum.arithmeticMonodromy_le_geometricMonodromy`,
 `RepresentedDegreeDatum.zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy`,
@@ -252,7 +253,8 @@ uniquely `u γⁿ`, with `n = deg w`. For the Weil group `W(X₀)` with a lift `
 `T = T_s`, this is the Weil fundamental representation `ρ(γ sⁿ) = ρ_geom(γ) T_sⁿ`; it restricts
 to `f` (`lift_apply_of_mem_ker`), sends `γ` to `T` (`lift_degreeOneElement`) and is continuous
 when `f` is and `P` is open (`continuous_lift`).
-(blueprint: `lem-wf-weil-fundamental-representation`) -/
+(blueprint: `lem-wf-weil-fundamental-representation`, the extension step of
+`def-wf-fundamental-representation`) -/
 def lift : W →* M where
   toFun w := f ⟨_, D.mul_inv_zpow_mem_ker w⟩ * T ^ (D.deg w).toAdd
   map_one' := by
@@ -353,8 +355,11 @@ noncomputable def arithmeticMonodromy : Ideal (CoordinateRing n k) :=
   vanishingIdeal (D.rep.range : Set (GL n k))
 
 /-- The geometric monodromy group `H = closure ρ(P)`, as a closed subgroup scheme of `GL_n`: the
-Hopf ideal of equations vanishing on `ρ(P)`, which cuts out the reduced Zariski closure.
-(blueprint: `sk-d-monodromy`) -/
+Hopf ideal of equations vanishing on `ρ(P)`, which cuts out the reduced Zariski closure. For the
+Weil group `W(X₀, s)` (`AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`, with the degree datum
+`DegreeDatum.ofWeilGroup`) the subgroup `P` is the geometric fundamental group, and this is the
+geometric monodromy group `H_geom` of a representation of the Weil group.
+(blueprint: `sk-d-monodromy`, `def-wf-geometric-monodromy-group`) -/
 noncomputable def geometricMonodromy : Ideal (CoordinateRing n k) :=
   vanishingIdeal (D.degreeZero.map D.rep : Set (GL n k))
 
