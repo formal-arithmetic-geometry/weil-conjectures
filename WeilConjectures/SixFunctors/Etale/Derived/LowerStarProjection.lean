@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
 # The projection map for the derived pushforward
@@ -41,6 +42,8 @@ edge is `(homEquiv _ _).symm` of the projection map and `ε` is the counit of
   is the transpose of the composite in the diagram above.
 - `AlgebraicGeometry.Etale.homEquiv_symm_rightDerivedLowerStarProjectionMap`: its transpose
   is the composite in the diagram above.
+- `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_isClosedImmersion`: for
+  a closed immersion the projection map is an isomorphism.
 
 The results depend on `sorryAx` through `AlgebraicGeometry.Etale.derivedTensor`.
 
@@ -168,6 +171,20 @@ lemma map_rightDerivedLowerStarProjectionMap_comp_counit
         ((-⊗ᴸ-(X)[A]).map ((derivedUpperStarLowerStarAdjunction A p).counit.app M)).app
           (L((p)^*[A]).obj L) :=
   Adjunction.map_rightAdjointProjectionMap_app_app_comp_counit _ _ M L
+
+/-- **The projection formula for a closed immersion.** For a closed immersion `i : Z ⟶ X` and
+any coefficient ring `Λ`, the projection map
+
+`Ri_* M ⊗ᴸ L ⟶ Ri_*(M ⊗ᴸ Li^* L)`
+
+is an isomorphism for all `M ∈ D(Z_ét, Λ)` and `L ∈ D(X_ét, Λ)`. It is checked on stalks at
+geometric points: `i_*` is exact, with stalk `M_x̄` at a geometric point `x̄` of `Z` and `0` at
+a geometric point off `Z`, and stalks commute with `⊗ᴸ`, so both sides have stalk
+`M_x̄ ⊗ᴸ L_x̄` on `Z` and `0` off `Z`. No finiteness or torsion hypothesis is needed. -/
+theorem isIso_rightDerivedLowerStarProjectionMap_of_isClosedImmersion (Λ : Type (u + 1))
+    [CommRing Λ] (i : X ⟶ Y) [IsClosedImmersion i] :
+    IsIso (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) i) :=
+  sorry
 
 end Etale
 

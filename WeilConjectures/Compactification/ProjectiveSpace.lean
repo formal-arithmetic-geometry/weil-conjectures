@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
 public import WeilConjectures.RingTheory.Dehomogenization
 
@@ -32,6 +33,8 @@ dehomogenisation, and show that it is an open immersion over `S`.
 - `AlgebraicGeometry.AffineSpace.isOpenImmersion_toRelativeProjectiveSpace` — the standard
   chart is an open immersion, and it is a morphism over `S` by
   `AlgebraicGeometry.AffineSpace.toRelativeProjectiveSpace_over`.
+- `AlgebraicGeometry.AffineSpace.compactification` — for finite `n`, the standard chart is a
+  compactification of `𝔸(n; S) ↘ S`.
 
 ## Implementation notes
 
@@ -112,6 +115,19 @@ instance isOpenImmersion_toRelativeProjectiveSpace :
     IsOpenImmersion (toRelativeProjectiveSpace n S) :=
   MorphismProperty.of_isPullback (P := @IsOpenImmersion)
     (isPullback_toRelativeProjectiveSpace n S) inferInstance
+
+/-- For a finite index type `n`, the standard chart `𝔸(n; S) ⟶ ℙ(Option n; S)` followed by the
+proper structure morphism of `ℙ(Option n; S)` is a compactification of `𝔸(n; S) ↘ S`. -/
+noncomputable def compactification [Finite n] : Compactification (𝔸(n; S) ↘ S) where
+  Z := ℙ(Option n; S)
+  g := ℙ(Option n; S) ↘ S
+  i := toRelativeProjectiveSpace n S
+  comm := (toRelativeProjectiveSpace_over n S).symm
+  isProper := inferInstance
+  isOpenImmersion := inferInstance
+
+instance hasCompactification_over [Finite n] : HasCompactification (𝔸(n; S) ↘ S) :=
+  (compactification n S).hasCompactification
 
 end AffineSpace
 

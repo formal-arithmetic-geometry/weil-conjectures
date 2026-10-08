@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Compactification.ProjectiveSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
@@ -61,6 +62,7 @@ Two clauses of the blueprint are stated only in part, and are TODOs.
   `AlgebraicGeometry.Etale.injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf`
 - `AlgebraicGeometry.Etale.eq_of_leftDerivedUpperStar_oneSection_eq`
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpaceZero`
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_affineSpace`
 -/
 
 @[expose] public section
@@ -225,6 +227,23 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero {k : Type u} [Field
         ((twistShift Λ 𝔸(ULift.{u} (Fin c); B) c).obj
           (constantComplex Λ 𝔸(ULift.{u} (Fin c); B))) ≅
       constantComplex Λ B) :=
+  sorry
+
+/-- Blueprint `sk-prop-an` (`thm-pur-projective-bundle-formula`): the compactly supported
+cohomology of affine space
+
+For the structure morphism `π : 𝔸(n; S) ⟶ S` of relative affine `n`-space,
+
+`Rπ_! Λ ≅ Λ_S(-n)[-2n]`,
+
+i.e. `RΓ_c(𝔸ⁿ, Λ) ≅ Λ(-n)[-2n]` relative to `S`. It is the `n`-fold Künneth product of the
+rank-one case `Rπ_! Λ ≅ Λ_S(-1)[-2]` for the affine line, which is dual to the acyclicity of
+the affine line and the fundamental class of the zero section; the generator is the
+compactly supported class of a point. -/
+theorem nonempty_iso_rightDerivedLowerShriek_affineSpace (n : Type u) [Fintype n]
+    (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
+    Nonempty ((R(𝔸(n; S) ↘ S)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ 𝔸(n; S)) ≅
+      (tateObject Λ S (-(Fintype.card n : ℤ)))⟦-(2 * Fintype.card n : ℤ)⟧) :=
   sorry
 
 end Etale
