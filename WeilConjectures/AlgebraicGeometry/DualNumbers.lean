@@ -8,8 +8,10 @@ module
 public import Mathlib.Algebra.DualNumber
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.Spectrum.Prime.Homeomorph
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
 public import WeilConjectures.Mathlib.Algebra.DualNumber
+public import WeilConjectures.Mathlib.RingTheory.DualNumber
 
 /-!
 # Dual-number thickenings of schemes
@@ -48,9 +50,13 @@ values in the ring `k[ε]`.
 
 ## Implementation notes
 
-The sheaf condition, the locality of the stalks, the local affineness of `X[ε]` and the locality
-of the morphisms constructed here are not yet proved. They are the obligations of the next
-milestone of the blueprint and are recorded as `sorry`.
+The thickening is first built as a locally ringed space,
+`AlgebraicGeometry.LocallyRingedSpace.dualNumbers`: the stalks of `𝒪_X[ε]` are the dual numbers
+over the stalks of `𝒪_X` (`TopCat.Presheaf.stalkDualNumberHom`). It is a scheme since the
+thickening of an affine scheme `Z` is affine (`LocallyRingedSpace.isIso_toΓSpec_dualNumbers`):
+dual numbers commute with localization, so the stalks of `Z[ε]` are the localizations of
+`Γ(Z)[ε]`. The locality of some of the morphisms constructed here, and several compatibilities
+between them, are not yet proved and are recorded as `sorry`.
 
 ## Blueprint
 
@@ -61,7 +67,7 @@ milestone of the blueprint and are recorded as `sorry`.
 
 universe u
 
-open CategoryTheory MonoidalCategory TopologicalSpace TrivSqZeroExt
+open CategoryTheory Limits MonoidalCategory TopologicalSpace TrivSqZeroExt Opposite
 
 /-! ### Dual numbers as a functor on commutative rings -/
 
@@ -72,10 +78,10 @@ variable {R S T : Type*} [CommRing R] [CommRing S] [CommRing T]
 /-- A ring homomorphism `f : R → S` induces `R[ε] → S[ε]`, `a + εb ↦ f(a) + εf(b)`. -/
 def mapRingHom (f : R →+* S) : R[ε] →+* S[ε] where
   toFun x := inl (f x.fst) + inr (f x.snd)
-  map_one' := by sorry
-  map_mul' := by sorry
-  map_zero' := by sorry
-  map_add' := by sorry
+  map_one' := by ext <;> simp
+  map_mul' x y := by ext <;> simp
+  map_zero' := by ext <;> simp
+  map_add' x y := by ext <;> simp
 
 @[simp]
 theorem fst_mapRingHom (f : R →+* S) (x : R[ε]) : (mapRingHom f x).fst = f x.fst := by
@@ -86,20 +92,76 @@ theorem snd_mapRingHom (f : R →+* S) (x : R[ε]) : (mapRingHom f x).snd = f x.
   simp [mapRingHom]
 
 theorem mapRingHom_id : mapRingHom (RingHom.id R) = RingHom.id R[ε] := by
-  sorry
+  ext x <;> simp
 
 theorem mapRingHom_comp (f : R →+* S) (g : S →+* T) :
     mapRingHom (g.comp f) = (mapRingHom g).comp (mapRingHom f) := by
-  sorry
+  ext x <;> simp
+
+theorem mapRingHom_comp_inlHom (f : R →+* S) :
+    (mapRingHom f).comp (inlHom R R) = (inlHom S S).comp f := by
+  ext x <;> simp
+
+theorem fstHom_comp_mapRingHom (f : R →+* S) :
+    (fstHom S S S).toRingHom.comp (mapRingHom f) = f.comp (fstHom R R R).toRingHom :=
+  RingHom.ext fun x ↦ by simp
+
+/-- Dual numbers commute with localization: if `S` is the localization of `R` at `M`, then `S[ε]`
+is the localization of `R[ε]` at the elements whose constant part lies in `M`. -/
+theorem isLocalization_mapRingHom [Algebra R S] (M : Submonoid R) [IsLocalization M S]
+    [Algebra R[ε] S[ε]]
+    (hA : algebraMap R[ε] S[ε] = mapRingHom (algebraMap R S)) :
+    IsLocalization (M.comap (fstHom R R R)) S[ε] := by
+  refine (isLocalization_iff _ _).mpr ⟨fun ⟨m, hm⟩ ↦ ?_, fun z ↦ ?_, fun {x y} h ↦ ?_⟩
+  · rw [hA, isUnit_iff_isUnit_fst, fst_mapRingHom]
+    exact IsLocalization.map_units S ⟨m.fst, hm⟩
+  · obtain ⟨⟨r₁, m₁⟩, h₁⟩ := IsLocalization.surj M z.fst
+    obtain ⟨⟨r₂, m₂⟩, h₂⟩ := IsLocalization.surj M z.snd
+    refine ⟨(inl (r₁ * m₂) + inr (r₂ * m₁),
+      ⟨inl ((m₁ * m₂ : M) : R), by simpa using M.mul_mem m₁.2 m₂.2⟩), ?_⟩
+    simp only [hA] at h₁ h₂ ⊢
+    ext
+    · simp only [fst_mul, fst_mapRingHom, fst_inl, fst_add, fst_inr, add_zero, Submonoid.coe_mul,
+        map_mul] at h₁ ⊢
+      linear_combination (algebraMap R S m₂) * h₁
+    · simp only [snd_mul, fst_mapRingHom, snd_mapRingHom, fst_inl, snd_inl, snd_add, snd_inr,
+        Submonoid.coe_mul, map_mul, map_zero, mul_zero, zero_add] at h₂ ⊢
+      linear_combination (algebraMap R S m₁) * h₂
+  · have h₁ := congr(fst $h)
+    have h₂ := congr(snd $h)
+    simp only [hA, fst_mapRingHom, snd_mapRingHom] at h₁ h₂
+    obtain ⟨⟨c₁, hc₁⟩, e₁⟩ := IsLocalization.exists_of_eq (M := M) h₁
+    obtain ⟨⟨c₂, hc₂⟩, e₂⟩ := IsLocalization.exists_of_eq (M := M) h₂
+    refine ⟨⟨inl (c₁ * c₂), by simpa using M.mul_mem hc₁ hc₂⟩, ?_⟩
+    ext
+    · simp only [fst_mul, fst_inl]
+      simp only at e₁
+      rw [mul_right_comm, e₁, mul_right_comm]
+    · simp only [snd_mul, fst_inl, snd_inl]
+      simp only at e₂
+      simp only [zero_mul, add_zero]
+      rw [mul_assoc, e₂, ← mul_assoc]
 
 /-- The ring homomorphism `R[η] → R[ε][δ]`, `a + ηb ↦ a + εδ b`, recording the mixed infinitesimal
 term of the two-parameter dual numbers `R[ε][δ] = R[ε, δ]/(ε², δ²)`. -/
 def mulRingHom : R[ε] →+* (R[ε])[ε] where
   toFun x := inl (inl x.fst) + inr (inr x.snd)
-  map_one' := by sorry
-  map_mul' := by sorry
-  map_zero' := by sorry
-  map_add' := by sorry
+  map_one' := by ext <;> simp
+  map_mul' x y := by ext <;> simp [mul_comm]
+  map_zero' := by ext <;> simp
+  map_add' x y := by ext <;> simp
+
+@[simp]
+theorem fst_mulRingHom (x : R[ε]) : (mulRingHom x).fst = inl x.fst := by
+  simp [mulRingHom]
+
+@[simp]
+theorem snd_mulRingHom (x : R[ε]) : (mulRingHom x).snd = inr x.snd := by
+  simp [mulRingHom]
+
+theorem mapRingHom_mapRingHom_comp_mulRingHom (f : R →+* S) :
+    (mapRingHom (mapRingHom f)).comp mulRingHom = mulRingHom.comp (mapRingHom f) := by
+  ext x <;> simp
 
 /-- Setting `δ = 0` in `a + εδ b` gives `a`. -/
 theorem fstHom_comp_mulRingHom :
@@ -131,19 +193,218 @@ noncomputable def dualNumber : CommRingCat.{u} ⥤ CommRingCat.{u} where
 /-- The inclusion of constants `R → R[ε]`, naturally in `R`. -/
 noncomputable def dualNumberInl : 𝟭 CommRingCat.{u} ⟶ dualNumber where
   app R := ofHom (TrivSqZeroExt.inlHom R R)
-  naturality _ _ _ := by sorry
+  naturality _ _ f := hom_ext (DualNumber.mapRingHom_comp_inlHom f.hom).symm
 
 /-- The augmentation `R[ε] → R`, `ε ↦ 0`, naturally in `R`. -/
 noncomputable def dualNumberFst : dualNumber ⟶ 𝟭 CommRingCat.{u} where
   app R := ofHom (TrivSqZeroExt.fstHom R R R).toRingHom
-  naturality _ _ _ := by sorry
+  naturality _ _ f := hom_ext (DualNumber.fstHom_comp_mapRingHom f.hom)
 
 /-- The map `R[η] → R[ε][δ]`, `η ↦ εδ`, naturally in `R`. -/
 noncomputable def dualNumberMul : dualNumber ⟶ dualNumber ⋙ dualNumber where
-  app R := ofHom DualNumber.mulRingHom
-  naturality _ _ _ := by sorry
+  app _ := ofHom DualNumber.mulRingHom
+  naturality _ _ f := hom_ext (DualNumber.mapRingHom_mapRingHom_comp_mulRingHom f.hom).symm
+
+theorem fst_dualNumber_map {R S : CommRingCat.{u}} (f : R ⟶ S) (x : DualNumber R) :
+    (dualNumber.map f x).fst = f x.fst :=
+  DualNumber.fst_mapRingHom _ _
+
+theorem snd_dualNumber_map {R S : CommRingCat.{u}} (f : R ⟶ S) (x : DualNumber R) :
+    (dualNumber.map f x).snd = f x.snd :=
+  DualNumber.snd_mapRingHom _ _
 
 end CommRingCat
+
+/-! ### Stalks of the dual-number thickening -/
+
+namespace TopCat.Presheaf
+variable {X : TopCat.{u}} (P : X.Presheaf CommRingCat.{u}) (x : X)
+
+/-- The comparison map from the stalk of `P[ε]` to the dual numbers over the stalk of `P`. -/
+noncomputable def stalkDualNumberHom :
+    stalk (P ⋙ CommRingCat.dualNumber) x ⟶ CommRingCat.dualNumber.obj (P.stalk x) :=
+  colimit.post ((OpenNhds.inclusion x).op ⋙ P) CommRingCat.dualNumber
+
+@[reassoc]
+theorem germ_stalkDualNumberHom (U : Opens X) (hx : x ∈ U) :
+    germ (P ⋙ CommRingCat.dualNumber) U x hx ≫ P.stalkDualNumberHom x =
+      CommRingCat.dualNumber.map (P.germ U x hx) :=
+  colimit.ι_post ((OpenNhds.inclusion x).op ⋙ P) CommRingCat.dualNumber (op ⟨U, hx⟩)
+
+theorem stalkDualNumberHom_germ (U : Opens X) (hx : x ∈ U) (g : DualNumber (P.obj (op U))) :
+    P.stalkDualNumberHom x (germ (P ⋙ CommRingCat.dualNumber) U x hx g) =
+      DualNumber.mapRingHom (P.germ U x hx).hom g :=
+  congr($(P.germ_stalkDualNumberHom x U hx) g)
+
+@[simp]
+theorem fst_stalkDualNumberHom_germ (U : Opens X) (hx : x ∈ U) (g : DualNumber (P.obj (op U))) :
+    (P.stalkDualNumberHom x (germ (P ⋙ CommRingCat.dualNumber) U x hx g)).fst =
+      P.germ U x hx g.fst :=
+  congr(TrivSqZeroExt.fst $(P.stalkDualNumberHom_germ x U hx g)).trans
+    (DualNumber.fst_mapRingHom _ _)
+
+@[simp]
+theorem snd_stalkDualNumberHom_germ (U : Opens X) (hx : x ∈ U) (g : DualNumber (P.obj (op U))) :
+    (P.stalkDualNumberHom x (germ (P ⋙ CommRingCat.dualNumber) U x hx g)).snd =
+      P.germ U x hx g.snd :=
+  congr(TrivSqZeroExt.snd $(P.stalkDualNumberHom_germ x U hx g)).trans
+    (DualNumber.snd_mapRingHom _ _)
+
+theorem bijective_stalkDualNumberHom : Function.Bijective (P.stalkDualNumberHom x) := by
+  refine ⟨(injective_iff_map_eq_zero _).mpr fun s hs ↦ ?_, fun t ↦ ?_⟩
+  · obtain ⟨U, hxU, g, rfl⟩ := exists_germ_eq (P ⋙ CommRingCat.dualNumber) s
+    have h₁ := congr(TrivSqZeroExt.fst $hs)
+    have h₂ := congr(TrivSqZeroExt.snd $hs)
+    erw [fst_stalkDualNumberHom_germ, fst_zero, ← map_zero (P.germ U x hxU).hom] at h₁
+    erw [snd_stalkDualNumberHom_germ, snd_zero, ← map_zero (P.germ U x hxU).hom] at h₂
+    obtain ⟨V₁, hxV₁, i₁, j₁, e₁⟩ := P.germ_eq x hxU hxU _ _ h₁
+    obtain ⟨V₂, hxV₂, i₂, j₂, e₂⟩ := P.germ_eq x hxU hxU _ _ h₂
+    rw [← map_zero (germ (P ⋙ CommRingCat.dualNumber) U x hxU).hom]
+    refine germ_ext (P ⋙ CommRingCat.dualNumber) (V₁ ⊓ V₂) (by simp [hxV₁, hxV₂])
+      (homOfLE (inf_le_left.trans i₁.le)) (homOfLE (inf_le_left.trans i₁.le)) ?_
+    refine TrivSqZeroExt.ext ?_ ?_
+    · have := congr(P.map (homOfLE inf_le_left : V₁ ⊓ V₂ ⟶ V₁).op $e₁)
+      simp only [map_zero] at this
+      refine (CommRingCat.fst_dualNumber_map _ _).trans
+        (Eq.trans ?_ (CommRingCat.fst_dualNumber_map _ _).symm)
+      refine (Eq.trans ?_ this).trans (map_zero _).symm
+      rw [← CommRingCat.comp_apply, ← P.map_comp]
+      rfl
+    · have := congr(P.map (homOfLE inf_le_right : V₁ ⊓ V₂ ⟶ V₂).op $e₂)
+      simp only [map_zero] at this
+      refine (CommRingCat.snd_dualNumber_map _ _).trans
+        (Eq.trans ?_ (CommRingCat.snd_dualNumber_map _ _).symm)
+      refine (Eq.trans ?_ this).trans (map_zero _).symm
+      rw [← CommRingCat.comp_apply, ← P.map_comp]
+      rfl
+  · obtain ⟨U₁, hxU₁, a, ha⟩ := P.exists_germ_eq t.fst
+    obtain ⟨U₂, hxU₂, b, hb⟩ := P.exists_germ_eq t.snd
+    refine ⟨germ (P ⋙ CommRingCat.dualNumber) (U₁ ⊓ U₂) x (by simp [hxU₁, hxU₂])
+      ((P.map (homOfLE inf_le_left).op a, P.map (homOfLE inf_le_right).op b) :
+        DualNumber (P.obj (op (U₁ ⊓ U₂)))), ?_⟩
+    refine TrivSqZeroExt.ext ?_ ?_
+    · erw [fst_stalkDualNumberHom_germ]
+      simpa using ha
+    · erw [snd_stalkDualNumberHom_germ]
+      simpa using hb
+
+instance isIso_stalkDualNumberHom : IsIso (P.stalkDualNumberHom x) :=
+  (ConcreteCategory.isIso_iff_bijective _).mpr (P.bijective_stalkDualNumberHom x)
+
+/-- A germ of `P[ε]` is a unit if and only if the germ of its constant part is a unit. -/
+theorem isUnit_germ_dualNumber_iff (U : Opens X) (hx : x ∈ U) (g : DualNumber (P.obj (op U))) :
+    IsUnit (germ (P ⋙ CommRingCat.dualNumber) U x hx g) ↔ IsUnit (P.germ U x hx g.fst) := by
+  refine (isUnit_map_iff (P.stalkDualNumberHom x).hom _).symm.trans ?_
+  erw [stalkDualNumberHom_germ]
+  exact (isUnit_iff_isUnit_fst (x := DualNumber.mapRingHom (P.germ U x hx).hom g)).trans
+    (by rw [DualNumber.fst_mapRingHom])
+
+variable {P} in
+theorem IsSheaf.comp_dualNumber (h : P.IsSheaf) : IsSheaf (P ⋙ CommRingCat.dualNumber) := by
+  rw [isSheaf_iff_isSheafUniqueGluing] at h ⊢
+  intro ι U sf hsf
+  have h₁ : IsCompatible P U fun i ↦ (sf i : DualNumber (P.obj (op (U i)))).fst := fun i j ↦
+    (CommRingCat.fst_dualNumber_map _ _).symm.trans <|
+      congr(TrivSqZeroExt.fst $(hsf i j)).trans (CommRingCat.fst_dualNumber_map _ _)
+  have h₂ : IsCompatible P U fun i ↦ (sf i : DualNumber (P.obj (op (U i)))).snd := fun i j ↦
+    (CommRingCat.snd_dualNumber_map _ _).symm.trans <|
+      congr(TrivSqZeroExt.snd $(hsf i j)).trans (CommRingCat.snd_dualNumber_map _ _)
+  obtain ⟨a, ha, ha'⟩ := h U _ h₁
+  obtain ⟨b, hb, hb'⟩ := h U _ h₂
+  refine ⟨((a, b) : DualNumber (P.obj (op (iSup U)))), fun i ↦ TrivSqZeroExt.ext ?_ ?_,
+    fun s hs ↦ TrivSqZeroExt.ext (ha' _ fun i ↦ ?_) (hb' _ fun i ↦ ?_)⟩
+  · exact (CommRingCat.fst_dualNumber_map _ _).trans (ha i)
+  · exact (CommRingCat.snd_dualNumber_map _ _).trans (hb i)
+  · exact (CommRingCat.fst_dualNumber_map _ _).symm.trans congr(TrivSqZeroExt.fst $(hs i))
+  · exact (CommRingCat.snd_dualNumber_map _ _).symm.trans congr(TrivSqZeroExt.snd $(hs i))
+
+end TopCat.Presheaf
+
+namespace AlgebraicGeometry.LocallyRingedSpace
+
+/-- The dual-number thickening `X[ε]` of a locally ringed space `X`: the same underlying space,
+with structure sheaf `𝒪_X[ε]`. Its stalks are the dual numbers over the stalks of `X`. -/
+noncomputable def dualNumbers (X : LocallyRingedSpace.{u}) : LocallyRingedSpace.{u} where
+  carrier := X.carrier
+  presheaf := X.presheaf ⋙ CommRingCat.dualNumber
+  IsSheaf := X.IsSheaf.comp_dualNumber
+  isLocalRing x :=
+    have : IsLocalRing (CommRingCat.dualNumber.obj (X.presheaf.stalk x)) :=
+      inferInstanceAs (IsLocalRing (DualNumber _))
+    (X.presheaf.stalkDualNumberHom x).hom.domain_isLocalRing
+
+/-- The dual-number thickening of an affine scheme is affine: `Z[ε] ⟶ Spec Γ(Z[ε])` is an
+isomorphism. -/
+theorem isIso_toΓSpec_dualNumbers (Z : Scheme.{u}) [IsAffine Z] :
+    IsIso Z.toLocallyRingedSpace.dualNumbers.toΓSpec := by
+  set Y := Z.toLocallyRingedSpace.dualNumbers
+  have hpt (y : Z) : Y.toΓSpecFun y = PrimeSpectrum.comap (fstHom Γ(Z, ⊤) Γ(Z, ⊤) Γ(Z, ⊤)).toRingHom
+      (Z.toLocallyRingedSpace.toΓSpecFun y) := by
+    ext (g : DualNumber Γ(Z, ⊤))
+    have h₁ := Y.notMem_prime_iff_unit_in_stalk g y
+    have h₂ := Z.toLocallyRingedSpace.notMem_prime_iff_unit_in_stalk g.fst y
+    change g ∈ (Y.toΓSpecFun y).asIdeal ↔ g.fst ∈ (Z.toLocallyRingedSpace.toΓSpecFun y).asIdeal
+    rw [← not_iff_not]
+    exact h₁.trans ((Z.presheaf.isUnit_germ_dualNumber_iff y ⊤ trivial g).trans h₂.symm)
+  have hZ : IsHomeomorph Z.toLocallyRingedSpace.toΓSpecFun :=
+    (TopCat.isIso_iff_isHomeomorph Z.toSpecΓ.base).mp inferInstance
+  have hbase : IsHomeomorph Y.toΓSpecFun := by
+    have : Y.toΓSpecFun = PrimeSpectrum.comap (fstHom Γ(Z, ⊤) Γ(Z, ⊤) Γ(Z, ⊤)).toRingHom ∘
+        Z.toLocallyRingedSpace.toΓSpecFun := funext hpt
+    rw [this]
+    refine .comp (PrimeSpectrum.isHomeomorph_comap _ (fun x ↦ ⟨1, one_pos, ?_⟩) ?_) hZ
+    · simpa using ⟨inl x, fst_inl _ _⟩
+    · intro g hg
+      refine ⟨2, ?_⟩
+      have : g.fst = 0 := hg
+      ext <;> simp [pow_two, this]
+  have : IsIso Y.toΓSpec.base := (TopCat.isIso_iff_isHomeomorph _).mpr hbase
+  have hstalk (y : Z) : IsIso (Y.toΓSpec.stalkMap y) := by
+    let q : PrimeSpectrum Γ(Z, ⊤) := Z.toLocallyRingedSpace.toΓSpecFun y
+    let _ := Z.presheaf.algebra_section_stalk (⟨y, trivial⟩ : (⊤ : Z.Opens))
+    have hZ : IsLocalization.AtPrime (Z.presheaf.stalk y) q.asIdeal := by
+      have := (isAffineOpen_top Z).isLocalization_stalk ⟨y, trivial⟩
+      convert this using 3
+      exact PrimeSpectrum.ext (IsLocalization.AtPrime.under_maximalIdeal (Z.presheaf.stalk y)
+        ((isAffineOpen_top Z).primeIdealOf ⟨y, trivial⟩).asIdeal)
+    let _ : Algebra (DualNumber Γ(Z, ⊤)) (DualNumber (Z.presheaf.stalk y)) :=
+      (DualNumber.mapRingHom (Z.presheaf.Γgerm y).hom).toAlgebra
+    have h₁ :=
+      DualNumber.isLocalization_mapRingHom (S := Z.presheaf.stalk y) q.asIdeal.primeCompl rfl
+    let P := Y.toΓSpecFun y
+    let e : Y.presheaf.stalk y ≃+* DualNumber (Z.presheaf.stalk y) :=
+      RingEquiv.ofBijective (Z.presheaf.stalkDualNumberHom y).hom
+        (Z.presheaf.bijective_stalkDualNumberHom y)
+    let _ : Algebra (DualNumber Γ(Z, ⊤)) (Y.presheaf.stalk y) := (Y.presheaf.Γgerm y).hom.toAlgebra
+    have h₂ : IsLocalization (q.asIdeal.primeCompl.comap (fstHom Γ(Z, ⊤) Γ(Z, ⊤) Γ(Z, ⊤)))
+        (Y.presheaf.stalk y) :=
+      IsLocalization.isLocalization_of_algEquiv _ <| AlgEquiv.ofRingEquiv (f := e.symm) fun g ↦ by
+        apply e.injective
+        rw [RingEquiv.apply_symm_apply]
+        exact (Z.presheaf.stalkDualNumberHom_germ y ⊤ trivial g).symm
+    let _ : Algebra (Γ.obj (op Y)) (Y.presheaf.stalk y) := (Y.presheaf.Γgerm y).hom.toAlgebra
+    have h₂' : IsLocalization P.asIdeal.primeCompl (Y.presheaf.stalk y) := by
+      have hM : P.asIdeal.primeCompl =
+          q.asIdeal.primeCompl.comap (fstHom Γ(Z, ⊤) Γ(Z, ⊤) Γ(Z, ⊤)) := by
+        ext g
+        simp only [P, hpt]
+        rfl
+      rw [hM]
+      exact h₂
+    have h₃ : (Y.toΓSpec.stalkMap y).hom.comp (algebraMap (Γ.obj (op Y))
+        ((Spec.structureSheaf (Γ.obj (op Y))).presheaf.stalk P)) =
+          algebraMap (Γ.obj (op Y)) (Y.presheaf.stalk y) :=
+      congrArg CommRingCat.Hom.hom (Y.toStalk_stalkMap_toΓSpec y)
+    exact (ConcreteCategory.isIso_iff_bijective _).mpr
+      (IsLocalization.bijective P.asIdeal.primeCompl
+        (S := (Spec.structureSheaf (Γ.obj (op Y))).presheaf.stalk P) _ h₃)
+  have : ∀ y : Y, IsIso (Y.toΓSpec.stalkMap y) := hstalk
+  have : LocallyRingedSpace.IsOpenImmersion Y.toΓSpec :=
+    LocallyRingedSpace.IsOpenImmersion.of_stalk_iso _
+      (TopCat.homeoOfIso (asIso Y.toΓSpec.base)).isOpenEmbedding
+  exact LocallyRingedSpace.IsOpenImmersion.to_iso _
+
+end AlgebraicGeometry.LocallyRingedSpace
 
 namespace AlgebraicGeometry
 
@@ -155,11 +416,11 @@ variable (X : Scheme.{u})
 sheaf `𝒪_X[ε] = 𝒪_X ⊕ ε𝒪_X`, the relative spectrum of the sheaf of algebras `𝒪_X[ε]`.
 (blueprint: `sk-d-tangent`) -/
 noncomputable def dualNumbers : Scheme.{u} where
-  carrier := X.carrier
-  presheaf := X.presheaf ⋙ CommRingCat.dualNumber
-  IsSheaf := by sorry
-  isLocalRing := by sorry
-  local_affine := by sorry
+  __ := X.toLocallyRingedSpace.dualNumbers
+  local_affine x := by
+    obtain ⟨U, hU, hxU, -⟩ := exists_isAffineOpen_mem_and_subset (x := (x : X)) (U := ⊤) trivial
+    have : IsAffine U := hU
+    exact ⟨⟨U, hxU⟩, _, ⟨@asIso _ _ _ _ _ (LocallyRingedSpace.isIso_toΓSpec_dualNumbers U)⟩⟩
 
 /-- The sections of `𝒪_{X[ε]}` over `U` are the dual numbers over the sections of `𝒪_X`. -/
 theorem dualNumbers_obj (U : X.Opens) :
@@ -172,7 +433,18 @@ noncomputable def dualNumbersProj : X.dualNumbers ⟶ X where
   base := 𝟙 _
   c := Functor.whiskerLeft X.presheaf CommRingCat.dualNumberInl ≫
     (TopCat.Presheaf.Pushforward.id _).inv
-  prop := by sorry
+  prop x := by
+    constructor
+    intro s hs
+    obtain ⟨U, hxU, g, rfl⟩ := X.presheaf.exists_germ_eq s
+    rw [PresheafedSpace.stalkMap_germ_apply] at hs
+    obtain ⟨V, i, hxV, hV⟩ := RingedSpace.isUnit_res_of_isUnit_germ
+      X.toLocallyRingedSpace.dualNumbers.toRingedSpace _ _ _ _ hs
+    replace hV := isUnit_iff_isUnit_fst.mp hV
+    erw [CommRingCat.fst_dualNumber_map] at hV
+    have := (hV.map (X.presheaf.germ V x hxV).hom)
+    erw [TopCat.Presheaf.germ_res_apply] at this
+    exact this
 
 /-- The closed immersion `i : X ⟶ X[ε]`, `ε ↦ 0`: the identity on points and the augmentation
 `𝒪_X[ε] → 𝒪_X` on functions. Its ideal is the square-zero ideal `ε𝒪_X`. -/
@@ -206,7 +478,25 @@ noncomputable def dualNumbersMul : X.dualNumbers.dualNumbers ⟶ X.dualNumbers w
   base := 𝟙 _
   c := Functor.whiskerLeft X.presheaf CommRingCat.dualNumberMul ≫
     (TopCat.Presheaf.Pushforward.id _).inv
-  prop := by sorry
+  prop x := by
+    constructor
+    intro s hs
+    obtain ⟨U, hxU, g, rfl⟩ := X.dualNumbers.presheaf.exists_germ_eq s
+    rw [PresheafedSpace.stalkMap_germ_apply] at hs
+    obtain ⟨V, i, hxV, hV⟩ := RingedSpace.isUnit_res_of_isUnit_germ
+      X.dualNumbers.dualNumbers.toRingedSpace _ _ _ _ hs
+    replace hV := isUnit_iff_isUnit_fst.mp hV
+    erw [CommRingCat.fst_dualNumber_map] at hV
+    replace hV := isUnit_iff_isUnit_fst.mp hV
+    erw [CommRingCat.fst_dualNumber_map] at hV
+    have hV' : IsUnit (X.dualNumbers.presheaf.map i.op g) := by
+      refine isUnit_iff_isUnit_fst.mpr ?_
+      erw [CommRingCat.fst_dualNumber_map]
+      convert hV using 2
+      exact (congr(fst $(DualNumber.fst_mulRingHom g)).trans (fst_inl _ _)).symm
+    have := (hV'.map (X.dualNumbers.presheaf.germ V x hxV).hom)
+    erw [TopCat.Presheaf.germ_res_apply] at this
+    exact this
 
 variable {X} {Y : Scheme.{u}}
 
@@ -237,7 +527,12 @@ theorem Hom.dualNumbers_comp {Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
 @[reassoc (attr := simp)]
 theorem dualNumbersMul_comp_proj (X : Scheme.{u}) :
     X.dualNumbersMul ≫ X.dualNumbersProj = X.dualNumbers.dualNumbersProj ≫ X.dualNumbersProj := by
-  sorry
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  ext a : 2
+  simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
+  erw [eqToHom_refl, Category.comp_id]
+  change (DualNumber.mulRingHom (inl a) : DualNumber (DualNumber Γ(X, U))) = inl (inl a)
+  ext <;> simp
 
 /-- Setting `δ = 0` in `η ↦ εδ`: the composite `X[ε] ⟶ X[ε][δ] ⟶ X[η]` factors through `X`. -/
 @[reassoc]
@@ -352,7 +647,7 @@ noncomputable def dualNumbersιδOver : dualNumbersOver S ⟶ dualNumbers₂Over
 
 /-- The map `S[ε][δ] ⟶ S[η]`, `η ↦ εδ`, as a morphism over `S`. -/
 noncomputable def dualNumbersMulOver : dualNumbers₂Over S ⟶ dualNumbersOver S :=
-  Over.homMk S.dualNumbersMul (by sorry)
+  Over.homMk S.dualNumbersMul S.dualNumbersMul_comp_proj
 
 /-- Setting `δ = 0` in `η ↦ εδ` factors through the `S`-point `ε ↦ 0` of `S[η]`. -/
 @[reassoc]
