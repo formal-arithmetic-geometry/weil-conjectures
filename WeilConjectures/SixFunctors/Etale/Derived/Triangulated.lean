@@ -64,25 +64,19 @@ section Monoidal
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] {X : Scheme.{u}}
 
-attribute [local instance] Sheaf.monoidalCategory in
-/-- Tensoring on the right with a fixed complex, `M ↦ M ⊗ᴸ K`, is triangulated. -/
-instance isTriangulated_derivedTensorFlipObj
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    ((derivedTensor A X).flip.obj K).IsTriangulated :=
-  inferInstanceAs
-    (((curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology A))).flip.obj K).IsTriangulated)
-
 /-- Tensoring on the right with a fixed complex, `M ↦ M ⊗ᴸ K`, commutes with shifts. -/
 noncomputable instance commShiftDerivedTensorRight
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     (derivedTensorRight A X K).CommShift ℤ :=
   inferInstanceAs (((derivedTensor A X).flip.obj K).CommShift ℤ)
 
+attribute [local instance] Sheaf.monoidalCategory in
 /-- Tensoring on the right with a fixed complex, `M ↦ M ⊗ᴸ K`, is triangulated. -/
 instance isTriangulated_derivedTensorRight
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     (derivedTensorRight A X K).IsTriangulated :=
-  inferInstanceAs (((derivedTensor A X).flip.obj K).IsTriangulated)
+  inferInstanceAs
+    (((curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology A))).flip.obj K).IsTriangulated)
 
 end Monoidal
 

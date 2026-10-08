@@ -43,6 +43,8 @@ compact-support direct image along `p₂` is the transform, before the shift.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.torAmplitudeIn_fourierKernel`: over a finite ring the kernel, being
+  flat, has Tor amplitude in `[0, 0]`.
 - `AlgebraicGeometry.Etale.isTriangulated_fourierTransform`: the transform is a triangulated
   functor.
 - `AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible`:
@@ -155,6 +157,25 @@ instance isConstructibleSheaf_fourierKernel [Finite Λ] [CharP Γ(pullback π π
   let := (pullback π π').overSpecZModOfCharP p
   exact isConstructibleSheaf_artinSchreierSheafOf _ _ _
 
+/-- The Fourier kernel is flat, having a tensor inverse, the Artin–Schreier sheaf of `-b`
+(`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg`).
+(sketch blueprint: `sk-prop-kernel-lisse`) -/
+theorem flat_fourierKernel [CharP Γ(pullback π π', ⊤) p] (Ψ : AddChar (ZMod p) Λ)
+    (b : Γ(pullback π π', ⊤)) :
+    ObjectProperty.flat (fourierKernel Λ π π' Ψ b) := by
+  let := (pullback π π').overSpecZModOfCharP p
+  obtain ⟨e⟩ := nonempty_iso_artinSchreierSheafOf_neg (pullback π π')
+    (Ψ.compAddMonoidHom AddEquiv.ulift.toAddMonoidHom) b
+  exact ObjectProperty.flat_of_tensorIso e
+
+/-- Over a finite coefficient ring the Fourier kernel, placed in degree `0`, has Tor amplitude
+in `[0, 0]`, being a flat constructible sheaf. (sketch blueprint: `sk-prop-kernel-lisse`) -/
+theorem torAmplitudeIn_fourierKernel [Finite Λ] [CharP Γ(pullback π π', ⊤) p]
+    (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) :
+    DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) (pullback π π') 0 0
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) :=
+  torAmplitudeIn_singleFunctor_obj_of_flat Λ _ (flat_fourierKernel Λ π π' Ψ b)
+
 /-- For a pairing `b ∈ Γ(V ×_S V', 𝒪)` between two `S`-schemes, the *Fourier integrand* is the
 functor `ℱ_ψ(K) = p₁^* K ⊗ᴸ 𝒦_ψ` from `D(V_ét)` to `D((V ×_S V')_ét)`, `p₁` being the first
 projection and `𝒦_ψ` the Fourier kernel placed in degree `0`. The Fourier–Deligne transform is
@@ -252,6 +273,7 @@ theorem boundedConstructible_fourierTransform_obj_of_boundedConstructible {k : T
   have h₁ := hK.mapDerivedCategory_upperStar (pullback.fst π π')
   have h₂ := boundedConstructible_tensor (ModuleCat.{u + 1} Λ) _ h₁
     (DerivedCategory.boundedConstructible_singleFunctor_obj (fourierKernel Λ π π' Ψ b) 0)
+    ⟨0, 0, torAmplitudeIn_fourierKernel Λ π π' Ψ b⟩
   have h₃ := boundedConstructible_rightDerivedLowerShriek Λ (pullback.snd π π')
     (pullback.snd π π' ≫ aV') aV' rfl _ h₂
   exact (DerivedCategory.boundedConstructible _ V').le_shift r _ h₃
