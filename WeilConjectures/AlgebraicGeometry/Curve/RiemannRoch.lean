@@ -452,23 +452,171 @@ theorem IdealSheafData.IsInvertible.degree_dual_toModules_eq_one {J : X.IdealShe
   rw [hJ.degree_dual_toModules, h, Nat.cast_one]
 
 include k in
+/-- **The degree of a multiple of a divisor.** For an effective Cartier divisor `D` on a smooth
+proper curve, `deg (n D) ≥ n deg D`; in fact equality holds, by additivity of the degree of
+divisors (`AlgebraicGeometry.Scheme.IdealSheafData.finrankΓ_subschemeι_mul_comp`). -/
+theorem IdealSheafData.IsInvertible.le_finrankΓ_subschemeι_pow_comp {J : X.IdealSheafData}
+    (hJ : J.IsInvertible) (n : ℕ) :
+    n * (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ ≤
+      ((J ^ n).subschemeι ≫ X ↘ Spec (.of k)).finrankΓ := by
+  induction n with
+  | zero => simp
+  | succ n ih =>
+    have := hJ.isFinite_subschemeι_comp (k := k)
+    have := (hJ.pow n).isFinite_subschemeι_comp (k := k)
+    have : IsFinite ((J ^ n * J).subschemeι ≫ X ↘ Spec (.of k)) :=
+      ((hJ.pow n).mul hJ).isFinite_subschemeι_comp
+    rw [pow_succ, IdealSheafData.finrankΓ_subschemeι_mul_comp _ (hJ.pow n) hJ, Nat.succ_mul]
+    omega
+
+/-- **Twisting by a large multiple of a divisor produces sections.** Let `D` be a non-empty
+effective Cartier divisor on a smooth proper curve, with invertible ideal sheaf `J = 𝒪_X(-D)`,
+and `ℒ` an invertible sheaf. Then `H⁰(X, ℒ ⊗ 𝒪_X(n D)) ≠ 0` for all `n ≫ 0`: by
+`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_tensorObj_dual_toModules`,
+`h⁰ ≥ χ(ℒ ⊗ 𝒪_X(n D)) = χ(ℒ) + deg (n D) ≥ χ(ℒ) + n`. -/
+theorem Modules.exists_finrankH_zero_pos_tensorObj_dual_pow (ℒ : X.Modules) [ℒ.IsInvertible]
+    {J : X.IdealSheafData} (hJ : J.IsInvertible) (hne : (J.support : Set X).Nonempty) :
+    ∃ n₀ : ℕ, ∀ n, n₀ ≤ n → 0 < (ℒ ⊗ (J ^ n).toModulesᵛ).finrankH k 0 := by
+  have : Nonempty J.subscheme := by
+    obtain ⟨x, hx⟩ := hne
+    rw [← IdealSheafData.range_subschemeι] at hx
+    obtain ⟨y, -⟩ := hx
+    exact ⟨y⟩
+  have := hJ.isFinite_subschemeι_comp (k := k)
+  have hd := Hom.finrankΓ_pos_of_isFinite (J.subschemeι ≫ X ↘ Spec (.of k))
+  refine ⟨(1 - ℒ.eulerChar k).toNat, fun n hn ↦ ?_⟩
+  have h₁ := (hJ.pow n).eulerChar_tensorObj_dual_toModules (k := k) ℒ
+  have h₂ := Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (k := k)
+    (ℒ ⊗ (J ^ n).toModulesᵛ)
+  have h₃ := (hJ.le_finrankΓ_subschemeι_pow_comp (k := k) n).trans' (Nat.le_mul_of_pos_right n hd)
+  have h₄ := Int.self_le_toNat (1 - ℒ.eulerChar k)
+  omega
+
+include k in
+attribute [local instance] Abelian.hasFiniteBiproducts in
 /-- **Every line bundle has a section with divisorial zeros after a twist.** For every invertible
 sheaf `ℒ` on a smooth proper curve there is an effective Cartier divisor `D₂`, with invertible
 ideal sheaf `J₂ = 𝒪_X(-D₂)`, and a global section `s` of `ℒ ⊗ 𝒪_X(D₂)` whose zero scheme is an
 effective Cartier divisor, i.e. `s` does not vanish identically on any connected component.
 
-Choose a closed point on each of the finitely many connected components of `X` and let `D` be
-their sum. On each component, `χ(ℒ ⊗ 𝒪_X(nD)) = χ(ℒ) + n deg D` grows with `n`
-(`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_tensorObj_dual_toModules`), so
-`h⁰ ≥ χ > 0` there for `n ≫ 0`. A section which is non-zero on each component, which is
-integral, has invertible zero scheme
+Choose a closed point `x i` on each of the finitely many connected components `V i` of `X`, and
+let `D = ∑ᵢ x i`, an effective Cartier divisor meeting every component. Each `V i` is a smooth
+proper curve, so `ℒ ⊗ 𝒪_X(n D)` has a non-zero section on `V i` for `n ≫ 0`
+(`AlgebraicGeometry.Scheme.Modules.exists_finrankH_zero_pos_tensorObj_dual_pow`). These glue to
+a global section `s`, since `X` is the disjoint union of the `V i`. Its zero scheme is locally
+principal, and non-zero on each `V i`, which is integral; hence it is invertible
 (`AlgebraicGeometry.Scheme.IdealSheafData.IsLocallyPrincipal.isInvertible`).
 
-(blueprint: `lem-sc-line-bundle-rational-section`) -/
+(blueprint: part of the proof of `lem-sc-line-bundle-rational-section`) -/
 theorem Modules.exists_isInvertible_zeroLocus_tensorObj_dual (ℒ : X.Modules) [ℒ.IsInvertible] :
     ∃ J₂ : X.IdealSheafData, J₂.IsInvertible ∧
-      ∃ s : 𝟙_ X.Modules ⟶ ℒ ⊗ J₂.toModulesᵛ, (Modules.Hom.zeroLocus s).IsInvertible :=
-  sorry
+      ∃ s : 𝟙_ X.Modules ⟶ ℒ ⊗ J₂.toModulesᵛ, (Modules.Hom.zeroLocus s).IsInvertible := by
+  classical
+  have := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
+  have : Smooth (X ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
+  have : IsRegular X := IsRegular.of_smooth (X ↘ Spec (.of k))
+  -- the finitely many connected components `V i` of `X`, open and closed
+  let m := Nat.card (ConnectedComponents X)
+  have : Finite (ConnectedComponents X) := inferInstance
+  let e : ConnectedComponents X ≃ Fin m := Finite.equivFin _
+  let V (i : Fin m) : X.Opens :=
+    ⟨ConnectedComponents.mk ⁻¹' {e.symm i}, (isOpen_discrete {e.symm i}).preimage
+      ConnectedComponents.continuous_coe⟩
+  have hV : _root_.Pairwise (Function.onFun Disjoint V) := fun i j hij ↦
+    TopologicalSpace.Opens.coe_disjoint.mp ((Set.disjoint_singleton.mpr
+      (e.symm.injective.ne hij)).preimage ConnectedComponents.mk)
+  have hcover : ⨆ i, V i = ⊤ := eq_top_iff.mpr fun x _ ↦
+    TopologicalSpace.Opens.mem_iSup.mpr ⟨e (ConnectedComponents.mk x), by simp [V]⟩
+  have hclosed (i : Fin m) : IsClosed (V i : Set X) :=
+    (isClosed_discrete {e.symm i}).preimage ConnectedComponents.continuous_coe
+  have hne (i : Fin m) : (V i : Set X).Nonempty := by
+    obtain ⟨x, hx⟩ := ConnectedComponents.surjective_coe (e.symm i)
+    exact ⟨x, hx⟩
+  have hconn (i : Fin m) : ConnectedSpace (V i) := by
+    obtain ⟨x, hx⟩ := ConnectedComponents.surjective_coe (e.symm i)
+    have : (V i : Set X) = connectedComponent x := by
+      change ConnectedComponents.mk ⁻¹' {e.symm i} = _
+      rw [← hx]
+      exact connectedComponents_preimage_singleton
+    exact isConnected_iff_connectedSpace.mp (this ▸ isConnected_connectedComponent)
+  -- each `V i` is a smooth proper curve
+  let (i : Fin m) : (V i).toScheme.Over (Spec (.of k)) := ⟨(V i).ι ≫ X ↘ Spec (.of k)⟩
+  have (i : Fin m) : IsClosedImmersion (V i).ι := .of_isPreimmersion _ (by simpa using hclosed i)
+  have (i : Fin m) : SmoothOfRelativeDimension 1 ((V i).toScheme ↘ Spec (.of k)) := by
+    have := smoothOfRelativeDimension_comp (n := 0) (m := 1) (V i).ι (X ↘ Spec (.of k))
+    rwa [zero_add] at this
+  have (i : Fin m) : IsProper ((V i).toScheme ↘ Spec (.of k)) :=
+    inferInstanceAs (IsProper ((V i).ι ≫ X ↘ Spec (.of k)))
+  -- a closed point `x i` on each component, and the divisor `D = ∑ x i`
+  have : CompactSpace X := inferInstance
+  choose x hxV hxcl using fun i ↦ (hclosed i).exists_closed_singleton (hne i)
+  let J : X.IdealSheafData := ∏ i, IdealSheafData.vanishingIdeal ⟨{x i}, hxcl i⟩
+  have hJ : J.IsInvertible := Finset.prod_induction _
+    (fun I : X.IdealSheafData ↦ I.IsInvertible)
+    (fun _ _ ha hb ↦ ha.mul hb) IdealSheafData.isInvertible_top fun i _ ↦
+      isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one (X ↘ Spec (.of k)) (hxcl i)
+  have hJx (i : Fin m) : x i ∈ J.support := by
+    have hle : J ≤ IdealSheafData.vanishingIdeal ⟨{x i}, hxcl i⟩ := by
+      change ∏ j, _ ≤ _
+      rw [← Finset.mul_prod_erase _ _ (Finset.mem_univ i)]
+      exact mul_le_of_le_one_right bot_le le_top
+    exact IdealSheafData.le_support_iff_le_vanishingIdeal.mpr hle rfl
+  -- on each component, twisting by `n D` for `n ≫ 0` produces non-zero sections
+  have hI (i : Fin m) : (J.comap (V i).ι).IsInvertible := hJ.comap_of_isOpenImmersion _
+  have hIne (i : Fin m) : ((J.comap (V i).ι).support : Set (V i)).Nonempty :=
+    ⟨⟨x i, hxV i⟩, by rw [IdealSheafData.coe_support_comap]; exact hJx i⟩
+  choose n₀ hn₀ using fun i ↦ exists_finrankH_zero_pos_tensorObj_dual_pow (k := k)
+    ((pullback (V i).ι).obj ℒ) (hI i) (hIne i)
+  let n := Finset.univ.sup n₀
+  have := (hJ.pow n).isInvertible_dual_toModules
+  let M := ℒ ⊗ (J ^ n).toModulesᵛ
+  let N (i : Fin m) : X.Modules := (pushforward (V i).ι).obj ((restrictFunctor (V i).ι).obj M)
+  have hpos (i : Fin m) : 0 < (N i).finrankH k 0 := by
+    have h := hn₀ i n (Finset.le_sup (Finset.mem_univ i))
+    rw [← IdealSheafData.comap_pow] at h
+    obtain ⟨e₁⟩ := nonempty_pullback_tensorObj_iso (V i).ι ℒ (J ^ n).toModulesᵛ
+    obtain ⟨e₂⟩ := (hJ.pow n).nonempty_pullback_dual_toModules_iso (V i).ι
+      ((hJ.pow n).comap_of_isOpenImmersion _)
+    rw [finrankH_pushforward_ι (V i) (hclosed i) k,
+      finrankH_congr k ((restrictFunctorIsoPullback (V i).ι).app M ≪≫ e₁ ≪≫
+        whiskerLeftIso _ e₂)]
+    exact h
+  have hτ (i : Fin m) : ∃ τ : 𝟙_ X.Modules ⟶ N i, τ ≠ 0 := by
+    have : Nontrivial ((N i).H 0) := Module.nontrivial_of_finrank_pos (R := k) (hpos i)
+    exact exists_ne_zero_of_nontrivial_H_zero _
+  choose τ hτ using hτ
+  -- glue them to a global section `s`, using `M ≅ ⨁ᵢ (V i).ι_* (M|_{V i})`
+  let φ : M ⟶ ⨁ N := biproduct.lift fun i ↦ (restrictAdjunction (V i).ι).unit.app M
+  have : IsIso φ := isIso_biproduct_lift_restrictAdjunction_unit V hV hcover M
+  let s : 𝟙_ X.Modules ⟶ M := biproduct.lift τ ≫ inv φ
+  have hs (i : Fin m) : s ≫ (restrictAdjunction (V i).ι).unit.app M = τ i := by
+    have h : s ≫ φ = biproduct.lift τ := by simp [s]
+    simpa [φ] using congrArg (· ≫ biproduct.π N i) h
+  refine ⟨J ^ n, hJ.pow n, s, ?_⟩
+  -- the zero scheme of `s` is invertible on each (integral) component
+  refine IdealSheafData.IsInvertible.of_iSup_opensRange_eq_top (fun i ↦ (V i).ι)
+    (by simpa using hcover) fun i ↦ ?_
+  have : Smooth ((V i).toScheme ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
+  have : IsRegular (V i) := IsRegular.of_smooth ((V i).toScheme ↘ Spec (.of k))
+  have := LocallyOfFiniteType.isLocallyNoetherian ((V i).toScheme ↘ Spec (.of k))
+  have : IsIntegral (V i) := IsRegular.isIntegral _
+  have := IsInvertible.sheafOfModules_isInvertible (𝟙_ X.Modules)
+  have := IsInvertible.sheafOfModules_isInvertible M
+  have : SheafOfModules.IsInvertible.{u, u, u} ((pullback (V i).ι).obj (𝟙_ X.Modules)) :=
+    IsInvertible.sheafOfModules_isInvertible _
+  have : SheafOfModules.IsInvertible.{u, u, u} ((pullback (V i).ι).obj M) :=
+    IsInvertible.sheafOfModules_isInvertible _
+  rw [Hom.comap_zeroLocus]
+  refine (Hom.isLocallyPrincipal_zeroLocus _).isInvertible fun h ↦ hτ i ?_
+  rw [Hom.zeroLocus_eq_bot_iff] at h
+  have h' : (restrictFunctor (V i).ι).map s = 0 := by
+    have := (restrictFunctorIsoPullback (V i).ι).hom.naturality s
+    rw [h, comp_zero] at this
+    exact (cancel_mono _).mp (this.trans zero_comp.symm)
+  have := (restrictAdjunction (V i).ι).unit.naturality s
+  simp only [Functor.id_map, Functor.comp_map, h', Functor.map_zero, comp_zero] at this
+  rw [← hs i, this]
+
 
 include k in
 /-- **Every line bundle comes from a divisor.** Every invertible sheaf `ℒ` on a smooth proper

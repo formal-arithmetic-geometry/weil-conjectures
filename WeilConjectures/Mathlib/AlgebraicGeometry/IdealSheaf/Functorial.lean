@@ -371,6 +371,13 @@ theorem comap_mul (f : X ⟶ Y) (I J : Y.IdealSheafData) :
     rw [ideal_comap_appLE _ f U V e, ideal_comap_appLE _ f U V e, ideal_comap_appLE _ f U V e,
       ideal_mul, Pi.mul_apply, Ideal.map_mul]
 
+/-- **Pullback of ideal sheaves commutes with powers**, by `comap_mul` and `comap_top`. -/
+theorem comap_pow (f : X ⟶ Y) (J : Y.IdealSheafData) (n : ℕ) :
+    (J ^ n).comap f = J.comap f ^ n := by
+  induction n with
+  | zero => rw [pow_zero, pow_zero]; exact comap_top f
+  | succ n ih => rw [pow_succ, comap_mul, ih, pow_succ]
+
 end Mul
 
 section OpenImmersion

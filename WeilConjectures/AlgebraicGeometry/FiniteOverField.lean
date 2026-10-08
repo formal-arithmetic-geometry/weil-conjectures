@@ -55,4 +55,14 @@ lemma finite_and_discreteTopology_of_isFinite {Z : Scheme.{u}} (g : Z ⟶ Spec (
   have : DiscreteTopology (Spec Γ(Z, ⊤)) := inferInstanceAs (DiscreteTopology (PrimeSpectrum _))
   exact ⟨Finite.of_injective e e.injective, e.isEmbedding.discreteTopology⟩
 
+/-- A nonempty scheme finite over a field `K` has non-zero `dim_K Γ(Z, 𝒪_Z)`. -/
+lemma Scheme.Hom.finrankΓ_pos_of_isFinite {Z : Scheme.{u}} (g : Z ⟶ Spec (.of K)) [IsFinite g]
+    [Nonempty Z] : 0 < g.finrankΓ := by
+  let _ := g.ΓAlgebra
+  have : Module.Finite K Γ(Z, ⊤) := by
+    have := finite_sections_top_of_isFinite g
+    rwa [Scheme.Hom.appLE_top_top] at this
+  have : Nonempty (⊤ : Z.Opens) := ⟨⟨Classical.arbitrary Z, trivial⟩⟩
+  exact Module.finrank_pos
+
 end AlgebraicGeometry
