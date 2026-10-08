@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.Submodule
 public import WeilConjectures.Mathlib.RingTheory.Filtration
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Noetherian
@@ -321,5 +323,181 @@ theorem Flat.exists_notMem_forall_flat_localizedModule [IsNoetherianRing R]
   · rw [lTensor_localizedModule_injective_iff]
     intro y hy
     exact ⟨b, hbQ, hbK y hy⟩
+
+omit [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] in
+/-- For a tower `R → A → B` and an ideal `I` of `R`, the `A`-submodule `(I A) • B` is the ideal
+`I B` of `B`. -/
+lemma _root_.Ideal.mem_map_smul_top_iff {A : Type*} [CommRing A] [Algebra R A] [Algebra A S]
+    [IsScalarTower R A S] (I : Ideal R) (y : S) :
+    y ∈ (I.map (algebraMap R A) • (⊤ : Submodule A S)) ↔ y ∈ I.map (algebraMap R S) := by
+  constructor
+  · intro hy
+    induction hy using Submodule.smul_induction_on' with
+    | smul a ha b _ =>
+      rw [Algebra.smul_def]
+      refine Ideal.mul_mem_right _ _ ?_
+      have : (I.map (algebraMap R A)).map (algebraMap A S) = I.map (algebraMap R S) := by
+        rw [Ideal.map_map, ← IsScalarTower.algebraMap_eq]
+      exact this ▸ Ideal.mem_map_of_mem _ ha
+    | add x _ y _ hx hy => exact Ideal.add_mem _ hx hy
+  · intro hy
+    have hmul : ∀ b : S, ∀ z ∈ (I.map (algebraMap R A) • (⊤ : Submodule A S)),
+        b * z ∈ (I.map (algebraMap R A) • (⊤ : Submodule A S)) := by
+      intro b z hz
+      induction hz using Submodule.smul_induction_on' with
+      | smul a ha c _ =>
+        rw [mul_smul_comm]
+        exact Submodule.smul_mem_smul ha trivial
+      | add x _ y _ hx hy => rw [mul_add]; exact Submodule.add_mem _ hx hy
+    induction hy using Submodule.span_induction with
+    | mem y hy =>
+      obtain ⟨r, hr, rfl⟩ := hy
+      rw [IsScalarTower.algebraMap_apply R A S, Algebra.algebraMap_eq_smul_one]
+      exact Submodule.smul_mem_smul (Ideal.mem_map_of_mem _ hr) trivial
+    | zero => exact zero_mem _
+    | add x y _ _ hx hy => exact Submodule.add_mem _ hx hy
+    | smul b y _ hy => exact hmul b y hy
+
+omit [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] in
+/-- **Regular elements of the fibre, noetherian case** (Stacks, Tags 00MF and 00RC). Let `R` be
+noetherian, `S` a finite type `R`-algebra, `q` a prime of `S` with `S_q` flat over `R`, and
+`f ∈ S` a nonzerodivisor of the fibre `S_q ⧸ p S_q`, `p = q ∩ R`. Then there is `g ∉ q` such that
+`f` is a nonzerodivisor on `S_g` and `(S ⧸ f)_g` is flat over `R`. -/
+theorem _root_.Algebra.exists_notMem_flat_localizedModule_quotient [IsNoetherianRing R]
+    [Algebra.FiniteType R S] (q : Ideal S) [q.IsPrime] [Flat R (Localization.AtPrime q)] (f : S)
+    (hfib : ∀ m : Localization.AtPrime q,
+      algebraMap S _ f * m ∈ (q.comap (algebraMap R S)).map (algebraMap R _) →
+        m ∈ (q.comap (algebraMap R S)).map (algebraMap R (Localization.AtPrime q))) :
+    ∃ g ∉ q, (∀ x : S, f * x = 0 → g * x = 0) ∧
+      Flat R (LocalizedModule (Submonoid.powers g) (S ⧸ Ideal.span {f})) := by
+  classical
+  have : IsNoetherianRing S := Algebra.FiniteType.isNoetherianRing R S
+  set p := q.comap (algebraMap R S)
+  set Sq := Localization.AtPrime q
+  let φR : Localization.AtPrime p →+* Sq := Localization.localRingHom p q (algebraMap R S) rfl
+  let : Algebra (Localization.AtPrime p) Sq := φR.toAlgebra
+  have : IsScalarTower R (Localization.AtPrime p) Sq := IsScalarTower.of_algebraMap_eq fun r ↦ by
+    rw [IsScalarTower.algebraMap_apply R S Sq]
+    exact (Localization.localRingHom_to_map p q (algebraMap R S) rfl r).symm
+  have : IsLocalHom (algebraMap (Localization.AtPrime p) Sq) :=
+    Localization.isLocalHom_localRingHom p q (algebraMap R S) rfl
+  have : Flat (Localization.AtPrime p) Sq :=
+    (Module.flat_iff_of_isLocalization (Localization.AtPrime p) p.primeCompl Sq).mpr
+      inferInstance
+  set s := algebraMap S Sq f
+  set mR := IsLocalRing.maximalIdeal (Localization.AtPrime p)
+  have hmax : mR.map (algebraMap _ Sq) ≤ Ideal.jacobson ⊥ := by
+    rw [IsLocalRing.jacobson_eq_maximalIdeal ⊥ bot_ne_top, Ideal.map_le_iff_le_comap]
+    intro x hx
+    rw [Ideal.mem_comap, IsLocalRing.mem_maximalIdeal, mem_nonunits_iff]
+    exact fun h ↦ (IsLocalRing.mem_maximalIdeal _).mp hx (isUnit_of_map_unit _ _ h)
+  have hmR : mR = p.map (algebraMap R (Localization.AtPrime p)) :=
+    (Localization.AtPrime.map_eq_maximalIdeal).symm
+  have hs : ∀ m : Sq, s • m ∈ mR • (⊤ : Submodule (Localization.AtPrime p) Sq) → m ∈ mR • (⊤ : Submodule (Localization.AtPrime p) Sq) := by
+    intro m
+    rw [hmR, Ideal.mem_map_smul_top_iff, Ideal.mem_map_smul_top_iff, smul_eq_mul]
+    exact hfib m
+  have key := Flat.rTensor_toLinearMap_injective (R := Localization.AtPrime p) (M := Sq) mR hmax s hs
+  set φ := DistribSMul.toLinearMap (Localization.AtPrime p) Sq s
+  -- `s` is a nonzerodivisor of `S_q`.
+  have hreg : ∀ m : Sq, s * m = 0 → m = 0 := by
+    intro m hm
+    have h := key (Localization.AtPrime p) (a₁ := m ⊗ₜ 1) (a₂ := 0) (by
+      rw [map_zero, LinearMap.rTensor_tmul]
+      simp [φ, smul_eq_mul, hm])
+    simpa using congr(TensorProduct.rid _ Sq $h)
+  -- `S_q ⧸ s` is flat.
+  have hq : Flat (Localization.AtPrime p) (Sq ⧸ LinearMap.range φ) := by
+    refine Flat.quotient_range φ fun J m hm ↦ ?_
+    let e := TensorProduct.tensorQuotEquivQuotSMul Sq J
+    have he (x : Sq ⊗[Localization.AtPrime p] (Localization.AtPrime p ⧸ J)) :
+        e (φ.rTensor _ x) = (J • (⊤ : Submodule (Localization.AtPrime p) Sq)).mapQ (J • ⊤) φ
+          (fun y hy ↦ by
+            rw [Submodule.mem_comap]
+            change s • y ∈ J • (⊤ : Submodule (Localization.AtPrime p) Sq)
+            induction hy using Submodule.smul_induction_on' with
+            | smul r hr y _ => rw [smul_comm]; exact Submodule.smul_mem_smul hr trivial
+            | add y _ z _ hy hz => rw [smul_add]; exact Submodule.add_mem _ hy hz) (e x) := by
+      induction x with
+      | zero => simp
+      | add x y hx hy => rw [map_add, map_add, map_add, hx, hy, map_add]
+      | tmul y r =>
+        obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective r
+        simp [e, φ, TensorProduct.tensorQuotEquivQuotSMul_tmul_mk]
+    have h0 : φ.rTensor _ (e.symm (Submodule.Quotient.mk m)) = 0 := by
+      apply e.injective
+      rw [he, LinearEquiv.apply_symm_apply, Submodule.mapQ_apply, map_zero,
+        Submodule.Quotient.mk_eq_zero]
+      exact hm
+    have := key (Localization.AtPrime p ⧸ J) (h0.trans (map_zero _).symm)
+    rw [LinearEquiv.map_eq_zero_iff, Submodule.Quotient.mk_eq_zero] at this
+    exact this
+  have hqR : Flat R (Sq ⧸ LinearMap.range φ) := Flat.trans R (Localization.AtPrime p) _
+  -- Transfer to the localization of `S ⧸ f`.
+  set C := S ⧸ Ideal.span {f}
+  let ψ := (Ideal.span {f} : Submodule S S).toLocalizedQuotient' Sq q.primeCompl
+    (Algebra.linearMap S Sq)
+  let e₁ : LocalizedModule q.primeCompl C ≃ₗ[S] Sq ⧸ (Ideal.span {f} : Submodule S S).localized'
+      Sq q.primeCompl (Algebra.linearMap S Sq) := IsLocalizedModule.iso q.primeCompl ψ
+  have hloc : (Ideal.span {f} : Submodule S S).localized' Sq q.primeCompl
+      (Algebra.linearMap S Sq) = Submodule.span Sq {s} := by
+    rw [Submodule.localized'_span, Set.image_singleton]
+    rfl
+  have hrange : (Submodule.span Sq {s}).restrictScalars (Localization.AtPrime p) =
+      LinearMap.range φ := by
+    ext x
+    rw [Submodule.restrictScalars_mem, ← Ideal.span, Ideal.mem_span_singleton', LinearMap.mem_range]
+    exact ⟨fun ⟨a, ha⟩ ↦ ⟨a, by rw [← ha, mul_comm]; rfl⟩,
+      fun ⟨a, ha⟩ ↦ ⟨a, by rw [← ha, mul_comm]; rfl⟩⟩
+  let e₂ : (Sq ⧸ Submodule.span Sq {s}) ≃ₗ[Localization.AtPrime p] Sq ⧸ LinearMap.range φ :=
+    (Submodule.Quotient.restrictScalarsEquiv _ _).symm.trans (Submodule.quotEquivOfEq _ _ hrange)
+  have hflatq : Flat R (LocalizedModule q.primeCompl C) :=
+    Flat.of_linearEquiv ((e₁.restrictScalars R).trans
+      (((Submodule.quotEquivOfEq _ _ hloc).restrictScalars R).trans (e₂.restrictScalars R)))
+  -- Openness of the flat locus.
+  obtain ⟨g₁, hg₁, hopen⟩ := Flat.exists_notMem_forall_flat_localizedModule (M := C) q hflatq
+  have hC : ∀ (J : Ideal R) (y : C ⊗[R] J), J.subtype.lTensor C y = 0 →
+      ∃ n : ℕ, g₁ ^ n • y = 0 := by
+    intro J y hy
+    have : g₁ ∈ (Submodule.span S {y}).annihilator.radical := by
+      rw [Ideal.radical_eq_sInf, Submodule.mem_sInf]
+      rintro Q ⟨haQ, hQ⟩
+      by_contra hg
+      obtain ⟨t, ht, hty⟩ := (flat_localizedModule_iff _).mp (hopen Q hg) J y hy
+      exact ht (haQ ((Submodule.mem_annihilator_span_singleton _ _).mpr hty))
+    obtain ⟨n, hn⟩ := this
+    exact ⟨n, (Submodule.mem_annihilator_span_singleton _ _).mp hn⟩
+  -- `f` is a nonzerodivisor near `q`.
+  set K := LinearMap.ker (LinearMap.mulLeft S f)
+  obtain ⟨σ, hσ⟩ := (IsNoetherian.noetherian K : K.FG)
+  have hσK : ∀ x ∈ σ, ∃ t ∉ q, t * x = 0 := by
+    intro x hx
+    have hxK : f * x = 0 := LinearMap.mem_ker.mp (hσ ▸ Submodule.subset_span hx)
+    have : algebraMap S Sq x = 0 := hreg _ (by rw [← map_mul, hxK, map_zero])
+    obtain ⟨⟨t, ht⟩, htx⟩ := (IsLocalization.map_eq_zero_iff q.primeCompl Sq x).mp this
+    exact ⟨t, ht, htx⟩
+  choose! t ht hty using hσK
+  set g₂ := ∏ x ∈ σ, t x
+  have hg₂ : g₂ ∉ q := by
+    rw [Ideal.IsPrime.prod_mem_iff]
+    push Not
+    exact fun x hx ↦ ht x hx
+  have hg₂K : ∀ x ∈ K, g₂ * x = 0 := by
+    intro x hx
+    rw [← hσ] at hx
+    induction hx using Submodule.span_induction with
+    | mem x hx =>
+      change (∏ x ∈ σ, t x) * x = 0
+      rw [← Finset.prod_erase_mul σ t hx, mul_assoc, hty x hx, mul_zero]
+    | zero => exact mul_zero _
+    | add x y _ _ hx hy => rw [mul_add, hx, hy, add_zero]
+    | smul a x _ hx => rw [smul_eq_mul, mul_left_comm, hx, mul_zero]
+  refine ⟨g₁ * g₂, fun h ↦ (Ideal.IsPrime.mul_mem_iff_mem_or_mem ‹_›).mp h |>.elim hg₁ hg₂,
+    fun x hx ↦ ?_, ?_⟩
+  · rw [mul_assoc, hg₂K x (LinearMap.mem_ker.mpr hx), mul_zero]
+  · rw [flat_localizedModule_iff]
+    intro J y hy
+    obtain ⟨n, hn⟩ := hC J y hy
+    exact ⟨(g₁ * g₂) ^ n, ⟨n, rfl⟩, by rw [mul_pow, mul_comm, mul_smul, hn, smul_zero]⟩
 
 end Module
