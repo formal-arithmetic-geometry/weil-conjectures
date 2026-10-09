@@ -5,14 +5,67 @@
  "statement": "Let $R$ be a commutative ring, $\\Lambda$ a commutative $R$-algebra, and $\\mathcal E$ a set of commutative $R$-algebras each of finite presentation over $R$ (isomorphic as $R$-algebras to $R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ for some $n,m\\ge0$). Assume: for every $R$-algebra $A$ of finite presentation and every homomorphism of $R$-algebras $\\alpha:A\\to\\Lambda$ there are $B\\in\\mathcal E$ and homomorphisms of $R$-algebras $\\beta:A\\to B$, $\\gamma:B\\to\\Lambda$ with $\\gamma\\circ\\beta=\\alpha$. Then $\\Lambda$ is a filtered colimit of members of $\\mathcal E$: there are a small filtered category $J$, a functor $j\\mapsto B_j$ from $J$ to commutative $R$-algebras with $B_j\\in\\mathcal E$ for all $j$, and homomorphisms of $R$-algebras $\\iota_j:B_j\\to\\Lambda$ such that $(\\Lambda,(\\iota_j)_j)$ is a colimit of this diagram in the category of commutative $R$-algebras [def-weil-pbc-category-colimit].",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 07C3 (lemma-when-colimit, line 31952), (2) implies (1): the full subcategory of the category of Lemma Tag 0BUF (lemma-ring-colimit-fp-category: finitely presented R-algebras over Lambda, filtered with colimit Lambda) on the objects A -> Lambda with A in E is cofinal and filtered (Categories, Lemma cofinal-in-filtered), so Lambda is its colimit (Categories, Lemma cofinal); the converse direction (1) implies (2) is the node lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+  "place": "Algebra, Lemma Tag 07C3 (lemma-when-colimit, line 31952), proof of (2) implies (1): the full subcategory of the category of Lemma Tag 0BUF (lemma-ring-colimit-fp-category, line 31771: finitely presented R-algebras over Lambda, filtered with colimit Lambda) on the objects A -> Lambda with A in E is cofinal and filtered (Categories, Lemma Tag 0BUC, lemma-cofinal-in-filtered, categories.tex line 2230), so Lambda is its colimit (Categories, Lemma Tag 04E7, lemma-cofinal, line 1760); the converse direction (1) implies (2) is the node lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
  },
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the category of finitely presented algebras over $\\Lambda$).* Let $\\mathcal P_0$ be the set of all $R$-algebras $R[x_1,\\dots,x_n]/I$ with $n\\ge0$ and $I\\subset R[x_1,\\dots,x_n]$ a finitely generated ideal, and $\\mathcal P=\\mathcal P_0\\cup\\mathcal E$. This is a set of $R$-algebras of finite presentation, and every $R$-algebra of finite presentation is isomorphic to a member of $\\mathcal P_0\\subset\\mathcal P$ (by definition it is isomorphic to some $R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$). Let $\\mathcal I$ be the category of pairs $(A,\\alpha)$, $A\\in\\mathcal P$, $\\alpha:A\\to\\Lambda$ a homomorphism of $R$-algebras, with morphisms $\\varphi:(A,\\alpha)\\to(A',\\alpha')$ the $R$-algebra maps $\\varphi:A\\to A'$ with $\\alpha'\\varphi=\\alpha$, and let $D:\\mathcal I\\to$ (commutative $R$-algebras) be $(A,\\alpha)\\mapsto A$. By [lem-weil-pbc-algebra-colimit-fp-algebras-over-it], $\\mathcal I$ is a small filtered category and $(\\Lambda,(\\alpha)_{(A,\\alpha)\\in\\mathcal I})$ is a colimit of $D$ [def-weil-pbc-category-colimit].",
+   "uses": [
+    "lem-weil-pbc-algebra-colimit-fp-algebras-over-it",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 07C3 (lemma-when-colimit, line 31952), proof, second paragraph: 'Consider the category I of Lemma 0BUF'; Lemma Tag 0BUF (line 31771) and its footnote (objects restricted to a set)"
+   }
+  },
+  {
+   "text": "*Step 2 (the subcategory of members of $\\mathcal E$, and the factorization).* Let $\\mathcal J\\subset\\mathcal I$ be the full subcategory on the objects $(B,\\beta)$ with $B\\in\\mathcal E$; it is small, as a full subcategory of the small category $\\mathcal I$. Let $(A,\\alpha)$ be an object of $\\mathcal I$. Then $A$ is an $R$-algebra of finite presentation and $\\alpha:A\\to\\Lambda$ a homomorphism of $R$-algebras, so by the hypothesis there are $B\\in\\mathcal E$ and $R$-algebra maps $\\beta:A\\to B$, $\\gamma:B\\to\\Lambda$ with $\\gamma\\circ\\beta=\\alpha$. Then $(B,\\gamma)$ is an object of $\\mathcal J$ (as $B\\in\\mathcal E\\subset\\mathcal P$) and $\\beta$ is a morphism $(A,\\alpha)\\to(B,\\gamma)$ of $\\mathcal I$ (as $\\gamma\\beta=\\alpha$). So every object of $\\mathcal I$ has a morphism to an object of $\\mathcal J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 07C3 (lemma-when-colimit, line 31952), proof, second paragraph ('the full subcategory J consisting of those A -> Lambda with A in E'); hypothesis (2) of the lemma"
+   }
+  },
+  {
+   "text": "*Step 3 (cofinality, Categories 0BUC and 04E7).* The opposite category $\\mathcal I^{\\mathrm{op}}$ is cofiltered, because the three conditions of filteredness of $\\mathcal I$ (Step 1) are, read in $\\mathcal I^{\\mathrm{op}}$, the three conditions of cofilteredness; $\\mathcal J^{\\mathrm{op}}$ is a full subcategory of $\\mathcal I^{\\mathrm{op}}$, and by Step 2 every object of $\\mathcal I^{\\mathrm{op}}$ receives a morphism from an object of $\\mathcal J^{\\mathrm{op}}$. Apply part (1) of [lem-weil-pbc-colimit-initial-full-subcategory] to the cofiltered category $\\mathcal I^{\\mathrm{op}}$, its full subcategory $\\mathcal J^{\\mathrm{op}}$, the category of commutative $R$-algebras, and the functor $D:(\\mathcal I^{\\mathrm{op}})^{\\mathrm{op}}=\\mathcal I\\to$ (commutative $R$-algebras) of Step 1, whose colimit exists by Step 1. It gives: $\\mathcal J^{\\mathrm{op}}$ is cofiltered, i.e. $\\mathcal J$ is filtered (in particular nonempty); the restriction $D|_{\\mathcal J}$ has a colimit $(L,(\\lambda_{(B,\\beta)})_{(B,\\beta)\\in\\mathcal J})$ [def-weil-pbc-category-colimit]; and the canonical map $u:L\\to\\Lambda$, the unique $R$-algebra map with $u\\circ\\lambda_{(B,\\beta)}=\\beta$ for all $(B,\\beta)\\in\\mathcal J$ (the coprojection of $D$ at $(B,\\beta)$ being $\\beta$ by Step 1), is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Lemma Tag 0BUC (lemma-cofinal-in-filtered, line 2230: J is filtered and cofinal in I) and Lemma Tag 04E7 (lemma-cofinal, line 1760: colim over J = colim over I), as cited in the proof of Algebra, Lemma Tag 07C3"
+   }
+  },
+  {
+   "text": "*Step 4 (conclusion).* Since $u$ is an isomorphism with $u\\circ\\lambda_{(B,\\beta)}=\\beta$, the cocone $(\\Lambda,(\\beta)_{(B,\\beta)\\in\\mathcal J})$ is a colimit of $D|_{\\mathcal J}$: for a cocone $(M,(\\mu_{(B,\\beta)}))$ on $D|_{\\mathcal J}$ let $v:L\\to M$ be the unique map with $v\\lambda_{(B,\\beta)}=\\mu_{(B,\\beta)}$; then $w=v u^{-1}$ satisfies $w\\beta=v\\lambda_{(B,\\beta)}=\\mu_{(B,\\beta)}$, and any $w'$ with $w'\\beta=\\mu_{(B,\\beta)}$ for all $(B,\\beta)$ has $w'u\\lambda_{(B,\\beta)}=\\mu_{(B,\\beta)}$, so $w'u=v$ and $w'=w$. Thus $J:=\\mathcal J$ is a small filtered category, $(B,\\beta)\\mapsto B_{(B,\\beta)}:=B$ is a functor from $J$ to commutative $R$-algebras with every $B_{(B,\\beta)}\\in\\mathcal E$, and the coprojections $\\iota_{(B,\\beta)}:=\\beta$ are homomorphisms of $R$-algebras with $(\\Lambda,(\\iota_j)_{j\\in J})$ a colimit of this diagram, which is the assertion.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 07C3 (lemma-when-colimit, line 31952), proof, last sentence ('Then Lambda is also the colimit over J by Categories, Lemma 04E7')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-colimit-fp-algebras-over-it",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-colimit-initial-full-subcategory"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07C3 (lemma-when-colimit, line 31952), proof of (2) implies (1), with Lemma Tag 0BUF and Categories, Lemmas Tag 0BUC and 04E7"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +87,17 @@
    "results": "Algebra/Category/Ring/FinitePresentation.lean: only the factorization through a stage of a given filtered colimit; no @[stacks 07C3]",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsFinitelyAccessibleCategory (and ObjectProperty.ind_iff_exists, read at ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/ObjectProperty/Ind.lean:77)",
+   "results": "CategoryTheory.ObjectProperty.ind_iff_exists (Mathlib.CategoryTheory.ObjectProperty.Ind, line 77): in a finitely accessible category C, for P implying finitely presentable, ind P X iff every map Z -> X from a finitely presentable object factors through an object satisfying P; its proof is the Stacks proof (Functor.final_of_exists_of_isFiltered_of_fullyFaithful, IsFiltered.of_exists_of_isFiltered_of_fullyFaithful, Filtered/Final.lean:186,166). MorphismProperty.ind_iff_exists (MorphismProperty/Ind.lean:143) is the Under-category form. No instance IsFinitelyAccessibleCategory for CommAlgCat R, Under R or CommRingCat.",
+   "date": "2026-10-10",
+   "verdict": "generalization, not a match: applied to C = CommAlgCat R and P = membership in E (up to isomorphism; P ≤ finitely presentable by CommRingCat.isFinitelyPresentable_under, Algebra/Category/Ring/FinitePresentation.lean:172, through commAlgCatEquivUnder) it gives this node with ObjectProperty.ind (the leaf of def-weil-pbc-filtered-colimit-smooth-algebras), but it needs IsFinitelyAccessibleCategory (CommAlgCat R) (the content of the new node lem-weil-pbc-algebra-colimit-fp-algebras-over-it), and its hypothesis quantifies over all categorically finitely presentable objects, which needs also the converse 'finitely presentable object => finitely presented algebra' (Stacks 00QO (3)=>(1)), absent from Mathlib"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +117,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-factorization-criterion-filtered-colimit",
+  "worker": "stage1",
+  "summary": "Split along Stacks 07C3, (2)=>(1), in four steps: the category I of finitely presented R-algebras over Lambda, made small by taking the objects from the set P_0 ∪ E (P_0 = the quotients R[x_1..x_n]/I, per the footnote of 0BUF), filtered with colimit Lambda by the new unsplit node lem-weil-pbc-algebra-colimit-fp-algebras-over-it (Stacks 0BUF, absent from Mathlib: no IsFinitelyAccessibleCategory instance for algebras); the full subcategory J on members of E and the factorization hypothesis giving every object of I a map to J (elementary); cofinality (Categories 0BUC and 04E7) by the existing Mathlib leaf lem-weil-pbc-colimit-initial-full-subcategory applied in dual form to I^op ⊃ J^op; transport of the colimit along the canonical isomorphism (elementary). Statement kept; source place now carries the tags 0BUC, 04E7 of the two Categories lemmas. Mathlib's ObjectProperty.ind_iff_exists is the categorical generalization, recorded, not a match (missing accessibility instance and the converse of 00QO). No Lean in either source branch."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Four steps along 07C3 (2)=>(1): the small filtered category of finitely presented R-algebras over Lambda with colimit Lambda is the new unsplit node lem-weil-pbc-algebra-colimit-fp-algebras-over-it (0BUF, with the set of representatives made explicit so the category is small; Mathlib's general version in Presentable/Dense.lean needs an accessibility instance CommAlgCat R lacks); the full subcategory on members of E receives a morphism from every object by the hypothesis; cofinality (0BUC, 04E7) through the existing Mathlib leaf lem-weil-pbc-colimit-initial-full-subcategory in dual form; the colimit is moved along the canonical isomorphism. Tags corrected by the worker (0BUC/04E7, not 04E6/002R). ObjectProperty.ind_iff_exists recorded as the Mathlib analogue."
+ }
 }

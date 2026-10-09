@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-algebra-colimit-fp-algebras-over-it",
+ "kind": "statement",
+ "title": "An algebra is the filtered colimit of the finitely presented algebras mapping to it (Stacks 0BUF)",
+ "statement": "Let $R$ be a commutative ring and $\\Lambda$ a commutative $R$-algebra. Let $\\mathcal P$ be a set of commutative $R$-algebras, each of finite presentation over $R$ (isomorphic as an $R$-algebra to $R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ for some $n,m\\ge0$), such that every $R$-algebra of finite presentation is isomorphic as an $R$-algebra to some member of $\\mathcal P$ (for example the set of all quotients $R[x_1,\\dots,x_n]/I$, $n\\ge0$, $I$ a finitely generated ideal, together with any further set of $R$-algebras of finite presentation). Let $\\mathcal I$ be the category whose objects are the pairs $(A,\\alpha)$ with $A\\in\\mathcal P$ and $\\alpha:A\\to\\Lambda$ a homomorphism of $R$-algebras, and whose morphisms $(A,\\alpha)\\to(A',\\alpha')$ are the homomorphisms of $R$-algebras $\\varphi:A\\to A'$ with $\\alpha'\\circ\\varphi=\\alpha$. Then $\\mathcal I$ is a small filtered category (Stacks, Categories, Definition Tag 002V: $\\mathcal I$ has at least one object, any two objects map to a common object, and any two parallel morphisms $\\sigma,\\tau:x\\to y$ are equalized by some $\\nu:y\\to z$, $\\nu\\sigma=\\nu\\tau$), and $(\\Lambda,(\\alpha)_{(A,\\alpha)\\in\\mathcal I})$ is a colimit [def-weil-pbc-category-colimit] of the functor $\\mathcal I\\to$ (commutative $R$-algebras), $(A,\\alpha)\\mapsto A$, $\\varphi\\mapsto\\varphi$, in the category of commutative $R$-algebras.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0BUF (lemma-ring-colimit-fp-category, line 31771) with its footnote restricting the objects to a set (quotients of $R[x_1,x_2,\\dots]$); here the set $\\mathcal P$ only has to contain a representative of every isomorphism class of finitely presented $R$-algebras"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every algebra is a filtered colimit of finitely presented algebras over it",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit (Mathlib.Algebra.Category.Ring.FinitePresentation), CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit(_under) (Mathlib.CategoryTheory.Presentable.Finite), ColimitPresentation.instIsFilteredTotal… (Presentable.ColimitPresentation), CommRingCat.preservesColimit_coyoneda_of_finitePresentation, CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits: all about maps out of a finitely presented algebra into a given filtered colimit (07C3/00QO (1)=>(2)), none writes an algebra as a colimit",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the category of finitely presented R-algebras with a map to A is filtered and A is the colimit of the forgetful diagram",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, CommRingCat.preservesFilteredColimits_coyoneda, CommRingCat.isFinitelyPresentable_under, CommRingCat.isFinitelyPresentable_hom (Mathlib.Algebra.Category.Ring.FinitePresentation): fp algebras are finitely presentable objects, not the density statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsFinitelyAccessibleCategory",
+   "results": "the class (Presentable.LocallyPresentable), the generic instances IsFinitelyAccessibleCategory.instIsFilteredCostructuredArrowFullSubcategoryIsFinitelyPresentableι and instIsDense… (Presentable.Dense: in a finitely accessible category the category of finitely presentable objects over X is filtered and X is its colimit), ObjectProperty.ind_iff_exists, MorphismProperty.ind_iff_exists; no instance IsFinitelyAccessibleCategory for CommRingCat, Under R or CommAlgCat R",
+   "date": "2026-10-10",
+   "verdict": "generalization: the categorical statement (Presentable/Dense.lean) would give this node for CommAlgCat R, but Mathlib lacks IsFinitelyAccessibleCategory (CommAlgCat R) and the identification of the finitely presentable objects of CommAlgCat R with the finitely presented algebras (only the direction CommRingCat.isFinitelyPresentable_under, Algebra/Category/Ring/FinitePresentation.lean:172); not a match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 0BUF\\|stacks 00QN\\|stacks 07C3' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'Accessible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -n 'theorem\\|lemma\\|def \\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/Ring/FinitePresentation.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/CommAlgCat/FiniteType.lean",
+   "results": "no @[stacks 0BUF/00QN/07C3]; no accessibility instance in Algebra/RingTheory/AlgebraicGeometry; FinitePresentation.lean has only factorization through stages of a given filtered colimit and finite presentability of fp algebras; CommAlgCat/FiniteType.lean has essential smallness of finite type algebras (FGAlgCat), no colimit statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "WeilConjectures (slopmaster2): grep -rn 'ind_iff_exists\\|IsFinitelyAccessibleCategory\\|07C3\\|0BUF\\|ObjectProperty.ind'",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no Lean candidate in the source repository"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-factorization-criterion-filtered-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
