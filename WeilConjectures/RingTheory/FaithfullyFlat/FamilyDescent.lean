@@ -7,6 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.TensorProduct.Pi
 public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
@@ -223,5 +224,101 @@ lemma descentEquiv_tmul (θ : ∀ j k, N j →ₗ[B j] B j ⊗[A] N k)
     [Fintype J] [DecidableEq J] (l : J) [Module.Flat A (B l)] (b : B l) (n : descentSubmodule θ) :
     descentEquiv θ hunit hcocycle l (b ⊗ₜ n) = b • (n : ∀ j, N j) l :=
   rfl
+
+section Amitsur
+
+variable {A B N : Type*} [CommRing A] [CommRing B] [Algebra A B] [AddCommGroup N] [Module A N]
+
+/-- The coaction `b ⊗ n ↦ b ⊗ (1 ⊗ n)` of `B ⊗[A] N`, whose descent submodule is the equalizer
+of the two maps `B ⊗[A] N → B ⊗[A] B ⊗[A] N`. -/
+noncomputable abbrev amitsurCoaction (A B N : Type*) [CommRing A] [CommRing B] [Algebra A B]
+    [AddCommGroup N] [Module A N] (_ _ : Unit) :
+    B ⊗[A] N →ₗ[B] B ⊗[A] (B ⊗[A] N) :=
+  (TensorProduct.mk A B N 1).baseChange B
+
+lemma amitsurCoaction_tmul (b : B) (n : N) :
+    amitsurCoaction A B N () () (b ⊗ₜ n) = b ⊗ₜ (1 ⊗ₜ n) :=
+  rfl
+
+/-- The inclusion `n ↦ (1 ⊗ n)` of `N` into the descent submodule of `amitsurCoaction`. -/
+noncomputable def amitsurInclusion : N →ₗ[A] descentSubmodule (amitsurCoaction A B N) where
+  toFun n := ⟨fun _ ↦ 1 ⊗ₜ n, by
+    rw [mem_descentSubmodule]
+    intro j k
+    rfl⟩
+  map_add' n n' := by ext; simp [tmul_add]
+  map_smul' a n := by ext; simp [tmul_smul]
+
+/-- **Amitsur exactness in degree zero.** For a faithfully flat `A`-algebra `B`, an element of
+`B ⊗[A] N` whose two images in `B ⊗[A] B ⊗[A] N` agree is of the form `1 ⊗ n`. -/
+theorem _root_.Module.FaithfullyFlat.exists_eq_one_tmul_of_rTensor_eq [Module.FaithfullyFlat A B]
+    (t : B ⊗[A] N)
+    (ht : (Algebra.TensorProduct.includeLeft : B →ₐ[A] B ⊗[A] B).toLinearMap.rTensor N t =
+      (Algebra.TensorProduct.includeRight : B →ₐ[A] B ⊗[A] B).toLinearMap.rTensor N t) :
+    ∃ n : N, t = 1 ⊗ₜ n := by
+  have hunit : ∀ (j : Unit) (x : B ⊗[A] N),
+      (LinearMap.id : B ⊗[A] N →ₗ[A] B ⊗[A] N).liftBaseChange B
+        (amitsurCoaction A B N j j x) = x := by
+    intro j x
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul b n => simp [smul_tmul']
+    | add x y hx hy => simp_all
+  have hcocycle : ∀ (j k l : Unit) (x : B ⊗[A] N),
+      ((amitsurCoaction A B N k l).restrictScalars A).lTensor B
+        (amitsurCoaction A B N j k x) =
+        (TensorProduct.mk A B (B ⊗[A] N) 1).lTensor B (amitsurCoaction A B N j l x) := by
+    intro j k l x
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul b n => rfl
+    | add x y hx hy => simp_all
+  have hbij := bijective_descentLift_of_flat (amitsurCoaction A B N) hunit hcocycle ()
+  -- `B ⊗ amitsurInclusion` is a section of the bijection `descentLift`
+  have hsec : ∀ x : B ⊗[A] N,
+      descentLift (amitsurCoaction A B N) ()
+        ((amitsurInclusion (A := A) (B := B) (N := N)).lTensor B x) = x := by
+    intro x
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul b n => simp [amitsurInclusion, smul_tmul']
+    | add x y hx hy => simp_all
+  have hincl : Function.Bijective (amitsurInclusion (A := A) (B := B) (N := N)) := by
+    have hl : Function.Bijective ((amitsurInclusion (A := A) (B := B) (N := N)).lTensor B) := by
+      constructor
+      · intro x y hxy
+        rw [← hsec x, ← hsec y, hxy]
+      · intro z
+        refine ⟨descentLift (amitsurCoaction A B N) () z, ?_⟩
+        apply hbij.1
+        exact hsec _
+    have key := Module.FaithfullyFlat.lTensor_bijective_iff_bijective (R := A) (M := B)
+      (N := N) (N' := descentSubmodule (amitsurCoaction A B N))
+      (amitsurInclusion (A := A) (B := B) (N := N))
+    exact key.mp hl
+  have ht' : (fun _ : Unit ↦ t) ∈ descentSubmodule (amitsurCoaction A B N) := by
+    rw [mem_descentSubmodule]
+    intro j k
+    have h1 : ∀ x : B ⊗[A] N, TensorProduct.assoc A B B N
+        ((Algebra.TensorProduct.includeLeft : B →ₐ[A] B ⊗[A] B).toLinearMap.rTensor N x) =
+        amitsurCoaction A B N () () x := by
+      intro x
+      induction x using TensorProduct.induction_on with
+      | zero => simp
+      | tmul b n => simp
+      | add x y hx hy => simp_all
+    have h2 : ∀ x : B ⊗[A] N, TensorProduct.assoc A B B N
+        ((Algebra.TensorProduct.includeRight : B →ₐ[A] B ⊗[A] B).toLinearMap.rTensor N x) =
+        1 ⊗ₜ x := by
+      intro x
+      induction x using TensorProduct.induction_on with
+      | zero => simp
+      | tmul b n => simp
+      | add x y hx hy => simp_all [tmul_add]
+    rw [← h1, ht, h2]
+  obtain ⟨n, hn⟩ := hincl.2 ⟨_, ht'⟩
+  exact ⟨n, (congr_fun (congr_arg Subtype.val hn) ()).symm⟩
+
+end Amitsur
 
 end TensorProduct
