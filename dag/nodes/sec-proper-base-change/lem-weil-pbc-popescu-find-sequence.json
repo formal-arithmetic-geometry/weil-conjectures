@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-popescu-find-sequence",
+ "kind": "statement",
+ "title": "Choosing generators of a regular prime with controlled annihilators (Ogoma)",
+ "statement": "Let $\\Lambda$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subset\\Lambda$ an ideal and $\\mathfrak q\\subset\\Lambda$ a prime ideal with $I\\subset\\mathfrak q$, and let $n,e\\ge1$ be integers. Assume $\\mathfrak q^n\\Lambda_{\\mathfrak q}\\subset I\\Lambda_{\\mathfrak q}$, where $\\Lambda_{\\mathfrak q}$ is the localization at $\\mathfrak q$ [def-weil-pbc-localization-at-prime], and that $\\Lambda_{\\mathfrak q}$ is a regular local ring [def-weil-regular-scheme] of dimension $d$. Then there are $\\pi_1,\\dots,\\pi_d\\in\\Lambda$ such that (1) the images of $\\pi_1,\\dots,\\pi_d$ generate $\\mathfrak q\\Lambda_{\\mathfrak q}$; (2) $\\pi_1^n,\\dots,\\pi_d^n\\in I$; (3) for $i=1,\\dots,d$, writing $M_i=\\Lambda/(\\pi_1^e,\\dots,\\pi_{i-1}^e)\\Lambda$, one has $\\{m\\in M_i:\\pi_im=0\\}=\\{m\\in M_i:\\pi_i^2m=0\\}$, i.e. $\\mathrm{Ann}_{M_i}(\\pi_i)=\\mathrm{Ann}_{M_i}(\\pi_i^2)$. (Stacks writes 'there exists an $n>0$ and $\\pi_1,\\dots,\\pi_d$'; the $n$ is the given one.)",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma Tag 07FD (lemma-find-sequence, line 2314), Section 07FB; its proof uses Lemma Tag 07FC (lemma-ogoma, Ogoma), Algebra Lemmas Tag 00NQ (lemma-regular-ring-CM) and Tag 07DV (lemma-regular-sequence-powers)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian ring, regular local ring at prime q, elements generating q, annihilator of pi equals annihilator of pi squared modulo previous powers",
+   "results": "IsNoetherianRing.of_prime, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem (Mathlib.RingTheory.Regular.Flat), exists_le_isAssociatedPrime_of_isNoetherianRing: localization of regular sequences, not this choice of elements",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "regular local ring, choose generators pi_i of the prime with powers in an ideal I and Ann(pi_i)=Ann(pi_i^2) modulo (pi_1^e,...,pi_{i-1}^e) (Ogoma)",
+   "results": "IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, PowerSeries.exist_eq_span_eq_ncard_of_X_notMem, Ideal.exists_mul_add_mem_pow_succ: none states the lemma",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_pow_annihilator\"",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'strictly ?standard|elementary ?standard|ogoma|desingulariz|popescu' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "only CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean (unrelated Gabriel-Popescu embedding); no strictly/elementary standard elements, no desingularization, no @[stacks] tag of Section 07F6/07FB",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-resolve-separable",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
