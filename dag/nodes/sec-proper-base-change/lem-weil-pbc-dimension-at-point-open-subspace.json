@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-dimension-at-point-open-subspace",
+ "kind": "statement",
+ "title": "The dimension at a point is unchanged on an open subspace",
+ "statement": "Let $Y$ be a topological space, $O\\subseteq Y$ an open subset with the subspace topology [def-kun-subspace-topology] and $y\\in O$. Then the Krull dimension of $O$ at $y$ equals the Krull dimension of $Y$ at $y$ [def-kun-topological-dimension-at-point]: $\\dim_y(O)=\\dim_y(Y)$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Section 'Krull dimension', Definition 0055 (label definition-Krull, line 1392, part (4): dim_x(X) = min of dim(U) over open neighbourhoods U of x) and the remark after it (line 1421: 'if U' subset U subset X are open then dim(U') <= dim(U). Hence ... x has a fundamental system of open neighbourhoods U with dim(U) = dim_x(X)')"
+ },
+ "stmt_deps": [
+  "def-kun-subspace-topology",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of an open subspace at a point equals Krull dimension of the space at that point",
+   "results": "topologicalKrullDim, topologicalKrullDim_subspace_le, IsInducing.topologicalKrullDim_le, IsHomeomorph.topologicalKrullDim_eq (Mathlib.Topology.KrullDimension), PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no Krull dimension at a point"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local Krull dimension of a topological space at a point is unchanged when passing to an open neighbourhood",
+   "results": "topologicalKrullDim_subspace_le, topologicalKrullDim, IsClosedEmbedding.topologicalKrullDim_le, IsInducing.topologicalKrullDim_le, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, Ring.krullDimLE_iff",
+   "date": "2026-10-10",
+   "verdict": "related, not a match: topologicalKrullDim_subspace_le (Mathlib/Topology/KrullDimension.lean:63, dim Y ≤ dim X for a subspace) is the ingredient; no local dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/KrullDimension.lean; grep -rn 'topologicalKrullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -v Topology/KrullDimension.lean; grep -rln 'krullDimAt\\|dimAt\\|localKrullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order",
+   "results": "KrullDimension.lean: topologicalKrullDim, IsInducing.topologicalKrullDim_le (48), IsHomeomorph.topologicalKrullDim_eq (53), topologicalKrullDim_subspace_le (63), topologicalKrullDim_zero_of_discreteTopology, IsOpenEmbedding.coheight_map/coheight_eq; other uses only PrimeSpectrum and AlgebraicGeometry/Artinian.lean; no dimension at a point anywhere",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

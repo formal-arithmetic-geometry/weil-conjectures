@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-smooth-zero-differentials-affine-open-etale",
+ "kind": "statement",
+ "title": "A smooth morphism is etale on an affine open where the differentials vanish",
+ "statement": "Let $g:U\\to S$ be a smooth morphism of schemes [def-sbc-smooth-morphisms]. Let $V\\subseteq S$ and $W\\subseteq U$ be affine open subschemes [def-weil-affine-spectrum] with $g(W)\\subseteq V$, let $R=\\mathcal O_S(V)$, $A=\\mathcal O_U(W)$ and $R\\to A$ the ring map corresponding to $g|_W:W\\to V$, and assume that the module of Kähler differentials $\\Omega_{A/R}$ [def-weil-pbc-kahler-differentials] is zero. Then the restriction $g|_W:W\\to S$ is etale [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Section 02GH: the sentence before Definition 02GI (line 8050: 'a ring map R -> A is said to be etale if it is smooth and Omega_{A/R} = 0', Algebra Definition 00U1), Definition 02GI (definition-etale, line 8058), Lemma 01V6 (lemma-smooth-characterize: R -> A is smooth for affine opens of a smooth morphism), Lemmas 02GP (open immersion etale) and 02GN (composition); equivalently Lemma 01VF (lemma-smooth-flat), Lemma 02G5 (lemma-unramified-omega-zero) and Lemma 02GE for the clauses of [def-weil-etale-morphism]; smoothness of [def-sbc-smooth-morphisms] is Definition 01V5 by more-morphisms.tex Lemma 02H6"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth algebra with vanishing Kähler differentials is étale",
+   "results": "Algebra.formallyEtale_iff (Mathlib.RingTheory.Etale.Basic: FormallyEtale ↔ Subsingleton Ω ∧ Subsingleton H1Cotangent), Algebra.formallyUnramified_iff (Mathlib.RingTheory.Unramified.Basic), RingHom.etale_iff_formallyUnramified_and_smooth (Mathlib.RingTheory.RingHom.Etale), AlgebraicGeometry.IsEtale.instIsSmooth",
+   "date": "2026-10-10",
+   "verdict": "related ring-level facts, no scheme statement: not a leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.Etale, KaehlerDifferential",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth ring homomorphism whose module of Kähler differentials is zero is étale",
+   "results": "Algebra.Etale.formallyEtale, RingHom.etale_iff_formallyUnramified_and_smooth, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, RingHom.Etale.toAlgebra, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero",
+   "date": "2026-10-10",
+   "verdict": "related, not a match: the ring-level statement is RingHom.etale_iff_formallyUnramified_and_smooth (Mathlib/RingTheory/RingHom/Etale.lean:40) with FormallyUnramified ↔ Subsingleton Ω (Mathlib/RingTheory/Unramified/Basic.lean:59); the node is about a morphism smooth in the formally-smooth sense of [def-sbc-smooth-morphisms], whose agreement with Mathlib's Smooth is Stacks 02H6 (stages/1-dag.md convention)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; grep -n 'Etale.of_formallyUnramified_of_flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Fiber.lean",
+   "results": "Etale.lean: HasRingHomProperty @Etale RingHom.Etale (line 56), iff_flat_and_formallyUnramified (line 140), of_formallyUnramified_of_flat (line 145), open immersions etale (line 78); Smooth.lean: Smooth → Flat (line 113), Smooth → LocallyOfFinitePresentation (line 241), restriction to opens (line 200); Fiber.lean:247 Algebra.Etale.of_formallyUnramified_of_flat; nothing stating that a smooth scheme morphism with Ω_{A/R}=0 on an affine open is etale there",
+   "date": "2026-10-10",
+   "verdict": "no match (the pieces exist; assembling them and the formal-smoothness definition is the proof)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
