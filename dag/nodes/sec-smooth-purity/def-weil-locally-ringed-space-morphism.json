@@ -1,0 +1,52 @@
+{
+ "id": "def-weil-locally-ringed-space-morphism",
+ "kind": "definition",
+ "title": "Morphism of locally ringed spaces (continuous map and map of structure sheaves)",
+ "statement": "A *ringed space* is a pair $(X,\\mathcal O_X)$ of a topological space $X$ and a sheaf of commutative rings $\\mathcal O_X$ on $X$; it is *locally ringed* if every stalk $\\mathcal O_{X,x}$ is a local ring. A *morphism of ringed spaces* $(f,f^\\sharp):(X,\\mathcal O_X)\\to(Y,\\mathcal O_Y)$ is a continuous map $f:X\\to Y$ together with a map of sheaves of rings $f^\\sharp:\\mathcal O_Y\\to f_*\\mathcal O_X$, i.e. ring homomorphisms $f^\\sharp_V:\\mathcal O_Y(V)\\to\\mathcal O_X(f^{-1}V)$ for all open $V\\subseteq Y$, compatible with restrictions. It is a *morphism of locally ringed spaces* if for every $x\\in X$ the induced map of stalks $f^\\sharp_x:\\mathcal O_{Y,f(x)}\\to\\mathcal O_{X,x}$ is a local homomorphism (it maps the maximal ideal into the maximal ideal). Composition is $(g,g^\\sharp)\\circ(f,f^\\sharp)=(g\\circ f,\\,g_*f^\\sharp\\circ g^\\sharp)$. In particular, when $X=Y$ and $f=\\mathrm{id}_X$, a morphism $(\\mathrm{id}_X,\\psi):X\\to X$ is the same as an endomorphism $\\psi:\\mathcal O_X\\to\\mathcal O_X$ of the sheaf of rings all of whose stalk maps $\\psi_x$ are local homomorphisms. A morphism of schemes is a morphism of the underlying locally ringed spaces.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/schemes.tex",
+  "place": "Sheaves, Definition 6.25.1 (tag 0091, label definition-ringed-space); Schemes, Definition 26.2.1 (tag 01HB, label definition-locally-ringed-space) (3); Schemes, Definition 26.9.1 (tag 01IJ) for morphisms of schemes"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure Hom\\|prop :' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Geometry/RingedSpace/PresheafedSpace.lean",
+   "results": "LocallyRingedSpace.lean:79 `structure Hom (X Y : LocallyRingedSpace)` extending `X.toPresheafedSpace.Hom Y.toPresheafedSpace` with `prop : ∀ x, IsLocalHom (toHom.stalkMap x).hom`; PresheafedSpace.lean:70 `structure Hom` with fields `base : X ⟶ Y` (continuous map) and `c : Y.presheaf ⟶ base _* X.presheaf`; LocallyRingedSpace.lean:157 `homMk` builds a morphism from a sheafed-space morphism and the stalk-locality proof",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure Hom\\|instance : Category Scheme' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Scheme.lean",
+   "results": "Scheme.lean:74 `structure Scheme.Hom` extends `X.toLocallyRingedSpace.Hom Y.toLocallyRingedSpace`; line 91 the category of schemes is the full subcategory of locally ringed spaces",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.LocallyRingedSpace.Hom",
+  "file": "Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean",
+  "how": "exact: fields `base` (continuous map) and `c` (map of sheaves O_Y → base_* O_X) from `AlgebraicGeometry.PresheafedSpace.Hom` (Mathlib/Geometry/RingedSpace/PresheafedSpace.lean:70) and `prop` (stalk maps are `IsLocalHom`); a morphism of schemes is `AlgebraicGeometry.Scheme.Hom` (Mathlib/AlgebraicGeometry/Scheme.lean:74), built from such a morphism by `Scheme.Hom.mk`; one with `base = 𝟙` is the identity-on-space case"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-absolute-frobenius-scheme",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

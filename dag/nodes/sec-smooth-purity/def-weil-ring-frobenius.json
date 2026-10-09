@@ -1,0 +1,50 @@
+{
+ "id": "def-weil-ring-frobenius",
+ "kind": "definition",
+ "title": "Frobenius endomorphism of a ring of characteristic p and its iterates",
+ "statement": "Let $p$ be a prime number and $A$ a commutative ring in which $p\\cdot1=0$. The *Frobenius endomorphism* of $A$ is the map $F_A:A\\to A$, $a\\mapsto a^p$; it is a ring homomorphism ($F_A(1)=1$, $F_A(ab)=F_A(a)F_A(b)$, and $(a+b)^p=a^p+b^p$ because the binomial coefficients $\\binom pi$, $0<i<p$, are divisible by $p$). For $n\\geq0$ its $n$-fold iterate is the ring endomorphism $F_A^n:a\\mapsto a^{p^n}$. Every ring homomorphism $\\varphi:A\\to B$ between such rings satisfies $\\varphi\\circ F_A=F_B\\circ\\varphi$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Section 33.36 'Frobenii' (tag 0CC6), the paragraph after Definition 33.36.1 (tag 03SM) ('for any ring $A$ of characteristic $p$ the map $F_A : A \\to A$, $a \\mapsto a^p$ is a ring endomorphism') and the proof of Lemma 33.36.2"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def frobenius\\b\\|def iterateFrobenius\\b' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/CharP/",
+   "results": "Algebra/CharP/Lemmas.lean:321 `frobenius R p : R →+* R` (x ↦ x^p) and :327 `iterateFrobenius R p n : R →+* R` (x ↦ x^(p^n)), both for `[CommSemiring R] [ExpChar R p]`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance expChar_prime\\|class inductive ExpChar' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/CharP/Defs.lean",
+   "results": "Defs.lean:332 `instance expChar_prime [CharP R p] [Fact p.Prime] : ExpChar R p`; ExpChar has constructors `zero [CharZero R] : ExpChar R 1` and `prime (hp : p.Prime) [CharP R p]`",
+   "date": "2026-10-09",
+   "verdict": "match (with the caveat that the zero ring has `CharP 0 1` and no `ExpChar 0 p` for p prime, so Mathlib's `frobenius` is not available for it; there x ↦ x^p is the identity of the zero ring)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "frobenius, iterateFrobenius",
+  "file": "Mathlib/Algebra/CharP/Lemmas.lean",
+  "how": "specializes in one line: for p prime and A nontrivial with (p : A) = 0, `CharP A p` holds by `charP_iff_prime_eq_zero` (Mathlib/Algebra/CharP/Basic.lean:103), hence `ExpChar A p` by `expChar_prime` (Mathlib/Algebra/CharP/Defs.lean:332); then F_A = `frobenius A p` and F_A^n = `iterateFrobenius A p n`; naturality is `RingHom.map_frobenius` / `RingHom.frobenius_comm` (Mathlib/Algebra/CharP/Frobenius.lean:78, 104). For the zero ring F_A is the identity, which Mathlib's `frobenius` does not cover (no `ExpChar 0 p` instance)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-absolute-frobenius-scheme",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
