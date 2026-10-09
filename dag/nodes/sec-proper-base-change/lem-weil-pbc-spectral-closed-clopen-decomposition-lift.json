@@ -11,9 +11,75 @@
   "def-weil-spectral-space",
   "def-weil-connected-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $Z$ is closed in $X$ and $Z_i$ is closed in $Z$, each $Z_i$ is closed in $X$. As $X$ is spectral [def-weil-spectral-space], it is quasi-compact, so the closed subsets $Z_1,Z_2$ are quasi-compact. (Source: 'Observe that $Z_i$ is quasi-compact'.)",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0CAM (lemma-connected-topological, line 15071), proof, first sentence"
+   }
+  },
+  {
+   "text": "For $i=1,2$ let $W_i=\\{x\\in X:\\ \\overline{\\{x\\}}\\cap Z_i\\neq\\emptyset\\}$, the set of points of $X$ specializing to a point of $Z_i$. By [lem-weil-pbc-spectral-generalizations-of-quasi-compact] applied to the quasi-compact set $Z_i$ (step 1), $W_i=\\bigcap_{U\\in\\mathcal U_i}U$ for a family $\\mathcal U_i$ of quasi-compact open subsets of $X$. Each quasi-compact open $U\\subseteq X$ is constructible [def-weil-constructible-subset]: for every quasi-compact open $V\\subseteq X$ the set $U\\cap V$ is quasi-compact because $X$ is quasi-separated [def-weil-spectral-space], so $U$ is retrocompact, and $U=U\\cap(X\\setminus\\emptyset)$ with $\\emptyset$ open and retrocompact. Hence $W_i$ is an intersection of a family of constructible subsets of $X$ (that is, $W_i$ is closed in the constructible topology, Topology Lemma 0A31 (3) => (1)).",
+   "uses": [
+    "lem-weil-pbc-spectral-generalizations-of-quasi-compact",
+    "def-weil-spectral-space",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0CAM (lemma-connected-topological, line 15071), proof, second sentence (citing Topology, Lemma 0A31, lemma-make-spectral-space)"
+   }
+  },
+  {
+   "text": "$X=W_1\\amalg W_2$. Let $x\\in X$ and $C=Z\\cap\\overline{\\{x\\}}$, which is nonempty and connected [def-weil-connected-scheme] by hypothesis. Since $Z=Z_1\\amalg Z_2$, $C=(Z_1\\cap\\overline{\\{x\\}})\\amalg(Z_2\\cap\\overline{\\{x\\}})$ is a disjoint union of two subsets closed in $C$, hence each also open in $C$. By connectedness one of them is empty, and since $C\\neq\\emptyset$ the other is not. Thus $\\overline{\\{x\\}}$ meets exactly one of $Z_1,Z_2$, i.e. $x$ lies in exactly one of $W_1,W_2$.",
+   "uses": [
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0CAM (lemma-connected-topological, line 15071), proof, third sentence ('Assumption (2) implies that $X=W_1\\amalg W_2$')"
+   }
+  },
+  {
+   "text": "Each $W_i$ is closed in $X$; we treat $i=1$, the case $i=2$ being symmetric. Let $x\\in\\overline{W_1}$. By step 2 and [lem-weil-pbc-spectral-proconstructible-closure-specialization] there is $x_1\\in W_1$ with $x\\in\\overline{\\{x_1\\}}$, hence $\\overline{\\{x\\}}\\subseteq\\overline{\\{x_1\\}}$. By hypothesis there is a point $z\\in Z\\cap\\overline{\\{x\\}}$; then $z\\in Z\\cap\\overline{\\{x_1\\}}$. Since $x_1\\in W_1$, step 3 gives $x_1\\notin W_2$, i.e. $\\overline{\\{x_1\\}}\\cap Z_2=\\emptyset$, so $z\\in Z_1$. Therefore $\\overline{\\{x\\}}\\cap Z_1\\ni z$ is nonempty and $x\\in W_1$. So $\\overline{W_1}=W_1$.",
+   "uses": [
+    "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0CAM (lemma-connected-topological, line 15071), proof, fourth and fifth sentences (citing Topology, Lemma 0903 part (1), lemma-constructible-stable-specialization-closed)"
+   }
+  },
+  {
+   "text": "Set $X_i=W_i$. By steps 3 and 4, $X_1,X_2$ are closed, disjoint and cover $X$, so $X=X_1\\amalg X_2$. Moreover $Z\\cap X_i=Z_i$: if $z\\in Z_i$ then $z\\in\\overline{\\{z\\}}\\cap Z_i$, so $z\\in W_i$; conversely if $z\\in Z\\cap W_1$ then $z\\notin W_2$ by step 3, hence $z\\notin Z_2$ (as $Z_2\\subseteq W_2$), so $z\\in Z_1$; symmetrically for $i=2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0CAM (lemma-connected-topological, line 15071), proof, last sentence ('setting $X_i=W_i$ does the job')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-spectral-space",
+  "lem-weil-pbc-spectral-generalizations-of-quasi-compact",
+  "def-weil-constructible-subset",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma 0CAM (label lemma-connected-topological, line 15071) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +104,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,7 +128,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Etale Cohomology 0CAM; self-contained; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Five steps along the proof of 0CAM, two new unsplit nodes with statements checked against topology.tex: lem-weil-pbc-spectral-generalizations-of-quasi-compact (0A31 (3)=>(4) with the quasi-compactness of W from its proof) and lem-weil-pbc-spectral-proconstructible-closure-specialization (0903 (1), stated for intersections of constructible sets so that no node for the constructible topology is needed). W_i = points specializing into Z_i; W_i an intersection of quasi-compact opens, hence of constructible sets (quasi-compact opens are retrocompact in a quasi-separated space); X = W_1 u W_2 disjoint by the connectedness hypothesis; W_i closed by 0903 (1) with the missing step of the source written out (a point of Z in the closure of x, and x_1 not in W_2); X_i = W_i."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spectral-closed-clopen-decomposition-lift",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 0CAM (etale-cohomology.tex line 15071; tag verified in tags/tags as 0CAM,etale-cohomology-lemma-connected-topological): it agrees; statement and stmt_deps kept. Wrote the proof in five steps following the Stacks proof, spelling out the terse parts: Z_i closed hence quasi-compact; W_i (points specializing to Z_i) is an intersection of quasi-compact opens by Topology 0A31 (3)=>(4) (tag verified: 0A31,topology-lemma-make-spectral-space), and quasi-compact opens of a quasi-separated space are constructible, so W_i is closed in the constructible topology; X = W_1 disjoint union W_2 from the connectedness hypothesis; W_i closed via Topology 0903 (1) (tag verified: 0903,topology-lemma-constructible-stable-specialization-closed), where the Stacks phrase 'thus closure{x} in closure{x_1} and we see x in W_1' is written out (it needs a point of Z in closure{x} and x_1 not in W_2); Z cap W_i = Z_i. Created two unsplit nodes for the cited topology lemmas: lem-weil-pbc-spectral-generalizations-of-quasi-compact (0A31 (3)=>(4) with quasi-compactness of W) and lem-weil-pbc-spectral-proconstructible-closure-specialization (0903 (1), stated for intersections of constructible sets so as not to need a node for the constructible topology; its proof will use lem-weil-pbc-spectral-constructible-finite-intersection). Mathlib (Topology/Spectral/*, Topology/Constructible.lean, Topology/Inseparable.lean) has neither; no Lean in the source repository."
  }
 }
