@@ -168,7 +168,7 @@ lemma exists_zeta_mul_eq_coe [IsAffine C] [Fact (ringChar K ≠ l)] :
     ∃ P₀ : Polynomial ℂ, (∏' x, zetaFactor p x) *
       ((1 - Polynomial.C (Nat.card K : ℂ) * Polynomial.X : Polynomial ℂ) : PowerSeries ℂ) = P₀ ∧
       ¬ (1 - Polynomial.C (Nat.card K : ℂ) * Polynomial.X : Polynomial ℂ) ∣ P₀ := by
-  have : ConnectedSpace C := connectedSpace_of_geometricallyConnected p
+  have : ConnectedSpace C := GeometricallyConnected.connectedSpace_of_subsingleton p
   have : Nonempty C.finitePoints := by
     obtain ⟨x, hx⟩ := p.exists_mem_finitePoints
     exact ⟨⟨x, hx⟩⟩
@@ -625,7 +625,7 @@ theorem dense_frobenius_ofFundamentalGroup :
   have : SmoothOfRelativeDimension 1 (V.ι ≫ p) := by
     simpa using smoothOfRelativeDimension_comp (n := 0) (m := 1) V.ι p
   have : GeometricallyConnected (V.ι ≫ p) := geometricallyConnected_comp V.ι
-  have : ConnectedSpace V := connectedSpace_of_geometricallyConnected (V.ι ≫ p)
+  have : ConnectedSpace V := GeometricallyConnected.connectedSpace_of_subsingleton (V.ι ≫ p)
   obtain ⟨sV⟩ := (V.ι ≫ p).nonempty_algebraicClosure_point
   obtain ⟨GV, _, _⟩ := Scheme.FiniteEtale.exists_isFundamentalGroup sV
   obtain ⟨τ⟩ := PreGaloisCategory.nonempty_iso_of_fiberFunctor

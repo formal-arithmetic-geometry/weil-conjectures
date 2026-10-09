@@ -41,7 +41,28 @@ noncomputable def isoPullbackOfIsPullback {X Y : Scheme.{u}} (f : Y ⟶ X) (P : 
 
 /-- **Gluing finite étale schemes** over the pushout `A ⊔_D B` of two open immersions: finite
 étale schemes over `A` and over `B` with isomorphic restrictions to `D` glue to a finite étale
-scheme over `A ⊔_D B` restricting to the given ones. -/
+scheme over `A ⊔_D B` restricting to the given ones. For the span and its pushout
+
+```
+  D ──dB──▶ B
+  │         │
+ dA        inr
+  ▼         ▼
+  A ──inl─▶ A ⊔_D B
+```
+
+and finite étale `P_A ⟶ A`, `P_B ⟶ B` with `dA^* P_A ≅ dB^* P_B`, there is a finite étale
+`P ⟶ A ⊔_D B` with `inl^* P ≅ P_A` and `inr^* P ≅ P_B`; it is the pushout
+`P_A ⊔_{P_D} P_B`, and the squares
+
+```
+  P_A ──▶ P          P_B ──▶ P
+   │      │           │      │
+   ▼      ▼           ▼      ▼
+   A ──▶ A ⊔_D B      B ──▶ A ⊔_D B
+```
+
+are cartesian. -/
 theorem exists_pullback_inl_iso (PA : A.FiniteEtale) (PB : B.FiniteEtale)
     (e : (pullback dA).obj PA ≅ (pullback dB).obj PB) :
     ∃ P : (Limits.pushout dA dB).FiniteEtale,
@@ -168,7 +189,18 @@ lemma preimage_opensRange_pushout_desc_inr :
 
 include H in
 /-- A scheme covered by two open immersions `A ⟶ X` and `B ⟶ X` meeting in `D` is the pushout
-`A ⊔_D B`. -/
+`A ⊔_D B`: if the square
+
+```
+  D ──dB──▶ B
+  │         │
+ dA        iB
+  ▼         ▼
+  A ──iA──▶ X
+```
+
+is cartesian and the images of `iA` and `iB` cover `X`, then the induced map
+`pushout.desc iA iB : A ⊔_D B ⟶ X` is an isomorphism. -/
 lemma isIso_pushout_desc (hcov : ∀ x, x ∈ Set.range iA ∨ x ∈ Set.range iB) :
     IsIso (Limits.pushout.desc iA iB H.w) := by
   rw [← MorphismProperty.isomorphisms.iff]
@@ -202,7 +234,18 @@ lemma isIso_pushout_desc (hcov : ∀ x, x ∈ Set.range iA ∨ x ∈ Set.range i
 include H in
 /-- **Gluing finite étale schemes** over a scheme `X` covered by two open immersions `A ⟶ X`,
 `B ⟶ X` meeting in `D`: finite étale schemes over `A` and over `B` with isomorphic restrictions
-to `D` glue to a finite étale scheme over `X` restricting to the one over `A`. -/
+to `D` glue to a finite étale scheme over `X` restricting to the one over `A`. Here the square
+
+```
+  D ──dB──▶ B
+  │         │
+ dA        iB
+  ▼         ▼
+  A ──iA──▶ X
+```
+
+is cartesian, the images of `iA` and `iB` cover `X`, and `X ≅ A ⊔_D B` by
+`AlgebraicGeometry.Scheme.FiniteEtale.isIso_pushout_desc`. -/
 theorem exists_pullback_iso_of_isPullback (hcov : ∀ x, x ∈ Set.range iA ∨ x ∈ Set.range iB)
     (PA : A.FiniteEtale) (PB : B.FiniteEtale) (e : (pullback dA).obj PA ≅ (pullback dB).obj PB) :
     ∃ P : X.FiniteEtale, Nonempty ((pullback iA).obj P ≅ PA) := by

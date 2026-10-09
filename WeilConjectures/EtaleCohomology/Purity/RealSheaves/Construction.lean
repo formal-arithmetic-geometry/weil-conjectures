@@ -50,7 +50,7 @@ namespace Scheme.FiniteEtale
 section Topology
 
 variable {K : Type u} [Field K] [Finite K] {X₀ : Scheme.{u}} (p : X₀ ⟶ Spec (.of K))
-  {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X₀)
+  [GeometricallyConnected p] {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X₀)
   (G : Type u) [Group G] [∀ P, MulAction G ((fiber s).obj P)] [TopologicalSpace G]
 
 /-- The degree map of the Weil group is continuous for the topology induced from
@@ -111,24 +111,6 @@ end Topology
 
 end Scheme.FiniteEtale
 
-/-- The residue field at a closed point of a scheme locally of finite type over a finite field
-`K` is finite: it is a finite extension of `K` (Nullstellensatz). -/
-lemma Scheme.Hom.finite_residueField_of_isClosed {K : Type u} [Field K] [Finite K]
-    {C : Scheme.{u}} (p : C ⟶ Spec (.of K)) [LocallyOfFiniteType p] {x : C}
-    (hx : IsClosed {x}) : Finite (C.residueField x) := by
-  have : JacobsonSpace C := LocallyOfFiniteType.jacobsonSpace p
-  have : IsClosedImmersion (C.fromSpecResidueField x) :=
-    isClosed_singleton_iff_isClosedImmersion.mp hx
-  let f := C.fromSpecResidueField x ≫ p
-  have : IsFinite f := isFinite_iff_locallyOfFiniteType_of_jacobsonSpace.2 inferInstance
-  obtain ⟨φ, hφ⟩ := Spec.map_surjective f
-  have hfin : φ.hom.Finite := by
-    rw [← IsFinite.SpecMap_iff, hφ]
-    infer_instance
-  let := φ.hom.toAlgebra
-  have : Module.Finite K (C.residueField x) := hfin
-  exact Module.finite_of_finite K
-
 /-- A nonempty quasi-compact scheme locally of finite type over a finite field `K` has a point
 with values in the algebraic closure of `K`: the residue field at a closed point is finite over
 `K`. -/
@@ -138,24 +120,10 @@ lemma Scheme.Hom.nonempty_algebraicClosure_point {K : Type u} [Field K] {C : Sch
   have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace p
   have : JacobsonSpace C := LocallyOfFiniteType.jacobsonSpace p
   obtain ⟨x, -, hx⟩ := (isClosed_univ (X := C)).exists_closed_singleton Set.univ_nonempty
-  have : IsClosedImmersion (C.fromSpecResidueField x) :=
-    isClosed_singleton_iff_isClosedImmersion.mp hx
-  let f := C.fromSpecResidueField x ≫ p
-  have : IsFinite f := isFinite_iff_locallyOfFiniteType_of_jacobsonSpace.2 inferInstance
-  obtain ⟨φ, hφ⟩ := Spec.map_surjective f
-  have hfin : φ.hom.Finite := by
-    rw [← IsFinite.SpecMap_iff, hφ]
-    infer_instance
-  let := φ.hom.toAlgebra
-  have : Module.Finite K (C.residueField x) := hfin
+  let := (p.residueFieldAlgebraMap x).toAlgebra
+  have := p.finite_residueField_of_isClosed x hx
   let ι := IsAlgClosed.lift (M := AlgebraicClosure K) (R := K) (S := C.residueField x)
   exact ⟨Spec.map (CommRingCat.ofHom ι.toRingHom) ≫ C.fromSpecResidueField x⟩
-
-/-- A scheme which is geometrically connected over a field is connected. -/
-lemma connectedSpace_of_geometricallyConnected {K : Type u} [Field K] {C : Scheme.{u}}
-    (p : C ⟶ Spec (.of K)) [GeometricallyConnected p] : ConnectedSpace C :=
-  GeometricallyConnected.geometrically_connectedSpace (f := p) (K := K) (𝟙 _) (𝟙 C) p
-    (IsPullback.id_horiz p)
 
 namespace WeilGroup
 
@@ -222,7 +190,7 @@ omit [ConnectedSpace C] [IsFundamentalGroup (fiber s) G] in
 /-- A geometrically connected curve over a finite field has a Weil group. -/
 theorem nonempty (p : C ⟶ Spec (.of K)) [IsCurve p] [GeometricallyConnected p] :
     Nonempty (WeilGroup p) := by
-  have : ConnectedSpace C := connectedSpace_of_geometricallyConnected p
+  have : ConnectedSpace C := GeometricallyConnected.connectedSpace_of_subsingleton p
   obtain ⟨s⟩ := p.nonempty_algebraicClosure_point
   obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
   exact ⟨ofFundamentalGroup p s G⟩
@@ -251,8 +219,7 @@ noncomputable def restrictionHom : weilGroup pU sU GU →* weilGroup p sC GC :=
     (weilGroup pU sU GU).subtype).codRestrict _ fun w ↦
       (mem_weilGroup_fundamentalGroupMap_iff j hj sU τ GU GC _ _).1 w.2)
 
-omit [IsCurve p] [GeometricallyConnected p] [IsCurve pU] [GeometricallyConnected pU]
-  [IsOpenImmersion j] [Nonempty U] in
+omit [IsCurve p] [IsCurve pU] [IsOpenImmersion j] [Nonempty U] in
 lemma restrictionHom_apply (w : weilGroup pU sU GU) :
     (restrictionHom j hj τ GU GC w : GC × Multiplicative ℤ) =
       (restrictionMap j τ GU GC (w : GU × Multiplicative ℤ).1, (w : GU × Multiplicative ℤ).2) :=
@@ -279,7 +246,7 @@ omit [Finite K] [GeometricallyConnected p] [Nonempty U] in
 lemma restrictionMap_surjective [Smooth p] : Function.Surjective (restrictionMap j τ GU GC) :=
   fundamentalGroupMap_surjective _ GC GU fun P hP ↦ isConnected_pullback_of_smooth (p := p) j P hP
 
-omit [GeometricallyConnected p] [IsCurve pU] [Nonempty U] in
+omit [IsCurve pU] [Nonempty U] in
 include hj in
 lemma restrictionHom_surjective [Smooth p] :
     Function.Surjective (restrictionHom j hj τ GU GC) := by

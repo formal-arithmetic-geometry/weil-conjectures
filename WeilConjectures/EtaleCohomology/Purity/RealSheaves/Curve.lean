@@ -16,23 +16,15 @@ For a geometrically connected curve `C₀` over a finite field, the geometric pa
 group `W` of `C₀` is the étale fundamental group of the geometric curve, Frobenius-equivariantly
 (the homotopy exact sequence, `AlgebraicGeometry.WeilGroup.isEtaleQuotient`). This is the
 hypothesis `AlgebraicGeometry.WeilGroup.IsEtaleQuotient` of the purity theorems of
-`sk-p-real-rankone`, `sk-p-real-rankin` and `sk-p-real-purity`, which therefore apply to the
-Weil group `AlgebraicGeometry.WeilGroup.ofFundamentalGroup` of an actual smooth geometrically
-connected curve.
+`sk-p-real-rankone`, `sk-p-real-rankin` and `sk-p-real-purity`. Since it is an instance, those
+theorems apply as stated to every Weil group of a smooth geometrically connected curve, for
+instance to `AlgebraicGeometry.WeilGroup.ofFundamentalGroup`.
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilGroup.isEtaleQuotient`: the homotopy exact sequence
   `1 → π₁(C) → π₁(C₀) → Gal(𝔽̄_q / 𝔽_q) → 1`, in the form of
   `AlgebraicGeometry.WeilGroup.IsEtaleQuotient`.
-- `AlgebraicGeometry.WeilGroup.ofFundamentalGroup_finite_geometric_image`: a rank-one lisse
-  Weil sheaf on a curve has finite geometric image.
-- `AlgebraicGeometry.WeilGroup.ofFundamentalGroup_isPunctuallyPure_of_finrank_eq_one`: a rank-one
-  lisse Weil sheaf on a curve is punctually pure.
-- `AlgebraicGeometry.WeilGroup.ofFundamentalGroup_hasWeightsAtMost_of_isReal`: the
-  Rankin–Selberg bound on an affine curve.
-- `AlgebraicGeometry.WeilGroup.ofFundamentalGroup_isPunctuallyPure_of_isConstituent_of_isReal`:
-  the constituents of a real lisse Weil sheaf on a curve are punctually pure.
 -/
 
 @[expose] public section
@@ -142,66 +134,5 @@ instance isEtaleQuotient (W : WeilGroup p) : W.IsEtaleQuotient := by
       _ * (W.weilGroupEquiv (f k) : W.fundamentalGroup × Multiplicative ℤ) * _
     rw [hf, hf, fundamentalGroupMap_transportConj]
     ext <;> simp [ρ]
-
-variable (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
-  [FiniteDimensional (PadicAlgCl l) V]
-
-/-- Blueprint `thm-wf-rank-one-finite-geometric-image-curve`: the geometric image of a rank-one
-lisse Weil sheaf on a smooth geometrically connected curve over `𝔽_q` is finite, for
-`ℓ ≠ char 𝔽_q`; here the sheaf is a lisse representation of the Weil group
-`AlgebraicGeometry.WeilGroup.ofFundamentalGroup` of the curve. -/
-theorem ofFundamentalGroup_finite_geometric_image [SmoothOfRelativeDimension 1 p]
-    [Fact (ringChar K ≠ l)]
-    (ρ : Representation (PadicAlgCl l) (ofFundamentalGroup p s G).carrier V)
-    (hrank : Module.finrank (PadicAlgCl l) V = 1) (hρ : (ofFundamentalGroup p s G).IsLisse l ρ) :
-    (Set.range fun g : (ofFundamentalGroup p s G).geometric ↦ ρ g).Finite :=
-  IsLisse.finite_geometric_image _ l ρ hrank hρ
-
-/-- Blueprint `cor-wf-rank-one-punctual-purity-curve`: a rank-one lisse Weil sheaf on a smooth
-geometrically connected curve over `𝔽_q` is punctually `ι`-pure, of weight `2 log_q |ι c|`
-where `c` is its value at a degree-one element, for `ℓ ≠ char 𝔽_q`; here the sheaf is a lisse
-representation of the Weil group `AlgebraicGeometry.WeilGroup.ofFundamentalGroup` of the
-curve. -/
-theorem ofFundamentalGroup_isPunctuallyPure_of_finrank_eq_one [SmoothOfRelativeDimension 1 p]
-    [Fact (ringChar K ≠ l)]
-    (ρ : Representation (PadicAlgCl l) (ofFundamentalGroup p s G).carrier V)
-    (ι : PadicAlgCl l →+* ℂ) (hrank : Module.finrank (PadicAlgCl l) V = 1)
-    (hρ : (ofFundamentalGroup p s G).IsLisse l ρ) :
-    (ofFundamentalGroup p s G).IsPunctuallyPure l ρ ι (frobeniusWeight ι (Nat.card K)
-      (LinearMap.det (ρ (ofFundamentalGroup p s G).frobeniusLift))) :=
-  IsLisse.isPunctuallyPure_of_finrank_eq_one _ l ρ ι hrank hρ
-
-/-- Blueprint `sk-p-real-rankin`, on an actual curve: on a smooth geometrically connected affine
-curve over `𝔽_q`, the local Frobenius eigenvalues of an `ι`-real lisse Weil sheaf have weight at
-most any upper bound `d` of the determinant weights of its constituents, for `ℓ ≠ char 𝔽_q`;
-here the sheaf is a lisse representation of the Weil group
-`AlgebraicGeometry.WeilGroup.ofFundamentalGroup` of the curve. -/
-theorem ofFundamentalGroup_hasWeightsAtMost_of_isReal [IsAffine C]
-    [SmoothOfRelativeDimension 1 p] [Fact (ringChar K ≠ l)] [Nontrivial V]
-    (ρ : Representation (PadicAlgCl l) (ofFundamentalGroup p s G).carrier V)
-    (ι : PadicAlgCl l →+* ℂ) (hρ : (ofFundamentalGroup p s G).IsLisse l ρ)
-    (hreal : (ofFundamentalGroup p s G).IsReal l ρ ι) {d : ℝ}
-    (hd : ∀ {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l) V']
-      [FiniteDimensional (PadicAlgCl l) V']
-      (σ : Representation (PadicAlgCl l) (ofFundamentalGroup p s G).carrier V') (γ : ℝ),
-      σ.IsConstituent ρ → (ofFundamentalGroup p s G).HasDetWeight l σ ι γ → γ ≤ d) :
-    (ofFundamentalGroup p s G).HasWeightsAtMost l ρ ι d :=
-  hasWeightsAtMost_of_isReal _ l ρ ι hρ hreal hd
-
-/-- Blueprint `thm-rp-real-lisse-purity-affine`, on an actual curve: every irreducible
-constituent of an `ι`-real lisse Weil sheaf on a smooth geometrically connected curve over `𝔽_q`
-is punctually `ι`-pure of its determinant weight, for `ℓ ≠ char 𝔽_q`; here the sheaf is a lisse
-representation of the Weil group `AlgebraicGeometry.WeilGroup.ofFundamentalGroup` of the
-curve. -/
-theorem ofFundamentalGroup_isPunctuallyPure_of_isConstituent_of_isReal
-    [SmoothOfRelativeDimension 1 p] [Fact (ringChar K ≠ l)]
-    (ρ : Representation (PadicAlgCl l) (ofFundamentalGroup p s G).carrier V)
-    (ι : PadicAlgCl l →+* ℂ) (hρ : (ofFundamentalGroup p s G).IsLisse l ρ)
-    (hreal : (ofFundamentalGroup p s G).IsReal l ρ ι)
-    {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l) V'] [FiniteDimensional (PadicAlgCl l) V']
-    (σ : Representation (PadicAlgCl l) (ofFundamentalGroup p s G).carrier V')
-    (hσ : σ.IsConstituent ρ) {γ : ℝ} (hγ : (ofFundamentalGroup p s G).HasDetWeight l σ ι γ) :
-    (ofFundamentalGroup p s G).IsPunctuallyPure l σ ι γ :=
-  isPunctuallyPure_of_isConstituent_of_isReal _ l ρ ι hρ hreal σ hσ hγ
 
 end AlgebraicGeometry.WeilGroup
