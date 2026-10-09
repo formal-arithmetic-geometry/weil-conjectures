@@ -61,7 +61,7 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
 
 namespace Etale
 
-variable {X : Scheme.{u}} (g : X ≅ X)
+variable [UpperStarPreservesFlat A] {X : Scheme.{u}} (g : X ≅ X)
 
 /-- Blueprint `sk-def-sf-weil-complexes`: Strict Weil complexes.
 
