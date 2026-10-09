@@ -388,6 +388,20 @@ lemma eqvGen_equiv_iff {α β : Type*} (e : α ≃ β) {r : α → α → Prop} 
       | trans x y z _ _ ih₁ ih₂ => exact .trans _ _ _ ih₁ ih₂
     simpa using key _ _ H
 
+/-- Transport of a surjection whose fibres are the classes of an equivalence closure along
+bijections compatible with the maps and the relations. -/
+lemma surjective_and_iff_eqvGen_of_equiv {P P' Q Q' : Type*} (E : P' ≃ P) (EF : Q' ≃ Q) (res' : P' → Q')
+    (res : P → Q) (h : ∀ s, EF (res' s) = res (E s)) {r' : P' → P' → Prop} {r : P → P → Prop}
+    (hr : ∀ s s', r' s s' ↔ r (E s) (E s'))
+    (H : Function.Surjective res' ∧ ∀ s s', res' s = res' s' ↔ Relation.EqvGen r' s s') :
+    Function.Surjective res ∧ ∀ t t', res t = res t' ↔ Relation.EqvGen r t t' := by
+  refine ⟨fun q ↦ ?_, fun t t' ↦ ?_⟩
+  · obtain ⟨s, hs⟩ := H.1 (EF.symm q)
+    exact ⟨E s, by rw [← h, hs, Equiv.apply_symm_apply]⟩
+  · obtain ⟨s, rfl⟩ := E.surjective t
+    obtain ⟨s', rfl⟩ := E.surjective t'
+    rw [← h, ← h, EF.injective.eq_iff, H.2, Relation.eqvGen_equiv_iff E hr]
+
 end Relation
 
 namespace RingHom.PointsOver
@@ -467,22 +481,10 @@ private def PointsGood {R A : Type*} [CommRing R] [CommRing A] [Algebra R A] (φ
       PointsOver.comap (fixedPoints σ).val t' ↔
         Relation.EqvGen (fun t t' : PointsOver φ A ↦ ∃ i, t' = PointsOver.comap (σ i) t) t t'
 
-private lemma transfer {P P' Q Q' : Type*} (E : P' ≃ P) (EF : Q' ≃ Q) (res' : P' → Q')
-    (res : P → Q) (h : ∀ s, EF (res' s) = res (E s)) {r' : P' → P' → Prop} {r : P → P → Prop}
-    (hr : ∀ s s', r' s s' ↔ r (E s) (E s'))
-    (H : Function.Surjective res' ∧ ∀ s s', res' s = res' s' ↔ Relation.EqvGen r' s s') :
-    Function.Surjective res ∧ ∀ t t', res t = res t' ↔ Relation.EqvGen r t t' := by
-  refine ⟨fun q ↦ ?_, fun t t' ↦ ?_⟩
-  · obtain ⟨s, hs⟩ := H.1 (EF.symm q)
-    exact ⟨E s, by rw [← h, hs, Equiv.apply_symm_apply]⟩
-  · obtain ⟨s, rfl⟩ := E.surjective t
-    obtain ⟨s', rfl⟩ := E.surjective t'
-    rw [← h, ← h, EF.injective.eq_iff, H.2, Relation.eqvGen_equiv_iff E hr]
-
 private lemma pointsGood_of_conj {R A A' : Type*} [CommRing R] [CommRing A] [CommRing A']
     [Algebra R A] [Algebra R A'] {φ : R →+* Ω} {ι : Type*} (e : A ≃ₐ[R] A')
     (σ : ι → A →ₐ[R] A) (H : PointsGood φ (conjFamily e σ)) : PointsGood φ σ := by
-  refine transfer (PointsOver.comapEquiv e) (PointsOver.comapEquiv (fixedPointsCongr e σ))
+  refine Relation.surjective_and_iff_eqvGen_of_equiv (PointsOver.comapEquiv e) (PointsOver.comapEquiv (fixedPointsCongr e σ))
     _ _ (fun s ↦ PointsOver.ext fun x ↦ rfl) (fun s s' ↦ exists_congr fun i ↦ ?_) H
   rw [← (PointsOver.comapEquiv e).injective.eq_iff]
   constructor <;> intro h <;> rw [h] <;> ext a <;> simp
@@ -491,7 +493,7 @@ private lemma pointsGood_of_tensor {R A T : Type*} [CommRing R] [CommRing A] [Co
     [Algebra R A] [Algebra R T] [Module.Flat R T] {φ : R →+* Ω} {φ' : T →+* Ω}
     (hφ' : φ'.comp (algebraMap R T) = φ) {ι : Type*} [_root_.Finite ι] (σ : ι → A →ₐ[R] A)
     (H : PointsGood φ' (baseChangeFamily T σ)) : PointsGood φ σ := by
-  refine transfer (PointsOver.tensorEquiv hφ')
+  refine Relation.surjective_and_iff_eqvGen_of_equiv (PointsOver.tensorEquiv hφ')
     ((PointsOver.comapEquiv (tensorFixedPointsEquiv T σ)).trans (PointsOver.tensorEquiv hφ'))
     _ _ (fun s ↦ PointsOver.ext fun x ↦ rfl) (fun s s' ↦ exists_congr fun i ↦ ?_) H
   rw [← (PointsOver.tensorEquiv hφ').injective.eq_iff]
@@ -503,7 +505,7 @@ private lemma pointsGood_coordFamily {S : Type*} [CommRing S] (φ : S →+* Ω) 
   classical
   let r : Fin n → Fin n → Prop := fun x y ↦ ∃ i, π i x = y
   have : Fintype (Quot r) := Fintype.ofFinite _
-  refine transfer (PointsOver.evalEquiv (Fin n))
+  refine Relation.surjective_and_iff_eqvGen_of_equiv (PointsOver.evalEquiv (Fin n))
     ((PointsOver.evalEquiv (Quot r)).trans
       (PointsOver.comapEquiv (fixedPointsCoordFamilyEquiv π)))
     (Quot.mk r) _ (fun s ↦ PointsOver.ext fun x ↦ rfl) (fun s s' ↦ exists_congr fun i ↦ ?_)
