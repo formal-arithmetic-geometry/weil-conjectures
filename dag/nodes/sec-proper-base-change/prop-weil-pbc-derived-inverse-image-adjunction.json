@@ -253,12 +253,48 @@
   "master": {
    "state": "none",
    "decls": [],
-   "missing": []
+   "missing": [
+    "CategoryTheory.Adjunction.derivedPlus",
+    "CategoryTheory.Adjunction.derivedPlus_unit_app_fac",
+    "CategoryTheory.Adjunction.derivedPlus_counit_app_fac"
+   ]
   },
   "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Adjunction.derivedPlus",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction",
+     "lines": [
+      129,
+      137
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Adjunction.derivedPlus_unit_app_fac",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction",
+     "lines": [
+      139,
+      149
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Adjunction.derivedPlus_counit_app_fac",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction",
+     "lines": [
+      151,
+      160
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
   }
  },
  "chapter": "sec-proper-base-change",
@@ -268,5 +304,23 @@
   "item": "prop-weil-pbc-derived-inverse-image-adjunction",
   "worker": "stage1",
   "summary": "Statement kept; 'morphism of schemes' repointed from def-weil-pbc-scheme-conventions to def-pc-scheme, the sheaf categories cited (def-weil-pbc-abelian-etale-sheaves) and Ru_* on morphisms cited (lem-weil-pbc-derived-direct-image-triangulated). Proof in 11 steps: K-injectivity of u_*I (new lem-weil-pbc-right-adjoint-preserves-kinjective, Stacks 08BJ, unsplit), the termwise adjunction on homotopy categories (new lem-weil-pbc-termwise-adjunction-homotopy, unsplit), Hom into K-injectives computed in K (new lem-weil-pbc-kinjective-hom-derived, Mathlib leaf IsKInjective.Qh_map_bijective / Plus.Qh_map_bijective_of_isKInjective, Stacks 070I), the bijection Hom(u^{-1}QM,K) = Hom(QM,Ru_*K) by the chain of 08BJ (in place of the ind/pro argument of 0DVC/0FND), naturality in both variables (localization universal property, existing leaf), the adjunction from the natural bijection (new leaf Adjunction.mkOfHomEquiv), computation of counit (1) and unit (2) on representatives, uniqueness (new leaf Adjunction.ext / ext_counit). u^{-1} being its own derived functor (lem-weil-pbc-exact-functor-derived-functor) is not needed and not cited. Mathlib's Adjunction.localization does not apply (u_* does not descend). Proof marked agent: Stacks states 0DVC but not (1), (2) or uniqueness; KS 14.4 wanted."
+ },
+ "lean": {
+  "branch": "slopmaster2",
+  "declarations": [
+   "CategoryTheory.Adjunction.derivedPlus",
+   "CategoryTheory.Adjunction.derivedPlus_unit_app_fac",
+   "CategoryTheory.Adjunction.derivedPlus_counit_app_fac"
+  ],
+  "note": "attached by the lead at review (2026-10-09), found by the opus worker of prop-weil-pbc-derived-inverse-image-adjunction: the generic adjunction mapDerivedCategoryPlus ⊣ rightDerivedFunctorPlus of an adjunction with exact left adjoint, with the factorisations of its unit and counit through rightDerivedFunctorPlusUnit (the descriptions (1)-(2) of the node up to the identification of Ru_* with rightDerivedFunctorPlus); applied to Etale.upperStarLowerStarAdjunction it is the node; the etale-specific AlgebraicGeometry.Etale.derivedUpperStarLowerStarAdjunctionPlus rests on the flat-separator sorry and is not attached; all three sorry-free on the full map"
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "agent proof through Stacks 08BJ/070I/0DVC with the unit and counit described on K-injective complexes; prop-weil-pbc-inverse-image-exact (sk-thm-properbasechange) accepted as a tool use; 5 new nodes, 3 Mathlib leaves, 2 closed by Lean; the item closed by the generic Lean adjunction"
  }
 }

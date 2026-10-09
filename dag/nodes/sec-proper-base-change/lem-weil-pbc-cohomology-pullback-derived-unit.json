@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-cohomology-pullback-derived-unit",
+ "kind": "statement",
+ "title": "The cohomology pullback is induced by the unit of the derived adjunction",
+ "statement": "Let $u:Y\\to X$ be a morphism of schemes [def-pc-scheme], let $u_*$ be the direct image and $Ru_*:\\Dplus(Y_{\\Et})\\to\\Dplus(X_{\\Et})$, $Ru_*L=u_*J$ for a K-injective resolution $L\\to J$, its derived functor [def-weil-pbc-direct-image], [def-weil-pbc-kinjective-resolutions], let $u^{-1}:\\Dplus(X_{\\Et})\\to\\Dplus(Y_{\\Et})$ be the inverse image on bounded below derived categories [def-weil-pbc-derived-inverse-image], [def-weil-pbc-derived-categories], and let $\\eta^D_u:\\mathrm{id}\\to Ru_*u^{-1}$ be the unit of the derived adjunction $u^{-1}\\dashv Ru_*$ [prop-weil-pbc-derived-inverse-image-adjunction]. Write $\\RGamma(T_{\\Et},-)$ and $H^q(T_{\\Et},-)$ for the derived global sections and the cohomology groups [def-weil-pbc-etale-cohomology]. Then:\n\n1. (Leray identification.) For every bounded below K-injective complex $J$ of abelian sheaves on $Y_{\\Et}$, the complex $u_*J$ on $X_{\\Et}$ is K-injective; hence for $L\\in\\Dplus(Y_{\\Et})$ with K-injective resolution $L\\to J$ the equality of complexes $\\Gamma(X,u_*J)=\\Gamma(Y,J)$ (as $(u_*J^r)(X)=J^r(X\\times_XY)=J^r(Y)$) is an isomorphism $\\lambda_L:\\RGamma(X_{\\Et},Ru_*L)\\xrightarrow{\\sim}\\RGamma(Y_{\\Et},L)$ in $\\Dplus(\\Ab)$, natural in $L$.\n2. (Alternative description of $u^*$.) For every $K\\in\\Dplus(X_{\\Et})$, in particular for an abelian sheaf $G$ on $X_{\\Et}$ placed in degree $0$, the pullback $u^*:\\RGamma(X_{\\Et},K)\\to\\RGamma(Y_{\\Et},u^{-1}K)$ of [def-weil-pbc-cohomology-pullback] equals the composite\n\n$$\n \\RGamma(X_{\\Et},K)\\xrightarrow{\\ \\RGamma(X,\\eta^D_{u,K})\\ }\\RGamma(X_{\\Et},Ru_*u^{-1}K)\\xrightarrow{\\ \\lambda_{u^{-1}K}\\ }\\RGamma(Y_{\\Et},u^{-1}K),\n$$\n\nand so $u^*:H^q(X_{\\Et},G)\\to H^q(Y_{\\Et},u^{-1}G)$ is $\\mathcal H^q$ of this composite for every $q\\ge0$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section Tag 01F7 (section-functoriality): Lemma Tag 01F8 (lemma-functoriality) and equations Tag 01F9 (equation-functorial-derived) and Tag 01FA (equation-functorial), where the arrow on $R\\Gamma$ is defined as $R\\Gamma(Y,-)$ of $\\mathcal G\\to Rf_*\\mathcal F$ followed by $R\\Gamma(Y,Rf_*\\mathcal F)=R\\Gamma(X,\\mathcal F)$ (Lemma Tag 01EZ, lemma-before-Leray); for sites literature/stacks-project/sites-cohomology.tex Remark Tag 08J6 (remark-before-Leray) and Lemma Tag 072Z (lemma-direct-image-injective-sheaf), Lemma Tag 07A6 (lemma-adjoint)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived global sections of derived pushforward equals derived global sections, RΓ(X, Rf_* F) ≅ RΓ(Y, F)",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj (Mathlib.AlgebraicGeometry.Modules.Sheaf), SheafOfModules.pushforward_map_val, Scheme.Modules.pseudofunctor_map_r, CategoryTheory.Sheaf.Γ and instIsRightAdjointSheafΓ (Mathlib.CategoryTheory.Sites.GlobalSections), Scheme.Modules.restrictFunctorAdjCounitIso; no derived global sections, no derived direct image",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unit of derived adjunction between inverse image and derived direct image of sheaves induces the pullback map on cohomology",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackIso (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), SheafOfModules.pullbackObjUnitToUnit and pullbackPushforwardAdjunction_homEquiv_* (…Sheaf.PullbackFree): underived adjunctions of sheaves of modules only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.Functor.sheafPushforwardContinuous",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match (no lemma relates sheaf cohomology Sheaf.H and the pushforward along a continuous functor)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'rightDerived\\|RightDerived' and grep -rn 'derivedFunctor\\|rightDerivedFunctor' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites and Mathlib/AlgebraicGeometry; grep 'Sheaf.H\\|H.map' in the same directories",
+   "results": "no right derived functor of a direct image and no derived global sections on sites; Sheaf.H used only in Sites/SheafCohomology/{Basic,Cech,MayerVietoris}.lean and AlgebraicGeometry/Sites/ElladicCohomology.lean (definition of ℓ-adic cohomology), never with a morphism of sites",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-cohomology-pullback",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "import_flags": [
+  "unreachable"
+ ]
+}
