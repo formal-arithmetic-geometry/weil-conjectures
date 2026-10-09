@@ -252,6 +252,107 @@ lemma preimage_hom_standardOpen (a : α) :
 
 end Hom
 
+section Extension
+
+variable (𝒟)
+
+/-- (Implementation) Pointwise data for the extension lemma: on each chart `Uₗ`, a function
+`eₗ` restricting to `h tₗᵢ₀ᵐ` on `Uₗ ∩ U_{i₀}`, for a common exponent `m`. -/
+lemma exists_extension_aux [Finite ι] (hU : ∀ i, IsCompact (𝒟.U i : Set X))
+    (hU' : ∀ i, IsQuasiSeparated (𝒟.U i : Set X)) (i₀ : ι) (h : Γ(X, 𝒟.U i₀)) :
+    ∃ (m : ℕ) (e : ∀ l, Γ(X, 𝒟.U l)), ∀ l,
+      X.presheaf.map (homOfLE (X.basicOpen_le (𝒟.ratio l i₀))).op (e l) =
+        X.presheaf.map (homOfLE ((𝒟.basicOpen_ratio l i₀).le.trans inf_le_right)).op h *
+          X.presheaf.map (homOfLE (X.basicOpen_le (𝒟.ratio l i₀))).op (𝒟.ratio l i₀) ^ m := by
+  have := Fintype.ofFinite ι
+  have H (l : ι) := exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated X (𝒟.U l) (hU l) (hU' l)
+    (𝒟.ratio l i₀)
+    (X.presheaf.map (homOfLE ((𝒟.basicOpen_ratio l i₀).le.trans inf_le_right)).op h)
+  choose n y hy using H
+  simp only [TopCat.Presheaf.restrictOpen, TopCat.Presheaf.restrict] at hy
+  refine ⟨Finset.univ.sup n, fun l ↦ y l * 𝒟.ratio l i₀ ^ (Finset.univ.sup n - n l),
+    fun l ↦ ?_⟩
+  rw [map_mul, hy, map_pow, mul_comm _ (X.presheaf.map _ h), mul_assoc, ← pow_add,
+    Nat.add_sub_cancel' (Finset.le_sup (Finset.mem_univ l))]
+
+/-- **The extension lemma** (Stacks, Tag 01PW). Let `𝒟` be a coordinate cover by finitely many
+quasi-compact quasi-separated charts. For every function `h` on a chart `U_{i₀}` there is `N₀`
+such that for all `N ≥ N₀` there is a section `σ` of degree `N` with `σ_{i₀} = h` that vanishes
+outside `U_{i₀}`. -/
+theorem exists_section [Finite ι] (hU : ∀ i, IsCompact (𝒟.U i : Set X))
+    (hU' : ∀ i, IsQuasiSeparated (𝒟.U i : Set X)) (i₀ : ι) (h : Γ(X, 𝒟.U i₀)) :
+    ∃ N₀ : ℕ, ∀ N ≥ N₀, ∃ σ : 𝒟.Section N, σ.s i₀ = h ∧ σ.nonvanishing ≤ 𝒟.U i₀ := by
+  have := Fintype.ofFinite ι
+  obtain ⟨m, e, he⟩ := 𝒟.exists_extension_aux hU hU' i₀ h
+  -- the defect of compatibility on `Uₗ ∩ Uₗ'` vanishes on `Uₗ ∩ Uₗ' ∩ U_{i₀}`
+  have hV (l l' : ι) : IsCompact ((𝒟.U l ⊓ 𝒟.U l' : X.Opens) : Set X) := by
+    rw [← 𝒟.basicOpen_ratio l l']
+    exact isCompact_basicOpen X (hU l) _
+  have Hδ (l l' : ι) : ∃ p : ℕ,
+      X.presheaf.map (homOfLE (inf_le_left : 𝒟.U l ⊓ 𝒟.U l' ≤ 𝒟.U l)).op (𝒟.ratio l i₀) ^ p *
+        (X.presheaf.map (homOfLE (inf_le_left : 𝒟.U l ⊓ 𝒟.U l' ≤ 𝒟.U l)).op (e l) -
+          X.presheaf.map (homOfLE (inf_le_left : 𝒟.U l ⊓ 𝒟.U l' ≤ 𝒟.U l)).op
+            (𝒟.ratio l l') ^ m *
+          X.presheaf.map (homOfLE (inf_le_right : 𝒟.U l ⊓ 𝒟.U l' ≤ 𝒟.U l')).op (e l')) =
+        0 := by
+    refine exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact X (hV l l') _ _ ?_
+    simp only [TopCat.Presheaf.restrictOpen, TopCat.Presheaf.restrict]
+    set W := X.basicOpen
+      (X.presheaf.map (homOfLE (inf_le_left : 𝒟.U l ⊓ 𝒟.U l' ≤ 𝒟.U l)).op (𝒟.ratio l i₀))
+    have hW : W = 𝒟.U l ⊓ 𝒟.U l' ⊓ 𝒟.U i₀ := by
+      simp only [W, Scheme.basicOpen_res, 𝒟.basicOpen_ratio]
+      rw [inf_comm (𝒟.U l), inf_assoc, inf_assoc, ← inf_assoc (𝒟.U l), inf_idem, inf_comm]
+    have hWl : W ≤ X.basicOpen (𝒟.ratio l i₀) := by
+      rw [hW, 𝒟.basicOpen_ratio]
+      exact le_inf (inf_le_left.trans inf_le_left) inf_le_right
+    have hWl' : W ≤ X.basicOpen (𝒟.ratio l' i₀) := by
+      rw [hW, 𝒟.basicOpen_ratio]
+      exact le_inf (inf_le_left.trans inf_le_right) inf_le_right
+    have hel := congrArg (X.presheaf.map (homOfLE hWl).op) (he l)
+    have hel' := congrArg (X.presheaf.map (homOfLE hWl').op) (he l')
+    have hr := congrArg (X.presheaf.map (homOfLE (X.basicOpen_le _ :
+      W ≤ 𝒟.U l ⊓ 𝒟.U l')).op) (𝒟.ratio_mul l l' i₀)
+    simp only [map_mul, map_pow, Scheme.presheaf_map_map] at hel hel' hr
+    simp only [map_sub, map_mul, map_pow, Scheme.presheaf_map_map, hel, hel', hr]
+    ring
+  choose p hp using Hδ
+  set P := Finset.univ.sup fun ll : ι × ι ↦ p ll.1 ll.2
+  have hP (l l' : ι) := Finset.le_sup (f := fun ll : ι × ι ↦ p ll.1 ll.2)
+    (Finset.mem_univ (l, l'))
+  refine ⟨m + P + 1, fun N hN ↦ ?_⟩
+  obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le hN
+  let σ : 𝒟.Section (m + P + 1) :=
+    { s := fun l ↦ e l * 𝒟.ratio l i₀ ^ (P + 1)
+      s_eq := fun l l' ↦ by
+        have hδ := hp l l'
+        have hr := 𝒟.ratio_mul l l' i₀
+        obtain ⟨q, hq⟩ := Nat.exists_eq_add_of_le (hP l l')
+        simp only [map_mul, map_pow]
+        rw [hr] at hδ ⊢
+        rw [show P = p l l' + q from hq]
+        linear_combination (X.presheaf.map (homOfLE (inf_le_left : 𝒟.U l ⊓ 𝒟.U l' ≤ 𝒟.U l)).op
+          (𝒟.ratio l l') * X.presheaf.map (homOfLE (inf_le_right :
+            𝒟.U l ⊓ 𝒟.U l' ≤ 𝒟.U l')).op (𝒟.ratio l' i₀)) ^ (q + 1) * hδ }
+  have hσ : σ.nonvanishing ≤ 𝒟.U i₀ := iSup_le fun l ↦ by
+    change X.basicOpen (e l * 𝒟.ratio l i₀ ^ (P + 1)) ≤ _
+    rw [Scheme.basicOpen_mul, Scheme.basicOpen_pow _ _ P.succ_pos, 𝒟.basicOpen_ratio]
+    exact inf_le_right.trans inf_le_right
+  have hσ₀ : σ.s i₀ = h := by
+    change e i₀ * 𝒟.ratio i₀ i₀ ^ (P + 1) = h
+    rw [𝒟.ratio_self, one_pow, mul_one]
+    have e₀ : X.basicOpen (𝒟.ratio i₀ i₀) = 𝒟.U i₀ := by rw [𝒟.ratio_self, X.basicOpen_one]
+    refine X.eq_of_map_eq_of_eq e₀ ?_
+    have := he i₀
+    simp only [𝒟.ratio_self, map_one, one_pow, mul_one] at this
+    exact this
+  refine ⟨σ.mul (𝒟.coordPow i₀ k), ?_, ?_⟩
+  · simp [hσ₀, 𝒟.ratio_self]
+  · refine iSup_le fun l ↦ ?_
+    rw [Section.mul_s, Scheme.basicOpen_mul]
+    exact inf_le_left.trans ((le_iSup (fun l ↦ X.basicOpen (σ.s l)) l).trans hσ)
+
+end Extension
+
 end Scheme.CoordinateCover
 
 end AlgebraicGeometry
