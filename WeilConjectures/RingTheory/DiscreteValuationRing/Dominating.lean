@@ -120,10 +120,9 @@ lemma ValuationSubring.coe_le_ord_of_strictMono {O K : Type*} [CommRing O] [IsDo
 `O` be a noetherian local domain of dimension one with fraction field `K`, and `V` a valuation
 ring of `K` dominating `O`. Then `V` is a discrete valuation ring.
 
-For `0 ≠ r ∈ O`, every strictly decreasing chain of ideals of `V` containing `r` has length at
-most the length of `O ⧸ r O`: choosing elements witnessing the strict inclusions, they span a
-finitely generated `O`-submodule `N` of `K` with `N ⧸ r N` of length that of `O ⧸ r O`. Hence
-every nonzero ideal of `V` is principal. -/
+For `0 ≠ r ∈ O`, every strict chain of ideals of `V` containing `r` has length at most the length
+of `O ⧸ r O` (`ValuationSubring.coe_le_ord_of_strictMono`): clearing denominators turns it into a
+strict chain of ideals of `O`. Hence `V` is noetherian, so it is a discrete valuation ring. -/
 theorem ValuationSubring.isDiscreteValuationRing_of_ringKrullDim_eq_one {O K : Type*}
     [CommRing O] [IsDomain O] [IsLocalRing O] [IsNoetherianRing O] [Field K] [Algebra O K]
     [IsFractionRing O K] (hdim : ringKrullDim O = 1) (V : ValuationSubring K)
