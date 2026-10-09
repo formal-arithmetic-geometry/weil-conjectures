@@ -1,0 +1,55 @@
+{
+ "id": "def-pur-kinjective-complex",
+ "kind": "definition",
+ "title": "K-injective complexes and K-injective resolutions of sheaves of modules",
+ "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$, and $\\Mod(\\mathcal O)$ the abelian category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. Two morphisms $f,g:\\mathcal K^\\bullet\\to\\mathcal I^\\bullet$ of cochain complexes of $\\mathcal O$-modules [def-pc-cochain-complex-modules] are *homotopic* if there are morphisms $h^p:\\mathcal K^p\\to\\mathcal I^{p-1}$ of $\\mathcal O$-modules with $f^p-g^p=d_{\\mathcal I}^{p-1}h^p+h^{p+1}d_{\\mathcal K}^p$ for all $p$. A cochain complex $\\mathcal I^\\bullet$ of $\\mathcal O$-modules is *K-injective* if every morphism of complexes $\\mathcal K^\\bullet\\to\\mathcal I^\\bullet$ from an acyclic complex $\\mathcal K^\\bullet$ [def-pc-acyclic-complex-modules] is homotopic to zero; equivalently $\\operatorname{Hom}_{K(\\mathcal O)}(\\mathcal K^\\bullet,\\mathcal I^\\bullet)=0$ in the homotopy category for every acyclic $\\mathcal K^\\bullet$. A *K-injective resolution* of a complex $\\mathcal M^\\bullet$ is a quasi-isomorphism $\\mathcal M^\\bullet\\to\\mathcal I^\\bullet$ [def-pc-quasi-iso-modules] with $\\mathcal I^\\bullet$ K-injective.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition 070H (derived-definition-K-injective), for the abelian category A = Mod(O) of a ringed site as in literature/stacks-project/sites-cohomology.tex Section 07A5 (sites-cohomology-section-unbounded)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sed -n 30,50p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+   "results": "`class CochainComplex.IsKInjective (L : CochainComplex C ℤ)` for an abelian category C (KInjective.lean:42): every morphism `K ⟶ L` with `K.Acyclic` has `Nonempty (Homotopy f 0)`; `isKInjective_iff_rightOrthogonal` (line 66) gives the equivalent form Hom_K(K, L) = 0 for acyclic K",
+   "date": "2026-10-09",
+   "verdict": "match: specialize C = SheafOfModules R"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure Homotopy' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Homotopy.lean; grep -n 'class QuasiIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/QuasiIso.lean",
+   "results": "`Homotopy f g` (Homotopy.lean), `QuasiIso f` (QuasiIso.lean); a K-injective resolution is a morphism `f : M ⟶ I` with `[QuasiIso f]` and `[I.IsKInjective]`",
+   "date": "2026-10-09",
+   "verdict": "match (resolution = pair of existing classes)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CochainComplex.IsKInjective",
+  "file": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+  "how": "specializes in one line: `CochainComplex.IsKInjective I` for `I : CochainComplex (SheafOfModules.{v} R) ℤ`, `R : Sheaf J CommRingCat` composed to `RingCat` (abelian by `SheafOfModules.instAbelian`); a K-injective resolution of `M` is `f : M ⟶ I` with `[QuasiIso f]` and `[I.IsKInjective]`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pur-derived-internal-hom",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

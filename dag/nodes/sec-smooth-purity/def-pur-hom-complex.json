@@ -1,0 +1,57 @@
+{
+ "id": "def-pur-hom-complex",
+ "kind": "definition",
+ "title": "Hom complex of complexes of sheaves of modules",
+ "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$, and $\\mathcal L^\\bullet,\\mathcal M^\\bullet$ cochain complexes of sheaves of $\\mathcal O$-modules [def-pc-cochain-complex-modules]. The *Hom complex* $\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal M^\\bullet)$ is the cochain complex of $\\mathcal O$-modules with terms\n\n$$\n \\mathcal Hom^n(\\mathcal L^\\bullet,\\mathcal M^\\bullet)=\\prod_{p\\in\\mathbf Z}\\mathcal Hom_{\\mathcal O}(\\mathcal L^p,\\mathcal M^{p+n}),\n$$\n\nthe product taken in the category of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category] (which has all products, computed sectionwise) of the sheaf Hom modules [def-pur-sheaf-hom]; a section over $U$ is a family $f=(f^p)_p$ of $\\mathcal O|_U$-linear maps $f^p:\\mathcal L^p|_U\\to\\mathcal M^{p+n}|_U$, i.e. an $\\mathcal O|_U$-linear map of graded modules homogeneous of degree $n$. The differential $d^n:\\mathcal Hom^n\\to\\mathcal Hom^{n+1}$ is\n\n$$\n d(f)=d_{\\mathcal M}\\circ f-(-1)^n f\\circ d_{\\mathcal L},\\qquad\\text{i.e. } d(f)^p=d_{\\mathcal M}^{p+n}\\circ f^p-(-1)^n f^{p+1}\\circ d_{\\mathcal L}^p ,\n$$\n\nan $\\mathcal O$-linear map of sheaves compatible with restriction, and $d^{n+1}\\circ d^n=0$ (expanding, $d(d(f))=d_{\\mathcal M}d_{\\mathcal M}f-(-1)^{n}d_{\\mathcal M}fd_{\\mathcal L}-(-1)^{n+1}d_{\\mathcal M}fd_{\\mathcal L}+(-1)^{n+1}(-1)^n f d_{\\mathcal L}d_{\\mathcal L}=0$). The construction is functorial: contravariant in $\\mathcal L^\\bullet$ and covariant in $\\mathcal M^\\bullet$, by composing componentwise with morphisms of complexes.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X (sites-cohomology-section-hom-complexes): definition of Hom^•(L^•, M^•), the differential, the verification d^2 = 0 (omitted there)"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^def\\|^noncomputable def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean",
+   "results": "`CochainComplex.HomComplex.Cochain F G n` (HomComplex.lean:68) and `CochainComplex.HomComplex F G : CochainComplex AddCommGrpCat ℤ` (HomComplex.lean:566): the Hom complex with values in abelian groups, i.e. the global sections of the complex wanted here, not a complex of O-modules",
+   "date": "2026-10-09",
+   "verdict": "no match: the group-valued Hom complex is the global-sections shadow only"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'MonoidalClosed\\|ihom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf* ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/; sed -n 1,40p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Monoidal.lean",
+   "results": "only CategoryTheory/Sites/Monoidal.lean and Sites/CartesianClosed.lean: a monoidal structure on `Sheaf J A` for a closed braided A (closedness on sheaves left as TODO); nothing on `SheafOfModules` and no internal Hom of complexes (`HomologicalComplex.mapBifunctor` in Algebra/Homology/Bifunctor.lean builds covariant total complexes with coproducts, not the product-indexed Hom complex)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'internalHom\\|sheafHom\\|HomComplex' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pur-derived-internal-hom",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

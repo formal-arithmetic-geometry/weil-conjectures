@@ -1,0 +1,51 @@
+{
+ "id": "prop-pur-kinjective-resolutions-exist",
+ "kind": "statement",
+ "title": "Existence of K-injective resolutions of sheaves of modules",
+ "statement": "Let $\\mathcal C$ be a site whose underlying category is small (its objects form a set) and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. Then the abelian category $\\Mod(\\mathcal O)$ of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category] is a Grothendieck abelian category [def-sp-grothendieck-abelian] (it has all colimits, filtered colimits are exact, and $\\bigoplus_{U\\in\\operatorname{Ob}\\mathcal C}j_{U!}\\mathcal O_U$ is a generator), and every cochain complex $\\mathcal M^\\bullet$ of $\\mathcal O$-modules [def-pc-cochain-complex-modules] admits a K-injective resolution [def-pur-kinjective-complex] $\\mathcal M^\\bullet\\to\\mathcal I^\\bullet$ which is injective in every degree, and which can be chosen functorially in $\\mathcal M^\\bullet$ (a functor $\\mathcal M^\\bullet\\mapsto\\mathcal I^\\bullet$ on the category of complexes with a natural transformation from the identity whose components are such resolutions).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 07A5 (sites-cohomology-section-unbounded), first paragraph: Mod(O) is Grothendieck abelian (Modules on Sites, Section sites-modules-section-kernels, Lemmas sites-modules-lemma-j-shriek-flat, sites-modules-lemma-module-quotient-flat) and literature/stacks-project/injectives.tex Theorem 079P (injectives-theorem-K-injective-embedding-grothendieck)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-grothendieck-abelian",
+  "def-pc-cochain-complex-modules",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isKInjective\\|IsKInjective' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i 'exists\\|resolution\\|Grothendieck\\|enough'; grep -rn 'HasKInjective' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none: Mathlib proves K-injectivity of bounded-below complexes of injectives (`CochainComplex.isKInjective_of_injective`, used in DerivedCategory/DerivabilityStructureInjectives.lean and ModelCategory/Injective.lean for bounded-below complexes) but no existence of K-injective resolutions of unbounded complexes",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsGrothendieckAbelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "results": "`IsGrothendieckAbelian` for `ModuleCat` (ModuleCat/AB.lean), for `Sheaf J A` with A Grothendieck (GrothendieckAxioms/Sheaf.lean:73) and for pro-etale abelian sheaves (ElladicCohomology.lean:53); none for `SheafOfModules R`; `CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean` gives enough injectives only",
+   "date": "2026-10-09",
+   "verdict": "no match: ingredients only (Grothendieck for sheaves of abelian groups; enough injectives)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pur-derived-internal-hom",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -2,14 +2,20 @@
  "id": "def-pur-derived-internal-hom",
  "kind": "definition",
  "title": "Derived internal Hom on a ringed site",
- "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site, $\\operatorname{Mod}(\\mathcal O)$\nits abelian category of sheaves of $\\mathcal O$-modules and $D(\\mathcal O)$ the\nderived category of $\\operatorname{Mod}(\\mathcal O)$. For complexes\n$\\mathcal L^\\bullet,\\mathcal M^\\bullet$ of $\\mathcal O$-modules the *Hom complex*\n$\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal M^\\bullet)$ is the complex of\n$\\mathcal O$-modules with terms\n\n$$\n \\mathcal Hom^n(\\mathcal L^\\bullet,\\mathcal M^\\bullet)\n =\\prod_{p\\in\\mathbf Z}\\mathcal Hom_{\\mathcal O}(\\mathcal L^p,\\mathcal M^{p+n})\n$$\n\n(sheaf Hom of $\\mathcal O$-modules) and differential\n$d(\\varphi)=d_{\\mathcal M}\\circ\\varphi-(-1)^n\\varphi\\circ d_{\\mathcal L}$. A\ncomplex $\\mathcal I^\\bullet$ of $\\mathcal O$-modules is *K-injective* if every\nmap of complexes from an acyclic complex to $\\mathcal I^\\bullet$ is homotopic\nto zero; every complex $\\mathcal M^\\bullet$ admits a quasi-isomorphism\n$\\mathcal M^\\bullet\\to\\mathcal I^\\bullet$ to a K-injective complex (a\n*K-injective resolution*). For $L,M\\in D(\\mathcal O)$, represented by\n$\\mathcal L^\\bullet$ and by a K-injective resolution $\\mathcal I^\\bullet$ of a\nrepresentative of $M$, the *derived internal Hom* is\n\n$$\n R\\mathcal Hom_{\\mathcal O}(L,M)\n =\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal I^\\bullet)\\in D(\\mathcal O);\n$$\n\nup to unique isomorphism it does not depend on the choices, and it is a functor\n$D(\\mathcal O)^{\\mathrm{op}}\\times D(\\mathcal O)\\to D(\\mathcal O)$, with\n$H^0(\\mathcal C,R\\mathcal Hom_{\\mathcal O}(L,M))=\\operatorname{Hom}_{D(\\mathcal O)}(L,M)$.",
+ "statement": "Let $\\mathcal C$ be a site whose underlying category is small and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$ (a ringed site); let $\\Mod(\\mathcal O)$ be its abelian category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category] and $D(\\mathcal O)$ the derived category [def-weil-abstract-derived-category] of $\\Mod(\\mathcal O)$, the localization of the category of cochain complexes of $\\mathcal O$-modules [def-pc-cochain-complex-modules] at the quasi-isomorphisms [def-pc-quasi-iso-modules]. For complexes $\\mathcal L^\\bullet,\\mathcal M^\\bullet$ of $\\mathcal O$-modules, let $\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal M^\\bullet)$ be their Hom complex [def-pur-hom-complex], with terms $\\prod_{p\\in\\mathbf Z}\\mathcal Hom_{\\mathcal O}(\\mathcal L^p,\\mathcal M^{p+n})$ and differential $d(\\varphi)=d_{\\mathcal M}\\circ\\varphi-(-1)^n\\varphi\\circ d_{\\mathcal L}$. Every complex $\\mathcal M^\\bullet$ has a K-injective resolution $\\mathcal M^\\bullet\\to\\mathcal I^\\bullet$ [def-pur-kinjective-complex], which can be chosen functorially in $\\mathcal M^\\bullet$ [prop-pur-kinjective-resolutions-exist]; fix such a functorial choice $\\mathcal M^\\bullet\\mapsto\\mathcal I^\\bullet(\\mathcal M^\\bullet)$. For $L,M\\in D(\\mathcal O)$, represented by complexes $\\mathcal L^\\bullet$ and $\\mathcal M^\\bullet$, the *derived internal Hom* is\n\n$$\n R\\mathcal Hom_{\\mathcal O}(L,M)\n =\\mathcal Hom^\\bullet\\bigl(\\mathcal L^\\bullet,\\mathcal I^\\bullet(\\mathcal M^\\bullet)\\bigr)\\in D(\\mathcal O).\n$$\n\nThe assignment $(\\mathcal L^\\bullet,\\mathcal M^\\bullet)\\mapsto\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal I^\\bullet(\\mathcal M^\\bullet))$ is a functor on pairs of complexes, contravariant in the first and covariant in the second variable; it sends a quasi-isomorphism in either variable to a quasi-isomorphism [lem-pur-rhom-well-defined] (a quasi-isomorphism $\\mathcal M^\\bullet\\to(\\mathcal M')^\\bullet$ induces a quasi-isomorphism $\\mathcal I^\\bullet(\\mathcal M^\\bullet)\\to\\mathcal I^\\bullet((\\mathcal M')^\\bullet)$ of K-injective complexes, by the two-out-of-three property of quasi-isomorphisms). Hence, by the universal property of the localization, it induces a functor $R\\mathcal Hom_{\\mathcal O}:D(\\mathcal O)^{\\mathrm{op}}\\times D(\\mathcal O)\\to D(\\mathcal O)$. By the same lemma, the object obtained from any other K-injective complex $\\mathcal I'^\\bullet$ quasi-isomorphic to $\\mathcal M^\\bullet$ and any other representative of $L$ is canonically isomorphic to it.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Section 0A8X (sites-cohomology-section-hom-complexes: the complex Hom^•), Section 08J7 (sites-cohomology-section-internal-hom: R Hom(L,M) = Hom^•(L^•, I^•) with I^• K-injective), Lemma 0A95 (sites-cohomology-lemma-RHom-well-defined); Derived Categories, Definition 070H (K-injective) and Injectives, Theorem 079P (K-injective resolutions exist in a Grothendieck abelian category)"
+  "place": "Section 08J7 (sites-cohomology-section-internal-hom: R Hom(L,M) = Hom^•(L^•, I^•) with I^• K-injective, well defined by Lemma 0A95, and the functor D(O)^opp x D(O) -> D(O)); Section 0A8X (the complex Hom^•); Section 07A5 (K-injective resolutions in Mod(O), functorial, via Injectives, Theorem 079P); Derived Categories, Definition 070H (K-injective)"
  },
  "stmt_deps": [
-  "def-pur-sheaf-hom",
-  "def-weil-abstract-derived-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "def-pur-hom-complex",
+  "def-pur-kinjective-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-rhom-well-defined"
  ],
  "proof": [],
  "proof_deps": [],
@@ -31,7 +37,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -45,5 +51,16 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-pur-derived-internal-hom",
+  "worker": "stage1",
+  "summary": "Checked against Stacks sites-cohomology.tex Sections 0A8X, 08J7, 07A5, Lemmas 0A94/0A95/08JA, derived.tex Definition 070H and injectives.tex Theorem 079P (Lean state none on both branches). Named the notions the definition is built from: the sheaf-valued Hom complex (new def-pur-hom-complex, Stacks 0A8X, not in Mathlib: Mathlib's CochainComplex.HomComplex is group-valued), K-injective complexes and resolutions (new def-pur-kinjective-complex, Mathlib leaf CochainComplex.IsKInjective + QuasiIso over SheafOfModules), cochain complexes and quasi-isomorphisms of O-modules (existing Mathlib leaves def-pc-cochain-complex-modules, def-pc-quasi-iso-modules), Mod(O) (def-weil-sheaf-of-modules-category) and D(O) (def-weil-abstract-derived-category). The two claims the definition needs became statement nodes: existence of functorial K-injective resolutions in Mod(O) (new prop-pur-kinjective-resolutions-exist, Stacks 07A5 + 079P, not in Mathlib for unbounded complexes) and well-definedness/functoriality (new lem-pur-rhom-well-defined, Stacks 0A95). The statement now uses a fixed functorial choice of K-injective resolution, so that the functor D(O)^op x D(O) -> D(O) is defined, and assumes the site small (needed for Mod(O) to be Grothendieck abelian; Stacks' standing convention). The claim H^0(C, R Hom(L,M)) = Hom_D(L,M), a theorem rather than part of the definition, was removed from the statement and is the new node lem-pur-rhom-global-sections (Stacks 08JA), which depends on this one. def-pur-sheaf-hom is now reached through def-pur-hom-complex rather than directly."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
