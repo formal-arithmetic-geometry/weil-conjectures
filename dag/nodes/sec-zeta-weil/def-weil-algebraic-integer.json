@@ -1,0 +1,50 @@
+{
+ "id": "def-weil-algebraic-integer",
+ "kind": "definition",
+ "title": "Algebraic integer",
+ "statement": "Let $\\Omega$ be a field of characteristic $0$ (so that $\\mathbf Z\\subset\\Omega$ through the unique ring homomorphism $\\mathbf Z\\to\\Omega$). An element $\\alpha\\in\\Omega$ is an *algebraic integer* if it is a root of a monic polynomial with integer coefficients: there are an integer $m\\geq1$ and integers $a_0,\\ldots,a_{m-1}$ such that\n\n$$\n\\alpha^m+a_{m-1}\\alpha^{m-1}+\\cdots+a_1\\alpha+a_0=0.\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-numbers.md",
+  "place": "node def-weil-numbers, order 2864: 'It is an *algebraic integer* if there are an integer $m\\geq1$ and integers $a_0,\\ldots,a_{m-1}$ such that $\\alpha^m+\\cdots+a_0=0$'"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def IsIntegral' -B4 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/IntegralClosure/IsIntegral/Defs.lean; grep -n 'def RingHom.IsIntegralElem' -A2 (same file)",
+   "results": "Defs.lean:53 `def IsIntegral (x : A) : Prop := (algebraMap R A).IsIntegralElem x`, with Defs.lean:39 `def RingHom.IsIntegralElem (f : R →+* A) (x : A) := ∃ p : R[X], Monic p ∧ eval₂ f x p = 0`; docstring 'integral if it is a root of some monic polynomial p : R[X]'",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def RingOfIntegers' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/Basic.lean",
+   "results": "Basic.lean:103 `NumberField.RingOfIntegers K` (the integral closure of ℤ in K): the set of algebraic integers of a number field, not needed here",
+   "date": "2026-10-09",
+   "verdict": "no match needed: the node is the predicate on one element, which is IsIntegral ℤ"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsIntegral",
+  "file": "Mathlib/RingTheory/IntegralClosure/IsIntegral/Defs.lean",
+  "how": "exact: `IsIntegral ℤ α` for `α : Ω` with `[Field Ω] [CharZero Ω]` (the ℤ-algebra structure is the canonical one) unfolds to `∃ p : ℤ[X], p.Monic ∧ p.eval₂ (algebraMap ℤ Ω) α = 0`, which is the displayed monic equation of degree m = natDegree p ≥ 1 (a monic polynomial of degree 0 is 1, which has no root)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-numbers",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

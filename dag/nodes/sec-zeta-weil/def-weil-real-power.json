@@ -1,0 +1,43 @@
+{
+ "id": "def-weil-real-power",
+ "kind": "definition",
+ "title": "Real power of a positive real number",
+ "statement": "For a real number $x>0$ and a real number $y$, the *power* $x^y\\in\\mathbf R_{>0}$ is\n\n$$\nx^y=\\exp(y\\log x),\n$$\n\nwhere $\\log$ is the natural logarithm on $\\mathbf R_{>0}$ and $\\exp$ the real exponential. For $y=n\\in\\mathbf Z$ it is the usual integer power $x^n$, and $x^{y_1+y_2}=x^{y_1}x^{y_2}$, $(x^{y_1})^{y_2}=x^{y_1y_2}$. In this chapter it is used for $q^{w/2}$ with $q$ a prime power and $w\\in\\mathbf R$ (and $w\\in\\mathbf Z$ in all uses, where $q^{w/2}=\\sqrt{q}^{\\,w}$).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-numbers.md",
+  "place": "node def-weil-numbers, order 2864: '$|\\tau(\\alpha)|=q^{w/2}$' with $w\\in\\mathbf R$ (the real power $q^{w/2}$)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'noncomputable def rpow\\|noncomputable instance : Pow ℝ ℝ\\|theorem rpow_def_of_pos\\|theorem rpow_intCast\\|theorem rpow_add\\|theorem rpow_mul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+   "results": "Pow/Real.lean:35 `noncomputable def Real.rpow (x y : ℝ) := ((x : ℂ) ^ (y : ℂ)).re`, line 38 `instance : Pow ℝ ℝ := ⟨rpow⟩`, line 51 `Real.rpow_def_of_pos {x : ℝ} (hx : 0 < x) (y : ℝ) : x ^ y = exp (log x * y)`; also `Real.rpow_intCast`, `Real.rpow_add`, `Real.rpow_mul` in the same file",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Real.rpow",
+  "file": "Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+  "how": "exact: `x ^ y` for `x y : ℝ` is `Real.rpow x y`, and for `0 < x` it equals `exp (log x * y)` by `Real.rpow_def_of_pos` (line 51); the listed properties are `Real.rpow_intCast`, `Real.rpow_add`, `Real.rpow_mul`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-numbers",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

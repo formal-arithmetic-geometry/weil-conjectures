@@ -8,14 +8,36 @@
   "place": "node def-weil-numbers, order 2864"
  },
  "stmt_deps": [
-  "def-weil-finite-field-fiber"
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraic-closure",
+  "def-weil-number-field",
+  "def-weil-number-field-complex-embeddings",
+  "def-weil-simple-field-extension",
+  "def-weil-complex-absolute-value",
+  "def-weil-real-power",
+  "def-weil-algebraic-integer"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rni 'weil number\\|WeilNumber\\|IsWeilNumber' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ --include=*.lean",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no notion of q-Weil number; the predicate '∀ τ : ℚ⟮α⟯ →+* ℂ, ‖τ α‖ = q ^ (w / 2)' is one line over the leaves this node now cites (NumberField embeddings, IntermediateField.adjoin, Complex.instNorm, Real.rpow), but Mathlib does not state it for any kind of object"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem pow_eq_one_of_norm_eq_one\\|theorem finite_of_norm_le' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean",
+   "results": "Embeddings.lean:109 `NumberField.Embeddings.finite_of_norm_le` and line 138 `pow_eq_one_of_norm_eq_one {x : K} (hxi : IsIntegral ℤ x) (hx : ∀ φ : K →+* A, ‖φ x‖ = 1) : ∃ n, 0 < n ∧ x ^ n = 1` (Kronecker's theorem)",
+   "date": "2026-10-09",
+   "verdict": "no match: these are statements about elements of a number field with all complex embeddings of absolute value ≤ 1 or = 1, i.e. the weight-0 case of the hypothesis shape of this node, confirming that Mathlib writes the condition in the form `∀ φ : K →+* ℂ, ‖φ x‖ = c` the node is stated in; Mathlib has no definition for general weight"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -37,5 +59,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-numbers",
+  "worker": "stage1",
+  "summary": "Checked the statement against its source (literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-numbers.md): verbatim, kept. The slopmaster2 LaTeX (src/version/sketch/01_final_weil_conjectures.tex, Definition def:weil-numbers, lines 3063-3078) differs: it takes w ∈ ℤ instead of w ∈ ℝ, does not define Emb_Q(L,ℂ), and has no algebraic-integer clause; the master copy is the source and was kept (all uses in the chapter have w = i ∈ ℤ). Lean state none on both branches. The definition is built from: the fixed prime power q (def-weil-finite-field-fiber, the only imported stmt_dep, confirmed used); an algebraic closure of ℚ (def-weil-algebraic-closure, the Mathlib leaf AlgebraicClosure, added: this node fixes Q̄ itself, at blueprint order 2864, before def-weil-algebraic-closure-q at order 2904, which is the ℓ-adic realization and is not needed to state a Weil number); and six notions the text defined inline or used without a node, now new Mathlib leaves: number field (def-weil-number-field, NumberField), the set Emb_Q(L,ℂ) of complex embeddings (def-weil-number-field-complex-embeddings, the type L →+* ℂ, with the remark that the restriction condition is automatic by map_ratCast), the field ℚ(α) (def-weil-simple-field-extension, IntermediateField.adjoin), the complex absolute value (def-weil-complex-absolute-value, Complex.instNorm), the real power q^{w/2} (def-weil-real-power, Real.rpow), and algebraic integer (def-weil-algebraic-integer, IsIntegral ℤ). The nonzero condition α ∈ Q̄^× and the notion of field homomorphism are elementary and got no node. Mathlib was searched for the node itself: no notion of q-Weil number; the predicate is one line over the leaves. The text's implicit claim that ℚ(α) is a number field (needed for Emb_Q(ℚ(α),ℂ) to be an instance of the Emb definition) holds because α is algebraic over ℚ (IntermediateField.adjoin.finiteDimensional, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean:459); it is a one-line fact and not a notion, so it was left in the text and is noted in the report."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

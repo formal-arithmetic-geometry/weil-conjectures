@@ -1,0 +1,52 @@
+{
+ "id": "def-weil-number-field-complex-embeddings",
+ "kind": "definition",
+ "title": "Complex embeddings of a number field",
+ "statement": "Let $L$ be a number field [def-weil-number-field]. Define\n\n$$\n\\operatorname{Emb}_{\\mathbf Q}(L,\\mathbf C)=\\{\\tau:L\\longrightarrow\\mathbf C:\\tau\\text{ is a field homomorphism and }\\tau|_{\\mathbf Q}=\\operatorname{id}_{\\mathbf Q}\\},\n$$\n\nthe set of field homomorphisms from $L$ to the field $\\mathbf C$ of complex numbers that are the identity on the prime field $\\mathbf Q\\subset L$. (Every field homomorphism $L\\to\\mathbf C$ is injective and restricts to the identity on $\\mathbf Q$, since it sends $1$ to $1$ and preserves sums, differences and quotients; so the condition $\\tau|_{\\mathbf Q}=\\operatorname{id}_{\\mathbf Q}$ is automatic and $\\operatorname{Emb}_{\\mathbf Q}(L,\\mathbf C)$ is the set of all field homomorphisms $L\\to\\mathbf C$, the *complex embeddings* of $L$.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-numbers.md",
+  "place": "node def-weil-numbers, order 2864: '$\\operatorname{Emb}_{\\mathbf Q}(L,\\mathbf C)=\\{\\tau:L\\to\\mathbf C:\\tau$ is a field homomorphism and $\\tau|_{\\mathbf Q}=\\operatorname{id}_{\\mathbf Q}\\}$'"
+ },
+ "stmt_deps": [
+  "def-weil-number-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'K →+\\* ℂ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/; grep -n 'theorem card\\|Fintype (K →+\\* A)\\|def place\\|equivRatAlgHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean",
+   "results": "Mathlib writes the complex embeddings of a number field K as the type of ring homomorphisms `K →+* ℂ` (NumberTheory/NumberField/InfinitePlace/Embeddings.lean, 'Embeddings of number fields': line 56 `Fintype (K →+* A)` via `RingHom.equivRatAlgHom K A`, line 61 `NumberField.Embeddings.card : Fintype.card (K →+* A) = finrank ℚ K`, line 158 `NumberField.place φ`)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem map_ratCast' -A1 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Data/Rat/Cast/Defs.lean",
+   "results": "Data/Rat/Cast/Defs.lean:219 `map_ratCast [DivisionRing α] [DivisionRing β] [RingHomClass F α β] (f : F) (q : ℚ) : f q = q`: every ring homomorphism between fields of characteristic 0 fixes ℚ, so the restriction condition in the node is automatic, as the node says",
+   "date": "2026-10-09",
+   "verdict": "match (for the parenthetical remark)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RingHom",
+  "file": "Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean",
+  "how": "exact: the set is the type `L →+* ℂ` of ring homomorphisms (a field homomorphism is a ring homomorphism between fields); the condition τ|ℚ = id is automatic by `map_ratCast` (Mathlib/Data/Rat/Cast/Defs.lean:219), and `RingHom.equivRatAlgHom L ℂ` (Embeddings.lean:56) identifies `L →+* ℂ` with the ℚ-algebra homomorphisms `L →ₐ[ℚ] ℂ`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-numbers",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
