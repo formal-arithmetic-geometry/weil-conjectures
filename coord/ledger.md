@@ -551,3 +551,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:16 UTC (2026-10-09) — Merged F1 horseshoe-morphism-lift (head 7ae22771; 1 new Mathlib leaf whose line L verified and added). Launched workers on etale-local-finite-multiple-points-elementary (02LL) and etale-neighbourhood-prescribed-residue-field (02LF).
 - 22:17 UTC (2026-10-09) — Reviewed and committed pushforward-coherent-on-open (0CYJ; 1 new node). Stage-3 note: pqf-def-coherent cites 01DW instead of 01BV. STATE row.
 - 2026-10-10, delivery of F1: lem-weil-pbc-etale-stratified-finite returned (93368851d): The branch (head 93368851) has no report file coord/reports/F1/lem-weil-pbc-etale-stratified-finite.md; a delivery needs the report with the group's '## Review 
+- 22:18 UTC (2026-10-09) — Returned F1 etale-stratified-finite (head 93368851; no report file). Launched a worker on fibre-product-point-residue-field (01JT residue sentence).
