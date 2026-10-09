@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.CategoryTheory.Limits.Lattice
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -380,8 +381,8 @@ lemma cechAcyclicOnAffines_X₃
 
 /-- Being Čech-acyclic on affine opens passes from `F` to the chosen injective sheaf under `F`
 and to the cokernel of `F ⟶ I`. -/
-lemma cechAcyclicOnAffines_under_cokernel {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
-    (h : cechAcyclicOnAffines X F) :
+lemma cechAcyclicOnAffines_under_cokernel
+    {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}} (h : cechAcyclicOnAffines X F) :
     cechAcyclicOnAffines X (Injective.under F) ∧
       cechAcyclicOnAffines X (cokernel (Injective.ι F)) := by
   have h₂ : cechAcyclicOnAffines X (Injective.under F) :=
@@ -517,6 +518,21 @@ theorem nonempty_cechComplex_linearEquiv_H_of_isSeparated {S : Scheme.{u}} (f : 
   nonempty_cechComplex_linearEquiv_H U
     (fun s hs ↦ IsAffineOpen.biInf (s : Set ι) s.finite_toSet hs (fun i _ ↦ hU i)) hU' ℱ q
 
+/-- **Cohomology along an affine morphism, for abelian sheaves.** Let `g : X ⟶ Y` be an affine
+morphism. Then `H^q(X, F) ≅ H^q(Y, g_* F)`, naturally in the abelian sheaves `F` on `X` which are
+Čech-acyclic on affine opens. Indeed `g_*` is exact on short exact sequences starting in such a
+sheaf, since these are surjective on the sections over the affine opens `g ⁻¹ᵁ V`. -/
+theorem nonempty_functorH_iso_pushforwardAb_of_isAffineHom {Y : Scheme.{u}} (g : X ⟶ Y)
+    [IsAffineHom g] (q : ℕ) :
+    Nonempty ((cechAcyclicOnAffines X).ι ⋙
+        Sheaf.functorH.{u} (Opens.grothendieckTopology X) q ≅
+      (cechAcyclicOnAffines X).ι ⋙ TopCat.Sheaf.pushforwardAb g.base ⋙
+        Sheaf.functorH.{u} (Opens.grothendieckTopology Y) q) :=
+  TopCat.Sheaf.nonempty_functorH_iso_pushforwardAb g.base (cechAcyclicOnAffines X)
+    (fun _ h ↦ cechAcyclicOnAffines_under_cokernel h)
+    (fun _ hS h ↦ TopCat.Sheaf.shortExact_map_pushforward hS Y.isBasis_affineOpens
+      fun _ hV ↦ surjective_app_of_cechAcyclicOnAffines hS h (IsAffineOpen.preimage hV g)) q
+
 section AffineMorphism
 
 variable (k : Type u) [Field k] {Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
@@ -534,8 +550,40 @@ theorem nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom (g : X ⟶ Y)
     [g.IsOver (Spec (.of k))] [IsAffineHom g] (q : ℕ) :
     Nonempty ((SheafOfModules.isQuasicoherent X.ringCatSheaf).ι ⋙ cohomologyFunctor k q ≅
       (SheafOfModules.isQuasicoherent X.ringCatSheaf).ι ⋙ pushforward g ⋙
-        cohomologyFunctor k q) :=
-  sorry
+        cohomologyFunctor k q) := by
+  obtain ⟨e⟩ := nonempty_functorH_iso_pushforwardAb_of_isAffineHom g q
+  let Q := SheafOfModules.isQuasicoherent X.ringCatSheaf
+  let F (ℱ : Q.FullSubcategory) : (cechAcyclicOnAffines X).FullSubcategory :=
+    ⟨(SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ.obj,
+      have : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ.obj := ℱ.property
+      cechAcyclicOnAffines_of_isQuasicoherent ℱ.obj⟩
+  have hE {ℱ ℱ' : Q.FullSubcategory} (φ : ℱ ⟶ ℱ')
+      (x : Sheaf.H ((SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ.obj) q) :
+      e.hom.app (F ℱ') (Sheaf.H.map ((SheafOfModules.toSheaf X.ringCatSheaf).map φ.hom) q x) =
+        Sheaf.H.map ((TopCat.Sheaf.pushforwardAb g.base).map
+          ((SheafOfModules.toSheaf X.ringCatSheaf).map φ.hom)) q (e.hom.app (F ℱ) x) := by
+    -- Elaborating the naturality square before unifying it with the goal avoids a timeout.
+    have h := NatTrans.naturality_apply e.hom (ObjectProperty.homMk
+      ((SheafOfModules.toSheaf X.ringCatSheaf).map φ.hom) : F ℱ ⟶ F ℱ') x
+    exact h
+  have hsmul (ℱ : Q.FullSubcategory) (c : k)
+      (x : Sheaf.H ((SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ.obj) q) :
+      e.hom.app (F ℱ) (Sheaf.H.map ((SheafOfModules.toSheaf X.ringCatSheaf).map
+        (smulHom ℱ.obj (globalSectionsRingHom k c))) q x) =
+      Sheaf.H.map ((SheafOfModules.toSheaf Y.ringCatSheaf).map
+        (smulHom ((pushforward g).obj ℱ.obj) (globalSectionsRingHom k c))) q
+          (e.hom.app (F ℱ) x) := by
+    rw [← Hom.appTop_globalSectionsRingHom k g c, ← pushforward_map_smulHom]
+    exact hE (ObjectProperty.homMk (smulHom ℱ.obj (g.appTop (globalSectionsRingHom k c)))) x
+  -- The components are `k`-linear: multiplication by `c` on `H^q(Y, g_* ℱ)` is induced by
+  -- multiplication by `g^♯ c` on `ℱ`.
+  refine ⟨NatIso.ofComponents (fun ℱ ↦ LinearEquiv.toModuleIso
+    ({ toAddEquiv := (e.app (F ℱ)).addCommGroupIsoToAddEquiv
+       map_smul' := fun c x ↦ ?_ } : (Q.ι ⋙ cohomologyFunctor k q).obj ℱ ≃ₗ[k]
+        (Q.ι ⋙ pushforward g ⋙ cohomologyFunctor k q).obj ℱ)) fun {ℱ ℱ'} φ ↦ ?_⟩
+  · exact hsmul ℱ c x
+  · ext x
+    exact hE φ x
 
 /-- **Cohomology along an affine morphism.** Let `g : X ⟶ Y` be an affine morphism of
 `k`-schemes. For every quasi-coherent `𝒪_X`-module `ℱ` and every `q` we have
