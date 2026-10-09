@@ -1,14 +1,15 @@
 {
  "id": "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
  "kind": "statement",
- "title": "A global section vanishing everywhere on a quasi-compact scheme is nilpotent",
- "statement": "Let $X$ be a quasi-compact scheme [def-pc-scheme] and let $h\\in H^0(X,\\mathcal O_X)$. If the germ of $h$ is zero in every stalk of $\\mathcal O_X$, then $h$ is nilpotent.",
+ "title": "A global section vanishing at every point of a quasi-compact scheme is nilpotent",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] whose underlying topological space is quasi-compact, and let $h\\in H^0(X,\\mathcal O_X)=\\mathcal O_X(X)$. For $x\\in X$ write $h(x)\\in\\kappa(x)=\\mathcal O_{X,x}/\\mathfrak m_x$ [def-weil-residue-field] for the image of the germ $h_x\\in\\mathcal O_{X,x}$ in the residue field. If $h(x)=0$ for every $x\\in X$ (equivalently $h_x\\in\\mathfrak m_x$, i.e. $h_x$ is not a unit of $\\mathcal O_{X,x}$, for every $x$), then $h$ is nilpotent: $h^n=0$ in $\\mathcal O_X(X)$ for some $n\\ge1$.",
  "source": {
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma 37.53.4 (Tag 03GY), surjectivity paragraph; the underlying fact is the quasi-compactness criterion for a section vanishing at every point"
+  "place": "More on Morphisms, Lemma 37.53.4 (Tag 03GY, lemma-stein-universally-closed), proof, surjectivity paragraph: 'h|_X is a global section of the structure sheaf of X which vanishes at every point. As X is quasi-compact this means that h|_X is a nilpotent section'"
  },
  "stmt_deps": [
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "def-weil-residue-field"
  ],
  "proof": [],
  "proof_deps": [],
@@ -34,10 +35,50 @@
    "results": "No theorem combining quasi-compactness and vanishing stalks of a global section",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "global section of a quasi-compact scheme vanishing in every residue field is nilpotent",
+   "results": "AlgebraicGeometry.Scheme.isNilpotent_iff_basicOpen_eq_bot, Scheme.isNilpotent_iff_basicOpen_eq_bot_of_isCompact, Scheme.zeroLocus_eq_univ_iff_subset_nilradical (all Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact), Scheme.isNilpotent_of_isNilpotent_cover (Mathlib.AlgebraicGeometry.Cover.Open)",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.isNilpotent_iff_basicOpen_eq_bot together with Scheme.basicOpen_eq_bot_iff_forall_evaluation_eq_zero"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.isNilpotent_iff_basicOpen_eq_bot",
+   "results": "AlgebraicGeometry.Scheme.isNilpotent_iff_basicOpen_eq_bot {X : Scheme} [CompactSpace X] (f : Γ(X, ⊤)) : IsNilpotent f ↔ X.basicOpen f = ⊥ (Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "on a quasi-compact scheme a global function whose value at every point is zero is nilpotent",
+   "results": "Scheme.isNilpotent_iff_basicOpen_eq_bot, Scheme.isNilpotent_iff_basicOpen_eq_bot_of_isCompact, exists_of_res_zero_of_qcqs_of_top, exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
+   "date": "2026-10-10",
+   "verdict": "match (first result)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsNilpotent' Mathlib/AlgebraicGeometry; grep -n 'basicOpen_eq_bot_iff_forall_evaluation_eq_zero\\|evaluation_eq_zero_iff_notMem_basicOpen\\|def evaluation' Mathlib/AlgebraicGeometry/ResidueField.lean",
+   "results": "Morphisms/QuasiCompact.lean:319 Scheme.isNilpotent_iff_basicOpen_eq_bot; :303 ..._of_isCompact; Cover/Open.lean:251 Scheme.isNilpotent_of_isNilpotent_cover; ResidueField.lean:96 Scheme.evaluation (germ followed by residue), :107 evaluation_eq_zero_iff_notMem_basicOpen, :115 basicOpen_eq_bot_iff_forall_evaluation_eq_zero",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "basicOpen_eq_bot_iff_forall_evaluation_eq_zero (project root ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.Scheme.basicOpen_eq_bot_iff_forall_evaluation_eq_zero (Mathlib/AlgebraicGeometry/ResidueField.lean), AlgebraicGeometry.LocallyRingedSpace.basicOpen_eq_bot_iff_forall_evaluation_eq_zero (Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean)",
+   "date": "2026-10-10",
+   "verdict": "names exist"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.isNilpotent_iff_basicOpen_eq_bot, AlgebraicGeometry.Scheme.basicOpen_eq_bot_iff_forall_evaluation_eq_zero",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+  "line": 319,
+  "how": "specializes in one line: for [CompactSpace X] (X quasi-compact) and f : Γ(X, ⊤), Scheme.isNilpotent_iff_basicOpen_eq_bot (Morphisms/QuasiCompact.lean:319-322) gives IsNilpotent f ↔ X.basicOpen f = ⊥, and Scheme.basicOpen_eq_bot_iff_forall_evaluation_eq_zero (Mathlib/AlgebraicGeometry/ResidueField.lean:115-117, with U = ⊤) gives X.basicOpen f = ⊥ ↔ ∀ x, X.evaluation ⊤ x _ f = 0, where X.evaluation U x hx = germ followed by X.residue x : O_{X,x} → κ(x) (ResidueField.lean:96-97), i.e. f(x) in the statement; so the proof is (Scheme.isNilpotent_iff_basicOpen_eq_bot f).2 ((X.basicOpen_eq_bot_iff_forall_evaluation_eq_zero f).2 fun x => h x). IsNilpotent f is ∃ n, f^n = 0; n can be taken ≥ 1. Sources read 2026-10-10 (sed -n)."
+ },
+ "status": "mathlib",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-stein-universally-closed-factor",
@@ -56,5 +97,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
+  "worker": "stage1",
+  "summary": "The statement was wrong as written: 'the germ of h is zero in every stalk' means h = 0 by the sheaf property, which is not what Stacks 03GY uses. Corrected (content changed) to the intended statement of the source: h vanishes at every point, i.e. its image h(x) in the residue field kappa(x) is zero (h_x in m_x) for every x, on a quasi-compact X; then h is nilpotent. Added def-weil-residue-field to stmt_deps; source place made precise. Mathlib states exactly this (CompactSpace X; basicOpen f = ⊥ iff f(x) = 0 in every residue field; IsNilpotent f iff basicOpen f = ⊥), so the node is a Mathlib leaf (status mathlib, no proof steps); declarations read in the Mathlib source. The citer lem-weil-pbc-stein-universally-closed-factor step 4 says 'whose germ vanishes at every point' and should read 'whose image in every residue field kappa(x) vanishes' (reported, not edited)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Statement corrected by the worker: the E1-delivered wording (germ zero in every stalk) was trivial and not what 03GY uses; now: h(x) = 0 in every residue field of a quasi-compact scheme implies h nilpotent. Mathlib leaf by two declarations in one line: Scheme.isNilpotent_iff_basicOpen_eq_bot (QuasiCompact.lean:319) and basicOpen_eq_bot_iff_forall_evaluation_eq_zero (ResidueField.lean:115), verified. The citer stein-universally-closed-factor step 4 reworded by L accordingly."
+ }
 }
