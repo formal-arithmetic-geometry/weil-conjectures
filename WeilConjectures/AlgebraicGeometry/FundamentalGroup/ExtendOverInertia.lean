@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DecompositionGroup
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusRestriction
 public import WeilConjectures.Mathlib.NumberTheory.RamificationInertia.Galois
 
 /-!
@@ -348,6 +349,65 @@ theorem isFinite_and_etale_restrict_of_forall_inertia (Z : U.FiniteEtale)
   obtain ⟨het, hfin⟩ := Ideal.etale_integralClosure_of_forall_inertia (K := C.functionField) m Q ϖ
     (R' := R') hϖ hϖm ψ₀ hI
   exact isFinite_and_etale_fromNormalization_restrict f hW hfin het
+
+section Open
+
+variable (V : C.Opens) (hjV : j.opensRange ≤ V) (hWV : W ≤ V)
+
+/-- The open immersion `U ⟶ V` into an open containing `U`. -/
+noncomputable abbrev toOpen : U ⟶ V.toScheme :=
+  IsOpenImmersion.lift V.ι j (by rw [Scheme.Opens.range_ι]; exact hjV)
+
+include hW hjV hWV in
+omit [QuasiCompact j] [Algebra Γ(C, W) Ω] [IsScalarTower Γ(C, W) C.functionField Ω] [IsSepClosed Ω]
+  [IsDedekindDomain Γ(C, W)] [IsGalois C.functionField Ω] in
+/-- The generic geometric point of `U`, mapped to `V`, is the generic geometric point through
+`Spec Γ(C, W)`. -/
+lemma pointOfAlgebra_genericPointLift_comp_toOpen :
+    pointOfAlgebra Ω (genericPointLift j) ≫ toOpen j V hjV =
+      pointOfAlgebra Ω (Spec.map (CommRingCat.ofHom (algebraMap Γ(C, W) C.functionField)) ≫
+        IsOpenImmersion.lift V.ι hW.fromSpec (by
+          rw [Scheme.Opens.range_ι, hW.range_fromSpec]; exact hWV)) := by
+  rw [← cancel_mono V.ι]
+  simp only [Category.assoc, IsOpenImmersion.lift_fac]
+  rw [genericPointLift_comp, hW.fromSpecFunctionField_eq, ← Category.assoc, ← Category.assoc, ← Spec.map_comp,
+    ← Spec.map_comp]
+  rfl
+
+include hW hjV hWV in
+omit [QuasiCompact j] [IsDedekindDomain Γ(C, W)] in
+/-- **Inertia acts trivially on covers coming from `V`.** -/
+lemma galoisToAut_hom_app_pullback_eq_of_mem_inertia [ConnectedSpace V]
+    {σ : Ω ≃ₐ[C.functionField] Ω} (hσ : σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω))
+    (P : V.toScheme.FiniteEtale)
+    (t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj ((pullback (toOpen j V hjV)).obj P)) :
+    (galoisToAut (genericPointLift j) σ).hom.app _ t = t := by
+  have : IsFractionRing Γ(C, W) C.functionField := functionField_isFractionRing_of_isAffineOpen C W hW
+  have h := pointOfAlgebra_genericPointLift_comp_toOpen j hW V hjV hWV (Ω := Ω)
+  let e := pullbackFiberIso (toOpen j V hjV) (pointOfAlgebra Ω (genericPointLift j)) ≪≫
+    fiberIsoOfIso (Iso.refl _) (by rw [Iso.refl_hom, Category.id_comp, h])
+  apply ((ConcreteCategory.isIso_iff_bijective (e.hom.app P)).1 inferInstance).1
+  have key := galoisToAut_hom_app_eq_of_mem_inertia (K := C.functionField) (Ω := Ω)
+    (IsOpenImmersion.lift V.ι hW.fromSpec (by
+      rw [Scheme.Opens.range_ι, hW.range_fromSpec]; exact hWV)) Q hσ P (e.hom.app P t)
+  rw [← key]
+  apply fiber_ext
+  simp only [e, Iso.trans_hom, NatTrans.comp_app, ConcreteCategory.comp_apply]
+  simp only [fiberIsoOfIso_hom_app_left, pullbackFiberIso_hom_app_left, galoisToAut_hom_app_left]
+  rfl
+
+include hW ϖ hϖ hWU m hϖm hjV hWV in
+/-- **Covers with trivial inertia extend over the point.** -/
+theorem exists_pullback_toOpen_iso_of_forall_inertia (Z : U.FiniteEtale)
+    [IsIntegral Z.obj.left] [ConnectedSpace U] (hV : V ≤ j.opensRange ⊔ W)
+    (hZ : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
+      ∀ t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj Z,
+        (galoisToAut (genericPointLift j) σ).hom.app Z t = t) :
+    ∃ Z' : V.toScheme.FiniteEtale, Nonempty ((pullback (toOpen j V hjV)).obj Z' ≅ Z) :=
+  exists_pullback_iso_of_fromNormalization j Z
+    (isFinite_and_etale_restrict_of_forall_inertia j hW ϖ hϖ hWU m hϖm Q Z hZ) V hjV hWV hV
+
+end Open
 
 end Inertia
 
