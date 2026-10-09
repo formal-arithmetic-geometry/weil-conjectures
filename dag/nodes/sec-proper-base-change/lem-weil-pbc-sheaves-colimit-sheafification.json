@@ -1,0 +1,59 @@
+{
+ "id": "lem-weil-pbc-sheaves-colimit-sheafification",
+ "kind": "statement",
+ "title": "A colimit of sheaves of sets is the sheafification of the presheaf colimit",
+ "statement": "Let $X$ be a topological space and let $\\operatorname{Opens}(X)$ be its opens site, whose objects are open subsets and whose covering families are open covers [def-weil-pbc-sites-and-cohomology]. Let $I$ be a small category and let $(\\mathcal F_i)_{i\\in I}$ be a diagram of sheaves of sets on $\\operatorname{Opens}(X)$ [def-weil-pbc-sites-and-cohomology]. Define the presheaf $\\mathcal P$ by $\\mathcal P(U)=\\varinjlim_{i\\in I}\\mathcal F_i(U)$, with restriction maps induced by the diagram and with the colimit coprojections [def-weil-pbc-category-colimit]. Let $\\eta:\\mathcal P\\to\\mathcal P^\\#$ be the sheafification of this presheaf of sets [def-weil-pbc-sheafification]. Then $\\mathcal P^\\#$, with the composite maps $\\mathcal F_i\\to\\mathcal P\\xrightarrow{\\eta}\\mathcal P^\\#$, is a colimit of the diagram $(\\mathcal F_i)$ in the category of sheaves of sets on $\\operatorname{Opens}(X)$: for every sheaf of sets $\\mathcal H$, composition with the composites induces a bijection between morphisms $\\mathcal P^\\#\\to\\mathcal H$ and compatible cocones of maps $\\mathcal F_i\\to\\mathcal H$ [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Section 009E (section-limits-sheaves), item (3): colimits of sheaves are sheafifications of the objectwise presheaf colimits"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "on the opens site of a topological space, colimit of sheaves of sets is obtained by sheafifying the objectwise presheaf colimit",
+   "results": "CategoryTheory.Sheaf.isColimitSheafifyCocone and CategoryTheory.Sheaf.sheafifyCocone (CategoryTheory.Sites.Limits)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "opens site topological space: sheafify objectwise colimit gives colimit in category of sheaves",
+   "results": "CategoryTheory.Sheaf.isColimitSheafifyCocone; CategoryTheory.Sheaf.createsColimitOfIsSheaf",
+   "date": "2026-10-10",
+   "verdict": "match: exact sheafification-of-presheaf-colimit construction"
+  },
+  {
+   "tool": "grep",
+   "query": "grep sheafifyCocone, isColimitSheafifyCocone, and createsColimitOfIsSheaf in Mathlib/CategoryTheory/Sites/Limits.lean",
+   "results": "Mathlib/CategoryTheory/Sites/Limits.lean:189 defines Sheaf.sheafifyCocone; :213-216 defines Sheaf.isColimitSheafifyCocone and proves it by the universal property of presheafToSheaf",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Sheaf.sheafifyCocone, CategoryTheory.Sheaf.isColimitSheafifyCocone",
+  "file": "Mathlib/CategoryTheory/Sites/Limits.lean:213",
+  "how": "For `D = Type` and the opens-site topology, line 213 takes an objectwise presheaf colimit cocone `E` and returns the sheafified cocone; line 214 states that it is a colimit, and lines 215-216 prove the universal property by transporting the presheaf colimit through the left adjoint `presheafToSheaf` and the precomposition hom equivalence. This is exactly the stated compatible-cocone bijection."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-directed-colimit-underlying-sets",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none", "decls": [], "missing": []},
+  "slopmaster2": {"state": "none", "decls": [], "missing": []}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

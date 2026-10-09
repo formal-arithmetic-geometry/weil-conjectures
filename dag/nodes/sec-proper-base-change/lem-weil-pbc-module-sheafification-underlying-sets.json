@@ -1,0 +1,60 @@
+{
+ "id": "lem-weil-pbc-module-sheafification-underlying-sets",
+ "kind": "statement",
+ "title": "Sheafification of a presheaf of modules has the sheafification of the underlying presheaf of sets",
+ "statement": "Let $X$ be a topological space and let $\\operatorname{Opens}(X)$ be the category whose objects are the open subsets of $X$ and whose morphisms are inclusions; equip it with the opens-site topology in which a family $\\{U_j\\subseteq U\\}_j$ covers $U$ exactly when $U=\\bigcup_jU_j$ [def-weil-pbc-sites-and-cohomology]. Let $\\mathcal O_X$ be a sheaf of rings on this site and let $\\mathcal P$ be a presheaf of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification]. Let $\\eta:\\mathcal P\\to\\mathcal P^\\#$ be the sheafification of $\\mathcal P$ as a presheaf of modules, with its universal property among sheaves of $\\mathcal O_X$-modules [def-weil-pbc-sheafification]. Write $|\\mathcal P|$ for the underlying presheaf of sets and $|\\mathcal P^\\#|$ for the underlying sheaf of sets [def-weil-sheaf-of-modules-category]. Then $|\\mathcal P^\\#|$ with $|\\eta|:|\\mathcal P|\\to|\\mathcal P^\\#|$ is the sheafification of $|\\mathcal P|$: for every sheaf of sets $\\mathcal H$ on $\\operatorname{Opens}(X)$, composition with $|\\eta|$ gives a bijection $\\operatorname{Hom}_{\\operatorname{PSh}(\\operatorname{Opens}(X),\\mathrm{Set})}(|\\mathcal P^\\#|,\\mathcal H)\\cong\\operatorname{Hom}_{\\operatorname{PSh}(\\operatorname{Opens}(X),\\mathrm{Set})}(|\\mathcal P|,\\mathcal H)$, where the left-hand morphisms have sheaf source and target.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma 03CY (lemma-sheafification-presheaf-modules), together with Sheaves, Lemma 0087 (lemma-sheafify-presheaf-structures), item (1): the module sheafification is the sheafification of the underlying presheaf of abelian groups and hence of sets"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "for the opens site of a topological space, sheafification of a presheaf of O-modules has underlying sheaf of sets the sheafification of the underlying presheaf of sets",
+   "results": "PresheafOfModules.sheafificationCompForgetCompToPresheaf and PresheafOfModules.sheafificationCompToSheaf (Algebra.Category.ModuleCat.Presheaf.Sheafification); CategoryTheory.sheafifyComposeIso for forgetting AddCommGrpCat to Type",
+   "date": "2026-10-10",
+   "verdict": "match: the module sheafification is identified with additive-group sheafification, and forgetting additive groups commutes with sheafification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "opens site topological space: underlying sheaf of sets of sheafification of a presheaf of modules",
+   "results": "PresheafOfModules.sheafificationCompForgetCompToPresheaf, PresheafOfModules.sheafificationCompToSheaf, CategoryTheory.sheafifyComposeIso",
+   "date": "2026-10-10",
+   "verdict": "match: specializes the module sheafification comparison to the forgetful functor to sets"
+  },
+  {
+   "tool": "grep",
+   "query": "grep sheafificationCompForgetCompToPresheaf and sheafificationCompToSheaf in Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean; grep sheafifyComposeIso and PreservesSheafification in Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:79-82 defines sheafificationCompForgetCompToPresheaf; Mathlib/CategoryTheory/Sites/PreservesSheafification.lean:233-241 defines sheafifyComposeIso and its unit compatibility, while :305-312 supplies the PreservesSheafification instance for the concrete forgetful functor",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PresheafOfModules.sheafificationCompForgetCompToPresheaf, CategoryTheory.sheafifyComposeIso, CategoryTheory.PreservesSheafification",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:79; Mathlib/CategoryTheory/Sites/PreservesSheafification.lean:233",
+  "how": "For the opens site `J` of `X`, line 79 identifies module sheafification after forgetting modules with additive-group sheafification. Line 233 gives `sheafifyComposeIso` for a value functor preserving sheafification; the concrete forgetful-functor instance is supplied by the hypotheses and instance at lines 305-312. Its compatibility equation at lines 239-241 identifies the unit with the underlying sheafification map, and the module `sheafificationAdjunction` supplies the universal property, so the resulting isomorphism is exactly the sheafification universal property for underlying sets."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-directed-colimit-underlying-sets",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none", "decls": [], "missing": []},
+  "slopmaster2": {"state": "none", "decls": [], "missing": []}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

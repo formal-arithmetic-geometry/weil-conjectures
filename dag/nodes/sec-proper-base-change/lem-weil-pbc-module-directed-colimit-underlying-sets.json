@@ -11,9 +11,62 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form the presheaf $\\mathcal P$ of $\\mathcal O_X$-modules by the sectionwise colimit $\\mathcal P(U)=\\varinjlim_i\\mathcal F_i(U)$. The sheafification of $\\mathcal P$ is a colimit of the $\\mathcal F_i$ in $\\Mod(\\mathcal O_X)$, so it is canonically isomorphic to the given colimit $(\\mathcal F,(c_i))$; this is the colimit construction in Modules 01AH(2), also recorded for arbitrary diagrams by [lem-weil-pbc-module-sheaves-colimits-forgetful]. For each open $U$, the filtered-colimit module lemma [lem-weil-pbc-filtered-colimit-modules-elementwise] identifies the underlying set of $\\mathcal P(U)$ with the colimit of the sets $\\mathcal F_i(U)$, compatibly with restrictions. Thus the underlying presheaf of sets of $\\mathcal P$ is the objectwise colimit of the underlying presheaves of sets of the $\\mathcal F_i$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01AH (lemma-limits-colimits), part (2), together with Sheaves, Lemma 007O (lemma-properties-algebraic-structures), item (7), and Section 009D (section-limits-presheaves)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-module-sheafification-underlying-sets], the underlying sheaf of sets of the module sheafification of $\\mathcal P$ is the sheafification of the underlying presheaf of sets of $\\mathcal P$. Transporting along the canonical isomorphism between this module sheafification and $\\mathcal F$ identifies the underlying maps with the maps induced by the $c_i$.",
+   "uses": [
+    "lem-weil-pbc-module-sheafification-underlying-sets",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03CY (lemma-sheafification-presheaf-modules), with Sheaves, Lemma 0087 (lemma-sheafify-presheaf-structures), item (1)"
+   }
+  },
+  {
+   "text": "The sheafification of the objectwise presheaf colimit is a colimit in sheaves of sets by [lem-weil-pbc-sheaves-colimit-sheafification]. Applying this to the underlying presheaves from Step 1 and the identification in Step 2 proves that the underlying sheaf of sets of $\\mathcal F$, with the underlying maps of the $c_i$, is the colimit of the underlying sheaves of sets of the $\\mathcal F_i$.",
+   "uses": [
+    "lem-weil-pbc-sheaves-colimit-sheafification",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 009E (section-limits-sheaves), item (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+  "lem-weil-pbc-module-sheafification-underlying-sets",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheaves-colimit-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01AH (lemma-limits-colimits), part (2), with Sheaves, Lemmas 007O and 0087 and Section 009E"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +98,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,7 +122,17 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is underlying sheaves of sets of a directed colimit of modules (01AH, 007O, 0087, 009E); self-contained; correct; unsplit."
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: Repaired as asked at 19:14: the two new leaves are now TeX statements on the opens site of X with node citations, and the Mathlib matches name the lines (PresheafOfModules.sheafificationCompForgetCompToPresheaf, Presheaf/Sheafification.lean:79; sheafifyComposeIso, PreservesSheafification.lean:233 with the forgetful instance; Sheaf.isColimitSheafifyCocone, Sites/Limits.lean:213; lines verified). The three steps (sectionwise presheaf colimit, underlying sets of the module sheafification, sheafification of the objectwise colimit is the colimit of sheaves of sets) are as reviewed before; lem-weil-pbc-module-sheaves-colimits-forgetful of unit sk-thm-reduction recorded as a tool use. Two commits (worker + repair) tolerated."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-directed-colimit-underlying-sets",
+  "worker": "stage1",
+  "summary": "Split the statement along Modules 01AH(2), Sheaves 007O(7), 0087(1), and 009E(3). The proof forms the sectionwise presheaf module colimit, uses the filtered-colimit module element and equality description to identify its underlying presheaf of sets, applies the new Mathlib leaf for module sheafification and underlying sheafification, and concludes with the new Mathlib leaf that sheafifies objectwise colimits of sheaves. Created lem-weil-pbc-module-sheafification-underlying-sets and lem-weil-pbc-sheaves-colimit-sheafification; both are direct Mathlib matches. Existing target statement and source were correct."
  }
 }
