@@ -11,9 +11,60 @@
   "def-weil-etale-morphism",
   "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is smooth.* By hypothesis $f=\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism]. By [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] an etale morphism of schemes is smooth in the sense of [def-sbc-smooth-morphisms] (locally of finite presentation and formally smooth); so $f$ is smooth.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 06DI (lemma-henselization-normal, line 11110): 'filtered colimits of etale hence smooth R-algebras, the result follows from Algebra, Lemma normal-goes-up' (Tag 033C)"
+   }
+  },
+  {
+   "text": "*$A\\to B$ is a smooth ring map.* The morphism $f$ is $\\operatorname{Spec}$ of the ring map $A\\to B$. By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is smooth in the sense of [def-sbc-smooth-morphisms] if and only if $A\\to B$ is a smooth ring map [def-weil-pbc-smooth-ring-map]; by the first step the left side holds, so $A\\to B$ is smooth.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-sbc-smooth-morphisms",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 06DI (lemma-henselization-normal, line 11110): 'filtered colimits of etale hence smooth R-algebras, the result follows from Algebra, Lemma normal-goes-up' (Tag 033C)"
+   }
+  },
+  {
+   "text": "*$B$ is normal.* $A$ is a normal ring [def-weil-pbc-normal-ring] and $A\\to B$ is a smooth ring map by the second step, so $B$ is a normal ring by [lem-weil-pbc-smooth-over-normal-ring-normal] (Stacks 033C, normality goes up along smooth ring maps).",
+   "uses": [
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-smooth-over-normal-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 033C (lemma-normal-goes-up, line 46563), as applied in the proof of More on Algebra, Lemma Tag 06DI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-smooth-over-normal-ring-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, proof of Lemma Tag 06DI (etale hence smooth, then Algebra Lemma Tag 033C)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +96,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,7 +120,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Stacks 033C restricted to etale maps; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Three steps following 06DI: an etale morphism of affine schemes is smooth (lem-weil-pbc-etale-smooth-zero-dimensional-fibres), hence A -> B is a smooth ring map (lem-weil-pbc-smooth-ring-map-iff-smooth-affine), hence B is normal by the new unsplit node lem-weil-pbc-smooth-over-normal-ring-normal (033C, statement checked; its proof is the long Noetherian/Nagata argument). No Mathlib class for normal rings; no match."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-over-normal-ring-normal",
+  "worker": "stage1",
+  "summary": "Statement kept (correct: Stacks 033C restricted to etale maps). Proof in three steps following the proof of More on Algebra 06DI ('etale hence smooth' then Algebra 033C): etale morphism => smooth morphism by the existing lem-weil-pbc-etale-smooth-zero-dimensional-fibres; smooth Spec-morphism => smooth ring map by the existing lem-weil-pbc-smooth-ring-map-iff-smooth-affine (Morphisms 01V6 / More on Morphisms 02H6); then the new node lem-weil-pbc-smooth-over-normal-ring-normal (Stacks 033C, unsplit, absent from Mathlib after LeanSearch, Loogle, LeanFinder and grep). No node identifying etale ring maps (00U1) with def-weil-etale-morphism was needed. Source tags checked against tags/tags: 033C lemma-normal-goes-up, 00U9 lemma-etale-standard-smooth, 00U1 definition-etale, 02GJ lemma-etale-characterize, 06DI lemma-henselization-normal. No Lean candidate found in slopmaster2 (grep of IsIntegrallyClosed conclusions)."
  }
 }
