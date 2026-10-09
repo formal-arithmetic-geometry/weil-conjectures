@@ -125,6 +125,9 @@ variable (J) in
 instance [HasLimitsOfShape J C] : PreservesLimitsOfShape J (forget (D := C) A) :=
   inferInstance
 
+noncomputable instance : CreatesLimitsOfSize.{v, v} (forget (D := C) A) where
+  CreatesLimitsOfShape := inferInstance
+
 end Limits
 
 section Colimits

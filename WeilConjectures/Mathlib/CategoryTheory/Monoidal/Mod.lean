@@ -435,3 +435,30 @@ noncomputable def regularIsoOfIsIso {M B : C} [MonObj M] [MonObj B] (φ : M ⟶ 
       ← comp_whiskerRight_assoc, IsIso.inv_hom_id, id_whiskerRight, Category.id_comp])
 
 end CategoryTheory.Mod
+
+namespace CategoryTheory.Adjunction
+
+open scoped Obj
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+  {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [adj.IsMonoidal]
+  {A : C} {B : D} [MonObj A] [MonObj B] (φ : A ⟶ G.obj B) [IsMonHom φ]
+  [IsIso ((adj.homEquiv _ _).symm φ)] [IsMonHom ((adj.homEquiv _ _).symm φ)]
+
+lemma modAdjunction_homEquiv_symm_apply_hom {M : Mod C A} {N : Mod D B}
+    (g : M ⟶ (adj.modRight φ).obj N) :
+    (((adj.modAdjunction φ).homEquiv M N).symm g).hom = (adj.homEquiv _ _).symm g.hom := by
+  simp [modAdjunction, Adjunction.mkOfHomEquiv_homEquiv]
+
+lemma modAdjunction_counit_app_hom (N : Mod D B) :
+    ((adj.modAdjunction φ).counit.app N).hom = adj.counit.app N.X := by
+  rw [← Adjunction.homEquiv_symm_id, modAdjunction_homEquiv_symm_apply_hom]
+  exact Adjunction.homEquiv_symm_id _ _
+
+lemma modAdjunction_unit_app_hom (M : Mod C A) :
+    ((adj.modAdjunction φ).unit.app M).hom = adj.unit.app M.X := by
+  rw [← Adjunction.homEquiv_id, modAdjunction_homEquiv_apply_hom]
+  exact Adjunction.homEquiv_id _ _
+
+end CategoryTheory.Adjunction
