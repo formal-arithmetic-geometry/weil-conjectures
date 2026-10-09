@@ -17,6 +17,9 @@ variable, then the pointwise monoidal structure on a functor category `C ⥤ D`
 (`CategoryTheory.Monoidal.functorCategoryMonoidal`) is again `R`-linear: whiskering,
 tensoring and the scalar action on natural transformations are all computed objectwise,
 so each `MonoidalLinear` axiom follows componentwise from the corresponding axiom in `D`.
+
+The file also records that the two partial functors `X ⊗ -` and `- ⊗ X` of the curried tensor
+product `curriedTensor D` are `R`-linear.
 -/
 
 @[expose] public section
@@ -36,3 +39,16 @@ instance functorCategoryMonoidalLinear : MonoidalLinear R (C ⥤ D) where
   smul_whiskerRight := by intros; ext; simp
 
 end CategoryTheory.Monoidal
+
+namespace CategoryTheory
+
+open MonoidalCategory
+
+variable {R : Type*} [Semiring R] {D : Type*} [Category* D] [MonoidalCategory D] [Preadditive D]
+  [Linear R D] [MonoidalPreadditive D] [MonoidalLinear R D]
+
+instance curriedTensor_obj_linear (X : D) : ((curriedTensor D).obj X).Linear R where
+
+instance curriedTensor_flip_obj_linear (X : D) : ((curriedTensor D).flip.obj X).Linear R where
+
+end CategoryTheory

@@ -56,8 +56,16 @@ open Scheme
 namespace Etale
 
 variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl l)]
+  [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)] [FiniteDimensional ℚ_[l] E]
   [Small.{u + 1} E] {X Y : Scheme.{u}} {d : ℕ} (f : X ⟶ Y) [IsSeparated f]
   [SmoothOfRelativeDimension d f] [HasCompactification f]
+
+/-- The small étale site of a scheme is essentially small. Instance search does not find this
+in the presence of the imports of this file. -/
+local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+  have : LocallySmall.{u + 1} X.Etale :=
+    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+  essentiallySmall_of_small_of_locallySmall _
 
 /-- Blueprint `sk-thm-purity-transport`: Smooth purity over `𝒪_E`, `E` and `ℚ̄_ℓ`
 
@@ -65,12 +73,15 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl 
 relative dimension `d` and let `Λ = 𝒪_E` be the integral coefficient stage. Then `Rf^!`
 carries derived-complete objects of `D(Y_ét, 𝒪_E)` to derived-complete objects of
 `D(X_ét, 𝒪_E)`, so that it restricts to the adic categories `D_comp(−, 𝒪_E)` in which the
-`ℓ`-adic formalism is typed.
+`ℓ`-adic formalism is typed. The exceptional inverse image `Rf^!` at the integral stage is the
+right adjoint of `Rf_!`, whose existence is assumed here: the instance
+`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek` only covers finite coefficients.
 
 Given this, the purity isomorphism `γ_{f,K} : (Lf^* K)(d)[2d] ≅ Rf^! K` at the adic stage is
 `sk-thm-smooth-purity` read at `Λ = 𝒪_E`, and applying
 `AlgebraicGeometry.DerivedCategoryDerivedCompleteRational.fromIntegral` gives it over `E`. -/
 theorem derivedCompleteIntegral_rightDerivedUpperShriek
+    [(R(f)_![ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))]).IsLeftAdjoint]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology
       (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))))
     (hK : DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E K) :

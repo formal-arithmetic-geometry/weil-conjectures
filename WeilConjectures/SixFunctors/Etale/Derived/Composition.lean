@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 
@@ -73,9 +74,11 @@ theorem nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar (f : X ⟶ Y)
     Nonempty (R(f)_![A] ≅ R((f)_*[A])) :=
   sorry
 
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
 /-- Blueprint `sk-lem-sf-mate`: Mate calculus for a pasted adjunction
 
-**The mate of the composition isomorphism.** For composable `f : X ⟶ Y` and `g : Y ⟶ S`,
+**The mate of the composition isomorphism.** For composable `f : X ⟶ Y` and `g : Y ⟶ S` and
+torsion coefficients,
 
 ```
   R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!           (left adjoints, sk-thm-sf-comp-composition)
@@ -83,10 +86,11 @@ theorem nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar (f : X ⟶ Y)
   R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!           (right adjoints, the mate)
 ```
 
-the mate of the composition isomorphism is an isomorphism `R(g ∘ f)^! ≅ Rf^! ∘ Rg^!`: the
-functoriality of the mate construction turns an isomorphism of left adjoints into one of right
-adjoints, and the triangle identities of a composite adjunction are the composites of the
-component ones.
+the mate of the composition isomorphism is an isomorphism `R(g ∘ f)^! ≅ Rf^! ∘ Rg^!`: right
+adjoints of isomorphic functors are isomorphic, and the right adjoint of a composite is the
+composite of the right adjoints. The composition isomorphism of the lower shrieks is
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`, which needs torsion
+coefficients.
 
 This is clause (b) of `sk-lem-sf-mate` in its étale form, for morphisms admitting a
 compactification (`sk-prop-sf-existence`(a)). Clause (a), the pro-étale ambient form, is not
@@ -95,8 +99,12 @@ quasi-separated base, by Nagata's theorem; it is kept because no composition ins
 `HasCompactification` is available in general. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp (f : X ⟶ Y) (g : Y ⟶ S)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
-    Nonempty (R(f ≫ g)^![A] ≅ R(g)^![A] ⋙ R(f)^![A]) :=
-  sorry
+    Nonempty (R(f ≫ g)^![ModuleCat.{u + 1} Λ] ≅
+      R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ]) := by
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ f g
+  exact ⟨Adjunction.rightAdjointUniq
+    ((rightDerivedUpperShriekAdjunction _ (f ≫ g)).ofNatIsoLeft e)
+    ((rightDerivedUpperShriekAdjunction _ f).comp (rightDerivedUpperShriekAdjunction _ g))⟩
 
 end Etale
 

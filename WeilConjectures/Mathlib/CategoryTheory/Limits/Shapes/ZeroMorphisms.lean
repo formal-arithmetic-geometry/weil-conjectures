@@ -14,6 +14,9 @@ In a category with zero morphisms, an injection `f : ι → ι'` induces a split
 between the copowers `∐ (fun (_ : ι) ↦ X) ⟶ ∐ (fun (_ : ι') ↦ X)` of an object `X`: the
 retraction sends the summand indexed by `s : ι'` to the summand indexed by the (unique)
 antecedent of `s`, if there is one, and to zero otherwise.
+
+A product all of whose factors but one are zero is that factor
+(`CategoryTheory.Limits.Pi.isoOfIsZero`).
 -/
 
 @[expose] public section
@@ -49,5 +52,20 @@ lemma exists_epi_copower_of_injective (X : C) {ι ι' : Type*} (f : ι → ι')
   have : IsSplitEpi (retraction (Sigma.desc
     (fun (i : ι) ↦ Sigma.ι (fun (_ : ι') ↦ X) (f i)))) := ⟨⟨_, IsSplitMono.id _⟩⟩
   infer_instance
+
+/-- A product `∏ᶜ F` all of whose factors `F j` with `j ≠ j₀` are zero is isomorphic to the
+factor `F j₀`, through the projection `Pi.π F j₀`. -/
+@[simps hom]
+noncomputable def Pi.isoOfIsZero {J : Type*} [DecidableEq J] (F : J → C) [HasProduct F] (j₀ : J)
+    (hF : ∀ j, j ≠ j₀ → IsZero (F j)) : ∏ᶜ F ≅ F j₀ where
+  hom := Pi.π F j₀
+  inv := Pi.lift fun j ↦ if h : j = j₀ then eqToHom (by rw [h]) else 0
+  hom_inv_id := by
+    refine Pi.hom_ext _ _ fun j ↦ ?_
+    by_cases h : j = j₀
+    · subst h
+      simp
+    · exact (hF j h).eq_of_tgt _ _
+  inv_hom_id := by simp
 
 end CategoryTheory.Limits

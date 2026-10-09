@@ -250,7 +250,7 @@ is a translation `σ_a`, and `a` is unique by
 `AlgebraicGeometry.Etale.artinSchreierTranslation_injective`. Together with the finiteness
 (`AlgebraicGeometry.AffineSpace.isFinite_artinSchreierMap`), the étaleness
 (`AlgebraicGeometry.Etale.etale_artinSchreierMap`), the surjectivity
-(`AlgebraicGeometry.Etale.surjective_artinSchreierMap`) and the torsor structure
+(`AlgebraicGeometry.AffineSpace.surjective_artinSchreierMap`) and the torsor structure
 (`AlgebraicGeometry.AffineSpace.isIso_artinSchreierTorsorMap`) of `AS_q`, this is the
 Artin–Schreier covering lemma for the universal covering `AS_q : 𝔸¹_k ⟶ 𝔸¹_k`, whose source is
 connected; the covering of a function `f` is its base change along `f`.
@@ -260,39 +260,11 @@ theorem exists_eq_artinSchreierTranslation_of_comp_artinSchreierMap (g : 𝔸¹[
   obtain ⟨a, ha⟩ := exists_eq_comp_artinSchreierTranslation (𝟙 _) g (by rw [hg, Category.id_comp])
   exact ⟨a, ha.trans (Category.id_comp _)⟩
 
-/-- Every geometric point of `𝔸¹_k` lifts along the Artin–Schreier map `AS_q`: the equation
-`T ^ q - T = c` has a root in an algebraically closed field. -/
-lemma exists_comp_artinSchreierMap_eq {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ 𝔸¹[k]) : ∃ t : Spec (.of Ω) ⟶ 𝔸¹[k], t ≫ AS[k] = y := by
-  set c := (Scheme.ΓSpecIso (.of Ω)).hom.hom
-    (y.appTop (AffineSpace.coord (Spec (.of k)) PUnit.unit))
-  have hlt : (Polynomial.X : Polynomial Ω).degree <
-      ((Polynomial.X : Polynomial Ω) ^ Fintype.card k).degree := by
-    rw [Polynomial.degree_X, Polynomial.degree_X_pow]
-    exact_mod_cast Fintype.one_lt_card
-  obtain ⟨d, hd⟩ := IsAlgClosed.exists_root (Polynomial.X ^ Fintype.card k - Polynomial.X -
-    Polynomial.C c) (by
-      rw [Polynomial.degree_sub_C (by
-        rw [Polynomial.degree_sub_eq_left_of_degree_lt hlt, Polynomial.degree_X_pow]
-        exact_mod_cast Fintype.card_pos)]
-      rw [Polynomial.degree_sub_eq_left_of_degree_lt hlt, Polynomial.degree_X_pow]
-      exact_mod_cast Fintype.card_ne_zero)
-  simp only [Polynomial.IsRoot, Polynomial.eval_sub, Polynomial.eval_pow, Polynomial.eval_X,
-    Polynomial.eval_C] at hd
-  refine ⟨AffineSpace.homOfVector (y ≫ 𝔸¹[k] ↘ Spec (.of k))
-    fun _ ↦ (Scheme.ΓSpecIso (.of Ω)).inv.hom d, AffineSpace.hom_ext ?_ fun _ ↦ ?_⟩
-  · rw [Category.assoc, AffineSpace.artinSchreierMap_over, AffineSpace.homOfVector_over]
-  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
-      AffineSpace.artinSchreierMap_appTop_coord, map_sub, map_pow,
-      AffineSpace.homOfVector_appTop_coord, ← map_pow, ← map_sub, sub_eq_zero.mp hd]
-    exact (Scheme.ΓSpecIso (.of Ω)).hom_inv_id_apply _
+@[deprecated (since := "2026-10-08")]
+alias exists_comp_artinSchreierMap_eq := AffineSpace.exists_comp_artinSchreierMap_eq
 
-/-- The Artin–Schreier map `AS_q` is surjective. -/
-lemma surjective_artinSchreierMap : Function.Surjective (AS[k]).base := by
-  intro x
-  obtain ⟨t, ht⟩ := exists_comp_artinSchreierMap_eq (𝔸¹[k].algClosurePoint x)
-  refine ⟨t.base default, ?_⟩
-  simpa using congrArg (fun g ↦ g.base default) ht
+@[deprecated (since := "2026-10-08")]
+alias surjective_artinSchreierMap := AffineSpace.surjective_artinSchreierMap
 
 /-- The Artin–Schreier map `AS_q` is étale, `q` vanishing in `k`. -/
 lemma etale_artinSchreierMap : Etale AS[k] :=
@@ -667,7 +639,8 @@ surjective Artin–Schreier map is. -/
 lemma isIso_of_isIso_upperStar_map_artinSchreierMap
     {F G : Sheaf 𝔸¹[k].smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : F ⟶ G)
     [IsIso ((AS[k])^*[ModuleCat.{u + 1} Λ].map φ)] : IsIso φ :=
-  have := Etale.reflectsIsomorphisms_upperStar_of_surjective Λ AS[k] surjective_artinSchreierMap
+  have := Etale.reflectsIsomorphisms_upperStar_of_surjective Λ AS[k]
+    (AffineSpace.surjective_artinSchreierMap k)
   isIso_of_reflects_iso φ (AS[k])^*[ModuleCat.{u + 1} Λ]
 
 end Trivialization
@@ -683,7 +656,7 @@ instance isLocallyConstantSheaf_artinSchreierSheaf (Ψ : AddChar k Λ) :
     Scheme.IsLocallyConstantSheaf (artinSchreierSheaf Ψ) := by
   have := etale_artinSchreierMap (k := k)
   refine ⟨⟨⟨.singleton AS[k] ((Scheme.singleton_mem_precoverage_iff (P := @Etale) _).2
-    ⟨surjective_artinSchreierMap, inferInstance⟩), fun _ ↦ ?_⟩⟩⟩
+    ⟨AffineSpace.surjective_artinSchreierMap k, inferInstance⟩), fun _ ↦ ?_⟩⟩⟩
   rw [Scheme.isConstant_over_iff_upperStar]
   exact Sheaf.isConstant_of_iso _ (X := 𝟙_ (ModuleCat.{u + 1} Λ))
     (artinSchreierSheafUpperStarIso Ψ ≪≫

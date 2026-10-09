@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
@@ -139,21 +140,18 @@ omit [HasSmallSiteSheafify A] in
 /-- Finite sheaves are invariant under isomorphism. -/
 lemma IsFiniteSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsFiniteSheaf F] : IsFiniteSheaf F' where
-  finite_sheafFiber Ω _ _ s :=
-    have := IsFiniteSheaf.finite_sheafFiber (FA := FA) (CA := CA) (F := F) Ω s
-    Finite.of_equiv _
-      ((CategoryTheory.forget A).mapIso ((pointSmallEtale s).sheafFiber.mapIso i)).toEquiv
+  isFinitelyGenerated_sheafFiber Ω _ _ s :=
+    (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (FA := FA) (CA := CA) (F := F) Ω s).of_iso
+      ((pointSmallEtale s).sheafFiber.mapIso i)
 
 omit [HasSmallSiteSheafify A] in
 /-- **Pullback of a finite sheaf is finite**: the stalks of `g^* F` are stalks of `F`.
 (blueprint: `lemma:constructible-pullback-finite`) -/
 theorem IsFiniteSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopology A)
     [IsFiniteSheaf F] : IsFiniteSheaf ((Etale.upperStar A g).obj F) where
-  finite_sheafFiber Ω _ _ s :=
-    have := IsFiniteSheaf.finite_sheafFiber (FA := FA) (CA := CA) (F := F) Ω (s ≫ g)
-    Finite.of_equiv _
-      ((CategoryTheory.forget A).mapIso
-        ((Etale.upperStarCompSheafFiberIso A g s).app F)).toEquiv.symm
+  isFinitelyGenerated_sheafFiber Ω _ _ s :=
+    (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (FA := FA) (CA := CA) (F := F) Ω
+      (s ≫ g)).of_iso ((Etale.upperStarCompSheafFiberIso A g s).app F).symm
 
 omit [HasSmallSiteSheafify A] in
 /-- Finite locally constant sheaves are invariant under isomorphism. -/
@@ -184,6 +182,7 @@ def Stratification.pullback (S : Stratification X) (g : Y ⟶ X) : Stratificatio
   iUnion_stratum_eq_univ := by
     rw [← Set.preimage_iUnion, S.iUnion_stratum_eq_univ, Set.preimage_univ]
   pairwise_disjoint_stratum i j hij := (S.pairwise_disjoint_stratum hij).preimage _
+  isConstructible_stratum i := g.isConstructible_preimage (S.isConstructible_stratum i)
   domain i := Limits.pullback (S.immersion i) g
   immersion i := Limits.pullback.snd (S.immersion i) g
   range_immersion i := by rw [Pullback.range_snd, S.range_immersion]

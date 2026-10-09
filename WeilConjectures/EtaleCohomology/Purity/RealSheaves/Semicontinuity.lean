@@ -42,10 +42,11 @@ The cohomology `H_c² (U, ℱ)` of a Weil representation is not available; as in
 `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin`, the coinvariant Tate twist
 `V_{π₁(U)} (-1)` is used in its place (`AlgebraicGeometry.WeilGroup.compactTopFrobenius`).
 
-The Euler-product form of the trace formula for middle extensions is not a consequence of the
-data of a `AlgebraicGeometry.BoundaryDatum`, and the statements of this file are false without
-it. It is the hypothesis `AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct` of
-the main results; the trace formula itself is not available.
+The Euler-product form of the trace formula for middle extensions is the hypothesis
+`AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct` of the main results: the
+Grothendieck–Lefschetz trace formula is not available, and the identity is not a consequence of
+the fields of a `AlgebraicGeometry.BoundaryDatum`, which pin the inertia groups down only through
+the closed normal subgroup they generate (`AlgebraicGeometry.BoundaryDatum.ker_restrict_eq`).
 
 ## Main definitions
 
@@ -511,15 +512,14 @@ boundary factors `ι det (1 - F_s T ^ e_s ∣ V ^ (I_s))⁻¹` at the points `s 
 `ι det (1 - F T ∣ H_c¹)`),
 `L (U'₀, ℱ, T) · ι det (1 - F T ∣ H_c²) = P · ∏_{s ∈ X'₀ \ U₀} ι det (1 - F_s T ^ e_s ∣ V ^ (I_s))`.
 
-This identity is not a consequence of the fields of a `BoundaryDatum`, which do not tie the
-residue Frobenius lifts and inertia groups to the geometry of `C₀`: for `C₀ = 𝔸¹`,
-`U₀ = 𝔾_m`, `W(U₀) = W(C₀) = ℤ_ℓ × ℤ`, local Frobenius elements `(0, e_x)` on `U₀`, residue
-Frobenius `(1, 1)` at `0` with trivial inertia, and the lisse character `(a, n) ↦ (1 + ℓ) ^ a`,
-all fields hold, the sheaf is pure of weight `0` on `U₀`, and the boundary eigenvalue `1 + ℓ`
-has positive weight. It is therefore recorded as a hypothesis on `D`, for every lisse Weil
-sheaf on `U₀` (the tensor-power argument applies it to `ℱ ^ ⊗ 2 ^ k` and to `ℱ ^ ∨`); for the
-boundary datum of an actual open immersion it is the Grothendieck–Lefschetz trace formula,
-which is not available. -/
+For the boundary datum of the actual inertia groups and residue Frobenius lifts of an open
+immersion this is the Grothendieck–Lefschetz trace formula, which is not available. It is not a
+consequence of the fields of a `BoundaryDatum`: they tie the Weil groups and the restriction
+map to the curve, but pin the inertia groups down only through the closed normal subgroup they
+generate (`AlgebraicGeometry.BoundaryDatum.ker_restrict_eq`), and the boundary polynomials
+depend on the individual inertia groups. It is therefore recorded as a hypothesis on `D`, for
+every lisse Weil sheaf on `U₀` (the tensor-power argument applies it to `ℱ ^ ⊗ 2 ^ k` and to
+`ℱ ^ ∨`). -/
 def HasMiddleExtensionEulerProduct [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p]
     [Fact (ringChar K ≠ l)] : Prop :=
   ∀ {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]

@@ -11,6 +11,8 @@ public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import Mathlib.NumberTheory.Padics.Complex
 public import Mathlib.RepresentationTheory.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroup
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaSeries
 
@@ -21,12 +23,18 @@ This file sets up the group-theoretic side of the purity theorem for real lisse 
 curves: the Weil group of a curve over a finite field, lisse Weil sheaves in their
 description as representations of that group, and the elementary operations on them.
 
-The étale fundamental group of a scheme does not exist in Mathlib, so the geometric
-fundamental group `π₁(C)` and the Weil group `W(C₀)` are packaged as *data*
-(`AlgebraicGeometry.WeilGroup`) recording exactly the structure that the purity argument
-uses: the exact degree sequence `1 → π₁(C) → W(C₀) → ℤ → 0` with `π₁(C)` an open profinite
-subgroup, a degree-one lift `frobeniusLift`, and, for every closed point `x` of `C₀`, a local
-Frobenius element of degree `e_x = [k(x) : 𝔽_q]`.
+A Weil group `AlgebraicGeometry.WeilGroup` of `C₀` is a topological group `W(C₀)` with the
+exact degree sequence `1 → π₁(C) → W(C₀) → ℤ → 0`, a degree-one lift `frobeniusLift`, and, for
+every closed point `x` of `C₀`, a local Frobenius element of degree `e_x = [k(x) : 𝔽_q]`,
+*presented* as the Weil group of the étale fundamental group: it comes with a geometric base
+point `s` of `C₀`, a fundamental group `π₁(C₀, s)` of the fibre functor at `s` on finite étale
+`C₀`-schemes, and an isomorphism of `W(C₀)` with the Weil group
+`AlgebraicGeometry.Scheme.FiniteEtale.weilGroup` of `π₁(C₀, s)` (the elements acting on the
+geometric fibres of the constant covers as an integral power of the geometric Frobenius),
+matching the degrees, inducing the profinite topology on `π₁(C)`, and carrying each local
+Frobenius to a Frobenius element of `π₁(C₀, s)` at that point
+(`AlgebraicGeometry.Scheme.FiniteEtale.IsFrobeniusElement`). These fields determine `W(C₀)`,
+its topology and the conjugacy classes of its local Frobenius elements up to isomorphism.
 
 Coefficients are `ℚ̄_ℓ = PadicAlgCl l`, and the archimedean comparison is a ring embedding
 `ι : ℚ̄_ℓ →+* ℂ`.
@@ -34,18 +42,30 @@ Coefficients are `ℚ̄_ℓ = PadicAlgCl l`, and the archimedean comparison is a
 ## Implementation notes
 
 The curve itself enters through the instance arguments `[Finite K]` and `[IsCurve p]` of
-`AlgebraicGeometry.WeilGroup`, so that every statement about a `W : WeilGroup p` carries them;
-smoothness and geometric connectedness are extra hypotheses where they are needed. Only closed
+`AlgebraicGeometry.WeilGroup`, so that every statement about a `W : WeilGroup p` carries them.
+Geometric connectedness of `C₀`, a standing hypothesis of `def-wf-weil-group`, is the field
+`AlgebraicGeometry.WeilGroup.geometricallyConnected`, since the presentation through
+`AlgebraicGeometry.Scheme.FiniteEtale.weilGroup` requires it; smoothness is an extra hypothesis
+where it is needed. Only closed
 points of `C₀` — those of `AlgebraicGeometry.Scheme.finitePoints` — index a local Frobenius,
 since `AlgebraicGeometry.Scheme.Hom.degreeOver` has the junk value `0` elsewhere.
 
-What the data of a `WeilGroup` does **not** record is that `ker deg` really is the geometric
-fundamental group of `C`: that needs the Galois category of finite étale covers of a scheme
-and Mathlib's `CategoryTheory.PreGaloisCategory.IsFundamentalGroup`, neither of which is
-available. The propositions of this block quantify over an arbitrary `WeilGroup p`, so they
-are not consequences of the recorded data alone; they become so once `WeilGroup` is rebased on
-the étale fundamental group. See the implementation notes of
-`WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity`.
+`W(C₀)` is kept as an abstract topological group `carrier` together with its presentation,
+rather than defined as the subgroup `weilGroup` of `π₁(C₀, s) × ℤ`, because the topology of the
+Weil group is not the subspace topology: the geometric part `π₁(C)` is open. Some fields are
+consequences of others for the genuine Weil group (for instance `deg_frobenius` follows from
+`isFrobeniusElement_frobenius`), and some are theorems about it which need hypotheses on `C₀`:
+the surjectivity of the degree needs `C₀` geometrically connected. The structure is constructed
+for a geometrically connected curve in `AlgebraicGeometry.WeilGroup.ofFundamentalGroup`.
+
+The Chebotarev density theorem, that the local Frobenius elements generate a dense normal
+subgroup, is not a field: it is a consequence of the other fields and of the Euler product of
+`L`-functions, `AlgebraicGeometry.WeilGroup.dense_frobenius`.
+
+The identification of `ker deg` with the étale fundamental group of the *geometric* curve
+`C₀ ×_K K̄`, which the rank-one purity theorems use, is the separate predicate
+`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`; every Weil group of a geometrically connected
+curve satisfies it by the homotopy exact sequence (`AlgebraicGeometry.WeilGroup.isEtaleQuotient`).
 
 ## Main definitions
 
@@ -70,15 +90,27 @@ variable {K : Type u} [Field K] {C : Scheme.{u}}
 /-- Blueprint `sk-d-real-weil`: Weil sheaves and their representations.
 
 The Weil group of a curve `p : C₀ ⟶ Spec 𝔽_q`. It is the preimage of the integer powers of
-the geometric Frobenius under `π₁(C₀) → Gal(k / 𝔽_q)`, and comes with the exact degree
+the geometric Frobenius under `π₁(C₀, s) → Gal(k / 𝔽_q)`, and comes with the exact degree
 sequence `1 → π₁(C) → W(C₀) → ℤ → 0` whose kernel is the profinite geometric fundamental
 group `π₁(C)`.
 
-Since the étale fundamental group of a scheme is not available, this is recorded as data:
-a topological group `W` with a surjective degree homomorphism to `ℤ` whose kernel is open and
-profinite, a chosen degree-one lift `frobeniusLift`, and for every closed point `x` of `C₀` a
-local Frobenius element `frobenius x`, well defined up to conjugacy, of degree
-`e_x = [k(x) : 𝔽_q]`. -/
+It consists of a topological group `W` with a surjective degree homomorphism to `ℤ` whose kernel
+is open and profinite, a chosen degree-one lift `frobeniusLift`, and for every closed point `x`
+of `C₀` a local Frobenius element `frobenius x`, well defined up to conjugacy, of degree
+`e_x = [k(x) : 𝔽_q]`; together with a presentation of all this through the étale fundamental
+group `π₁(C₀, s)` of `C₀` at a geometric base point `s`:
+
+* `weilGroupEquiv` identifies `W` with the Weil group of `π₁(C₀, s)`, the subgroup of pairs
+  `(g, n)` of `π₁(C₀, s) × ℤ` such that `g` acts on the geometric fibres of the constant covers
+  `C₀ ×_{𝔽_q} Spec A` as the `n`-th power of the geometric Frobenius
+  (`AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`), and `deg` with the second projection;
+* the topology of `W` induces the profinite topology of `π₁(C₀, s)` on `π₁(C)`;
+* `frobenius x` is a Frobenius element at `x` of `π₁(C₀, s)`: it acts on the geometric fibres
+  at `s` as the geometric Frobenius of `κ(x)` acts on those at a geometric point over `x`,
+  transported along a path (`AlgebraicGeometry.Scheme.FiniteEtale.IsFrobeniusElement`).
+
+That the local Frobenius elements generate a dense normal subgroup (Chebotarev density) is a
+theorem about these data, `AlgebraicGeometry.WeilGroup.dense_frobenius`. -/
 structure WeilGroup [Finite K] (p : C ⟶ Spec (.of K)) [IsCurve p] where
   /-- The underlying group `W(C₀)` of the Weil group. -/
   carrier : Type u
@@ -106,9 +138,47 @@ structure WeilGroup [Finite K] (p : C ⟶ Spec (.of K)) [IsCurve p] where
   /-- The local Frobenius at `x` has degree `e_x = [k(x) : 𝔽_q]`. -/
   deg_frobenius (x : C.finitePoints) :
     deg (frobenius x) = Multiplicative.ofAdd (p.degreeOver x.1 : ℤ)
+  /-- The curve `C₀` is connected, so that its finite étale covers form a Galois category. -/
+  [connectedSpace : ConnectedSpace C]
+  /-- The geometric base point `s` of `C₀`. -/
+  basePoint : Spec (.of (AlgebraicClosure K)) ⟶ C
+  /-- The étale fundamental group `π₁(C₀, s)`, a fundamental group of the fibre functor at `s`
+  on finite étale `C₀`-schemes. -/
+  fundamentalGroup : Type u
+  [fundamentalGroupGroup : Group fundamentalGroup]
+  [fundamentalGroupTopologicalSpace : TopologicalSpace fundamentalGroup]
+  [fundamentalGroupIsTopologicalGroup : IsTopologicalGroup fundamentalGroup]
+  [fundamentalGroupCompactSpace : CompactSpace fundamentalGroup]
+  [mulAction (P : C.FiniteEtale) :
+    MulAction fundamentalGroup ((Scheme.FiniteEtale.fiber basePoint).obj P)]
+  [isFundamentalGroup :
+    PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber basePoint) fundamentalGroup]
+  /-- The curve `C₀` is geometrically connected over `𝔽_q`, the standing hypothesis of the Weil
+  group `def-wf-weil-group`: without it the degree map of
+  `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup` is not surjective. -/
+  [geometricallyConnected : GeometricallyConnected p]
+  /-- The identification of `W(C₀)` with the Weil group of `π₁(C₀, s)`: the pairs `(g, n)` such
+  that `g` acts on the geometric fibres of the constant covers as the `n`-th power of the
+  geometric Frobenius. -/
+  weilGroupEquiv : carrier ≃* Scheme.FiniteEtale.weilGroup p basePoint fundamentalGroup
+  /-- Under `weilGroupEquiv`, the degree is the exponent of the geometric Frobenius. -/
+  deg_eq (g : carrier) :
+    deg g = Scheme.FiniteEtale.weilGroupDeg p basePoint fundamentalGroup (weilGroupEquiv g)
+  /-- The topology of `W(C₀)` induces on `π₁(C) = ker deg` the profinite topology of
+  `π₁(C₀, s)`. -/
+  isEmbedding_ker :
+    Topology.IsEmbedding fun g : deg.ker ↦ (weilGroupEquiv g).1.1
+  /-- The local Frobenius at `x` is a Frobenius element of `π₁(C₀, s)` at `x`. -/
+  isFrobeniusElement_frobenius (x : C.finitePoints) :
+    haveI : Finite (C.residueField x.1) := x.2
+    Scheme.FiniteEtale.IsFrobeniusElement basePoint fundamentalGroup x.1
+      (weilGroupEquiv (frobenius x)).1.1
 
 attribute [instance] WeilGroup.group WeilGroup.topologicalSpace WeilGroup.isTopologicalGroup
   WeilGroup.compactSpace_ker WeilGroup.totallyDisconnectedSpace_ker
+  WeilGroup.fundamentalGroupGroup WeilGroup.fundamentalGroupTopologicalSpace
+  WeilGroup.fundamentalGroupIsTopologicalGroup WeilGroup.fundamentalGroupCompactSpace
+  WeilGroup.mulAction WeilGroup.isFundamentalGroup
 
 namespace WeilGroup
 
@@ -117,24 +187,49 @@ variable [Finite K] {p : C ⟶ Spec (.of K)} [IsCurve p] (W : WeilGroup p)
 /-- The geometric fundamental group `π₁(C)`, the kernel of the degree homomorphism. -/
 protected abbrev geometric : Subgroup W.carrier := W.deg.ker
 
+/-- The inclusion `W(C₀) → π₁(C₀, s)` of the Weil group into the étale fundamental group. -/
+noncomputable def toFundamentalGroup : W.carrier →* W.fundamentalGroup :=
+  haveI := W.geometricallyConnected
+  (MonoidHom.fst _ _).comp
+    ((Scheme.FiniteEtale.weilGroup p W.basePoint W.fundamentalGroup).subtype.comp
+      W.weilGroupEquiv.toMonoidHom)
+
+theorem toFundamentalGroup_apply (g : W.carrier) :
+    W.toFundamentalGroup g = (W.weilGroupEquiv g).1.1 :=
+  rfl
+
 /-- Blueprint `sk-i-real-boundary`: Boundary stalks and restriction to an open.
 
 The restriction of Weil groups along a nonempty open immersion `j : U₀ ↪ C₀` of curves over
-`𝔽_q`: a continuous, degree-preserving and surjective homomorphism `W(U₀) → W(C₀)` carrying the
-local Frobenius at a closed point `x` of `U₀` to the local Frobenius at its image, up to
-conjugacy.
+`𝔽_q`: the homomorphism `W(U₀) → W(C₀)` induced by the restriction functor
+`j^* : FÉt(C₀) ⥤ FÉt(U₀)` of finite étale covers and a path `τ` between the base points, that is
+an isomorphism `τ : F_{s_U} ∘ j^* ≅ F_{s_C}` of fibre functors on `FÉt(C₀)`: an element `g` of
+`W(U₀)` acts on the geometric fibre at `s_U` of the restriction `j^* P` of a finite étale
+`C₀`-scheme `P`, and its restriction acts on the fibre of `P` at `s_C` through `τ`
+(`restrict_smul`). Since `W(C₀)` embeds into `π₁(C₀, s_C)`, this determines the restriction
+map.
 
-Surjectivity is data rather than a conclusion: `π₁(U) → π₁(C)` is surjective for a nonempty
-open of a connected normal curve (`sk-i-real-boundary`), but nothing in the data of two
-`AlgebraicGeometry.WeilGroup`s forces an arbitrary degree-preserving homomorphism between them
-to be onto. Likewise the compatibility `restrict_frobenius` is what ties `restrict` to `j`;
-without it a `Restriction` would say nothing about the geometry. -/
+The remaining fields are theorems about the map so defined: it is continuous and preserves
+degrees, it is surjective because `π₁(U) → π₁(C)` is for a nonempty open of a connected
+normal curve (`sk-i-real-boundary`), and it carries the local Frobenius at a closed point of
+`U₀` into the Frobenius conjugacy class at its image. -/
 structure Restriction {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)} [IsCurve pU] (j : U ⟶ C)
     [IsOpenImmersion j] [Nonempty U] (WU : WeilGroup pU) (WC : WeilGroup p) where
   /-- `j` is a morphism of curves over `𝔽_q`. -/
   comp_eq : j ≫ p = pU
   /-- The restriction map `W(U₀) → W(C₀)` of Weil groups. -/
   restrict : WU.carrier →* WC.carrier
+  /-- The path from the base point of `U₀` to that of `C₀`: an isomorphism between the fibre
+  functor at `s_U` precomposed with the restriction of finite étale covers to `U₀`, and the fibre
+  functor at `s_C`. -/
+  fiberIso : Scheme.FiniteEtale.pullback j ⋙ Scheme.FiniteEtale.fiber WU.basePoint ≅
+    Scheme.FiniteEtale.fiber WC.basePoint
+  /-- The restriction map is induced by the restriction of finite étale covers along `j`,
+  transported along `fiberIso`. -/
+  restrict_smul (g : WU.carrier) (P : C.FiniteEtale)
+    (y : (Scheme.FiniteEtale.fiber WU.basePoint).obj ((Scheme.FiniteEtale.pullback j).obj P)) :
+    WC.toFundamentalGroup (restrict g) • fiberIso.hom.app P y =
+      fiberIso.hom.app P (WU.toFundamentalGroup g • y)
   /-- The restriction map is continuous. -/
   continuous_restrict : Continuous restrict
   /-- The restriction map preserves degrees. -/
@@ -162,18 +257,6 @@ structure IsLisse {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
   /-- In every basis, the matrix coefficients of the geometric part of `ρ` are continuous. -/
   continuous_toMatrix {n : ℕ} (b : Module.Basis (Fin n) (PadicAlgCl l) V) (i j : Fin n) :
     Continuous fun g : W.geometric ↦ LinearMap.toMatrix b b (ρ g) i j
-
-/-- Blueprint `sk-d-real-weil`: Weil sheaves and their representations.
-
-Continuity of the matrix coefficients in *one* basis of a finite-dimensional `V` implies
-continuity in every basis: a change of basis is a fixed invertible matrix, so it acts on the
-matrix coefficients by a fixed polynomial expression. -/
-theorem isLisse_iff_exists_basis {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
-    [FiniteDimensional (PadicAlgCl l) V]
-    (ρ : Representation (PadicAlgCl l) W.carrier V) :
-    W.IsLisse l ρ ↔ ∃ (n : ℕ) (b : Module.Basis (Fin n) (PadicAlgCl l) V), ∀ i j,
-      Continuous fun g : W.geometric ↦ LinearMap.toMatrix b b (ρ g) i j := by
-  sorry
 
 variable {W l} in
 /-- For a lisse representation on a finite-dimensional `V`, every coefficient
@@ -205,6 +288,29 @@ theorem IsLisse.of_continuous_apply {V : Type u} [AddCommGroup V] [Module (Padic
     W.IsLisse l ρ where
   continuous_toMatrix b i j := by
     simpa [LinearMap.toMatrix_apply] using h (b.coord i) (b j)
+
+/-- Blueprint `sk-d-real-weil`: Weil sheaves and their representations.
+
+Continuity of the matrix coefficients in *one* basis of a finite-dimensional `V` implies
+continuity in every basis: a change of basis is a fixed invertible matrix, so it acts on the
+matrix coefficients by a fixed polynomial expression. -/
+theorem isLisse_iff_exists_basis {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
+    [FiniteDimensional (PadicAlgCl l) V]
+    (ρ : Representation (PadicAlgCl l) W.carrier V) :
+    W.IsLisse l ρ ↔ ∃ (n : ℕ) (b : Module.Basis (Fin n) (PadicAlgCl l) V), ∀ i j,
+      Continuous fun g : W.geometric ↦ LinearMap.toMatrix b b (ρ g) i j := by
+  refine ⟨fun h ↦ ⟨_, Module.finBasis (PadicAlgCl l) V, h.continuous_toMatrix _⟩, ?_⟩
+  rintro ⟨n, b, hb⟩
+  refine IsLisse.of_continuous_apply fun φ v ↦ ?_
+  have key (g : W.geometric) : φ (ρ g v) =
+      ∑ i, φ (b i) * ∑ j, LinearMap.toMatrix b b (ρ g) i j * b.repr v j := by
+    conv_lhs => rw [← b.sum_repr (ρ g v)]
+    simp only [map_sum, map_smul, smul_eq_mul, ← LinearMap.toMatrix_mulVec_repr b b,
+      Matrix.mulVec, dotProduct]
+    exact Finset.sum_congr rfl fun i _ ↦ mul_comm _ _
+  simp_rw [key]
+  exact continuous_finsetSum _ fun i _ ↦ continuous_const.mul <|
+    continuous_finsetSum _ fun j _ ↦ (hb i j).mul continuous_const
 
 /-- Blueprint `sk-d-real-operations`: Operations, constituents and coinvariants.
 

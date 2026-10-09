@@ -63,4 +63,12 @@ lemma pullHom_congr_left ⦃X₁ X₂ : C⦄ ⦃M₁ : F.obj (.mk (op X₁))⦄ 
   subst h
   rfl
 
+/-- Pulling back the image `f₁^* a` of a morphism `a : M₁ ⟶ M₂` along `g` gives `(g ≫ f₁)^* a`. -/
+@[simp]
+lemma pullHom_map ⦃X₁ : C⦄ ⦃M₁ M₂ : F.obj (.mk (op X₁))⦄ (a : M₁ ⟶ M₂) ⦃Y : C⦄ (f₁ : Y ⟶ X₁)
+    ⦃Y' : C⦄ (g : Y' ⟶ Y) (gf₁ : Y' ⟶ X₁) (hgf₁ : g ≫ f₁ = gf₁ := by cat_disch) :
+    pullHom ((F.map f₁.op.toLoc).toFunctor.map a) g gf₁ gf₁ hgf₁ hgf₁ =
+      (F.map gf₁.op.toLoc).toFunctor.map a := by
+  simp [pullHom]
+
 end CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat

@@ -54,12 +54,12 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 the geometric fiber `X̄`, with the canonical isomorphism `Fr_X^* ℚ̄_ℓ = (Fr_X⁻¹)_* ℚ̄_ℓ ≅ ℚ̄_ℓ`
 as Weil structure. -/
 noncomputable def ProEtaleWeilSheaf.adicConstant : ProEtaleWeilSheaf k₀ l X :=
-  IsoAlgebra.mk (adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (adicConstantSheafLowerStarIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)
+  IsoAlgebra.mk (AdicSheaf.unit l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (adicLowerStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)
 
 lemma ProEtaleWeilSheaf.adicConstant_carrier :
     (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier =
-      adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+      AdicSheaf.unit l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   rfl
 
 end
@@ -96,7 +96,7 @@ theorem WeilSheaf.not_isZero_adicConstant [Nonempty X] :
     ¬ IsZero (WeilSheaf.adicConstant k₀ l X) := by
   have := Scheme.Hom.nonempty_geometricFiber k₀ X
   rw [WeilSheaf.isZero_iff_isZero_carrier]
-  exact not_isZero_adicConstantSheaf l _
+  exact fun h ↦ not_isZero_adicConstantSheaf l _ ((AdicSheaf.forget _).map_isZero h)
 
 /-- **Non-degeneracy of Weil complexes.** The constant Weil sheaf `ℚ̄_ℓ` placed in degree zero is
 a nonzero Weil complex on a nonempty `k₀`-scheme: its cohomology sheaf `𝓗⁰` is `ℚ̄_ℓ`. -/
@@ -105,5 +105,18 @@ theorem WeilComplex.not_isZero_toComplex_adicConstant [Nonempty X] :
   WeilSheaf.not_isZero_adicConstant k₀ l X
     (((WeilComplex.homologySheaf 0).map_isZero h).of_iso
       (WeilSheaf.toComplexCompHomologySheafIso.app _).symm)
+
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+  {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+
+lemma WeilSheaf.adicConstant_str_hom_hom :
+    (Endofunctor.IsoAlgebra.str (WeilSheaf.adicConstant k₀ l X).obj).hom.hom =
+      (ProEtale.adicConstantSheafLowerStarIso l
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).hom :=
+  rfl
 
 end AlgebraicGeometry

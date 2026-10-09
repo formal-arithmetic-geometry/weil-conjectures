@@ -42,7 +42,8 @@ variable (ψ : AddChar k₀ (PadicAlgCl l))
 irreducible lisse sheaf `M'` of its Fourier partner is punctually `ι`-pure of some real weight
 `v`. (blueprint: `sk-p-dl-a1-some-weight`) -/
 theorem exists_isPunctuallyPureOfWeight_of_isFourierPartner (ι : PadicAlgCl l →+* ℂ)
-    (hψ : ψ ≠ 1) (D D' : WeilSheaf.LisseOnDenseOpen k₀ l) [Simple D.sheaf]
+    (hψ : ψ ≠ 1) (D D' : WeilSheaf.LisseOnDenseOpen k₀ l)
+    (hD : D.sheaf.IsIrreducibleLisse)
     (hne : D.sheaf.IsNonexceptional ψ D.j) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) (hFT : D.IsFourierPartner ψ D') :
     ∃ v : ℝ, D'.sheaf.IsPunctuallyPureOfWeight ι v := by

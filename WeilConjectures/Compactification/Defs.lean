@@ -57,7 +57,15 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The data of a compactification of `f : X ⟶ Y`: a scheme `Z` together with a proper
-morphism `g : Z ⟶ Y` and an open immersion `i : X ⟶ Z` such that `f = i ≫ g`. -/
+morphism `g : Z ⟶ Y` and an open immersion `i : X ⟶ Z` such that `f = i ≫ g`.
+
+The open immersion `i` is not required to be quasi-compact, unlike in the blueprint
+(`def-nagata-compactification`) and in Stacks/Conrad, where `j` is a quasi-compact open
+immersion. When `f` is quasi-compact, which is the case in all uses of Nagata's theorem, the
+two notions agree: `i` is then automatically quasi-compact
+(`AlgebraicGeometry.Compactification.quasiCompact_openImmersion_iff`). The weaker
+requirement is what lets a compactification be restricted along an arbitrary open immersion
+(`AlgebraicGeometry.Compactification.precomp`). -/
 structure Compactification {X Y : Scheme.{u}} (f : X ⟶ Y) where
   /-- The scheme in which `X` is compactified. -/
   Z : Scheme.{u}
@@ -84,6 +92,15 @@ def ofIsProper (f : X ⟶ Y) [IsProper f] : Compactification f where
   g := f
   i := 𝟙 X
   comm := (Category.id_comp f).symm
+  isProper := inferInstance
+  isOpenImmersion := inferInstance
+
+/-- An open immersion is compactified by the identity of its target. -/
+def ofIsOpenImmersion (f : X ⟶ Y) [IsOpenImmersion f] : Compactification f where
+  Z := Y
+  g := 𝟙 Y
+  i := f
+  comm := (Category.comp_id f).symm
   isProper := inferInstance
   isOpenImmersion := inferInstance
 

@@ -328,6 +328,33 @@ instance [QuasiCompact g] : CompactSpace g.geometricFiber :=
 instance [QuasiSeparated g] : QuasiSeparatedSpace g.geometricFiber :=
   quasiSeparatedSpace_of_quasiSeparated g.geometricFiberToAlgebraicClosure
 
+variable (g) in
+/-- The Galois action on the geometric fiber: the endomorphism `𝟙 Y₀ × Spec σ` of
+`Y = Y₀ ×_{Spec k} Spec k̄` induced by a `k`-algebra endomorphism `σ` of `k̄`. It commutes with
+the projection to the model `Y₀`, and lies over `Spec σ` on `Spec k̄`. For an automorphism `σ`
+the line bundles on `Y` are pulled back along it, which is the action of `Gal(k̄ / k)` on
+`Pic(Y)`. -/
+def geometricFiberGaloisMap (σ : AlgebraicClosure k →ₐ[k] AlgebraicClosure k) :
+    g.geometricFiber ⟶ g.geometricFiber :=
+  pullback.map g (Scheme.specAlgebraicClosure k).hom g (Scheme.specAlgebraicClosure k).hom
+    (𝟙 Y₀) (Scheme.specAlgebraicClosureMap σ).left (𝟙 _) (by simp)
+    (by simp only [Category.comp_id]; exact (Over.w (Scheme.specAlgebraicClosureMap σ)).symm)
+
+variable (g) in
+@[reassoc (attr := simp)]
+theorem geometricFiberGaloisMap_comp_geometricFiberProj
+    (σ : AlgebraicClosure k →ₐ[k] AlgebraicClosure k) :
+    g.geometricFiberGaloisMap σ ≫ g.geometricFiberProj = g.geometricFiberProj := by
+  simp [geometricFiberGaloisMap, geometricFiberProj]
+
+variable (g) in
+@[reassoc (attr := simp)]
+theorem geometricFiberGaloisMap_comp_geometricFiberToAlgebraicClosure
+    (σ : AlgebraicClosure k →ₐ[k] AlgebraicClosure k) :
+    g.geometricFiberGaloisMap σ ≫ g.geometricFiberToAlgebraicClosure =
+      g.geometricFiberToAlgebraicClosure ≫ (Scheme.specAlgebraicClosureMap σ).left := by
+  simp [geometricFiberGaloisMap, geometricFiberToAlgebraicClosure]
+
 end Scheme.Hom
 
 end AlgebraicClosure
