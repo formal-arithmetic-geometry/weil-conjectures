@@ -1,0 +1,56 @@
+{
+ "id": "lem-weil-pbc-separable-purely-inseparable-linear-disjoint",
+ "kind": "statement",
+ "title": "Separable and purely inseparable extensions are linearly disjoint",
+ "statement": "Let $k\\subseteq K$ and $k\\subseteq L$ be field extensions [def-pc-field-extension] embedded in a common field $\\Omega$. Assume that $K/k$ is separable algebraic [def-weil-pbc-separable-algebraic-extension] and that $L/k$ is purely inseparable [def-weil-pbc-finite-purely-inseparable-extension]. Then the canonical $K$-algebra map $K\\otimes_kL\\to KL\\subseteq\\Omega$, $x\\otimes y\\mapsto xy$, is injective; equivalently, $K$ and $L$ are linearly disjoint over $k$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 030K (fields-lemma-separable-first) together with the algebraic-extension discussion in Section Tag 037H; the tensor/compositum formulation is the standard linear-disjointness reformulation used in Algebra, Lemma Tag 07QH.",
+  "url": "https://stacks.math.columbia.edu/tag/030K"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "separable algebraic extension and purely inseparable extension are linearly disjoint",
+   "results": "IntermediateField.linearDisjoint_of_isPurelyInseparable_of_isSeparable (FieldTheory/PurelyInseparable/Tower.lean:99) proves the corresponding tower statement inside a common field; no theorem presents the abstract tensor map in this exact form.",
+   "date": "2026-10-10",
+   "verdict": "no exact match; the tower linear-disjointness theorem is an ingredient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K tensor_k L injective linearly disjoint when K/k separable and L/k purely inseparable",
+   "results": "IntermediateField.linearDisjoint_of_isPurelyInseparable_of_isSeparable; IntermediateField.LinearDisjoint.isDomain; no direct canonical TensorProduct map theorem with these hypotheses.",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'linearDisjoint_of_isPurelyInseparable_of_isSeparable|TensorProduct.*LinearDisjoint|isField_of_isAlgebraic' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory",
+   "results": "PurelyInseparable/Tower.lean:99 contains the tower lemma; FieldTheory/LinearDisjoint.lean contains domain/field consequences, but no theorem with the abstract statement above.",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-separable-tensor-purely-inseparable-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none", "decls": [], "missing": []},
+  "slopmaster2": {"state": "none", "decls": [], "missing": []}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
