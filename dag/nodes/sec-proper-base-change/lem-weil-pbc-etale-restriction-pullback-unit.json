@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-etale-restriction-pullback-unit",
+ "kind": "statement",
+ "title": "Pulling back sections over an etale object along a base change is pulling back along the morphism (unit compatibility with etale localization)",
+ "statement": "Let $g:Y\\to X$ be a morphism of schemes [def-pc-scheme] and $p:W\\to X$ an etale morphism [def-weil-etale-morphism]. Let $W'$ be a scheme with morphisms $g':W'\\to W$ and $p':W'\\to Y$ such that $p\\circ g'=g\\circ p'$ and the induced morphism $\\iota=(g',p'):W'\\to W\\times_XY$ to the fibre product of $p$ and $g$ [def-pc-fibre-product] is an isomorphism (a cartesian square); then $p'$ is etale (a base change of $p$, [lem-weil-pbc-etale-base-change-finite-limits] (1)), so $(W,p)$ is an object of $X_{\\Et}$, $(W',p')$ and $(W\\times_XY,\\mathrm{pr}_2)$ are objects of $Y_{\\Et}$ [def-weil-pbc-etale-site], and $\\iota$ is an isomorphism in $Y_{\\Et}$. Use the abelian sheaves [def-weil-pbc-abelian-etale-sheaves], the direct images $(u_*H)(T)=H(T\\times_{\\mathrm{target}}\\mathrm{source})$ [def-weil-pbc-direct-image] and the inverse images $u^{-1}$ with units $\\eta_u:\\mathrm{id}\\to u_*u^{-1}$ [def-weil-pbc-inverse-image]; for a sheaf $H$ on $W'_{\\Et}$ read $\\Gamma(W,g'_*H)=H(W\\times_WW')$ as $H(W')$ through the isomorphism $(g',\\mathrm{id}_{W'}):W'\\to W\\times_WW'$ of $W'$-schemes. For an abelian sheaf $F$ on $X_{\\Et}$ let $\\rho_F:p^{-1}F\\xrightarrow{\\sim}F|_W$ and $\\rho_{g^{-1}F}:p'^{-1}g^{-1}F\\xrightarrow{\\sim}(g^{-1}F)|_{W'}$ be the isomorphisms of [lem-weil-pbc-etale-inverse-image-restriction] (1), so that $\\rho_F(W):\\Gamma(W,p^{-1}F)\\xrightarrow{\\sim}F(W)$ and $\\rho_{g^{-1}F}(W'):\\Gamma(W',p'^{-1}g^{-1}F)\\xrightarrow{\\sim}(g^{-1}F)(W')$, and let $\\kappa_F=c_{g,p',F}^{-1}\\circ c_{p,g',F}:g'^{-1}p^{-1}F\\xrightarrow{\\sim}(p\\circ g')^{-1}F=(g\\circ p')^{-1}F\\xrightarrow{\\sim}p'^{-1}g^{-1}F$, with $c$ the composition isomorphisms of [lem-weil-pbc-inverse-image-composition]. Then for every $a\\in\\Gamma(W,p^{-1}F)$\n$$\\rho_{g^{-1}F}(W')\\Bigl(\\kappa_F(W')\\bigl(\\eta_{g',p^{-1}F}(W)(a)\\bigr)\\Bigr)=(g^{-1}F)(\\iota)\\Bigl(\\eta_{g,F}(W)\\bigl(\\rho_F(W)(a)\\bigr)\\Bigr)\\quad\\text{in }(g^{-1}F)(W'),$$\nwhere $\\eta_{g,F}(W):F(W)\\to(g_*g^{-1}F)(W)=(g^{-1}F)(W\\times_XY)$ and $(g^{-1}F)(\\iota)$ is the restriction along $\\iota:W'\\to W\\times_XY$. In words: under the identifications of the inverse image along an etale morphism with the restriction, pulling back sections along the base change $g':W'\\to W$ is pulling back sections along $g$. (For an open immersion $p$ this is [lem-weil-pbc-open-restriction-pullback-unit].)",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "not stated in the source as such (agent-identified gap, needed by lem-weil-pbc-limit-pullback-sections-colimit, step 5); it is the unit-side counterpart of Sites, Lemma 03CF (lemma-localize-morphism: $f'_*j_U^{-1}=j_V^{-1}f_*$ for the localized morphism of sites $f':\\mathcal C/U\\to\\mathcal D/V$, $U=u(V)$), with Lemma 03EF (lemma-localize-morphism-strong) for sites with fibre products such as the small etale sites. Intended proof (agent), as for the open-immersion case lem-weil-pbc-open-restriction-pullback-unit but without the monomorphism shortcut: both sides are $W$-sections of morphisms of sheaves $p^{-1}F\\to g'_*(p'^{-1}g^{-1}F)$ on $W_{\\Et}$; by $p^{-1}\\dashv p_*$ they agree once their composites with $\\eta_{p,F}$ agree, which is checked on each object $T$ of $X_{\\Et}$ using the unit equation of $c$ (lem-weil-pbc-inverse-image-composition (2), for both factorizations of $p\\circ g'=g\\circ p'$), the description of the units of $p$ and $p'$ as restrictions (lem-weil-pbc-etale-inverse-image-restriction (2)) and the naturality of $\\eta_g$."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unit of pullback adjunction of sheaves commutes with restriction to an etale object over the base (localization of sites and morphisms)",
+   "results": "SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction (ModuleCat.Sheaf.PullbackContinuous), TopCat.Presheaf.germ_stalkPullbackHom, pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk (Topology.Sheaves.Stalks), Functor.sheafPullback, sheafPullbackConstruction.sheafAdjunctionContinuous (Sites.Pullback), SheafOfModules.pullbackObjUnitToUnit (PullbackFree): adjunctions for one continuous functor or stalks on spaces; nothing relating the unit of a pullback to localization at an object",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "over site localization: pullback functor along a morphism of sites commutes with restriction to the slice category over an object, compatible with the adjunction unit",
+   "results": "GrothendieckTopology.overMapPullback, overMapPullbackComp (+_hom_app_val_app, _inv_app_val_app), overMapPullback_assoc, overMapPullback_id_comp, overMapPullback_comp_id (Mathlib.CategoryTheory.Sites.Over): restriction along morphisms of Over categories inside one site, with its coherence; no inverse image along a morphism of sites, no unit compatibility",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafAdjunctionContinuous, CategoryTheory.Over",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'overMapPullback\\|sheafPullback' Mathlib/CategoryTheory/Sites Mathlib/AlgebraicGeometry/Sites; grep -rn 'smallEtale.*over\\|overEquiv\\|Etale.*Over' Mathlib/AlgebraicGeometry/Sites/*.lean; read header of Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean",
+   "results": "Sites/Pullback.lean, CoverLifting.lean, Over.lean, PseudofunctorSheafOver.lean (pseudofunctor X |-> Sh(J.over X) for restriction inside one site), SheafHom.lean, Point/Comap.lean; AlgebraicGeometry/Sites: Small.lean:57 Cover.overEquiv_generate_toPresieveOver_eq_ofArrows, Etale.lean:73, EtalePoint.lean:56, Proetale.lean:181; no inverse image along a morphism of schemes compared with etale localization",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-limit-pullback-sections-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
