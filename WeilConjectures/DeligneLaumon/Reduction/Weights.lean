@@ -87,6 +87,7 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 /-! ### Mixed sheaves -/
 
@@ -276,6 +277,8 @@ def HasDirectImageWeightBound (k₀ : Type u) [Field k₀] [Finite k₀] {l : �
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] : Prop :=
+  haveI : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
   ∀ (w : ℝ) (F : WeilSheaf k₀ l X), F.IsMixedOfWeightsAtMost ι w →
     ∀ r : ℕ, ((WeilSheaf.higherLowerShriek k₀ l f r).obj F).IsMixedOfWeightsAtMost ι (w + r)
 
@@ -291,6 +294,8 @@ def HasDirectImageComplexWeightBound (k₀ : Type u) [Field k₀] [Finite k₀] 
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] : Prop :=
+  haveI : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
   ∀ (w : ℝ) (K : WeilComplex k₀ l X), K.IsMixedOfWeightsAtMost ι w →
     ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w
 

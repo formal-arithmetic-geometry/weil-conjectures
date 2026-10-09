@@ -1168,6 +1168,7 @@ end Constituent
 section Fourier
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 variable (k₀ l X) in
 /-- The internal hom `B ↦ [A, B]` out of a fixed pro-étale Weil sheaf, as a functor. -/
@@ -1241,6 +1242,12 @@ noncomputable def affinePlane : Scheme.{u} :=
 
 noncomputable instance : (affinePlane k₀).Over (Spec (CommRingCat.of k₀)) :=
   ⟨pullback.fst _ _ ≫ affineLine k₀ ↘ Spec (CommRingCat.of k₀)⟩
+
+instance : LocallyOfFiniteType (affinePlane k₀ ↘ Spec (CommRingCat.of k₀)) := by
+  have : LocallyOfFiniteType (pullback.fst (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀))) :=
+    MorphismProperty.pullback_fst _ _ inferInstance
+  exact inferInstanceAs (LocallyOfFiniteType (pullback.fst _ _ ≫ _))
 
 variable (k₀) in
 /-- The first projection `pr₁ : 𝔸¹ ×_{k₀} 𝔸¹ ⟶ 𝔸¹`. -/
