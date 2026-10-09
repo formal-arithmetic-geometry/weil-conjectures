@@ -222,7 +222,7 @@ model of `H¹(C, ℤ / ℓⁿ)` this gives maps `Ψ n` from `ℤ / ℓⁿ`-torso
   bundles along `g` (invariance of cup product and trace under the automorphism `g` of `C`);
 * the reduction `ℤ / ℓⁿ⁺¹ → ℤ / ℓⁿ` of torsors corresponds to the `ℓ`-th power map
   `Pic(C)[ℓⁿ⁺¹] → Pic(C)[ℓⁿ]` (the compatibility of the Kummer sequences and traces). -/
-theorem _root_.AlgebraicGeometry.Scheme.EtaleTorsor.exists_picTorsionPairing {C : Scheme.{u}}
+theorem exists_picTorsionPairing {C : Scheme.{u}}
     (p : C ⟶ Spec (.of K)) [IsCurve p] [SmoothOfRelativeDimension 1 p] [IsProper p]
     [GeometricallyConnected p] (l : ℕ) [Fact l.Prime] [Fact (ringChar K ≠ l)]
     [ConnectedSpace p.geometricFiber] (s : Spec (.of (AlgebraicClosure K)) ⟶ p.geometricFiber)
