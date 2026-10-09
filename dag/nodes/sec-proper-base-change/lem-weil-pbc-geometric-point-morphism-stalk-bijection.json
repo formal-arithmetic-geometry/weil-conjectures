@@ -15,9 +15,97 @@
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-abelian-etale-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Morphisms from the spectrum of a field.) For a field $K$ and a scheme $X$, by [lem-weil-pbc-morphism-from-spec-field] a morphism $g:\\operatorname{Spec}K\\to X$ is the same as a pair $(x,\\varphi)$ of a point $x\\in X$ and a field homomorphism $\\varphi:\\kappa(x)\\to K$, via $g=j_x\\circ\\operatorname{Spec}(\\varphi)$, where $j_x:\\operatorname{Spec}\\kappa(x)\\to X$ is the canonical morphism; write $g=(x,\\varphi)$. Two rules follow. (i) If $h:X\\to Y$ is a morphism and $r_x:\\kappa(h(x))\\to\\kappa(x)$ the induced map of residue fields, then $h\\circ(x,\\varphi)=(h(x),\\varphi\\circ r_x)$: by [lem-weil-pbc-residue-field-point-naturality] $h\\circ j_x=j_{h(x)}\\circ\\operatorname{Spec}(r_x)$, so $h\\circ g=j_{h(x)}\\circ\\operatorname{Spec}(r_x)\\circ\\operatorname{Spec}(\\varphi)=j_{h(x)}\\circ\\operatorname{Spec}(\\varphi\\circ r_x)$ ($\\operatorname{Spec}$ is a contravariant functor [def-weil-affine-spectrum]), and the pair is read off by the uniqueness in [lem-weil-pbc-morphism-from-spec-field]. (ii) The scheme $\\operatorname{Spec}k'$ has a single point $\\xi'$, whose residue field is $k'$ itself with $j_{\\xi'}=\\mathrm{id}$ ([lem-weil-pbc-spec-field-point-residue-field] (1) for the field $R=k'$ and its prime $(0)$); hence by [lem-weil-pbc-morphism-from-spec-field] the morphism $a$ is $a=\\operatorname{Spec}(\\alpha)$ for a unique field homomorphism $\\alpha:k'\\to k$, which is injective (a ring map between fields). For every $g=(x,\\varphi):\\operatorname{Spec}k'\\to X$ we get $g\\circ a=j_x\\circ\\operatorname{Spec}(\\varphi)\\circ\\operatorname{Spec}(\\alpha)=j_x\\circ\\operatorname{Spec}(\\alpha\\circ\\varphi)$, i.e. $g\\circ a=(x,\\alpha\\circ\\varphi)$. Consequently precomposition with $a$ is injective on morphisms $\\operatorname{Spec}k'\\to X$: if $(x_1,\\alpha\\circ\\varphi_1)=(x_2,\\alpha\\circ\\varphi_2)$ then $x_1=x_2$ and $\\varphi_1=\\varphi_2$ because $\\alpha$ is injective.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-field-point-residue-field",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Remark 04FN (remark-map-stalks, lines 3416-3441): 'the functor above is clearly an equivalence'; written out here"
+   }
+  },
+  {
+   "text": "(Lifts as field embeddings.) Write $\\bar s'=(s,\\beta')$ with $s\\in S$ and $\\beta':\\kappa(s)\\to k'$ [def-weil-geometric-point]. By step 1 (ii), $\\bar s=\\bar s'\\circ a=(s,\\alpha\\circ\\beta')$, so $\\bar s$ lies over the same point $s$. Let $f:U\\to S$ be an object of $S_{\\Et}$ [def-weil-pbc-etale-site]. By step 1 (i), a morphism $\\bar u'=(u,\\varphi'):\\operatorname{Spec}k'\\to U$ satisfies $f\\circ\\bar u'=\\bar s'$ iff $f(u)=s$ and $\\varphi'\\circ r_u=\\beta'$, where $r_u:\\kappa(s)\\to\\kappa(u)$ is induced by $f$; likewise $\\bar u=(u,\\varphi):\\operatorname{Spec}k\\to U$ is a lift of $\\bar s$ iff $f(u)=s$ and $\\varphi\\circ r_u=\\alpha\\circ\\beta'$. So the pointed etale neighbourhoods of $\\bar s'$ (resp. $\\bar s$) [def-weil-pbc-pointed-etale-neighbourhoods] with underlying $U$ are the triples $(U,u,\\varphi')$ (resp. $(U,u,\\varphi)$) as above, and the rule $\\Phi:(U,\\bar u')\\mapsto(U,\\bar u'\\circ a)$ of the statement is $(U,u,\\varphi')\\mapsto(U,u,\\alpha\\circ\\varphi')$ (step 1 (ii)); in particular $(U,\\bar u'\\circ a)$ is a pointed etale neighbourhood of $\\bar s$, as the statement says.",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-pointed-etale-neighbourhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Remark 04FN (remark-map-stalks, lines 3416-3441): 'the functor above is clearly an equivalence'; written out here"
+   }
+  },
+  {
+   "text": "($\\Phi$ is bijective on objects.) Fix $U$. Injectivity: $\\alpha\\circ\\varphi'_1=\\alpha\\circ\\varphi'_2$ implies $\\varphi'_1=\\varphi'_2$ since $\\alpha$ is injective. Surjectivity: let $(U,u,\\varphi)$ be a pointed etale neighbourhood of $\\bar s$, so $f(u)=s$ and $\\varphi\\circ r_u=\\alpha\\circ\\beta'$. Since $f$ is etale, $\\kappa(u)$ is separable algebraic over $\\kappa(s)$ through $r_u$ [lem-weil-pbc-etale-residue-field-extension-separable], [def-weil-pbc-separable-algebraic-extension]. Let $y\\in\\kappa(u)$ and let $P=\\sum c_iT^i\\in\\kappa(s)[T]$ be nonzero with $\\sum r_u(c_i)y^i=0$. Applying $\\varphi$ gives $\\sum\\alpha(\\beta'(c_i))\\varphi(y)^i=0$, and the polynomial $\\sum\\alpha(\\beta'(c_i))T^i$ has coefficients in $\\alpha(k')$ and is nonzero ($\\alpha\\circ\\beta'$ is injective). So $\\varphi(y)$ is algebraic over $\\alpha(k')$, and since $k'$ is algebraically closed [def-weil-algebraic-closure], $\\varphi(y)\\in\\alpha(k')$ by [lem-weil-pbc-algebraic-over-algebraically-closed-subfield]. Hence $\\varphi(\\kappa(u))\\subseteq\\alpha(k')$; as $\\alpha:k'\\to\\alpha(k')$ is a bijective ring map, $\\varphi':=\\alpha^{-1}\\circ\\varphi:\\kappa(u)\\to k'$ is a field homomorphism with $\\alpha\\circ\\varphi'=\\varphi$, and $\\alpha\\circ(\\varphi'\\circ r_u)=\\varphi\\circ r_u=\\alpha\\circ\\beta'$ gives $\\varphi'\\circ r_u=\\beta'$ by injectivity of $\\alpha$. So $(U,u,\\varphi')$ is a pointed etale neighbourhood of $\\bar s'$ with $\\Phi(U,u,\\varphi')=(U,u,\\varphi)$.",
+   "uses": [
+    "lem-weil-pbc-etale-residue-field-extension-separable",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-algebraic-over-algebraically-closed-subfield"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Remark 04FN (remark-map-stalks, lines 3416-3441): 'the functor above is clearly an equivalence'; written out here"
+   }
+  },
+  {
+   "text": "($\\Phi$ is an isomorphism of categories.) A morphism $(U,\\bar u')\\to(V,\\bar v')$ of pointed etale neighbourhoods of $\\bar s'$ is an $S$-morphism $h:U\\to V$ with $h\\circ\\bar u'=\\bar v'$; a morphism $(U,\\bar u'\\circ a)\\to(V,\\bar v'\\circ a)$ of pointed etale neighbourhoods of $\\bar s$ is an $S$-morphism $h$ with $h\\circ\\bar u'\\circ a=\\bar v'\\circ a$ [def-weil-pbc-pointed-etale-neighbourhoods]. By the injectivity of precomposition with $a$ (step 1 (ii), applied to $X=V$) the two conditions on $h$ are equivalent. Hence $\\Phi$, defined on morphisms by $h\\mapsto h$, is a functor that is bijective on every set of morphisms and (step 3) on objects: an isomorphism of categories $\\mathcal N_{\\bar s'}\\to\\mathcal N_{\\bar s}$, compatible with the functors to $S_{\\Et}$ forgetting the lift. (This is the equivalence asserted in Stacks 04FN, in the stronger form of an isomorphism.)",
+   "uses": [
+    "def-weil-pbc-pointed-etale-neighbourhoods"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Remark 04FN (remark-map-stalks, lines 3416-3441): 'the functor above is clearly an equivalence'; written out here"
+   }
+  },
+  {
+   "text": "(The map of stalks.) By [def-weil-pbc-geometric-stalks], $\\mathcal F_{\\bar s'}=\\varinjlim_{\\mathcal N_{\\bar s'}^{\\mathrm{op}}}D'$ and $\\mathcal F_{\\bar s}=\\varinjlim_{\\mathcal N_{\\bar s}^{\\mathrm{op}}}D$ with $D'(U,\\bar u')=\\mathcal F(U)$, $D(U,\\bar u)=\\mathcal F(U)$ and both sending a morphism $h$ to $\\mathcal F(h)$; by step 4, $D'=D\\circ\\Phi^{\\mathrm{op}}$. The universal property of $\\varinjlim D'$ gives the map $a^*$ with $a^*([U,\\bar u',\\sigma])=[U,\\bar u'\\circ a,\\sigma]$ (the coprojections $\\mathcal F(U)=D(\\Phi(U,\\bar u'))\\to\\mathcal F_{\\bar s}$ form a cocone on $D'$; Stacks Categories, Lemma 002K, categories-lemma-functorial-colimit, with $t=\\mathrm{id}$), and it is the only map with this property because every element of a colimit of sets is the class of some $\\sigma\\in D'(U,\\bar u')$. In the same way $\\Phi^{-1}$ gives $b:\\mathcal F_{\\bar s}\\to\\mathcal F_{\\bar s'}$ with $b([U,\\bar u'\\circ a,\\sigma])=[U,\\bar u',\\sigma]$; as every element of $\\mathcal F_{\\bar s}$ has the form $[\\Phi(U,\\bar u'),\\sigma]$ (step 3), $b\\circ a^*$ and $a^*\\circ b$ are the identity on all classes, so $a^*$ is bijective. If $\\mathcal F$ is a sheaf of abelian groups [def-weil-pbc-abelian-etale-sheaves], its stalks are the colimits of the same diagrams in abelian groups; the index categories are cofiltered [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered], so these filtered colimits have the colimits of the underlying sets as underlying sets, and $a^*$, being induced by the additive coprojections, is additive; a bijective additive map is an isomorphism of abelian groups.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "def-weil-pbc-pointed-etale-neighbourhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Remark 04FN (remark-map-stalks, lines 3416-3441) and the description of stalk elements as triples after Definition 040R (definition-stalk, lines 3342-3372); Categories, Lemma 002K (categories-lemma-functorial-colimit, categories.tex line 1437)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-field-point-residue-field",
+  "def-weil-residue-field",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "lem-weil-pbc-etale-residue-field-extension-separable",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-algebraic-over-algebraically-closed-subfield",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Remark 04FN (remark-map-stalks, line 3416); Stacks only says 'the functor above is clearly an equivalence', the argument (lifts as field embeddings, residue fields of etale morphisms separable algebraic, algebraic elements over the algebraically closed k' lie in k') is written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,7 +137,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,7 +161,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Etale Cohomology Remark 04FN (a morphism of geometric points induces a bijection of stalks); self-contained; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Five steps written by the worker (Stacks 04FN only says the functor is 'clearly an equivalence'): morphisms from Spec of a field as pairs (point, residue field embedding), lifts of geometric points as embeddings of kappa(u), bijectivity on objects from kappa(u) separable algebraic over kappa(s) for etale U -> S (new Mathlib leaf: the IsSeparable instance FormallyUnramified.lean:158 with the etale instances, verified) and 'algebraic over an algebraically closed subfield lies in it' (new Mathlib leaf IntermediateField.eq_bot_of_isAlgClosed_of_isAlgebraic, IsAlgClosed/Basic.lean:245, verified), isomorphism of categories (elementary), the comparison map of colimits bijective and additive for abelian sheaves. Stage-3 note: the statement cites def-weil-pbc-etale-sheaves for 'sheaf of sets', which defines abelian sheaves. Lean candidate reported, not attached: Scheme.pointSmallEtaleCongr (slopmaster2 EtalePoint.lean:457, sorry-free) covers only a an isomorphism."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+  "worker": "stage1",
+  "summary": "Read Stacks Remark 04FN (etale-cohomology.tex 3416-3441; it only asserts the functor is 'clearly an equivalence'). Wrote the proof by agent in five steps: morphisms Spec K -> X as pairs (point, field map) with the composition rules (lem-weil-pbc-morphism-from-spec-field, lem-weil-pbc-residue-field-point-naturality, lem-weil-pbc-spec-field-point-residue-field), a = Spec(alpha) and precomposition with a injective; lifts of s-bar' / s-bar to U as kappa(s)-embeddings of kappa(u); bijectivity on objects from the separability (algebraicity) of kappa(u)/kappa(s) for etale U -> S (new Mathlib leaf lem-weil-pbc-etale-residue-field-extension-separable) and the fact that an element algebraic over the algebraically closed alpha(k') lies in alpha(k') (new Mathlib leaf lem-weil-pbc-algebraic-over-algebraically-closed-subfield); the functor is an isomorphism of categories (not just an equivalence); the stalk map is the comparison map of colimits along it, bijective, additive for abelian sheaves. Statement and stmt_deps kept; the clause about modules does not occur in Stacks 04FN (it speaks of 'stalk functors' only), the item's abelian clause is covered. lem-weil-pbc-etale-fibre-discrete-separable-points and lem-weil-pbc-etale-cover-geometric-point-lift were not needed."
  }
 }

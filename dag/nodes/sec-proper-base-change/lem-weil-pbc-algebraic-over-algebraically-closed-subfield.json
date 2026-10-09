@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-algebraic-over-algebraically-closed-subfield",
+ "kind": "statement",
+ "title": "An element algebraic over an algebraically closed subfield lies in it",
+ "statement": "Let $k'$ be an algebraically closed field [def-weil-algebraic-closure], $k$ a field and $\\alpha:k'\\to k$ a field homomorphism (so $k$ is a field extension of $k'$ through $\\alpha$ [def-pc-field-extension]). If $x\\in k$ is algebraic over $k'$, i.e. $P(x)=0$ for a nonzero polynomial $P$ with coefficients in $\\alpha(k')$, then $x\\in\\alpha(k')$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Definition 09GQ (fields-definition-algebraically-closed, line 901: F is algebraically closed if every algebraic extension E/F is trivial), applied to the algebraic extension alpha(k')(x)/alpha(k'), equivalently the subfield of k of elements algebraic over alpha(k'); its equivalence with the root-of-polynomials definition of def-weil-algebraic-closure is Fields, Lemma 09GR (fields-lemma-algebraically-closed, line 911)"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebraically closed subfield contains every element algebraic over it; field hom from algebraically closed field, element of target algebraic over image lies in image",
+   "results": "algebraicClosure.isAlgebraic, algebraicClosure.isAlgClosure (Mathlib.FieldTheory.AlgebraicClosure), IsAlgClosed, isAlgClosure_iff, AlgebraicClosure.isAlgClosed, IntermediateField.instIsAlgClosureAlgebraicClosure...",
+   "date": "2026-10-10",
+   "verdict": "ingredients (algebraicClosure.isAlgebraic) found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "element algebraic over an algebraically closed field k lies in the image of algebraMap k K",
+   "results": "IsSepClosed.algebraMap_surjective (Mathlib.FieldTheory.IsSepClosed), IsAlgClosed.algebraMap_bijective_of_isIntegral (Mathlib.FieldTheory.IsAlgClosed.Basic), IsIntegrallyClosedIn.algebraMap_eq_of_integral, Algebra.IsAlgebraic.range_eval_eq_rootSet_minpoly",
+   "date": "2026-10-10",
+   "verdict": "generalization: algebraMap_bijective_of_isIntegral for an integral algebra; applied to the intermediate field of algebraic elements"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If k' is algebraically closed and k'->k a field embedding, any K-algebra map from an algebraic extension L of K into k factors uniquely through k'",
+   "results": "Field.embEquivOfIsAlgClosed (Mathlib.FieldTheory.SeparableDegree), IsAlgClosed.lift, IsAlgClosed.lift_def, Field.embProdEmbOfIsAlgebraic, IntermediateField.Lifts.nonempty_algHom_of_exist_lifts_finset, IntermediateField.exists_algHom_of_splits",
+   "date": "2026-10-10",
+   "verdict": "no direct factorization statement; the elementwise statement of this node is the leaf below"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed ?k, IsAlgebraic ?k ?x, ?x ∈ Set.range (algebraMap ?k ?K)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match by this pattern"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'algebraMap_surjective_of_is\\|eq_bot_of_isAlgClosed\\|isAlgClosed_of' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/; sed -n 215,250p FieldTheory/IsAlgClosed/Basic.lean; grep -n 'def algebraicClosure\\|instance isAlgebraic\\|mem_algebraicClosure_iff' FieldTheory/AlgebraicClosure.lean",
+   "results": "FieldTheory/IsAlgClosed/Basic.lean:245 IntermediateField.eq_bot_of_isAlgClosed_of_isAlgebraic ([IsAlgClosed k] [Algebra k K] (L : IntermediateField k K) [Algebra.IsAlgebraic k L] : L = ⊥); FieldTheory/AlgebraicClosure.lean:39 algebraicClosure F E (intermediate field of elements of E algebraic over F), :54 mem_algebraicClosure_iff (x ∈ algebraicClosure F E ↔ IsAlgebraic F x), :108 instance isAlgebraic : Algebra.IsAlgebraic F (algebraicClosure F E); the name IsAlgClosed.algebraMap_surjective_of_isAlgebraic is mentioned in a docstring (Basic.lean:242) but not declared",
+   "date": "2026-10-10",
+   "verdict": "match (specializes in one line)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IntermediateField.eq_bot_of_isAlgClosed_of_isAlgebraic",
+  "file": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+  "line": 245,
+  "how": "specializes in one line: with `Algebra k' k := α.toAlgebra`, apply `IntermediateField.eq_bot_of_isAlgClosed_of_isAlgebraic (algebraicClosure k' k)` (its hypothesis `Algebra.IsAlgebraic k' (algebraicClosure k' k)` is the instance `algebraicClosure.isAlgebraic`, Mathlib/FieldTheory/AlgebraicClosure.lean:108); x algebraic over k' lies in `algebraicClosure k' k` (`mem_algebraicClosure_iff`, AlgebraicClosure.lean:54), which is `⊥`, i.e. `x ∈ Set.range (algebraMap k' k) = α(k')` (`IntermediateField.mem_bot`)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-etale-residue-field-extension-separable",
+ "kind": "statement",
+ "title": "Residue field extensions of an etale morphism are separable algebraic",
+ "statement": "Let $f:X\\to Y$ be an etale morphism of schemes [def-weil-etale-morphism], let $x\\in X$, and let $r:\\kappa(f(x))\\to\\kappa(x)$ be the field homomorphism induced by $f$ on residue fields [def-weil-residue-field]. Then $\\kappa(x)$, viewed as a field extension of $\\kappa(f(x))$ through $r$, is separable algebraic [def-weil-pbc-separable-algebraic-extension]: every element of $\\kappa(x)$ is algebraic and separable over $\\kappa(f(x))$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 02G8 (morphisms-lemma-unramified-etale-fibres, line 7827), part (1): for an unramified morphism the extension kappa(x)/kappa(f(x)) is finite separable; an etale morphism is unramified (Morphisms, Lemma 02GK = morphisms-lemma-etale-smooth-unramified; directly from def-weil-etale-morphism, which defines etale as flat, locally of finite presentation and unramified)"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residue field extension of an étale morphism of schemes is separable",
+   "results": "Algebra.instIsSeparableResidueFieldOfFormallyUnramified (Mathlib.RingTheory.Unramified.LocalRing: local formally unramified essentially finite type R -> S gives IsSeparable of residue fields), Scheme.Hom.residueFieldMap (Mathlib.AlgebraicGeometry.ResidueField), Algebra.FormallyEtale.iff_isSeparable (Mathlib.RingTheory.Etale.Field), Algebra.FormallyUnramified.iff_map_maximalIdeal_eq, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-10",
+   "verdict": "match via the scheme-level instance found by loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSeparable (AlgebraicGeometry.Scheme.residueField _ _) (AlgebraicGeometry.Scheme.residueField _ _)",
+   "results": "AlgebraicGeometry.FormallyUnramified.instIsSeparableCarrierResidueFieldCoeContinuousMapCarrierCarrierCommRingCatHomTopCatBaseOfLocallyOfFiniteType (Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified): [FormallyUnramified f] [LocallyOfFiniteType f] (x : X) : Algebra.IsSeparable (Y.residueField (f x)) (X.residueField x)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'residueField' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/*.lean | grep -i 'separable'; grep -n 'instance' Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "results": "Morphisms/FormallyUnramified.lean:158-161 the instance above (algebra structure (f.residueFieldMap x).hom.toAlgebra); Morphisms/Etale.lean:118 instance [Etale f] : FormallyUnramified f; Etale.lean:114 [Etale f] : Smooth f; Morphisms/Smooth.lean:241 [Smooth f] : LocallyOfFinitePresentation f; Morphisms/FinitePresentation.lean:108 LocallyOfFinitePresentation f -> LocallyOfFiniteType f",
+   "date": "2026-10-10",
+   "verdict": "match (specializes in one line through instances)"
+  },
+  {
+   "tool": "local_search",
+   "query": "Algebra.IsSeparable (definition used in the conclusion)",
+   "results": "Algebra.IsSeparable, Mathlib/FieldTheory/Separable.lean:549 (every element has separable minimal polynomial; algebraicity built in: Algebra.IsSeparable.isAlgebraic line 570)",
+   "date": "2026-10-10",
+   "verdict": "the conclusion is def-weil-pbc-separable-algebraic-extension (itself a leaf on Algebra.IsSeparable)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.FormallyUnramified.instIsSeparableCarrierResidueFieldCoeContinuousMapCarrierCarrierCommRingCatHomTopCatBaseOfLocallyOfFiniteType",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+  "line": 158,
+  "how": "specializes in one line: the anonymous instance (lines 158-161) gives `Algebra.IsSeparable (Y.residueField (f x)) (X.residueField x)` with the algebra structure `(f.residueFieldMap x).hom.toAlgebra` (= r) for `[FormallyUnramified f] [LocallyOfFiniteType f]`; for `[Etale f]` both hypotheses are instances: `FormallyUnramified f` (Morphisms/Etale.lean:118) and `LocallyOfFiniteType f` via `Smooth f` (Etale.lean:114), `LocallyOfFinitePresentation f` (Morphisms/Smooth.lean:241), `LocallyOfFiniteType f` (Morphisms/FinitePresentation.lean:108)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
