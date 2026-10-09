@@ -2,7 +2,7 @@
  "id": "lem-weil-reverse-charpoly-coefficients",
  "kind": "statement",
  "title": "Coefficients of the reverse characteristic polynomial",
- "statement": "Let $K$ be a field, $V$ a finite-dimensional $K$-vector space [def-weil-finite-dimensional-subspace] of dimension $n=\\dim_KV$ [def-weil-vector-space-dimension], $F:V\\to V$ a $K$-linear endomorphism, $T$ an indeterminate, and $P(T)=\\det(1-TF\\mid V)\\in K[T]$ [def-weil-polynomial-ring] the reverse characteristic polynomial of $F$ [def-weil-reverse-characteristic-polynomial]. Then:\n\n1. the constant coefficient of $P$ is $P(0)=1$;\n\n2. $\\deg P\\leq n$, and the coefficient of $T^n$ in $P$ is $(-1)^n\\det(F\\mid V)$ [def-weil-endomorphism-determinant];\n\n3. consequently, $\\deg P=n$ with leading coefficient $(-1)^n\\det(F\\mid V)$ if $F$ is invertible, and $\\deg P<n$ if $F$ is not invertible.",
+ "statement": "Let $K$ be a field, $V$ a finite-dimensional $K$-vector space [def-weil-finite-dimensional-subspace] of dimension $n=\\dim_KV$ [def-weil-vector-space-dimension], $F:V\\to V$ a $K$-linear endomorphism, $T$ an indeterminate, and $P(T)=\\det(1-TF\\mid V)\\in K[T]$ [def-weil-polynomial-ring] the reverse characteristic polynomial of $F$ [def-weil-reverse-characteristic-polynomial]. Then:\n\n1. the constant coefficient [def-weil-polynomial-coefficient] of $P$ is $P(0)=1$;\n\n2. $\\deg P\\leq n$, and the coefficient of $T^n$ in $P$ is $(-1)^n\\det(F\\mid V)$ [def-weil-endomorphism-determinant];\n\n3. consequently, $\\deg P=n$ with leading coefficient $(-1)^n\\det(F\\mid V)$ if $F$ is invertible, and $\\deg P<n$ if $F$ is not invertible.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
   "place": "node def-weil-smooth-proper-cohomological-family, order 2856, last sentence: 'It has constant coefficient $1$, degree $\\dim_{\\Ql}V_{i,\\ell}$, and leading coefficient $(-1)^{\\dim V_{i,\\ell}}\\det(F_{i,\\ell})$' (the same claim is made in literature/blueprint/master/blueprint/sec-trace-formula/sk-def-frobmod/def-zl-frobenius-trace-series.md)"
@@ -12,11 +12,103 @@
   "def-weil-vector-space-dimension",
   "def-weil-polynomial-ring",
   "def-weil-reverse-characteristic-polynomial",
-  "def-weil-endomorphism-determinant"
+  "def-weil-endomorphism-determinant",
+  "def-weil-polynomial-coefficient"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Step 1: $P$ is the reverse of the characteristic polynomial. Let $\\chi_F(T)=\\det(T-F\\mid V)\\in K[T]$ be the characteristic polynomial of $F$ [def-weil-characteristic-polynomial]. By [lem-weil-reverse-charpoly-eq-reverse], $P(T)=\\det(1-TF\\mid V)=\\operatorname{rev}(\\chi_F)(T)$, the reverse of $\\chi_F$ [def-weil-reverse-polynomial] taken with respect to $\\deg\\chi_F$.",
+   "uses": [
+    "def-weil-reverse-characteristic-polynomial",
+    "def-weil-characteristic-polynomial",
+    "def-weil-reverse-polynomial",
+    "lem-weil-reverse-charpoly-eq-reverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+    "place": "written by an agent (no linear-algebra textbook in literature/; WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. XIV §3); the claim is that of literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md, order 2856, last sentence, stated there without proof"
+   }
+  },
+  {
+   "text": "Step 2: the two coefficients of $\\chi_F$ that matter. Write $\\chi_F(T)=\\sum_{k\\ge0}a_kT^k$ with $a_k=[T^k]\\chi_F\\in K$ [def-weil-polynomial-coefficient]. By [lem-weil-charpoly-monic-degree], $\\chi_F$ is monic of degree $n$: $\\deg\\chi_F=n$, $a_n=1$ and $a_k=0$ for $k>n$. By [lem-weil-charpoly-constant-coefficient-det], $\\det(F\\mid V)=(-1)^na_0$ [def-weil-endomorphism-determinant]; multiplying by $(-1)^n$ and using $((-1)^n)^2=1$ gives $a_0=(-1)^n\\det(F\\mid V)$. (For $n=0$: $\\chi_F=1$, $a_0=1=\\det(F\\mid 0)$, consistent.)",
+   "uses": [
+    "def-weil-polynomial-coefficient",
+    "lem-weil-charpoly-monic-degree",
+    "lem-weil-charpoly-constant-coefficient-det",
+    "def-weil-endomorphism-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+    "place": "written by an agent (no linear-algebra textbook in literature/; WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. XIV §3); the claim is that of literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md, order 2856, last sentence, stated there without proof"
+   }
+  },
+  {
+   "text": "Step 3: the coefficients of $P$. Since $\\deg\\chi_F=n$ (Step 2), [lem-weil-reverse-polynomial-coefficients] applied to $f=\\chi_F$, $d=n$, together with Step 1, gives $[T^j]P=a_{n-j}$ for $0\\le j\\le n$ and $[T^j]P=0$ for $j>n$ [def-weil-polynomial-coefficient].",
+   "uses": [
+    "lem-weil-reverse-polynomial-coefficients",
+    "def-weil-polynomial-coefficient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+    "place": "written by an agent (no linear-algebra textbook in literature/; WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. XIV §3); the claim is that of literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md, order 2856, last sentence, stated there without proof"
+   }
+  },
+  {
+   "text": "Step 4: claim 1. By Step 3 with $j=0$ and Step 2, the constant coefficient of $P$ is $P(0)=[T^0]P=a_n=1$. In particular $P\\neq0$. (Directly: $P(0)=\\det(1-0\\cdot F\\mid V)=\\det(1_V)=1$; in Mathlib this is `Matrix.eval_charpolyRev`.)",
+   "uses": [
+    "def-weil-polynomial-coefficient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+    "place": "written by an agent (no linear-algebra textbook in literature/; WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. XIV §3); the claim is that of literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md, order 2856, last sentence, stated there without proof"
+   }
+  },
+  {
+   "text": "Step 5: claim 2. By Step 3, $[T^j]P=0$ for every $j>n$, so $\\deg P\\le n$ [def-weil-polynomial-coefficient]; and by Step 3 with $j=n$ and Step 2, $[T^n]P=a_0=(-1)^n\\det(F\\mid V)$.",
+   "uses": [
+    "def-weil-polynomial-coefficient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+    "place": "written by an agent (no linear-algebra textbook in literature/; WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. XIV §3); the claim is that of literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md, order 2856, last sentence, stated there without proof"
+   }
+  },
+  {
+   "text": "Step 6: claim 3. By Step 4, $P\\neq0$, and by Step 5, $\\deg P\\le n$; hence $\\deg P=n$ if and only if $[T^n]P\\neq0$, i.e. (Step 5, $(-1)^n\\neq0$) if and only if $\\det(F\\mid V)\\neq0$, which by [lem-weil-endomorphism-invertible-iff-det-nonzero] holds if and only if $F$ is invertible. If $F$ is invertible, then $\\deg P=n$ and the leading coefficient of $P$ is $[T^{\\deg P}]P=[T^n]P=(-1)^n\\det(F\\mid V)$ [def-weil-polynomial-coefficient]. If $F$ is not invertible, then $[T^n]P=0$ and $\\deg P\\le n$, so $\\deg P<n$.",
+   "uses": [
+    "lem-weil-endomorphism-invertible-iff-det-nonzero",
+    "def-weil-polynomial-coefficient",
+    "def-weil-endomorphism-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+    "place": "written by an agent (no linear-algebra textbook in literature/; WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. XIV §3); the claim is that of literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md, order 2856, last sentence, stated there without proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-characteristic-polynomial",
+  "def-weil-reverse-polynomial",
+  "lem-weil-reverse-charpoly-eq-reverse",
+  "def-weil-polynomial-coefficient",
+  "lem-weil-charpoly-monic-degree",
+  "lem-weil-charpoly-constant-coefficient-det",
+  "def-weil-endomorphism-determinant",
+  "lem-weil-reverse-polynomial-coefficients",
+  "lem-weil-endomorphism-invertible-iff-det-nonzero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+  "place": "order 2856, last sentence (claim only, no proof); proof written by an agent from standard linear algebra; WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. XIV §3"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -31,10 +123,17 @@
    "results": "Mathlib/Algebra/Polynomial/Reverse.lean:221 `Polynomial.coeff_reverse : f.reverse.coeff n = f.coeff (revAt f.natDegree n)`, :225 `Polynomial.coeff_zero_reverse : coeff (reverse f) 0 = leadingCoeff f`, :236 `Polynomial.reverse_natDegree_le`, :257 `Polynomial.reverse_natDegree : f.reverse.natDegree = f.natDegree - f.natTrailingDegree`",
    "date": "2026-10-09",
    "verdict": "no match as one statement; these transfer degree and coefficients between charpoly and its reverse, which with the charpoly lemmas prove claims 2 and 3 (deg P = n iff charpoly.coeff 0 ≠ 0 iff det F ≠ 0)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'charpolyRev' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (all files); grep -n 'natDegree.*charpolyRev\\|charpolyRev.*natDegree\\|coeff.*charpolyRev' Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean",
+   "results": "only Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean: def charpolyRev (:292), reverse_charpoly (:294), charpoly_inv (:315), eval_charpolyRev (:329), coeff_charpolyRev_eq_neg_trace (:336), isUnit_charpolyRev_of_isNilpotent (:343), a coefficient formula via minors (:468); no LinearMap.charpolyRev, no lemma on the degree of charpolyRev or its coefficient of T^n",
+   "date": "2026-10-09",
+   "verdict": "no match as one statement; claim 1 is Matrix.eval_charpolyRev (for a matrix of F), claims 2 and 3 are split into the leaves lem-weil-reverse-charpoly-eq-reverse, lem-weil-charpoly-monic-degree, lem-weil-charpoly-constant-coefficient-det, lem-weil-reverse-polynomial-coefficients, lem-weil-endomorphism-invertible-iff-det-nonzero"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -52,5 +151,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-reverse-charpoly-coefficients",
+  "worker": "stage1",
+  "summary": "No Lean and no proof existed; the blueprint states the claim without proof (def-weil-smooth-proper-cohomological-family, order 2856) and literature/ has no linear-algebra textbook, so the proof is written by an agent (WANTED: Lang, Algebra, Ch. XIV §3). Mathlib has no single statement (no LinearMap.charpolyRev, no degree or top-coefficient lemma for Matrix.charpolyRev). Proof in six steps: P = rev(chi_F); chi_F monic of degree n with constant coefficient (-1)^n det F; coefficients of the reverse; then the three claims, the last via invertible iff det != 0. Seven new nodes, all Mathlib leaves: def-weil-characteristic-polynomial (LinearMap.charpoly), def-weil-reverse-polynomial (Polynomial.reverse), lem-weil-reverse-charpoly-eq-reverse (Matrix.reverse_charpoly + LinearMap.charpoly_toMatrix), lem-weil-charpoly-monic-degree (LinearMap.charpoly_monic, charpoly_natDegree), lem-weil-charpoly-constant-coefficient-det (LinearMap.det_eq_sign_charpoly_coeff), lem-weil-reverse-polynomial-coefficients (Polynomial.coeff_reverse), lem-weil-endomorphism-invertible-iff-det-nonzero (LinearMap.isUnit_iff_isUnit_det). Statement kept; added def-weil-polynomial-coefficient to stmt_deps (coefficients and degree are used)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

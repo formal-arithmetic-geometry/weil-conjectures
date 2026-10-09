@@ -1,0 +1,49 @@
+{
+ "id": "lem-weil-reverse-charpoly-eq-reverse",
+ "kind": "statement",
+ "title": "The reverse characteristic polynomial is the reverse of the characteristic polynomial",
+ "statement": "Let $K$ be a field, $V$ a finite-dimensional $K$-vector space [def-weil-finite-dimensional-subspace] of dimension $n=\\dim_KV$ [def-weil-vector-space-dimension], $F:V\\to V$ a $K$-linear endomorphism, $\\chi_F(T)=\\det(T-F\\mid V)$ its characteristic polynomial [def-weil-characteristic-polynomial] and $\\det(1-TF\\mid V)$ its reverse characteristic polynomial [def-weil-reverse-characteristic-polynomial]. Then\n\n$$\n\\det(1-TF\\mid V)=\\operatorname{rev}(\\chi_F)(T)=T^n\\chi_F(1/T)\n$$\n\n[def-weil-reverse-polynomial].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+  "place": "a standard fact of linear algebra used in the proof of lem-weil-reverse-charpoly-coefficients, whose claim is made at node def-weil-smooth-proper-cohomological-family, order 2856, last sentence, without proof; no linear-algebra textbook is in literature/ (WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. XIV §3, the characteristic polynomial)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension",
+  "def-weil-characteristic-polynomial",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-reverse-polynomial"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'reverse_charpoly\\|def charpolyRev' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean; grep -rn 'charpolyRev' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (outside Coeff.lean: none)",
+   "results": "Coeff.lean:292 `Matrix.charpolyRev M := det (1 - (X : R[X]) • M.map C)`; Coeff.lean:294 `Matrix.reverse_charpoly (M : Matrix n n R) : M.charpoly.reverse = M.charpolyRev`; no `LinearMap.charpolyRev`",
+   "date": "2026-10-09",
+   "verdict": "generalization: the matrix statement; for the matrix A of F in a basis b, it gives the node by `LinearMap.charpoly_toMatrix`"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Matrix.reverse_charpoly",
+  "file": "Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean",
+  "how": "specializes in one line: for a basis `b` of `V` and `A = LinearMap.toMatrix b b F`, `det(1 - T F | V) = A.charpolyRev` (match of def-weil-reverse-characteristic-polynomial) `= A.charpoly.reverse` (`(Matrix.reverse_charpoly A).symm`) `= F.charpoly.reverse` (`LinearMap.charpoly_toMatrix`, Mathlib/LinearAlgebra/Charpoly/ToMatrix.lean:43)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-reverse-charpoly-coefficients",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

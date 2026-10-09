@@ -1,0 +1,47 @@
+{
+ "id": "lem-weil-reverse-polynomial-coefficients",
+ "kind": "statement",
+ "title": "Coefficients of the reverse of a polynomial",
+ "statement": "Let $R$ be a commutative ring, $T$ an indeterminate and $f\\in R[T]$ [def-weil-polynomial-ring] with $d=\\deg f$ ($d=0$ for $f=0$), and let $\\operatorname{rev}(f)$ be its reverse [def-weil-reverse-polynomial]. Then for every integer $j\\ge0$ [def-weil-polynomial-coefficient]\n\n$$\n[T^j]\\operatorname{rev}(f)=\\begin{cases}[T^{d-j}]f,&0\\le j\\le d,\\\\0,&j>d.\\end{cases}\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+  "place": "a standard fact of linear algebra used in the proof of lem-weil-reverse-charpoly-coefficients, whose claim is made at node def-weil-smooth-proper-cohomological-family, order 2856, last sentence, without proof; no linear-algebra textbook is in literature/ (WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. XIV §3, the characteristic polynomial)"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-reverse-polynomial",
+  "def-weil-polynomial-coefficient"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem coeff_reverse\\|theorem revAt_le\\|lemma revAt_eq_self_of_lt\\|theorem coeff_zero_reverse' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Reverse.lean; grep -n 'theorem coeff_eq_zero_of_natDegree_lt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Degree/Operations.lean",
+   "results": "Reverse.lean:221 `Polynomial.coeff_reverse (f : R[X]) (n : ℕ) : f.reverse.coeff n = f.coeff (revAt f.natDegree n)`; :66 `revAt_le (H : i ≤ N) : revAt N i = N - i`; :70 `revAt_eq_self_of_lt (h : N < i) : revAt N i = i`; :225 `coeff_zero_reverse`; Operations.lean:85 `coeff_eq_zero_of_natDegree_lt`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.coeff_reverse",
+  "file": "Mathlib/Algebra/Polynomial/Reverse.lean",
+  "how": "specializes in one line: rewrite `coeff_reverse` with `revAt_le` for $j\\le d$; for $j>d$ with `revAt_eq_self_of_lt` and `coeff_eq_zero_of_natDegree_lt`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-reverse-charpoly-coefficients",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

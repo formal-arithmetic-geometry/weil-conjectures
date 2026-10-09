@@ -1,0 +1,49 @@
+{
+ "id": "def-weil-characteristic-polynomial",
+ "kind": "definition",
+ "title": "Characteristic polynomial of an endomorphism",
+ "statement": "Let $K$ be a field, $V$ a finite-dimensional $K$-vector space [def-weil-finite-dimensional-subspace] of dimension $n=\\dim_KV$ [def-weil-vector-space-dimension], $F:V\\to V$ a $K$-linear endomorphism, and $T$ an indeterminate, with polynomial ring $K[T]$ [def-weil-polynomial-ring]. The characteristic polynomial of $F$ is\n\n$$\n\\chi_F(T)=\\det(T-F\\mid V)\\in K[T],\n$$\n\nthe determinant [def-weil-endomorphism-determinant] of the $K[T]$-linear endomorphism $T-(F\\otimes1)$ of the free $K[T]$-module $V\\otimes_KK[T]$ of rank $n$. Concretely, if $A\\in M_n(K)$ [def-weil-matrix] is the matrix of $F$ in a basis of $V$, then $\\chi_F(T)=\\det(T\\,I_n-A)$, and this does not depend on the basis.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+  "place": "a standard fact of linear algebra used in the proof of lem-weil-reverse-charpoly-coefficients, whose claim is made at node def-weil-smooth-proper-cohomological-family, order 2856, last sentence, without proof; no linear-algebra textbook is in literature/ (WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. XIV §3, the characteristic polynomial)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension",
+  "def-weil-polynomial-ring",
+  "def-weil-endomorphism-determinant",
+  "def-weil-matrix"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def charpoly\\|theorem charpoly_toMatrix' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Charpoly/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean",
+   "results": "Mathlib/LinearAlgebra/Charpoly/Basic.lean:44 `LinearMap.charpoly f : R[X] := (toMatrix (chooseBasis R M) (chooseBasis R M) f).charpoly`; Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean:134 `Matrix.charpoly M := (charmatrix M).det` with `charmatrix M = scalar n X - (C : R →+* R[X]).mapMatrix M`; Mathlib/LinearAlgebra/Charpoly/ToMatrix.lean:43 `LinearMap.charpoly_toMatrix : (toMatrix b b f).charpoly = f.charpoly` for any basis b",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.charpoly",
+  "file": "Mathlib/LinearAlgebra/Charpoly/Basic.lean",
+  "how": "exact: `LinearMap.charpoly F` for `F : V →ₗ[K] V`; the basis description is `LinearMap.charpoly_toMatrix` (Mathlib/LinearAlgebra/Charpoly/ToMatrix.lean:43) with `Matrix.charpoly` (Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean:134)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-reverse-charpoly-coefficients",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

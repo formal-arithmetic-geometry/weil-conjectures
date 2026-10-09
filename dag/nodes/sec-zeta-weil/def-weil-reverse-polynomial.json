@@ -1,0 +1,46 @@
+{
+ "id": "def-weil-reverse-polynomial",
+ "kind": "definition",
+ "title": "Reverse of a polynomial",
+ "statement": "Let $R$ be a commutative ring, $T$ an indeterminate and $f(T)=\\sum_{k=0}^{d}a_kT^k\\in R[T]$ [def-weil-polynomial-ring] with $d=\\deg f$ [def-weil-polynomial-coefficient] (and $d=0$ for $f=0$). The reverse of $f$ is\n\n$$\n\\operatorname{rev}(f)(T)=\\sum_{k=0}^{d}a_kT^{d-k}\\in R[T],\n$$\n\nthat is, $T^{d}f(1/T)$: the coefficient of $T^{j}$ in $\\operatorname{rev}(f)$ is $a_{d-j}$ for $0\\le j\\le d$ and $0$ for $j>d$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+  "place": "a standard fact of linear algebra used in the proof of lem-weil-reverse-charpoly-coefficients, whose claim is made at node def-weil-smooth-proper-cohomological-family, order 2856, last sentence, without proof; no linear-algebra textbook is in literature/ (WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. XIV §3, the characteristic polynomial)"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-coefficient"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def reverse\\|def reflect\\|def revAt\\|theorem coeff_reverse' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Reverse.lean",
+   "results": "Reverse.lean:218 `Polynomial.reverse f := reflect f.natDegree f`; :88 `Polynomial.reflect N f` (coefficients re-indexed by `revAt N`); :52 `Polynomial.revAt N i = N - i` for `i ≤ N`, `= i` otherwise; :221 `Polynomial.coeff_reverse`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.reverse",
+  "file": "Mathlib/Algebra/Polynomial/Reverse.lean",
+  "how": "exact: `Polynomial.reverse f = reflect f.natDegree f`, with `natDegree 0 = 0` as in the statement"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-reverse-charpoly-coefficients",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

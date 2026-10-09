@@ -1,0 +1,48 @@
+{
+ "id": "lem-weil-charpoly-monic-degree",
+ "kind": "statement",
+ "title": "The characteristic polynomial is monic of degree the dimension",
+ "statement": "Let $K$ be a field, $V$ a finite-dimensional $K$-vector space [def-weil-finite-dimensional-subspace] of dimension $n=\\dim_KV$ [def-weil-vector-space-dimension], $F:V\\to V$ a $K$-linear endomorphism, and $\\chi_F(T)=\\det(T-F\\mid V)\\in K[T]$ its characteristic polynomial [def-weil-characteristic-polynomial]. Then $\\chi_F$ is monic of degree $n$: $[T^n]\\chi_F=1$ and $[T^k]\\chi_F=0$ for $k>n$ [def-weil-polynomial-coefficient].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+  "place": "a standard fact of linear algebra used in the proof of lem-weil-reverse-charpoly-coefficients, whose claim is made at node def-weil-smooth-proper-cohomological-family, order 2856, last sentence, without proof; no linear-algebra textbook is in literature/ (WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. XIV §3, the characteristic polynomial)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension",
+  "def-weil-characteristic-polynomial",
+  "def-weil-polynomial-coefficient"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem charpoly_monic\\|lemma charpoly_natDegree\\|theorem charpoly_natDegree_eq_dim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra",
+   "results": "Mathlib/LinearAlgebra/Charpoly/Basic.lean:72 `LinearMap.charpoly_monic : f.charpoly.Monic`; :76 `LinearMap.charpoly_natDegree [StrongRankCondition R] : natDegree (charpoly f) = finrank R M`; Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean:116 `Matrix.charpoly_natDegree_eq_dim`, :120 `Matrix.charpoly_monic`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.charpoly_natDegree",
+  "file": "Mathlib/LinearAlgebra/Charpoly/Basic.lean",
+  "how": "specializes in one line: `⟨LinearMap.charpoly_monic F, LinearMap.charpoly_natDegree F⟩`; the coefficient statements are `Polynomial.Monic.coeff_natDegree` and `Polynomial.coeff_eq_zero_of_natDegree_lt` (Mathlib/Algebra/Polynomial/Degree/Operations.lean:85)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-reverse-charpoly-coefficients",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -1,0 +1,46 @@
+{
+ "id": "lem-weil-endomorphism-invertible-iff-det-nonzero",
+ "kind": "statement",
+ "title": "An endomorphism is invertible iff its determinant is nonzero",
+ "statement": "Let $K$ be a field, $V$ a finite-dimensional $K$-vector space [def-weil-finite-dimensional-subspace] and $F:V\\to V$ a $K$-linear endomorphism. Then $F$ is invertible (bijective, equivalently a unit of $\\operatorname{End}_K(V)$) if and only if $\\det(F\\mid V)\\neq0$ [def-weil-endomorphism-determinant].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+  "place": "a standard fact of linear algebra used in the proof of lem-weil-reverse-charpoly-coefficients, whose claim is made at node def-weil-smooth-proper-cohomological-family, order 2856, last sentence, without proof; no linear-algebra textbook is in literature/ (WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. XIV §3, the characteristic polynomial)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-endomorphism-determinant"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isUnit_iff_isUnit_det\\|theorem isUnit_det' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Determinant.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean; grep -n 'theorem isUnit_iff_ne_zero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/GroupWithZero/Units/Basic.lean",
+   "results": "Determinant.lean:327 `LinearMap.isUnit_iff_isUnit_det [Module.Finite R M] [Module.Free R M] (f : M →ₗ[R] M) : IsUnit f ↔ IsUnit f.det`; :323 `LinearMap.isUnit_det`; NonsingularInverse.lean:127 `Matrix.isUnit_iff_isUnit_det`; GroupWithZero/Units/Basic.lean:264 `isUnit_iff_ne_zero`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.isUnit_iff_isUnit_det",
+  "file": "Mathlib/LinearAlgebra/Determinant.lean",
+  "how": "specializes in one line: `(LinearMap.isUnit_iff_isUnit_det F).trans isUnit_iff_ne_zero`; a unit of `Module.End K V` is a linear automorphism (`Module.End.isUnit_iff`, Mathlib/Algebra/Module/Equiv/Basic.lean:65: bijective)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-reverse-charpoly-coefficients",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
