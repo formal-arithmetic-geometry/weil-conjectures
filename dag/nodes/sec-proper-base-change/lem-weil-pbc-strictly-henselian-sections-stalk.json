@@ -14,9 +14,124 @@
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The germ map and its naturality.* Write $\\mathcal N=\\mathcal N_{\\bar s}$ for the category of pointed etale neighbourhoods of $\\bar s$ [def-weil-pbc-pointed-etale-neighbourhoods]: objects $(U,\\bar u)$ with $f_U:U\\to S$ etale and $f_U\\circ\\bar u=\\bar s$, morphisms $h:(U',\\bar u')\\to(U,\\bar u)$ the $S$-morphisms $h:U'\\to U$ with $h\\circ\\bar u'=\\bar u$. By [def-weil-pbc-geometric-stalks] $F_{\\bar s}=\\varinjlim_{(U,\\bar u)\\in\\mathcal N^{\\mathrm{op}}}F(U)$ in abelian groups (the diagram $D_F$ sends $(U,\\bar u)$ to $F(U)$ and $h$ to the restriction $h^*:F(U)\\to F(U')$), with coprojections $\\iota_{(U,\\bar u)}:F(U)\\to F_{\\bar s}$ [def-weil-pbc-category-colimit]. Since $\\mathrm{id}_S$ is etale and $\\mathrm{id}_S\\circ\\bar s=\\bar s$, $(S,\\bar s)$ is an object of $\\mathcal N$, and the germ map is $\\gamma_F=\\iota_{(S,\\bar s)}:F(S)\\to F_{\\bar s}$, a homomorphism of abelian groups. For a morphism $\\varphi:F\\to G$ of abelian sheaves [def-weil-pbc-abelian-etale-sheaves] the stalk map $\\varphi_{\\bar s}:F_{\\bar s}\\to G_{\\bar s}$ is the canonical map induced by the compatible family $\\iota^G_{(U,\\bar u)}\\circ\\varphi_U$ (compatible because $\\varphi$ commutes with restrictions), so $\\varphi_{\\bar s}\\circ\\iota^F_{(U,\\bar u)}=\\iota^G_{(U,\\bar u)}\\circ\\varphi_U$ for every $(U,\\bar u)$, in particular $\\varphi_{\\bar s}\\circ\\gamma_F=\\gamma_G\\circ\\varphi_S$: the germ maps are natural in $F$. It remains to show that $\\gamma_F$ is bijective (steps 2-7).",
+   "uses": [
+    "def-weil-pbc-pointed-etale-neighbourhoods",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), proof"
+   }
+  },
+  {
+   "text": "*An affine chart through the point.* Let $(U,\\bar u)$ be an object of $\\mathcal N$, $f=f_U:U\\to S$, and let $u\\in U$ be the image of the point of $\\operatorname{Spec}\\Omega$ under $\\bar u$. Since $f\\circ\\bar u=\\bar s$ and $\\bar s$ lies over $s$, $f(u)=s$. By [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink] (with $V=U$, $W=U$, $\\bar v=\\bar u$) there are a ring $A$, an open immersion $j:\\operatorname{Spec}A\\to U$ with $u\\in j(\\operatorname{Spec}A)$ and $f\\circ j$ etale, and $\\bar u_0:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}A$ with $j\\circ\\bar u_0=\\bar u$. Let $\\mathfrak q\\subset A$ be the prime with $j(\\mathfrak q)=u$ (the image of $\\bar u_0$). By [def-weil-affine-spectrum] the morphism $f\\circ j:\\operatorname{Spec}A\\to\\operatorname{Spec}R=S$ is $\\operatorname{Spec}\\phi$ for exactly one ring map $\\phi:R\\to A$; so $\\operatorname{Spec}A\\to\\operatorname{Spec}R$ is etale [def-weil-etale-morphism], and since $\\operatorname{Spec}\\phi$ sends $\\mathfrak q$ to $\\phi^{-1}(\\mathfrak q)$ and $(f\\circ j)(\\mathfrak q)=f(u)=s$, which is the point $\\mathfrak m$, we get $\\phi^{-1}(\\mathfrak q)=\\mathfrak m$: $\\mathfrak q$ lies over $\\mathfrak m$.",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "def-weil-affine-spectrum",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), proof"
+   }
+  },
+  {
+   "text": "*The residue field does not grow.* By [lem-weil-pbc-etale-algebra-residue-field-separable] applied to $\\phi:R\\to A$ and $\\mathfrak q$ (with $\\phi^{-1}(\\mathfrak q)=\\mathfrak m$, step 2), the residue field $\\kappa(\\mathfrak q)$ is a finite separable extension of $\\kappa(\\mathfrak m)=\\kappa$ via the map $\\bar\\phi:\\kappa\\to\\kappa(\\mathfrak q)$ induced by $\\phi$. Since $R$ is strictly henselian, $\\kappa$ is separably closed [def-weil-pbc-henselian-terminology], so by [lem-pc-sepclosed-finite-sep-trivial] $\\bar\\phi$ is an isomorphism. Translation to the schemes [def-weil-residue-field]: the residue field of $\\operatorname{Spec}A$ at $\\mathfrak q$ is $A_{\\mathfrak q}/\\mathfrak qA_{\\mathfrak q}=\\kappa(\\mathfrak q)$, that of $S$ at $s$ is $\\kappa$, and the open immersion $j$ identifies the local ring of $\\operatorname{Spec}A$ at $\\mathfrak q$ with $\\mathcal O_{U,u}$; under these identifications the residue field map $f^\\sharp:\\kappa(s)\\to\\kappa(u)$ induced by $f$ at $u$ is $\\bar\\phi$ (the residue map of $f\\circ j=\\operatorname{Spec}\\phi$ at $\\mathfrak q$, composed with the isomorphism given by $j$). Hence $f^\\sharp:\\kappa(s)\\to\\kappa(u)$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "def-weil-pbc-henselian-terminology",
+    "lem-pc-sepclosed-finite-sep-trivial",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), proof"
+   }
+  },
+  {
+   "text": "*A retraction through $\\mathfrak q$ (Stacks Theorem 04GG, used in 03QO as $A\\cong R\\times A'$ compatibly with the maps to the residue field).* $R$ is henselian (strictly henselian includes henselian, [def-weil-pbc-henselian-terminology]: idempotents of finite $R$-algebras lift uniquely mod $\\mathfrak m$), so by [lem-weil-pbc-henselian-local-root-lifting], (i) $\\Rightarrow$ (ii), simple roots in $\\kappa$ of monic polynomials over $R$ lift to roots in $R$. With step 2 ($\\operatorname{Spec}A\\to\\operatorname{Spec}R$ etale, $\\mathfrak q$ over $\\mathfrak m$) and step 3 ($\\kappa\\to\\kappa(\\mathfrak q)$ an isomorphism), [lem-weil-pbc-root-lifting-etale-retraction] gives an $R$-algebra homomorphism $\\tau:A\\to R$, i.e. $\\tau\\circ\\phi=\\mathrm{id}_R$, with $\\tau^{-1}(\\mathfrak m)=\\mathfrak q$.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-weil-pbc-root-lifting-etale-retraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03QO, proof (the appeal to Theorem Tag 04GG, theorem-henselian, in etale-cohomology.tex)"
+   }
+  },
+  {
+   "text": "*The section.* Put $\\sigma=j\\circ\\operatorname{Spec}\\tau:S=\\operatorname{Spec}R\\to\\operatorname{Spec}A\\to U$. By functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum], $f\\circ\\sigma=(f\\circ j)\\circ\\operatorname{Spec}\\tau=\\operatorname{Spec}\\phi\\circ\\operatorname{Spec}\\tau=\\operatorname{Spec}(\\tau\\circ\\phi)=\\operatorname{Spec}(\\mathrm{id}_R)=\\mathrm{id}_S$, so $\\sigma$ is a section of $f$, in particular an $S$-morphism from $(S\\xrightarrow{\\mathrm{id}}S)$ to $(U\\xrightarrow fS)$. And $\\operatorname{Spec}\\tau$ sends the closed point $\\mathfrak m$ to $\\tau^{-1}(\\mathfrak m)=\\mathfrak q$, so $\\sigma(s)=j(\\mathfrak q)=u$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), proof"
+   }
+  },
+  {
+   "text": "*The section respects the geometric points: $\\sigma\\circ\\bar s=\\bar u$.* By [def-weil-geometric-point] a morphism $\\operatorname{Spec}\\Omega\\to U$ is the same as a point $x\\in U$ together with a field homomorphism $\\kappa(x)\\to\\Omega$; and the field map of a composite $g\\circ\\bar y$ is (field map of $\\bar y$)$\\circ$(residue map of $g$ at the image point) [def-weil-residue-field] (residue maps compose contravariantly, being induced by the local homomorphisms of stalks). Let $\\alpha:\\kappa(s)\\to\\Omega$ be the field map of $\\bar s$ and $\\beta:\\kappa(u)\\to\\Omega$ that of $\\bar u$; let $f^\\sharp:\\kappa(s)\\to\\kappa(u)$ be the residue map of $f$ at $u$ (an isomorphism, step 3) and $\\sigma^\\sharp:\\kappa(u)\\to\\kappa(s)$ the residue map of $\\sigma$ at $s$ (defined since $\\sigma(s)=u$, step 5). (a) $f\\circ\\sigma=\\mathrm{id}_S$ gives $\\sigma^\\sharp\\circ f^\\sharp=\\mathrm{id}_{\\kappa(s)}$, hence $\\sigma^\\sharp=(f^\\sharp)^{-1}$. (b) $f\\circ\\bar u=\\bar s$ gives $\\beta\\circ f^\\sharp=\\alpha$. Now $\\sigma\\circ\\bar s$ lies over $\\sigma(s)=u$, as $\\bar u$ does, and its field map is $\\alpha\\circ\\sigma^\\sharp=\\beta\\circ f^\\sharp\\circ(f^\\sharp)^{-1}=\\beta$, the field map of $\\bar u$. Hence $\\sigma\\circ\\bar s=\\bar u$, and $\\sigma$ is a morphism $(S,\\bar s)\\to(U,\\bar u)$ in $\\mathcal N$ [def-weil-pbc-pointed-etale-neighbourhoods]. (Stacks takes $\\Omega$ a separable closure of $\\kappa$; the argument holds for every algebraically closed $\\Omega$ over $\\kappa$.)",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-weil-residue-field",
+    "def-weil-pbc-pointed-etale-neighbourhoods"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), proof"
+   }
+  },
+  {
+   "text": "*Cofinality: the germ map is an isomorphism.* By [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered] $\\mathcal N$ is cofiltered. Let $\\mathcal J\\subset\\mathcal N$ be the full subcategory on the single object $(S,\\bar s)$; its only endomorphism is $\\mathrm{id}_S$, since an $S$-morphism $h:S\\to S$ satisfies $h=\\mathrm{id}_S\\circ h=\\mathrm{id}_S$. By steps 2-6 every object $(U,\\bar u)$ of $\\mathcal N$ receives a morphism from $(S,\\bar s)\\in\\mathcal J$. By [lem-weil-pbc-colimit-initial-full-subcategory] (1) (with $\\mathcal C$ the category of abelian groups, $\\mathcal I=\\mathcal N$, $D=D_F$) the canonical map $c:\\varinjlim_{\\mathcal J^{\\mathrm{op}}}D_F|_{\\mathcal J^{\\mathrm{op}}}\\to\\varinjlim_{\\mathcal N^{\\mathrm{op}}}D_F=F_{\\bar s}$, induced by the coprojection $\\iota_{(S,\\bar s)}$, is an isomorphism. The category $\\mathcal J^{\\mathrm{op}}$ has one object and one morphism, so it is connected and $D_F|_{\\mathcal J^{\\mathrm{op}}}$ is the constant diagram with value $F(S)$; by [lem-weil-pbc-colimit-constant-connected-diagram] $(F(S),\\mathrm{id}_{F(S)})$ is a colimit of it, and with this choice $c=c\\circ\\mathrm{id}_{F(S)}=\\iota_{(S,\\bar s)}=\\gamma_F$. Hence the germ map $\\gamma_F:F(S)\\to F_{\\bar s}$ is an isomorphism of abelian groups, natural in $F$ by step 1. (Explicitly: every germ $\\iota_{(U,\\bar u)}(x)$ equals $\\gamma_F(\\sigma^*x)$ for the section $\\sigma$ of step 6; and if $\\gamma_F(a)=0$ then, the colimit being cofiltered, $h^*a=0$ for some $h:(U',\\bar u')\\to(S,\\bar s)$, and with a section $\\sigma':(S,\\bar s)\\to(U',\\bar u')$ one gets $a=(h\\circ\\sigma')^*a=\\sigma'^*h^*a=0$, since $h\\circ\\sigma'$ is an $S$-endomorphism of $S$, i.e. the identity.)",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "def-weil-pbc-henselian-terminology",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "def-weil-residue-field",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-root-lifting-etale-retraction",
+  "def-weil-geometric-point",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-colimit-constant-connected-diagram"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), the statement Gamma(S,F)=F_sbar and its proof, with Theorem Tag 04GG (theorem-henselian) for the retraction"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,10 +153,31 @@
    "results": "none; the etale site files (Sites/Etale.lean, Sites/EtalePoint.lean: pointSmallEtale, isConservativeFamilyOfPoints_pointSmallEtale') never mention henselian rings",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, AlgebraicGeometry.Scheme.Etale",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale scheme over spectrum of strictly henselian local ring has a section through a point over the closed point with trivial residue extension",
+   "results": "AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, RingHom.Etale.propertyIsLocal, IsEtale.instIsStableUnderBaseChangeScheme, Scheme.range_fromSpecResidueField, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.exists_etale_of_isEtaleAt, Algebra.etaleLocus",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'stalk\\|Henselian' Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; grep -rn 'colimitOfDiagramTerminal\\|colimitOfTerminal' Mathlib/CategoryTheory/Limits/Shapes/Terminal.lean",
+   "results": "EtalePoint.lean: exists_fac_of_etale_of_isSepClosed (37), pointSmallEtale (64, the point of the small etale site at Spec Omega -> S, Omega separably closed; its fibre functor is Mathlib's etale stalk), isConservativeFamilyOfPoints_pointSmallEtale' (150); no henselian ring and no comparison of the fibre with global sections. Terminal.lean: colimitOfDiagramTerminal, colimitOfTerminal (291: colimit over a category with a terminal object is the value there), which would need (S,sbar) terminal in N^op, i.e. uniqueness of morphisms out of (S,sbar), not used here",
+   "date": "2026-10-09",
+   "verdict": "no match (the colimit step is carried by the DAG nodes lem-weil-pbc-colimit-initial-full-subcategory and lem-weil-pbc-colimit-constant-connected-diagram)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "created": {
@@ -62,5 +198,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "worker": "stage1",
+  "summary": "Split along Stacks 03QO into seven steps: (1) the germ map is the coprojection at (S,sbar) and is natural (elementary); (2) affine chart Spec A of a pointed etale neighbourhood (U,ubar) through u via lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink, ring map phi: R -> A etale, q over m; (3) kappa -> kappa(q) finite separable (lem-weil-pbc-etale-algebra-residue-field-separable) hence an isomorphism (lem-pc-sepclosed-finite-sep-trivial, a generic tool lemma of unit sk-prop-picard-dense-points; Mathlib IsSepClosed.algebraMap_surjective); (4) retraction tau: A -> R with tau^-1(m)=q by lem-weil-pbc-henselian-local-root-lifting (i)=>(ii) and lem-weil-pbc-root-lifting-etale-retraction (Stacks 04GG); (5) section sigma = j o Spec tau with sigma(s)=u (elementary); (6) sigma o sbar = ubar via the field-map description of geometric points, written out (elementary); (7) (S,sbar) is a full subcategory with only the identity endomorphism receiving maps to every object of the cofiltered category of neighbourhoods, so lem-weil-pbc-colimit-initial-full-subcategory (1) and lem-weil-pbc-colimit-constant-connected-diagram give that the germ map is an isomorphism; the explicit surjectivity/injectivity argument is recorded too. Statement kept (the sheaf condition is not used: it holds for presheaves). Three more Mathlib searches recorded; no new nodes. No Lean in slopmaster2 states it."
+ },
+ "tool_uses": [
+  "lem-pc-sepclosed-finite-sep-trivial"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Seven steps along Stacks 03QO with 04GG for the retraction: the germ map; an affine chart through the point (reviewed leaf); the residue field does not grow (reviewed leaf lem-weil-pbc-etale-algebra-residue-field-separable and lem-pc-sepclosed-finite-sep-trivial, a generic field-theory tool accepted as tool use; Mathlib leaf candidate IsSepClosed.algebraMap_surjective for that node); the retraction via lem-weil-pbc-henselian-local-root-lifting (i) => (ii) and lem-weil-pbc-root-lifting-etale-retraction; the section and its compatibility with the geometric points, written out with field maps; cofinality via the reviewed colimit leaves. The sheaf condition is unused (holds for presheaves): worker's note. No source-repository Lean."
+ }
 }
