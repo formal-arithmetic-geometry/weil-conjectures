@@ -149,6 +149,7 @@ theorem overDualNumbers₂ProjFst_comp_overDualNumbersProj :
     overDualNumbers₂ProjFst Y ≫ overDualNumbersProj Y = overDualNumbers₂Proj Y :=
   rfl
 
+@[reassoc]
 theorem overDualNumbers₂ProjFst_comp_overDualNumbersMap :
     overDualNumbers₂ProjFst Y ≫ overDualNumbersMap Y =
       overDualNumbers₂Map Y ≫ dualNumbersProjεOver S := by
@@ -160,6 +161,7 @@ theorem overDualNumbers₂ProjSnd_comp_overDualNumbersProj :
   ext1
   simp [overDualNumbers₂ProjSnd, overDualNumbersProj, overDualNumbers₂Proj]
 
+@[reassoc]
 theorem overDualNumbers₂ProjSnd_comp_overDualNumbersMap :
     overDualNumbers₂ProjSnd Y ≫ overDualNumbersMap Y =
       overDualNumbers₂Map Y ≫ dualNumbersProjδOver S := by
@@ -172,6 +174,7 @@ theorem overDualNumbersMul_comp_overDualNumbersProj :
   ext1
   simp [overDualNumbersMul, overDualNumbersProj, overDualNumbers₂Proj]
 
+@[reassoc]
 theorem overDualNumbersMul_comp_overDualNumbersMap :
     overDualNumbersMul Y ≫ overDualNumbersMap Y =
       overDualNumbers₂Map Y ≫ dualNumbersMulOver S := by
@@ -332,7 +335,223 @@ theorem rightTranslationDeriv_mul {x y : Scheme.dualNumbersOver S ⟶ G}
       (dualNumbersι_comp_rightTranslation_left hy)]
   rfl
 
+theorem rightTranslation_one :
+    rightTranslation (1 : Scheme.dualNumbersOver S ⟶ G) = Scheme.overDualNumbersProj G := by
+  rw [rightTranslation, MonObj.comp_one, mul_one]
+
+theorem rightTranslationDeriv_one (h1 : Scheme.dualNumbersιOver S ≫ (1 : _ ⟶ G) = 1)
+    (U : G.left.Opens) : rightTranslationDeriv h1 U = 0 := by
+  ext a
+  have e : U ≤ (rightTranslation (1 : Scheme.dualNumbersOver S ⟶ G)).left ⁻¹ᵁ U :=
+    Scheme.le_preimage_self_of_dualNumbersι_comp_eq_id
+      (dualNumbersι_comp_rightTranslation_left h1) U
+  rw [rightTranslationDeriv, Scheme.Hom.dualNumbersDeriv_apply _ U e]
+  exact (congrArg TrivSqZeroExt.snd (Scheme.Hom.appLE_apply_eq_of_eq
+    (congrArg CommaMorphism.left rightTranslation_one) U U e le_rfl a)).trans
+    ((congrArg TrivSqZeroExt.snd (Scheme.dualNumbersProj_appLE_self (X := G.left) U le_rfl a)).trans
+      (TrivSqZeroExt.snd_inl _ a))
+
 end One
+
+/-! ### Two parameters -/
+
+section Two
+
+/-- The right translation `ρ_z : G[ε][δ] ⟶ G`, `(g, t) ↦ g · z(t)`, by a point
+`z : S[ε][δ] ⟶ G`. -/
+noncomputable def rightTranslation₂ (z : Scheme.dualNumbers₂Over S ⟶ G) :
+    Scheme.overDualNumbers₂ G ⟶ G :=
+  Scheme.overDualNumbers₂Proj G * (Scheme.overDualNumbers₂Map G ≫ z)
+
+/-- The automorphism `(g, t) ↦ (g · z(t), t)` of `G[ε][δ]` over `S[ε][δ]`. -/
+noncomputable def rightTranslationLift₂ (z : Scheme.dualNumbers₂Over S ⟶ G) :
+    Scheme.overDualNumbers₂ G ⟶ Scheme.overDualNumbers₂ G :=
+  pullbackLift _ _ (Scheme.isPullback_overDualNumbers₂ G) (rightTranslation₂ z)
+
+theorem rightTranslation₂_mul (z w : Scheme.dualNumbers₂Over S ⟶ G) :
+    rightTranslation₂ (z * w) = rightTranslationLift₂ z ≫ rightTranslation₂ w :=
+  (pullbackLift_comp_mul _ _ _ _ _).symm
+
+theorem overDualNumbers₂ι_comp_rightTranslation₂ {z : Scheme.dualNumbers₂Over S ⟶ G}
+    (hz : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫ z = 1) :
+    Scheme.overDualNumbers₂ι G ≫ rightTranslation₂ z = 𝟙 G := by
+  rw [rightTranslation₂, MonObj.comp_mul, ← Category.assoc,
+    Scheme.overDualNumbers₂ι_comp_overDualNumbers₂Map, Category.assoc, Category.assoc, hz,
+    MonObj.comp_one, Scheme.overDualNumbers₂ι_comp_overDualNumbers₂Proj, mul_one]
+
+theorem dualNumbersι₂_comp_rightTranslation₂_left {z : Scheme.dualNumbers₂Over S ⟶ G}
+    (hz : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫ z = 1) :
+    G.left.dualNumbersι ≫ G.left.dualNumbers.dualNumbersι ≫ (rightTranslation₂ z).left =
+      𝟙 G.left := by
+  rw [← Category.assoc]
+  exact congrArg CommaMorphism.left (overDualNumbers₂ι_comp_rightTranslation₂ hz)
+
+/-- The operator `1 + ε D₁ + δ D₂ + εδ D₁₂` on the sections of `𝒪_G` of a point
+`z : S[ε][δ] ⟶ G` reducing to the identity: `ρ_z^♯(a) = a + ε D₁(a) + δ D₂(a) + εδ D₁₂(a)`. -/
+noncomputable def rightTranslationOp₂ {z : Scheme.dualNumbers₂Over S ⟶ G}
+    (hz : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫ z = 1) (U : G.left.Opens) :
+    DualNumber (DualNumber (AddMonoid.End Γ(G.left, U))) :=
+  Scheme.Hom.dualNumbers₂Op (dualNumbersι₂_comp_rightTranslation₂_left hz) U
+
+theorem rightTranslationOp₂_mul {z w : Scheme.dualNumbers₂Over S ⟶ G}
+    (hz : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫ z = 1)
+    (hw : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫ w = 1)
+    (hzw : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫ (z * w) = 1)
+    (U : G.left.Opens) :
+    rightTranslationOp₂ hzw U = rightTranslationOp₂ hz U * rightTranslationOp₂ hw U := by
+  have e := congrArg CommaMorphism.left (rightTranslation₂_mul z w)
+  have hh₃ : G.left.dualNumbersι ≫ G.left.dualNumbers.dualNumbersι ≫
+      (rightTranslationLift₂ z).left ≫ (rightTranslation₂ w).left = 𝟙 G.left :=
+    (congrArg (fun φ : Scheme.overDualNumbers₂ G ⟶ G ↦
+      G.left.dualNumbersι ≫ G.left.dualNumbers.dualNumbersι ≫ φ.left)
+      (rightTranslation₂_mul z w)).symm.trans (dualNumbersι₂_comp_rightTranslation₂_left hzw)
+  have hΛ : (rightTranslationLift₂ z).left ≫ G.left.dualNumbers.dualNumbersProj ≫
+      G.left.dualNumbersProj = (rightTranslation₂ z).left :=
+    congrArg CommaMorphism.left (pullbackLift_comp_snd _ _ _ _)
+  have hF : (rightTranslationLift₂ z).left ≫ G.hom.dualNumbers.dualNumbers =
+      G.hom.dualNumbers.dualNumbers :=
+    congrArg CommaMorphism.left (pullbackLift_comp_fst _ _ _ _)
+  rw [rightTranslationOp₂, Scheme.Hom.dualNumbers₂Op_congr _ hh₃ e,
+    Scheme.Hom.dualNumbers₂Op_comp _ _
+      (Scheme.appTop_inr_one_of_comp_dualNumbers_dualNumbers _ _ hF)
+      (Scheme.appTop_inl_inr_one_of_comp_dualNumbers_dualNumbers _ _ hF) hΛ
+      (dualNumbersι₂_comp_rightTranslation₂_left hz)
+      (dualNumbersι₂_comp_rightTranslation₂_left hw)]
+  rfl
+
+theorem rightTranslation₂_projε (v : Scheme.dualNumbersOver S ⟶ G) :
+    rightTranslation₂ (Scheme.dualNumbersProjεOver S ≫ v) =
+      Scheme.overDualNumbers₂ProjFst G ≫ rightTranslation v := by
+  rw [rightTranslation₂, rightTranslation, MonObj.comp_mul,
+    Scheme.overDualNumbers₂ProjFst_comp_overDualNumbersProj,
+    Scheme.overDualNumbers₂ProjFst_comp_overDualNumbersMap_assoc]
+
+theorem rightTranslation₂_projδ (v : Scheme.dualNumbersOver S ⟶ G) :
+    rightTranslation₂ (Scheme.dualNumbersProjδOver S ≫ v) =
+      Scheme.overDualNumbers₂ProjSnd G ≫ rightTranslation v := by
+  rw [rightTranslation₂, rightTranslation, MonObj.comp_mul,
+    Scheme.overDualNumbers₂ProjSnd_comp_overDualNumbersProj,
+    Scheme.overDualNumbers₂ProjSnd_comp_overDualNumbersMap_assoc]
+
+theorem rightTranslation₂_mul_over (v : Scheme.dualNumbersOver S ⟶ G) :
+    rightTranslation₂ (Scheme.dualNumbersMulOver S ≫ v) =
+      Scheme.overDualNumbersMul G ≫ rightTranslation v := by
+  rw [rightTranslation₂, rightTranslation, MonObj.comp_mul,
+    Scheme.overDualNumbersMul_comp_overDualNumbersProj,
+    Scheme.overDualNumbersMul_comp_overDualNumbersMap_assoc]
+
+theorem rightTranslationOp₂_projε {v : Scheme.dualNumbersOver S ⟶ G}
+    (hv : Scheme.dualNumbersιOver S ≫ v = 1)
+    (hz : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫
+      (Scheme.dualNumbersProjεOver S ≫ v) = 1) (U : G.left.Opens) :
+    rightTranslationOp₂ hz U = inl (inl 1 + inr (rightTranslationDeriv hv U)) := by
+  have e := Scheme.le_preimage_self_of_dualNumbersι₂_comp_eq_id
+    (dualNumbersι₂_comp_rightTranslation₂_left hz) U
+  have eρ := Scheme.le_preimage_self_of_dualNumbersι_comp_eq_id
+    (dualNumbersι_comp_rightTranslation_left hv) U
+  have key (a : Γ(G.left, U)) : ((rightTranslation₂ (Scheme.dualNumbersProjεOver S ≫ v)).left.appLE
+      U U e a : DualNumber (DualNumber Γ(G.left, U))) =
+        inl ((rightTranslation v).left.appLE U U eρ a) := by
+    refine (Scheme.Hom.appLE_apply_eq_of_eq (congrArg CommaMorphism.left
+      (rightTranslation₂_projε v)) U U e (fun x hx ↦ eρ hx) a).trans ?_
+    refine (Scheme.Hom.appLE_comp_apply (Scheme.overDualNumbers₂ProjFst G).left
+      (rightTranslation v).left U U U eρ le_rfl _ a).trans ?_
+    exact Scheme.dualNumbersProj_appLE_self (X := G.left.dualNumbers) U le_rfl _
+  refine TrivSqZeroExt.ext (TrivSqZeroExt.ext ?_ ?_) (TrivSqZeroExt.ext ?_ ?_)
+  · simp [rightTranslationOp₂]
+  · ext a
+    rw [rightTranslationOp₂, Scheme.Hom.fst_snd_dualNumbers₂Op_apply _ U e]
+    have := congrArg (fun y : DualNumber (DualNumber Γ(G.left, U)) ↦ y.fst.snd) (key a)
+    simp only [fst_inl] at this
+    exact this.trans (by simp; rfl)
+  · ext a
+    rw [rightTranslationOp₂, Scheme.Hom.snd_fst_dualNumbers₂Op_apply _ U e]
+    have := congrArg (fun y : DualNumber (DualNumber Γ(G.left, U)) ↦ y.snd.fst) (key a)
+    simp only [snd_inl, fst_zero] at this
+    exact this.trans (by simp)
+  · ext a
+    rw [rightTranslationOp₂, Scheme.Hom.snd_snd_dualNumbers₂Op_apply _ U e]
+    have := congrArg (fun y : DualNumber (DualNumber Γ(G.left, U)) ↦ y.snd.snd) (key a)
+    simp only [snd_inl, snd_zero] at this
+    exact this.trans (by simp)
+
+theorem rightTranslationOp₂_projδ {v : Scheme.dualNumbersOver S ⟶ G}
+    (hv : Scheme.dualNumbersιOver S ≫ v = 1)
+    (hz : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫
+      (Scheme.dualNumbersProjδOver S ≫ v) = 1) (U : G.left.Opens) :
+    rightTranslationOp₂ hz U = inl (inl 1) + inr (inl (rightTranslationDeriv hv U)) := by
+  have e := Scheme.le_preimage_self_of_dualNumbersι₂_comp_eq_id
+    (dualNumbersι₂_comp_rightTranslation₂_left hz) U
+  have eρ := Scheme.le_preimage_self_of_dualNumbersι_comp_eq_id
+    (dualNumbersι_comp_rightTranslation_left hv) U
+  let φ : Γ(G.left, U) →+* DualNumber Γ(G.left, U) := (G.left.dualNumbersProj.appLE U U le_rfl).hom
+  have hp (b : Γ(G.left, U)) : φ b = inl b := Scheme.dualNumbersProj_appLE_self U le_rfl b
+  have key (a : Γ(G.left, U)) : ((rightTranslation₂ (Scheme.dualNumbersProjδOver S ≫ v)).left.appLE
+      U U e a : DualNumber (DualNumber Γ(G.left, U))) =
+        DualNumber.mapRingHom φ ((rightTranslation v).left.appLE U U eρ a) := by
+    refine (Scheme.Hom.appLE_apply_eq_of_eq (congrArg CommaMorphism.left
+      (rightTranslation₂_projδ v)) U U e (fun x hx ↦ eρ hx) a).trans ?_
+    refine (Scheme.Hom.appLE_comp_apply (Scheme.overDualNumbers₂ProjSnd G).left
+      (rightTranslation v).left U U U eρ le_rfl _ a).trans ?_
+    exact Scheme.Hom.dualNumbers_appLE G.left.dualNumbersProj U U le_rfl _
+  refine TrivSqZeroExt.ext (TrivSqZeroExt.ext ?_ ?_) (TrivSqZeroExt.ext ?_ ?_)
+  · simp [rightTranslationOp₂]
+  · ext a
+    rw [rightTranslationOp₂, Scheme.Hom.fst_snd_dualNumbers₂Op_apply _ U e]
+    have := congrArg (fun y : DualNumber (DualNumber Γ(G.left, U)) ↦ y.fst.snd) (key a)
+    simp only [DualNumber.fst_mapRingHom] at this
+    rw [hp] at this
+    exact this.trans (by simp)
+  · ext a
+    rw [rightTranslationOp₂, Scheme.Hom.snd_fst_dualNumbers₂Op_apply _ U e]
+    have := congrArg (fun y : DualNumber (DualNumber Γ(G.left, U)) ↦ y.snd.fst) (key a)
+    simp only [DualNumber.snd_mapRingHom] at this
+    rw [hp] at this
+    exact this.trans (by simp; rfl)
+  · ext a
+    rw [rightTranslationOp₂, Scheme.Hom.snd_snd_dualNumbers₂Op_apply _ U e]
+    have := congrArg (fun y : DualNumber (DualNumber Γ(G.left, U)) ↦ y.snd.snd) (key a)
+    simp only [DualNumber.snd_mapRingHom] at this
+    rw [hp] at this
+    exact this.trans (by simp)
+
+theorem rightTranslationOp₂_mul_over {v : Scheme.dualNumbersOver S ⟶ G}
+    (hv : Scheme.dualNumbersιOver S ≫ v = 1)
+    (hz : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫
+      (Scheme.dualNumbersMulOver S ≫ v) = 1) (U : G.left.Opens) :
+    rightTranslationOp₂ hz U = inl (inl 1) + inr (inr (rightTranslationDeriv hv U)) := by
+  have e := Scheme.le_preimage_self_of_dualNumbersι₂_comp_eq_id
+    (dualNumbersι₂_comp_rightTranslation₂_left hz) U
+  have eρ := Scheme.le_preimage_self_of_dualNumbersι_comp_eq_id
+    (dualNumbersι_comp_rightTranslation_left hv) U
+  have key (a : Γ(G.left, U)) : ((rightTranslation₂ (Scheme.dualNumbersMulOver S ≫ v)).left.appLE
+      U U e a : DualNumber (DualNumber Γ(G.left, U))) =
+        DualNumber.mulRingHom ((rightTranslation v).left.appLE U U eρ a :
+          DualNumber Γ(G.left, U)) := by
+    refine (Scheme.Hom.appLE_apply_eq_of_eq (congrArg CommaMorphism.left
+      (rightTranslation₂_mul_over v)) U U e (fun x hx ↦ eρ hx) a).trans ?_
+    refine (Scheme.Hom.appLE_comp_apply (Scheme.overDualNumbersMul G).left
+      (rightTranslation v).left U U U eρ le_rfl _ a).trans ?_
+    exact Scheme.dualNumbersMul_appLE_self (X := G.left) U le_rfl _
+  refine TrivSqZeroExt.ext (TrivSqZeroExt.ext ?_ ?_) (TrivSqZeroExt.ext ?_ ?_)
+  · simp [rightTranslationOp₂]
+  · ext a
+    rw [rightTranslationOp₂, Scheme.Hom.fst_snd_dualNumbers₂Op_apply _ U e]
+    have := congrArg (fun y : DualNumber (DualNumber Γ(G.left, U)) ↦ y.fst.snd) (key a)
+    simp only [DualNumber.fst_mulRingHom, snd_inl] at this
+    exact this.trans (by simp)
+  · ext a
+    rw [rightTranslationOp₂, Scheme.Hom.snd_fst_dualNumbers₂Op_apply _ U e]
+    have := congrArg (fun y : DualNumber (DualNumber Γ(G.left, U)) ↦ y.snd.fst) (key a)
+    simp only [DualNumber.snd_mulRingHom, fst_inr] at this
+    exact this.trans (by simp)
+  · ext a
+    rw [rightTranslationOp₂, Scheme.Hom.snd_snd_dualNumbers₂Op_apply _ U e]
+    have := congrArg (fun y : DualNumber (DualNumber Γ(G.left, U)) ↦ y.snd.snd) (key a)
+    simp only [DualNumber.snd_mulRingHom, snd_inr] at this
+    exact this.trans (by simp; rfl)
+
+end Two
 
 end GrpObj
 
