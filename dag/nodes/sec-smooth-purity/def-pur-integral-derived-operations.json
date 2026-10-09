@@ -1,0 +1,56 @@
+{
+ "id": "def-pur-integral-derived-operations",
+ "kind": "definition",
+ "title": "Integral derived pullback, completed tensor product and internal Hom",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring\n$\\mathcal O_E$ and uniformizer $\\varpi_E$, and put\n$A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$. For a scheme $W$ let\n$\\widehat{\\mathcal O}_{E,W}=\\varprojlim_n(A_{E,n})_W$ be the completed\ncoefficient sheaf on the small pro-etale site $W_{\\mathrm{proet}}$,\n$D(W_{\\mathrm{proet}},\\mathcal O_E)$ the derived category of\n$\\widehat{\\mathcal O}_{E,W}$-modules, and\n$\\operatorname{Res}_n:D(W_{\\mathrm{proet}},A_{E,n})\\to D(W_{\\mathrm{proet}},\\mathcal O_E)$\nrestriction of scalars along $\\widehat{\\mathcal O}_{E,W}\\twoheadrightarrow(A_{E,n})_W$\n(exact, so applied termwise). For $K\\in D(W_{\\mathrm{proet}},\\mathcal O_E)$\nwrite $K_n=K\\otimes^L_{\\mathcal O_E}A_{E,n}\\in D(W_{\\mathrm{proet}},A_{E,n})$ for\nthe derived tensor product with the constant $(A_{E,n})_W$-module; the\nreductions $A_{E,n+1}\\twoheadrightarrow A_{E,n}$ induce maps\n$\\operatorname{Res}_{n+1}K_{n+1}\\to\\operatorname{Res}_nK_n$. Let $f:X\\to Y$ be\na morphism of schemes, with inverse image $f^{-1}$ on pro-etale sheaves, which\nis exact and satisfies $f^{-1}(A_{E,n})_Y=(A_{E,n})_X$. Define, for\n$K\\in D(Y_{\\mathrm{proet}},\\mathcal O_E)$ and $M,N\\in D(W_{\\mathrm{proet}},\\mathcal O_E)$,\n\n$$\n Lf^*K=R\\varprojlim_n\\operatorname{Res}_n f^{-1}(K_n),\n \\qquad\n M\\mathbin{\\widehat\\otimes}^L_{\\mathcal O_E}N\n =R\\varprojlim_n\\operatorname{Res}_n\\bigl(M_n\\otimes^L_{A_{E,n}}N_n\\bigr),\n \\qquad\n R\\mathcal Hom_{\\mathcal O_E}(M,N)\n =R\\mathcal Hom_{\\widehat{\\mathcal O}_{E,W}}(M,N),\n$$\n\nwhere $f^{-1}$ is applied termwise to a representative of $K_n$ (which computes\nthe derived pullback $L(f_n)^*$ at level $n$), $R\\varprojlim_n$ is the derived\nlimit, formed by the Roos triangle in $D(-_{\\mathrm{proet}},\\mathcal O_E)$, of the\ninverse systems whose transition maps are induced by\n$A_{E,n+1}\\twoheadrightarrow A_{E,n}$, and the last functor is the derived\ninternal Hom of the ringed site $(W_{\\mathrm{proet}},\\widehat{\\mathcal O}_{E,W})$,\ncomputed with a K-injective resolution of $N$ in the category of all\n$\\widehat{\\mathcal O}_{E,W}$-modules. The first two are, respectively, the\npullback followed by derived completion and the completed tensor product of\nBhatt--Scholze.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 (completed tensor product), Lemma 3.4.11 (R Hom into a complete object is complete), Lemma 6.5.9 (4) (pullback followed by completion); with literature/stacks-project/proetale.tex, Lemma 099N (5) (proetale-lemma-pushforward-Noetherian-case: Lf^*_comp M = R lim Lf^*(M ⊗^L Λ/I^n))"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-tensor",
+  "def-weil-derived-limit",
+  "def-weil-proetale-inverse-image",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'homotopyLimit\\|derivedLimit\\|Rlim\\|holim' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'ellAdicSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "no derived (homotopy) limit in any triangulated or derived category; the only completed coefficient sheaf is `AlgebraicGeometry.Scheme.ellAdicSheaf` (AlgebraicGeometry/Sites/ElladicCohomology.lean:63), the sheaf of abelian groups U ↦ C(U, ℤ_ℓ), with no ring or module structure and no derived category of modules over it",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def totalLeftDerived\\|def mapDerivedCategory' -r ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Derived/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/",
+   "results": "`Functor.totalLeftDerived` (CategoryTheory/Functor/Derived/LeftDerived.lean:193), an abstract left derived functor along a localization, and `Functor.mapDerivedCategory` (Algebra/Homology/DerivedCategory/ExactFunctor.lean:36) for exact functors; nothing for completed pullback or completed tensor products",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-derived-pullback-tensor-hom",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

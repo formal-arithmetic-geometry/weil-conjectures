@@ -1,0 +1,49 @@
+{
+ "id": "def-pur-derived-internal-hom",
+ "kind": "definition",
+ "title": "Derived internal Hom on a ringed site",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site, $\\operatorname{Mod}(\\mathcal O)$\nits abelian category of sheaves of $\\mathcal O$-modules and $D(\\mathcal O)$ the\nderived category of $\\operatorname{Mod}(\\mathcal O)$. For complexes\n$\\mathcal L^\\bullet,\\mathcal M^\\bullet$ of $\\mathcal O$-modules the *Hom complex*\n$\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal M^\\bullet)$ is the complex of\n$\\mathcal O$-modules with terms\n\n$$\n \\mathcal Hom^n(\\mathcal L^\\bullet,\\mathcal M^\\bullet)\n =\\prod_{p\\in\\mathbf Z}\\mathcal Hom_{\\mathcal O}(\\mathcal L^p,\\mathcal M^{p+n})\n$$\n\n(sheaf Hom of $\\mathcal O$-modules) and differential\n$d(\\varphi)=d_{\\mathcal M}\\circ\\varphi-(-1)^n\\varphi\\circ d_{\\mathcal L}$. A\ncomplex $\\mathcal I^\\bullet$ of $\\mathcal O$-modules is *K-injective* if every\nmap of complexes from an acyclic complex to $\\mathcal I^\\bullet$ is homotopic\nto zero; every complex $\\mathcal M^\\bullet$ admits a quasi-isomorphism\n$\\mathcal M^\\bullet\\to\\mathcal I^\\bullet$ to a K-injective complex (a\n*K-injective resolution*). For $L,M\\in D(\\mathcal O)$, represented by\n$\\mathcal L^\\bullet$ and by a K-injective resolution $\\mathcal I^\\bullet$ of a\nrepresentative of $M$, the *derived internal Hom* is\n\n$$\n R\\mathcal Hom_{\\mathcal O}(L,M)\n =\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal I^\\bullet)\\in D(\\mathcal O);\n$$\n\nup to unique isomorphism it does not depend on the choices, and it is a functor\n$D(\\mathcal O)^{\\mathrm{op}}\\times D(\\mathcal O)\\to D(\\mathcal O)$, with\n$H^0(\\mathcal C,R\\mathcal Hom_{\\mathcal O}(L,M))=\\operatorname{Hom}_{D(\\mathcal O)}(L,M)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X (sites-cohomology-section-hom-complexes: the complex Hom^•), Section 08J7 (sites-cohomology-section-internal-hom: R Hom(L,M) = Hom^•(L^•, I^•) with I^• K-injective), Lemma 0A95 (sites-cohomology-lemma-RHom-well-defined); Derived Categories, Definition 070H (K-injective) and Injectives, Theorem 079P (K-injective resolutions exist in a Grothendieck abelian category)"
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-hom",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsKInjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n '^def\\|^noncomputable def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean | head",
+   "results": "`CochainComplex.IsKInjective` (Algebra/Homology/HomotopyCategory/KInjective.lean:42) and its use in DerivedCategory/KInjective.lean; `CochainComplex.HomComplex.Cochain` (HomotopyCategory/HomComplex.lean:68): the Hom complex of abelian groups between two cochain complexes, not a complex of sheaves of modules",
+   "date": "2026-10-09",
+   "verdict": "no match: K-injectivity and the Hom complex of groups exist; the sheaf-valued Hom complex and R Hom do not"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'MonoidalClosed\\|MonoidalCategory\\|ihom\\|RHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/",
+   "results": "none: no internal Hom on `DerivedCategory C`, and no sheaf Hom on `SheafOfModules` (see also the searches of def-pur-sheaf-hom)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-derived-pullback-tensor-hom",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

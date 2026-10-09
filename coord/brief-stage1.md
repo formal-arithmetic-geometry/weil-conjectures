@@ -1,6 +1,6 @@
 # Standing brief for a stage-1 worker
 
-Written by the lead. Your prompt names your item; this file says what to deliver. Read `AGENTS.md`, `roles/worker.md`, `SETUP.md` (its section "Requirements of the human" rules) and `stages/1-dag.md` first. No Lean is written and nothing is built or compiled. Use the Bash tool for reading and writing (cat, grep, python3 for JSON).
+Written by the lead. Your prompt names your item; this file says what to deliver. Read `AGENTS.md`, `roles/worker.md`, `SETUP.md` (its section "Requirements of the human" rules) and `stages/1-dag.md` first. No Lean is written and nothing is built or compiled. Use the Bash tool for reading and writing (cat, grep, python3 for JSON). Temporary scripts go into a subdirectory of the scratchpad named after your item (ten workers share the scratchpad; a script named like another worker's was once overwritten and run on the wrong files).
 
 ## 1. Your item
 
