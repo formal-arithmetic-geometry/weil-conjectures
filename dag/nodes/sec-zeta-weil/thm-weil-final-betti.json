@@ -13,60 +13,154 @@
   "def-weil-geometric-hypotheses",
   "def-weil-global-geometric-frobenius",
   "def-weil-integral-frobenius-factor",
-  "def-weil-ordinary-compact-cohomology"
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-coefficientwise-extension",
+  "def-weil-polynomial-ring",
+  "def-weil-betti-numbers",
+  "def-weil-vector-space-dimension",
+  "def-weil-point-counts-zeta",
+  "def-weil-rational-power-series",
+  "def-weil-rational-function-field",
+  "def-weil-rational-function-pole-order"
  ],
  "proof": [
   {
-   "text": "The definition of the common Betti numbers is\n[def-weil-betti-numbers]. The comparison in\n[prop-weil-betti-comparison] gives\n$b_i=\\dim_{\\Ql}H^i(X,\\Ql)$, independently of $\\ell$. The perfect pairing\nhas its canonical exceptional-inverse-image orientation supplied by\n[thm-weil-six-operations] for the smooth proper structure morphism;\nthe duality interface [thm-weil-poincare-duality] and the pairing assembled in\n[prop-poincare-pairing] together give $b_i=b_{2d-i}$; the endpoint calculation\n[prop-endpoints] gives $b_0=b_{2d}=1$ and the two endpoint factors,\nidentified with $P_0,P_{2d}$ by [prop-integral-recovery].",
-   "uses": [
-    "def-weil-betti-numbers",
-    "prop-weil-betti-comparison",
-    "thm-weil-six-operations",
-    "thm-weil-poincare-duality",
-    "prop-poincare-pairing",
-    "prop-endpoints",
-    "prop-integral-recovery"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For the poles, use the factorization\n$Z(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}$ of\n[thm-weil-final-integrality]. Over $\\overline{\\mathbf Q}$ write\n$P_i(T)=\\prod_{r=1}^{b_i}(1-\\alpha_{i,r}T)$, the $\\alpha_{i,r}$ being the\nreciprocal roots. For $c\\in\\overline{\\mathbf Q}^\\times$, the order of\nvanishing of $P_i$ at $T=c^{-1}$ is the number of $r$ with\n$\\alpha_{i,r}=c$. By [thm-weil-final-rh], every $\\alpha_{i,r}$ satisfies\n$|\\tau(\\alpha_{i,r})|=q^{i/2}$ for every complex embedding $\\tau$.",
+   "text": "*Step 1: the factors and the Betti numbers; $b_i=\\dim_{\\Ql}H^i(X,\\Ql)$.* By [thm-weil-final-integrality], for each $0\\leq i\\leq2d$ the polynomial $P_i\\in\\mathbf Z[T]$ [def-weil-polynomial-ring] is the unique one with $P_i(0)=1$ whose coefficientwise extension $P_i^{(\\ell)}\\in\\Ql[T]$ [def-weil-coefficientwise-extension] equals $\\det(1-TF_{i,\\ell}\\mid H^i(X,\\Ql))$ for every prime $\\ell\\neq p$. In the notation of [def-weil-smooth-proper-cohomological-family], $V_{i,\\ell}=H^i(X,\\Ql)$ is the ordinary cohomology group [def-weil-ordinary-compact-cohomology], $F_{i,\\ell}$ is the restriction to it of the global geometric Frobenius [def-weil-global-geometric-frobenius], and this determinant is the factor $P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})$ of the smooth-proper cohomological family. So $P_i$ is an integral realization-independent factor in degree $i$ in the sense of [def-weil-integral-frobenius-factor], normalized by $P_i(0)=1$, and $b_i=\\deg P_i$ is the Betti number of [def-weil-betti-numbers]. [prop-integral-recovery], applied to the same $X_0$, asserts that there is exactly one tuple $(P_i)_{0\\leq i\\leq2d}$ in $\\mathbf Z[T]$ with $P_i(0)=1$ and $P_i^{(\\ell)}=P_{i,\\ell}$ for every $\\ell\\neq p$, and that this tuple satisfies $\\deg P_i=\\dim_{\\Ql}H^i(X,\\Ql)$ [def-weil-vector-space-dimension] for every prime $\\ell\\neq p$. Our $P_i$ have these two properties, so by that uniqueness they form that tuple; hence $b_i=\\deg P_i=\\dim_{\\Ql}H^i(X,\\Ql)$ for every prime $\\ell\\neq p$, and since the left side does not involve $\\ell$, the dimension is independent of $\\ell$. This is the first displayed equality.",
    "uses": [
     "thm-weil-final-integrality",
-    "thm-weil-final-rh"
+    "def-weil-polynomial-ring",
+    "def-weil-coefficientwise-extension",
+    "def-weil-smooth-proper-cohomological-family",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-global-geometric-frobenius",
+    "def-weil-integral-frobenius-factor",
+    "def-weil-betti-numbers",
+    "prop-integral-recovery",
+    "def-weil-vector-space-dimension"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, Summary 27.14 (e), p. 159 ('Let β_r = deg P_r(t)'), with Theorem 27.6, p. 156 (P_r(X,t) = det(1 − Ft | H^r(X,Q_ℓ))); the equality deg P_i = dim H^i(X,Q_ℓ) for the integral factors is the degree clause of prop-integral-recovery. Blueprint: literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex, proof of thm:weil-final, Clause (iv), lines 3728–3732 ('Proposition prop:integral-recovery gives b_i = deg P_i = dim_{Q_ℓ} H^i(X,Q_ℓ), so the left-hand side is independent of ℓ'); the master node (literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md, ## Proof, first paragraph) cites prop-weil-betti-comparison, which restates the same clause"
+   }
   },
   {
-   "text": "Take $c=1$. Since $q>1$, $q^{i/2}=1$ only for $i=0$, so\n$P_i(1)\\neq0$ for $1\\leq i\\leq2d$, while $P_0(T)=1-T$ vanishes to\norder exactly $1$ at $T=1$. As $P_0$ occurs with exponent $(-1)^{0+1}=-1$,\n$Z(X_0,T)$ has a pole of order exactly $1$ at $T=1$.",
-   "uses": [],
-   "elementary": null
+   "text": "*Step 2: the symmetry $b_i=b_{2d-i}$.* Fix a prime $\\ell\\neq p$. [prop-duality-reciprocity] is stated for the same finite-field datum, the same $X_0$ and $X$, the same $V_{i,\\ell}=H^i(X,\\Ql)$ and $P_{i,\\ell}=\\det(1-TF\\mid V_{i,\\ell})$, for the normalized integral factor $P_i\\in\\mathbf Z[T]$ with $P_i^{(\\ell)}=P_{i,\\ell}$ and for $b_i=\\deg P_i$. The $P_i$ of the present statement satisfy this hypothesis (Step 1: $P_i(0)=1$ and $P_i^{(\\ell)}=P_{i,\\ell}$), so the proposition applies to them, and among its conclusions is $b_i=b_{2d-i}$ for every integer $i$ with $0\\leq i\\leq2d$. (It obtains this from the perfect Frobenius-equivariant Poincaré duality pairing $H^i(X,\\Ql)\\times H^{2d-i}(X,\\Ql)\\to\\Ql(-d)$, which gives $\\dim_{\\Ql}H^{2d-i}(X,\\Ql)=\\dim_{\\Ql}H^i(X,\\Ql)$, and from the equality of Betti numbers with dimensions of Step 1.) This is the second displayed equality.",
+   "uses": [
+    "prop-duality-reciprocity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, proof of Theorem 27.12, p. 158 (the Poincaré duality pairing H^{2d−r}(X,Q_ℓ) × H^r(X,Q_ℓ(d)) → Q_ℓ; the eigenvalues of F on H^{2d−r} are q^d/α_1, …, q^d/α_s for the eigenvalues α_1, …, α_s of F on H^r, so the two groups have the same dimension s). Blueprint: literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex, proof of thm:weil-final, Clause (iv), line 3733 ('Proposition prop:duality-reciprocity gives b_i = b_{2d−i}'); the master node (literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md, ## Proof, first paragraph) cites thm-weil-six-operations, thm-weil-poincare-duality and prop-poincare-pairing, which are inputs of that proposition, not of this step"
+   }
   },
   {
-   "text": "Take $c=q^d$ with $d\\geq1$. Since $|\\tau(q^d)|=q^d=q^{i/2}$ only for\n$i=2d$, one has $P_i(q^{-d})\\neq0$ for $0\\leq i<2d$ (for $i=0$ this is\nalso visible from $P_0(q^{-d})=1-q^{-d}\\neq0$), while\n$P_{2d}(T)=1-q^dT$ vanishes to order exactly $1$ at $T=q^{-d}$. As\n$2d$ is even, $P_{2d}$ occurs with exponent $-1$, so $Z(X_0,T)$ has a\npole of order exactly $1$ at $T=q^{-d}$. (For $d=0$ the two points\ncoincide and $Z(X_0,T)=(1-T)^{-1}$.)",
-   "uses": [],
-   "elementary": null
+   "text": "*Step 3: the endpoints.* Fix a prime $\\ell\\neq p$. [prop-endpoints] is stated for the same finite-field datum, the same $X_0$, $X$, geometric Frobenius and smooth-proper cohomological family, for the normalized integral factor $P_i\\in\\mathbf Z[T]$ with $P_i^{(\\ell)}=P_{i,\\ell}$ and for $b_i=\\deg P_i$; the $P_i$ of the present statement satisfy this hypothesis (Step 1). It concludes that $P_0(T)=1-T$ and $P_{2d}(T)=1-q^dT$ in $\\mathbf Z[T]$ and that $b_0=b_{2d}=1$. These are the third displayed equality and the two identities $P_0(T)=1-T$, $P_{2d}(T)=1-q^dT$.",
+   "uses": [
+    "prop-endpoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, Remark 27.7, p. 156 ('Because F acts as 1 on H^0(X,Q_ℓ), P_0(X_0,t) = 1 − t, and because F acts as q^d on H^{2d}(X,Q_ℓ), P_{2d}(X_0,t) = 1 − q^d t'), stated for the ℓ-adic factors; prop-endpoints carries it to the integral factors and the Betti numbers. Blueprint: literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex, proof of thm:weil-final, Clause (iv), lines 3733–3736 ('Proposition prop:endpoints gives b_0 = b_{2d} = 1, P_0(T) = 1 − T, P_{2d}(T) = 1 − q^d T'); the master node (literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md, ## Proof, first paragraph) adds 'identified with P_0, P_{2d} by [prop-integral-recovery]', which is not needed since prop-endpoints concludes for the integral factors"
+   }
+  },
+  {
+   "text": "*Step 4: the rational function and the criterion for its poles.* By [thm-weil-final-integrality], the point-count zeta series $Z(X_0,T)\\in1+T\\mathbf Q[[T]]$ of [def-weil-point-counts-zeta] is a rational power series [def-weil-rational-power-series] whose rational function is\n\n$$\nR(T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}\\in\\mathbf Q(T)\n$$\n\n[def-weil-rational-function-field]; this is the rational function the statement refers to, and it is nonzero because every $P_i$ is nonzero ($P_i(0)=1$). For $c\\in\\mathbf Q$ and an integer $m\\geq1$, '$R$ has a pole of order exactly $m$ at $T=c$' is the notion of [def-weil-rational-function-pole-order]: $c$ is a root of multiplicity exactly $m$ of the denominator of the reduced presentation of $R$. Apply [lem-weil-rational-function-order-product] (2) over $K=\\mathbf Q$ to the nonzero polynomials $P_0,\\ldots,P_{2d}$ with the exponents $e_i=(-1)^{i+1}$: with\n\n$$\n\\nu_c=\\sum_{i=0}^{2d}(-1)^{i+1}m_c(P_i),\n$$\n\nwhere $m_c(P_i)$ is the multiplicity of $c$ as a root of $P_i$ [def-weil-root-multiplicity], $R$ has a pole of order exactly $1$ at $T=c$ if and only if $\\nu_c=-1$. By (1) of the same lemma, $m_c(P_i)=0$ whenever $P_i(c)\\neq0$, and $m_c\\bigl(u(T-c)\\bigr)=1$ for every $u\\in\\mathbf Q^\\times$.",
+   "uses": [
+    "thm-weil-final-integrality",
+    "def-weil-point-counts-zeta",
+    "def-weil-rational-power-series",
+    "def-weil-rational-function-field",
+    "def-weil-rational-function-pole-order",
+    "lem-weil-rational-function-order-product",
+    "def-weil-root-multiplicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+    "place": "## Proof, second paragraph ('For the poles, use the factorization Z(X_0,T) = ∏ P_i(T)^{(−1)^{i+1}} of [thm-weil-final-integrality]. ... the order of vanishing of P_i at T = c^{−1} is the number of r with α_{i,r} = c'), rewritten with root multiplicities in place of the factorization over the algebraic closure; the bookkeeping of orders in the product is the new node lem-weil-rational-function-order-product. Also literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-betti/_section.md, ## Proof ('to read off the pole orders one must exclude cancellation against N_ℓ and further multiplicity from other factors of D_ℓ')"
+   }
+  },
+  {
+   "text": "*Step 5: the values $1$ and $q^{-d}$ are roots of the endpoint factors only.* Fix an algebraic closure $\\overline{\\mathbf Q}$ of $\\mathbf Q$; it contains $\\mathbf Q$ and has characteristic $0$. Let $0\\leq i\\leq2d$, put $r_i=\\deg P_i$ and $P_i^\\#(U)=U^{r_i}P_i(U^{-1})\\in\\mathbf Z[U]$, and let $c\\in\\mathbf Q^\\times$ be such that $P_i(c)=0$. Apply [lem-weil-reciprocal-polynomial] (3) with $R=\\mathbf Z$, $K=\\overline{\\mathbf Q}$, $\\varphi$ the unique ring homomorphism $\\mathbf Z\\to\\overline{\\mathbf Q}$ (admissible since $\\overline{\\mathbf Q}$ has characteristic $0$), and $x=c^{-1}\\neq0$: since $\\varphi(P_i)(x^{-1})=P_i(c)=0$, one gets $\\varphi(P_i^\\#)(c^{-1})=0$, i.e. $\\alpha:=c^{-1}$ is a root of $P_i^\\#$ in $\\overline{\\mathbf Q}$, a reciprocal root of $P_i$ in the sense of [prop-arithmetic-roots]. The $P_i$ of the statement satisfy the hypotheses of that proposition ($P_i\\in\\mathbf Z[T]$, $P_i(0)=1$, $P_i^{(\\ell)}=P_{i,\\ell}$ for every prime $\\ell\\neq p$; Step 1), and it asserts $|\\tau(\\alpha)|=q^{i/2}$ for every embedding $\\tau:\\mathbf Q(\\alpha)\\hookrightarrow\\mathbf C$, in the sense of [def-weil-numbers]. Here $\\alpha\\in\\mathbf Q$, so $\\mathbf Q(\\alpha)=\\mathbf Q$ and the only such $\\tau$ is the inclusion $\\mathbf Q\\subset\\mathbf C$ (a field homomorphism fixes $1$, hence every rational number); thus $|\\alpha|=q^{i/2}$. Now $q=p^a\\geq2$ [def-weil-finite-field-fiber], so $n\\mapsto q^n$ is injective on the integers. If $c=1$, then $\\alpha=1$, so $q^{i/2}=1$, $q^i=1$ and $i=0$. If $c=q^{-d}$, then $\\alpha=q^d$, so $q^{i/2}=q^d$, $q^i=q^{2d}$ and $i=2d$. Hence $P_i(1)\\neq0$ for $1\\leq i\\leq2d$, and $P_i(q^{-d})\\neq0$ for $0\\leq i\\leq2d-1$.",
+   "uses": [
+    "lem-weil-reciprocal-polynomial",
+    "prop-arithmetic-roots",
+    "def-weil-numbers",
+    "def-weil-finite-field-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+    "place": "## Proof, second to fourth paragraphs ('By [thm-weil-final-rh], every α_{i,r} satisfies |τ(α_{i,r})| = q^{i/2} for every complex embedding τ'; 'Since q > 1, q^{i/2} = 1 only for i = 0, so P_i(1) ≠ 0 for 1 ≤ i ≤ 2d'; 'Since |τ(q^d)| = q^d = q^{i/2} only for i = 2d, one has P_i(q^{−d}) ≠ 0 for 0 ≤ i < 2d'); the Riemann-hypothesis input is taken from prop-arithmetic-roots, which thm-weil-final-rh restates, and the passage from a root of P_i to a reciprocal root is lem-weil-reciprocal-polynomial. Also literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-betti/_section.md, ## Proof ('this is weight separation: by [sk-prop-rootpurity] every reciprocal root of P_{j,ℓ} has absolute value q^{j/2}, so 1 (weight 0) is a reciprocal root of P_0 only and q^d (weight 2d) of P_{2d} only, each with multiplicity one'), and literature/deligne-weil-I_PMIHES-1974-43.pdf, §1, 'Preuve de (1.7) ⇒ (1.6)', p. 277 (paper pagination; PDF p. 5): the roots of P_i(t) are the roots of R(t) all of whose complex conjugates have absolute value q^{−i/2}"
+   }
+  },
+  {
+   "text": "*Step 6: the pole at $T=1$.* By Step 3, $P_0(T)=1-T=u\\,(T-1)$ with $u=-1\\in\\mathbf Q^\\times$, so $m_1(P_0)=1$ by Step 4. By Step 5, $P_i(1)\\neq0$, hence $m_1(P_i)=0$ (Step 4), for $1\\leq i\\leq2d$. Therefore $\\nu_1=(-1)^{0+1}\\cdot1+\\sum_{i=1}^{2d}(-1)^{i+1}\\cdot0=-1$, and by the criterion of Step 4 the rational function $R=Z(X_0,T)$ has a pole of order exactly $1$ at $T=1$ [def-weil-rational-function-pole-order].",
+   "uses": [
+    "def-weil-rational-function-pole-order"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+    "place": "## Proof, third paragraph ('Take c = 1. ... P_0(T) = 1 − T vanishes to order exactly 1 at T = 1. As P_0 occurs with exponent (−1)^{0+1} = −1, Z(X_0,T) has a pole of order exactly 1 at T = 1')"
+   }
+  },
+  {
+   "text": "*Step 7: the pole at $T=q^{-d}$ when $d\\geq1$.* Assume $d\\geq1$. By Step 3, $P_{2d}(T)=1-q^dT=u\\,(T-q^{-d})$ with $u=-q^d\\in\\mathbf Q^\\times$, so $m_{q^{-d}}(P_{2d})=1$ by Step 4. By Step 5, $P_i(q^{-d})\\neq0$, hence $m_{q^{-d}}(P_i)=0$ (Step 4), for $0\\leq i\\leq2d-1$ (for $i=0$ this is also visible directly: $P_0(q^{-d})=1-q^{-d}\\neq0$ because $q^d\\geq2$). Since $2d$ is even, $(-1)^{2d+1}=-1$, so $\\nu_{q^{-d}}=-1\\cdot1+\\sum_{i=0}^{2d-1}(-1)^{i+1}\\cdot0=-1$, and by the criterion of Step 4 the rational function $R=Z(X_0,T)$ has a pole of order exactly $1$ at $T=q^{-d}$ [def-weil-rational-function-pole-order]. (When $d=0$ the two points coincide: $P_0=P_{2d}=1-T$ and $R=(1-T)^{-1}$, so the conclusion also holds for $d=0$; the statement claims it only for $d\\geq1$.) Together with Steps 1–3 and 6 this proves every assertion of the statement.",
+   "uses": [
+    "def-weil-rational-function-pole-order"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+    "place": "## Proof, fourth paragraph ('Take c = q^d with d ≥ 1. ... P_{2d}(T) = 1 − q^d T vanishes to order exactly 1 at T = q^{−d}. As 2d is even, P_{2d} occurs with exponent −1, so Z(X_0,T) has a pole of order exactly 1 at T = q^{−d}. (For d = 0 the two points coincide and Z(X_0,T) = (1 − T)^{−1}.)')"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-betti-numbers",
-  "prop-weil-betti-comparison",
-  "thm-weil-six-operations",
-  "thm-weil-poincare-duality",
-  "prop-poincare-pairing",
-  "prop-endpoints",
-  "prop-integral-recovery",
   "thm-weil-final-integrality",
-  "thm-weil-final-rh"
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-extension",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-betti-numbers",
+  "prop-integral-recovery",
+  "def-weil-vector-space-dimension",
+  "prop-duality-reciprocity",
+  "prop-endpoints",
+  "def-weil-point-counts-zeta",
+  "def-weil-rational-power-series",
+  "def-weil-rational-function-field",
+  "def-weil-rational-function-pole-order",
+  "lem-weil-rational-function-order-product",
+  "def-weil-root-multiplicity",
+  "lem-weil-reciprocal-polynomial",
+  "prop-arithmetic-roots",
+  "def-weil-numbers",
+  "def-weil-finite-field-fiber"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
-  "place": "## Proof"
+  "place": "## Proof, expanded into seven steps. Steps 1–3 follow the proof of clause (iv) of thm:weil-final in literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex (lines 3728–3736: prop:integral-recovery, prop:duality-reciprocity, prop:endpoints) and are the statements of Milne, literature/milne-lectures-on-etale-cohomology_LEC.pdf, Summary 27.14 (e) p. 159, proof of Theorem 27.12 p. 158 and Remark 27.7 p. 156, proved in the DAG by the cited propositions. The pole clause (steps 4–7) is stated by no human source in literature/ and follows the blueprint's weight-separation argument (also literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-betti/_section.md, ## Proof), with Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, p. 277, for the separation of the roots of the P_i by weight; the Riemann-hypothesis input is prop-arithmetic-roots"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Betti\\|betti' Mathlib/ --include=*.lean; grep -rln 'Weil conjecture\\|WeilConjecture\\|zeta function of a variety' Mathlib/ --include=*.lean",
+   "results": "none: Mathlib has no Betti numbers of a variety, no Frobenius on étale cohomology and no Hasse–Weil zeta function",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -106,5 +200,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "thm-weil-final-betti",
+  "worker": "stage1",
+  "summary": "Statement kept: it is the master text verbatim; slopmaster2 has no separate node (its thm:weil-final clause (iv) states the same five equalities and the two endpoint identities, without the pole sentence). Checked on X_0 = P^1 (b = (1,0,1), P_0 = 1−T, P_2 = 1−qT, Z = 1/((1−T)(1−qT)), simple poles at 1 and q^{−1}). stmt_deps now name every notion the statement uses: the finite-field datum, the geometric hypotheses, the theorem providing the P_i, the integral-factor notion, Z[T] and deg, the coefficientwise extension, det(1−TF_{i,ℓ}|H^i) as the family's P_{i,ℓ}, the global geometric Frobenius, ordinary cohomology, the Betti numbers, dim, the zeta series, and (for 'the rational function ... ∈ Q(T) has a pole of order exactly 1') the three definitions def-weil-rational-power-series, def-weil-rational-function-field and def-weil-rational-function-pole-order created for thm-weil-final. The imported four-paragraph proof became seven steps. Steps 1–3 are the three propositions the slopmaster2 proof of clause (iv) names: prop-integral-recovery (degree clause; the master's prop-weil-betti-comparison restates it), prop-duality-reciprocity (b_i = b_{2d−i}; the master's thm-weil-six-operations, thm-weil-poincare-duality and prop-poincare-pairing are that proposition's inputs and were dropped from this proof) and prop-endpoints (which already concludes for the integral factors, so the master's extra appeal to prop-integral-recovery there was dropped). Steps 4–7 prove the pole clause: the factorization over Q̄ and 'the order of vanishing of P_i at c^{−1} is the number of r with α_{i,r} = c' are replaced by root multiplicities, the multiplicity bookkeeping in ∏ P_i^{(−1)^{i+1}} becoming the new unsplit node lem-weil-rational-function-order-product (with the new Mathlib leaf def-weil-root-multiplicity = Polynomial.rootMultiplicity); the weight input is taken from prop-arithmetic-roots (reviewed; thm-weil-final-rh, which the blueprint cites, restates it), with lem-weil-reciprocal-polynomial for the passage from a root c of P_i to the reciprocal root c^{−1}, and the two imported steps with elementary = null are now the elementary Steps 6–7. Human sources: Milne LEC 27.14(e), 27.12, 27.7 for steps 1–3 and Deligne Weil I p. 277 for the weight separation; no human source in literature/ states the pole clause, so proof_origin is agent (blueprint)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

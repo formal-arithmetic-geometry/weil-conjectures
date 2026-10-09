@@ -1,0 +1,62 @@
+{
+ "id": "def-weil-rational-function-pole-order",
+ "kind": "definition",
+ "title": "Pole of order exactly $m$ of a rational function",
+ "statement": "Let $K$ be a field [def-weil-field], $T$ an indeterminate, $K[T]$ the polynomial ring [def-weil-polynomial-ring] and $K(T)$ the field of rational functions [def-weil-rational-function-field]. Let $R\\in K(T)$ be nonzero, with reduced presentation $R=N/D$ ($N,D\\in K[T]$, $D$ monic, $\\gcd(N,D)=1$), let $a\\in K$, and let $m\\geq1$ be an integer. $R$ has a *pole of order exactly $m$ at $T=a$* if $(T-a)^m$ divides $D$ and $(T-a)^{m+1}$ does not, that is, if $a$ is a root of $D$ of multiplicity exactly $m$. Equivalently, $R=A/\\bigl((T-a)^mB\\bigr)$ for some $A,B\\in K[T]$ with $A(a)\\neq0$ and $B(a)\\neq0$: from the reduced presentation take $A=N$ and $B=D/(T-a)^m$, where $N(a)\\neq0$ because $(T-a)\\mid D$ and $\\gcd(N,D)=1$; conversely, given such $A,B$, cancelling $\\gcd(A,B)$ (which does not vanish at $a$) and making the denominator monic gives the reduced presentation, whose denominator has $a$ as a root of multiplicity exactly $m$. $R$ has *no pole at $a$* if $D(a)\\neq0$, i.e. if $R$ is regular at $a$. A rational power series $f\\in K[[T]]\\cap K(T)$ [def-weil-rational-power-series] has a pole of order exactly $m$ at $T=a$ if its rational function $R_f$ does.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-the-five-assembled-theorems--remark-1/thm-weil-final.md",
+  "place": "node thm-weil-final, order 2939, clause (iv): 'In particular $Z(X_0,T)$ has a pole of order exactly $1$ at $T=1$ and, if $d\\geq1$, a pole of order exactly $1$ at $T=q^{-d}$' (the same words in sk-thm-weil4/thm-weil-final-betti.md). The meaning is fixed by the blueprint's proof in sk-thm-betti/_section.md, ## Proof, paragraph 'For the poles': write $Z=N_\\ell/D_\\ell$; '$T=1$ is a simple root of the factor $P_0=1-T$ of $D_\\ell$ ...; to read off the pole orders one must exclude cancellation against $N_\\ell$ and further multiplicity from other factors of $D_\\ell$ ... each with multiplicity one. Hence $Z$ has a pole of order $1$ at $T=1$': the order of a pole is the multiplicity of the root of the denominator after cancellation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-weil-rational-function-field",
+  "def-weil-rational-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn -i '\\bpole\\b\\|poles\\b' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory Mathlib/RingTheory Mathlib/Algebra/Polynomial --include=*.lean; grep -rl 'pole of order' dag/nodes (DAG)",
+   "results": "Mathlib: none (no declaration about poles of rational functions or Laurent series). DAG: only thm-weil-final and thm-weil-final-betti, which use the words without a definition node",
+   "date": "2026-10-09",
+   "verdict": "no named Mathlib declaration; no existing DAG definition"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def rootMultiplicity\\|lemma le_rootMultiplicity_iff\\|theorem rootMultiplicity_eq_zero' Mathlib/Algebra/Polynomial/Div.lean; grep -n 'def num\\b\\|def denom\\b\\|theorem monic_denom\\|theorem num_div_denom\\|theorem isCoprime_num_denom' Mathlib/FieldTheory/RatFunc/Basic.lean",
+   "results": "Div.lean:502 `Polynomial.rootMultiplicity (a : R) (p : R[X]) : ℕ`, :714 `le_rootMultiplicity_iff (p0 : p ≠ 0) : n ≤ rootMultiplicity a p ↔ (X - C a) ^ n ∣ p`, :623/629 `rootMultiplicity_eq_zero_iff`/`rootMultiplicity_eq_zero`; RatFunc/Basic.lean:906 `num`, :948 `denom`, :958 `monic_denom`, :990 `num_div_denom`, :1004 `isCoprime_num_denom`",
+   "date": "2026-10-09",
+   "verdict": "generalization that specializes in one line: pole of order exactly m at a is `Polynomial.rootMultiplicity a R.denom = m` (m ≥ 1); see mathlib_match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def meromorphicOrderAt' Mathlib/Analysis/Meromorphic/Order.lean; grep -n 'def valuation\\b' Mathlib/RingTheory/DedekindDomain/AdicValuation.lean; grep -n 'def intDegree\\|def inftyValuationDef' Mathlib/FieldTheory/RatFunc/Degree.lean Valuation.lean",
+   "results": "Analysis/Meromorphic/Order.lean:50 `meromorphicOrderAt (f : 𝕜 → E) (x : 𝕜) : WithTop ℤ` (functions on a normed field, not rational functions over an arbitrary field); RingTheory/DedekindDomain/AdicValuation.lean:322 `IsDedekindDomain.HeightOneSpectrum.valuation v : Valuation K ℤᵐ⁰` (the (T−a)-adic valuation of K(T) once the prime (X − C a) of K[X] is packaged as a HeightOneSpectrum; the pole order is its negative); RatFunc/Degree.lean:40 `RatFunc.intDegree` and Valuation.lean:52 `inftyValuationDef` (order at infinity only)",
+   "date": "2026-10-09",
+   "verdict": "other formalisms noted; not the same kind of object or not one line"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.rootMultiplicity",
+  "file": "Mathlib/Algebra/Polynomial/Div.lean",
+  "how": "specializes in one line: for `R : RatFunc K`, `R ≠ 0`, `a : K` and `1 ≤ m`, '`R` has a pole of order exactly `m` at `a`' is `Polynomial.rootMultiplicity a R.denom = m`, where `RatFunc.denom` is the monic denominator of the reduced presentation (`RatFunc.monic_denom`, `RatFunc.isCoprime_num_denom`, `RatFunc.num_div_denom`, Mathlib/FieldTheory/RatFunc/Basic.lean:958, 1004, 990) and `rootMultiplicity a p` (Div.lean:502) is the largest `n` with `(X - C a) ^ n ∣ p` (`Polynomial.le_rootMultiplicity_iff`, Div.lean:714); for a rational power series `f` apply it to `RatFunc.mk P Q` of def-weil-rational-power-series. Mathlib has no declaration named 'pole' for rational functions"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "thm-weil-final",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

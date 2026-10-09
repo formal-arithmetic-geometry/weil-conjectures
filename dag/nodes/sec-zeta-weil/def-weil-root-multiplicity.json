@@ -1,0 +1,52 @@
+{
+ "id": "def-weil-root-multiplicity",
+ "kind": "definition",
+ "title": "Multiplicity of a root of a polynomial",
+ "statement": "Let $K$ be a field, $T$ an indeterminate and $K[T]$ the polynomial ring [def-weil-polynomial-ring]. For $P\\in K[T]$ and $c\\in K$, the multiplicity of $c$ as a root of $P$ is\n\n$$\nm_c(P)=\\max\\{m\\in\\mathbf Z_{\\geq0}:(T-c)^m\\text{ divides }P\\text{ in }K[T]\\}\\in\\mathbf Z_{\\geq0}\n$$\n\nwhen $P\\neq0$ (the set is finite because $\\deg(T-c)^m=m\\leq\\deg P$ for every divisor $(T-c)^m$ of $P$), and $m_c(0)=0$. Thus $m_c(P)\\geq1$ if and only if $P\\neq0$ and $P(c)=0$, by the factor theorem; $c$ is a simple root of $P$ when $m_c(P)=1$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+  "place": "## Proof, second paragraph: 'the order of vanishing of $P_i$ at $T=c^{-1}$ is the number of $r$ with $\\alpha_{i,r}=c$', and third and fourth paragraphs: '$P_0(T)=1-T$ vanishes to order exactly $1$ at $T=1$', '$P_{2d}(T)=1-q^dT$ vanishes to order exactly $1$ at $T=q^{-d}$'; the order of vanishing of a polynomial at a point is used there without definition"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def rootMultiplicity' Mathlib/Algebra/Polynomial/",
+   "results": "Polynomial.rootMultiplicity (a : R) (p : R[X]) : ℕ, 'The largest power of X - C a which divides p', with rootMultiplicity a 0 = 0 (Mathlib/Algebra/Polynomial/Div.lean line 502)",
+   "date": "2026-10-09",
+   "verdict": "match: the same notion, for any commutative ring R in place of the field K"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rhn 'theorem rootMultiplicity' Mathlib/Algebra/Polynomial/Div.lean Mathlib/Algebra/Polynomial/RingDivision.lean Mathlib/Algebra/Polynomial/Roots.lean",
+   "results": "rootMultiplicity_pos (hp : p ≠ 0) : 0 < rootMultiplicity x p ↔ IsRoot p x (Div.lean 637); rootMultiplicity_eq_zero (h : ¬IsRoot p x) : rootMultiplicity x p = 0 (Div.lean 629); rootMultiplicity_C (Div.lean 536); rootMultiplicity_X_sub_C_self : rootMultiplicity x (X - C x) = 1 (RingDivision.lean 167); rootMultiplicity_mul (hpq : p * q ≠ 0) : rootMultiplicity x (p * q) = rootMultiplicity x p + rootMultiplicity x q (RingDivision.lean 291); count_roots : p.roots.count a = rootMultiplicity a p (Roots.lean 99)",
+   "date": "2026-10-09",
+   "verdict": "match for the clause 'm_c(P) ≥ 1 iff P ≠ 0 and P(c) = 0' (rootMultiplicity_pos, rootMultiplicity_eq_zero)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.rootMultiplicity",
+  "file": "Mathlib/Algebra/Polynomial/Div.lean",
+  "how": "exact"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "thm-weil-final-betti",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
