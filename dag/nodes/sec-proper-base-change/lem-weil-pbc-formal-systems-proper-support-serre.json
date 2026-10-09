@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-formal-systems-proper-support-serre",
  "kind": "statement",
  "title": "Coherent formal modules with support proper over the base form Serre subcategories",
- "statement": "Let $S$ be a Noetherian scheme, $f:X\\to S$ a morphism of finite type [def-weil-finite-type-morphism] (so $X$ is Noetherian) and $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals. Each of the following full subcategories $\\mathcal C$ of the abelian category $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module, lem-weil-pbc-coherent-formal-modules-abelian] is a Serre subcategory, i.e. contains $0$ and, for every short exact sequence $0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C'\\to0$ of $\\mathit{Coh}(X,\\mathcal I)$, $\\mathcal B\\in\\mathcal C$ if and only if $\\mathcal A\\in\\mathcal C$ and $\\mathcal C'\\in\\mathcal C$: (1) $\\mathit{Coh}_{\\text{support proper over }S}(X,\\mathcal I)$, the objects $(\\mathcal F_n)$ with $\\operatorname{Supp}(\\mathcal F_1)$ proper over $S$ [def-weil-pbc-closed-subset-proper-over-base]; (2) the objects $(\\mathcal F_n)$ for which there is a closed subscheme $Z\\subseteq X$ [def-weil-closed-immersion] with $Z\\to S$ proper [def-weil-proper-morphism] and $\\mathcal I_Z\\mathcal F_n=0$ for all $n\\ge1$.",
+ "statement": "Let $S$ be a Noetherian scheme, $f:X\\to S$ a morphism of finite type [def-weil-finite-type-morphism] (so $X$ is Noetherian [lem-weil-pbc-finite-type-over-noetherian]) and $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals. Each of the following full subcategories $\\mathcal C$ of the abelian category $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module, lem-weil-pbc-coherent-formal-modules-abelian] is a Serre subcategory, i.e. contains $0$ and, for every short exact sequence $0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C'\\to0$ of $\\mathit{Coh}(X,\\mathcal I)$, $\\mathcal B\\in\\mathcal C$ if and only if $\\mathcal A\\in\\mathcal C$ and $\\mathcal C'\\in\\mathcal C$: (1) $\\mathit{Coh}_{\\text{support proper over }S}(X,\\mathcal I)$, the objects $(\\mathcal F_n)$ with $\\operatorname{Supp}(\\mathcal F_1)$ proper over $S$ [def-weil-pbc-closed-subset-proper-over-base]; (2) the objects $(\\mathcal F_n)$ for which there is a closed subscheme $Z\\subseteq X$ [def-weil-closed-immersion] with $Z\\to S$ proper [def-weil-proper-morphism] and $\\mathcal I_Z\\mathcal F_n=0$ for all $n\\ge1$, $\\mathcal I_Z$ the ideal sheaf of $Z$ [def-sbc-closed-immersion-ideal-sheaf] (that is, $(\\mathcal F_n)$ is supported on $Z$ in the sense of [def-weil-pbc-coherent-formal-module] (3)).",
  "source": {
   "document": "literature/stacks-project/coherent.tex",
   "place": "Cohomology of Schemes, Lemma 0CYV (lemma-systems-with-proper-support)"
@@ -13,11 +13,135 @@
   "lem-weil-pbc-coherent-formal-modules-abelian",
   "def-weil-pbc-closed-subset-proper-over-base",
   "def-weil-closed-immersion",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-sbc-closed-immersion-ideal-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Supports in a short exact sequence.) $X$ is Noetherian [lem-weil-pbc-finite-type-over-noetherian], so $\\mathit{Coh}(X,\\mathcal I)$ is an abelian category. Three facts on stalks of $\\mathcal O_X$-modules [def-weil-pbc-module-stalk], $\\operatorname{Supp}$ as in [def-weil-pbc-closed-subset-proper-over-base] (2): (i) if $\\mathcal P\\subseteq\\mathcal Q$ is a sub-$\\mathcal O_X$-module then $\\mathcal P_x\\to\\mathcal Q_x$ is injective (a germ $s_x$, $s\\in\\mathcal P(U)$, that vanishes in $\\mathcal Q_x$ has $s|_W=0$ in $\\mathcal Q(W)\\supseteq\\mathcal P(W)$ for some open $x\\in W\\subseteq U$), so $\\operatorname{Supp}\\mathcal P\\subseteq\\operatorname{Supp}\\mathcal Q$; (ii) if $\\mathcal Q\\to\\mathcal R$ is surjective then $\\mathcal Q_x\\to\\mathcal R_x$ is surjective, since every section of $\\mathcal R$ lifts on a neighbourhood of $x$ [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (1); so $\\operatorname{Supp}\\mathcal R\\subseteq\\operatorname{Supp}\\mathcal Q$; (iii) if $\\mathcal A\\to\\mathcal B\\to\\mathcal C$ is exact at $\\mathcal B$ and $\\mathcal A_x=0=\\mathcal C_x$, then $\\mathcal B_x=0$: for $s\\in\\mathcal B(U)$ the image of $s$ in $\\mathcal C$ has zero germ, hence vanishes on an open $x\\in W\\subseteq U$, so by [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (2) $s|_{W'}$ is the image of a section $t$ of $\\mathcal A$ on some open $x\\in W'\\subseteq W$, and $s_x$ is the image of $t_x=0$. Now let $0\\to(\\mathcal G_n)\\to(\\mathcal F_n)\\xrightarrow{\\alpha}(\\mathcal H_n)\\to0$ be a short exact sequence of $\\mathit{Coh}(X,\\mathcal I)$. By [lem-weil-pbc-coherent-formal-short-exact-levels] (a) for $n=1$, $\\mathcal G_1\\to\\mathcal F_1\\to\\mathcal H_1\\to0$ is exact, so $\\operatorname{Supp}\\mathcal H_1\\subseteq\\operatorname{Supp}\\mathcal F_1$ by (ii) and $\\operatorname{Supp}\\mathcal F_1\\subseteq\\operatorname{Supp}\\mathcal G_1\\cup\\operatorname{Supp}\\mathcal H_1$ by (iii). By [lem-weil-pbc-coherent-formal-short-exact-levels] (b) for $n=1$ there are $m\\ge1$ and a surjection $\\operatorname{Ker}(\\alpha_m)\\to\\mathcal G_1$, so by (ii), (i) and [lem-weil-pbc-formal-system-support-constant], $\\operatorname{Supp}\\mathcal G_1\\subseteq\\operatorname{Supp}\\operatorname{Ker}(\\alpha_m)\\subseteq\\operatorname{Supp}\\mathcal F_m=\\operatorname{Supp}\\mathcal F_1$. Hence $\\operatorname{Supp}\\mathcal F_1=\\operatorname{Supp}\\mathcal G_1\\cup\\operatorname{Supp}\\mathcal H_1$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-coherent-formal-modules-abelian",
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-closed-subset-proper-over-base",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "lem-weil-pbc-coherent-formal-short-exact-levels",
+    "lem-weil-pbc-formal-system-support-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYV (lemma-systems-with-proper-support), proof, remarks (a), (b) and the proof of (1): Supp(F_n) = Supp(F_1) and Supp(G_1) cup Supp(H_1) = Supp(F_1); the stalk facts (i)-(iii) are written out by the agent"
+   }
+  },
+  {
+   "text": "(The supports are closed.) $X$ is locally Noetherian [lem-weil-pbc-finite-type-over-noetherian], so for every object $(\\mathcal F_n)$ of $\\mathit{Coh}(X,\\mathcal I)$ the coherent module $\\mathcal F_1$ is quasi-coherent of finite type [pqf-lem-coherent-ft-locnoeth] and $\\operatorname{Supp}\\mathcal F_1$ is a closed subset of $X$ [lem-weil-pbc-finite-type-module-support-closed]. As $f$ is of finite type, in particular locally of finite type [def-weil-finite-type-morphism], 'proper over $S$' is defined for closed subsets of $X$ [def-weil-pbc-closed-subset-proper-over-base] (1).",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-closed-subset-proper-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYV (lemma-systems-with-proper-support), proof; closedness of supports as in Lemma 0CYU (lemma-cat-module-support-proper-over-base) via Morphisms Lemma 056J"
+   }
+  },
+  {
+   "text": "(The empty set.) The empty closed subscheme $E=\\emptyset$ of $X$ (the closed immersion $\\emptyset\\to X$ [def-weil-closed-immersion], with ideal sheaf $\\ker(\\mathcal O_X\\to0)=\\mathcal O_X$ [def-sbc-closed-immersion-ideal-sheaf]) is proper over $S$: the morphism $\\emptyset\\to S$ is a homeomorphism onto the closed subset $\\emptyset$ and $\\mathcal O_S\\to0$ is surjective, so it is a closed immersion, hence proper [lem-weil-pbc-proper-fp-permanence] (c). The empty scheme is reduced and is the reduced induced closed subscheme structure on the closed subset $\\emptyset$ [def-weil-pbc-closed-subset-proper-over-base] (1), so the closed subset $\\emptyset\\subseteq X$ is proper over $S$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-pbc-closed-subset-proper-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYV (lemma-systems-with-proper-support), proof (the criterion Homology, Lemma 02MP (lemma-characterize-serre-subcategory), literature/stacks-project/homology.tex, condition (1): 0 is an object); written out by the agent"
+   }
+  },
+  {
+   "text": "(Proof of (1).) Let $\\mathcal C_1$ be the subcategory (1). The zero object $(0)_n$ has $\\operatorname{Supp}(0)=\\emptyset$, proper over $S$ by Step 3, so $(0)_n\\in\\mathcal C_1$. Let $0\\to(\\mathcal G_n)\\to(\\mathcal F_n)\\to(\\mathcal H_n)\\to0$ be a short exact sequence of $\\mathit{Coh}(X,\\mathcal I)$; by Step 1, $\\operatorname{Supp}\\mathcal F_1=\\operatorname{Supp}\\mathcal G_1\\cup\\operatorname{Supp}\\mathcal H_1$, all three closed by Step 2. If $(\\mathcal F_n)\\in\\mathcal C_1$, the closed subsets $\\operatorname{Supp}\\mathcal G_1,\\operatorname{Supp}\\mathcal H_1\\subseteq\\operatorname{Supp}\\mathcal F_1$ are proper over $S$ [lem-weil-pbc-closed-subset-proper-over-base-properties] (2). If $(\\mathcal G_n),(\\mathcal H_n)\\in\\mathcal C_1$, their union $\\operatorname{Supp}\\mathcal F_1$ is proper over $S$ [lem-weil-pbc-closed-subset-proper-over-base-union-preimage] (1). So $\\mathcal C_1$ is a Serre subcategory in the sense of the statement.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYV (lemma-systems-with-proper-support), proof of (1), with Lemma 0CYN (lemma-closed-closed-proper-over-base) and Lemma 0CYR (lemma-union-closed-proper-over-base)"
+   }
+  },
+  {
+   "text": "(Annihilators.) For a quasi-coherent ideal $\\mathcal J\\subseteq\\mathcal O_X$ and an $\\mathcal O_X$-module $\\mathcal P$, $\\mathcal J\\mathcal P$ is the image of $\\mathcal J\\otimes_{\\mathcal O_X}\\mathcal P\\to\\mathcal P$ [def-weil-pbc-coherent-formal-module] (0); the tensor product is the sheafification of $U\\mapsto\\mathcal J(U)\\otimes_{\\mathcal O_X(U)}\\mathcal P(U)$ [def-pur-sheaf-tensor-product], so each of its sections is locally a finite sum of tensors $a\\otimes s$, and $\\mathcal J\\mathcal P=0$ if and only if $as=0$ for all opens $U$, $a\\in\\mathcal J(U)$, $s\\in\\mathcal P(U)$. Hence: (i) if $\\mathcal J\\mathcal Q=0$ and $\\mathcal P\\subseteq\\mathcal Q$ then $\\mathcal J\\mathcal P=0$; (ii) if $\\mathcal J\\mathcal Q=0$ and $\\mathcal Q\\to\\mathcal R$ is surjective then $\\mathcal J\\mathcal R=0$ (for $r\\in\\mathcal R(U)$, $a\\in\\mathcal J(U)$, locally $r$ is the image of some $q$ [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (1), so $ar$ is locally the image of $aq=0$, and $ar=0$ by the sheaf property); (iii) if $\\mathcal A\\to\\mathcal B\\to\\mathcal C$ is exact at $\\mathcal B$, $\\mathcal J'\\mathcal A=0$ and $\\mathcal J\\mathcal C=0$, then $(\\mathcal J'\\mathcal J)\\mathcal B=0$ for the product ideal [def-sbc-ideal-sheaf-powers]: for $b\\in\\mathcal B(U)$, $a\\in\\mathcal J(U)$, $a'\\in\\mathcal J'(U)$ the image of $ab$ in $\\mathcal C$ is $a$ times the image of $b$, i.e. $0$, so on an open covering $U=\\bigcup U_i$, $ab|_{U_i}$ is the image of some $t_i\\in\\mathcal A(U_i)$ [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (2), and $a'ab|_{U_i}$ is the image of $a't_i=0$; thus $a'ab=0$, and since the sections of $\\mathcal J'\\mathcal J$ (the image of $\\mathcal J'\\otimes\\mathcal J\\to\\mathcal O_X$) are locally finite sums of products $a'a$, $(\\mathcal J'\\mathcal J)\\mathcal B=0$.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYV (lemma-systems-with-proper-support), proof of (2): 'I_Z annihilates G_n and H_n by (a) and (b)' and 'it follows from (a) that I_Z . I_Y annihilates F_n'; written out by the agent"
+   }
+  },
+  {
+   "text": "(Proof of (2): zero object, subobjects and quotients.) Let $\\mathcal C_2$ be the subcategory (2). The empty closed subscheme $E$ of Step 3 is proper over $S$ and $\\mathcal I_E\\cdot0=0$, so $(0)_n\\in\\mathcal C_2$. Let $0\\to(\\mathcal G_n)\\to(\\mathcal F_n)\\xrightarrow{\\alpha}(\\mathcal H_n)\\to0$ be short exact in $\\mathit{Coh}(X,\\mathcal I)$ and $Z\\subseteq X$ a closed subscheme with $Z\\to S$ proper and $\\mathcal I_Z\\mathcal F_n=0$ for all $n$. By [lem-weil-pbc-coherent-formal-short-exact-levels] (a), $\\mathcal F_n\\to\\mathcal H_n$ is surjective, so $\\mathcal I_Z\\mathcal H_n=0$ (Step 5 (ii)). By [lem-weil-pbc-coherent-formal-short-exact-levels] (b), for each $n$ there are $m\\ge n$ and a surjection $\\operatorname{Ker}(\\alpha_m)\\to\\mathcal G_n$; as $\\operatorname{Ker}(\\alpha_m)\\subseteq\\mathcal F_m$, $\\mathcal I_Z\\operatorname{Ker}(\\alpha_m)=0$ (Step 5 (i)) and $\\mathcal I_Z\\mathcal G_n=0$ (Step 5 (ii)). So $(\\mathcal G_n),(\\mathcal H_n)\\in\\mathcal C_2$, with the same $Z$.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-short-exact-levels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYV (lemma-systems-with-proper-support), proof of (2), first part"
+   }
+  },
+  {
+   "text": "(Proof of (2): extensions.) In the situation of Step 6 suppose instead that $Z,Y\\subseteq X$ are closed subschemes with $Z\\to S$, $Y\\to S$ proper, $\\mathcal I_Z\\mathcal G_n=0$ and $\\mathcal I_Y\\mathcal H_n=0$ for all $n$. By [lem-weil-pbc-coherent-formal-short-exact-levels] (a) and Step 5 (iii) (with $\\mathcal J'=\\mathcal I_Z$, $\\mathcal J=\\mathcal I_Y$), $(\\mathcal I_Z\\mathcal I_Y)\\mathcal F_n=0$ for all $n$. By [lem-weil-pbc-product-ideal-closed-subscheme-union] there is a closed subscheme $W\\subseteq X$ with ideal sheaf $\\mathcal I_W=\\mathcal I_Z\\mathcal I_Y$ and underlying set $Z\\cup Y$. The closed subsets $Z$, $Y$ are proper over $S$, since they carry a closed subscheme structure proper over $S$ [lem-weil-pbc-closed-subset-proper-over-base-properties] (1); so $Z\\cup Y$ is proper over $S$ [lem-weil-pbc-closed-subset-proper-over-base-union-preimage] (1), and therefore $W\\to S$ is proper, $W$ being a closed subscheme structure on $Z\\cup Y$ [lem-weil-pbc-closed-subset-proper-over-base-properties] (1). Thus $(\\mathcal F_n)\\in\\mathcal C_2$. With Step 6, $\\mathcal C_2$ is a Serre subcategory in the sense of the statement.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-short-exact-levels",
+    "lem-weil-pbc-product-ideal-closed-subscheme-union",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYV (lemma-systems-with-proper-support), proof of (2), last part: I_{Z cup Y} = I_Z . I_Y, Lemma 0CYR and Definition 0CYM (any scheme structure on the union)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "lem-weil-pbc-coherent-formal-short-exact-levels",
+  "lem-weil-pbc-formal-system-support-constant",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+  "def-weil-pbc-coherent-formal-module",
+  "def-pur-sheaf-tensor-product",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-product-ideal-closed-subscheme-union"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 0CYV (lemma-systems-with-proper-support, line 7531) and its proof; the stalk and annihilator arguments, the zero object and the remarks (a), (b) (from the proof of Lemma 087X) are written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,7 +166,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +186,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-formal-systems-proper-support-serre",
+  "worker": "stage1",
+  "summary": "Split along the proof of Stacks 0CYV (tags 0CYV, 087X, 02MP, 0CYN, 0CYR, 0CYM, 01QQ, 01IN, 00E0 checked against tags/tags). Seven steps: supports in a short exact sequence via stalks (Supp F_1 = Supp G_1 cup Supp H_1), closedness of supports, the empty set proper over S (closed immersion), proof of (1) by 0CYN/0CYR, annihilator calculus (sub, quotient, extension gives product ideal), proof of (2) for sub/quotients and for extensions via the closed subscheme cut out by I_Z I_Y and 0CYL. Three new nodes: lem-weil-pbc-coherent-formal-short-exact-levels (Stacks' remarks (a), (b), which the abelian node does not state: its statement gives termwise cokernels only, kernels are not termwise), lem-weil-pbc-formal-system-support-constant (Supp F_n = Supp F_1, stated without proof by Stacks), both unsplit; lem-weil-pbc-product-ideal-closed-subscheme-union, a Mathlib leaf (IdealSheafData.support_mul with subschemeι, ker_subschemeι, range_subschemeι, Hom.support_ker). Statement unchanged in content; citations [lem-weil-pbc-finite-type-over-noetherian] (for 'so X is Noetherian') and [def-sbc-closed-immersion-ideal-sheaf] (for I_Z) added, with stmt_deps."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Seven steps along Stacks 0CYV: supports in a short exact sequence of Coh(X,I) (on stalks, via two new unsplit nodes: levelwise exactness remarks (a),(b) from the proof of 087X, and Supp(F_n) = Supp(F_1), which Stacks asserts without proof; the proof sketch the worker wrote into the latter's statement was moved to its lead_note by L), supports closed (056J node), the empty subscheme proper, part (1) from 0CYN/0CYR nodes, annihilator facts, part (2) for subobjects and quotients, extensions via the closed subscheme cut out by I_Z I_Y (new leaf of a few Mathlib lemmas: IdealSheafData.support_mul Basic.lean:423, ker_subschemeι :576, range_subschemeι :493, the closed-immersion instance ClosedImmersion.lean:94; lines verified). Statement: two citations added, content unchanged. Brief error: exactness in Coh(X,I) is termwise only for cokernels (lem-weil-pbc-coherent-formal-modules-abelian). pqf-lem-coherent-ft-locnoeth already on the route via the definition node. Tags verified by the worker (0CYV, 087X, 02MP, 0CYN, 0CYR, 0CYM, 01QQ, 01IN, 00E0)."
+ }
 }

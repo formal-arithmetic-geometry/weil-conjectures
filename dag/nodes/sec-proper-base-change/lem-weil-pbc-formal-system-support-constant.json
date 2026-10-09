@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-formal-system-support-constant",
+ "kind": "statement",
+ "title": "All levels of a coherent formal module have the same support",
+ "statement": "Let $X$ be a Noetherian scheme (a locally Noetherian scheme [pqf-def-locnoeth] with quasi-compact underlying space), $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals and $(\\mathcal F_n)_{n\\ge1}$ an object of $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module]. Then $\\operatorname{Supp}(\\mathcal F_n)=\\operatorname{Supp}(\\mathcal F_1)$ for every $n\\ge1$, where $\\operatorname{Supp}(\\mathcal F)=\\{x\\in X:\\mathcal F_x\\ne0\\}$ [def-weil-pbc-closed-subset-proper-over-base] (2).",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, proof of Lemma 0CYV (lemma-systems-with-proper-support), first sentence of the proof of (1) ('Then Supp(F_n) = Supp(F_1) for all n >= 1'), stated there without proof"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-closed-subset-proper-over-base"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "support of sheaf of modules in inverse system of coherent modules modulo powers of ideal is constant",
+   "results": "Module.support, Module.stableUnderSpecialization_support (RingTheory), IdealSheafData.isClosed_supportSet, IdealSheafData.support: support of a module over a ring and of an ideal sheaf only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse system of modules F_n with I^n F_n = 0 and F_{n+1}/I^n F_{n+1} = F_n has support of F_n equal to support of F_1",
+   "results": "Module.support_quotient (Supp(M/IM) = Supp M cap V(I), RingTheory.Support), Hausdorffification, AdicCompletion.submodule, localCohomology: ring-level only; Module.support_quotient with I nilpotent on M would give the module-level analogue but there is no sheaf-level statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Module.support' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rlnE 'InverseSystem|inverse system' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "no support of a sheaf of O_X-modules in AlgebraicGeometry; no inverse systems of sheaves of modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-systems-proper-support-serre",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "The proof sketch that the worker had put in the statement was moved here by L (2026-10-10): Idea: the transition map $\\mathcal F_n\\to\\mathcal F_1$ is surjective, giving $\\supseteq$; on stalks $\\mathcal F_{1,x}\\cong\\mathcal F_{n,x}/\\mathcal I_x\\mathcal F_{n,x}$ and $\\mathcal I_x^n\\mathcal F_{n,x}=0$, so $\\mathcal F_{1,x}=0$ forces $\\mathcal F_{n,x}=\\mathcal I_x^n\\mathcal F_{n,x}=0$.)"
+}

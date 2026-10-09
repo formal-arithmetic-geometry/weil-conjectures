@@ -500,3 +500,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:35 UTC (2026-10-09) — Reviewed and committed formal-completion-fully-faithful-proper (0883; 3 new unsplit nodes: 01CQ, 0882, 087U). Launched a worker on g-ring-quotient (07PP(3)).
 - 21:36 UTC (2026-10-09) — Reviewed and committed formal-systems-pullback (0887; 1 new unsplit node).
 - 21:38 UTC (2026-10-09) — Noted: C1 released complete-local-g-ring at 21:28 and 21:36 ('workers terminated with provider 429 before work'); E1 released descend-closed-immersion at 21:28. Both taken by L in queue order; workers launched (complete-local-g-ring 07PS, geometric-point-morphism-stalk-bijection 04FN).
+- 21:38 UTC (2026-10-09) — Reviewed and committed formal-systems-proper-support-serre (0CYV; 3 new nodes). STATE row.

@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-product-ideal-closed-subscheme-union",
+ "kind": "statement",
+ "title": "The closed subscheme cut out by a product of two ideal sheaves has the union as underlying set",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $i:Z\\to X$, $i':Y\\to X$ closed immersions [def-weil-closed-immersion] with ideal sheaves $\\mathcal I_Z=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ and $\\mathcal I_Y=\\ker(\\mathcal O_X\\to i'_*\\mathcal O_Y)$ [def-sbc-closed-immersion-ideal-sheaf]. Then the product $\\mathcal I_Z\\mathcal I_Y$ [def-sbc-ideal-sheaf-powers] is a quasi-coherent sheaf of ideals of $\\mathcal O_X$, there is a closed immersion $w:W\\to X$ whose ideal sheaf $\\ker(\\mathcal O_X\\to w_*\\mathcal O_W)$ is $\\mathcal I_Z\\mathcal I_Y$, and its image is $w(W)=i(Z)\\cup i'(Y)$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, proof of Lemma 0CYV (lemma-systems-with-proper-support), part (2): 'I_{Z cup Y} = I_Z . I_Y'; with Morphisms, Lemma 01QQ (morphisms-lemma-closed-immersion-bijection-ideals, literature/stacks-project/morphisms.tex) for the closed immersion of a quasi-coherent ideal, Schemes, Lemma 01IN (schemes-lemma-closed-subspace-scheme) for the affine-local description, and Algebra, Lemma 00E0 (algebra-lemma-Zariski-topology) part (9) with V(IJ) = V(I cap J) for the underlying set"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "vanishing locus of product of ideal sheaves is union of closed subschemes",
+   "results": "PrimeSpectrum.zeroLocus_mul, PrimeSpectrum.zeroLocus_inf, Scheme.zeroLocus_inf, Scheme.zeroLocus_iInf (ring and affine level)",
+   "date": "2026-10-10",
+   "verdict": "generalization: affine-level ingredient; the sheaf-level statement is found by the grep below"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.support (_ * _)",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.support_mul : (I * J).support = I.support ⊔ J.support (Mathlib.AlgebraicGeometry.IdealSheaf.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match (support clause)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed subscheme defined by product of two ideal sheaves has underlying set the union",
+   "results": "Scheme.zeroLocus_inf, IdealSheafData.vanishingIdeal_sup, vanishingIdeal_iSup, Scheme.zeroLocus_iInf_of_nonempty",
+   "date": "2026-10-10",
+   "verdict": "no match by itself (intersection, not product)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'support_mul\\|instance : Mul' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; grep -n 'range_subschemeι\\|ker_subschemeι' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; grep -n 'lemma Hom.support_ker' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; grep -rn 'IsClosedImmersion I.subschemeι' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+   "results": "Basic.lean:410 instance Mul X.IdealSheafData (ideal (I*J) U = I U * J U), :423 support_mul; Subscheme.lean:493 range_subschemeι (Set.range I.subschemeι = I.support), :576 ker_subschemeι (I.subschemeι.ker = I); Basic.lean:845 Hom.support_ker (f.ker.support = closure (range f) for quasi-compact f); ClosedImmersion.lean:94 instance IsClosedImmersion I.subschemeι",
+   "date": "2026-10-10",
+   "verdict": "match (a few lemmas, one per clause)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.support_mul, with IdealSheafData.subschemeι, IdealSheafData.ker_subschemeι, IdealSheafData.range_subschemeι and Scheme.Hom.support_ker",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+  "line": 423,
+  "how": "a few Mathlib lemmas, one per clause: the ideal sheaves are i.ker, i'.ker : X.IdealSheafData (Scheme.Hom.ker, the match of def-sbc-closed-immersion-ideal-sheaf), their product is i.ker * i'.ker (instance Mul, Basic.lean:410, the match of def-sbc-ideal-sheaf-powers), quasi-coherent by being an IdealSheafData; W = (i.ker * i'.ker).subscheme with w = subschemeι, a closed immersion (instance, Morphisms/ClosedImmersion.lean:94) with w.ker = i.ker * i'.ker (ker_subschemeι, IdealSheaf/Subscheme.lean:576); its image is (i.ker * i'.ker).support (range_subschemeι, Subscheme.lean:493) = i.ker.support ⊔ i'.ker.support (support_mul, Basic.lean:423) = closure(range i) ∪ closure(range i') (Hom.support_ker, Basic.lean:845, closed immersions being quasi-compact) = i(Z) ∪ i'(Y), the ranges being closed"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-systems-proper-support-serre",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
