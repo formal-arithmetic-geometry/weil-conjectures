@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+ "kind": "statement",
+ "title": "Abelian sheaves on the small etale site form a Grothendieck abelian category",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $\\Ab(T_{\\Et})$ the category of sheaves of abelian groups on its small etale site [def-weil-pbc-abelian-etale-sheaves]. Then $\\Ab(T_{\\Et})$ is a Grothendieck abelian category [def-sp-grothendieck-abelian]: it is abelian, it has all small colimits, filtered colimits in it are exact (for a small filtered category $\\mathcal I$ and a diagram of short exact sequences $0\\to F_i\\to G_i\\to H_i\\to0$, the sequence $0\\to\\colim F_i\\to\\colim G_i\\to\\colim H_i\\to0$ is exact; in particular a filtered colimit of monomorphisms is a monomorphism), and it has a generator.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma 03CO (label lemma-limits-colimits-abelian-sheaves: all colimits exist, filtered colimits are exact) and Lemma 03EW (3) for O = Z (generator); Cohomology on Sites, proof of Lemma 07AC (sites-cohomology.tex)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaves of abelian groups on the small etale site form a Grothendieck abelian category",
+   "results": "CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.instIsGrothendieckAbelian (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf); IsGrothendieckAbelian.mk/casesOn; CategoryTheory.sheafIsAbelian; Sheaf.instCategorySheaf",
+   "date": "2026-10-09",
+   "verdict": "generalization (essentially small sites); the étale instance found by loogle/grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of sheaves of abelian groups on small etale site is Grothendieck abelian",
+   "results": "CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall (GrothendieckAxioms.Sheaf); CategoryTheory.sheafIsAbelian; instAbelianLightCondMod; SheafOfModules.instAbelian",
+   "date": "2026-10-09",
+   "verdict": "generalization; see loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology",
+   "results": "isGrothendieckAbelian_sheaf_smallEtaleTopology (S : Scheme) (A) [Category.{u} A] [ConcreteCategory A ..] [PreservesLimits (forget A)] [HasColimits A] [HasLimits A] [ReflectsIsomorphisms (forget A)] [PreservesFilteredColimitsOfSize.{u,u} (forget A)] [Abelian A] [IsGrothendieckAbelian.{u} A] : IsGrothendieckAbelian.{u} (Sheaf S.smallEtaleTopology A) (Mathlib.AlgebraicGeometry.Sites.AffineEtale)",
+   "date": "2026-10-09",
+   "verdict": "match with A = AddCommGrpCat.{u}"
+  },
+  {
+   "tool": "grep",
+   "query": "'IsGrothendieckAbelian' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Algebra/Category/Grp/AB.lean, CategoryTheory/Abelian/GrothendieckCategory/Basic.lean",
+   "results": "AffineEtale.lean:149 isGrothendieckAbelian_sheaf_smallEtaleTopology (via AffineEtale.sheafEquiv :140 and Sheaf.isGrothendieckAbelian_of_essentiallySmall); Grp/AB.lean:109 instance IsGrothendieckAbelian.{u} AddCommGrpCat.{u}; GrothendieckCategory/Basic.lean:70 class IsGrothendieckAbelian (locallySmall, hasFilteredColimitsOfSize, ab5OfSize, hasSeparator), :99 IsGrothendieckAbelian.hasColimits : HasColimitsOfSize.{w,w}",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology",
+  "file": "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+  "how": "specializes in one line: A = AddCommGrpCat.{u} (Grothendieck abelian by the instance at Mathlib/Algebra/Category/Grp/AB.lean:109; concrete with forget preserving limits and filtered colimits and reflecting isomorphisms), giving IsGrothendieckAbelian.{u} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u}); its fields are AB5OfSize.{u,u} (exact filtered colimits) and HasSeparator, and small colimits are IsGrothendieckAbelian.hasColimits (GrothendieckCategory/Basic.lean:99); abelian by CategoryTheory.sheafIsAbelian"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

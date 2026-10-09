@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-free-yoneda-presheaf-module",
+ "kind": "statement",
+ "title": "Morphisms out of the free presheaf of modules on a representable are sections",
+ "statement": "Let $\\mathcal C$ be a category, $\\mathcal O$ a presheaf of rings on $\\mathcal C$ and $U$ an object of $\\mathcal C$. Let $\\mathcal O[h_U]$ be the presheaf of $\\mathcal O$-modules $V\\mapsto\\bigoplus_{\\varphi\\in\\mathrm{Mor}_{\\mathcal C}(V,U)}\\mathcal O(V)$ (the free $\\mathcal O(V)$-module on the set $\\mathrm{Mor}_{\\mathcal C}(V,U)$, with basis elements $e_\\varphi$), whose restriction along $\\psi:V'\\to V$ is the $\\mathcal O(\\psi)$-semilinear map sending $e_\\varphi$ to $e_{\\varphi\\psi}$ (this is the presheaf extension by zero $j_{U!}\\mathcal O_U$ of Stacks, sites-modules, Remark 03EJ). Then for every presheaf of $\\mathcal O$-modules $\\mathcal P$ [def-weil-presheaf-modules-sheafification] the map $\\mathrm{Hom}_{\\mathrm{PMod}(\\mathcal O)}(\\mathcal O[h_U],\\mathcal P)\\to\\mathcal P(U)$, $\\beta\\mapsto\\beta_U(e_{\\mathrm{id}_U})$, is a bijection, natural in $\\mathcal P$: for $\\gamma:\\mathcal P\\to\\mathcal P'$ the element attached to $\\gamma\\circ\\beta$ is $\\gamma_U(\\beta_U(e_{\\mathrm{id}_U}))$. Its inverse sends $s\\in\\mathcal P(U)$ to the morphism with $e_\\varphi\\mapsto\\mathcal P(\\varphi)(s)=s|_\\varphi$ on $V$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Remark 03EJ (label remark-localize-presheaves: j_{U!}G on presheaves is V -> (+)_{phi in Mor(V,U)} G(V -> U)), Lemma 03EV proof (j_{U!}O_U(V) = (+)_{phi} O(V)), and the equation after Lemma 03DI (label equation-map-lower-shriek-OU-into-module: Hom_O(j_{U!}O_U, F) = F(U)), here for presheaves"
+ },
+ "stmt_deps": [
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Hom from sheafification of free presheaf of modules on yoneda X to a sheaf of modules M is M(X)",
+   "results": "SheafOfModules.free, SheafOfModules.ιFree, SheafOfModules.freeFunctor (Mathlib.Algebra.Category.ModuleCat.Sheaf.Free); CategoryTheory.Sheaf.freeYoneda (Mathlib.CategoryTheory.Generator.Sheaf); PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.toSheafify",
+   "date": "2026-10-09",
+   "verdict": "no direct match for the sheaf version; the presheaf version is found by loogle below"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.freeYonedaEquiv",
+   "results": "PresheafOfModules.freeYonedaEquiv : ((PresheafOfModules.free R).obj (yoneda.obj X) ⟶ M) ≃ M.obj (op X); freeYonedaEquiv_symm_app; freeYonedaEquiv_comp (Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "'freeYoneda' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/ (read Generator.lean:50-95, Free.lean:43-110)",
+   "results": "Generator.lean:58 freeYonedaEquiv (= freeHomEquiv.trans yonedaEquiv), :64 freeYonedaEquiv_symm_app (the element is the image of freeMk (𝟙 X)), :69 freeYonedaEquiv_comp (naturality), :86 freeYoneda.isSeparating; Free.lean:43 freeObj F (V ↦ free R(V)-module on F(V)), :87 freeHomEquiv",
+   "date": "2026-10-09",
+   "verdict": "match: (free R).obj (yoneda.obj U) is O[h_U] (Free.lean:43, ModuleCat.free on Mor(V,U)), freeYonedaEquiv is the bijection, freeYonedaEquiv_symm_app and freeYonedaEquiv_comp are the formula and the naturality"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PresheafOfModules.freeYonedaEquiv",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean",
+  "how": "exact: for R : Cᵒᵖ ⥤ RingCat.{v} with C : Category.{v} (for T_et: C = T.Etale, Category.{u}, rings in RingCat.{u}), `freeYonedaEquiv : ((free R).obj (yoneda.obj U) ⟶ M) ≃ M.obj (op U)` (line 58); the value is β_U(freeMk (𝟙 U)) by freeYonedaEquiv_symm_app (line 64) and naturality is freeYonedaEquiv_comp (line 69); (free R).obj (yoneda.obj U) is PresheafOfModules.freeObj (Free.lean:43), V ↦ ModuleCat.free (R(V)) on Mor(V,U)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

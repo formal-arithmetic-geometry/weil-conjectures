@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+ "kind": "statement",
+ "title": "Colimits of sheaves of modules and the forgetful functor to abelian sheaves",
+ "statement": "Let $\\mathcal C$ be a site on which every presheaf of abelian groups has a sheafification [def-weil-pbc-sheafification] (e.g. the small etale site of a scheme), let $\\mathcal O$ be a sheaf of rings on $\\mathcal C$, let $\\Mod(\\mathcal O)$ be the abelian category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category] and $\\Ab(\\mathcal C)$ the category of sheaves of abelian groups on $\\mathcal C$, and let $\\mathrm{forget}:\\Mod(\\mathcal O)\\to\\Ab(\\mathcal C)$ be the functor forgetting the $\\mathcal O$-module structure. Then: (1) $\\mathrm{forget}$ is faithful and exact: it preserves kernels and cokernels (kernels are sectionwise, cokernels are the sheafified sectionwise cokernels in both categories); (2) every diagram $\\mathcal I\\to\\Mod(\\mathcal O)$, $i\\mapsto\\mathcal F_i$, indexed by a small category $\\mathcal I$, has a colimit, namely the sheafification [def-weil-presheaf-modules-sheafification] of the sectionwise colimit $V\\mapsto\\colim_i\\mathcal F_i(V)$ with its evident $\\mathcal O$-module structure, and every such diagram has a limit, computed sectionwise; (3) $\\mathrm{forget}$ commutes with all small colimits and limits: the underlying abelian sheaf of $\\colim_i\\mathcal F_i$ (resp. $\\lim_i\\mathcal F_i$) is the colimit (resp. limit) of the underlying abelian sheaves in $\\Ab(\\mathcal C)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma 03DA (label lemma-abelian: Mod(O) abelian, forgetful functor to Ab(C) exact) and Lemma 03DB (label lemma-limits-colimits: limits and colimits exist and the forgetful functor commutes with them), with Lemma 03CO (label lemma-limits-colimits-abelian-sheaves) and Lemma 03CY (label lemma-sheafification-presheaf-modules)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the forgetful functor from sheaves of modules to sheaves of abelian groups preserves colimits",
+   "results": "PresheafOfModules.toPresheaf_preservesColimit, toPresheaf_preservesColimitsOfSize, toPresheaf_preservesColimitsOfShape (Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits: presheaf level only); SheafOfModules.toSheaf_obj_val; SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat (Sheaf.Colimits); ModuleCat.forget₂PreservesColimitsOfSize",
+   "date": "2026-10-09",
+   "verdict": "no match: colimits exist for SheafOfModules and toPresheaf preserves colimits of presheaves of modules, but nothing says SheafOfModules.toSheaf preserves colimits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "forgetful functor from sheaves of O-modules to abelian sheaves preserves colimits and filtered colimits of sheaves of modules are exact",
+   "results": "SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat (Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits); Condensed.instAB5CondensedMod; SheafOfModules.instAbelian; Sheaf.instHasExactColimitsOfShape... (GrothendieckAxioms.Sheaf, for Sheaf J A)",
+   "date": "2026-10-09",
+   "verdict": "no match for clause (3)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesColimitsOfSize (SheafOfModules.toSheaf _)",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "'toSheaf' with 'Colimit|Preserves|Faithful|ReflectsIso|sheafification' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Sheaf/*.lean, Presheaf/Sheafification.lean",
+   "results": "Sheaf.lean:128 instance (toSheaf R).Faithful; Presheaf/Sheafification.lean:41 (toSheaf R).ReflectsIsomorphisms, :73 sheafificationCompToSheaf : sheafification α ⋙ toSheaf ≅ toPresheaf ⋙ presheafToSheaf J AddCommGrpCat; Sheaf/Limits.lean:62 createsLimit (forget), :88/:111 forgetPreservesLimits, :118 PreservesFiniteLimits (toSheaf R); Sheaf/Colimits.lean:32,40 HasColimitsOfShape/HasColimitsOfSize (SheafOfModules R) from presheaves via sheafification; no PreservesColimits or PreservesFiniteColimits for toSheaf",
+   "date": "2026-10-09",
+   "verdict": "no match as one statement: clauses (1) faithful + finite limits, (2) existence and (3) for limits are in Mathlib; preservation of colimits (and of cokernels) by toSheaf follows from sheafificationCompToSheaf + toPresheaf_preservesColimitsOfSize + presheafToSheaf a left adjoint, an argument of several steps, so not a leaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

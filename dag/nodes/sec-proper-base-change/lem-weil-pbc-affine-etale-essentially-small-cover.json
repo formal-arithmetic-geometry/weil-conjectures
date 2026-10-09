@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-affine-etale-essentially-small-cover",
+ "kind": "statement",
+ "title": "A set of affine etale schemes covers every object of the small etale site",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $T_{\\Et}$ its small etale site [def-weil-pbc-etale-site]. There is a set $\\mathcal S$ of objects of $T_{\\Et}$, each of the form $\\mathrm{Spec}(A)\\to T$ with $A$ a ring (affine schemes etale over $T$), such that every object $U\\to T$ of $T_{\\Et}$ with $U$ affine is isomorphic in $T_{\\Et}$ to a member of $\\mathcal S$; consequently every object $V$ of $T_{\\Et}$ has a covering $\\{U_k\\to V\\}_{k\\in K}$ in $T_{\\Et}$ with every $U_k\\in\\mathcal S$ (refine an affine open covering of $V$). In other words the full subcategory $T_{\\mathrm{aff},\\Et}$ of affine objects is essentially small and cover-dense in $T_{\\Et}$.",
+ "source": {
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Topologies, Definitions 021A (label definition-big-etale-site) and 021B (label definition-big-small-etale, small affine etale site S_{affine,etale}), Lemma 04HR (label lemma-alternative: S_{affine,etale} -> S_etale induces an equivalence of topoi; its hint refers to the proof of Lemma 021E, condition (5): every scheme has an affine open covering); the set-theoretic bound: Sets, Lemma 04T7 (label lemma-bound-finite-type, literature/stacks-project/sets.tex: size(X) <= size(S) for X -> S locally of finite type with X quasi-compact)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of affine schemes etale over S is essentially small",
+   "results": "CategoryTheory.EssentiallySmall.mk, CategoryTheory.essentiallySmallSelf (Mathlib.CategoryTheory.EssentiallySmall); AlgebraicGeometry.AffineScheme; AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-09",
+   "verdict": "no direct hit; found by loogle and grep below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every object of the small etale site is covered by affine schemes etale over S, cover dense functor",
+   "results": "AlgebraicGeometry.Scheme.smallEtaleTopology, etaleTopology, smallEtalePretopology, etalePretopology (Mathlib.AlgebraicGeometry.Sites.Etale); AffineZariskiSite toOpensFunctor IsCoverDense (Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski, Zariski analogue)",
+   "date": "2026-10-09",
+   "verdict": "no direct hit for the etale case; found by loogle and grep below"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EssentiallySmall (AlgebraicGeometry.Scheme.AffineEtale _)",
+   "results": "AlgebraicGeometry.Scheme.AffineEtale.instEssentiallySmall : EssentiallySmall.{u, u, u + 1} S.AffineEtale (Mathlib.AlgebraicGeometry.Sites.AffineEtale)",
+   "date": "2026-10-09",
+   "verdict": "match (clause: essentially small)"
+  },
+  {
+   "tool": "grep",
+   "query": "'EssentiallySmall|IsCoverDense|def AffineEtale|Spec' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean (read lines 40-96)",
+   "results": "AffineEtale.lean:46 def AffineEtale S (costructured arrows Spec R ⟶ S étale, R : CommRingCat.{u}); :59 AffineEtale.Spec : S.AffineEtale ⥤ S.Etale, Full (:67) and Faithful (:63); :71 instance (AffineEtale.Spec S).IsCoverDense S.smallEtaleTopology; :91 instance EssentiallySmall.{u} S.AffineEtale",
+   "date": "2026-10-09",
+   "verdict": "match: conjunction of two Mathlib instances"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.AffineEtale.instEssentiallySmall",
+  "file": "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+  "how": "conjunction of two Mathlib instances, one per clause: `EssentiallySmall.{u} S.AffineEtale` (line 91: the category of rings R with an étale Spec R ⟶ T has a small skeleton, whose images under the fully faithful `AffineEtale.Spec` (lines 59-69) form the set 𝒮, and every affine U → T is isomorphic to Spec Γ(U) → T, an object of AffineEtale) and `(AffineEtale.Spec S).IsCoverDense S.smallEtaleTopology` (line 71: for every V the sieve of morphisms factoring through an object Spec R is covering; replacing each such Spec R by its isomorphic representative in 𝒮 gives a covering family from 𝒮)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

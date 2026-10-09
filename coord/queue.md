@@ -1,12 +1,11 @@
 # Work queue
 
-563 items; claim with `tools/claim.py next <group> [--stage N]`.
+560 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (547)
+## Stage 1: nodes to split (544)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-invertible-pullback-tensor` | 1004 | none |
 | `lem-weil-pbc-module-sheaves-grothendieck-abelian` | 1004 | none |
 | `lem-weil-pbc-p1-power-affine-charts` | 1004 | none |
 | `lem-weil-pbc-projective-morphism-chart-preimage` | 1004 | none |
@@ -39,11 +38,9 @@
 | `lem-weil-pbc-henselian-etale-retraction` | 1005 | none |
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1005 | none |
 | `lem-weil-pbc-invertible-generating-sections-fibre` | 1005 | none |
-| `lem-weil-pbc-invertible-pullback-invertible` | 1005 | none |
 | `lem-weil-pbc-module-pullback-tensor` | 1005 | none |
 | `lem-weil-pbc-module-stalk-pullback` | 1005 | none |
 | `lem-weil-pbc-module-stalk-tensor` | 1005 | none |
-| `lem-weil-pbc-module-tensor-symmetric-monoidal` | 1005 | none |
 | `lem-weil-pbc-open-closed-short-exact` | 1005 | none |
 | `lem-weil-pbc-power-set-complex-contractible` | 1005 | none |
 | `lem-weil-pbc-pullback-cohomology-long-exact-ladder` | 1005 | none |
@@ -575,7 +572,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 563 nodes that wait for stage 1, 98 nodes that wait for a statement dependency.
+Not open yet: 560 nodes that wait for stage 1, 101 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
