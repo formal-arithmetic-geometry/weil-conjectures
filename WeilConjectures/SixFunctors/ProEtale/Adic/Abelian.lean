@@ -428,4 +428,120 @@ theorem IsAdicLisseSheaf.isAdicStratifiedLisseSheaf_kernel_cokernel {Y : Scheme.
 
 end Stratification
 
+section Constructible
+
+open TopologicalSpace Topology
+
+/-- Refining a stratification by stratifications of its strata: a sheaf whose restrictions to
+the strata of a finite stratification of a Noetherian scheme are stratified lisse is stratified
+lisse. -/
+lemma IsAdicStratifiedLisseSheaf.of_stratification {V : Scheme.{u}} [NoetherianSpace V]
+    {K : AdicSheaf l V} {ι : Type} [Finite ι] (Z : ι → Scheme.{u}) (i : (k : ι) → Z k ⟶ V)
+    (himm : ∀ k, IsImmersion (i k)) (huniq : ∀ y, ∃! k, y ∈ Set.range (i k).base)
+    (h : ∀ k, IsAdicStratifiedLisseSheaf ((i k)^*ᵃ[l].obj K)) :
+    IsAdicStratifiedLisseSheaf K := by
+  choose κ hκ S s hs hsc hsu hsl using h
+  refine ⟨Σ k, κ k, inferInstance, fun p ↦ S p.1 p.2, fun p ↦ s p.1 p.2 ≫ i p.1,
+    fun p ↦ inferInstance, fun p ↦ ?_, fun y ↦ ?_, fun p ↦ ?_⟩
+  · rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp]
+    exact (hsc p.1 p.2).image_of_isEmbedding (i p.1).isEmbedding (i p.1).isLocallyClosed_range
+  · obtain ⟨k, ⟨z, rfl⟩, hk⟩ := huniq y
+    obtain ⟨m, hm, hm'⟩ := hsu k z
+    refine ⟨⟨k, m⟩, ?_, ?_⟩
+    · obtain ⟨w, rfl⟩ := hm
+      exact ⟨w, rfl⟩
+    · rintro ⟨k', m'⟩ ⟨w, hw⟩
+      change (s k' m' ≫ i k') w = _ at hw
+      rw [Scheme.Hom.comp_apply] at hw
+      obtain rfl : k' = k := hk k' ⟨_, hw⟩
+      obtain rfl := (i k').isEmbedding.injective hw
+      obtain rfl : m' = m := hm' m' ⟨w, rfl⟩
+      rfl
+  · exact (hsl p.1 p.2).of_iso ((adicUpperStarComp l _ _).app K).symm
+
+/-- Two stratified lisse sheaves are lisse on the strata of a common stratification. -/
+lemma IsAdicStratifiedLisseSheaf.exists_common {V : Scheme.{u}} {F G : AdicSheaf l V}
+    (hF : IsAdicStratifiedLisseSheaf F) (hG : IsAdicStratifiedLisseSheaf G) :
+    ∃ (ι : Type) (_ : Finite ι) (Z : ι → Scheme.{u}) (i : (k : ι) → Z k ⟶ V),
+      (∀ k, IsImmersion (i k)) ∧ (∀ y, ∃! k, y ∈ Set.range (i k).base) ∧
+      ∀ k, IsAdicLisseSheaf ((i k)^*ᵃ[l].obj F) ∧ IsAdicLisseSheaf ((i k)^*ᵃ[l].obj G) := by
+  obtain ⟨ι, hι, Z, i, hi, -, hcover, h⟩ := hF
+  obtain ⟨ι', hι', Z', i', hi', -, hcover', h'⟩ := hG
+  refine ⟨ι × ι', inferInstance, fun k ↦ pullback (i k.1) (i' k.2),
+    fun k ↦ pullback.fst (i k.1) (i' k.2) ≫ i k.1, fun k ↦ inferInstance, fun x ↦ ?_,
+    fun k ↦ ⟨((h k.1).upperStar _).of_iso ((adicUpperStarComp l _ _).app F).symm, ?_⟩⟩
+  · obtain ⟨k, ⟨z, hz⟩, hk⟩ := hcover x
+    obtain ⟨k', ⟨z', hz'⟩, hk'⟩ := hcover' x
+    obtain ⟨t, ht, -⟩ := Scheme.Pullback.exists_preimage_pullback z z' (hz.trans hz'.symm)
+    refine ⟨(k, k'), ⟨t, by rw [Scheme.Hom.comp_apply, ht, hz]⟩, fun m ⟨t', ht'⟩ ↦ ?_⟩
+    refine Prod.ext (hk m.1 ⟨_, ht'⟩) (hk' m.2 ⟨pullback.snd (i m.1) (i' m.2) t', ?_⟩)
+    rw [← ht', ← Scheme.Hom.comp_apply, ← pullback.condition, Scheme.Hom.comp_apply]
+  · exact (((h' k.2).upperStar (pullback.snd (i k.1) (i' k.2))).of_iso
+      ((adicUpperStarCompIso l pullback.condition.symm).app G)).of_iso
+      ((adicUpperStarComp l (pullback.fst (i k.1) (i' k.2)) (i k.1)).app G).symm
+
+/-- **Kernels and cokernels of constructible sheaves are constructible** (Bhatt–Scholze, §6.8),
+on a locally Noetherian scheme: on a common stratification of an affine open neighbourhood both
+sheaves are lisse, and the kernel and cokernel of a morphism of lisse sheaves are stratified
+lisse. -/
+theorem IsAdicConstructibleSheaf.kernel_cokernel {X : Scheme.{u}} [IsLocallyNoetherian X]
+    {F G : AdicSheaf l X} (hF : IsAdicConstructibleSheaf F) (hG : IsAdicConstructibleSheaf G)
+    (φ : F ⟶ G) :
+    IsAdicConstructibleSheaf (kernel φ) ∧ IsAdicConstructibleSheaf (cokernel φ) := by
+  have key (x : X) : ∃ V : X.Opens, x ∈ V ∧
+      IsAdicStratifiedLisseSheaf ((V.ι)^*ᵃ[l].obj (kernel φ)) ∧
+      IsAdicStratifiedLisseSheaf ((V.ι)^*ᵃ[l].obj (cokernel φ)) := by
+    obtain ⟨W, j, hj, ⟨w, hw⟩, hFs⟩ := hF x
+    obtain ⟨W', j', hj', ⟨w', hw'⟩, hGs⟩ := hG x
+    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVsub⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open
+      (⟨⟨w, hw⟩, ⟨w', hw'⟩⟩ : x ∈ Set.range j.base ∩ Set.range j'.base)
+      (j.isOpenEmbedding.isOpen_range.inter j'.isOpenEmbedding.isOpen_range)
+    have : IsNoetherianRing Γ(X, V) := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
+    have : NoetherianSpace V := noetherianSpace_of_isAffineOpen V hV
+    let a := IsOpenImmersion.lift j (Scheme.Opens.ι V) (by
+      rw [Scheme.Opens.range_ι]; exact hVsub.trans Set.inter_subset_left)
+    let a' := IsOpenImmersion.lift j' (Scheme.Opens.ι V) (by
+      rw [Scheme.Opens.range_ι]; exact hVsub.trans Set.inter_subset_right)
+    have hFV : IsAdicStratifiedLisseSheaf (((Scheme.Opens.ι V))^*ᵃ[l].obj F) :=
+      (hFs.upperStar a).of_iso (((adicUpperStarComp l a j).app F).symm ≪≫
+        (adicUpperStarCongr l (IsOpenImmersion.lift_fac _ _ _)).app F)
+    have hGV : IsAdicStratifiedLisseSheaf (((Scheme.Opens.ι V))^*ᵃ[l].obj G) :=
+      (hGs.upperStar a').of_iso (((adicUpperStarComp l a' j').app G).symm ≪≫
+        (adicUpperStarCongr l (IsOpenImmersion.lift_fac _ _ _)).app G)
+    obtain ⟨ι, _, Z, i, himm, huniq, hl⟩ := hFV.exists_common hGV
+    refine ⟨V, hxV, IsAdicStratifiedLisseSheaf.of_stratification Z i himm huniq fun k ↦ ?_,
+      IsAdicStratifiedLisseSheaf.of_stratification Z i himm huniq fun k ↦ ?_⟩ <;>
+      have : NoetherianSpace (Z k) := (i k).isEmbedding.isInducing.noetherianSpace <;>
+      have hk := IsAdicLisseSheaf.isAdicStratifiedLisseSheaf_kernel_cokernel (hl k).1 (hl k).2
+        ((i k)^*ᵃ[l].map (((Scheme.Opens.ι V))^*ᵃ[l].map φ))
+    · exact hk.1.of_iso ((i k)^*ᵃ[l].mapIso (PreservesKernel.iso ((Scheme.Opens.ι V))^*ᵃ[l] φ) ≪≫
+        PreservesKernel.iso (i k)^*ᵃ[l] _).symm
+    · exact hk.2.of_iso ((i k)^*ᵃ[l].mapIso (PreservesCokernel.iso ((Scheme.Opens.ι V))^*ᵃ[l] φ) ≪≫
+        PreservesCokernel.iso (i k)^*ᵃ[l] _).symm
+  refine ⟨fun x ↦ ?_, fun x ↦ ?_⟩ <;> obtain ⟨V, hxV, hk, hc⟩ := key x
+  · exact ⟨V, V.ι, inferInstance, ⟨⟨x, hxV⟩, rfl⟩, hk⟩
+  · exact ⟨V, V.ι, inferInstance, ⟨⟨x, hxV⟩, rfl⟩, hc⟩
+
+variable {X : Scheme.{u}} [IsLocallyNoetherian X]
+
+/-- **Kernels of constructible sheaves are constructible** on a locally Noetherian scheme
+(`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.kernel_cokernel`). -/
+instance : (adicConstructibleSheaf l X).IsClosedUnderKernels where
+  kernels_le := by
+    rintro _ ⟨f, k, hk, hX, hY⟩
+    exact (adicConstructibleSheaf l X).prop_of_iso
+      ((kernelIsKernel f).conePointUniqueUpToIso hk)
+      (IsAdicConstructibleSheaf.kernel_cokernel hX hY f).1
+
+/-- **Cokernels of constructible sheaves are constructible** on a locally Noetherian scheme
+(`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.kernel_cokernel`). -/
+instance : (adicConstructibleSheaf l X).IsClosedUnderCokernels where
+  cokernels_le := by
+    rintro _ ⟨f, k, hk, hX, hY⟩
+    exact (adicConstructibleSheaf l X).prop_of_iso
+      ((cokernelIsCokernel f).coconePointUniqueUpToIso hk)
+      (IsAdicConstructibleSheaf.kernel_cokernel hX hY f).2
+
+end Constructible
+
 end AlgebraicGeometry.ProEtale

@@ -59,7 +59,8 @@ this is the same as a global finite stratification.
   `AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.biprod`: binary direct sums of lisse,
   resp. constructible, sheaves are lisse, resp. constructible.
 - The constructible sheaves contain `0` and are closed under isomorphisms and finite products.
-  They are also closed under kernels and cokernels (stated here with `sorry`) and extensions
+  On a locally Noetherian scheme they are also closed under kernels and cokernels
+  (`WeilConjectures.SixFunctors.ProEtale.Adic.Abelian`), and they are closed under extensions
   (`WeilConjectures.SixFunctors.ProEtale.Adic.Extension`), the blueprint
   `def-weil-constructible-heart`.
 -/
@@ -325,17 +326,6 @@ instance : (adicConstructibleSheaf l X).IsClosedUnderIsomorphisms where
 instance : (adicConstructibleSheaf l X).ContainsZero where
   exists_zero := ⟨0, isZero_zero _,
     (IsAdicLisseSheaf.of_isZero (isZero_zero _)).isAdicConstructibleSheaf⟩
-
-/-- **Kernels of constructible sheaves are constructible** (Bhatt–Scholze, §6.8): after
-refining the stratifications, a morphism of constructible sheaves is a morphism of lisse
-sheaves on each stratum, whose rank is constant on the strata of a further finite
-stratification; on these the kernel is lisse. -/
-instance : (adicConstructibleSheaf l X).IsClosedUnderKernels :=
-  sorry
-
-/-- **Cokernels of constructible sheaves are constructible**, as for kernels. -/
-instance : (adicConstructibleSheaf l X).IsClosedUnderCokernels :=
-  sorry
 
 /-- **Finite products of constructible sheaves are constructible**: the empty product is `0`,
 and a binary product is a binary direct sum
