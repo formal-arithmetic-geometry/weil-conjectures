@@ -6,6 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.NumberTheory.RamificationInertia.Galois
+public import Mathlib.RingTheory.Unramified.Dedekind
+public import Mathlib.RingTheory.Unramified.Locus
+public import Mathlib.RingTheory.Smooth.Fiber
 public import WeilConjectures.Mathlib.RingTheory.Invariant.Profinite
 
 /-!
@@ -23,7 +26,10 @@ ideal of the integral closure of `R` in `Ω`. If the inertia group of `Q` in `Ga
 images of all `R`-algebra maps from a Dedekind domain `T` finite over `R` to `Ω`, then all primes
 of `T` over `Q ∩ R` are unramified (`Ideal.ramificationIdx_eq_one_of_forall_inertia`): this is
 reduced to the Galois closure of the image of `T`, using that inertia lifts from finite Galois
-subextensions to `Ω` (`Ideal.exists_mem_inertia_eqOn`).
+subextensions to `Ω` (`Ideal.exists_mem_inertia_eqOn`). Consequently, if `π ∈ R` vanishes exactly
+at `Q ∩ R` and `A` is a finite étale `R[1/π]`-domain on whose `R`-algebra maps to `Ω` the inertia
+group acts trivially, then the integral closure of `R` in `A` is finite étale over `R`
+(`Ideal.etale_integralClosure_of_forall_inertia`).
 -/
 
 @[expose] public section
@@ -294,6 +300,251 @@ theorem ramificationIdx_eq_one_of_forall_inertia {T : Type*} [CommRing T] [IsDom
     rfl
   rw [← hψ]
   exact ramificationIdx_comap_integralClosureMap_eq_one ψ Q m fun σ hσ x ↦ hI σ hσ ψ x
+
+section Ring
+
+/-- A fraction `a / s` of elements of an integrally closed domain `A`, embedded in a field `Ω`,
+which is integral over `A` lies in `A`. -/
+lemma IsIntegrallyClosed.exists_eq_of_mul_eq {A Ω : Type*} [CommRing A] [IsDomain A]
+    [IsIntegrallyClosed A] [Field Ω] [Algebra A Ω] (hφ : Function.Injective (algebraMap A Ω))
+    {x : Ω} (hx : IsIntegral A x) {a s : A} (hs : s ≠ 0)
+    (h : x * algebraMap A Ω s = algebraMap A Ω a) : ∃ b : A, algebraMap A Ω b = x := by
+  let F := FractionRing A
+  let φ : F →ₐ[A] Ω := IsFractionRing.liftAlgHom (K := F) (g := Algebra.ofId A Ω) hφ
+  let y : F := IsLocalization.mk' F a ⟨s, mem_nonZeroDivisors_of_ne_zero hs⟩
+  have hy : φ y = x := by
+    change IsFractionRing.lift (g := (Algebra.ofId A Ω : A →+* Ω)) hφ
+      (IsLocalization.mk' F a ⟨s, mem_nonZeroDivisors_of_ne_zero hs⟩) = x
+    rw [IsFractionRing.lift_mk' (g := (Algebra.ofId A Ω : A →+* Ω)) hφ]
+    change algebraMap A Ω a / algebraMap A Ω s = x
+    rw [div_eq_iff ((map_ne_zero_iff _ hφ).2 hs)]
+    exact h.symm
+  have hyint : IsIntegral A y := by
+    rw [← isIntegral_algHom_iff φ φ.toRingHom.injective, hy]
+    exact hx
+  obtain ⟨b, hb⟩ := IsIntegrallyClosed.isIntegral_iff.1 hyint
+  refine ⟨b, ?_⟩
+  rw [← hy, ← hb]
+  exact (φ.commutes b).symm
+
+end Ring
+
+section Etale
+
+variable (m : Ideal R) [m.IsMaximal] [Finite (R ⧸ m)] (Q : Ideal (integralClosure R Ω))
+  [Q.IsMaximal] [Q.LiesOver m] (π : R) {R' : Type*} [CommRing R'] [Algebra R R']
+  [IsLocalization.Away π R'] {A : Type*} [CommRing A] [IsDomain A] [Algebra R A]
+  [Algebra R' A] [IsScalarTower R R' A] [Module.Finite R' A] [Algebra.Etale R' A]
+
+include R' in
+omit [IsDedekindDomain R] [IsFractionRing R K] [IsGalois K Ω] [IsDomain A] [Algebra.Etale R' A] in
+/-- The integral closure of `R` in `A` localizes to `A` away from `π`. -/
+lemma isLocalization_away_integralClosure :
+    IsLocalization.Away (algebraMap R (integralClosure R A) π) A := by
+  have hunit : IsUnit (algebraMap R A π) := by
+    rw [IsScalarTower.algebraMap_apply R R' A]
+    exact (IsLocalization.Away.algebraMap_isUnit π).map _
+  have : Algebra.IsIntegral R' A := Algebra.IsIntegral.of_finite R' A
+  refine ⟨?_, fun a ↦ ?_, fun {x y} h ↦ ⟨1, by simpa using Subtype.ext h⟩⟩
+  · rintro ⟨_, n, rfl⟩
+    rw [map_pow, ← IsScalarTower.algebraMap_apply]
+    exact hunit.pow n
+  · obtain ⟨⟨_, n, rfl⟩, h⟩ := IsIntegral.exists_multiple_integral_of_isLocalization
+      (Submonoid.powers π) (Rₘ := R') a (Algebra.IsIntegral.isIntegral a)
+    refine ⟨(⟨_, h⟩, ⟨algebraMap R _ π ^ n, n, rfl⟩), ?_⟩
+    change a * algebraMap _ A (algebraMap R _ π ^ n) = (π ^ n) • a
+    rw [map_pow, ← IsScalarTower.algebraMap_apply, Algebra.smul_def, map_pow, mul_comm]
+
+include R' in
+set_option maxHeartbeats 1000000 in
+/-- **Covers on which inertia acts trivially extend.** Let `π ∈ R` vanish exactly at the maximal
+ideal `m`, and `A` a finite étale `R[1/π]`-domain with an `R`-algebra map to `Ω`. If the inertia
+group of `Q` fixes the images of all `R`-algebra maps `A → Ω`, then the integral closure of `R` in
+`A` is finite étale over `R`. -/
+theorem etale_integralClosure_of_forall_inertia (hπ : π ≠ 0)
+    (hπm : ∀ p : Ideal R, p.IsPrime → π ∈ p → p = m) (ψ₀ : A →ₐ[R] Ω)
+    (hI : ∀ σ ∈ Q.inertia Gal(Ω/K), ∀ (ψ : A →ₐ[R] Ω) (x : A), σ (ψ x) = ψ x) :
+    Algebra.Etale R (integralClosure R A) ∧ Module.Finite R (integralClosure R A) := by
+  set T := integralClosure R A
+  have hRΩ : Function.Injective (algebraMap R Ω) := by
+    rw [IsScalarTower.algebraMap_eq R K Ω]
+    exact (algebraMap K Ω).injective.comp (IsFractionRing.injective R K)
+  have hπ' : Submonoid.powers π ≤ nonZeroDivisors R :=
+    powers_le_nonZeroDivisors_of_noZeroDivisors hπ
+  have : IsDomain R' := IsLocalization.isDomain_of_le_nonZeroDivisors R' hπ'
+  have : IsDedekindDomain R' := IsLocalization.isDedekindDomain R hπ' R'
+  have : IsDedekindDomain A := isDedekindDomain.of_formallyUnramified R' A
+  have : Algebra.IsIntegral R' A := Algebra.IsIntegral.of_finite R' A
+  -- the elements of `R'` map into `K`
+  have hR'K (ψ : A →ₐ[R] Ω) (r' : R') :
+      ∃ k : K, algebraMap K Ω k = ψ (algebraMap R' A r') := by
+    obtain ⟨⟨r, _, n, rfl⟩, hr⟩ := IsLocalization.surj (Submonoid.powers π) r'
+    have hπn : algebraMap R K (π ^ n) ≠ 0 :=
+      (map_ne_zero_iff _ (IsFractionRing.injective R K)).2 (pow_ne_zero n hπ)
+    refine ⟨algebraMap R K r / algebraMap R K (π ^ n), ?_⟩
+    have h := congrArg (fun y ↦ ψ (algebraMap R' A y)) hr
+    simp only [map_mul, ← IsScalarTower.algebraMap_apply, AlgHom.commutes] at h
+    rw [map_div₀, ← IsScalarTower.algebraMap_apply, ← IsScalarTower.algebraMap_apply, ← h,
+      mul_div_cancel_right₀]
+    rw [IsScalarTower.algebraMap_apply R K Ω]
+    exact (map_ne_zero_iff _ (algebraMap K Ω).injective).2 hπn
+  -- every `R`-algebra map `A → Ω` is injective
+  have hinj (ψ : A →ₐ[R] Ω) : Function.Injective ψ := by
+    refine (injective_iff_map_eq_zero ψ).2 fun x hx ↦ ?_
+    have hker : RingHom.ker ψ.toRingHom = ⊥ := by
+      refine Ideal.eq_bot_of_comap_eq_bot (R := R') ?_
+      rw [RingHom.comap_ker, eq_bot_iff]
+      intro r' hr'
+      obtain ⟨k, hk⟩ := hR'K ψ r'
+      rw [RingHom.mem_ker] at hr'
+      obtain ⟨⟨r, _, n, rfl⟩, hr⟩ := IsLocalization.surj (Submonoid.powers π) r'
+      have h := congrArg (fun y ↦ ψ (algebraMap R' A y)) hr
+      simp only [map_mul, ← IsScalarTower.algebraMap_apply, AlgHom.commutes] at h
+      change ψ (algebraMap R' A r') = 0 at hr'
+      rw [hr', zero_mul, eq_comm, map_eq_zero_iff _ hRΩ] at h
+      rw [Ideal.mem_bot]
+      have hu : IsUnit (algebraMap R R' (π ^ n)) :=
+        IsLocalization.map_units R' (⟨π ^ n, n, rfl⟩ : Submonoid.powers π)
+      rw [h, map_zero] at hr
+      exact (hu.mul_left_eq_zero).1 hr
+    have : x ∈ RingHom.ker ψ.toRingHom := hx
+    rwa [hker, Ideal.mem_bot] at this
+  -- the field `L'` generated by `ψ₀(A)`: its elements are fractions of elements of `ψ₀(A)`
+  let L' : IntermediateField K Ω := adjoin K (Set.range ψ₀)
+  have hfrac : ∀ x ∈ L', ∃ a b : A, b ≠ 0 ∧ x * ψ₀ b = ψ₀ a := by
+    let S : IntermediateField K Ω :=
+      { carrier := {x | ∃ a b : A, b ≠ 0 ∧ x * ψ₀ b = ψ₀ a}
+        mul_mem' := by
+          rintro x y ⟨a, b, hb, h⟩ ⟨c, d, hd, h'⟩
+          exact ⟨a * c, b * d, mul_ne_zero hb hd, by
+            rw [map_mul, map_mul, ← h, ← h']
+            ring⟩
+        add_mem' := by
+          rintro x y ⟨a, b, hb, h⟩ ⟨c, d, hd, h'⟩
+          exact ⟨a * d + b * c, b * d, mul_ne_zero hb hd, by
+            rw [map_add, map_mul, map_mul, map_mul, ← h, ← h']
+            ring⟩
+        algebraMap_mem' := by
+          intro k
+          obtain ⟨r, t, ht, rfl⟩ := IsFractionRing.div_surjective (A := R) k
+          refine ⟨algebraMap R A r, algebraMap R A t, ?_, ?_⟩
+          · intro h0
+            apply nonZeroDivisors.ne_zero ht
+            apply hRΩ
+            rw [map_zero, ← ψ₀.commutes, h0, map_zero]
+          · rw [ψ₀.commutes, ψ₀.commutes, map_div₀, ← IsScalarTower.algebraMap_apply,
+              ← IsScalarTower.algebraMap_apply, div_mul_cancel₀]
+            exact (map_ne_zero_iff _ hRΩ).2 (nonZeroDivisors.ne_zero ht)
+        inv_mem' := by
+          rintro x ⟨a, b, hb, h⟩
+          by_cases ha : a = 0
+          · refine ⟨0, 1, one_ne_zero, ?_⟩
+            rw [ha, map_zero, mul_eq_zero] at h
+            rcases h with h | h
+            · simp [h]
+            · exact absurd ((map_eq_zero_iff _ (hinj ψ₀)).1 h) hb
+          · refine ⟨b, a, ha, ?_⟩
+            have hx : x ≠ 0 := by
+              rintro rfl
+              rw [zero_mul, eq_comm, map_eq_zero_iff _ (hinj ψ₀)] at h
+              exact ha h
+            rw [← h, ← mul_assoc, inv_mul_cancel₀ hx, one_mul] }
+    have hle : L' ≤ S := adjoin_le_iff.2 fun _ ⟨a, ha⟩ ↦ ⟨a, 1, one_ne_zero, by simp [← ha]⟩
+    exact fun x hx ↦ hle hx
+  have : FiniteDimensional K L' := by
+    obtain ⟨g, hg⟩ := Module.Finite.fg_top (R := R') (M := A)
+    have hle : L' ≤ adjoin K (ψ₀ '' g) := by
+      refine adjoin_le_iff.2 ?_
+      rintro _ ⟨x, rfl⟩
+      have hx : x ∈ Submodule.span R' (g : Set A) := hg ▸ Submodule.mem_top
+      refine Submodule.span_induction (p := fun x _ ↦ ψ₀ x ∈ adjoin K (ψ₀ '' g)) ?_ ?_ ?_ ?_ hx
+      · exact fun y hy ↦ subset_adjoin _ _ ⟨y, hy, rfl⟩
+      · simp
+      · intro a b _ _ ha hb
+        rw [map_add]
+        exact add_mem ha hb
+      · intro r' a _ ha
+        obtain ⟨k, hk⟩ := hR'K ψ₀ r'
+        rw [Algebra.smul_def, map_mul, ← hk]
+        exact mul_mem ((adjoin K (ψ₀ '' g)).algebraMap_mem k) ha
+    have : FiniteDimensional K (adjoin K (ψ₀ '' g)) :=
+      finiteDimensional_adjoin fun y _ ↦ Algebra.IsIntegral.isIntegral (R := K) y
+    exact Module.Finite.of_injective (IntermediateField.inclusion hle).toLinearMap
+      (IntermediateField.inclusion hle).injective
+  have : Algebra.IsSeparable K L' := Algebra.isSeparable_tower_bot_of_isSeparable K L' Ω
+  -- `T` is the ring of integers of `L'`
+  let ψT : T →+* L' := (ψ₀.codRestrict (L'.toSubalgebra.restrictScalars R)
+    (fun x ↦ subset_adjoin K _ ⟨x, rfl⟩)).toRingHom.comp T.val.toRingHom
+  let _ : Algebra T L' := ψT.toAlgebra
+  have : IsScalarTower R T L' := IsScalarTower.of_algebraMap_eq fun r ↦ Subtype.ext (by
+    change algebraMap R Ω r = ψ₀ (algebraMap R A r)
+    rw [ψ₀.commutes])
+  have : IsIntegrallyClosed A := inferInstance
+  have hIC : IsIntegralClosure T R L' := by
+    refine ⟨fun x y h ↦ Subtype.ext (hinj ψ₀ (congrArg Subtype.val h)), fun {x} ↦ ⟨fun hx ↦ ?_, ?_⟩⟩
+    · obtain ⟨a, b, hb, h⟩ := hfrac x x.2
+      let _ : Algebra A Ω := ψ₀.toRingHom.toAlgebra
+      have : IsScalarTower R A Ω := IsScalarTower.of_algebraMap_eq fun r ↦ (ψ₀.commutes r).symm
+      have hxR : IsIntegral R (x : Ω) := by
+        rw [← isIntegral_algHom_iff (L'.val.restrictScalars R) L'.val.injective] at hx
+        exact hx
+      obtain ⟨c, hc⟩ := IsIntegrallyClosed.exists_eq_of_mul_eq (hinj ψ₀) (hxR.tower_top) hb h
+      have hcT : IsIntegral R c := by
+        rw [← isIntegral_algHom_iff ψ₀ (hinj ψ₀)]
+        change IsIntegral R (algebraMap A Ω c)
+        rw [hc]
+        exact hxR
+      exact ⟨⟨c, hcT⟩, Subtype.ext hc⟩
+    · rintro ⟨t, rfl⟩
+      exact (Algebra.IsIntegral.isIntegral (R := R) t).map (IsScalarTower.toAlgHom R T L')
+  have : IsDedekindDomain T := IsIntegralClosure.isDedekindDomain R K L' T
+  have : Module.Finite R T := IsIntegralClosure.finite R K L' T
+  -- `T` is flat and of finite presentation over `R`
+  have hRT : Function.Injective (algebraMap R T) := fun x y h ↦ hRΩ (by
+    have : ψ₀ (algebraMap T A (algebraMap R T x)) = ψ₀ (algebraMap T A (algebraMap R T y)) :=
+      congrArg (fun t : T ↦ ψ₀ (algebraMap T A t)) h
+    rwa [← IsScalarTower.algebraMap_apply R T A, ← IsScalarTower.algebraMap_apply R T A,
+      ψ₀.commutes, ψ₀.commutes] at this)
+  have : Module.IsTorsionFree R T :=
+    Module.isTorsionFree_iff_faithfulSMul.2 ((faithfulSMul_iff_algebraMap_injective R T).2 hRT)
+  have : Algebra.FinitePresentation R T := Algebra.FinitePresentation.of_finiteType.mp inferInstance
+  have hloc := isLocalization_away_integralClosure (R' := R') π (A := A)
+  have : Algebra.FormallyUnramified R R' :=
+    Algebra.FormallyUnramified.of_isLocalization (Submonoid.powers π)
+  have : Algebra.FormallyUnramified R A := Algebra.FormallyUnramified.comp R R' A
+  have hperf : PerfectField m.ResidueField := by
+    have : Finite m.ResidueField :=
+      Finite.of_surjective _ (Ideal.bijective_algebraMap_quotient_residueField m).2
+    exact PerfectField.ofFinite
+  -- `T` is unramified at every prime
+  have hunr : Algebra.FormallyUnramified R T := by
+    rw [Algebra.formallyUnramified_iff_forall]
+    intro q
+    by_cases hq : algebraMap R T π ∈ q.1
+    · have hqm : q.1.under R = m := hπm _ (Ideal.IsPrime.under R q.1) hq
+      have : q.1.LiesOver m := ⟨hqm.symm⟩
+      have he := ramificationIdx_eq_one_of_forall_inertia (K := K)
+        (ψ₀.comp (IsScalarTower.toAlgHom R T A)) Q m (fun σ hσ ψ x ↦ ?_) q.1
+      · have : PerfectField (q.1.under R).ResidueField := hqm ▸ hperf
+        exact Ideal.ramificationIdx_eq_one_iff.1 he
+      · have hψu (y : Submonoid.powers (algebraMap R T π)) : IsUnit (ψ y) := by
+          refine IsUnit.mk0 _ fun h0 ↦ ?_
+          have := injective_of_isIntegral ψ hRΩ (h0.trans (map_zero ψ).symm)
+          obtain ⟨_, n, rfl⟩ := y
+          exact pow_ne_zero n (fun h ↦ hπ (hRT (h.trans (map_zero _).symm))) this
+        let ψA : A →ₐ[R] Ω := IsLocalization.liftAlgHom (M := Submonoid.powers (algebraMap R T π))
+          (f := ψ) hψu
+        have hψA (t : T) : ψA (algebraMap T A t) = ψ t := IsLocalization.lift_eq _ _
+        rw [← hψA]
+        exact hI σ hσ ψA _
+    · have hbo : q ∈ PrimeSpectrum.basicOpen (algebraMap R T π) := hq
+      have e : Localization.Away (algebraMap R T π) ≃ₐ[T] A :=
+        IsLocalization.algEquiv (Submonoid.powers (algebraMap R T π)) _ _
+      have : Algebra.FormallyUnramified R (Localization.Away (algebraMap R T π)) :=
+        Algebra.FormallyUnramified.of_equiv (e.symm.restrictScalars R)
+      exact (Algebra.basicOpen_subset_unramifiedLocus_iff.2 this) hbo
+  exact ⟨Algebra.Etale.of_formallyUnramified_of_flat, inferInstance⟩
+end Etale
 
 end Ideal
 
