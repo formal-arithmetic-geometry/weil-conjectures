@@ -13,9 +13,77 @@
   "def-weil-pbc-scheme-conventions",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "$Z$ has exactly one point. $Z$ is integral, hence nonempty and irreducible [def-pc-integral-scheme]; as a topological space it is an irreducible closed subset of itself, so by [lem-weil-pbc-scheme-sober] it has a unique generic point $\\eta$, $\\overline{\\{\\eta\\}}=Z$. Let $z\\in Z$. The closure $\\overline{\\{z\\}}$ is closed and irreducible (the closure of an irreducible set, here a point, is irreducible) [def-weil-irreducible-components], and $\\overline{\\{z\\}}\\subseteq Z$. If the inclusion were strict, $\\overline{\\{z\\}}\\subsetneq Z$ would be a chain of irreducible closed subsets of length $1$, so $\\dim Z\\ge1$ [def-kun-topological-krull-dimension], contradicting $\\dim Z=0$. Hence $\\overline{\\{z\\}}=Z$, i.e. $z$ is a generic point of $Z$, and by uniqueness $z=\\eta$. So $|Z|=\\{\\eta\\}$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-scheme-sober",
+    "def-weil-irreducible-components",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma (lemma-algebraic-scheme-dim-0), tag 06LH, second paragraph of the proof (the underlying space is discrete); written out for the irreducible case with Schemes, Lemma 01IS"
+   }
+  },
+  {
+   "text": "$Z=\\operatorname{Spec}A$ with $A$ a field which is a finitely generated $k$-algebra. Let $f:Z\\to\\operatorname{Spec}k$ be the structure morphism. As $f$ is of finite type [def-weil-pbc-scheme-conventions], [def-weil-finite-type-morphism], applied to the affine open $\\operatorname{Spec}k$ itself, $Z=f^{-1}(\\operatorname{Spec}k)$ has a cover by affine opens $\\operatorname{Spec}B$ with $B$ a finitely generated $k$-algebra (via the ring map $k\\to B$ for which $f|_{\\operatorname{Spec}B}=\\operatorname{Spec}(k\\to B)$ [def-weil-affine-spectrum]). Let $U=\\operatorname{Spec}A$ be a member containing $\\eta$. $U$ is a nonempty open subset of the one-point space $Z$ (step 1), so $U=Z$ as open subscheme, i.e. $Z=\\operatorname{Spec}A$ and $A=\\Gamma(Z,\\mathcal O_Z)$. Since $Z$ is integral and $U$ is a nonempty affine open, $A$ is an integral domain [def-pc-integral-scheme], in particular $A\\neq0$. The points of $\\operatorname{Spec}A$ are the prime ideals of $A$ [def-weil-affine-spectrum], and there is only one, so $(0)$ (prime, since $A$ is a domain) is the only prime ideal of $A$. Then $A$ is a field: a nonzero non-unit $a\\in A$ would lie in a maximal ideal $\\mathfrak m$, which is prime and contains $a\\neq0$, so $\\mathfrak m\\neq(0)$, a second prime ideal.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-finite-type-morphism",
+    "def-weil-affine-spectrum",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma (lemma-algebraic-scheme-dim-0), tag 06LH, first paragraph of the proof (an affine open $\\operatorname{Spec}A$ with $\\dim A=0$) and 'a singleton scheme is affine'"
+   }
+  },
+  {
+   "text": "$k\\to A$ is an isomorphism. $A$ is a field and a finitely generated $k$-algebra (step 2), so $A$ is a finite extension of $k$ by Zariski's lemma [lem-weil-pbc-zariski-lemma]. As $k$ is algebraically closed [def-weil-algebraic-closure], the ring map $\\varphi:k\\to A$ is bijective [lem-weil-pbc-alg-closed-finite-extension-trivial].",
+   "uses": [
+    "lem-weil-pbc-zariski-lemma",
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-alg-closed-finite-extension-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Theorem (theorem-nullstellensatz), tag 00FV (1), as used in Varieties 06LH (finite injection $k\\to A$, $\\dim_kA<\\infty$); then Fields, Lemma 09GR"
+   }
+  },
+  {
+   "text": "Conclusion. Under $Z=\\operatorname{Spec}A$ (step 2) the structure morphism is $f=\\operatorname{Spec}\\varphi:\\operatorname{Spec}A\\to\\operatorname{Spec}k$, $\\varphi:k\\to A$ the ring map of step 2 (every morphism $\\operatorname{Spec}A\\to\\operatorname{Spec}k$ is $\\operatorname{Spec}$ of exactly one ring map [def-weil-affine-spectrum]). $\\varphi$ is a ring isomorphism (step 3) with inverse $\\varphi^{-1}$, and by functoriality of $\\operatorname{Spec}$, $\\operatorname{Spec}(\\varphi^{-1})$ is inverse to $\\operatorname{Spec}\\varphi$. Hence $f$ is an isomorphism.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma (lemma-algebraic-scheme-dim-0), tag 06LH (the conclusion $X=\\operatorname{Spec}A$, $A$ finite over $k$), specialized to $A$ a field over algebraically closed $k$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-scheme-sober",
+  "def-weil-irreducible-components",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-zariski-lemma",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-alg-closed-finite-extension-trivial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma (lemma-algebraic-scheme-dim-0), tag 06LH, with Algebra, Theorem 00FV (1) (Nullstellensatz/Zariski's lemma), Schemes, Lemma 01IS (sober) and Fields, Lemma 09GR; the specialization to an integral $Z$ over algebraically closed $k$ (one point, $A$ a field, $A=k$) is written out here"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,10 +105,31 @@
    "results": "AlgClosed/Basic.lean:32 residueFieldIsoBase (residue field of a closed point of a locally-finite-type K-scheme, K algebraically closed, is K), pointOfClosedPoint, pointEquivClosedPoint; Artinian.lean:67 IsLocallyArtinian.of_topologicalKrullDim_le_zero. Ingredients only; the isomorphism Z ≅ Spec k is absent",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, topologicalKrullDim",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "scheme with a single point which is integral is the spectrum of a field",
+   "results": "instIsAffineOfSubsingletonCarrierCarrierCommRingCat (Mathlib.AlgebraicGeometry.Limits: a one-point scheme is affine), IsIntegral.mk, irreducibleSpace_of_isIntegral, isIntegral_of_isAffine_of_isDomain (Properties), PrimeSpectrum.instUnique",
+   "date": "2026-10-09",
+   "verdict": "no match (ingredients for steps 1-2 only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsAlgClosed\\|isField_of_isDomain\\|subsingleton_iff_isField' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/KrullDimension/Zero.lean",
+   "results": "AlgClosed/Basic.lean:32 residueFieldIsoBase (residue field of a closed point is K); KrullDimension/Zero.lean:56 Ring.KrullDimLE.isField_of_isDomain, :182 PrimeSpectrum.subsingleton_iff_isField_of_isReduced (step 2's 'domain with one prime is a field'); no statement Z ≅ Spec k",
+   "date": "2026-10-09",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +149,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-zero-dim-integral-point",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against its use in step 3 of lem-weil-pbc-reduced-curve-normalization, where the structure morphism X_i -> Spec k of an integral zero-dimensional component must be an isomorphism; 'dim Z = 0' excludes the empty scheme, and integral includes nonempty). Proof in four steps following Stacks Varieties 06LH specialized to the integral case: (1) one point, via the uniqueness of generic points (new Mathlib leaf lem-weil-pbc-scheme-sober, Stacks 01IS: QuasiSober + T0Space instances of Scheme) and dim 0; (2) the point lies in a member Spec A of the finite-type affine cover (def-weil-finite-type-morphism), which is all of Z, A a domain with one prime hence a field (argument written out in the step); (3) Zariski's lemma (new Mathlib leaf lem-weil-pbc-zariski-lemma = finite_of_finite_type_of_isJacobsonRing, Stacks 00FV(1)/0CY7) and the triviality of finite extensions of an algebraically closed field (new Mathlib leaf lem-weil-pbc-alg-closed-finite-extension-trivial = IsAlgClosed.algebraMap_bijective_of_isIntegral, Stacks 09GR); (4) Spec of a ring isomorphism is an isomorphism (elementary, def-weil-affine-spectrum). The existing lem-kun-closed-point-field (Zariski's lemma inside a Kunneth-unit statement, unit sk-prop-sf-kunneth-ordinary, unsplit) was not used, being off this unit's route and a larger statement; the three new nodes are Mathlib leaves. The item itself is not in Mathlib (searches recorded)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "four steps along Stacks 06LH (one point by sobriety and dimension 0; Z = Spec A with A a field finitely generated over k; A = k by Zariski's lemma and algebraic closedness; Spec of a ring isomorphism); 3 new Mathlib leaves verified by the lead (Properties.lean:38/43, Sober.lean:79, Jacobson/Ring.lean:102/676, IsAlgClosed/Basic.lean:220); Lean attached to lem-sc-dim0-finite"
+ }
 }

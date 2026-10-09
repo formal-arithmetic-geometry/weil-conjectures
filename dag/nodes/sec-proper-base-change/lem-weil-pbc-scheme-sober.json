@@ -1,0 +1,86 @@
+{
+ "id": "lem-weil-pbc-scheme-sober",
+ "kind": "statement",
+ "title": "The underlying space of a scheme is sober",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. Every irreducible closed subset $T\\subseteq X$ [def-weil-irreducible-components] has a unique generic point: there is exactly one $\\xi\\in T$ with $\\overline{\\{\\xi\\}}=T$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma (lemma-scheme-sober), tag 01IS"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "underlying topological space of a scheme is sober, every irreducible closed subset has a unique generic point",
+   "results": "AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat (Mathlib.AlgebraicGeometry.Properties), QuasiSober.sober, quasiSober_iff (Mathlib.Topology.Sober)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the underlying space of a scheme is quasi-sober and T0, so every irreducible closed subset has a unique generic point",
+   "results": "AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat (Properties), genericPoints_eq_singleton, genericPoint (Mathlib.Topology.Sober)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, T0Space",
+   "results": "AlgebraicGeometry.instT0SpaceCarrierCarrierCommRingCat (Mathlib.AlgebraicGeometry.Properties)",
+   "date": "2026-10-09",
+   "verdict": "match (uniqueness half)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGenericPoint, T0Space, _ = _",
+   "results": "IsGenericPoint.eq (Mathlib.Topology.Sober)",
+   "date": "2026-10-09",
+   "verdict": "match (uniqueness from T0)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'QuasiSober\\|T0Space' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Properties.lean; grep -n 'protected theorem eq' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sober.lean",
+   "results": "Properties.lean:38 instance : T0Space X; Properties.lean:43 instance : QuasiSober X; Sober.lean:79 IsGenericPoint.eq [T0Space α]",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.instT0SpaceCarrierCarrierCommRingCat, IsGenericPoint.eq",
+  "file": "Mathlib/AlgebraicGeometry/Properties.lean",
+  "how": "specializes in one line: existence is `QuasiSober.sober` for the instance `QuasiSober X` (Properties.lean:43), uniqueness is `IsGenericPoint.eq` (Mathlib/Topology/Sober.lean:79) for the instance `T0Space X` (Properties.lean:38)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zero-dim-integral-point",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-zero-dim-integral-point; match verified by the lead against the Mathlib source"
+ }
+}

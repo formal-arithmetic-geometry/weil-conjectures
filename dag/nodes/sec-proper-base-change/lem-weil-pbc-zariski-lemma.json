@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-zariski-lemma",
+ "kind": "statement",
+ "title": "Zariski's lemma: a field of finite type over a field is a finite extension",
+ "statement": "Let $k$ be a field and let $K$ be a field together with a ring homomorphism $k\\to K$ making $K$ a finitely generated $k$-algebra (a quotient of a polynomial ring $k[x_1,\\dots,x_n]$). Then $K$ is a finite-dimensional $k$-vector space, i.e. $K/k$ is a finite field extension.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Theorem (theorem-nullstellensatz), tag 00FV, part (1) (for $K=k[x_1,\\dots,x_n]/\\mathfrak m$, $\\mathfrak m$ maximal); also Algebra, Lemma (lemma-silly-jacobson), tag 0CY7, with $R=k$ (a field is a Jacobson ring)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a field which is a finitely generated algebra over a field k is a finite extension of k (Zariski's lemma)",
+   "results": "exists_finite_inj_algHom_of_fg (Mathlib.RingTheory.NoetherNormalization), IntermediateField.finite_of_fg_of_isAlgebraic, Algebra.finite_of_essFiniteType_of_isAlgebraic (Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra; need algebraic hypothesis)",
+   "date": "2026-10-09",
+   "verdict": "no direct match (Noether normalization is a route)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, IsJacobsonRing, Module.Finite",
+   "results": "finite_of_finite_type_of_isJacobsonRing, finite_of_algHom_finiteType_of_isJacobsonRing (Mathlib.RingTheory.Jacobson.Ring), Module.finite_of_isArtinianRing (Mathlib.RingTheory.Jacobson.Artinian)",
+   "date": "2026-10-09",
+   "verdict": "match: finite_of_finite_type_of_isJacobsonRing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski's lemma: field finitely generated as algebra over a field is finite-dimensional",
+   "results": "Algebra.finite_of_essFiniteType_of_isAlgebraic, IntermediateField.finite_of_fg_of_isAlgebraic, fieldOfFiniteDimensional",
+   "date": "2026-10-09",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'finite_of_finite_type_of_isJacobsonRing\\|Zariski' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Jacobson; grep -rn 'instance.*IsArtinianRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Artinian/Module.lean; grep -n 'IsArtinianRing R\\] : IsJacobsonRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Jacobson/Ring.lean",
+   "results": "Jacobson/Ring.lean:675-676 @[stacks 0CY7 \"See also Zariski's lemma\"] finite_of_finite_type_of_isJacobsonRing (R S) [CommRing R] [Field S] [Algebra R S] [IsJacobsonRing R] [Algebra.FiniteType R S] : Module.Finite R S; Artinian/Module.lean:376 DivisionRing.instIsArtinianRing; Jacobson/Ring.lean:102 instance [IsArtinianRing R] : IsJacobsonRing R",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "finite_of_finite_type_of_isJacobsonRing",
+  "file": "Mathlib/RingTheory/Jacobson/Ring.lean",
+  "how": "specializes in one line: take R = k, S = K; `IsJacobsonRing k` is found by instance search (DivisionRing.instIsArtinianRing, Mathlib/RingTheory/Artinian/Module.lean:376, and the instance IsArtinianRing → IsJacobsonRing, Jacobson/Ring.lean:102); the conclusion `Module.Finite k K` is 'K is finite over k'"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zero-dim-integral-point",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-zero-dim-integral-point; match verified by the lead against the Mathlib source"
+ }
+}

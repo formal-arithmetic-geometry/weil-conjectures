@@ -1,8 +1,8 @@
 # Work queue
 
-568 items; claim with `tools/claim.py next <group> [--stage N]`.
+565 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (547)
+## Stage 1: nodes to split (544)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,8 +15,6 @@
 | `lem-sc-c6` | 1005 | none |
 | `lem-sc-c7` | 1005 | none |
 | `lem-sc-c8` | 1005 | none |
-| `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1005 | none |
-| `lem-weil-pbc-pullback-cohomology-long-exact-ladder` | 1005 | none |
 | `lem-weil-pbc-zero-dim-integral-point` | 1005 | none |
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1005 | none |
 | `lem-weil-pbc-zero-dimensional-sections-stalks` | 1005 | none |
@@ -28,7 +26,6 @@
 | `def-weil-pbc-proj-twisting-sheaf` | 1006 | none |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1006 | none |
 | `lem-weil-pbc-constructible-torsion-modules-agree` | 1006 | none |
-| `lem-weil-pbc-dehomogenization-polynomial-ring` | 1006 | none |
 | `lem-weil-pbc-etale-base-change-continuous` | 1006 | none |
 | `lem-weil-pbc-etale-retraction-finite-product-local` | 1006 | none |
 | `lem-weil-pbc-filtered-colimit-tensor-varying-rings` | 1006 | none |
@@ -580,7 +577,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 562 nodes that wait for stage 1, 148 nodes that wait for a statement dependency.
+Not open yet: 559 nodes that wait for stage 1, 151 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

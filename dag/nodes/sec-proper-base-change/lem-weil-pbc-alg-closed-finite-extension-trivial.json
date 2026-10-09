@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-alg-closed-finite-extension-trivial",
+ "kind": "statement",
+ "title": "A finite extension of an algebraically closed field is trivial",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure] and let $K$ be a field together with a ring homomorphism $\\varphi:k\\to K$ making $K$ a finite-dimensional $k$-vector space. Then $\\varphi$ is bijective, i.e. an isomorphism of fields.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma (lemma-algebraically-closed), tag 09GR, (1)⇒(2): every irreducible polynomial over an algebraically closed field is linear; for $a\\in K$ the minimal polynomial of $a$ over $k$ (which exists since $K$ is finite over $k$) is irreducible, hence linear, so $a\\in\\varphi(k)$"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebraically closed field k, integral domain integral over k, algebraMap is bijective",
+   "results": "IsAlgClosed.algebraMap_bijective_of_isIntegral, IsAlgClosed.ringHom_bijective_of_isIntegral (Mathlib.FieldTheory.IsAlgClosed.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "k algebraically closed, K a field finitely generated as k-algebra, then algebraMap k K is bijective",
+   "results": "IsAlgClosed.algebraMap_bijective_of_isIntegral, IsAlgClosed.ringHom_bijective_of_isIntegral, Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing (needs unramified)",
+   "date": "2026-10-09",
+   "verdict": "match (for the finite case)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed, Algebra.IsIntegral, Function.Bijective",
+   "results": "IsAlgClosed.algebraMap_bijective_of_isIntegral (Mathlib.FieldTheory.IsAlgClosed.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'bijective_of_isIntegral\\|eq_bot_of_isAlgClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+   "results": "Basic.lean:220 algebraMap_bijective_of_isIntegral {k K} [Field k] [Ring K] [IsDomain K] [IsAlgClosed k] [Algebra k K] [Algebra.IsIntegral k K] : Function.Bijective (algebraMap k K); :232 ringHom_bijective_of_isIntegral; IntermediateField.eq_bot_of_isAlgClosed_of_isAlgebraic (@[stacks 09GQ])",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsAlgClosed.algebraMap_bijective_of_isIntegral",
+  "file": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+  "how": "specializes in one line: a field is a domain, and `Module.Finite k K` gives `Algebra.IsIntegral k K` by the instance `Algebra.IsIntegral.of_finite`; the conclusion is `Function.Bijective (algebraMap k K)` with `algebraMap k K = φ`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zero-dim-integral-point",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-zero-dim-integral-point; match verified by the lead against the Mathlib source"
+ }
+}
