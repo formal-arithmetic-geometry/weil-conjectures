@@ -1,0 +1,43 @@
+{
+ "id": "def-sf-induced-category",
+ "kind": "definition",
+ "title": "Induced category, fully faithful functor, essential image",
+ "statement": "Let $\\mathcal D$ be a category, let $C$ be a class (a type) and let $F:C\\to\\operatorname{Ob}(\\mathcal D)$ be a function. The *induced category* $\\mathcal D_F$ has as objects the elements of $C$, as morphisms $\\operatorname{Hom}_{\\mathcal D_F}(x,y)=\\operatorname{Hom}_{\\mathcal D}(F(x),F(y))$, and the identities and the composition of $\\mathcal D$. The *induced functor* $\\iota_F:\\mathcal D_F\\to\\mathcal D$ sends $x$ to $F(x)$ and is the identity on morphisms. A functor $G:\\mathcal A\\to\\mathcal B$ is *fully faithful* if every map $\\operatorname{Hom}_{\\mathcal A}(x,y)\\to\\operatorname{Hom}_{\\mathcal B}(G(x),G(y))$ is bijective; $\\iota_F$ is fully faithful (its maps on morphisms are identities). The *essential image* of $G$ is the class of objects of $\\mathcal B$ isomorphic to $G(x)$ for some object $x$ of $\\mathcal A$; that of $\\iota_F$ is the class of objects of $\\mathcal D$ isomorphic to some $F(x)$. When $F$ is injective, $\\mathcal D_F$ is the full subcategory of $\\mathcal D$ on the image of $F$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Tag 001C (label definition-faithful: faithful, fully faithful, essentially surjective) and Tag 001D (label definition-subcategory: full subcategory) with the remark after it; the induced category itself is the construction of Mathlib's CategoryTheory.InducedCategory"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def InducedCategory\\|def inducedFunctor\\|fullyFaithfulInducedFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/InducedCategory.lean; grep -n 'def essImage' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/EssentialImage.lean; grep -n 'structure FullyFaithful' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/FullyFaithful.lean",
+   "results": "CategoryTheory.InducedCategory (InducedCategory.lean line 46, category instance with Hom X Y = F X ⟶ F Y), inducedFunctor (line 101), fullyFaithfulInducedFunctor (line 106) with instances InducedCategory.full / .faithful (lines 109, 112); Functor.essImage (EssentialImage.lean line 45, an ObjectProperty: ∃ X, Nonempty (F.obj X ≅ Y)); Functor.FullyFaithful (Functor/FullyFaithful.lean)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.InducedCategory",
+  "file": "Mathlib/CategoryTheory/InducedCategory.lean",
+  "how": "exact: InducedCategory D F for F : C → D, with inducedFunctor F and fullyFaithfulInducedFunctor F : (inducedFunctor F).FullyFaithful; the essential image is Functor.essImage (Mathlib/CategoryTheory/EssentialImage.lean) and full faithfulness is Functor.FullyFaithful (Mathlib/CategoryTheory/Functor/FullyFaithful.lean)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-sf-etale-origin-subcategory",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

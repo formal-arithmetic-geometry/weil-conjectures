@@ -1,0 +1,53 @@
+{
+ "id": "def-sf-comparison-derived-pullback",
+ "kind": "definition",
+ "title": "The derived pullback along the comparison morphism of sites",
+ "statement": "Let $T$ be a scheme and $\\Lambda$ a finite discrete commutative ring. Let $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ be the comparison morphism from the small pro-etale site [def-weil-pbc-proetale-site] to the small etale site of $T$ [def-weil-pbc-site-comparison-morphism], and $\\nu_T^*:\\operatorname{Mod}(T_{\\mathrm{et}},\\Lambda)\\to\\operatorname{Mod}(T_{\\mathrm{proet}},\\Lambda)$ its inverse image on sheaves of $\\Lambda$-modules, an exact additive functor by [lem-sf-comparison-pullback-exact]. The *derived pullback*\n\n$$\n \\nu_T^*:D(T_{\\mathrm{et}},\\Lambda)\\longrightarrow D(T_{\\mathrm{proet}},\\Lambda)\n$$\n\nfrom the derived category of sheaves of $\\Lambda$-modules on $T_{\\mathrm{et}}$ [def-weil-pbc-derived-categories] to that on $T_{\\mathrm{proet}}$ [def-weil-pbc-proetale-modules] is the triangulated functor induced by applying $\\nu_T^*$ termwise to cochain complexes [lem-sf-exact-functor-derived-triangulated]; no resolution is needed, since termwise $\\nu_T^*$ preserves quasi-isomorphisms. By part (3) of [lem-sf-comparison-pullback-exact] it carries the full subcategory $D^{+}(T_{\\mathrm{et}},\\Lambda)$ of complexes whose cohomology sheaves vanish below some integer into $D^{+}(T_{\\mathrm{proet}},\\Lambda)$; the restricted functor $\\nu_T^*:D^{+}(T_{\\mathrm{et}},\\Lambda)\\to D^{+}(T_{\\mathrm{proet}},\\Lambda)$ is also written $\\nu_T^*$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Tag 015F (label lemma-right-derived-exact-functor: an exact functor of abelian categories has RF everywhere defined on D and D^+, computed termwise), applied to epsilon^{-1} of Pro-etale Cohomology, Section 'Comparison with the etale site' (Tag 099R, literature/stacks-project/proetale.tex, label section-comparison), where epsilon^{-1}K is represented termwise (proof of Lemma lemma-relative-comparison); in the blueprint this is the functor nu_T^* of node def-weil-pbc-etale-origin-witness (literature/blueprint/master/blueprint/sec-proper-base-change/)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-sf-comparison-pullback-exact",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def mapDerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; grep -rn 'mapDerivedCategory' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | grep -v ExactFunctor.lean",
+   "results": "Functor.mapDerivedCategory (ExactFunctor.lean line 36) for an additive F preserving finite limits and colimits, with CommShift ℤ (line 80) and IsTriangulated (line 104); used elsewhere only in Algebra/Homology/DerivedCategory/Ext/Map.lean. No restriction of it to DerivedCategory.Plus",
+   "date": "2026-10-09",
+   "verdict": "generalization: (nu_T^*).mapDerivedCategory gives D(T_et, Lambda) -> D(T_proet, Lambda) in one line once nu_T^* is an exact functor of Mathlib; but the comparison morphism nu_T is not in Mathlib (see lem-sf-comparison-pullback-exact), so the node is not a leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'abbrev Plus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; grep -n 'def mapCochainComplexPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/CochainComplexPlus.lean; grep -rn 'mapDerivedCategory.*Plus\\|Plus.*mapDerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "DerivedCategory.Plus C (TStructure.lean line 204, full subcategory t.plus of DerivedCategory C) with Plus.ι (line 215); Functor.mapCochainComplexPlus (CochainComplexPlus.lean line 141) on bounded-below cochain complexes; nothing combining mapDerivedCategory with Plus",
+   "date": "2026-10-09",
+   "verdict": "no match for the restriction to D^+: it is ObjectProperty.lift of (Plus.ι ⋙ F.mapDerivedCategory) using part (3) of lem-sf-comparison-pullback-exact"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-sf-etale-origin-subcategory",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

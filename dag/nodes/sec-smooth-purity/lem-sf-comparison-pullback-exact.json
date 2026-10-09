@@ -1,0 +1,52 @@
+{
+ "id": "lem-sf-comparison-pullback-exact",
+ "kind": "statement",
+ "title": "The comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves",
+ "statement": "Let $T$ be a scheme and $\\Lambda$ a finite discrete commutative ring. Let $T_{\\mathrm{et}}$ be the small etale site and $T_{\\mathrm{proet}}$ the small pro-etale site of $T$ [def-weil-pbc-proetale-site], let $\\Lambda_{T_{\\mathrm{et}}}$ and $\\Lambda_{T_{\\mathrm{proet}}}$ be the constant sheaves of rings with value $\\Lambda$ [def-weil-pbc-constant-sheaf] on them, and let $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ be the comparison morphism of sites, with inverse image $\\nu_T^{-1}$ on sheaves [def-weil-pbc-site-comparison-morphism]. Then:\n\n1. $\\nu_T^{-1}\\Lambda_{T_{\\mathrm{et}}}\\cong\\Lambda_{T_{\\mathrm{proet}}}$ as sheaves of rings, so $\\nu_T$ is a flat morphism of ringed sites $(T_{\\mathrm{proet}},\\Lambda_{T_{\\mathrm{proet}}})\\to(T_{\\mathrm{et}},\\Lambda_{T_{\\mathrm{et}}})$ and the module inverse image $\\nu_T^*F=\\nu_T^{-1}F\\otimes_{\\nu_T^{-1}\\Lambda_{T_{\\mathrm{et}}}}\\Lambda_{T_{\\mathrm{proet}}}$ of a sheaf of $\\Lambda$-modules $F$ on $T_{\\mathrm{et}}$ is $\\nu_T^{-1}F$ with its induced $\\Lambda$-module structure.\n2. The functor $\\nu_T^*:\\operatorname{Mod}(T_{\\mathrm{et}},\\Lambda)\\to\\operatorname{Mod}(T_{\\mathrm{proet}},\\Lambda)$ between the abelian categories of sheaves of $\\Lambda$-modules is additive and exact (it preserves finite limits and finite colimits).\n3. Consequently, for every cochain complex $K$ of sheaves of $\\Lambda$-modules on $T_{\\mathrm{et}}$ and every $i\\in\\mathbf Z$ there is an isomorphism $\\mathcal H^i(\\nu_T^*K)\\cong\\nu_T^*\\mathcal H^i(K)$, natural in $K$, between the cohomology sheaves [def-weil-pbc-derived-categories, def-weil-derived-cohomology-sheaves] of the termwise pullback and the pullback of the cohomology sheaves. In particular termwise $\\nu_T^*$ carries quasi-isomorphisms to quasi-isomorphisms, and carries a complex whose cohomology sheaves vanish in degrees $<a$ to a complex whose cohomology sheaves vanish in degrees $<a$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Tag 04JC (label lemma-flat-pullback-exact: f^{-1} is exact on abelian sheaves, f^* is exact for a flat morphism of ringed topoi) and Tag 03D2 (label lemma-pullback-module); applied to the comparison morphism epsilon : X_proetale -> X_etale of Pro-etale Cohomology, Tag 099R (literature/stacks-project/proetale.tex, label section-comparison, defined by Sites, Tag 00X6, label proposition-get-morphism) and the description of epsilon^{-1} in Tag 0GLZ (label lemma-describe-pullback-from-etale)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'PreservesFiniteLimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Pullback.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Flat.lean",
+   "results": "Functor.sheafPullback G A J K (Sites/Pullback.lean line 55, left adjoint of sheafPushforwardContinuous) with instance preservesFiniteLimits (line 99) under RepresentablyFlat G and PreservesFiniteLimits (G.op.lan); lan_preservesFiniteLimits_of_flat and lan_preservesFiniteLimits_of_preservesFiniteLimits (Functor/Flat.lean lines 330, 346) for small categories and concrete E such as ModuleCat",
+   "date": "2026-10-09",
+   "verdict": "generalization: exactness of the sheaf pullback along a representably flat continuous functor of (small) sites, for sheaves with values in ModuleCat Λ; it does not apply as stated since the comparison morphism nu_T between the small etale and small pro-etale sites of a scheme is not in Mathlib (and the pro-etale site is large), and the commutation with cohomology sheaves (3) is not stated for it"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean; grep -rln 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
+   "results": "Proetale.lean has only etalePrecoverage_le_proetalePrecoverage (line 72) and etaleTopology_le_proetaleTopology (line 79), comparisons of topologies on the big category of schemes; no functor from the small etale site X.Etale to X.ProEt, hence no pullback along it",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-sf-etale-origin-subcategory",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
