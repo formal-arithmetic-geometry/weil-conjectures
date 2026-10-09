@@ -10,6 +10,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 
 /-!
@@ -167,6 +168,12 @@ lemma nonempty_iso_unit_of_tensorObj_iso (M N : X.Modules) [M.IsInvertible] (e :
   obtain ⟨d⟩ := nonempty_tensorObj_dual_iso_unit M
   exact ⟨(λ_ N).symm ≪≫ (((β_ _ _) ≪≫ d).symm ⊗ᵢ Iso.refl N) ≪≫ α_ _ _ _ ≪≫
     (Iso.refl _ ⊗ᵢ e) ≪≫ (β_ _ _) ≪≫ d⟩
+
+/-- Tensoring with an invertible module preserves monomorphisms. -/
+instance mono_whiskerRight {N P : X.Modules} (f : N ⟶ P) [Mono f] (M : X.Modules)
+    [M.IsInvertible] : Mono (f ▷ M) :=
+  (BraidedCategory.tensorRightEquivalence M Mᵛ
+    (nonempty_tensorObj_dual_iso_unit M).some).functor.map_mono f
 
 /-- The dual of a finite locally free `𝒪_X`-module is finite locally free: on an open where
 `M ≅ 𝒪^r`, the dual is `Hom(𝒪^r, 𝒪) ≅ 𝒪^r`. -/
