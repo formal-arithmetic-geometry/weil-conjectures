@@ -78,6 +78,14 @@ restrictions of `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!` and `𝔻_X` to `Dctf`.
 
 ## Implementation notes
 
+* The statements about the derived tensor product's constructibility and about open immersions
+  are made for a finite coefficient ring `Λ`. For an arbitrary coefficient category the tensor
+  statement is false (over `R = k[x, y₁, y₂, …]` on a point, `R/(x yᵢ)ᵢ ⊗ᴸ R/(x)` has the
+  non-finitely generated `Tor₁ = (yᵢ)ᵢ/(x yᵢ)ᵢ`), and `Rj_!` is computed through an arbitrary
+  compactification of `j`, which agrees with extension by zero only when `Rj_!` is known to be
+  independent of the compactification
+  (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, proved for a finite ring and a
+  quasi-compact `j`).
 * Clause (vi) of `sk-thm-sf-ctf-stability` — that `𝔻_X` preserves `Dctf(X, A)` and is an
   anti-equivalence of it — is **not restated here**: it is
   `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual` and
