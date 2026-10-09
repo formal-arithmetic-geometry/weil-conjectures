@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.LocallyBijective
 public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Sections of constant sheaves
@@ -107,39 +108,47 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   [J.WEqualsLocallyBijective (ModuleCat.{v'} Λ)] {T : C}
 
 /-- **A morphism between constant sheaves of modules is locally induced by a linear map**,
-in the form of sections: for `φ : M_C ⟶ N_C` with `M` finite and any object `T`, there is a
-covering sieve `S` of `T` such that over every member `U` of `S` not covered by the empty
-sieve, `φ` sends the constant section `m` over `U` to the constant section `f m`, for a
-`Λ`-linear map `f : M ⟶ N`. The map `f` is obtained by lifting the finitely many
-sections `φ♭(m)`, `m : M`, to elements of `N` on a common cover; it is linear since
-`N ⟶ N_C(U)` is injective. -/
-theorem exists_mem_forall_exists_linearMap (M N : ModuleCat.{v'} Λ) [Finite M]
+in the form of sections: for `φ : M_C ⟶ N_C` with `M` finitely generated and any object `T`,
+there is a covering sieve `S` of `T` such that over every member `U` of `S` not covered by the
+empty sieve, `φ` sends the constant section `m` over `U` to the constant section `f m`, for a
+`Λ`-linear map `f : M ⟶ N`. The sections `φ♭(x)` for `x` in a finite generating set of `M` are
+lifted to elements of `N` on a common cover; since `N ⟶ N_C(U)` is injective and its range is a
+submodule, every `φ♭(m)` then comes from a unique element `f m` of `N`, and `f` is linear. -/
+theorem exists_mem_forall_exists_linearMap (M N : ModuleCat.{v'} Λ) [Module.Finite Λ M]
     (φ : (constantSheaf J (ModuleCat.{v'} Λ)).obj M ⟶ (constantSheaf J (ModuleCat.{v'} Λ)).obj N) :
     ∃ S ∈ J T, ∀ ⦃U : C⦄ (g : U ⟶ T), S g → (⊥ : Sieve U) ∉ J U → ∃ f : M ⟶ N, ∀ m : M,
         φ.hom.app (op U) ((CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj M)).app (op U) m) =
         (CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj N)).app (op U) (f m) := by
+  obtain ⟨t, ht⟩ := Module.Finite.fg_top (R := Λ) (M := M)
   obtain ⟨S, hS, h⟩ := J.exists_mem_forall_exists_toSheafify_const_app_eq N (U := T)
-    (fun m : M ↦ φ.hom.app (op T)
-      ((CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj M)).app (op T) m))
+    (fun m : (t : Set M) ↦ φ.hom.app (op T)
+      ((CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj M)).app (op T) m.1))
   refine ⟨S, hS, fun U g hg hU ↦ ?_⟩
   choose n hn using h g hg
-  have hn' (m : M) :
+  have hn' (m : (t : Set M)) :
       (CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj N)).app (op U) (n m) =
         φ.hom.app (op U)
-          ((CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj M)).app (op U) m) := by
+          ((CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj M)).app (op U) m.1) := by
     rw [hn]
     erw [← NatTrans.naturality_apply φ.hom,
       ← NatTrans.naturality_apply (CategoryTheory.toSheafify J _)]
-    simp
+    rfl
   clear hn
-  rename' hn' => hn
   have hinj := J.toSheafify_const_app_injective N hU
-  refine ⟨ModuleCat.ofHom
-    { toFun := n
-      map_add' := fun m m' ↦ hinj ?_
-      map_smul' := fun a m ↦ hinj ?_ }, fun m ↦ (hn m).symm⟩
-  · simp only [map_add, hn]
-  · simp only [map_smul, hn, RingHom.id_apply]
+  let ιN := ((CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj N)).app (op U)).hom
+  let L := (φ.hom.app (op U)).hom ∘ₗ
+    ((CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj M)).app (op U)).hom
+  have hle : LinearMap.range L ≤ LinearMap.range ιN := by
+    rw [LinearMap.range_eq_map, ← ht, Submodule.map_span]
+    refine Submodule.span_le.2 ?_
+    rintro _ ⟨m, hm, rfl⟩
+    exact ⟨n ⟨m, hm⟩, hn' ⟨m, hm⟩⟩
+  let e := LinearEquiv.ofInjective ιN hinj
+  refine ⟨ModuleCat.ofHom (e.symm.toLinearMap ∘ₗ
+    L.codRestrict _ fun m ↦ hle (LinearMap.mem_range_self L m)), fun m ↦ ?_⟩
+  have h := congrArg Subtype.val (e.apply_symm_apply ⟨L m, hle (LinearMap.mem_range_self L m)⟩)
+  rw [LinearEquiv.ofInjective_apply] at h
+  exact h.symm
 
 end ModuleCat
 

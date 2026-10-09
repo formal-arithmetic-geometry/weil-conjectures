@@ -5,142 +5,215 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Category.ModuleCat.AB
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.InternalHom
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+public import WeilConjectures.CategoryTheory.Sites.MonObj
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Reflection
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Basic
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
 
 /-!
-# Restriction of internal homs of pro-étale sheaves
+# Pullback along a weakly étale morphism commutes with internal homs
 
-Let `g : W ⟶ V` be weakly étale. The pullback `g^*` of sheaves of modules on the small
-pro-étale sites is restriction along the localization functor `W.ProEt ⥤ V.ProEt`
-(`AlgebraicGeometry.ProEtale.upperStarIsoLocalizationRestriction`), and it commutes with
-internal homs: `g^* [F, G] ≅ [g^* F, g^* G]`
-(`AlgebraicGeometry.ProEtale.upperStarIhomIsoOfWeaklyEtale`).
+Let `g : V ⟶ X` be weakly étale and let `A` be a symmetric monoidal closed Grothendieck abelian
+coefficient category. The pullback `g^*` of pro-étale sheaves is monoidal, so it has a comparison
+map `g^* [P, Q] ⟶ [g^* P, g^* Q]` (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`). It is an
+isomorphism (`AlgebraicGeometry.ProEtale.isIso_ihomComparison_upperStar`): the internal hom of
+sheaves is local.
 
-The underlying presheaf of `[F, G]` is the internal hom of presheaves, whose sections over `U`
-are the morphisms between the restrictions of `F` and `G` to the slice over `U`
-(`CategoryTheory.GrothendieckTopology.sheafToPresheafIhomIso`). The localization functor
-induces equivalences of these slices, `W.ProEt / T ≌ V.ProEt / T`, so internal homs of
-presheaves commute with restriction along it (`ModuleCat.functorEnrichedHomCompIso`).
-
-## Main definitions
-
-- `AlgebraicGeometry.ProEtale.localizationRestrictionIhomIso`: `j^* [F, G] ≅ [j^* F, j^* G]`
-  for the restriction `j^*` along a weakly étale morphism.
-- `AlgebraicGeometry.ProEtale.upperStarIhomIsoOfWeaklyEtale`: `g^* [F, G] ≅ [g^* F, g^* G]` for
-  a weakly étale `g`.
+The proof identifies `g^*` with the restriction along the localization functor
+`V_proét ⥤ X_proét` (`AlgebraicGeometry.ProEtale.upperStarIsoLocalizationRestriction`), as
+monoidal functors: both monoidal structures are determined by the adjunctions with `g_*`, and the
+units of the adjunction `j_g^* ⊣ g_*` are computed sectionwise
+(`AlgebraicGeometry.ProEtale.localizationRestrictionLowerStarAdjunction_unit_app_tensor`). The
+restriction of sheaves is in turn the restriction of presheaves, which commutes with internal homs
+since the localization functor is an equivalence on slices
+(`CategoryTheory.MorphismProperty.Over.isEquivalence_post_map_op`,
+`CategoryTheory.isIso_ihomComparison_whiskeringLeft`), and the inclusion of sheaves into presheaves
+preserves internal homs (`CategoryTheory.Monoidal.Reflective.isIso_ihomComparison`).
 -/
 
 @[expose] public section
 
-universe u
+universe u' u
 
-open CategoryTheory Opposite MonoidalCategory MonoidalClosed Enriched.FunctorCategory
+open CategoryTheory Limits MonoidalCategory Functor.LaxMonoidal Opposite
 
-namespace CategoryTheory
+namespace AlgebraicGeometry
 
-variable {T : Type*} [Category T] {P : MorphismProperty T} {X Y : T}
+open Scheme ProEtale
 
-section Post
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [BraidedCategory A]
+  {V X : Scheme.{u}} (g : V ⟶ X) (h : WeaklyEtale g)
+  [((Scheme.ProEt.topology X).W (A := A)).IsMonoidal]
+  [((Scheme.ProEt.topology V).W (A := A)).IsMonoidal]
 
-variable [P.IsStableUnderComposition] [P.HasOfPostcompProperty P] {f : X ⟶ Y} (hPf : P f)
-  (T : (P.Over ⊤ X)ᵒᵖ)
+attribute [local instance] Sheaf.monoidalCategory
 
-/-- The functor `MorphismProperty.Over.map` induces a full functor
-`Under T ⥤ Under (op (map T.unop))` on the opposite slices: a morphism `B' ⟶ A'` over `map T`
-is a morphism over `T`, since `A' ⟶ X` factors through `T`. -/
-instance MorphismProperty.Over.full_post_op_map :
-    (Under.post (X := T) (MorphismProperty.Over.map ⊤ hPf).op).Full where
-  map_surjective {A B} φ := by
-    have hw : φ.right.unop.left ≫ A.hom.unop.left = B.hom.unop.left :=
-      congrArg (fun g ↦ g.unop.left) (CategoryTheory.Under.w φ)
-    refine ⟨CategoryTheory.Under.homMk (MorphismProperty.Over.homMk (A := B.right.unop)
-      (B := A.right.unop) φ.right.unop.left ?_ trivial).op ?_, ?_⟩
-    · rw [← MorphismProperty.Over.w A.hom.unop, reassoc_of% hw, MorphismProperty.Over.w B.hom.unop]
-    · apply Quiver.Hom.unop_inj
-      apply MorphismProperty.Over.Hom.ext
-      exact hw
-    · ext
-      apply Quiver.Hom.unop_inj
-      apply MorphismProperty.Over.Hom.ext
-      simp
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [BraidedCategory A]
+  [((Scheme.ProEt.topology X).W (A := A)).IsMonoidal]
+  [((Scheme.ProEt.topology V).W (A := A)).IsMonoidal] in
+/-- The unit of `j_g^* ⊣ g_*` restricts sections along the counit of the site adjunction. -/
+lemma ProEtale.localizationRestrictionLowerStarAdjunction_unit_app_hom_app
+    (P : Sheaf (Scheme.ProEt.topology X) A) (U : X.ProEtᵒᵖ) :
+    ((sheafToPresheaf _ A).map ((localizationRestrictionLowerStarAdjunction A g h).unit.app P)).app
+      U =
+      P.obj.map ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g h trivial).counit.app
+        U.unop).op := by
+  simp [localizationRestrictionLowerStarAdjunction, Adjunction.sheafPushforwardContinuous,
+    Adjunction.whiskerLeft]
 
-/-- The functor `MorphismProperty.Over.map` induces an essentially surjective functor
-`Under T ⥤ Under (op (map T.unop))` on the opposite slices: an object `B ⟶ map T` is the image
-of `B ⟶ T`, the structure morphism `B ⟶ X` satisfying `P` by cancellation. -/
-instance MorphismProperty.Over.essSurj_post_op_map :
-    (Under.post (X := T) (MorphismProperty.Over.map ⊤ hPf).op).EssSurj where
-  mem_essImage B := by
-    have hB : B.hom.unop.left ≫ T.unop.hom ≫ f = B.right.unop.hom := by
-      simpa using MorphismProperty.Over.w B.hom.unop
-    have hP : P (B.hom.unop.left ≫ T.unop.hom) := P.comp_mem _ _
-      (P.of_postcomp _ (T.unop.hom ≫ f) (P.comp_mem _ _ T.unop.prop hPf)
-        (hB ▸ B.right.unop.prop)) T.unop.prop
-    let S : P.Over ⊤ X := MorphismProperty.Over.mk ⊤ (B.hom.unop.left ≫ T.unop.hom) hP
-    let a : S ⟶ T.unop := MorphismProperty.Over.homMk B.hom.unop.left rfl trivial
-    refine ⟨CategoryTheory.Under.mk a.op, ⟨CategoryTheory.Under.isoMk
-      (MorphismProperty.Over.isoMk (A := B.right.unop)
-        (B := (MorphismProperty.Over.map ⊤ hPf).obj S) (Iso.refl B.right.unop.left)
-        (by simp [S, hB])).op ?_⟩⟩
-    apply Quiver.Hom.unop_inj
-    apply MorphismProperty.Over.Hom.ext
-    simp only [a]
-    exact Category.id_comp _
+/-- The unit of `j_g^* ⊣ g_*` is compatible with the tensor comparison maps. -/
+lemma ProEtale.localizationRestrictionLowerStarAdjunction_unit_app_tensor
+    (P Q : Sheaf (Scheme.ProEt.topology X) A) :
+    (localizationRestrictionLowerStarAdjunction A g h).unit.app (P ⊗ Q) =
+      ((localizationRestrictionLowerStarAdjunction A g h).unit.app P ⊗ₘ
+        (localizationRestrictionLowerStarAdjunction A g h).unit.app Q) ≫
+        μ (g)_*[A] _ _ ≫ (g)_*[A].map (μ ((MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous
+          A (Scheme.ProEt.topology V) (Scheme.ProEt.topology X)) P Q) := by
+  apply Sheaf.tensor_hom_ext
+  rw [Functor.map_comp, ← μ_natural_assoc]
+  ext U : 2
+  simp only [NatTrans.comp_app, Functor.map_comp, Monoidal.tensorHom_app,
+    localizationRestrictionLowerStarAdjunction_unit_app_hom_app]
+  erw [← (μ (sheafToPresheaf (ProEt.topology X) A) P Q).naturality]
+  erw [Functor.μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app_assoc]
+  erw [Functor.μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app
+    (F := MorphismProperty.Over.map ⊤ h)]
+  rfl
 
-/-- The functor `MorphismProperty.Over.map` induces equivalences
-`Under T ≌ Under (op (map T.unop))` of opposite slices. -/
-instance MorphismProperty.Over.isEquivalence_post_op_map :
-    (Under.post (X := T) (MorphismProperty.Over.map ⊤ hPf).op).IsEquivalence where
+/-- The unit of `j_g^* ⊣ g_*` is compatible with the unit comparison maps. -/
+lemma ProEtale.localizationRestrictionLowerStarAdjunction_unit_app_unit :
+    (localizationRestrictionLowerStarAdjunction A g h).unit.app (𝟙_ _) =
+      ε (g)_*[A] ≫ (g)_*[A].map (ε ((MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous
+          A (Scheme.ProEt.topology V) (Scheme.ProEt.topology X))) := by
+  apply Sheaf.hom_ext_of_ε_comp
+  ext U : 2
+  simp only [NatTrans.comp_app, Functor.map_comp,
+    localizationRestrictionLowerStarAdjunction_unit_app_hom_app]
+  erw [← (ε (sheafToPresheaf (ProEt.topology X) A)).naturality]
+  erw [Functor.ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app_assoc]
+  erw [Functor.ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app
+    (F := MorphismProperty.Over.map ⊤ h)]
+  erw [Monoidal.tensorUnit_map, Category.id_comp]
+  rfl
 
-end Post
+section
 
-end CategoryTheory
+variable [∀ M : A, PreservesFilteredColimitsOfSize.{u, u + 1} (tensorLeft M)]
 
-namespace AlgebraicGeometry.ProEtale
+open Functor.OplaxMonoidal
 
-open GrothendieckTopology
+/-- The identification of the pullback along a weakly étale morphism with the restriction,
+as a functor to the pushforward. -/
+noncomputable abbrev ProEtale.upperStarIsoSheafPushforward :
+    (g)^*[A] ≅ (MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous A
+      (Scheme.ProEt.topology V) (Scheme.ProEt.topology X) :=
+  upperStarIsoLocalizationRestriction A g h
 
-variable {R : Type (u + 1)} [CommRing R] {V W : Scheme.{u}}
+/-- The identification of the pullback along a weakly étale morphism with the restriction is a
+monoidal natural isomorphism. -/
+instance : NatTrans.IsMonoidal (ProEtale.upperStarIsoSheafPushforward A g h).hom where
+  unit := by
+    rw [← cancel_epi (η (g)^*[A])]
+    simp only [Functor.Monoidal.η_ε_assoc]
+    apply ((upperStarLowerStarAdjunction A g).homEquiv _ _).injective
+    dsimp only [upperStarIsoSheafPushforward, upperStarIsoLocalizationRestriction]
+    erw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
+    rw [Adjunction.homEquiv_unit, Functor.map_comp,
+      ← Category.assoc, Adjunction.unit_app_unit_comp_map_η]
+    exact localizationRestrictionLowerStarAdjunction_unit_app_unit A g h
+  tensor P Q := by
+    rw [← cancel_epi (δ (g)^*[A] P Q)]
+    simp only [Functor.Monoidal.δ_μ_assoc]
+    apply ((upperStarLowerStarAdjunction A g).homEquiv _ _).injective
+    dsimp only [upperStarIsoSheafPushforward, upperStarIsoLocalizationRestriction]
+    erw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
+    rw [Adjunction.homEquiv_unit, Functor.map_comp,
+      ← Category.assoc, Adjunction.unit_app_tensor_comp_map_δ, Functor.map_comp, Category.assoc,
+      ← μ_natural_assoc, tensorHom_comp_tensorHom_assoc, Adjunction.unit_leftAdjointUniq_hom_app,
+      Adjunction.unit_leftAdjointUniq_hom_app]
+    exact localizationRestrictionLowerStarAdjunction_unit_app_tensor A g h P Q
 
-/-- The localization functor `W.ProEt ⥤ V.ProEt` along a weakly étale `g` induces equivalences
-of the opposite slices `W.ProEt / T ≌ V.ProEt / T`. -/
-instance isEquivalence_post_op_overMap (g : W ⟶ V) (h : WeaklyEtale g) (d : W.ProEtᵒᵖ) :
-    (Under.post (X := d) (MorphismProperty.Over.map ⊤ h).op).IsEquivalence :=
-  MorphismProperty.Over.isEquivalence_post_op_map (P := @WeaklyEtale) h d
+end
 
-/-- The restriction `j^*` of sheaves of modules along a weakly étale `g : W ⟶ V` commutes with
-internal homs: on underlying presheaves both sides are internal homs of presheaves, and the
-localization functor induces equivalences of slices. -/
-noncomputable def localizationRestrictionIhomIso (g : W ⟶ V) (h : WeaklyEtale g)
-    (F G : Sheaf (Scheme.ProEt.topology V) (ModuleCat.{u + 1} R)) :
-    (localizationRestriction _ g h).obj ((ihom F).obj G) ≅
-      (ihom ((localizationRestriction _ g h).obj F)).obj
-        ((localizationRestriction _ g h).obj G) :=
-  let u := MorphismProperty.Over.map ⊤ h
-  let e₁ : u.op ⋙ ((ihom F).obj G).obj ≅
-      u.op ⋙ functorEnrichedHom (ModuleCat.{u + 1} R) F.obj G.obj :=
-    Functor.isoWhiskerLeft u.op (sheafToPresheafIhomIso _ F G)
-  let e₂ : u.op ⋙ functorEnrichedHom (ModuleCat.{u + 1} R) F.obj G.obj ≅
-      functorEnrichedHom (ModuleCat.{u + 1} R) (u.op ⋙ F.obj) (u.op ⋙ G.obj) :=
-    ModuleCat.functorEnrichedHomCompIso u F.obj G.obj
-  let e₃ : functorEnrichedHom (ModuleCat.{u + 1} R) ((localizationRestriction _ g h).obj F).obj
-      ((localizationRestriction _ g h).obj G).obj ≅
-      ((ihom ((localizationRestriction _ g h).obj F)).obj
-        ((localizationRestriction _ g h).obj G)).obj :=
-    (sheafToPresheafIhomIso _ _ _).symm
-  (fullyFaithfulSheafToPresheaf _ _).preimageIso (e₁ ≪≫ e₂ ≪≫ e₃)
+section Closed
 
-/-- The pullback `g^*` of sheaves of modules along a weakly étale `g` commutes with internal
-homs, `g^*` being restriction along the localization functor. -/
-noncomputable def upperStarIhomIsoOfWeaklyEtale (g : W ⟶ V) [h : WeaklyEtale g]
-    (F G : Sheaf (Scheme.ProEt.topology V) (ModuleCat.{u + 1} R)) :
-    (g)^*[ModuleCat.{u + 1} R].obj ((ihom F).obj G) ≅
-      (ihom ((g)^*[ModuleCat.{u + 1} R].obj F)).obj ((g)^*[ModuleCat.{u + 1} R].obj G) :=
-  (upperStarIsoLocalizationRestriction _ g h).app _ ≪≫ localizationRestrictionIhomIso g h F G ≪≫
-    (ihom _).mapIso ((upperStarIsoLocalizationRestriction _ g h).app G).symm ≪≫
-    (MonoidalClosed.internalHom.mapIso
-      ((upperStarIsoLocalizationRestriction _ g h).app F).op).app _
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [SymmetricCategory A] [MonoidalClosed A]
+  [∀ M : A, PreservesFilteredColimitsOfSize.{u, u + 1} (tensorLeft M)]
+  {V X : Scheme.{u}} (g : V ⟶ X) [hg : WeaklyEtale g]
+  [((Scheme.ProEt.topology X).W (A := A)).IsMonoidal]
+  [((Scheme.ProEt.topology V).W (A := A)).IsMonoidal]
 
-end AlgebraicGeometry.ProEtale
+open scoped MonoidalClosed.FunctorCategory
+
+omit [((Scheme.ProEt.topology X).W (A := A)).IsMonoidal]
+  [((Scheme.ProEt.topology V).W (A := A)).IsMonoidal] in
+/-- **Pullback along a weakly étale morphism commutes with internal homs**: the comparison map
+`g^* [P, Q] ⟶ [g^* P, g^* Q]` is an isomorphism. -/
+theorem ProEtale.isIso_ihomComparison_upperStar (P : Sheaf (Scheme.ProEt.topology X) A) :
+    IsIso (ihomComparison (g)^*[A] P).natTrans := by
+  let h : WeaklyEtale g := hg
+  let R := (MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous A
+    (Scheme.ProEt.topology V) (Scheme.ProEt.topology X)
+  let W := (Functor.whiskeringLeft _ _ A).obj (MorphismProperty.Over.map ⊤ h).op
+  have : ∀ k : V.ProEtᵒᵖ, (Under.post (MorphismProperty.Over.map ⊤ h).op (X := k)).IsEquivalence :=
+    fun k ↦ MorphismProperty.Over.isEquivalence_post_map_op h k.unop
+  have hW : IsIso (ihomComparison W ((sheafToPresheaf _ A).obj P)).natTrans := inferInstance
+  have hι : ∀ Y : Sheaf (Scheme.ProEt.topology X) A,
+      IsIso (ihomComparison (sheafToPresheaf _ A) Y).natTrans :=
+    Monoidal.Reflective.isIso_ihomComparison (sheafificationAdjunction (Scheme.ProEt.topology _) A)
+  have hιV : ∀ Y : Sheaf (Scheme.ProEt.topology V) A,
+      IsIso (ihomComparison (sheafToPresheaf _ A) Y).natTrans :=
+    Monoidal.Reflective.isIso_ihomComparison (sheafificationAdjunction (Scheme.ProEt.topology _) A)
+  have h1 : IsIso (ihomComparison (sheafToPresheaf _ A ⋙ W) P).natTrans := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro Q
+    rw [ihomComparison_comp_app]
+    infer_instance
+  let τ := Functor.sheafPullbackConstruction.sheafToPresheafCompWhiskeringLeftIsoPushforward
+    (MorphismProperty.Over.map ⊤ h) A (Scheme.ProEt.topology V) (Scheme.ProEt.topology X)
+  have : NatTrans.IsMonoidal τ.symm.hom := inferInstanceAs (NatTrans.IsMonoidal τ.inv)
+  have h2 : IsIso (ihomComparison (R ⋙ sheafToPresheaf _ A) P).natTrans :=
+    isIso_ihomComparison_of_iso τ.symm P
+  have hR : IsIso (ihomComparison R P).natTrans := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro Q
+    have := NatIso.isIso_app_of_isIso (ihomComparison (R ⋙ sheafToPresheaf _ A) P).natTrans Q
+    rw [ihomComparison_comp_app] at this
+    have := IsIso.of_isIso_comp_right ((sheafToPresheaf _ A).map
+      ((ihomComparison R P).natTrans.app Q))
+      ((ihomComparison (sheafToPresheaf _ A) (R.obj P)).natTrans.app (R.obj Q))
+    exact isIso_of_reflects_iso _ (sheafToPresheaf _ A)
+  exact isIso_ihomComparison_of_iso (upperStarIsoSheafPushforward A g h) P
+
+end Closed
+
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+
+open Scheme ProEtale
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [BraidedCategory A]
+  [∀ M : A, PreservesFilteredColimitsOfSize.{u, u + 1} (tensorLeft M)]
+  {V X : Scheme.{u}} (g : V ⟶ X) [hg : WeaklyEtale g]
+  [((Scheme.ProEt.topology X).W (A := A)).IsMonoidal]
+  [((Scheme.ProEt.topology V).W (A := A)).IsMonoidal]
+
+attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
+
+/-- The pullback along a weakly étale morphism is braided: it is identified, as a monoidal
+functor, with the restriction along the localization functor, which is lax braided. -/
+noncomputable instance ProEtale.laxBraided_upperStar : (g)^*[A].LaxBraided where
+  braided P Q := by
+    let τ := ProEtale.upperStarIsoSheafPushforward A g hg
+    rw [← cancel_mono (τ.hom.app (Q ⊗ P)), Category.assoc, NatTrans.naturality,
+      ← Category.assoc, NatTrans.IsMonoidal.tensor, Category.assoc,
+      Functor.LaxBraided.braided, Category.assoc, NatTrans.IsMonoidal.tensor,
+      ← BraidedCategory.braiding_naturality_assoc]
+
+end AlgebraicGeometry

@@ -46,6 +46,26 @@ open scoped AddSubgroup
 
 namespace AddSubgroup
 
+section Map
+
+variable {M N F : Type*} [AddCommGroup M] [AddCommGroup N] [FunLike F M N]
+  [AddMonoidHomClass F M N]
+
+/-- An additive homomorphism maps `n`-torsion to `n`-torsion. -/
+theorem apply_mem_torsionBy (f : F) {n : ℤ} {x : M} (hx : x ∈ torsionBy M n) :
+    f x ∈ torsionBy N n := by
+  change n • f x = 0
+  rw [← map_zsmul, show n • x = 0 from hx, map_zero]
+
+/-- Multiplication by `l` maps `l ^ (n + 1)`-torsion to `l ^ n`-torsion. -/
+theorem zsmul_mem_torsionBy_pow {l : ℤ} {n : ℕ} {x : M} (hx : x ∈ torsionBy M (l ^ (n + 1))) :
+    l • x ∈ torsionBy M (l ^ n) := by
+  change l ^ n • l • x = 0
+  rw [smul_smul, ← pow_succ]
+  exact hx
+
+end Map
+
 section
 
 variable {D ι : Type*} [AddCommGroup D] [Fintype ι]

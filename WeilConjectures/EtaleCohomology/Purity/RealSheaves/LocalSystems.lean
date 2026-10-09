@@ -105,7 +105,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems.
+/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems. Also
+blueprint `cor-galois-lisse-representations`: Lisse sheaves and continuous representations.
 
 The steps *sheaves and covers* and *linear structure* of the proof, for a named fundamental
 group: let `Y` be a connected scheme, `s : Spec Ω ⟶ Y` a geometric point, `Λ` a finite ring
@@ -324,13 +325,14 @@ theorem IsLisse.exists_lattice {l : ℕ} [Fact l.Prime] {W : WeilGroup p} {V : T
 The global sections `H⁰(U, F|_U)` of the lisse sheaf `F` with geometric generic stalk
 `(V, ρ)`, rendered as in the proof sketch: a global section is a morphism from the constant
 rank-one sheaf, i.e. a `π₁(U)`-equivariant `ℚ̄_ℓ`-linear map `ℚ̄_ℓ → V`, where `π₁(U)` acts
-on `V` through `res`. -/
+on `V` through the restriction `R : W(U₀) → W(C₀)` of Weil groups along the open `U₀ ⊆ C₀`. -/
 noncomputable def globalSections (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u}
     [AddCommGroup V] [Module (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) W.carrier V)
-    (WU : WeilGroup pU) (res : WU.carrier →* W.carrier) :
+    {j : U ⟶ C} [IsOpenImmersion j] [Nonempty U] {WU : WeilGroup pU}
+    (R : Restriction j WU W) :
     Submodule (PadicAlgCl l) (PadicAlgCl l →ₗ[PadicAlgCl l] V) :=
   (Representation.linHom (Representation.trivial (PadicAlgCl l) WU.geometric (PadicAlgCl l))
-    ((ρ.comp res).comp WU.geometric.subtype)).invariants
+    ((ρ.comp R.restrict).comp WU.geometric.subtype)).invariants
 
 section Sections
 
@@ -362,8 +364,8 @@ The geometric Frobenius `F = ρ (res γ)` acts on global sections by post-compos
 is normal in `W(U₀)`, so post-composing an equivariant map with `F` gives an equivariant
 map. -/
 theorem comp_mem_globalSections (f : PadicAlgCl l →ₗ[PadicAlgCl l] V)
-    (hf : f ∈ W.globalSections l ρ WU R.restrict) :
-    (ρ (R.restrict WU.frobeniusLift)).comp f ∈ W.globalSections l ρ WU R.restrict := by
+    (hf : f ∈ W.globalSections l ρ R) :
+    (ρ (R.restrict WU.frobeniusLift)).comp f ∈ W.globalSections l ρ R := by
   refine fun g ↦ LinearMap.ext fun a ↦ ?_
   simp only [Representation.linHom_apply, Representation.trivial_apply, MonoidHom.coe_comp,
     Function.comp_apply, Subgroup.coe_subtype, LinearMap.comp_apply]
@@ -393,9 +395,9 @@ equivariant for it:
 -/
 theorem globalSections_eq_invariants [FiniteDimensional (PadicAlgCl l) V]
     (_hρ : W.IsLisse l ρ) :
-    ∃ e : W.globalSections l ρ WU R.restrict ≃ₗ[PadicAlgCl l]
+    ∃ e : W.globalSections l ρ R ≃ₗ[PadicAlgCl l]
       Representation.invariants ((ρ.comp R.restrict).comp WU.geometric.subtype),
-      ∀ f : W.globalSections l ρ WU R.restrict,
+      ∀ f : W.globalSections l ρ R,
         e ⟨(ρ (R.restrict WU.frobeniusLift)).comp (f : PadicAlgCl l →ₗ[PadicAlgCl l] V),
             comp_mem_globalSections ρ R f f.2⟩ =
           ⟨ρ (R.restrict WU.frobeniusLift) (e f),

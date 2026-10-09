@@ -9,6 +9,7 @@ public import Mathlib
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
@@ -199,7 +200,7 @@ theorem Etale.CurveTestDatum.isIntegrallyClosed_and_isAlgClosed_and_exists_of_is
 datum, every class `ξ ∈ H¹(Y₀ ×_{X₀} U, ℤ/e)`, for `e ∣ d` and `U` affine étale over `X₀`, dies
 on an étale cover of `U`.
 
-By the slicing lemma `AlgebraicGeometry.exists_etaleCover_factorization` (blueprint
+By the slicing lemma `AlgebraicGeometry.Smooth.exists_etaleCover_factorization` (blueprint
 `sbc-lem-slicing`) `U` is covered by étale `U'` with `U' ⟶ S₀` factoring as an affine
 morphism `U' ⟶ V` with geometrically connected fibres and a section, followed by an étale
 `V ⟶ S₀`. As `S₀` is normal with algebraically closed function field, `V ⟶ S₀` is a local
@@ -219,8 +220,12 @@ theorem Etale.CurveTestDatum.exists_cover_cohomologyMap_eq_zero (D : Etale.Curve
     inferInstanceAs (SmoothOfRelativeDimension (0 + 1) (u ≫ D.f₀))
   have : Smooth (u ≫ D.f₀) := SmoothOfRelativeDimension.smooth 1 _
   -- slicing
-  obtain ⟨ι, U', p, V, q, r, hp, hpcov, hr, -, -, hqaff, hqconn, hsec, hqr⟩ :=
-    exists_etaleCover_factorization (u ≫ D.f₀)
+  obtain ⟨ι, U', p, V, q, r, hp, hpcov, hr, -, hU', hV, hqconn, hsec, hqr⟩ :=
+    Smooth.exists_etaleCover_factorization (u ≫ D.f₀)
+  have hqaff (i : ι) : IsAffineHom (q i) := by
+    have := hU' i
+    have := hV i
+    infer_instance
   -- each `V i` is locally an affine open of `S₀`
   have hloc (i : ι) (v : V i) : ∃ W : (V i).Opens, v ∈ W ∧ IsAffineOpen W ∧
       IsOpenImmersion (W.ι ≫ r i) := by

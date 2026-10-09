@@ -42,8 +42,9 @@ of the criterion are:
   the base change of a smooth projective curve to a field extension is again a smooth projective
   curve (blueprint `rem-pc-conventions`).
 - `AlgebraicGeometry.isRepresentable_picardFunctor`: the Picard functor of a smooth projective
-  curve over a separably closed field is representable by a group scheme (blueprint
-  `sk-thm-picard-main`, `thm-pc-picard-representable`).
+  curve over a separably closed field is representable by a group scheme whose group law is the
+  tensor product of invertible modules (blueprint `sk-thm-picard-main`,
+  `thm-pc-picard-representable`).
 -/
 
 @[expose] public section
@@ -106,8 +107,49 @@ theorem isInvertibleDirectImage_of_finrankH_eq (K : Type u) [Field K] [Algebra k
     (h0 : Modules.finrankH K ((fromSkeleton _).obj L.val) 0 = 1)
     (h1 : Modules.finrankH K ((fromSkeleton _).obj L.val) 1 = 0) :
     IsInvertibleDirectImage (X ↘ Spec (.of k))
-      (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))) L :=
-  sorry
+      (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))) L := by
+  let XK := pullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  let g : XK ⟶ Spec (.of K) := XK ↘ Spec (.of K)
+  have hpb :=
+    IsPullback.of_hasPullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  have : IsProper g := IsProper.isStableUnderBaseChange.of_isPullback hpb ‹_›
+  have : SmoothOfRelativeDimension 1 g :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback hpb ‹_›
+  have : IsLocallyNoetherian XK := LocallyOfFiniteType.isLocallyNoetherian g
+  have : IsNoetherian XK := ⟨⟩
+  have : HasInjectiveResolutions XK.Modules :=
+    inferInstanceAs <| HasInjectiveResolutions (pullback (X ↘ Spec (.of k))
+      (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))).hom).Modules
+  let ℒ : XK.Modules := (fromSkeleton _).obj L.val
+  have : SheafOfModules.IsInvertible.{u, u, u} ℒ := L.isInvertible
+  have : SheafOfModules.IsFiniteLocallyFree.{u, u, u} ℒ :=
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
+  have : ℒ.IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  have hK : IsField (CommRingCat.of K) := Field.toIsField K
+  -- `H¹(X_K, ℒ)` is finite-dimensional, hence zero, and `H^q(X_K, ℒ) = 0` for `q ≥ 2` since
+  -- `X_K` has dimension `1`
+  have hH (q : ℕ) (hq : 0 < q) : Subsingleton (ℒ.H q) := by
+    obtain rfl | hq := eq_or_lt_of_le (Nat.succ_le_of_lt hq)
+    · have := Modules.finiteDimensional_H_of_isProper (k := K) ℒ 1
+      exact Module.finrank_zero_iff (R := K).1 h1
+    · refine Modules.subsingleton_H_of_topologicalKrullDim_lt ℒ ?_
+      refine (topologicalKrullDim_le_of_smoothOfRelativeDimension g 1).trans_lt ?_
+      exact_mod_cast hq
+  -- `R^q g_* ℒ` lives on `Spec K`, where it is determined by its sections `H^q(X_K, ℒ)`
+  refine ⟨show SheafOfModules.IsInvertible.{u, u, u} ((Modules.higherDirectImage g 0).obj ℒ)
+    from ?_, fun q hq ↦ show IsZero ((Modules.higherDirectImage g q).obj ℒ) from ?_⟩
+  · obtain ⟨e⟩ := Modules.nonempty_moduleSpecΓFunctor_obj_higherDirectImage_linearEquiv_H ℒ K 0
+    have h : Module.finrank K _ = 1 := e.finrank_eq.trans h0
+    have : Module.Finite K _ := Module.finite_of_finrank_eq_succ h
+    exact (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one
+      ((Modules.higherDirectImage g 0).obj ℒ)).2
+      ((Modules.isFiniteLocallyFreeOfRank_iff_finrank_moduleSpecΓFunctor_obj hK _ 1).2 h)
+  · obtain ⟨e⟩ := Modules.nonempty_moduleSpecΓFunctor_obj_higherDirectImage_linearEquiv_H ℒ K q
+    have := hH q hq
+    have := e.toEquiv.subsingleton
+    exact (Modules.isZero_iff_finrank_moduleSpecΓFunctor_obj_eq_zero hK _).2
+      Module.finrank_zero_of_subsingleton
 
 variable [GeometricallyIntegral (X ↘ Spec (.of k))]
 
@@ -185,21 +227,22 @@ end Curve
 /-- **The Picard functor of a smooth projective curve over a separably closed field is
 representable.** Let `k` be a separably closed field and let `f : X ⟶ Spec k` be a smooth
 projective curve.  Then the Picard functor `Pic_{X/k} = AlgebraicGeometry.picardFunctor f` is
-represented by a group scheme over `k`, i.e. by an object of `Over (Spec k)` carrying a
-`CategoryTheory.GrpObj` structure.
-
-The group structure is the one induced by the group law of the Picard functor
-(`AlgebraicGeometry.picardFunctorNormalizedGrp`, blueprint `rem-pc-group-structure`).
+represented by a group scheme `A` over `k`, i.e. by an object of `Over (Spec k)` carrying a
+`CategoryTheory.GrpObj` structure, and the representation respects the group laws
+(`AlgebraicGeometry.IsPicardMul`): the group law of `A` is the tensor product of invertible
+modules (blueprint `rem-pc-group-structure`).
 
 (blueprint: `sk-thm-picard-main`, `thm-pc-picard-representable`) -/
 theorem isRepresentable_picardFunctor [IsSepClosed k] (f : X ⟶ Spec (.of k))
     [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] :
-    ∃ (A : Over (Spec (.of k))) (_ : GrpObj A),
-      Nonempty ((picardFunctor f).obj.RepresentableBy A) := by
+    ∃ (A : Over (Spec (.of k))) (_ : GrpObj A) (e : (picardFunctor f).obj.RepresentableBy A),
+      IsPicardMul f e := by
   let : X.Over (Spec (.of k)) := ⟨f⟩
   have : SmoothOfRelativeDimension 1 (X ↘ Spec (.of k)) := ‹SmoothOfRelativeDimension 1 f›
   have : IsProper (X ↘ Spec (.of k)) := ‹IsProper f›
   have : GeometricallyIntegral (X ↘ Spec (.of k)) := ‹GeometricallyIntegral f›
-  exact isRepresentable_picardFunctor_aux
+  obtain ⟨A, -, ⟨e⟩⟩ := isRepresentable_picardFunctor_aux (k := k) (X := X)
+  obtain ⟨_, he⟩ := exists_commGrpObj_isPicardMul f e
+  exact ⟨A, inferInstance, e, he⟩
 
 end AlgebraicGeometry

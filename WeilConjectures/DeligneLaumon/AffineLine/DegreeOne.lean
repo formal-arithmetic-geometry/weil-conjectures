@@ -146,16 +146,16 @@ end WeilSheaf.LisseOnDenseOpen
 weight `w` on a dense open `U₀` of the affine line, then `H_c^1(A, j_*M)` has weights at most
 `w + 1`. (blueprint: `sk-c-dl-a1-hc1`, `cor-a1-fourier-middle-hc1`) -/
 theorem hasWeightsAtMost_compactlySupportedCohomology_one (ι : PadicAlgCl l →+* ℂ)
-    (hψ : ψ ≠ 1) (D : WeilSheaf.LisseOnDenseOpen k₀ l) [Simple D.sheaf]
+    (hψ : ψ ≠ 1) (D : WeilSheaf.LisseOnDenseOpen k₀ l)
+    (hD : D.sheaf.IsIrreducibleLisse)
     (hne : D.sheaf.IsNonexceptional ψ D.j) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
     (D.directImage.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
   -- Step 1: the transform of `(j_*M)[1]` is a middle extension `(j'_*M')[1]`
-  obtain ⟨D', _, hFT⟩ := exists_middleExtension_fourierTransform ψ hψ D
-    D.lisse.isIrreducibleLisse hne
+  obtain ⟨D', _, hFT⟩ := exists_middleExtension_fourierTransform ψ hψ D hD hne
   -- Step 2: `M'` is pure of a weight `v ≤ w + 1`
-  obtain ⟨v, hv⟩ := exists_isPunctuallyPureOfWeight_of_isFourierPartner ψ ι hψ D D' hne hw hFT
-  have hvw : v ≤ w + 1 := le_add_one_of_isFourierPartner ψ ι hψ D D' hne hw hFT hv
+  obtain ⟨v, hv⟩ := exists_isPunctuallyPureOfWeight_of_isFourierPartner ψ ι hψ D D' hD hne hw hFT
+  have hvw : v ≤ w + 1 := le_add_one_of_isFourierPartner ψ ι hψ D D' hD hne hw hFT hv
   -- Step 3: `j'_*M'` has weights at most `w + 1` on the whole dual line
   have hM' : D'.directImage.HasWeightsAtMost ι (w + 1) :=
     D'.hasWeightsAtMost_directImage (hv.hasWeightsAtMost.mono hvw)

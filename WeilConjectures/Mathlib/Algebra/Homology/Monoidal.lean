@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
@@ -83,6 +84,41 @@ lemma ιTensorObj_whiskerLeft_f {K' : CochainComplex C ℤ} (f : K ⟶ K') (p q 
       P.X p ◁ f.f q ≫ HomologicalComplex.ιTensorObj P K' p q r h := by
   rw [whiskerLeft_f_eq]
   simp
+
+section Bounds
+
+variable {C : Type*} [Category* C] [Preadditive C] [HasZeroObject C] [MonoidalCategory C]
+  [MonoidalPreadditive C] (K L : CochainComplex C ℤ) [HomologicalComplex.HasTensor K L]
+
+/-- The tensor product of a complex vanishing below `a` and one vanishing below `c` vanishes
+below `a + c`. -/
+lemma isStrictlyGE_tensorObj (a c : ℤ) [K.IsStrictlyGE a] [L.IsStrictlyGE c] :
+    IsStrictlyGE (HomologicalComplex.tensorObj K L) (a + c) := by
+  rw [isStrictlyGE_iff]
+  intro n hn
+  rw [IsZero.iff_id_eq_zero]
+  refine HomologicalComplex.mapBifunctor.hom_ext (fun p q hpq ↦ ?_)
+  apply IsZero.eq_of_src
+  have hpq' : p + q = n := hpq
+  by_cases hp : p < a
+  · exact ((curriedTensor C).map_isZero (K.isZero_of_isStrictlyGE a p hp)).obj _
+  · exact ((curriedTensor C).obj _).map_isZero (L.isZero_of_isStrictlyGE c q (by omega))
+
+/-- The tensor product of a complex vanishing above `b` and one vanishing above `d` vanishes
+above `b + d`. -/
+lemma isStrictlyLE_tensorObj (b d : ℤ) [K.IsStrictlyLE b] [L.IsStrictlyLE d] :
+    IsStrictlyLE (HomologicalComplex.tensorObj K L) (b + d) := by
+  rw [isStrictlyLE_iff]
+  intro n hn
+  rw [IsZero.iff_id_eq_zero]
+  refine HomologicalComplex.mapBifunctor.hom_ext (fun p q hpq ↦ ?_)
+  apply IsZero.eq_of_src
+  have hpq' : p + q = n := hpq
+  by_cases hp : b < p
+  · exact ((curriedTensor C).map_isZero (K.isZero_of_isStrictlyLE b p hp)).obj _
+  · exact ((curriedTensor C).obj _).map_isZero (L.isZero_of_isStrictlyLE d q (by omega))
+
+end Bounds
 
 end CochainComplex
 

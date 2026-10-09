@@ -92,9 +92,11 @@ theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
 eight assertions `C(X, F₁)` and `C(X, F₂)` hold, then so does `C(X, F)`: the long exact
 cohomology sequences (and their pullbacks along a field extension) pass vanishing, finiteness
 and bijectivity to the middle term, the hypotheses of the assertions being inherited by
-subsheaves and quotients; for `C₈` one uses `H³(X, F₁) = 0`, i.e. `C₁(X, F₁)`.
+subsheaves and quotients, constructibility for subsheaves since `Λ` is noetherian; for `C₈` one uses
+`H³(X, F₁) = 0`, i.e. `C₁(X, F₁)`.
 (blueprint: `lemma-weil-pbc-eight-curve-devissage`) -/
-theorem IsCurve.Assertions.of_shortExact {k : Type u} [Field k] {X : Scheme.{u}}
+theorem IsCurve.Assertions.of_shortExact [IsNoetherianRing Λ] {k : Type u} [Field k]
+    {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f]
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
     (h₁ : IsCurve.Assertions Λ f S.X₁) (h₃ : IsCurve.Assertions Λ f S.X₃) :
@@ -165,14 +167,17 @@ theorem IsCurve.bijective_cohomologyMap_of_forall_isReduced {k : Type u} [Field 
 closed. Suppose that the eight assertions `C(X, G)` hold for every reduced curve `X` over `k`,
 every prime `ℓ` and every constructible sheaf `G` of `𝐅_ℓ`-modules on `X` (modules over
 `ULift (ZMod ℓ)`). Then `C(C, F)` holds for every curve `C` over `k` and every torsion sheaf
-`F` of `Λ`-modules; in particular so does the field extension invariance `C₇`.
+`F` of `Λ`-modules, for a finite ring `Λ` (over an infinite ring such as `𝐅_ℓ[t]` the constant
+sheaf is constructible and its `H⁰` on a proper curve is infinite); in particular so does the field
+extension invariance `C₇`.
 
 The proof is that of `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced`,
 run for all eight assertions simultaneously: reduction to `C_red`, constructible approximation
 and continuity of cohomology, primary decomposition, and induction on the exponent along
 `0 → F[ℓ] → F → F/F[ℓ] → 0` using `AlgebraicGeometry.IsCurve.Assertions.of_shortExact`.
 (blueprint: `lemma-weil-pbc-curve-constructible-primary-reduction`) -/
-theorem IsCurve.Assertions.of_forall_isReduced {k : Type u} [Field k] [IsAlgClosed k]
+theorem IsCurve.Assertions.of_forall_isReduced [Finite Λ] {k : Type u} [Field k]
+    [IsAlgClosed k]
     (H : ∀ {X : Scheme.{u}} (g : X ⟶ Spec (.of k)) [IsCurve g] [IsReduced X] (ℓ : ℕ)
       [Fact ℓ.Prime]
       (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
@@ -185,14 +190,15 @@ theorem IsCurve.Assertions.of_forall_isReduced {k : Type u} [Field k] [IsAlgClos
 /-! ### Localisation to a dense open -/
 
 /-- **Dense-open localisation reduction.** Let `X` be a reduced curve over an algebraically
-closed field `k` and `F` a constructible sheaf of `Λ`-modules killed by a prime `r`. There is
-a dense open `j : U ⟶ X` whose connected components are irreducible and on which `F` is finite
-locally constant, and for it the eight assertions for `F` are equivalent to those for
-`j_! j^* F`: the open–closed sequence `0 → j_! j^* F → F → i_* i^* F → 0` has third term
+closed field `k` and `F` a constructible sheaf of `Λ`-modules killed by a prime `r`, over a
+finite ring `Λ`. There is a dense open `j : U ⟶ X` whose connected components are irreducible
+and on which `F` is finite locally constant, and for it the eight assertions for `F` are
+equivalent to those for `j_! j^* F`: the open–closed sequence `0 → j_! j^* F → F → i_* i^* F → 0`
+has third term
 supported on the zero-dimensional complement `Z` of `U`, whose cohomology is concentrated in
 degree zero and invariant under field extension.
 (blueprint: `lemma-weil-pbc-curve-dense-open-reduction`) -/
-theorem IsCurve.exists_dense_assertions_iff_lowerShriek {k : Type u} [Field k]
+theorem IsCurve.exists_dense_assertions_iff_lowerShriek [Finite Λ] {k : Type u} [Field k]
     [IsAlgClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (r : ℕ) [Fact r.Prime] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsConstructibleSheaf F] (hF : r • 𝟙 F = 0) :
@@ -205,14 +211,15 @@ theorem IsCurve.exists_dense_assertions_iff_lowerShriek {k : Type u} [Field k]
 
 /-- **Dense-open localisation, componentwise.** Let `C` be a reduced curve over an
 algebraically closed field `k` and `F` a constructible sheaf of `Λ`-modules killed by a prime
-`r`. There are finitely many pairwise disjoint irreducible opens `U_a ⊆ C`, with dense union
-`U` and zero-dimensional complement `Z = C ∖ U`, on each of which `F` is finite locally
-constant, such that, writing `j_a : U_a ⟶ C` for the inclusions,
+`r`, over a finite ring `Λ`. There are finitely many pairwise disjoint irreducible opens
+`U_a ⊆ C`, with dense union `U` and zero-dimensional complement `Z = C ∖ U`, on each of which
+`F` is finite locally constant, such that, writing `j_a : U_a ⟶ C` for the inclusions,
 `C(C, F) ↔ ∀ a, C(C, j_{a,!}(F|_{U_a}))`. This combines the open–closed sequence
 `0 → j_! j^* F → F → i_* i^* F → 0`, the assertions on the zero-dimensional `Z`, the
 decomposition `j_! j^* F = ⨁_a j_{a,!}(F|_{U_a})` and dévissage.
 (blueprint: `lem-weil-pbc-curve-dense-open-localization`) -/
-theorem IsCurve.exists_dense_assertions_iff_forall_lowerShriek {k : Type u} [Field k]
+theorem IsCurve.exists_dense_assertions_iff_forall_lowerShriek [Finite Λ] {k : Type u}
+    [Field k]
     [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsReduced C]
     (r : ℕ) [Fact r.Prime] (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsConstructibleSheaf F] (hF : r • 𝟙 F = 0) :

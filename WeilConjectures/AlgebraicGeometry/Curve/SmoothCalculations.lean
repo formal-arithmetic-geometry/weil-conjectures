@@ -68,12 +68,12 @@ lemma Etale.nsmul_id_constantModSheaf (X : Scheme.{u}) (n : ℕ) :
   ext
   simpa using (Ideal.Quotient.eq_zero_iff_mem).2 (Ideal.mem_span_singleton_self (n : Λ))
 
-/-- For `n > 0`, the underlying abelian sheaf of the constant sheaf `Λ/nΛ` is torsion in the
-sectionwise sense `CategoryTheory.Sheaf.IsTorsion`: every section is killed by `n`. -/
+/-- For `n > 0`, the underlying abelian sheaf of the constant sheaf `Λ/nΛ` is torsion
+(`CategoryTheory.Sheaf.IsTorsion`): every section is killed by `n`. -/
 lemma Etale.isTorsion_constantModSheaf (X : Scheme.{u}) {n : ℕ} (hn : 0 < n) :
     ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
       (Etale.constantModSheaf Λ X n)).IsTorsion := by
-  intro U x
+  refine Sheaf.IsTorsion.of_forall_isAddTorsion fun U x ↦ ?_
   have h := congr_arg
     (fun φ => ((sheafToPresheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map φ).app U)
     (Etale.nsmul_id_constantModSheaf Λ X n)
@@ -129,28 +129,28 @@ theorem subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP [IsCurve f] [Smo
   sorry
 
 /-- **`C₄` for `𝐅_r`.** Let `C` be a smooth separated connected curve over an algebraically
-closed field `k` and `r` a prime different from `char k`. If `𝐅_r` is constructible (e.g. when
-`Λ/rΛ` is finite), then `Hᵠ(C, 𝐅_r)` is finite for every `q`: `C` is proper or affine, and the
+closed field `k` and `r` a prime different from `char k`. If `Λ/rΛ` is finite, then
+`Hᵠ(C, 𝐅_r)` is finite for every `q`: `C` is proper or affine, and the
 groups are computed by the Kummer sequence. The torsion hypothesis of the field `C₄` of
 `AlgebraicGeometry.IsCurve.Assertions` is replaced by `(r : k) ≠ 0`.
 (blueprint: `lem-sc-c4`) -/
 theorem finite_sheafH_constantModSheaf_of_ne_zero [IsCurve f] [Smooth f] [ConnectedSpace C]
     (r : ℕ) [Fact r.Prime] (hr : (r : k) ≠ 0)
-    [Scheme.IsConstructibleSheaf (Etale.constantModSheaf Λ C r)] (q : ℕ) :
+    [Finite (Λ ⧸ (Ideal.span {(r : Λ)} : Ideal Λ))] (q : ℕ) :
     Finite (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
         (Etale.constantModSheaf Λ C r)) q) :=
   sorry
 
 /-- **`C₅` for `𝐅_r`.** Let `C` be a smooth proper connected curve over an algebraically closed
-field `k` and `r` an arbitrary prime. If `𝐅_r` is constructible (e.g. when `Λ/rΛ` is finite),
-then `Hᵠ(C, 𝐅_r)` is finite for every `q`: for `r ≠ char k` by the curve estimates, and for
+field `k` and `r` an arbitrary prime. If `Λ/rΛ` is finite, then `Hᵠ(C, 𝐅_r)` is finite for
+every `q`: for `r ≠ char k` by the curve estimates, and for
 `r = char k = p` by the Artin–Schreier sequence, which identifies `H¹(C, 𝐅_p)` with the
 Frobenius-fixed part of `H¹(C, 𝒪_C)` and kills the higher groups.
 (blueprint: `lem-sc-c5`) -/
 theorem finite_sheafH_constantModSheaf_of_isProper [IsCurve f] [Smooth f] [ConnectedSpace C]
-    [IsProper f] (r : ℕ) [Fact r.Prime]
-    [Scheme.IsConstructibleSheaf (Etale.constantModSheaf Λ C r)] (q : ℕ) :
+    [IsProper f] (r : ℕ) [Fact r.Prime] [Finite (Λ ⧸ (Ideal.span {(r : Λ)} : Ideal Λ))]
+    (q : ℕ) :
     Finite (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
         (Etale.constantModSheaf Λ C r)) q) :=
@@ -224,7 +224,8 @@ algebraically closed field `k` and `n` a prime. The constant sheaf `𝐅_n` (rea
 
 * `C₁` and `C₈`;
 * `C₂` when `C` is affine, `C₅` and `C₇` when `C` is proper;
-* `C₄` and `C₆` when `n ≠ char k` (part (a) of the blueprint statement);
+* `C₄` and `C₆` when `n ≠ char k` (part (a) of the blueprint statement), the finiteness in
+  `C₄` and `C₅` when `Λ/nΛ` is finite;
 * `C₃` when `n = char k` (part (b));
 
 each in the form of the corresponding field of `AlgebraicGeometry.IsCurve.Assertions`, with the
@@ -244,9 +245,9 @@ theorem constantModSheaf_curveCalculations [IsCurve f] [Smooth f] [ConnectedSpac
     (∀ q, 2 < q → Subsingleton (Sheaf.H F q)) ∧
     (IsAffine C → ∀ q, 1 < q → Subsingleton (Sheaf.H F q)) ∧
     (CharP k n → ∀ q, 1 < q → Subsingleton (Sheaf.H F q)) ∧
-    ((n : k) ≠ 0 → Scheme.IsConstructibleSheaf (Etale.constantModSheaf Λ C n) →
+    ((n : k) ≠ 0 → Finite (Λ ⧸ (Ideal.span {(n : Λ)} : Ideal Λ)) →
       ∀ q, Finite (Sheaf.H F q)) ∧
-    (IsProper f → Scheme.IsConstructibleSheaf (Etale.constantModSheaf Λ C n) →
+    (IsProper f → Finite (Λ ⧸ (Ideal.span {(n : Λ)} : Ideal Λ)) →
       ∀ q, Finite (Sheaf.H F q)) ∧
     ((n : k) ≠ 0 → ∀ (k' : Type u) [Field k'] [IsAlgClosed k'] {C' : Scheme.{u}}
       {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C},
@@ -270,27 +271,28 @@ theorem constantModSheaf_curveCalculations [IsCurve f] [Smooth f] [ConnectedSpac
 /-- **The eight assertions for `𝐅_ℓ`, `ℓ ≠ char k`, on a smooth curve.** Let `k` be
 algebraically closed, `C` a smooth separated `k`-scheme of finite type of dimension at most
 one (not necessarily connected) and `ℓ` a prime different from `char k`. Then the constant sheaf
-`𝐅_ℓ` (read over `Λ` as `Λ/ℓΛ`) satisfies all eight assertions
+`𝐅_ℓ` (read over `Λ` as `Λ/ℓΛ`, assumed finite) satisfies all eight assertions
 `AlgebraicGeometry.IsCurve.Assertions`; their maps are the pullback maps
 `AlgebraicGeometry.Etale.cohomologyMap`. The proof goes through the Kummer sequence, the
 compactification of `C` and purity for the boundary points.
 (blueprint: `lemma-weil-pbc-smooth-curve-kummer-localization`) -/
 theorem assertions_constantModSheaf_of_ne_zero [IsCurve f] [Smooth f] (ℓ : ℕ) [Fact ℓ.Prime]
-    (hℓ : (ℓ : k) ≠ 0) :
+    (hℓ : (ℓ : k) ≠ 0) [Finite (Λ ⧸ (Ideal.span {(ℓ : Λ)} : Ideal Λ))] :
     IsCurve.Assertions Λ f (Etale.constantModSheaf Λ C ℓ) :=
   sorry
 
 /-- **The eight assertions for `𝐅_p`, `p = char k`, on a smooth curve.** Let `k` be
 algebraically closed of characteristic `p > 0` and `C` a smooth separated `k`-scheme of finite
 type of dimension at most one (not necessarily connected). Then the constant sheaf `𝐅_p` (read
-over `Λ` as `Λ/pΛ`) satisfies all eight assertions `AlgebraicGeometry.IsCurve.Assertions`
+over `Λ` as `Λ/pΛ`, assumed finite) satisfies all eight assertions
+`AlgebraicGeometry.IsCurve.Assertions`
 (`C₄` and `C₆` hold since their torsion hypothesis forces the sheaf to vanish). The proof goes
 through the Artin–Schreier sequence `0 → 𝐅_p → 𝒪_C → 𝒪_C → 0`; for proper `C` the invariance
 `C₇` comes from that of the kernel of `F - 1` on `H¹(C, 𝒪_C)` (this description of the map is
 not stated).
 (blueprint: `lemma-weil-pbc-smooth-curve-artin-schreier`) -/
 theorem assertions_constantModSheaf_of_charP [IsCurve f] [Smooth f] (p : ℕ) [Fact p.Prime]
-    [CharP k p] :
+    [CharP k p] [Finite (Λ ⧸ (Ideal.span {(p : Λ)} : Ideal Λ))] :
     IsCurve.Assertions Λ f (Etale.constantModSheaf Λ C p) :=
   sorry
 

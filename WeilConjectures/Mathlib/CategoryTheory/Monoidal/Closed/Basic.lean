@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
+public import Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 
 /-!
 # Zero objects and internal homs along monoidal functors
@@ -22,10 +23,15 @@ tensorator. This is the monoidal generalisation of `CategoryTheory.expComparison
 the TODO of `Mathlib.CategoryTheory.Monoidal.Closed.Functor`. If `G` is monoidal and an
 equivalence, the comparison map is an isomorphism (`CategoryTheory.Functor.Monoidal.commIhom`);
 compare `CategoryTheory.MonoidalClosed.ofEquiv`, which transports the closed structure along a
-monoidal equivalence.
+monoidal equivalence. The comparison maps of a composite are composites of comparison maps
+(`CategoryTheory.Functor.LaxMonoidal.ihomComparison_comp_app`), and they are compatible with
+monoidal natural transformations
+(`CategoryTheory.Functor.LaxMonoidal.ihomComparison_app_comp_map_app`).
 
 A pairing `b : X ⊗ Y ⟶ 𝟙_ C` is *perfect* (`CategoryTheory.MonoidalClosed.IsPerfectPairing`)
-if its adjoint `Y ⟶ [X, 𝟙_ C]` is an isomorphism.
+if its adjoint `Y ⟶ [X, 𝟙_ C]` is an isomorphism. Perfectness is preserved by precomposition
+with an isomorphism in the first variable
+(`CategoryTheory.MonoidalClosed.IsPerfectPairing.whiskerRight_comp`).
 -/
 
 @[expose] public section
@@ -209,4 +215,75 @@ noncomputable def IsPerfectPairing.iso {X Y : C} {b : X ⊗ Y ⟶ 𝟙_ C}
     (h : IsPerfectPairing b) : Y ≅ (ihom X).obj (𝟙_ C) :=
   @asIso _ _ _ _ _ h.isIso
 
+instance isIso_pre {X X' : C} (f : X' ⟶ X) [IsIso f] : IsIso (pre f) :=
+  ⟨pre (inv f), by rw [← pre_map, IsIso.inv_hom_id, pre_id],
+    by rw [← pre_map, IsIso.hom_inv_id, pre_id]⟩
+
+/-- Precomposing a perfect pairing `b : X ⊗ Y ⟶ 𝟙_ C` with an isomorphism `f : X' ⟶ X` in the
+first variable gives a perfect pairing `X' ⊗ Y ⟶ 𝟙_ C`: the adjoint of the composite is the
+adjoint of `b` followed by the isomorphism `pre f`,
+```
+         curry b                 pre f
+  Y ─────────────▶ [X, 𝟙_ C] ─────────▶ [X', 𝟙_ C]
+``` -/
+lemma IsPerfectPairing.whiskerRight_comp {X X' Y : C} {b : X ⊗ Y ⟶ 𝟙_ C}
+    (h : IsPerfectPairing b) (f : X' ⟶ X) [IsIso f] : IsPerfectPairing (f ▷ Y ≫ b) :=
+  ⟨by
+    have := h.isIso
+    rw [← curry_pre_app]
+    infer_instance⟩
+
 end CategoryTheory.MonoidalClosed
+
+namespace CategoryTheory.Functor.LaxMonoidal
+
+open MonoidalCategory MonoidalClosed
+
+variable {C D E : Type*} [Category* C] [Category* D] [Category* E] [MonoidalCategory C]
+  [MonoidalCategory D] [MonoidalCategory E] [MonoidalClosed C] [MonoidalClosed D]
+  [MonoidalClosed E]
+
+/-- The comparison map `G [A, B] ⟶ [G A, G B]` is characterised by its compatibility with
+evaluation. -/
+lemma ihomComparison_app_eq_curry (G : C ⥤ D) [G.LaxMonoidal] (A B : C) :
+    (ihomComparison G A).natTrans.app B = curry (μ G A _ ≫ G.map ((ihom.ev A).app B)) := by
+  rw [← ihomComparison_ev, ← uncurry_eq, curry_uncurry]
+
+/-- The comparison map of a composite of lax monoidal functors is the composite of the comparison
+maps. -/
+lemma ihomComparison_comp_app (F : C ⥤ D) (G : D ⥤ E) [F.LaxMonoidal] [G.LaxMonoidal]
+    (A B : C) :
+    (ihomComparison (F ⋙ G) A).natTrans.app B =
+      G.map ((ihomComparison F A).natTrans.app B) ≫
+        (ihomComparison G (F.obj A)).natTrans.app (F.obj B) := by
+  rw [ihomComparison_app_eq_curry, curry_eq_iff, uncurry_eq]
+  dsimp only [Functor.comp_obj, Functor.id_obj]
+  rw [MonoidalCategory.whiskerLeft_comp_assoc, ihomComparison_ev, μ_natural_right_assoc,
+    ← G.map_comp, ihomComparison_ev, comp_μ]
+  simp
+
+/-- The comparison maps are compatible with monoidal natural transformations. -/
+lemma ihomComparison_app_comp_map_app {F F' : C ⥤ D} [F.LaxMonoidal] [F'.LaxMonoidal]
+    (τ : F ⟶ F') [NatTrans.IsMonoidal τ] (A B : C) :
+    (ihomComparison F A).natTrans.app B ≫ (ihom (F.obj A)).map (τ.app B) =
+      τ.app _ ≫ (ihomComparison F' A).natTrans.app B ≫ (pre (τ.app A)).app (F'.obj B) := by
+  apply uncurry_injective
+  rw [uncurry_natural_right, uncurry_eq, ihomComparison_ev, uncurry_natural_left,
+    uncurry_pre_app, uncurry_eq, ihomComparison_ev, Category.assoc, ← tensorHom_def'_assoc,
+    ← NatTrans.IsMonoidal.tensor_assoc]
+  exact congrArg _ (τ.naturality _)
+
+/-- If `τ : F ≅ F'` is a monoidal natural isomorphism, the comparison maps of `F` are isomorphisms
+if those of `F'` are. -/
+lemma isIso_ihomComparison_of_iso {F F' : C ⥤ D} [F.LaxMonoidal] [F'.LaxMonoidal]
+    (τ : F ≅ F') [NatTrans.IsMonoidal τ.hom] (A : C)
+    [IsIso (ihomComparison F' A).natTrans] : IsIso (ihomComparison F A).natTrans := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro B
+  have h := ihomComparison_app_comp_map_app τ.hom A B
+  have : IsIso ((ihomComparison F A).natTrans.app B ≫ (ihom (F.obj A)).map (τ.hom.app B)) := by
+    rw [h]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _ ((ihom (F.obj A)).map (τ.hom.app B))
+
+end CategoryTheory.Functor.LaxMonoidal

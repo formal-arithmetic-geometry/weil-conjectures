@@ -6,7 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.FourierTransform.Defs
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
@@ -114,7 +114,8 @@ Class: torsion; decided by the cohomology of `𝔸^r`, `H_c^*(𝔸^r, Λ) ≅ Λ
 `[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-prop-first-formula`) -/
 theorem nonempty_iso_affineFourierTransform_unit [Finite Λ] [HasInvertibleExponent Λ S]
-    [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
+    [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] (Ψ : AddChar (ZMod p) Λ)
+    (hΨ : IsUnit (Ψ 1 - 1)) :
     Nonempty ((affineFourierTransform Λ n S Ψ).obj (𝟙_ _) ≅
         (shiftFunctor _ (-(Fintype.card n : ℤ))).obj
           ((tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj

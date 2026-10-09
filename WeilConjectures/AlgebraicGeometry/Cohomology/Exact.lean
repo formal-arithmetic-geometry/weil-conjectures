@@ -18,6 +18,11 @@ exact sequence of `𝒪_X`-modules has a long exact sequence in the cohomology
 `AlgebraicGeometry.Scheme.Modules.H`, the covariant `Ext` sequence. We record the vanishing
 statements that follow from it.
 
+## Main definitions
+
+- `AlgebraicGeometry.Scheme.Modules.toAb`: the exact forgetful functor from `𝒪_X`-modules to
+  abelian sheaves.
+
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_iso`: vanishing of `H^n` only depends on
@@ -40,6 +45,20 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}}
 
+variable (X) in
+/-- The forgetful functor from `𝒪_X`-modules to abelian sheaves on `X`. -/
+noncomputable abbrev toAb : X.Modules ⥤ Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} :=
+  SheafOfModules.toSheaf.{u} X.ringCatSheaf
+
+instance : (toAb X).PreservesZeroMorphisms :=
+  inferInstanceAs (SheafOfModules.toSheaf.{u} X.ringCatSheaf).PreservesZeroMorphisms
+
+instance : PreservesFiniteLimits (toAb X) :=
+  inferInstanceAs (PreservesFiniteLimits (SheafOfModules.toSheaf.{u} X.ringCatSheaf))
+
+instance : PreservesFiniteColimits (toAb X) :=
+  inferInstanceAs (PreservesFiniteColimits (SheafOfModules.toSheaf.{u} X.ringCatSheaf))
+
 /-- Vanishing of sheaf cohomology only depends on the isomorphism class of the module. -/
 lemma subsingleton_H_of_iso {M N : X.Modules} (e : M ≅ N) (n : ℕ) [Subsingleton (M.H n)] :
     Subsingleton (N.H n) :=
@@ -59,18 +78,10 @@ The underlying sequence of abelian sheaves is again short exact, since `SheafOfM
 is exact (`SheafOfModules.preservesFiniteColimits_toSheaf`). -/
 lemma subsingleton_H_of_shortExact {S : ShortComplex X.Modules} (hS : S.ShortExact) (n : ℕ)
     [Subsingleton (S.X₂.H n)] [Subsingleton (S.X₁.H (n + 1))] : Subsingleton (S.X₃.H n) := by
-  let Φ : X.Modules ⥤ Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} :=
-    SheafOfModules.toSheaf.{u} X.ringCatSheaf
-  have : Φ.PreservesZeroMorphisms :=
-    inferInstanceAs (SheafOfModules.toSheaf.{u} X.ringCatSheaf).PreservesZeroMorphisms
-  have : PreservesFiniteLimits Φ :=
-    inferInstanceAs (PreservesFiniteLimits (SheafOfModules.toSheaf.{u} X.ringCatSheaf))
-  have : PreservesFiniteColimits Φ :=
-    inferInstanceAs (PreservesFiniteColimits (SheafOfModules.toSheaf.{u} X.ringCatSheaf))
   refine ⟨fun x y ↦ ?_⟩
   suffices h : ∀ z : S.X₃.H n, z = 0 by rw [h x, h y]
   intro z
-  obtain ⟨w, hw⟩ := Abelian.Ext.covariant_sequence_exact₃ _ (hS.map_of_exact Φ) z
+  obtain ⟨w, hw⟩ := Abelian.Ext.covariant_sequence_exact₃ _ (hS.map_of_exact (toAb X)) z
     (n₁ := n + 1) rfl (Subsingleton.elim (α := S.X₁.H (n + 1)) _ _)
   obtain rfl : w = 0 := Subsingleton.elim (α := S.X₂.H n) _ _
   rw [← hw]

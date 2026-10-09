@@ -111,7 +111,7 @@ abbrev kFlatUpperStar :
 omit [Abelian.HasFunctorialFlatResolution A] in
 /-- The pullbacks of the functorial flat resolutions of complexes of étale sheaves on `Y` are
 K-flat. -/
-lemma kFlatUpperStar_quotient_obj_resolutionFunctor_obj [Etale.UpperStarPreservesFlat A]
+lemma kFlatUpperStar_quotient_obj_resolutionFunctor_obj [(g)^*[A].PreservesFlat]
     (Λ : LeftResolution (ObjectProperty.flat.ι : _ ⥤ Sheaf Y.smallEtaleTopology A))
     [Λ.F.PreservesZeroMorphisms]
     (K : CochainComplex (Sheaf Y.smallEtaleTopology A) ℤ) :
@@ -126,7 +126,7 @@ omit [Abelian.HasFunctorialFlatResolution A] in
 pullback by `g` is K-flat form a left derivability structure on `K(Y_ét)` for the
 quasi-isomorphisms. -/
 lemma isLeftDerivabilityStructure_kFlatUpperStar_of_leftResolution
-    [Etale.UpperStarPreservesFlat A]
+    [(g)^*[A].PreservesFlat]
     (Λ : LeftResolution (ObjectProperty.flat.ι : _ ⥤ Sheaf Y.smallEtaleTopology A)) :
     (HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).IsLeftDerivabilityStructure :=
   HomotopyCategory.isLeftDerivabilityStructure_quasiIsoLocalizerMorphism _
@@ -136,7 +136,7 @@ lemma isLeftDerivabilityStructure_kFlatUpperStar_of_leftResolution
 /-- The complexes whose pullback by `g` is K-flat form a left derivability structure on
 `K(Y_ét)` for the quasi-isomorphisms. The functorial flat resolution of étale sheaves on `Y`
 is given by the instance `Etale.hasFunctorialFlatResolution_sheaf`. -/
-instance isLeftDerivabilityStructure_kFlatUpperStar [Etale.UpperStarPreservesFlat A] :
+instance isLeftDerivabilityStructure_kFlatUpperStar [(g)^*[A].PreservesFlat] :
     (HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).IsLeftDerivabilityStructure :=
   isLeftDerivabilityStructure_kFlatUpperStar_of_leftResolution A g
     (inferInstance : HasFunctorialFlatResolution (Sheaf Y.smallEtaleTopology A)).some
@@ -258,7 +258,7 @@ end
 from `K(Y_ét) × K(Y_ét)` to `D(Z_ét)`. It is computed on pairs `(K, M)` with `K` K-flat and
 `g^*M` K-flat. -/
 theorem isLeftDerivedFunctor₂_derivedTensor_leftDerivedUpperStar
-    [Etale.UpperStarPreservesFlat A] :
+    [(g)^*[A].PreservesFlat] :
     (derivedTensorLeftDerivedUpperStar A g).IsLeftDerivedFunctor₂
       (derivedTensorLeftDerivedUpperStarCounit A g)
         (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
@@ -292,7 +292,7 @@ section
 
 open DerivedCategory Functor.OplaxMonoidal
 
-variable [Etale.UpperStarPreservesFlat A]
+variable [(g)^*[A].PreservesFlat]
 
 attribute [local instance] isLeftDerivedFunctor₂_derivedTensor_leftDerivedUpperStar
   isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor
