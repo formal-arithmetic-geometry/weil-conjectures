@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-simple-root-uniqueness",
+ "kind": "statement",
+ "title": "A simple root in a local ring is unique in its residue class (Stacks 06RR)",
+ "statement": "Let $(R,\\mathfrak m)$ be a local ring, $f\\in R[T]$ with derivative $f'$, and $a,b\\in R$ with $f(a)=f(b)=0$, $a-b\\in\\mathfrak m$ and $f'(a)\\notin\\mathfrak m$. Then $a=b$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 06RR (lemma-uniqueness), just before Lemma Tag 04GG"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "two roots of a polynomial in a local ring congruent modulo the maximal ideal with derivative a unit are equal",
+   "results": "HenselianLocalRing.is_henselian, HenselianRing.is_henselian (Mathlib.RingTheory.Henselian); Polynomial.one_lt_rootMultiplicity_iff_isRoot, rootMultiplicity_le_one_of_separable (FieldDivision/Separable)",
+   "date": "2026-10-09",
+   "verdict": "no match by this tool; match found by grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a local ring, if f(a) = f(b) = 0, a ≡ b mod the maximal ideal and f'(a) is a unit, then a = b",
+   "results": "IsLocalRing.residue_eq_zero_iff, HenselianLocalRing, HenselianLocalRing.TFAE, IsLocalRing.residue_ne_zero_iff_isUnit, HenselianLocalRing.is_henselian (the v4.28 index does not show the lemma)",
+   "date": "2026-10-09",
+   "verdict": "no match by this tool; match found by grep"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 06RR' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 264,277p RingTheory/Henselian.lean",
+   "results": "RingTheory/Henselian.lean:265-269 @[stacks 06RR] theorem IsLocalRing.eq_of_eval_eq_zero_of_not_isUnit_sub {f : R[X]} {a b : R} (ha : f.eval a = 0) (hb : f.eval b = 0) (h : ¬ IsUnit (a - b)) (h' : IsUnit (f.derivative.eval a)) : a = b",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsLocalRing.eq_of_eval_eq_zero_of_not_isUnit_sub (project ~/weil-conjectures-slopmaster2)",
+   "results": "IsLocalRing.eq_of_eval_eq_zero_of_not_isUnit_sub, theorem, .lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean",
+   "date": "2026-10-09",
+   "verdict": "match (name exists)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalRing.eq_of_eval_eq_zero_of_not_isUnit_sub",
+  "file": "Mathlib/RingTheory/Henselian.lean",
+  "how": "exact: in a local ring ¬IsUnit (a - b) is a - b ∈ 𝔪 (`IsLocalRing.mem_maximalIdeal`, `mem_nonunits_iff`) and IsUnit (f'(a)) is f'(a) ∉ 𝔪; line 265-269, tagged @[stacks 06RR]. Source read 2026-10-09."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselian-etale-retraction",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

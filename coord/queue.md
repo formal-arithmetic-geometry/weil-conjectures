@@ -1,8 +1,8 @@
 # Work queue
 
-570 items; claim with `tools/claim.py next <group> [--stage N]`.
+572 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (553)
+## Stage 1: nodes to split (555)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-sc-c6` | 1005 | none |
 | `lem-sc-c7` | 1005 | none |
 | `lem-sc-c8` | 1005 | none |
-| `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1005 | none |
 | `lem-weil-pbc-finite-etale-trace-degree` | 1005 | none |
 | `lem-weil-pbc-finite-pushforward-constructible-descent` | 1005 | none |
 | `lem-weil-pbc-henselian-etale-retraction` | 1005 | none |
@@ -44,9 +43,12 @@
 | `lemma-weil-pbc-h1-torsor-comparison` | 1005 | sorry_here |
 | `lemma-weil-pbc-injective-restriction-acyclicity` | 1005 | sorry_here |
 | `thm-weil-pbc-finite-etale-lifting` | 1005 | sorry_here |
+| `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1006 | none |
 | `lem-weil-pbc-constructible-torsion-modules-agree` | 1006 | none |
+| `lem-weil-pbc-etale-base-change-continuous` | 1006 | none |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
 | `lem-weil-pbc-injective-resolution-ses` | 1006 | none |
+| `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1006 | none |
 | `lemma-weil-pbc-constructible-approximation` | 1006 | none |
 | `lemma-weil-pbc-constructible-finite-pushforward` | 1006 | none |
 | `lemma-weil-pbc-finite-etale-henselian-lifting` | 1006 | none |
@@ -582,7 +584,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 568 nodes that wait for stage 1, 129 nodes that wait for a statement dependency.
+Not open yet: 570 nodes that wait for stage 1, 130 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

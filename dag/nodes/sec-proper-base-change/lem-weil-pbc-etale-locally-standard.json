@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-etale-locally-standard",
+ "kind": "statement",
+ "title": "Etale algebras are Zariski-locally standard etale (Stacks 00UE)",
+ "statement": "For a commutative ring $S$, a monic $f\\in S[t]$ and $h\\in S[t]$ such that $f'p_1+fp_2=h^n$ in $S[t]$ for some $p_1,p_2\\in S[t]$ and $n\\ge0$ (equivalently: $f'$ is invertible in $S[t]_h/(f)$), write $C(f,h)=S[t][Y]/(f,\\,Yh-1)$ ($=S[t]_h/(f)$, the *standard etale algebra* of the pair $(f,h)$, Stacks Definition Tag 00UB) and $x\\in C(f,h)$ for the class of $t$. Let $S\\to B$ be a ring map such that $\\operatorname{Spec}B\\to\\operatorname{Spec}S$ is etale [def-weil-etale-morphism], and let $\\mathfrak q\\subset B$ be a prime ideal. Then there exist $g\\in B\\setminus\\mathfrak q$, a monic $f\\in S[t]$, an $h\\in S[t]$ with $f'p_1+fp_2=h^n$ for some $p_1,p_2\\in S[t]$, $n\\ge0$, and an isomorphism of $S$-algebras $B_g\\cong C(f,h)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Proposition Tag 00UE (proposition-etale-locally-standard); standard etale: Definition Tag 00UB"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale algebra is locally standard etale: exists f not in prime such that localization away f is standard etale",
+   "results": "Algebra.exists_etale_of_isEtaleAt (Mathlib.RingTheory.Etale.Locus), Algebra.instEtaleOfIsStandardEtale, Algebra.IsStandardEtale.nonempty_standardEtalePresentation (Mathlib.RingTheory.Etale.StandardEtale), RingHom.Etale.propertyIsLocal",
+   "date": "2026-10-09",
+   "verdict": "partial: the pieces; the main lemma found by loogle and grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An étale algebra at a prime q is, after localizing away from some element not in q, isomorphic to a standard étale algebra",
+   "results": "Algebra.exists_etale_of_isEtaleAt, Algebra.Etale.of_isLocalizationAway, Algebra.IsStandardEtale.of_isLocalizationAway, RingHom.Etale.ofLocalizationSpan",
+   "date": "2026-10-09",
+   "verdict": "partial (the v4.28 index of LeanFinder may predate the lemma)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsStandardEtale, Localization.Away",
+   "results": "Algebra.IsEtaleAt.exists_isStandardEtale : (Q : Ideal S) [Q.IsPrime] [Algebra.FinitePresentation R S] [Algebra.IsEtaleAt R Q] : ∃ f ∉ Q, Algebra.IsStandardEtale R (Localization.Away f); HasStandardEtaleSurjectionOn.isStandardEtale; Algebra.IsSmoothAt.exists_isStandardEtale_mvPolynomial (Mathlib.RingTheory.Unramified.LocalStructure)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00UE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 372,383p RingTheory/Unramified/LocalStructure.lean; sed -n 40,60p and 255,275p and 380,400p RingTheory/Etale/StandardEtale.lean",
+   "results": "RingTheory/Unramified/LocalStructure.lean:372 @[stacks 00UE] lemma IsEtaleAt.exists_isStandardEtale (namespace Algebra); StandardEtalePair (f monic, g, cond : ∃ p₁ p₂ n, derivative f * p₁ + f * p₂ = g ^ n), P.Ring := R[X][Y] ⧸ span {C f, Y * C g - 1}, StandardEtalePresentation.equivRing : S ≃ₐ[R] P.Ring, class IsStandardEtale (nonempty StandardEtalePresentation)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.IsEtaleAt.exists_isStandardEtale",
+  "file": "Mathlib/RingTheory/Unramified/LocalStructure.lean",
+  "how": "a few Mathlib lemmas, one per clause: Spec B -> Spec S etale <-> `Algebra.Etale S B` (`HasRingHomProperty.Spec_iff`, AlgebraicGeometry/Morphisms/RingHomProperties.lean:360, with `HasRingHomProperty @Etale RingHom.Etale`, Morphisms/Etale.lean:56, and `RingHom.etale_algebraMap`, RingTheory/RingHom/Etale.lean:37); `Algebra.Etale` gives `FinitePresentation` (Etale/Basic.lean:208,219) and `IsEtaleAt S q` (= `FormallyEtale S (Localization.AtPrime q)`, Etale/Locus.lean:35, by the instance Etale/Basic.lean:183); `Algebra.IsEtaleAt.exists_isStandardEtale q` (LocalStructure.lean:372-373) gives g ∉ q with `Algebra.IsStandardEtale S (Localization.Away g)`; `Algebra.IsStandardEtale.nonempty_standardEtalePresentation` (Etale/StandardEtale.lean:382-383) gives a `StandardEtalePresentation` P whose `StandardEtalePair` is (f, h) with `monic_f` and `cond` (lines 49-55), and `P.equivRing : B_g ≃ₐ[S] P.Ring` (line 272) with `P.Ring = S[X][Y]/(f, Y h - 1)` (line 65). Source read 2026-10-09."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselian-etale-retraction",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

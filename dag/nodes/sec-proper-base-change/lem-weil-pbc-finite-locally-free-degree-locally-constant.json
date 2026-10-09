@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+ "kind": "statement",
+ "title": "The fibre degree of a finite locally free morphism is locally constant",
+ "statement": "Let $f:Y\\to X$ be a finite locally free morphism of schemes [def-pc-finite-locally-free], i.e. finite, flat and locally of finite presentation. For $x\\in X$ with residue field $\\kappa(x)$ [def-weil-residue-field] let $Y_x=Y\\times_X\\operatorname{Spec}\\kappa(x)$ be the fibre [def-pc-fibre-product] and\n$$\\delta_f(x)=\\dim_{\\kappa(x)}\\Gamma(Y_x,\\mathcal O_{Y_x}).$$\nThen $\\delta_f(x)$ is finite for every $x\\in X$, and the function $\\delta_f:X\\to\\mathbf Z_{\\ge0}$ is locally constant on the underlying topological space of $X$ (every point has an open neighbourhood on which $\\delta_f$ is constant). Equivalently, $X=\\coprod_{d\\ge0}X_d$ with $X_d=\\delta_f^{-1}(d)$ open and closed, and $f^{-1}(X_d)\\to X_d$ is finite locally free of degree $d$ in the sense of [def-pc-finite-locally-free].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Stacks Morphisms, Section 02K9 (section-finite-locally-free): Definition 02KA (rank/degree), Lemma 02KB (lemma-finite-flat: finite, flat, lfp iff affine with f_*O_X finite locally free), Lemma 04MH (lemma-finite-locally-free: decomposition S = coprod S_d, proof 'a finite locally free sheaf locally has a well defined rank. Details omitted.')"
+ },
+ "stmt_deps": [
+  "def-pc-finite-locally-free",
+  "def-weil-residue-field",
+  "def-pc-fibre-product"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dimension of the fiber of a finite flat finitely presented morphism over the residue field is locally constant",
+   "results": "Module.isLocallyConstant_rankAtStalk, Module.isLocallyConstant_rankAtStalk_freeLocus (Mathlib.RingTheory.Spectrum.Prime.FreeLocus), Scheme.Hom.fiber, Scheme.Hom.fiberOverSpecResidueField (Mathlib.AlgebraicGeometry.Fiber), IsFinite.finite_preimage_singleton",
+   "date": "2026-10-09",
+   "verdict": "partial: the module-level local constancy of the rank at stalks; no scheme statement on the fibre dimension"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.finrank",
+   "results": "Scheme.Hom.finrank (stacks 02KA 'second part'), Scheme.Hom.isLocallyConstant_finrank [Flat f] [IsFinite f] [LocallyOfFinitePresentation f] : IsLocallyConstant (finrank f), finrank_SpecMap_eq_finrank, finrank_SpecMap_algebraMap (= Module.rankAtStalk), finrank_pullback_snd, finrank_of_isPullback, finrank_eq_one_of_isIso (all Mathlib.AlgebraicGeometry.Morphisms.FlatRank)",
+   "date": "2026-10-09",
+   "verdict": "generalization in a different form: Mathlib's finrank f x is the rank of the stalk of f_*O_Y at x (via an affine chart), not the fibre dimension of def-pc-finite-locally-free; their agreement is a further theorem (the TODO of FlatRank.lean says the relation to f_*O_X is not yet there), so not a leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dimension over the residue field of the global sections of the fibre of a finite flat morphism is a locally constant function on the base",
+   "results": "Module.isLocallyConstant_rankAtStalk, Module.rankAtStalk_eq (rankAtStalk M p = finrank κ(p) (κ(p) ⊗_R M)), Module.rankAtStalk_baseChange, instFiniteCarrier...FiberOfIsFinite (Mathlib.RingTheory.Spectrum.Prime.FreeLocus, Mathlib.AlgebraicGeometry.Fiber)",
+   "date": "2026-10-09",
+   "verdict": "no exact match; the ring-level identification rankAtStalk = fibre dimension is Module.rankAtStalk_eq"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'fiber.*finrank\\|finrank.*fiber\\|isLocallyConstant_finrank\\|stacks 02K\\|stacks 04MH' Mathlib/AlgebraicGeometry Mathlib/RingTheory/Spectrum",
+   "results": "only FlatRank.lean (Scheme.Hom.finrank, @[stacks 02KA \"second part\"], isLocallyConstant_finrank line 232) and FreeLocus.lean (rankAtStalk_eq line 379); no 04MH; no lemma relating Scheme.Hom.finrank to Scheme.Hom.fiber",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Scheme.Hom.finrank_eq_fiberDegree (project ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.Scheme.Hom.finrank_eq_fiberDegree and finrank_eq_fiberDegree_of_isAffine (WeilConjectures/AlgebraicGeometry/Hilbert/Curve.lean:651,670; source repository, not Mathlib; sorry-free by the slopmaster2 sorry map): for finite flat g, g.finrank y = g.fiberDegree y = dim_{κ(y)} Γ(g.fiber y)",
+   "date": "2026-10-09",
+   "verdict": "not Mathlib; in the source repository the node follows in two lines from Mathlib's Scheme.Hom.isLocallyConstant_finrank and this closed lemma (no single declaration states it)"
+  }
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-etale-trace-degree",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
