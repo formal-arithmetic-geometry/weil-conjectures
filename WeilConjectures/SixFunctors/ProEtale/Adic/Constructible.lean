@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
@@ -110,27 +111,29 @@ lemma IsAdicLisseSheaf.of_isZero {F : Sheaf (Scheme.ProEt.topology X) (WeilCoeff
       fun _ ↦ ⟨⟨⟨0⟩, fun _ ↦ biproduct.hom_ext _ _ fun j ↦ Fin.elim0 j⟩⟩⟩
 
 /-- A sheaf of `ℚ̄_ℓ`-modules on the small pro-étale site of `X` is *stratified lisse* if `X` is
-the disjoint union of finitely many locally closed subschemes `Z_k`, given by immersions
-`i_k : Z_k ⟶ X` whose images partition `X`, such that each restriction `i_k^* F` is lisse. -/
+the disjoint union of finitely many locally closed constructible subschemes `Z_k`, given by
+immersions `i_k : Z_k ⟶ X` whose images are constructible subsets partitioning `X`, such that
+each restriction `i_k^* F` is lisse (`def-weil-finite-torsion-constructibility`). -/
 def IsAdicStratifiedLisseSheaf (F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)) :
     Prop :=
   ∃ (ι : Type) (_ : Finite ι) (Z : ι → Scheme.{u}) (i : (k : ι) → Z k ⟶ X),
-    (∀ k, IsImmersion (i k)) ∧ (∀ x : X, ∃! k, x ∈ Set.range (i k).base) ∧
+    (∀ k, IsImmersion (i k)) ∧ (∀ k, Topology.IsConstructible (Set.range (i k).base)) ∧
+      (∀ x : X, ∃! k, x ∈ Set.range (i k).base) ∧
       ∀ k, IsAdicLisseSheaf ((i k)^*[WeilCoefficients.{u} l].obj F)
 
 /-- Being stratified lisse is invariant under isomorphism. -/
 lemma IsAdicStratifiedLisseSheaf.of_iso
     {F G : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)} (e : F ≅ G)
     (hF : IsAdicStratifiedLisseSheaf F) : IsAdicStratifiedLisseSheaf G := by
-  obtain ⟨ι, hι, Z, i, hi, hcover, h⟩ := hF
-  exact ⟨ι, hι, Z, i, hi, hcover, fun k ↦ (h k).of_iso ((_)^*[_].mapIso e)⟩
+  obtain ⟨ι, hι, Z, i, hi, hc, hcover, h⟩ := hF
+  exact ⟨ι, hι, Z, i, hi, hc, hcover, fun k ↦ (h k).of_iso ((_)^*[_].mapIso e)⟩
 
 /-- A lisse sheaf is stratified lisse, with the trivial stratification. -/
 lemma IsAdicLisseSheaf.isAdicStratifiedLisseSheaf
     {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)} (hF : IsAdicLisseSheaf F) :
     IsAdicStratifiedLisseSheaf F :=
   ⟨Unit, inferInstance, fun _ ↦ X, fun _ ↦ 𝟙 X, fun _ ↦ inferInstance,
-    fun x ↦ ⟨(), ⟨x, rfl⟩, fun _ _ ↦ rfl⟩,
+    fun _ ↦ by simp, fun x ↦ ⟨(), ⟨x, rfl⟩, fun _ _ ↦ rfl⟩,
     fun _ ↦ hF.of_iso ((upperStarId _ X).app F).symm⟩
 
 /-- A sheaf of `ℚ̄_ℓ`-modules on the small pro-étale site of `X` is *constructible* if it is
@@ -199,10 +202,12 @@ theorem IsAdicStratifiedLisseSheaf.upperStar {Y : Scheme.{u}} (f : Y ⟶ X)
     {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
     (hF : IsAdicStratifiedLisseSheaf F) :
     IsAdicStratifiedLisseSheaf ((f)^*[WeilCoefficients.{u} l].obj F) := by
-  obtain ⟨ι, hι, Z, i, hi, hcover, h⟩ := hF
+  obtain ⟨ι, hι, Z, i, hi, hc, hcover, h⟩ := hF
   refine ⟨ι, hι, fun k ↦ pullback (i k) f, fun k ↦ pullback.snd (i k) f, fun k ↦ inferInstance,
-    fun y ↦ ?_, fun k ↦ ((h k).upperStar (pullback.fst (i k) f)).of_iso
+    fun k ↦ ?_, fun y ↦ ?_, fun k ↦ ((h k).upperStar (pullback.fst (i k) f)).of_iso
       ((upperStarCompIso _ pullback.condition).app F)⟩
+  · rw [Scheme.Pullback.range_snd]
+    exact f.isConstructible_preimage (hc k)
   obtain ⟨k, ⟨z, hz⟩, hk⟩ := hcover (f y)
   obtain ⟨t, -, ht⟩ := Scheme.Pullback.exists_preimage_pullback z y hz
   refine ⟨k, ⟨t, ht⟩, fun k' ⟨t', ht'⟩ ↦ hk k' ⟨pullback.fst (i k') f t', ?_⟩⟩
@@ -254,11 +259,14 @@ theorem IsAdicStratifiedLisseSheaf.biprod
     {F G : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
     (hF : IsAdicStratifiedLisseSheaf F) (hG : IsAdicStratifiedLisseSheaf G) :
     IsAdicStratifiedLisseSheaf (F ⊞ G) := by
-  obtain ⟨ι, hι, Z, i, hi, hcover, h⟩ := hF
-  obtain ⟨ι', hι', Z', i', hi', hcover', h'⟩ := hG
+  obtain ⟨ι, hι, Z, i, hi, hc, hcover, h⟩ := hF
+  obtain ⟨ι', hι', Z', i', hi', hc', hcover', h'⟩ := hG
   refine ⟨ι × ι', inferInstance, fun k ↦ pullback (i k.1) (i' k.2),
-    fun k ↦ pullback.fst (i k.1) (i' k.2) ≫ i k.1, fun k ↦ inferInstance, fun x ↦ ?_,
-    fun k ↦ ?_⟩
+    fun k ↦ pullback.fst (i k.1) (i' k.2) ≫ i k.1, fun k ↦ inferInstance, fun k ↦ ?_,
+    fun x ↦ ?_, fun k ↦ ?_⟩
+  · rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp, Scheme.Pullback.range_fst,
+      Set.image_preimage_eq_inter_range]
+    exact (hc' k.2).inter (hc k.1)
   · obtain ⟨k, ⟨z, hz⟩, hk⟩ := hcover x
     obtain ⟨k', ⟨z', hz'⟩, hk'⟩ := hcover' x
     obtain ⟨t, ht, -⟩ := Scheme.Pullback.exists_preimage_pullback z z' (hz.trans hz'.symm)

@@ -112,6 +112,16 @@ restrictions of `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!` and `𝔻_X` to `Dctf`.
   the Artin–Schreier cohomology makes `Ri^!Λ` at the origin non-constructible. There is not
   yet a way to say "the characteristic of `A` is invertible on `X`" for a general coefficient
   category `A`, so this hypothesis is missing from every statement here carrying a `2d` bound.
+* Constructible sheaves have finitely generated stalks (`AlgebraicGeometry.Scheme.IsFiniteSheaf`).
+  The statements about direct images, internal homs, exceptional inverse images and the Verdier
+  dual hold for torsion coefficients only, and assume that finitely generated objects of `A` are
+  finite (`CategoryTheory.ConcreteCategory.FiniteOfIsFinitelyGenerated`, which holds for
+  `ModuleCat Λ` with `Λ` finite); the direct image statements, used at the integral stage on the
+  torsion reductions, assume instead that `K` is killed by a nonzero integer and that `A` is
+  noetherian (`CategoryTheory.ConcreteCategory.FinitelyGeneratedOfMono`). With coefficients `ℤ`,
+  `H³(ℙ¹, ℤ) ≅ H²(ℙ¹, ℚ/ℤ)` contains `ℚ_ℓ/ℤ_ℓ`, so `Rf_*ℤ` is not constructible for
+  `f : ℙ¹ ⟶ Spec k`. The `ℓ`-adic coefficient stages are reached through the pro-étale formalism
+  instead.
 * The clause (iv) statements of `sk-prop-sf-rf-shriek-preservation` and clause (v) of
   `sk-thm-sf-ctf-stability` assume `Y` Noetherian (`[IsNoetherian Y]`). Quasi-compactness of
   `Y` is needed for a uniform shift, since `f` must be covered by finitely many affine charts:
@@ -271,6 +281,7 @@ admitting a compactification. One assembles the open-immersion case
 (`AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedLowerShriek`) with the proper
 case, where `Rf_! = Rf_*`, along a compactification of `f`. -/
 theorem constructibleFiniteTor_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     [HasCompactification f] [QuasiCompact f]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hK : constructibleFiniteTor A X K) :
@@ -294,6 +305,7 @@ noncomputable def DerivedCategoryFiniteTor.leftDerivedUpperStar (f : X ⟶ Y) :
 `Rf_! : Dctf(X, A) ⥤ Dctf(Y, A)` of the compactly supported direct image to the small
 categories. -/
 noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriek (f : X ⟶ Y)
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     [HasCompactification f] [QuasiCompact f] :
     DerivedCategoryFiniteTor A X ⥤ DerivedCategoryFiniteTor A Y :=
   ObjectProperty.lift _ (DerivedCategoryFiniteTor.ι A X ⋙ R(f)_![A])
@@ -333,47 +345,44 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
 /-! #### Direct image -/
 
-omit [Finite Λ] in
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility.
 
-Let `Λ` be a ring every finite module of which is annihilated by an integer invertible on `Y`
-(for instance a finite ring annihilated by such an integer, or the integral stage `𝒪_E`), and
-let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes. Then `Rf_*` carries `Dᵇc(X, Λ)` into
-`Dᵇc(Y, Λ)`. The hypothesis on `Λ` makes the finite stalks of a constructible complex torsion of
-order invertible on `Y`. -/
-theorem boundedConstructible_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k))
-    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY]
-    [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
-    (hΛ : ∀ (M : Type (u + 1)) [AddCommGroup M] [Module Λ M] [Finite M],
-      ∃ n : ℕ, IsUnit (n : Γ(Y, ⊤)) ∧ ∀ m : M, n • m = 0)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
-    boundedConstructible (ModuleCat.{u + 1} Λ) Y ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
+Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes, and let `K` be a bounded constructible
+complex on `X_ét` killed by an integer `N` invertible on `Y`. Then `Rf_* K` is bounded
+constructible on `Y_ét`. The coefficients are noetherian: subobjects of finitely generated
+objects of `A` are finitely generated (`CategoryTheory.ConcreteCategory.FinitelyGeneratedOfMono`,
+which holds for `ModuleCat Λ` with `Λ` noetherian).
+
+Each hypothesis is needed. Without torsion the statement fails, `H³(ℙ¹, ℤ)` containing
+`ℚ_ℓ/ℤ_ℓ`; without the noetherian hypothesis it fails for a rank-one local system on `𝔾_m` with
+stalk `𝔽_ℓ[x, y₁, y₂, …]/(xˡ, x yᵢ)` and monodromy `1 + x`, whose `H⁰` is the non-finitely
+generated annihilator of `x`; and for `N = p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽_p)` is infinite
+(Artin–Schreier). -/
+theorem boundedConstructible_rightDerivedLowerStar [ConcreteCategory.FinitelyGeneratedOfMono A]
+    {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
+    [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (N : ℕ) [NeZero N]
+    (hN : N • 𝟙 K = 0) (hNY : IsUnit (N : Γ(Y, ⊤))) (hbc : boundedConstructible A X K) :
+    boundedConstructible A Y ((R((f)_*[A])).obj K) :=
   sorry
 
-omit [Finite Λ] in
 /-- Blueprint `sk-thm-sf-direct-image-tor-amplitude`: Direct image with finite Tor amplitude.
 
-Let `Λ` be a ring every finite module of which is annihilated by an integer invertible on `Y`
-(as in `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`), let `f : X ⟶ Y` be a
-separated morphism of finite-type `k`-schemes with `dim X ≤ d`, and let `K` be a bounded
-constructible complex on `X_ét` of Tor amplitude in `[a, b]`. Then `Rf_* K` has Tor amplitude
-in `[a, b + 2d]`. The shift `2d` is the uniform vanishing of `Rᵖf_*` above twice the dimension
-of the source. -/
-theorem torAmplitudeIn_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k))
-    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY]
-    [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsSeparated f]
-    (hΛ : ∀ (M : Type (u + 1)) [AddCommGroup M] [Module Λ M] [Finite M],
-      ∃ n : ℕ, IsUnit (n : Γ(Y, ⊤)) ∧ ∀ m : M, n • m = 0)
-    (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
-    (hta : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
-    torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a (b + 2 * (d : ℤ))
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
+Let `f : X ⟶ Y` be a separated morphism of finite-type `k`-schemes with `dim X ≤ d`, and let `K`
+be a bounded constructible complex on `X_ét` of Tor amplitude in `[a, b]`, killed by an integer
+`N` invertible on `Y`. Then `Rf_* K` has Tor amplitude in `[a, b + 2d]`. The shift `2d` is the
+uniform vanishing of `Rᵖf_*` above twice the dimension of the source. The coefficients are as in
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`. -/
+theorem torAmplitudeIn_rightDerivedLowerStar [ConcreteCategory.FinitelyGeneratedOfMono A]
+    {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
+    [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
+    [IsSeparated f] (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (N : ℕ) [NeZero N]
+    (hN : N • 𝟙 K = 0) (hNY : IsUnit (N : Γ(Y, ⊤)))
+    (hbc : boundedConstructible A X K) (hta : torAmplitudeIn A X a b K) :
+    torAmplitudeIn A Y a (b + 2 * (d : ℤ)) ((R((f)_*[A])).obj K) :=
   sorry
 
-omit [Finite Λ] in
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.
 
@@ -390,11 +399,12 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X 
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
   obtain ⟨hbc, a, b, hta⟩ := hK
   obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le aX
-  have hΛ : ∀ (M : Type (u + 1)) [AddCommGroup M] [Module Λ M] [Finite M],
-      ∃ n : ℕ, IsUnit (n : Γ(Y, ⊤)) ∧ ∀ m : M, n • m = 0 :=
-    fun M ↦ HasInvertibleExponent.exists_isUnit_nsmul_eq_zero Λ Y M
-  exact ⟨boundedConstructible_rightDerivedLowerStar Λ aX aY f hf hΛ hbc, a, b + 2 * (d : ℤ),
-    torAmplitudeIn_rightDerivedLowerStar Λ aX aY f hf hΛ d hd a b hbc hta⟩
+  obtain ⟨N, hN0, hNΛ, hNY⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := Y)
+  have : NeZero N := ⟨hN0.ne'⟩
+  have hN := nsmul_id_eq_zero_of_natCast_eq_zero hNΛ K
+  have : IsNoetherianRing Λ := inferInstance
+  exact ⟨boundedConstructible_rightDerivedLowerStar _ aX aY f hf N hN hNY hbc, a, b + 2 * (d : ℤ),
+    torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN hNY hbc hta⟩
 
 /-! #### Internal hom -/
 

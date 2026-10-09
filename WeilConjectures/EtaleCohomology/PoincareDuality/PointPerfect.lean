@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import WeilConjectures.Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
@@ -143,14 +142,16 @@ theorem isPerfect_rightDerivedGlobalSections [QuasiCompact aX]
   have : HasInvertibleExponent Λ c.Z := HasInvertibleExponent.of_hom c.g
   obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le aX
   obtain ⟨hbc, a, b, hta⟩ := hK
+  obtain ⟨N, hN0, hNΛ, hNY⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ)
+    (X := c.Z)
+  have : NeZero N := ⟨hN0.ne'⟩
+  have hN := nsmul_id_eq_zero_of_natCast_eq_zero hNΛ K
+  have : IsNoetherianRing Λ := inferInstance
   have hK' : DerivedCategory.boundedConstructibleFiniteTor Λ c.Z
       ((R((c.i)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-    have hΛ : ∀ (M : Type (u + 1)) [AddCommGroup M] [Module Λ M] [Finite M],
-        ∃ n : ℕ, IsUnit (n : Γ(c.Z, ⊤)) ∧ ∀ m : M, n • m = 0 :=
-      fun M ↦ HasInvertibleExponent.exists_isUnit_nsmul_eq_zero Λ c.Z M
-    ⟨boundedConstructible_rightDerivedLowerStar Λ aX c.g c.i c.comm.symm hΛ hbc,
+    ⟨boundedConstructible_rightDerivedLowerStar _ aX c.g c.i c.comm.symm N hN hNY hbc,
       a, b + 2 * (d : ℤ),
-      torAmplitudeIn_rightDerivedLowerStar Λ aX c.g c.i c.comm.symm hΛ d hd a b hbc hta⟩
+      torAmplitudeIn_rightDerivedLowerStar _ aX c.g c.i c.comm.symm d hd a b N hN hNY hbc hta⟩
   exact (isPerfect_compactlySupportedGlobalSections Λ c.g _ hK').of_iso
     ((compactlySupportedGlobalSectionsIsoOfIsProper _ c.g).app _ ≪≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ c.i).app K)
@@ -207,24 +208,6 @@ def DerivedCategory.boundedConstructibleIntegral (X : Scheme.{u}) :
         DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)
 
-/-- At the integral stage every finite `Λ`-module is annihilated by an integer invertible on any
-scheme `Y` on which the exponent of `Λ / I` is invertible: it is killed by a power of `I`
-(`IsAdicComplete.exists_pow_smul_top_eq_bot`). -/
-theorem exists_isUnit_nsmul_eq_zero_of_isAdicComplete [IsAdicComplete I Λ]
-    (Y : Scheme.{u}) [HasInvertibleExponent (Λ ⧸ I) Y] (M : Type (u + 1)) [AddCommGroup M]
-    [Module Λ M] [Finite M] : ∃ n : ℕ, IsUnit (n : Γ(Y, ⊤)) ∧ ∀ m : M, n • m = 0 := by
-  obtain ⟨k, hk⟩ := IsAdicComplete.exists_pow_smul_top_eq_bot I M
-  obtain ⟨n, -, hn, hu⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ ⧸ I) (X := Y)
-  have hnI : (n : Λ) ∈ I := by
-    rw [← Ideal.Quotient.eq_zero_iff_mem, map_natCast]
-    exact hn
-  refine ⟨n ^ k, by rw [Nat.cast_pow]; exact hu.pow k, fun m ↦ ?_⟩
-  have hmem : ((n : Λ) ^ k) • m ∈ I ^ k • (⊤ : Submodule Λ M) :=
-    Submodule.smul_mem_smul (Ideal.pow_mem_pow hnI k) Submodule.mem_top
-  rw [hk, Submodule.mem_bot] at hmem
-  rw [← Nat.cast_smul_eq_nsmul Λ, Nat.cast_pow]
-  exact hmem
-
 variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
   {k : Type u} [Field k] [IsSepClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
@@ -273,14 +256,22 @@ theorem isPerfect_rightDerivedGlobalSections_integral [QuasiCompact aX] (hI : I.
       ⟨⟨x ^ (n + 1), by rw [hx, Ideal.submodule_span_eq, Ideal.span_singleton_pow]⟩⟩
     obtain ⟨e⟩ := nonempty_iso_reductionModIdeal_rightDerivedLowerStar Λ c.i _ hJ
     obtain ⟨hbc, hta⟩ := hab n
+    -- the reduction is killed by `N = mⁿ⁺¹`, for `m` the exponent of `Λ/I`
     have : HasInvertibleExponent (Λ ⧸ I) c.Z := HasInvertibleExponent.of_hom c.g
-    have hΛ : ∀ (M : Type (u + 1)) [AddCommGroup M] [Module Λ M] [Finite M],
-        ∃ n : ℕ, IsUnit (n : Γ(c.Z, ⊤)) ∧ ∀ m : M, n • m = 0 :=
-      fun M ↦ exists_isUnit_nsmul_eq_zero_of_isAdicComplete I c.Z M
+    obtain ⟨m, hm0, hmΛ, hmY⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ ⧸ I)
+      (X := c.Z)
+    have hmI : (m : Λ) ∈ I := by
+      rw [← Ideal.Quotient.eq_zero_iff_mem, map_natCast]
+      exact hmΛ
+    have : NeZero (m ^ (n + 1)) := ⟨pow_ne_zero _ hm0.ne'⟩
+    have hNY : IsUnit ((m ^ (n + 1) : ℕ) : Γ(c.Z, ⊤)) := by
+      rw [Nat.cast_pow]; exact hmY.pow _
+    have hN := nsmul_id_reductionModIdeal (J := I ^ (n + 1)) (N := m ^ (n + 1))
+      (by rw [Nat.cast_pow]; exact Ideal.pow_mem_pow hmI _) K
     exact ⟨(DerivedCategory.boundedConstructible _ _).prop_of_iso (e.app K).symm
-        (boundedConstructible_rightDerivedLowerStar Λ aX c.g c.i c.comm.symm hΛ hbc),
+        (boundedConstructible_rightDerivedLowerStar _ aX c.g c.i c.comm.symm _ hN hNY hbc),
       (DerivedCategory.torAmplitudeIn _ _ _ _).prop_of_iso (e.app K).symm
-        (torAmplitudeIn_rightDerivedLowerStar Λ aX c.g c.i c.comm.symm hΛ d hd a b hbc hta)⟩
+        (torAmplitudeIn_rightDerivedLowerStar _ aX c.g c.i c.comm.symm d hd a b _ hN hNY hbc hta)⟩
   exact (isPerfect_compactlySupportedGlobalSections_integral I c.g hI _ hK').of_iso
     ((compactlySupportedGlobalSectionsIsoOfIsProper _ c.g).app _ ≪≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ c.i).app K)

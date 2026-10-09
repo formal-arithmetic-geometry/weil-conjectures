@@ -47,12 +47,4 @@ theorem HasInvertibleExponent.of_hom {Λ : Type*} [CommRing Λ] {X Y : Scheme.{u
   obtain ⟨n, hn, hΛ, hu⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := Y)
   exact ⟨n, hn, hΛ, by simpa using hu.map f.appTop.hom⟩
 
-/-- If the exponent of `Λ` is invertible on `X`, every `Λ`-module is annihilated by an integer
-invertible on `X`. -/
-theorem HasInvertibleExponent.exists_isUnit_nsmul_eq_zero (Λ : Type*) [CommRing Λ]
-    (X : Scheme.{u}) [HasInvertibleExponent Λ X] (M : Type*) [AddCommGroup M] [Module Λ M] :
-    ∃ n : ℕ, IsUnit (n : Γ(X, ⊤)) ∧ ∀ m : M, n • m = 0 := by
-  obtain ⟨n, -, hn, hu⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := X)
-  exact ⟨n, hu, fun m ↦ by rw [← Nat.cast_smul_eq_nsmul Λ, hn, zero_smul]⟩
-
 end AlgebraicGeometry

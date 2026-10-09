@@ -46,6 +46,12 @@ For `p`-torsion coefficients in characteristic `p` the Verdier dual of `j_! Λ` 
 which is not constructible (Artin–Schreier). At a finite stage every object of `Dctf` is
 locally perfect, so no quasi-Frobenius hypothesis on `Λ` is needed.
 
+The statements are for torsion coefficients, finitely generated objects of `A` being finite
+(`CategoryTheory.ConcreteCategory.FiniteOfIsFinitelyGenerated`, which holds for `ModuleCat Λ`
+with `Λ` finite). With coefficients `ℤ` they fail: for the origin `i` of `𝔸¹` in characteristic
+zero, `Ri^!ℤ` has `ℚ/ℤ` in degree `3`, so `𝔻(i_*ℤ)` is not constructible, and
+`𝔻𝔻(i_*ℤ) = i_*Ẑ` is not `i_*ℤ`.
+
 -/
 
 @[expose] public section

@@ -36,6 +36,11 @@ orientation is an orientation in the sense of the six-functor formalism
 - `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`
   (`sk-thm-derived-duality`): at finite coefficients, the derived Poincaré pairing of a Tate
   orientation is perfect for `K` dualizable.
+- `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_properPoincarePairing`
+  (`thm-pod-proper-poincare-duality`): the same for proper `a`, with `Ra_! ≅ Ra_*`.
+
+The degreewise consequences over a field are in
+`WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise`.
 
 ## Implementation notes
 
@@ -128,6 +133,27 @@ theorem isPerfectPairing_poincarePairing (γ : TateOrientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hKd : IsDualizable K) :
     IsPerfectPairing (γ.poincarePairing K) :=
   Etale.isPerfectPairing_poincarePairing a Λ _ hKd
+
+/-- The derived Poincaré pairing of a Tate orientation `γ` of a proper morphism `a`, read
+through `Ra_! ≅ Ra_*` (`AlgebraicGeometry.Etale.properPoincarePairing`):
+
+`Ra_* K ⊗ᴸ (Ra_*(K^∨(d)))[2d] ⟶ Λ_Y`. -/
+noncomputable def properPoincarePairing [IsProper a] (γ : TateOrientation Λ a d)
+    (K : DerivedCategoryModule Λ X) :
+    ((derivedTensor _ Y).obj ((R((a)_*[ModuleCat.{u + 1} Λ])).obj K)).obj
+        (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (twistedDual Λ d K))⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
+  Etale.properPoincarePairing a γ.toOrientation (leftDerivedUpperStarConstantComplexIso Λ a) K
+
+/-- Blueprint `thm-pod-proper-poincare-duality`: Proper Poincaré duality.
+
+For `a` proper, the derived Poincaré pairing of a Tate orientation read through
+`Ra_! ≅ Ra_*`, `RΓ(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ` over `Y = Spec k`, is perfect for a finite
+coefficient ring `Λ` and `K` dualizable
+(`AlgebraicGeometry.Etale.isPerfectPairing_properPoincarePairing`). -/
+theorem isPerfectPairing_properPoincarePairing [Finite Λ] [IsProper a]
+    (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X} (hKd : IsDualizable K) :
+    IsPerfectPairing (γ.properPoincarePairing K) :=
+  Etale.isPerfectPairing_properPoincarePairing a Λ _ _ hKd
 
 end TateOrientation
 
