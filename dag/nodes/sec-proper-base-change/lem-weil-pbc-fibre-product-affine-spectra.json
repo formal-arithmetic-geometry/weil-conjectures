@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-fibre-product-affine-spectra",
+ "kind": "statement",
+ "title": "The fibre product of affine schemes is the spectrum of the tensor product",
+ "statement": "Let $R$ be a commutative ring and $A,B$ commutative $R$-algebras, and let $\\operatorname{Spec}A\\to\\operatorname{Spec}R$, $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ be the morphisms induced by the structure maps [def-weil-affine-spectrum]. Then there is an isomorphism $\\operatorname{Spec}A\\times_{\\operatorname{Spec}R}\\operatorname{Spec}B\\cong\\operatorname{Spec}(A\\otimes_RB)$ [def-pc-fibre-product] under which the two projections become $\\operatorname{Spec}$ of the ring maps $A\\to A\\otimes_RB$, $a\\mapsto a\\otimes1$, and $B\\to A\\otimes_RB$, $b\\mapsto1\\otimes b$. In particular the fibre product is affine with ring of global sections $A\\otimes_RB$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma (Tag 01I4, label lemma-fibre-product-affine-schemes) and Lemma (Tag 01JQ, label lemma-fibre-product-affines)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of Spec A and Spec B over Spec R is isomorphic to Spec of tensor product A ⊗[R] B",
+   "results": "AlgebraicGeometry.pullbackSpecIso, pullbackSpecIso_hom_base, _hom_fst_assoc, _hom_snd_assoc, _hom_fst'_assoc (Mathlib.AlgebraicGeometry.Pullbacks)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.pullbackSpecIso",
+   "results": "pullbackSpecIso : pullback (Spec.map (ofHom (algebraMap R S))) (Spec.map (ofHom (algebraMap R T))) ≅ Spec (S ⊗[R] T); pullbackSpecIso_inv_fst, pullbackSpecIso_hom_fst, pullbackSpecIso_hom_fst', diagonal_SpecMap",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def pullbackSpecIso\\|pullbackSpecIso_inv_fst\\|pullbackSpecIso_inv_snd' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Pullbacks.lean",
+   "results": "Pullbacks.lean:726 def pullbackSpecIso; :741 pullbackSpecIso_inv_fst (= Spec.map includeLeftRingHom); :757 pullbackSpecIso_inv_snd (= Spec.map includeRight)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.pullbackSpecIso",
+  "file": "Mathlib/AlgebraicGeometry/Pullbacks.lean",
+  "how": "exact: pullbackSpecIso R A B (line 726) is the isomorphism pullback (Spec.map (algebraMap R A)) (Spec.map (algebraMap R B)) ≅ Spec (A ⊗[R] B); pullbackSpecIso_inv_fst and pullbackSpecIso_inv_snd identify the projections with Spec of a ↦ a ⊗ 1 and b ↦ 1 ⊗ b"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-p1-power-affine-charts",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

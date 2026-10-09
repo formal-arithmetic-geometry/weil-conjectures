@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-polynomial-tensor-product",
+ "kind": "statement",
+ "title": "Tensor product of polynomial rings",
+ "statement": "Let $R$ be a commutative ring and $I,J$ sets. The $R$-algebra map $R[X_i:i\\in I]\\otimes_RR[Y_j:j\\in J]\\to R[X_i,Y_j:i\\in I,j\\in J]$ (polynomial ring in the disjoint union of the variables), $f\\otimes g\\mapsto fg$, is an isomorphism; it sends $X_i\\otimes1\\mapsto X_i$ and $1\\otimes Y_j\\mapsto Y_j$. By induction, for finite sets $I_1,\\dots,I_n$, $R[X_{I_1}]\\otimes_R\\cdots\\otimes_RR[X_{I_n}]\\cong R[X_{I_1\\sqcup\\dots\\sqcup I_n}]$, the $k$-th factor's variables going to the corresponding variables.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "no statement found in algebra.tex (grep for tensor products of polynomial rings); a standard fact, recorded here as a Mathlib leaf"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product of multivariate polynomial rings over R is polynomial ring in disjoint union of variables",
+   "results": "MvPolynomial.tensorEquivSum, tensorEquivSum_X_tmul_X, MvPolynomial.algebraTensorAlgEquiv (Mathlib.RingTheory.TensorProduct.MvPolynomial), MvPolynomial.sumRingEquiv, sumAlgEquiv (Mathlib.Algebra.MvPolynomial.Equiv)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.tensorEquivSum",
+   "results": "tensorEquivSum : MvPolynomial σ S ⊗[R] MvPolynomial ι R ≃ₐ[S] MvPolynomial (σ ⊕ ι) S; tensorEquivSum_X_tmul_one, tensorEquivSum_one_tmul_X, tensorEquivSum_X_tmul_X, tensorEquivSum_C_tmul_one",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'tensorEquivSum' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/TensorProduct/MvPolynomial.lean",
+   "results": "line 139 def tensorEquivSum; 149 tensorEquivSum_X_tmul_one (X i ⊗ 1 ↦ X (inl i)); 157 tensorEquivSum_one_tmul_X (1 ⊗ X i ↦ X (inr i))",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MvPolynomial.tensorEquivSum",
+  "file": "Mathlib/RingTheory/TensorProduct/MvPolynomial.lean",
+  "how": "specializes in one line: tensorEquivSum R I J R : MvPolynomial I R ⊗[R] MvPolynomial J R ≃ₐ[R] MvPolynomial (I ⊕ J) R (line 139) with tensorEquivSum_X_tmul_one and tensorEquivSum_one_tmul_X for the variables; the n-fold case by induction"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-p1-power-affine-charts",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

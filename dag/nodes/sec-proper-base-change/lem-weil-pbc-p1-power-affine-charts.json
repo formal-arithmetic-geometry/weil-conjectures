@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-p1-power-affine-charts",
  "kind": "statement",
  "title": "The standard affine charts of a power of the projective line",
- "statement": "Let $S$ be a scheme, $n\\ge1$, $\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ [def-nagata-projective-space-base-change] with structure morphism $q_1$, $X=(\\mathbf P^1_S)^n=\\mathbf P^1_S\\times_S\\cdots\\times_S\\mathbf P^1_S$ the $n$-fold fibre product [def-pc-fibre-product] with projections $\\mathrm{pr}_i:X\\to\\mathbf P^1_S$ and $p_n:X\\to S$. Put $\\mathcal L_i=\\mathrm{pr}_i^*\\mathcal O(1)$ (an invertible module [def-sc-invertible-module]) and $x_i=\\mathrm{pr}_i^*T_0$, $y_i=\\mathrm{pr}_i^*T_1\\in\\Gamma(X,\\mathcal L_i)$. For $A\\subseteq\\{1,\\dots,n\\}$ let $U_A=\\bigcap_{i\\in A}X_{y_i}\\cap\\bigcap_{i\\notin A}X_{x_i}$, where $X_s$ is the open set where the section $s$ does not vanish. Then: (i) the $2^n$ opens $U_A$ cover $X$; (ii) for every affine open $S'=\\operatorname{Spec}R\\subseteq S$ [def-weil-affine-spectrum] and every $A$, the open $U_A\\cap p_n^{-1}(S')$ is affine, and the $R$-algebra map $R[Z_i\\,(i\\in A),W_i\\,(i\\notin A)]\\to\\Gamma(U_A\\cap p_n^{-1}(S'),\\mathcal O)$ from the polynomial ring in $n$ variables, $Z_i\\mapsto z_i=x_i/y_i$, $W_i\\mapsto w_i=y_i/x_i$ (the unique functions with $x_i=z_iy_i$ on $X_{y_i}$, $y_i=w_ix_i$ on $X_{x_i}$), is an isomorphism.",
+ "statement": "Let $S$ be a scheme, $n\\ge1$, $\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ [def-nagata-projective-space-base-change] with structure morphism $q_1$, $X=(\\mathbf P^1_S)^n=\\mathbf P^1_S\\times_S\\cdots\\times_S\\mathbf P^1_S$ the $n$-fold fibre product [def-pc-fibre-product] with projections $\\mathrm{pr}_i:X\\to\\mathbf P^1_S$ and $p_n:X\\to S$. Let $\\mathcal O(1)=\\rho^*\\mathcal O_{\\mathbf P^1_{\\mathbf Z}}(1)$ on $\\mathbf P^1_S$, where $\\rho:\\mathbf P^1_S\\to\\mathbf P^1_{\\mathbf Z}=\\operatorname{Proj}\\mathbf Z[T_0,T_1]$ is the second projection and $\\mathcal O_{\\mathbf P^1_{\\mathbf Z}}(1)$ the twisting sheaf [def-pc-projective-space-twist] pulled back [def-pc-module-pullback], and write $T_0,T_1\\in\\Gamma(\\mathbf P^1_S,\\mathcal O(1))$ for the pullbacks of the coordinate sections. Put $\\mathcal L_i=\\mathrm{pr}_i^*\\mathcal O(1)$ (an invertible module [def-sc-invertible-module]) and $x_i=\\mathrm{pr}_i^*T_0$, $y_i=\\mathrm{pr}_i^*T_1\\in\\Gamma(X,\\mathcal L_i)$. For $A\\subseteq\\{1,\\dots,n\\}$ let $U_A=\\bigcap_{i\\in A}X_{y_i}\\cap\\bigcap_{i\\notin A}X_{x_i}$, where $X_s$ is the open set where the section $s$ does not vanish. Then: (i) the $2^n$ opens $U_A$ cover $X$; (ii) for every affine open $S'=\\operatorname{Spec}R\\subseteq S$ [def-weil-affine-spectrum] and every $A$, the open $U_A\\cap p_n^{-1}(S')$ is affine, and the $R$-algebra map $R[Z_i\\,(i\\in A),W_i\\,(i\\notin A)]\\to\\Gamma(U_A\\cap p_n^{-1}(S'),\\mathcal O)$ from the polynomial ring in $n$ variables, $Z_i\\mapsto z_i=x_i/y_i$, $W_i\\mapsto w_i=y_i/x_i$ (the unique functions with $x_i=z_iy_i$ on $X_{y_i}$, $y_i=w_ix_i$ on $X_{x_i}$), is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/constructions.tex",
   "place": "Constructions, Section (Tag 01ND, label section-projective-space): P^1_Z = D_+(T_0) ∪ D_+(T_1) with D_+(T_k) = Spec Z[T_{1-k}/T_k]; with Schemes, Lemma (Tag 01JR, open subschemes of a fibre product) and (Tag 01JQ, fibre product of affines is Spec of the tensor product), literature/stacks-project/schemes.tex"
@@ -11,11 +11,86 @@
   "def-nagata-projective-space-base-change",
   "def-pc-fibre-product",
   "def-sc-invertible-module",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Charts of $\\mathbf P^1_S$.* Apply [lem-weil-pbc-projective-space-standard-charts] with $n=\\{0,1\\}$ to $P=\\mathbf P^1_S$, $q=q_1$. Write $D_0=D_+(T_0)_S$, $D_1=D_+(T_1)_S$ (preimages under $\\rho$ of the standard opens of $\\mathbf P^1_{\\mathbf Z}$), $t=u_{1/0}\\in\\Gamma(D_0,\\mathcal O)$ and $s=u_{0/1}\\in\\Gamma(D_1,\\mathcal O)$ (the pullbacks of $T_1/T_0$ and $T_0/T_1$). By (a), $\\mathbf P^1_S=D_0\\cup D_1$. By (b), for every morphism $g:Y\\to\\mathbf P^1_S$: $g^*T_1$ freely generates $g^*\\mathcal O(1)$ over $g^{-1}(D_1)$ and $g^*T_0=g^*(s)\\,g^*T_1$ there; $g^*T_0$ freely generates $g^*\\mathcal O(1)$ over $g^{-1}(D_0)$ and $g^*T_1=g^*(t)\\,g^*T_0$ there; and $D_k$ is the non-vanishing locus of $T_k$. By (c), for an affine open $S'=\\operatorname{Spec}R\\subseteq S$, $D_1\\cap q_1^{-1}(S')$ is affine with $R[Z]\\to\\Gamma(D_1\\cap q_1^{-1}(S'),\\mathcal O)$, $Z\\mapsto s$, an isomorphism, and $D_0\\cap q_1^{-1}(S')$ is affine with $R[W]\\cong\\Gamma(D_0\\cap q_1^{-1}(S'),\\mathcal O)$, $W\\mapsto t$. Since these opens are affine, each is $\\operatorname{Spec}$ of its ring of global sections over $S'$, i.e. $D_1\\cap q_1^{-1}(S')\\cong\\operatorname{Spec}R[Z]$ and $D_0\\cap q_1^{-1}(S')\\cong\\operatorname{Spec}R[W]$ as schemes over $S'=\\operatorname{Spec}R$ [def-weil-affine-spectrum].",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Section 27.13 (Tag 01ND), Lemma Tag 01NG (P^n_Z = union of D_+(T_i), D_+(T_i) = Spec Z[T_0/T_i,...,T_n/T_i]); Lemma Tag 01MV (non-vanishing locus of the section f of O(d) is D_+(f)); Definition 'projective space over S' as base change (label definition-projective-space)"
+   }
+  },
+  {
+   "text": "*The charts pulled back along the projections.* $\\mathcal L_i=\\mathrm{pr}_i^*\\mathcal O(1)$ is invertible [lem-weil-pbc-invertible-pullback-tensor] (1). By [lem-weil-pbc-invertible-pullback-tensor] (3), for $\\xi\\in X$ the value $x_i(\\xi)=(\\mathrm{pr}_i^*T_0)(\\xi)$ is $T_0(\\mathrm{pr}_i\\xi)\\otimes1\\in\\mathcal O(1)(\\mathrm{pr}_i\\xi)\\otimes_{\\kappa(\\mathrm{pr}_i\\xi)}\\kappa(\\xi)$, which is nonzero iff $T_0(\\mathrm{pr}_i\\xi)\\neq0$ (a tensor product of nonzero vectors over a field extension), i.e. iff $\\mathrm{pr}_i\\xi\\in D_0$ by step 1. Hence $X_{x_i}=\\mathrm{pr}_i^{-1}(D_0)$ and likewise $X_{y_i}=\\mathrm{pr}_i^{-1}(D_1)$. Applying step 1 to $g=\\mathrm{pr}_i$: on $X_{y_i}$ the section $y_i$ freely generates $\\mathcal L_i$ and $x_i=\\mathrm{pr}_i^*(s)\\,y_i$, so $z_i:=\\mathrm{pr}_i^*(s)|_{X_{y_i}}$ is the unique function with $x_i=z_iy_i$ on $X_{y_i}$ (uniqueness because $y_i$ is a free generator there); symmetrically $w_i:=\\mathrm{pr}_i^*(t)|_{X_{x_i}}$ is the unique function with $y_i=w_ix_i$ on $X_{x_i}$. Consequently $U_A=\\bigcap_{i\\in A}\\mathrm{pr}_i^{-1}(D_1)\\cap\\bigcap_{i\\notin A}\\mathrm{pr}_i^{-1}(D_0)$, an open subset, and the functions $z_i$ ($i\\in A$), $w_i$ ($i\\notin A$) are defined on all of $U_A$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Lemma Tag 01MV with Modules Lemma Tag 01CY (literature/stacks-project/modules.tex, label lemma-s-open: X_s open, s trivializes L on X_s); pullback of sections, Modules Section 'invertible modules' (the step itself is written by the agent)"
+   }
+  },
+  {
+   "text": "*(i) The $U_A$ cover $X$.* Let $\\xi\\in X$. For each $i$, $\\mathrm{pr}_i(\\xi)\\in\\mathbf P^1_S=D_0\\cup D_1$ (step 1). Put $A=\\{i:\\mathrm{pr}_i(\\xi)\\notin D_0\\}$; then $\\mathrm{pr}_i(\\xi)\\in D_1$ for $i\\in A$ and $\\mathrm{pr}_i(\\xi)\\in D_0$ for $i\\notin A$, so $\\xi\\in U_A$ by the description of $U_A$ in step 2. Hence $X=\\bigcup_{A\\subseteq\\{1,\\dots,n\\}}U_A$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Lemma Tag 01NG (the cover D_+(T_0) ∪ D_+(T_1)); the combinatorial choice of A is written by the agent"
+   }
+  },
+  {
+   "text": "*$U_A$ over $S'$ as a fibre product of charts.* Fix an affine open $S'=\\operatorname{Spec}R\\subseteq S$ and $A$. For each $i$ let $V_i=D_1\\cap q_1^{-1}(S')$ if $i\\in A$ and $V_i=D_0\\cap q_1^{-1}(S')$ if $i\\notin A$, open in $\\mathbf P^1_S$ with $q_1(V_i)\\subseteq S'$. Since $q_1\\circ\\mathrm{pr}_i=p_n$ for every $i$, step 2 gives $U_A\\cap p_n^{-1}(S')=\\bigcap_i\\mathrm{pr}_i^{-1}(V_i)$. We claim that the canonical morphism $V_1\\times_{S'}\\cdots\\times_{S'}V_n\\to X$ (the fibre product of the $V_i\\to S'$, mapped by the inclusions) is an open immersion with image $\\bigcap_i\\mathrm{pr}_i^{-1}(V_i)$, compatibly with the projections. Induction on $n$: for $n=1$ it is the inclusion $V_1\\subseteq\\mathbf P^1_S$ (and $p_1=q_1$). For $n\\ge2$ write $X=X'\\times_S\\mathbf P^1_S$ with $X'=(\\mathbf P^1_S)^{n-1}$ [def-pc-fibre-product], first projection $a:X\\to X'$, second projection $\\mathrm{pr}_n$, and $\\mathrm{pr}_i=\\mathrm{pr}'_i\\circ a$ for $i<n$. By induction $V'=\\bigcap_{i<n}\\mathrm{pr}'^{-1}_i(V_i)\\subseteq X'$ is open, maps into $S'$ under $p_{n-1}$, and is $V_1\\times_{S'}\\cdots\\times_{S'}V_{n-1}$. By [lem-weil-pbc-open-fibre-product] applied to $U=S'$, $V=V'$, $W=V_n$, the morphism $V'\\times_{S'}V_n\\to X'\\times_S\\mathbf P^1_S=X$ is an open immersion with image $a^{-1}(V')\\cap\\mathrm{pr}_n^{-1}(V_n)=\\bigcap_{i\\le n}\\mathrm{pr}_i^{-1}(V_i)$, compatible with the projections. This proves the claim, so $U_A\\cap p_n^{-1}(S')\\cong V_1\\times_{S'}\\cdots\\times_{S'}V_n$ over $S'$, the restriction of $\\mathrm{pr}_i$ corresponding to the $i$-th projection onto $V_i$.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01JR (label lemma-open-fibre-product) and the remark after it (V x_U W = V x_S W), Lemma Tag 01JS (label lemma-affine-covering-fibre-product); the induction over the factors is written by the agent"
+   }
+  },
+  {
+   "text": "*(ii) The fibre product of the charts is a polynomial ring.* By step 1, $V_i\\cong\\operatorname{Spec}R[C_i]$ over $\\operatorname{Spec}R$, with $C_i=Z_i\\mapsto s$ for $i\\in A$ and $C_i=W_i\\mapsto t$ for $i\\notin A$. By [lem-weil-pbc-fibre-product-affine-spectra] applied $n-1$ times (the fibre product of the first $k$ factors being already $\\operatorname{Spec}$ of the tensor product of their rings), $V_1\\times_{S'}\\cdots\\times_{S'}V_n\\cong\\operatorname{Spec}(R[C_1]\\otimes_R\\cdots\\otimes_RR[C_n])$, the $i$-th projection being $\\operatorname{Spec}$ of the inclusion of the $i$-th factor, and by [lem-weil-pbc-polynomial-tensor-product] this ring is $R[C_1,\\dots,C_n]$ with $1\\otimes\\cdots\\otimes C_i\\otimes\\cdots\\otimes1\\mapsto C_i$. With step 4, $U_A\\cap p_n^{-1}(S')$ is affine, isomorphic to $\\operatorname{Spec}R[Z_i\\,(i\\in A),W_i\\,(i\\notin A)]$ over $\\operatorname{Spec}R$, and on global sections [def-weil-affine-spectrum] the variable $Z_i$ (resp. $W_i$) corresponds to the pullback along the $i$-th projection of the coordinate $s$ on $V_i$ (resp. $t$), i.e. to $\\mathrm{pr}_i^*(s)=z_i$ (resp. $\\mathrm{pr}_i^*(t)=w_i$) by step 2. So the $R$-algebra map $R[Z_i,W_i]\\to\\Gamma(U_A\\cap p_n^{-1}(S'),\\mathcal O)$, $Z_i\\mapsto z_i$, $W_i\\mapsto w_i$, is the composite of these isomorphisms, hence an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-polynomial-tensor-product",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01I4 (label lemma-fibre-product-affine-schemes: Spec(A) x_{Spec(R)} Spec(B) = Spec(A ⊗_R B)) and Lemma Tag 01JQ (label lemma-fibre-product-affines)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-open-fibre-product",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-polynomial-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "assembled by the agent from Constructions Tags 01ND/01NG/01MV (charts of P^n_Z and the non-vanishing loci of the T_i) and Schemes Tags 01JR, 01I4, 01JQ (open subschemes and affine pieces of fibre products); no document states the charts of (P^1_S)^n as such"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,10 +112,24 @@
    "results": "none; Mathlib has AffineSpace.lean and ProjectiveSpectrum/ but no projective space over a scheme",
    "verdict": "no match",
    "date": "2026-10-09"
+  },
+  {
+   "tool": "leansearch",
+   "query": "standard open D_+(X_i) of projective space over a scheme is affine space, coordinates X_j / X_i",
+   "results": "Proj.isAffineOpen_basicOpen, Proj.affineOpenCover, Proj.basicOpenIsoSpec(_hom) (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic)",
+   "date": "2026-10-09",
+   "verdict": "no match: no projective space over a scheme, hence no charts of its fibre powers"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'pullbackSpecIso\\|pullback_map_isOpenImmersion\\|tensorEquivSum' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/TensorProduct",
+   "results": "Pullbacks.lean:701 Scheme.pullback_map_isOpenImmersion, :726 pullbackSpecIso; PullbackCarrier.lean:355 Scheme.Pullback.range_map; RingTheory/TensorProduct/MvPolynomial.lean:139 tensorEquivSum",
+   "date": "2026-10-09",
+   "verdict": "no match for the item; these are the leaves of its steps 4 and 5"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +149,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-p1-power-affine-charts",
+  "worker": "stage1",
+  "summary": "Split into five steps: (1) charts of P^1_S from a new node lem-weil-pbc-projective-space-standard-charts (D_+(T_i)_S cover, T_i freely generates O(1) there and T_j=u_{j/i}T_i, also after pullback along any g, and over Spec R the chart is Spec R[u]); its Lean exists sorry-free in slopmaster2 (OfSections.iSup_standardOpen, Twist.isFreeGenerator_pullbackSection_twistOneSection, Twist.pullbackSection_twistOneSection_map_eq_smul, CoordinateSection.compl_support_zeroLocus_coordinateSection, Charts.standardOpenIso, Charts.isAffineOpen_standardOpen); (2) X_{x_i}=pr_i^{-1}(D_0), X_{y_i}=pr_i^{-1}(D_1) via the value formula of lem-weil-pbc-invertible-pullback-tensor (3), and z_i=pr_i^*(T_0/T_1), w_i=pr_i^*(T_1/T_0) as the unique quotients; (3) the cover, elementary; (4) U_A over Spec R is V_1 x_{S'} ... x_{S'} V_n by induction with the new Mathlib leaf lem-weil-pbc-open-fibre-product (Stacks 01JR; Scheme.pullback_map_isOpenImmersion + Scheme.Pullback.range_map); (5) Spec of the tensor product by the new leaves lem-weil-pbc-fibre-product-affine-spectra (01I4/01JQ; pullbackSpecIso) and lem-weil-pbc-polynomial-tensor-product (MvPolynomial.tensorEquivSum). Statement clarified only: O(1) on P^1_S is now defined as the pullback of the twisting sheaf of P^1_Z along the second projection, with stmt_deps def-pc-projective-space-twist and def-pc-module-pullback added."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "five steps (charts of P^1_S, pullback along the projections via the value formula, the cover, the fibre product of charts by induction with Stacks 01JR, the polynomial ring by 01I4); O(1) on P^1_S made explicit in the statement; 4 new nodes, three Mathlib leaves verified by the lead (Pullbacks.lean:701/726, PullbackCarrier.lean:355, TensorProduct/MvPolynomial.lean:139); the Lean of the source repository for the standard-charts node recorded on that node as candidates"
+ }
 }

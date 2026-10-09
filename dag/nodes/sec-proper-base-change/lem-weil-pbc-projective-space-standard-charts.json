@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-projective-space-standard-charts",
+ "kind": "statement",
+ "title": "Standard charts and coordinate sections of projective space over a scheme",
+ "statement": "Let $S$ be a scheme, $n$ a finite nonempty index set, $\\mathbf P^n_{\\mathbf Z}=\\operatorname{Proj}(\\mathbf Z[T_k:k\\in n])$ with $\\deg T_k=1$, and $P=\\mathbf P(n;S)=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ [def-nagata-projective-space-base-change] with first projection $q:P\\to S$ and second projection $\\rho:P\\to\\mathbf P^n_{\\mathbf Z}$. Let $\\mathcal O(1)$ be the twisting sheaf of $\\mathbf P^n_{\\mathbf Z}$ [def-pc-projective-space-twist] with its global sections $T_k$, put $\\mathcal O_P(1)=\\rho^*\\mathcal O(1)$ [def-pc-module-pullback] and write $T_k$ also for the pulled-back sections in $\\Gamma(P,\\mathcal O_P(1))$. For $i\\in n$ let $D_+(T_i)\\subseteq\\mathbf P^n_{\\mathbf Z}$ be the standard open [def-nagata-affine-proj], $D_+(T_i)\\cong\\operatorname{Spec}\\mathbf Z[T_j/T_i:j\\in n]$, put $D_+(T_i)_S=\\rho^{-1}(D_+(T_i))$ and, for $j\\in n$, $u_{j/i}=\\rho^*(T_j/T_i)\\in\\Gamma(D_+(T_i)_S,\\mathcal O_P)$. Then: (a) $P=\\bigcup_{i\\in n}D_+(T_i)_S$; (b) for every morphism of schemes $g:Y\\to P$ and every $i,j\\in n$, the section $g^*T_i$ of the invertible module $g^*\\mathcal O_P(1)$ [def-sc-invertible-module] is a free generator of $g^*\\mathcal O_P(1)$ over $g^{-1}(D_+(T_i)_S)$ (every section over an open $V\\subseteq g^{-1}(D_+(T_i)_S)$ is $a\\cdot g^*T_i$ for exactly one $a\\in\\Gamma(V,\\mathcal O_Y)$), and $g^*T_j=g^*(u_{j/i})\\cdot g^*T_i$ on $g^{-1}(D_+(T_i)_S)$; in particular ($g=\\mathrm{id}_P$) the open set $P_{T_i}$ where $T_i$ does not vanish (its image in $\\mathcal O_P(1)_x\\otimes\\kappa(x)$ is nonzero) is $D_+(T_i)_S$; (c) for every affine open $S'=\\operatorname{Spec}R\\subseteq S$ [def-weil-affine-spectrum] and every $i\\in n$, the open $D_+(T_i)_S\\cap q^{-1}(S')$ is affine and the $R$-algebra map $R[U_j:j\\in n\\setminus\\{i\\}]\\to\\Gamma(D_+(T_i)_S\\cap q^{-1}(S'),\\mathcal O_P)$, $U_j\\mapsto u_{j/i}$, from the polynomial ring is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma (Tag 01NG, label lemma-standard-covering-projective-space) for the charts of P^n_Z; Lemma (Tag 01MV, label lemma-principal-open) and Lemma (Tag 01MS, label lemma-when-invertible) for the non-vanishing locus of T_i and the generator of O(1) on D_+(T_i); Definition (Section Tag 01ND, label definition-projective-space) for the base change; with Schemes, Lemmas 01JR and 01I4 (literature/stacks-project/schemes.tex) for the restriction over Spec R"
+ },
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-nagata-affine-proj",
+  "def-sc-invertible-module",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "standard open D_+(X_i) of projective space over a scheme is affine space, coordinates X_j / X_i",
+   "results": "AlgebraicGeometry.Proj.isAffineOpen_basicOpen, Proj.affineOpenCover, Proj.basicOpen, Proj.basicOpenIsoSpec(_hom) (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic); Scheme.affineBasicOpen",
+   "date": "2026-10-09",
+   "verdict": "no match: charts of a single Proj of a graded ring; no projective space over a scheme, no twisting sheaf sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective space over a scheme covered by standard opens where homogeneous coordinate T_i does not vanish, each isomorphic to affine space over the base",
+   "results": "AlgebraicGeometry.Proj, Proj.openCoverOfMapIrrelevantEqTop, Proj.awayι, Proj.affineOpenCoverOfIrrelevantLESpan, Proj.affineOpenCover, Proj.toSpecZero, Proj.fromOfGlobalSections (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.*)",
+   "date": "2026-10-09",
+   "verdict": "no match (pieces for P^n_Z only: Proj.basicOpenIsoSpec, Proj.iSup_basicOpen_eq_top)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ProjectiveSpace\\|projectiveSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -n 'basicOpenIsoSpec\\|iSup_basicOpen_eq_top' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+   "results": "no ProjectiveSpace in Mathlib; ProjectiveSpectrum/Basic.lean:161 basicOpenIsoSpec (D_+(f) ≅ Spec A_(f)), :86 iSup_basicOpen_eq_top; no twisting sheaf O(1) on Proj in Mathlib",
+   "date": "2026-10-09",
+   "verdict": "no match in Mathlib. The source repository (slopmaster2) has it sorry-free: WeilConjectures/AlgebraicGeometry/ProjectiveSpace/OfSections.lean:116 iSup_standardOpen (a); ProjectiveSpace/Twist.lean:254 isFreeGenerator_pullbackSection_twistOneSection and :270 pullbackSection_twistOneSection_map_eq_smul (b), CoordinateSection.lean:116 compl_support_zeroLocus_coordinateSection (b, non-vanishing locus); Charts.lean:117 standardOpenIso (D_+(T_i)_S ≅ A^{n-1}_S over S) and :144 isAffineOpen_standardOpen (c, in the form over S, to be restricted to Spec R)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-p1-power-affine-charts",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean_candidates": {
+  "branch": "slopmaster2",
+  "note": "recorded by the lead at the review of lem-weil-pbc-p1-power-affine-charts (2026-10-09): sorry-free declarations covering the clauses in a different form, to be attached when the node is split: (a) AlgebraicGeometry.ProjectiveSpace.iSup_standardOpen (OfSections.lean:116); (b) isFreeGenerator_pullbackSection_twistOneSection (Twist.lean:256), pullbackSection_twistOneSection_map_eq_smul (Twist.lean:272), compl_support_zeroLocus_coordinateSection (CoordinateSection.lean:119); (c) standardOpenIso (Charts.lean:120: D_+(T_i)_S ≅ A^{n-1}_S over S) and isAffineOpen_standardOpen (Charts.lean:145, S affine); the restriction to Spec R ⊆ S is not in Lean. The case S = Spec Z of (b), (c) is the node lem-weil-pbc-projective-space-twisting-sheaf-charts (created the same day by lem-weil-pbc-projective-morphism-chart-preimage): cite it when splitting; merge candidates for stage 3."
+ }
+}

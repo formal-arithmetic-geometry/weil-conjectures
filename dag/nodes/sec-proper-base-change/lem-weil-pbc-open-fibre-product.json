@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-open-fibre-product",
+ "kind": "statement",
+ "title": "Open subschemes of a fibre product",
+ "statement": "Let $f:X\\to S$ and $g:Y\\to S$ be morphisms of schemes with fibre product $X\\times_SY$ and projections $p,q$ [def-pc-fibre-product]. Let $U\\subseteq S$, $V\\subseteq X$, $W\\subseteq Y$ be open subschemes with $f(V)\\subseteq U$ and $g(W)\\subseteq U$. Then the canonical morphism $V\\times_UW\\to X\\times_SY$ (induced by the inclusions) is an open immersion [def-weil-open-immersion] whose image is $p^{-1}(V)\\cap q^{-1}(W)$; so $V\\times_UW$ is identified with the open subscheme $p^{-1}(V)\\cap q^{-1}(W)$, compatibly with the projections.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma (Tag 01JR, label lemma-open-fibre-product)"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of open immersions into a fibre product of schemes is an open immersion with range the intersection of preimages",
+   "results": "IsOpenImmersion.range_pullback_to_base_of_right/_of_left, range_pullback_fst_of_right, range_pullback_snd_of_left, hasPullback_of_left/right (Mathlib.AlgebraicGeometry.OpenImmersion), isPullback_opens_inf (Restrict)",
+   "date": "2026-10-09",
+   "verdict": "partial: these are the case of one open; the general map found by loogle below"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.map _ _ _ _ _ _ _ _ _)",
+   "results": "AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion (Mathlib.AlgebraicGeometry.Pullbacks)",
+   "date": "2026-10-09",
+   "verdict": "match (open immersion part)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for open subschemes V of X, W of Y over U of S, V ×_U W is the open subscheme p⁻¹(V) ∩ q⁻¹(W) of X ×_S Y",
+   "results": "isPullback_opens_inf, isPullback_opens_inf_le (Restrict), Scheme.Pullback.range_fst_comp, range_snd_comp (PullbackCarrier), IsOpenImmersion.range_pullback_to_base_of_left",
+   "date": "2026-10-09",
+   "verdict": "related; image clause found by grep below"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'pullback_map_isOpenImmersion\\|lemma range_map' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Pullbacks.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+   "results": "Pullbacks.lean:701 instance Scheme.pullback_map_isOpenImmersion [IsOpenImmersion i₁] [IsOpenImmersion i₂] [Mono i₃] : IsOpenImmersion (pullback.map f g f' g' i₁ i₂ i₃ e₁ e₂); PullbackCarrier.lean:355 Scheme.Pullback.range_map: Set.range (pullback.map ...) = pullback.fst f' g' ⁻¹' range i₁ ∩ pullback.snd f' g' ⁻¹' range i₂ (for [Mono i₃])",
+   "date": "2026-10-09",
+   "verdict": "match: the two lemmas, one per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion, AlgebraicGeometry.Scheme.Pullback.range_map",
+  "file": "Mathlib/AlgebraicGeometry/Pullbacks.lean",
+  "how": "a few Mathlib lemmas, one per clause: with i₁=V.ι, i₂=W.ι, i₃=U.ι (open immersions, U.ι mono) and f|V, g|W the restrictions, Scheme.pullback_map_isOpenImmersion (Pullbacks.lean:701) says pullback.map (f|V) (g|W) f g V.ι W.ι U.ι _ _ : V ×_U W → X ×_S Y is an open immersion, and Scheme.Pullback.range_map (Mathlib/AlgebraicGeometry/PullbackCarrier.lean:355) says its range is (pullback.fst f g)⁻¹(range V.ι) ∩ (pullback.snd f g)⁻¹(range W.ι) = p⁻¹(V) ∩ q⁻¹(W); compatibility with projections is pullback.lift_fst/lift_snd of pullback.map"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-p1-power-affine-charts",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}
