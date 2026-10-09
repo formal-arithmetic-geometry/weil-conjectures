@@ -123,10 +123,12 @@ lemma isPerfectPairing_iff {C D : _root_.DerivedCategory (Sheaf X.smallEtaleTopo
         (Sheaf X.smallEtaleTopology A)) b :=
   Iff.rfl
 
-/-- An object `K` of `D(X_ét)` is invertible if and only if `K ⊗ᴸ M ≅ Λ_X` for some `M`. -/
+/-- An object `K` of `D(X_ét)` is invertible if and only if `K ⊗ᴸ M ≅ Λ_X` and
+`M ⊗ᴸ K ≅ Λ_X` for some `M`. -/
 lemma isInvertible_iff_exists_derivedTensor
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    IsInvertible K ↔ ∃ M, Nonempty (((derivedTensor A X).obj K).obj M ≅ 𝟙_ _) :=
+    IsInvertible K ↔ ∃ M, Nonempty (((derivedTensor A X).obj K).obj M ≅ 𝟙_ _) ∧
+      Nonempty (((derivedTensor A X).obj M).obj K ≅ 𝟙_ _) :=
   Iff.rfl
 
 end Etale

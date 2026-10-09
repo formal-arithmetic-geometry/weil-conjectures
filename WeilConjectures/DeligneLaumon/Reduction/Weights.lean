@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.Analysis.SpecialFunctions.Log.Base
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import WeilConjectures.WeilSheaf.Defs
+public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.Tensor
 
 /-!
@@ -52,9 +54,14 @@ Monotonicity in the bound and the bound for a zero sheaf are proved
 (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.mono_weight` and
 `AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_of_isZero`), and the closure properties the
 blueprint records alongside the definition — under subobjects, quotients and extensions — are
-stated: `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_mono`, `.of_epi` and
-`.of_mono_cokernel`. From them, the middle term of an exact sequence whose outer terms are mixed
-of weights at most `w` is mixed of weights at most `w`
+proved: `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_mono`, `.of_epi` and
+`.of_mono_cokernel`. They come from the general closure properties of objects with a finite
+filtration (`CategoryTheory.ObjectProperty.filtrationClosure`), applied to the property
+`AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeightLE` of being punctually pure of some weight
+at most `w`, which is closed under subobjects and quotients since the stalk functors are exact
+(`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.of_mono`). From them, the middle term
+of an exact sequence whose outer terms are mixed of weights at most `w` is mixed of weights at
+most `w`
 (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_exact`), and so is a sheaf with a finite
 filtration whose successive quotients are
 (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_filtration`).
@@ -80,6 +87,7 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 /-! ### Mixed sheaves -/
 
@@ -128,24 +136,55 @@ theorem isMixedOfWeightsAtMost_of_isZero (hF : IsZero F) (w : ℝ) :
     F.IsMixedOfWeightsAtMost ι w :=
   ⟨0, fun _ ↦ F, fun i ↦ i.elim0, hF, ⟨Iso.refl F⟩, fun i ↦ i.elim0, fun i ↦ i.elim0⟩
 
+variable (ι w) in
+/-- The property of a Weil sheaf of being punctually `ι`-pure of some weight at most `w`; the
+sheaves mixed of weights at most `w` are those with a finite filtration whose successive
+quotients have this property. -/
+def isPunctuallyPureOfWeightLE : ObjectProperty (WeilSheaf k₀ l X) :=
+  fun F ↦ ∃ v ≤ w, F.IsPunctuallyPureOfWeight ι v
+
+instance : (isPunctuallyPureOfWeightLE (k₀ := k₀) (l := l) (X := X) ι w).IsClosedUnderSubobjects
+    where
+  prop_of_mono f _ := fun ⟨v, hv, h⟩ ↦ ⟨v, hv, h.of_mono f⟩
+
+instance : (isPunctuallyPureOfWeightLE (k₀ := k₀) (l := l) (X := X) ι w).IsClosedUnderQuotients
+    where
+  prop_of_epi f _ := fun ⟨v, hv, h⟩ ↦ ⟨v, hv, h.of_epi f⟩
+
+instance :
+    (isPunctuallyPureOfWeightLE (k₀ := k₀) (l := l) (X := X) ι w).IsClosedUnderIsomorphisms where
+  of_iso e := fun ⟨v, hv, h⟩ ↦ ⟨v, hv, h.of_epi e.hom⟩
+
+/-- Being mixed of weights at most `w` is admitting a finite filtration whose successive
+quotients are punctually `ι`-pure of some weight at most `w`. -/
+theorem isMixedOfWeightsAtMost_iff_filtrationClosure :
+    F.IsMixedOfWeightsAtMost ι w ↔ (isPunctuallyPureOfWeightLE ι w).filtrationClosure F := by
+  rw [ObjectProperty.filtrationClosure_iff]
+  rfl
+
 /-- A subobject of a sheaf mixed of weights at most `w` is mixed of weights at most `w`: intersect
 the filtration (blueprint: `sk-d-dl-general-weights`). -/
 theorem IsMixedOfWeightsAtMost.of_mono (i : G ⟶ F) [Mono i] (h : F.IsMixedOfWeightsAtMost ι w) :
-    G.IsMixedOfWeightsAtMost ι w :=
-  sorry
+    G.IsMixedOfWeightsAtMost ι w := by
+  rw [isMixedOfWeightsAtMost_iff_filtrationClosure] at h ⊢
+  exact ObjectProperty.prop_of_mono _ i h
 
 /-- A quotient of a sheaf mixed of weights at most `w` is mixed of weights at most `w`: take the
 images of the filtration (blueprint: `sk-d-dl-general-weights`). -/
 theorem IsMixedOfWeightsAtMost.of_epi (p : F ⟶ G) [Epi p] (h : F.IsMixedOfWeightsAtMost ι w) :
-    G.IsMixedOfWeightsAtMost ι w :=
-  sorry
+    G.IsMixedOfWeightsAtMost ι w := by
+  rw [isMixedOfWeightsAtMost_iff_filtrationClosure] at h ⊢
+  exact ObjectProperty.prop_of_epi _ p h
 
 /-- An extension of a sheaf mixed of weights at most `w` by another one is mixed of weights at
 most `w`: splice the two filtrations (blueprint: `sk-d-dl-general-weights`). -/
 theorem IsMixedOfWeightsAtMost.of_mono_cokernel (i : G ⟶ F) [Mono i]
     (hG : G.IsMixedOfWeightsAtMost ι w) (hQ : (cokernel i).IsMixedOfWeightsAtMost ι w) :
-    F.IsMixedOfWeightsAtMost ι w :=
-  sorry
+    F.IsMixedOfWeightsAtMost ι w := by
+  rw [isMixedOfWeightsAtMost_iff_filtrationClosure] at hG hQ ⊢
+  exact ObjectProperty.prop_X₂_of_shortExact _
+    (ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel i) inferInstance inferInstance)
+    hG hQ
 
 /-- Mixed upper bounds are invariant under isomorphism (blueprint: `sk-d-dl-general-weights`). -/
 theorem IsMixedOfWeightsAtMost.of_iso (e : F ≅ G) (h : F.IsMixedOfWeightsAtMost ι w) :
@@ -173,7 +212,6 @@ nonzero stalk at some closed point, and its eigenvalues there are eigenvalues of
 (blueprint: `lem-zl-mixed-punctual-cutoff`). -/
 theorem IsMixedOfWeightsAtMost.of_hasWeightsAtMost
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {u v : ℝ}
     (h : F.IsMixedOfWeightsAtMost ι u) (hv : F.HasWeightsAtMost ι v) :
     F.IsMixedOfWeightsAtMost ι v :=
@@ -238,6 +276,8 @@ def HasDirectImageWeightBound (k₀ : Type u) [Field k₀] [Finite k₀] {l : �
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] : Prop :=
+  haveI : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
   ∀ (w : ℝ) (F : WeilSheaf k₀ l X), F.IsMixedOfWeightsAtMost ι w →
     ∀ r : ℕ, ((WeilSheaf.higherLowerShriek k₀ l f r).obj F).IsMixedOfWeightsAtMost ι (w + r)
 
@@ -253,6 +293,8 @@ def HasDirectImageComplexWeightBound (k₀ : Type u) [Field k₀] [Finite k₀] 
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] : Prop :=
+  haveI : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
   ∀ (w : ℝ) (K : WeilComplex k₀ l X), K.IsMixedOfWeightsAtMost ι w →
     ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w
 

@@ -86,7 +86,8 @@ Class: torsion; decided by the cohomology of `𝔸^r`, `H_c^*(𝔸^r, Λ) ≅ Λ
 `[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-prop-convolution-kernel`) -/
 theorem nonempty_iso_fourierKernel_convolution [Finite Λ] [HasInvertibleExponent Λ S]
-    [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
+    [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] (Ψ : AddChar (ZMod p) Λ)
+    (hΨ : IsUnit (Ψ 1 - 1)) :
     Nonempty (kernelConvolution (ModuleCat.{u + 1} Λ) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)
           ((DerivedCategory.singleFunctor _ 0).obj
             (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S)))
@@ -132,7 +133,7 @@ needs `[Finite Λ] [HasInvertibleExponent Λ S]`.
 -- `𝔸^{3n}_S ⟶ 𝔸^n_S`, which is compactified through projective space by
 -- `AlgebraicGeometry.Compactification.ofIsImmersionAffineSpace`, with no need for Nagata.
 theorem nonempty_iso_affineFourierTransform_comp_inv [Finite Λ] [HasInvertibleExponent Λ S]
-    [HasTateTwist Λ]
+    [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
     [HasCompactification (pullback.tripleProj₁₃ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ≫
       pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))]
     (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
@@ -194,7 +195,7 @@ Class: torsion; decided by inversion
 `[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-thm-inversion`) -/
 theorem nonempty_iso_affineFourierTransform_comp_self [Finite Λ] [HasInvertibleExponent Λ S]
-    [HasTateTwist Λ]
+    [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
     [HasCompactification (pullback.tripleProj₁₃ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ≫
       pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))]
     (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :

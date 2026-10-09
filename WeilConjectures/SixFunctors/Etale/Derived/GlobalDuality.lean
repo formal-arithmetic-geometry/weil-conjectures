@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
+public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 /-!
@@ -45,24 +47,30 @@ category of the coefficient category, whereas the coefficient dual `(-)^∨` is 
 `Ra_{X!} K` in `D(S_ét)`; applying `RΓ(S, -)` to them recovers the `RΓ` / `RΓ_c` form, since
 `RΓ_c(X/S, -)` is by definition `RΓ(S, Ra_{X!} -)`.
 
-The blueprint assumes *either* that `X` is proper *or* that `X = X₀ ×_{k₀} k` for a smooth
-separated geometrically connected finite-type scheme `X₀` over a finite field. The second
-alternative needs the model datum `X₀`, which this repository does not yet have, so only the
-proper case is stated here. `[IsProper a_X]` also supplies `[HasCompactification a_X]`, hence
-separatedness and finite type.
+The statements are made for a finite coefficient ring `Λ`, the finite stages of the blueprint.
+Global duality is then the case `N = Λ_S` of the tensor–Hom exchange
+`AlgebraicGeometry.Etale.nonempty_iso_derivedHom_rightDerivedLowerShriek`, which rests on the
+projection formula at finite coefficients; it needs neither the properness, smoothness and
+geometric connectedness of `X` nor the finiteness of `K` that the blueprint assumes, so these
+hypotheses are not imposed. For a general coefficient category the projection formula, and
+with it global duality, can fail.
 
 The subject of `sk-thm-sf-identification` is the pairing `β_K` — the mixed-support cup
 product followed by the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X` and the normalized trace — and the
 assertion that its tensor–internal-hom adjoint is invertible. The pairing is
-`AlgebraicGeometry.Etale.poincarePairing`, and its perfectness at finite coefficients is
-`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`; this file does not import them,
-and records only the isomorphism that the blueprint identifies the adjoint of `β_K` with.
+`AlgebraicGeometry.Etale.poincarePairing`, and its perfectness is proved next to it
+(`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isDetecting` and, at finite
+coefficients, `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`); this file does not
+import them, and records only the isomorphism that the blueprint identifies the adjoint of
+`β_K` with. The blueprint's further assertion that the inverse of the adjoint *is* the global
+duality isomorphism followed by `𝔻_X K ≅ K^∨(d)[2d]` is not stated: those isomorphisms are only
+known to exist here (`Nonempty`), they are not constructed as specific maps.
 
 -/
 
 @[expose] public section
 
-universe u' u
+universe u
 
 open CategoryTheory Limits MonoidalCategory Opposite
 
@@ -72,55 +80,57 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A]
-
-variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [HasSmallSiteSheafify A]
-
 namespace Etale
 
-variable {X S : Scheme.{u}} (aX : X ⟶ S) [IsProper aX] (d : ℕ)
-  [SmoothOfRelativeDimension d aX] [GeometricallyConnected aX]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X S : Scheme.{u}} (aX : X ⟶ S)
+  [HasCompactification aX]
 
 /-- Blueprint `sk-thm-sf-global-duality`: Global Verdier duality.
 
-For `X` smooth, proper and geometrically connected of pure relative dimension `d` over `S`,
-and `K` an object of `Dctf(X, A)`, the coefficient dual of the compactly supported cohomology
-of `K` is the cohomology of the Verdier dual of `K`:
+For `a_X : X ⟶ S` admitting a compactification, a finite coefficient ring `Λ` and `K` an
+object of `D(X_ét, Λ)`, the coefficient dual of the compactly supported cohomology of `K` is the
+cohomology of the Verdier dual of `K`:
 
 `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`.
 
 It is stated here for `Ra_{X!} K` and `Ra_{X*} (𝔻_X K)` in `D(S_ét)`; applying `RΓ(S, -)`
-gives the displayed form, since `RΓ_c(X/S, -) = RΓ(S, Ra_{X!} -)`. -/
+gives the displayed form, since `RΓ_c(X/S, -) = RΓ(S, Ra_{X!} -)`. It is the tensor–Hom
+exchange `Ra_{X*} RHom(K, Ra_X^! N) ≅ RHom(Ra_{X!} K, N)` at `N = Λ_S`. -/
 theorem nonempty_iso_coefficientDual_rightDerivedLowerShriek
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hK : DerivedCategory.constructibleFiniteTor A X K) :
-    Nonempty ((DerivedCategory.coefficientDual A S).obj (op ((R(aX)_![A]).obj K)) ≅
-      (R((aX)_*[A])).obj ((verdierDual A aX).obj (op K))) :=
-  sorry
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).obj
+        (op ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)) ≅
+      (R((aX)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K))) :=
+  (nonempty_iso_derivedHom_rightDerivedLowerShriek Λ aX K (𝟙_ _)).map Iso.symm
 
 /-- Blueprint `sk-thm-sf-identification`: The derived Poincaré pairing is the duality
 isomorphism.
 
-Under the hypotheses of `sk-thm-sf-global-duality`, with an orientation `o` of `a_X` of
-relative dimension `d` and with `K` perfect over `Λ_X`, there is an isomorphism
+With an orientation `o` of `a_X` of relative dimension `d` and with `K` perfect over `Λ_X`,
+there is an isomorphism
 
 `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`,
 
 again written one step earlier, with `Ra_{X*}` and `Ra_{X!}` in `D(S_ét)`. The blueprint
 identifies this isomorphism with the tensor–internal-hom adjoint of the derived Poincaré
-pairing `β_K`, and concludes that `β_K` is perfect; see the module docstring. -/
-theorem nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation
-    (o : Orientation A aX d)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hK : DerivedCategory.constructibleFiniteTor A X K) (hKperf : IsDualizable K) :
-    Nonempty (((R((aX)_*[A])).obj
-        ((DerivedCategory.coefficientDual A X).obj (op K) ⊗ o.twist))⟦(2 * d : ℤ)⟧ ≅
-      (DerivedCategory.coefficientDual A S).obj (op ((R(aX)_![A]).obj K))) :=
-  sorry
+pairing `β_K`, and concludes that `β_K` is perfect; that perfectness is
+`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isDetecting`. -/
+theorem nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation [HasTateTwist Λ]
+    {d : ℕ} (o : Orientation Λ aX d)
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hKperf : IsDualizable K) :
+    Nonempty (((R((aX)_*[ModuleCat.{u + 1} Λ])).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+          ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))).obj
+            (tateObject Λ X d)))⟦(2 * d : ℤ)⟧ ≅
+      (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).obj
+        (op ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K))) := by
+  obtain ⟨e₁⟩ := nonempty_iso_coefficientDual_rightDerivedLowerShriek Λ aX K
+  obtain ⟨e₂⟩ := Orientation.nonempty_iso_verdierDual_coefficientDual o hKperf
+  exact ⟨((R((aX)_*[ModuleCat.{u + 1} Λ])).commShiftIso (2 * d : ℤ)).symm.app _ ≪≫
+    (R((aX)_*[ModuleCat.{u + 1} Λ])).mapIso ((((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+      ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))).commShiftIso
+        (2 * d : ℤ)).symm.app (tateObject Λ X d) ≪≫ e₂.symm) ≪≫ e₁.symm⟩
 
 end Etale
 

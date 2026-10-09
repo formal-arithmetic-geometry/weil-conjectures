@@ -108,7 +108,7 @@ lemma isPerverseLE_shift_iff (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopo
 
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
-variable (a : X ⟶ S) [HasCompactification a]
+variable (a : X ⟶ S) [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
 
 /-- The *cosupport condition* `CosuppCon(K)`: the support condition for the Verdier dual
 `𝔻_X K = RHom(K, ω_X)`, the dualizing complex being taken relative to `a : X ⟶ S`.
@@ -149,6 +149,7 @@ lemma isPerverseGE_shift_iff (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopo
 /-- The cosupport classes only depend on the structure morphism `a`, not on the proof that it
 carries a compactification; this lets one transport them along an equality `a = a'`. -/
 lemma IsPerverseGE.of_eq {a a' : X ⟶ S} [HasCompactification a] [HasCompactification a']
+    [(R(a)_![A]).IsLeftAdjoint] [(R(a')_![A]).IsLeftAdjoint]
     (h : a = a') {n : ℤ} {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hK : IsPerverseGE a n K) : IsPerverseGE a' n K := by
   subst h

@@ -148,7 +148,8 @@ lemma Scheme.Hom.picDegree_eq (f : C ⟶ Spec (.of K)) (L : C.Pic) :
 
 /-- The degree of the class of an invertible module `M` is the degree `χ(M) - χ(𝒪_C)` of `M`. -/
 @[simp]
-lemma Scheme.Hom.picDegree_mk (f : C ⟶ Spec (.of K)) (M : C.Modules) [M.IsInvertible] :
+lemma Scheme.Hom.picDegree_mk (f : C ⟶ Spec (.of K)) (M : C.Modules)
+    [SheafOfModules.IsInvertible.{u, u, u} M] :
     letI : C.Over (Spec (.of K)) := ⟨f⟩
     f.picDegree (Pic.mk M) = Modules.degree K M :=
   letI : C.Over (Spec (.of K)) := ⟨f⟩

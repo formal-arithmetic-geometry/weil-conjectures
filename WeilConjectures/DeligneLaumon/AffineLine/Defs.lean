@@ -37,7 +37,8 @@ a finite sum of copies of `ℚ̄_ℓ`, on every connected open of the geometric 
 - `AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity`: extension to a lisse sheaf at `∞ ∈ ℙ¹`.
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen`: a dense open immersion `j : U₀ ↪ 𝔸¹_{k₀}`
   together with a lisse Weil sheaf on `U₀`, with its direct image, its extension by zero, its
-  boundary sheaf and its curve perverse middle extension.
+  boundary sheaf, its curve perverse middle extension and the map
+  `j_!M[1] ⟶ j_*M[1]` (`shiftedExtensionByZeroToMiddleExtension`).
 -/
 
 @[expose] public section
@@ -70,8 +71,8 @@ fundamental group `π₁(Ū)` acts trivially on the stalks of `F`.
 (blueprint: `sk-d-dl-a1-setup`) -/
 def IsGeometricallyConstant (F : WeilSheaf k₀ l U) : Prop :=
   ∀ V : (U ↘ Spec (CommRingCat.of k₀)).geometricFiber.Opens, ConnectedSpace V →
-    ∃ n : ℕ, Nonempty ((V.ι)^*[WeilCoefficients.{u} l].obj F.obj.carrier ≅
-      ⨁ fun _ : Fin n ↦ ProEtale.adicConstantSheaf l V.toScheme)
+    ∃ n : ℕ, Nonempty ((V.ι)^*ᵃ[l].obj F.obj.carrier ≅
+      ⨁ fun _ : Fin n ↦ ProEtale.AdicSheaf.unit l V.toScheme)
 
 /-- A lisse Weil sheaf `F` on an open `U₀` of the affine line, embedded by `j : U₀ ↪ 𝔸¹`, is
 *unramified at infinity* if it extends to a lisse Weil sheaf on `U₀ ∪ {∞} ⊆ ℙ¹`. Here `𝔸¹`
@@ -155,6 +156,12 @@ noncomputable def boundarySheaf : WeilSheaf k₀ l (affineLine k₀) :=
 /-- The shifted zero extension `j_!M[1]`, a curve perverse sheaf. -/
 noncomputable def shiftedExtensionByZero : WeilComplex k₀ l (affineLine k₀) :=
   (WeilSheaf.toComplex.obj D.extensionByZero)⟦(1 : ℤ)⟧
+
+/-- The shift `j_!M[1] ⟶ j_*M[1] = j_{!*}(M[1])` of the canonical map `j_!M ⟶ j_*M`, the middle
+arrow of the rotated triangle `B ⟶ j_!M[1] ⟶ j_*M[1] ⟶ B[1]`. -/
+noncomputable def shiftedExtensionByZeroToMiddleExtension :
+    D.shiftedExtensionByZero ⟶ D.middleExtension :=
+  (WeilSheaf.toComplex.map ((WeilSheaf.extensionByZeroToDirectImage D.j).app D.sheaf))⟦(1 : ℤ)⟧'
 
 end LisseOnDenseOpen
 

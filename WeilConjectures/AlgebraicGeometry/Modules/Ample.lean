@@ -30,7 +30,9 @@ public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 An `𝒪_X`-module is *very ample* relative to `f : X ⟶ S` if it is the pullback of `𝒪(1)` along
 a closed immersion of `X` into a projective space `ℙ(n; S)` over `S`; it is then invertible. An
-invertible module on a `K`-scheme is *ample* if some positive tensor power of it is very ample.
+invertible module on a `K`-scheme is *ample* if some positive tensor power of it is very ample;
+since very ample modules come from *closed* immersions into projective space, this is ampleness
+on a projective `K`-scheme (see the warning in the docstring of `AlgebraicGeometry.IsAmple`).
 For an ample invertible module `M` on a proper `K`-scheme `X` of dimension `g`, the function
 `m ↦ χ(X, M^{⊗ m})` is a numerical polynomial of degree at most `g`, and the *degree of `X` with
 respect to `M`* is `g!` times its leading coefficient.
@@ -172,9 +174,23 @@ theorem IsVeryAmple.tensorPow {S : Scheme.{u}} {f : X ⟶ S} {M : X.Modules}
 
 /-- Blueprint `sk-def-av-ample-degree`: Ample modules and the Hilbert degree.
 
-An invertible `𝒪_X`-module is *ample* if some positive tensor power of it is very ample. -/
+An `𝒪_X`-module `M` on a `K`-scheme `X` is *ample* if it is invertible and some positive tensor
+power of it is very ample in the sense of `AlgebraicGeometry.IsVeryAmple`.
+
+**Warning.** `AlgebraicGeometry.IsVeryAmple` asks for a *closed* immersion into a projective
+space, so `IsAmple f M` means "`M` is ample and `X` is projective over `K`". It is the standard
+notion (EGA II 4.5.3, Stacks `01PS`) when `f` is proper, which is the only case in which the
+blueprint uses it, but an ample module on a non-proper `K`-scheme, such as `𝒪` on `𝔸¹_K`, does
+not satisfy `IsAmple`. Statements such as Serre vanishing
+(`AlgebraicGeometry.Scheme.Modules.exists_subsingleton_H_tensorObj_tensorPow`) hold without a
+properness hypothesis for this reason. -/
 def IsAmple (f : X ⟶ Spec (.of K)) (M : X.Modules) : Prop :=
-  ∃ m : ℕ, 0 < m ∧ IsVeryAmple f (M.tensorPow m)
+  M.IsInvertible ∧ ∃ m : ℕ, 0 < m ∧ IsVeryAmple f (M.tensorPow m)
+
+/-- An ample module is invertible. -/
+lemma IsAmple.isInvertible {f : X ⟶ Spec (.of K)} {M : X.Modules} (h : IsAmple f M) :
+    M.IsInvertible :=
+  h.1
 
 /-- The Hilbert function `m ↦ χ(X, M^{⊗ m})` of an `𝒪_X`-module `M` on a `K`-scheme `X`, with
 the Euler characteristic `AlgebraicGeometry.Scheme.Modules.eulerChar` over `K`. -/
@@ -228,7 +244,7 @@ Let `X` be a proper scheme of dimension `g` over a field `K` and `M` an ample in
 a polynomial `P` over `ℚ` of degree at most `g` with `P(m) = χ(X, M^{⊗ m})` for all `m`, the
 *Hilbert polynomial* of `M` (Stacks, Tag 0BEM). -/
 theorem Scheme.Hom.exists_polynomial_hilbertFunction (f : X ⟶ Spec (.of K)) [IsProper f]
-    (M : X.Modules) [M.IsInvertible] (hM : IsAmple f M) :
+    (M : X.Modules) (hM : IsAmple f M) :
     ∃ P : Polynomial ℚ, P.natDegree ≤ ((topologicalKrullDim X).unbotD 0).toNat ∧
       ∀ m : ℕ, P.eval (m : ℚ) = f.hilbertFunction M m :=
   sorry
@@ -266,7 +282,7 @@ Let `X` be a proper scheme of dimension `g` over a field `K` and `M` an ample in
 the degree of `X` with respect to `M` is `g!` times the leading coefficient of `P`, its
 coefficient of `m^g`. -/
 theorem Scheme.Hom.exists_polynomial_degree_eq_factorial_mul_coeff (f : X ⟶ Spec (.of K))
-    [IsProper f] (M : X.Modules) [M.IsInvertible] (hM : IsAmple f M) :
+    [IsProper f] (M : X.Modules) (hM : IsAmple f M) :
     ∃ P : Polynomial ℚ, P.natDegree ≤ ((topologicalKrullDim X).unbotD 0).toNat ∧
       (∀ m : ℕ, P.eval (m : ℚ) = f.hilbertFunction M m) ∧
       (f.degree M : ℚ) = ((topologicalKrullDim X).unbotD 0).toNat.factorial *
@@ -303,7 +319,7 @@ coefficient of `m^g` is `k^g` times that of `P`.
 
 This is a step of the proof of blueprint `sk-prop-av-isogeny`. -/
 theorem Scheme.Hom.degree_tensorPow (f : X ⟶ Spec (.of K)) [IsProper f] (M : X.Modules)
-    [M.IsInvertible] (hM : IsAmple f M) (k : ℕ) :
+    (hM : IsAmple f M) (k : ℕ) :
     f.degree (M.tensorPow k) = k ^ ((topologicalKrullDim X).unbotD 0).toNat * f.degree M := by
   have hcoeff (P : Polynomial ℚ) (n : ℕ) :
       (P.comp (Polynomial.C (k : ℚ) * Polynomial.X)).coeff n = (k : ℚ) ^ n * P.coeff n := by
@@ -395,8 +411,8 @@ This is used in the proof of blueprint `lem-sc-ample-positive-degree`. -/
 theorem IsAmple.pullback {Z : Scheme.{u}} {f : X ⟶ Spec (.of K)} {L : X.Modules}
     (hL : IsAmple f L) (i : Z ⟶ X) [IsClosedImmersion i] :
     IsAmple (i ≫ f) ((Scheme.Modules.pullback i).obj L) := by
-  obtain ⟨m, hm, h⟩ := hL
-  exact ⟨m, hm, (h.pullback i).of_iso
+  obtain ⟨hinv, m, hm, h⟩ := hL
+  exact ⟨inferInstance, m, hm, (h.pullback i).of_iso
     (Scheme.Modules.nonempty_pullback_tensorPow_iso i L m).some⟩
 
 /-- **Positive tensor powers of an ample module are ample.** If `L^{⊗ m}` is very ample, then
@@ -406,8 +422,8 @@ so is `(L^{⊗ m})^{⊗ k}` (`AlgebraicGeometry.IsVeryAmple.tensorPow`, via the 
 This is used in the proof of blueprint `lem-sc-mult-n-finite-kernel`. -/
 theorem IsAmple.tensorPow {f : X ⟶ Spec (.of K)} {L : X.Modules} (hL : IsAmple f L) {k : ℕ}
     (hk : 0 < k) : IsAmple f (L.tensorPow k) := by
-  obtain ⟨m, hm, hLm⟩ := hL
-  exact ⟨m, hm, (hLm.tensorPow hk).of_iso ((L.tensorPowMulIso m k).symm ≪≫
+  obtain ⟨hinv, m, hm, hLm⟩ := hL
+  exact ⟨inferInstance, m, hm, (hLm.tensorPow hk).of_iso ((L.tensorPowMulIso m k).symm ≪≫
     eqToIso (congrArg L.tensorPow (Nat.mul_comm m k)) ≪≫ L.tensorPowMulIso k m)⟩
 
 /-- Blueprint `lem-sc-ample-tensor`: Tensor products of ample modules.
@@ -418,9 +434,10 @@ their tensor product `(L ⊗ M)^{⊗ ab}`, by the Segre embedding
 (`AlgebraicGeometry.IsVeryAmple.tensorObj`). -/
 theorem IsAmple.tensorObj {f : X ⟶ Spec (.of K)} {L M : X.Modules} (hL : IsAmple f L)
     (hM : IsAmple f M) : IsAmple f (L ⊗ M) := by
-  obtain ⟨a, ha, hLa⟩ := hL
-  obtain ⟨b, hb, hMb⟩ := hM
-  refine ⟨a * b, Nat.mul_pos ha hb, ((hLa.tensorPow hb).tensorObj (hMb.tensorPow ha)).of_iso ?_⟩
+  obtain ⟨hinvL, a, ha, hLa⟩ := hL
+  obtain ⟨hinvM, b, hb, hMb⟩ := hM
+  refine ⟨inferInstance, a * b, Nat.mul_pos ha hb,
+    ((hLa.tensorPow hb).tensorObj (hMb.tensorPow ha)).of_iso ?_⟩
   exact ((L.tensorPowMulIso a b).symm ⊗ᵢ ((M.tensorPowMulIso b a).symm ≪≫
     eqToIso (congrArg M.tensorPow (Nat.mul_comm b a)))) ≪≫ (L.tensorPowTensorObjIso M _).symm
 
@@ -446,8 +463,8 @@ theorem IsAmple.pullback_of_field {k : Type u} [Field k] {f : X ⟶ Spec (.of k)
     IsAmple (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))
       ((Scheme.Modules.pullback
         (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M) := by
-  obtain ⟨m, hm, hv⟩ := h
-  exact ⟨m, hm, (hv.pullback_of_field K).of_iso
+  obtain ⟨hinv, m, hm, hv⟩ := h
+  exact ⟨inferInstance, m, hm, (hv.pullback_of_field K).of_iso
     (Scheme.Modules.nonempty_pullback_tensorPow_iso _ M m).some⟩
 
 /-- **Very ampleness descends along a field extension.** Let `X` be proper over a field `k`, let
@@ -534,7 +551,7 @@ classical input without a separate proof. -/
 @[stacks 0B5X]
 theorem Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace [IsAlgClosed K]
     (f : X ⟶ Spec (.of K)) [IsProper f] [ConnectedSpace X] (hdim : topologicalKrullDim X = 1)
-    (L : X.Modules) [L.IsInvertible] (hample : IsAmple f L) : 0 < f.degree L :=
+    (L : X.Modules) (hample : IsAmple f L) : 0 < f.degree L :=
   sorry
 
 /-- Blueprint `sk-prop-av-ample-positive`: Ample modules on proper curves have positive degree.
@@ -551,8 +568,9 @@ a positive degree by the connected case
 ample (`AlgebraicGeometry.IsAmple.pullback`). If all components had dimension `0`,
 `C` would be discrete, so at least one has dimension `1`. -/
 theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)) [IsProper f]
-    (hdim : topologicalKrullDim X = 1) (L : X.Modules) [L.IsInvertible] (hample : IsAmple f L) :
+    (hdim : topologicalKrullDim X = 1) (L : X.Modules) (hample : IsAmple f L) :
     0 < f.degree L := by
+  have := hample.isInvertible
   let : X.Over (Spec (.of K)) := ⟨f⟩
   have : IsProper (X ↘ Spec (.of K)) := ‹IsProper f›
   have := LocallyOfFiniteType.isLocallyNoetherian f
@@ -627,7 +645,7 @@ This is Stacks 0BEV, cited as classical input in the proof of blueprint `sk-prop
 (also `lem-sc-isogeny-facts`). -/
 @[stacks 0BEV]
 theorem Scheme.Hom.degree_pos_of_isAmple_of_nonempty (f : X ⟶ Spec (.of K)) [IsProper f]
-    [Nonempty X] (M : X.Modules) [M.IsInvertible] (hample : IsAmple f M) : 0 < f.degree M :=
+    [Nonempty X] (M : X.Modules) (hample : IsAmple f M) : 0 < f.degree M :=
   sorry
 
 /-- **An ample module on a proper curve is not trivial.** Let `K` be algebraically closed, `X` a
@@ -636,7 +654,7 @@ degree (`AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`), whereas `𝒪_X` 
 
 This is the last assertion of blueprint `lem-sc-ample-positive-degree`. -/
 theorem IsAmple.isEmpty_iso_unit [IsAlgClosed K] {f : X ⟶ Spec (.of K)} [IsProper f]
-    (hdim : topologicalKrullDim X = 1) {L : X.Modules} [L.IsInvertible] (hL : IsAmple f L) :
+    (hdim : topologicalKrullDim X = 1) {L : X.Modules} (hL : IsAmple f L) :
     IsEmpty (L ≅ 𝟙_ X.Modules) := by
   let : X.Over (Spec (.of K)) := ⟨f⟩
   refine ⟨fun e ↦ ?_⟩
@@ -653,7 +671,7 @@ positive degree (`AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`), whereas 
 
 This is used in the proof of blueprint `lem-sc-mult-n-finite-kernel`. -/
 theorem IsAmple.isEmpty_tensorPow_iso_unit [IsAlgClosed K] {f : X ⟶ Spec (.of K)} [IsProper f]
-    (hdim : topologicalKrullDim X = 1) {L : X.Modules} [L.IsInvertible] (hL : IsAmple f L)
+    (hdim : topologicalKrullDim X = 1) {L : X.Modules} (hL : IsAmple f L)
     {k : ℕ} (hk : 0 < k) : IsEmpty (L.tensorPow k ≅ 𝟙_ X.Modules) := by
   let : X.Over (Spec (.of K)) := ⟨f⟩
   refine ⟨fun e ↦ ?_⟩
@@ -675,7 +693,7 @@ has degree at most `g - 1`: by additivity of `χ` and dévissage, `E` may be com
 This is the input on Hilbert polynomials used in the proof of blueprint
 `lem-sc-deg-pullback-finite`. -/
 theorem Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow [IsIntegral Y]
-    (f : Y ⟶ Spec (.of K)) [IsProper f] (M : Y.Modules) [M.IsInvertible] (hample : IsAmple f M)
+    (f : Y ⟶ Spec (.of K)) [IsProper f] (M : Y.Modules) (hample : IsAmple f M)
     (E : Y.Modules) [E.IsFinitePresentation] {U : Y.Opens} (hU : (U : Set Y).Nonempty) {r : ℕ}
     (e : (Scheme.Modules.pullback U.ι).obj E ≅ SheafOfModules.free (ULift.{u} (Fin r))) :
     letI : Y.Over (Spec (.of K)) := ⟨f⟩
@@ -706,9 +724,10 @@ differences at `0`, where `dim X = dim Y` since `g` is finite surjective
 -/
 theorem Scheme.Hom.degree_pullback [IsIntegral X] [IsIntegral Y] (fX : X ⟶ Spec (.of K))
     (fY : Y ⟶ Spec (.of K)) [IsProper fX] [IsProper fY] (g : X ⟶ Y) (hg : g ≫ fY = fX)
-    [IsFinite g] [Surjective g] (M : Y.Modules) [M.IsInvertible] (hample : IsAmple fY M) :
+    [IsFinite g] [Surjective g] (M : Y.Modules) (hample : IsAmple fY M) :
     fX.degree ((Scheme.Modules.pullback g).obj M) =
       g.finrank (genericPoint Y) * fY.degree M := by
+  have := hample.isInvertible
   subst hg
   let : Y.Over (Spec (.of K)) := ⟨fY⟩
   let : X.Over (Spec (.of K)) := ⟨g ≫ fY⟩

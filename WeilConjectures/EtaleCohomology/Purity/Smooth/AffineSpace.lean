@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.Compactification.Affine
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
@@ -38,6 +39,8 @@ affine line, where the input is `sk-prop-a1` (for clause (i)) and affine-line pu
   `Rp^! K ≅ Lp^* K (1)[2]`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpace`: clause (ii),
   affine-space purity `Rp_c^! K ≅ Lp_c^* K (c)[2c]`.
+- `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`: its case `K = Λ_B`,
+  `ω_{p_c} ≅ Λ(c)[2c]`.
 
 ## Implementation notes
 
@@ -110,7 +113,6 @@ noncomputable def twistShiftTwistShiftIso (X : Scheme.{u}) (m m' : ℤ)
         ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).mapIso
           (HasTateTwist.twistObjectAddIso X m m'))
 
-omit [Finite Λ] in
 /-- `Lf^* K (m)[2m]` lies in `D^b_{ctf}` when `K` does. -/
 theorem boundedConstructibleFiniteTor_twistShift_leftDerivedUpperStar (f : X ⟶ Y) (m : ℤ)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -131,6 +133,7 @@ formula for the closed immersion `s` and `Rs^! Λ(1)[2] ≅ Λ_Y` (`sk-prop-a1`)
 
 `Rs^! Λ_{𝔸¹_Y}(1 + m)[2(1 + m)] ≅ Rs^! Λ(1)[2] ⊗ Ls^* Λ(m)[2m] ≅ Λ_Y(m)[2m]`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero_shiftTateObject
+    [HasTateTwist.IsNormalized Λ]
     (Y : Scheme.{u}) [HasInvertibleExponent Λ Y] (m : ℤ) :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
           (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y)).obj
@@ -175,7 +178,6 @@ lemma affineSpaceSuccIso_hom_over_over (c : ℕ) (B : Scheme.{u}) :
   rw [affineSpaceSuccIso, Iso.trans_hom, Category.assoc, AffineSpace.sumIso_hom_over_over,
     AffineSpace.reindexIso_hom, AffineSpace.reindex_over]
 
-omit [Finite Λ] in
 /-- Blueprint `sk-prop-an`, Step 1: the zero section of `𝔸^{c+1}_B` is that of `𝔸¹_{B'}`
 after that of `B' = 𝔸^c_B`, so by the composition law
 `Rz_{c+1}^! Λ(c+1)[2(c+1)] ≅ Rz_c^! Rs'^! Λ(1 + c)[2(1 + c)]`. -/
@@ -190,11 +192,11 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_succ (c : ℕ) (B :
           ((tateObject Λ 𝔸(ULift.{u} (Fin 1); 𝔸(ULift.{u} (Fin c); B)) (1 + (c : ℤ)))⟦
             2 * (1 + (c : ℤ))⟧))) := by
   set φ := affineSpaceSuccIso c B
-  obtain ⟨comp₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp (ModuleCat.{u + 1} Λ)
+  obtain ⟨comp₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ
     (AffineSpace.zeroSection (ULift.{u} (Fin (c + 1))) B) φ.hom
   obtain ⟨heq⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ)
     (zeroSection_comp_affineSpaceSuccIso_hom c B)
-  obtain ⟨comp₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp (ModuleCat.{u + 1} Λ)
+  obtain ⟨comp₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ
     (AffineSpace.zeroSection (ULift.{u} (Fin c)) B)
     (AffineSpace.zeroSection (ULift.{u} (Fin 1)) 𝔸(ULift.{u} (Fin c); B))
   exact ⟨(R(AffineSpace.zeroSection (ULift.{u} (Fin (c + 1))) B)^![ModuleCat.{u + 1} Λ]).mapIso
@@ -208,7 +210,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_succ (c : ℕ) (B :
 
 /-- The `Rz^!`-form of the model purity with the twisting object in place of the twisted
 constant complex: `Rz^! Λ(c)[2c] ≅ Λ_B`, by induction on `c` (`sk-prop-an`, Step 1). -/
-theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_shiftTateObject (c : ℕ)
+theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_shiftTateObject
+    [HasTateTwist.IsNormalized Λ] (c : ℕ)
     (B : Scheme.{u}) [HasInvertibleExponent Λ B] :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
           (AffineSpace.zeroSection (ULift.{u} (Fin c)) B)).obj
@@ -249,7 +252,8 @@ unavailable (see the implementation notes).
 The proof is Step 1 of the blueprint: write `𝔸^c_B = 𝔸¹_{B'}` with `B' = 𝔸^{c-1}_B`, so that
 `z = s' ∘ z_{c-1}` and `Rz^! ≅ Rz_{c-1}^! Rs'^!`; pass the twist pulled back from `B'` through
 `Rs'^!` and conclude by `sk-prop-a1` and induction on `c`. -/
-theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero {k : Type u} [Field k] (c : ℕ)
+theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero [HasTateTwist.IsNormalized Λ]
+    {k : Type u} [Field k] (c : ℕ)
     (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
     [HasInvertibleExponent Λ B] :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
@@ -274,7 +278,8 @@ In the blueprint the isomorphism is the comparison `γ_{p,K}`, the transpose und
 `Rp_! ⊣ Rp^!` of the integration map built from the projective-line trace
 (`def-pur-affine-line-purity-comparison`); this comparison is not constructed, so only the
 existence of the isomorphism is recorded. -/
-theorem nonempty_iso_rightDerivedUpperShriek_affineLine {k : Type u} [Field k]
+theorem nonempty_iso_rightDerivedUpperShriek_affineLine [HasTateTwist.IsNormalized Λ]
+    {k : Type u} [Field k]
     (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
     [HasInvertibleExponent Λ Y]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -285,7 +290,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLine {k : Type u} [Field k]
         ((L(((𝔸(ULift.{u} (Fin 1); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).obj K)) :=
   sorry
 
-omit [Finite Λ] [HasTateTwist Λ] in
+omit [HasTateTwist Λ] in
 /-- Blueprint `sk-prop-an`, Step 6: the projection of `𝔸^{d+1}_Y` is that of `𝔸¹_{Y'}`
 followed by that of `Y' = 𝔸^d_Y`, so by the composition law and `Re^! ≅ Le^*` for the
 isomorphism `e : 𝔸^{d+1}_Y ≅ 𝔸¹_{Y'}`, `Rp_{d+1}^! K ≅ Le^* Rp'^! Rp_d^! K`. -/
@@ -307,9 +312,9 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpace_succ (d : ℕ) (Y : Sch
     exact (affineSpaceSuccIso_hom_over_over d Y).symm
   have : HasCompactification ((φ.hom ≫ q) ≫ p) := .of_eq h
   obtain ⟨heq⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ) h
-  obtain ⟨comp₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp (ModuleCat.{u + 1} Λ)
+  obtain ⟨comp₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ
     (φ.hom ≫ q) p
-  obtain ⟨comp₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp (ModuleCat.{u + 1} Λ) φ.hom q
+  obtain ⟨comp₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ φ.hom q
   exact ⟨heq.app K ≪≫ comp₁.app K ≪≫ comp₂.app _ ≪≫ (rightDerivedUpperShriekIsoOfIso _ φ).app _⟩
 
 omit [Finite Λ] in
@@ -364,7 +369,8 @@ is recorded.
 The proof is Step 6 of the blueprint: write `𝔸^{d+1}_Y = 𝔸¹_{Y'}` with `Y' = 𝔸^d_Y`, apply
 affine-line purity (`thm-pur-affine-line-purity`) over `Y'` to `Rp_d^! K ≅ Lp_d^* K (d)[2d]`,
 which lies in `D^b_{ctf}`, and add up the twists. -/
-theorem nonempty_iso_rightDerivedUpperShriek_affineSpace {k : Type u} [Field k] (d : ℕ)
+theorem nonempty_iso_rightDerivedUpperShriek_affineSpace [HasTateTwist.IsNormalized Λ]
+    {k : Type u} [Field k] (d : ℕ)
     (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
     [HasInvertibleExponent Λ Y]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -390,6 +396,29 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpace {k : Type u} [Field k] 
     exact ⟨t ≪≫ (L(((affineSpaceSuccIso d Y).hom)^*[ModuleCat.{u + 1} Λ])).mapIso
       ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin 1);
         𝔸(ULift.{u} (Fin d); Y)) ↘ 𝔸(ULift.{u} (Fin d); Y))).mapIso ih ≪≫ l) ≪≫ s⟩
+
+/-- Blueprint `cor-pur-affine-space-purity`: affine-space purity
+
+*The dualizing complex.* For the projection `p_d : 𝔸^d_Y → Y` of relative affine space over
+a separated scheme of finite type over a field, on which the exponent of `Λ` is invertible,
+
+`ω_{p_d} = Rp_d^! Λ_Y ≅ Λ_{𝔸^d_Y}(d)[2d]`.
+
+This is the case `K = Λ_Y` of
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpace`, with
+`Lp_d^* Λ_Y ≅ Λ_{𝔸^d_Y}`; `Λ_Y` lies in `D^b_{ctf}` as the twisting object `Λ_Y(0)`. -/
+theorem nonempty_iso_dualizingComplex_affineSpace [HasTateTwist.IsNormalized Λ]
+    {k : Type u} [Field k] (d : ℕ)
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
+    [HasInvertibleExponent Λ Y] :
+    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin d); Y) ↘ Y) ≅
+      (twistShift Λ 𝔸(ULift.{u} (Fin d); Y) d).obj
+        (constantComplex Λ 𝔸(ULift.{u} (Fin d); Y))) := by
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_affineSpace Λ d Y aY (tateObject Λ Y 0)
+    (boundedConstructibleFiniteTor_tateObject Λ Y 0)
+  exact ⟨(rightDerivedUpperShriek _ _).mapIso (HasTateTwist.twistObjectZeroIso Y).symm ≪≫ e ≪≫
+    (twistShift Λ _ d).mapIso ((L(((𝔸(ULift.{u} (Fin d); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).mapIso
+      (HasTateTwist.twistObjectZeroIso Y) ≪≫ leftDerivedUpperStarUnitIso _ _)⟩
 
 end Etale
 

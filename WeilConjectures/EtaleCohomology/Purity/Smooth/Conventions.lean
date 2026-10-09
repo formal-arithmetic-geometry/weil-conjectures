@@ -45,11 +45,22 @@ taken as a *parameter*: `AlgebraicGeometry.Etale.HasTateTwist` bundles the twist
 `Lf^* Λ_Y(m) ≅ Λ_X(m)`, ⊗-invertibility, membership in `D^b_{ctf}`, and the coherences
 between these identifications listed in "Additivity and pullback of twists" of the framework
 chapter: unit and associativity laws, compatibility of pullback with composition, and
-compatibility of pullback with products. Every statement of the chapter carries
-`[HasTateTwist Λ]`, and becomes an unconditional theorem once the instance is constructed. The
-Kummer classes of units, the rank-one datum, are cohomological data about `μ_n` rather than
-twist data; they are the separate class `AlgebraicGeometry.Etale.HasKummerClass` of
+compatibility of pullback with products. The Kummer classes of units, the rank-one datum, are
+cohomological data about `μ_n` rather than twist data; they are the separate class
+`AlgebraicGeometry.Etale.HasKummerClass` of
 `WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass`.
+
+These fields do not determine the twisting objects: the untwisted datum `Λ_X(m) = Λ_X` and the
+shifted datum `Λ_X(m) = Λ_X[-2m]`, with the evident identifications, satisfy all of them. A
+statement that only manipulates twists formally — the twist-and-shift calculus, co-projection,
+the pairings and traces built from a given orientation — holds for every twist datum and carries
+`[HasTateTwist Λ]`. A statement comparing the twist with geometry — `Rs^! Λ(1)[2] ≅ Λ` for the
+zero section of `𝔸¹`, affine-space and smooth purity, purity for regular immersions, Fourier
+inversion — is false for those data and assumes moreover `[HasTateTwist.IsNormalized Λ]`
+(`WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass`): the twist underlies Kummer
+classes whose boundary for the coordinate of `𝔸¹_B` is the fundamental class of the zero
+section, which forces `Λ_B(1) ≅ μ_n ⊗ Λ` on every `B` on which the exponent `n` of `Λ` is
+invertible.
 
 Invertibility is a field rather than a consequence of the zero and addition isomorphisms:
 `Λ_X(m) ⊗ Λ_X(-m) ≅ Λ_X(0) ≅ Λ_X` is a two-line proof, but checking it forces the kernel to
@@ -303,7 +314,8 @@ The *section invariant* `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` of a morphism 
 together with a section `s : B ⟶ V`. For `g` smooth of pure relative dimension `d` with `s` a
 closed section, smooth purity identifies it with `Λ_B(d)[2d]`; the deformation to the normal
 cone of the section reduces the general case to the standard pair `(𝔸^d_B → B, 0)`. -/
-noncomputable def sectionInvariant {V B : Scheme.{u}} (g : V ⟶ B) [HasCompactification g]
+noncomputable def sectionInvariant [Finite Λ] {V B : Scheme.{u}} (g : V ⟶ B)
+    [HasCompactification g]
     (s : B ⟶ V) : DerivedCategory (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   (L((s)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) g)
 

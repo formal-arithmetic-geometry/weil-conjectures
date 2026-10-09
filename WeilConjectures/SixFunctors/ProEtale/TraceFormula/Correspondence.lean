@@ -81,7 +81,9 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] {s : Scheme.{u}}
+  [Abelian.HasFunctorialFlatResolution A] [Etale.HasBoundedBelowUpperShrieks A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA] {s : Scheme.{u}}
 
 /-- A correspondence from `(X, K)` to `(Y, L)`: a geometric scheme `C` over the base `s`,
 two legs `c₁ : C ⟶ Y`, `c₂ : C ⟶ X` over `s` — the blueprint's `c = (c₁, c₂) : C ⟶ Y × X`,
@@ -120,13 +122,11 @@ structure Correspondence {X Y : Scheme.{u}} (aX : X ⟶ s) (aY : Y ⟶ s)
   snd_comp : snd ≫ aX = str
   /-- `c₁` admits a compactification, so that `c₁^!` is available. -/
   [hasCompactification_fst : HasCompactification fst]
-  /-- `Rc₁_!` is a left adjoint, so that `c₁^!` is available. -/
-  [isLeftAdjoint_fst : (R(fst)_![A]).IsLeftAdjoint]
   /-- the coefficient map `u : c₂^* K ⟶ c₁^! L`. -/
   coeff : ((upperStar A snd).leftDerivedFunctor).obj K ⟶
     (rightDerivedUpperShriek A fst).obj L
 
-attribute [instance] Correspondence.hasCompactification_fst Correspondence.isLeftAdjoint_fst
+attribute [instance] Correspondence.hasCompactification_fst
 
 namespace Correspondence
 
@@ -195,6 +195,19 @@ instance hasCompactification_fixι [IsSeparated aX] (c : Correspondence aX aX K 
     HasCompactification c.fixι :=
   .of_isPullback c.isPullback_fixι_toProd.flip
 
+/-- The inclusion `Fix(c) ⟶ C` of the fixed scheme is a closed immersion when `aX` is
+separated, being the base change of the diagonal of `aX` along the support map. -/
+instance isClosedImmersion_fixι [IsSeparated aX] (c : Correspondence aX aX K K) :
+    IsClosedImmersion c.fixι :=
+  MorphismProperty.of_isPullback (P := @IsClosedImmersion) c.isPullback_fixι_toProd.flip
+    (inferInstanceAs (IsClosedImmersion (pullback.diagonal aX)))
+
+/-- The fixed scheme of an endocorrespondence on a geometric scheme with geometric support is
+geometric. -/
+instance isGeometric_fixStr [IsSeparated aX] (c : Correspondence aX aX K K) [IsGeometric c.str] :
+    IsGeometric c.fixStr :=
+  inferInstanceAs (IsGeometric (c.fixι ≫ c.str))
+
 /-- The structure morphism of the intersection support `E(C, D)` factors through the first
 projection of `Y × X`: the diagram
 
@@ -220,33 +233,34 @@ lemma fixι_toProd_fst_comp_eq_fixStr (c : Correspondence aX aX K K) :
     c.fixι ≫ c.toProd ≫ pullback.fst aX aX ≫ aX = c.fixStr := by
   simp [fixStr, toProd, c.fst_comp]
 
-variable [DerivedBraiding A]
+end Correspondence
+
+namespace Correspondence
+
+variable [DerivedBraiding A] {X : Scheme.{u}}
 
 /-- The coefficient map of `AlgebraicGeometry.ProEtale.Correspondence.ofEnd`: the
-endomorphism `v` read through the comparisons `L(𝟙)^* K ≃ K ≃ 𝟙^! K`. -/
-noncomputable def ofEndCoeff (G : GeometricOperations A s)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
-    haveI := G.isLeftAdjoint_rightDerivedLowerShriek_id X
+endomorphism `v` read through the comparisons `L(𝟙)^* K ≃ K ≃ 𝟙^! K`, for `K ∈ Dᵇctf(X)`. -/
+noncomputable def ofEndCoeff (G : GeometricOperations A s) (aX : X ⟶ s) [IsGeometric aX]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hK : G.ctf X K) (v : K ⟶ K) :
     ((upperStar A (𝟙 X)).leftDerivedFunctor).obj K ⟶
       (rightDerivedUpperShriek A (𝟙 X)).obj K :=
-  haveI := G.isLeftAdjoint_rightDerivedLowerShriek_id X
-  (leftDerivedUpperStarId A X).hom.app K ≫ v ≫ (G.upperShriekId X).inv.app K
+  (leftDerivedUpperStarId A X).hom.app K ≫ v ≫ (G.upperShriekIdIso X (.id aX) K hK).hom
 
-/-- The coefficient map of the diagonal identity `ofEnd G aX K (𝟙 K)` is the comparison
+/-- The coefficient map of the diagonal identity `ofEnd G aX K hK (𝟙 K)` is the comparison
 `L(𝟙)^* K ≃ K ≃ 𝟙^! K`. -/
 @[simp]
-lemma ofEndCoeff_id (G : GeometricOperations A s)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    haveI := G.isLeftAdjoint_rightDerivedLowerShriek_id X
-    ofEndCoeff G K (𝟙 K) =
-      (leftDerivedUpperStarId A X).hom.app K ≫ (G.upperShriekId X).inv.app K := by
+lemma ofEndCoeff_id (G : GeometricOperations A s) (aX : X ⟶ s) [IsGeometric aX]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hK : G.ctf X K) :
+    ofEndCoeff G aX K hK (𝟙 K) =
+      (leftDerivedUpperStarId A X).hom.app K ≫ (G.upperShriekIdIso X (.id aX) K hK).hom := by
   simp [ofEndCoeff]
 
 /-- The endocorrespondence on `(X, K)` with support `X`, support map the diagonal `Δ_X`,
-identity legs, and coefficient map induced by `v : K ⟶ K`. For `v = 𝟙 K` this is the
-blueprint's *diagonal identity* (part of blueprint `sk-d-corr`). -/
-noncomputable def ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
+identity legs, and coefficient map induced by `v : K ⟶ K`, for `K ∈ Dᵇctf(X)`. For `v = 𝟙 K`
+this is the blueprint's *diagonal identity* (part of blueprint `sk-d-corr`). -/
+noncomputable def ofEnd (G : GeometricOperations A s) (aX : X ⟶ s) [IsGeometric aX]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hK : G.ctf X K) (v : K ⟶ K) :
     Correspondence aX aX K K where
   supp := X
   str := aX
@@ -254,77 +268,54 @@ noncomputable def ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
   snd := 𝟙 X
   fst_comp := Category.id_comp aX
   snd_comp := Category.id_comp aX
-  isLeftAdjoint_fst := G.isLeftAdjoint_rightDerivedLowerShriek_id X
-  coeff := ofEndCoeff G K v
+  coeff := ofEndCoeff G aX K hK v
 
-/-- The support map of `ofEnd G aX K v` is the diagonal of `aX`. -/
+variable (G : GeometricOperations A s) (aX : X ⟶ s) [IsGeometric aX]
+  (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hK : G.ctf X K) (v : K ⟶ K)
+
+/-- The support map of `ofEnd G aX K hK v` is the diagonal of `aX`. -/
 @[simp]
-lemma ofEnd_toProd (G : GeometricOperations A s) (aX : X ⟶ s)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
-    (ofEnd G aX K v).toProd = pullback.diagonal aX :=
+lemma ofEnd_toProd : (ofEnd G aX K hK v).toProd = pullback.diagonal aX :=
   rfl
 
-/-- The swapped support map of `ofEnd G aX K v` is the diagonal of `aX`. -/
+/-- The swapped support map of `ofEnd G aX K hK v` is the diagonal of `aX`. -/
 @[simp]
-lemma ofEnd_toProdSwap (G : GeometricOperations A s) (aX : X ⟶ s)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
-    (ofEnd G aX K v).toProdSwap = pullback.diagonal aX :=
+lemma ofEnd_toProdSwap : (ofEnd G aX K hK v).toProdSwap = pullback.diagonal aX :=
   rfl
 
-/-- The support map of `ofEnd G aX K v` is the diagonal of `aX`, a closed immersion when
-`aX` is separated, so it admits a compactification. -/
-instance hasCompactification_toProd_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
-    [IsSeparated aX] (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
-    HasCompactification (ofEnd G aX K v).toProd := by
+/-- The support map of `ofEnd G aX K hK v` is the diagonal of `aX`, a closed immersion as `aX`
+is separated, so it admits a compactification. -/
+instance hasCompactification_toProd_ofEnd :
+    HasCompactification (ofEnd G aX K hK v).toProd := by
   rw [ofEnd_toProd]
   infer_instance
 
-/-- The swapped support map of `ofEnd G aX K v` is the diagonal of `aX`, a closed immersion
-when `aX` is separated, so it admits a compactification. -/
-instance hasCompactification_toProdSwap_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
-    [IsSeparated aX] (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
-    HasCompactification (ofEnd G aX K v).toProdSwap := by
+/-- The swapped support map of `ofEnd G aX K hK v` is the diagonal of `aX`, a closed immersion
+as `aX` is separated, so it admits a compactification. -/
+instance hasCompactification_toProdSwap_ofEnd :
+    HasCompactification (ofEnd G aX K hK v).toProdSwap := by
   rw [ofEnd_toProdSwap]
   infer_instance
 
-/-- The support map of `ofEnd G aX K v` is the diagonal of `aX`, so its exceptional direct
-image is a left adjoint when that of the diagonal is. -/
-instance isLeftAdjoint_toProd_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
-    [HasCompactification (pullback.diagonal aX)] [(R(pullback.diagonal aX)_![A]).IsLeftAdjoint]
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K)
-    [HasCompactification (ofEnd G aX K v).toProd] :
-    (R((ofEnd G aX K v).toProd)_![A]).IsLeftAdjoint :=
-  inferInstanceAs (R(pullback.diagonal aX)_![A]).IsLeftAdjoint
-
-/-- The swapped support map of `ofEnd G aX K v` is the diagonal of `aX`, so its exceptional
-direct image is a left adjoint when that of the diagonal is. -/
-instance isLeftAdjoint_toProdSwap_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
-    [HasCompactification (pullback.diagonal aX)] [(R(pullback.diagonal aX)_![A]).IsLeftAdjoint]
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K)
-    [HasCompactification (ofEnd G aX K v).toProdSwap] :
-    (R((ofEnd G aX K v).toProdSwap)_![A]).IsLeftAdjoint :=
-  inferInstanceAs (R(pullback.diagonal aX)_![A]).IsLeftAdjoint
-
-instance isIso_fixι_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
-    IsIso (ofEnd G aX K v).fixι :=
+instance isIso_fixι_ofEnd : IsIso (ofEnd G aX K hK v).fixι :=
   inferInstanceAs (IsIso (equalizer.ι (𝟙 X) (𝟙 X)))
 
-/-- The structure morphism of `ofEnd G aX K v` is `aX`, so it admits a compactification
+/-- The structure morphism of `ofEnd G aX K hK v` is `aX`, so it admits a compactification
 when `aX` does. -/
-instance hasCompactification_str_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
-    [HasCompactification aX] (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
-    (v : K ⟶ K) : HasCompactification (ofEnd G aX K v).str :=
+instance hasCompactification_str_ofEnd [HasCompactification aX] :
+    HasCompactification (ofEnd G aX K hK v).str :=
   inferInstanceAs (HasCompactification aX)
 
-instance isProper_fixStr_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s) [IsProper aX]
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
-    IsProper (ofEnd G aX K v).fixStr :=
-  inferInstanceAs (IsProper ((ofEnd G aX K v).fixι ≫ aX))
+/-- The structure morphism of `ofEnd G aX K hK v` is `aX`, which is geometric. -/
+instance isGeometric_str_ofEnd : IsGeometric (ofEnd G aX K hK v).str :=
+  inferInstanceAs (IsGeometric aX)
+
+instance isProper_fixStr_ofEnd [IsProper aX] : IsProper (ofEnd G aX K hK v).fixStr :=
+  inferInstanceAs (IsProper ((ofEnd G aX K hK v).fixι ≫ aX))
 
 /-- The graph endocorrespondence `(1, g)` on `(X, K)` of an endomorphism `g : X ⟶ X` over
-`s`: support `X`, exceptional leg `𝟙 X`, ordinary-pullback leg `g`, and coefficient map
-`v : Lg^* K ⟶ K` read through `K ≃ 𝟙^! K`,
+`s`, for `K ∈ Dᵇctf(X)`: support `X`, exceptional leg `𝟙 X`, ordinary-pullback leg `g`, and
+coefficient map `v : Lg^* K ⟶ K` read through `K ≃ 𝟙^! K`,
 
 ```
             X
@@ -336,8 +327,7 @@ instance isProper_fixStr_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s) [IsP
 
 For `g = 𝟙 X` this is `ofEnd` up to the identification `L(𝟙)^* K ≃ K`
 (part of blueprint `sk-d-corr`). -/
-noncomputable def ofGraph (G : GeometricOperations A s) (aX : X ⟶ s) (g : X ⟶ X)
-    (hg : g ≫ aX = aX) (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+noncomputable def ofGraph (g : X ⟶ X) (hg : g ≫ aX = aX)
     (v : ((upperStar A g).leftDerivedFunctor).obj K ⟶ K) :
     Correspondence aX aX K K where
   supp := X
@@ -346,41 +336,46 @@ noncomputable def ofGraph (G : GeometricOperations A s) (aX : X ⟶ s) (g : X �
   snd := g
   fst_comp := Category.id_comp aX
   snd_comp := hg
-  isLeftAdjoint_fst := G.isLeftAdjoint_rightDerivedLowerShriek_id X
-  coeff := v ≫ (G.upperShriekIdIso X).hom.app K
+  coeff := v ≫ (G.upperShriekIdIso X (.id aX) K hK).hom
 
-/-- The structure morphism of `ofGraph G aX g hg K v` is `aX`, so it admits a
+variable (g : X ⟶ X) (hg : g ≫ aX = aX) (w : ((upperStar A g).leftDerivedFunctor).obj K ⟶ K)
+
+/-- The structure morphism of `ofGraph G aX K hK g hg w` is `aX`, so it admits a
 compactification when `aX` does. -/
-instance hasCompactification_str_ofGraph (G : GeometricOperations A s) (aX : X ⟶ s)
-    [HasCompactification aX] (g : X ⟶ X) (hg : g ≫ aX = aX)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
-    (v : ((upperStar A g).leftDerivedFunctor).obj K ⟶ K) :
-    HasCompactification (ofGraph G aX g hg K v).str :=
+instance hasCompactification_str_ofGraph [HasCompactification aX] :
+    HasCompactification (ofGraph G aX K hK g hg w).str :=
   inferInstanceAs (HasCompactification aX)
 
-/-- The support map `(𝟙, g) : X ⟶ X ×_s X` of `ofGraph G aX g hg K v` is the graph
+/-- The structure morphism of `ofGraph G aX K hK g hg w` is `aX`, which is geometric. -/
+instance isGeometric_str_ofGraph : IsGeometric (ofGraph G aX K hK g hg w).str :=
+  inferInstanceAs (IsGeometric aX)
+
+/-- The support map `(𝟙, g) : X ⟶ X ×_s X` of `ofGraph G aX K hK g hg w` is the graph
 `X ⟶ X ×_s X` of `g`, a section of the first projection, followed by the identification
 of `X ×_{g ≫ a_X, s, a_X} X` with `X ×_s X` along `g ≫ a_X = a_X`. -/
-lemma ofGraph_toProd_eq (G : GeometricOperations A s) (aX : X ⟶ s) (g : X ⟶ X)
-    (hg : g ≫ aX = aX) (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
-    (v : ((upperStar A g).leftDerivedFunctor).obj K ⟶ K) :
-    (ofGraph G aX g hg K v).toProd =
+lemma ofGraph_toProd_eq :
+    (ofGraph G aX K hK g hg w).toProd =
       pullback.lift (𝟙 X) g (Category.id_comp (g ≫ aX)) ≫ (pullback.congrHom hg rfl).hom := by
   apply pullback.hom_ext <;> simp [toProd, ofGraph]
 
-/-- The support map `(𝟙, g) : X ⟶ X ×_s X` of `ofGraph G aX g hg K v` is a section of the
-first projection, hence a closed immersion when `aX` is separated. -/
-instance isClosedImmersion_toProd_ofGraph (G : GeometricOperations A s) (aX : X ⟶ s)
-    [IsSeparated aX] (g : X ⟶ X) (hg : g ≫ aX = aX)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
-    (v : ((upperStar A g).leftDerivedFunctor).obj K ⟶ K) :
-    IsClosedImmersion (ofGraph G aX g hg K v).toProd := by
+/-- The support map `(𝟙, g) : X ⟶ X ×_s X` of `ofGraph G aX K hK g hg w` is a section of the
+first projection, hence a closed immersion as `aX` is separated. -/
+instance isClosedImmersion_toProd_ofGraph :
+    IsClosedImmersion (ofGraph G aX K hK g hg w).toProd := by
   rw [ofGraph_toProd_eq]
   -- instance search does not find this factor inside the composite, only when it is stated
   -- on its own
   have : IsClosedImmersion (pullback.lift (𝟙 X) g (Category.id_comp (g ≫ aX))) :=
     inferInstance
   infer_instance
+
+end Correspondence
+
+namespace Correspondence
+
+variable [DerivedBraiding A] {X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s}
+  {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+  {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
 
 /-- `c₂ ≫ a_X = a_C` admits a compactification when `a_C` does. -/
 instance hasCompactification_snd_comp (c : Correspondence aX aY K L)
@@ -392,7 +387,8 @@ instance hasCompactification_fst_comp (c : Correspondence aX aY K L)
     [HasCompactification c.str] : HasCompactification (c.fst ≫ aY) :=
   c.fst_comp ▸ inferInstance
 
-/-- The first half of the global operator, `RΓ_c(X, K) ⟶ RΓ_c(C, c₂^* K)`: the composite
+/-- The first half of the global operator, `RΓ_c(X, K) ⟶ RΓ_c(C, c₂^* K)`, for `K ∈ Dᵇctf(X)`
+on geometric schemes: the composite
 
 ```
   Ra_{X!} K ──η──▶ Ra_{X!} Rc₂_* c₂^* K ≅ Ra_{X!} Rc₂_! c₂^* K ≅ Ra_{C!} c₂^* K
@@ -401,17 +397,22 @@ instance hasCompactification_fst_comp (c : Correspondence aX aY K L)
 of the unit of `c₂^* ⊣ Rc₂_*`, the proper identification `Rc₂_* = Rc₂_!` and the
 composition `Ra_{X!} Rc₂_! ≃ R(c₂ ≫ a_X)_! = Ra_{C!}` (part of blueprint `sk-d-operator`). -/
 noncomputable def globalOperatorUnit (G : GeometricOperations A s)
-    (c : Correspondence aX aY K L) [HasCompactification aX] [IsProper c.snd]
-    [HasCompactification c.str] :
+    (c : Correspondence aX aY K L) (hK : G.ctf X K) [IsGeometric aX] [IsGeometric c.str]
+    [HasCompactification aX] [IsProper c.snd] [HasCompactification c.str] :
     (rightDerivedLowerShriek A aX).obj K ⟶
       (rightDerivedLowerShriek A c.str).obj (((upperStar A c.snd).leftDerivedFunctor).obj K) :=
   (rightDerivedLowerShriek A aX).map
       ((derivedUpperStarLowerStarAdjunction A c.snd).unit.app K) ≫
-    (rightDerivedLowerShriek A aX).map ((G.properComparison c.snd).inv.app _) ≫
-    (G.lowerShriekComp c.snd aX).hom.app _ ≫
+    (rightDerivedLowerShriek A aX).map
+      ((G.properComparison c.snd (.mk c.snd_comp)).inv.app
+        ⟨_, G.ctf_upperStar c.snd (.mk c.snd_comp) hK⟩).hom ≫
+    ((G.lowerShriekComp c.snd aX (.mk c.snd_comp) (.of_isGeometric aX)
+      (.mk (aX := c.str) (aY := 𝟙 s) (by rw [Category.comp_id, c.snd_comp]))).hom.app
+        ⟨_, G.ctf_upperStar c.snd (.mk c.snd_comp) hK⟩).hom ≫
     (rightDerivedLowerShriekCongr A c.snd_comp).hom.app _
 
-/-- The second half of the global operator, `RΓ_c(C, c₁^! L) ⟶ RΓ_c(Y, L)`: the composite
+/-- The second half of the global operator, `RΓ_c(C, c₁^! L) ⟶ RΓ_c(Y, L)`, for
+`L ∈ Dᵇctf(Y)` on geometric schemes: the composite
 
 ```
   Ra_{C!} c₁^! L ≅ Ra_{Y!} Rc₁_! c₁^! L ──ε──▶ Ra_{Y!} L
@@ -420,30 +421,31 @@ noncomputable def globalOperatorUnit (G : GeometricOperations A s)
 of the composition `Ra_{C!} = R(c₁ ≫ a_Y)_! ≃ Ra_{Y!} Rc₁_!` and the counit of
 `Rc₁_! ⊣ c₁^!` (part of blueprint `sk-d-operator`). -/
 noncomputable def globalOperatorCounit (G : GeometricOperations A s)
-    (c : Correspondence aX aY K L) [HasCompactification aY] [HasCompactification c.str] :
+    (c : Correspondence aX aY K L) (hL : G.ctf Y L) [IsGeometric aY] [IsGeometric c.str]
+    [HasCompactification aY] [HasCompactification c.str] :
     (rightDerivedLowerShriek A c.str).obj ((rightDerivedUpperShriek A c.fst).obj L) ⟶
       (rightDerivedLowerShriek A aY).obj L :=
   (rightDerivedLowerShriekCongr A c.fst_comp.symm).hom.app _ ≫
-    (G.lowerShriekComp c.fst aY).inv.app _ ≫
-    (rightDerivedLowerShriek A aY).map ((rightDerivedUpperShriekAdjunction A c.fst).counit.app L)
+    ((G.lowerShriekComp c.fst aY (.mk c.fst_comp) (.of_isGeometric aY)
+      (.mk (aX := c.str) (aY := 𝟙 s) (by rw [Category.comp_id, c.fst_comp]))).inv.app
+        ⟨_, G.ctf_upperShriek c.fst (.mk c.fst_comp) hL⟩).hom ≫
+    (rightDerivedLowerShriek A aY).map (G.exceptionalCounit c.fst (.mk c.fst_comp) L hL)
 
-/-- The global operator of an endocorrespondence `(C, c, u)` on `(X, K)` whose ordinary leg
-`c₂` is proper: the composite
-
+/-- The global operator of an endocorrespondence `(C, c, u)` on `(X, K)` with `K ∈ Dᵇctf(X)`,
+on a geometric scheme `X`, whose ordinary leg `c₂` is proper: the composite
 ```
   RΓ_c(X, K) ──η──▶ RΓ_c(X, Rc₂_* c₂^* K) ≅ RΓ_c(C, c₂^* K) ──u──▶ RΓ_c(C, c₁^! K)
              ≅ RΓ_c(X, Rc₁_! c₁^! K) ──ε──▶ RΓ_c(X, K)
 ```
-
 of the unit of `c₂^* ⊣ Rc₂_*`, the proper identification `Rc₂_* = Rc₂_!` and the counit of
 `Rc₁_! ⊣ c₁^!`, acting on compactly supported cohomology `RΓ_c(X, K) = Ra_{X!} K`
 (blueprint: `sk-d-operator`). -/
 noncomputable def globalOperator (G : GeometricOperations A s)
-    (c : Correspondence aX aX K K) [HasCompactification aX] [IsProper c.snd]
-    [HasCompactification c.str] :
+    (c : Correspondence aX aX K K) (hK : G.ctf X K) [IsGeometric aX] [IsGeometric c.str]
+    [HasCompactification aX] [IsProper c.snd] [HasCompactification c.str] :
     (rightDerivedLowerShriek A aX).obj K ⟶ (rightDerivedLowerShriek A aX).obj K :=
-  globalOperatorUnit G c ≫ (rightDerivedLowerShriek A c.str).map c.coeff ≫
-    globalOperatorCounit G c
+  globalOperatorUnit G c hK ≫ (rightDerivedLowerShriek A c.str).map c.coeff ≫
+    globalOperatorCounit G c hK
 
 end Correspondence
 
@@ -457,60 +459,75 @@ abbrev borelMooreSections {T : Scheme.{u}} (a : T ⟶ s) :=
   𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology T) A)) ⟶ G.dualizing a
 
 /-- The pushforward of a Borel-Moore section `α : A_T ⟶ ω_T` along a proper `h : T ⟶ T'`
-over `s`: the composite
-
+of geometric schemes over `s`: the composite
 ```
   A_{T'} ──η──▶ Rh_* Lh^* A_{T'} ≅ Rh_* A_T ──α──▶ Rh_* ω_T ≅ Rh_! ω_T ≅ Rh_! h^! ω_{T'}
          ──ε──▶ ω_{T'}
 ```
-
 of the unit of `h^* ⊣ Rh_*`, the proper identification `Rh_* = Rh_!`, the dualizing
 composition `h^! ω_{T'} ≃ ω_T` and the counit of `Rh_! ⊣ h^!`
 (blueprint: `sk-d-integral`). -/
 noncomputable def borelMoorePushforward {T T' : Scheme.{u}} (h : T ⟶ T') (a : T' ⟶ s)
-    [HasCompactification h] [IsProper h] [(R(h)_![A]).IsLeftAdjoint]
+    [IsGeometric a] [IsGeometric (h ≫ a)] [HasCompactification h] [IsProper h]
     (α : G.borelMooreSections (h ≫ a)) :
     G.borelMooreSections a :=
   (derivedUpperStarLowerStarAdjunction A h).unit.app (𝟙_ _) ≫
     ((lowerStar A h).rightDerivedFunctor).map ((G.upperStarUnit h).hom ≫ α) ≫
-    (G.properComparison h).inv.app _ ≫
+    ((G.properComparison h (.mk (aY := a) rfl)).inv.app
+      ⟨G.dualizing (h ≫ a), G.ctf_dualizing (h ≫ a)⟩).hom ≫
     (rightDerivedLowerShriek A h).map (G.dualizingComp h a).inv ≫
-    (rightDerivedUpperShriekAdjunction A h).counit.app (G.dualizing a)
+    G.exceptionalCounit h (.mk (aY := a) rfl) (G.dualizing a) (G.ctf_dualizing a)
 
 /-- Pushing a Borel-Moore section forward along the identity gives the section back, up to
 the transport `ω_{𝟙 ≫ a} = ω_a`. -/
-lemma borelMoorePushforward_id {T : Scheme.{u}} (a : T ⟶ s)
+lemma borelMoorePushforward_id {T : Scheme.{u}} (a : T ⟶ s) [IsGeometric a]
     (α : G.borelMooreSections (𝟙 T ≫ a)) :
-    haveI := G.isLeftAdjoint_rightDerivedLowerShriek_id T
     G.borelMoorePushforward (𝟙 T) a α = α ≫ (G.dualizingCongr (Category.id_comp a)).hom := by
-  have := G.isLeftAdjoint_rightDerivedLowerShriek_id T
   set c := (conjugateEquiv (derivedUpperStarLowerStarAdjunction A (𝟙 T)) Adjunction.id)
     (leftDerivedUpperStarId A T).inv
   have hc := c.naturality
   have h₁ := unit_conjugateEquiv (derivedUpperStarLowerStarAdjunction A (𝟙 T)) Adjunction.id
     (leftDerivedUpperStarId A T).inv (𝟙_ _)
-  have h₂ := conjugateEquiv_counit Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 T))
-    (G.lowerShriekId T).hom (G.dualizing a)
-  have h₃ : (((conjugateIsoEquiv Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 T)))
-      (G.lowerShriekId T)).symm.app (G.dualizing a)).inv =
-      ((conjugateEquiv Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 T)))
-        (G.lowerShriekId T).hom).app (G.dualizing a) := rfl
-  have h₄ := (G.lowerShriekId T).inv.naturality
-    (eqToHom (congrArg G.dualizing (Category.id_comp a)))
-  dsimp at hc h₁ h₂
-  dsimp only [Functor.id_obj, Functor.id_map] at h₄
-  simp only [borelMoorePushforward, G.properComparison_id, G.dualizingComp_id,
-    upperStarUnit_hom_id, Iso.trans_inv, NatTrans.comp_app, conjugateIsoEquiv_apply_inv,
-    eqToIso.inv, Functor.map_comp, Category.assoc, dualizingCongr]
+  have h₂ := congrArg (·.hom) (conjugateEquiv_counit Adjunction.id
+    (G.exceptionalAdjunction (𝟙 T) (.id a)) (G.lowerShriekId T (.id a)).hom
+    ⟨G.dualizing a, G.ctf_dualizing a⟩)
+  have h₄ := congrArg (·.hom)
+    ((G.lowerShriekId T (.id a)).inv.naturality (X := ⟨G.dualizing (𝟙 T ≫ a), G.ctf_dualizing _⟩)
+      (Y := ⟨G.dualizing a, G.ctf_dualizing a⟩)
+      (ObjectProperty.homMk (eqToHom (congrArg G.dualizing (Category.id_comp a)))))
+  dsimp at hc h₁ h₂ h₄
+  have h₂' : (rightDerivedLowerShriek A (𝟙 T)).map
+      ((conjugateEquiv Adjunction.id (G.exceptionalAdjunction (𝟙 T) (.id a))
+        (G.lowerShriekId T (.id a)).hom).app ⟨G.dualizing a, G.ctf_dualizing a⟩).hom ≫
+      ((G.exceptionalAdjunction (𝟙 T) (.id a)).counit.app ⟨G.dualizing a, G.ctf_dualizing a⟩).hom =
+      ((G.lowerShriekId T (.id a)).hom.app ⟨G.dualizing a, G.ctf_dualizing a⟩).hom := by
+    rw [← Category.comp_id ((G.lowerShriekId T (.id a)).hom.app _).hom]
+    exact h₂
+  have h₄' : eqToHom (congrArg G.dualizing (Category.id_comp a)) ≫
+      ((G.lowerShriekId T (.id a)).inv.app ⟨G.dualizing a, G.ctf_dualizing a⟩).hom =
+      ((G.lowerShriekId T (.id a)).inv.app ⟨G.dualizing (𝟙 T ≫ a), G.ctf_dualizing _⟩).hom ≫
+        (rightDerivedLowerShriek A (𝟙 T)).map
+          (eqToHom (congrArg G.dualizing (Category.id_comp a))) :=
+    h₄
+  simp only [borelMoorePushforward, G.properComparison_id_inv_app_hom, G.dualizingComp_id,
+    upperStarUnit_hom_id, Iso.trans_inv, eqToIso.inv, Functor.map_comp, Category.assoc,
+    dualizingCongr,
+    GeometricCoefficients.exceptionalCounit,
+    conjugateIsoEquiv_apply_inv, Functor.mapIso_inv, Iso.symm_inv,
+    conjugateIsoEquiv_apply_hom, ObjectProperty.ι_map, Iso.app_inv]
   rw [reassoc_of% (hc α), reassoc_of% (hc ((leftDerivedUpperStarId A T).hom.app (𝟙_ _))),
-    reassoc_of% h₁, h₃, h₂, ← reassoc_of% h₄]
+    reassoc_of% h₁]
+  simp only [Adjunction.id_unit, NatTrans.id_app, Functor.id_obj, Category.id_comp,
+    Iso.inv_hom_id_app_assoc]
+  rw [← reassoc_of% h₄', h₂',
+    ← ObjectProperty.FullSubcategory.comp_hom, Iso.inv_hom_id_app]
   simp
 
 /-- The integral `∫_T α ∈ A` of a Borel-Moore section over a geometric scheme `T` that is
 proper over the base: the pushforward of `α` along `a_T`, read in `End (A_s) = A` through
 `GeometricOperations.dualizingBase` (part of blueprint `sk-d-integral`). -/
-noncomputable def integral {T : Scheme.{u}} (a : T ⟶ s) [HasCompactification a]
-    [IsProper a] [(R(a)_![A]).IsLeftAdjoint] (α : G.borelMooreSections a) :
+noncomputable def integral {T : Scheme.{u}} (a : T ⟶ s) [IsGeometric a] [HasCompactification a]
+    [IsProper a] (α : G.borelMooreSections a) :
     End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))) :=
   G.borelMoorePushforward a (𝟙 s)
       (α ≫ (G.dualizingCongr (Category.comp_id a).symm).hom) ≫

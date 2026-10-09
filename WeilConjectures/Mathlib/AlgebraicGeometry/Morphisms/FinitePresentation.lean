@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 
@@ -15,6 +16,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.RingHomPropert
 We prove the cancellation property of morphisms locally of finite presentation: if `f ≫ g` is
 locally of finite presentation and `g` is locally of finite type, then so is `f`
 (`AlgebraicGeometry.locallyOfFinitePresentation_of_comp`, Stacks Tag 02FV).
+Local finite presentation also descends along flat surjections of finite presentation of the
+source (`AlgebraicGeometry.LocallyOfFinitePresentation.of_comp_of_flat_of_surjective`, Stacks
+Tag 02KL).
 
 Applying this to `Δ ≫ pullback.fst f f = 𝟙 X` shows that the diagonal of a morphism locally of
 finite presentation is again locally of finite presentation
@@ -49,6 +53,15 @@ theorem locallyOfFinitePresentation_of_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (
     LocallyOfFinitePresentation f :=
   HasRingHomProperty.of_comp' (P' := @LocallyOfFiniteType)
     (fun _ _ hf hfg ↦ hfg.of_comp_finiteType _ hf) ‹_› ‹_›
+
+/-- **Local finite presentation descends along flat surjections of finite presentation.** Let
+`u : X' ⟶ X` be surjective, flat and locally of finite presentation, and let `f : X ⟶ S`. If
+`u ≫ f` is locally of finite presentation, then so is `f`. -/
+@[stacks 02KL]
+theorem LocallyOfFinitePresentation.of_comp_of_flat_of_surjective {X' X S : Scheme.{u}}
+    (u : X' ⟶ X) (f : X ⟶ S) [Flat u] [Surjective u] [LocallyOfFinitePresentation u]
+    [LocallyOfFinitePresentation (u ≫ f)] : LocallyOfFinitePresentation f :=
+  sorry
 
 section Diagonal
 

@@ -50,9 +50,9 @@ variable {l : ℕ} [Fact l.Prime] {K : Type u} [Field K] [IsAlgClosed K]
 direct sum of copies of `ℚ̄_ℓ`: a member `f : V ⟶ Spec K` of a trivialising pro-étale cover
 with `V` nonempty has a section `σ`, and `F ≅ σ^* f^* F ≅ σ^* ℚ̄_ℓ,Vⁿ ≅ ℚ̄_ℓⁿ`. -/
 theorem IsAdicLisseSheaf.exists_iso_biproduct_of_isAlgClosed
-    {F : Sheaf (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l)}
+    {F : AdicSheaf l (Spec (.of K))}
     (hF : IsAdicLisseSheaf F) :
-    ∃ n : ℕ, Nonempty (F ≅ ⨁ fun _ : Fin n ↦ adicConstantSheaf l (Spec (.of K))) := by
+    ∃ n : ℕ, Nonempty (F ≅ ⨁ fun _ : Fin n ↦ AdicSheaf.unit l (Spec (.of K))) := by
   obtain ⟨R, hR, h⟩ := hF
   obtain ⟨ι, V, f, rfl⟩ := R.exists_eq_ofArrows
   have hR' : _ ∈ Scheme.precoverage (@WeaklyEtale : MorphismProperty Scheme.{u}) _ :=
@@ -62,27 +62,27 @@ theorem IsAdicLisseSheaf.exists_iso_biproduct_of_isAlgClosed
   have : WeaklyEtale (f i) := hR'.2 i
   obtain ⟨σ, hσ⟩ := exists_comp_eq_id_of_weaklyEtale (f i) v
   obtain ⟨n, ⟨e⟩⟩ := h (f i) (.mk i)
-  obtain ⟨e'⟩ := nonempty_upperStar_iso_biproduct σ ⟨upperStarAdicConstantSheafIso l σ⟩ e
-  exact ⟨n, ⟨((upperStarId _ _).app F).symm ≪≫ (upperStarCongr _ hσ.symm).app F ≪≫
-    (upperStarComp _ _ _).app F ≪≫ e'⟩⟩
+  obtain ⟨e'⟩ := nonempty_upperStar_iso_biproduct σ ⟨adicUpperStarUnitIso l σ⟩ e
+  exact ⟨n, ⟨((adicUpperStarId l _).app F).symm ≪≫ (adicUpperStarCongr l hσ.symm).app F ≪≫
+    (adicUpperStarComp l _ _).app F ≪≫ e'⟩⟩
 
 omit [IsAlgClosed K] in
 /-- A constructible `ℓ`-adic sheaf on the spectrum of a field is lisse: the stratum through the
 point is an immersion into the point, hence an isomorphism. -/
 theorem IsAdicConstructibleSheaf.isAdicLisseSheaf_of_isField
-    {F : Sheaf (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l)}
+    {F : AdicSheaf l (Spec (.of K))}
     (hF : IsAdicConstructibleSheaf F) : IsAdicLisseSheaf F := by
   obtain ⟨W, j, hj, ⟨w, -⟩, hW⟩ := hF (IsLocalRing.closedPoint K)
-  obtain ⟨ι, -, Z, i, hi, hcover, h⟩ := hW
+  obtain ⟨ι, -, Z, i, hi, -, hcover, h⟩ := hW
   obtain ⟨k, ⟨z, -⟩, -⟩ := hcover w
   have : Nonempty (Z k) := ⟨z⟩
   have := hi k
   have : IsIso (i k ≫ j) := IsImmersion.isIso_of_nonempty _
   have e : (inv (i k ≫ j) ≫ i k) ≫ j = 𝟙 _ := by simp
   exact ((h k).upperStar (inv (i k ≫ j))).of_iso
-    (((upperStarComp _ (inv (i k ≫ j)) (i k)).app _).symm ≪≫
-      ((upperStarComp _ (inv (i k ≫ j) ≫ i k) j).app F).symm ≪≫
-      (upperStarCongr _ e).app F ≪≫ (upperStarId _ _).app F)
+    (((adicUpperStarComp l (inv (i k ≫ j)) (i k)).app _).symm ≪≫
+      ((adicUpperStarComp l (inv (i k ≫ j) ≫ i k) j).app F).symm ≪≫
+      (adicUpperStarCongr l e).app F ≪≫ (adicUpperStarId l _).app F)
 
 /-- The global sections of the constant `ℓ`-adic sheaf on the spectrum of a field are
 finite-dimensional: they are the continuous functions on the one-point space `Spec K`. -/
@@ -111,17 +111,20 @@ lemma finiteDimensional_globalSections_adicConstantSheaf (K : Type u) [Field K] 
 /-- The global sections of a constructible `ℓ`-adic sheaf on the spectrum of an algebraically
 closed field are finite-dimensional: the sheaf is a finite direct sum of copies of `ℚ̄_ℓ`. -/
 theorem IsAdicConstructibleSheaf.finiteDimensional_globalSections
-    {F : Sheaf (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l)}
+    {F : AdicSheaf l (Spec (.of K))}
     (hF : IsAdicConstructibleSheaf F) :
     FiniteDimensional (PadicAlgCl l) ((WeilCoefficients.toModuleCat l).obj
-      ((Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l)).obj F)) := by
+      ((Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l)).obj F.X)) := by
   obtain ⟨n, ⟨e⟩⟩ := hF.isAdicLisseSheaf_of_isField.exists_iso_biproduct_of_isAlgClosed
   have : (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l)).Additive :=
     Functor.additive_of_preserves_binary_products _
   let G := Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l) ⋙
     WeilCoefficients.toModuleCat l
-  let e' : G.obj F ≅ ModuleCat.of _ (Fin n → G.obj (adicConstantSheaf l (Spec (.of K)))) :=
-    G.mapIso e ≪≫ G.mapBiproduct _ ≪≫ ModuleCat.biproductIsoPi _
+  let e' : G.obj F.X ≅ ModuleCat.of _ (Fin n → G.obj (adicConstantSheaf l (Spec (.of K)))) :=
+    G.mapIso ((AdicSheaf.forget _).mapIso e ≪≫
+      (AdicSheaf.forget _).mapBiproduct (fun _ : Fin n ↦ AdicSheaf.unit l (Spec (.of K)))) ≪≫
+      G.mapBiproduct (fun _ : Fin n ↦ adicConstantSheaf l (Spec (.of K))) ≪≫
+      ModuleCat.biproductIsoPi (fun _ : Fin n ↦ G.obj (adicConstantSheaf l (Spec (.of K))))
   have : FiniteDimensional (PadicAlgCl l) (G.obj (adicConstantSheaf l (Spec (.of K)))) :=
     finiteDimensional_globalSections_adicConstantSheaf K
   exact LinearEquiv.finiteDimensional e'.toLinearEquiv.symm

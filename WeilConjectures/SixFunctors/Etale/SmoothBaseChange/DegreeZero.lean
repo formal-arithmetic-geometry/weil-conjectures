@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallyBijective
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
@@ -252,7 +252,7 @@ degree-zero base-change map `p⁻¹ g_* F ⟶ h_* e⁻¹ F` of
 
 Every étale `X`-scheme `W₀` is covered, by `AlgebraicGeometry.exists_etaleCover_factorization`
 applied to `W₀ ⟶ S`, by charts `W` for which `W ⟶ S` factors as `W ⟶ V ⟶ S` with `V ⟶ S` étale
-and `W ⟶ V` flat, of finite presentation, affine, with geometrically connected fibres. On such
+and `W ⟶ V` flat, of finite presentation, with geometrically connected fibres. On such
 a chart both sides have sections `F(V ×_S T)`, by
 `AlgebraicGeometry.Etale.isIso_upperStarSectionsMap` applied to `W ⟶ V` and to its base change
 `W ×_X Y ⟶ V ×_S T`, compatibly with the base-change map by
@@ -267,7 +267,7 @@ theorem Etale.isIso_baseChangeMap_app_of_flat [Flat p] [LocallyOfFinitePresentat
   refine Sheaf.isIso_of_isIso_app_of_generate_mem _ (forget (ModuleCat.{u + 1} Λ)) _ fun W₀ ↦ ?_
   have : Etale W₀.hom := W₀.prop
   have : GeometricallyReduced (W₀.hom ≫ p) := GeometricallyReduced.comp_of_etale _ _
-  obtain ⟨ι, U, a, V, q, r, ha, hcov, hr, hq₁, -, hq₃, hq₄, -, hfac⟩ :=
+  obtain ⟨ι, U, a, V, q, r, ha, hcov, hr, hq₁, -, hq₃, -, hq₄, -, hfac⟩ :=
     exists_etaleCover_factorization (W₀.hom ≫ p)
   let W (i : ι) : X.Etale := Scheme.Etale.mk (a i ≫ W₀.hom)
   let ι' (i : ι) : W i ⟶ W₀ := MorphismProperty.Over.homMk (a i)

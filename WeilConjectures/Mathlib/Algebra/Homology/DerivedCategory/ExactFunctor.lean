@@ -29,6 +29,9 @@ For exact functors between abelian categories, the induced functor
 - `CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso`: the commutation
   `H^n(-) ⋙ F ≅ F.mapDerivedCategory ⋙ H^n(-)` with the homology functors, with the
   bounded below variant `CategoryTheory.Functor.mapDerivedCategoryPlusHomologyFunctorIso`.
+- `CategoryTheory.Functor.mapDerivedCategoryTruncLEIso`,
+  `CategoryTheory.Functor.mapDerivedCategoryTruncGEIso`: `F.mapDerivedCategory` commutes with the
+  truncations `τ^{≤ n}` and `τ^{≥ n}` of the canonical t-structures.
 - `CategoryTheory.Functor.isZero_mapDerivedCategory_obj`: `F.mapDerivedCategory` kills every
   object whose homology objects are killed by `F`.
 - `CategoryTheory.Functor.jointlyReflectIsomorphisms_mapDerivedCategory` and
@@ -894,5 +897,157 @@ instance isEquivalence_mapDerivedCategory (F : C ⥤ D) [F.IsEquivalence] [F.Add
     F.mapDerivedCategory.IsEquivalence :=
   have : F.asEquivalence.functor.Additive := ‹F.Additive›
   inferInstanceAs F.asEquivalence.mapDerivedCategory.functor.IsEquivalence
+
+end CategoryTheory.Functor
+
+namespace CategoryTheory.Functor
+
+open DerivedCategory
+
+variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+  [HasDerivedCategory C] [HasDerivedCategory D]
+  (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+
+attribute [local instance] isLE_mapDerivedCategory_obj
+
+/-- An isomorphism in degree `m` of homology between two objects whose `m`-th homology
+vanishes. -/
+private lemma isIso_homologyMap_of_isZero {X Y : DerivedCategory D} (f : X ⟶ Y) (m : ℤ)
+    (hX : IsZero ((homologyFunctor D m).obj X)) (hY : IsZero ((homologyFunctor D m).obj Y)) :
+    IsIso ((homologyFunctor D m).map f) :=
+  ⟨⟨0, hX.eq_of_src _ _, hY.eq_of_src _ _⟩⟩
+
+/-- An exact functor commutes with homology on morphisms: `Hᵐ(D(F) f)` is an isomorphism if
+`Hᵐ f` is. -/
+private lemma isIso_homologyMap_mapDerivedCategory {X Y : DerivedCategory C} (f : X ⟶ Y)
+    (m : ℤ) [IsIso ((homologyFunctor C m).map f)] :
+    IsIso ((homologyFunctor D m).map (F.mapDerivedCategory.map f)) := by
+  have : IsIso ((homologyFunctor C m ⋙ F).map f) := by rw [Functor.comp_map]; infer_instance
+  exact (NatIso.isIso_map_iff (F.mapDerivedCategoryHomologyFunctorIso m) f).1 this
+
+/-- An exact functor `F` commutes with the truncation `τ^{≤ n}` of the canonical t-structure:
+`D(F)(τ^{≤ n} X) ⟶ τ^{≤ n} D(F)(X)`, the factorisation of `D(F)` of the truncation map, is an
+isomorphism, both sides having the homology of `D(F)(X)` in degrees `≤ n` and none above. -/
+noncomputable def mapDerivedCategoryTruncLEIso (n : ℤ) :
+    TStructure.t.truncLE n ⋙ F.mapDerivedCategory ≅
+      F.mapDerivedCategory ⋙ TStructure.t.truncLE n :=
+  NatIso.ofComponents
+    (fun X ↦
+      have : IsIso (TStructure.t.liftTruncLE
+          (F.mapDerivedCategory.map ((TStructure.t.truncLEι n).app X)) n) := by
+        rw [isIso_iff]
+        intro m
+        by_cases hm : m ≤ n
+        · have h₁ : ∀ Z : DerivedCategory C,
+              IsIso ((homologyFunctor C m).map ((TStructure.t.truncLEι n).app Z)) := fun Z ↦
+            have : ((TStructure.t.triangleLEGT n).obj Z).obj₃.IsGE (n + 1) :=
+              (inferInstance : TStructure.t.IsGE ((TStructure.t.truncGT n).obj Z) (n + 1))
+            isIso_homologyMap_mor₁ _ (TStructure.t.triangleLEGT_distinguished n Z) (m - 1) m
+              (by lia) (isZero_of_isGE _ (n + 1) _ (by lia)) (isZero_of_isGE _ (n + 1) _ (by lia))
+          have h₂ : ∀ Z : DerivedCategory D,
+              IsIso ((homologyFunctor D m).map ((TStructure.t.truncLEι n).app Z)) := fun Z ↦
+            have : ((TStructure.t.triangleLEGT n).obj Z).obj₃.IsGE (n + 1) :=
+              (inferInstance : TStructure.t.IsGE ((TStructure.t.truncGT n).obj Z) (n + 1))
+            isIso_homologyMap_mor₁ _ (TStructure.t.triangleLEGT_distinguished n Z) (m - 1) m
+              (by lia) (isZero_of_isGE _ (n + 1) _ (by lia)) (isZero_of_isGE _ (n + 1) _ (by lia))
+          have := F.isIso_homologyMap_mapDerivedCategory ((TStructure.t.truncLEι n).app X) m
+          have := h₂ (F.mapDerivedCategory.obj X)
+          have : IsIso ((homologyFunctor D m).map (TStructure.t.liftTruncLE
+              (F.mapDerivedCategory.map ((TStructure.t.truncLEι n).app X)) n) ≫
+              (homologyFunctor D m).map
+                ((TStructure.t.truncLEι n).app (F.mapDerivedCategory.obj X))) := by
+            have hc : TStructure.t.liftTruncLE
+                (F.mapDerivedCategory.map ((TStructure.t.truncLEι n).app X)) n ≫
+                  (TStructure.t.truncLEι n).app (F.mapDerivedCategory.obj X) =
+                F.mapDerivedCategory.map ((TStructure.t.truncLEι n).app X) :=
+              TStructure.t.liftTruncLE_ι _ _
+            rw [← Functor.map_comp, hc]
+            infer_instance
+          exact IsIso.of_isIso_comp_right _
+            ((homologyFunctor D m).map ((TStructure.t.truncLEι n).app (F.mapDerivedCategory.obj X)))
+        · exact isIso_homologyMap_of_isZero _ m (isZero_of_isLE _ n _ (by lia))
+            (isZero_of_isLE _ n _ (by lia))
+      asIso (TStructure.t.liftTruncLE
+        (F.mapDerivedCategory.map ((TStructure.t.truncLEι n).app X)) n))
+    (fun {X Y} f ↦ by
+      refine TStructure.t.to_truncLE_obj_ext (Y := F.mapDerivedCategory.obj
+        ((TStructure.t.truncLE n).obj X)) ?_
+      have hX : TStructure.t.liftTruncLE
+          (F.mapDerivedCategory.map ((TStructure.t.truncLEι n).app X)) n ≫
+            (TStructure.t.truncLEι n).app (F.mapDerivedCategory.obj X) =
+          F.mapDerivedCategory.map ((TStructure.t.truncLEι n).app X) :=
+        TStructure.t.liftTruncLE_ι _ _
+      have hY : TStructure.t.liftTruncLE
+          (F.mapDerivedCategory.map ((TStructure.t.truncLEι n).app Y)) n ≫
+            (TStructure.t.truncLEι n).app (F.mapDerivedCategory.obj Y) =
+          F.mapDerivedCategory.map ((TStructure.t.truncLEι n).app Y) :=
+        TStructure.t.liftTruncLE_ι _ _
+      have nat₁ := (TStructure.t.truncLEι n).naturality f
+      have nat₂ := (TStructure.t.truncLEι n).naturality (F.mapDerivedCategory.map f)
+      simp only [Functor.id_map] at nat₁ nat₂
+      simp only [Functor.comp_obj, Functor.comp_map, asIso_hom, Category.assoc]
+      rw [hY, nat₂, reassoc_of% hX, ← Functor.map_comp, ← Functor.map_comp, nat₁])
+
+attribute [local instance] isGE_mapDerivedCategory_obj
+
+/-- An exact functor `F` commutes with the truncation `τ^{≥ n}` of the canonical t-structure:
+`τ^{≥ n} D(F)(X) ⟶ D(F)(τ^{≥ n} X)`, the factorisation of `D(F)` of the truncation map, is an
+isomorphism, both sides having the homology of `D(F)(X)` in degrees `≥ n` and none below. -/
+noncomputable def mapDerivedCategoryTruncGEIso (n : ℤ) :
+    TStructure.t.truncGE n ⋙ F.mapDerivedCategory ≅
+      F.mapDerivedCategory ⋙ TStructure.t.truncGE n :=
+  (NatIso.ofComponents
+    (fun X ↦
+      have : IsIso (TStructure.t.descTruncGE
+          (F.mapDerivedCategory.map ((TStructure.t.truncGEπ n).app X)) n) := by
+        rw [isIso_iff]
+        intro m
+        by_cases hm : n ≤ m
+        · have h₂ : ∀ Z : DerivedCategory D,
+              IsIso ((homologyFunctor D m).map ((TStructure.t.truncGEπ n).app Z)) := fun Z ↦
+            isIso_homologyMap_mor₂ _ (TStructure.t.triangleLTGE_distinguished n Z) m (m + 1)
+              rfl (isZero_of_isLE _ (n - 1) _ (by lia)) (isZero_of_isLE _ (n - 1) _ (by lia))
+          have h₁ : IsIso ((homologyFunctor C m).map ((TStructure.t.truncGEπ n).app X)) :=
+            isIso_homologyMap_mor₂ _ (TStructure.t.triangleLTGE_distinguished n X) m (m + 1)
+              rfl (isZero_of_isLE _ (n - 1) _ (by lia)) (isZero_of_isLE _ (n - 1) _ (by lia))
+          have := F.isIso_homologyMap_mapDerivedCategory ((TStructure.t.truncGEπ n).app X) m
+          have := h₂ (F.mapDerivedCategory.obj X)
+          have hc : (TStructure.t.truncGEπ n).app (F.mapDerivedCategory.obj X) ≫
+              TStructure.t.descTruncGE
+                (F.mapDerivedCategory.map ((TStructure.t.truncGEπ n).app X)) n =
+              F.mapDerivedCategory.map ((TStructure.t.truncGEπ n).app X) :=
+            TStructure.t.π_descTruncGE _ _
+          have : IsIso ((homologyFunctor D m).map
+              ((TStructure.t.truncGEπ n).app (F.mapDerivedCategory.obj X)) ≫
+              (homologyFunctor D m).map (TStructure.t.descTruncGE
+                (F.mapDerivedCategory.map ((TStructure.t.truncGEπ n).app X)) n)) := by
+            rw [← Functor.map_comp, hc]
+            infer_instance
+          exact IsIso.of_isIso_comp_left
+            ((homologyFunctor D m).map ((TStructure.t.truncGEπ n).app (F.mapDerivedCategory.obj X)))
+            _
+        · exact isIso_homologyMap_of_isZero _ m (isZero_of_isGE _ n _ (by lia))
+            (isZero_of_isGE _ n _ (by lia))
+      asIso (TStructure.t.descTruncGE
+        (F.mapDerivedCategory.map ((TStructure.t.truncGEπ n).app X)) n))
+    (fun {X Y} f ↦ by
+      refine TStructure.t.from_truncGE_obj_ext (Y := F.mapDerivedCategory.obj
+        ((TStructure.t.truncGE n).obj Y)) ?_
+      have hX : (TStructure.t.truncGEπ n).app (F.mapDerivedCategory.obj X) ≫
+          TStructure.t.descTruncGE
+            (F.mapDerivedCategory.map ((TStructure.t.truncGEπ n).app X)) n =
+          F.mapDerivedCategory.map ((TStructure.t.truncGEπ n).app X) :=
+        TStructure.t.π_descTruncGE _ _
+      have hY : (TStructure.t.truncGEπ n).app (F.mapDerivedCategory.obj Y) ≫
+          TStructure.t.descTruncGE
+            (F.mapDerivedCategory.map ((TStructure.t.truncGEπ n).app Y)) n =
+          F.mapDerivedCategory.map ((TStructure.t.truncGEπ n).app Y) :=
+        TStructure.t.π_descTruncGE _ _
+      have nat₁ := (TStructure.t.truncGEπ n).naturality f
+      have nat₂ := (TStructure.t.truncGEπ n).naturality (F.mapDerivedCategory.map f)
+      simp only [Functor.id_map] at nat₁ nat₂
+      simp only [Functor.comp_obj, Functor.comp_map, asIso_hom]
+      rw [reassoc_of% hX, ← reassoc_of% nat₂, hY, ← Functor.map_comp, ← Functor.map_comp,
+        nat₁])).symm
 
 end CategoryTheory.Functor

@@ -10,25 +10,29 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 
 /-!
 # The Jacobian of a curve
 
 A *Jacobian* of a smooth projective geometrically integral curve `C` over `K` is an abelian
-variety `J` over `K` of dimension the genus of `C`, together with an isomorphism between the
-degree-zero relative Picard functor `Pic⁰_{C/K}` and the functor of points of `J`.
+variety `J` over `K` of dimension the genus of `C`, together with an isomorphism of group-valued
+functors between the degree-zero relative Picard functor `Pic⁰_{C/K}` and the functor of points
+of `J`.
 
 ## Implementation notes
 
-The relative Picard functor belongs to the `sec-picard-framework` block of the blueprint and is
-not available here, so it enters `AlgebraicGeometry.IsJacobian` as the parameter
-`P : (Over (Spec (.of K)))ᵒᵖ ⥤ GrpCat.{u}`. **Nothing in the definition ties `P` to `C`**: the
-class says that `J` is an abelian variety of dimension `genus C` representing `P`, and any `P`
-whatever may be supplied. It cannot yet be tied to `C` here, because the only degree-zero
-Picard group available, `AlgebraicGeometry.Scheme.Hom.picZero`, lives in `Type (u + 1)` (see
-`WeilConjectures.AlgebraicGeometry.PicardFunctor`) while `GrpCat.{u}`-valued functors take values
-in `Type u`. `IsJacobian` should be restated against the relative Picard functor once
-`sec-picard-framework` lands.
+The degree-zero relative Picard functor is `AlgebraicGeometry.picardFunctorDegree f 0`, the fppf
+sheafification of the presheaf of classes of fibrewise degree zero. It takes values in
+`Type (u + 1)`, so the functor of points of `J` is lifted to that universe by
+`CategoryTheory.uliftFunctor`. Its group law is induced by the tensor product of invertible
+modules, and that the isomorphism is one of group-valued functors is the predicate
+`AlgebraicGeometry.IsPicardZeroMul`: the map from classes of degree zero to points of `J` turns
+the tensor product into the group law of `J`.
+
+The existence of a Jacobian over a separably closed field is
+`AlgebraicGeometry.exists_jacobian`, and over a general field
+`AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree`.
 
 ## Main definitions
 
@@ -52,19 +56,22 @@ Let `C` be a smooth projective geometrically integral curve over a field `K`, of
 `g` together with an isomorphism of group-valued functors `φ : Pic⁰_{C/K} ≅ h_J` on `(Sch/K)`;
 that is, `J` represents the degree-zero relative Picard functor.
 
-The relative Picard functor `Pic⁰_{C/K}` enters as the parameter
-`P : (Over (Spec (.of K)))ᵒᵖ ⥤ GrpCat`, which the definition does not relate to `C`; see the
-implementation notes of this file. The functor of points of `J` as a group-valued functor is
-`CategoryTheory.yonedaGrpObj J`.
+The functor `Pic⁰_{C/K}` is `AlgebraicGeometry.picardFunctorDegree f 0`, with values in
+`Type (u + 1)`, and `h_J` is the functor of points `yoneda.obj J`, lifted to `Type (u + 1)`. The
+isomorphism respects the group laws: for every `K`-scheme `T`, the map sending a class of
+fibrewise degree zero in `Pic (C_T)` to the point of `J` that `φ` attaches to it turns the tensor
+product of invertible modules into the group law of `J` (`AlgebraicGeometry.IsPicardZeroMul`).
 
-Representability is stated as `Nonempty (P ≅ yonedaGrpObj J)` rather than as a chosen
-isomorphism, so that `IsJacobian` is a `Prop`; the data of `φ` is recovered by choice. -/
+Representability is stated as the existence of `φ` rather than as a chosen isomorphism, so that
+`IsJacobian` is a `Prop`; the data of `φ` is recovered by choice. -/
 class IsJacobian (f : C ⟶ Spec (.of K)) [IsCurve f] [Smooth f] [IsProper f]
-    [GeometricallyIntegral f] (P : (Over (Spec (.of K)))ᵒᵖ ⥤ GrpCat.{u})
-    (J : Over (Spec (.of K))) [GrpObj J] : Prop extends IsAbelianVariety J where
+    [GeometricallyIntegral f] (J : Over (Spec (.of K))) [GrpObj J] : Prop
+    extends IsAbelianVariety J where
   /-- The dimension of a Jacobian of `C` is the genus of `C`. -/
   dim_eq : IsAbelianVariety.dim J = f.genus
-  /-- A Jacobian of `C` represents the degree-zero relative Picard functor of `C`. -/
-  represents : Nonempty (P ≅ CategoryTheory.yonedaGrpObj J)
+  /-- A Jacobian of `C` represents the degree-zero relative Picard functor of `C`, by an
+  isomorphism of group-valued functors. -/
+  represents : ∃ φ : (picardFunctorDegree f 0).obj ≅ yoneda.obj J ⋙ uliftFunctor.{u + 1},
+    IsPicardZeroMul f ((Functor.RepresentableBy.equivUliftYonedaIso _ J).symm φ.symm)
 
 end AlgebraicGeometry

@@ -28,7 +28,8 @@ blueprint `lemma:nagata-dense-affine-cover-exists`):
 We also record `AlgebraicGeometry.sigmaSpec_comp_Spec_map_algebraMap`: under
 `∐_ι Spec k ≅ Spec (ι → k)` the fold map to `Spec k` is `Spec` of the diagonal, and
 `AlgebraicGeometry.Scheme.isEmpty_of_subsingleton_Γ`: a scheme whose ring of global sections is
-zero is empty.
+zero is empty, and `AlgebraicGeometry.exists_comp_sigmaι_eq_of_subsingleton`: a morphism from a
+one-point scheme into a coproduct factors through one of the summands.
 -/
 
 @[expose] public section
@@ -202,5 +203,31 @@ lemma Scheme.isEmpty_of_subsingleton_Γ (h : Subsingleton Γ(X, ⊤)) : IsEmpty 
     have := congrArg (X.presheaf.germ ⊤ p trivial).hom (Subsingleton.elim (0 : Γ(X, ⊤)) 1)
     rw [map_zero, map_one] at this
     exact zero_ne_one this⟩
+
+open CategoryTheory Limits in
+/-- A morphism from a scheme with exactly one point into a coproduct of schemes factors through
+one of the summands. -/
+lemma exists_comp_sigmaι_eq_of_subsingleton {σ : Type*} [Small.{u} σ] {g : σ → Scheme.{u}}
+    [Subsingleton X] [Nonempty X] (f : X ⟶ ∐ g) :
+    ∃ (i : σ) (f' : X ⟶ g i), f' ≫ Sigma.ι g i = f := by
+  obtain ⟨z⟩ := ‹Nonempty X›
+  obtain ⟨i, y, hy⟩ := (sigmaOpenCover g).exists_eq (f z)
+  have hy' : Sigma.ι g i y = f z := hy
+  refine ⟨i, IsOpenImmersion.lift (Sigma.ι g i) f ?_, IsOpenImmersion.lift_fac _ _ _⟩
+  rintro _ ⟨w, rfl⟩
+  exact ⟨y, by rw [hy', Subsingleton.elim w z]⟩
+
+open CategoryTheory Limits in
+/-- The ring of global functions on the terminal scheme `Spec ℤ` is a quotient of `ℤ`. -/
+lemma surjective_intCastRingHom_Γ_terminal :
+    Function.Surjective (Int.castRingHom Γ(⊤_ Scheme.{u}, ⊤)) := by
+  let e : Γ(⊤_ Scheme.{u}, ⊤) ≅ CommRingCat.of (ULift.{u} ℤ) :=
+    Scheme.Γ.mapIso (specULiftZIsTerminal.uniqueUpToIso terminalIsTerminal).op ≪≫
+      Scheme.ΓSpecIso _
+  intro y
+  refine ⟨(e.hom y).down, e.commRingCatIsoToRingEquiv.injective ?_⟩
+  change e.hom _ = e.hom y
+  rw [eq_intCast, map_intCast]
+  rfl
 
 end AlgebraicGeometry
