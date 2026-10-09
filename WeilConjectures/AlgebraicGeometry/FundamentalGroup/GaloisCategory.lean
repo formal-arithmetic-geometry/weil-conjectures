@@ -225,6 +225,40 @@ instance : HasInitial Y.FiniteEtale := isInitialEmpty.hasInitial
 instance : HasFiniteCoproducts Y.FiniteEtale :=
   hasFiniteCoproducts_of_has_binary_and_initial
 
+/-- Two morphisms of finite étale `Y`-schemes which are open immersions with disjoint images
+covering the target exhibit it as a coproduct. -/
+noncomputable def isColimitOfIsOpenImmersion {X X' Z : Y.FiniteEtale} (i : X ⟶ Z) (j : X' ⟶ Z)
+    [IsOpenImmersion i.hom.left] [IsOpenImmersion j.hom.left]
+    (hdisj : ∀ x x', i.hom.left x ≠ j.hom.left x')
+    (hcov : ∀ z, z ∈ Set.range i.hom.left ∨ z ∈ Set.range j.hom.left) :
+    IsColimit (BinaryCofan.mk i j) :=
+  have : IsIso ((forgetScheme Y).map
+      ((isColimitCoprodCofan X X').desc (BinaryCofan.mk i j))) := by
+    change IsIso (coprod.desc i.hom.left j.hom.left)
+    exact isIso_coprodDesc_of_isOpenImmersion _ _ hdisj hcov
+  have : IsIso ((isColimitCoprodCofan X X').desc (BinaryCofan.mk i j)) :=
+    isIso_of_reflects_iso _ (forgetScheme Y)
+  IsColimit.ofPointIso (isColimitCoprodCofan X X')
+
+instance (Z : Y.FiniteEtale) (V : Z.obj.left.Opens) (hV : IsClosed (V : Set Z.obj.left)) :
+    IsOpenImmersion (ofIsClopenι Z V hV).hom.left :=
+  inferInstanceAs (IsOpenImmersion V.ι)
+
+/-- An open and closed subscheme and its complement form a coproduct decomposition. -/
+noncomputable def isColimitOfIsClopen (Z : Y.FiniteEtale) (V : Z.obj.left.Opens)
+    (hV : IsClosed (V : Set Z.obj.left)) :
+    IsColimit (BinaryCofan.mk (ofIsClopenι Z V hV)
+      (ofIsClopenι Z ⟨(V : Set Z.obj.left)ᶜ, hV.isOpen_compl⟩
+        (isClosed_compl_iff.mpr V.isOpen))) := by
+  refine isColimitOfIsOpenImmersion _ _ (fun x w hxw ↦ ?_) (fun z ↦ ?_)
+  · let x' : V := x
+    let w' : (⟨_, hV.isOpen_compl⟩ : Z.obj.left.Opens) := w
+    have hxw' : x'.1 = w'.1 := hxw
+    exact w'.2 (hxw' ▸ x'.2)
+  · by_cases hz : z ∈ V
+    · exact .inl ⟨⟨z, hz⟩, rfl⟩
+    · exact .inr ⟨⟨z, hz⟩, rfl⟩
+
 /-- **Monomorphisms are inclusions of direct summands** in `FÉt(Y)`: a monomorphism of finite
 étale `Y`-schemes is an étale monomorphism, hence an open immersion, and it is finite, hence
 closed; its image is open and closed, and the complement is the other summand. -/
@@ -235,21 +269,13 @@ lemma monoInducesIsoOnDirectSummand {X Z : Y.FiniteEtale} (i : X ⟶ Z) [Mono i]
   have hVc : IsClosed (V : Set Z.obj.left) := i.hom.left.isClosedMap.isClosed_range
   let W : Z.obj.left.Opens := ⟨(V : Set Z.obj.left)ᶜ, hVc.isOpen_compl⟩
   have hW : IsClosed (W : Set Z.obj.left) := isClosed_compl_iff.mpr V.isOpen
-  let Z' := ofIsClopen Z W hW
-  have hiso : IsIso (coprod.desc i.hom.left W.ι) := by
-    refine isIso_coprodDesc_of_isOpenImmersion _ _ (fun x w hxw ↦ ?_) (fun z ↦ ?_)
-    · have : W.ι w ∈ W := by simp
-      exact this ⟨x, hxw⟩
-    · by_cases hz : z ∈ V
-      · exact .inl hz
-      · exact .inr ⟨⟨z, hz⟩, rfl⟩
-  let c := BinaryCofan.mk i (ofIsClopenι Z W hW)
-  have : IsIso ((forgetScheme Y).map ((isColimitCoprodCofan X Z').desc c)) := by
-    change IsIso (coprod.desc i.hom.left W.ι)
-    exact hiso
-  have : IsIso ((isColimitCoprodCofan X Z').desc c) :=
-    isIso_of_reflects_iso _ (forgetScheme Y)
-  exact ⟨Z', ofIsClopenι Z W hW, ⟨IsColimit.ofPointIso (isColimitCoprodCofan X Z')⟩⟩
+  refine ⟨ofIsClopen Z W hW, ofIsClopenι Z W hW, ⟨isColimitOfIsOpenImmersion _ _
+    (fun x w hxw ↦ ?_) (fun z ↦ ?_)⟩⟩
+  · have : W.ι w ∈ W := by simp
+    exact this ⟨x, hxw⟩
+  · by_cases hz : z ∈ V
+    · exact .inl hz
+    · exact .inr ⟨⟨z, hz⟩, rfl⟩
 
 end Limits
 
@@ -352,6 +378,124 @@ instance : PreservesColimitsOfShape (Discrete PEmpty.{1}) (fiber s) :=
 
 instance : PreservesFiniteCoproducts (fiber s) :=
   ⟨fun n ↦ PreservesFiniteCoproducts.of_preserves_binary_and_initial (fiber s) (Fin n)⟩
+
+omit [IsSepClosed Ω] in
+/-- An epimorphism of finite étale `Y`-schemes is surjective: its image is open and closed, and
+the two maps to `Q ⊔ Q` which agree on the image and differ on its complement are equalised by
+it. -/
+lemma surjective_of_epi {P Q : Y.FiniteEtale} (f : P ⟶ Q) [Epi f] :
+    Function.Surjective f.hom.left := by
+  let V : Q.obj.left.Opens := ⟨Set.range f.hom.left, f.hom.left.isOpenMap.isOpen_range⟩
+  have hV : IsClosed (V : Set Q.obj.left) := f.hom.left.isClosedMap.isClosed_range
+  let hc := isColimitOfIsClopen Q V hV
+  let W : Q.obj.left.Opens := ⟨(V : Set Q.obj.left)ᶜ, hV.isOpen_compl⟩
+  have hW : IsClosed (W : Set Q.obj.left) := isClosed_compl_iff.mpr V.isOpen
+  have hrange : Set.range f.hom.left ⊆ Set.range (ofIsClopenι Q V hV).hom.left := by
+    rintro _ ⟨p, rfl⟩
+    exact ⟨⟨_, p, rfl⟩, rfl⟩
+  let f' : P ⟶ ofIsClopen Q V hV := ObjectProperty.homMk (MorphismProperty.Over.homMk
+    (IsOpenImmersion.lift (ofIsClopenι Q V hV).hom.left f.hom.left hrange) (by
+      have h := IsOpenImmersion.lift_fac (ofIsClopenι Q V hV).hom.left f.hom.left hrange
+      calc _ = (IsOpenImmersion.lift _ _ hrange ≫ (ofIsClopenι Q V hV).hom.left) ≫
+            Q.obj.hom := (Category.assoc _ _ _).symm
+        _ = P.obj.hom := by rw [h, hom_left_comp]))
+  have hf : f' ≫ ofIsClopenι Q V hV = f :=
+    hom_ext (IsOpenImmersion.lift_fac (ofIsClopenι Q V hV).hom.left f.hom.left hrange)
+  obtain ⟨g, hg₁, hg₂⟩ := BinaryCofan.IsColimit.desc' hc
+    (ofIsClopenι Q V hV ≫ (coprodCofan Q Q).inl) (ofIsClopenι Q W hW ≫ (coprodCofan Q Q).inr)
+  simp only [BinaryCofan.mk_inl, BinaryCofan.mk_inr] at hg₁ hg₂
+  have hinl : (coprodCofan Q Q).inl = g := by
+    rw [← cancel_epi f, ← hf, Category.assoc, Category.assoc, hg₁]
+  intro q
+  by_contra hq
+  let w : (W : Set Q.obj.left) := ⟨q, fun h ↦ hq h⟩
+  have := congr_arg (fun φ : ofIsClopen Q W hW ⟶ coprod Q Q ↦ φ.hom.left w)
+    (show ofIsClopenι Q W hW ≫ (coprodCofan Q Q).inl = ofIsClopenι Q W hW ≫ (coprodCofan Q Q).inr
+      by rw [hinl, hg₂])
+  exact inl_ne_inr _ _ _ _ this
+
+instance : (fiber s).PreservesEpimorphisms where
+  preserves f _ := by
+    have : Epi (FintypeCat.incl.map ((fiber s).map f)) :=
+      (epi_iff_surjective _).mpr (surjective_fiber_map_of_surjective s f (surjective_of_epi f))
+    exact FintypeCat.incl.epi_of_epi_map this
+
+section Connected
+
+variable [ConnectedSpace Y]
+
+/-- Over a connected base, a morphism of finite étale `Y`-schemes which is surjective on
+geometric fibres is surjective: the complement of its image is an open and closed subscheme
+with empty geometric fibre, hence empty. -/
+lemma surjective_of_surjective_fiber {P Q : Y.FiniteEtale} (f : P ⟶ Q)
+    (h : Function.Surjective ((fiber s).map f)) : Function.Surjective f.hom.left := by
+  have hV : IsClosed (Set.range f.hom.left) := f.hom.left.isClosedMap.isClosed_range
+  let W : Q.obj.left.Opens := ⟨(Set.range f.hom.left)ᶜ, hV.isOpen_compl⟩
+  have hW : IsClosed (W : Set Q.obj.left) :=
+    isClosed_compl_iff.mpr f.hom.left.isOpenMap.isOpen_range
+  intro q
+  by_contra hq
+  obtain ⟨x⟩ := (nonempty_fiber_iff s (ofIsClopen Q W hW)).mpr
+    ⟨(⟨q, hq⟩ : (W : Set Q.obj.left))⟩
+  obtain ⟨z, hz⟩ := h ((fiber s).map (ofIsClopenι Q W hW) x)
+  have := congr_arg (fun y : (fiber s).obj Q ↦ (y.left : Spec (.of Ω) ⟶ Q.obj.left)
+    (default : Spec (.of Ω))) hz
+  simp only [fiber_map_left, Scheme.Hom.comp_apply] at this
+  let w : (W : Set Q.obj.left) := x.left (default : Spec (.of Ω))
+  exact w.2 ⟨_, this⟩
+
+/-- Over a connected base, a monomorphism of finite étale `Y`-schemes which is surjective on
+geometric fibres is an isomorphism: it is a surjective open immersion. -/
+lemma isIso_of_mono_of_surjective_fiber {P Q : Y.FiniteEtale} (i : P ⟶ Q) [Mono i]
+    (h : Function.Surjective ((fiber s).map i)) : IsIso i := by
+  have : IsOpenImmersion i.hom.left := IsOpenImmersion.of_flat_of_mono _
+  have : IsIso ((forgetScheme Y).map i) :=
+    (isIso_iff_isOpenImmersion_and_surjective i.hom.left).mpr
+      ⟨inferInstance, ⟨surjective_of_surjective_fiber s i h⟩⟩
+  exact isIso_of_reflects_iso i (forgetScheme Y)
+
+/-- Over a connected base, the fibre functor reflects isomorphisms. -/
+lemma isIso_of_isIso_fiber_map {P Q : Y.FiniteEtale} (f : P ⟶ Q)
+    [IsIso ((fiber s).map f)] : IsIso f := by
+  have hbij : Function.Bijective ((fiber s).map f) := ConcreteCategory.bijective_of_isIso _
+  -- `f` is a monomorphism: the diagonal `P ⟶ P ×_Q P` is surjective on fibres
+  let δ : P ⟶ pullback f f := pullback.lift (𝟙 P) (𝟙 P) rfl
+  have : IsSplitMono δ := IsSplitMono.mk' ⟨pullback.fst f f, by simp [δ]⟩
+  have hδ : Function.Surjective ((fiber s).map δ) := by
+    intro e
+    let hD := isLimitOfPreserves (fiber s ⋙ FintypeCat.incl) (pullbackIsPullback f f)
+    have hfs : (fiber s).map f ((fiber s).map (pullback.fst f f) e) =
+        (fiber s).map f ((fiber s).map (pullback.snd f f) e) := by
+      rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply, ← Functor.map_comp,
+        ← Functor.map_comp, pullback.condition]
+    have hab := hbij.1 hfs
+    set a := (fiber s).map (pullback.fst f f) e
+    have hfst : (fiber s).map (pullback.fst f f) ((fiber s).map δ a) = a := by
+      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, pullback.lift_fst,
+        CategoryTheory.Functor.map_id, ConcreteCategory.id_apply]
+    have hsnd : (fiber s).map (pullback.snd f f) ((fiber s).map δ a) = a := by
+      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, pullback.lift_snd,
+        CategoryTheory.Functor.map_id, ConcreteCategory.id_apply]
+    refine ⟨a, (Concrete.isLimit_ext _ hD _ _ ?_).symm⟩
+    rintro (_ | _ | _)
+    · change (fiber s).map (pullback.fst f f ≫ f) e =
+        (fiber s).map (pullback.fst f f ≫ f) ((fiber s).map δ a)
+      rw [Functor.map_comp, ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, hfst]
+    · change (fiber s).map (pullback.fst f f) e =
+        (fiber s).map (pullback.fst f f) ((fiber s).map δ a)
+      exact hfst.symm
+    · change (fiber s).map (pullback.snd f f) e =
+        (fiber s).map (pullback.snd f f) ((fiber s).map δ a)
+      rw [hsnd]
+      exact hab.symm
+  have : IsIso δ := isIso_of_mono_of_surjective_fiber s δ hδ
+  have hfs : pullback.fst f f = pullback.snd f f := by
+    rw [← cancel_epi δ, pullback.lift_fst, pullback.lift_snd]
+  have : Mono f := ⟨fun g h hgh ↦ by
+    rw [← pullback.lift_fst g h hgh, hfs, pullback.lift_snd]⟩
+  exact isIso_of_mono_of_surjective_fiber s f hbij.2
+
+end Connected
 
 end FiberLimits
 
