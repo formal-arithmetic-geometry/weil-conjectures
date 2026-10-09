@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+ "kind": "statement",
+ "title": "Abelian presheaves form an abelian category with exact evaluation functors",
+ "statement": "Let $\\mathcal C$ be a category and $\\textit{PAb}(\\mathcal C)$ the category of presheaves of abelian groups on $\\mathcal C$, i.e. functors $\\mathcal C^{op}\\to\\textit{Ab}$, with natural transformations as morphisms and the sectionwise addition of morphisms ($(\\varphi+\\psi)_W=\\varphi_W+\\psi_W$). Then $\\textit{PAb}(\\mathcal C)$ is an abelian category [def-sp-abelian], and for every object $W$ of $\\mathcal C$ the evaluation functor $\\mathrm{ev}_W:\\textit{PAb}(\\mathcal C)\\to\\textit{Ab}$, $\\mathcal F\\mapsto\\mathcal F(W)$, $\\varphi\\mapsto\\varphi_W$, is additive and exact: it commutes with finite limits and finite colimits (kernels, cokernels, finite products are computed sectionwise). In particular, if $\\mathcal F'\\xrightarrow{a}\\mathcal F\\xrightarrow{b}\\mathcal F''$ is a sequence in $\\textit{PAb}(\\mathcal C)$ with $b\\circ a=0$ that is exact at $\\mathcal F$, then $\\mathcal F'(W)\\xrightarrow{a_W}\\mathcal F(W)\\xrightarrow{b_W}\\mathcal F''(W)$ is an exact sequence of abelian groups for every object $W$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03AQ (lemma-cech-exact-presheaves), first sentence of the proof ('For any object W of C the functor F -> F(W) is an additive exact functor from PAb(C) to Ab'); Homology, Lemma Tag 010N (homology.tex, lemma-exact-functor) for exact functors"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a short complex in a functor category is exact iff it is exact after evaluation at every object",
+   "results": "ShortComplex.exact_iff_of_hasForget, HomologicalComplex.exact_of_degreewise_exact, ShortComplex.ab_exact_iff_function_exact, ShortComplex.exact_iff_exact_map_forget₂, HomologicalComplex.shortExact_iff_degreewise_shortExact",
+   "date": "2026-10-10",
+   "verdict": "no direct statement for functor categories; the pieces are found by the grep and LeanFinder below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exactness of a short complex of functors C ⥤ D in an abelian functor category is tested objectwise by evaluation",
+   "results": "CategoryTheory.Functor.exact_tfae (Mathlib.Algebra.Homology.ShortComplex.ExactFunctor), ShortComplex.ShortExact.map_of_exact, HomologicalComplex.exact_of_degreewise_exact, Functor.reflects_exact_of_faithful, ShortComplex.exact_map_iff_of_faithful",
+   "date": "2026-10-10",
+   "verdict": "match together with the grep: Functor.exact_tfae turns 'preserves finite limits and finite colimits' into 'preserves exact sequences'"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'functorCategoryAbelian' Mathlib; grep -n 'instance evaluation' Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean; grep -n exact_tfae Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "instance functorCategoryAbelian : Abelian (C ⥤ D) for {C : Type u} [Category.{v} C] and abelian D (Mathlib/CategoryTheory/Abelian/FunctorCategory.lean:96; kernels and cokernels via PreservesKernel.iso/PreservesCokernel.iso of evaluation, lines 40-63); evaluation_preservesLimitsOfShape [HasLimitsOfShape J C] (Limits/FunctorCategory/Basic.lean:225), evaluation_preservesColimitsOfShape (line 319), evaluationPreservesLimits (405), evaluation_preservesColimits (437); Functor.exact_tfae (ShortComplex/ExactFunctor.lean:220); ShortComplex.Exact.map (ShortComplex/Exact.lean:227)",
+   "date": "2026-10-10",
+   "verdict": "match: one Mathlib declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.functorCategoryAbelian",
+  "file": "Mathlib/CategoryTheory/Abelian/FunctorCategory.lean",
+  "how": "one Mathlib declaration per clause, with D = AddCommGrpCat and the functor category Cᵒᵖ ⥤ AddCommGrpCat: abelian by the instance functorCategoryAbelian (line 96); (evaluation _ _).obj (op W) preserves finite limits and finite colimits by evaluation_preservesLimitsOfShape / evaluation_preservesColimitsOfShape (Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:225, 319; AddCommGrpCat has finite limits and colimits); it is additive (the addition of natural transformations in the functor category is objectwise); exact sequences are preserved by Functor.exact_tfae (Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean:220, clause 4 to clause 2), or directly by ShortComplex.Exact.map (Mathlib/Algebra/Homology/ShortComplex/Exact.lean:227)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-site-cech-complex",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause: functorCategoryAbelian (Abelian/FunctorCategory.lean:96), evaluation_preservesLimitsOfShape/ColimitsOfShape (Limits/FunctorCategory/Basic.lean:225, 319), Functor.exact_tfae (ExactFunctor.lean:220) / ShortComplex.Exact.map (Exact.lean:227); all checked in the pinned Mathlib."
+ }
+}

@@ -2,17 +2,93 @@
  "id": "def-weil-pbc-site-cech-complex",
  "kind": "definition",
  "title": "The Cech complex of a covering on a site",
- "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology], $\\mathcal U=\\{U_t\\to U\\}_{t\\in T}$ a covering of $\\mathcal C$ (so all fibre products $U_{t_0}\\times_U\\cdots\\times_UU_{t_p}$ exist in $\\mathcal C$, Sites Definition 00VH (3) and induction), and $\\mathcal F$ a presheaf of abelian groups on $\\mathcal C$. The *Cech complex* $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal F)$ has in degree $p\\ge0$ the group $\\prod_{(t_0,\\ldots,t_p)\\in T^{p+1}}\\mathcal F(U_{t_0}\\times_U\\cdots\\times_UU_{t_p})$ and differential $d(s)_{t_0\\ldots t_{p+1}}=\\sum_{j=0}^{p+1}(-1)^js_{t_0\\ldots\\hat{t_j}\\ldots t_{p+1}}|_{U_{t_0}\\times_U\\cdots\\times_UU_{t_{p+1}}}$ (restriction along the projection omitting the $j$-th factor); $d\\circ d=0$. Its cohomology is the *Cech cohomology* $\\check H^p(\\mathcal U,\\mathcal F)$. It is a functor of $\\mathcal F$ (a map of presheaves acts componentwise), exact on presheaves. (General-site version of [def-weil-pbc-cech-complex], which is stated for the small etale site.)",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and $\\mathcal U=\\{f_t:U_t\\to U\\}_{t\\in T}$ a covering of $\\mathcal C$. (a) *Fibre products.* For $p\\ge0$ and $\\mathbf t=(t_0,\\ldots,t_p)\\in T^{p+1}$, a fibre product $U_{t_0}\\times_U\\cdots\\times_UU_{t_p}$ is an object $W$ with morphisms $\\mathrm{pr}_k:W\\to U_{t_k}$ ($0\\le k\\le p$) such that $w=f_{t_k}\\circ\\mathrm{pr}_k:W\\to U$ does not depend on $k$, universal among such data: for every object $Z$ and morphisms $a_k:Z\\to U_{t_k}$ with $f_{t_0}a_0=\\cdots=f_{t_p}a_p$ there is exactly one $a:Z\\to W$ with $\\mathrm{pr}_k\\circ a=a_k$ for all $k$ (for $p=0$, $W=U_{t_0}$ with $\\mathrm{pr}_0=\\mathrm{id}$). Such a fibre product exists for every $\\mathbf t$ (by axiom (iii) of a site and induction on $p$), is unique up to unique isomorphism compatible with the $\\mathrm{pr}_k$, and one, $U_{\\mathbf t}=U_{t_0}\\times_U\\cdots\\times_UU_{t_p}$, is chosen for every $\\mathbf t$. (b) *Index maps.* For $\\mathbf t\\in T^{p+1}$ and a map $\\alpha:\\{0,\\ldots,q\\}\\to\\{0,\\ldots,p\\}$ let $\\mathbf t\\alpha=(t_{\\alpha(0)},\\ldots,t_{\\alpha(q)})\\in T^{q+1}$ and let $\\alpha^*:U_{\\mathbf t}\\to U_{\\mathbf t\\alpha}$ be the unique morphism with $\\mathrm{pr}_k\\circ\\alpha^*=\\mathrm{pr}_{\\alpha(k)}$ for all $k$. For $0\\le j\\le p+1$ let $\\delta_j:\\{0,\\ldots,p\\}\\to\\{0,\\ldots,p+1\\}$ be the increasing injection omitting $j$; for $\\mathbf t=(t_0,\\ldots,t_{p+1})$, $\\delta_j^*:U_{t_0}\\times_U\\cdots\\times_UU_{t_{p+1}}\\to U_{t_0}\\times_U\\cdots\\times_U\\widehat{U_{t_j}}\\times_U\\cdots\\times_UU_{t_{p+1}}$ is the *projection omitting the $j$-th factor*. (c) *The Cech complex.* Let $\\mathcal F$ be a presheaf of abelian groups on $\\mathcal C$, i.e. an object of the abelian category $\\textit{PAb}(\\mathcal C)$ of functors $\\mathcal C^{op}\\to\\textit{Ab}$ [lem-weil-pbc-abelian-presheaves-evaluation-exact]; for $h:V\\to W$ write $s\\mapsto s|_V=\\mathcal F(h)(s)$. The *Cech complex* $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal F)$ is the cochain complex of abelian groups [def-weil-abstract-derived-category] with $\\check{\\mathcal C}^p(\\mathcal U,\\mathcal F)=\\prod_{\\mathbf t\\in T^{p+1}}\\mathcal F(U_{\\mathbf t})$ for $p\\ge0$ (componentwise addition; $s_{t_0\\ldots t_p}$ denotes the component of $s$ at $(t_0,\\ldots,t_p)$), $\\check{\\mathcal C}^p=0$ for $p<0$, and differential $d=d^p:\\check{\\mathcal C}^p\\to\\check{\\mathcal C}^{p+1}$, $d(s)_{t_0\\ldots t_{p+1}}=\\sum_{j=0}^{p+1}(-1)^j\\mathcal F(\\delta_j^*)\\big(s_{t_0\\ldots\\hat{t_j}\\ldots t_{p+1}}\\big)$ for $p\\ge0$ (restriction along the projection omitting the $j$-th factor), $d^p=0$ for $p<0$; $d$ is a group homomorphism and $d\\circ d=0$. (d) *Cech cohomology.* $\\check H^p(\\mathcal U,\\mathcal F)=H^p(\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal F))=\\ker d^p/\\operatorname{im}d^{p-1}$ ($p\\ge0$; so $\\check H^0(\\mathcal U,\\mathcal F)=\\ker d^0$), the *Cech cohomology groups* of $\\mathcal F$ with respect to $\\mathcal U$. (e) *Functoriality and exactness.* A morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of presheaves of abelian groups induces the morphism of complexes $\\check{\\mathcal C}^p(\\varphi)=\\prod_{\\mathbf t}\\varphi_{U_{\\mathbf t}}$, $(\\check{\\mathcal C}^p(\\varphi)s)_{\\mathbf t}=\\varphi_{U_{\\mathbf t}}(s_{\\mathbf t})$, and hence maps $\\check H^p(\\mathcal U,\\varphi)$; this makes $\\check{\\mathcal C}^\\bullet(\\mathcal U,-):\\textit{PAb}(\\mathcal C)\\to\\mathrm{CoCh}(\\textit{Ab})$ an additive functor, and $\\check H^p(\\mathcal U,-)$ additive functors $\\textit{PAb}(\\mathcal C)\\to\\textit{Ab}$. The functor $\\check{\\mathcal C}^\\bullet(\\mathcal U,-)$ is exact: if $\\mathcal F'\\to\\mathcal F\\to\\mathcal F''$ is exact at $\\mathcal F$ in $\\textit{PAb}(\\mathcal C)$, then $\\check{\\mathcal C}^p(\\mathcal U,\\mathcal F')\\to\\check{\\mathcal C}^p(\\mathcal U,\\mathcal F)\\to\\check{\\mathcal C}^p(\\mathcal U,\\mathcal F'')$ is exact for every $p$; in particular a short exact sequence of presheaves goes to a short exact sequence of complexes. (Stacks Cohomology on Sites, Section 03AK, Definition 03AM, Section 03AO, Lemma 03AQ. General-site version of [def-weil-pbc-cech-complex], which is stated for the small etale site.)",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Section Tag 03AK (section-cech): equation-d-cech and Definition Tag 03AM (definition-cech-complex); Lemma Tag 03AQ (lemma-cech-exact-presheaves)"
  },
  "stmt_deps": [
-  "def-weil-pbc-sites-and-cohomology"
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+  "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Existence of the fibre products (a).* Induction on $p$. For $p=0$, $U_{t_0}$ with $\\mathrm{pr}_0=\\mathrm{id}$ is a fibre product: given $a_0:Z\\to U_{t_0}$, $a=a_0$ is the only morphism with $\\mathrm{id}\\circ a=a_0$. Let $p\\ge0$, $\\mathbf t=(t_0,\\ldots,t_{p+1})$, and let $(V,\\mathrm{pr}_0,\\ldots,\\mathrm{pr}_p)$ be a fibre product of $(t_0,\\ldots,t_p)$ (induction hypothesis), with $v=f_{t_k}\\mathrm{pr}_k:V\\to U$. Since $\\mathcal U$ is a covering and $v:V\\to U$ is a morphism, axiom (iii) of a site [def-weil-pbc-sites-and-cohomology] (Sites, Definition 00VH (3)) says that the fibre product $U_{t_{p+1}}\\times_UV$ of $f_{t_{p+1}}$ and $v$ exists; call its projections $q:U_{t_{p+1}}\\times_UV\\to U_{t_{p+1}}$, $r:U_{t_{p+1}}\\times_UV\\to V$. Put $W=U_{t_{p+1}}\\times_UV$, $\\mathrm{pr}_k=\\mathrm{pr}_k\\circ r$ for $k\\le p$ and $\\mathrm{pr}_{p+1}=q$. Then $f_{t_k}\\mathrm{pr}_k=v r=f_{t_{p+1}}q$ for all $k$. Universality: given $a_k:Z\\to U_{t_k}$ ($k\\le p+1$) with all $f_{t_k}a_k$ equal to $c:Z\\to U$, the universal property of $V$ gives a unique $b:Z\\to V$ with $\\mathrm{pr}_kb=a_k$ ($k\\le p$), and $vb=f_{t_0}a_0=c=f_{t_{p+1}}a_{p+1}$, so there is a unique $a:Z\\to W$ with $ra=b$, $qa=a_{p+1}$; it satisfies $\\mathrm{pr}_ka=a_k$ for all $k$. If $a'$ is another such morphism, then $\\mathrm{pr}_k(ra')=a_k$ for $k\\le p$ gives $ra'=b$ by uniqueness for $V$, and $qa'=a_{p+1}$, so $a'=a$ by uniqueness for $W$. Uniqueness of fibre products up to unique isomorphism compatible with the $\\mathrm{pr}_k$ is the usual argument for limits (two universal objects map to each other, and the composites are identities by the uniqueness clause); a fibre product $U_{\\mathbf t}$ is chosen for every $\\mathbf t$ (axiom of choice; $T$ and the $T^{p+1}$ are sets).",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Definition 00VH (definition-site) condition (3); Cohomology on Sites, Section 03AK ('any covering of a site is a family ... to which the definition applies', after Definition 03AM)"
+   }
+  },
+  {
+   "text": "*Index maps (b).* For $\\mathbf t\\in T^{p+1}$ and $\\alpha:\\{0,\\ldots,q\\}\\to\\{0,\\ldots,p\\}$, the morphisms $\\mathrm{pr}_{\\alpha(k)}:U_{\\mathbf t}\\to U_{t_{\\alpha(k)}}$ ($0\\le k\\le q$) satisfy $f_{t_{\\alpha(k)}}\\mathrm{pr}_{\\alpha(k)}=w$ for all $k$, so the universal property of $U_{\\mathbf t\\alpha}$ (step 1) gives exactly one $\\alpha^*:U_{\\mathbf t}\\to U_{\\mathbf t\\alpha}$ with $\\mathrm{pr}_k\\alpha^*=\\mathrm{pr}_{\\alpha(k)}$. Functoriality: $\\mathrm{id}^*=\\mathrm{id}$, and for $\\beta:\\{0,\\ldots,r\\}\\to\\{0,\\ldots,q\\}$ one has $\\beta^*\\circ\\alpha^*=(\\alpha\\circ\\beta)^*:U_{\\mathbf t}\\to U_{\\mathbf t\\alpha\\beta}$, since $\\mathrm{pr}_k\\beta^*\\alpha^*=\\mathrm{pr}_{\\beta(k)}\\alpha^*=\\mathrm{pr}_{\\alpha(\\beta(k))}$ for every $k$ and a morphism into $U_{\\mathbf t\\alpha\\beta}$ is determined by its composites with the projections. The projection omitting the $j$-th factor is $\\delta_j^*$, $\\delta_j(k)=k$ for $k<j$ and $\\delta_j(k)=k+1$ for $k\\ge j$; it is the restriction map of the Stacks formula (equation-d-cech).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 03AK (section-cech), the projection map after equation 03AL (equation-d-cech)"
+   }
+  },
+  {
+   "text": "*The differential and $d\\circ d=0$ (c).* Each $\\mathcal F(\\delta_j^*)$ is a group homomorphism and the components of $d(s)$ are sums of them applied to components of $s$, so $d$ is a homomorphism of the product groups. Let $s\\in\\check{\\mathcal C}^p$, $p\\ge0$, and $\\mathbf t\\in T^{p+3}$. By definition, and since $\\mathcal F$ is a contravariant functor with $\\mathcal F(\\delta_i^*)\\circ\\mathcal F(\\delta_j^*)=\\mathcal F(\\delta_j^*\\circ\\delta_i^*)=\\mathcal F((\\delta_i\\circ\\delta_j)^*)$ (step 2; here $\\delta_j:\\{0..p\\}\\to\\{0..p+1\\}$, $\\delta_i:\\{0..p+1\\}\\to\\{0..p+2\\}$), $d(d(s))_{\\mathbf t}=\\sum_{i=0}^{p+2}\\sum_{j=0}^{p+1}(-1)^{i+j}\\mathcal F((\\delta_i\\delta_j)^*)(s_{\\mathbf t\\delta_i\\delta_j})$. The cosimplicial identity $\\delta_i\\circ\\delta_j=\\delta_{j+1}\\circ\\delta_i$ for $0\\le i\\le j\\le p+1$ holds because both sides are the increasing injection $\\{0,\\ldots,p\\}\\to\\{0,\\ldots,p+2\\}$ whose image omits exactly $i$ and $j+1$. The map $(i,j)\\mapsto(j+1,i)$ is a bijection from $\\{(i,j):0\\le i\\le j\\le p+1\\}$ onto $\\{(i',j'):0\\le j'<i'\\le p+2\\}$ (inverse $(i',j')\\mapsto(j',i'-1)$), and the two sets partition the index set of the double sum. Matched terms have the same composite $\\delta_i\\delta_j=\\delta_{j+1}\\delta_i$, hence the same tuple $\\mathbf t\\delta_i\\delta_j$ and the same restriction map, and opposite signs $(-1)^{i+j}$ and $(-1)^{i+j+1}$; so $d(d(s))_{\\mathbf t}=0$. In degrees $p<0$, $d\\circ d=0$ trivially. Hence $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal F)$ is a cochain complex of abelian groups in the sense of [def-weil-abstract-derived-category] (objects $\\check{\\mathcal C}^p$, $p\\in\\mathbf Z$, with $d^{p+1}d^p=0$). (Stacks: 'It is straightforward to see that $d\\circ d=0$'; this is that verification. For the small etale site the same complex is the Mathlib leaf of [def-weil-pbc-cech-complex], where Mathlib obtains $d\\circ d=0$ from the alternating coface complex of a cosimplicial object, i.e. from the same identities.)",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 03AK (section-cech): equation 03AL (equation-d-cech) and the sentence after it ('It is straightforward to see that d o d = 0')"
+   }
+  },
+  {
+   "text": "*Independence of the choices.* If $U'_{\\mathbf t}$ are other choices of fibre products, step 1 gives unique isomorphisms $\\iota_{\\mathbf t}:U'_{\\mathbf t}\\to U_{\\mathbf t}$ with $\\mathrm{pr}_k\\iota_{\\mathbf t}=\\mathrm{pr}'_k$, and $\\alpha^*\\iota_{\\mathbf t}=\\iota_{\\mathbf t\\alpha}\\alpha'^*$ (both have components $\\mathrm{pr}'_{\\alpha(k)}$). Hence $s\\mapsto(\\mathcal F(\\iota_{\\mathbf t})(s_{\\mathbf t}))_{\\mathbf t}$ is an isomorphism of complexes between the two Cech complexes, commuting with the differentials term by term and natural in $\\mathcal F$; so the complex, and $\\check H^p$, are well defined up to canonical isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 03AK (section-cech)"
+   }
+  },
+  {
+   "text": "*Cech cohomology and functoriality (d), (e).* $\\check H^p(\\mathcal U,\\mathcal F)$ is the $p$-th cohomology object $H^p=\\ker d^p/\\operatorname{im}d^{p-1}$ of the cochain complex of step 3 [def-weil-abstract-derived-category]; since $\\check{\\mathcal C}^{-1}=0$, $\\check H^0=\\ker d^0$. For $\\varphi:\\mathcal F\\to\\mathcal G$, $\\check{\\mathcal C}^p(\\varphi)$ is a homomorphism and commutes with $d$: for $\\mathbf t\\in T^{p+2}$, $(d\\,\\check{\\mathcal C}^p(\\varphi)s)_{\\mathbf t}=\\sum_j(-1)^j\\mathcal G(\\delta_j^*)\\varphi_{U_{\\mathbf t\\delta_j}}(s_{\\mathbf t\\delta_j})=\\sum_j(-1)^j\\varphi_{U_{\\mathbf t}}\\mathcal F(\\delta_j^*)(s_{\\mathbf t\\delta_j})=(\\check{\\mathcal C}^{p+1}(\\varphi)\\,ds)_{\\mathbf t}$ by naturality of $\\varphi$ and additivity of $\\varphi_{U_{\\mathbf t}}$. Clearly $\\check{\\mathcal C}(\\mathrm{id})=\\mathrm{id}$, $\\check{\\mathcal C}(\\psi\\varphi)=\\check{\\mathcal C}(\\psi)\\check{\\mathcal C}(\\varphi)$ and $\\check{\\mathcal C}(\\varphi+\\psi)=\\check{\\mathcal C}(\\varphi)+\\check{\\mathcal C}(\\psi)$ (componentwise, the addition of presheaf morphisms being sectionwise [lem-weil-pbc-abelian-presheaves-evaluation-exact]); so $\\check{\\mathcal C}^\\bullet(\\mathcal U,-)$ is an additive functor $\\textit{PAb}(\\mathcal C)\\to\\mathrm{CoCh}(\\textit{Ab})$, and composing with the cohomology functors $H^p$ of [def-weil-abstract-derived-category] gives the functors $\\check H^p(\\mathcal U,-)$, additive since $H^p$ of a sum of morphisms of complexes is the sum of the induced maps on $\\ker d^p/\\operatorname{im}d^{p-1}$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-abelian-presheaves-evaluation-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Definition 03AM (definition-cech-complex); Section 03AO (section-cech-functor), equation 03AP (equation-cech-functor)"
+   }
+  },
+  {
+   "text": "*Exactness (e)* (Lemma 03AQ). Let $\\mathcal F'\\xrightarrow{a}\\mathcal F\\xrightarrow{b}\\mathcal F''$ be exact at $\\mathcal F$ in $\\textit{PAb}(\\mathcal C)$. By [lem-weil-pbc-abelian-presheaves-evaluation-exact], for every $\\mathbf t$ the sequence $\\mathcal F'(U_{\\mathbf t})\\to\\mathcal F(U_{\\mathbf t})\\to\\mathcal F''(U_{\\mathbf t})$ is exact. A product of sequences $A_{\\mathbf t}\\xrightarrow{a_{\\mathbf t}}B_{\\mathbf t}\\xrightarrow{b_{\\mathbf t}}C_{\\mathbf t}$ of abelian groups exact at $B_{\\mathbf t}$ is exact at $\\prod B_{\\mathbf t}$: the composite is $0$ componentwise, and if $(y_{\\mathbf t})$ has $b_{\\mathbf t}(y_{\\mathbf t})=0$ for all $\\mathbf t$, choose $x_{\\mathbf t}$ with $a_{\\mathbf t}(x_{\\mathbf t})=y_{\\mathbf t}$, then $(x_{\\mathbf t})\\mapsto(y_{\\mathbf t})$ (in Mathlib: products in AddCommGrpCat are exact, instance instAB4StarAddCommGrpCat, Mathlib/Algebra/Category/Grp/AB.lean:98). Hence $\\check{\\mathcal C}^p(\\mathcal U,\\mathcal F')\\to\\check{\\mathcal C}^p(\\mathcal U,\\mathcal F)\\to\\check{\\mathcal C}^p(\\mathcal U,\\mathcal F'')$ is exact for every $p\\ge0$ (and trivially for $p<0$). For a short exact sequence $0\\to\\mathcal F'\\to\\mathcal F\\to\\mathcal F''\\to0$ (exact at each of the three places) this gives the short exact sequences $0\\to\\check{\\mathcal C}^p(\\mathcal F')\\to\\check{\\mathcal C}^p(\\mathcal F)\\to\\check{\\mathcal C}^p(\\mathcal F'')\\to0$ for all $p$ (the functor is additive, so it sends the zero presheaf to the zero complex), and by [lem-weil-pbc-cochain-complexes-degreewise-exact] (2) $0\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal F')\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal F)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal F'')\\to0$ is short exact in $\\mathrm{CoCh}(\\textit{Ab})$; so the additive functor $\\check{\\mathcal C}^\\bullet(\\mathcal U,-)$ is exact in the sense of Homology, Lemma 010N (4).",
+   "uses": [
+    "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 03AQ (lemma-cech-exact-presheaves) and its proof; Homology, Lemma 010N (homology.tex, lemma-exact-functor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 03AK (equation 03AL, Definition 03AM), Section 03AO, Lemma 03AQ; Sites, Definition 00VH (sites.tex). The verification of d o d = 0, which Stacks calls straightforward, and the induction for the fibre products are written out (agent-written details of steps the source states)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -26,7 +102,7 @@
    "query": "CategoryTheory.cechComplexFunctor",
    "results": "CategoryTheory.cechComplexFunctor {C} [HasFiniteProducts C] [Preadditive A] [HasProducts A] (U : ι → C) : (Cᵒᵖ ⥤ A) ⥤ CochainComplex A ℕ (Mathlib.CategoryTheory.Sites.SheafCohomology.Cech)",
    "date": "2026-10-10",
-   "verdict": "candidate, not a one-line specialization: requires HasFiniteProducts on the category; on a site in Stacks' sense only the fibre products of the members of a covering exist, so Over U need not have finite products (it does for the small etale site, where def-weil-pbc-cech-complex is the leaf). The general version FormalCoproduct.cochainComplexFunctor (same file) applied to a Cech nerve simplicial object in FormalCoproduct C would cover it, but that nerve is not in Mathlib for a family with only some fibre products"
+   "verdict": "re-checked 2026-10-10 by the worker of this item (see the entries below): candidate, not a one-line specialization. cechComplexFunctor needs HasFiniteProducts C; on a Stacks site only the fibre products of members of a covering exist, so Over U need not have finite products (it does for the small etale site, where def-weil-pbc-cech-complex is the leaf)"
   },
   {
    "tool": "grep",
@@ -34,10 +110,59 @@
    "results": "CategoryTheory/Sites/SheafCohomology/Cech.lean only (cosimplicialObjectFunctor, cochainComplexFunctor, cechComplexFunctor)",
    "date": "2026-10-10",
    "verdict": "no exact match for a general site; candidate recorded above"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech complex of a presheaf for a family of morphisms with fixed target whose iterated fibre products exist",
+   "results": "CategoryTheory.Arrow.cechNerve, CategoryTheory.cechNerveTerminalFrom, CategoryTheory.Arrow.augmentedCechNerve (Mathlib.AlgebraicTopology.CechNerve), TopCat.Presheaf.objPairwiseOfFamily, CategoryTheory.Presieve.ofArrows, Presieve.isSheafFor_of_preservesProduct, TopCat.Presheaf.SheafConditionEqualizerProducts.piInters",
+   "date": "2026-10-10",
+   "verdict": "no match: Arrow.cechNerve is the Cech nerve of one morphism f (needs HasWidePullback f.right (fun _ => f.left) (fun _ => f.hom), the self-fibre-powers of a single arrow); for a family {U_t -> U} it would need the coproduct of the U_t, which a site need not have; the rest is degree 0/1 sheaf-condition material"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Čech nerve of a family of morphisms U_i → U as a simplicial object, using only wide pullbacks over U",
+   "results": "SimplicialObject.cechNerve_obj, Arrow.cechNerve, Arrow.cechNerve_obj, SimplicialObject.cechNerve, SimplicialObject.augmentedCechNerve_obj_left_obj, Arrow.augmentedCechNerve, Arrow.cechNerve_map, CosimplicialObject.cechConerve_obj (all Mathlib.AlgebraicTopology.CechNerve)",
+   "date": "2026-10-10",
+   "verdict": "no match: only the Cech nerve of a single arrow"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Arrow.cechNerve",
+   "results": "Arrow.cechNerve, CechNerveTerminalFrom.iso [HasTerminal C] [HasFiniteProducts C], SimplicialObject.cechNerve_obj, Arrow.augmentedCechNerve_left, Arrow.cechNerve_obj, SimplicialObject.cechNerve_map (Mathlib.AlgebraicTopology.CechNerve)",
+   "date": "2026-10-10",
+   "verdict": "no match for a family (single arrow only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'cech\\|Cech\\|Čech' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; read Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean (whole), grep -n 'def \\|variable' Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean; grep -rn 'cechNerve\\|HasPairwisePullbacks\\|HasWidePullback' Mathlib/CategoryTheory/Sites/",
+   "results": "Cech files: AlgebraicTopology/CechNerve.lean (Arrow.cechNerve, single arrow), AlgebraicTopology/ExtraDegeneracy.lean, CategoryTheory/Limits/FormalCoproducts/{Basic,Cech,ExtraDegeneracy}.lean, CategoryTheory/Sites/SheafCohomology/Cech.lean, Sites/NonabelianCohomology/H1.lean (Cech H^1 of a family with values in a sheaf of groups, not a complex); the rest is Stone-Cech. FormalCoproducts/Cech.lean: power, powerMap, mapPower; FormalCoproduct.cech (line 190) under 'variable [HasFiniteProducts C]' (line 185). Sites/SheafCohomology/Cech.lean: FormalCoproduct.cosimplicialObjectFunctor, FormalCoproduct.cochainComplexFunctor (for any simplicial object E of FormalCoproduct C; no product hypothesis on C), cechComplexFunctor [HasFiniteProducts C] (U : ι → C). In Sites/: only Presieve.HasPairwisePullbacks (Precoverage.lean, IsSheafFor.lean), no Cech nerve of a presieve or Presieve.ofArrows family, no Sieve-based Cech complex",
+   "date": "2026-10-10",
+   "verdict": "no exact match for a Stacks site. What exists: FormalCoproduct.cochainComplexFunctor E for any simplicial object E in FormalCoproduct C, and cechComplexFunctor needing HasFiniteProducts C. A stage-2 route (not a one-line specialization): take D = the full subcategory of Over U on id_U and the chosen U_t0 x_U ... x_U U_tp; by step 1 of this node D has finite products (U_s x U_t = U_(s,t), terminal id_U), and cechComplexFunctor (C := D) (fun t => U_t) applied to F restricted to D is this complex (indexed by ℕ). The HasFiniteProducts D instance is the content of step 1, so the node stays split"
+  },
+  {
+   "tool": "leansearch",
+   "query": "product of exact sequences of abelian groups is exact (Pi.map of exact maps is exact)",
+   "results": "instAB4StarAddCommGrpCat : AB4Star AddCommGrpCat (Mathlib.Algebra.Category.Grp.AB), ShortComplex.ShortExact.exact, ShortComplex.ab_exact_iff_range_eq_ker, instAB4AddCommGrpCat, AddMonoidHom.ker_prodMap, Limits.Pi.map_isIso",
+   "date": "2026-10-10",
+   "verdict": "generalization for step 6 (products of exact sequences of abelian groups): AB4Star AddCommGrpCat (Grp/AB.lean:98; AB4StarOfSize = HasExactLimitsOfShape (Discrete α), CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean:249); the step is written out as elementary"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact, Pi.map",
+   "results": "none (also 'Function.Exact (Pi.map _ _) (Pi.map _ _)': none)",
+   "date": "2026-10-10",
+   "verdict": "no elementwise Pi-exactness lemma; the categorical AB4Star instance is the Mathlib form"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Exact (Pi.map\\|Exact.pi\\b\\|exact_pi\\|Function.Exact.pi\\|pi_exact' Mathlib; grep -rn 'instance.*AB4Star' Mathlib",
+   "results": "no Pi exactness lemma; instance : AB4Star AddCommGrpCat.{u} (Mathlib/Algebra/Category/Grp/AB.lean:98), AB4Star (ModuleCat R) (Algebra/Category/ModuleCat/AB.lean:37)",
+   "date": "2026-10-10",
+   "verdict": "generalization recorded in step 6"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +182,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-site-cech-complex",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Cohomology on Sites Section 03AK (equation 03AL, Definition 03AM, the remark that coverings of a site qualify), Section 03AO (equation 03AP) and Lemma 03AQ, Sites Definition 00VH (3), Homology Lemma 010N. Made the definition self-contained in five parts: (a) iterated fibre products U_t0 x_U ... x_U U_tp defined by their universal property (wide pullback), existence by axiom (iii) and induction, a choice fixed; (b) index maps alpha^* for arbitrary maps of index sets and the face projections delta_j^*; (c) the complex, zero in negative degrees, with the sign convention of 03AL; (d) Cech cohomology ker/im; (e) functoriality and exactness. Six steps: the induction for the fibre products (on def-weil-pbc-sites-and-cohomology), functoriality of alpha^* (elementary), d o d = 0 written out from the cosimplicial identity delta_i delta_j = delta_{j+1} delta_i (i <= j) with the cancelling bijection of index pairs, independence of the choices (elementary), functoriality in F and the functors H^p (on def-weil-abstract-derived-category), and exactness 03AQ (on the new Mathlib leaf lem-weil-pbc-abelian-presheaves-evaluation-exact for exactness of evaluation in PAb, the product of exact sequences of abelian groups written out (Mathlib form AB4Star AddCommGrpCat recorded), and the reviewed leaf lem-weil-pbc-cochain-complexes-degreewise-exact). def-weil-pbc-cech-complex is not cited as a dependency: it is the same construction for the small etale site and cannot be specialized to a general site; it is mentioned in the text only. Mathlib re-checked three ways: no Cech complex for a family with only the fibre products of a covering; cechComplexFunctor needs HasFiniteProducts, Arrow.cechNerve is for one arrow; a stage-2 route through the full subcategory of Over U spanned by the chosen fibre products is recorded."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition node split into its verification (fibre products by site axiom (iii) and induction, index maps, d∘d=0 via the cosimplicial identity δ_iδ_j=δ_{j+1}δ_i with the (i,j)↔(j+1,i) pairing, independence of choices, functoriality, exactness 03AQ via sectionwise exactness and products of exact sequences). Read fully; the pairing argument is correct. Mathlib has no Čech complex of a covering on a general site (cechComplexFunctor needs HasFiniteProducts); recorded. Leaf lem-weil-pbc-abelian-presheaves-evaluation-exact verified (FunctorCategory.lean:96, FunctorCategory/Basic.lean:225,319, ExactFunctor.lean:220, Exact.lean:227)."
+ }
 }
