@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.AlgebraicGeometry.BaseChangeNorm
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateCover
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
@@ -182,5 +183,67 @@ theorem exists_descent : ∃ 𝒟' : X.CoordinateCover ι, ∀ i, IsAffineOpen (
     exact Opens.mem_iSup.mpr ⟨i, (mem_saturatedPart H).mpr hi⟩
 
 end Scheme.CoordinateCover
+
+attribute [local instance] MvPolynomial.gradedAlgebra
+
+include H in
+/-- **Ample coordinate covers descend along a finite field extension.** Let `X` be a
+quasi-compact `k`-scheme and `ψ : X_{k'} ⟶ ℙ(β; k')` a morphism such that the preimages of the
+standard opens are affine. Then `X` has a finite coordinate cover by affine charts.
+
+For every point `x` of `X`, graded prime avoidance gives a form `G` over `ℤ` not vanishing on the
+finite fibre `ψ(π⁻¹ x)`; the preimages under `ψ` of the loci `D₊(G)` are affine, and finitely many
+such forms, raised to a common degree, give a coordinate cover of `X_{k'}` satisfying the fibre
+condition of `AlgebraicGeometry.Scheme.CoordinateCover.exists_descent`. -/
+theorem exists_coordinateCover_of_isPullback [CompactSpace X] {β : Type u}
+    (ψ : Y ⟶ ℙ(β; Spec (.of k')))
+    (hψ : ∀ b, IsAffineOpen (ψ ⁻¹ᵁ ProjectiveSpace.standardOpen β (Spec (.of k')) b)) :
+    ∃ (ι : Type u) (_ : Finite ι) (𝒟 : X.CoordinateCover ι), ∀ i, IsAffineOpen (𝒟.U i) := by
+  classical
+  have := isFinite_of_isPullback_spec H
+  have hψa : IsAffineHom ψ := HasAffineProperty.of_iSup_eq_top (P := @IsAffineHom)
+    (fun b ↦ ⟨_, ProjectiveSpace.isAffineOpen_standardOpen β (Spec (.of k')) b⟩)
+    (ProjectiveSpace.iSup_standardOpen _ _) fun b ↦ hψ b
+  have hτ : IsAffineHom (ProjectiveSpace.toProjInt β (Spec (.of k'))) :=
+    MorphismProperty.pullback_snd (P := @IsAffineHom) _ _ inferInstance
+  set 𝒜 := MvPolynomial.homogeneousSubmodule β (ULift.{u} ℤ)
+  let ρ := ψ ≫ ProjectiveSpace.toProjInt β (Spec (.of k'))
+  have hρ {d : ℕ} (hd : 0 < d) {G : MvPolynomial β (ULift.{u} ℤ)} (hG : G ∈ 𝒜 d) :
+      IsAffineOpen (ρ ⁻¹ᵁ Proj.basicOpen 𝒜 G) :=
+    ((Proj.isAffineOpen_basicOpen 𝒜 G hG hd).preimage _).preimage ψ
+  -- a form not vanishing on a given fibre
+  have key (x : X) : ∃ d > 0, ∃ G ∈ 𝒜 d, ∀ y, π y = x → y ∈ ρ ⁻¹ᵁ Proj.basicOpen 𝒜 G := by
+    have hfin : (π ⁻¹' {x}).Finite := π.finite_preimage_singleton x
+    obtain ⟨d, hd, G, hG, hGs⟩ :=
+      ProjectiveSpectrum.exists_homogeneous_notMem_of_finset (hfin.toFinset.image ρ)
+    exact ⟨d, hd, G, hG, fun y hy ↦ hGs (ρ y) (Finset.mem_image_of_mem _ (by simpa using hy))⟩
+  choose d hd G hG hGx using key
+  obtain ⟨t, ht⟩ := CompactSpace.elim_nhds_subcover
+    (fun x ↦ (Scheme.CoordinateCover.saturatedPart H (ρ ⁻¹ᵁ Proj.basicOpen 𝒜 (G x)) : Set X))
+    fun x ↦ (Scheme.CoordinateCover.saturatedPart H _).isOpen.mem_nhds
+      ((Scheme.CoordinateCover.mem_saturatedPart H).mpr (hGx x))
+  set D := ∏ x ∈ t, d x
+  have hdD (x : t) : d x ∣ D := Finset.dvd_prod_of_mem _ x.2
+  have hD : 0 < D := Finset.prod_pos fun x _ ↦ hd x
+  let F : t → MvPolynomial β (ULift.{u} ℤ) := fun x ↦ G x ^ (D / d x)
+  have hF (x : t) : F x ∈ 𝒜 D := by
+    have := SetLike.pow_mem_graded (D / d x) (hG x)
+    rwa [smul_eq_mul, Nat.div_mul_cancel (hdD x)] at this
+  have hFb (x : t) : Proj.basicOpen 𝒜 (F x) = Proj.basicOpen 𝒜 (G x) :=
+    Proj.basicOpen_pow _ _ _ (Nat.div_pos (Nat.le_of_dvd hD (hdD x)) (hd x))
+  -- every fibre lies in one of the charts
+  have hfib (x' : X) : ∃ i : t, ∀ y, π y = x' → y ∈ ρ ⁻¹ᵁ Proj.basicOpen 𝒜 (F i) := by
+    obtain ⟨x, hx, hx'⟩ := Set.mem_iUnion₂.mp (ht.ge (Set.mem_univ x'))
+    refine ⟨⟨x, hx⟩, fun y hy ↦ ?_⟩
+    rw [hFb]
+    exact (Scheme.CoordinateCover.mem_saturatedPart H).mp hx' y hy
+  have hcovY : ⨆ i : t, ρ ⁻¹ᵁ Proj.basicOpen 𝒜 (F i) = ⊤ := by
+    refine top_le_iff.mp fun y _ ↦ ?_
+    obtain ⟨i, hi⟩ := hfib (π y)
+    exact Opens.mem_iSup.mpr ⟨i, hi y rfl⟩
+  let 𝒟 := Scheme.CoordinateCover.ofProj 𝒜 ρ hD F hF hcovY
+  obtain ⟨𝒟', h𝒟'⟩ := Scheme.CoordinateCover.exists_descent H (𝒟 := 𝒟)
+    (fun i ↦ hρ hD (hF i)) hfib
+  exact ⟨t, inferInstance, 𝒟', h𝒟'⟩
 
 end AlgebraicGeometry
