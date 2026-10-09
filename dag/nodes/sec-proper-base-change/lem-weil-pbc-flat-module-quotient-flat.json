@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-flat-module-quotient-flat",
+ "kind": "statement",
+ "title": "Reduction of a flat module modulo an ideal is flat over the quotient ring",
+ "statement": "Let $R$ be a commutative ring, $J\\subseteq R$ an ideal and $M$ a flat $R$-module [def-weil-pbc-flat-ring-map]. Then $M/JM$, an $R/J$-module by $(r\\bmod J)\\cdot(x\\bmod JM)=rx\\bmod JM$, is a flat $R/J$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00HI (lemma-flat-base-change, line 8888) applied to $R\\to R'=R/J$, together with the canonical isomorphism $M\\otimes_RR/J\\cong M/JM$ (right exactness of $M\\otimes_R-$ applied to $J\\to R\\to R/J\\to0$); used in More on Algebra, proof of Lemma Tag 0C4G ('Hence $B^\\wedge/\\mathfrak m_A^nB^\\wedge$ is flat over $A/\\mathfrak m_A^n$')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient of a flat module M by I M is flat over R ⧸ I",
+   "results": "Module.FaithfullyFlat.toFlat, Module.flat_iff_of_isLocalization, Module.Finite.quotient, Module.isTorsionBySet_quotient_ideal_smul, Module.Flat.of_flat_tensorProduct, Module.Flat.of_isLocalizedModule",
+   "date": "2026-10-10",
+   "verdict": "no direct statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if M is a flat R-module and I an ideal then M / I M is a flat R/I-module",
+   "results": "Module.instQuotientIdealSubmoduleHSMulTop (Mathlib.Algebra.Module.Torsion.Basic, the R/I-module structure on M/IM), AdicCompletion.instModuleQuotientIdealHSMulTopSubmodule, Module.Flat.iff_lift_lsmul_comp_subtype_injective",
+   "date": "2026-10-10",
+   "verdict": "no direct statement; module structure found"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat (_ ⧸ _) (_ ⧸ _)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no direct statement"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'quotTensorEquivQuotSMul\\|instance baseChange\\|of_linearEquiv\\|extendScalarsOfSurjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/{LinearAlgebra/TensorProduct/Quotient.lean,RingTheory/Flat/Stability.lean,RingTheory/Flat/Basic.lean,Algebra/Algebra/Basic.lean}",
+   "results": "TensorProduct.quotTensorEquivQuotSMul M I : ((R ⧸ I) ⊗[R] M) ≃ₗ[R] M ⧸ (I • ⊤) (LinearAlgebra/TensorProduct/Quotient.lean:153); instance Module.Flat.baseChange [Flat R M] : Flat S (S ⊗[R] M) (RingTheory/Flat/Stability.lean:100); Module.Flat.of_linearEquiv (RingTheory/Flat/Basic.lean:181); LinearEquiv.extendScalarsOfSurjective (Algebra/Algebra/Basic.lean:587); instance Module (R ⧸ I) (M ⧸ I • ⊤) (Algebra/Module/Torsion/Basic.lean:648)",
+   "date": "2026-10-10",
+   "verdict": "specializes in one line"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Flat.baseChange",
+  "file": "Mathlib/RingTheory/Flat/Stability.lean",
+  "line": 100,
+  "how": "specializes in one line: `Module.Flat.of_linearEquiv ((TensorProduct.quotTensorEquivQuotSMul M J).extendScalarsOfSurjective Ideal.Quotient.mk_surjective).symm`, where the instance `Module.Flat.baseChange` (Stability.lean:100) gives `Module.Flat (R ⧸ J) ((R ⧸ J) ⊗[R] M)`, `quotTensorEquivQuotSMul` (Mathlib/LinearAlgebra/TensorProduct/Quotient.lean:153) is the R-linear iso (R ⧸ J) ⊗[R] M ≃ M ⧸ J • ⊤, `LinearEquiv.extendScalarsOfSurjective` (Mathlib/Algebra/Algebra/Basic.lean:587) makes it (R ⧸ J)-linear, and `Module.Flat.of_linearEquiv` is at Mathlib/RingTheory/Flat/Basic.lean:181; the (R ⧸ J)-module structure on M ⧸ J • ⊤ is the instance at Mathlib/Algebra/Module/Torsion/Basic.lean:648. Source read 2026-10-10; not compiled."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-completion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
