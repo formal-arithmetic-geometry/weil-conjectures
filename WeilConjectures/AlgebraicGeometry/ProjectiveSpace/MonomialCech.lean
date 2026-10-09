@@ -30,7 +30,8 @@ blueprint proof of `lem-pc-projective-space-twist-cohomology`. Writing `d + 1` f
 of coordinates:
 
 * `H⁰` is the degree-`m` part `A[xᵢ]ₘ` of the polynomial ring
-  (`monomialCechComplexHomologyZeroLinearEquiv`);
+  (`monomialCechComplexHomologyZeroLinearEquiv`), which vanishes for `m < 0` if `d ≥ 1`
+  (`subsingleton_monomialCechComplex_homology_zero`);
 * `Hᵠ = 0` for `0 < q < d` (`exactAt_monomialCechComplex`);
 * `Hᵈ` is free on the strictly negative exponent vectors of sum `m`
   (`monomialCechComplexHomologyTopLinearEquiv`), so that `Hᵈ = 0` for `m ≥ -d`
@@ -359,6 +360,51 @@ lemma monomialCech_cocycle_zero_mem (hm : 0 ≤ m) {c : MonomialCechCochain n A 
       rw [← hs, Fintype.sum_eq_single l fun j hj ↦ absurd (h j) hj] at hm
       exact hm
   · exact hr l fun ⟨_, h'⟩ ↦ hl h'.symm
+
+/-- If there are at least two coordinates, the components of a `0`-cocycle are polynomials of
+degree `m`, for every `m`. -/
+lemma monomialCech_cocycle_zero_mem_of_ne {c : MonomialCechCochain n A m 0}
+    (hc : (monomialCechComplex n A m).d 0 1 c = 0) {i j : n} (hij : i ≠ j) :
+    (c (monomialCechVertex i) : (n → ℤ) →₀ A) ∈ Finsupp.supported A A (monomialExponents n m) := by
+  intro e he
+  obtain ⟨hs, hr⟩ := (c (monomialCechVertex i)).2 he
+  refine ⟨hs, fun l ↦ ?_⟩
+  by_cases hl : l = i
+  · subst hl
+    rw [monomialCech_cocycle_zero hc l j] at he
+    exact ((c (monomialCechVertex j)).2 he).2 l fun ⟨_, h'⟩ ↦ hij h'.symm
+  · exact hr l fun ⟨_, h'⟩ ↦ hl h'.symm
+
+variable (n) in
+/-- There are no monomials of negative degree. -/
+lemma monomialExponents_eq_empty (hm : m < 0) : monomialExponents n m = ∅ := by
+  ext e
+  simp only [monomialExponents, Set.mem_ofPred_eq, Set.mem_empty_iff_false, iff_false, not_and,
+    not_forall, not_le]
+  intro hs
+  by_contra! h
+  exact hm.not_ge (hs ▸ Finset.sum_nonneg fun i _ ↦ h i)
+
+variable (n A) in
+/-- **`H⁰` of the monomial Čech complex in negative degree**: for `m < 0` and at least two
+coordinates, the `0`-th cohomology of the monomial Čech complex of `𝒪(m)` vanishes.
+
+(blueprint: `lem-pc-projective-space-twist-cohomology` (i)) -/
+lemma subsingleton_monomialCechComplex_homology_zero [Nontrivial n] (hm : m < 0) :
+    Subsingleton ((monomialCechComplex n A m).homology 0) := by
+  refine (monomialCechComplex n A m).homologyZeroLinearEquiv.toEquiv.subsingleton_congr.2
+    ⟨fun c c' ↦ ?_⟩
+  suffices h : ∀ c : LinearMap.ker ((monomialCechComplex n A m).d 0 1).hom, c = 0 by
+    rw [h c, h c']
+  intro c
+  refine Subtype.ext (MonomialCechCochain.ext_coeff fun σ e ↦ ?_)
+  obtain ⟨j, hj⟩ := exists_ne (σ 0)
+  have hσ : σ = monomialCechVertex (σ 0) := funext fun l ↦ by fin_cases l; rfl
+  have h := monomialCech_cocycle_zero_mem_of_ne (A := A) c.2 hj.symm
+  rw [monomialExponents_eq_empty n hm, Finsupp.supported_empty, Submodule.mem_bot] at h
+  change (c.1 σ : (n → ℤ) →₀ A) e = 0
+  rw [hσ, h]
+  rfl
 
 /-- A family of sections all equal to the same polynomial is a `0`-cocycle. -/
 lemma monomialCechComplex_d_const (g : Finsupp.supported A A (monomialExponents n m)) :
