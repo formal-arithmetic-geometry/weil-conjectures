@@ -571,3 +571,72 @@ theorem surjective_comap_fixedPoints_val_and_iff {R A : Type u} [CommRing R] [Co
 end Points
 
 end AlgHom
+
+namespace AlgHom
+
+/-- Flat base change of a injection whose image contains the fixed points of a finite family of
+endomorphisms, stated for pushout squares: if `A' = S ⊗[R] A` and `B' = S ⊗[R] B` with `S` flat
+over `R`, `α : B → A` is injective with image containing the fixed points of `σ`, and `α'`, `σ'`
+are the base changes of `α`, `σ`, then `α'` is injective with image containing the fixed points
+of `σ'`. -/
+theorem injective_and_mem_range_of_isPushout {R S A B A' B' : Type*} [CommRing R] [CommRing S]
+    [CommRing A] [CommRing B] [CommRing A'] [CommRing B'] [Algebra R S] [Algebra R A]
+    [Algebra R B] [Algebra S A'] [Algebra A A'] [Algebra R A'] [IsScalarTower R S A']
+    [IsScalarTower R A A'] [Algebra.IsPushout R S A A'] [Algebra S B'] [Algebra B B']
+    [Algebra R B'] [IsScalarTower R S B'] [IsScalarTower R B B'] [Algebra.IsPushout R S B B']
+    [Module.Flat R S] (α : B →ₐ[R] A) (hinj : Function.Injective α) (α' : B' →+* A')
+    (h₁ : ∀ y, α' (algebraMap B B' y) = algebraMap A A' (α y))
+    (h₂ : ∀ s, α' (algebraMap S B' s) = algebraMap S A' s) {ι : Type*} [_root_.Finite ι]
+    (σ : ι → A →ₐ[R] A) (σ' : ι → A' →+* A')
+    (h₁' : ∀ i x, σ' i (algebraMap A A' x) = algebraMap A A' (σ i x))
+    (h₂' : ∀ i s, σ' i (algebraMap S A' s) = algebraMap S A' s)
+    (hrange : ∀ x ∈ fixedPoints σ, x ∈ Set.range α) :
+    Function.Injective α' ∧ ∀ x, (∀ i, σ' i x = x) → x ∈ Set.range α' := by
+  let eA := Algebra.IsPushout.equiv R S A A'
+  let eB := Algebra.IsPushout.equiv R S B B'
+  let αS : S ⊗[R] B →ₐ[S] S ⊗[R] A := Algebra.TensorProduct.map (AlgHom.id S S) α
+  have hcomm (z : S ⊗[R] B) : α' (eB z) = eA (αS z) := by
+    induction z with
+    | zero => simp
+    | tmul s y =>
+      simp [eA, eB, αS, Algebra.IsPushout.equiv_tmul, h₁, h₂]
+    | add z z' hz hz' => simp only [map_add, hz, hz']
+  have hσ (i : ι) (z : S ⊗[R] A) : σ' i (eA z) = eA (baseChangeFamily S σ i z) := by
+    induction z with
+    | zero => simp
+    | tmul s x => simp [eA, Algebra.IsPushout.equiv_tmul, h₁', h₂']
+    | add z z' hz hz' => simp only [map_add, hz, hz']
+  have hαS : Function.Injective αS :=
+    Module.Flat.lTensor_preserves_injective_linearMap (M := S) α.toLinearMap hinj
+  refine ⟨fun x y hxy ↦ ?_, fun x hx ↦ ?_⟩
+  · obtain ⟨x, rfl⟩ := eB.surjective x
+    obtain ⟨y, rfl⟩ := eB.surjective y
+    rw [hcomm, hcomm, eA.injective.eq_iff] at hxy
+    rw [hαS hxy]
+  · obtain ⟨y, rfl⟩ := eA.surjective x
+    have hy : y ∈ fixedPoints (baseChangeFamily S σ) := mem_fixedPoints.mpr fun i ↦
+      eA.injective (by rw [← hσ, hx])
+    obtain ⟨z, hz⟩ := (tensorFixedPointsEquiv S σ).surjective ⟨y, hy⟩
+    -- the inclusion of the fixed points factors through `α`
+    have hle : (fixedPoints σ).toSubmodule ≤ LinearMap.range α.toLinearMap := fun x hx ↦ by
+      obtain ⟨b, hb⟩ := hrange x hx
+      exact ⟨b, hb⟩
+    let β : fixedPoints σ →ₗ[R] B :=
+      (LinearEquiv.ofInjective α.toLinearMap hinj).symm.toLinearMap ∘ₗ
+        Submodule.inclusion hle
+    have hβ (x : fixedPoints σ) : α (β x) = x :=
+      congr_arg Subtype.val ((LinearEquiv.ofInjective α.toLinearMap hinj).apply_symm_apply
+        (Submodule.inclusion hle x))
+    refine ⟨eB (TensorProduct.AlgebraTensorModule.lTensor S S β z), ?_⟩
+    rw [hcomm]
+    congr 1
+    have hz' := congr_arg Subtype.val hz
+    simp only at hz'
+    rw [← hz']
+    clear hz hz'
+    induction z with
+    | zero => simp
+    | tmul s x => simp [αS, hβ]
+    | add z z' hz hz' => simp only [map_add, hz, hz', Subalgebra.coe_add]
+
+end AlgHom
