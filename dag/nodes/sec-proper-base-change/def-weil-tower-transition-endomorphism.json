@@ -1,0 +1,43 @@
+{
+ "id": "def-weil-tower-transition-endomorphism",
+ "kind": "definition",
+ "title": "Transition endomorphism 1 − s of the product of an inverse system",
+ "statement": "Let $\\mathcal C$ be a preadditive category [def-weil-preadditive-category], let $(K_n,f_n:K_{n+1}\\to K_n)_{n\\geq1}$ be an inverse system of objects of $\\mathcal C$ [def-weil-inverse-system], and assume that the product $\\prod_{n\\geq1}K_n$ with projections $\\mathrm{pr}_n$ exists [def-weil-category-product]. The *shift* $s:\\prod_nK_n\\to\\prod_nK_n$ is the morphism $(f_n\\circ\\mathrm{pr}_{n+1})_{n\\geq1}$, i.e. the unique morphism with $\\mathrm{pr}_n\\circ s=f_n\\circ\\mathrm{pr}_{n+1}$ for all $n$, and the *transition endomorphism* of the system is $1-s=\\mathrm{id}-s$, the unique morphism with $\\mathrm{pr}_n\\circ(1-s)=\\mathrm{pr}_n-f_n\\circ\\mathrm{pr}_{n+1}$; on generalized elements, $(k_n)_n\\mapsto(k_n-f_n(k_{n+1}))_n$. If $(\\varphi_n):(K_n,f_n)\\to(K'_n,f'_n)$ is a morphism of inverse systems and both products exist, then $(1-s')\\circ\\prod_n\\varphi_n=\\prod_n\\varphi_n\\circ(1-s)$ (componentwise this is $f'_n\\varphi_{n+1}=\\varphi_nf_n$).",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Stacks Project, Derived Categories, Definition 13.34.1 (Tag 08TC), derived.tex line 10442: \"the map $\\prod K_n\\to\\prod K_n$ is given by $(k_n)\\mapsto(k_n-f_{n+1}(k_{n+1}))$\" (Stacks indexes the transition map $K_{n+1}\\to K_n$ as $f_{n+1}$); Bhatt-Scholze, arXiv:1309.1198v2, Proposition 3.1.10, p. 17 (the map $t-\\mathrm{id}$)"
+ },
+ "stmt_deps": [
+  "def-weil-preadditive-category",
+  "def-weil-inverse-system",
+  "def-weil-category-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Pi.π _ (n + 1)\\|Pi.π f (n + 1)\\|Pi.π X (n + 1)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln -i 'homotopy limit\\|homotopyLimit\\|holim\\|derived limit\\|Milnor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra",
+   "results": "none (no endomorphism of a sequential product built from the transition maps; no homotopy/derived limit, no Milnor sequence)",
+   "date": "2026-10-09",
+   "verdict": "no match: a one-line definition from `Pi.lift`, `Pi.π` and subtraction in a `Preadditive` category: `𝟙 _ - Pi.lift (fun n => Pi.π K (n+1) ≫ f n)`, not a Mathlib declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-derived-limit",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

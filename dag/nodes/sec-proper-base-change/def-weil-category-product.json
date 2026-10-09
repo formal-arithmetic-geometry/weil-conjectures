@@ -1,0 +1,50 @@
+{
+ "id": "def-weil-category-product",
+ "kind": "definition",
+ "title": "Products of families of objects in a category; countable products",
+ "statement": "Let $\\mathcal C$ be a category and $(K_i)_{i\\in I}$ a family of objects of $\\mathcal C$ indexed by a set $I$. A *product* of the family is an object $\\prod_iK_i$ with morphisms $\\mathrm{pr}_i:\\prod_iK_i\\to K_i$ (the *projections*) such that for every object $L$ and every family of morphisms $g_i:L\\to K_i$ there is exactly one morphism $g=(g_i)_i:L\\to\\prod_iK_i$ with $\\mathrm{pr}_i\\circ g=g_i$ for all $i$. It is unique up to unique isomorphism compatible with the projections. For families $(K_i)$, $(K'_i)$ with products and morphisms $\\varphi_i:K_i\\to K'_i$, $\\prod_i\\varphi_i$ is the morphism $(\\varphi_i\\circ\\mathrm{pr}_i)_i$. The category $\\mathcal C$ *has countable products* if every family indexed by a countable set has a product.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Stacks Project, Categories, Definition Tag 002I (product as limit over a discrete category, projection morphisms), categories.tex line 1405; used in Derived Categories, Definition Tag 08TC and Lemma Tag 07KC"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'abbrev HasProduct\\|abbrev piObj\\|abbrev Pi.π\\|abbrev Pi.lift\\|def Pi.map ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Products.lean; grep -n 'class HasCountableProducts' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Countable.lean",
+   "results": "Products.lean:90 `HasProduct f`, :194 `piObj f` (notation `∏ᶜ f`, :204), :210 `Pi.π f b`, :253 `Pi.lift`, :330 `Pi.map`; Countable.lean:60 `class HasCountableProducts` (products indexed by every countable type)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -li 'countable product\\|HasCountableProducts\\|piObj' dag/nodes/*/*.json",
+   "results": "statement nodes using countable products (lem-weil-derived-limit-existence, prop-weil-pbc-derived-product-representation, lem-weil-proetale-countable-products-exact, ...); no definition node of products in a category",
+   "date": "2026-10-09",
+   "verdict": "no existing node"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.piObj, CategoryTheory.Limits.Pi.π, CategoryTheory.Limits.Pi.lift, CategoryTheory.Limits.Pi.map, CategoryTheory.Limits.HasCountableProducts",
+  "file": "Mathlib/CategoryTheory/Limits/Shapes/Products.lean",
+  "how": "exact: `∏ᶜ K` with `Pi.π K i` and `Pi.lift` (under `[HasProduct K]`), `Pi.map` for $\\prod\\varphi_i$; countable products are `[HasCountableProducts C]` (Mathlib/CategoryTheory/Limits/Shapes/Countable.lean:60)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-derived-limit",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
