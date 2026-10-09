@@ -175,9 +175,11 @@ For a dualizable `K`, an invertible twist `T` — in the `ℓ`-adic formalism a 
 isomorphism. In particular `RHom(K, Λ_X(m)) ≅ K^∨(m)`. -/
 theorem nonempty_iso_derivedHom_tensor
     {K T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)
-    (hT : IsInvertible T) (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    Nonempty ((RHom(X)[A].obj (op K)).obj (M ⊗ T) ≅ (RHom(X)[A].obj (op K)).obj M ⊗ T) :=
-  sorry
+    (_hT : IsInvertible T) (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    Nonempty ((RHom(X)[A].obj (op K)).obj (M ⊗ T) ≅ (RHom(X)[A].obj (op K)).obj M ⊗ T) := by
+  obtain ⟨e₁⟩ := nonempty_iso_coefficientDual_tensor hK (M ⊗ T)
+  obtain ⟨e₂⟩ := nonempty_iso_coefficientDual_tensor hK M
+  exact ⟨e₁.symm ≪≫ (α_ _ _ _).symm ≪≫ whiskerRightIso e₂ T⟩
 
 /-- Blueprint `sk-thm-sf-internal-hom-pullback`: Internal Hom versus pullback for a
 site-perfect first variable. This is also blueprint `thm-trf-internal-hom-pullback`.
