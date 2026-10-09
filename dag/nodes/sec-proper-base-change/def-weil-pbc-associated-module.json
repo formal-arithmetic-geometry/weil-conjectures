@@ -2,7 +2,7 @@
  "id": "def-weil-pbc-associated-module",
  "kind": "definition",
  "title": "Sheaf of modules associated to a module over the global sections",
- "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-weil-locally-ringed-space-morphism] and $R=\\Gamma(X,\\mathcal O_X)$; for an open $U\\subseteq X$ regard $\\mathcal O_X(U)$ as an $R$-algebra through the restriction map $R=\\mathcal O_X(X)\\to\\mathcal O_X(U)$. For an $R$-module $M$ let $\\mathcal P_M$ be the presheaf of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification] with $\\mathcal P_M(U)=\\mathcal O_X(U)\\otimes_RM$ (the base change of $M$ to $\\mathcal O_X(U)$ [def-weil-module-base-change], an $\\mathcal O_X(U)$-module through the factor $\\mathcal O_X(U)$) and restriction maps $\\rho^U_V\\otimes\\mathrm{id}_M$ for $V\\subseteq U$. The *sheaf of $\\mathcal O_X$-modules associated to $M$* is the sheafification $\\mathcal F_M=\\mathcal P_M^\\#$ [def-weil-presheaf-modules-sheafification], a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], with its $\\mathcal O_X$-linear sheafification map $\\sigma_M:\\mathcal P_M\\to\\mathcal F_M$; its *canonical section map* is the $R$-linear map $c_M:M\\to\\Gamma(X,\\mathcal F_M)$, $c_M(m)=\\sigma_{M,X}(1\\otimes m)$. For an $R$-linear map $u:M\\to M'$, the maps $\\mathrm{id}_{\\mathcal O_X(U)}\\otimes u$ form a morphism $\\mathcal P_u:\\mathcal P_M\\to\\mathcal P_{M'}$ of presheaves of $\\mathcal O_X$-modules, and $\\mathcal F_u:\\mathcal F_M\\to\\mathcal F_{M'}$ is the unique $\\mathcal O_X$-linear map with $\\mathcal F_u\\circ\\sigma_M=\\sigma_{M'}\\circ\\mathcal P_u$ (universal property of sheafification); in particular $\\mathcal F_{u,X}\\circ c_M=c_{M'}\\circ u$. This makes $M\\mapsto\\mathcal F_M$ a functor from $R$-modules to $\\mathcal O_X$-modules. (Stacks, Modules, Lemma 01BH, construction (3), with $\\alpha=\\mathrm{id}_R$, and Definition 01BI.)",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-weil-locally-ringed-space-morphism] and $R=\\Gamma(X,\\mathcal O_X)$; for an open $U\\subseteq X$ regard $\\mathcal O_X(U)$ as an $R$-algebra through the restriction map $R=\\mathcal O_X(X)\\to\\mathcal O_X(U)$. For an $R$-module $M$ let $\\mathcal P_M$ be the presheaf of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification] with $\\mathcal P_M(U)=\\mathcal O_X(U)\\otimes_RM$ (the base change of $M$ to $\\mathcal O_X(U)$ [def-weil-module-base-change], an $\\mathcal O_X(U)$-module through the factor $\\mathcal O_X(U)$) and restriction maps $\\rho^U_V\\otimes\\mathrm{id}_M$ for $V\\subseteq U$. The *sheaf of $\\mathcal O_X$-modules associated to $M$* is the sheafification $\\mathcal F_M=\\mathcal P_M^\\#$ [def-weil-presheaf-modules-sheafification], a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], with its $\\mathcal O_X$-linear sheafification map $\\sigma_M:\\mathcal P_M\\to\\mathcal F_M$; its *canonical section map* is the $R$-linear map $c_M:M\\to\\Gamma(X,\\mathcal F_M)$, $c_M(m)=\\sigma_{M,X}(1\\otimes m)$. For an $R$-linear map $u:M\\to M'$, the maps $\\mathrm{id}_{\\mathcal O_X(U)}\\otimes u$ form a morphism $\\mathcal P_u:\\mathcal P_M\\to\\mathcal P_{M'}$ of presheaves of $\\mathcal O_X$-modules, and $\\mathcal F_u:\\mathcal F_M\\to\\mathcal F_{M'}$ is the unique $\\mathcal O_X$-linear map with $\\mathcal F_u\\circ\\sigma_M=\\sigma_{M'}\\circ\\mathcal P_u$ (universal property of sheafification); in particular $\\mathcal F_{u,X}\\circ c_M=c_{M'}\\circ u$. Moreover $\\mathcal F_{\\mathrm{id}_M}=\\mathrm{id}_{\\mathcal F_M}$ and $\\mathcal F_{v\\circ u}=\\mathcal F_v\\circ\\mathcal F_u$ for $R$-linear $u:M\\to M'$, $v:M'\\to M''$, so $M\\mapsto\\mathcal F_M$, $u\\mapsto\\mathcal F_u$ is a functor from $R$-modules to $\\mathcal O_X$-modules. (Stacks, Modules, Lemma 01BH, construction (3), with $\\alpha=\\mathrm{id}_R$, and Definition 01BI.)",
  "source": {
   "document": "literature/stacks-project/modules.tex",
   "place": "Modules, Lemma 01BH (lemma-construct-quasi-coherent-sheaves), construction (3) with alpha = id, and Definition 01BI (definition-sheaf-associated)"
@@ -13,9 +13,90 @@
   "def-weil-module-base-change",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$\\mathcal P_M$ is a presheaf of $\\mathcal O_X$-modules.* $\\mathcal O_X$ is a sheaf of commutative rings on the opens of $X$ [def-weil-locally-ringed-space-morphism], so the restrictions $\\rho^U_V:\\mathcal O_X(U)\\to\\mathcal O_X(V)$ ($V\\subseteq U$) are ring homomorphisms with $\\rho^U_U=\\mathrm{id}$ and $\\rho^V_W\\circ\\rho^U_V=\\rho^U_W$. The $R$-algebra structure of $\\mathcal O_X(U)$ is $\\rho^X_U$, and $\\rho^U_V\\circ\\rho^X_U=\\rho^X_V$, so every $\\rho^U_V$ is an $R$-algebra homomorphism. Hence $\\mathcal P_M(U)=\\mathcal O_X(U)\\otimes_RM$ is an $\\mathcal O_X(U)$-module (the base change of $M$ along $R\\to\\mathcal O_X(U)$ [def-weil-module-base-change], tensor factors written in the other order), and the $R$-bilinear map $(a,m)\\mapsto\\rho^U_V(a)\\otimes m$ induces the additive map $\\rho^U_V\\otimes\\mathrm{id}_M:a\\otimes m\\mapsto\\rho^U_V(a)\\otimes m$ (universal property of $\\otimes_R$; bilinearity uses only that $\\rho^U_V$ is additive and $R$-linear). On generators $a\\otimes m$: $(\\rho^U_U\\otimes\\mathrm{id})=\\mathrm{id}$, $(\\rho^V_W\\otimes\\mathrm{id})(\\rho^U_V\\otimes\\mathrm{id})=\\rho^U_W\\otimes\\mathrm{id}$, so $\\mathcal P_M$ is a presheaf of abelian groups; and for $b\\in\\mathcal O_X(U)$, $(\\rho^U_V\\otimes\\mathrm{id})(b\\cdot(a\\otimes m))=\\rho^U_V(ba)\\otimes m=\\rho^U_V(b)\\cdot(\\rho^U_V(a)\\otimes m)$, i.e. the restriction maps are semilinear over $\\rho^U_V$. By additivity these identities hold on all of $\\mathcal P_M(U)$, so $\\mathcal P_M$ is a presheaf of $\\mathcal O_X$-modules in the sense of [def-weil-presheaf-modules-sheafification].",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-module-base-change",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BH (lemma-construct-quasi-coherent-sheaves), construction (3) and assertion (2) (functoriality), with alpha = id; Definition 01BI"
+   }
+  },
+  {
+   "text": "*$\\mathcal F_M$ and $\\sigma_M$ are well defined.* The opens of $X$ with inclusions, a family $\\{U_j\\subseteq U\\}$ covering $U$ when $U=\\bigcup_jU_j$, form a site [def-weil-pbc-sites-and-cohomology] (fibre products are intersections), and $\\mathcal O_X$ is a sheaf of rings on it. Applying [def-weil-presheaf-modules-sheafification] to the presheaf of $\\mathcal O_X$-modules $\\mathcal P_M$ of Step 1 gives the sheaf of $\\mathcal O_X$-modules $\\mathcal F_M=\\mathcal P_M^\\#$ [def-weil-sheaf-of-modules-category] and the $\\mathcal O_X$-linear map $\\sigma_M:\\mathcal P_M\\to\\mathcal F_M$, through which every $\\mathcal O_X$-linear map from $\\mathcal P_M$ to a sheaf of $\\mathcal O_X$-modules factors uniquely; $\\mathcal F_M$ with $\\sigma_M$ is determined up to unique isomorphism by this universal property. (In Stacks this is construction (3) of 01BH; its proof identifies it with $\\pi^*M$ for $\\pi:(X,\\mathcal O_X)\\to(\\{*\\},R)$, whose definition is this sheafification.)",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section ringed-spaces-functoriality-modules (pullback pi^* of modules defined as the sheafification of U -> O_X(U) tensor M), cited in the proof of Modules 01BH for F_1 = F_3"
+   }
+  },
+  {
+   "text": "*$c_M$ is $R$-linear.* The map $\\iota:M\\to\\mathcal P_M(X)=R\\otimes_RM$, $m\\mapsto1\\otimes m$, is additive, and $\\iota(rm)=1\\otimes rm=r\\otimes m=r\\cdot(1\\otimes m)$ for $r\\in R=\\mathcal O_X(X)$ (the tensor is over $R$ and $\\mathcal O_X(X)$ acts on the first factor); so $\\iota$ is $R$-linear [def-weil-module-base-change]. The component $\\sigma_{M,X}:\\mathcal P_M(X)\\to\\mathcal F_M(X)=\\Gamma(X,\\mathcal F_M)$ is $\\mathcal O_X(X)=R$-linear by Step 2. Hence $c_M=\\sigma_{M,X}\\circ\\iota$ is $R$-linear, for the $R$-module structure of $\\Gamma(X,\\mathcal F_M)$ as an $\\mathcal O_X(X)$-module.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BH (lemma-construct-quasi-coherent-sheaves), construction (3) and assertion (2) (functoriality), with alpha = id; Definition 01BI"
+   }
+  },
+  {
+   "text": "*$\\mathcal P_u$ is a morphism of presheaves of $\\mathcal O_X$-modules, functorial in $u$.* For an $R$-linear $u:M\\to M'$, $\\mathcal P_{u,U}=\\mathrm{id}_{\\mathcal O_X(U)}\\otimes u:a\\otimes m\\mapsto a\\otimes u(m)$ is the base change of $u$ to $\\mathcal O_X(U)$, which is $\\mathcal O_X(U)$-linear, with $\\mathrm{id}\\otimes\\mathrm{id}_M=\\mathrm{id}$ and $(\\mathrm{id}\\otimes v)(\\mathrm{id}\\otimes u)=\\mathrm{id}\\otimes(v\\circ u)$ [def-weil-module-base-change]. It commutes with restrictions: both $(\\rho^U_V\\otimes\\mathrm{id}_{M'})\\circ(\\mathrm{id}\\otimes u)$ and $(\\mathrm{id}\\otimes u)\\circ(\\rho^U_V\\otimes\\mathrm{id}_M)$ send $a\\otimes m$ to $\\rho^U_V(a)\\otimes u(m)$, and are additive. So $\\mathcal P_u:\\mathcal P_M\\to\\mathcal P_{M'}$ is a morphism of presheaves of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification], $\\mathcal P_{\\mathrm{id}_M}=\\mathrm{id}$, $\\mathcal P_{v\\circ u}=\\mathcal P_v\\circ\\mathcal P_u$, and $\\mathcal P_{u,X}(1\\otimes m)=1\\otimes u(m)$.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BH (lemma-construct-quasi-coherent-sheaves), construction (3) and assertion (2) (functoriality), with alpha = id; Definition 01BI"
+   }
+  },
+  {
+   "text": "*$\\mathcal F_u$ exists, is unique and is functorial.* $\\sigma_{M'}\\circ\\mathcal P_u:\\mathcal P_M\\to\\mathcal F_{M'}$ is $\\mathcal O_X$-linear (Steps 2 and 4) with target a sheaf of $\\mathcal O_X$-modules, so by the universal property of $\\sigma_M$ [def-weil-presheaf-modules-sheafification] there is exactly one $\\mathcal O_X$-linear $\\mathcal F_u:\\mathcal F_M\\to\\mathcal F_{M'}$ with $\\mathcal F_u\\circ\\sigma_M=\\sigma_{M'}\\circ\\mathcal P_u$. For $u=\\mathrm{id}_M$, both $\\mathcal F_{\\mathrm{id}_M}$ and $\\mathrm{id}_{\\mathcal F_M}$ satisfy $\\varphi\\circ\\sigma_M=\\sigma_M=\\sigma_M\\circ\\mathcal P_{\\mathrm{id}_M}$, so they are equal by uniqueness. For $v:M'\\to M''$: $(\\mathcal F_v\\circ\\mathcal F_u)\\circ\\sigma_M=\\mathcal F_v\\circ\\sigma_{M'}\\circ\\mathcal P_u=\\sigma_{M''}\\circ\\mathcal P_v\\circ\\mathcal P_u=\\sigma_{M''}\\circ\\mathcal P_{v\\circ u}$ (Step 4), so $\\mathcal F_v\\circ\\mathcal F_u=\\mathcal F_{v\\circ u}$ by uniqueness. Hence $M\\mapsto\\mathcal F_M$, $u\\mapsto\\mathcal F_u$ is a functor (Stacks 01BH (2), there via $\\pi^*$).",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BH (lemma-construct-quasi-coherent-sheaves), construction (3) and assertion (2) (functoriality), with alpha = id; Definition 01BI"
+   }
+  },
+  {
+   "text": "*Compatibility with the canonical section maps.* For $m\\in M$, by Step 5 at the open $X$ and Step 4: $\\mathcal F_{u,X}(c_M(m))=\\mathcal F_{u,X}(\\sigma_{M,X}(1\\otimes m))=\\sigma_{M',X}(\\mathcal P_{u,X}(1\\otimes m))=\\sigma_{M',X}(1\\otimes u(m))=c_{M'}(u(m))$. So $\\mathcal F_{u,X}\\circ c_M=c_{M'}\\circ u$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BH (lemma-construct-quasi-coherent-sheaves), construction (3) and assertion (2) (functoriality), with alpha = id; Definition 01BI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-module-base-change",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BH construction (3) and assertion (2), Definition 01BI; sheaves.tex, Section ringed-spaces-functoriality-modules (pi^* as sheafification of U -> O_X(U) tensor M); well-definedness checks written out by the agent, since Stacks leaves them implicit"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +132,31 @@
    "results": "no declaration with these names in Mathlib or the source repository",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "presheaf of modules U ↦ R(U) ⊗ M obtained by extending scalars of a module over global sections to each open",
+   "results": "ModuleCat.ExtendScalars.obj' (ModuleCat/ChangeOfRings), PresheafOfModules.restrictScalarsObj, SheafOfModules.restrictScalars, PresheafOfModules.pushforward, PresheafOfModules.free, ModuleCat.tildeInModuleCat (AlgebraicGeometry.Modules.Tilde)",
+   "date": "2026-10-10",
+   "verdict": "no match: extension of scalars exists for one ring map only; no presheaf U ↦ O(U) ⊗_R M"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of a module along the morphism of ringed spaces from X to a point with ring the global sections, sheaf of modules",
+   "results": "ModuleCat.tilde, ModuleCat.tildeInModuleCat (Spec only), SheafOfModules.evaluation, SheafOfModules.sectionsFunctor, Scheme.PresheafOfModules, Scheme.Modules.pullback",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'extendScalars\\|^noncomputable def\\|^def ' Mathlib/Algebra/Category/ModuleCat/Presheaf/{ChangeOfRings,Pullback}.lean Mathlib/Algebra/Category/ModuleCat/Sheaf/{PullbackContinuous,ChangeOfRings}.lean; grep -rln 'constFunctor\\|PresheafOfModules.*extendScalars' Mathlib/Algebra/Category/ModuleCat Mathlib/AlgebraicGeometry",
+   "results": "PresheafOfModules.pullback (Presheaf/Pullback.lean:44) and SheafOfModules.pullback (Sheaf/PullbackContinuous.lean:53): pullback along a functor of sites as the abstract left adjoint of pushforward (Stacks construction (1) up to a theorem, not the tensor presheaf (3)); PresheafOfModules.ColimitFunctor.constFunctor (Presheaf/ColimitFunctor.lean:50), the constant presheaf of modules over a colimit ring on a cofiltered category (not O(U) ⊗ M); no extendScalars for presheaves of modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,5 +176,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-associated-module",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Modules 01BH construction (3) and assertion (2) with alpha = id, Definition 01BI, and the proof of 01BH (F_1 = F_3: pi^* is the sheafification of the tensor presheaf). The definition agrees with the source; the statement was completed by making the functoriality explicit (F_id = id, F_{vu} = F_v F_u), which 01BH (2) asserts and the citers (lem-weil-pbc-associated-module-hom naturality in M, lem-weil-pbc-associated-module-pullback naturality) use together with c_M and F_{u,X} c_M = c_{M'} u (all clauses they use are in the statement). Six elementary well-definedness steps: P_M is a presheaf of O_X-modules (restrictions are R-algebra maps, rho tensor id compatible and semilinear); F_M and sigma_M by def-weil-presheaf-modules-sheafification on the opens site (def-weil-pbc-sites-and-cohomology); c_M is R-linear; P_u is a morphism of presheaves of modules, functorial (def-weil-module-base-change); F_u exists uniquely and is functorial by the universal property; F_{u,X} c_M = c_{M'} u. No new nodes (every fact is an instance of a cited definition or a one-line computation on generators). Mathlib re-searched (LeanSearch, LeanFinder, grep): no presheaf U -> O_X(U) tensor_R M on a general ringed space; PresheafOfModules.pullback / SheafOfModules.pullback give construction (1) abstractly, ModuleCat.tilde the Spec case, both identified with this construction only by a theorem, so not a leaf. Kept stmt_deps; def-weil-pbc-sites-and-cohomology added to proof_deps only."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Definition node split by six elementary well-formedness steps (presheaf of modules, sheafification on the site of opens, R-linearity of c_M, P_u a morphism functorial in u, F_u by the universal property with F_id = id and F_vu = F_v F_u, compatibility with c). Statement: functoriality made explicit (F_id, F_{vu}); content as in Stacks 01BH(3)/01BI. Both citers covered. Correct."
+ }
 }
