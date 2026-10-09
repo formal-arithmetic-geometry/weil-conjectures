@@ -12,9 +12,105 @@
   "def-sbc-formally-smooth",
   "def-sbc-first-order-thickening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Notation and the dictionary of morphisms.* Write $Y=\\operatorname{Spec}R$, $X=\\operatorname{Spec}S$ and $f=\\operatorname{Spec}\\varphi:X\\to Y$ [def-weil-affine-spectrum]. By [def-weil-affine-spectrum], $\\operatorname{Spec}$ is contravariant and functorial ($\\operatorname{Spec}(\\psi\\circ\\chi)=\\operatorname{Spec}\\chi\\circ\\operatorname{Spec}\\psi$), every morphism of schemes $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is $\\operatorname{Spec}\\chi$ for exactly one ring map $\\chi:A\\to B$, and $\\mathcal O_{\\operatorname{Spec}A}(\\operatorname{Spec}A)=A$, the ring map induced by $\\operatorname{Spec}\\chi$ on global sections being $\\chi$. Consequently, for a ring $D$ with structure map $\\beta:R\\to D$ (so $\\operatorname{Spec}D$ is a scheme over $Y$ via $\\operatorname{Spec}\\beta$ [def-weil-scheme-over-base]) and a ring map $h:S\\to D$: $\\operatorname{Spec}h$ is a morphism over $Y$, i.e. $f\\circ\\operatorname{Spec}h=\\operatorname{Spec}\\beta$, iff $\\operatorname{Spec}(h\\circ\\varphi)=\\operatorname{Spec}\\beta$, iff $h\\circ\\varphi=\\beta$, i.e. iff $h$ is a homomorphism of $R$-algebras.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemmas Tag 01I1 (lemma-morphism-into-affine) and 01I2 (lemma-category-affine-schemes)"
+   }
+  },
+  {
+   "text": "*Square-zero quotients give first order thickenings of affine schemes.* Let $D$ be a ring with $\\beta:R\\to D$, $N\\subseteq D$ an ideal with $N^2=0$, $q:D\\to D/N$ the quotient map, $T'=\\operatorname{Spec}D$ over $Y$ via $\\operatorname{Spec}\\beta$, $T=\\operatorname{Spec}(D/N)$ and $i=\\operatorname{Spec}q:T\\to T'$. By the first step the map induced by $i$ on global sections $\\mathcal O_{T'}(T')=D\\to\\mathcal O_T(i^{-1}T')=\\mathcal O_T(T)=D/N$ is $q$, which is surjective, and $i^{-1}(T')=T$ is affine; applying [lem-weil-pbc-closed-immersion-affine-cover-criterion](2) to the covering of $T'$ by the single affine open $T'$, $i$ is a closed immersion [def-weil-closed-immersion]. Its ideal sheaf $\\mathcal I$ [def-sbc-closed-immersion-ideal-sheaf] satisfies, on the affine open $U=T'$ where $i$ is $\\operatorname{Spec}(D/N)\\to\\operatorname{Spec}D$, $\\mathcal I(T')=\\ker q=N$ and $\\mathcal I=\\widetilde N$. By the definition of products of quasi-coherent ideals [def-sbc-ideal-sheaf-powers], on the affine open $T'$ itself $\\mathcal I^2=(\\mathcal I(T')\\mathcal I(T'))^\\sim=(N^2)^\\sim=0$. Hence $T\\subset T'$ is a first order thickening [def-sbc-first-order-thickening] of affine schemes over $Y$, $T$ being over $Y$ through $\\operatorname{Spec}\\beta\\circ i=\\operatorname{Spec}(q\\circ\\beta)$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers",
+    "def-sbc-first-order-thickening",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 01QO (lemma-closed-immersion, line 58), (1)=>(2) and (3)=>(1); Schemes, Lemma Tag 01IH (lemma-closed-immersion-affine-case, schemes.tex line 1600)"
+   }
+  },
+  {
+   "text": "*Every first order thickening of affine schemes is of this form.* Let $T\\subset T'$ be a first order thickening of affine schemes over $Y$ [def-sbc-first-order-thickening], with closed immersion $i:T\\to T'$, structure morphism $b:T'\\to Y$ and ideal sheaf $\\mathcal I$, $\\mathcal I^2=0$. Since $T'$ is affine [def-pc-scheme], choose an isomorphism $T'\\cong\\operatorname{Spec}D$; then $D\\cong\\mathcal O_{T'}(T')$ [def-weil-affine-spectrum]. By [lem-weil-pbc-closed-immersion-affine-cover-criterion](1) applied to the affine open $V=T'$, the ring map $i^\\sharp:D=\\mathcal O_{T'}(T')\\to C=\\mathcal O_T(T)$ is surjective; let $N=\\ker i^\\sharp$, so $i^\\sharp$ induces an isomorphism $D/N\\cong C$, and $T$ is affine, $T\\cong\\operatorname{Spec}C\\cong\\operatorname{Spec}(D/N)$. Under these isomorphisms $i$ becomes a morphism $\\operatorname{Spec}(D/N)\\to\\operatorname{Spec}D$, which by the first step is $\\operatorname{Spec}$ of the ring map it induces on global sections, namely $q:D\\to D/N$. By [def-sbc-closed-immersion-ideal-sheaf] $\\mathcal I(T')=\\ker(\\mathcal O_{T'}(T')\\to\\mathcal O_T(T))=N$, and by [def-sbc-ideal-sheaf-powers] (square zero means $\\mathcal I(U)^2=0$ on every affine open $U$; take $U=T'$) $N^2=0$. Finally $b=\\operatorname{Spec}\\beta$ for a unique $\\beta:R\\to D$ (first step), making $D$ an $R$-algebra. So the thickening $(T\\subset T',b)$ is isomorphic, by isomorphisms compatible with $i$ and with the morphisms to $Y$, to the thickening $(\\operatorname{Spec}(D/N)\\subset\\operatorname{Spec}D,\\operatorname{Spec}\\beta)$ of the second step with $N^2=0$.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 01QO (lemma-closed-immersion, line 58), (1)=>(2) and (3)=>(1); Schemes, Lemma Tag 01IH (lemma-closed-immersion-affine-case, schemes.tex line 1600)"
+   }
+  },
+  {
+   "text": "*Transport along isomorphisms.* If two first order thickenings over $Y$, $(T_1\\subset T_1',b_1)$ and $(T_2\\subset T_2',b_2)$, are related by isomorphisms $\\sigma:T_1\\to T_2$, $\\sigma':T_1'\\to T_2'$ with $i_2\\sigma=\\sigma'i_1$ and $b_2\\sigma'=b_1$, then $a\\mapsto a\\sigma^{-1}$, $a'\\mapsto a'\\sigma'^{-1}$ is a bijection between the lifting problems of [def-sbc-formally-smooth] for $f$ on the first and on the second thickening, carrying solutions to solutions (both triangles are preserved by composing with the isomorphisms). So $f$ has the lifting property of [def-sbc-formally-smooth] for one of them iff it has it for the other.",
+   "uses": [
+    "def-sbc-formally-smooth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 02H4 (lemma-affine-formally-smooth, line 3164), proof: 'immediate from the definitions (Definition 02H0 and Algebra, Definition 00TI) by the equivalence of categories of rings and affine schemes, Schemes, Lemma 01I2'"
+   }
+  },
+  {
+   "text": "*($\\Rightarrow$).* Assume $f$ is formally smooth [def-sbc-formally-smooth]. Let $D$ be a ring with $\\beta:R\\to D$, $N\\subseteq D$ with $N^2=0$, $q:D\\to D/N$, and $g:S\\to D/N$ a homomorphism of $R$-algebras, $g\\circ\\varphi=q\\circ\\beta$. By the second step, $i=\\operatorname{Spec}q:T=\\operatorname{Spec}(D/N)\\to T'=\\operatorname{Spec}D$ is a first order thickening of affine schemes over $Y$ (via $\\operatorname{Spec}\\beta$). The morphism $a=\\operatorname{Spec}g:T\\to X$ is over $Y$: $f\\circ a=\\operatorname{Spec}(g\\circ\\varphi)=\\operatorname{Spec}(q\\circ\\beta)=\\operatorname{Spec}\\beta\\circ i$ (first step). Formal smoothness gives $a':T'\\to X$ over $Y$ with $a'\\circ i=a$. By the first step $a'=\\operatorname{Spec}h$ for a unique ring map $h:S\\to D$; $a'$ being over $Y$ means $h$ is a homomorphism of $R$-algebras, and $\\operatorname{Spec}(q\\circ h)=\\operatorname{Spec}h\\circ\\operatorname{Spec}q=a'\\circ i=a=\\operatorname{Spec}g$ gives $q\\circ h=g$ by uniqueness. So $\\varphi$ satisfies the lifting condition of Algebra, Definition 00TI.",
+   "uses": [
+    "def-sbc-formally-smooth",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 02H4 (lemma-affine-formally-smooth, line 3164), proof: 'immediate from the definitions (Definition 02H0 and Algebra, Definition 00TI) by the equivalence of categories of rings and affine schemes, Schemes, Lemma 01I2'"
+   }
+  },
+  {
+   "text": "*($\\Leftarrow$).* Assume $\\varphi$ satisfies the lifting condition of Algebra 00TI. Let $T\\subset T'$ be a first order thickening of affine schemes over $Y$ with structure morphism $b:T'\\to Y$ and $a:T\\to X$ with $f\\circ a=b\\circ i$. By the third and fourth steps we may assume $T'=\\operatorname{Spec}D$, $T=\\operatorname{Spec}(D/N)$ with $N^2=0$, $i=\\operatorname{Spec}q$ and $b=\\operatorname{Spec}\\beta$ for $\\beta:R\\to D$. By the first step $a=\\operatorname{Spec}g$ for a unique ring map $g:S\\to D/N$, and $\\operatorname{Spec}(g\\circ\\varphi)=f\\circ a=b\\circ i=\\operatorname{Spec}(q\\circ\\beta)$ gives $g\\circ\\varphi=q\\circ\\beta$: $g$ is a homomorphism of $R$-algebras $S\\to D/N$. The lifting condition gives an $R$-algebra map $h:S\\to D$ with $q\\circ h=g$. Put $a'=\\operatorname{Spec}h:T'\\to X$. Then $f\\circ a'=\\operatorname{Spec}(h\\circ\\varphi)=\\operatorname{Spec}\\beta=b$, so $a'$ is over $Y$, and $a'\\circ i=\\operatorname{Spec}(q\\circ h)=\\operatorname{Spec}g=a$. Hence every such lifting problem has a solution and $f$ is formally smooth [def-sbc-formally-smooth].",
+   "uses": [
+    "def-sbc-formally-smooth",
+    "def-weil-affine-spectrum",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 02H4 (lemma-affine-formally-smooth, line 3164), proof: 'immediate from the definitions (Definition 02H0 and Algebra, Definition 00TI) by the equivalence of categories of rings and affine schemes, Schemes, Lemma 01I2'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-scheme-over-base",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sbc-first-order-thickening",
+  "def-pc-scheme",
+  "def-sbc-formally-smooth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma Tag 02H4 (lemma-affine-formally-smooth), with Definition 02H0, Algebra Definition 00TI and Schemes Lemma 01I2; the affine description of first order thickenings follows Morphisms Lemma 01QO and Schemes Lemma 01IH"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,7 +149,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,5 +169,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 02H4, 02H0 and Algebra 00TI and against def-sbc-formally-smooth (thickenings T subset T' of affine schemes over S, T over S through T'): statement kept, stmt_deps kept. Wrote the 'immediate from the definitions' proof out in six steps: the Spec/ring-map dictionary (def-weil-affine-spectrum, a Mathlib leaf via Spec.homEquiv, which already states that every morphism of spectra is Spec of exactly one ring map), Spec of a square-zero quotient is a first order thickening of affine schemes and conversely every first order thickening with affine T' is isomorphic to one (via the Mathlib leaf lem-weil-pbc-closed-immersion-affine-cover-criterion, def-sbc-closed-immersion-ideal-sheaf and def-sbc-ideal-sheaf-powers), transport of lifting problems along isomorphisms (elementary), and the two directions. No new node was needed. Mathlib has no scheme-level formally smooth class (no AlgebraicGeometry/Morphisms/FormallySmooth.lean in this Mathlib; only stalk-level use in Morphisms/Smooth.lean), so the item is not a leaf; its recorded searches stand."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Six steps along Stacks 02H4 (immediate from the definitions): the Spec/ring-map dictionary from def-weil-affine-spectrum, square-zero quotients give first order thickenings of affine schemes (closed immersion by the affine-cover criterion leaf, ideal sheaf N~ with square (N^2)~ = 0), every first order thickening of affine schemes has this form, transport along isomorphisms, and the two directions. Correct; 0 new nodes. Worker notes Mathlib has no scheme-level FormallySmooth (only stalk-level in Morphisms/Smooth.lean)."
+ }
 }
