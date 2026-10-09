@@ -5,8 +5,10 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.RingTheory.Derivation.Localization
 
 /-!
@@ -55,6 +57,11 @@ structure LocalDerivation (U : X.Opens) where
   naturality (W W' : X.Opens) (hW : W ≤ U) (h : W' ≤ W) (a : Γ(X, W)) :
     app W' (h.trans hW) (X.presheaf.map (homOfLE h).op a) =
       M.presheaf.map (homOfLE h).op (app W hW a)
+
+/-- The sections of a sheaf of modules over the empty open are trivial. -/
+lemma subsingleton_sections_bot : Subsingleton Γ(M, ⊥) :=
+  ⟨fun a b ↦ TopCat.Sheaf.eq_of_locally_eq' ⟨M.presheaf, M.isSheaf⟩ (fun _ : PEmpty.{1} ↦ ⊥) ⊥
+    (fun i ↦ i.elim) (fun _ hx ↦ hx.elim) a b fun i ↦ i.elim⟩
 
 namespace LocalDerivation
 
@@ -246,7 +253,8 @@ lemma basicOpen_cover (W : X.Opens) (hW : W ≤ U) (x : X) (hx : x ∈ W) :
   exact ⟨g, hxg, hg⟩
 
 /-- The restriction `Γ(X, U) → Γ(M, D(g))` of a map `δ : Γ(X, U) → Γ(M, U)`. -/
-noncomputable def restrictBasicOpen (δ : Γ(X, U) →+ Γ(M, U)) (g : Γ(X, U)) : Γ(X, U) →+ Γ(M, X.basicOpen g) :=
+noncomputable def restrictBasicOpen (δ : Γ(X, U) →+ Γ(M, U)) (g : Γ(X, U)) :
+    Γ(X, U) →+ Γ(M, X.basicOpen g) :=
   (M.presheaf.map (homOfLE (X.basicOpen_le g)).op).hom.comp δ
 
 variable (δ : Γ(X, U) →+ Γ(M, U)) (hδ : ∀ a b, δ (a * b) = a • δ b + b • δ a)
@@ -351,6 +359,75 @@ lemma app_eq_of_closure (D₁ D₂ : LocalDerivation M U) {W : X.Opens} (hW : W 
   | add x y _ _ hx hy => rw [map_add, map_add, hx, hy]
   | neg x _ hx => rw [map_neg, map_neg, hx]
   | mul x y _ _ hx hy => rw [D₁.map_mul, D₂.map_mul, hx, hy]
+
+section Relative
+
+variable {S : Scheme.{u}} (f : X ⟶ S)
+
+/-- Two ring homomorphisms out of `(f⁻¹𝒪_S)(V)` agree if they agree on the images of the
+sections of `𝒪_S` over the opens `U` with `V ⊆ f⁻¹ U`. -/
+lemma pullbackPresheaf_hom_ext {V : X.Opens} {R : CommRingCat.{u}}
+    {g₁ g₂ : f.pullbackPresheaf.obj (op V) ⟶ R}
+    (h : ∀ (U : S.Opens) (e : V ≤ f ⁻¹ᵁ U),
+      ((TopCat.Presheaf.pullbackPushforwardAdjunction CommRingCat f.base).unit.app
+          S.presheaf).app (op U) ≫ f.pullbackPresheaf.map (homOfLE e).op ≫ g₁ =
+        ((TopCat.Presheaf.pullbackPushforwardAdjunction CommRingCat f.base).unit.app
+          S.presheaf).app (op U) ≫ f.pullbackPresheaf.map (homOfLE e).op ≫ g₂) :
+    g₁ = g₂ := by
+  refine ((Opens.map f.base).op.isPointwiseLeftKanExtensionLeftKanExtensionUnit S.presheaf
+    (op V)).hom_ext fun j ↦ ?_
+  have := h j.left.unop j.hom.unop.le
+  rw [Subsingleton.elim (homOfLE j.hom.unop.le).op j.hom] at this
+  exact (Category.assoc _ _ _).trans (this.trans (Category.assoc _ _ _).symm)
+
+attribute [local instance] IsLocalization.opModule
+
+/-- A local derivation over `⊤` vanishing on the functions coming from `S` is a derivation of
+`𝒪_X` relative to `f⁻¹𝒪_S`. -/
+noncomputable def toDerivation' (D : LocalDerivation M ⊤)
+    (h : ∀ (U : S.Opens) (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) (c : Γ(S, U)),
+      D.app V le_top (f.appLE U V e c) = 0) :
+    M.val.Derivation' f.pullbackPresheafToPresheaf where
+  d {V} := D.app V.unop le_top
+  d_mul {V} a b := D.map_mul _ _ a b
+  d_map {V V'} i x := by
+    rw [Subsingleton.elim i (homOfLE i.unop.le).op]
+    exact D.naturality V.unop V'.unop le_top i.unop.le x
+  d_app {V} a := by
+    let ρ := IsLocalization.derivationToTrivSqZeroExt (A := Γ(X, V.unop)) (B := Γ(X, V.unop))
+      (RingHom.id _) (D.app V.unop le_top) (D.map_mul _ _)
+    let ρ₀ : Γ(X, V.unop) →+* TrivSqZeroExt Γ(X, V.unop) Γ(M, V.unop) := TrivSqZeroExt.inlHom _ _
+    have key : f.pullbackPresheafToPresheaf.app V ≫ CommRingCat.ofHom ρ =
+        f.pullbackPresheafToPresheaf.app V ≫ CommRingCat.ofHom ρ₀ := by
+      refine pullbackPresheaf_hom_ext f fun U e ↦ ?_
+      have e' : ∀ {R : CommRingCat.{u}} (g : Γ(X, V.unop) ⟶ R),
+          ((TopCat.Presheaf.pullbackPushforwardAdjunction CommRingCat f.base).unit.app
+            S.presheaf).app (op U) ≫ f.pullbackPresheaf.map (homOfLE e).op ≫
+              f.pullbackPresheafToPresheaf.app V ≫ g = f.appLE U V.unop e ≫ g := fun g ↦ by
+        rw [Scheme.Hom.appLE_eq_pullbackPresheafToPresheaf_app]
+        simp only [Category.assoc]
+      rw [e', e']
+      ext c
+      · change (ρ (f.appLE U V.unop e c)).fst = (ρ₀ (f.appLE U V.unop e c)).fst
+        rw [IsLocalization.fst_derivationToTrivSqZeroExt]
+        rfl
+      · change (ρ (f.appLE U V.unop e c)).snd = 0
+        rw [IsLocalization.snd_derivationToTrivSqZeroExt]
+        exact h U V.unop e c
+    have := congrArg (fun g ↦ (g a).snd) (congrArg CommRingCat.Hom.hom key)
+    simp only [CommRingCat.hom_comp, RingHom.coe_comp, Function.comp_apply,
+      CommRingCat.hom_ofHom] at this
+    rw [IsLocalization.snd_derivationToTrivSqZeroExt] at this
+    exact this
+
+@[simp]
+lemma toDerivation'_d (D : LocalDerivation M ⊤)
+    (h : ∀ (U : S.Opens) (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) (c : Γ(S, U)),
+      D.app V le_top (f.appLE U V e c) = 0) (V : X.Opens) (a : Γ(X, V)) :
+    (toDerivation' f D h).d (X := op V) a = D.app V le_top a :=
+  rfl
+
+end Relative
 
 end LocalDerivation
 
