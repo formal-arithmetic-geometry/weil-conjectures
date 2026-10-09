@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-module-pullback-structure-sheaf",
+ "kind": "statement",
+ "title": "The pullback of the structure sheaf is the structure sheaf",
+ "statement": "Let $g:X\\to Y$ be a morphism of schemes [def-pc-scheme] with $g^\\sharp:\\mathcal O_Y\\to g_*\\mathcal O_X$, and let $g^*\\dashv g_*$ be the pullback and pushforward of modules [def-pc-module-pullback] with unit $\\eta_g$; regard $\\mathcal O_Y$ and $\\mathcal O_X$ as modules over themselves [def-weil-sheaf-of-modules-category], so that $g^\\sharp$ is a morphism of $\\mathcal O_Y$-modules. Let $\\epsilon_g:g^*\\mathcal O_Y\\to\\mathcal O_X$ be the morphism of $\\mathcal O_X$-modules corresponding to $g^\\sharp$ under the adjunction, i.e. the unique one with $g_*(\\epsilon_g)\\circ\\eta_{g,\\mathcal O_Y}=g^\\sharp$ (on an open $W\\subseteq Y$ and $a\\in\\mathcal O_Y(W)$: $\\epsilon_g(\\eta_g(a))=g^\\sharp(a)\\in\\mathcal O_X(g^{-1}W)$). Then $\\epsilon_g$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Definition 0095 (definition-pushforward): $g^*\\mathcal O_Y=\\mathcal O_X\\otimes_{g^{-1}\\mathcal O_Y}g^{-1}\\mathcal O_Y=\\mathcal O_X$, with the adjunction of Lemma 0096 (lemma-adjoint-pullback-pushforward-modules); used without statement in Modules, Lemma 01BG (lemma-pullback-quasi-coherent), proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of the structure sheaf (unit sheaf of modules) along a morphism of schemes is isomorphic to the structure sheaf",
+   "results": "SheafOfModules.pullback, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree), SheafOfModules.pullbackObjFreeIso, Scheme.Modules.pullback, Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-10",
+   "verdict": "match (instIsIsoPullbackObjUnitToUnitOfFinal)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of the unit sheaf of modules O_Y along a morphism of schemes is isomorphic to O_X",
+   "results": "Scheme.Modules.pullbackId, conjugateEquiv_pullbackId_hom, pseudofunctor_left_unitality, SheafOfModules.pullbackId, pseudofunctor_right_unitality, SheafOfModules.pullback_id_comp: identity pullbacks only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjUnitToUnit",
+   "results": "SheafOfModules.pullbackObjUnitToUnit, instIsIsoPullbackObjUnitToUnitOfFinal ([F.Final] ⊢ IsIso (pullbackObjUnitToUnit φ)), pullback_map_ιFree_comp_pullbackObjFreeIso_hom, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit (homEquiv (pullbackObjUnitToUnit φ) = unitToPushforwardObjUnit φ), ..._homEquiv_symm_unitToPushforwardObjUnit (all Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 55,112p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; grep -rn 'pullbackObjUnit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "unitToPushforwardObjUnit (:60) with unitToPushforwardObjUnit_val_app_apply (:68: its value on a is φ.hom.app X a), pullbackObjUnitToUnit (:86, defined as the adjoint of unitToPushforwardObjUnit), instance IsIso when F.Final (:101); no scheme-level wrapper in Mathlib (the source repository adds Scheme.Modules.pullbackObjUnitIso in WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:115, obtaining the IsIso instance for g.toRingCatSheafHom by instance search)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+  "how": "a few Mathlib declarations, one per clause, for g : X ⟶ Y with Scheme.Modules.pullback g = SheafOfModules.pullback g.toRingCatSheafHom (Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:183): ε_g is pullbackObjUnitToUnit g.toRingCatSheafHom (:86); its adjoint is unitToPushforwardObjUnit (pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit :96), whose value on a section a is g^♯(a) (unitToPushforwardObjUnit_val_app_apply :68), which is the characterization g_*(ε)∘η = g^♯; it is an isomorphism by the instance :101 (requires (Opens.map g.base).Final; the instance is found by instance search, as the compiled source declaration AlgebraicGeometry.Scheme.Modules.pullbackObjUnitIso, WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:115, shows; I did not locate the Final instance in the Mathlib source by grep: the lead should check it)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-pushforward-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: pullbackObjUnitToUnit (Sheaf/PullbackFree.lean:86), IsIso instance under [F.Final] (:101), homEquiv lemma (:96); the Final instance for Opens.map of a scheme morphism is supplied in the source repo by inferInstance (pullbackObjUnitIso, WeilConjectures Modules/Sheaf.lean:115, sorry-free): acceptable, stage 2 to confirm the instance name."
+ }
+}

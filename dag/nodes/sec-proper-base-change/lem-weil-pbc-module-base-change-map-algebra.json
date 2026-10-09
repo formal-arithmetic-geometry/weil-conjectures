@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-module-base-change-map-algebra",
+ "kind": "statement",
+ "title": "The base change map of the structure sheaf is a morphism of algebras",
+ "statement": "Let $f:X\\to S$, $f':X'\\to S'$, $g:S'\\to S$, $g':X'\\to X$ be morphisms of schemes [def-pc-scheme] with $f\\circ g'=g\\circ f'$, let $g^*\\dashv g_*$ etc. be the pullback and pushforward of modules [def-pc-module-pullback] with units $\\eta$, and let $\\otimes$ be the tensor product of modules [def-pur-sheaf-tensor-product]. Let $\\mathcal A=f_*\\mathcal O_X$ and $\\mathcal A'=f'_*\\mathcal O_{X'}$ with their algebra structures (sections $\\mathcal O_X(f^{-1}W)$, multiplications $\\mu:\\mathcal A\\otimes\\mathcal A\\to\\mathcal A$, $\\mu'$, units $f^\\sharp:\\mathcal O_S\\to\\mathcal A$, $f'^\\sharp:\\mathcal O_{S'}\\to\\mathcal A'$). Give $g^*\\mathcal A$ the multiplication $g^*(\\mu)\\circ t^{-1}:g^*\\mathcal A\\otimes g^*\\mathcal A\\to g^*\\mathcal A$, with $t:g^*(\\mathcal A\\otimes\\mathcal A)\\cong g^*\\mathcal A\\otimes g^*\\mathcal A$ the isomorphism of [lem-weil-pbc-module-pullback-tensor], and the unit $g^*(f^\\sharp)\\circ\\epsilon_g^{-1}:\\mathcal O_{S'}\\to g^*\\mathcal A$, with $\\epsilon_g:g^*\\mathcal O_S\\cong\\mathcal O_{S'}$ and $\\epsilon_{g'}:g'^*\\mathcal O_X\\cong\\mathcal O_{X'}$ the isomorphisms of [lem-weil-pbc-module-pullback-structure-sheaf]. Let $\\beta:g^*\\mathcal A\\to f'_*g'^*\\mathcal O_X$ be the base change map, i.e. the morphism corresponding under $g^*\\dashv g_*$ to $f_*(\\eta_{g',\\mathcal O_X}):f_*\\mathcal O_X\\to f_*g'_*g'^*\\mathcal O_X=g_*f'_*g'^*\\mathcal O_X$, and $\\gamma=f'_*(\\epsilon_{g'})\\circ\\beta:g^*\\mathcal A\\to\\mathcal A'$. Then (i) $\\gamma$ is the morphism corresponding under $g^*\\dashv g_*$ to $f_*(g'^\\sharp):\\mathcal A\\to g_*\\mathcal A'$, i.e. $\\gamma(\\eta_g(a))=g'^\\sharp(a)\\in\\mathcal O_{X'}(f'^{-1}g^{-1}W)$ for $a\\in\\mathcal A(W)=\\mathcal O_X(f^{-1}W)$; (ii) $\\gamma\\circ g^*(\\mu)=\\mu'\\circ(\\gamma\\otimes\\gamma)\\circ t$ and $\\gamma\\circ g^*(f^\\sharp)=f'^\\sharp\\circ\\epsilon_g$, i.e. $\\gamma$ is a morphism of $\\mathcal O_{S'}$-algebras. (No hypothesis on $f$ or on the square beyond commutativity.)",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "not stated in the Stacks project: Cohomology of Schemes, Lemma 02KG gives only the module isomorphism; the creator of lem-weil-pbc-affine-pushforward-base-change derived the algebra compatibility affine-locally; this node states it for any commutative square (base change map of Cohomology, Remark 08HY, literature/stacks-project/cohomology.tex)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of a sheaf of algebras along a morphism of schemes, base change morphism of pushforward of structure sheaf is a ring homomorphism",
+   "results": "Scheme.Hom.toRingCatSheafHom, SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction, Scheme.Modules.pullbackPushforwardAdjunction, PullbackConstruction.adjunction, Scheme.Modules.pullback: no algebra structure on pullbacks",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change map g^* f_* O_X → f'_* O_X' is a morphism of sheaves of O_S'-algebras",
+   "results": "Scheme.Hom.toRingCatSheafHom, Scheme.Modules.pullback, Scheme.Modules.pushforward, pushforward_map_app, pullbackPushforwardAdjunction, pushforward_obj_presheaf_map",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.unit",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'tensor\\|Monoidal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/*.lean; grep -rln 'SheafOfAlgebras' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "no tensor product of sheaves of modules on schemes and no sheaves of algebras in these directories, so the statement cannot even be formulated over Mathlib's Scheme.Modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-pushforward-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: the base change map for O_X composed with g'^* O_X = O_{X'} is an algebra map; self-contained (cites lem-weil-pbc-module-pullback-tensor, unit sk-thm-reduction: tool use when split); correct; unsplit."
+ }
+}

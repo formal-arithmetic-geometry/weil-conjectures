@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-affine-pushforward-base-change",
  "kind": "statement",
  "title": "Affine base change: pushforward of a quasi-coherent module along an affine morphism commutes with arbitrary base change",
- "statement": "Let $f:X\\to S$ be an affine morphism of schemes [pqf-def-affine-morphism], $g:S'\\to S$ a morphism, $X'=X\\times_SS'$ [def-pc-fibre-product] with projections $g':X'\\to X$ and $f':X'\\to S'$, and $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. (1) $f_*\\mathcal F$ is quasi-coherent, and the base change map $g^*f_*\\mathcal F\\to f'_*(g')^*\\mathcal F$ (adjoint [def-pc-module-pullback] to $f_*\\mathcal F\\to f_*g'_*(g')^*\\mathcal F=g_*f'_*(g')^*\\mathcal F$) is an isomorphism; over affine opens $\\operatorname{Spec}R'\\subseteq S'$ above $\\operatorname{Spec}R\\subseteq S$, with $f^{-1}(\\operatorname{Spec}R)=\\operatorname{Spec}B$ and $M=\\mathcal F(\\operatorname{Spec}B)$, it is the identification $R'\\otimes_RM=(R'\\otimes_RB)\\otimes_BM$. (2) For $\\mathcal F=\\mathcal O_X$ it is an isomorphism of $\\mathcal O_{S'}$-algebras $g^*f_*\\mathcal O_X\\cong f'_*\\mathcal O_{X'}$ (the algebra structure on $g^*f_*\\mathcal O_X$ induced through $g^*(\\mathcal A\\otimes\\mathcal A)\\cong g^*\\mathcal A\\otimes g^*\\mathcal A$). (3) The base change maps are compatible with composition: for a further $h:S''\\to S'$, the base change map for $g\\circ h$ equals the composite of $h^*$ of the one for $g$ with the one for $h$ (applied to $f'$ and $(g')^*\\mathcal F$), under $(g\\circ h)^*=h^*g^*$.",
+ "statement": "Let $f:X\\to S$ be an affine morphism of schemes [pqf-def-affine-morphism], $g:S'\\to S$ a morphism, $X'=X\\times_SS'$ [def-pc-fibre-product] with projections $g':X'\\to X$ and $f':X'\\to S'$, and $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. (1) $f_*\\mathcal F$ is quasi-coherent, and the base change map $g^*f_*\\mathcal F\\to f'_*(g')^*\\mathcal F$ (adjoint [def-pc-module-pullback] to $f_*\\mathcal F\\to f_*g'_*(g')^*\\mathcal F=g_*f'_*(g')^*\\mathcal F$) is an isomorphism; over affine opens $\\operatorname{Spec}R'\\subseteq S'$ above $\\operatorname{Spec}R\\subseteq S$, with $f^{-1}(\\operatorname{Spec}R)=\\operatorname{Spec}B$ and $M=\\mathcal F(\\operatorname{Spec}B)$, it is the identification $R'\\otimes_RM=(R'\\otimes_RB)\\otimes_BM$. (2) For $\\mathcal F=\\mathcal O_X$, composed with $f'_*$ of the isomorphism $(g')^*\\mathcal O_X\\cong\\mathcal O_{X'}$ of [lem-weil-pbc-module-pullback-structure-sheaf], it is an isomorphism of $\\mathcal O_{S'}$-algebras $g^*f_*\\mathcal O_X\\cong f'_*\\mathcal O_{X'}$ (the algebra structure on $g^*\\mathcal A$, $\\mathcal A=f_*\\mathcal O_X$, induced through $g^*(\\mathcal A\\otimes\\mathcal A)\\cong g^*\\mathcal A\\otimes g^*\\mathcal A$ [lem-weil-pbc-module-pullback-tensor] and $g^*\\mathcal O_S\\cong\\mathcal O_{S'}$ [lem-weil-pbc-module-pullback-structure-sheaf]). (3) The base change maps are compatible with composition: for a further $h:S''\\to S'$, the base change map for $g\\circ h$ equals the composite of $h^*$ of the one for $g$ with the one for $h$ (applied to $f'$ and $(g')^*\\mathcal F$), under $(g\\circ h)^*=h^*g^*$ and $(g'\\circ h')^*=h'^*g'^*$ (the composition isomorphisms of [def-pc-module-pullback]), where $X''=X'\\times_{S'}S''$ is identified with $X\\times_SS''$ with projection $g'\\circ h'$ [lem-weil-pbc-cartesian-square-pasting].",
  "source": {
   "document": "literature/stacks-project/coherent.tex",
   "place": "Cohomology of Schemes, Lemma 02KG (lemma-affine-base-change) and the base change diagram (equation-base-change-diagram) before it; (2) and (3) are not stated by Stacks: (2) is the affine-local formula of (1) for M = B, which is a ring isomorphism R' (x)_R B = R' (x)_R B; (3) follows from the same local formula"
@@ -11,11 +11,130 @@
   "pqf-def-affine-morphism",
   "def-pc-fibre-product",
   "pqf-def-coherent",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-cartesian-square-pasting"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (quasi-coherence of $f_*\\mathcal F$).* An affine morphism is quasi-compact and quasi-separated [lem-weil-pbc-affine-morphism-permanence](3) (with the definition [pqf-def-affine-morphism]), so $f_*\\mathcal F$ is quasi-coherent by [pqf-lem-pushforward-qcoh] (Schemes, Lemma 01LC). (On an affine open $U=\\operatorname{Spec}R$ of $S$ with $f^{-1}(U)=\\operatorname{Spec}B$ it is $\\widetilde{M_R}$, $M=\\mathcal F(f^{-1}U)$, by Step 4.)",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-lem-pushforward-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 02KG, statement ('$f_*\\mathcal F$ is a quasi-coherent sheaf'); the proof's first sentence cites relative affine vanishing (02KE) for $Rf_*$, which is not part of this node; quasi-coherence is Schemes, Lemma 01LC"
+   }
+  },
+  {
+   "text": "*Step 2 (the question is local on $S$ and $S'$).* Let $\\beta_{\\mathcal F}:g^*f_*\\mathcal F\\to f'_*g'^*\\mathcal F$ be the base change map of the statement (it is the base change map in the sense of [lem-weil-pbc-module-base-change-map-open-restriction] for the square $(f,f',g,g')$). For every point $s'\\in S'$ choose an affine open $U\\subseteq S$ containing $g(s')$ and an affine open $V\\subseteq g^{-1}(U)$ containing $s'$ [def-pc-scheme]. Put $X_U=f^{-1}(U)$, affine because $f$ is affine [pqf-def-affine-morphism], and $X'_V=f'^{-1}(V)$; since $f(g'(x'))=g(f'(x'))\\in U$ for $x'\\in X'_V$, $g'(X'_V)\\subseteq X_U$, and the restrictions $f_U:X_U\\to U$, $f'_V:X'_V\\to V$, $g_V:V\\to U$, $g'_V:X'_V\\to X_U$ form a commutative square. It is cartesian: by [lem-weil-pbc-open-fibre-product] applied to $X'=X\\times_SS'$ and the opens $X_U\\subseteq X$, $V\\subseteq S'$, $U\\subseteq S$, the fibre product $X_U\\times_UV$ is the open subscheme $g'^{-1}(X_U)\\cap f'^{-1}(V)=f'^{-1}(V)=X'_V$ with the restricted projections. The inclusions $j_U,j_V,j_X,j_{X'}$ are open immersions satisfying the hypotheses of [lem-weil-pbc-module-base-change-map-open-restriction] ($j_X(X_U)=f^{-1}(U)$, $j_{X'}(X'_V)=f'^{-1}(V)$), so $j_V^*(\\beta_{\\mathcal F})$ is an isomorphism if and only if the base change map $\\beta^{\\circ}_{j_X^*\\mathcal F}$ of the restricted square is. By [lem-weil-pbc-open-immersion-module-pullback-restriction] $j_V^*\\cong(-)|_V$ naturally, so $j_V^*(\\beta_{\\mathcal F})$ is an isomorphism iff $\\beta_{\\mathcal F}|_V$ is, and $j_X^*\\mathcal F\\cong\\mathcal F|_{X_U}$ is quasi-coherent [lem-weil-pbc-module-restriction-open-immersion-colimits](2). Suppose (Steps 3, 4) that $\\beta^{\\circ}$ is an isomorphism for every such restricted square. Then $\\beta_{\\mathcal F}(W)$ is bijective for every open $W$ contained in one of the chosen $V$; these $W$ form a basis of the topology of $S'$, so $\\beta_{\\mathcal F}$ is an isomorphism [lem-weil-pbc-sheaf-morphism-on-basis](b). So it suffices to treat a cartesian square with $S$, $S'$, $X$ affine and $\\mathcal F$ quasi-coherent.",
+   "uses": [
+    "def-pc-scheme",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-module-base-change-map-open-restriction",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 02KG, proof, first sentence: 'The statement is local on $S$ and $S'$. Hence we may assume ...' (the locality argument is written out here)"
+   }
+  },
+  {
+   "text": "*Step 3 (spectra).* Let $S$, $S'$, $X$ be affine and $X'$ a fibre product [def-pc-fibre-product]; put $R=\\Gamma(S,\\mathcal O_S)$, $R'=\\Gamma(S',\\mathcal O_{S'})$, $B=\\Gamma(X,\\mathcal O_X)$ and let $\\varphi=f^\\sharp:R\\to B$, $\\psi=g^\\sharp:R\\to R'$ be the ring maps on global sections. The canonical morphisms $S\\to\\operatorname{Spec}R$, $S'\\to\\operatorname{Spec}R'$, $X\\to\\operatorname{Spec}B$ (corresponding to the identities of the rings) are isomorphisms since the schemes are affine, and under them $f$ and $g$ become $\\operatorname{Spec}\\varphi$ and $\\operatorname{Spec}\\psi$ [lem-weil-pbc-morphism-into-affine-scheme], [def-weil-affine-spectrum]. By [lem-weil-pbc-fibre-product-affine-spectra] $\\operatorname{Spec}R'\\times_{\\operatorname{Spec}R}\\operatorname{Spec}B\\cong\\operatorname{Spec}(R'\\otimes_RB)$ with projections $\\operatorname{Spec}$ of $r'\\mapsto r'\\otimes1$ and $b\\mapsto1\\otimes b$, so by uniqueness of fibre products [def-pc-fibre-product] there is an isomorphism $X'\\cong\\operatorname{Spec}(R'\\otimes_RB)$ compatible with the projections. Isomorphisms of schemes are open immersions, so [lem-weil-pbc-module-base-change-map-open-restriction] (with these isomorphisms as $j_U,j_V,j_X,j_{X'}$; the preimage conditions hold trivially) identifies $\\beta_{\\mathcal F}$, up to the isomorphisms $a,b$ there, with the base change map of the square $f=\\operatorname{Spec}\\varphi:\\operatorname{Spec}B\\to\\operatorname{Spec}R$, $g=\\operatorname{Spec}\\psi$, $g'=\\operatorname{Spec}(b\\mapsto1\\otimes b)$, $f'=\\operatorname{Spec}(r'\\mapsto r'\\otimes1)$ on $X'=\\operatorname{Spec}(R'\\otimes_RB)$, applied to the pullback of $\\mathcal F$ along the isomorphism, which is quasi-coherent ([lem-weil-pbc-open-immersion-module-pullback-restriction], [lem-weil-pbc-module-restriction-open-immersion-colimits](2)). So we may assume this square of spectra.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-base-change-map-open-restriction",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 02KG, proof: 'we may assume $X=\\operatorname{Spec}(A)$, $S=\\operatorname{Spec}(R)$, $S'=\\operatorname{Spec}(R')$ ... $X'=\\operatorname{Spec}(R'\\otimes_RA)$' (Schemes, Lemma 01JQ/01I4 for the fibre product)"
+   }
+  },
+  {
+   "text": "*Step 4 (the affine computation, part (1)).* In the square of Step 3 let $M=\\Gamma(\\operatorname{Spec}B,\\mathcal F)$. Since $\\mathcal F$ is quasi-coherent, the counit $\\widetilde M\\to\\mathcal F$ is an isomorphism [lem-weil-pbc-affine-tilde-gamma-adjunction](3), so by naturality of $\\beta$ we may assume $\\mathcal F=\\widetilde M$. Put $P=(R'\\otimes_RB)\\otimes_BM$, an $R'$-module through $r'\\mapsto r'\\otimes1$. We have isomorphisms: $\\pi:f_*\\widetilde M\\cong\\widetilde{M_R}$ with $\\pi(\\tau_B(m))=\\tau_R(m)$ and $\\pi':f'_*\\widetilde P\\cong\\widetilde{P_{R'}}$ with $\\pi'(\\tau(p))=\\tau(p)$ [lem-weil-pbc-pushforward-tilde-spec]; $\\theta:g^*\\widetilde{M_R}\\cong\\widetilde{R'\\otimes_RM}$ with $\\theta(\\eta_g(\\tau_R(m)))=\\tau(1\\otimes m)$ and $\\theta':g'^*\\widetilde M\\cong\\widetilde P$ with $\\theta'(\\eta_{g'}(\\tau_B(m)))=\\tau((1\\otimes1)\\otimes m)$ [lem-weil-pbc-tilde-pullback-base-change]. Let $\\tilde\\beta=\\pi'\\circ f'_*(\\theta')\\circ\\beta_{\\widetilde M}\\circ g^*(\\pi)^{-1}\\circ\\theta^{-1}:\\widetilde{R'\\otimes_RM}\\to\\widetilde{P_{R'}}$. By [lem-weil-pbc-affine-tilde-gamma-adjunction](1),(2) ($\\tau$ is an isomorphism on global sections and $\\alpha\\mapsto\\alpha_X\\circ\\tau$ is bijective) $\\tilde\\beta=\\widetilde u$ for the $R'$-linear map $u:R'\\otimes_RM\\to P$ determined by $\\tilde\\beta(\\tau(x))=\\tau(u(x))$. Compute $u(1\\otimes m)$: $\\tau(1\\otimes m)=\\theta(\\eta_g(\\tau_R(m)))=\\theta(g^*(\\pi)(\\eta_g(s)))$ with $s=\\tau_B(m)\\in\\Gamma(\\operatorname{Spec}R,f_*\\widetilde M)$, by naturality of the unit $\\eta_g$. By the definition of $\\beta$ as the adjoint of $f_*(\\eta_{g'})$, $g_*(\\beta)\\circ\\eta_{g,f_*\\widetilde M}=f_*(\\eta_{g',\\widetilde M})$, i.e. $\\beta(\\eta_g(s))=\\eta_{g'}(\\tau_B(m))\\in\\Gamma(X',g'^*\\widetilde M)=\\Gamma(S',f'_*g'^*\\widetilde M)$. Hence $\\tilde\\beta(\\tau(1\\otimes m))=\\pi'(\\theta'(\\eta_{g'}(\\tau_B(m))))=\\tau((1\\otimes1)\\otimes m)$, so $u(1\\otimes m)=(1\\otimes1)\\otimes m$ and, by $R'$-linearity, $u(r'\\otimes m)=(r'\\otimes1)\\otimes m$. This $u$ is the canonical isomorphism $R'\\otimes_RM\\cong(R'\\otimes_RB)\\otimes_BM$, with inverse $(r'\\otimes b)\\otimes m\\mapsto r'\\otimes bm$ (well defined: $(r'\\otimes b)\\mapsto(m\\mapsto r'\\otimes bm)$ is $R$-balanced in $(r',b)$ and the result is $B$-balanced; the two composites are the identity on generators). So $\\tilde\\beta=\\widetilde u$ is an isomorphism (a functor preserves isomorphisms), hence so is $\\beta_{\\widetilde M}$. With Step 2 this proves (1), and identifies $\\beta$ over $\\operatorname{Spec}R'\\subseteq S'$ above $\\operatorname{Spec}R\\subseteq S$ with $R'\\otimes_RM=(R'\\otimes_RB)\\otimes_BM$.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-pushforward-tilde-spec",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 02KG, proof: 'We use Schemes, Lemma 01I9 to describe pullbacks and pushforwards of $\\mathcal F$ ... the lemma boils down to the equality $(R'\\otimes_RA)\\otimes_AM=R'\\otimes_RM$ as $R'$-modules' (literature/stacks-project/schemes.tex, Lemma 01I9 (1),(2)); the identification of the base change map with this equality is written out here"
+   }
+  },
+  {
+   "text": "*Step 5 (part (2): algebras).* Let $\\mathcal A=f_*\\mathcal O_X$, a quasi-coherent $\\mathcal O_S$-algebra [lem-weil-pbc-affine-morphism-relative-spec](1), $\\mathcal A'=f'_*\\mathcal O_{X'}$, and $\\gamma=f'_*(\\epsilon_{g'})\\circ\\beta_{\\mathcal O_X}:g^*\\mathcal A\\to\\mathcal A'$ with $\\epsilon_{g'}:g'^*\\mathcal O_X\\cong\\mathcal O_{X'}$ the isomorphism of [lem-weil-pbc-module-pullback-structure-sheaf]. By (1) (Steps 2-4, for the quasi-coherent module $\\mathcal O_X$) $\\beta_{\\mathcal O_X}$ is an isomorphism, hence so is $\\gamma$. By [lem-weil-pbc-module-base-change-map-algebra](ii) $\\gamma$ respects the multiplications (the one of $g^*\\mathcal A$ being induced through $g^*(\\mathcal A\\otimes\\mathcal A)\\cong g^*\\mathcal A\\otimes g^*\\mathcal A$) and the units (through $g^*\\mathcal O_S\\cong\\mathcal O_{S'}$). A morphism of $\\mathcal O_{S'}$-algebras which is an isomorphism of modules is an isomorphism of algebras (its inverse respects multiplication and unit because $\\gamma$ does and is bijective on sections). So $g^*f_*\\mathcal O_X\\cong f'_*\\mathcal O_{X'}$ as $\\mathcal O_{S'}$-algebras.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-weil-pbc-module-base-change-map-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "not in Stacks (Cohomology of Schemes, Lemma 02KG states only the module isomorphism); argument written by an agent"
+   }
+  },
+  {
+   "text": "*Step 6 (part (3): composition).* For $h:S''\\to S'$ let $X''=X'\\times_{S'}S''$ with projections $h':X''\\to X'$ and $f'':X''\\to S''$; by [lem-weil-pbc-cartesian-square-pasting] $X''$ with $g'\\circ h'$ and $f''$ is a fibre product $X\\times_SS''$, so the base change map for $g\\circ h$ is that of the rectangle $(f,f'',g\\circ h,g'\\circ h')$. By [lem-weil-pbc-module-base-change-map-pasting] it equals $f''_*(c_{g',h'})\\circ\\beta^{(h)}_{g'^*\\mathcal F}\\circ h^*(\\beta^{(g)}_{\\mathcal F})\\circ c_{g,h}^{-1}$, where $\\beta^{(g)}$ is the base change map for $g$ (applied to $f$ and $\\mathcal F$) and $\\beta^{(h)}$ the one for $h$ (applied to $f'$ and $g'^*\\mathcal F$), which is the assertion of (3) under the composition isomorphisms $(g\\circ h)^*\\cong h^*g^*$, $(g'\\circ h')^*\\cong h'^*g'^*$ of [def-pc-module-pullback].",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-module-base-change-map-pasting",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Remark 0ATM (remark-compose-base-change-horizontal), for modules; not stated in Cohomology of Schemes, Lemma 02KG"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "pqf-lem-pushforward-qcoh",
+  "def-pc-scheme",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-module-base-change-map-open-restriction",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-pushforward-tilde-spec",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-module-base-change-map-algebra",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-module-base-change-map-pasting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 02KG (lemma-affine-base-change), proof, for (1) (Steps 1-4; the locality claim and the identification of the base change map with the tensor identity are written out by the agent, Steps 2-4); (2) and (3) are not in Stacks: Step 5 is written by an agent, Step 6 follows Cohomology, Remark 0ATM (literature/stacks-project/cohomology.tex)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +163,17 @@
    "results": "no IsAffineHom in the module files; Tilde.lean:566 has the TODO 'use this to show that quasicoherent sheaves pushforward to quasicoherent sheaves for affine morphisms' (not even quasi-coherence of the pushforward is in Mathlib)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pushforward of a quasi-coherent sheaf of modules along an affine morphism is quasi-coherent",
+   "results": "SheafOfModules.pushforward_map_val, TopCat.Sheaf.pushforward_sheaf_of_sheaf, PresheafOfModules.pushforward₀, Scheme.Modules.pushforward, PresheafOfModules.pushforward₀_obj, pushforward₀_obj_obj_isModule: no quasi-coherence statement for affine pushforward",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,6 +198,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is 02KG with the algebra and composition clauses made explicit; self-contained; correct; unsplit."
+  "note": "Split reviewed: 6 steps along Cohomology of Schemes 02KG (quasi-coherence by 01LC; locality on S and S' via the open-restriction node; reduction to spectra; the affine computation with the pushforward and pullback of tilde modules; clause (2) via the algebra node; clause (3) via pasting). Statement: clauses (2),(3) made explicit, meaning unchanged. Correct. Five new nodes: three unsplit (agent-written statements), two Mathlib leaves."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-affine-pushforward-base-change",
+  "worker": "stage1",
+  "summary": "Checked the source: Stacks tag 02KG is coherent-lemma-affine-base-change (coherent.tex:907), with the base change diagram 02KF before it; its proof says the statement is local on S and S', reduces to spectra and cites Schemes 01I9. Split in six steps: (1) quasi-coherence of f_*F via lem-weil-pbc-affine-morphism-permanence(3) and pqf-lem-pushforward-qcoh (01LC, another unit; same tool use as the reviewed lem-weil-pbc-affine-morphism-relative-spec); (2) the locality claim written out with the new unsplit node lem-weil-pbc-module-base-change-map-open-restriction, the leaves lem-weil-pbc-open-fibre-product, lem-weil-pbc-open-immersion-module-pullback-restriction, lem-weil-pbc-module-restriction-open-immersion-colimits and lem-weil-pbc-sheaf-morphism-on-basis; (3) passage to spectra (lem-weil-pbc-morphism-into-affine-scheme, lem-weil-pbc-fibre-product-affine-spectra, transport along isomorphisms by the same new node); (4) the computation: F = M~ (lem-weil-pbc-affine-tilde-gamma-adjunction(3)), f_* of tilde by the new Mathlib leaf lem-weil-pbc-pushforward-tilde-spec (01I9(2); isIso_fromTildeΓ_pushforward), g^* of tilde by lem-weil-pbc-tilde-pullback-base-change (01I9(1)), and the base change map is shown to be tilde of r'(x)m -> (r'(x)1)(x)m by evaluating on 1(x)m through the unit formulas; (5) part (2): the module isomorphism of (1) for O_X, composed with g'^*O_X = O_X' (new Mathlib leaf lem-weil-pbc-module-pullback-structure-sheaf, pullbackObjUnitToUnit), is an algebra map by the new unsplit node lem-weil-pbc-module-base-change-map-algebra (stated for any commutative square: the adjoint of the base change map for O_X is f_*(g'^#), a ring map; its split will need lem-weil-pbc-module-pullback-tensor of unit sk-thm-reduction as a tool use); (6) part (3) from the new unsplit node lem-weil-pbc-module-base-change-map-pasting (Stacks 0ATM for modules) and lem-weil-pbc-cartesian-square-pasting. Statement kept; clauses (2),(3) made explicit (the identification g'^*O_X = O_X', the tensor isomorphism, the composition isomorphisms and X'' = X x_S S''), stmt_deps extended accordingly. Mathlib: no base change map for modules on schemes; searches recorded."
  }
 }

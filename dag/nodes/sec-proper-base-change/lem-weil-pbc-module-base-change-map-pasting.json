@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-module-base-change-map-pasting",
+ "kind": "statement",
+ "title": "Base change maps of modules compose along horizontally pasted squares",
+ "statement": "For a commutative square of morphisms of schemes [def-pc-scheme] $f\\circ v=u\\circ f_1$, with $f:X\\to S$, $u:T\\to S$, $f_1:X_1\\to T$, $v:X_1\\to X$, and an $\\mathcal O_X$-module $\\mathcal F$ [def-weil-sheaf-of-modules-category], the *base change map* $\\beta_{\\mathcal F}:u^*f_*\\mathcal F\\to f_{1*}v^*\\mathcal F$ of the square is the morphism of $\\mathcal O_T$-modules corresponding, under the adjunction $u^*\\dashv u_*$ of pullback and pushforward of modules [def-pc-module-pullback], to $f_*(\\eta_{v,\\mathcal F}):f_*\\mathcal F\\to f_*v_*v^*\\mathcal F=u_*f_{1*}v^*\\mathcal F$, where $\\eta_v$ is the unit of $v^*\\dashv v_*$ and the equality holds because both sheaves have the sections $(v^*\\mathcal F)(v^{-1}f^{-1}W)=(v^*\\mathcal F)(f_1^{-1}u^{-1}W)$ over an open $W\\subseteq S$; $\\beta$ is natural in $\\mathcal F$. For morphisms of schemes $a:Z\\to Y$, $b:Y\\to W$ let $c_{b,a}:a^*b^*\\xrightarrow{\\sim}(b\\circ a)^*$ be the composition isomorphism of pullbacks [def-pc-module-pullback], the unique isomorphism with $(b\\circ a)_*(c_{b,a})\\circ b_*(\\eta_{a,b^*})\\circ\\eta_b=\\eta_{b\\circ a}$ (conjugate to the equality $(b\\circ a)_*=b_*a_*$). Let $f:X\\to S$, $f':X'\\to S'$, $f'':X''\\to S''$, $g:S'\\to S$, $g':X'\\to X$, $h:S''\\to S'$, $h':X''\\to X'$ be morphisms of schemes with $f\\circ g'=g\\circ f'$ and $f'\\circ h'=h\\circ f''$, so that $f\\circ(g'\\circ h')=(g\\circ h)\\circ f''$; let $\\beta^{1}$, $\\beta^{2}$, $\\beta^{12}$ be the base change maps of the squares $(f,f',g,g')$, $(f',f'',h,h')$ and of the outer rectangle $(f,f'',g\\circ h,g'\\circ h')$. Then for every $\\mathcal O_X$-module $\\mathcal F$\n$$\\beta^{12}_{\\mathcal F}=f''_*(c_{g',h',\\mathcal F})\\circ\\beta^{2}_{g'^*\\mathcal F}\\circ h^*(\\beta^{1}_{\\mathcal F})\\circ c_{g,h,f_*\\mathcal F}^{-1}:$$\n$$(g h)^*f_*\\mathcal F\\to h^*g^*f_*\\mathcal F\\to h^*f'_*g'^*\\mathcal F\\to f''_*h'^*g'^*\\mathcal F\\to f''_*(g'h')^*\\mathcal F.$$",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Remark 0ATM (remark-compose-base-change-horizontal; stated for the derived functors, 'we omit the verification'), with the base change map of Remark 08HY (remark-base-change); here for modules with the underived pullback and pushforward"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change morphism pullback pushforward sheaves of modules composition of commutative squares",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback, SheafOfModules.pushforwardComp, SheafOfModules.pullbackComp, Scheme.Modules.pullbackComp, Scheme.Modules.pullbackPushforwardAdjunction: composition isomorphisms only, no base change map",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change map g^* f_* F → f'_* g'^* F for sheaves of modules on schemes, compatible with composition of base changes",
+   "results": "Scheme.Modules.pushforwardComp, Scheme.Modules.pullbackPushforwardAdjunction, Scheme.Modules.pushforward_map_app, SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc, SheafOfModules.pushforwardNatTrans_app_val_app: no base change map for modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullbackComp, CategoryTheory.mateEquiv",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'mateEquiv\\|conjugateEquiv\\|baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "only conjugateEquiv_pullbackId_hom and conjugateEquiv_pullbackComp_inv (Sheaf.lean:224,265; PullbackContinuous.lean:144,177) and the pseudofunctor coherence Scheme.Modules.pseudofunctor_associativity (Sheaf.lean:273); no base change map of a square. The generic mate pasting is CategoryTheory.mateEquiv_hcomp/mateEquiv_vcomp (Mathlib/CategoryTheory/Adjunction/Mates.lean:170,209), node lem-weil-pbc-mate-pasting",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only: mate pasting and the pullback pseudofunctor)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-pushforward-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: base change maps of modules compose along pasted squares (Remark 0ATM for modules); self-contained; correct; unsplit."
+ }
+}

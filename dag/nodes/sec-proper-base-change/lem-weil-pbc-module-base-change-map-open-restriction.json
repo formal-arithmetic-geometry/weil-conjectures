@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-module-base-change-map-open-restriction",
+ "kind": "statement",
+ "title": "Base change maps of modules are compatible with restriction to open subschemes",
+ "statement": "For a commutative square of morphisms of schemes [def-pc-scheme] $f\\circ v=u\\circ f_1$, with $f:X\\to S$, $u:T\\to S$, $f_1:X_1\\to T$, $v:X_1\\to X$, and an $\\mathcal O_X$-module $\\mathcal F$ [def-weil-sheaf-of-modules-category], the *base change map* $\\beta_{\\mathcal F}:u^*f_*\\mathcal F\\to f_{1*}v^*\\mathcal F$ of the square is the morphism of $\\mathcal O_T$-modules corresponding, under the adjunction $u^*\\dashv u_*$ of pullback and pushforward of modules [def-pc-module-pullback], to $f_*(\\eta_{v,\\mathcal F}):f_*\\mathcal F\\to f_*v_*v^*\\mathcal F=u_*f_{1*}v^*\\mathcal F$, where $\\eta_v$ is the unit of $v^*\\dashv v_*$ and the equality holds because both sheaves have the sections $(v^*\\mathcal F)(v^{-1}f^{-1}W)=(v^*\\mathcal F)(f_1^{-1}u^{-1}W)$ over an open $W\\subseteq S$; $\\beta$ is natural in $\\mathcal F$. Let $f:X\\to S$, $f':X'\\to S'$, $g:S'\\to S$, $g':X'\\to X$ be morphisms of schemes with $f\\circ g'=g\\circ f'$, and let $j_U:U\\to S$, $j_V:V\\to S'$, $j_X:X_U\\to X$, $j_{X'}:X'_V\\to X'$ be open immersions [def-weil-open-immersion] (for instance inclusions of open subschemes, or isomorphisms) together with morphisms $f_U:X_U\\to U$, $f'_V:X'_V\\to V$, $g_V:V\\to U$, $g'_V:X'_V\\to X_U$ such that $f\\circ j_X=j_U\\circ f_U$, $f'\\circ j_{X'}=j_V\\circ f'_V$, $g\\circ j_V=j_U\\circ g_V$, $g'\\circ j_{X'}=j_X\\circ g'_V$, $f_U\\circ g'_V=g_V\\circ f'_V$, $j_X(X_U)=f^{-1}(j_U(U))$ and $j_{X'}(X'_V)=f'^{-1}(j_V(V))$. Let $\\beta$ be the base change map of the square $(f,f',g,g')$ and $\\beta^{\\circ}$ that of $(f_U,f'_V,g_V,g'_V)$. Then: (1) the base change maps $\\rho_{\\mathcal F}:j_U^*f_*\\mathcal F\\to f_{U*}j_X^*\\mathcal F$ of the square $(f,f_U,j_U,j_X)$ and $\\rho'_{\\mathcal G}:j_V^*f'_*\\mathcal G\\to f'_{V*}j_{X'}^*\\mathcal G$ of $(f',f'_V,j_V,j_{X'})$ are isomorphisms for all $\\mathcal O_X$-modules $\\mathcal F$ and $\\mathcal O_{X'}$-modules $\\mathcal G$; (2) with the composition isomorphisms $c$ of pullbacks [def-pc-module-pullback], the isomorphisms\n$$a:j_V^*g^*f_*\\mathcal F\\xrightarrow{c}(g j_V)^*f_*\\mathcal F=(j_Ug_V)^*f_*\\mathcal F\\xrightarrow{c^{-1}}g_V^*j_U^*f_*\\mathcal F\\xrightarrow{g_V^*\\rho_{\\mathcal F}}g_V^*f_{U*}j_X^*\\mathcal F,$$\n$$b:j_V^*f'_*g'^*\\mathcal F\\xrightarrow{\\rho'_{g'^*\\mathcal F}}f'_{V*}j_{X'}^*g'^*\\mathcal F\\xrightarrow{c}f'_{V*}(g'j_{X'})^*\\mathcal F=f'_{V*}(j_Xg'_V)^*\\mathcal F\\xrightarrow{c^{-1}}f'_{V*}g_V'^{*}j_X^*\\mathcal F$$\nsatisfy $b\\circ j_V^*(\\beta_{\\mathcal F})=\\beta^{\\circ}_{j_X^*\\mathcal F}\\circ a$ for every $\\mathcal O_X$-module $\\mathcal F$. In particular $j_V^*(\\beta_{\\mathcal F})$ is an isomorphism if and only if $\\beta^{\\circ}_{j_X^*\\mathcal F}$ is.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 02KG (lemma-affine-base-change), proof, first sentence 'The statement is local on S and S'' (not proved there); the pasting of base change maps is Cohomology, Remarks 0ATL and 0ATM (remark-compose-base-change, remark-compose-base-change-horizontal, literature/stacks-project/cohomology.tex), and $f_*$ commutes with restriction to opens by Sheaves, Lemma 00A0 (lemma-j-pullback)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction to open subscheme of pullback of sheaf of modules base change map compatible with restriction",
+   "results": "Scheme.Modules.restrict, restrict_obj, restrict_map, tilde.toOpen, morphismRestrict_appLE, Scheme.Modules.restrictFunctorIsoPullback, Scheme.Hom.appLE_appIso_inv: restriction and its identification with pullback, no base change map",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction to open subsets of the base change morphism of quasi-coherent sheaves is the base change morphism of the restricted square",
+   "results": "Scheme.Modules.restrict_map, morphismRestrict_app, restrict_obj, restrict, Γ_map_morphismRestrict, restrictFunctorComp, restrictFunctorComp_hom_app_app, restrictFunctor (Mathlib.AlgebraicGeometry.Modules.Sheaf, Mathlib.AlgebraicGeometry.Restrict)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pushforward",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'restrictFunctor\\|pushforward\\|pullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "results": "restrictFunctor (:348), restrictAdjunction (:425), restrictFunctorIsoPullback (:453), restrictFunctorComp (:478), restrictFunctorAdjCounitIso (:416: pushforward f ⋙ restrictFunctor f ≅ id for an open immersion f): the open immersion pieces exist, but no statement relating a base change map to its restriction",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-pushforward-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: base change maps commute with restriction along open immersions; self-contained; correct; unsplit."
+ }
+}

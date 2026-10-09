@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-pushforward-tilde-spec",
+ "kind": "statement",
+ "title": "Pushforward of the sheaf associated to a module along the spectrum of a ring map",
+ "statement": "Let $\\varphi:R\\to B$ be a homomorphism of commutative rings and $\\psi=\\operatorname{Spec}\\varphi:\\operatorname{Spec}B\\to\\operatorname{Spec}R$ the induced morphism [def-weil-affine-spectrum], with the pushforward of modules $\\psi_*$ [def-pc-module-pullback]. For a $B$-module $N$ let $N_R$ be $N$ viewed as an $R$-module through $\\varphi$, and let $\\widetilde N$ on $\\operatorname{Spec}B$, $\\widetilde{N_R}$ on $\\operatorname{Spec}R$ and the maps $\\tau$ be as in [lem-weil-pbc-spec-module-tilde-sections]. Then there is an isomorphism of $\\mathcal O_{\\operatorname{Spec}R}$-modules [def-weil-sheaf-of-modules-category] $\\pi_N:\\psi_*\\widetilde N\\xrightarrow{\\sim}\\widetilde{N_R}$, natural in $N$, such that $\\pi_N(\\tau_{\\operatorname{Spec}B}(n))=\\tau_{\\operatorname{Spec}R}(n)$ for every $n\\in N$, where $\\tau_{\\operatorname{Spec}B}(n)\\in\\widetilde N(\\operatorname{Spec}B)=(\\psi_*\\widetilde N)(\\operatorname{Spec}R)$. In particular $\\psi_*\\widetilde N$ is quasi-coherent [pqf-def-coherent].",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01I9 (lemma-widetilde-pullback), part (2): $\\psi_*\\widetilde N=\\widetilde{N_R}$ functorially in $N$"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pushforward of the sheaf associated to a module along Spec of a ring map is the sheaf associated to the restricted module",
+   "results": "TopCat.Sheaf.pushforward, PresheafOfModules.pushforward₀, Scheme.Modules.restrictAdjunction, Scheme.Modules.pushforward, SheafOfModules.pushforward_map_val, SheafOfModules.pushforward_obj_val: generic pushforwards only",
+   "date": "2026-10-10",
+   "verdict": "no match (by itself)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pushforward of tilde M along Spec of ring hom is tilde of M with restricted scalars",
+   "results": "Scheme.Hom.toRingCatSheafHom, Scheme.Modules.pushforward, pushforward_map_app, pushforward_obj_obj, PresheafOfModules.pushforward_obj_obj (restrictScalars description of the pushforward), pushforward_obj_presheaf_map",
+   "date": "2026-10-10",
+   "verdict": "no match by itself; pushforward_obj_obj and PresheafOfModules.pushforward_obj_obj give the sections of the pushforward as restricted modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.tilde",
+   "results": "AlgebraicGeometry.isIso_fromTildeΓ_pushforward (Mathlib.AlgebraicGeometry.Modules.Tilde): for φ : R ⟶ S and M on Spec S with IsIso M.fromTildeΓ, IsIso ((pushforward (Spec.map φ)).obj M).fromTildeΓ",
+   "date": "2026-10-10",
+   "verdict": "match (with tilde.isoTop and isIso_fromTildeΓ_of_isQuasicoherent)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 530,575p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Tilde.lean; grep -n 'fromTildeΓ\\|isoTop' same file",
+   "results": "pushforwardCompModulesSpecToSheafIso (:544, the pushforward along Spec.map φ is restrictScalars φ on the underlying sheaf of modules), isLocalizing_pushforward_of_isLocalizing (:556), isIso_fromTildeΓ_pushforward (:568), Scheme.Modules.fromTildeΓ (:259), toOpen_fromTildeΓ_app (:294), fromTildeΓNatTrans (:313), tilde.isoTop (:247), tilde.toTildeΓNatIso (:338), instance (tilde M).IsQuasicoherent (:465), Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent (:850)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.isIso_fromTildeΓ_pushforward, AlgebraicGeometry.Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent, AlgebraicGeometry.Scheme.Modules.toOpen_fromTildeΓ_app, AlgebraicGeometry.tilde.isoTop, AlgebraicGeometry.Scheme.Modules.fromTildeΓNatTrans",
+  "file": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+  "how": "a few Mathlib declarations, one per clause, for φ : R ⟶ B in CommRingCat and N : ModuleCat B: (tilde N) is quasi-coherent (instance :465), so IsIso (tilde N).fromTildeΓ (isIso_fromTildeΓ_of_isQuasicoherent :850), hence IsIso ((pushforward (Spec.map φ)).obj (tilde N)).fromTildeΓ (isIso_fromTildeΓ_pushforward :568); its inverse is an isomorphism ψ_*Ñ ≅ (Γ(ψ_*Ñ, ⊤))~ where Γ(ψ_*Ñ, ⊤) = Γ(Ñ, ⊤) with R acting through φ (Scheme.Modules.pushforward_obj_obj, Sheaf.lean:170; pushforwardCompModulesSpecToSheafIso :544 shows the module structure is restrictScalars φ); composing with tilde of the R-linear inverse of tilde.isoTop N : N ≅ Γ(Ñ, ⊤) (:247, toOpen N ⊤ = τ, B-linear hence R-linear) gives π_N; π_N(τ_B(n)) = τ_R(n) because on ⊤ the inverse of fromTildeΓ is toOpen _ ⊤ (toOpen_fromTildeΓ_app :294 at U = ⊤) and tilde of a linear map commutes with toOpen (tilde.toOpen_map_app :226); naturality in N from fromTildeΓNatTrans (:313) and tilde.toTildeΓNatIso (:338); quasi-coherence is the instance :465 for N_R. Mathlib's tilde on Spec (CommRingCat.of R) is the sheaf of lem-weil-pbc-spec-module-tilde-sections (as recorded there)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-pushforward-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: isIso_fromTildeΓ_pushforward (Modules/Tilde.lean:568) with isIso_fromTildeΓ_of_isQuasicoherent, fromTildeΓNatTrans (:313), isoTop; Schemes 01I9(2)."
+ }
+}
