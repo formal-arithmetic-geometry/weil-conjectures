@@ -9,16 +9,35 @@
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
   "def-weil-pbc-proetale-site",
   "def-weil-scheme-morphism-properties",
-  "def-weil-derived-cohomology-sheaves"
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-triangulated-subcategory",
+  "lem-weil-proetale-dbc-triangulated"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ProEt\\|Dbc\\|onstructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "Scheme.ProEt (small pro-etale site, Sites/Proetale.lean:100) and DerivedCategory C of an abelian category with homologyFunctor; no derived category of pro-etale sheaves of modules spelled out, no constructible complexes.",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsConstructible\\|IsLocallyClosed\\|class IsConstant\\|class IsTriangulated' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ConstantSheaf.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+   "results": "Topology.IsConstructible (Topology/Constructible.lean:178), IsLocallyClosed (Topology/Defs/Basic.lean:119), Sheaf.IsConstant (ConstantSheaf.lean:81), ObjectProperty.IsTriangulated (Subcategory.lean:182); no locally constant or constructible sheaf on a site.",
+   "date": "2026-10-09",
+   "verdict": "no match (the ingredients recorded in def-weil-proetale-constructible-sheaf and def-weil-triangulated-subcategory)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -40,5 +59,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-finite-torsion-constructibility",
+  "worker": "stage1",
+  "summary": "Checked the statement against the blueprint source (master; no slopmaster2 copy found by id), against Stacks Definition 61.27.1 (Tag 09AJ) and Bhatt-Scholze Definition 1.1. Statement kept. Named the notions it is built from: the global finite-field datum (prime p, so that l != p makes sense) [def-weil-finite-field-fiber]; E, O_E, the uniformizer and A_{E,n} [def-weil-l-adic-coefficient-extension, added]; the small pro-etale site, its module sheaves and D(Y_proet, A) [def-weil-pbc-proetale-site]; locally closed constructible subsets [def-weil-scheme-morphism-properties]; the constructibility clause of the second paragraph, now stated for any finite coefficient ring as the new node def-weil-proetale-constructible-sheaf (unsplit; built from the stratification, the module inverse image along the strata, locally constant sheaves and stalks); the cohomology sheaves [def-weil-derived-cohomology-sheaves]; full triangulated subcategory, new Mathlib leaf def-weil-triangulated-subcategory (ObjectProperty.IsTriangulated); and the fact that the subcategory so defined is triangulated, which the definition presupposes, as the new unsplit statement lem-weil-proetale-dbc-triangulated (Stacks 09AL proof, from the weak Serre property 09B5). Being bounded (finitely many nonzero H^i) is elementary from the cohomology sheaves. Mathlib has the pro-etale site Scheme.ProEt, IsConstructible, IsLocallyClosed, Sheaf.IsConstant, DerivedCategory and ObjectProperty.IsTriangulated, but no locally constant or constructible sheaves on a site."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
