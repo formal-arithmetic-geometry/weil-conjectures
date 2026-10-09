@@ -424,3 +424,33 @@ lemma adicLowerStar_map_smul {Z : Scheme.{u}} (g : X ⟶ Z) (c : ULift.{u + 1} (
   Mod.hom_ext _ _ (by ext : 3; rfl)
 
 end AlgebraicGeometry.ProEtale.AdicSheaf
+
+namespace AlgebraicGeometry.ProEtale
+
+variable (l : ℕ) [Fact l.Prime]
+
+/-- **A deck transformation commutes with the exchange isomorphism**, for sheaves of modules over
+the constant `ℓ`-adic sheaves: the version of
+`AlgebraicGeometry.ProEtale.lowerStar_map_deckAction_comp_lowerStarExchange` for
+`g_* ℚ̄_ℓ,X` as a sheaf of `ℚ̄_ℓ,Y`-modules. -/
+lemma adicLowerStar_map_deckAction_comp_lowerStarExchange {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (a : X ≅ X) (b : Y ≅ Y) (σ : X ≅ X) (hg : g ≫ b.inv = a.inv ≫ g) (hσ : σ.hom ≫ g = g)
+    (hσa : σ.hom ≫ a.hom = a.hom ≫ σ.hom)
+    (str : (b.inv)_*ᵃ[l].obj ((g)_*ᵃ[l].obj (AdicSheaf.unit l X)) ⟶
+      (g)_*ᵃ[l].obj (AdicSheaf.unit l X))
+    (hstr : str = ((adicLowerStarComp l g b.inv ≪≫ adicLowerStarCongr l hg ≪≫
+          (adicLowerStarComp l a.inv g).symm).app (AdicSheaf.unit l X) ≪≫
+        (g)_*ᵃ[l].mapIso (adicLowerStarUnitIso l a.symm)).hom) :
+    (b.inv)_*ᵃ[l].map
+        ((g)_*ᵃ[l].map (adicLowerStarUnitIso l σ).inv ≫
+          (adicLowerStarComp l σ.hom g).hom.app (AdicSheaf.unit l X) ≫
+          (adicLowerStarCongr l hσ).hom.app (AdicSheaf.unit l X)) ≫ str =
+    str ≫
+      ((g)_*ᵃ[l].map (adicLowerStarUnitIso l σ).inv ≫
+          (adicLowerStarComp l σ.hom g).hom.app (AdicSheaf.unit l X) ≫
+          (adicLowerStarCongr l hσ).hom.app (AdicSheaf.unit l X)) := by
+  subst hstr
+  refine Mod.hom_ext _ _ ?_
+  exact lowerStar_map_deckAction_comp_lowerStarExchange l g a b σ hg hσ hσa _ rfl
+
+end AlgebraicGeometry.ProEtale
