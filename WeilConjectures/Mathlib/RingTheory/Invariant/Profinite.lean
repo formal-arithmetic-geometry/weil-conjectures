@@ -9,6 +9,8 @@ public import Mathlib.FieldTheory.Galois.Infinite
 public import Mathlib.FieldTheory.Galois.Profinite
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Invariant.Profinite
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import WeilConjectures.Mathlib.RingTheory.Etale.QuasiFinite
 
 /-!
 # The Galois group of a Galois extension acting on an integral closure
@@ -221,3 +223,69 @@ theorem exists_mem_inertia_eqOn (M : IntermediateField K Ω) [Normal K M]
 end Ideal
 
 end Galois
+
+section ResidueField
+
+variable {R K Ω : Type*} [CommRing R] [IsDomain R] [Field K] [Algebra R K] [IsFractionRing R K]
+  [Field Ω] [Algebra K Ω] [Algebra R Ω] [IsScalarTower R K Ω] [Algebra.IsAlgebraic K Ω]
+
+omit [IsDomain R] [IsFractionRing R K] [Algebra.IsAlgebraic K Ω] in
+/-- The integral closure of `R` in `Ω` is integrally closed in `Ω`. -/
+instance integralClosure.isIntegrallyClosedIn_self :
+    IsIntegrallyClosedIn (integralClosure R Ω) Ω :=
+  ⟨Subtype.val_injective, fun {x} ↦ ⟨fun hx ↦ ⟨⟨x, isIntegral_trans (R := R) _ hx⟩, rfl⟩,
+    by rintro ⟨y, rfl⟩; exact isIntegral_algebraMap⟩⟩
+
+variable (K) in
+include K in
+/-- The integral closure of `R` in an algebraic extension `Ω` of its fraction field has fraction
+field `Ω`. -/
+lemma integralClosure.isFractionRing_of_isAlgebraic :
+    IsFractionRing (integralClosure R Ω) Ω := by
+  have : Algebra.IsAlgebraic R K := IsLocalization.isAlgebraic (S := K) (nonZeroDivisors R)
+  have : Algebra.IsAlgebraic R Ω := Algebra.IsAlgebraic.trans R K Ω
+  have hinj : Function.Injective (algebraMap R Ω) := by
+    rw [IsScalarTower.algebraMap_eq R K Ω]
+    exact (algebraMap K Ω).injective.comp (IsFractionRing.injective R K)
+  exact integralClosure.isFractionRing_of_algebraic fun x hx ↦
+    hinj (hx.trans (map_zero _).symm)
+
+/-- A field isomorphic to a separably closed field is separably closed. -/
+lemma IsSepClosed.of_ringEquiv {k k' : Type*} [Field k] [Field k'] [IsSepClosed k]
+    (e : k ≃+* k') : IsSepClosed k' := by
+  refine IsSepClosed.of_exists_root _ fun p hmon hirr hsep ↦ ?_
+  have hdeg : (p.map (e.symm : k' →+* k)).degree ≠ 0 := by
+    rw [Polynomial.degree_map]
+    exact (Polynomial.degree_pos_of_irreducible hirr).ne'
+  obtain ⟨x, hx⟩ := IsSepClosed.exists_root (p.map (e.symm : k' →+* k)) hdeg
+    (hsep.map (f := (e.symm : k' →+* k)))
+  refine ⟨e x, ?_⟩
+  have hp : p = (p.map (e.symm : k' →+* k)).map (e : k →+* k') := by
+    rw [Polynomial.map_map]
+    simp
+  rw [hp, Polynomial.eval_map]
+  change Polynomial.eval₂ (e : k →+* k') ((e : k →+* k') x) _ = 0
+  rw [Polynomial.eval₂_hom, show
+    Polynomial.eval x (p.map (e.symm : k' →+* k)) = 0 from hx, map_zero]
+
+variable (K) in
+include K in
+/-- The residue fields at maximal ideals of the integral closure of `R` in a separably closed
+algebraic extension of its fraction field are separably closed. -/
+lemma Ideal.isSepClosed_quotient_integralClosure [IsSepClosed Ω] (Q : Ideal (integralClosure R Ω))
+    [Q.IsMaximal] :
+    letI := Ideal.Quotient.field Q
+    IsSepClosed (integralClosure R Ω ⧸ Q) := by
+  let := Ideal.Quotient.field Q
+  have := integralClosure.isFractionRing_of_isAlgebraic (R := R) K (Ω := Ω)
+  have : IsIntegrallyClosed (integralClosure R Ω) :=
+    (isIntegrallyClosed_iff_isIntegrallyClosedIn Ω).2 inferInstance
+  have : IsIntegrallyClosed (Localization.AtPrime Q) :=
+    isIntegrallyClosed_of_isLocalization _ Q.primeCompl Q.primeCompl_le_nonZeroDivisors
+  have : IsSepClosed (FractionRing (integralClosure R Ω)) :=
+    IsSepClosed.of_ringEquiv (FractionRing.algEquiv (integralClosure R Ω) Ω).symm.toRingEquiv
+  have := IsLocalRing.isSepClosed_residueField_of_isSepClosed_fractionRing
+    (A := Localization.AtPrime Q) (FractionRing (integralClosure R Ω))
+  have : IsSepClosed Q.ResidueField := this
+  exact IsSepClosed.of_ringEquiv (RingEquiv.ofBijective _
+    (Ideal.bijective_algebraMap_quotient_residueField Q)).symm
