@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-similitude-pairing-reciprocity",
+ "kind": "statement",
+ "title": "Reciprocity of a similitude pair under a perfect pairing",
+ "statement": "Let $K$ be a field, let $V$ and $W$ be finite-dimensional $K$-vector spaces [def-weil-finite-dimensional-subspace] with dimensions [def-weil-vector-space-dimension] $\\dim_KV$, $\\dim_KW$, and let $\\beta:V\\times W\\to K$ be a $K$-bilinear map that is perfect, meaning that the two induced $K$-linear maps $V\\to\\operatorname{Hom}_K(W,K)$, $v\\mapsto\\beta(v,-)$, and $W\\to\\operatorname{Hom}_K(V,K)$, $w\\mapsto\\beta(-,w)$, are bijective. Let $F:V\\to V$ and $G:W\\to W$ be $K$-linear endomorphisms and $c\\in K^\\times$ a nonzero scalar such that\n\n$$\n\\beta(Fv,Gw)=c\\,\\beta(v,w)\\qquad(v\\in V,\\ w\\in W)\n$$\n\n(a *similitude pair* with multiplier $c$). Fix an indeterminate $T$, write $P_F(T)=\\det(1-TF\\mid V)\\in K[T]$ and $P_G(T)=\\det(1-TG\\mid W)\\in K[T]$ for the reverse characteristic polynomials [def-weil-reverse-characteristic-polynomial], $\\chi_F(T)=\\det(T-F\\mid V)\\in K[T]$ for the characteristic polynomial, and $\\det(F\\mid V),\\det(G\\mid W)\\in K$ for the determinants [def-weil-endomorphism-determinant]. Put $n=\\dim_KV$. Then:\n\n1. $\\dim_KW=\\dim_KV=n$.\n\n2. $F$ and $G$ are invertible, and $\\det(F\\mid V)\\cdot\\det(G\\mid W)=c^{\\,n}$.\n\n3. $\\deg P_F=\\deg P_G=n$, and $P_F(0)=P_G(0)=1$; more precisely, after transporting $G$ along the isomorphism $W\\xrightarrow{\\sim}\\operatorname{Hom}_K(V,K)$, $w\\mapsto\\beta(-,w)$, it becomes $c\\,(F^{-1})^\\vee$ (the scalar $c$ times the transpose of the inverse of $F$), and consequently\n\n$$\n\\det(F\\mid V)\\cdot P_G(T)=(-1)^{n}\\,\\chi_F(cT)\\qquad\\text{in }K[T].\n$$\n\n4. For every ring homomorphism $\\iota:K\\to L$ into an algebraically closed field $L$ [def-weil-algebraic-closure], the multiset of reciprocal roots of $P_G$ in $L$ [lem-weil-reciprocal-root-factorization] is the image of the multiset of reciprocal roots of $P_F$ in $L$ under $\\alpha\\mapsto\\iota(c)/\\alpha$, with multiplicities [def-weil-root-multiplicity]: if $(P_F)_L(T)=\\prod_{r=1}^{n}(1-\\alpha_rT)$ in $L[T]$, then $(P_G)_L(T)=\\prod_{r=1}^{n}\\bigl(1-\\iota(c)\\alpha_r^{-1}T\\bigr)$. Equivalently, the roots of $(P_G)_L$ in $L$, counted with multiplicity, are the $(\\iota(c)z)^{-1}$ for the roots $z$ of $(P_F)_L$. In particular (with $\\iota$ the identity when $K$ is algebraically closed) the eigenvalues of $G$ in $L$, counted with algebraic multiplicity, are the $\\iota(c)/\\alpha$ for the eigenvalues $\\alpha$ of $F$ in $L$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-reciprocity/prop-duality-reciprocity.md",
+  "place": "## Proof, step 1: 'Since $F$ acts on $\\Ql(-d)$ by $q^d$, the operator transported to the right-hand side is $q^d(F^{-1})^\\vee$. Its eigenvalue multiset is $\\{q^d/\\alpha_{i,r}\\}$' and step 2, '$D_{2d-i}=\\prod q^d/\\alpha_{i,r}=q^{db_i}/D_i$' (asserted without argument), stated here for abstract vector spaces. The same argument is Milne, Lectures on Etale Cohomology (literature/milne-lectures-on-etale-cohomology_LEC.pdf), Chapter II, §27, proof of Theorem 27.12, p. 158 ('the eigenvalues of $F^*$ acting on $H^r(X)$ are the same as the eigenvalues of $F_*$ acting on $H^{2d-r}(X)$. But $F_*=q^d/F^*$'). Lean (slopmaster2, no sorry, named by no node before this one): module WeilConjectures.ZetaLinearAlgebra.Pairing, LinearMap.injective_of_similitude (lines 87-93), LinearMap.isUnit_det_of_similitude (107-111), LinearMap.charpoly_eq_smul_inverse_dualMap_of_similitude (146-158), LinearMap.det_mul_det_of_similitude (160-166, clause 2), LinearMap.C_det_mul_charpolyRev_of_similitude (170-175, clause 3), LinearMap.roots_map_charpolyRev_of_similitude (186-221, clause 4), LinearMap.natDegree_map_charpolyRev_of_similitude (223-228, clause 3), LinearMap.charpoly_roots_of_similitude (282-292, clause 4 over an algebraically closed $K$); clause 1 is Mathlib's Module.finrank_of_isPerfPair."
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-endomorphism-determinant",
+  "def-weil-algebraic-closure",
+  "lem-weil-reciprocal-root-factorization",
+  "def-weil-root-multiplicity"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'finrank_of_isPerfPair\\|class IsPerfPair' Mathlib",
+   "results": "Mathlib/LinearAlgebra/PerfectPairing/Basic.lean:40 `class IsPerfPair (p : M →ₗ[R] N →ₗ[R] R)` (both induced maps bijective) and :79 `Module.finrank_of_isPerfPair : finrank R M = finrank R N` for a finite free M: clause 1 only",
+   "date": "2026-10-09",
+   "verdict": "generalization of clause 1 only (Module.finrank_of_isPerfPair); clauses 2-4 not found"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'similitude\\|charpoly_dualMap\\|charpoly_transpose\\|charpolyRev' Mathlib",
+   "results": "no 'similitude' in linear algebra (only Topology/MetricSpace/Dilation.lean); Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean:167 `Matrix.charpoly_transpose`; Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean:292 `Matrix.charpolyRev` (matrices only, no LinearMap.charpolyRev and no dualMap statement); Mathlib/LinearAlgebra/Eigenspace/Charpoly.lean:49 `LinearMap.det_eq_prod_roots_charpoly_of_splits`: ingredients, not the statement",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem' ~/weil-conjectures-slopmaster2/WeilConjectures/ZetaLinearAlgebra/Pairing.lean (source repository, not Mathlib)",
+   "results": "the whole statement, without sorry: LinearMap.det_mul_det_of_similitude, C_det_mul_charpolyRev_of_similitude, roots_map_charpolyRev_of_similitude, natDegree_map_charpolyRev_of_similitude, charpoly_roots_of_similitude (lines 160-292)",
+   "date": "2026-10-09",
+   "verdict": "no match in Mathlib; Lean of the source repository recorded in source"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-duality-reciprocity",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

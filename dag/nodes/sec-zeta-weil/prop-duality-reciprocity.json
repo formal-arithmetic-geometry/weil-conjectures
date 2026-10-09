@@ -8,62 +8,152 @@
   "place": "node prop-duality-reciprocity, order 2919"
  },
  "stmt_deps": [
-  "def-weil-frobenius-detailed",
+  "def-weil-finite-field-fiber",
   "def-weil-geometric-hypotheses",
-  "def-weil-integral-frobenius-factor",
+  "def-weil-frobenius-detailed",
+  "def-weil-global-geometric-frobenius",
   "def-weil-ordinary-compact-cohomology",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-extension",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-betti-numbers",
+  "def-weil-polynomial-coefficient",
+  "def-weil-determinant-constants",
   "def-weil-poincare-trace-cup",
-  "def-weil-smooth-proper-cohomological-family"
+  "def-weil-ordinary-reciprocal-roots",
+  "def-weil-rational-function-field",
+  "def-weil-laurent-polynomial-ring"
  ],
  "proof": [
   {
-   "text": "1. **1.** Write $V_i=H^i(X,\\Ql)$, put\n$n_i=\\dim_{\\Ql}V_i$, and let\n$\\alpha_{i,1},\\ldots,\\alpha_{i,n_i}$ denote the eigenvalues of $F$ on\n$V_i$, counted with algebraic multiplicity. The perfect,\nFrobenius-similitude pairing in [prop-poincare-pairing] induces\n$$\nV_{2d-i}\\xrightarrow{\\sim}V_i^\\vee(-d),\\qquad\ny\\longmapsto\\bigl(x\\longmapsto\\langle x,y\\rangle_i\\bigr).\n$$\nSince $F$ acts on $\\Ql(-d)$ by $q^d$, the operator transported to the\nright-hand side is $q^d(F^{-1})^\\vee$. Its eigenvalue multiset is\n$$\n\\{\\alpha_{2d-i,1},\\ldots,\\alpha_{2d-i,n_{2d-i}}\\}\n=\n\\{q^d/\\alpha_{i,1},\\ldots,q^d/\\alpha_{i,n_i}\\}.\n$$\nIn particular the two multisets have the same cardinality.",
+   "text": "*Step 1 (the spaces, the Betti numbers, and the eigenvalue multisets).* Fix $i$ with $0\\leq i\\leq2d$ and write $V_j=V_{j,\\ell}=H^j(X,\\Ql)$ and $F_j=F_{j,\\ell}=F|_{V_j}$ for the members of the smooth-proper cohomological family [def-weil-smooth-proper-cohomological-family]; each $V_j$ is a finite-dimensional $\\Ql$-vector space by [prop-cohomological-finiteness], and $P_{j,\\ell}(T)=\\det(1-TF_j\\mid V_j)\\in\\Ql[T]$. By [def-weil-betti-numbers] and [def-weil-integral-frobenius-factor], $P_j\\in\\mathbf Z[T]$ is the polynomial with $P_j(0)=1$ and $P_j^{(\\ell)}=P_{j,\\ell}$ (unique by [prop-integral-recovery]), $b_j=\\deg P_j$, and the last clause of [prop-integral-recovery] gives $b_j=\\deg P_j=\\dim_{\\Ql}V_j$. Let $\\Qlb$ be the algebraic closure of $\\Ql$ chosen in [def-weil-finite-field-fiber]. By [lem-weil-reciprocal-root-factorization] applied to $P_{j,\\ell}$ (which has $P_{j,\\ell}(0)=1$), there are $\\alpha_{j,1},\\ldots,\\alpha_{j,n_j}\\in\\Qlb^\\times$, $n_j=\\deg P_{j,\\ell}=\\deg P_j=b_j$ (the coefficientwise extension $\\mathbf Z[T]\\to\\Ql[T]$ preserves degrees, [lem-weil-coefficientwise-extension-degree] with [lem-weil-integers-injective-char-zero]), with $P_{j,\\ell}(T)=\\prod_{r=1}^{b_j}(1-\\alpha_{j,r}T)$ in $\\Qlb[T]$, and the $\\alpha_{j,r}$ are the reciprocal roots of $P_{j,\\ell}$ counted with algebraic multiplicity [def-weil-ordinary-reciprocal-roots]; by [prop-weil-reciprocal-roots-eigenvalues] they are exactly the eigenvalues of $F_j$ on $V_j\\otimes_{\\Ql}\\Qlb$ counted with algebraic multiplicity. This multiset $\\{\\alpha_{j,1},\\ldots,\\alpha_{j,b_j}\\}$ is what the statement calls the multiset of Frobenius eigenvalues in degree $j$.",
    "uses": [
-    "prop-poincare-pairing"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "1. **2.** By the Betti-number convention in\n[def-weil-betti-numbers], $b_j=\\dim_{\\Ql}V_j=n_j$. The cardinality\ncomparison in Step 1 therefore gives\n$$\nb_{2d-i}=b_i.\n$$\nThe determinant-constant definition in\n[def-weil-determinant-constants] and the factorization\n$P_i(T)=\\prod_{r=1}^{b_i}(1-\\alpha_{i,r}T)$ give\n$$\nD_i=(-1)^{b_i}[T^{b_i}]P_i(T)\n=\\prod_{r=1}^{b_i}\\alpha_{i,r}.\n$$\nUsing the reciprocal multiset from Step 1,\n$$\nD_{2d-i}\n=\\prod_{r=1}^{b_i}\\frac{q^d}{\\alpha_{i,r}}\n=\\frac{q^{db_i}}{D_i},\n$$\nand hence $D_iD_{2d-i}=q^{db_i}$.",
-   "uses": [
+    "def-weil-smooth-proper-cohomological-family",
+    "prop-cohomological-finiteness",
     "def-weil-betti-numbers",
-    "def-weil-determinant-constants"
+    "def-weil-integral-frobenius-factor",
+    "prop-integral-recovery",
+    "def-weil-finite-field-fiber",
+    "lem-weil-reciprocal-root-factorization",
+    "lem-weil-coefficientwise-extension-degree",
+    "lem-weil-integers-injective-char-zero",
+    "def-weil-ordinary-reciprocal-roots",
+    "prop-weil-reciprocal-roots-eigenvalues"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-reciprocity/prop-duality-reciprocity.md",
+    "place": "## Proof, step 1, first sentence ('let $\\alpha_{i,1},\\ldots,\\alpha_{i,n_i}$ denote the eigenvalues of $F$ on $V_i$, counted with algebraic multiplicity') and step 2 ('$b_j=\\dim V_j=n_j$', 'the factorization $P_i(T)=\\prod(1-\\alpha_{i,r}T)$'); the identification of eigenvalues with reciprocal roots, and $b_j=\\dim V_j$, are taken there without argument"
+   }
   },
   {
-   "text": "1. **3.** The same factorization gives, as an identity in\n$\\mathbf Q[T,T^{-1}]$,\n$$\n\\begin{aligned}\nP_{2d-i}(q^{-d}T^{-1})\n&=\\prod_{r=1}^{b_i}\n\\left(1-\\frac{1}{\\alpha_{i,r}}T^{-1}\\right)\\\\\n&=(-1)^{b_i}T^{-b_i}\n\\left(\\prod_{r=1}^{b_i}\\alpha_{i,r}\\right)^{-1}\n\\prod_{r=1}^{b_i}(1-\\alpha_{i,r}T)\\\\\n&=(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T).\n\\end{aligned}\n$$\nThis is the claimed Laurent-polynomial reciprocity.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "1. **4.** For $i=d$, the symmetry clause of\n[prop-poincare-pairing] makes the pairing $(-1)^d$-symmetric. If\n$d$ is odd, choose a nonzero $\\Ql$-linear trivialization\n$\\Ql(-d)\\xrightarrow{\\sim}\\Ql$; this is possible because the Tate-twist\nconstruction in [def-coefficient-twists-detailed] makes\n$\\Ql(-d)$ an invertible rank-one coefficient space. Transporting the\npairing along this trivialization gives a nondegenerate alternating\n$\\Ql$-valued form on $V_d$. The\ncoefficient field is $\\Ql=\\mathbf Q_\\ell$, of characteristic zero under\nthe finite-field convention of [def-weil-finite-field-fiber], so its\ncharacteristic is not $2$. Applying\n[lem-weil-alternating-form-dimension] gives\n$\\dim_{\\Ql}V_d$ even; [def-weil-betti-numbers] then gives that\n$b_d$ is even.",
+   "text": "*Step 2 (the $\\Ql$-valued similitude pairing).* By [prop-poincare-pairing], the trace–cup-product pairing $\\langle-,-\\rangle_i:V_i\\times V_{2d-i}\\to\\Ql(-d)$ of [def-weil-poincare-trace-cup] is perfect (both induced maps $V_i\\to\\operatorname{Hom}_{\\Ql}(V_{2d-i},\\Ql(-d))$ and $V_{2d-i}\\to\\operatorname{Hom}_{\\Ql}(V_i,\\Ql(-d))$ are bijective), and $\\langle Fx,Fy\\rangle_i=q^d\\langle x,y\\rangle_i$ for all $x\\in V_i$, $y\\in V_{2d-i}$, geometric Frobenius acting on $\\Ql(-d)$ by $q^d$ [def-weil-frobenius-coefficient-twists]. The value space $\\Ql(-d)$ is the Tate twist of degree $-d$ of [def-coefficient-twists-detailed], a one-dimensional $\\Ql$-vector space (the twist of degree $1$ has rank one and $\\Lambda(-d)=\\operatorname{Hom}(\\Lambda(d),\\Lambda)$). Choose a $\\Ql$-linear isomorphism $\\tau:\\Ql(-d)\\xrightarrow{\\sim}\\Ql$ and put $\\beta_i=\\tau\\circ\\langle-,-\\rangle_i:V_i\\times V_{2d-i}\\to\\Ql$. Then $\\beta_i$ is $\\Ql$-bilinear; it is perfect, because composing with the isomorphism $\\operatorname{Hom}_{\\Ql}(-,\\Ql(-d))\\xrightarrow{\\sim}\\operatorname{Hom}_{\\Ql}(-,\\Ql)$, $\\varphi\\mapsto\\tau\\circ\\varphi$, carries the two induced maps of $\\langle-,-\\rangle_i$ to those of $\\beta_i$; and $\\beta_i(F_ix,F_{2d-i}y)=\\tau(q^d\\langle x,y\\rangle_i)=q^d\\beta_i(x,y)$. Finally $q^d\\neq0$ in $\\Ql$, since $\\mathbf Z\\to\\Ql$ is injective [lem-weil-integers-injective-char-zero]. So $(F_i,F_{2d-i})$ is a similitude pair with multiplier $c=q^d\\in\\Ql^\\times$ for the perfect pairing $\\beta_i$, in the sense of [lem-weil-similitude-pairing-reciprocity].",
    "uses": [
     "prop-poincare-pairing",
+    "def-weil-poincare-trace-cup",
+    "def-weil-frobenius-coefficient-twists",
     "def-coefficient-twists-detailed",
-    "def-weil-finite-field-fiber",
-    "lem-weil-alternating-form-dimension",
-    "def-weil-betti-numbers"
+    "lem-weil-integers-injective-char-zero",
+    "lem-weil-similitude-pairing-reciprocity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, proof of Theorem 27.12, p. 158 (the pairing $H^{2d-r}(X,\\Ql)\\times H^r(X,\\Ql(d))\\to H^{2d}(X,\\Ql)\\to\\Ql$ and its Frobenius compatibility $\\eta_X(F_*x\\cup x')=\\eta_X(x\\cup F^*x')$, with $F_*F^*=q^d$ from Remark 27.4(a), p. 155); here in the form of [prop-poincare-pairing], whose similitude $\\langle Fx,Fy\\rangle_i=q^d\\langle x,y\\rangle_i$ replaces Milne's $F_*=q^d/F^*$. The trivialization of $\\Ql(-d)$ is the blueprint's step 4 ('choose a nonzero $\\Ql$-linear trivialization $\\Ql(-d)\\simeq\\Ql$')"
+   }
+  },
+  {
+   "text": "*Step 3 (the eigenvalue multiset in degree $2d-i$, and $b_i=b_{2d-i}$).* Apply [lem-weil-similitude-pairing-reciprocity] with $K=\\Ql$, $V=V_i$, $W=V_{2d-i}$, $\\beta=\\beta_i$, $F=F_i$, $G=F_{2d-i}$, $c=q^d$ (hypotheses from Step 2), and $\\iota:\\Ql\\hookrightarrow\\Qlb$ the inclusion. Its clause 1 gives $\\dim_{\\Ql}V_{2d-i}=\\dim_{\\Ql}V_i$, hence, by Step 1, $b_{2d-i}=\\dim V_{2d-i}=\\dim V_i=b_i$. Its clause 4 gives that the multiset of reciprocal roots of $P_{2d-i,\\ell}=\\det(1-TF_{2d-i}\\mid V_{2d-i})$ in $\\Qlb$ is the image of the multiset of reciprocal roots of $P_{i,\\ell}$ under $\\alpha\\mapsto q^d/\\alpha$, with multiplicities; in the notation of Step 1,\n\n$$\n\\{\\alpha_{2d-i,1},\\ldots,\\alpha_{2d-i,b_{2d-i}}\\}=\\{q^d/\\alpha_{i,1},\\ldots,q^d/\\alpha_{i,b_i}\\},\n\\qquad\nP_{2d-i,\\ell}(T)=\\prod_{r=1}^{b_i}\\bigl(1-q^d\\alpha_{i,r}^{-1}T\\bigr)\\ \\text{in }\\Qlb[T].\n$$\n\nBy Step 1 both multisets are the multisets of Frobenius eigenvalues, with algebraic multiplicity, in degrees $2d-i$ and $i$: this is the first assertion of the proposition.",
+   "uses": [
+    "lem-weil-similitude-pairing-reciprocity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, proof of Theorem 27.12, p. 158: 'the eigenvalues of $F^*$ acting on $H^r(X)$ are the same as the eigenvalues of $F_*$ acting on $H^{2d-r}(X)$. But $F_*=q^d/F^*$ (see 27.4a), and so if $\\alpha_1,\\ldots,\\alpha_s$ are the eigenvalues of $F^*$ acting on $H^r(X,\\Ql)$, then $q^d/\\alpha_1,\\ldots,q^d/\\alpha_s$ are the eigenvalues of $F^*$ acting on $H^{2d-r}(X,\\Ql)$'; the linear algebra Milne leaves implicit is [lem-weil-similitude-pairing-reciprocity]. Blueprint: ## Proof, step 1 (the display of the two multisets) and step 2 ('$b_{2d-i}=b_i$')"
+   }
+  },
+  {
+   "text": "*Step 4 (the product rule $D_iD_{2d-i}=q^{db_i}$).* By [def-weil-determinant-constants], $D_j=(-1)^{b_j}[T^{b_j}]P_j(T)\\in\\mathbf Z\\setminus\\{0\\}$ and the image of $D_j$ in $\\Ql$ is $\\det(F_j\\mid V_j)$, for $j=i$ and $j=2d-i$. Clause 2 of [lem-weil-similitude-pairing-reciprocity], applied as in Step 3, gives $\\det(F_i\\mid V_i)\\cdot\\det(F_{2d-i}\\mid V_{2d-i})=(q^d)^{\\dim V_i}=q^{db_i}$ in $\\Ql$ (Step 1: $\\dim V_i=b_i$). Hence the integers $D_iD_{2d-i}$ and $q^{db_i}$ have the same image in $\\Ql$, and since $\\mathbf Z\\to\\Ql$ is injective [lem-weil-integers-injective-char-zero], $D_iD_{2d-i}=q^{db_i}$ in $\\mathbf Z$.",
+   "uses": [
+    "def-weil-determinant-constants",
+    "lem-weil-similitude-pairing-reciprocity",
+    "lem-weil-integers-injective-char-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-reciprocity/prop-duality-reciprocity.md",
+    "place": "## Proof, step 2: '$D_i=(-1)^{b_i}[T^{b_i}]P_i(T)=\\prod\\alpha_{i,r}$', '$D_{2d-i}=\\prod q^d/\\alpha_{i,r}=q^{db_i}/D_i$, and hence $D_iD_{2d-i}=q^{db_i}$'; the blueprint computes with the eigenvalue products, here the product rule is clause 2 of [lem-weil-similitude-pairing-reciprocity] (the determinant is the product of the eigenvalues), and the descent from $\\Ql$ to $\\mathbf Z$, which the blueprint omits, is written out"
+   }
+  },
+  {
+   "text": "*Step 5 (the Laurent-polynomial identity).* Work first in $\\Qlb[T,T^{-1}]$ [def-weil-laurent-polynomial-ring]. Apply [lem-weil-reciprocal-roots-laurent-identity] with $L=\\Qlb$, $P=P_{2d-i,\\ell}$, $Q=P_{i,\\ell}$ (both have constant coefficient $1$, [def-weil-smooth-proper-cohomological-family]) and $c=q^d\\in\\Qlb^\\times$. Its hypothesis holds: by Step 3 the reciprocal roots of $P_{2d-i,\\ell}$ are the $q^d/\\alpha_{i,r}$, so the reciprocal roots of $Q=P_{i,\\ell}$, namely the $\\alpha_{i,r}=q^d/(q^d/\\alpha_{i,r})$, are the images of those of $P=P_{2d-i,\\ell}$ under $\\alpha\\mapsto c/\\alpha$, with multiplicities ($\\alpha\\mapsto q^d/\\alpha$ is an involution of $\\Qlb^\\times$); and $n=\\deg P_{2d-i,\\ell}=b_{2d-i}=b_i$ (Step 1 and Step 3). The lemma's determinant constant of $Q=P_{i,\\ell}$ is $D_Q=(-1)^{b_i}[T^{b_i}]P_{i,\\ell}$, which is the image in $\\Ql$ of $D_i=(-1)^{b_i}[T^{b_i}]P_i$, because the coefficientwise extension $P_i\\mapsto P_i^{(\\ell)}=P_{i,\\ell}$ preserves every coefficient [lem-weil-coefficientwise-extension-degree] ([def-weil-coefficientwise-extension], [def-weil-polynomial-coefficient]). Clause 2 of the lemma therefore gives, in $\\Qlb[T,T^{-1}]$,\n\n$$\nP_{2d-i,\\ell}(q^{-d}T^{-1})=(-1)^{b_i}T^{-b_i}D_i^{-1}P_{i,\\ell}(T).\n$$\n\nNow descend to $\\mathbf Q[T,T^{-1}]$. Both sides are the images, under the coefficientwise map $\\mathbf Q[T,T^{-1}]\\to\\Qlb[T,T^{-1}]$ induced by the field inclusions $\\mathbf Q\\subset\\Ql\\subset\\Qlb$ (the unique ring homomorphism $\\mathbf Q\\to\\Ql$ extending $\\mathbf Z\\to\\Ql$; it is injective, as is every ring homomorphism out of a field), of the elements $P_{2d-i}(q^{-d}T^{-1})$ and $(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T)$ of $\\mathbf Q[T,T^{-1}]$: indeed $P_j^{(\\ell)}=P_{j,\\ell}$, the coefficientwise map is a ring homomorphism [lem-weil-coefficientwise-extension-injective] commuting with the substitution $T\\mapsto q^{-d}T^{-1}$ of [def-weil-rational-function-field] ([def-weil-laurent-polynomial-ring]), and $D_i\\in\\mathbf Z\\setminus\\{0\\}$ is invertible in $\\mathbf Q$. The coefficientwise map $\\mathbf Q[T,T^{-1}]\\to\\Qlb[T,T^{-1}]$ is injective ([def-weil-laurent-polynomial-ring]; a Laurent polynomial is determined by its coefficients and $\\mathbf Q\\to\\Qlb$ is injective, [lem-weil-integers-injective-char-zero]). Hence\n\n$$\nP_{2d-i}(q^{-d}T^{-1})=(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T)\\quad\\text{in }\\mathbf Q[T,T^{-1}],\n$$\n\nwhich is the Laurent-polynomial identity of the proposition.",
+   "uses": [
+    "def-weil-laurent-polynomial-ring",
+    "lem-weil-reciprocal-roots-laurent-identity",
+    "def-weil-smooth-proper-cohomological-family",
+    "lem-weil-coefficientwise-extension-degree",
+    "def-weil-coefficientwise-extension",
+    "def-weil-polynomial-coefficient",
+    "lem-weil-coefficientwise-extension-injective",
+    "def-weil-rational-function-field",
+    "lem-weil-integers-injective-char-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-reciprocity/prop-duality-reciprocity.md",
+    "place": "## Proof, step 3: '$P_{2d-i}(q^{-d}T^{-1})=\\prod(1-\\alpha_{i,r}^{-1}T^{-1})=(-1)^{b_i}T^{-b_i}(\\prod\\alpha_{i,r})^{-1}\\prod(1-\\alpha_{i,r}T)=(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T)$'; the computation is [lem-weil-reciprocal-roots-laurent-identity], and the passage from $\\Qlb[T,T^{-1}]$, where the factorization lives, to $\\mathbf Q[T,T^{-1}]$, which the blueprint does not mention, is written out"
+   }
+  },
+  {
+   "text": "*Step 6 (middle degree: $(-1)^d$-symmetry and the parity of $b_d$).* By the graded-commutativity clause of [prop-poincare-pairing], $\\langle y,x\\rangle_{2d-i}=(-1)^i\\langle x,y\\rangle_i$ for $x\\in V_i$, $y\\in V_{2d-i}$; for $i=d$ this reads $\\langle y,x\\rangle_d=(-1)^d\\langle x,y\\rangle_d$ for all $x,y\\in V_d$, i.e. the middle pairing is $(-1)^d$-symmetric. Suppose $d$ is odd. The $\\Ql$-valued pairing $\\beta_d=\\tau\\circ\\langle-,-\\rangle_d:V_d\\times V_d\\to\\Ql$ of Step 2 (with $i=d$) is bilinear and perfect, hence nondegenerate ($\\beta_d(x,-)=0$ forces $x=0$ by the bijectivity of $x\\mapsto\\beta_d(x,-)$), and satisfies $\\beta_d(y,x)=-\\beta_d(x,y)$. Taking $y=x$ gives $2\\beta_d(x,x)=0$; the field $\\Ql$ has characteristic $0$ [lem-weil-integers-injective-char-zero], so $2\\neq0$ in $\\Ql$ and $\\beta_d(x,x)=0$ for all $x$: $\\beta_d$ is a nondegenerate alternating bilinear form on the finite-dimensional $\\Ql$-vector space $V_d$ (Step 1), over a field of characteristic $\\neq2$. By [lem-weil-alternating-form-dimension], $\\dim_{\\Ql}V_d$ is even, and $b_d=\\dim_{\\Ql}V_d$ (Step 1) is even.",
+   "uses": [
+    "prop-poincare-pairing",
+    "lem-weil-integers-injective-char-zero",
+    "lem-weil-alternating-form-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-reciprocity/prop-duality-reciprocity.md",
+    "place": "## Proof, step 4 ('the symmetry clause of [prop-poincare-pairing] makes the pairing $(-1)^d$-symmetric. If $d$ is odd, choose a nonzero $\\Ql$-linear trivialization $\\Ql(-d)\\simeq\\Ql$ ... a nondegenerate alternating $\\Ql$-valued form on $V_d$ ... characteristic is not $2$. Applying [lem-weil-alternating-form-dimension] gives $\\dim V_d$ even'); the passage from $(-1)$-symmetric to alternating, which the blueprint skips, is written out. Milne, Remark 27.13, p. 159, uses the parity of the multiplicity of $q^{d/2}$ on $H^d$ instead and does not state this claim"
+   }
   }
  ],
  "proof_deps": [
-  "prop-poincare-pairing",
+  "def-weil-smooth-proper-cohomological-family",
+  "prop-cohomological-finiteness",
   "def-weil-betti-numbers",
-  "def-weil-determinant-constants",
-  "def-coefficient-twists-detailed",
+  "def-weil-integral-frobenius-factor",
+  "prop-integral-recovery",
   "def-weil-finite-field-fiber",
+  "lem-weil-reciprocal-root-factorization",
+  "lem-weil-coefficientwise-extension-degree",
+  "lem-weil-integers-injective-char-zero",
+  "def-weil-ordinary-reciprocal-roots",
+  "prop-weil-reciprocal-roots-eigenvalues",
+  "prop-poincare-pairing",
+  "def-weil-poincare-trace-cup",
+  "def-weil-frobenius-coefficient-twists",
+  "def-coefficient-twists-detailed",
+  "lem-weil-similitude-pairing-reciprocity",
+  "def-weil-determinant-constants",
+  "def-weil-laurent-polynomial-ring",
+  "lem-weil-reciprocal-roots-laurent-identity",
+  "def-weil-coefficientwise-extension",
+  "def-weil-polynomial-coefficient",
+  "lem-weil-coefficientwise-extension-injective",
+  "def-weil-rational-function-field",
   "lem-weil-alternating-form-dimension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-reciprocity/prop-duality-reciprocity.md",
-  "place": "## Proof"
+  "place": "## Proof (steps 1-4 of the blueprint, rewritten as six steps; steps 2 and 3 follow Milne, Lectures on Etale Cohomology, Chapter II, §27, proof of Theorem 27.12, p. 158, with Remark 27.4(a), p. 155, as the per-step sources record; the remaining claims, $D_iD_{2d-i}=q^{db_i}$, the Laurent identity and the parity of $b_d$, are the blueprint's and have no source in literature/ beyond it)"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -105,5 +195,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "prop-duality-reciprocity",
+  "worker": "stage1",
+  "summary": "Statement checked against the master blueprint file and the slopmaster2 LaTeX (01_final_weil_conjectures.tex, prop:duality-reciprocity, lines 3453-3482): same claims, kept verbatim. The statement leaves 'Frobenius eigenvalues in degree i, with algebraic multiplicity' undefined; the proof (Step 1) reads it as the multiset of reciprocal roots of P_{i,ell} in the chosen algebraic closure Qlb [def-weil-ordinary-reciprocal-roots], which [prop-weil-reciprocal-roots-eigenvalues] identifies with the eigenvalues of F_{i,ell} after scalar extension; def-weil-ordinary-reciprocal-roots was added to stmt_deps for that reason, and the Laurent ring Q[T,T^{-1}] and the substitution T -> q^{-d}T^{-1}, used without definition, now point to def-weil-laurent-polynomial-ring (new) and def-weil-rational-function-field. stmt_deps completed with the notions the statement names (geometric hypotheses, global geometric Frobenius, cohomological family, coefficientwise extension, integral factor, Betti numbers, coefficient notation, determinant constants, trace-cup pairing). The four imported steps were replaced by six: the blueprint's step 1 asserted without argument that the transported operator q^d(F^{-1})^vee has eigenvalue multiset {q^d/alpha}, and its steps 2-3 computed with the factorization over an unnamed algebraic closure and never descended to Z or Q[T,T^{-1}]; the hidden linear algebra is now lem-weil-similitude-pairing-reciprocity (new), the polynomial computation is lem-weil-reciprocal-roots-laurent-identity (new), the factorization is the existing lem-weil-reciprocal-root-factorization, b_i = dim V_i is taken from prop-integral-recovery, D_i = det F_i from def-weil-determinant-constants, and the descents use lem-weil-integers-injective-char-zero and lem-weil-coefficientwise-extension-injective/-degree. The dependencies def-coefficient-twists-detailed and def-weil-finite-field-fiber, cited by the import in step 4, are kept where they are used (trivialization of Ql(-d) in Step 2; Qlb in Step 1). Both new lemmas are stated to match sorry-free Lean of slopmaster2 (WeilConjectures.ZetaLinearAlgebra.Pairing; WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic), recorded in their source fields; the proposition's own trace-datum form is WeilConjectures.ZetaLinearAlgebra.Reciprocity (reported as attachments)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
