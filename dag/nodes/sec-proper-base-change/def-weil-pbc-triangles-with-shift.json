@@ -1,0 +1,50 @@
+{
+ "id": "def-weil-pbc-triangles-with-shift",
+ "kind": "definition",
+ "title": "Triangles, morphisms and isomorphisms of triangles in a category with shift",
+ "statement": "Let $\\mathcal D$ be an additive category and $[1]:\\mathcal D\\to\\mathcal D$, $X\\mapsto X[1]$, an additive functor which is an auto-equivalence. A *triangle* in $\\mathcal D$ is a sextuple $(X,Y,Z,f,g,h)$ of objects $X,Y,Z$ and morphisms $f:X\\to Y$, $g:Y\\to Z$, $h:Z\\to X[1]$. A *morphism of triangles* $(X,Y,Z,f,g,h)\\to(X',Y',Z',f',g',h')$ is a triple of morphisms $a:X\\to X'$, $b:Y\\to Y'$, $c:Z\\to Z'$ with $b\\circ f=f'\\circ a$, $c\\circ g=g'\\circ b$ and $a[1]\\circ h=h'\\circ c$. Triangles and their morphisms, composed componentwise, form a category; an *isomorphism of triangles* is an isomorphism in this category, equivalently a morphism of triangles $(a,b,c)$ whose three components are isomorphisms of $\\mathcal D$. Two triangles are *isomorphic* when there is an isomorphism of triangles between them.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Definition 13.3.1, Tag 0144 (label definition-triangle)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure Triangle\\|structure TriangleMorphism\\|instance triangleCategory\\|def isoMk\\|isIso_of_isIsos' Mathlib/CategoryTheory/Triangulated/Basic.lean (under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "structure Triangle (line 44, @[stacks 0144], for [Category C] [HasShift C ℤ], third morphism obj₃ ⟶ obj₁⟦1⟧); structure TriangleMorphism (line 104, hom₁ hom₂ hom₃ with comm₁ comm₂ comm₃); instance triangleCategory (line 146); Triangle.isoMk (line 187, isomorphism from three component isomorphisms); Triangle.isIso_of_isIsos (line 202)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Triangle' Mathlib/CategoryTheory/Triangulated/",
+   "results": "Basic.lean defines triangles; Pretriangulated.lean, Rotate.lean, TriangleShift.lean, Functor.lean use them",
+   "date": "2026-10-09",
+   "verdict": "match (Basic.lean)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Pretriangulated.Triangle",
+  "file": "Mathlib/CategoryTheory/Triangulated/Basic.lean",
+  "how": "exact: `Triangle C` for `[Category C] [HasShift C ℤ]` (line 44, tagged @[stacks 0144]), morphisms `TriangleMorphism` (line 104), the category `triangleCategory` (line 146), isomorphisms built from component isomorphisms by `Triangle.isoMk` (line 187) and conversely `Triangle.isIso_of_isIsos` (line 202); Mathlib's shift is a `HasShift C ℤ` structure, which an additive auto-equivalence $[1]$ with chosen quasi-inverse determines (Stacks' remark after Tag 0144)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-common-stage-cones",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
