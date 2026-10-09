@@ -2,20 +2,64 @@
  "id": "def-weil-pbc-symmetric-product-morphism",
  "kind": "definition",
  "title": "Symmetric-product coordinate morphism",
- "statement": "For $n\\geq1$ and a scheme $S$, define polynomials $F_0,\\dots,F_n$ by\n\n$$\n \\prod_{i=1}^n(x_it+y_i)=\\sum_{j=0}^nF_jt^j.\n$$\n\nEach $F_j$ is multihomogeneous of degree one in every pair $(x_i,y_i)$. The\nassociated rational formula is\n\n$$\n ((x_1:y_1),\\dots,(x_n:y_n))\\longmapsto[F_0:\\cdots:F_n].\n$$",
+ "statement": "Let $n\\ge1$ and let $\\mathbf Z[x_1,y_1,\\dots,x_n,y_n]$ be the polynomial ring over $\\mathbf Z$ in the $2n$ variables $x_1,y_1,\\dots,x_n,y_n$. Define $F_0,\\dots,F_n\\in\\mathbf Z[x_1,y_1,\\dots,x_n,y_n]$ as the coefficients, in an auxiliary variable $t$, of\n\n$$\n \\prod_{i=1}^n(x_it+y_i)=\\sum_{j=0}^nF_jt^j\\qquad\\text{in }\\mathbf Z[x_1,y_1,\\dots,x_n,y_n][t].\n$$\n\nBy [lem-weil-pbc-product-linear-forms-coefficients] (with $R=\\mathbf Z[x_1,y_1,\\dots,x_n,y_n]$, $a_i=x_i$, $b_i=y_i$),\n\n$$\n F_j=\\sum_{J\\subseteq\\{1,\\dots,n\\},\\ |J|=j}\\ \\prod_{i\\in J}x_i\\prod_{i\\notin J}y_i\\qquad(0\\le j\\le n),\n$$\n\nso $F_0=y_1\\cdots y_n$, $F_n=x_1\\cdots x_n$, and each monomial of $F_j$ contains, for every $i$, exactly one of $x_i,y_i$, to the first power: $F_j$ is multihomogeneous of degree $(1,\\dots,1)$, i.e. of degree one in every pair $(x_i,y_i)$. By the same node, for every commutative ring $R'$ and elements $a_i,b_i\\in R'$, $F_j(a_1,b_1,\\dots,a_n,b_n)$ is the coefficient of $t^j$ in $\\prod_i(a_it+b_i)\\in R'[t]$.\n\nThe associated rational formula\n\n$$\n ((x_1:y_1),\\dots,(x_n:y_n))\\longmapsto[F_0:\\cdots:F_n]\n$$\n\nis, for a scheme $S$ [def-pc-scheme], the name of the symmetric-product morphism $\\sigma_n:(\\mathbf P^1_S)^n\\to\\mathbf P^n_S$. This node defines only the polynomials $F_j$; the morphism is constructed in lem-weil-pbc-symmetric-product-properties, part (c), as $\\sigma_n=\\varphi_{p_n,(\\mathcal L_n,(F_0,\\dots,F_n))}$ of def-weil-pbc-morphism-to-projective-space-by-sections, with $\\mathcal L_n=\\bigotimes_i\\mathrm{pr}_i^*\\mathcal O(1)$, $x_i=\\mathrm{pr}_i^*T_0$, $y_i=\\mathrm{pr}_i^*T_1$, and $F_j$ read as global sections of $\\mathcal L_n$ (that node uses this one, so the reference is a pointer, not a dependency). (Stacks, Etale Cohomology, proof of Lemma 0A4F, indexes the same polynomials in reverse order, $\\sum_jF_jt^{n-j}$; here the indexing $\\sum_jF_jt^j$ of the blueprint and of all users is kept.)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/def-weil-pbc-symmetric-product-morphism.md",
   "place": "node def-weil-pbc-symmetric-product-morphism, order 1199"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-pc-scheme",
+  "lem-weil-pbc-product-linear-forms-coefficients"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coefficients of the product of linear forms (x_i t + y_i) are bihomogeneous elementary symmetric polynomials in pairs of variables",
+   "results": "Polynomial.coeff_mul (Mathlib.Algebra.Polynomial.Coeff), MvPolynomial.coeff_mul, Multiset.prod_X_add_C_coeff', MvPolynomial.prod_X_add_C_coeff, Multiset.prod_X_add_C_coeff, Multiset.prod_X_sub_C_coeff (Mathlib.RingTheory.Polynomial.Vieta), MvPowerSeries.coeff_prod",
+   "date": "2026-10-09",
+   "verdict": "no match: Vieta covers only the monic case x_i = 1 (coefficients = esymm in the y_i), not the homogenized polynomials F_j"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "multihomogeneous polynomial in pairs of variables (x_i, y_i): coefficient of t^j in product of (x_i t + y_i) as homogenized elementary symmetric polynomial",
+   "results": "MvPolynomial.prod_X_add_C_coeff, Multiset.prod_X_add_C_coeff('), MvPolynomial.prod_C_add_X_eq_sum_esymm (Mathlib.RingTheory.Polynomial.Vieta), MvPolynomial.esymm, MvPolynomial.esymm_eq_sum_monomial, MvPolynomial.esymm_eq_sum_subtype (Mathlib.RingTheory.MvPolynomial.Symmetric.Defs), MvPolynomial.mul_esymm_eq_sum",
+   "date": "2026-10-09",
+   "verdict": "no match: MvPolynomial.esymm σ R j is the sum over |J|=j of prod_J X_i, i.e. F_j at y_i = 1; F_j is its multihomogenization y_1...y_n e_j(x_i/y_i), not in Mathlib as a definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "product over a finset of (f i + g i) equals sum over subsets t of product of f over t times product of g over complement",
+   "results": "Finset.prod_add, Fintype.prod_add, Finset.prod_add_one, Finset.prod_one_add, Finset.prod_univ_sum (Mathlib.Algebra.BigOperators.Ring.Finset)",
+   "date": "2026-10-09",
+   "verdict": "Finset.prod_add is the expansion behind the coefficient formula; already the match of the leaf lem-weil-pbc-product-linear-forms-coefficients, which this node cites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "weighted homogeneous multivariate polynomial with weights in a monoid, multigraded degree",
+   "results": "MvPolynomial.IsWeightedHomogeneous, MvPolynomial.weightedHomogeneousComponent(_apply), MvPolynomial.IsWeightedHomogeneous.mul, MvPolynomial.weightedHomogeneousComponent_isWeightedHomogeneous (Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous)",
+   "date": "2026-10-09",
+   "verdict": "notion available: multihomogeneity of degree (1,...,1) is IsWeightedHomogeneous w F_j (fun _ => 1) with w (x_i) = w (y_i) = Pi.single i 1 : Fin n -> Nat; no statement about the F_j"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.esymm, Polynomial.coeff",
+   "results": "MvPolynomial.prod_X_add_C_coeff (Mathlib.RingTheory.Polynomial.Vieta) only",
+   "date": "2026-10-09",
+   "verdict": "no match: the monic case only"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem prod_add \\|prod_add_ordered\\|prod_C_add_X_eq_sum_esymm\\|^def esymm\\|prod_X_add_C_eq_sum_esymm' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln -i 'homogeniz\\|IsWeightedHomogeneous\\|multihomogeneous\\|bihomogeneous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'def homogenize\\|def IsHomogeneous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Finset.prod_add (Algebra/BigOperators/Ring/Finset.lean:171), Finset.prod_add_ordered (:205); Multiset.esymm and MvPolynomial.esymm (RingTheory/MvPolynomial/Symmetric/Defs.lean:70,195); Multiset.prod_X_add_C_eq_sum_esymm (RingTheory/Polynomial/Vieta.lean:40); MvPolynomial.IsHomogeneous (RingTheory/MvPolynomial/Homogeneous.lean:49), IsWeightedHomogeneous (RingTheory/MvPolynomial/WeightedHomogeneous.lean); Polynomial.homogenize (Algebra/Polynomial/Homogenize.lean:40, one variable to MvPolynomial (Fin 2), not multihomogenization); no 'multihomogeneous'/'bihomogeneous'",
+   "date": "2026-10-09",
+   "verdict": "no match as a definition; the F_j are written in Lean in one line from Mathlib notions, F_j = (prod_i (C (X (x i)) * Polynomial.X + C (X (y i)))).coeff j, and their formula is the leaf lem-weil-pbc-product-linear-forms-coefficients"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -39,5 +83,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-pbc-symmetric-product-morphism",
+  "worker": "stage1",
+  "summary": "Reduced the definition to the data the four users (lem-weil-pbc-symmetric-product-properties, -over-base, -finite, -surjective) do not hold: the polynomials F_0..F_n in Z[x_1,y_1,...,x_n,y_n] with the indexing prod(x_i t + y_i) = sum F_j t^j, their explicit form sum_{|J|=j} prod_J x_i prod_{J^c} y_i and their multihomogeneity of degree (1,...,1), taken from the Mathlib leaf lem-weil-pbc-product-linear-forms-coefficients (Finset.prod_add), plus the evaluation clause. The 'rational formula' is identified with sigma_n of lem-weil-pbc-symmetric-product-properties (c) = phi_{p_n,(L_n,(F_j))} of def-weil-pbc-morphism-to-projective-space-by-sections; since the properties node has this node in stmt_deps, the reference is written by name in the text only (no stmt_dep, which would close a cycle; pointers left as is per the brief). 'scheme' repointed from def-weil-pbc-scheme-conventions to def-pc-scheme. The formula adds nothing beyond part (c) of the properties node. Mathlib searched three ways (esymm, Finset.prod_add, IsWeightedHomogeneous): no definition of the homogenized F_j; MvPolynomial.esymm is the case y_i = 1."
+ },
+ "pointers": [
+  "lem-weil-pbc-symmetric-product-properties"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "holds the polynomials F_j only; sigma_n itself is constructed in lem-weil-pbc-symmetric-product-properties (pointer added by the lead)"
+ }
 }

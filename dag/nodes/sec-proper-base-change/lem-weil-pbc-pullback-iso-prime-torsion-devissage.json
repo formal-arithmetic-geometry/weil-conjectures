@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-pullback-iso-prime-torsion-devissage",
+ "kind": "statement",
+ "title": "Pullback isomorphisms on cohomology: from prime-torsion to torsion sheaves",
+ "statement": "Let $u:Y\\to X$ be a morphism of schemes [def-pc-scheme] with $X$ and $Y$ quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. For an abelian sheaf $G$ on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] let\n$$u^*:H^q(X_{\\Et},G)\\longrightarrow H^q(Y_{\\Et},u^{-1}G)\\qquad(q\\ge0)$$\nbe the pullback map of [def-weil-pbc-cohomology-pullback] between the etale cohomology groups of [def-weil-pbc-etale-cohomology], $u^{-1}$ the inverse image [def-weil-pbc-inverse-image]. Assume that for every prime number $r$ and every abelian sheaf $G$ on $X_{\\Et}$ with $rG=0$ (i.e. multiplication by $r$ is the zero endomorphism of $G$), $u^*$ is bijective for every $q\\ge0$. Then $u^*:H^q(X_{\\Et},F)\\to H^q(Y_{\\Et},u^{-1}F)$ is bijective for every $q\\ge0$ and every torsion abelian sheaf $F$ on $X_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "the devissage of the proof of Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives), paragraphs 2-3 (F = colim F[n]; 0 -> F[l] -> F -> F/F[l] -> 0, long exact sequences and the five lemma), transposed from higher direct images to the global cohomology groups and the pullback maps, with Theorem 09YQ (etale-cohomology-theorem-colimit: cohomology on a qcqs scheme commutes with filtered colimits) in place of Lemma 09Z1; the transposition is the agent's (Stacks 095T itself works with sheaves of Z/lZ-modules throughout and does not state this)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-torsion-etale-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology commutes with filtered colimits of sheaves; torsion sheaf isomorphism of cohomology deduced from prime torsion case",
+   "results": "CategoryTheory.GrothendieckTopology.Point...PreservesColimits (Mathlib.CategoryTheory.Sites.Point.Basic), CategoryTheory.Limits.colimitLimitIso (Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit), CategoryTheory.Sheaf.hasFilteredColimitsOfSize (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf), CommGrpCat.FilteredColimits.colimit, instPreservesHomologyFunctorAddCommGrpCatColim (Mathlib.Algebra.Category.Grp.AB): general colimit facts, nothing on cohomology of sheaves or pullback maps",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformation of cohomological delta functors that is an isomorphism on n-torsion objects for prime n is an isomorphism on all torsion objects (devissage)",
+   "results": "CochainComplex.cm5b.instQuasiIsoIntP, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CategoryTheory.ShortComplex.ShortExact.isIso_δ, CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.quasiIso_descShortComplex: homological algebra only, no torsion devissage",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.Limits.colimit",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Sheaf.H\\|colimit' Mathlib/CategoryTheory/Sites/SheafCohomology/*.lean; grep -rn 'smallEtale\\|etaleTopology' Mathlib --include=*.lean | grep -i 'cohom\\|Sheaf.H\\|Ext'",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/{Basic,Cech,MayerVietoris}.lean define Sheaf.H (as Ext from the constant sheaf), H.map, functorH, Mayer-Vietoris; no compatibility with filtered colimits, no pullback map along a morphism of sites, no torsion devissage; no etale cohomology of schemes beyond Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean (pro-etale l-adic definitions)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-p1-strict-henselian-comparison",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,14 +1,13 @@
 # Work queue
 
-558 items; claim with `tools/claim.py next <group> [--stage N]`.
+559 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (543)
+## Stage 1: nodes to split (544)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `prop-weil-pbc-algebraically-closed-extension` | 1003 | sorry_here |
 | `prop-weil-pbc-p1-strict-henselian-comparison` | 1003 | none |
-| `def-weil-pbc-morphism-to-projective-space-by-sections` | 1004 | none |
 | `def-weil-pbc-symmetric-product-morphism` | 1004 | none |
 | `lem-weil-pbc-cech-vanishing-criterion` | 1004 | none |
 | `lem-weil-pbc-curve-constructible-reduction` | 1004 | none |
@@ -26,6 +25,7 @@
 | `lem-weil-pbc-p1-power-affine-charts` | 1004 | none |
 | `lem-weil-pbc-projective-morphism-chart-preimage` | 1004 | none |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1004 | none |
+| `lem-weil-pbc-pullback-iso-prime-torsion-devissage` | 1004 | none |
 | `lem-weil-pbc-strict-henselization-triples` | 1004 | none |
 | `lem-weil-pbc-zero-dimensional-field-extension` | 1004 | none |
 | `lemma-weil-pbc-curve-filtered-cohomology` | 1004 | none |
@@ -34,12 +34,12 @@
 | `lemma-weil-pbc-finite-l-group-filtration` | 1004 | none |
 | `lemma-weil-pbc-finite-pushforward-extension-zero` | 1004 | none |
 | `lemma-weil-pbc-normalization-exact-sequence` | 1004 | none |
-| `lemma-weil-pbc-p1-injective-acyclic` | 1004 | none |
 | `prop-weil-pbc-inverse-image-modules-exact` | 1004 | none |
 | `prop-weil-pbc-p1-acyclicity` | 1004 | none |
 | `thm-sc-main` | 1004 | none |
 | `def-weil-pbc-extension-by-zero` | 1005 | none |
 | `def-weil-pbc-finite-open-comparison` | 1005 | none |
+| `def-weil-pbc-generating-sections` | 1005 | none |
 | `lem-sc-c1` | 1005 | none |
 | `lem-sc-c2` | 1005 | none |
 | `lem-sc-c3` | 1005 | none |
@@ -48,6 +48,7 @@
 | `lem-sc-c6` | 1005 | none |
 | `lem-sc-c7` | 1005 | none |
 | `lem-sc-c8` | 1005 | none |
+| `lem-weil-pbc-invertible-generating-sections-fibre` | 1005 | none |
 | `lemma-weil-pbc-finite-open-comparison-inverse` | 1005 | none |
 | `lemma-weil-pbc-h1-constructible-representation` | 1005 | none |
 | `lemma-weil-pbc-h1-torsor-comparison` | 1005 | none |
@@ -570,7 +571,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 558 nodes that wait for stage 1, 75 nodes that wait for a statement dependency.
+Not open yet: 559 nodes that wait for stage 1, 76 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
