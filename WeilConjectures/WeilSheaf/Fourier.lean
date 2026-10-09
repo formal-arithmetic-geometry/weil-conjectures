@@ -7,12 +7,8 @@ module
 
 public import Mathlib.Algebra.Group.AddChar
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
-public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.Mathlib.CategoryTheory.Extensive
 public import WeilConjectures.WeilSheaf.Tensor
 
@@ -62,9 +58,7 @@ there the projector `e_ψ` factors as an averaging map to the sections of `ℚ̄
 splitting map, a split epi–mono factorisation; hence the image of `e_ψ` becomes `ℚ̄_ℓ`.
 
 The constructibility statement which makes the tensor product with a lisse sheaf land in Weil
-complexes is reduced by dévissage to the case of a single Weil sheaf, and there to the higher
-derived functors `RⁿHom(F, G)`, `n > 0`
-(`AlgebraicGeometry.WeilSheaf.exists_rightDerived_ihomFunctor`, stated with `sorry`).
+complexes is reduced by dévissage to the case of a single Weil sheaf, stated with `sorry`.
 -/
 
 @[expose] public section
@@ -876,65 +870,17 @@ instance (A : ProEtaleWeilSheaf k₀ l X) : (ProEtaleWeilSheaf.ihomFunctor k₀ 
   have := (ihom.adjunction A.carrier).right_adjoint_additive
   ⟨ObjectProperty.hom_ext _ (Algebra.Hom.ext (CategoryTheory.ihom A.carrier).map_add)⟩
 
-/-- The internal hom `[A, -]` of pro-étale Weil sheaves is left exact: its composite with the
-forgetful functor to pro-étale sheaves, which reflects finite limits, is the right adjoint
-`[A, -]` of pro-étale sheaves after forgetting. -/
-instance (A : ProEtaleWeilSheaf k₀ l X) :
-    PreservesFiniteLimits (ProEtaleWeilSheaf.ihomFunctor k₀ l X A) := by
-  have : PreservesFiniteLimits (ProEtaleWeilSheaf.ihomFunctor k₀ l X A ⋙
-      IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) :=
-    preservesFiniteLimits_of_natIso
-      (NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by simp) :
-        IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X) ⋙
-          CategoryTheory.ihom A.carrier ≅ _)
-  exact preservesFiniteLimits_of_reflects_of_preserves _
-    (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X))
-
-/-- **The higher derived functors of `[F, -]` on a Weil sheaf**, for a lisse Weil sheaf `F`: the
-sheaves `RⁿHom(F, G)`, `n > 0`, of a Weil sheaf `G` are Weil sheaves, and they vanish for large
-`n`. (This is the positive-degree part of
-`AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor_singleFunctor`;
-the degree `0` part is `[F, G]`, constructible by
-`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.ihom_of_isAdicLisseSheaf`.) -/
-theorem WeilSheaf.exists_rightDerived_ihomFunctor (F : WeilSheaf k₀ l X) (hF : F.IsLisse)
-    (G : ProEtaleWeilSheaf k₀ l X) (hG : WeilSheaf.objectProperty k₀ l X G) :
-    ∃ N : ℕ, ∀ n : ℕ, 0 < n →
-      WeilSheaf.objectProperty k₀ l X
-          (((ProEtaleWeilSheaf.ihomFunctor k₀ l X F.obj).rightDerived n).obj G) ∧
-        (N < n → IsZero (((ProEtaleWeilSheaf.ihomFunctor k₀ l X F.obj).rightDerived n).obj G)) :=
-  sorry
-
 /-- **Finiteness for the tensor product with a lisse Weil sheaf, on a single Weil sheaf.** For
 a lisse Weil sheaf `F` and a Weil sheaf `G` placed in degree `0`, the right derived functor of
-`[F, -]` on pro-étale Weil sheaves gives a Weil complex: it is concentrated in degrees `≥ 0`, its
-`0`-th cohomology is `[F, G]`, constructible since `F` is lisse, and its higher cohomology sheaves
-`RⁿHom(F, G)` are Weil sheaves vanishing in large degrees
-(`AlgebraicGeometry.WeilSheaf.exists_rightDerived_ihomFunctor`). -/
+`[F, -]` on pro-étale Weil sheaves gives a Weil complex: it is the tensor product `F^∨ ⊗ G`
+placed in degree `0`, the higher `Ext` sheaves out of the locally free `F` vanishing. -/
 theorem WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor_singleFunctor
     (F : WeilSheaf k₀ l X) (hF : F.IsLisse) (G : ProEtaleWeilSheaf k₀ l X)
     (hG : WeilSheaf.objectProperty k₀ l X G) :
     WeilComplex.objectProperty k₀ l X
       ((ProEtaleWeilSheaf.ihomFunctor k₀ l X F.obj).rightDerivedFunctor.obj
-        ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) := by
-  set Φ := ProEtaleWeilSheaf.ihomFunctor k₀ l X F.obj
-  obtain ⟨N, hN⟩ := WeilSheaf.exists_rightDerived_ihomFunctor F hF G hG
-  have hge := Φ.isGE_rightDerivedFunctor_obj_singleFunctor G
-  have hzero (m : ℤ) (hm : m < 0) : IsZero ((_root_.DerivedCategory.homologyFunctor _ m).obj
-      (Φ.rightDerivedFunctor.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) :=
-    (_root_.DerivedCategory.isGE_iff _ 0).1 hge m hm
-  refine ⟨⟨⟨0, hge⟩, ⟨N, (_root_.DerivedCategory.isLE_iff _ _).2 fun m hm ↦ ?_⟩⟩, fun m ↦ ?_⟩
-  · obtain ⟨n, rfl⟩ : ∃ n : ℕ, m = n := ⟨m.toNat, by omega⟩
-    exact ((hN n (by omega)).2 (by omega)).of_iso
-      (Φ.homologyRightDerivedFunctorObjSingleFunctorIso G n)
-  obtain hm | hm := lt_or_ge m 0
-  · exact (WeilSheaf.objectProperty k₀ l X).prop_of_isZero (hzero m hm)
-  obtain ⟨n, rfl⟩ : ∃ n : ℕ, m = n := ⟨m.toNat, by omega⟩
-  refine (WeilSheaf.objectProperty k₀ l X).prop_of_iso
-    (Φ.homologyRightDerivedFunctorObjSingleFunctorIso G n).symm ?_
-  obtain rfl | hn := Nat.eq_zero_or_pos n
-  · exact (WeilSheaf.objectProperty k₀ l X).prop_of_iso (Φ.rightDerivedZeroIsoSelf.app G).symm
-      (ProEtale.IsAdicConstructibleSheaf.ihom_of_isAdicLisseSheaf hF hG)
-  · exact (hN n hn).1
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) :=
+  sorry
 
 /-- **Finiteness for the tensor product with a lisse Weil sheaf.** For a lisse Weil sheaf `F`,
 the right derived functor of `[F, -]` on pro-étale Weil sheaves carries Weil complexes to Weil

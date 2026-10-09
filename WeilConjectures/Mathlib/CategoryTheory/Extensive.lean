@@ -37,7 +37,15 @@ variable {C : Type u} [Category.{v} C]
 `∐ᵢ Y ⟶ Y ×_X Y`, `(𝟙, σ i)` on the `i`-th summand, is an isomorphism. Then for every
 `v : V ⟶ Y` the map `∐ᵢ V ⟶ V ×_X Y`, `(𝟙, v ≫ σ i)` on the `i`-th summand, is an isomorphism:
 it is the base change of the former along `v × 𝟙 : V ×_X Y ⟶ Y ×_X Y`, finite coproducts being
-universal. -/
+universal:
+```
+  ∐ᵢ V --(𝟙, v ≫ σ i)ᵢ--> V ×_X Y --v × 𝟙--> Y ×_X Y <--(𝟙, σ i)ᵢ-- ∐ᵢ Y
+                              |                  |
+                             fst                fst
+                              ↓                  ↓
+                              V -------v-------> Y
+```
+where the square is cartesian. -/
 lemma FinitaryPreExtensive.isIso_sigmaDesc_lift_comp [FinitaryPreExtensive C] [HasPullbacks C]
     {ι : Type*} [Finite ι] {X Y : C} (f : Y ⟶ X) (σ : ι → (Y ⟶ Y)) (hσ : ∀ i, σ i ≫ f = f)
     [HasCoproduct fun _ : ι ↦ Y]
