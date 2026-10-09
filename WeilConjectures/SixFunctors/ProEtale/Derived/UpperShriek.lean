@@ -376,6 +376,39 @@ lemma rightDerivedUpperShriekHomEquiv_naturality_right
   rw [← Equiv.eq_symm_apply, rightDerivedUpperShriekHomEquiv_naturality_right_symm f hK hL hL',
     Equiv.symm_apply_apply]
 
+/-- Blueprint `sk-prop-sf-existence` (c), on full subcategories: if `P` is a property of
+objects of `D(X_proét)` contained in the bounded below objects of étale origin and `Q` a property
+of objects of `D(Y_proét)` contained in the bounded below objects, such that `Rf_!` sends `P` to
+`Q` and `Rf^!` sends `Q` to `P`, then the restrictions of `Rf_!` and `Rf^!` to the full
+subcategories of `P` and `Q` are adjoint. This applies to the bounded constructible objects of
+finite Tor amplitude. -/
+noncomputable def rightDerivedUpperShriekAdjunctionOfLE
+    (P : ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)))
+    (Q : ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)))
+    (hP : P ≤ DerivedCategory.plusEtaleOrigin A X) (hQ : Q ≤ DerivedCategory.TStructure.t.plus)
+    (h₁ : ∀ K, P K → Q ((ProEtale.rightDerivedLowerShriek A f).obj K))
+    (h₂ : ∀ L, Q L → P ((R(f)^![A]).obj L)) :
+    Q.lift (P.ι ⋙ ProEtale.rightDerivedLowerShriek A f) (fun K ↦ h₁ _ K.property) ⊣
+      P.lift (Q.ι ⋙ R(f)^![A]) (fun L ↦ h₂ _ L.property) :=
+  Adjunction.mkOfHomEquiv
+    { homEquiv K L :=
+        { toFun g := ObjectProperty.homMk
+            (rightDerivedUpperShriekHomEquiv f (hP _ K.property) (hQ _ L.property) g.hom)
+          invFun g := ObjectProperty.homMk
+            ((rightDerivedUpperShriekHomEquiv f (hP _ K.property) (hQ _ L.property)).symm g.hom)
+          left_inv g := by
+            ext
+            exact (rightDerivedUpperShriekHomEquiv f _ _).symm_apply_apply g.hom
+          right_inv g := by
+            ext
+            exact (rightDerivedUpperShriekHomEquiv f _ _).apply_symm_apply g.hom }
+      homEquiv_naturality_left_symm {K K' L} φ g := by
+        ext
+        exact rightDerivedUpperShriekHomEquiv_naturality_left_symm f _ _ _ φ.hom g.hom
+      homEquiv_naturality_right {K L L'} g φ := by
+        ext
+        exact rightDerivedUpperShriekHomEquiv_naturality_right f _ _ _ g.hom φ.hom }
+
 end Adjunction
 
 end ProEtale
