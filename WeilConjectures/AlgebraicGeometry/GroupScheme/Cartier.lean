@@ -34,6 +34,9 @@ so the smoothness half is stated separately below rather than derived here.
 
 ## Main statements
 
+* `AlgebraicGeometry.GrpObj.exists_derivation_of_isOpenImmersion`: on an affine open subscheme
+  `Spec A` of a group scheme, every tangent vector at a rational point extends to a derivation of
+  `A` (invariant vector fields).
 * `AlgebraicGeometry.isReduced_of_grpObj`: a group scheme locally of finite type over a field of
   characteristic zero is reduced.
 * `AlgebraicGeometry.smooth_of_grpObj_of_charZero`: such a group scheme is smooth over the base
