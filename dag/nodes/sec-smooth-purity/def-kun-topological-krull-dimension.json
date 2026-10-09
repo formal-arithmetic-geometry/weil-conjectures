@@ -1,0 +1,52 @@
+{
+ "id": "def-kun-topological-krull-dimension",
+ "kind": "definition",
+ "title": "Krull dimension of a topological space",
+ "statement": "Let $X$ be a topological space. A *chain of irreducible closed subsets* of $X$ of *length* $n$ is a sequence $Z_0\\subsetneq Z_1\\subsetneq\\cdots\\subsetneq Z_n$ of closed subsets of $X$ each of which is irreducible [def-weil-irreducible-components] (in particular nonempty). The *Krull dimension* $\\dim X$ of $X$ is the element of $\\{-\\infty,0,1,2,\\ldots,\\infty\\}$\n\n$$\n\\dim X=\\sup\\{n: \\text{there is a chain of irreducible closed subsets of $X$ of length $n$}\\},\n$$\n\nso that $\\dim X=-\\infty$ if and only if $X$ is empty. For a subset $Y\\subseteq X$, $\\dim Y$ is the Krull dimension of $Y$ with the subspace topology.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Definition 5.10.1, tag 0055 (definition-Krull), items (1)-(3)"
+ },
+ "stmt_deps": [
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'topologicalKrullDim\\|def krullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; sed -n 1,50p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/KrullDimension.lean",
+   "results": "Topology/KrullDimension.lean:39 `noncomputable def topologicalKrullDim (T : Type*) [TopologicalSpace T] : WithBot ℕ∞ := krullDim (IrreducibleCloseds T)`, with docstring 'the supremum of lengths of chains of closed irreducible sets'; Order/KrullDimension.lean:78 `krullDim α := ⨆ (p : LTSeries α), p.length` in WithBot ℕ∞ (⊥ for the empty space, Order/KrullDimension.lean:601 krullDim_eq_bot_iff); Topology/KrullDimension.lean:63 topologicalKrullDim_subspace_le for a subset with the subspace topology",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure IrreducibleCloseds' -A6 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sets/Closeds.lean; sed -n 50,56p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Irreducible.lean",
+   "results": "Topology/Sets/Closeds.lean:393 `structure IrreducibleCloseds` (carrier, IsIrreducible, IsClosed) with PartialOrder by inclusion (line 405); Topology/Irreducible.lean:52 `IsIrreducible s := s.Nonempty ∧ IsPreirreducible s`, so the closed irreducible subsets are nonempty as in Stacks 004V",
+   "date": "2026-10-09",
+   "verdict": "match: the chains of the definition are the strict chains `LTSeries (IrreducibleCloseds X)`"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "topologicalKrullDim",
+  "file": "Mathlib/Topology/KrullDimension.lean",
+  "how": "exact: `topologicalKrullDim X : WithBot ℕ∞` is `krullDim (IrreducibleCloseds X)`, the supremum of the lengths of strict chains of nonempty irreducible closed subsets, with ⊥ = -∞ for the empty space; for a subset `Y : Set X` it is `topologicalKrullDim Y` with the subspace topology (used in topologicalKrullDim_subspace_le)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-kun-dimension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -1,0 +1,48 @@
+{
+ "id": "def-kun-topological-dimension-at-point",
+ "kind": "definition",
+ "title": "Krull dimension of a topological space at a point",
+ "statement": "Let $X$ be a topological space and $x\\in X$. The *Krull dimension of $X$ at $x$* is\n\n$$\n\\dim_x X=\\min\\{\\dim U: x\\in U\\subseteq X\\text{ open}\\},\n$$\n\nthe minimum, over the open neighbourhoods $U$ of $x$ in $X$, of the Krull dimension [def-kun-topological-krull-dimension] of $U$ with the subspace topology (an element of $\\{0,1,2,\\ldots,\\infty\\}$, since every such $U$ contains $x$ and so is nonempty; the minimum exists because the values are in a well-ordered set).",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Definition 5.10.1, tag 0055 (definition-Krull), item (4)"
+ },
+ "stmt_deps": [
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rni 'dimension at\\|krullDim.*nhds\\|nhds.*krullDim\\|topologicalKrullDim.*Opens\\|Opens.*topologicalKrullDim\\|⨅.*krullDim\\|krullDim.*⨅\\|localDim\\|dimAt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "only 'Krull dimension at most n' for rings (RingTheory/KrullDimension/Basic.lean:33 Ring.KrullDimLE, DedekindDomain/Basic.lean); no infimum of topologicalKrullDim over open neighbourhoods, no local dimension of a space or scheme at a point",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rl 'topologicalKrullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -rn 'stacks 0055\\|stacks 04MT\\|stacks 02I4' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "topologicalKrullDim is used only in Topology/KrullDimension.lean, AlgebraicGeometry/Artinian.lean and RingTheory/Spectrum/Prime/Topology.lean (topologicalKrullDim_eq_ringKrullDim); no declaration tagged with Stacks 0055 or 04MT; AlgebraicGeometry/Properties.lean:361-377 has `Order.coheight x` of a point of a scheme (= ringKrullDim of the stalk, tags 02I4, 02IZ), which is the dimension of the local ring, a different notion",
+   "date": "2026-10-09",
+   "verdict": "no match: the ingredients (topologicalKrullDim, TopologicalSpace.Opens, nhds) exist, the minimum over open neighbourhoods is not defined"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-kun-dimension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
