@@ -39,7 +39,7 @@ cohomology on the families in `𝒞`, and `H^{q + 1}(X, F) ≅ H^q(X, Q)` for `q
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory Limits TopologicalSpace Opposite
 
@@ -84,17 +84,17 @@ end TopCat.Sheaf
 
 namespace TopCat.Presheaf
 
-variable {X : TopCat.{u}} {n : ℕ} (U : Fin n → Opens X)
+variable {X : TopCat.{u}} {ι : Type v} (U : ι → Opens X)
 
 /-- `TopCat.Presheaf.cechComplex_map_f_apply`, for elements of the objects of the complex. -/
 lemma cechComplex_map_f_apply' {P Q : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}} (φ : P ⟶ Q) (k : ℕ)
-    (c : ((cechComplex U).obj P).X k) (y : Fin (k + 1) → Fin n) :
+    (c : ((cechComplex U).obj P).X k) (y : Fin (k + 1) → ι) :
     ((cechComplex U).map φ).f k c y = φ.app _ (c y) :=
   cechComplex_map_f_apply U φ k c y
 
 /-- The zero Čech cochain vanishes termwise. -/
 lemma cechComplex_zero_apply (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) (k : ℕ)
-    (y : Fin (k + 1) → Fin n) : (0 : ((cechComplex U).obj P).X k) y = 0 :=
+    (y : Fin (k + 1) → ι) : (0 : ((cechComplex U).obj P).X k) y = 0 :=
   rfl
 
 /-- `TopCat.Presheaf.exactAt_cechComplex_iff`, for elements of the objects of the complex. -/
@@ -129,7 +129,7 @@ lemma exists_cechComplex_map_f_eq {P₁ P₂ P₃ : (Opens X)ᵒᵖ ⥤ AddCommG
     (f : P₁ ⟶ P₂) (g : P₂ ⟶ P₃) (hfg : ∀ W x, g.app W x = 0 → ∃ y, f.app W y = x) (k : ℕ)
     (a : ((cechComplex U).obj P₂).X k) (ha : ((cechComplex U).map g).f k a = 0) :
     ∃ e, ((cechComplex U).map f).f k e = a := by
-  have (y : Fin (k + 1) → Fin n) := hfg _ (a y) (by
+  have (y : Fin (k + 1) → ι) := hfg _ (a y) (by
     simpa only [cechComplex_map_f_apply', cechComplex_zero_apply] using congr_fun ha y)
   choose e he using this
   exact ⟨e, funext fun y ↦ (cechComplex_map_f_apply U f k e y).trans (he y)⟩
@@ -151,7 +151,7 @@ theorem exactAt_cechComplex_of_sectionwise {P₁ P₂ P₃ : (Opens X)ᵒᵖ ⥤
     (f : P₁ ⟶ P₂) (g : P₂ ⟶ P₃) (hfg : ∀ W x, g.app W (f.app W x) = 0)
     (hf : ∀ W, Function.Injective (f.app W))
     (hfg' : ∀ W x, g.app W x = 0 → ∃ y, f.app W y = x)
-    (hg : ∀ (k : ℕ) (y : Fin (k + 1) → Fin n), Function.Surjective (g.app (op (⨅ l, U (y l)))))
+    (hg : ∀ (k : ℕ) (y : Fin (k + 1) → ι), Function.Surjective (g.app (op (⨅ l, U (y l)))))
     (q : ℕ) (h₁ : ((cechComplex U).obj P₁).ExactAt (q + 2))
     (h₂ : ((cechComplex U).obj P₂).ExactAt (q + 1)) :
     ((cechComplex U).obj P₃).ExactAt (q + 1) := by
@@ -175,7 +175,7 @@ theorem exactAt_cechComplex_of_sectionwise {P₁ P₂ P₃ : (Opens X)ᵒᵖ ⥤
 
 /-- Subtraction of Čech cochains is termwise. -/
 lemma cechComplex_sub_apply (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) (k : ℕ)
-    (a b : ((cechComplex U).obj P).X k) (y : Fin (k + 1) → Fin n) : (a - b) y = a y - b y :=
+    (a b : ((cechComplex U).obj P).X k) (y : Fin (k + 1) → ι) : (a - b) y = a y - b y :=
   rfl
 
 /-- The restrictions of the members of a family of sections with equal indices agree. -/
@@ -188,7 +188,7 @@ lemma map_homOfLE_apply_of_eq (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) {ι : 
 
 /-- The Čech differential of the restrictions of a single section vanishes. -/
 lemma cechComplex_d_zero_restrict (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) {V : Opens X}
-    (s : P.obj (op V)) (h : ∀ z : Fin 1 → Fin n, ⨅ l, U (z l) ≤ V) :
+    (s : P.obj (op V)) (h : ∀ z : Fin 1 → ι, ⨅ l, U (z l) ≤ V) :
     ((cechComplex U).obj P).d 0 1
       (fun z ↦ P.map (homOfLE (h z)).op s : ((cechComplex U).obj P).X 0) = 0 := by
   funext y
@@ -198,7 +198,7 @@ lemma cechComplex_d_zero_restrict (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) {V
 /-- A Čech `0`-cocycle is compatible: its members agree on the overlaps. -/
 lemma map_inf_eq_of_cechComplex_d_zero (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u})
     (c : ((cechComplex U).obj P).X 0) (hc : ((cechComplex U).obj P).d 0 1 c = 0)
-    (z z' : Fin 1 → Fin n) :
+    (z z' : Fin 1 → ι) :
     P.map (homOfLE (inf_le_left : (⨅ l, U (z l)) ⊓ ⨅ l, U (z' l) ≤ _)).op (c z) =
       P.map (homOfLE (inf_le_right : (⨅ l, U (z l)) ⊓ ⨅ l, U (z' l) ≤ _)).op (c z') := by
   have hle : (⨅ l, U (z l)) ⊓ ⨅ l, U (z' l) ≤ ⨅ l, U (![z 0, z' 0] l) := by
@@ -222,8 +222,8 @@ lemma map_inf_eq_of_cechComplex_d_zero (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u
     funext l
     fin_cases l
     rfl
-  exact (map_homOfLE_apply_of_eq P (fun z : Fin 1 → Fin n ↦ ⨅ l, U (z l)) c h₁.symm _ _).trans
-    (h.symm.trans (map_homOfLE_apply_of_eq P (fun z : Fin 1 → Fin n ↦ ⨅ l, U (z l)) c h₀ _ _))
+  exact (map_homOfLE_apply_of_eq P (fun z : Fin 1 → ι ↦ ⨅ l, U (z l)) c h₁.symm _ _).trans
+    (h.symm.trans (map_homOfLE_apply_of_eq P (fun z : Fin 1 → ι ↦ ⨅ l, U (z l)) c h₀ _ _))
 
 /-- Let `0 → F → I → Q → 0` be a short exact sequence of abelian sheaves and `V` an open subset
 such that every open covering of `V` is refined by a finite family `U` covering `V` on which the

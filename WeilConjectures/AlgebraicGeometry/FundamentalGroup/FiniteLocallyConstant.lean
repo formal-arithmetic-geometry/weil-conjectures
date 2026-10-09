@@ -60,7 +60,8 @@ a geometric point `s : Spec Ω ⟶ Y`, as a functor `FLC(Y) ⥤ FintypeCat`; the
 fibre `|P_s|` of a finite étale `P` is `AlgebraicGeometry.Scheme.FiniteEtale.fiber`. -/
 noncomputable def fiber : Y.FiniteLocallyConstant ⥤ FintypeCat.{u + 1} :=
   ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ (pointSmallEtale s).sheafFiber)
-    fun F ↦ F.property.2.finite_sheafFiber Ω s
+    fun F ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
+      (F.property.2.isFinitelyGenerated_sheafFiber Ω s)
 
 @[simp]
 lemma fiber_obj_obj (F : Y.FiniteLocallyConstant) :

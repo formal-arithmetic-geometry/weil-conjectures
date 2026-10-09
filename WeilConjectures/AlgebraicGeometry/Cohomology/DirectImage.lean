@@ -91,7 +91,9 @@ and the pullback `ℱ' := (Modules.pullback g').obj ℱ`.
   `exists_bijective_semilinearMap_sections_higherDirectImage_H`: over an affine base, the global
   sections of `R^q f_* ℱ` are `H^q(X, ℱ)`, linearly over `Γ(T, ⊤)`. Hence
   (`hFiber_eq_finrank_sections_higherDirectImage`) the fibre dimension is the dimension of the
-  higher direct image of the fibre to the point.
+  higher direct image of the fibre to the point; over a field `K`, the sections of `R^q f_* ℱ`
+  are `H^q(X, ℱ)` as `K`-vector spaces
+  (`nonempty_moduleSpecΓFunctor_obj_higherDirectImage_linearEquiv_H`).
 - `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`: the higher direct
   images commute with restriction to an open subscheme of the base.
 - `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isAffineHom` and
@@ -168,18 +170,6 @@ instance hypothesis. -/
 noncomputable def higherDirectImage (f : X ⟶ T) [HasInjectiveResolutions X.Modules] (q : ℕ) :
     X.Modules ⥤ T.Modules :=
   (pushforward f).rightDerived q
-
-/-- The pushforward of multiplication by `f^♯ a` is multiplication by `a`. -/
-lemma pushforward_map_smulHom (f : X ⟶ T) (M : X.Modules) (a : Γ(T, ⊤)) :
-    (pushforward f).map (M.smulHom (f.appTop a)) = ((pushforward f).obj M).smulHom a := by
-  ext U x
-  simp only [pushforward_map_app, smulHom_app_apply]
-  erw [smulHom_app_apply]
-  change _ = f.app U (T.presheaf.map (homOfLE le_top).op a) • (show Γ(M, f ⁻¹ᵁ U) from x)
-  congr 1
-  rw [Scheme.Hom.appTop, ← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
-    Scheme.Hom.naturality]
-  rfl
 
 /-- **The higher direct images are linear over the base.** Applying `R^q f_*` to multiplication
 by `f^♯ a` on `M` gives multiplication by `a` on `R^q f_* M`. -/
@@ -402,6 +392,27 @@ theorem hFiber_eq_finrank_sections_higherDirectImage [QuasiCompact f] [IsSeparat
     rfl
   have hj (z) : j (e z) = z := (AddEquiv.ofBijective e.toAddMonoidHom he).symm_apply_apply z
   rw [hc, hj, hj]
+
+/-- **The direct images to the spectrum of a field.** For a scheme `X` over a field `K`, with
+structure morphism quasi-compact and separated, and a quasi-coherent `𝒪_X`-module `ℱ`, the
+global sections of `R^q f_* ℱ` are `H^q(X, ℱ)` as `K`-vector spaces. This is
+`AlgebraicGeometry.Scheme.Modules.exists_bijective_semilinearMap_sections_higherDirectImage_H`
+over `Spec K`, where `K` acts on both sides through `Γ(Spec K, ⊤)`. -/
+theorem nonempty_moduleSpecΓFunctor_obj_higherDirectImage_linearEquiv_H (K : Type u) [Field K]
+    [X.Over (Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] [IsSeparated (X ↘ Spec (.of K))]
+    [HasInjectiveResolutions X.Modules]
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
+    Nonempty ((moduleSpecΓFunctor (R := .of K)).obj
+      ((higherDirectImage (X ↘ Spec (.of K)) q).obj ℱ) ≃ₗ[K] ℱ.H q) := by
+  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H
+    (X ↘ Spec (.of K)) ℱ q
+  let M := (moduleSpecΓFunctor (R := .of K)).obj ((higherDirectImage (X ↘ Spec (.of K)) q).obj ℱ)
+  refine ⟨LinearEquiv.ofBijective (M := M)
+    { toFun := e, map_add' := e.map_add, map_smul' := fun c x ↦ ?_ } he⟩
+  let y : Γ((higherDirectImage (X ↘ Spec (.of K)) q).obj ℱ, ⊤) := x
+  have h : (c • x : M) = (Scheme.ΓSpecIso (.of K)).inv c • y := smul_top_eq (R := .of K) _ c y
+  exact (congrArg e h).trans ((e.map_smulₛₗ _ y).trans
+    (smul_H_eq_globalSectionsRingHom_smul K ℱ q c (e y)).symm)
 
 section BaseChange
 

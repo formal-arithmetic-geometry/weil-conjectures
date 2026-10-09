@@ -182,7 +182,7 @@ noncomputable def cohomologyAddEquivCompactSupport (a : X ⟶ Y) [HasCompactific
 
 end General
 
-variable {Λ : Type (u + 1)} [CommRing Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
 
 namespace TateOrientation
 

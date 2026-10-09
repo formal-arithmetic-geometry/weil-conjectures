@@ -73,18 +73,21 @@ namespace ProEtale
 
 section DirectImage
 
-variable {k : Type u} [Field k] (N : ℕ) (hN : (N : k) ≠ 0) (hA : ∀ M : A, N • 𝟙 M = 0)
+variable [hA' : ConcreteCategory.FinitelyGeneratedOfMono A]
+  {k : Type u} [Field k] (N : ℕ) (hN : (N : k) ≠ 0) (hA : ∀ M : A, N • 𝟙 M = 0)
   {X Y : Scheme.{u}} (s : Y ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType s] [QuasiCompact s]
   (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
-include hN hA s
+include hN hA hA' s
 
 /-- Blueprint `sk-cor-sf-direct-image-ctf`: Direct image preserves bounded constructibility on
 the pro-étale site.
 
 Let `Y` be of finite type over a field `k`, let `A` be killed by an integer `N` invertible in
-`k`, and let `f : X ⟶ Y` be separated of finite type. If `K` is a bounded constructible complex
-on `X_proét`, then `Rf_* K` is bounded constructible on `Y_proét`. -/
+`k` and noetherian, subobjects of finitely generated objects being finitely generated
+(`CategoryTheory.ConcreteCategory.FinitelyGeneratedOfMono`, which holds for `ModuleCat Λ` with
+`Λ` noetherian), and let `f : X ⟶ Y` be separated of finite type. If `K` is a bounded
+constructible complex on `X_proét`, then `Rf_* K` is bounded constructible on `Y_proét`. -/
 theorem boundedConstructible_rightDerivedLowerStar
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
     (hbc : DerivedCategory.boundedConstructible A X K) :

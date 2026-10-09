@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Functor.Category
+public import Mathlib.CategoryTheory.NatIso
 
 /-!
 # Invertibility of a natural transformation at an object is invariant under isomorphism
@@ -38,5 +39,26 @@ lemma NatTrans.isIso_app_of_iso {F G : C ⥤ A} (φ : F ⟶ G) {X Y : C} (e : X 
     rw [← Category.assoc, φ.naturality, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
   rw [key]
   infer_instance
+
+/-- Conjugating the image of a morphism under a functor `F₁` by isomorphisms is the same as
+conjugating its image under an isomorphic functor `F₂`. -/
+lemma conj_eq_comp_conj {C D : Type*} [Category C] [Category D]
+    {F₁ F₂ : C ⥤ D} (c : F₁ ≅ F₂) {X Y : C} (φ : X ⟶ Y) {A B A' B' : D}
+    (t₁ : F₁.obj X ≅ A) (s₁ : F₁.obj Y ≅ B) (t₂ : F₂.obj X ≅ A') (s₂ : F₂.obj Y ≅ B') :
+    t₁.inv ≫ F₁.map φ ≫ s₁.hom =
+      (t₁.symm ≪≫ c.app X ≪≫ t₂).hom ≫ (t₂.inv ≫ F₂.map φ ≫ s₂.hom) ≫
+        (s₂.symm ≪≫ (c.app Y).symm ≪≫ s₁).hom := by
+  simp only [Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Category.assoc,
+    Iso.hom_inv_id_assoc, NatTrans.naturality_assoc, Iso.hom_inv_id_app_assoc]
+
+/-- Conjugating the image of a morphism under a functor `F₁` by isomorphisms is the same as
+conjugating its image under an isomorphic functor `F₂` by the composite isomorphisms. -/
+lemma conj_eq_comp_conj' {C D : Type*} [Category C] [Category D]
+    {F₁ F₂ : C ⥤ D} (c : F₁ ≅ F₂) {X Y : C} (φ : X ⟶ Y) {A B : D}
+    (t₁ : F₁.obj X ≅ A) (s₁ : F₁.obj Y ≅ B) :
+    t₁.inv ≫ F₁.map φ ≫ s₁.hom =
+      (t₁.symm ≪≫ c.app X).hom ≫ F₂.map φ ≫ ((c.app Y).symm ≪≫ s₁).hom := by
+  simp only [Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Category.assoc,
+    NatTrans.naturality_assoc, Iso.hom_inv_id_app_assoc]
 
 end CategoryTheory
