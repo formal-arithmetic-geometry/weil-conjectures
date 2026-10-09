@@ -7,6 +7,8 @@ module
 
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Connected
 public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.Topology.Algebra.ClopenNhdofOne
+public import Mathlib.Topology.Category.FinTopCat
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GeometricFiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
@@ -349,6 +351,249 @@ theorem exists_hom_pullback_mono (Q : p.geometricFiber.FiniteEtale) :
   rw [Limits.pullback.lift_snd] at h₂
   exact H.hom_ext h₁ h₂
 
+/-- **Sections over the geometric fibre descend.** A morphism of `C₀`-schemes from the geometric
+fibre `C = C₀ ×_K K̄` to a finite étale `C₀`-scheme `U`, i.e. a section of the base change of `U`
+to `C`, factors through the projection to a finite stage `C₀ ×_K Spec L`, by a morphism of finite
+étale `C₀`-schemes (Stacks `01ZM`). -/
+theorem exists_constantCover_hom_of_section (U : C.FiniteEtale)
+    (σ : p.geometricFiber ⟶ U.obj.left) (hσ : σ ≫ U.obj.hom = p.geometricFiberProj) :
+    ∃ (L : FiniteSubfield K) (ψ : constantCover p L.toFiniteEtaleAlgebra ⟶ U),
+      geometricFiberToConstantCover p L ≫ ψ.hom.left = σ := by
+  have : IsFinite U.obj.hom := U.property
+  have : Etale U.obj.hom := U.obj.prop
+  let i₀ : (FiniteSubfield K)ᵒᵖ := Opposite.op ⟨⊥, inferInstance⟩
+  let q₀ : (constantCoverSchemeDiagram p).obj i₀ ⟶ C := Limits.pullback.fst p i₀.unop.toFiniteEtaleAlgebra.specHom
+  let pW := Limits.pullback.snd U.obj.hom q₀
+  let ψ : Limits.pullback (𝟙 ((constantCoverSchemeDiagram p).obj i₀)) ((constantCoverCone p).π.app i₀) ⟶ Limits.pullback U.obj.hom q₀ :=
+    Limits.pullback.lift (Limits.pullback.snd _ _ ≫ σ) (Limits.pullback.fst _ _) (by
+      have hc := Limits.pullback.condition (f := 𝟙 ((constantCoverSchemeDiagram p).obj i₀)) (g := (constantCoverCone p).π.app i₀)
+      rw [Category.assoc, hσ, ← geometricFiberToConstantCover_fst p i₀.unop, ← Category.assoc]
+      change (Limits.pullback.snd _ _ ≫ (constantCoverCone p).π.app i₀) ≫ q₀ = _
+      rw [← hc, Category.comp_id])
+  obtain ⟨j, f, ψj, h₁, h₂⟩ := Scheme.exists_pullback_hom_of_isLimit (isLimitConstantCoverCone p)
+    (𝟙 ((constantCoverSchemeDiagram p).obj i₀)) pW ψ (by simp [ψ, pW])
+  let Dj := (constantCoverSchemeDiagram p).obj j
+  let Df := (constantCoverSchemeDiagram p).map f
+  let e : Dj ⟶ Limits.pullback (𝟙 ((constantCoverSchemeDiagram p).obj i₀)) Df :=
+    Limits.pullback.lift Df (𝟙 _) (by simp)
+  let ψ' : Dj ⟶ U.obj.left := e ≫ ψj ≫ Limits.pullback.fst U.obj.hom q₀
+  have hq : Df ≫ q₀ = Limits.pullback.fst p j.unop.toFiniteEtaleAlgebra.specHom := by
+    simp [Df, q₀]
+  have hψ' : ψ' ≫ U.obj.hom = Limits.pullback.fst p j.unop.toFiniteEtaleAlgebra.specHom := by
+    calc ψ' ≫ U.obj.hom = e ≫ (ψj ≫ pW) ≫ q₀ := by
+          simp only [ψ', pW, Category.assoc, Limits.pullback.condition]
+      _ = _ := by
+          rw [h₁, ← hq, Category.comp_id, ← Category.assoc]
+          exact congrArg (· ≫ q₀) (Limits.pullback.lift_fst _ _ _)
+  refine ⟨j.unop, ObjectProperty.homMk (MorphismProperty.Over.homMk ψ' hψ'), ?_⟩
+  change (constantCoverCone p).π.app j ≫ ψ' = σ
+  have hw : (constantCoverCone p).π.app j ≫ Df = (constantCoverCone p).π.app i₀ :=
+    (constantCoverCone p).w f
+  have hE : (constantCoverCone p).π.app j ≫ e =
+      Limits.pullback.lift ((constantCoverCone p).π.app i₀) (𝟙 _)
+        ((Category.comp_id _).trans (Category.id_comp _).symm) ≫
+      Limits.pullback.map (𝟙 ((constantCoverSchemeDiagram p).obj i₀))
+        ((constantCoverCone p).π.app i₀) (𝟙 ((constantCoverSchemeDiagram p).obj i₀)) Df (𝟙 _)
+        ((constantCoverCone p).π.app j) (𝟙 _) (by simp) ((Category.comp_id _).trans hw.symm) := by
+    apply Limits.pullback.hom_ext
+    · simpa [e] using hw
+    · simp only [e, Category.assoc, Limits.pullback.lift_snd, Limits.pullback.lift_snd_assoc,
+        Limits.pullback.lift_snd]
+      exact (Category.comp_id _).trans (Category.id_comp _).symm
+  simp only [ψ', ← Category.assoc, hE]
+  rw [Category.assoc _ _ ψj, h₂, Category.assoc, Limits.pullback.lift_fst, ← Category.assoc,
+    Limits.pullback.lift_snd]
+  exact Category.id_comp σ
+
 end Descent
+
+section Injective
+
+variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} (p : C ⟶ Spec (.of K))
+  [CompactSpace C] [QuasiSeparatedSpace C] [ConnectedSpace C] [ConnectedSpace p.geometricFiber]
+  {t : Spec (.of (AlgebraicClosure K)) ⟶ p.geometricFiber} {s : Spec (.of (AlgebraicClosure K)) ⟶ C}
+  (τ : pullback p.geometricFiberProj ⋙ fiber t ≅ fiber s)
+  (G' : Type u) [Group G'] [TopologicalSpace G'] [IsTopologicalGroup G'] [CompactSpace G']
+  [∀ P, MulAction G' ((fiber t).obj P)] [IsFundamentalGroup (fiber t) G']
+  (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+  [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
+
+/-- **The map `π₁(C₀ ×_K K̄) → π₁(C₀)` is injective**: every finite étale scheme over the geometric
+fibre embeds into the base change of a finite étale `C₀`-scheme. -/
+theorem fundamentalGroupMap_injective_geometricFiber :
+    Function.Injective (fundamentalGroupMap τ G' G) := by
+  refine (injective_iff_map_eq_one _).2 fun g hg ↦
+    IsFundamentalGroup.non_trivial (F := fiber t) g fun Q y ↦ ?_
+  obtain ⟨P, φ, hφ⟩ := exists_hom_pullback_mono p Q
+  have htriv (z : (fiber t).obj ((pullback p.geometricFiberProj).obj P)) : g • z = z := by
+    have h := fundamentalGroupMap_smul τ G' G g P z
+    rw [hg, one_smul] at h
+    exact ((ConcreteCategory.isIso_iff_bijective _).1 inferInstance).1 h.symm
+  have hinj : Function.Injective ((fiber t).map φ) := fun a b hab ↦ fiber_ext t <| by
+    have := congrArg (fun z ↦ z.left) hab
+    simp only [fiber_map_left] at this
+    exact hφ.right_cancellation _ _ this
+  apply hinj
+  rw [IsNaturalSMul.naturality, htriv]
+
+end Injective
+
+section Criterion
+
+variable {Y : Scheme.{u}} [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+  (s : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
+  [CompactSpace G] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
+
+open scoped FintypeCatDiscrete in
+/-- An element `g` of the fundamental group lies in a closed subgroup `H` as soon as it fixes
+every point of a geometric fibre fixed by `H`. For an open normal subgroup `N`, the finite
+continuous `G`-set `G / H N` is the geometric fibre of a finite étale scheme, whose base point is
+fixed by `H`, hence by `g`, so that `g ∈ H N`; and `H` is the intersection of the `H N`. -/
+theorem mem_of_forall_smul_eq_self (H : Subgroup G) (hH : IsClosed (H : Set G)) (g : G)
+    (h : ∀ (U : Y.FiniteEtale) (u : (fiber s).obj U), (∀ k ∈ H, k • u = u) → g • u = u) :
+    g ∈ H := by
+  have : TotallyDisconnectedSpace G :=
+    (toAutHomeo (fiber s) G).symm.totallyDisconnectedSpace
+  -- `g ∈ H ⊔ N` for every open normal subgroup `N`
+  have key (N : Subgroup G) [N.Normal] (hN : IsOpen (N : Set G)) : g ∈ H ⊔ N := by
+    set S := H ⊔ N
+    have hSo : IsOpen (S : Set G) := Subgroup.isOpen_mono le_sup_right hN
+    have : Finite (G ⧸ S) := Subgroup.quotient_finite_of_isOpen S hSo
+    have : Fintype (G ⧸ S) := Fintype.ofFinite _
+    let X : ContAction FintypeCat.{u} G :=
+      ⟨Action.FintypeCat.ofMulAction G (FintypeCat.of (G ⧸ S)), by
+        rw [Action.isContinuous_def]
+        have : DiscreteTopology ((forget₂ (Action FintypeCat G) TopCat).obj
+          (Action.FintypeCat.ofMulAction G (FintypeCat.of (G ⧸ S)))) := ⟨rfl⟩
+        have : DiscreteTopology ((forget₂ FintypeCat TopCat).obj
+          (Action.FintypeCat.ofMulAction G (FintypeCat.of (G ⧸ S))).V) := ⟨rfl⟩
+        refine continuous_prod_of_discrete_right.mpr fun v ↦
+          continuous_discrete_rng.mpr fun w ↦ ?_
+        obtain ⟨a, rfl⟩ := QuotientGroup.mk_surjective (v : G ⧸ S)
+        obtain ⟨b, rfl⟩ := QuotientGroup.mk_surjective (w : G ⧸ S)
+        have : (fun k : G ↦ (k • (QuotientGroup.mk a : G ⧸ S) : G ⧸ S)) ⁻¹'
+            {(QuotientGroup.mk b : G ⧸ S)} = (fun k : G ↦ (k * a)⁻¹ * b) ⁻¹' S := by
+          ext k
+          simp [QuotientGroup.eq]
+        change IsOpen ((fun k : G ↦ (k • (QuotientGroup.mk a : G ⧸ S) : G ⧸ S)) ⁻¹'
+          {(QuotientGroup.mk b : G ⧸ S)})
+        rw [this]
+        exact hSo.preimage (((continuous_id.mul continuous_const).inv).mul continuous_const)⟩
+    let E := equivalenceContAction s G
+    let U := E.inverse.obj X
+    let c := E.counitIso.app X
+    let u : (fiber s).obj U := c.inv.hom.hom (QuotientGroup.mk 1 : G ⧸ S)
+    have hinv (k : G) (v : G ⧸ S) : c.inv.hom.hom (k • v) = k • c.inv.hom.hom v :=
+      congrArg (fun f ↦ f.hom v) (c.inv.hom.comm k)
+    have hhom (k : G) (x : (fiber s).obj U) : c.hom.hom.hom (k • x) = k • c.hom.hom.hom x :=
+      congrArg (fun f ↦ f.hom x) (c.hom.hom.comm k)
+    have hu : ∀ k ∈ H, k • u = u := fun k hk ↦ by
+      rw [← hinv]
+      congr 1
+      change (QuotientGroup.mk (k * 1) : G ⧸ S) = QuotientGroup.mk 1
+      rw [QuotientGroup.eq]
+      simpa using inv_mem (le_sup_left (a := H) hk)
+    have hcu : c.hom.hom.hom u = (QuotientGroup.mk 1 : G ⧸ S) :=
+      congrArg (fun f ↦ f.hom.hom (QuotientGroup.mk 1 : G ⧸ S)) c.inv_hom_id
+    have h₁ := congrArg c.hom.hom.hom (h U u hu)
+    rw [hhom, hcu] at h₁
+    change (QuotientGroup.mk (g * 1) : G ⧸ S) = QuotientGroup.mk 1 at h₁
+    rw [QuotientGroup.eq] at h₁
+    simpa using inv_mem h₁
+  rw [← SetLike.mem_coe, ← hH.closure_eq, mem_closure_iff]
+  intro o ho hgo
+  have hV : IsOpen ((fun x ↦ g * x) ⁻¹' o) := ho.preimage (continuous_const.mul continuous_id)
+  obtain ⟨N₀, hN₀⟩ :=
+    ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one hV (by simpa using hgo)
+  have hg := key N₀.toSubgroup N₀.isOpen'
+  rw [← SetLike.mem_coe, Subgroup.mul_normal] at hg
+  obtain ⟨x, hx, n, hn, hxn⟩ := hg
+  refine ⟨x, ?_, hx⟩
+  have : x = g * n⁻¹ := by
+    rw [← hxn]
+    group
+  rw [this]
+  exact hN₀ (inv_mem (show n ∈ N₀.toSubgroup from hn))
+
+end Criterion
+
+section Exact
+
+variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} (p : C ⟶ Spec (.of K))
+  [CompactSpace C] [QuasiSeparatedSpace C] [ConnectedSpace C] [ConnectedSpace p.geometricFiber]
+  {t : Spec (.of (AlgebraicClosure K)) ⟶ p.geometricFiber} {s : Spec (.of (AlgebraicClosure K)) ⟶ C}
+  (τ : pullback p.geometricFiberProj ⋙ fiber t ≅ fiber s)
+  (G' : Type u) [Group G'] [TopologicalSpace G'] [IsTopologicalGroup G'] [CompactSpace G']
+  [∀ P, MulAction G' ((fiber t).obj P)] [IsFundamentalGroup (fiber t) G']
+  (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+  [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
+
+/-- **Exactness in the middle of the homotopy exact sequence**: an element of `π₁(C₀, s)` acting
+trivially on the geometric fibres of the constant covers lies in the image of
+`π₁(C₀ ×_K K̄, t)`. A point `u` of the geometric fibre of a finite étale `C₀`-scheme `U` which is
+fixed by this image corresponds to a section over `C₀ ×_K K̄` of the base change of `U`; it descends
+to a morphism `C₀ ×_K Spec L ⟶ U` from a constant cover, through which `u` comes from a point of
+the geometric fibre of the constant cover, fixed by `g`. -/
+theorem mem_range_fundamentalGroupMap_of_mem_weilGroup (g : G)
+    (hg : (g, (1 : Multiplicative ℤ)) ∈ weilGroup p s G) :
+    g ∈ (fundamentalGroupMap τ G' G).range := by
+  have : T2Space G := (toAutHomeo (fiber s) G).isEmbedding.t2Space
+  have : ∀ P, ContinuousSMul G' ((fiber t).obj P) := fun P ↦ IsFundamentalGroup.continuous_smul P
+  have hcl : IsClosed ((fundamentalGroupMap τ G' G).range : Set G) := by
+    rw [MonoidHom.coe_range]
+    exact (isCompact_range (continuous_fundamentalGroupMap τ G' G)).isClosed
+  refine mem_of_forall_smul_eq_self s G _ hcl g fun U u hu ↦ ?_
+  -- the point of the fibre over the geometric fibre corresponding to `u` is fixed by `π₁`
+  let z : (fiber t).obj ((pullback p.geometricFiberProj).obj U) := τ.inv.app U u
+  have hτz : τ.hom.app U z = u := ConcreteCategory.congr_hom (τ.inv_hom_id_app U) u
+  have hz (k : G') : k • z = z := by
+    apply ((ConcreteCategory.isIso_iff_bijective (τ.hom.app U)).1 inferInstance).1
+    rw [← fundamentalGroupMap_smul τ G' G, hτz]
+    exact hu _ ⟨k, rfl⟩
+  -- a fixed point lies on a section
+  let E := equivalenceContAction t G'
+  let T₀ : p.geometricFiber.FiniteEtale := ⟨MorphismProperty.Over.mk ⊤ (𝟙 _) inferInstance,
+    inferInstanceAs (IsFinite (𝟙 _))⟩
+  let x₀ : (fiber t).obj T₀ := Over.homMk t (Category.comp_id t)
+  let m : E.functor.obj T₀ ⟶ E.functor.obj ((pullback p.geometricFiberProj).obj U) :=
+    ObjectProperty.homMk
+      { hom := FintypeCat.homMk fun _ ↦ z
+        comm k := FintypeCat.hom_ext _ _ fun _ ↦ (hz k).symm }
+  let S := E.fullyFaithfulFunctor.preimage m
+  have hS : (fiber t).map S x₀ = z :=
+    congrArg (fun f ↦ f.hom.hom x₀) (E.fullyFaithfulFunctor.map_preimage m)
+  have hσb : S.hom.left ≫ Limits.pullback.snd U.obj.hom p.geometricFiberProj = 𝟙 _ :=
+    hom_left_comp S
+  let σ := S.hom.left ≫ Limits.pullback.fst U.obj.hom p.geometricFiberProj
+  have hσ : σ ≫ U.obj.hom = p.geometricFiberProj := by
+    rw [Category.assoc, Limits.pullback.condition, ← Category.assoc, hσb, Category.id_comp]
+  obtain ⟨L, ψ, hψ⟩ := exists_constantCover_hom_of_section p U σ hσ
+  -- the corresponding point of the fibre of the constant cover
+  let A := L.toFiniteEtaleAlgebra
+  let zV : (fiber t).obj ((pullback p.geometricFiberProj).obj (constantCover p A)) :=
+    fiberMk t _ (t ≫ Limits.pullback.lift (geometricFiberToConstantCover p L) (𝟙 _)
+      (by rw [Category.id_comp]; exact geometricFiberToConstantCover_fst p L))
+      (by simp)
+  have hzV : (fiber t).map ((pullback p.geometricFiberProj).map ψ) zV = z := by
+    apply fiber_ext
+    rw [fiber_map_left, ← hS, fiber_map_left, fiberMk_left, Category.assoc]
+    congr 1
+    apply Limits.pullback.hom_ext
+    · simp only [pullback_map_hom_left, Category.assoc, Limits.pullback.lift_fst]
+      erw [Limits.pullback.lift_fst_assoc]
+      exact hψ
+    · simp only [pullback_map_hom_left, Category.assoc, Limits.pullback.lift_snd,
+        Category.comp_id]
+      erw [Limits.pullback.lift_snd]
+      exact hσb.symm
+  have hu' : u = (fiber s).map ψ (τ.hom.app _ zV) := by
+    rw [← hτz, ← hzV]
+    exact (ConcreteCategory.congr_hom (τ.hom.naturality ψ) zV)
+  have hfix : g • τ.hom.app _ zV = τ.hom.app _ zV := by
+    rw [(mem_weilGroup_iff p s G).1 hg A]
+    rfl
+  rw [hu', ← IsNaturalSMul.naturality, hfix]
+
+end Exact
 
 end AlgebraicGeometry.Scheme.FiniteEtale
