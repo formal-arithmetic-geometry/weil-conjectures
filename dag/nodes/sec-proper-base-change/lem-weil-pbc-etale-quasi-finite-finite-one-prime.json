@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-etale-quasi-finite-finite-one-prime",
+ "kind": "statement",
+ "title": "A ring map quasi-finite at a prime becomes finite on a factor after an etale extension with the same residue field (Algebra 00UJ)",
+ "statement": "Let $\\varphi:R\\to A$ be a homomorphism of commutative rings making $A$ a finitely generated $R$-algebra, let $\\mathfrak q\\subset A$ be a prime ideal and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$, and assume that $\\mathfrak q$ is an isolated point of the set $\\{\\mathfrak Q\\in\\operatorname{Spec}A:\\varphi^{-1}(\\mathfrak Q)=\\mathfrak p\\}$ of primes of $A$ lying over $\\mathfrak p$, with the subspace topology of $\\operatorname{Spec}A$ [def-weil-affine-spectrum] (that is, $R\\to A$ is quasi-finite at $\\mathfrak q$, Algebra, Definition 00PL, by Lemma 00PK (1) and the identification of this set with $\\operatorname{Spec}(A\\otimes_R\\kappa(\\mathfrak p))$). Then there are a homomorphism of commutative rings $\\psi:R\\to R'$ which is etale (equivalently, $\\operatorname{Spec}\\psi:\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ is etale [def-weil-etale-morphism]), a prime ideal $\\mathfrak p'\\subset R'$ with $\\psi^{-1}(\\mathfrak p')=\\mathfrak p$, an idempotent $e$ of $C=R'\\otimes_RA$ (so that $C\\cong C_e\\times C_{1-e}$, with $C_e$ the localization at $\\{1,e,e^2,\\dots\\}$ [def-weil-pbc-localization-at-prime]) and a prime ideal $\\mathfrak r\\subset C$ such that: (1) the field map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ induced by $\\psi$ is an isomorphism; (2) $C_e$ is a finite $R'$-module (via $R'\\to C\\to C_e$, $r'\\mapsto r'\\otimes1$); (3) $\\mathfrak r$ lies over $\\mathfrak p'$ (its preimage under $R'\\to C$ is $\\mathfrak p'$), $e\\notin\\mathfrak r$, and $\\mathfrak r$ is the only prime of $C$ lying over $\\mathfrak p'$ and not containing $e$ (equivalently, $C_e$ has exactly one prime lying over $\\mathfrak p'$); (4) the preimage of $\\mathfrak r$ under $A\\to C$, $a\\mapsto1\\otimes a$, is $\\mathfrak q$. (Stacks Algebra 00UJ with $A=C_e$, $B=C_{1-e}$; its clause (5), that $B$ has no prime lying over both $\\mathfrak q$ and $\\mathfrak p'$, is not stated here.)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00UJ (algebra-lemma-etale-makes-quasi-finite-finite-one-prime, line 40228), clauses (1)-(4) of the conclusion; hypothesis 'quasi-finite at q' is Definition 00PL (algebra-definition-quasi-finite, line 30233) via Lemma 00PK (algebra-lemma-isolated-point-fibre, line 30196) (1)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite type algebra quasi-finite at a prime: etale extension R' with prime of same residue field and idempotent e such that localization at e is finite with a unique prime over P",
+   "results": "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (Mathlib.RingTheory.Etale.QuasiFinite), Algebra.QuasiFinite.iff_finite_primesOver, Algebra.QuasiFiniteAt (Mathlib.RingTheory.QuasiFinite.Basic), Algebra.IsEtaleAt, Algebra.etaleLocus (Mathlib.RingTheory.Etale.Locus)",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+   "results": "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (Mathlib.RingTheory.Etale.QuasiFinite): [FiniteType R S] p q [q.LiesOver p] [QuasiFiniteAt R q] -> exists R', Etale R R', P prime LiesOver p, e idempotent, P' prime LiesOver P, comap includeRight P' = q, e notin P', residue map kappa(p)->kappa(P) bijective, Module.Finite R' (Localization.Away e), and P' unique prime over P not containing e",
+   "date": "2026-10-10",
+   "verdict": "match (clauses (1)-(4)), type read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-finite ring map becomes finite on a factor of the tensor product after an etale base change preserving the residue field (Stacks 00UJ)",
+   "results": "Algebra.Etale.exists_subalgebra_fg, Algebra.QuasiFiniteAt.baseChange, Algebra.Etale.baseChange, Algebra.QuasiFinite.baseChange, RingHom.QuasiFinite.isStableUnderBaseChange, RingHom.EssFiniteType.isStableUnderBaseChange",
+   "date": "2026-10-10",
+   "verdict": "no match among these (the Lean Finder snapshot v4.28.0 does not return the 00UJ declaration)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'stacks 00UJ|quasiFiniteAt_iff_isOpen_singleton_fiber|abbrev QuasiFiniteAt' Mathlib/ (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "Mathlib/RingTheory/Etale/QuasiFinite.lean:378-379 @[stacks 00UJ] Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Mathlib/RingTheory/ZariskisMainTheorem.lean:754 Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber; Mathlib/RingTheory/QuasiFinite/Basic.lean:358 Algebra.QuasiFiniteAt (S_q quasi-finite over R)",
+   "date": "2026-10-10",
+   "verdict": "match: the two declarations, read with sed -n"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber",
+  "file": "Mathlib/RingTheory/Etale/QuasiFinite.lean",
+  "how": "a few Mathlib lemmas, one per clause: the hypothesis (q isolated in the subspace comap(algebraMap R A)^{-1}{p} of PrimeSpectrum A, [Algebra.FiniteType R A]) gives [Algebra.QuasiFiniteAt R q] by Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber (ZariskisMainTheorem.lean:754, .mpr); then Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (Etale/QuasiFinite.lean:379, @[stacks 00UJ]) gives R' with Algebra.Etale R R' (= Spec psi etale by HasRingHomProperty.Spec_iff, Morphisms/RingHomProperties.lean:360, as in the match of lem-weil-pbc-etale-ring-map-iff-etale-affine), P = p' LiesOver p, idempotent e of R' (x)_R A, P' = r LiesOver P with e notin P', comap includeRight P' = q (clause 4), Function.Bijective of Ideal.ResidueField.map_a p P (clause 1), Module.Finite R' (Localization.Away e) (clause 2), and uniqueness of P' among primes over P not containing e (clause 3). Types read 2026-10-10.",
+  "line": 379
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-local-finite-at-point-elementary",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L (2026-10-10): line field added (379 for the main declaration; quasiFiniteAt_iff_isOpen_singleton_fiber at ZariskisMainTheorem.lean:754), verified with sed."
+}

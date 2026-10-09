@@ -16,9 +16,148 @@
   "def-pc-fibre-product",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Affine opens and the ring map (Stacks: 'Let $Y\\subset X$, $W\\subset S$ be affine opens such that $f(Y)\\subset W$ and such that $x\\in Y$'). Every point of a scheme has an affine open neighbourhood [def-pc-scheme]: choose an affine open $W\\subseteq S$ with $s\\in W$, and then, in the open subscheme $f^{-1}(W)$ of $X$, an affine open $Y$ with $x\\in Y$, so $f(Y)\\subseteq W$. Put $R=\\mathcal O_S(W)$ and $A=\\mathcal O_X(Y)$. By [lem-weil-pbc-affine-open-spec-points] there are open immersions $\\iota_W:\\operatorname{Spec}R\\to S$, $\\iota_Y:\\operatorname{Spec}A\\to X$ [def-weil-open-immersion] with images $W$ and $Y$, and primes $\\mathfrak p\\subset R$, $\\mathfrak q\\subset A$ with $\\iota_W(\\mathfrak p)=s$, $\\iota_Y(\\mathfrak q)=x$. Since $f\\circ\\iota_Y$ has image in $W$ and $\\iota_W$ is an isomorphism onto the open subscheme $W$, $f\\circ\\iota_Y=\\iota_W\\circ g$ for a unique morphism $g:\\operatorname{Spec}A\\to\\operatorname{Spec}R$, and $g=\\operatorname{Spec}\\varphi$ for exactly one ring map $\\varphi:R\\to A$ [def-weil-affine-spectrum], namely the map $\\mathcal O_S(W)\\to\\mathcal O_X(Y)$ induced by $f$; $\\operatorname{Spec}\\varphi$ sends a prime $\\mathfrak Q$ to $\\varphi^{-1}(\\mathfrak Q)$. As $f$ is locally of finite type [def-weil-finite-type-morphism], $\\varphi$ is of finite type by [lem-weil-pbc-lft-affine-pairs]. Finally $\\iota_W(\\varphi^{-1}(\\mathfrak q))=f(\\iota_Y(\\mathfrak q))=f(x)=s=\\iota_W(\\mathfrak p)$ and $\\iota_W$ is injective, so $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LK (lemma-etale-makes-quasi-finite-finite-at-point), proof (lines 11957-11965)"
+   }
+  },
+  {
+   "text": "$\\mathfrak q$ is isolated over $\\mathfrak p$ (Stacks: 'Note that $x$ is also an isolated point of the fibre of the morphism $f|_Y:Y\\to W$'). By [def-pc-scheme-fibre] the first projection $X_s\\to X$ is a homeomorphism onto the subspace $f^{-1}(s)$, so the hypothesis says that $\\{x\\}$ is open in $f^{-1}(s)$. Since $Y\\cap f^{-1}(s)$ is an open subset of $f^{-1}(s)$ containing $x$, $\\{x\\}$ is open in the subspace $Y\\cap f^{-1}(s)$. The open immersion $\\iota_Y$ is a homeomorphism of $\\operatorname{Spec}A$ onto $Y$ [def-weil-open-immersion], and for $\\mathfrak Q\\in\\operatorname{Spec}A$ we have $f(\\iota_Y(\\mathfrak Q))=\\iota_W(\\varphi^{-1}(\\mathfrak Q))$, which equals $s=\\iota_W(\\mathfrak p)$ iff $\\varphi^{-1}(\\mathfrak Q)=\\mathfrak p$ (step 1, $\\iota_W$ injective). So $\\iota_Y$ restricts to a homeomorphism from the subspace $P=\\{\\mathfrak Q\\in\\operatorname{Spec}A:\\varphi^{-1}(\\mathfrak Q)=\\mathfrak p\\}$ onto $Y\\cap f^{-1}(s)$, sending $\\mathfrak q$ to $x$; hence $\\mathfrak q$ is an isolated point of $P$ [def-weil-affine-spectrum].",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LK (lemma-etale-makes-quasi-finite-finite-at-point), proof (lines 11957-11965)"
+   }
+  },
+  {
+   "text": "The algebra case (Stacks: 'Hence we reduce to the case where $f$ is a morphism of affine schemes. This case is Algebra, Lemma 00UJ'). By steps 1 and 2, [lem-weil-pbc-etale-quasi-finite-finite-one-prime] applies to $\\varphi:R\\to A$ and $\\mathfrak q$: there are an etale ring map $\\psi:R\\to R'$ with $\\operatorname{Spec}\\psi$ etale [def-weil-etale-morphism], a prime $\\mathfrak p'\\subset R'$ with $\\psi^{-1}(\\mathfrak p')=\\mathfrak p$ and $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ an isomorphism, an idempotent $e\\in C=R'\\otimes_RA$ with $C_e$ a finite $R'$-module [def-weil-pbc-localization-at-prime], and a prime $\\mathfrak r\\subset C$ lying over $\\mathfrak p'$ with $e\\notin\\mathfrak r$, the only prime of $C$ lying over $\\mathfrak p'$ and not containing $e$, whose preimage under $a\\mapsto1\\otimes a$ is $\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-etale-quasi-finite-finite-one-prime",
+    "def-weil-etale-morphism",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00UJ (algebra-lemma-etale-makes-quasi-finite-finite-one-prime, line 40228), applied as in More on Morphisms 02LK, proof, line 11964"
+   }
+  },
+  {
+   "text": "The elementary etale neighbourhood (a) (written out by the agent). Put $U=\\operatorname{Spec}R'$, $u=\\mathfrak p'\\in U$ and $\\phi=\\iota_W\\circ\\operatorname{Spec}\\psi:U\\to S$. The morphism $\\operatorname{Spec}\\psi$ is etale (step 3; [lem-weil-pbc-etale-ring-map-iff-etale-affine] for the equivalence with Algebra, Definition 00U1), the open immersion $\\iota_W$ is etale by [lem-weil-pbc-etale-composition-cancellation] (1), so $\\phi$ is etale by (2) [def-weil-etale-morphism]. Also $\\phi(u)=\\iota_W(\\psi^{-1}(\\mathfrak p'))=\\iota_W(\\mathfrak p)=s$. Residue fields: $\\iota_W$ is an isomorphism onto the open subscheme $W$, so it induces an isomorphism of local rings $\\mathcal O_{S,s}\\cong\\mathcal O_{\\operatorname{Spec}R,\\mathfrak p}$ and of residue fields [def-weil-residue-field]; by [lem-weil-pbc-spec-residue-field-identification] the residue fields of $\\operatorname{Spec}R$ at $\\mathfrak p$ and of $\\operatorname{Spec}R'$ at $\\mathfrak p'$ are identified with $\\kappa(\\mathfrak p)$, $\\kappa(\\mathfrak p')$ [def-weil-pbc-localization-at-prime] compatibly with the maps from $R$, $R'$; the map induced by $\\operatorname{Spec}\\psi$ on residue fields then corresponds to the field map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ induced by $\\psi$, since both are field maps agreeing on the image of $R$ (the map of stalks of $\\operatorname{Spec}\\psi$ is $R_{\\mathfrak p}\\to R'_{\\mathfrak p'}$ composed with the germ maps) and $\\kappa(\\mathfrak p)$ is generated as a field by the image of $R$. As $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ is an isomorphism (step 3), $\\kappa(s)\\to\\kappa(u)$ induced by $\\phi$ is an isomorphism: $(U,u)\\to(S,s)$ is an elementary etale neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "def-weil-residue-field",
+    "lem-weil-pbc-spec-residue-field-identification",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LK, proof: 'this case is Algebra, Lemma 00UJ' (line 11964); the translation of 00UJ into (a), (b), (i)-(iii) is not written in Stacks and is written out by the agent"
+   }
+  },
+  {
+   "text": "The open $V$ (b) (Stacks: 'If we can prove the theorem for $f|_Y:Y\\to W$, then the theorem follows for $f$'; written out by the agent). Let $X_U=X\\times_SU$ with projections $p:X_U\\to X$, $q:X_U\\to U$ [def-pc-fibre-product]. Apply [lem-weil-pbc-open-fibre-product] to $f$ and $\\phi$ with the open subschemes $W\\subseteq S$, $Y\\subseteq X$, $U\\subseteq U$ ($f(Y)\\subseteq W$, $\\phi(U)\\subseteq W$): $Y\\times_WU\\to X_U$ is an open immersion onto $p^{-1}(Y)$, compatible with the projections. Identifying $Y\\cong\\operatorname{Spec}A$ and $W\\cong\\operatorname{Spec}R$ by $\\iota_Y$, $\\iota_W$ (step 1), under which $f|_Y$ and $U\\to W$ become $\\operatorname{Spec}\\varphi$ and $\\operatorname{Spec}\\psi$, [lem-weil-pbc-fibre-product-affine-spectra] gives $Y\\times_WU\\cong\\operatorname{Spec}(A\\otimes_RR')\\cong\\operatorname{Spec}C$ (swapping the factors), with the projections $\\operatorname{Spec}$ of $A\\to C$, $a\\mapsto1\\otimes a$, and of $R'\\to C$, $r'\\mapsto r'\\otimes1$. So there is an open immersion $j:\\operatorname{Spec}C\\to X_U$ [def-weil-open-immersion] with $p\\circ j=\\iota_Y\\circ\\operatorname{Spec}(a\\mapsto1\\otimes a)$ and $q\\circ j=\\operatorname{Spec}(r'\\mapsto r'\\otimes1)$. By [lem-weil-pbc-principal-localization-open-immersion] the morphism $\\operatorname{Spec}C_e\\to\\operatorname{Spec}C$ is an open immersion with image $D(e)=\\{\\mathfrak Q:e\\notin\\mathfrak Q\\}$. Let $V=j(D(e))$, an open subscheme of $X_U$; then $k:\\operatorname{Spec}C_e\\to\\operatorname{Spec}C\\xrightarrow{j}X_U$ is an isomorphism onto $V$ and $q\\circ k=\\operatorname{Spec}(R'\\to C_e)$ [def-weil-affine-spectrum].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LK, proof: 'this case is Algebra, Lemma 00UJ' (line 11964); the translation of 00UJ into (a), (b), (i)-(iii) is not written in Stacks and is written out by the agent"
+   }
+  },
+  {
+   "text": "(i) $V\\to U$ is finite (written out by the agent). By step 5 the composite $V\\hookrightarrow X_U\\xrightarrow{q}U$ is isomorphic over $U$ to $\\operatorname{Spec}(R'\\to C_e):\\operatorname{Spec}C_e\\to\\operatorname{Spec}R'=U$. Cover $U$ by the single affine open $U$; its preimage $V\\cong\\operatorname{Spec}C_e$ is affine and the induced ring map $\\mathcal O_U(U)=R'\\to\\mathcal O_V(V)=C_e$ is $R'\\to C_e$ [def-weil-affine-spectrum], which is finite by step 3. By [lem-weil-pbc-finite-local-on-target] (2)$\\Rightarrow$(1), $V\\to U$ is finite [def-weil-finite-integral-morphism].",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-finite-local-on-target",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LK, proof: 'this case is Algebra, Lemma 00UJ' (line 11964); the translation of 00UJ into (a), (b), (i)-(iii) is not written in Stacks and is written out by the agent"
+   }
+  },
+  {
+   "text": "(ii) and the first half of (iii) (written out by the agent). Every point of $V$ is $k(\\mathfrak Q')$ for a unique prime $\\mathfrak Q'$ of $C_e$, i.e. $j(\\mathfrak Q)$ for a unique prime $\\mathfrak Q$ of $C$ with $e\\notin\\mathfrak Q$ (step 5), and $q(j(\\mathfrak Q))$ is the preimage of $\\mathfrak Q$ under $R'\\to C$ [def-weil-affine-spectrum]. So the points $v\\in V$ with $q(v)=u=\\mathfrak p'$ correspond to the primes of $C$ lying over $\\mathfrak p'$ not containing $e$; by step 3 there is exactly one, $\\mathfrak r$. Put $v=j(\\mathfrak r)$: it is the unique point of $V$ over $u$. Further $p(v)=\\iota_Y(\\mathfrak r')$ where $\\mathfrak r'$ is the preimage of $\\mathfrak r$ under $a\\mapsto1\\otimes a$, which is $\\mathfrak q$ by step 3; so $p(v)=\\iota_Y(\\mathfrak q)=x$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LK, proof: 'this case is Algebra, Lemma 00UJ' (line 11964); the translation of 00UJ into (a), (b), (i)-(iii) is not written in Stacks and is written out by the agent"
+   }
+  },
+  {
+   "text": "Residue fields in (iii) (written out by the agent). The point $v\\in X_U$ has $p(v)=x$ and $q(v)=u$, over $s$. The maps $\\kappa(s)\\to\\kappa(x)$, $\\beta:\\kappa(s)\\to\\kappa(u)$ are induced by $f$ and $\\phi$ [def-weil-residue-field], and $\\beta$ is an isomorphism (step 4). Hence $\\kappa(x)\\to T=\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(u)$, $a\\mapsto a\\otimes1$, is a ring isomorphism (inverse $a\\otimes b\\mapsto a\\,\\alpha(\\beta^{-1}(b))$, $\\alpha:\\kappa(s)\\to\\kappa(x)$), so $T$ is a field and its only prime is $0$. Let $\\mathfrak p_v$ be the prime of $T$ attached to $v$ by [lem-weil-pbc-fibre-product-points], the kernel of $T\\to\\kappa(v)$; then $\\mathfrak p_v=0$, $T/\\mathfrak p_v=T$ is a field, and [lem-weil-pbc-fibre-product-point-residue-field] gives that $T\\to\\kappa(v)$ is an isomorphism compatible with the maps from $\\kappa(x)$. The map $\\kappa(x)\\to\\kappa(v)$ induced by $p$ is the composite of the isomorphisms $\\kappa(x)\\to T\\to\\kappa(v)$, hence an isomorphism. With steps 4-7 this proves (a), (b), (i)-(iii).",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LK, proof: 'this case is Algebra, Lemma 00UJ' (line 11964); the translation of 00UJ into (a), (b), (i)-(iii) is not written in Stacks and is written out by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-etale-quasi-finite-finite-one-prime",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-residue-field",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-finite-local-on-target",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-fibre-product-point-residue-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02LK, proof (lines 11957-11965), with Algebra, Lemma 00UJ (algebra.tex line 40228); the passage from the affine case to the statement (steps 4-8) is not written in Stacks and was written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +189,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,5 +209,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-local-finite-at-point-elementary",
+  "worker": "stage1",
+  "summary": "Split along the Stacks proof of 02LK (statement (a), (b), (i)-(iii); the final persistence assertion is the separate node lem-weil-pbc-elementary-etale-finite-piece-persistence and is not part of this item, so the proof does not use it): affine opens $x\\in Y$, $s\\in W$ with the ring map $R\\to A$ of finite type (lem-weil-pbc-lft-affine-pairs), $\\mathfrak q$ isolated over $\\mathfrak p$ via the homeomorphism of def-pc-scheme-fibre, application of a new Mathlib-leaf node for Algebra 00UJ (clauses (1)-(4), idempotent form; Mathlib Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq with Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber), then the translation back that Stacks leaves implicit: $U=\\operatorname{Spec}R'\\to W\\subseteq S$ etale with trivial residue extension, $V=D(e)\\subseteq\\operatorname{Spec}(R'\\otimes_RA)=Y\\times_WU\\subseteq X_U$ (open-fibre-product, fibre-product-affine-spectra, principal-localization-open-immersion), finiteness by finite-local-on-target, the unique point from 00UJ (3)-(4), and $\\kappa(x)\\cong\\kappa(v)$ from the points and residue fields of a fibre product (00UJ has no residue-field clause; the brief's 'residue field clause' is derived here). Statement and stmt_deps unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Eight steps along Stacks 02LK with the translation back to schemes written out: affine reduction, q isolated among the primes over p, Algebra 00UJ as a new Mathlib leaf (exists_etale_isIdempotentElem_forall_liesOver_eq QuasiFinite.lean:379 with quasiFiniteAt_iff_isOpen_singleton_fiber ZMT:754, verified; stated in idempotent form, clause (5) omitted), the elementary etale neighbourhood, the open V = D(e), finiteness local on the target, the unique point, residue fields via the fibre-product nodes. Correct."
+ }
 }
