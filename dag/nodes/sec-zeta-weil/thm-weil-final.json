@@ -14,11 +14,15 @@
   "def-weil-smooth-proper-datum",
   "def-weil-smooth-proper-cohomological-family",
   "def-weil-canonical-integral-factors",
+  "def-weil-coefficientwise-extension",
   "def-weil-point-counts-zeta",
   "def-weil-formal-power-series",
+  "def-weil-rational-function-field",
+  "def-weil-polynomial-ring",
   "def-weil-rational-power-series",
   "def-weil-rational-function-pole-order",
   "def-weil-ordinary-compact-cohomology",
+  "def-weil-vector-space-dimension",
   "def-weil-global-geometric-frobenius",
   "def-weil-ordinary-reciprocal-roots",
   "def-weil-numbers"
@@ -41,10 +45,13 @@
    }
   },
   {
-   "text": "*Clause (i).* By [def-weil-point-counts-zeta] (with $Y_0=X_0$), $\\#X_0(\\mathbf F_{q^n})=N_n(X_0)$ and $Z(X_0,T)=\\exp\\bigl(\\sum_{n\\geq1}N_n(X_0)T^n/n\\bigr)\\in1+T\\mathbf Q[[T]]$; this is the first displayed equality of (i), and the same definition fixes the set $|X_0|$ of closed points and $\\deg(x)=[\\kappa(x):\\Fq]$. Theorem [thm-weil-final-rationality] applies to $X_0$ (same hypotheses, same zeta series, same closed points and degrees) and states $Z(X_0,T)\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$ and $Z(X_0,T)=\\prod_{x\\in|X_0|}(1-T^{\\deg(x)})^{-1}$. These are the second displayed equality and the membership claim of (i).",
+   "text": "*Clause (i).* By [def-weil-point-counts-zeta] (with $Y_0=X_0$), $\\#X_0(\\mathbf F_{q^n})=N_n(X_0)$ and $Z(X_0,T)=\\exp\\bigl(\\sum_{n\\geq1}N_n(X_0)T^n/n\\bigr)\\in1+T\\mathbf Q[[T]]$; this is the first displayed equality of (i), and the same definition fixes the set $|X_0|$ of closed points and $\\deg(x)=[\\kappa(x):\\Fq]$. Theorem [thm-weil-final-rationality] applies to $X_0$ (same hypotheses, same zeta series, same closed points and degrees) and states $Z(X_0,T)\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$ and $Z(X_0,T)=\\prod_{x\\in|X_0|}(1-T^{\\deg(x)})^{-1}$. These are the second displayed equality and the membership claim of (i). The membership $Z(X_0,T)\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$ is read as in [def-weil-rational-power-series]: $Z(X_0,T)\\in\\mathbf Q[[T]]$ [def-weil-formal-power-series] has all coefficients in $\\mathbf Z$, constant coefficient $1$, and is rational over $\\mathbf Q$, i.e. $QZ(X_0,T)=P$ for polynomials $P,Q\\in\\mathbf Q[T]$ with $Q(0)\\neq0$, its rational function being $P/Q\\in\\mathbf Q(T)$ [def-weil-rational-function-field]; Theorem I writes the membership with the same symbols and no other convention, so it asserts the same thing.",
    "uses": [
     "def-weil-point-counts-zeta",
-    "thm-weil-final-rationality"
+    "thm-weil-final-rationality",
+    "def-weil-rational-power-series",
+    "def-weil-formal-power-series",
+    "def-weil-rational-function-field"
    ],
    "elementary": false,
    "source": {
@@ -53,9 +60,13 @@
    }
   },
   {
-   "text": "*Clause (ii).* By step 1, $P_i=P_i(\\mathscr X)$ is the integral Frobenius factor of degree $i$ of [thm-weil-final-integrality]. That theorem states that $P_i$ is the unique polynomial in $\\mathbf Z[T]$ with $P_i(0)=1$ whose coefficientwise extension $P_i^{(\\ell)}=(\\mathbf Z[T]\\to\\Ql[T])(P_i)$ equals $\\det(1-TF_{i,\\ell}\\mid H^i(X,\\Ql))$ for every prime $\\ell\\neq p$, and that $Z(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}$ (an identity of rational power series, i.e. in $\\mathbf Q(T)$). With $F_{i,\\ell}$ the restriction of $F$ to $H^i(X,\\Ql)$ (step 1), these are exactly the two assertions of (ii).",
+   "text": "*Clause (ii).* By step 1, $P_i=P_i(\\mathscr X)$ is the integral Frobenius factor of degree $i$ of [thm-weil-final-integrality]. That theorem states that $P_i$ is the unique polynomial in $\\mathbf Z[T]$ with $P_i(0)=1$ whose coefficientwise extension $P_i^{(\\ell)}=(\\mathbf Z[T]\\to\\Ql[T])(P_i)$ equals $\\det(1-TF_{i,\\ell}\\mid H^i(X,\\Ql))$ for every prime $\\ell\\neq p$, and that $Z(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}$. Here $P_i\\in\\mathbf Z[T]$ [def-weil-polynomial-ring], the coefficientwise extension $(\\mathbf Z[T]\\to\\Ql[T])(P_i)$ is that of [def-weil-coefficientwise-extension] (the same map that [thm-weil-final-integrality] and [def-weil-canonical-integral-factors] write $P_i^{(\\ell)}$), and the factorization is an identity in $\\mathbf Q(T)$ between the rational function of the rational power series $Z(X_0,T)$ [def-weil-rational-power-series] and $\\prod_iP_i^{(-1)^{i+1}}$; equivalently, since each $P_i$ has constant coefficient $1$ and is therefore a unit of $\\mathbf Q[[T]]$, it is the identity of the two sides in $\\mathbf Q[[T]]$. With $F_{i,\\ell}$ the restriction of $F$ to $H^i(X,\\Ql)$ (step 1), these are exactly the two assertions of (ii).",
    "uses": [
-    "thm-weil-final-integrality"
+    "thm-weil-final-integrality",
+    "def-weil-polynomial-ring",
+    "def-weil-coefficientwise-extension",
+    "def-weil-canonical-integral-factors",
+    "def-weil-rational-power-series"
    ],
    "elementary": false,
    "source": {
@@ -77,9 +88,13 @@
    }
   },
   {
-   "text": "*Clause (iv).* Put $b_i=\\deg P_i$ for $0\\leq i\\leq2d$. Theorem [thm-weil-final-betti], applied to $X_0$ and the same $P_i$ (step 1), uses the same $b_i=\\deg P_i$ and states: $b_i=\\dim_{\\Ql}H^i(X,\\Ql)$ for every prime $\\ell\\neq p$, so that this dimension is independent of $\\ell$; $b_i=b_{2d-i}$; $b_0=b_{2d}=1$; $P_0(T)=1-T$ and $P_{2d}(T)=1-q^dT$; and that the rational function $Z(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}\\in\\mathbf Q(T)$ (the one of clause (ii)) has a pole of order exactly $1$ at $T=1$ and, if $d\\geq1$, a pole of order exactly $1$ at $T=q^{-d}$. This is (iv) word for word.",
+   "text": "*Clause (iv).* Put $b_i=\\deg P_i$ for $0\\leq i\\leq2d$, the degree of the polynomial $P_i\\in\\mathbf Z[T]$ [def-weil-polynomial-ring]; $\\dim_{\\Ql}H^i(X,\\Ql)$ is the dimension of the finite-dimensional $\\Ql$-vector space $H^i(X,\\Ql)$ [def-weil-vector-space-dimension]. Theorem [thm-weil-final-betti], applied to $X_0$ and the same $P_i$ (step 1), uses the same $b_i=\\deg P_i$ and states: $b_i=\\dim_{\\Ql}H^i(X,\\Ql)$ for every prime $\\ell\\neq p$, so that this dimension is independent of $\\ell$; $b_i=b_{2d-i}$; $b_0=b_{2d}=1$; $P_0(T)=1-T$ and $P_{2d}(T)=1-q^dT$; and that the rational function $Z(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}\\in\\mathbf Q(T)$ (the one of clause (ii)) has a pole of order exactly $1$ at $T=1$ and, if $d\\geq1$, a pole of order exactly $1$ at $T=q^{-d}$. A pole of order exactly $m$ at $T=a$ of the rational power series $Z(X_0,T)$ is, by [def-weil-rational-function-pole-order] (applied, as that definition says, through [def-weil-rational-power-series] to the rational function $R=\\prod_iP_i^{(-1)^{i+1}}\\in\\mathbf Q(T)$ of $Z(X_0,T)$), the assertion that $a$ is a root of multiplicity exactly $m$ of the monic denominator $D$ of the reduced presentation $R=N/D$, $\\gcd(N,D)=1$ (so $(T-a)^m\\mid D$, $(T-a)^{m+1}\\nmid D$, and $N(a)\\neq0$); Theorem IV states the two pole orders in these words, for the same rational function and with the same definition [def-weil-rational-function-pole-order], so no translation is needed. This is (iv) word for word.",
    "uses": [
-    "thm-weil-final-betti"
+    "thm-weil-final-betti",
+    "def-weil-polynomial-ring",
+    "def-weil-vector-space-dimension",
+    "def-weil-rational-function-pole-order",
+    "def-weil-rational-power-series"
    ],
    "elementary": false,
    "source": {
@@ -88,9 +103,12 @@
    }
   },
   {
-   "text": "*Clause (v).* With $b_i=\\deg P_i$, define $D_i=(-1)^{b_i}[T^{b_i}]P_i(T)$, $\\chi=\\sum_{i=0}^{2d}(-1)^ib_i$ and $\\varepsilon=(-1)^\\chi q^{-d\\chi/2}\\prod_{i=0}^{2d}D_i^{(-1)^i}$ by the formulas of (v); $D_i$ is a nonzero integer because $b_i=\\deg P_i$, so $D_i^{-1}$ and the product make sense in $\\mathbf Q^\\times$. Theorem [thm-weil-final-functional-equation], applied to $X_0$ and the same $P_i$ (step 1), defines $D_i$, $\\chi$ and $\\varepsilon$ by the same three formulas, with $Z(X_0,T)$ the same point-count zeta series, and states that $d\\chi$ is even, that $P_{2d-i}(q^{-d}T^{-1})=(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T)$ for every $0\\leq i\\leq2d$, and that $Z(X_0,q^{-d}T^{-1})=\\varepsilon q^{d\\chi/2}T^\\chi Z(X_0,T)$ with $\\varepsilon\\in\\{1,-1\\}$. This is (v). The five clauses together are the statement.",
+   "text": "*Clause (v).* With $b_i=\\deg P_i$, define $D_i=(-1)^{b_i}[T^{b_i}]P_i(T)$, $\\chi=\\sum_{i=0}^{2d}(-1)^ib_i$ and $\\varepsilon=(-1)^\\chi q^{-d\\chi/2}\\prod_{i=0}^{2d}D_i^{(-1)^i}$ by the formulas of (v); $[T^{b_i}]P_i(T)$ is the coefficient of $T^{b_i}$ in $P_i\\in\\mathbf Z[T]$, i.e. its leading coefficient [def-weil-polynomial-ring], so $D_i$ is a nonzero integer and $D_i^{-1}$ and the product make sense in $\\mathbf Q^\\times$. The two displayed identities are identities in $\\mathbf Q(T)$ [def-weil-rational-function-field]: $P_{2d-i}(q^{-d}T^{-1})$ is the polynomial $P_{2d-i}$ evaluated at $q^{-d}T^{-1}\\in\\mathbf Q(T)$, and $Z(X_0,q^{-d}T^{-1})$ is the substitution of $q^{-d}T^{-1}$ for $T$ in the rational function of the rational power series $Z(X_0,T)$ [def-weil-rational-power-series], the substitution being the automorphism of $\\mathbf Q(T)$ of [def-weil-rational-function-field]. Theorem [thm-weil-final-functional-equation], applied to $X_0$ and the same $P_i$ (step 1), defines $D_i$, $\\chi$ and $\\varepsilon$ by the same three formulas, with $Z(X_0,T)$ the same point-count zeta series, and, for the same reading of $Z(X_0,q^{-d}T^{-1})$ and $P_{2d-i}(q^{-d}T^{-1})$ (its proof in the blueprint writes the identities 'in $\\mathbf Q(T)$'), states that $d\\chi$ is even, that $P_{2d-i}(q^{-d}T^{-1})=(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T)$ for every $0\\leq i\\leq2d$, and that $Z(X_0,q^{-d}T^{-1})=\\varepsilon q^{d\\chi/2}T^\\chi Z(X_0,T)$ with $\\varepsilon\\in\\{1,-1\\}$. This is (v). The five clauses together are the statement.",
    "uses": [
-    "thm-weil-final-functional-equation"
+    "thm-weil-final-functional-equation",
+    "def-weil-polynomial-ring",
+    "def-weil-rational-function-field",
+    "def-weil-rational-power-series"
    ],
    "elementary": false,
    "source": {
@@ -108,10 +126,17 @@
   "thm-weil-final-integrality",
   "def-weil-point-counts-zeta",
   "thm-weil-final-rationality",
+  "def-weil-rational-power-series",
+  "def-weil-formal-power-series",
+  "def-weil-rational-function-field",
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-extension",
   "def-weil-ordinary-reciprocal-roots",
   "def-weil-numbers",
   "thm-weil-final-rh",
   "thm-weil-final-betti",
+  "def-weil-vector-space-dimension",
+  "def-weil-rational-function-pole-order",
   "thm-weil-final-functional-equation"
  ],
  "proof_origin": {
@@ -246,6 +271,11 @@
   "date": "2026-10-09",
   "item": "thm-weil-final",
   "worker": "stage1",
-  "summary": "Statement unchanged (GOAL.md states it word for word). Checked the six imported steps against the master md and the identical slopmaster2 LaTeX proof (01_final_weil_conjectures.tex, thm:weil-final): each paragraph only names the propositions behind one clause and says the clause follows, so none was a proof of the clause from the propositions. The four title-only references the import could not resolve are definitions and a proposition that exist only in the slopmaster2 LaTeX sketch: 'Smooth-proper datum' and 'Canonical integral cohomological factors' are now the nodes def-weil-smooth-proper-datum and def-weil-canonical-integral-factors (the latter takes its tuple from prop-integral-recovery, the master counterpart of prop:integral-factor-existence); 'Frobenius characteristic factors' is the determinant family P_{i,l} already inside def-weil-smooth-proper-cohomological-family; 'Euler characteristic' is chi inside def-weil-determinant-constants; 'Parity of the functional-equation exponent' is the assertion 'd chi is even' of thm-weil-final-functional-equation. The proof is rewritten as the assembly the master frontmatter declares: step 1 identifies the datum and, by the uniqueness in thm-weil-final-integrality, the canonical factors with the integral Frobenius factors that Theorems I-V are stated for; steps 2-6 show that clauses (i)-(v) are, for these objects, exactly the statements of thm-weil-final-rationality, -integrality, -rh, -betti and -functional-equation (clause (iii) needs the elementary reciprocal-root/ordinary-root correspondence, written out). The propositions the text cites (prop-euler-product, prop-integral-recovery, prop-arithmetic-roots, prop-duality-reciprocity, prop-endpoints, prop-functional-equation) and the two sign/constant definitions are each used by exactly the theorem whose clause they prove and remain reached through it; they are no longer direct dependencies of the target. Statement dependencies now name every notion the statement uses; two standard notions had no node and are new Mathlib leaves: def-weil-rational-power-series (a series in K[[T]] ∩ K(T) and its rational function) and def-weil-rational-function-pole-order (pole of order exactly m). Lean on slopmaster2 (WeilConjectures/Statement.lean 86-98, 77-84) states less than the node; see the report."
+  "summary": "Statement unchanged (GOAL.md states it word for word). Checked the six imported steps against the master md and the identical slopmaster2 LaTeX proof (01_final_weil_conjectures.tex, thm:weil-final, lines 3557-3760): each paragraph only names the propositions behind one clause and says the clause follows, so none was a proof of the clause from the propositions. The four title-only references the import could not resolve are definitions and a proposition that exist only in the slopmaster2 LaTeX sketch: 'Smooth-proper datum' and 'Canonical integral cohomological factors' are the nodes def-weil-smooth-proper-datum and def-weil-canonical-integral-factors (the latter takes its tuple from prop-integral-recovery, the master counterpart of prop:integral-factor-existence, and now cites the existing leaves def-weil-coefficientwise-extension and def-weil-polynomial-ring instead of redefining P^(l)); 'Frobenius characteristic factors' (LaTeX lines 2899-2917) is the determinant family P_{i,l} already inside def-weil-smooth-proper-cohomological-family; 'Euler characteristic' is chi inside def-weil-determinant-constants; 'Parity of the functional-equation exponent' is the assertion 'd chi is even' of thm-weil-final-functional-equation. The proof is the assembly the master frontmatter declares: step 1 identifies the datum and, by the uniqueness in thm-weil-final-integrality, the canonical factors with the integral Frobenius factors that Theorems I-V are stated for; steps 2-6 show that clauses (i)-(v) are, for these objects, exactly the statements of thm-weil-final-rationality, -integrality, -rh, -betti and -functional-equation, compared statement against statement (clause (iii) needs the elementary reciprocal-root/ordinary-root correspondence, written out; def-weil-ordinary-reciprocal-roots is stated for polynomials over Q_l with roots in Q_l-bar, and clause (iii) applies the same words to P_i over Q-bar, so the step spells the convention out and matches it with the roots of P_i^# used by Theorem III). The propositions the text cites (prop-euler-product, prop-integral-recovery, prop-arithmetic-roots, prop-duality-reciprocity, prop-endpoints, prop-functional-equation) and the two sign/constant definitions are each used by the theorem whose clause they prove (checked in those theorems' proof_deps) and remain reached through it; they are no longer direct dependencies of the target. Statement dependencies now name every notion the statement uses. Three standard notions had no node (def-weil-normalized-integral-fraction, prop-integral-recovery and thm-weil-final-betti use them undefined). Two are new Mathlib leaves created for this item: def-weil-rational-function-field (K(T) with reduced presentation, value at a point and substitution of a transcendental element, needed for T -> q^{-d}T^{-1} in clause (v); RatFunc) and def-weil-rational-power-series (f in K[[T]] with Qf=P, Q(0)!=0, its rational function P/Q, and the reading of '1+TZ[[T]] cap Q(T)' and of assertions about Z 'in Q(T)'; one line over PowerSeries/RatFunc/LaurentSeries, no named Mathlib predicate). The third, the pole of order exactly m, is taken from def-weil-rational-function-order-at-point, created meanwhile (uncommitted) by the worker on thm-weil-final-betti: it defines ord_c on K(T) in lowest terms and 'pole of order exactly m' as ord_c = -m, with the same Mathlib match (Polynomial.rootMultiplicity on RatFunc.num/denom); the node def-weil-rational-function-pole-order that the previous worker's citation announced was therefore not delivered (a draft of it, written before that node appeared, was withdrawn before any commit). That node also defines K(T) and lowest terms in its preamble, which overlaps the first paragraph of def-weil-rational-function-field; the lead may make it cite def-weil-rational-function-field instead. The existing leaves def-weil-polynomial-ring, def-weil-coefficientwise-extension and def-weil-vector-space-dimension are now cited for Z[T], deg, [T^b]P, the map Z[T]->Q_l[T] and dim_{Q_l}, in the statement and in the steps that use them. Lean (slopmaster2 and master identical, WeilConjectures/Statement.lean, both declarations sorry): weil_conjectures (lines 86-98) takes a finite field k (q = Nat.card k), d : N and f : X -> Spec k with [SmoothOfRelativeDimension d f] [IsProper f] [GeometricallyIntegral f] -- geometrically integral where the node says geometrically connected -- and states the existence of P : Fin (2d+1) -> Z[T] with IsWeilFactorization q d f.zetaSeries P (P_i(0)=1 for all i, P_0 = 1-T, P_{2d} = 1-q^d T, and zetaSeries * prod_{i even} P_i = prod_{i odd} P_i in Q[[T]]), WeilFunctionalEquation q d P (for every i, the multiset of complex roots of P_{2d-i} is the image of that of P_i under z -> 1/(q^d z)) and WeilRiemannHypothesis q d P (every complex root z of P_i has |z| = q^{-i/2}) (Comparator/Weil/Definitions.lean). So it states: the factorization of clause (ii) as an existence statement, without the uniqueness of the P_i and without their cohomological characterization P_i^(l) = det(1-TF | H^i(X,Q_l)); the endpoint factors P_0, P_{2d} of clause (iv), without b_i = dim H^i, b_i = b_{2d-i} and the pole orders; the ordinary-root form |tau(beta)| = q^{-i/2} of clause (iii) (algebraic integrality and the reciprocal-root form follow from P_i in Z[T], P_i(0)=1); and the root-multiset form of the degreewise reciprocity of clause (v), which implies the Laurent identity P_{2d-i}(q^{-d}T^{-1}) = (-1)^{b_i} T^{-b_i} D_i^{-1} P_i(T) and the functional equation for Z with some sign, but does not state the parity of d chi, the formula for epsilon, or the displayed functional equation itself. zetaSeries_rational (lines 77-84) states, for any f locally of finite type and quasi-compact over a finite field, the existence of P, Q in Z[T] with Q(0)=1 and zetaSeries * Q = P in Q[[T]]: the rationality of clause (i) (with an integral presentation, which gives the membership in 1+TZ[[T]] cap Q(T)), without the Euler product; the exp description of clause (i) is the Lean definition of zetaSeries (pointCount n = #X(F_{q^n}) via the splitting field of X^{q^n}-X). No Lean declaration states the Euler product, the uniqueness or cohomological meaning of the P_i, or the Betti and pole assertions of clause (iv). Third pass (interrupted twice before): step 5 cited a node def-weil-rational-function-order-at-point that was never created; the existing leaf def-weil-rational-function-pole-order (created for this item, Mathlib match Polynomial.rootMultiplicity on RatFunc.denom, and already used by thm-weil-final-betti) defines exactly the notion clause (iv) uses, 'pole of order exactly m at T=a' of a rational function and of a rational power series, so step 5, stmt_deps and proof_deps now cite it and step 5 reads the pole order as the multiplicity of a as a root of the reduced denominator, as that leaf does; no new node was needed. Rechecked: statement unchanged and equal to GOAL.md; every cited id exists and is unmerged; each step names what it uses and none is elementary; proof_deps is the union of the uses; check_dag.py and review_split.py report nothing on this node."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
