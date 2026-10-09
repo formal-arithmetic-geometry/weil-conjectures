@@ -53,7 +53,7 @@ def Scheme.Hom.normAt {X Y : Scheme.{u}} (π : Y ⟶ X) (U : X.Opens) :
   letI := (π.app U).hom.toAlgebra
   Algebra.norm Γ(X, U)
 
-lemma surjective_specMap_algebraMap {k k' : Type u} [Field k] [Field k'] [Algebra k k'] :
+lemma surjective_specMap_algebraMap_of_field {k k' : Type u} [Field k] [Field k'] [Algebra k k'] :
     Surjective (Spec.map (CommRingCat.ofHom (algebraMap k k'))) := by
   have : Subsingleton (Spec (.of k)) := inferInstanceAs (Subsingleton (PrimeSpectrum k))
   have : Nonempty (Spec (.of k')) := inferInstanceAs (Nonempty (PrimeSpectrum k'))
@@ -77,7 +77,7 @@ lemma flat_of_isPullback_spec : Flat π := by
 
 omit [Module.Finite k k'] in
 lemma surjective_of_isPullback_spec : Surjective π :=
-  MorphismProperty.of_isPullback (P := @Surjective) H.flip surjective_specMap_algebraMap
+  MorphismProperty.of_isPullback (P := @Surjective) H.flip surjective_specMap_algebraMap_of_field
 
 /-- Over an affine open `U`, the ring `Γ(Y, π⁻¹ U)` is finite free over `Γ(X, U)`: it is
 `Γ(X, U) ⊗_k k'`. -/
@@ -161,7 +161,7 @@ lemma isAffineOpen_of_isAffineOpen_preimage {W : X.Opens} (hW : IsAffineOpen (π
     exact RingHom.flat_algebraMap_iff.mpr inferInstance
   have : IsAffineHom (W.ι ≫ f) := MorphismProperty.of_isPullback_of_descendsAlong
     (P := @IsAffineHom) (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact) hsq.flip
-    ⟨⟨surjective_specMap_algebraMap, hflat⟩, inferInstance⟩ inferInstance
+    ⟨⟨surjective_specMap_algebraMap_of_field, hflat⟩, inferInstance⟩ inferInstance
   have : IsAffine W := isAffine_of_isAffineHom (W.ι ≫ f)
   exact this
 

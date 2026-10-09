@@ -75,7 +75,7 @@ theorem exists_isImmersion_projectiveSpace_of_pullback {X : Scheme.{u}} (f : X �
     ∃ (β : Type u) (_ : Finite β) (i : X ⟶ ℙ(β; Spec (.of k))),
       IsImmersion i ∧ i ≫ ℙ(β; Spec (.of k)) ↘ Spec (.of k) = f := by
   let φ := Spec.map (CommRingCat.ofHom (algebraMap k K))
-  have hsurj : Surjective φ := surjective_specMap_algebraMap
+  have hsurj : Surjective φ := surjective_specMap_algebraMap_of_field
   have hflat : Flat φ := by
     rw [Flat.SpecMap_iff]
     exact RingHom.flat_algebraMap_iff.mpr inferInstance
