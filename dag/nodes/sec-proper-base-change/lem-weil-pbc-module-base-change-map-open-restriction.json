@@ -13,9 +13,79 @@
   "def-pc-module-pullback",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*(1) Restriction along the two open squares.* For an open immersion, the restriction functor and its sectionwise description are the adjoint of [lem-weil-pbc-module-restriction-open-immersion-colimits], while [lem-weil-pbc-open-immersion-module-pullback-restriction] identifies that restriction with the module pullback and identifies its adjunction unit with restriction of sections. For an open W in U, the two sides of rho_F therefore have sections F(f^{-1}(j_U(W))) and F(j_X(f_U^{-1}(W))). The square relation and the hypothesis that the image of j_X is f^{-1}(j_U(U)) identify these opens, and under this identification the map is the restriction map, hence an isomorphism. The same argument for the primed square proves that every rho'_G is an isomorphism.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-open-immersion",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 00A0 (lemma-j-pullback), parts (2) and (5), together with its module statement; the base-change-map adjunction is Cohomology on Sites, Remark 08HY"
+   }
+  },
+  {
+   "text": "*(2) First pasting description.* Paste the original square (f,f',g,g') with the open restriction square (f',f'_V,j_V,j_X'). The horizontal pasting formula for module base-change maps [lem-weil-pbc-module-base-change-map-pasting], with the pullback composition isomorphisms, says that the base-change map of the resulting outer square (f,f'_V,g after j_V,g' after j_X') is exactly the composite b after j_V^*(beta_F); the first restriction map in b is rho' applied to g'^*F.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-base-change-map-pasting",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Remark 0ATM (remark-compose-base-change-horizontal), with Remark 08HY (remark-base-change) for the definition of the base-change map"
+   }
+  },
+  {
+   "text": "*(3) Second pasting description and comparison.* Paste instead the open restriction square (f,f_U,j_U,j_X) with the restricted square (f_U,f'_V,g_V,g'_V). The same pasting formula identifies the base-change map of the same outer square with beta-circle after a, including the displayed composition isomorphisms in a and b. The two outer squares agree by the stated commutation relations, so their defining adjoint maps agree; hence the two descriptions give b after j_V^*(beta_F) equals beta-circle after a.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-base-change-map-pasting",
+    "def-pc-scheme",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Remark 0ATL (remark-compose-base-change) and Remark 0ATM (remark-compose-base-change-horizontal), whose omitted verification is the pasting used here"
+   }
+  },
+  {
+   "text": "*(4) Isomorphism criterion.* The maps a and b are isomorphisms because they are composites of pullback composition isomorphisms, pullbacks of rho_F, and rho' applied to g'^*F from step 1. In the commutative equality of step 3, composition with these isomorphisms shows that j_V^*(beta_F) is an isomorphism exactly when beta-circle applied to j_X^*F is.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-base-change-map-pasting",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 02KG (lemma-affine-base-change), proof, first sentence: locality on the base and its open restriction maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-module-base-change-map-pasting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remarks 0ATL and 0ATM (pasting base-change maps), with Sheaves Lemma 00A0 and Cohomology of Schemes Lemma 02KG for open restriction"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,7 +117,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,7 +141,14 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement: base change maps commute with restriction along open immersions; self-contained; correct; unsplit."
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: Four steps (restriction along open squares via the open-immersion pullback nodes, two horizontal pastings by the pasting node committed today, comparison, isomorphism criterion). Accepted by L."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-base-change-map-open-restriction",
+  "worker": "stage1",
+  "summary": "Checked the module restriction statement against Stacks Sheaves Lemma 00A0 and the base-change pasting remarks 0ATL/0ATM. The proof has four steps: sectionwise restriction identifies both open base-change maps with isomorphisms; pasting the original square with the restricted target square gives the outer base-change map as b after j_V^* beta; pasting the restricted source square with the restricted square gives the same outer map as beta° after a; and the isomorphism criterion follows because a and b are composites of pullback composition isomorphisms and the restriction isomorphisms. Existing nodes supply restriction/pullback compatibility and the module pasting lemma; no new DAG node was needed."
  }
 }
