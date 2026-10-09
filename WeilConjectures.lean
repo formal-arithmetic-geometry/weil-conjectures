@@ -84,6 +84,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantCover
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ExtendOverPoints
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Extension
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteLocallyConstant
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Frobenius
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusConjugacy
@@ -92,11 +93,13 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusLift
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusRestriction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusTransport
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GaloisCategory
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GeometricFiber
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Gluing
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.HomotopyExactSequence
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Inertia
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.KummerTorsor
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocallyTrivial
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeilGroup
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
@@ -680,6 +683,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Birational.RationalMap
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ColimitsOver
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
@@ -1011,6 +1015,7 @@ public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Noetherian
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Maps
+public import WeilConjectures.Mathlib.RingTheory.TotallySplit
 public import WeilConjectures.Mathlib.RingTheory.UniqueFactorizationDomain.Ideal
 public import WeilConjectures.Mathlib.RingTheory.UniqueFactorizationDomain.Kaplansky
 public import WeilConjectures.Mathlib.RingTheory.Unramified.Finite
