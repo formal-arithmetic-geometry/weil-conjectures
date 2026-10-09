@@ -331,6 +331,55 @@ theorem flat_localization_tensor_of_forall [IsNoetherianRing R₀] [IsNoetherian
     exact hQ₀ N (fun i hi n ↦ hN _ (Ideal.mem_map_of_mem _ hi) n) (N'.restrictScalars R₀)
   · exact lTensor_injective_localization_tensor q₁ I₁.subtype hI₀
 
+
+/-- **Noetherian approximation of flatness at a prime** (Stacks, Tag 00R6). Let `R₀` be
+noetherian, `S₀` a finite type `R₀`-algebra and `A` an `R₀`-algebra such that `A ⊗[R₀] S₀` is flat
+over `A`. For a prime `q` of `A ⊗[R₀] S₀` there is a finitely generated subalgebra `R₁` of `A`
+such that `R₁ ⊗[R₀] S₀` is flat over `R₁` at the prime below `q`. -/
+theorem exists_fg_flat_localization_tensor {A : Type u} [CommRing A] [Algebra R₀ A]
+    [IsNoetherianRing R₀] [Algebra.FiniteType R₀ S₀] [Flat A (A ⊗[R₀] S₀)]
+    (q : Ideal (A ⊗[R₀] S₀)) [q.IsPrime] :
+    ∃ R₁ : Subalgebra R₀ A, R₁.FG ∧ IsNoetherianRing R₁ ∧
+      Flat R₁ (Localization.AtPrime
+        (q.comap (Algebra.TensorProduct.map R₁.val (AlgHom.id R₀ S₀)).toRingHom)) := by
+  classical
+  have : IsNoetherianRing S₀ := Algebra.FiniteType.isNoetherianRing R₀ S₀
+  set q₀ : Ideal S₀ := q.comap (Algebra.TensorProduct.includeRight.toRingHom)
+  set p₀ : Ideal R₀ := q₀.comap (algebraMap R₀ S₀)
+  let μ' : S₀ ⊗[R₀] p₀ →ₗ[S₀] S₀ := (AlgebraTensorModule.rid R₀ S₀ S₀).toLinearMap ∘ₗ
+    AlgebraTensorModule.lTensor S₀ S₀ p₀.subtype
+  obtain ⟨Ξ, hΞ⟩ : (LinearMap.ker μ').FG := IsNoetherian.noetherian _
+  have hV : ∀ ξ ∈ Ξ, ∃ T : Finset A, ∀ R₁ : Subalgebra R₀ A, (T : Set A) ⊆ R₁ →
+      (((Algebra.linearMap R₀ R₁) ∘ₗ p₀.subtype).codRestrict
+        ((p₀.map (algebraMap R₀ R₁)).restrictScalars R₀)
+        (fun a ↦ Ideal.mem_map_of_mem _ a.2)).lTensor S₀ ξ = 0 := fun ξ hξ ↦
+    exists_finset_lTensor_eq_zero p₀ ξ (by
+      have h : ξ ∈ LinearMap.ker μ' := hΞ ▸ Submodule.subset_span hξ
+      exact h)
+  choose! T hT using hV
+  set R₁ := Algebra.adjoin R₀ ((Ξ.biUnion T : Finset A) : Set A)
+  have : Algebra.FiniteType R₀ R₁ := Algebra.FiniteType.adjoin_of_finite (Finset.finite_toSet _)
+  have : IsNoetherianRing R₁ := Algebra.FiniteType.isNoetherianRing R₀ R₁
+  refine ⟨R₁, Subalgebra.fg_adjoin_finset _, this, ?_⟩
+  set q₁ := q.comap (Algebra.TensorProduct.map R₁.val (AlgHom.id R₀ S₀)).toRingHom
+  have hq : q₁.comap (Algebra.TensorProduct.includeRight.toRingHom) = q₀ := by
+    rw [Ideal.comap_comap]
+    congr 1
+  apply flat_localization_tensor_of_forall q₁
+  rw [hq]
+  intro ξ hξ
+  have hξ' : ξ ∈ Submodule.span S₀ (Ξ : Set (S₀ ⊗[R₀] p₀)) := hΞ ▸ LinearMap.mem_ker.mpr hξ
+  set σ := ((Algebra.linearMap R₀ R₁) ∘ₗ p₀.subtype).codRestrict
+    ((p₀.map (algebraMap R₀ R₁)).restrictScalars R₀) (fun a ↦ Ideal.mem_map_of_mem _ a.2)
+  change AlgebraTensorModule.lTensor S₀ S₀ σ ξ = 0
+  clear hξ
+  induction hξ' using Submodule.span_induction with
+  | mem x hx =>
+    exact hT x hx R₁ (subset_trans (Finset.subset_biUnion_of_mem T hx) Algebra.subset_adjoin)
+  | zero => exact map_zero _
+  | add x y _ _ hx hy => rw [map_add, hx, hy, add_zero]
+  | smul a x _ hx => rw [map_smul, hx, smul_zero]
+
 end Module
 
 
