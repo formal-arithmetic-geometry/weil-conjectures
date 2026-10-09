@@ -172,25 +172,40 @@ variable [IsAdicComplete I R] [IsDomain R] (hI : I.IsPrincipal)
   (hK : IsNormalizedTower I K) (c : Cone K) (hc : IsHomotopyLimit c)
 
 include hI hK hc in
-/-- Adic realization, derived completeness: the realization `K_{𝒪_E} = R lim_n K_n` of a
-normalized system `K_•` of finite-level complexes is derived complete, that is, it is the
-derived limit of its own reductions `K_{𝒪_E} ⊗ᴸ R/Iⁿ` (blueprint: `sk-prop-trace-adic`). -/
-theorem isHomotopyLimit_derivedCompletionCone :
-    IsHomotopyLimit (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X) I c.pt) :=
+/-- Adic realization, levelwise reduction: the realization `K_{𝒪_E} = R lim_n K_n` of a
+normalized system reduces to the given levels, `K_{𝒪_E} ⊗ᴸ R/Iⁿ ≅ K_n`, compatibly with the
+transitions, and the legs `K_{𝒪_E} ⟶ K_n` are the reduction maps followed by these
+isomorphisms (blueprint: `sk-prop-trace-adic`). -/
+theorem exists_derivedCompletionDiagram_iso :
+    ∃ e : DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I c.pt ≅ K,
+      ∀ n : ℕ, c.π.app (Opposite.op n) =
+        (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X) I c.pt).π.app
+          (Opposite.op n) ≫ e.hom.app (Opposite.op n) :=
   sorry
 
 include hI hK hc in
-/-- Adic realization, levelwise reduction: the realization of a normalized system reduces
-to the given levels, `K_{𝒪_E} ⊗ᴸ R/Iⁿ ≅ K_n`, compatibly with the transitions: the leg
-`K_{𝒪_E} ⟶ K_n` is the reduction map followed by this isomorphism
-(blueprint: `sk-prop-trace-adic`). -/
+/-- Adic realization, levelwise reduction at a single level: `K_{𝒪_E} ⊗ᴸ R/Iⁿ ≅ K_n`, the leg
+`K_{𝒪_E} ⟶ K_n` being the reduction map followed by this isomorphism. -/
 theorem exists_derivedCompletionDiagram_obj_iso (n : ℕ) :
     ∃ e : (DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I c.pt).obj
         (Opposite.op n) ≅ K.obj (Opposite.op n),
       c.π.app (Opposite.op n) =
         (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X) I c.pt).π.app
-          (Opposite.op n) ≫ e.hom :=
-  sorry
+          (Opposite.op n) ≫ e.hom := by
+  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso I hI hK c hc
+  exact ⟨e.app _, he n⟩
+
+include hI hK hc in
+/-- Adic realization, derived completeness: the realization `K_{𝒪_E} = R lim_n K_n` of a
+normalized system `K_•` of finite-level complexes is derived complete, that is, it is the
+derived limit of its own reductions `K_{𝒪_E} ⊗ᴸ R/Iⁿ`: transport the Milnor triangle of `K_•`
+along `exists_derivedCompletionDiagram_iso`. -/
+theorem isHomotopyLimit_derivedCompletionCone :
+    IsHomotopyLimit (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X) I c.pt) := by
+  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso I hI hK c hc
+  refine hc.of_iso e.symm _ (Iso.refl _) fun n ↦ ?_
+  rw [he n, Category.assoc, Iso.symm_hom, Iso.hom_inv_id_app, Category.comp_id, Iso.refl_hom,
+    Category.id_comp]
 
 include hI hK hc in
 /-- Adic realization, compact cohomology: `RΓ_c(X, -)` commutes with realization for a
