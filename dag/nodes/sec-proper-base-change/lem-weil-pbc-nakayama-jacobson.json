@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-nakayama-jacobson",
+ "kind": "statement",
+ "title": "Nakayama's lemma for an ideal in the Jacobson radical",
+ "statement": "Let $R$ be a commutative ring, $I\\subseteq R$ an ideal contained in the Jacobson radical of $R$ (the intersection of all maximal ideals), and $M$ a finitely generated $R$-module with $IM=M$. Then $M=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00DV (lemma-NAK), part (2)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Nakayama lemma: finitely generated module M with I M = M and I in Jacobson radical implies M = 0",
+   "results": "Submodule.le_of_le_smul_of_le_jacobson_bot, Submodule.sup_eq_sup_smul_of_le_smul_of_le_jacobson, Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul (Mathlib.RingTheory.Nakayama, Mathlib.RingTheory.Finiteness.Nakayama)",
+   "date": "2026-10-10",
+   "verdict": "generalization: le_of_le_smul_of_le_jacobson_bot with N = bot"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nakayama: I ≤ jacobson ⊥, M finitely generated module, I • ⊤ = ⊤ implies M subsingleton",
+   "results": "Submodule.top_ne_ideal_smul_of_le_jacobson_annihilator, Submodule.FG.jacobson_smul_lt, Submodule.le_of_le_smul_of_le_jacobson_bot (Mathlib.RingTheory.Nakayama)",
+   "date": "2026-10-10",
+   "verdict": "match (contrapositive forms)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.eq_bot_of_le_smul_of_le_jacobson_bot",
+   "results": "Submodule.eq_bot_of_le_smul_of_le_jacobson_bot (I : Ideal R) (N : Submodule R M) (hN : N.FG) (hIN : N ≤ I • N) (hIjac : I ≤ ⊥.jacobson) : N = ⊥ (Mathlib.RingTheory.Nakayama)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00DV\\|theorem eq_bot_of_le_smul_of_le_jacobson_bot' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Nakayama.lean",
+   "results": "Nakayama.lean:117-118 @[stacks 00DV \"(2)\"] theorem eq_bot_of_le_smul_of_le_jacobson_bot",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Submodule.eq_bot_of_le_smul_of_le_jacobson_bot",
+  "file": "Mathlib/RingTheory/Nakayama.lean",
+  "how": "specializes in one line: N = ⊤ (finitely generated as M is a finite module, Module.Finite.fg_top), hIN from I • ⊤ = ⊤, hIjac : I ≤ jacobson ⊥ (= the intersection of the maximal ideals); conclusion ⊤ = ⊥, i.e. M = 0. Tagged @[stacks 00DV \"(2)\"] (line 117). Source read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselian-factorization-locally-nilpotent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf Submodule.eq_bot_of_le_smul_of_le_jacobson_bot (RingTheory/Nakayama.lean, @[stacks 00DV (2)]); checked."
+ }
+}

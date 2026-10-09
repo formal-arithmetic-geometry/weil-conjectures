@@ -2,16 +2,179 @@
  "id": "lem-weil-pbc-henselian-factorization-locally-nilpotent",
  "kind": "statement",
  "title": "Unique lifting of factorizations across locally nilpotent ideals",
- "statement": "Let $A$ be a commutative ring and $J\\subseteq A$ a locally nilpotent ideal. For every monic polynomial $f\\in A[T]$ and every factorization of its reduction $\\overline f\\in(A/J)[T]$ into monic polynomials $g_0h_0$ generating the unit ideal, there exist unique monic polynomials $g,h\\in A[T]$ with $f=gh$ and reductions $g_0,h_0$ modulo $J$.",
- "source": {"document": "literature/stacks-project/more-algebra.tex", "place": "Lemma Tag 0ALI (lemma-locally-nilpotent-henselian), essential surjectivity of etale algebras and the final factorization paragraph"},
- "stmt_deps": [], "proof": [], "proof_deps": [], "proof_origin": null,
- "mathlib_searches": [
-  {"tool":"leansearch","query":"monic polynomial factorization lifts across a locally nilpotent ideal","results":"Idempotents lift only across nilpotent kernels; no polynomial-factorization theorem for locally nilpotent ideals","date":"2026-10-10","verdict":"no match"},
-  {"tool":"leanfinder","query":"locally nilpotent ideal etale algebras equivalent to quotient and monic factorization lifting","results":"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker and etale base change; no locally-nilpotent factorization statement","date":"2026-10-10","verdict":"no match"},
-  {"tool":"grep","query":"grep -rn 'locally nilpotent\\|IsNilpotent\\|factorization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory","results":"Idempotent lifting under nilpotent kernels in RingTheory/Idempotents.lean; no locally-nilpotent ideal factorization lemma","date":"2026-10-10","verdict":"no match"}
+ "statement": "Let $A$ be a commutative ring and $J\\subseteq A$ a locally nilpotent ideal (every element of $J$ is nilpotent). For every monic polynomial $f\\in A[T]$ and every factorization $\\overline f=g_0h_0$ of its reduction $\\overline f\\in(A/J)[T]$ into monic polynomials $g_0,h_0\\in(A/J)[T]$ generating the unit ideal of $(A/J)[T]$, there exist unique monic polynomials $g,h\\in A[T]$ with $f=gh$ and reductions $\\overline g=g_0$, $\\overline h=h_0$ modulo $J$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0ALI (lemma-locally-nilpotent-henselian), essential surjectivity of etale algebras and the final factorization paragraph"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "$J$ is contained in the Jacobson radical of $A$. Let $x\\in J$ and let $\\mathfrak m$ be a maximal ideal with $x\\notin\\mathfrak m$. Then $1=ax+m$ for some $a\\in A$, $m\\in\\mathfrak m$. Since $ax\\in J$ is nilpotent, say $(ax)^N=0$, the element $m=1-ax$ is a unit with inverse $1+ax+\\dots+(ax)^{N-1}$, contradicting $m\\in\\mathfrak m$. Hence $x$ lies in every maximal ideal. (Stacks says 'It is clear that $I$ is contained in the Jacobson radical of $A$'; Mathlib: mem_nilradical with nilradical_le_jacobson, Mathlib/RingTheory/KrullDimension/Basic.lean:140.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0ALI (lemma-locally-nilpotent-henselian), proof, second paragraph, first sentence; cf. algebra.tex Lemmas 0AME (lemma-contained-in-radical) and 0AMG (lemma-locally-nilpotent-unit)"
+   }
+  },
+  {
+   "text": "$(A,J)$ is henselian in the sense of [def-weil-pbc-henselian-terminology]. Let $B$ be a finite $A$-algebra. The kernel of $B\\to B/JB$ is the ideal $JB$, every element of which is nilpotent by [lem-weil-pbc-locally-nilpotent-extension] applied to $A\\to B$. By [lem-weil-pbc-lift-idempotents-locally-nilpotent] applied to $(B,JB)$, every idempotent of $B/JB$ lifts to exactly one idempotent of $B$. This is the defining condition of a henselian pair. (Finiteness of $B$ is not even used.)",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-locally-nilpotent-extension",
+    "lem-weil-pbc-lift-idempotents-locally-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemmas Tag 0544 (lemma-locally-nilpotent) and Tag 00J9 (lemma-lift-idempotents); the henselian-pair characterization more-algebra.tex Lemma Tag 09XI (3)"
+   }
+  },
+  {
+   "text": "Existence. By step 1, $J$ lies in the Jacobson radical of $A$, and by step 2 the pair $(A,J)$ is henselian; so the direction 'henselian $\\Rightarrow$ factorizations lift' of [lem-weil-pbc-henselian-factorization-criterion] applies to the given monic $f$ and the factorization $\\overline f=g_0h_0$ into monic polynomials generating the unit ideal of $(A/J)[T]$: there are monic $g,h\\in A[T]$ with $f=gh$, $\\overline g=g_0$, $\\overline h=h_0$. (Stacks deduces existence instead from the equivalence of etale algebras over $A$ and $A/J$ together with Lemma 0ALH; the route through 09XI (3) $\\Rightarrow$ (1) and the idempotent definition of the DAG is used here because the DAG defines henselian pairs by idempotent lifting.)",
+   "uses": [
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0ALI (lemma-locally-nilpotent-henselian), 'Moreover, the pair is henselian', with Definition Tag 09XE and Lemma Tag 09XI (3) => (1)"
+   }
+  },
+  {
+   "text": "Coprimality lifts. Let $g,k\\in A[T]$ with $g$ monic whose reductions $\\overline g,\\overline k$ generate the unit ideal of $(A/J)[T]$; then $g,k$ generate the unit ideal of $A[T]$. Put $M=A[T]/(g,k)$. It is a quotient of $A[T]/(g)$, which is a finite $A$-module because $g$ is monic [lem-weil-pbc-monic-quotient-free]; so $M$ is a finitely generated $A$-module. Since $A[T]/JA[T]=(A/J)[T]$, we get $M/JM=A[T]/(g,k,JA[T])=(A/J)[T]/(\\overline g,\\overline k)=0$, i.e. $JM=M$. As $J$ lies in the Jacobson radical (step 1), Nakayama's lemma [lem-weil-pbc-nakayama-jacobson] gives $M=0$, i.e. $1=ug+vk$ for some $u,v\\in A[T]$. (Only $J\\subseteq\\operatorname{rad}(A)$ is used here, not local nilpotence.)",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "written by an agent; Nakayama Lemma Tag 00DV (2), and the argument pattern of more-algebra.tex Lemma Tag 0ALJ/09XI (coprimality checked modulo an ideal in the radical); Stacks states no uniqueness lemma for lifted factorizations"
+   }
+  },
+  {
+   "text": "Uniqueness. Let $f=gh=g'h'$ with $g,h,g',h'\\in A[T]$ monic, $\\overline g=\\overline{g'}=g_0$ and $\\overline h=\\overline{h'}=h_0$. If $A=0$ there is nothing to prove; otherwise $1\\notin J$ (a nonzero ring has $1$ not nilpotent), so $A/J\\neq0$ and reduction keeps the degree of a monic polynomial: $\\deg g=\\deg g_0=\\deg g'$. By step 4 applied to the monic $g$ and $k=h'$ (whose reductions $g_0,h_0$ generate the unit ideal) there are $u,v$ with $ug+vh'=1$. Then $g'=ugg'+vh'g'=ugg'+vgh=g(ug'+vh)$, so $g'=gq$ with $q\\in A[T]$. As $g$ is monic, $\\deg(gq)=\\deg g+\\deg q$ and the leading coefficient of $gq$ is that of $q$; comparing with $g'$ monic of degree $\\deg g$ gives $\\deg q=0$ and $q=1$, i.e. $g'=g$. Then $g(h-h')=0$, and a monic polynomial is a nonzerodivisor in $A[T]$ (look at the leading coefficient of $g\\cdot(h-h')$), so $h'=h$. (Mathlib pieces: IsCoprime.dvd_of_dvd_mul_left, Polynomial.Monic.natDegree_mul, Polynomial.eq_one_of_monic_natDegree_zero, Polynomial.Monic.mul_right_eq_zero_iff.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "written by an agent; Stacks states 0ALI without uniqueness and has no uniqueness lemma for lifted factorizations (searched more-algebra.tex Sections 'Lifting' and 'Henselian pairs' and algebra.tex)"
+   }
+  }
  ],
- "mathlib_match": null, "status": "unsplit", "merged_into": null,
- "created": {"by":"worker","item":"lem-weil-pbc-complete-pair-henselian","date":"2026-10-10"},
- "lean_audit": {"master":{"state":"none"},"slopmaster2":{"state":"none"}},
- "chapter":"sec-proper-base-change", "unit":"sk-thm-p1"
+ "proof_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "lem-weil-pbc-lift-idempotents-locally-nilpotent",
+  "lem-weil-pbc-locally-nilpotent-extension",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-nakayama-jacobson"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0ALI (lemma-locally-nilpotent-henselian) for 'the pair is henselian', with Definition 09XE and Lemma 09XI (3) => (1); existence proved via the DAG's idempotent definition instead of Stacks' etale-equivalence argument, and the uniqueness (not in Stacks) written by the agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "monic polynomial factorization lifts across a locally nilpotent ideal",
+   "results": "Idempotents lift only across nilpotent kernels; no polynomial-factorization theorem for locally nilpotent ideals",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally nilpotent ideal etale algebras equivalent to quotient and monic factorization lifting",
+   "results": "CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker and etale base change; no locally-nilpotent factorization statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'locally nilpotent\\|IsNilpotent\\|factorization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "Idempotent lifting under nilpotent kernels in RingTheory/Idempotents.lean; no locally-nilpotent ideal factorization lemma",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "uniqueness of lifting a factorization of a monic polynomial into coprime monic factors modulo a nilpotent ideal",
+   "results": "Algebra.FormallyUnramified.lift_unique, PowerSeries.IsWeierstrassFactorization.unique, MvPolynomial.universalFactorizationMapLiftEquiv, Polynomial.UniversalCoprimeFactorizationRing.isCoprime_factor₁_factor₂",
+   "date": "2026-10-10",
+   "verdict": "no match (see the remark on UniversalCoprimeFactorizationRing below)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "monic polynomials g h coprime modulo ideal in Jacobson radical then g h coprime",
+   "results": "Polynomial.isUnit_resultant_iff_isCoprime (Mathlib.RingTheory.Polynomial.Resultant.Basic: f monic -> (IsUnit (resultant f g) <-> IsCoprime f g)), Ideal.isRadical_jacobson; no coprimality-lifting lemma",
+   "date": "2026-10-10",
+   "verdict": "no match; isUnit_resultant_iff_isCoprime gives an alternative to the Nakayama step 4 (resultant reduces mod J, a unit mod J is a unit when J <= rad)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hensel lemma lifting a coprime factorization of a monic polynomial modulo an ideal I to a factorization over A",
+   "results": "HenselianRing.is_henselian (root lifting only), Polynomial.UniversalCoprimeFactorizationRing.factor₁/factor₂, instEtaleUniversalCoprimeFactorizationRing, HenselianLocalRing.is_henselian",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCoprime, Polynomial.map, Ideal.jacobson",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic, IsNilpotent, IsCoprime",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean; grep -n 'IsCoprime' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean",
+   "results": "UniversalFactorizationRing.lean:590-627 UniversalCoprimeFactorizationRing.homEquiv: R-algebra maps from the (etale, line 'instEtale...') universal coprime factorization ring to S correspond to factorizations p = q1*q2 in S[X] into monic factors with IsCoprime; Henselian.lean has no IsCoprime",
+   "date": "2026-10-10",
+   "verdict": "no match; remark: for J nilpotent (not only locally nilpotent) existence and uniqueness together follow from homEquiv with Algebra.FormallyEtale lifting along A -> A/J, a few lines; for locally nilpotent J this does not apply directly"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-complete-pair-henselian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-henselian-factorization-locally-nilpotent",
+  "worker": "stage1",
+  "summary": "Statement kept; 'locally nilpotent' spelled out (every element nilpotent) and 'reductions g0, h0' written as equalities. Read Stacks more-algebra.tex 0ALI (lemma-locally-nilpotent-henselian), 09XE, 09XI, 0ALH, 0ALJ and algebra.tex 0AME, 0AMG, 0544, 00J9, 00DV. Stacks 0ALI proves only existence (via the equivalence of etale algebras over A and A/J and 0ALH); Stacks has no uniqueness lemma for lifted coprime factorizations (searched), so the uniqueness, needed by step 3 of lem-weil-pbc-complete-pair-henselian, is written by the agent and holds under J in the Jacobson radical alone. Five steps: (1) J in rad(A), elementary; (2) (A,J) henselian in the DAG's idempotent definition from two new Mathlib leaves (0544 extension of locally nilpotent ideals, 00J9 unique lifting of idempotents); (3) existence from lem-weil-pbc-henselian-factorization-criterion; (4) coprimality of g and h' in A[T] from monic-quotient-free and a new Mathlib leaf for Nakayama (00DV (2), Jacobson form); (5) uniqueness, elementary. New nodes: lem-weil-pbc-locally-nilpotent-extension, lem-weil-pbc-lift-idempotents-locally-nilpotent, lem-weil-pbc-nakayama-jacobson (all mathlib). No source declarations found in slopmaster2."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Five steps: J ⊆ rad(A) (elementary), (A, J) henselian in the DAG sense via two new Mathlib leaves (extension of a locally nilpotent ideal; existsUnique_isIdempotentElem_eq_of_ker_isNilpotent @[stacks 00J9]), existence from the factorization criterion node (09XI, being split), coprimality lifts by Nakayama (new leaf Submodule.eq_bot_of_le_smul_of_le_jacobson_bot @[stacks 00DV (2)]; lem-weil-pbc-monic-quotient-free), uniqueness written out (agent; Stacks has no uniqueness lemma, as the worker found; holds for J ⊆ rad(A)). Checked, including the A = 0 case. Statement spelled out. The lean_audit diff flagged by review_split comes from the lead′s lean_status runs."
+ }
 }
