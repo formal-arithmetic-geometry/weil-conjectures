@@ -11,9 +11,82 @@
   "def-weil-etale-morphism",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Setup and decomposition upstairs.* Let $B$ be a finite $R$-algebra. Apply [lem-weil-pbc-finite-algebra-etale-idempotent-decomposition] to $R\\to B$ and the prime $\\mathfrak m$: there are a ring map $R\\to R'$ with $\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ etale, a prime $\\mathfrak m'\\subset R'$ with preimage $\\mathfrak m$ in $R$ and $\\kappa=\\kappa(\\mathfrak m)\\to\\kappa(\\mathfrak m')$ bijective (for the maximal ideal of the local ring $R$, $R_{\\mathfrak m}=R$ and $\\kappa(\\mathfrak m)=R/\\mathfrak m=\\kappa$), an integer $n\\ge0$, complete orthogonal idempotents $e_1,\\dots,e_n,e_\\infty$ of $C=R'\\otimes_RB$, and primes $Q_1,\\dots,Q_n$ of $C$ over $\\mathfrak m'$, such that $e_i\\notin Q_i$, and every prime $Q$ of $C$ over $\\mathfrak m'$ contains $e_\\infty$ and equals $Q_i$ whenever $e_i\\notin Q$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-etale-idempotent-decomposition",
+    "def-weil-etale-morphism",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 8$\\Rightarrow$10 (application of Lemma Tag 00UK to the finite ring map $R\\to S$)"
+   }
+  },
+  {
+   "text": "*The retraction.* $(R',\\mathfrak m')$ satisfies the hypothesis of the statement ($\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ etale, $\\mathfrak m'$ over $\\mathfrak m$, $\\kappa\\to\\kappa(\\mathfrak m')$ an isomorphism, by step 1), so there is an $R$-algebra homomorphism $\\tau:R'\\to R$ with $\\tau^{-1}(\\mathfrak m)=\\mathfrak m'$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 8$\\Rightarrow$10 (\"Apply (8) to get a retraction\")"
+   }
+  },
+  {
+   "text": "*Base change back along $\\tau$.* Let $\\varphi:C=R'\\otimes_RB\\to B$ be the ring homomorphism $r'\\otimes b\\mapsto\\tau(r')b$ (well defined by the universal property of the tensor product of commutative $R$-algebras, applied to the $R$-algebra maps $R'\\xrightarrow{\\tau}R\\to B$ and $\\mathrm{id}_B$). It is surjective, since $\\varphi(1\\otimes b)=b$; this is the identification $B=(B\\otimes_RR')\\otimes_{R',\\tau}R$ of the source, i.e. $B=C/\\ker\\varphi$. Its restriction to $R'$ (via $r'\\mapsto r'\\otimes1$) is $r'\\mapsto\\tau(r')\\cdot1_B$. Hence for every prime $\\mathfrak q$ of $B$ whose preimage in $R$ is $\\mathfrak m$, the prime $\\varphi^{-1}(\\mathfrak q)$ of $C$ has preimage $\\tau^{-1}(\\mathfrak m)=\\mathfrak m'$ in $R'$ (step 2), i.e. lies over $\\mathfrak m'$; and $\\mathfrak q=\\varphi(\\varphi^{-1}(\\mathfrak q))$ by surjectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 8$\\Rightarrow$10 (the displayed identification $S=(S\\otimes_RR')\\otimes_{R',\\tau}R$), written out by the agent"
+   }
+  },
+  {
+   "text": "*Idempotents of $B$ and the primes over $\\mathfrak m$.* Put $f_i=\\varphi(e_i)$ ($1\\le i\\le n$) and $f_\\infty=\\varphi(e_\\infty)$; as $\\varphi$ is a ring homomorphism these are complete orthogonal idempotents of $B$. Let $\\mathfrak q$ be a prime of $B$ over $\\mathfrak m$ and $Q=\\varphi^{-1}(\\mathfrak q)$, a prime of $C$ over $\\mathfrak m'$ (step 3). By step 1, $e_\\infty\\in Q$, so $f_\\infty\\in\\mathfrak q$. If $f_i\\notin\\mathfrak q$, then $e_i\\notin Q$, so $Q=Q_i$ (step 1) and $\\mathfrak q=\\varphi(Q_i)$ (step 3). Hence: every prime of $B$ over $\\mathfrak m$ contains $f_\\infty$, and for each $i$ there is at most one prime of $B$ over $\\mathfrak m$ not containing $f_i$, namely $\\varphi(Q_i)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 8$\\Rightarrow$10 (the factors $A_i=A_i'\\otimes_{R',\\tau}R$ have at most one prime over $\\mathfrak m$ and $B\\otimes_{R',\\tau}R$ none), written out by the agent"
+   }
+  },
+  {
+   "text": "*The factors.* For an idempotent $f$ of $B$, the ideal $fB$ is a ring with unit $f$ and an $R$-algebra, and $\\pi_f:B\\to fB$, $b\\mapsto fb$, is a surjective $R$-algebra homomorphism with kernel $(1-f)B$ (if $fb=0$ then $b=(1-f)b$). So $fB$ is a finite $R$-algebra (images of $R$-module generators of $B$ generate it), and $\\mathfrak n\\mapsto\\pi_f^{-1}(\\mathfrak n)$ is a bijection from the primes of $fB$ to the primes of $B$ containing $1-f$, which are exactly the primes of $B$ not containing $f$ (as $f(1-f)=0$, a prime contains $f$ or $1-f$, and not both since $f+(1-f)=1$); since $R\\to fB$ is $\\pi_f\\circ(R\\to B)$, $\\mathfrak n$ and $\\pi_f^{-1}(\\mathfrak n)$ have the same preimage in $R$. If $fB\\neq0$ it has a maximal ideal, and every maximal ideal of the finite $R$-algebra $fB$ has preimage $\\mathfrak m$ in $R$ [lem-weil-pbc-finite-algebra-local-radical]. Apply this to $f_\\infty$: a maximal ideal of $f_\\infty B$ would give a prime of $B$ over $\\mathfrak m$ not containing $f_\\infty$, impossible by step 4; so $f_\\infty B=0$, i.e. $f_\\infty=0$. Apply it to $f_i$ with $f_i\\neq0$: every maximal ideal of $f_iB$ corresponds to a prime of $B$ over $\\mathfrak m$ not containing $f_i$, of which there is at most one (step 4), and the correspondence is injective; so $f_iB$ has exactly one maximal ideal, i.e. is a local ring.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-local-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 8$\\Rightarrow$10 (\"The factor $B$ is finite over $R$ but not quasi-finite at any prime lying over $\\mathfrak m$. Hence $B=0$. The factors $A_i$ ... are local rings\"), written out by the agent; the zero factors $f_i=0$ are discarded, which the source does not mention"
+   }
+  },
+  {
+   "text": "*Conclusion.* Let $i_1<\\dots<i_r$ be the indices $i\\in\\{1,\\dots,n\\}$ with $f_i\\neq0$ ($r\\ge0$). Since $f_\\infty=0$ and $f_i=0$ for the other $i$, $f_{i_1},\\dots,f_{i_r}$ are orthogonal idempotents with sum $1$, so $B\\to f_{i_1}B\\times\\dots\\times f_{i_r}B$, $b\\mapsto(f_{i_1}b,\\dots,f_{i_r}b)$, is an $R$-algebra isomorphism (its inverse is $(b_1,\\dots,b_r)\\mapsto b_1+\\dots+b_r$: $\\sum_kf_{i_k}b=b$, and $f_{i_k}(\\sum_lb_l)=b_k$ for $b_l\\in f_{i_l}B$ by orthogonality). By step 5 each $B_k=f_{i_k}B$ is a local ring. (If $B=0$, then $r=0$ and $B$ is the empty product.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 8$\\Rightarrow$10 (\"This proves that $S$ is a finite product of local rings\")"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-etale-idempotent-decomposition",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "lem-weil-pbc-finite-algebra-local-radical"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 8$\\Rightarrow$10, with Lemma Tag 00UK (lemma-etale-makes-quasi-finite-finite) for finite $S$ (Mathlib's 00UL form); the base change along $\\tau$, the exclusion of the last factor, the locality of the factors and the discarding of zero factors written out by the agent (steps 3-6)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +122,38 @@
    "results": "only RingTheory/Artinian/Module.lean:623 (Artinian rings, IsArtinianRing.equivPi). Tool for the later split: Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq (RingTheory/Etale/QuasiFinite.lean:613, @[stacks 00UL]) is Stacks 00UK for module-finite S: an etale R', a prime P over p with bijective residue field map, complete orthogonal idempotents e_0..e_n of R' (x)_R S with exactly one prime over P in each e_i-factor (i<n) and none in the last; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (:379, @[stacks 00UJ]) the one-prime version",
    "date": "2026-10-09",
    "verdict": "no match: Stacks 04GG (8)=>(10) is not in Mathlib; its main input 00UK (finite case) is (QuasiFinite.lean:613)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If R is a local ring in which etale algebras with a rational point have sections, then every finite R-algebra is a finite product of local rings",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod (over a field), Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.finitePresentation, Algebra.exists_etale_of_isEtaleAt, Algebra.IsEtaleAt, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale, Algebra.Etale.of_isLocalization_Away",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "module-finite algebra over a henselian local ring is isomorphic to a finite product of local rings",
+   "results": "Algebra.QuasiFinite.recOn, Module.Finite.of_quasiFinite, Algebra.QuasiFinite.iff_of_isArtinianRing, HenselianLocalRing.toIsLocalRing, Algebra.finite_iff_isIntegral_and_finiteType, Algebra.QuasiFinite.finite_fiber",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Module.Finite",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'product of (finitely many )?local|04GG|00UK|00UL' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'Etale|stacks' RingTheory/Henselian.lean",
+   "results": "Artinian/Module.lean:623 (Artinian rings only), Etale/QuasiFinite.lean:612 (00UL, the decomposition used in step 1); Henselian.lean cites only 04GE and 06RR, no etale algebras",
+   "date": "2026-10-10",
+   "verdict": "no match: the statement (Stacks 04GG (8)=>(10)) is absent; its input 00UK (finite case) is lem-weil-pbc-finite-algebra-etale-idempotent-decomposition"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +173,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-retraction-finite-product-local",
+  "worker": "stage1",
+  "summary": "Split along Stacks 04GG proof of (8)=>(10) (algebra.tex 42242-42263), read before writing. Six steps: (1) the decomposition of Lemma 00UK for finite S, as new Mathlib leaf lem-weil-pbc-finite-algebra-etale-idempotent-decomposition (Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq, QuasiFinite.lean:613, hypothesis Module.Finite R S, not quasi-finiteness at the prime); (2) the statement's hypothesis gives tau; (3) the surjection phi: R' (x)_R B -> B, r'(x)b -> tau(r')b, pulls primes of B over m back to primes over m'; (4) images f_i of the idempotents: f_infinity lies in every prime over m, each f_i misses at most one; (5) via lem-weil-pbc-finite-algebra-local-radical, f_infinity = 0 and each nonzero f_iB is local; (6) zero factors dropped, B = product of the nonzero f_iB. Statement unchanged. Fresh three-kind searches recorded (2026-10-10). The previous rejected attempt's gap (A_i = 0 not excluded) is handled in steps 5-6."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Split reviewed: 6 steps along Algebra 04GG (8)=>(10): the 00UL decomposition upstairs (Mathlib leaf), retraction, surjection C -> B and primes over m, idempotents f_i, each f_i B local or zero and f_infty = 0 via lem-weil-pbc-finite-algebra-local-radical, zero factors dropped. Correct; fixes the gaps of the rejected remote attempt."
+ }
 }

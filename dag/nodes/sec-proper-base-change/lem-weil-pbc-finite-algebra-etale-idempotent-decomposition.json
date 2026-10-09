@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-finite-algebra-etale-idempotent-decomposition",
+ "kind": "statement",
+ "title": "After an etale neighbourhood with trivial residue extension, a finite algebra splits by idempotents into factors with at most one prime over the point (finite case of Stacks 00UK/00UL)",
+ "statement": "Let $R$ be a commutative ring, $\\mathfrak p\\subset R$ a prime ideal and $R\\to S$ a ring map making $S$ a finitely generated $R$-module. For a prime $\\mathfrak q$ of a ring $A$ write $\\kappa(\\mathfrak q)$ for its residue field, the residue field of the local ring $A_{\\mathfrak q}$ (the residue field of $\\operatorname{Spec}A$ at the point $\\mathfrak q$ [def-weil-residue-field]). Then there exist: a ring map $R\\to R'$ such that $\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ is etale [def-weil-etale-morphism]; a prime $\\mathfrak p'\\subset R'$ whose preimage in $R$ is $\\mathfrak p$ and such that the induced map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ is bijective; an integer $n\\ge0$; elements $e_1,\\dots,e_n,e_\\infty$ of the ring $C=R'\\otimes_RS$ (an $R'$-algebra via $r'\\mapsto r'\\otimes1$) that are complete orthogonal idempotents ($e_i^2=e_i$, $e_ie_j=0$ for $i\\neq j$, $e_1+\\dots+e_n+e_\\infty=1$); and primes $Q_1,\\dots,Q_n$ of $C$, each with preimage $\\mathfrak p'$ in $R'$, such that (a) $e_i\\notin Q_i$ for $i=1,\\dots,n$, and (b) every prime $Q$ of $C$ with preimage $\\mathfrak p'$ in $R'$ contains $e_\\infty$, and for each $i$ with $e_i\\notin Q$ one has $Q=Q_i$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00UK (lemma-etale-makes-quasi-finite-finite), in the case $S$ finite over $R$, where every prime over $\\mathfrak p$ is a point at which $R\\to S$ is quasi-finite, so the factor $B$ there has no prime over $\\mathfrak p'$; Mathlib states it as @[stacks 00UL]"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite algebra over local ring: etale neighbourhood with trivial residue field extension after which tensor product splits by complete orthogonal idempotents with one prime over P in each factor",
+   "results": "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (Mathlib.RingTheory.Etale.QuasiFinite, one-prime version 00UJ), Algebra.FormallyEtale.iff_exists_algEquiv_prod, RingHom.Etale, Algebra.Etale.of_isLocalizationAway, Algebra.IsEtaleAt, Algebra.exists_etale_of_isEtaleAt, Algebra.etaleLocus, Algebra.Etale.iff_exists_algEquiv_prod",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; the 00UJ one-prime version points to the file containing the match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, CompleteOrthogonalIdempotents, Ideal.LiesOver",
+   "results": "Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq (Mathlib.RingTheory.Etale.QuasiFinite), the only result",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00U\\|completeOrthogonalIdempotents_forall' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale/; read QuasiFinite.lean 600-640",
+   "results": "RingTheory/Etale/QuasiFinite.lean:612-624 @[stacks 00UL] Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq [Module.Finite R S] (p : Ideal R) [p.IsPrime] : exists R' : Type u, Algebra.Etale R R', P prime, P.LiesOver p, n, e : Fin (n+1) -> R' (x)[R] S CompleteOrthogonalIdempotents, P' : Fin n -> Ideal, each prime and LiesOver P, Function.Bijective (Ideal.ResidueField.mapₐ p P ...), (forall i, e i.castSucc notin P' i), forall P'' prime LiesOver P, e (Fin.last n) in P'' and forall i, e i.castSucc notin P'' -> P'' = P' i; also :379 @[stacks 00UJ] exists_etale_isIdempotentElem_forall_liesOver_eq (one prime)",
+   "date": "2026-10-10",
+   "verdict": "match: hypothesis is Module.Finite R S (S finite over R), not quasi-finiteness at the prime; the docstring says so"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq",
+  "file": "Mathlib/RingTheory/Etale/QuasiFinite.lean",
+  "line": 613,
+  "how": "exact up to notation, read 2026-10-10 (lines 602-624): Module.Finite R S is 'S a finitely generated R-module'; e : Fin (n+1) -> R' (x)[R] S with e i.castSucc = e_{i+1} and e (Fin.last n) = e_infinity; P' i = Q_{i+1}; Ideal.LiesOver P p is 'preimage of P is p' (Ideal/Over.lean:125); Ideal.ResidueField p is the residue field of Localization.AtPrime p; R' lives in the universe of R. The node's 'Spec R' -> Spec R etale' is Algebra.Etale R R' by AlgebraicGeometry.HasRingHomProperty.Spec_iff (AlgebraicGeometry/Morphisms/RingHomProperties.lean:360) with instance HasRingHomProperty @Etale RingHom.Etale (Morphisms/Etale.lean:56) and RingHom.etale_algebraMap (RingTheory/RingHom/Etale.lean:37), as for lem-weil-pbc-etale-ring-base-change"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-retraction-finite-product-local",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq (RingTheory/Etale/QuasiFinite.lean:613, Module.Finite R S, @[stacks 00UL]); statement written in Mathlib's form."
+ }
+}
