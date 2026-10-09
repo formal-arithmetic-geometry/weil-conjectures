@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+ "kind": "statement",
+ "title": "Finitely many finite separable extensions embed into one finite Galois extension",
+ "statement": "Let $k$ be a field, $n\\ge0$, and let $L_1,\\dots,L_n$ be field extensions of $k$ [def-pc-field-extension] which are finite ($\\dim_kL_i<\\infty$) and separable algebraic [def-weil-pbc-separable-algebraic-extension]. Then there are a field extension $L/k$ and homomorphisms of $k$-algebras $\\tau_i:L_i\\to L$ ($i=1,\\dots,n$) such that $L/k$ is finite ($\\dim_kL<\\infty$), separable algebraic [def-weil-pbc-separable-algebraic-extension], and normal: for every $\\beta\\in L$ the minimal polynomial of $\\beta$ over $k$ (as in [def-weil-pbc-separable-algebraic-extension]) is a product of polynomials of degree one in $L[T]$. (That is, $L/k$ is a finite Galois extension, Stacks, Fields, Definition 09I0, receiving every $L_i$.)",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma 09DT (fields-lemma-normal-closure, line 2086: existence of the normal closure of a finite extension) and Lemma 0EXM (fields-lemma-normal-closure-galois, line 2704: the normal closure of a finite separable extension is Galois); a finite separable extension containing copies of all L_i is obtained from Fields, Lemma 09GU (fields-lemma-map-into-algebraic-closure, line 1023: embed each L_i into an algebraic closure) and Lemma 09HC (fields-lemma-separable-elements, line 1435: the compositum of the images is separable). Used in the proof of More on Morphisms, Lemma 02LM (more-morphisms.tex lines 12064-12066: 'Choose a finite Galois extension L/kappa(s) such that there exist kappa(s)-embeddings L_i -> L')"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finitely many finite separable field extensions of k embed into one finite Galois extension of k",
+   "results": "FiniteGaloisIntermediateField, FiniteGaloisIntermediateField.adjoin, FiniteGaloisIntermediateField.isGalois, FiniteGaloisIntermediateField.toIntermediateField (Mathlib.FieldTheory.Galois.GaloisClosure); IsGalois.tfae, IsGalois.of_separable_splitting_field_aux, IsGalois.sup_right (Mathlib.FieldTheory.Galois.Basic); FiniteField.nonempty_algHom_of_finrank_dvd",
+   "date": "2026-10-10",
+   "verdict": "no match: ingredients (smallest finite Galois intermediate field containing a finite set inside a Galois K/k)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "there exists a finite Galois extension L of k and k-algebra homomorphisms from each finite separable extension K_i into L",
+   "results": "IsSepClosure.isGalois (Mathlib.FieldTheory.IsSepClosed), IsGaloisGroup.finite, IsGaloisGroup.isGalois, IntermediateField.normal_iff_forall_fieldRange_le, IsNormalClosure.lift (Mathlib.FieldTheory.Normal.Closure), isGalois_iff, IsAbelianGalois.of_algHom",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteGaloisIntermediateField.adjoin",
+   "results": "FiniteGaloisIntermediateField.adjoin, subset_adjoin, adjoin_simple_le_iff, adjoin_map, adjoin_val (= IntermediateField.normalClosure k (adjoin k s) K), adjoin_simple_map_algEquiv (Mathlib.FieldTheory.Galois.GaloisClosure)",
+   "date": "2026-10-10",
+   "verdict": "no match: a construction in a few lines (Ω = SeparableClosure k is Galois over k by IsSepClosure.isGalois, IsSepClosed.lift L_i → Ω, then FiniteGaloisIntermediateField.adjoin k of the union of the images of k-bases, subset_adjoin), not one line"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists.*IsGalois\\|∃.*IsGalois' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory; grep -n 'def adjoin\\|instance IsGalois.normalClosure\\|irreducible_def lift' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Galois/GaloisClosure.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Galois/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean",
+   "results": "only KummerExtension.exists_root_adjoin_eq_top_of_isCyclic (irrelevant); GaloisClosure.lean:108 FiniteGaloisIntermediateField.adjoin; Galois/Basic.lean:583 IsGalois.normalClosure (@[stacks 0EXM]); IsSepClosed.lean:294 IsSepClosed.lift",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-separable-split-purely-inseparable-residue-fields",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

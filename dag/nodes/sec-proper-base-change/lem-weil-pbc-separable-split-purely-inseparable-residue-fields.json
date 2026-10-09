@@ -12,9 +12,84 @@
   "def-weil-pbc-separable-algebraic-extension",
   "def-weil-pbc-finite-purely-inseparable-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Separable parts. Fix $i$. Since $K_i/k$ is finite, it is algebraic (each $\\alpha\\in K_i$ satisfies a linear dependence among $1,\\alpha,\\dots,\\alpha^{d}$, $d=\\dim_kK_i$). Let $L_i\\subseteq K_i$ be the separable algebraic closure of $k$ in $K_i$ [def-weil-pbc-relative-separable-closure]. By [lem-weil-pbc-separable-first-purely-inseparable] (Stacks 030K), $L_i$ is a subfield of $K_i$ containing $k$, $L_i/k$ is separable algebraic [def-weil-pbc-separable-algebraic-extension], and $K_i/L_i$ is purely inseparable [def-weil-pbc-finite-purely-inseparable-extension]: if $\\operatorname{char}k=p>0$, every $\\alpha\\in K_i$ has $\\alpha^{p^m}\\in L_i$ for some $m\\ge0$; if $\\operatorname{char}k=0$, then $L_i=K_i$. Moreover $L_i/k$ is finite, $L_i$ being a $k$-subspace of the finite-dimensional $K_i$.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "def-weil-pbc-relative-separable-closure",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of More on Morphisms, Lemma 02LM, lines 12062-12064 ('let kappa(s) subset L_i subset kappa(x_i) be the subfield such that L_i/kappa(s) is separable, and kappa(x_i)/L_i is purely inseparable'), by Fields, Lemma 030K (fields.tex line 1704)"
+   }
+  },
+  {
+   "text": "Choice of $L$. Apply [lem-weil-pbc-finite-galois-receiving-separable-extensions] to the finite separable algebraic extensions $L_1,\\dots,L_n$ of $k$ from step 1: there are a finite field extension $L/k$ [def-pc-field-extension], separable algebraic [def-weil-pbc-separable-algebraic-extension] and normal (the minimal polynomial over $k$ of every element of $L$ splits into linear factors in $L[T]$), and $k$-algebra homomorphisms $\\tau_i:L_i\\to L$. This $L$ is finite and separable algebraic over $k$, as the statement requires (and finite Galois, as in the parenthetical remark). It remains to check (a) and (b) for each $i$; fix $i$ and put $A=L\\otimes_kK_i$, an $L$-algebra through $l\\mapsto l\\otimes1$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "def-pc-field-extension",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of More on Morphisms, Lemma 02LM, lines 12064-12066 ('Choose a finite Galois extension L/kappa(s) such that there exist kappa(s)-embeddings L_i -> L'); Fields, Lemmas 09DT and 0EXM"
+   }
+  },
+  {
+   "text": "Finitely many primes, residue fields finite over $L$. If $e_1,\\dots,e_d$ is a $k$-basis of $K_i$, then every $l\\otimes a$ with $a=\\sum_jc_je_j$ ($c_j\\in k$) equals $\\sum_j(c_jl)(1\\otimes e_j)$, so $1\\otimes e_1,\\dots,1\\otimes e_d$ generate $A$ as an $L$-module: $A$ is a finite $L$-algebra. The field $L$ is a local ring whose only prime ideal is its maximal ideal $(0)$. By [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] (with $R=L$, $B=A$), $A$ has only finitely many prime ideals, and each of them is maximal. This is (a). For a prime $\\mathfrak p$ of $A$, the quotient $E=A/\\mathfrak p$ by the maximal ideal $\\mathfrak p$ is a field, and it is spanned over $L$ by the images of $1\\otimes e_1,\\dots,1\\otimes e_d$, so $\\dim_LE\\le d<\\infty$: $E$ is a finite field extension of $L$ through $\\iota_L:L\\to E$, $l\\mapsto(l\\otimes1)\\bmod\\mathfrak p$ [def-pc-field-extension].",
+   "uses": [
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "def-pc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of More on Morphisms, Lemma 02LM, lines 12070-12075 ('these points y_{i,j} correspond exactly to the primes in the rings kappa(u) (x)_{kappa(s)} kappa(x_i). This also explains why there are finitely many'); written out by the agent"
+   }
+  },
+  {
+   "text": "The image of $L_i$ lies in the image of $L$. Let $\\iota_K:K_i\\to E$, $a\\mapsto(1\\otimes a)\\bmod\\mathfrak p$; $\\iota_L$ and $\\iota_K$ are ring homomorphisms and agree on $k$ (since $c\\otimes1=1\\otimes c$ for $c\\in k$), so both are $k$-algebra homomorphisms. Let $b\\in L_i$ and let $g\\in k[T]$ be its minimal polynomial over $k$ [def-weil-pbc-separable-algebraic-extension]. As $\\tau_i$ is an injective $k$-algebra homomorphism, $g(\\tau_i(b))=\\tau_i(g(b))=0$ and $g$ is monic irreducible, so $g$ is the minimal polynomial of $\\tau_i(b)\\in L$; by normality of $L$ (step 2), $g=\\prod_{j=1}^r(T-c_j)$ with $c_j\\in L$. Applying $\\iota_L$ to the coefficients (it fixes those of $g$, which lie in $k$), $g=\\prod_j(T-\\iota_L(c_j))$ in $E[T]$. Since $g(\\iota_K(b))=\\iota_K(g(b))=0$ and $E$ is a field, $\\iota_K(b)=\\iota_L(c_j)$ for some $j$. Hence $\\iota_K(L_i)\\subseteq\\iota_L(L)$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of More on Morphisms, Lemma 02LM, lines 12076-12079 ('By our choice of L (and elementary field theory) we see that kappa(u) subset kappa(y_{i,j}) is finite purely inseparable'); the elementary field theory written out by the agent"
+   }
+  },
+  {
+   "text": "$E/L$ is purely inseparable. Every element of $A$ is a finite sum $\\sum_rl_r\\otimes a_r=\\sum_r(l_r\\otimes1)(1\\otimes a_r)$, so every element of $E$ has the form $x=\\sum_r\\iota_L(l_r)\\iota_K(a_r)$ ($l_r\\in L$, $a_r\\in K_i$). If $\\operatorname{char}k=0$, then $K_i=L_i$ (step 1), so $\\iota_K(a_r)\\in\\iota_L(L)$ by step 4 and $x\\in\\iota_L(L)$: $\\iota_L$ is onto, $E=L$, which is the meaning of purely inseparable in characteristic $0$ [def-weil-pbc-finite-purely-inseparable-extension]. If $\\operatorname{char}k=p>0$, then $E$ has characteristic $p$ (it is a $k$-algebra); choose by step 1 integers $m_r$ with $a_r^{p^{m_r}}\\in L_i$ and put $m=\\max_rm_r$, so $a_r^{p^m}=(a_r^{p^{m_r}})^{p^{m-m_r}}\\in L_i$ for all $r$. Since $y\\mapsto y^{p^m}$ is a ring endomorphism of $E$, $x^{p^m}=\\sum_r\\iota_L(l_r^{p^m})\\,\\iota_K(a_r^{p^m})$, which lies in $\\iota_L(L)$ by step 4. So every element of $E$ has a $p$-power in $L$, and with step 3, $E$ is a finite purely inseparable extension of $L$ [def-weil-pbc-finite-purely-inseparable-extension]. This is (b).",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of More on Morphisms, Lemma 02LM, lines 12076-12079 ('by our choice of L (and elementary field theory) ... finite purely inseparable'); the elementary field theory written out by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "def-weil-pbc-relative-separable-closure",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "def-pc-field-extension",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Proof of More on Morphisms, Lemma 02LM (lines 12060-12079), with Fields, Lemmas 030K, 09DT, 0EXM; the 'elementary field theory' of line 12077 (steps 3-5) is written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,7 +121,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +141,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-separable-split-purely-inseparable-residue-fields",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against Stacks 02LM, more-morphisms.tex 12060-12079, and Fields 030K/09DT/0EXM). Proof in five steps: (1) L_i = separable closure of k in K_i, K_i/L_i purely inseparable, via new Mathlib leaf lem-weil-pbc-separable-first-purely-inseparable (030K; separableClosure.isPurelyInseparable + separableClosure.isSeparable); (2) L finite separable and normal over k receiving all L_i, via new unsplit node lem-weil-pbc-finite-galois-receiving-separable-extensions (09DT, 0EXM, 09GU, 09HC); (3) L (x)_k K_i is a finite L-algebra, so by the existing leaf lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum (R=L) it has finitely many primes, all maximal, residue fields finite over L; (4) the image of L_i in each residue field E lies in the image of L (minimal polynomials split in the normal L; elementary); (5) every element of E has a p-power in L (Frobenius additivity; char 0: E = L), elementary. The brief's route through the splitting L (x)_k L_i = prod_sigma L and the tensor base change of a purely inseparable extension is not needed; neither lem-weil-pbc-etale-algebra-over-field-product nor lem-weil-pbc-separable-tensor-purely-inseparable-field (claimed by another group) is used. stmt_deps unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Five steps (Stacks 02LM 'elementary field theory' written out): separable closures L_i (new Mathlib leaf: separableClosure.isPurelyInseparable PurelyInseparable/Basic.lean:481 @[stacks 030K] with separableClosure.isSeparable SeparableClosure.lean:151, verified), a finite Galois L receiving the L_i (new unsplit node, 09DT/0EXM), finitely many primes of L (x) K_i with residue fields finite over L (existing leaf), the image of L_i lies in the image of L (normality; elementary), E/L purely inseparable (elementary). Tags verified (030K, 09DT, 0EXM, 09HC, 09GU)."
+ }
 }

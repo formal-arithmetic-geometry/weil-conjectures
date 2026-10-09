@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-separable-first-purely-inseparable",
+ "kind": "statement",
+ "title": "An algebraic extension is purely inseparable over the separable closure of the base in it",
+ "statement": "Let $k$ be a field and $K/k$ an algebraic field extension [def-pc-field-extension] (every element of $K$ is a root of a nonzero polynomial with coefficients in $k$). Let $K_s\\subseteq K$ be the separable algebraic closure of $k$ in $K$ [def-weil-pbc-relative-separable-closure], i.e. the set of elements of $K$ separable over $k$. Then $K_s$ is a subfield of $K$ containing the image of $k$; the extension $K_s/k$ is separable algebraic [def-weil-pbc-separable-algebraic-extension]; and $K/K_s$ is purely inseparable in the sense of [def-weil-pbc-finite-purely-inseparable-extension]: if $k$ has characteristic $p>0$, then for every $\\alpha\\in K$ there is an integer $n\\ge0$ with $\\alpha^{p^n}\\in K_s$, and if $k$ has characteristic $0$, then $K_s=K$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma 030K (fields-lemma-separable-first, line 1704) and its proof; that the separable elements form a subextension is Fields, Lemma 09HC (fields-lemma-separable-elements, line 1435)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-relative-separable-closure",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebraic extension E/F: separable closure of F in E is separable over F and E is purely inseparable over it",
+   "results": "separableClosure.isSeparable, separableClosure.isAlgebraic, separableClosure (Mathlib.FieldTheory.SeparableClosure); separableClosure.isPurelyInseparable, IsPurelyInseparable.mk (Mathlib.FieldTheory.PurelyInseparable.Basic); IsSepClosure (Mathlib.FieldTheory.IsSepClosed)",
+   "date": "2026-10-10",
+   "verdict": "match: separableClosure.isPurelyInseparable together with separableClosure.isSeparable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable (↥(separableClosure _ _)) _",
+   "results": "separableClosure.isPurelyInseparable (F E) [Algebra.IsAlgebraic F E] : IsPurelyInseparable (separableClosure F E) E (Mathlib.FieldTheory.PurelyInseparable.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance separableClosure.isPurelyInseparable\\|instance separableClosure.isSeparable\\|theorem isPurelyInseparable_iff_pow_mem\\|theorem IsPurelyInseparable.surjective_algebraMap_of_isSeparable' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/PurelyInseparable/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/SeparableClosure.lean",
+   "results": "PurelyInseparable/Basic.lean:481 instance separableClosure.isPurelyInseparable (@[stacks 030K]); SeparableClosure.lean:151 instance separableClosure.isSeparable (@[stacks 030K]); PurelyInseparable/Basic.lean:211 isPurelyInseparable_iff_pow_mem (@[stacks 09HE]); PurelyInseparable/Basic.lean:158 IsPurelyInseparable.surjective_algebraMap_of_isSeparable",
+   "date": "2026-10-10",
+   "verdict": "match (sources read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "separableClosure.isPurelyInseparable",
+  "file": "Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+  "line": 481,
+  "how": "specializes in one line per clause: `separableClosure F E` (Mathlib/FieldTheory/SeparableClosure.lean:83, an IntermediateField, so a subfield containing F) is K_s; instance `separableClosure.isSeparable` (SeparableClosure.lean:151, @[stacks 030K]) gives Algebra.IsSeparable F K_s (separable algebraic); instance `separableClosure.isPurelyInseparable` [Algebra.IsAlgebraic F E] (PurelyInseparable/Basic.lean:481, @[stacks 030K]) gives IsPurelyInseparable K_s E; in characteristic p, `isPurelyInseparable_iff_pow_mem` (PurelyInseparable/Basic.lean:211, with ExpChar p) turns it into the power condition; in characteristic 0, E/K_s is separable (char 0 fields are perfect: Algebra.IsSeparable of PerfectField) and `IsPurelyInseparable.surjective_algebraMap_of_isSeparable` (PurelyInseparable/Basic.lean:158) gives K_s = E. Sources read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-separable-split-purely-inseparable-residue-fields",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
