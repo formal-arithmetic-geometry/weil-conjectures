@@ -12,9 +12,58 @@
   "def-weil-affine-spectrum",
   "def-weil-connected-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (reduce to a domain).* The quotient map $A\\to A/\\mathfrak p$ is integral, and [lem-weil-pbc-integral-over-henselian-pair] therefore makes $(A/\\mathfrak p,(I+\\mathfrak p)/\\mathfrak p)$ a henselian pair. Since $\\mathfrak p$ is prime, $A/\\mathfrak p$ is a nonzero domain. The quotient-spectrum description identifies $\\operatorname{Spec}((A/\\mathfrak p)/((I+\\mathfrak p)/\\mathfrak p))$ homeomorphically with the subspace $V(\\mathfrak p+I)\\subseteq\\operatorname{Spec}A$: the map for a quotient is a closed immersion [lem-weil-pbc-spec-quotient-closed-immersion], and its image consists exactly of primes containing the quotient ideal by [def-weil-affine-spectrum]. Thus it is enough to prove that if $(A,I)$ is henselian and $A$ is a nonzero domain, then $\\operatorname{Spec}(A/I)$ is connected.",
+   "uses": [
+    "lem-weil-pbc-integral-over-henselian-pair",
+    "lem-weil-pbc-spec-quotient-closed-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.11.16 (Tag 09Y6), proof: first paragraph, using Lemma 15.11.8 (Tag 09XK)"
+   }
+  },
+  {
+   "text": "*Step 2 (the quotient is nonzero).* The quotient $A/I$ cannot be the zero ring. Otherwise, applying the henselian lifting condition [def-weil-pbc-henselian-terminology] to the finite $A$-algebra $B=A$, the unique idempotent of $B/IB=0$ would have the two distinct lifts $0$ and $1$ in the nonzero domain $A$, contradicting uniqueness. Hence the hypothesis needed for the affine connectedness criterion applies to $A/I$.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.11.16 (Tag 09Y6), proof together with the nonzero-ring hypothesis of Algebra, Lemma 10.21.2 (Tag 00E9)"
+   }
+  },
+  {
+   "text": "*Step 3 (idempotent contradiction).* If $\\operatorname{Spec}(A/I)$ were disconnected, the affine clopen-idempotent correspondence [lem-weil-pbc-spec-clopen-idempotent] would give a nontrivial idempotent $\\bar e\\in A/I$: choose a nonempty proper clopen piece of the disconnection, and its corresponding idempotent is neither $0$ nor $1$. Apply the henselian condition to $B=A$ to lift $\\bar e$ to an idempotent $e\\in A$. Since $A$ is a domain, $e(e-1)=0$ forces $e=0$ or $e=1$, whose reductions are respectively $0$ or $1$, contrary to the choice of $\\bar e$. Therefore $\\operatorname{Spec}(A/I)$ is connected, and Step 1 transports this connectedness (including nonemptiness) to $V(\\mathfrak p+I)$.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "def-weil-pbc-henselian-terminology",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.11.16 (Tag 09Y6), proof: second paragraph, using Algebra, Lemma 10.21.2 (Tag 00E9) and the characterization of henselian pairs in Lemma 15.11.6 (Tag 09XI)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.11.16 (Tag 09Y6, lemma-irreducible-henselian-pair-connected)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +88,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,10 +109,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-henselian-pair-prime-connected",
+  "worker": "stage1",
+  "summary": "Split the Stacks 09Y6 proof into quotient reduction, a direct proof that the quotient is nonzero from the henselian lifting condition, and the nontrivial-idempotent contradiction in a domain. The quotient-spectrum homeomorphism is made explicit using the existing quotient closed-immersion Mathlib leaf and affine-spectrum definition; the affine clopen-idempotent correspondence supplies the contradiction. No new nodes were needed, and the item already had the required three Mathlib searches."
+ },
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is More on Algebra 09Y6; self-contained; correct; unsplit."
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Repaired as asked (one commit on the tip). Three steps, no new nodes, following 09Y6: reduction to the domain A/p with the henselian pair (A/p,(I+p)/p) by lem-weil-pbc-integral-over-henselian-pair and the closed-immersion identification of Spec of the quotient with V(p+I); A/I nonzero because the zero quotient would have the two idempotent lifts 0 and 1 in the domain A; a disconnection of Spec(A/I) would give a nontrivial idempotent of A/I (lem-weil-pbc-spec-clopen-idempotent), which lifts to an idempotent of the domain A, hence to 0 or 1, contradiction. The review by C1 is a real review."
  }
 }
