@@ -87,7 +87,10 @@ of `Dᵇctf` is bounded below of étale origin.
 complexes of étale origin of finite Tor amplitude, which is the blueprint's `Dᵇctf(X, A)` at the
 finite coefficient stages `A = 𝒪_E/ϖⁿ` (blueprint `sk-d-setup`, `def-weil-pbc-proetale-modules`).
 The coefficients are an arbitrary Grothendieck abelian monoidal closed concrete category `A`;
-the intended instantiation is `A = ModuleCat (𝒪_E/ϖⁿ)`.
+the intended instantiation is `A = ModuleCat (𝒪_E/ϖⁿ)`. They are assumed to have étale
+exceptional inverse images preserving bounded below objects
+(`AlgebraicGeometry.Etale.HasBoundedBelowUpperShrieks`), out of which the constructible `f^!` is
+built; this holds for torsion coefficients, in particular for `ModuleCat (𝒪_E/ϖⁿ)`.
 
 The fields of the package are the comparison isomorphisms of the six operations restricted to
 `Dᵇctf` on geometric schemes, that is, natural isomorphisms between functors out of the
@@ -181,7 +184,7 @@ lemma IsGeometric.of_eq {X s : Scheme.{u}} {a b : X ⟶ s} (h : a = b) [IsGeomet
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A]
+  [Abelian.HasFunctorialFlatResolution A] [Etale.HasBoundedBelowUpperShrieks A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
@@ -260,6 +263,7 @@ noncomputable def ctfHomMk {C : Type*} [Category C] {F G : C ⥤ Ctf A X}
       G ⋙ (DerivedCategory.constructibleFiniteTor A X).ι) : F ⟶ G :=
   ((DerivedCategory.constructibleFiniteTor A X).fullyFaithfulι.whiskeringRight C).preimage e
 
+omit [Etale.HasBoundedBelowUpperShrieks A] in
 @[simp]
 lemma ctfHomMk_app_hom {C : Type*} [Category C] {F G : C ⥤ Ctf A X}
     (e : F ⋙ (DerivedCategory.constructibleFiniteTor A X).ι ⟶

@@ -87,6 +87,7 @@ noncomputable def cohomology (i : ℤ) :
 scoped notation "H(" X ")[" A "](" i ")" => cohomology A X i
 
 variable {X} {Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a]
+  [Etale.HasBoundedBelowUpperShriek A a]
 
 /-- Blueprint `sk-def-ops`: The six operations, the dualizing complex, the duals.
 
