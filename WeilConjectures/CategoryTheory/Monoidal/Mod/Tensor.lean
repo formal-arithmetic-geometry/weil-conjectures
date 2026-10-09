@@ -165,6 +165,39 @@ noncomputable def tensorLeftDiagramMap {M M' : Mod C A} (f : M ⟶ M') :
 noncomputable def tensorLeftMap {M M' : Mod C A} (f : M ⟶ M') : tensorLeft M ⟶ tensorLeft M' :=
   Functor.whiskerRight ((flipFunctor _ _ _).map (tensorLeftDiagramMap A f)) colim
 
+lemma tensorRightMap_id (X : C) : tensorRightMap A (𝟙 X) = 𝟙 _ :=
+  NatTrans.ext (funext fun P ↦ Mod.hom_ext _ _ (MonoidalCategory.whiskerLeft_id _ _))
+
+lemma tensorLeftDiagramMap_comp {M M' M'' : Mod C A} (f : M ⟶ M') (g : M' ⟶ M'') :
+    tensorLeftDiagramMap A (f ≫ g) = tensorLeftDiagramMap A f ≫ tensorLeftDiagramMap A g := by
+  ext j : 2
+  cases j
+  · exact (congrArg (tensorRightMap A) (MonoidalCategory.whiskerLeft_comp A _ _)).trans
+      (tensorRightMap_comp _ _)
+  · exact tensorRightMap_comp _ _
+
+lemma tensorLeftDiagramMap_id (M : Mod C A) : tensorLeftDiagramMap A (𝟙 M) = 𝟙 _ := by
+  ext j : 2
+  cases j
+  · exact (congrArg (tensorRightMap A) (MonoidalCategory.whiskerLeft_id A _)).trans
+      (tensorRightMap_id _)
+  · exact tensorRightMap_id _
+
+/-- An isomorphism `M ≅ M'` induces `- ⊗_A M ≅ - ⊗_A M'`. -/
+noncomputable def tensorLeftMapIso {M M' : Mod C A} (e : M ≅ M') : tensorLeft M ≅ tensorLeft M' where
+  hom := tensorLeftMap e.hom
+  inv := tensorLeftMap e.inv
+  hom_inv_id := by
+    rw [tensorLeftMap, tensorLeftMap, ← Functor.whiskerRight_comp, ← Functor.map_comp,
+      ← tensorLeftDiagramMap_comp, e.hom_inv_id, tensorLeftDiagramMap_id, Functor.map_id,
+      Functor.whiskerRight_id']
+    rfl
+  inv_hom_id := by
+    rw [tensorLeftMap, tensorLeftMap, ← Functor.whiskerRight_comp, ← Functor.map_comp,
+      ← tensorLeftDiagramMap_comp, e.inv_hom_id, tensorLeftDiagramMap_id, Functor.map_id,
+      Functor.whiskerRight_id']
+    rfl
+
 end TensorLeft
 
 section Hom
@@ -201,6 +234,10 @@ noncomputable def ihomAdjunction (M : Mod C A) : tensorLeft M ⊣ ihom M :=
 instance (M : Mod C A) : (ihom M).Additive :=
   have := (ihomAdjunction M).rightAdjoint_preservesLimits
   Functor.additive_of_preserves_binary_products _
+
+/-- An isomorphism `M ≅ M'` induces `Hom_A(M', -) ≅ Hom_A(M, -)`. -/
+noncomputable def ihomMapIso {M M' : Mod C A} (e : M ≅ M') : ihom M' ≅ ihom M :=
+  conjugateIsoEquiv (ihomAdjunction M') (ihomAdjunction M) (tensorLeftMapIso e)
 
 /-- The internal hom is contravariant in the first variable. -/
 noncomputable def ihomMap {M M' : Mod C A} (f : M ⟶ M') : ihom M' ⟶ ihom M :=

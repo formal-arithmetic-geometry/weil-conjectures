@@ -270,7 +270,29 @@ variable (l) in
 /-- The pushforwards of sheaves of modules along equal morphisms are isomorphic. -/
 noncomputable def adicLowerStarCongr {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g') :
     (g)_*ᵃ[l] ≅ (g')_*ᵃ[l] :=
-  eqToIso (by rw [h])
+  NatIso.ofComponents (fun M ↦ Mod.isoMk (M := (g)_*ᵃ[l].obj M) (N := (g')_*ᵃ[l].obj M)
+      ((lowerStarCongr (WeilCoefficients.{u} l) h).app M.X) (by
+        subst h
+        simp only [lowerStarCongr_rfl, Iso.app_hom, Iso.refl_hom, NatTrans.id_app]
+        erw [Category.comp_id, MonoidalCategory.whiskerLeft_id, Category.id_comp]))
+    fun f ↦ Mod.hom_ext _ _ ((lowerStarCongr (WeilCoefficients.{u} l) h).hom.naturality f.hom)
+
+lemma adicLowerStarCongr_hom_app_hom {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g')
+    (M : AdicSheaf l Z) :
+    ((adicLowerStarCongr l h).hom.app M).hom = (lowerStarCongr (WeilCoefficients.{u} l) h).hom.app M.X :=
+  rfl
+
+lemma adicLowerStarComp_hom_app_hom {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (M : AdicSheaf l T) :
+    ((adicLowerStarComp l h₁ h₂).hom.app M).hom =
+      (lowerStarComp (WeilCoefficients.{u} l) h₁ h₂).hom.app M.X :=
+  rfl
+
+lemma adicLowerStarComp_inv_app_hom {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (M : AdicSheaf l T) :
+    ((adicLowerStarComp l h₁ h₂).inv.app M).hom =
+      (lowerStarComp (WeilCoefficients.{u} l) h₁ h₂).inv.app M.X :=
+  rfl
 
 variable (l) in
 /-- The pullbacks of sheaves of modules along equal morphisms are isomorphic. -/
@@ -309,6 +331,63 @@ noncomputable def adicUpperStarUnitIso {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
     (g)^*ᵃ[l].obj (AdicSheaf.unit l Y) ≅ AdicSheaf.unit l Z :=
   Mod.regularIsoOfIsIso _
 
+variable (l) in
+/-- **The pushforward of the constant `ℓ`-adic sheaf along an isomorphism** `e : X ≅ Y` is the
+constant `ℓ`-adic sheaf, as sheaves of modules: the inverse of the ring isomorphism
+`ℚ̄_ℓ,Y ⟶ e_* ℚ̄_ℓ,X`, whose underlying morphism is
+`AlgebraicGeometry.ProEtale.adicConstantSheafLowerStarIso`. -/
+noncomputable def adicLowerStarUnitIso {X Y : Scheme.{u}} (e : X ≅ Y) :
+    (e.hom)_*ᵃ[l].obj (AdicSheaf.unit l X) ≅ AdicSheaf.unit l Y :=
+  Mod.isoMk (M := (e.hom)_*ᵃ[l].obj (AdicSheaf.unit l X)) (N := AdicSheaf.unit l Y)
+    (adicConstantSheafLowerStarIso l e) (by
+      have : IsMonHom (adicConstantSheafLowerStarIso l e).inv :=
+        inferInstanceAs (IsMonHom (adicConstantSheafToLowerStar l e.hom))
+      have : IsMonHom (adicConstantSheafLowerStarIso l e).hom := by
+        have : IsMonHom (inv (adicConstantSheafLowerStarIso l e).inv) := inferInstance
+        rwa [IsIso.Iso.inv_inv] at this
+      have h := IsMonHom.mul_hom (f := (adicConstantSheafLowerStarIso l e).hom)
+      change ((adicConstantSheafLowerStarIso l e).inv ▷ _ ≫ μ) ≫ _ = _
+      rw [Category.assoc, h, tensorHom_def, Category.assoc, ← comp_whiskerRight_assoc,
+        Iso.inv_hom_id, id_whiskerRight, Category.id_comp]
+      rfl)
+
+lemma adicLowerStarUnitIso_hom_hom {X Y : Scheme.{u}} (e : X ≅ Y) :
+    (adicLowerStarUnitIso l e).hom.hom = (adicConstantSheafLowerStarIso l e).hom :=
+  rfl
+
 end Isos
 
 end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale.AdicSheaf
+
+variable {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
+
+/-- Multiplication by a scalar `c ∈ ℚ̄_ℓ`, an endomorphism of a sheaf of `ℚ̄_ℓ,X`-modules. -/
+noncomputable def smul (c : ULift.{u + 1} (PadicAlgCl l)) (M : AdicSheaf l X) : M ⟶ M :=
+  Mod.homMk (c • 𝟙 M.X) (by
+    rw [Linear.comp_smul, Category.comp_id, MonoidalLinear.whiskerLeft_smul, Linear.smul_comp,
+      MonoidalCategory.whiskerLeft_id, Category.id_comp])
+
+@[simp]
+lemma smul_hom (c : ULift.{u + 1} (PadicAlgCl l)) (M : AdicSheaf l X) :
+    (smul c M).hom = c • 𝟙 M.X :=
+  rfl
+
+lemma smul_comp (c : ULift.{u + 1} (PadicAlgCl l)) {M N : AdicSheaf l X} (f : M ⟶ N) :
+    smul c M ≫ f = f ≫ smul c N :=
+  Mod.hom_ext _ _ (by simp)
+
+lemma smul_smul (c d : ULift.{u + 1} (PadicAlgCl l)) (M : AdicSheaf l X) :
+    smul c M ≫ smul d M = smul (d * c) M :=
+  Mod.hom_ext _ _ (by simp [_root_.smul_smul])
+
+lemma smul_one (M : AdicSheaf l X) : smul 1 M = 𝟙 M :=
+  Mod.hom_ext _ _ (by simp)
+
+/-- The pushforward commutes with multiplication by a scalar. -/
+lemma adicLowerStar_map_smul {Z : Scheme.{u}} (g : X ⟶ Z) (c : ULift.{u + 1} (PadicAlgCl l))
+    (M : AdicSheaf l X) : (g)_*ᵃ[l].map (smul c M) = smul c ((g)_*ᵃ[l].obj M) :=
+  Mod.hom_ext _ _ (by ext : 3; rfl)
+
+end AlgebraicGeometry.ProEtale.AdicSheaf

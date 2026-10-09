@@ -182,29 +182,18 @@ section Scalar
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- The pushforward of pro-étale sheaves commutes with multiplication by a scalar. -/
-lemma ProEtale.lowerStar_map_smul_id {Z Y : Scheme.{u}} (g : Z ⟶ Y)
-    (G : Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l))
-    (c : ULift.{u + 1} (PadicAlgCl l)) :
-    (g)_*[WeilCoefficients.{u} l].map (ObjectProperty.homMk (c • 𝟙 G.obj)) =
-      ObjectProperty.homMk (c • 𝟙 ((g)_*[WeilCoefficients.{u} l].obj G).obj) := by
-  ext : 3
-  rfl
-
 /-- Multiplication by a scalar `b ∈ ℚ̄_ℓ` commutes with the Weil structure of a Weil sheaf: the
 Frobenius pullback, a pushforward, is `ℚ̄_ℓ`-linear. -/
 lemma WeilSheaf.smul_comm_str (b : PadicAlgCl l) (F : WeilSheaf k₀ l X) :
     (WeilSheaf.frobeniusPullback k₀ l X).map
-        (ObjectProperty.homMk (ULift.up b • 𝟙 F.obj.carrier.obj)) ≫ F.obj.obj.str =
-      F.obj.obj.str ≫ ObjectProperty.homMk (ULift.up b • 𝟙 F.obj.carrier.obj) := by
-  rw [ProEtale.lowerStar_map_smul_id]
-  ext U : 3
-  simp
+        (ProEtale.AdicSheaf.smul (ULift.up b) F.obj.carrier) ≫ F.obj.obj.str =
+      F.obj.obj.str ≫ ProEtale.AdicSheaf.smul (ULift.up b) F.obj.carrier := by
+  rw [ProEtale.AdicSheaf.adicLowerStar_map_smul, ProEtale.AdicSheaf.smul_comp]
 
 /-- Multiplication by a scalar `b ∈ ℚ̄_ℓ`, as an endomorphism of a Weil sheaf. -/
 noncomputable def WeilSheaf.smulEnd (b : PadicAlgCl l) (F : WeilSheaf k₀ l X) : F ⟶ F :=
   ObjectProperty.homMk (ObjectProperty.homMk
-    ⟨ObjectProperty.homMk (ULift.up b • 𝟙 F.obj.carrier.obj), WeilSheaf.smul_comm_str b F⟩)
+    ⟨ProEtale.AdicSheaf.smul (ULift.up b) F.obj.carrier, WeilSheaf.smul_comm_str b F⟩)
 
 end Scalar
 
@@ -225,21 +214,48 @@ variable (l) in
 ```
 -/
 noncomputable def artinSchreierTranslationSheafHom (c : k₀) :
-    (affineLine.geometricArtinSchreierMap k₀)_*[
-        WeilCoefficients.{u} l].obj
-      (ProEtale.adicConstantSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ⟶
-    (affineLine.geometricArtinSchreierMap k₀)_*[
-        WeilCoefficients.{u} l].obj
-      (ProEtale.adicConstantSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
-  (affineLine.geometricArtinSchreierMap k₀)_*[
-      WeilCoefficients.{u} l].map
-      (ProEtale.adicConstantSheafLowerStarIso l (affineLine.geometricTranslationIso k₀ c)).inv ≫
-    (ProEtale.lowerStarComp (WeilCoefficients.{u} l) (affineLine.geometricTranslationIso k₀ c).hom
+    (affineLine.geometricArtinSchreierMap k₀)_*ᵃ[l].obj
+      (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ⟶
+    (affineLine.geometricArtinSchreierMap k₀)_*ᵃ[l].obj
+      (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
+  (affineLine.geometricArtinSchreierMap k₀)_*ᵃ[l].map
+      (ProEtale.adicLowerStarUnitIso l (affineLine.geometricTranslationIso k₀ c)).inv ≫
+    (ProEtale.adicLowerStarComp l (affineLine.geometricTranslationIso k₀ c).hom
       (affineLine.geometricArtinSchreierMap k₀)).hom.app
-      (ProEtale.adicConstantSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≫
-    (ProEtale.lowerStarCongr (WeilCoefficients.{u} l)
+      (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≫
+    (ProEtale.adicLowerStarCongr l
       (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)).hom.app
-      (ProEtale.adicConstantSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+      (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+
+lemma artinSchreierTranslationSheafHom_hom (c : k₀) :
+    (artinSchreierTranslationSheafHom l c).hom =
+      (affineLine.geometricArtinSchreierMap k₀)_*[WeilCoefficients.{u} l].map
+          (ProEtale.adicConstantSheafLowerStarIso l (affineLine.geometricTranslationIso k₀ c)).inv ≫
+        (ProEtale.lowerStarComp (WeilCoefficients.{u} l)
+          (affineLine.geometricTranslationIso k₀ c).hom
+          (affineLine.geometricArtinSchreierMap k₀)).hom.app
+          (ProEtale.adicConstantSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≫
+        (ProEtale.lowerStarCongr (WeilCoefficients.{u} l)
+          (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)).hom.app
+          (ProEtale.adicConstantSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
+  rfl
+
+lemma artinSchreierPushforward_str_hom_hom :
+    (WeilSheaf.artinSchreierPushforward k₀ l).obj.obj.str.hom =
+      ((ProEtale.lowerStarComp _ (affineLine.geometricArtinSchreierMap k₀)
+            (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv ≪≫
+          ProEtale.lowerStarCongr _
+            (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) ≪≫
+          (ProEtale.lowerStarComp _
+            (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+            (affineLine.geometricArtinSchreierMap k₀)).symm).app
+          (ProEtale.adicConstantSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≪≫
+        (affineLine.geometricArtinSchreierMap k₀)_*[WeilCoefficients.{u} l].mapIso
+          (ProEtale.adicConstantSheafLowerStarIso l
+            (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)).hom :=
+  -- Componentwise this is `WeilSheaf.lowerStar_obj_obj_str` and
+  -- `WeilSheaf.adicConstant_str_hom_hom`; the kernel times out on the definitional unfolding.
+  sorry
 
 /-- The action of `σ_c` on `AS_* ℚ̄_ℓ` commutes with its Weil structure: the translation and
 the Artin–Schreier map are defined over `k₀`, hence commute with the geometric Frobenius. -/
@@ -248,21 +264,18 @@ lemma artinSchreierTranslationSheafHom_comm (c : k₀) :
         (artinSchreierTranslationSheafHom l c) ≫
       (WeilSheaf.artinSchreierPushforward k₀ l).obj.obj.str =
     (WeilSheaf.artinSchreierPushforward k₀ l).obj.obj.str ≫
-      artinSchreierTranslationSheafHom l c :=
-  ProEtale.lowerStar_map_deckAction_comp_lowerStarExchange l
+      artinSchreierTranslationSheafHom l c := by
+  refine Mod.hom_ext _ _ ?_
+  rw [Mod.comp_hom', Mod.comp_hom', ProEtale.adicLowerStar_map_hom,
+    artinSchreierTranslationSheafHom_hom, artinSchreierPushforward_str_hom_hom]
+  exact ProEtale.lowerStar_map_deckAction_comp_lowerStarExchange l
     (affineLine.geometricArtinSchreierMap k₀)
     (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
     (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
     (affineLine.geometricTranslationIso k₀ c)
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
     (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)
-    (affineLine.geometricTranslation_comp_geometricGaloisFrobenius k₀ c)
-    ((WeilSheaf.lowerStar (affineLine.artinSchreierMap k₀)).obj
-      (WeilSheaf.adicConstant k₀ l (affineLine k₀))).obj.obj.str
-    (by
-      rw [← Endofunctor.IsoAlgebra.str_hom, WeilSheaf.lowerStar_obj_obj_str]
-      simp only [Iso.trans_hom, Functor.mapIso_hom, Endofunctor.IsoAlgebra.str_hom]
-      rfl)
+    (affineLine.geometricTranslation_comp_geometricGaloisFrobenius k₀ c) _ rfl
 
 variable (l) in
 /-- The action of the translation `σ_c : x ↦ x + c` on `AS_* ℚ̄_ℓ`, as an endomorphism of Weil
@@ -342,10 +355,10 @@ so a subquotient isomorphic to it is an irreducible constituent. -/
 def WeilSheaf.HasLinearArtinSchreierConstituent (F : WeilSheaf k₀ l U)
     (ψ : AddChar k₀ (PadicAlgCl l)) (a : AlgebraicClosure k₀) (j : U ⟶ affineLine k₀)
     [j.IsOver (Spec (CommRingCat.of k₀))] : Prop :=
-  ∃ (B : Sheaf (Scheme.ProEt.topology (U ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-      (WeilCoefficients.{u} l)) (i : B ⟶ F.obj.carrier)
-    (p : B ⟶ (Scheme.Hom.geometricFiberMap j (comp_over j _))^*[WeilCoefficients.{u} l].obj
-      ((affineLine.geometricSMul k₀ a)^*[WeilCoefficients.{u} l].obj
+  ∃ (B : ProEtale.AdicSheaf l (U ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (i : B ⟶ F.obj.carrier)
+    (p : B ⟶ (Scheme.Hom.geometricFiberMap j (comp_over j _))^*ᵃ[l].obj
+      ((affineLine.geometricSMul k₀ a)^*ᵃ[l].obj
         (artinSchreier ψ 1).obj.carrier)), Mono i ∧ Epi p
 
 end Constituent
@@ -359,15 +372,15 @@ variable (k₀ l X) in
 noncomputable def ProEtaleWeilSheaf.ihomFunctor (A : ProEtaleWeilSheaf k₀ l X) :
     ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X where
   obj B := ProEtaleWeilSheaf.ihom k₀ l X A B
-  map f := ObjectProperty.homMk ⟨(CategoryTheory.ihom A.carrier).map f.hom.f,
+  map f := ObjectProperty.homMk ⟨(ProEtale.AdicSheaf.ihom A.carrier).map f.hom.f,
     ProEtaleWeilSheaf.ihom_map_comm A f⟩
-  map_id _ := ObjectProperty.hom_ext _ (Algebra.Hom.ext ((CategoryTheory.ihom A.carrier).map_id _))
+  map_id _ := ObjectProperty.hom_ext _
+    (Algebra.Hom.ext ((ProEtale.AdicSheaf.ihom A.carrier).map_id _))
   map_comp _ _ := ObjectProperty.hom_ext _
-    (Algebra.Hom.ext ((CategoryTheory.ihom A.carrier).map_comp _ _))
+    (Algebra.Hom.ext ((ProEtale.AdicSheaf.ihom A.carrier).map_comp _ _))
 
 instance (A : ProEtaleWeilSheaf k₀ l X) : (ProEtaleWeilSheaf.ihomFunctor k₀ l X A).Additive :=
-  have := (ihom.adjunction A.carrier).right_adjoint_additive
-  ⟨ObjectProperty.hom_ext _ (Algebra.Hom.ext (CategoryTheory.ihom A.carrier).map_add)⟩
+  ⟨ObjectProperty.hom_ext _ (Algebra.Hom.ext (ProEtale.AdicSheaf.ihom A.carrier).map_add)⟩
 
 /-- **Finiteness for the tensor product with a lisse Weil sheaf, on a single Weil sheaf.** For
 a lisse Weil sheaf `F` and a Weil sheaf `G` placed in degree `0`, the right derived functor of

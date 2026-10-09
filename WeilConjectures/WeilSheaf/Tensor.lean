@@ -55,25 +55,18 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 namespace WeilCoefficients
 
-variable {C : Type*} [Category* C] {J : GrothendieckTopology C}
-
-/-- Multiplication by a unit `b` of `ℚ̄_ℓ`, as an automorphism of a sheaf of `ℚ̄_ℓ`-modules. -/
-noncomputable def smulIso (b : (PadicAlgCl l)ˣ) (M : Sheaf J (WeilCoefficients.{u} l)) :
+/-- Multiplication by a unit `b` of `ℚ̄_ℓ`, as an automorphism of a sheaf of
+`ℚ̄_ℓ,X`-modules. -/
+noncomputable def smulIso {Z : Scheme.{u}} (b : (PadicAlgCl l)ˣ) (M : ProEtale.AdicSheaf l Z) :
     M ≅ M where
-  hom := ObjectProperty.homMk (ULift.up (b : PadicAlgCl l) • 𝟙 M.obj)
-  inv := ObjectProperty.homMk (ULift.up ((b⁻¹ : (PadicAlgCl l)ˣ) : PadicAlgCl l) • 𝟙 M.obj)
+  hom := ProEtale.AdicSheaf.smul (ULift.up (b : PadicAlgCl l)) M
+  inv := ProEtale.AdicSheaf.smul (ULift.up ((b⁻¹ : (PadicAlgCl l)ˣ) : PadicAlgCl l)) M
   hom_inv_id := by
-    ext1
-    simp only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
-      Linear.smul_comp, Linear.comp_smul, Category.id_comp, smul_smul,
-      ObjectProperty.FullSubcategory.id_hom]
-    exact (congrArg (· • 𝟙 M.obj) (congrArg ULift.up (Units.inv_mul b))).trans (one_smul _ _)
+    rw [ProEtale.AdicSheaf.smul_smul, ← ProEtale.AdicSheaf.smul_one]
+    exact congrArg (ProEtale.AdicSheaf.smul · M) (congrArg ULift.up (Units.inv_mul b))
   inv_hom_id := by
-    ext1
-    simp only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
-      Linear.smul_comp, Linear.comp_smul, Category.id_comp, smul_smul,
-      ObjectProperty.FullSubcategory.id_hom]
-    exact (congrArg (· • 𝟙 M.obj) (congrArg ULift.up (Units.mul_inv b))).trans (one_smul _ _)
+    rw [ProEtale.AdicSheaf.smul_smul, ← ProEtale.AdicSheaf.smul_one]
+    exact congrArg (ProEtale.AdicSheaf.smul · M) (congrArg ULift.up (Units.mul_inv b))
 
 end WeilCoefficients
 

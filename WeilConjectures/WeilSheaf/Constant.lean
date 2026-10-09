@@ -55,9 +55,7 @@ the geometric fiber `X̄`, with the canonical isomorphism `Fr_X^* ℚ̄_ℓ = (F
 as Weil structure. -/
 noncomputable def ProEtaleWeilSheaf.adicConstant : ProEtaleWeilSheaf k₀ l X :=
   IsoAlgebra.mk (AdicSheaf.unit l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    ((adicUpperStarIsoLowerStarInv l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).symm.app _ ≪≫
-      adicUpperStarUnitIso l _)
+    (adicLowerStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)
 
 lemma ProEtaleWeilSheaf.adicConstant_carrier :
     (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier =
@@ -107,5 +105,18 @@ theorem WeilComplex.not_isZero_toComplex_adicConstant [Nonempty X] :
   WeilSheaf.not_isZero_adicConstant k₀ l X
     (((WeilComplex.homologySheaf 0).map_isZero h).of_iso
       (WeilSheaf.toComplexCompHomologySheafIso.app _).symm)
+
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+  {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+
+lemma WeilSheaf.adicConstant_str_hom_hom :
+    (Endofunctor.IsoAlgebra.str (WeilSheaf.adicConstant k₀ l X).obj).hom.hom =
+      (ProEtale.adicConstantSheafLowerStarIso l
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).hom :=
+  rfl
 
 end AlgebraicGeometry
