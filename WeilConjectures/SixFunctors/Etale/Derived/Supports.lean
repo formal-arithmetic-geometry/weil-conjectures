@@ -98,22 +98,27 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 section Lift
 
-variable {W U X Z Z₁ Z₂ U₁ U₂ : Scheme.{u}}
+variable {V W U X Z Z₁ Z₂ U₁ U₂ : Scheme.{u}}
 
-/-- `Lh^* Ri_! B = 0` when the ranges of `h` and `i` are disjoint: by adjunction this is
-`Hom(Ri_! B, Rh_* C) = 0`
-(`AlgebraicGeometry.Etale.subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar`).
--/
+/-- `Lh^* Ri_! B = 0` when `h` factors through an open immersion `j` whose range is disjoint
+from the range of `i`: by adjunction `Lj^* Ri_! B = 0` is `Hom(Ri_! B, Rj_* C) = 0`
+(`AlgebraicGeometry.Etale.subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar`),
+and `Lh^*` factors through `Lj^*`. -/
 lemma isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (i : Z ⟶ X)
-    [HasCompactification i] (h : W ⟶ X) (hih : Disjoint (Set.range i) (Set.range h))
+    [HasCompactification i] (j : V ⟶ X) [IsOpenImmersion j]
+    (hij : Disjoint (Set.range i) (Set.range j)) (h : W ⟶ X) (hh : Set.range h ⊆ Set.range j)
     (B : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
     IsZero ((L((h)^*[A])).obj ((R(i)_![A]).obj B)) := by
-  have h₀ := subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar A i h hih B
-    ((L((h)^*[A])).obj ((R(i)_![A]).obj B)) 0
-  rw [IsZero.iff_id_eq_zero]
-  apply ((derivedUpperStarLowerStarAdjunction A h).homEquiv _ _).injective
-  rw [← cancel_epi ((shiftFunctorZero _ ℤ).hom.app _)]
-  exact @Subsingleton.elim _ h₀ _ _
+  have hj : IsZero ((L((j)^*[A])).obj ((R(i)_![A]).obj B)) := by
+    have h₀ := subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar A i j hij B
+      ((L((j)^*[A])).obj ((R(i)_![A]).obj B)) 0
+    rw [IsZero.iff_id_eq_zero]
+    apply ((derivedUpperStarLowerStarAdjunction A j).homEquiv _ _).injective
+    rw [← cancel_epi ((shiftFunctorZero _ ℤ).hom.app _)]
+    exact @Subsingleton.elim _ h₀ _ _
+  rw [← IsOpenImmersion.lift_fac j h hh]
+  exact ((L((IsOpenImmersion.lift j h hh)^*[A])).map_isZero hj).of_iso
+    ((leftDerivedUpperStarComp A _ j).app _)
 
 /-- There are no nonzero morphisms `K ⟶ Rj_* C` when `Lj^* K = 0`. -/
 lemma subsingleton_hom_rightDerivedLowerStar_of_isZero (j : U ⟶ X)
@@ -192,7 +197,9 @@ lemma isZero_of_isZero_leftDerivedUpperStar_of_disjoint
   have hsub : Subsingleton ((R(d)_![A]).obj ((R(d)^![A]).obj T) ⟶
       (R((c)_*[A])).obj ((R(c)^![A]).obj T)) :=
     subsingleton_hom_rightDerivedLowerStar_of_isZero A c
-      (isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A d c hcd.symm _) _
+      (isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A d b
+        (by rw [hdb]; exact disjoint_compl_left) c
+        (by simpa [hdb] using hcd.subset_compl_right) _) _
   have : Subsingleton (T ⟶ T) :=
     @Equiv.subsingleton _ _
       ((asIso ((rightDerivedUpperShriekAdjunction A d).counit.app T)).symm.homCongr
@@ -208,8 +215,12 @@ lemma isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShrie
     (M : DerivedCategory (Sheaf Z₁.smallEtaleTopology A)) :
     IsZero ((L(((pullback.snd i₁ j).openComplement.ι ≫ j)^*[A])).obj
       ((R(i₁)_![A]).obj M)) := by
-  refine isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A i₁ _ ?_ _
-  rw [Set.disjoint_left]
+  refine isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A i₁
+    i₁.openComplement.ι
+    (by rw [i₁.range_eq_compl_range_openComplement_ι]; exact disjoint_compl_left)
+    _ ?_ _
+  rw [← compl_compl (Set.range i₁.openComplement.ι), ← i₁.range_eq_compl_range_openComplement_ι,
+    Set.subset_compl_iff_disjoint_left, Set.disjoint_left]
   rintro _ ⟨z, rfl⟩ ⟨x, hx⟩
   apply x.2
   rw [Scheme.Pullback.range_snd]
@@ -383,9 +394,11 @@ theorem existsUnique_supportedRestriction (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' �
   refine existsUnique_comp_counit_of_isZero A i' i'.openComplement.ι
     i'.range_eq_compl_range_openComplement_ι ?_ _
   refine (isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A i
+    i.openComplement.ι (by rw [i.range_eq_compl_range_openComplement_ι]; exact disjoint_compl_left)
     (i'.openComplement.ι ≫ e) ?_ _).of_iso
       ((leftDerivedUpperStarComp A i'.openComplement.ι e).app _).symm
-  rw [Set.disjoint_left]
+  rw [← compl_compl (Set.range i.openComplement.ι), ← i.range_eq_compl_range_openComplement_ι,
+    Set.subset_compl_iff_disjoint_left, Set.disjoint_left]
   rintro _ ⟨z, rfl⟩ ⟨x, hx⟩
   apply x.2
   rw [Scheme.range_snd_of_isPullback hg]
