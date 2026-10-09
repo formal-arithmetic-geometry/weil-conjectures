@@ -317,3 +317,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:57 UTC: L reviewed and committed lem-weil-pbc-proper-immersion-closed (Mathlib leaf, two lemmas; new leaf lem-weil-pbc-immersion-closed-image-closed-immersion (01IQ); statement made self-contained).
 - 18:57 UTC: L reviewed and committed lem-weil-pbc-finite-presentation-kernel-surjection-finite-type (4 steps; new unsplit node lem-weil-pbc-ringed-space-module-exactness-local-lifting (01AF/01AG)).
 - 18:57 UTC: L reviewed and committed lem-weil-pbc-charpoly-locally-free-direct-sum (5 steps; three new Mathlib leaves verified).
+- 2026-10-10, delivery of F1: lem-weil-pbc-symmetric-algebra-quotient-module returned (677030d89): 1. The new node lem-weil-pbc-finite-flat-rank-one-algebra-map-bijective has created.item different from the delivered item: every node created for an item must 
