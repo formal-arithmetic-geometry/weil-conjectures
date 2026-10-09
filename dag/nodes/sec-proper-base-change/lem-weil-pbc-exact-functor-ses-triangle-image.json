@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-exact-functor-ses-triangle-image",
+ "kind": "statement",
+ "title": "An exact functor carries the triangle of a short exact sequence to the triangle of the image sequence",
+ "statement": "Let $F:\\mathcal C_1\\to\\mathcal C_2$ be an exact functor between abelian categories, and let $F_D:D(\\mathcal C_1)\\to D(\\mathcal C_2)$ be the triangulated functor induced by applying $F$ termwise to complexes, with its shift isomorphism $c_K:F_D(K[1])\\xrightarrow{\\sim}F_D(K)[1]$ and its natural isomorphism $\\varphi_A:F_D(A[0])\\xrightarrow{\\sim}F(A)[0]$ for objects $A$ of $\\mathcal C_1$ placed in degree $0$ [lem-sf-exact-functor-derived-triangulated], [def-weil-abstract-derived-category]. Let $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ be a short exact sequence in $\\mathcal C_1$, with the distinguished triangle $A[0]\\xrightarrow{f}B[0]\\xrightarrow{g}C[0]\\xrightarrow{w}A[0][1]$ of [lem-sf-derived-ses-triangle], $w$ the morphism constructed there from the mapping cone $C(f)$ of $f$ (the inverse of the quasi-isomorphism $q:C(f)\\to C[0]$ followed by the canonical morphism $C(f)\\to A[0][1]$, with the sign convention of that construction; Stacks 0152 writes it $-p\\circ q^{-1}$), and let $w':F(C)[0]\\to F(A)[0][1]$ be the morphism constructed in the same way for the short exact sequence $0\\to F(A)\\xrightarrow{F(f)}F(B)\\xrightarrow{F(g)}F(C)\\to0$ of $\\mathcal C_2$ (exact since $F$ is exact). Then\n$$\n\\varphi_A[1]\\circ c_{A[0]}\\circ F_D(w)=w'\\circ\\varphi_C,\n$$\nso that $(\\varphi_A,\\varphi_B,\\varphi_C)$ is an isomorphism of triangles [def-weil-pbc-triangles-with-shift] from $\\bigl(F_D(A[0]),F_D(B[0]),F_D(C[0]),F_D(f),F_D(g),c_{A[0]}\\circ F_D(w)\\bigr)$ to $\\bigl(F(A)[0],F(B)[0],F(C)[0],F(f),F(g),w'\\bigr)$ (the first two squares commute by naturality of $\\varphi$).",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Section 014Z (section-canonical-delta-functor) and Lemma 0152 (lemma-derived-canonical-delta-functor): the morphism $\\delta=-p\\circ q^{-1}$ built from the mapping cone; Lemma 0151 (lemma-exact-compose-delta-functor, (2): composing the canonical delta-functor with an exact functor of abelian categories); an exact functor commutes termwise with mapping cones, $F(C(f))=C(F(f))$, $F(p)=p'$, $F(q)=q'$"
+ },
+ "stmt_deps": [
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-ses-triangle",
+  "def-weil-pbc-triangles-with-shift"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact functor on derived category maps the connecting morphism of the triangle of a short exact sequence to the connecting morphism of the image short exact sequence",
+   "results": "ShortComplex.ShortExact.singleδ (Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle), DerivedCategory.triangleOfSESδ (Mathlib.Algebra.Homology.DerivedCategory.ShortExact), Functor.mapDerivedCategory (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor), Abelian.Ext.mapExactFunctor (Mathlib.Algebra.Homology.DerivedCategory.Ext.Map), Triangulated.SpectralObject.mapTriangulatedFunctor_δ'",
+   "date": "2026-10-09",
+   "verdict": "no match by itself (the ingredients; the lemma is found by the Loogle query below)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.singleδ, CategoryTheory.Functor.mapDerivedCategory",
+   "results": "ShortComplex.ShortExact.mapShiftedHom_singleδ, mapShiftedHom_singleδ', and their _assoc forms (Mathlib.Algebra.Homology.DerivedCategory.Ext.Map)",
+   "date": "2026-10-09",
+   "verdict": "match: mapShiftedHom_singleδ"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'triangleOfSES\\|singleTriangle\\|mapTriangleOfSES\\|singleδ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; sed -n 1,120p Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; ShiftedHom.map in Mathlib/CategoryTheory/Shift/ShiftedHom.lean:165",
+   "results": "DerivedCategory.map_triangleOfSESδ (Ext/Map.lean:59, the version for short exact sequences of complexes, with F.mapDerivedCategoryFactors), ShortComplex.ShortExact.mapShiftedHom_singleδ' (Ext/Map.lean:81) and mapShiftedHom_singleδ (Ext/Map.lean:109); ShiftedHom.map f F = F.map f ≫ (F.commShiftIso a).hom.app Y (ShiftedHom.lean:165); singleδ, singleTriangle (DerivedCategory/SingleTriangle.lean:55)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ShortComplex.ShortExact.mapShiftedHom_singleδ",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+  "how": "exact: for `hS : S.ShortExact` and `F` additive preserving finite limits and colimits, `ShiftedHom.map hS.singleδ F.mapDerivedCategory = (F.mapDerivedCategorySingleFunctor 0).hom.app S.X₃ ≫ (hS.map_of_exact F).singleδ ≫ ((F.mapDerivedCategorySingleFunctor 0).inv.app S.X₁)⟦1⟧'` (line 109; equivalently `mapShiftedHom_singleδ'`, line 81), where `ShiftedHom.map w F = F.map w ≫ (F.commShiftIso 1).hom.app _` is $c\\circ F_D(w)$, `F.mapDerivedCategorySingleFunctor 0` is $\\varphi$ and `singleδ` is the $w$ of [lem-sf-derived-ses-triangle] (its Mathlib match); the first two squares are the naturality of `F.mapDerivedCategorySingleFunctor 0`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-pullback-cohomology-long-exact-ladder; match verified by the lead against the Mathlib source"
+ }
+}

@@ -1,8 +1,8 @@
 # Work queue
 
-566 items; claim with `tools/claim.py next <group> [--stage N]`.
+568 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (545)
+## Stage 1: nodes to split (547)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-sc-c6` | 1005 | none |
 | `lem-sc-c7` | 1005 | none |
 | `lem-sc-c8` | 1005 | none |
-| `lem-weil-pbc-projective-space-standard-charts` | 1005 | none |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1005 | none |
 | `lem-weil-pbc-pullback-cohomology-long-exact-ladder` | 1005 | none |
 | `lem-weil-pbc-zero-dim-integral-point` | 1005 | none |
@@ -26,8 +25,10 @@
 | `lemma-weil-pbc-h1-torsor-comparison` | 1005 | sorry_here |
 | `lemma-weil-pbc-injective-restriction-acyclicity` | 1005 | sorry_here |
 | `thm-weil-pbc-finite-etale-lifting` | 1005 | sorry_here |
+| `def-weil-pbc-proj-twisting-sheaf` | 1006 | none |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1006 | none |
 | `lem-weil-pbc-constructible-torsion-modules-agree` | 1006 | none |
+| `lem-weil-pbc-dehomogenization-polynomial-ring` | 1006 | none |
 | `lem-weil-pbc-etale-base-change-continuous` | 1006 | none |
 | `lem-weil-pbc-etale-retraction-finite-product-local` | 1006 | none |
 | `lem-weil-pbc-filtered-colimit-tensor-varying-rings` | 1006 | none |
@@ -35,6 +36,7 @@
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
 | `lem-weil-pbc-finite-locally-free-degree-locally-constant` | 1006 | none |
 | `lem-weil-pbc-injective-resolution-ses` | 1006 | none |
+| `lem-weil-pbc-proj-graded-module-sheaf-exists` | 1006 | none |
 | `lem-weil-pbc-projective-space-twist-glued-identification` | 1006 | none |
 | `lem-weil-pbc-root-lifting-etale-retraction` | 1006 | none |
 | `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1006 | none |
@@ -578,7 +580,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 560 nodes that wait for stage 1, 147 nodes that wait for a statement dependency.
+Not open yet: 562 nodes that wait for stage 1, 148 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
