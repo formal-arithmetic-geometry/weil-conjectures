@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-sheafification-geometric-stalk",
+ "kind": "statement",
+ "title": "The geometric stalk of a sheafification is the stalk of the presheaf",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $T_{\\Et}$ its small etale site [def-weil-pbc-etale-site] and $\\bar t:\\operatorname{Spec}\\Omega\\to T$ a geometric point [def-weil-geometric-point], with category of pointed etale neighbourhoods $\\mathcal N_{\\bar t}$ [def-weil-pbc-pointed-etale-neighbourhoods]. For a presheaf of abelian groups $\\mathcal F$ on $T_{\\Et}$ (a contravariant functor from $T_{\\Et}$ to abelian groups) define its stalk $\\mathcal F_{\\bar t}=\\varinjlim_{(U,\\bar u)\\in\\mathcal N_{\\bar t}^{\\mathrm{op}}}\\mathcal F(U)$ [def-weil-pbc-category-colimit], with coprojections $s\\mapsto(\\text{class of }s\\text{ at }(U,\\bar u))$ (for a sheaf this is the stalk of [def-weil-pbc-geometric-stalks]). Let $\\theta:\\mathcal F\\to\\mathcal F^\\#$ be the sheafification [def-weil-pbc-sheafification], $\\mathcal F^\\#\\in\\Ab(T_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]. Then the homomorphism $\\theta_{\\bar t}:\\mathcal F_{\\bar t}\\to(\\mathcal F^\\#)_{\\bar t}$ induced by $\\theta$, sending the class of $s\\in\\mathcal F(U)$ at $(U,\\bar u)$ to the class of $\\theta_U(s)$ at $(U,\\bar u)$, is an isomorphism of abelian groups.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03PT (2) (lemma-stalk-exact: $(\\mathcal F^\\#)_{\\bar s}=\\mathcal F_{\\bar s}$; the proof there shows injectivity of $\\kappa:\\mathcal F_{\\bar s}\\to(\\mathcal F^\\#)_{\\bar s}$ and omits surjectivity), with Definition 040R; complete proof via Lemma 04FM (lemma-stalk-gives-point: the stalk comes from a point of $S_{\\Et}$) and literature/stacks-project/sites.tex Lemma 00Y8 (3) (lemma-point-pushforward-sheaf: $\\mathcal F_p=\\mathcal F^\\#_p$ by the adjunctions of stalk/skyscraper and of sheafification)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-geometric-point",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the fiber of a presheaf at a point of a site is isomorphic to the fiber of its sheafification",
+   "results": "TopCat.Presheaf.sheafifyStalkIso (Mathlib.Topology.Sheaves.Sheafify, topological spaces only); CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify (instance `IsIso (Φ.presheafFiber.map (toSheafify J P))`); CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber (deprecated alias of presheafToSheafCompSheafFiberIso); sheafificationIso, isoSheafify",
+   "date": "2026-10-09",
+   "verdict": "generalization: the instance and presheafToSheafCompSheafFiberIso for an arbitrary point of a site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of the sheafification of a presheaf equals stalk of the presheaf at a point of a site",
+   "results": "TopCat.Presheaf.sheafifyStalkIso, TopCat.Presheaf.stalkToFiber, TopCat.Presheaf.Sheafify.isLocallyGerm, TopCat.Presheaf.toSheafify (all Mathlib.Topology.Sheaves.Sheafify, topological stalks)",
+   "date": "2026-10-09",
+   "verdict": "no match for sites (topological case only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.presheafFiber, CategoryTheory.toSheafify",
+   "results": "CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify : IsIso (Φ.presheafFiber.map (toSheafify J P)) (Mathlib.CategoryTheory.Sites.Point.Skyscraper), hypotheses HasProducts A, HasColimitsOfSize.{w,w} A, HasWeakSheafify J A",
+   "date": "2026-10-09",
+   "verdict": "generalization (match after specialization to pointSmallEtale)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'toSheafify\\|presheafToSheafCompSheafFiberIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; grep -n 'def presheafFiber\\|def sheafFiber\\|def toPresheafFiber' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/Basic.lean; grep -n 'pointSmallEtale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; grep -n 'HasSheafify S.smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+   "results": "Skyscraper.lean:273-275 instance IsIso (Φ.presheafFiber.map (toSheafify J P)) (proved from W_isInvertedBy_presheafFiber:263), :282 presheafToSheafCompSheafFiberIso : presheafToSheaf J A ⋙ Φ.sheafFiber ≅ Φ.presheafFiber with components asIso (presheafFiber.map (toSheafify J P)); Basic.lean:96 presheafFiber = colim over (fiber.Elements)ᵒᵖ of P ∘ π, :101 toPresheafFiber (the coprojection at (X,x)), :277 sheafFiber = sheafToPresheaf ⋙ presheafFiber; EtalePoint.lean:64 pointSmallEtale s : (smallEtaleTopology S).Point for s : Spec Ω ⟶ S, Ω : Type u separably closed, fiber X = Hom_{Over S}(Over.mk s, X); AffineEtale.lean:112 HasSheafify S.smallEtaleTopology A for concrete A with Category.{u} A (e.g. AddCommGrpCat.{u})",
+   "date": "2026-10-09",
+   "verdict": "match (specializes in one line, see mathlib_match)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiberIso",
+  "file": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+  "how": "specializes in one line: take Φ = AlgebraicGeometry.Scheme.pointSmallEtale t̄ (Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:64; Ω algebraically closed is separably closed, instance IsAlgClosed → IsSepClosed) and A = AddCommGrpCat.{u} for T : Scheme.{u} (HasProducts and HasColimitsOfSize.{u,u}; HasWeakSheafify from AffineEtale.lean:112). The component at a presheaf P of `presheafToSheafCompSheafFiberIso A` (line 282) is `asIso (Φ.presheafFiber.map (toSheafify J P))` (equivalently the instance at lines 273-275), i.e. the node's θ_{t̄}. `Φ.presheafFiber.obj P` is the colimit of P over (Φ.fiber.Elements)ᵒᵖ (Point/Basic.lean:96), and for pointSmallEtale the category of elements is N_{t̄} (an element of fiber X is a morphism Spec Ω ⟶ X.left over T), the identification recorded in lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered; sheafFiber is presheafFiber of the underlying presheaf (Basic.lean:277), so this is the node's stalk."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-pbc",
+ "import_flags": []
+}

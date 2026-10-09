@@ -14,11 +14,66 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-geometric-point",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-pointed-etale-neighbourhoods"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The stalk of $\\underline E$ is the stalk of the constant presheaf.* Let $P$ be the constant presheaf $U\\mapsto E$ on $T_{\\Et}$ (all restriction maps $\\mathrm{id}_E$), so that $\\underline E=P^\\#$ with canonical map $\\iota:P\\to\\underline E$ [def-weil-pbc-constant-sheaf], [def-weil-pbc-sheafification]. Define the stalk of the presheaf $P$ at $\\bar t$ as $P_{\\bar t}=\\varinjlim_{(U,\\bar u)\\in\\mathcal N_{\\bar t}^{\\mathrm{op}}}P(U)$, with coprojections $c_{(U,\\bar u)}:E=P(U)\\to P_{\\bar t}$, the same colimit formula as for the stalk of a sheaf [def-weil-pbc-geometric-stalks] over the pointed etale neighbourhoods [def-weil-pbc-pointed-etale-neighbourhoods]. By [lem-weil-pbc-sheafification-geometric-stalk] (Stacks 03PT (2)) the map $\\iota_{\\bar t}:P_{\\bar t}\\to\\underline E_{\\bar t}$ induced by $\\iota$, which sends $c_{(U,\\bar u)}(e)$ to the class of $\\iota_U(e)$ at $(U,\\bar u)$, is an isomorphism of abelian groups.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-pointed-etale-neighbourhoods",
+    "lem-weil-pbc-sheafification-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03PT (2) (lemma-stalk-exact) and Definition 040R (definition-stalk)"
+   }
+  },
+  {
+   "text": "*The stalk of the constant presheaf is $E$.* The diagram $(U,\\bar u)\\mapsto P(U)=E$ on $\\mathcal N_{\\bar t}^{\\mathrm{op}}$ is the constant diagram with value $E$, every transition map being a restriction map of $P$, i.e. $\\mathrm{id}_E$. The category $\\mathcal N_{\\bar t}$ is cofiltered, with the object $(T,\\bar t)$ [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered] (Stacks 03PQ), so $\\mathcal N_{\\bar t}^{\\mathrm{op}}$ is nonempty and filtered, hence connected, and by [lem-weil-pbc-colimit-constant-connected-diagram] every coprojection $c_{(U,\\bar u)}:E\\to P_{\\bar t}$ of the colimit [def-weil-pbc-category-colimit] is an isomorphism of abelian groups; in particular so is $c_{(T,\\bar t)}:E\\to P_{\\bar t}$, $e\\mapsto$ class of $e$ at $(T,\\bar t)$. (Elementwise, as in the remark after Definition 040R: every element of $P_{\\bar t}$ is a class $(U,\\bar u,e)$, and $(U,\\bar u,e)=(T,\\bar t,e)$ via the morphism $(U,\\bar u)\\to(T,\\bar t)$ given by the structure map; $(T,\\bar t,e)=(T,\\bar t,e')$ forces $e=e'$ since the restrictions are identities.)",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-pointed-etale-neighbourhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definition 040R and the remark after it (elements of the stalk as triples), Lemma 03PQ (lemma-cofinal-etale: the index category is filtered)"
+   }
+  },
+  {
+   "text": "*Assembly.* For $e\\in E$, $\\iota_{\\bar t}(c_{(T,\\bar t)}(e))$ is by step 1 the class of $\\iota_T(e)$ at $(T,\\bar t)$. So the map of the statement is the composite $\\iota_{\\bar t}\\circ c_{(T,\\bar t)}$ of the isomorphisms of steps 2 and 1, hence an isomorphism of abelian groups.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03PT (2) with Definition 040R"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "lem-weil-pbc-sheafification-geometric-stalk",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03PT (2) and Definition 040R with Lemma 03PQ; the identification of the stalk of a constant presheaf (step 2) is the elementary description of colimits of constant diagrams, written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,10 +102,31 @@
    "results": "none in Mathlib. Ingredients present: Point.presheafToSheafCompSheafFiberIso (Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean:282, the fibre of the sheafification is the fibre of the presheaf), Point.presheafFiber as a colimit over the cofiltered category of elements (Sites/Point/Basic.lean:96), pointSmallEtale (AlgebraicGeometry/Sites/EtalePoint.lean:64, at separably closed points). The source repository (not Mathlib) has CategoryTheory.GrothendieckTopology.Point.sheafFiberConstantSheafIso (WeilConjectures/Mathlib/CategoryTheory/Sites/Point/ConstantSheaf.lean:81-85, sorry-free in local/sorry_map_slopmaster2_full.jsonl) for an arbitrary point of a site",
    "date": "2026-10-09",
    "verdict": "no match in Mathlib; the statement needs Skyscraper.lean:282 plus the colimit of a constant functor over a connected category plus the identification of pointSmallEtale's fibre with this node's stalk, more than one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "colimit of a constant functor over a connected category is the value",
+   "results": "CategoryTheory.Limits.isColimitConstCocone, hasColimit_const_of_isConnected (Mathlib.CategoryTheory.Limits.Connected)",
+   "date": "2026-10-09",
+   "verdict": "ingredient only (step 2, leaf lem-weil-pbc-colimit-constant-connected-diagram); no statement about constant sheaves"
+  },
+  {
+   "tool": "local_search",
+   "query": "CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify (project ~/weil-conjectures-slopmaster2)",
+   "results": "index unavailable",
+   "date": "2026-10-09",
+   "verdict": "no verdict (index not available); existence of the Mathlib ingredients checked by grep and loogle"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn sheafFiberConstantSheafIso ~/weil-conjectures-slopmaster2/WeilConjectures; sed -n 1,140p ~/weil-conjectures-slopmaster2/WeilConjectures/Mathlib/CategoryTheory/Sites/Point/ConstantSheaf.lean",
+   "results": "source repository (not Mathlib): ConstantSheaf.lean:43 presheafFiberConstIso (fibre of the constant presheaf is M, via isColimitConstCocone), :48 toPresheafFiber_presheafFiberConstIso_hom, :76 isIso_presheafFiber_map_toSheafify_const, :81-85 sheafFiberConstantSheafIso (M : A) : Φ.sheafFiber.obj ((constantSheaf J A).obj M) ≅ M, used for pointSmallEtale s at ConstructibleSheaf/KernelCokernel.lean:118; all sorry-free by local/sorry_map_slopmaster2_full.jsonl",
+   "date": "2026-10-09",
+   "verdict": "no match in Mathlib; Lean in the source repository states the node for an arbitrary point (attachment candidate, see split_report)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +147,21 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-def-pbc",
- "import_flags": []
+ "import_flags": [],
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "worker": "stage1",
+  "summary": "Proof written from Stacks 03PT (2) and Definition 040R / Lemma 03PQ in three steps: (1) the stalk of $\\underline E=P^\\#$ is the stalk of the constant presheaf $P$ via $\\iota$ (new Mathlib leaf lem-weil-pbc-sheafification-geometric-stalk, Point.presheafToSheafCompSheafFiberIso specialized to pointSmallEtale; no such node existed: grep of dag/nodes for 03PT/sheafification/stalk found only users); (2) $P_{\\bar t}$ is the colimit of the constant diagram $E$ over the nonempty filtered, hence connected, $\\mathcal N_{\\bar t}^{\\mathrm{op}}$, so every coprojection is an isomorphism (new Mathlib leaf lem-weil-pbc-colimit-constant-connected-diagram, isColimitConstCocone); (3) the map of the statement is the composite, elementary. Added def-weil-pbc-pointed-etale-neighbourhoods to stmt_deps (the statement uses the neighbourhood $(T,\\bar t)$). Lean: the source repository's CategoryTheory.GrothendieckTopology.Point.sheafFiberConstantSheafIso (WeilConjectures/Mathlib/CategoryTheory/Sites/Point/ConstantSheaf.lean:81-85, sorry-free in the sorry map; reaches presheafFiberConstIso :43, isIso_presheafFiber_map_toSheafify_const :76) applied to Φ = pointSmallEtale t̄ and A = AddCommGrpCat.{u} gives an isomorphism $\\underline E_{\\bar t}\\cong E$ whose inverse is the node's map, by toPresheafFiber_presheafFiberConstIso_hom (:48, at the element (T, t̄)) and Point.toPresheafFiber_naturality (Mathlib Point/Basic.lean:131): a two-line bridge, so an attachment candidate for the lead to verify rather than a literal statement of the node."
+ },
+ "lean_candidates": {
+  "branch": "slopmaster2",
+  "note": "recorded by the lead at review (2026-10-09): CategoryTheory.GrothendieckTopology.Point.sheafFiberConstantSheafIso (WeilConjectures/Mathlib/CategoryTheory/Sites/Point/ConstantSheaf.lean:81-85, sorry-free) with Φ = pointSmallEtale t̄ and A = AddCommGrpCat gives the isomorphism E̲_t̄ ≅ E; that its inverse is the map of the statement (e ↦ class of ι_T(e) at (T, t̄)) needs toPresheafFiber_presheafFiberConstIso_hom and Point.toPresheafFiber_naturality: a two-line bridge for stage 2, not an exact attachment"
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "three steps (stalk of the sheafification = stalk of the presheaf, Stacks 03PT (2) with the full proof in sites 00Y8; the colimit of a constant diagram over the connected N^op; assembly); 2 new Mathlib leaves verified by the lead (Skyscraper.lean:273/282 with pointSmallEtale, Limits/Connected.lean:83, Filtered/Connected.lean:34, Filtered/Basic.lean:955); the source repository isomorphism recorded as a candidate"
+ }
 }

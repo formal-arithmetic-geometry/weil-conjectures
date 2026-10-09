@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-colimit-constant-connected-diagram",
+ "kind": "statement",
+ "title": "The colimit of a constant diagram over a connected (e.g. nonempty filtered) category",
+ "statement": "Let $I$ be a small category that is connected: nonempty, and any two objects are joined by a finite zigzag of morphisms. Every nonempty filtered category is connected (two objects map to a common object), in particular the opposite $\\mathcal N^{\\mathrm{op}}$ of a cofiltered category $\\mathcal N$. Let $E$ be an object of a category $\\mathcal C$ (e.g. an abelian group) and $D:I\\to\\mathcal C$ the constant diagram with value $E$, all of whose transition maps are $\\mathrm{id}_E$. Then the cocone $(E,(\\mathrm{id}_E)_{i\\in I})$ is a colimit of $D$ [def-weil-pbc-category-colimit]: for every cocone $(M,(\\mu_i)_i)$ all $\\mu_i$ are equal to one morphism $\\mu:E\\to M$, and $\\mu$ is the unique morphism $u$ with $u\\circ\\mathrm{id}_E=\\mu_i$ for all $i$. Consequently, for any chosen colimit $(\\varinjlim_ID,(c_i)_i)$, every coprojection $c_i:E\\to\\varinjlim_ID$ is an isomorphism, and $c_i=c_j$ for all $i,j$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "no document states it separately: it is the elementary fact used in Stacks etale-cohomology.tex, remark after Definition 040R (description of filtered colimits, Categories Section 04AX directed colimits) for the stalk of a constant presheaf; stated as in Mathlib Limits/Connected.lean:83 (isColimitConstCocone)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "colimit of a constant functor over a connected category is the value",
+   "results": "CategoryTheory.Limits.isColimitConstCocone, hasColimit_const_of_isConnected (Mathlib.CategoryTheory.Limits.Connected); Types.colimitConstPUnitIsoPUnit, Types.isColimitPUnitCocone (Mathlib.CategoryTheory.Limits.IsConnected); isLimitConstCone",
+   "date": "2026-10-09",
+   "verdict": "match: isColimitConstCocone"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.constCocone _ _)",
+   "results": "CategoryTheory.Limits.isColimitConstCocone (J) [IsConnected J] (X : C) : IsColimit (constCocone J X) (Mathlib.CategoryTheory.Limits.Connected)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def constCocone\\|def isColimitConstCocone' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Connected.lean; grep -n 'theorem IsFiltered.isConnected' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Filtered/Connected.lean; grep -n 'isFiltered_op_of_isCofiltered' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Filtered/Basic.lean",
+   "results": "Connected.lean:60 constCocone J X (pt X, ι = 𝟙), :83 isColimitConstCocone (desc s = s.ι.app (arbitrary j)); Filtered/Connected.lean:34 IsFiltered.isConnected; Filtered/Basic.lean:955 isFiltered_op_of_isCofiltered",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.isColimitConstCocone",
+  "file": "Mathlib/CategoryTheory/Limits/Connected.lean",
+  "how": "a few Mathlib lemmas, one per clause: `isColimitConstCocone J X : IsColimit (constCocone J X)` for `[IsConnected J]` (line 83; constCocone line 60 has point X and identity coprojections; its desc is s.ι.app of an arbitrary object, so all legs agree); a nonempty filtered category is connected by `IsFiltered.isConnected` (Mathlib/CategoryTheory/Filtered/Connected.lean:34), and the opposite of a cofiltered category is filtered by `isFiltered_op_of_isCofiltered` (Mathlib/CategoryTheory/Filtered/Basic.lean:955); the coprojections of a chosen colimit are then `colimit.isoColimitCocone` composed with 𝟙."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-pbc",
+ "import_flags": []
+}
