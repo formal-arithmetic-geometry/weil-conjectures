@@ -12,10 +12,12 @@ public import Mathlib.CategoryTheory.ObjectProperty.Retract
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
 
 /-!
 
@@ -71,6 +73,13 @@ restrictions of `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!` and `𝔻_X` to `Dctf`.
   `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual` of
   `WeilConjectures.SixFunctors.Etale.Derived.Dualizing`. Only the descended functor
   `DerivedCategoryFiniteTor.verdierDual` is built here, out of those.
+* Clause (i) of `sk-thm-sf-ctf-stability` assumes that pullbacks preserve flat sheaves
+  (`AlgebraicGeometry.Etale.UpperStarPreservesFlat A`, an instance for `A = ModuleCat Λ`, where
+  flatness is checked on stalks). For a general coefficient category `A` this is not known, and
+  it is the special case of the Tor amplitude statement for a flat sheaf in degree `0`. The
+  proof represents a complex of Tor amplitude in `[a, b]` by a complex of flat sheaves in
+  degrees `[a, b]` (`DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn`) and pulls it
+  back termwise.
 * Clause (vii) of `sk-thm-sf-ctf-stability` — compatibility of each of (i)–(vi) with finite
   reduction, with scalar extension and with the pro-étale realization — is **not stated**. It
   quantifies over the coefficient stages `A_{E,n} ⇝ 𝒪_E ⇝ E ⇝ ℚ̄_ℓ` and over the étale/pro-étale
@@ -376,24 +385,41 @@ theorem boundedConstructible_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ 
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     (hbc : boundedConstructible A Y K) :
     boundedConstructible A X ((L((f)^*[A])).obj K) :=
-  sorry
+  (boundedConstructible A X).prop_of_iso
+    ((leftDerivedUpperStarIsoMapDerivedCategory A f).app K).symm
+    (hbc.mapDerivedCategory_upperStar f)
 
+omit [HasSmallSiteSheafify A] in
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (i), amplitude: `Lf^*` preserves the Tor amplitude interval unchanged, the pullback of
-a bounded flat model being a bounded flat model in the same degrees. -/
-theorem torAmplitudeIn_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y) (a b : ℤ)
+a bounded flat model being a bounded flat model in the same degrees.
+
+The pullback is assumed to preserve flat sheaves (`AlgebraicGeometry.Etale.UpperStarPreservesFlat`,
+which holds for `A = ModuleCat Λ`). This is no restriction: the statement for `a = b = 0` and
+`K` a flat sheaf in degree `0` says exactly that `f^*` of a flat sheaf is flat. -/
+theorem torAmplitudeIn_leftDerivedUpperStar [UpperStarPreservesFlat A] {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     (hta : torAmplitudeIn A Y a b K) :
-    torAmplitudeIn A X a b ((L((f)^*[A])).obj K) :=
-  sorry
+    torAmplitudeIn A X a b ((L((f)^*[A])).obj K) := by
+  -- `K` is represented by a complex `P` of flat sheaves in degrees `[a, b]`, so `Lf^* K` is
+  -- represented by the complex `f^* P` of flat sheaves in degrees `[a, b]`
+  obtain ⟨P, _, _, hP, ⟨e⟩⟩ := _root_.DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn hta
+  refine (torAmplitudeIn A X a b).prop_of_iso
+    (((f)^*[A].mapDerivedCategoryFactors.app P).symm ≪≫
+      (f)^*[A].mapDerivedCategory.mapIso e ≪≫
+      ((leftDerivedUpperStarIsoMapDerivedCategory A f).app K).symm)
+    (_root_.DerivedCategory.torAmplitudeIn_Q_obj_of_flat _ a b fun n ↦ ?_)
+  exact Functor.PreservesFlat.flat_obj (F := (f)^*[A]) (hP n)
 
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (i): `Lf^* : Dctf(Y, A) ⥤ Dctf(X, A)` is defined. -/
-theorem constructibleFiniteTor_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
+theorem constructibleFiniteTor_leftDerivedUpperStar [UpperStarPreservesFlat A] {X Y : Scheme.{u}}
+    (f : X ⟶ Y)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     (hK : constructibleFiniteTor A Y K) :
     constructibleFiniteTor A X ((L((f)^*[A])).obj K) := by
@@ -497,7 +523,8 @@ variable {X Y : Scheme.{u}}
 
 /-- Blueprint `sk-thm-sf-ctf-stability`, clause (i): the restriction
 `Lf^* : Dctf(Y, A) ⥤ Dctf(X, A)` of the derived pullback to the small categories. -/
-noncomputable def DerivedCategoryFiniteTor.leftDerivedUpperStar (f : X ⟶ Y) :
+noncomputable def DerivedCategoryFiniteTor.leftDerivedUpperStar [UpperStarPreservesFlat A]
+    (f : X ⟶ Y) :
     DerivedCategoryFiniteTor A Y ⥤ DerivedCategoryFiniteTor A X :=
   ObjectProperty.lift _ (DerivedCategoryFiniteTor.ι A Y ⋙ L((f)^*[A]))
     fun K ↦ constructibleFiniteTor_leftDerivedUpperStar A f K.property
