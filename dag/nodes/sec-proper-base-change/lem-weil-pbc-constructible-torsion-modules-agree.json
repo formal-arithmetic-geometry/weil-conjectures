@@ -2,21 +2,136 @@
  "id": "lem-weil-pbc-constructible-torsion-modules-agree",
  "kind": "statement",
  "title": "On a curve, the torsion-sheaf and the Z/n-module notions of constructibility agree",
- "statement": "Let $k$ be an algebraically closed field, $C$ a separated scheme of finite type over $k$ with $\\dim C\\le1$, $n\\ge1$ an integer and $F$ an abelian sheaf on $C_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] with $nF=0$; then $F$ is torsion and $(C,F)$ is a curve coefficient pair [def-weil-pbc-curve-setting], and $F$ is a sheaf of $(\\mathbf Z/n)_C$-modules [def-weil-pbc-etale-sheaves]. Then $F$ is constructible in the sense of [def-weil-pbc-constructible-torsion] (a finite partition of $C$ into locally closed constructible subschemes on each of which the restriction of $F$ is locally constant with finite stalks, as an abelian sheaf) if and only if $F$ is a constructible sheaf of $\\mathbf Z/n$-modules in the sense of [def-weil-pbc-etale-constructible-sheaf] with $\\Lambda=\\mathbf Z/n$. (Ingredients: a constant abelian sheaf $\\underline A$ on a nonempty $U$ with $n\\underline A=0$ has $nA=0$, and $\\underline A$ is then the constant sheaf of the $\\mathbf Z/n$-module $A$; an abelian-sheaf isomorphism between $\\mathbf Z/n$-module sheaves is $\\mathbf Z/n$-linear; the geometric stalks of $\\underline A|_{U}$ are $A$; both notions use finite partitions into constructible locally closed pieces, and $C$ is Noetherian.)",
+ "statement": "Let $k$ be an algebraically closed field, $C$ a separated scheme of finite type over $k$ with $\\dim C\\le1$, $n\\ge1$ an integer and $F$ an abelian sheaf on $C_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] with $n\\cdot\\mathrm{id}_F=0$. Then $F$ is torsion [def-weil-pbc-torsion-etale-sheaf], so $(C,F)$ is a curve coefficient pair [def-weil-pbc-curve-setting], and $F$ carries exactly one structure of sheaf of $(\\mathbf Z/n)_C$-modules [def-weil-pbc-etale-sheaves] extending its abelian structure. Moreover the following are equivalent, and the same finite partitions and immersions serve for both: (i) $F$ is constructible in the sense of [def-weil-pbc-constructible-torsion]: there are a finite partition $C=\\coprod_kC_k$ into pairwise disjoint locally closed constructible subsets [def-weil-constructible-subset] and immersions $\\iota_k:Z_k\\to C$ with image $C_k$ such that each abelian inverse image $\\iota_k^{-1}F$ [def-weil-pbc-inverse-image] is locally constant as an abelian sheaf [def-constructible-locally-constant] (an etale covering $\\{U_i\\to Z_k\\}$ and abelian groups $A_i$ with $(\\iota_k^{-1}F)|_{U_i}\\cong\\underline{A_i}$ as abelian sheaves) and has finite stalks at all geometric points [def-weil-pbc-geometric-stalks]; (ii) $F$, with this module structure, is a constructible sheaf of $\\mathbf Z/n$-modules in the sense of [def-weil-pbc-etale-constructible-sheaf] with $\\Lambda=\\mathbf Z/n$ (on each stratum the module inverse image is locally isomorphic to constant sheaves of $(\\mathbf Z/n)$-modules $\\underline{M_i}$ with $M_i$ finite). (Ingredients: a constant abelian sheaf $\\underline A$ on a nonempty $U$ with $n\\underline A=0$ has $nA=0$, $A$ being its stalk at a geometric point, and is then the underlying abelian sheaf of the constant sheaf of the $\\mathbf Z/n$-module $A$; an abelian-sheaf isomorphism between sheaves of $\\mathbf Z/n$-modules is $\\mathbf Z/n$-linear; both notions use finite partitions into locally closed constructible pieces with immersions. The hypotheses on $C$ and $k$ only serve to make $(C,F)$ a curve coefficient pair; the equivalence holds on any scheme.)",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Definition 03RW (definition-constructible), parts (2) and (3), compared for Lambda = Z/n, with Lemma 095E (lemma-constructible-quasi-compact-quasi-separated); Definition 03RU (definition-finite-locally-constant). Not stated in Stacks, which passes between abelian sheaves killed by n and sheaves of Z/n-modules silently (proof of Theorem 03SC). Agent-formulated."
  },
  "stmt_deps": [
   "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-torsion-etale-sheaf",
   "def-weil-pbc-curve-setting",
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-constructible-torsion",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-inverse-image",
+  "def-constructible-locally-constant",
+  "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-etale-constructible-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$F$ is torsion and a sheaf of $\\mathbf Z/n$-modules.* Every section $s\\in F(U)$ satisfies $ns=(n\\cdot\\mathrm{id}_F)(U)(s)=0$, so condition (2) of [lem-weil-pbc-torsion-sheaf-characterizations] holds (trivial covering, $n_i=n$) and $F$ is torsion in the sense of [def-weil-pbc-torsion-etale-sheaf]; with the hypotheses on $k$ and $C$ this makes $(C,F)$ a curve coefficient pair [def-weil-pbc-curve-setting] (the torsion of [def-weil-pbc-etale-sheaves] is condition (2) of that lemma). By [lem-weil-pbc-sheaves-killed-by-n-zmod-modules] (2) $F$ carries exactly one structure of sheaf of $(\\mathbf Z/n)_C$-modules extending its abelian structure; in what follows $F$ denotes this module sheaf in (ii) and its underlying abelian sheaf in (i). By (3) of that lemma, on any scheme an abelian-sheaf isomorphism between the underlying abelian sheaves of two sheaves of $(\\mathbf Z/n)$-modules is an isomorphism of module sheaves, its inverse being linear too.",
+   "uses": [
+    "lem-weil-pbc-torsion-sheaf-characterizations",
+    "def-weil-pbc-torsion-etale-sheaf",
+    "def-weil-pbc-curve-setting",
+    "def-weil-pbc-etale-sheaves",
+    "lem-weil-pbc-sheaves-killed-by-n-zmod-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definition 03RW (2), (3) with Lambda = Z/n; proof of Theorem 03SC (passage between abelian sheaves killed by n and Z/n-module sheaves, silent in Stacks); agent"
+   }
+  },
+  {
+   "text": "*The partitions are the same.* In (i), [def-weil-pbc-constructible-torsion] asks for a finite partition of $C$ by locally closed constructible subschemes: a finite family of pairwise disjoint locally closed subsets $C_k$ covering $C$, each constructible [def-weil-constructible-subset], with a subscheme structure, i.e. an immersion $\\iota_k:Z_k\\to C$ with image $C_k$, the restriction of $F$ to the piece being the inverse image $\\iota_k^{-1}F$ [def-weil-pbc-inverse-image]. In (ii), [def-weil-pbc-etale-constructible-sheaf] asks for a stratification of the scheme $C$ [def-constructible-stratification] (the same data: finite partition into pairwise disjoint locally closed subsets with immersions $\\iota_k:Z_k\\to C$ of image $C_k$) whose strata are constructible (its condition (a)). So the data and the conditions on them coincide, and the same family $(\\iota_k)$ is used on both sides below; no Noetherian argument is needed since both notions require the strata to be constructible (on the Noetherian $C$ this condition is moreover automatic, [def-weil-constructible-subset], Stacks 005L).",
+   "uses": [
+    "def-weil-pbc-constructible-torsion",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-constructible-stratification",
+    "def-weil-constructible-subset",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definition 03RW (finite decomposition into constructible locally closed subschemes, the same in (2) and (3)); topology.tex Definition 09XZ"
+   }
+  },
+  {
+   "text": "*Restriction to strata and to etale pieces commutes with forgetting the module structure.* Fix a stratum $\\iota=\\iota_k:Z=Z_k\\to C$. By [prop-weil-pbc-inverse-image-modules-exact] (2) (with $R=\\mathbf Z/n$), the module inverse image $\\iota^{-1}F$ of (ii), a sheaf of $(\\mathbf Z/n)_Z$-modules, has as underlying abelian sheaf the abelian inverse image $\\iota^{-1}F$ of (i), up to a canonical isomorphism of abelian sheaves; write $G$ for either. $G$ is killed by $n$: $\\iota^{-1}$ is additive [prop-weil-pbc-inverse-image-modules-exact] (3), so $n\\cdot\\mathrm{id}_G=\\iota^{-1}(n\\cdot\\mathrm{id}_F)=0$. For an etale $v:U\\to Z$ the restriction $G|_U$ to $U_{\\Et}$ [def-constructible-locally-constant] is the sheaf $U'\\mapsto G(U')$ on etale $U$-schemes $U'$ (viewed as etale $Z$-schemes through $v$), defined sectionwise; so the underlying abelian sheaf of the module restriction is the restriction of the underlying abelian sheaf, and $G|_U$ is again killed by $n$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-inverse-image",
+    "def-constructible-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definition 03RU (restriction F|_{U_i}); Definition 03RW; agent"
+   }
+  },
+  {
+   "text": "*Constant pieces.* Let $v:U\\to Z$ be etale with $U\\ne\\emptyset$ and $\\varphi:G|_U\\xrightarrow{\\sim}\\underline A$ an isomorphism of abelian sheaves with a constant abelian sheaf [def-weil-pbc-constant-sheaf] on $U_{\\Et}$. Pick a point of $U$ and a geometric point $\\bar w$ of $U$ over it [def-weil-geometric-point]. (a) $A\\cong\\underline A_{\\bar w}$ by [lem-weil-pbc-constant-sheaf-geometric-stalk]. (b) $(G|_U)_{\\bar w}=G_{v\\circ\\bar w}$ [def-weil-pbc-geometric-stalks]: a pointed etale neighbourhood of $\\bar w$ in $U$ is, by composition with $v$, a pointed etale neighbourhood of $v\\circ\\bar w$ in $Z$ with the same sections of $G$, and these are cofinal, since a pointed neighbourhood $(W,\\bar x)$ of $v\\circ\\bar w$ receives $(W\\times_ZU,(\\bar x,\\bar w))$. So $A\\cong G_{v\\circ\\bar w}$ as abelian groups. (c) Hence $nA=0$: the stalk is a colimit of the groups $G(W)$, all killed by $n$ (step 3). So $A$ is a $\\mathbf Z/n$-module, and by [lem-weil-pbc-constant-module-sheaf-underlying] ($R=\\mathbf Z/n$, $M=A$) $\\underline A$ is the underlying abelian sheaf of the constant sheaf $\\underline A^{\\mathbf Z/n}$ of $(\\mathbf Z/n)_U$-modules. By step 1 (applied on $U$), $\\varphi$ is an isomorphism $G|_U\\cong\\underline A^{\\mathbf Z/n}$ of sheaves of $(\\mathbf Z/n)_U$-modules, the module structure on $G|_U$ being the one of step 3. Conversely an isomorphism $G|_U\\cong\\underline M^{\\mathbf Z/n}$ of module sheaves, $M$ a $\\mathbf Z/n$-module, is by [lem-weil-pbc-constant-module-sheaf-underlying] and step 3 an isomorphism of abelian sheaves $G|_U\\cong\\underline M$, and (a), (b) give $M\\cong G_{v\\circ\\bar w}$ for every geometric point $\\bar w$ of $U$.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-geometric-point",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-constant-module-sheaf-underlying",
+    "lem-weil-pbc-sheaves-killed-by-n-zmod-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definition 03RU (constant values of a finite locally constant sheaf); Section 03PO-03PQ (stalks at geometric points, Lemma 03PQ cofinality); agent"
+   }
+  },
+  {
+   "text": "*(i) implies (ii).* Take the partition and immersions of (i) (step 2). On a stratum $Z$ we have an etale covering $\\{v_i:U_i\\to Z\\}_{i\\in I}$ and abelian groups $A_i$ with $G|_{U_i}\\cong\\underline{A_i}$ as abelian sheaves [def-constructible-locally-constant], and every geometric stalk of $G$ is finite. Discard the empty $U_i$; the remaining family is still jointly surjective, hence still an etale covering. For each remaining $i$, step 4 gives $nA_i=0$, an isomorphism $G|_{U_i}\\cong\\underline{A_i}^{\\mathbf Z/n}$ of sheaves of $(\\mathbf Z/n)_{U_i}$-modules, and $A_i\\cong G_{v_i\\circ\\bar w}$ for a geometric point $\\bar w$ of $U_i$, a finite set by (i). So $M_i=A_i$ is a finite $\\mathbf Z/n$-module and the module inverse image $\\iota_k^{-1}F$ is finite locally constant as a sheaf of $\\mathbf Z/n$-modules in the sense of condition (b) of [def-weil-pbc-etale-constructible-sheaf]; with step 2 for condition (a), $F$ is a constructible sheaf of $\\mathbf Z/n$-modules. (The empty pieces must be discarded: on $U=\\emptyset$ every abelian group $A$ gives $\\underline A=0$, so $A$ need not be finite nor killed by $n$.)",
+   "uses": [
+    "def-constructible-locally-constant",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definitions 03RU, 03RW (2) => (3) for Lambda = Z/n; agent"
+   }
+  },
+  {
+   "text": "*(ii) implies (i).* Take the stratification of (ii) (step 2). On a stratum $Z$ we have an etale covering $\\{v_i:U_i\\to Z\\}$ and finite $\\mathbf Z/n$-modules $M_i$ with $G|_{U_i}\\cong\\underline{M_i}^{\\mathbf Z/n}$ as module sheaves. By step 4 (converse part) $G|_{U_i}\\cong\\underline{M_i}$ as abelian sheaves, so the abelian inverse image $\\iota_k^{-1}F$ is locally constant as an abelian sheaf [def-constructible-locally-constant] (constant = isomorphic to a constant sheaf, [def-constructible-constant]). Finite stalks: a geometric point $\\bar z$ of $Z$ lifts along some $v_i$ to a geometric point $\\bar w$ of $U_i$ [lem-weil-pbc-etale-cover-geometric-point-lift] (necessarily $U_i\\ne\\emptyset$), and step 4 gives $G_{\\bar z}=G_{v_i\\circ\\bar w}\\cong M_i$, a finite set. Hence $\\iota_k^{-1}F$ is locally constant with finite stalks on every stratum, and with step 2 $F$ is constructible in the sense of [def-weil-pbc-constructible-torsion] ($(C,F)$ being a curve coefficient pair by step 1).",
+   "uses": [
+    "def-constructible-locally-constant",
+    "def-constructible-constant",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "def-weil-pbc-constructible-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definitions 03RU, 03RW (3) => (2) for Lambda = Z/n; agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
+  "def-weil-pbc-constructible-torsion",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-inverse-image",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-constructible-locally-constant",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-geometric-point",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-constant-module-sheaf-underlying",
+  "def-constructible-constant",
+  "lem-weil-pbc-etale-cover-geometric-point-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definitions 03RU (definition-finite-locally-constant) and 03RW (definition-constructible) (2), (3), compared for Lambda = Z/n; Stacks passes between the two silently (proof of Theorem 03SC); the comparison is written by the agent."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,10 +153,24 @@
    "results": "none",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "locally constant sheaf on a site, constructible etale sheaf abelian groups versus modules",
+   "results": "CategoryTheory.constantSheaf, CategoryTheory.Sheaf.IsConstant, Sheaf.isConstant_iff_mem_essImage (Mathlib.CategoryTheory.Sites.ConstantSheaf); CondensedSet.LocallyConstant.functorFullyFaithful, Condensed.locallyConstantPresheaf: unrelated",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has constant sheaves (Sheaf.IsConstant) but no locally constant or constructible sheaves on a site"
+  },
+  {
+   "tool": "grep",
+   "query": "ls Mathlib/CategoryTheory/Sites/ | grep -i 'const|local'; grep -rn 'IsLocallyConstant|class IsConstant|isConstant_iff_forget' Mathlib/CategoryTheory/Sites/; grep -rln -i constructible Mathlib/CategoryTheory Mathlib/AlgebraicGeometry",
+   "results": "Sites/ConstantSheaf.lean: class Sheaf.IsConstant (l.81, essential image of constantSheaf), Sheaf.isConstant_iff_forget (l.226: F constant iff its image under sheafCompose J U is, for U reflecting isomorphisms and fully faithful constant-sheaf functors), constantCommuteCompose (l.184); no IsLocallyConstant on sites (Sites/LocallyBijective, LocallyInjective, LocallySurjective, LocallyFullyFaithful are other notions); 'constructible' only in AlgebraicGeometry/Morphisms/FinitePresentation.lean (constructible sets)",
+   "date": "2026-10-09",
+   "verdict": "no match; Sheaf.isConstant_iff_forget is the closest relative (constancy detected after forgetting), but needs full faithfulness of the constant-sheaf functors (a connected site) and does not handle local constancy, finiteness or partitions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +191,17 @@
  },
  "import_flags": [],
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-constructible-torsion-modules-agree",
+  "worker": "stage1",
+  "summary": "Read def-weil-pbc-constructible-torsion (imported: finite partition into locally closed constructible subschemes, restriction locally constant with finite stalks) and def-weil-pbc-etale-constructible-sheaf (stratification with constructible strata, module inverse image finite locally constant with finite values, Stacks 03RU) exactly, and the two users: lem-weil-pbc-curve-constructible-sub-quotient steps 3 and 6 use (i)=>(ii) and (ii)=>(i) with n=N; prop-weil-pbc-algebraically-closed-extension step 10 (with lem-weil-pbc-curve-constructible-reduction, whose hypothesis is module-constructibility for F_r) needs (ii)=>(i) with n=r prime (C_red proper of dim <=1). Statement made exact: the abelian reading of 'locally constant' (def-constructible-locally-constant with abelian coefficients, as in the sub-quotient lemma step 1), finite geometric stalks, same partitions for both; noted that the curve hypotheses only make (C,F) a curve coefficient pair. Proof in six steps: torsion + unique Z/n-module structure + full faithfulness (new node lem-weil-pbc-sheaves-killed-by-n-zmod-modules, unsplit, agent-formulated), partitions agree (both require constructible locally closed strata with immersions; no Noetherian argument needed), module inverse image vs abelian inverse image (prop-weil-pbc-inverse-image-modules-exact (2)), constant pieces on nonempty U (stalk = value, so finite stalks = finite values and nA=0; constant module sheaf has underlying constant abelian sheaf, Mathlib leaf lem-weil-pbc-constant-module-sheaf-underlying), the two directions. Mathlib: no locally constant or constructible sheaves on sites; Sheaf.IsConstant and Sheaf.isConstant_iff_forget recorded. Source repository: IsConstructibleSheaf (WeilConjectures/ConstructibleSheaf/Defs.lean:249) is generic in an abelian concrete coefficient category A and is applied only with A = ModuleCat Lambda; no comparison lemma between AddCommGrp and ModuleCat (ZMod n) exists; IsConstructibleSheaf, IsFiniteLocallyConstantSheaf, IsLocallyConstantSheaf reach no sorry."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Six steps: torsion and the unique Z/n-structure (new node lem-weil-pbc-sheaves-killed-by-n-zmod-modules, agent-formulated, unsplit); the partitions coincide (elementary); restriction commutes with forgetting (prop-weil-pbc-inverse-image-modules-exact (2),(3)); constant pieces (constant-sheaf stalk, finite values = finite stalks on nonempty pieces, lem-weil-pbc-constant-module-sheaf-underlying); the two implications, with empty pieces discarded. Statement fixed to the abelian reading of 'locally constant' in def-weil-pbc-constructible-torsion (imported, ambiguous) and tightened to the two definitions' exact clauses. The hypotheses on k and C are only for the curve coefficient pair. The known-defect pointer of prop-weil-pbc-algebraically-closed-extension step 10 is now set (this node added to its step 10 uses)."
+ }
 }

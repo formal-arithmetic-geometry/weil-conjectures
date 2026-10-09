@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
+ "kind": "statement",
+ "title": "Abelian sheaves killed by n are the sheaves of Z/n-modules",
+ "statement": "Let $T$ be a scheme, $T_{\\Et}$ its small etale site [def-weil-pbc-etale-site], $n\\ge1$ an integer, $(\\mathbf Z/n)_T$ the constant sheaf of rings with value $\\mathbf Z/n$ on $T_{\\Et}$ [def-weil-pbc-constant-sheaf], $\\Mod(T_{\\Et},\\mathbf Z/n)$ the category of sheaves of $(\\mathbf Z/n)_T$-modules [def-weil-sheaf-of-modules-category], [def-weil-pbc-etale-sheaves], and $\\mathrm{forget}:\\Mod(T_{\\Et},\\mathbf Z/n)\\to\\Ab(T_{\\Et})$ the functor to abelian sheaves [def-weil-pbc-abelian-etale-sheaves] forgetting the module structure. Then: (1) for every sheaf $G$ of $(\\mathbf Z/n)_T$-modules, $n\\cdot\\mathrm{id}=0$ on the abelian sheaf $\\mathrm{forget}(G)$; (2) for every abelian sheaf $F$ with $n\\cdot\\mathrm{id}_F=0$ there is exactly one structure of sheaf of $(\\mathbf Z/n)_T$-modules on $F$ extending its structure of abelian sheaf, and in it the image $\\iota_U(\\bar a)\\in(\\mathbf Z/n)_T(U)$ of the constant $\\bar a\\in\\mathbf Z/n$ (with $\\iota$ the canonical map from the constant presheaf to its sheafification) acts on $F(U)$ as multiplication by any integer $a$ lifting $\\bar a$; (3) for sheaves $G,G'$ of $(\\mathbf Z/n)_T$-modules, every morphism of abelian sheaves $\\mathrm{forget}(G)\\to\\mathrm{forget}(G')$ is $(\\mathbf Z/n)_T$-linear. Hence $\\mathrm{forget}$ is fully faithful, and its image is the full subcategory of abelian sheaves killed by $n$; in particular an isomorphism of abelian sheaves between two sheaves of $(\\mathbf Z/n)_T$-modules is an isomorphism of sheaves of $(\\mathbf Z/n)_T$-modules. (Ingredients: every section of $(\\mathbf Z/n)_T$ over $U$ is, on some etale covering of $U$, the image of constants $\\bar a_i$; a unital additive action of $\\bar a$ is multiplication by $a$; separation of $F$. Existence in (2): the action of the constant presheaf $\\mathbf Z/n$ on $F$ by $\\bar a\\cdot s=as$ is well defined because $nF=0$ and extends along the sheafification of the constant presheaf of rings, sheafification preserving finite products.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definition 03RW (definition-constructible), parts (2) and (3), and the proof of Theorem 03SC, where Stacks passes between abelian sheaves killed by n and sheaves of Z/n-modules without comment; the module notion is that of Modules on Sites (sites-modules.tex, definition of O-modules). Not stated in Stacks; agent-formulated."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf of abelian groups killed by n is the same as sheaf of ZMod n modules; forgetful functor fully faithful",
+   "results": "SheafOfModules.fullyFaithfulForget, SheafOfModules.instFaithfulSheafAddCommGrpCatToSheaf (Mathlib.Algebra.Category.ModuleCat.Sheaf): forgetting a SheafOfModules to its presheaf of modules / faithfulness of toSheaf for an arbitrary sheaf of rings; AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules: unrelated",
+   "date": "2026-10-09",
+   "verdict": "no match (faithfulness only, no fullness over (Z/n), no characterisation of the image)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every additive group homomorphism between ZMod n modules is ZMod n linear",
+   "results": "AddMonoidHom.toZModLinearMap, AddMonoidHom.toZModLinearMapEquiv, ZMod.map_smul, AddCommGroup.zmodModule (Mathlib.Algebra.Module.ZMod)",
+   "date": "2026-10-09",
+   "verdict": "no match for sheaves: the group-level ingredients of (2) and (3) (AddCommGroup.zmodModule: a group with n x = 0 is a ZMod n-module; ZMod.map_smul: additive maps are ZMod n-linear); for sheaves with values in ModuleCat (ZMod n) (the source repository's formalism) these apply sectionwise, for sheaves of (Z/n)_T-modules the local argument of the statement is needed"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidHom.toZModLinearMap",
+   "results": "AddMonoidHom.toZModLinearMap, AddMonoidHom.toZModLinearMap_injective, AddMonoidHom.coe_toZModLinearMap (Mathlib.Algebra.Module.ZMod)",
+   "date": "2026-10-09",
+   "verdict": "no match (group level only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'toZModLinearMap\\|zmodModule' Mathlib --include=*.lean; grep -rln 'ZMod' Mathlib/CategoryTheory Mathlib/Algebra/Category",
+   "results": "uses only in Mathlib/LinearAlgebra/FreeModule/ModN.lean and Mathlib/Algebra/Module/Torsion/Basic.lean (torsionBy.zmodModule); ZMod in CategoryTheory/Algebra/Category only in Grp/Injective, Grp/Subobject, Grp/Abelian, AlgCat/TensorAlgebra: nothing on sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-torsion-modules-agree",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
