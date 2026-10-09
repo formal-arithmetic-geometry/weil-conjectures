@@ -528,3 +528,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:01 UTC (2026-10-09) — Reviewed and committed def-weil-pbc-etale-shriek-to-star-map (definition; 1 new node). Launched a worker on def-weil-pbc-etale-shriek-base-change-map.
 - 22:02 UTC (2026-10-09) — Reviewed and committed etale-shriek-to-star-injective (0F4L; 1 new node).
 - 2026-10-10, delivery of C1: lem-weil-pbc-grothendieck-existence-projective returned (32849b738): The branch (head 32849b73) has no report file coord/reports/C1/lem-weil-pbc-grothendieck-existence-projective.md; a delivery needs the report with the group's '
+- 22:03 UTC (2026-10-09) — Returned C1 grothendieck-existence-projective (no report file). Reviewed and committed noetherian-acc-quasi-coherent (01Y8; 1 new Mathlib leaf). Launched workers on popescu-final-solve (07EU) and popescu-reduce-to-field (07F5).

@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-noetherian-finite-module-acc",
+ "kind": "statement",
+ "title": "Ascending chain and maximal condition for submodules of a finite module over a Noetherian ring",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $M$ a finitely generated $A$-module [def-weil-finitely-generated-module]. Then (1) every increasing sequence $N_1\\subseteq N_2\\subseteq\\dots$ of $A$-submodules of $M$ is eventually constant: there is $n$ with $N_m=N_n$ for all $m\\ge n$; (2) every nonempty set $\\Psi$ of $A$-submodules of $M$ has a maximal element: some $N\\in\\Psi$ such that no $N'\\in\\Psi$ satisfies $N\\subsetneq N'$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00IK (lemma-Noetherian-basic), third assertion (ascending chain condition for submodules of a finite module over a Noetherian ring); the maximal-element form (2) is the equivalent formulation used for Noetherian induction (the proof of 00IK omits the equivalence of the ascending chain condition with finite generation of all submodules)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely generated module over a Noetherian ring: every increasing chain of submodules stabilizes",
+   "results": "IsNoetherian.mk, monotone_stabilizes_iff_noetherian, IsNoetherian, Module.IsNoetherian.finite, eventuallyConst_of_isNoetherian (Mathlib.RingTheory.Noetherian.Filter), isNoetherian_of_isNoetherianRing_of_finite (Mathlib.RingTheory.Noetherian.Basic), isNoetherian_iff', isNoetherian_iff (Mathlib.RingTheory.Noetherian.Defs)",
+   "date": "2026-10-10",
+   "verdict": "match: isNoetherian_of_isNoetherianRing_of_finite with monotone_stabilizes_iff_noetherian"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing ?R → Module.Finite ?R ?M → IsNoetherian ?R ?M",
+   "results": "isNoetherian_of_isNoetherianRing_of_finite (Mathlib.RingTheory.Noetherian.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match (clause: finite module over Noetherian ring is a Noetherian module)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every nonempty set of submodules of a finitely generated module over a Noetherian ring has a maximal element",
+   "results": "set_has_maximal_iff_noetherian (Mathlib.RingTheory.Noetherian.Defs), Module.Finite.instIsCoatomicSubmodule, isNoetherian_def, IsNoetherian, isNoetherian_submodule_right, isNoetherian_submodule",
+   "date": "2026-10-10",
+   "verdict": "match for (2): set_has_maximal_iff_noetherian"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem set_has_maximal_iff_noetherian\\|theorem monotone_stabilizes_iff_noetherian\\|isNoetherian_of_isNoetherianRing_of_finite\\|theorem isNoetherian_of_fg_of_noetherian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 150,165p RingTheory/Noetherian/Defs.lean; sed -n 320,333p RingTheory/Noetherian/Basic.lean",
+   "results": "set_has_maximal_iff_noetherian (RingTheory/Noetherian/Defs.lean:155), monotone_stabilizes_iff_noetherian (Defs.lean:160), instance isNoetherian_of_isNoetherianRing_of_finite (RingTheory/Noetherian/Basic.lean:324), isNoetherian_of_fg_of_noetherian (Basic.lean:330, for an FG submodule); statements read",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "isNoetherian_of_isNoetherianRing_of_finite (lean_local_search, project ~/weil-conjectures-slopmaster2)",
+   "results": "instance isNoetherian_of_isNoetherianRing_of_finite in .lake/packages/mathlib/Mathlib/RingTheory/Noetherian/Basic.lean (index: unavailable, found by ripgrep fallback); set_has_maximal_iff_noetherian and monotone_stabilizes_iff_noetherian confirmed by the grep entry and sed -n",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "isNoetherian_of_isNoetherianRing_of_finite; monotone_stabilizes_iff_noetherian; set_has_maximal_iff_noetherian",
+  "file": "Mathlib/RingTheory/Noetherian/Basic.lean, Mathlib/RingTheory/Noetherian/Defs.lean",
+  "line": "Basic.lean:324; Defs.lean:160; Defs.lean:155",
+  "how": "a few Mathlib lemmas applied one per clause: the instance isNoetherian_of_isNoetherianRing_of_finite (Basic.lean:324: [Ring R] [IsNoetherianRing R] [Module.Finite R M] : IsNoetherian R M; Module.Finite = def-weil-finitely-generated-module, IsNoetherianRing = def-weil-pbc-noetherian-ring) makes M a Noetherian module; then (1) is monotone_stabilizes_iff_noetherian.mpr (Defs.lean:160: every f : ℕ →o Submodule R M has n with f n = f m for m ≥ n) and (2) is set_has_maximal_iff_noetherian.mpr (Defs.lean:155: every nonempty a : Set (Submodule R M) has M' ∈ a with ¬ M' < I for all I ∈ a). Lines read 2026-10-10 with sed -n."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-noetherian-acc-quasi-coherent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
