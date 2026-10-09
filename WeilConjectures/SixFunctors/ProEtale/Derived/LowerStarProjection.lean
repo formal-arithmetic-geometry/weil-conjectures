@@ -16,7 +16,7 @@ Let `p : X ⟶ Y` be a morphism of schemes. We construct the projection map
 `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)`, natural in `M` in `D(X_proét)` and `L` in `D(Y_proét)`, as the
 specialisation of the general `CategoryTheory.Adjunction.rightAdjointProjectionMap` to the
 adjunction `Lp^* ⊣ Rp_*` and the comparison
-`AlgebraicGeometry.ProProEtale.leftDerivedUpperStarTensorComparison`. Its transpose along
+`AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison`. Its transpose along
 `Lp^* ⊣ Rp_*` is given by the diagram
 ```
 Lp^*(Rp_*M ⊗ᴸ L) --comparison--> Lp^*Rp_*M ⊗ᴸ Lp^*L
@@ -25,30 +25,30 @@ Lp^*(Rp_*M ⊗ᴸ L) --comparison--> Lp^*Rp_*M ⊗ᴸ Lp^*L
        transpose                        v
            ---------------------->  M ⊗ᴸ Lp^*L
 ```
-where the comparison is `AlgebraicGeometry.ProProEtale.leftDerivedUpperStarTensorComparison`, the long
+where the comparison is `AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison`, the long
 edge is `(homEquiv _ _).symm` of the projection map and `ε` is the counit of
-`AlgebraicGeometry.ProProEtale.derivedUpperStarLowerStarAdjunction`.
+`AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction`.
 
 ## Main definitions and results
 
-- `AlgebraicGeometry.ProProEtale.derivedTensorRightDerivedLowerStar p` and
-  `AlgebraicGeometry.ProProEtale.rightDerivedLowerStarDerivedTensorLeftDerivedUpperStar p`: the
+- `AlgebraicGeometry.ProEtale.derivedTensorRightDerivedLowerStar p` and
+  `AlgebraicGeometry.ProEtale.rightDerivedLowerStarDerivedTensorLeftDerivedUpperStar p`: the
   bifunctors `(M, L) ↦ Rp_*M ⊗ᴸ L` and `(M, L) ↦ Rp_*(M ⊗ᴸ Lp^*L)`, of type
   `D(X_proét) ⥤ D(Y_proét) ⥤ D(Y_proét)`.
-- `AlgebraicGeometry.ProProEtale.rightDerivedLowerStarProjectionMap p`: the projection map, as a
+- `AlgebraicGeometry.ProEtale.rightDerivedLowerStarProjectionMap p`: the projection map, as a
   natural transformation between these bifunctors.
-- `AlgebraicGeometry.ProProEtale.rightDerivedLowerStarProjectionMap_app_app`: its value at `(M, L)`
+- `AlgebraicGeometry.ProEtale.rightDerivedLowerStarProjectionMap_app_app`: its value at `(M, L)`
   is the transpose of the composite in the diagram above.
-- `AlgebraicGeometry.ProProEtale.homEquiv_symm_rightDerivedLowerStarProjectionMap`: its transpose
+- `AlgebraicGeometry.ProEtale.homEquiv_symm_rightDerivedLowerStarProjectionMap`: its transpose
   is the composite in the diagram above.
 
-The results depend on `sorryAx` through `AlgebraicGeometry.ProProEtale.derivedTensor`.
+The results depend on `sorryAx` through `AlgebraicGeometry.ProEtale.derivedTensor`.
 
 ## TODO
 
 - The projection formula at finite coefficients, currently stated with `Nonempty` in the
   `TODO(unify)` of `WeilConjectures.SixFunctors.ProEtale.Derived.Exchange`, should be restated
-  through `AlgebraicGeometry.ProProEtale.projectionMap`, which is built from this projection map in
+  through `AlgebraicGeometry.ProEtale.projectionMap`, which is built from this projection map in
   `WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekProjection`.
 - The pro-pro-étale and `O_E`/`E`-coefficient projection maps should be obtained in the same way
   from `CategoryTheory.Adjunction.rightAdjointProjectionMap`.
@@ -110,8 +110,8 @@ variable [ProEtale.UpperStarPreservesFlat A]
 /-- The projection map `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` for the derived pushforward along
 `p : X ⟶ Y`, as a natural transformation of bifunctors `D(X_proét) ⥤ D(Y_proét) ⥤ D(Y_proét)`.
 It is `CategoryTheory.Adjunction.rightAdjointProjectionMap` for the adjunction
-`AlgebraicGeometry.ProProEtale.derivedUpperStarLowerStarAdjunction` and the comparison
-`AlgebraicGeometry.ProProEtale.leftDerivedUpperStarTensorComparison`. -/
+`AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction` and the comparison
+`AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison`. -/
 noncomputable def rightDerivedLowerStarProjectionMap :
     derivedTensorRightDerivedLowerStar A p ⟶
       rightDerivedLowerStarDerivedTensorLeftDerivedUpperStar A p :=
@@ -140,9 +140,9 @@ Lp^*(Rp_*M ⊗ᴸ L) --comparison--> Lp^*Rp_*M ⊗ᴸ Lp^*L
        transpose                        v
            ---------------------->  M ⊗ᴸ Lp^*L
 ```
-where the comparison is `AlgebraicGeometry.ProProEtale.leftDerivedUpperStarTensorComparison`, the long
+where the comparison is `AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison`, the long
 edge is `(homEquiv _ _).symm` of the projection map and `ε` is the counit of
-`AlgebraicGeometry.ProProEtale.derivedUpperStarLowerStarAdjunction`. -/
+`AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction`. -/
 @[simp, reassoc]
 lemma homEquiv_symm_rightDerivedLowerStarProjectionMap
     (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
@@ -155,7 +155,7 @@ lemma homEquiv_symm_rightDerivedLowerStarProjectionMap
   Adjunction.homEquiv_symm_rightAdjointProjectionMap_app_app _ _ M L
 
 /-- The counit form of
-`AlgebraicGeometry.ProProEtale.homEquiv_symm_rightDerivedLowerStarProjectionMap`: applying `Lp^*`
+`AlgebraicGeometry.ProEtale.homEquiv_symm_rightDerivedLowerStarProjectionMap`: applying `Lp^*`
 to the projection map and composing with the counit of `Lp^* ⊣ Rp_*` gives the comparison
 followed by `ε_M ⊗ᴸ 𝟙`. -/
 @[reassoc]
