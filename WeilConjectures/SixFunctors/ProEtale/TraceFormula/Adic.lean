@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.LinearAlgebra.Trace
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
@@ -62,12 +63,13 @@ at `n`. The derived limit `R lim_n K_n` is not a categorical limit in the derive
 is the point of a homotopy limit cone `CategoryTheory.Pretriangulated.IsHomotopyLimit`, whose
 legs fit into the distinguished Milnor triangle
 `R lim K → ∏ K_n ──1 - t──▶ ∏ K_n → (R lim K)[1]`. A tower is *normalized*
-(`AlgebraicGeometry.ProEtale.IsNormalizedTower`) when each transition `K_n ⟶ K_j` is the
-reduction `K_n ⟶ K_n ⊗ᴸ R/I^j` followed by an isomorphism, so that the normalizations are
-compatible with the transition maps. Derived completeness of `R lim K` is stated as the
-homotopy-limit property of its own reductions, `R lim K ≃ R lim_n (R lim K ⊗ᴸ R/Iⁿ)`. The
-statements about compact cohomology and geometric stalks are for normalized towers of
-geometric schemes over a field whose levels are bounded constructible of finite Tor
+(`AlgebraicGeometry.ProEtale.IsNormalizedTower`) when it comes from levels
+`L_n ∈ D(X, R/Iⁿ)` whose base changes `L_n ⊗ᴸ_{R/Iⁿ} R/Iʲ` are `L_j`, each transition
+`K_n ⟶ K_j` being the restriction to `R` of the reduction followed by this isomorphism.
+Derived completeness of `R lim K` is stated as the homotopy-limit property of its own
+reductions, `R lim K ≃ R lim_n (R lim K ⊗ᴸ R/Iⁿ)`. The statements about compact cohomology
+and geometric stalks are for normalized towers of geometric schemes over a field whose levels
+are bounded constructible of finite Tor
 amplitude, which is the setting of the blueprint. This forces the coefficient category to be
 `ModuleCat 𝒪_E`, which does satisfy the standard coefficient instance block, so that the
 pro-étale operations `Rf_!` and `Lx̄^*` apply to it unchanged.
@@ -155,19 +157,59 @@ open Pretriangulated
 
 variable {R : Type (u + 1)} [CommRing R] (I : Ideal R)
 
-/-- A tower `K : ℕᵒᵖ ⥤ D(X, R)` is *normalized* with respect to an ideal `I` if, for `j ≤ n`,
-the transition map `K_n ⟶ K_j` is the reduction `K_n ⟶ K_n ⊗ᴸ R/I^j` followed by an
-isomorphism `K_n ⊗ᴸ R/I^j ≅ K_j`: the normalizations are compatible with the transition maps
-(part of blueprint `sk-prop-trace-adic`). -/
+variable (X) in
+/-- Restriction of scalars along `R → R/Iⁿ`, from `D(X_proét, R/Iⁿ)` to `D(X_proét, R)`. -/
+noncomputable abbrev levelRestrictScalars (n : ℕ) :
+    DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R ⧸ I ^ n))) ⥤
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) :=
+  (Sheaf.restrictScalars (Scheme.ProEt.topology X) (Ideal.Quotient.mk (I ^ n))).mapDerivedCategory
+
+variable (X) in
+/-- Restriction of scalars along `R/Iⁿ → R/Iʲ` for `j ≤ n`, from `D(X_proét, R/Iʲ)` to
+`D(X_proét, R/Iⁿ)`. -/
+noncomputable abbrev levelTransitionRestrictScalars {j n : ℕ} (h : j ≤ n) :
+    DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R ⧸ I ^ j))) ⥤
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R ⧸ I ^ n))) :=
+  (Sheaf.restrictScalars (Scheme.ProEt.topology X)
+    (Ideal.Quotient.factor (Ideal.pow_le_pow_right h))).mapDerivedCategory
+
+variable (X) in
+/-- Restricting scalars from `R/Iʲ` to `R/Iⁿ` and then to `R` is restricting scalars from
+`R/Iʲ` to `R`. -/
+noncomputable def levelRestrictScalarsCompIso {j n : ℕ} (h : j ≤ n) :
+    levelTransitionRestrictScalars X I h ⋙ levelRestrictScalars X I n ≅
+      levelRestrictScalars X I j :=
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (Sheaf.restrictScalarsCompIso _ _ _ _
+      (Ideal.Quotient.factor_comp_mk (Ideal.pow_le_pow_right h)).symm)
+
+/-- A tower `K : ℕᵒᵖ ⥤ D(X, R)` is *normalized* with respect to an ideal `I` if it comes from a
+compatible system of levels `L_n ∈ D(X, A_n)` over the rings `A_n = R/Iⁿ`, as in blueprint
+`sk-prop-trace-adic`:
+- `K_n` is `L_n` with scalars restricted to `R`;
+- for `j ≤ n`, the base change `L_n ⊗ᴸ_{A_n} A_n/I^j A_n` of `L_n` along `A_n → A_j` is
+  isomorphic to `L_j` with scalars restricted to `A_n`;
+- the transition `K_n ⟶ K_j` is the restriction to `R` of the reduction
+  `L_n ⟶ L_n ⊗ᴸ_{A_n} A_n/I^j A_n` followed by this isomorphism.
+
+The base change is taken over `A_n`, not over `R`: for `I = (ϖ)` with `ϖ` a nonzerodivisor,
+`L_n ⊗ᴸ_R R/Iʲ` has an extra `Tor₁` term, and requiring it to be `L_j` would force the tower
+to vanish. -/
 def IsNormalizedTower
     (K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) :
     Prop :=
-  ∀ n j : ℕ, ∀ h : j ≤ n,
-    ∃ e : (DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I
-        (K.obj (Opposite.op n))).obj (Opposite.op j) ≅ K.obj (Opposite.op j),
-      K.map (homOfLE h).op =
-        (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X) I
-          (K.obj (Opposite.op n))).π.app (Opposite.op j) ≫ e.hom
+  ∃ (L : ∀ n : ℕ,
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R ⧸ I ^ n))))
+    (eK : ∀ n : ℕ, K.obj (Opposite.op n) ≅ (levelRestrictScalars X I n).obj (L n))
+    (e : ∀ n j : ℕ, ∀ h : j ≤ n,
+      (DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X)
+          (I.map (Ideal.Quotient.mk (I ^ n))) (L n)).obj (Opposite.op j) ≅
+        (levelTransitionRestrictScalars X I h).obj (L j)),
+    ∀ n j : ℕ, ∀ h : j ≤ n, K.map (homOfLE h).op =
+      (eK n).hom ≫ (levelRestrictScalars X I n).map
+        ((DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X)
+          (I.map (Ideal.Quotient.mk (I ^ n))) (L n)).π.app (Opposite.op j) ≫ (e n j h).hom) ≫
+        (levelRestrictScalarsCompIso X I h).hom.app (L j) ≫ (eK j).inv
 
 variable [IsAdicComplete I R] [IsDomain R] (hI : I.IsPrincipal)
   {K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))}
@@ -223,8 +265,9 @@ theorem isHomotopyLimit_mapCone_rightDerivedLowerShriek [s.IsSpecOfField] (aX : 
   -- is triangulated and preserves products, so it preserves homotopy limits.
   let cX := HasCompactification.compactification aX
   -- The remaining step: the extension by zero `Di_!` commutes with `R lim` on towers of `Dctf`
-  -- objects. This needs countable products in `D(X_proét)` and repleteness of the pro-étale
-  -- topos, which are not available.
+  -- objects. Countable products in `D(X_proét)` exist
+  -- (`DerivedCategory.hasLimitsOfShape_discrete`), but `Di_!` is a left adjoint and its
+  -- commutation with them needs repleteness of the pro-étale topos, which is not available.
   have hi : IsHomotopyLimit ((cX.i)_!open[ModuleCat.{u + 1} R].mapDerivedCategory.mapCone c) :=
     sorry
   have :=
