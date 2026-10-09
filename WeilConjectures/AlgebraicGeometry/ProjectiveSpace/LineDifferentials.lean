@@ -475,6 +475,95 @@ lemma chartLocalDerivation_agree (hij : i ≠ j) (σ τ : ℤ) (hστ : σ = -τ
   exact LocalDerivation.ext_of_isAffineOpen (isAffineOpen_chart k (Set.univ_nonempty)) D₁ D₂ key W
     (le_overlap k hij hi hj) a
 
+/-- The other homogeneous coordinate. -/
+def other (i : ULift.{u} (Fin 2)) : ULift.{u} (Fin 2) :=
+  ⟨i.down.rev⟩
+
+lemma ne_other (i : ULift.{u} (Fin 2)) : i ≠ other i := by
+  obtain ⟨⟨i, hi⟩⟩ := i
+  simp only [other, ne_eq, ULift.up.injEq, Fin.ext_iff, Fin.val_rev]
+  omega
+
+lemma other_eq (hij : i ≠ j) : other i = j :=
+  ((eq_or_eq_of_ne (ne_other i) j).resolve_left hij.symm).symm
+
+/-- The sign `1` on `D₊(x₀)` and `-1` on `D₊(x₁)`. -/
+def sign (i : ULift.{u} (Fin 2)) : ℤ :=
+  if i = ⟨0⟩ then 1 else -1
+
+lemma sign_eq_neg (hij : i ≠ j) : sign i = -sign j := by
+  obtain ⟨⟨i, hi⟩⟩ := i
+  obtain ⟨⟨j, hj⟩⟩ := j
+  simp only [ne_eq, ULift.up.injEq, Fin.mk.injEq] at hij
+  simp only [sign, ULift.up.injEq, Fin.ext_iff]
+  split_ifs <;> omega
+
+/-- The derivation `sign i • d / d(x_{other i} / xᵢ)` over `D₊(xᵢ)`. -/
+def localD (i : ULift.{u} (Fin 2)) :
+    LocalDerivation (twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)) (chart k {i}) :=
+  chartLocalDerivation k (ne_other i) (sign i)
+
+lemma chartLocalDerivation_congr {j' : ULift.{u} (Fin 2)} (hij : i ≠ j) (hij' : i ≠ j')
+    (h : j = j') (σ : ℤ) : chartLocalDerivation k hij σ = chartLocalDerivation k hij' σ := by
+  subst h
+  rfl
+
+lemma localD_agree (i j : ULift.{u} (Fin 2)) (W : (ProjectiveLine (Spec (.of k))).Opens)
+    (hi : W ≤ chart k {i}) (hj : W ≤ chart k {j}) (a : Γ(ProjectiveLine (Spec (.of k)), W)) :
+    (localD k i).app W hi a = (localD k j).app W hj a := by
+  by_cases hij : i = j
+  · subst hij
+    rfl
+  · rw [localD, localD, chartLocalDerivation_congr k (ne_other i) hij (other_eq hij),
+      chartLocalDerivation_congr k (ne_other j) (Ne.symm hij) (other_eq (Ne.symm hij))]
+    exact chartLocalDerivation_agree k hij _ _ (sign_eq_neg hij) W hi hj a
+
+/-- **The derivation `𝒪 → 𝒪(-2)`** on `ℙ¹_k`, given by `d/dt` on `D₊(x₀)` and `-d/ds` on
+`D₊(x₁)`. -/
+def twistDerivation : LocalDerivation (twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)) ⊤ :=
+  LocalDerivation.glueCover (fun i ↦ chart k {i}) (iSup_chart k) (localD k) (localD_agree k)
+
+lemma twistDerivation_app (i : ULift.{u} (Fin 2)) (W : (ProjectiveLine (Spec (.of k))).Opens)
+    (hW : W ≤ chart k {i}) (a : Γ(ProjectiveLine (Spec (.of k)), W)) :
+    (twistDerivation k).app W le_top a = (localD k i).app W hW a :=
+  LocalDerivation.glueCover_app _ _ _ _ i W hW a
+
+lemma appLE_top_eq_chartConst (W : (ProjectiveLine (Spec (.of k))).Opens)
+    (e : W ≤ (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) ⁻¹ᵁ ⊤) (c : Γ(Spec (.of k), ⊤)) :
+    (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).appLE ⊤ W e c =
+      chartConst k W ((Scheme.ΓSpecIso (.of k)).hom c) := by
+  simp only [chartConst, Scheme.Hom.appLE, CommRingCat.hom_comp, RingHom.coe_comp,
+    Function.comp_apply]
+  rw [← CommRingCat.comp_apply (Scheme.ΓSpecIso _).hom, Iso.hom_inv_id, CommRingCat.id_apply]
+  rfl
+
+lemma twistDerivation_appLE (U : (Spec (.of k)).Opens) (V : (ProjectiveLine (Spec (.of k))).Opens)
+    (e : V ≤ (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) ⁻¹ᵁ U) (c : Γ(Spec (.of k), U)) :
+    (twistDerivation k).app V le_top
+      ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).appLE U V e c) = 0 := by
+  by_cases hV : V = ⊥
+  · subst hV
+    have := subsingleton_sections_bot (twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2))
+    exact Subsingleton.elim _ _
+  obtain ⟨x, hx⟩ := (Opens.ne_bot_iff_nonempty V).1 hV
+  obtain rfl : U = ⊤ := eq_top_iff.2 fun y _ ↦ Subsingleton.elim
+    ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).base x) y ▸ e hx
+  refine TopCat.Sheaf.eq_of_locally_eq' ⟨_, (twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)).isSheaf⟩
+    (fun i ↦ V ⊓ chart k {i}) V (fun _ ↦ homOfLE inf_le_left) (fun y hy ↦ ?_) _ 0 fun i ↦ ?_
+  · obtain ⟨i, hi⟩ := Opens.mem_iSup.mp ((iSup_chart k).ge (Set.mem_univ y))
+    exact Opens.mem_iSup.mpr ⟨i, hy, hi⟩
+  · rw [map_zero, ← (twistDerivation k).naturality V _ le_top inf_le_left]
+    have h1 : (ProjectiveLine (Spec (.of k))).presheaf.map
+        (homOfLE (inf_le_left : V ⊓ chart k {i} ≤ V)).op
+          ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).appLE ⊤ V e c) =
+        (ProjectiveLine (Spec (.of k))).presheaf.map
+          (homOfLE (inf_le_right : V ⊓ chart k {i} ≤ chart k {i})).op
+          (chartConst k (chart k {i}) ((Scheme.ΓSpecIso (.of k)).hom c)) := by
+      rw [presheaf_map_chartConst, ← appLE_top_eq_chartConst k _ (inf_le_left.trans e)]
+      exact ConcreteCategory.congr_hom (Scheme.Hom.appLE_map _ e _) c
+    rw [h1, twistDerivation_app k i _ inf_le_right, localD, chartLocalDerivation_app_restrict,
+      chartDerivation_chartConst, map_zero]
+
 end Glue
 
 end AlgebraicGeometry.ProjectiveLine
