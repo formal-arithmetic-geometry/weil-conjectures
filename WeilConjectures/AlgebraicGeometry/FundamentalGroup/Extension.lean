@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Gluing
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 
 /-!
@@ -109,5 +110,75 @@ theorem exists_pullback_iso_of_ker_smul (hρ : Function.Surjective (fundamentalG
     ObjectProperty.isoMk _ (Action.mkIso (FintypeCat.equivEquivIso (Equiv.ofBijective φ hφ))
       fun g ↦ FintypeCat.hom_ext _ _ fun y ↦ hφg g y)
   exact ⟨ZV, ⟨EU.fullyFaithfulFunctor.preimageIso I⟩⟩
+
+section Fixing
+
+variable {U Y Y' : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ U)
+  (k : U ⟶ Y) (G : Type u) [Group G] [∀ P, MulAction G ((fiber s).obj P)]
+
+/-- The elements of `π₁(U, s)` acting trivially on the geometric fibres of all base changes of
+finite étale `Y`-schemes along `k : U ⟶ Y`: the kernel of `π₁(U, s) → π₁(Y)`. -/
+def fixingSubgroup : Subgroup G where
+  carrier := {g | ∀ (P : Y.FiniteEtale) (x : (fiber s).obj ((pullback k).obj P)), g • x = x}
+  mul_mem' {g h} hg hh P x := by
+    rw [mul_smul, hh, hg]
+  one_mem' P x := one_smul G x
+  inv_mem' {g} hg P x := by
+    conv_lhs => rw [← hg P x]
+    exact inv_smul_smul g x
+
+lemma mem_fixingSubgroup_iff {g : G} :
+    g ∈ fixingSubgroup s k G ↔
+      ∀ (P : Y.FiniteEtale) (x : (fiber s).obj ((pullback k).obj P)), g • x = x :=
+  Iff.rfl
+
+instance : (fixingSubgroup s k G).Normal where
+  conj_mem g hg h P x := by
+    rw [mul_smul, mul_smul, hg, smul_inv_smul]
+
+lemma isClosed_fixingSubgroup [TopologicalSpace G] [∀ P, ContinuousSMul G ((fiber s).obj P)] :
+    IsClosed (fixingSubgroup s k G : Set G) := by
+  have : (fixingSubgroup s k G : Set G) =
+      ⋂ (P : Y.FiniteEtale) (x : (fiber s).obj ((pullback k).obj P)), {g : G | g • x = x} := by
+    ext g
+    simp [mem_fixingSubgroup_iff]
+  rw [this]
+  exact isClosed_iInter fun P ↦ isClosed_iInter fun x ↦
+    isClosed_eq (continuous_id.smul continuous_const) continuous_const
+
+variable [IsNaturalSMul (fiber s) G]
+
+/-- An element fixing the geometric fibre of a finite étale scheme fixes that of any isomorphic
+one. -/
+lemma smul_eq_self_of_iso {P Q : U.FiniteEtale} (e : P ≅ Q) {g : G}
+    (h : ∀ x : (fiber s).obj P, g • x = x) (y : (fiber s).obj Q) : g • y = y := by
+  obtain ⟨x, rfl⟩ : ∃ x, (fiber s).map e.hom x = y :=
+    ⟨(fiber s).map e.inv y, ConcreteCategory.congr_hom ((fiber s).mapIso e).inv_hom_id y⟩
+  rw [← IsNaturalSMul.naturality, h]
+
+lemma fixingSubgroup_le_comp (m : Y ⟶ Y') : fixingSubgroup s k G ≤ fixingSubgroup s (k ≫ m) G :=
+  fun _ hg P ↦ smul_eq_self_of_iso s G (pullbackCompIso k m P).symm (hg _)
+
+variable [ConnectedSpace Y] {Ω' : Type u} [Field Ω'] [IsSepClosed Ω'] {t : Spec (.of Ω') ⟶ Y}
+  (τ : pullback k ⋙ fiber s ≅ fiber t)
+  (GY : Type u) [Group GY] [TopologicalSpace GY] [IsTopologicalGroup GY] [CompactSpace GY]
+  [∀ P, MulAction GY ((fiber t).obj P)] [IsFundamentalGroup (fiber t) GY]
+
+/-- The kernel of the map `π₁(U, s) → π₁(Y, t)` induced by `k` is the subgroup of elements acting
+trivially on the base changes of finite étale `Y`-schemes. -/
+lemma ker_fundamentalGroupMap : (fundamentalGroupMap τ G GY).ker = fixingSubgroup s k G := by
+  ext g
+  rw [MonoidHom.mem_ker, mem_fixingSubgroup_iff]
+  constructor
+  · intro hg P x
+    apply ((ConcreteCategory.isIso_iff_bijective (τ.hom.app P)).1 inferInstance).1
+    rw [← fundamentalGroupMap_smul τ G GY, hg, one_smul]
+  · intro hg
+    refine IsFundamentalGroup.non_trivial (F := fiber t) _ fun P y ↦ ?_
+    obtain ⟨x, rfl⟩ : ∃ x, τ.hom.app P x = y :=
+      ⟨τ.inv.app P y, ConcreteCategory.congr_hom (τ.inv_hom_id_app P) y⟩
+    rw [fundamentalGroupMap_smul, hg]
+
+end Fixing
 
 end AlgebraicGeometry.Scheme.FiniteEtale
