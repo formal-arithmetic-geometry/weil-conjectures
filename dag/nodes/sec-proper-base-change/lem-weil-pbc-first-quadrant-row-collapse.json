@@ -11,9 +11,58 @@
   "def-sp-abelian",
   "def-sp-filtration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "**Step 1 (the vanishing propagates to every page).** Claim: for every $r\\ge2$, $E_r^{p,q}=0$ whenever $p<0$, or $q<0$, or $q>0$. For $r=2$ this is the first-quadrant hypothesis together with the hypothesis $E_2^{p,q}=0$ for $q>0$. If it holds for $r$, then $E_{r+1}^{p,q}\\cong\\ker(d_r^{p,q})/\\operatorname{im}(d_r^{p-r,q+r-1})$ is a subquotient of $E_r^{p,q}$, and a subquotient of $0$ is $0$ in the abelian category $\\mathcal A$; so it holds for $r+1$. By induction on $r$ the claim holds for all $r\\ge2$.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 011N (definition-spectral-sequence, line 5164): $E_{r+1}=\\Ker(d_r)/\\Im(d_r)$; Lemma 0BDV (lemma-relate-boundedness, line 6292), proof hint: 'If $E_r^{p,q}=0$, then we have $E_{r'}^{p,q}=0$ for all $r'\\ge r$'"
+   }
+  },
+  {
+   "text": "**Step 2 ($E_\\infty$ and the row $q=0$ is stationary from $E_2$ on).** Fix $(p,q)$ and $r>\\max(p,q+1)$. The differential out of $E_r^{p,q}$ lands in $E_r^{p+r,q-r+1}$ with $q-r+1<0$, and the differential into it starts at $E_r^{p-r,q+r-1}$ with $p-r<0$; both objects are $0$ by Step 1, so both differentials are $0$ and $E_{r+1}^{p,q}\\cong\\ker/\\operatorname{im}=E_r^{p,q}$. Hence the $E_r^{p,q}$ for $r>\\max(p,q+1)$ are identified with each other by these isomorphisms, and $E_\\infty^{p,q}$ of the statement is well defined (in Stacks' terms the subobjects $Z_r^{p,q}$, $B_r^{p,q}$ of $E_2^{p,q}$ are stationary, so this is the limit $Z_\\infty/B_\\infty$; a first-quadrant spectral sequence is bounded, hence regular and coregular). Now take $(p,q)=(n,0)$ with $n\\ge0$ and any $r\\ge2$: the differential out of $E_r^{n,0}$ lands in $E_r^{n+r,1-r}$, which is $0$ since $1-r<0$; the differential into $E_r^{n,0}$ starts at $E_r^{n-r,r-1}$, which is $0$ by Step 1 since $r-1\\ge1>0$ (the hypothesis on the rows $q>0$). So $d_r$ vanishes into and out of $E_r^{n,0}$ for every $r\\ge2$, $E_{r+1}^{n,0}\\cong E_r^{n,0}$ for every $r\\ge2$, and composing these finitely many isomorphisms up to any $r>\\max(n,1)$ gives $E_2^{n,0}\\cong E_\\infty^{n,0}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 011O (definition-limit-spectral-sequence, line 5219): limit $E_\\infty=Z_\\infty/B_\\infty$ and degeneration at $E_r$ with $E_r=E_{r+1}=\\dots=E_\\infty$; Definition 0BDU (definition-bounded-ss, line 6262) and Lemma 0BDV (lemma-relate-boundedness, line 6292), (1)-(2), (5)-(6): bounded implies regular and coregular, i.e. $Z_r^{p,q}$ and $B_r^{p,q}$ eventually constant"
+   }
+  },
+  {
+   "text": "**Step 3 (the filtration of $H^n$ collapses to its last step).** Fix $n\\ge0$. By hypothesis $H^n=F^0H^n\\supseteq\\dots\\supseteq F^{n+1}H^n=0$ with $F^pH^n/F^{p+1}H^n\\cong E_\\infty^{p,n-p}$ [def-sp-filtration]. For $0\\le p\\le n-1$ we have $n-p\\ge1$, so $E_\\infty^{p,n-p}=E_r^{p,n-p}=0$ (for $r$ large, Step 2) by Step 1. So the inclusion $F^{p+1}H^n\\to F^pH^n$ is a monomorphism with cokernel $\\operatorname{gr}^pH^n=0$, hence an epimorphism, hence an isomorphism in the abelian category $\\mathcal A$ [def-sp-abelian]; i.e. $F^{p+1}H^n=F^pH^n$ as subobjects. Composing for $p=0,\\dots,n-1$: $F^nH^n=F^0H^n=H^n$, so the inclusion $F^nH^n\\hookrightarrow H^n$ is an isomorphism. Since $F^{n+1}H^n=0$, the quotient map $F^nH^n\\to F^nH^n/F^{n+1}H^n=\\operatorname{gr}^nH^n$ is an isomorphism, and $\\operatorname{gr}^nH^n\\cong E_\\infty^{n,0}$. (For $n=0$ the chain is empty and $F^0H^0=H^0$ directly.)",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 0121 (definition-filtered, line 4667), items (1), (7): finite filtrations and $\\operatorname{gr}^p=F^p/F^{p+1}$; Lemma 012W (lemma-biregular-ss-converges, line 6362), proof of (4): 'we can find an $r'$ such that $E_\\infty^{p,q}=E_{r'}^{p,q}$ for all $p,q$ with $p+q=n$. Thus $H^n$ has a finite filtration whose graded pieces are ...'; Lemma 0132 (lemma-first-quadrant-ss, line 6672), (2)-(3): finite filtrations and convergence in the first quadrant"
+   }
+  },
+  {
+   "text": "**Step 4 (the edge map; the particular case).** The edge map of the statement is the composite $E_2^{n,0}\\xrightarrow{\\ \\sim\\ }E_\\infty^{n,0}\\xrightarrow{\\ \\sim\\ }\\operatorname{gr}^nH^n=F^nH^n\\hookrightarrow H^n$ of the isomorphism of Step 2, the inverse of the convergence isomorphism, the identification $F^nH^n=\\operatorname{gr}^nH^n$ (as $F^{n+1}H^n=0$) and the inclusion; each is an isomorphism (Steps 2 and 3), so the edge map is an isomorphism $E_2^{n,0}\\cong H^n$ for every $n\\ge0$. If moreover $H^n=0$ for every $n>0$, then $E_2^{n,0}\\cong H^n=0$ for every $n>0$ (and conversely, if $E_2^{n,0}=0$ for $n>0$ then $H^n=0$ for $n>0$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (lemma-sandwich), proof, second paragraph ('Using the spectral sequence ... we conclude that $R^pg'_*(f'_*a^{-1}\\mathcal J)=0$ for $p>0$'), where this conclusion is drawn without statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Stacks states no such lemma; the proof is written from Homology, Definitions 011N, 011O, 0121, 0BDU, Lemmas 0BDV, 012W (proof of (4)), 0132, and is the inference left implicit in Etale Cohomology, Lemma 0A4C, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +84,38 @@
    "results": "Mathlib/Algebra/Homology/SpectralSequence/Basic.lean defines `SpectralSequence` (pages, differentials, iso to homology of previous page), `CohomologicalSpectralSequence`, `E₂CohomologicalSpectralSequenceNat`, page functors and morphisms only; no convergence, abutment, E_∞ or degeneration lemma; no 'collapse'/'degenerat' in Algebra/Homology; no Grothendieck or Leray spectral sequence",
    "date": "2026-10-09",
    "verdict": "no match: Mathlib has spectral sequences but no notion of convergence, so the statement is absent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "first quadrant spectral sequence whose E2 page vanishes outside the row q = 0: edge map E2^{n,0} to abutment is an isomorphism",
+   "results": "HomologicalComplex₂.d₁_eq_zero (Mathlib.Algebra.Homology.TotalComplex); ShortComplex.quasiIso_iff_isIso_descOpcycles, RightHomologyMapData.ofZeros_φQ, cyclesIsoLeftHomology, RightHomologyData.ofHasKernel_Q; ShortComplex.ShortExact.δIso (Mathlib.Algebra.Homology.HomologySequence); Abelian.epi_of_epi_of_epi_of_epi; CochainComplex.mkHom_f_0: none about spectral sequences",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.SpectralObject.IsFirstQuadrant",
+   "results": "SpectralObject.IsFirstQuadrant (class on spectral objects indexed by EInt: vanishing of H^n on intervals ≤ 0 and above n), its fields isZero₁/isZero₂, isZero₁_of_isFirstQuadrant, isZero₂_of_isFirstQuadrant, instHasSpectralSequence…CoreE₂CohomologicalNat, SpectralObject.E₂SpectralSequenceNat (Mathlib.Algebra.Homology.SpectralObject.HasSpectralSequence, .SpectralSequence): construction of the first-quadrant E₂ spectral sequence of a spectral object; no E_∞, abutment, filtration or edge-map statement",
+   "date": "2026-10-09",
+   "verdict": "no match: first-quadrant spectral sequences exist (from spectral objects) but without convergence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "convergence of a spectral sequence: E_infinity page isomorphic to graded pieces of a filtration on the abutment",
+   "results": "CochainComplex.ConnectData.homologyIsoPos; HomologicalComplex.pOpcycles_extendOpcyclesIso_inv, homologyπ_extendHomologyIso_inv/hom, truncGE'.XIsoOpcycles, restrictionToTruncGE'.f_eq_iso_hom_pOpcycles_iso_inv, restrictionOpcyclesIso (Mathlib.Algebra.Homology.Embedding.*): homology of complexes, no spectral-sequence convergence",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "'pageInfinity|EInfinity|abutment|Abutment|ConvergesTo|convergesTo' in all of Mathlib/; 'Infty|∞|abut|stationary|collapse|degenerat|filtration' in Mathlib/Algebra/Homology/SpectralObject/ and Mathlib/Algebra/Homology/SpectralSequence/; read SpectralObject/HasSpectralSequence.lean lines 385-440 and SpectralObject/SpectralSequence.lean header",
+   "results": "no hit for the first pattern anywhere; second pattern only a comment in SpectralSequence/ComplexShape.lean line 24 ('spectral sequences associated to a *finite* filtration'); SpectralSequence/Basic.lean has the structure SpectralSequence, Hom, pageXIsoOfEq, pageFunctor and the abbrevs (E₂)CohomologicalSpectralSequence(Nat|Fin); IsFirstQuadrant is a class on SpectralObject C EInt whose docstring says '(convergent)' but no convergence is stated",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has (first-quadrant) spectral sequences but no limit page, abutment or convergence, so the statement is absent; confirmed"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +135,16 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-first-quadrant-row-collapse",
+  "worker": "stage1",
+  "summary": "Statement kept (it fixes its own convergence conventions: first quadrant, E_∞^{p,q}=E_r^{p,q} for r>max(p,q+1), finite filtration H^n=F^0⊇…⊇F^{n+1}=0 with gr^p≅E_∞^{p,n-p}); stmt_deps def-sp-abelian, def-sp-filtration kept; it deliberately does not use def-sp-convergence (exact-couple notion whose 'regular' = B_r eventually constant is Stacks' coregular, Lemma 0BDV (2)); the node needs neither regularity hypothesis, since first-quadrant gives both. Proof written in four elementary steps from Stacks Homology 011N, 011O, 0121, 0BDU/0BDV, 012W (proof of (4)), 0132: vanishing for q>0 on all pages; d_r into and out of (n,0) vanish so E_2^{n,0}=E_∞^{n,0}; gr^p H^n=0 for p<n so F^nH^n=H^n and F^nH^n=E_∞^{n,0}; the edge map and the particular case. No new nodes. Mathlib re-searched three ways (leansearch, loogle on SpectralObject.IsFirstQuadrant, leanfinder, grep): spectral sequences and first-quadrant spectral objects exist, no convergence: no match. Proof marked agent-written because Stacks uses this inference (0A4C) without stating it."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }
