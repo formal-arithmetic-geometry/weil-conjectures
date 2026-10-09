@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-frobenius-cohomology-transport-iso",
+ "kind": "statement",
+ "title": "The transport of cohomology along the geometric Frobenius is an isomorphism",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a\nprime $\\ell\\neq p$, a finite extension $E/\\Ql$ contained in the chosen\nalgebraic closure $\\Qlb$, an integer $n\\geq1$, and a coefficient ring\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$. Let $Y_0$ be a separated\nfinite-type [def-weil-scheme-morphism-properties] $k_0$-scheme, put\n$Y=Y_0\\times_{k_0}k$, $s=\\Spec k$, let $a_Y:Y\\to s$ be the structure\nmorphism, let $g_Y:Y\\to Y$ be the geometric Frobenius\n[def-weil-frobenius-detailed] and $g_s=\\Spec(\\operatorname{Frob}_q):s\\to s$.\nLet $\\iota_N$ (for $N\\in D^b_c(s,\\Lambda)$), $\\operatorname{FrEx}_{Y,*}(M)$,\n$\\operatorname{FrEx}_{Y,!}(M)$, $\\tau_M$ and $\\tau_{c,M}$ (for $M\\in\nD^b_c(Y,\\Lambda)$) be the point transport, the exchange maps along the\nFrobenius square, and the transports of ordinary and compactly supported\ncohomology along $g_Y$ of [def-weil-frobenius-cohomology-transport]. Then:\n\n1. for every $N\\in D^b_c(s,\\Lambda)$, $\\iota_N:\\operatorname{Fib}_s(N)\\to\n\\operatorname{Fib}_s(Lg_s^*N)$ is an isomorphism;\n\n2. for every $M\\in D^b_c(Y,\\Lambda)$,\n$\\operatorname{FrEx}_{Y,*}(M):Lg_s^*Ra_{Y*}M\\to Ra_{Y*}Lg_Y^*M$ and\n$\\operatorname{FrEx}_{Y,!}(M):Lg_s^*Ra_{Y!}M\\to Ra_{Y!}Lg_Y^*M$ are\nisomorphisms in $D^b_c(s,\\Lambda)$;\n\n3. consequently, for every $M\\in D^b_c(Y,\\Lambda)$,\n$\\tau_M:\\RGamma(Y,M)\\to\\RGamma(Y,Lg_Y^*M)$ and\n$\\tau_{c,M}:\\RGammac(Y,M)\\to\\RGammac(Y,Lg_Y^*M)$ are isomorphisms, natural\nin $M$, and so are the induced maps $\\mathrm H^i(\\tau_M)$ and\n$\\mathrm H^i(\\tau_{c,M})$ on cohomology groups\n[def-weil-ordinary-compact-cohomology] for every integer $i$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+  "place": "the symbols \\sim on the first arrows of both displayed composites of node def-weil-global-geometric-frobenius (order 2061), asserted there without proof; also node lem-trf-frobenius-operator-compact-description (order 2298), which calls the compact-support arrow 'the compact-support base-change isomorphism along the automorphism'; cf. Deligne, La conjecture de Weil II (literature/deligne-weil-II_PMIHES-1980-52.pdf), (1.1.7), p. 151, action by transport of structure"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-frobenius-detailed",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rli -E 'etale cohomology|étale cohomology|Weil sheaf|Weil conjecture|geometric Frobenius|compactly supported cohomology|proper base change' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "AlgebraicGeometry/Sites/ElladicCohomology.lean (defines Scheme.ellAdicSheaf and Scheme.EllAdicCohomology: the pro-etale cohomology groups H^i(X, Z_l) of a scheme, no functoriality in X, no Frobenius, no compact supports, no derived direct image) and AlgebraicGeometry/Sites/BigZariski.lean (docstring mention only)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i frobenius ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ; grep -rl -E 'frobenius|Frobenius' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "nothing in AlgebraicGeometry/; elsewhere only the ring-theoretic Frobenius (RingTheory/Frobenius.lean, Algebra/CharP/Frobenius.lean, WittVector/Frobenius.lean, FieldTheory/Perfect.lean): the q-power map of a ring, no scheme morphism Y -> Y and no action on cohomology",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i -E 'beck.chevalley|base change|exchange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ; grep -n -E '^def |^noncomputable def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Pullback.lean ; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point",
+   "results": "CategoryTheory/Adjunction/Mates.lean (mates of squares of adjunctions, the abstract form of an exchange map); CategoryTheory/Sites/Pullback.lean (sheafPullback, sheafAdjunctionContinuous: the underived pullback-pushforward adjunction for a continuous functor of sites); Sites/SheafCohomology/Basic.lean (Sheaf.H F n as Ext from the constant sheaf); Sites/Point/* (points of sites and fiber functors). No derived direct image Rf_*, no Rf_!, no exchange transformation for a square of schemes, no transport of cohomology along an automorphism",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-global-geometric-frobenius",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
