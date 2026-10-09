@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Galois.Equivalence
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.IsFundamentalgroup
 
 /-!
@@ -54,9 +55,8 @@ profinite group `G : ProfiniteGrp.{u}` together with a fundamental group structu
 isomorphism compatible with the actions
 (`CategoryTheory.PreGaloisCategory.toAutContinuousMulEquiv`).
 
-The Galois category axioms for finite étale schemes (blueprint `lem-fet-galois-category`), the
-finiteness of geometric fibres and the essential smallness are recorded as separate lemmas
-without proof here.
+The Galois category axioms for finite étale schemes (blueprint `lem-fet-galois-category`) are
+recorded without proof here.
 -/
 
 @[expose] public section
@@ -172,9 +172,24 @@ attribute [instance] galoisCategory
 
 variable (Y) in
 /-- The finite étale `Y`-schemes form an essentially small category: finite morphisms are
-affine, so a finite étale `Y`-scheme is determined by a quasi-coherent `𝒪_Y`-algebra. -/
+affine and of finite type, and the `Y`-schemes affine and locally of finite type over `Y` form an
+essentially small family
+(`AlgebraicGeometry.Scheme.Over.small_skeleton_isAffineHomLocallyOfFiniteType`). -/
 theorem essentiallySmall : EssentiallySmall.{u} Y.FiniteEtale := by
-  sorry
+  let Q := Scheme.Over.isAffineHomLocallyOfFiniteType (Y := Y)
+  have hQ (P : Y.FiniteEtale) : Q ((MorphismProperty.Over.forget _ _ _).obj P.obj) := by
+    have : IsFinite P.obj.hom := P.property
+    exact ⟨inferInstanceAs (IsAffineHom P.obj.hom), inferInstanceAs (LocallyOfFiniteType P.obj.hom)⟩
+  let g : Skeleton Y.FiniteEtale → Skeleton Q.FullSubcategory := fun x ↦
+    toSkeleton ⟨(MorphismProperty.Over.forget _ _ _).obj (Quotient.out x).obj, hQ _⟩
+  have hg : Function.Injective g := fun x y hxy ↦ by
+    obtain ⟨e⟩ := Quotient.exact hxy
+    rw [← Quotient.out_eq x, ← Quotient.out_eq y]
+    exact Quotient.sound ⟨ObjectProperty.isoMk _
+      (MorphismProperty.Over.isoMk ((CategoryTheory.Over.forget Y).mapIso
+        ((ObjectProperty.ι _).mapIso e)) (Over.w e.hom.hom))⟩
+  have := Scheme.Over.small_skeleton_isAffineHomLocallyOfFiniteType (Y := Y)
+  exact (essentiallySmall_iff _).2 ⟨small_of_injective hg, ⟨fun _ _ ↦ inferInstance⟩⟩
 
 section FundamentalGroup
 
