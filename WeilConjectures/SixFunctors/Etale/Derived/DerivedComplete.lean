@@ -92,13 +92,15 @@ theorem derivedComplete_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) (
     DerivedCategory.derivedComplete Y.smallEtaleTopology I
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
   -- Proof sketch: by `derivedComplete_iff`, `hK` says that the cone `K ⟶ K ⊗ᴸ Λ/Iⁿ` is a
-  -- limit cone. `Rf_*` is right adjoint to `Lf^*`, so it preserves limit cones, and the image
-  -- cone `Rf_* K ⟶ Rf_*(K ⊗ᴸ Λ/Iⁿ)` is a limit cone. Each `Iⁿ` is principal, so
+  -- homotopy limit (its Milnor triangle is distinguished). `Rf_*` is triangulated and, being
+  -- right adjoint to `Lf^*`, preserves products, so by `IsHomotopyLimit.map` the image cone
+  -- `Rf_* K ⟶ Rf_*(K ⊗ᴸ Λ/Iⁿ)` is a homotopy limit. Each `Iⁿ` is principal, so
   -- `nonempty_iso_reductionModIdeal_rightDerivedLowerStar` gives
   -- `Rf_*(K ⊗ᴸ Λ/Iⁿ) ≅ Rf_* K ⊗ᴸ Λ/Iⁿ`, naturally in `n` (the isomorphisms are built from
   -- the cones of multiplication by `πⁿ`, which are compatible along the projections
-  -- `Λ/Iⁿ⁺¹ → Λ/Iⁿ`). Transporting the limit cone along these isomorphisms gives the cone
-  -- `Rf_* K ⟶ Rf_* K ⊗ᴸ Λ/Iⁿ`, which is therefore a limit cone.
+  -- `Λ/Iⁿ⁺¹ → Λ/Iⁿ`). Transporting the homotopy limit along these isomorphisms gives the cone
+  -- `Rf_* K ⟶ Rf_* K ⊗ᴸ Λ/Iⁿ` (`IsHomotopyLimit.of_iso`), which is therefore a homotopy
+  -- limit.
   sorry
 
 /-- **`Rf_!` preserves derived completeness.** For a principal ideal `I` of a domain `Λ` and
@@ -114,12 +116,12 @@ theorem derivedComplete_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
   -- `g` proper, `Rf_! = Rg_* j_!`, and `Rg_*` preserves derived completeness by
   -- `derivedComplete_rightDerivedLowerStar`. It remains to see that `j_! K` is derived
   -- complete. This is the non-formal step and it is open here: `j_!` is a left adjoint, so it
-  -- commutes with `– ⊗ᴸ Λ/Iⁿ` (projection formula for `j`) but need not preserve the limit
-  -- cone of `K`. A possible route is the triangle `j_! K → Rj_* K → i_* i^* Rj_* K` for the
-  -- closed complement `i`: `Rj_* K` and `i_*` of a complete object are complete by the
-  -- argument for `Rf_*`, so it suffices that `i^*` preserves completeness of `Rj_* K`. Should
-  -- that fail, `Rf_!` on the adic category has to be defined as the derived completion of
-  -- `Rg_* j_!`.
+  -- commutes with `– ⊗ᴸ Λ/Iⁿ` (projection formula for `j`) but need not preserve the
+  -- products in the Milnor triangle of `K`. A possible route is the triangle
+  -- `j_! K → Rj_* K → i_* i^* Rj_* K` for the closed complement `i`: `Rj_* K` and `i_*` of a
+  -- complete object are complete by the argument for `Rf_*`, so it suffices that `i^*`
+  -- preserves completeness of `Rj_* K`. Should that fail, `Rf_!` on the adic category has to
+  -- be defined as the derived completion of `Rg_* j_!`.
   sorry
 
 /-- **The coefficient dual preserves derived completeness.** For a principal ideal `I` of a
@@ -137,12 +139,13 @@ theorem derivedComplete_coefficientDual {X : Scheme.{u}}
       ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K)) :=
   -- Proof sketch: `Λ_X` is the monoidal unit up to the isomorphism
   -- `DerivedCategory.εSingleFunctorZero`, and derived completeness is invariant under
-  -- isomorphism. `RHom(K, –)` is right adjoint to `K ⊗ᴸ –`, so it carries the limit cone
-  -- `Λ_X ⟶ Λ_X ⊗ᴸ Λ/Iⁿ` given by `hΛ` to a limit cone. Since `Iⁿ = (πⁿ)` and `Λ/Iⁿ` is the
+  -- isomorphism. `RHom(K, –)` is triangulated and, being right adjoint to `K ⊗ᴸ –`, preserves
+  -- products, so it carries the homotopy limit `Λ_X ⟶ Λ_X ⊗ᴸ Λ/Iⁿ` given by `hΛ` to a
+  -- homotopy limit (`IsHomotopyLimit.map`). Since `Iⁿ = (πⁿ)` and `Λ/Iⁿ` is the
   -- cone of `πⁿ : Λ → Λ`, the triangulated `Λ`-linear functor `RHom(K, –)` satisfies
-  -- `RHom(K, Λ_X ⊗ᴸ Λ/Iⁿ) ≅ RHom(K, Λ_X) ⊗ᴸ Λ/Iⁿ`, naturally in `n`; transporting the limit
-  -- cone along these isomorphisms shows that `K^∨` is derived complete. The hypothesis `hK`
-  -- is not needed by this argument.
+  -- `RHom(K, Λ_X ⊗ᴸ Λ/Iⁿ) ≅ RHom(K, Λ_X) ⊗ᴸ Λ/Iⁿ`, naturally in `n`; transporting the
+  -- homotopy limit along these isomorphisms shows that `K^∨` is derived complete. The
+  -- hypothesis `hK` is not needed by this argument.
   sorry
 
 end General

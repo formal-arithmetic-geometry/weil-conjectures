@@ -304,6 +304,7 @@ public import WeilConjectures.CategoryTheory.ConcreteCategory.FinitelyGenerated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Principal
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
@@ -380,6 +381,7 @@ public import WeilConjectures.CategoryTheory.Sites.TransfinitePlus
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlusSheaf
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.Compactification.BaseChange
@@ -821,6 +823,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Resol
 public import WeilConjectures.Mathlib.CategoryTheory.Presentable.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Shift.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
+public import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShiftTwo
+public import WeilConjectures.Mathlib.CategoryTheory.Shift.Localization
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.CompatiblePlus
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
