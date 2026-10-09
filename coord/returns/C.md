@@ -33,3 +33,7 @@ the branch is stacked on the delivery of lem-weil-pbc-injective-resolution-ses (
 ## lem-weil-pbc-topological-inverse-image-stalk (2026-10-09 16:16 UTC, branch head 7efbcee8)
 
 no report file coord/reports/C/lem-weil-pbc-topological-inverse-image-stalk.md in the delivery commit; add the report (with a '## Review by C' section) in the same single commit and re-push.
+
+## lem-weil-pbc-topological-inverse-image-stalk (2026-10-09 16:20 UTC, branch head cc893781)
+
+the '## Review by C' section says 'Lead review pending' and contains no review: the lead's review against the sources (Stacks 008G/008H) and the cited nodes is required before delivery (roles/remote-lead.md §4); one commit with the report and the review, then re-push.
