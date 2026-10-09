@@ -1,0 +1,51 @@
+{
+ "id": "lem-weil-proetale-isomorphism-inverse-image",
+ "kind": "statement",
+ "title": "Inverse image along an isomorphism of schemes on the pro-etale site",
+ "statement": "Let $g:X\\to Y$ be an isomorphism of schemes [def-weil-scheme-morphism-properties], with small pro-etale sites $X_{\\mathrm{proet}}$, $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and let $g^{-1}$, $g_*$ and the structure maps $c^g_A:g^{-1}A_Y\\to A_X$ be the inverse image, direct image and structure maps of [def-weil-proetale-inverse-image]. Then:\n\n1. The functor $\\Phi_g:X_{\\mathrm{proet}}\\to Y_{\\mathrm{proet}}$, $(U\\xrightarrow{u}X)\\mapsto(U\\xrightarrow{g\\circ u}Y)$, is an equivalence of categories, with quasi-inverse $(V\\xrightarrow{v}Y)\\mapsto(V\\xrightarrow{g^{-1}\\circ v}X)$; both functors send coverings to coverings. For every sheaf $\\mathcal F$ on $Y_{\\mathrm{proet}}$ there is an isomorphism $(g^{-1}\\mathcal F)(U\\xrightarrow{u}X)\\cong\\mathcal F(U\\xrightarrow{g\\circ u}Y)$, natural in $\\mathcal F$ and in $U$.\n2. $g^{-1}$ is an equivalence of categories from sheaves on $Y_{\\mathrm{proet}}$ to sheaves on $X_{\\mathrm{proet}}$ (of sets, abelian groups, rings, or modules over a constant sheaf of rings), with quasi-inverse $g_*$. In particular $g^{-1}$ is exact and commutes with all small limits and colimits; for every inverse system $(\\mathcal F_n)_{n\\geq1}$ of sheaves on $Y_{\\mathrm{proet}}$ the canonical map $g^{-1}\\varprojlim_n\\mathcal F_n\\to\\varprojlim_ng^{-1}\\mathcal F_n$ [def-pur-sheaf-inverse-limit], induced by the inverse images of the projections, is an isomorphism.\n3. For every commutative ring $A$ the structure map $c^g_A:g^{-1}A_Y\\to A_X$ is an isomorphism of sheaves of rings, and for every ring homomorphism $\\varphi:A\\to B$, with $\\varphi_Y:A_Y\\to B_Y$ and $\\varphi_X:A_X\\to B_X$ the induced maps of constant sheaves, $\\varphi_X\\circ c^g_A=c^g_B\\circ g^{-1}(\\varphi_Y)$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Stacks Project, Tag 09A5 (Section 'Functoriality of the pro-etale site'); Sites, Tag 06UM (Section sites-section-pullback) and Tag 0H7J (Example sites-example-constant-sheaf: Mor(E_C, F) = Mor(E, Gamma(C, F))). The specialization to an isomorphism g is not stated there; the source of this node is the construction of def-weil-constant-weil-structure and the point-transport construction of def-weil-frobenius-cohomology-transport, item 2, which uses part 1 for g_s"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-pur-sheaf-inverse-limit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def sheafCongr\\|IsDenseSubsite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Equivalence.lean; grep -n 'equivCommuteConstant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "results": "Sites/Equivalence.lean:141 Equivalence.sheafCongr (an equivalence of sites e with e.functor dense gives Sheaf J A ≌ Sheaf K A) and :103 instance e.functor.IsDenseSubsite J K; Sites/ConstantSheaf.lean:142 equivCommuteConstant (constantSheaf J D ⋙ (sheafEquiv J K G D).functor ≅ constantSheaf K D for a dense subsite G preserving a terminal object) and :152 equivCommuteConstant'; the file's TODO (line 157) says constantSheaf is not yet commuted with pullback/pushforward of sheaves",
+   "date": "2026-10-09",
+   "verdict": "generalization, not in one line: parts 1-3 follow from Equivalence.sheafCongr and equivCommuteConstant' applied to the site equivalence Phi_g, but Mathlib has no functor X.ProEt ⥤ Y.ProEt attached to an isomorphism of schemes (MorphismProperty.Over.map along g exists in CategoryTheory/MorphismProperty/OverAdjunction.lean:42, but not its compatibility with ProEt.topology) and no pro-etale inverse image (see def-weil-proetale-inverse-image); no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ProEt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean -l",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean and Sites/ElladicCohomology.lean only; neither has functoriality of the small pro-etale site",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-constant-weil-structure",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "id": "def-weil-proetale-inverse-image",
+ "kind": "definition",
+ "title": "Inverse image and direct image along a morphism on small pro-etale sites",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-weil-scheme-morphism-properties], with small pro-etale sites $X_{\\mathrm{proet}}$, $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. The base-change functor $u_f:Y_{\\mathrm{proet}}\\to X_{\\mathrm{proet}}$, $(V\\to Y)\\mapsto(X\\times_YV\\to X)$, is well defined because weakly etale maps are stable under base change, and it sends coverings to coverings and commutes with fibre products and the final object; it therefore defines a morphism of sites $f_{\\mathrm{proet}}:X_{\\mathrm{proet}}\\to Y_{\\mathrm{proet}}$. For a sheaf $\\mathcal G$ (of sets, abelian groups, rings or modules) on $X_{\\mathrm{proet}}$ the *direct image* is $f_*\\mathcal G(V)=\\mathcal G(X\\times_YV)$. For a sheaf $\\mathcal F$ on $Y_{\\mathrm{proet}}$ the *inverse image* $f^{-1}\\mathcal F$ is the sheafification of the presheaf\n$$\n U\\longmapsto\\varinjlim_{(V,\\ U\\to X\\times_YV)}\\mathcal F(V),\n$$\nthe colimit over the category of pairs of an object $V$ of $Y_{\\mathrm{proet}}$ and an $X$-morphism $U\\to X\\times_YV$. Then $f^{-1}$ is left adjoint to $f_*$; write $\\eta_f:\\mathcal F\\to f_*f^{-1}\\mathcal F$ and $\\varepsilon_f:f^{-1}f_*\\mathcal G\\to\\mathcal G$ for the unit and counit. For a commutative ring $A$, with constant sheaves $A_Y$, $A_X$ (sheafifications of the constant presheaves with value $A$), the *structure map*\n$$\n c^f_A:f^{-1}A_Y\\longrightarrow A_X\n$$\nis the morphism of sheaves of rings adjoint to the morphism $A_Y\\to f_*A_X$ obtained, by the universal property of sheafification, from the map of presheaves sending $a\\in A$ to the image of the constant section $a$ in $A_X(X\\times_YV)$, for every $V$. On sheaves of $A_Y$-modules, $f^{-1}$ produces sheaves of $f^{-1}A_Y$-modules, which become $A_X$-modules by $f^{-1}(-)\\otimes_{f^{-1}A_Y}A_X$ along $c^f_A$, and $f_*$ produces $A_Y$-modules through $A_Y\\to f_*A_X$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Stacks Project, Tag 09A5 (Section 'Functoriality of the pro-etale site'), with Sites, Tag 00X6 (Proposition sites-proposition-get-morphism: a continuous functor commuting with finite limits defines a morphism of sites), Tag 06UM (Section sites-section-pullback: the presheaf inverse image and its adjunction) and Tag 0H7J (Example sites-example-constant-sheaf)"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ProEt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean -l; grep -n 'def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "results": "only Mathlib/AlgebraicGeometry/Sites/Proetale.lean (Scheme.ProEt S := MorphismProperty.Over @WeaklyEtale ⊤ S, ProEt.topology, ProEt.forget) and Sites/ElladicCohomology.lean (ellAdicSheaf, by sheafPushforwardContinuous along ProEt.forget X ⋙ Over.forget into the big site); no functor X.ProEt ⥤ Y.ProEt or Y.ProEt ⥤ X.ProEt attached to a morphism of schemes, no inverse or direct image of sheaves between small pro-etale sites",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def Over.pullback\\|def Over.map' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean; grep -n 'def sheafPullback\\|sheafAdjunctionContinuous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Pullback.lean; grep -rn 'IsContinuous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/MorphismProperty ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites | grep -i 'pullback\\|map'",
+   "results": "OverAdjunction.lean:101 MorphismProperty.Over.pullback (base change functor P.Over Q Y ⥤ P.Over Q X) and :42 Over.map; Sites/Pullback.lean:55 Functor.sheafPullback and Functor.sheafAdjunctionContinuous (inverse image along a continuous functor, left adjoint of sheafPushforwardContinuous); no IsContinuous instance for MorphismProperty.Over.pullback with the pro-etale topologies, and no constant-sheaf structure map",
+   "date": "2026-10-09",
+   "verdict": "generalization, not in one line: the inverse image is (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).sheafPullback once that functor is shown continuous (and representably flat) for ProEt.topology, which Mathlib does not prove; no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-constant-weil-structure",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

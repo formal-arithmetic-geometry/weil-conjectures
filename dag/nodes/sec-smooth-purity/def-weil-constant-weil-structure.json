@@ -2,22 +2,31 @@
  "id": "def-weil-constant-weil-structure",
  "kind": "definition",
  "title": "Canonical Weil structure on the constant coefficient object",
- "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$, and a finite extension $E/\\Ql$ contained in $\\Qlb$ with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$ and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $Y_0$ be a finite-type [def-weil-scheme-morphism-properties] $k_0$-scheme, $Y=Y_0\\times_{k_0}k$, and $g_Y:Y\\to Y$ the geometric-Frobenius automorphism [def-weil-frobenius-detailed]. On the small pro-etale site [def-weil-pbc-proetale-site], for every ring $A$ the inverse image $g_Y^{-1}$ of the constant sheaf $A_Y$ is the sheafification of the constant presheaf $A$ on $Y_{\\mathrm{proet}}$ (the inverse image of a sheafified constant presheaf is the sheafification of the pulled-back constant presheaf, which is again constant), so there is a canonical isomorphism $c_{A,n}:g_Y^{-1}A_Y\\xrightarrow{\\sim}A_Y$, inverse to the adjunction unit on constant sections. For $A=A_{E,n}$ these isomorphisms are compatible with the reductions $A_{E,n+1}\\twoheadrightarrow A_{E,n}$, and the limit over $n$ is a canonical isomorphism $c_{\\mathcal O_E}:g_Y^{-1}\\widehat{\\mathcal O}_{E,Y}\\xrightarrow{\\sim}\\widehat{\\mathcal O}_{E,Y}$ of the completed integral coefficient sheaf [def-weil-completed-integral-coefficients]. Since $g_Y^{-1}$ is exact, $Lg_Y^*$ of the derived pullback [def-weil-derived-pullback-tensor-hom] agrees with $g_Y^{-1}$ on these sheaves placed in degree $0$, which are objects of $D^b_c(Y,\\mathcal O_E)$ by [lem-weil-constant-coefficient-objects-constructible]. The *canonical Weil structure* on $E_Y$ is the pair $(E_Y,\\theta_{E})$ with $\\theta_E$ the image of $c_{\\mathcal O_E}$ in the rationalized category $D^b_c(Y,E)$ [def-weil-rationalization-karoubi]; it is an object of $D^b_{c,\\mathrm W}(Y,E)$ [def-weil-weil-sheaf-complex]. The canonical Weil structure on $(\\Qlb)_Y$ is $(E,(E_Y,\\theta_E))$ in the common-stage category [def-weil-algebraically-closed-coefficients], independent of the stage $E$ up to the canonical isomorphisms $E_Y\\otimes_EL\\cong L_Y$, under which $\\theta_E\\otimes_EL=\\theta_L$. The forgetful functor $\\operatorname{For}$ sends these objects to $E_Y$ and $(\\Qlb)_Y$.",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and a finite extension $E/\\Ql$ contained in $\\Qlb$, with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, finite coefficient rings $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ ($n\\geq1$) and reductions $r_n:A_{E,n+1}\\twoheadrightarrow A_{E,n}$ [def-weil-l-adic-coefficient-extension]. Let $Y_0$ be a finite-type [def-weil-scheme-morphism-properties] $k_0$-scheme, $Y=Y_0\\times_{k_0}k$, and $g_Y:Y\\to Y$ the geometric-Frobenius automorphism [def-weil-frobenius-detailed], an isomorphism of schemes; $\\ell$ is invertible on $Y$.\n\n1. *Finite level.* For $n\\geq1$ let $(A_{E,n})_Y$ be the constant sheaf of rings on the small pro-etale site $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and let\n$$\n c_n=c^{g_Y}_{A_{E,n}}:g_Y^{-1}(A_{E,n})_Y\\longrightarrow(A_{E,n})_Y\n$$\nbe the structure map of the pro-etale inverse image along $g_Y$ [def-weil-proetale-inverse-image]: the morphism of sheaves of rings adjoint, under $g_Y^{-1}\\dashv g_{Y*}$, to the map $(A_{E,n})_Y\\to g_{Y*}(A_{E,n})_Y$ induced by sending $a\\in A_{E,n}$ to the constant section $a$ over every object. Each $c_n$ is an isomorphism, and $(r_n)_Y\\circ c_{n+1}=c_n\\circ g_Y^{-1}((r_n)_Y)$ for every $n$ [lem-weil-proetale-isomorphism-inverse-image].\n\n2. *Integral level.* Let $\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y$ be the completed integral coefficient sheaf [def-weil-completed-integral-coefficients], an inverse limit of sheaves of rings [def-pur-sheaf-inverse-limit]. Define\n$$\n c_{\\mathcal O_E}:g_Y^{-1}\\widehat{\\mathcal O}_{E,Y}\\longrightarrow\\varprojlim_ng_Y^{-1}(A_{E,n})_Y\\xrightarrow{\\ \\varprojlim_nc_n\\ }\\widehat{\\mathcal O}_{E,Y},\n$$\nthe first arrow being the canonical comparison map induced by the inverse images of the projections; the second arrow is defined by the compatibility in 1. Both arrows are isomorphisms [lem-weil-proetale-isomorphism-inverse-image], so $c_{\\mathcal O_E}$ is an isomorphism of sheaves of rings.\n\n3. *Derived integral level.* $\\widehat{\\mathcal O}_{E,Y}$ placed in degree $0$ is an object of $D^b_c(Y,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed, lem-weil-constant-coefficient-objects-constructible]. Let $\\lambda:Lg_Y^*\\widehat{\\mathcal O}_{E,Y}\\xrightarrow{\\sim}g_Y^{-1}\\widehat{\\mathcal O}_{E,Y}$ be the isomorphism identifying the derived pullback [def-weil-derived-pullback-tensor-hom] along the isomorphism $g_Y$ with the inverse image [lem-weil-isomorphism-derived-pullback], and put\n$$\n \\theta_{\\mathcal O_E}=c_{\\mathcal O_E}\\circ\\lambda:Lg_Y^*\\widehat{\\mathcal O}_{E,Y}\\xrightarrow{\\ \\sim\\ }\\widehat{\\mathcal O}_{E,Y}\\quad\\text{in }D^b_c(Y,\\mathcal O_E).\n$$\n\n4. *Rational level.* Let $E_Y$ be the image of $\\widehat{\\mathcal O}_{E,Y}$ in the rationalized category $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ [def-weil-rationalization-karoubi], on which the derived pullback $Lg_Y^*$ is induced from integral representatives [def-weil-derived-pullback-tensor-hom]. Put $\\theta_E=\\theta_{\\mathcal O_E}\\otimes1:Lg_Y^*E_Y\\xrightarrow{\\sim}E_Y$, the image of $\\theta_{\\mathcal O_E}$, an isomorphism. Since $\\widehat{\\mathcal O}_{E,Y}$ is a sheaf placed in degree $0$, $E_Y$ lies in the constructible heart $\\Sh_c(Y,E)$ [def-weil-constructible-heart], so $(E_Y,\\theta_E)$ is a constructible $E$-Weil sheaf and an object of $D^b_{c,\\mathrm W}(Y,E)$ [def-weil-weil-sheaf-complex]. It is the *canonical Weil structure* on $E_Y$, and $\\operatorname{For}(E_Y,\\theta_E)=E_Y$.\n\n5. *Algebraically closed coefficients.* The *canonical Weil structure* on $(\\Qlb)_Y$ is the object $(\\Ql,((\\Ql)_Y,\\theta_{\\Ql}))$ of $D^b_{c,\\mathrm W}(Y,\\Qlb)=\\operatorname{2-colim}_{E}D^b_{c,\\mathrm W}(Y,E)$ [def-weil-weil-sheaf-complex], given at the stage $E=\\Ql$ of the directed set of finite extensions of $\\Ql$ in $\\Qlb$ [def-weil-algebraically-closed-coefficients]. Its image under $\\operatorname{For}$ is $(\\Ql,(\\Ql)_Y)$, which is the object $(\\Qlb)_Y$ of $D^b_c(Y,\\Qlb)$ [lem-weil-constant-coefficient-objects-constructible].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
   "place": "node def-weil-ordinary-compact-cohomology, order 1510: 'When $\\Lambda\\in\\{E,\\Qlb\\}$, equip it with the canonical Weil structure from the Weil-sheaf structure [def-weil-weil-sheaf-complex]' (the structure is named but not constructed in the blueprint; def-pod-dual-tate-datum also names it as $\\varphi_A:Lg_\\gamma^*A_X\\xrightarrow{\\sim}A_X$ without defining it)"
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension",
   "def-weil-scheme-morphism-properties",
   "def-weil-frobenius-detailed",
   "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-proetale-isomorphism-inverse-image",
   "def-weil-completed-integral-coefficients",
-  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-derived-complete-integral-detailed",
   "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-isomorphism-derived-pullback",
   "def-weil-rationalization-karoubi",
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-weil-sheaf-complex"
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-algebraically-closed-coefficients"
  ],
  "proof": [],
  "proof_deps": [],
@@ -32,7 +41,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -50,5 +59,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-constant-weil-structure",
+  "worker": "stage1",
+  "summary": "The blueprint names but does not construct this structure (def-weil-ordinary-compact-cohomology, order 1510), so the statement was checked against the definitions it uses. Corrected: (a) c_A was described as 'inverse to the adjunction unit on constant sections', which is not a map g^{-1}A_Y -> A_Y; it is now the structure map of the pro-etale inverse image (adjoint of A_Y -> g_*A_Y), new node def-weil-proetale-inverse-image, which the DAG lacked (def-weil-pbc-inverse-image is the etale one); (b) the integral isomorphism needs g^{-1} to commute with the inverse limit, true because g_Y is an isomorphism: split off as lem-weil-proetale-isomorphism-inverse-image, together with the isomorphy of c_n and its compatibility with reductions; (c) 'Lg^* agrees with g^{-1}' (the old text justified it by exactness of g^{-1}, which does not by itself remove the tensor with g^{-1}A over A or the integral derived-limit recipe) is split off as lem-weil-isomorphism-derived-pullback; (d) the claim that the Qlb object is independent of the stage E with theta_E (x) L = theta_L is removed from the definition, which now fixes the stage E = Ql, and stated as lem-weil-constant-weil-structure-stage-independence (unsplit; no node uses it yet). Added statement dependencies for the notions used (l-adic numbers, algebraic closure, coefficient extension, inverse limit of sheaves, derived-complete integral category, constructible heart). Mathlib (CategoryTheory/Sites/ConstantSheaf.lean equivCommuteConstant, Sites/Equivalence.lean sheafCongr, AlgebraicGeometry/Sites/Proetale.lean) has the general site-theoretic tools but no functoriality of the small pro-etale site."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
