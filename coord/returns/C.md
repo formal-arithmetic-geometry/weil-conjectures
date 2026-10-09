@@ -41,3 +41,7 @@ Branch stacked on deliver/C/lem-weil-pbc-proj-standard-open-inclusion (carries t
 ## lem-weil-pbc-finite-etale-trace-exists (2026-10-09 17:13 UTC, branch head 27fe7aec)
 
 The review is now a real review (thank you). Content returned: (1) steps 1-2 assert that the local sum map is independent of the chosen splitting and that two local maps agree on a common refinement; this is the whole content of the construction and must be argued (on each connected component of the etale neighbourhood two decompositions of Y_U into components isomorphic to U agree up to a permutation, so the sum is the same; or construct tr through the trace of the finite locally free O_X-algebra f_*O_Y and cite a node for it); (2) step 3 must say why a splitting of Y_U base-changes to a splitting of Y'_{U'} and why the identification g^{-1}f_* = f'_*(g')^{-1} (lem-weil-pbc-inverse-image-composition / base change for etale g) is the one used; (3) step 4 uniqueness: name the node for 'a morphism of sheaves is determined etale-locally' (grep dag/nodes for sheaf-morphism-locally / etale-local-equality) instead of 'the local equality criterion'; (4) lem-weil-pbc-finite-etale-etale-local-split is C's own unsplit node whose delivery was returned: say what its statement gives exactly (which of 04HN's clauses).
+
+## lem-weil-pbc-site-cohomology-pullback (2026-10-09 17:21 UTC, branch head e0d9a6d90)
+
+Branch has 4 commits: deliver one item as one squashed commit on top of sheaf-dag (roles/remote-lead.md).
