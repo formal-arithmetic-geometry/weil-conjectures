@@ -7,12 +7,15 @@ module
 
 public import Mathlib.Algebra.DualNumber
 public import Mathlib.Data.Matrix.Mul
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Ring
 
 /-!
 # Dual numbers: scaling and matrices
 
 The `R`-algebra endomorphism `ε ↦ cε` of the dual numbers `R[ε]`, which is multiplicative in `c`
-and reduces to the identity modulo `ε`, and the arithmetic of matrices over `R[ε]` whose
+and reduces to the identity modulo `ε`, the evaluation `R[ε] → R`, `ε ↦ t`, at an element of
+square zero, and the arithmetic of matrices over `R[ε]` whose
 reduction modulo `ε` is the identity: their `ε`-parts add under multiplication.
 -/
 
@@ -54,6 +57,23 @@ theorem scale_zero : scale (0 : R) = (Algebra.ofId R R[ε]).comp (fstHom R R R) 
 @[simp]
 theorem fstHom_comp_scale (c : R) : (fstHom R R R).comp (scale c) = fstHom R R R := by
   ext; simp
+
+/-- The evaluation `R[ε] → R`, `a + εb ↦ a + tb`, at an element `t` of square zero. -/
+def evalRingHom {R : Type*} [CommRing R] (t : R) (ht : t * t = 0) : R[ε] →+* R where
+  toFun x := x.fst + t * x.snd
+  map_one' := by simp
+  map_mul' x y := by
+    simp only [fst_mul, snd_mul]
+    linear_combination (-(x.snd * y.snd)) * ht
+  map_zero' := by simp
+  map_add' x y := by
+    simp only [fst_add, snd_add]
+    ring
+
+@[simp]
+theorem evalRingHom_apply {R : Type*} [CommRing R] (t : R) (ht : t * t = 0) (x : R[ε]) :
+    evalRingHom t ht x = x.fst + t * x.snd :=
+  rfl
 
 end DualNumber
 
