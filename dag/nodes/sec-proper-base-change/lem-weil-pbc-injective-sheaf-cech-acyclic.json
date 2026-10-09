@@ -13,9 +13,84 @@
   "def-sp-injective-resolutions",
   "def-weil-pbc-cech-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal O=\\underline{\\mathbf Z}^{p}$ be the constant presheaf of rings on $X_{\\Et}$: $\\mathcal O(V)=\\mathbf Z$ for every object $V$, all restriction maps the identity. A presheaf of $\\mathcal O$-modules [def-weil-presheaf-modules-sheafification] (the definition reads verbatim for a presheaf of rings) is a presheaf of abelian groups $\\mathcal P$ with a $\\mathbf Z$-module structure on each $\\mathcal P(V)$ for which the restrictions are $\\mathbf Z$-linear; since an abelian group carries exactly one $\\mathbf Z$-module structure and every additive map is $\\mathbf Z$-linear, the forgetful functor $\\mathrm{PMod}(\\mathcal O)\\to\\mathrm{PAb}(X_{\\Et})$ is an isomorphism of categories, the identity on objects and morphisms. Under it, for an object $V$ the presheaf $\\mathcal O_V=\\mathcal O[h_V]:W\\mapsto\\bigoplus_{\\varphi\\in\\Mor(W,V)}\\mathbf Z$ of [lem-weil-pbc-free-cech-complex-exact] and [lem-weil-pbc-free-yoneda-presheaf-module] is the free abelian presheaf $\\mathbf Z_V$ of Stacks, and the complex $K_\\bullet=\\mathcal O_{\\mathcal U,\\bullet}$ of [lem-weil-pbc-free-cech-complex-exact] built from the covering $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ is Stacks' complex $\\mathbf Z_{\\mathcal U,\\bullet}$ (Lemma 03AS): $K_p=\\bigoplus_{(i_0,\\ldots,i_p)\\in I^{p+1}}\\mathbf Z_{U_{i_0}\\times_U\\cdots\\times_UU_{i_p}}$ with differential $\\sum_j(-1)^j$ times the maps induced by the projections. The fibre products exist in $X_{\\Et}$ [def-weil-pbc-etale-site].",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-free-cech-complex-exact",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AS (lemma-cech-map-into), statement: the complex Z_{U,.} of abelian presheaves"
+   }
+  },
+  {
+   "text": "The abelian sheaf $\\mathcal I$, injective in $\\Ab(X_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves], is injective as an object of $\\mathrm{PAb}(X_{\\Et})$ by [lem-weil-pbc-injective-abelian-sheaf-injective-presheaf], hence, by the previous step, injective in $\\mathrm{PMod}(\\mathcal O)$ [def-sp-injective-resolutions].",
+   "uses": [
+    "lem-weil-pbc-injective-abelian-sheaf-injective-presheaf",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AW (lemma-injective-trivial-cech), proof, first sentence: Lemma Tag 03F6"
+   }
+  },
+  {
+   "text": "For every presheaf of abelian groups $\\mathcal G$ there is an isomorphism of cochain complexes $\\Hom_{\\mathrm{PAb}}(K_\\bullet,\\mathcal G)\\cong\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal G)$ [def-weil-pbc-cech-complex], functorial in $\\mathcal G$, where the left side has in degree $p$ the group $\\Hom(K_p,\\mathcal G)$ and differential $s\\mapsto s\\circ d_{p+1}$. Indeed, a morphism out of a direct sum is a family of morphisms out of the summands, so $\\Hom(K_p,\\mathcal G)=\\prod_{(i_0,\\ldots,i_p)}\\Hom(\\mathbf Z_{U_{i_0}\\times_U\\cdots\\times_UU_{i_p}},\\mathcal G)$, and by [lem-weil-pbc-free-yoneda-presheaf-module] (with the presheaf of rings $\\mathcal O$ of the first step) $\\Hom(\\mathbf Z_V,\\mathcal G)\\to\\mathcal G(V)$, $\\beta\\mapsto\\beta_V(e_{\\mathrm{id}_V})$, is a bijection, additive since evaluation is, and natural in $\\mathcal G$; so $\\Hom(K_p,\\mathcal G)\\cong\\prod\\mathcal G(U_{i_0}\\times_U\\cdots\\times_UU_{i_p})=\\check{\\mathcal C}^p(\\mathcal U,\\mathcal G)$. For a morphism $g:V'\\to V$ and $\\beta:\\mathbf Z_V\\to\\mathcal G$ with $\\beta_V(e_{\\mathrm{id}_V})=s$, the composite $\\beta\\circ\\mathbf Z_g$ sends $e_{\\mathrm{id}_{V'}}$ to $\\beta_{V'}(e_g)=\\mathcal G(g)(s)=s|_{V'}$ (the inverse map of [lem-weil-pbc-free-yoneda-presheaf-module] is $e_\\varphi\\mapsto s|_\\varphi$); so precomposition with the map induced by the projection omitting the $j$-th factor is restriction along that projection, and precomposition with $d_{p+1}=\\sum_j(-1)^j(\\ldots)$ is $s\\mapsto(\\sum_j(-1)^js_{i_0\\ldots\\hat{i_j}\\ldots i_{p+1}}|_{U_{i_0}\\times_U\\cdots\\times_UU_{i_{p+1}}})$, the Cech differential. (This is the module computation of step 1 of [lem-weil-pbc-injective-module-abelian-acyclic] for $\\mathcal O=\\underline{\\mathbf Z}^p$; Stacks calls it a tautology.)",
+   "uses": [
+    "lem-weil-pbc-free-yoneda-presheaf-module",
+    "def-weil-pbc-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AS (lemma-cech-map-into) and its proof (Modules on Sites, Lemma sites-modules-lemma-obvious-adjointness)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-free-cech-complex-exact], applied to the presheaf of rings $\\mathcal O=\\underline{\\mathbf Z}^p$ of the first step and the covering $\\mathcal U$ (a family of morphisms of $X_{\\Et}$ with target $U$), $K_\\bullet$ is exact in positive degrees: $H_p(K_\\bullet(W))=0$ for every object $W$ and every $p>0$. Since kernels and images in $\\mathrm{PAb}(X_{\\Et})$ are computed objectwise, this says that for $p>0$ the image of $d_{p+1}:K_{p+1}\\to K_p$ equals the kernel of $d_p:K_p\\to K_{p-1}$ as subpresheaves of $K_p$.",
+   "uses": [
+    "lem-weil-pbc-free-cech-complex-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AT (lemma-homology-complex)"
+   }
+  },
+  {
+   "text": "Let $p>0$ and let $s\\in\\Hom(K_p,\\mathcal I)$ be a cocycle, $s\\circ d_{p+1}=0$. Then $s$ vanishes on $\\operatorname{im}(d_{p+1})=\\ker(d_p)$ (previous step), so it factors as $s=t\\circ\\bar d_p$ with $\\bar d_p:K_p\\to B=\\operatorname{im}(d_p)\\subset K_{p-1}$ the corestriction of $d_p$ (an epimorphism with kernel $\\ker d_p$, so $B\\cong K_p/\\ker d_p$) and $t:B\\to\\mathcal I$. Since $\\mathcal I$ is injective in $\\mathrm{PAb}(X_{\\Et})$ (second step) and $B\\to K_{p-1}$ is a monomorphism, $t$ extends to $s':K_{p-1}\\to\\mathcal I$ [def-sp-injective-resolutions], and then $s=s'\\circ d_p$ is the coboundary of $s'\\in\\Hom(K_{p-1},\\mathcal I)$. Hence $H^p(\\Hom(K_\\bullet,\\mathcal I))=0$ for every $p>0$ (this is exactness of $\\Hom(-,\\mathcal I)$ applied to $K_\\bullet$), and by the third step $\\check H^p(\\mathcal U,\\mathcal I)=H^p(\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I))=0$ for every $p>0$ [def-weil-pbc-cech-complex].",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AW (lemma-injective-trivial-cech), proof, via the second paragraph of the proof of Lemma Tag 03AU (lemma-cech-cohomology-derived-presheaves): Hom into an injective abelian presheaf is exact"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-free-cech-complex-exact",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-injective-abelian-sheaf-injective-presheaf",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-weil-pbc-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03AW (lemma-injective-trivial-cech) and its proof, with Lemmas Tag 03F6, 03AS, 03AT and the second paragraph of the proof of Lemma Tag 03AU"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +119,31 @@
    "results": "Cech files: SheafCohomology/Cech.lean (definition cechComplexFunctor only), NonabelianCohomology/H1.lean (degree-1 cochains of a presheaf of groups); injective sheaves in SheafCohomology only at Basic.lean:97 (Subsingleton (H F (n+1)) for injective F, derived-functor not Cech vanishing)",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech complex of an injective presheaf for a covering is exact in positive degrees",
+   "results": "InjectiveResolution.cocomplex_exactAt_succ, InjectiveResolution.exact_succ, ofCocomplex_exactAt_succ, CochainComplex.exactAt_succ_single_obj, CochainComplex.isKInjective_of_injective_aux: none about Cech complexes",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Čech cohomology of an injective sheaf vanishes in positive degrees; Cech complex is Hom from the free Cech complex of a covering",
+   "results": "CochainComplex.cm5b.instInjectiveXIntI, InjectiveResolution.instInjectiveXIntCochainComplex, Sheaf.cohomologyPresheaf, CochainComplex.isKInjective_of_injective_aux, MayerVietorisSquare.shortComplex_X₁: none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,68p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean; grep -rn 'Injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/*.lean",
+   "results": "Cech.lean (68 lines) has only FormalCoproduct.cosimplicialObjectFunctor, FormalCoproduct.cochainComplexFunctor and cechComplexFunctor (for a family U : ι → C in a category with finite products, not fibre products over U); no lemma about injective sheaves or about Hom from a free complex; Sites/*.lean mention only locally injective morphisms",
+   "date": "2026-10-09",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +163,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-injective-sheaf-cech-acyclic",
+  "worker": "stage1",
+  "summary": "Split along Stacks 03AW in PAb(X_et), as its source does, rather than through Mod(X_et,Z): the identification Ab(X_et) = Mod(X_et,Z) suggested in the brief is not stated by def-weil-pbc-abelian-etale-sheaves or def-weil-pbc-etale-sheaves and is not elementary (Z_X(V) is the ring of locally constant Z-valued functions, and uniqueness of the module structure needs sheafification), whereas PMod of the constant presheaf of rings Z is PAb identically. Steps: (1) PMod(constant presheaf Z) = PAb, Z_V and K = Z_{U,.} (elementary); (2) I injective in PAb by the new Mathlib leaf lem-weil-pbc-injective-abelian-sheaf-injective-presheaf (Stacks 03F6; Adjunction.map_injective for the sheafification adjunction); (3) Hom(K,G) = Cech complex by lem-weil-pbc-free-yoneda-presheaf-module (03AS); (4) K exact in positive degrees by lem-weil-pbc-free-cech-complex-exact with O = constant presheaf Z (03AT); (5) Hom(-,I) carries it to an exact complex, written out from the definition of injective. lem-weil-pbc-injective-module-injective-presheaf is not used. Mathlib has no Cech-acyclicity of injective sheaves (Cech.lean defines cechComplexFunctor only); the source repository proves the topological-space analogue TopCat.Presheaf.exactAt_cechComplex_of_injective (sorry-free, finite covers by opens, via Godement sheaves), not this statement."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "five steps along Stacks 03AW in presheaves of abelian groups (the constant presheaf Z makes presheaves of modules = presheaves of abelian groups; injective sheaf ⇒ injective presheaf by the new leaf (Adjunction.map_injective, Injective/Basic.lean:279, verified); Hom(Z_{U,•}, G) is the Cech complex via the free-Yoneda leaf; exactness of Z_{U,•}; Hom(-, I) exact); 1 new Mathlib leaf; the brief's route (a) through Ab = Mod(Z) rejected by the worker for lack of a node, rightly"
+ }
 }

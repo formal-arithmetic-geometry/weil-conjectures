@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-injective-abelian-sheaf-injective-presheaf",
+ "kind": "statement",
+ "title": "An injective abelian sheaf on the small etale site is an injective abelian presheaf",
+ "statement": "Let $X$ be a scheme, $X_{\\Et}$ its small etale site [def-weil-pbc-etale-site], $\\mathrm{PAb}(X_{\\Et})$ the abelian category of presheaves of abelian groups on $X_{\\Et}$ (contravariant functors to abelian groups, with natural transformations) and $\\Ab(X_{\\Et})\\subset\\mathrm{PAb}(X_{\\Et})$ the full subcategory of abelian sheaves [def-weil-pbc-abelian-etale-sheaves]. If $\\mathcal I$ is an injective object [def-sp-injective-resolutions] of $\\Ab(X_{\\Et})$, then $\\mathcal I$, regarded as a presheaf, is an injective object of $\\mathrm{PAb}(X_{\\Et})$. (Stacks states this for any site.)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F6 (lemma-injective-abelian-sheaf-injective-presheaf) and its proof: Homology, Lemma Tag 015Z (homology-lemma-adjoint-preserve-injectives) applied to the inclusion Ab(C) -> PAb(C) and its exact left adjoint, sheafification [def-weil-pbc-sheafification] (Modules on Sites, Section sites-modules-section-abelian-sheaves)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "an injective sheaf is injective as a presheaf (sheafToPresheaf preserves injective objects)",
+   "results": "sheafToPresheaf_isRightAdjoint, presheaf_mono_of_mono, Sheaf.Hom.mono_iff_presheaf_mono (Sites.ConcreteSheafification), sheafToPresheaf (Sites.Sheaf), isLocallyInjective_sheafToPresheaf_map_iff: ingredients (sheafToPresheaf is a right adjoint), no direct statement",
+   "date": "2026-10-09",
+   "verdict": "ingredients found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective object in category of sheaves of abelian groups on a site is injective in presheaves of abelian groups",
+   "results": "Sheaf.isLocallyInjective_iff_injective, Sheaf.mono_of_injective, PresheafOfModules.injective_of_mono, Presheaf.isLocallyInjective_of_injective: all about injective maps, none about injective objects",
+   "date": "2026-10-09",
+   "verdict": "no direct hit"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective (CategoryTheory.Functor.obj (CategoryTheory.sheafToPresheaf _ _) _)",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no direct statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective.injective_of_adjoint",
+   "results": "Injective.injective_of_adjoint {L : C ⥤ D} {R : D ⥤ C} [L.PreservesMonomorphisms] (adj : L ⊣ R) (J : D) [Injective J] : Injective (R.obj J) (Mathlib.CategoryTheory.Preadditive.Injective.Basic)",
+   "date": "2026-10-09",
+   "verdict": "generalization: right adjoint of a mono-preserving functor preserves injectives"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem map_injective\\|theorem injective_of_adjoint' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean; sed -n 70,92p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Sheafification.lean; grep -n preservesMonomorphisms_of_preservesLimitsOfShape ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Constructions/EpiMono.lean",
+   "results": "Injective.injective_of_adjoint (Basic.lean:195), Adjunction.map_injective (adj : F ⊣ G) [F.PreservesMonomorphisms] (I : D) (hI : Injective I) : Injective (G.obj I) (Basic.lean:279); sheafificationAdjunction J A : presheafToSheaf J A ⊣ sheafToPresheaf J A (Sheafification.lean:80), instance [HasSheafify J A] PreservesFiniteLimits (presheafToSheaf J A) (Sheafification.lean:76); preservesMonomorphisms_of_preservesLimitsOfShape (EpiMono.lean:40). The source repository uses exactly `(sheafificationAdjunction _ _).map_injective I inferInstance` (WeilConjectures/Topology/Sheaves/Cech.lean:288, inside TopCat.Presheaf.exactAt_cechComplex_of_injective, sorry-free)",
+   "date": "2026-10-09",
+   "verdict": "match (one Mathlib lemma applied to the sheafification adjunction)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.map_injective",
+  "file": "Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean",
+  "how": "specializes in one line: `(sheafificationAdjunction (X.smallEtaleTopology) AddCommGrpCat).map_injective I hI : Injective ((sheafToPresheaf _ _).obj I)`; the left adjoint presheafToSheaf preserves monomorphisms by the instance PreservesFiniteLimits (presheafToSheaf J A) (Sites/Sheafification.lean:76, needs HasSheafify for AddCommGrpCat on the small etale site, the standing instance of the formalized Ab(X_et)) and preservesMonomorphisms_of_preservesLimitsOfShape (Limits/Constructions/EpiMono.lean:40). Equivalently Injective.injective_of_adjoint (Basic.lean:195)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-injective-sheaf-cech-acyclic",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
