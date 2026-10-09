@@ -15,6 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Cube
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.GeometricPoints
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Projective
@@ -553,6 +554,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.QuotientThree
 public import WeilConjectures.FromJoel.CategoryTheory.QuotientTwo
 public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor
 public import WeilConjectures.GroupTheory.TateModule
+public import WeilConjectures.GroupTheory.TorsionCharacter
 public import WeilConjectures.GroupTheory.WeilGroup
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 public import WeilConjectures.Mathlib.Algebra.Algebra.Hom
