@@ -10,14 +10,38 @@
  "stmt_deps": [
   "def-weil-finite-field-fiber",
   "def-weil-geometric-hypotheses",
+  "def-weil-l-adic-numbers",
+  "def-weil-polynomial-ring",
   "def-weil-smooth-proper-cohomological-family"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'protected def prod\\|theorem prod_filter \\|theorem prod_filter_mul_prod_filter_not' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360)/Algebra/BigOperators",
+   "results": "Finset.prod (Algebra/BigOperators/Group/Finset/Defs.lean:68, notation ∏ i ∈ s, f i); Finset.prod_filter (Algebra/BigOperators/Group/Finset/Basic.lean:325: ∏ over s.filter p equals ∏ over s of ite); Finset.prod_filter_mul_prod_filter_not (same file, line 144)",
+   "date": "2026-10-09",
+   "verdict": "match for the primitive: a finite product in the commutative ring Q_l[T] over a filtered finite index set is Finset.prod over Finset.filter"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '^def range\\|^def filter\\|def Odd\\|def IsSquare' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360)/Data/Finset/Range.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360)/Data/Finset/Filter.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360)/Algebra/Ring/Parity.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360)/Algebra/Group/Even.lean",
+   "results": "Finset.range (Data/Finset/Range.lean:53), Finset.filter (Data/Finset/Filter.lean:52), Odd (Algebra/Ring/Parity.lean:101), Even (to_additive of IsSquare, Algebra/Group/Even.lean:57)",
+   "date": "2026-10-09",
+   "verdict": "match for the primitives: the index sets {0<=i<=2d, i odd} and {0<=i<=2d, i even} are (Finset.range (2*d+1)).filter Odd and .filter Even (or Finset.univ.filter over Fin (2*d+1), as the slopmaster2 Lean writes them inline in WeilConjectures/ZetaFunction/IntegralFactors.lean:76-82 and HasseWeil.lean:85-86)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli 'Weil polynomial\\|zeta function of a variety\\|Weil sheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360)",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no determinant factors P_{i,l} of the cohomology of a variety (see def-weil-smooth-proper-cohomological-family), so N_l and D_l themselves are not in Mathlib; they are one-line Finset.prod expressions over that node"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -43,5 +67,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-parity-products",
+  "worker": "stage1",
+  "summary": "Checked the statement against its source (master blueprint node def-weil-parity-products, order 2899): verbatim, kept. The slopmaster2 blueprint defines the same products under the names O_l, E_l (chapters/14_integrality_final.tex lines 106-113, section 'No cancellation before algebraicity'), with the further claims that they lie in 1+T Q_l[T] and that Z(X_0,T)=O_l/E_l; those are assertions, not part of this definition, and are not added here. Named every notion the statement is built from: kept the three imported dependencies (finite-field datum, X, l and Q_l: def-weil-finite-field-fiber; smooth, proper, geometrically connected, pure dimension d: def-weil-geometric-hypotheses; the determinant factors P_{i,l} in Q_l[T]: def-weil-smooth-proper-cohomological-family, reviewed), and added the two Mathlib leaves the statement also uses, def-weil-l-adic-numbers (Q_l = Padic l) and def-weil-polynomial-ring (Q_l[T] = Polynomial). The remaining primitives, a finite product in a commutative ring over the index sets {0<=i<=2d : i odd} and {0<=i<=2d : i even}, are Mathlib's Finset.prod over Finset.filter Odd/Even of Finset.range (2d+1); following the precedent of def-weil-functional-equation-sign and def-weil-determinant-constants they are recorded in mathlib_searches rather than as leaf nodes. No new node was created. With these, N_l and D_l are one-line definitions over def-weil-smooth-proper-cohomological-family; the node is not a leaf itself only because P_{i,l} is not in Mathlib. Lean: no declaration on either branch (audit none is right); the slopmaster2 Lean writes these products inline as ∏ i ∈ Finset.univ.filter (fun i : Fin (2*d+1) ↦ Odd i.1), P i (WeilConjectures/ZetaFunction/IntegralFactors.lean:76-82, ZetaLinearAlgebra/Recovery.lean:65-67)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
