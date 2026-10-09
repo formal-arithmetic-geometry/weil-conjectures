@@ -1,0 +1,78 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import Mathlib.CategoryTheory.Yoneda
+
+/-!
+# The unit of an adjunction on the essential image of a fully faithful functor
+
+Let `F ⊣ G` be an adjunction between `C` and `D`, and let `J : U ⥤ C` be a fully faithful functor
+with a right adjoint `J'`, such that `J ⋙ F` is again fully faithful. Then the unit
+`η : K ⟶ G (F K)` is invisible to `J'` on the essential image of `J`: the map
+`J' (η_{J K}) : J' (J K) ⟶ J' (G (F (J K)))` is an isomorphism.
+
+The typical instance is an extension by zero `J = j_!` along an open immersion, with `J' = j^*`,
+and `F = q^*` the pullback along a morphism `q` which is an isomorphism over the open subset, so
+that `q^* j_! = j'_!` is again fully faithful.
+
+## Main statements
+
+- `CategoryTheory.Adjunction.isIso_map_unit_app_obj`: `J' (η_{J K})` is an isomorphism.
+-/
+
+@[expose] public section
+
+namespace CategoryTheory
+
+open Category
+
+variable {C D U : Type*} [Category C] [Category D] [Category U]
+  {F : C ⥤ D} {G : D ⥤ C} {J : U ⥤ C} {J' : C ⥤ U}
+
+namespace Adjunction
+
+/-- Let `F ⊣ G`, and let `J` be a fully faithful functor with right adjoint `J'` such that
+`J ⋙ F` is fully faithful. Then for every `K`, composing with the unit `η_{J K}` is a bijection
+`(J T ⟶ J K) ≃ (J T ⟶ G (F (J K)))` for every `T`. -/
+lemma bijective_comp_unit_app_obj (adj : F ⊣ G) [J.Full] [J.Faithful] [(J ⋙ F).Full]
+    [(J ⋙ F).Faithful] (T K : U) :
+    Function.Bijective (fun f : J.obj T ⟶ J.obj K ↦ f ≫ adj.unit.app (J.obj K)) := by
+  have hF : Function.Bijective (fun f : J.obj T ⟶ J.obj K ↦ F.map f) := by
+    have e : (fun f : J.obj T ⟶ J.obj K ↦ F.map f) =
+        (fun g : T ⟶ K ↦ (J ⋙ F).map g) ∘ (fun f ↦ J.preimage f) := by
+      funext f
+      simp
+    rw [e]
+    exact (Functor.FullyFaithful.ofFullyFaithful (J ⋙ F)).map_bijective _ _ |>.comp
+      ((Functor.FullyFaithful.ofFullyFaithful J).homEquiv.symm.bijective)
+  have e : (fun f : J.obj T ⟶ J.obj K ↦ f ≫ adj.unit.app (J.obj K)) =
+      (adj.homEquiv _ _) ∘ (fun f ↦ F.map f) := by
+    funext f
+    simp [Adjunction.homEquiv_unit]
+  rw [e]
+  exact (adj.homEquiv _ _).bijective.comp hF
+
+/-- Let `F ⊣ G`, and let `J` be a fully faithful functor with right adjoint `J'` such that
+`J ⋙ F` is fully faithful. Then `J'` sends the unit `η_{J K} : J K ⟶ G (F (J K))` to an
+isomorphism. -/
+lemma isIso_map_unit_app_obj (adj : F ⊣ G) (adjJ : J ⊣ J') [J.Full] [J.Faithful]
+    [(J ⋙ F).Full] [(J ⋙ F).Faithful] (K : U) :
+    IsIso (J'.map (adj.unit.app (J.obj K))) := by
+  rw [isIso_iff_yoneda_map_bijective]
+  intro T
+  have e : (fun x : T ⟶ J'.obj (J.obj K) ↦ x ≫ J'.map (adj.unit.app (J.obj K))) =
+      (adjJ.homEquiv T (G.obj (F.obj (J.obj K)))) ∘ (fun f ↦ f ≫ adj.unit.app (J.obj K)) ∘
+        (adjJ.homEquiv T (J.obj K)).symm := by
+    funext x
+    simp [Adjunction.homEquiv_naturality_right]
+  exact (congrArg Function.Bijective e).mpr ((adjJ.homEquiv _ _).bijective.comp
+    ((adj.bijective_comp_unit_app_obj T K).comp (adjJ.homEquiv _ _).symm.bijective))
+
+end Adjunction
+
+end CategoryTheory
