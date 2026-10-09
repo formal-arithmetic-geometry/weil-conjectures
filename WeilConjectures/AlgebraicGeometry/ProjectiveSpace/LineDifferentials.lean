@@ -306,4 +306,112 @@ def chartLocalDerivation : LocalDerivation (twist (ULift.{u} (Fin 2)) (Spec (.of
 
 end Charts
 
+section Overlap
+
+/-- The intersection `D₊(x₀) ∩ D₊(x₁)`. -/
+abbrev overlap : (ProjectiveLine (Spec (.of k))).Opens := chart k Set.univ
+
+lemma overlap_le_chart (i : ULift.{u} (Fin 2)) : overlap k ≤ chart k {i} :=
+  chart_mono k (Set.subset_univ _)
+
+lemma mem_chart_iff {s : Set (ULift.{u} (Fin 2))} {x : ProjectiveLine (Spec (.of k))} :
+    x ∈ chart k s ↔ ∀ i ∈ s, x ∈ standardOpen _ (Spec (.of k)) i :=
+  Proj.mem_basicOpen_monomialToNat_indicator
+
+lemma chart_singleton (i : ULift.{u} (Fin 2)) : chart k {i} = standardOpen _ (Spec (.of k)) i :=
+  Opens.ext (Set.ext fun _ ↦ (mem_chart_iff k).trans (by simp))
+
+lemma le_overlap {i j : ULift.{u} (Fin 2)} (hij : i ≠ j) {W : (ProjectiveLine (Spec (.of k))).Opens}
+    (hi : W ≤ chart k {i}) (hj : W ≤ chart k {j}) : W ≤ overlap k := fun _ hx ↦
+  (mem_chart_iff k).2 fun l _ ↦ (eq_or_eq_of_ne hij l).elim
+    (fun h ↦ h ▸ chart_singleton k i ▸ hi hx) fun h ↦ h ▸ chart_singleton k j ▸ hj hx
+
+lemma iSup_chart : ⨆ i, chart k {i} = ⊤ := by
+  simp only [chart_singleton, iSup_standardOpen]
+
+variable {i j : ULift.{u} (Fin 2)}
+
+/-- The Laurent monomial `xⱼ / xᵢ` on the overlap. -/
+def overlapCoordExp (i j : ULift.{u} (Fin 2)) : laurentExponents (Set.univ : Set (ULift.{u} (Fin 2))) 0 :=
+  ⟨(coordExp (i := i) (j := j)).1, (coordExp (i := i) (j := j)).2.1, fun _ hl ↦ (hl trivial).elim⟩
+
+lemma coord_restrict :
+    (ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE (overlap_le_chart k i)).op
+        (coord k (i := i) (j := j)) =
+      chartFun k Set.univ (awayMonomial _ _ (overlapCoordExp i j)) :=
+  presheaf_map_chartFun_awayMonomial k (Set.subset_univ _) _
+
+lemma coord_mul_coord :
+    (ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE (overlap_le_chart k i)).op
+        (coord k (i := i) (j := j)) *
+      (ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE (overlap_le_chart k j)).op
+        (coord k (i := j) (j := i)) = 1 := by
+  rw [coord_restrict, coord_restrict, ← map_mul,
+    Proj.awayMonomial_mul _ _ ⟨0, by simp, fun _ _ ↦ le_rfl⟩ (by
+      funext l
+      simp only [overlapCoordExp, coordExp, Pi.zero_apply, Pi.add_apply, Pi.sub_apply]
+      ring),
+    Proj.awayMonomial_zero _ rfl, map_one]
+
+lemma twistGen_restrict :
+    (twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)).presheaf.map
+        (homOfLE (overlap_le_chart k i)).op (twistGen k i) =
+      ((ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE (overlap_le_chart k i)).op
+        (coord k (i := i) (j := j))) ^ 2 •
+      (twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)).presheaf.map
+        (homOfLE (overlap_le_chart k j)).op (twistGen k j) := by
+  have hi := twist_presheaf_map_twistMonomialSection (S := Spec (.of k)) (m := -2)
+    (Set.subset_univ {i}) (Proj.singleExponent (s := {i}) (m := -2) (Set.mem_singleton i))
+  have hj := twist_presheaf_map_twistMonomialSection (S := Spec (.of k)) (m := -2)
+    (Set.subset_univ {j}) (Proj.singleExponent (s := {j}) (m := -2) (Set.mem_singleton j))
+  rw [twistGen, twistGen, hi, hj, twistMonomialSection_eq_smul (Set.mem_univ j), coord_restrict,
+    ← map_pow, ← Proj.awayMonomial_pow _ 2 _ ?_]
+  · rfl
+  · funext l
+    simp only [Proj.shiftExponent, Proj.singleExponent, overlapCoordExp, coordExp, Pi.sub_apply,
+      Pi.smul_apply, Pi.single_apply]
+    split_ifs <;> simp_all
+
+lemma closure_overlap (hij : i ≠ j) :
+    Subring.closure (Set.range (chartConst k (overlap k)) ∪
+      {(ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE (overlap_le_chart k i)).op
+        (coord k (i := i) (j := j)),
+       (ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE (overlap_le_chart k j)).op
+        (coord k (i := j) (j := i))}) = ⊤ := by
+  set T := Subring.closure (Set.range (chartConst k (overlap k)) ∪
+      {(ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE (overlap_le_chart k i)).op
+        (coord k (i := i) (j := j)),
+       (ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE (overlap_le_chart k j)).op
+        (coord k (i := j) (j := i))})
+  have hmono (e : laurentExponents (Set.univ : Set (ULift.{u} (Fin 2))) 0) :
+      chartFun k Set.univ (awayMonomial _ _ e) ∈ T := by
+    have hs := e.2.1
+    rw [sum_eq_add_of_ne hij] at hs
+    rcases le_total 0 (e.1 j) with h | h
+    · rw [Proj.awayMonomial_pow (overlapCoordExp i j) (e.1 j).toNat e ?_, map_pow,
+        ← coord_restrict]
+      · exact T.pow_mem (Subring.subset_closure (by simp)) _
+      · funext l
+        rcases eq_or_eq_of_ne hij l with rfl | rfl
+        · simp [overlapCoordExp, coordExp, hij]
+          omega
+        · simp [overlapCoordExp, coordExp, hij.symm]
+          omega
+    · rw [Proj.awayMonomial_pow (overlapCoordExp j i) (e.1 i).toNat e ?_, map_pow,
+        ← coord_restrict]
+      · exact T.pow_mem (Subring.subset_closure (by simp)) _
+      · funext l
+        rcases eq_or_eq_of_ne hij l with rfl | rfl
+        · simp [overlapCoordExp, coordExp, hij]
+          omega
+        · simp [overlapCoordExp, coordExp, hij.symm]
+          omega
+  refine eq_top_iff.2 fun f _ ↦ ?_
+  obtain ⟨c, rfl⟩ := (bijective_sum_awayMonomial (n := ULift.{u} (Fin 2)) k
+    (Set.univ_nonempty (α := ULift.{u} (Fin 2)))).2 f
+  refine Subring.sum_mem _ fun e _ ↦ Subring.mul_mem _
+    (Subring.subset_closure (Or.inl ⟨c e, rfl⟩)) (hmono e)
+
+end Overlap
+
 end AlgebraicGeometry.ProjectiveLine
