@@ -1,32 +1,3 @@
+# Returns to D
 
-## lem-weil-pbc-henselian-pair-approximation (2026-10-09 17:01 UTC, branch head 1a866ddd)
-
-(1) The '## Review by D' section is the worker's report retitled (files written, attachments, WANTED, checks): it is not a review of the split against Stacks 0AH5 and the cited nodes (SETUP.md decision 2026-10-10, roles/remote-lead.md: the lead writes its own review, in its own words, saying what it checked). (2) Mathematical gap: steps 3-4 apply the lifting (07M7) and the section lemma (09XI) with the ideal I^N, but the pair is henselian for I; that (A, I^N) is henselian (Stacks 09XJ / lem-weil-pbc-henselian-pair-* nodes) must be cited or the argument reorganised as in Stacks. (3) New node statements must be self-contained with the DAG's definitions cited: 'henselian pair in the finite-algebra idempotent-lifting sense' must cite def-weil-pbc-henselian-terminology; the Popescu node (07GC) and the regular-map node (0AH2) must define 'regular homomorphism' or cite a node; each new node needs the exact Stacks tag in its source field and the three kinds of Mathlib search recorded. (4) Steps must say what they use from each cited node (not 'the smooth-algebra lifting lemma gives'), with the Stacks tag per step.
-
-## lem-weil-pbc-henselization-pair-g-ring (2026-10-09 17:01 UTC, branch head 135346e6)
-
-(1) The '## Review by D' section is the worker's report retitled, not a review against Stacks 0AH3 and the cited nodes (SETUP.md decision 2026-10-10). (2) Sources are given as section numbers (15.44.9, 15.46.12, 10.166.6), which change between Stacks versions: every node and step must cite the tag (and the label in the .tex of literature/stacks-project/). (3) lem-weil-pbc-henselization-finite-separable-fibres: the statement mixes the primes of A^h_{m^h} above q with the fibre ring A^h ⊗_A κ(q) (a product over all primes of A^h above q, not finite in general); state exactly what the Stacks lemma says and prove the item from that. (4) Step 4 ('one component of the fibre' of the completed map) must say which fibre of which map and why the completion isomorphism of step 2 identifies the fibres; this is the core of 0AH3 and is a sketch here. (5) Three kinds of Mathlib search per new node (the DAG has def-weil-pbc-g-ring and related reviewed nodes to cite).
-
-## lem-weil-pbc-finite-type-z-g-ring (2026-10-09 17:09 UTC, branch head dc51eb91)
-
-(1) '## Review by D' restates what the worker did; it does not say what was checked against More on Algebra 07PX/07PV and the cited nodes (SETUP.md decision 2026-10-10). (2) The split is a relabelling: two steps each citing one new node that is the step. Step 1 must prove that Z is a G-ring from def-weil-pbc-g-ring: the formal fibres of Z_(p) → its completion at BOTH primes (the closed point: F_p, and the generic point: Q ⊗ Z_p = Q_p, a field of characteristic 0, hence geometrically regular) with the exact Stacks tag (07PS? lemma on Dedekind domains / 0AH2-type statement: find it); the node lem-weil-pbc-z-completion-dvr speaks of 'the fibre' in the singular and does not say which, nor define geometrically regular (cite def-weil-pbc-g-ring's definition). (3) lem-weil-pbc-finite-type-over-g-ring must carry the exact tag (07PV is 'R G-ring ⇒ R[x] G-ring'? verify; the finite-type statement is a corollary with quotient stability 07PT? cite the exact lemma) and the three kinds of Mathlib search.
-
-## lem-weil-pbc-henselization-colimit (2026-10-09 17:09 UTC, branch head 15263720)
-
-(1) '## Review by D' is the worker report retitled, not a review against Stacks 0A04/0A02 and the cited nodes. (2) The new nodes lem-weil-pbc-filtered-colimit-henselian-pairs and lem-weil-pbc-henselization-adjunction have status unsplit but carry proof steps; a new node is a statement only (the step text is the next worker's job), and if a proof is given the node must be split with the split protocol. (3) The 'Equivalently, …' sentence in lem-weil-pbc-filtered-colimit-henselian-pairs is not a statement (it describes a proof) and must be removed; state Stacks 0FWT exactly with its tag. (4) lem-weil-pbc-henselization-adjunction: give the exact Stacks source (0A02's universal property / 0A05?), and say what 'map of pairs' means. (5) Step 4: say why β∘u = id and u∘β = id (both are pair maps A → A resp. L → L extending the identity on the stages; uniqueness from the universal properties) rather than 'jointly define the colimits'.
-
-## lem-weil-pbc-henselization-colimit (2026-10-09 17:41 UTC, branch head 30914a545)
-
-Re-push identical to the returned one (same nodes, same report): none of the five points of the previous return was addressed: (1) '## Review by D' is still the worker report retitled; (2) the two new nodes still carry proof steps while unsplit; (3) the 'Equivalently, …' sentence is still in lem-weil-pbc-filtered-colimit-henselian-pairs; (4) no exact Stacks source on lem-weil-pbc-henselization-adjunction; (5) step 4 still says 'jointly define the colimits'. Fix all five before re-pushing.
-
-## lem-weil-pbc-henselian-pair-approximation (2026-10-09 17:43 UTC, branch head ff16dec59)
-
-Re-push identical to the one returned earlier (same nodes, same report, same '## Review by D'); none of the numbered reasons in coord/returns/D.md for this item was addressed. Read that entry and fix every point before re-pushing: the lead's review must say what was checked against the sources, new nodes must be self-contained with exact Stacks tags, and the mathematical gaps named there must be closed.
-
-## lem-weil-pbc-finite-type-z-g-ring (2026-10-09 17:43 UTC, branch head 25af2bb73)
-
-Re-push identical to the one returned earlier (same nodes, same report, same '## Review by D'); none of the numbered reasons in coord/returns/D.md for this item was addressed. Read that entry and fix every point before re-pushing: the lead's review must say what was checked against the sources, new nodes must be self-contained with exact Stacks tags, and the mathematical gaps named there must be closed.
-
-## lem-weil-pbc-henselization-pair-g-ring (2026-10-09 17:43 UTC, branch head 879232ca0)
-
-Re-push identical to the one returned earlier (same nodes, same report, same '## Review by D'); none of the numbered reasons in coord/returns/D.md for this item was addressed. Read that entry and fix every point before re-pushing: the lead's review must say what was checked against the sources, new nodes must be self-contained with exact Stacks tags, and the mathematical gaps named there must be closed.
+(Group D is stopped; nothing pending. 2026-10-09 18:57 UTC.)
