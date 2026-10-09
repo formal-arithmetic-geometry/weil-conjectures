@@ -168,15 +168,6 @@ namespace AlgebraicGeometry
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-/-- The preimage under an immersion `j` of an affine open contained in the open `j.coborderRange`
-(in which the image of `j` is closed) is affine. -/
-lemma Scheme.Hom.isAffineOpen_preimage_of_le_coborderRange {X Y : Scheme.{u}} (j : X ⟶ Y)
-    [IsImmersion j] {V : Y.Opens} (hV : IsAffineOpen V) (hle : V ≤ j.coborderRange) :
-    IsAffineOpen (j ⁻¹ᵁ V) := by
-  have h := (hV.preimage_of_isOpenImmersion j.coborderRange.ι
-    (by rwa [Scheme.Opens.opensRange_ι])).preimage j.liftCoborder
-  rwa [← Scheme.Hom.comp_preimage, Scheme.Hom.liftCoborder_ι] at h
-
 /-- **An immersion into projective space can be replaced by a morphism with affine preimages of
 the standard opens.** Let `j : X ⟶ ℙ(α; S)` be a quasi-compact immersion over an affine scheme
 `S`, with `X` quasi-compact and quasi-separated. Then there is a morphism `ψ : X ⟶ ℙ(β; S)` over

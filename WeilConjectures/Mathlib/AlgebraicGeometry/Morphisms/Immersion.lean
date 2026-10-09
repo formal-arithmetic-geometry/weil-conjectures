@@ -146,4 +146,13 @@ theorem Scheme.Hom.exists_isCompact_isClosedImmersion (f : X ⟶ Y) [IsImmersion
     rw [key]; infer_instance
   exact IsClosedImmersion.of_comp _ (Y.homOfLE hWle)
 
+/-- The preimage under an immersion `j` of an affine open contained in the open `j.coborderRange`
+(in which the image of `j` is closed) is affine. -/
+lemma Scheme.Hom.isAffineOpen_preimage_of_le_coborderRange {X Y : Scheme.{u}} (j : X ⟶ Y)
+    [IsImmersion j] {V : Y.Opens} (hV : IsAffineOpen V) (hle : V ≤ j.coborderRange) :
+    IsAffineOpen (j ⁻¹ᵁ V) := by
+  have h := (hV.preimage_of_isOpenImmersion j.coborderRange.ι
+    (by rwa [Scheme.Opens.opensRange_ι])).preimage j.liftCoborder
+  rwa [← Scheme.Hom.comp_preimage, Scheme.Hom.liftCoborder_ι] at h
+
 end AlgebraicGeometry

@@ -54,33 +54,6 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
-lemma Scheme.homOfLE_appTop_topIso_inv {X : Scheme.{u}} {U V : X.Opens} (e : U ≤ V)
-    (x : Γ(X, V)) : (X.homOfLE e).appTop (V.topIso.inv x) =
-      U.topIso.inv (X.presheaf.map (homOfLE e).op x) := by
-  simp only [Scheme.homOfLE_appTop, Scheme.Opens.topIso_inv]
-  change (X.presheaf.map _ ≫ X.presheaf.map _) x = (X.presheaf.map _ ≫ X.presheaf.map _) x
-  rw [← Functor.map_comp]
-  erw [← Functor.map_comp]
-  rfl
-
-lemma Scheme.presheaf_map_map {X : Scheme.{u}} {U V W : X.Opens} (e₁ : V ≤ U) (e₂ : W ≤ V)
-    (x : Γ(X, U)) : X.presheaf.map (homOfLE e₂).op (X.presheaf.map (homOfLE e₁).op x) =
-      X.presheaf.map (homOfLE (e₂.trans e₁)).op x := by
-  rw [← CommRingCat.comp_apply, ← Functor.map_comp]
-  rfl
-
-lemma Scheme.isUnit_map_of_le_basicOpen {X : Scheme.{u}} {U V : X.Opens} (f : Γ(X, U))
-    (h : V ≤ X.basicOpen f) :
-    IsUnit (X.presheaf.map (homOfLE (h.trans (X.basicOpen_le f))).op f) := by
-  have := (RingedSpace.isUnit_res_basicOpen X.toRingedSpace f).map
-    (X.presheaf.map (homOfLE h).op).hom
-  exact (X.presheaf_map_map (X.basicOpen_le f) h f) ▸ this
-
-lemma Scheme.eq_of_map_eq_of_eq {X : Scheme.{u}} {U V : X.Opens} (e : V = U) {x y : Γ(X, U)}
-    (h : X.presheaf.map (homOfLE e.le).op x = X.presheaf.map (homOfLE e.le).op y) : x = y := by
-  subst e
-  simpa using h
-
 /-- A *coordinate cover* of a scheme `X` indexed by `ι`: an open cover `(Uᵢ)` with functions
 `tᵢⱼ ∈ Γ(X, Uᵢ)` (the ratios `Tⱼ / Tᵢ` of trivialising sections of an invertible module) such
 that `tᵢᵢ = 1`, `D(tᵢⱼ) = Uᵢ ∩ Uⱼ` and `tᵢₗ = tᵢⱼ tⱼₗ` on `Uᵢ ∩ Uⱼ`. -/
