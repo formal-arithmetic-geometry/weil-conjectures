@@ -140,3 +140,47 @@ noncomputable def adicOpenImmersionLowerShriekToLowerStar : (j)_!ᵃ[l] ⟶ (j)_
     (Functor.rightUnitor _).hom
 
 end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale
+
+variable (l : ℕ) [Fact l.Prime]
+
+variable {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)}
+  {g : Y₀ ⟶ Spec (.of k)} (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) [IsOpenImmersion φ]
+
+/-- The pullback along the base change `φ̄` of an open immersion commutes with the pushforwards
+along the Frobenii: `(Fr_Y)_* ⋙ φ̄^* ≅ φ̄^* ⋙ (Fr_X)_*`. -/
+noncomputable def adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso :
+    (g.geometricGaloisFrobenius.hom)_*ᵃ[l] ⋙ (Scheme.Hom.geometricFiberMap φ h)^*ᵃ[l] ≅
+      (Scheme.Hom.geometricFiberMap φ h)^*ᵃ[l] ⋙ (f.geometricGaloisFrobenius.hom)_*ᵃ[l] :=
+  Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l g.geometricGaloisFrobenius.symm).symm _ ≪≫
+    (adicUpperStarComp l _ _).symm ≪≫
+    adicUpperStarCongr l (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ h) ≪≫
+    adicUpperStarComp l _ _ ≪≫
+    Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l f.geometricGaloisFrobenius.symm)
+
+/-- The extension by zero along the base change `φ̄` of an open immersion commutes with the
+Frobenius pullbacks `Fr^* = (Fr⁻¹)_*`: the two sides are left adjoint to the two sides of
+`AlgebraicGeometry.ProEtale.adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso`. -/
+noncomputable def adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso :
+    (Scheme.Hom.geometricFiberMap φ h)_!ᵃ[l] ⋙ (g.geometricGaloisFrobenius.inv)_*ᵃ[l] ≅
+      (f.geometricGaloisFrobenius.inv)_*ᵃ[l] ⋙ (Scheme.Hom.geometricFiberMap φ h)_!ᵃ[l] :=
+  (conjugateIsoEquiv
+      ((adicLowerStarEquivalence l f.geometricGaloisFrobenius).symm.toAdjunction.comp
+        (adicOpenImmersionLowerShriekAdjunction l _))
+      ((adicOpenImmersionLowerShriekAdjunction l _).comp
+        (adicLowerStarEquivalence l g.geometricGaloisFrobenius).symm.toAdjunction)).symm
+    (adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso l φ h).symm
+
+/-- The comparison `φ̄_! ⟶ φ̄_*` commutes with the Frobenius exchange isomorphisms. -/
+lemma adicOpenImmersionLowerShriekToLowerStar_geometricFiberMapCompFrobeniusIso :
+    Functor.whiskerRight
+        (adicOpenImmersionLowerShriekToLowerStar l (Scheme.Hom.geometricFiberMap φ h))
+        (g.geometricGaloisFrobenius.inv)_*ᵃ[l] ≫
+      (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom =
+    (adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso l φ h).hom ≫
+      Functor.whiskerLeft (f.geometricGaloisFrobenius.inv)_*ᵃ[l]
+        (adicOpenImmersionLowerShriekToLowerStar l (Scheme.Hom.geometricFiberMap φ h)) :=
+  sorry
+
+end AlgebraicGeometry.ProEtale

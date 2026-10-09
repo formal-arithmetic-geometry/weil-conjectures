@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Complement
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.FullyFaithful
 
@@ -51,8 +52,8 @@ is `F`. The strata of the `Z_k`, composed with the `i_k`, stratify `X`. -/
 theorem IsAdicStratifiedLisseSheaf.of_partition {ι : Type} [Finite ι] {Z : ι → Scheme.{u}}
     (i : (k : ι) → Z k ⟶ X) (hi : ∀ k, IsImmersion (i k))
     (hcover : ∀ x : X, ∃! k, x ∈ Set.range (i k).base)
-    {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
-    (h : ∀ k, IsAdicStratifiedLisseSheaf ((i k)^*[WeilCoefficients.{u} l].obj F)) :
+    {F : AdicSheaf l X}
+    (h : ∀ k, IsAdicStratifiedLisseSheaf ((i k)^*ᵃ[l].obj F)) :
     IsAdicStratifiedLisseSheaf F := by
   choose κ hκ Z' i' hi' hcover' h' using h
   have : ∀ k, Finite (κ k) := hκ
@@ -69,16 +70,16 @@ theorem IsAdicStratifiedLisseSheaf.of_partition {ι : Type} [Finite ι] {Z : ι 
     have := hi k'
     obtain rfl : m' = m := hm m' ⟨w', (i k').isEmbedding.injective hw'⟩
     rfl
-  · exact (h' p.1 p.2).of_iso ((upperStarComp _ _ _).app F).symm
+  · exact (h' p.1 p.2).of_iso ((adicUpperStarComp l _ _).app F).symm
 
 /-- Two complementary immersions stratify: if the ranges of the immersions `i₁` and `i₂` are
 complementary and both `i₁^* F` and `i₂^* F` are stratified lisse, then so is `F`. -/
 theorem IsAdicStratifiedLisseSheaf.of_isCompl {Z₁ Z₂ : Scheme.{u}} (i₁ : Z₁ ⟶ X)
     (i₂ : Z₂ ⟶ X) [IsImmersion i₁] [IsImmersion i₂]
     (h : IsCompl (Set.range i₁.base) (Set.range i₂.base))
-    {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
-    (h₁ : IsAdicStratifiedLisseSheaf ((i₁)^*[WeilCoefficients.{u} l].obj F))
-    (h₂ : IsAdicStratifiedLisseSheaf ((i₂)^*[WeilCoefficients.{u} l].obj F)) :
+    {F : AdicSheaf l X}
+    (h₁ : IsAdicStratifiedLisseSheaf ((i₁)^*ᵃ[l].obj F))
+    (h₂ : IsAdicStratifiedLisseSheaf ((i₂)^*ᵃ[l].obj F)) :
     IsAdicStratifiedLisseSheaf F := by
   refine of_partition (ι := Bool) (Z := fun b ↦ bif b then Z₁ else Z₂)
     (fun b ↦ match b with | true => i₁ | false => i₂) (by rintro (_ | _) <;> infer_instance)
@@ -97,7 +98,7 @@ theorem IsAdicStratifiedLisseSheaf.of_isCompl {Z₁ Z₂ : Scheme.{u}} (i₁ : Z
 the open neighbourhoods `W_a` cover `X`. The pieces `W_a ∖ ⋃_{b < a} W_b`, closed in `W_a`,
 partition `X`, and on each of them `F` is stratified lisse. -/
 theorem IsAdicConstructibleSheaf.isAdicStratifiedLisseSheaf [CompactSpace X]
-    {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
+    {F : AdicSheaf l X}
     (hF : IsAdicConstructibleSheaf F) : IsAdicStratifiedLisseSheaf F := by
   choose W j hj hx h using hF
   have := hj
@@ -139,7 +140,7 @@ theorem IsAdicConstructibleSheaf.isAdicStratifiedLisseSheaf [CompactSpace X]
       obtain ⟨c, rfl⟩ := hwC
       exact ⟨c, rfl⟩
   refine IsAdicStratifiedLisseSheaf.of_partition s (fun a ↦ inferInstance) (fun x ↦ ?_)
-    (fun a ↦ ((h (p a)).upperStar _).of_iso ((upperStarComp _ _ _).app F).symm)
+    (fun a ↦ ((h (p a)).upperStar _).of_iso ((adicUpperStarComp l _ _).app F).symm)
   classical
   obtain ⟨a, ha, hmin⟩ := (Finset.univ.filter fun a ↦ x ∈ Set.range (j (p a)).base).exists_min_image
     id (by simpa [Finset.filter_nonempty_iff] using hp x)
@@ -157,15 +158,15 @@ quasi-compact, so `F` is stratified lisse there, and the restriction of `j_! F` 
 `F`. The restriction of `j_! F` to the closed complement of `U ∩ V` in `V` vanishes. -/
 theorem IsAdicConstructibleSheaf.openImmersionLowerShriek {U : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] [QuasiCompact j]
-    {F : Sheaf (Scheme.ProEt.topology U) (WeilCoefficients.{u} l)}
+    {F : AdicSheaf l U}
     (hF : IsAdicConstructibleSheaf F) :
-    IsAdicConstructibleSheaf ((j)_!open[WeilCoefficients.{u} l].obj F) := by
+    IsAdicConstructibleSheaf ((j)_!ᵃ[l].obj F) := by
   intro x
   obtain ⟨V, hV, hxV, -⟩ : ∃ V : X.Opens, V ∈ X.affineOpens ∧ x ∈ V ∧ V ≤ ⊤ :=
     (Opens.isBasis_iff_nbhd.1 X.isBasis_affineOpens)
     (show x ∈ (⊤ : X.Opens) from trivial)
   refine ⟨V, V.ι, inferInstance, by simpa using hxV, ?_⟩
-  set G := (j)_!open[WeilCoefficients.{u} l].obj F
+  set G := (j)_!ᵃ[l].obj F
   have : IsAffine V := hV
   have : CompactSpace ↥(pullback j V.ι) :=
     QuasiCompact.compactSpace_of_compactSpace (pullback.snd j V.ι)
@@ -179,15 +180,14 @@ theorem IsAdicConstructibleSheaf.openImmersionLowerShriek {U : Scheme.{u}} (j : 
   refine IsAdicStratifiedLisseSheaf.of_isCompl (pullback.snd j V.ι) s
     (by rw [hs]; exact isCompl_compl) ?_ ?_
   · -- On `U ∩ V` the sheaf `j_! F` restricts to `F`.
-    have e : F ≅ (j)^*[WeilCoefficients.{u} l].obj G :=
-      asIso ((openImmersionLowerShriekAdjunction _ j).unit.app F) ≪≫
-        ((upperStarIsoOpenImmersionRestriction _ j).app G).symm
+    have e : F ≅ (j)^*ᵃ[l].obj G :=
+      asIso ((adicOpenImmersionLowerShriekAdjunction l j).unit.app F)
     exact (hF.upperStar (pullback.fst j V.ι)).isAdicStratifiedLisseSheaf.of_iso
-      ((pullback.fst j V.ι)^*[_].mapIso e ≪≫ (upperStarCompIso _ pullback.condition).app G)
+      ((pullback.fst j V.ι)^*ᵃ[l].mapIso e ≪≫ (adicUpperStarCompIso l pullback.condition).app G)
   · -- On the closed complement the sheaf `j_! F` vanishes.
     refine (IsAdicLisseSheaf.of_isZero ?_).isAdicStratifiedLisseSheaf
-    refine (isZero_upperStar_openImmersionLowerShriek _ j (s ≫ V.ι) ?_ F).of_iso
-      ((upperStarComp _ _ _).app G).symm
+    refine (isZero_adicUpperStar_adicOpenImmersionLowerShriek j (s ≫ V.ι) ?_ F).of_iso
+      ((adicUpperStarComp l _ _).app G).symm
     refine Set.eq_empty_of_forall_notMem fun y ⟨⟨u, hu⟩, ⟨c, hc⟩⟩ ↦ ?_
     obtain ⟨t, -, ht⟩ := Scheme.Pullback.exists_preimage_pullback (f := j) (g := V.ι) u (s c)
       (by rw [hu, ← hc]; rfl)
