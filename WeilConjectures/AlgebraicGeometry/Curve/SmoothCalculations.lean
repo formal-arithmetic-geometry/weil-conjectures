@@ -68,12 +68,12 @@ lemma Etale.nsmul_id_constantModSheaf (X : Scheme.{u}) (n : ℕ) :
   ext
   simpa using (Ideal.Quotient.eq_zero_iff_mem).2 (Ideal.mem_span_singleton_self (n : Λ))
 
-/-- For `n > 0`, the underlying abelian sheaf of the constant sheaf `Λ/nΛ` is torsion in the
-sectionwise sense `CategoryTheory.Sheaf.IsTorsion`: every section is killed by `n`. -/
+/-- For `n > 0`, the underlying abelian sheaf of the constant sheaf `Λ/nΛ` is torsion
+(`CategoryTheory.Sheaf.IsTorsion`): every section is killed by `n`. -/
 lemma Etale.isTorsion_constantModSheaf (X : Scheme.{u}) {n : ℕ} (hn : 0 < n) :
     ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
       (Etale.constantModSheaf Λ X n)).IsTorsion := by
-  intro U x
+  refine Sheaf.IsTorsion.of_forall_isAddTorsion fun U x ↦ ?_
   have h := congr_arg
     (fun φ => ((sheafToPresheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map φ).app U)
     (Etale.nsmul_id_constantModSheaf Λ X n)
