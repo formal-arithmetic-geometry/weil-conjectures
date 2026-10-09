@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-faithfully-flat-descent-noetherian",
+ "kind": "statement",
+ "title": "Noetherian descends along faithfully flat ring maps",
+ "statement": "Let $\\varphi:R\\to S$ be a faithfully flat ring map of commutative rings [def-weil-pbc-faithfully-flat-ring-map] with $S$ a Noetherian ring [def-weil-pbc-noetherian-ring]. Then $R$ is a Noetherian ring.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 033E (lemma-descent-Noetherian, line 46647); proof via Lemma Tag 05CK (lemma-faithfully-flat-universally-injective: $I=R\\cap IS$); cited in more-algebra.tex, proof of Lemma Tag 0AGV (line 3142)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if R → S is faithfully flat and S is Noetherian then R is Noetherian",
+   "results": "Module.FaithfullyFlat.instTensorProduct, RingHom.FaithfullyFlat, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_flat_tensorProduct; no direct ring statement",
+   "date": "2026-10-10",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "faithfully flat ring extension descends Noetherian property: S faithfully flat over R and S Noetherian implies R Noetherian",
+   "results": "Algebra.Smooth.flat_of_isNoetherianRing, IsNoetherianRing.of_finite, Algebra.FiniteType.isNoetherianRing (not about descent)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FaithfullyFlat, IsNoetherianRing",
+   "results": "no results (rate-limited query returned empty)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'FaithfullyFlat' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | xargs grep -ln 'IsNoetherian'; sed -n 600,640p /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean",
+   "results": "RingTheory/Flat/FaithfullyFlat/Basic.lean:634 theorem Submodule.IsNoetherian.of_isNoetherian_tensorProduct_of_faithfullyFlat [FaithfullyFlat R A] (h : IsNoetherian A (A ⊗[R] M)) : IsNoetherian R M (via baseChangeOrderEmbedding); used in RingTheory/LocalRing/Length.lean:121",
+   "date": "2026-10-10",
+   "verdict": "generalization: M := R"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsNoetherian.of_isNoetherian_tensorProduct_of_faithfullyFlat",
+   "results": "Submodule.IsNoetherian.of_isNoetherian_tensorProduct_of_faithfullyFlat (Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Submodule.IsNoetherian.of_isNoetherian_tensorProduct_of_faithfullyFlat",
+  "file": "Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean",
+  "line": 634,
+  "how": "specializes in one line: take M := R and A := S (with [Module.FaithfullyFlat R S]); the hypothesis IsNoetherian S (S ⊗[R] R) follows from IsNoetherianRing S = IsNoetherian S S by `isNoetherian_of_linearEquiv` (Mathlib/RingTheory/Noetherian/Basic.lean:92) along `(Algebra.TensorProduct.rid R S S).symm.toLinearEquiv` (Mathlib/RingTheory/TensorProduct/Maps.lean:276, A ⊗[R] R ≃ₐ[S] A), and the conclusion IsNoetherian R R is IsNoetherianRing R. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselization-noetherian-completion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

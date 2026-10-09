@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-colimit-rings-flat",
+ "kind": "statement",
+ "title": "Flatness over a filtered colimit of rings",
+ "statement": "Let $\\mathcal I$ be a small filtered category (for instance a directed set) and $i\\mapsto R_i$ a functor from $\\mathcal I$ to commutative rings with colimit $R=\\varinjlim_iR_i$ [def-weil-pbc-category-colimit] and coprojections $\\iota_i:R_i\\to R$. Let $\\psi:R\\to S$ be a ring map of commutative rings such that for every object $i$ the composite $\\psi\\circ\\iota_i:R_i\\to S$ is flat [def-weil-pbc-flat-ring-map]. Then $\\psi$ is flat.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 05UU (lemma-colimit-rings-flat, line 8857), part (1) with $M=S$ (stated for a directed set; the proof uses only that $\\otimes$ commutes with colimits and that filtered colimits of modules are exact, Lemma Tag 00DB lemma-directed-colimit-exact; a filtered index category reduces to a directed set by Categories Lemma Tag 0032 categories-lemma-directed-category-system); cited in more-algebra.tex, proof of Lemma Tag 0AGV (line 3142)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "direct limit of flat modules is flat",
+   "results": "ModuleCat.directLimitIsColimit, DirectLimit.Module.lift, Module.FaithfullyFlat.toFlat, Module.DirectLimit.induction_on, Module.Flat.directSum_iff",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "colimit of rings flat: R = colim R_i, S flat over each R_i compatible, then S flat over R",
+   "results": "Ring.DirectLimit.commRing, RingCat.Colimits.hasColimits_ringCat, CommRingCat.FilteredColimits.colimit (no flatness)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "colimit of a directed system of rings R_i, a module flat over each R_i is flat over the colimit ring",
+   "results": "Module.Flat.directSum_iff, Module.FaithfullyFlat.directSum, Module.Flat.directSum, Module.Flat.dfinsupp_iff, ModuleCat.directLimitIsColimit",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "directed colimit of flat modules over varying rings is flat over the colimit ring",
+   "results": "Module.Flat.directSum_iff, Module.Flat.directSum, Module.FaithfullyFlat.directSum, ModuleCat.directLimitIsColimit",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Flat' --include=*.lean /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | grep -i 'colimit\\|directlimit\\|direct_limit\\|filtered'; grep -rln 'DirectLimit\\|IsFiltered\\|colimit' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/",
+   "results": "only CategoryTheory/Functor/Flat.lean and CategoryTheory/Filtered/Flat.lean (representably flat functors, unrelated); no flatness lemma in RingTheory/Flat or Algebra/Colimit mentions direct limits",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselization-noetherian-completion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -474,3 +474,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:04 UTC (2026-10-09) — Deliveries: merged the repaired C1 finite-type-z-g-ring (07PX/07PV) and F1 etale-qcqs-sections-filtered-colimit (0738(4); new 00WB/00WK node). STATE row 21:04.
 - 21:05 UTC (2026-10-09) — Reviewed and committed g-ring-maximal-ideal-criterion (07PT; statement made precise; 9 steps, 6 new nodes) and geometric-regularity-separable-extension (07QH; Noetherian hypothesis added; 5 steps, 5 new unsplit nodes).
 - 21:08 UTC (2026-10-09) — Reviewed and committed factorization-criterion-filtered-colimit (07C3; 4 steps, 1 new unsplit node for 0BUF).
+- 21:09 UTC (2026-10-09) — Reviewed and committed henselization-noetherian-completion (0AGV; 7 steps, 7 new nodes: 4 Mathlib leaves incl. the definition of faithfully flat) and etale-qcqs-cofinal-finite-coverings (6 steps, no new nodes; Mathlib leaf route recorded for stage 3).

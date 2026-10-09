@@ -1,7 +1,201 @@
 {
- "id":"lem-weil-pbc-henselization-noetherian-completion","kind":"statement","title":"Noetherian henselization of a Noetherian pair has the same completion",
- "statement":"Let $(A,I)$ be a pair with $A$ Noetherian [def-weil-pbc-noetherian-ring], and let $(A^h,I^h)$ be its henselization [lem-weil-pbc-pair-henselization]. Thus $I^h=IA^h$. For the adic completions $A^\\wedge=\\varprojlim_n A/I^n$ and $(A^h)^\\wedge=\\varprojlim_n A^h/(I^h)^n$ [def-weil-pbc-adic-completion], the canonical map $A\\to A^h$ induces an isomorphism $A^\\wedge\\xrightarrow{\\sim}(A^h)^\\wedge$. Moreover $A^h$ is Noetherian, $A\\to A^h$ is flat [def-weil-pbc-flat-ring-map], and $A^h\\to A^\\wedge$ is faithfully flat.",
- "source":{"document":"literature/stacks-project/more-algebra.tex","place":"Lemma Tag 0AGV (more-algebra-lemma-henselization-Noetherian-pair)"},"stmt_deps":["lem-weil-pbc-pair-henselization","def-weil-pbc-noetherian-ring","def-weil-pbc-adic-completion","def-weil-pbc-flat-ring-map"],
- "mathlib_searches":[{"tool":"leansearch","query":"henselization of a Noetherian pair is Noetherian and has the same adic completion","results":"Only HenselianRing and adic-completion primitives; no henselization theorem","date":"2026-10-10","verdict":"no match"},{"tool":"loogle","query":"IsNoetherianRing completion henselization","results":"no result for henselization","date":"2026-10-10","verdict":"no match"},{"tool":"grep","query":"rg -n -i 'henselization|same completion|faithfully flat.*completion' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/","results":"no henselization theorem; only HenselianRing and AdicCompletion APIs","date":"2026-10-10","verdict":"no match"}],
- "status":"unsplit","merged_into":null,"proof":[],"proof_deps":[],"proof_origin":null,"created":{"by":"worker","item":"lem-weil-pbc-henselization-pair-g-ring","date":"2026-10-10"},"lean_audit":{"master":{"state":"none","decls":[],"missing":[]},"slopmaster2":{"state":"none","decls":[],"missing":[]}},"chapter":"sec-proper-base-change","unit":"sk-thm-p1"
+ "id": "lem-weil-pbc-henselization-noetherian-completion",
+ "kind": "statement",
+ "title": "Noetherian henselization of a Noetherian pair has the same completion",
+ "statement": "Let $(A,I)$ be a pair with $A$ Noetherian [def-weil-pbc-noetherian-ring], and let $(A^h,I^h)$ be its henselization [lem-weil-pbc-pair-henselization], with structure map $\\eta:A\\to A^h$. Thus $I^h=IA^h$. For the adic completions $A^\\wedge=\\varprojlim_n A/I^n$ and $(A^h)^\\wedge=\\varprojlim_n A^h/(I^h)^n$ [def-weil-pbc-adic-completion], the canonical map $A\\to A^h$ induces an isomorphism $\\theta:A^\\wedge\\xrightarrow{\\sim}(A^h)^\\wedge$. Let $\\gamma:A^h\\to A^\\wedge$ be the composite of the completion map $A^h\\to(A^h)^\\wedge$ with $\\theta^{-1}$ (an $A$-algebra map). Moreover $A^h$ is Noetherian, $A\\to A^h$ is flat [def-weil-pbc-flat-ring-map], and $\\gamma:A^h\\to A^\\wedge$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0AGV (more-algebra-lemma-henselization-Noetherian-pair)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-pair-henselization",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "henselization of a Noetherian pair is Noetherian and has the same adic completion",
+   "results": "Only HenselianRing and adic-completion primitives; no henselization theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing completion henselization",
+   "results": "no result for henselization",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'henselization|same completion|faithfully flat.*completion' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/",
+   "results": "no henselization theorem; only HenselianRing and AdicCompletion APIs",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "henselization of a pair, completion of henselization is the completion",
+   "results": "IsAdicComplete.henselianRing, IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion, AdicCompletion.ofAlgEquiv; no henselization",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli 'henseliz' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none (only HenselianRing in RingTheory/Henselian.lean:94)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "proof": [
+  {
+   "text": "*Set-up.* By [lem-weil-pbc-pair-henselization], $A^h=\\varinjlim_{B\\in\\mathcal C}B$, where $\\mathcal C$ is the (essentially small, filtered) category of ring maps $A\\to B$ with $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ etale and $A/I\\xrightarrow{\\sim}B/IB$, with coprojections $\\iota_B:B\\to A^h$ ($\\eta=\\iota_A$), $I^h=IA^h$, the pair $(A^h,I^h)$ is henselian, and $A/I\\to A^h/I^h$ is an isomorphism. Since $I^h$ is generated by $\\eta(I)$, $(I^h)^n$ is generated by $\\eta(I^n)$, i.e. $(I^h)^n=I^nA^h$, for all $n\\ge1$.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AGV, proof: 'In the proof of Lemma 0A02 we have seen that $A^h$ is a filtered colimit of etale $A$-algebras $B$ such that $A/I\\to B/IB$ is an isomorphism'"
+   }
+  },
+  {
+   "text": "*$A\\to A^h$ is flat and $\\theta$ is an isomorphism.* By [lem-weil-pbc-henselization-flat-quotients], $\\eta$ is flat and for every $n\\ge1$ the map $\\eta_n:A/I^n\\to A^h/I^nA^h=A^h/(I^h)^n$ (step 1) is an isomorphism. The $\\eta_n$ commute with the transition maps $A/I^{n+1}\\to A/I^n$ and $A^h/(I^h)^{n+1}\\to A^h/(I^h)^n$ (all are induced by $\\eta$ and the identity), so they induce a ring map $\\theta=\\varprojlim_n\\eta_n:A^\\wedge\\to(A^h)^\\wedge$ [def-weil-pbc-adic-completion], which is the map induced by $A\\to A^h$, and $\\varprojlim_n\\eta_n^{-1}$ is its inverse. Hence $\\theta$ is an isomorphism of $A$-algebras, and $\\gamma$ is an $A$-algebra map: $\\gamma\\circ\\eta$ is the completion map $A\\to A^\\wedge$. (This step does not use that $A$ is Noetherian.)",
+   "uses": [
+    "lem-weil-pbc-henselization-flat-quotients",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AGV, proof: 'The first statement is an immediate consequence of Lemma 0AGU (lemma-henselization-flat, line 3105) and in fact holds without assuming $A$ is Noetherian'"
+   }
+  },
+  {
+   "text": "*Each $B\\in\\mathcal C$ is Noetherian.* Let $B$ be an object of $\\mathcal C$. As $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale, it is locally of finite presentation [def-weil-etale-morphism], so, applied to the affine opens $\\operatorname{Spec}B$ and $\\operatorname{Spec}A$, the ring map $A\\to B$ is of finite presentation [lem-weil-pbc-lfp-affine-opens-finite-presentation], in particular $B\\cong A[x_1,\\dots,x_n]/\\mathfrak a$ is of finite type over $A$. Since $A$ is Noetherian, $B$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian].",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AGV, proof (the application of Algebra Lemma 00MB to $B$ needs $B$ Noetherian; left implicit in Stacks): Algebra Lemma Tag 00FN (lemma-Noetherian-permanence); Morphisms Lemma Tag 01TQ"
+   }
+  },
+  {
+   "text": "*For each $B\\in\\mathcal C$, $B^\\wedge\\cong A^\\wedge\\cong(A^h)^\\wedge$.* Let $B\\in\\mathcal C$ and $B^\\wedge=\\varprojlim_nB/I^nB$ its $IB$-adic completion [def-weil-pbc-adic-completion] ($(IB)^n=I^nB$). $A\\to B$ is flat [lem-weil-pbc-etale-algebra-flat] and $A/I\\to B/IB$ is an isomorphism, so $\\beta_n:A/I^n\\to B/I^nB$ is an isomorphism for every $n\\ge1$ [lem-weil-pbc-flat-iso-mod-ideal-powers]; as in step 2 the $\\beta_n$ induce an isomorphism $\\varprojlim\\beta_n:A^\\wedge\\xrightarrow{\\sim}B^\\wedge$. Let $\\kappa_B:B^\\wedge\\to(A^h)^\\wedge$ be the map induced by $\\iota_B$ (levelwise $\\bar\\iota_{B,n}:B/I^nB\\to A^h/I^nA^h$). Since $\\iota_B$ is an $A$-algebra map, $\\bar\\iota_{B,n}\\circ\\beta_n=\\eta_n$ (step 2), so $\\kappa_B\\circ\\varprojlim\\beta_n=\\theta$; as $\\theta$ and $\\varprojlim\\beta_n$ are isomorphisms, so is $\\kappa_B$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-iso-mod-ideal-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AGV, proof: 'For each such $A\\to B$ the induced map $A^\\wedge\\to B^\\wedge$ is an isomorphism (see proof of Lemma 0AGU)'; the isomorphisms $A/I^n\\to B/I^nB$: proof of Lemma Tag 0AGU (line 3105), via Algebra Lemma Tag 051H"
+   }
+  },
+  {
+   "text": "*$A^h\\to(A^h)^\\wedge$ is flat, hence $\\gamma$ is flat.* Let $c:A^h\\to(A^h)^\\wedge$ be the completion map. For $B\\in\\mathcal C$ the composite $c\\circ\\iota_B:B\\to(A^h)^\\wedge$ equals $\\kappa_B\\circ c_B$, with $c_B:B\\to B^\\wedge$ the completion map (both are levelwise $b\\mapsto\\iota_B(b)\\bmod I^nA^h$). $B$ is Noetherian (step 3), so $c_B$ is flat [lem-weil-pbc-noetherian-completion-flat]; $\\kappa_B$ is an isomorphism (step 4), so $c\\circ\\iota_B$ is flat (an isomorphism of $B$-algebras identifies the two module structures). Since $\\mathcal C$ is filtered and $A^h=\\varinjlim_{\\mathcal C}B$ with coprojections $\\iota_B$ (step 1), $c$ is flat [lem-weil-pbc-colimit-rings-flat]. As $\\theta^{-1}$ is a ring isomorphism, $\\gamma=\\theta^{-1}\\circ c$ is flat [def-weil-pbc-flat-ring-map].",
+   "uses": [
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-colimit-rings-flat",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AGV, proof: 'By Algebra, Lemma 00MB (lemma-completion-flat) the ring map $B\\to A^\\wedge=B^\\wedge=(A^h)^\\wedge$ is flat for each $B$. Thus $A^h\\to A^\\wedge=(A^h)^\\wedge$ is flat by Algebra, Lemma 05UU (lemma-colimit-rings-flat)'"
+   }
+  },
+  {
+   "text": "*$\\gamma$ is faithfully flat.* $(A^h,I^h)$ is henselian (step 1), so $I^h$ is contained in the Jacobson radical of $A^h$ [lem-weil-pbc-henselian-factorization-criterion]. Let $\\pi:A^\\wedge\\to A/I$ be the surjection with kernel $IA^\\wedge$ [lem-weil-pbc-adic-completion-mod-ideal] ($I$ is finitely generated, $A$ being Noetherian). Then $\\pi\\circ\\gamma:A^h\\to A/I$ is an $A$-algebra map (step 2), so it kills $I^h=IA^h$ and the induced map $A^h/I^h\\to A/I$ is an $A$-algebra map; since $A\\to A^h/I^h$ is surjective (it is an isomorphism, step 1), this induced map is the inverse of that isomorphism, so $\\pi\\circ\\gamma$ is surjective with kernel exactly $I^h$. Let $\\mathfrak m\\subset A^h$ be a maximal ideal. Then $I^h\\subseteq\\mathfrak m$, so $\\bar{\\mathfrak m}=\\pi\\gamma(\\mathfrak m)$ is a proper (maximal) ideal of $A/I$; the ideal $\\mathfrak mA^\\wedge$ generated by $\\gamma(\\mathfrak m)$ maps under the surjective ring map $\\pi$ into the ideal generated by $\\bar{\\mathfrak m}$, which is $\\bar{\\mathfrak m}\\ne A/I$; hence $\\mathfrak mA^\\wedge\\ne A^\\wedge$. As $\\gamma$ is flat (step 5), it is faithfully flat [lem-weil-pbc-flat-faithfully-flat-maximal-ideals].",
+   "uses": [
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AGV, proof: 'Since $I^h=IA^h$ is contained in the Jacobson radical of $A^h$ and since $A^h\\to A^\\wedge$ induces an isomorphism $A^h/I^h\\to A/I$ we see that $A^h\\to A^\\wedge$ is faithfully flat by Algebra, Lemma 00HP (lemma-ff)'"
+   }
+  },
+  {
+   "text": "*$A^h$ is Noetherian.* $A^\\wedge$ is Noetherian [lem-weil-pbc-adic-completion-noetherian] and $\\gamma:A^h\\to A^\\wedge$ is faithfully flat (step 6), so $A^h$ is Noetherian [lem-weil-pbc-faithfully-flat-descent-noetherian]. Together with steps 2, 5 and 6 this proves every assertion.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-faithfully-flat-descent-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AGV, proof: 'By Algebra, Lemma 0316 (lemma-completion-Noetherian-Noetherian) the ring $A^\\wedge$ is Noetherian. Hence we conclude that $A^h$ is Noetherian by Algebra, Lemma 033E (lemma-descent-Noetherian)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-henselization-flat-quotients",
+  "def-weil-pbc-adic-completion",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-flat-iso-mod-ideal-powers",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-colimit-rings-flat",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-faithfully-flat-descent-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0AGV (lemma-henselization-Noetherian-pair, line 3142) and its proof"
+ },
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselization-pair-g-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-henselization-noetherian-completion",
+  "worker": "stage1",
+  "summary": "Checked the statement against more-algebra.tex Lemma 0AGV (line 3142): correct; minimal clarification: the map $A^h\\to A^\\wedge$ is now named ($\\gamma$ = completion map followed by $\\theta^{-1}$), and 'faithfully flat' now cites the new definition node (Stacks 00HB); Stacks also states $A^h\\to A^\\wedge$ flat, which faithful flatness contains, and $A\\to A^\\wedge$ flat, which the node omits (not needed). Proof split along Stacks' proof in 7 steps: set-up from 0A02 [lem-weil-pbc-pair-henselization]; completion isomorphism from 0AGU (new node lem-weil-pbc-henselization-flat-quotients); each etale $B$ Noetherian (made explicit; Stacks leaves it implicit when applying 00MB to $B$; new leaf for 00FN); per-$B$ isomorphism $A^\\wedge\\cong B^\\wedge$ via the new node lem-weil-pbc-flat-iso-mod-ideal-powers (proof of 0AGU / 051H); flatness via 00MB and 05UU (new node lem-weil-pbc-colimit-rings-flat); faithful flatness via the Jacobson radical (henselian-factorization-criterion) and 00HP (new leaf); Noetherianity via 0316 and 033E (new leaf). Tags checked against tags/tags: 0AGV, 0AGU, 0A02, 00MB, 05UU, 05UT, 00HP, 0316, 033E, 00FN, 051H, 01TQ, 00HB, 05CK."
+ },
+ "lead_note": "2026-10-10, stage-1 worker for L: statement checked against more-algebra.tex line 3142 (0AGV); it was correct. Minimal correction: the map $A^h\\to A^\\wedge$ (which the old text used without defining) is now named $\\gamma$ = completion map $A^h\\to(A^h)^\\wedge$ followed by $\\theta^{-1}$, and 'faithfully flat' cites the new node def-weil-pbc-faithfully-flat-ring-map (00HB); stmt_deps gained that node. Stacks' extra clause '$A\\to A^\\wedge$ flat' is not in the node (not needed on the route).",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Node created by C1; the map A^h -> A^ is now named (completion followed by theta^{-1}) and faithful flatness has a definition node. Seven steps along the proof of 0AGV with the gap of Stacks (each etale B is Noetherian: finite presentation and 00FN) filled; seven new nodes: four Mathlib leaves verified by line (00HB faithfully flat: Module.FaithfullyFlat FaithfullyFlat/Basic.lean:63 with RingHom.FaithfullyFlat; 00HP via faithfullyFlat_iff; 033E descent of Noetherian: IsNoetherian.of_isNoetherian_tensorProduct_of_faithfullyFlat :634; 00FN: Algebra.FiniteType.isNoetherianRing FiniteType.lean:187) and three unsplit (0AGU flatness of A -> A^h with A/I^n = A^h/I^n A^h; 05UU flatness through a filtered colimit of rings; the flat-modulo-I^n lemma from 051H). Faithful flatness of gamma from the Jacobson-radical property of the henselian pair (lem-weil-pbc-henselian-factorization-criterion) and 00HP."
+ }
 }

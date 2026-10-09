@@ -1,0 +1,66 @@
+{
+ "id": "def-weil-pbc-faithfully-flat-ring-map",
+ "kind": "definition",
+ "title": "Faithfully flat modules and ring maps",
+ "statement": "Let $R$ be a commutative ring. An $R$-module $M$ is *faithfully flat* if for every complex $N_1\\to N_2\\to N_3$ of $R$-modules (composite zero), the complex is exact if and only if $M\\otimes_RN_1\\to M\\otimes_RN_2\\to M\\otimes_RN_3$ is exact; in particular a faithfully flat module is flat [def-weil-pbc-flat-ring-map]. A ring map $\\varphi:R\\to S$ of commutative rings is *faithfully flat* if $S$, an $R$-module via $\\varphi$, is a faithfully flat $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Definition Tag 00HB (definition-flat, line 8621), items (2) and (4)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat module is faithfully flat iff m • M ≠ M for every maximal ideal m",
+   "results": "Module.FaithfullyFlat (Mathlib.RingTheory.Flat.FaithfullyFlat.Basic), Module.faithfullyFlat_iff, Module.FaithfullyFlat.mk, Module.FaithfullyFlat.iff_flat_and_proper_ideal",
+   "date": "2026-10-10",
+   "verdict": "match: Module.FaithfullyFlat (defined by flat + m•M ≠ M; equivalent to 00HB(2) by iff_exact_iff_lTensor_exact)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "faithfully flat module: a sequence is exact iff it is exact after tensoring with M",
+   "results": "Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, lTensor_exact_iff_exact, rTensor_exact_iff_exact (Mathlib.RingTheory.Flat.FaithfullyFlat.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'class FaithfullyFlat\\|iff_exact_iff_rTensor_exact\\|def FaithfullyFlat' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/FaithfullyFlat/ RingTheory/RingHom/",
+   "results": "Basic.lean:63 class FaithfullyFlat extends Module.Flat (submodule_ne_top), :410 iff_exact_iff_rTensor_exact; RingTheory/RingHom/FaithfullyFlat.lean:25 def RingHom.FaithfullyFlat (@[stacks 00HB \"Part (4)\"])",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.FaithfullyFlat, RingHom.FaithfullyFlat",
+  "file": "Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean",
+  "line": 63,
+  "how": "specializes in one line: Mathlib's `Module.FaithfullyFlat R M` (Basic.lean:63) is defined as flat with `m • ⊤ ≠ ⊤` for every maximal ideal m (Stacks 00HP (4)); its equivalence with the node's exactness definition (00HB (2)) is `Module.FaithfullyFlat.iff_exact_iff_lTensor_exact` (same file, line 424; quantifies over modules in universe max u v, which suffices for 00HB(2) as the condition is checked on complexes of R-modules of that universe); the ring-map notion is `RingHom.FaithfullyFlat` (Mathlib/RingTheory/RingHom/FaithfullyFlat.lean:25, tagged stacks 00HB Part (4)), with `RingHom.faithfullyFlat_algebraMap_iff`. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselization-noetherian-completion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
