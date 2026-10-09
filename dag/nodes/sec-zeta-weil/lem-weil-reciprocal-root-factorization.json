@@ -1,0 +1,52 @@
+{
+ "id": "lem-weil-reciprocal-root-factorization",
+ "kind": "statement",
+ "title": "Factorization of a polynomial with constant term one into linear factors $1-\\alpha_jT$ over an algebraically closed field",
+ "statement": "Let $K$ be a field, $T$ an indeterminate, and let $L$ be an algebraically closed field [def-weil-algebraic-closure] together with a ring homomorphism $\\iota:K\\to L$ (for instance $K=\\Ql$ and $L=\\Qlb$ an algebraic closure of $\\Ql$). Let $P(T)\\in K[T]$ [def-weil-polynomial-ring] satisfy $P(0)=1$, and put $r=\\deg P\\in\\mathbf Z_{\\geq0}$. Write $P_L\\in L[T]$ for the polynomial obtained by applying $\\iota$ to the coefficients of $P$, so that $P(x)=P_L(x)$ for $x\\in L$ [def-weil-polynomial-root]. Then:\n\n1. Every root $\\beta\\in L$ of $P$ is nonzero. Hence $\\beta\\mapsto\\beta^{-1}$ is a bijection from the set of roots of $P$ in $L$ onto the set of *reciprocal roots* of $P$ in $L$, the elements $\\alpha\\in L^\\times$ with $P(\\alpha^{-1})=0$.\n\n2. There exist $\\alpha_1,\\dots,\\alpha_r\\in L^\\times$ such that, in $L[T]$,\n\n$$\nP_L(T)=\\prod_{j=1}^{r}(1-\\alpha_jT).\n$$\n\n3. The family $(\\alpha_j)_{1\\leq j\\leq r}$ is unique up to reordering: for every $\\alpha\\in L^\\times$ the number of indices $j$ with $\\alpha_j=\\alpha$ equals $m_{\\alpha^{-1}}(P_L)$, the multiplicity of $\\alpha^{-1}$ as a root of $P_L$ [def-weil-root-multiplicity], which is also the multiplicity $m_\\alpha(P_L^\\#)$ of $\\alpha$ as a root of the reciprocal polynomial $P_L^\\#(U)=U^rP_L(U^{-1})$ [lem-weil-reciprocal-polynomial]. In particular the $\\alpha_j$ are exactly the reciprocal roots of $P$ in $L$, each occurring $m_{\\alpha_j^{-1}}(P_L)$ times (its *algebraic multiplicity* as a reciprocal root), and the number of reciprocal roots counted with multiplicity is $r=\\deg P$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-ordinary-reciprocal-roots.md",
+  "place": "node def-weil-ordinary-reciprocal-roots, order 2859: the assertions 'It is nonzero' and 'Over an algebraic closure one has $P(T)=\\prod_j(1-\\alpha_jT)$, where the $\\alpha_j$, counted with algebraic multiplicity, are the reciprocal roots', stated inside the definition without proof"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-root",
+  "def-weil-root-multiplicity",
+  "lem-weil-reciprocal-polynomial"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rni 'reciprocal root\\|reciprocal polynomial' Mathlib/; grep -rn 'theorem Splits.eq_prod_roots\\|theorem Splits.eq_prod_roots_of_monic\\|theorem splits_iff_card_roots' Mathlib/Algebra/Polynomial/Splits.lean; grep -n 'class IsAlgClosed\\|theorem IsAlgClosed.splits_domain' Mathlib/FieldTheory/IsAlgClosed/Basic.lean  (~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, lean4 v4.33.1))",
+   "results": "'reciprocal root'/'reciprocal polynomial': nothing. Polynomial.Splits.eq_prod_roots (hf : f.Splits) : f = C f.leadingCoeff * (f.roots.map (X - C ·)).prod (Splits.lean:299); Splits.eq_prod_roots_of_monic (Splits.lean:307); splits_iff_card_roots : f.Splits ↔ f.roots.card = f.natDegree (Splits.lean:373); IsAlgClosed k : class with field splits : ∀ p : k[X], p.Splits (IsAlgClosed/Basic.lean:62); IsAlgClosed.splits_domain (p : k[X]) : (p.map f).Splits for f : k →+* K with K algebraically closed (Basic.lean:66)",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib factors a polynomial over an algebraically closed field as leadingCoeff · ∏ (X - β) over its roots (Splits.eq_prod_roots with IsAlgClosed.splits_domain), not as ∏ (1 - α_j X) indexed by the inverses of the roots; turning one into the other (every root is nonzero since the constant term is 1, X - β = -β(1 - β⁻¹X), and the product of the -β equals leadingCoeff⁻¹) is a short argument, not a one-line specialization, so the node is not a leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^theorem count_roots\\|^theorem mem_roots\\|def roots' Mathlib/Algebra/Polynomial/Roots.lean; grep -n 'def reverse\\|theorem eval₂_reverse_eq_zero_iff\\|theorem eval₂_reverse_mul_pow\\|theorem coeff_zero_reverse\\|theorem reverse_mul_of_domain' Mathlib/Algebra/Polynomial/Reverse.lean; grep -rn 'roots_reverse\\|eval_reverse' Mathlib/  (~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, lean4 v4.33.1))",
+   "results": "Polynomial.roots (p : R[X]) : Multiset R (Roots.lean:58); count_roots : p.roots.count a = rootMultiplicity a p (Roots.lean:99); mem_roots (hp : p ≠ 0) : a ∈ p.roots ↔ IsRoot p a (Roots.lean:110); Polynomial.reverse (Reverse.lean:218); eval₂_reverse_eq_zero_iff (i : R →+* S) (x : S) [Invertible x] (f : R[X]) : eval₂ i (⅟x) (reverse f) = 0 ↔ eval₂ i x f = 0 (Reverse.lean:337); eval₂_reverse_mul_pow (Reverse.lean:332); coeff_zero_reverse (Reverse.lean:225); reverse_mul_of_domain (Reverse.lean:277); no 'roots_reverse' or 'eval_reverse' anywhere",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has the ingredients (the root multiset with count_roots = rootMultiplicity, and the pointwise statement that x⁻¹ is a root of reverse f iff x is a root of f) but no statement that the roots of the reverse polynomial, with multiplicities, are the inverses of the roots, nor the factorization ∏ (1 - α_j X); clause 3 therefore needs a proof of its own"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-ordinary-reciprocal-roots",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

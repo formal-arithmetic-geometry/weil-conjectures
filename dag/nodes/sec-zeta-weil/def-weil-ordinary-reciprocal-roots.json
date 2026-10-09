@@ -8,18 +8,31 @@
   "place": "node def-weil-ordinary-reciprocal-roots, order 2859"
  },
  "stmt_deps": [
-  "def-weil-frobenius-detailed",
-  "def-weil-smooth-proper-cohomological-family",
   "def-weil-finite-field-fiber",
   "def-weil-geometric-hypotheses",
-  "def-weil-ordinary-compact-cohomology"
+  "def-weil-frobenius-detailed",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-algebraic-closure",
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-root",
+  "def-weil-root-multiplicity",
+  "lem-weil-reciprocal-root-factorization"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rni 'reciprocal root\\|reciprocal polynomial' Mathlib/; grep -n '^def IsRoot' Mathlib/Algebra/Polynomial/Eval/Defs.lean; grep -n 'def reverse\\|theorem eval₂_reverse_eq_zero_iff' Mathlib/Algebra/Polynomial/Reverse.lean  (~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, lean4 v4.33.1))",
+   "results": "'reciprocal root'/'reciprocal polynomial': nothing. Polynomial.IsRoot (p : R[X]) (a : R) : Prop := p.eval a = 0 (Eval/Defs.lean:355); Polynomial.reverse (Reverse.lean:218), the polynomial with the coefficients reversed, i.e. U^{deg P} P(U^{-1}); eval₂_reverse_eq_zero_iff : eval₂ i (⅟x) (reverse f) = 0 ↔ eval₂ i x f = 0 (Reverse.lean:337)",
+   "date": "2026-10-09",
+   "verdict": "no match for the definition as a whole, which is tied to the family P_{i,ℓ} = det(1 - T F_{i,ℓ} | H^i(X, Q_ℓ)) that Mathlib does not have; its ingredients are leaves: an ordinary root of P in Qlb is Polynomial.IsRoot (P.map ι) β (def-weil-polynomial-root), a reciprocal root α is a root of Polynomial.reverse P, equivalently (eval₂_reverse_eq_zero_iff) a nonzero α with P(α⁻¹) = 0, and the multiplicity is Polynomial.rootMultiplicity (def-weil-root-multiplicity); the factorization asserted in the last sentence is the new node lem-weil-reciprocal-root-factorization"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +60,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-ordinary-reciprocal-roots",
+  "worker": "stage1",
+  "summary": "Checked the statement against its source (master blueprint, order 2859): verbatim, kept; the slopmaster2 blueprint has no copy of this node and no Lean exists on either branch. The first paragraph only restates the setting of def-weil-smooth-proper-cohomological-family; the definition proper is the second paragraph, about a polynomial P in Q_l[T] with P(0)=1. Kept the five imported statement dependencies, each verified to supply something the statement uses: the datum p,a,q,k_0,k, the prime l, Q_l and the chosen algebraic closure Qlb (def-weil-finite-field-fiber); smooth, proper, geometrically connected, pure dimension d (def-weil-geometric-hypotheses); the geometric-Frobenius convention, cited in the text (def-weil-frobenius-detailed); H^i(X,Q_l) (def-weil-ordinary-compact-cohomology); V_{i,l}, F_{i,l} and P_{i,l} (def-weil-smooth-proper-cohomological-family). Added the notions the second paragraph is built from: 'algebraically closed field' and 'algebraic closure' for Qlb (existing leaf def-weil-algebraic-closure, in sec-nagata-compactification); the polynomial ring Q_l[T] and the constant coefficient P(0) (existing leaf def-weil-polynomial-ring); the evaluation P(beta) of a polynomial over Q_l at a point of Qlb and the notion of root in an extension field, which the DAG lacked (new leaf def-weil-polynomial-root, Polynomial.eval₂ / Polynomial.IsRoot); 'algebraic multiplicity' (existing leaf def-weil-root-multiplicity, Polynomial.rootMultiplicity). The sentences 'It is nonzero' and 'Over an algebraic closure one has P(T)=prod_j(1-alpha_j T), where the alpha_j, counted with algebraic multiplicity, are the reciprocal roots' are assertions, not part of the definition, and the multiplicity of a reciprocal root is not defined by the text: they are stated as the new node lem-weil-reciprocal-root-factorization (unsplit; Mathlib has the ingredients Splits.eq_prod_roots, IsAlgClosed.splits_domain, count_roots, eval₂_reverse_eq_zero_iff but not the statement), which fixes the multiplicity of a reciprocal root alpha as the multiplicity of alpha^{-1} as a root of P, equivalently of alpha as a root of the reciprocal polynomial of lem-weil-reciprocal-polynomial. Recorded a Mathlib search for the item itself: no match for the definition as a whole; its ingredients are leaves."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

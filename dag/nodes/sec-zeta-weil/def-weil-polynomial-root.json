@@ -1,0 +1,52 @@
+{
+ "id": "def-weil-polynomial-root",
+ "kind": "definition",
+ "title": "Evaluation of a polynomial in an extension field, and roots",
+ "statement": "Let $K$ be a field, $T$ an indeterminate and $K[T]$ the polynomial ring [def-weil-polynomial-ring]. Let $L$ be a field together with a ring homomorphism $\\iota:K\\to L$ (for instance a subfield inclusion $K\\subseteq L$, or $K=\\Ql$ and $L=\\Qlb$ an algebraic closure). For $P(T)=\\sum_{n\\geq0}c_nT^n\\in K[T]$ and $x\\in L$, the value of $P$ at $x$ is\n\n$$\nP(x)=\\sum_{n\\geq0}\\iota(c_n)\\,x^n\\in L,\n$$\n\nthe image of $P$ under the unique ring homomorphism $K[T]\\to L$ that restricts to $\\iota$ on $K$ and sends $T$ to $x$. A *root* of $P$ in $L$ is an element $x\\in L$ with $P(x)=0$. When $L=K$ and $\\iota=\\mathrm{id}$ this is the usual evaluation $P(x)\\in K$; in particular $P(0)=c_0$ is the constant coefficient.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-ordinary-reciprocal-roots.md",
+  "place": "node def-weil-ordinary-reciprocal-roots, order 2859: 'An *ordinary root* is a scalar $\\beta\\in\\Qlb$ satisfying $P(\\beta)=0$' for $P(T)\\in\\Ql[T]$, and 'All roots are taken in this chosen algebraically closed field $\\Qlb$'; the evaluation of a polynomial over $\\Ql$ at a point of $\\Qlb$ is used there without definition"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'irreducible_def eval₂\\|^def eval \\|^def IsRoot\\|^def map ' Mathlib/Algebra/Polynomial/Eval/Defs.lean; grep -n '^def aeval\\|theorem aeval_def' Mathlib/Algebra/Polynomial/AlgebraMap.lean  (~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, lean4 v4.33.1))",
+   "results": "Polynomial.eval₂ (f : R →+* S) (x : S) (p : R[X]) : S (Eval/Defs.lean:57), the sum Σ f(c_n) x^n; Polynomial.eval (x : R) (p : R[X]) (Eval/Defs.lean:250) is eval₂ (RingHom.id R) x; Polynomial.IsRoot (p : R[X]) (a : R) : Prop := p.eval a = 0 (Eval/Defs.lean:355); Polynomial.map (f : R →+* S) : R[X] → S[X] (Eval/Defs.lean:494); Polynomial.aeval (x : A) : R[X] →ₐ[R] A (AlgebraMap.lean:257) with aeval_def : aeval x p = eval₂ (algebraMap R A) x p (AlgebraMap.lean:273)",
+   "date": "2026-10-09",
+   "verdict": "match: the value P(x) ∈ L of P ∈ K[T] along ι : K →+* L is Polynomial.eval₂ ι x P (equivalently Polynomial.aeval x P when L is a K-algebra); a root of P in L is Polynomial.IsRoot (P.map ι) x"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem eval₂_eq_eval_map\\|theorem eval_map' Mathlib/Algebra/Polynomial/Eval/Defs.lean; grep -n 'theorem isRoot_map_iff\\|theorem coeff_zero_eq_eval_zero' Mathlib/Algebra/Polynomial/Eval/Coeff.lean  (~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, lean4 v4.33.1))",
+   "results": "Polynomial.eval₂_eq_eval_map : p.eval₂ f x = (p.map f).eval x (Eval/Defs.lean:565); Polynomial.eval_map (x : S) : (p.map f).eval x = p.eval₂ f x (Eval/Defs.lean:577); Polynomial.isRoot_map_iff (Eval/Coeff.lean:225, for injective f and x in the source ring); Polynomial.coeff_zero_eq_eval_zero : coeff p 0 = p.eval 0 (Eval/Coeff.lean:57)",
+   "date": "2026-10-09",
+   "verdict": "match: the two descriptions of P(x) (eval₂ along ι, or eval of the coefficientwise extension P.map ι) agree by eval₂_eq_eval_map, and P(0) is the constant coefficient by coeff_zero_eq_eval_zero"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.eval₂",
+  "file": "Mathlib/Algebra/Polynomial/Eval/Defs.lean",
+  "how": "exact: `Polynomial.eval₂ ι x P` is $P(x)$ for `P : K[X]`, `ι : K →+* L`, `x : L` (equivalently `(P.map ι).eval x` by `Polynomial.eval₂_eq_eval_map`, or `Polynomial.aeval x P` when `L` is a `K`-algebra); a root of $P$ in $L$ is `Polynomial.IsRoot (P.map ι) x` (Mathlib/Algebra/Polynomial/Eval/Defs.lean:355)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-ordinary-reciprocal-roots",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
