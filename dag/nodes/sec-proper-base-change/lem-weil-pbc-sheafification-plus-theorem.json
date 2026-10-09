@@ -2,19 +2,96 @@
  "id": "lem-weil-pbc-sheafification-plus-theorem",
  "kind": "statement",
  "title": "The plus construction computes sheafification",
- "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and let $\\mathcal F$ be a presheaf of sets on $\\mathcal C$. For an object $U$, define $\\mathcal F^+(U)$ to be the equivalence classes of pairs consisting of a covering $\\{U_i\\to U\\}_{i\\in I}$ and sections $s_i\\in\\mathcal F(U_i)$ whose pullbacks agree after passing to a covering of each $U_i\\times_UU_j$, where two pairs are equivalent when they have a common covering refinement on which the sections agree; restrictions are obtained by pullback of coverings and sections. Put $\\mathcal F^{++}=(\\mathcal F^+)^+$. The Sites Theorem Tag 00WB (theorem-plus) says: (1) $\\mathcal F^+$ is separated and the canonical map $\\mathcal F^+\\to\\mathcal F^{++}$ is injective, as in [lem-weil-pbc-sheafification-plus-separated]; (2) $\\mathcal F^{++}$ is a sheaf; and (3) the canonical map $\\mathcal F\\to\\mathcal F^{++}$ is a sheafification. More precisely, if $\\theta:\\mathcal F\\to\\mathcal F^\\#$ is the universal-property sheafification [def-weil-pbc-sheafification], there is a unique isomorphism $\\mathcal F^{++}\\simeq\\mathcal F^\\#$ over $\\mathcal F$, carrying the canonical map to $\\theta$.",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and let $\\mathcal F$ be a presheaf of sets on $\\mathcal C$. Let $\\mathcal F^+$ be its plus construction and $\\theta_{\\mathcal F}:\\mathcal F\\to\\mathcal F^+$ the canonical map [def-weil-pbc-site-plus-construction]: $\\mathcal F^+(U)=\\operatorname{colim}_{\\mathcal J_U^{opp}}H^0(\\mathcal U,\\mathcal F)$, the colimit over the coverings $\\mathcal U$ of $U$ and their refinements of the sets $H^0(\\mathcal U,\\mathcal F)$ of families $(s_i)\\in\\prod_i\\mathcal F(U_i)$ with $s_i|_{U_i\\times_UU_j}=s_j|_{U_i\\times_UU_j}$; it is a presheaf and $\\theta_{\\mathcal F}$ a morphism of presheaves [lem-weil-pbc-site-plus-construction-presheaf]. Put $\\mathcal F^{++}=(\\mathcal F^+)^+$ and $\\theta^2_{\\mathcal F}=\\theta_{\\mathcal F^+}\\circ\\theta_{\\mathcal F}:\\mathcal F\\to\\mathcal F^{++}$. Then (Stacks Sites, Theorem 00WB and Proposition 00WH): (1) $\\mathcal F^+$ is separated and the canonical map $\\theta_{\\mathcal F^+}:\\mathcal F^+\\to\\mathcal F^{++}$ is injective, as in [lem-weil-pbc-sheafification-plus-separated]; (2) $\\mathcal F^{++}$ is a sheaf; (3) $\\theta^2_{\\mathcal F}:\\mathcal F\\to\\mathcal F^{++}$ is a sheafification: for every sheaf of sets $\\mathcal G$ on $\\mathcal C$ and every morphism of presheaves $\\varphi:\\mathcal F\\to\\mathcal G$ there is a unique morphism $\\varphi':\\mathcal F^{++}\\to\\mathcal G$ with $\\varphi'\\circ\\theta^2_{\\mathcal F}=\\varphi$. Consequently, if $\\theta:\\mathcal F\\to\\mathcal F^\\#$ is the universal-property sheafification [def-weil-pbc-sheafification], there is a unique isomorphism $\\mathcal F^{++}\\simeq\\mathcal F^\\#$ of presheaves carrying $\\theta^2_{\\mathcal F}$ to $\\theta$.",
  "source": {
   "document": "literature/stacks-project/sites.tex",
-  "place": "Sites, Theorem Tag 00WB (theorem-plus), parts (1)--(4), with the plus construction of Section 7.10"
+  "place": "Sites, Section 00W1 (section-sheafification): Theorem 00WB (theorem-plus), parts (1)--(4), Definition 00WG (definition-associated-sheaf) and Proposition 00WH (proposition-sheafification-adjoint) with its proof"
  },
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-sheafification-plus-separated"
+  "def-weil-pbc-site-plus-construction",
+  "lem-weil-pbc-site-plus-construction-presheaf",
+  "lem-weil-pbc-sheafification-plus-separated",
+  "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Part (1). Applying [lem-weil-pbc-sheafification-plus-separated] to $\\mathcal F$ gives that $\\mathcal F^+$ is separated (for every covering $\\{U_i\\to U\\}$ the map $\\mathcal F^+(U)\\to\\prod_i\\mathcal F^+(U_i)$ is injective; injectivity into the equalizer of the two maps to $\\prod_{i,j}\\mathcal F^+(U_i\\times_UU_j)$, as that node phrases it, is the same condition since the equalizer is a subset of the product) and that $\\theta_{\\mathcal F^+}:\\mathcal F^+\\to\\mathcal F^{++}$ is injective.",
+   "uses": [
+    "lem-weil-pbc-sheafification-plus-separated",
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB(1) (item-sep, tag 00WC), and 00WB(2) applied to the separated presheaf $\\mathcal F^+$"
+   }
+  },
+  {
+   "text": "Part (2). By step 1, $\\mathcal F^+$ is a separated presheaf of sets in the sense of Sites, Definition 00WA. Applying [lem-weil-pbc-site-plus-of-separated-is-sheaf] to $\\mathcal G=\\mathcal F^+$ (a presheaf by [lem-weil-pbc-site-plus-construction-presheaf]) gives that $(\\mathcal F^+)^+=\\mathcal F^{++}$ is a sheaf.",
+   "uses": [
+    "lem-weil-pbc-site-plus-of-separated-is-sheaf",
+    "lem-weil-pbc-site-plus-construction-presheaf",
+    "lem-weil-pbc-sheafification-plus-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB(4) (item-plusplus) and its proof ('now obvious' from (1) and (2))"
+   }
+  },
+  {
+   "text": "Part (3), existence. Let $\\mathcal G$ be a sheaf and $\\varphi:\\mathcal F\\to\\mathcal G$ a morphism. By [lem-weil-pbc-site-plus-of-sheaf-iso], $\\theta_{\\mathcal G}:\\mathcal G\\to\\mathcal G^+$ is an isomorphism, so $\\mathcal G^+$ is a sheaf (a presheaf isomorphic to a sheaf is a sheaf, the equalizer condition being transported by the isomorphism), and applying the same node to $\\mathcal G^+$, $\\theta_{\\mathcal G^+}$ is an isomorphism; hence $\\theta^2_{\\mathcal G}=\\theta_{\\mathcal G^+}\\circ\\theta_{\\mathcal G}:\\mathcal G\\to\\mathcal G^{++}$ is an isomorphism. By [lem-weil-pbc-site-plus-construction-functorial](b) applied to $\\varphi$ and to $\\varphi^+:\\mathcal F^+\\to\\mathcal G^+$ we have $\\theta_{\\mathcal G}\\circ\\varphi=\\varphi^+\\circ\\theta_{\\mathcal F}$ and $\\theta_{\\mathcal G^+}\\circ\\varphi^+=\\varphi^{++}\\circ\\theta_{\\mathcal F^+}$, with $\\varphi^{++}=(\\varphi^+)^+$; composing, $\\theta^2_{\\mathcal G}\\circ\\varphi=\\varphi^{++}\\circ\\theta^2_{\\mathcal F}$. Put $\\varphi'=(\\theta^2_{\\mathcal G})^{-1}\\circ\\varphi^{++}:\\mathcal F^{++}\\to\\mathcal G$; then $\\varphi'\\circ\\theta^2_{\\mathcal F}=(\\theta^2_{\\mathcal G})^{-1}\\circ\\theta^2_{\\mathcal G}\\circ\\varphi=\\varphi$.",
+   "uses": [
+    "lem-weil-pbc-site-plus-of-sheaf-iso",
+    "lem-weil-pbc-site-plus-construction-functorial",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Proposition 00WH (proposition-sheafification-adjoint), proof: the commutative diagram from Lemma 00W5 and Theorem 00WB(3)"
+   }
+  },
+  {
+   "text": "Part (3), uniqueness. Let $\\varphi',\\varphi'':\\mathcal F^{++}\\to\\mathcal G$ with $\\varphi'\\circ\\theta^2_{\\mathcal F}=\\varphi''\\circ\\theta^2_{\\mathcal F}$, and let $x\\in\\mathcal F^{++}(U)$. Local surjectivity of $\\theta$ (Sites, Lemma 00W9): by [lem-weil-pbc-site-plus-construction-presheaf](1) applied to $\\mathcal F^+$, $x=[\\mathcal U,(t_i)_i]$ for a covering $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ and $(t_i)\\in H^0(\\mathcal U,\\mathcal F^+)$, and by part (3) of the same node (with $h:U_i\\to U$ factoring through $U_i$ via the identity) $x|_{U_i}=\\theta_{\\mathcal F^+}(t_i)$. Likewise each $t_i=[\\{U_{ik}\\to U_i\\}_k,(r_{ik})_k]$ with $r_{ik}\\in\\mathcal F(U_{ik})$ and $t_i|_{U_{ik}}=\\theta_{\\mathcal F}(r_{ik})$. Since $\\theta_{\\mathcal F^+}$ is a morphism of presheaves, $x|_{U_{ik}}=\\theta_{\\mathcal F^+}(t_i|_{U_{ik}})=\\theta^2_{\\mathcal F}(r_{ik})$, so $\\varphi'(x)|_{U_{ik}}=\\varphi'(\\theta^2_{\\mathcal F}(r_{ik}))=\\varphi''(\\theta^2_{\\mathcal F}(r_{ik}))=\\varphi''(x)|_{U_{ik}}$. The family $\\{U_{ik}\\to U\\}_{i,k}$ is a covering of $U$ by axiom (ii) of a site, and a sheaf is separated (the map $\\mathcal G(U)\\to\\prod\\mathcal G(U_{ik})$ is injective by the equalizer condition), so $\\varphi'(x)=\\varphi''(x)$. Hence $\\varphi'=\\varphi''$.",
+   "uses": [
+    "lem-weil-pbc-site-plus-construction-presheaf",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Proposition 00WH, proof ('uniqueness follows from Lemma 00W9'), with Lemma 00W9 (lemma-plus-surjective) and its proof"
+   }
+  },
+  {
+   "text": "Comparison with $\\mathcal F^\\#$. By steps 2--4, $(\\mathcal F^{++},\\theta^2_{\\mathcal F})$ is a sheaf with a morphism from $\\mathcal F$ through which every morphism from $\\mathcal F$ to a sheaf factors uniquely, which is the universal property of [def-weil-pbc-sheafification]. By the universal properties there are unique morphisms $a:\\mathcal F^{++}\\to\\mathcal F^\\#$ with $a\\circ\\theta^2_{\\mathcal F}=\\theta$ and $b:\\mathcal F^\\#\\to\\mathcal F^{++}$ with $b\\circ\\theta=\\theta^2_{\\mathcal F}$; then $b\\circ a\\circ\\theta^2_{\\mathcal F}=\\theta^2_{\\mathcal F}=\\mathrm{id}\\circ\\theta^2_{\\mathcal F}$ gives $b\\circ a=\\mathrm{id}$ by the uniqueness for $\\mathcal F^{++}$, and likewise $a\\circ b=\\mathrm{id}$. So $a$ is an isomorphism carrying $\\theta^2_{\\mathcal F}$ to $\\theta$, and it is the only morphism with $a\\circ\\theta^2_{\\mathcal F}=\\theta$.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, the paragraph after Proposition 00WH (the sheafification is unique up to unique isomorphism; left adjoint to the inclusion)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheafification-plus-separated",
+  "def-weil-pbc-site-plus-construction",
+  "lem-weil-pbc-site-plus-of-separated-is-sheaf",
+  "lem-weil-pbc-site-plus-construction-presheaf",
+  "lem-weil-pbc-site-plus-of-sheaf-iso",
+  "lem-weil-pbc-site-plus-construction-functorial",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Theorem 00WB (theorem-plus) and Proposition 00WH (proposition-sheafification-adjoint), Section 00W1"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +120,17 @@
    "results": "Mathlib contains the sheafification adjunction and IsSheafFor criteria, but no explicit plus-construction separatedness theorem or F -> F++ comparison isomorphism for a general site",
    "date": "2026-10-10",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem isSheaf_plus_plus\\|def sheafify\\|def sheafifyLift\\|theorem sheafifyLift_unique\\|theorem sheafify_hom_ext' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean; grep -n plusPlusIsoSheafify .../Sites/LeftExact.lean",
+   "results": "ConcreteSheafification.lean:426 isSheaf_plus_plus, :441 sheafify (:= J.plusObj (J.plusObj P)), :515 sheafifyLift, :527 sheafifyLift_unique, :542 sheafify_hom_ext; LeftExact.lean:293 plusPlusIsoSheafify, :299 toSheafify_plusPlusIsoSheafify_hom; Plus.lean:256 isIso_toPlus_of_isSheaf",
+   "date": "2026-10-10",
+   "verdict": "generalization in another formalism: clauses (2), (3) hold verbatim for Mathlib's `plusObj` over a Grothendieck topology (covering sieves), and Mathlib's sheafification of presheaves of types is plus-plus by definition; but the plus construction of this node is the colimit over covering families of a Stacks site [def-weil-pbc-site-plus-construction], and its identification with `plusObj` of the generated topology is itself a theorem (Stacks Sites Sections 00ZB/00ZG), so not a leaf; candidates recorded for stage 2"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +150,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheafification-plus-theorem",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Sites Section 00W1 (Theorem 00WB, Definition 00WG, Proposition 00WH; tags checked in tags/tags). The statement defined F^+ ad hoc as classes of families whose pullbacks agree only after a further covering of U_i x_U U_j, which is not Stacks's H^0 condition (exact agreement on U_i x_U U_j); it now uses the plus construction node def-weil-pbc-site-plus-construction (colimit over J_U) created by the split of lem-weil-pbc-sheafification-plus-separated, cites lem-weil-pbc-site-plus-construction-presheaf for F^+ being a presheaf, makes the canonical map theta^2 explicit and states the universal property of clause (3) (Stacks Prop. 00WH, not part of 00WB). Proof in five steps: (1) by the separated node; (2) by the new node 'G separated => G^+ sheaf' (00WB(2)); (3) existence via functoriality (new node, Lemma 00W5) and 'G sheaf => G -> G^+ iso' (new node, 00WB(3)); (4) uniqueness via local surjectivity (parts (1),(3) of the presheaf node, i.e. Lemma 00W9) and separatedness of sheaves; (5) unique iso with F^# by universal properties (elementary). Mathlib has all of this for plusObj over covering sieves (Plus.lean, ConcreteSheafification.lean, LeftExact.lean), recorded as candidates, not leaves, since the family/sieve identification is a theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Five steps: (1) by the separated node, (2) F^{++} a sheaf by a new unsplit node (separated G: G -> G^+ injective and G^+ a sheaf, 00WB(2)), (3) existence of the factorization through F^{++} via G = G^{++} for a sheaf (new unsplit 00WB(3) node) and functoriality of plus (new unsplit 00W5 node), (4) uniqueness by local surjectivity of theta (00W9, from the presheaf/colimit node) and separatedness of sheaves, (5) the unique isomorphism with F^#. Correct. Statement rewritten to the Stacks plus construction (cites def-weil-pbc-site-plus-construction) with the universal property made explicit (00WH); the earlier inline description was not F^+. Mathlib sieve-based plus/sheafify recorded, not leaves (site convention)."
+ }
 }
