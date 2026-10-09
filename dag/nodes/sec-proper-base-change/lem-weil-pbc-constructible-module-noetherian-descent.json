@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-constructible-module-noetherian-descent",
+ "kind": "statement",
+ "title": "A constructible sheaf of $\\Lambda$-modules on a qcqs scheme is the inverse image of one on a Noetherian scheme",
+ "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], $\\Lambda$ a finite commutative ring and $F$ a constructible sheaf of $\\Lambda$-modules on $X_{\\Et}$ [def-weil-pbc-etale-constructible-sheaf], an object of $\\Mod(X_{\\Et},\\Lambda)$ [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category]. Then there are a Noetherian scheme $X'$ (locally Noetherian [pqf-def-locnoeth] and quasi-compact; one may take $X'$ of finite type over $\\operatorname{Spec}\\mathbf Z$), a morphism of schemes $\\nu:X\\to X'$, a constructible sheaf of $\\Lambda$-modules $F'$ on $X'_{\\Et}$ [def-weil-pbc-etale-constructible-sheaf] and an isomorphism of sheaves of $\\Lambda$-modules $\\nu^{-1}F'\\cong F$, where $\\nu^{-1}$ is the inverse image [def-weil-pbc-inverse-image]. (Stacks states the underlying Lemma 09YU (3) for Noetherian $\\Lambda$; a finite ring is Noetherian.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09Z7 (lemma-constructible-maps-into-constant-general), proof, first paragraph up to 'is the pullback of a similar constructible sheaf F_t over X_t for some t' (etale-cohomology.tex ~line 13066), which combines Limits, Proposition 01ZA (limits-proposition-approximate) and the essential surjectivity part of Lemma 09YU (3) (lemma-category-is-colimit, etale-cohomology.tex line 12552)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constructible sheaf on the etale site is the pullback of a constructible sheaf on a Noetherian scheme",
+   "results": "Functor.sheafPullbackConstruction.sheafPullback, Functor.sheafPullback (CategoryTheory.Sites.Pullback), TopCat.Sheaf.pullback, SheafOfModules.pullback, Scheme.Hom.isConstructible_preimage (constructible sets): generic pullback functors only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every constructible etale sheaf on a quasi-compact quasi-separated scheme is the inverse image of a constructible sheaf on a scheme of finite type over Z",
+   "results": "Scheme.Hom.isConstructible_image (Chevalley), isLocallyConstructible_image, isConstructible_preimage (Morphisms.FinitePresentation), Scheme.etaleTopology: constructible sets and the big etale topology only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "results": "smallEtaleTopology, ofArrows_mem_smallEtaleTopology_iff (Sites.Etale); AffineEtale.sheafEquiv, instAbelianSheafEtaleSmallEtaleTopology, instHasSheafifyEtaleSmallEtaleTopology (Sites.AffineEtale): the site and its sheaf category only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlni constructible Mathlib/AlgebraicGeometry/Sites Mathlib/CategoryTheory/Sites Mathlib/Topology/Sheaves; ls Mathlib/AlgebraicGeometry/Sites/; grep -rn 'pushforward\\|lowerStar' Mathlib/AlgebraicGeometry/Sites/*.lean",
+   "results": "no constructible sheaf, no etale direct image or inverse image along a morphism of schemes in Mathlib/AlgebraicGeometry/Sites (Etale.lean defines smallEtaleTopology only; AffineEtale.lean the abelian sheaf category); 'constructible' occurs only for constructible sets (Morphisms/FinitePresentation.lean, Topology.IsConstructible)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.Etale.exists_isNoetherian_upperStar_iso",
+   "module": "WeilConjectures.ConstructibleSheaf.FinitePushforward",
+   "note": "FinitePushforward.lean:118-129, own sorry; false as stated with the source repository's IsConstructibleSheaf (locally closed strata without constructibility); not attached; see coord/HUMAN.md"
+  }
+ ]
+}

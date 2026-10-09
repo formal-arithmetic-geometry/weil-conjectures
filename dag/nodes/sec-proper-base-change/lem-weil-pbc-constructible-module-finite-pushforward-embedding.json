@@ -18,9 +18,74 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Noetherian approximation of $F$.* By [lem-weil-pbc-constructible-module-noetherian-descent] applied to the quasi-compact quasi-separated $X$ and the constructible sheaf of $\\Lambda$-modules $F$ there are a Noetherian scheme $X'$, a morphism $\\nu:X\\to X'$, a constructible sheaf of $\\Lambda$-modules $F'$ on $X'_{\\Et}$ and an isomorphism $\\alpha:\\nu^{-1}F'\\xrightarrow{\\sim}F$. (In Stacks: write $X=\\lim_tX_t$ with $X_t$ of finite type over $\\mathbf Z$ and affine transition maps, Limits 01ZA; by Lemma 09YU (3) the category of constructible sheaves of $\\Lambda$-modules on $X$ is the colimit of those on the $X_t$, so $F$ is the pullback of a constructible $F_t$ on some $X_t$; take $X'=X_t$, $\\nu$ the projection, $F'=F_t$.)",
+   "uses": [
+    "lem-weil-pbc-constructible-module-noetherian-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09Z7, proof, first paragraph ('We will reduce this lemma to the Noetherian case ... is the pullback of a similar constructible sheaf F_t over X_t for some t'), etale-cohomology.tex lines 13059-13066"
+   }
+  },
+  {
+   "text": "*The Noetherian case.* By [lem-weil-pbc-constructible-module-finite-pushforward-noetherian] applied to the Noetherian scheme $X'$ and the constructible sheaf of $\\Lambda$-modules $F'$ there are $n\\ge0$, finite morphisms $f_i:Y_i\\to X'$, finite $\\Lambda$-modules $M_i$ ($i=1,\\dots,n$) and a monomorphism $\\varphi:F'\\hookrightarrow\\bigoplus_{i=1}^nf_{i,*}\\underline{M_i}$ in $\\Mod(X'_{\\Et},\\Lambda)$.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09Z7, proof: 'Then we apply the Noetherian case (Lemma 09Z6) to find an injection F_t -> (+) f_{i,*} M_i over X_t for some finite morphisms f_i : Y_i -> X_t', etale-cohomology.tex lines 13066-13075"
+   }
+  },
+  {
+   "text": "*The $f_i$ are of finite presentation.* $X'$ is Noetherian, in particular locally Noetherian, and each $f_i$ is finite; a finite morphism to a locally Noetherian scheme is of finite presentation [pqf-lem-finite-fp-locnoeth] (Mathlib: `AlgebraicGeometry.IsFinite.instLocallyOfFiniteType` together with the instance `LocallyOfFinitePresentation f` for `[IsLocallyNoetherian Y] [LocallyOfFiniteType f]`, Mathlib/AlgebraicGeometry/Noetherian.lean:265). Hence each $f_i$ is finite and locally of finite presentation [def-sbc-locally-finite-presentation].",
+   "uses": [
+    "pqf-lem-finite-fp-locnoeth",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09Z7, proof: 'Since X_t is Noetherian the morphisms f_i are of finite presentation', etale-cohomology.tex line 13076"
+   }
+  },
+  {
+   "text": "*Pulling the embedding back to $X$.* By [lem-weil-pbc-finite-pushforward-embedding-pullback] applied to $\\nu:X\\to X'$, $F'$, the finite and locally finitely presented $f_i$ of Step 3, the $M_i$ and the monomorphism $\\varphi$ of Step 2, there are finite morphisms $g_i:Y'_i\\to X$ locally of finite presentation (the base changes $Y_i\\times_{X'}X\\to X$) and a monomorphism $\\varphi':\\nu^{-1}F'\\hookrightarrow\\bigoplus_{i=1}^ng_{i,*}\\underline{M_i}$ in $\\Mod(X_{\\Et},\\Lambda)$ with the same finite $\\Lambda$-modules $M_i$. (In Stacks: pullback is exact, so $\\nu^{-1}\\varphi$ is injective; $\\nu^{-1}$ commutes with finite direct sums; and $\\nu^{-1}f_{i,*}\\underline{M_i}=g_{i,*}(\\nu')^{-1}\\underline{M_i}=g_{i,*}\\underline{M_i}$ by Lemma 0959 and the fact that the inverse image of a constant sheaf is constant.)",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-embedding-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09Z7, proof, last sentence: 'Since pullback is exact and since formation of f_{i,*} commutes with base change (Lemma 0959), we conclude', etale-cohomology.tex lines 13077-13080"
+   }
+  },
+  {
+   "text": "*Conclusion.* The composite $\\varphi'\\circ\\alpha^{-1}:F\\to\\bigoplus_{i=1}^ng_{i,*}\\underline{M_i}$ of the isomorphism $\\alpha^{-1}$ of Step 1 and the monomorphism $\\varphi'$ of Step 4 is a monomorphism of sheaves of $\\Lambda$-modules, with $g_i$ finite and locally of finite presentation and $M_i$ finite $\\Lambda$-modules, as asserted. (A finite morphism is quasi-compact and separated, so each $g_i$ is also of finite presentation, which is the form of Stacks 09Z7.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09Z7 (3), statement, etale-cohomology.tex line 13028"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+  "lem-weil-pbc-constructible-module-noetherian-descent",
+  "lem-weil-pbc-finite-pushforward-embedding-pullback",
+  "pqf-lem-finite-fp-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09Z7 (lemma-constructible-maps-into-constant-general), part (3), and its proof, etale-cohomology.tex lines 13028-13081"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,7 +117,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,11 +138,26 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar"
-  ],
-  "note": "attached by the lead at review of lemma-weil-pbc-h1-constructible-representation (2026-10-09): WeilConjectures/ConstructibleSheaf/FinitePushforward.lean:190, @[stacks 09Z7], stated for any commutative ring Lambda (the node's finite Lambda is a special case); no own sorry, rests on sorry in exists_isNoetherian_upperStar_iso and exists_mono_biproduct_lowerStar_of_isNoetherian; its docstring names lemma-weil-pbc-constructible-finite-pushforward (the abelian-group form 09Z7(2))"
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+  "worker": "stage1",
+  "summary": "Split along the proof of Stacks 09Z7, which is also the structure of WeilConjectures/ConstructibleSheaf/FinitePushforward.lean: (1) descent of F to a Noetherian scheme (new node lem-weil-pbc-constructible-module-noetherian-descent, Stacks 01ZA + 09YU(3); Lean exists_isNoetherian_upperStar_iso, not attached, see below), (2) the Noetherian case 09Z6(3) (new node lem-weil-pbc-constructible-module-finite-pushforward-noetherian = Lean exists_mono_biproduct_lowerStar_of_isNoetherian, sorry_here), (3) finite over Noetherian is of finite presentation (existing pqf-lem-finite-fp-locnoeth, a Mathlib fact: Noetherian.lean:265), (4) pullback of the embedding (new node lem-weil-pbc-finite-pushforward-embedding-pullback = Lean exists_mono_biproduct_lowerStar_upperStar, sorry-free, for attachment), (5) composition with the isomorphism (elementary). The existing nodes lem-weil-pbc-constructible-finite-pushforward-noetherian / -approximation are the abelian-group torsion forms (09Z6(2), 09Z7(2)) and do not give Lambda-linear maps, so Lambda-module nodes were created. Lambda: Stacks needs Lambda Noetherian (09YU(3), 09YV, 09Z4 go through finitely presented Lambda-modules); the node's finite Lambda is Noetherian. LEAN DISCREPANCY: the attached Lean exists_mono_biproduct_lowerStar uses the source repository's IsConstructibleSheaf, whose strata are arbitrary locally closed subsets (Topology.Stratification has no constructibility), weaker than def-weil-pbc-etale-constructible-sheaf (constructible strata). With it the Lean statement is false: X=Spec(prod_N F_2), x a non-principal ultrafilter point (closed, not open, so {x} is closed but not constructible), F=i_*Z/2 for i:{x}->X; F is Lean-constructible (strata {x}, X\\{x}), but a monomorphism F -> (+) g_{i,*}M_i with g_i finite of finite presentation is impossible: the global section 1 of F has support {x}, the support of a global section of g_*M is the image of a clopen subset of Y under the finite finitely presented g, which is closed and constructible (Chevalley), and a monomorphism preserves supports. The same example (j_!Z/2 for the non-quasi-compact open j: X\\{x} -> X, or i_*Z/2) refutes exists_isNoetherian_upperStar_iso and exists_isNoetherian_mono_biproduct_lowerStar (an inverse image of a constructible sheaf from a Noetherian scheme has constructible support). The node itself is right (its definition has constructible strata); the Lean statement must not be attached as stating it unless IsConstructibleSheaf requires constructible strata."
+ },
+ "tool_uses": [
+  "pqf-lem-finite-fp-locnoeth"
+ ],
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar",
+   "module": "WeilConjectures.ConstructibleSheaf.FinitePushforward",
+   "note": "attached by the lead at 15:50 and withdrawn at the review of this split (2026-10-09 17:05): the source repository's IsConstructibleSheaf (ConstructibleSheaf/Defs.lean:249, strata a Topology.Stratification = finite partition into locally closed subsets, Topology/Stratification.lean:29, no constructibility) is weaker than def-weil-pbc-etale-constructible-sheaf, and with it the Lean statement is false (X = Spec(prod_N F_2), x a non-principal ultrafilter point, F = i_* Z/2: Lean-constructible, but the support {x} of its section 1 is not constructible while supports of sections of (+) g_{i*} M_i are images of clopens under finite finitely presented maps, hence constructible by Chevalley; a monomorphism preserves supports); its proof rests on the sorried exists_isNoetherian_upperStar_iso, false for the same reason. Lean names kept here for the human (coord/HUMAN.md)."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Five steps along the proof of Stacks 09Z7 (etale-cohomology.tex:13059-13080): Noetherian approximation (new node lem-weil-pbc-constructible-module-noetherian-descent, 01ZA + 09YU(3)), the Noetherian case 09Z6(3) (new node lem-weil-pbc-constructible-module-finite-pushforward-noetherian, Lean exists_mono_biproduct_lowerStar_of_isNoetherian, sorry), finite over Noetherian is of finite presentation (pqf-lem-finite-fp-locnoeth, tool use; Mathlib Noetherian.lean:265), pullback of the embedding (new node lem-weil-pbc-finite-pushforward-embedding-pullback, closed by exists_mono_biproduct_lowerStar_upperStar, attached by the lead), composition (elementary). Lambda: the node's finite Lambda is Noetherian, which Stacks' proof needs. LEAN FINDING verified by the lead: the Lean IsConstructibleSheaf has no constructibility of strata (Topology/Stratification.lean:29), so exists_mono_biproduct_lowerStar, exists_isNoetherian_upperStar_iso and exists_isNoetherian_mono_biproduct_lowerStar are false as stated (worker's counterexample checked); the earlier attachment moved to lean_candidates; reported in coord/HUMAN.md."
  }
 }
