@@ -62,6 +62,105 @@ noncomputable def toAffineOverFullyFaithful : (toAffineOver Y).FullyFaithful whe
 instance : (toAffineOver Y).Full := toAffineOverFullyFaithful.full
 instance : (toAffineOver Y).Faithful := toAffineOverFullyFaithful.faithful
 
+section Limits
+
+/-- A coproduct of two étale morphisms is étale. -/
+lemma _root_.AlgebraicGeometry.Etale.coprodDesc {X X' Z : Scheme.{u}} (f : X ⟶ Z) (g : X' ⟶ Z)
+    [Etale f] [Etale g] : Etale (coprod.desc f g) := by
+  rw [IsZariskiLocalAtSource.iff_of_openCover (P := @Etale) (coprodOpenCover.{_, 0} X X')]
+  rintro (⟨⟩ | ⟨⟩)
+  · simpa [coprodOpenCover] using ‹Etale f›
+  · simpa [coprodOpenCover] using ‹Etale g›
+
+variable (Y) in
+/-- `FÉt(Y)` as the category of `Y`-schemes with finite étale structure morphism. -/
+@[simps]
+noncomputable def toFiniteEtaleOver :
+    Y.FiniteEtale ⥤ (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ Y where
+  obj P := MorphismProperty.Over.mk ⊤ P.obj.hom ⟨P.property, P.obj.prop⟩
+  map f := MorphismProperty.Over.homMk f.hom.left (hom_left_comp f) trivial
+
+/-- `FÉt(Y) ⥤ (finite ⊓ étale).Over Y` is fully faithful. -/
+noncomputable def toFiniteEtaleOverFullyFaithful : (toFiniteEtaleOver Y).FullyFaithful where
+  preimage f :=
+    ObjectProperty.homMk (MorphismProperty.Over.homMk f.left (MorphismProperty.Over.w f))
+  map_preimage f := MorphismProperty.Over.Hom.ext rfl
+  preimage_map f := hom_ext rfl
+
+instance : (toFiniteEtaleOver Y).Full := toFiniteEtaleOverFullyFaithful.full
+instance : (toFiniteEtaleOver Y).Faithful := toFiniteEtaleOverFullyFaithful.faithful
+instance : (toFiniteEtaleOver Y).EssSurj where
+  mem_essImage A := ⟨⟨MorphismProperty.Over.mk ⊤ A.hom A.prop.2, A.prop.1⟩,
+    ⟨MorphismProperty.Over.isoMk (Iso.refl _)⟩⟩
+instance : (toFiniteEtaleOver Y).IsEquivalence where
+
+instance : HasFiniteLimits Y.FiniteEtale := by
+  have : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).IsStableUnderBaseChange :=
+    MorphismProperty.IsStableUnderBaseChange.inf
+  have : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).HasOfPostcompProperty
+      (@IsFinite ⊓ @Etale) := by
+    refine ⟨fun {X Y Z} f g hg hfg ↦ ?_⟩
+    have := hg.1; have := hg.2; have := hfg.1; have := hfg.2
+    exact ⟨IsFinite.of_comp f g, Etale.of_comp f g⟩
+  exact ⟨fun J _ _ ↦ Adjunction.hasLimitsOfShape_of_equivalence (toFiniteEtaleOver Y)⟩
+
+/-- The initial finite étale `Y`-scheme: the empty scheme. -/
+noncomputable def empty : Y.FiniteEtale :=
+  ⟨MorphismProperty.Over.mk ⊤ (Scheme.emptyTo Y) inferInstance,
+    show IsFinite (Scheme.emptyTo Y) from inferInstance⟩
+
+/-- The empty scheme is initial in `FÉt(Y)`. -/
+noncomputable def isInitialEmpty : IsInitial (empty (Y := Y)) :=
+  IsInitial.ofUniqueHom
+    (fun P ↦ ObjectProperty.homMk (MorphismProperty.Over.homMk (Scheme.emptyTo _)
+      (_root_.AlgebraicGeometry.emptyIsInitial.hom_ext _ _) trivial))
+    (fun _ _ ↦ hom_ext (_root_.AlgebraicGeometry.emptyIsInitial.hom_ext _ _))
+
+/-- The disjoint union of two finite étale `Y`-schemes. -/
+noncomputable def coprod (P Q : Y.FiniteEtale) : Y.FiniteEtale :=
+  ⟨MorphismProperty.Over.mk ⊤ (Limits.coprod.desc P.obj.hom Q.obj.hom)
+    (by have := P.obj.prop; have := Q.obj.prop; exact Etale.coprodDesc _ _),
+    by
+      have : IsFinite P.obj.hom := P.property
+      have : IsFinite Q.obj.hom := Q.property
+      exact show IsFinite (Limits.coprod.desc P.obj.hom Q.obj.hom) from inferInstance⟩
+
+/-- The disjoint union is a coproduct in `FÉt(Y)`. -/
+noncomputable def coprodCofan (P Q : Y.FiniteEtale) : BinaryCofan P Q :=
+  BinaryCofan.mk
+    (ObjectProperty.homMk (MorphismProperty.Over.homMk Limits.coprod.inl
+      (Limits.coprod.inl_desc _ _)) : P ⟶ coprod P Q)
+    (ObjectProperty.homMk (MorphismProperty.Over.homMk Limits.coprod.inr
+      (Limits.coprod.inr_desc _ _)) : Q ⟶ coprod P Q)
+
+/-- The disjoint union is a coproduct in `FÉt(Y)`. -/
+noncomputable def isColimitCoprodCofan (P Q : Y.FiniteEtale) : IsColimit (coprodCofan P Q) :=
+  BinaryCofan.IsColimit.mk _
+    (fun f g ↦ ObjectProperty.homMk (MorphismProperty.Over.homMk
+      (Limits.coprod.desc f.hom.left g.hom.left)
+      (by
+        apply Limits.coprod.hom_ext
+        · exact (Limits.coprod.inl_desc_assoc _ _ _).trans
+            ((hom_left_comp f).trans (Limits.coprod.inl_desc _ _).symm)
+        · exact (Limits.coprod.inr_desc_assoc _ _ _).trans
+            ((hom_left_comp g).trans (Limits.coprod.inr_desc _ _).symm))))
+    (fun f g ↦ hom_ext (Limits.coprod.inl_desc _ _))
+    (fun f g ↦ hom_ext (Limits.coprod.inr_desc _ _))
+    (fun f g m h₁ h₂ ↦ hom_ext (by
+      apply Limits.coprod.hom_ext
+      · exact congr(($h₁).hom.left).trans (Limits.coprod.inl_desc _ _).symm
+      · exact congr(($h₂).hom.left).trans (Limits.coprod.inr_desc _ _).symm))
+
+instance : HasBinaryCoproducts Y.FiniteEtale :=
+  @hasBinaryCoproducts_of_hasColimit_pair _ _ (fun {P Q} ↦ ⟨⟨_, isColimitCoprodCofan P Q⟩⟩)
+
+instance : HasInitial Y.FiniteEtale := isInitialEmpty.hasInitial
+
+instance : HasFiniteCoproducts Y.FiniteEtale :=
+  hasFiniteCoproducts_of_has_binary_and_initial
+
+end Limits
+
 section Quotient
 
 variable {G : Type u} [Monoid G] [Finite G] (D : SingleObj G ⥤ Y.FiniteEtale)
