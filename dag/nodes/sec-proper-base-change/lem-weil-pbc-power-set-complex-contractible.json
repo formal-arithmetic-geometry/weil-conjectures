@@ -8,9 +8,54 @@
   "place": "Lemma Tag 03AT (lemma-homology-complex), last paragraph of the proof: the extended complex Z[S x S x S] -> Z[S x S] -> Z[S] -> Z (sum) -> 0 is exact for nonempty S, by the homotopy n_(s_0..s_p) -> n_(s,s_0..s_p); with coefficients A (= O(V)) as in the first argument of the proof of Lemma Tag 03F5 (lemma-complex-tensored-still-exact)"
  },
  "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "$d\\circ d=0$ and $\\varepsilon\\circ d=0$. All maps are $A$-linear and $C_{p+2}(S;A)$ is free on the tuples, so it suffices to check on a basis element $x=[(s_0,\\ldots,s_{p+2})]$. Write $x_{\\hat i\\hat j}$ ($i<j$) for the tuple with the entries in positions $i$ and $j$ deleted. Then $d(d x)=\\sum_{j}(-1)^j d[(s_0,\\ldots,\\widehat{s_j},\\ldots,s_{p+2})]=\\sum_j\\sum_{i<j}(-1)^{j}(-1)^{i}[x_{\\hat i\\hat j}]+\\sum_j\\sum_{i>j}(-1)^{j}(-1)^{i-1}[x_{\\hat j\\hat i}]$ (after deleting position $j$, an entry originally at position $i>j$ sits at position $i-1$). Renaming $(j,i)\\mapsto(i,j)$ in the second sum turns it into $\\sum_{i<j}(-1)^{i+j-1}[x_{\\hat i\\hat j}]$, the negative of the first sum; so $d\\circ d=0$. Also $\\varepsilon(d[(s_0,s_1)])=\\varepsilon([s_1]-[s_0])=1-1=0$, so $\\varepsilon\\circ d=0$ on $C_1(S;A)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AT (lemma-homology-complex), last paragraph of the proof (the complex Z[S x S] -> Z[S] -> Z (sum) -> 0; the sign computation is the standard one, written out here)"
+   }
+  },
+  {
+   "text": "Empty case. If $S=\\emptyset$ then $S^{p+1}=\\emptyset$ for every $p\\geq0$, so $C_p(S;A)$ is the free module on the empty set, i.e. $0$; the non-augmented complex is $0$ and all its homology vanishes. (The augmented complex is then $0\\to A\\to0$, exact only if $A=0$; this is why the exactness clause assumes $S\\neq\\emptyset$, as Stacks does.) From now on $S\\neq\\emptyset$ and $s\\in S$ is fixed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AT (lemma-homology-complex), last paragraph of the proof ('for any nonempty set S'); the empty case is used in the proof of 03AT when some S_phi is empty"
+   }
+  },
+  {
+   "text": "The homotopy identities. Define $A$-linear maps $h:C_p(S;A)\\to C_{p+1}(S;A)$, $[(s_0,\\ldots,s_p)]\\mapsto[(s,s_0,\\ldots,s_p)]$ ($p\\geq0$) and $h:A\\to C_0(S;A)$, $1\\mapsto[s]$ (Stacks' homotopy $n_{(s_0,\\ldots,s_p)}\\mapsto n_{(s,s_0,\\ldots,s_p)}$ with coefficients in $A$, as in the proof of 03F5). On a basis element $x=[(s_0,\\ldots,s_p)]$: the $j=0$ term of $d[(s,s_0,\\ldots,s_p)]$ is $x$ and the term $j+1$ is $(-1)^{j+1}[(s,s_0,\\ldots,\\widehat{s_j},\\ldots,s_p)]$, so $d(hx)=x-\\sum_{j=0}^p(-1)^j[(s,s_0,\\ldots,\\widehat{s_j},\\ldots,s_p)]$. For $p\\geq1$ the subtracted sum is exactly $h(dx)$, so $dh+hd=\\mathrm{id}$ on $C_p(S;A)$. For $p=0$ it is $[s]=h(\\varepsilon x)$, so $dh+h\\varepsilon=\\mathrm{id}$ on $C_0(S;A)$. Finally $\\varepsilon(h(1))=\\varepsilon[s]=1$, so $\\varepsilon h=\\mathrm{id}_A$. Hence, writing the augmented complex as $K_0=A$, $K_{p+1}=C_p(S;A)$ with differentials $\\varepsilon$ and $d$, the maps $h$ satisfy $d_Kh+hd_K=\\mathrm{id}_{K_n}$ for all $n\\geq0$: they are a homotopy from $\\mathrm{id}_K$ to $0$ (a contracting homotopy).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AT (lemma-homology-complex), last paragraph of the proof; coefficients A as in Lemma Tag 03F5 (lemma-complex-tensored-still-exact), proof (coefficients O(V) in place of Z)"
+   }
+  },
+  {
+   "text": "Exactness. By the first step $K_\\bullet$ (the augmented complex of the previous step) is a chain complex of $A$-modules, and by the previous step it carries a homotopy from the identity to $0$; by [lem-weil-pbc-contractible-complex-acyclic] it is exact in every degree. (Directly: a cycle $z\\in K_n$ satisfies $z=d(hz)+h(dz)=d(hz)$, and $1=\\varepsilon(h(1))$.) Exactness at $K_{p+1}=C_p(S;A)$ for $p\\geq1$ is $H_p(C_\\bullet(S;A))=0$, since the augmentation does not touch these degrees. Exactness at $K_0=A$ and at $K_1=C_0(S;A)$ says that $\\varepsilon$ is surjective and $\\ker\\varepsilon=\\operatorname{im}(d:C_1\\to C_0)$, so $\\varepsilon$ induces $H_0(C_\\bullet(S;A))=C_0/\\operatorname{im}d\\cong A$.",
+   "uses": [
+    "lem-weil-pbc-contractible-complex-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AT (lemma-homology-complex), last paragraph of the proof ('is exact in all degrees. To see this fix an element s in S, and use the homotopy')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-contractible-complex-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03AT (lemma-homology-complex), last paragraph of the proof; with coefficients A as in Lemma Tag 03F5 (lemma-complex-tensored-still-exact), proof (coefficients O(V) in place of Z)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,10 +91,38 @@
    "results": "ExtraDegeneracy.lean:368 Arrow.AugmentedCechNerve.extraDegeneracy, :96 ExtraDegeneracy.map (transport along a functor, e.g. the free functor Type ⥤ ModuleCat A), :415 ExtraDegeneracy.homotopyEquiv; CechNerve.lean:339 cechNerveTerminalFrom X ([n] ↦ X^{n+1}) and :422 CechNerveTerminalFrom.iso (Arrow.mk (terminal.from X)).cechNerve ≅ cechNerveTerminalFrom X; Resolution.lean:134-162 assembles exactly these for a monoid G (extraDegeneracyAugmentedCechNerve, extraDegeneracyCompForgetAugmentedToModule); FormalCoproducts/ExtraDegeneracy.lean:96 extraDegeneracyCech for formal coproducts with a point T → U_{i0}",
    "date": "2026-10-09",
    "verdict": "no single declaration for an arbitrary set S; the statement is the composite of four Mathlib pieces (Cech nerve of S → * in Type identified with S^{•+1} by CechNerveTerminalFrom.iso, its extra degeneracy from a chosen s, ExtraDegeneracy.map along the free A-module functor, ExtraDegeneracy.homotopyEquiv), so the node stays unsplit with these as its expected Lean route"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech nerve of a nonempty type to the terminal object, linearized free module, augmented complex is exact",
+   "results": "HomologicalComplex.ExactAt, ChainComplex.augment, CochainComplex.augment (Mathlib.Algebra.Homology.Augment), HomologicalComplex.exact_iff_degreewise_exact, InjectiveResolution.cocomplex_exactAt_succ",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for any nonempty type S and ring A the augmented complex of free A-modules on S^(n+1) with alternating face differential is exact (homotopy equivalent to A in degree zero)",
+   "results": "ChainComplex.alternatingConst_exactAt, singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, SimplicialObject.Splitting.nondegComplex, AlternatingFaceMapComplex.obj, NormalizedMooreComplex.obj, classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule (CommRing k, Monoid G), AlternatingFaceMapComplex.ε_app_f_succ, ChainComplex.exactAt_succ_single_obj",
+   "date": "2026-10-09",
+   "verdict": "no match for an arbitrary set; monoid special case only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv",
+   "results": "Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv (k G : Type u) [CommRing k] [Monoid G] : HomotopyEquiv (Rep.standardComplex.forget₂ToModuleCat k G) ((ChainComplex.single₀ (ModuleCat k)).obj ...); ..._f_0_eq; εToSingle₀_comp_eq (Mathlib.RepresentationTheory.Homological.Resolution)",
+   "date": "2026-10-09",
+   "verdict": "special case S = a monoid G, k commutative, S and k in the same universe; does not specialize in one line to an arbitrary set S and ring A"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln ExtraDegeneracy Mathlib; sed Mathlib/RepresentationTheory/Homological/Resolution.lean 1-330, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean 380-440, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean",
+   "results": "ExtraDegeneracy used only in AlgebraicTopology/ExtraDegeneracy.lean, RepresentationTheory/Homological/Resolution.lean, CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Algebra/Homology/AlternatingConst.lean. ExtraDegeneracy.homotopyEquiv (ExtraDegeneracy.lean:415, any preadditive C with zero object); ModuleCat.free R : Type u ⥤ ModuleCat R for [Ring R] (Adjunctions.lean:40); Resolution.lean assembles Cech nerve of G → * + extra degeneracy + linearization + homotopyEquiv only for a monoid G, and identifies the differential with the explicit one by Rep.standardComplex.d_eq (Resolution.lean:214, a nontrivial simp computation); FormalCoproduct.extraDegeneracyCech (FormalCoproducts/ExtraDegeneracy.lean) is in FormalCoproduct C, not in modules",
+   "date": "2026-10-09",
+   "verdict": "no match: the explicit complex A[S^{p+1}] for an arbitrary set S is not stated; assembling it from Arrow.AugmentedCechNerve.extraDegeneracy, ExtraDegeneracy.map along ModuleCat.free A, ExtraDegeneracy.homotopyEquiv and an identification of the alternating face map complex with the explicit differential (the analogue of Rep.standardComplex.d_eq, itself a computation) is more than one lemma per clause, so the node is split; its clauses are elementary on basis elements, the homological conclusion is the Mathlib leaf lem-weil-pbc-contractible-complex-acyclic"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,5 +142,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-power-set-complex-contractible",
+  "worker": "stage1",
+  "summary": "Checked against Stacks 03AT (last paragraph of the proof: the extended complex Z[S^3]->Z[S^2]->Z[S]->Z->0 is exact for nonempty S by the homotopy n_(s_0..s_p) -> n_(s,s_0..s_p)) and 03F5 (coefficients O(V)). Statement kept (correct; the empty case is stated correctly as C_p = 0, the augmented complex then not being exact unless A = 0). Proof written in four steps: (1) d∘d = 0 and ε∘d = 0 by the sign cancellation on basis elements, elementary; (2) the empty case, elementary; (3) the homotopy identities dh+hd = id on C_p (p>=1), dh+hε = id on C_0, εh = id on A, computed on basis elements, elementary; (4) exactness and H_0 ≅ A from the contracting homotopy, using the new Mathlib leaf lem-weil-pbc-contractible-complex-acyclic (Homotopy.homologyMap_eq + homologyMap_id/zero + IsZero.iff_id_eq_zero + exactAt_iff_isZero_homology). The item itself is not a Mathlib leaf: Mathlib has the construction only for S a monoid with k commutative (Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv), and for a general set it would be assembled from four pieces plus an identification of the alternating face map complex with the explicit differential (analogue of Rep.standardComplex.d_eq), recorded in mathlib_searches as the expected Lean route. Source repository slopmaster2: no declaration of this chain complex; the cochain-side analogue TopCat.Presheaf.exactAt_cechComplex_of_bijective / map_cocycle_eq_sum_cons (Topology/Sheaves/Cech.lean:182-224, same 'insert an index first' homotopy, sorry-free) states a different thing and is not attached."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "four steps (the sign cancellation, the empty case, the homotopy identities on basis elements, exactness by the new leaf (Homotopy.lean:894 with HomologicalComplex.lean:356/390/670, ZeroMorphisms.lean:172, verified)); 1 new Mathlib leaf; the Mathlib route through the Cech nerve, its extra degeneracy and the alternating face map complex recorded on the node as the stage-2 route, not a leaf"
+ }
 }

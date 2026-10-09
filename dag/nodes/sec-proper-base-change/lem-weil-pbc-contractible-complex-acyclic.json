@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-contractible-complex-acyclic",
+ "kind": "statement",
+ "title": "A complex whose identity is homotopic to zero is exact",
+ "statement": "Let $A$ be a ring and $K_\\bullet$ a chain complex of left $A$-modules indexed by $\\mathbf N$ (differentials $d:K_{n+1}\\to K_n$, $K_{-1}=0$). Suppose given $A$-linear maps $h_n:K_n\\to K_{n+1}$ ($n\\geq0$) with $d\\circ h_n+h_{n-1}\\circ d=\\mathrm{id}_{K_n}$ for all $n\\geq0$ (where $h_{-1}\\circ d=0$ for $n=0$), i.e. a homotopy from $\\mathrm{id}_{K_\\bullet}$ to $0$. Then $K_\\bullet$ is exact in every degree: $H_n(K_\\bullet)=0$ for all $n\\geq0$. (More generally, for any complex shape and any preadditive category with homology, a homotopy $\\mathrm{id}\\simeq0$ makes every homology object zero.)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03AT (lemma-homology-complex), last paragraph of the proof: exactness of the extended complex is deduced from the homotopy n_(s_0..s_p) -> n_(s,s_0..s_p); the general fact that a complex homotopic to zero (identity null-homotopic) has zero homology is the standard one used there"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "chain complex with a contracting homotopy (homotopy between identity and zero) has zero homology, is exact at every degree",
+   "results": "HomologicalComplex.Acyclic, HomologicalComplex.ExactAt.isZero_homology, HomologicalComplex.exactAt_iff_isZero_homology (Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex), Homotopy.mkInductive, Homotopy.nullHomotopy (Mathlib.Algebra.Homology.Homotopy)",
+   "date": "2026-10-09",
+   "verdict": "match by composition: exactAt_iff_isZero_homology together with Homotopy.homologyMap_eq"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if the identity of a homological complex is homotopic to zero then the complex is acyclic (exact at every degree)",
+   "results": "HomologicalComplex.acyclic_iff (K.Acyclic ↔ ∀ i, K.ExactAt i), HomologicalComplex.acyclic_of_isZero, HomotopyCategory.mem_subcategoryAcyclic_iff, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic (Mathlib.Algebra.Homology.HomotopyCategory.Acyclic)",
+   "date": "2026-10-09",
+   "verdict": "ingredients (acyclic_iff); no single declaration Homotopy (𝟙 K) 0 → K.Acyclic"
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy (CategoryTheory.CategoryStruct.id _) 0 → HomologicalComplex.Acyclic _ ; and \"HomologicalComplex.Acyclic, Homotopy\"",
+   "results": "first: none; second: only CochainComplex.IsKInjective/IsKProjective lemmas (Mathlib.Algebra.Homology.HomotopyCategory.KInjective/KProjective)",
+   "date": "2026-10-09",
+   "verdict": "no single-declaration match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Homotopy (𝟙 \\|homologyMap_eq\\|acyclic_of_homotopy\\|exactAt_of_homotopy' Mathlib/Algebra/Homology",
+   "results": "Algebra/Homology/Homotopy.lean:894 Homotopy.homologyMap_eq (ho : Homotopy f g) (i) : homologyMap f i = homologyMap g i; :903 HomotopyEquiv.toHomologyIso; HomotopyCategory.lean:187 HomotopyCategory.isZero_quotient_obj_iff : IsZero ((quotient _ _).obj C) ↔ Nonempty (Homotopy (𝟙 C) 0); ShortComplex/HomologicalComplex.lean:356 homologyMap_id, :390 homologyMap_zero, :670 exactAt_iff_isZero_homology; CategoryTheory/Limits/Shapes/ZeroMorphisms.lean:172 IsZero.iff_id_eq_zero; Homotopy.lean:254 nullHomotopicMap' / Homotopy.nullHomotopy' and :528 Homotopy.mkInductive build a Homotopy from the family h",
+   "date": "2026-10-09",
+   "verdict": "match: a few Mathlib lemmas applied one per step (see mathlib_match)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Homotopy.homologyMap_eq",
+  "file": "Mathlib/Algebra/Homology/Homotopy.lean",
+  "how": "specializes in a few lines, one lemma per step: from ho : Homotopy (𝟙 K) 0 (built from the family h by Homotopy.mkInductive / Homotopy.nullHomotopy', Homotopy.lean:528/:254), ho.homologyMap_eq i with HomologicalComplex.homologyMap_id and homologyMap_zero (Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean:356, :390) gives 𝟙 (K.homology i) = 0, hence IsZero (K.homology i) by Limits.IsZero.iff_id_eq_zero (Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean:172), hence K.ExactAt i by HomologicalComplex.exactAt_iff_isZero_homology (ShortComplex/HomologicalComplex.lean:670); for ModuleCat A (A a Ring) homology exists. Elementarily: a cycle z equals d(h z) + h(d z) = d(h z)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-power-set-complex-contractible",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-power-set-complex-contractible; match verified by the lead against the Mathlib source"
+ }
+}

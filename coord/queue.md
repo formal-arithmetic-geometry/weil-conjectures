@@ -1,8 +1,8 @@
 # Work queue
 
-568 items; claim with `tools/claim.py next <group> [--stage N]`.
+567 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (550)
+## Stage 1: nodes to split (548)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,8 +15,6 @@
 | `lem-sc-c6` | 1005 | none |
 | `lem-sc-c7` | 1005 | none |
 | `lem-sc-c8` | 1005 | none |
-| `lem-weil-pbc-module-stalk-tensor` | 1005 | none |
-| `lem-weil-pbc-nonvanishing-section-trivializes` | 1005 | none |
 | `lem-weil-pbc-open-closed-short-exact` | 1005 | none |
 | `lem-weil-pbc-power-set-complex-contractible` | 1005 | none |
 | `lem-weil-pbc-projective-space-standard-charts` | 1005 | none |
@@ -557,7 +555,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (18)
+## Stage 2: nodes to state (19)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -571,6 +569,7 @@
 | `lem-weil-pbc-flat-coproduct` | 1 | state |
 | `lem-weil-pbc-mate-whisker` | 1 | state |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1 | state |
+| `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
 | `lem-weil-pbc-termwise-adjunction-homotopy` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
@@ -580,7 +579,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 565 nodes that wait for stage 1, 143 nodes that wait for a statement dependency.
+Not open yet: 563 nodes that wait for stage 1, 144 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
