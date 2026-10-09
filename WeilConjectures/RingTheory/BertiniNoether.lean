@@ -23,7 +23,7 @@ Nullstellensatz and absolute irreducibility.
 
 ## Main statements
 
-- `BertiniNoether.bertini_noether`: the Bertini–Noether theorem.
+- `MvPolynomial.bertini_noether`: the Bertini–Noether theorem.
 
 ## References
 
@@ -39,34 +39,34 @@ namespace BertiniNoether
 variable {n d : ℕ}
 
 /-- The monomial with exponent vector `e`. -/
-noncomputable def mono (e : Fin n → Fin d) : Fin n →₀ ℕ :=
+private noncomputable def mono (e : Fin n → Fin d) : Fin n →₀ ℕ :=
   Finsupp.equivFunOnFinite.symm fun i ↦ (e i : ℕ)
 
-lemma mono_injective : Function.Injective (mono (n := n) (d := d)) := by
+private lemma mono_injective : Function.Injective (mono (n := n) (d := d)) := by
   intro e e' h
   funext i
   have := congrArg (fun m : Fin n →₀ ℕ ↦ m i) h
   simpa [mono, Fin.ext_iff] using this
 
 /-- Indices of monomials of total degree `< d`. -/
-noncomputable def lowMonos (n d : ℕ) : Finset (Fin n → Fin d) :=
+private noncomputable def lowMonos (n d : ℕ) : Finset (Fin n → Fin d) :=
   Finset.univ.filter fun e ↦ (mono e).sum (fun _ k ↦ k) < d
 
 variable (A : Type*) [CommRing A]
 
 /-- The generic polynomial of total degree `< d` with coefficients the variables `X (b, e)`. -/
-noncomputable def generic (n d : ℕ) (b : Bool) :
+private noncomputable def generic (n d : ℕ) (b : Bool) :
     MvPolynomial (Fin n) (MvPolynomial (Bool × (Fin n → Fin d)) A) :=
   ∑ e ∈ lowMonos n d, monomial (mono e) (X (b, e))
 
 /-- The ideal of the "coefficient scheme" of factorizations `P = F * G`. -/
-noncomputable def factorIdeal (P : MvPolynomial (Fin n) A) (d : ℕ) :
+private noncomputable def factorIdeal (P : MvPolynomial (Fin n) A) (d : ℕ) :
     Ideal (MvPolynomial (Bool × (Fin n → Fin d)) A) :=
   Ideal.span ((generic A n d false * generic A n d true - map C P).coeffs : Set _)
 
 variable {A}
 
-lemma coeff_generic (b : Bool) (m : Fin n →₀ ℕ) :
+private lemma coeff_generic (b : Bool) (m : Fin n →₀ ℕ) :
     coeff m (generic A n d b) =
       if h : ∃ e ∈ lowMonos n d, mono e = m then X (b, h.choose) else 0 := by
   classical
@@ -85,7 +85,7 @@ lemma coeff_generic (b : Bool) (m : Fin n →₀ ℕ) :
     exact Finset.sum_eq_zero fun e he ↦ by simp [h e he]
 
 
-lemma totalDegree_generic_lt (hd : 0 < d) (b : Bool) :
+private lemma totalDegree_generic_lt (hd : 0 < d) (b : Bool) :
     totalDegree (generic A n d b) < d := by
   rw [totalDegree, Finset.sup_lt_iff (by simpa using hd)]
   intro m hm
@@ -99,7 +99,7 @@ lemma totalDegree_generic_lt (hd : 0 < d) (b : Bool) :
 variable {E : Type*} [CommRing E]
 
 /-- A point of the coefficient scheme gives a factorization. -/
-lemma map_generic_mul_eq (P : MvPolynomial (Fin n) A)
+private lemma map_generic_mul_eq (P : MvPolynomial (Fin n) A)
     (ψ : MvPolynomial (Bool × (Fin n → Fin d)) A →+* E) (hψ : factorIdeal A P d ≤ RingHom.ker ψ) :
     map ψ (generic A n d false) * map ψ (generic A n d true) = map (ψ.comp C) P := by
   have h : map ψ (generic A n d false * generic A n d true - map C P) = 0 := by
@@ -111,7 +111,7 @@ lemma map_generic_mul_eq (P : MvPolynomial (Fin n) A)
   rwa [map_sub, map_mul, map_map, sub_eq_zero] at h
 
 /-- A factorization gives a point of the coefficient scheme. -/
-lemma exists_hom_of_mul_eq (P : MvPolynomial (Fin n) A) (φ : A →+* E)
+private lemma exists_hom_of_mul_eq (P : MvPolynomial (Fin n) A) (φ : A →+* E)
     (F G : MvPolynomial (Fin n) E) (hF : totalDegree F < d) (hG : totalDegree G < d)
     (hFG : F * G = map φ P) :
     ∃ ψ : MvPolynomial (Bool × (Fin n → Fin d)) A →+* E,
@@ -149,7 +149,7 @@ lemma exists_hom_of_mul_eq (P : MvPolynomial (Fin n) A) (φ : A →+* E)
 
 /-- A constructible subset of `Spec R` (`R` a domain) not containing the generic point is
 contained in `V(a)` for some `a ≠ 0`. -/
-lemma exists_ne_zero_forall_mem_of_isConstructible {R : Type*} [CommRing R] [IsDomain R]
+private lemma exists_ne_zero_forall_mem_of_isConstructible {R : Type*} [CommRing R] [IsDomain R]
     {Z : Set (PrimeSpectrum R)} (hZ : IsConstructible Z)
     (h : (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R) ∉ Z) :
     ∃ a : R, a ≠ 0 ∧ ∀ p ∈ Z, a ∈ p.asIdeal := by
@@ -173,17 +173,18 @@ lemma exists_ne_zero_forall_mem_of_isConstructible {R : Type*} [CommRing R] [IsD
   exact this hp
 
 /-- The coefficient algebra of factorizations `P = F * G` with `deg F, deg G < d`. -/
-abbrev FactorAlg (P : MvPolynomial (Fin n) A) (d : ℕ) :=
+private abbrev FactorAlg (P : MvPolynomial (Fin n) A) (d : ℕ) :=
   MvPolynomial (Bool × (Fin n → Fin d)) A ⧸ factorIdeal A P d
 
-lemma isConstructible_range_factorAlg (P : MvPolynomial (Fin n) A) (d : ℕ) :
+private lemma isConstructible_range_factorAlg (P : MvPolynomial (Fin n) A) (d : ℕ) :
     IsConstructible (Set.range (PrimeSpectrum.comap (algebraMap A (FactorAlg P d)))) := by
   refine PrimeSpectrum.isConstructible_range_comap
     (RingHom.finitePresentation_algebraMap.mpr ?_)
   exact Algebra.FinitePresentation.quotient ⟨_, rfl⟩
 
 /-- Every factorization over a field gives a point of the coefficient scheme. -/
-lemma ker_mem_range_factorAlg (P : MvPolynomial (Fin n) A) {k : Type*} [Field k] (φ : A →+* k)
+private lemma ker_mem_range_factorAlg (P : MvPolynomial (Fin n) A) {k : Type*} [Field k]
+    (φ : A →+* k)
     (F G : MvPolynomial (Fin n) k) (hF : totalDegree F < d) (hG : totalDegree G < d)
     (hFG : F * G = map φ P) :
     (⟨RingHom.ker φ, RingHom.ker_isPrime φ⟩ : PrimeSpectrum A) ∈
@@ -197,17 +198,17 @@ lemma ker_mem_range_factorAlg (P : MvPolynomial (Fin n) A) {k : Type*} [Field k]
   exact Iff.rfl
 
 
-lemma totalDegree_map_of_injective {σ R S : Type*} [CommSemiring R] [CommSemiring S]
+private lemma totalDegree_map_of_injective {σ R S : Type*} [CommSemiring R] [CommSemiring S]
     {f : R →+* S} (hf : Function.Injective f) (p : MvPolynomial σ R) :
     totalDegree (map f p) = totalDegree p := by
   simp [totalDegree, support_map_of_injective p hf]
 
-lemma totalDegree_map_le {σ R S : Type*} [CommSemiring R] [CommSemiring S]
+private lemma totalDegree_map_le {σ R S : Type*} [CommSemiring R] [CommSemiring S]
     (f : R →+* S) (p : MvPolynomial σ R) :
     totalDegree (map f p) ≤ totalDegree p :=
   Finset.sup_mono (support_map_subset f p)
 
-lemma totalDegree_pos_of_irreducible {σ L : Type*} [Field L] {Q : MvPolynomial σ L}
+private lemma totalDegree_pos_of_irreducible {σ L : Type*} [Field L] {Q : MvPolynomial σ L}
     (hQ : Irreducible Q) : 0 < totalDegree Q := by
   rw [Nat.pos_iff_ne_zero]
   intro h
@@ -220,7 +221,7 @@ lemma totalDegree_pos_of_irreducible {σ L : Type*} [Field L] {Q : MvPolynomial 
 
 attribute [local instance] MvPolynomial.algebraMvPolynomial in
 /-- The generic point is not in the reducible locus if `P` is absolutely irreducible. -/
-lemma bot_notMem_range_factorAlg [IsDomain A] (P : MvPolynomial (Fin n) A)
+private lemma bot_notMem_range_factorAlg [IsDomain A] (P : MvPolynomial (Fin n) A)
     (K L : Type*) [Field K] [Algebra A K] [IsFractionRing A K] [Field L] [IsAlgClosed L]
     [Algebra K L] (hP : Irreducible (map ((algebraMap K L).comp (algebraMap A K)) P)) :
     (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum A) ∉
@@ -288,7 +289,7 @@ lemma bot_notMem_range_factorAlg [IsDomain A] (P : MvPolynomial (Fin n) A)
     exact (hlt false).ne this.symm
 
 
-lemma totalDegree_pos_of_not_isUnit {σ k : Type*} [Field k] {F : MvPolynomial σ k}
+private lemma totalDegree_pos_of_not_isUnit {σ k : Type*} [Field k] {F : MvPolynomial σ k}
     (hF : ¬IsUnit F) (hF0 : F ≠ 0) : 0 < totalDegree F := by
   rw [Nat.pos_iff_ne_zero]
   intro h
@@ -297,6 +298,14 @@ lemma totalDegree_pos_of_not_isUnit {σ k : Type*} [Field k] {F : MvPolynomial �
   rintro h0
   rw [h0, map_zero] at hF0
   exact hF0 rfl
+
+end BertiniNoether
+
+namespace MvPolynomial
+
+open BertiniNoether
+
+variable {n : ℕ} {A : Type*} [CommRing A]
 
 universe v in
 /-- **Bertini–Noether** (core of Stacks 0557). If `P ∈ A[X₁,…,Xₙ]` (`A` a domain with fraction
@@ -344,4 +353,4 @@ theorem bertini_noether [IsDomain A] (P : MvPolynomial (Fin n) A)
     have hmem := ker_mem_range_factorAlg (d := d) P φ F G (by omega) (by omega) hFG.symm
     exact left_ne_zero_of_mul hφ (ha₀Z _ hmem)
 
-end BertiniNoether
+end MvPolynomial
