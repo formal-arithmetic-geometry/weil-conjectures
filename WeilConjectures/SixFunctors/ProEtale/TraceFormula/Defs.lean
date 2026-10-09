@@ -251,6 +251,30 @@ noncomputable def ctfLowerShriekCongr {f g : X ⟶ Y} (e : f = g) [HasCompactifi
     subst e
     rfl
 
+/-- A natural transformation between functors into `Dᵇctf(X)`, given by one between their
+composites with the inclusion into `D(X, A)`. -/
+noncomputable def ctfHomMk {C : Type*} [Category C] {F G : C ⥤ Ctf A X}
+    (e : F ⋙ (DerivedCategory.constructibleFiniteTor A X).ι ⟶
+      G ⋙ (DerivedCategory.constructibleFiniteTor A X).ι) : F ⟶ G :=
+  ((DerivedCategory.constructibleFiniteTor A X).fullyFaithfulι.whiskeringRight C).preimage e
+
+@[simp]
+lemma ctfHomMk_app_hom {C : Type*} [Category C] {F G : C ⥤ Ctf A X}
+    (e : F ⋙ (DerivedCategory.constructibleFiniteTor A X).ι ⟶
+      G ⋙ (DerivedCategory.constructibleFiniteTor A X).ι) (c : C) :
+    ((ctfHomMk e).app c).hom = e.app c := by
+  simp [ctfHomMk]
+
+instance isIso_ctfHomMk {C : Type*} [Category C] {F G : C ⥤ Ctf A X}
+    (e : F ⋙ (DerivedCategory.constructibleFiniteTor A X).ι ⟶
+      G ⋙ (DerivedCategory.constructibleFiniteTor A X).ι) [IsIso e] : IsIso (ctfHomMk e) := by
+  have : IsIso (((Functor.whiskeringRight C _ _).obj
+      (DerivedCategory.constructibleFiniteTor A X).ι).map (ctfHomMk e)) := by
+    rw [ctfHomMk, Functor.FullyFaithful.map_preimage]
+    infer_instance
+  exact ((DerivedCategory.constructibleFiniteTor A X).fullyFaithfulι.whiskeringRight
+    C).isIso_of_isIso_map _
+
 end CtfFunctors
 
 /-- A morphism `f : X ⟶ Y` is a *morphism of geometric schemes* over `s` if there is a structure
