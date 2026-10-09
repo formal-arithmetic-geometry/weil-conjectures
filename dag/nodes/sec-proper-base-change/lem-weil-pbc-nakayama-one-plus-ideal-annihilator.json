@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+ "kind": "statement",
+ "title": "Nakayama: a finite module with IM=M is killed by an element of 1+I",
+ "statement": "Let $R$ be a commutative ring, $I\\subseteq R$ an ideal and $M$ a finitely generated $R$-module [def-weil-finitely-generated-module] with $IM=M$. Then there is $f\\in R$ with $f-1\\in I$ and $fM=0$ (that is, $fm=0$ for every $m\\in M$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00DV (lemma-NAK), item (1) (item-nakayama): 'If IM = M and M is finite, then there exists an f in 1 + I such that fM = 0'"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Nakayama: finitely generated module M with I M = M, there is r with r - 1 in I and r M = 0",
+   "results": "Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul (Mathlib.RingTheory.Finiteness.Nakayama), Submodule.exists_mem_and_smul_eq_self_of_fg_of_le_smul, Submodule.exists_sub_one_mem_and_smul_le_of_fg_of_le_sup, Submodule.le_of_le_smul_of_le_jacobson_bot (Mathlib.RingTheory.Nakayama)",
+   "date": "2026-10-10",
+   "verdict": "match: Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul with N = top"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If M is a finite R-module and IM = M then some element of 1 + I annihilates M",
+   "results": "Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul, Submodule.exists_mem_and_smul_eq_self_of_fg_of_le_smul (Mathlib.RingTheory.Finiteness.Nakayama), Ideal.mem_iInf_smul_pow_eq_bot_iff (Mathlib.RingTheory.Filtration)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.FG, _ ≤ _ • _, _ - 1 ∈ _",
+   "results": "Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul (I : Ideal R) (N : Submodule R M) (hn : N.FG) (hin : N ≤ I • N) : ∃ r, r - 1 ∈ I ∧ ∀ n ∈ N, r • n = 0 (Mathlib.RingTheory.Finiteness.Nakayama)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Mathlib/RingTheory/Finiteness/Nakayama.lean:28 (tagged @[stacks 00DV], namespace Submodule), statement read at lines 26-30",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul",
+  "file": "Mathlib/RingTheory/Finiteness/Nakayama.lean",
+  "line": 28,
+  "how": "specializes in one line: take N = ⊤ (⊤.FG is Module.Finite R M, and ⊤ ≤ I • ⊤ is IM = M); the result r with r - 1 ∈ I and r • m = 0 for all m is f. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zariski-pair-finite-gabber-polynomial",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

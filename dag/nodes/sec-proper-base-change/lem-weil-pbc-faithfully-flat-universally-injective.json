@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-faithfully-flat-universally-injective",
+ "kind": "statement",
+ "title": "A faithfully flat ring map is universally injective",
+ "statement": "Let $\\varphi:R\\to S$ be a faithfully flat ring map of commutative rings [def-weil-pbc-faithfully-flat-ring-map] and $N$ an $R$-module. Then the $R$-linear map $N\\to N\\otimes_RS$, $n\\mapsto n\\otimes1$, is injective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05CK (lemma-faithfully-flat-universally-injective), first sentence ('R -> S is universally injective as a map of R-modules') and the first sentence of its proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "faithfully flat algebra B over A, the map M to B tensor M is injective",
+   "results": "Module.FaithfullyFlat.tensorProduct_mk_injective (Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra), Algebra.TensorProduct.includeLeft_injective, Module.FaithfullyFlat.surjective_of_tensorProduct",
+   "date": "2026-10-10",
+   "verdict": "match: Module.FaithfullyFlat.tensorProduct_mk_injective"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FaithfullyFlat, Function.Injective, TensorProduct.mk",
+   "results": "Module.FaithfullyFlat.tensorProduct_mk_injective {A B} [CommRing A] [CommRing B] [Algebra A B] [Module.FaithfullyFlat A B] (M) [AddCommGroup M] [Module A M] : Function.Injective ⇑((TensorProduct.mk A B M) 1) (Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'tensorProduct_mk_injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/FaithfullyFlat/",
+   "results": "Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:85 lemma Module.FaithfullyFlat.tensorProduct_mk_injective (M) : Function.Injective (TensorProduct.mk A B M 1), under variable [Module.FaithfullyFlat A B] (line 78); also Module.FaithfullyFlat.lTensor_injective_iff_injective (Basic.lean:385)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.FaithfullyFlat.tensorProduct_mk_injective",
+  "file": "Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean",
+  "line": 85,
+  "how": "exact up to the order of the tensor factors: with phi.toAlgebra and [Module.FaithfullyFlat A B], TensorProduct.mk A B N 1 : n ↦ 1 ⊗ n into B ⊗[A] N is injective; composing with the commutativity isomorphism B ⊗ N ≅ N ⊗ B gives n ↦ n ⊗ 1. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zariski-pair-finite-gabber-polynomial",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
