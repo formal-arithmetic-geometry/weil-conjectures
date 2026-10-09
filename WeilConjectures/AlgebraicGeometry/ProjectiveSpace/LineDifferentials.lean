@@ -622,6 +622,53 @@ def omegaGen (i : ULift.{u} (Fin 2)) :
     Γ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials, chart k {i}) :=
   sign i • (dΩ k).app _ le_top (coord k (i := i) (j := other i))
 
+lemma omegaGen_compat (i j : ULift.{u} (Fin 2)) (W : (ProjectiveLine (Spec (.of k))).Opens)
+    (hi : W ≤ chart k {i}) (hj : W ≤ chart k {j}) (a b : Γ(ProjectiveLine (Spec (.of k)), W))
+    (h : a • (twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)).presheaf.map (homOfLE hi).op
+        (twistGen k i) =
+      b • (twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)).presheaf.map (homOfLE hj).op
+        (twistGen k j)) :
+    a • (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials.presheaf.map
+        (homOfLE hi).op (omegaGen k i) =
+      b • (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials.presheaf.map
+        (homOfLE hj).op (omegaGen k j) := by
+  by_cases hij : i = j
+  · subst hij
+    rw [((isFreeGenerator_twistGen k i).map hi).smul_left_injective h]
+  have hW := le_overlap k hij hi hj
+  set c := (ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE hi).op (coord k (i := i) (j := j))
+  set c' := (ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE hj).op
+    (coord k (i := j) (j := i))
+  have hres {l : ULift.{u} (Fin 2)} (hl : W ≤ chart k {l})
+      (x : Γ(ProjectiveLine (Spec (.of k)), chart k {l})) :
+      (ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE hW).op
+        ((ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE (overlap_le_chart k l)).op x) =
+      (ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE hl).op x := by
+    rw [Scheme.presheaf_map_map_apply]
+    rfl
+  have hcc : c * c' = 1 := by
+    have := congrArg ((ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE hW).op)
+      (coord_mul_coord k (i := i) (j := j))
+    rwa [map_mul, map_one, hres hi, hres hj] at this
+  have hg : (twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)).presheaf.map (homOfLE hi).op
+      (twistGen k i) = c ^ 2 • (twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)).presheaf.map
+        (homOfLE hj).op (twistGen k j) := by
+    have := congrArg ((twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)).presheaf.map
+      (homOfLE hW).op) (twistGen_restrict k (i := i) (j := j))
+    rwa [map_smul, map_pow, hres hi, presheaf_map_homOfLE_map_homOfLE,
+      presheaf_map_homOfLE_map_homOfLE] at this
+  rw [hg, smul_smul] at h
+  have hb : b = a * c ^ 2 := (((isFreeGenerator_twistGen k j).map hj).smul_left_injective h).symm
+  have hd {l : ULift.{u} (Fin 2)} (hl : W ≤ chart k {l})
+      (x : Γ(ProjectiveLine (Spec (.of k)), chart k {l})) :
+      (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials.presheaf.map
+        (homOfLE hl).op ((dΩ k).app _ le_top x) =
+      (dΩ k).app W le_top ((ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE hl).op x) :=
+    ((dΩ k).naturality _ _ le_top hl x).symm
+  rw [omegaGen, omegaGen, other_eq hij, other_eq (Ne.symm hij), map_zsmul, map_zsmul, hd hi,
+    hd hj, (dΩ k).app_eq_neg_sq_smul_of_mul_eq_one le_top hcc, sign_eq_neg hij, hb]
+  module
+
 end Differentials
 
 end AlgebraicGeometry.ProjectiveLine
