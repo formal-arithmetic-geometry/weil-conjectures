@@ -1,0 +1,66 @@
+{
+ "id": "def-weil-proetale-module-direct-image",
+ "kind": "definition",
+ "title": "Direct image of pro-etale module sheaves",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and let $A$ be a commutative ring. Use the small pro-etale sites $X_{\\mathrm{proet}}$, $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], the constant sheaves of rings $A_X$, $A_Y$ and the abelian categories $\\Sh(X_{\\mathrm{proet}},A)$, $\\Sh(Y_{\\mathrm{proet}},A)$ of sheaves of $A_X$-, resp. $A_Y$-modules defined there. For an object $V\\to Y$ of $Y_{\\mathrm{proet}}$ the base change $V\\times_YX\\to X$ is weakly etale [def-weil-scheme-morphism-properties] (flatness and flatness of the diagonal are stable under base change), so $u_f(V)=V\\times_YX$ is an object of $X_{\\mathrm{proet}}$, and $V\\mapsto u_f(V)$ is a functor $u_f:Y_{\\mathrm{proet}}\\to X_{\\mathrm{proet}}$ which carries coverings to coverings and commutes with fibre products. For a sheaf $F$ of $A_X$-modules on $X_{\\mathrm{proet}}$, the *direct image* $f_*F$ is the presheaf\n\n$$\n (f_*F)(V)=F(V\\times_YX),\\qquad V\\in Y_{\\mathrm{proet}},\n$$\n\nwith restriction maps those of $F$ along $u_f$; it is a sheaf on $Y_{\\mathrm{proet}}$, and it is an $A_Y$-module through the map of sheaves of rings $A_Y\\to f_*A_X$ induced, by the universal property of sheafification, from the map of constant presheaves $A\\to A_X(V\\times_YX)$. On morphisms $f_*$ acts by $(f_*\\varphi)_V=\\varphi_{V\\times_YX}$. This defines an additive functor\n\n$$\n f_*:\\Sh(X_{\\mathrm{proet}},A)\\longrightarrow\\Sh(Y_{\\mathrm{proet}},A).\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-direct-image.md",
+  "place": "node def-weil-derived-direct-image, order 1468: the functor $f_*:\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(Y_{\\mathrm{proet}},A)$",
+  "external": [
+   {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 4.1.1 (weakly etale), Lemma 4.1.6 (base changes of weakly etale maps are weakly etale), Section 4.1 (the site $X_{\\mathrm{proet}}$); the direct image is the pushforward along the base-change functor of small sites"
+   },
+   {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section on morphisms of ringed topoi, pushforward $f_*$ of modules (Tag 03D7 for its adjunction)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def sheafPushforwardContinuous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/",
+   "results": "CategoryTheory/Sites/Continuous.lean:362 `Functor.sheafPushforwardContinuous : Sheaf K A ⥤ Sheaf J A` for a continuous functor `G : C ⥤ D`",
+   "date": "2026-10-09",
+   "verdict": "generalization: pushforward of sheaves along a continuous functor of sites; specializing it needs the base-change functor $u_f$ between small pro-etale sites and its continuity, which Mathlib does not have, so not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def pushforward' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "results": "`SheafOfModules.pushforward : SheafOfModules R ⥤ SheafOfModules S` along a continuous functor with a ring map `S ⟶ F.sheafPushforwardContinuous R` (line 44)",
+   "date": "2026-10-09",
+   "verdict": "generalization: the module version of the same, same missing input"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^def\\|^abbrev\\|^instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean; grep -rn 'ProEt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
+   "results": "Proetale.lean defines `proetaleTopology` (big site), `Scheme.ProEt S` with `ProEt.topology S` (small site), `ProEt.forget`; ElladicCohomology.lean uses them. No functor `Y.ProEt ⥤ X.ProEt` for a morphism `X ⟶ Y` (base change) and no continuity statement for one",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-derived-direct-image",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

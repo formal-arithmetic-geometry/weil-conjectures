@@ -1,0 +1,54 @@
+{
+ "id": "lem-weil-proetale-module-direct-image-left-exact",
+ "kind": "statement",
+ "title": "Pro-etale direct image is left exact",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and $A$ a commutative ring, and let $f_*:\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(Y_{\\mathrm{proet}},A)$ be the direct image of sheaves of modules on the small pro-etale sites [def-weil-proetale-module-direct-image]. Then $f_*$ is additive and left exact: for every exact sequence $0\\to F'\\to F\\to F''$ in $\\Sh(X_{\\mathrm{proet}},A)$ the sequence $0\\to f_*F'\\to f_*F\\to f_*F''$ is exact in $\\Sh(Y_{\\mathrm{proet}},A)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-direct-image.md",
+  "place": "node def-weil-derived-direct-image, order 1468: 'the functor $f_*$ ... is left exact'",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules): $f^*\\dashv f_*$ on modules; a right adjoint preserves kernels"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-proetale-module-direct-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'pullbackPushforwardAdjunction\\|isRightAdjoint' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "results": "`SheafOfModules.pullbackPushforwardAdjunction : pullback φ ⊣ pushforward φ` (line 60), under the existence of the left adjoint; a right adjoint preserves limits (`Adjunction.rightAdjoint_preservesLimits`)",
+   "date": "2026-10-09",
+   "verdict": "generalization: left exactness follows for `SheafOfModules.pushforward` along a continuous functor, but specializing needs the pro-etale base-change functor of def-weil-proetale-module-direct-image, absent from Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'PreservesFiniteLimits\\|preservesLimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Continuous.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "results": "none in these files",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-derived-direct-image",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

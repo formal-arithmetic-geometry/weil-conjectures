@@ -1,0 +1,56 @@
+{
+ "id": "lem-weil-derived-scalar-extension-restriction-adjunction",
+ "kind": "statement",
+ "title": "Derived reduction modulo varpi^n is left adjoint to restriction of scalars",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, an integer $n\\in\\mathbf Z_{\\geq1}$ and a scheme $Y$, and let $\\widehat{\\mathcal O}_{E,Y}\\twoheadrightarrow(A_{E,n})_Y$ be the reduction map of the completed coefficient sheaf on $Y_{\\mathrm{proet}}$, with restriction of scalars $\\operatorname{Res}_n:\\Sh(Y_{\\mathrm{proet}},A_{E,n})\\to\\Sh(Y_{\\mathrm{proet}},\\mathcal O_E)$ [def-weil-completed-integral-coefficients]. Since $\\operatorname{Res}_n$ is exact [lem-weil-restriction-of-scalars-exact], applying it termwise defines a triangulated functor $\\operatorname{Res}_n:D(Y_{\\mathrm{proet}},A_{E,n})\\to D(Y_{\\mathrm{proet}},\\mathcal O_E)$. Let $-\\otimes^L_{\\mathcal O_E}A_{E,n}:D(Y_{\\mathrm{proet}},\\mathcal O_E)\\to D(Y_{\\mathrm{proet}},A_{E,n})$ be the derived tensor product with $(A_{E,n})_Y$ over $\\widehat{\\mathcal O}_{E,Y}$, computed with K-flat resolutions [def-weil-derived-tensor]. Then $-\\otimes^L_{\\mathcal O_E}A_{E,n}$ is left adjoint to $\\operatorname{Res}_n$: there are bijections\n\n$$\n \\Hom_{D(Y_{\\mathrm{proet}},A_{E,n})}\\bigl(K\\otimes^L_{\\mathcal O_E}A_{E,n},M\\bigr)\n \\cong\n \\Hom_{D(Y_{\\mathrm{proet}},\\mathcal O_E)}\\bigl(K,\\operatorname{Res}_nM\\bigr),\n$$\n\nnatural in $K\\in D(Y_{\\mathrm{proet}},\\mathcal O_E)$ and $M\\in D(Y_{\\mathrm{proet}},A_{E,n})$, whose unit is the map $K\\to\\operatorname{Res}_n(K\\otimes^L_{\\mathcal O_E}A_{E,n})$ induced by $\\widehat{\\mathcal O}_{E,Y}\\to(A_{E,n})_Y$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-direct-image.md",
+  "place": "node def-weil-derived-direct-image, order 1468: 'The finite-reduction comparison is the natural map'",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 21.20 (lemma-adjoint), Tag 07A6 ( $Lf^*\\dashv Rf_*$ on unbounded derived categories of a morphism of ringed topoi), applied to the morphism $(\\Sh(Y_{\\mathrm{proet}}),(A_{E,n})_Y)\\to(\\Sh(Y_{\\mathrm{proet}}),\\widehat{\\mathcal O}_{E,Y})$ with identity topos map, for which $Lf^*=-\\otimes^L A_{E,n}$ (Tag 06YY) and $Rf_*=\\operatorname{Res}_n$ because $\\operatorname{Res}_n$ is exact"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-restriction-of-scalars-exact",
+  "def-weil-derived-tensor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'extendRestrictScalarsAdj' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "results": "`ModuleCat.extendRestrictScalarsAdj` (extension of scalars ⊣ restriction of scalars for modules over rings, underived)",
+   "date": "2026-10-09",
+   "verdict": "no match: underived and for modules over a ring, not over a sheaf of rings"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'restrictScalars\\|Adjunction' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; grep -rln 'derivedAdjunction\\|Adjunction.derived' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Derived/",
+   "results": "`SheafOfModules.restrictScalars` without an adjunction; CategoryTheory/Functor/Derived/Adjunction.lean gives adjunctions of derived functors from adjunctions of functors under derivability hypotheses, not instantiated for sheaves of modules or derived tensor products",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-derived-direct-image",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
