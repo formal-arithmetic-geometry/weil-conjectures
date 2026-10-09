@@ -54,7 +54,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "split",
+ "status": "unsplit",
  "lean_audit": {
   "master": {
    "state": "none",
@@ -81,71 +81,9 @@
    "open": []
   }
  },
- "proof": [
-  {
-   "text": "Choose a bounded-below K-injective representative $I^\\bullet$ of $K$ using [lem-weil-pbc-dplus-injective-representative]. To apply the stated injective-acyclicity hypothesis for an arbitrary coefficient ring, the representative must be chosen with torsion terms; this is exactly the coefficient-resolution assertion isolated in [lem-weil-pbc-torsion-injective-resolution], whose statement also includes torsion of every inverse-image term $g'^{-1}I^m$.",
-   "uses": [
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-torsion-injective-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A4B, direction (2)=>(1), first paragraph of the converse proof (injective resolution and torsion coefficient devissage), line 18389"
-   }
-  },
-  {
-   "text": "For each term $I^m$, the injective-acyclicity assumption gives $R^qf'_*g'^{-1}I^m=0$ for $q>0$. Hence each $g'^{-1}I^m$ is $f'_*$-acyclic, and [lemma-weil-pbc-leray-acyclicity] identifies the complex $f'_*g'^{-1}I^\\bullet$ with $Rf'_*g'^{-1}K$ after the chosen resolution. Exactness of inverse image and the corresponding resolution identify $g^{-1}f_*I^\\bullet$ with $g^{-1}Rf_*K$.",
-   "uses": [
-    "lemma-weil-pbc-leray-acyclicity",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A4B, direction (2)=>(1), injective-resolution computation of higher direct images, lines 18389-18418"
-   }
-  },
-  {
-   "text": "The degree-zero proper exchange map is an isomorphism for each torsion term $I^m$ by [lemma-weil-pbc-proper-underived-exchange]. Naturality of the exchange construction makes these maps a morphism of complexes, and [lem-weil-pbc-derived-exchange-termwise] identifies the induced morphism after passing to derived categories with $\\Ex_{\\square,K}$.",
-   "uses": [
-    "lemma-weil-pbc-proper-underived-exchange",
-    "lem-weil-pbc-derived-exchange-termwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A4B, direction (2)=>(1), termwise proper exchange, lines 18418-18445; Lemma 0DDE, line 18708"
-   }
-  },
-  {
-   "text": "A termwise isomorphism of the two complexes is a quasi-isomorphism, so the derived exchange morphism is an isomorphism. Equivalently, applying cohomology to the termwise map and using [lem-weil-pbc-derived-plus-iso-on-cohomology] proves that $\\Ex_{\\square,K}$ is an isomorphism in $\\Dplus(Y'_{\\Et},\\Lambda)$.",
-   "uses": [
-    "lem-weil-pbc-derived-plus-iso-on-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0DDE (lemma-proper-base-change), line 18708, bounded-below complex conclusion"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-torsion-injective-resolution",
-  "lemma-weil-pbc-leray-acyclicity",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image",
-  "lemma-weil-pbc-proper-underived-exchange",
-  "lem-weil-pbc-derived-exchange-termwise",
-  "lem-weil-pbc-derived-plus-iso-on-cohomology"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0A4B, direction (2)=>(1), and Lemma 0DDE; the arbitrary-coefficient resolution step is isolated as lem-weil-pbc-torsion-injective-resolution"
- },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
  "merged_into": null,
  "import_flags": [],
  "created": {
@@ -154,18 +92,5 @@
   "date": "2026-10-09"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-weil-pbc-injective-acyclicity-bounded-below",
-  "worker": "stage1",
-  "summary": "Split the injective-acyclicity implication into resolution, acyclicity computation, termwise proper exchange, and derived conclusion. Stacks Lemma 0A4B proves the prime-coefficient route, while the Lean declaration generalizes to arbitrary commutative Lambda and remains sorry; the missing torsion-preserving injective-resolution assertion is therefore a new unsplit node, lem-weil-pbc-torsion-injective-resolution. Mathlib searches found only unrestricted enough-injectives and generic right-derived facts, not the needed coefficient lemma. No Lean files were written or compiled."
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "group": "C1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Accepted after independent audit of the arbitrary-Lambda mismatch, Stacks source, four proof steps, new reusable torsion-resolution node, three search records, route, and one-commit file boundary; gap is explicitly preserved as an open node and reported."
- }
+ "unit": "sk-thm-iff"
 }
