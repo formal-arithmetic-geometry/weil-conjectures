@@ -87,24 +87,6 @@ theorem Module.Flat.localization_of_forall_mem_isClosed {R C : Type*} [CommRing 
   rw [← htj]
   exact add_mem htq ((PrimeSpectrum.mem_vanishingIdeal Z j).1 hj q hq)
 
-/-- Let `F` be a noetherian subspace of `X` and `f : Y → X` a continuous map landing in `F`. Then
-the preimage under `f` of a connected component of `F` is open and closed. -/
-theorem isClopen_preimage_connectedComponentIn {X Y : Type*} [TopologicalSpace X]
-    [TopologicalSpace Y] {F : Set X} [TopologicalSpace.NoetherianSpace F] {f : Y → X}
-    (hf : Continuous f) (hfF : ∀ y, f y ∈ F) (x : X) :
-    IsClopen (f ⁻¹' connectedComponentIn F x) := by
-  by_cases hx : x ∈ F
-  · have : f ⁻¹' connectedComponentIn F x =
-        (fun y ↦ (⟨f y, hfF y⟩ : F)) ⁻¹' connectedComponent ⟨x, hx⟩ := by
-      ext y
-      simp [connectedComponentIn_eq_image hx, hfF]
-    rw [this]
-    exact ⟨isClosed_connectedComponent.preimage (hf.subtype_mk hfF),
-      (TopologicalSpace.NoetherianSpace.isOpen_connectedComponent _).preimage
-        (hf.subtype_mk hfF)⟩
-  · rw [connectedComponentIn_eq_empty hx, Set.preimage_empty]
-    exact isClopen_empty
-
 attribute [local instance] Algebra.TensorProduct.rightAlgebra
 
 namespace PrimeSpectrum
@@ -115,10 +97,12 @@ sections of `C`. Assume that `C` is flat over `R` at the points of the relative 
 in the special fibre. If the special point of `τ` lies in the relative component of `σ`, then so
 does its generic point.
 
-The connected component `Z` of the special point of `σ` in the noetherian special fibre is open
-and closed there, so there is `g ∈ C` with `D(g) ∩ V(𝔪 C) = Z` and `C_g` flat over `R`. An
-idempotent of `C_g[1/ϖ]` separating the generic points of `σ` and `τ` comes from an idempotent of
-`C_g`, which would separate their special points in `Z`. -/
+Let `Z` be the connected component of the special point of `σ` in the special fibre; it is closed
+in `Spec C`. Inverting the elements lying in no prime of `Z` gives a flat `R`-algebra `D` with
+reduced special fibre. If the generic points of `σ` and `τ` lay in different connected components
+of the noetherian generic fibre, an idempotent of `D[1/ϖ]` would separate them. It comes from an
+idempotent of `D` (`IsDiscreteValuationRing.exists_eq_algebraMap_of_isIdempotentElem`), which
+would separate the special points of `σ` and `τ` in the connected set `Z`. -/
 theorem mem_relativeComponent_of_isDiscreteValuationRing {R C : Type u} [CommRing R] [IsDomain R]
     [IsDiscreteValuationRing R] [CommRing C] [Algebra R C] [Algebra.FiniteType R C]
     (σ τ : C →ₐ[R] R) (hred : IsReduced (ResidueField R ⊗[R] C))
@@ -205,8 +189,9 @@ theorem mem_relativeComponent_of_isDiscreteValuationRing {R C : Type u} [CommRin
     rw [IsScalarTower.algebraMap_apply R D E]
     exact IsLocalization.Away.algebraMap_isUnit _
   by_contra hW
-  obtain ⟨e, he, hUe⟩ := isClopen_iff.1 (isClopen_preimage_connectedComponentIn
-    (continuous_comap ι) hιF (comap (σ : C →+* R) ηR))
+  obtain ⟨e, he, hUe⟩ := isClopen_iff.1
+    (TopologicalSpace.NoetherianSpace.isClopen_preimage_connectedComponentIn
+      (continuous_comap ι) hιF (comap (σ : C →+* R) ηR))
   obtain ⟨b, rfl⟩ :=
     IsDiscreteValuationRing.exists_eq_algebraMap_of_isIdempotentElem hϖ hDred he
   have hb : IsIdempotentElem b := hinj ((map_mul _ b b).trans he)
