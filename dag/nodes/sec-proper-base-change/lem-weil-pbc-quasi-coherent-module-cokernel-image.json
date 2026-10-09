@@ -5,7 +5,7 @@
  "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\varphi:\\mathcal F\\to\\mathcal G$ a morphism of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] between quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent]. Let $q:\\mathcal G\\to\\operatorname{Coker}\\varphi$ be the cokernel of $\\varphi$ in $\\Mod(\\mathcal O_X)$, i.e. the sheafification [def-weil-pbc-sheafification] of the presheaf of $\\mathcal O_X$-modules $U\\mapsto\\mathcal G(U)/\\varphi_U(\\mathcal F(U))$, with $q$ the composite of the quotient maps and the sheafification map; and let $\\operatorname{Im}\\varphi\\subseteq\\mathcal G$ be the subsheaf of local sections of $\\mathcal G$ that are locally in the image of $\\varphi$: $(\\operatorname{Im}\\varphi)(W)=\\{s\\in\\mathcal G(W):$ every point of $W$ has an open neighbourhood $V\\subseteq W$ with $s|_V\\in\\varphi_V(\\mathcal F(V))\\}$. Then: (1) $\\operatorname{Im}\\varphi$ is a sub-$\\mathcal O_X$-module of $\\mathcal G$ and equals $\\ker q$ (sectionwise kernel), $\\varphi$ factors through $\\operatorname{Im}\\varphi$, and $q$ is an epimorphism with $q\\circ\\varphi=0$; (2) $\\operatorname{Coker}\\varphi$ and $\\operatorname{Im}\\varphi$ are quasi-coherent; (3) for every affine open $U\\subseteq X$: $(\\operatorname{Im}\\varphi)(U)=\\varphi_U(\\mathcal F(U))$, and $q_U:\\mathcal G(U)\\to(\\operatorname{Coker}\\varphi)(U)$ is surjective with kernel $\\varphi_U(\\mathcal F(U))$, so that $(\\operatorname{Coker}\\varphi)(U)=\\mathcal G(U)/\\varphi_U(\\mathcal F(U))$ as $\\mathcal O_X(U)$-modules.",
  "source": {
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma 01IC (lemma-kernel-cokernel-quasi-coherent, line 1419: on Spec R, Coker(M~ -> N~) = Coker(M -> N)~, by exactness of M -> M~ and Lemma 01I7), Lemma 01IB (lemma-equivalence-quasi-coherent, line 1390: Γ and tilde quasi-inverse equivalences on Spec R, whence sections over an affine open), Section 01LA (section-quasi-coherent, line 4717, item (5), tag 01LB: kernel and cokernel of a morphism of quasi-coherent sheaves are quasi-coherent); Modules, Lemma 01AH (modules.tex line 204, lemma-limits-colimits: colimits in Mod(O_X) are sheafified presheaf colimits)"
+  "place": "Schemes, Lemmas 01IC (tag 01IC), 01IB (tag 01IB), Section 01LA item (5) (tag 01LB); Modules, Lemma 01AH (tag 01AH)."
  },
  "stmt_deps": [
   "def-pc-scheme",
@@ -13,9 +13,76 @@
   "pqf-def-coherent",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $j:U\\hookrightarrow X$ be the inclusion of an affine open. By clause (1) of lem-weil-pbc-module-restriction-open-immersion-colimits, $j^*$ is a left adjoint and preserves all colimits, hence it preserves the cokernel of $\\varphi$; by clause (2) of that node and the affine-local definition pqf-def-coherent, $j^*\\mathcal F$ and $j^*\\mathcal G$ are quasi-coherent. After choosing $U\\cong\\operatorname{Spec}R$, the restricted map is therefore a morphism of quasi-coherent modules on $\\operatorname{Spec}R$.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01AJ (tag 01AJ, f^* is left adjoint to f_* and preserves colimits) and Lemma 01BG (tag 01BG, pullback of a quasi-coherent module is quasi-coherent); for an open immersion j, j^* is restriction; the affine-local criterion is pqf-def-coherent."
+   }
+  },
+  {
+   "text": "On $U=\\operatorname{Spec}R$, apply clauses (3), (4), and (2) of lem-weil-pbc-affine-tilde-gamma-adjunction. Clause (3) identifies each restricted quasi-coherent module with the tilde of its global-sections module; under these identifications $j^*\\varphi$ corresponds to the induced $R$-linear map on global sections. Clause (4) says that tilde preserves colimits, so the cokernel is the tilde of the module cokernel; clause (2) identifies its global sections with that module cokernel. Thus $q_U$ is surjective with kernel $\\varphi_U(\\mathcal F(U))$ and $\\operatorname{Coker}\\varphi(U)=\\mathcal G(U)/\\varphi_U(\\mathcal F(U))$.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemmas 01IC (tag 01IC, cokernel of M~ -> N~ is the tilde of the module cokernel), 01IB (tag 01IB, affine quasi-coherent equivalence), and 01I7 (tag 01I7, affine tilde/global-sections comparison); the DAG formulation is lem-weil-pbc-affine-tilde-gamma-adjunction clauses (2), (3), and (4)."
+   }
+  },
+  {
+   "text": "Because every point of $X$ has an affine open neighbourhood and quasi-coherence is local by pqf-def-coherent, the cokernel is quasi-coherent on $X$. The kernel of its quotient map is quasi-coherent by lem-weil-pbc-quasi-coherent-module-kernel, so the image is quasi-coherent once the local-image identification in Step 4 is made.",
+   "uses": [
+    "def-pc-scheme",
+    "pqf-def-coherent",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Section 01LA item (5), tag 01LB (kernels and cokernels of morphisms of quasi-coherent modules are quasi-coherent), together with the affine-neighbourhood criterion pqf-def-coherent."
+   }
+  },
+  {
+   "text": "By the sheafified-quotient local-image criterion, a section of $\\mathcal G$ lies in the kernel exactly when it is locally in the image of $\\varphi$. Thus this kernel is $\\operatorname{Im}\\varphi$, the map $\\varphi$ factors through it, and $q$ is an epimorphism with $q\\varphi=0$. The affine formulas of Step 2 give $(\\operatorname{Im}\\varphi)(U)=\\varphi_U(\\mathcal F(U))$ and $\\operatorname{Coker}\\varphi(U)=\\mathcal G(U)/\\varphi_U(\\mathcal F(U))$.",
+   "uses": [
+    "lem-weil-pbc-sheaf-cokernel-local-image",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01AH (tag 01AH, colimits in modules are sheafified presheaf colimits), applied to the quotient presheaf; its kernel consists exactly of sections locally in the image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-sheaf-cokernel-local-image",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemmas 01IC (tag 01IC), 01IB (tag 01IB), Section 01LA item (5) (tag 01LB); Modules, Lemma 01AH (tag 01AH)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,7 +121,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -78,7 +145,14 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Stacks 01IC / 01IB / 01LA(5), Modules 01AH; self-contained; correct; unsplit. No Lean on either branch (only isQuasicoherent_sigma, isQuasicoherent_kernel in the source repo)."
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: Repaired as asked at 20:00/20:17: the affine step now uses clauses (2),(3),(4) of lem-weil-pbc-affine-tilde-gamma-adjunction (the false sectionwise clause and the non-leaf affine node are gone), step 1 names clauses (1),(2) of lem-weil-pbc-module-restriction-open-immersion-colimits and the affine-local criterion, and the local-image node is self-contained with the tag 01AH. Four steps: restriction to affine opens, the affine computation of the cokernel and its global sections, quasi-coherence of Coker and of the kernel of q (lem-weil-pbc-quasi-coherent-module-kernel), ker q = Im phi by the local-image node."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "worker": "stage1",
+  "summary": "Repaired returned split: restriction step states the colimit/cokernel and quasi-coherence clauses; Step 2 reuses existing affine tilde/Gamma clauses (2), (3), (4); removed the non-leaf affine calculation; added exact Stacks tags and self-contained child definitions."
  }
 }
