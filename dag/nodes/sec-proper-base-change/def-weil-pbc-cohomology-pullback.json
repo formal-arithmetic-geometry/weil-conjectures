@@ -1,0 +1,85 @@
+{
+ "id": "def-weil-pbc-cohomology-pullback",
+ "kind": "definition",
+ "title": "Pullback map on etale cohomology",
+ "statement": "Let $u:Y\\to X$ be a morphism of schemes [def-weil-pbc-scheme-conventions] and $G$ an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-etale-sheaves], with inverse image $u^{-1}G$ [def-weil-pbc-inverse-image] and unit $\\eta_u:\\mathrm{id}\\to u_*u^{-1}$ of $u^{-1}\\dashv u_*$ [def-weil-pbc-direct-image]. Choose a resolution $G\\to I^\\bullet$ by a bounded below complex of injective abelian sheaves (a K-injective resolution [def-weil-pbc-kinjective-resolutions]) and a K-injective resolution $u^{-1}I^\\bullet\\to J^\\bullet$ on $Y_{\\Et}$; since $u^{-1}$ is exact [prop-weil-pbc-inverse-image-exact], $u^{-1}G\\to u^{-1}I^\\bullet\\to J^\\bullet$ is a K-injective resolution of $u^{-1}G$. The *pullback map*\n\n$$\n u^*:H^q(X_{\\Et},G)\\longrightarrow H^q(Y_{\\Et},u^{-1}G)\\qquad(q\\ge0)\n$$\n\nbetween the cohomology groups of [def-weil-pbc-etale-cohomology] is the map induced in degree $q$ by the morphism of complexes of abelian groups\n\n$$\n \\Gamma(X,I^\\bullet)\\xrightarrow{\\ \\eta_u\\ }\\Gamma(X,u_*u^{-1}I^\\bullet)=\\Gamma(Y,u^{-1}I^\\bullet)\\longrightarrow\\Gamma(Y,J^\\bullet),\n$$\n\nthat is, a section $a\\in I^r(X)$ goes to the image of $\\eta_{u,I^r}(a)\\in(u^{-1}I^r)(Y)$ in $J^r(Y)$ (\"pull back the section, then compare with the resolution\"). For $K\\in\\Dplus(X_{\\Et})$ the same recipe, with $I^\\bullet$ a K-injective resolution of $K$, defines $u^*:\\RGamma(X_{\\Et},K)\\to\\RGamma(Y_{\\Et},u^{-1}K)$ in $\\Dplus(\\Ab)$. The independence of the choices of $I^\\bullet$ and $J^\\bullet$ is the statement [lem-weil-pbc-cohomology-pullback-functorial], not part of this definition. When $u$ is etale (an object of $X_{\\Et}$), $u^{-1}G=G|_Y$ and $u^*$ is the restriction map $H^q(X,G)\\to H^q(Y,G|_Y)$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section Tag 01F7 (section-functoriality), Lemma Tag 01F8 and equation (equation-functorial), Remark Tag 01FB (remark-explain-arrow): written there for ringed spaces; the construction on the small etale site is the same with the etale direct and inverse images (Stacks, Etale Cohomology, Section Tag 04I0)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-kinjective-resolutions",
+  "prop-weil-pbc-inverse-image-exact",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-derived-categories"
+ ],
+ "pointers": [
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback map on sheaf cohomology along a morphism of sites, compatible with composition",
+   "results": "Functor.sheafPullback, sheafPullbackConstruction.sheafPullback (Mathlib.CategoryTheory.Sites.Pullback); GrothendieckTopology.overMapPullbackComp (Sites.Over); TopCat.Presheaf.stalkPullbackHom; TopCat.Sheaf.pullback; none acts on cohomology",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "Sheaf.H (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic, cohomology as Ext from the constant sheaf), Sheaf.H.map (functoriality in a morphism of sheaves F ⟶ G on one site), H.map_comp_apply, H.equiv₀, functorH; nothing for a morphism of sites",
+   "date": "2026-10-09",
+   "verdict": "no match (only functoriality in the sheaf, not in the space)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.Functor.sheafPullback",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "induced map on sheaf cohomology H^n along a morphism of sites (pullback of sheaves), functoriality for composition",
+   "results": "Functor.sheafPushforwardContinuous_map_val_app, sheafPushforwardContinuous_obj_val_map, sheafPushforwardContinuousNatTrans(_app_val) (Mathlib.CategoryTheory.Sites.Continuous), sheafCompose_map_val; no cohomology map",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def \\|theorem \\|lemma ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/*.lean | grep -iE 'pullback|mapExact|comap|functor'",
+   "results": "cohomologyPresheafFunctor, functorH (Basic.lean), Cech complexes (Cech.lean); the generic Ext.mapExactFunctor exists in Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean but no pullback of sheaf cohomology along a morphism of sites or schemes",
+   "date": "2026-10-09",
+   "verdict": "no match (the source repository defines it as AlgebraicGeometry.Etale.cohomologyMap, WeilConjectures/SixFunctors/Etale/UpperLowerStar/TopologicalInvariance.lean:182, via Ext.mapExactFunctor)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

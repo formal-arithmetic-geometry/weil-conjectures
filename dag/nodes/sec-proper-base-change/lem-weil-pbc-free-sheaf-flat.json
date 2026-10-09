@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-free-sheaf-flat",
+ "kind": "statement",
+ "title": "The sheafified free presheaf on a representable with flat coefficients is flat (j_{X!} of a constant flat sheaf is flat)",
+ "statement": "Let $\\mathcal C$ be an essentially small category with a Grothendieck topology $J$, and let $\\mathcal A$ be a Grothendieck abelian category with a symmetric monoidal closed structure whose tensor product is additive in each variable; give $\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$ the sheafified objectwise tensor product. Let $P$ be an object of $\\mathcal A$ such that $P\\otimes-:\\mathcal A\\to\\mathcal A$ preserves finite limits, let $X$ be an object of $\\mathcal C$, and let $P_X^\\#$ be the sheaf associated to the presheaf $V\\mapsto\\bigoplus_{\\varphi\\in\\mathrm{Mor}_{\\mathcal C}(V,X)}P$ (restriction along $\\psi:V'\\to V$ sending the summand of $\\varphi$ to that of $\\varphi\\psi$ by the identity); equivalently $P_X^\\#=j_{X!}\\underline P_X$, the extension by zero of the constant sheaf $P$ on $\\mathcal C/X$. Then $P_X^\\#\\otimes-:\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)\\to\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$ preserves finite limits.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03EV (lemma-j-shriek-flat): j_{U!}O_U is flat, proved via Lemma 03ES (lemma-flatness-presheaves: objectwise flat presheaves are flat), Lemma 03ET (lemma-flatness-sheafification) and Lemma 0GMW (lemma-sheafification-tensor); description of j_{U!} as sheafification of V -> sum over Mor(V,U), Lemma 03DI (lemma-extension-by-zero); projection formula Lemma 0E8I (lemma-j-shriek-and-tensor). Stacks treats O-modules; the A-valued statement is the flatness claim of the module docstring ('The sheaf case') of WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution (slopmaster2), no Lean declaration. Intended proof (agent, generalizing 03EV): by [lem-weil-pbc-sheaf-tensor-closed] (2), P_X^# (x) F = a(Q (x)_p iota F) for Q the presheaf above; (Q (x)_p G)(V) = sum over Mor(V,X) of P (x) G(V) since - (x) G(V) preserves coproducts (closed); finite limits of presheaves are objectwise, P (x) - is left exact and coproducts in A are exact (AB4, from AB5), so G -> Q (x)_p G is left exact on presheaves; iota is a right adjoint and a is exact, so F -> a(Q (x)_p iota F) is left exact"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-sheaf-tensor-closed"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheafification of free presheaf on representable is flat; tensor with sheafified free yoneda preserves finite limits",
+   "results": "Module.Flat.iff_preservesFiniteLimits_tensorLeft (RingTheory.Flat.CategoryTheory); preservesFiniteLimits_presheafToSheaf (Sites.LeftExact); PresheafOfModules.sheafification; GrothendieckTopology.preservesFiniteLimits_sheafification; Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback",
+   "date": "2026-10-09",
+   "verdict": "no match (exactness of sheafification only, a tool of the proof)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero j_! of a flat sheaf is flat; projection formula j_! G ⊗ F ≅ j_!(G ⊗ F|_U)",
+   "results": "lan_flat_of_flat (Functor.Flat, representably flat functors); Module.Flat.iff_preservesFiniteLimits_tensorLeft; compatiblePreservingOfFlat; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "date": "2026-10-09",
+   "verdict": "no match: no extension by zero of sheaves on a site and no projection formula in Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.freeYoneda, CategoryTheory.MonoidalCategory.tensorLeft",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l 'freeYoneda' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; rg -n 'Flat|flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Monoidal.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Generator; rg -n 'extensionByZero|ExtensionByZero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "freeYoneda only in Generator/Presheaf.lean, Generator/Sheaf.lean, ModuleCat/Presheaf/Generator.lean, ModuleCat/Presheaf/Pullback.lean, Presentable/Presheaf.lean (separating/presentability statements); no flatness statement in those directories; no extension by zero",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-flat-separator",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

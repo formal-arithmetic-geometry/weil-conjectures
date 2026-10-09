@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-etale-localization-exchange",
+ "kind": "statement",
+ "title": "Exchange along an etale morphism of the target is an isomorphism",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and let $j:V\\to Y$ be an etale morphism [def-weil-etale-morphism]. Let $X_V=X\\times_YV$ [def-pc-fibre-product] with projections $j_X:X_V\\to X$ and $f_V:X_V\\to V$, and let $\\square_j=(f,f_V,j,j_X)$ be the resulting cartesian square [def-weil-pbc-cartesian-square] (bottom map $j$, top map $j_X$). Then for every $K\\in\\Dplus(X_{\\Et})$ [def-weil-pbc-derived-categories] the derived exchange morphism [def-weil-pbc-derived-exchange]\n\n$$\n \\Ex_{\\square_j,K}:j^{-1}Rf_*K\\longrightarrow Rf_{V*}\\,j_X^{-1}K\n$$\n\nis an isomorphism in $\\Dplus(V_{\\Et})$. No hypothesis is put on $f$. (Under the identification of $V_{\\Et}$ with the localized site $Y_{\\Et}/V$, $j^{-1}$ is restriction to $Y_{\\Et}/V$ and $j_X^{-1}$ restriction to $X_{\\Et}/X_V$; the lemma says that $Rf_*$ commutes with this restriction, and that the identification is the exchange morphism.)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Cohomology on Sites, Lemma label lemma-restrict-direct-image-open, Tag 0D6G ($(Rf_*E)|_{\\mathcal D/V}=Rg_*(E|_{\\mathcal C/U})$, proof by a K-injective representative and Lemma lemma-restrict-K-injective-to-open); with Sites, Lemma label sites-lemma-localize-morphism-strong, Tag 03EF (the underived statement), and the use of both in the proof of Etale Cohomology, Lemma label lemma-base-change-local, Tag 0EZR (literature/stacks-project/etale-cohomology.tex), where the restricted base change map is identified with the base change map of the localized square"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-exchange"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of derived pushforward to an open (etale) object equals derived pushforward of restriction",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, Scheme.Modules.pushforward_obj_presheaf_map, Scheme.Modules.restrictFunctorAdjCounitIso, Scheme.Modules.restrictFunctor (Mathlib.AlgebraicGeometry.Modules.Sheaf; Zariski O_X-modules, underived, open immersions only)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exchange morphism for etale base change of derived direct image is an isomorphism (localization of Rf_* to an etale V over the target)",
+   "results": "AlgebraicGeometry.IsEtale.of_comp, IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.respectsIso, Algebra.basicOpen_subset_etaleLocus_iff (morphism properties only)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pushforward of sheaves commutes with restriction to an over category (localization of a site at an object)",
+   "results": "Functor.sheafPushforwardContinuousComp'_hom_app_val_app, Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom, SheafOfModules.pushforwardNatIso (underived composition of pushforwards; nothing derived, nothing about restriction to J.over)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites | xargs grep -ln 'pushforward\\|DerivedCategory\\|rightDerived'; grep -rn 'overPullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | grep -i 'pushforward\\|derived'",
+   "results": "no file of AlgebraicGeometry/Sites mentions pushforward or derived categories; overPullback occurs with pushforward only in Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:97,358 (SheafOfModules.overPullback, adjunction overMap ⊣ overPullback, underived)",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no derived direct image on the small etale site and no exchange morphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-target-locality",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

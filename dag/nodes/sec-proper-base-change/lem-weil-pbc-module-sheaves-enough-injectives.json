@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-module-sheaves-enough-injectives",
+ "kind": "statement",
+ "title": "Sheaves of modules on the small etale site have enough injectives",
+ "statement": "Let $T$ be a scheme and $R$ a commutative ring, and let $\\Mod(T_{\\Et},R)$ be the abelian category of sheaves of $R_T$-modules on the small etale site of $T$ [def-weil-pbc-etale-sheaves]. Then $\\Mod(T_{\\Et},R)$ has enough injectives: for every object $F$ there are an injective object $J$ of $\\Mod(T_{\\Et},R)$ [def-sp-injective-resolutions] and a monomorphism $F\\hookrightarrow J$ in $\\Mod(T_{\\Et},R)$.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Injectives, Theorem 01DU (label theorem-sheaves-modules-injectives): the category of sheaves of $\\mathcal O$-modules on a site has enough injectives; used in Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Choose an injective map of sheaves $f^{-1}\\mathcal I\\to\\mathcal J$ where $\\mathcal J$ is an injective sheaf of $\\mathbf Z/\\ell\\mathbf Z$-modules\")"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of sheaves of modules on a site has enough injectives",
+   "results": "CategoryTheory.IsGrothendieckAbelian.enoughInjectives (Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives); CategoryTheory.Sheaf.instIsGrothendieckAbelian (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf); SheafOfModules colimit/limit instances (Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits, .Limits); instEnoughInjectivesModuleCatInt",
+   "date": "2026-10-09",
+   "verdict": "generalization for Sheaf J (ModuleCat R), not for SheafOfModules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaves of O-modules on a site have enough injectives",
+   "results": "PresheafOfModules.sheafify, PresheafOfModules.sheafification (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify/Sheafification); SheafOfModules.instAbelian (Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian); SheafOfModules.IsQuasicoherent",
+   "date": "2026-10-09",
+   "verdict": "no match: no EnoughInjectives or IsGrothendieckAbelian for SheafOfModules"
+  },
+  {
+   "tool": "grep",
+   "query": "'EnoughInjectives|IsGrothendieckAbelian' in Mathlib/Algebra/Category/ModuleCat/Sheaf/ and Mathlib/AlgebraicGeometry/Sites/; 'instance enoughInjectives' in Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+   "results": "IsGrothendieckAbelian.enoughInjectives (EnoughInjectives.lean:380, @[stacks 079H]): a Grothendieck abelian category has enough injectives; AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology (Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:149) with the example `IsGrothendieckAbelian.{u} (Sheaf S.smallEtaleTopology (ModuleCat.{u} R))` (line 154); nothing in ModuleCat/Sheaf/ (SheafOfModules, which def-weil-sheaf-of-modules-category matches)",
+   "date": "2026-10-09",
+   "verdict": "generalization only up to a theorem: Mathlib gives enough injectives for Sheaf T.smallEtaleTopology (ModuleCat R) (sheaves valued in R-modules); Mod(T_et,R) as sheaves of R_T-modules is SheafOfModules over the constant ring sheaf, and its equivalence with ModuleCat R-valued sheaves is itself a theorem, so not a leaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-cancellation",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

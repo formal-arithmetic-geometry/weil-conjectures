@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-etale-cover-detects-iso",
+ "kind": "statement",
+ "title": "A morphism of etale sheaves is an isomorphism iff it is one on an etale covering",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and let $(t_i:T_i\\to T)_{i\\in I}$ be a family of etale morphisms [def-weil-etale-morphism] which is jointly surjective (every point of $T$ lies in the image of some $t_i$). Let $\\varphi:G\\to H$ be a morphism in the category $\\Ab(T_{\\Et})$ of abelian sheaves on the small etale site [def-weil-pbc-abelian-etale-sheaves]. Then $\\varphi$ is an isomorphism if and only if for every $i$ its inverse image [def-weil-pbc-inverse-image] $t_i^{-1}\\varphi:t_i^{-1}G\\to t_i^{-1}H$ is an isomorphism in $\\Ab(T_{i,\\Et})$. (For $I=\\emptyset$, $T$ is empty and every morphism of $\\Ab(T_{\\Et})$ is an isomorphism.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Etale Cohomology, Lemma label lemma-base-change-local, Tag 0EZR, last sentence of the proof of (1) (\"we conclude it is an isomorphism as $\\{U_i\\to X\\}$ is an etale covering\"); with Theorem label theorem-exactness-stalks, Tag 03PU (geometric stalks detect isomorphisms) and Lemma label lemma-stalk-pullback, Tag 03Q1 ($(f^{-1}G)_{\\bar s}=G_{f(\\bar s)}$). Route intended by the item that created this node: geometric stalks are conservative (node lemma-weil-pbc-geometric-stalk-conservative, Lean closed); every geometric point $\\bar t$ of $T$ over $t$ lifts to some $T_i$ (choose $s\\in T_i$ over $t$; $\\kappa(t)\\to\\kappa(s)$ is finite separable, so it embeds into the algebraically closed field of $\\bar t$ over $\\kappa(t)$); and $(t_i^{-1}G)_{\\bar s}\\cong G_{\\bar t}$ for a lift $\\bar s$, naturally in $G$."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a morphism of sheaves is an isomorphism if its restriction to each member of a covering is an isomorphism",
+   "results": "AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, GrothendieckTopology.W_sheafToPreheaf_map_iff_isIso (Mathlib.CategoryTheory.Sites.Localization), Sheaf.isLocallyBijective_iff_isIso, TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso",
+   "date": "2026-10-09",
+   "verdict": "no match for the etale site; related general site statements"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism of etale sheaves is an isomorphism if its pullback along each map of an etale covering is an isomorphism",
+   "results": "GrothendieckTopology.W_sheafToPreheaf_map_iff_isIso, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, Precoverage.ZeroHypercover.instIsLocalAtTargetIsomorphisms (isomorphisms of C, not of sheaves), Scheme.Modules.Hom.isIso_iff_isIso_app, Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of sheaves on a site is an isomorphism if it becomes an isomorphism after restriction to each object of a covering (over category)",
+   "results": "GrothendieckTopology.W_sheafToPreheaf_map_iff_isIso, GrothendieckTopology.W_iff, W_eq_inverseImage_isomorphisms, Functor.IsCoverDense.presheafIso, Functor.IsCoverDense.iso_of_restrict_iso",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isIso_of_coversTop\\|isIso_iff_of_coversTop' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/; sed -n 1,75p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/LocalProperties.lean",
+   "results": "CategoryTheory.Sheaf.isIso_iff_of_coversTop (CategoryTheory/Sites/LocalProperties.lean:68): for hX : K.CoversTop X and f : F ⟶ G of sheaves, IsIso f ↔ ∀ i, IsIso ((K.overPullback A (X i)).map f); also Sheaf.isIso_of_coversTop (line 35)",
+   "date": "2026-10-09",
+   "verdict": "generalization, not a leaf: it is stated for an arbitrary site with the restriction functor overPullback to the localized sites K.over (X i); specializing it to this node needs the theorem that, for etale t_i, the inverse image t_i^{-1} of def-weil-pbc-inverse-image (sheafified presheaf pullback) agrees with restriction to (T_et)/T_i under T_{i,et} ≅ (T_et)/T_i, and that a jointly surjective etale family covers the terminal object of T_et; recorded as the Mathlib route for stage 3"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-target-locality",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

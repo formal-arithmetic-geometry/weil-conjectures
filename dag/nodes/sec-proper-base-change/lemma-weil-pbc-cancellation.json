@@ -2,7 +2,7 @@
  "id": "lemma-weil-pbc-cancellation",
  "kind": "statement",
  "title": "Cancellation along a proper surjection",
- "statement": "Let $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ be proper, with $f$ surjective. If\n$\\mathrm{PBC}(f)$ and $\\mathrm{PBC}(hf)$ hold, then $\\mathrm{PBC}(h)$ holds.",
+ "statement": "Let $f:X\\to Y$ and $h:Y\\to Z$ be proper morphisms of schemes [def-weil-proper-morphism], with $f$ surjective [def-weil-surjective-morphism] (the composite $hf:X\\to Z$ is then proper). If $\\mathrm{PBC}(f)$ and $\\mathrm{PBC}(hf)$ hold in the sense of [def-weil-pbc-property], then $\\mathrm{PBC}(h)$ holds.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lemma-weil-pbc-cancellation.md",
   "place": "node lemma-weil-pbc-cancellation, order 1189",
@@ -14,36 +14,148 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-injective-acyclicity-property",
-  "def-weil-pbc-property",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-proper-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-property"
  ],
  "proof": [
   {
-   "text": "$\\mathrm{PBC}(h)$ is equivalent to $\\mathrm{IA}(h)$, so we prove\n$\\mathrm{IA}(h)$. Fix a base change $c:Z'\\to Z$, write $Y'=Y\\times_ZZ'$,\n$X'=X\\times_ZZ'$ with projections $b$, $a$, and base-changed maps $f'$, $h'$,\nand fix a prime $r$ and an injective $\\mathbf F_r$-module sheaf $I$ on $Y$. By\n[lem-weil-pbc-retract-supplied], $b^{-1}I$ is a direct summand of\n$b^{-1}f_*J$ for a suitable injective $J$ on $X$. The underived proper\nexchange identifies $b^{-1}f_*J$ with $f'_*a^{-1}J$; $\\mathrm{IA}_r(f)$ and\n$\\mathrm{IA}_r(hf)$ kill the higher direct images of $a^{-1}J$ along $f'$ and\n$h'f'$, so the spectral sequence of\n[lem-weil-pbc-grothendieck-spectral-sequence] collapses to the $q=0$ row and\nyields $R^ph'_*(f'_*a^{-1}J)=0$ for $p>0$. Via the exchange identification\nthis is the vanishing for $b^{-1}f_*J$, and\n[lem-weil-pbc-vanishing-descends-retract] descends it to the retract\n$b^{-1}I$, proving $\\mathrm{IA}_r(h)$.",
+   "text": "*Reduction to injective acyclicity.* The composite $hf$ is proper by [lem-weil-pbc-proper-composition]. By [lemma-weil-pbc-property-iff-acyclicity] applied to the proper morphisms $f$ and $hf$, the hypotheses $\\mathrm{PBC}(f)$ and $\\mathrm{PBC}(hf)$ give $\\mathrm{IA}_r(f)$ and $\\mathrm{IA}_r(hf)$ for every prime $r$ [def-weil-pbc-injective-acyclicity-property]; by the same lemma applied to the proper morphism $h$, it suffices to prove $\\mathrm{IA}_r(h)$ for every prime $r$. Fix a prime $r$, a morphism of schemes $c:Z'\\to Z$ and an injective object $I$ of the category of sheaves of $\\mathbf F_r$-modules on $Y_{\\Et}$; we must show $R^ph'_*b^{-1}I=0$ for $p>0$, where $b:Y'\\to Y$, $h':Y'\\to Z'$ are the maps of a cartesian square completing $h$ and $c$ [def-weil-pbc-cartesian-square].",
    "uses": [
-    "lem-weil-pbc-retract-supplied",
-    "lem-weil-pbc-grothendieck-spectral-sequence",
-    "lem-weil-pbc-vanishing-descends-retract"
+    "lem-weil-pbc-proper-composition",
+    "lemma-weil-pbc-property-iff-acyclicity",
+    "def-weil-pbc-injective-acyclicity-property",
+    "def-weil-pbc-cartesian-square"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first sentences (\"We will use the equivalence of Lemma 0A4B without further mention. Let $\\ell$ be a prime number. Let $\\mathcal I$ be an injective sheaf of $\\mathbf Z/\\ell\\mathbf Z$-modules on $Y_{\\acute etale}$\"); Lemma 0A4B (label lemma-proper-base-change-in-terms-of-injectives)"
+   }
+  },
+  {
+   "text": "*$I$ is a direct summand of $f_*J$.* The inverse image $f^{-1}I$ is a sheaf of $\\mathbf F_r$-modules on $X_{\\Et}$ [def-weil-pbc-inverse-image]. By [lem-weil-pbc-module-sheaves-enough-injectives] (with $T=X$, $R=\\mathbf F_r$) choose a monomorphism $f^{-1}I\\hookrightarrow J$ with $J$ injective in the category of sheaves of $\\mathbf F_r$-modules on $X_{\\Et}$. Since $f$ is surjective, [lem-weil-pbc-retract-supplied] (read in the categories of sheaves of $\\mathbf F_r$-modules, where its argument takes place) shows that the adjoint map $\\iota:I\\to f_*J$ [def-weil-pbc-direct-image] is a monomorphism and, $I$ being injective, that there is a retraction $\\rho:f_*J\\to I$ with $\\rho\\iota=\\mathrm{id}_I$. So it suffices to prove the desired vanishing for $f_*J$ (step 6).",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-retract-supplied",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Choose an injective map of sheaves $f^{-1}\\mathcal I\\to\\mathcal J$ ... Since $f$ is surjective the map $\\mathcal I\\to f_*\\mathcal J$ is injective (look at stalks in geometric points). Since $\\mathcal I$ is injective we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$. Thus it suffices to prove the desired vanishing for $f_*\\mathcal J$.\")"
+   }
+  },
+  {
+   "text": "*The base-changed diagram.* Let $X'$ with $a:X'\\to X$ and $f':X'\\to Y'$ complete $f$ and $b$ to a cartesian square [def-weil-pbc-cartesian-square], $X'\\cong X\\times_YY'$. The lower square ($Y'\\to Y$ over $Z'\\to Z$) is cartesian, so by [lem-weil-pbc-cartesian-square-pasting] the outer rectangle, with vertical maps $hf$ and $h'f'$ and horizontal maps $a$ and $c$, is cartesian: $X'\\cong X\\times_ZZ'$, and $h'f':X'\\to Z'$ is the base change of $hf$ along $c$ with projection $a$.",
+   "uses": [
+    "def-weil-pbc-cartesian-square",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, second paragraph (\"set $Y'=Z'\\times_ZY$ and $X'=Z'\\times_ZX=Y'\\times_YX$. Denote $a:X'\\to X$, $b:Y'\\to Y$ ... $f':X'\\to Y'$ and $g':Y'\\to Z'$\")"
+   }
+  },
+  {
+   "text": "*Underived exchange.* $J$ is killed by $r$, hence a torsion sheaf [def-weil-pbc-etale-sheaves]. Since $f$ is proper, [lemma-weil-pbc-proper-underived-exchange] applied to the cartesian square of step 3 ($f$, $f'$, $b$, $a$) and to $J$ gives an isomorphism $b^{-1}f_*J\\cong f'_*a^{-1}J$ of sheaves on $Y'_{\\Et}$.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "lemma-weil-pbc-proper-underived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, second paragraph (\"By Lemma 0A3U we have $b^{-1}f_*\\mathcal J=f'_*a^{-1}\\mathcal J$\"); Lemma 0A3U (label lemma-proper-base-change-f-star)"
+   }
+  },
+  {
+   "text": "*The two vanishings.* $\\mathrm{IA}_r(f)$, applied to the base change $b:Y'\\to Y$ of step 3 and the injective $\\mathbf F_r$-module sheaf $J$, gives $R^qf'_*a^{-1}J=0$ for $q>0$. $\\mathrm{IA}_r(hf)$, applied to the base change $c:Z'\\to Z$ with the cartesian outer rectangle of step 3 and to $J$, gives $R^n(h'f')_*a^{-1}J=0$ for $n>0$. Both are instances of [def-weil-pbc-injective-acyclicity-property], with $R^q$ the higher direct images of [def-weil-pbc-direct-image].",
+   "uses": [
+    "def-weil-pbc-injective-acyclicity-property",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, second paragraph (\"On the other hand, we know that $R^qf'_*a^{-1}\\mathcal J$ and $R^q(g'\\circ f')_*a^{-1}\\mathcal J$ are zero for $q>0$\")"
+   }
+  },
+  {
+   "text": "*Spectral sequence.* [lem-weil-pbc-grothendieck-spectral-sequence] for $X'\\xrightarrow{f'}Y'\\xrightarrow{h'}Z'$ and $F=a^{-1}J$ gives a first-quadrant spectral sequence $E_2^{p,q}=R^ph'_*R^qf'_*a^{-1}J\\Rightarrow R^{p+q}(h'f')_*a^{-1}J$. By step 5, $E_2^{p,q}=0$ for $q>0$ and the abutment vanishes in every degree $n>0$, so [lem-weil-pbc-first-quadrant-row-collapse] gives $R^ph'_*(f'_*a^{-1}J)=E_2^{p,0}=0$ for $p>0$. Since $R^ph'_*$ is a functor, the isomorphism of step 4 gives $R^ph'_*(b^{-1}f_*J)=0$ for $p>0$.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-spectral-sequence",
+    "lem-weil-pbc-first-quadrant-row-collapse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, second paragraph (\"Using the spectral sequence (Cohomology on Sites, Lemma 0734) $R^pg'_*R^qf'_*a^{-1}\\mathcal J\\Rightarrow R^{p+q}(g'\\circ f')_*a^{-1}\\mathcal J$ we conclude that $R^pg'_*(b^{-1}f_*\\mathcal J)=R^pg'_*(f'_*a^{-1}\\mathcal J)=0$ for $p>0$ as desired\")"
+   }
+  },
+  {
+   "text": "*Descent to the summand and conclusion.* The functor $b^{-1}$ is additive [def-weil-pbc-inverse-image], so $b^{-1}\\rho\\circ b^{-1}\\iota=\\mathrm{id}_{b^{-1}I}$: $b^{-1}I$ is a direct summand of $M=b^{-1}f_*J$. By step 6 $R^ph'_*M=0$ for $p>0$, so [lem-weil-pbc-vanishing-descends-retract] (for $h'$, $M$ and its summand $b^{-1}I$) gives $R^ph'_*b^{-1}I=0$ for $p>0$. As $c$ and $I$ were arbitrary, $\\mathrm{IA}_r(h)$ holds [def-weil-pbc-injective-acyclicity-property]; as $r$ was arbitrary, step 1 ([lemma-weil-pbc-property-iff-acyclicity] for the proper $h$) gives $\\mathrm{PBC}(h)$.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-vanishing-descends-retract",
+    "def-weil-pbc-injective-acyclicity-property",
+    "lemma-weil-pbc-property-iff-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"$\\mathcal I$ is a direct summand of $f_*\\mathcal J$. Thus it suffices to prove the desired vanishing for $f_*\\mathcal J$\") and the opening sentence (equivalence of Lemma 0A4B)"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-proper-composition",
+  "lemma-weil-pbc-property-iff-acyclicity",
+  "def-weil-pbc-injective-acyclicity-property",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
   "lem-weil-pbc-retract-supplied",
-  "lem-weil-pbc-grothendieck-spectral-sequence",
-  "lem-weil-pbc-vanishing-descends-retract",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "def-weil-pbc-etale-sheaves",
   "lemma-weil-pbc-proper-underived-exchange",
-  "lemma-weil-pbc-property-iff-acyclicity"
+  "lem-weil-pbc-grothendieck-spectral-sequence",
+  "lem-weil-pbc-first-quadrant-row-collapse",
+  "lem-weil-pbc-vanishing-descends-retract"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lemma-weil-pbc-cancellation.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper base change holds for g if it holds for f and g ∘ f with f proper surjective, étale cohomology",
+   "results": "AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.stableUnderComposition (Mathlib.AlgebraicGeometry.Morphisms.Proper); AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; RingHom.IsStableUnderBaseChange; MorphismProperty.IsStableUnderBaseChangeAlong.of_isPullback",
+   "date": "2026-10-09",
+   "verdict": "no match (only stability of morphism classes, no étale cohomology base change)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology commutes with base change for g when it does for f and g ∘ f and f is proper surjective (étale higher direct images)",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Modules.pullbackComp, pushforwardComp, conjugateEquiv_pullbackComp_inv (Mathlib.AlgebraicGeometry.Modules.Sheaf); IsProper.isStableUnderBaseChange",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "'ProperBaseChange|properBaseChange|proper base change|0A4C|0A4B|stacks 0A4' in Mathlib/; 'sandwich|cancel' in the source repository WeilConjectures/",
+   "results": "none in Mathlib (no étale higher direct images or base change map); the source repository has no declaration for this lemma (lean_audit none)",
+   "date": "2026-10-09",
+   "verdict": "no match: absent from Mathlib"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -89,5 +201,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lemma-weil-pbc-cancellation",
+  "worker": "stage1",
+  "summary": "Rewrote the proof from Stacks Lemma 0A4C (lemma-sandwich), the cancellation lemma used in the proof of 0A4F, in seven steps each citing the place. Statement: f, h proper, f surjective, PBC(f), PBC(hf) give PBC(h), as in 0A4C; 'proper' and 'surjective' repointed from def-weil-pbc-scheme-conventions to def-weil-proper-morphism and def-weil-surjective-morphism; def-weil-pbc-injective-acyclicity-property removed from stmt_deps (used only in the proof). 'f proper' is used: PBC(f) is defined only for proper f, the IA equivalence for f and the underived exchange (step 4) need it; it is however implied by h and hf proper (Stacks 01W6, h separated), so the hypotheses 'f, h proper' and 'h, hf proper' are equivalent; hf proper follows from f, h proper by lem-weil-pbc-proper-composition (unit sk-thm-br, used as a tool). Checked the cited nodes: the IA equivalence (lemma-weil-pbc-property-iff-acyclicity, proper f) is used for f, hf (proper by composition) and h; lem-weil-pbc-retract-supplied needs only f surjective but does not name the coefficient category (it must be read in F_r-module sheaves); the underived exchange needs f proper and J torsion; the Grothendieck spectral sequence node has no hypotheses on F; lem-weil-pbc-vanishing-descends-retract is used for h' and the summand b^{-1}I, the additivity of b^{-1} being written in step 7. Hidden arguments made explicit: existence of J (new node lem-weil-pbc-module-sheaves-enough-injectives, Stacks 01DU), the identification X' = X x_Z Z' (existing leaf lem-weil-pbc-cartesian-square-pasting), and the collapse of the spectral sequence (new node lem-weil-pbc-first-quadrant-row-collapse). The imported proof's single paragraph is replaced; its uses lemma-weil-pbc-proper-underived-exchange and lemma-weil-pbc-property-iff-acyclicity, previously only in proof_deps, are now cited by steps."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "from Stacks 0A4C; hypotheses checked; 2 new nodes; lem-weil-pbc-proper-composition (sk-thm-br) accepted as a tool use"
+ }
 }

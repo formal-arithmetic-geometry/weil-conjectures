@@ -2,43 +2,166 @@
  "id": "lemma-weil-pbc-target-locality",
  "kind": "statement",
  "title": "Target locality",
- "statement": "For proper $f:X\\to Y$, the assertion $\\mathrm{PBC}(f)$ of\n[def-weil-pbc-property] is local on $Y$ for the etale topology. More\nprecisely, after an etale covering $\\coprod_iV_i\\to Y$, the exchange map is an\nisomorphism if and only if its pullback over every $V_i$ is an isomorphism.",
+ "statement": "Let $f:X\\to Y$ be a proper morphism of schemes [def-weil-proper-morphism] and let $(j_i:V_i\\to Y)_{i\\in I}$ be an etale covering of $Y$: a family of etale morphisms [def-weil-etale-morphism] such that every point of $Y$ lies in the image of some $j_i$. For each $i$ let $X_i=X\\times_YV_i$ [def-pc-fibre-product], with projections $f_i:X_i\\to V_i$ and $j_{X,i}:X_i\\to X$.\n\n(a) *The exchange morphism is etale local on the target.* Let $g:Y'\\to Y$ be a morphism of schemes, $\\square=(f,f',g,g')$ a cartesian square [def-weil-pbc-cartesian-square] with $X'\\cong X\\times_YY'$, and $F\\in\\Ab(X_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]. For each $i$ let $Y'_i=Y'\\times_YV_i$ with projections $k_i:Y'_i\\to Y'$ and $g_i:Y'_i\\to V_i$, let $X'_i=X'\\times_{Y'}Y'_i$ with projections $k_{X,i}:X'_i\\to X'$ and $f'_i:X'_i\\to Y'_i$, and let $g'_i:X'_i\\to X_i$ be the morphism with components $g'k_{X,i}$ and $g_if'_i$. Then $\\square_i=(f_i,f'_i,g_i,g'_i)$ is a cartesian square, and for every $i$ the morphism $k_i^{-1}\\Ex_{\\square,F}$ ($k_i^{-1}$ the derived inverse image [def-weil-pbc-derived-inverse-image]) is an isomorphism if and only if the derived exchange morphism [def-weil-pbc-derived-exchange]\n\n$$\n \\Ex_{\\square_i,\\,j_{X,i}^{-1}F}:g_i^{-1}Rf_{i*}(j_{X,i}^{-1}F)\\longrightarrow Rf'_{i*}\\,g_i'^{-1}j_{X,i}^{-1}F\n$$\n\nis an isomorphism in $\\Dplus(Y'_{i,\\Et})$. Moreover $\\Ex_{\\square,F}:g^{-1}Rf_*F\\to Rf'_*g'^{-1}F$ is an isomorphism in $\\Dplus(Y'_{\\Et})$ [def-weil-pbc-derived-categories] if and only if $\\Ex_{\\square_i,j_{X,i}^{-1}F}$ is an isomorphism for every $i\\in I$.\n\n(b) *$\\mathrm{PBC}$ descends from an etale covering of the target.* Each $f_i$ is proper, and if $\\mathrm{PBC}(f_i)$ [def-weil-pbc-property] holds for every $i\\in I$, then $\\mathrm{PBC}(f)$ holds.\n\nThe converse of (b) is not part of the statement: for $j_i$ etale but not an open immersion, a torsion sheaf on $X_i$ need not be of the form $j_{X,i}^{-1}F$, so (a) does not yield it, and the reduction to an affine base uses only (b), for a Zariski covering by affine opens.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lemma-weil-pbc-target-locality.md",
   "place": "node lemma-weil-pbc-target-locality, order 1190",
   "external": [
    {
     "document": "Stacks Project",
-    "place": "Tag 03Q8"
+    "place": "Tag 0EZR"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A4F, first paragraph of the proof"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0D6G"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03Q8 (cited by the blueprint; not used)"
    }
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-property",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-proper-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-property"
  ],
  "proof": [
   {
-   "text": "By the quasi-compact quasi-separated description of higher direct image, the\nrestriction of $R^qf_*F$ to $V$ is the sheafification of $U\\mapsto\nH^q(X\\times_YU,F|)$, compatible with further etale restriction and with the\ncanonical exchange morphism of [def-weil-pbc-derived-exchange]. Hence the\nexchange map is an isomorphism if and only if it is so on the stalks over an\netale cover, and geometric stalks are conservative.",
+   "text": "*The cube of cartesian squares.* Fix $g:Y'\\to Y$, $\\square=(f,f',g,g')$, $F$ and $i$, and form $Y'_i$, $k_i$, $g_i$, $X'_i$, $k_{X,i}$, $f'_i$ as in the statement. Besides $\\square$ there are three cartesian squares by construction: $\\square_{j_i}=(f,f_i,j_i,j_{X,i})$ (the base change of $f$ along $j_i$), $\\square_{k_i}=(f',f'_i,k_i,k_{X,i})$ (the base change of $f'$ along $k_i$), and the square $(Y'_i\\to V_i\\to Y)$, $(Y'_i\\to Y'\\to Y)$ defining $Y'_i$. Stacking $\\square_{k_i}$ on $\\square$ along $Y'_i\\xrightarrow{k_i}Y'\\xrightarrow{g}Y$, the pasting lemma [lem-weil-pbc-cartesian-square-pasting] shows that the rectangle $R=(f,f'_i,gk_i,g'k_{X,i})$ is cartesian, i.e. $(X'_i,g'k_{X,i},f'_i)$ is a fibre product of $f$ and $gk_i=j_ig_i$. Since $j_{X,i}g'_i=g'k_{X,i}$ and $f_ig'_i=g_if'_i$ by definition of $g'_i$, the rectangle $R$ is also the square $\\square_i$ stacked on $\\square_{j_i}$ along $Y'_i\\xrightarrow{g_i}V_i\\xrightarrow{j_i}Y$; as $\\square_{j_i}$ and $R$ are cartesian, the pasting lemma [lem-weil-pbc-cartesian-square-pasting] gives that $\\square_i$ is cartesian. The chosen identifications [def-weil-pbc-cartesian-square] of $\\square_i$ and of $R$ are the unique isomorphisms to the fibre products compatible with the two projections, so $R$ is one and the same cartesian square for both decompositions. Finally $f_i$, the base change of the proper $f$ along $j_i$, is proper [lem-weil-pbc-proper-base-change], [def-weil-proper-morphism].",
    "uses": [
-    "def-weil-pbc-derived-exchange"
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-weil-pbc-cartesian-square",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma label lemma-base-change-local, Tag 0EZR, part (2) and its proof (with Lemma label lemma-base-change-compose, Tag 0EZS, for composing base change maps), as used in the proof of Lemma label lemma-reduce-to-P1, Tag 0A4F, first paragraph (\"the formation of the higher direct images commutes with Zariski (and even etale) localization on the base\")"
+   }
+  },
+  {
+   "text": "*The base-changed covering.* Each $k_i:Y'_i\\to Y'$ is etale and the family $(k_i)_{i\\in I}$ is jointly surjective, since it is the base change along $g$ of the etale covering $(j_i)_{i\\in I}$ [lem-weil-pbc-etale-covering-base-change]; likewise $j_i$ is etale by hypothesis.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma label lemma-base-change-local, Tag 0EZR (the covering $\\{U_i\\to X\\}$ there is $\\{Y'_i\\to Y'\\}$ here, with $U_i\\to S$ factoring through the etale $V_i\\to S$)"
+   }
+  },
+  {
+   "text": "*Two factorizations of the exchange morphism of $R$.* By the compatibility of the derived exchange morphism with pasting of cartesian squares [lem-weil-pbc-exchange-identity-pasting], applied to the two decompositions of $R$ of step 1 (both are compositions of base changes along the bottom row), and after inserting the canonical associativity isomorphisms $k_i^{-1}g^{-1}\\cong(gk_i)^{-1}=(j_ig_i)^{-1}\\cong g_i^{-1}j_i^{-1}$ and $k_{X,i}^{-1}g'^{-1}\\cong(g'k_{X,i})^{-1}=(j_{X,i}g'_i)^{-1}\\cong g_i'^{-1}j_{X,i}^{-1}$ of derived inverse images [def-weil-pbc-derived-inverse-image], the exchange morphism $\\Ex_{R,F}:(gk_i)^{-1}Rf_*F\\to Rf'_{i*}(g'k_{X,i})^{-1}F$ [def-weil-pbc-derived-exchange] is equal to both composites\n\n$$\n k_i^{-1}g^{-1}Rf_*F\\xrightarrow{k_i^{-1}\\Ex_{\\square,F}}k_i^{-1}Rf'_*g'^{-1}F\\xrightarrow{\\Ex_{\\square_{k_i},\\,g'^{-1}F}}Rf'_{i*}k_{X,i}^{-1}g'^{-1}F\n$$\n\nand\n\n$$\n g_i^{-1}j_i^{-1}Rf_*F\\xrightarrow{g_i^{-1}\\Ex_{\\square_{j_i},F}}g_i^{-1}Rf_{i*}j_{X,i}^{-1}F\\xrightarrow{\\Ex_{\\square_i,\\,j_{X,i}^{-1}F}}Rf'_{i*}g_i'^{-1}j_{X,i}^{-1}F .\n$$",
+   "uses": [
+    "lem-weil-pbc-exchange-identity-pasting",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma label lemma-base-change-compose, Tag 0EZS, and its proof (\"the composition of these base change maps is the base change map for the outer rectangle\", Cohomology on Sites, Remark label remark-compose-base-change-horizontal, Tag 0E47, literature/stacks-project/sites-cohomology.tex)"
+   }
+  },
+  {
+   "text": "*The exchange morphisms along the etale maps are isomorphisms.* Since $j_i$ and $k_i$ are etale (step 2), the exchange morphisms $\\Ex_{\\square_{j_i},F}$ and $\\Ex_{\\square_{k_i},g'^{-1}F}$ are isomorphisms [lem-weil-pbc-etale-localization-exchange] (applied to $f$, $j_i$, $F$ and to $f'$, $k_i$, $g'^{-1}F$; no hypothesis on $f'$ is needed), hence so is $g_i^{-1}\\Ex_{\\square_{j_i},F}$, $g_i^{-1}$ being a functor [def-weil-pbc-derived-inverse-image]. In each of the two composites of step 3 one factor is therefore an isomorphism, and a composite with an isomorphism is an isomorphism iff the other factor is; so $k_i^{-1}\\Ex_{\\square,F}$ is an isomorphism $\\iff$ $\\Ex_{R,F}$ is an isomorphism $\\iff$ $\\Ex_{\\square_i,j_{X,i}^{-1}F}$ is an isomorphism. This is the first assertion of (a).",
+   "uses": [
+    "lem-weil-pbc-etale-localization-exchange",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma label lemma-restrict-direct-image-open, Tag 0D6G, as invoked in the proof of Etale Cohomology, Lemma label lemma-base-change-local, Tag 0EZR (literature/stacks-project/etale-cohomology.tex), last paragraph"
+   }
+  },
+  {
+   "text": "*Checking an isomorphism on the covering.* Write $\\varphi=\\Ex_{\\square,F}$, a morphism of $\\Dplus(Y'_{\\Et})$. By [lem-weil-pbc-derived-plus-iso-on-cohomology] $\\varphi$ is an isomorphism iff $\\mathcal H^r(\\varphi)$ is an isomorphism of $\\Ab(Y'_{\\Et})$ for every $r\\in\\mathbf Z$, and likewise $k_i^{-1}\\varphi$ is an isomorphism iff every $\\mathcal H^r(k_i^{-1}\\varphi)$ is. The derived inverse image $k_i^{-1}$ is computed by applying the exact functor $k_i^{-1}$ termwise to a representing complex [def-weil-pbc-derived-inverse-image] (exactness of $k_i^{-1}$ on sheaves is part of that definition), and an exact functor commutes with the cohomology of complexes, naturally [lem-weil-pbc-exact-functor-complex-cohomology]; hence $\\mathcal H^r(k_i^{-1}\\varphi)$ is identified with $k_i^{-1}\\mathcal H^r(\\varphi)$ up to isomorphisms of source and target. Since $(k_i)_{i\\in I}$ is a jointly surjective family of etale morphisms (step 2), [lem-weil-pbc-etale-cover-detects-iso] shows that $\\mathcal H^r(\\varphi)$ is an isomorphism iff $k_i^{-1}\\mathcal H^r(\\varphi)$ is one for every $i$. Together: $\\Ex_{\\square,F}$ is an isomorphism iff $k_i^{-1}\\Ex_{\\square,F}$ is an isomorphism for every $i$, iff (step 4) $\\Ex_{\\square_i,j_{X,i}^{-1}F}$ is an isomorphism for every $i$. This is the second assertion of (a).",
+   "uses": [
+    "lem-weil-pbc-derived-plus-iso-on-cohomology",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-etale-cover-detects-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma label lemma-base-change-local, Tag 0EZR (\"restricts to an isomorphism over $U_i$ for all $i$ and we conclude it is an isomorphism as $\\{U_i\\to X\\}$ is an etale covering\"; for (2) and (3) via cohomology sheaves); Theorem label theorem-exactness-stalks, Tag 03PU"
+   }
+  },
+  {
+   "text": "*Proof of (b).* Assume $\\mathrm{PBC}(f_i)$ for every $i$; $f_i$ is proper by step 1. Let $g:Y'\\to Y$ be a morphism, $\\square$ a cartesian square completing $f$ and $g$, and $F$ a torsion abelian sheaf on $X_{\\Et}$ [def-weil-pbc-property]. For each $i$, $j_{X,i}^{-1}F$ is a torsion abelian sheaf on $X_{i,\\Et}$ [lem-weil-pbc-inverse-image-torsion], and $\\square_i$ is a cartesian square completing $f_i$ and $g_i$ (step 1); so $\\mathrm{PBC}(f_i)$ says that $\\Ex_{\\square_i,j_{X,i}^{-1}F}$ is an isomorphism. By (a) (step 5), $\\Ex_{\\square,F}$ is an isomorphism. As $g$, $\\square$ and $F$ were arbitrary, $\\mathrm{PBC}(f)$ holds.",
+   "uses": [
+    "def-weil-pbc-property",
+    "lem-weil-pbc-inverse-image-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma label lemma-base-change-local, Tag 0EZR, part (2), applied in the proof of Lemma label lemma-reduce-to-P1, Tag 0A4F, first paragraph"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-cartesian-square-pasting",
+  "def-weil-pbc-cartesian-square",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-exchange-identity-pasting",
   "def-weil-pbc-derived-exchange",
-  "lem-weil-pbc-qcqs-higher-direct-image",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-etale-localization-exchange",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-etale-cover-detects-iso",
+  "def-weil-pbc-property",
+  "lem-weil-pbc-inverse-image-torsion"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lemma-weil-pbc-target-locality.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma label lemma-base-change-local, Tag 0EZR (with Tag 0EZS for the composition of base change maps and Cohomology on Sites, Tag 0D6G, for etale localization of Rf_*), as used in the proof of Lemma label lemma-reduce-to-P1, Tag 0A4F"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper base change property is local on the target for the etale topology",
+   "results": "CategoryTheory.MorphismProperty.IsLocalAtTarget.mk_of_isStableUnderBaseChange, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.IsLocalAtTarget, topologically_isZariskiLocalAtTarget', IsEtale.instIsStableUnderBaseChangeScheme, HasAffineProperty.instTargetAffineLocallyOfIsLocal (locality of morphism properties of schemes; nothing about cohomology or exchange maps)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change of cohomology along a cover: property of a proper morphism local on the target for etale topology, higher direct images commute with etale localization",
+   "results": "IsEtale.instIsStableUnderBaseChangeScheme, MorphismProperty.IsLocalAtTarget.mk_of_isStableUnderBaseChange, IsLocalAtTarget.descendsAlong, IsEtale.instHasOfPostcompProperty..., IsLocalIso.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ProperBaseChange\\|properBaseChange\\|HasTorsionBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rln 'Etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites | xargs grep -ln 'pushforward\\|DerivedCategory'",
+   "results": "none; no derived direct image or exchange morphism on the small etale site in Mathlib (the base change property is AlgebraicGeometry.Etale.HasTorsionBaseChange of the source repository, not Mathlib)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -79,5 +202,11 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lemma-weil-pbc-target-locality",
+  "worker": "stage1",
+  "summary": "Checked against Stacks 0A4F (first paragraph: reduction to affine Y via 'formation of higher direct images commutes with Zariski (and even etale) localization', citing 03Q8) and the lemma that actually carries it, Etale Cohomology 0EZR (base change maps are etale local; proof via 0D6G/03EF and the etale covering) with 0EZS/0E47 (composition of base change maps). The imported statement ('the exchange map is an isomorphism iff its pullback over every V_i is') was made precise: (a) for each square and F, k_i^{-1}Ex_{square,F} iso iff Ex_{square_i, F|X_i} iso, and Ex_{square,F} iso iff all Ex_{square_i,...} iso; (b) PBC(f_i) for all i implies PBC(f); the converse of (b) is not claimed (not provable by this argument for non-open etale V_i, not used). The imported one-step proof via lem-weil-pbc-qcqs-higher-direct-image was replaced: that node gives only the presheaf description of R^q u_* F for qcqs u, not that the identification of j^{-1}R^q f_*F with R^q f_{V*}(F|) is the exchange map, so it is not used (nor is 03Q8); the argument is the pasting of exchange maps (lem-weil-pbc-exchange-identity-pasting) plus a new node for exchange along etale maps (0D6G). 'Proper' repointed from def-weil-pbc-scheme-conventions to def-weil-proper-morphism. New nodes: lem-weil-pbc-etale-localization-exchange (unsplit), lem-weil-pbc-etale-cover-detects-iso (unsplit; Mathlib generalization Sheaf.isIso_iff_of_coversTop recorded), lem-weil-pbc-etale-covering-base-change (Mathlib leaf), lem-weil-pbc-inverse-image-torsion (unsplit). Existing nodes used: lem-weil-pbc-cartesian-square-pasting, lem-weil-pbc-derived-plus-iso-on-cohomology, lem-weil-pbc-exact-functor-complex-cohomology (Mathlib leaves), lem-weil-pbc-proper-base-change. lemma-weil-pbc-geometric-stalk-conservative is used through lem-weil-pbc-etale-cover-detects-iso, as that node's intended route."
+ }
 }

@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-strict-henselization-functoriality",
+ "kind": "statement",
+ "title": "Strict henselizations at a geometric point and their functoriality",
+ "statement": "Let $g:T\\to S$ be a morphism of schemes [def-weil-pbc-scheme-conventions], let $\\bar t:\\operatorname{Spec}\\Omega\\to T$ be a geometric point [def-weil-geometric-point] lying over $t\\in T$, and let $\\bar s=g\\circ\\bar t$, a geometric point of $S$ lying over $s=g(t)$. For a geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to Y$ of a scheme $Y$ lying over $y$, write $\\mathcal O^{\\mathrm{sh}}_{Y,\\bar x}=\\varinjlim_{(V,\\bar v)}A_V$ and $Y_{(\\bar x)}=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{Y,\\bar x}$ as in [def-weil-pbc-strict-henselization-limit] (colimit over the affine pointed etale neighbourhoods $(V=\\operatorname{Spec}A_V,\\bar v)$ of $\\bar x$ [def-weil-pbc-geometric-stalks]), with its canonical maps $Y_{(\\bar x)}\\to V$ and $j_Y:Y_{(\\bar x)}\\to Y$, and write $\\kappa(\\bar x)\\subset\\Omega$ for the separable algebraic closure of the residue field $\\kappa(y)$ [def-weil-residue-field] inside $\\Omega$, which is a $\\kappa(y)$-extension through $\\bar x$. Then:\n\n1. $\\mathcal O^{\\mathrm{sh}}_{Y,\\bar x}$ is a strictly henselian local ring [def-weil-pbc-henselian-terminology]; $j_Y$ maps the closed point to $y$; and there is a unique isomorphism of $\\kappa(y)$-algebras from the residue field of $\\mathcal O^{\\mathrm{sh}}_{Y,\\bar x}$ onto $\\kappa(\\bar x)$ through which $\\bar x$ factors as $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\kappa(\\bar x)\\to Y_{(\\bar x)}\\xrightarrow{j_Y}Y$ (the first map from the inclusion $\\kappa(\\bar x)\\subset\\Omega$, the second the closed point). In particular $\\kappa(\\bar x)$ is separably closed.\n2. Inside $\\Omega$ one has $\\kappa(\\bar s)\\subset\\kappa(\\bar t)$, where $\\kappa(s)$ and $\\kappa(t)$ are embedded in $\\Omega$ through $\\bar s$ and $\\bar t$ (so that $\\kappa(s)\\to\\kappa(t)\\to\\Omega$ is the embedding of $\\kappa(s)$).\n3. There is a unique local ring homomorphism $h:\\mathcal O^{\\mathrm{sh}}_{S,\\bar s}\\to\\mathcal O^{\\mathrm{sh}}_{T,\\bar t}$ such that $j_S\\circ\\operatorname{Spec}h=g\\circ j_T$ and the map induced by $h$ on residue fields is, under the identifications of (1), the inclusion $\\kappa(\\bar s)\\subset\\kappa(\\bar t)$ of (2).\n4. Compatibility with neighbourhoods: let $(V,\\bar v)$ be an affine pointed etale neighbourhood of $\\bar s$ and $(W,\\bar w)$ an affine pointed etale neighbourhood of $\\bar t$ together with a morphism $w:W\\to V$ with $(V\\to S)\\circ w=g\\circ(W\\to T)$ and $w\\circ\\bar w=\\bar v$ (for instance $W$ an affine open of $V\\times_ST$ containing the image of $\\bar w=(\\bar v,\\bar t)$). Then the two morphisms $T_{(\\bar t)}\\to V$, namely $T_{(\\bar t)}\\to W\\xrightarrow{w}V$ and $T_{(\\bar t)}\\xrightarrow{\\operatorname{Spec}h}S_{(\\bar s)}\\to V$, are equal.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 04HX (lemma-describe-etale-local-ring) for (1); Definition Tag 03PS (definition-etale-local-rings) and the paragraph following it (the canonical commutative diagram of strict henselizations for $f:T\\to S$); literature/stacks-project/algebra.tex Lemmas Tags 04GU (lemma-strictly-henselian-functorial) and 08HV (lemma-strictly-henselian-functorial-improve) for (3) and (4); (2) is the statement 'Since $\\kappa(s)^{sep}\\subset\\kappa(t)^{sep}$' in the proof of Theorem Tag 095T (etale-cohomology.tex)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-residue-field",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strict henselization of a local ring at a geometric point, functoriality local homomorphism",
+   "results": "HenselianLocalRing.toIsLocalRing, HenselianLocalRing.mk/casesOn (Mathlib.RingTheory.Henselian); LocallyRingedSpace.Hom.stalkMap, isLocalHomStalkMap' (Mathlib.Geometry.RingedSpace.LocallyRingedSpace); AlgebraicGeometry.SpecToEquivOfLocalRing, Scheme.stalkClosedPointTo (Mathlib.AlgebraicGeometry.Stalk); none constructs a strict henselization",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict henselization of a local ring, strictly henselian local ring with separably closed residue field",
+   "results": "HenselianLocalRing, HenselianLocalRing.TFAE, Field.henselian, instHenselianRingMaximalIdeal (Mathlib.RingTheory.Henselian); no strict henselization",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, IsSepClosed",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rliE 'strict(ly)?[ _]?hensel|StrictHenselization|IsStrictlyHenselian|strictHensel' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none; Mathlib/RingTheory/Henselian.lean has only HenselianLocalRing and HenselianRing; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean has pointSmallEtale (the point of the small etale site given by Spec of a separably closed field) but no etale local ring",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

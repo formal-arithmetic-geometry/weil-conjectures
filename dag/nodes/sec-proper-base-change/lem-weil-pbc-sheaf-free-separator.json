@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-sheaf-free-separator",
+ "kind": "statement",
+ "title": "The coproduct of the sheafified free presheaves on representables with coefficients in a separator is a separator of the sheaf category",
+ "statement": "Let $\\mathcal C$ be a category with a Grothendieck topology $J$, and let $\\mathcal A$ be a preadditive category with all coproducts (of the size of the Hom-sets of $\\mathcal C$) for which sheafification $\\mathrm{PSh}(\\mathcal C;\\mathcal A)\\to\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$ exists. Let $G$ be a separator of $\\mathcal A$ (for $u\\neq v:M\\to N$ there is $h:G\\to M$ with $uh\\neq vh$). For $X\\in\\mathrm{Ob}(\\mathcal C)$ let $G_X^\\#$ be the sheaf associated to the presheaf $V\\mapsto\\bigoplus_{\\varphi\\in\\mathrm{Mor}_{\\mathcal C}(V,X)}G$; then $\\mathrm{Hom}(G_X^\\#,F)\\cong\\mathrm{Hom}_{\\mathcal A}(G,F(X))$ naturally in the sheaf $F$, and whenever the coproduct $\\coprod_{X\\in\\mathrm{Ob}(\\mathcal C)}G_X^\\#$ exists in $\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$ it is a separator of $\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03EW (lemma-module-quotient-flat) part (3) and its proof (every sheaf of modules is a quotient of a direct sum of j_{U!}O_U), with the identification Hom(j_{U!}O_U, F) = F(U) of the equation after Lemma 03DI (equation-map-lower-shriek-OU-into-module); Mathlib CategoryTheory.Sheaf.isSeparator / freeYonedaHomEquiv"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf.freeYoneda separator of the category of sheaves",
+   "results": "CategoryTheory.Sheaf.isSeparating, Sheaf.freeYoneda, Sheaf.isSeparator (Mathlib.CategoryTheory.Generator.Sheaf); Presheaf.isSeparating, Presheaf.freeYoneda (Mathlib.CategoryTheory.Generator.Presheaf)",
+   "date": "2026-10-09",
+   "verdict": "match: Sheaf.isSeparator"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of sheaves on a site has a separator which is flat for the tensor product",
+   "results": "Sheaf.hasSeparator, Sheaf.isSeparator ('Coproduct of Free Yoneda Sheaves from a Separating Family is a Separator'), Sheaf.isSeparating (Mathlib.CategoryTheory.Generator.Sheaf); Sheaf.isSeparated; SheafOfTypes.balanced",
+   "date": "2026-10-09",
+   "verdict": "match: Sheaf.isSeparator for the separator half (no flatness)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasSeparator (CategoryTheory.Sheaf _ _)",
+   "results": "CategoryTheory.Sheaf.hasSeparator only (recorded on the item, same date)",
+   "date": "2026-10-09",
+   "verdict": "match for existence; the explicit object is Sheaf.isSeparator in the same file"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,80p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Generator/Sheaf.lean",
+   "results": "Generator/Sheaf.lean:31 Sheaf.freeYoneda J X M := (presheafToSheaf J A).obj (Presheaf.freeYoneda X M) (Presheaf.freeYoneda X M: Y |-> ∐_{(yoneda.obj X).obj Y} M, Generator/Presheaf.lean:36); :37 freeYonedaHomEquiv : (freeYoneda J X M ⟶ F) ≃ (M ⟶ F.obj.obj (op X)); :43 isSeparating; :55 isSeparator {ι} {S : ι → A} (hS : IsSeparating (ofObj S)) [HasCoproduct (fun (X,i) : C × ι => freeYoneda J X (S i))] [Preadditive A] : IsSeparator (∐ ...); :61 instance hasSeparator (uses ι = Unit, S = separator A)",
+   "date": "2026-10-09",
+   "verdict": "match: CategoryTheory.Sheaf.isSeparator with ι = Unit, S = fun _ => G"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Sheaf.isSeparator",
+  "file": "Mathlib/CategoryTheory/Generator/Sheaf.lean",
+  "how": "specializes in one line: take ι = Unit and S = fun _ => G; IsSeparating (ofObj S) is IsSeparator G (as in the instance Sheaf.hasSeparator, same file); Sheaf.freeYoneda J X G is the sheaf G_X^# and the coproduct over C × Unit is the coproduct over Ob(C); the Hom identification is Sheaf.freeYonedaHomEquiv"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-flat-separator",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

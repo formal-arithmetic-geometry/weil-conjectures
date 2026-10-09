@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-first-quadrant-row-collapse",
+ "kind": "statement",
+ "title": "A first-quadrant spectral sequence concentrated in the row q = 0 collapses",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and let $(E_r^{p,q},d_r)_{r\\ge2}$ be a first-quadrant cohomological spectral sequence in $\\mathcal A$: $E_2^{p,q}=0$ unless $p\\ge0$ and $q\\ge0$, $d_r:E_r^{p,q}\\to E_r^{p+r,q-r+1}$, $d_r\\circ d_r=0$ and $E_{r+1}\\cong\\ker d_r/\\operatorname{im}d_r$. Suppose it converges to a sequence of objects $(H^n)_{n\\ge0}$ of $\\mathcal A$: each $H^n$ carries a finite decreasing filtration [def-sp-filtration] $H^n=F^0H^n\\supseteq F^1H^n\\supseteq\\dots\\supseteq F^{n+1}H^n=0$ with $F^pH^n/F^{p+1}H^n\\cong E_\\infty^{p,n-p}$, where $E_\\infty^{p,q}=E_r^{p,q}$ for $r>\\max(p,q+1)$. If $E_2^{p,q}=0$ for every $q>0$, then for every $n\\ge0$ the edge map $E_2^{n,0}=E_\\infty^{n,0}=F^nH^n\\hookrightarrow H^n$ is an isomorphism $E_2^{n,0}\\cong H^n$. In particular, if moreover $H^n=0$ for every $n>0$, then $E_2^{n,0}=0$ for every $n>0$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Definition 011O (label definition-limit-spectral-sequence: degeneration at $E_r$ and $E_r=E_\\infty$) and Lemma 0132 (label lemma-first-quadrant-ss: first-quadrant spectral sequences are bounded and converge with finite filtrations); used without statement in Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, second paragraph (\"Using the spectral sequence ... we conclude\")"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "first quadrant spectral sequence with E2^{p,q}=0 for q>0 degenerates, abutment H^n isomorphic to E2^{n,0}",
+   "results": "HomologicalComplex₂.d₁_eq_zero, HomologicalComplex₂.D₁_D₁ (Mathlib.Algebra.Homology.TotalComplex); ShortComplex.RightHomologyMapData.ofZeros_φQ, ShortComplex.cyclesIsoLeftHomology (Mathlib.Algebra.Homology.ShortComplex.*); CategoryTheory.Abelian.Ext.mk₀; DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "spectral sequence concentrated in one row collapses; edge map to abutment is isomorphism",
+   "results": "HomologicalComplex.singleObjOpcyclesSelfIso, singleObjHomologySelfIso and variants (Mathlib.Algebra.Homology.SingleHomology): homology of a single-term complex, not spectral sequences",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "'^theorem|^lemma|^def|^structure' in Mathlib/Algebra/Homology/SpectralSequence/*.lean; 'collapse|degenerat' in Mathlib/Algebra/Homology/; 'Grothendieck spectral|Leray' in Mathlib",
+   "results": "Mathlib/Algebra/Homology/SpectralSequence/Basic.lean defines `SpectralSequence` (pages, differentials, iso to homology of previous page), `CohomologicalSpectralSequence`, `E₂CohomologicalSpectralSequenceNat`, page functors and morphisms only; no convergence, abutment, E_∞ or degeneration lemma; no 'collapse'/'degenerat' in Algebra/Homology; no Grothendieck or Leray spectral sequence",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has spectral sequences but no notion of convergence, so the statement is absent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-cancellation",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}
