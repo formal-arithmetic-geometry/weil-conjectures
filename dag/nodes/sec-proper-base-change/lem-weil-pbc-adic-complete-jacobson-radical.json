@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-adic-complete-jacobson-radical",
+ "kind": "statement",
+ "title": "The ideal of a complete ring lies in the Jacobson radical",
+ "statement": "Let $A$ be a commutative ring and $I\\subseteq A$ an ideal such that $A$ is $I$-adically complete [def-weil-pbc-adically-complete-ring]. Then $I$ is contained in the Jacobson radical of $A$: $1+x$ is a unit for every $x\\in I$, equivalently every maximal ideal of $A$ contains $I$. Consequently every nonempty closed subset of $\\operatorname{Spec}A$ meets $V(I)$ (it is $V(J)$ for an ideal $J\\ne A$, and a maximal ideal containing $J$ contains $I$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 05GI (label lemma-radical-completion), part (4), applied to A = A^wedge; the last sentence is the definition of the Zariski topology together with the existence of maximal ideals over a proper ideal"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ideal I of an I-adically complete ring is contained in the Jacobson radical",
+   "results": "IsAdicComplete.le_jacobson_bot (Mathlib.RingTheory.AdicCompletion.Basic); HenselianRing.jac",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, Ideal.jacobson",
+   "results": "IsAdicComplete.le_jacobson_bot : I <= (bot : Ideal R).jacobson (Mathlib.RingTheory.AdicCompletion.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'le_jacobson_bot' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/",
+   "results": "Basic.lean:870 theorem le_jacobson_bot [IsAdicComplete I R] : I <= (bot : Ideal R).jacobson; used for IsAdicComplete.henselianRing (RingTheory/Henselian.lean:170)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsAdicComplete.le_jacobson_bot",
+  "file": "Mathlib/RingTheory/AdicCompletion/Basic.lean",
+  "how": "specializes in one line: `IsAdicComplete.le_jacobson_bot I : I <= (bot).jacobson` (line 870) is the first sentence (the Jacobson radical of A is `(bot : Ideal A).jacobson`, the intersection of the maximal ideals); the consequence for closed subsets is `Ideal.exists_le_maximal` applied to J together with `Ideal.jacobson` being an infimum of maximal ideals"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-etale-lifting-complete",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: IsAdicComplete.le_jacobson_bot (AdicCompletion/Basic.lean:870)."
+ }
+}

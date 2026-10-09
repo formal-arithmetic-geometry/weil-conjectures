@@ -1,23 +1,233 @@
 {
  "id": "lem-weil-pbc-finite-etale-lifting-complete",
  "kind": "statement",
- "title": "Finite etale covers algebraize over a complete Noetherian proper scheme",
- "statement": "Let (A,I) be a Noetherian I-adically complete henselian pair, let Y be proper over Spec A, and let Y_0=Y\\times_A Spec(A/I). Every finite etale Y_0-scheme V is the closed fibre of a finite etale Y-scheme U.",
- "source": {"document": "literature/stacks-project/pione.tex", "place": "Fundamental Groups, Lemma 0GS2, essential-surjectivity proof, complete Noetherian case"},
- "stmt_deps": ["def-weil-pbc-henselian-terminology", "def-weil-proper-morphism", "def-weil-pbc-finite-etale-category"],
- "proof": [],
- "proof_deps": [],
- "proof_origin": {"by": "agent", "document": "literature/stacks-project/pione.tex", "place": "Lemma 0GS2; source file unavailable locally"},
+ "title": "Finite etale covers lift over a complete Noetherian base: proper case",
+ "statement": "Let $A$ be a Noetherian ring and $I\\subseteq A$ an ideal such that $A$ is $I$-adically complete [def-weil-pbc-adically-complete-ring]. Put $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum] and $S_n=\\operatorname{Spec}(A/I^{n+1})$ for $n\\ge0$. Let $f:Y\\to S$ be a proper morphism [def-weil-proper-morphism] and $Y_n=Y\\times_SS_n$ [def-pc-base-change], so that $Y_0=Y\\times_S\\operatorname{Spec}(A/I)$. Then for every finite etale $Y_0$-scheme $V\\to Y_0$ [def-weil-pbc-finite-etale-category] there exist a finite etale $Y$-scheme $U\\to Y$ and an isomorphism of $Y_0$-schemes $U\\times_YY_0\\cong V$. (No henselian hypothesis is assumed: an $I$-adically complete pair is henselian anyway (Stacks, More on Algebra, Lemma 0ALJ), so this is the complete Noetherian case of the essential surjectivity of $\\mathsf{FEt}(Y)\\to\\mathsf{FEt}(Y_0)$ over a henselian pair, but the proof does not use it.)",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups, Lemma 0GS2, essential-surjectivity proof, complete Noetherian case"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-pc-base-change",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof": [
+  {
+   "text": "(The thickenings $Y_m\\subseteq Y_n$.) For $0\\le m\\le n$ the closed immersion $S_m\\to S_n$ is defined by the ideal $I^{m+1}/I^{n+1}$ of $A/I^{n+1}$, whose $(n+1)$-st power is $0$; every prime of $A/I^{n+1}$ contains this nilpotent ideal, so $S_m\\to S_n$ is surjective. By transitivity of fibre products $Y_m=Y\\times_SS_m\\cong Y_n\\times_{S_n}S_m$, so $j_{m,n}:Y_m\\to Y_n$ is the base change of $S_m\\to S_n$ along $Y_n\\to S_n$; hence it is a closed immersion [lem-weil-pbc-closed-immersion-base-change] and surjective [lem-weil-pbc-surjective-base-change]. Its ideal sheaf is $I^{m+1}\\mathcal O_{Y_n}$, whose $(n+1)$-st power is $I^{(m+1)(n+1)}\\mathcal O_{Y_n}=0$ as $I^{n+1}\\mathcal O_{Y_n}=0$; so $Y_m\\subseteq Y_n$ is a finite order thickening [def-sbc-first-order-thickening]. By [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism] each $j_{m,n}$, in particular $j_{n,n+1}:Y_n\\to Y_{n+1}$ and $j_{0,n}:Y_0\\to Y_n$, is a universal homeomorphism.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, Lemma 0GS2 (label lemma-finite-etale-on-proper-over-henselian-pair), proof, paragraph 'Essential surjectivity when A is Noetherian and I-adically complete' (same as the complete local case of Lemma 0A48); 'Let X_n = X x_{Spec A} Spec(A/I^{n+1}) ... the inclusions X_0 -> X_1 -> X_2 -> ...'"
+   }
+  },
+  {
+   "text": "(Lifting $V$ to a compatible system of etale $Y_n$-schemes.) Put $V_0=V$. Given an etale $Y_n$-scheme $V_n$, apply [lemma-weil-pbc-universal-homeomorphism-site-equivalence] to the universal homeomorphism $j_{n,n+1}:Y_n\\to Y_{n+1}$ (step 1): base change along $j_{n,n+1}$ is an equivalence from etale $Y_{n+1}$-schemes to etale $Y_n$-schemes, so there are an etale $Y_{n+1}$-scheme $V_{n+1}$ and an isomorphism of $Y_n$-schemes $V_{n+1}\\times_{Y_{n+1}}Y_n\\cong V_n$. Composing it with the projection gives $V_n\\to V_{n+1}$ over $j_{n,n+1}$, and the square formed by $V_n\\to V_{n+1}$, $V_n\\to Y_n$, $V_{n+1}\\to Y_{n+1}$, $j_{n,n+1}$ is cartesian by construction. By induction and transitivity of fibre products [def-pc-fibre-product], $V_n\\times_{Y_n}Y_0\\cong V$ as $Y_0$-schemes for every $n$. (Stacks cites Etale Morphisms, Theorem 039R, for thickenings with the same underlying space, which is the case here; the DAG node is its generalization to universal homeomorphisms, Stacks 04DZ, whose Lean `AlgebraicGeometry.Scheme.Hom.isEquivalence_etale` is sorry-free on slopmaster2.)",
+   "uses": [
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+    "def-pc-fibre-product",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, Lemma 0GS2 (label lemma-finite-etale-on-proper-over-henselian-pair), proof, paragraph 'Essential surjectivity when A is Noetherian and I-adically complete' (same as the complete local case of Lemma 0A48); 'By Etale Morphisms, Theorem 039R the inclusions ... induce equivalence of categories between the category of schemes etale over X_0 and the category of schemes etale over X_n'"
+   }
+  },
+  {
+   "text": "(Each $V_n\\to Y_n$ is finite.) By step 1, $Y_0\\subseteq Y_n$ is a finite order thickening, and by step 2, $V\\cong Y_0\\times_{Y_n}V_n$ as $Y_0$-schemes, i.e. $V\\to Y_0$ is the base change of $V_n\\to Y_n$. Since $V\\to Y_0$ is finite, [lem-weil-pbc-thickening-finite-cartesian] shows that $V_n\\to Y_n$ is finite. So $(V_n\\to Y_n)_n$ is a system of finite morphisms with cartesian transition squares.",
+   "uses": [
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, Lemma 0GS2 (label lemma-finite-etale-on-proper-over-henselian-pair), proof, paragraph 'Essential surjectivity when A is Noetherian and I-adically complete' (same as the complete local case of Lemma 0A48); 'if U_n -> X_n corresponds to a finite etale morphism U_0 -> X_0, then U_n -> X_n is finite too, for example by More on Morphisms, Lemma 09ZW'"
+   }
+  },
+  {
+   "text": "($V$ is proper over $S_0$.) The projection $Y_0\\to S_0$ is the base change of the proper morphism $f$ along $S_0\\to S$, hence proper [lem-weil-pbc-proper-base-change]. The morphism $V\\to Y_0$ is finite, so the composite $V\\to Y_0\\to S_0$ is proper by [lem-weil-pbc-finite-morphism-permanence] (c).",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, Lemma 0GS2 (label lemma-finite-etale-on-proper-over-henselian-pair), proof, paragraph 'Essential surjectivity when A is Noetherian and I-adically complete' (same as the complete local case of Lemma 0A48); 'In this case the morphism U_0 -> Spec(A/I) is proper as X_0 is proper over A/I'"
+   }
+  },
+  {
+   "text": "(Algebraization.) The proper morphism $f:Y\\to S$ is separated and of finite type [def-weil-proper-morphism]. Apply [lem-weil-pbc-algebraize-finite-over-proper] to $X=Y$ over the complete Noetherian ring $(A,I)$, with $X_n=Y_n$ and the system of finite morphisms $V_n\\to Y_n$ with cartesian squares (steps 2, 3), the hypothesis that $V_0=V$ is proper over $S_0$ being step 4. It gives a finite morphism $g:U\\to Y$ together with isomorphisms of $Y_n$-schemes $U\\times_YY_n\\cong V_n$ compatible with the transition maps, and $U$ is proper over $S$. In particular $U_0:=U\\times_YY_0\\cong V$ as $Y_0$-schemes. (Stacks' index $S_n=\\operatorname{Spec}(A/I^n)$, $n\\ge1$, is ours shifted by one.)",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-algebraize-finite-over-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, Lemma 0GS2 (label lemma-finite-etale-on-proper-over-henselian-pair), proof, paragraph 'Essential surjectivity when A is Noetherian and I-adically complete' (same as the complete local case of Lemma 0A48); 'Thus we may apply Grothendieck's algebraization theorem (in the form of Cohomology of Schemes, Lemma 09ZT) to see that there is a finite morphism U -> X whose restriction to X_0 recovers U_0'"
+   }
+  },
+  {
+   "text": "($g$ is etale along $U_0$.) $S=\\operatorname{Spec}A$ with $A$ Noetherian is locally Noetherian [pqf-def-locnoeth], and $f$ is of finite type, so $Y$ is locally Noetherian [pqf-lem-locnoeth-lft]. The finite morphism $g$ is of finite type: it is affine, hence quasi-compact, and over an affine open $\\operatorname{Spec}R\\subseteq Y$ it is $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ with $B$ a finite $R$-module, hence a finitely generated $R$-algebra [def-weil-finite-integral-morphism, def-weil-finite-type-morphism]. Let $Z=Y_0\\subseteq Y$, the closed subscheme with ideal sheaf $\\mathcal J=I\\mathcal O_Y$ (step 1). Its $n$-th infinitesimal neighbourhood is cut out by $\\mathcal J^{n+1}=I^{n+1}\\mathcal O_Y$ [def-sbc-ideal-sheaf-powers], i.e. it is $Y_n$, and $Y_n\\times_YU\\cong V_n$ is etale over $Y_n$ for all $n$ (steps 2 and 5). By [lem-weil-pbc-etale-infinitesimal-neighbourhoods] there is an open subscheme $W\\subseteq U$ containing $g^{-1}(Y_0)$ with $g|_W:W\\to Y$ etale.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-finite-integral-morphism",
+    "def-weil-finite-type-morphism",
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, Lemma 0GS2 (label lemma-finite-etale-on-proper-over-henselian-pair), proof, paragraph 'Essential surjectivity when A is Noetherian and I-adically complete' (same as the complete local case of Lemma 0A48); 'By More on Morphisms, Lemma 0A43 we see that U -> X is etale at every point of U_0'"
+   }
+  },
+  {
+   "text": "($W=U$.) Let $u\\in U$ and let $T=\\overline{\\{u\\}}$, a nonempty closed subset of $U$. The structure morphism $h=f\\circ g:U\\to S$ is proper (step 5), hence universally closed and in particular a closed map (base change along $\\mathrm{id}_S$) [def-weil-proper-morphism]; so $h(T)$ is a nonempty closed subset of $\\operatorname{Spec}A$. By [lem-weil-pbc-adic-complete-jacobson-radical] it contains a maximal ideal $\\mathfrak m\\supseteq I$; pick $t\\in T$ with $h(t)=\\mathfrak m\\in V(I)$. The underlying set of $Y_0=Y\\times_S\\operatorname{Spec}(A/I)$ is $f^{-1}(V(I))$: over an affine open $\\operatorname{Spec}R\\subseteq Y$ it is $\\operatorname{Spec}(R/IR)$, whose points are the primes of $R$ containing $IR$, i.e. lying over $V(I)$ [lem-weil-pbc-closed-immersion-base-change]. Hence $g(t)\\in Y_0$, so $t\\in g^{-1}(Y_0)\\subseteq W$ (step 6). Since $t\\in\\overline{\\{u\\}}$ and $W$ is an open neighbourhood of $t$, $W$ meets $\\{u\\}$, i.e. $u\\in W$. Thus $W=U$ and $g:U\\to Y$ is etale [def-weil-etale-morphism].",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-affine-spectrum",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, Lemma 0GS2 (label lemma-finite-etale-on-proper-over-henselian-pair), proof, paragraph 'Essential surjectivity when A is Noetherian and I-adically complete' (same as the complete local case of Lemma 0A48); 'However, since every point of U specializes to a point of U_0 (as U is proper over A), we conclude that U -> X is etale' (written out: closed image of a proper morphism, and I in the Jacobson radical of A by Algebra, Lemma 05GI)"
+   }
+  },
+  {
+   "text": "(Conclusion.) $g:U\\to Y$ is finite (step 5) and etale (step 7), so $U$ is a finite etale $Y$-scheme [def-weil-pbc-finite-etale-category], and step 5 gives the isomorphism of $Y_0$-schemes $U\\times_YY_0\\cong V_0=V$.",
+   "uses": [
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, Lemma 0GS2 (label lemma-finite-etale-on-proper-over-henselian-pair), proof, paragraph 'Essential surjectivity when A is Noetherian and I-adically complete' (same as the complete local case of Lemma 0A48); 'In this way we conclude the functor is essentially surjective'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-thickening-finite-cartesian",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-algebraize-finite-over-proper",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-finite-type-morphism",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups, Lemma 0GS2 (pione.tex, label lemma-finite-etale-on-proper-over-henselian-pair), paragraph 'Essential surjectivity when A is Noetherian and I-adically complete'; identical to the complete local case of Lemma 0A48 (line 1622)"
+ },
  "mathlib_searches": [
-  {"tool": "leansearch", "query": "finite etale cover algebraizes from all infinitesimal thickenings of a proper scheme over a complete Noetherian ring", "results": "Scheme.Etale and IsProper: no Grothendieck existence or algebraization theorem", "date": "2026-10-09", "verdict": "no match"},
-  {"tool": "leanfinder", "query": "algebraization compatible finite etale formal scheme proper complete ring", "results": "Scheme.Pullback.carrierEquiv and IsFinite.instSndScheme are unrelated", "date": "2026-10-09", "verdict": "no match"},
-  {"tool": "grep", "query": "rg -n 'Grothendieck|algebraiz|formal scheme|I-adic' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Mathlib", "results": "no scheme-level Grothendieck existence or finite-etale algebraization theorem", "date": "2026-10-09", "verdict": "no match"}
+  {
+   "tool": "leansearch",
+   "query": "finite etale cover algebraizes from all infinitesimal thickenings of a proper scheme over a complete Noetherian ring",
+   "results": "Scheme.Etale and IsProper: no Grothendieck existence or algebraization theorem",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "algebraization compatible finite etale formal scheme proper complete ring",
+   "results": "Scheme.Pullback.carrierEquiv and IsFinite.instSndScheme are unrelated",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'Grothendieck|algebraiz|formal scheme|I-adic' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Mathlib",
+   "results": "no scheme-level Grothendieck existence or finite-etale algebraization theorem",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite etale cover of closed fibre of proper scheme over complete Noetherian ring lifts (Grothendieck existence)",
+   "results": "Algebra.Etale.formallyEtale, Scheme.Etale, IsProper.instOfIsFinite, Algebra.FormallySmooth.exists_lift: no lifting of finite etale covers over a proper base",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "I-adically complete Noetherian ring A, proper scheme over Spec A: finite etale covers of the special fibre lift to finite etale covers",
+   "results": "IsEtale.of_comp, Algebra.Etale.exists_subalgebra_fg, Algebra.IsEtaleAt.comp, StandardEtalePair.instFormallyEtaleRing: unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'algebraiz|Grothendieck existence|formal scheme' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -rn 'henselianRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean",
+   "results": "only the `algebraize` tactic; IsAdicComplete.henselianRing (Henselian.lean:170) gives the root-lifting HenselianRing, not lifting of finite etale schemes over a proper base",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
- "created": {"by": "worker", "item": "lem-weil-pbc-finite-etale-lifting-essential-surjectivity", "date": "2026-10-09"},
- "lean_audit": {"master": {"state": "none", "decls": [], "missing": []}, "slopmaster2": {"state": "none", "decls": [], "missing": []}},
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-etale-lifting-essential-surjectivity",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-etale-lifting-complete",
+  "worker": "stage1",
+  "summary": "Made the statement precise (A Noetherian and I-adically complete, Y_n = Y x_A A/I^{n+1}, U x_Y Y_0 isomorphic to V over Y_0) and dropped the henselian hypothesis, which the proof does not use (complete pairs are henselian, Stacks 0ALJ, noted in the statement). Split along the Stacks 0GS2 complete-Noetherian paragraph (read in pione.tex): thickenings Y_m in Y_n are universal homeomorphisms (new node); lifting V to etale V_n by the closed topological-invariance node lemma-weil-pbc-universal-homeomorphism-site-equivalence (Stacks 04DZ, generalizing the cited 039R; Lean isEquivalence_etale sorry-free); finiteness of V_n by Stacks 09ZW(8) (new node); properness of V over A/I; algebraization by Stacks 09ZT (new node); etaleness along U_0 by Stacks 0A43(2) (new node); etaleness everywhere written out from properness of U over A and I in the Jacobson radical (Stacks 05GI(4), new Mathlib leaf IsAdicComplete.le_jacobson_bot); a definition node for I-adic completeness (Mathlib leaf IsAdicComplete). Tools from other units: lem-weil-pbc-proper-base-change (sk-thm-br), pqf-lem-locnoeth-lft (sk-prop-av-pqf-finite)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Statement made precise and the redundant henselian hypothesis dropped (the proof never uses it; complete pairs are henselian anyway, 0ALJ); eight steps along the complete Noetherian paragraph of Stacks 0GS2/0A48: thickenings are universal homeomorphisms (new node lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism; Lean instance of UniversalHomeomorphism.lean:111 attached, sorry-free, stated for the source repository's definition integral + universally injective + surjective, which the node records alongside the topological one); lifting V to a compatible system via the closed lemma-weil-pbc-universal-homeomorphism-site-equivalence (04DZ, generalizing 039R); finiteness along thickenings (new node lem-weil-pbc-thickening-finite-cartesian, 09ZW (8)); properness of V; algebraization (new node lem-weil-pbc-algebraize-finite-over-proper, Grothendieck existence for finite morphisms, 09ZT); etaleness along U_0 (new node lem-weil-pbc-etale-infinitesimal-neighbourhoods, 0A43 (2)); W = U via I in the Jacobson radical (new Mathlib leaf lem-weil-pbc-adic-complete-jacobson-radical: IsAdicComplete.le_jacobson_bot AdicCompletion/Basic.lean:870, verified) and properness, correcting the parent's 'proper over the local base'; conclusion. New definition leaf def-weil-pbc-adically-complete-ring (IsAdicComplete, Basic.lean:55, @[stacks 0317], verified); it overlaps def-weil-pbc-adic-completion created today by the approximation worker (stage-3 merge candidate). Cited from outside the route without flags: lem-weil-pbc-proper-base-change, pqf-lem-locnoeth-lft, pqf-def-locnoeth, the sk-def-smooth thickening definitions."
+ }
 }

@@ -1,0 +1,69 @@
+{
+ "id": "def-weil-pbc-adically-complete-ring",
+ "kind": "definition",
+ "title": "I-adically complete ring",
+ "statement": "Let $A$ be a commutative ring and $I\\subseteq A$ an ideal. The *$I$-adic completion* of $A$ is $A^\\wedge=\\varprojlim_nA/I^n$ (the inverse limit of the quotient rings along the projections $A/I^{n+1}\\to A/I^n$), with the canonical ring map $A\\to A^\\wedge$, $a\\mapsto(a\\bmod I^n)_n$. The ring $A$ is *$I$-adically complete* if this canonical map is bijective (hence a ring isomorphism); this includes the condition $\\bigcap_nI^n=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition 0317 (label definition-complete), the case M = R"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ring complete with respect to an ideal I: the map to the inverse limit of R/I^n is bijective",
+   "results": "IsAdicComplete (Mathlib.RingTheory.AdicCompletion.Basic); AdicCompletion.of_bijective_iff : Bijective (AdicCompletion.of I M) <-> IsAdicComplete I M; AdicCompletion.ofAlgEquiv",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "I-adically complete ring: Hausdorff and precomplete, equivalently A = lim A/I^n",
+   "results": "isAdicComplete_iff (IsAdicComplete <-> IsHausdorff and IsPrecomplete), IsAdic.isAdicComplete_iff (topological form)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'bijective\\|^class IsAdicComplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/Basic.lean",
+   "results": "class IsAdicComplete (line 56, tagged @[stacks 0317]) extends IsHausdorff, IsPrecomplete; AdicCompletion.of_bijective_iff (line 647)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsAdicComplete",
+  "file": "Mathlib/RingTheory/AdicCompletion/Basic.lean",
+  "how": "specializes in one line: for the ring A as a module over itself, `IsAdicComplete I A` (line 56, tagged Stacks 0317) is equivalent to bijectivity of the canonical map `AdicCompletion.of I A : A -> lim A/I^n A` by `AdicCompletion.of_bijective_iff` (line 647)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-etale-lifting-complete",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf (definition) verified: IsAdicComplete (AdicCompletion/Basic.lean:55, @[stacks 0317]) with of_bijective_iff. Overlaps def-weil-pbc-adic-completion (merge candidate)."
+ }
+}
