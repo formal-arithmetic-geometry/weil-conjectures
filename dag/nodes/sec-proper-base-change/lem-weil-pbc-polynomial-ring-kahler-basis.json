@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-polynomial-ring-kahler-basis",
+ "kind": "statement",
+ "title": "Kähler differentials of a polynomial ring are free on dx_1,...,dx_n",
+ "statement": "Let $R$ be a commutative ring, $n\\ge0$ and $P=R[x_1,\\dots,x_n]$ the polynomial ring. Then the module of Kähler differentials $\\Omega_{P/R}$ [def-weil-pbc-kahler-differentials] is a free $P$-module with basis $\\mathrm dx_1,\\dots,\\mathrm dx_n$, and for every $g\\in P$ one has $\\mathrm dg=\\sum_{k=1}^n\\frac{\\partial g}{\\partial x_k}\\,\\mathrm dx_k$, where $\\partial/\\partial x_k$ is the formal partial derivative of $P$ over $R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00RX (lemma-differentials-polynomial-ring, line 34306): Omega_{S/R} free with basis dx_1,...,dx_n for S = R[x_1,...,x_n]; the formula dg = sum (partial g/partial x_i) dx_i is the content of its proof (the R-derivations partial/partial x_i give the coordinates)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kähler differentials of a polynomial ring form a free module with basis dX_i",
+   "results": "KaehlerDifferential.mvPolynomialEquiv, KaehlerDifferential.mvPolynomialBasis, instFreeMvPolynomialKaehlerDifferential, KaehlerDifferential.mvPolynomialBasis_repr_apply, KaehlerDifferential.mvPolynomialBasis_apply (Mathlib.RingTheory.Kaehler.Polynomial); Algebra.Presentation.differentialsRelations",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module of Kähler differentials of R[x_1,...,x_n] over R is free on dx_1,...,dx_n, with dg = sum of partial derivatives times dx_i",
+   "results": "instFreeMvPolynomialKaehlerDifferential, KaehlerDifferential.mvPolynomialBasis, KaehlerDifferential.mvPolynomialBasis_apply, KaehlerDifferential.mvPolynomialEquiv (Mathlib.RingTheory.Kaehler.Polynomial); Algebra.SubmersivePresentation.free_kaehlerDifferential; Algebra.IsStandardSmooth.free_kaehlerDifferential",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.mvPolynomialBasis",
+   "results": "mvPolynomialBasis : Module.Basis σ (MvPolynomial σ R) Ω[MvPolynomial σ R⁄R]; mvPolynomialBasis_apply (basis i = D (X i)); mvPolynomialBasis_repr_apply (repr (D x) i = MvPolynomial.pderiv i x); mvPolynomialBasis_repr_D, _repr_D_X, _repr_symm_single, _repr_comp_D",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'mvPolynomialBasis' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Kaehler/Polynomial.lean; sed -n 55,85p same file",
+   "results": "line 60 def KaehlerDifferential.mvPolynomialBasis (σ) : Basis σ (MvPolynomial σ R) Ω[MvPolynomial σ R⁄R]; line 79 lemma mvPolynomialBasis_repr_apply : (mvPolynomialBasis R σ).repr (D _ _ x) i = MvPolynomial.pderiv i x",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "KaehlerDifferential.mvPolynomialBasis",
+  "file": "Mathlib/RingTheory/Kaehler/Polynomial.lean",
+  "line": 60,
+  "how": "exact with σ = Fin n: mvPolynomialBasis R (Fin n) is a basis of Ω[MvPolynomial (Fin n) R⁄R] indexed by k with basis vector D (X k) = dx_k (mvPolynomialBasis_apply), and its coordinates of D g are MvPolynomial.pderiv k g (mvPolynomialBasis_repr_apply, line 79), i.e. dg = sum_k (partial g/partial x_k) dx_k"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-ring-map-conormal-criterion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

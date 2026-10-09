@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-polynomial-ring-h1-cotangent-vanishing",
+ "kind": "statement",
+ "title": "H_1 of the naive cotangent complex of a polynomial ring vanishes",
+ "statement": "Let $R$ be a commutative ring, $n\\ge0$ and $P=R[x_1,\\dots,x_n]$ the polynomial ring, an $R$-algebra. Then $H_1(L_{P/R})=0$, where $H_1(L_{P/R})$ is the first homology of the naive cotangent complex $\\mathrm{NL}_{P/R}$ of [def-weil-pbc-smooth-ring-map] (formed with the canonical presentation $R[P]\\to P$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 08Q1 (lemma-NL-polynomial-algebra, line 35391: for a polynomial algebra A -> B, NL_{B/A} is homotopy equivalent to (0 -> Omega_{B/A})), proved from Lemma Tag 00S1 (lemma-NL-homotopy, line 35274) applied to the presentation id_B with zero kernel"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "H1Cotangent of a polynomial algebra MvPolynomial is zero (subsingleton)",
+   "results": "Algebra.mvPolynomial (= instFormallySmoothMvPolynomial, FormallySmooth R (MvPolynomial σ R), Mathlib.RingTheory.Smooth.Basic); Algebra.FormallySmooth.subsingleton_h1Cotangent; Algebra.IsStandardSmooth.subsingleton_h1Cotangent; Algebra.FormallyEtale.subsingleton_h1Cotangent",
+   "date": "2026-10-10",
+   "verdict": "match (instance plus class field)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "first homology of the naive cotangent complex of a polynomial ring over R vanishes; polynomial algebra is formally smooth",
+   "results": "Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.formallySmooth_iff / Algebra.FormallySmooth.iff_subsingleton_and_projective (Projective Ω ∧ Subsingleton (H1Cotangent R A)), Algebra.FormallyEtale",
+   "date": "2026-10-10",
+   "verdict": "match via formallySmooth_iff and the MvPolynomial instance"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subsingleton (Algebra.H1Cotangent _ (MvPolynomial _ _))",
+   "results": "none (the statement is reached through the FormallySmooth instance, not stated separately)",
+   "date": "2026-10-10",
+   "verdict": "no direct statement"
+  },
+  {
+   "tool": "local_search",
+   "query": "Algebra.instFormallySmoothMvPolynomial (project ~/weil-conjectures-slopmaster2)",
+   "results": "Algebra.instFormallySmoothMvPolynomial, instance, .lake/packages/mathlib/Mathlib/RingTheory/Smooth/Basic.lean",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instFormallySmoothMvPolynomial\\|subsingleton_h1Cotangent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Basic.lean; grep -n 'abbrev H1Cotangent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+   "results": "Smooth/Basic.lean:69-72 class FormallySmooth with field subsingleton_h1Cotangent : Subsingleton (H1Cotangent R A) (registered as instance, line 75); :112 instance instFormallySmoothMvPolynomial (σ) : FormallySmooth R (MvPolynomial σ R); Extension/Cotangent/Basic.lean:561 abbrev H1Cotangent R S := (Generators.self R S).toExtension.H1Cotangent (canonical presentation)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.instFormallySmoothMvPolynomial",
+  "file": "Mathlib/RingTheory/Smooth/Basic.lean",
+  "line": 112,
+  "how": "specializes in one line: with σ = Fin n the instance gives FormallySmooth R (MvPolynomial (Fin n) R), whose field FormallySmooth.subsingleton_h1Cotangent (line 72) is Subsingleton (H1Cotangent R (MvPolynomial (Fin n) R)); H1Cotangent R S (Extension/Cotangent/Basic.lean:561) is H_1 of the naive cotangent complex of the canonical presentation Generators.self R S, as in the match of def-weil-pbc-smooth-ring-map"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-ring-map-conormal-criterion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
