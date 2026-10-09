@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.CategoryTheory.SingleObj
 public import WeilConjectures.Mathlib.RingTheory.TotallySplit
+public import Mathlib.Algebra.Category.Ring.Constructions
 
 /-!
 # Quotients of affine schemes by monoid actions
@@ -216,25 +217,147 @@ lemma quotientι_left_appTop_apply (x : Γ(Spec (CommRingCat.of (invariants K)),
       invariantsι K ((ΓSpecIso (CommRingCat.of (invariants K))).hom x) :=
   congr($(toSpecΓ_comp_specMap_appTop _ (invariantsι K)).hom x)
 
+omit [IsAffine X] in
+lemma injective_quotientι_left_appTop :
+    Function.Injective ((K.obj (SingleObj.star G)).left.toSpecΓ ≫
+      Spec.map (invariantsι K)).appTop.hom := by
+  intro x y hxy
+  have := (quotientι_left_appTop_apply K x).symm.trans
+    (hxy.trans (quotientι_left_appTop_apply K y))
+  exact (ΓSpecIso (CommRingCat.of (invariants K))).commRingCatIsoToRingEquiv.injective
+    (Subtype.val_injective this)
+
+omit [IsAffine X] in
+lemma mem_range_quotientι_left_appTop (a : Γ((K.obj (SingleObj.star G)).left, ⊤))
+    (ha : ∀ g : G, (K.map g).left.appTop.hom a = a) :
+    a ∈ Set.range ((K.obj (SingleObj.star G)).left.toSpecΓ ≫
+      Spec.map (invariantsι K)).appTop.hom := by
+  refine ⟨(ΓSpecIso (CommRingCat.of (invariants K))).inv.hom ⟨a, (mem_invariants K).mpr ha⟩, ?_⟩
+  refine (quotientι_left_appTop_apply K _).trans ?_
+  change invariantsι K (((ΓSpecIso (CommRingCat.of (invariants K))).inv ≫
+    (ΓSpecIso (CommRingCat.of (invariants K))).hom).hom _) = _
+  rw [Iso.inv_hom_id]
+  rfl
+
 include hP hP' in
 /-- The quotient cocone is a colimit. -/
-noncomputable def isColimitQuotientCocone : IsColimit (quotientCocone K hP') := by
-  refine isColimitOfInjectiveAppTop hP K _ ?_ ?_
-  · change Function.Injective ((K.obj (SingleObj.star G)).left.toSpecΓ ≫
-      Spec.map (invariantsι K)).appTop.hom
-    intro x y hxy
-    have := (quotientι_left_appTop_apply K x).symm.trans
-      (hxy.trans (quotientι_left_appTop_apply K y))
-    exact (ΓSpecIso (CommRingCat.of (invariants K))).commRingCatIsoToRingEquiv.injective
-      (Subtype.val_injective this)
-  · intro a ha
-    change a ∈ Set.range ((K.obj (SingleObj.star G)).left.toSpecΓ ≫
-      Spec.map (invariantsι K)).appTop.hom
-    refine ⟨(ΓSpecIso (CommRingCat.of (invariants K))).inv.hom ⟨a, (mem_invariants K).mpr ha⟩, ?_⟩
-    refine (quotientι_left_appTop_apply K _).trans ?_
-    change invariantsι K (((ΓSpecIso (CommRingCat.of (invariants K))).inv ≫
-      (ΓSpecIso (CommRingCat.of (invariants K))).hom).hom _) = _
-    rw [Iso.inv_hom_id]
-    rfl
+noncomputable def isColimitQuotientCocone : IsColimit (quotientCocone K hP') :=
+  isColimitOfInjectiveAppTop hP K _ (injective_quotientι_left_appTop K)
+    (mem_range_quotientι_left_appTop K)
+
+include hP hP' in
+/-- Over an affine base, the leg of a colimit cocone of a monoid action on an affine scheme is
+injective on global sections, with image the invariants. -/
+lemma injective_appTop_of_isColimit {c : Cocone K} (hc : IsColimit c) :
+    Function.Injective (c.ι.app (SingleObj.star G)).left.appTop.hom ∧
+      ∀ a, (∀ g : G, (K.map g).left.appTop.hom a = a) →
+        a ∈ Set.range (c.ι.app (SingleObj.star G)).left.appTop.hom := by
+  let e := hc.coconePointUniqueUpToIso (isColimitQuotientCocone hP K hP')
+  have he := hc.comp_coconePointUniqueUpToIso_hom (isColimitQuotientCocone hP K hP')
+    (SingleObj.star G)
+  have heq (x) : ((K.obj (SingleObj.star G)).left.toSpecΓ ≫
+      Spec.map (invariantsι K)).appTop.hom x =
+      (c.ι.app (SingleObj.star G)).left.appTop.hom (e.hom.left.appTop.hom x) := by
+    have := congr($(he).left.appTop.hom x)
+    exact this.symm
+  have hbij : Function.Bijective e.hom.left.appTop.hom :=
+    (Scheme.Γ.mapIso ((MorphismProperty.Over.forget P ⊤ X ⋙ Over.forget X).mapIso
+      e).op).commRingCatIsoToRingEquiv.bijective
+  refine ⟨fun x y hxy ↦ ?_, fun a ha ↦ ?_⟩
+  · obtain ⟨x, rfl⟩ := hbij.2 x
+    obtain ⟨y, rfl⟩ := hbij.2 y
+    rw [injective_quotientι_left_appTop K ((heq x).trans (hxy.trans (heq y).symm))]
+  · obtain ⟨x, hx⟩ := mem_range_quotientι_left_appTop K a ha
+    exact ⟨_, (heq x).symm.trans hx⟩
+
+include hP hP' in
+/-- Over affine schemes, base change along a flat morphism preserves quotients by finite monoid
+actions: the base change of the invariants is computed by flat base change of fixed points
+(`AlgHom.injective_and_mem_range_of_isPushout`). -/
+lemma preservesColimit_pullback [Finite G] {U : Scheme.{u}} [IsAffine U] (f : U ⟶ X) [Flat f]
+    [P.HasPullbacksAlong f] [P.IsStableUnderBaseChangeAlong f] :
+    PreservesColimit K (MorphismProperty.Over.pullback P ⊤ f) := by
+  have hA (W : P.Over ⊤ X) : IsAffine W.left := isAffine_left hP W
+  let c := quotientCocone K hP'
+  have hc := isColimitQuotientCocone hP K hP'
+  refine preservesColimit_of_preserves_colimit_cocone hc ?_
+  let K' := K ⋙ MorphismProperty.Over.pullback P ⊤ f
+  let c' := (MorphismProperty.Over.pullback P ⊤ f).mapCocone c
+  let W := K.obj (SingleObj.star G)
+  let Q := c.pt
+  -- the rings
+  let R := Γ(X, ⊤)
+  let S := Γ(U, ⊤)
+  let A := Γ(W.left, ⊤)
+  let B := Γ(Q.left, ⊤)
+  let A' := Γ(pullback W.hom f, ⊤)
+  let B' := Γ(pullback Q.hom f, ⊤)
+  letI : Algebra R S := f.appTop.hom.toAlgebra
+  letI : Algebra R A := W.hom.appTop.hom.toAlgebra
+  letI : Algebra R B := Q.hom.appTop.hom.toAlgebra
+  letI : Algebra A A' := (pullback.fst W.hom f).appTop.hom.toAlgebra
+  letI : Algebra S A' := (pullback.snd W.hom f).appTop.hom.toAlgebra
+  letI : Algebra R A' := (W.hom.appTop ≫ (pullback.fst W.hom f).appTop).hom.toAlgebra
+  letI : Algebra B B' := (pullback.fst Q.hom f).appTop.hom.toAlgebra
+  letI : Algebra S B' := (pullback.snd Q.hom f).appTop.hom.toAlgebra
+  letI : Algebra R B' := (Q.hom.appTop ≫ (pullback.fst Q.hom f).appTop).hom.toAlgebra
+  have hsqA : W.hom.appTop ≫ (pullback.fst W.hom f).appTop =
+      f.appTop ≫ (pullback.snd W.hom f).appTop := by
+    rw [← Hom.comp_appTop, ← Hom.comp_appTop, pullback.condition]
+  have hsqB : Q.hom.appTop ≫ (pullback.fst Q.hom f).appTop =
+      f.appTop ≫ (pullback.snd Q.hom f).appTop := by
+    rw [← Hom.comp_appTop, ← Hom.comp_appTop, pullback.condition]
+  haveI : IsScalarTower R A A' := .of_algebraMap_eq' rfl
+  haveI : IsScalarTower R S A' := .of_algebraMap_eq' congr($(hsqA).hom)
+  haveI : IsScalarTower R B B' := .of_algebraMap_eq' rfl
+  haveI : IsScalarTower R S B' := .of_algebraMap_eq' congr($(hsqB).hom)
+  have : IsAffine ((𝟭 Scheme).obj W.left) := hA W
+  have : IsAffine ((𝟭 Scheme).obj Q.left) := hA Q
+  have : IsAffine ((Functor.fromPUnit X).obj W.right) := ‹IsAffine X›
+  have : IsAffine ((Functor.fromPUnit X).obj Q.right) := ‹IsAffine X›
+  haveI : Algebra.IsPushout R S A A' :=
+    (CommRingCat.isPushout_iff_isPushout.mp
+      (isPushout_appTop_of_isPullback (IsPullback.of_hasPullback W.hom f))).symm
+  haveI : Algebra.IsPushout R S B B' :=
+    (CommRingCat.isPushout_iff_isPushout.mp
+      (isPushout_appTop_of_isPullback (IsPullback.of_hasPullback Q.hom f))).symm
+  haveI : Module.Flat R S := by
+    have := (HasRingHomProperty.iff_of_isAffine (P := @Flat) (f := f)).mp ‹_›
+    exact RingHom.flat_algebraMap_iff.mpr this
+  -- the leg and the action
+  have hι : Q.hom.appTop ≫ (c.ι.app (SingleObj.star G)).left.appTop = W.hom.appTop := by
+    rw [← Hom.comp_appTop]
+    congr 1
+    exact MorphismProperty.Over.w _
+  let α : B →ₐ[R] A :=
+    { (c.ι.app (SingleObj.star G)).left.appTop.hom with
+      commutes' r := congr($(hι).hom r) }
+  have hσ (g : G) : W.hom.appTop ≫ (K.map g).left.appTop = W.hom.appTop := by
+    rw [← Hom.comp_appTop]
+    congr 1
+    exact MorphismProperty.Over.w _
+  let σ (g : G) : A →ₐ[R] A :=
+    { (K.map g).left.appTop.hom with
+      commutes' r := congr($(hσ g).hom r) }
+  obtain ⟨hinj, hrange⟩ := injective_appTop_of_isColimit hP K hP' hc
+  have e₁ : (c'.ι.app (SingleObj.star G)).left ≫ pullback.fst Q.hom f =
+      pullback.fst W.hom f ≫ (c.ι.app (SingleObj.star G)).left :=
+    pullback.lift_fst _ _ _
+  have e₂ : (c'.ι.app (SingleObj.star G)).left ≫ pullback.snd Q.hom f = pullback.snd W.hom f :=
+    pullback.lift_snd _ _ _
+  have e₁' (g : G) : (K'.map g).left ≫ pullback.fst W.hom f =
+      pullback.fst W.hom f ≫ (K.map g).left :=
+    pullback.lift_fst _ _ _
+  have e₂' (g : G) : (K'.map g).left ≫ pullback.snd W.hom f = pullback.snd W.hom f :=
+    pullback.lift_snd _ _ _
+  obtain ⟨hinj', hrange'⟩ := AlgHom.injective_and_mem_range_of_isPushout (R := R) (S := S)
+    (A := A) (B := B) (A' := A') (B' := B') α hinj
+    (c'.ι.app (SingleObj.star G)).left.appTop.hom
+    (fun y ↦ congr($(e₁).appTop.hom y)) (fun s ↦ congr($(e₂).appTop.hom s))
+    σ (fun g ↦ (K'.map g).left.appTop.hom)
+    (fun g x ↦ congr($(e₁' g).appTop.hom x)) (fun g s ↦ congr($(e₂' g).appTop.hom s))
+    (fun x hx ↦ hrange x (AlgHom.mem_fixedPoints.mp hx))
+  have hA' (W : P.Over ⊤ U) : IsAffine W.left := isAffine_left hP W
+  exact isColimitOfInjectiveAppTop hP K' c' hinj' hrange'
 
 end AlgebraicGeometry.Scheme
