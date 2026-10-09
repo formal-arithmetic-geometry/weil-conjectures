@@ -551,6 +551,78 @@ theorem rightTranslationOp₂_mul_over {v : Scheme.dualNumbersOver S ⟶ G}
     simp only [DualNumber.snd_mulRingHom, snd_inr] at this
     exact this.trans (by simp; rfl)
 
+theorem rightTranslationDeriv_inv {v : Scheme.dualNumbersOver S ⟶ G}
+    (hv : Scheme.dualNumbersιOver S ≫ v = 1) (hv' : Scheme.dualNumbersιOver S ≫ v⁻¹ = 1)
+    (U : G.left.Opens) : rightTranslationDeriv hv' U = -rightTranslationDeriv hv U := by
+  have h1 : Scheme.dualNumbersιOver S ≫ (v * v⁻¹) = 1 := by rw [mul_inv_cancel, MonObj.comp_one]
+  have := rightTranslationDeriv_mul hv hv' h1 U
+  have h0 : rightTranslationDeriv h1 U = 0 := by
+    rw [← rightTranslationDeriv_one (S := S) (G := G) (MonObj.comp_one _) U]
+    exact Scheme.Hom.dualNumbersDeriv_congr _ _ (by rw [mul_inv_cancel]) U
+  rw [h0] at this
+  exact eq_neg_of_add_eq_zero_right this.symm
+
+/-- The operator of the commutator `v_ε w_δ v_ε⁻¹ w_δ⁻¹`, the mixed term `εδ` of which is the
+point `u`, is the commutator `D_v D_w - D_w D_v` of the operators of `v` and `w`: the bracket of
+infinitesimal points is the bracket of left-invariant vector fields. -/
+theorem rightTranslationDeriv_eq_of_mul_eq_commutator {v w u : Scheme.dualNumbersOver S ⟶ G}
+    (hv : Scheme.dualNumbersιOver S ≫ v = 1) (hw : Scheme.dualNumbersιOver S ≫ w = 1)
+    (hu : Scheme.dualNumbersιOver S ≫ u = 1)
+    (h : Scheme.dualNumbersMulOver S ≫ u = (Scheme.dualNumbersProjεOver S ≫ v) *
+      (Scheme.dualNumbersProjδOver S ≫ w) * (Scheme.dualNumbersProjεOver S ≫ v)⁻¹ *
+        (Scheme.dualNumbersProjδOver S ≫ w)⁻¹) (U : G.left.Opens) :
+    rightTranslationDeriv hu U = rightTranslationDeriv hv U * rightTranslationDeriv hw U -
+      rightTranslationDeriv hw U * rightTranslationDeriv hv U := by
+  have hιε : Scheme.dualNumbersιεOver S ≫ Scheme.dualNumbersProjεOver S = 𝟙 _ := by
+    ext1
+    simp [Scheme.dualNumbersιεOver, Scheme.dualNumbersProjεOver]
+  have hιδ : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫
+      Scheme.dualNumbersProjδOver S = Scheme.dualNumbersιOver S := by
+    ext1
+    simp [Scheme.dualNumbersιεOver, Scheme.dualNumbersProjδOver, Scheme.dualNumbersιOver]
+  have hιμ : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫
+      Scheme.dualNumbersMulOver S = Scheme.dualNumbersιOver S := by
+    rw [Scheme.dualNumbersιεOver_comp_dualNumbersMulOver, ← Category.assoc]
+    congr 1
+  have hvε : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫
+      (Scheme.dualNumbersProjεOver S ≫ v) = 1 := by
+    rw [reassoc_of% hιε, hv]
+  have hwδ : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫
+      (Scheme.dualNumbersProjδOver S ≫ w) = 1 := by
+    rw [reassoc_of% hιδ, hw]
+  have hv' : Scheme.dualNumbersιOver S ≫ v⁻¹ = 1 := by rw [GrpObj.comp_inv, hv, inv_one]
+  have hw' : Scheme.dualNumbersιOver S ≫ w⁻¹ = 1 := by rw [GrpObj.comp_inv, hw, inv_one]
+  have hvε' : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫
+      (Scheme.dualNumbersProjεOver S ≫ v⁻¹) = 1 := by
+    rw [reassoc_of% hιε, hv']
+  have hwδ' : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫
+      (Scheme.dualNumbersProjδOver S ≫ w⁻¹) = 1 := by
+    rw [reassoc_of% hιδ, hw']
+  have hι (z : Scheme.dualNumbers₂Over S ⟶ G) (hz : Scheme.dualNumbersιOver S ≫
+      Scheme.dualNumbersιεOver S ≫ z = 1) (z' : Scheme.dualNumbers₂Over S ⟶ G)
+      (hz' : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫ z' = 1) :
+      Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫ (z * z') = 1 := by
+    rw [MonObj.comp_mul, MonObj.comp_mul, hz, hz', mul_one]
+  have hμ : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫
+      (Scheme.dualNumbersMulOver S ≫ u) = 1 := by
+    rw [reassoc_of% hιμ, hu]
+  have h₁ := hι _ hvε _ hwδ
+  have h₂ := hι _ h₁ _ hvε'
+  have h₃ := hι _ h₂ _ hwδ'
+  have hT : rightTranslationOp₂ hμ U = rightTranslationOp₂ hvε U * rightTranslationOp₂ hwδ U *
+      rightTranslationOp₂ hvε' U * rightTranslationOp₂ hwδ' U := by
+    rw [← rightTranslationOp₂_mul hvε hwδ h₁, ← rightTranslationOp₂_mul h₁ hvε' h₂,
+      ← rightTranslationOp₂_mul h₂ hwδ' h₃]
+    exact Scheme.Hom.dualNumbers₂Op_congr _ _ (by
+      rw [h, GrpObj.comp_inv, GrpObj.comp_inv]) U
+  rw [rightTranslationOp₂_mul_over hu, rightTranslationOp₂_projε hv, rightTranslationOp₂_projδ hw,
+    rightTranslationOp₂_projε hv', rightTranslationOp₂_projδ hw', rightTranslationDeriv_inv hv hv',
+    rightTranslationDeriv_inv hw hw'] at hT
+  have := congrArg (fun y : DualNumber (DualNumber (AddMonoid.End Γ(G.left, U))) ↦ y.snd.snd) hT
+  simp at this
+  rw [this]
+  abel
+
 end Two
 
 end GrpObj
