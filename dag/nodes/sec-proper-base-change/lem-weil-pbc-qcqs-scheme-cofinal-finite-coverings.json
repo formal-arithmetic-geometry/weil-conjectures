@@ -11,9 +11,45 @@
   "def-pc-scheme",
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Finite affine refinement.* Let $(V_a)_{a\\in A}$ be an open covering of $X$. For every point $x\\in X$, choose $a(x)\\in A$ with $x\\in V_{a(x)}$. Since the affine opens form a basis, choose an affine open $U_x$ with $x\\in U_x\\subseteq V_{a(x)}$ (Stacks 01IT; in Mathlib this is `AlgebraicGeometry.Scheme.isBasis_affineOpens`, imported from `Mathlib/AlgebraicGeometry/AffineScheme.lean`). The family $(U_x)_{x\\in X}$ covers $X$. Quasi-compactness of $X$ gives a finite subset $J\\subseteq X$ for which $X=\\bigcup_{j\\in J}U_j$ (the finite-subcover operation is Mathlib `IsCompact.elim_finite_subcover`, imported from `Mathlib/Topology/Compactness/Compact.lean`). Thus $(U_j)_{j\\in J}$ is a finite affine open covering refining $(V_a)_{a\\in A}$, via $j\\mapsto a(j)$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01IT (lemma-basis-affine-opens), together with the definition of quasi-compactness; Algebra, Lemma 00E8 supplies quasi-compactness of affine schemes"
+   }
+  },
+  {
+   "text": "*Quasi-compact intersections.* Every $U_j$ is affine, hence quasi-compact (Stacks 00E8; Mathlib `AlgebraicGeometry.IsAffineOpen.isCompact`). Since $X$ is quasi-separated, [pqf-lem-qs-intersection-qc] applied to the quasi-compact opens $U_j$ and $U_{j'}$ shows that $U_j\\cap U_{j'}$ is quasi-compact for every $j,j'\\in J$. Equivalently, one may apply condition (2) of Stacks 01KO directly: the intersection of two affine opens in a quasi-separated scheme is a finite union of affine opens. Therefore every open covering admits a refinement in the stated class, so the finite affine open coverings with quasi-compact pairwise intersections form a cofinal system and satisfy hypothesis (3) of Modules 01BS (and Sheaves 009F (4) for $U=X$).",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "pqf-lem-qs-intersection-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01KO (lemma-characterize-quasi-separated), implication (1) => (2); Algebra, Lemma 00E8 (lemma-quasi-compact)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-lem-qs-intersection-qc"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemmas 01IT and 01KO, with Algebra, Lemma 00E8; their application to Modules 01BS hypothesis (3) is written out"
+ },
+ "tool_uses": [
+  "pqf-lem-qs-intersection-qc"
+ ],
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +74,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,10 +95,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 01IT, 01KO, and 00E8 and split its proof into the finite affine refinement and the quasi-compactness of pairwise intersections. The first step records the exact imported Mathlib declarations for the affine basis and finite-subcover operations; the second reuses the existing public node pqf-lem-qs-intersection-qc. No new node is needed."
+ },
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is finite affine coverings with quasi-compact intersections are cofinal on a qcqs scheme (01IT, 01KO, 00E8); self-contained; correct; unsplit."
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read both steps (affine basis + finite subcover; pqf-lem-qs-intersection-qc for intersections): correct; the E1 review checks the route and tool use. Note for E1: the branch was stacked on the nakayama delivery; L rebased it locally this time, future stacked branches will be returned"
  }
 }
