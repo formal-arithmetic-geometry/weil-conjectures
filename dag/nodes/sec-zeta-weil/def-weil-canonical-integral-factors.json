@@ -2,17 +2,18 @@
  "id": "def-weil-canonical-integral-factors",
  "kind": "definition",
  "title": "Canonical integral cohomological factors",
- "statement": "Let $\\mathscr X=(X_0,d,X)$ be a smooth-proper datum over the finite-field datum $(p,a,q,k_0,k)$, and fix an indeterminate $T$. For every prime $\\ell\\neq p$ let $P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid H^i(X,\\Ql))\\in\\Ql[T]$, $0\\leq i\\leq2d$, be the determinant factors of the smooth-proper cohomological family of $\\mathscr X$, and for $P=\\sum_rc_rT^r\\in\\mathbf Z[T]$ [def-weil-polynomial-ring] write $P^{(\\ell)}=(\\mathbf Z[T]\\to\\Ql[T])(P)=\\sum_r(c_r\\cdot1_{\\Ql})T^r$ for its coefficientwise extension [def-weil-coefficientwise-extension]. By [prop-integral-recovery] there is exactly one tuple $(P_0,\\ldots,P_{2d})\\in\\mathbf Z[T]^{2d+1}$ such that, for every $0\\leq i\\leq2d$, $P_i(0)=1$ and $P_i^{(\\ell)}=P_{i,\\ell}$ for every prime $\\ell\\neq p$; each $P_i$ is an integral realization-independent factor in degree $i$ in the sense of [def-weil-integral-frobenius-factor], normalized by $P_i(0)=1$. The *canonical integral cohomological factor* of $\\mathscr X$ in degree $i$ is the $i$-th member of this tuple, written $P_i(\\mathscr X)$, or simply $P_i$ once $\\mathscr X$ is fixed; thus $P_i(\\mathscr X)\\in\\mathbf Z[T]$ and $P_i(\\mathscr X)(0)=1$. The tuple depends only on $\\mathscr X$: it involves no choice of an algebraic closure of $\\mathbf Q$ or of an embedding comparing algebraic numbers with $\\ell$-adic numbers.",
+ "statement": "Let $\\mathscr X=(X_0,d,X)$ be a smooth-proper datum [def-weil-smooth-proper-datum] over the finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], and fix an indeterminate $T$. For every prime $\\ell\\neq p$ write $\\Ql=\\mathbf Q_\\ell$ for the field of $\\ell$-adic numbers [def-weil-l-adic-numbers], and let $P_{i,\\ell}(T)\\in\\Ql[T]$, $0\\leq i\\leq2d$, be the determinant factors $P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid H^i(X,\\Ql))$ of the smooth-proper cohomological family of $\\mathscr X$ [def-weil-smooth-proper-cohomological-family]. For $P=\\sum_rc_rT^r$ in the polynomial ring $\\mathbf Z[T]$ [def-weil-polynomial-ring] write $P(0)=c_0$ for its constant coefficient and $P^{(\\ell)}=(\\mathbf Z[T]\\to\\Ql[T])(P)=\\sum_r(c_r\\cdot1_{\\Ql})T^r$ for its coefficientwise extension [def-weil-coefficientwise-extension]. By [prop-integral-recovery] there is exactly one tuple $(P_0,\\ldots,P_{2d})\\in\\mathbf Z[T]^{2d+1}$ such that, for every $0\\leq i\\leq2d$, $P_i(0)=1$ and $P_i^{(\\ell)}=P_{i,\\ell}$ for every prime $\\ell\\neq p$; in other words, each $P_i$ is an integral realization-independent factor in degree $i$ in the sense of [def-weil-integral-frobenius-factor], and it is the only one with constant coefficient $1$. The *canonical integral cohomological factor* of $\\mathscr X$ in degree $i$ is the $i$-th member of this tuple, written $P_i(\\mathscr X)$, or simply $P_i$ once $\\mathscr X$ is fixed; thus $P_i(\\mathscr X)\\in\\mathbf Z[T]$, $P_i(\\mathscr X)(0)=1$ and $P_i(\\mathscr X)^{(\\ell)}=P_{i,\\ell}$ for every prime $\\ell\\neq p$. Since the tuple is characterized by a condition in which only $\\mathscr X$, $T$ and the primes $\\ell\\neq p$ occur, it is a function of $\\mathscr X$ alone: no algebraic closure of $\\mathbf Q$ and no embedding comparing algebraic numbers with $\\ell$-adic numbers enters its definition.",
  "source": {
   "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
   "place": "Definition [Canonical integral cohomological factors], label def:canonical-cohomological-factors, lines 3138-3149. The existence and uniqueness it rests on is Proposition [Existence and uniqueness of integral cohomological factors], label prop:integral-factor-existence, lines 3117-3135, whose statement is the first part of the master node prop-integral-recovery (literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-integral-recovery.md). The master blueprint has no file for this definition; thm-weil-final.md refers to it by name."
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
   "def-weil-smooth-proper-datum",
   "def-weil-smooth-proper-cohomological-family",
-  "def-weil-coefficientwise-extension",
   "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-extension",
   "def-weil-integral-frobenius-factor",
   "prop-integral-recovery"
  ],
@@ -33,10 +34,17 @@
    "results": "Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean:292 Matrix.charpolyRev M = det (1 - X • M.map C), with charpoly.reverse = charpolyRev (:295)",
    "date": "2026-10-09",
    "verdict": "no match: this is the shape of one ℓ-adic factor det(1 - T F_{i,ℓ}) once a basis is chosen, not an integral polynomial realized for every ℓ"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def ExistsUnique\\|theorem ExistsUnique.exists\\|theorem ExistsUnique.unique\\|theorem ExistsUnique.choose_eq_iff' Mathlib/Logic/ExistsUnique.lean; grep -n 'noncomputable def choose\\|theorem choose_spec' ~/.elan/toolchains/leanprover--lean4---v4.33.1/src/lean/Init/Classical.lean; grep -n 'theorem map_injective' Mathlib/Algebra/Polynomial/Eval/Coeff.lean",
+   "results": "the construction primitive the definition uses is in core and Mathlib: Classical.choose (Init/Classical.lean:29) with Classical.choose_spec (:32) applied to the existence part of prop-integral-recovery, and ExistsUnique (Mathlib/Logic/ExistsUnique.lean:22) with ExistsUnique.exists (:89), ExistsUnique.unique (:91) and ExistsUnique.choose_eq_iff (:95) for the uniqueness part; Polynomial.map_injective (Mathlib/Algebra/Polynomial/Eval/Coeff.lean:103) is the injectivity of the coefficientwise extension. None of these is the tuple itself: the definition is Classical.choose on the existence statement of prop-integral-recovery, which Mathlib does not contain",
+   "date": "2026-10-09",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -50,5 +58,16 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-canonical-integral-factors",
+  "worker": "stage1",
+  "summary": "Checked the statement against its source, slopmaster2 def:canonical-cohomological-factors (lines 3138-3150: the i-th member of the unique tuple supplied by prop:integral-factor-existence, lines 3117-3135) and against its only user thm-weil-final (reviewed), which reads P_i exactly so. The data of the definition is not hollow: it is the unique tuple (P_0,...,P_{2d}) in Z[T]^{2d+1} with P_i(0)=1 and P_i^{(l)}=P_{i,l} for all l != p, whose existence and uniqueness is stated word for word by the reviewed node prop-integral-recovery ('There are unique polynomials P_i(T) in Z[T] with P_i(0)=1 and P_i^{(l)}=P_{i,l} for every l != p'); in Lean the definition is Classical.choose on that existence statement, with uniqueness making the P_i well defined, and no proof is postponed inside the definition. The statement was kept in substance and reworded only to name every notion where it is used and to turn the closing remark on independence of auxiliary choices into what it is, a consequence of the characterizing condition mentioning nothing but X, T and the primes l != p. Notions named: the finite-field datum (def-weil-finite-field-fiber, kept), the field Q_l (def-weil-l-adic-numbers, Mathlib leaf, added: the statement writes Q_l[T]), the smooth-proper datum (def-weil-smooth-proper-datum, kept), the determinant factors P_{i,l} (def-weil-smooth-proper-cohomological-family, reviewed, which defines them inline; slopmaster2 splits them off as def:frobenius-characteristic-factors, which has no node of its own and needs none), the polynomial ring Z[T] with its constant coefficient (def-weil-polynomial-ring, kept), the coefficientwise extension (def-weil-coefficientwise-extension, kept), the integral realization-independent factor, which the slopmaster2 text does not mention but the master node def-weil-integral-frobenius-factor names as the notion whose unique normalized instance P_i is (kept), and the existence-and-uniqueness statement prop-integral-recovery (kept). The displayed formula det(1 - T F_{i,l} | H^i(X,Q_l)) is the family's own definition of P_{i,l} and is quoted, not built on, so the determinant and cohomology nodes are the family's statement dependencies, not this node's. The tuple indexed by 0..2d and the choice of the unique witness are judged elementary (Fin (2d+1) -> Z[X] and Classical.choose) and got no node; the Mathlib search records where these primitives live. No new node was created: every notion already had one. Mathlib has no Weil polynomial, Frobenius characteristic polynomial or integral factor of the zeta function of a variety over a finite field (two earlier searches plus the one added)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
