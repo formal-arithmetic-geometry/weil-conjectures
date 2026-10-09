@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-etale-quotient-base-change",
+ "kind": "statement",
+ "title": "An etale algebra stays etale modulo an ideal of the base",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings with $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ etale [def-weil-etale-morphism], and $I\\subseteq A$ an ideal. Then $\\operatorname{Spec}(B/IB)\\to\\operatorname{Spec}(A/I)$, induced by the ring map $A/I\\to B/IB$, is etale. (Indeed $B/IB\\cong(A/I)\\otimes_AB$ as $A/I$-algebras.)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00U2 (lemma-etale) (8) (base change of an etale ring map is etale), applied to A -> A/I, with (A/I) ⊗_A B = B/IB (right exactness of the tensor product, Algebra, Lemma Tag 00DF, applied to I -> A -> A/I -> 0); used in More on Algebra, proof of Lemma 0ALH ('Since A/I -> B_g/IB_g is etale')"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale algebra base change to quotient B/IB etale over A/I",
+   "results": "Algebra.Etale.baseChange (RingTheory/Etale/Basic.lean), AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Unramified.baseChange, Algebra.FormallyEtale.comp_bijective, KaehlerDifferential.isBaseChange_of_formallyEtale",
+   "date": "2026-10-10",
+   "verdict": "generalization: Algebra.Etale.baseChange specializes with Algebra.TensorProduct.quotIdealMapEquivQuotTensor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if A → B is etale and I is an ideal of A then A/I → B/IB is etale",
+   "results": "Algebra.IsEtaleAt.comp, StandardEtalePair.instFormallyEtaleRing, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePair.instEtaleRing, RingHom.Etale.toAlgebra",
+   "date": "2026-10-10",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.quotIdealMapEquivQuotTensor",
+   "results": "Algebra.TensorProduct.quotIdealMapEquivQuotTensor : (B ⧸ Ideal.map (algebraMap A B) I) ≃ₐ[A ⧸ I] TensorProduct A (A ⧸ I) B, ..._mk (Mathlib.RingTheory.TensorProduct.Quotient)",
+   "date": "2026-10-10",
+   "verdict": "match for the identification B/IB = (A/I) ⊗_A B"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Etale.*⧸\\|⧸.*Etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; grep -n 'instance baseChange\\|theorem of_equiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale/Basic.lean; read ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/TensorProduct/Quotient.lean:20-90",
+   "results": "no quotient-specific etale lemma; instance Algebra.Etale.baseChange (Etale/Basic.lean:242), Algebra.Etale.of_equiv (Etale/Basic.lean:228), Algebra.TensorProduct.quotIdealMapEquivQuotTensor (TensorProduct/Quotient.lean:72)",
+   "date": "2026-10-10",
+   "verdict": "generalization specializing in one line"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Etale.baseChange, Algebra.TensorProduct.quotIdealMapEquivQuotTensor, Algebra.Etale.of_equiv",
+  "file": "Mathlib/RingTheory/Etale/Basic.lean, Mathlib/RingTheory/TensorProduct/Quotient.lean",
+  "how": "specializes in one line: Algebra.Etale A B gives Algebra.Etale (A ⧸ I) ((A ⧸ I) ⊗[A] B) (instance baseChange, Etale/Basic.lean:242), transported by Algebra.Etale.of_equiv (Etale/Basic.lean:228) along (quotIdealMapEquivQuotTensor B I).symm : (A ⧸ I) ⊗[A] B ≃ₐ[A ⧸ I] B ⧸ I.map (algebraMap A B) (TensorProduct/Quotient.lean:72); Spec-etale ↔ Algebra.Etale by RingHom.etale_algebraMap (RingHom/Etale.lean:37) and HasRingHomProperty.Spec_iff with HasRingHomProperty @Etale RingHom.Etale (Morphisms/Etale.lean:56), as in lem-weil-pbc-etale-ring-base-change. Sources read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lift-monic-coprime-factorization-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf Algebra.Etale.baseChange + Algebra.TensorProduct.quotIdealMapEquivQuotTensor + Etale.of_equiv; checked."
+ }
+}

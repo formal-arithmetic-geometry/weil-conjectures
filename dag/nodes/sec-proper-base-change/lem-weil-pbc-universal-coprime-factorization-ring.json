@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-universal-coprime-factorization-ring",
+ "kind": "statement",
+ "title": "The universal ring of coprime monic factorizations of a monic polynomial is etale",
+ "statement": "Let $A$ be a commutative ring, $m,k\\ge0$ integers, $n=m+k$, and $f\\in A[x]$ a polynomial whose coefficient of $x^n$ is $1$ and whose coefficients of $x^i$, $i>n$, are $0$ (monic of degree $n$; call such a polynomial of $C[x]$, for a ring $C$, *monic of degree exactly $n$*, a condition that is empty when $C=0$). Then there are an $A$-algebra $B$ and polynomials $G,H\\in B[x]$, monic of degree exactly $m$ and $k$ respectively, such that: (1) $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism]; (2) $f=GH$ in $B[x]$ and $G,H$ generate the unit ideal of $B[x]$; (3) for every commutative $A$-algebra $C$, the map $\\varphi\\mapsto(\\varphi(G),\\varphi(H))$ ($\\varphi$ applied coefficientwise) is a bijection from the set of $A$-algebra homomorphisms $B\\to C$ onto the set of pairs $(g,h)$ of polynomials in $C[x]$, monic of degree exactly $m$ and $k$, with $gh=f$ in $C[x]$ and $g,h$ generating the unit ideal of $C[x]$. (Concretely $B=(A\\otimes_{\\mathbf Z[a_1,\\dots,a_n]}\\mathbf Z[b_1,\\dots,b_m,c_1,\\dots,c_k])[1/\\Delta]$ with $\\Delta=\\operatorname{Res}_x(G,H)$, Stacks Algebra Example 00UA, as in the proof of More on Algebra 0ALH.)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Example Tag 00UA (example-factor-polynomials-etale: R -> S[1/Res(g,h)] is etale) base changed along a_i -> alpha_i as in More on Algebra, proof of Lemma Tag 0ALH (more-algebra.tex)"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal ring representing factorizations of a monic polynomial into coprime monic factors is etale",
+   "results": "Polynomial.instEtaleUniversalCoprimeFactorizationRing, Algebra.instEtaleOfIsStandardEtale, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, MvPolynomial.universalFactorizationMapLiftEquiv, Polynomial.UniversalFactorizationRing.factor₁, Polynomial.UniversalCoprimeFactorizationRing (Mathlib.RingTheory.Polynomial.UniversalFactorizationRing)",
+   "date": "2026-10-10",
+   "verdict": "match: Polynomial.instEtaleUniversalCoprimeFactorizationRing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ring representing coprime monic factorizations p = f g of a monic polynomial, algebra homomorphisms correspond to factorizations, etale over base",
+   "results": "Polynomial.instEtaleUniversalCoprimeFactorizationRing, UniversalCoprimeFactorizationRing.factor₁, .factor₂, .homEquiv, Polynomial.instAlgebraUniversalFactorizationRing",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.UniversalCoprimeFactorizationRing.homEquiv",
+   "results": "UniversalCoprimeFactorizationRing.homEquiv : (UniversalCoprimeFactorizationRing m k hn p →ₐ[R] S) ≃ { q // q.1 * q.2 = map (algebraMap R S) p ∧ IsCoprime q.1 q.2 }, homEquiv_comp_fst, homEquiv_comp_snd",
+   "date": "2026-10-10",
+   "verdict": "match for clause (3)"
+  },
+  {
+   "tool": "grep",
+   "query": "read ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean lines 380-715; grep -rn 'MonicDegreeEq' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Monic.lean",
+   "results": "UniversalCoprimeFactorizationRing (abbrev :543, Localization.Away of the jacobian = (-1)^n Res(factor₁,factor₂), jacobian_resentation :518), factor₁/factor₂ (:549/:553), factor₁_mul_factor₂ (:557), isCoprime_factor₁_factor₂ (:562), instance Algebra.Etale R _ (:574), homEquiv (:591, toFun f = (factor₁.map f, factor₂.map f)), homEquiv_comp_fst/snd (:629/:637); Polynomial.MonicDegreeEq R n := {p // p.coeff n = 1 ∧ ∀ i > n, p.coeff i = 0} (Monic.lean:234); no @[stacks 00UA/0ALH] tag",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.UniversalCoprimeFactorizationRing, Polynomial.UniversalCoprimeFactorizationRing.factor₁, .factor₂, .factor₁_mul_factor₂, .isCoprime_factor₁_factor₂, Polynomial.instEtaleUniversalCoprimeFactorizationRing, Polynomial.UniversalCoprimeFactorizationRing.homEquiv (with homEquiv_comp_fst/snd for naturality)",
+  "file": "Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean",
+  "how": "one declaration per clause, with p : MonicDegreeEq A n the polynomial f (MonicDegreeEq, Algebra/Polynomial/Monic.lean:234, is 'monic of degree exactly n' as in the statement), hn : n = m + k, B = UniversalCoprimeFactorizationRing m k hn p (:543), G = factor₁ (:549), H = factor₂ (:553): (1) instance Algebra.Etale A B (:574), turned into Spec B → Spec A etale by RingHom.etale_algebraMap (RingTheory/RingHom/Etale.lean:37) and HasRingHomProperty.Spec_iff (AlgebraicGeometry/Morphisms/RingHomProperties.lean:360) with instance HasRingHomProperty @Etale RingHom.Etale (AlgebraicGeometry/Morphisms/Etale.lean:56), as in the leaf lem-weil-pbc-etale-ring-base-change; (2) factor₁_mul_factor₂ (:557) and isCoprime_factor₁_factor₂ (:562; IsCoprime G H is 'generate the unit ideal'); (3) homEquiv C (:591), whose forward map is φ ↦ (factor₁.map φ, factor₂.map φ). Sources read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lift-monic-coprime-factorization-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause in RingTheory/Polynomial/UniversalFactorizationRing.lean (Stacks 00UA); checked."
+ }
+}

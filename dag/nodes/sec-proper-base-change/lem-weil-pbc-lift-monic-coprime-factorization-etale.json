@@ -10,9 +10,92 @@
  "stmt_deps": [
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Degrees and the universal ring (Stacks: 'Say $\\deg\\bar g=n$, $\\deg\\bar h=m$ ... consider $R\\to S$ of Algebra, Example 00UA ... set $B=A\\otimes_RS$').* Choose integers $m,k\\ge0$: if $A/I\\neq0$, $m=\\deg\\bar g$ and $k=\\deg\\bar h$; then $\\bar f=\\bar g\\bar h$ is monic of degree $m+k$ (product of monic polynomials over a nonzero ring), and since $f$ is monic and $A/I\\ne0$, $\\deg f=\\deg\\bar f=m+k$. If $A/I=0$, take $m=\\deg f$, $k=0$. Put $n=m+k=\\deg f$. In both cases $f$ is monic of degree exactly $n$, and $\\bar g,\\bar h$ are monic of degree exactly $m,k$ in the sense of [lem-weil-pbc-universal-coprime-factorization-ring] (over the zero ring that condition is empty). Let $B$, $G,H\\in B[x]$ be the $A$-algebra and polynomials of [lem-weil-pbc-universal-coprime-factorization-ring] for $(A,m,k,f)$: $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale, $f=GH$ in $B[x]$, and $A$-algebra maps $B\\to C$ correspond to coprime factorizations of $f$ over $C$ by $\\varphi\\mapsto(\\varphi(G),\\varphi(H))$. (Stacks uses $B=A\\otimes_RS$ and later a localization $B_g$ chosen by More on Algebra 07M0 near $V(J)$; here $B$ is already the localization $(A\\otimes_RS)[1/\\operatorname{Res}(G,H)]$, etale over $A$ everywhere by Algebra Example 00UA, so 07M0 is not needed: the resultant maps to a unit of $A/I$ in step 2 because $\\bar g,\\bar h$ are coprime, which is what 07M0's $g$ provides.)",
+   "uses": [
+    "lem-weil-pbc-universal-coprime-factorization-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0ALH (lemma-lift-factorization-monic)"
+   }
+  },
+  {
+   "text": "*The point $B\\to A/I$ (Stacks: 'The $A$-algebra map $B\\to A/I$, $1\\otimes b_i\\mapsto\\bar\\beta_i$, $1\\otimes c_i\\mapsto\\bar\\gamma_i$ maps $g_B,h_B$ to $\\bar g,\\bar h$. The displayed map is surjective').* $A/I$ is an $A$-algebra, $\\bar g,\\bar h\\in(A/I)[x]$ are monic of degree exactly $m,k$ (step 1), $\\bar g\\bar h=\\bar f$ and $\\bar g,\\bar h$ generate the unit ideal. By [lem-weil-pbc-universal-coprime-factorization-ring] (3) with $C=A/I$ there is a unique $A$-algebra map $\\varphi:B\\to A/I$ with $\\varphi(G)=\\bar g$ and $\\varphi(H)=\\bar h$. It is surjective, since already its restriction along $A\\to B$ is the quotient map $A\\to A/I$. As $\\varphi$ is $A$-linear, $\\varphi(IB)=I\\cdot(A/I)=0$, so $\\varphi$ induces a homomorphism of $A/I$-algebras $s:\\bar B:=B/IB\\to A/I$ with $s(\\bar y)=\\varphi(y)$ for $y\\in B$.",
+   "uses": [
+    "lem-weil-pbc-universal-coprime-factorization-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0ALH (lemma-lift-factorization-monic)"
+   }
+  },
+  {
+   "text": "*$\\bar B$ is etale over $A/I$ and $s$ splits off an idempotent (Stacks: 'Since $A/I\\to B_g/IB_g$ is etale, also $B_g/IB_g\\to A/I$ is etale (Algebra 00U7). Hence there exists an idempotent $e\\in B_g/IB_g$ such that $A/I=(B_g/IB_g)_e$ (Algebra 00U8)').* Since $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale (step 1), $\\operatorname{Spec}\\bar B\\to\\operatorname{Spec}(A/I)$ is etale [lem-weil-pbc-etale-quotient-base-change]. Apply [lem-weil-pbc-etale-section-idempotent-splitting] to $R=A/I$, $S=\\bar B$ and the $A/I$-algebra map $s$ of step 2 (that node contains the steps 00U7 and 00U8 of Stacks): there is an idempotent $\\bar e\\in\\bar B$ with $s(\\bar e)=1$, $\\ker s=(1-\\bar e)\\bar B$, and $s$ induces an isomorphism of $A/I$-algebras $\\sigma:\\bar B_{\\bar e}\\xrightarrow{\\sim}A/I$, $\\bar y/\\bar e^r\\mapsto s(\\bar y)$.",
+   "uses": [
+    "lem-weil-pbc-etale-quotient-base-change",
+    "lem-weil-pbc-etale-section-idempotent-splitting",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0ALH (lemma-lift-factorization-monic)"
+   }
+  },
+  {
+   "text": "*The ring $A'$ and its etaleness (Stacks: 'Choose a lift $h\\in B_g$ of $e$. Then $A\\to A'=(B_g)_h$ ...').* Choose $b\\in B$ whose image in $\\bar B=B/IB$ is $\\bar e$ (the quotient map is surjective), and put $A'=B_b$ (localization at $\\{1,b,b^2,\\dots\\}$), an $A$-algebra via $A\\to B\\to B_b$. $\\operatorname{Spec}B_b\\to\\operatorname{Spec}B$ is an open immersion [lem-weil-pbc-principal-localization-open-immersion], hence etale [lem-weil-pbc-etale-composition-cancellation] (1); $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale (step 1); and $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ is their composite (functoriality of $\\operatorname{Spec}$), hence etale [lem-weil-pbc-etale-composition-cancellation] (2).",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0ALH (lemma-lift-factorization-monic)"
+   }
+  },
+  {
+   "text": "*$A/I\\to A'/IA'$ is an isomorphism (Stacks: implicit in 'is a solution to the problem').* The ideal $IA'$ is the extension to $B_b$ of $J=IB\\subseteq B$ (both are generated by the images of the elements of $I$). By [lem-weil-pbc-localization-quotient-commute] (with $B$, $J=IB$, $b$) the map $\\bar B\\to A'/IA'$ induced by $B\\to B_b$ makes $A'/IA'$ the localization of $\\bar B$ at the powers of $\\bar e$; so there is an isomorphism $\\lambda:\\bar B_{\\bar e}\\xrightarrow{\\sim}A'/IA'$, $\\bar y/\\bar e^r\\mapsto[y/b^r]$. Put $\\psi=\\sigma\\circ\\lambda^{-1}:A'/IA'\\xrightarrow{\\sim}A/I$ (step 3), an isomorphism with $\\psi([y/b^r])=\\varphi(y)$ for $y\\in B$ (as $s(\\bar e)=1$). Let $\\alpha:A/I\\to A'/IA'$ be the map induced by $A\\to A'$, i.e. $\\alpha(\\bar a)=[a\\cdot1]$. For $a\\in A$, $\\psi(\\alpha(\\bar a))=\\varphi(a\\cdot1_B)=\\bar a$ since $\\varphi$ is an $A$-algebra map. So $\\psi\\circ\\alpha=\\mathrm{id}_{A/I}$, and since $\\psi$ is bijective, $\\alpha=\\psi^{-1}$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-commute"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0ALH (lemma-lift-factorization-monic)"
+   }
+  },
+  {
+   "text": "*The factorization (Stacks: 'with factorization given by the image of the factorization $f_B=g_Bh_B$ in $A'$').* Let $\\iota:B\\to A'=B_b$ be the localization map, an $A$-algebra map, and put $g'=\\iota(G)$, $h'=\\iota(H)$ (coefficientwise). Since $G,H$ are monic of degree exactly $m,k$, so are $g',h'$; in particular $g',h'$ are monic (in the zero ring every polynomial is monic). Applying $\\iota$ to $f=GH$ gives $f=g'h'$ in $A'[x]$ ($\\iota$ restricted to $A$ is the structure map). Reduction modulo $IA'$: let $\\pi:A'\\to A'/IA'$ be the quotient map. Then $\\psi\\circ\\pi\\circ\\iota=\\varphi$ on $B$ (step 5: $\\psi([y/1])=\\varphi(y)$). Hence, coefficientwise, $\\psi(\\pi(g'))=\\varphi(G)=\\bar g$ and $\\psi(\\pi(h'))=\\varphi(H)=\\bar h$ (step 2), so $\\pi(g')=\\psi^{-1}(\\bar g)=\\alpha(\\bar g)$ and $\\pi(h')=\\alpha(\\bar h)$. Together with steps 4 and 5 this proves the lemma. (In Lean: the images of $g'$ mod $IA'$ are the first component of homEquiv applied to $\\pi\\circ\\iota$, and homEquiv_comp_fst/snd with $\\psi$ give the comparison, as recorded on [lem-weil-pbc-universal-coprime-factorization-ring].)",
+   "uses": [
+    "lem-weil-pbc-universal-coprime-factorization-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0ALH (lemma-lift-factorization-monic)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-quotient-base-change",
+  "lem-weil-pbc-etale-section-idempotent-splitting",
+  "lem-weil-pbc-localization-quotient-commute",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-universal-coprime-factorization-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 0ALH, proof; with one substitution at node level: Stacks' B_g (g chosen by Lemma 07M0 near V(J)) is replaced by the localization of B = A ⊗_R S at the resultant, etale over A by Algebra Example 00UA (the ring Mathlib uses, Polynomial.UniversalCoprimeFactorizationRing)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,7 +127,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,6 +152,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks 0ALH (monic coprime factorizations lift after an etale A → A′ with A/I ≅ A′/IA′); correct; unsplit; Mathlib route recorded."
+  "note": "Six steps along Stacks 0ALH with Mathlib′s universal coprime factorization ring in place of Stacks′ localization by 07M0 (new leaf lem-weil-pbc-universal-coprime-factorization-ring: UniversalCoprimeFactorizationRing :543, Etale instance :574, factor₁_mul_factor₂, isCoprime, homEquiv :591; checked), the point B → A/I, B/IB etale over A/I (new leaf lem-weil-pbc-etale-quotient-base-change: Etale.baseChange Etale/Basic.lean:242 + quotIdealMapEquivQuotTensor TensorProduct/Quotient.lean:72; checked), the idempotent from the reviewed lem-weil-pbc-etale-section-idempotent-splitting, A′ = B_b etale, A/I ≅ A′/IA′ via the new leaf lem-weil-pbc-localization-quotient-commute (also cited by the committed 09ZC split), the factorization with the A/I = 0 case handled. Checked."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-lift-monic-coprime-factorization-etale",
+  "worker": "stage1",
+  "summary": "Read Stacks 0ALH and its proof (more-algebra.tex:1843-1890), Algebra Example 00UA (the resultant; R -> S[1/Res] etale) and Mathlib's RingTheory/Polynomial/UniversalFactorizationRing.lean:380-715. Statement kept (it is 0ALH; the A/I = 0 case is covered by the choice of degrees in step 1, since 'monic of degree exactly n' is empty over the zero ring). Proof in six steps following Stacks: universal coprime factorization ring B (new Mathlib leaf lem-weil-pbc-universal-coprime-factorization-ring: UniversalCoprimeFactorizationRing, its Etale instance and homEquiv), the point phi: B -> A/I, B/IB etale over A/I (new Mathlib leaf lem-weil-pbc-etale-quotient-base-change: Algebra.Etale.baseChange + quotIdealMapEquivQuotTensor) and the idempotent from the reviewed lem-weil-pbc-etale-section-idempotent-splitting (which carries Stacks' 00U7/00U8 steps), A' = B_b for a lift b of the idempotent (etale by the reviewed leaves principal-localization-open-immersion and etale-composition-cancellation), A'/IA' = (B/IB)_e = A/I (new Mathlib leaf lem-weil-pbc-localization-quotient-commute: Stacks 00CT, Localization/Ideal.lean:391 instance), and the factors as images of the universal ones. Stacks' Lemma 07M0 is not needed: Mathlib's B is already localized at the resultant, globally etale (noted in step 1). Mathlib searched three ways for the item: no statement of 0ALH (no @[stacks 0ALH]). Source repository: no declaration mentions UniversalCoprimeFactorization, 0ALH or 07M0."
  }
 }

@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-localization-quotient-commute",
+ "kind": "statement",
+ "title": "Localization at an element commutes with passing to a quotient",
+ "statement": "Let $B$ be a commutative ring, $J\\subseteq B$ an ideal, $b\\in B$ with image $\\bar b\\in B/J$, and $B_b$ the localization at $\\{1,b,b^2,\\dots\\}$. Then the ring map $B/J\\to B_b/JB_b$ induced by $B\\to B_b$ makes $B_b/JB_b$ a localization of $B/J$ at $\\{1,\\bar b,\\bar b^2,\\dots\\}$: there is a unique ring isomorphism $(B/J)_{\\bar b}\\xrightarrow{\\sim}B_b/JB_b$ sending $\\bar x/\\bar b^n$ to the class of $x/b^n$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Proposition Tag 00CT (proposition-localize-quotient) (localization is exact; S^{-1}(B/J) = S^{-1}B/S^{-1}J), used in More on Algebra, proof of Lemma 0ALH ('A' = (B_g)_h ... A'/IA' = (B_g/IB_g)_e')"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of quotient ring equals quotient of localization S_b / I S_b is localization of S/I",
+   "results": "IsLocalization.of_surjective (RingTheory/Localization/Ideal.lean), localizedQuotientEquiv, IsLocalization.Away.mvPolynomialQuotientEquiv, IsLocalization.isLocalization_iff_of_ringEquiv, quotMapEquivQuotMapMaximalIdealOfIsLocalization",
+   "date": "2026-10-10",
+   "verdict": "match via the instance built from IsLocalization.of_surjective (Localization/Ideal.lean:391)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for an ideal I of R and a submonoid M, the quotient S/IS of a localization S = M^{-1}R is the localization of R/I at the image of M",
+   "results": "quotMapEquivQuotMapMaximalIdealOfIsLocalization, Algebra.idealMap_eq_ofEq_comp_toLocalized₀, Algebra.idealMap_isLocalizedModule, IsLocalization.AtPrime.exists_algebraMap_quot_eq_of_mem_quot, Ideal.localized'_eq_map",
+   "date": "2026-10-10",
+   "verdict": "no direct match (prime/module variants)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'algebraMapSubmonoid (R ⧸ I)' -r ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization; grep -rn 'lemma algebraMapSubmonoid_powers' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "instance IsLocalization (Algebra.algebraMapSubmonoid (R ⧸ I) M) (S ⧸ I.map (algebraMap R S)) (Localization/Ideal.lean:391-394, auto-named IsLocalization.instQuotientIdealAlgebraMapSubmonoidMapRingHomAlgebraMap as recorded in the reviewed leaf lem-weil-pbc-lift-invertible-element); Algebra.algebraMapSubmonoid_powers (Algebra/Algebra/Basic.lean:138)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.instQuotientIdealAlgebraMapSubmonoidMapRingHomAlgebraMap, Algebra.algebraMapSubmonoid_powers, IsLocalization.algEquiv",
+  "file": "Mathlib/RingTheory/Localization/Ideal.lean, Mathlib/Algebra/Algebra/Basic.lean, Mathlib/RingTheory/Localization/Basic.lean",
+  "how": "specializes in one line: the instance at Localization/Ideal.lean:391 with R = B, M = powers b, S = Localization.Away b, I = J says B_b ⧸ J.map _ is the localization of B ⧸ J at algebraMapSubmonoid (B ⧸ J) (powers b) = powers b̄ (Algebra.algebraMapSubmonoid_powers); the isomorphism with Localization.Away b̄ is IsLocalization.algEquiv (Localization/Basic.lean:172). Sources read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lift-monic-coprime-factorization-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: IsLocalization quotient instance (Localization/Ideal.lean:391), algebraMapSubmonoid_powers, IsLocalization.algEquiv; Stacks 00CT; accepted."
+ }
+}
