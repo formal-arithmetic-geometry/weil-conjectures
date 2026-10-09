@@ -2,17 +2,90 @@
  "id": "def-weil-pbc-site-plus-construction",
  "kind": "definition",
  "title": "Zeroth Cech set of a covering and the plus construction of a presheaf of sets on a site",
- "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and $\\mathcal F$ a presheaf of sets on $\\mathcal C$, i.e. a functor $\\mathcal C^{op}\\to$ sets; for $h:V\\to W$ write $s\\mapsto s|_V=\\mathcal F(h)(s)$. (a) *Zeroth Cech set.* For a covering $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ put $H^0(\\mathcal U,\\mathcal F)=\\{(s_i)_{i\\in I}\\in\\prod_i\\mathcal F(U_i)\\mid s_i|_{U_i\\times_UU_j}=s_j|_{U_i\\times_UU_j}\\ \\forall i,j\\in I\\}$ (restrictions along the two projections of the fibre product), with the canonical map $\\mathcal F(U)\\to H^0(\\mathcal U,\\mathcal F)$, $s\\mapsto(s|_{U_i})_i$. (b) *Morphisms of coverings.* A morphism (refinement) $f:\\mathcal U\\to\\mathcal V$ from $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ to $\\mathcal V=\\{V_j\\to V\\}_{j\\in J}$ consists of a morphism $\\chi:U\\to V$, a map $\\alpha:I\\to J$ and morphisms $f_i:U_i\\to V_{\\alpha(i)}$ such that $U_i\\xrightarrow{f_i}V_{\\alpha(i)}\\to V$ equals $U_i\\to U\\xrightarrow{\\chi}V$ for all $i$; it is said to lie over $\\chi$. It induces $f^*:H^0(\\mathcal V,\\mathcal F)\\to H^0(\\mathcal U,\\mathcal F)$, $(f^*s)_i=s_{\\alpha(i)}|_{U_i}$ (restriction along $f_i$), which is well defined because $f_i\\times f_{i'}$ maps $U_i\\times_UU_{i'}$ to $V_{\\alpha(i)}\\times_VV_{\\alpha(i')}$ compatibly with the projections, and $f^*$ is compatible with $\\mathcal F(\\chi):\\mathcal F(V)\\to\\mathcal F(U)$ and the canonical maps of (a). A covering $\\mathcal U$ of $U$ *refines* a covering $\\mathcal V$ of $U$ if there is a morphism $\\mathcal U\\to\\mathcal V$ over $\\mathrm{id}_U$. (c) *The plus construction.* Let $\\mathcal J_U$ be the category whose objects are the coverings of $U$ and whose morphisms are the morphisms of coverings over $\\mathrm{id}_U$ (it is small by the set-theoretic conventions of a site and nonempty, containing $\\{\\mathrm{id}_U\\}$); $\\mathcal U\\mapsto H^0(\\mathcal U,\\mathcal F)$, $f\\mapsto f^*$ is a functor $\\mathcal J_U^{opp}\\to$ sets. Define $\\mathcal F^+(U)=\\operatorname{colim}_{\\mathcal J_U^{opp}}H^0(\\mathcal U,\\mathcal F)$ (colimit of sets) and write $[\\mathcal U,s]\\in\\mathcal F^+(U)$ for the image of $s\\in H^0(\\mathcal U,\\mathcal F)$. For a morphism $h:V\\to U$, choose for every covering $\\mathcal U=\\{U_i\\to U\\}$ the fibre products $U_i\\times_UV$ (axiom (iii) of a site); the covering $\\mathcal U\\times_UV=\\{U_i\\times_UV\\to V\\}$ and the projections give a morphism of coverings $p_{\\mathcal U}:\\mathcal U\\times_UV\\to\\mathcal U$ over $h$, natural in $\\mathcal U\\in\\mathcal J_U$, and $\\mathcal F^+(h):\\mathcal F^+(U)\\to\\mathcal F^+(V)$ is the induced map of colimits, $[\\mathcal U,s]\\mapsto[\\mathcal U\\times_UV,p_{\\mathcal U}^*s]$, i.e. $(s_i)\\mapsto(s_i|_{U_i\\times_UV})$. Finally $\\theta_U:\\mathcal F(U)\\to\\mathcal F^+(U)$, $s\\mapsto[\\{\\mathrm{id}_U\\},s]$, using $H^0(\\{\\mathrm{id}_U\\},\\mathcal F)=\\mathcal F(U)$. That these data form a presheaf $\\mathcal F^+$ (independent of the choices of fibre products) with a morphism of presheaves $\\theta:\\mathcal F\\to\\mathcal F^+$ is a lemma (Stacks Sites, Lemma 00W4), stated as a node of its own.",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and $\\mathcal F$ a presheaf of sets on $\\mathcal C$, i.e. a functor $\\mathcal C^{op}\\to$ sets; for $h:V\\to W$ write $s\\mapsto s|_V=\\mathcal F(h)(s)$. (a) *Zeroth Cech set.* For a covering $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ put $H^0(\\mathcal U,\\mathcal F)=\\{(s_i)_{i\\in I}\\in\\prod_i\\mathcal F(U_i)\\mid s_i|_{U_i\\times_UU_j}=s_j|_{U_i\\times_UU_j}\\ \\forall i,j\\in I\\}$ (restrictions along the two projections of the fibre product), with the canonical map $\\mathcal F(U)\\to H^0(\\mathcal U,\\mathcal F)$, $s\\mapsto(s|_{U_i})_i$. (b) *Morphisms of coverings.* A morphism (refinement) $f:\\mathcal U\\to\\mathcal V$ from $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ to $\\mathcal V=\\{V_j\\to V\\}_{j\\in J}$ consists of a morphism $\\chi:U\\to V$, a map $\\alpha:I\\to J$ and morphisms $f_i:U_i\\to V_{\\alpha(i)}$ such that $U_i\\xrightarrow{f_i}V_{\\alpha(i)}\\to V$ equals $U_i\\to U\\xrightarrow{\\chi}V$ for all $i$; it is said to lie over $\\chi$. It induces $f^*:H^0(\\mathcal V,\\mathcal F)\\to H^0(\\mathcal U,\\mathcal F)$, $(f^*s)_i=s_{\\alpha(i)}|_{U_i}$ (restriction along $f_i$), which is well defined because $f_i\\times f_{i'}$ maps $U_i\\times_UU_{i'}$ to $V_{\\alpha(i)}\\times_VV_{\\alpha(i')}$ compatibly with the projections, and $f^*$ is compatible with $\\mathcal F(\\chi):\\mathcal F(V)\\to\\mathcal F(U)$ and the canonical maps of (a). A covering $\\mathcal U$ of $U$ *refines* a covering $\\mathcal V$ of $U$ if there is a morphism $\\mathcal U\\to\\mathcal V$ over $\\mathrm{id}_U$. (c) *The plus construction.* Let $\\mathcal J_U$ be the category whose objects are the coverings of $U$ and whose morphisms are the morphisms of coverings over $\\mathrm{id}_U$ (it is small by the set-theoretic conventions of a site and nonempty, containing $\\{\\mathrm{id}_U\\}$); $\\mathcal U\\mapsto H^0(\\mathcal U,\\mathcal F)$, $f\\mapsto f^*$ is a functor $\\mathcal J_U^{opp}\\to$ sets. Define $\\mathcal F^+(U)=\\operatorname{colim}_{\\mathcal J_U^{opp}}H^0(\\mathcal U,\\mathcal F)$ (colimit of sets [def-weil-pbc-category-colimit]) and write $[\\mathcal U,s]\\in\\mathcal F^+(U)$ for the image of $s\\in H^0(\\mathcal U,\\mathcal F)$. For a morphism $h:V\\to U$, choose for every covering $\\mathcal U=\\{U_i\\to U\\}$ the fibre products $U_i\\times_UV$ (axiom (iii) of a site); the covering $\\mathcal U\\times_UV=\\{U_i\\times_UV\\to V\\}$ and the projections give a morphism of coverings $p_{\\mathcal U}:\\mathcal U\\times_UV\\to\\mathcal U$ over $h$, natural in $\\mathcal U\\in\\mathcal J_U$, and $\\mathcal F^+(h):\\mathcal F^+(U)\\to\\mathcal F^+(V)$ is the induced map of colimits, $[\\mathcal U,s]\\mapsto[\\mathcal U\\times_UV,p_{\\mathcal U}^*s]$, i.e. $(s_i)\\mapsto(s_i|_{U_i\\times_UV})$. Finally $\\theta_U:\\mathcal F(U)\\to\\mathcal F^+(U)$, $s\\mapsto[\\{\\mathrm{id}_U\\},s]$, using $H^0(\\{\\mathrm{id}_U\\},\\mathcal F)=\\mathcal F(U)$. That these data form a presheaf $\\mathcal F^+$ (independent of the choices of fibre products) with a morphism of presheaves $\\theta:\\mathcal F\\to\\mathcal F^+$ is a lemma (Stacks Sites, Lemma 00W4), stated as a node of its own.",
  "source": {
   "document": "literature/stacks-project/sites.tex",
   "place": "Sites, Section 00W1 (section-sheafification): the definition of $H^0(\\mathcal U,\\mathcal F)$ and of the maps induced by morphisms of coverings, the category $\\mathcal J_U$ and $\\mathcal F^+(U)=\\operatorname{colim}_{\\mathcal J_U^{opp}}H^0(\\mathcal U,\\mathcal F)$, the restriction maps via $\\mathcal J_U\\to\\mathcal J_V$, and the map $\\mathcal F(U)\\to\\mathcal F^+(U)$ from the trivial covering; morphisms of coverings as in Sites, Definition 00VT (definition-morphism-coverings)"
  },
  "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "*(a) $H^0(\\mathcal U,\\mathcal F)$ and the canonical map are well defined.* For a covering $\\mathcal U=\\{\\pi_i:U_i\\to U\\}_{i\\in I}$ and $i,j\\in I$, axiom (iii) of a site [def-weil-pbc-sites-and-cohomology] applied to $\\mathcal U$ and $\\pi_j:U_j\\to U$ gives that the fibre product $U_i\\times_UU_j$ exists; choose one, with projections $\\mathrm{pr}_1,\\mathrm{pr}_2$. The condition $\\mathcal F(\\mathrm{pr}_1)(s_i)=\\mathcal F(\\mathrm{pr}_2)(s_j)$ does not depend on the choice: another choice $P'$ is related to $P$ by the unique isomorphism $\\phi:P'\\to P$ with $\\mathrm{pr}_k\\phi=\\mathrm{pr}'_k$, and $\\mathcal F(\\phi)$ is a bijection with $\\mathcal F(\\phi)\\mathcal F(\\mathrm{pr}_k)=\\mathcal F(\\mathrm{pr}'_k)$. So $H^0(\\mathcal U,\\mathcal F)$ is a well-defined subset of the set $\\prod_i\\mathcal F(U_i)$ ($I$ is a set and each $\\mathcal F(U_i)$ is a set). For $s\\in\\mathcal F(U)$, the family $(\\mathcal F(\\pi_i)s)_i$ lies in it: $\\mathcal F(\\mathrm{pr}_1)\\mathcal F(\\pi_i)s=\\mathcal F(\\pi_i\\mathrm{pr}_1)s=\\mathcal F(\\pi_j\\mathrm{pr}_2)s=\\mathcal F(\\mathrm{pr}_2)\\mathcal F(\\pi_j)s$, since $\\pi_i\\mathrm{pr}_1=\\pi_j\\mathrm{pr}_2$ (fibre product square) and $\\mathcal F$ is a functor on $\\mathcal C^{op}$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00W1 (section-sheafification), the paragraphs before Lemma 00W4 (lemma-plus-presheaf): definition of $H^0(\\mathcal U,\\mathcal F)$ and the canonical map $\\mathcal F(U)\\to H^0(\\mathcal U,\\mathcal F)$"
+   }
+  },
+  {
+   "text": "*(b) Morphisms of coverings compose, and $f^*$ is well defined.* Let $f=(\\chi,\\alpha,(f_i))$ be a morphism from $\\mathcal U=\\{\\pi_i:U_i\\to U\\}_{i\\in I}$ to $\\mathcal V=\\{\\rho_j:V_j\\to V\\}_{j\\in J}$, so $\\rho_{\\alpha(i)}f_i=\\chi\\pi_i$. Composition with $g=(\\psi,\\beta,(g_j)):\\mathcal V\\to\\mathcal W=\\{\\sigma_k:W_k\\to W\\}$ is $g\\circ f=(\\psi\\chi,\\beta\\alpha,(g_{\\alpha(i)}f_i)_i)$, again a morphism since $\\sigma_{\\beta\\alpha(i)}g_{\\alpha(i)}f_i=\\psi\\rho_{\\alpha(i)}f_i=\\psi\\chi\\pi_i$; the identity of $\\mathcal U$ is $(\\mathrm{id}_U,\\mathrm{id}_I,(\\mathrm{id}_{U_i}))$; associativity and the unit laws hold componentwise (composition in $\\mathcal C$ and of maps of sets). For $i,i'\\in I$ the morphisms $f_i\\mathrm{pr}_1:U_i\\times_UU_{i'}\\to V_{\\alpha(i)}$ and $f_{i'}\\mathrm{pr}_2:U_i\\times_UU_{i'}\\to V_{\\alpha(i')}$ satisfy $\\rho_{\\alpha(i)}f_i\\mathrm{pr}_1=\\chi\\pi_i\\mathrm{pr}_1=\\chi\\pi_{i'}\\mathrm{pr}_2=\\rho_{\\alpha(i')}f_{i'}\\mathrm{pr}_2$, so by the universal property of $V_{\\alpha(i)}\\times_VV_{\\alpha(i')}$ (which exists by Step 1) there is $f_i\\times f_{i'}$ with $\\mathrm{pr}_1(f_i\\times f_{i'})=f_i\\mathrm{pr}_1$ and $\\mathrm{pr}_2(f_i\\times f_{i'})=f_{i'}\\mathrm{pr}_2$. For $s=(s_j)\\in H^0(\\mathcal V,\\mathcal F)$ put $(f^*s)_i=\\mathcal F(f_i)(s_{\\alpha(i)})$. Then $\\mathcal F(\\mathrm{pr}_1)(f^*s)_i=\\mathcal F(f_i\\times f_{i'})\\mathcal F(\\mathrm{pr}_1)(s_{\\alpha(i)})=\\mathcal F(f_i\\times f_{i'})\\mathcal F(\\mathrm{pr}_2)(s_{\\alpha(i')})=\\mathcal F(\\mathrm{pr}_2)(f^*s)_{i'}$, the middle equality being the condition on $s$ for the pair $(\\alpha(i),\\alpha(i'))$. So $f^*s\\in H^0(\\mathcal U,\\mathcal F)$ and $f^*:H^0(\\mathcal V,\\mathcal F)\\to H^0(\\mathcal U,\\mathcal F)$ is a map of sets.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Definition 00VT (definition-morphism-coverings) for morphisms of families; Sites, Section 00W1 (section-sheafification), the paragraphs before Lemma 00W4 (lemma-plus-presheaf): the diagram with $U_i\\times_UU_j\\to V_{\\alpha(i)}\\times_VV_{\\alpha(j)}$ and the induced map $H^0(\\mathcal V,\\mathcal F)\\to H^0(\\mathcal U,\\mathcal F)$"
+   }
+  },
+  {
+   "text": "*(b) $f^*$ is functorial and compatible with $\\mathcal F(\\chi)$.* With the notation of Step 2: $((g\\circ f)^*s)_i=\\mathcal F(g_{\\alpha(i)}f_i)(s_{\\beta\\alpha(i)})=\\mathcal F(f_i)\\mathcal F(g_{\\alpha(i)})(s_{\\beta(\\alpha(i))})=(f^*(g^*s))_i$, so $(g\\circ f)^*=f^*\\circ g^*$; and $(\\mathrm{id}^*s)_i=\\mathcal F(\\mathrm{id}_{U_i})s_i=s_i$, so $\\mathrm{id}^*=\\mathrm{id}$. For $t\\in\\mathcal F(V)$, $(f^*(\\mathcal F(\\rho_j)t)_j)_i=\\mathcal F(f_i)\\mathcal F(\\rho_{\\alpha(i)})t=\\mathcal F(\\rho_{\\alpha(i)}f_i)t=\\mathcal F(\\chi\\pi_i)t=\\mathcal F(\\pi_i)(\\mathcal F(\\chi)t)$, i.e. $f^*$ composed with the canonical map of $\\mathcal V$ equals the canonical map of $\\mathcal U$ composed with $\\mathcal F(\\chi)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00W1 (section-sheafification), the paragraphs before Lemma 00W4 (lemma-plus-presheaf): the map $H^0(\\mathcal V,\\mathcal F)\\to H^0(\\mathcal U,\\mathcal F)$ is compatible with $\\mathcal F(V)\\to\\mathcal F(U)$; contravariance in the paragraph defining $\\mathcal J_U$"
+   }
+  },
+  {
+   "text": "*(c) $\\mathcal J_U$ is a small nonempty category, $H^0(-,\\mathcal F)$ a functor on $\\mathcal J_U^{opp}$, and $\\mathcal F^+(U)$ exists.* The objects of $\\mathcal J_U$ are the coverings of $U$, a subset of the set $\\operatorname{Cov}(\\mathcal C)$ [def-weil-pbc-sites-and-cohomology]; the morphisms $\\mathcal U'\\to\\mathcal U$ over $\\mathrm{id}_U$ are pairs $(\\alpha,(f_{i'}))$, elements of the set $\\operatorname{Map}(I',I)\\times\\prod_{i'\\in I'}\\operatorname{Mor}(\\mathcal C)$ ($\\operatorname{Ob}$ and $\\operatorname{Mor}$ of a site are sets). Composition and identities of Step 2 preserve the condition $\\chi=\\mathrm{id}_U$ ($\\mathrm{id}_U\\mathrm{id}_U=\\mathrm{id}_U$), so $\\mathcal J_U$ is a small category; it contains $\\{\\mathrm{id}_U:U\\to U\\}$ by axiom (i). By Step 3, $\\mathcal U\\mapsto H^0(\\mathcal U,\\mathcal F)$, $f\\mapsto f^*$ is a functor $D_U:\\mathcal J_U^{opp}\\to$ sets. A colimit of $D_U$ [def-weil-pbc-category-colimit] exists: let $L$ be the quotient of the set $\\coprod_{\\mathcal U\\in\\operatorname{Ob}\\mathcal J_U}H^0(\\mathcal U,\\mathcal F)$ by the equivalence relation generated by $(\\mathcal U',f^*s)\\sim(\\mathcal U,s)$ for $f:\\mathcal U'\\to\\mathcal U$ in $\\mathcal J_U$, and $\\iota_{\\mathcal U}(s)=[\\mathcal U,s]$ the class; then $\\iota_{\\mathcal U'}\\circ f^*=\\iota_{\\mathcal U}$ (cocone), and for a cocone $(M,(\\mu_{\\mathcal U}))$ the map $[\\mathcal U,s]\\mapsto\\mu_{\\mathcal U}(s)$ is well defined (it is constant on generating pairs since $\\mu_{\\mathcal U'}f^*=\\mu_{\\mathcal U}$, hence on classes), is the unique map $u$ with $u\\iota_{\\mathcal U}=\\mu_{\\mathcal U}$ (the $\\iota_{\\mathcal U}$ are jointly surjective). Hence $\\mathcal F^+(U)$, the chosen colimit, and the classes $[\\mathcal U,s]=\\iota_{\\mathcal U}(s)$ are defined.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00W1 (section-sheafification), the paragraphs before Lemma 00W4 (lemma-plus-presheaf): the paragraph defining $\\mathcal J_U$ ('By our conventions on sites this is indeed a category ... $\\Ob(\\mathcal J_U)$ is not empty since $\\{\\mathrm{id}_U\\}$ is an object') and $\\mathcal F^+(U)=\\colim_{\\mathcal J_U^{opp}}H^0(\\mathcal U,\\mathcal F)$"
+   }
+  },
+  {
+   "text": "*(c) $\\mathcal F^+(h)$ is well defined.* Let $h:V\\to U$. For $\\mathcal U=\\{\\pi_i:U_i\\to U\\}_{i\\in I}$ in $\\mathcal J_U$, axiom (iii) [def-weil-pbc-sites-and-cohomology] gives the chosen fibre products $U_i\\times_UV$ (projections $\\mathrm{pr}_1,\\mathrm{pr}_2$) and that $\\mathcal U\\times_UV=\\{\\mathrm{pr}_2:U_i\\times_UV\\to V\\}_{i\\in I}$ is a covering of $V$. Then $p_{\\mathcal U}=(h,\\mathrm{id}_I,(\\mathrm{pr}_1)_i):\\mathcal U\\times_UV\\to\\mathcal U$ is a morphism of coverings over $h$, the condition $\\pi_i\\mathrm{pr}_1=h\\,\\mathrm{pr}_2$ being the fibre product square. For $g=(\\alpha,(g_{i'})):\\mathcal U'\\to\\mathcal U$ in $\\mathcal J_U$ let $g_{i'}\\times_UV:U'_{i'}\\times_UV\\to U_{\\alpha(i')}\\times_UV$ be the unique morphism with $\\mathrm{pr}_1(g_{i'}\\times_UV)=g_{i'}\\mathrm{pr}_1$ and $\\mathrm{pr}_2(g_{i'}\\times_UV)=\\mathrm{pr}_2$ (it exists since $\\pi_{\\alpha(i')}g_{i'}\\mathrm{pr}_1=\\pi'_{i'}\\mathrm{pr}_1=h\\,\\mathrm{pr}_2$); $g_V=(\\alpha,(g_{i'}\\times_UV))$ is a morphism $\\mathcal U'\\times_UV\\to\\mathcal U\\times_UV$ over $\\mathrm{id}_V$, i.e. in $\\mathcal J_V$, and by the uniqueness in the universal property $\\mathcal U\\mapsto\\mathcal U\\times_UV$, $g\\mapsto g_V$ is a functor $\\mathcal J_U\\to\\mathcal J_V$. Moreover $p_{\\mathcal U}\\circ g_V=g\\circ p_{\\mathcal U'}$ (both are $(h,\\alpha,(g_{i'}\\mathrm{pr}_1)_{i'})$, Step 2), so by Step 3 $g_V^*p_{\\mathcal U}^*=p_{\\mathcal U'}^*g^*$. Put $\\varphi_{\\mathcal U}=\\iota^V_{\\mathcal U\\times_UV}\\circ p_{\\mathcal U}^*:H^0(\\mathcal U,\\mathcal F)\\to\\mathcal F^+(V)$, with $\\iota^V$ the coprojections of Step 4 for $V$. Then $\\varphi_{\\mathcal U'}g^*=\\iota^V_{\\mathcal U'\\times_UV}g_V^*p_{\\mathcal U}^*=\\iota^V_{\\mathcal U\\times_UV}p_{\\mathcal U}^*=\\varphi_{\\mathcal U}$, using the cocone property of $\\iota^V$ for the morphism $g_V$ of $\\mathcal J_V$. So $(\\mathcal F^+(V),(\\varphi_{\\mathcal U}))$ is a cocone on $D_U$, and the universal property of the colimit [def-weil-pbc-category-colimit] gives the unique $\\mathcal F^+(h):\\mathcal F^+(U)\\to\\mathcal F^+(V)$ with $\\mathcal F^+(h)[\\mathcal U,s]=[\\mathcal U\\times_UV,p_{\\mathcal U}^*s]$, where $(p_{\\mathcal U}^*s)_i=\\mathcal F(\\mathrm{pr}_1)(s_i)=s_i|_{U_i\\times_UV}$ (Step 2). (That $\\mathcal F^+$ is then a presheaf, independent of the choices, is not part of the definition.)",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00W1 (section-sheafification), the paragraphs before Lemma 00W4 (lemma-plus-presheaf): the paragraph with the functor $\\mathcal J_U\\to\\mathcal J_V$, $\\{U_i\\to U\\}\\mapsto\\{U_i\\times_UV\\to V\\}$, the functorial morphism of coverings given by the projections, and the induced map $\\mathcal F^+(U)\\to\\mathcal F^+(V)$ 'by generalities of colimits'"
+   }
+  },
+  {
+   "text": "*(c) $\\theta_U$ is well defined.* $\\{\\mathrm{id}_U:U\\to U\\}$ is a covering by axiom (i) [def-weil-pbc-sites-and-cohomology], with a one-element index set. For the chosen fibre product $U\\times_UU$ of $\\mathrm{id}_U$ with itself the square gives $\\mathrm{id}_U\\mathrm{pr}_1=\\mathrm{id}_U\\mathrm{pr}_2$, so $\\mathrm{pr}_1=\\mathrm{pr}_2$ and the condition defining $H^0(\\{\\mathrm{id}_U\\},\\mathcal F)$ holds for every $s\\in\\mathcal F(U)$; thus $H^0(\\{\\mathrm{id}_U\\},\\mathcal F)=\\mathcal F(U)$, and the canonical map of Step 1 is $s\\mapsto\\mathcal F(\\mathrm{id}_U)s=s$. Hence $\\theta_U=\\iota_{\\{\\mathrm{id}_U\\}}:\\mathcal F(U)\\to\\mathcal F^+(U)$, $s\\mapsto[\\{\\mathrm{id}_U\\},s]$, is a well-defined map of sets (Step 4). (That $\\theta$ commutes with the maps $\\mathcal F(h)$, $\\mathcal F^+(h)$ is part of the lemma stated separately, not of this definition.)",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00W1 (section-sheafification), the paragraphs before Lemma 00W4 (lemma-plus-presheaf): $\\{\\mathrm{id}_U\\}$ is an object of $\\mathcal J_U$; the canonical map $\\mathcal F\\to\\mathcal F^+$ of Lemma 00W4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Section 00W1 (section-sheafification), from the definition of $H^0(\\mathcal U,\\mathcal F)$ to Lemma 00W4, and Definition 00VT; the well-definedness checks, which Stacks calls clear or leaves to 'the axioms of a site' and 'generalities of colimits', written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +107,38 @@
    "results": "Plus.lean:110 `def plusObj` (colimit over `(J.Cover X)ᵒᵖ` of multiequalizers `J.diagram P X`), `toPlus`; Cech only in SheafCohomology/Cech.lean and NonabelianCohomology/H1.lean (abelian / H^1), nothing indexed by families of coverings with morphisms of coverings",
    "date": "2026-10-10",
    "verdict": "no match (sieve version only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Precoverage",
+   "results": "CategoryTheory.Precoverage, Precoverage.HasIsos, HasPullbacks, IsStableUnderBaseChange, IsStableUnderComposition, IsStableUnderSup (Mathlib.CategoryTheory.Sites.Precoverage): coverings as presieves, the covering-family axioms of a Stacks site",
+   "date": "2026-10-10",
+   "verdict": "partial: Mathlib's covering-family notion (Precoverage) exists, but no plus construction over it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compatible family of sections over a covering family of morphisms (Presieve.ofArrows), zeroth Cech set, refinement of coverings",
+   "results": "Presieve.Arrows.Compatible.familyOfElements (Mathlib.CategoryTheory.Sites.IsSheafFor), PreZeroHypercover.presieve0 (Mathlib.CategoryTheory.Sites.Hypercover.Zero), GrothendieckTopology.OneHypercover.arrowsCompatible (Hypercover.One), TopCat.Presheaf.IsCompatible",
+   "date": "2026-10-10",
+   "verdict": "partial: H^0(U,F) corresponds to `Presieve.Arrows.Compatible P E.f x` (pullback-compatible families) for a family `E.f`; no colimit over refinements"
+  },
+  {
+   "tool": "local_search",
+   "query": "Precoverage.ZeroHypercover (project root ~/weil-conjectures-slopmaster2)",
+   "results": "CategoryTheory.Precoverage.ZeroHypercover (Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean), ZeroHypercover.Hom.isSheafFor_iff (Hypercover/SheafOfTypes.lean), ZeroHypercover.toOneHypercover; index unavailable",
+   "date": "2026-10-10",
+   "verdict": "partial (see grep entry)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure\\|^def\\|^abbrev\\|colimit\\|plus' Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean; grep -rn 'ZeroHypercover' Mathlib | grep -i 'colimit\\|plus\\|cocone\\|Cech'; sed -n 260,300p and 700,830p Hypercover/Zero.lean; sed -n 140,150p Hypercover/One.lean",
+   "results": "Zero.lean:35 `structure PreZeroHypercover` (family I0, X, f), :268 `structure Hom` (s0 : I0 -> I0, h0, w0 : h0 i ≫ F.f (s0 i) = E.f i, i.e. a refinement over id_S), :279 Hom.id, :287 Hom.comp, `instance : Category (PreZeroHypercover S)`; :703 `structure ZeroHypercover (J : Precoverage C) (S : C)` (presieve0 ∈ J S) with `instance : Category (ZeroHypercover J S)` (~:818); :97 `pullback₁` (the covering pulled back along f, components `pullback f (E.f i)`); One.lean:143 `multicospanIndex` (the equalizer diagram of a 1-hypercover); no colimit over ZeroHypercover, no plus construction for covering families (only the sieve version GrothendieckTopology.plusObj, Sites/Plus.lean:110)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has the category J_U of covering families with refinements (Precoverage.ZeroHypercover J S, in a universe w, and only morphisms over id_S, not over a general chi) and the pullback covering, but not H^0 as a functor on it nor the colimit F^+(U); with a Precoverage generated by a Stacks site the identification is itself a construction, not a one-line specialization. Lean candidates for stage 2: Precoverage.ZeroHypercover, PreZeroHypercover.Hom, PreZeroHypercover.pullback₁, Presieve.Arrows.Compatible, GrothendieckTopology.plusObj"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +166,17 @@
    "reason": "forward pointer, not a dependency: the lemma proves that the data of this definition form a presheaf with a morphism theta (Stacks 00W4) and describes elements and equality in the colimit",
    "date": "2026-10-10"
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-site-plus-construction",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Sites, Section 00W1 up to Lemma 00W4 (sites.tex 1631-1795) and Definition 00VT. The definition agrees with the source; statement unchanged except the bracket citation [def-weil-pbc-category-colimit] for the colimit of sets (added to stmt_deps, since F^+(U) and the classes [U,s] are a chosen colimit). Six elementary well-definedness steps: (1) H^0 is a subset of prod F(U_i), independent of the chosen fibre products (axiom (iii)), and F(U)->H^0 lands in it; (2) morphisms of coverings compose (identities, associativity) and f^* lands in H^0 via f_i x f_i'; (3) (g o f)^* = f^* g^*, id^* = id, compatibility with F(chi); (4) J_U is a small nonempty category (Cov(C), Ob, Mor are sets by def-weil-pbc-sites-and-cohomology; {id_U} by axiom (i)), H^0 a functor on J_U^opp, the colimit of sets constructed as a quotient of the disjoint union; (5) F^+(h): U x_U V is a covering (axiom (iii)), p_U a morphism over h, g -> g_V a functor J_U -> J_V with p_U g_V = g p_U', so the maps iota^V p_U^* form a cocone and induce F^+(h) with the stated formula; (6) H^0({id_U},F) = F(U) since pr1 = pr2 on U x_U U, theta_U = iota_{id_U}. No new nodes. The forward lemma lem-weil-pbc-site-plus-construction-presheaf (presheaf, independence of choices, theta natural) is not cited. Mathlib re-searched (Loogle, LeanSearch, local_search, grep): Precoverage.ZeroHypercover with its Category instance is the covering-family J_U, PreZeroHypercover.pullback₁ the pulled-back covering, but there is no H^0 functor or colimit over it, so no leaf."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Definition node, six elementary well-formedness steps (H^0 independent of the chosen fibre products, morphisms of coverings compose and f^* is functorial and compatible with F(chi), J_U small and nonempty with H^0 a functor and the colimit of sets written out, F^+(h) well defined by a cocone over the fibre-product coverings, theta from H^0({id_U}) = F(U)). Statement: citation of def-weil-pbc-category-colimit added; content unchanged. Correct. Mathlib: Precoverage.ZeroHypercover gives the category of coverings but no H^0 functor or colimit; not a leaf."
+ }
 }
