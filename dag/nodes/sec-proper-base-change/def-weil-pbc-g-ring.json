@@ -2,12 +2,19 @@
  "id": "def-weil-pbc-g-ring",
  "kind": "definition",
  "title": "G-ring",
- "statement": "A commutative ring $R$ is a *G-ring* if $R$ is Noetherian and for every prime ideal $\\mathfrak p\\subset R$ the ring map $R_{\\mathfrak p}\\to(R_{\\mathfrak p})^\\wedge$ from the localization to its $\\mathfrak pR_{\\mathfrak p}$-adic completion is regular, i.e. flat with geometrically regular fibre rings (Stacks More on Algebra, Definition 07GH and Definition 07BZ of a regular ring map); equivalently every local ring $R_{\\mathfrak p}$ has geometrically regular formal fibres.",
+ "statement": "Let $k$ be a field. A Noetherian [def-weil-pbc-noetherian-ring] $k$-algebra $A$ is *geometrically regular over $k$* if for every finite purely inseparable field extension $k'/k$ [def-weil-pbc-finite-purely-inseparable-extension] the ring $k'\\otimes_kA$ is regular, i.e. Noetherian with every localization at a prime ideal a regular local ring [def-weil-regular-scheme] (Stacks Algebra, Definition 0382, by condition (2) of Lemma 0381, as recalled in More on Algebra, Section 07BY). A ring map $\\varphi:R\\to\\Lambda$ of commutative rings is *regular* if it is flat [def-weil-pbc-flat-ring-map] and for every prime ideal $\\mathfrak p\\subset R$ the fibre ring $\\Lambda\\otimes_R\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime] is Noetherian and geometrically regular over the residue field $\\kappa(\\mathfrak p)$ (More on Algebra, Definition 07BZ). A commutative ring $R$ is a *G-ring* if $R$ is Noetherian and for every prime ideal $\\mathfrak p\\subset R$ the ring map $R_{\\mathfrak p}\\to(R_{\\mathfrak p})^\\wedge$ is regular, where $R_{\\mathfrak p}$ is the localization of $R$ at $\\mathfrak p$, a local ring with maximal ideal $\\mathfrak pR_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], and $(R_{\\mathfrak p})^\\wedge=\\varprojlim_nR_{\\mathfrak p}/\\mathfrak p^nR_{\\mathfrak p}$ is its $\\mathfrak pR_{\\mathfrak p}$-adic completion with its canonical ring map $R_{\\mathfrak p}\\to(R_{\\mathfrak p})^\\wedge$ [def-weil-pbc-adic-completion] (More on Algebra, Definition 07GH).",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Definition Tag 07GH (definition-G-ring, line 12179), in Section 07GG (G-rings); regular ring map: Definition Tag 07BZ"
+  "place": "Definition Tag 07GH (definition-G-ring, line 12179) in Section 07GG (G-rings); regular ring map: Definition Tag 07BZ (definition-regular, line 10375) in Section 07BY (lines 10361-10372, which recalls geometric regularity by finite purely inseparable extensions); geometrically regular: algebra.tex Definition Tag 0382 (definition-geometrically-regular, line 47151) with Lemma Tag 0381 (lemma-geometrically-regular); regular ring: algebra.tex Definition Tag 00OD"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
@@ -32,10 +39,73 @@
    "results": "only DirectSum.GRing (graded rings) and unrelated uses of the word 'excellent'; no formal fibres, no regular ring maps in the sense of 07BZ",
    "verdict": "no match",
    "date": "2026-10-10"
+  },
+  {
+   "tool": "leansearch",
+   "query": "regular ring homomorphism: flat with geometrically regular fibres",
+   "results": "RingHom.Flat, RingHom.Smooth, RingHom.FaithfullyFlat, RingHom.flat_algebraMap_iff: flat and smooth ring maps only; no regular ring map in the sense of 07BZ",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometrically regular algebra over a field: tensor with every finite purely inseparable extension is a regular ring",
+   "results": "Algebra.IsGeometricallyReduced and its lemmas (Mathlib.RingTheory.Nilpotent.GeometricallyReduced), Algebra.FormallyUnramified.range_eq_top_of_isPurelyInseparable: geometrically reduced exists, geometrically regular does not",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "G-ring: Noetherian ring such that the map from each local ring to its completion has geometrically regular formal fibres (excellent ring)",
+   "results": "IsNoetherianRing.of_isLocalization_maximal, isNoetherianRing_of_away, IsLocalization.isNoetherianRing, Algebra.QuasiFiniteAt, Algebra.Smooth.flat_of_isNoetherianRing: no G-ring, formal fibre or excellent ring",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a ring map is regular if it is flat and all its fibre rings are geometrically regular over the residue fields",
+   "results": "RingTheory.Sequence.IsRegular.of_faithfullyFlat, IsWeaklyRegular.of_flat (regular sequences), RingHom.Smooth, Algebra.Smooth.flat, RingHom.Flat",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometrically regular algebra over a field; regular after base change to every finitely generated field extension",
+   "results": "Algebra.IsGeometricallyReduced, Algebra.isGeometricallyReduced_iff, IsGeometricallyReduced.of_forall_fg (reduced, not regular)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyRegular\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing",
+   "results": "IsRegularRing, isRegularRing_iff, IsRegularRing.isRegularLocalRing_localization, IsRegularLocalRing.of_isRegularRing_of_isLocalRing, Polynomial/MvPolynomial.isRegularRing_of_isRegularRing (Mathlib.RingTheory.RegularLocalRing.*): the regular rings used by the node exist",
+   "date": "2026-10-10",
+   "verdict": "match for the notion regular ring only (def-weil-regular-scheme)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'geometrically.?regular|G-ring|formal fib|formalFib|excellent|IsExcellent|IsNagata' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only DirectSum GRing/CommRingRing section names and the English word 'excellent' (Lie/InvariantForm.lean); RingTheory/RegularLocalRing/ has only Defs.lean and Polynomial.lean",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'class FormallySmooth\\|def RingHom.Flat\\|class IsGeometricallyReduced\\|abbrev Fiber\\|AdicCompletion (IsLocalRing.maximalIdeal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Smooth/Basic.lean:70 Algebra.FormallySmooth (discrete topology only; no I-adic formal smoothness, so the characterization of regular maps by formal smoothness (André) is not available either); RingHom/Flat.lean:27 RingHom.Flat; Nilpotent/GeometricallyReduced.lean:54 IsGeometricallyReduced; LocalRing/ResidueField/Fiber.lean:66 Ideal.Fiber; AdicCompletion/LocalRing.lean: AdicCompletion (maximalIdeal R) R local",
+   "date": "2026-10-10",
+   "verdict": "no match: the ingredients exist, the notion does not"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -55,5 +125,43 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "pointers": [
+  {
+   "to": "lem-weil-pbc-henselian-pair-approximation",
+   "was": [],
+   "reason": "user of the notion (as a hypothesis); its split needs the G-ring property only through the regularity of A_m -> (A_m)^ (Smoothing 0AH5 via Popescu 07GC and Lemma 07PN check-G-ring-easy); the equivalence of the two forms of geometric regularity is Stacks Algebra Lemma 0381 and the reduction to finite purely inseparable k' with k ⊂ k' ⊂ k^{1/p} is More on Algebra Proposition 07E5; regularity is local (07C0)",
+   "date": "2026-10-10"
+  },
+  {
+   "to": "lem-weil-pbc-finite-type-z-g-ring",
+   "was": [],
+   "reason": "standard facts on G-rings stated there (created by the split of lem-weil-pbc-finite-etale-lifting-limit-descent): Z, fields, Noetherian complete local rings (Proposition 07PS) and Dedekind domains of characteristic 0 are G-rings, and rings essentially of finite type over a G-ring are G-rings (Proposition 07PV; ubiquity Proposition 07PX); a localization of a G-ring is a G-ring (proof of 07PV)",
+   "date": "2026-10-10"
+  },
+  {
+   "to": "lem-weil-pbc-henselization-pair-g-ring",
+   "was": [],
+   "reason": "the henselization of a pair (A,I) with A a G-ring is a G-ring (Stacks More on Algebra Lemma 0AH3, Greco Thm 5.3 i)), stated there (created by the split of lem-weil-pbc-finite-etale-lifting-limit-descent)",
+   "date": "2026-10-10"
+  },
+  {
+   "to": "lem-weil-pbc-finite-etale-lifting-approximation",
+   "was": [],
+   "reason": "user of the notion as a hypothesis (A a G-ring, hence Noetherian, Stacks pione 0GS2); quasi-excellent = G-ring + J-2 (More on Algebra Definition 07QT) is not needed",
+   "date": "2026-10-10"
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-g-ring",
+  "worker": "stage1",
+  "summary": "Read More on Algebra Section 07BY with Definition 07BZ (regular ring map), Section 07GG with Definition 07GH (G-ring), Algebra Lemma 0381 / Definition 0382 (geometrically regular), 00OD/00KU (regular ring, regular local ring), 00HB (flat), 00CO and Section 07BH (localization at a prime, residue field), Fields 09HE (purely inseparable). Rewrote the statement to be self-contained: geometrically regular algebra over a field (Stacks 0382, taken in the form (2) of 0381, finite purely inseparable k'/k, as More on Algebra 07BY recalls it; the equivalence with (1) is a pointer, not part of the node), regular ring map (flat, fibre rings Noetherian and geometrically regular), G-ring (Noetherian, R_p -> pR_p-adic completion regular for every prime). Removed the claim 'equivalently every local ring has geometrically regular formal fibres' from the statement (Stacks' remark after 07GH; it is the definition of formal fibre unfolded and nobody uses it). No well-definedness theorem is needed: every clause is a predicate on objects given by the cited definitions (regular ring includes Noetherian; the completion and its map are def-weil-pbc-adic-completion; the fibre ring is Noetherian by requirement of 07BZ). stmt_deps: def-weil-regular-scheme (reviewed leaf IsRegularLocalRing/IsRegularRing), def-weil-pbc-adic-completion (reviewed leaf) and four new Mathlib leaves (Noetherian ring; flat module/ring map; localization at a prime, residue field, fibre ring; finite purely inseparable extension). Mathlib has no G-ring, regular ring map, geometrically regular algebra, formal fibre or excellent ring (three kinds of search recorded); it has IsRegularLocalRing, IsRegularRing, RingHom.Flat, Module.Flat, Algebra.FormallySmooth (discrete), Algebra.IsGeometricallyReduced, Ideal.Fiber, AdicCompletion. The source repository (both branches) has no G-ring/excellent/geometrically regular declaration; the only mention is the docstring of WeilConjectures/SixFunctors/Etale/Derived/Stability.lean:107 ('quasi-excellent Noetherian by Gabber'). Standard facts (07PS, 07PV, 07PX, 0AH3) are pointers to the nodes the limit-descent split created (lem-weil-pbc-finite-type-z-g-ring, lem-weil-pbc-henselization-pair-g-ring)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Definition made self-contained against Stacks 0382/0381 (geometrically regular, form (2)), 07BZ (regular ring map) and 07GH (G-ring); the remark 'equivalently geometrically regular formal fibres' removed from the statement; no well-definedness steps needed. Four new Mathlib leaves verified: def-weil-pbc-noetherian-ring (IsNoetherianRing Noetherian/Defs.lean:196), def-weil-pbc-flat-ring-map (Module.Flat / RingHom.Flat), def-weil-pbc-localization-at-prime (Localization.AtPrime AtPrime/Basic.lean:57, Ideal.ResidueField, Ideal.Fiber), def-weil-pbc-finite-purely-inseparable-extension (IsPurelyInseparable with isPurelyInseparable_iff_pow_mem @[stacks 09HE] PurelyInseparable/Basic.lean:211, Module.Finite). Pointers to the users and to the G-ring facts in lem-weil-pbc-finite-type-z-g-ring and lem-weil-pbc-henselization-pair-g-ring. Mathlib has no G-rings, regular ring maps, geometrically regular algebras or excellent rings."
+ }
 }

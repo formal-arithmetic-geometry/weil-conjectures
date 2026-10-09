@@ -1,0 +1,76 @@
+{
+ "id": "def-weil-pbc-flat-ring-map",
+ "kind": "definition",
+ "title": "Flat module and flat ring map",
+ "statement": "Let $R$ be a commutative ring. An $R$-module $M$ is *flat* if for every injective $R$-linear map $N_1\\to N_2$ of $R$-modules the induced map $N_1\\otimes_RM\\to N_2\\otimes_RM$ is injective. A ring map $\\varphi:R\\to S$ of commutative rings is *flat* if $S$, an $R$-module via $\\varphi$, is a flat $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Definition Tag 00HB (definition-flat), items (1) and (3)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat module over a commutative ring, tensoring preserves injectivity",
+   "results": "Module.Flat.iff_lTensor_preserves_injective_linearMap, Module.Flat.lTensor_preserves_injective_linearMap (Mathlib.RingTheory.Flat.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "regular ring homomorphism: flat with geometrically regular fibres",
+   "results": "RingHom.Flat (Mathlib.RingTheory.RingHom.Flat), RingHom.flat_algebraMap_iff, RingHom.Smooth, RingHom.FaithfullyFlat",
+   "date": "2026-10-10",
+   "verdict": "match for the flat part"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a ring homomorphism is flat if the target is a flat module over the source",
+   "results": "RingHom.Flat, RingHom.flat_algebraMap_iff (Mathlib.RingTheory.RingHom.Flat)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class Flat\\|def RingHom.Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RingHom/Flat.lean",
+   "results": "Flat/Basic.lean:113 class Module.Flat (rTensor injective on f.g. submodules of finite modules); RingHom/Flat.lean:27 def RingHom.Flat f := Module.Flat R S via f.toAlgebra",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Flat, RingHom.Flat",
+  "file": "Mathlib/RingTheory/Flat/Basic.lean",
+  "how": "specializes in one line: Mathlib's `Module.Flat R M` (line 113, defined by injectivity on finitely generated ideals/submodules) is equivalent to the node's condition by `Module.Flat.iff_lTensor_preserves_injective_linearMap` (same file); a flat ring map is `RingHom.Flat φ` (Mathlib/RingTheory/RingHom/Flat.lean:27, `Module.Flat R S` for `φ.toAlgebra`), with `RingHom.flat_algebraMap_iff`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-g-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf (definition) verified: Module.Flat (Flat/Basic.lean) with iff_lTensor_preserves_injective_linearMap, RingHom.Flat."
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "id": "def-weil-pbc-finite-purely-inseparable-extension",
+ "kind": "definition",
+ "title": "Finite purely inseparable field extension",
+ "statement": "Let $k$ be a field and $k'/k$ a field extension [def-pc-field-extension]. If $k$ has characteristic $p>0$, an element $\\alpha\\in k'$ is *purely inseparable* over $k$ if $\\alpha^{p^n}\\in k$ for some $n\\ge0$, and $k'/k$ is *purely inseparable* if every element of $k'$ is; in characteristic $0$, $k'/k$ is purely inseparable if $k'=k$. The extension is *finite* if $k'$ is a finite-dimensional $k$-vector space.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Definition Tag 09HE (definition-purely-inseparable, line 1581), with the convention following it for arbitrary characteristic"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "purely inseparable field extension",
+   "results": "IsPurelyInseparable, isPurelyInseparable_iff, isPurelyInseparable_iff_natSepDegree_eq_one (Mathlib.FieldTheory.PurelyInseparable.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, Module.Finite",
+   "results": "none (no declaration mentions both)",
+   "date": "2026-10-10",
+   "verdict": "no combined declaration: the node is the conjunction of two Mathlib classes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite purely inseparable field extension",
+   "results": "isPurelyInseparable_iff_fd_isPurelyInseparable, IsPurelyInseparable, perfectClosure.isPurelyInseparable (Mathlib.FieldTheory.PurelyInseparable.*)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class IsPurelyInseparable\\|theorem isPurelyInseparable_iff_pow_mem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+   "results": "line 107 class IsPurelyInseparable (integral, and separable elements lie in k); line 211 isPurelyInseparable_iff_pow_mem (tagged @[stacks 09HE]): IsPurelyInseparable F E ↔ ∀ x, ∃ n, x ^ q ^ n ∈ range, q the exponential characteristic",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsPurelyInseparable, Module.Finite",
+  "file": "Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+  "how": "specializes in one line: `IsPurelyInseparable k k' ∧ Module.Finite k k'`; Mathlib's class (line 107) agrees with Stacks 09HE by `isPurelyInseparable_iff_pow_mem` (line 211, tagged stacks 09HE) with q = ringExpChar k (q = 1 in characteristic 0, so x ∈ k for all x, i.e. k' = k)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-g-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf (definition) verified: IsPurelyInseparable (PurelyInseparable/Basic.lean:107) with isPurelyInseparable_iff_pow_mem (:211, @[stacks 09HE]) and Module.Finite."
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "id": "def-weil-pbc-localization-at-prime",
+ "kind": "definition",
+ "title": "Localization at a prime, residue field of a prime, fibre ring",
+ "statement": "Let $R$ be a commutative ring and $\\mathfrak p\\subset R$ a prime ideal. The *localization* $R_{\\mathfrak p}=S^{-1}R$, $S=R\\setminus\\mathfrak p$, is the ring of fractions $r/s$ ($r\\in R$, $s\\in S$, with $r/s=r'/s'$ iff $u(rs'-r's)=0$ for some $u\\in S$), with the ring map $R\\to R_{\\mathfrak p}$, $r\\mapsto r/1$; it is a local ring with maximal ideal $\\mathfrak pR_{\\mathfrak p}$. The *residue field* of $\\mathfrak p$ is $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$, an $R$-algebra. For an $R$-algebra $\\Lambda$ (a ring map $R\\to\\Lambda$) the *fibre ring* of $\\Lambda$ over $\\mathfrak p$ is the tensor product of $R$-algebras $\\Lambda\\otimes_R\\kappa(\\mathfrak p)$, a $\\kappa(\\mathfrak p)$-algebra; it is isomorphic to $\\Lambda_{\\mathfrak p}/\\mathfrak p\\Lambda_{\\mathfrak p}$, $\\Lambda_{\\mathfrak p}$ the localization of $\\Lambda$ at the image of $R\\setminus\\mathfrak p$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Definition Tag 00CO (definition-localization) and the localization at a prime defined after it (line 1218); Section Tag 07BH (local rings), paragraph after Definition 07BI (lines 3333-3342): R_p local with maximal ideal pR_p, residue field kappa(p); fibre ring Lambda (x)_R kappa(p) = Lambda_p/pLambda_p as written in More on Algebra Definition 07BZ"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of a commutative ring at a prime ideal is a local ring whose maximal ideal is the extension of the prime",
+   "results": "Localization.AtPrime, Localization.AtPrime.isLocalRing, IsLocalization.AtPrime.map_eq_maximalIdeal (Mathlib.RingTheory.Localization.AtPrime.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.AtPrime, IsLocalRing.maximalIdeal, Ideal.map",
+   "results": "Localization.AtPrime.map_eq_maximalIdeal (Mathlib.RingTheory.Localization.AtPrime.Basic), Ideal.Fiber.algEquivQuotient (Mathlib.RingTheory.LocalRing.ResidueField.Fiber)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "residue field of a prime ideal and the fiber of an algebra over a prime, kappa(p) tensor S",
+   "results": "Ideal.Fiber (Mathlib.RingTheory.LocalRing.ResidueField.Fiber), PrimeSpectrum.preimageEquivFiber",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'abbrev Localization.AtPrime\\|abbrev Ideal.ResidueField\\|abbrev Fiber' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "Localization/AtPrime/Basic.lean:57 Localization.AtPrime := Localization P.primeCompl; LocalRing/ResidueField/Ideal.lean:33 Ideal.ResidueField := IsLocalRing.ResidueField (Localization.AtPrime I); LocalRing/ResidueField/Fiber.lean:66 Ideal.Fiber p S := p.ResidueField ⊗[R] S",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Localization.AtPrime, Ideal.ResidueField, Ideal.Fiber",
+  "file": "Mathlib/RingTheory/Localization/AtPrime/Basic.lean",
+  "how": "one Mathlib declaration per clause: `Localization.AtPrime p` (line 57; local by the instance `Localization.AtPrime.isLocalRing`, maximal ideal = pR_p by `Localization.AtPrime.map_eq_maximalIdeal`, line 524); `p.ResidueField` (Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean:33, `IsLocalRing.ResidueField (Localization.AtPrime p)`); the fibre ring is `p.Fiber Λ = p.ResidueField ⊗[R] Λ` (Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean:66; tensor factors in the other order, `Algebra.TensorProduct.comm`), and its identification with Λ_p/pΛ_p is `Ideal.Fiber.algEquivQuotient` (same file, line 85)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-g-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf (definition) verified: Localization.AtPrime (AtPrime/Basic.lean:57), map_eq_maximalIdeal, Ideal.ResidueField, Ideal.Fiber, one per clause."
+ }
+}
