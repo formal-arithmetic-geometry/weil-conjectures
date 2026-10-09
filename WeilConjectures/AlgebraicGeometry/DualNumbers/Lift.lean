@@ -270,6 +270,146 @@ theorem eq_dualNumbersLift_comp_dualNumbers (h : X ⟶ Y.dualNumbers) (x : X ⟶
   rw [mul_comm]
   rfl
 
+theorem dualNumbersLift_congr {t t' : Γ(X, ⊤)} (ht : t * t = 0) (ht' : t' * t' = 0) (h : t = t') :
+    X.dualNumbersLift t ht = X.dualNumbersLift t' ht' := by
+  subst h
+  rfl
+
+@[simp]
+theorem Hom.dualNumbers_appTop_inr_one (f : X ⟶ Y) :
+    f.dualNumbers.appTop (inr 1 : DualNumber Γ(Y, ⊤)) = (inr 1 : DualNumber Γ(X, ⊤)) := by
+  change DualNumber.mapRingHom (f.appTop).hom (inr 1) = inr 1
+  ext <;> simp
+
+/-- The parameter of `h ≫ f[ε]` is that of `h`. -/
+theorem Hom.dualNumbersParam_comp_dualNumbers {T : Scheme.{u}} (h : T ⟶ X.dualNumbers)
+    (f : X ⟶ Y) : (h ≫ f.dualNumbers).dualNumbersParam = h.dualNumbersParam := by
+  rw [Hom.dualNumbersParam, Hom.comp_appTop, CommRingCat.comp_apply,
+    Hom.dualNumbers_appTop_inr_one]
+  rfl
+
+open CategoryTheory.Limits in
+/-- The thickening `X[ε]` of a scheme `X` over `Y` is the base change of `Y[ε] ⟶ Y`:
+a morphism `T ⟶ X[ε]` is a morphism `T ⟶ X` together with a square-zero function on `T`. -/
+theorem isPullback_dualNumbers (f : X ⟶ Y) :
+    IsPullback f.dualNumbers X.dualNumbersProj Y.dualNumbersProj f := by
+  refine IsPullback.of_isLimit (PullbackCone.IsLimit.mk (Hom.dualNumbers_comp_proj f)
+    (fun s ↦ s.pt.dualNumbersLift s.fst.dualNumbersParam s.fst.dualNumbersParam_mul_self ≫
+      s.snd.dualNumbers) (fun s ↦ ?_) (fun s ↦ ?_) (fun s m h₁ h₂ ↦ ?_))
+  · rw [Category.assoc, ← Hom.dualNumbers_comp, ← s.condition]
+    exact (eq_dualNumbersLift_comp_dualNumbers s.fst _ rfl).symm
+  · rw [Category.assoc, Hom.dualNumbers_comp_proj, dualNumbersLift_comp_proj_assoc]
+  · rw [eq_dualNumbersLift_comp_dualNumbers m s.snd h₂]
+    congr 1
+    apply dualNumbersLift_congr
+    rw [← h₁, Hom.dualNumbersParam_comp_dualNumbers]
+
+/-! ### Endomorphisms of the thickening on sections -/
+
+theorem Hom.appLE_eq_of_eq {f g : X ⟶ Y} (h : f = g) (U : Y.Opens) (V : X.Opens)
+    (e₁ : V ≤ f ⁻¹ᵁ U) (e₂ : V ≤ g ⁻¹ᵁ U) : f.appLE U V e₁ = g.appLE U V e₂ := by
+  subst h
+  rfl
+
+theorem Hom.appLE_apply_eq_of_eq {f g : X ⟶ Y} (h : f = g) (U : Y.Opens) (V : X.Opens)
+    (e₁ : V ≤ f ⁻¹ᵁ U) (e₂ : V ≤ g ⁻¹ᵁ U) (a : Γ(Y, U)) : f.appLE U V e₁ a = g.appLE U V e₂ a := by
+  subst h
+  rfl
+
+@[simp]
+theorem presheaf_map_self_apply (X : Scheme.{u}) {U : X.Opens} (i : op U ⟶ op U) (a : Γ(X, U)) :
+    X.presheaf.map i a = a := by
+  rw [Subsingleton.elim i (𝟙 _), CategoryTheory.Functor.map_id]
+  rfl
+
+theorem dualNumbersProj_appLE_self (U : X.Opens) (e : U ≤ X.dualNumbersProj ⁻¹ᵁ U)
+    (a : Γ(X, U)) :
+    (X.dualNumbersProj.appLE U U e a : DualNumber Γ(X, U)) = (inl a : DualNumber Γ(X, U)) := by
+  change DualNumber.mapRingHom (X.presheaf.map (homOfLE e).op).hom (inl a) = _
+  ext
+  · exact (DualNumber.fst_mapRingHom _ _).trans (presheaf_map_self_apply X _ a)
+  · exact (DualNumber.snd_mapRingHom _ _).trans (map_zero _)
+
+theorem dualNumbersMul_appLE_self (U : X.Opens) (e : U ≤ X.dualNumbersMul ⁻¹ᵁ U)
+    (x : Γ(X.dualNumbers, U)) :
+    (X.dualNumbersMul.appLE U U e x : DualNumber (DualNumber Γ(X, U))) =
+      DualNumber.mulRingHom (x : DualNumber Γ(X, U)) := by
+  rw [dualNumbersMul_appLE]
+  congr 1
+  ext
+  · exact (DualNumber.fst_mapRingHom _ _).trans (presheaf_map_self_apply X _ _)
+  · exact (DualNumber.snd_mapRingHom _ _).trans (presheaf_map_self_apply X _ _)
+
+theorem Hom.dualNumbers_appLE_self (f : X ⟶ Y) (U : Y.Opens) (V : X.Opens)
+    (e : V ≤ f.dualNumbers ⁻¹ᵁ U) (x : Γ(Y.dualNumbers, U)) :
+    f.dualNumbers.appLE U V e x =
+      DualNumber.mapRingHom (f.appLE U V e).hom (x : DualNumber Γ(Y, U)) :=
+  Hom.dualNumbers_appLE f U V e x
+
+/-- A morphism `h : X[ε] ⟶ Y` restricting to `g : X ⟶ Y` along `ε ↦ 0` has the same underlying
+map as `g`, so it maps an open `V` with `V ≤ g⁻¹U` into `U`. -/
+theorem le_preimage_of_dualNumbersι_comp {h : X.dualNumbers ⟶ Y} {g : X ⟶ Y}
+    (hh : X.dualNumbersι ≫ h = g) {U : Y.Opens} {V : X.Opens} (e : V ≤ g ⁻¹ᵁ U) :
+    V ≤ h ⁻¹ᵁ U := by
+  intro x hx
+  have := e hx
+  rw [← hh] at this
+  exact this
+
+theorem le_preimage_of_comp_dualNumbersProj {h : Y ⟶ X.dualNumbers} {g : Y ⟶ X}
+    (hh : h ≫ X.dualNumbersProj = g) {U : X.Opens} {V : Y.Opens} (e : V ≤ g ⁻¹ᵁ U) :
+    V ≤ h ⁻¹ᵁ U := by
+  intro x hx
+  have := e hx
+  rw [← hh] at this
+  exact this
+
+/-- An endomorphism `Λ` of `X[ε]` fixing the global function `ε` fixes its restrictions. -/
+theorem appLE_inr_one (Λ : X.dualNumbers ⟶ X.dualNumbers)
+    (hε : Λ.appTop (inr 1 : DualNumber Γ(X, ⊤)) = (inr 1 : DualNumber Γ(X, ⊤))) (U : X.Opens)
+    (V : X.Opens) (e : V ≤ Λ ⁻¹ᵁ U) :
+    (Λ.appLE U V e (inr 1 : DualNumber Γ(X, U)) : DualNumber Γ(X, V)) = inr 1 := by
+  have h : (inr 1 : DualNumber Γ(X, U)) = X.dualNumbers.presheaf.map
+      (homOfLE (le_top : (U : X.dualNumbers.Opens) ≤ ⊤)).op (inr 1 : DualNumber Γ(X, ⊤)) := by
+    change _ = DualNumber.mapRingHom _ _
+    ext <;> simp
+  have h2 : Λ.appLE U V e (X.dualNumbers.presheaf.map
+      (homOfLE (le_top : (U : X.dualNumbers.Opens) ≤ ⊤)).op (inr 1 : DualNumber Γ(X, ⊤))) =
+        X.dualNumbers.presheaf.map (homOfLE (le_top : (V : X.dualNumbers.Opens) ≤ ⊤)).op
+          (Λ.appTop (inr 1 : DualNumber Γ(X, ⊤))) := by
+    rw [Hom.map_appLE_apply, Hom.appTop, Hom.app_eq_appLE]
+    exact (Hom.appLE_map_apply Λ _ _ _).symm
+  refine (congrArg (Λ.appLE U V e) h).trans (h2.trans ?_)
+  change DualNumber.mapRingHom _ (Λ.appTop _) = _
+  rw [hε]
+  ext <;> simp
+
+/-- An endomorphism `Λ` of `X[ε]` fixing `ε` acts on a function `a + εb` through the morphism
+`Λ ≫ p : X[ε] ⟶ X`: `Λ^♯(a + εb) = (Λ ≫ p)^♯(a) + ε (Λ ≫ p)^♯(b)`. -/
+theorem appLE_dualNumbers_self (Λ : X.dualNumbers ⟶ X.dualNumbers)
+    (hε : Λ.appTop (inr 1 : DualNumber Γ(X, ⊤)) = (inr 1 : DualNumber Γ(X, ⊤))) (U : X.Opens)
+    (e : U ≤ Λ ⁻¹ᵁ U) (e' : U ≤ (Λ ≫ X.dualNumbersProj) ⁻¹ᵁ U) (z : Γ(X.dualNumbers, U)) :
+    (Λ.appLE U U e z).fst = ((Λ ≫ X.dualNumbersProj).appLE U U e' z.fst).fst ∧
+    (Λ.appLE U U e z).snd = ((Λ ≫ X.dualNumbersProj).appLE U U e' z.fst).snd +
+      ((Λ ≫ X.dualNumbersProj).appLE U U e' z.snd).fst := by
+  let φ : DualNumber Γ(X, U) →+* DualNumber Γ(X, U) := (Λ.appLE U U e).hom
+  let ψ : Γ(X, U) →+* DualNumber Γ(X, U) := ((Λ ≫ X.dualNumbersProj).appLE U U e').hom
+  have hinl (b : Γ(X, U)) : φ (inl b) = ψ b := by
+    rw [← dualNumbersProj_appLE_self U le_rfl b]
+    exact (Hom.appLE_comp_apply Λ X.dualNumbersProj U U U le_rfl e e' b).symm
+  have hinr : φ (inr 1) = inr 1 := appLE_inr_one Λ hε U U e
+  let z' : DualNumber Γ(X, U) := z
+  have hz : z' = inl z'.fst + inr 1 * inl z'.snd := by ext <;> simp
+  have key : φ z' = ψ z'.fst + inr 1 * ψ z'.snd := by
+    conv_lhs => rw [hz]
+    rw [map_add, map_mul, hinl, hinl, hinr]
+  have h1 := congrArg TrivSqZeroExt.fst key
+  have h2 := congrArg TrivSqZeroExt.snd key
+  simp only [fst_add, fst_mul, fst_inr, zero_mul, add_zero] at h1
+  simp only [snd_add, snd_mul, snd_inr, fst_inr, smul_eq_mul, op_smul_eq_mul, one_mul,
+    zero_mul, zero_add] at h2
+  exact ⟨h1, h2⟩
+
 end Scheme
 
 end AlgebraicGeometry
