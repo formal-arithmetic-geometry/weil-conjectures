@@ -1,0 +1,45 @@
+{
+ "id": "lem-sf-derived-concentrated-single",
+ "kind": "statement",
+ "title": "A complex with cohomology in a single degree is that cohomology object shifted",
+ "statement": "Let $\\mathcal C$ be an abelian category, $D(\\mathcal C)$ its derived category [def-weil-abstract-derived-category] with cohomology functors $H^n$, and let $K\\in D(\\mathcal C)$ and $r\\in\\mathbf Z$ with $H^n(K)=0$ for every $n\\neq r$. Then $K\\cong A[-r]$ in $D(\\mathcal C)$ for an object $A$ of $\\mathcal C$ (the complex with $A$ in degree $r$), and necessarily $A\\cong H^r(K)$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Remark Tag 08J5 (label remark-truncation-distinguished-triangle) applied twice: if $H^n(K)=0$ for $n\\neq r$, the maps $\\tau_{\\leq r}K\\to K$ and $\\tau_{\\leq r}K\\to\\tau_{\\geq r}\\tau_{\\leq r}K$ are quasi-isomorphisms and the last complex is $H^r(K)$ placed in degree $r$"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'exists_iso_singleFunctor_obj_of_isGE_of_isLE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE (line 189), with isGE_iff/isLE_iff",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+  "how": "specializes in one line: the hypotheses `X.IsGE r`, `X.IsLE r` are the vanishing of $H^n$ for $n<r$ and $n>r$ by `DerivedCategory.isGE_iff`, `isLE_iff`; $A\\cong H^r(K)$ by applying `homologyFunctor C r` to the isomorphism"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-proetale-constructible-origin",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

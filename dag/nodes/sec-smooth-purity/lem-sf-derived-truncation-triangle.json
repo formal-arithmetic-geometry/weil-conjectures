@@ -1,0 +1,46 @@
+{
+ "id": "lem-sf-derived-truncation-triangle",
+ "kind": "statement",
+ "title": "Canonical truncation triangle in the derived category",
+ "statement": "Let $\\mathcal C$ be an abelian category, $D(\\mathcal C)$ its derived category [def-weil-abstract-derived-category] with cohomology functors $H^n$, and let $K\\in D(\\mathcal C)$ and $b\\in\\mathbf Z$. There is a distinguished triangle\\n$$\\nK'\\longrightarrow K\\longrightarrow K''\\longrightarrow K'[1]\\n$$\\nwith $H^n(K')=0$ for all $n>b-1$ and $H^n(K'')=0$ for all $n<b$ (namely $K'=\\tau_{\\leq b-1}K$, $K''=\\tau_{\\geq b}K$ for the canonical t-structure).",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Remark Tag 08J5 (label remark-truncation-distinguished-triangle: the canonical triangle $\\tau_{\\leq a}K\\to K\\to\\tau_{\\geq a+1}K\\to$, from the short exact sequence $0\\to\\tau_{\\leq a}K\\to K\\to K/\\tau_{\\leq a}K\\to0$), with $a=b-1$"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'triangleLEGE_distinguished' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean; grep -n 'lemma isLE_iff\\|lemma isGE_iff\\|def TStructure.t' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+   "results": "TStructure.triangleLEGE_distinguished (TruncLEGT.lean:206); DerivedCategory.TStructure.t the canonical t-structure (TStructure.lean:34); DerivedCategory.isLE_iff, isGE_iff (cohomological description of the aisles)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Triangulated.TStructure.triangleLEGE_distinguished",
+  "file": "Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean",
+  "how": "specializes in one line: `DerivedCategory.TStructure.t.triangleLEGE_distinguished (b-1) b (by lia) K`; the vanishing of cohomology is `DerivedCategory.isLE_iff` / `isGE_iff` applied to the instances `IsLE (truncLE (b-1) K) (b-1)`, `IsGE (truncGE b K) b`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-proetale-constructible-origin",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
