@@ -26,6 +26,51 @@ upperStarIsoLocalizationRestriction_inv_app_comp_adicUpperStarUnitIso`).
 
 @[expose] public section
 
+namespace PadicAlgCl
+
+variable {l : ℕ} [Fact l.Prime] {T : Type*} [TopologicalSpace T]
+
+/-- Evaluation of locally finite functions at a point. -/
+noncomputable def locallyFiniteFunctionsEval (t : T) :
+    locallyFiniteFunctions l T →+* PadicAlgCl l where
+  toFun f := f.1 t
+  map_one' := rfl
+  map_mul' _ _ := rfl
+  map_zero' := rfl
+  map_add' _ _ := rfl
+
+@[simp]
+lemma locallyFiniteFunctionsEval_apply (t : T) (f : locallyFiniteFunctions l T) :
+    locallyFiniteFunctionsEval t f = f.1 t :=
+  rfl
+
+/-- A nowhere vanishing locally finite function is invertible. -/
+lemma isUnit_of_forall_ne_zero (f : locallyFiniteFunctions l T) (hf : ∀ t, f.1 t ≠ 0) :
+    IsUnit f := by
+  have hc : Continuous fun t ↦ (f.1 t)⁻¹ := f.1.continuous.inv₀ hf
+  let g : C(T, PadicAlgCl l) := ⟨fun t ↦ (f.1 t)⁻¹, hc⟩
+  have hg : g ∈ locallyFiniteFunctions l T := by
+    intro x
+    obtain ⟨U, hU, hfU⟩ := f.2 x
+    refine ⟨U, hU, ?_⟩
+    obtain ⟨S, hS⟩ := Module.Finite.iff_fg.1 hfU
+    let E := IntermediateField.adjoin ℚ_[l] (S : Set (PadicAlgCl l))
+    have : FiniteDimensional ℚ_[l] E := IntermediateField.finiteDimensional_adjoin
+      fun x _ ↦ (Algebra.IsAlgebraic.isAlgebraic x).isIntegral
+    have hfE : ∀ y ∈ U, f.1 y ∈ E := fun y hy ↦ by
+      have : f.1 y ∈ Submodule.span ℚ_[l] (S : Set (PadicAlgCl l)) := by
+        rw [hS]; exact Submodule.subset_span ⟨y, hy, rfl⟩
+      exact (Submodule.span_le (p := Subalgebra.toSubmodule E.toSubalgebra)).2
+        (fun z hz ↦ IntermediateField.subset_adjoin _ _ hz) this
+    refine Submodule.finiteDimensional_of_le (S₂ := Subalgebra.toSubmodule E.toSubalgebra) ?_
+    refine Submodule.span_le.2 ?_
+    rintro _ ⟨y, hy, rfl⟩
+    exact E.inv_mem (hfE y hy)
+  have h1 : f * ⟨g, hg⟩ = 1 := Subtype.ext (ContinuousMap.ext fun t ↦ mul_inv_cancel₀ (hf t))
+  exact ⟨⟨f, ⟨g, hg⟩, h1, by rw [mul_comm]; exact h1⟩, rfl⟩
+
+end PadicAlgCl
+
 open CategoryTheory MonoidalCategory Limits Opposite Functor.LaxMonoidal
 
 universe u
