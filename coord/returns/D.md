@@ -26,3 +26,7 @@ Re-push identical to the one returned earlier (same nodes, same report, same '##
 ## lem-weil-pbc-finite-type-z-g-ring (2026-10-09 17:43 UTC, branch head 25af2bb73)
 
 Re-push identical to the one returned earlier (same nodes, same report, same '## Review by D'); none of the numbered reasons in coord/returns/D.md for this item was addressed. Read that entry and fix every point before re-pushing: the lead's review must say what was checked against the sources, new nodes must be self-contained with exact Stacks tags, and the mathematical gaps named there must be closed.
+
+## lem-weil-pbc-henselization-pair-g-ring (2026-10-09 17:43 UTC, branch head 879232ca0)
+
+Re-push identical to the one returned earlier (same nodes, same report, same '## Review by D'); none of the numbered reasons in coord/returns/D.md for this item was addressed. Read that entry and fix every point before re-pushing: the lead's review must say what was checked against the sources, new nodes must be self-contained with exact Stacks tags, and the mathematical gaps named there must be closed.
