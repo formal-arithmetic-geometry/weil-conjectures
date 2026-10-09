@@ -8,7 +8,11 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.Compactification.CommonRefinement
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.OpenClosed.Derived
 
 /-!
 
@@ -113,22 +117,88 @@ noncomputable def rightDerivedLowerShriekOfCompactificationComparison
       (Functor.rightDerivedFunctorCompIso' (r.hom)_*[A] (d.g)_*[A]
         (refinementLowerStarComp A r)).hom
 
-/-- **The comparison of unbounded derived lower shrieks along a refinement is an
-isomorphism**: for a refinement `r : c.Refinement d` whose square over `X` is cartesian, the
-comparison `Rf_!(d)[A] ⟶ Rf_!(c)[A]` is an isomorphism.
+section Torsion
 
-Not proved yet, and not expected to hold in this generality. The blueprint (`BA43-RHO`) only
-states the bounded below version, with torsion coefficients: it rests on proper base change
-for `r.hom`, which needs torsion coefficients. Passing from `D⁺` to the unbounded derived
-category moreover needs `R(r.hom)_*` to have finite cohomological dimension, since étale
-topoi are not left-complete in general. The corresponding hypotheses on `A` and on `f` are
-still to be added. -/
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+
+/-- **The unit of `D(q^*) ⊣ Rq_*` at an extension by zero is an isomorphism.** Let
+`r : c.Refinement d` be a refinement of compactifications whose square over `X` is cartesian,
+and write `q = r.hom : c.Z ⟶ d.Z` and `j = d.i`. For torsion coefficients the unit
+`j_! K ⟶ Rq_* q^* j_! K` is an isomorphism. It is checked on the open `X` and on its closed
+complement `i : W ⟶ d.Z`:
+
+* over `X`, `q^* j_! = (c.i)_!` is fully faithful, so the unit is invisible to `j^*`
+  (`CategoryTheory.Adjunction.isIso_map_unit_app_obj`);
+* over `W`, both sides vanish: `i^* j_! K = 0`, and by proper base change for the proper `q`,
+  `i^* Rq_* q^* j_! K` is computed on `q⁻¹(W)`, which does not meet `X`. -/
+theorem isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_openImmersionLowerShriek
+    (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso ((Etale.mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) r.hom).unit.app
+      (D((d.i)_!open[ModuleCat.{u + 1} Λ]).obj K)) := by
+  apply isIso_of_isIso_mapDerivedCategoryUpperStar_map _ d.i d.i.closedComplement
+    d.i.range_closedComplement
+  · have : D((d.i)_!open[ModuleCat.{u + 1} Λ]).Full :=
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction _ d.i).fullyFaithfulLOfIsIsoUnit.full
+    have : D((d.i)_!open[ModuleCat.{u + 1} Λ]).Faithful :=
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction _ d.i).fullyFaithfulLOfIsIsoUnit.faithful
+    have : D((c.i)_!open[ModuleCat.{u + 1} Λ]).Full :=
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction _ c.i).fullyFaithfulLOfIsIsoUnit.full
+    have : D((c.i)_!open[ModuleCat.{u + 1} Λ]).Faithful :=
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction _ c.i).fullyFaithfulLOfIsIsoUnit.faithful
+    have : (D((d.i)_!open[ModuleCat.{u + 1} Λ]) ⋙ D((r.hom)^*[ModuleCat.{u + 1} Λ])).Full :=
+      Functor.Full.of_iso (refinementLowerShriekBaseChangeDerivedIso _ r hcart)
+    have : (D((d.i)_!open[ModuleCat.{u + 1} Λ]) ⋙ D((r.hom)^*[ModuleCat.{u + 1} Λ])).Faithful :=
+      Functor.Faithful.of_iso (refinementLowerShriekBaseChangeDerivedIso _ r hcart)
+    exact Adjunction.isIso_map_unit_app_obj _
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction _ d.i) K
+  · have hdisj : Disjoint (Set.range d.i.closedComplement.base) (Set.range d.i.base) := by
+      rw [d.i.range_closedComplement]
+      exact disjoint_compl_left
+    refine isIso_of_source_target_iso_zero _
+      (isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoint_range _ d.i
+        d.i.closedComplement hdisj K).isoZero (IsZero.isoZero ?_)
+    let sq := IsPullback.of_hasPullback r.hom d.i.closedComplement
+    have := isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite sq
+    let N := D((r.hom)^*[ModuleCat.{u + 1} Λ]).obj (D((d.i)_!open[ModuleCat.{u + 1} Λ]).obj K)
+    have hN :
+        IsZero (L((pullback.fst r.hom d.i.closedComplement)^*[ModuleCat.{u + 1} Λ]).obj N) := by
+      refine IsZero.of_iso ?_
+        ((leftDerivedUpperStarIsoMapDerivedCategory _ _).app N ≪≫
+          ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp _
+            (pullback.fst r.hom d.i.closedComplement) r.hom) ≪≫
+            Functor.mapDerivedCategoryCompIso _ _).app _).symm)
+      refine isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoint_range _
+        d.i _ (hdisj.mono_left ?_) K
+      rw [pullback.condition, Scheme.Hom.comp_base, TopCat.coe_comp]
+      exact Set.range_comp_subset_range _ _
+    exact IsZero.of_iso
+      ((R((pullback.snd r.hom d.i.closedComplement)_*[ModuleCat.{u + 1} Λ])).map_isZero hN)
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ _).symm.app _ ≪≫
+        asIso ((derivedBaseChangeMap _ sq.toCommSq).app N))
+
+/-- **The comparison of unbounded derived lower shrieks along a refinement is an
+isomorphism** for torsion coefficients: for a refinement `r : c.Refinement d` whose square over
+`X` is cartesian, the comparison `Rf_!(d)[Λ] ⟶ Rf_!(c)[Λ]` is an isomorphism. The composition
+and base change factors of the comparison are isomorphisms, and so is the unit factor, by
+`isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_openImmersionLowerShriek`, which rests
+on proper base change for `r.hom`. This is the unbounded form of `BA43-RHO`. -/
 instance isIso_rightDerivedLowerShriekOfCompactificationComparison
     (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
-    IsIso (rightDerivedLowerShriekOfCompactificationComparison A r hcart) :=
-  sorry
+    IsIso (rightDerivedLowerShriekOfCompactificationComparison (ModuleCat.{u + 1} Λ) r hcart) := by
+  have : IsIso (Functor.whiskerLeft D((d.i)_!open[ModuleCat.{u + 1} Λ])
+      (Etale.mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) r.hom).unit) :=
+    have : ∀ K, IsIso ((Functor.whiskerLeft D((d.i)_!open[ModuleCat.{u + 1} Λ])
+        (Etale.mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) r.hom).unit).app K) :=
+      fun K ↦ isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_openImmersionLowerShriek
+        r Λ hcart K
+    NatIso.isIso_of_isIso_app _
+  unfold rightDerivedLowerShriekOfCompactificationComparison
+  infer_instance
 
-variable [QuasiCompact f]
+end Torsion
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [QuasiCompact f]
 
 /-- **The unbounded derived lower shriek does not depend on the compactification**: for two
 compactifications `c` and `d` of a quasi-compact morphism `f`, the isomorphism
@@ -137,10 +207,10 @@ compactifications `c` and `d` of a quasi-compact morphism `f`, the isomorphism
 inverse of the comparison along `Compactification.infSnd c d`.
 (blueprint: unbounded analogue of `κ_{C,D}` in `BA43-RHO`) -/
 noncomputable def rightDerivedLowerShriekOfCompactificationIso
-    (c d : Compactification f) : Rf_!(c)[A] ≅ Rf_!(d)[A] :=
-  asIso (rightDerivedLowerShriekOfCompactificationComparison A
+    (c d : Compactification f) : Rf_!(c)[ModuleCat.{u + 1} Λ] ≅ Rf_!(d)[ModuleCat.{u + 1} Λ] :=
+  asIso (rightDerivedLowerShriekOfCompactificationComparison _
       (Compactification.infFst c d) (Compactification.isPullback_infFst c d)) ≪≫
-    (asIso (rightDerivedLowerShriekOfCompactificationComparison A
+    (asIso (rightDerivedLowerShriekOfCompactificationComparison _
       (Compactification.infSnd c d) (Compactification.isPullback_infSnd c d))).symm
 
 variable [HasCompactification f]
@@ -150,8 +220,8 @@ quasi-compact morphism `f` is isomorphic to `R(f)_![A]`, the one attached to the
 compactification `HasCompactification.compactification f`.
 (blueprint: unbounded analogue of `κ_{C,D}` in `BA43-RHO`) -/
 noncomputable def rightDerivedLowerShriekIso (c : Compactification f) :
-    Rf_!(c)[A] ≅ R(f)_![A] :=
-  rightDerivedLowerShriekOfCompactificationIso A c (HasCompactification.compactification f)
+    Rf_!(c)[ModuleCat.{u + 1} Λ] ≅ R(f)_![ModuleCat.{u + 1} Λ] :=
+  rightDerivedLowerShriekOfCompactificationIso Λ c (HasCompactification.compactification f)
 
 end Etale
 

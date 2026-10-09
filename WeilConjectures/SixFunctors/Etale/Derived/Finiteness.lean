@@ -131,14 +131,16 @@ theorem boundedConstructible_rightDerivedLowerShriek_padicAlgCl (l : ℕ) [Fact 
 
 **The fibre-dimension bound.** If `e` bounds the dimensions of the *geometric* fibres of a
 separated finite-type `f : X ⟶ Y`, then `R^q f_! K = 0` for `q > 2e` and every bounded
-constructible `K`. -/
+constructible `K` concentrated in degrees `≤ 0`; for a sheaf `𝓕` placed in degree `0` this is
+the blueprint's `R^q f_! 𝓕 = 0`. Some bound on the degrees of `K` is needed: for `f = 𝟙` the
+complex `K = Λ[-1]` has `H^1(Rf_! K) = Λ`. -/
 theorem isZero_homology_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactification f]
     [HasInvertibleExponent Λ X] (e : ℕ)
     (he : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
       topologicalKrullDim (Limits.pullback f s : Scheme.{u}) ≤ (e : WithBot ℕ∞))
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
-    (q : ℤ) (hq : (2 * e : ℤ) < q) :
+    (hK₀ : _root_.DerivedCategory.TStructure.t.IsLE K 0) (q : ℤ) (hq : (2 * e : ℤ) < q) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
       ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)) :=
   sorry

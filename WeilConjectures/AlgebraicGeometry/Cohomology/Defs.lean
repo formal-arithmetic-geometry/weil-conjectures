@@ -167,6 +167,17 @@ lemma smulHom_naturality {M N : X.Modules} (φ : M ⟶ N) (a : Γ(X, ⊤)) :
   ext U x
   simp
 
+/-- Pushing forward multiplication by the pullback `g^♯ c` of a global function is
+multiplication by `c`. -/
+lemma pushforward_map_smulHom {Y : Scheme.{u}} (g : X ⟶ Y) (N : X.Modules) (c : Γ(Y, ⊤)) :
+    (pushforward g).map (N.smulHom (g.appTop c)) = ((pushforward g).obj N).smulHom c := by
+  ext U x
+  rw [pushforward_map_app, smulHom_app_apply]
+  refine (smulHom_app_apply N (g.appTop c) (g ⁻¹ᵁ U) x).trans ?_
+  have h := ConcreteCategory.congr_hom (g.naturality (homOfLE (le_top (a := U))).op) c
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h
+  exact congrArg (fun r : Γ(X, g ⁻¹ᵁ U) ↦ r • (show Γ(N, g ⁻¹ᵁ U) from x)) h.symm
+
 /-- Multiplication by global functions on the `n`-th cohomology of a sheaf of modules, as a
 ring homomorphism to the additive endomorphisms of `M.H n`. -/
 noncomputable def smulEnd (M : X.Modules) (n : ℕ) : Γ(X, ⊤) →+* AddMonoid.End (M.H n) where

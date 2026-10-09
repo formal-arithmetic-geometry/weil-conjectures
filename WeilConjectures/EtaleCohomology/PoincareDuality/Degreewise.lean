@@ -167,7 +167,7 @@ end General
 
 namespace TateOrientation
 
-variable {Λ : Type (u + 1)} [CommRing Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
   {a : X ⟶ Y} [HasCompactification a] {d : ℕ}
 
 /-- Blueprint `prop-pod-degree-of-the-pairing`: Degree of the pairing.

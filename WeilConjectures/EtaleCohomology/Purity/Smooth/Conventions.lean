@@ -314,7 +314,8 @@ The *section invariant* `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` of a morphism 
 together with a section `s : B ⟶ V`. For `g` smooth of pure relative dimension `d` with `s` a
 closed section, smooth purity identifies it with `Λ_B(d)[2d]`; the deformation to the normal
 cone of the section reduces the general case to the standard pair `(𝔸^d_B → B, 0)`. -/
-noncomputable def sectionInvariant {V B : Scheme.{u}} (g : V ⟶ B) [HasCompactification g]
+noncomputable def sectionInvariant [Finite Λ] {V B : Scheme.{u}} (g : V ⟶ B)
+    [HasCompactification g]
     (s : B ⟶ V) : DerivedCategory (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   (L((s)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) g)
 
