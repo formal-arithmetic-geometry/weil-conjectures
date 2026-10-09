@@ -16,9 +16,85 @@
   "def-weil-finite-integral-morphism",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because a finite morphism is affine, the hypothesis on f and [lem-weil-pbc-finite-morphism-permanence] reduce the problem to descending affineness. Apply [lem-weil-pbc-affine-finite-stage] to obtain an index after which f_i is affine; replace 0 by that index.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-affine-finite-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 01ZO, proof, first paragraph using Lemma Tag 01ZN"
+   }
+  },
+  {
+   "text": "Choose a finite affine open covering of Y_0 and refine the inverse images under f_0 by affine opens. Using [lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings] and locality of affineness, it is enough to treat one affine pair X_0 -> Y_0 over a common affine open W in S_0; the corresponding base changes at every stage remain affine by [lem-weil-pbc-affine-morphism-permanence].",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 01ZO, proof, reduction after descending affineness to finite affine coverings"
+   }
+  },
+  {
+   "text": "Write W=Spec(A_0), Y_0=Spec(B_0), and X_0=Spec(C_0) in this affine reduction. The assumption that f_0 is locally of finite type gives that C_0 is a finite-type B_0-algebra by [lem-weil-pbc-lft-affine-pairs]. The limit description [lem-weil-pbc-limit-affine-transition] identifies the coordinate rings at the limit with A tensor_{A_0} B_0 and A tensor_{A_0} C_0, where A=colim_i A_i.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 01ZO, proof, affine reduction in Situation 081D"
+   }
+  },
+  {
+   "text": "The finite morphism f says that A tensor_{A_0} B_0 -> A tensor_{A_0} C_0 is a finite ring map. Apply [lem-weil-pbc-colimit-finite-algebra] to obtain i>=0 for which A_i tensor_{A_0} B_0 -> A_i tensor_{A_0} C_0 is finite.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-colimit-finite-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07RG (lemma-colimit-finite), applied in Limits, Lemma Tag 01ZO"
+   }
+  },
+  {
+   "text": "The finite ring map in the preceding step is exactly the affine-local criterion for the base-changed morphism f_i to be finite, by [def-weil-finite-integral-morphism]. This proves the assertion for the chosen affine pair and hence, by the finite covering, for f_i.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 01ZO, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-affine-finite-stage",
+  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-colimit-finite-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,7 +119,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +139,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-descend-finite",
+  "worker": "stage1",
+  "summary": "Checked Stacks 01ZO against the imported statement. Added the missing affine-stage and directed-colimit finite-algebra nodes, then expanded the proof into the affine descent, finite affine-cover reduction, affine algebra translation, colimit finiteness, and reconstruction steps. Mathlib searches on both new nodes found no matching eventual-descent theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: Reviewed five proof steps against Stacks 01ZO and the new 01ZN/07RG statement nodes; route, searches, and proof dependency union are complete, with no unrelated files."
+ }
 }
