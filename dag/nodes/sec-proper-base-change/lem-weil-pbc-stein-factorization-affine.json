@@ -13,9 +13,101 @@
   "def-pc-scheme-fibre",
   "def-weil-connected-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}A$ and $S\\xleftarrow{s}S' = \\operatorname{Spec}B$ for the relative-spectrum factorization supplied by [def-weil-pbc-stein-factorization]. The preceding universal factorization lemma (Tag 03GY) applies because a proper morphism is universally closed and quasi-separated. It gives that $q:X\\to S'$ is universally closed, quasi-compact, quasi-separated and surjective, that $s$ is integral, and that $q_*\\mathcal O_X=\\mathcal O_{S'}$ with $S'=\\underline{\\operatorname{Spec}}_S(f_*\\mathcal O_X)$.",
+   "uses": [
+    "def-weil-pbc-stein-factorization",
+    "lem-weil-pbc-stein-universally-closed-factor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 37.53.4 (Tag 03GY), lines 15087--15152; Theorem 37.53.5 setup, lines 15312--15320"
+   }
+  },
+  {
+   "text": "The morphism $q$ is separated by cancellation from the separated proper composite $s\\circ q=f$ [lem-weil-pbc-separated-cancellation], and it is locally of finite type because $s\\circ q=f$ is locally of finite type and locally finite type is permanent under this composition [lem-weil-pbc-proper-fp-permanence]. Tag 03GY already gives that $q$ is universally closed. Combining universal closedness, separatedness and finite type is exactly properness, so $q$ is proper.",
+   "uses": [
+    "lem-weil-pbc-stein-universally-closed-factor",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Theorem 37.53.5 (Tag 03H2), lines 15312--15321; Morphisms Lemma 03GN (used in the preceding factorization proof)"
+   }
+  },
+  {
+   "text": "The universal factorization lemma already identifies $s$ as integral and $S'$ as $\\operatorname{Spec}H^0(X,\\mathcal O_X)$; over the affine base this is the induced integral ring map $A\\to B$. Equivalently, the exact Mathlib leaf [lem-weil-pbc-stein-integral-global-sections] applies via `AlgebraicGeometry.isIntegral_appTop_of_universallyClosed` at Proper.lean:138.",
+   "uses": [
+    "lem-weil-pbc-stein-integral-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Theorem 37.53.5 (Tag 03H2), clauses (2) and (4), line 15290"
+   }
+  },
+  {
+   "text": "To prove geometric connectedness, replace the base by $S'$ using $q_*\\mathcal O_X=\\mathcal O_{S'}$ from Tag 03GY; since $S'=\\operatorname{Spec}B$ in the Stein factorization, the replaced situation has $H^0(X,\\mathcal O_X)=B$. For a point $s\\in S'$ apply the etale criterion Tag 03GZ: it suffices to check connectedness after every affine etale neighbourhood $(U,u)\\to(S',s)$. Properness is preserved by this base change [lem-weil-pbc-proper-fp-permanence]. Writing $U=\\operatorname{Spec}R'$, Tag 02KH (the proper special case of its quasi-compact quasi-separated flat-base-change lemma) gives $H^0(X_U,\\mathcal O_{X_U})=H^0(X,\\mathcal O_X)\\otimes_B R'=B\\otimes_B R'=R'$, so the fibre over $u$ is in the normalized situation of [lem-weil-pbc-stein-normalized-fibre-idempotent].",
+   "uses": [
+    "lem-weil-pbc-stein-universally-closed-factor",
+    "lem-weil-pbc-stein-geometric-fibre-etale-criterion",
+    "lem-weil-pbc-stein-flat-base-change-global-sections",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Theorem 37.53.5 (Tag 03H2), lines 15321--15334; Lemma 03GZ; Cohomology Lemma 02KH"
+   }
+  },
+  {
+   "text": "The normalized affine situation is handled by the formal-functions/idempotent argument of Tag 03H2. The theorem on formal functions identifies the completed local ring at $s$ with the inverse limit of the global sections on the infinitesimal neighbourhoods $X_n$. A nontrivial idempotent on the fibre lifts compatibly through these neighbourhoods, producing a nontrivial idempotent in the completed local ring, which is impossible because that ring is local. The fibre is therefore connected and nonempty, by [lem-weil-pbc-stein-normalized-fibre-idempotent]. This proves that every geometric fibre of $q$ is connected.",
+   "uses": [
+    "lem-weil-pbc-stein-normalized-fibre-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Theorem 37.53.5 (Tag 03H2), lines 15334--15357; Cohomology Lemma 02OD and Derived Categories Lemma 0G7X"
+   }
+  },
+  {
+   "text": "Finally, [def-pc-scheme-fibre] identifies the underlying space of the scheme-theoretic fibre $X_t$ with the topological inverse image $q^{-1}(t)$ by a homeomorphism (Stacks Schemes Lemma 26.18.5, Tag 01K1). Hence connectedness and nonemptiness of $X_t$ give the final topological assertion.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Theorem 37.53.5 (Tag 03H2), clause (1), together with Schemes Definition 26.18.2 and Lemma 26.18.5 (Tags 01K0, 01K1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-stein-factorization",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-stein-flat-base-change-global-sections",
+  "lem-weil-pbc-stein-geometric-fibre-etale-criterion",
+  "lem-weil-pbc-stein-integral-global-sections",
+  "lem-weil-pbc-stein-normalized-fibre-idempotent",
+  "lem-weil-pbc-stein-universally-closed-factor",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Theorem 37.53.5 (Tag 03H2), proof lines 15312--15357, using Lemma 03GY and Lemma 03GZ"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,7 +132,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,7 +156,15 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Stein factorization 03H2 over an affine base (integral, proper, geometrically connected fibres); self-contained; correct; unsplit."
- }
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: Third delivery: along the proof of 03H2 with five new nodes (03GY, 03GZ, 02KH special case, the idempotent-fibre statement now without a proof sketch, the Mathlib leaf for 01W6-type integrality) in the item's unit; step 2 cites the separated-cancellation and permanence nodes, step 4 writes the 02KH specialization explicitly. The Mathlib leaf lacked the line field, which L verified (Proper.lean:138) and added after the merge. Accepted by L."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-stein-factorization-affine",
+  "worker": "stage1",
+  "summary": "Repaired split along the actual proof of Theorem 37.53.5 (Tag 03H2): the preceding Tag 03GY factorization, properness via universal-closed image and permanence, affine etale criterion Tag 03GZ, flat global-sections base change Tag 02KH, and the formal-functions/idempotent fibre argument. The integral clause is the exact Mathlib leaf isIntegral_appTop_of_universallyClosed at Proper.lean:138. The general scheme-fibre homeomorphism is supplied by def-pc-scheme-fibre (Tag 01K1), so no duplicate Stein-specific fibre node is introduced."
+ },
+ "tool_uses": []
 }
