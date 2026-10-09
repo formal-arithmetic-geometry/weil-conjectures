@@ -10,9 +10,77 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (elements of $A$ and when two are equal).* By [lem-weil-pbc-filtered-colimit-algebras-elementwise], applied to $R$, the filtered category $I$ and the diagram $i\\mapsto A_i$ with its colimit $(A,(\\iota_i))$: (a) $(A,(\\iota_i))$ is also a colimit of the underlying diagram $i\\mapsto A_i$ of commutative rings (transition maps $A(u)$); (b) every $z\\in A$ is $\\iota_i(a)$ for some $i\\in I$ and $a\\in A_i$. By [lem-weil-pbc-filtered-colimit-rings-zero], applied to the small filtered category $I$ and the colimit (a) of commutative rings: (c) for $a\\in A_i$, $b\\in A_j$ one has $\\iota_i(a)=\\iota_j(b)$ if and only if there are an object $k$ and morphisms $u:i\\to k$, $v:j\\to k$ with $A(u)(a)=A(v)(b)$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00D6 (lemma-directed-colimit, line 778) and its proof: elements of a filtered colimit are classes of elements of the stages, sums and scalar multiples computed at a common later index; transcribed here to the colimit of commutative R-algebras regarded as R-modules"
+   }
+  },
+  {
+   "text": "*Step 2 (a cocone of $R$-modules).* An $R$-algebra homomorphism $\\varphi:B\\to B'$ of commutative $R$-algebras with structure maps $\\sigma,\\sigma'$ is $R$-linear: it is additive, and $\\varphi(r\\cdot b)=\\varphi(\\sigma(r)b)=\\varphi(\\sigma(r))\\varphi(b)=\\sigma'(r)\\varphi(b)=r\\cdot\\varphi(b)$. So the $A(u)$ and $\\iota_i$ are $R$-linear, $i\\mapsto A_i$ is a diagram of $R$-modules (functoriality is that of the algebra diagram), and $\\iota_j\\circ A(u)=\\iota_i$ for $u:i\\to j$ holds since $(A,(\\iota_i))$ is a cocone of algebras [def-weil-pbc-category-colimit]; hence $(A,(\\iota_i))$ is a cocone of $R$-modules on this diagram.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00D6 (lemma-directed-colimit, line 778) and its proof: elements of a filtered colimit are classes of elements of the stages, sums and scalar multiples computed at a common later index; transcribed here to the colimit of commutative R-algebras regarded as R-modules"
+   }
+  },
+  {
+   "text": "*Step 3 (definition of $f$).* Let $P$ be an $R$-module and $f_i:A_i\\to P$ $R$-linear with $f_j\\circ A(u)=f_i$ for all $u:i\\to j$. For $z\\in A$ choose by step 1(b) $i$ and $a\\in A_i$ with $z=\\iota_i(a)$ and put $f(z)=f_i(a)$. This does not depend on the choice: if also $z=\\iota_j(b)$ with $b\\in A_j$, step 1(c) gives $k$, $u:i\\to k$, $v:j\\to k$ with $A(u)(a)=A(v)(b)$, so $f_i(a)=f_k(A(u)(a))=f_k(A(v)(b))=f_j(b)$. Taking the representation $z=\\iota_i(a)$ itself gives $f(\\iota_i(a))=f_i(a)$, i.e. $f\\circ\\iota_i=f_i$ for every $i$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00D6 (lemma-directed-colimit, line 778) and its proof: elements of a filtered colimit are classes of elements of the stages, sums and scalar multiples computed at a common later index; transcribed here to the colimit of commutative R-algebras regarded as R-modules"
+   }
+  },
+  {
+   "text": "*Step 4 ($f$ is $R$-linear).* Let $z,z'\\in A$ and $r\\in R$. By step 1(b) write $z=\\iota_i(a)$, $z'=\\iota_j(b)$. Since $I$ is filtered [def-weil-pbc-category-colimit] there are an object $k$ and morphisms $u:i\\to k$, $v:j\\to k$; by the cocone identity of step 2, $z=\\iota_k(a')$, $z'=\\iota_k(b')$ with $a'=A(u)(a)$, $b'=A(v)(b)\\in A_k$. As $\\iota_k$ is $R$-linear (step 2), $z+z'=\\iota_k(a'+b')$ and $r\\cdot z=\\iota_k(r\\cdot a')$, so by step 3 and the $R$-linearity of $f_k$: $f(z+z')=f_k(a'+b')=f_k(a')+f_k(b')=f(z)+f(z')$ and $f(r\\cdot z)=f_k(r\\cdot a')=r\\cdot f_k(a')=r\\cdot f(z)$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00D6 (lemma-directed-colimit, line 778) and its proof: elements of a filtered colimit are classes of elements of the stages, sums and scalar multiples computed at a common later index; transcribed here to the colimit of commutative R-algebras regarded as R-modules"
+   }
+  },
+  {
+   "text": "*Step 5 (uniqueness; conclusion).* If $g:A\\to P$ is $R$-linear with $g\\circ\\iota_i=f_i$ for all $i$, then for $z\\in A$, written $z=\\iota_i(a)$ by step 1(b), $g(z)=f_i(a)=f(z)$; so $g=f$. With steps 2-4 this says that $(A,(\\iota_i))$ is a colimit of the diagram $i\\mapsto A_i$ in the category of $R$-modules [def-weil-pbc-category-colimit].",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00D6 (lemma-directed-colimit, line 778) and its proof: elements of a filtered colimit are classes of elements of the stages, sums and scalar multiples computed at a common later index; transcribed here to the colimit of commutative R-algebras regarded as R-modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-rings-zero",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Stacks does not state this for algebras; the proof transcribes the elementwise description of Lemma Tag 00D6 (lemma-directed-colimit) and is written by an agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +109,31 @@
    "results": "AlgCat/FilteredColimits.lean:92 forget₂ (AlgCat R) RingCat and :95 forget (AlgCat R) preserve filtered colimits; Ring/FilteredColimits.lean:301 forget₂ RingCat AddCommGrpCat; no instance for forget₂ (AlgCat R) (ModuleCat R) or forget₂ (CommAlgCat R) (ModuleCat R) with colimits (only Limits: AlgCat/Limits.lean:168-176); CommAlgCat/ has Basic, FiniteType, Monoidal only",
    "date": "2026-10-10",
    "verdict": "no match: obtainable in Lean in a few lines (forget (ModuleCat R) reflects isomorphisms and preserves filtered colimits, so it reflects them; compose with the AlgCat and CommAlgCat ≌ Under R facts), but not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "forget₂ CommAlgCat ModuleCat preserves filtered colimits",
+   "results": "ModuleCat.FilteredColimits.forget_preservesFilteredColimits, forget₂AddCommGroup_preservesFilteredColimits, forget_reflectsFilteredColimits (Mathlib.Algebra.Category.ModuleCat.FilteredColimits); CommRingCat.FilteredColimits.forget₂Ring_preservesFilteredColimits; AddGrpCat/AddCommGrpCat/CommGrpCat forget_preservesFilteredColimits",
+   "date": "2026-10-10",
+   "verdict": "no match: ingredients only (forget (ModuleCat R) preserves and reflects filtered colimits)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFilteredColimits, CommAlgCat",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'PreservesFilteredColimits\\|PreservesColimitsOfShape' Mathlib/Algebra/Category/AlgCat Mathlib/Algebra/Category/CommAlgCat Mathlib/Algebra/Category/ModuleCat; grep -rln 'forget₂ (CommAlgCat' Mathlib",
+   "results": "AlgCat/FilteredColimits.lean:92,95 (forget₂ (AlgCat R) RingCat, forget (AlgCat R)); ModuleCat/FilteredColimits.lean:195,202; ModuleCat/Colimits.lean:129; forget₂ (CommAlgCat ...) only in CommAlgCat/Basic.lean, no colimit preservation to ModuleCat",
+   "date": "2026-10-10",
+   "verdict": "no match: confirms the earlier grep; no exact instance for CommAlgCat R ⥤ ModuleCat R"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +153,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "worker": "stage1",
+  "summary": "Statement kept (correct, introduces its objects; stmt_deps def-weil-pbc-category-colimit kept). No exact Mathlib instance for forget₂ (CommAlgCat R) (ModuleCat R) preserving filtered colimits (three kinds of search recorded, the earlier ones confirmed); the item is split. Proof in five steps: elements of A come from a stage and the equality criterion holds (lem-weil-pbc-filtered-colimit-algebras-elementwise, which gives the ring colimit and representability but NOT the equality criterion, so the existing Mathlib leaf lem-weil-pbc-filtered-colimit-rings-zero is applied to its ring colimit); algebra maps are R-linear and form a cocone; f defined on representatives and well defined; R-linearity at a common stage (filtered); uniqueness by joint surjectivity. No new node. Proof written by an agent after Stacks 00D6, which does not state the algebra case."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Five steps (agent proof after Stacks 00D6): elements and equality at a stage (elementwise node plus the rings-zero leaf), the coprojections form a cocone of modules, f defined on representatives is well defined, R-linear via a common stage, unique. Correct; 0 new nodes."
+ }
 }

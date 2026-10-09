@@ -12,9 +12,72 @@
   "def-pc-scheme",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Setup.* Let $\\xi$ be the unique point of $\\operatorname{Spec}K$ and $x=s(\\xi)=i(z)$. By [lem-weil-pbc-morphism-from-spec-field], $s=j_x\\circ\\operatorname{Spec}(\\varphi)$ with $\\varphi=\\varphi_s:\\kappa(x)\\to K$ the field map induced by $s$, where $j_y:\\operatorname{Spec}\\kappa(y)\\to Y$ denotes the canonical morphism at a point $y$ of a scheme $Y$; and $s\\mapsto(s(\\xi),\\varphi_s)$ is a bijection from morphisms $\\operatorname{Spec}K\\to X$ to pairs (point, field map), with inverse $(y,\\psi)\\mapsto j_y\\circ\\operatorname{Spec}(\\psi)$. Let $r:\\kappa(x)\\to\\kappa(z)$ be the map induced by $i$ on residue fields [def-weil-residue-field]; it is an isomorphism by [lem-weil-pbc-closed-immersion-residue-field-iso].",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-weil-residue-field",
+    "lem-weil-pbc-closed-immersion-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, the discussion of morphisms from spectra of fields before Lemma Tag 01J9 (lemma-characterize-points)"
+   }
+  },
+  {
+   "text": "*Existence.* Put $\\psi=\\varphi\\circ r^{-1}:\\kappa(z)\\to K$ and $s'=j_z\\circ\\operatorname{Spec}(\\psi):\\operatorname{Spec}K\\to Z$. By [lem-weil-pbc-residue-field-point-naturality] applied to $g=i$ and the point $z$, $i\\circ j_z=j_{x}\\circ\\operatorname{Spec}(r)$. Since $\\operatorname{Spec}$ is a contravariant functor [def-weil-affine-spectrum], $i\\circ s'=j_x\\circ\\operatorname{Spec}(r)\\circ\\operatorname{Spec}(\\psi)=j_x\\circ\\operatorname{Spec}(\\psi\\circ r)=j_x\\circ\\operatorname{Spec}(\\varphi)=s$. Moreover $s'(\\xi)=j_z(\\operatorname{Spec}(\\psi)(\\xi))=z$, because $j_z$ maps the unique point of $\\operatorname{Spec}\\kappa(z)$ to $z$ [lem-weil-pbc-morphism-from-spec-field].",
+   "uses": [
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-morphism-from-spec-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, the commutative diagram $\\operatorname{Spec}\\kappa(x)\\to\\operatorname{Spec}\\mathcal O_{X,x}\\to X$ over $\\operatorname{Spec}\\kappa(s)\\to S$ after Lemma Tag 01J9"
+   }
+  },
+  {
+   "text": "*The point of any lift.* Let $u:\\operatorname{Spec}K\\to Z$ satisfy $i\\circ u=s$. Then $i(u(\\xi))=s(\\xi)=i(z)$. A closed immersion is a homeomorphism onto its image [def-weil-closed-immersion], in particular injective on points, so $u(\\xi)=z$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Definition Tag 01HK (closed immersion of locally ringed spaces: homeomorphism onto a closed subset)"
+   }
+  },
+  {
+   "text": "*Uniqueness.* With $u$ as in the previous step, [lem-weil-pbc-morphism-from-spec-field] gives $u=j_z\\circ\\operatorname{Spec}(\\psi_u)$ with $\\psi_u=\\varphi_u:\\kappa(z)\\to K$, since $u(\\xi)=z$. By [lem-weil-pbc-residue-field-point-naturality] as in the existence step, $s=i\\circ u=j_x\\circ\\operatorname{Spec}(r)\\circ\\operatorname{Spec}(\\psi_u)=j_x\\circ\\operatorname{Spec}(\\psi_u\\circ r)$. So $s$ is the image of both pairs $(x,\\varphi)$ and $(x,\\psi_u\\circ r)$ under the inverse of the bijection of [lem-weil-pbc-morphism-from-spec-field], which is injective; hence $\\psi_u\\circ r=\\varphi$, and as $r$ is an isomorphism [lem-weil-pbc-closed-immersion-residue-field-iso], $\\psi_u=\\varphi\\circ r^{-1}=\\psi$. Therefore $u=j_z\\circ\\operatorname{Spec}(\\psi)=s'$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, the discussion before Lemma Tag 01J9 (a morphism $\\operatorname{Spec}K\\to X$ is the same as a point $x$ and a field map $\\kappa(x)\\to K$)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-weil-residue-field",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Direct argument from the description of morphisms from spectra of fields (discussion before and after Lemma Tag 01J9) and the residue-field isomorphism of a closed immersion; the node's source route (Lemma Tag 0356 applied to the reduced scheme Spec K, with Lemma Tag 01L7 for uniqueness) is replaced by this argument, which uses only nodes already in the DAG"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +106,45 @@
    "results": "ClosedImmersion.lean has lift only with a kernel inclusion; no reduced-source field-point factorization theorem in Mathlib",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism from a reduced scheme factors through a closed immersion if its range is contained in the range of the closed immersion",
+   "results": "AlgebraicGeometry.IsClosedImmersion, IsClosedImmersion.of_isPreimmersion, IsClosedImmersion.lift / lift_fac (Morphisms/ClosedImmersion.lean:210,215; hypothesis ker f ≤ ker g), IsClosedImmersion.instIsIsoSchemeToImage",
+   "date": "2026-10-10",
+   "verdict": "no match: lift needs the kernel inclusion, nothing converts a set-theoretic range condition for a reduced source into it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "unique lift of a morphism Spec K ⟶ X along a closed immersion Z ⟶ X when the image point lies in the range",
+   "results": "IsClosedImmersion.lift, lift_fac, lift_fac_assoc; IsOpenImmersion.lift and lift_uniq (open immersions only, range condition)",
+   "date": "2026-10-10",
+   "verdict": "no match (the range-condition lift exists only for open immersions)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "residue field map of a closed immersion is an isomorphism; Spec of a field point lifts along closed immersion",
+   "results": "IsClosedImmersion.Spec_map_residue, Scheme.instIsPreimmersionFromSpecResidueField, isClosed_singleton_iff_isClosedImmersion, Scheme.SpecToEquivOfField (ResidueField.lean:346), instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion (open immersions only), descResidueField_stalkClosedPointTo_fromSpecResidueField",
+   "date": "2026-10-10",
+   "verdict": "no match; SpecToEquivOfField and the naturality lemma are the tools the proof uses (already leaves of the cited nodes)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.IsReduced",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'Mono\\|lift\\|IsClosedImmersion\\|residueFieldMap.*IsIso' Mathlib/AlgebraicGeometry/ResidueField.lean; grep -rn 'IsReduced\\|liftQuotient\\|range_subset' Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean Morphisms/Immersion.lean; grep -rn 'instance.*Mono' Morphisms/Preimmersion.lean",
+   "results": "ResidueField.lean:177 IsIso residueFieldMap only for IsOpenImmersion; ClosedImmersion.lean:417 uses IsReduced only for a surjective closed immersion onto a reduced target; Preimmersion.lean:65 instance Mono f for IsPreimmersion f (uniqueness half only); no liftQuotient, no range-condition lift for closed immersions",
+   "date": "2026-10-10",
+   "verdict": "no match: only the uniqueness half (Mono of a preimmersion, Preimmersion.lean:65) is in Mathlib"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +164,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-field-point-factors-through-closed-immersion",
+  "worker": "stage1",
+  "summary": "Split with a direct proof from the point-and-field-map description of morphisms Spec K -> X (lem-weil-pbc-morphism-from-spec-field, Mathlib leaf SpecToEquivOfField), the naturality of the canonical morphisms j_z (lem-weil-pbc-residue-field-point-naturality, Mathlib leaf) and the residue-field isomorphism of a closed immersion (lem-weil-pbc-closed-immersion-residue-field-iso, unsplit, cited, not edited); injectivity on points from def-weil-closed-immersion. The source route 0356 + 01L7 would need two new nodes (reduced-source factorization, closed immersions are monomorphisms); the direct route needs none, so proof_origin is agent with the Stacks places 01J9 and 01HK per step. Statement and stmt_deps kept; tags 0356 (lemma-map-into-reduction), 01L7 (lemma-immersions-monomorphisms), 01J9, 01HK verified in tags/tags. Mathlib re-searched with LeanSearch, LeanFinder, Loogle and grep: no match (IsClosedImmersion.lift needs ker f <= ker g; Mono of a preimmersion gives only uniqueness). No new nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Four steps (agent proof): s = j_x Spec(phi) by the morphism-from-spec-field node, the residue map of the closed immersion is an isomorphism (unsplit node, delivered by F1 and returned once; cited, not edited), existence via the residue-field naturality leaf, point of any lift is z by injectivity, uniqueness from the bijection. Correct; 0 new nodes."
+ }
 }
