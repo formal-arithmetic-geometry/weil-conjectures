@@ -1,0 +1,54 @@
+{
+ "id": "def-weil-coefficientwise-ring-hom-map",
+ "kind": "definition",
+ "title": "Coefficientwise map of polynomials and power series along a ring homomorphism",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings and $T$ an indeterminate. The *coefficientwise map* along $\\varphi$ sends a polynomial $P=\\sum_rc_rT^r\\in R[T]$ [def-weil-polynomial-ring] to $\\varphi(P)=\\sum_r\\varphi(c_r)T^r\\in S[T]$, and a formal power series $f=\\sum_{n\\geq0}c_nT^n\\in R[[T]]$ [def-weil-formal-power-series] to $\\varphi(f)=\\sum_{n\\geq0}\\varphi(c_n)T^n\\in S[[T]]$; both maps are ring homomorphisms fixing $T$, and they agree on polynomials regarded as power series [def-weil-polynomial-as-power-series]. For $R=\\mathbf Z$, $S=\\mathbf Q$ and $\\varphi$ the inclusion $c\\mapsto c\\cdot1_{\\mathbf Q}$, these are the inclusions $\\mathbf Z[T]\\subset\\mathbf Q[T]$ and $\\mathbf Z[[T]]\\subset\\mathbf Q[[T]]$, through which an integral polynomial or power series is regarded as a rational one.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-normalized-integral-fraction.md",
+  "place": "node def-weil-normalized-integral-fraction, order 2862 (notion used in the displayed conditions)"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-formal-power-series",
+  "def-weil-polynomial-as-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'def map' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Eval/Defs.lean and RingTheory/PowerSeries/Basic.lean",
+   "results": "Polynomial.map (Algebra/Polynomial/Eval/Defs.lean:494, R[X] → S[X], ring hom version Polynomial.mapRingHom); PowerSeries.map (RingTheory/PowerSeries/Basic.lean:450, R⟦X⟧ →+* S⟦X⟧)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "'coefficientwise' in dag/nodes",
+   "results": "def-weil-coefficientwise-extension (only Z[T] → Q_ℓ[T], polynomials only) and its two lemmas; def-nagata-rees-localization-map (unrelated)",
+   "date": "2026-10-09",
+   "verdict": "no existing node covers Z[T] → Q[T] and Z[[T]] → Q[[T]]; this node is the general version"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.map",
+  "file": "Mathlib/Algebra/Polynomial/Eval/Defs.lean",
+  "how": "exact: `Polynomial.map φ P` (ring hom `Polynomial.mapRingHom φ`) and `PowerSeries.map φ f` (Mathlib/RingTheory/PowerSeries/Basic.lean:450); for Z → Q, φ = `Int.castRingHom ℚ`; compatibility with the coercion is `Polynomial.polynomial_map_coe` (Mathlib/RingTheory/PowerSeries/Basic.lean:806)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-normalized-integral-fraction",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

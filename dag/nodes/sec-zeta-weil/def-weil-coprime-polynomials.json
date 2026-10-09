@@ -1,0 +1,53 @@
+{
+ "id": "def-weil-coprime-polynomials",
+ "kind": "definition",
+ "title": "Coprime polynomials over a field",
+ "statement": "Let $K$ be a field [def-weil-field] and $T$ an indeterminate, with polynomial ring $K[T]$ [def-weil-polynomial-ring]. Two polynomials $P,Q\\in K[T]$ are *coprime*, written $\\gcd(P,Q)=1$ in $K[T]$, if there are $U,V\\in K[T]$ with $UP+VQ=1$. Since $K[T]$ is a principal ideal domain, this holds if and only if every common divisor of $P$ and $Q$ in $K[T]$ is a nonzero constant (a unit of $K[T]$), i.e. if and only if the greatest common divisor of $P$ and $Q$, which is defined up to a nonzero constant factor, is a unit; normalized to be monic or zero, it is then $1$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-normalized-integral-fraction.md",
+  "place": "node def-weil-normalized-integral-fraction, order 2862 (notion used in the displayed conditions)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'^def IsCoprime\\|def IsRelPrime' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "IsCoprime (RingTheory/Coprime/Basic.lean:45: ∃ a b, a * x + b * y = 1); IsRelPrime (Algebra/Divisibility/Units.lean:150: every common divisor is a unit)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "'theorem gcd_isUnit_iff\\|gcd_isUnit_iff_isRelPrime' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "gcd_isUnit_iff : IsUnit (gcd x y) ↔ IsCoprime x y (RingTheory/EuclideanDomain.lean:90, RingTheory/PrincipalIdealDomain.lean:479); gcd_isUnit_iff_isRelPrime (Algebra/GCDMonoid/Basic.lean:375)",
+   "date": "2026-10-09",
+   "verdict": "match: the gcd formulation is equivalent to IsCoprime in K[X]"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsCoprime",
+  "file": "Mathlib/RingTheory/Coprime/Basic.lean",
+  "how": "exact: `IsCoprime P Q` for `P Q : K[X]`; the gcd formulation is `gcd_isUnit_iff` (Mathlib/RingTheory/PrincipalIdealDomain.lean:479, Mathlib/RingTheory/EuclideanDomain.lean:90)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-normalized-integral-fraction",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

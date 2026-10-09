@@ -2,20 +2,40 @@
  "id": "def-weil-normalized-integral-fraction",
  "kind": "definition",
  "title": "Normalized reduced integral fraction",
- "statement": "Fix an indeterminate $T$, and let\n$Z(T)\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$ be any rational series\nwith integer coefficients and constant coefficient one, in the\nformal power series convention.\nA normalized reduced integral presentation\nof $Z$ is a pair $A,B\\in\\mathbf Z[T]$ such that\n\n$$\nA(0)=B(0)=1,\n\\qquad\n\\gcd(A,B)=1\\text{ in }\\mathbf Q[T],\n\\qquad\nZ(T)=\\frac{A(T)}{B(T)}\n$$\n\nas a Taylor series at $T=0$.",
+ "statement": "Fix an indeterminate $T$, and let\n$Z(T)\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$ be any rational series\nwith integer coefficients and constant coefficient one, in the\nformal power series convention.\nA normalized reduced integral presentation\nof $Z$ is a pair $A,B\\in\\mathbf Z[T]$ such that\n\n$$\nA(0)=B(0)=1,\n\\qquad\n\\gcd(A,B)=1\\text{ in }\\mathbf Q[T],\n\\qquad\nZ(T)=\\frac{A(T)}{B(T)}\n$$\n\nas a Taylor series at $T=0$.\n\nHere $\\mathbf Z[T]$ and $\\mathbf Z[[T]]$ are the polynomial ring [def-weil-polynomial-ring] and the formal power series ring [def-weil-formal-power-series]; $\\mathbf Z[T]\\subset\\mathbf Q[T]$ and $\\mathbf Z[[T]]\\subset\\mathbf Q[[T]]$ are the coefficientwise maps along $\\mathbf Z\\subset\\mathbf Q$ [def-weil-coefficientwise-ring-hom-map]; $Z\\in\\mathbf Q(T)$ means that $Z$, regarded in $\\mathbf Q[[T]]$, is a rational power series over $\\mathbf Q$ [def-weil-rational-power-series]; $A(0),B(0)$ are constant coefficients; $\\gcd(A,B)=1$ in $\\mathbf Q[T]$ means that the images of $A$ and $B$ in $\\mathbf Q[T]$ are coprime [def-weil-coprime-polynomials]; and $Z(T)=A(T)/B(T)$ as a Taylor series at $T=0$ means $BZ=A$ in $\\mathbf Z[[T]]$, with $A,B$ regarded as power series [def-weil-polynomial-as-power-series] (equivalently $Z=AB^{-1}$, $B$ being a unit of $\\mathbf Z[[T]]$ since $B(0)=1$). The definition is the predicate on the pair $(A,B)$; that such a pair exists and is unique for every $Z\\in1+T\\mathbf Z[[T]]$ rational over $\\mathbf Q$ is the separate statement [prop-weil-integral-rational-series].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-normalized-integral-fraction.md",
   "place": "node def-weil-normalized-integral-fraction, order 2862"
  },
  "stmt_deps": [
-  "def-weil-formal-power-series"
+  "def-weil-polynomial-ring",
+  "def-weil-formal-power-series",
+  "def-weil-coefficientwise-ring-hom-map",
+  "def-weil-rational-power-series",
+  "def-weil-coprime-polynomials",
+  "def-weil-polynomial-as-power-series"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'ormaliz' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/RatFunc/Basic.lean; RatFunc.num/denom",
+   "results": "RatFunc.num/RatFunc.denom (lines 860-958): reduced presentation over a field K with monic denominator; no integral presentation with constant coefficients 1",
+   "date": "2026-10-09",
+   "verdict": "no match: the Mathlib normalization (monic denominator in K[X]) differs from A(0)=B(0)=1 with A,B in Z[X]"
+  },
+  {
+   "tool": "grep",
+   "query": "'IsCoprime.*constantCoeff\\|num.*coeff 0 = 1' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: no predicate for a normalized integral presentation of a power series; built from Polynomial, PowerSeries, Polynomial.map (Int.castRingHom ℚ), IsCoprime and the coercion R[X] → R⟦X⟧ as `A.coeff 0 = 1 ∧ B.coeff 0 = 1 ∧ IsCoprime (A.map (Int.castRingHom ℚ)) (B.map (Int.castRingHom ℚ)) ∧ (B : ℤ⟦X⟧) * Z = A`"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -37,5 +57,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-normalized-integral-fraction",
+  "worker": "stage1",
+  "summary": "Lean state none on both branches; slopmaster2 blueprint has no copy of this node. Checked the statement against the master blueprint: correct; kept verbatim and added a paragraph naming each notion it uses. stmt_deps were only def-weil-formal-power-series; now polynomial ring, formal power series, rational power series (for Z in Q(T)), and three new Mathlib-leaf definitions: def-weil-coprime-polynomials (IsCoprime / gcd_isUnit_iff), def-weil-coefficientwise-ring-hom-map (Polynomial.map, PowerSeries.map; needed for Z[T]⊂Q[T], Z[[T]]⊂Q[[T]]; the existing def-weil-coefficientwise-extension is only Z[T]→Q_l[T]), def-weil-polynomial-as-power-series (coercion R[X]→R⟦X⟧, for 'Z=A/B as a Taylor series', made precise as BZ=A). The definition contains no claim: it is the predicate on (A,B); existence and uniqueness are prop-weil-integral-rational-series (referenced in the text, not a dependency). Mathlib has no predicate for the whole notion (RatFunc.num/denom normalizes the denominator to be monic over a field), so the node is a definition built from Mathlib leaves."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
