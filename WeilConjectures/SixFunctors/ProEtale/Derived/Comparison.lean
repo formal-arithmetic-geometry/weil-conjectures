@@ -41,7 +41,8 @@ they are the generic constructions `D(-)`, `D+(-)` and `R+(-)` of the folder
   `M ⟶ Rν_* ν^* M` is an isomorphism for bounded below `M`. On a bounded below complex `I` of
   injectives it is the unit of `ν^* ⊣ ν_*` on `I`, which is invertible, followed by the unit
   `ν_* ν^* I ⟶ R⁺ν_* ν^* I`, which is invertible because `ν^*` sends injectives to
-  `ν_*`-acyclic objects (`AlgebraicGeometry.ProEtale.rightAcyclic_comparisonUpperStar_obj_of_injective`).
+  `ν_*`-acyclic objects
+  (`AlgebraicGeometry.ProEtale.rightAcyclic_comparisonUpperStar_obj_of_injective`).
 
 -/
 
