@@ -15,9 +15,50 @@
   "def-pc-fibre-product",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The base-changed diagonal $\\Delta_f:X\\to X\\times_Y X$ is a closed immersion because $f$ is separated. The diagonal $\\Delta_{f_0}:X_0\\to X_0\\times_{Y_0}X_0$ is an immersion by [lem-weil-pbc-diagonal-immersion] (Stacks Schemes Lemma 01KJ), hence locally of finite type by [lem-weil-pbc-immersion-base-change-lft](2), which supplies exactly the locally-finite-type hypothesis of 01ZP. The source $X_0$ and target $X_0\\times_{Y_0}X_0$ are quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence]: clause (1) makes $f_0$ quasi-compact and quasi-separated from the qcqs hypotheses, clause (3) preserves these properties under the base change along $f_0$, and clause (2), with the qcqs target $X_0$, gives the qcqs fibre product.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-diagonal-immersion",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 01ZQ, proof at line 1851: the diagonal is an immersion (Schemes Lemma 01KJ), hence locally of finite type (Morphisms Lemma 01T5), and the qcqs hypotheses are inherited from Situation 081D"
+   }
+  },
+  {
+   "text": "Apply the closed-immersion descent lemma (Stacks Tag 01ZP) to $\\Delta_{f_0}$ and the inverse system $(S_i)$. By the canonical base-change identification $(X_0\\times_{Y_0}X_0)\\times_{S_0}S_i\\cong X_i\\times_{Y_i}X_i$, compatible with the two projections and hence with the diagonals, and likewise $(X_0\\times_{Y_0}X_0)\\times_{S_0}S\\cong X\\times_Y X$, its base change is the closed immersion $\\Delta_f$. Therefore at some index $i\\ge0$ the base-changed diagonal $\\Delta_{f_i}:X_i\\to X_i\\times_{Y_i}X_i$ is a closed immersion. By the definition of separatedness, $f_i$ is separated.",
+   "uses": [
+    "lem-weil-pbc-descend-closed-immersion",
+    "def-weil-proper-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 01ZQ (lemma-descend-separated-finite-presentation), line 1851; apply Lemma Tag 01ZP to the diagonal"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-descend-closed-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-diagonal-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 01ZQ (lemma-descend-separated-finite-presentation), line 1851; the diagonal and qcqs checks are written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,7 +83,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,10 +104,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-descend-separated",
+  "worker": "stage1",
+  "summary": "Split Limits Lemma 01ZQ into the diagonal check and an application of the existing 01ZP closed-immersion descent node. The diagonal of the limit morphism is closed by separatedness, while the stage-0 diagonal is an immersion and hence locally of finite type; applying 01ZP gives a closed diagonal at a finite stage, which is exactly separatedness. No new node was needed because the reusable 01ZP child already exists."
+ },
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Limits 01ZQ in Situation 081D (no finiteness hypothesis); self-contained; correct; unsplit."
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: Fourth delivery: the diagonal-is-an-immersion fact is now the cited unsplit node lem-weil-pbc-diagonal-immersion (Schemes 01KJ); the fibre product and the base-change identification were fixed earlier. Accepted by L."
  }
 }
