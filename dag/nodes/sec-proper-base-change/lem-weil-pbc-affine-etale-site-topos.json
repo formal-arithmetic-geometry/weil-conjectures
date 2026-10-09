@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-affine-etale-site-topos",
+ "kind": "statement",
+ "title": "The small affine etale site computes the etale topos and its cohomology",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] with small etale site $S_{\\Et}$ [def-weil-pbc-etale-site]. Let $S_{affine,\\Et}$ be the site [def-weil-pbc-sites-and-cohomology] whose underlying category is the full subcategory of $S_{\\Et}$ of the $U\\to S$ with $U$ affine, and whose coverings are the standard etale coverings $\\{U_j\\to U\\}_{j=1,\\dots,m}$: finite families with every $U_j$ affine and etale over $U$ and $U=\\bigcup_jf_j(U_j)$ (Stacks Topologies, Definitions 0219 and 021B(4)). Then the inclusion $\\iota:S_{affine,\\Et}\\to S_{\\Et}$ is special cocontinuous and induces an equivalence of topoi: restriction $\\mathcal G\\mapsto\\mathcal G|_{S_{affine,\\Et}}=\\mathcal G\\circ\\iota$ is an equivalence from abelian sheaves on $S_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] to abelian sheaves on $S_{affine,\\Et}$ (and likewise for sheaves of sets) (Topologies, Lemma 04HR). Moreover, for every abelian sheaf $\\mathcal G$ on $S_{\\Et}$ and every object $U$ of $S_{affine,\\Et}$ there are isomorphisms $H^p(U,\\mathcal G|_{S_{affine,\\Et}})\\cong H^p(U,\\mathcal G)$ ($p\\ge0$; left side cohomology over $U$ on the site $S_{affine,\\Et}$, right side on $S_{\\Et}$, [def-weil-pbc-sites-and-cohomology]), functorial in $\\mathcal G$, and equal to the identity of $\\mathcal G(U)$ for $p=0$; for $U=S$ affine the right side is $H^p(S_{\\Et},\\mathcal G)$ of [def-weil-pbc-etale-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Lemma Tag 04HR (lemma-alternative; proof 'omitted, compare with Lemma 021E (lemma-affine-big-site-etale)'), Definitions Tag 0219 (definition-standard-etale) and Tag 021B (definition-big-small-etale) part (4); for the cohomology clause the pattern of Cohomology on Sites Lemma Tag 03YU (sites-cohomology.tex, lemma-cohomology-bigger-site: an equivalence of topoi preserving the sections over corresponding objects carries injectives to injectives)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of sheaves on small affine étale site equivalent to sheaves on small étale site",
+   "results": "CategoryTheory.Functor.IsDenseSubsite.sheafEquiv (Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv), Equivalence.sheafCongr, Functor.sheafInducedTopologyEquivOfIsCoverDense",
+   "date": "2026-10-09",
+   "verdict": "generalization candidate (dense subsite comparison lemma)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv",
+   "results": "AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv : Sheaf (AffineEtale.topology S) A ≌ Sheaf S.smallEtaleTopology A; sheafEquiv_inverse = (AffineEtale.Spec S).sheafPushforwardContinuous (Mathlib.AlgebraicGeometry.Sites.AffineEtale)",
+   "date": "2026-10-09",
+   "verdict": "close candidate: Mathlib's affine etale site carries the topology induced from S_et (AffineEtale.topology, line 75), not the one of standard etale coverings; that the two topologies agree is Topologies Lemma 0218 (lemma-etale-affine), a theorem; and the cohomology clause is not in Mathlib (Sheaf.H' is Ext from free sheaves, compared nowhere across sheafEquiv). Not a leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,200p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; grep -rn 'sheafEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/",
+   "results": "AffineEtale.lean: def AffineEtale (CostructuredArrow of Spec over S), instance IsCoverDense, def topology := inducedTopology, IsDenseSubsite, def AffineEtale.sheafEquiv (line 140); no cohomology statement in SheafCohomology/",
+   "date": "2026-10-09",
+   "verdict": "no exact match: the equivalence exists for the induced topology; cohomology comparison absent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

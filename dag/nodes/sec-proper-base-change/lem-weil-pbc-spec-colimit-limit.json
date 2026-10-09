@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-spec-colimit-limit",
+ "kind": "statement",
+ "title": "Spec of a directed colimit of rings is the limit of the spectra",
+ "statement": "Let $(C_i,\\varphi_{ii'})$ be a directed system of commutative rings over a directed set $I$, with colimit $C=\\varinjlim_iC_i$ [def-weil-pbc-category-colimit]. Then $\\operatorname{Spec}C$, with the morphisms $\\operatorname{Spec}C\\to\\operatorname{Spec}C_i$ induced by the coprojections, is the limit of the inverse system $(\\operatorname{Spec}C_i)$ in the category of schemes [def-pc-scheme], and the transition morphisms $\\operatorname{Spec}C_{i'}\\to\\operatorname{Spec}C_i$ are affine [def-weil-pbc-scheme-conventions] (a morphism between affine schemes is affine).",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit, line 42) and its proof (Schemes Lemma 01I1, morphisms into an affine scheme)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec of a filtered colimit of rings is the limit of the Spec schemes",
+   "results": "instIsAffineObjOppositeCommRingCatSchemeSpec, instPreservesColimitsOfShape...Spec, AffineScheme.Spec, isAffine_Spec (Mathlib.AlgebraicGeometry.*)",
+   "date": "2026-10-09",
+   "verdict": "partial"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spec functor from opposite of commutative rings to schemes preserves limits",
+   "results": "AffineScheme.forgetToScheme_preservesLimits, preservesLimit_rightOp_Γ, AffineScheme.Γ_preservesLimits, AffineScheme.createsLimitsForgetToScheme (Mathlib.AlgebraicGeometry.AffineScheme)",
+   "date": "2026-10-09",
+   "verdict": "match via Spec.reflective (Spec is a right adjoint, hence preserves limits)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'Spec.reflective\\|IsRightAdjoint' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean; grep -n 'isAffineHom_of_isAffine' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+   "results": "GammaSpecAdjunction.lean:600 instance Spec.reflective : Reflective Scheme.Spec (adj := ΓSpec.adjunction); Morphisms/Affine.lean:181 instance isAffineHom_of_isAffine [IsAffine X] [IsAffine Y] : IsAffineHom f",
+   "date": "2026-10-09",
+   "verdict": "match: one Mathlib fact per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Spec.reflective",
+  "file": "Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean",
+  "how": "conjunction, one fact per clause: Scheme.Spec : CommRingCatᵒᵖ ⥤ Scheme is reflective (Spec.reflective, adjunction ΓSpec.adjunction), hence a right adjoint and preserves all limits; the colimit cocone of the C_i in CommRingCat is a limit cone in CommRingCatᵒᵖ, so its image under Spec is a limit cone of schemes; affineness of the transition maps is the instance AlgebraicGeometry.isAffineHom_of_isAffine (Mathlib/AlgebraicGeometry/Morphisms/Affine.lean:181)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Spec.reflective (GammaSpecAdjunction.lean:600; a right adjoint preserves limits) and isAffineHom_of_isAffine (Morphisms/Affine.lean:181)."
+ }
+}

@@ -1,0 +1,62 @@
+{
+ "id": "def-weil-pbc-sites-and-cohomology",
+ "kind": "definition",
+ "title": "Sites, morphisms of sites and cohomology on an object of a site",
+ "statement": "(1) A *site* $\\mathcal C$ and its category $\\textit{Ab}(\\mathcal C)$ of abelian sheaves are as in [lem-weil-pbc-site-sheaves-enough-injectives] (Stacks Sites, Definition 00VH). (2) *Cohomology over an object.* For $U\\in\\operatorname{Ob}(\\mathcal C)$ and $\\mathcal F\\in\\textit{Ab}(\\mathcal C)$ choose an injective resolution $\\mathcal F\\to\\mathcal I^\\bullet$ in $\\textit{Ab}(\\mathcal C)$ (one exists by [lem-weil-pbc-site-sheaves-enough-injectives]) and put $H^p(U,\\mathcal F)=H^p(\\Gamma(U,\\mathcal I^\\bullet))$, $\\Gamma(U,\\mathcal G)=\\mathcal G(U)$; these are the right derived functors of the left exact functor $\\mathcal F\\mapsto\\mathcal F(U)$, independent of the resolution up to canonical isomorphism, and form a universal $\\delta$-functor (Stacks Cohomology on Sites, Section 01FT). (3) *Continuous functors and morphisms of sites.* A functor $u:\\mathcal C\\to\\mathcal D$ between sites is *continuous* if for every covering $\\{V_t\\to V\\}$ of $\\mathcal C$ the family $\\{u(V_t)\\to u(V)\\}$ is a covering of $\\mathcal D$ and for every morphism $T\\to V$ the morphisms $u(V_t\\times_VT)\\to u(V_t)\\times_{u(V)}u(T)$ are isomorphisms (Sites, Definition 00WV). Then $u^s\\mathcal G=\\mathcal G\\circ u$ sends sheaves on $\\mathcal D$ to sheaves on $\\mathcal C$, and it has a left adjoint $u_s$, the sheafification [def-weil-pbc-sheafification] of the presheaf $u_p\\mathcal F(W)=\\varinjlim_{(V,\\,W\\to u(V))}\\mathcal F(V)$. A *morphism of sites* $f:\\mathcal D\\to\\mathcal C$ is given by a continuous functor $u:\\mathcal C\\to\\mathcal D$ such that $u_s$ is exact; then $f_*=u^s$ and $f^{-1}=u_s$ (left adjoint of $f_*$), on sheaves of sets and on abelian sheaves (Sites, Definition 00X1). The composite of the morphisms of sites given by $u:\\mathcal C\\to\\mathcal D$ and $v:\\mathcal D\\to\\mathcal E$ is the morphism given by $v\\circ u$ (Sites, Lemma 03CB).",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Definitions Tag 00VH (definition-site), Tag 00WV (definition-continuous), Tag 00X1 (definition-morphism-sites), Lemma Tag 03CB (lemma-composition-morphisms-sites); sites-cohomology.tex Section Tag 01FT (section-cohomology-sheaves, equation cohomology-object-site)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous functor between sites induces morphism of sites, pullback of sheaves is left adjoint to pushforward",
+   "results": "CategoryTheory.Functor.sheafPullback, Functor.sheafAdjunctionContinuous (Mathlib.CategoryTheory.Sites.Pullback), Functor.sheafPushforwardContinuous (Mathlib.CategoryTheory.Sites.Continuous)",
+   "date": "2026-10-09",
+   "verdict": "notions present for Grothendieck topologies (IsContinuous, sheafPushforwardContinuous, sheafPullback); Stacks' site with Cov(C) is a different presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of an abelian sheaf over an object of a site as Ext from the free sheaf on the representable presheaf",
+   "results": "CategoryTheory.Sheaf.H' and Sheaf.cohomologyPresheaf (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic), Sheaf.H",
+   "date": "2026-10-09",
+   "verdict": "candidate: H'(F,n,X) = Ext^n(free sheaf on yoneda X, F); its agreement with the derived functor of F -> F(X) is a theorem (Mathlib file TODO notes the comparison is missing), so not a leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'abbrev H\\b\\|abbrev H'\"'\"'\\|TODO' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+   "results": "Basic.lean:59 abbrev H (Ext from constant sheaf ULift Z), :87 abbrev H' (Ext from free sheaf on yoneda X); TODO lines 30-34: isomorphism with Sheaf.H (F.over U) not yet defined",
+   "date": "2026-10-09",
+   "verdict": "no exact match: definition node with Mathlib candidates recorded"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

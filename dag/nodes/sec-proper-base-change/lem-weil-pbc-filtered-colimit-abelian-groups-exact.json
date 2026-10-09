@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+ "kind": "statement",
+ "title": "Filtered colimits of abelian groups are exact",
+ "statement": "Let $J$ be a small filtered category [def-weil-pbc-category-colimit] and $A_\\bullet\\to B_\\bullet\\to C_\\bullet$ a sequence of functors $J\\to\\mathrm{Ab}$ with natural transformations which is exact at $B_j$ for every $j$. Then $\\varinjlim_JA\\to\\varinjlim_JB\\to\\varinjlim_JC$ is exact. Consequently the filtered colimit of a system of long exact sequences of abelian groups (with compatible maps) is a long exact sequence.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00DB (algebra-lemma-directed-colimit-exact), cited in Cohomology on Sites Lemma 09YP's proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of exact sequences of abelian groups is exact",
+   "results": "instAB5AddCommGrpCat, instPreservesHomologyFunctorAddCommGrpCatColim (Mathlib.Algebra.Category.Grp.AB), CategoryTheory.AB5",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exactness of filtered colimits in the category of abelian groups (AB5)",
+   "results": "instAB5AddCommGrpCat (Mathlib.Algebra.Category.Grp.AB)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 25,70p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/Grp/AB.lean",
+   "results": "noncomputable instance : (colim (J := J) (C := AddCommGrpCat.{u})).PreservesHomology for [SmallCategory J] [IsFiltered J] (line 36), proved from ShortComplex.ab_exact_iff_ker_le_range; instance AB5 AddCommGrpCat (line 61)",
+   "date": "2026-10-09",
+   "verdict": "match: exactness at each spot is ShortComplex.Exact preserved by colim"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "instPreservesHomologyFunctorAddCommGrpCatColim",
+  "file": "Mathlib/Algebra/Category/Grp/AB.lean",
+  "how": "specializes in one line: colim over a filtered small J preserves homology, hence maps a short complex of functors exact at every j (exact in the functor category, exactness being objectwise) to an exact short complex; a long exact sequence is exactness at each spot"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: the instance at Algebra/Category/Grp/AB.lean:37 (colim over a filtered J preserves homology in AddCommGrpCat)."
+ }
+}

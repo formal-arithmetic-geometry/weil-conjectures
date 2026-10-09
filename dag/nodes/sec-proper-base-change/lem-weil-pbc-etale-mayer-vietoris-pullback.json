@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-etale-mayer-vietoris-pullback",
+ "kind": "statement",
+ "title": "Mayer-Vietoris sequences are compatible with pullback",
+ "statement": "Let $g:Y\\to X$ be a morphism of schemes [def-pc-scheme], $X=U\\cup V$ a union of two open subschemes, and $U'=g^{-1}(U)$, $V'=g^{-1}(V)$, so $Y=U'\\cup V'$ and $U'\\cap V'=g^{-1}(U\\cap V)$; for $W\\in\\{U,V,U\\cap V\\}$ write $W'=g^{-1}(W)$ and $g_W:W'\\to W$ for the restriction of $g$. Let $\\mathcal G$ be an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves]. Then the pullback maps of [def-weil-pbc-cohomology-pullback], $g^*:H^q(X_{\\Et},\\mathcal G)\\to H^q(Y_{\\Et},g^{-1}\\mathcal G)$ and $g_W^*:H^q(W_{\\Et},\\mathcal G|_W)\\to H^q(W'_{\\Et},g_W^{-1}(\\mathcal G|_W))\\cong H^q(W'_{\\Et},(g^{-1}\\mathcal G)|_{W'})$ (the identification being $H^q$ of the isomorphism $g_W^{-1}j_W^{-1}\\cong j_{W'}^{-1}g^{-1}$ of [lem-weil-pbc-inverse-image-composition], both sides being inverse images along $g\\circ j_{W'}=j_W\\circ g_W$), form a morphism from the Mayer-Vietoris long exact sequence of [lem-weil-pbc-etale-mayer-vietoris] for $(X,U,V,\\mathcal G)$ to the one for $(Y,U',V',g^{-1}\\mathcal G)$: every square, including those with the connecting maps $\\delta$, commutes.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 0A50 (lemma-mayer-vietoris) and its proof (the short exact sequences $0\\to\\mathcal I^\\bullet(X)\\to\\mathcal I^\\bullet(U)\\oplus\\mathcal I^\\bullet(V)\\to\\mathcal I^\\bullet(U\\cap V)\\to0$ of an injective resolution); the compatibility with pullback is not stated in the source (agent-identified gap: it is needed for the reduction of Theorem 09YQ to the affine case)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-mayer-vietoris"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Mayer-Vietoris long exact sequence sheaf cohomology natural with respect to pullback morphism of sites",
+   "results": "Opens.mayerVietorisSquare (Mathlib.Topology.Sheaves.MayerVietoris), GrothendieckTopology.MayerVietorisSquare.shortComplex(_exact), MayerVietorisSquare.mk_of_isPullback_toSquare (Mathlib.CategoryTheory.Sites.MayerVietorisSquare)",
+   "date": "2026-10-09",
+   "verdict": "no match: the sequence on one site, no naturality in a morphism of sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer-Vietoris sequence in étale cohomology compatible with pullback along a morphism of schemes",
+   "results": "MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue, map_f₃₄_op_glue, toPullbackObj, SheafCondition (Mathlib.CategoryTheory.Sites.MayerVietorisSquare)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def\\|theorem\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean",
+   "results": "toBiprod, fromBiprod, δ, sequenceIso, sequence_exact for one Mayer-Vietoris square of one site; no statement about functoriality in the site",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

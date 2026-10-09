@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-limit-affine-transition",
+ "kind": "statement",
+ "title": "Limits of schemes along affine transition morphisms",
+ "statement": "Let $I$ be a directed set and $(S_i,f_{ii'})$ an inverse system of schemes [def-pc-scheme] over $I$ whose transition morphisms $f_{ii'}:S_i\\to S_{i'}$ ($i\\ge i'$) are affine [def-weil-pbc-scheme-conventions]. Then the limit $S=\\varprojlim_iS_i$ exists in the category of schemes; each projection $f_i:S\\to S_i$ is affine; and for every $0\\in I$ and every open subscheme $U_0\\subseteq S_0$, $f_0^{-1}(U_0)=\\varprojlim_{i\\ge0}f_{i0}^{-1}(U_0)$ in the category of schemes (with the restricted projections), the transition morphisms $f_{i0}^{-1}(U_0)\\to f_{i'0}^{-1}(U_0)$ being affine. If all $S_i$ are affine, $S=\\operatorname{Spec}(\\varinjlim_i\\Gamma(S_i,\\mathcal O_{S_i}))$ (Limits, Lemma 01YW).",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 01YX (lemma-directed-inverse-system-has-limit, line 58) with Lemma Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit, line 42)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "limit of cofiltered diagram of schemes with affine transition morphisms exists",
+   "results": "exists_app_map_eq_zero_of_isLimit, Scheme.exists_isAffine_of_isLimit, exists_mem_of_isClosed_of_nonempty(') (Mathlib.AlgebraicGeometry.AffineTransitionLimit), AffineScheme.hasLimits (Mathlib.AlgebraicGeometry.AffineScheme)",
+   "date": "2026-10-09",
+   "verdict": "partial: limits of affine schemes exist (AffineScheme.hasLimits, created in Scheme by forgetToScheme_preservesLimits); every AffineTransitionLimit lemma assumes a given limit cone, existence for affine transition maps is absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "limit of an inverse system of schemes with affine transition morphisms exists and preimage of an open is the limit of preimages",
+   "results": "exists_map_preimage_eq_map_preimage, exists_isAffineOpen_preimage_eq, exists_map_preimage_le_map_preimage, exists_map_eq_top (Mathlib.AlgebraicGeometry.AffineTransitionLimit)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'HasLimit\\|hasLimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Affine.lean; grep -rn 'stacks 01YX\\|stacks 01YW' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "no matches",
+   "date": "2026-10-09",
+   "verdict": "no match for the general case; the affine case is covered by AffineScheme.hasLimits + forgetToScheme_preservesLimits, recorded for the next worker"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
