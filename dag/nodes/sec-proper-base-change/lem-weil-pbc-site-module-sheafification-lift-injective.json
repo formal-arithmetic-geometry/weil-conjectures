@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-site-module-sheafification-lift-injective",
+ "kind": "statement",
+ "title": "A locally injective map into a sheaf induces an injective map on the sheafification",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] on which presheaves of abelian groups have sheafifications, $\\mathcal O$ a sheaf of rings on $\\mathcal C$, $\\mathcal P$ a presheaf of $\\mathcal O$-modules with sheafification $\\eta:\\mathcal P\\to\\mathcal P^\\#$ [def-weil-presheaf-modules-sheafification], $\\mathcal F$ a sheaf of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category], $f:\\mathcal P\\to\\mathcal F$ a morphism of presheaves of $\\mathcal O$-modules and $f^\\#:\\mathcal P^\\#\\to\\mathcal F$ the unique morphism of sheaves of $\\mathcal O$-modules with $f^\\#\\circ\\eta=f$. Suppose $f$ is *locally injective*: for every object $V$ of $\\mathcal C$ and every $x\\in\\mathcal P(V)$ with $f_V(x)=0$ there is a covering $\\{V_k\\to V\\}_k$ of $\\mathcal C$ such that $x|_{V_k}=0$ in $\\mathcal P(V_k)$ for every $k$. Then $f^\\#_W:\\mathcal P^\\#(W)\\to\\mathcal F(W)$ is injective for every object $W$ of $\\mathcal C$; in particular $f^\\#$ is a monomorphism of sheaves of $\\mathcal O$-modules. (Proof sketch for the splitter: by Stacks Sites, Lemma 00WK (lemma-sections-sheafification), applied to the underlying presheaf of sets of $\\mathcal P$, whose sheafification is the underlying sheaf of sets of $\\mathcal P^\\#$ (Sites, Section 00YR; Modules on Sites, Lemma 03CY), a section $t\\in\\mathcal P^\\#(W)$ with $f^\\#(t)=0$ is locally of the form $\\eta(x_i)$ with $x_i\\in\\mathcal P(W_i)$; then $f(x_i)=f^\\#(t)|_{W_i}=0$, so $x_i$ vanishes on a covering of $W_i$, hence so does $t$, and $t=0$ as $\\mathcal P^\\#$ is a sheaf.)",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Theorem 00WB (theorem-plus) and Lemma 00WK (lemma-sections-sheafification), with Section 00YR (section-sheaves-algebraic-structures) and literature/stacks-project/sites-modules.tex Lemma 03CY (lemma-sheafification-presheaf-modules); used in this form in the proof of etale-cohomology.tex Lemma 0F4L (lemma-shriek-into-star-separated-etale)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism from a presheaf to a sheaf which is locally injective induces an injective (mono) morphism from the sheafification",
+   "results": "CategoryTheory.Sheaf.mono_of_isLocallyInjective, CategoryTheory.Sheaf.mono_of_injective (Mathlib.CategoryTheory.Sites.LocallyInjective), GrothendieckTopology.instIsLocallyInjectiveToSheafify (Mathlib.CategoryTheory.Sites.LocallyBijective), PresheafOfModules.instIsLocallyInjectiveToSheafify (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify), CategoryTheory.presheaf_mono_of_mono",
+   "date": "2026-10-10",
+   "verdict": "no single match; the statement is the composite of three Mathlib facts (see grep record)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac",
+   "results": "CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac (Mathlib.CategoryTheory.Sites.LocallySurjective): f1 >> f2 = f3, f3 locally injective, f1 locally surjective => f2 locally injective",
+   "date": "2026-10-10",
+   "verdict": "generic ingredient, not the statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a morphism of presheaves of modules P to a sheaf F kills only locally-zero sections, then the induced morphism from the sheafification of P to F is injective on sections",
+   "results": "PresheafOfModules.instIsLocallyInjectiveToSheafify, PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify), CategoryTheory.Sheaf.isLocallyInjective_iff_injective (Mathlib.CategoryTheory.Sites.LocallyInjective), PresheafOfModules.IsLocallyInjective (Mathlib.Algebra.Category.ModuleCat.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "no single match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem|lemma|instance' Mathlib/CategoryTheory/Sites/LocallyInjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean; grep -n IsLocallySurjective Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean",
+   "results": "LocallySurjective.lean:209 isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac; LocallySurjective.lean:302/308 isLocallySurjective_toSheafify(') ; ModuleCat/Presheaf/Sheafify.lean:356 instance IsLocallySurjective J (toSheafify alpha phi); LocallyInjective.lean:237 Sheaf.isLocallyInjective_iff_injective, :244 Sheaf.mono_of_isLocallyInjective. Chain: toSheafify locally surjective + fac lemma gives f^# locally injective, then isLocallyInjective_iff_injective gives injectivity on sections",
+   "date": "2026-10-10",
+   "verdict": "no exact match; obtained from three Mathlib declarations chained (candidate leaf for the lead to judge)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-shriek-to-star-injective",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
