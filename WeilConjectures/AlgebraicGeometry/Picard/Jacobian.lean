@@ -806,6 +806,10 @@ laws (`AlgebraicGeometry.IsPicardZeroMul`). Then the tangent space of `J` at the
 isomorphic as a `k`-vector space to `H^1(X, 𝒪_X)`, which has dimension `g` by the definition of
 `AlgebraicGeometry.Scheme.arithmeticGenus`.
 
+The tangent vectors are identified with the classes in `Pic^0(X_{k[ε]})` restricting to the
+trivial class on `X` by `AlgebraicGeometry.exists_mulEquiv_tangentSubgroup`; what remains is the
+identification of that kernel with `H^1(X, 𝒪_X)`, through `0 → 𝒪_X → 𝒪_{X[ε]}ˣ → 𝒪_Xˣ → 1`.
+
 (blueprint: `sk-prop-picard-jacobian-tangent`) -/
 theorem nonempty_tangentSpaceAt_linearEquiv_H_one [IsSepClosed k]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
@@ -949,6 +953,128 @@ theorem exists_picardZero_equiv_picardFunctorDegree_zero [IsSepClosed k]
     simp only [φ, hβS]
     rw [hinv' M]
     exact hM₂
+
+/-- **Sections of `Pic^0_{X/k}` over a one-point base.** Let `X` be a smooth projective curve over
+a separably closed field `k` and let `T` be a `k`-scheme with a single point, such as `Spec k` or
+`Spec k[ε]`. Then every section of `Pic^0_{X/k}` over `T` is the image of a unique class of
+fibrewise degree zero on `X_T`: by the split exact sequence, `Pic (X_T) ≃ Pic_{X/k}(T)` since
+`Pic T` is trivial, and the comparison `Pic^0_{X/k} ⟶ Pic_{X/k}` is injective. -/
+theorem bijective_toSheafify_picardSubfunctorDegree_zero [IsSepClosed k]
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+    [GeometricallyIntegral (X ↘ Spec (.of k))] (T : Over (Spec (.of k))) [Subsingleton T.left]
+    [Nonempty T.left] :
+    Function.Bijective ((toSheafify (fppfTopology.over (Spec (.of k)))
+      (picardSubfunctorDegree (X ↘ Spec (.of k)) 0).toFunctor).app (.op T)) := by
+  set f := X ↘ Spec (.of k)
+  let J := fppfTopology.over (Spec (.of k))
+  let S := picardSubfunctorDegree f 0
+  let α : S.toFunctor ⟶ (picardFunctor f).obj := S.ι ≫ toPicardFunctor f
+  let β : picardFunctorDegree f 0 ⟶ picardFunctor f :=
+    ⟨sheafifyLift J α (picardFunctor f).property⟩
+  have fac : toSheafify J S.toFunctor ≫ β.hom = α := toSheafify_sheafifyLift J α _
+  have : Presheaf.IsLocallyInjective J α := inferInstance
+  have : Presheaf.IsLocallyInjective J β.hom :=
+    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac J α fac
+  have hβ : Function.Injective (β.hom.app (.op T)) :=
+    (Sheaf.isLocallyInjective_iff_injective β).1 this _
+  have hβS {T' : Over (Spec (.of k))} (M : S.toFunctor.obj (.op T')) :
+      β.hom.app _ ((toSheafify J S.toFunctor).app _ M) = (toPicardFunctor f).app _ M.1 :=
+    ConcreteCategory.congr_hom (NatTrans.congr_app fac (.op T')) M
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton f
+  obtain ⟨pt⟩ := Hom.nonempty_fieldPoints (k := k) f
+  have hσ : pt.1 ≫ f = 𝟙 _ := by
+    rw [pt.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]
+  have hsplit := bijective_pic_split f pt.1 hσ
+    isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral T
+  have hone (a : T.left.Pic) : a = 1 := by
+    obtain ⟨e⟩ := Modules.IsInvertible.nonempty_iso_unit (X := T.left) (Classical.arbitrary _)
+      ((fromSkeleton _).obj a.val)
+    exact Pic.eq_iff_nonempty_iso.2 ⟨e ≪≫ Pic.oneIso.symm⟩
+  refine ⟨fun a b h ↦ ?_, fun s ↦ ?_⟩
+  · have h' := congrArg (β.hom.app _) h
+    rw [hβS, hβS] at h'
+    exact Subtype.ext (hsplit.1 (Prod.ext ((hone _).trans (hone _).symm) h'))
+  · have hdeg (t : T.left) : picardDegree f (β.hom.app _ s) t = 0 := by
+      obtain ⟨Z, g, ⟨a, ha⟩, -, -, z, rfl⟩ := exists_flat_mem_of_mem_fppfTopology_over
+        (Presheaf.imageSieve_mem J (toSheafify J S.toFunctor) s) t
+      refine (picardDegree_map f g (β.hom.app _ s) z).symm.trans ?_
+      rw [← NatTrans.naturality_apply β.hom,
+        show (picardFunctorDegree f 0).obj.map g.op s = (toSheafify J S.toFunctor).app _ a from
+          ha.symm]
+      rw [hβS, picardDegree_toPicardFunctor]
+      exact (mem_picardSubfunctorDegree_iff f 0 a.1).1 a.2 z
+    obtain ⟨M, hM⟩ := hsplit.2 (1, β.hom.app _ s)
+    have hM₂ : (toPicardFunctor f).app _ M = β.hom.app _ s := congrArg Prod.snd hM
+    have hMS : M ∈ S.obj (.op T) := (mem_picardSubfunctorDegree_iff f 0 M).2 fun t ↦ by
+      rw [← picardDegree_toPicardFunctor, hM₂]
+      exact hdeg t
+    exact ⟨⟨M, hMS⟩, hβ (by rw [hβS]; exact hM₂)⟩
+
+/-- Over a one-point `k`-scheme `T`, a representation of `Pic^0_{X/k}` respecting the group laws
+identifies the group `J(T)` with the group of classes of fibrewise degree zero on `X_T`. -/
+theorem exists_mulEquiv_picardSubgroupDegreeZero [IsSepClosed k]
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+    [GeometricallyIntegral (X ↘ Spec (.of k))] {J : Over (Spec (.of k))} [GrpObj J]
+    (e : (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy J)
+    (he : IsPicardZeroMul (X ↘ Spec (.of k)) e) (T : Over (Spec (.of k)))
+    [Subsingleton T.left] [Nonempty T.left] :
+    ∃ ψ : (T ⟶ J) ≃* picardSubgroupDegreeZero (X ↘ Spec (.of k)) T, ∀ v,
+      (toSheafify (fppfTopology.over (Spec (.of k)))
+        (picardSubfunctorDegree (X ↘ Spec (.of k)) 0).toFunctor).app (.op T) (ψ v) =
+          e.homEquiv v := by
+  obtain ⟨ψ, hψ⟩ := exists_mulEquiv_of_isPicardZeroMul (X ↘ Spec (.of k)) e he (T := T)
+    (G := picardSubgroupDegreeZero (X ↘ Spec (.of k)) T) (fun L ↦ L.1) (fun _ _ ↦ rfl)
+    (Equiv.ofBijective _ (bijective_toSheafify_picardSubfunctorDegree_zero T))
+    (fun g ↦ ⟨g.2, rfl⟩)
+  refine ⟨ψ.symm, fun v ↦ ?_⟩
+  have h := hψ (ψ.symm v)
+  rw [MulEquiv.apply_symm_apply] at h
+  have h' := congrArg e.homEquiv h
+  rw [Equiv.apply_symm_apply] at h'
+  exact h'.symm
+
+/-- **Reduction of the tangent space of the Jacobian.** (Part of blueprint
+`sk-prop-picard-jacobian-tangent`.) Let `J` represent `Pic^0_{X/k}`,
+respecting the group laws. Then the tangent vectors of `J` at the unit, i.e. the kernel of
+`J(k[ε]) ⟶ J(k)`, form a group isomorphic to the kernel of the restriction
+`Pic^0(X_{k[ε]}) ⟶ Pic^0(X)` of classes of fibrewise degree zero on `X_{k[ε]} = X ×_k k[ε]`. -/
+theorem exists_mulEquiv_tangentSubgroup [IsSepClosed k]
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+    [GeometricallyIntegral (X ↘ Spec (.of k))] (J : Over (Spec (.of k))) [GrpObj J]
+    (e : (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy J)
+    (he : IsPicardZeroMul (X ↘ Spec (.of k)) e) :
+    Nonempty (tangentSubgroup J ≃*
+      ((picardPresheafDegreeZeroGrp (X ↘ Spec (.of k))).map
+        (Scheme.dualNumbersιOver (Spec (.of k))).op).hom.ker) := by
+  let D := Scheme.dualNumbersOver (Spec (.of k))
+  let T₀ := 𝟙_ (Over (Spec (.of k)))
+  let i₀ := Scheme.dualNumbersιOver (Spec (.of k))
+  let J' := fppfTopology.over (Spec (.of k))
+  let S := picardSubfunctorDegree (X ↘ Spec (.of k)) 0
+  have : Subsingleton D.left := inferInstanceAs (Subsingleton (Spec (.of k)))
+  have : Nonempty D.left := inferInstanceAs (Nonempty (Spec (.of k)))
+  have : Subsingleton T₀.left := inferInstanceAs (Subsingleton (Spec (.of k)))
+  have : Nonempty T₀.left := inferInstanceAs (Nonempty (Spec (.of k)))
+  obtain ⟨ψD, hψD⟩ := exists_mulEquiv_picardSubgroupDegreeZero e he D
+  obtain ⟨ψ₀, hψ₀⟩ := exists_mulEquiv_picardSubgroupDegreeZero e he T₀
+  -- naturality along `ι`
+  have hnat (v : D ⟶ J) :
+      ψ₀ (i₀ ≫ v) = ((picardPresheafDegreeZeroGrp (X ↘ Spec (.of k))).map i₀.op).hom (ψD v) := by
+    apply (bijective_toSheafify_picardSubfunctorDegree_zero (X := X) T₀).1
+    change (toSheafify J' S.toFunctor).app _ (ψ₀ (i₀ ≫ v)) =
+      (toSheafify J' S.toFunctor).app _ (S.toFunctor.map i₀.op (ψD v))
+    rw [hψ₀, NatTrans.naturality_apply, hψD, e.homEquiv_comp]
+    rfl
+  have hker : (tangentSubgroup J).map ψD.toMonoidHom =
+      ((picardPresheafDegreeZeroGrp (X ↘ Spec (.of k))).map i₀.op).hom.ker := by
+    ext x
+    obtain ⟨v, rfl⟩ := ψD.surjective x
+    rw [Subgroup.mem_map_equiv, MulEquiv.symm_apply_apply, MonoidHom.mem_ker]
+    erw [← hnat]
+    change i₀ ≫ v = η[J] ↔ _
+    rw [MonObj.one_eq_one, ← map_one ψ₀, ψ₀.injective.eq_iff]
+  exact ⟨(ψD.subgroupMap (tangentSubgroup J)).trans (MulEquiv.subgroupCongr hker)⟩
 
 /-- **The Jacobian is an abelian variety.** Let `X` be a smooth projective curve of genus `g`
 over a separably closed field `k`.  Then there is a `k`-scheme `J` carrying a commutative group
