@@ -304,7 +304,7 @@ end Etale
 
 namespace Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
 
@@ -321,7 +321,7 @@ inversion — assume it; they are false for the two data above. -/
 class HasTateTwist.IsNormalized [inst : HasTateTwist Λ] : Prop where
   /-- The twist datum underlies a normalized rank-one datum. -/
   exists_hasKummerClass :
-    ∃ K : HasKummerClass Λ, K.toHasTateTwist = inst ∧ @HasKummerClass.IsNormalized Λ _ K
+    ∃ K : HasKummerClass Λ, K.toHasTateTwist = inst ∧ @HasKummerClass.IsNormalized Λ _ K _
 
 /-- The twist datum underlying a normalized rank-one datum is normalized. -/
 instance HasKummerClass.IsNormalized.hasTateTwistIsNormalized [HasKummerClass Λ]
