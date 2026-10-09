@@ -639,3 +639,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:32 L reviewed lem-weil-pbc-coherent-support-power-ideal-kills (worker, 7 steps, 1 new unsplit): pass, committed.
 - 23:35 L reviewed lem-weil-pbc-completion-regular-local (worker, 3 steps, 2 new: 07NV unsplit, generator-count leaf): pass, committed.
 - 23:35 L: C1 re-pushed z-g-ring a third time unchanged (f52e26fe2); reported in coord/HUMAN.md; return stays open.
+- 23:36 L reviewed lem-weil-pbc-derivation-extends (worker, 11 elementary steps, 0 new; general localization written into the statement): pass, committed.
