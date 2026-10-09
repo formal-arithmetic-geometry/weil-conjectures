@@ -165,4 +165,45 @@ lemma isAffineOpen_of_isAffineOpen_preimage {W : X.Opens} (hW : IsAffineOpen (π
   have : IsAffine W := isAffine_of_isAffineHom (W.ι ≫ f)
   exact this
 
+/-- **Norms commute with restriction to basic opens.** For `U` affine, `r ∈ Γ(X, U)` and
+`V = D(r)`, the norm of the restriction of `a ∈ Γ(Y, π⁻¹ U)` to `π⁻¹ V` is the restriction of
+the norm of `a`. -/
+lemma normAt_map_of_eq_basicOpen {U V : X.Opens} (hU : IsAffineOpen U) (r : Γ(X, U))
+    (hV : V = X.basicOpen r) (a : Γ(Y, π ⁻¹ᵁ U)) :
+    π.normAt V (Y.presheaf.map (homOfLE (π.preimage_mono
+      (hV.le.trans (X.basicOpen_le r)))).op a) =
+      X.presheaf.map (homOfLE (hV.le.trans (X.basicOpen_le r))).op (π.normAt U a) := by
+  subst hV
+  obtain ⟨hfree, hfin⟩ := free_finite_app H hU
+  have := isFinite_of_isPullback_spec H
+  have hU' : IsAffineOpen (π ⁻¹ᵁ U) := hU.preimage π
+  let : Algebra Γ(X, U) Γ(Y, π ⁻¹ᵁ U) := (π.app U).hom.toAlgebra
+  let : Algebra Γ(Y, π ⁻¹ᵁ U) Γ(Y, π ⁻¹ᵁ X.basicOpen r) :=
+    (Y.presheaf.map (homOfLE (π.preimage_mono (X.basicOpen_le r))).op).hom.toAlgebra
+  let : Algebra Γ(X, X.basicOpen r) Γ(Y, π ⁻¹ᵁ X.basicOpen r) :=
+    (π.app (X.basicOpen r)).hom.toAlgebra
+  let : Algebra Γ(X, U) Γ(Y, π ⁻¹ᵁ X.basicOpen r) :=
+    (π.app U ≫ Y.presheaf.map (homOfLE (π.preimage_mono (X.basicOpen_le r))).op).hom.toAlgebra
+  have : IsScalarTower Γ(X, U) Γ(Y, π ⁻¹ᵁ U) Γ(Y, π ⁻¹ᵁ X.basicOpen r) :=
+    IsScalarTower.of_algebraMap_eq' rfl
+  have : IsScalarTower Γ(X, U) Γ(X, X.basicOpen r) Γ(Y, π ⁻¹ᵁ X.basicOpen r) :=
+    IsScalarTower.of_algebraMap_eq' (by
+      change (π.app U ≫ Y.presheaf.map _).hom = (X.presheaf.map _ ≫ π.app _).hom
+      rw [π.naturality]
+      rfl)
+  have : IsLocalization.Away r Γ(X, X.basicOpen r) := hU.isLocalization_basicOpen r
+  have : IsLocalization (Algebra.algebraMapSubmonoid Γ(Y, π ⁻¹ᵁ U) (Submonoid.powers r))
+      Γ(Y, π ⁻¹ᵁ X.basicOpen r) := by
+    rw [Algebra.algebraMapSubmonoid, Submonoid.map_powers]
+    have e : π ⁻¹ᵁ X.basicOpen r = Y.basicOpen (π.app U r) := Scheme.preimage_basicOpen π r
+    have := hU'.isLocalization_basicOpen (π.app U r)
+    let ψ := (Y.presheaf.mapIso (eqToIso e).op).commRingCatIsoToRingEquiv
+    refine IsLocalization.isLocalization_of_algEquiv (Submonoid.powers (π.app U r))
+      { ψ with commutes' := fun x ↦ ?_ }
+    change (Y.presheaf.map _ ≫ Y.presheaf.map _) x = Y.presheaf.map _ x
+    rw [← Functor.map_comp]
+    rfl
+  exact Algebra.norm_localization (Rₘ := Γ(X, X.basicOpen r))
+    (Sₘ := Γ(Y, π ⁻¹ᵁ X.basicOpen r)) Γ(X, U) (Submonoid.powers r) a
+
 end AlgebraicGeometry
