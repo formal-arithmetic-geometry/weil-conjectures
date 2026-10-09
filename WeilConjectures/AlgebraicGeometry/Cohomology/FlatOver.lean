@@ -8,6 +8,10 @@ module
 public import Mathlib.RingTheory.Flat.Localization
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackSections
+public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
+public import WeilConjectures.Mathlib.RingTheory.Flat.Stability
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 /-!
 # Flatness of a module over the base is local
@@ -28,7 +32,7 @@ localizations at a family of functions generating the unit ideal
 
 universe u
 
-open CategoryTheory Opposite
+open CategoryTheory Opposite Limits TensorProduct
 
 namespace AlgebraicGeometry.Scheme.Modules
 
@@ -76,5 +80,83 @@ theorem isFlatOver_of_forall_exists (f : X ⟶ T) (ℱ : X.Modules) [ℱ.IsQuasi
   refine Module.flat_of_isLocalized_span Γ(X, W.1) Γ(ℱ, W.1) s spn Mₛ gₛ fun r ↦ ?_
   obtain ⟨_, ⟨x, rfl⟩⟩ := r
   exact hN x ⟨_, W.2.basicOpen _⟩ (hle _) (hgN x)
+
+
+set_option backward.isDefEq.respectTransparency false in
+/-- **Sections of a pullback from a factor of a product over a field.** Let `W` and `Z` be schemes
+over a field `K`, with projections `π : W ×_K Z ⟶ W` and `f : W ×_K Z ⟶ Z`, and let `ℱ` be a
+quasi-coherent `𝒪_W`-module. For affine opens `U_W ⊆ W`, `V ⊆ Z` and an affine open
+`U ⊆ π⁻¹ U_W ∩ f⁻¹ V`, the sections of `π^* ℱ` over `U` are flat over `Γ(Z, V)`. -/
+theorem flat_sections_pullback_fst {K : Type u} [Field K] {W Z : Scheme.{u}}
+    (gW : W ⟶ Spec (.of K)) (gZ : Z ⟶ Spec (.of K)) (ℱ : W.Modules) [ℱ.IsQuasicoherent]
+    {UW : W.Opens} (hUW : IsAffineOpen UW) {V : Z.Opens} (hV : IsAffineOpen V)
+    {U : (Limits.pullback gW gZ).Opens} (hU : IsAffineOpen U)
+    (hUle : U ≤ pullback.fst gW gZ ⁻¹ᵁ UW ⊓ pullback.snd gW gZ ⁻¹ᵁ V) :
+    letI : Module Γ(Z, V) Γ((Modules.pullback (Limits.pullback.fst gW gZ)).obj ℱ, U) :=
+      Module.compHom _ ((pullback.snd gW gZ).appLE V U (hUle.trans inf_le_right)).hom
+    Module.Flat Γ(Z, V) Γ((Modules.pullback (Limits.pullback.fst gW gZ)).obj ℱ, U) := by
+  set π := pullback.fst gW gZ
+  set f := pullback.snd gW gZ
+  set Ω := π ⁻¹ᵁ UW ⊓ f ⁻¹ᵁ V
+  have hΩ : IsAffineOpen Ω := isAffineOpen_preimage_inf_preimage_pullback gW gZ hUW hV
+  have hUV : U ≤ f ⁻¹ᵁ V := hUle.trans inf_le_right
+  have hUW' : U ≤ π ⁻¹ᵁ UW := hUle.trans inf_le_left
+  -- the ring maps `Γ(K) → Γ(W, U_W)`, `Γ(K) → Γ(Z, V)`, `→ Γ(Ω) → Γ(U)`
+  let : Algebra Γ(Spec (.of K), ⊤) Γ(W, UW) := (gW.appLE ⊤ UW le_top).hom.toAlgebra
+  let : Algebra Γ(Spec (.of K), ⊤) Γ(Z, V) := (gZ.appLE ⊤ V le_top).hom.toAlgebra
+  let : Algebra Γ(W, UW) Γ(Limits.pullback gW gZ, Ω) := (π.appLE UW Ω inf_le_left).hom.toAlgebra
+  let : Algebra Γ(Z, V) Γ(Limits.pullback gW gZ, Ω) := (f.appLE V Ω inf_le_right).hom.toAlgebra
+  let : Algebra Γ(Spec (.of K), ⊤) Γ(Limits.pullback gW gZ, Ω) :=
+    (gW.appLE ⊤ UW le_top ≫ π.appLE UW Ω inf_le_left).hom.toAlgebra
+  let : Algebra Γ(Limits.pullback gW gZ, Ω) Γ(Limits.pullback gW gZ, U) :=
+    ((Limits.pullback gW gZ).presheaf.map (homOfLE hUle).op).hom.toAlgebra
+  let : Algebra Γ(Z, V) Γ(Limits.pullback gW gZ, U) := (f.appLE V U hUV).hom.toAlgebra
+  let : Algebra Γ(W, UW) Γ(Limits.pullback gW gZ, U) := (π.appLE UW U hUW').hom.toAlgebra
+  have : IsScalarTower Γ(Spec (.of K), ⊤) Γ(W, UW) Γ(Limits.pullback gW gZ, Ω) :=
+    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : IsScalarTower Γ(Spec (.of K), ⊤) Γ(Z, V) Γ(Limits.pullback gW gZ, Ω) := by
+    refine IsScalarTower.of_algebraMap_eq fun r ↦ ?_
+    change (gW.appLE ⊤ UW le_top ≫ π.appLE UW Ω inf_le_left) r =
+      (gZ.appLE ⊤ V le_top ≫ f.appLE V Ω inf_le_right) r
+    rw [Scheme.Hom.appLE_comp_appLE, Scheme.Hom.appLE_comp_appLE]
+    simp only [pullback.condition, π, f]
+  have : IsScalarTower Γ(Z, V) Γ(Limits.pullback gW gZ, Ω) Γ(Limits.pullback gW gZ, U) := by
+    refine IsScalarTower.of_algebraMap_eq fun r ↦ ?_
+    change (f.appLE V U hUV) r = (f.appLE V Ω inf_le_right ≫
+      (Limits.pullback gW gZ).presheaf.map (homOfLE hUle).op) r
+    rw [Scheme.Hom.appLE_map]
+  have : IsScalarTower Γ(W, UW) Γ(Limits.pullback gW gZ, Ω) Γ(Limits.pullback gW gZ, U) := by
+    refine IsScalarTower.of_algebraMap_eq fun r ↦ ?_
+    change (π.appLE UW U hUW') r = (π.appLE UW Ω inf_le_left ≫
+      (Limits.pullback gW gZ).presheaf.map (homOfLE hUle).op) r
+    rw [Scheme.Hom.appLE_map]
+  -- `Γ(Ω) = Γ(W, U_W) ⊗[K] Γ(Z, V)`
+  have hpush : Algebra.IsPushout Γ(Spec (.of K), ⊤) Γ(W, UW) Γ(Z, V)
+      Γ(Limits.pullback gW gZ, Ω) := by
+    have hiso := isIso_pushoutSection_of_isAffineOpen (IsPullback.of_hasPullback gW gZ)
+      (le_top : V ≤ gZ ⁻¹ᵁ ⊤) (le_top : UW ≤ gW ⁻¹ᵁ ⊤) (UY := Ω) rfl (isAffineOpen_top _) hV hUW
+    exact CommRingCat.isPushout_iff_isPushout.mp ((isIso_pushoutSection_iff ..).mp hiso)
+  have hpush' := hpush.symm
+  -- the sections of `π^* ℱ` over `U` are `Γ(U) ⊗[Γ(Ω)] (Γ(Ω) ⊗[Γ(U_W)] Γ(ℱ, U_W))`
+  obtain ⟨e, -⟩ := exists_linearEquiv_pullback_sections π ℱ hUW hU hUW'
+  let : Module Γ(Spec (.of K), ⊤) Γ(ℱ, UW) :=
+    Module.compHom _ (algebraMap Γ(Spec (.of K), ⊤) Γ(W, UW))
+  have : IsScalarTower Γ(Spec (.of K), ⊤) Γ(W, UW) Γ(ℱ, UW) := ⟨fun a b m ↦ mul_smul _ _ _⟩
+  let := (isField_Γ_Spec (R := .of K) (Field.toIsField K)).toField
+  have hN : Module.Flat Γ(Z, V) (Γ(Limits.pullback gW gZ, Ω) ⊗[Γ(W, UW)] Γ(ℱ, UW)) :=
+    Module.Flat.of_linearEquiv (Algebra.IsPushout.cancelBaseChange Γ(Spec (.of K), ⊤) Γ(Z, V)
+      Γ(W, UW) Γ(Limits.pullback gW gZ, Ω) Γ(ℱ, UW))
+  have hΩU : Module.Flat Γ(Limits.pullback gW gZ, Ω) Γ(Limits.pullback gW gZ, U) := by
+    have := Scheme.Hom.flat_appLE (𝟙 (Limits.pullback gW gZ)) hΩ hU hUle
+    exact this
+  have := Module.Flat.tensorProduct_of_flat Γ(Z, V) Γ(Limits.pullback gW gZ, Ω)
+    Γ(Limits.pullback gW gZ, U) (Γ(Limits.pullback gW gZ, Ω) ⊗[Γ(W, UW)] Γ(ℱ, UW))
+  let : Module Γ(Z, V) Γ((Modules.pullback π).obj ℱ, U) :=
+    Module.compHom _ (f.appLE V U hUV).hom
+  have : IsScalarTower Γ(Z, V) Γ(Limits.pullback gW gZ, U) Γ((Modules.pullback π).obj ℱ, U) :=
+    ⟨fun a b m ↦ mul_smul _ _ _⟩
+  exact Module.Flat.of_linearEquiv (((AlgebraTensorModule.cancelBaseChange Γ(W, UW)
+    Γ(Limits.pullback gW gZ, Ω) Γ(Limits.pullback gW gZ, U) Γ(Limits.pullback gW gZ, U)
+    Γ(ℱ, UW)).trans e).restrictScalars Γ(Z, V)).symm
 
 end AlgebraicGeometry.Scheme.Modules
