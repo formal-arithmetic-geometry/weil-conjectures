@@ -8,9 +8,45 @@
   "place": "More on Algebra, Lemma Tag 09XG (lemma-helper-integral) and its proof (uses Algebra, Lemma Tag 00H5, lemma-integral-integral-over-ideal: an element of IB is a root of a monic polynomial with non-leading coefficients in I)"
  },
  "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$z=b^2-b$ lies in $IB$.* The kernel of the quotient map $B\\to B/IB$ is $IB$. The image $\\bar b$ of $b$ is idempotent, so the image of $z=b^2-b$ is $\\bar b^2-\\bar b=0$, i.e. $z\\in IB$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 09XG (lemma-helper-integral), first sentence ('Observe that z = b^2 - b is an element of IB')"
+   }
+  },
+  {
+   "text": "*An equation for $z$ over $I$.* Since $B$ is integral over $A$ and $z\\in IB$, there is a monic $g=x^e+\\sum_{j<e}a_jx^j\\in A[x]$ with $a_j\\in I$ for $j<e$ and $g(z)=0$ [lem-weil-pbc-integral-extended-ideal-element-monic]. If $e=0$, then $g=1$ and $1=g(z)=0$ in $B$, so $B=0$; in that case replace $g$ by $xg=x$, which is monic of degree $1$ with constant coefficient $0\\in I$ and $(xg)(z)=0$. So we may take $g$ monic of degree $d\\ge1$, $g=x^d+\\sum_{j<d}a_jx^j$, $a_j\\in I$, $g(z)=0$. (Stacks writes degree $d$ without the case $d=0$; this case is added by the agent.)",
+   "uses": [
+    "lem-weil-pbc-integral-extended-ideal-element-monic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 09XG (lemma-helper-integral), second sentence (Algebra, Lemma Tag 00H5, lemma-integral-integral-over-ideal)"
+   }
+  },
+  {
+   "text": "*The polynomial $f(x)=g(x^2-x)$.* Put $f=g\\circ(x^2-x)=(x^2-x)^d+\\sum_{j<d}a_j(x^2-x)^j\\in A[x]$. (i) $f$ is monic of degree $2d$: $(x^2-x)^d$ is monic of degree $2d$ and each $a_j(x^2-x)^j$ with $j<d$ has degree $\\le2j<2d$ (in Mathlib: Polynomial.Monic.comp, since $x^2-x$ is monic of degree $2\\ne0$). (ii) $f(b)=g(b^2-b)=g(z)=0$, because evaluation at $b$ is a ring map and $f$ is the composite (Polynomial.aeval_comp). (iii) Reducing coefficients modulo $I$ is a ring map $A[x]\\to(A/I)[x]$ commuting with composition (Polynomial.map_comp); it sends $a_j\\in I$ to $0$, so $\\bar f=(x^2-x)^d=x^d(x-1)^d$ in $(A/I)[x]$. Hence $d\\ge1$ and $f$ are as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 09XG (lemma-helper-integral), last sentence ('Hence f(x) = g(x^2 - x) ... is a monic polynomial such that f(x) ≡ x^d(x-1)^d mod I and f(b) = 0'); the degree count and the reduction are written out by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-extended-ideal-element-monic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 09XG (lemma-helper-integral), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,10 +75,31 @@
    "results": "only @[stacks 00H5] Polynomial.exists_monic_aeval_eq_zero_forall_mem_of_mem_map (RingTheory/IntegralClosure/Algebra/Ideal.lean:91): [Algebra.IsIntegral R S], x in I.map (algebraMap R S) -> exists monic p, aeval x p = 0, coeff i in I for i != natDegree; no 09XG",
    "verdict": "no match; the proof will be 00H5 (Mathlib) applied to z=b^2-b, then f(x)=g(x^2-x)",
    "date": "2026-10-10"
+  },
+  {
+   "tool": "leansearch",
+   "query": "element b with b^2 - b in IB, B integral over A, monic polynomial f with f(b)=0 and f ≡ X^d (X-1)^d modulo I",
+   "results": "Polynomial.exists_monic_aeval_eq_zero_forall_mem_of_mem_map, roots_mem_integralClosure, IsIntegral.of_aeval_monic, minpoly, isInteger_of_is_root_of_monic, minpoly.monic",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredient 00H5 only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic, Polynomial.map, Polynomial.X ^ _ * (Polynomial.X - 1) ^ _",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '09XG\\|lemma-helper-integral' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; sed -n 240,256p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Idempotents.lean; grep -rn 'Monic.comp\\|aeval_comp\\|map_comp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial",
+   "results": "no 09XG; exists_isIdempotentElem_eq_of_ker_isNilpotent (RingTheory/Idempotents.lean:249) lifts idempotents along a ring map with nil kernel only (not applicable: IB need not be nil, and the statement is about an annihilating polynomial, not a lift); tools for step 3: Polynomial.Monic.comp (Algebra/Polynomial/Monic.lean:119), Polynomial.aeval_comp (Mathlib.Algebra.Polynomial.AlgebraMap), Polynomial.map_comp (Algebra/Polynomial/Eval/Defs.lean:587)",
+   "date": "2026-10-10",
+   "verdict": "no match for 09XG itself; split along Stacks into the leaf 00H5 and elementary steps"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,6 +124,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks 09XG; correct; unsplit."
+  "note": "Three steps along Stacks 09XG: z = b²−b ∈ IB, the 00H5 equation (new Mathlib leaf lem-weil-pbc-integral-extended-ideal-element-monic, exists_monic_aeval_eq_zero_forall_mem_of_mem_map, Ideal.lean:90 @[stacks 00H5], checked; the degree-0 case B = 0 handled), f = g(x²−x) monic of degree 2d with f(b) = 0 and f ≡ x^d(x−1)^d mod I. Checked."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-integral-idempotent-annihilating-polynomial",
+  "worker": "stage1",
+  "summary": "Read More on Algebra 09XG (more-algebra.tex:1959-1975) and Algebra 00H5 (algebra.tex:8421) with the definition of 'integral over I'. Split along Stacks' three sentences: z=b^2-b in IB (elementary); 00H5 gives a monic g with non-leading coefficients in I and g(z)=0 (new Mathlib leaf lem-weil-pbc-integral-extended-ideal-element-monic = Polynomial.exists_monic_aeval_eq_zero_forall_mem_of_mem_map, @[stacks 00H5], source read); f=g(x^2-x) is monic of degree 2d, f(b)=0, f≡x^d(x-1)^d mod I (elementary, Mathlib tools named). Added the case deg g=0 (then B=0; replace g by xg) which Stacks omits, to get d≥1. lem-weil-pbc-integral-algebra-ideal-in-radical is not 00H5 (it is about the Jacobson radical), so a new leaf was needed. No 09XG in Mathlib or in slopmaster2 (grep)."
  }
 }
