@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-derived-functor-map-via-lift",
+ "kind": "statement",
+ "title": "Right derived functors on morphisms are computed by lifts to injective resolutions",
+ "statement": "Let $\\mathcal A$ be an abelian category with enough injectives, $\\mathcal B$ an abelian category [def-sp-abelian], $v:\\mathcal A\\to\\mathcal B$ an additive functor, and $R^nv$ ($n\\geq0$) its right derived functors computed by injective resolutions [def-sp-left-exact-additive], [def-sp-injective-resolutions]. Then each $R^nv$ is a functor $\\mathcal A\\to\\mathcal B$, and for every object $X$ and every injective resolution $s_X:X\\to P^\\bullet$ with $P^q=0$ for $q<0$ there is an isomorphism $\\iota_P^n:R^nv(X)\\xrightarrow{\\sim}H^n(v(P^\\bullet))$, such that: for every morphism $h:X\\to Y$ of $\\mathcal A$, every injective resolution $s_Y:Y\\to Q^\\bullet$ with $Q^q=0$ for $q<0$, and every morphism of complexes $\\varphi:P^\\bullet\\to Q^\\bullet$ with $\\varphi^0\\circ s_X=s_Y\\circ h$, one has $R^nv(h)=(\\iota_Q^n)^{-1}\\circ H^n(v(\\varphi))\\circ\\iota_P^n$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Section 'Right derived functors and injective resolutions' (Lemma Tag 05TD lemma-left-exact-higher-derived and the definition of R^iF = H^i(RF(A[0])) computed by an injective resolution, Lemma Tag 013P (lemma-morphisms-lift): morphisms of complexes into a bounded below complex of injectives lift uniquely up to homotopy); Mathlib CategoryTheory/Abelian/RightDerived.lean"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compute right derived functor on a morphism using a lift to a cochain map between injective resolutions",
+   "results": "Functor.rightDerived_map_eq, InjectiveResolution.rightDerived_app_eq, Functor.rightDerived, InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, NatTrans.rightDerivedToHomotopyCategory_id, InjectiveResolution.toRightDerivedZero_eq (Mathlib.CategoryTheory.Abelian.RightDerived)",
+   "date": "2026-10-09",
+   "verdict": "match: Functor.rightDerived_map_eq"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived_map_eq",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq (F : C ⥤ D) [F.Additive] (n : ℕ) {X Y : C} (f : X ⟶ Y) {P : InjectiveResolution X} {Q : InjectiveResolution Y} (g : P.cocomplex ⟶ Q.cocomplex) (w : P.ι ≫ g = (CochainComplex.single₀ C).map f ≫ Q.ι) : (F.rightDerived n).map f = (P.isoRightDerivedObj F n).hom ≫ (F.mapHomologicalComplex _ ⋙ homologyFunctor D _ n).map g ≫ (Q.isoRightDerivedObj F n).inv",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^theorem\\|^lemma\\|^noncomputable def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "results": "Functor.rightDerived (line 110), InjectiveResolution.isoRightDerivedObj (114), isoRightDerivedObj_hom_naturality (126, with hypothesis comm : I.ι.f 0 ≫ φ.f 0 = f ≫ J.ι.f 0), isoRightDerivedObj_inv_naturality (141), Functor.rightDerived_map_eq (164); instance (F.rightDerived n).Additive is not in Mathlib (it is in the source repository, WeilConjectures/Mathlib/CategoryTheory/Abelian/RightDerived.lean:28), but additivity is not used here",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.rightDerived_map_eq",
+  "file": "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+  "how": "specializes in one line: R^nv := F.rightDerived n (line 110; it is H^n of v applied to an injective resolution, as in def-sp-left-exact-additive, see the leaves lem-weil-pbc-derived-functor-injective-vanishing and lem-weil-pbc-left-exact-injective-resolution-degree-zero); an injective resolution with P^q=0 for q<0 is an InjectiveResolution X (an ℕ-indexed cochain complex P.cocomplex of injectives with quasi-isomorphism P.ι from (single₀ C).obj X, whose degree-0 component is s_X); iota_P^n := (P.isoRightDerivedObj F n).hom (line 114); the hypothesis φ^0 ∘ s_X = s_Y ∘ h is the degree-0 component of w : P.ι ≫ φ = (single₀ C).map h ≫ Q.ι (equivalently the comm hypothesis of isoRightDerivedObj_hom_naturality, line 126, which is stated directly in degree 0); the conclusion is rightDerived_map_eq (line 164). The functoriality of R^nv is that F.rightDerived n is a Functor C D."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-derived-functor-long-exact",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-injective-resolution-ses",
+ "kind": "statement",
+ "title": "Injective resolutions of a short exact sequence (horseshoe lemma)",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with enough injectives, and let $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ be a short exact sequence in $\\mathcal A$. Then there exist injective resolutions [def-sp-injective-resolutions] $s_A:A\\to I_A^\\bullet$, $s_B:B\\to I_B^\\bullet$, $s_C:C\\to I_C^\\bullet$ with $I_A^n=I_B^n=I_C^n=0$ for $n<0$, and morphisms of complexes $\\alpha:I_A^\\bullet\\to I_B^\\bullet$, $\\beta:I_B^\\bullet\\to I_C^\\bullet$, such that $\\alpha^0\\circ s_A=s_B\\circ f$, $\\beta^0\\circ s_B=s_C\\circ g$, and for every $n\\geq0$ the sequence $0\\to I_A^n\\xrightarrow{\\alpha^n}I_B^n\\xrightarrow{\\beta^n}I_C^n\\to0$ is short exact. (One may moreover take $I_B^n=I_A^n\\oplus I_C^n$ with $\\alpha^n,\\beta^n$ the inclusion and the projection.)",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 013T (lemma-injective-resolution-ses), parts (2) and (3), applied to the complexes A[0], B[0], C[0] concentrated in degree 0; proof Steps 1-2 (pushout along A -> I, termwise split case with I_2^n = I_1^n (+) I_3^n)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "horseshoe lemma: injective resolution of the middle term of a short exact sequence from resolutions of the outer terms",
+   "results": "InjectiveResolution.of, InjectiveResolution.self, instHasInjectiveResolutions, InjectiveResolution.ofCocomplex, ShortExact.hasInjectiveDimensionLT_X₂/X₃ (Mathlib.CategoryTheory.Abelian.Injective.*): resolutions of single objects and injective dimension only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "horseshoe lemma: given a short exact sequence 0 → A → B → C → 0 and injective resolutions of A and C, construct an injective resolution of B which is degreewise the direct sum, giving a short exact sequence of resolutions",
+   "results": "InjectiveResolution.exact₀, InjectiveResolution.descFSucc, InjectiveResolution.exact_succ, ofCocomplex_exactAt_succ, cocomplex_exactAt_succ, InjectiveResolution.of: nothing about short exact sequences of resolutions",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution, CategoryTheory.ShortComplex.ShortExact",
+   "results": "no results",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i horseshoe ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'ShortExact\\|ShortComplex\\|biprod' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Injective/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Preadditive/Injective/",
+   "results": "no 'horseshoe' anywhere in Mathlib; Injective/Resolution.lean uses ShortComplex only for the exactness of a single resolution (lines 67, 271, 336) and InjectivePresentation.shortExact (line 360); biprod only in Preadditive/Injective/Basic.lean:148 (injectivity of a biproduct)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-derived-functor-long-exact",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

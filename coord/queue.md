@@ -15,7 +15,6 @@
 | `lem-sc-c6` | 1005 | none |
 | `lem-sc-c7` | 1005 | none |
 | `lem-sc-c8` | 1005 | none |
-| `lem-weil-pbc-curve-constructible-sub-quotient` | 1005 | none |
 | `lem-weil-pbc-derived-functor-long-exact` | 1005 | none |
 | `lem-weil-pbc-edge-map-base-change` | 1005 | none |
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1005 | none |
@@ -49,6 +48,7 @@
 | `thm-weil-pbc-finite-etale-lifting` | 1005 | sorry_here |
 | `lem-weil-pbc-constructible-torsion-modules-agree` | 1006 | none |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
+| `lem-weil-pbc-injective-resolution-ses` | 1006 | none |
 | `lemma-weil-pbc-constructible-approximation` | 1006 | none |
 | `lemma-weil-pbc-constructible-finite-pushforward` | 1006 | none |
 | `lemma-weil-pbc-finite-etale-henselian-lifting` | 1006 | none |
@@ -584,7 +584,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 570 nodes that wait for stage 1, 126 nodes that wait for a statement dependency.
+Not open yet: 570 nodes that wait for stage 1, 127 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
