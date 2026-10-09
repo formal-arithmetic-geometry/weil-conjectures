@@ -1,0 +1,53 @@
+{
+ "id": "def-sbc-standard-tstructure-derived-category",
+ "kind": "definition",
+ "title": "The standard t-structure on the derived category of an abelian category",
+ "statement": "Let $\\mathcal A$ be an abelian category and $D(\\mathcal A)$ its derived category, with cohomology functors $H^i:D(\\mathcal A)\\to\\mathcal A$ [def-weil-abstract-derived-category]. For $n\\in\\mathbf Z$ let $D(\\mathcal A)^{\\le n}$ (resp. $D(\\mathcal A)^{\\ge n}$) be the strictly full subcategory of objects $K$ with $H^i(K)=0$ for all $i>n$ (resp. for all $i<n$); equivalently, of objects isomorphic in $D(\\mathcal A)$ to (the image of) a complex $K^\\bullet$ with $K^i=0$ for $i>n$ (resp. $i<n$). The pair $(D(\\mathcal A)^{\\le0},D(\\mathcal A)^{\\ge0})$ is a t-structure on the triangulated category $D(\\mathcal A)$ [def-weil-t-structure], the *standard* (or *natural*) t-structure, with $D(\\mathcal A)^{\\le n}=D(\\mathcal A)^{\\le0}[-n]$ and $D(\\mathcal A)^{\\ge n}=D(\\mathcal A)^{\\ge0}[-n]$. For a complex $K$ the truncation triangle of axiom (iii) is the image of the short exact sequence $0\\to\\tau_{\\le0}K\\to K\\to K/\\tau_{\\le0}K\\to0$, where $\\tau_{\\le0}K$ is the subcomplex $\\cdots\\to K^{-1}\\to\\ker(d^0)\\to0\\to\\cdots$ of $K$, and $K/\\tau_{\\le0}K$ lies in $D(\\mathcal A)^{\\ge1}$.",
+ "source": {
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Exemples 1.3.2 (i), p. 28 (la t-structure naturelle sur DA); the truncation triangle also in literature/stacks-project/derived.tex Remark 08J5 (remark-truncation-distinguished-triangle)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-t-structure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def TStructure.t\\|lemma isGE_iff\\|lemma isLE_iff\\|lemma isGE_Q_obj_iff\\|lemma isLE_Q_obj_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+   "results": "`DerivedCategory.TStructure.t : TStructure (DerivedCategory C)` (line 34) for an abelian C with `HasDerivedCategory C`: `le n X := ∃ K, X ≅ Q.obj K ∧ K.IsStrictlyLE n`, `ge n X := ∃ K, X ≅ Q.obj K ∧ K.IsStrictlyGE n`, the truncation triangle built from `K.shortComplexTruncLE_shortExact 0`; `isGE_iff` (line 90): `X.IsGE n ↔ ∀ i < n, IsZero ((homologyFunctor C i).obj X)`; `isLE_iff` (line 107): `X.IsLE n ↔ ∀ i > n, IsZero ((homologyFunctor C i).obj X)`; `isGE_Q_obj_iff`, `isLE_Q_obj_iff` (lines 134, 141)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'structure TStructure\\|def heart' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean",
+   "results": "`CategoryTheory.Triangulated.TStructure` (the t-structure axioms) in TStructure/Basic.lean; `TStructure.heart` (Heart.lean:45); no t-cohomology functor of a general t-structure is defined",
+   "date": "2026-10-09",
+   "verdict": "supports the match (the abstract notion is def-weil-t-structure)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "DerivedCategory.TStructure.t",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+  "how": "exact: `DerivedCategory.TStructure.t` (line 34) is the standard t-structure on `DerivedCategory C`; its parts are described by cohomology through `DerivedCategory.isLE_iff` / `isGE_iff` (lines 107, 90) and by strictly bounded representing complexes by definition"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-derived-cohomology-sheaves",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

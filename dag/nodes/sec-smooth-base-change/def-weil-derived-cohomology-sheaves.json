@@ -1,21 +1,45 @@
 {
  "id": "def-weil-derived-cohomology-sheaves",
  "kind": "definition",
- "title": "Cohomology sheaves of a derived complex",
- "statement": "Fix a scheme $Y$, a commutative ring $A$, a complex $K\\in\nD(Y_{\\mathrm{proet}},A)$, and an integer $r\\in\\mathbf Z$. Let\n\n$$\n \\mathcal H^r(K)\n$$\n\ndenote the $r$-th cohomology sheaf for the standard t-structure on the\nderived category of sheaves of $A_Y$-modules on the small pro-etale site\n[def-weil-pbc-proetale-site]. The nonpositive part of this\nt-structure consists of complexes with vanishing cohomology in positive\ndegrees, and the nonnegative part consists of complexes with vanishing\ncohomology in negative degrees. The notation is invariant under\nquasi-isomorphism.",
+ "title": "Cohomology sheaves of a complex of modules over a sheaf of rings",
+ "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$, with abelian category $\\Mod(\\mathcal O)$ of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category], and write $D(\\mathcal C,\\mathcal O)=D(\\Mod(\\mathcal O))$ for its derived category [def-weil-abstract-derived-category]. For $K\\in D(\\mathcal C,\\mathcal O)$ and $r\\in\\mathbf Z$, the $r$-th *cohomology sheaf*\n\n$$\n \\mathcal H^r(K)\\in\\Mod(\\mathcal O)\n$$\n\nis the value at $K$ of the $r$-th cohomology functor $H^r:D(\\Mod(\\mathcal O))\\to\\Mod(\\mathcal O)$ of [def-weil-abstract-derived-category]: for any cochain complex $K^\\bullet$ of $\\mathcal O$-modules representing $K$ it is the cohomology sheaf $\\Ker(d^r)/\\Im(d^{r-1})$ of $K^\\bullet$ [def-pc-acyclic-complex-modules], the quotient taken in $\\Mod(\\mathcal O)$; a quasi-isomorphism induces isomorphisms on these sheaves, so $\\mathcal H^r(K)$ is well defined up to canonical isomorphism, and a morphism of $D(\\mathcal C,\\mathcal O)$ induces an $\\mathcal O$-linear map on $\\mathcal H^r$. The standard t-structure on $D(\\mathcal C,\\mathcal O)$ [def-sbc-standard-tstructure-derived-category] has as nonpositive part the complexes $K$ with $\\mathcal H^r(K)=0$ for $r>0$, and as nonnegative part those with $\\mathcal H^r(K)=0$ for $r<0$.\n\nIn particular, for a scheme $Y$ and a commutative ring $A$, taking for $\\mathcal C$ the small pro-etale site $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] and for $\\mathcal O$ the constant sheaf of rings $A_Y$ [def-weil-pbc-constant-sheaf] gives $D(Y_{\\mathrm{proet}},A)=D(\\Mod(A_Y))$ and the cohomology sheaves $\\mathcal H^r(K)$ of $K\\in D(Y_{\\mathrm{proet}},A)$; the same definition applies verbatim to any other sheaf of rings on $Y_{\\mathrm{proet}}$, for instance a completed (non-constant) coefficient sheaf $\\widehat{\\mathcal O}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/def-weil-derived-cohomology-sheaves.md",
   "place": "node def-weil-derived-cohomology-sheaves, order 1428"
  },
  "stmt_deps": [
-  "def-weil-pbc-proetale-site"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-acyclic-complex-modules",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def homologyFunctor\\|def homologyFunctorFactors' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean; grep -n 'noncomputable instance : Abelian (SheafOfModules' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean; grep -n 'def HasDerivedCategory.standard' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+   "results": "`DerivedCategory.homologyFunctor C n : DerivedCategory C ⥤ C` (HomologySequence.lean:34) for any abelian C with `HasDerivedCategory C`, with `homologyFunctorFactors C n : Q ⋙ homologyFunctor C n ≅ HomologicalComplex.homologyFunctor _ _ n` (:39); `Abelian (SheafOfModules.{v} R)` for `R : Sheaf J RingCat` (Sheaf/Abelian.lean:40, under `HasSheafify J AddCommGrpCat.{v}` and `J.WEqualsLocallyBijective AddCommGrpCat.{v}`); `HasDerivedCategory.standard` (Basic.lean:81)",
+   "date": "2026-10-09",
+   "verdict": "generalization: specializes in one line to C = SheafOfModules R"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'SheafOfModules' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ | xargs grep -ln 'DerivedCategory'",
+   "results": "none: Mathlib has no named derived category or cohomology sheaf functor specific to sheaves of modules; the general `DerivedCategory`/`homologyFunctor` apply to the abelian category `SheafOfModules R`",
+   "date": "2026-10-09",
+   "verdict": "no separate declaration; the general one specializes"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "DerivedCategory.homologyFunctor",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+  "how": "specializes in one line: `(DerivedCategory.homologyFunctor (SheafOfModules.{v} R) r).obj K` for `R : Sheaf J RingCat` (abelian by `SheafOfModules` instance in Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean:40, with `HasDerivedCategory.standard`), equal to the homology of a representing complex by `DerivedCategory.homologyFunctorFactors`; the t-structure statement is `DerivedCategory.isLE_iff` / `isGE_iff` for `DerivedCategory.TStructure.t`; for A_Y take `J = Scheme.ProEt.topology Y`, `R = (constantSheaf J RingCat).obj (RingCat.of A)` (universe-lifted as in def-weil-pbc-constant-sheaf)"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -34,5 +58,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-derived-cohomology-sheaves",
+  "worker": "stage1",
+  "summary": "The node stated the cohomology sheaves only for complexes over the constant ring sheaf A_Y on Y_proet, while several nodes use it for complexes over other sheaves of rings (the completed sheaf Ô). The statement is generalized, as the lead asked, to any site and any sheaf of commutative rings O: D(C,O) is D(Mod(O)) (def-weil-abstract-derived-category applied to the abelian category def-weil-sheaf-of-modules-category), H^r(K) is the r-th cohomology functor of def-weil-abstract-derived-category, i.e. Ker d^r/Im d^{r-1} of a representing complex as in def-pc-acyclic-complex-modules, and the standard t-structure is described by vanishing of H^r (new Mathlib leaf def-sbc-standard-tstructure-derived-category, BBD Exemples 1.3.2(i), Mathlib DerivedCategory.TStructure.t with isLE_iff/isGE_iff). The original A_Y on Y_proet case is kept as the stated specialization (def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf). The blueprint's phrase 'the r-th cohomology sheaf for the standard t-structure' is made precise as the ordinary cohomology functor H^r with the t-structure described by it; the identification of the t-cohomology functor tau^{>=r}tau^{<=r}(-)[r] with H^r (BBD, Exemple after Théorème 1.3.6) is not stated, since no user needs it and Mathlib has no t-cohomology functor. The item is now a one-line specialization of DerivedCategory.homologyFunctor to SheafOfModules R, hence a Mathlib leaf; no other new node was needed."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass; Mathlib leaf (DerivedCategory.homologyFunctor on SheafOfModules), generalized to any sheaf of commutative rings"
  }
 }
