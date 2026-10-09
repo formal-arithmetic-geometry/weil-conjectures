@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+ "kind": "statement",
+ "title": "Two ideals have the same zero locus iff they have the same radical",
+ "statement": "Let $R$ be a commutative ring. For an ideal $I\\subset R$ let $V(I)=\\{\\mathfrak p\\subset R\\text{ prime}: I\\subset\\mathfrak p\\}$ and $\\sqrt I=\\{x\\in R: x^n\\in I\\text{ for some }n\\ge1\\}$. Then $\\sqrt I=\\bigcap_{\\mathfrak p\\in V(I)}\\mathfrak p$, and for ideals $I,J\\subset R$ one has $V(I)=V(J)$ if and only if $\\sqrt I=\\sqrt J$. In particular two radical ideals ($I=\\sqrt I$, $J=\\sqrt J$) with $V(I)=V(J)$ are equal.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00E0 (lemma-Zariski-topology), items (6) $V(I)=V(\\sqrt I)$ and (7) $\\sqrt I=\\bigcap_{I\\subset\\mathfrak p}\\mathfrak p$; the equivalence is (6) and (7) combined"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the radical of an ideal is the intersection of all prime ideals containing it",
+   "results": "Ideal.radical_eq_sInf (Mathlib.RingTheory.Ideal.Operations), Ideal.sInf_minimalPrimes (MinimalPrime.Basic), Ideal.IsHomogeneous.radical_eq, PrimeSpectrum.nilradical_eq_iInf, nilradical_eq_sInf",
+   "date": "2026-10-10",
+   "verdict": "match for the first clause: Ideal.radical_eq_sInf (RingTheory/Ideal/Operations.lean:932), I.radical = sInf {J | I <= J and J.IsPrime}"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.radical ?I = sInf _",
+   "results": "Ideal.radical_eq_sInf (Mathlib.RingTheory.Ideal.Operations), Ideal.IsHomogeneous.radical_eq (GradedAlgebra.Radical)",
+   "date": "2026-10-10",
+   "verdict": "match (first clause)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two radical ideals with the same zero locus in Spec are equal",
+   "results": "PrimeSpectrum.zeroLocus_eq_iff (Mathlib.RingTheory.Spectrum.Prime.Topology), PrimeSpectrum.zeroLocus_radical, PrimeSpectrum.vanishingIdeal_zeroLocus_eq_radical (Spectrum.Prime.Basic), AlgebraicGeometry.Scheme.zeroLocus_radical",
+   "date": "2026-10-10",
+   "verdict": "match: PrimeSpectrum.zeroLocus_eq_iff {I J : Ideal R} : zeroLocus I = zeroLocus J <-> I.radical = J.radical (CommSemiring R)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem zeroLocus_eq_iff\\|theorem radical_eq_sInf\\|theorem zeroLocus_radical' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "RingTheory/Spectrum/Prime/Topology.lean:190 zeroLocus_eq_iff; RingTheory/Ideal/Operations.lean:932 radical_eq_sInf; RingTheory/Spectrum/Prime/Basic.lean:224 zeroLocus_radical; sources read with sed -n",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.zeroLocus_eq_iff",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+  "line": 190,
+  "how": "a few Mathlib lemmas, one per clause: the equivalence V(I)=V(J) <-> sqrt I = sqrt J is PrimeSpectrum.zeroLocus_eq_iff (Topology.lean:190, for CommSemiring R, zeroLocus of the carrier sets); sqrt I = intersection of the primes containing I is Ideal.radical_eq_sInf (RingTheory/Ideal/Operations.lean:932); 'in particular' for radical ideals: Ideal.IsRadical.radical (alias of Ideal.radical_eq_iff, Operations.lean:814-817, I.radical = I) rewrites both sides. Sources read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-singular-ideal",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
