@@ -789,6 +789,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 public import WeilConjectures.Mathlib.Data.Fin.Rev
+public import WeilConjectures.Mathlib.Data.Nat.Choose.Dvd
 public import WeilConjectures.Mathlib.Data.Set.Image
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Polynomial

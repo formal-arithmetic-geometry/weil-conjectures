@@ -5,6 +5,9 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.Algebra.BigOperators.Field
+public import Mathlib.Analysis.SpecificLimits.Basic
+public import WeilConjectures.Mathlib.Data.Nat.Choose.Dvd
 public import WeilConjectures.NumberTheory.Padics.Extension
 
 /-!
@@ -30,6 +33,7 @@ it, while the two definitions, which make sense for any subfield of `ℚ̄_ℓ`,
 ## Main statements
 
 - `PadicAlgCl.summable_logSeries` : the logarithm series converges on `ℓ² 𝒪_E`.
+- `PadicAlgCl.tendsto_pow_sub_one_div_smallLog` : `log u = lim (u ^ ℓⁿ - 1) / ℓⁿ` on `U_E`.
 - `PadicAlgCl.smallLog_mul` and `PadicAlgCl.injOn_smallLog` : `u ↦ log u` is an injective
   homomorphism `U_E → (E, +)`.
 -/
@@ -37,6 +41,9 @@ it, while the two definitions, which make sense for any subfield of `ℚ̄_ℓ`,
 @[expose] public section
 
 universe w
+
+open Filter Topology
+open scoped Nat
 
 namespace PadicAlgCl
 
@@ -106,6 +113,104 @@ theorem norm_algebraMap_natCast (m : ℕ) :
     ‖algebraMap E (PadicAlgCl l) (m : E)‖ = ‖(m : ℚ_[l])‖ := by
   rw [map_natCast, ← map_natCast (algebraMap ℚ_[l] (PadicAlgCl l)), PadicAlgCl.norm_extends]
 
+/-- The norm of a nonzero natural number `m` in `E ⊆ ℚ̄_ℓ` is `ℓ ^ (-v_ℓ(m))`. -/
+theorem norm_natCast_eq_pow_padicValNat {m : ℕ} (hm : m ≠ 0) :
+    letI := normedFieldOfAlgebra l E
+    ‖(m : E)‖ = (l : ℝ)⁻¹ ^ padicValNat l m := by
+  change ‖algebraMap E (PadicAlgCl l) (m : E)‖ = _
+  rw [norm_algebraMap_natCast, Padic.norm_eq_zpow_neg_valuation (by exact_mod_cast hm),
+    Padic.valuation_natCast, inv_pow, zpow_neg, zpow_natCast]
+
+/-- An element `x ∈ ℓ² 𝒪_E` has norm `‖x‖ ≤ ℓ⁻²`. -/
+theorem norm_le_of_div_mem_integers {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E) :
+    letI := normedFieldOfAlgebra l E
+    ‖x‖ ≤ (l : ℝ)⁻¹ ^ 2 := by
+  let := normedFieldOfAlgebra l E
+  have hr0 : (0 : ℝ) < (l : ℝ)⁻¹ := inv_pos.mpr (by exact_mod_cast (Fact.out : l.Prime).pos)
+  have hlE : ‖(l : E)‖ = (l : ℝ)⁻¹ := by
+    rw [norm_natCast_eq_pow_padicValNat (Fact.out : l.Prime).ne_zero, padicValNat_self, pow_one]
+  have h : ‖x / (l : E) ^ 2‖ ≤ 1 := by
+    change ‖algebraMap E (PadicAlgCl l) _‖ ≤ 1
+    exact_mod_cast (mem_integers_iff l E _).mp hx
+  rwa [norm_div, norm_pow, hlE, div_le_one (pow_pos hr0 2)] at h
+
+/-- On `ℓ² 𝒪_E` the `n`-th term `(-1)^n x ^ (n + 1) / (n + 1)` of the logarithm series has norm
+at most `‖x‖ ℓ⁻ⁿ`, as `v_ℓ(n + 1) ≤ n`. -/
+theorem norm_logSeries_term_le {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E) (n : ℕ) :
+    letI := normedFieldOfAlgebra l E
+    ‖(-1) ^ n * x ^ (n + 1) / (n + 1 : ℕ)‖ ≤ ‖x‖ * (l : ℝ)⁻¹ ^ n := by
+  let := normedFieldOfAlgebra l E
+  set r : ℝ := (l : ℝ)⁻¹ with hr
+  have hl : (1 : ℝ) < l := by exact_mod_cast (Fact.out : l.Prime).one_lt
+  have hr0 : 0 < r := inv_pos.mpr (zero_lt_one.trans hl)
+  have hr1 : r ≤ 1 := inv_le_one_of_one_le₀ hl.le
+  have hxr : ‖x‖ ≤ r ^ 2 := norm_le_of_div_mem_integers hx
+  have hv : padicValNat l (n + 1) ≤ n := Nat.lt_succ_iff.mp
+    ((padicValNat_le_nat_log (p := l) (n + 1)).trans_lt (Nat.log_lt_self l n.succ_ne_zero))
+  rw [norm_div, norm_mul, norm_pow, norm_pow, norm_neg, norm_one, one_pow, one_mul,
+    norm_natCast_eq_pow_padicValNat n.succ_ne_zero, div_le_iff₀ (pow_pos hr0 _), pow_succ',
+    mul_assoc]
+  refine mul_le_mul_of_nonneg_left ?_ (norm_nonneg x)
+  calc ‖x‖ ^ n ≤ (r ^ 2) ^ n := pow_le_pow_left₀ (norm_nonneg x) hxr n
+    _ = r ^ n * r ^ n := by rw [← pow_mul, ← pow_add, two_mul]
+    _ ≤ r ^ n * r ^ padicValNat l (n + 1) :=
+      mul_le_mul_of_nonneg_left (pow_le_pow_of_le_one hr0.le hr1 hv) (by positivity)
+
+/-- For `‖x‖ ≤ ℓ⁻¹` the difference quotient `((1 + x) ^ q - 1) / q` agrees with the `q`-th
+partial sum of the logarithm series up to an error of norm at most `‖q‖`: the coefficient of
+`x ^ (j + 1)` in it is `C(q - 1, j) / (j + 1)`, and `j! C(q - 1, j) ≡ (-1)^j j!` modulo `q`. -/
+theorem norm_pow_sub_one_div_sub_sum_le {x : E}
+    (hx : letI := normedFieldOfAlgebra l E; ‖x‖ ≤ (l : ℝ)⁻¹) (q : ℕ) :
+    letI := normedFieldOfAlgebra l E
+    ‖((1 + x) ^ q - 1) / q - ∑ j ∈ Finset.range q, (-1) ^ j * x ^ (j + 1) / (j + 1 : ℕ)‖ ≤
+      ‖(q : E)‖ := by
+  let := normedFieldOfAlgebra l E
+  have := isUltrametricDist_ofAlgebra l E
+  have : CharZero E := (algebraMap E (PadicAlgCl l)).charZero
+  set r : ℝ := (l : ℝ)⁻¹ with hr
+  have hl : (1 : ℝ) < l := by exact_mod_cast (Fact.out : l.Prime).one_lt
+  have hr0 : 0 < r := inv_pos.mpr (zero_lt_one.trans hl)
+  have hr1 : r ≤ 1 := inv_le_one_of_one_le₀ hl.le
+  obtain _ | p := q
+  · simp
+  have hq : ((p + 1 : ℕ) : E) ≠ 0 := Nat.cast_ne_zero.mpr p.succ_ne_zero
+  have hsum : ((1 + x) ^ (p + 1) - 1) / (p + 1 : ℕ) =
+      ∑ j ∈ Finset.range (p + 1), (p.choose j : E) * x ^ (j + 1) / (j + 1 : ℕ) := by
+    rw [add_comm, add_pow, Finset.sum_range_succ']
+    simp only [pow_zero, one_pow, mul_one, Nat.choose_zero_right, Nat.cast_one,
+      add_sub_cancel_right]
+    rw [Finset.sum_div]
+    refine Finset.sum_congr rfl fun j _ ↦ ?_
+    have h := congrArg (fun m : ℕ ↦ (m : E)) (Nat.add_one_mul_choose_eq p j)
+    have hj : ((j + 1 : ℕ) : E) ≠ 0 := Nat.cast_ne_zero.mpr j.succ_ne_zero
+    push_cast at h hq hj ⊢
+    rw [div_eq_div_iff hq hj]
+    linear_combination -x ^ (j + 1) * h
+  rw [hsum, ← Finset.sum_sub_distrib]
+  refine IsUltrametricDist.norm_sum_le_of_forall_le_of_nonneg (norm_nonneg _) fun j hj ↦ ?_
+  obtain ⟨w, hw⟩ := Nat.add_one_dvd_factorial_mul_choose_sub_neg_one_pow
+    (Nat.lt_succ_iff.mp (Finset.mem_range.mp hj))
+  have hw' : (j ! : E) * ((p.choose j : E) - (-1) ^ j) = ((p + 1 : ℕ) : E) * (w : E) := by
+    exact_mod_cast hw
+  have hj1 : ((j + 1 : ℕ) : E) ≠ 0 := Nat.cast_ne_zero.mpr j.succ_ne_zero
+  have hfac : ((j + 1)! : E) ≠ 0 := Nat.cast_ne_zero.mpr (Nat.factorial_ne_zero _)
+  have hterm : ((p.choose j : E) * x ^ (j + 1) / (j + 1 : ℕ) -
+      (-1) ^ j * x ^ (j + 1) / (j + 1 : ℕ)) * ((j + 1)! : E) =
+      ((p + 1 : ℕ) : E) * (w : E) * x ^ (j + 1) := by
+    rw [Nat.factorial_succ, Nat.cast_mul, ← hw']
+    field_simp
+  have hfacn : r ^ (j + 1) ≤ ‖((j + 1)! : E)‖ := by
+    rw [norm_natCast_eq_pow_padicValNat (Nat.factorial_ne_zero _)]
+    exact pow_le_pow_of_le_one hr0.le hr1 (padicValNat_factorial_le l _)
+  have hpos : 0 < ‖((j + 1)! : E)‖ := norm_pos_iff.mpr hfac
+  refine le_of_mul_le_mul_right ?_ hpos
+  rw [← norm_mul, hterm, norm_mul, norm_mul, norm_pow, mul_assoc]
+  refine mul_le_mul_of_nonneg_left ?_ (norm_nonneg _)
+  calc ‖(w : E)‖ * ‖x‖ ^ (j + 1) ≤ 1 * r ^ (j + 1) := by
+        gcongr
+        exact IsUltrametricDist.norm_intCast_le_one E w
+    _ ≤ ‖((j + 1)! : E)‖ := by rw [one_mul]; exact hfacn
+
 end Integers
 
 variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl l)]
@@ -164,7 +269,12 @@ The logarithm series converges on `ℓ² 𝒪_E`: the `n`-th term has valuation 
 theorem summable_logSeries {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E) :
     letI := normedFieldOfAlgebra l E
     Summable fun n : ℕ ↦ (-1) ^ n * x ^ (n + 1) / (n + 1 : ℕ) := by
-  sorry
+  let := normedFieldOfAlgebra l E
+  have := completeSpace_ofAlgebra l E
+  have hl : (1 : ℝ) < l := by exact_mod_cast (Fact.out : l.Prime).one_lt
+  exact Summable.of_norm_bounded ((summable_geometric_of_lt_one
+    (inv_nonneg.mpr (zero_le_one.trans hl.le)) (inv_lt_one_of_one_lt₀ hl)).mul_left ‖x‖)
+    (norm_logSeries_term_le hx)
 
 omit instQ instT instF in
 /-- Blueprint `sk-d-real-log`: Small logarithm.
@@ -179,50 +289,114 @@ theorem norm_smallLog_le {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E) :
   have := isUltrametricDist_ofAlgebra l E
   have hnorm (y : E) : ‖y‖ = ‖algebraMap E (PadicAlgCl l) y‖ := rfl
   rw [← hnorm, ← hnorm, smallLog]
-  refine IsUltrametricDist.norm_tsum_le_of_forall_le_of_nonneg (norm_nonneg _) fun n ↦ ?_
   have hl : (1 : ℝ) < l := by exact_mod_cast (Fact.out : l.Prime).one_lt
+  refine IsUltrametricDist.norm_tsum_le_of_forall_le_of_nonneg (norm_nonneg _) fun n ↦
+    (norm_logSeries_term_le hx n).trans (mul_le_of_le_one_right (norm_nonneg x) ?_)
+  exact pow_le_one₀ (inv_nonneg.mpr (zero_le_one.trans hl.le)) (inv_le_one_of_one_le₀ hl.le)
+
+/-- On `ℓ² 𝒪_E` the logarithm is the limit of the difference quotients
+`((1 + x) ^ ℓⁿ - 1) / ℓⁿ`: these are within `‖ℓⁿ‖` of the `ℓⁿ`-th partial sum of the
+logarithm series (`PadicAlgCl.norm_pow_sub_one_div_sub_sum_le`). -/
+theorem tendsto_pow_sub_one_div_smallLog {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E) :
+    letI := normedFieldOfAlgebra l E
+    Tendsto (fun n : ℕ ↦ ((1 + x) ^ (l ^ n) - 1) / (l ^ n : ℕ)) atTop (𝓝 (smallLog l E x)) := by
+  let := normedFieldOfAlgebra l E
+  have hl : (1 : ℝ) < l := by exact_mod_cast (Fact.out : l.Prime).one_lt
+  have hr0 : (0 : ℝ) ≤ (l : ℝ)⁻¹ := inv_nonneg.mpr (zero_le_one.trans hl.le)
+  have hr1 : (l : ℝ)⁻¹ < 1 := inv_lt_one_of_one_lt₀ hl
+  have hx1 : ‖x‖ ≤ (l : ℝ)⁻¹ :=
+    (norm_le_of_div_mem_integers hx).trans (pow_le_of_le_one hr0 hr1.le two_ne_zero)
+  have hS := ((summable_logSeries l E hx).hasSum.tendsto_sum_nat).comp
+    (tendsto_pow_atTop_atTop_of_one_lt (Fact.out : l.Prime).one_lt)
+  have hdiff : Tendsto (fun n : ℕ ↦ ((1 + x) ^ (l ^ n) - 1) / (l ^ n : ℕ) -
+      ∑ j ∈ Finset.range (l ^ n), (-1) ^ j * x ^ (j + 1) / (j + 1 : ℕ)) atTop (𝓝 0) := by
+    refine squeeze_zero_norm (fun n ↦ (norm_pow_sub_one_div_sub_sum_le hx1 _).trans_eq ?_)
+      (tendsto_pow_atTop_nhds_zero_of_lt_one hr0 hr1)
+    rw [norm_natCast_eq_pow_padicValNat (pow_ne_zero _ (Fact.out : l.Prime).ne_zero),
+      padicValNat.prime_pow]
+  have h := hdiff.add hS
+  simp only [Function.comp_apply, sub_add_cancel, zero_add] at h
+  exact h
+
+/-- On `ℓ² 𝒪_E` the norm of `log (1 + x) - x` is at most `ℓ⁻¹ ‖x‖`, so the logarithm vanishes
+only at `x = 0`. -/
+theorem eq_zero_of_smallLog_eq_zero {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E)
+    (h0 : smallLog l E x = 0) : x = 0 := by
+  let := normedFieldOfAlgebra l E
+  have := isUltrametricDist_ofAlgebra l E
   set r : ℝ := (l : ℝ)⁻¹ with hr
-  have hr0 : 0 < r := inv_pos.mpr (zero_lt_one.trans hl)
-  have hr1 : r ≤ 1 := inv_le_one_of_one_le₀ hl.le
-  have hlE : ‖(l : E)‖ = r := by
-    rw [hnorm, norm_algebraMap_natCast, Padic.norm_p]
-  have hxr : ‖x‖ ≤ r ^ 2 := by
-    have h := (mem_integers_iff l E _).mp hx
-    have h' : ‖x / (l : E) ^ 2‖ ≤ 1 := by
-      rw [hnorm]
-      exact_mod_cast h
-    rwa [norm_div, norm_pow, hlE, div_le_one (pow_pos hr0 2)] at h'
-  set v := padicValNat l (n + 1)
-  have hv : v ≤ 2 * n := by
-    rcases Nat.eq_zero_or_pos n with rfl | hn
-    · simp [v]
-    · have := (padicValNat_le_nat_log (p := l) (n + 1)).trans (Nat.log_le_self l (n + 1))
-      omega
-  have hn1 : ‖((n + 1 : ℕ) : E)‖ = r ^ v := by
-    rw [hnorm, norm_algebraMap_natCast, Padic.norm_eq_zpow_neg_valuation (by exact_mod_cast
-      (Nat.succ_ne_zero n)), Padic.valuation_natCast, hr, inv_pow, zpow_neg, zpow_natCast]
-  rw [norm_div, norm_mul, norm_pow, norm_pow, norm_neg, norm_one, one_pow, one_mul, hn1,
-    div_le_iff₀ (pow_pos hr0 v), pow_succ']
-  refine mul_le_mul_of_nonneg_left ?_ (norm_nonneg x)
-  calc ‖x‖ ^ n ≤ (r ^ 2) ^ n := pow_le_pow_left₀ (norm_nonneg x) hxr n
-    _ = r ^ (2 * n) := by rw [← pow_mul]
-    _ ≤ r ^ v := pow_le_pow_of_le_one hr0.le hr1 hv
+  have hl : (1 : ℝ) < l := by exact_mod_cast (Fact.out : l.Prime).one_lt
+  have hr0 : 0 ≤ r := inv_nonneg.mpr (zero_le_one.trans hl.le)
+  have hr1 : r < 1 := inv_lt_one_of_one_lt₀ hl
+  have hsplit := (summable_logSeries l E hx).tsum_eq_zero_add
+  change smallLog l E x = _ at hsplit
+  simp only [pow_zero, zero_add, pow_one, one_mul, Nat.cast_one, div_one] at hsplit
+  have hle : ‖∑' n : ℕ, (-1) ^ (n + 1) * x ^ (n + 1 + 1) / (n + 1 + 1 : ℕ)‖ ≤ ‖x‖ * r :=
+    IsUltrametricDist.norm_tsum_le_of_forall_le_of_nonneg (by positivity) fun n ↦
+      (norm_logSeries_term_le hx (n + 1)).trans
+        (mul_le_mul_of_nonneg_left (pow_le_of_le_one hr0 hr1.le n.succ_ne_zero) (norm_nonneg x))
+  rw [h0, eq_comm, add_eq_zero_iff_eq_neg] at hsplit
+  have hxT : ‖x‖ = ‖∑' n : ℕ, (-1) ^ (n + 1) * x ^ (n + 1 + 1) / (n + 1 + 1 : ℕ)‖ := by
+    conv_lhs => rw [hsplit]
+    exact norm_neg _
+  by_contra hne
+  have hpos : 0 < ‖x‖ := norm_pos_iff.mpr hne
+  nlinarith
 
 /-- Blueprint `sk-d-real-log`: Small logarithm.
 
-The logarithm turns the multiplication of `U_E` into the addition of `E`. -/
+The logarithm turns the multiplication of `U_E` into the addition of `E`: writing
+`a_n(u) = (u ^ ℓⁿ - 1) / ℓⁿ`, one has `a_n(uv) = ℓⁿ a_n(u) a_n(v) + a_n(u) + a_n(v)`, and
+`a_n(u) → log u` (`PadicAlgCl.tendsto_pow_sub_one_div_smallLog`). -/
 theorem smallLog_mul (u v : smallUnits l E) :
     smallLog l E (((u * v : smallUnits l E) : Eˣ) - 1)
       = smallLog l E (((u : Eˣ) : E) - 1) + smallLog l E (((v : Eˣ) : E) - 1) := by
-  sorry
+  let := normedFieldOfAlgebra l E
+  have : CharZero E := (algebraMap E (PadicAlgCl l)).charZero
+  set a : E := ((u : Eˣ) : E)
+  set b : E := ((v : Eˣ) : E)
+  change smallLog l E (a * b - 1) = smallLog l E (a - 1) + smallLog l E (b - 1)
+  have hu := tendsto_pow_sub_one_div_smallLog l E (x := a - 1) u.2
+  have hv := tendsto_pow_sub_one_div_smallLog l E (x := b - 1) v.2
+  have huv := tendsto_pow_sub_one_div_smallLog l E (x := a * b - 1) (u * v).2
+  simp only [add_sub_cancel] at hu hv huv
+  have hq : Tendsto (fun n : ℕ ↦ ((l ^ n : ℕ) : E)) atTop (𝓝 0) := by
+    rw [tendsto_zero_iff_norm_tendsto_zero]
+    have hl : (1 : ℝ) < l := by exact_mod_cast (Fact.out : l.Prime).one_lt
+    refine (tendsto_pow_atTop_nhds_zero_of_lt_one (inv_nonneg.mpr (zero_le_one.trans hl.le))
+      (inv_lt_one_of_one_lt₀ hl)).congr fun n ↦ ?_
+    rw [norm_natCast_eq_pow_padicValNat (pow_ne_zero _ (Fact.out : l.Prime).ne_zero),
+      padicValNat.prime_pow]
+  have key (n : ℕ) : ((l ^ n : ℕ) : E) * ((a ^ (l ^ n) - 1) / (l ^ n : ℕ)) *
+      ((b ^ (l ^ n) - 1) / (l ^ n : ℕ)) + (a ^ (l ^ n) - 1) / (l ^ n : ℕ) +
+      (b ^ (l ^ n) - 1) / (l ^ n : ℕ) = ((a * b) ^ (l ^ n) - 1) / (l ^ n : ℕ) := by
+    have hq0 : ((l ^ n : ℕ) : E) ≠ 0 :=
+      Nat.cast_ne_zero.mpr (pow_ne_zero _ (Fact.out : l.Prime).ne_zero)
+    field_simp
+    ring
+  have hlim := (((hq.mul hu).mul hv).add hu).add hv
+  rw [zero_mul, zero_mul, zero_add] at hlim
+  exact tendsto_nhds_unique huv (hlim.congr key)
 
 /-- Blueprint `sk-d-real-log`: Small logarithm.
 
-The logarithm is injective on `U_E = 1 + ℓ² 𝒪_E`: on that subgroup the series `exp` converges
-and is inverse to `log`. This is what `sk-p-real-rankone` uses to turn a character of `π₁` with
-values in `U_E` into a continuous additive character. -/
+The logarithm is injective on `U_E = 1 + ℓ² 𝒪_E`: it is a homomorphism there, and its kernel
+is trivial since `‖log (1 + x) - x‖ ≤ ℓ⁻¹ ‖x‖` (`PadicAlgCl.eq_zero_of_smallLog_eq_zero`).
+This is what `sk-p-real-rankone` uses to turn a character of `π₁` with values in `U_E` into a
+continuous additive character. -/
 theorem injOn_smallLog :
     Set.InjOn (fun u : Eˣ ↦ smallLog l E ((u : E) - 1)) (smallUnits l E) := by
-  sorry
+  intro u hu v hv huv
+  have hw : u * v⁻¹ ∈ smallUnits l E := mul_mem hu (inv_mem hv)
+  have h := smallLog_mul l E ⟨u * v⁻¹, hw⟩ ⟨v, hv⟩
+  change smallLog l E (((u * v⁻¹ * v : Eˣ) : E) - 1) =
+    smallLog l E (((u * v⁻¹ : Eˣ) : E) - 1) + smallLog l E ((v : E) - 1) at h
+  rw [inv_mul_cancel_right] at h
+  change smallLog l E ((u : E) - 1) = smallLog l E ((v : E) - 1) at huv
+  rw [huv] at h
+  have h0 := eq_zero_of_smallLog_eq_zero l E (x := ((u * v⁻¹ : Eˣ) : E) - 1) hw
+    (by linear_combination -h)
+  rw [sub_eq_zero, ← Units.val_one, Units.val_inj, mul_inv_eq_one] at h0
+  exact h0
 
 end PadicAlgCl
