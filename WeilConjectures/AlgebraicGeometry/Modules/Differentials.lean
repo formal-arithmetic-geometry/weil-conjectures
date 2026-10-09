@@ -13,6 +13,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Algebra.Module.LocalizedModule.Basic
+public import WeilConjectures.AlgebraicGeometry.PicardFunctor
+public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 
 /-!
@@ -201,6 +203,11 @@ lemma relativeDifferentialsHomEquiv_symm_app_d {M : X.Modules}
       (f.relativeDifferentialsDerivation.d x) = D.d x :=
   congr($((f.relativeDifferentialsHomEquiv M).apply_symm_apply D).d x)
 
+/-- Equal morphisms have isomorphic sheaves of relative differentials. -/
+noncomputable def relativeDifferentialsCongr {g : X ⟶ S} (h : f = g) :
+    f.relativeDifferentials ≅ g.relativeDifferentials :=
+  eqToIso (by rw [h])
+
 /-- Two morphisms `f₁ : X ⟶ S₁` and `f₂ : X ⟶ S₂` with the same derivations have isomorphic
 sheaves of relative differentials. -/
 noncomputable def relativeDifferentialsIsoOfDerivation {S₁ S₂ : Scheme.{u}} (f₁ : X ⟶ S₁)
@@ -380,16 +387,6 @@ noncomputable def relativeDifferentialsRestrictIso :
   inv_hom_id := f.relativeDifferentialsToRestrict_restrictToRelativeDifferentials j
 
 end Restrict
-
-/-- **The canonical sheaf of a smooth curve.** For `f : X ⟶ S` smooth of relative dimension one,
-the sheaf `Ω¹_{X/S}` is invertible: Zariski-locally `f` is standard smooth, `X = Spec B` with
-`B = R[x₁, …, xₙ₊₁]/(g₁, …, gₙ)`, and `Ω_{B/R}` is free of rank one on the class of `dxᵢ` for
-the coordinate `xᵢ` not involved in the invertible Jacobian minor.
-
-(blueprint: `lem-sc-canonical-sheaf`) -/
-theorem isInvertible_relativeDifferentials [SmoothOfRelativeDimension 1 f] :
-    SheafOfModules.IsInvertible (R := X.ringCatSheaf) f.relativeDifferentials :=
-  sorry
 
 end AlgebraicGeometry.Scheme.Hom
 
@@ -609,6 +606,63 @@ noncomputable def relativeDifferentialsSpecΓIso :
       CommRingCat.KaehlerDifferential φ :=
   (asIso (relativeDifferentialsSpecΓHom φ)).symm
 
+/-- If `Ω_{S/R} ≅ S`, then `Ω¹_{Spec S / Spec R} ≅ 𝒪_{Spec S}`. -/
+noncomputable def relativeDifferentialsSpecIsoUnit {R S : CommRingCat.{u}} (φ : R ⟶ S)
+    (e : CommRingCat.KaehlerDifferential φ ≅ ModuleCat.of S S) :
+    (Spec.map φ).relativeDifferentials ≅ SheafOfModules.unit (Spec S).ringCatSheaf :=
+  relativeDifferentialsSpecIso φ ≪≫ (tilde.functor S).mapIso e ≪≫ tildeSelf
+
 end Affine
+
+namespace Scheme.Hom
+
+variable {X S : Scheme.{u}} (f : X ⟶ S)
+
+/-- If `f` is smooth of relative dimension one, then every point of `X` has an open
+neighbourhood `V` on which `Ω¹_{X/S}` is trivial: on an affine chart where `f` is standard
+smooth, `Ω¹_{X/S}|_V ≅ Ω_{𝒪(V)/𝒪(U)}^~ ≅ 𝒪_V`. -/
+lemma nonempty_restrict_relativeDifferentials_iso_unit [SmoothOfRelativeDimension 1 f] (x : X) :
+    ∃ V : X.Opens, x ∈ V ∧
+      Nonempty (f.relativeDifferentials.restrict V.ι ≅
+        SheafOfModules.unit V.toScheme.ringCatSheaf) := by
+  obtain ⟨U, hU, V, hV, hx, e, hsm⟩ :=
+    SmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension (n := 1) (f := f) x
+  let := (f.appLE U V e).hom.toAlgebra
+  have : Algebra.IsStandardSmoothOfRelativeDimension 1 Γ(S, U) Γ(X, V) := hsm
+  obtain ⟨eΩ⟩ :=
+    Algebra.IsStandardSmoothOfRelativeDimension.nonempty_linearEquiv_kaehlerDifferential
+      (R := Γ(S, U)) (S := Γ(X, V)) 1
+  refine ⟨V, hx, ⟨?_⟩⟩
+  let eM : CommRingCat.KaehlerDifferential (f.appLE U V e) ≅ ModuleCat.of Γ(X, V) Γ(X, V) :=
+    (eΩ ≪≫ₗ LinearEquiv.funUnique (Fin 1) Γ(X, V) Γ(X, V)).toModuleIso
+  let T : f.relativeDifferentials.restrict hV.fromSpec ≅
+      SheafOfModules.unit (Spec Γ(X, V)).ringCatSheaf :=
+    f.relativeDifferentialsRestrictIso hV.fromSpec ≪≫
+      relativeDifferentialsCongr _ (IsAffineOpen.SpecMap_appLE_fromSpec f hU hV e).symm ≪≫
+      relativeDifferentialsCompIso _ _ ≪≫ relativeDifferentialsSpecIsoUnit _ eM
+  exact (Modules.restrictFunctorCongr hV.isoSpec_hom_fromSpec.symm).app _ ≪≫
+    (Modules.restrictFunctorComp hV.isoSpec.hom hV.fromSpec).app _ ≪≫
+    (Modules.restrictFunctor hV.isoSpec.hom).mapIso T ≪≫ Modules.restrictUnitIso _
+
+/-- **The canonical sheaf of a smooth curve.** For `f : X ⟶ S` smooth of relative dimension one,
+the sheaf `Ω¹_{X/S}` is invertible: Zariski-locally `f` is standard smooth, `X = Spec B` with
+`B = R[x₁, …, xₙ₊₁]/(g₁, …, gₙ)`, and `Ω_{B/R}` is free of rank one on the class of `dxᵢ` for
+the coordinate `xᵢ` not involved in the invertible Jacobian minor.
+
+(blueprint: `lem-sc-canonical-sheaf`) -/
+theorem isInvertible_relativeDifferentials [SmoothOfRelativeDimension 1 f] :
+    SheafOfModules.IsInvertible (R := X.ringCatSheaf) f.relativeDifferentials := by
+  choose V hxV hV using f.nonempty_restrict_relativeDifferentials_iso_unit
+  have hV' (x : X) : Nonempty (f.relativeDifferentials.over (V x) ≅
+      SheafOfModules.unit (X.ringCatSheaf.over (V x))) :=
+    ⟨Modules.overIsoUnitOfPullbackIotaIso
+      (((Modules.restrictFunctorIsoPullback (V x).ι).app _).symm ≪≫ (hV x).some)⟩
+  have hcov : (Opens.grothendieckTopology X).CoversTop V := by
+    rw [Opens.coversTop_iff]
+    exact IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ Opens.mem_iSup.2 ⟨x, hxV x⟩)
+  exact SheafOfModules.isInvertible_of_forall_over_unit (M := f.relativeDifferentials) V hcov
+    hV'
+
+end Scheme.Hom
 
 end AlgebraicGeometry
