@@ -57,7 +57,9 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] [DerivedBraiding A] {s X : Scheme.{u}}
+  [Abelian.HasFunctorialFlatResolution A] [Etale.HasBoundedBelowUpperShrieks A] [DerivedBraiding A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA] {s X : Scheme.{u}}
 
 /-- Compact trace additivity: for a closed immersion `i : Z ⟶ X` and its open complement
 `j : U ⟶ X`, the Frobenius coefficient morphisms induced on the functorial compact
@@ -69,25 +71,32 @@ Invertibility of the coefficient morphism is unnecessary, so the statement is fo
 `WeilComplex`es (blueprint: `sk-i-global-additivity`). -/
 theorem trace_globalOperator_eq_trace_add_trace (G : GeometricOperations A s)
     {U Z : Scheme.{u}} {aX : X ⟶ s} {aU : U ⟶ s} {aZ : Z ⟶ s}
+    [IsGeometric aX] [IsGeometric aU] [IsGeometric aZ]
     [HasCompactification aX] [HasCompactification aU] [HasCompactification aZ]
     (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
     (hj : j ≫ aX = aU) (hi : i ≫ aX = aZ)
     (hcompl : IsCompl (Set.range j.base) (Set.range i.base))
-    (W : WeilComplex (A := A) aX) (frobU : U ⟶ U) (frobZ : Z ⟶ Z)
+    (W : WeilComplex (A := A) aX) (hW : G.ctf X W.obj) (frobU : U ⟶ U) (frobZ : Z ⟶ Z)
     (sqU : CommSq frobU j j (W.frobeniusIterate 1))
     (sqZ : CommSq frobZ i i (W.frobeniusIterate 1))
     (m : ℕ)
-    [IsProper (W.graph G m).snd]
-    [IsProper ((W.upperStarPull j hj frobU sqU).graph G m).snd]
-    [IsProper ((W.upperStarPull i hi frobZ sqZ).graph G m).snd]
+    [IsProper (W.graph G hW m).snd]
+    [IsProper ((W.upperStarPull j hj frobU sqU).graph G
+      (G.ctf_upperStar j (.mk hj) hW) m).snd]
+    [IsProper ((W.upperStarPull i hi frobZ sqZ).graph G
+      (G.ctf_upperStar i (.mk hi) hW) m).snd]
     [HasRightDual ((rightDerivedLowerShriek A aX).obj W.obj)]
     [HasRightDual ((rightDerivedLowerShriek A aU).obj (W.upperStarPull j hj frobU sqU).obj)]
     [HasRightDual ((rightDerivedLowerShriek A aZ).obj (W.upperStarPull i hi frobZ sqZ).obj)] :
-    MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G m)) =
+    MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G hW m) hW) =
       MonoidalCategory.trace
-          (Correspondence.globalOperator G ((W.upperStarPull j hj frobU sqU).graph G m)) +
+          (Correspondence.globalOperator G
+            ((W.upperStarPull j hj frobU sqU).graph G (G.ctf_upperStar j (.mk hj) hW) m)
+            (G.ctf_upperStar j (.mk hj) hW)) +
         MonoidalCategory.trace
-          (Correspondence.globalOperator G ((W.upperStarPull i hi frobZ sqZ).graph G m)) :=
+          (Correspondence.globalOperator G
+            ((W.upperStarPull i hi frobZ sqZ).graph G (G.ctf_upperStar i (.mk hi) hW) m)
+            (G.ctf_upperStar i (.mk hi) hW)) :=
   sorry
 
 /-- **The finite-coefficient Lefschetz trace formula.** For every Weil datum on the
@@ -106,11 +115,12 @@ theorem trace_globalOperator_eq_sum_trace_stalkFrobenius {Ω : Type u} [Field Ω
     (f₀ : X₀ ⟶ Spec (.of k)) [IsSeparated f₀] [LocallyOfFiniteType f₀] [QuasiCompact f₀]
     (σ : Spec (.of Ω) ⟶ Spec (.of k)) (p : X ⟶ X₀) (hΦ : W.IsModelFrobenius f₀ σ p)
     (hW : IsIso W.coeff) (hctf : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m)
-    [IsProper (W.graph G m).snd]
+    [IsProper (haveI := hΦ.isGeometric; W.graph G hctf m).snd]
     [HasRightDual ((rightDerivedLowerShriek A aX).obj W.obj)]
     [Fintype {x : Spec (.of Ω) ⟶ X // x ≫ aX = 𝟙 _ ∧ x ≫ W.frobeniusIterate m = x}]
     [∀ x : Spec (.of Ω) ⟶ X, HasRightDual (((upperStar A x).leftDerivedFunctor).obj W.obj)] :
-    MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G m)) =
+    haveI := hΦ.isGeometric
+    MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G hctf m) hctf) =
       ∑ x : {x : Spec (.of Ω) ⟶ X // x ≫ aX = 𝟙 _ ∧ x ≫ W.frobeniusIterate m = x},
         MonoidalCategory.trace (W.stalkFrobenius m x.1 x.2.2) :=
   sorry

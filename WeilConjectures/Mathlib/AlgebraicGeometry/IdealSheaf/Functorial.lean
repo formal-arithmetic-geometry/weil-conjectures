@@ -371,6 +371,13 @@ theorem comap_mul (f : X ⟶ Y) (I J : Y.IdealSheafData) :
     rw [ideal_comap_appLE _ f U V e, ideal_comap_appLE _ f U V e, ideal_comap_appLE _ f U V e,
       ideal_mul, Pi.mul_apply, Ideal.map_mul]
 
+/-- **Pullback of ideal sheaves commutes with powers**, by `comap_mul` and `comap_top`. -/
+theorem comap_pow (f : X ⟶ Y) (J : Y.IdealSheafData) (n : ℕ) :
+    (J ^ n).comap f = J.comap f ^ n := by
+  induction n with
+  | zero => rw [pow_zero, pow_zero]; exact comap_top f
+  | succ n ih => rw [pow_succ, comap_mul, ih, pow_succ]
+
 end Mul
 
 section OpenImmersion
@@ -406,5 +413,18 @@ lemma map_comap_of_subset_range [IsOpenImmersion j] (I : Y.IdealSheafData)
     IsOpenImmersion.lift_fac, ker_subschemeι]
 
 end OpenImmersion
+
+section Pullback
+
+open Limits
+
+/-- The base change of the closed subscheme of `I` along `h : Y' ⟶ Y` is the closed subscheme of
+the pulled back ideal sheaf `I.comap h`. -/
+lemma isPullback_comap {Y Y' : Scheme.{u}} (I : Y.IdealSheafData) (h : Y' ⟶ Y) :
+    IsPullback (I.comap h).subschemeι ((I.comapIso h).hom ≫ pullback.snd h I.subschemeι) h
+      I.subschemeι :=
+  IsPullback.of_iso_pullback ⟨by simp⟩ (I.comapIso h) (by simp) rfl
+
+end Pullback
 
 end AlgebraicGeometry.Scheme.IdealSheafData
