@@ -2,18 +2,135 @@
  "id": "lem-weil-pbc-zariski-h0-proper-henselian-pair",
  "kind": "statement",
  "title": "Zariski degree-zero comparison for a proper scheme over a henselian pair",
- "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology] and let $f:X\\to\\operatorname{Spec}A$ be a proper morphism of schemes [def-weil-pbc-scheme-conventions]. Let $Z=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$, viewed as a closed subset of the underlying topological space of $X$ (the projection $Z\\to X$ is a closed immersion, the base change of $\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}A$). For every sheaf of sets $\\mathcal F$ on the underlying topological space of $X$, the restriction map $\\Gamma(X,\\mathcal F)\\to\\Gamma(Z,\\mathcal F|_Z)$ is bijective, where $\\mathcal F|_Z$ is the topological inverse image of $\\mathcal F$ along the inclusion $Z\\subseteq X$ (the sheafification of $U\\mapsto\\varinjlim_{V\\supseteq U}\\mathcal F(V)$, $V$ open in $X$).",
+ "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology] and let $f:X\\to\\operatorname{Spec}A$ be a proper morphism of schemes [def-weil-pbc-scheme-conventions]. Let $Z=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$ [def-pc-fibre-product], viewed as a closed subset of the underlying topological space of $X$ (the projection $Z\\to X$ is a closed immersion, the base change of $\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}A$). For every sheaf of sets $\\mathcal F$ on the underlying topological space of $X$, the restriction map $\\Gamma(X,\\mathcal F)\\to\\Gamma(Z,\\mathcal F|_Z)$ is bijective, where $\\mathcal F|_Z$ is the topological inverse image of $\\mathcal F$ along the inclusion $i:Z\\subseteq X$ [def-weil-pbc-topological-inverse-image], taken with values in sets: the sheafification [def-weil-pbc-sheafification] $\\theta:i_p\\mathcal F\\to\\mathcal F|_Z$ of the presheaf $i_p\\mathcal F:U\\mapsto\\varinjlim_{V\\supseteq U}\\mathcal F(V)$ ($V$ open in $X$; colimit [def-weil-pbc-category-colimit] with coprojections $\\iota^U_V$), and the restriction map is $s\\mapsto\\theta_Z(\\iota^Z_X(s))$.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Etale Cohomology, Lemma 59.91.1, Tag 0A0B (label lemma-zariski-h0-proper-over-henselian-pair, line 18167); its proof uses Tag 09ZG (lemma-h0-topological), Tag 094L, Tag 03H2 (Stein factorization, general), Tag 09XK (integral over henselian pair), Tag 09Y6 (irreducible henselian pair connected), Tag 0377"
  },
  "stmt_deps": [
   "def-weil-pbc-henselian-terminology",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the closed fibre over $V(I)$; $X$ is spectral).* Let $g:W\\to\\operatorname{Spec}A$ be any morphism of schemes and $W_0=W\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$ with first projection $p:W_0\\to W$. Since $\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}A$ is a closed immersion [lem-weil-pbc-spec-quotient-closed-immersion], so is $p$ [lem-weil-pbc-closed-immersion-base-change], i.e. $p$ is a homeomorphism onto the closed subset $p(W_0)$ [def-weil-closed-immersion]. The image of $\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}A$ is $V(I)$ (the primes of $A/I$ are the $\\mathfrak q/I$ with $\\mathfrak q\\supseteq I$ [def-weil-affine-spectrum]). By [lem-weil-pbc-fibre-product-points], $w\\in W$ lies in $p(W_0)$ iff there are $s_0\\in\\operatorname{Spec}(A/I)$ with image $s=g(w)$ and a prime of $\\kappa(w)\\otimes_{\\kappa(s)}\\kappa(s_0)$; such a prime always exists, since a tensor product of two nonzero vector spaces over the field $\\kappa(s)$ is a nonzero ring. Hence $p(W_0)=g^{-1}(V(I))$. For $W=X$, $g=f$: the closed subset of the statement is $Z=f^{-1}(V(I))$. Moreover $f$ is proper, hence separated and of finite type [def-weil-proper-morphism], so $X$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-over-affine], and its underlying space is spectral [lem-weil-pbc-qcqs-scheme-spectral].",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-points",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-qcqs-scheme-spectral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, proof of Lemma 59.91.1 (Tag 0A0B, line 18167): 'the underlying topological space of $X$ is spectral by Properties, Lemma 094L'; the identification of $Y\\cap Z$ with $Y\\times_{\\operatorname{Spec}(A)}\\operatorname{Spec}(A/I)$"
+   }
+  },
+  {
+   "text": "*Step 2 (reduction to a connectedness statement).* By Step 1, $X$ is spectral and $Z\\subseteq X$ is closed. By [lem-weil-pbc-h0-spectral-closed-restriction] (applied to the sheaf of sets $\\mathcal F$, with $\\mathcal F|_Z$ and the restriction map as in the statement, which are those of [def-weil-pbc-topological-inverse-image] with values in sets), $\\Gamma(X,\\mathcal F)\\to\\Gamma(Z,\\mathcal F|_Z)$ is bijective as soon as $Z\\cap\\overline{\\{x\\}}$ is connected [def-weil-connected-scheme] (in particular nonempty) for every $x\\in X$. Steps 3 to 6 prove this for a fixed $x\\in X$.",
+   "uses": [
+    "lem-weil-pbc-h0-spectral-closed-restriction",
+    "def-weil-pbc-topological-inverse-image",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, proof of Lemma 59.91.1 (Tag 0A0B, line 18167): 'We will use Lemma 09ZG to prove this'"
+   }
+  },
+  {
+   "text": "*Step 3 (replacing $X$ by an irreducible closed subscheme).* Let $T=\\overline{\\{x\\}}$; it is closed and irreducible [def-weil-irreducible-components] (if $T=C_1\\cup C_2$ with $C_i$ closed then $x\\in C_i$ for some $i$, so $T\\subseteq C_i$). By [lem-weil-pbc-closed-subset-closed-subscheme] there is a closed immersion $j:Y\\to X$ with $j(Y)=T$; $j$ is a homeomorphism of $Y$ onto $T$ [def-weil-closed-immersion], so $Y$ is irreducible. A closed immersion is proper and a composite of proper morphisms is proper [lem-weil-pbc-proper-fp-permanence] (c), (a), so $g=f\\circ j:Y\\to\\operatorname{Spec}A$ is proper. Put $Y_0=g^{-1}(V(I))=j^{-1}(f^{-1}(V(I)))=j^{-1}(Z)$ (Step 1); $Y_0$ is closed in $Y$, and by Step 1 applied to $W=Y$ it is the image of $Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)\\to Y$. Since $j$ is a homeomorphism onto $T$, it maps $Y_0$ homeomorphically onto $T\\cap Z$. So it suffices to show that $Y_0$ is connected [def-weil-connected-scheme].",
+   "uses": [
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, proof of Lemma 59.91.1 (Tag 0A0B, line 18167): 'Let $Y\\subset X$ be an irreducible closed subscheme. ... we show that $Y\\cap Z=Y\\times_{\\Spec(A)}\\Spec(A/I)$ is connected. Replacing $X$ by $Y$ we may assume that $X$ is irreducible'"
+   }
+  },
+  {
+   "text": "*Step 4 (Stein factorization).* Let $Y\\xrightarrow{q}\\operatorname{Spec}B\\xrightarrow{s}\\operatorname{Spec}A$ be the Stein factorization of the proper $g$ [def-weil-pbc-stein-factorization], $B=H^0(Y,\\mathcal O_Y)$, $\\varphi:A\\to B$ the structure map, $g=s\\circ q$. By [lem-weil-pbc-stein-factorization-affine], $A\\to B$ is integral, $q$ is proper, and for every $t\\in\\operatorname{Spec}B$ the subspace $q^{-1}(t)\\subseteq Y$ is connected (in particular nonempty). By [lem-weil-pbc-integral-over-henselian-pair], $(B,IB)$ is a henselian pair.",
+   "uses": [
+    "def-weil-pbc-stein-factorization",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-integral-over-henselian-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, proof of Lemma 59.91.1 (Tag 0A0B, line 18167): 'Let $X\\to\\Spec(B)\\to\\Spec(A)$ be the Stein factorization of $f$ (Theorem 03H2). Then $A\\to B$ is integral and $(B,IB)$ is a henselian pair (Lemma 09XK). Thus we may assume the fibres of $X\\to\\Spec(A)$ are geometrically connected'"
+   }
+  },
+  {
+   "text": "*Step 5 (the image of $Y$ meets $V(IB)$ in a connected set).* Let $T'=q(Y)\\subseteq\\operatorname{Spec}B$. It is closed, since $q$ is proper, hence universally closed, hence (base change along the identity) a closed map [def-weil-proper-morphism]; and it is irreducible, as the image of the irreducible $Y$ under a continuous map (if $T'=C_1\\cup C_2$ with $C_i$ closed, then $Y=q^{-1}(C_1)\\cup q^{-1}(C_2)$, so $Y=q^{-1}(C_i)$ and $T'\\subseteq C_i$ for some $i$) [def-weil-irreducible-components]. By [lem-weil-pbc-scheme-sober], $T'$ has a generic point $\\mathfrak q$, so $T'=\\overline{\\{\\mathfrak q\\}}=V(\\mathfrak q)$ (the closure of a point $\\mathfrak q$ of $\\operatorname{Spec}B$ is the smallest $V(J)$ containing it, which is $V(\\mathfrak q)$ [def-weil-affine-spectrum]). Further $s^{-1}(V(I))=V(IB)$: a prime $\\mathfrak r\\subseteq B$ has $\\varphi^{-1}(\\mathfrak r)\\supseteq I$ iff $\\varphi(I)\\subseteq\\mathfrak r$ iff $IB\\subseteq\\mathfrak r$. Hence $T'\\cap s^{-1}(V(I))=V(\\mathfrak q)\\cap V(IB)=V(\\mathfrak q+IB)$, which is connected (in particular nonempty) by [lem-weil-pbc-henselian-pair-prime-connected] applied to the henselian pair $(B,IB)$ (Step 4) and the prime $\\mathfrak q$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-scheme-sober",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-henselian-pair-prime-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, proof of Lemma 59.91.1 (Tag 0A0B, line 18167): 'the image $T\\subset\\Spec(A)$ of $f$ is irreducible and closed as $X$ is proper over $A$. Hence $T\\cap V(I)$ is connected by More on Algebra, Lemma 09Y6' (here with $A$ replaced by $B$)"
+   }
+  },
+  {
+   "text": "*Step 6 ($Y_0$ is connected).* Put $W=V(\\mathfrak q+IB)=T'\\cap V(IB)$ (Step 5). By Step 3 and $g=s\\circ q$, $Y_0=g^{-1}(V(I))=q^{-1}(s^{-1}(V(I)))=q^{-1}(V(IB))$, so $q$ restricts to a continuous map $h:Y_0\\to W$ (subspace topologies), $h(y)=q(y)\\in q(Y)\\cap V(IB)=W$. It is surjective: for $w\\in W\\subseteq T'=q(Y)$ pick $y$ with $q(y)=w$; then $y\\in q^{-1}(V(IB))=Y_0$. Its fibres $h^{-1}(w)=q^{-1}(w)$ are connected for $w\\in W$ (Step 4). It is closed: a closed subset $C$ of $Y_0$ is closed in $Y$ ($Y_0$ is closed in $Y$), so $h(C)=q(C)$ is closed in $\\operatorname{Spec}B$ (Step 5: $q$ is a closed map) and hence in $W$. Therefore $W$ carries the quotient topology for $h$: if $h^{-1}(S)$ is closed for some $S\\subseteq W$, then $S=h(h^{-1}(S))$ (surjectivity) is closed; conversely preimages of closed sets are closed by continuity. Since $W$ is connected (Step 5), [lem-weil-pbc-connected-fibres-quotient-preimage-connected] gives that $Y_0=h^{-1}(W)$ is connected. By Step 3, $Z\\cap\\overline{\\{x\\}}$ is connected for every $x\\in X$, and Step 2 concludes.",
+   "uses": [
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-connected-fibres-quotient-preimage-connected",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, proof of Lemma 59.91.1 (Tag 0A0B, line 18167): 'Now $Y\\times_{\\Spec(A)}\\Spec(A/I)\\to T\\cap V(I)$ is a surjective closed map with connected fibres. The result now follows from Topology, Lemma 0377'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-points",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-h0-spectral-closed-restriction",
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-connected-scheme",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-pbc-stein-factorization",
+  "lem-weil-pbc-stein-factorization-affine",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-henselian-pair-prime-connected",
+  "lem-weil-pbc-connected-fibres-quotient-preimage-connected"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma 59.91.1 (Tag 0A0B, label lemma-zariski-h0-proper-over-henselian-pair, line 18167) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,7 +169,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +189,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+  "worker": "stage1",
+  "summary": "Proof written fresh from the Stacks proof of Tag 0A0B, in six steps: (1) Z = f^{-1}(V(I)) via the points of a fibre product and X spectral (094L); (2) reduction by 09ZG to connectedness of Z ∩ closure{x}; (3) replace X by a closed subscheme Y on closure{x} (01J3, existence only), Y proper over A; (4) Stein factorization of Y (03H2) and (B,IB) henselian (09XK); (5) the image T' of Y in Spec B is V(q) for a prime q and T' ∩ V(IB) = V(q+IB) is connected (09Y6); (6) Y_0 → V(q+IB) is surjective, closed, with connected fibres, so Y_0 is connected (0377). The step 'we may assume the fibres are geometrically connected' of the source is carried out over B. All Stacks tags verified in literature/stacks-project/tags/tags. Seven new nodes: three Mathlib leaves (094L, 0377, existence part of 01J3), four unsplit (09ZG for sheaves of sets, 03H2 over an affine base, 09XK, 09Y6). Statement kept; it now cites the definitions it uses (fibre product, topological inverse image, sheafification, colimit) and names the restriction map explicitly. Mathlib searches of the item were already recorded (all three kinds, no match)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Split reviewed: 6 steps along Etale Cohomology 0A0B (Z = f^{-1}V(I), X spectral; reduction to connectedness of Z meets closure of x by 09ZG; irreducible closed subscheme; Stein factorization with (B, IB) henselian by 09XK; V(q+IB) connected by 09Y6; quotient-topology argument 0377). Statement gained citations only. Correct; seven new nodes (3 Mathlib leaves verified, 4 unsplit)."
+ }
 }

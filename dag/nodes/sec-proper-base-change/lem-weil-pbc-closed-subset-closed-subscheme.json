@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-closed-subset-closed-subscheme",
+ "kind": "statement",
+ "title": "Every closed subset of a scheme underlies a closed subscheme",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $T\\subseteq X$ a closed subset. Then there are a scheme $Y$ and a closed immersion $j:Y\\to X$ [def-weil-closed-immersion] whose image $j(Y)$ is $T$ (for instance the reduced induced closed subscheme structure on $T$).",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 26.12.4 (Tag 01J3, label lemma-reduced-closed-subscheme): there is a unique reduced closed subscheme with underlying space $T$; this node keeps the existence of some closed subscheme with underlying set $T$"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closed subset of a scheme is the image of a closed immersion reduced induced subscheme",
+   "results": "AlgebraicGeometry.IsClosedImmersion, IsClosedImmersion.of_isPreimmersion, iff_isPreimmersion, Scheme.Hom.isLocallyClosed_range",
+   "date": "2026-10-10",
+   "verdict": "related; the construction is found by leanfinder/grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "vanishing ideal sheaf of a closed subset of a scheme, support equals the closed subset, closed subscheme",
+   "results": "Scheme.IdealSheafData.coe_support_vanishingIdeal (↑(vanishingIdeal Z).support = ↑Z), IdealSheafData.support, IdealSheafData.vanishingIdeal ('the reduced induced scheme structure on the closed set is the quotient of this ideal'), isClosed_supportSet, coe_support_ofIdealTop (Mathlib.AlgebraicGeometry.IdealSheaf.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n subschemeι ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; sed -n 560,566p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+   "results": "IdealSheaf/Basic.lean:565 vanishingIdeal (Z : Closeds X) with @[simps! ideal coe_support] (generating coe_support_vanishingIdeal); IdealSheaf/Subscheme.lean:472 subschemeι, :493 range_subschemeι : Set.range I.subschemeι = I.support; Morphisms/ClosedImmersion.lean:94 instance IsClosedImmersion I.subschemeι",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.subschemeι",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+  "how": "specializes in one line: for Z : Closeds X put I = Scheme.IdealSheafData.vanishingIdeal Z (IdealSheaf/Basic.lean:565) and j = I.subschemeι : I.subscheme ⟶ X (Subscheme.lean:472); j is a closed immersion by the instance at Morphisms/ClosedImmersion.lean:94, and Set.range j = I.support (range_subschemeι, Subscheme.lean:493) = Z (coe_support_vanishingIdeal, the simps lemma of vanishingIdeal)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: IdealSheafData.subschemeι (IdealSheaf/Subscheme.lean:472) of vanishingIdeal, range_subschemeι, coe_support_vanishingIdeal; Schemes 01J3 existence part."
+ }
+}

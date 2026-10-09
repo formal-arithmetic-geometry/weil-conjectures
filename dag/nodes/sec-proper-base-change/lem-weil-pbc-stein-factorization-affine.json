@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-stein-factorization-affine",
+ "kind": "statement",
+ "title": "Stein factorization of a proper morphism to an affine scheme",
+ "statement": "Let $A$ be a commutative ring and $f:X\\to\\operatorname{Spec}A$ a proper morphism of schemes [def-weil-proper-morphism], and let $X\\xrightarrow{q}\\operatorname{Spec}B\\xrightarrow{s}\\operatorname{Spec}A$ be its Stein factorization [def-weil-pbc-stein-factorization], $B=H^0(X,\\mathcal O_X)$. Then: (i) the ring map $A\\to B$ is integral (every element of $B$ is a root of a monic polynomial with coefficients in the image of $A$); (ii) $q$ is proper; (iii) $q$ has geometrically connected fibres; in particular for every $t\\in\\operatorname{Spec}B$ the scheme-theoretic fibre $X_t$ [def-pc-scheme-fibre] is connected [def-weil-connected-scheme] (in particular nonempty), hence so is the subspace $q^{-1}(t)\\subseteq X$, which $X_t$ maps homeomorphically onto.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Theorem 37.53.5 (Tag 03H2, label theorem-stein-factorization-general, line 15290), for $S=\\operatorname{Spec}A$ affine, where $S'=\\underline{\\operatorname{Spec}}_S(f_*\\mathcal O_X)=\\operatorname{Spec}H^0(X,\\mathcal O_X)$ (its (4)); (i) is its (2) through the affine case, (iii) is its (1) (geometrically connected with Stacks' convention that connected spaces are nonempty)"
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-pbc-stein-factorization",
+  "def-pc-scheme-fibre",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stein factorization proper morphism global sections integral geometrically connected fibres",
+   "results": "AlgebraicGeometry.finite_appTop_of_universallyClosed, IsProper.mk, specTargetImageFactorization_app_injective, Scheme.Hom.appTop, IsIntegralHom.mk",
+   "date": "2026-10-10",
+   "verdict": "no match for the factorization; clause (i) see grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stein factorization: proper morphism X to Spec A factors through Spec of global sections with connected fibres",
+   "results": "AlgebraicGeometry.specTargetImageFactorization (scheme-theoretic image, not Stein), IsProper, Scheme.Hom.normalizationDesc, Scheme.Hom.toNormalization, isProper_iff",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli stein ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -n 'theorem\\|lemma\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Geometrically/Connected.lean; grep -n isIntegral_appTop ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+   "results": "no Stein factorization in Mathlib; Morphisms/Proper.lean:138 isIntegral_appTop_of_universallyClosed (f universally closed, Y affine ⇒ f.appTop integral: clause (i)); Geometrically/Connected.lean:40 class GeometricallyConnected, :66 ConnectedSpace (f.fiber s), :72 Scheme.Hom.isConnected_preimage_singleton (the consequence in (iii) once q is geometrically connected); nothing proves that q is geometrically connected",
+   "date": "2026-10-10",
+   "verdict": "partial: (i) is isIntegral_appTop_of_universallyClosed; (ii), (iii) absent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stein factorization 03H2 over an affine base (integral, proper, geometrically connected fibres); self-contained; correct; unsplit."
+ }
+}

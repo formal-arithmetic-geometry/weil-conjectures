@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-connected-fibres-quotient-preimage-connected",
+ "kind": "statement",
+ "title": "Preimage of a closed connected set under a quotient map with connected fibres",
+ "statement": "Let $h:P\\to W$ be a continuous map of topological spaces such that every fibre $h^{-1}(w)$, $w\\in W$, is connected [def-weil-connected-scheme] (in particular nonempty, so $h$ is surjective), and such that $W$ carries the quotient topology: a subset $T\\subseteq W$ is closed if and only if $h^{-1}(T)$ is closed in $P$. Then for every closed connected subset $T\\subseteq W$ the preimage $h^{-1}(T)$ is connected. In particular, if $W$ is connected, so is $P$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma 5.7.5 (Tag 0377, label lemma-connected-fibres-quotient-topology-connected-components, line 721): its proof shows that $f^{-1}(T)$ is connected for a connected component $T$; the argument uses only that $T$ is closed and connected"
+ },
+ "stmt_deps": [
+  "def-weil-connected-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient map with connected fibres, preimage of closed connected set is connected",
+   "results": "Topology.IsQuotientMap.preimage_connectedComponent, preimage_connectedComponent_connected (Topology.Connected.Clopen), IsConnected.preimage_of_isClosedMap / isOpenMap (injective maps only)",
+   "date": "2026-10-10",
+   "verdict": "match: see loogle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed map surjective continuous with connected fibers, preimage of connected set is connected",
+   "results": "IsConnected.preimage_of_isClosedMap, preimage_connectedComponent_connected, IsPreconnected.preimage_of_isClosedMap, Function.Surjective.connectedSpace, isPreconnected_range",
+   "date": "2026-10-10",
+   "verdict": "related; exact match found by loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsCoinducing, IsConnected, IsClosed",
+   "results": "Topology.IsCoinducing.isConnected_preimage_of_isClosed (connected_fibers : ∀ t, IsConnected (f ⁻¹' {t})) (hcl : IsCoinducing f) {t} (ht : IsClosed t) (ht' : IsConnected t) : IsConnected (f ⁻¹' t) (Mathlib.Topology.Connected.Clopen)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 400,500p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Connected/Clopen.lean",
+   "results": "Clopen.lean:404 Topology.IsCoinducing.isConnected_preimage_of_isClosed (comment: 'essentially https://stacks.math.columbia.edu/tag/0377'); :479 preimage_connectedComponent_connected (deprecated 2026-04-01 in its favour)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Topology.IsCoinducing.isConnected_preimage_of_isClosed",
+  "file": "Mathlib/Topology/Connected/Clopen.lean",
+  "how": "exact (line 404): IsCoinducing f means the topology of W is coinduced by f, i.e. the quotient topology (isCoinducing_iff_isClosed, Topology/Maps/Basic.lean:267), which makes f continuous; IsConnected is the node's connectedness (nonempty and preconnected). The 'in particular' is the case t = univ (isConnected_univ / ConnectedSpace)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: Topology.IsCoinducing.isConnected_preimage_of_isClosed (Topology/Connected/Clopen.lean:404); Topology 0377."
+ }
+}

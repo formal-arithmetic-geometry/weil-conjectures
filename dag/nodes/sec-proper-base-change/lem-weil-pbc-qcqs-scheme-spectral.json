@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-qcqs-scheme-spectral",
+ "kind": "statement",
+ "title": "The underlying space of a quasi-compact quasi-separated scheme is spectral",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] which is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Then the underlying topological space of $X$ is a spectral space [def-weil-spectral-space].",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 28.2.4 (Tag 094L, label lemma-quasi-compact-quasi-separated-spectral, line 102)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-spectral-space"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi-compact quasi-separated scheme underlying space is spectral space",
+   "results": "SpectralSpace.toQuasiSeparatedSpace, SpectralSpace.toCompactSpace (Topology.Spectral.Basic), AlgebraicGeometry.quasiCompact_iff_isSpectralMap, Scheme.Hom.isSpectralMap (Morphisms.QuasiCompact), PrimeSpectrum.instQuasiSeparatedSpace",
+   "date": "2026-10-10",
+   "verdict": "generalization: the class SpectralSpace is a conjunction of instances that schemes have (see grep)"
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSpace, AlgebraicGeometry.Scheme",
+   "results": "none (no declaration names both)",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; assembled from instances"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Properties.lean; sed -n 30,45p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Spectral/Basic.lean",
+   "results": "Topology/Spectral/Basic.lean:38 class SpectralSpace X extends T0Space X, CompactSpace X, QuasiSober X, QuasiSeparatedSpace X, PrespectralSpace X; AlgebraicGeometry/Properties.lean:38 instance T0Space X, :43 instance QuasiSober X, :54 instance PrespectralSpace X (every scheme)",
+   "date": "2026-10-10",
+   "verdict": "match (one line, conjunction of instances)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SpectralSpace",
+  "file": "Mathlib/Topology/Spectral/Basic.lean",
+  "how": "specializes in one line: SpectralSpace X (line 38) extends T0Space, CompactSpace, QuasiSober, QuasiSeparatedSpace, PrespectralSpace; for a scheme X the instances T0Space X (AlgebraicGeometry/Properties.lean:38), QuasiSober X (:43) and PrespectralSpace X (:54) hold always, and CompactSpace X, QuasiSeparatedSpace X are quasi-compactness and quasi-separatedness of X (compactSpace_iff_quasiCompact, Morphisms/QuasiCompact.lean:137; quasiSeparatedSpace_iff_quasiSeparated, Morphisms/QuasiSeparated.lean:133); so `{}` (the anonymous constructor filled by instances) proves SpectralSpace X. The node def-weil-spectral-space is matched with SpectralSpace."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: SpectralSpace from the scheme instances QuasiSober (AlgebraicGeometry/Properties.lean:43), PrespectralSpace (:54), T0Space, with CompactSpace and QuasiSeparatedSpace; Properties 094L."
+ }
+}
