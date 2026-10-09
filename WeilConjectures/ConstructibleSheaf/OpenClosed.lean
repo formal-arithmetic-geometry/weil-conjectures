@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.ConstructibleSheaf.Pullback
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Complex
@@ -68,21 +69,13 @@ lemma IsLocallyConstantSheaf.of_isZero {F : Sheaf X.smallEtaleTopology A} (hF : 
 
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [PreservesFiniteLimits (CategoryTheory.forget A)]
 
 omit [HasSmallSiteSheafify A] in
-/-- A zero sheaf is finite: its stalks are zero, whose underlying types are singletons since
-the forgetful functor preserves the terminal object. -/
+/-- A zero sheaf is finite: its stalks are zero objects, which are finitely generated. -/
 lemma IsFiniteSheaf.of_isZero {F : Sheaf X.smallEtaleTopology A} (hF : IsZero F) :
     IsFiniteSheaf F where
-  finite_sheafFiber Ω _ _ s := by
-    have hz : IsZero ((pointSmallEtale s).sheafFiber.obj F) :=
-      (pointSmallEtale s).sheafFiber.map_isZero hF
-    have hT : IsTerminal ((CategoryTheory.forget A).obj ((pointSmallEtale s).sheafFiber.obj F)) :=
-      hz.isTerminal.isTerminalObj (CategoryTheory.forget A)
-    have : Unique ((CategoryTheory.forget A).obj ((pointSmallEtale s).sheafFiber.obj F)) :=
-      Types.isTerminalEquivUnique _ hT
-    exact Finite.of_subsingleton
+  isFinitelyGenerated_sheafFiber _ _ _ s :=
+    ConcreteCategory.isFinitelyGenerated_of_isZero ((pointSmallEtale s).sheafFiber.map_isZero hF)
 
 /-- A zero sheaf is finite locally constant. -/
 lemma IsFiniteLocallyConstantSheaf.of_isZero {F : Sheaf X.smallEtaleTopology A}
@@ -98,6 +91,7 @@ def Stratification.trivial (X : Scheme.{u}) : Stratification X where
   isLocallyClosed_stratum _ := isOpen_univ.isLocallyClosed
   iUnion_stratum_eq_univ := Set.iUnion_const _
   pairwise_disjoint_stratum i j hij := (hij (Subsingleton.elim i j)).elim
+  isConstructible_stratum _ := Topology.IsConstructible.univ
   domain _ := X
   immersion _ := 𝟙 X
   range_immersion _ := Set.range_id'
@@ -114,12 +108,33 @@ section OpenImmersionPoints
 
 variable {U : Scheme.{u}}
 
+/-- If the complement of the range of a quasi-compact open immersion `j` is finite, every
+closed point `x` of this complement is a constructible subset: the complement of `{x}` is the
+union of the range of `j` and of a finite set, an open retrocompact subset. -/
+lemma isConstructible_singleton_of_isOpenImmersion (j : U ⟶ X) [IsOpenImmersion j]
+    [QuasiCompact j] (hfin : (Set.range j.base)ᶜ.Finite) {x : X}
+    (hx : x ∈ (Set.range j.base)ᶜ) (hcl : IsClosed {x}) : Topology.IsConstructible {x} := by
+  have hfin' : IsRetrocompact ((Set.range j.base)ᶜ \ {x}) := fun V _ _ ↦
+    ((hfin.sdiff).subset Set.inter_subset_left).isCompact
+  have h : ({x} : Set X)ᶜ = Set.range j.base ∪ ((Set.range j.base)ᶜ \ {x}) := by
+    ext y
+    by_cases hy : y ∈ Set.range j.base
+    · simp only [Set.mem_compl_iff, Set.mem_singleton_iff, Set.mem_union, hy, true_or,
+        iff_true]
+      rintro rfl
+      exact hx hy
+    · simp [hy]
+  refine Topology.IsConstructible.of_compl ?_
+  rw [h]
+  exact ((j.isRetrocompact_range).union hfin').isConstructible
+    (h ▸ hcl.isOpen_compl)
+
 /-- The stratification of `X` whose strata are the range of an open immersion `j : U ⟶ X`
 and the points of its complement, when that complement is finite and consists of closed
 points. The point strata are realized by the closed immersions
 `X.fromSpecResidueField x ⟶ X`. -/
 @[simps n]
-def Stratification.ofOpenImmersion (j : U ⟶ X) [IsOpenImmersion j]
+def Stratification.ofOpenImmersion (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     (hfin : (Set.range j.base)ᶜ.Finite) (hcl : ∀ x ∈ (Set.range j.base)ᶜ, IsClosed {x}) :
     Stratification X :=
   haveI := hfin.to_subtype
@@ -128,6 +143,8 @@ def Stratification.ofOpenImmersion (j : U ⟶ X) [IsOpenImmersion j]
     stratum := Fin.cases (Set.range j.base) fun i ↦ {(e i).1}
     isLocallyClosed_stratum := Fin.cases j.isOpenEmbedding.isOpen_range.isLocallyClosed
       fun i ↦ (hcl _ (e i).2).isLocallyClosed
+    isConstructible_stratum := Fin.cases (j.isConstructible_range)
+      fun i ↦ isConstructible_singleton_of_isOpenImmersion j hfin (e i).2 (hcl _ (e i).2)
     iUnion_stratum_eq_univ := by
       refine Set.eq_univ_of_forall fun x ↦ Set.mem_iUnion.mpr ?_
       by_cases hx : x ∈ Set.range j.base
@@ -165,7 +182,7 @@ end OpenImmersionPoints
 section Devissage
 
 variable {U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
-  (hij : Set.range i.base = (Set.range j.base)ᶜ)
+  [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ)
 
 include hij in
 /-- Stratifications of the members of a complementary pair `(j, i)` concatenate to a
@@ -194,6 +211,14 @@ def Stratification.openClosed (SU : Stratification U) (SZ : Stratification Z) :
       obtain ⟨z, rfl⟩ := hx
       obtain ⟨l, hl⟩ := Set.mem_iUnion.mp (SZ.iUnion_stratum_eq_univ ▸ Set.mem_univ z)
       exact Set.mem_iUnion.mpr ⟨finSumFinEquiv (Sum.inr l), by simpa using ⟨z, hl, rfl⟩⟩
+  isConstructible_stratum k := by
+    generalize finSumFinEquiv.symm k = s
+    rcases s with l | l
+    · exact (SU.isConstructible_stratum l).image_of_isOpenEmbedding j.isOpenEmbedding
+        (j.isRetrocompact_range)
+    · refine (SZ.isConstructible_stratum l).image_of_isClosedEmbedding i.isClosedEmbedding ?_
+      rw [hij, compl_compl]
+      exact j.isRetrocompact_range
   pairwise_disjoint_stratum k k' hkk' := by
     have hne : finSumFinEquiv.symm k ≠ finSumFinEquiv.symm k' :=
       fun h ↦ hkk' (finSumFinEquiv.symm.injective h)
@@ -256,8 +281,6 @@ theorem isConstructibleSheaf_iff_upperStar (F : Sheaf X.smallEtaleTopology A) :
     exact IsFiniteLocallyConstantSheaf.of_iso (F := (Etale.upperStar A (SZ.immersion l)).obj
       ((Etale.upperStar A i).obj F))
       ((Etale.upperStarComp A (SZ.immersion l) i).app F).symm
-
-variable [PreservesFiniteLimits (CategoryTheory.forget A)]
 
 include hij in
 /-- **The extension by zero of a constructible sheaf along an open immersion is

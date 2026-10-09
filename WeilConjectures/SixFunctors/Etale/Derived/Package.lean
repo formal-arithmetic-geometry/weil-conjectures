@@ -182,11 +182,15 @@ structure SixOperationsPackage : Prop where
 
 /-- Blueprint `sk-thm-sf-package`: The six-operations package.
 
-The eight clauses of `AlgebraicGeometry.Etale.SixOperationsPackage` hold when `Y` is
-Noetherian, which the stability of `Dctf` under `Rf^!` needs. Every clause is one
+The eight clauses of `AlgebraicGeometry.Etale.SixOperationsPackage` hold for torsion
+coefficients, finitely generated objects of `A` being finite
+(`CategoryTheory.ConcreteCategory.FiniteOfIsFinitelyGenerated`), when `Y` is Noetherian, which
+the stability of `Dctf` under `Rf^!` needs. With coefficients `ℤ`, proper base change and the
+stability of `Dctf` fail on the étale site. Every clause is one
 of the propositions of this directory, and the proof is the assembly; the clauses that are
 still open carry a `sorry`, see the module docstring. -/
-theorem sixOperationsPackage [IsNoetherian Y] : SixOperationsPackage A f aY where
+theorem sixOperationsPackage [IsNoetherian Y] [ConcreteCategory.FiniteOfIsFinitelyGenerated A] :
+    SixOperationsPackage A f aY where
   upperStarLowerStarAdjunction := ⟨derivedUpperStarLowerStarAdjunction A f⟩
   lowerShriekUpperShriekAdjunction := ⟨rightDerivedUpperShriekAdjunction A f⟩
   baseChangeLowerShriek _ _ _ _ := sorry

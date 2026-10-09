@@ -20,8 +20,8 @@ push an `Ext`-class forward along `G` and precompose with the comparison of cons
 
 ## Main definitions
 
-- `CategoryTheory.Sheaf.IsTorsion`: a sheaf of abelian groups all of whose groups of sections
-  are torsion groups.
+- `CategoryTheory.Sheaf.IsTorsion`: a sheaf of abelian groups every section of which is locally
+  torsion.
 - `CategoryTheory.Sheaf.H.mapFunctor`: the map `H F n →+ H (G.obj F) n` on sheaf cohomology
   induced by an exact functor `G` together with an isomorphism `e` between the constant
   sheaf `ℤ` on the target site and the image under `G` of the constant sheaf `ℤ` on the
@@ -53,10 +53,25 @@ namespace CategoryTheory
 
 open Abelian Limits AddCommGrpCat
 
-/-- A sheaf of abelian groups is *torsion* if all its groups of sections are torsion groups. -/
+/-- A sheaf of abelian groups is *torsion* if every section is locally torsion: each section
+`s` over `U` restricts to an element of finite order on the members of a covering sieve of `U`.
+On a site with enough points this means that all stalks are torsion groups [Stacks 03SA],
+see `CategoryTheory.Sheaf.isTorsion_iff_isAddTorsion_sheafFiber`.
+
+The sections themselves need not be torsion: on the small étale site sections over an infinite
+disjoint union are infinite products, so a sheaf all of whose groups of sections are torsion
+is killed by a single integer. That stronger condition is
+`CategoryTheory.Sheaf.IsTorsion.of_forall_isAddTorsion`'s hypothesis. -/
 def Sheaf.IsTorsion {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (F : Sheaf J AddCommGrpCat.{w}) : Prop :=
-  ∀ U, IsAddTorsion (F.obj.obj U)
+  ∀ ⦃U : Cᵒᵖ⦄ (s : F.obj.obj U), ∃ S ∈ J U.unop,
+    ∀ ⦃V : C⦄ ⦃f : V ⟶ U.unop⦄, S f → IsOfFinAddOrder (F.obj.map f.op s)
+
+/-- A sheaf of abelian groups all of whose groups of sections are torsion groups is torsion. -/
+lemma Sheaf.IsTorsion.of_forall_isAddTorsion {C : Type u} [Category.{v} C]
+    {J : GrothendieckTopology C} {F : Sheaf J AddCommGrpCat.{w}}
+    (h : ∀ U, IsAddTorsion (F.obj.obj U)) : F.IsTorsion :=
+  fun U _ ↦ ⟨⊤, J.top_mem U.unop, fun _ _ _ ↦ h _ _⟩
 
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 variable {D : Type u'} [Category.{v'} D] {K : GrothendieckTopology D}

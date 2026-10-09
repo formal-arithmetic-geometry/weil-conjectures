@@ -42,8 +42,9 @@ of the criterion are:
   the base change of a smooth projective curve to a field extension is again a smooth projective
   curve (blueprint `rem-pc-conventions`).
 - `AlgebraicGeometry.isRepresentable_picardFunctor`: the Picard functor of a smooth projective
-  curve over a separably closed field is representable by a group scheme (blueprint
-  `sk-thm-picard-main`, `thm-pc-picard-representable`).
+  curve over a separably closed field is representable by a group scheme whose group law is the
+  tensor product of invertible modules (blueprint `sk-thm-picard-main`,
+  `thm-pc-picard-representable`).
 -/
 
 @[expose] public section
@@ -185,21 +186,22 @@ end Curve
 /-- **The Picard functor of a smooth projective curve over a separably closed field is
 representable.** Let `k` be a separably closed field and let `f : X ⟶ Spec k` be a smooth
 projective curve.  Then the Picard functor `Pic_{X/k} = AlgebraicGeometry.picardFunctor f` is
-represented by a group scheme over `k`, i.e. by an object of `Over (Spec k)` carrying a
-`CategoryTheory.GrpObj` structure.
-
-The group structure is the one induced by the group law of the Picard functor
-(`AlgebraicGeometry.picardFunctorNormalizedGrp`, blueprint `rem-pc-group-structure`).
+represented by a group scheme `A` over `k`, i.e. by an object of `Over (Spec k)` carrying a
+`CategoryTheory.GrpObj` structure, and the representation respects the group laws
+(`AlgebraicGeometry.IsPicardMul`): the group law of `A` is the tensor product of invertible
+modules (blueprint `rem-pc-group-structure`).
 
 (blueprint: `sk-thm-picard-main`, `thm-pc-picard-representable`) -/
 theorem isRepresentable_picardFunctor [IsSepClosed k] (f : X ⟶ Spec (.of k))
     [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] :
-    ∃ (A : Over (Spec (.of k))) (_ : GrpObj A),
-      Nonempty ((picardFunctor f).obj.RepresentableBy A) := by
+    ∃ (A : Over (Spec (.of k))) (_ : GrpObj A) (e : (picardFunctor f).obj.RepresentableBy A),
+      IsPicardMul f e := by
   let : X.Over (Spec (.of k)) := ⟨f⟩
   have : SmoothOfRelativeDimension 1 (X ↘ Spec (.of k)) := ‹SmoothOfRelativeDimension 1 f›
   have : IsProper (X ↘ Spec (.of k)) := ‹IsProper f›
   have : GeometricallyIntegral (X ↘ Spec (.of k)) := ‹GeometricallyIntegral f›
-  exact isRepresentable_picardFunctor_aux
+  obtain ⟨A, -, ⟨e⟩⟩ := isRepresentable_picardFunctor_aux (k := k) (X := X)
+  obtain ⟨_, he⟩ := exists_commGrpObj_isPicardMul f e
+  exact ⟨A, inferInstance, e, he⟩
 
 end AlgebraicGeometry
