@@ -11,9 +11,88 @@
   "def-weil-pbc-singular-ideal",
   "def-weil-pbc-smooth-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Choice of $f_i,\\lambda_i$.) Write $\\varphi:A\\to\\Lambda$ for the given map. $H_{A/R}\\Lambda$ is the set of finite sums $\\sum_k\\mu_k\\varphi(h_k)$ with $h_k\\in H_{A/R}$, $\\mu_k\\in\\Lambda$; since it equals $\\Lambda$ it contains $1$, so there are $r\\ge0$, $f_1,\\dots,f_r\\in H_{A/R}$ and $\\lambda_1,\\dots,\\lambda_r\\in\\Lambda$ with $\\sum_{i=1}^r\\varphi(f_i)\\lambda_i=1$ in $\\Lambda$. ($r=0$ is allowed; it happens only when $\\Lambda=0$.)",
+   "uses": [
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07EU (lemma-final-solve), first sentence"
+   }
+  },
+  {
+   "text": "(Construction of $B$ and the factorization.) Put $h=f_1x_1+\\dots+f_rx_r-1\\in A[x_1,\\dots,x_r]$ and $B=A[x_1,\\dots,x_r]/(h)$, an $R$-algebra via $R\\to A\\to B$. The $A$-algebra map $A[x_1,\\dots,x_r]\\to\\Lambda$ (with $A$ acting through $\\varphi$) sending $x_i\\mapsto\\lambda_i$ exists by the universal property of the polynomial ring and sends $h$ to $\\sum\\varphi(f_i)\\lambda_i-1=0$ by step 1, so it factors through a ring map $\\beta:B\\to\\Lambda$, $\\bar x_i\\mapsto\\lambda_i$. By construction $\\beta$ restricted to $A$ is $\\varphi$, i.e. the composite $A\\to B\\xrightarrow{\\beta}\\Lambda$ is the given map; both maps are $A$-algebra maps, hence $R$-algebra maps. It remains to show that $B$ is smooth over $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07EU (lemma-final-solve), second and third sentences"
+   }
+  },
+  {
+   "text": "($A_{f_i}$ is smooth over $R$.) For each $i$, $f_i\\in H_{A/R}$, so $A_{f_i}$ is a smooth $R$-algebra [lem-weil-pbc-singular-ideal-localization-smooth]. (Stacks says 'by definition of $H_{A/R}$'; with $H_{A/R}=\\sqrt{(G)}$ as in [def-weil-pbc-singular-ideal] this needs the cited lemma, since $f_i$ need not lie in $G$.)",
+   "uses": [
+    "lem-weil-pbc-singular-ideal-localization-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07EU (lemma-final-solve): 'A_{f_i} is smooth over R by definition of H_{A/R}'"
+   }
+  },
+  {
+   "text": "($B_{f_i}$ is smooth over $A_{f_i}$.) Let $r\\ge1$ and fix $i$. By [lem-weil-pbc-linear-equation-localization-polynomial], $B_{f_i}$ (localization of $B$ at the powers of the image of $f_i$) is isomorphic as an $A_{f_i}$-algebra, via the map $A_{f_i}\\to B_{f_i}$ induced by $A\\to B$, to the polynomial ring $A_{f_i}[y_j:j\\ne i]$ in $r-1$ variables, which is smooth over $A_{f_i}$ [lem-weil-pbc-polynomial-ring-smooth]. Smoothness [def-weil-pbc-smooth-ring-map] is a property of the $A_{f_i}$-algebra up to isomorphism (an $A_{f_i}$-algebra isomorphism carries a finite presentation to a finite presentation and induces isomorphisms of naive cotangent complexes and of modules of differentials), so $A_{f_i}\\to B_{f_i}$ is smooth.",
+   "uses": [
+    "lem-weil-pbc-linear-equation-localization-polynomial",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07EU (lemma-final-solve): 'and that B_{f_i} is smooth over A_{f_i}. Details omitted.'"
+   }
+  },
+  {
+   "text": "($B_{f_i}$ is smooth over $R$.) The square $A\\to A_{f_i}\\to B_{f_i}$, $A\\to B\\to B_{f_i}$ commutes (both send $a\\mapsto a/1$), so the $R$-algebra structure of $B_{f_i}$ through $R\\to A\\to B\\to B_{f_i}$ equals the composite $R\\to A_{f_i}\\to B_{f_i}$. This is a composite of smooth ring maps (steps 3 and 4), hence smooth [lem-weil-pbc-smooth-ring-map-base-change-composition] (2).",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07EU (lemma-final-solve): 'To check that B is smooth over R use that A_{f_i} is smooth over R ... and that B_{f_i} is smooth over A_{f_i}'"
+   }
+  },
+  {
+   "text": "($B$ is smooth over $R$.) In $B$ we have $\\sum_i\\bar f_i\\bar x_i=1$, so the images $\\bar f_1,\\dots,\\bar f_r$ of the $f_i$ generate the unit ideal of $B$ (for $r=0$ the relation reads $-1=0$, $B=0$, and the empty family generates the unit ideal of the zero ring). Each $B_{\\bar f_i}=B_{f_i}$ is smooth over $R$ by step 5, so $R\\to B$ is smooth by locality of smoothness [lem-weil-pbc-smooth-ring-map-local-on-cover] (Algebra, Lemma 00TC). With step 2, $A\\to B\\to\\Lambda$ is the required factorization.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-local-on-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00TC (lemma-locally-smooth), applied as in the proof of smoothing.tex Lemma Tag 07EU"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-singular-ideal",
+  "lem-weil-pbc-singular-ideal-localization-smooth",
+  "lem-weil-pbc-linear-equation-localization-polynomial",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-ring-map-local-on-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma Tag 07EU (lemma-final-solve) and its proof; the omitted details (steps 3-6) written out by the worker from Algebra, Lemmas Tag 00TC (lemma-locally-smooth) and 00TD (lemma-compose-smooth)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +117,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +137,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-popescu-final-solve",
+  "worker": "stage1",
+  "summary": "Checked against smoothing.tex Lemma 07EU (lemma-final-solve, lines 311-327) and algebra.tex 00TC (lemma-locally-smooth), 00TD (lemma-compose-smooth), 00T6/00T7, 00TK (tags verified in tags/tags). Statement kept (the hypothesis that A is of finite presentation is not used by the proof; kept as in Stacks). Proof in six steps: choice of f_i in H_{A/R} and lambda_i with sum f_i lambda_i = 1 (elementary); construction of B = A[x]/(sum f_i x_i - 1) and B -> Lambda (elementary); A_{f_i} smooth over R (new node lem-weil-pbc-singular-ideal-localization-smooth: Stacks' 'by definition of H_{A/R}' is not literal, since H_{A/R} = sqrt((G)) and f_i need not be in G); B_{f_i} isomorphic to a polynomial ring over A_{f_i} (new node lem-weil-pbc-linear-equation-localization-polynomial) and polynomial rings are smooth (new Mathlib leaf lem-weil-pbc-polynomial-ring-smooth); composition (existing leaf lem-weil-pbc-smooth-ring-map-base-change-composition); the f_i generate the unit ideal of B and smoothness is local (new Mathlib leaf lem-weil-pbc-smooth-ring-map-local-on-cover, RingHom.Smooth.ofLocalizationSpanTarget). The case r = 0 (Lambda = 0) is covered. stmt_deps unchanged. No Lean in slopmaster2."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Six steps along Stacks 07EU with the omitted smoothness check written out: f_i in H_{A/R} and lambda_i with sum f_i lambda_i = 1, B = A[x]/(sum f_i x_i - 1) and the factorization, A_{f_i} smooth over R (new unsplit node: with H_{A/R} = sqrt((G)) of the definition node this is a lemma, proved by covering D(f) and 00TC), B_{f_i} a polynomial ring over A_{f_i} (new unsplit node for the linear-equation localization; new Mathlib leaf of two instances for polynomial rings smooth, Smooth/Basic.lean:112 and FinitePresentation.lean:190, verified), composition, locality of smoothness 00TC (new Mathlib leaf RingHom.Smooth.ofLocalizationSpanTarget, RingHom/Smooth.lean:131 via smooth_algebraMap :82, verified); r = 0 handled. Brief errors: 00TA/00T9/00TB are not the locality lemma (00TC) or composition (00TD). Note: the finite presentation hypothesis on A is unused."
+ }
 }

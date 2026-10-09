@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-polynomial-ring-smooth",
+ "kind": "statement",
+ "title": "A polynomial ring in finitely many variables is smooth over its coefficient ring",
+ "statement": "Let $C$ be a commutative ring, $n\\ge0$, and $C[y_1,\\dots,y_n]$ the polynomial ring in $n$ variables. Then the ring map $C\\to C[y_1,\\dots,y_n]$ is smooth [def-weil-pbc-smooth-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 00T6 (definition-standard-smooth) with c = 0 and Lemma Tag 00T7 (lemma-standard-smooth) (1): C[y_1,...,y_n] is standard smooth over C, hence smooth; also Lemma Tag 00TK (lemma-polynomial-ring-formally-smooth)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "polynomial ring in finitely many variables is a smooth algebra",
+   "results": "Algebra.mvPolynomial = instFormallySmoothMvPolynomial (FormallySmooth R (MvPolynomial σ R)), Algebra.FormallySmooth.polynomial, Algebra.Smooth, Algebra.instSmoothOfIsStandardSmooth, Algebra.Smooth.mk (Mathlib.RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match as a conjunction: Algebra.Smooth.mk of the FormallySmooth instance and the FinitePresentation instance"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth ?R (MvPolynomial ?σ ?R)",
+   "results": "none (no named Algebra.Smooth instance for MvPolynomial; it is found by instance synthesis from its two fields)",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; see grep"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Smooth.*(MvPolynomial' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -n 'mvPolynomial\\|instance self' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/FinitePresentation.lean",
+   "results": "Smooth/Basic.lean:112 instance instFormallySmoothMvPolynomial (σ) : FormallySmooth R (MvPolynomial σ R); FinitePresentation.lean:190 protected instance mvPolynomial [FinitePresentation R A] (ι) [Finite ι] : FinitePresentation R (MvPolynomial ι A); FinitePresentation.lean:195 instance self : FinitePresentation R R; Smooth/Basic.lean:540 class Smooth (formallySmooth, finitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "match (conjunction of two Mathlib classes)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.instFormallySmoothMvPolynomial, Algebra.FinitePresentation.mvPolynomial",
+  "file": "Mathlib/RingTheory/Smooth/Basic.lean",
+  "line": 112,
+  "how": "conjunction of two Mathlib instances, one per field of Algebra.Smooth (Smooth/Basic.lean:540): FormallySmooth C (MvPolynomial (Fin n) C) is instFormallySmoothMvPolynomial (Smooth/Basic.lean:112), FinitePresentation C (MvPolynomial (Fin n) C) is FinitePresentation.mvPolynomial (Mathlib/RingTheory/FinitePresentation.lean:190) with FinitePresentation.self (line 195); so Algebra.Smooth C (MvPolynomial (Fin n) C) by Algebra.Smooth.mk (found by instance synthesis); smooth ring map = Algebra.Smooth by the match of def-weil-pbc-smooth-ring-map"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-final-solve",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

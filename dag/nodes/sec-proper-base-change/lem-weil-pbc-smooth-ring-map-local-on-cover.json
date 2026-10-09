@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-smooth-ring-map-local-on-cover",
+ "kind": "statement",
+ "title": "Smoothness of a ring map is local on the target ring: a cover by principal opens with smooth localizations",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings and let $g_1,\\dots,g_m\\in S$ ($m\\ge0$) generate the unit ideal of $S$. For each $j$ let $S_{g_j}$ be the localization of $S$ at $\\{1,g_j,g_j^2,\\dots\\}$, an $R$-algebra via $R\\to S\\to S_{g_j}$. If every $R\\to S_{g_j}$ is a smooth ring map [def-weil-pbc-smooth-ring-map], then $R\\to S$ is smooth.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00TC (lemma-locally-smooth), the finite-cover form used in its proof ('there exists a finite covering Spec(S) = union D(g_i) such that each S_{g_i} is smooth ... this implies ...'), with Lemma Tag 00EP (lemma-cover-upstairs) for finite presentation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth if localizations at elements spanning the unit ideal are smooth",
+   "results": "RingHom.Smooth.ofLocalizationSpanTarget, RingHom.Smooth.propertyIsLocal, RingHom.Smooth.holdsForLocalizationAway (Mathlib.RingTheory.RingHom.Smooth), Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.FormallySmooth.of_isLocalization",
+   "date": "2026-10-10",
+   "verdict": "match: RingHom.Smooth.ofLocalizationSpanTarget"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.OfLocalizationSpanTarget RingHom.Smooth",
+   "results": "RingHom.Smooth.ofLocalizationSpanTarget (Mathlib.RingTheory.RingHom.Smooth)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ofLocalizationSpanTarget\\|of_span_eq_top' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RingHom/Smooth.lean; sed -n 120,150p RingTheory/RingHom/Smooth.lean; sed -n 160,175p RingTheory/LocalProperties/Basic.lean",
+   "results": "RingTheory/RingHom/Smooth.lean:131 lemma ofLocalizationSpanTarget : OfLocalizationSpanTarget Smooth; RingHom.OfLocalizationSpanTarget (LocalProperties/Basic.lean:171): for f : R ->+* S and s : Set S with Ideal.span s = top and P((algebraMap S (Localization.Away r)).comp f) for all r in s, P f; RingHom.smooth_algebraMap (RingHom/Smooth.lean:82)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RingHom.Smooth.ofLocalizationSpanTarget",
+  "file": "Mathlib/RingTheory/RingHom/Smooth.lean",
+  "line": 131,
+  "how": "specializes in one line: apply it to f = algebraMap R S and s = {g_1,...,g_m} (Ideal.span s = top), translating RingHom.Smooth of algebraMap to Algebra.Smooth by RingHom.smooth_algebraMap (line 82; (algebraMap S S_g).comp (algebraMap R S) = algebraMap R S_g by IsScalarTower); smooth ring map = Algebra.Smooth by the match of def-weil-pbc-smooth-ring-map. Mathlib states it for R, S in one universe, which is the case here"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-final-solve",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,59 @@
+{
+ "id": "lem-weil-pbc-linear-equation-localization-polynomial",
+ "kind": "statement",
+ "title": "Localizing A[x_1..x_r]/(f_1x_1+...+f_rx_r-1) at f_i gives a polynomial ring over A_{f_i}",
+ "statement": "Let $A$ be a commutative ring, $r\\ge1$, $f_1,\\dots,f_r\\in A$, and $B=A[x_1,\\dots,x_r]/(f_1x_1+\\dots+f_rx_r-1)$. Fix $i\\in\\{1,\\dots,r\\}$; let $A_{f_i}$ be the localization of $A$ at $\\{1,f_i,f_i^2,\\dots\\}$ and $B_{f_i}$ the localization of $B$ at the powers of the image of $f_i$, and regard $B_{f_i}$ as an $A_{f_i}$-algebra via the ring map $A_{f_i}\\to B_{f_i}$, $a/f_i^e\\mapsto a/f_i^e$ (induced by $A\\to B$). Let $A_{f_i}[y_j:j\\ne i]$ be the polynomial ring over $A_{f_i}$ in the $r-1$ variables $y_j$, $j\\in\\{1,\\dots,r\\}\\setminus\\{i\\}$. Then the $A_{f_i}$-algebra homomorphism $A_{f_i}[y_j:j\\ne i]\\to B_{f_i}$ with $y_j\\mapsto \\bar x_j/1$ is an isomorphism; its inverse sends $\\bar x_j/1\\mapsto y_j$ for $j\\ne i$ and $\\bar x_i/1\\mapsto f_i^{-1}\\bigl(1-\\sum_{j\\ne i}f_jy_j\\bigr)$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07EU (lemma-final-solve): 'B_{f_i} is smooth over A_{f_i}. Details omitted.' (the isomorphism is the omitted detail)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient of polynomial ring by linear equation with unit coefficient is isomorphic to polynomial ring in one fewer variable",
+   "results": "Ideal.polynomialQuotientEquivQuotientPolynomial, Polynomial.quotientSpanXSubCAlgEquiv (R[X]/(X - c) = R), AdjoinRoot.Polynomial.quotQuotEquivComm, MvPolynomial.quotientEquivQuotientMvPolynomial (Mathlib.RingTheory.Polynomial.Quotient)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A[x_1,...,x_r]/(f_1 x_1 + ... + f_r x_r - 1) localized at f_i is a polynomial ring over A_{f_i}",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv(_apply) (R[X]/(rX - 1) = R_r; Mathlib.RingTheory.MvPolynomial.Localization), MvPolynomial.isLocalization, Algebra.Generators.localizationAway, Polynomial.isLocalization",
+   "date": "2026-10-10",
+   "verdict": "no match (closest: the case r = 1, where B itself is A_{f_1}; not a generalization)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'mvPolynomialQuotientEquiv\\|finSuccEquiv\\|optionEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/MvPolynomial/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/",
+   "results": "RingTheory/MvPolynomial/Localization.lean:117 IsLocalization.Away.mvPolynomialQuotientEquiv (one variable, rX - 1); no statement for a linear equation in several variables after localization",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-final-solve",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
