@@ -77,6 +77,16 @@ lemma app_one (D : LocalDerivation M U) (W : X.Opens) (hW : W ≤ U) :
   rw [mul_one, one_smul] at h
   exact left_eq_add.mp h
 
+/-- The derivative of an inverse: if `a * b = 1`, then `D a = -a² D b`. -/
+lemma app_eq_neg_sq_smul_of_mul_eq_one (D : LocalDerivation M U) {W : X.Opens} (hW : W ≤ U)
+    {a b : Γ(X, W)} (hab : a * b = 1) : D.app W hW a = -(a ^ 2) • D.app W hW b := by
+  have h := D.map_mul W hW a b
+  rw [hab, app_one] at h
+  calc D.app W hW a = (a * b) • D.app W hW a := by rw [hab, one_smul]
+    _ = a • (b • D.app W hW a) := mul_smul _ _ _
+    _ = a • -(a • D.app W hW b) := by rw [eq_neg_of_add_eq_zero_right h.symm]
+    _ = -(a ^ 2) • D.app W hW b := by rw [smul_neg, smul_smul, neg_smul, sq]
+
 section Glue
 
 variable {ι : Type*} (O : ι → X.Opens) (d : ∀ i, Γ(X, O i) →+ Γ(M, O i))

@@ -414,4 +414,67 @@ lemma closure_overlap (hij : i ≠ j) :
 
 end Overlap
 
+section Glue
+
+variable {i j : ULift.{u} (Fin 2)}
+
+omit [Field k] in
+lemma neg_sq_smul_neg_zsmul_sq_smul {R M : Type*} [CommRing R] [AddCommGroup M] [Module R M]
+    {x y : R} (h : x * y = 1) (τ : ℤ) (g : M) : -(y ^ 2) • -τ • x ^ 2 • g = τ • g := by
+  rw [neg_smul, neg_smul, smul_neg, neg_neg, smul_comm (y ^ 2) τ, smul_smul, ← mul_pow,
+    mul_comm y x, h, one_pow, one_smul]
+
+lemma chartLocalDerivation_app_self (hij : i ≠ j) (σ : ℤ)
+    (f : Γ(ProjectiveLine (Spec (.of k)), chart k {i})) :
+    (chartLocalDerivation k hij σ).app (chart k {i}) le_rfl f = chartDerivation k hij σ f :=
+  LocalDerivation.ofIsAffineOpen_app_self _ _ _ f
+
+lemma chartLocalDerivation_app_restrict (hij : i ≠ j) (σ : ℤ) {W : (ProjectiveLine (Spec (.of k))).Opens}
+    (hW : W ≤ chart k {i}) (f : Γ(ProjectiveLine (Spec (.of k)), chart k {i})) :
+    (chartLocalDerivation k hij σ).app W hW
+        ((ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE hW).op f) =
+      (twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)).presheaf.map (homOfLE hW).op
+        (chartDerivation k hij σ f) := by
+  rw [← chartLocalDerivation_app_self k hij σ f]
+  exact (chartLocalDerivation k hij σ).naturality _ _ le_rfl hW f
+
+/-- **The chain rule on `D₊(x₀) ∩ D₊(x₁)`.** The derivations `σ d/d(xⱼ/xᵢ)` on `D₊(xᵢ)` and
+`τ d/d(xᵢ/xⱼ)` on `D₊(xⱼ)`, with values in `𝒪(-2)` through `xᵢ⁻²` and `xⱼ⁻²`, agree on the
+overlap if `σ = -τ`. -/
+lemma chartLocalDerivation_agree (hij : i ≠ j) (σ τ : ℤ) (hστ : σ = -τ)
+    (W : (ProjectiveLine (Spec (.of k))).Opens) (hi : W ≤ chart k {i}) (hj : W ≤ chart k {j})
+    (a : Γ(ProjectiveLine (Spec (.of k)), W)) :
+    (chartLocalDerivation k hij σ).app W hi a = (chartLocalDerivation k hij.symm τ).app W hj a := by
+  set D₁ := (chartLocalDerivation k hij σ).restrict (overlap_le_chart k i)
+  set D₂ := (chartLocalDerivation k hij.symm τ).restrict (overlap_le_chart k j)
+  have hD₁ : ∀ f, D₁.app (overlap k) le_rfl
+      ((ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE (overlap_le_chart k i)).op f) =
+      (twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)).presheaf.map
+        (homOfLE (overlap_le_chart k i)).op (chartDerivation k hij σ f) :=
+    chartLocalDerivation_app_restrict k hij σ _
+  have hD₂ : ∀ f, D₂.app (overlap k) le_rfl
+      ((ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE (overlap_le_chart k j)).op f) =
+      (twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)).presheaf.map
+        (homOfLE (overlap_le_chart k j)).op (chartDerivation k hij.symm τ f) :=
+    chartLocalDerivation_app_restrict k hij.symm τ _
+  have hc := coord_mul_coord k (i := i) (j := j)
+  have hc' := coord_mul_coord k (i := j) (j := i)
+  have hg := twistGen_restrict k (i := i) (j := j)
+  have key : ∀ a, D₁.app (overlap k) le_rfl a = D₂.app (overlap k) le_rfl a := by
+    refine LocalDerivation.app_eq_of_closure D₁ D₂ le_rfl _ (closure_overlap k hij) ?_
+    rintro a (⟨c, rfl⟩ | rfl | rfl)
+    · conv_lhs => rw [← presheaf_map_chartConst k (overlap_le_chart k i) c]
+      conv_rhs => rw [← presheaf_map_chartConst k (overlap_le_chart k j) c]
+      rw [hD₁, hD₂, chartDerivation_chartConst, chartDerivation_chartConst, map_zero, map_zero]
+    · rw [hD₁, D₂.app_eq_neg_sq_smul_of_mul_eq_one le_rfl hc, hD₂, chartDerivation_coord,
+        chartDerivation_coord, map_zsmul, map_zsmul, hg, hστ]
+      module
+    · rw [hD₂, D₁.app_eq_neg_sq_smul_of_mul_eq_one le_rfl hc', hD₁, chartDerivation_coord,
+        chartDerivation_coord, map_zsmul, map_zsmul, hg, hστ]
+      exact neg_sq_smul_neg_zsmul_sq_smul hc _ _
+  exact LocalDerivation.ext_of_isAffineOpen (isAffineOpen_chart k (Set.univ_nonempty)) D₁ D₂ key W
+    (le_overlap k hij hi hj) a
+
+end Glue
+
 end AlgebraicGeometry.ProjectiveLine
