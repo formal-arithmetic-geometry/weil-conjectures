@@ -8,7 +8,6 @@
 |---|---|---|
 | `lem-weil-pbc-etale-underived-exchange-restriction` | 1004 | none |
 | `lem-weil-pbc-invertible-pullback-tensor` | 1004 | none |
-| `lem-weil-pbc-map-into-henselian-colimit` | 1004 | none |
 | `lem-weil-pbc-module-sheaves-grothendieck-abelian` | 1004 | none |
 | `lem-weil-pbc-p1-power-affine-charts` | 1004 | none |
 | `lem-weil-pbc-projective-morphism-chart-preimage` | 1004 | none |
@@ -38,6 +37,7 @@
 | `lem-weil-pbc-derived-functor-long-exact` | 1005 | none |
 | `lem-weil-pbc-edge-map-base-change` | 1005 | none |
 | `lem-weil-pbc-finite-pushforward-constructible-descent` | 1005 | none |
+| `lem-weil-pbc-henselian-etale-retraction` | 1005 | none |
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1005 | none |
 | `lem-weil-pbc-invertible-generating-sections-fibre` | 1005 | none |
 | `lem-weil-pbc-open-closed-short-exact` | 1005 | none |
@@ -571,7 +571,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 559 nodes that wait for stage 1, 96 nodes that wait for a statement dependency.
+Not open yet: 559 nodes that wait for stage 1, 97 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
