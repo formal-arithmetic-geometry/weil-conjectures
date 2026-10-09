@@ -13,9 +13,68 @@
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The easy direction.* If $\\varphi$ is an isomorphism with inverse $\\psi$, then $t_i^{-1}$, being a functor $\\Ab(T_{\\Et})\\to\\Ab(T_{i,\\Et})$ [def-weil-pbc-inverse-image], sends $\\psi\\circ\\varphi=\\mathrm{id}_G$ and $\\varphi\\circ\\psi=\\mathrm{id}_H$ to $t_i^{-1}\\psi\\circ t_i^{-1}\\varphi=\\mathrm{id}$ and $t_i^{-1}\\varphi\\circ t_i^{-1}\\psi=\\mathrm{id}$; so every $t_i^{-1}\\varphi$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma label lemma-base-change-local, Tag 0EZR (functoriality of restriction, implicit)"
+   }
+  },
+  {
+   "text": "*Lifting a geometric point.* Assume every $t_i^{-1}\\varphi$ is an isomorphism, and let $\\bar t:\\operatorname{Spec}\\Omega\\to T$ be any geometric point of $T$ [def-weil-geometric-point], lying over $t\\in T$. Since the etale family $(t_i)$ is jointly surjective there are $i\\in I$ and $s\\in T_i$ with $t_i(s)=t$, and [lem-weil-pbc-etale-cover-geometric-point-lift] gives a geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to T_i$ over $s$ with $t_i\\circ\\bar s=\\bar t$. (If $I=\\emptyset$ then $T=\\emptyset$, there is no geometric point, and this step and the next are vacuous.)",
+   "uses": [
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "def-weil-geometric-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma label lemma-geometric-lift-to-cover, Tag 03PR, with $(U,\\bar u)=(T,\\bar t)$ and the covering $\\{T_i\\to T\\}$"
+   }
+  },
+  {
+   "text": "*The stalk of the pullback is the stalk at the image.* For the geometric point $\\bar s$ of $T_i$ of step 2 there is an isomorphism $c_K:(t_i^{-1}K)_{\\bar s}\\xrightarrow{\\sim}K_{t_i\\circ\\bar s}=K_{\\bar t}$ of stalks [def-weil-pbc-geometric-stalks], natural in the abelian sheaf $K$ on $T_{\\Et}$ [lemma-openclosed-stalk-upperstar] (its $f^*$ is the inverse image $f^{-1}$ of [def-weil-pbc-inverse-image]: in the Lean, `Etale.upperStar` is the sheaf pullback along the base-change functor $T_{\\Et}\\to T_{i,\\Et}$, i.e. the sheafified presheaf inverse image; Stacks 03Q1 (3) is the same identification). Naturality in $K$ applied to $\\varphi:G\\to H$ gives $\\varphi_{\\bar t}\\circ c_G=c_H\\circ(t_i^{-1}\\varphi)_{\\bar s}$. The stalk at $\\bar s$ is a functor (a colimit of sections), so it sends the isomorphism $t_i^{-1}\\varphi$ to an isomorphism $(t_i^{-1}\\varphi)_{\\bar s}$; hence $\\varphi_{\\bar t}=c_H\\circ(t_i^{-1}\\varphi)_{\\bar s}\\circ c_G^{-1}$ is an isomorphism of abelian groups.",
+   "uses": [
+    "lemma-openclosed-stalk-upperstar",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma label lemma-stalk-pullback, Tag 03Q1 (3): $(f^{-1}\\mathcal G)_{\\bar x}=\\mathcal G_{f\\circ\\bar x}$"
+   }
+  },
+  {
+   "text": "*Geometric stalks detect isomorphisms.* By steps 2 and 3, $\\varphi_{\\bar t}:G_{\\bar t}\\to H_{\\bar t}$ is an isomorphism for every geometric point $\\bar t$ of $T$. A morphism of abelian sheaves on $T_{\\Et}$ that is an isomorphism at every geometric stalk is an isomorphism [lemma-weil-pbc-geometric-stalk-conservative]; so $\\varphi$ is an isomorphism. (In the Lean, `Scheme.isIso_of_isIso_sheafFiber_map` asks this only at one universe-lifted geometric point over each point of $T$, which is among the geometric points just treated.) This proves the converse direction.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem label theorem-exactness-stalks, Tag 03PU (a map of etale sheaves is injective/surjective iff it is so on all geometric stalks), as used in the proof of Lemma label lemma-base-change-local, Tag 0EZR (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "def-weil-geometric-point",
+  "lemma-openclosed-stalk-upperstar",
+  "def-weil-pbc-geometric-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Lemma label lemma-base-change-local, Tag 0EZR, end of (1), made explicit through Theorem label theorem-exactness-stalks (Tag 03PU), Lemma label lemma-stalk-pullback (Tag 03Q1) and Lemma label lemma-geometric-lift-to-cover (Tag 03PR)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +103,38 @@
    "results": "CategoryTheory.Sheaf.isIso_iff_of_coversTop (CategoryTheory/Sites/LocalProperties.lean:68): for hX : K.CoversTop X and f : F ⟶ G of sheaves, IsIso f ↔ ∀ i, IsIso ((K.overPullback A (X i)).map f); also Sheaf.isIso_of_coversTop (line 35)",
    "date": "2026-10-09",
    "verdict": "generalization, not a leaf: it is stated for an arbitrary site with the restriction functor overPullback to the localized sites K.over (X i); specializing it to this node needs the theorem that, for etale t_i, the inverse image t_i^{-1} of def-weil-pbc-inverse-image (sheafified presheaf pullback) agrees with restriction to (T_et)/T_i under T_{i,et} ≅ (T_et)/T_i, and that a jointly surjective etale family covers the terminal object of T_et; recorded as the Mathlib route for stage 3"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.isIso_iff_of_coversTop",
+   "results": "CategoryTheory.Sheaf.isIso_iff_of_coversTop {C} {K : GrothendieckTopology C} {A} {ι} {X : ι → C} (hX : K.CoversTop X) {F G : Sheaf K A} (f : F ⟶ G) : IsIso f ↔ ∀ i, IsIso ((K.overPullback A (X i)).map f) (Mathlib.CategoryTheory.Sites.LocalProperties)",
+   "date": "2026-10-09",
+   "verdict": "generalization, not a leaf (read in Mathlib/CategoryTheory/Sites/LocalProperties.lean:35-70; the brief's CoversTop.lean holds only CoversTop itself). What is missing to specialize it: (i) K.CoversTop of the objects (T_i,t_i) of T.Etale for smallEtaleTopology T (for each W, Sieve.ofObjects contains the jointly surjective family W×_T T_i → W; derivable from ofArrows_mem_smallEtaleTopology_iff, AlgebraicGeometry/Sites/Etale.lean:61, but not stated); (ii) an equivalence of sites between (smallEtaleTopology T).over (T_i,t_i) on (T.Etale)/(T_i) and smallEtaleTopology T_i on T_i.Etale (Mathlib has only Over.iteratedSliceEquiv for plain Over categories, Comma/Over/Basic.lean:382, nothing for MorphismProperty.Over @Etale nor for the topologies); (iii) K.overPullback A X = (Over.forget X).sheafPushforwardContinuous is restriction G ↦ G∘Over.forget, with no sheafification, whereas t_i^{-1} [def-weil-pbc-inverse-image] is the sheafified left Kan extension along base change T.Etale → T_i.Etale; their agreement for etale t_i is lem-weil-pbc-etale-inverse-image-restriction (1), not in Mathlib (CoverLifting.lean:300-310 lists the comparison of the cocontinuous pullback with sheafPushforwardContinuous as TODO). The stalk route of the proof avoids all three"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf on small etale site over an etale scheme equivalent to sheaf on over category; pullback along etale morphism equals restriction",
+   "results": "CategoryTheory.Sheaf.over, GrothendieckTopology.overPullback (Mathlib.CategoryTheory.Sites.Over), Scheme.smallEtaleTopology, Functor.sheafPullbackConstruction.sheafPullback (Mathlib.CategoryTheory.Sites.Pullback), Sheaf.ΓRes",
+   "date": "2026-10-09",
+   "verdict": "no match: no identification of overPullback with the inverse image on small etale sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of sheaves on the small etale site of a scheme is an isomorphism iff its pullback along each member of a jointly surjective family of etale morphisms is an isomorphism",
+   "results": "Scheme.etaleTopology, Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf, Scheme.smallEtaleTopology, Scheme.etalePretopology, Scheme.smallEtalePretopology, Scheme.instCategoryEtale",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'CoversTop' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'iteratedSlice\\|overEquivOfIsInitial' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/MorphismProperty ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'sheafPullback.*sheafPushforward' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+   "results": "no CoversTop in AlgebraicGeometry; only MorphismProperty.overEquivOfIsInitial (Sites/Proetale.lean:181, for the empty scheme); the TODO comment CategoryTheory/Sites/CoverLifting.lean:310",
+   "date": "2026-10-09",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +154,16 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-etale-cover-detects-iso",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against Stacks 0EZR (1), 03PU, 03Q1). Proof written in four steps along the stalk route named in the source field: the forward direction by functoriality of t_i^{-1} (elementary); the converse by lifting each geometric point of T to some T_i (new Mathlib leaf lem-weil-pbc-etale-cover-geometric-point-lift = Stacks 03PR, AlgebraicGeometry.Scheme.exists_fac_of_etale_of_isSepClosed), identifying the stalk of t_i^{-1}phi at the lift with the stalk of phi (lemma-openclosed-stalk-upperstar, Lean closed, Stacks 03Q1 (3)), and concluding with the conservativity of geometric stalks (lemma-weil-pbc-geometric-stalk-conservative, Lean closed, Stacks 03PU). The two closed lemmas are tools (units sk-thm-p1 and sk-prop-cd). The mono-only leaf lem-weil-pbc-geometric-stalks-detect-mono does not fit (it would need a separate epi half) and is not used. Mathlib's Sheaf.isIso_iff_of_coversTop was read: it is a generalization, missing the CoversTop of the family, the site equivalence (T_et)/T_i = T_{i,et}, and the identification of overPullback (plain restriction) with the inverse image (lem-weil-pbc-etale-inverse-image-restriction); recorded in mathlib_searches. No Lean exists for the item."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }

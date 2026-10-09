@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-etale-cover-geometric-point-lift",
+ "kind": "statement",
+ "title": "A geometric point lifts to some member of a jointly surjective etale family",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], let $(t_i:T_i\\to T)_{i\\in I}$ be a family of etale morphisms [def-weil-etale-morphism] which is jointly surjective (every point of $T$ lies in the image of some $t_i$), and let $\\bar t:\\operatorname{Spec}\\Omega\\to T$ be a geometric point of $T$ [def-weil-geometric-point] lying over $t\\in T$. Then there are $i\\in I$ and a geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to T_i$ (with the same field $\\Omega$) such that $t_i\\circ\\bar s=\\bar t$. More precisely, for every $i$ and every $s\\in T_i$ with $t_i(s)=t$ there is such an $\\bar s$ lying over $s$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma label lemma-geometric-lift-to-cover, Tag 03PR, applied to the etale neighbourhood $(T,\\bar t)$ of $\\bar t$ and the etale covering $\\{T_i\\to T\\}$; the field-theoretic form: $\\kappa(s)/\\kappa(t)$ is finite separable (Morphisms, Lemma label lemma-etale-over-field, Tag 02GL) and so embeds over $\\kappa(t)$ into the separably closed field $\\Omega$"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-geometric-point"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "geometric point lifts along an etale morphism to a point in the preimage with separably closed field",
+   "results": "separableClosure.comap_eq_of_algHom, Algebra.FormallyEtale.of_isSeparable, IsSepClosed.lift (Mathlib.FieldTheory.IsSepClosed), AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-09",
+   "verdict": "no direct match; IsSepClosed.lift is the field-theoretic ingredient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "for an etale morphism f : X ⟶ S, a morphism Spec Ω ⟶ S with Ω separably closed factors through f at any point x over its image",
+   "results": "AlgebraicGeometry.IsEtale, Scheme.Etale, Algebra.FormallyEtale.iff_isSeparable, Algebra.instIsSeparableResidueFieldOfFormallyUnramified",
+   "date": "2026-10-09",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric point of S with separably closed field lifts through an etale morphism X → S to any point of X in the fibre",
+   "results": "AlgebraicGeometry.Scheme.Etale, IsEtale, IsEtale.instFormallyUnramified, Scheme.instCategoryEtale, Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+   "date": "2026-10-09",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.exists_fac_of_etale_of_isSepClosed",
+   "results": "AlgebraicGeometry.Scheme.exists_fac_of_etale_of_isSepClosed {X S : Scheme} (f : X ⟶ S) [Etale f] {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec Ω ⟶ S) (x : X) (hx : f x = s default) : ∃ l, l ≫ f = s ∧ l default = x (Mathlib.AlgebraicGeometry.Sites.EtalePoint)",
+   "date": "2026-10-09",
+   "verdict": "match (for one etale morphism; the family version specializes in one line)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists_fac_of_etale\\|lift.*geometric point' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; sed -n 30,55p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; grep -n 'IsSepClosed.of_isAlgClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean",
+   "results": "AlgebraicGeometry.Scheme.exists_fac_of_etale_of_isSepClosed (AlgebraicGeometry/Sites/EtalePoint.lean:37, proof by IsSepClosed.lift on residue fields), used at lines 89 and 120 of the same file; instance IsSepClosed.of_isAlgClosed (FieldTheory/IsSepClosed.lean:70)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.exists_fac_of_etale_of_isSepClosed",
+  "file": "Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean",
+  "how": "specializes in one line: by joint surjectivity choose i and x : T_i with t_i x = t̄ default; Ω algebraically closed is separably closed (instance IsSepClosed.of_isAlgClosed, Mathlib/FieldTheory/IsSepClosed.lean:70), and exists_fac_of_etale_of_isSepClosed (t_i) t̄ x hx gives l : Spec Ω ⟶ T_i with l ≫ t_i = t̄ and l default = x"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-cover-detects-iso",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}
