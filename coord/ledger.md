@@ -371,3 +371,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of F1: lem-weil-pbc-descend-surjective returned (d7bd177fb): Same defects as the old group E's version of this item, which was deleted: 1. Step 3 asserts that the image of a base change f_i is the inverse image of E = f_0
 - 19:27 UTC: merged E1 lem-weil-pbc-module-filtered-colimit-finite-presentation (repaired; spot-checked); returned F1 lem-weil-pbc-descend-surjective (image of a base change asserted without a node; orphan 05F3 node).
 - 19:28 UTC: L reviewed and committed split of lem-weil-pbc-closed-pushforward-constant-restriction (5 steps, no new nodes).
+- 2026-10-10, delivery of G1: lem-weil-pbc-gabber-h1-absolutely-algebraically-closed returned (b4da8e0b2): 1. The new node lem-weil-pbc-gabber-finite-etale-section (09ZA) is delivered with two proof steps while its status is unsplit: a new node must carry a statement
