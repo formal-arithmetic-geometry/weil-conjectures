@@ -98,9 +98,9 @@ theorem isIso_derivedPlus_unit_app_openImmersionLowerShriek {c d : Compactificat
   have hff : ∀ {Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j],
       D+((j)_!open[ModuleCat.{u + 1} Λ]).Full ∧ D+((j)_!open[ModuleCat.{u + 1} Λ]).Faithful := by
     intro Z j _
-    have := (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).fullyFaithfulLOfIsIsoUnit.full
-    have :=
-      (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).fullyFaithfulLOfIsIsoUnit.faithful
+    let adj := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j
+    have := adj.fullyFaithfulLOfIsIsoUnit.full
+    have := adj.fullyFaithfulLOfIsIsoUnit.faithful
     have : (D+((j)_!open[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.ι).Full :=
       Functor.Full.of_iso ((j)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusCompatibility.symm
     have : (D+((j)_!open[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.ι).Faithful :=

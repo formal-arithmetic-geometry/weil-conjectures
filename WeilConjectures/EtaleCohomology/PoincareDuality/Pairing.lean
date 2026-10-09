@@ -93,12 +93,10 @@ noncomputable def dualizingComplexIso (γ : TateOrientation Λ a d) :
 /-- A Tate orientation `γ : Λ_X(d)[2d] ≅ Ra^! Λ_Y` of a morphism `a` smooth of relative dimension
 `d`, as an orientation in the sense of the six-functor formalism
 (`AlgebraicGeometry.Etale.Orientation.ofDualizingComplexIso`): its isomorphism
-`Λ_X(d)[2d] ≅ Ra^! Λ_Y` is `γ.dualizingComplexIso`, and `La^* Λ_Y ≅ Λ_X` is
-`AlgebraicGeometry.Etale.leftDerivedUpperStarConstantComplexIso`. -/
+`Λ_X(d)[2d] ≅ Ra^! Λ_Y` is `γ.dualizingComplexIso`. -/
 noncomputable def toOrientation [SmoothOfRelativeDimension d a] (γ : TateOrientation Λ a d) :
     Orientation Λ a d :=
-  Orientation.ofDualizingComplexIso (leftDerivedUpperStarConstantComplexIso Λ a)
-    γ.dualizingComplexIso
+  Orientation.ofDualizingComplexIso γ.dualizingComplexIso
 
 /-- Blueprint `sk-def-pairing-data`: The pairing data.
 

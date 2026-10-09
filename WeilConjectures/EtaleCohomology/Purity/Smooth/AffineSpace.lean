@@ -193,11 +193,11 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_succ (c : ℕ) (B :
           ((tateObject Λ 𝔸(ULift.{u} (Fin 1); 𝔸(ULift.{u} (Fin c); B)) (1 + (c : ℤ)))⟦
             2 * (1 + (c : ℤ))⟧))) := by
   set φ := affineSpaceSuccIso c B
-  obtain ⟨comp₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp (ModuleCat.{u + 1} Λ)
+  obtain ⟨comp₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ
     (AffineSpace.zeroSection (ULift.{u} (Fin (c + 1))) B) φ.hom
   obtain ⟨heq⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ)
     (zeroSection_comp_affineSpaceSuccIso_hom c B)
-  obtain ⟨comp₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp (ModuleCat.{u + 1} Λ)
+  obtain ⟨comp₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ
     (AffineSpace.zeroSection (ULift.{u} (Fin c)) B)
     (AffineSpace.zeroSection (ULift.{u} (Fin 1)) 𝔸(ULift.{u} (Fin c); B))
   exact ⟨(R(AffineSpace.zeroSection (ULift.{u} (Fin (c + 1))) B)^![ModuleCat.{u + 1} Λ]).mapIso
@@ -310,9 +310,9 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpace_succ (d : ℕ) (Y : Sch
     exact (affineSpaceSuccIso_hom_over_over d Y).symm
   have : HasCompactification ((φ.hom ≫ q) ≫ p) := .of_eq h
   obtain ⟨heq⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ) h
-  obtain ⟨comp₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp (ModuleCat.{u + 1} Λ)
+  obtain ⟨comp₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ
     (φ.hom ≫ q) p
-  obtain ⟨comp₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp (ModuleCat.{u + 1} Λ) φ.hom q
+  obtain ⟨comp₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ φ.hom q
   exact ⟨heq.app K ≪≫ comp₁.app K ≪≫ comp₂.app _ ≪≫ (rightDerivedUpperShriekIsoOfIso _ φ).app _⟩
 
 omit [Finite Λ] in

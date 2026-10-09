@@ -161,7 +161,8 @@ theorem isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_openImmersionLower
     let sq := IsPullback.of_hasPullback r.hom d.i.closedComplement
     have := isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite sq
     let N := D((r.hom)^*[ModuleCat.{u + 1} Λ]).obj (D((d.i)_!open[ModuleCat.{u + 1} Λ]).obj K)
-    have hN : IsZero (L((pullback.fst r.hom d.i.closedComplement)^*[ModuleCat.{u + 1} Λ]).obj N) := by
+    have hN :
+        IsZero (L((pullback.fst r.hom d.i.closedComplement)^*[ModuleCat.{u + 1} Λ]).obj N) := by
       refine IsZero.of_iso ?_
         ((leftDerivedUpperStarIsoMapDerivedCategory _ _).app N ≪≫
           ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp _
@@ -171,7 +172,8 @@ theorem isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_openImmersionLower
         d.i _ (hdisj.mono_left ?_) K
       rw [pullback.condition, Scheme.Hom.comp_base, TopCat.coe_comp]
       exact Set.range_comp_subset_range _ _
-    exact IsZero.of_iso ((R((pullback.snd r.hom d.i.closedComplement)_*[ModuleCat.{u + 1} Λ])).map_isZero hN)
+    exact IsZero.of_iso
+      ((R((pullback.snd r.hom d.i.closedComplement)_*[ModuleCat.{u + 1} Λ])).map_isZero hN)
       ((leftDerivedUpperStarIsoMapDerivedCategory _ _).symm.app _ ≪≫
         asIso ((derivedBaseChangeMap _ sq.toCommSq).app N))
 

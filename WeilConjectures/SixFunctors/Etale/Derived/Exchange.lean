@@ -121,8 +121,8 @@ isomorphism `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` for `f'`, so th
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite`.
 That comparison isomorphism is
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison`, which rests
-on unbounded proper base change; the blueprint states this theorem on `D⁺`. If `f` is quasi-compact, `[QuasiCompact f']` is obtained from `sq` by
-`MorphismProperty.of_isPullback`. -/
+on unbounded proper base change; the blueprint states this theorem on `D⁺`. If `f` is
+quasi-compact, `[QuasiCompact f']` is obtained from `sq` by `MorphismProperty.of_isPullback`. -/
 -- TODO: state this for the `D⁺` exchange map built from `derivedBaseChangeMapPlus`, and drop
 -- `[QuasiCompact f']` once `Ex_!` is constructed without it.
 theorem isIso_rightDerivedLowerShriekBaseChangeMap [Finite Λ] [HasCompactification f]

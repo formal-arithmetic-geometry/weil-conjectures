@@ -244,8 +244,8 @@ ring `Λ` and `f : X ⟶ Y` admitting a compactification, the projection map
 `PF : Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)`
 
 of `AlgebraicGeometry.Etale.projectionMapOfCompactification`, for any compactification of `f`,
-is an isomorphism of bifunctors on the whole unbounded derived categories, with no boundedness, constructibility or Tor amplitude
-hypothesis on `K` and `L`.
+is an isomorphism of bifunctors on the whole unbounded derived categories, with no boundedness,
+constructibility or Tor amplitude hypothesis on `K` and `L`.
 
 This is the unbounded form of clause (5) of `prop-functor-package` that the base linearity of
 kernel transforms (and of the Fourier–Deligne transform, `sk-prop-base-linear`) consumes.

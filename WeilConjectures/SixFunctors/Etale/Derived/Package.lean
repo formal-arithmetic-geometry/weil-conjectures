@@ -194,7 +194,8 @@ theorem sixOperationsPackage [HasInvertibleExponent Λ (Spec (.of k))] [IsSepara
   lowerShriekCompactificationIndependent c c' :=
     ⟨rightDerivedLowerShriekOfCompactificationIso Λ c c'⟩
   lowerShriekComp h := nonempty_iso_rightDerivedLowerShriek_comp Λ f h
-  lowerShriekIsoLowerStarOfProper _ := nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar _ f
+  lowerShriekIsoLowerStarOfProper _ :=
+    nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar _ f
   orientation _ _ := sorry
   biduality _ hK := nonempty_iso_verdierDual_verdierDual Λ (f ≫ aY) hK
   verdierExchange M := nonempty_iso_verdierDual_rightDerivedLowerShriek Λ f aY M
