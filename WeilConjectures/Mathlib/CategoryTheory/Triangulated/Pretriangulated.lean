@@ -60,7 +60,80 @@ lemma cancel_mor₂_of_subsingleton {Y : C} [Subsingleton (T.obj₁⟦(1 : ℤ)�
   obtain ⟨g, hg⟩ := yoneda_exact₃ T hT (c - c') (by rw [Preadditive.comp_sub, h, sub_self])
   rw [hg, Subsingleton.elim g 0, comp_zero]
 
+omit hT in
+include hT in
+/-- An endomorphism `k` of the first object of a distinguished triangle which is killed by
+`T.mor₁` and kills `T.mor₃` (up to shift) is of square zero. -/
+lemma comp_self_eq_zero {k : T.obj₁ ⟶ T.obj₁} (h₁ : k ≫ T.mor₁ = 0)
+    (h₃ : T.mor₃ ≫ k⟦(1 : ℤ)⟧' = 0) : k ≫ k = 0 := by
+  obtain ⟨g, hg⟩ := coyoneda_exact₁ T hT (k⟦(1 : ℤ)⟧')
+    (by rw [← Functor.map_comp, h₁, Functor.map_zero])
+  obtain ⟨g', hg'⟩ := yoneda_exact₃ _ (rot_of_distTriang _ hT) (k⟦(1 : ℤ)⟧') h₃
+  apply (CategoryTheory.shiftFunctor C (1 : ℤ)).map_injective
+  rw [Functor.map_comp, Functor.map_zero]
+  nth_rw 1 [hg]
+  rw [hg', Triangle.rotate_mor₃]
+  simp [comp_distTriang_mor_zero₃₁_assoc _ hT]
+
 end Triangle
+
+/-- Let `ψ : T ⟶ T'` be a morphism of distinguished triangles such that `T.mor₁ = 0` and
+`ψ.hom₁ = 0`. Then there is a map `b : T.obj₃ ⟶ T'.obj₂` with `T.mor₂ ≫ b = ψ.hom₂` and
+`b ≫ T'.mor₂ = ψ.hom₃`. -/
+lemma exists_lift_of_mor₁_eq_zero {T T' : Triangle C} (hT : T ∈ distTriang C)
+    (hT' : T' ∈ distTriang C) (hT₁ : T.mor₁ = 0) (ψ : T ⟶ T') (hψ₁ : ψ.hom₁ = 0) :
+    ∃ b : T.obj₃ ⟶ T'.obj₂, T.mor₂ ≫ b = ψ.hom₂ ∧ b ≫ T'.mor₂ = ψ.hom₃ := by
+  obtain ⟨r, hr⟩ := Triangle.yoneda_exact₂ T hT ψ.hom₂ (by rw [hT₁, zero_comp])
+  obtain ⟨y, hy⟩ := Triangle.yoneda_exact₃ T hT (r ≫ T'.mor₂ - ψ.hom₃) (by
+    rw [Preadditive.comp_sub, reassoc_of% hr.symm, ψ.comm₂, sub_self])
+  have : Epi T.mor₃ := (Triangle.mor₁_eq_zero_iff_epi₃ T hT).1 hT₁
+  obtain ⟨z, hz⟩ := Triangle.coyoneda_exact₃ T' hT' y (by
+    rw [← cancel_epi T.mor₃, ← Category.assoc, ← hy, comp_zero, Preadditive.sub_comp,
+      Category.assoc, comp_distTriang_mor_zero₂₃ _ hT', comp_zero, zero_sub, ← ψ.comm₃,
+      hψ₁, Functor.map_zero, comp_zero, neg_zero])
+  refine ⟨r - T.mor₃ ≫ z, ?_, ?_⟩
+  · rw [Preadditive.comp_sub, ← hr, comp_distTriang_mor_zero₂₃_assoc _ hT, zero_comp, sub_zero]
+  · rw [Preadditive.sub_comp, Category.assoc, ← hz, ← hy, sub_sub_cancel]
+
+/-- Let `φ : T ⟶ T'` and `φ' : T' ⟶ T` be morphisms of distinguished triangles such that the
+composites `φ ≫ φ'` and `φ' ≫ φ` act as the identity on `T.mor₁`, `T.mor₃` (resp. `T'.mor₁`,
+`T'.mor₃`) through their second and third components. Then `φ.hom₁` is an isomorphism: the
+endomorphisms `𝟙 - (φ ≫ φ').hom₁` and `𝟙 - (φ' ≫ φ).hom₁` are of square zero. -/
+lemma isIso_hom₁_of_comp {T T' : Triangle C} (hT : T ∈ distTriang C)
+    (hT' : T' ∈ distTriang C) (φ : T ⟶ T') (φ' : T' ⟶ T)
+    (h₂ : T.mor₁ ≫ φ.hom₂ ≫ φ'.hom₂ = T.mor₁) (h₃ : φ.hom₃ ≫ φ'.hom₃ ≫ T.mor₃ = T.mor₃)
+    (h₂' : T'.mor₁ ≫ φ'.hom₂ ≫ φ.hom₂ = T'.mor₁)
+    (h₃' : φ'.hom₃ ≫ φ.hom₃ ≫ T'.mor₃ = T'.mor₃) : IsIso φ.hom₁ := by
+  have key : ∀ {T T' : Triangle C} (_ : T ∈ distTriang C) (φ : T ⟶ T') (φ' : T' ⟶ T)
+      (_ : T.mor₁ ≫ φ.hom₂ ≫ φ'.hom₂ = T.mor₁) (_ : φ.hom₃ ≫ φ'.hom₃ ≫ T.mor₃ = T.mor₃),
+      IsIso (φ.hom₁ ≫ φ'.hom₁) := by
+    intro T T' hT φ φ' h₂ h₃
+    have hk := Triangle.comp_self_eq_zero hT (k := 𝟙 _ - φ.hom₁ ≫ φ'.hom₁)
+      (by
+        rw [Preadditive.sub_comp, Category.id_comp, Category.assoc, ← φ'.comm₁,
+          ← φ.comm₁_assoc, h₂, sub_self])
+      (by
+        simp only [Functor.map_sub, Functor.map_id, Functor.map_comp, Preadditive.comp_sub,
+          Category.comp_id]
+        rw [φ.comm₃_assoc, φ'.comm₃, h₃, sub_self])
+    set k := 𝟙 _ - φ.hom₁ ≫ φ'.hom₁
+    have e : φ.hom₁ ≫ φ'.hom₁ = 𝟙 _ - k := by simp [k]
+    rw [e]
+    refine ⟨𝟙 _ + k, ?_, ?_⟩
+    · simp only [Preadditive.sub_comp, Preadditive.comp_add, Category.id_comp,
+        Category.comp_id, hk]
+      abel
+    · simp only [Preadditive.add_comp, Preadditive.comp_sub, Category.id_comp,
+        Category.comp_id, hk]
+      abel
+  have := key hT φ φ' h₂ h₃
+  have := key hT' φ' φ h₂' h₃'
+  refine ⟨⟨φ'.hom₁ ≫ inv (φ.hom₁ ≫ φ'.hom₁),
+    by rw [← Category.assoc, IsIso.hom_inv_id], ?_⟩⟩
+  have e : inv (φ'.hom₁ ≫ φ.hom₁) ≫ φ'.hom₁ = φ'.hom₁ ≫ inv (φ.hom₁ ≫ φ'.hom₁) := by
+    rw [← cancel_mono (φ.hom₁ ≫ φ'.hom₁), Category.assoc, Category.assoc, IsIso.inv_hom_id,
+      Category.comp_id, ← Category.assoc φ'.hom₁ φ.hom₁, IsIso.inv_hom_id_assoc]
+  rw [← e, Category.assoc, IsIso.inv_hom_id]
 
 /-- **Extension of a middle component** [BBD, 1.1.9]. Given distinguished triangles `T` and `T'`,
 a morphism `φ : T.obj₂ ⟶ T'.obj₂` such that `T.mor₁ ≫ φ ≫ T'.mor₂ = 0` is the middle component of
