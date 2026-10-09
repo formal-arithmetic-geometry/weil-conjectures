@@ -2,17 +2,62 @@
  "id": "lem-weil-pbc-filtered-colimit-flat-modules",
  "kind": "statement",
  "title": "Filtered colimits of flat modules are flat",
- "statement": "Let $R$ be a commutative ring and let $(M_i,\\varphi_{ij})$ be a filtered (directed) system of flat $R$-modules [def-weil-pbc-flat-ring-map]. Then the filtered colimit $M=\\varinjlim_i M_i$, with its induced $R$-module structure, is flat over $R$.",
+ "statement": "Let $R$ be a commutative ring, $I$ a small filtered category (for instance a nonempty directed set) and $i\\mapsto M_i$ a functor from $I$ to the category of $R$-modules, with transition maps $M(a):M_i\\to M_j$ for $a:i\\to j$, such that every $M_i$ is a flat $R$-module [def-weil-pbc-flat-ring-map]. Let $(M,(\\mu_i:M_i\\to M)_i)$ be a colimit of this diagram in the category of $R$-modules [def-weil-pbc-category-colimit]. Then $M$ is a flat $R$-module.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 05UT (lemma-colimit-flat), line 8660: a directed colimit of flat $R$-modules is flat; proof by commutation of tensor products with colimits and exactness of directed colimits"
  },
  "stmt_deps": [
-  "def-weil-pbc-flat-ring-map"
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $u:N_1\\to N_2$ be an injective $R$-linear map. By [def-weil-pbc-flat-ring-map] we must show that $u\\otimes1_M:N_1\\otimes_RM\\to N_2\\otimes_RM$ is injective. Composing with the canonical isomorphisms $N_k\\otimes_RM\\cong M\\otimes_RN_k$, $n\\otimes m\\mapsto m\\otimes n$, which commute with $u\\otimes1$ and $1\\otimes u$, it is equivalent to show that $1_M\\otimes u:M\\otimes_RN_1\\to M\\otimes_RN_2$ is injective; likewise, for each $i$, flatness of $M_i$ says that $f_i:=1_{M_i}\\otimes u:M_i\\otimes_RN_1\\to M_i\\otimes_RN_2$ is injective.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.39.3 (Tag 05UT, lemma-colimit-flat), line 8660, with Lemma 10.12.9 (Tag 00DD, lemma-tensor-products-commute-with-limits, line 1934) and Lemma 10.8.8 (Tag 00DB, lemma-directed-colimit-exact, line 908)"
+   }
+  },
+  {
+   "text": "Put $P_i=M_i\\otimes_RN_1$ and $Q_i=M_i\\otimes_RN_2$, functors of $i$ with transition maps $M(a)\\otimes1$. By [lem-weil-pbc-tensor-commutes-with-colimits] (applied with $N=N_1$ and with $N=N_2$), $M\\otimes_RN_1$ with the maps $p_i=\\mu_i\\otimes1:P_i\\to M\\otimes_RN_1$ is a colimit of $(P_i)$, and $M\\otimes_RN_2$ with $q_i=\\mu_i\\otimes1:Q_i\\to M\\otimes_RN_2$ is a colimit of $(Q_i)$ in the category of $R$-modules [def-weil-pbc-category-colimit]. The maps $f_i$ form a morphism of diagrams: $f_j\\circ(M(a)\\otimes1)=M(a)\\otimes u=(M(a)\\otimes1)\\circ f_i$ for $a:i\\to j$, checked on pure tensors; and $f:=1_M\\otimes u$ satisfies $f\\circ p_i=\\mu_i\\otimes u=q_i\\circ f_i$ for all $i$.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.39.3 (Tag 05UT, lemma-colimit-flat), line 8660, with Lemma 10.12.9 (Tag 00DD, lemma-tensor-products-commute-with-limits, line 1934) and Lemma 10.8.8 (Tag 00DB, lemma-directed-colimit-exact, line 908)"
+   }
+  },
+  {
+   "text": "$f$ is injective (directed/filtered colimits are exact, Tag 00DB, in the case of a left-exact sequence $0\\to P_i\\to Q_i$). Let $x\\in M\\otimes_RN_1$ with $f(x)=0$. Since $I$ is filtered, by [lem-weil-pbc-filtered-colimit-modules-elementwise](1) applied to the colimit $(M\\otimes_RN_1,(p_i))$ of step 2, $x=p_i(y)$ for some $i$ and $y\\in P_i$. Then $0=f(p_i(y))=q_i(f_i(y))$, so by [lem-weil-pbc-filtered-colimit-modules-elementwise](2) (the case $\\iota_i(x)=0$) applied to the colimit $(M\\otimes_RN_2,(q_i))$ there is a morphism $a:i\\to k$ with $(M(a)\\otimes1)(f_i(y))=0$, i.e. $f_k((M(a)\\otimes1)(y))=0$ by the naturality of step 2. As $f_k$ is injective (step 1), $(M(a)\\otimes1)(y)=0$, hence $x=p_i(y)=p_k((M(a)\\otimes1)(y))=0$. So $1_M\\otimes u$ is injective, and by step 1 $M$ is flat.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.39.3 (Tag 05UT, lemma-colimit-flat), line 8660, with Lemma 10.12.9 (Tag 00DD, lemma-tensor-products-commute-with-limits, line 1934) and Lemma 10.8.8 (Tag 00DB, lemma-directed-colimit-exact, line 908)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 10.39.3 (Tag 05UT, lemma-colimit-flat), line 8660; the exactness step written out after the proof of Lemma 10.8.8 (Tag 00DB), stated in the DAG for filtered index categories"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +79,38 @@
    "results": "Mathlib/RingTheory/Flat/Basic.lean contains Module.Flat and direct-sum instances; Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean contains the filtered module-colimit construction and preservation by forgetful functors, but no flatness-preservation result",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "direct limit of flat modules is flat",
+   "results": "ModuleCat.directLimitIsColimit, DirectLimit.Module.lift, Module.DirectLimit, Module.DirectLimit.induction_on (Mathlib.Algebra.Colimit.Module), Module.Flat.directSum_iff (Mathlib.RingTheory.Flat.Basic), ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; no flatness theorem for a direct limit",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.DirectLimit ; and Module.Flat _ (Module.DirectLimit _ _)",
+   "results": "none (both queries empty)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If each module in a directed system is flat over R, then the direct limit is flat over R; and: flatness preserved under filtered colimits in ModuleCat",
+   "results": "Module.Flat.directSum(_iff), Module.Flat.dfinsupp(_iff) (RingTheory.Flat.Basic), ModuleCat.directLimitCocone (Algebra.Category.ModuleCat.Limits), Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.iff_lTensor_preserves_shortComplex_exact (RingTheory.Flat.CategoryTheory), Module.Flat.iff_lTensor_exact'; no filtered-colimit flatness theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'DirectLimit\\|directLimit\\|colimit' Mathlib/RingTheory/Flat/*.lean; grep -rn Flat Mathlib/Algebra/Colimit/ Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean; files containing Module.Flat and DirectLimit|IsFiltered|colimit (under /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "nothing in RingTheory/Flat/ (Basic, CategoryTheory, Stability, Tensor, ...) mentions direct limits or colimits; no Flat in Algebra/Colimit or ModuleCat/FilteredColimits; only AlgebraicGeometry/Morphisms/Flat.lean mentions both (morphism property colimit lemmas, not modules); TensorProduct.directLimitLeft (LinearAlgebra/TensorProduct/DirectLimit.lean:78) is the tensor-commutes ingredient",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +130,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-filtered-colimit-flat-modules",
+  "worker": "stage1",
+  "summary": "Mathlib re-searched with LeanSearch, Loogle, LeanFinder and grep: no theorem that a direct limit or filtered colimit of flat modules is flat (only direct sums, Module.Flat.directSum); not a leaf. Statement made precise: the vague 'filtered (directed) system' became a functor from a small filtered category (the citer lem-weil-pbc-henselization-flat-quotients applies it to the filtered category of etale algebras of lem-weil-pbc-pair-henselization, not a directed set), with def-weil-pbc-category-colimit added to stmt_deps. Proof follows Stacks 05UT in three steps: reduce flatness to injectivity of 1_M (x) u by symmetry of tensor; tensor commutes with colimits (lem-weil-pbc-tensor-commutes-with-colimits, Mathlib leaf) so 1_M (x) u is the colimit of the injective maps 1_{M_i} (x) u; injectivity of a filtered colimit of injections (the case 0->P->Q of Stacks 00DB) written out from the elementwise description lem-weil-pbc-filtered-colimit-modules-elementwise (Mathlib leaf), which holds for filtered categories, so no reduction to directed sets (Categories 04AX) is needed. No new nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Three steps along Stacks 05UT: flatness as injectivity of 1 tensor u, tensor commutes with colimits (existing node), filtered colimits of injections are injective from the elementwise node. Correct; 0 new nodes. Statement restated for a small filtered category (the citer applies it to a filtered category of etale algebras; worker notes the citer should pass to a small equivalent category)."
+ }
 }

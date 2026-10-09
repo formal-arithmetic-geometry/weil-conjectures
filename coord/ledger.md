@@ -657,3 +657,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:47 L merged C1 deliver/C1/lem-weil-pbc-grothendieck-existence-projective (3rd delivery; 7 new unsplit nodes for 0885's inputs).
 - 23:47 L reviewed lem-weil-pbc-eventually-affine (worker, 5 steps, 0 new; tool_uses pqf-lem-affine-local-target): pass, committed.
 - 23:48 L reviewed lem-weil-pbc-filtered-colimit-algebras-underlying-module (worker, 5 steps, 0 new) and lem-weil-pbc-field-point-factors-through-closed-immersion (worker, 4 steps, 0 new): pass, committed.
+- 23:50 L reviewed lem-weil-pbc-etale-local-finite-at-point-elementary (worker, 8 steps, 1 new Mathlib leaf 00UJ; line added by L) and lem-weil-pbc-filtered-colimit-flat-modules (worker, 3 steps, 0 new): pass, committed.
