@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-scheme-image-qc-kernel",
+ "kind": "statement",
+ "title": "Scheme-theoretic image of a quasi-compact morphism: affine kernels and universal property",
+ "statement": "Let $h:X\\to Y$ be a quasi-compact morphism of schemes [def-weil-finite-type-morphism]. There are a closed subscheme $Z\\subseteq Y$, the scheme-theoretic image of $h$ [def-nagata-scheme-theoretic-image], with closed immersion $\\iota:Z\\to Y$ [def-weil-closed-immersion], and a morphism $h':X\\to Z$ with $\\iota\\circ h'=h$, such that: (1) for every affine open $U\\subseteq Y$ the ideal of $Z$ on $U$, i.e. the kernel of $\\iota^\\#:\\mathcal O_Y(U)\\to\\mathcal O_Z(\\iota^{-1}U)$, equals $\\ker\\big(h^\\#:\\mathcal O_Y(U)\\to\\mathcal O_X(h^{-1}U)\\big)$; (2) for every closed immersion $i:Z'\\to Y$ whose ideal is contained in that of $Z$ (on every affine open $U$, $\\ker(\\mathcal O_Y(U)\\to\\mathcal O_{Z'}(i^{-1}U))\\subseteq\\ker(\\mathcal O_Y(U)\\to\\mathcal O_X(h^{-1}U))$) there is a unique morphism $u:X\\to Z'$ with $i\\circ u=h$ (uniqueness: a closed immersion is a monomorphism).",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Section 'Scheme theoretic image' (Lemma Tag 01R8, morphisms-lemma-quasi-compact-scheme-theoretic-image, and Definition Tag 01R7, morphisms-definition-scheme-theoretic-image, for the universal property); stated here in the form of Mathlib's Scheme.Hom.image"
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "scheme theoretic image of a quasi-compact morphism, ideal on affine open is kernel of the ring map on sections",
+   "results": "AlgebraicGeometry.Scheme.Hom.ker_apply, Scheme.Hom.ideal_ker_le, Scheme.Hom.ker (Mathlib.AlgebraicGeometry.IdealSheaf.Basic), Scheme.Hom.toImage_app, IdealSheafData.ker_subschemeι_app (IdealSheaf.Subscheme), IdealSheafData.ideal_map, specTargetImageIdeal",
+   "date": "2026-10-10",
+   "verdict": "match: ker_apply"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.ker_apply",
+   "results": "Scheme.Hom.ker_apply {X Y} (f : X.Hom Y) [QuasiCompact f] (U : Y.affineOpens) : f.ker.ideal U = RingHom.ker (f.app U).hom (Mathlib.AlgebraicGeometry.IdealSheaf.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism factors through a closed immersion iff the kernel ideal sheaf of the closed immersion is contained in the kernel of the morphism",
+   "results": "IsClosedImmersion.lift, IsClosedImmersion.lift_fac, lift_fac_assoc, isIso_of_ker_eq, isIso_lift (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion), IdealSheafData.ker_fst_of_isClosedImmersion",
+   "date": "2026-10-10",
+   "verdict": "match: lift, lift_fac"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'Hom.ker\\|ker_apply\\|Hom.image\\|imageι\\|toImage' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; grep -n 'def lift\\|lift_fac' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+   "results": "Basic.lean:692 def Hom.ker, :702 Hom.ker_apply; Subscheme.lean: abbrev Hom.image, Hom.imageι, :710 Hom.toImage, :715 Hom.toImage_imageι, :576 ker_subschemeι; ClosedImmersion.lean:94 IsClosedImmersion I.subschemeι, :210 lift, :215 lift_fac; ClosedImmersion.lean:69 + Preimmersion.lean:65 (closed immersion is a monomorphism)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.image",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+  "how": "a few Mathlib lemmas one per clause: Z = f.image = f.ker.subscheme with ι = f.imageι (closed immersion by the instance at Morphisms/ClosedImmersion.lean:94) and h' = f.toImage (Hom.toImage_imageι); (1) is Scheme.Hom.ker_apply (IdealSheaf/Basic.lean:702, needs QuasiCompact f) with IdealSheafData.ker_subschemeι_app; (2) existence is IsClosedImmersion.lift / lift_fac (Morphisms/ClosedImmersion.lean:210-215; hypothesis i.ker <= f.ker, which on affine opens is the stated inclusion), uniqueness is Mono of a closed immersion (ClosedImmersion.lean:69 IsPreimmersion instance, Preimmersion.lean:65 Mono instance)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proper-limit-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: Scheme.Hom.image, toImage (IdealSheaf/Subscheme.lean), Hom.ker_apply (IdealSheaf/Basic.lean:702, QuasiCompact), IsClosedImmersion.lift/lift_fac (Morphisms/ClosedImmersion.lean:210), Mono of closed immersions; checked."
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-eventually-proper",
+ "kind": "statement",
+ "title": "Properness descends to a finite stage of a limit",
+ "statement": "Let $I$ be a directed set and $(S_i,f_{ii'})$ an inverse system of schemes over $I$ with affine transition morphisms [pqf-def-affine-morphism], with limit $S=\\varprojlim_iS_i$ [lem-weil-pbc-limit-affine-transition]. Let $0\\in I$ and let $f_0:X_0\\to Y_0$ be a morphism of schemes over $S_0$ with $S_0$, $X_0$, $Y_0$ quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. For $i\\ge0$ let $f_i:X_i\\to Y_i$ be the base change of $f_0$ along $S_i\\to S_0$ and $f:X\\to Y$ its base change along $S\\to S_0$ [def-pc-fibre-product]. If $f$ is proper [def-weil-proper-morphism] and $f_0$ is locally of finite type [def-weil-finite-type-morphism], then there is $i\\ge0$ such that $f_i$ is proper.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 081F (lemma-eventually-proper, line 3265) in Situation Tag 081D (situation-descent-property, line 1739), and its proof (Lemma 01ZQ descend-separated-finite-presentation, Lemma 0202 chow-finite-type, Lemma 01ZP descend-closed-immersion-finite-presentation, Morphisms lemmas on proper morphisms)"
+ },
+ "stmt_deps": [
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if the base change of a morphism to the limit of an inverse system of schemes is proper then the morphism at some finite stage is proper",
+   "results": "IsProper.isStableUnderBaseChange, universallyClosed_isStableUnderBaseChange, IsProper.instOfIsFinite, isProper_iff, isProper_eq, quasiCompact_isStableUnderBaseChange, IsProper.toLocallyOfFiniteType (Mathlib.AlgebraicGeometry.Morphisms.*)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism over a cofiltered limit of schemes is proper at a finite stage if its base change to the limit is proper (Stacks 081F)",
+   "results": "IsProper.instFstScheme, IsProper.instSndScheme, Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType (AffineTransitionLimit: descent of morphisms only), IsProper.isStableUnderBaseChange, IsProper.comp_iff",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, CategoryTheory.Limits.IsLimit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'IsProper' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; rg -ln 'IsProper' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | xargs grep -ln 'IsLimit\\|IsCofiltered'; rg -n 'IsProper' ~/weil-conjectures-slopmaster2/WeilConjectures/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "results": "none in all three",
+   "date": "2026-10-10",
+   "verdict": "no match (Mathlib and slopmaster2 descend morphisms, closed immersions and separatedness to a stage, not properness)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proper-limit-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 081F; correct; unsplit."
+ }
+}
