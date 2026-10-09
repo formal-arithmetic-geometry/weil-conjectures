@@ -1,0 +1,54 @@
+{
+ "id": "def-weil-integral-derived-restriction-of-scalars",
+ "kind": "definition",
+ "title": "Derived restriction of scalars from finite to completed integral coefficients",
+ "statement": "Fix a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, a scheme $Y$, and put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\in\\mathbf Z_{\\geq1}$. Let $\\pi_n:\\widehat{\\mathcal O}_{E,Y}\\twoheadrightarrow(A_{E,n})_Y$ be the projection of the completed coefficient sheaf on $Y_{\\mathrm{proet}}$ and $\\operatorname{Res}_n:\\Sh(Y_{\\mathrm{proet}},A_{E,n})\\to\\Sh(Y_{\\mathrm{proet}},\\mathcal O_E)$ the restriction of scalars along $\\pi_n$ [def-weil-completed-integral-coefficients], an exact functor [lem-weil-restriction-of-scalars-exact]. Let $D(Y_{\\mathrm{proet}},A_{E,n})$ and $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ be the derived categories [def-weil-abstract-derived-category] of $\\Sh(Y_{\\mathrm{proet}},A_{E,n})$ and of $\\Sh(Y_{\\mathrm{proet}},\\mathcal O_E)$. Applying $\\operatorname{Res}_n$ termwise to complexes sends quasi-isomorphisms to quasi-isomorphisms (an exact functor commutes with cohomology objects), and so defines the functor\n\n$$\n \\operatorname{Res}_n:D(Y_{\\mathrm{proet}},A_{E,n})\\longrightarrow D(Y_{\\mathrm{proet}},\\mathcal O_E),\\qquad \\operatorname{Res}_n(Q(M))=Q(\\operatorname{Res}_n M)\n$$\n\non complexes $M$ of $(A_{E,n})_Y$-modules, and on morphisms by the universal property of the localization $Q$; it commutes with the shift. It is the *derived restriction of scalars*.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Stacks Project, Derived Categories, Lemma 'right-derived-exact-functor' (Tag 015F): an exact functor of abelian categories transforms quasi-isomorphisms into quasi-isomorphisms, and every complex computes its derived functor on D; used in Bhatt-Scholze (literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf) p. 24, Proposition 3.5.1 and Definition 3.5.2, where the reductions K⊗^L R/m^n are read in D(X, R^) through the algebra maps R^ → R/m^n"
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-restriction-of-scalars-exact",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def mapDerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/",
+   "results": "CategoryTheory.Functor.mapDerivedCategory in Algebra/Homology/DerivedCategory/ExactFunctor.lean: for F : C1 ⥤ C2 between abelian categories with [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F], the induced functor DerivedCategory C1 ⥤ DerivedCategory C2, with mapDerivedCategoryFactors : Q ⋙ F.mapDerivedCategory ≅ F.mapHomologicalComplex _ ⋙ Q",
+   "date": "2026-10-09",
+   "verdict": "generalization: specializes in one line to F = SheafOfModules.restrictScalars π_n, the exactness instances coming from lem-weil-restriction-of-scalars-exact"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def restrictScalars' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/",
+   "results": "SheafOfModules.restrictScalars (Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean), additive; no exactness instance and no derived version",
+   "date": "2026-10-09",
+   "verdict": "the abelian-level functor exists; its derived extension is the generalization above"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.mapDerivedCategory",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+  "how": "specializes in one line: (SheafOfModules.restrictScalars π_n).mapDerivedCategory, given the exactness of lem-weil-restriction-of-scalars-exact as the instances PreservesFiniteLimits/PreservesFiniteColimits"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-derived-complete",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
