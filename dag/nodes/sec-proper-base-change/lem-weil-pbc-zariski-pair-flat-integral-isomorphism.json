@@ -10,9 +10,55 @@
  "stmt_deps": [
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite-presentation hypothesis makes B a finite-type A-algebra. Since A -> B is integral, the integral-plus-finite-type criterion gives that B is a finitely generated A-module, so the ring map is finite.",
+   "uses": [
+    "lem-weil-pbc-integral-finite-presentation-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0ELZ, first sentence, citing Algebra Lemmas 02JJ and 0564"
+   }
+  },
+  {
+   "text": "By step 1, B is a finite A-module, and the finite-presentation hypothesis on the A-algebra B makes it a finitely presented A-module. With flatness, B is finite locally free. The quotient isomorphism A/I -> B/IB identifies every fibre over a prime containing I with a one-dimensional residue-field algebra. The rank-one propagation lemma therefore gives rankAtStalk B = 1 at every prime: the rank is locally constant, and if the locus where it differs from one were nonempty and closed, it would contain a maximal ideal; every maximal ideal contains I because I is in the Jacobson radical, contradicting the rank-one fibre calculation on V(I).",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-finite-algebra-presentation-module-presentation",
+    "lem-weil-pbc-zariski-pair-rank-one-propagation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0ELZ, middle argument: finite locally free, rank one on V(I), then rank one everywhere for a Zariski pair"
+   }
+  },
+  {
+   "text": "Apply the rank-one algebra-map criterion to the finite flat A-module B. Since rankAtStalk B is constantly one, the structure map A -> B is bijective, hence an isomorphism of rings.",
+   "uses": [
+    "lem-weil-pbc-finite-flat-rank-one-algebra-map-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0ELZ, final sentence: a locally free algebra of rank one is an isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-integral-finite-presentation-finite",
+  "lem-weil-pbc-finite-algebra-presentation-module-presentation",
+  "lem-weil-pbc-zariski-pair-rank-one-propagation",
+  "lem-weil-pbc-finite-flat-rank-one-algebra-map-bijective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0ELZ (lemma-check-isomorphism-zariski), line 2265 and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,7 +90,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,10 +111,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-zariski-pair-flat-integral-isomorphism",
+  "worker": "stage1",
+  "summary": "Split Stacks 0ELZ into finite-module reduction from integral finite presentation, module finite presentation from finite algebra presentation, rank-one propagation from the quotient isomorphism and Jacobson condition, and the final rank-one algebra-map criterion. Added three Mathlib leaves and one unsplit node for the non-Mathlib Jacobson/rank propagation argument."
+ },
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Stacks 0ELZ; correct; unsplit."
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: Reviewed proof and created nodes against Stacks 0ELZ; finite presentation leaves and rank-one propagation dependency are explicit and searched."
  }
 }

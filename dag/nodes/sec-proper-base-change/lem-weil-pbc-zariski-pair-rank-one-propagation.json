@@ -1,0 +1,58 @@
+{
+ "id": "lem-weil-pbc-zariski-pair-rank-one-propagation",
+ "kind": "statement",
+ "title": "A finite flat algebra is rank one when it is rank one modulo a Zariski-pair ideal",
+ "statement": "Let A be a commutative ring, I an ideal contained in the Jacobson radical of A, and A -> B a ring map with B finite, finitely presented, and flat as an A-module. If the induced map A/I -> B/IB is an isomorphism, then the rankAtStalk function of B is constantly 1 on Spec(A).",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0ELZ (lemma-check-isomorphism-zariski), line 2265: finite presentation of B as a module plus flatness makes B finite locally free (Algebra Lemma 00NX); the quotient isomorphism gives rank one on V(I), and local constancy plus I in the Jacobson radical gives rank one everywhere"
+ },
+ "stmt_deps": ["def-weil-pbc-flat-ring-map"],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite finitely presented flat algebra whose reduction modulo an ideal in the Jacobson radical is the base quotient has rank one everywhere",
+   "results": "Module.isLocallyConstant_rankAtStalk, Module.rankAtStalk_eq, Ideal.mem_jacobson_bot; no theorem combining the quotient and Jacobson hypotheses",
+   "date": "2026-10-10",
+   "verdict": "no match; local-constancy and Jacobson ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "rank of a finitely presented finite flat module is one on V(I) and I is in the Jacobson radical, so rank is one globally",
+   "results": "Module.isLocallyConstant_rankAtStalk (FreeLocus), Module.rankAtStalk_eq_finrank_tensorProduct, Ideal.mem_jacobson_bot; no global propagation statement",
+   "date": "2026-10-10",
+   "verdict": "no match; the Spec(A) closed-subset/maximal-ideal argument is absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.isLocallyConstant_rankAtStalk",
+   "results": "Module.isLocallyConstant_rankAtStalk gives local constancy under Module.FinitePresentation and Module.Flat, but no hypothesis involving A/I -> B/IB or Jacobson radical",
+   "date": "2026-10-10",
+   "verdict": "partial ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'rankAtStalk|jacobson|Jacobson' Mathlib/RingTheory/Flat Mathlib/RingTheory/Spectrum/Prime Mathlib/RingTheory/Jacobson",
+   "results": "Flat/Rank.lean: Module.algebraMap_bijective_iff_rankAtStalk; FreeLocus.lean: Module.isLocallyConstant_rankAtStalk; Jacobson/Ideal.lean: Ideal.mem_jacobson_bot; no quotient-rank propagation theorem",
+   "date": "2026-10-10",
+   "verdict": "no match; ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zariski-pair-flat-integral-isomorphism",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none", "decls": [], "missing": []},
+  "slopmaster2": {"state": "none", "decls": [], "missing": []}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
