@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Connected finite étale covers
@@ -131,6 +132,55 @@ theorem isConnected_of_connectedSpace (P : Y.FiniteEtale) [ConnectedSpace P.obj.
     by_contra hni
     have hlt := lt_card_fiber_of_mono_of_notIso (fiber s) i hni
     exact (Nat.card_le_card_of_surjective _ hs).not_gt hlt
+
+
+/-- The open and closed subscheme `V` of a finite étale `Y`-scheme `P`, as a finite étale
+`Y`-scheme. -/
+noncomputable abbrev ofIsClopen (P : Y.FiniteEtale) (V : P.obj.left.Opens)
+    (hV : IsClosed (V : Set P.obj.left)) : Y.FiniteEtale :=
+  ⟨MorphismProperty.Over.mk ⊤ (V.ι ≫ P.obj.hom) (by have : Etale P.obj.hom := P.obj.prop
+                                                    infer_instance),
+    by
+      have : IsFinite P.obj.hom := P.property
+      have : IsClosedImmersion V.ι := IsClosedImmersion.of_isOpenImmersion V.ι (by simpa using hV)
+      exact inferInstanceAs (IsFinite (V.ι ≫ P.obj.hom))⟩
+
+/-- The inclusion of an open and closed subscheme of a finite étale `Y`-scheme. -/
+noncomputable abbrev ofIsClopenι (P : Y.FiniteEtale) (V : P.obj.left.Opens)
+    (hV : IsClosed (V : Set P.obj.left)) : ofIsClopen P V hV ⟶ P :=
+  ObjectProperty.homMk (MorphismProperty.Over.homMk V.ι rfl)
+
+instance (P : Y.FiniteEtale) (V : P.obj.left.Opens) (hV : IsClosed (V : Set P.obj.left)) :
+    Mono (ofIsClopenι P V hV) :=
+  ⟨fun _ _ h ↦ hom_ext ((cancel_mono V.ι).1 congr(($h).hom.left))⟩
+
+/-- The underlying scheme of a connected object of `FÉt(Y)` is connected: an open and closed
+subscheme is a subobject, which is either empty or everything. -/
+theorem connectedSpace_of_isConnected (P : Y.FiniteEtale) [IsConnected P] :
+    ConnectedSpace P.obj.left := by
+  obtain ⟨y⟩ := (inferInstance : Nonempty Y)
+  let s : Spec (.of (AlgebraicClosure (Y.residueField y))) ⟶ Y :=
+    Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y)
+      (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y
+  rw [connectedSpace_iff_clopen]
+  refine ⟨(nonempty_fiber_iff s P).1 ((not_initial_iff_fiber_nonempty (fiber s) P).1
+    IsConnected.notInitial), fun V hV ↦ ?_⟩
+  rw [or_iff_not_imp_left, ← ne_eq, ← Set.nonempty_iff_ne_empty]
+  intro hne
+  let V' : P.obj.left.Opens := ⟨V, hV.isOpen⟩
+  have hni : IsInitial (ofIsClopen P V' hV.isClosed) → False := by
+    rw [not_initial_iff_fiber_nonempty (fiber s), nonempty_fiber_iff s]
+    exact hne.to_subtype
+  have := IsConnected.noTrivialComponent _ (ofIsClopenι P V' hV.isClosed) hni
+  have hiso : IsIso V'.ι := by
+    refine ⟨(inv (ofIsClopenι P V' hV.isClosed)).hom.left, ?_, ?_⟩
+    · exact congr(($(IsIso.hom_inv_id (ofIsClopenι P V' hV.isClosed))).hom.left)
+    · exact congr(($(IsIso.inv_hom_id (ofIsClopenι P V' hV.isClosed))).hom.left)
+  have := V'.ι.surjective
+  ext x
+  simp only [Set.mem_univ, iff_true]
+  obtain ⟨z, rfl⟩ := V'.ι.surjective x
+  simp
 
 end Scheme.FiniteEtale
 
