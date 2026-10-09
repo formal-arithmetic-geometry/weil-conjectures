@@ -182,6 +182,7 @@ the counits `Rc_! Rc^! T ⟶ T` and `Rd_! Rd^! T ⟶ T` are isomorphisms. With `
 lemma isZero_of_isZero_leftDerivedUpperStar_of_disjoint
     (c : Z₁ ⟶ X) (d : Z₂ ⟶ X) (a : U₁ ⟶ X) (b : U₂ ⟶ X)
     [IsClosedImmersion c] [IsClosedImmersion d] [IsOpenImmersion a] [IsOpenImmersion b]
+    [(R(c)_![A]).IsLeftAdjoint] [(R(d)_![A]).IsLeftAdjoint]
     (hca : Set.range c = (Set.range a)ᶜ) (hdb : Set.range d = (Set.range b)ᶜ)
     (hcd : Disjoint (Set.range c) (Set.range d))
     {T : DerivedCategory (Sheaf X.smallEtaleTopology A)}
@@ -289,6 +290,8 @@ factorisation is then `AlgebraicGeometry.Etale.existsUnique_comp_counit_of_isZer
 theorem existsUnique_supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
     [(R(i₁)_![A]).IsLeftAdjoint] [(R(i₂)_![A]).IsLeftAdjoint] [(R(i)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd i₁ i.openComplement.ι)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd i₂ i.openComplement.ι)_![A]).IsLeftAdjoint]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
     (M N : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
     ∃! ψ : ((derivedTensor A U).obj ((R(i₁)_![A]).obj ((R(i₁)^![A]).obj M))).obj
@@ -329,6 +332,8 @@ canonical. -/
 noncomputable def supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
     [(R(i₁)_![A]).IsLeftAdjoint] [(R(i₂)_![A]).IsLeftAdjoint] [(R(i)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd i₁ i.openComplement.ι)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd i₂ i.openComplement.ι)_![A]).IsLeftAdjoint]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
     (M N : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
     ((derivedTensor A U).obj ((R(i₁)_![A]).obj ((R(i₁)^![A]).obj M))).obj
@@ -348,6 +353,8 @@ with coefficients `M[a]`. -/
 noncomputable def cupWithSupports (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
     [(R(i₁)_![A]).IsLeftAdjoint] [(R(i₂)_![A]).IsLeftAdjoint] [(R(i)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd i₁ i.openComplement.ι)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd i₂ i.openComplement.ι)_![A]).IsLeftAdjoint]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
     {K M N : DerivedCategory (Sheaf U.smallEtaleTopology A)}
     (Δ : K ⟶ ((derivedTensor A U).obj K).obj K)
