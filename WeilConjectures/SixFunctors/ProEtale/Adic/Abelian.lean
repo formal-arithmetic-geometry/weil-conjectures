@@ -21,6 +21,15 @@ cokernel are lisse (`AlgebraicGeometry.ProEtale.AdicSheaf.isAdicLisseSheaf_kerne
 
 open CategoryTheory Limits
 
+lemma CategoryTheory.conj_eq_comp_conj {C D : Type*} [Category C] [Category D]
+    {F₁ F₂ : C ⥤ D} (c : F₁ ≅ F₂) {X Y : C} (φ : X ⟶ Y) {A B A' B' : D}
+    (t₁ : F₁.obj X ≅ A) (s₁ : F₁.obj Y ≅ B) (t₂ : F₂.obj X ≅ A') (s₂ : F₂.obj Y ≅ B') :
+    t₁.inv ≫ F₁.map φ ≫ s₁.hom =
+      (t₁.symm ≪≫ c.app X ≪≫ t₂).hom ≫ (t₂.inv ≫ F₂.map φ ≫ s₂.hom) ≫
+        (s₂.symm ≪≫ (c.app Y).symm ≪≫ s₁).hom := by
+  simp only [Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Category.assoc,
+    Iso.hom_inv_id_assoc, NatTrans.naturality_assoc, Iso.hom_inv_id_app_assoc]
+
 universe u
 
 namespace AlgebraicGeometry.ProEtale
@@ -31,7 +40,7 @@ attribute [local instance] Abelian.hasFiniteBiproducts
 
 namespace AdicSheaf
 
-variable {ι κ : Type} [Fintype ι] [Fintype κ] [DecidableEq ι] [DecidableEq κ]
+variable {ι κ : Type} [Fintype ι] [Fintype κ]
 
 /-- A finite free module over a finite index type is a free module over `Fin n`. -/
 noncomputable def freeFinIso (ι : Type) [Fintype ι] (V : Scheme.{u}) :
@@ -77,6 +86,92 @@ theorem isAdicLisseSheaf_kernel_cokernel_of_rank_eq
         (freeUpperStarIso l κ (O t).ι).hom).symm ≪≫ cokernelIsoOfEq hconj ≪≫
       cokernelEpiComp _ _ ≪≫ cokernelCompIsIso _ _ ≪≫ cokernelBlockMapIso _ _ _ _ ≪≫
       freeFinIso _ _⟩⟩
+
+section Rank
+
+variable {P : Scheme.{u}} {ι κ ι' κ' : Type} [Fintype ι] [Fintype κ] [Fintype ι'] [Fintype κ']
+
+/-- The pointwise rank of a morphism of finite free modules is invariant under composition with
+isomorphisms. -/
+lemma rank_unitMatrix_eq_of_eq_comp
+    (ψ₁ : (⨁ fun _ : ι ↦ unit l P) ⟶ ⨁ fun _ : κ ↦ unit l P)
+    (ψ₂ : (⨁ fun _ : ι' ↦ unit l P) ⟶ ⨁ fun _ : κ' ↦ unit l P)
+    (α : (⨁ fun _ : ι' ↦ unit l P) ≅ ⨁ fun _ : ι ↦ unit l P)
+    (β : (⨁ fun _ : κ ↦ unit l P) ≅ ⨁ fun _ : κ' ↦ unit l P)
+    (h : ψ₂ = α.hom ≫ ψ₁ ≫ β.hom) (t : P) :
+    ((unitMatrix ψ₂).map (PadicAlgCl.locallyFiniteFunctionsEval t)).rank =
+      ((unitMatrix ψ₁).map (PadicAlgCl.locallyFiniteFunctionsEval t)).rank := by
+  have h' : ψ₁ = α.inv ≫ ψ₂ ≫ β.inv := by
+    rw [h, Category.assoc, Iso.inv_hom_id_assoc, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  refine le_antisymm ?_ ?_
+  · rw [h, unitMatrix_comp, unitMatrix_comp,
+      Matrix.map_mul (f := PadicAlgCl.locallyFiniteFunctionsEval t),
+      Matrix.map_mul (f := PadicAlgCl.locallyFiniteFunctionsEval t)]
+    exact (Matrix.rank_mul_le_left _ _).trans (Matrix.rank_mul_le_right _ _)
+  · rw [h', unitMatrix_comp, unitMatrix_comp,
+      Matrix.map_mul (f := PadicAlgCl.locallyFiniteFunctionsEval t),
+      Matrix.map_mul (f := PadicAlgCl.locallyFiniteFunctionsEval t)]
+    exact (Matrix.rank_mul_le_left _ _).trans (Matrix.rank_mul_le_right _ _)
+
+section Transport
+
+variable {Y V : Scheme.{u}} {n : ℕ}
+
+/-- Transport of a trivialisation `h^* F ≅ ℚ̄_ℓⁿ` along a morphism `g`. -/
+noncomputable def trivPull {F : AdicSheaf l Y} (h : V ⟶ Y)
+    (e : (h)^*ᵃ[l].obj F ≅ ⨁ fun _ : Fin n ↦ unit l V) (g : P ⟶ V) :
+    (g ≫ h)^*ᵃ[l].obj F ≅ ⨁ fun _ : Fin n ↦ unit l P :=
+  (adicUpperStarComp l g h).app F ≪≫ (g)^*ᵃ[l].mapIso e ≪≫ freeUpperStarIso l (Fin n) g
+
+lemma trivPull_conj {F G : AdicSheaf l Y} (φ : F ⟶ G) (h : V ⟶ Y) {m : ℕ}
+    (e : (h)^*ᵃ[l].obj F ≅ ⨁ fun _ : Fin n ↦ unit l V)
+    (e' : (h)^*ᵃ[l].obj G ≅ ⨁ fun _ : Fin m ↦ unit l V) (g : P ⟶ V) :
+    (trivPull h e g).inv ≫ (g ≫ h)^*ᵃ[l].map φ ≫ (trivPull h e' g).hom =
+      (freeUpperStarIso l (Fin n) g).inv ≫ (g)^*ᵃ[l].map (e.inv ≫ (h)^*ᵃ[l].map φ ≫ e'.hom) ≫
+        (freeUpperStarIso l (Fin m) g).hom := by
+  have := (adicUpperStarComp l g h).hom.naturality φ
+  simp only [Functor.comp_map] at this
+  simp only [trivPull, Iso.trans_inv, Iso.trans_hom, Iso.app_inv, Iso.app_hom,
+    Functor.mapIso_inv, Functor.mapIso_hom, Category.assoc, Functor.map_comp]
+  rw [reassoc_of% this, Iso.inv_hom_id_app_assoc]
+
+end Transport
+
+section Descent
+
+variable {Y V V' : Scheme.{u}} {F G : AdicSheaf l Y} (φ : F ⟶ G) {n m n' m' : ℕ}
+
+/-- **The pointwise rank of a morphism of lisse sheaves descends.** Trivialising a morphism of
+sheaves over two weakly étale maps, the matrices of functions have the same rank at points with
+the same image. -/
+lemma rank_eq_of_apply_eq (f : V ⟶ Y) (f' : V' ⟶ Y) [WeaklyEtale f] [WeaklyEtale f']
+    (e : (f)^*ᵃ[l].obj F ≅ ⨁ fun _ : Fin n ↦ unit l V)
+    (e₂ : (f)^*ᵃ[l].obj G ≅ ⨁ fun _ : Fin m ↦ unit l V)
+    (e' : (f')^*ᵃ[l].obj F ≅ ⨁ fun _ : Fin n' ↦ unit l V')
+    (e₂' : (f')^*ᵃ[l].obj G ≅ ⨁ fun _ : Fin m' ↦ unit l V')
+    (v : V) (v' : V') (hvv' : f v = f' v') :
+    ((unitMatrix (e.inv ≫ (f)^*ᵃ[l].map φ ≫ e₂.hom)).map
+        (PadicAlgCl.locallyFiniteFunctionsEval v)).rank =
+      ((unitMatrix (e'.inv ≫ (f')^*ᵃ[l].map φ ≫ e₂'.hom)).map
+        (PadicAlgCl.locallyFiniteFunctionsEval v')).rank := by
+  obtain ⟨w, hw, hw'⟩ := Scheme.Pullback.exists_preimage_pullback v v' hvv'
+  have key := conj_eq_comp_conj (adicUpperStarCongr l (pullback.condition (f := f) (g := f'))) φ
+    (trivPull f e (pullback.fst f f')) (trivPull f e₂ (pullback.fst f f'))
+    (trivPull f' e' (pullback.snd f f')) (trivPull f' e₂' (pullback.snd f f'))
+  rw [trivPull_conj, trivPull_conj] at key
+  have hX := rank_unitMatrix_eq_of_eq_comp _ _ _ _ key w
+  rw [unitMatrix_adicUpperStar, unitMatrix_adicUpperStar] at hX
+  have e1 {W P' : Scheme.{u}} {a b : ℕ} (M : Matrix (Fin a) (Fin b) _) (g : P' ⟶ W) (w : P') :
+      (M.map (PadicAlgCl.locallyFiniteFunctionsComp l g.base.hom)).map
+        (PadicAlgCl.locallyFiniteFunctionsEval w) =
+        M.map (PadicAlgCl.locallyFiniteFunctionsEval (g w)) := by
+    ext; rfl
+  rw [e1, e1, hw, hw'] at hX
+  exact hX
+
+end Descent
+
+end Rank
 
 end AdicSheaf
 
