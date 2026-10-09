@@ -184,17 +184,25 @@ variable {X Y : Scheme.{u}}
 /-- Blueprint `sk-thm-sf-pf-adic`: Projection formula: the derived-complete stage.
 
 At the integral stage of the `ℓ`-adic formalism, where the coefficients are the ring of
-integers `𝒪_E` of an extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`: if `K` and `L` are derived
-complete for the maximal ideal `𝔪_E` and of finite Tor amplitude, then the projection
-formula holds for `f` at `K` and `L`. -/
+integers `𝒪_E` of an extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`: if `K` and `L` are bounded
+constructible, derived complete for the maximal ideal `𝔪_E` and of finite Tor amplitude, then
+the projection formula holds for `f` at `K` and `L`. Constructibility is needed: the proof
+checks the projection map modulo `𝔪_E`, where it is the finite-stage projection formula, and
+concludes by conservativity of the reduction on derived complete objects, which needs both
+sides derived complete; `Rf_! K ⊗ᴸ L` is derived complete for constructible `K` and `L`, but not
+in general. -/
 theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology
       (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))))
+    (hKc : DerivedCategory.boundedConstructible
+      (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) X K)
     (hK : _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K)
     (hKt : DerivedCategory.finiteTorAmplitude
       (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) X K)
+    (hLc : DerivedCategory.boundedConstructible
+      (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) Y L)
     (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L)
     (hLt : DerivedCategory.finiteTorAmplitude
       (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) Y L) :
@@ -235,8 +243,8 @@ ring `Λ` and `f : X ⟶ Y` admitting a compactification, the projection map
 
 `PF : Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)`
 
-of `AlgebraicGeometry.Etale.projectionMap` is an isomorphism of bifunctors on the whole
-unbounded derived categories, with no boundedness, constructibility or Tor amplitude
+of `AlgebraicGeometry.Etale.projectionMapOfCompactification`, for any compactification of `f`,
+is an isomorphism of bifunctors on the whole unbounded derived categories, with no boundedness, constructibility or Tor amplitude
 hypothesis on `K` and `L`.
 
 This is the unbounded form of clause (5) of `prop-functor-package` that the base linearity of
@@ -248,9 +256,17 @@ map `g` one checks on geometric stalks with unbounded proper base change, where 
 `RΓ(X_ȳ, K) ⊗ᴸ M ≅ RΓ(X_ȳ, K ⊗ᴸ M)` for a complex `M` of `Λ`-modules; this holds because
 `RΓ(X_ȳ, -)` has finite cohomological dimension on torsion sheaves, so commutes with the
 colimits reducing `M` to `Λ`. -/
+theorem isIso_projectionMapOfCompactification_of_finite [Finite Λ] {f : X ⟶ Y}
+    (c : Compactification f) :
+    IsIso (projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c) :=
+  sorry
+
+/-- **The projection formula at finite coefficients, unbounded**, for the chosen
+compactification: `AlgebraicGeometry.Etale.isIso_projectionMapOfCompactification_of_finite`
+for `HasCompactification.compactification f`. -/
 theorem isIso_projectionMap_of_finite [Finite Λ] (f : X ⟶ Y) [HasCompactification f] :
     IsIso (projectionMap (ModuleCat.{u + 1} Λ) f) :=
-  sorry
+  isIso_projectionMapOfCompactification_of_finite Λ (HasCompactification.compactification f)
 
 /-- The projection formula at finite coefficients, objectwise: for a finite coefficient ring
 `Λ`, the projection formula holds for `f` at all `K` and `L`.
@@ -290,45 +306,60 @@ theorem hasProjectionFormula_id (X : Scheme.{u})
     HasProjectionFormula A (𝟙 X) K L :=
   sorry
 
-omit [Etale.UpperStarPreservesFlat A] in
+end Coherence
+
+section TorsionCoherence
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y Z : Scheme.{u}}
+
 /-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
 
-The composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the compactly supported direct image. -/
+The composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the compactly supported direct image, for
+torsion coefficients. Comparing the chosen compactification of `f ≫ g` with the one assembled
+from compactifications of `f` and `g` uses the independence of the compactification and
+compact-support base change for the open immersion of the compactification of `g` along the
+proper map of that of `f`; both rest on proper base change, which needs torsion coefficients. -/
 theorem nonempty_iso_rightDerivedLowerShriek_comp (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
-    Nonempty (R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A]) :=
+    Nonempty (R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
+      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) :=
   sorry
 
 /-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
 
 Compatibility of the projection formula with the composition law: if the formula holds for
 `f` at `K` and `Lg^* M`, and for `g` at `Rf_! K` and `M`, then it holds for `f ≫ g` at `K`
-and `M`. This is the objectwise shadow of the blueprint's associativity pentagon; the
-pentagon itself is an identity between canonical transformations and is not stated, see the
-module docstring. -/
+and `M`. For torsion coefficients the projection formula holds for every morphism admitting a
+compactification and all objects (`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`).
+This is the objectwise shadow of the blueprint's associativity pentagon; the pentagon itself is
+an identity between canonical transformations and is not stated, see the module docstring. -/
 theorem hasProjectionFormula_comp (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
-    (hf : HasProjectionFormula A f K ((L((g)^*[A])).obj M))
-    (hg : HasProjectionFormula A g ((R(f)_![A]).obj K) M) :
-    HasProjectionFormula A (f ≫ g) K M :=
-  sorry
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (_hf : HasProjectionFormula (ModuleCat.{u + 1} Λ) f K ((L((g)^*[ModuleCat.{u + 1} Λ])).obj M))
+    (_hg : HasProjectionFormula (ModuleCat.{u + 1} Λ) g ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) M) :
+    HasProjectionFormula (ModuleCat.{u + 1} Λ) (f ≫ g) K M :=
+  hasProjectionFormula_of_finite Λ (f ≫ g) K M
 
 /-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
 
-Independence of the compactification: the formula computed with an arbitrary compactification
-`c` of `f` holds if and only if it holds for the chosen one, i.e. for
-`AlgebraicGeometry.Etale.HasProjectionFormula`. Applying this to two compactifications `c`
-and `c'` shows that the two agree. -/
+Independence of the compactification, for torsion coefficients: the formula computed with an
+arbitrary compactification `c` of `f` holds if and only if it holds for the chosen one, i.e. for
+`AlgebraicGeometry.Etale.HasProjectionFormula`. For torsion coefficients both hold, for every
+compactification (`AlgebraicGeometry.Etale.isIso_projectionMapOfCompactification_of_finite`). -/
 theorem hasProjectionFormulaOfCompactification_iff {f : X ⟶ Y} [HasCompactification f]
     (c : Compactification f)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    HasProjectionFormulaOfCompactification A c K L ↔ HasProjectionFormula A f K L :=
-  sorry
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L ↔
+      HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L := by
+  have := isIso_projectionMapOfCompactification_of_finite Λ c
+  have := isIso_projectionMapOfCompactification_of_finite Λ (HasCompactification.compactification f)
+  exact ⟨fun _ ↦ inferInstanceAs (IsIso (((projectionMapOfCompactification _ _).app K).app L)),
+    fun _ ↦ inferInstanceAs (IsIso (((projectionMapOfCompactification _ c).app K).app L))⟩
 
-end Coherence
+end TorsionCoherence
 
 end Etale
 

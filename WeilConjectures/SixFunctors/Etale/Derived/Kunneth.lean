@@ -227,7 +227,8 @@ theorem nonempty_iso_externalProduct_closedImmersion (f : X ⟶ B) (g : Y ⟶ B)
 
 /-- Blueprint `sk-thm-product`: Supported product over a relative base.
 
-Let `f : X ⟶ B` and `g : Y ⟶ B` be separated of finite type, `h = f ×_B g`, and let
+Let `Λ` be a finite ring whose exponent is invertible on `B`, a scheme of finite type over a
+field `k`. Let `f : X ⟶ B` and `g : Y ⟶ B` be separated of finite type, `h = f ×_B g`, and let
 `i : Z ⟶ X`, `j : W ⟶ Y` be closed immersions, with product
 `i ×_B j : Z ×_B W ⟶ X ×_B Y`. For `K` in `Dctf(X, A)` and `L` in `Dctf(Y, A)`,
 
@@ -238,26 +239,33 @@ This is the relative product theorem
 complexes `i_* i^* K` and `j_* j^* L`, rewritten with
 `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion`. Over `B = Spec k` it
 is the Künneth formula for the compactly supported cohomology of `Z ×_k W`. -/
-theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion
+theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] {k : Type u} [Field k] (aB : B ⟶ Spec (.of k))
+    [LocallyOfFiniteType aB] [QuasiCompact aB] [HasInvertibleExponent Λ B]
     (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f] [HasCompactification g]
     [QuasiCompact f] [QuasiCompact g] [HasCompactification (pullback.toBase f g)]
     {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    (hK : DerivedCategory.constructibleFiniteTor A X K)
-    (hL : DerivedCategory.constructibleFiniteTor A Y L) :
-    Nonempty ((R(f)_![A]).obj ((R((i)_*[A])).obj ((L((i)^*[A])).obj K)) ⊗
-        (R(g)_![A]).obj ((R((j)_*[A])).obj ((L((j)^*[A])).obj L)) ≅
-      (R(pullback.toBase f g)_![A]).obj
-        ((R((pullback.mapOverBase i j f g)_*[A])).obj
-          ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K L)))) := by
-  obtain ⟨e⟩ := nonempty_iso_externalProduct_closedImmersion A f g i j K L
-  obtain ⟨k⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct A f g
-    (constructibleFiniteTor_rightDerivedLowerStar A i
-      (constructibleFiniteTor_leftDerivedUpperStar A i hK))
-    (constructibleFiniteTor_rightDerivedLowerStar A j
-      (constructibleFiniteTor_leftDerivedUpperStar A j hL))
-  exact ⟨k.symm ≪≫ (R(pullback.toBase f g)_![A]).mapIso e.symm⟩
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
+    Nonempty ((R(f)_![ModuleCat.{u + 1} Λ]).obj ((R((i)_*[ModuleCat.{u + 1} Λ])).obj
+          ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K)) ⊗
+        (R(g)_![ModuleCat.{u + 1} Λ]).obj ((R((j)_*[ModuleCat.{u + 1} Λ])).obj
+          ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L)) ≅
+      (R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).obj
+        ((R((pullback.mapOverBase i j f g)_*[ModuleCat.{u + 1} Λ])).obj
+          ((L((pullback.mapOverBase i j f g)^*[ModuleCat.{u + 1} Λ])).obj
+            (externalProduct _ f g K L)))) := by
+  have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom f
+  have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom g
+  obtain ⟨e⟩ := nonempty_iso_externalProduct_closedImmersion _ f g i j K L
+  obtain ⟨k⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct _ f g
+    (constructibleFiniteTor_rightDerivedLowerStar Λ (i ≫ f ≫ aB) (f ≫ aB) i rfl
+      (constructibleFiniteTor_leftDerivedUpperStar _ i hK))
+    (constructibleFiniteTor_rightDerivedLowerStar Λ (j ≫ g ≫ aB) (g ≫ aB) j rfl
+      (constructibleFiniteTor_leftDerivedUpperStar _ j hL))
+  exact ⟨k.symm ≪≫ (R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).mapIso e.symm⟩
 
 /-- Blueprint `sk-thm-product`: Supported product over a relative base.
 
@@ -475,10 +483,14 @@ recorded as the assertion that it is an isomorphism. All external products are t
   identifications `RHom(Λ_X, M) = M` and `Λ_X ⊠ N = p_Y^* N`.
 
 Only `Ku_!` is built from isomorphisms; that `α`, `β` and `κ` are invertible is the content of
-`AlgebraicGeometry.Etale.hasKunnethComparisons`, i.e. of `sk-thm-sf-kunneth-verdier`. -/
+`AlgebraicGeometry.Etale.hasKunnethComparisons`, i.e. of `sk-thm-sf-kunneth-verdier`, which
+holds over a field for finite coefficients of invertible exponent. Over a more general base the
+comparisons fail: over `S = 𝔸¹_k`, with `E₁ = E₂ = i_*Λ` the skyscraper at the origin and
+`N₁ = N₂ = Λ_S`, the source of `β` is `i_*Λ(-2)[-4]` and its target `i_*Λ(-1)[-2]`. -/
 structure HasKunnethComparisons (S : Scheme.{u}) : Prop where
   /-- The `!`-Künneth map `Ku_!` is an isomorphism. -/
   kunnethShriek : ∀ {X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S)
+      [LocallyOfFiniteType b₁] [QuasiCompact b₁] [LocallyOfFiniteType b₂] [QuasiCompact b₂]
       (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂) [HasCompactification f₁] [HasCompactification f₂]
       [QuasiCompact f₁] [QuasiCompact f₂]
       [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
@@ -491,9 +503,12 @@ structure HasKunnethComparisons (S : Scheme.{u}) : Prop where
         externalProduct A b₁ b₂ ((R(f₁)_![A]).obj M₁) ((R(f₂)_![A]).obj M₂))
   /-- The exceptional Künneth map `α` is an isomorphism. -/
   exceptional : ∀ {X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S)
+      [LocallyOfFiniteType b₁] [QuasiCompact b₁] [LocallyOfFiniteType b₂] [QuasiCompact b₂]
       (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂) [HasCompactification f₁] [HasCompactification f₂]
       [QuasiCompact f₁] [QuasiCompact f₂]
       [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
+      [(R(f₁)_![A]).IsLeftAdjoint] [(R(f₂)_![A]).IsLeftAdjoint]
+      [(R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![A]).IsLeftAdjoint]
       {N₁ : _root_.DerivedCategory (Sheaf Y₁.smallEtaleTopology A)}
       {N₂ : _root_.DerivedCategory (Sheaf Y₂.smallEtaleTopology A)},
       DerivedCategory.constructibleFiniteTor A Y₁ N₁ →
@@ -519,6 +534,7 @@ structure HasKunnethComparisons (S : Scheme.{u}) : Prop where
   kunnethVerdier : ∀ {X Y : Scheme.{u}} (a : X ⟶ S) (b : Y ⟶ S)
       [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]
       [HasCompactification b] [QuasiCompact b] [HasCompactification (pullback.fst a b)]
+      [(R(b)_![A]).IsLeftAdjoint] [(R(pullback.fst a b)_![A]).IsLeftAdjoint]
       {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
       {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)},
       DerivedCategory.constructibleFiniteTor A X M →
@@ -534,14 +550,18 @@ isomorphisms: besides the `!`-Künneth map `Ku_!`, which is an isomorphism by co
 this asserts the invertibility of the exceptional Künneth map `α`, of the external Hom map
 `β`, and of the Künneth–Verdier map `κ`.
 
-The headline case is `kunnethVerdier`: for `X` and `Y` separated of finite type over `S`,
+It is stated over a field `k`, for a finite coefficient ring `Λ` whose exponent is invertible
+in `k`, as in the blueprint. The headline case is `kunnethVerdier`: for `X` and `Y` separated of
+finite type over `S = Spec k`,
 with projections `p_X : X ×_S Y ⟶ X` and `p_Y : X ×_S Y ⟶ Y`, and for `M` in `Dctf(X, A)`
 and `N` in `Dctf(Y, A)`,
 
 `κ : M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`
 
 on `X ×_S Y`, where `𝔻_Y = RHom(-, ω_Y)` is the Verdier dual relative to `b : Y ⟶ S`. -/
-theorem hasKunnethComparisons (S : Scheme.{u}) : HasKunnethComparisons A S :=
+theorem hasKunnethComparisons (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (k : Type u)
+    [Field k] [HasInvertibleExponent Λ (Spec (.of k))] :
+    HasKunnethComparisons (ModuleCat.{u + 1} Λ) (Spec (.of k)) :=
   sorry
 
 end Etale

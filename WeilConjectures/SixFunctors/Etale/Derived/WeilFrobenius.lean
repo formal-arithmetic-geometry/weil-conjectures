@@ -349,7 +349,7 @@ lemma IsWeilMorphism.rightDerivedLowerShriek_map [QuasiCompact a] (sq : IsPullba
     {f : K ⟶ L} (hf : IsWeilMorphism g φK φL f) :
     IsWeilMorphism h (lowerShriekWeilDatum sq φK) (lowerShriekWeilDatum sq φL)
       ((R(a)_![ModuleCat.{u + 1} Λ]).map f) := by
-  have := (rightDerivedLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq).naturality f
+  have := (rightDerivedLowerShriekBaseChangeMap Λ sq).naturality f
   simp only [Functor.comp_map] at this
   unfold IsWeilMorphism lowerShriekWeilDatum at *
   rw [reassoc_of% this, ← Functor.map_comp, hf, Functor.map_comp, Category.assoc]
