@@ -2,7 +2,7 @@
  "id": "def-weil-pbc-universal-first-order-thickening",
  "kind": "definition",
  "title": "Universal first order thickening of a scheme over another",
- "statement": "Let $h:Z\\to X$ be a morphism of schemes [def-pc-scheme]. A *universal first order thickening of $Z$ over $X$* is a first order thickening $Z\\subset Z'$ over $X$ [def-sbc-first-order-thickening], that is a scheme $Z'$ with a morphism $h':Z'\\to X$ and a closed immersion $i_Z:Z\\to Z'$ whose ideal sheaf has square zero, with $h'\\circ i_Z=h$ [def-weil-scheme-over-base], such that the following holds: for every first order thickening $T\\subset T'$ over $X$ (closed immersion $i_T:T\\to T'$, structure morphism $b:T'\\to X$; $T$ and $T'$ arbitrary schemes, not necessarily affine) and every morphism $a:T\\to Z$ with $h\\circ a=b\\circ i_T$, there is exactly one morphism $a':T'\\to Z'$ with $h'\\circ a'=b$ and $a'\\circ i_T=i_Z\\circ a$.",
+ "statement": "Let $h:Z\\to X$ be a morphism of schemes [def-pc-scheme]. A *universal first order thickening of $Z$ over $X$* is a first order thickening $Z\\subset Z'$ over $X$ [def-sbc-first-order-thickening], that is a scheme $Z'$ with a morphism $h':Z'\\to X$ and a closed immersion $i_Z:Z\\to Z'$ [def-weil-closed-immersion] whose ideal sheaf $\\mathcal I\\subseteq\\mathcal O_{Z'}$ [def-sbc-closed-immersion-ideal-sheaf] has square zero, with $h'\\circ i_Z=h$ [def-weil-scheme-over-base], such that the following holds: for every first order thickening $T\\subset T'$ over $X$ (closed immersion $i_T:T\\to T'$ whose ideal sheaf has square zero, structure morphism $b:T'\\to X$, $T$ over $X$ through $b\\circ i_T$; $T$ and $T'$ arbitrary schemes, not necessarily affine) and every morphism $a:T\\to Z$ with $h\\circ a=b\\circ i_T$, there is exactly one morphism $a':T'\\to Z'$ with $h'\\circ a'=b$ and $a'\\circ i_T=i_Z\\circ a$. *Uniqueness up to unique isomorphism:* if $(Z'_1,i_1:Z\\to Z'_1,h'_1:Z'_1\\to X)$ and $(Z'_2,i_2,h'_2)$ are two universal first order thickenings of $Z$ over $X$, there is exactly one morphism $\\varphi:Z'_1\\to Z'_2$ with $h'_2\\circ\\varphi=h'_1$ and $\\varphi\\circ i_1=i_2$, and $\\varphi$ is an isomorphism of schemes over $X$. (Existence is not part of the definition: in general a universal first order thickening need not exist; it exists when $h$ is formally unramified, Stacks Lemma 04F3, and Stacks Definition 04F4 (1) calls that one *the* universal first order thickening.)",
  "source": {
   "document": "literature/stacks-project/more-morphisms.tex",
   "place": "More on Morphisms, Section 04F2 (section-universal-thickening), opening paragraph; Definition 04F4 (definition-universal-thickening) (1)"
@@ -10,11 +10,51 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-sbc-first-order-thickening",
+  "def-weil-scheme-over-base",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "*The notions are well defined for arbitrary schemes.* A first order thickening over $X$ is defined in [def-sbc-first-order-thickening], items (2) and (4), for an arbitrary scheme $T'$ and an arbitrary closed immersion $i_T:T\\to T'$ [def-weil-closed-immersion] whose ideal sheaf $\\mathcal I_T=\\ker(\\mathcal O_{T'}\\to i_{T,*}\\mathcal O_T)$ [def-sbc-closed-immersion-ideal-sheaf] satisfies $\\mathcal I_T^2=0$, together with a morphism $b:T'\\to X$, $T$ being over $X$ through $b\\circ i_T$; affineness is only required in the separate notion 'of affine schemes', which is not used here. So $Z\\subset Z'$ with $h'$ is a first order thickening over $X$ exactly when $i_Z$ is a closed immersion with square-zero ideal sheaf and $h'\\circ i_Z=h$, i.e. $i_Z$ is a morphism of schemes over $X$ [def-weil-scheme-over-base] when $Z$ is over $X$ through $h$. In the universal property, $h\\circ a=b\\circ i_T$ says that $a:T\\to Z$ is a morphism over $X$, and the two conditions on $a'$ say that $a':T'\\to Z'$ is a morphism over $X$ and that $(a,a')$ commutes with the closed immersions (Stacks: '$(a,a')$ is a morphism of thickenings over $X$'). All are equalities of composites of morphisms of schemes [def-pc-scheme], so the defining condition is a well-formed property of the triple $(Z',i_Z,h')$, quantified over all first order thickenings over $X$ and all $a$; nothing is chosen.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-weil-scheme-over-base",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Section 04F2 (section-universal-thickening), opening paragraph; Definition 37.2.1 (04EX) for first order thickenings over a base"
+   }
+  },
+  {
+   "text": "*Uniqueness up to unique isomorphism.* Let $(Z'_1,i_1,h'_1)$ and $(Z'_2,i_2,h'_2)$ be universal first order thickenings of $Z$ over $X$. Each $Z\\subset Z'_k$ is itself a first order thickening over $X$ [def-sbc-first-order-thickening], with $b=h'_k$, and $a=\\mathrm{id}_Z$ satisfies $h\\circ\\mathrm{id}_Z=h=h'_k\\circ i_k$. (i) Apply the universal property of $Z'_2$ to the thickening $Z\\subset Z'_1$, $b=h'_1$, $a=\\mathrm{id}_Z$: there is exactly one $\\varphi:Z'_1\\to Z'_2$ with $h'_2\\circ\\varphi=h'_1$ and $\\varphi\\circ i_1=i_2\\circ\\mathrm{id}_Z=i_2$. This is the existence and uniqueness of $\\varphi$. (ii) Symmetrically there is $\\psi:Z'_2\\to Z'_1$ with $h'_1\\circ\\psi=h'_2$ and $\\psi\\circ i_2=i_1$. (iii) $\\psi\\circ\\varphi:Z'_1\\to Z'_1$ satisfies $h'_1\\circ\\psi\\circ\\varphi=h'_2\\circ\\varphi=h'_1$ and $\\psi\\circ\\varphi\\circ i_1=\\psi\\circ i_2=i_1$; so does $\\mathrm{id}_{Z'_1}$. The universal property of $Z'_1$ applied to the thickening $Z\\subset Z'_1$ itself ($b=h'_1$, $a=\\mathrm{id}_Z$) allows exactly one such morphism, so $\\psi\\circ\\varphi=\\mathrm{id}_{Z'_1}$. Likewise $\\varphi\\circ\\psi=\\mathrm{id}_{Z'_2}$. Hence $\\varphi$ is an isomorphism of schemes, and an isomorphism over $X$ [def-weil-scheme-over-base] since $h'_2\\circ\\varphi=h'_1$.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Section 04F2, opening paragraph ('if a universal first order thickening exists, then it is unique up to unique isomorphism'), and proof of Lemma 04F3, first general remark; the argument from the universal property written out by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-first-order-thickening",
+  "def-weil-closed-immersion",
   "def-weil-scheme-over-base"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Section 04F2 (section-universal-thickening), opening paragraph, and Definition 04F4 (1); the uniqueness argument, which Stacks only asserts, written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +83,38 @@
    "results": "Morphisms/FormallyUnramified.lean: instance (priority := 900) [IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f (:79), IsStableUnderBaseChange @FormallyUnramified (:120), FormallyUnramified.hom_ext (:193, Stacks 04F1, at most one lift along a closed immersion with nilpotent ideal sheaf), FormallyUnramified.of_hom_ext (:240, lifting uniqueness on affine square-zero thickenings Spec(R/I) -> Spec R implies FormallyUnramified); no 'conormal' and no universal first order thickening anywhere in Mathlib/AlgebraicGeometry; 'thickening' elsewhere only metric (Topology/MetricSpace/Thickening) and a docstring in RingTheory/Smooth/Basic.lean:329",
    "date": "2026-10-10",
    "verdict": "no match: Mathlib has no universal first order thickening and no conormal sheaf of a morphism of schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "closed immersion of schemes with square zero ideal sheaf, universal among first order thickenings over a base scheme",
+   "results": "AlgebraicGeometry.IsClosedImmersion (+ .mk, .of_isPreimmersion, .isIso_iff_ker_eq_bot, .iff_isFinite_and_mono), IsIntegralHom.instOfIsClosedImmersion, IsImmersion.instOfIsClosedImmersion (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion/Immersion/Finite/Integral)",
+   "date": "2026-10-10",
+   "verdict": "no match: closed immersions only, no square-zero thickening and no universal one"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Thickening\", AlgebraicGeometry.Scheme",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "universal first order infinitesimal thickening of a morphism of schemes; unique lift from square-zero thickenings",
+   "results": "AlgebraicGeometry.FormallyUnramified, Scheme.Hom.liftQuotient, IsClosedImmersion.lift, formallyUnramified_iff, IsEtale, FormallyUnramified.formallyUnramified_appLE, instHasRingHomPropertyFormallyUnramified",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln -i 'thickening' Mathlib/AlgebraicGeometry Mathlib/RingTheory; grep -rn -i 'universal.*thickening\\|thickening.*universal\\|SquareZero\\|IsSquareZero' Mathlib/AlgebraicGeometry",
+   "results": "thickening only in AlgebraicGeometry/Morphisms/FormallyUnramified.lean and RingTheory/Smooth/Basic.lean (docstrings); no universal thickening, no square-zero closed subscheme notion",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +134,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-universal-first-order-thickening",
+  "worker": "stage1",
+  "summary": "Checked against Stacks More on Morphisms Section 04F2 (opening paragraph), proof of Lemma 04F3 (first general remark) and Definition 04F4 (1). The node defines the property 'a universal first order thickening' from the section opening, not 'the' thickening of 04F4 (1) (which presupposes existence, Lemma 04F3 = lem-weil-pbc-universal-first-order-thickening-exists; not cited, it would close a cycle). The cited def-sbc-first-order-thickening (items (2),(4)) defines first order thickenings over a base for arbitrary schemes, so the 'not necessarily affine' clause is supported; def-weil-closed-immersion and def-sbc-closed-immersion-ideal-sheaf added to stmt_deps since the statement spells out closed immersion and square-zero ideal sheaf. Added the clause 'unique up to unique isomorphism' (Stacks' remark in 04F2), used by the citers def-weil-pbc-conormal-sheaf-formally-unramified and lem-weil-pbc-flat-unramified-formally-etale step 4 (currently through the existence lemma, whose statement also asserts it). Two elementary steps: well-formedness of the notions for arbitrary schemes; uniqueness up to unique isomorphism from the universal property (apply it to Z in Z'_1 with a = id). No new nodes. Mathlib re-searched with LeanSearch, Loogle, LeanFinder and grep: no universal first order thickening, no square-zero thickening of schemes."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Definition node, two elementary steps: the notions are well defined for arbitrary schemes (def-sbc-first-order-thickening (2),(4) covers non-affine thickenings), and uniqueness up to unique isomorphism from the universal property (written out). Statement: uniqueness clause added (used by the citers conormal-sheaf-formally-unramified and flat-unramified-formally-etale; the existence lemma also states it), existence explicitly excluded; citations for closed immersion and ideal sheaf added. Correct."
+ }
 }
