@@ -17,6 +17,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+public import WeilConjectures.RingTheory.RegularLocalRing.UniqueFactorization
 
 /-!
 # Regular schemes
@@ -43,6 +44,10 @@ injection for the Brauer group.
   is irreducible.
 - `AlgebraicGeometry.GeometricallyIrreducible.of_smooth_of_geometricallyConnected`: a smooth
   morphism with geometrically connected fibres has geometrically irreducible fibres.
+- `AlgebraicGeometry.IsRegular.isRegularRing_stalk`: the local rings of a regular scheme are
+  regular rings, i.e. all their localizations at primes are regular local rings.
+- `AlgebraicGeometry.IsRegular.uniqueFactorizationMonoid_stalk`: the local rings of a regular
+  scheme are unique factorization domains.
 -/
 
 @[expose] public section
@@ -212,5 +217,38 @@ theorem GeometricallyReduced.of_smooth {X S : Scheme.{u}} (f : X ⟶ S) [Smooth 
     have := LocallyOfFiniteType.isLocallyNoetherian snd
     have := IsRegular.of_smooth snd
     exact isReduced_of_isReduced_stalk _
+
+
+/-- The local rings of a regular scheme are regular rings: the localization of `𝒪_{X,x}` at a
+prime is the local ring of `X` at a generization of `x`. Concretely, if `U ∋ x` is an affine open,
+then `𝒪_{X,x}` is a localization of `Γ(X, U)`, so its localization at a prime `q` is the
+localization of `Γ(X, U)` at the prime `P` below `q`, which is the stalk at the point of `U`
+corresponding to `P`. -/
+theorem IsRegular.isRegularRing_stalk {X : Scheme.{u}} [IsRegular X] (x : X) :
+    IsRegularRing (X.presheaf.stalk x) := by
+  obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
+    X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+  let := X.presheaf.algebra_section_stalk ⟨x, hxU⟩
+  have := hU.isLocalization_stalk ⟨x, hxU⟩
+  rw [isRegularRing_iff]
+  intro q _
+  have := IsLocalization.isLocalization_isLocalization_atPrime_isLocalization
+    (hU.primeIdealOf ⟨x, hxU⟩).asIdeal.primeCompl (Localization.AtPrime q) q
+  let y : PrimeSpectrum Γ(X, U) :=
+    ⟨q.comap (algebraMap Γ(X, U) (X.presheaf.stalk x)), inferInstance⟩
+  have hy : hU.fromSpec y ∈ U := by
+    rw [← SetLike.mem_coe, ← hU.range_fromSpec]
+    exact Set.mem_range_self y
+  let := X.presheaf.algebra_section_stalk ⟨hU.fromSpec y, hy⟩
+  have := hU.isLocalization_stalk' y hy
+  exact IsRegularLocalRing.of_ringEquiv (IsLocalization.algEquiv y.asIdeal.primeCompl
+    (X.presheaf.stalk (hU.fromSpec y)) (Localization.AtPrime q)).toRingEquiv
+
+/-- **Auslander–Buchsbaum theorem** for schemes: the local rings of a regular scheme are unique
+factorization domains. -/
+theorem IsRegular.uniqueFactorizationMonoid_stalk {X : Scheme.{u}} [IsRegular X] (x : X) :
+    UniqueFactorizationMonoid (X.presheaf.stalk x) :=
+  have := isRegularRing_stalk x
+  IsRegularLocalRing.uniqueFactorizationMonoid _
 
 end AlgebraicGeometry
