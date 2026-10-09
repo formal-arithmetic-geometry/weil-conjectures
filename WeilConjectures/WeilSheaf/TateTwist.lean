@@ -159,6 +159,7 @@ namespace WeilComplex
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 variable (k₀ l X) in
 /-- The Tate twist `K ↦ K(m) = K ⊗^L ℚ̄_ℓ(m)` of Weil complexes on a `k₀`-scheme `X`, the derived
