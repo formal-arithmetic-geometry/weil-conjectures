@@ -2,10 +2,10 @@
  "id": "lem-weil-pbc-etale-stratified-finite",
  "kind": "statement",
  "title": "Etale morphisms become finite etale on a constructible stratification",
- "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $j:U\\to X$ be an etale morphism [def-weil-etale-morphism] with $U$ quasi-compact and quasi-separated. Then there exists a finite partition $X=\\coprod_i X_i$ by constructible locally closed subschemes [def-weil-constructible-subset] such that each base change $U_i:=U\\times_X X_i\\to X_i$ is finite etale [def-weil-pbc-finite-etale-category]. The fibre products are those of [def-pc-fibre-product]. This is Stacks Project Lemma 59.70.8, Tag 03S9 (lemma-etale-stratified-finite).",
+ "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $j:U\\to X$ be an etale morphism [def-weil-etale-morphism] with $U$ quasi-compact and quasi-separated. Then there exists a finite partition $X=\\coprod_i X_i$ by constructible locally closed subschemes [def-weil-constructible-subset] such that each base change $U_i:=U\\times_X X_i\\to X_i$ is finite etale [def-weil-pbc-finite-etale-category]. The fibre products are those of [def-pc-fibre-product]. This is Stacks Project Lemma Tag 03S9 (lemma-etale-stratified-finite).",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 03S9 (lemma-etale-stratified-finite), line 12034"
+  "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), line 12034"
  },
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
@@ -14,9 +14,73 @@
   "def-weil-pbc-finite-etale-category",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First suppose that $j:U\\to X$ is separated. Since an etale morphism is flat, locally of finite presentation, and quasi-finite, the separated stratification theorem gives a finite partition of $X$ by constructible locally closed strata whose base changes are finite locally free. Etaleness is preserved by base change, and a finite locally free etale morphism is finite etale, so this is the required partition.",
+   "uses": [
+    "lem-weil-pbc-etale-separated-stratified-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 07RZ (more-morphisms-lemma-stratify-flat-fp-qf), proof and conclusion; etale properties and finite-etale conclusion"
+   }
+  },
+  {
+   "text": "Over an affine base $X$, choose a finite affine open covering $U=\\bigcup_aU_a$, and apply the separated case to every $U_a\\to X$ and every overlap $U_a\\cap U_b\\to X$. A common refinement of the finitely many resulting partitions, followed by refinement by affine strata, gives a finite constructible locally closed affine partition of $X$ for which all chart and overlap base changes are finite etale. The finite-cover gluing lemma then says that $V_i:=U\\times_XX_i\\to X_i$ is separated for every stratum.",
+   "uses": [
+    "lem-weil-pbc-etale-affine-cover-gluing",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "lemma-constructible-common-refinement",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, second paragraph, lines 12045-12050"
+   }
+  },
+  {
+   "text": "Apply the separated case once more to each separated etale morphism $V_i\\to X_i$ from the preceding step and take a common refinement of the resulting finite partitions. Each refined base change is finite etale, and the finite common refinement remains a finite constructible locally closed partition of the affine base.",
+   "uses": [
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lemma-constructible-common-refinement",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, second paragraph, lines 12050-12061"
+   }
+  },
+  {
+   "text": "For the original qcqs base $X$, choose a finite affine open covering. Perform the preceding affine construction on each member. The locality/gluing lemma assembles the finitely many local partitions into one finite constructible locally closed partition of $X$, preserving the finite-etale base-change property on every piece.",
+   "uses": [
+    "lem-weil-pbc-etale-stratification-local-gluing",
+    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, second paragraph, line 12045, with the finite affine-cover locality made explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-separated-stratified-finite",
+  "lem-weil-pbc-etale-affine-cover-gluing",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+  "lem-weil-pbc-etale-stratification-local-gluing",
+  "lemma-constructible-common-refinement",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03S9 (lemma-etale-stratified-finite), proof at lines 12042-12061"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,7 +105,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +125,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-stratified-finite",
+  "worker": "stage1",
+  "summary": "Split Tag 03S9 into the separated case (More on Morphisms 07RZ), the finite affine chart and overlap gluing reduction on an affine base, and a final separated-case refinement. The proof explicitly records base change, common refinement, affine refinement, and the finite-etale gluing argument; two reusable non-Mathlib statements were created with three kinds of Mathlib searches each."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 4th delivery meets the third return: the locality node is now a concrete statement, the separated case (07RZ) and the affine-cover gluing have Stacks places. Route along 03S9 correct (separated case, charts and overlaps over an affine base with common refinement and affine strata, separatedness of the glued piece, locality over a finite affine cover). Stage-3 note: lem-weil-pbc-etale-affine-cover-gluing packages the whole of step 2; the reusable content is the gluing lemma 'a finite open cover whose pairwise intersections are proper over X makes U -> X separated'. Proof-hint sentence removed from the locality node by L after merge."
+ }
 }
