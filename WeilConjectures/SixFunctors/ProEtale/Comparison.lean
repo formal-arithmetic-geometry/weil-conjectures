@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 
 /-!
@@ -91,7 +93,12 @@ theorem nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar {U V : Schem
     (u : U ⟶ V) [QuasiCompact u] [QuasiSeparated u] :
     Nonempty (R+(Etale.lowerStar A u) ⋙ D+(comparisonUpperStar A V) ≅
       D+(comparisonUpperStar A U) ⋙ R+(ProEtale.lowerStar A u)) :=
-  sorry
+  have := isIso_lowerStarComparisonUpperStarBaseChange u A
+  have := Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic
+    (asIso (lowerStarComparisonUpperStarBaseChange u A))
+    (fun I _ ↦ rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective u A I)
+  ⟨asIso (Functor.rightDerivedFunctorPlusBaseChange
+    (asIso (lowerStarComparisonUpperStarBaseChange u A)))⟩
 
 end ProEtale
 

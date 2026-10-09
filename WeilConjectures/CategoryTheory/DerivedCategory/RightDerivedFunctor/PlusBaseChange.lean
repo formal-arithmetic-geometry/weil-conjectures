@@ -97,4 +97,47 @@ noncomputable def rightDerivedBaseChange (e : G ⋙ γ ≅ β ⋙ G') (p : ℕ) 
       (G'.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.homologyFunctor C' p) ≫
     Functor.whiskerLeft β (G'.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p).hom
 
+/-- **The base change morphism is invertible when `β` sends injectives to `G'`-acyclics.** If `G'`
+is left exact and `β` sends injective objects to `G'`-acyclic objects, then the base change
+morphism `R⁺G ⋙ γ⁺ ⟶ β⁺ ⋙ R⁺G'` attached to `e : G ⋙ γ ≅ β ⋙ G'` is an isomorphism. On a
+bounded below complex `T` of injectives it is the composite of `γ G(T) ≅ G' β(T)` with the unit
+`G' β(T) ⟶ R⁺G'(β T)`, which is invertible since `β T` is a bounded below complex of
+`G'`-acyclic objects. -/
+theorem isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic [PreservesFiniteLimits G']
+    (e : G ⋙ γ ≅ β ⋙ G') (h : ∀ (I : B) [Injective I], G'.rightAcyclic (β.obj I)) :
+    IsIso (rightDerivedFunctorPlusBaseChange e) := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro X
+  -- represent `X` by a bounded below complex of injectives `T`
+  obtain ⟨K, ⟨eK⟩⟩ : ∃ K : HomotopyCategory.Plus B,
+      Nonempty (DerivedCategory.Plus.Qh.obj K ≅ X) :=
+    ⟨_, ⟨DerivedCategory.Plus.Qh.objObjPreimageIso X⟩⟩
+  obtain ⟨M, rfl⟩ := HomotopyCategory.Plus.quotient_obj_surjective K
+  obtain ⟨a, _⟩ := M.2
+  obtain ⟨T, _, i, hi⟩ := CochainComplex.Plus.exists_quasiIso_injective M a
+  let T' := (InjectiveObject.ι B).mapCochainComplexPlus.obj T
+  have : ∀ n, Injective (T'.obj.X n) := fun n ↦ (T.obj.X n).2
+  have : IsIso (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient B).map i)) :=
+    Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso B) _
+      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hi)
+  rw [← NatTrans.isIso_app_iff_of_iso _ eK,
+    NatTrans.isIso_app_iff_of_iso _
+      (asIso (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient B).map i)))]
+  set K' := (HomotopyCategory.Plus.quotient B).obj T'
+  have hK' : ∀ n : ℤ, Injective (K'.obj.as.X n) := fun n ↦ (T.obj.X n).2
+  have h₁ : IsIso (G.rightDerivedFunctorPlusUnit.app K') := inferInstance
+  let LT : CochainComplex.Plus B' := ⟨(β.mapHomotopyCategoryPlus.obj K').obj.as,
+    (HomotopyCategory.plus_quotient_obj_iff _).1 (β.mapHomotopyCategoryPlus.obj K').property⟩
+  have h₂ : IsIso (G'.rightDerivedFunctorPlusUnit.app (β.mapHomotopyCategoryPlus.obj K')) :=
+    G'.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic LT (fun n ↦ h (T'.obj.X n))
+  have hfac := congr_app (rightDerivedFunctorPlusBaseChange_fac e) K'
+  have h₃ : IsIso ((rightDerivedFunctorPlusBaseChangeAux e).app K') := by
+    dsimp [rightDerivedFunctorPlusBaseChangeAux]
+    infer_instance
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Category.comp_id, Functor.whiskerLeft_app] at hfac
+  rw [← hfac] at h₃
+  exact IsIso.of_isIso_comp_left (γ.mapDerivedCategoryPlus.map
+    (G.rightDerivedFunctorPlusUnit.app K')) _
+
 end CategoryTheory.Functor
