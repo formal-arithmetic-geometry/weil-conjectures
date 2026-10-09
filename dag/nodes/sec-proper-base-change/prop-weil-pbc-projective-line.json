@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Let $S$ be a scheme, $X=\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ [def-nagata-projective-space-base-change] and $p:X\\to S$ the projection. The morphism $p$ is proper by [lemma-nagata-projective-space-base-change-proper], so $\\mathrm{PBC}(p)$ of [def-weil-pbc-property] is defined, and by the implication (2)$\\Rightarrow$(1) of [lemma-weil-pbc-property-iff-acyclicity] it suffices to prove $\\mathrm{IA}_r(p)$ of [def-weil-pbc-injective-acyclicity-property] for every prime $r$. So fix a prime $r$, a morphism $g:T\\to S$, the cartesian square [def-weil-pbc-cartesian-square] with $X'=X\\times_ST$, $p'=f':X'\\to T$, $g':X'\\to X$, and an injective sheaf $I$ of $\\mathbf F_r$-modules on $X_{\\Et}$; we must show $R^qp'_*g'^{-1}I=0$ for $q>0$. By [lemma-nagata-projective-space-base-change-pullback] the square with $\\mathbf P^1_T\\to\\mathbf P^1_S$ on top is cartesian, so we may take $X'=\\mathbf P^1_T$ with $p'$ its projection, which is the setting of the geometric-stalk lemma used in the next step.",
+   "text": "Let $S$ be a scheme, $X=\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ [def-nagata-projective-space-base-change] and $p:X\\to S$ the projection. The morphism $p$ is proper by [lemma-nagata-projective-space-base-change-proper], so $\\mathrm{PBC}(p)$ of [def-weil-pbc-property] is defined, and by the implication (2)$\\Rightarrow$(1) of [lemma-weil-pbc-property-iff-acyclicity] it suffices to prove $\\mathrm{IA}_r(p)$ of [def-weil-pbc-injective-acyclicity-property] for every prime $r$. So fix a prime $r$, a morphism $g:T\\to S$, the cartesian square [def-weil-pbc-cartesian-square] with $X'=X\\times_ST$, $p'=f':X'\\to T$, $g':X'\\to X$, and an injective sheaf $I$ of $\\mathbf F_r$-modules on $X_{\\Et}$; we must show $R^qp'_*g'^{-1}I=0$ for $q>0$. By [lemma-nagata-projective-space-base-change-pullback] the square with $\\mathbf P^1_T\\to\\mathbf P^1_S$ on top is cartesian, so we may take $X'=\\mathbf P^1_T$ with $p'$ its projection, which is the setting of the geometric-stalk lemma used in the next step. (In the Lean this reduction is [lem-weil-pbc-injective-acyclicity-bounded-below], the implication (2)$\\Rightarrow$(1) stated for bounded below complexes with torsion cohomology and any coefficient ring.)",
    "uses": [
     "def-nagata-projective-space-base-change",
     "lemma-nagata-projective-space-base-change-proper",
@@ -21,7 +21,8 @@
     "lemma-weil-pbc-property-iff-acyclicity",
     "def-weil-pbc-injective-acyclicity-property",
     "def-weil-pbc-cartesian-square",
-    "lemma-nagata-projective-space-base-change-pullback"
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lem-weil-pbc-injective-acyclicity-bounded-below"
    ],
    "elementary": false,
    "source": {
@@ -30,12 +31,13 @@
    }
   },
   {
-   "text": "Let $F$ be any torsion abelian sheaf on $X_{\\Et}$ [def-weil-pbc-etale-sheaves]; the case needed below is the underlying abelian sheaf of $I$, which is killed by $r$ and hence torsion. Let $\\bar t\\to T$ be a geometric point and $\\bar s=g\\circ\\bar t$ its image in $S$, lying over $t\\in T$ and $s\\in S$. Let $\\kappa(\\bar s)$ and $\\kappa(\\bar t)$ be the residue fields of the strict henselizations of $S$ at $\\bar s$ and of $T$ at $\\bar t$, i.e. the separable closures of $\\kappa(s)$ and $\\kappa(t)$ inside the fields of $\\bar s$ and $\\bar t$; both are separably closed, and $g$ induces a field extension $\\kappa(\\bar s)\\subset\\kappa(\\bar t)$. By [lemma-weil-pbc-p1-exchange-geometric-stalk], for every $q\\ge0$ the stalk at $\\bar t$ [def-weil-pbc-geometric-stalks] of the degree-$q$ exchange map $\\mathcal H^q(\\Ex_{\\square,F}):g^{-1}R^qp_*F\\to R^qp'_*g'^{-1}F$ of [def-weil-pbc-derived-exchange] is identified, by isomorphisms of its source and target, with the pullback map $H^q(\\mathbf P^1_{\\kappa(\\bar s)},F|)\\to H^q(\\mathbf P^1_{\\kappa(\\bar t)},F|)$ along $\\mathbf P^1_{\\kappa(\\bar t)}\\to\\mathbf P^1_{\\kappa(\\bar s)}$. (That lemma contains the strictly henselian part of the argument, unit step (ii): the stalk formula $(R^qp_*F)_{\\bar s}=H^q(\\mathbf P^1_{\\mathcal O^{sh}_{S,\\bar s}},F|)$ and the comparison $H^q(\\mathbf P^1_{\\mathcal O^{sh}},F|)\\cong H^q(\\mathbf P^1_{\\kappa(\\bar s)},F|)$ of [prop-weil-pbc-p1-strict-henselian-comparison], through [prop-weil-pbc-strict-local-exchange].)",
+   "text": "Let $F$ be any torsion abelian sheaf on $X_{\\Et}$ [def-weil-pbc-etale-sheaves]; the case needed below is the underlying abelian sheaf of $I$, which is killed by $r$ and hence torsion. Let $\\bar t\\to T$ be a geometric point and $\\bar s=g\\circ\\bar t$ its image in $S$, lying over $t\\in T$ and $s\\in S$. Let $\\kappa(\\bar s)$ and $\\kappa(\\bar t)$ be the residue fields of the strict henselizations of $S$ at $\\bar s$ and of $T$ at $\\bar t$, i.e. the separable closures of $\\kappa(s)$ and $\\kappa(t)$ inside the fields of $\\bar s$ and $\\bar t$; both are separably closed, and $g$ induces a field extension $\\kappa(\\bar s)\\subset\\kappa(\\bar t)$. By [lemma-weil-pbc-p1-exchange-geometric-stalk], for every $q\\ge0$ the stalk at $\\bar t$ [def-weil-pbc-geometric-stalks] of the degree-$q$ exchange map $\\mathcal H^q(\\Ex_{\\square,F}):g^{-1}R^qp_*F\\to R^qp'_*g'^{-1}F$ of [def-weil-pbc-derived-exchange] is identified, by isomorphisms of its source and target, with the pullback map $H^q(\\mathbf P^1_{\\kappa(\\bar s)},F|)\\to H^q(\\mathbf P^1_{\\kappa(\\bar t)},F|)$ along $\\mathbf P^1_{\\kappa(\\bar t)}\\to\\mathbf P^1_{\\kappa(\\bar s)}$. (That lemma contains the strictly henselian part of the argument, unit step (ii): the stalk formula $(R^qp_*F)_{\\bar s}=H^q(\\mathbf P^1_{\\mathcal O^{sh}_{S,\\bar s}},F|)$ and the comparison $H^q(\\mathbf P^1_{\\mathcal O^{sh}},F|)\\cong H^q(\\mathbf P^1_{\\kappa(\\bar s)},F|)$ of [prop-weil-pbc-p1-strict-henselian-comparison], through [prop-weil-pbc-strict-local-exchange].) (The Lean builds the derived inverse-image adjunction behind $\\Ex_{\\square,F}$ from a flat separator of the category of étale sheaves of modules, [lem-weil-pbc-sheaf-flat-separator].)",
    "uses": [
     "def-weil-pbc-etale-sheaves",
     "lemma-weil-pbc-p1-exchange-geometric-stalk",
     "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-derived-exchange"
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-sheaf-flat-separator"
    ],
    "elementary": false,
    "source": {
@@ -98,7 +100,9 @@
   "lemma-openclosed-stalk-upperstar",
   "prop-weil-pbc-proper-curve-sepclosed-invariance",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-injective-module-direct-image-acyclic"
+  "lem-weil-pbc-injective-module-direct-image-acyclic",
+  "lem-weil-pbc-injective-acyclicity-bounded-below",
+  "lem-weil-pbc-sheaf-flat-separator"
  ],
  "proof_origin": {
   "by": "document",
@@ -151,12 +155,115 @@
   "master": {
    "state": "none",
    "decls": [],
-   "missing": []
+   "missing": [
+    "AlgebraicGeometry.Etale.hasTorsionBaseChange_projectiveLine",
+    "AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine",
+    "AlgebraicGeometry.Etale.hasInjectiveAcyclicity_projectiveLine"
+   ]
   },
   "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_projectiveLine",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine",
+     "lines": [
+      103,
+      122
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk",
+     "lines": [
+      161,
+      213
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.hasInjectiveAcyclicity_projectiveLine",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk",
+     "lines": [
+      215,
+      235
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk",
+     "lines": [
+      93,
+      159
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lemma-weil-pbc-p1-exchange-geometric-stalk"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty",
+     "lines": [
+      309,
+      323
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lemma-weil-pbc-property-iff-acyclicity",
+      "lem-weil-pbc-injective-acyclicity-bounded-below"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
+     "lines": [
+      69,
+      95
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "prop-weil-pbc-algebraically-closed-extension"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
+     "lines": [
+      97,
+      134
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lemma-weil-pbc-curve-separably-closed-passage"
+     ],
+     "below": true
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution",
+     "lines": [
+      164,
+      170
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-weil-pbc-sheaf-flat-separator"
+     ],
+     "below": false
+    }
+   ]
   }
  },
  "chapter": "sec-proper-base-change",
@@ -166,5 +273,19 @@
   "item": "prop-weil-pbc-projective-line",
   "worker": "stage1",
   "summary": "Rewrote the one-paragraph imported proof as five steps following the projective-line part of the proof of Stacks Theorem 095T (with Lemmas 0A4B and 0A5E), realizing the four steps of unit sk-thm-p1: reduction to IA_r via lemma-weil-pbc-property-iff-acyclicity (unit step 1); geometric-stalk identification of the degree-q exchange map with the pullback between projective lines over the separably closed residue fields of the strict henselizations via lemma-weil-pbc-p1-exchange-geometric-stalk (which carries unit step (ii)); invariance of curve cohomology under separably closed extension via prop-weil-pbc-proper-curve-sepclosed-invariance (unit step (i)); conservativity of geometric stalks and the vanishing of R^q p_* of an injective (unit step (iii)). The imported proof used the conservativity and iff lemmas without naming them in a step (only in proof_deps) and silently used: properness of P^1_S -> S and the base change identification P^1_S x_S T = P^1_T (now the closed nodes lemma-nagata-projective-space-base-change-proper / -pullback of units sk-lem-nagata-sketch-affine-cover / sk-thm-reduction; finished nodes, so not route), dim P^1_k <= 1 (new node lem-weil-pbc-p1-field-dimension-one), torsionness of a restriction (lemma-openclosed-stalk-upperstar), and the vanishing of the abelian higher direct images of an injective F_r-module sheaf (new node lem-weil-pbc-injective-module-direct-image-acyclic, Stacks 03FD + 072W). stmt_deps: removed def-weil-pbc-injective-acyclicity-property (not used by the statement; now a proof dependency), added def-nagata-projective-space-base-change for P^1_S. The statement is unchanged except that it names the projective line's definition."
+ },
+ "lean": {
+  "branch": "slopmaster2",
+  "declarations": [
+   "AlgebraicGeometry.Etale.hasTorsionBaseChange_projectiveLine",
+   "AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine",
+   "AlgebraicGeometry.Etale.hasInjectiveAcyclicity_projectiveLine"
+  ],
+  "note": "attached by the lead at review (2026-10-09), found by the opus worker: the Lean of the unit sk-thm-p1 is stated for complexes with torsion cohomology over any coefficient ring (stronger than the node); hasTorsionBaseChange_projectiveLine rests on sorries in the stalk identification, the curve field-extension lemmas, the flat separator and hasTorsionBaseChange_of_hasInjectiveAcyclicity"
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "note": "passed; the lead attached the Lean (three declarations, none sorry-free) and added the two statements the Lean of this proposition rests on, found by the worker of the target, to Steps 1 and 2"
  }
 }

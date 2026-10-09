@@ -17,12 +17,10 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (unit step 1: $\\mathbf P^1$).** For every scheme $S$ the projection $\\mathbf P^1_S\\to S$ satisfies $\\mathrm{PBC}$ in the sense of [def-weil-pbc-property]: this is [prop-weil-pbc-projective-line] (Stacks 095T, proof, paragraphs 2-5: the strictly henselian comparison $H^q(\\mathbf P^1_A,F)=H^q(\\mathbf P^1_s,F|)$, the stalk formula, and the invariance of the cohomology of $\\mathbf P^1$ under extension of separably closed fields, giving $\\mathrm{IA}$ for the projection, which is then converted into $\\mathrm{PBC}$). The Lean of this node rests, inside this step, on two statements the Lean split off: the conversion of injective acyclicity into base change for bounded below complexes with torsion cohomology, [lem-weil-pbc-injective-acyclicity-bounded-below] (it is how the Lean deduces $\\mathrm{PBC}$ of the projection from its $\\mathrm{IA}$), and the existence of a flat separator of étale sheaves of modules, [lem-weil-pbc-sheaf-flat-separator], which the Lean uses to build the derived inverse-image adjunction entering the degree-$q$ exchange map whose geometric stalks the $\\mathbf P^1$ computation evaluates. Both are used through [prop-weil-pbc-projective-line], whose proof is to cite them.",
+   "text": "**Step 1 (unit step 1: $\\mathbf P^1$).** For every scheme $S$ the projection $\\mathbf P^1_S\\to S$ satisfies $\\mathrm{PBC}$ in the sense of [def-weil-pbc-property]: this is [prop-weil-pbc-projective-line] (Stacks 095T, proof, paragraphs 2-5: the strictly henselian comparison $H^q(\\mathbf P^1_A,F)=H^q(\\mathbf P^1_s,F|)$, the stalk formula, and the invariance of the cohomology of $\\mathbf P^1$ under extension of separably closed fields, giving $\\mathrm{IA}$ for the projection, which is then converted into $\\mathrm{PBC}$). (The Lean of this step rests on two statements the Lean split off, [lem-weil-pbc-injective-acyclicity-bounded-below] and [lem-weil-pbc-sheaf-flat-separator]; they are cited where the Lean uses them, in the proof of [prop-weil-pbc-projective-line].)",
    "uses": [
     "prop-weil-pbc-projective-line",
-    "def-weil-pbc-property",
-    "lem-weil-pbc-injective-acyclicity-bounded-below",
-    "lem-weil-pbc-sheaf-flat-separator"
+    "def-weil-pbc-property"
    ],
    "elementary": false,
    "source": {
@@ -109,8 +107,6 @@
  "proof_deps": [
   "prop-weil-pbc-projective-line",
   "def-weil-pbc-property",
-  "lem-weil-pbc-injective-acyclicity-bounded-below",
-  "lem-weil-pbc-sheaf-flat-separator",
   "prop-weil-pbc-reduction-to-projective-line",
   "lemma-weil-pbc-prime-proper-base-change",
   "lemma-weil-pbc-torsion-assembly",
@@ -227,8 +223,10 @@
       170
      ],
      "kind": "theorem",
-     "nodes": [],
-     "below": false
+     "nodes": [
+      "lem-weil-pbc-sheaf-flat-separator"
+     ],
+     "below": true
     },
     {
      "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
@@ -277,8 +275,10 @@
       159
      ],
      "kind": "theorem",
-     "nodes": [],
-     "below": false
+     "nodes": [
+      "lemma-weil-pbc-p1-exchange-geometric-stalk"
+     ],
+     "below": true
     },
     {
      "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity",
@@ -288,8 +288,11 @@
       323
      ],
      "kind": "theorem",
-     "nodes": [],
-     "below": false
+     "nodes": [
+      "lemma-weil-pbc-property-iff-acyclicity",
+      "lem-weil-pbc-injective-acyclicity-bounded-below"
+     ],
+     "below": true
     },
     {
      "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper",
@@ -299,8 +302,10 @@
       149
      ],
      "kind": "theorem",
-     "nodes": [],
-     "below": false
+     "nodes": [
+      "prop-weil-pbc-reduction-to-projective-line"
+     ],
+     "below": true
     },
     {
      "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed",
@@ -310,8 +315,10 @@
       95
      ],
      "kind": "theorem",
-     "nodes": [],
-     "below": false
+     "nodes": [
+      "prop-weil-pbc-algebraically-closed-extension"
+     ],
+     "below": true
     },
     {
      "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed",
@@ -321,8 +328,10 @@
       134
      ],
      "kind": "theorem",
-     "nodes": [],
-     "below": false
+     "nodes": [
+      "lemma-weil-pbc-curve-separably-closed-passage"
+     ],
+     "below": true
     },
     {
      "name": "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall",
@@ -332,8 +341,10 @@
       170
      ],
      "kind": "theorem",
-     "nodes": [],
-     "below": false
+     "nodes": [
+      "lem-weil-pbc-sheaf-flat-separator"
+     ],
+     "below": true
     }
    ]
   }
@@ -350,5 +361,14 @@
   "item": "thm-weil-pbc-bounded-below",
   "worker": "stage1",
   "summary": "Checked against Stacks 095T, 0A4F, 0A4B and 0DDE (literature/stacks-project/etale-cohomology.tex) and the Lean Proper.lean, BaseChangeProperty.lean, ProjectiveLine.lean of slopmaster2. The node states 0DDE (bounded below complexes with torsion cohomology); its unit states 095T (torsion sheaves), which lemma-weil-pbc-torsion-assembly states. The imported one-step proof (spectral sequences only, sheaf case cited) was replaced by seven steps: Steps 1-3 realize the unit's three steps (P^1 by prop-weil-pbc-projective-line; reduction by prop-weil-pbc-reduction-to-projective-line, specialized to F_r-sheaves in lemma-weil-pbc-prime-proper-base-change; dévissage to all torsion sheaves by lemma-weil-pbc-torsion-assembly), Steps 4-7 carry out 0DDE with the existing truncation-couple nodes, page induction, finite-filtration induction and a new Mathlib leaf (DerivedCategory.Plus.isIso_iff). stmt_deps: added def-weil-proper-morphism, def-weil-pbc-torsion-etale-sheaf, def-weil-pbc-derived-exchange (the statement uses properness, torsion and Ex). Of the six open Lean declarations, four belong to existing nodes (reported), two got new nodes (lem-weil-pbc-injective-acyclicity-bounded-below, lem-weil-pbc-sheaf-flat-separator), cited in Step 1 where the Lean uses them."
+ },
+ "pointers": [
+  "lem-weil-pbc-injective-acyclicity-bounded-below",
+  "lem-weil-pbc-sheaf-flat-separator"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "note": "passed; the lead moved the two Lean-only citations of Step 1 (injective acyclicity for complexes, flat separator) to the proof of prop-weil-pbc-projective-line, where the Lean uses them, and kept them as pointers here"
  }
 }
