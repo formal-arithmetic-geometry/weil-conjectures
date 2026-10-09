@@ -15,9 +15,60 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\xi\\in H^1(Z_{\\Et},\\underline M)$. By [thm-galois-torsor-h1] (Cohomology on Sites Lemma 03AJ), $\\xi$ corresponds canonically to an isomorphism class of $\\underline M$-torsors on $Z_{\\Et}$. To prove that $\\xi=0$, it is enough to show that the corresponding torsor is trivial.",
+   "uses": [
+    "thm-galois-torsor-h1",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-finite-torsors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZB, proof, first sentence; Cohomology on Sites Lemma 03AJ identifies H^1 with torsors"
+   }
+  },
+  {
+   "text": "An $\\underline M$-torsor is finite locally constant by its definition [def-weil-pbc-finite-torsors]. The equivalence between finite locally constant sheaves and finite etale schemes [thm-galois-lc-etale] therefore represents it by a finite etale surjective morphism $V\\to Z$ equipped with the simply transitive $M$-action.",
+   "uses": [
+    "def-weil-pbc-finite-torsors",
+    "thm-galois-lc-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZB, proof, first sentence; Lemma 03RV represents finite locally constant torsors by finite etale surjective schemes"
+   }
+  },
+  {
+   "text": "The finite etale surjection $V\\to Z$ from the preceding step represents the corresponding $\\underline M$-torsor as an etale sheaf. Apply [lem-weil-pbc-gabber-finite-etale-section] (Stacks 09ZA) to the closed subscheme $Z\\subseteq X$; its section $s:Z\\to V$ is therefore a global sheaf section of that torsor. Translation by this global section identifies the torsor with the constant torsor $\\underline M$, so its class in $\\operatorname{Tor}^1(Z,M)$ is the base point and $\\xi=0$. Since every $\\xi$ is zero, $H^1(Z_{\\Et},\\underline M)=0$.",
+   "uses": [
+    "lem-weil-pbc-gabber-finite-etale-section",
+    "thm-galois-lc-etale",
+    "thm-galois-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZB, proof, final sentence; Lemma 09ZA supplies a section, which gives a global section of the torsor and trivializes it"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-galois-torsor-h1",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-finite-torsors",
+  "thm-galois-lc-etale",
+  "lem-weil-pbc-gabber-finite-etale-section"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZB, proof; the torsor-to-finite-etale dictionary is written via Lemmas 03AJ and 03RV"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,7 +93,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,10 +114,21 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-gabber-h1-absolutely-algebraically-closed",
+  "worker": "stage1",
+  "summary": "Split Stacks Lemma 09ZB into torsor identification (03AJ), finite locally constant torsor representation by a finite etale surjection (03RV), and trivialization by the global sheaf section supplied by the new 09ZA statement node. The 09ZA statement records the exact affine hypothesis and queues its clopen-section argument separately. Mathlib searches found no cohomology, torsor, or section result."
+ },
+ "tool_uses": [
+  "thm-galois-torsor-h1",
+  "thm-galois-lc-etale"
+ ],
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Stacks 09ZB; correct; unsplit."
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: Repaired as asked at 19:xx: the 09ZA node is statement-only with the exact hypotheses of Stacks (X affine integral normal with separably closed function field, Z closed, V -> Z etale with V affine; a surjective finite etale V -> Z has a section), and step 3 says that V represents the torsor and that a section is a global section of it. Three steps: 03AJ torsors, 03RV finite locally constant = finite etale, 09ZA section trivializes. The helper node lem-weil-pbc-clopen-open-cover-section is not yet cited by anything (it is meant for the split of 09ZA); accepted as such, to be cited when 09ZA is split."
  }
 }
