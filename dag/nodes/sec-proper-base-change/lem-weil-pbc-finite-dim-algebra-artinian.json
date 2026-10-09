@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-finite-dim-algebra-artinian",
+ "kind": "statement",
+ "title": "A finite-dimensional algebra over a field is Artinian",
+ "statement": "Let $k$ be a field and $B$ a commutative ring together with a ring map $k\\to B$ making $B$ a finite-dimensional $k$-vector space. Then $B$ is an Artinian ring: every descending chain of ideals $J_1\\supseteq J_2\\supseteq\\cdots$ of $B$ is eventually constant.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00J6 (lemma-finite-dimensional-algebra, line 12714); proof: ideals of B are k-subspaces, so a descending chain has eventually constant dimension"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite dimensional algebra over a field is an Artinian ring",
+   "results": "isArtinianRing_iff_isNoetherianRing_krullDimLE_zero, isArtinianRing_iff_isFiniteLength, Module.finite_of_isArtinianRing, IsArtinianRing.setOf_isPrime_finite (Mathlib.RingTheory.HopkinsLevitzki / Artinian.Module / Jacobson.Artinian)",
+   "verdict": "no direct match in the top results; see grep",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite dimensional algebra over a field is an Artinian ring",
+   "results": "Module.finite_iff_isArtinianRing (Mathlib.RingTheory.Jacobson.Artinian, needs Algebra.FiniteType), Module.finite_of_isArtinianRing, Algebra.QuasiFinite.iff_of_isArtinianRing",
+   "verdict": "generalization: Module.finite_iff_isArtinianRing k B (.mp) also gives it for finite type B; the direct lemma is IsArtinianRing.of_finite (grep)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsArtinianRing.of_finite\\|instance DivisionRing.instIsArtinianRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Artinian/",
+   "results": "IsArtinianRing.of_finite (RingTheory/Artinian/Module.lean:403: [IsArtinianRing R] [Module.Finite R S] -> IsArtinianRing S), DivisionRing.instIsArtinianRing (Module.lean:376)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsArtinianRing.of_finite",
+  "file": "Mathlib/RingTheory/Artinian/Module.lean",
+  "line": 403,
+  "how": "specializes in one line: IsArtinianRing.of_finite k B with IsArtinianRing k from the instance DivisionRing.instIsArtinianRing (Module.lean:376), Module.Finite k B from finite dimension, IsScalarTower k B B from the algebra structure; IsArtinianRing B = IsArtinian B B is the descending chain condition on ideals. Source read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-after-completion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

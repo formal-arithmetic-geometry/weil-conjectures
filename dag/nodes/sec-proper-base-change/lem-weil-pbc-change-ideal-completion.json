@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-change-ideal-completion",
+ "kind": "statement",
+ "title": "Completions along two ideals each containing a power of the other agree",
+ "statement": "Let $A$ be a commutative ring, $I,J\\subseteq A$ ideals and $c,d\\ge1$ integers with $I^c\\subseteq J$ and $J^d\\subseteq I$. Let $M$ be an $A$-module, $M^\\wedge_I=\\varprojlim_nM/I^nM$ and $M^\\wedge_J=\\varprojlim_nM/J^nM$ (compatible sequences, componentwise $A$-module structure), with canonical maps $\\iota_I:M\\to M^\\wedge_I$, $\\iota_J:M\\to M^\\wedge_J$, $x\\mapsto(x\\bmod I^nM)_n$ resp. $(x\\bmod J^nM)_n$. Then the map $\\theta:M^\\wedge_J\\to M^\\wedge_I$, $(x_n)_n\\mapsto(x_{dk}\\bmod I^kM)_k$ (well defined since $J^{dk}M\\subseteq I^kM$) is an isomorphism of $A$-modules with inverse $(y_k)_k\\mapsto(y_{cn}\\bmod J^nM)_n$ (well defined since $I^{cn}M\\subseteq J^nM$), and $\\theta\\circ\\iota_J=\\iota_I$. In particular $M$ is $I$-adically complete ($\\iota_I$ bijective) if and only if it is $J$-adically complete. For $M=A$ (where $M^\\wedge_I=\\varprojlim_nA/I^n$ with componentwise multiplication) $\\theta$ is an isomorphism of rings.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0319 (lemma-change-ideal-completion, line 22806); proof: the systems of maps M/I^nM -> M/J^{floor(n/c)}M and M/J^mM -> M/I^{floor(m/d)}M give mutually inverse maps of the completions"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if I^c ≤ J and J^d ≤ I then adic completion with respect to I is isomorphic to adic completion with respect to J",
+   "results": "AdicCompletion, AdicCompletion.instCommRing, AdicCompletion.ofAlgEquiv_apply, AdicCompletion.ofLinearEquiv, AdicCompletion.sum_lof, AdicCompletion.congr, AdicCompletion.module (Mathlib.RingTheory.AdicCompletion.*)",
+   "verdict": "no match: only functoriality in the module for a fixed ideal",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adic completions with respect to two ideals with the same radical (each contains a power of the other) are isomorphic; IsAdicComplete I M iff IsAdicComplete J M",
+   "results": "AdicCompletion.congr, AdicCompletion.congr_apply, AdicCompletion.ofAlgEquiv, IsAdic.isPrecomplete_iff, isAdicComplete_iff, IsAdic.isAdicComplete_iff",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "I-adic completion of a module is isomorphic to J-adic completion when I^c ≤ J and J^d ≤ I",
+   "results": "AdicCompletion.congr, AdicCompletion.ofLinearEquiv, AdicCompletion.ext_iff, IsAdicComplete",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Ideal.radical",
+   "results": "no results",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/*.lean | grep -iE 'radical|_of_le|mono|pow_le|anti'; grep -rn 'stacks 0319' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only IsHausdorff.StrictMono.funext (Basic.lean:108,131) and AdicCompletion.isMaximal_map_of_le (LocalRing.lean:65); no comparison of completions along different ideals, no stacks 0319 tag",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-after-completion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

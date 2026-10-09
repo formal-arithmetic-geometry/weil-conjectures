@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-fg-ideal-radical-power",
+ "kind": "statement",
+ "title": "A finitely generated ideal inside the radical of another has a power inside it",
+ "statement": "Let $A$ be a commutative ring and $I,J\\subseteq A$ ideals with $I$ finitely generated and $I\\subseteq\\sqrt J=\\{x\\in A:x^m\\in J\\text{ for some }m\\ge1\\}$. Then there is an integer $t\\ge1$ with $I^t\\subseteq J$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00IM (lemma-Noetherian-power, line 6300), whose proof (J=(f_1,...,f_s), f_i^{d_i} in I, n = d_1+...+d_s+1) uses only that the ideal is finitely generated; used without reference in the proof of Lemma Tag 0394 (lemma-finite-after-completion, line 23120: \"the fact that n is finitely generated implies that n^t is contained in mS\")"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely generated ideal contained in radical of J has a power contained in J",
+   "results": "Ideal.exists_pow_le_of_le_radical_of_fg, Ideal.exists_pow_le_of_le_radical_of_fg_radical, Ideal.exists_radical_pow_le_of_fg (Mathlib.RingTheory.Finiteness.Ideal)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if I is finitely generated and I ⊆ radical J then I^n ⊆ J for some n",
+   "results": "Ideal.exists_pow_le_of_le_radical_of_fg, Ideal.exists_pow_le_of_le_radical_of_fg_radical, Ideal.exists_radical_pow_le_of_fg, Ideal.radical_pow (Mathlib.RingTheory.Finiteness.Ideal, Ideal.Operations)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists_pow_le_of_le_radical_of_fg' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Finiteness/Ideal.lean",
+   "results": "RingTheory/Finiteness/Ideal.lean:76 (exists_pow_le_of_le_radical_of_fg_radical), :82 (exists_pow_le_of_le_radical_of_fg)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.exists_pow_le_of_le_radical_of_fg",
+  "file": "Mathlib/RingTheory/Finiteness/Ideal.lean",
+  "line": 82,
+  "how": "specializes in one line: (h' : I ≤ J.radical) (h : I.FG) : ∃ n, I ^ n ≤ J, for a commutative semiring; if the n obtained is 0 then J = A and t = 1 works (I^1 ≤ I^0 = ⊤ = J). Source read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-after-completion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

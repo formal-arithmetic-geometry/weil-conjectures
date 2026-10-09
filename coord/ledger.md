@@ -488,3 +488,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:22 UTC (2026-10-09) — Returned G1 stein-factorization-affine a second time (head 9fbf9d9f, repair along 03H2 is the right route; proof sketch inside the idempotent node's statement, uncited cancellation facts in step 2, new nodes in the wrong unit).
 - 21:23 UTC (2026-10-09) — Reviewed and committed filtered-colimit-algebras-tensor-elementwise (00DD+00D6; 2 new nodes, one a Mathlib leaf). Launched a worker on finite-type-module-support-closed (056J).
 - 21:24 UTC (2026-10-09) — Reviewed and committed finite-separable-multiplication-etale (retraction route via 02GW; new node finite-separable-extension-etale closed on the sorry-free Lean declaration Algebra.Etale.of_finite_of_isSeparable, attached by L). Launched a worker on flat-completion (0C4G).
+- 21:24 UTC (2026-10-09) — Reviewed and committed finite-after-completion (0394; 5 new nodes, 3 Mathlib leaves, lines verified).
