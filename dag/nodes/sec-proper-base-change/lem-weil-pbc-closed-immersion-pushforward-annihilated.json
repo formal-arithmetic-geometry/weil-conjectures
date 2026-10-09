@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+ "kind": "statement",
+ "title": "Quasi-coherent modules killed by the ideal of a closed subscheme are pushforwards from it",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion] with ideal sheaf $\\mathcal I\\subseteq\\mathcal O_X$ [def-sbc-closed-immersion-ideal-sheaf], and let $i_*$ and $i^*$ be the pushforward and pullback of modules [def-pc-module-pullback], with unit $\\eta_{\\mathcal F}:\\mathcal F\\to i_*i^*\\mathcal F$. Quasi-coherent and finite type are as in [pqf-def-coherent]. (1) For every quasi-coherent $\\mathcal O_Z$-module $\\mathcal G$, $i_*\\mathcal G$ is a quasi-coherent $\\mathcal O_X$-module and $\\mathcal I\\,(i_*\\mathcal G)=0$, i.e. $as=0$ for every open $V\\subseteq X$, $a\\in\\mathcal I(V)$ and $s\\in(i_*\\mathcal G)(V)$. (2) Let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module with $\\mathcal I\\mathcal F=0$ (same meaning). Then $i^*\\mathcal F$ is a quasi-coherent $\\mathcal O_Z$-module and $\\eta_{\\mathcal F}:\\mathcal F\\to i_*i^*\\mathcal F$ is an isomorphism of $\\mathcal O_X$-modules; if moreover $\\mathcal F$ is of finite type, so is $i^*\\mathcal F$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01QY (morphisms-lemma-i-star-equivalence) with its proof (essential image of i_* and the unit G -> i_* i^* G); Modules, Lemma 01BG (modules-lemma-pullback-quasi-coherent) and Lemma 01B6 (modules-lemma-pullback-finite-type), literature/stacks-project/modules.tex, for i^*F quasi-coherent and of finite type"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "pqf-def-coherent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pushforward along closed immersion fully faithful, essential image modules annihilated by the ideal sheaf",
+   "results": "IdealSheafData.ideal_map, map_vanishingIdeal, IdealSheafData.map (Mathlib.AlgebraicGeometry.IdealSheaf.Functorial); Scheme.Modules.instFaithfulPushforward, instFullPushforward (Mathlib.AlgebraicGeometry.Modules.Sheaf, for open immersions only); IsClosedImmersion instances",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion i: quasi-coherent O_X-module killed by the ideal sheaf is isomorphic to i_* i^* F; pushforward along closed immersion fully faithful",
+   "results": "IsClosedImmersion.overEquivIdealSheafData; IdealSheafData.subschemeObjIso, subschemeι_app (Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme); Scheme.Modules.restrictFunctorAdjCounitIso, Scheme.Modules.restrict (open immersions)",
+   "date": "2026-10-10",
+   "verdict": "no match: only the closed immersion / ideal sheaf correspondence, nothing on modules over a closed subscheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.IsClosedImmersion",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'IsClosedImmersion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf; grep -rn 'stacks 01QY' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-support-proper-over-base",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

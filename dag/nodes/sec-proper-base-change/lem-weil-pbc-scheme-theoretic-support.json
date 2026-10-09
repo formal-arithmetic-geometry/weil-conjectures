@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-scheme-theoretic-support",
+ "kind": "statement",
+ "title": "Scheme-theoretic support of a finite type quasi-coherent module",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module of finite type [pqf-def-coherent], with support $\\operatorname{Supp}(\\mathcal F)$ [def-weil-pbc-closed-subset-proper-over-base](2). For an open $U\\subseteq X$ let $\\operatorname{Ann}(\\mathcal F)(U)=\\{a\\in\\mathcal O_X(U): a|_V\\,s=0\\text{ for every open }V\\subseteq U\\text{ and every }s\\in\\mathcal F(V)\\}$. Then: (1) $\\operatorname{Ann}(\\mathcal F)$ is a quasi-coherent sheaf of ideals of $\\mathcal O_X$, and for every affine open $U\\subseteq X$ one has $\\operatorname{Ann}(\\mathcal F)(U)=\\operatorname{Ann}_{\\mathcal O_X(U)}(\\mathcal F(U))$. (2) There is a closed immersion $i:Z\\to X$ [def-weil-closed-immersion] whose ideal sheaf [def-sbc-closed-immersion-ideal-sheaf] is $\\operatorname{Ann}(\\mathcal F)$; for every affine open $U=\\operatorname{Spec}A\\subseteq X$ [def-weil-affine-spectrum], $i^{-1}(U)\\to U$ is isomorphic over $U$ to $\\operatorname{Spec}(A/\\operatorname{Ann}_A(\\mathcal F(U)))\\to\\operatorname{Spec}A$. (3) $i(Z)=\\operatorname{Supp}(\\mathcal F)$. (4) $\\operatorname{Ann}(\\mathcal F)\\,\\mathcal F=0$: $as=0$ for every open $V$, $a\\in\\operatorname{Ann}(\\mathcal F)(V)$ and $s\\in\\mathcal F(V)$. (5) If $i':Z'\\to X$ is a closed immersion whose ideal sheaf $\\mathcal I'$ satisfies $\\mathcal I'\\mathcal F=0$, then $\\mathcal I'\\subseteq\\operatorname{Ann}(\\mathcal F)$. The closed subscheme $Z$ is the *scheme-theoretic support* of $\\mathcal F$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 05JU (morphisms-lemma-scheme-theoretic-support) with its proof (affine-local description (1), support (4), the algebra fact Ann_A(M)_f = Ann_{A_f}(M_f) for finite M, which the proof omits and which is Algebra Lemma 07T8 algebra-lemma-annihilator-flat-base-change, and Lemma 01QQ morphisms-lemma-closed-immersion-bijection-ideals for the closed subscheme cut out by a quasi-coherent ideal sheaf), and Definition 05JV (morphisms-definition-scheme-theoretic-support)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "annihilator ideal sheaf of a sheaf of modules on a scheme, scheme-theoretic support closed subscheme",
+   "results": "Submodule.annihilator (Mathlib.RingTheory.Ideal.Maps); IdealSheafData.support, isClosed_supportSet, mkOfMemSupportIff, support_eq_bot_iff, coe_support_vanishingIdeal (Mathlib.AlgebraicGeometry.IdealSheaf.Basic); Module.annihilator_le_of_mem_support (Mathlib.RingTheory.Support)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has ideal sheaves (IdealSheafData) and their closed subschemes, but no annihilator ideal sheaf of an O_X-module"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scheme-theoretic support of a coherent sheaf: closed subscheme defined by the annihilator ideal sheaf of a quasi-coherent module",
+   "results": "IdealSheafData.Simps.coe_support, supportSet, coe_support_mkOfMemSupportIff, support, mkOfMemSupportIff, coe_support_eq_eq_iInter_zeroLocus (Mathlib.AlgebraicGeometry.IdealSheaf.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match (IdealSheafData.mkOfMemSupportIff is the tool to build the ideal sheaf from affine-local ideals Ann_A(M), not the statement)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, Module.annihilator",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'annihilator|support' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf; grep -rn 'stacks 05JU\\|stacks 01QQ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-support-proper-over-base",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-finite-type-module-support-closed",
+ "kind": "statement",
+ "title": "The support of a finite type quasi-coherent module is closed, locally the zero locus of the annihilator",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module of finite type [pqf-def-coherent], with support $\\operatorname{Supp}(\\mathcal F)=\\{x\\in X:\\mathcal F_x\\neq0\\}$ [def-weil-pbc-closed-subset-proper-over-base](2), $\\mathcal F_x$ the stalk [def-weil-pbc-module-stalk]. Let $U\\subseteq X$ be an affine open, $A=\\mathcal O_X(U)$, $M=\\mathcal F(U)$ (a finitely generated $A$-module), and identify $U$ with $\\operatorname{Spec}A$ [def-weil-affine-spectrum], the point $x\\in U$ corresponding to the prime $\\mathfrak p_x\\subseteq A$. Then $\\mathcal F_x\\cong M_{\\mathfrak p_x}$, and $x\\in\\operatorname{Supp}(\\mathcal F)$ if and only if $\\operatorname{Ann}_A(M)=\\{a\\in A: aM=0\\}\\subseteq\\mathfrak p_x$; that is, $\\operatorname{Supp}(\\mathcal F)\\cap U=V(\\operatorname{Ann}_A(M))$. Consequently $\\operatorname{Supp}(\\mathcal F)$ is a closed subset of $X$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 056J (morphisms-lemma-support-finite-type) part (1), via Lemma 056I (morphisms-lemma-support-affine-open), Properties Lemma 01PB (properties-lemma-finite-type-module) and Algebra Lemma 00L2 (algebra-lemma-support-closed, literature/stacks-project/algebra.tex) as in its proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-pbc-module-stalk",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "support of a finite type quasi-coherent sheaf of modules on a scheme is closed",
+   "results": "Scheme.IdealSheafData.isClosed_supportSet, IdealSheafData.support (Mathlib.AlgebraicGeometry.IdealSheaf.Basic, support of an ideal sheaf); Module.isClosed_support (Mathlib.RingTheory.Spectrum.Prime.Module, ring level); isClosed_tsupport; Scheme.zeroLocus_isClosed",
+   "date": "2026-10-10",
+   "verdict": "no match: only the ring-level statement (Module.isClosed_support, Module.support_eq_zeroLocus = Algebra 00L2) and the support of an ideal sheaf; no support of an O_X-module"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the support of a finitely generated quasi-coherent O_X-module on a scheme is a closed subset, locally the zero locus of the annihilator",
+   "results": "IdealSheafData.isClosed_supportSet, IdealSheafData.support, coe_support_mkOfMemSupportIff, mem_support_iff (Mathlib.AlgebraicGeometry.IdealSheaf.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, Module.support",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'annihilator|support' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf; grep -n isClosed_support ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/Module.lean; grep -n support_eq_zeroLocus ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Support.lean",
+   "results": "no support of a sheaf of modules; ring level only: Module.isClosed_support (RingTheory/Spectrum/Prime/Module.lean:46), Module.support_eq_zeroLocus (RingTheory/Support.lean:216, @[stacks 00L2])",
+   "date": "2026-10-10",
+   "verdict": "no match at scheme level (the affine-local algebra step is Mathlib's Module.support_eq_zeroLocus)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-support-proper-over-base",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

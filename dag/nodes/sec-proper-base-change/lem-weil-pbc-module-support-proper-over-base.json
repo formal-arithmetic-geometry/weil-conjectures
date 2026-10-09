@@ -13,11 +13,90 @@
   "def-weil-pbc-closed-subset-proper-over-base",
   "def-weil-closed-immersion",
   "def-sbc-closed-immersion-ideal-sheaf",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Part (1): the support is closed.) $\\mathcal F$ is a quasi-coherent $\\mathcal O_X$-module of finite type on the scheme $X$, so $\\operatorname{Supp}(\\mathcal F)$ is a closed subset of $X$ [lem-weil-pbc-finite-type-module-support-closed] (on each affine open $U$ it is $V(\\operatorname{Ann}_{\\mathcal O_X(U)}(\\mathcal F(U)))$). In particular the condition `$\\operatorname{Supp}(\\mathcal F)$ is proper over $S$' of [def-weil-pbc-closed-subset-proper-over-base](1) makes sense.",
+   "uses": [
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "def-weil-pbc-closed-subset-proper-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, paragraph before Lemma 0CYS and first sentence of its proof, citing Morphisms Lemma 056J (morphisms-lemma-support-finite-type)"
+   }
+  },
+  {
+   "text": "(The scheme-theoretic support.) Let $i_F:Z_F\\to X$ be the scheme-theoretic support of $\\mathcal F$ [lem-weil-pbc-scheme-theoretic-support]: a closed immersion whose ideal sheaf [def-sbc-closed-immersion-ideal-sheaf] is the annihilator ideal sheaf $\\operatorname{Ann}(\\mathcal F)$, with $i_F(Z_F)=\\operatorname{Supp}(\\mathcal F)$ [lem-weil-pbc-scheme-theoretic-support](3) and $\\operatorname{Ann}(\\mathcal F)\\,\\mathcal F=0$ [lem-weil-pbc-scheme-theoretic-support](4). So $Z_F$ is a closed subscheme of $X$ whose underlying closed subset is $\\operatorname{Supp}(\\mathcal F)$ and whose ideal sheaf kills $\\mathcal F$; this is the last sentence of the statement.",
+   "uses": [
+    "lem-weil-pbc-scheme-theoretic-support",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 05JU (morphisms-lemma-scheme-theoretic-support) and Definition 05JV (morphisms-definition-scheme-theoretic-support); used in the proof of Cohomology of Schemes Lemma 0CYS ((1)<=>(2): the scheme theoretic support has underlying closed subset Supp(F))"
+   }
+  },
+  {
+   "text": "(Part (2), `only if'.) Assume $\\operatorname{Supp}(\\mathcal F)$ is proper over $S$. The closed subscheme $Z_F$ of step 2 is a closed subscheme structure on the closed subset $\\operatorname{Supp}(\\mathcal F)$, so $Z_F\\to S$ is proper by [lem-weil-pbc-closed-subset-proper-over-base-properties](1) (`proper over $S$' implies properness for every closed subscheme structure). With $Z=Z_F$ and $\\mathcal I_Z=\\operatorname{Ann}(\\mathcal F)$ we have $\\mathcal I_Z\\mathcal F=0$ (step 2), which is the required closed subscheme; in particular one may take for $Z$ the scheme-theoretic support.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "lem-weil-pbc-scheme-theoretic-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 0CYS, (1)=>(2) via Definition 0CYM (definition-proper-over-base) and Lemma 0CYL (lemma-closed-proper-over-base), and (2)=>(3)"
+   }
+  },
+  {
+   "text": "(Part (2), `if'.) Let $i:Z\\to X$ be a closed immersion with ideal sheaf $\\mathcal I_Z$ [def-sbc-closed-immersion-ideal-sheaf], $Z\\to S$ proper and $\\mathcal I_Z\\mathcal F=0$. First, $\\operatorname{Supp}(\\mathcal F)\\subseteq i(Z)$: $i(Z)$ is closed ($i$ is a closed immersion [def-weil-closed-immersion]), so $U=X\\setminus i(Z)$ is open with $i^{-1}(U)=\\emptyset$; hence $\\mathcal O_Z(i^{-1}U)=0$ and $\\mathcal I_Z(U)=\\ker(\\mathcal O_X(U)\\to\\mathcal O_Z(\\emptyset))=\\mathcal O_X(U)\\ni1$. For $x\\in U$ and any germ $s_x\\in\\mathcal F_x$ [def-weil-pbc-module-stalk], with $s\\in\\mathcal F(V)$, $x\\in V\\subseteq U$, we get $s=1|_V\\,s=0$ because $1|_V\\in\\mathcal I_Z(V)$ and $\\mathcal I_Z\\mathcal F=0$; so $\\mathcal F_x=0$ and $x\\notin\\operatorname{Supp}(\\mathcal F)$. Next, $Z$ is a closed subscheme structure on the closed subset $i(Z)$ with $Z\\to S$ proper, so $i(Z)$ is proper over $S$ [lem-weil-pbc-closed-subset-proper-over-base-properties](1). Since $\\operatorname{Supp}(\\mathcal F)$ is closed (step 1) and contained in $i(Z)$, it is proper over $S$ [lem-weil-pbc-closed-subset-proper-over-base-properties](2), [def-weil-pbc-closed-subset-proper-over-base](1).",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "def-weil-pbc-closed-subset-proper-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 0CYS, (3)=>(1): Supp(F) is contained in Z, then Lemma 0CYN (lemma-closed-closed-proper-over-base); the inclusion Supp(F) in Z, stated there without proof, is written out here"
+   }
+  },
+  {
+   "text": "(The reformulation $\\mathcal I_Z\\mathcal F=0\\iff\\mathcal F\\cong i_*\\mathcal G$.) Let $i:Z\\to X$ be a closed immersion with ideal sheaf $\\mathcal I_Z$. If $\\mathcal I_Z\\mathcal F=0$, put $\\mathcal G=i^*\\mathcal F$ [def-pc-module-pullback]: it is a quasi-coherent $\\mathcal O_Z$-module of finite type and the unit $\\mathcal F\\to i_*\\mathcal G$ is an isomorphism [lem-weil-pbc-closed-immersion-pushforward-annihilated](2). Conversely, if $\\mathcal F\\cong i_*\\mathcal G$ for a quasi-coherent $\\mathcal O_Z$-module $\\mathcal G$ (of finite type or not), then $\\mathcal I_Z(i_*\\mathcal G)=0$ [lem-weil-pbc-closed-immersion-pushforward-annihilated](1), and this property passes to $\\mathcal F$ along the $\\mathcal O_X$-linear isomorphism ($a\\varphi(s)=\\varphi(as)$). Hence in part (2) the condition $\\mathcal I_Z\\mathcal F=0$ may equivalently be read as $\\mathcal F=i_*\\mathcal G$ with $\\mathcal G$ a finite type quasi-coherent $\\mathcal O_Z$-module, which is condition (3) of Stacks' lemma.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01QY (morphisms-lemma-i-star-equivalence); Cohomology of Schemes Lemma 0CYS condition (3) (literature/stacks-project/coherent.tex)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-weil-pbc-scheme-theoretic-support",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 0CYS (coherent-lemma-module-support-proper-over-base) and its proof; closedness of the support from Morphisms Lemma 056J (morphisms-lemma-support-finite-type); scheme-theoretic support Morphisms Lemma 05JU / Definition 05JV"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,7 +121,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,7 +145,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is 0CYS with 056J (support closed); self-contained; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Five steps along the proof of 0CYS, three new unsplit nodes with statements checked: lem-weil-pbc-finite-type-module-support-closed (056J(1) via 056I/01PB/00L2: Supp n U = V(Ann_A(M))), lem-weil-pbc-scheme-theoretic-support (05JU/05JV: the annihilator ideal sheaf is quasi-coherent, its closed subscheme has underlying set Supp(F) and kills F, with the localization fact Ann(M)_f = Ann(M_f) for finite M folded in), lem-weil-pbc-closed-immersion-pushforward-annihilated (01QY/01BG/01B6: I i_*G = 0; if IF = 0 then F -> i_* i^* F is an isomorphism, i^*F quasi-coherent, of finite type if F is). 'Only if' from lem-weil-pbc-closed-subset-proper-over-base-properties (1) with Z the scheme-theoretic support; 'if' with Supp(F) in i(Z) written out (I_Z(X \\ i(Z)) = O_X) and (1),(2) of the properties node; the reformulation I_Z F = 0 iff F = i_* G. def-pc-module-pullback added to stmt_deps for i_*."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-support-proper-over-base",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 0CYS, 056J, 05JU/05JV and 01QY (tags verified in tags/tags: 0CYS coherent-lemma-module-support-proper-over-base, 056J morphisms-lemma-support-finite-type, 05JU morphisms-lemma-scheme-theoretic-support, 05JV morphisms-definition-scheme-theoretic-support, 01QY morphisms-lemma-i-star-equivalence, 0CYN, 0CYL, 0CYM). Statement kept (correct); stmt_deps gained def-pc-module-pullback for i_*. Proof in five steps following the proof of 0CYS: closedness (new node lem-weil-pbc-finite-type-module-support-closed), the scheme-theoretic support (new node lem-weil-pbc-scheme-theoretic-support), the two directions of (2) via the existing lem-weil-pbc-closed-subset-proper-over-base-properties (1),(2), with the inclusion Supp(F) in Z (left implicit in Stacks) written out from the definition of the ideal sheaf, and the equivalence I_Z F=0 <=> F = i_*G (new node lem-weil-pbc-closed-immersion-pushforward-annihilated). Mathlib has no support, annihilator ideal sheaf or closed-immersion pushforward theory for Scheme.Modules (three kinds of search recorded on the new nodes); the ring-level facts Module.support_eq_zeroLocus / Module.isClosed_support exist. No Lean candidate in slopmaster2."
  }
 }
