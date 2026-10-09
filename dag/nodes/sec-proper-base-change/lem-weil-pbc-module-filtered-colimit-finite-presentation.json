@@ -1,0 +1,92 @@
+{
+ "id": "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+ "kind": "statement",
+ "title": "A quasi-coherent module on a qcqs scheme is a filtered colimit of modules of finite presentation, indexed by a filtered category (Stacks 01PJ)",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] which is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], and let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. An $\\mathcal O_X$-module $\\mathcal G$ is *of finite presentation* if every point of $X$ has an open neighbourhood $U$ with an exact sequence $\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U\\to0$ of $\\mathcal O_U$-modules (Stacks, Modules, Definition 01BN). Then there exist a small filtered category $\\mathcal I$ (its objects form a set; it is nonempty, any two objects $i,i'$ admit morphisms $i\\to i''$, $i'\\to i''$ to a common object, and any two parallel morphisms $a,b:i\\to i'$ are equalized by some $c:i'\\to i''$, $ca=cb$) [def-weil-pbc-category-colimit], a functor $M:\\mathcal I\\to\\Mod(\\mathcal O_X)$, $i\\mapsto\\mathcal F_i$, with every $\\mathcal F_i$ of finite presentation, and $\\mathcal O_X$-module maps $\\varphi_i:\\mathcal F_i\\to\\mathcal F$ with $\\varphi_{i'}\\circ M(a)=\\varphi_i$ for every morphism $a:i\\to i'$ of $\\mathcal I$, such that $(\\mathcal F,(\\varphi_i)_i)$ is a colimit of $M$ in the category of $\\mathcal O_X$-modules [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PJ (lemma-directed-colimit-diagram-finite-presentation, line 3040); its proof uses Modules, Lemma 01BC (lemma-set-isomorphism-classes-finite-type-modules), direct sums and cokernels of finitely presented modules, stalks of colimits (Sheaves, Section 009E), Properties, Lemma 01PF (lemma-extend, line 2847) and Lemma 01PI (lemma-extend-finite-presentation, line 2924)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi-coherent sheaf of modules is a filtered colimit of sheaves of modules of finite presentation",
+   "results": "SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation(.mk, .isFinite_presentation), SheafOfModules.isQuasicoherent, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.Presentation.isColimit (all Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent): definitions and fp => quasi-coherent only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "category of morphisms from finitely presented sheaves of modules to a fixed sheaf is filtered and its colimit is the sheaf",
+   "results": "CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under (Presentable/Finite), MorphismProperty.exists_hom_of_isFinitelyPresentable (MorphismProperty/Ind), ColimitPresentation.instIsFilteredTotal... (Presentable/ColimitPresentation), SheafOfModules.instHasColimitsOfSize... / instHasColimitsOfShape... (ModuleCat/Sheaf/Colimits), Sheaf.hasFilteredColimitsOfSize, ModuleCat.FilteredColimits.colimit: general categorical tools and existence of colimits, nothing about quasi-coherent or finitely presented sheaves of modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "on a quasi-compact quasi-separated scheme any quasi-coherent sheaf is a filtered colimit of finitely presented O_X-modules (category of pairs G -> F with G finitely presented is filtered)",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, AlgebraicGeometry.Scheme.Modules.instHasColimits (AlgebraicGeometry/Modules/Sheaf.lean:53): definitions, fp => quasi-coherent, and existence of colimits in X.Modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation",
+   "results": "5 declarations in total, all in Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent: SheafOfModules.IsFinitePresentation, instIsFiniteTypeOfIsFinitePresentation, instIsQuasicoherentOfIsFinitePresentation, IsFinitePresentation.exists_quasicoherentData, IsFinitePresentation.mk; no colimit result",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinitePresentation\", CategoryTheory.Limits.IsColimit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'IsFinitePresentation\\|isFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | grep -i 'colim\\|filtered\\|directed'; grep -rn 'stacks 01PK\\|stacks 01PJ\\|stacks 01PG\\|stacks 01PI\\|stacks 01PF\\|stacks 01BC' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'IsQuasicoherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'SheafOfModules\\|Scheme.Modules' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Presentable/",
+   "results": "IsFinitePresentation only in Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; no line combining it with colimit/filtered/directed; no stacks attribute 01PK/01PJ/01PG/01PI/01PF/01BC; IsQuasicoherent in AlgebraicGeometry only in Modules/Tilde.lean (tilde M quasi-coherent, restriction along open immersions); no local presentability of SheafOfModules/Scheme.Modules in CategoryTheory/Presentable",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-directed-colimit-finite-presentation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Properties 01PJ (quasi-coherent on qcqs = colimit of finitely presented modules over a small filtered category); correct; unsplit (its split needs 01BC, 01PF, 01PI, 01BP)."
+ }
+}

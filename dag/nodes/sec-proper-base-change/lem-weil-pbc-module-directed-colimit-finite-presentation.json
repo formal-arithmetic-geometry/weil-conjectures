@@ -14,9 +14,64 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the filtered diagram).* By [lem-weil-pbc-module-filtered-colimit-finite-presentation] (Properties 01PJ; $X$ is qcqs and $\\mathcal F$ quasi-coherent) there are a small filtered category $\\mathcal I$, a functor $M:\\mathcal I\\to\\Mod(\\mathcal O_X)$ with every $M(x)$ of finite presentation, and maps $\\varphi_x:M(x)\\to\\mathcal F$ with $\\varphi_y\\circ M(a)=\\varphi_x$ for $a:x\\to y$, such that $(\\mathcal F,(\\varphi_x)_x)$ is a colimit of $M$.",
+   "uses": [
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PK (lemma-directed-colimit-finite-presentation, line 3193), proof (line 3215): 'direct consequence of Lemma 01PJ and Categories, Lemma 0032'"
+   }
+  },
+  {
+   "text": "*Step 2 (dualize).* The opposite category $\\mathcal I^{\\rm op}$ is small and cofiltered (the three conditions of filteredness for $\\mathcal I$ [def-weil-pbc-category-colimit] read in $\\mathcal I^{\\rm op}$ are the three conditions of cofilteredness: nonempty, any two objects receive morphisms from a common object, any two parallel morphisms are equalized on the source side). Let $\\mathcal C=\\Mod(\\mathcal O_X)^{\\rm op}$ and $D=M^{\\rm op}:\\mathcal I^{\\rm op}\\to\\mathcal C$. A family $g_x:T\\to D(x)$ in $\\mathcal C$ with $D(a)\\circ g_x=g_y$ is a family $M(x)\\to T$ in $\\Mod(\\mathcal O_X)$ compatible with the $M(a)$, so the colimit property of $(\\mathcal F,(\\varphi_x))$ (Step 1) says exactly that $(\\mathcal F,(\\varphi_x^{\\rm op}:\\mathcal F\\to D(x))_x)$ is a limit cone of $D$ in $\\mathcal C$ in the sense of [lem-weil-pbc-cofiltered-limit-directed-reindex] (a limit in $\\mathcal C$ is a colimit in $\\mathcal C^{\\rm op}=\\Mod(\\mathcal O_X)$). This is the definition read in the opposite category.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-cofiltered-limit-directed-reindex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PK (lemma-directed-colimit-finite-presentation, line 3193), proof (line 3215): 'direct consequence of Lemma 01PJ and Categories, Lemma 0032'"
+   }
+  },
+  {
+   "text": "*Step 3 (reindex by a directed set: Categories 0032).* By [lem-weil-pbc-cofiltered-limit-directed-reindex] (Categories, Lemma 0032, Mathlib `IsFiltered.exists_directed` with `Functor.Final`; applied to the small cofiltered category $\\mathcal I^{\\rm op}$, the category $\\mathcal C=\\Mod(\\mathcal O_X)^{\\rm op}$, $D=M^{\\rm op}$ and the limit cone of Step 2) there are a nonempty directed set $(A,\\le)$, objects $x_a$ of $\\mathcal I$ ($a\\in A$) and morphisms $x_b\\to x_a$ of $\\mathcal I^{\\rm op}$, i.e. morphisms $\\psi_{ba}:x_a\\to x_b$ of $\\mathcal I$ ($a\\le b$), with $\\psi_{aa}=\\mathrm{id}$ and $\\psi_{cb}\\circ\\psi_{ba}=\\psi_{ca}$ ($a\\le b\\le c$), such that $(\\mathcal F,(\\varphi_{x_a}^{\\rm op})_{a\\in A})$ is a limit in $\\mathcal C$ of the inverse system $(D(x_a),D(\\psi_{ba}^{\\rm op}))$; read back in $\\Mod(\\mathcal O_X)$ as in Step 2, $(\\mathcal F,(\\varphi_{x_a})_{a\\in A})$ is a colimit of the system $(M(x_a),M(\\psi_{ba}))_{a\\le b}$ over $A$. (Stacks also invokes the existence of colimits in $\\Mod(\\mathcal O_X)$; it is not needed here, since the cited lemma transfers the colimit property itself, Mathlib `Functor.Final.isColimitWhiskerEquiv`.)",
+   "uses": [
+    "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PK (lemma-directed-colimit-finite-presentation, line 3193), proof (line 3215): 'direct consequence of Lemma 01PJ and Categories, Lemma 0032'"
+   }
+  },
+  {
+   "text": "*Step 4 (conclusion).* Put $I=A$, $\\mathcal F_a=M(x_a)$, $\\varphi_{ba}=M(\\psi_{ba})$ for $a\\le b$, and $\\varphi_a=\\varphi_{x_a}$. Each $\\mathcal F_a$ is of finite presentation (Step 1); $\\varphi_{aa}=M(\\mathrm{id})=\\mathrm{id}$ and $\\varphi_{cb}\\varphi_{ba}=M(\\psi_{cb}\\psi_{ba})=\\varphi_{ca}$ by functoriality of $M$; $\\varphi_b\\circ\\varphi_{ba}=\\varphi_{x_b}\\circ M(\\psi_{ba})=\\varphi_{x_a}=\\varphi_a$ by the cocone property of Step 1; and $(\\mathcal F,(\\varphi_a))$ is a colimit of the system [def-weil-pbc-category-colimit] by Step 3. This is the statement.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PK (lemma-directed-colimit-finite-presentation, line 3193), proof (line 3215): 'direct consequence of Lemma 01PJ and Categories, Lemma 0032'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PK, proof (line 3215); Categories, Lemma 0032 (categories.tex line 2710)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,10 +93,38 @@
    "results": "SymmetricAlgebra only in LinearAlgebra/SymmetricAlgebra/{Basic,Basis}.lean, RingTheory/Bialgebra/SymmetricAlgebra.lean (ring level, no sheaf version, no finite-presentation instance); IsQuasicoherent in AlgebraicGeometry only in Modules/Tilde.lean (tilde M is quasi-coherent); IsFinitePresentation only in Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean (definition, implies quasi-coherent and finite type); no IsFiniteType in AlgebraicGeometry; no kernel/image/colimit results for quasi-coherent sheaves; no quasi-coherent algebras",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi-coherent sheaf of modules is a filtered colimit of sheaves of modules of finite presentation",
+   "results": "SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation(.mk, .isFinite_presentation), SheafOfModules.isQuasicoherent, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.Presentation.isColimit (all Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent): definitions and fp => quasi-coherent only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "category of morphisms from finitely presented sheaves of modules to a fixed sheaf is filtered and its colimit is the sheaf",
+   "results": "CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under (Presentable/Finite), MorphismProperty.exists_hom_of_isFinitelyPresentable (MorphismProperty/Ind), ColimitPresentation.instIsFilteredTotal... (Presentable/ColimitPresentation), SheafOfModules.instHasColimitsOfSize... / instHasColimitsOfShape... (ModuleCat/Sheaf/Colimits), Sheaf.hasFilteredColimitsOfSize, ModuleCat.FilteredColimits.colimit: general categorical tools and existence of colimits, nothing about quasi-coherent or finitely presented sheaves of modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation",
+   "results": "5 declarations in total, all in Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent: SheafOfModules.IsFinitePresentation, instIsFiniteTypeOfIsFinitePresentation, instIsQuasicoherentOfIsFinitePresentation, IsFinitePresentation.exists_quasicoherentData, IsFinitePresentation.mk; no colimit result",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'IsFinitePresentation\\|isFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | grep -i 'colim\\|filtered\\|directed'; grep -rn 'stacks 01PK\\|stacks 01PJ\\|stacks 01PG\\|stacks 01PI\\|stacks 01PF\\|stacks 01BC' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'IsQuasicoherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'SheafOfModules\\|Scheme.Modules' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Presentable/",
+   "results": "IsFinitePresentation only in Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; no line combining it with colimit/filtered/directed; no stacks attribute 01PK/01PJ/01PG/01PI/01PF/01BC; IsQuasicoherent in AlgebraicGeometry only in Modules/Tilde.lean (tilde M quasi-coherent, restriction along open immersions); no local presentability of SheafOfModules/Scheme.Modules in CategoryTheory/Presentable",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,6 +149,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks Properties 01PK; self-contained; correct; unsplit."
+  "note": "Four steps along Stacks 01PK as it is (01PJ + Categories 0032; the brief′s expected ingredients were wrong, as the worker shows): 01PJ as the new unsplit node lem-weil-pbc-module-filtered-colimit-finite-presentation, dualization written out, reindexing by the reviewed leaf lem-weil-pbc-cofiltered-limit-directed-reindex in the opposite category, conclusion. Checked."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-directed-colimit-finite-presentation",
+  "worker": "stage1",
+  "summary": "Read the Stacks proof of 01PK (properties.tex line 3215): it is exactly 01PJ (filtered-category version, line 3040) plus Categories 0032 (filtered category -> cofinal directed system) plus existence of colimits in Mod(O_X). It does not cite 01PG, 01PF, 01PI, 01BS or 01BC directly; those are used inside the proof of 01PJ (01BC, 01PF, 01PI, direct sums/cokernels of fp modules, stalks of colimits), which is created as the new unsplit node lem-weil-pbc-module-filtered-colimit-finite-presentation. Categories 0032 is the existing reviewed Mathlib leaf lem-weil-pbc-cofiltered-limit-directed-reindex (cofiltered/limit form), applied in the opposite category (Steps 2-3); the existence of colimits in Mod(O_X) that Stacks mentions is not needed because the leaf transfers the colimit property itself. Steps 2 and 4 are elementary. Mathlib re-searched with LeanSearch, Loogle and grep: IsFinitePresentation has 5 declarations (definition, => quasi-coherent, => finite type, mk, exists_quasicoherentData), no colimit result; no 01PK/01PJ in the slopmaster2 source."
  }
 }
