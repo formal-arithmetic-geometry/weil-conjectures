@@ -26,7 +26,7 @@ the shapes whose colimits are preserved by `A ⊗ -`: the colimit then carries t
 
 @[expose] public section
 
-universe v u
+universe w w' v u
 
 open CategoryTheory MonoidalCategory MonObj Limits
 
@@ -235,5 +235,13 @@ variable (J) in
 instance [HasColimitsOfShape J C] [PreservesColimitsOfShape J (tensorLeft A)] :
     PreservesColimitsOfShape J (forget (D := C) A) :=
   inferInstance
+
+noncomputable instance [PreservesColimitsOfSize.{w, w'} (tensorLeft A)] :
+    CreatesColimitsOfSize.{w, w'} (forget (D := C) A) where
+  CreatesColimitsOfShape := inferInstance
+
+instance [HasColimitsOfSize.{w, w'} C] [PreservesColimitsOfSize.{w, w'} (tensorLeft A)] :
+    PreservesColimitsOfSize.{w, w'} (forget (D := C) A) where
+  preservesColimitsOfShape := inferInstance
 
 end CategoryTheory.Mod
