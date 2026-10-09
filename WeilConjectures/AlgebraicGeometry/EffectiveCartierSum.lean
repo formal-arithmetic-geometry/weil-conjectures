@@ -15,8 +15,8 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.Quotient.Operations
 The unit ideal sheaf is invertible
 (`AlgebraicGeometry.Scheme.IdealSheafData.isInvertible_top`), and the product of two invertible
 ideal sheaves is invertible (`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.mul`): it
-cuts out the sum of the two effective Cartier divisors. Over a field, the degree `dim_K Γ(D, 𝒪_D)` of finite effective
-Cartier divisors is additive
+cuts out the sum of the two effective Cartier divisors. Over a field, the degree
+`dim_K Γ(D, 𝒪_D)` of finite effective Cartier divisors is additive
 (`AlgebraicGeometry.Scheme.IdealSheafData.finrankΓ_subschemeι_mul_comp`).
 -/
 

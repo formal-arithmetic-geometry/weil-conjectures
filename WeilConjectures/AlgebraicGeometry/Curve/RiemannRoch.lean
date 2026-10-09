@@ -25,14 +25,17 @@ public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 
 /-!
 # Riemann–Roch, Serre duality and the twist lemma for curves
@@ -866,6 +869,346 @@ theorem genus_eq_arithmeticGenus [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k
 
 end Duality
 
+
+section PointIdeal
+
+variable {k : Type u} [Field k] {X : Scheme.{u}} (x : Spec (.of k) ⟶ X)
+
+/-- Away from the image of a rational point `x`, the ideal sheaf `ker x` is everything. -/
+lemma Hom.ideal_ker_eq_top_of_notMem (W : X.affineOpens) (h : x.base default ∉ W.1) :
+    x.ker.ideal W = ⊤ := by
+  have hW : x ⁻¹ᵁ W.1 = ⊥ := by
+    refine eq_bot_iff.mpr fun y hy ↦ (h ?_).elim
+    rw [Subsingleton.elim y default] at hy
+    exact hy
+  have : Subsingleton Γ(Spec (.of k), x ⁻¹ᵁ W.1) := by
+    rw [hW]
+    infer_instance
+  rw [Hom.ker_apply, Ideal.eq_top_iff_one, RingHom.mem_ker]
+  exact Subsingleton.elim _ _
+
+/-- Near the image `P` of a rational point `x`, a function lies in the ideal sheaf `ker x` if
+and only if it vanishes at `P`. -/
+lemma Hom.mem_ideal_ker_iff (W : X.affineOpens) (h : x.base default ∈ W.1) (c : Γ(X, W.1)) :
+    c ∈ x.ker.ideal W ↔ x.base default ∉ X.basicOpen c := by
+  have e : (⊤ : (Spec (.of k)).Opens) ≤ x ⁻¹ᵁ W.1 := fun y _ ↦ by
+    rw [Subsingleton.elim y default]
+    exact h
+  rw [Hom.ker_apply, RingHom.mem_ker]
+  have h1 : x.app W.1 c = 0 ↔ x.appLE W.1 ⊤ e c = 0 := by
+    rw [Scheme.Hom.appLE, CommRingCat.comp_apply]
+    have hinj : Function.Injective ((Spec (.of k)).presheaf.map (homOfLE e).op) := by
+      have : IsIso (homOfLE e).op := by
+        have : x ⁻¹ᵁ W.1 = ⊤ := top_le_iff.mp e
+        rw [show (homOfLE e).op = (eqToHom (by rw [this])) from Subsingleton.elim _ _]
+        infer_instance
+      exact (ConcreteCategory.bijective_of_isIso _).1
+    exact ⟨fun h ↦ by rw [h, map_zero], fun h ↦ hinj (h.trans (map_zero _).symm)⟩
+  have h2 : x.base default ∈ X.basicOpen c ↔
+      default ∈ (Spec (.of k)).basicOpen (x.appLE W.1 ⊤ e c) := by
+    rw [Scheme.basicOpen_appLE]
+    exact ⟨fun h ↦ ⟨trivial, h⟩, fun h ↦ h.2⟩
+  rw [h1, h2, basicOpen_eq_of_affine', PrimeSpectrum.mem_basicOpen, not_not]
+  have hbot (p : PrimeSpectrum k) : p.asIdeal = ⊥ := Ideal.eq_bot_of_prime _
+  rw [hbot, Ideal.mem_bot]
+  exact (map_eq_zero_iff _ (ConcreteCategory.bijective_of_isIso
+    (Scheme.ΓSpecIso (.of k)).hom).1).symm
+
+/-- The ideal sheaf of a rational point `x` generates the maximal ideal of the local ring at its
+image. -/
+lemma Hom.map_germ_ideal_ker (W : X.affineOpens) (h : x.base default ∈ W.1) :
+    (x.ker.ideal W).map (X.presheaf.germ W.1 (x.base default) h).hom =
+      IsLocalRing.maximalIdeal (X.presheaf.stalk (x.base default)) := by
+  let : Algebra Γ(X, W.1) (X.presheaf.stalk (x.base default)) :=
+    TopCat.Presheaf.algebra_section_stalk X.presheaf ⟨x.base default, h⟩
+  have := W.2.isLocalization_stalk ⟨x.base default, h⟩
+  have e : x.ker.ideal W = (W.2.primeIdealOf ⟨x.base default, h⟩).asIdeal := by
+    ext c
+    rw [x.mem_ideal_ker_iff W h c, Scheme.mem_basicOpen _ _ _ h, ← mem_nonunits_iff,
+      ← IsLocalRing.mem_maximalIdeal]
+    exact IsLocalization.AtPrime.to_map_mem_maximal_iff (X.presheaf.stalk (x.base default))
+      (W.2.primeIdealOf ⟨x.base default, h⟩).asIdeal c
+  rw [e]
+  exact IsLocalization.AtPrime.map_eq_maximalIdeal _ _
+
+end PointIdeal
+
+section ClosedPoint
+
+variable {k : Type u} [Field k] {X : Scheme.{u}}
+
+/-- Over an algebraically closed field, every closed point of a scheme locally of finite type is
+the image of a rational point. -/
+lemma Hom.exists_fieldPoints_base_eq_of_isClosed [IsAlgClosed k] (f : X ⟶ Spec (.of k))
+    [LocallyOfFiniteType f] {P : X} (hP : IsClosed {P}) :
+    ∃ x : f.fieldPoints k, x.1.base default = P := by
+  rw [Hom.exists_fieldPoints_base_eq_iff]
+  let := (f.residueFieldAlgebraMap P).toAlgebra
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  have : Module.Finite k (X.residueField P) := by
+    have := isClosed_singleton_iff_isClosedImmersion.mp hP
+    have := (isFinite_iff_locallyOfFiniteType_of_jacobsonSpace
+      (f := X.fromSpecResidueField P ≫ f)).mpr inferInstance
+    rw [← f.specMap_residueFieldAlgebraMap, IsFinite.SpecMap_iff] at this
+    exact this
+  have hb := IsAlgClosed.ringHom_bijective_of_isIntegral (f.residueFieldAlgebraMap P)
+    (RingHom.IsIntegral.of_finite (RingHom.finite_algebraMap.mpr inferInstance))
+  let e := RingEquiv.ofBijective _ hb
+  refine ⟨CommRingCat.ofHom e.symm.toRingHom, ?_⟩
+  ext c
+  exact e.symm_apply_apply c
+
+/-- The image of a rational point of a scheme locally of finite type over a field is closed. -/
+lemma Hom.isClosed_singleton_fieldPoints (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f]
+    (x : f.fieldPoints k) : IsClosed {x.1.base default} := by
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  have hx : x.1 ≫ f = 𝟙 _ := by
+    rw [x.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]
+  have : LocallyOfFiniteType x.1 := by
+    have : LocallyOfFiniteType (x.1 ≫ f) := by rw [hx]; infer_instance
+    exact locallyOfFiniteType_of_comp x.1 f
+  exact x.1.closePoints_subset_preimage_closedPoints
+    (show IsClosed {default} from isClosed_discrete _)
+
+end ClosedPoint
+
+section H
+
+variable {X : Scheme.{u}}
+
+/-- On `H⁰ = Γ`, the map induced by a morphism of modules is its action on global sections. -/
+lemma Modules.H.zeroLinearEquiv_map {M N : X.Modules} (φ : M ⟶ N) (z : M.H 0) :
+    Modules.H.zeroLinearEquiv N (Modules.H.map φ 0 z) =
+      φ.app ⊤ (Modules.H.zeroLinearEquiv M z) :=
+  (Sheaf.H.equiv₀_naturality (hT := isTerminalTop)
+    ((SheafOfModules.toSheaf X.ringCatSheaf).map φ) z).symm
+
+end H
+
+section VeryAmpleCurve
+
+variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
+  [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
+/-- **A section vanishing at a rational point vanishes on it.** A global section `σ` of an
+invertible `N` which does not generate `N` at the image of a rational point `x` maps to zero in
+`N ⧸ 𝒪_X(-x) N`. -/
+lemma Modules.app_cokernel_π_eq_zero_of_not_generatesAt (N : X.Modules) [N.IsInvertible]
+    (x : (X ↘ Spec (.of k)).fieldPoints k) (σ : Γ(N, ⊤))
+    (hσ : ¬ Modules.GeneratesAt σ (x.1.base default)) :
+    ((λ_ N).inv ≫ cokernel.π (x.1.ker.toModulesι ▷ N)).app ⊤ σ = 0 := by
+  have := Modules.IsInvertible.sheafOfModules_isInvertible N
+  have hP := (X ↘ Spec (.of k)).isClosed_singleton_fieldPoints x
+  refine Modules.app_cokernel_π_eq_zero _ _ σ fun y ↦ ?_
+  by_cases hy : y = x.1.base default
+  · subst hy
+    obtain ⟨W, hxW, -, e, he⟩ := Modules.exists_isFreeGenerator N
+      (TopologicalSpace.Opens.mem_top (x.1.base default))
+    obtain ⟨c, hc⟩ := he.exists_smul_eq (N.presheaf.map (homOfLE le_top).op σ)
+    refine ⟨W, hxW, e, c, (x.1.mem_ideal_ker_iff W hxW c).mpr fun h ↦ hσ ?_, hc.symm⟩
+    exact Modules.generatesAt_of_mem_basicOpen he hc.symm h
+  · obtain ⟨W, hyW, hWP, e, he⟩ := Modules.exists_isFreeGenerator N
+      (W := ⟨_, hP.isOpen_compl⟩) (x := y) hy
+    obtain ⟨c, hc⟩ := he.exists_smul_eq (N.presheaf.map (homOfLE le_top).op σ)
+    refine ⟨W, hyW, e, c, ?_, hc.symm⟩
+    rw [x.1.ideal_ker_eq_top_of_notMem W fun h ↦ hWP h rfl]
+    trivial
+
+/-- **Twisting by a rational point at which `h⁰` drops.** If `h⁰(N ⊗ 𝒪_X(-x)) + 1 = h⁰(N)`
+for an invertible `N` and a rational point `x`, some global section of `N` has non-zero image in
+`N ⧸ 𝒪_X(-x) N`. -/
+lemma Modules.exists_app_cokernel_π_ne_zero (N : X.Modules) [N.IsInvertible]
+    (x : (X ↘ Spec (.of k)).fieldPoints k)
+    (h : Modules.finrankH k (N ⊗ x.1.ker.toModules) 0 + 1 = Modules.finrankH k N 0) :
+    ∃ σ : Γ(N, ⊤), ((λ_ N).inv ≫ cokernel.π (x.1.ker.toModulesι ▷ N)).app ⊤ σ ≠ 0 := by
+  have hJ := Hom.isInvertible_ker_fieldPoints x
+  have := hJ.isInvertible_toModules
+  let S := ShortComplex.mk (x.1.ker.toModulesι ▷ N) (cokernel.π _) (cokernel.condition _)
+  have hS : S.ShortExact := .mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+  have : S.X₂.IsInvertible := Modules.IsInvertible.of_iso (λ_ N).symm
+  have := hJ.finiteDimensional_H_cokernel_whiskerRight (k := k) N 0
+  have : FiniteDimensional k (S.X₂.H 0) := Modules.finiteDimensional_H (M := S.X₂) k 0
+  have h3 : Modules.finrankH k S.X₃ 0 = 1 := by
+    have := hJ.subsingleton_H_one_cokernel_whiskerRight k N
+    have h := hJ.eulerChar_cokernel_whiskerRight (k := k) N
+    have h1 : Modules.finrankH k (cokernel (x.1.ker.toModulesι ▷ N)) 1 = 0 :=
+      Module.finrank_zero_of_subsingleton
+    rw [Hom.finrankΓ_subschemeι_ker_fieldPoints,
+      Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one, h1] at h
+    simp only [Nat.cast_zero, sub_zero, Nat.cast_one, Nat.cast_eq_one] at h
+    exact h
+  let f := Modules.H.mapLinearMap k S.f 0
+  let g := Modules.H.mapLinearMap k S.g 0
+  have hf : LinearMap.ker f = ⊥ :=
+    LinearMap.ker_eq_bot.mpr (Modules.H.injective_map_zero_of_shortExact hS)
+  have hg : LinearMap.ker g = LinearMap.range f := by
+    ext y
+    exact SetLike.ext_iff.mp (Modules.H.ker_map_g_eq_range_map_f hS 0) y
+  have hrf : Module.finrank k (LinearMap.range f) = Modules.finrankH k S.X₁ 0 := by
+    have := LinearMap.finrank_range_add_finrank_ker f
+    rw [hf, finrank_bot] at this
+    exact this.trans rfl
+  have h2 := LinearMap.finrank_range_add_finrank_ker g
+  rw [hg, hrf] at h2
+  have e₁ : S.X₁ ≅ N ⊗ x.1.ker.toModules := β_ _ _
+  have e₂ : S.X₂ ≅ N := λ_ N
+  rw [Modules.finrankH_congr k e₁] at h2
+  change _ + _ = Modules.finrankH k S.X₂ 0 at h2
+  rw [Modules.finrankH_congr k e₂] at h2
+  have hpos : LinearMap.range g ≠ ⊥ := by
+    intro h0
+    rw [h0, finrank_bot] at h2
+    omega
+  obtain ⟨_, ⟨z, rfl⟩, hz⟩ := Submodule.exists_mem_ne_zero_of_ne_bot hpos
+  refine ⟨(λ_ N).hom.app ⊤ (Modules.H.zeroLinearEquiv S.X₂ z), fun h0 ↦ hz ?_⟩
+  rw [Hom.comp_app, ConcreteCategory.comp_apply, Modules.inv_app_hom_app_apply_of_iso] at h0
+  apply (Modules.H.zeroLinearEquiv S.X₃).injective
+  rw [map_zero, Modules.H.mapLinearMap_apply, Modules.H.zeroLinearEquiv_map]
+  exact h0
+
+/-- **Base point freeness.** If `h⁰(ℳ ⊗ 𝒪_X(-x)) + 1 = h⁰(ℳ)` and the global sections `s j`
+span `Γ(X, ℳ)`, then some `s j` generates `ℳ` at `x`. -/
+lemma Modules.exists_generatesAt_of_finrankH {n : Type*} (ℳ : X.Modules) [ℳ.IsInvertible]
+    (s : n → Γ(ℳ, ⊤)) (hspan : ∀ σ : Γ(ℳ, ⊤), σ ∈ Submodule.span Γ(X, ⊤) (Set.range s))
+    (x : (X ↘ Spec (.of k)).fieldPoints k)
+    (h₁ : Modules.finrankH k (ℳ ⊗ x.1.ker.toModules) 0 + 1 = Modules.finrankH k ℳ 0) :
+    ∃ j, Modules.GeneratesAt (s j) (x.1.base default) := by
+  obtain ⟨σ, hσ⟩ := Modules.exists_app_cokernel_π_ne_zero ℳ x h₁
+  by_contra! hs
+  have key (τ : Γ(ℳ, ⊤)) (hτ : τ ∈ Submodule.span Γ(X, ⊤) (Set.range s)) :
+      ((λ_ ℳ).inv ≫ cokernel.π (x.1.ker.toModulesι ▷ ℳ)).app ⊤ τ = 0 := by
+    induction hτ using Submodule.span_induction with
+    | mem y hy =>
+      obtain ⟨j, rfl⟩ := hy
+      exact Modules.app_cokernel_π_eq_zero_of_not_generatesAt ℳ x _ (hs j)
+    | zero => exact map_zero _
+    | add a b _ _ ha hb => rw [map_add, ha, hb, add_zero]
+    | smul r a _ ha => rw [Hom.app_smul, ha, smul_zero]
+  exact hσ (key σ (hspan σ))
+
+/-- The setting of the two-point conditions: a global section of `𝒪_X(-x) ⊗ ℳ` which
+generates at `y`. -/
+lemma Modules.exists_generatesAt_tensorObj_toModules_ker (ℳ : X.Modules) [ℳ.IsInvertible]
+    (x y : (X ↘ Spec (.of k)).fieldPoints k)
+    (h₁ : Modules.finrankH k (ℳ ⊗ x.1.ker.toModules) 0 + 1 = Modules.finrankH k ℳ 0)
+    (h₂ : Modules.finrankH k ((ℳ ⊗ x.1.ker.toModules) ⊗ y.1.ker.toModules) 0 + 2 =
+      Modules.finrankH k ℳ 0) :
+    ∃ σ : Γ(x.1.ker.toModules ⊗ ℳ, ⊤), Modules.GeneratesAt σ (y.1.base default) := by
+  have := (Hom.isInvertible_ker_fieldPoints x).isInvertible_toModules
+  have hdim : Modules.finrankH k ((x.1.ker.toModules ⊗ ℳ) ⊗ y.1.ker.toModules) 0 + 1 =
+      Modules.finrankH k (x.1.ker.toModules ⊗ ℳ) 0 := by
+    rw [Modules.finrankH_congr k (β_ x.1.ker.toModules ℳ),
+      Modules.finrankH_congr k (whiskerRightIso (β_ x.1.ker.toModules ℳ) _)]
+    omega
+  obtain ⟨σ, hσ⟩ := Modules.exists_app_cokernel_π_ne_zero _ y hdim
+  refine ⟨σ, ?_⟩
+  by_contra h
+  exact hσ (Modules.app_cokernel_π_eq_zero_of_not_generatesAt _ y σ h)
+
+/-- **Separating points.** Under the two-point conditions at `x ≠ y`, some global section of `ℳ`
+vanishes at `x` but generates `ℳ` at `y`. -/
+lemma Modules.exists_not_generatesAt_generatesAt (ℳ : X.Modules) [ℳ.IsInvertible]
+    (x y : (X ↘ Spec (.of k)).fieldPoints k) (hxy : x.1.base default ≠ y.1.base default)
+    (h₁ : Modules.finrankH k (ℳ ⊗ x.1.ker.toModules) 0 + 1 = Modules.finrankH k ℳ 0)
+    (h₂ : Modules.finrankH k ((ℳ ⊗ x.1.ker.toModules) ⊗ y.1.ker.toModules) 0 + 2 =
+      Modules.finrankH k ℳ 0) :
+    ∃ t : Γ(ℳ, ⊤), ¬ Modules.GeneratesAt t (x.1.base default) ∧
+      Modules.GeneratesAt t (y.1.base default) := by
+  have hI := Hom.isInvertible_ker_fieldPoints x
+  have hP := (X ↘ Spec (.of k)).isClosed_singleton_fieldPoints x
+  obtain ⟨σ, hσ⟩ := Modules.exists_generatesAt_tensorObj_toModules_ker ℳ x y h₁ h₂
+  refine ⟨(x.1.ker.toModulesι ▷ ℳ ≫ (λ_ ℳ).hom).app ⊤ σ, fun hgen ↦ ?_, ?_⟩
+  · obtain ⟨W, hPW, -, e, v, π, he, hspan, ht, -⟩ :=
+      Modules.exists_app_leftUnitor_whiskerRight_toModulesι x.1.ker ℳ hI σ
+        (TopologicalSpace.Opens.mem_top (x.1.base default))
+    have h1 := Modules.mem_basicOpen_of_generatesAt he ht hPW hgen
+    rw [Scheme.basicOpen_mul] at h1
+    have hπ : π ∈ x.1.ker.ideal W := hspan ▸ Ideal.mem_span_singleton_self π
+    exact (x.1.mem_ideal_ker_iff W hPW π).mp hπ h1.2
+  · obtain ⟨W, hQW, hWO, e, v, π, he, hspan, ht, hv⟩ :=
+      Modules.exists_app_leftUnitor_whiskerRight_toModulesι x.1.ker ℳ hI σ
+        (O := ⟨_, hP.isOpen_compl⟩) (x := y.1.base default) (Ne.symm hxy)
+    rw [x.1.ideal_ker_eq_top_of_notMem W fun h ↦ hWO h rfl, Ideal.span_singleton_eq_top] at hspan
+    refine Modules.generatesAt_of_mem_basicOpen he ht ?_
+    rw [Scheme.basicOpen_mul, X.basicOpen_of_isUnit hspan]
+    exact ⟨hv hσ, hQW⟩
+
+/-- **Separating tangent vectors.** Under the two-point condition at `x = y`, some global
+section of `ℳ` is, near `x`, a multiple `c • e` of a free generator `e` by a function `c`
+generating the ideal of `x`. -/
+lemma Modules.exists_span_eq_ideal_ker (ℳ : X.Modules) [ℳ.IsInvertible]
+    (x : (X ↘ Spec (.of k)).fieldPoints k)
+    (h₁ : Modules.finrankH k (ℳ ⊗ x.1.ker.toModules) 0 + 1 = Modules.finrankH k ℳ 0)
+    (h₂ : Modules.finrankH k ((ℳ ⊗ x.1.ker.toModules) ⊗ x.1.ker.toModules) 0 + 2 =
+      Modules.finrankH k ℳ 0) :
+    ∃ t : Γ(ℳ, ⊤), ∃ W : X.affineOpens, x.1.base default ∈ W.1 ∧
+      ∃ (e : Γ(ℳ, W.1)) (c : Γ(X, W.1)), Modules.IsFreeGenerator e ∧
+        ℳ.presheaf.map (homOfLE (le_top : W.1 ≤ ⊤)).op t = c • e ∧
+        Ideal.span {c} = x.1.ker.ideal W := by
+  have hI := Hom.isInvertible_ker_fieldPoints x
+  obtain ⟨σ, hσ⟩ := Modules.exists_generatesAt_tensorObj_toModules_ker ℳ x x h₁ h₂
+  obtain ⟨W, hPW, -, e, v, π, he, hspan, ht, hv⟩ :=
+    Modules.exists_app_leftUnitor_whiskerRight_toModulesι x.1.ker ℳ hI σ
+      (TopologicalSpace.Opens.mem_top (x.1.base default))
+  have hle : X.basicOpen v ≤ W.1 := X.basicOpen_le v
+  let W' : X.affineOpens := ⟨X.basicOpen v, W.2.basicOpen v⟩
+  have hu : IsUnit (X.presheaf.map (homOfLE hle).op v) := X.toRingedSpace.isUnit_res_basicOpen v
+  refine ⟨(x.1.ker.toModulesι ▷ ℳ ≫ (λ_ ℳ).hom).app ⊤ σ, W', hv hσ,
+    ℳ.presheaf.map (homOfLE hle).op e,
+    X.presheaf.map (homOfLE hle).op (v * π), he.map hle, ?_, ?_⟩
+  · rw [← Modules.presheaf_map_homOfLE_map_homOfLE (le_top : W.1 ≤ ⊤) hle, ht, Modules.map_smul]
+  · rw [map_mul, Ideal.span_singleton_mul_left_unit hu, ← x.1.ker.map_ideal (U := W') (V := W)
+      hle, ← hspan, Ideal.map_span, Set.image_singleton]
+    rfl
+
+end VeryAmpleCurve
+
+section VeryAmpleSpan
+
+variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
+
+private lemma appLE_eq_of_eq' {Y Z : Scheme.{u}} {f g : Y ⟶ Z} (h : f = g) (U V e) :
+    f.appLE U V e = g.appLE U V (h ▸ e) := by
+  subst h
+  rfl
+
+/-- For a morphism `φ : X ⟶ ℙ(n; k)` with `φ^* 𝒪(1) ≅ ℳ` sending `φ^* Tⱼ` to `s j`, every
+global section in the span of the `s j` is, on the preimage of `D₊(Tᵢ)`, the pullback of a
+function on `D₊(Tᵢ)` times `s i`. -/
+lemma exists_eq_app_smul_of_mem_span [GlobalSectionsBijective k X] {n : Type u} {ℳ : X.Modules}
+    {s : n → Γ(ℳ, ⊤)} {φ : X ⟶ ℙ(n; Spec (.of k))}
+    (hφ : φ ≫ ℙ(n; Spec (.of k)) ↘ Spec (.of k) = X ↘ Spec (.of k))
+    (ε : ProjectiveSpace.twistRestrict φ 1 ⟶ ℳ) [IsIso ε]
+    (hε : ∀ j, ε.app _ (Modules.pullbackSection φ (ProjectiveSpace.twistOneSection n _ j)) =
+      ℳ.presheaf.map (homOfLE (le_top : φ ⁻¹ᵁ ⊤ ≤ ⊤)).op (s j))
+    (i : n) {σ : Γ(ℳ, ⊤)} (hσ : σ ∈ Submodule.span Γ(X, ⊤) (Set.range s)) :
+    ∃ a : Γ(ℙ(n; Spec (.of k)), ProjectiveSpace.standardOpen n _ i),
+      ℳ.presheaf.map (homOfLE (le_top : φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i ≤ ⊤)).op σ =
+        φ.app _ a • ℳ.presheaf.map
+          (homOfLE (le_top : φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i ≤ ⊤)).op (s i) := by
+  induction hσ using Submodule.span_induction with
+  | mem y hy =>
+    obtain ⟨j, rfl⟩ := hy
+    exact ⟨_, ProjectiveSpace.map_eq_coordRatio_smul_of_twistRestrict_iso ε hε i j⟩
+  | zero => exact ⟨0, by rw [map_zero, map_zero, zero_smul]⟩
+  | add a b _ _ ha hb =>
+    obtain ⟨a', ha'⟩ := ha
+    obtain ⟨b', hb'⟩ := hb
+    exact ⟨a' + b', by rw [map_add, ha', hb', map_add, add_smul]⟩
+  | smul r a _ ha =>
+    obtain ⟨a', ha'⟩ := ha
+    obtain ⟨c, rfl⟩ := (GlobalSectionsBijective.bijective_globalSectionsRingHom (k := k)).2 r
+    refine ⟨(ℙ(n; Spec (.of k)) ↘ Spec (.of k)).appLE ⊤ _ le_top
+      ((Scheme.ΓSpecIso (.of k)).inv c) * a', ?_⟩
+    rw [Modules.map_smul, ha', map_mul, mul_smul]
+    congr 1
+    rw [Scheme.Hom.app_eq_appLE, ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE,
+      appLE_eq_of_eq' hφ]
+    rfl
+
+end VeryAmpleSpan
+
 section LargeDegree
 
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
@@ -981,8 +1324,93 @@ theorem isVeryAmple_of_finrankH_zero_tensorObj_toModules_ker [IsAlgClosed k]
     (h₂ : ∀ x y : (X ↘ Spec (.of k)).fieldPoints k,
       Modules.finrankH k ((ℳ ⊗ x.1.ker.toModules) ⊗ y.1.ker.toModules) 0 + 2 =
         ℳ.finrankH k 0) :
-    IsVeryAmple (X ↘ Spec (.of k)) ℳ :=
-  sorry
+    IsVeryAmple (X ↘ Spec (.of k)) ℳ := by
+  have : FiniteDimensional k (ℳ.H 0) := Modules.finiteDimensional_H (M := ℳ) k 0
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  -- a basis `s` of the global sections
+  let b := Module.finBasis k (ℳ.H 0)
+  let n := ULift.{u} (Fin (Module.finrank k (ℳ.H 0)))
+  let s : n → Γ(ℳ, ⊤) := fun j ↦ Modules.H.zeroLinearEquiv ℳ (b j.down)
+  have hspan (σ : Γ(ℳ, ⊤)) : σ ∈ Submodule.span Γ(X, ⊤) (Set.range s) := by
+    obtain ⟨z, rfl⟩ := (Modules.H.zeroLinearEquiv ℳ).surjective σ
+    rw [← b.sum_repr z, map_sum]
+    refine Submodule.sum_mem _ fun j _ ↦ ?_
+    rw [Modules.smul_H_eq_globalSectionsRingHom_smul, LinearEquiv.map_smul]
+    exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨⟨j⟩, rfl⟩)
+  have hpt (P : X) (hP : IsClosed {P}) :
+      ∃ x : (X ↘ Spec (.of k)).fieldPoints k, x.1.base default = P :=
+    (X ↘ Spec (.of k)).exists_fieldPoints_base_eq_of_isClosed hP
+  -- the loci where the `s j` generate `ℳ` cover `X`
+  have hU : ⨆ j, Modules.generatingLocus (s j) = ⊤ := by
+    by_contra hne
+    obtain ⟨P, hPZ, hPcl⟩ := (⨆ j, Modules.generatingLocus (s j)).isOpen.isClosed_compl
+      |>.exists_closed_singleton (by
+        rw [Set.nonempty_compl]
+        exact fun h ↦ hne (SetLike.coe_injective h))
+    obtain ⟨x, rfl⟩ := hpt P hPcl
+    obtain ⟨j, hj⟩ := Modules.exists_generatesAt_of_finrankH ℳ s hspan x (h₁ x)
+    exact hPZ (TopologicalSpace.Opens.mem_iSup.mpr ⟨j, hj⟩)
+  obtain ⟨φ, hφ, ε, hεi, hε⟩ := ProjectiveSpace.exists_hom_twistRestrict
+    (g := X ↘ Spec (.of k)) (s := s) (U := fun j ↦ Modules.generatingLocus (s j))
+    (hs := fun j ↦ Modules.isFreeGenerator_generatingLocus (s j)) hU
+  refine ⟨n, φ, inferInstance, ?_, hφ, ⟨asIso ε⟩⟩
+  have : IsProper φ := by
+    have : IsProper (φ ≫ ℙ(n; Spec (.of k)) ↘ Spec (.of k)) := by rw [hφ]; infer_instance
+    exact IsProper.of_comp φ (ℙ(n; Spec (.of k)) ↘ Spec (.of k))
+  have hcov (P : X) : ∃ i, P ∈ φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i := by
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp
+      ((ProjectiveSpace.iSup_standardOpen n _).ge (Set.mem_univ (φ P)))
+    exact ⟨i, hi⟩
+  refine isClosedImmersion_of_injective_of_le_map_maximalIdeal φ (X ↘ Spec (.of k))
+    (ℙ(n; Spec (.of k)) ↘ Spec (.of k)) hφ ?_ ?_
+  · intro P Q hPcl hQcl hPQ
+    by_contra hne
+    obtain ⟨x, rfl⟩ := hpt P hPcl
+    obtain ⟨y, rfl⟩ := hpt Q hQcl
+    obtain ⟨t, htP, htQ⟩ :=
+      Modules.exists_not_generatesAt_generatesAt ℳ x y hne (h₁ x) (h₂ x y)
+    obtain ⟨i, hi⟩ := hcov (y.1.base default)
+    obtain ⟨a, ha⟩ := exists_eq_app_smul_of_mem_span hφ ε hε i (hspan t)
+    have he := ProjectiveSpace.isFreeGenerator_of_twistRestrict_iso ε hε i
+    have h1 := Modules.mem_basicOpen_of_generatesAt he ha hi htQ
+    have h2 : x.1.base default ∉ X.basicOpen (φ.app _ a) := fun h ↦
+      htP (Modules.generatesAt_of_mem_basicOpen he ha h)
+    rw [← Scheme.preimage_basicOpen] at h1 h2
+    rw [Scheme.Hom.mem_preimage, ← hPQ, ← Scheme.Hom.mem_preimage] at h1
+    exact h2 h1
+  · intro P hPcl
+    obtain ⟨x, rfl⟩ := hpt P hPcl
+    obtain ⟨t, W, hPW, e, c, he, ht, hc⟩ := Modules.exists_span_eq_ideal_ker ℳ x (h₁ x) (h₂ x x)
+    obtain ⟨i, hi⟩ := hcov (x.1.base default)
+    obtain ⟨a, ha⟩ := exists_eq_app_smul_of_mem_span hφ ε hε i (hspan t)
+    have hsi := ProjectiveSpace.isFreeGenerator_of_twistRestrict_iso ε hε i
+    have hVW : W.1 ⊓ (φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i) ≤ W.1 := inf_le_left
+    have hVi : W.1 ⊓ (φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i) ≤
+        (φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i) := inf_le_right
+    have hPV : x.1.base default ∈ W.1 ⊓ (φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i) := ⟨hPW, hi⟩
+    obtain ⟨w, hw⟩ := (he.map hVW).exists_unit_smul_eq (hsi.map hVi)
+    rw [Modules.presheaf_map_homOfLE_map_homOfLE] at hw
+    have ht' := congrArg (ℳ.presheaf.map (homOfLE hVW).op) ht
+    have ha' := congrArg (ℳ.presheaf.map (homOfLE hVi).op) ha
+    simp only [Modules.presheaf_map_homOfLE_map_homOfLE, Modules.map_smul] at ht' ha'
+    rw [hw, smul_smul, ht'] at ha'
+    have hcV := (he.map hVW).smul_left_injective ha'
+    -- germs at `P`
+    have hg : X.presheaf.germ W.1 _ hPW c =
+        X.presheaf.germ (φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i) _ hi (φ.app _ a) *
+          X.presheaf.germ _ _ hPV w.1 := by
+      rw [← X.presheaf.germ_res_apply (homOfLE hVW) _ hPV, hcV, map_mul,
+        X.presheaf.germ_res_apply (homOfLE hVi)]
+    have hcmem : c ∈ x.1.ker.ideal W := hc ▸ Ideal.mem_span_singleton_self c
+    have hnu : ¬ IsUnit (X.presheaf.germ W.1 _ hPW c) := fun h ↦
+      (x.1.mem_ideal_ker_iff W hPW c).mp hcmem ((Scheme.mem_basicOpen _ _ _ hPW).mpr h)
+    rw [← x.1.map_germ_ideal_ker W hPW, ← hc, Ideal.map_span, Set.image_singleton,
+      Ideal.span_le, Set.singleton_subset_iff, SetLike.mem_coe, hg]
+    refine Ideal.mul_mem_right _ _ ?_
+    rw [← Scheme.Hom.germ_stalkMap_apply]
+    refine Ideal.mem_map_of_mem _ ((IsLocalRing.mem_maximalIdeal _).mpr fun hu ↦ hnu ?_)
+    rw [hg, ← Scheme.Hom.germ_stalkMap_apply]
+    exact ((hu.map (φ.stalkMap _).hom).mul (w.isUnit.map _))
 
 /-- **A line bundle of degree `≥ 2g + 1` is very ample.** Let `k` be algebraically closed and
 `ℳ` a line bundle of degree `d ≥ 2g + 1` on a smooth proper curve with `H⁰(X, 𝒪_X) = k` of

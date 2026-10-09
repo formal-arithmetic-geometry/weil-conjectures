@@ -49,10 +49,14 @@ since `SheafOfModules.toSheaf` is exact. -/
 lemma shortExact_map_toSheaf (hS : S.ShortExact) : (S.map (toAb X)).ShortExact :=
   hS.map_of_exact (toAb X)
 
+/-- The map induced on cohomology by `φ : M ⟶ N` is composition with the degree-`0` class of
+`φ`. -/
 lemma H.map_apply_eq_comp {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) (z : M.H n) :
     H.map φ n z = Ext.comp (Y := (toAb X).obj M) z (Ext.mk₀ ((toAb X).map φ)) (add_zero n) :=
   rfl
 
+/-- Multiplication by a global function `a` on `H^n(X, M)` is the map induced on cohomology by
+multiplication by `a` on `M`. -/
 lemma smul_H_eq_map (M : X.Modules) (n : ℕ) (a : Γ(X, ⊤)) (z : M.H n) :
     a • z = H.map (M.smulHom a) n z :=
   rfl
