@@ -10,7 +10,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 public import WeilConjectures.AlgebraicGeometry.FunctionFieldLimit
+public import WeilConjectures.AlgebraicGeometry.Sites.GenericPointCounit
 public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
+public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyBijective
 
 /-!
 # Comparing the cohomology of a curve with that of its generic point
@@ -305,6 +307,50 @@ theorem bijective_H_map_unit_fromSpecFunctionField
     change ((τ U ≫ π ≫ adj.unit.app (cokernel ε)).hom.app (op W')) s = 0
     rw [key]
     rfl
+
+include f in
+/-- **Generic dévissage.** Let `C` be an integral curve over an algebraically closed field, with
+generic point `η : Spec k(C) ⟶ C`, and `0 → M₁ → M₂ → M₃ → 0` a short exact sequence of abelian
+étale sheaves on `Spec k(C)`. If `Hⁿ⁺²(C, η_* M₁) = Hⁿ⁺²(C, η_* M₃) = 0`, then
+`Hⁿ⁺²(C, η_* M₂) = 0`. Although `η_*` is not right exact, the cokernel `Q` of
+`η_* M₁ ⟶ η_* M₂` satisfies `η^* Q ≅ M₃` since the counit `η^* η_* ⟶ 𝟭` is an isomorphism
+(`AlgebraicGeometry.Scheme.isIso_counit_fromSpecFunctionField`), so
+`Hⁿ⁺²(C, Q) ≅ Hⁿ⁺²(C, η_* η^* Q) ≅ Hⁿ⁺²(C, η_* M₃)`
+(`AlgebraicGeometry.IsCurve.bijective_H_map_unit_fromSpecFunctionField`). -/
+theorem subsingleton_H_lowerStar_of_shortExact
+    {S : ShortComplex (Sheaf (Spec C.functionField).smallEtaleTopology AddCommGrpCat.{u + 1})}
+    (hS : S.ShortExact) (n : ℕ)
+    (h₁ : Subsingleton (Sheaf.H ((C.fromSpecFunctionField)_*[AddCommGrpCat.{u + 1}].obj S.X₁)
+      (n + 2)))
+    (h₃ : Subsingleton (Sheaf.H ((C.fromSpecFunctionField)_*[AddCommGrpCat.{u + 1}].obj S.X₃)
+      (n + 2))) :
+    Subsingleton (Sheaf.H ((C.fromSpecFunctionField)_*[AddCommGrpCat.{u + 1}].obj S.X₂)
+      (n + 2)) := by
+  have : QuasiSeparatedSpace C := quasiSeparatedSpace_of_quasiSeparated f
+  let η := C.fromSpecFunctionField
+  let adj := Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} η
+  let g := (η)_*[AddCommGrpCat.{u + 1}].map S.f
+  have := hS.mono_f
+  have : Mono g := inferInstanceAs (Mono ((η)_*[AddCommGrpCat.{u + 1}].map S.f))
+  let T := ShortComplex.mk g (cokernel.π g) (cokernel.condition g)
+  have hT : T.ShortExact := ShortComplex.ShortExact.mk'
+    (T.exact_of_g_is_cokernel (cokernelIsCokernel _)) inferInstance inferInstance
+  have := Scheme.isIso_counit_fromSpecFunctionField (X := C) S.X₁
+  have := Scheme.isIso_counit_fromSpecFunctionField (X := C) S.X₂
+  let e : (η)^*[AddCommGrpCat.{u + 1}].obj (cokernel g) ≅ S.X₃ :=
+    PreservesCokernel.iso ((η)^*[AddCommGrpCat.{u + 1}]) g ≪≫
+      cokernel.mapIso _ S.f (asIso (adj.counit.app S.X₁)) (asIso (adj.counit.app S.X₂))
+        (adj.counit.naturality S.f) ≪≫
+      (cokernelIsCokernel S.f).coconePointUniqueUpToIso hS.gIsCokernel
+  have hQ : Subsingleton (Sheaf.H (cokernel g) (n + 2)) := by
+    have : Subsingleton ((Sheaf.functorH _ (n + 2)).obj
+        ((η)_*[AddCommGrpCat.{u + 1}].obj S.X₃)) := h₃
+    have hs : Subsingleton (Sheaf.H (((η)^*[AddCommGrpCat.{u + 1}] ⋙
+        (η)_*[AddCommGrpCat.{u + 1}]).obj (cokernel g)) (n + 2)) :=
+      ((Sheaf.functorH _ (n + 2)).mapIso
+        ((η)_*[AddCommGrpCat.{u + 1}].mapIso e)).addCommGroupIsoToAddEquiv.subsingleton
+    exact (bijective_H_map_unit_fromSpecFunctionField f (cokernel g) n).injective.subsingleton
+  exact Sheaf.H.subsingleton_of_shortExact hT (n + 2)
 
 end IsCurve
 

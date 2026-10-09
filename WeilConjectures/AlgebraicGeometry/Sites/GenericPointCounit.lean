@@ -114,7 +114,8 @@ theorem exists_hom_etaleSpec_pullback (E : Type u) [Field E] [Algebra X.function
   let A := Γ(X, U.1)
   let φ := X.affineOpenToFunctionField U
   let : Algebra A K := φ.hom.toAlgebra
-  let P : StandardEtalePair A := ⟨g, hg, derivative g, ⟨1, 0, 1, by simp⟩⟩
+  obtain ⟨P, hPf, hPg⟩ : ∃ P : StandardEtalePair A, P.f = g ∧ P.g = derivative g :=
+    ⟨⟨g, hg, derivative g, ⟨1, 0, 1, by simp⟩⟩, rfl, rfl⟩
   let : Algebra A E := ((algebraMap K E).comp φ.hom).toAlgebra
   have : IsScalarTower A K E := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   have hgf' : g.map (algebraMap A K) = minpoly K pb.gen := hgf
@@ -122,15 +123,13 @@ theorem exists_hom_etaleSpec_pullback (E : Type u) [Field E] [Algebra X.function
   have hroot : aeval ((1 : K) ⊗ₜ[A] P.X) (minpoly K pb.gen) = 0 := by
     rw [← hgf', aeval_map_algebraMap,
       show ((1 : K) ⊗ₜ[A] P.X) = Algebra.TensorProduct.includeRight P.X from rfl,
-      aeval_algHom_apply, P.hasMap_X.1, map_zero]
+      aeval_algHom_apply, ← hPf, P.hasMap_X.1, map_zero]
   let ρ : E →ₐ[K] K ⊗[A] P.Ring := pb.lift _ hroot
   -- the morphism `K ⊗_A P.Ring → E`, so that `K ⊗_A P.Ring` is nontrivial
   have hmap : P.HasMap pb.gen := by
     refine ⟨?_, ?_⟩
-    · change aeval pb.gen g = 0
-      rw [← aeval_map_algebraMap K, hgf', minpoly.aeval]
-    · change IsUnit (aeval pb.gen (derivative g))
-      rw [← aeval_map_algebraMap K, ← derivative_map, hgf']
+    · rw [hPf, ← aeval_map_algebraMap K, hgf', minpoly.aeval]
+    · rw [hPg, ← aeval_map_algebraMap K, ← derivative_map, hgf']
       exact (hsep.aeval_derivative_ne_zero (minpoly.aeval K pb.gen)).isUnit
   let σ : K ⊗[A] P.Ring →ₐ[A] E :=
     Algebra.TensorProduct.lift (IsScalarTower.toAlgHom A K E) (P.lift pb.gen hmap)
@@ -138,8 +137,9 @@ theorem exists_hom_etaleSpec_pullback (E : Type u) [Field E] [Algebra X.function
   have : Nontrivial (K ⊗[A] P.Ring) := σ.toRingHom.domain_nontrivial
   -- the étale `X`-scheme `W`
   have hW : @Etale _ _ (Spec.map (CommRingCat.ofHom (algebraMap A P.Ring)) ≫ U.2.1.fromSpec) := by
+    have hPe : Algebra.Etale A P.Ring := inferInstance
     have : @Etale _ _ (Spec.map (CommRingCat.ofHom (algebraMap A P.Ring))) :=
-      HasRingHomProperty.Spec_iff.mpr (RingHom.etale_algebraMap.mpr inferInstance)
+      HasRingHomProperty.Spec_iff.mpr ((RingHom.etale_algebraMap (R := A) (S := P.Ring)).mpr hPe)
     infer_instance
   let W : X.Etale := MorphismProperty.Over.mk ⊤ _ hW
   have hη : X.fromSpecFunctionField = Spec.map φ ≫ U.2.1.fromSpec :=
@@ -159,8 +159,10 @@ theorem exists_hom_etaleSpec_pullback (E : Type u) [Field E] [Algebra X.function
     pullback.lift _ _ hcond ≫ (pullbackSpecIso A K P.Ring).hom
   refine ⟨W, inferInstanceAs (IsAffine (Spec _)), ?_, ⟨MorphismProperty.Over.homMk
     (q ≫ Spec.map (CommRingCat.ofHom ρ.toRingHom)) ?_⟩⟩
-  · obtain ⟨z⟩ : Nonempty (Spec (.of (K ⊗[A] P.Ring))) := inferInstance
-    let p := (pullbackSpecIso A K P.Ring).inv z
+  · obtain ⟨p⟩ : Nonempty
+        ↥(pullback (C := Scheme.{u}) (Spec.map (CommRingCat.ofHom (algebraMap A K))) ι) := by
+      obtain ⟨z⟩ : Nonempty (Spec (.of (K ⊗[A] P.Ring))) := inferInstance
+      exact ⟨(pullbackSpecIso A K P.Ring).inv z⟩
     let a : pullback (Spec.map (CommRingCat.ofHom (algebraMap A K))) ι ⟶ Spec K :=
       pullback.fst _ _
     let b : pullback (Spec.map (CommRingCat.ofHom (algebraMap A K))) ι ⟶ W.left :=
@@ -173,9 +175,7 @@ theorem exists_hom_etaleSpec_pullback (E : Type u) [Field E] [Algebra X.function
       rw [← Category.assoc b ι, ← hpc, Category.assoc]
       rfl
     obtain ⟨w, -, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := W.hom)
-      (g := X.fromSpecFunctionField) (b p) (a p) (by
-        rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, key]
-        rfl)
+      (g := X.fromSpecFunctionField) (b p) (a p) (congrArg (fun φ ↦ φ p) key)
     exact ⟨w⟩
   · change (q ≫ Spec.map _) ≫ Spec.map _ = pullback.snd W.hom X.fromSpecFunctionField
     rw [Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp]

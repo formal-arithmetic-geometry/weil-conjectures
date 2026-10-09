@@ -49,6 +49,15 @@ lemma Sheaf.H.bijective_map_f (m : ℕ) [Subsingleton (H S.X₃ m)]
     rw [Subsingleton.elim z 0, Ext.zero_comp]
   · exact Ext.covariant_sequence_exact₂ _ hS y (Subsingleton.elim _ _)
 
+include hS in
+/-- In a short exact sequence `0 → S.X₁ → S.X₂ → S.X₃ → 0` of abelian sheaves with
+`Hⁿ(S.X₁) = Hⁿ(S.X₃) = 0`, also `Hⁿ(S.X₂) = 0`. -/
+lemma Sheaf.H.subsingleton_of_shortExact (n : ℕ) [Subsingleton (H S.X₁ n)]
+    [Subsingleton (H S.X₃ n)] : Subsingleton (H S.X₂ n) := by
+  refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+  obtain ⟨y, rfl⟩ := Ext.covariant_sequence_exact₂ _ hS x (Subsingleton.elim _ _)
+  rw [Subsingleton.elim y 0, Ext.zero_comp]
+
 /-- A morphism `φ` of abelian sheaves whose kernel and cokernel have no cohomology in positive
 degrees induces bijections `Hⁿ(F) → Hⁿ(G)` for `n ≥ 2`: factor `φ` through its image and use
 the two long exact sequences. -/
