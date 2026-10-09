@@ -139,12 +139,106 @@
   "master": {
    "state": "none",
    "decls": [],
-   "missing": []
+   "missing": [
+    "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isProper"
+   ]
   },
   "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isProper",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine",
+     "lines": [
+      151,
+      155
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk",
+     "lines": [
+      93,
+      159
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lemma-weil-pbc-p1-exchange-geometric-stalk"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty",
+     "lines": [
+      309,
+      323
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lemma-weil-pbc-property-iff-acyclicity",
+      "lem-weil-pbc-injective-acyclicity-bounded-below"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine",
+     "lines": [
+      124,
+      149
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "prop-weil-pbc-reduction-to-projective-line"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
+     "lines": [
+      69,
+      95
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "prop-weil-pbc-algebraically-closed-extension"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
+     "lines": [
+      97,
+      134
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lemma-weil-pbc-curve-separably-closed-passage"
+     ],
+     "below": true
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution",
+     "lines": [
+      164,
+      170
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-weil-pbc-sheaf-flat-separator"
+     ],
+     "below": true
+    }
+   ]
   }
  },
  "chapter": "sec-proper-base-change",
@@ -154,5 +248,18 @@
   "item": "lemma-weil-pbc-prime-proper-base-change",
   "worker": "stage1",
   "summary": "Restated with every notion named: proper from def-weil-proper-morphism (replacing the grab-bag def-weil-pbc-scheme-conventions), the cartesian square def-weil-pbc-cartesian-square, sheaves of F_r-modules as modules over the constant sheaf of rings (def-weil-sheaf-of-modules-category, def-weil-pbc-constant-sheaf), and 'the specified map' made explicit as the derived exchange morphism of def-weil-pbc-derived-exchange at the underlying abelian sheaf in degree 0, an isomorphism in D+(Y'_et) of def-weil-pbc-derived-categories. Checked that 'no finite-presentation hypothesis' is right (Stacks 095T assumes only proper; Chow, Limits 0202, needs only separated of finite type). Proof in three steps following Stacks 095T/0A4F: (1) an F_r-module sheaf is killed by r, so F[r]=F and c_F is an isomorphism, i.e. F is torsion in the sense of def-weil-pbc-torsion-etale-sheaf (written out, elementary); (2) prop-weil-pbc-projective-line gives the hypothesis of prop-weil-pbc-reduction-to-projective-line, hence PBC(f) for every proper f; (3) PBC(f) of def-weil-pbc-property applied to the square and the torsion sheaf F is exactly the assertion. proof_origin changed from the blueprint to Stacks. No new nodes. Mathlib has no etale direct images or proper base change; the source repository's Etale.hasTorsionBaseChange_of_isProper (not sorry-free) is the Lean of the general form and is reported as a candidate attachment."
+ },
+ "lean": {
+  "branch": "slopmaster2",
+  "declarations": [
+   "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isProper"
+  ],
+  "note": "attached by the lead at review (2026-10-09), found by the opus worker: the Lean states that every proper morphism has the base-change property for complexes with torsion cohomology over any coefficient ring (Step 2 of this lemma, more general; with coefficients Z/r it gives the lemma); it rests on the sorry of hasTorsionBaseChange_of_projectiveLine_of_isProper (prop-weil-pbc-reduction-to-projective-line) and those below hasTorsionBaseChange_projectiveLine (prop-weil-pbc-projective-line)"
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "statement made precise (module sheaves over the constant sheaf F_r, the map named); Lean attached by the lead"
  }
 }
