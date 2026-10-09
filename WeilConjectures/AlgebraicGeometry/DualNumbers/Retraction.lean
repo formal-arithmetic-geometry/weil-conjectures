@@ -66,6 +66,11 @@ noncomputable def Hom.dualNumbersDeriv (U : X.Opens) : AddMonoid.End Γ(X, U) wh
   map_zero' := by rw [map_zero]; rfl
   map_add' a b := by rw [map_add]; rfl
 
+theorem Hom.dualNumbersDeriv_congr {h' : X.dualNumbers ⟶ X} (hh' : X.dualNumbersι ≫ h' = 𝟙 X)
+    (e : h = h') (U : X.Opens) : Hom.dualNumbersDeriv hh U = Hom.dualNumbersDeriv hh' U := by
+  subst e
+  rfl
+
 theorem Hom.dualNumbersDeriv_apply (U : X.Opens) (e : U ≤ h ⁻¹ᵁ U) (a : Γ(X, U)) :
     Hom.dualNumbersDeriv hh U a = (h.appLE U U e a).snd :=
   rfl
@@ -137,6 +142,12 @@ noncomputable def Hom.dualNumbers₂Op (U : X.Opens) :
     { toFun a := (h.appLE U U e a).snd.snd
       map_zero' := by rw [map_zero]; rfl
       map_add' a b := by rw [map_add]; rfl })
+
+theorem Hom.dualNumbers₂Op_congr {h' : X.dualNumbers.dualNumbers ⟶ X}
+    (hh' : X.dualNumbersι ≫ X.dualNumbers.dualNumbersι ≫ h' = 𝟙 X) (e : h = h') (U : X.Opens) :
+    Hom.dualNumbers₂Op hh U = Hom.dualNumbers₂Op hh' U := by
+  subst e
+  rfl
 
 variable (U : X.Opens) (e : U ≤ h ⁻¹ᵁ U) (a : Γ(X, U))
 
