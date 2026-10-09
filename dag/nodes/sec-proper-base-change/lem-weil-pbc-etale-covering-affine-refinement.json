@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-etale-covering-affine-refinement",
+ "kind": "statement",
+ "title": "An etale covering of an affine scheme is refined by a finite family of affine opens of its members",
+ "statement": "Let $T$ be an affine scheme [def-pc-scheme] and $(t_i:T_i\\to T)_{i\\in I}$ a family of etale morphisms [def-weil-etale-morphism] which is jointly surjective ($T=\\bigcup_it_i(T_i)$). Then there are $m\\ge0$, indices $i(1),\\dots,i(m)\\in I$ and affine open subschemes $U_j\\subseteq T_{i(j)}$ ($j=1,\\dots,m$) such that $T=\\bigcup_{j=1}^mt_{i(j)}(U_j)$. In particular $\\{t_{i(j)}|_{U_j}:U_j\\to T\\}_{j=1,\\dots,m}$ is a family of etale morphisms from affine schemes (an open immersion is etale and a composite of etale morphisms is etale), jointly surjective, and it refines $(t_i)_{i\\in I}$: each $U_j\\to T$ factors through $t_{i(j)}$ via the open immersion $U_j\\hookrightarrow T_{i(j)}$.",
+ "source": {
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Lemma Tag 0218 (label lemma-etale-affine; proof omitted in Stacks); the mechanism: Topologies Lemma 022C-type quasi-compactness of fppf coverings (etale morphisms are open, an affine scheme is quasi-compact)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "an étale covering of an affine scheme can be refined by a finite covering by affine schemes étale over it",
+   "results": "AlgebraicGeometry.Scheme.smallEtaleTopology, etalePretopology, smallEtalePretopology, etaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale); Scheme.affineCover, affineOpenCover (Mathlib.AlgebraicGeometry.Cover.Open); directedAffineCover",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; see leanfinder, loogle and grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every étale covering of an affine scheme has a finite refinement by affine opens of the covering schemes (standard étale covering)",
+   "results": "Scheme.AffineCover (Mathlib.AlgebraicGeometry.Cover.MorphismProperty); Scheme.OpenCover.affineRefinement (Cover.Open); Scheme.exists_isOpenCover_and_isAffine (AffineTransitionLimit)",
+   "date": "2026-10-10",
+   "verdict": "related (affine refinements of Zariski covers); the etale statement found by grep below"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiCompactCover.exists_hom",
+   "results": "AlgebraicGeometry.QuasiCompactCover.exists_hom {P} {S} (𝒰 : Scheme.Cover (Scheme.precoverage P) S) [P.RespectsLeft IsOpenImmersion] [CompactSpace S] [QuasiCompactCover 𝒰.toPreZeroHypercover] : ∃ 𝒱 f, Finite 𝒱.I₀ ∧ ∀ j, IsOpenImmersion (f.h₀ j) (Mathlib.AlgebraicGeometry.Cover.QuasiCompact)",
+   "date": "2026-10-10",
+   "verdict": "match (with the hypotheses discharged as in the grep record)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'QuasiCompactCover' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; sed -n 25,215p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; grep -n 'isOpenMap\\|UniversallyOpen.of_flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean",
+   "results": "Cover/QuasiCompact.lean:60 QuasiCompactCover.exists_isAffineOpen_of_isCompact (finitely many affine opens V_k of components whose images cover a compact open); :73 QuasiCompactCover.of_isOpenMap (@[stacks 022C]: a cover with open component maps is quasi-compact); :183 QuasiCompactCover.exists_hom (compact base: a finite affine P-cover with a map of covers whose components are open immersions); Morphisms/UniversallyOpen.lean:147 UniversallyOpen.of_flat [Flat f] [LocallyOfFinitePresentation f], :48 Scheme.Hom.isOpenMap; Morphisms/Etale.lean:141 Etale f ↔ Flat f ∧ FormallyUnramified f ∧ LocallyOfFinitePresentation f; AffineScheme.lean:561 compactSpace_of_isAffine; Morphisms/Basic.lean:262 respectsLeft_isOpenImmersion for P local at the source (Etale: HasRingHomProperty, Morphisms/Etale.lean:56)",
+   "date": "2026-10-10",
+   "verdict": "match: exists_hom with P = @Etale"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.QuasiCompactCover.exists_hom",
+  "file": "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+  "how": "specializes in one line: apply `QuasiCompactCover.exists_hom` (Cover/QuasiCompact.lean:183) with P = @Etale to the etale cover 𝒰 given by the t_i (Scheme.Cover (Scheme.precoverage @Etale) T: the components are etale and jointly surjective); its hypotheses are instances or one lemma each: `CompactSpace T` from IsAffine (AffineScheme.lean:561), `P.RespectsLeft @IsOpenImmersion` from Etale being local at the source (Morphisms/Basic.lean:262), `QuasiCompactCover 𝒰` by `QuasiCompactCover.of_isOpenMap` (:73) since every t_i is an open map (`Scheme.Hom.isOpenMap`, UniversallyOpen.lean:48, with `UniversallyOpen.of_flat`, :147, etale = flat + formally unramified + lfp, Etale.lean:141). The output is a finite affine etale cover 𝒱 of T (components Spec Γ(V_k) of affine opens V_k ⊆ T_{i(k)}, the proof at :193-207 builds it from exists_isAffineOpen_of_isCompact, :60) with a map of covers 𝒱 → 𝒰 whose components 𝒱.X_k → T_{i(k)} are open immersions: this is U_k ≅ V_k ⊆ T_{i(k)} and T = ⋃ t_{i(k)}(V_k), the node's statement."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-etale-site-topos",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: QuasiCompactCover.exists_hom (Cover/QuasiCompact.lean:183) for P = Etale; hypotheses by instances (CompactSpace of an affine scheme, Etale local at the source, etale morphisms open)."
+ }
+}

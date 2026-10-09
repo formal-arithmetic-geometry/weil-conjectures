@@ -1,0 +1,61 @@
+{
+ "id": "def-weil-pbc-special-cocontinuous-functor",
+ "kind": "definition",
+ "title": "Cocontinuous and special cocontinuous functors between sites",
+ "statement": "Let $\\mathcal C$, $\\mathcal D$ be sites with coverings and continuous functors as in [def-weil-pbc-sites-and-cohomology], and $u:\\mathcal C\\to\\mathcal D$ a functor. (1) $u$ is *cocontinuous* if for every $U\\in\\operatorname{Ob}(\\mathcal C)$ and every covering $\\{V_j\\to u(U)\\}_{j\\in J}$ of $\\mathcal D$ there is a covering $\\{U_i\\to U\\}_{i\\in I}$ of $\\mathcal C$ such that the family $\\{u(U_i)\\to u(U)\\}_{i\\in I}$ refines $\\{V_j\\to u(U)\\}_{j\\in J}$, i.e. every $u(U_i)\\to u(U)$ factors through some $V_j\\to u(U)$ (Stacks Sites, Definition 00XJ). (2) $u$ is *special cocontinuous* if (a) $u$ is cocontinuous; (b) $u$ is continuous [def-weil-pbc-sites-and-cohomology]; (c) for $a,b:U'\\to U$ in $\\mathcal C$ with $u(a)=u(b)$ there is a covering $\\{f_i:U'_i\\to U'\\}$ of $\\mathcal C$ with $a\\circ f_i=b\\circ f_i$ for all $i$; (d) for $U',U\\in\\operatorname{Ob}(\\mathcal C)$ and a morphism $c:u(U')\\to u(U)$ of $\\mathcal D$ there are a covering $\\{f_i:U'_i\\to U'\\}$ of $\\mathcal C$ and morphisms $c_i:U'_i\\to U$ with $u(c_i)=c\\circ u(f_i)$; (e) every $V\\in\\operatorname{Ob}(\\mathcal D)$ has a covering in $\\mathcal D$ of the form $\\{u(U_i)\\to V\\}_{i\\in I}$. These are conditions (1)-(5) of Stacks Sites, Lemma 03A0 (label lemma-equivalence); Stacks' Definition 03CG (label definition-special-cocontinuous-functor) calls $u$ special cocontinuous when it satisfies the assumptions and the conclusion of Lemma 03A0, and since that lemma derives the conclusion (the morphism of topoi $g:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ of the cocontinuous $u$, Stacks Sites Lemma 00XO, is an equivalence) from (1)-(5), the two definitions agree; here the conclusion is not part of the definition and is proved where it is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Definition Tag 00XJ (label definition-cocontinuous), Lemma Tag 03A0 (label lemma-equivalence) conditions (1)-(5), Definition Tag 03CG (label definition-special-cocontinuous-functor)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous and cocontinuous fully faithful functor of sites with every object covered by images induces equivalence of sheaf categories",
+   "results": "CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense (Sites.DenseSubsite.InducedTopology); Functor.IsDenseSubsite.sheafEquiv, sheafEquiv_functor, instIsEquivalenceSheafSheafPushforwardContinuous (Sites.DenseSubsite.SheafEquiv); IsCoverDense.faithful_sheafPushforwardContinuous; Functor.IsCocontinuous (Sites.CoverLifting)",
+   "date": "2026-10-10",
+   "verdict": "related notions (cover-lifting, dense subsite), no definition of special cocontinuous"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cocontinuous functor between sites, cover-lifting: every covering sieve of the image lifts to a covering sieve",
+   "results": "CategoryTheory.Functor.IsCocontinuous, IsCocontinuous.cover_lift, Functor.cover_lift (Sites.CoverLifting); Functor.inducedTopology_isCocontinuous; Functor.IsDenseSubsite.instIsCocontinuous",
+   "date": "2026-10-10",
+   "verdict": "clause (1) is Mathlib's Functor.IsCocontinuous for the generated topologies (sieve form: the pullback along u of a covering sieve of u(U) is covering); the conjunction (a)-(e) has no Mathlib name; closest is Functor.IsDenseSubsite (cover dense = (e), locally full = (d), locally faithful = (c), functorPushforward_mem_iff), which is a different packaging"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'special\\|class IsDenseSubsite\\|class IsCocontinuous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/CoverLifting.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean; grep -rln 'special cocontinuous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "CoverLifting.lean: class Functor.IsCocontinuous (cover_lift); DenseSubsite/Basic.lean:538 class IsDenseSubsite (isCoverDense', isLocallyFull', isLocallyFaithful', functorPushforward_mem_iff); no file mentions 'special cocontinuous'",
+   "date": "2026-10-10",
+   "verdict": "no match for the packaged notion (definition node built from site notions)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-etale-site-topos",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

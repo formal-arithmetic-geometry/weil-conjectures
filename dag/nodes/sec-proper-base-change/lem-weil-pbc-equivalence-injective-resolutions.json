@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-equivalence-injective-resolutions",
+ "kind": "statement",
+ "title": "An additive equivalence of abelian categories carries injective resolutions to injective resolutions",
+ "statement": "Let $\\mathcal A$, $\\mathcal B$ be abelian categories and $\\Phi:\\mathcal A\\to\\mathcal B$ an additive functor that is an equivalence of categories. Then: (1) $\\Phi$ carries injective objects to injective objects (and an object $I$ is injective iff $\\Phi(I)$ is); (2) $\\Phi$ preserves all limits and colimits that exist, in particular kernels and cokernels, and carries exact sequences to exact sequences; (3) consequently, if $s:X\\to I^\\bullet$ is an injective resolution of $X\\in\\mathcal A$ ($I^q=0$ for $q<0$, each $I^q$ injective, $0\\to X\\to I^0\\to I^1\\to\\cdots$ exact), then $\\Phi(s):\\Phi(X)\\to\\Phi(I^\\bullet)$ is an injective resolution of $\\Phi(X)$; and a morphism of complexes $\\varphi^\\bullet:I^\\bullet\\to I'^\\bullet$ lifting $\\varphi:X\\to X'$, or a homotopy between two such lifts, is carried by $\\Phi$ to a morphism lifting $\\Phi(\\varphi)$, resp. a homotopy.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Lemma Tag 015Z (label lemma-adjoint-preserve-injectives: a right adjoint of an exact functor preserves injectives; applied to the equivalence and its quasi-inverse), as used in Cohomology on Sites, Lemma Tag 03YU (sites-cohomology.tex, label lemma-cohomology-bigger-site)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact functor sends injective resolution to injective resolution equivalence of abelian categories derived functors commute",
+   "results": "CategoryTheory.injectiveResolutions (Abelian.Injective.Resolution); InjectiveResolution.isoRightDerivedObj_hom_naturality (Abelian.RightDerived); Abelian.Ext.mapExactFunctor_hom (Homology.DerivedCategory.Ext.Map); Functor.rightDerived_map_eq",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; clauses found by leanfinder and grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an equivalence of categories maps injective objects to injective objects",
+   "results": "CategoryTheory.Functor.preservesInjectiveObjects_of_isEquivalence (Preadditive.Injective.Preserves); EnoughInjectives.of_equivalence; Equivalence.map_injective_iff; Equivalence.enoughInjectives_iff (Preadditive.Injective.Basic); Functor.injective_obj_of_injective",
+   "date": "2026-10-10",
+   "verdict": "match (clause 1)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "an equivalence of categories preserves limits",
+   "results": "CategoryTheory.Adjunction.isEquivalencePreservesLimits (Adjunction.Limits); Adjunction.hasLimitsOfShape_of_equivalence; Limits.preservesLimitsOfShape_of_equiv",
+   "date": "2026-10-10",
+   "verdict": "match (clause 2, limits)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 345,356p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean; sed -n 50,58p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean; grep -n 'isEquivalence' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Limits.lean; sed -n 55,64p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; grep -n 'lemma Exact.map' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+   "results": "Injective/Basic.lean:352 Equivalence.map_injective_iff; Injective/Preserves.lean:55 Functor.preservesInjectiveObjects_of_isEquivalence; Adjunction/Limits.lean:106 isEquivalence_preservesColimits, :220 isEquivalencePreservesLimits; ShortComplex/PreservesHomology.lean:61 Functor.preservesHomologyOfExact (finite limits and colimits preserved ⇒ PreservesHomology); ShortComplex/Exact.lean:227 ShortComplex.Exact.map",
+   "date": "2026-10-10",
+   "verdict": "match: a few Mathlib lemmas, one per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Equivalence.map_injective_iff",
+  "file": "Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean",
+  "how": "a few Mathlib lemmas, one per clause: (1) `Equivalence.map_injective_iff` (Injective/Basic.lean:352) or the instance `Functor.preservesInjectiveObjects_of_isEquivalence` (Injective/Preserves.lean:55); (2) `isEquivalencePreservesLimits` (Adjunction/Limits.lean:220) and `isEquivalence_preservesColimits` (:106), then `Functor.preservesHomologyOfExact` (ShortComplex/PreservesHomology.lean:61) and `ShortComplex.Exact.map` (ShortComplex/Exact.lean:227) for exact sequences; (3) is (1) and (2) applied termwise to the resolution (exactness of 0→X→I^0→I^1→⋯ at each spot is exactness of a short complex) and functoriality and additivity of Φ for morphisms and homotopies (Φ(dh+hd)=Φ(d)Φ(h)+Φ(h)Φ(d))."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-etale-site-topos",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Equivalence.map_injective_iff (Preadditive/Injective/Basic.lean:352), isEquivalencePreservesLimits/Colimits, ShortComplex.Exact.map, one per clause."
+ }
+}
