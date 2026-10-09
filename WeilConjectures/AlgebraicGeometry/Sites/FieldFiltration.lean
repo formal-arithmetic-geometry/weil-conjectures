@@ -384,4 +384,47 @@ lemma card_eq_card_cokernel_mul (hX : IsSplitBy N X) [Finite (X.obj.obj (op (eta
 
 end Quotient
 
+/-- **Dévissage of split `ℓ`-primary sheaves.** Let `N/F` be a finite Galois extension whose
+Galois group is an `ℓ`-group, and let `P` be a property of étale sheaves on `Spec F` which holds
+for zero sheaves and for `ℤ/ℓ` and is stable under extensions. Then `P` holds for every sheaf
+`X` split by `N` whose sections over `N` form a finite group killed by a power of `ℓ`. -/
+theorem isSplitBy_induction [IsGalois F N] [FiniteDimensional F N] {ℓ : ℕ} [Fact ℓ.Prime]
+    (hP : IsPGroup ℓ (N ≃ₐ[F] N))
+    (P : Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1} → Prop)
+    (hzero : ∀ X, IsZero X → P X)
+    (hext : ∀ S : ShortComplex (Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1}),
+      S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂)
+    (hconst : P ((Spec (.of F)).constantZMod ℓ)) (a : ℕ) :
+    ∀ (X : Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1}), IsSplitBy N X →
+      Finite (X.obj.obj (op (etaleSpec F N))) →
+      (∀ x : X.obj.obj (op (etaleSpec F N)), ℓ ^ a • x = 0) → P X := by
+  intro X
+  induction h : Nat.card (X.obj.obj (op (etaleSpec F N))) using Nat.strong_induction_on
+    generalizing X with
+  | _ n ih =>
+  intro hX _ ha
+  rcases subsingleton_or_nontrivial (X.obj.obj (op (etaleSpec F N))) with h0 | h0
+  · exact hzero X (hX.isZero h0)
+  obtain ⟨x, hx0, hxℓ, hxfix⟩ := exists_ne_zero_fixed hP X ha
+  obtain ⟨s, rfl⟩ := exists_map_toTerminal_eq X x hxfix
+  have hs : ℓ • s = 0 := injective_globalRes X N
+    (((map_nsmul (X.obj.map (toTerminal N).op).hom ℓ s).trans hxℓ).trans (map_zero _).symm)
+  have hs0 : s ≠ 0 := by
+    rintro rfl
+    exact hx0 (map_zero _)
+  have := mono_constZModHom hs hs0
+  let S := ShortComplex.mk (constZModHom ℓ X s hs) (cokernel.π _) (cokernel.condition _)
+  have hS : S.ShortExact :=
+    ShortComplex.ShortExact.mk' (S.exact_of_g_is_cokernel (cokernelIsCokernel _))
+      inferInstance inferInstance
+  have hsurj := surjective_cokernel_π_app hs hs0 hX N (AlgHom.id F N)
+  have : Finite (S.X₃.obj.obj (op (etaleSpec F N))) := Finite.of_surjective _ hsurj
+  have hcard := card_eq_card_cokernel_mul hs hs0 hX
+  refine hext S hS hconst (ih _ ?_ S.X₃ rfl (isSplitBy_cokernel hs hs0 hX) this fun y ↦ ?_)
+  · have : 0 < Nat.card (S.X₃.obj.obj (op (etaleSpec F N))) := Nat.card_pos
+    rw [← h, hcard]
+    exact lt_mul_of_one_lt_right this (Fact.out : ℓ.Prime).one_lt
+  · obtain ⟨w, rfl⟩ := hsurj y
+    rw [← map_nsmul, ha, map_zero]
+
 end AlgebraicGeometry.Scheme
