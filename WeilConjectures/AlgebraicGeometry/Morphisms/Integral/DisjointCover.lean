@@ -1,7 +1,7 @@
 /-
-Copyright (c) 2026 Christian Merten. All rights reserved.
+Copyright (c) 2026 Claude. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Christian Merten
+Authors: Claude
 -/
 module
 
@@ -106,6 +106,13 @@ def openIncl (f : X ⟶ Y) (c : Nbhd y) (P : (pullback c.1.hom f).Opens) :
 lemma openIncl_left (f : X ⟶ Y) (c : Nbhd y) (P : (pullback c.1.hom f).Opens) :
     (openIncl f c P).left = P.ι :=
   rfl
+
+instance (f : X ⟶ Y) (c : Nbhd y) (P : (pullback c.1.hom f).Opens) :
+    Mono (openIncl f c P) where
+  right_cancellation g h hgh := by
+    apply MorphismProperty.Over.Hom.ext
+    apply (cancel_mono P.ι).mp
+    exact congrArg (fun m ↦ m.left) hgh
 
 variable (f : X ⟶ Y) [IsIntegralHom f] [IsAlgClosed Ω]
 
