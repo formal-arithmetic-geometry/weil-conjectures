@@ -1,0 +1,59 @@
+{
+ "id": "lem-weil-infinite-matrix-rank-row-span",
+ "kind": "statement",
+ "title": "Rank of an infinite matrix and its row span",
+ "statement": "Let $K$ be a field [def-weil-field] and $A=(a_{rs})_{r,s\\geq0}$ an infinite matrix with entries in $K$ [def-weil-matrix]. For $r\\geq0$ let $A_r=(a_{rs})_{s\\geq0}\\in K^{\\mathbf Z_{\\geq0}}$ be its $r$-th row, and let $V\\subseteq K^{\\mathbf Z_{\\geq0}}$ be the vector subspace [def-weil-sequence-subspace] spanned over $K$ by all the rows $A_r$, $r\\geq0$. Let $\\rho(A)\\in\\mathbf N\\cup\\{\\infty\\}$ be the supremum [def-weil-extended-natural-supremum] of the ranks over $K$ [def-weil-matrix-rank] of all finite square submatrices of $A$ [def-weil-submatrix]. Then $\\rho(A)=\\dim_KV$ [def-weil-vector-space-dimension] if $V$ is finite-dimensional [def-weil-finite-dimensional-subspace], and $\\rho(A)=\\infty$ otherwise. In particular $\\rho(A)$ is finite if and only if $V$ is finite-dimensional.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.md",
+  "place": "## Proof, first paragraph ('We first identify the matrix rank in [def-weil-hankel-matrix] with $\\dim_K V$'); the Hankel-determinant formulation is in literature/deligne-weil-I_PMIHES-1974-43.pdf, p. 276, proof of (1.7)⇒(1.6), and in literature/milne-lectures-on-etale-cohomology_LEC.pdf, p. 157, Bourbaki's Exercise 3(b),(d); neither proves it"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-matrix",
+  "def-weil-sequence-subspace",
+  "def-weil-extended-natural-supremum",
+  "def-weil-matrix-rank",
+  "def-weil-submatrix",
+  "def-weil-vector-space-dimension",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'cRank\\|eRank\\|iSup\\|⨆' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Rank.lean; grep -rn 'eRank' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ --include=*.lean | grep -v Matrix/Rank.lean",
+   "results": "Matrix.cRank / Matrix.eRank (Rank.lean:62, 101): for arbitrary (also infinite) index types, the dimension of the span of the columns, as a cardinal / in ℕ∞; eRank_submatrix_le (:111): the eRank of any submatrix is at most that of the matrix; eRank_le_card_width/height; no iSup or ⨆ in the file; other eRank hits are Matroid.eRank (unrelated)",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has the row-span dimension of an infinite matrix (eRank of the transpose) and the inequality ρ(A) ≤ eRank Aᵀ via eRank_submatrix_le with eRank_toNat_eq_rank for finite blocks, but not the equality with the supremum over finite square submatrices"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'rank.*submatrix.*det\\|det.*submatrix.*rank\\|exists_submatrix' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Data/Matrix",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-rationality-criterion",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

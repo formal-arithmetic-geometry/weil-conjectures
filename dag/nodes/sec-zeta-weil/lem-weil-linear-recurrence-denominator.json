@@ -1,0 +1,57 @@
+{
+ "id": "lem-weil-linear-recurrence-denominator",
+ "kind": "statement",
+ "title": "Denominator from a linear recurrence",
+ "statement": "Let $K$ be a field [def-weil-field] and $C(T)=\\sum_{n\\geq0}c_nT^n\\in K[[T]]$ a formal power series [def-weil-formal-power-series]. Let $m\\geq0$, $d\\geq1$ be integers and $a_0,\\ldots,a_{d-1}\\in K$ such that $(c_n)$ satisfies the linear recurrence of order $d$ with coefficients $a_0,\\ldots,a_{d-1}$ from the index $m$ on [def-weil-eventual-linear-recurrence]: $c_{n+d}+a_{d-1}c_{n+d-1}+\\cdots+a_0c_n=0$ for $n\\geq m$. Put\n$$\nQ(T)=1+a_{d-1}T+a_{d-2}T^2+\\cdots+a_0T^d\\in K[T]\n$$\n[def-weil-polynomial-ring], so $[T^0]Q=1$ and $[T^j]Q=a_{d-j}$ for $1\\leq j\\leq d$ [def-weil-polynomial-coefficient]. Then $Q(0)=1$, and the product $QC\\in K[[T]]$ (with $Q$ regarded as a power series [def-weil-polynomial-as-power-series]) is a polynomial $P\\in K[T]$ with $[T^N]P=0$ for every $N\\geq m+d$; explicitly $[T^N]P=c_N+\\sum_{j=1}^{\\min(N,d)}a_{d-j}c_{N-j}$ for $0\\leq N<m+d$.",
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Ch. II, §27, proof of Lemma 27.9, p. 157 (quoting Bourbaki, Algèbre, IV.5, Exercise 3(a): f lies in k(t) iff its coefficients satisfy a linear relation λ_1a_n+…+λ_ra_{n+r-1}=0 for all n≥d; stated, not proved); the direction 'recurrence implies rational'"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-formal-power-series",
+  "def-weil-eventual-linear-recurrence",
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-coefficient",
+  "def-weil-polynomial-as-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'PowerSeries' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | xargs grep -ln 'Polynomial' | xargs grep -ln -i 'recurr'; grep -n 'PowerSeries' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/LinearRecurrence.lean; grep -rn -i 'IsRational\\|rational' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/",
+   "results": "no file of Mathlib relates the coefficients of a power series to a linear recurrence (the hits for 'recurr' in LaurentSeries.lean, PowerSeries/PiTopology.lean, Derivative.lean, Substitution.lean are unrelated words); LinearRecurrence.lean mentions no PowerSeries; RingTheory/PowerSeries has no notion of rational power series (only AlgebraicGeometry IsRationalOver, unrelated)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'LinearRecurrence\\|IsSolution' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -n 'theorem\\|lemma\\|def\\|structure' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/LinearRecurrence.lean",
+   "results": "Mathlib/Algebra/LinearRecurrence.lean: structure LinearRecurrence (order, coeffs : Fin order → R) (:53), IsSolution u := ∀ n, u (n + order) = ∑ i, coeffs i * u (n + i) (:70), mkSol, solSpace (:117), solSpace_rank : Module.rank R E.solSpace = E.order (:198), charPoly (:209), geom_sol_iff_root_charPoly (:229); used elsewhere only in NumberTheory/Real/GoldenRatio.lean (fibRec). The file imports no PowerSeries and mentions none.",
+   "date": "2026-10-09",
+   "verdict": "no match: LinearRecurrence has a characteristic polynomial (charPoly, monic of degree order) but no statement about the generating power series of a solution"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-rationality-criterion",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

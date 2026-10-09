@@ -2,52 +2,101 @@
  "id": "prop-weil-rationality-criterion",
  "kind": "statement",
  "title": "Rationality criterion",
- "statement": "Let $K$ be a field and\n$C(T)=\\sum_{n\\geq0}c_nT^n\\in K[[T]]$ a\nformal power series.\nThe following conditions are equivalent:\n\n1. $C=P/Q$ for polynomials $P,Q\\in K[T]$ with $Q(0)=1$.\n1. The Hankel rank of $C$ is finite.\n1. There are integers $m\\geq0,d\\geq1$ and\n$a_0,\\ldots,a_{d-1}\\in K$ such that\n$$\nc_{n+d}+a_{d-1}c_{n+d-1}+\\cdots+a_0c_n=0\n\\qquad(n\\geq m).\n$$",
+ "statement": "Let $K$ be a field [def-weil-field] and\n$C(T)=\\sum_{n\\geq0}c_nT^n\\in K[[T]]$ a\nformal power series [def-weil-formal-power-series].\nThe following conditions are equivalent:\n\n1. $C=P/Q$ for polynomials $P,Q\\in K[T]$ [def-weil-polynomial-ring] with $Q(0)=1$, that is, $QC=P$ in $K[[T]]$ [def-weil-polynomial-as-power-series].\n1. The Hankel rank of $C$ [def-weil-hankel-matrix] is finite.\n1. There are integers $m\\geq0,d\\geq1$ and\n$a_0,\\ldots,a_{d-1}\\in K$ such that\n$$\nc_{n+d}+a_{d-1}c_{n+d-1}+\\cdots+a_0c_n=0\n\\qquad(n\\geq m).\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.md",
   "place": "node prop-weil-rationality-criterion, order 2889"
  },
  "stmt_deps": [
   "def-weil-field",
-  "def-weil-formal-power-series"
+  "def-weil-formal-power-series",
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-as-power-series",
+  "def-weil-hankel-matrix"
  ],
  "proof": [
   {
-   "text": "Write $R_j=(c_{j+s})_{s\\geq0}$ and\n$V=\\operatorname{span}_K\\{R_j:j\\geq0\\}$. We first identify the\nmatrix rank in [def-weil-hankel-matrix] with $\\dim_K V$.\nIf $r$ rows are independent as infinite sequences,\n[lem-weil-finite-coordinate-detection] applied to their span\nshows that finitely many columns still detect their independence.\nA further selection of $r$ columns gives a nonzero $r$-minor.\nConversely a nonzero finite minor makes its rows independent.\nThus bounded finite matrix ranks are equivalent to finite $\\dim_K V$.",
+   "text": "(Hankel rank and the row span.) For $j\\geq0$ write $R_j=(c_{j+s})_{s\\geq0}\\in K^{\\mathbf Z_{\\geq0}}$; it is the $j$-th row of the Hankel matrix $\\mathcal H(C)=(c_{r+s})_{r,s\\geq0}$ [def-weil-hankel-matrix]. Let $V$ be the $K$-linear span of $\\{R_j:j\\geq0\\}$ in the sequence space. The Hankel rank of $C$ is by definition the supremum in $\\mathbf N\\cup\\{\\infty\\}$ of the ranks of the finite square submatrices of the infinite matrix $\\mathcal H(C)$. By [lem-weil-infinite-matrix-rank-row-span] applied to $A=\\mathcal H(C)$, whose rows are the $R_j$, this supremum equals $\\dim_KV$ when $V$ is finite-dimensional and is $\\infty$ otherwise. Hence condition (2) holds if and only if $V$ is finite-dimensional.",
    "uses": [
     "def-weil-hankel-matrix",
-    "lem-weil-finite-coordinate-detection"
+    "lem-weil-infinite-matrix-rank-row-span"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.md",
+    "place": "## Proof, first paragraph; the Hankel formulation of rationality is literature/deligne-weil-I_PMIHES-1974-43.pdf, p. 276 (proof of (1.7)⇒(1.6): rationality means that the Hankel determinants vanish), stated without proof"
+   }
   },
   {
-   "text": "Suppose (2) holds. If $R_0=0$, all $c_n$ vanish and (3) holds\nwith $m=0,d=1,a_0=0$. Otherwise choose the least $d\\geq1$\nfor which $R_0,\\ldots,R_d$ are dependent. The preceding rows are\nindependent, so the last row has coefficient nonzero in any nontrivial relation.\nDividing by that coefficient gives\n$R_d+a_{d-1}R_{d-1}+\\cdots+a_0R_0=0$.\nIts $n$-th coordinate is (3) with $m=0$.",
-   "uses": [],
-   "elementary": null
+   "text": "((2) implies (3).) Assume (2). By step 1, $V$ is finite-dimensional. The sequences $R_j$ are exactly the shifted sequences $(c_{j+s})_{s\\geq0}$ of $(c_n)$, so [lem-weil-shift-span-linear-recurrence] gives an integer $d\\geq1$ and $a_0,\\ldots,a_{d-1}\\in K$ with $R_d+a_{d-1}R_{d-1}+\\cdots+a_0R_0=0$. The coordinate of index $n$ of this identity is $c_{n+d}+a_{d-1}c_{n+d-1}+\\cdots+a_0c_n=0$, for every $n\\geq0$; this is (3) with $m=0$.",
+   "uses": [
+    "lem-weil-shift-span-linear-recurrence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.md",
+    "place": "## Proof, second paragraph; the equivalence of the Hankel condition with rationality is stated in literature/milne-lectures-on-etale-cohomology_LEC.pdf, p. 157 (Bourbaki, Algèbre IV.5, Exercise 3(d), quoted in the proof of Lemma 27.9) without proof"
+   }
   },
   {
-   "text": "Suppose (3) holds. Put\n$Q(T)=1+a_{d-1}T+\\cdots+a_0T^d$.\nFor $N\\geq m+d$, the coefficient of $T^N$ in $QC$ is\nzero by the recurrence with $n=N-d$. Hence $QC=P$ is a\npolynomial, proving (1). For later use, (3) also directly implies\n(2): for every $j\\geq m$ the same recurrence in every coordinate\nexpresses $R_{j+d}$ in the span of $R_j,\\ldots,R_{j+d-1}$.\nAll rows therefore lie in the span of $R_0,\\ldots,R_{m+d-1}$.",
-   "uses": [],
-   "elementary": null
+   "text": "((3) implies (1).) Assume (3), with $m\\geq0$, $d\\geq1$ and $a_0,\\ldots,a_{d-1}$. Put $Q(T)=1+a_{d-1}T+\\cdots+a_0T^d\\in K[T]$. By [lem-weil-linear-recurrence-denominator], $Q(0)=1$ and $QC$ is a polynomial $P\\in K[T]$ (of degree $<m+d$). So $QC=P$ with $Q(0)=1$, which is (1).",
+   "uses": [
+    "lem-weil-linear-recurrence-denominator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Ch. II, §27, proof of Lemma 27.9, p. 157: Bourbaki, Algèbre IV.5, Exercise 3(a), direction 'recurrence implies $f\\in k(t)$', stated without proof"
+   }
   },
   {
-   "text": "Finally suppose (1) holds. Write\n$Q=1+b_1T+\\cdots+b_dT^d$, first taking $d\\geq1$.\nThe coefficient identity $QC=P$, in degrees $N>\\deg P$\nand $N\\geq d$, gives (3) with $a_{d-j}=b_j$ and sufficiently\nlarge $m$. If $Q=1$, the coefficients of $C=P$ eventually\nvanish, so take $d=1,a_0=0$ and $m$ sufficiently large.\nThis proves all implications.",
+   "text": "((1) implies (3).) Assume (1): $QC=P$ with $P,Q\\in K[T]$ and $Q(0)=1$. Let $d=\\max(\\deg Q,1)$ and $m=\\deg P+1$ if $P\\neq0$, $m=0$ if $P=0$; then $[T^N]P=0$ for every $N\\geq m+d$. By [lem-weil-rational-series-linear-recurrence], with $a_i=[T^{d-i}]Q$ for $0\\leq i\\leq d-1$, the coefficients satisfy $c_{n+d}+a_{d-1}c_{n+d-1}+\\cdots+a_0c_n=0$ for every $n\\geq m$, which is (3).",
+   "uses": [
+    "lem-weil-rational-series-linear-recurrence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Ch. II, §27, proof of Lemma 27.9, p. 157: Bourbaki, Algèbre IV.5, Exercise 3(a), direction '$f\\in k(t)$ implies a recurrence', stated without proof"
+   }
+  },
+  {
+   "text": "((3) implies (2).) Assume (3), with $m,d,a_0,\\ldots,a_{d-1}$. By [lem-weil-linear-recurrence-shift-span], every $R_j$ lies in the span of $R_0,\\ldots,R_{m+d-1}$, so $V$ is finite-dimensional (of dimension at most $m+d$). By step 1 the Hankel rank of $C$ is finite, which is (2).",
+   "uses": [
+    "lem-weil-linear-recurrence-shift-span"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.md",
+    "place": "## Proof, third paragraph ('(3) also directly implies (2)'); stated without proof in literature/milne-lectures-on-etale-cohomology_LEC.pdf, p. 157 (Bourbaki's Exercise 3(d))"
+   }
+  },
+  {
+   "text": "(Conclusion.) Steps 2–5 prove (2)⇒(3), (3)⇒(1), (1)⇒(3) and (3)⇒(2). Hence (1)⇔(3)⇔(2), and the three conditions are equivalent.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.md",
+    "place": "## Proof, last sentence ('This proves all implications')"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-hankel-matrix",
-  "lem-weil-finite-coordinate-detection"
+  "lem-weil-infinite-matrix-rank-row-span",
+  "lem-weil-shift-span-linear-recurrence",
+  "lem-weil-linear-recurrence-denominator",
+  "lem-weil-rational-series-linear-recurrence",
+  "lem-weil-linear-recurrence-shift-span"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.md",
-  "place": "## Proof"
+  "place": "## Proof. The sources state the criterion without proof: literature/milne-lectures-on-etale-cohomology_LEC.pdf, Ch. II §27, proof of Lemma 27.9, pp. 156–157, quotes Bourbaki, Algèbre IV.5, Exercise 3 (a)–(d) (an exercise; Bourbaki is not in literature/); literature/deligne-weil-I_PMIHES-1974-43.pdf, p. 276, proof of (1.7)⇒(1.6), asserts that rationality means the vanishing of the Hankel determinants for large indices. The argument follows the blueprint, written by an agent, checked and split here."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -77,5 +126,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "prop-weil-rationality-criterion",
+  "worker": "stage1",
+  "summary": "Read Milne LEC pp. 156–157 (Lemma 27.9 and its proof: it only quotes Bourbaki, Algèbre IV.5, Exercise 3, without proof) and Deligne Weil I p. 276 (asserts the Hankel-determinant criterion without proof); no document in literature/ proves the criterion, so the proof stays by agent, following the blueprint, and Bourbaki's exercise is reported WANTED. Statement unchanged in content; references added inline, and condition (1) made explicit as $QC=P$ in $K[[T]]$. stmt_deps: added def-weil-hankel-matrix (used by condition (2), as the reviewer noted), def-weil-polynomial-ring and def-weil-polynomial-as-power-series (used by condition (1)). The proof is now six steps: the identification of the Hankel rank with the dimension of the row span (new node lem-weil-infinite-matrix-rank-row-span, which absorbs lem-weil-finite-coordinate-detection; it needs no determinants, since the Hankel rank is defined by ranks of finite submatrices), (2)⇒(3) via a relation among consecutive rows (new lem-weil-shift-span-linear-recurrence), (3)⇒(1) via the denominator built from the recurrence (new lem-weil-linear-recurrence-denominator), (1)⇒(3) by comparing coefficients (new lem-weil-rational-series-linear-recurrence), (3)⇒(2) (new lem-weil-linear-recurrence-shift-span), and the elementary conclusion. New definition def-weil-eventual-linear-recurrence is a Mathlib leaf (LinearRecurrence.IsSolution of the shifted sequence). Mathlib has Matrix.eRank for infinite matrices and LinearRecurrence, but nothing linking power series to recurrences, no notion of rational power series, and not the equality of eRank with the supremum of finite-submatrix ranks; the five new lemmas are unsplit. lem-weil-finite-coordinate-detection is no longer used directly by this node."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

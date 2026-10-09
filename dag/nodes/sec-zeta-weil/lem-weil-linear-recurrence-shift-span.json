@@ -1,0 +1,56 @@
+{
+ "id": "lem-weil-linear-recurrence-shift-span",
+ "kind": "statement",
+ "title": "A linear recurrence bounds the shift span",
+ "statement": "Let $K$ be a field [def-weil-field], $m\\geq0$, $d\\geq1$ integers, $a_0,\\ldots,a_{d-1}\\in K$, and $(c_n)_{n\\geq0}$ a sequence in $K$ satisfying the linear recurrence of order $d$ with coefficients $a_0,\\ldots,a_{d-1}$ from the index $m$ on [def-weil-eventual-linear-recurrence]. For $j\\geq0$ let $R_j=(c_{j+s})_{s\\geq0}\\in K^{\\mathbf Z_{\\geq0}}$. Then every $R_j$ lies in the $K$-linear span of $R_0,\\ldots,R_{m+d-1}$. Consequently the subspace $V\\subseteq K^{\\mathbf Z_{\\geq0}}$ [def-weil-sequence-subspace] spanned by all $R_j$ is finite-dimensional [def-weil-finite-dimensional-subspace] with $\\dim_KV\\leq m+d$ [def-weil-vector-space-dimension].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.md",
+  "place": "## Proof, third paragraph ('(3) also directly implies (2): ... All rows therefore lie in the span of $R_0,\\ldots,R_{m+d-1}$'); stated without proof in literature/milne-lectures-on-etale-cohomology_LEC.pdf, p. 157, Bourbaki's Exercise 3(d)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-eventual-linear-recurrence",
+  "def-weil-sequence-subspace",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'solSpace\\|solSpace_rank' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/LinearRecurrence.lean; grep -rn 'shift' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/LinearRecurrence.lean",
+   "results": "solSpace : Submodule R (ℕ → R) (:117), the solutions of one recurrence; solSpace_rank (:198): its rank is the order; no statement about the span of the shifted sequences n ↦ u (n + j); 'shift' does not occur",
+   "date": "2026-10-09",
+   "verdict": "generalization only for m=0: when m=0 every R_j is a solution of the recurrence, so V ⊆ E.solSpace of rank d (solSpace_rank); for m>0 the rows R_0,…,R_{m-1} are not solutions and the bound m+d is not one line from it: no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'finrank_span_le_card\\|rank_span_le' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Dimension/Constructions.lean",
+   "results": "rank_span_le (:427), finrank_span_le_card (:446): the span of finitely many vectors has dimension at most their number (used for the bound, not the statement)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-rationality-criterion",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
