@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-flat-base-change-hom-finitely-presented",
+ "kind": "statement",
+ "title": "Hom out of a finitely presented module commutes with flat base change",
+ "statement": "Let $R\\to R'$ be a flat ring map [def-weil-pbc-flat-ring-map], $M$ a finitely presented $R$-module (the cokernel of an $R$-linear map $R^{\\oplus m}\\to R^{\\oplus n}$) and $N$ any $R$-module. For an $R$-linear $h:M\\to N$ let $\\mathrm{id}_{R'}\\otimes h:R'\\otimes_RM\\to R'\\otimes_RN$ be its base change [def-weil-module-base-change] (written with $R'$ on the left). Then the $R'$-linear map $$\\theta:R'\\otimes_R\\operatorname{Hom}_R(M,N)\\longrightarrow\\operatorname{Hom}_{R'}(R'\\otimes_RM,\\,R'\\otimes_RN),\\qquad r'\\otimes h\\longmapsto r'\\cdot(\\mathrm{id}_{R'}\\otimes h)$$ is bijective. In particular this holds if $R$ is Noetherian [def-weil-pbc-noetherian-ring] and $M$ is a finitely generated $R$-module [def-weil-finitely-generated-module] (such an $M$ is finitely presented).",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 087R (lemma-pseudo-coherence-and-base-change-ext, line 16709), part (1) and the final sentence ('if R is Noetherian and M is a finite module this holds')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-module-base-change",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat base change of Hom module: Hom_R(M,N) ⊗ S ≅ Hom_S(S ⊗ M, S ⊗ N) for M finitely presented and S flat over R",
+   "results": "IsBaseChange.linearMapLeftRightHom (Mathlib.RingTheory.TensorProduct.IsBaseChangeHom; base change of Hom only for free finite source, theorem linearMapLeftRight), IsBaseChange.endHom, IsBaseChange.linearMapRightBaseChangeHom, RingHom.Flat.ofLocalizationSpanTarget, Module.Flat.iff_flat_tensorProduct, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+   "date": "2026-10-10",
+   "verdict": "no match among these (free-source version only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat R-algebra S and finitely presented R-module M, the natural map S ⊗_R Hom_R(M, N) → Hom_S(S ⊗_R M, S ⊗_R N) is an isomorphism",
+   "results": "instFinitePresentationTensorProduct, Module.Flat.iff_flat_tensorProduct, Module.Flat.toAlgebra, Module.FaithfullyFlat.lTensor_bijective_iff_bijective, Module.Flat.instTensorProduct, Module.Flat.of_flat_tensorProduct, LinearMap.tensorKerEquiv, Module.Flat.baseChange",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsBaseChange _ (LinearMap.baseChangeHom _ _ _ _)",
+   "results": "Module.FinitePresentation.isBaseChange_map (R M N S) [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S] [Module.FinitePresentation R M] : IsBaseChange S (LinearMap.baseChangeHom R S M N); Module.isBaseChange_map_of_finite_free (Mathlib.Algebra.Module.FinitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.FinitePresentation.isBaseChange_map"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'FinitePresentation' Mathlib --include=*.lean | grep -i 'hom|linearMap|Flat|baseChange'; sed -n 640,740p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/FinitePresentation.lean; grep -n 'def baseChangeHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Tower.lean; grep -n 'def IsBaseChange\\|IsBaseChange.equiv\\b\\|equiv_tmul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/IsTensorProduct.lean; grep -n 'finitePresentation_of_finite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/FinitePresentation.lean",
+   "results": "Module.FinitePresentation.isBaseChange_map (Algebra/Module/FinitePresentation.lean:696, [Module.Flat R S] [Module.FinitePresentation R M]); LinearMap.baseChangeHom (LinearAlgebra/TensorProduct/Tower.lean:717, f ↦ baseChange A f); IsBaseChange.equiv (RingTheory/IsTensorProduct.lean:404) with equiv_tmul (:416: s ⊗ₜ m ↦ s • f m); Module.finitePresentation_of_finite (Algebra/Module/FinitePresentation.lean:118, [IsNoetherianRing R] [Module.Finite R M]); also Module.FinitePresentation.linearEquivMapExtendScalars (localization case only)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.FinitePresentation.isBaseChange_map, Module.finitePresentation_of_finite",
+  "file": "Mathlib/Algebra/Module/FinitePresentation.lean",
+  "line": 696,
+  "how": "exact, with S = R': `isBaseChange_map R M N S [Module.Flat R S] [Module.FinitePresentation R M] : IsBaseChange S (LinearMap.baseChangeHom R S M N)` (:696); `LinearMap.baseChangeHom` (LinearAlgebra/TensorProduct/Tower.lean:717) is h ↦ id_S ⊗ h, and IsBaseChange S g means that `IsBaseChange.equiv` (RingTheory/IsTensorProduct.lean:404), s ⊗ h ↦ s • g h (`equiv_tmul`, :416), is a linear equivalence S ⊗[R] Hom → Hom_S(S ⊗ M, S ⊗ N): this is θ. The 'in particular' clause is `Module.finitePresentation_of_finite` (:118, [IsNoetherianRing R] [Module.Finite R M] → Module.FinitePresentation R M). Mathlib's Module.FinitePresentation (finitely generated with finitely generated relation module) is the node's finite presentation."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-completion-internal-hom",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

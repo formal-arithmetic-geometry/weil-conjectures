@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-completion-finite-module-tensor",
+ "kind": "statement",
+ "title": "The completion of a finite module over a Noetherian ring is its base change to the completed ring",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq A$ an ideal and $A^\\wedge=\\varprojlim_nA/I^n$ the $I$-adic completion [def-weil-pbc-adic-completion]. For an $A$-module $P$ let $P^\\wedge=\\varprojlim_nP/I^nP$ (compatible sequences, an $A^\\wedge$-module by $(a_n)_n\\cdot(x_n)_n=(a_nx_n)_n$), with the $A$-linear map $\\iota_P:P\\to P^\\wedge$, $x\\mapsto(x\\bmod I^nP)_n$, and for an $A$-linear $u:P\\to Q$ let $u^\\wedge:P^\\wedge\\to Q^\\wedge$, $(x_n)_n\\mapsto(u(x_n))_n$. Let $c_P:A^\\wedge\\otimes_AP\\to P^\\wedge$ be the $A^\\wedge$-linear map with $c_P(a\\otimes x)=a\\cdot\\iota_P(x)$ (the tensor product as in [def-weil-module-base-change], with $A^\\wedge$ written on the left). Then (1) $c$ is natural: $u^\\wedge\\circ c_P=c_Q\\circ(\\mathrm{id}_{A^\\wedge}\\otimes u)$ for every $A$-linear $u:P\\to Q$; (2) if $P$ is a finitely generated $A$-module [def-weil-finitely-generated-module], then $c_P$ is bijective, so $P^\\wedge\\cong A^\\wedge\\otimes_AP$ as $A^\\wedge$-modules.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00MA (lemma-completion-tensor, line 22901), part (3) (M^ = M (x)_R R^ for a finite module M over a Noetherian ring R); the naturality (1) is immediate from the formula of the map and is used in the proof of Cohomology of Schemes, Lemma 0882"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-module-base-change",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adic completion of a finite module over a Noetherian ring is isomorphic to the tensor product with the completed ring",
+   "results": "AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.module (all Mathlib.RingTheory.AdicCompletion.AsTensorProduct / Algebra)",
+   "date": "2026-10-10",
+   "verdict": "match: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.ofTensorProduct",
+   "results": "AdicCompletion.ofTensorProduct (AdicCompletion I R ⊗[R] M →ₗ[AdicCompletion I R] AdicCompletion I M), ofTensorProduct_tmul (r ⊗ₜ x ↦ r • of I M x), ofTensorProduct_bijective_of_finite_of_isNoetherian, ofTensorProduct_surjective_of_finite, coe_ofTensorProductEquivOfFiniteNoetherian, ofTensorProductEquivOfFiniteNoetherian_apply, ofTensorProduct_bijective_of_pi_of_fintype (Mathlib.RingTheory.AdicCompletion.AsTensorProduct)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'ofTensorProduct' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; sed -n 40,80p and 315,350p of that file",
+   "results": "def ofTensorProduct (:57, the map r ⊗ x ↦ r • of I M x, ofTensorProduct_tmul :68 rfl), ofTensorProduct_naturality (:74: map I f ∘ₗ ofTensorProduct I M = ofTensorProduct I N ∘ₗ AlgebraTensorModule.map id f), ofTensorProduct_bijective_of_finite_of_isNoetherian (:320), def ofTensorProductEquivOfFiniteNoetherian (:328) under variable [IsNoetherianRing R] (:316) and [Module.Finite R M]",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProduct_naturality",
+  "file": "Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean",
+  "line": 328,
+  "how": "a few Mathlib declarations, one per clause: c_P is `AdicCompletion.ofTensorProduct I P` (:57; c_P(a ⊗ x) = a • of I P x by `ofTensorProduct_tmul`, :68), where `AdicCompletion I P` is lim P/(I^n • ⊤) and `of I P` is ι_P; (1) is `ofTensorProduct_naturality` (:74), with `AdicCompletion.map I u` = u^ and `AlgebraTensorModule.map LinearMap.id u` = id ⊗ u; (2) is `ofTensorProductEquivOfFiniteNoetherian` (:328, [IsNoetherianRing R] [Module.Finite R M], a linear equiv whose underlying map is ofTensorProduct by `coe_ofTensorProductEquivOfFiniteNoetherian`, :333), equivalently `ofTensorProduct_bijective_of_finite_of_isNoetherian` (:320). Mathlib's statement puts M in the universe of R (M : Type u), which a finite module can always be moved into."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-completion-internal-hom",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
