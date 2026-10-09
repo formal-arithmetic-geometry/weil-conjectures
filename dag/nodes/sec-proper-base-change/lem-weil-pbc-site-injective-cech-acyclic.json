@@ -11,9 +11,76 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-site-cech-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write PAb(C) for presheaves of abelian groups and let I be the given injective sheaf. The inclusion Ab(C) into PAb(C) has sheafification as an exact left adjoint: finite limits are sectionwise and sheafification preserves finite limits and colimits. Therefore an extension problem from a monomorphism of presheaves into I sheafifies to an extension problem between sheaves, which is solved by injectivity of I; composing the extension with the unit of sheafification gives an extension in presheaves. Thus I is injective in PAb(C).",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F6 (injective sheaf is injective presheaf)"
+   }
+  },
+  {
+   "text": "Let K_p be the direct sum of the free presheaves Z_{U_t0 x_U ... x_U U_tp} over tuples of covering indices, with alternating face differential. At an object W, decompose K_p(W) by the composite phi: W -> U. The summand for phi is the free abelian group on S_phi^(p+1), where S_phi is the disjoint union of lifts W -> U_t over phi. Face maps delete one entry. If S_phi is empty the summand is zero; otherwise choosing s in S_phi gives the contracting homotopy (s0,...,sp) -> (s,s0,...,sp) in positive degrees. Hence K is exact in every positive degree as a presheaf.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas Tags 03AS and 03AT (free Cech complex and contracting homotopy)"
+   }
+  },
+  {
+   "text": "For every presheaf G, Yoneda identifies Hom(Z_V,G) with G(V), naturally in V and G. Hom out of a direct sum is a product, so Hom(K_p,G) is the product of G on the iterated fibre products; precomposition with a face is restriction along the corresponding projection. The resulting cochain differential is exactly the Cech differential, so Hom(K,I) is the Cech complex of I.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AS (Cech complex as Hom from the free complex)"
+   }
+  },
+  {
+   "text": "For p>0, a cocycle s: K_p -> I vanishes on im(d_{p+1}) = ker(d_p), hence factors through B = im(d_p) included in K_{p-1}. Injectivity of I in presheaves extends B -> I to K_{p-1} -> I, whose composite with d_p is s. Every positive-degree cocycle is therefore a coboundary, and Cech H^p(U,I)=0.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AW via the second paragraph of Lemma Tag 03AU"
+   }
+  },
+  {
+   "text": "In degree zero, a Cech cocycle is a section of I(U) whose restrictions to every pairwise fibre product agree. The sheaf condition identifies these compatible families with the unique section on U, giving Cech H^0(U,I)=I(U).",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AN (Cech H0)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-sheafification-exact",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemmas Tags 03AW, 03F6, 03AS, 03AT, 03AU and 03AN"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +112,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +132,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "tool_uses": [
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-injective-cech-acyclic",
+  "worker": "stage1",
+  "summary": "Split the general-site statement along Stacks 03AW. The proof first transfers injectivity from sheaves to presheaves through the exact sheafification adjunction, then constructs the free Cech presheaf complex and proves its positive-degree exactness by decomposing each value into contractible complexes on the sets of lifts over a fixed map to U. Yoneda identifies Hom from this complex with the Cech complex, and injectivity makes every positive cocycle a coboundary. The sheaf equalizer condition gives the degree-zero identification. The proof uses only the general site and Cech definitions; no small-etale specialization or new node was introduced. Mathlib searches found no Cech-acyclicity theorem for injective sheaves."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C; spot-checked by L: L read the five steps against Stacks 03AW/03F6/03AT/03AS: I injective in PAb (sheafification exact left adjoint), the free Cech complex K_* contractible in positive degrees by the (s, s_0, ..., s_p) homotopy on each summand, Hom(K, I) = Cech complex by Yoneda, cocycles factor through the image and extend by injectivity, degree 0 = sheaf condition. Correct; C's review says what it checked."
+ }
 }
