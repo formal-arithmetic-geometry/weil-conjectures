@@ -54,7 +54,7 @@ from the adjunctions of `Lg^* ⊣ Rg_*`, `Lf^* ⊣ Rf_*`, `Rc_{1!} ⊣ c₁^!` a
 `Rb_{1!} ⊣ b₁^!` with the package fields `properComparison` (for `f` and `g`) and
 `lowerShriekComp`, so it needs `g` proper and `g ≫ b₁` compactifiable; both are fields
 of `ProperPushforwardDiagram`. The trace class of the pushed correspondence needs `Rf_* K`
-in `Dᵇctf`, which is `GeometricOperations.ctf_lowerStar`.
+in `Dᵇctf`, which is `GeometricCoefficients.ctf_lowerStar`.
 
 Properness of `h`, which the blueprint deduces from properness of `f` and `g` by factoring
 `h` through `C ×_D Fix(b)`, is taken as an instance hypothesis, as is the compactification

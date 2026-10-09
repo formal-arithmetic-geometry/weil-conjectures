@@ -37,7 +37,8 @@ graph correspondences `c_m = (id, Φ_m)` and the global Frobenius operators.
 - `AlgebraicGeometry.ProEtale.relativeFrobenius`: the relative Frobenius `r_m` of a
   morphism compatible with the Frobenius morphisms of its source and target.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.lowerShriekExchange`: the compact-support
-  exchange `Lg_Y^* Rf_! ⟶ Rf_! Lg_X^*` of a commutative square with proper gap map.
+  exchange `Lg_Y^* Rf_! ⟶ Rf_! Lg_X^*` on `Dᵇctf` of a commutative square of geometric
+  schemes with proper gap map.
 - `AlgebraicGeometry.ProEtale.WeilComplex.lowerShriekPush`: the `!`-pushforward of a Weil
   complex.
 
@@ -74,11 +75,11 @@ whereas the blueprint states topological invariance on `Dᵇctf`; the generalisa
 expected one on the pro-étale site, and `ctf_leftDerivedUpperStar_obj_iff` restricts it
 back to the coefficient stage.
 
-`WeilComplex.graph` takes the package `G` only for the identification
-`GeometricOperations.upperShriekIdIso : 𝟭 ≅ (𝟙 X)^!`, which comes from the field
-`lowerShriekId : R(𝟙 X)_! ≅ 𝟭`. Constructing `R(𝟙 X)_! ≅ 𝟭` from the trivial
-compactification and the lower-star API would remove that field, and `graph` would no longer
-depend on `G`.
+`WeilComplex.graph` takes the package `G` and the hypothesis `K ∈ Dᵇctf(X)` only for the
+identification `GeometricOperations.upperShriekIdIso : K ≅ (𝟙 X)^! K` on `Dᵇctf`, which comes
+from the field `lowerShriekId : R(𝟙 X)_! ≅ 𝟭` through the exceptional adjunction on `Dᵇctf`.
+Constructing `R(𝟙 X)_! ≅ 𝟭` from the trivial compactification and the lower-star API would
+remove that field, and `graph` would no longer depend on `G`.
 
 `GeometricOperations.lowerShriekExchange`, and hence the coefficient map of
 `WeilComplex.lowerShriekPush`, uses the fields `baseChange`, `properComparison` and
