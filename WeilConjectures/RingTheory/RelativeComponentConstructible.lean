@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.GenericConnectedness
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
+public import WeilConjectures.Mathlib.RingTheory.FinitePresentation
 
 /-!
 # Constructibility of the relative connected component over a noetherian base
@@ -21,10 +22,14 @@ component of `s⁻¹ p` in their fibre is constructible (Stacks `055P`, noetheri
 - `PrimeSpectrum.isConstructible_of_forall_exists_basicOpen`: a noetherian induction criterion
   for constructibility of subsets of a space over `Spec A`.
 - `PrimeSpectrum.isConstructible_relativeComponent`: the relative component is constructible.
+- `PrimeSpectrum.relativeComponent_eq_preimage_of_isPushout`: the relative component is compatible
+  with base change (Stacks `055M`, affine case).
+- `PrimeSpectrum.isConstructible_relativeComponent_of_finitePresentation`: the relative component
+  is constructible for finitely presented algebras over an arbitrary base (Stacks `055P`).
 
 ## References
 
-- Stacks Project, Tags `055N` and `055P`
+- Stacks Project, Tags `055M`, `055N` and `055P`
 -/
 
 @[expose] public section
@@ -353,5 +358,200 @@ theorem isConstructible_relativeComponent [IsNoetherianRing A] [Algebra.FiniteTy
   · exact ((isClosed_zeroLocus _).preimage (continuous_comap (algebraMap A B))).isOpen_compl
   · exact (isOpen_basicOpen).preimage (continuous_comap (algebraMap A B))
   · exact (isClosed_zeroLocus _).isOpen_compl
+
+/-- Over a noetherian ring `R`, preimages of constructible sets under `Spec S → Spec R` are
+constructible: every open subset of `Spec R` is the complement of `V(I)` with `I` finitely
+generated, and its preimage is the complement of `V(I S)`. -/
+theorem isConstructible_preimage_comap {R S : Type*} [CommRing R] [CommRing S]
+    [IsNoetherianRing R] (f : R →+* S) {t : Set (PrimeSpectrum R)} (ht : IsConstructible t) :
+    IsConstructible (comap f ⁻¹' t) := by
+  refine ht.preimage (continuous_comap f) fun U hU _ ↦ ?_
+  obtain ⟨I, hI⟩ := (isClosed_iff_zeroLocus_ideal _).mp hU.isClosed_compl
+  rw [← compl_compl U, hI, Set.preimage_compl, preimage_comap_zeroLocus, ← zeroLocus_span,
+    ← Ideal.map]
+  exact isRetrocompact_zeroLocus_compl_of_fg (Ideal.FG.map (IsNoetherian.noetherian I) f)
+
+/-- **Base change of a closed piece of a fibre** (Stacks `04KV`). Let `B = A ⊗[R] B₀` and let
+`s₀` be a section of `B₀` over `R` with `s₀ c = 0`. If the part `V(c)` of the fibre of
+`Spec B₀ → Spec R` over `p₀ = p ∩ R` is connected, then the part `V(c)` of the fibre of
+`Spec B → Spec A` over `p` is preconnected: it is the image of `Spec (κ(p) ⊗[R] B₀ ⧸ (c))`. -/
+theorem isPreconnected_preimage_inter_preimage_zeroLocus_of_isPushout
+    {R A B₀ B : Type u} [CommRing R] [CommRing A] [CommRing B₀] [CommRing B] [Algebra R A]
+    [Algebra R B₀] [Algebra A B] [Algebra B₀ B] [Algebra R B] [IsScalarTower R A B]
+    [IsScalarTower R B₀ B] [Algebra.IsPushout R A B₀ B] (s₀ : B₀ →ₐ[R] R)
+    (p : PrimeSpectrum A) {c : B₀} (hc : s₀ c = 0)
+    (hconn : IsConnected
+      (comap (algebraMap R B₀) ⁻¹' {comap (algebraMap R A) p} ∩ zeroLocus {c})) :
+    IsPreconnected
+      (comap (algebraMap A B) ⁻¹' {p} ∩ comap (algebraMap B₀ B) ⁻¹' zeroLocus {c}) := by
+  set p₀ := comap (algebraMap R A) p
+  set J : Ideal B₀ := Ideal.span {c}
+  let s' : B₀ ⧸ J →ₐ[R] R := Ideal.Quotient.liftₐ J s₀ fun x hx ↦ by
+    obtain ⟨y, rfl⟩ := Ideal.mem_span_singleton'.mp hx
+    simp [hc]
+  set ψ := comap (Ideal.Quotient.mk J)
+  have hψ : IsInducing ψ :=
+    (isClosedEmbedding_comap_of_surjective _ _ Ideal.Quotient.mk_surjective).isInducing
+  have himage : ψ '' (comap (algebraMap R (B₀ ⧸ J)) ⁻¹' {p₀}) =
+      comap (algebraMap R B₀) ⁻¹' {p₀} ∩ zeroLocus {c} := by
+    ext q
+    constructor
+    · rintro ⟨q, hq, rfl⟩
+      refine ⟨?_, ?_⟩
+      · rw [Set.mem_preimage, Set.mem_singleton_iff] at hq ⊢
+        rw [← hq]
+        rfl
+      · simp [ψ, J]
+    · rintro ⟨hq, hcq⟩
+      have hJq : q ∈ Set.range ψ := by
+        rw [range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective, Ideal.mk_ker]
+        simpa [J, Ideal.span_le] using hcq
+      obtain ⟨q', rfl⟩ := hJq
+      exact ⟨q', hq, rfl⟩
+  have hK : ConnectedSpace (PrimeSpectrum (p₀.asIdeal.ResidueField ⊗[R] (B₀ ⧸ J))) := by
+    refine (preimageHomeomorphFiber R (B₀ ⧸ J) p₀).connectedSpace_iff.mp ?_
+    rw [← isConnected_iff_connectedSpace]
+    refine ⟨?_, ?_⟩
+    · obtain ⟨q, hq⟩ := hconn.nonempty
+      rw [← himage] at hq
+      obtain ⟨q', hq', -⟩ := hq
+      exact ⟨q', hq'⟩
+    · rw [← hψ.isPreconnected_image, himage]
+      exact hconn.isPreconnected
+  let _ : Algebra p₀.asIdeal.ResidueField p.asIdeal.ResidueField :=
+    (Ideal.ResidueField.map p₀.asIdeal p.asIdeal (algebraMap R A) rfl).toAlgebra
+  have : IsScalarTower R p₀.asIdeal.ResidueField p.asIdeal.ResidueField :=
+    .of_algebraMap_eq fun r ↦ by
+      rw [RingHom.algebraMap_toAlgebra, IsScalarTower.algebraMap_apply R A p.asIdeal.ResidueField]
+      exact (Ideal.ResidueField.map_algebraMap _ _ _ _ r).symm
+  have hT := GenericConnectedness.connectedSpace_tensor_of_section
+    (L := p.asIdeal.ResidueField) s' hK
+  let Θ : B →ₐ[R] p.asIdeal.ResidueField ⊗[R] (B₀ ⧸ J) := Algebra.pushoutDesc B
+    ((Algebra.TensorProduct.includeLeft (S := R)).comp (IsScalarTower.toAlgHom R A _))
+    ((Algebra.TensorProduct.includeRight).comp (Ideal.Quotient.mkₐ R J))
+    fun _ _ ↦ mul_comm _ _
+  have hunit (y : p.asIdeal.ResidueField)
+      (P : PrimeSpectrum (p.asIdeal.ResidueField ⊗[R] (B₀ ⧸ J))) :
+      Algebra.TensorProduct.includeLeft (S := R) (B := B₀ ⧸ J) y ∈ P.asIdeal ↔ y = 0 := by
+    refine ⟨fun h ↦ by_contra fun hy ↦ P.isPrime.ne_top ?_, fun h ↦ by simp [h]⟩
+    exact Ideal.eq_top_of_isUnit_mem _ h ((IsUnit.mk0 y hy).map _)
+  have hset : comap (algebraMap A B) ⁻¹' {p} ∩ comap (algebraMap B₀ B) ⁻¹' zeroLocus {c} =
+      Set.range (comap Θ.toRingHom) := by
+    ext q
+    constructor
+    · rintro ⟨hq, hcq⟩
+      rw [Set.mem_preimage, Set.mem_singleton_iff] at hq
+      have hcq' : algebraMap B₀ B c ∈ q.asIdeal := by simpa using hcq
+      let f' : p.asIdeal.ResidueField →ₐ[R] q.asIdeal.ResidueField :=
+        Ideal.ResidueField.mapₐ p.asIdeal q.asIdeal (IsScalarTower.toAlgHom R A B)
+          (by rw [← hq]; rfl)
+      let g' : B₀ ⧸ J →ₐ[R] q.asIdeal.ResidueField := Ideal.Quotient.liftₐ J
+        ((IsScalarTower.toAlgHom R B _).comp (IsScalarTower.toAlgHom R B₀ B)) fun x hx ↦ by
+          obtain ⟨y, rfl⟩ := Ideal.mem_span_singleton'.mp hx
+          simp [Ideal.algebraMap_residueField_eq_zero.mpr hcq']
+      let χ := Algebra.TensorProduct.lift f' g' fun _ _ ↦ .all _ _
+      have hχ : χ.comp Θ = IsScalarTower.toAlgHom R B q.asIdeal.ResidueField := by
+        refine Algebra.IsPushout.algHom_ext (R := R) (S := A) (R' := B₀) (S' := B) ?_ ?_
+        · ext x
+          simp [Θ, χ, g']
+          exact (Ideal.Quotient.lift_mk _ _ _).trans rfl
+        · ext x
+          simp [Θ, χ, f']
+      refine ⟨comap χ.toRingHom ⟨⊥, Ideal.isPrime_bot⟩, ?_⟩
+      ext x
+      have := congr($hχ x)
+      simp only [AlgHom.comp_apply, IsScalarTower.coe_toAlgHom'] at this
+      simp [this]
+    · rintro ⟨P, rfl⟩
+      refine ⟨?_, ?_⟩
+      · ext x
+        simp [Θ]
+        rw [← Algebra.TensorProduct.includeLeft_apply (S := R), hunit,
+          Ideal.algebraMap_residueField_eq_zero]
+      · simp [Θ, J]
+  rw [hset]
+  exact isPreconnected_range (continuous_comap _)
+
+/-- **Base change of the relative component** (Stacks `055M`, affine case). Let `B = A ⊗[R] B₀`
+with `B₀` of finite type over `R`, and let the section `s` of `B` over `A` be induced by a
+section `s₀` of `B₀` over `R`. Then the relative component of `s` is the preimage of the relative
+component of `s₀` under `Spec B → Spec B₀`. -/
+theorem relativeComponent_eq_preimage_of_isPushout
+    {R A B₀ B : Type u} [CommRing R] [CommRing A] [CommRing B₀] [CommRing B] [Algebra R A]
+    [Algebra R B₀] [Algebra A B] [Algebra B₀ B] [Algebra R B] [IsScalarTower R A B]
+    [IsScalarTower R B₀ B] [Algebra.IsPushout R A B₀ B] [Algebra.FiniteType R B₀]
+    (s : B →ₐ[A] A) (s₀ : B₀ →ₐ[R] R)
+    (hs : ∀ b, algebraMap R A (s₀ b) = s (algebraMap B₀ B b)) :
+    relativeComponent s = comap (algebraMap B₀ B) ⁻¹' relativeComponent s₀ := by
+  ext q
+  set φ := comap (algebraMap B₀ B)
+  set p := comap (algebraMap A B) q
+  set p₀ := comap (algebraMap R A) p
+  have hφ (q' : PrimeSpectrum B) : comap (algebraMap R B₀) (φ q') =
+      comap (algebraMap R A) (comap (algebraMap A B) q') := by
+    rw [← comap_comp_apply, ← comap_comp_apply, ← IsScalarTower.algebraMap_eq,
+      ← IsScalarTower.algebraMap_eq]
+  have hσ : φ (comap (s : B →+* A) p) = comap (s₀ : B₀ →+* R) p₀ := by
+    ext x
+    simp [φ, p₀, hs]
+  have hσF : comap (s : B →+* A) p ∈ comap (algebraMap A B) ⁻¹' {p} := by
+    ext x
+    simp
+  have hF : φ '' (comap (algebraMap A B) ⁻¹' {p}) ⊆ comap (algebraMap R B₀) ⁻¹' {p₀} := by
+    rintro _ ⟨q', hq', rfl⟩
+    rw [Set.mem_preimage, Set.mem_singleton_iff] at hq' ⊢
+    rw [hφ, hq']
+  rw [relativeComponent, Set.mem_ofPred_eq, Set.mem_preimage, relativeComponent,
+    Set.mem_ofPred_eq, hφ, ← hσ]
+  constructor
+  · intro hq
+    exact (isPreconnected_connectedComponentIn.image φ (continuous_comap _).continuousOn)
+      |>.subset_connectedComponentIn ⟨_, mem_connectedComponentIn hσF, rfl⟩
+      ((Set.image_mono (connectedComponentIn_subset _ _)).trans hF) ⟨q, hq, rfl⟩
+  · intro hq
+    obtain ⟨a, ha, b, c, H₁, hsc, hconn⟩ := exists_isConnected_preimage_inter_zeroLocus s₀ p₀
+    set F₀ := comap (algebraMap R B₀) ⁻¹' {p₀}
+    have hUV : F₀ ∩ basicOpen b = F₀ ∩ zeroLocus {c} := by
+      ext q'
+      simp only [Set.mem_inter_iff, Set.mem_preimage, Set.mem_singleton_iff, SetLike.mem_coe,
+        mem_basicOpen, mem_zeroLocus, Set.singleton_subset_iff, and_congr_right_iff, F₀]
+      intro hq'
+      obtain ⟨hbc, hb⟩ := H₁ q' hq'.ge (by rwa [hq'])
+      refine ⟨fun hb' ↦ (q'.isPrime.mem_or_mem hbc).resolve_left hb', fun hc hb' ↦ hb ?_⟩
+      exact sub_mem hb' hc
+    have hσ₀ : φ (comap (s : B →+* A) p) ∈ F₀ ∩ zeroLocus {c} := by
+      rw [hσ]
+      refine ⟨?_, ?_⟩
+      · ext x
+        simp
+      · simpa using hsc
+    have hcc' : F₀ ∩ zeroLocus {c} = F₀ ∩ zeroLocus {c - algebraMap R B₀ (s₀ c)} := by
+      ext q'
+      simp only [Set.mem_inter_iff, Set.mem_preimage, Set.mem_singleton_iff, SetLike.mem_coe,
+        mem_zeroLocus, Set.singleton_subset_iff, and_congr_right_iff, F₀]
+      intro hq'
+      have h : algebraMap R B₀ (s₀ c) ∈ q'.asIdeal := by
+        rwa [← Ideal.mem_comap, ← comap_asIdeal, hq']
+      exact ⟨fun hc ↦ sub_mem hc h, fun hc ↦ by simpa using add_mem hc h⟩
+    rw [connectedComponentIn_eq_of_inter_eq isOpen_basicOpen (isClosed_zeroLocus {c}) hUV
+      hconn.isPreconnected hσ₀, hcc'] at hq
+    rw [hcc'] at hσ₀ hconn
+    exact (isPreconnected_preimage_inter_preimage_zeroLocus_of_isPushout s₀ p (by simp) hconn)
+      |>.subset_connectedComponentIn ⟨hσF, hσ₀.2⟩ Set.inter_subset_left ⟨rfl, hq.2⟩
+
+/-- **The relative connected component of a section is constructible** (Stacks `055P`, affine
+case). Let `B` be a finitely presented `A`-algebra with a section `s`. The set of primes `q` of
+`B` lying in the connected component of `s⁻¹ (q ∩ A)` in their fibre is constructible. By
+noetherian approximation, `B` and `s` descend to a noetherian subring of `A`, where this is
+`isConstructible_relativeComponent`, and the relative component is compatible with base change. -/
+theorem isConstructible_relativeComponent_of_finitePresentation [Algebra.FinitePresentation A B]
+    (s : B →ₐ[A] A) : IsConstructible (relativeComponent s) := by
+  obtain ⟨A₀, B₀, _, _, _, _, hA₀, hB₀, hpush, s₀, hs⟩ :=
+    Algebra.FinitePresentation.exists_fg_subalgebra_with_section s
+  have : Algebra.FiniteType ℤ A₀ := (Subalgebra.fg_iff_finiteType A₀).mp hA₀
+  have : IsNoetherianRing A₀ := Algebra.FiniteType.isNoetherianRing ℤ A₀
+  have : IsNoetherianRing B₀ := Algebra.FiniteType.isNoetherianRing A₀ B₀
+  rw [relativeComponent_eq_preimage_of_isPushout s s₀ hs]
+  exact isConstructible_preimage_comap _ (isConstructible_relativeComponent s₀)
 
 end PrimeSpectrum
