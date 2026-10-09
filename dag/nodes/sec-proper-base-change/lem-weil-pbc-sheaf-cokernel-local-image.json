@@ -5,15 +5,79 @@
  "statement": "Let $(X,\\mathcal O_X)$ be a ringed space and let $\\mathcal F\\xrightarrow{\\varphi}\\mathcal G$ be a morphism of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. Form the presheaf $P$ by $P(V)=\\mathcal G(V)/\\varphi_V(\\mathcal F(V))$ for each open $V\\subseteq X$, and let $P^#$ be its sheafification [def-weil-pbc-sheafification]. Let $q:\\mathcal G\\to P^#$ be the composite. Then $\\ker q$ is the subsheaf whose sections are locally in the image of $\\varphi$, and consequently $q$ is an epimorphism and $q\\circ\\varphi=0$.",
  "source": {
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01AH (tag 01AH, lemma-limits-colimits): colimits in modules are sheafified presheaf colimits; the local description of the kernel is the sheafification criterion for a section to vanish locally."
+  "place": "Modules, Lemma 01AH (tag 01AH, modules.tex lines 204-243): colimits in modules are sheafified presheaf colimits; Sites, Theorem 00WB and Lemma 00WK give the local section/equality criterion used for the kernel."
  },
  "stmt_deps": [
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\eta:P\\to P^#$ be the sheafification map and write $p_V:\\mathcal G(V)\\to P(V)$ for the sectionwise quotient. The quotient maps commute with restriction, so $P$ is a presheaf of $\\mathcal O_X$-modules and $q_V=\\eta_V\\circ p_V$ defines the morphism $q$. Since $p_V\\circ\\varphi_V=0$ for every open $V$, one has $q\\circ\\varphi=0$. The underlying sheaf of sets of $P^#$ with $\\eta$ is the ordinary sheafification, by lem-weil-pbc-module-sheafification-underlying-sets.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-module-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01AH (tag 01AH), proof and statement of parts (1)--(2), lines 204-243; the module sheafification is Modules on Sites, Lemma 03CY (tag 03CY)."
+   }
+  },
+  {
+   "text": "Apply the local-section/equality criterion to the opens site of $X$ (Sites, 00WB and 00WK), using the underlying-sheaf identification from Step 1. For $s\\in\\mathcal G(V)$, the equality $q_V(s)=0$ is the equality $\\eta_V([s])=\\eta_V(0)$ in $P^#(V)$, and therefore holds exactly when some open covering $V=\\bigcup_iV_i$ satisfies $[s|_{V_i}]=0$ in $P(V_i)$. By the definition of the quotient, this is equivalent to the existence of sections $t_i\\in\\mathcal F(V_i)$ with $s|_{V_i}=\\varphi_{V_i}(t_i)$.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-module-sheafification-underlying-sets",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB (tag 00WB, theorem-plus), especially parts (2) and (4), and Lemma 00WK (tag 00WK, lemma-sections-sheafification); applied to the opens site."
+   }
+  },
+  {
+   "text": "For each open $V$ let $I(V)$ be the set of sections of $\\mathcal G(V)$ that are locally of the form $\\varphi(t)$. Restriction preserves this property. Given two such sections, refine their two covers to a common cover; on each member the sum, difference, and multiplication by a section of $\\mathcal O_X$ are again images under the corresponding linear map. Thus $I$ is a subsheaf of $\\mathcal O_X$-modules of $\\mathcal G$ (the sheaf condition is inherited from $\\mathcal G$). Step 2 identifies $I(V)$ with $\\ker(q_V)$ for every $V$, so $I=\\ker q$ as sheaves of modules.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01AH (tag 01AH), together with the sectionwise sheaf-of-modules structure and the local criterion from Sites 00WB/00WK."
+   }
+  },
+  {
+   "text": "The map $\\varphi$ factors through $I$ because every section in its image is locally in the image. Finally, let $h,k:P^#\\to\\mathcal H$ be morphisms with $h q=k q$. For any section $u\\in P^#(V)$, 00WB/00WK gives an open cover $V=\\bigcup_iV_i$ and sections $a_i\\in P(V_i)$ with $\\eta(a_i)=u|_{V_i}$. Each $a_i$ is $p_{V_i}(g_i)$ for some $g_i\\in\\mathcal G(V_i)$, so $u|_{V_i}=q(g_i)$ and $h(u)|_{V_i}=k(u)|_{V_i}$. The sheaf axiom for $\\mathcal H$ gives $h(u)=k(u)$; hence $q$ is an epimorphism. Together with Step 1 this proves all remaining assertions.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sheafification",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01AH (tag 01AH), proof that the sheafified sectionwise colimit is the colimit; the local representatives used here are Sites, Theorem 00WB and Lemma 00WK (tags 00WB, 00WK)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-module-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01AH (tag 01AH), with the local section/equality argument supplied by Sites, Theorem 00WB and Lemma 00WK (tags 00WB, 00WK)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +102,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +122,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheaf-cokernel-local-image",
+  "worker": "worker_sheaf_cokernel",
+  "summary": "Split into four proof steps: quotient and sheafification setup; local vanishing via the existing 00WB/00WK sheafification node; closure of locally image sections and identification with the kernel; and epimorphism by local representatives. No new child node was needed because the reusable local sheafification lemma already exists in this unit."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: 4 steps, 0 new nodes: sectionwise quotient presheaf, sheafification as sets (existing node), local-section criterion (site-sheafification-sections-local, which carries 00WB/00WK), kernel = locally-in-image subsheaf, epimorphism by local representatives. Correct."
+ }
 }
