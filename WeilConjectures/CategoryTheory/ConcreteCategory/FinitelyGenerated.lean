@@ -9,7 +9,8 @@ public import Mathlib.Algebra.Category.ModuleCat.EpiMono
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.ConcreteCategory
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
-public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Finiteness.Cardinality
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Finitely generated objects of a concrete category
@@ -23,6 +24,11 @@ any concrete coefficient category:
 - for modules over a ring `R` it is finite generation, `Module.Finite R M`
   (`ModuleCat.isFinitelyGenerated_iff`); over a finite ring it is finiteness of `M`;
 - for types it is finiteness (`CategoryTheory.ConcreteCategory.isFinitelyGenerated_iff_finite`).
+
+The class `CategoryTheory.ConcreteCategory.FiniteOfIsFinitelyGenerated` singles out the concrete
+categories in which finitely generated objects are finite: modules over a finite ring, and types.
+The class `CategoryTheory.ConcreteCategory.FinitelyGeneratedOfMono` singles out those in which
+subobjects of finitely generated objects are finitely generated: modules over a noetherian ring.
 
 Finitely generated objects are stable under isomorphisms
 (`CategoryTheory.ConcreteCategory.IsFinitelyGenerated.of_iso`), contain the zero objects
@@ -102,6 +108,23 @@ lemma IsFinitelyGenerated.biprod [Abelian C] [PreservesFiniteLimits (forget C)] 
     rw [Preadditive.add_comp, Category.assoc, Category.assoc, ha, hb, biprod.total]⟩⟩⟩
   exact isIso_of_mono_of_epi m
 
+variable (C) in
+/-- A concrete category *has finite finitely generated objects* if every finitely generated object
+has a finite underlying type: modules over a finite ring
+(`ModuleCat.finiteOfIsFinitelyGenerated`) or types. For sheaves with values in such a category,
+the finite sheaves of `AlgebraicGeometry.Scheme.IsFiniteSheaf` are those with finite stalks, which
+are torsion sheaves when `C` is abelian: this is the hypothesis under which the étale formalism
+of torsion coefficients applies. -/
+class FiniteOfIsFinitelyGenerated : Prop where
+  finite_of_isFinitelyGenerated (M : C) : IsFinitelyGenerated M → Finite (ToType M)
+
+variable (C) in
+/-- A concrete category in which every subobject of a finitely generated object is finitely
+generated: modules over a noetherian ring (`ModuleCat.finitelyGeneratedOfMono`). -/
+class FinitelyGeneratedOfMono : Prop where
+  isFinitelyGenerated_of_mono {M N : C} (m : N ⟶ M) [Mono m] :
+    IsFinitelyGenerated M → IsFinitelyGenerated N
+
 end CategoryTheory.ConcreteCategory
 
 namespace CategoryTheory
@@ -121,6 +144,11 @@ lemma ConcreteCategory.isFinitelyGenerated_iff_finite (M : Type u) :
     refine ⟨Set.univ, Set.finite_univ, fun N m hm hsm ↦ ?_⟩
     exact (isIso_iff_bijective m).2 ⟨(mono_iff_injective m).1 hm,
       fun x ↦ hsm (Set.mem_univ x)⟩
+
+/-- In the category of types, finitely generated objects are finite. -/
+instance ConcreteCategory.finiteOfIsFinitelyGenerated_types :
+    ConcreteCategory.FiniteOfIsFinitelyGenerated (Type u) where
+  finite_of_isFinitelyGenerated M h := (ConcreteCategory.isFinitelyGenerated_iff_finite M).1 h
 
 end CategoryTheory
 
@@ -155,5 +183,20 @@ lemma isFinitelyGenerated_iff (M : ModuleCat.{v} R) :
       Submodule.span_le.2 fun y hy ↦ hsm hy
     rw [hS] at hle
     exact hle Submodule.mem_top
+
+/-- Over a noetherian ring, submodules of finitely generated modules are finitely generated. -/
+instance finitelyGeneratedOfMono [IsNoetherianRing R] :
+    FinitelyGeneratedOfMono (ModuleCat.{v} R) where
+  isFinitelyGenerated_of_mono m hm h :=
+    have := (isFinitelyGenerated_iff _).1 h
+    (isFinitelyGenerated_iff _).2
+      (Module.Finite.of_injective m.hom ((ModuleCat.mono_iff_injective m).1 hm))
+
+/-- Over a finite ring, finitely generated modules are finite. -/
+instance finiteOfIsFinitelyGenerated [Finite R] :
+    FiniteOfIsFinitelyGenerated (ModuleCat.{v} R) where
+  finite_of_isFinitelyGenerated M h :=
+    have := (isFinitelyGenerated_iff M).1 h
+    Module.finite_of_finite R
 
 end ModuleCat
