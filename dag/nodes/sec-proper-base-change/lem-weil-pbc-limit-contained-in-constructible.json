@@ -14,9 +14,113 @@
   "def-weil-pbc-category-colimit",
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (affine case: the complement of $E$ is the image of an affine scheme).* Assume first that $T_i$ is affine, $T_i\\cong\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Since the constructible subsets of $T_i$ form a Boolean subalgebra of the power set [def-weil-constructible-subset], the complement $T_i\\setminus E$ is constructible. By [lem-weil-pbc-constructible-is-image] there are a ring map $\\varphi:R\\to A$ and the affine scheme $W=\\operatorname{Spec}A$ with a morphism $g=\\operatorname{Spec}\\varphi:W\\to T_i$ whose image is $g(W)=T_i\\setminus E$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-constructible-is-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 05F4 (lemma-limit-contained-in-constructible, line 530): 'In this case the complement $S_i\\setminus E$ is constructible too. Hence there exists an affine scheme $T$ and a morphism $T\\to S_i$ whose image is $S_i\\setminus E$, see Algebra, Lemma 00F8'"
+   }
+  },
+  {
+   "text": "*Step 2 (affine case: $W\\times_{T_i}T=\\emptyset$).* Let $p:W\\times_{T_i}T\\to W$ and $q:W\\times_{T_i}T\\to T$ be the projections of the fibre product along $g$ and $t_i$ [def-pc-fibre-product]. If $z$ were a point of $W\\times_{T_i}T$, then $g(p(z))=t_i(q(z))$; the left side lies in $g(W)=T_i\\setminus E$ and the right side in $t_i(T)\\subseteq E$, a contradiction. Hence $W\\times_{T_i}T$ is empty.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 05F4 (lemma-limit-contained-in-constructible, line 530) (hypothesis (1) of Lemma Tag 05F3, lemma-limit-fibre-product-empty, line 512, for $T=W$), left implicit by the source"
+   }
+  },
+  {
+   "text": "*Step 3 (affine case: the system $W\\times_{T_i}T_{i'}$).* For $i'\\ge i$ put $W_{i'}=W\\times_{T_i}T_{i'}$ (fibre product along $g$ and $t_{i'i}$). By [lem-weil-pbc-scheme-over-limit] (with $0=i$, the given limit $T$ being canonically isomorphic to the limit of [lem-weil-pbc-limit-affine-transition], both being limits of the same system [def-weil-pbc-category-colimit]), $(W_{i'})_{i'\\ge i}$ with the morphisms $\\mathrm{id}_W\\times t_{i''i'}$ is an inverse system over the directed set $I_{\\ge i}$ with affine transition morphisms, and $W\\times_{T_i}T$ with the morphisms $\\mathrm{id}_W\\times t_{i'}$ is its limit. Each $W_{i'}$ is affine, hence quasi-compact: $W_{i'}\\to W$ is the base change of the affine morphism $t_{i'i}$ and so affine [lem-weil-pbc-affine-morphism-permanence] (1), and a scheme affine over the affine scheme $W$ is affine [lem-weil-pbc-affine-morphism-permanence] (2).",
+   "uses": [
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-limit-affine-transition",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 05F3 (lemma-limit-fibre-product-empty, line 512): 'By Lemma 01YZ we see that $T\\times_{S_i}S=\\lim_{i'\\ge i}T\\times_{S_i}S_{i'}$', cited in the proof of Lemma Tag 05F4 (lemma-limit-contained-in-constructible, line 530); the affineness of the $W_{i'}$ is written out by the agent"
+   }
+  },
+  {
+   "text": "*Step 4 (affine case: some $W_{i_1}$ is empty).* If every $W_{i'}$, $i'\\ge i$, were nonempty, then by Step 3 and [lem-weil-pbc-limit-nonempty] (applied to the system $(W_{i'})_{i'\\ge i}$ over the directed set $I_{\\ge i}$, all of whose members are nonempty and quasi-compact) the limit $W\\times_{T_i}T$ would be nonempty, contradicting Step 2. So there is $i_1\\ge i$ with $W_{i_1}=\\emptyset$. For $i'\\ge i_1$ there is the morphism $\\mathrm{id}_W\\times t_{i'i_1}:W_{i'}\\to W_{i_1}$, so $W_{i'}=\\emptyset$ as well.",
+   "uses": [
+    "lem-weil-pbc-limit-nonempty"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 05F3 (line 512): 'Hence the result follows from Lemma 01Z2', cited in the proof of Lemma Tag 05F4 (lemma-limit-contained-in-constructible, line 530): 'By Lemma 05F3 we see that $T\\times_{S_i}S_{i'}$ is empty for all sufficiently large $i'$'"
+   }
+  },
+  {
+   "text": "*Step 5 (affine case: conclusion).* Let $i'\\ge i_1$ and $x\\in T_{i'}$, and suppose $s=t_{i'i}(x)\\notin E$. By Step 1 there is $w\\in W$ with $g(w)=s$. By [lem-weil-pbc-fibre-product-points] the points of $W_{i'}=W\\times_{T_i}T_{i'}$ lying over $w$ and $x$ correspond to the primes of $\\kappa(w)\\otimes_{\\kappa(s)}\\kappa(x)$, a nonzero ring (a tensor product of two nonzero vector spaces over the field $\\kappa(s)$), which has a prime ideal; so $W_{i'}\\neq\\emptyset$, contradicting Step 4. Hence $t_{i'i}(T_{i'})\\subseteq E$ for all $i'\\ge i_1$: the lemma holds when $T_i$ is affine.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 05F4 (lemma-limit-contained-in-constructible, line 530): '... is empty for all sufficiently large $i'$, and hence $f_{i'i}(S_{i'})\\subset E$ for all sufficiently large $i'$'; the use of the points of a fibre product (Schemes, Lemma Tag 01JT) is written out by the agent"
+   }
+  },
+  {
+   "text": "*Step 6 (reduction to the affine case).* In general, $T_i$ is quasi-compact [def-weil-pbc-scheme-conventions], so $T_i=U_1\\cup\\dots\\cup U_m$ with $U_j\\subseteq T_i$ affine open. Fix $j$. By [lem-weil-pbc-limit-cone-affine-projections-opens] (2) (with $0=i$, $U_0=U_j$), the open subschemes $U_{j,i'}=t_{i'i}^{-1}(U_j)\\subseteq T_{i'}$, $i'\\ge i$, with the restricted transition morphisms form an inverse system over the directed set $I_{\\ge i}$ with affine transition morphisms, whose limit is $t_i^{-1}(U_j)\\subseteq T$ with the restricted projections. Each $U_{j,i'}$ is affine, since it is the preimage of the affine open $U_j$ under the affine morphism $t_{i'i}$ [pqf-def-affine-morphism], hence quasi-compact and quasi-separated; its stage at the index $i$ is $U_{j,i}=U_j$, which is affine. The set $E\\cap U_j$ is constructible in $U_j$ by [lem-weil-pbc-constructible-open-restriction], and the image of $t_i^{-1}(U_j)$ in $U_j$ lies in $E\\cap U_j$. By Steps 1 to 5 applied to this system there is $i_j\\ge i$ with $t_{i'i}(U_{j,i'})\\subseteq E\\cap U_j$ for all $i'\\ge i_j$.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-constructible-open-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 05F4 (lemma-limit-contained-in-constructible, line 530): 'Writing $S_i$ as a finite union of open affine subschemes reduces the question to the case that $S_i$ is affine and $E$ is constructible, see Lemma 01YX and Properties, Lemma 054C' (for a constructible $E$ the constructibility of $E\\cap U_j$ in $U_j$ is Topology, Lemma 005J, used in the proof of 054C)"
+   }
+  },
+  {
+   "text": "*Step 7 (conclusion).* Since $I$ is directed there is $i_1\\in I$ with $i_1\\ge i_j$ for $j=1,\\dots,m$. For $i'\\ge i_1$ we have $T_{i'}=\\bigcup_jU_{j,i'}$, so $t_{i'i}(T_{i'})=\\bigcup_jt_{i'i}(U_{j,i'})\\subseteq\\bigcup_j(E\\cap U_j)\\subseteq E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 05F4 (lemma-limit-contained-in-constructible, line 530) (the reduction step, left implicit by the source)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-constructible-is-image",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-limit-nonempty",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-limit-cone-affine-projections-opens",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-constructible-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "proof of Lemma Tag 05F4 (lemma-limit-contained-in-constructible, line 530), in Situation Tag 086P, with Limits Lemmas Tag 05F3 (proof written into Steps 2-4), Tag 01YZ, Tag 01Z2, Tag 01YX (via the opens of the limit), Algebra Lemma Tag 00F8 and Topology Lemma Tag 005J (in place of Properties Lemma Tag 054C, since $E$ is constructible); the emptiness in Step 2, the affineness of the fibre products in Step 3, the points of a fibre product in Step 5 and the finite-cover bookkeeping in Steps 6-7 are written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,7 +145,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,7 +169,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Limits 05F4 in Situation 086P for a constructible E; self-contained; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Seven steps along the proof of 05F4, three new Mathlib leaves verified by line: lem-weil-pbc-constructible-is-image (00F8 without the finite-presentation clause; PrimeSpectrum.exists_range_eq_of_isConstructible, ConstructibleSet.lean:142), lem-weil-pbc-limit-nonempty (01Z2; Scheme.nonempty_of_isLimit, AffineTransitionLimit.lean:47), lem-weil-pbc-constructible-open-restriction (005J; IsConstructible.preimage_of_isOpenEmbedding, Topology/Constructible.lean:254). The affine case writes out 05F3 (the complement as the image of an affine scheme, the empty fibre product with T, the system W x T_{i'} with affine stages and limit W x T via lem-weil-pbc-scheme-over-limit, emptiness at a stage by 01Z2, points of fibre products by lem-weil-pbc-fibre-product-points); the reduction uses a finite affine cover and the limits of the preimages (lem-weil-pbc-limit-cone-affine-projections-opens (2)) with 005J in place of Stacks' 054C since E is constructible, not only locally constructible. Quasi-separatedness is not used, kept as in 086P."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-limit-contained-in-constructible",
+  "worker": "stage1",
+  "summary": "Split in seven steps along Stacks' proof of Limits 05F4 (limits.tex line 530), checked against the source and the cited lemmas (tags verified in tags/tags: 05F4, 05F3, 01Z2, 01YX, 01YZ, 086P, 00F8, 005J, 054C, 01JT). Affine case (Steps 1-5): the complement of E is constructible and is the image of an affine W (new Mathlib leaf lem-weil-pbc-constructible-is-image = PrimeSpectrum.exists_range_eq_of_isConstructible, @[stacks 00F8] without finite presentation); W x T is empty; W x T = lim W x T_i' with affine transitions (lem-weil-pbc-scheme-over-limit, 01YZ), the W x T_i' affine (lem-weil-pbc-affine-morphism-permanence); by 01Z2 (new Mathlib leaf lem-weil-pbc-limit-nonempty = Scheme.nonempty_of_isLimit) some W x T_i' is empty (this is Stacks 05F3, written out rather than made a node); points of fibre products (lem-weil-pbc-fibre-product-points) give the inclusion. Reduction (Steps 6-7): finite affine cover of T_i, limits of the preimage opens (lem-weil-pbc-limit-cone-affine-projections-opens), E cap U_j constructible in U_j (new Mathlib leaf lem-weil-pbc-constructible-open-restriction = IsConstructible.preimage_of_isOpenEmbedding, @[stacks 005J]; Stacks cites 054C because its E is only locally constructible). Statement and stmt_deps kept. The quasi-separatedness of the T_i is not used by the proof (only quasi-compactness of T_i); it is kept because it is the hypothesis of Situation 086P. lem-weil-pbc-limit-affine-stage is not needed and not cited."
  }
 }

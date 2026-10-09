@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-constructible-open-restriction",
+ "kind": "statement",
+ "title": "A constructible subset meets an open subspace in a constructible subset",
+ "statement": "Let $X$ be a topological space (for instance the underlying space of a scheme), let $U\\subseteq X$ be an open subset with the subspace topology, and let $E\\subseteq X$ be a constructible subset of $X$ [def-weil-constructible-subset]. Then $E\\cap U$ is a constructible subset of the topological space $U$ (Stacks Topology, Lemma 005J).",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Lemma Tag 005J (lemma-open-immersion-constructible-inverse-image, line 2604)"
+ },
+ "stmt_deps": [
+  "def-weil-constructible-subset"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "preimage of a constructible set under an open embedding is constructible",
+   "results": "Topology.IsConstructible.preimage_of_isOpenEmbedding, Topology.isConstructible_preimage_iff_of_isOpenEmbedding, Topology.IsConstructible.preimage (Mathlib.Topology.Constructible), AlgebraicGeometry.Scheme.Hom.isConstructible_preimage (Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "match: IsConstructible.preimage_of_isOpenEmbedding"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if U is an open subset of a topological space X and E is constructible in X then E ∩ U is constructible in U",
+   "results": "Topology.IsConstructible.inter, Topology.IsLocallyConstructible.inter, Topology.IsConstructible.isLocallyConstructible, Topology.IsLocallyConstructible, Topology.IsLocallyConstructible.inter_of_isOpen_isCompact (all Mathlib.Topology.Constructible)",
+   "date": "2026-10-10",
+   "verdict": "no direct match (results are about intersections inside X); the match is the leansearch/grep one"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 005J' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 250,256p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Constructible.lean",
+   "results": "Topology/Constructible.lean:151 @[stacks 005J \"Extracted from the proof\"] IsRetrocompact.preimage_of_isOpenEmbedding; :253 @[stacks 005J], line 254 lemma IsConstructible.preimage_of_isOpenEmbedding (namespace Topology)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Topology.IsConstructible.preimage_of_isOpenEmbedding",
+  "file": "Mathlib/Topology/Constructible.lean",
+  "line": 254,
+  "how": "specializes in one line: apply it to f = Subtype.val : U → X, an open embedding by IsOpen.isOpenEmbedding_subtypeVal; then f ⁻¹' E is the subset E ∩ U of the space U, and IsConstructible is the node's notion (def-weil-constructible-subset). Tagged @[stacks 005J]. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-limit-contained-in-constructible",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

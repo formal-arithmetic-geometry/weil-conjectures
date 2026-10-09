@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-limit-nonempty",
+ "kind": "statement",
+ "title": "A directed limit of nonempty quasi-compact schemes with affine transition morphisms is nonempty",
+ "statement": "Let $I$ be a directed set and $(S_i,f_{ii'})$ ($i\\ge i'$) an inverse system of schemes [def-pc-scheme] over $I$ whose transition morphisms $f_{ii'}:S_i\\to S_{i'}$ are affine [pqf-def-affine-morphism], and let $(S,(f_i)_{i\\in I})$, $f_i:S\\to S_i$, be a limit of this system in the category of schemes [def-weil-pbc-category-colimit]. If every $S_i$ is nonempty and quasi-compact [def-weil-pbc-scheme-conventions], then $S$ is nonempty (Stacks Limits, Lemma 01Z2).",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 01Z2 (lemma-limit-nonempty, line 312)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "limit of a cofiltered diagram of nonempty quasi-compact schemes with affine transition maps is nonempty",
+   "results": "AlgebraicGeometry.Scheme.nonempty_of_isLimit, Scheme.compactSpace_of_isLimit, exists_mem_of_isClosed_of_nonempty(') (Mathlib.AlgebraicGeometry.AffineTransitionLimit), TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system (Mathlib.Topology.Category.TopCat.Limits.Konig)",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.nonempty_of_isLimit"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.nonempty_of_isLimit",
+   "results": "AlgebraicGeometry.Scheme.nonempty_of_isLimit (Mathlib.AlgebraicGeometry.AffineTransitionLimit): [IsCofilteredOrEmpty I] [∀ f, IsAffineHom (D.map f)] [∀ i, Nonempty (D.obj i)] [∀ i, CompactSpace (D.obj i)] : Nonempty c.pt",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse limit of nonempty quasi-compact schemes along affine morphisms is nonempty",
+   "results": "Scheme.nonempty_of_isLimit, Scheme.exists_isAffine_of_isLimit, Scheme.exists_isQuasiAffine_of_isLimit, Scheme.compactSpace_of_isLimit, exists_mem_of_isClosed_of_nonempty' (all Mathlib.AlgebraicGeometry.AffineTransitionLimit)",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.nonempty_of_isLimit"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 01Z2' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 40,52p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "results": "AffineTransitionLimit.lean:46 @[stacks 01Z2], line 47 lemma Scheme.nonempty_of_isLimit",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_of_isLimit",
+  "file": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+  "line": 47,
+  "how": "specializes in one line: an inverse system over the directed set I is a functor D from the category of I (with the opposite order), which is cofiltered, hence IsCofilteredOrEmpty; the transition morphisms are IsAffineHom (Mathlib's affine morphisms, pqf-def-affine-morphism); a scheme is quasi-compact iff its underlying space is CompactSpace; (S,(f_i)) is a limit cone c with hc : IsLimit c; the conclusion Nonempty c.pt is that S is nonempty. Tagged @[stacks 01Z2]; source read 2026-10-10 (sed -n 40,52p)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-limit-contained-in-constructible",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-constructible-is-image",
+ "kind": "statement",
+ "title": "A constructible subset of an affine spectrum is the image of an affine scheme",
+ "statement": "Let $R$ be a commutative ring and let $E\\subseteq\\operatorname{Spec}R$ be a constructible subset [def-weil-constructible-subset] of the underlying topological space of the affine scheme $\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Then there are a commutative ring $A$ and a ring homomorphism $\\varphi:R\\to A$ such that the image of the morphism $\\operatorname{Spec}\\varphi:\\operatorname{Spec}A\\to\\operatorname{Spec}R$ (on points $\\mathfrak q\\mapsto\\varphi^{-1}(\\mathfrak q)$) is exactly $E$ (Stacks Algebra, Lemma 00F8, which moreover gives $\\varphi$ of finite presentation; that part is not stated here).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00F8 (lemma-constructible-is-image, line 5454), without the finite presentation of $R\\to S$"
+ },
+ "stmt_deps": [
+  "def-weil-constructible-subset",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constructible subset of prime spectrum is the image of Spec of a ring map",
+   "results": "PrimeSpectrum.exists_range_eq_of_isConstructible (Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet), PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.isConstructible_range_comap (Mathlib.RingTheory.Spectrum.Prime.Chevalley), PrimeSpectrum.isClosedMap_comap_of_isIntegral",
+   "date": "2026-10-10",
+   "verdict": "match: exists_range_eq_of_isConstructible"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsConstructible, Set.range, PrimeSpectrum.comap",
+   "results": "PrimeSpectrum.exists_range_eq_of_isConstructible (ConstructibleSet), PrimeSpectrum.isConstructible_range_comap (Chevalley)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every constructible subset of Spec R is the image of Spec S for some ring homomorphism R → S",
+   "results": "PrimeSpectrum.exists_range_eq_of_isConstructible, PrimeSpectrum.isConstructible_range_comap, PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.ConstructibleSetData.map, AlgebraicGeometry.Scheme.Hom.isConstructible_image",
+   "date": "2026-10-10",
+   "verdict": "match: exists_range_eq_of_isConstructible"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00F8' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 138,146p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean",
+   "results": "ConstructibleSet.lean:140 @[stacks 00F8 \"without the finite presentation part\"], line 142 lemma exists_range_eq_of_isConstructible (namespace PrimeSpectrum)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.exists_range_eq_of_isConstructible",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean",
+  "line": 142,
+  "how": "exact: for R : Type u a CommRing and s : Set (PrimeSpectrum R) with Topology.IsConstructible s (the node's constructible subsets, def-weil-constructible-subset), ∃ (S : Type u) (_ : CommRing S) (f : R →+* S), Set.range (comap f) = s; PrimeSpectrum R is the underlying space of Spec R and comap f the map on points of Spec f. Tagged @[stacks 00F8 \"without the finite presentation part\"], which is exactly what the node states. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-limit-contained-in-constructible",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
