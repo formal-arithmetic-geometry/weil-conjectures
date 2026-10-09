@@ -36,10 +36,11 @@ separably closed these are the cohomology groups, and `Hom(Λ_Y, Λ_Y(m)) = Λ(m
 
 ## Degreewise duality
 
-Let `k` be a separably closed field, `a : X ⟶ Spec k` a morphism admitting a compactification,
-`Λ` a finite field whose characteristic is invertible on `X` and `Spec k`, with a Tate twist
-datum, and `γ` a Tate orientation of `a` of relative dimension `d`. For `K ∈ D^b_{ctf}(X, Λ)`
-perfect over `Λ_X`, the derived Poincaré duality `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`
+Let `k` be a separably closed field, `a : X ⟶ Spec k` a morphism locally of finite type
+admitting a compactification, `Λ` a finite field whose characteristic is invertible on `X`,
+with a Tate twist datum, and `γ` a Tate orientation of `a` of relative dimension `d`. For
+`K ∈ D^b_{ctf}(X, Λ)` perfect over `Λ_X`, the derived Poincaré duality
+`RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`
 (`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`) gives, in every
 degree `i`, an isomorphism of finite-dimensional `Λ`-vector spaces
 
@@ -63,7 +64,8 @@ All of them are blueprint `prop-pod-degree-of-the-pairing`.
 - `AlgebraicGeometry.Etale.TateOrientation.degreewisePairing_apply`: `⟨x, y⟩ᵢ` is the
   degree-zero part of `β_K` evaluated on `x` and on `y` read in `H⁻ⁱ(RΓ(X, K^∨(d))[2d])`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_of_isPerfectPairing`: over a
-  separably closed field, derived global sections carry perfect pairings to dualities.
+  separably closed field, derived global sections carry perfect pairings to dualities
+  (from blueprint `lem-sf-point`).
 - `AlgebraicGeometry.Etale.TateOrientation.degreewise_duality` (`sk-thm-derived-duality`,
   `thm-pod-degreewise-perfectness-over-a-field`): degreewise duality over a field.
 - `AlgebraicGeometry.Etale.TateOrientation.degreewise_duality_of_isProper`
@@ -260,26 +262,26 @@ section FieldDuality
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsSepClosed k]
 
+variable [Finite Λ] in
 /-- Over a separably closed field `k`, derived global sections carry a perfect pairing
-`b : C ⊗ᴸ D ⟶ Λ` in `D(Spec k_ét, Λ)` to a duality `RΓ(Spec k, D) ≅ RΓ(Spec k, C)^∨` in `D(Λ)`.
-
-The pairing identifies `D` with `C^∨`, and derived global sections commute with coefficient
-duals. This is part of the identification of the point category `D(Spec k_ét, Λ)` with `D(Λ)`
-(blueprint `def-weil-finite-coefficient-point`): since every étale cover of `Spec k` splits,
-global sections are a monoidal equivalence between étale sheaves of `Λ`-modules on `Spec k` and
-`Λ`-modules, so their derived functor is a monoidal equivalence and preserves internal homs. -/
+`b : C ⊗ᴸ D ⟶ Λ` in `D(Spec k_ét, Λ)`, with `C ∈ D^b_c(Spec k, Λ)`, to a duality
+`RΓ(Spec k, D) ≅ RΓ(Spec k, C)^∨` in `D(Λ)`: the pairing identifies `D` with the dual `C^∨`,
+and evaluation at the point carries `C^∨` to `RΓ(Spec k, C)^∨`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual`, blueprint
+`lem-sf-point`). -/
 theorem nonempty_iso_rightDerivedGlobalSections_of_isPerfectPairing
     {C D : DerivedCategoryModule Λ (Spec (.of k))}
+    (hC : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) C)
     {b : ((derivedTensor (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C).obj D ⟶ 𝟙_ _}
     (hb : IsPerfectPairing b) :
     Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj D ≅
       (ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C)).obj
         (𝟙_ _)) :=
-  sorry
+  (nonempty_iso_rightDerivedGlobalSections_coefficientDual hC).map fun e ↦
+    (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).mapIso hb.iso ≪≫ e
 
 variable [IsDomain Λ] [Finite Λ] [HasTateTwist Λ] {X : Scheme.{u}} {a : X ⟶ Spec (.of k)}
-  [HasCompactification a] [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ (Spec (.of k))]
-  {d : ℕ}
+  [HasCompactification a] [HasInvertibleExponent Λ X] {d : ℕ}
 
 variable {Λ}
 
@@ -292,18 +294,19 @@ of dimensions, is proved, not that the adjoint of the degreewise pairing `⟨-, 
 isomorphism (see the implementation notes of this file).
 
 Let `k` be separably closed, `Λ` a finite field (a finite domain) whose characteristic is
-invertible on `X` and on `Spec k`, `γ` a Tate orientation of `a : X ⟶ Spec k` of relative
-dimension `d`, and `K ∈ D^b_{ctf}(X, Λ)` perfect over `Λ_X`. Then for every `i` the cohomology
-spaces `H^i_c(X, K)` and `H^{2d-i}(X, K^∨(d))` are finite-dimensional and
+invertible on `X`, `γ` a Tate orientation of `a : X ⟶ Spec k` of relative dimension `d`, with
+`a` locally of finite type, and `K ∈ D^b_{ctf}(X, Λ)` perfect over `Λ_X`. Then for every `i` the
+cohomology spaces `H^i_c(X, K)` and `H^{2d-i}(X, K^∨(d))` are finite-dimensional and
 
 `H^{2d-i}(X, K^∨(d)) ≅ H^i_c(X, K)^∨`.
 
 It follows from the derived duality `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`
 (`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`) by taking
-`H^{-i}`, the perfect point complex `RΓ_c(X, K)` satisfying `H^{-i}(C^∨) ≅ H^i(C)^∨`
-(`DerivedCategory.IsPerfect.nonempty_iso_homology_ihom`). -/
-theorem degreewise_duality (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X}
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (hKd : IsDualizable K) (i : ℤ) :
+`H^{-i}`, since over a field `H^{-i}(C^∨) ≅ H^i(C)^∨` for `C = RΓ_c(X, K)`
+(`DerivedCategory.nonempty_iso_homology_ihom`). -/
+theorem degreewise_duality [LocallyOfFiniteType a] (γ : TateOrientation Λ a d)
+    {K : DerivedCategoryModule Λ X} (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K)
+    (hKd : IsDualizable K) (i : ℤ) :
     Module.Finite Λ ((H_c(a)[ModuleCat.{u + 1} Λ](i)).obj K) ∧
       Module.Finite Λ ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) (2 * d - i)).obj
         ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj (twistedDual Λ d K))) ∧
@@ -313,18 +316,10 @@ theorem degreewise_duality (γ : TateOrientation Λ a d) {K : DerivedCategoryMod
   have hΛ : IsField Λ := Finite.isField_of_domain Λ
   let RΓ := rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))
   let C := (R(a)_![ModuleCat.{u + 1} Λ]).obj K
-  have hP : (RΓ.obj C).IsPerfect := by
-    let _ := hΛ.toField
-    rw [DerivedCategory.isPerfect_iff]
-    obtain ⟨b₁, b₂, hb⟩ := isZero_compactlySupportedCohomology_of_lt Λ a K hK
-    refine ⟨⟨b₁, b₂, ?_, ?_⟩, fun q ↦ finite_compactlySupportedCohomology Λ a K hK q⟩
-    · rw [_root_.DerivedCategory.isGE_iff]
-      exact fun q hq ↦ hb q (Or.inl hq)
-    · rw [_root_.DerivedCategory.isLE_iff]
-      exact fun q hq ↦ hb q (Or.inr hq)
   obtain ⟨eA⟩ := nonempty_iso_rightDerivedGlobalSections_of_isPerfectPairing Λ
+    (boundedConstructible_rightDerivedLowerShriek Λ a a (𝟙 _) (Category.comp_id a) K hK.1)
     (γ.isPerfectPairing_poincarePairing hKd)
-  obtain ⟨eB⟩ := hP.nonempty_iso_homology_ihom hΛ i
+  obtain ⟨eB⟩ := DerivedCategory.nonempty_iso_homology_ihom hΛ (RΓ.obj C) i
   let e := (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) (2 * d - i)).mapIso
       ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ a).app _).symm ≪≫
     (((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) 0).shiftIso (2 * d : ℤ) (-i)

@@ -216,7 +216,12 @@ instance isIso_pre {X X' : C} (f : X' ⟶ X) [IsIso f] : IsIso (pre f) :=
     by rw [← pre_map, IsIso.hom_inv_id, pre_id]⟩
 
 /-- Precomposing a perfect pairing `b : X ⊗ Y ⟶ 𝟙_ C` with an isomorphism `f : X' ⟶ X` in the
-first variable gives a perfect pairing `X' ⊗ Y ⟶ 𝟙_ C`. -/
+first variable gives a perfect pairing `X' ⊗ Y ⟶ 𝟙_ C`: the adjoint of the composite is the
+adjoint of `b` followed by the isomorphism `pre f`,
+```
+         curry b                 pre f
+  Y ─────────────▶ [X, 𝟙_ C] ─────────▶ [X', 𝟙_ C]
+``` -/
 lemma IsPerfectPairing.whiskerRight_comp {X X' Y : C} {b : X ⊗ Y ⟶ 𝟙_ C}
     (h : IsPerfectPairing b) (f : X' ⟶ X) [IsIso f] : IsPerfectPairing (f ▷ Y ≫ b) :=
   ⟨by
