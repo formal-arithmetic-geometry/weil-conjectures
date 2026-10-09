@@ -15,9 +15,71 @@
   "def-weil-integral-frobenius-factor",
   "def-weil-smooth-proper-cohomological-family"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the data, for one fixed prime $\\ell$).* Choose a prime $\\ell\\neq p$ (one of the primes $2,3$ is different from $p$). The finite-field datum $(p,a,q,k_0,k)$ and $X=X_0\\times_{k_0}k$ are those of [def-weil-finite-field-fiber], and the hypotheses on $X_0$ are those of [def-weil-geometric-hypotheses]. For this $\\ell$, $(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})_{0\\leq i\\leq2d}$, with $V_{i,\\ell}=H^i(X,\\Ql)$ and $P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})$, is the smooth-proper cohomological family of [def-weil-smooth-proper-cohomological-family]. The polynomials $P_i\\in\\mathbf Z[T]$ of the statement are integral Frobenius factors [def-weil-integral-frobenius-factor] with $P_i(0)=1$ and $P_i^{(\\ell')}=P_{i,\\ell'}$ for every prime $\\ell'\\neq p$, so in particular $P_i^{(\\ell)}=P_{i,\\ell}$ for the chosen $\\ell$: they are exactly the polynomials that [prop-duality-reciprocity] takes as its $P_i$ for this $\\ell$. The integers $b_i=\\deg P_i$ are the Betti numbers of [def-weil-betti-numbers], which are also the $b_i=\\deg P_i$ of [prop-duality-reciprocity], and $\\chi=\\sum_{i=0}^{2d}(-1)^ib_i$ is the Euler characteristic of [def-weil-determinant-constants], defined there by the same formula.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-weil-geometric-hypotheses",
+    "def-weil-smooth-proper-cohomological-family",
+    "def-weil-integral-frobenius-factor",
+    "def-weil-betti-numbers",
+    "def-weil-determinant-constants",
+    "prop-duality-reciprocity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
+    "place": "Proposition prop:functional-equation-parity, lines 3486-3494 ('For every smooth-proper datum ... the integer $d\\chi$ is even'; uses def:smooth-proper-datum, prop:duality-reciprocity, def:euler-characteristic); no proof in the source"
+   }
+  },
+  {
+   "text": "*Step 2 (the duality relations).* By [prop-duality-reciprocity], applied to $X_0$, the prime $\\ell$ of Step 1 and these $P_i$: (i) $b_i=b_{2d-i}$ for every integer $i$ with $0\\leq i\\leq2d$; (ii) if $d$ is odd, then $b_d$ is even (its last clause, which rests on the middle-degree pairing being alternating and on [lem-weil-alternating-form-dimension], step 6 of that node's proof).",
+   "uses": [
+    "prop-duality-reciprocity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
+    "place": "proof, lines 117-120: 'These same reciprocity relations show that $d\\chi$ is even ... If $d$ is odd, then [prop-duality-reciprocity] gives that $b_d$ is even'"
+   }
+  },
+  {
+   "text": "*Step 3 (pairing $i$ with $2d-i$).* By (i) of Step 2, the integers $b_0,\\ldots,b_{2d}$ satisfy $b_i=b_{2d-i}$ for all $0\\leq i\\leq2d$, so [lem-weil-symmetric-alternating-sum-parity] gives\n\n$$\n\\chi=2S+(-1)^db_d,\\qquad S=\\sum_{i=0}^{d-1}(-1)^ib_i\\in\\mathbf Z.\n$$",
+   "uses": [
+    "lem-weil-symmetric-alternating-sum-parity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
+    "place": "proof, lines 120-124: 'pairing the terms indexed by $i$ and $2d-i$ gives $\\chi=2\\sum_{0\\leq i<d}(-1)^ib_i+(-1)^db_d$'"
+   }
+  },
+  {
+   "text": "*Step 4 (conclusion).* If $d$ is even, $d=2e$ with $e\\in\\mathbf Z_{\\geq0}$, and $d\\chi=2h$ with $h=e\\chi$. If $d$ is odd, then $b_d=2c$ for an integer $c$ by (ii) of Step 2, so by Step 3 $\\chi=2S+(-1)^d\\cdot2c=2(S-c)$ is even, and $d\\chi=2h$ with $h=d(S-c)$. In both cases $d\\chi$ is even.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
+    "place": "proof, lines 117-125: 'This is immediate if $d$ is even ... which is even'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-betti-numbers",
+  "def-weil-determinant-constants",
+  "prop-duality-reciprocity",
+  "lem-weil-symmetric-alternating-sum-parity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
+  "place": "proof of the functional equation, the paragraph 'These same reciprocity relations show that $d\\chi$ is even ...' (lines 117-125), the argument the creator of this node recorded; the statement is slopmaster2 Proposition prop:functional-equation-parity (lines 3486-3494 of literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex), which has no proof. Milne, Lectures on Etale Cohomology v2.21, Theorem 27.12 and Remark 27.13, pp. 158-159, writes $q^{d\\chi/2}$ without proving the parity, so no human-written source in literature/ covers it"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,7 +104,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +122,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "prop-weil-functional-equation-parity",
+  "worker": "stage1",
+  "summary": "The slopmaster2 LaTeX (lines 3486-3494) states the proposition with no proof; the argument is the inline paragraph of the master proof of prop-functional-equation (lines 117-125), which the node's creator recorded. Wrote it in four steps: fix one prime l != p and identify the data with those of prop-duality-reciprocity (the statement's P_i work for every l, so for this one); take b_i=b_{2d-i} and, for odd d, the evenness of b_d from prop-duality-reciprocity (its step 6, via lem-weil-alternating-form-dimension); the pairing identity chi = 2 sum_{i<d} (-1)^i b_i + (-1)^d b_d, hidden in the source as 'pairing the terms', made into the new node lem-weil-symmetric-alternating-sum-parity (searched in Mathlib: only the primitives Finset.sum_range_reflect, Finset.prod_involution, Int.even_add/even_mul); the case split on the parity of d is elementary. Statement and stmt_deps kept: they are correct against the source and every listed node is used. Lean: TraceDatum.even_mul_alternatingNatDegreeSum_of_pairing (WeilConjectures/ZetaLinearAlgebra/Reciprocity.lean:111, sorry-free) is the linear-algebra form of this statement, and Polynomial.even_alternatingNatDegreeSum_sub_of_natDegree_rev (WeilConjectures/Mathlib/Algebra/Polynomial/BigOperators.lean:51, sorry-free) is the parity form of the new lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
