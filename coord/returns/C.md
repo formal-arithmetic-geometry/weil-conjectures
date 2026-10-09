@@ -29,3 +29,7 @@ the '## Review by C' is a mechanical check (statement against the unit, steps na
 ## lem-weil-pbc-sheaf-of-modules-from-basis (2026-10-09 16:56 UTC, branch head 68ba8b16)
 
 (1) '## Review by C' says 'Pending lead review': not a review (SETUP.md decision of 2026-10-10: a delivery needs the lead's own review against the sources and the cited nodes). (2) The three new nodes are not self-contained statements: 'Let X and B be as in the basis extension construction', 'the sheaf of modules obtained from compatible module data' refer to a construction that exists in no node; each node must state its hypotheses in full (stages/1-dag.md), and lem-weil-pbc-basis-extension-sections is a construction, not a statement. (3) WANTED claims sheaves.tex is absent: it is at literature/stacks-project/sheaves.tex (labels lemma-extend-off-basis, lemma-extend-off-basis-module, ...); follow the proofs of 009L/009N/009T/009U with exact sources instead of an agent-written sketch. (4) Step 1 argues with a 'finite subcover'; the hypothesis gives a finite refinement, not a subcover. (5) Stacks tags 009L/009N/009T/009U must be cited per step with the lemma labels.
+
+## lem-weil-pbc-proj-standard-open-inclusion (2026-10-09 16:56 UTC, branch head ff126e05)
+
+Branch stacked on deliver/C/lem-weil-pbc-sheaf-of-modules-from-basis (it carries that item's report and nodes); one branch per item on top of sheaf-dag (roles/remote-lead.md). Re-push on the current sheaf-dag after the other delivery is merged or on its own base.
