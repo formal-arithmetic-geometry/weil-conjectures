@@ -2,7 +2,7 @@
 
 598 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (562)
+## Stage 1: nodes to split (560)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -14,7 +14,6 @@
 | `lem-weil-pbc-zariski-h0-proper-henselian-pair` | 1007 | none |
 | `lemma-weil-pbc-gabber-effacement` | 1007 | none |
 | `lem-weil-pbc-algebraize-finite-over-proper` | 1008 | none |
-| `lem-weil-pbc-basis-sheaf-cofinal-coverings` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-cech-complex` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-sections` | 1008 | none |
@@ -33,20 +32,17 @@
 | `lem-weil-pbc-henselian-pair-approximation` | 1008 | none |
 | `lem-weil-pbc-henselization-colimit` | 1008 | none |
 | `lem-weil-pbc-henselization-pair-g-ring` | 1008 | none |
-| `lem-weil-pbc-sheaf-on-basis-extends` | 1008 | none |
-| `lem-weil-pbc-site-cech-vanishing-criterion` | 1008 | none |
 | `lem-weil-pbc-site-cohomology-pullback` | 1008 | none |
 | `lem-weil-pbc-site-continuous-pushforward-sheaf` | 1008 | none |
 | `lem-weil-pbc-site-injective-cech-acyclic` | 1008 | none |
 | `lem-weil-pbc-site-morphism-composition` | 1008 | none |
-| `lem-weil-pbc-site-sheaves-enough-injectives` | 1008 | none |
 | `lem-weil-pbc-site-system-strictification` | 1008 | none |
-| `lem-weil-pbc-thickening-finite-cartesian` | 1008 | none |
 | `lemma-weil-pbc-constructible-approximation` | 1008 | none |
 | `lemma-weil-pbc-constructible-finite-pushforward` | 1008 | none |
 | `lemma-weil-pbc-finite-cover-killing` | 1008 | none |
 | `lemma-weil-pbc-pushout-monicity` | 1008 | none |
 | `def-weil-pbc-delta-functor` | 1009 | none |
+| `lem-weil-pbc-basis-sheaf-sections-germs` | 1009 | none |
 | `lem-weil-pbc-constant-sheaf-sections-connected` | 1009 | none |
 | `lem-weil-pbc-constructible-finite-pushforward-approximation` | 1009 | none |
 | `lem-weil-pbc-effaceable-delta-functor-universal` | 1009 | none |
@@ -62,6 +58,8 @@
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1009 | none |
 | `lem-weil-pbc-site-ses-cech-h1-surjective` | 1009 | none |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1009 | none |
+| `lem-weil-pbc-thickening-integral` | 1009 | none |
+| `lem-weil-pbc-thickening-lft-cartesian` | 1009 | none |
 | `lemma-weil-pbc-finite-stage-killing` | 1009 | none |
 | `lem-weil-pbc-constructible-finite-pushforward-noetherian` | 1010 | none |
 | `def-weil-pbc-injective-acyclicity-property` | 2002 | none |
@@ -569,7 +567,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (36)
+## Stage 2: nodes to state (38)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -583,6 +581,7 @@
 | `lem-sc-dim0-finite` | 1 | state |
 | `lem-weil-pbc-adic-completion-noetherian` | 1 | state |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
+| `lem-weil-pbc-basis-sheaf-cofinal-coverings` | 1 | state |
 | `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
 | `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
@@ -601,6 +600,7 @@
 | `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
 | `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1 | state |
 | `lem-weil-pbc-sheaf-of-modules-from-basis` | 1 | state |
+| `lem-weil-pbc-sheaf-on-basis-extends` | 1 | state |
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
 | `lem-weil-pbc-termwise-adjunction-homotopy` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
@@ -610,7 +610,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 573 nodes that wait for stage 1, 216 nodes that wait for a statement dependency.
+Not open yet: 571 nodes that wait for stage 1, 218 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
