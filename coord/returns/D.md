@@ -18,3 +18,7 @@
 ## lem-weil-pbc-henselization-colimit (2026-10-09 17:41 UTC, branch head 30914a545)
 
 Re-push identical to the returned one (same nodes, same report): none of the five points of the previous return was addressed: (1) '## Review by D' is still the worker report retitled; (2) the two new nodes still carry proof steps while unsplit; (3) the 'Equivalently, …' sentence is still in lem-weil-pbc-filtered-colimit-henselian-pairs; (4) no exact Stacks source on lem-weil-pbc-henselization-adjunction; (5) step 4 still says 'jointly define the colimits'. Fix all five before re-pushing.
+
+## lem-weil-pbc-henselian-pair-approximation (2026-10-09 17:43 UTC, branch head ff16dec59)
+
+Re-push identical to the one returned earlier (same nodes, same report, same '## Review by D'); none of the numbered reasons in coord/returns/D.md for this item was addressed. Read that entry and fix every point before re-pushing: the lead's review must say what was checked against the sources, new nodes must be self-contained with exact Stacks tags, and the mathematical gaps named there must be closed.
