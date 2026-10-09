@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-finite-purely-inseparable-scalar-descent",
+ "kind": "statement",
+ "title": "A finite purely inseparable extension descends along a field extension",
+ "statement": "Let $K\\subseteq L$ be fields ($L$ a field extension of $K$ [def-pc-field-extension]) and let $B$ be a commutative $K$-algebra. Regard $L\\otimes_KB$ as an $L$-algebra via $l\\mapsto l\\otimes1$. If $L\\otimes_KB$ is a field and, via this map, a finite purely inseparable field extension of $L$ [def-weil-pbc-finite-purely-inseparable-extension], then $B$ is a field, the structure map $K\\to B$ makes $B$ a finite purely inseparable field extension of $K$ [def-weil-pbc-finite-purely-inseparable-extension], and $\\dim_KB=\\dim_L(L\\otimes_KB)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Implicit in the proof of Lemma Tag 07QG (lemma-geometrically-regular-over-subfields, line 47202), where $k_i'$ is asserted to be a finite purely inseparable field extension of $k_i$ without argument; definition of purely inseparable: Fields, Definition Tag 09HE (fields.tex). Intended argument (agent): choose a $K$-basis of $L$ containing $1$ and a $K$-basis $(b_\\lambda)$ of $B$ containing $1$; then $(1\\otimes b_\\lambda)$ is an $L$-basis of $L\\otimes_KB$, so $\\dim_KB=\\dim_L(L\\otimes_KB)<\\infty$, and $b\\mapsto1\\otimes b$ is injective; hence $B$ is a domain finite over $K$, so a field; if $\\beta\\in B$ has $(1\\otimes\\beta)^q=l\\otimes1$ ($q$ a power of the characteristic exponent), comparing coordinates in the basis $(1\\otimes b_\\lambda)$ gives $\\beta^q\\in K$; in characteristic $0$, $\\dim=1$ gives $B=K$."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if L ⊗_K B is a field purely inseparable over L then B is purely inseparable field extension of K",
+   "results": "IsPurelyInseparable, isPurelyInseparable_iff, isPurelyInseparable_iff_fd_isPurelyInseparable, IsPurelyInseparable.tower_top, IsPurelyInseparable.isAlgebraic, isPurelyInseparable_iff_natSepDegree_eq_one, separableClosure.isPurelyInseparable, IsPurelyInseparable.isIntegral (Mathlib.FieldTheory.PurelyInseparable.Basic); none about tensor products or descent along scalar extension",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "descent of field and purely inseparable property along base change of scalars: K ⊆ L fields, B a K-algebra with L ⊗[K] B a finite purely inseparable field extension of L, then B is a finite purely inseparable extension of K",
+   "results": "IsPurelyInseparable.tower_top, IsPurelyInseparable.tower_bot, IsPurelyInseparable.trans, isPurelyInseparable_iff_fd_isPurelyInseparable, IntermediateField.isPurelyInseparable_tower_top/_bot, perfectClosure.isPurelyInseparable, IntermediateField.linearDisjoint_of_isPurelyInseparable_of_isSeparable (towers of fields only, no tensor-product descent)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable _ (TensorProduct _ _ _)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'IsPurelyInseparable.*TensorProduct|TensorProduct.*IsPurelyInseparable|isField_of_.*tensor|IsField.*⊗|includeRight_injective|finrank_baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "no purely-inseparable statement about tensor products; ingredients only: Algebra.TensorProduct.includeRight_injective (RingTheory/Flat/Basic.lean:417, B → A ⊗[R] B injective for flat B and injective R → A), Module.finrank_baseChange (LinearAlgebra/Dimension/Constructions.lean:379), IsField (A ⊗[F] B) results in FieldTheory/LinearDisjoint.lean (630-725, linear disjointness, not descent)",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'IsPurelyInseparable|geometricallyRegular' /home/ubuntu/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "only a copied Mathlib file Mathlib/RingTheory/RingHom/PurelyInseparable.lean (RingHom.IsPurelyInseparable.of_bijective, comp_of_bijective); nothing on descent",
+   "date": "2026-10-10",
+   "verdict": "no Lean candidate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometrically-regular-over-subfields",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

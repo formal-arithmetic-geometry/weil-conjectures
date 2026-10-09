@@ -12,9 +12,82 @@
   "def-weil-pbc-g-ring",
   "def-pc-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (a finite presentation of $k'$).* By the definition [def-weil-pbc-g-ring], since $A$ is Noetherian by hypothesis, it suffices to show that $k'\\otimes_kA$ is regular for every finite purely inseparable field extension $k'/k$ [def-weil-pbc-finite-purely-inseparable-extension]; fix one. Choose a $k$-basis $e_1,\\dots,e_n$ of $k'$ ($n=\\dim_kk'<\\infty$). The $k$-algebra map $\\pi:P=k[x_1,\\dots,x_n]\\to k'$, $x_j\\mapsto e_j$, is surjective, since its image is a $k$-subspace containing the basis. The field $k$ is a Noetherian ring (its only ideals are $0$ and $k$) [def-weil-pbc-noetherian-ring] and $P$ is a $k$-algebra of finite type, so $P$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian] and $\\ker\\pi=(f_1,\\dots,f_m)$ for finitely many $f_1,\\dots,f_m\\in P$. Hence $k'\\cong k[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ as $k$-algebras. (Stacks: 'We can get $k'$ by adjoining finitely many variables to $k$ and imposing finitely many polynomial relations.')",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07QG (lemma-geometrically-regular-over-subfields, line 47202), proof, first two sentences; Definition Tag 0382"
+   }
+  },
+  {
+   "text": "*Step 2 (the relations are defined over some $k_i$).* The polynomials $f_1,\\dots,f_m$ have finitely many coefficients $c_1,\\dots,c_N\\in k=\\bigcup_ik_i$; choose $i_s$ with $c_s\\in k_{i_s}$. As the family is nonempty and directed, induction on $N$ gives one $i\\in I$ with $k_{i_s}\\subseteq k_i$ for all $s$, so every $f_j$ lies in $P_i=k_i[x_1,\\dots,x_n]\\subseteq P$. Put $J_i=(f_1,\\dots,f_m)\\subseteq P_i$ and $k_i'=P_i/J_i$, a commutative $k_i$-algebra.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07QG proof, third sentence ('there exists an $i$ and ... $k_i'/k_i$')"
+   }
+  },
+  {
+   "text": "*Step 3 ($k\\otimes_{k_i}k_i'\\cong k'$).* By [lem-weil-pbc-tensor-cancel-base-change] (with $R=k_i$, $S=P_i$, the $S$-algebra $P_i/J_i$ and the $R$-algebra $k$) and symmetry of $\\otimes$, $k\\otimes_{k_i}(P_i/J_i)\\cong(P_i/J_i)\\otimes_{P_i}(P_i\\otimes_{k_i}k)$. By [lem-weil-pbc-polynomial-scalar-extension] (with $A=k_i$, $R=k$) $P_i\\otimes_{k_i}k\\cong k\\otimes_{k_i}k_i[x_1,\\dots,x_n]\\cong k[x_1,\\dots,x_n]=P$, $p\\otimes c\\mapsto cp$, a map of $P_i$-algebras for the inclusion $P_i\\subseteq P$. By [lem-weil-pbc-tensor-quotient-base-change] (with $A=P_i$, $B=P$, $I=J_i$) $P\\otimes_{P_i}(P_i/J_i)\\cong P/J_iP=k[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$, which is $k'$ by step 1. Following $c\\otimes1$ ($c\\in k$) through these maps, it goes to $c$, so the composite $\\theta:k\\otimes_{k_i}k_i'\\xrightarrow{\\sim}k'$ is an isomorphism of $k$-algebras, $k\\otimes_{k_i}k_i'$ being a $k$-algebra via $c\\mapsto c\\otimes1$. (This is the identity '$k'=k\\otimes_{k_i}k_i'$' of the Stacks proof, printed there as '$k_i=k\\otimes_{k_i}k_i'$'.)",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-tensor-quotient-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07QG proof, third sentence (with the misprint '$k_i$' for '$k'$' corrected)"
+   }
+  },
+  {
+   "text": "*Step 4 ($k_i'/k_i$ is finite purely inseparable).* By step 3, $k\\otimes_{k_i}k_i'$ is isomorphic as a $k$-algebra to $k'$, so it is a field and, via $c\\mapsto c\\otimes1$, a finite purely inseparable field extension of $k$. By [lem-weil-pbc-finite-purely-inseparable-scalar-descent] (with $K=k_i$, $L=k$, $B=k_i'$), $k_i'$ is a field and a finite purely inseparable field extension of $k_i$ via $k_i\\to P_i/J_i$.",
+   "uses": [
+    "lem-weil-pbc-finite-purely-inseparable-scalar-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07QG proof, third sentence ('a finite purely inseparable field extension $k_i'/k_i$')"
+   }
+  },
+  {
+   "text": "*Step 5 (conclusion).* The $k$-algebra isomorphism $\\theta$ of step 3 gives a ring isomorphism $A\\otimes_kk'\\cong A\\otimes_k(k\\otimes_{k_i}k_i')$, and [lem-weil-pbc-tensor-cancel-base-change] (with $R=k_i$, $S=k$, the $S$-algebra $A$ and the $R$-algebra $k_i'$) gives $A\\otimes_k(k\\otimes_{k_i}k_i')\\cong A\\otimes_{k_i}k_i'$, $a\\otimes(c\\otimes y)\\mapsto ca\\otimes y$, where $A$ is a $k_i$-algebra by restriction along $k_i\\subseteq k$ as in the statement. With symmetry of $\\otimes$, $k'\\otimes_kA\\cong k_i'\\otimes_{k_i}A$ as rings. Since $A$ is geometrically regular over $k_i$ and $k_i'/k_i$ is finite purely inseparable (step 4), $k_i'\\otimes_{k_i}A$ is regular [def-weil-pbc-g-ring]; being Noetherian with regular local rings at all primes is preserved by ring isomorphisms, so $k'\\otimes_kA$ is regular. As $k'/k$ was arbitrary and $A$ is Noetherian, $A$ is geometrically regular over $k$ [def-weil-pbc-g-ring].",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07QG proof, last sentence ('Thus $A\\otimes_kk'=A\\otimes_{k_i}k_i'$ and the lemma is clear')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-finite-purely-inseparable-scalar-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 07QG (lemma-geometrically-regular-over-subfields, line 47202) and its proof, with the misprint '$k_i=k\\otimes_{k_i}k_i'$' read as '$k'=k\\otimes_{k_i}k_i'$'; the finite presentation, the descent of the coefficients, the base-change identity and the descent of 'finite purely inseparable field' (left implicit in Stacks) are written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +112,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +132,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-geometrically-regular-over-subfields",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 07QG (the node adds the Noetherian hypothesis, which the definition 0382 of geometric regularity requires; tag 07QG verified in tags/tags). Wrote the proof in five steps following the Stacks proof: finite presentation of k'/k (Hilbert basis via lem-weil-pbc-finite-type-algebra-noetherian), descent of the finitely many coefficients to one k_i (elementary, directedness), k (x)_{k_i} k_i' = k' via the Mathlib leaves tensor-cancel-base-change, polynomial-scalar-extension and tensor-quotient-base-change, then the new node lem-weil-pbc-finite-purely-inseparable-scalar-descent (Stacks asserts without argument that k_i' is a finite purely inseparable field extension), and A (x)_k k' = A (x)_{k_i} k_i' by cancel base change. Statement and stmt_deps unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Five steps along Stacks 07QG (with the misprint corrected as recorded in source.place): finite presentation of k' over k, coefficients in one k_i, k (x)_{k_i} k_i' = k' (three Mathlib leaves), k_i'/k_i finite purely inseparable by the new unsplit descent node (agent-formulated: if L (x)_K B is a field finite purely inseparable over L then B is a field finite purely inseparable over K), conclusion by cancel base change. The generators-with-pure-relations route was avoided (it can give a ring strictly bigger than k'). lem-weil-pbc-polynomial-scalar-extension is a Mathlib leaf in sk-thm-reduction (tool). Tags verified by the worker (07QG, 09HI, 09HH)."
+ }
 }
