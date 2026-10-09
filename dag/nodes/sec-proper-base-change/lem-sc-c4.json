@@ -9,28 +9,80 @@
  },
  "stmt_deps": [
   "def-weil-pbc-eight-curve-assertions",
-  "def-sc-curves"
+  "def-sc-curves",
+  "def-weil-pbc-etale-sheaves"
  ],
  "proof": [
   {
-   "text": "The constant sheaf $\\mathbf F_r$ is locally constant with finite\nstalks on $C$, hence [def-weil-pbc-etale-sheaves]\n(constructible). By [lem-sc-compactification] and\n[lem-sc-affine-open-proper], $C$ either is proper or is\naffine. If $C$ is proper, the cohomology groups are\n$\\mathbf Z/r\\mathbf Z$, $(\\mathbf Z/r\\mathbf Z)^{2g}$,\n$\\mathbf Z/r\\mathbf Z$ and $0$ by\n[thm-sc-proper-cohomology], hence finite. If $C$ is affine,\n$H^0(C,\\mathbf F_r)=\\mathbf Z/r\\mathbf Z$ and the higher groups\nabove degree one vanish by [thm-sc-affine-cohomology]. That\ntheorem expresses $H^1$ as an extension of the finite group\n$\\operatorname{Pic}(C)[r]$ of [lem-sc-pic-affine] by the\nfinite unit quotient of [lem-sc-affine-unit-quotient].\nThus $H^1$ is finite as well.",
+   "text": "The constant sheaf $\\mathbf F_r$ is locally constant with finite stalks on $C$, so it is constructible by [def-weil-pbc-etale-sheaves]. This is the sheaf to which the assertion $\\mathcal C_4(C,\\mathbf F_r)$ applies.",
    "uses": [
-    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c4.md",
+    "place": "Proof, first sentence"
+   }
+  },
+  {
+   "text": "By [lem-sc-compactification] and [lem-sc-affine-open-proper], the smooth separated connected curve $C$ is either proper or affine. These two cases exhaust the proof.",
+   "uses": [
     "lem-sc-compactification",
-    "lem-sc-affine-open-proper",
-    "thm-sc-proper-cohomology",
+    "lem-sc-affine-open-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c4.md",
+    "place": "Proof, case split"
+   }
+  },
+  {
+   "text": "If $C$ is proper, [thm-sc-proper-cohomology] identifies the cohomology groups with $\\mathbf Z/r\\mathbf Z$ in degrees $0$ and $2$, with $(\\mathbf Z/r\\mathbf Z)^{2g}$ in degree $1$, and with $0$ in higher degrees. Since $r$ is finite, each of these abelian groups is finite.",
+   "uses": [
+    "thm-sc-proper-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c4.md",
+    "place": "Proof, proper case"
+   }
+  },
+  {
+   "text": "If $C$ is affine, [thm-sc-affine-cohomology] gives $H^0(C,\\mathbf F_r)=\\mathbf Z/r\\mathbf Z$ and vanishing in degrees above $1$. In degree $1$ it gives an extension whose subquotient is the finite group $\\operatorname{Pic}(C)[r]$ from [lem-sc-pic-affine] and whose complementary unit quotient is finite by [lem-sc-affine-unit-quotient]. An extension of finite abelian groups is finite, so $H^1(C_{\\Et},\\mathbf F_r)$ is finite.",
+   "uses": [
     "thm-sc-affine-cohomology",
     "lem-sc-pic-affine",
     "lem-sc-affine-unit-quotient"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c4.md",
+    "place": "Proof, affine case"
+   }
+  },
+  {
+   "text": "The proper and affine cases establish finiteness of $H^q(C_{\\Et},\\mathbf F_r)$ for every $q\\geq0$, which is precisely $\\mathcal C_4(C,\\mathbf F_r)$ in [def-weil-pbc-eight-curve-assertions].",
+   "uses": [
+    "def-weil-pbc-eight-curve-assertions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c4.md",
+    "place": "Proof, conclusion"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-eight-curve-assertions",
   "lem-sc-compactification",
   "lem-sc-affine-open-proper",
   "thm-sc-proper-cohomology",
+  "thm-sc-affine-cohomology",
+  "lem-sc-pic-affine",
+  "lem-sc-affine-unit-quotient"
+ ],
+ "tool_uses": [
   "thm-sc-affine-cohomology",
   "lem-sc-pic-affine",
   "lem-sc-affine-unit-quotient"
@@ -40,9 +92,31 @@
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c4.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale cohomology groups of a constructible finite sheaf on a curve",
+   "results": "CategoryTheory.Sheaf.H and CategoryTheory.Sheaf.cohomologyPresheaf in Mathlib.CategoryTheory.Sites.SheafCohomology.Basic; no theorem for etale curve finiteness",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite cohomology constructible sheaf",
+   "results": "SheafOfModules.IsFiniteType and CategoryTheory.PresheafIsFinite; these concern finite type sheaves/presheaves, not etale cohomology of curves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'constructible|etale cohomology|finite.*group' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "no relevant etale constructible-cohomology finiteness declaration",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -75,5 +149,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-sc-c4",
+  "worker": "stage1",
+  "summary": "Checked the blueprint proof and split it into constructibility, proper/affine case division, proper cohomology, affine cohomology, and conclusion steps. Added the missing statement dependency on def-weil-pbc-etale-sheaves. All cited results already have DAG nodes; Mathlib searches found no matching theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C"
+ }
 }
