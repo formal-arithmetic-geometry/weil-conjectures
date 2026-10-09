@@ -304,7 +304,7 @@ lemma directed_restrictScalars :
   Monotone.directed_le fun A B h _ hx ↦ (show A.1 ≤ B.1 from h) hx
 
 /-- (Implementation) The ring homomorphism out of `K` induced by a cocone. -/
-def fgSubalgebraDescOf (s : Cocone (fgSubalgebraDiagramOf k K)) : K →+* s.pt :=
+noncomputable def fgSubalgebraDescOf (s : Cocone (fgSubalgebraDiagramOf k K)) : K →+* s.pt :=
   ((Subalgebra.iSupLift (fun A : {A : Subalgebra k K // A.FG} ↦ A.1.restrictScalars ℤ)
       (directed_restrictScalars k K)
       (fun A ↦ by exact (s.ι.app A).hom.toIntAlgHom)
@@ -324,7 +324,7 @@ lemma fgSubalgebraDescOf_val (s : Cocone (fgSubalgebraDiagramOf k K))
 
 /-- A `k`-algebra is the filtered colimit in `CommRingCat` of its finitely generated
 `k`-subalgebras. -/
-def isColimitFGSubalgebraCocone : IsColimit (fgSubalgebraCoconeOf k K) where
+noncomputable def isColimitFGSubalgebraCocone : IsColimit (fgSubalgebraCoconeOf k K) where
   desc s := ofHom (fgSubalgebraDescOf k K s)
   fac s A := by
     ext x
