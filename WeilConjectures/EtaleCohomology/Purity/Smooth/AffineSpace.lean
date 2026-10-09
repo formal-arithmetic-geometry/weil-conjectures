@@ -49,7 +49,7 @@ transpose `γ_{π,K}` — are not constructed: the projective-line trace and the
 with supports they are built from are not available. The isomorphisms are therefore recorded
 as `Nonempty (_ ≅ _)`, and the normalization (iii), the composition law and the
 compatibilities of `γ`, which are statements about these maps, are not stated. The
-vector-bundle forms are not stated either, Mathlib having no vector bundles over a scheme.
+vector-bundle form is `WeilConjectures.EtaleCohomology.Purity.Smooth.VectorBundle`.
 -/
 
 @[expose] public section

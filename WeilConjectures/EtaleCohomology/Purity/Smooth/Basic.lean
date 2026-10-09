@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.Compactification.BaseChange
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.Compactification.FinitePresentation
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.VectorBundle
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
@@ -26,20 +26,21 @@ dimension `d` and a finite coefficient ring `Λ` whose exponent is invertible on
 * *smooth purity* (`sk-thm-smooth-purity`): `ω_f ≅ Λ_X(d)[2d]`, hence
   `Rf^! K ≅ Lf^* K(d)[2d]`.
 
-The route is the blueprint's: the model case is affine-space purity
-`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`, transported along the
-deformation to the normal cone (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`)
-of the diagonal, a closed section of the first projection `X ×_Y X ⟶ X`.
+The route is the blueprint's: the diagonal `Δ` of `f` is a closed section of the first projection
+`X ×_Y X ⟶ X`; the deformation to the normal cone
+(`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`) moves its section invariant
+to that of the normal bundle of `Δ`, a vector bundle of rank `d`, where vector-bundle purity
+(`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_normalBundle`) computes it.
 
 ## Implementation notes
 
-The blueprint asserts that each isomorphism below is *canonical*: `sk-prop-cohsm` (b) is about
-the mate `φ_K : Lf^* K ⊗ ω_f ⟶ Rf^! K` of the projection formula, and `sk-thm-smooth-purity`
-about the normalized comparison. Neither map exists in the repository — the projection map
-itself is a TODO of `WeilConjectures.SixFunctors.Etale.Derived.Exchange` — so each statement
-records the existence of the isomorphism only, with a `TODO(unify)` marker. For the same
-reason the smooth purity map `γ_{f,K}` and the smooth pullback exchange are built from their
-constituent isomorphisms, which are arguments of the constructions.
+The tensor formula of `sk-prop-cohsm` (b) is stated for the canonical map
+`AlgebraicGeometry.Etale.dualizingComplexTensorMap`, the mate of the projection formula. It has
+`ω_f` as its left factor, the blueprint writes `Lf^* K ⊗ ω_f`; the library only knows that a
+symmetry of `- ⊗ᴸ -` exists, so the smooth purity map uses a chosen one
+(`AlgebraicGeometry.Etale.derivedTensorFlipIso`). The identification `θ : ω_f ≅ Λ_X(d)[2d]` is
+only known to exist, so it is an argument of the smooth purity map and of the constructions
+built from it; their naturality holds for every `θ`.
 
 The statements of `sk-prop-cohsm` carry `include d in`: their statements do not mention the
 relative dimension `d`, and without it the hypothesis `[SmoothOfRelativeDimension d f]` would
@@ -49,20 +50,27 @@ silently be dropped.
 
 - `AlgebraicGeometry.Etale.twistShiftObjIso`: the twist reassociation
   `M(m)[2m] ≅ M ⊗ Λ_X(m)[2m]`.
+- `AlgebraicGeometry.Etale.dualizingComplexTensorIso`: the tensor formula
+  `ω_f ⊗ Lf^* K ≅ Rf^! K` on `D^b_{ctf}`.
 - `AlgebraicGeometry.Etale.smoothPurityIso`: the smooth purity map
-  `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`.
+  `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`, and `AlgebraicGeometry.Etale.smoothPurityNatIso`, the
+  same as a natural isomorphism on `D^b_{ctf}`.
 - `AlgebraicGeometry.Etale.smoothPullbackExchange`: the smooth pullback exchange
   `Lg^* Rf^! K ≅ Rf'^! Lv^* K`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isInvertible_dualizingComplex`
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor`
+- `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_app`
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek`
 - `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`: `𝒞(p₁, Δ) ≅ ω_f`.
+- `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalBundle`: the section invariant
+  of a vector bundle.
 - `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`: `ω_f ≅ Λ_X(d)[2d]`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_twistShift`:
   `Rf^! K ≅ Lf^* K(d)[2d]`.
+- `AlgebraicGeometry.Etale.twistShift_map_comp_smoothPurityIso_hom`: naturality of the smooth
+  purity map.
 - `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_comp`: `ω_{g ≫ f} ≅ ω_g ⊗ Lg^* ω_f`.
 - `AlgebraicGeometry.Etale.leftDerivedUpperStar_map_comp_smoothPullbackExchange_hom`: smooth
   base-change coherence.
