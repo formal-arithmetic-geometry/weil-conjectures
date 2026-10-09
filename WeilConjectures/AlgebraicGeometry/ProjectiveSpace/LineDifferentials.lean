@@ -103,6 +103,36 @@ lemma presheaf_map_awayToSection_awayMonomial {t : Set n} (hts : t ⊆ s)
 
 end AlgebraicGeometry.Proj
 
+namespace AlgebraicGeometry.Scheme.Modules
+
+variable {X : Scheme.{u}} {M N : X.Modules} {ι : Type*} {U : ι → X.Opens} {e : ∀ i, Γ(M, U i)}
+
+lemma isGlueValue_app (φ : M ⟶ N) {V : X.Opens} (m : Γ(M, V)) :
+    IsGlueValue e (fun i ↦ φ.app (U i) (e i)) m (φ.app V m) := by
+  intro i W hW hWi a ha
+  rw [← Hom.app_presheaf_map, ← ha, Hom.app_smul, Hom.app_presheaf_map]
+
+/-- Two morphisms out of a module with free generators `e i` over an open cover agree if they
+agree on the generators. -/
+lemma hom_ext_of_isFreeGenerator (hU : ⨆ i, U i = ⊤) (he : ∀ i, IsFreeGenerator (e i))
+    {φ ψ : M ⟶ N} (h : ∀ i, φ.app (U i) (e i) = ψ.app (U i) (e i)) : φ = ψ := by
+  refine hom_ext _ _ fun V ↦ ?_
+  ext m
+  have hψ := isGlueValue_app (e := e) ψ m
+  simp only [← h] at hψ
+  exact (isGlueValue_app φ m).unique hU he hψ
+
+lemma glueHom_app_self {f : ∀ i, Γ(N, U i)} (hU : ⨆ i, U i = ⊤) (he : ∀ i, IsFreeGenerator (e i))
+    (hc : ∀ i j (W : X.Opens) (hi : W ≤ U i) (hj : W ≤ U j) (a b : Γ(X, W)),
+      a • M.presheaf.map (homOfLE hi).op (e i) = b • M.presheaf.map (homOfLE hj).op (e j) →
+        a • N.presheaf.map (homOfLE hi).op (f i) = b • N.presheaf.map (homOfLE hj).op (f j))
+    (i : ι) : (glueHom hU he hc).app (U i) (e i) = f i := by
+  have := isGlueValue_glueHom_app hU he hc (e i) i (U i) le_rfl le_rfl 1
+    (by rw [one_smul])
+  rwa [presheaf_map_id_apply, presheaf_map_id_apply, one_smul] at this
+
+end AlgebraicGeometry.Scheme.Modules
+
 namespace AlgebraicGeometry.ProjectiveLine
 
 open ProjectiveSpace Scheme.Modules
@@ -565,5 +595,33 @@ lemma twistDerivation_appLE (U : (Spec (.of k)).Opens) (V : (ProjectiveLine (Spe
       chartDerivation_chartConst, map_zero]
 
 end Glue
+
+section Differentials
+
+/-- The universal derivation `d : 𝒪 → Ω¹_{ℙ¹/k}`, as a local derivation. -/
+def dΩ : LocalDerivation (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials ⊤ :=
+  LocalDerivation.ofDerivation'
+    (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentialsDerivation
+
+/-- **The morphism `Ω¹_{ℙ¹/k} ⟶ 𝒪(-2)`** induced by the derivation `twistDerivation`. -/
+def toTwist : (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials ⟶
+    twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2) :=
+  ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentialsHomEquiv _).symm
+    (LocalDerivation.toDerivation' _ (twistDerivation k) (twistDerivation_appLE k))
+
+lemma toTwist_app_dΩ (V : (ProjectiveLine (Spec (.of k))).Opens)
+    (a : Γ(ProjectiveLine (Spec (.of k)), V)) :
+    (toTwist k).app V ((dΩ k).app V le_top a) = (twistDerivation k).app V le_top a := by
+  have := ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentialsHomEquiv
+    _).apply_symm_apply (LocalDerivation.toDerivation' _ (twistDerivation k)
+      (twistDerivation_appLE k))
+  exact congrArg (fun d ↦ d.d (X := Opposite.op V) a) this
+
+/-- The local generator `± d(x_{other i} / xᵢ)` of `Ω¹_{ℙ¹/k}` over `D₊(xᵢ)`. -/
+def omegaGen (i : ULift.{u} (Fin 2)) :
+    Γ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials, chart k {i}) :=
+  sign i • (dΩ k).app _ le_top (coord k (i := i) (j := other i))
+
+end Differentials
 
 end AlgebraicGeometry.ProjectiveLine
