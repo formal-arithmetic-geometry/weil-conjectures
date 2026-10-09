@@ -116,7 +116,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}}
 
 section FundamentalClass
 
-variable {c : ℕ} {i : Z ⟶ X}
+variable [Finite Λ] {c : ℕ} {i : Z ⟶ X}
 
 /-- The *class of a frame* `(e : U ⟶ X, f₁, …, f_c)` of `Z`:
 
@@ -299,7 +299,7 @@ The hypotheses on the product are derived: `i₁₂` is a regular immersion of c
 `c₁ + c₂` (`AlgebraicGeometry.IsRegularImmersion.pullback_map`), `Z₁ ×_k Z₂` is regular
 (`AlgebraicGeometry.isRegularLocalRing_stalk_pullback`), `P` is smooth over `k` and the exponent
 of `Λ` is invertible on `P`. -/
-theorem fundamentalClass_eq_cupWithSupportsTateObject [HasKummerClass Λ]
+theorem fundamentalClass_eq_cupWithSupportsTateObject [Finite Λ] [HasKummerClass Λ]
     [HasKummerClass.IsNormalized Λ] {k : Type u} [Field k] [PerfectField k]
     {X₁ X₂ Z₁ Z₂ : Scheme.{u}} (c₁ c₂ : ℕ)
     (i₁ : Z₁ ⟶ X₁) (i₂ : Z₂ ⟶ X₂) [IsRegularImmersion c₁ i₁] [IsRegularImmersion c₂ i₂]

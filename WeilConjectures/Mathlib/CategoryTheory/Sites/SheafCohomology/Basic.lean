@@ -46,6 +46,11 @@ push an `Ext`-class forward along `G` and precompose with the comparison of cons
   the cokernel of `Γ(I) → Γ(Q)`.
 - `CategoryTheory.Sheaf.exists_shortExact_injective_addEquiv_H_one`: such a sequence exists
   with `I` injective.
+- `CategoryTheory.Sheaf.H.connecting`: the connecting homomorphism `Hⁿ(S.X₃) → Hⁿ⁺¹(S.X₁)` of a
+  short exact sequence, natural (`CategoryTheory.Sheaf.H.map_connecting`) and with kernel the
+  image of `Hⁿ(S.X₂)` (`CategoryTheory.Sheaf.H.connecting_eq_zero_iff`).
+- `CategoryTheory.Sheaf.functorHZeroIso`: `H⁰` is the functor of sections over a terminal
+  object.
 -/
 
 @[expose] public section
@@ -293,7 +298,65 @@ lemma Sheaf.H.exact_map_δSucc (n : ℕ) : Function.Exact (H.map S.g n) (H.δSuc
 lemma Sheaf.H.exact_δSucc_map (n : ℕ) : Function.Exact (H.δSucc hS n) (H.map S.f (n + 1)) :=
   (ShortComplex.ab_exact_iff_function_exact _).1 (Ext.covariant_sequence_exact₁' _ hS n _ rfl)
 
+/-- The connecting homomorphism is natural in the short exact sequence. -/
+lemma Sheaf.H.map_δSucc {S' : ShortComplex (Sheaf J AddCommGrpCat.{w})}
+    (hS' : S'.ShortExact) (φ : S ⟶ S') (n : ℕ) (x : H S.X₃ n) :
+    H.map φ.τ₁ (n + 1) (H.δSucc hS n x) = H.δSucc hS' n (H.map φ.τ₃ n x) := by
+  rw [H.δSucc_apply, H.δSucc_apply, H.map_apply, H.map_apply,
+    Ext.comp_assoc_of_third_deg_zero, hS.extClass_naturality hS' φ,
+    Ext.comp_assoc_of_second_deg_zero]
+
+/-- The connecting homomorphism `Hⁿ(S.X₃) → Hⁿ⁺¹(S.X₁)` is surjective when
+`Hⁿ⁺¹(S.X₂) = 0`. -/
+lemma Sheaf.H.δSucc_surjective (n : ℕ) [Subsingleton (H S.X₂ (n + 1))] :
+    Function.Surjective (H.δSucc hS n) := by
+  intro x
+  obtain ⟨y, rfl⟩ := Ext.covariant_sequence_exact₁ _ hS x (Subsingleton.elim _ _) rfl
+  exact ⟨y, rfl⟩
+
+/-- The connecting homomorphism `Hⁿ(S.X₃) → Hⁿ⁺¹(S.X₁)`, as a morphism between the values of
+the cohomology functors `CategoryTheory.Sheaf.functorH`. -/
+noncomputable def Sheaf.functorHδ (n : ℕ) :
+    (functorH.{w'} J n).obj S.X₃ ⟶ (functorH.{w'} J (n + 1)).obj S.X₁ :=
+  AddCommGrpCat.ofHom (H.δSucc hS n)
+
+lemma Sheaf.functorHδ_apply (n : ℕ) (x : H S.X₃ n) : functorHδ hS n x = H.δSucc hS n x :=
+  rfl
+
+@[reassoc]
+lemma Sheaf.functorHδ_naturality (n : ℕ) {S' : ShortComplex (Sheaf J AddCommGrpCat.{w})}
+    (hS' : S'.ShortExact) (φ : S ⟶ S') :
+    functorHδ hS n ≫ (functorH.{w'} J (n + 1)).map φ.τ₁ =
+      (functorH.{w'} J n).map φ.τ₃ ≫ functorHδ hS' n := by
+  ext x
+  exact H.map_δSucc hS hS' φ n x
+
+lemma Sheaf.functorHδ_eq_zero_iff (n : ℕ) (x : H S.X₃ n) :
+    functorHδ hS n x = 0 ↔ x ∈ ((functorH.{w'} J n).map S.g).hom.range :=
+  ((H.exact_map_δSucc hS n) x).trans (by rfl)
+
+lemma Sheaf.functorHδ_surjective (n : ℕ) [Subsingleton (H S.X₂ (n + 1))] :
+    Function.Surjective (functorHδ hS n) :=
+  H.δSucc_surjective hS n
+
 end Connecting
+
+
+section Zero
+
+variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
+  [HasSheafify J AddCommGrpCat.{w}] [HasExt.{w} (Sheaf J AddCommGrpCat.{w})] {T : C}
+  (hT : IsTerminal T)
+
+/-- `H⁰` is the functor of sections over a terminal object. -/
+noncomputable def Sheaf.functorHZeroIso :
+    functorH.{w} J 0 ≅ sheafToPresheaf J AddCommGrpCat.{w} ⋙
+      (evaluation Cᵒᵖ AddCommGrpCat.{w}).obj (Opposite.op T) :=
+  NatIso.ofComponents (fun F ↦ (H.equiv₀ F hT).toAddCommGrpIso) fun φ ↦ by
+    ext x
+    exact (H.equiv₀_naturality (hT := hT) φ x).symm
+
+end Zero
 
 /-- The map induced on sheaf cohomology by `m • f` is `m` times the map induced by `f`. -/
 lemma Sheaf.H.map_nsmul_apply {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}

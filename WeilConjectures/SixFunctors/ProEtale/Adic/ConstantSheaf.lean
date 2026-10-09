@@ -72,10 +72,11 @@ namespace PadicAlgCl
 variable (l : ℕ) [Fact l.Prime] (T : Type*) [TopologicalSpace T]
 
 /-- The continuous functions `f : T → ℚ̄_ℓ` whose values span, locally on `T`, a
-finite-dimensional `ℚ_ℓ`-subspace. For compact `T` these are the continuous functions with
-values in a finite-dimensional `ℚ_ℓ`-subspace, the sections of the constant `ℓ`-adic sheaf
-`ℚ̄_ℓ = colim_E E` over a quasi-compact scheme. -/
-noncomputable def locallyFiniteFunctions : Submodule (PadicAlgCl l) C(T, PadicAlgCl l) where
+finite-dimensional `ℚ_ℓ`-subspace. For compact `T` these are the continuous functions with values
+in a finite-dimensional `ℚ_ℓ`-subspace, the sections of the constant `ℓ`-adic sheaf
+`ℚ̄_ℓ = colim_E E` over a quasi-compact scheme. They form a `ℚ̄_ℓ`-subalgebra: the values of a
+product lie in the product of the two finite-dimensional spans. -/
+noncomputable def locallyFiniteFunctions : Subalgebra (PadicAlgCl l) C(T, PadicAlgCl l) where
   carrier := {f | ∀ x, ∃ U ∈ 𝓝 x, FiniteDimensional ℚ_[l] (Submodule.span ℚ_[l] (f '' U))}
   zero_mem' x := by
     refine ⟨Set.univ, Filter.univ_mem, Submodule.finiteDimensional_of_le (S₂ := ⊥) ?_⟩
@@ -91,13 +92,23 @@ noncomputable def locallyFiniteFunctions : Submodule (PadicAlgCl l) C(T, PadicAl
     rintro _ ⟨y, hy, rfl⟩
     exact Submodule.add_mem_sup (Submodule.subset_span ⟨y, hy.1, rfl⟩)
       (Submodule.subset_span ⟨y, hy.2, rfl⟩)
-  smul_mem' c f hf x := by
+  mul_mem' {f g} hf hg x := by
     obtain ⟨U, hU, hfU⟩ := hf x
-    refine ⟨U, hU, Submodule.finiteDimensional_of_le
-      (S₂ := (Submodule.span ℚ_[l] (f '' U)).map (LinearMap.mulLeft ℚ_[l] c)) ?_⟩
+    obtain ⟨V, hV, hgV⟩ := hg x
+    have : FiniteDimensional ℚ_[l]
+        ↥(Submodule.span ℚ_[l] (f '' U) * Submodule.span ℚ_[l] (g '' V)) :=
+      Module.Finite.iff_fg.2 ((Module.Finite.iff_fg.1 hfU).mul (Module.Finite.iff_fg.1 hgV))
+    refine ⟨U ∩ V, Filter.inter_mem hU hV, Submodule.finiteDimensional_of_le
+      (S₂ := Submodule.span ℚ_[l] (f '' U) * Submodule.span ℚ_[l] (g '' V)) ?_⟩
     refine Submodule.span_le.2 ?_
     rintro _ ⟨y, hy, rfl⟩
-    exact ⟨f y, Submodule.subset_span ⟨y, hy, rfl⟩, rfl⟩
+    exact Submodule.mul_mem_mul (Submodule.subset_span ⟨y, hy.1, rfl⟩)
+      (Submodule.subset_span ⟨y, hy.2, rfl⟩)
+  algebraMap_mem' c x := by
+    refine ⟨Set.univ, Filter.univ_mem, Submodule.finiteDimensional_of_le
+      (S₂ := Submodule.span ℚ_[l] {c}) (Submodule.span_mono ?_)⟩
+    rintro _ ⟨y, -, rfl⟩
+    rfl
 
 variable {l T}
 

@@ -15,7 +15,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyP
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
-public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
+public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 
 /-!
 # Weil sheaves and Weil complexes
@@ -123,15 +123,13 @@ along its geometric Galois Frobenius `Fr_X`. It is realized as the pushforward a
 which is isomorphic to the pullback along `Fr_X`
 (`AlgebraicGeometry.ProEtale.upperStarIsoLowerStarInv`). -/
 noncomputable abbrev WeilSheaf.frobeniusPullback :
-    Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-        (WeilCoefficients.{u} l) ⥤
-      Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-        (WeilCoefficients.{u} l) :=
-  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+    AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ⥤
+      AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*ᵃ[l]
 
 /-- The Frobenius pullback is an equivalence, `Fr_X` being an automorphism. -/
 instance : (WeilSheaf.frobeniusPullback k₀ l X).IsEquivalence :=
-  isEquivalence_lowerStar _ _
+  isEquivalence_adicLowerStar _ _
 
 /-- The category of all `ℓ`-adic pro-étale sheaves on the geometric fiber `X̄` with a Weil
 structure: pairs of a sheaf `F` of `ℚ̄_ℓ`-modules on `X̄_proét` and an isomorphism
@@ -219,8 +217,7 @@ namespace WeilSheaf
 
 /-- The underlying pro-étale sheaf of a Weil sheaf. -/
 noncomputable abbrev carrier (F : WeilSheaf k₀ l X) :
-    Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-      (WeilCoefficients.{u} l) :=
+    AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   F.obj.carrier
 
 /-- The underlying sheaf of a Weil sheaf is constructible. -/
@@ -266,14 +263,14 @@ pullback along an automorphism `g` is the pushforward along `g⁻¹`. At a geome
 by `Fr_Xᵐ` up to reparametrisation it induces the Frobenius relative to `𝔽_{qᵐ}` on the
 stalk. -/
 noncomputable def frobeniusPowIso (F : WeilSheaf k₀ l X) (m : ℕ) :
-    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[
-        WeilCoefficients.{u} l].obj F.obj.carrier ≅
+    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*ᵃ[l].obj
+        F.obj.carrier ≅
       F.obj.carrier :=
   match m with
-  | 0 => (lowerStarCongr _ (by rw [pow_zero]; rfl)).app _ ≪≫ (lowerStarId _ _).app _
+  | 0 => (adicLowerStarCongr l (by rw [pow_zero]; rfl)).app _ ≪≫ (adicLowerStarId l _).app _
   | m + 1 =>
-    (lowerStarCongr _ (by rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv])).app _ ≪≫
-      (lowerStarComp _ _ _).symm.app _ ≪≫
+    (adicLowerStarCongr l (by rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv])).app _ ≪≫
+      (adicLowerStarComp l _ _).symm.app _ ≪≫
       (frobeniusPullback k₀ l X).mapIso (F.frobeniusPowIso m) ≪≫ F.obj.str
 
 /-- A Weil sheaf is *lisse* if its underlying `ℓ`-adic sheaf is lisse: pro-étale locally a
@@ -357,8 +354,8 @@ noncomputable def _root_.AlgebraicGeometry.WeilSheaf.toComplexCompHomologySheafI
 pro-étale sheaves on `X̄`, forgetting the Weil structure; the Weil structure of `K` induces the
 derived Frobenius isomorphism `θ_K : Fr_X^* For(K) ≅ For(K)`. -/
 noncomputable def forget :
-    WeilComplex k₀ l X ⥤ _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology
-      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (WeilCoefficients.{u} l)) :=
+    WeilComplex k₀ l X ⥤ _root_.DerivedCategory
+      (AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
   ObjectProperty.ι _ ⋙ (IsoAlgebra.forget _).mapDerivedCategory
 
 end WeilComplex
@@ -374,7 +371,7 @@ the pullback along the base change `φ̄ : X̄ ⟶ Ȳ`, with the Weil structure 
 noncomputable def ProEtaleWeilSheaf.upperStar :
     ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l X :=
   IsoAlgebra.mapOfNatIso
-    (ProEtale.upperStarGeometricFiberMapCompFrobeniusIso _ φ (comp_over φ _))
+    (ProEtale.adicUpperStarGeometricFiberMapCompFrobeniusIso l φ (comp_over φ _))
 
 instance : (ProEtaleWeilSheaf.upperStar k₀ l φ).Additive :=
   IsoAlgebra.additive_mapOfNatIso _

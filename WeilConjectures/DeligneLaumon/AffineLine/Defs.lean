@@ -71,8 +71,8 @@ fundamental group `π₁(Ū)` acts trivially on the stalks of `F`.
 (blueprint: `sk-d-dl-a1-setup`) -/
 def IsGeometricallyConstant (F : WeilSheaf k₀ l U) : Prop :=
   ∀ V : (U ↘ Spec (CommRingCat.of k₀)).geometricFiber.Opens, ConnectedSpace V →
-    ∃ n : ℕ, Nonempty ((V.ι)^*[WeilCoefficients.{u} l].obj F.obj.carrier ≅
-      ⨁ fun _ : Fin n ↦ ProEtale.adicConstantSheaf l V.toScheme)
+    ∃ n : ℕ, Nonempty ((V.ι)^*ᵃ[l].obj F.obj.carrier ≅
+      ⨁ fun _ : Fin n ↦ ProEtale.AdicSheaf.unit l V.toScheme)
 
 /-- A lisse Weil sheaf `F` on an open `U₀` of the affine line, embedded by `j : U₀ ↪ 𝔸¹`, is
 *unramified at infinity* if it extends to a lisse Weil sheaf on `U₀ ∪ {∞} ⊆ ℙ¹`. Here `𝔸¹`

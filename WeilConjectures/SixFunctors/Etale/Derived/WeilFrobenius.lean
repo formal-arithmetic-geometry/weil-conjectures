@@ -310,7 +310,7 @@ end Morphism
 
 section Exchange
 
-variable {a : X ⟶ Y} [HasCompactification a] {g : X ⟶ X} {h : Y ⟶ Y}
+variable [Finite Λ] {a : X ⟶ Y} [HasCompactification a] {g : X ⟶ X} {h : Y ⟶ Y}
 
 /-- The Weil datum on `Ra_! K` of a Weil datum `φ : Lg^* K ⟶ K`, for `g ≫ a = a ≫ h`:
 ```
@@ -349,12 +349,12 @@ lemma IsWeilMorphism.rightDerivedLowerShriek_map [QuasiCompact a] (sq : IsPullba
     {f : K ⟶ L} (hf : IsWeilMorphism g φK φL f) :
     IsWeilMorphism h (lowerShriekWeilDatum sq φK) (lowerShriekWeilDatum sq φL)
       ((R(a)_![ModuleCat.{u + 1} Λ]).map f) := by
-  have := (rightDerivedLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq).naturality f
+  have := (rightDerivedLowerShriekBaseChangeMap Λ sq).naturality f
   simp only [Functor.comp_map] at this
   unfold IsWeilMorphism lowerShriekWeilDatum at *
   rw [reassoc_of% this, ← Functor.map_comp, hf, Functor.map_comp, Category.assoc]
 
-omit [HasCompactification a] in
+omit [Finite Λ] [HasCompactification a] in
 /-- `Ra_*` carries morphisms of Weil objects to morphisms of Weil objects, by naturality of the
 exchange map. -/
 lemma IsWeilMorphism.rightDerivedLowerStar_map (sq : CommSq g a a h) {f : K ⟶ L}

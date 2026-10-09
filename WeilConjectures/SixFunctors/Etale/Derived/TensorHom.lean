@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 /-!
@@ -78,84 +78,80 @@ namespace Etale
 
 section TensorHom
 
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
+  [HasCompactification f]
 
 /-- Blueprint `sk-thm-sf-tensor-hom`: Tensor–Hom form of the exchange.
 
-For a morphism `f : X ⟶ Y` admitting a compactification, so that `Rf_!` and its right adjoint
-`Rf^!` exist, and for `M` in `Dctf(X, A)` and `N` in `Dctf(Y, A)`, the direct image of the
-internal hom from `M` into `Rf^! N` agrees with the internal hom on `Y` from `Rf_! M` into `N`:
+For a morphism `f : X ⟶ Y` admitting a compactification and torsion coefficients `Λ`, the direct
+image of the internal hom from `M` into `Rf^! N` agrees with the internal hom on `Y` from
+`Rf_! M` into `N`:
 
 `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)`.
 
-The blueprint obtains this by Yoneda from the chain of adjunctions `Rf_! ⊣ Rf^!`,
-`Lf^* ⊣ Rf_*` and `- ⊗ᴸ - ⊣ RHom`, together with the projection formula. -/
+As in the blueprint this is obtained from the chain of adjunctions `Rf_! ⊣ Rf^!`,
+`Lf^* ⊣ Rf_*` and `- ⊗ᴸ - ⊣ RHom`, together with the projection formula: the functor
+`N ↦ Rf_* RHom_X(M, Rf^! N)` is right adjoint to `L ↦ Rf_!(M ⊗ᴸ Lf^* L)`, the functor
+`N ↦ RHom_Y(Rf_! M, N)` is right adjoint to `L ↦ Rf_! M ⊗ᴸ L`, and the projection formula
+(`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`) identifies the two left adjoints.
+For torsion coefficients no finiteness hypothesis on `M` and `N` is needed. -/
 theorem nonempty_iso_derivedHom_rightDerivedLowerShriek
-    {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    (hM : DerivedCategory.constructibleFiniteTor A X M)
-    (hN : DerivedCategory.constructibleFiniteTor A Y N) :
-    Nonempty ((R((f)_*[A])).obj ((RHom(X)[A].obj (op M)).obj ((R(f)^![A]).obj N)) ≅
-      (RHom(Y)[A].obj (op ((R(f)_![A]).obj M))).obj N) :=
-  sorry
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op M)).obj
+        ((R(f)^![ModuleCat.{u + 1} Λ]).obj N)) ≅
+      (RHom(Y)[ModuleCat.{u + 1} Λ].obj (op ((R(f)_![ModuleCat.{u + 1} Λ]).obj M))).obj N) := by
+  obtain ⟨e⟩ := nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek _ f M
+    (fun L ↦ hasProjectionFormula_of_finite Λ f M L)
+  exact ⟨(Adjunction.rightAdjointUniq
+    (((derivedUpperStarLowerStarAdjunction _ f).comp (derivedTensorHomAdjunction _ M)).comp
+      (rightDerivedUpperShriekAdjunction _ f))
+    ((derivedTensorHomAdjunction _ ((R(f)_![ModuleCat.{u + 1} Λ]).obj M)).ofNatIsoLeft
+      (e ≪≫ (Functor.associator _ _ _).symm))).app N⟩
 
 end TensorHom
 
 section VerdierExchange
 
-variable {X Y S : Scheme.{u}} (f : X ⟶ Y) (aY : Y ⟶ S) [HasCompactification f]
-  [HasCompactification aY] [HasCompactification (f ≫ aY)]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y S : Scheme.{u}} (f : X ⟶ Y)
+  (aY : Y ⟶ S) [HasCompactification f] [HasCompactification aY] [HasCompactification (f ≫ aY)]
 
 /-- Blueprint `sk-thm-sf-verdier-exchange`: Verdier-duality exchange.
 
 First half. If `f : X ⟶ Y`, the structure morphism `a_Y : Y ⟶ S` and `a_X = f ≫ a_Y` all
 admit a compactification (the last is assumed separately, there being no composition instance
-for `HasCompactification`), then the exceptional inverse image along `f` of the dualizing
-complex of `Y` is the dualizing complex of `X`:
+for `HasCompactification`), then for torsion coefficients the exceptional inverse image along
+`f` of the dualizing complex of `Y` is the dualizing complex of `X`:
 
 `Rf^! ω_Y ≅ ω_X`.
 
 This is the mate, under the adjunctions `Rf_! ⊣ Rf^!`, of the composition isomorphism
 `R(a_Y ∘ f)_! ≅ R a_{Y!} ∘ Rf_!`, evaluated at the monoidal unit `Λ_S`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_dualizingComplex :
-    Nonempty ((R(f)^![A]).obj (dualizingComplex A aY) ≅ dualizingComplex A (f ≫ aY)) := by
-  obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_comp A f aY
+    Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj (dualizingComplex _ aY) ≅
+      dualizingComplex _ (f ≫ aY)) := by
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ f aY
   exact ⟨(e.app (𝟙_ _)).symm⟩
 
 /-- Blueprint `sk-thm-sf-verdier-exchange`: Verdier-duality exchange.
 
 Second half. With `a_Y : Y ⟶ S` the structure morphism of `Y` and `a_X = f ≫ a_Y` that of
 `X`, the Verdier duals `𝔻_Y = RHom_Y(-, ω_Y)` and `𝔻_X = RHom_X(-, ω_X)` exchange the
-extraordinary and the ordinary direct image: for `M` in `Dctf(X, A)`,
+extraordinary and the ordinary direct image: for torsion coefficients and every `M`,
 
 `𝔻_Y (Rf_! M) ≅ Rf_* 𝔻_X M`.
 
-In the blueprint this is the tensor–Hom exchange
+As in the blueprint this is the tensor–Hom exchange
 `nonempty_iso_derivedHom_rightDerivedLowerShriek` at `N = ω_Y`, combined with
-`Rf^! ω_Y ≅ ω_X`. The tensor–Hom exchange is a statement on `Dctf`, so `ω_Y` is assumed to
-lie in `Dctf(Y, A)` (hypothesis `hω`), as it does in the blueprint's setting; see
-`AlgebraicGeometry.Etale.constructibleFiniteTor_dualizingComplex`. -/
+`Rf^! ω_Y ≅ ω_X`. -/
 theorem nonempty_iso_verdierDual_rightDerivedLowerShriek
-    (hω : DerivedCategory.constructibleFiniteTor A Y (dualizingComplex A aY))
-    {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hM : DerivedCategory.constructibleFiniteTor A X M) :
-    Nonempty ((verdierDual A aY).obj (op ((R(f)_![A]).obj M)) ≅
-      (R((f)_*[A])).obj ((verdierDual A (f ≫ aY)).obj (op M))) := by
-  obtain ⟨e₁⟩ := nonempty_iso_derivedHom_rightDerivedLowerShriek A f hM hω
-  obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex A f aY
-  exact ⟨e₁.symm ≪≫ (R((f)_*[A])).mapIso ((RHom(X)[A].obj (op M)).mapIso e₂)⟩
-
-omit [HasCompactification f] [HasCompactification (f ≫ aY)] in
-/-- The dualizing complex `ω_Y = Ra_Y^! Λ_S` lies in `Dctf(Y, A)` when the unit `Λ_S` does
-and `S` is Noetherian, for torsion coefficients, by the stability of `Dctf` under `Ra_Y^!`. In
-the blueprint's setting (`S` the spectrum of a field and `A` the modules over a finite ring) the
-unit is in `Dctf`, so this discharges the hypothesis `hω` of
-`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerShriek`. -/
-theorem constructibleFiniteTor_dualizingComplex [QuasiCompact aY] [IsNoetherian S]
-    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
-    (hΛ : DerivedCategory.constructibleFiniteTor A S (𝟙_ _)) :
-    DerivedCategory.constructibleFiniteTor A Y (dualizingComplex A aY) :=
-  constructibleFiniteTor_rightDerivedUpperShriek A aY hΛ
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((verdierDual _ aY).obj (op ((R(f)_![ModuleCat.{u + 1} Λ]).obj M)) ≅
+      (R((f)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual _ (f ≫ aY)).obj (op M))) := by
+  obtain ⟨e₁⟩ := nonempty_iso_derivedHom_rightDerivedLowerShriek Λ f M (dualizingComplex _ aY)
+  obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ f aY
+  exact ⟨e₁.symm ≪≫ (R((f)_*[ModuleCat.{u + 1} Λ])).mapIso
+    ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op M)).mapIso e₂)⟩
 
 end VerdierExchange
 

@@ -61,6 +61,12 @@ categories.
   (`AlgebraicGeometry.ProEtale.bijective_comparisonUpperStar_mapDerivedCategory_map`).
 * The ambient right adjoint of `Rf_!` of blueprint `sk-prop-sf-existence` (b) is not defined
   here: it does not exist for proper curves, and nothing needs it.
+* Everything here takes `[AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek A f]`: that the
+  étale `Rf_!` is a left adjoint, so that `f^×` exists, and that `f^×` preserves bounded below
+  objects. Both rest on the finite cohomological amplitude of proper direct images, so they are
+  not available for an arbitrary coefficient category; for torsion coefficients `ModuleCat Λ`,
+  `Λ` finite, they are the instance
+  `AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`.
 
 -/
 
@@ -81,6 +87,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 namespace ProEtale
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+  [Etale.HasBoundedBelowUpperShriek A f]
 
 /-- Blueprint `sk-def-sf-operations` (vi): the exceptional inverse image
 `Rf^! := ν_X^* ∘ f^× ∘ Rν_{Y,*} : D(Y_proét) ⥤ D(X_proét)` along a morphism `f : X ⟶ Y`
@@ -106,7 +113,8 @@ lemma rightDerivedUpperShriek_obj (L : DerivedCategory (Sheaf (Scheme.ProEt.topo
 /-- Transport of the exceptional inverse image along an equality of morphisms:
 `Rf^! ≅ Rg^!` for `f = g`. -/
 noncomputable def rightDerivedUpperShriekCongr {f g : X ⟶ Y} (h : f = g)
-    [HasCompactification f] [HasCompactification g] : R(f)^![A] ≅ R(g)^![A] :=
+    [HasCompactification f] [HasCompactification g] [Etale.HasBoundedBelowUpperShriek A f]
+    [Etale.HasBoundedBelowUpperShriek A g] : R(f)^![A] ≅ R(g)^![A] :=
   eqToIso <| by
     subst h
     rfl

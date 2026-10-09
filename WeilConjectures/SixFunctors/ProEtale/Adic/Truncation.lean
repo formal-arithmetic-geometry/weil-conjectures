@@ -73,7 +73,7 @@ variable (l : ℕ) [Fact l.Prime]
 with `ℓ`-adically constructible cohomology sheaves. -/
 def DerivedCategory.boundedAdicConstructible (X : Scheme.{u}) :
     ObjectProperty
-      (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l))) :=
+      (_root_.DerivedCategory (AdicSheaf l X)) :=
   _root_.DerivedCategory.TStructure.t.bounded ⊓
     _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l X)
 
@@ -84,7 +84,7 @@ variable {l} {X : Scheme.{u}}
 `D^b_c(X, ℚ̄_ℓ)` is stable under the truncation `τ^{≤ n}` of the canonical t-structure: the
 cohomology sheaves of `τ^{≤ n} K` are those of `K` in degrees `≤ n`, and zero above. -/
 lemma DerivedCategory.boundedAdicConstructible_truncLE
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l))}
+    {K : _root_.DerivedCategory (AdicSheaf l X)}
     (hK : DerivedCategory.boundedAdicConstructible l X K) (n : ℤ) :
     DerivedCategory.boundedAdicConstructible l X
       ((_root_.DerivedCategory.TStructure.t.truncLE n).obj K) := by
@@ -97,7 +97,7 @@ lemma DerivedCategory.boundedAdicConstructible_truncLE
 `D^b_c(X, ℚ̄_ℓ)` is stable under the truncation `τ^{≥ n}` of the canonical t-structure: the
 cohomology sheaves of `τ^{≥ n} K` are those of `K` in degrees `≥ n`, and zero below. -/
 lemma DerivedCategory.boundedAdicConstructible_truncGE
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l))}
+    {K : _root_.DerivedCategory (AdicSheaf l X)}
     (hK : DerivedCategory.boundedAdicConstructible l X K) (n : ℤ) :
     DerivedCategory.boundedAdicConstructible l X
       ((_root_.DerivedCategory.TStructure.t.truncGE n).obj K) := by
@@ -109,48 +109,52 @@ section Automorphism
 
 variable (h : X ⟶ X) [IsIso h]
 
+omit [IsIso h] in
 /-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
 
 The pullback `h^*` along an automorphism `h` of `X` preserves `D^b_c(X, ℚ̄_ℓ)`: it is exact, so
 `𝓗ⁱ(h^* K) ≅ h^* 𝓗ⁱ(K)`, and pullbacks of constructible sheaves are constructible. -/
 lemma DerivedCategory.boundedAdicConstructible_mapDerivedCategory_upperStar
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l))}
+    {K : _root_.DerivedCategory (AdicSheaf l X)}
     (hK : DerivedCategory.boundedAdicConstructible l X K) :
     DerivedCategory.boundedAdicConstructible l X
-      (((h)^*[WeilCoefficients.{u} l]).mapDerivedCategory.obj K) :=
+      (((h)^*ᵃ[l]).mapDerivedCategory.obj K) :=
   ⟨Functor.bounded_mapDerivedCategory_obj _ hK.1, fun i ↦
     (adicConstructibleSheaf l X).prop_of_iso
-      ((((h)^*[WeilCoefficients.{u} l]).mapDerivedCategoryHomologyFunctorIso i).app K)
+      ((((h)^*ᵃ[l]).mapDerivedCategoryHomologyFunctorIso i).app K)
       ((hK.2 i).upperStar h)⟩
 
+omit [IsIso h] in
 /-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
 
 The pullback `h^*` along an automorphism `h` of `X` commutes with the truncation `τ^{≤ n}`. -/
 theorem nonempty_truncLE_comp_mapDerivedCategory_upperStar_iso (n : ℤ) :
     Nonempty (_root_.DerivedCategory.TStructure.t.truncLE n ⋙
-        ((h)^*[WeilCoefficients.{u} l]).mapDerivedCategory ≅
-      ((h)^*[WeilCoefficients.{u} l]).mapDerivedCategory ⋙
+        ((h)^*ᵃ[l]).mapDerivedCategory ≅
+      ((h)^*ᵃ[l]).mapDerivedCategory ⋙
         _root_.DerivedCategory.TStructure.t.truncLE n) :=
   ⟨Functor.mapDerivedCategoryTruncLEIso _ n⟩
 
+omit [IsIso h] in
 /-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
 
 The pullback `h^*` along an automorphism `h` of `X` commutes with the truncation `τ^{≥ n}`. -/
 theorem nonempty_truncGE_comp_mapDerivedCategory_upperStar_iso (n : ℤ) :
     Nonempty (_root_.DerivedCategory.TStructure.t.truncGE n ⋙
-        ((h)^*[WeilCoefficients.{u} l]).mapDerivedCategory ≅
-      ((h)^*[WeilCoefficients.{u} l]).mapDerivedCategory ⋙
+        ((h)^*ᵃ[l]).mapDerivedCategory ≅
+      ((h)^*ᵃ[l]).mapDerivedCategory ⋙
         _root_.DerivedCategory.TStructure.t.truncGE n) :=
   ⟨Functor.mapDerivedCategoryTruncGEIso _ n⟩
 
+omit [IsIso h] in
 /-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
 
 The pullback `h^*` along an automorphism `h` of `X` commutes with the cohomology sheaves:
 `𝓗ⁱ(h^* K) ≅ h^* 𝓗ⁱ(K)`. -/
 theorem nonempty_mapDerivedCategory_upperStar_comp_homologyFunctor_iso (i : ℤ) :
-    Nonempty (((h)^*[WeilCoefficients.{u} l]).mapDerivedCategory ⋙
+    Nonempty (((h)^*ᵃ[l]).mapDerivedCategory ⋙
         _root_.DerivedCategory.homologyFunctor _ i ≅
-      _root_.DerivedCategory.homologyFunctor _ i ⋙ (h)^*[WeilCoefficients.{u} l]) :=
+      _root_.DerivedCategory.homologyFunctor _ i ⋙ (h)^*ᵃ[l]) :=
   ⟨(Functor.mapDerivedCategoryHomologyFunctorIso _ i).symm⟩
 
 end Automorphism
