@@ -11,6 +11,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.Compactification.Comp
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionRefinement
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekLowerStarExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
@@ -383,17 +384,27 @@ theorem hasProjectionFormula_comp [Finite Λ] (f : X ⟶ Y) (g : Y ⟶ Z)
 
 Independence of the compactification, for torsion coefficients: the formula computed with an
 arbitrary compactification `c` of `f` holds if and only if it holds for the chosen one, i.e. for
-`AlgebraicGeometry.Etale.HasProjectionFormula`. For torsion coefficients both sides hold: the
-argument for the chosen compactification (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`)
-applies to any compactification. -/
+`AlgebraicGeometry.Etale.HasProjectionFormula`. Both are compared with the common refinement
+`Compactification.inf c d` of `c` and the chosen compactification `d`, along the refinements
+`Compactification.infFst c d` and `Compactification.infSnd c d`, whose squares over `X` are
+cartesian: along such a refinement the projection maps are isomorphisms at the same objects
+(`AlgebraicGeometry.Etale.isIso_projectionMapOfCompactification_app_app_iff_of_refinement`).
+
+`f` is assumed quasi-compact, as needed for the common refinement `Compactification.inf c d`;
+this holds for morphisms of finite type over a noetherian base. -/
 theorem hasProjectionFormulaOfCompactification_iff [Finite Λ] {f : X ⟶ Y}
-    [HasCompactification f]
+    [HasCompactification f] [QuasiCompact f]
     (c : Compactification f)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L ↔
       HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
-  sorry
+  (isIso_projectionMapOfCompactification_app_app_iff_of_refinement Λ
+      (Compactification.infFst c (HasCompactification.compactification f))
+      (Compactification.isPullback_infFst c _) K L).symm.trans
+    (isIso_projectionMapOfCompactification_app_app_iff_of_refinement Λ
+      (Compactification.infSnd c (HasCompactification.compactification f))
+      (Compactification.isPullback_infSnd c _) K L)
 
 end TorsionCoherence
 

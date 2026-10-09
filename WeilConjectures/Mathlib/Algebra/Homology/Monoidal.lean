@@ -20,7 +20,9 @@ If `G : C ⥤ D` is an additive oplax monoidal functor which preserves the copro
 defining the tensor product of complexes, the comonoidal structure of `G` induces
 a natural transformation `G(K ⊗ L) ⟶ G(K) ⊗ G(L)` of bifunctors on homological complexes
 (`CategoryTheory.Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans`), which is an
-isomorphism when every `δ G X Y` is an isomorphism.
+isomorphism when every `δ G X Y` is an isomorphism. These comparisons are compatible with
+composition of functors
+(`CategoryTheory.Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_comp`).
 -/
 
 @[expose] public section
@@ -139,5 +141,79 @@ variable [∀ X Y : C, IsIso (δ G X Y)]
 
 instance : IsIso (mapHomologicalComplexδNatTrans c G) :=
   inferInstanceAs (IsIso (mapBifunctorComparisonNatTrans (δNatTrans G) c))
+
+end CategoryTheory.Functor.OplaxMonoidal
+
+namespace CategoryTheory.Functor.OplaxMonoidal
+
+open HomologicalComplex
+
+variable {C D E : Type*} [Category* C] [Category* D] [Category* E]
+  [Preadditive C] [Preadditive D] [Preadditive E]
+  [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E]
+  [HasZeroObject C] [HasZeroObject D] [HasZeroObject E]
+  [(curriedTensor C).Additive] [∀ (X₁ : C), ((curriedTensor C).obj X₁).Additive]
+  [(curriedTensor D).Additive] [∀ (X₁ : D), ((curriedTensor D).obj X₁).Additive]
+  [(curriedTensor E).Additive] [∀ (X₁ : E), ((curriedTensor E).obj X₁).Additive]
+  {I : Type*} [AddMonoid I] (c : ComplexShape I) [c.TensorSigns] [DecidableEq I]
+  [∀ (X₁ X₂ : GradedObject I C), X₁.HasTensor X₂]
+  [∀ (X₁ X₂ : GradedObject I D), X₁.HasTensor X₂]
+  [∀ (X₁ X₂ : GradedObject I E), X₁.HasTensor X₂]
+  [∀ X₁, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).obj X₁)]
+  [∀ X₂, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).flip.obj X₂)]
+  [∀ X₁, PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).obj X₁)]
+  [∀ X₂, PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).flip.obj X₂)]
+  [∀ X₁, PreservesColimit (Functor.empty.{0} E) ((curriedTensor E).obj X₁)]
+  [∀ X₂, PreservesColimit (Functor.empty.{0} E) ((curriedTensor E).flip.obj X₂)]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject I C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject I C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject I C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject I D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject I D), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject I D), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject I E), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject I E), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject I E), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  {G₁ : C ⥤ D} {G₂ : D ⥤ E} {G₁₂ : C ⥤ E} [G₁.Additive] [G₂.Additive] [G₁₂.Additive]
+  [G₁.OplaxMonoidal] [G₂.OplaxMonoidal] [G₁₂.OplaxMonoidal]
+  [∀ j, PreservesColimitsOfShape (Discrete (ComplexShape.π c c c ⁻¹' {j})) G₁]
+  [∀ j, PreservesColimitsOfShape (Discrete (ComplexShape.π c c c ⁻¹' {j})) G₂]
+  [∀ j, PreservesColimitsOfShape (Discrete (ComplexShape.π c c c ⁻¹' {j})) G₁₂]
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Let `u : G₁₂ ⟶ G₁ ⋙ G₂` be compatible with the comparisons `δ` of the oplax monoidal
+functors `G₁`, `G₂` and `G₁₂`. Then the induced morphism of functors on homological complexes is
+compatible with the comparisons `G(K ⊗ L) ⟶ G(K) ⊗ G(L)` of
+`CategoryTheory.Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans`:
+```
+  G₁₂(K ⊗ L) ──────────u──────────▶ G₂(G₁(K ⊗ L))
+       │                                  │ G₂(δ)
+       │ δ                                ▼
+       │                           G₂(G₁K ⊗ G₁L)
+       │                                  │ δ
+       ▼                                  ▼
+  G₁₂K ⊗ G₁₂L ───────u ⊗ u───────▶ G₂G₁K ⊗ G₂G₁L
+```
+-/
+lemma mapHomologicalComplexδNatTrans_comp (u : G₁₂ ⟶ G₁ ⋙ G₂)
+    (hu : ∀ X Y : C, u.app (X ⊗ Y) ≫ G₂.map (δ G₁ X Y) ≫ δ G₂ _ _ =
+      δ G₁₂ X Y ≫ (u.app X ⊗ₘ u.app Y))
+    (K L : HomologicalComplex C c) :
+    (NatTrans.mapHomologicalComplex u c).app (K ⊗ L) ≫
+        (G₂.mapHomologicalComplex c).map (((mapHomologicalComplexδNatTrans c G₁).app K).app L) ≫
+        ((mapHomologicalComplexδNatTrans c G₂).app _).app _ =
+      ((mapHomologicalComplexδNatTrans c G₁₂).app K).app L ≫
+        ((NatTrans.mapHomologicalComplex u c).app K ⊗ₘ
+          (NatTrans.mapHomologicalComplex u c).app L) := by
+  ext j
+  refine mapBifunctor.hom_ext_of_map G₁₂ (fun i₁ i₂ h ↦ ?_)
+  simp only [HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f,
+    mapHomologicalComplexδNatTrans_app_app, Functor.mapHomologicalComplex_map_f,
+    mapBifunctorComparison_f, map_ιMapBifunctor_mapBifunctorComparisonX_assoc]
+  erw [u.naturality_assoc, Functor.comp_map, ← G₂.map_comp_assoc,
+    map_ιMapBifunctor_mapBifunctorComparisonX, G₂.map_comp, assoc,
+    map_ιMapBifunctor_mapBifunctorComparisonX, ι_mapBifunctorMap]
+  erw [reassoc_of% (hu (K.X i₁) (L.X i₂)), tensorHom_def, assoc]
+  rfl
 
 end CategoryTheory.Functor.OplaxMonoidal
