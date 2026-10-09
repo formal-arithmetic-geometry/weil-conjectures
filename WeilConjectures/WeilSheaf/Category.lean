@@ -442,7 +442,9 @@ noncomputable instance : (WeilComplex.upperStar (k₀ := k₀) (l := l) φ).Comm
   exact ObjectProperty.commShiftLiftFullSubcategory _ _ _ _
 
 /-- The pullback of Weil complexes is a triangulated functor. -/
-instance : (WeilComplex.upperStar (k₀ := k₀) (l := l) φ).IsTriangulated := by
+instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] :
+    (WeilComplex.upperStar (k₀ := k₀) (l := l) φ).IsTriangulated := by
   have : (ProEtaleWeilSheaf.upperStar k₀ l φ).mapDerivedCategory.IsTriangulated := inferInstance
   exact ObjectProperty.isTriangulated_liftFullSubcategory _ _ _ _
 

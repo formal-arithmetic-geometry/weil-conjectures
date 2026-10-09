@@ -320,9 +320,9 @@ theorem exists_nonempty_isAdicLisseSheaf_kernel_cokernel {Y : Scheme.{u}} [Compa
     change rk k _ = jmax
     rw [← hRk, ← Scheme.Hom.comp_apply, ← pullback.condition, Scheme.Hom.comp_apply]
     exact le_antisymm (hmax _) (pullback.fst U.ι (g k) w).2
-  exact ⟨IsAdicLisseSheaf.of_cover _ hP fun _ _ ⟨k⟩ ↦
+  exact ⟨IsAdicLisseSheaf.of_presieve _ hP fun _ _ ⟨k⟩ ↦
       (hmem k).1.of_iso (PreservesKernel.iso _ _).symm,
-    IsAdicLisseSheaf.of_cover _ hP fun _ _ ⟨k⟩ ↦
+    IsAdicLisseSheaf.of_presieve _ hP fun _ _ ⟨k⟩ ↦
       (hmem k).2.of_iso (PreservesCokernel.iso _ _).symm⟩
 
 end Generic

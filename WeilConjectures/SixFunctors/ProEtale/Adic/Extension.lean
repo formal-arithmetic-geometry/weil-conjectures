@@ -229,7 +229,7 @@ variable {X : Scheme.{u}}
 
 /-- **Being lisse is local**: a sheaf whose pullbacks along the members of a pro-étale cover are
 lisse is lisse. -/
-lemma IsAdicLisseSheaf.of_cover {F : AdicSheaf l X} (R : Presieve X)
+lemma IsAdicLisseSheaf.of_presieve {F : AdicSheaf l X} (R : Presieve X)
     (hR : R ∈ Scheme.proetalePrecoverage X)
     (h : ∀ ⦃V : Scheme.{u}⦄ (f : V ⟶ X), R f → IsAdicLisseSheaf ((f)^*ᵃ[l].obj F)) :
     IsAdicLisseSheaf F := by
@@ -250,7 +250,7 @@ theorem IsAdicLisseSheaf.of_shortExact_of_iso {S : ShortComplex (AdicSheaf l X)}
   have := hS.epi_g
   obtain ⟨R, hR, h⟩ := exists_cover_adic_lift (biproduct.map fun _ : Fin m ↦ S.g)
     (biproduct.lift fun k ↦ biproduct.ι (fun _ : Fin m ↦ AdicSheaf.unit l X) k ≫ e.inv)
-  refine IsAdicLisseSheaf.of_cover R hR fun W g hg ↦ ?_
+  refine IsAdicLisseSheaf.of_presieve R hR fun W g hg ↦ ?_
   obtain ⟨hw, s, hs⟩ := h g hg
   let σ : (⨁ fun _ : Fin m ↦ AdicSheaf.unit l W) ⟶ (g)^*ᵃ[l].obj S.X₂ :=
     biproduct.desc fun k ↦ s ≫ (g)^*ᵃ[l].map (biproduct.π _ k)
@@ -280,7 +280,7 @@ theorem IsAdicLisseSheaf.of_shortExact {S : ShortComplex (AdicSheaf l X)}
     (hS : S.ShortExact) (h₁ : IsAdicLisseSheaf S.X₁) (h₃ : IsAdicLisseSheaf S.X₃) :
     IsAdicLisseSheaf S.X₂ := by
   obtain ⟨R, hR, h⟩ := id h₃
-  refine IsAdicLisseSheaf.of_cover R hR fun V f hf ↦ ?_
+  refine IsAdicLisseSheaf.of_presieve R hR fun V f hf ↦ ?_
   obtain ⟨m, ⟨e⟩⟩ := h f hf
   exact IsAdicLisseSheaf.of_shortExact_of_iso (S := S.map (f)^*ᵃ[l]) (hS.map_of_exact _)
     (h₁.upperStar f) (h₃.upperStar f) e
