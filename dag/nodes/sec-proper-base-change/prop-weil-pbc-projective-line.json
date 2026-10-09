@@ -2,39 +2,120 @@
  "id": "prop-weil-pbc-projective-line",
  "kind": "statement",
  "title": "Projective-line proper base change",
- "statement": "For every scheme $S$, the projection $\\mathbf P^1_S\\to S$ satisfies\n$\\mathrm{PBC}$ in the sense of [def-weil-pbc-property].",
+ "statement": "For every scheme $S$, the projection $\\mathbf P^1_S\\to S$ of the projective line $\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ [def-nagata-projective-space-base-change] satisfies\n$\\mathrm{PBC}$ in the sense of [def-weil-pbc-property].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-weil-pbc-projective-line.md",
   "place": "node prop-weil-pbc-projective-line, order 1183"
  },
  "stmt_deps": [
   "def-weil-pbc-property",
-  "def-weil-pbc-injective-acyclicity-property"
+  "def-nagata-projective-space-base-change"
  ],
  "proof": [
   {
-   "text": "Let $I$ be injective in $\\mathbf F_r$-module sheaves on $\\mathbf P^1_S$ and\nmake an arbitrary base change. On every geometric stalk,\n[lemma-weil-pbc-p1-exchange-geometric-stalk] identifies the exchange map with\npullback between proper curves over separably closed fields;\n[prop-weil-pbc-proper-curve-sepclosed-invariance] makes it an isomorphism. Since\n$R^qp_*I=0$ for $q>0$, the target stalks $R^qp'_*g'^{-1}I$ vanish for $q>0$,\nand conservativity of geometric stalks gives $\\mathrm{IA}_r$ for the\nprojection; the equivalence between $\\mathrm{PBC}$ and $\\mathrm{IA}$ gives\n$\\mathrm{PBC}$.",
+   "text": "Let $S$ be a scheme, $X=\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ [def-nagata-projective-space-base-change] and $p:X\\to S$ the projection. The morphism $p$ is proper by [lemma-nagata-projective-space-base-change-proper], so $\\mathrm{PBC}(p)$ of [def-weil-pbc-property] is defined, and by the implication (2)$\\Rightarrow$(1) of [lemma-weil-pbc-property-iff-acyclicity] it suffices to prove $\\mathrm{IA}_r(p)$ of [def-weil-pbc-injective-acyclicity-property] for every prime $r$. So fix a prime $r$, a morphism $g:T\\to S$, the cartesian square [def-weil-pbc-cartesian-square] with $X'=X\\times_ST$, $p'=f':X'\\to T$, $g':X'\\to X$, and an injective sheaf $I$ of $\\mathbf F_r$-modules on $X_{\\Et}$; we must show $R^qp'_*g'^{-1}I=0$ for $q>0$. By [lemma-nagata-projective-space-base-change-pullback] the square with $\\mathbf P^1_T\\to\\mathbf P^1_S$ on top is cartesian, so we may take $X'=\\mathbf P^1_T$ with $p'$ its projection, which is the setting of the geometric-stalk lemma used in the next step.",
    "uses": [
+    "def-nagata-projective-space-base-change",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-pbc-property",
+    "lemma-weil-pbc-property-iff-acyclicity",
+    "def-weil-pbc-injective-acyclicity-property",
+    "def-weil-pbc-cartesian-square",
+    "lemma-nagata-projective-space-base-change-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 095T (theorem-proper-base-change), proof, last paragraph (condition (2) of Lemma Tag 0A4B suffices); Lemma Tag 0A4B (lemma-proper-base-change-in-terms-of-injectives)"
+   }
+  },
+  {
+   "text": "Let $F$ be any torsion abelian sheaf on $X_{\\Et}$ [def-weil-pbc-etale-sheaves]; the case needed below is the underlying abelian sheaf of $I$, which is killed by $r$ and hence torsion. Let $\\bar t\\to T$ be a geometric point and $\\bar s=g\\circ\\bar t$ its image in $S$, lying over $t\\in T$ and $s\\in S$. Let $\\kappa(\\bar s)$ and $\\kappa(\\bar t)$ be the residue fields of the strict henselizations of $S$ at $\\bar s$ and of $T$ at $\\bar t$, i.e. the separable closures of $\\kappa(s)$ and $\\kappa(t)$ inside the fields of $\\bar s$ and $\\bar t$; both are separably closed, and $g$ induces a field extension $\\kappa(\\bar s)\\subset\\kappa(\\bar t)$. By [lemma-weil-pbc-p1-exchange-geometric-stalk], for every $q\\ge0$ the stalk at $\\bar t$ [def-weil-pbc-geometric-stalks] of the degree-$q$ exchange map $\\mathcal H^q(\\Ex_{\\square,F}):g^{-1}R^qp_*F\\to R^qp'_*g'^{-1}F$ of [def-weil-pbc-derived-exchange] is identified, by isomorphisms of its source and target, with the pullback map $H^q(\\mathbf P^1_{\\kappa(\\bar s)},F|)\\to H^q(\\mathbf P^1_{\\kappa(\\bar t)},F|)$ along $\\mathbf P^1_{\\kappa(\\bar t)}\\to\\mathbf P^1_{\\kappa(\\bar s)}$. (That lemma contains the strictly henselian part of the argument, unit step (ii): the stalk formula $(R^qp_*F)_{\\bar s}=H^q(\\mathbf P^1_{\\mathcal O^{sh}_{S,\\bar s}},F|)$ and the comparison $H^q(\\mathbf P^1_{\\mathcal O^{sh}},F|)\\cong H^q(\\mathbf P^1_{\\kappa(\\bar s)},F|)$ of [prop-weil-pbc-p1-strict-henselian-comparison], through [prop-weil-pbc-strict-local-exchange].)",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
     "lemma-weil-pbc-p1-exchange-geometric-stalk",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 095T (theorem-proper-base-change), proof, paragraphs 2-4 (the strictly henselian comparison, the stalk formula via Theorem Tag 03Q9, and the stalk of the base change map at $\\bar t$)"
+   }
+  },
+  {
+   "text": "Put $k=\\kappa(\\bar s)\\subset k'=\\kappa(\\bar t)$ and $C=\\mathbf P^1_k$. Then $C$ is proper over $k$ by [lemma-nagata-projective-space-base-change-proper] (with $S=\\operatorname{Spec}k$) and of dimension at most one by [lem-weil-pbc-p1-field-dimension-one]; by [lemma-nagata-projective-space-base-change-pullback] (with $g:\\operatorname{Spec}k'\\to\\operatorname{Spec}k$) the base change $C_{k'}=C\\times_kk'$ is $\\mathbf P^1_{k'}$, and its projection to $C$ is the map $\\mathbf P^1_{\\kappa(\\bar t)}\\to\\mathbf P^1_{\\kappa(\\bar s)}$ of the previous step. The restriction $F|_C$ is torsion, because its geometric stalks are geometric stalks of $F$ by [lemma-openclosed-stalk-upperstar]. Hence [prop-weil-pbc-proper-curve-sepclosed-invariance], applied to $k\\subset k'$, $C$ and $F|_C$, shows that the pullback $H^q(\\mathbf P^1_{k},F|)\\to H^q(\\mathbf P^1_{k'},F|)$ is an isomorphism for every $q$. This is where the curve calculations (unit step (i)) enter: that proposition is the invariance $(C_6)/(C_7)$ for algebraically closed fields [prop-weil-pbc-algebraically-closed-extension], passed to separably closed fields through universal homeomorphisms.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-p1-field-dimension-one",
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lemma-openclosed-stalk-upperstar",
     "prop-weil-pbc-proper-curve-sepclosed-invariance"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 095T (theorem-proper-base-change), proof, paragraph 4 (\"Since $\\kappa(s)^{sep}\\subset\\kappa(t)^{sep}$ this map is an isomorphism by Lemma 0A5E\"); Lemma Tag 0A5E (lemma-base-change-dim-1-separably-closed)"
+   }
+  },
+  {
+   "text": "By the two previous steps, for every torsion abelian sheaf $F$ on $X_{\\Et}$ and every $q\\ge0$ the degree-$q$ exchange map $g^{-1}R^qp_*F\\to R^qp'_*g'^{-1}F$ is an isomorphism at every geometric stalk of $T$, hence an isomorphism of sheaves on $T_{\\Et}$ by [lemma-weil-pbc-geometric-stalk-conservative].",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 095T (theorem-proper-base-change), proof, paragraph 5 (\"This proves cohomology commutes with base change for $\\mathbf P^1_S\\to S$ and sheaves of $\\mathbf Z/\\ell\\mathbf Z$-modules\")"
+   }
+  },
+  {
+   "text": "Apply the previous step to $F=I$ (as an abelian sheaf). Since $I$ is injective among sheaves of $\\mathbf F_r$-modules, $R^qp_*I=0$ for $q>0$ by [lem-weil-pbc-injective-module-direct-image-acyclic], hence $g^{-1}R^qp_*I=0$, and the isomorphism of the previous step gives $R^qp'_*g'^{-1}I=0$ for $q>0$. As $r$, $g$ and $I$ were arbitrary, this is $\\mathrm{IA}_r(p)$ for every prime $r$ [def-weil-pbc-injective-acyclicity-property], and by the reduction of the first step $\\mathrm{PBC}(p)$ holds.",
+   "uses": [
+    "lem-weil-pbc-injective-module-direct-image-acyclic",
+    "def-weil-pbc-injective-acyclicity-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 095T (theorem-proper-base-change), proof, paragraph 5 (\"In particular, for an injective sheaf of $\\mathbf Z/\\ell\\mathbf Z$-modules the higher direct images of any base change are zero\")"
+   }
   }
  ],
  "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-pbc-property",
+  "lemma-weil-pbc-property-iff-acyclicity",
+  "def-weil-pbc-injective-acyclicity-property",
+  "def-weil-pbc-cartesian-square",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "def-weil-pbc-etale-sheaves",
   "lemma-weil-pbc-p1-exchange-geometric-stalk",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-derived-exchange",
+  "lem-weil-pbc-p1-field-dimension-one",
+  "lemma-openclosed-stalk-upperstar",
   "prop-weil-pbc-proper-curve-sepclosed-invariance",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "lemma-weil-pbc-property-iff-acyclicity"
+  "lem-weil-pbc-injective-module-direct-image-acyclic"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-weil-pbc-projective-line.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 095T (theorem-proper-base-change), proof, paragraphs 2-5 (the projective-line case), with Lemma Tag 0A4B and Lemma Tag 0A5E"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ProjectiveSpace\\|ProjectiveLine\\|baseChange\\|BaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+   "results": "none relevant: Mathlib has no projective line over a base scheme, no higher direct images of etale sheaves and no base change morphism",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -79,5 +160,11 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "prop-weil-pbc-projective-line",
+  "worker": "stage1",
+  "summary": "Rewrote the one-paragraph imported proof as five steps following the projective-line part of the proof of Stacks Theorem 095T (with Lemmas 0A4B and 0A5E), realizing the four steps of unit sk-thm-p1: reduction to IA_r via lemma-weil-pbc-property-iff-acyclicity (unit step 1); geometric-stalk identification of the degree-q exchange map with the pullback between projective lines over the separably closed residue fields of the strict henselizations via lemma-weil-pbc-p1-exchange-geometric-stalk (which carries unit step (ii)); invariance of curve cohomology under separably closed extension via prop-weil-pbc-proper-curve-sepclosed-invariance (unit step (i)); conservativity of geometric stalks and the vanishing of R^q p_* of an injective (unit step (iii)). The imported proof used the conservativity and iff lemmas without naming them in a step (only in proof_deps) and silently used: properness of P^1_S -> S and the base change identification P^1_S x_S T = P^1_T (now the closed nodes lemma-nagata-projective-space-base-change-proper / -pullback of units sk-lem-nagata-sketch-affine-cover / sk-thm-reduction; finished nodes, so not route), dim P^1_k <= 1 (new node lem-weil-pbc-p1-field-dimension-one), torsionness of a restriction (lemma-openclosed-stalk-upperstar), and the vanishing of the abelian higher direct images of an injective F_r-module sheaf (new node lem-weil-pbc-injective-module-direct-image-acyclic, Stacks 03FD + 072W). stmt_deps: removed def-weil-pbc-injective-acyclicity-property (not used by the statement; now a proof dependency), added def-nagata-projective-space-base-change for P^1_S. The statement is unchanged except that it names the projective line's definition."
+ }
 }

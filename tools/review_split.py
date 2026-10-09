@@ -85,7 +85,9 @@ def main() -> int:
             allowed = un.closure(units_, u)
             for c in dq.deps_of(d, "proof"):
                 cn = nodes.get(c)
-                if cn and not dq.is_def(cn) and not dq.is_leaf(cn) and cn.get("unit") and cn.get("unit") not in allowed:
+                if cn and not dq.is_def(cn) and not dq.is_leaf(cn) and not dq.finished(cn) and cn.get("unit") and cn.get("unit") not in allowed:
+                    if c in (d.get("tool_uses") or []):
+                        notes.append(f"tool use accepted: {c}"); continue
                     errs.append(f"route: proof uses {c} of unit {cn.get('unit')}, which {u} does not cite (a departure from the unit's route needs an established error, SETUP.md)")
         if u and u in units_:
             r = units_[u].get("realized") or {}
@@ -97,6 +99,8 @@ def main() -> int:
         if hv:
             for k in list(hv):
                 if k.startswith("blueprint_") or k in ("import_flags", "id", "kind", "lean_audit", "pointers"):
+                    if k == "lean_audit" and str((d.get("lean") or {}).get("note", "")).startswith("attached by the lead"):
+                        continue
                     if hv.get(k) != d.get(k):
                         errs.append(f"{k} changed from the committed version")
             if hv.get("statement") != d.get("statement"):

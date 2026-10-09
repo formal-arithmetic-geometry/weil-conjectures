@@ -53,12 +53,12 @@
   "def-weil-pbc-underived-exchange"
  ],
  "lean": {
-  "module": "WeilConjectures.SixFunctors.BaseChange.Derived",
-  "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus",
   "branch": "slopmaster2",
-  "line": 134,
-  "sorry_free": true,
-  "body_lines": 2
+  "declarations": [
+   "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus",
+   "AlgebraicGeometry.Etale.baseChange"
+  ],
+  "note": "attached by the lead at review (2026-10-09): the unit's Lean `Etale.baseChange` (BC on D^+ as unit, square transport, counit; equal to the mateEquiv form by baseChange_app_eq_mateEquiv) added beside the blueprint's derivedBaseChangeMapPlus; both sorry-free"
  },
  "blueprint_lean": [
   "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus"
@@ -94,6 +94,16 @@
      ],
      "kind": "def",
      "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.baseChange",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs",
+     "lines": [
+      234,
+      246
+     ],
+     "kind": "def",
+     "sorry": false
     }
    ],
    "missing": [],
@@ -107,5 +117,10 @@
   "item": "def-weil-pbc-derived-exchange",
   "worker": "stage1",
   "summary": "Checked against the unit sk-def-exchange (mate of g'^{-1}eps_f after theta under f'^{-1} -| Rf'_*) and Stacks Remark 07A7 (sites-cohomology.tex, remark-base-change; the flat/exact-pullback construction on D^+ is Lemma 0736 in Section 0735; the earlier pointer 0A9D, the twisted inverse image section of duality.tex, is not the place). Rewrote the statement to name every ingredient on the derived level: the imported text used the sheaf-level theta_square and 'the derived adjunction of the inverse-image adjunction' without a node; both are now nodes. The definition is the mate (CategoryTheory.mateEquiv, def-weil-pbc-adjunction-mate) of the derived square isomorphism, as in the reviewed def-weil-pbc-ambient-ringed-exchange. The 'Equivalently, choose a K-injective resolution ... term by term' clause was a claim inside the definition; it is exactly lem-weil-pbc-derived-exchange-termwise (existing node), so it was removed from the statement and stmt_deps lost def-weil-pbc-kinjective-resolutions and def-weil-pbc-underived-exchange (pointed to in the text only, not cited as dependencies, to avoid a cycle). New nodes: def-weil-pbc-derived-inverse-image (u^{-1} on D^+, termwise), lem-weil-pbc-exact-functor-bounded-below (exact functors preserve D^+, Stacks 015F/0736), prop-weil-pbc-derived-inverse-image-adjunction (u^{-1} -| Ru_* on D^+ with termwise unit/counit, Stacks 0DVC/09T5/07A6), def-weil-pbc-derived-square-iso (theta on D^+, termwise; Stacks 07A7/0D6D); all searched in Mathlib, none present (Mathlib has mapDerivedCategory on D, DerivedCategory.Plus, rightDerivedFunctorPlus, Adjunction.derived for absolute derived functors, Localization.liftNatIso, mateEquiv). Lean: the unit's declaration AlgebraicGeometry.Etale.baseChange (MorphismDefs.lean:243, sorry-free, = mateEquiv by baseChange_app_eq_mateEquiv) states this node exactly; the node's recorded derivedBaseChangeMapPlus is the termwise-characterized version, equal to it by baseChange_eq_derivedBaseChangeMapPlus."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

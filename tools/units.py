@@ -19,8 +19,8 @@ Representation (stages/1-dag.md §7):
   a node                    chapter, unit (null for a chapter-level node), from its blueprint path; a node a worker created
                             inherits them from the item it was created for.
 A node's route is its unit and the units its unit cites, transitively. The route is about proofs: a step of a statement in
-unit U may use a statement of another unit only if U cites that unit (transitively); definitions and Mathlib leaves are notions,
-not route. A proof dependency outside the route is reported: an error for a split and reviewed node, a count for an imported one.
+unit U may use a statement of another unit only if U cites that unit (transitively); definitions, Mathlib leaves and finished nodes (closed Lean) are notions or tools, not route. A proof dependency outside the route is reported: an error for a split and reviewed node, a count for an imported one,
+unless the lead accepted it as a tool use (`tool_uses` on the node, SETUP.md), which is counted separately.
 A unit with no proof and no `uses` (a remark, an assembly) constrains nothing.
 """
 from __future__ import annotations
@@ -155,7 +155,7 @@ def route(nodes=None, units=None, chapters=None):
 
 def check(nodes=None, verbose=True) -> list[str]:
     nodes = nodes or dq.load(); units, chapters = load_units()
-    errs, info = [], collections.Counter()
+    errs, info, tools_accepted = [], collections.Counter(), collections.Counter()
     g = dq.Dag(nodes)
     for i, d in g.live.items():
         if d.get("chapter") not in chapters:
@@ -198,11 +198,14 @@ def check(nodes=None, verbose=True) -> list[str]:
             continue
         allowed = closure(units, u)
         for c in g.deps(i, "proof"):
-            if c not in g.live or dq.is_def(nodes[c]) or dq.is_leaf(nodes[c]):
+            if c not in g.live or dq.is_def(nodes[c]) or dq.is_leaf(nodes[c]) or dq.finished(nodes[c]):
                 continue
             cu, cc = nodes[c].get("unit"), nodes[c].get("chapter")
             ok = cu in allowed if cu else True
             if not ok:
+                if c in (d.get("tool_uses") or []):
+                    tools_accepted[i] += 1
+                    continue
                 split = str(d.get("status")) in ("split", "mathlib") and d.get("reviewed")
                 msg = f"route: {i} ({u}) depends on {c} ({cu or cc}), outside its unit's route"
                 if split:
@@ -213,7 +216,8 @@ def check(nodes=None, verbose=True) -> list[str]:
         for e in errs:
             print(e)
         print(f"units: {len(units)} units, {len(chapters)} chapters; {len(errs)} errors; "
-              f"{sum(info.values())} route departures in imported (unreviewed) nodes across {len(info)} units")
+              f"{sum(info.values())} route departures in imported (unreviewed) nodes across {len(info)} units; "
+              f"{sum(tools_accepted.values())} tool uses accepted by the lead on {len(tools_accepted)} nodes")
     return errs
 
 

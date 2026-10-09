@@ -1,8 +1,8 @@
 # Work queue
 
-563 items; claim with `tools/claim.py next <group> [--stage N]`.
+560 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (560)
+## Stage 1: nodes to split (557)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -20,11 +20,8 @@
 | `lem-sp-truncation-couple-exact` | 4 | none |
 | `def-weil-pbc-scheme-conventions` | 1001 | none |
 | `prop-weil-pbc-reduction-to-projective-line` | 1002 | none |
-| `lem-weil-pbc-projective-embedding` | 1003 | none |
 | `lem-weil-pbc-reduction-projective-space` | 1003 | none |
 | `lemma-weil-pbc-cancellation` | 1003 | none |
-| `lemma-weil-pbc-composition` | 1003 | none |
-| `lemma-weil-pbc-symmetric-product-p1` | 1003 | none |
 | `lemma-weil-pbc-target-locality` | 1003 | none |
 | `prop-weil-pbc-composition-stability` | 1003 | none |
 | `prop-weil-pbc-projective-line` | 1003 | none |
@@ -262,11 +259,11 @@
 | `lem-sc-ext-locally-free` | 3014 | none |
 | `lem-sc-four-lemma` | 3014 | none |
 | `lem-sc-p1-graded-resolution` | 3014 | none |
+| `lem-weil-pbc-closed-immersion-proper` | 4003 | none |
 | `lem-weil-pbc-proper-base-change` | 4003 | none |
 | `lem-weil-pbc-proper-composition` | 4003 | none |
 | `lem-weil-pbc-proper-to-separated` | 4003 | none |
 | `lem-weil-pbc-closed-immersion-products` | 4004 | none |
-| `lem-weil-pbc-closed-immersion-proper` | 4004 | none |
 | `lem-weil-pbc-proper-closed-image` | 4004 | none |
 | `lem-weil-pbc-surjective-nonempty-fibres` | 4005 | none |
 | `lem-sc-affine-open-proper` | 4008 | none |
@@ -387,7 +384,6 @@
 | `def-sp-abelian` | 6003 | none |
 | `def-sp-filtration` | 6003 | none |
 | `def-sp-truncation-couple` | 6003 | none |
-| `cor-pqf-proper-quasifinite-finite` | 6004 | none |
 | `def-sp-grothendieck-abelian` | 6004 | none |
 | `def-sp-image-filtration` | 6004 | none |
 | `def-sp-injective-resolutions` | 6004 | none |
@@ -398,46 +394,47 @@
 | `def-sp-composite-acyclicity` | 6005 | none |
 | `lem-sp-derived-well-defined` | 6005 | none |
 | `lem-sp-long-exact-of-triangle` | 6005 | none |
-| `pqf-lem-proper-basic` | 6005 | none |
-| `pqf-lem-qf-finitefibres` | 6005 | none |
-| `thm-pqf-finite-iff-proper-finite-fibres` | 6005 | none |
 | `thm-sp-grothendieck` | 6005 | none |
 | `thm-sp-if-e1` | 6005 | none |
 | `def-sp-double-complex-total` | 6006 | none |
 | `def-sp-homological-functor` | 6006 | none |
 | `lem-sp-edge-collapse` | 6006 | none |
 | `lem-sp-grothendieck-enough-injectives` | 6006 | none |
-| `lem-weil-pbc-finite-proper` | 6006 | none |
-| `pqf-lem-affine-vanishing` | 6006 | none |
-| `pqf-lem-coherent-ft-locnoeth` | 6006 | none |
-| `pqf-lem-fff-vanishing` | 6006 | none |
-| `pqf-lem-finite-qf` | 6006 | none |
-| `pqf-lem-integral-lft-finite` | 6006 | none |
-| `pqf-lem-integral-univclosed` | 6006 | none |
-| `pqf-lem-leray` | 6006 | none |
-| `pqf-lem-leray-lowdegree` | 6006 | none |
-| `pqf-lem-locnoeth-lft` | 6006 | none |
-| `pqf-lem-pushforward-qcoh` | 6006 | none |
-| `pqf-lem-serre-criterion` | 6006 | none |
-| `pqf-lem-sheaf-zero-stalks` | 6006 | none |
 | `thm-sp-double-complex-spectral-sequences` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `def-sp-spectral-sequence` | 6007 | none |
 | `lem-sp-page-induction` | 6007 | none |
-| `pqf-def-coherent` | 6007 | none |
-| `pqf-def-cohomology` | 6007 | none |
-| `pqf-lem-associated-sections-localize` | 6007 | none |
-| `pqf-lem-finite-integral-lft` | 6007 | none |
-| `pqf-lem-lying-over` | 6007 | none |
+| `lem-weil-pbc-finite-proper` | 6007 | none |
+| `pqf-lem-finite-integral-lft` | 6008 | none |
 | `lem-sc-cech-spectral` | 6009 | sorry_here |
 | `lem-sc-divisor-exact-sequence` | 6009 | none |
+| `thm-pqf-finite-iff-proper-finite-fibres` | 6009 | none |
 | `lem-pc-cech-exact` | 6010 | none |
 | `lem-sc-ample-positive-degree` | 6010 | rests_on_sorry |
 | `lem-sc-divisor-sequence-general` | 6010 | rests_on_sorry |
 | `lem-sc-rigidity` | 6010 | rests_on_sorry |
+| `pqf-lem-affine-vanishing` | 6010 | none |
+| `pqf-lem-coherent-ft-locnoeth` | 6010 | none |
+| `pqf-lem-fff-vanishing` | 6010 | none |
+| `pqf-lem-finite-qf` | 6010 | none |
+| `pqf-lem-integral-lft-finite` | 6010 | none |
+| `pqf-lem-integral-univclosed` | 6010 | none |
+| `pqf-lem-leray` | 6010 | none |
+| `pqf-lem-leray-lowdegree` | 6010 | none |
+| `pqf-lem-locnoeth-lft` | 6010 | none |
+| `pqf-lem-proper-basic` | 6010 | none |
+| `pqf-lem-pushforward-qcoh` | 6010 | none |
+| `pqf-lem-qf-finitefibres` | 6010 | none |
+| `pqf-lem-serre-criterion` | 6010 | none |
+| `pqf-lem-sheaf-zero-stalks` | 6010 | none |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-serre-vanishing` | 6011 | rests_on_sorry |
 | `lem-sc-abelian-variety-characterization` | 6011 | none |
+| `pqf-def-coherent` | 6011 | none |
+| `pqf-def-cohomology` | 6011 | none |
+| `pqf-lem-associated-sections-localize` | 6011 | none |
+| `pqf-lem-lying-over` | 6011 | none |
+| `cor-pqf-proper-quasifinite-finite` | 6012 | none |
 | `def-pc-projective-space-twist` | 6012 | none |
 | `def-pc-zero-scheme` | 6012 | none |
 | `lem-pc-affine-morphism-hi` | 6012 | none |
@@ -463,16 +460,9 @@
 | `lemma-nagata-final-noetherian-base-system` | - | none |
 | `def-nagata-finite-presentation-descent` | - | none |
 | `def-nagata-glued-limit-comparison` | - | none |
-| `pqf-def-affine-morphism` | - | none |
-| `pqf-def-quasifinite` | - | none |
-| `pqf-lem-affine-local-target` | - | none |
-| `pqf-lem-qf-locqf-qc` | - | none |
-| `thm-pqf-zmt-factorization` | - | none |
 | `def-nagata-relative-gluing-valid-stage` | - | none |
 | `def-weil-pbc-eight-curve-assertions` | - | none |
 | `lem-pc-kbar-pure-insep` | - | none |
-| `pqf-def-locnoeth` | - | none |
-| `thm-pqf-immersion-descent` | - | none |
 | `def-nagata-directed-finite-upper-bound` | - | none |
 | `def-nagata-morphism-equality-stage` | - | none |
 | `def-nagata-qc-open-equality-stage` | - | none |
@@ -488,10 +478,6 @@
 | `def-weil-pbc-C8` | - | none |
 | `lem-pc-sepclosed-finite-sep-trivial` | - | none |
 | `lemma-nagata-filtered-colimit-finite-data` | - | none |
-| `pqf-lem-finite-fp-locnoeth` | - | none |
-| `pqf-lem-limit-immersion-descends` | - | none |
-| `pqf-lem-limit-qc-open-descends` | - | none |
-| `pqf-lem-qs-intersection-qc` | - | none |
 | `thm-sc-affine-cohomology` | - | none |
 | `thm-sc-constant-invariance` | - | none |
 | `def-nagata-affine-fp-descent` | - | none |
@@ -511,7 +497,6 @@
 | `lemma-nagata-directed-finite-upper-bound` | - | none |
 | `lemma-nagata-morphism-descends` | - | none |
 | `lemma-nagata-qc-open-descends` | - | none |
-| `pqf-lem-affine-open-locnoeth` | - | none |
 | `def-nagata-basechanged-system` | - | none |
 | `lem-sc-affine-generic-second` | - | none |
 | `lem-sc-divisible-quotient-torsion` | - | none |
@@ -521,6 +506,10 @@
 | `lem-pc-k-sheaf` | - | rests_on_sorry |
 | `lem-sc-affine-constant-second` | - | none |
 | `lem-sc-finite-extension-affine-model` | - | none |
+| `pqf-def-affine-morphism` | - | none |
+| `pqf-def-locnoeth` | - | none |
+| `pqf-def-quasifinite` | - | none |
+| `pqf-lem-affine-local-target` | - | none |
 | `cor-pc-dense-points-curves-sections` | - | none |
 | `def-fin-normalization-extension` | - | none |
 | `def-pc-derived-category` | - | none |
@@ -553,6 +542,8 @@
 | `lem-sc-p1-hi-vanishing` | - | none |
 | `lem-weil-pbc-flat-lfp-open` | - | none |
 | `lem-weil-pbc-noetherian-finite-components` | - | none |
+| `pqf-lem-qf-locqf-qc` | - | none |
+| `thm-pqf-zmt-factorization` | - | none |
 | `def-pc-linear-pair-morphism` | - | none |
 | `lem-pc-hilb-functorial` | - | none |
 | `lem-pc-linear-pair-morphism-finite` | - | none |
@@ -562,10 +553,16 @@
 | `lem-pc-projective-space-coherent-finiteness` | - | none |
 | `lem-sc-p1-monomial` | - | none |
 | `lem-sc-p1-twist-exists` | - | none |
+| `thm-pqf-immersion-descent` | - | none |
 | `def-pc-standard-graded-algebra` | - | none |
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `lem-sc-p1-twist-sections` | - | none |
+| `pqf-lem-finite-fp-locnoeth` | - | none |
+| `pqf-lem-limit-immersion-descends` | - | none |
+| `pqf-lem-limit-qc-open-descends` | - | none |
+| `pqf-lem-qs-intersection-qc` | - | none |
+| `pqf-lem-affine-open-locnoeth` | - | none |
 
 ## Stage 2: nodes to state (3)
 
@@ -575,7 +572,7 @@
 | `def-pc-kflat-complex` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
 
-Not open yet: 574 nodes that wait for stage 1, 10 nodes that wait for a statement dependency.
+Not open yet: 577 nodes that wait for stage 1, 11 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
