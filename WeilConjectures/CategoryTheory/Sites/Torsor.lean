@@ -146,6 +146,48 @@ def trivial : Torsor G where
   bijective_vadd U t := (Equiv.addRight (show G.obj.obj U from t)).bijective
   nonemptySieve_mem U := J.superset_covering (fun _ _ _ ↦ ⟨(0 : G.obj.obj _)⟩) (J.top_mem U)
 
+section OfIso
+
+variable {G' : Sheaf J AddCommGrpCat.{w}} (e : G ≅ G')
+
+/-- A `G`-torsor, as a torsor under an isomorphic abelian sheaf `G'`: the same sheaf of sets,
+on which `a : G'` acts as `e⁻¹ a`. -/
+def ofIso (P : Torsor G) : Torsor G' where
+  sheaf := P.sheaf
+  vadd U a x := P.vadd U (e.inv.hom.app U a) x
+  zero_vadd U x := by rw [map_zero, P.zero_vadd]
+  add_vadd U a b x := by rw [map_add, P.add_vadd]
+  map_vadd f a x := by
+    rw [P.map_vadd, ← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
+      e.inv.hom.naturality]
+  bijective_vadd U x := by
+    have : IsIso (e.inv.hom.app U) := inferInstance
+    exact (P.bijective_vadd U x).comp (ConcreteCategory.bijective_of_isIso _)
+  nonemptySieve_mem := P.nonemptySieve_mem
+
+@[simp]
+lemma ofIso_sheaf (P : Torsor G) : (ofIso e P).sheaf = P.sheaf := rfl
+
+lemma ofIso_vadd (P : Torsor G) (U : Cᵒᵖ) (a : G'.obj.obj U) (x : P.sheaf.obj.obj U) :
+    (ofIso e P).vadd U a x = P.vadd U (e.inv.hom.app U a) x := rfl
+
+/-- Transport along `e` preserves and reflects isomorphism of torsors. -/
+lemma ofIso_equiv_ofIso_iff {P P' : Torsor G} : ofIso e P ≈ ofIso e P' ↔ P ≈ P' := by
+  constructor
+  · rintro ⟨φ⟩
+    refine ⟨⟨φ.iso, fun U a x ↦ ?_⟩⟩
+    have h := φ.map_vadd U (e.hom.hom.app U a) x
+    have he : e.inv.hom.app U (e.hom.hom.app U a) = a := by
+      change ((sheafSections J AddCommGrpCat.{w}).obj U).map (e.hom ≫ e.inv) a = a
+      rw [e.hom_inv_id, Functor.map_id]
+      rfl
+    simp only [ofIso_vadd, he] at h
+    exact h
+  · rintro ⟨φ⟩
+    exact ⟨⟨φ.iso, fun U a x ↦ φ.map_vadd U _ x⟩⟩
+
+end OfIso
+
 end Torsor
 
 section ShortExact
