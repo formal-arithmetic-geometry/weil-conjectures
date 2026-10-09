@@ -22,10 +22,9 @@ On sections over an étale `R`-scheme `W` it is the pullback of sections of `G|_
 For a cofiltered system `(Dⱼ)` of quasi-compact quasi-separated schemes over `R` with affine
 transition maps and limit `X`, the comparison maps exhibit the sections of the pullback of `G`
 over `W ×_R X` as the colimit of the sections over the `W ×_R Dⱼ`, for `W` quasi-compact and
-quasi-separated (`AlgebraicGeometry.Etale.unitComparison_app_surjective_of_isLimit` and
-`AlgebraicGeometry.Etale.exists_unitComparison_app_eq_zero_of_isLimit`). This is blueprint
-`lem-weil-pbc-etale-section-continuity`, which belongs to the subsection `sk-prop-h2`; its proof
-is not formalised here.
+quasi-separated (`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`). This is
+blueprint `lem-weil-pbc-etale-section-continuity`, which belongs to the subsection
+`sk-prop-h2`; its proof is not formalised here.
 -/
 
 @[expose] public section
@@ -72,12 +71,34 @@ variable {J : Type u} [SmallCategory J] [IsCofiltered J] (D : J ⥤ Scheme.{u})
   (π : D ⟶ (Functor.const J).obj R) (c : Cone D) (P : c.pt ⟶ R)
   (hP : ∀ j, P = c.π.app j ≫ π.app j)
 
-/-- **Continuity of sections at an inverse limit, surjectivity.** Let `(Dⱼ)` be a cofiltered
-system of quasi-compact quasi-separated schemes over `R` with affine transition maps, with limit
-`X`, and `G` an abelian étale sheaf on `R`. Every section of the pullback of `G` over
-`W ×_R X`, for `W` a quasi-compact quasi-separated étale `R`-scheme, comes from a section of the
-pullback of `G` over `W ×_R Dⱼ` for some `j`.
+/-- **Continuity of sections at an inverse limit.** Let `(Dⱼ)` be a cofiltered system of
+quasi-compact quasi-separated schemes over `R` with affine transition maps, with limit `X`, let
+`G` be an abelian étale sheaf on `R` and `W` a quasi-compact quasi-separated étale `R`-scheme.
+Then the sections of the pullback of `G` over `W ×_R X` are the filtered colimit of the sections
+of the pullbacks of `G` over the `W ×_R Dⱼ`: every section over `W ×_R X` comes from some
+`W ×_R Dⱼ`, and a section over `W ×_R Dⱼ` which vanishes on `W ×_R X` already vanishes on some
+`W ×_R Dⱼ'`, `j' ⟶ j`. The sections of the pullback of `G` over `W ×_R Dⱼ` are written as the
+sections of `πⱼ_* πⱼ^* G` over `W`, and the transition maps are
+`AlgebraicGeometry.Etale.unitComparison`.
 (blueprint: `lem-weil-pbc-etale-section-continuity`) -/
+theorem unitComparison_app_isColimit_of_isLimit [∀ j, CompactSpace (D.obj j)]
+    [∀ j, QuasiSeparatedSpace (D.obj j)] [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]
+    (hc : IsLimit c) (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) (W : R.Etale)
+    [CompactSpace W.left] [QuasiSeparatedSpace W.left] :
+    (∀ t : ((P)_*[AddCommGrpCat.{u + 1}].obj
+        ((P)^*[AddCommGrpCat.{u + 1}].obj G)).obj.obj (op W),
+      ∃ (j : J) (s : ((π.app j)_*[AddCommGrpCat.{u + 1}].obj
+        ((π.app j)^*[AddCommGrpCat.{u + 1}].obj G)).obj.obj (op W)),
+        (unitComparison (c.π.app j) (π.app j) P (hP j) G).hom.app (op W) s = t) ∧
+    ∀ (j : J) (s : ((π.app j)_*[AddCommGrpCat.{u + 1}].obj
+        ((π.app j)^*[AddCommGrpCat.{u + 1}].obj G)).obj.obj (op W)),
+      (unitComparison (c.π.app j) (π.app j) P (hP j) G).hom.app (op W) s = 0 →
+        ∃ (j' : J) (f : j' ⟶ j), (unitComparison (D.map f) (π.app j) (π.app j')
+          (by simp) G).hom.app (op W) s = 0 :=
+  sorry
+
+/-- **Continuity of sections at an inverse limit, surjectivity**: the first half of
+`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`. -/
 theorem unitComparison_app_surjective_of_isLimit [∀ j, CompactSpace (D.obj j)]
     [∀ j, QuasiSeparatedSpace (D.obj j)] [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]
     (hc : IsLimit c) (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) (W : R.Etale)
@@ -86,13 +107,10 @@ theorem unitComparison_app_surjective_of_isLimit [∀ j, CompactSpace (D.obj j)]
     ∃ (j : J) (s : ((π.app j)_*[AddCommGrpCat.{u + 1}].obj
       ((π.app j)^*[AddCommGrpCat.{u + 1}].obj G)).obj.obj (op W)),
       (unitComparison (c.π.app j) (π.app j) P (hP j) G).hom.app (op W) s = t :=
-  sorry
+  (unitComparison_app_isColimit_of_isLimit D π c P hP hc G W).1 t
 
-/-- **Continuity of sections at an inverse limit, injectivity.** In the situation of
-`AlgebraicGeometry.Etale.unitComparison_app_surjective_of_isLimit`, a section of the pullback of
-`G` over `W ×_R Dⱼ` which vanishes on `W ×_R X` already vanishes on `W ×_R Dⱼ'` for some
-`j' ⟶ j`.
-(blueprint: `lem-weil-pbc-etale-section-continuity`) -/
+/-- **Continuity of sections at an inverse limit, injectivity**: the second half of
+`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`. -/
 theorem exists_unitComparison_app_eq_zero_of_isLimit [∀ j, CompactSpace (D.obj j)]
     [∀ j, QuasiSeparatedSpace (D.obj j)] [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]
     (hc : IsLimit c) (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) (W : R.Etale)
@@ -102,7 +120,7 @@ theorem exists_unitComparison_app_eq_zero_of_isLimit [∀ j, CompactSpace (D.obj
     (hs : (unitComparison (c.π.app j) (π.app j) P (hP j) G).hom.app (op W) s = 0) :
     ∃ (j' : J) (f : j' ⟶ j), (unitComparison (D.map f) (π.app j) (π.app j')
       (by simp) G).hom.app (op W) s = 0 :=
-  sorry
+  (unitComparison_app_isColimit_of_isLimit D π c P hP hc G W).2 j s hs
 
 end Etale
 

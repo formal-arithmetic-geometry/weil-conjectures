@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Sites.EpiMono
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 public import WeilConjectures.AlgebraicGeometry.FunctionFieldLimit
@@ -87,20 +88,24 @@ lemma Etale.mem_smallEtaleTopology_of_forall_isAffine {V : X.Etale} (R : Sieve V
 
 end Sections
 
-/-- For an adjunction whose counit is an isomorphism at `L X`, the image of the unit at `X`
-under `L ⋙ R` is the unit at `R (L X)`. -/
-lemma Adjunction.map_map_unit_app_eq {C D : Type*} [Category C] [Category D] {L : C ⥤ D}
-    {R : D ⥤ C} (adj : L ⊣ R) (X : C) [IsIso (adj.counit.app (L.obj X))] :
-    R.map (L.map (adj.unit.app X)) = adj.unit.app (R.obj (L.obj X)) := by
-  rw [← cancel_mono (R.map (adj.counit.app (L.obj X)))]
-  simp [← R.map_comp]
-
 namespace Scheme
 
 variable {X : Scheme.{u}} [IsIntegral X]
 
 instance (U : X.NonemptyAffineOpens) : IsOpenImmersion (X.affineOpensDiagramι.app U) :=
   inferInstanceAs (IsOpenImmersion U.2.1.fromSpec)
+
+instance (U : X.NonemptyAffineOpens) : IsAffine (X.affineOpensDiagram.obj U) :=
+  inferInstanceAs (IsAffine (Spec Γ(X, U.1)))
+
+instance (U : X.NonemptyAffineOpens) : CompactSpace (X.affineOpensDiagram.obj U) :=
+  inferInstanceAs (CompactSpace (Spec Γ(X, U.1)))
+
+instance (U : X.NonemptyAffineOpens) : QuasiSeparatedSpace (X.affineOpensDiagram.obj U) :=
+  inferInstanceAs (QuasiSeparatedSpace (Spec Γ(X, U.1)))
+
+instance {U V : X.NonemptyAffineOpens} (f : U ⟶ V) : IsAffineHom (X.affineOpensDiagram.map f) :=
+  isAffineHom_of_isAffine _
 
 /-- The unit `G ⟶ j_* j^* G` of the open immersion `j : Spec Γ(X, U) ⟶ X` of a nonempty affine
 open `U`. -/
@@ -186,7 +191,8 @@ theorem subsingleton_H_of_genericVanishing
     let α : Dg ⟶ (Functor.const _).obj G := { app U := kernel.ι _ }
     have : Mono α := NatTrans.mono_of_mono_app _
     have : Mono (colim.map α) := inferInstance
-    let e := (colimit.isColimit ((Functor.const C.NonemptyAffineOpensᵒᵖ).obj G)).coconePointUniqueUpToIso
+    let e := (colimit.isColimit
+      ((Functor.const C.NonemptyAffineOpensᵒᵖ).obj G)).coconePointUniqueUpToIso
       (isColimitConstCocone C.NonemptyAffineOpensᵒᵖ G)
     have : φ = colim.map α ≫ e.hom := by
       refine colimit.hom_ext fun U ↦ ?_
@@ -200,7 +206,8 @@ theorem subsingleton_H_of_genericVanishing
       rintro W g ⟨U, hU⟩
       obtain ⟨t, ht⟩ := Etale.exists_kernel_ι_app_eq _ _ hU
       refine ⟨(colimit.ι Dg (op U)).hom.app (op W) t, ?_⟩
-      rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app, ← ObjectProperty.FullSubcategory.comp_hom,
+      rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+        ← ObjectProperty.FullSubcategory.comp_hom,
         colimit.ι_desc]
       exact ht
     exact Sheaf.epi_of_isLocallySurjective _
@@ -237,6 +244,93 @@ theorem subsingleton_H_of_genericVanishing
   obtain ⟨U, y, rfl⟩ := ((Scheme.H_map_isColimit_of_isFiltered C hcG (i + 1)).1 x)
   have := hK U.unop
   rw [Subsingleton.elim y 0, map_zero]
+
+include f in
+/-- **Generic replacement.** Let `C` be an integral curve over an algebraically closed field,
+with generic point `η : Spec k(C) ⟶ C`. For every abelian étale sheaf `F` on `C` the unit
+`F ⟶ η_* η^* F` induces bijections `Hᵠ(C, F) → Hᵠ(C, η_* η^* F)` for `q ≥ 2`: its kernel and
+cokernel have generically vanishing sections by continuity of sections at the limit
+`Spec k(C) = lim_U Spec Γ(C, U)`, hence are acyclic. -/
+theorem bijective_H_map_unit_fromSpecFunctionField
+    (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) :
+    Function.Bijective (Sheaf.H.map ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+      C.fromSpecFunctionField).unit.app F) (n + 2)) := by
+  let ε := (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+    C.fromSpecFunctionField).unit.app F
+  let D := C.affineOpensDiagram
+  let ι := C.affineOpensDiagramι
+  let c := C.functionFieldCone
+  have hc : IsLimit c := C.isLimitFunctionFieldCone
+  have hP := C.fromSpecFunctionField_eq_functionFieldCone_comp
+  -- the comparison maps to `η_* η^* F`
+  let τ (U : C.NonemptyAffineOpens) := Etale.unitComparison (c.π.app U) (ι.app U)
+    C.fromSpecFunctionField (hP U) F
+  have hτ (U : C.NonemptyAffineOpens) : C.affineOpenUnit U F ≫ τ U = ε :=
+    Etale.unit_app_comp_unitComparison _ _ _ _ F
+  refine Sheaf.H.bijective_map_of_subsingleton ε (fun i ↦ ?_) (fun i ↦ ?_) n
+  · -- the kernel
+    refine subsingleton_H_of_genericVanishing f _ (fun V s ↦ ?_) i
+    refine Etale.mem_smallEtaleTopology_of_forall_isAffine _ fun W g hW ↦ ?_
+    let x := (kernel.ι ε).hom.app (op W) ((kernel ε).obj.map g.op s)
+    have hx : ε.hom.app (op W) x = 0 := by
+      change (kernel.ι ε ≫ ε).hom.app (op W) _ = 0
+      rw [kernel.condition]
+      rfl
+    let U₀ : C.NonemptyAffineOpens := Classical.arbitrary _
+    have h₀ : (τ U₀).hom.app (op W) ((C.affineOpenUnit U₀ F).hom.app (op W) x) = 0 := by
+      rw [← hτ U₀] at hx
+      exact hx
+    obtain ⟨U, f', hU⟩ := Etale.exists_unitComparison_app_eq_zero_of_isLimit D ι c
+      C.fromSpecFunctionField hP hc F W U₀ _ h₀
+    refine ⟨U, ?_⟩
+    have hxU : (C.affineOpenUnit U F).hom.app (op W) x = 0 := by
+      rw [← C.affineOpenUnit_comp_transition f' F]
+      exact hU
+    let A := (ι.app U)^*[AddCommGrpCat.{u + 1}] ⋙ (ι.app U)_*[AddCommGrpCat.{u + 1}]
+    have : Mono (A.map (kernel.ι ε)) := inferInstance
+    refine Etale.injective_app_of_mono (A.map (kernel.ι ε)) W ?_
+    rw [map_zero]
+    have := (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (ι.app U)).unit.naturality
+      (kernel.ι ε)
+    change ((C.affineOpenUnit U (kernel ε) ≫ A.map (kernel.ι ε)).hom.app (op W)) _ = 0
+    rw [← this]
+    exact hxU
+  · -- the cokernel
+    refine subsingleton_H_of_genericVanishing f _ (fun V t ↦ ?_) i
+    let π := cokernel.π ε
+    have : Sheaf.IsLocallySurjective π :=
+      (Sheaf.isLocallySurjective_iff_epi' (φ := π)).2 inferInstance
+    refine C.smallEtaleTopology.transitive (Presheaf.imageSieve_mem _ π.hom t) _
+      fun W g ⟨ta, hta⟩ ↦ ?_
+    refine Etale.mem_smallEtaleTopology_of_forall_isAffine _ fun W' h hW' ↦ ?_
+    let E := (C.fromSpecFunctionField)_*[AddCommGrpCat.{u + 1}].obj
+      ((C.fromSpecFunctionField)^*[AddCommGrpCat.{u + 1}].obj F)
+    obtain ⟨U, s, hs⟩ := Etale.unitComparison_app_surjective_of_isLimit D ι c
+      C.fromSpecFunctionField hP hc F W' (E.obj.map h.op ta)
+    refine ⟨U, ?_⟩
+    let adj := Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (ι.app U)
+    let A := (ι.app U)^*[AddCommGrpCat.{u + 1}] ⋙ (ι.app U)_*[AddCommGrpCat.{u + 1}]
+    -- the morphism identity `τ ≫ π ≫ u = 0`
+    have key : τ U ≫ π ≫ adj.unit.app (cokernel ε) = 0 := by
+      have h₁ : π ≫ adj.unit.app (cokernel ε) = adj.unit.app E ≫ A.map π :=
+        adj.unit.naturality π
+      have h₂ : τ U ≫ adj.unit.app E = adj.unit.app (A.obj F) ≫ A.map (τ U) :=
+        adj.unit.naturality (τ U)
+      have h₃ : adj.unit.app (A.obj F) = A.map (adj.unit.app F) :=
+        (CategoryTheory.Adjunction.map_map_unit_app_eq adj F).symm
+      have h₄ : adj.unit.app F ≫ τ U ≫ π = 0 := by
+        rw [← Category.assoc]
+        exact (congrArg (· ≫ π) (hτ U)).trans (cokernel.condition ε)
+      rw [h₁, ← Category.assoc, h₂, h₃, Category.assoc, ← A.map_comp, ← A.map_comp, h₄,
+        A.map_zero]
+    change (C.affineOpenUnit U (cokernel ε)).hom.app (op W')
+      ((cokernel ε).obj.map (h ≫ g).op t) = 0
+    rw [op_comp, Functor.map_comp, ConcreteCategory.comp_apply, ← hta]
+    erw [← NatTrans.naturality_apply π.hom h.op ta]
+    erw [← hs]
+    change ((τ U ≫ π ≫ adj.unit.app (cokernel ε)).hom.app (op W')) s = 0
+    rw [key]
+    rfl
 
 end IsCurve
 

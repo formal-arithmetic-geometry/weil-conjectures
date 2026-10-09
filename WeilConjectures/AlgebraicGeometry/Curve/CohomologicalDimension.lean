@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.Affine
+public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
@@ -314,11 +315,13 @@ many closed points and have no cohomology in positive degrees.
 (blueprint: `lem-sc-generic-cohomology-comparison`) -/
 theorem isIso_functorH_map_unit_fromSpecFunctionField (f : C ⟶ Spec (.of k)) [IsCurve f]
     [Smooth f] [IsIntegral C] (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (hF : F.IsTorsion) (q : ℕ) (hq : 2 ≤ q) :
+    (_hF : F.IsTorsion) (q : ℕ) (hq : 2 ≤ q) :
     IsIso ((Sheaf.functorH _ q).map
       ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
-        C.fromSpecFunctionField).unit.app F)) :=
-  sorry
+        C.fromSpecFunctionField).unit.app F)) := by
+  obtain ⟨n, rfl⟩ := Nat.exists_eq_add_of_le' hq
+  exact (ConcreteCategory.isIso_iff_bijective _).2
+    (bijective_H_map_unit_fromSpecFunctionField f F n)
 
 /-- **Reduction to smooth connected curves.** Let `C` be an affine curve over an algebraically
 closed field `k`. If `H²(C', F') = 0` for every smooth affine connected curve `C'` over `k` and
