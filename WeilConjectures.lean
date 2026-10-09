@@ -164,6 +164,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceSection
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceSections
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitExists
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitNeighborhood
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
 public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
