@@ -163,3 +163,87 @@ theorem exists_isImmersion {S : Scheme.{u}} [IsAffine S] (g : X ⟶ S) [LocallyO
       simp only [s, σ, Sum.elim_inr, (hσ' ⟨i, μ⟩).1]
 
 end AlgebraicGeometry.Scheme.CoordinateCover
+
+namespace AlgebraicGeometry
+
+attribute [local instance] MvPolynomial.gradedAlgebra
+
+/-- The preimage under an immersion `j` of an affine open contained in the open `j.coborderRange`
+(in which the image of `j` is closed) is affine. -/
+lemma Scheme.Hom.isAffineOpen_preimage_of_le_coborderRange {X Y : Scheme.{u}} (j : X ⟶ Y)
+    [IsImmersion j] {V : Y.Opens} (hV : IsAffineOpen V) (hle : V ≤ j.coborderRange) :
+    IsAffineOpen (j ⁻¹ᵁ V) := by
+  have h := (hV.preimage_of_isOpenImmersion j.coborderRange.ι
+    (by rwa [Scheme.Opens.opensRange_ι])).preimage j.liftCoborder
+  rwa [← Scheme.Hom.comp_preimage, Scheme.Hom.liftCoborder_ι] at h
+
+/-- **An immersion into projective space can be replaced by a morphism with affine preimages of
+the standard opens.** Let `j : X ⟶ ℙ(α; S)` be a quasi-compact immersion over an affine scheme
+`S`, with `X` quasi-compact and quasi-separated. Then there is a morphism `ψ : X ⟶ ℙ(β; S)` over
+`S`, with `β` finite, such that the preimage of every standard open `D₊(T_b)` is affine; i.e. the
+pullback of `𝒪(1)` along `j` is ample (EGA II, 4.5.2).
+
+The morphism is given by sections `σ` of `j^* 𝒪(N)` whose non-vanishing loci are the preimages
+of basic opens `D(r) ⊆ D₊(Tᵢ)` contained in the open in which `j(X)` is closed; such sections
+exist by the extension lemma `AlgebraicGeometry.Scheme.CoordinateCover.exists_section`. -/
+theorem exists_isAffineOpen_preimage_of_isImmersion {X S : Scheme.{u}} [IsAffine S]
+    {α : Type u} [Finite α] (j : X ⟶ ℙ(α; S)) [IsImmersion j] [QuasiCompact j] [CompactSpace X]
+    [QuasiSeparatedSpace X] :
+    ∃ (β : Type u) (_ : Finite β) (ψ : X ⟶ ℙ(β; S)),
+      ψ ≫ ℙ(β; S) ↘ S = j ≫ ℙ(α; S) ↘ S ∧
+        ∀ b, IsAffineOpen (ψ ⁻¹ᵁ ProjectiveSpace.standardOpen β S b) := by
+  classical
+  let ρ := j ≫ ProjectiveSpace.toProjInt α S
+  have hX (i : α) : MvPolynomial.X i ∈
+      MvPolynomial.homogeneousSubmodule α (ULift.{u} ℤ) 1 :=
+    MvPolynomial.X_mem_homogeneousSubmodule_one _ i
+  have hpre (i : α) : ρ ⁻¹ᵁ Proj.basicOpen (MvPolynomial.homogeneousSubmodule α (ULift.{u} ℤ))
+      (MvPolynomial.X i) = j ⁻¹ᵁ ProjectiveSpace.standardOpen α S i := rfl
+  have hcov : ⨆ i, ρ ⁻¹ᵁ Proj.basicOpen (MvPolynomial.homogeneousSubmodule α (ULift.{u} ℤ))
+      (MvPolynomial.X i) = ⊤ := by
+    simp only [hpre]
+    rw [← Scheme.Hom.preimage_iSup, ProjectiveSpace.iSup_standardOpen, Scheme.Hom.preimage_top]
+  let 𝒟 := Scheme.CoordinateCover.ofProj _ ρ one_pos _ hX hcov
+  have hU (i : α) : IsCompact (𝒟.U i : Set X) :=
+    QuasiCompact.isCompact_preimage (f := j) _ (ProjectiveSpace.standardOpen α S i).2
+      (ProjectiveSpace.isAffineOpen_standardOpen α S i).isCompact
+  have hU' (i : α) : IsQuasiSeparated (𝒟.U i : Set X) := .of_quasiSeparatedSpace _
+  -- around every point, a basic open of a chart inside the open in which `j(X)` is closed
+  have key (x : X) : ∃ (i : α) (r : Γ(ℙ(α; S), ProjectiveSpace.standardOpen α S i)),
+      x ∈ j ⁻¹ᵁ ℙ(α; S).basicOpen r ∧ ℙ(α; S).basicOpen r ≤ j.coborderRange := by
+    obtain ⟨i, hi⟩ := Opens.mem_iSup.mp (hcov.ge (Set.mem_univ x))
+    obtain ⟨r, hr, hrO⟩ :=
+      (ProjectiveSpace.isAffineOpen_standardOpen α S i).exists_basicOpen_le_of_finite
+      (inf_le_left : ProjectiveSpace.standardOpen α S i ⊓ j.coborderRange ≤ _)
+      (Set.finite_singleton (j x)) (by
+        rw [Set.singleton_subset_iff]
+        exact ⟨hi, subset_coborder ⟨x, rfl⟩⟩)
+    exact ⟨i, r, hr rfl, hrO.trans inf_le_right⟩
+  choose i r hxr hrO using key
+  have hext (x : X) := 𝒟.exists_section hU hU' (i x) (j.app _ (r x))
+  choose N₀ hN₀ using hext
+  obtain ⟨t, ht⟩ := CompactSpace.elim_nhds_subcover
+    (fun x ↦ (j ⁻¹ᵁ ℙ(α; S).basicOpen (r x) : Set X))
+    fun x ↦ (j ⁻¹ᵁ ℙ(α; S).basicOpen (r x)).isOpen.mem_nhds (hxr x)
+  set N := t.sup N₀
+  have hσ (x : t) := hN₀ x N (Finset.le_sup x.2)
+  choose σ hσs hσU using hσ
+  have hnv (x : t) : (σ x).nonvanishing = j ⁻¹ᵁ ℙ(α; S).basicOpen (r x) := by
+    rw [Scheme.CoordinateCover.nonvanishing_eq_basicOpen σ (fun x ↦ i x) hσU, hσs,
+      Scheme.preimage_basicOpen]
+  have hcov' : ⨆ x : t, (σ x).nonvanishing = ⊤ := by
+    refine top_le_iff.mp fun y _ ↦ ?_
+    obtain ⟨x, hx, hy⟩ := Set.mem_iUnion₂.mp (ht.ge (Set.mem_univ y))
+    exact Opens.mem_iSup.mpr ⟨⟨x, hx⟩, by rw [hnv]; exact hy⟩
+  let 𝒟' := Scheme.CoordinateCover.ofSections σ (fun x ↦ i x) hσU hcov'
+  have hgen (a : t) : Ideal.span (Set.range fun b ↦ (𝒟'.coordPow b 1).s a) = ⊤ :=
+    Ideal.eq_top_of_isUnit_mem _ (Ideal.subset_span ⟨a, rfl⟩) (by simp [𝒟'.ratio_self])
+  refine ⟨t, inferInstance, Scheme.CoordinateCover.hom _ hgen (j ≫ ℙ(α; S) ↘ S), by simp,
+    fun b ↦ ?_⟩
+  rw [Scheme.CoordinateCover.preimage_hom_standardOpen,
+    Scheme.CoordinateCover.nonvanishing_coordPow _ _ one_pos,
+    Scheme.CoordinateCover.ofSections_U, hnv]
+  exact j.isAffineOpen_preimage_of_le_coborderRange
+    ((ProjectiveSpace.isAffineOpen_standardOpen α S _).basicOpen _) (hrO b)
+
+end AlgebraicGeometry
