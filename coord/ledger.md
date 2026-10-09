@@ -534,3 +534,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:05 UTC (2026-10-09) — Reviewed and committed def-weil-pbc-etale-shriek-base-change-map (definition; no new node).
 - 22:07 UTC (2026-10-09) — Reviewed and committed popescu-final-solve (07EU; 4 new nodes, 2 Mathlib leaves). STATE row.
 - 2026-10-10, delivery of F1: lem-weil-pbc-henselization-flat-quotients returned (f95d65a42): The report (head f95d65a4) lacks the heading '## Review by F1', the group's own review of the split, required by roles/remote-lead.md; the merge tool refuses it
+- 22:07 UTC (2026-10-09) — Returned F1 henselization-flat-quotients (head f95d65a4; no '## Review by F1'). Launched a worker on finite-unramified-one-point-closed (04DG).
