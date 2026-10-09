@@ -5,16 +5,86 @@
  "statement": "Let $k$ be a field and let $\\varphi:A\\to B$ be a homomorphism of $k$-algebras which is a smooth ring map [def-weil-pbc-smooth-ring-map]. Assume $A$ is Noetherian [def-weil-pbc-noetherian-ring] and geometrically regular over $k$ [def-weil-pbc-g-ring]. Then $B$ is Noetherian and geometrically regular over $k$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma Tag 07QF (lemma-geometrically-regular-goes-up, line 47187) and its proof (Lemma 00T4 base-change-smooth, Lemma 07NF regular-goes-up, with Lemma 0381 for finitely generated field extensions); Noetherianity of $B$: $B$ is of finite presentation over the Noetherian ring $A$ (Hilbert basis theorem), implicit in Stacks since Definition 0382 is for Noetherian algebras"
+  "place": "Lemma Tag 07QF (lemma-geometrically-regular-goes-up, line 47187) and its proof (Lemma 00T4 lemma-base-change-smooth, Lemma 07NF lemma-regular-goes-up); the Stacks proof runs over finitely generated field extensions (condition (1) of Lemma 0381), the definition here uses finite purely inseparable ones (condition (2)); Noetherianity of $B$: $B$ is of finite presentation over the Noetherian ring $A$ (Lemma 00FN, Hilbert basis theorem), implicit in Stacks since Definition 0382 is for Noetherian algebras"
  },
  "stmt_deps": [
   "def-weil-pbc-smooth-ring-map",
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-g-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "$B$ is Noetherian. Since $\\varphi$ is smooth, clause (i) of [def-weil-pbc-smooth-ring-map] gives $B\\cong A[x_1,\\dots,x_n]/(g_1,\\dots,g_m)$ as $A$-algebras; in particular $A\\to B$ is of finite type. As $A$ is Noetherian, $B$ is Noetherian by the Hilbert basis theorem [lem-weil-pbc-finite-type-algebra-noetherian]. (Stacks states 07QF without this clause because Definition 0382 is only made for Noetherian algebras; the Noetherianity is needed for $B$ to be a candidate for geometric regularity in [def-weil-pbc-g-ring].)",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00FN (lemma-Noetherian-permanence, line 5991), first sentence; implicit in Lemma Tag 07QF via Definition Tag 0382"
+   }
+  },
+  {
+   "text": "Fix a finite purely inseparable field extension $k'/k$ and put $A'=k'\\otimes_kA$. Since $A$ is geometrically regular over $k$, the ring $A'$ is a regular ring (Noetherian, all localizations at primes regular local), by the definition [def-weil-pbc-g-ring]. (Stacks lets $k'/k$ run over finitely generated field extensions, condition (1) of Lemma 0381; the definition used here is condition (2), finite purely inseparable extensions, which are finitely generated, and the argument is the same.)",
+   "uses": [
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 07QF (lemma-geometrically-regular-goes-up, line 47187) and its proof"
+   }
+  },
+  {
+   "text": "The ring map $\\mathrm{id}_{k'}\\otimes\\varphi:A'=k'\\otimes_kA\\to k'\\otimes_kB$ is smooth. By base change of smooth ring maps [lem-weil-pbc-smooth-ring-map-base-change-composition](1), applied to the smooth map $A\\to B$ and the ring map $A\\to A'$, $a\\mapsto1\\otimes a$, the map $A'\\to A'\\otimes_AB$, $x\\mapsto x\\otimes1$, is smooth. By [lem-weil-pbc-tensor-cancel-base-change] with $R=k$, $S=A$, the $k$-algebra $k'$ and the $A$-algebra $B$ (via $\\varphi$), there is an isomorphism $B\\otimes_A(A\\otimes_kk')\\cong B\\otimes_kk'$, $b\\otimes(a\\otimes c)\\mapsto\\varphi(a)b\\otimes c$. Composing it with the symmetry isomorphisms of tensor products, $A'\\otimes_AB\\to B\\otimes_A(A\\otimes_kk')\\to B\\otimes_kk'\\to k'\\otimes_kB$ sends $(c\\otimes a)\\otimes b\\mapsto c\\otimes\\varphi(a)b$; it is a ring isomorphism, and composed with $x\\mapsto x\\otimes1$ it is $c\\otimes a\\mapsto c\\otimes\\varphi(a)$, i.e. it is an isomorphism of $A'$-algebras from $A'\\otimes_AB$ to $k'\\otimes_kB$ (with $A'$ acting through $\\mathrm{id}_{k'}\\otimes\\varphi$). The three conditions of [def-weil-pbc-smooth-ring-map] (finite presentation, $H_1(L)=0$, $\\Omega$ finite projective) are invariant under isomorphism of $A'$-algebras, so $\\mathrm{id}_{k'}\\otimes\\varphi$ is smooth (in Mathlib: Algebra.Smooth.of_equiv, RingTheory/Smooth/Basic.lean line 554).",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07QF, with Lemma Tag 00T4 (lemma-base-change-smooth, line 37133); the identification $(k'\\otimes_kA)\\otimes_AB=k'\\otimes_kB$ is implicit in Stacks (Lemma Tag 00D2)"
+   }
+  },
+  {
+   "text": "$k'\\otimes_kB$ is a regular ring: it receives the smooth ring map $\\mathrm{id}_{k'}\\otimes\\varphi$ of step 3 from the regular ring $A'$ of step 2, so it is Noetherian with all localizations at primes regular local by ascent of regularity along smooth ring maps [lem-weil-pbc-regular-ring-smooth-ascent].",
+   "uses": [
+    "lem-weil-pbc-regular-ring-smooth-ascent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07QF, with Lemma Tag 07NF (lemma-regular-goes-up, line 46610)"
+   }
+  },
+  {
+   "text": "Conclusion: $B$ is a Noetherian $k$-algebra (step 1) and $k'\\otimes_kB$ is a regular ring for every finite purely inseparable extension $k'/k$ (steps 2-4, $k'$ arbitrary), so $B$ is geometrically regular over $k$ by the definition [def-weil-pbc-g-ring].",
+   "uses": [
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 07QF (lemma-geometrically-regular-goes-up, line 47187) and its proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-regular-ring-smooth-ascent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07QF (lemma-geometrically-regular-goes-up, line 47187), proof; Noetherianity of B from Lemma Tag 00FN"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +109,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +129,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-geometrically-regular-smooth-ascent",
+  "worker": "stage1",
+  "summary": "Read Stacks Algebra Lemma 07QF and its proof (algebra.tex line 47187), Lemma 07NF (line 46610), 00T4, 00FN, 0381/0382 and Definition 00OD; tags checked in tags/tags (07QF lemma-geometrically-regular-goes-up, 07NF lemma-regular-goes-up, 00T4 lemma-base-change-smooth, 00FN lemma-Noetherian-permanence, 0381, 0382, 033A lemma-Rk-goes-up, 00TT lemma-characterize-smooth-over-field, 00OD definition-regular). Statement kept. Five steps: Noetherianity of B by finite presentation and Hilbert basis (existing Mathlib leaf lem-weil-pbc-finite-type-algebra-noetherian); regularity of k' (x)_k A by the definition (def-weil-pbc-g-ring uses finite purely inseparable k', Stacks' proof uses finitely generated k', same argument); smoothness of k' (x)_k A -> k' (x)_k B by base change (Mathlib leaf lem-weil-pbc-smooth-ring-map-base-change-composition (1), 00T4) and the identification (k' (x)_k A) (x)_A B = k' (x)_k B (Mathlib leaf lem-weil-pbc-tensor-cancel-base-change, written out, implicit in Stacks); regularity of k' (x)_k B by 07NF (unsplit node lem-weil-pbc-regular-ring-smooth-ascent, created concurrently by the worker of lem-weil-pbc-geometrically-regular-finitely-generated-extensions; a duplicate this worker had created was removed); conclusion by the definition. Item's own Lean state none; its Mathlib searches (2026-10-10) kept."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Five steps along Stacks 07QF with no new node: B Noetherian (Hilbert basis via the finite type leaf), k' (x) A regular (definition), id (x) phi smooth by base change and the cancel-base-change leaf (Algebra.Smooth.of_equiv Smooth/Basic.lean:554 for transport), k' (x) B regular by 07NF (the node lem-weil-pbc-regular-ring-smooth-ascent created by the finitely-generated-extensions worker; the worker deleted its own duplicate), conclusion. Stacks runs over finitely generated extensions (0381 (1)); the definition node uses finite purely inseparable ones (0381 (2)), same argument."
+ }
 }
