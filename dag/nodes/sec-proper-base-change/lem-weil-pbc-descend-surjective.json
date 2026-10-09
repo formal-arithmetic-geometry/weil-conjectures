@@ -16,9 +16,81 @@
   "def-weil-surjective-morphism",
   "def-sbc-locally-finite-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $X_0$ and $Y_0$ are quasi-compact and quasi-separated, the locally finitely presented morphism $f_0$ is quasi-compact and quasi-separated, hence of finite presentation in the sense used by Chevalley's theorem.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 07RR, first sentence ('$f_0$ is of finite presentation') together with Morphisms Definition Tag 01TP"
+   }
+  },
+  {
+   "text": "The image $E=f_0(X_0)\\subseteq Y_0$ is constructible by Chevalley's theorem for a morphism of finite presentation between quasi-compact quasi-separated schemes.",
+   "uses": [
+    "lem-weil-pbc-chevalley-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 07RR, proof; Morphisms Lemma Tag 054J"
+   }
+  },
+  {
+   "text": "For every $i\\ge0$, the image of the base change $f_i:X_i\\to Y_i$ is the inverse image of $E$ under $Y_i\\to Y_0$: a point of $Y_i$ lies in that inverse image exactly when its pullback to $Y_i\\times_{Y_0}X_0=X_i$ lies over a point of $X_0$. The same identification holds at the limit, so the image of $f:X\\to Y$ is the inverse image of $E$ in $Y$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 07RR, proof; sentence 'The image of $f_i$ is the inverse image of $E$ in $Y_i$'"
+   }
+  },
+  {
+   "text": "Surjectivity of $f$ says that the projection $Y\\to Y_0$ has image contained in $E$, by the image identification in the preceding step.",
+   "uses": [
+    "def-weil-surjective-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 07RR, proof; sentence '$Y\\to Y_0$ maps into $E$'"
+   }
+  },
+  {
+   "text": "Apply the finite-stage containment lemma to $E\\subseteq Y_0$. It gives $i\\ge0$ such that the image of $Y_i\\to Y_0$ is contained in $E$. By the image identification, $f_i$ is then surjective.",
+   "uses": [
+    "lem-weil-pbc-limit-contained-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 07RR, proof; Limits Lemma Tag 05F4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-chevalley-image",
+  "def-pc-fibre-product",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-limit-contained-constructible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits Lemma Tag 07RR"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,7 +115,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +135,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-descend-surjective",
+  "worker": "stage1",
+  "summary": "Expanded Stacks Lemma 07RR into five explicit steps: finite-presentation setup, Chevalley constructible image, identification of images after base change, use of surjectivity, and finite-stage containment. Added a Mathlib leaf for Chevalley's theorem and unsplit nodes for Stacks Lemmas 05F3 and 05F4; all three new nodes were searched with LeanSearch, LeanFinder or Loogle, and source grep."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: Reviewed five proof steps against Stacks 07RR, Chevalley 054J and new 05F3/05F4 nodes; Mathlib leaf and statement-only nodes are correctly classified, searches and route are complete."
+ }
 }
