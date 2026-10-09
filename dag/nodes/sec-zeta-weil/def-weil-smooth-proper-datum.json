@@ -2,14 +2,16 @@
  "id": "def-weil-smooth-proper-datum",
  "kind": "definition",
  "title": "Smooth-proper datum",
- "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$, with $k_0=\\Fq$ and $k=\\Fbar$ its fixed algebraic closure. A *smooth-proper datum* $\\mathscr X=(X_0,d,X)$ consists of a $k_0$-scheme $X_0$ that is smooth, proper and geometrically connected, an integer $d\\geq0$ such that $X_0$ is smooth of pure dimension $d$ (its structure morphism is smooth and every irreducible component of $X_0\\times_{k_0}k$ has dimension $d$), and the geometric fiber $X=X_0\\times_{k_0}k$. When $X_0$ and $d$ are given, 'the resulting smooth-proper datum' is $(X_0,d,X_0\\times_{k_0}k)$. Every object later defined from $\\mathscr X$ (the cohomological family, the Frobenius characteristic factors, the canonical integral factors, the Betti numbers, the determinant constants, the Euler characteristic and the functional-equation sign) is a function of $\\mathscr X$, even when that argument is suppressed.",
+ "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], with $k_0=\\Fq$ and $k=\\Fbar$ its fixed algebraic closure. A *smooth-proper datum* $\\mathscr X=(X_0,d,X)$ consists of a $k_0$-scheme $X_0$ [def-weil-scheme-over-base] that is smooth, proper and geometrically connected [def-weil-geometric-hypotheses] (proper, hence of finite type, so that $X_0$ is a finite-type $k_0$-scheme in the sense of [def-weil-finite-field-fiber] and [def-weil-geometric-hypotheses]), an integer $d\\geq0$ such that $X_0$ is smooth of pure dimension $d$ [def-weil-geometric-hypotheses] (its structure morphism is smooth and every irreducible component of $X_0\\times_{k_0}k$ has dimension $d$), and the geometric fiber $X=X_0\\times_{k_0}k$ of $X_0$ [def-weil-finite-field-fiber], the base change [def-pc-base-change] of $X_0\\to\\operatorname{Spec}k_0$ along $\\operatorname{Spec}k\\to\\operatorname{Spec}k_0$. When $X_0$ and $d$ are given, 'the resulting smooth-proper datum' is $(X_0,d,X_0\\times_{k_0}k)$. Every object later defined from $\\mathscr X$ (the cohomological family, the Frobenius characteristic factors, the canonical integral factors, the Betti numbers, the determinant constants, the Euler characteristic and the functional-equation sign) is a function of $\\mathscr X$, even when that argument is suppressed.",
  "source": {
   "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
-  "place": "Definition [Smooth-proper datum], label def:smooth-proper-datum, lines 2868-2876. The master blueprint has no file for it; literature/blueprint/master/blueprint/sec-zeta-weil/sk-the-five-assembled-theorems--remark-1/thm-weil-final.md refers to it by name ('the resulting smooth-proper datum', '$\\mathscr X=(X_0,d,X)$ a smooth-proper datum')."
+  "place": "Definition [Smooth-proper datum], label def:smooth-proper-datum, lines 2868-2876; the last sentence (every later symbol is a function of $\\mathscr X$) is the convention stated at lines 2910-2911 of the same file. The master blueprint has no file for it; literature/blueprint/master/blueprint/sec-zeta-weil/sk-the-five-assembled-theorems--remark-1/thm-weil-final.md refers to it by name ('the resulting smooth-proper datum', '$\\mathscr X=(X_0,d,X)$ a smooth-proper datum')."
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
-  "def-weil-geometric-hypotheses"
+  "def-weil-scheme-over-base",
+  "def-weil-geometric-hypotheses",
+  "def-pc-base-change"
  ],
  "proof": [],
  "proof_deps": [],
@@ -28,10 +30,17 @@
    "results": "none",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'geometric fib\\|geometricFiber\\|GeometricFiber' Mathlib/AlgebraicGeometry; grep -rln AlgebraicClosure Mathlib/AlgebraicGeometry; grep -n 'pullback' Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+   "results": "Sites/Etale.lean:97 def geometricFiber (a point of the etale site, not the base-changed scheme); AlgebraicClosure occurs only in Group/Abelian.lean and Group/Smooth.lean; Geometrically/Connected.lean:51-64 instances that GeometricallyConnected is stable under pullback. The scheme X_0 ×_{k_0} k is the categorical pullback `pullback f (Spec.map (CommRingCat.ofHom (algebraMap k_0 k)))`, with k an `AlgebraicClosure k_0`; no declaration names it.",
+   "date": "2026-10-09",
+   "verdict": "no match for the bundled datum: each component is a Mathlib predicate or a one-line pullback (recorded in the earlier search), but no structure (X_0, d, X_0 ×_{k_0} k̄) exists; the node stays a definition of this project, as far from Mathlib as def-weil-geometric-hypotheses and def-weil-finite-field-fiber"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -45,5 +54,16 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-smooth-proper-datum",
+  "worker": "stage1",
+  "summary": "Checked the statement against the slopmaster2 LaTeX (def:smooth-proper-datum, lines 2868-2876): it matches ('smooth, proper, geometrically connected F_q-scheme X_0, an integer d >= 0, an identification of d with the pure dimension of X_0, and the geometric fiber X = X_0 x_{F_q} k'); the closing convention sentence, which the LaTeX definition does not contain, is the convention of lines 2910-2911 of the same file, now cited in source.place. The statement is otherwise unchanged except that each notion is now tagged with the node that defines it, and a parenthesis records that proper implies finite type, which the geometric-fiber notation of def-weil-finite-field-fiber and the predicates of def-weil-geometric-hypotheses require. The notions the definition is built from: the global finite-field datum and the geometric fiber Y_0 x_{k_0} k of a finite-type k_0-scheme (def-weil-finite-field-fiber, reviewed), a k_0-scheme (def-weil-scheme-over-base, Mathlib leaf), the four predicates smooth, proper, geometrically connected and smooth of pure dimension d (def-weil-geometric-hypotheses, being split by another worker; not duplicated), and the fibre product/base change (def-pc-base-change). The integer d >= 0 is elementary. No new node was needed. Mathlib: the earlier search found the four component predicates (IsProper, SmoothOfRelativeDimension, GeometricallyConnected, GeometricallyIntegral); a further search for the base-changed scheme or a bundled datum found nothing, so the node is not a leaf. Lean: no declaration on either branch; the target weil_conjectures (WeilConjectures/Statement.lean) carries the datum as hypotheses [SmoothOfRelativeDimension d f] [IsProper f] [GeometricallyIntegral f] on f : X -> Spec k, i.e. geometrically integral where this definition says geometrically connected, as already noted on thm-weil-final."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
