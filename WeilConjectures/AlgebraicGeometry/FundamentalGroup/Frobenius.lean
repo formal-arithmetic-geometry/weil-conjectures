@@ -35,10 +35,17 @@ the monodromy character of the transported torsor is that of the torsor precompo
 finite field and the Weil group, `σ` is conjugation by a lift of Frobenius, which is the
 Weil-descent clause of blueprint `lem-wf-finite-constant-h1-pi1`.
 
-The last section states the cohomological input of the purity of rank-one sheaves
+The last section proves the cohomological input of the purity of rank-one sheaves
 (blueprint `prop-wf-open-curve-h1-no-frobenius-fixed`): on the geometric fibre of a smooth
 geometrically connected curve over `𝔽_q`, a compatible system of `ℤ / ℓⁿ`-torsors which are
-all fixed by the Frobenius is trivial.
+all fixed by the Frobenius is trivial. The open case reduces to the proper case through the
+smooth compactification and the residue sequence
+(`AlgebraicGeometry.Scheme.EtaleTorsor.exists_extension_of_isIsomorphic_mapIso`). In the proper
+case, the duality between `H¹(C, ℤ / ℓⁿ)` and `Pic(C)[ℓⁿ] = J₀(K̄)[ℓⁿ]`
+(`AlgebraicGeometry.Scheme.EtaleTorsor.exists_picTorsionPairing`) turns the system into a
+compatible system of Frobenius-invariant characters of `J₀(K̄)[ℓⁿ]`, which vanishes because the
+Frobenius has finitely many fixed points `J₀(𝔽_q)`
+(`AddSubgroup.eq_zero_of_forall_map_eq_of_finite_fixedPoints`).
 
 ## Main definitions
 
@@ -55,6 +62,8 @@ all fixed by the Frobenius is trivial.
   has trivial monodromy.
 - `AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso`: Frobenius-fixed
   compatible systems of `ℤ / ℓⁿ`-torsors on a curve over `𝔽̄_q` are trivial.
+- `AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso_of_isProper`: the
+  same for a proper curve.
 -/
 
 @[expose] public section
@@ -356,9 +365,10 @@ reduces to the proper case, where `lim_n H¹(C, ℤ / ℓⁿ)` is the dual of th
 Jacobian by Poincaré duality and Kummer theory (blueprints `lem-wf-curve-finite-level-pd`,
 `lem-wf-curve-h1-dual-tate-module`), on which Frobenius has no fixed vector because
 `J₀(𝔽_q)` is finite (blueprints `lem-wf-finite-field-tate-no-fixed`,
-`lem-wf-proper-curve-compatible-h1-no-fixed`). None of these inputs (cup products, purity for
-`C - U ⊆ C`, the Jacobian and its Tate module as a Galois module) is available, so the
-statement is recorded without proof. -/
+`lem-wf-proper-curve-compatible-h1-no-fixed`). Here the residue step is
+`AlgebraicGeometry.Scheme.EtaleTorsor.exists_extension_of_isIsomorphic_mapIso` and the proper
+case is `AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso_of_isProper`;
+a section of the extended torsor over `C` restricts to a section over `U`. -/
 theorem exists_section_of_isIsomorphic_mapIso {K : Type u} [Field K] [Finite K]
     {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsCurve p] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] (l : ℕ) [Fact l.Prime] [Fact (ringChar K ≠ l)]

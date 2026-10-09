@@ -14,9 +14,10 @@ public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
 
 Let `A` be an `ℓ`-divisible abelian group with finite `ℓ ^ n`-torsion `A[ℓ ^ n]`, and let `σ` be
 an endomorphism of `A` with finitely many fixed points, for instance the Frobenius acting on the
-geometric points of an abelian variety over a finite field. A *compatible system of characters*
-is a family of homomorphisms `ψ n : A[ℓ ^ n] → ℤ / ℓ ^ n` with `ψ n (ℓ • y) = ψ (n + 1) y mod ℓ ^ n`,
-i.e. an element of `lim_n Hom(A[ℓ ^ n], ℤ / ℓ ^ n) = Hom(T_ℓ A, ℤ_ℓ)`. If every `ψ n` is invariant
+geometric points of an abelian variety over a finite field. A *compatible system of
+characters* is a family of homomorphisms `ψ n : A[ℓ ^ n] → ℤ / ℓ ^ n` with
+`ψ n (ℓ • y) = ψ (n + 1) y mod ℓ ^ n`, i.e. an element of
+`lim_n Hom(A[ℓ ^ n], ℤ / ℓ ^ n) = Hom(T_ℓ A, ℤ_ℓ)`. If every `ψ n` is invariant
 under `σ`, then all `ψ n` vanish (`AddSubgroup.eq_zero_of_forall_map_eq_of_finite_fixedPoints`).
 
 This is the dual form of the absence of `σ`-fixed vectors in the Tate module `T_ℓ A`. Instead of
