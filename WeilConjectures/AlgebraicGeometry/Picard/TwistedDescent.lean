@@ -87,6 +87,19 @@ lemma pullHom_pseudofunctorSmulHom {Y' Z : Scheme.{u}}
         (b.appTop a) :=
   pullHom_smulHom M f₁ b bf h a
 
+/-- Pulling back a morphism followed by multiplication by `a`. (Proved by a term rather than by
+`rw`, whose motives are slow to type check here.) -/
+lemma pullHom_comp_pseudofunctorSmulHom {Y' Z₁ Z₂ : Scheme.{u}}
+    {M₁ : modulesPseudofunctor.obj (.mk (op Z₁))} {M₂ : modulesPseudofunctor.obj (.mk (op Z₂))}
+    {f₁ : Y ⟶ Z₁} {f₂ : Y ⟶ Z₂}
+    (φ : (modulesPseudofunctor.map f₁.op.toLoc).toFunctor.obj M₁ ⟶
+      (modulesPseudofunctor.map f₂.op.toLoc).toFunctor.obj M₂) (a : Γ(Y, ⊤))
+    (g : Y' ⟶ Y) (gf₁ : Y' ⟶ Z₁) (gf₂ : Y' ⟶ Z₂) (hgf₁ : g ≫ f₁ = gf₁) (hgf₂ : g ≫ f₂ = gf₂) :
+    pullHom (φ ≫ pseudofunctorSmulHom _ a) g gf₁ gf₂ hgf₁ hgf₂ =
+      pullHom φ g gf₁ gf₂ hgf₁ hgf₂ ≫ pseudofunctorSmulHom _ (g.appTop a) :=
+  (pullHom_comp _ _ g gf₁ gf₂ gf₂ hgf₁ hgf₂ hgf₂).trans
+    (congrArg _ (pullHom_pseudofunctorSmulHom _ _ _ _ hgf₂ _))
+
 lemma comp_comp_pseudofunctorSmulHom_comp {A B C D : modulesPseudofunctor.obj (.mk (op Y))}
     (x : A ⟶ B) (y : B ⟶ C) (z : C ⟶ D) (a : Γ(Y, ⊤)) :
     x ≫ (y ≫ pseudofunctorSmulHom C a) ≫ z = (x ≫ y ≫ z) ≫ pseudofunctorSmulHom D a := by
@@ -141,11 +154,10 @@ noncomputable def twist (D : modulesPseudofunctor.DescentData f) :
   obj := D.obj
   hom Y q i₁ i₂ f₁ f₂ hf₁ hf₂ :=
     D.hom q f₁ f₂ hf₁ hf₂ ≫ pseudofunctorSmulHom _ (c.c q f₁ f₂ hf₁ hf₂)
-  pullHom_hom Y' Y g q q' hq i₁ i₂ f₁ f₂ hf₁ hf₂ gf₁ gf₂ hgf₁ hgf₂ := by
-    rw [pullHom_comp _ _ _ _ gf₂ _ hgf₁ hgf₂ hgf₂,
-      D.pullHom_hom g q q' hq f₁ f₂ hf₁ hf₂ gf₁ gf₂ hgf₁ hgf₂,
-      pullHom_pseudofunctorSmulHom _ _ _ _ hgf₂,
-      c.appTop_c g q q' hq f₁ f₂ hf₁ hf₂ gf₁ gf₂ hgf₁ hgf₂]
+  pullHom_hom Y' Y g q q' hq i₁ i₂ f₁ f₂ hf₁ hf₂ gf₁ gf₂ hgf₁ hgf₂ :=
+    (pullHom_comp_pseudofunctorSmulHom _ _ g gf₁ gf₂ hgf₁ hgf₂).trans
+      (congrArg₂ (· ≫ ·) (D.pullHom_hom g q q' hq f₁ f₂ hf₁ hf₂ gf₁ gf₂ hgf₁ hgf₂)
+        (congrArg _ (c.appTop_c g q q' hq f₁ f₂ hf₁ hf₂ gf₁ gf₂ hgf₁ hgf₂)))
   hom_self Y q i g hg := by
     rw [D.hom_self q g hg, c.c_self, pseudofunctorSmulHom_one, Category.comp_id]
   hom_comp Y q i₁ i₂ i₃ f₁ f₂ f₃ hf₁ hf₂ hf₃ := by
@@ -228,28 +240,47 @@ lemma ratio_eq ⦃Y : Scheme.{u}⦄ (q : Y ⟶ S) ⦃i₁ i₂ : ι⦄ (f₁ : Y
   exact eq_of_pseudofunctorSmulHom_eq _ (by rw [← cancel_epi (D₂.hom q f₁ f₂ hf₁ hf₂),
     hom_comp_ratio, h])
 
+include hD₂ in
+lemma appTop_ratio ⦃Y' Y : Scheme.{u}⦄ (g : Y' ⟶ Y) (q : Y ⟶ S) (q' : Y' ⟶ S) (hq : g ≫ q = q')
+    ⦃i₁ i₂ : ι⦄ (f₁ : Y ⟶ X i₁) (f₂ : Y ⟶ X i₂) (hf₁ : f₁ ≫ f i₁ = q) (hf₂ : f₂ ≫ f i₂ = q)
+    (gf₁ : Y' ⟶ X i₁) (gf₂ : Y' ⟶ X i₂) (hgf₁ : g ≫ f₁ = gf₁) (hgf₂ : g ≫ f₂ = gf₂) :
+    g.appTop (ratio e q f₁ f₂ hf₁ hf₂) =
+      ratio e q' gf₁ gf₂ (by rw [← hgf₁, Category.assoc, hf₁, hq])
+        (by rw [← hgf₂, Category.assoc, hf₂, hq]) := by
+  refine (ratio_eq e _ _ _ _ _ ?_).symm
+  exact ((pullHom_comp_pseudofunctorSmulHom _ _ g gf₁ gf₂ hgf₁ hgf₂).trans
+    (congrArg (· ≫ _) (D₂.pullHom_hom g q q' hq f₁ f₂ hf₁ hf₂ gf₁ gf₂ hgf₁ hgf₂))).symm.trans <|
+    (congrArg (pullHom · g gf₁ gf₂ hgf₁ hgf₂) (hom_comp_ratio e q f₁ f₂ hf₁ hf₂)).trans <|
+    (pullHom_comp _ _ g gf₁ gf₁ gf₂ hgf₁ hgf₁ hgf₂).trans <|
+    congrArg₂ (· ≫ ·) (pullHom_map _ _ _ _ hgf₁) <|
+    (pullHom_comp _ _ g gf₁ gf₂ gf₂ hgf₁ hgf₂ hgf₂).trans <|
+    congrArg₂ (· ≫ ·) (D₁.pullHom_hom g q q' hq f₁ f₂ hf₁ hf₂ gf₁ gf₂ hgf₁ hgf₂)
+      (pullHom_map _ _ _ _ hgf₂)
+
+include hD₂ in
+lemma ratio_self ⦃Y : Scheme.{u}⦄ (q : Y ⟶ S) ⦃i : ι⦄ (g : Y ⟶ X i) (hg : g ≫ f i = q) :
+    ratio e q g g hg hg = 1 := by
+  refine ratio_eq e _ _ _ _ _ ?_
+  rw [D₂.hom_self q g hg, D₁.hom_self q g hg, pseudofunctorSmulHom_one, Category.id_comp,
+    Category.id_comp, Iso.map_inv_hom_id]
+
+include hD₂ in
+lemma ratio_mul ⦃Y : Scheme.{u}⦄ (q : Y ⟶ S) ⦃i₁ i₂ i₃ : ι⦄ (f₁ : Y ⟶ X i₁) (f₂ : Y ⟶ X i₂)
+    (f₃ : Y ⟶ X i₃) (hf₁ : f₁ ≫ f i₁ = q) (hf₂ : f₂ ≫ f i₂ = q) (hf₃ : f₃ ≫ f i₃ = q) :
+    ratio e q f₁ f₂ hf₁ hf₂ * ratio e q f₂ f₃ hf₂ hf₃ = ratio e q f₁ f₃ hf₁ hf₃ := by
+  refine (ratio_eq e q f₁ f₃ hf₁ hf₃ ?_).symm
+  rw [← D₂.hom_comp q f₁ f₂ f₃ hf₁ hf₂ hf₃, ← D₁.hom_comp q f₁ f₂ f₃ hf₁ hf₂ hf₃,
+    pseudofunctorSmulHom_mul, Category.assoc, ← Category.assoc _ _ (pseudofunctorSmulHom _ _),
+    ← pseudofunctorSmulHom_naturality, ← Category.assoc, hom_comp_ratio, Category.assoc,
+    hom_comp_ratio]
+  simp only [Category.assoc, Iso.map_hom_inv_id_assoc]
+
 /-- The cocycle by which two descent data with isomorphic invertible components differ. -/
 noncomputable def ratioCocycle : DescentCocycle f where
   c := ratio e
-  appTop_c Y' Y g q q' hq i₁ i₂ f₁ f₂ hf₁ hf₂ gf₁ gf₂ hgf₁ hgf₂ := by
-    refine (ratio_eq e _ _ _ _ _ ?_).symm
-    rw [← D₂.pullHom_hom g q q' hq f₁ f₂ hf₁ hf₂ gf₁ gf₂ hgf₁ hgf₂,
-      ← D₁.pullHom_hom g q q' hq f₁ f₂ hf₁ hf₂ gf₁ gf₂ hgf₁ hgf₂,
-      ← pullHom_pseudofunctorSmulHom _ f₂ g gf₂ hgf₂,
-      ← pullHom_comp _ _ g gf₁ gf₂ gf₂ hgf₁ hgf₂ hgf₂, hom_comp_ratio,
-      pullHom_comp _ _ g gf₁ gf₁ gf₂ hgf₁ hgf₁ hgf₂, pullHom_comp _ _ g gf₁ gf₂ gf₂ hgf₁ hgf₂ hgf₂,
-      pullHom_map, pullHom_map]
-  c_self Y q i g hg := by
-    refine ratio_eq e _ _ _ _ _ ?_
-    rw [D₂.hom_self q g hg, D₁.hom_self q g hg, pseudofunctorSmulHom_one, Category.id_comp,
-      Category.id_comp, Iso.map_inv_hom_id]
-  c_mul Y q i₁ i₂ i₃ f₁ f₂ f₃ hf₁ hf₂ hf₃ := by
-    refine (ratio_eq e q f₁ f₃ hf₁ hf₃ ?_).symm
-    rw [← D₂.hom_comp q f₁ f₂ f₃ hf₁ hf₂ hf₃, ← D₁.hom_comp q f₁ f₂ f₃ hf₁ hf₂ hf₃,
-      pseudofunctorSmulHom_mul, Category.assoc, ← Category.assoc _ _ (pseudofunctorSmulHom _ _),
-      ← pseudofunctorSmulHom_naturality, ← Category.assoc, hom_comp_ratio, Category.assoc,
-      hom_comp_ratio]
-    simp only [Category.assoc, Iso.map_hom_inv_id_assoc]
+  appTop_c := appTop_ratio e
+  c_self := ratio_self e
+  c_mul := ratio_mul e
 
 lemma map_hom_comp_twist_hom ⦃Y : Scheme.{u}⦄ (q : Y ⟶ S) ⦃i₁ i₂ : ι⦄ (f₁ : Y ⟶ X i₁)
     (f₂ : Y ⟶ X i₂) (hf₁ : f₁ ≫ f i₁ = q) (hf₂ : f₂ ≫ f i₂ = q) :
@@ -311,5 +342,142 @@ end Pull
 end DescentCocycle
 
 end Cocycle
+
+section FullyFaithful
+
+variable {T : Scheme.{u}} {ι : Type w} {T' : ι → Scheme.{u}} (g : ∀ i, T' i ⟶ T)
+
+/-- Quasi-coherent modules whose descent data relative to an fpqc covering are isomorphic are
+isomorphic: the comparison functor is fully faithful on quasi-coherent modules. -/
+theorem nonempty_iso_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    {M N : modulesPseudofunctor.obj (.mk (op T))} (hM : (M : T.Modules).IsQuasicoherent)
+    (hN : (N : T.Modules).IsQuasicoherent)
+    (e : (modulesPseudofunctor.toDescentData g).obj M ≅
+      (modulesPseudofunctor.toDescentData g).obj N) :
+    Nonempty (M ≅ N) := by
+  obtain ⟨φ, hφ⟩ := (bijective_toDescentData_map g hg M N hM hN).2 e.hom
+  obtain ⟨ψ, hψ⟩ := (bijective_toDescentData_map g hg N M hN hM).2 e.inv
+  refine ⟨⟨φ, ψ, (bijective_toDescentData_map g hg M M hM hM).1 ?_,
+    (bijective_toDescentData_map g hg N N hN hN).1 ?_⟩⟩
+  · rw [Functor.map_comp, hφ, hψ, e.hom_inv_id, CategoryTheory.Functor.map_id]
+  · rw [Functor.map_comp, hφ, hψ, e.inv_hom_id, CategoryTheory.Functor.map_id]
+
+end FullyFaithful
+
+section BaseChange
+
+@[reassoc (attr := simp)]
+lemma baseChangeMap_fst {X S : Scheme.{u}} (f : X ⟶ S) {T T' : Over S} (φ : T' ⟶ T) :
+    baseChangeMap f φ ≫ pullback.fst f T.hom = pullback.fst f T'.hom := by
+  rw [pullback.lift_fst, Category.comp_id]
+
+@[reassoc (attr := simp)]
+lemma baseChangeMap_snd {X S : Scheme.{u}} (f : X ⟶ S) {T T' : Over S} (φ : T' ⟶ T) :
+    baseChangeMap f φ ≫ pullback.snd f T.hom = pullback.snd f T'.hom ≫ φ.left :=
+  pullback.lift_snd _ _ _
+
+variable {X S : Scheme.{u}} (f : X ⟶ S) {T : Over S} {ι : Type w} {T' : ι → Over S}
+  (g : ∀ i, T' i ⟶ T)
+  (hbij : ∀ Y : Over S, Function.Bijective (pullback.snd f Y.hom).appTop)
+
+namespace DescentCocycle
+
+variable {f g} (c : DescentCocycle fun i ↦ baseChangeMap f (g i))
+
+/-- The value of the descended cocycle `DescentCocycle.ofBaseChange` at `Y`, `f₁` and `f₂`: the
+unique function on `Y` whose pullback to `X_Y` is the value of `c` at the base changes of `f₁` and
+`f₂`. -/
+noncomputable def ofBaseChangeAux ⦃Y : Scheme.{u}⦄ (q : Y ⟶ T.left) ⦃i₁ i₂ : ι⦄
+    (f₁ : Y ⟶ (T' i₁).left) (f₂ : Y ⟶ (T' i₂).left) (hf₁ : f₁ ≫ (g i₁).left = q)
+    (hf₂ : f₂ ≫ (g i₂).left = q) : Γ(Y, ⊤) :=
+  (Equiv.ofBijective _ (hbij (Over.mk (q ≫ T.hom)))).symm
+    (c.c (baseChangeMap f (Over.homMk q : Over.mk (q ≫ T.hom) ⟶ T))
+      (baseChangeMap f (Over.homMk f₁ (by rw [← Over.w (g i₁), reassoc_of% hf₁]; rfl) :
+        Over.mk (q ≫ T.hom) ⟶ T' i₁))
+      (baseChangeMap f (Over.homMk f₂ (by rw [← Over.w (g i₂), reassoc_of% hf₂]; rfl) :
+        Over.mk (q ≫ T.hom) ⟶ T' i₂))
+      (by rw [← baseChangeMap_comp]; congr 1; ext; exact hf₁)
+      (by rw [← baseChangeMap_comp]; congr 1; ext; exact hf₂))
+
+lemma appTop_ofBaseChangeAux ⦃Y : Scheme.{u}⦄ (q : Y ⟶ T.left) ⦃i₁ i₂ : ι⦄
+    (f₁ : Y ⟶ (T' i₁).left) (f₂ : Y ⟶ (T' i₂).left) (hf₁ : f₁ ≫ (g i₁).left = q)
+    (hf₂ : f₂ ≫ (g i₂).left = q) :
+    (pullback.snd f (Over.mk (q ≫ T.hom)).hom).appTop (c.ofBaseChangeAux hbij q f₁ f₂ hf₁ hf₂) =
+      c.c (baseChangeMap f (Over.homMk q : Over.mk (q ≫ T.hom) ⟶ T))
+        (baseChangeMap f (Over.homMk f₁ (by rw [← Over.w (g i₁), reassoc_of% hf₁]; rfl) :
+          Over.mk (q ≫ T.hom) ⟶ T' i₁))
+        (baseChangeMap f (Over.homMk f₂ (by rw [← Over.w (g i₂), reassoc_of% hf₂]; rfl) :
+          Over.mk (q ≫ T.hom) ⟶ T' i₂))
+        (by rw [← baseChangeMap_comp]; congr 1; ext; exact hf₁)
+        (by rw [← baseChangeMap_comp]; congr 1; ext; exact hf₂) :=
+  (Equiv.ofBijective _ (hbij (Over.mk (q ≫ T.hom)))).apply_symm_apply _
+
+/-- **Descending a cocycle along `X_T ⟶ T`.** If `Γ(Y, 𝒪_Y) ⟶ Γ(X_Y, 𝒪_{X_Y})` is bijective for
+every `Y` over `S`, a cocycle relative to the family `X_{T i} ⟶ X_T` comes from a cocycle relative
+to the family `T i ⟶ T` (`DescentCocycle.pull_ofBaseChange`). -/
+noncomputable def ofBaseChange : DescentCocycle fun i ↦ (g i).left where
+  c := c.ofBaseChangeAux hbij
+  appTop_c Y' Y h q q' hq i₁ i₂ f₁ f₂ hf₁ hf₂ gf₁ gf₂ hgf₁ hgf₂ := by
+    apply (hbij (Over.mk (q' ≫ T.hom))).1
+    let ho : Over.mk (q' ≫ T.hom) ⟶ Over.mk (q ≫ T.hom) :=
+      Over.homMk h (by rw [← hq]; simp)
+    have key : pullback.snd f (Over.mk (q' ≫ T.hom)).hom ≫ h =
+        baseChangeMap f ho ≫ pullback.snd f (Over.mk (q ≫ T.hom)).hom :=
+      (baseChangeMap_snd f ho).symm
+    rw [appTop_ofBaseChangeAux, ← ConcreteCategory.comp_apply, ← Scheme.Hom.comp_appTop, key,
+      Scheme.Hom.comp_appTop, ConcreteCategory.comp_apply, appTop_ofBaseChangeAux]
+    exact c.appTop_c (baseChangeMap f ho) _ _
+      (by rw [← baseChangeMap_comp]; congr 1; ext; exact hq) _ _ _ _ _ _
+      (by rw [← baseChangeMap_comp]; congr 1; ext; exact hgf₁)
+      (by rw [← baseChangeMap_comp]; congr 1; ext; exact hgf₂)
+  c_self Y q i a ha := by
+    apply (hbij (Over.mk (q ≫ T.hom))).1
+    rw [appTop_ofBaseChangeAux, c.c_self, map_one]
+  c_mul Y q i₁ i₂ i₃ f₁ f₂ f₃ hf₁ hf₂ hf₃ := by
+    apply (hbij (Over.mk (q ≫ T.hom))).1
+    rw [map_mul, appTop_ofBaseChangeAux, appTop_ofBaseChangeAux, appTop_ofBaseChangeAux,
+      c.c_mul]
+
+/-- The cocycle `DescentCocycle.ofBaseChange` pulls back to the cocycle it was built from. -/
+lemma pull_ofBaseChange :
+    (c.ofBaseChange hbij).pull (p := pullback.snd f T.hom) (α := id)
+      (p' := fun i ↦ pullback.snd f (T' i).hom) (fun i ↦ (baseChangeMap_snd f (g i)).symm) =
+      c := by
+  ext Y q j₁ j₂ f₁ f₂ hf₁ hf₂
+  let s : Y ⟶ pullback f (Over.mk ((q ≫ pullback.snd f T.hom) ≫ T.hom)).hom :=
+    pullback.lift (q ≫ pullback.fst f T.hom) (𝟙 Y)
+      (by rw [Category.id_comp, Category.assoc, Category.assoc, pullback.condition]; rfl)
+  have hs : s ≫ pullback.snd f _ = 𝟙 Y := pullback.lift_snd _ _ _
+  have hsf : s ≫ pullback.fst f _ = q ≫ pullback.fst f T.hom := pullback.lift_fst _ _ _
+  have w (j : ι) (fj : Y ⟶ pullback f (T' j).hom) (hfj : fj ≫ baseChangeMap f (g j) = q) :
+      (fj ≫ pullback.snd f (T' j).hom) ≫ (g j).left = q ≫ pullback.snd f T.hom := by
+    rw [Category.assoc, ← baseChangeMap_snd, ← Category.assoc, hfj]
+  have e (j : ι) (fj : Y ⟶ pullback f (T' j).hom) (hfj : fj ≫ baseChangeMap f (g j) = q) :
+      s ≫ baseChangeMap f (Over.homMk (fj ≫ pullback.snd f (T' j).hom)
+        (((Category.assoc _ _ _).trans
+          (congrArg (fj ≫ pullback.snd f (T' j).hom ≫ ·) (Over.w (g j)).symm)).trans
+            (by simp only [← Category.assoc]; rw [w j fj hfj]; rfl)) :
+          Over.mk ((q ≫ pullback.snd f T.hom) ≫ T.hom) ⟶ T' j) = fj := by
+    refine pullback.hom_ext ?_ ?_
+    · rw [Category.assoc, baseChangeMap_fst, hsf, ← hfj, Category.assoc, baseChangeMap_fst]
+    · rw [Category.assoc, baseChangeMap_snd, ← Category.assoc, hs, Category.id_comp]
+      rfl
+  change c.ofBaseChangeAux hbij _ _ _ (w j₁ f₁ hf₁) (w j₂ f₂ hf₂) = _
+  calc _ = s.appTop ((pullback.snd f _).appTop (c.ofBaseChangeAux hbij
+        (q ≫ pullback.snd f T.hom) (f₁ ≫ pullback.snd f (T' j₁).hom)
+        (f₂ ≫ pullback.snd f (T' j₂).hom) (w j₁ f₁ hf₁) (w j₂ f₂ hf₂))) := by
+        rw [← ConcreteCategory.comp_apply, ← Scheme.Hom.comp_appTop, hs]
+        rfl
+    _ = _ := by
+        rw [appTop_ofBaseChangeAux]
+        refine c.appTop_c s _ q ?_ _ _ _ _ f₁ f₂ (e j₁ f₁ hf₁) (e j₂ f₂ hf₂)
+        refine pullback.hom_ext ?_ ?_
+        · rw [Category.assoc, baseChangeMap_fst, hsf]
+        · rw [Category.assoc, baseChangeMap_snd, ← Category.assoc, hs, Category.id_comp]
+          rfl
+
+end DescentCocycle
+
+end BaseChange
 
 end AlgebraicGeometry
