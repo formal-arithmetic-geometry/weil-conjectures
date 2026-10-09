@@ -6,6 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.RingTheory.KrullDimension.Polynomial
+public import Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
@@ -1051,5 +1053,23 @@ lemma zeroSection_comp_sumIso_hom :
       homOfVector_appTop_coord, Function.comp_apply, zeroSection_appTop_coord]
 
 end AffineSpace
+
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+
+/-- The affine space `𝔸(m; S)` over an affine scheme with noetherian ring of global sections
+has dimension `dim S + |m|`. -/
+lemma topologicalKrullDim_affineSpace_of_isAffine {S : Scheme.{u}} [IsAffine S]
+    [IsNoetherianRing Γ(S, ⊤)] (m : Type u) [Finite m] :
+    topologicalKrullDim 𝔸(m; S) = topologicalKrullDim S + Nat.card m := by
+  rw [IsHomeomorph.topologicalKrullDim_eq _
+      (Scheme.homeoOfIso (AffineSpace.isoOfIsAffine m S)).isHomeomorph,
+    IsHomeomorph.topologicalKrullDim_eq _ (Scheme.homeoOfIso S.isoSpec).isHomeomorph]
+  change topologicalKrullDim (PrimeSpectrum (MvPolynomial m Γ(S, ⊤))) =
+    topologicalKrullDim (PrimeSpectrum Γ(S, ⊤)) + _
+  rw [PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim,
+    PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim,
+    MvPolynomial.ringKrullDim_of_isNoetherianRing]
 
 end AlgebraicGeometry
