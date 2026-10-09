@@ -8,30 +8,61 @@
   "place": "node lem-sc-c1, order 1112"
  },
  "stmt_deps": [
+  "def-sc-constant-sheaves",
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-eight-curve-assertions",
   "def-sc-curves"
  ],
  "proof": [
   {
-   "text": "The sheaf $\\mathbf F_n$ is torsion; the assertion is\n[lem-sc-cohomological-dimension] applied to it.",
+   "text": "By the definition of the constant sheaf F_n, every geometric stalk is the finite group Z/nZ, hence is killed by n; therefore F_n is a torsion etale sheaf. Applying the cohomological-dimension lemma for smooth separated connected curves to F_n gives H^q(C_Et,F_n)=0 for every q>2, which is exactly assertion C_1 in the eight curve assertions.",
    "uses": [
-    "lem-sc-cohomological-dimension"
+    "def-sc-constant-sheaves",
+    "lem-sc-cohomological-dimension",
+    "def-weil-pbc-eight-curve-assertions"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c1.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sc-cohomological-dimension"
+  "def-sc-constant-sheaves",
+  "lem-sc-cohomological-dimension",
+  "def-weil-pbc-eight-curve-assertions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c1.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology of a smooth curve over an algebraically closed field with finite constant coefficients vanishes in degrees above two",
+   "results": "No relevant Mathlib declaration; results concerned with formally etale algebras and site definitions.",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "étale cohomological dimension of a curve constant finite sheaf vanishing H q for q greater than 2",
+   "results": "No relevant Mathlib declaration; results concerned with cotangent cohomology and unrelated singular homology.",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"cohomologicalDimension|cohomological_dimension|IsCurve|isZero.*[Cc]ohomology|[Cc]ohomology.*isZero\" Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites",
+   "results": "No curve étale-cohomology vanishing theorem found; only site definitions such as AlgebraicGeometry.Scheme.smallEtaleTopology.",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -59,5 +90,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-sc-c1",
+  "worker": "stage1",
+  "summary": "Expanded the imported one-line argument into a complete step: the constant sheaf F_n has stalks Z/nZ and is torsion, so the existing cohomological-dimension lemma yields vanishing above degree two, exactly C_1. Added the constant-sheaf definition to statement dependencies and recorded LeanSearch, LeanFinder, and Mathlib grep searches; no new nodes were needed."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C"
+ }
 }
