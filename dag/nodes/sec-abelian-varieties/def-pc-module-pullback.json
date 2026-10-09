@@ -26,14 +26,31 @@
    "results": "AlgebraicGeometry.Scheme.Modules X := SheafOfModules X.ringCatSheaf (Modules/Sheaf.lean:39); AlgebraicGeometry.Scheme.Modules.pullback (f : X ⟶ Y) : Y.Modules ⥤ X.Modules := SheafOfModules.pullback f.toRingCatSheafHom (:183); pushforward (:166); pullbackPushforwardAdjunction : pullback f ⊣ pushforward f (:189); pullbackId (:219), pullbackComp (:241); the underlying PresheafOfModules.pullback (Algebra/Category/ModuleCat/Presheaf/Pullback.lean:44) is defined as the left adjoint of pushforward; the inverse image of sheaves of sets/groups is TopCat.Sheaf.pullback (Topology/Sheaves/Functors.lean:91)",
    "date": "2026-10-09",
    "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback functor of sheaves of modules along a morphism of schemes",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback, instIsLeftAdjointPullback, pullbackPushforwardAdjunction (Mathlib.AlgebraicGeometry.Modules.Sheaf), SheafOfModules.pullback (…Sheaf.PullbackContinuous)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of sheaves of modules along morphism of schemes, left adjoint to pushforward",
+   "results": "Scheme.Modules.pullbackPushforwardAdjunction, Scheme.Modules.instIsLeftAdjointPullback (Mathlib.AlgebraicGeometry.Modules.Sheaf), SheafOfModules.pullback (defined as the left adjoint of the pushforward)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 176,192p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; rg -n '^def pullbackId|^def pullbackComp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "results": "def pullback : Y.Modules ⥤ X.Modules := SheafOfModules.pullback f.toRingCatSheafHom (line 183), pullbackPushforwardAdjunction (189), pullbackId (219), pullbackComp (241); SheafOfModules.pullback is defined as a left adjoint of the pushforward, not by the formula O_X ⊗ g^{-1}G",
+   "date": "2026-10-09",
+   "verdict": "confirmed with a caveat: functor, adjunction, identity and composition isomorphisms are as the node says; the tensor formula is not in Mathlib and agrees with the left adjoint by Stacks 0096 (determined up to unique isomorphism)"
   }
  ],
- "mathlib_match": {
-  "declaration": "AlgebraicGeometry.Scheme.Modules.pullback",
-  "file": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
-  "how": "exact: for `g : X ⟶ Y`, `Scheme.Modules.pullback g : Y.Modules ⥤ X.Modules` (line 183) is $g^*$; it is characterized as the left adjoint of `Scheme.Modules.pushforward g` (line 166) by `pullbackPushforwardAdjunction` (line 189), which is the content of Stacks Tag 0096 and determines $g^*\\mathcal G$ up to unique isomorphism, so the tensor-product formula is this functor; `pullbackId` (line 219) and `pullbackComp` (line 241) are the identity and composition isomorphisms"
- },
- "status": "mathlib",
+ "mathlib_match": null,
+ "status": "unsplit",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -53,5 +70,11 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-jacobian"
+ "unit": "sk-def-av-jacobian",
+ "mathlib_match_withdrawn": {
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pullback",
+  "file": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+  "how": "exact: for `g : X ⟶ Y`, `Scheme.Modules.pullback g : Y.Modules ⥤ X.Modules` (line 183) is $g^*$; it is characterized as the left adjoint of `Scheme.Modules.pushforward g` (line 166) by `pullbackPushforwardAdjunction` (line 189), which is the content of Stacks Tag 0096 and determines $g^*\\mathcal G$ up to unique isomorphism, so the tensor-product formula is this functor; `pullbackId` (line 219) and `pullbackComp` (line 241) are the identity and composition isomorphisms Re-check 2026-10-09: Mathlib defines `SheafOfModules.pullback` as a left adjoint of the pushforward; the formula $\\mathcal O_X\\otimes_{g^{-1}\\mathcal O_Y}g^{-1}\\mathcal G$ is not stated in Mathlib, and it agrees with the left adjoint by Stacks 0096; the node's functor, adjunction and identity/composition isomorphisms are those of Mathlib.",
+  "reason": "re-check 2026-10-09 (lead's decision on the report of list C): the node defines the pullback of modules by the formula O_X ⊗_{g^{-1}O_Y} g^{-1}G, Mathlib defines SheafOfModules.pullback / Scheme.Modules.pullback as the left adjoint of the pushforward; their agreement is a theorem (Stacks 0096), and a node whose agreement with Mathlib's definition is itself a theorem is not a leaf (stages/1-dag.md §2; same ruling as def-pur-sheaf-tensor-product on list D). The match stays recorded for the split: the functor, the adjunction and the identity/composition isomorphisms are Mathlib's"
+ }
 }

@@ -21,6 +21,27 @@
    "results": "`AlgebraicGeometry.Scheme.fpqcPrecoverage` (Fpqc.lean:60) = `propQCPrecoverage @Flat` = `qcPrecoverage ⊓ Scheme.precoverage @Flat` (QuasiCompact.lean:112): jointly surjective families of flat morphisms that are `QuasiCompactCover`s, i.e. every affine open U of the target is `IsCompactOpenCovered`: a finite union of images of quasi-compact opens of the sources equals U",
    "date": "2026-10-09",
    "verdict": "match: Mathlib uses quasi-compact opens where Stacks uses affine opens; equivalent because an affine open is quasi-compact and a quasi-compact open is a finite union of affine opens; joint surjectivity, which Mathlib also requires, follows from the affine condition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "fpqc precoverage on the category of schemes: flat quasi-compact covers",
+   "results": "AlgebraicGeometry.Scheme.Cover (Cover.MorphismProperty), Scheme.zariskiPretopology, Scheme.Cover.Over, Scheme.overPretopology (Sites.Small)",
+   "date": "2026-10-09",
+   "verdict": "no direct hit (the LeanSearch index does not show Sites/Fpqc.lean); see grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fpqc topology on schemes: flat and quasi-compact covering families",
+   "results": "AlgebraicGeometry.Scheme.quasiCompactCover, QuasiCompactCover, QuasiCompactCover.homCover, Scheme.quasiCompactCover_iff, QuasiCompactCover.of_finite (Mathlib.AlgebraicGeometry.Cover.QuasiCompact)",
+   "date": "2026-10-09",
+   "verdict": "supports the match (QuasiCompactCover is the covering condition of fpqcPrecoverage)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 50,64p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; rg -n 'abbrev propQCPrecoverage' -A2 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean; sed -n 70,80p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean; rg -n 'class QuasiCompactCover' -A3 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; rg -n 'def IsCompactOpenCovered' -A5 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sets/CompactOpenCovered.lean",
+   "results": "fpqcPrecoverage := propQCPrecoverage @Flat (Fpqc.lean:60); propQCPrecoverage P := qcPrecoverage ⊓ Scheme.precoverage P (QuasiCompact.lean:112); Scheme.precoverage P := jointlySurjectivePrecoverage ⊓ P.precoverage (MorphismProperty.lean:78); QuasiCompactCover: for every affine open U, IsCompactOpenCovered (𝒰.f ·) U (Cover/QuasiCompact.lean:38); IsCompactOpenCovered: finitely many indices and compact opens V_i with ⋃ f_i(V_i) = U (CompactOpenCovered.lean:35)",
+   "date": "2026-10-09",
+   "verdict": "confirmed: flat arrows; Mathlib's condition (for each affine U, finitely many quasi-compact opens with union of images = U) agrees with Stacks' (affine opens) since a quasi-compact open is a finite union of affine opens and an affine open is quasi-compact; joint surjectivity follows from the affine condition"
   }
  ],
  "mathlib_match": {

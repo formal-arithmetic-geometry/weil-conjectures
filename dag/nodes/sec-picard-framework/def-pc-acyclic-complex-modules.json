@@ -28,6 +28,27 @@
    "results": "`categoryWithHomology_of_abelian` (Abelian.lean:193): every short complex in an abelian category has homology, so `K.homology i` is defined for complexes of `SheafOfModules R`",
    "date": "2026-10-09",
    "verdict": "supports the specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homological complex acyclic: exact at every degree",
+   "results": "HomologicalComplex.acyclic_iff, HomologicalComplex.Acyclic, HomologicalComplex.ExactAt (Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex); HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic (Mathlib.Algebra.Homology.HomotopyCategory.Acyclic)",
+   "date": "2026-10-09",
+   "verdict": "match: HomologicalComplex.Acyclic"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Acyclic",
+   "results": "HomologicalComplex.Acyclic {C} [Category C] [HasZeroMorphisms C] {ι} {c : ComplexShape ι} (K : HomologicalComplex C c) : Prop; acyclic_iff : K.Acyclic ↔ ∀ i, K.ExactAt i; acyclic_of_isZero (Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def Acyclic|def ExactAt|lemma exactAt_iff_isZero_homology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean",
+   "results": "ExactAt (line 651), exactAt_iff_isZero_homology (line 670), Acyclic := ∀ i, K.ExactAt i (line 681): the recorded declaration exists at the recorded file",
+   "date": "2026-10-09",
+   "verdict": "confirmed: hypotheses (a category with zero morphisms, here the abelian SheafOfModules R, complex shape up ℤ) specialize to the node's site, sheaf of rings and cochain complex; conclusion ∀ i, ExactAt i ⟺ ∀ i, IsZero (homology i), i.e. H^i = 0 for all i, as the node says"
   }
  ],
  "mathlib_match": {

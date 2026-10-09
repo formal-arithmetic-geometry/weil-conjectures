@@ -44,6 +44,34 @@
    "results": "none: no flatness notion for complexes or for sheaves/presheaves of modules; the ingredients exist: `CochainComplex (SheafOfModules R) ℤ` (def-pc-cochain-complex-modules), `HomologicalComplex.Acyclic` (def-pc-acyclic-complex-modules), `QuasiIso` (def-pc-quasi-iso-modules), `HomologicalComplex.mapBifunctor` (def-pc-tensor-complex-sheaves)",
    "date": "2026-10-09",
    "verdict": "no match: K-flatness is to be defined from these ingredients (one line: `∀ F, F.Acyclic → (mapBifunctor F K T (ComplexShape.up ℤ)).Acyclic`)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat complex: tensor product with any acyclic complex is acyclic",
+   "results": "Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact (Mathlib.RingTheory.Flat.CategoryTheory), CochainComplex.IsKProjective.leftOrthogonal (Mathlib.Algebra.Homology.HomotopyCategory.KProjective)",
+   "date": "2026-10-09",
+   "verdict": "no match (flatness of single modules over a ring; K-projective only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\"",
+   "results": "only Lean.mkFlatCtorOfStructCtorName (Lean.Structure): no Mathlib declaration with KFlat in its name",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat complex: tensoring with acyclic complexes gives acyclic complexes; derived tensor product",
+   "results": "Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact (Mathlib.RingTheory.Flat.CategoryTheory), CategoryTheory.Tor' (Mathlib.CategoryTheory.Monoidal.Tor)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -ln -i 'k-flat|kflat|derivedTensor|tensorDerived|leftDerivedTensor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; rg -ln 'Monoidal|Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/",
+   "results": "none; no monoidal structure and no flatness notion on SheafOfModules (only PresheafOfModules/Monoidal.lean); Algebra/Homology/HomotopyCategory has KInjective.lean and KProjective.lean only",
+   "date": "2026-10-09",
+   "verdict": "no match: the split stands (notions are the leaves CochainComplex, Acyclic, QuasiIso, mapBifunctor)"
   }
  ],
  "mathlib_match": null,

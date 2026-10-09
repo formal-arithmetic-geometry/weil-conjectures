@@ -27,6 +27,27 @@
    "results": "`HomologicalComplex` over an abelian category is abelian (HomologicalComplexAbelian.lean:45); `SheafOfModules R` is abelian (Sheaf/Abelian.lean:40)",
    "date": "2026-10-09",
    "verdict": "supports the specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "category of cochain complexes indexed by integers",
+   "results": "CochainComplex, CochainComplex.of (Mathlib.Algebra.Homology.HomologicalComplex); CochainComplex.instHasShiftInt (Mathlib.Algebra.Homology.HomotopyCategory.Shift)",
+   "date": "2026-10-09",
+   "verdict": "match: CochainComplex"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, CategoryTheory.Abelian",
+   "results": "CochainComplex.isIso_liftCycles_iff, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, DerivedCategory.Q : CochainComplex C ℤ ⥤ DerivedCategory C (complexes over an abelian category)",
+   "date": "2026-10-09",
+   "verdict": "supports the match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n '^abbrev CochainComplex' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologicalComplex.lean; rg -n 'instance : Abelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
+   "results": "CochainComplex V α := HomologicalComplex V (ComplexShape.up α) (line 157); `noncomputable instance : Abelian (HomologicalComplex C c)` (HomologicalComplexAbelian.lean:45); `noncomputable instance : Abelian (SheafOfModules.{v} R)` (Sheaf/Abelian.lean:40)",
+   "date": "2026-10-09",
+   "verdict": "confirmed: with V = SheafOfModules R, α = ℤ, objects are families F^i with d^i : F^i → F^{i+1}, d∘d = 0, morphisms degreewise commuting with d, and the category is abelian, as the node says"
   }
  ],
  "mathlib_match": {

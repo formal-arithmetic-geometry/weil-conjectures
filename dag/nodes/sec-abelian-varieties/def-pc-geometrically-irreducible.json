@@ -48,6 +48,27 @@
    "results": "Statement.lean:8 imports Mathlib.AlgebraicGeometry.Geometrically.Integral and line 93 takes [GeometricallyIntegral f]: the source repository states its targets with Mathlib's notion",
    "date": "2026-10-09",
    "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometrically irreducible morphism of schemes",
+   "results": "IsSmooth.casesOn, isIntegral_of_irreducibleSpace_of_isReduced, IsIntegralHom, FormallyUnramified.* (the index has no Geometrically/ files)",
+   "date": "2026-10-09",
+   "verdict": "no direct hit; see grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometrically irreducible scheme over a field: base change to every field is irreducible",
+   "results": "isField_of_universallyClosed (Morphisms.Proper), irreducibleSpace_of_isIntegral (Properties), IsIntegralHom.instIsStableUnderBaseChangeScheme (index v4.28.0 has no Geometrically/ files)",
+   "date": "2026-10-09",
+   "verdict": "no direct hit; see grep"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n '^def geometrically|^class Geometrically' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Geometrically/*.lean; sed -n 125,145p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Geometrically/Basic.lean",
+   "results": "geometrically (Basic.lean:46: ∀ field K : Type u, ∀ y : Spec K ⟶ Y, every pullback Z satisfies P), GeometricallyIrreducible (Irreducible.lean:42), GeometricallyReduced (Reduced.lean:44), GeometricallyConnected (Connected.lean:40), GeometricallyIntegral (Integral.lean:40); geometrically_iff_of_commRing (Basic.lean:129) and …_of_isClosedUnderIsomorphisms (:138): for f : X ⟶ Spec R, ∀ K [Field K] [Algebra R K], P (pullback f (Spec.map (algebraMap R K)))",
+   "date": "2026-10-09",
+   "verdict": "confirmed: with R = k this is 'X_{k'} has P for every field extension k'/k' (fields in the universe of the scheme), as the node says, one class per clause"
   }
  ],
  "mathlib_match": {

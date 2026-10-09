@@ -34,6 +34,27 @@
    "results": "no declaration named base change of a scheme: in Mathlib the base change of f : X ⟶ S along T ⟶ S is pullback f (T ↘ S) with pullback.snd as pr_T and pullback.fst as f_T (HasPullbacks Scheme, Pullbacks.lean:485), the base change of a morphism is pullback.map, and 'base change' appears only in MorphismProperty.IsStableUnderBaseChange (Morphisms/Basic.lean:432ff); the induced section is pullback.lift (σ ≫ ...) (𝟙 T) _; the fibre is Scheme.Hom.fiber (Fiber.lean:38); the module base change is Scheme.Modules.pullback (pullback.map ...) (Modules/Sheaf.lean:183); no Mathlib notion of geometric fibre or geometric point (AlgebraicClosure appears in AlgebraicGeometry only in Group/Abelian.lean:136, as the base change to Spec (AlgebraicClosure K) written by hand; Geometrically/Basic.lean quantifies over all fields K instead)",
    "date": "2026-10-09",
    "verdict": "no match: the node is a bundle of notations; every notion it is built from is a statement dependency, and each of those is a Mathlib leaf except def-weil-pbc-scheme-conventions (geometric fibre and geometric point), which is unsplit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "base change of a scheme X over S along T → S, pullback of schemes",
+   "results": "Algebra.Extension.baseChange, AlgebraicGeometry.Scheme.canonicallyOverPullback, Scheme.Pullback.instHasPullback, pullbackSpecIso (Mathlib.AlgebraicGeometry.Pullbacks), Scheme.Pullback.Triplet",
+   "date": "2026-10-09",
+   "verdict": "no match for the bundle; ingredients only (pullback)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change of a morphism of schemes along T → S, X ×_S T as a scheme over T, pullback.map",
+   "results": "Scheme.canonicallyOverPullback, Scheme.instIsOverFstOverInferInstanceOverClassId (Mathlib.AlgebraicGeometry.Pullbacks), Scheme.Pullback.Triplet, RingHom.IsStableUnderBaseChange.pullback_fst_appTop",
+   "date": "2026-10-09",
+   "verdict": "no match for the bundle"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'instance : HasPullbacks Scheme' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Pullbacks.lean; rg -n 'canonicallyOverPullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Pullbacks.lean",
+   "results": "HasPullbacks Scheme (line 485); canonicallyOverPullback: pullback (M ↘ S) f is canonically over T",
+   "date": "2026-10-09",
+   "verdict": "no match: the node is a bundle of notations; the split into its leaves stands"
   }
  ],
  "mathlib_match": null,

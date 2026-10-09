@@ -20,6 +20,27 @@
    "results": "`CategoryTheory.constantSheaf J D : D ⥤ Sheaf J D := Functor.const Cᵒᵖ ⋙ presheafToSheaf J D` (CategoryTheory/Sites/ConstantSheaf.lean:66), with `constantSheafAdj` (left adjoint to sections over a terminal object). Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean is NOT this: it defines `continuousMapPresheaf T` (U ↦ C(U,T)) and proves it an fpqc sheaf; its docstring leaves 'this is the constant sheaf when T is discrete' as a TODO (that identification is B-S Lemma 4.2.12)",
    "date": "2026-10-09",
    "verdict": "match: `CategoryTheory.constantSheaf`; the AlgebraicGeometry file does not give the constant sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf on a site, sheafification of constant presheaf",
+   "results": "CategoryTheory.constantSheaf, CategoryTheory.Sheaf.IsConstant (Mathlib.CategoryTheory.Sites.ConstantSheaf), LightCondensed.IsDiscrete, TopCat.Presheaf.sheafify",
+   "date": "2026-10-09",
+   "verdict": "match: CategoryTheory.constantSheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant sheaf functor D ⥤ Sheaf J D",
+   "results": "CategoryTheory.constantSheaf, CategoryTheory.Sheaf.IsConstant (Mathlib.CategoryTheory.Sites.ConstantSheaf), LightCondensed.discrete",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def constantSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "results": "`noncomputable def constantSheaf : D ⥤ Sheaf J D := Functor.const Cᵒᵖ ⋙ (presheafToSheaf J D)` (line 66), under [HasWeakSheafify J D]",
+   "date": "2026-10-09",
+   "verdict": "confirmed: for E in D the sheaf is the sheafification of the constant presheaf U ↦ E with identity restrictions, as the node says; with D = RingCat/CommRingCat (universe u+1 on Y.ProEt) and E = A this is A_Y"
   }
  ],
  "mathlib_match": {

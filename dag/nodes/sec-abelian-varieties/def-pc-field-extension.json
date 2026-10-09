@@ -28,6 +28,27 @@
    "results": "RingTheory/SimpleRing/Basic.lean:67: RingHom.injective, a ring homomorphism out of a division ring (in particular a field) into a nontrivial ring is injective",
    "date": "2026-10-09",
    "verdict": "match (for the injectivity remark)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "field extension L/K as an algebra over K, ring hom from field is injective",
+   "results": "Subfield.subtype_injective, algebraMap_injective_of_field_isFractionRing, IntermediateField.inclusion_injective, IntermediateField.toSubalgebra_injective",
+   "date": "2026-10-09",
+   "verdict": "supports the convention [Field K] [Field L] [Algebra K L]"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "field extension L over K given as Algebra K L with K and L fields",
+   "results": "IntermediateField (K L) [Field K] [Field L] [Algebra K L], IntermediateField.toAlgebra, IntermediateField.toField (Mathlib.FieldTheory.IntermediateField.Basic)",
+   "date": "2026-10-09",
+   "verdict": "supports the match: Mathlib's field extension is [Field k] [Field k'] [Algebra k k']"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n '^class Algebra|^abbrev RingHom.toAlgebra ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Algebra/Defs.lean; rg -n 'protected theorem _root_.RingHom.injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/SimpleRing/Basic.lean",
+   "results": "class Algebra (line 95), RingHom.toAlgebra (line 197), RingHom.injective (SimpleRing/Basic.lean:67)",
+   "date": "2026-10-09",
+   "verdict": "confirmed: a field k' with a ring map k → k' is [Field k'] [Algebra k k'] (algebraMap), injective by RingHom.injective, as the node says"
   }
  ],
  "mathlib_match": {
