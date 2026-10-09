@@ -44,6 +44,15 @@ local instance :
     Category (MorphismProperty.Over (@IsAffineHom : MorphismProperty Scheme.{u}) ⊤ Y) :=
   MorphismProperty.Comma.instCategory _ _ _ _ _
 
+local instance : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).IsStableUnderBaseChange :=
+  MorphismProperty.IsStableUnderBaseChange.inf
+
+local instance : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).HasOfPostcompProperty
+    (@IsFinite ⊓ @Etale) := by
+  refine ⟨fun {X Y Z} f g hg hfg ↦ ?_⟩
+  have := hg.1; have := hg.2; have := hfg.1; have := hfg.2
+  exact ⟨IsFinite.of_comp f g, Etale.of_comp f g⟩
+
 variable (Y) in
 /-- A finite étale `Y`-scheme as an affine `Y`-scheme. -/
 @[simps]
@@ -148,15 +157,6 @@ instance : (toFiniteEtaleOver Y).EssSurj where
     ⟨MorphismProperty.Over.isoMk (Iso.refl _)⟩⟩
 instance : (toFiniteEtaleOver Y).IsEquivalence where
 
-local instance : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).IsStableUnderBaseChange :=
-  MorphismProperty.IsStableUnderBaseChange.inf
-
-local instance : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).HasOfPostcompProperty
-    (@IsFinite ⊓ @Etale) := by
-  refine ⟨fun {X Y Z} f g hg hfg ↦ ?_⟩
-  have := hg.1; have := hg.2; have := hfg.1; have := hfg.2
-  exact ⟨IsFinite.of_comp f g, Etale.of_comp f g⟩
-
 instance : HasFiniteLimits Y.FiniteEtale :=
   ⟨fun _ _ _ ↦ Adjunction.hasLimitsOfShape_of_equivalence (toFiniteEtaleOver Y)⟩
 
@@ -252,6 +252,108 @@ lemma monoInducesIsoOnDirectSummand {X Z : Y.FiniteEtale} (i : X ⟶ Z) [Mono i]
   exact ⟨Z', ofIsClopenι Z W hW, ⟨IsColimit.ofPointIso (isColimitCoprodCofan X Z')⟩⟩
 
 end Limits
+
+section FiberLimits
+
+variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+
+/-- The fibre functor followed by the inclusion into types is corepresented by `s` on
+`Y`-schemes. -/
+noncomputable def fiberCompInclIso : fiber s ⋙ FintypeCat.incl ≅
+    toFiniteEtaleOver Y ⋙ MorphismProperty.Over.forget _ ⊤ Y ⋙ coyoneda.obj (.op (Over.mk s)) :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _)
+
+instance : PreservesFiniteLimits (fiber s ⋙ FintypeCat.incl) :=
+  preservesFiniteLimits_of_natIso (fiberCompInclIso s).symm
+
+instance : PreservesFiniteLimits (fiber s) :=
+  preservesFiniteLimits_of_reflects_of_preserves (fiber s) FintypeCat.incl
+
+omit [IsSepClosed Ω] in
+/-- A geometric point of a disjoint union factors through one of the summands. -/
+lemma _root_.AlgebraicGeometry.exists_eq_comp_inl_or_inr {X X' : Scheme.{u}}
+    (x : Spec (.of Ω) ⟶ X ⨿ X') :
+    (∃ y, x = y ≫ (coprod.inl : X ⟶ X ⨿ X')) ∨ ∃ y, x = y ≫ (coprod.inr : X' ⟶ X ⨿ X') := by
+  have hpt (p : Spec (.of Ω)) : p = default := Subsingleton.elim _ _
+  obtain ⟨(a | a), ha⟩ := (coprodMk X X').surjective (x default)
+  · left
+    have h : Set.range x ⊆ Set.range (coprod.inl : X ⟶ X ⨿ X') := by
+      rintro _ ⟨p, rfl⟩
+      exact ⟨a, by rw [hpt p, ← ha, coprodMk_inl]⟩
+    exact ⟨IsOpenImmersion.lift _ x h, (IsOpenImmersion.lift_fac _ _ h).symm⟩
+  · right
+    have h : Set.range x ⊆ Set.range (coprod.inr : X' ⟶ X ⨿ X') := by
+      rintro _ ⟨p, rfl⟩
+      exact ⟨a, by rw [hpt p, ← ha, coprodMk_inr]⟩
+    exact ⟨IsOpenImmersion.lift _ x h, (IsOpenImmersion.lift_fac _ _ h).symm⟩
+
+lemma isColimit_binaryCofan_fiber (P Q : Y.FiniteEtale) :
+    Nonempty (IsColimit (BinaryCofan.mk ((fiber s ⋙ FintypeCat.incl).map (coprodCofan P Q).inl)
+      ((fiber s ⋙ FintypeCat.incl).map (coprodCofan P Q).inr))) := by
+  rw [Types.binaryCofan_isColimit_iff]
+  have hinl (y y' : (fiber s).obj P) (h : (fiber s).map (coprodCofan P Q).inl y =
+      (fiber s).map (coprodCofan P Q).inl y') : y = y' := by
+    apply fiber_ext
+    have := congr_arg (fun z : (fiber s).obj (coprod P Q) ↦ z.left) h
+    simp only [fiber_map_left] at this
+    exact (cancel_mono (coprod.inl : P.obj.left ⟶ P.obj.left ⨿ Q.obj.left)).mp this
+  have hinr (y y' : (fiber s).obj Q) (h : (fiber s).map (coprodCofan P Q).inr y =
+      (fiber s).map (coprodCofan P Q).inr y') : y = y' := by
+    apply fiber_ext
+    have := congr_arg (fun z : (fiber s).obj (coprod P Q) ↦ z.left) h
+    simp only [fiber_map_left] at this
+    exact (cancel_mono (coprod.inr : Q.obj.left ⟶ P.obj.left ⨿ Q.obj.left)).mp this
+  refine ⟨hinl, hinr, ⟨?_, ?_⟩⟩
+  · rw [Set.disjoint_iff]
+    rintro _ ⟨⟨y, rfl⟩, ⟨y', hy'⟩⟩
+    change (fiber s).obj P at y
+    change (fiber s).obj Q at y'
+    change (fiber s).map (coprodCofan P Q).inr y' = (fiber s).map (coprodCofan P Q).inl y at hy'
+    have := congr_arg (fun z : (fiber s).obj (coprod P Q) ↦ z.left) hy'
+    simp only [fiber_map_left] at this
+    have := congr_arg (fun g : Spec (.of Ω) ⟶ P.obj.left ⨿ Q.obj.left ↦ g (default : Spec (.of Ω)))
+      this
+    simp only [Scheme.Hom.comp_apply] at this
+    exact inr_ne_inl _ _ _ _ this
+  · refine codisjoint_iff.mpr (Set.eq_univ_of_forall fun x ↦ ?_)
+    change (fiber s).obj (coprod P Q) at x
+    rcases exists_eq_comp_inl_or_inr x.left with ⟨y, hy⟩ | ⟨y, hy⟩
+    · refine .inl ⟨Over.homMk y ?_, fiber_ext s ?_⟩
+      · change y ≫ P.obj.hom = s
+        rw [← fiber_left_comp s x, hy, Category.assoc]
+        exact congr_arg (y ≫ ·) (coprod.inl_desc _ _).symm
+      · exact hy.symm
+    · refine .inr ⟨Over.homMk y ?_, fiber_ext s ?_⟩
+      · change y ≫ Q.obj.hom = s
+        rw [← fiber_left_comp s x, hy, Category.assoc]
+        exact congr_arg (y ≫ ·) (coprod.inr_desc _ _).symm
+      · exact hy.symm
+
+instance (P Q : Y.FiniteEtale) : PreservesColimit (pair P Q) (fiber s) :=
+  preservesColimit_of_preserves_colimit_cocone (isColimitCoprodCofan P Q)
+    (isColimitOfReflects FintypeCat.incl
+      ((isColimitMapCoconeBinaryCofanEquiv (fiber s ⋙ FintypeCat.incl) _ _).symm
+        (isColimit_binaryCofan_fiber s P Q).some))
+
+lemma isEmpty_fiber_empty : IsEmpty ((fiber s).obj (empty (Y := Y))) :=
+  ⟨fun x ↦ (inferInstance : IsEmpty (∅ : Scheme.{u})).false (x.left (default : Spec (.of Ω)))⟩
+
+instance : PreservesColimit (Functor.empty.{0} Y.FiniteEtale) (fiber s) := by
+  have := isEmpty_fiber_empty s
+  obtain ⟨h⟩ := (Types.initial_iff_empty ((fiber s ⋙ FintypeCat.incl).obj empty)).mpr this
+  exact preservesColimit_of_preserves_colimit_cocone isInitialEmpty
+    ((isColimitMapCoconeEmptyCoconeEquiv _ _).symm (IsInitial.isInitialOfObj FintypeCat.incl _ h))
+
+instance : PreservesColimitsOfShape (Discrete WalkingPair) (fiber s) :=
+  ⟨fun {K} ↦ preservesColimit_of_iso_diagram _ (diagramIsoPair K).symm⟩
+
+instance : PreservesColimitsOfShape (Discrete PEmpty.{1}) (fiber s) :=
+  preservesColimitsOfShape_pempty_of_preservesInitial (fiber s)
+
+instance : PreservesFiniteCoproducts (fiber s) :=
+  ⟨fun n ↦ PreservesFiniteCoproducts.of_preserves_binary_and_initial (fiber s) (Fin n)⟩
+
+end FiberLimits
 
 section Quotient
 
