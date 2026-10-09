@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-basic-open-pullback",
+ "kind": "statement",
+ "title": "Preimage of the nonvanishing locus of a section under a morphism of schemes",
+ "statement": "Let $g:Y\\to X$ be a morphism of schemes [def-pc-scheme], $U\\subseteq X$ open and $f\\in\\mathcal O_X(U)$, and let $g^\\sharp(f)\\in\\mathcal O_Y(g^{-1}U)$ be its pullback. For an open $W$ of a scheme $Z$ and $h\\in\\mathcal O_Z(W)$ write $D(h)=\\{z\\in W: h_z\\notin\\mathfrak m_z\\}$ ($h_z$ a unit of $\\mathcal O_{Z,z}$). Then $g^{-1}(D(f))=D(g^\\sharp(f))$. In particular for $f\\in\\Gamma(X,\\mathcal O_X)$: $g^{-1}(X_f)=Y_{g^\\sharp f}$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Remark Tag 0H78 (remark-pullback-s-open), with L = O_X; the reason: for y ∈ g^{-1}U the stalk map g^♯_y : O_{X,g(y)} → O_{Y,y} is a local homomorphism sending f_{g(y)} to (g^♯f)_y (Schemes, Definition Tag 01HB, definition-locally-ringed-space), and a local homomorphism maps an element to a unit iff the element is a unit"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-basic-open-function"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "preimage of basic open of a global section under a morphism of schemes is the basic open of the pulled back section",
+   "results": "AlgebraicGeometry.Scheme.basicOpen_appLE, Scheme.preimage_basicOpen_top, Scheme.Hom.preimage_basicOpen, Scheme.Hom.preimage_basicOpen_top, Scheme.preimage_basicOpen (Mathlib.AlgebraicGeometry.Scheme)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.preimage_basicOpen_top",
+   "results": "Scheme.preimage_basicOpen_top (f : X ⟶ Y) (r : Γ(Y, ⊤)) : (Opens.map f.base).obj (Y.basicOpen r) = X.basicOpen (f.appTop r) (Mathlib.AlgebraicGeometry.Scheme)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem preimage_basicOpen\\|theorem mem_basicOpen' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Scheme.lean",
+   "results": "Scheme.lean:641 mem_basicOpen (x ∈ X.basicOpen f ↔ IsUnit (germ f)), :655 mem_basicOpen_top, :679 preimage_basicOpen (f : X ⟶ Y) {U : Y.Opens} (r : Γ(Y, U)) : f ⁻¹ᵁ Y.basicOpen r = X.basicOpen (f.app U r), :685 preimage_basicOpen_top; also Geometry/RingedSpace/LocallyRingedSpace.lean:455 LocallyRingedSpace.preimage_basicOpen",
+   "date": "2026-10-10",
+   "verdict": "match (exact)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.preimage_basicOpen, AlgebraicGeometry.Scheme.preimage_basicOpen_top",
+  "file": "Mathlib/AlgebraicGeometry/Scheme.lean",
+  "how": "exact: preimage_basicOpen (line 679) f ⁻¹ᵁ Y.basicOpen r = X.basicOpen (f.app U r) (Mathlib's names: f : X ⟶ Y here is g : Y → X of the node); preimage_basicOpen_top (:685) the global-section case; X.basicOpen is D(-) by Scheme.mem_basicOpen (:641), as in lem-weil-pbc-basic-open-function"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-scheme-clopen-idempotent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf Scheme.preimage_basicOpen (Scheme.lean:679) and preimage_basicOpen_top (:685); checked."
+ }
+}

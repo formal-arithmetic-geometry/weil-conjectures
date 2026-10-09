@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-sheaf-disjoint-union-product",
+ "kind": "statement",
+ "title": "Sections of a sheaf over a disjoint union of two opens",
+ "statement": "Let $X$ be a topological space, $\\mathcal F$ a sheaf of rings on $X$, and $U,V\\subseteq X$ open with $U\\cap V=\\emptyset$. Then the map $\\mathcal F(U\\cup V)\\to\\mathcal F(U)\\times\\mathcal F(V)$, $s\\mapsto(s|_U,s|_V)$, is an isomorphism of rings (onto the product ring). In particular, for a scheme $X$ and an open and closed $U\\subseteq X$, $\\Gamma(X,\\mathcal O_X)\\to\\mathcal O_X(U)\\times\\mathcal O_X(X\\setminus U)$ is a ring isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Definition Tag 006T (definition-sheaf: the sheaf condition for the covering U∪V={U,V}; the compatibility on U∩V=∅ is automatic because F(∅) is a singleton, Remark Tag 006U, remark-confusion); used in this form in Schemes, Lemma Tag 01I5 (lemma-disjoint-union-affines), proof: 'R = O_X(U) × O_X(V) by the sheaf property'"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf sections over union of two disjoint opens is the product of the sections",
+   "results": "AlgebraicGeometry.Scheme.coprodPresheafObjIso (Mathlib.AlgebraicGeometry.Limits; for a coproduct scheme), TopCat.Sheaf.isProductOfDisjoint (Mathlib.Topology.Sheaves.SheafCondition.PairwiseIntersections), TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd (Mathlib.Topology.Sheaves.CommRingCat), TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types",
+   "date": "2026-10-10",
+   "verdict": "match: TopCat.Sheaf.isProductOfDisjoint"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.isProductOfDisjoint",
+   "results": "TopCat.Sheaf.isProductOfDisjoint (F : TopCat.Sheaf C X) (U V : Opens X) (h : U ⊓ V = ⊥) : IsLimit (BinaryFan.mk (F.obj.map (homOfLE _).op) (F.obj.map (homOfLE _).op)) (Mathlib.Topology.Sheaves.SheafCondition.PairwiseIntersections)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isProductOfDisjoint\\|def objSupIsoProdEqLocus\\|objSupIsoProdEqLocus_inv_fst\\|objSupIsoProdEqLocus_inv_snd' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/CommRingCat.lean",
+   "results": "PairwiseIntersections.lean:428 def isProductOfDisjoint (h : U ⊓ V = ⊥) : IsLimit (BinaryFan.mk ...) ('If U, V are disjoint, then F(U ⊔ V) = F(U) × F(V)'); CommRingCat.lean:301 objSupIsoProdEqLocus (F : X.Sheaf CommRingCat) (U V) : F(U ⊔ V) ≅ the equalizer subring of F(U) × F(V), with :327 _inv_fst, :335 _inv_snd",
+   "date": "2026-10-10",
+   "verdict": "match (exact)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.Sheaf.isProductOfDisjoint, TopCat.Sheaf.objSupIsoProdEqLocus",
+  "file": "Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean",
+  "how": "exact: isProductOfDisjoint (line 428) says F(U ⊔ V) with the two restrictions is a product of F(U) and F(V) in the value category (CommRingCat: the product ring); in ring form, objSupIsoProdEqLocus (Mathlib/Topology/Sheaves/CommRingCat.lean:301) identifies F(U ⊔ V) with the subring of F(U) × F(V) where the restrictions to U ⊓ V agree, all of F(U) × F(V) when U ⊓ V = ⊥ (F(⊥) is terminal, isTerminalOfEqEmpty, SheafCondition/Sites.lean:232); slopmaster2's Scheme.connectedSpace_iff_isIdempotentElem uses it this way"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-scheme-clopen-idempotent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf TopCat.Sheaf.isProductOfDisjoint (PairwiseIntersections.lean:428), ring form objSupIsoProdEqLocus (Sheaves/CommRingCat.lean:301); checked."
+ }
+}

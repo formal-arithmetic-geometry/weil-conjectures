@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-sheaf-sections-determined-by-germs",
+ "kind": "statement",
+ "title": "Sections of a sheaf are determined by their germs",
+ "statement": "Let $X$ be a topological space, $\\mathcal F$ a sheaf of sets (or of rings) on $X$ and $U\\subseteq X$ open. If $s,t\\in\\mathcal F(U)$ have the same germ $s_x=t_x\\in\\mathcal F_x$ at every $x\\in U$, then $s=t$; i.e. $\\mathcal F(U)\\to\\prod_{x\\in U}\\mathcal F_x$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma Tag 0079 (lemma-sheaf-subset-stalks)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "two sections of a sheaf with equal germs at every point are equal",
+   "results": "TopCat.Presheaf.IsSheaf.section_ext (Mathlib.Topology.Sheaves.Sheaf), TopCat.Presheaf.section_ext (Mathlib.Topology.Sheaves.Stalks), TopCat.Presheaf.germ_eq, TopCat.Presheaf.germ_ext",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.section_ext",
+   "results": "TopCat.Presheaf.section_ext (F : TopCat.Sheaf C X) (U : Opens X) (s t) (h : ∀ x (hx : x ∈ U), germ U x hx s = germ U x hx t) : s = t (Mathlib.Topology.Sheaves.Stalks)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem section_ext' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Stalks.lean",
+   "results": "Stalks.lean:520 theorem section_ext (F : Sheaf C X) (U : Opens X) (s t : ToType (F.1.obj (op U))) (h : ∀ (x : X) (hx : x ∈ U), F.presheaf.germ U x hx s = F.presheaf.germ U x hx t) : s = t, for C concrete with limits/filtered colimits preserved and forget reflecting isos (CommRingCat, Type)",
+   "date": "2026-10-10",
+   "verdict": "match (exact)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.Presheaf.section_ext",
+  "file": "Mathlib/Topology/Sheaves/Stalks.lean",
+  "how": "exact (line 520), for sheaves valued in a concrete category such as CommRingCat (the structure sheaf of a scheme: applied as TopCat.Presheaf.section_ext X.sheaf in slopmaster2's Scheme.connectedSpace_iff_isIdempotentElem)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-scheme-clopen-idempotent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf TopCat.Presheaf.section_ext (Stalks.lean:520); checked."
+ }
+}

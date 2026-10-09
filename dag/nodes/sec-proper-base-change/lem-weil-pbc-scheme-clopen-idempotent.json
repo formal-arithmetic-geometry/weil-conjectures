@@ -10,9 +10,82 @@
  "stmt_deps": [
   "def-pc-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (values of an idempotent at the stalks).* Let $e\\in\\Gamma(X,\\mathcal O_X)$ be idempotent and $x\\in X$. The germ map $\\Gamma(X,\\mathcal O_X)\\to\\mathcal O_{X,x}$ is a ring homomorphism, so $e_x^2=(e^2)_x=e_x$, and $\\mathcal O_{X,x}$ is a local ring because $X$ is a scheme (a locally ringed space) [def-pc-scheme]. By [lem-weil-pbc-local-ring-idempotent-zero-one], $e_x\\in\\{0,1\\}$, and $e_x\\neq0\\iff e_x=1\\iff e_x\\notin\\mathfrak m_x$. Hence $U_e=\\{x:e_x\\neq0\\}=\\{x:e_x=1\\}=D(e)=\\{x: e_x\\notin\\mathfrak m_x\\}$, the nonvanishing locus of $e$ of [lem-weil-pbc-basic-open-function] (with $U=X$).",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-local-ring-idempotent-zero-one",
+    "lem-weil-pbc-basic-open-function"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00E9 (lemma-characterize-local-ring) for the local ring; Schemes, Lemma Tag 01HZ (lemma-f-open) for D(e)"
+   }
+  },
+  {
+   "text": "*Step 2 (statement (a)).* By Step 1 and [lem-weil-pbc-basic-open-function] (b), $U_e=D(e)$ is open. The element $1-e$ is again idempotent: $(1-e)^2=1-2e+e^2=1-e$. Its germ at $x$ is $1-e_x$, so by Step 1 applied to $1-e$: $x\\in U_{1-e}\\iff 1-e_x\\neq0\\iff e_x\\neq1\\iff e_x=0\\iff x\\notin U_e$ (using $e_x\\in\\{0,1\\}$ and $0\\neq1$ in the local ring $\\mathcal O_{X,x}$). Thus $X\\setminus U_e=U_{1-e}$, which is open by the same argument; so $U_e$ is open and closed.",
+   "uses": [
+    "lem-weil-pbc-basic-open-function",
+    "lem-weil-pbc-local-ring-idempotent-zero-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00EE (lemma-disjoint-decomposition), the affine model D(e), D(1-e) complementary; here pointwise on the stalks"
+   }
+  },
+  {
+   "text": "*Step 3 (statement (b), injectivity).* Let $e,e'$ be idempotents of $\\Gamma(X,\\mathcal O_X)$ with $U_e=U_{e'}$. For each $x\\in X$, $e_x,e'_x\\in\\{0,1\\}$ by Step 1, and $e_x=1\\iff x\\in U_e=U_{e'}\\iff e'_x=1$; hence $e_x=e'_x$ for every $x\\in X$. Since $\\mathcal O_X$ is a sheaf, [lem-weil-pbc-sheaf-sections-determined-by-germs] (with $U=X$) gives $e=e'$.",
+   "uses": [
+    "lem-weil-pbc-local-ring-idempotent-zero-one",
+    "lem-weil-pbc-sheaf-sections-determined-by-germs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 0079 (lemma-sheaf-subset-stalks)"
+   }
+  },
+  {
+   "text": "*Step 4 (statement (b), surjectivity and the inverse).* Let $U\\subseteq X$ be open and closed and $V=X\\setminus U$, open, with $U\\cap V=\\emptyset$ and $U\\cup V=X$. By [lem-weil-pbc-sheaf-disjoint-union-product] the restriction map $\\rho:\\Gamma(X,\\mathcal O_X)\\to\\mathcal O_X(U)\\times\\mathcal O_X(V)$, $s\\mapsto(s|_U,s|_V)$, is a ring isomorphism (this holds also when $U$ or $V$ is empty, $\\mathcal O_X(\\emptyset)$ being the zero ring). Let $e=\\rho^{-1}(1,0)$; it is the unique global section with $e|_U=1$ and $e|_V=0$. Since $\\rho(e^2)=(1,0)^2=(1,0)=\\rho(e)$ and $\\rho$ is injective, $e^2=e$. For $x\\in U$, $e_x=(e|_U)_x=1\\neq0$ (local ring), so $x\\in U_e$; for $x\\in V$, $e_x=(e|_V)_x=0$, so $x\\notin U_e$. Hence $U_e=U$, so $e\\mapsto U_e$ is surjective, and by Step 3 bijective; its inverse sends $U$ to this $e$, the unique global section that is $1$ on $U$ and $0$ on $X\\setminus U$.",
+   "uses": [
+    "lem-weil-pbc-sheaf-disjoint-union-product",
+    "lem-weil-pbc-local-ring-idempotent-zero-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01I5 (lemma-disjoint-union-affines), proof: 'R = O_X(U) × O_X(V) by the sheaf property'; Sheaves, Definition Tag 006T"
+   }
+  },
+  {
+   "text": "*Step 5 (statement (c)).* Let $g:Y\\to X$ be a morphism of schemes and $e\\in\\Gamma(X,\\mathcal O_X)$ idempotent. The map $g^\\sharp:\\Gamma(X,\\mathcal O_X)\\to\\Gamma(Y,\\mathcal O_Y)$ is a ring homomorphism, so $g^\\sharp(e)^2=g^\\sharp(e^2)=g^\\sharp(e)$. By Step 1 (on $X$ and on $Y$), $U_e=X_e=\\{x:e_x\\notin\\mathfrak m_x\\}$ and $U_{g^\\sharp e}=Y_{g^\\sharp e}$; by [lem-weil-pbc-basic-open-pullback], $g^{-1}(X_e)=Y_{g^\\sharp e}$. Hence $U_{g^\\sharp(e)}=g^{-1}(U_e)$.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-basic-open-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Remark Tag 0H78 (remark-pullback-s-open), with L = O_X"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-local-ring-idempotent-zero-one",
+  "lem-weil-pbc-basic-open-function",
+  "lem-weil-pbc-sheaf-sections-determined-by-germs",
+  "lem-weil-pbc-sheaf-disjoint-union-product",
+  "lem-weil-pbc-basic-open-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Assembled by the worker from Stacks: Sheaves Tag 0079 (injectivity via stalks), Sheaves Tag 006T and Schemes Tag 01I5 proof (O_X(U ⊔ V) = O_X(U) × O_X(V)), Modules Lemma Tag 01CY / Remark Tag 0H78 (nonvanishing loci and their pullbacks), Algebra Tag 00E9 and 00EE; no single Stacks statement for the scheme case. The same route is the closed Lean proof of AlgebraicGeometry.Scheme.connectedSpace_iff_isIdempotentElem (slopmaster2, WeilConjectures/Mathlib/AlgebraicGeometry/Scheme.lean:245)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,10 +121,45 @@
    "results": "only AlgebraicGeometry/Morphisms/OpenImmersion.lean:38 (isOpenImmersion_SpecMap_iff_of_surjective, kernel generated by an idempotent) and QuasiFinite.lean:443 (isClopen_singleton_asFiber); affine statements in RingTheory/Spectrum/Prime/Topology.lean:1031-1130",
    "date": "2026-10-10",
    "verdict": "no match: Mathlib has only the affine case (PrimeSpectrum.isIdempotentElemEquivClopens), the scheme case needs gluing over an affine cover"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.basicOpen, IsClopen",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.basicOpen, IsIdempotentElem",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "basicOpen of an idempotent global section of a scheme is clopen",
+   "results": "PrimeSpectrum.isClopen_iff, PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.isClopen_basicOpen_of_mul_add, PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens, RingedSpace.basicOpen_of_isUnit, PrimeSpectrum.isClopen_iff_zeroLocus, PrimeSpectrum.mulZeroAddOneEquivClopens, Scheme.basicOpen_one",
+   "date": "2026-10-10",
+   "verdict": "no match for schemes (affine only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme X, the basic open of an idempotent global section is open and closed; clopen subsets of a scheme correspond to idempotents of Γ(X, ⊤)",
+   "results": "PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.isClopen_iff, PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens, PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply, PrimeSpectrum.isClopen_iff_mul_add, PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen, PrimeSpectrum.basicOpen_isIdempotentElemEquivClopens_symm",
+   "date": "2026-10-10",
+   "verdict": "no match for schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Clopens\\|IsClopen' Mathlib/AlgebraicGeometry Mathlib/Topology/Sheaves; grep -rn IsIdempotentElem ~/weil-conjectures-slopmaster2/WeilConjectures (with basicOpen/isClopen/Scheme)",
+   "results": "Mathlib: only QuasiFinite.lean:443 isClopen_singleton_asFiber (unrelated). slopmaster2: AlgebraicGeometry.Scheme.connectedSpace_iff_isIdempotentElem (WeilConjectures/Mathlib/AlgebraicGeometry/Scheme.lean:245, closed: no sorry reached) proves inside its proof that D(e) is clopen with complement D(1-e) and builds the idempotent of a clopen via objSupIsoProdEqLocus, but states only 'X connected iff idempotents are 0,1'; Scheme.bijective_appTop_idempotent_of_henselianRing (HenselianFiniteEtale.lean:125, own sorry) is the henselian lifting, a different statement",
+   "date": "2026-10-10",
+   "verdict": "no match: the scheme-level bijection is in neither Mathlib nor slopmaster2 as a declaration; split into Mathlib leaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +179,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-scheme-clopen-idempotent",
+  "worker": "stage1",
+  "summary": "Split by stalks rather than by an affine cover (the brief's suggested route): Step 1 identifies U_e with the nonvanishing locus D(e) via the new node lem-weil-pbc-local-ring-idempotent-zero-one (closed in slopmaster2 as IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem, not in Mathlib); (a) openness from the reviewed leaf lem-weil-pbc-basic-open-function and complement U_{1-e}; (b) injectivity by germs (new Mathlib leaf lem-weil-pbc-sheaf-sections-determined-by-germs, Stacks 0079, TopCat.Presheaf.section_ext), surjectivity and the description of the inverse by O_X(U ⊔ V) = O_X(U) × O_X(V) for disjoint opens (new Mathlib leaf lem-weil-pbc-sheaf-disjoint-union-product, Stacks 006T/01I5, TopCat.Sheaf.isProductOfDisjoint); (c) by the new Mathlib leaf lem-weil-pbc-basic-open-pullback (Stacks 0H78, Scheme.preimage_basicOpen). The affine leaf lem-weil-pbc-spec-clopen-idempotent and the basis/gluing node are not needed. Statement unchanged; Mathlib searched three ways for the scheme case: absent (affine only). The same proof is the closed slopmaster2 proof of Scheme.connectedSpace_iff_isIdempotentElem."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Five steps through the stalks (agent proof from Stacks 0079, 006T/01I5, 0H78): e_x ∈ {0,1} so U_e = D(e), complement U_{1-e}, injectivity by germs, surjectivity by Γ(X) = O(U) × O(X∖U) for a clopen U, pullback by preimage_basicOpen. All checked. New Mathlib leaves verified: section_ext (Stalks.lean:520), isProductOfDisjoint (PairwiseIntersections.lean:428) with objSupIsoProdEqLocus (CommRingCat.lean:301), preimage_basicOpen/_top (Scheme.lean:679/685). The local-ring node closed by the sorry-free IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem of the source repository."
+ }
 }
