@@ -12,9 +12,58 @@
   "def-weil-pbc-category-colimit",
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the basis).* Let $\\mathcal B$ be the set of quasi-compact open subsets of $X$. Since $X$ is spectral [def-weil-spectral-space], the quasi-compact open subsets form a basis of the topology of $X$; so $\\mathcal B$ is a basis of the topology consisting of quasi-compact opens.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 0CAL (lemma-constructible-in-constant, line 3133): 'Let B be the set of quasi-compact open subsets of X'"
+   }
+  },
+  {
+   "text": "*Step 2 (directed colimit of finitely presented sheaves; Tag 0CAI).* Apply [lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers] to $X$, the basis $\\mathcal B$ of Step 1 and $\\mathcal F$. It gives a directed set $\\Lambda$, a system $(\\mathcal F_\\lambda,\\varphi_{\\mu\\lambda})_{\\lambda\\le\\mu}$ of sheaves of sets on $X$ over $\\Lambda$ and morphisms $c_\\lambda:\\mathcal F_\\lambda\\to\\mathcal F$ with $c_\\mu\\varphi_{\\mu\\lambda}=c_\\lambda$ such that $(\\mathcal F,(c_\\lambda)_\\lambda)$ is a colimit of the system in the category of sheaves of sets on $X$ [def-weil-pbc-category-colimit]; and for every $\\lambda$ the sheaf $\\mathcal F_\\lambda$, with some $q_\\lambda$, is a coequalizer of two morphisms $\\beta_\\lambda,\\gamma_\\lambda:\\coprod_{b=1}^{m}j_{V_b!}\\underline{T_b}\\to\\coprod_{a=1}^{n}j_{U_a!}\\underline{S_a}$ of finite coproducts of extensions by the empty set [def-weil-pbc-sets-extension-by-empty], with all $U_a,V_b\\in\\mathcal B$, i.e. quasi-compact open, and all $S_a,T_b$ finite (the data depending on $\\lambda$). This gives $\\Lambda$, the system and the colimit cocone of the statement.",
+   "uses": [
+    "lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sets-extension-by-empty"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 0CAI (lemma-filtered-colimit-constructibles, line 3016); used in this way in literature/stacks-project/etale-cohomology.tex, proof of Lemma 59.82.1 (Tag 09ZG), lines 15119-15128"
+   }
+  },
+  {
+   "text": "*Step 3 (embedding each term; Tag 0CAL).* Fix $\\lambda\\in\\Lambda$. By Step 2, $\\mathcal F_\\lambda$ is a sheaf of sets on the spectral space $X$ which is a coequalizer of two morphisms between finite coproducts $\\coprod_bj_{V_b!}\\underline{T_b}\\rightrightarrows\\coprod_aj_{U_a!}\\underline{S_a}$ with $U_a,V_b$ quasi-compact open and $S_a,T_b$ finite: exactly the hypothesis of [lem-weil-pbc-spectral-finite-coequalizer-embeds-constant]. That lemma gives $n\\ge0$, constructible [def-weil-constructible-subset] closed subsets $Z_1,\\dots,Z_n\\subseteq X$, finite sets $S_1,\\dots,S_n$ and a morphism $\\mathcal F_\\lambda\\to\\prod_{k=1}^n(i_{Z_k})_*\\underline{S_k}_{Z_k}$ (product computed sectionwise, $(i_{Z_k})_*\\underline{S_k}_{Z_k}(V)=\\{$locally constant maps $V\\cap Z_k\\to S_k\\}$) injective on sections over every open of $X$. Choosing such data for every $\\lambda$ gives the last assertion of the statement, which together with Step 2 proves it.",
+   "uses": [
+    "lem-weil-pbc-spectral-finite-coequalizer-embeds-constant",
+    "def-weil-constructible-subset",
+    "def-weil-pbc-sets-extension-by-empty"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 0CAL (lemma-constructible-in-constant, line 3133); used in this way in literature/stacks-project/etale-cohomology.tex, proof of Lemma 59.82.1 (Tag 09ZG), lines 15138-15142"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-spectral-space",
+  "lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sets-extension-by-empty",
+  "lem-weil-pbc-spectral-finite-coequalizer-embeds-constant",
+  "def-weil-constructible-subset"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Section 'Constructible sheaves of sets' (Tag 0CAG, line 2979): Lemma Tag 0CAI (line 3016) and Lemma Tag 0CAL (line 3133) applied to the basis of quasi-compact opens of a spectral space, as combined in literature/stacks-project/etale-cohomology.tex, proof of Lemma 59.82.1 (Tag 09ZG, lines 15119-15142)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +88,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,7 +112,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement combines Etale Cohomology 0CAI and 0CAL (a sheaf of sets on a spectral space is a directed colimit of sheaves embedding into finite products of pushed-forward finite constant sheaves on constructible closed subsets); self-contained; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Three steps, three new unsplit nodes checked against modules.tex: def-weil-pbc-sets-extension-by-empty (00A2, extension by the empty set for sheaves of sets on a topological space; the existing extension-by-zero node is for etale module sheaves), lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers (0CAI, stated with a directed set as the proof of 0CAI indexes by finite subsets) and lem-weil-pbc-spectral-finite-coequalizer-embeds-constant (0CAL, with the sheaves (i_Z)_* S_Z defined in the statement). The item is their combination for the basis of quasi-compact opens of a spectral space, as in the proof of 09ZG. Correct that 0CAH is a lemma (modules-lemma-surjection), not a definition, and that no definition of constructible sheaves of sets is needed at this level."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings",
+  "worker": "stage1",
+  "summary": "Statement kept (correct against Modules 0CAI + 0CAL; Stacks says 'filtered colimit', the proof of 0CAI indexes by finite subsets, so a directed set is right). stmt_deps kept. Tags checked against tags/tags: 0CAG section constructible sheaves of sets, 0CAH lemma-surjection (not a definition: Stacks has no definition of a constructible sheaf of sets in this section, and none is needed since 0CAI/0CAL name the explicit coequalizer form), 0CAI, 0CAK, 0CAL, 00A2 definition-j-shriek. Proof in three steps: the quasi-compact opens form a basis (definition of spectral space), 0CAI gives the directed colimit of coequalizers of finite coproducts of j_{U!} of finite constant sheaves, 0CAL embeds each term. New nodes: def-weil-pbc-sets-extension-by-empty (Stacks 00A2, sheaves of sets on a topological space; the existing def-weil-pbc-extension-by-zero is for etale sheaves of modules), lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers (0CAI, stated with a directed set), lem-weil-pbc-spectral-finite-coequalizer-embeds-constant (0CAL; its split will need 0CAK and the facts Stacks omits). All three searched with LeanSearch, LeanFinder and grep: no Mathlib match. No Lean of slopmaster2 states any of them."
  }
 }

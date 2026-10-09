@@ -1,0 +1,61 @@
+{
+ "id": "def-weil-pbc-sets-extension-by-empty",
+ "kind": "definition",
+ "title": "Extension by the empty set of a sheaf of sets along an open subset",
+ "statement": "Let $X$ be a topological space, $U\\subseteq X$ an open subset with inclusion $j_U:U\\to X$, and $\\mathcal G$ a sheaf of sets on $U$. The presheaf of sets $j_{U,p!}\\mathcal G$ on $X$ is defined by $(j_{U,p!}\\mathcal G)(V)=\\mathcal G(V)$ if $V\\subseteq U$ and $(j_{U,p!}\\mathcal G)(V)=\\emptyset$ if $V\\not\\subseteq U$ ($V\\subseteq X$ open); for opens $V'\\subseteq V$ the restriction map is the restriction map of $\\mathcal G$ when $V\\subseteq U$ (then $V'\\subseteq U$), and the empty map when $V\\not\\subseteq U$. The *extension of $\\mathcal G$ by the empty set* is the sheaf of sets $j_{U!}\\mathcal G$ on $X$ given by the sheafification [def-weil-pbc-sheafification] $j_{U,p!}\\mathcal G\\to j_{U!}\\mathcal G$. A morphism $\\alpha:\\mathcal G\\to\\mathcal G'$ of sheaves on $U$ gives $j_{U,p!}\\alpha$ (equal to $\\alpha_V$ on $V\\subseteq U$, empty otherwise) and hence $j_{U!}\\alpha$. For a set $S$ write $\\underline S_U$ for the sheaf of sets on $U$ with $\\underline S_U(V)=\\{$locally constant maps $V\\to S\\}$ ($V\\subseteq U$ open, restriction of maps), and $j_{U!}\\underline S:=j_{U!}(\\underline S_U)$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Section 'Open immersions and (pre)sheaves of sets' (Tag 009Z), Definition Tag 00A2 (label definition-j-shriek, line 4525); notation j_{U!} and the constant sheaf as in Modules, Section 'Constructible sheaves of sets' (Tag 0CAG, modules.tex line 2979)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by the empty set of a sheaf of sets along an open embedding, left adjoint to restriction",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction (Mathlib.AlgebraicGeometry.Modules.Sheaf), AlgebraicGeometry.PresheafedSpace.restrict, AlgebraicGeometry.SheafedSpace.restrict, CategoryTheory.presheafToSheaf IsLeftAdjoint, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Mathlib.CategoryTheory.Sites.Pullback)",
+   "date": "2026-10-10",
+   "verdict": "no match: restriction functors and their right adjoints; no explicit extension by the empty set"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by empty set j_! of a sheaf of sets on an open subset, sections empty over opens not contained in U",
+   "results": "skyscraperSheaf, skyscraperPresheaf_obj, skyscraperPresheaf_isSheaf (Mathlib.Topology.Sheaves.Skyscraper), TopCat.Sheaf.extend_hom_app, TopCat.Sheaf.isTerminalOfEqEmpty",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'extension by\\|lowerShriek\\|extendByEmpty\\|j_!' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites; sed -n 120,175p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Functors.lean; grep -rn 'def sheafPullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Pullback.lean",
+   "results": "no file names extension by the empty set; Topology/Sheaves/Functors.lean has only Topology.IsOpenEmbedding.sheafPullback (restriction j^{-1}, composition with IsOpenMap.functor); CategoryTheory/Sites/Pullback.lean line 55/70 Functor.sheafPullback (left adjoint of sheafPushforwardContinuous for a continuous functor of sites), which applied to IsOpenMap.functor would compute j_! only after a left Kan extension computation that is not in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match (generalization only through an unproved identification of the left Kan extension; not one line)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
