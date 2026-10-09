@@ -121,7 +121,12 @@ noncomputable def externalProduct (f : X ⟶ B) (g : Y ⟶ B)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     _root_.DerivedCategory (Sheaf (pullback f g).smallEtaleTopology A) :=
-  (L((pullback.fst f g)^*[A])).obj K ⊗ (L((pullback.snd f g)^*[A])).obj M
+  -- Written with `derivedTensor A (pullback f g)` rather than `⊗`: the instance proofs of the
+  -- monoidal structure then mention the scheme only through a variable, so they are not
+  -- abstracted into auxiliary lemmas, and unfolding `externalProduct` against `⊗` stays cheap
+  -- in the kernel (about 1s instead of about 2 minutes per unfolding).
+  ((derivedTensor A (pullback f g)).obj ((L((pullback.fst f g)^*[A])).obj K)).obj
+    ((L((pullback.snd f g)^*[A])).obj M)
 
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
@@ -371,14 +376,27 @@ theorem nonempty_iso_leftDerivedUpperStar_mapOverBaseIso_externalProduct
         (pullback.snd f₂ (pullback.snd b₁ b₂))
         ((L((pullback.fst f₁ (pullback.fst b₁ b₂))^*[A])).obj M₁)
         ((L((pullback.fst f₂ (pullback.snd b₁ b₂))^*[A])).obj M₂)) := by
-  set e := pullback.mapOverBaseIso f₁ f₂ b₁ b₂
-  let pb₁ := ((leftDerivedUpperStarComp A e.inv (pullback.fst _ _)).app M₁).symm ≪≫
-      (leftDerivedUpperStarComp A (pullback.fst _ _) (pullback.fst f₁ (pullback.fst b₁ b₂))
-        (e.inv ≫ pullback.fst _ _) (by simp [e])).app M₁
-  let pb₂ := ((leftDerivedUpperStarComp A e.inv (pullback.snd _ _)).app M₂).symm ≪≫
-      (leftDerivedUpperStarComp A (pullback.snd _ _) (pullback.fst f₂ (pullback.snd b₁ b₂))
-        (e.inv ≫ pullback.snd _ _) (by simp [e])).app M₂
-  exact ⟨leftDerivedUpperStarTensorIso A e.inv _ _ ≪≫ (pb₁ ⊗ᵢ pb₂)⟩
+  -- The schemes in the type of `pullback.mapOverBaseIso` carry other `HasPullback` instances
+  -- than the ones found here. Spelling out the source and target of `e`, writing the two
+  -- isomorphisms `pb₁`, `pb₂` with explicit types and tensoring them with `derivedTensor` keeps
+  -- every comparison syntactic; otherwise the kernel unfolds the derived tensor product down
+  -- to complexes, which takes minutes.
+  let e : pullback (pullback.snd f₁ (pullback.fst b₁ b₂)) (pullback.snd f₂ (pullback.snd b₁ b₂)) ⟶
+      pullback (f₁ ≫ b₁) (f₂ ≫ b₂) := (pullback.mapOverBaseIso f₁ f₂ b₁ b₂).inv
+  let pb₁ : (L((e)^*[A])).obj ((L((pullback.fst (f₁ ≫ b₁) (f₂ ≫ b₂))^*[A])).obj M₁) ≅
+      (L((pullback.fst (pullback.snd f₁ (pullback.fst b₁ b₂))
+        (pullback.snd f₂ (pullback.snd b₁ b₂)))^*[A])).obj
+        ((L((pullback.fst f₁ (pullback.fst b₁ b₂))^*[A])).obj M₁) :=
+    ((leftDerivedUpperStarComp A e (pullback.fst _ _)).app M₁).symm ≪≫
+      (leftDerivedUpperStarComp A _ _ (e ≫ pullback.fst _ _) (by simp [e])).app M₁
+  let pb₂ : (L((e)^*[A])).obj ((L((pullback.snd (f₁ ≫ b₁) (f₂ ≫ b₂))^*[A])).obj M₂) ≅
+      (L((pullback.snd (pullback.snd f₁ (pullback.fst b₁ b₂))
+        (pullback.snd f₂ (pullback.snd b₁ b₂)))^*[A])).obj
+        ((L((pullback.fst f₂ (pullback.snd b₁ b₂))^*[A])).obj M₂) :=
+    ((leftDerivedUpperStarComp A e (pullback.snd _ _)).app M₂).symm ≪≫
+      (leftDerivedUpperStarComp A _ _ (e ≫ pullback.snd _ _) (by simp [e])).app M₂
+  exact ⟨leftDerivedUpperStarTensorIso A e _ _ ≪≫ ((derivedTensor A _).mapIso pb₁).app _ ≪≫
+    ((derivedTensor A _).obj _).mapIso pb₂⟩
 
 /-- The `!`-Künneth isomorphism `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for
 general coefficients, given compact-support base change of `Rfᵢ_! Mᵢ` along the projections
