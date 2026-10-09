@@ -7,6 +7,8 @@ module
 
 public import Mathlib.LinearAlgebra.Trace
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Main
@@ -216,8 +218,18 @@ theorem isHomotopyLimit_mapCone_rightDerivedLowerShriek [s.IsSpecOfField] (aX : 
     [IsGeometric aX] [HasCompactification aX]
     (hctf : ∀ n : ℕ,
       DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} R) X (K.obj (Opposite.op n))) :
-    IsHomotopyLimit ((rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX).mapCone c) :=
-  sorry
+    IsHomotopyLimit ((rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX).mapCone c) := by
+  -- `Rf_! = Di_! ⋙ Rg_*` for the chosen compactification `aX = i ≫ g`. The right adjoint `Rg_*`
+  -- is triangulated and preserves products, so it preserves homotopy limits.
+  let cX := HasCompactification.compactification aX
+  -- The remaining step: the extension by zero `Di_!` commutes with `R lim` on towers of `Dctf`
+  -- objects. This needs countable products in `D(X_proét)` and repleteness of the pro-étale
+  -- topos, which are not available.
+  have hi : IsHomotopyLimit ((cX.i)_!open[ModuleCat.{u + 1} R].mapDerivedCategory.mapCone c) :=
+    sorry
+  have :=
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} R) cX.g).rightAdjoint_preservesLimits
+  exact hi.map ((cX.g)_*[ModuleCat.{u + 1} R].rightDerivedFunctor)
 
 include hI hK hc in
 /-- Adic realization, geometric stalks: the stalk at a geometric point `x̄ : s ⟶ X` commutes
