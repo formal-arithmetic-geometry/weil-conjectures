@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-root-lifting-etale-retraction",
+ "kind": "statement",
+ "title": "Over a local ring in which simple roots of monic polynomials lift, etale algebras with a rational point over the closed point retract",
+ "statement": "Let $(R,\\mathfrak m,\\kappa)$ be a local ring such that for every monic $f\\in R[T]$ and every $a_0\\in\\kappa$ with $\\overline f(a_0)=0$ and $\\overline{f'}(a_0)\\neq0$ there is $a\\in R$ with $f(a)=0$ and $a\\bmod\\mathfrak m=a_0$ (simple roots of monic polynomials lift; Stacks' definition of henselian). Let $R\\to S$ be a ring map such that $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is etale [def-weil-etale-morphism], and let $\\mathfrak q\\subset S$ be a prime ideal lying over $\\mathfrak m$ such that the induced map of residue fields [def-weil-residue-field] $\\kappa\\to\\kappa(\\mathfrak q)$ is an isomorphism. Then there is exactly one $R$-algebra homomorphism $\\tau:S\\to R$ (a retraction of $R\\to S$) with $\\tau^{-1}(\\mathfrak m)=\\mathfrak q$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 1=>8 (via Proposition Tag 00UE, etale is locally standard etale, and Lemma Tag 06RR, lemma-uniqueness)"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "henselian local ring etale algebra with prime of trivial residue extension has a section (retraction)",
+   "results": "HenselianLocalRing.TFAE, HenselianLocalRing.is_henselian, RingHom.Etale, Algebra.IsEtaleAt.comp, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (Mathlib.RingTheory.Etale.QuasiFinite), Algebra.Etale.of_isLocalizationAway: none gives a retraction",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "over a henselian local ring, an etale algebra with a prime over the maximal ideal with trivial residue field extension admits a unique algebra retraction",
+   "results": "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePair.instFormallyEtaleRing, Algebra.FormallyUnramified.of_map_maximalIdeal, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq, HenselianLocalRing.TFAE",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, AlgHom",
+   "results": "HenselianLocalRing.TFAE only (Mathlib.RingTheory.Henselian)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Henselian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -n 'retraction\\|section' RingTheory/Henselian.lean",
+   "results": "Henselian only in RingTheory/Henselian.lean (root-lifting definitions, TFAE of three root-lifting forms, IsAdicComplete.henselianRing); no etale-retraction statement. (The source repository has the converse direction, retractions => root lifting: HenselianLocalRing.of_exists_algHom_comap_maximalIdeal_eq, WeilConjectures/Mathlib/RingTheory/Henselian.lean:77, sorry-free; not this statement.)",
+   "date": "2026-10-09",
+   "verdict": "no match: Stacks 04GG (1)=>(8) is not in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselian-local-root-lifting",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

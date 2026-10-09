@@ -1,0 +1,56 @@
+{
+ "id": "lem-weil-pbc-finite-algebra-local-radical",
+ "kind": "statement",
+ "title": "In a finite algebra over a local ring, every maximal ideal lies over the maximal ideal",
+ "statement": "Let $(R,\\mathfrak m)$ be a local ring and $R\\to B$ a ring map making $B$ a finitely generated $R$-module. Then every maximal ideal $\\mathfrak n$ of $B$ has preimage $\\mathfrak m$ in $R$, hence contains $\\mathfrak mB$; consequently $\\mathfrak mB$ is contained in the Jacobson radical of $B$, i.e. $1+x$ is a unit of $B$ for every $x\\in\\mathfrak mB$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex",
+  "place": "algebra.tex Lemma Tag 04GG (lemma-characterize-henselian), proof of 9=>10 ('by going up for R -> S the maximal ideals of S all lie over m'), with Lemma Tag 00GU (lemma-integral-going-up); more-algebra.tex proof of Lemma Tag 09XI (IB is contained in the Jacobson radical of B for B integral over A)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "maximal ideal of an integral extension contracts to a maximal ideal",
+   "results": "Ideal.IsMaximal.under, Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (Mathlib.RingTheory.Ideal.GoingUp), IsLocalization.AtPrime.mem_primesOver_of_isPrime, Ideal.primesOver.isMaximal, Ideal.isMaximal_of_isIntegral_of_isMaximal_comap",
+   "date": "2026-10-09",
+   "verdict": "match (a few lemmas)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isMaximal_comap_of_isIntegral_of_isMaximal\\|instance Algebra.IsIntegral.of_finite\\|theorem eq_maximalIdeal\\|theorem mem_jacobson_bot' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "RingTheory/Ideal/GoingUp.lean:204 isMaximal_comap_of_isIntegral_of_isMaximal [Algebra.IsIntegral R S] (I) [I.IsMaximal] : (I.comap (algebraMap R S)).IsMaximal; RingTheory/IntegralClosure/Algebra/Basic.lean:72 instance Algebra.IsIntegral.of_finite [Module.Finite R B]; RingTheory/LocalRing/MaximalIdeal/Basic.lean:56 IsLocalRing.eq_maximalIdeal; RingTheory/Jacobson/Ideal.lean:288 Ideal.mem_jacobson_bot : x in jacobson bot <-> forall y, IsUnit (x*y+1)",
+   "date": "2026-10-09",
+   "verdict": "match (a few lemmas, one per clause)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.isMaximal_comap_of_isIntegral_of_isMaximal",
+  "file": "Mathlib/RingTheory/Ideal/GoingUp.lean",
+  "how": "a few Mathlib lemmas, one per clause: Module.Finite R B gives Algebra.IsIntegral R B (instance Algebra.IsIntegral.of_finite, RingTheory/IntegralClosure/Algebra/Basic.lean:72); for a maximal n, (n.comap (algebraMap R B)).IsMaximal (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal, GoingUp.lean:204), = maximalIdeal R by IsLocalRing.eq_maximalIdeal (LocalRing/MaximalIdeal/Basic.lean:56), so m.map (algebraMap R B) <= n (Ideal.map_le_iff_le_comap); the Jacobson radical is the intersection of the maximal ideals (Ideal.jacobson, sInf of maximal ideals containing bot) and Ideal.mem_jacobson_bot (Jacobson/Ideal.lean:288) gives the unit form. Source read 2026-10-09"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselian-local-root-lifting",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

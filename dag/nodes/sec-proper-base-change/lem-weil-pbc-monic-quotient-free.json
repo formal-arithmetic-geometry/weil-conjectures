@@ -1,0 +1,56 @@
+{
+ "id": "lem-weil-pbc-monic-quotient-free",
+ "kind": "statement",
+ "title": "The quotient of a polynomial ring by a monic polynomial is free with the power basis",
+ "statement": "Let $R$ be a commutative ring and $f\\in R[T]$ monic of degree $n$. Then $R[T]/(f)$ is a free $R$-module with basis the classes of $1,T,\\dots,T^{n-1}$; in particular it is a finite $R$-algebra, and for every ideal $I\\subset R$ one has $(R[T]/(f))/I(R[T]/(f))\\cong(R/I)[T]/(\\overline f)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 10=>1 ('S = R[T]/(f) is a finite R-algebra', 'the finite free R-module S'); Euclidean division by a monic polynomial"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient of polynomial ring by monic polynomial is a free module",
+   "results": "Polynomial.Monic.free_quotient, Polynomial.Monic.free_adjoinRoot, Polynomial.Monic.finite_quotient (Mathlib.RingTheory.AdjoinRoot), Polynomial.degreeLT.instFreeSubtypeMemSubmodule, Polynomial.instFree",
+   "date": "2026-10-09",
+   "verdict": "match: AdjoinRoot.powerBasis' / Polynomial.Monic.free_quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n \"powerBasis'\\|free_adjoinRoot\\|finite_adjoinRoot\\|free_quotient\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdjoinRoot.lean",
+   "results": "line 633 def AdjoinRoot.powerBasis' (hg : g.Monic) : PowerBasis R (AdjoinRoot g) with gen = root g, dim = g.natDegree; 648 Polynomial.Monic.free_adjoinRoot; 651 Polynomial.Monic.finite_adjoinRoot; 655 Polynomial.Monic.free_quotient",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AdjoinRoot.powerBasis'",
+  "file": "Mathlib/RingTheory/AdjoinRoot.lean",
+  "how": "specializes in one line: AdjoinRoot f = R[X]/(f); for f monic, AdjoinRoot.powerBasis' hf (line 633) is a power basis with generator root f = class of T and dim = natDegree f, i.e. basis 1, T, ..., T^{n-1}; Polynomial.Monic.free_adjoinRoot / finite_adjoinRoot (648-652) give Module.Free and Module.Finite; the reduction mod I is the base change of R[X]/(f), (R/I) (x)_R R[X]/(f) = (R/I)[X]/(f bar) (AdjoinRoot.quotAdjoinRootEquivQuotPolynomialQuot / Ideal.quotientEquiv of right-exactness; elementary). Source read 2026-10-09"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselian-local-root-lifting",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
