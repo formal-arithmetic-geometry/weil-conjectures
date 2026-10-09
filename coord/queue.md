@@ -15,8 +15,6 @@
 | `lem-sc-c6` | 1005 | none |
 | `lem-sc-c7` | 1005 | none |
 | `lem-sc-c8` | 1005 | none |
-| `lem-weil-pbc-henselian-local-root-lifting` | 1005 | none |
-| `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1005 | none |
 | `lem-weil-pbc-inverse-image-module-adjunction` | 1005 | none |
 | `lem-weil-pbc-inverse-image-stalk-germ` | 1005 | none |
 | `lem-weil-pbc-invertible-generating-sections-fibre` | 1005 | none |
@@ -43,10 +41,12 @@
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1006 | none |
 | `lem-weil-pbc-constructible-torsion-modules-agree` | 1006 | none |
 | `lem-weil-pbc-etale-base-change-continuous` | 1006 | none |
+| `lem-weil-pbc-etale-retraction-finite-product-local` | 1006 | none |
 | `lem-weil-pbc-finite-etale-etale-local-split` | 1006 | none |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
 | `lem-weil-pbc-finite-locally-free-degree-locally-constant` | 1006 | none |
 | `lem-weil-pbc-injective-resolution-ses` | 1006 | none |
+| `lem-weil-pbc-root-lifting-etale-retraction` | 1006 | none |
 | `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1006 | none |
 | `lemma-weil-pbc-constructible-approximation` | 1006 | none |
 | `lemma-weil-pbc-constructible-finite-pushforward` | 1006 | none |
@@ -582,7 +582,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 568 nodes that wait for stage 1, 136 nodes that wait for a statement dependency.
+Not open yet: 568 nodes that wait for stage 1, 138 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
