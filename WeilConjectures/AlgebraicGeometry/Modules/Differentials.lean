@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.Algebra.Module.LocalizedModule.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 
 /-!
@@ -396,6 +397,108 @@ namespace AlgebraicGeometry
 
 section Affine
 
+/-- On an affine scheme, a derivation of `𝒪_X` with values in a sheaf of modules is determined
+by its values on global sections. -/
+lemma Scheme.Modules.derivation_ext_of_isAffine {X : Scheme.{u}} [IsAffine X]
+    {R' : X.Opensᵒᵖ ⥤ CommRingCat.{u}} {φ : R' ⟶ X.presheaf} {N : X.Modules}
+    {D₁ D₂ : N.val.Derivation' φ} (h : ∀ a : Γ(X, ⊤), D₁.d (X := op ⊤) a = D₂.d a) :
+    D₁ = D₂ := by
+  ext W s
+  refine TopCat.Sheaf.eq_of_locally_eq' ⟨N.presheaf, N.isSheaf⟩
+    (fun i : {r : Γ(X, ⊤) // X.basicOpen r ≤ W.unop} ↦ X.basicOpen i.1) W.unop
+    (fun i ↦ homOfLE i.2) ?_ _ _ fun i ↦ ?_
+  · intro x hx
+    obtain ⟨_, ⟨r, rfl⟩, hxr, hrW⟩ := (Opens.isBasis_iff_nbhd.mp (isBasis_basicOpen X)) hx
+    exact Opens.mem_iSup.2 ⟨⟨r, hrW⟩, hxr⟩
+  · obtain ⟨r, hr⟩ := i
+    refine (D₁.d_map (homOfLE hr).op s).symm.trans (Eq.trans ?_ (D₂.d_map (homOfLE hr).op s))
+    suffices ∀ y : Γ(X, X.basicOpen r), D₁.d y = D₂.d y from this _
+    intro y
+    obtain ⟨⟨a, ⟨_, n, rfl⟩⟩, hy⟩ := IsLocalization.surj (Submonoid.powers r) y
+    have key (b : Γ(X, ⊤)) : D₁.d (algebraMap Γ(X, ⊤) Γ(X, X.basicOpen r) b) =
+        D₂.d (algebraMap Γ(X, ⊤) Γ(X, X.basicOpen r) b) :=
+      (D₁.d_map (homOfLE (X.basicOpen_le r)).op b).trans
+        ((congrArg _ (h b)).trans (D₂.d_map (homOfLE (X.basicOpen_le r)).op b).symm)
+    have hu : IsUnit (algebraMap Γ(X, ⊤) Γ(X, X.basicOpen r) (r ^ n)) :=
+      IsLocalization.map_units _ (⟨r ^ n, n, rfl⟩ : Submonoid.powers r)
+    set u := algebraMap Γ(X, ⊤) Γ(X, X.basicOpen r) (r ^ n)
+    have e₁ := D₁.d_mul y u
+    have e₂ := D₂.d_mul y u
+    erw [hy] at e₁ e₂
+    rw [← key, e₁, key] at e₂
+    have hu' : IsUnit (M := X.ringCatSheaf.obj.obj (op (X.basicOpen r))) u := hu
+    exact (hu'.smul_left_cancel).1 (add_left_cancel e₂)
+
+section TildeDerivation
+
+variable {R S : CommRingCat.{u}} {φ : R ⟶ S} {M : ModuleCat.{u} S} (D : M.Derivation φ)
+
+/-- The derivation of the localization `S_𝔭 → M_𝔭` induced by `D`. -/
+noncomputable def derivationStalk (x : PrimeSpectrum S) :
+    StructureSheaf.Localizations S x → StructureSheaf.Localizations M x :=
+  LocalizedModule.derivationLift x.asIdeal.primeCompl (AddMonoidHom.mk' D.d D.d_add) D.d_mul
+
+lemma derivationStalk_add (x : PrimeSpectrum S) (a b : StructureSheaf.Localizations S x) :
+    derivationStalk D x (a + b) = derivationStalk D x a + derivationStalk D x b :=
+  LocalizedModule.derivationLift_add _ (AddMonoidHom.mk' D.d D.d_add) D.d_mul a b
+
+lemma derivationStalk_mul (x : PrimeSpectrum S) (a b : StructureSheaf.Localizations S x) :
+    derivationStalk D x (a * b) = a • derivationStalk D x b + b • derivationStalk D x a :=
+  LocalizedModule.derivationLift_mul _ (AddMonoidHom.mk' D.d D.d_add) D.d_mul a b
+
+lemma derivationStalk_localRingHom (x : PrimeSpectrum S)
+    (z : Localization.AtPrime (PrimeSpectrum.comap φ.hom x).asIdeal) :
+    derivationStalk D x (Localization.localRingHom _ x.asIdeal φ.hom rfl z) = 0 := by
+  induction z using Localization.induction_on with | H p
+  obtain ⟨r, u⟩ := p
+  unfold derivationStalk
+  erw [Localization.localRingHom_mk]
+  change LocalizedModule.derivationLift _ _ _ (LocalizedModule.mk _ _) = 0
+  refine (LocalizedModule.derivationLift_mk _ _ _ _ _).trans ?_
+  simp [D.d_map]
+
+lemma isLocallyFraction_derivationStalk (W : (Spec S).Opens) (s : Γ(Spec S, W)) :
+    (StructureSheaf.isLocallyFraction S M).pred (fun x : W ↦ derivationStalk D x.1 (s.1 x)) := by
+  intro x
+  obtain ⟨V, m, i, a, h, w⟩ := s.2 x
+  refine ⟨V, m, i, h • D.d a - a • D.d h, h * h, fun y ↦ ?_⟩
+  obtain ⟨hy, e⟩ := w y
+  refine ⟨fun hh ↦ (y.1.isPrime.mem_or_mem hh).elim hy hy, ?_⟩
+  simp only [e, derivationStalk]
+  rfl
+
+
+/-- The derivation `𝒪_{Spec S} → M^~` induced by `D`, on sections over `W`. -/
+noncomputable def tildeDerivationApp (W : (Spec S).Opens) :
+    Γ(Spec S, W) →+ (tilde M).val.obj (op W) :=
+  AddMonoidHom.mk' (fun s ↦ ⟨fun x ↦ derivationStalk D x.1 (s.1 x),
+    isLocallyFraction_derivationStalk D W s⟩) (fun s t ↦ Subtype.ext (funext fun x ↦
+      derivationStalk_add D x.1 (s.1 x) (t.1 x)))
+
+/-- The derivation `𝒪_{Spec S} → M^~` induced by an `R`-derivation `D : S → M`, relative to
+`Spec S ⟶ Spec R`. -/
+noncomputable def tildeDerivation :
+    (tilde M).val.Derivation' (Spec.map φ).pullbackPresheafToPresheaf :=
+  (Spec.map φ).derivationMk (fun {W} ↦ tildeDerivationApp D W.unop)
+    (fun {W} a b ↦ Subtype.ext (funext fun x ↦ derivationStalk_mul D x.1 (a.1 x) (b.1 x)))
+    (fun {W₁ W₂} i s ↦ Subtype.ext (funext fun x ↦ rfl))
+    (fun V a ↦ by
+      refine Subtype.ext (funext fun x ↦ ?_)
+      change derivationStalk D x.1 ((StructureSheaf.comap φ.hom V _ le_rfl a).1 x) = 0
+      erw [StructureSheaf.comap_apply]
+      exact derivationStalk_localRingHom D x.1 _)
+
+
+lemma tildeDerivation_d_top (b : S) :
+    (tildeDerivation D).d (X := op ⊤) ((Scheme.ΓSpecIso S).inv b) =
+      tilde.toOpen M ⊤ (D.d b) := by
+  refine Subtype.ext (funext fun x ↦ ?_)
+  change derivationStalk D x.1 (LocalizedModule.mk b 1) = LocalizedModule.mk (D.d b) 1
+  exact (LocalizedModule.derivationLift_mk_one _ _ _ _)
+
+
+end TildeDerivation
+
 variable {R S : CommRingCat.{u}} (φ : R ⟶ S)
 
 set_option backward.isDefEq.respectTransparency false in
@@ -444,10 +547,46 @@ lemma unit_app_comp_map_relativeDifferentialsSpecTildeHom :
       relativeDifferentialsSpecΓHom φ :=
   (Adjunction.homEquiv_unit _ _ _ _).symm.trans ((tilde.adjunction.homEquiv _ _).apply_symm_apply _)
 
+/-- The inverse of `relativeDifferentialsSpecTildeHom`. -/
+noncomputable def relativeDifferentialsSpecToTilde :
+    (Spec.map φ).relativeDifferentials ⟶ tilde (CommRingCat.KaehlerDifferential φ) :=
+  ((Spec.map φ).relativeDifferentialsHomEquiv _).symm
+    (tildeDerivation (CommRingCat.KaehlerDifferential.D φ))
+
+lemma relativeDifferentialsSpecTildeHom_comp_toTilde :
+    relativeDifferentialsSpecTildeHom φ ≫ relativeDifferentialsSpecToTilde φ = 𝟙 _ := by
+  apply (tilde.adjunction.homEquiv _ _).injective
+  refine (Adjunction.homEquiv_naturality_right _ _ _).trans
+    (Eq.trans ?_ (tilde.adjunction.homEquiv_id (CommRingCat.KaehlerDifferential φ)).symm)
+  refine (congrArg (· ≫ _) ((tilde.adjunction.homEquiv _ _).apply_symm_apply _)).trans ?_
+  ext b
+  rw [ConcreteCategory.comp_apply, relativeDifferentialsSpecΓHom_d]
+  exact (Scheme.Hom.relativeDifferentialsHomEquiv_symm_app_d _ _ _).trans
+    (tildeDerivation_d_top _ b)
+
+
+lemma relativeDifferentialsSpecToTilde_comp_tildeHom :
+    relativeDifferentialsSpecToTilde φ ≫ relativeDifferentialsSpecTildeHom φ = 𝟙 _ := by
+  apply ((Spec.map φ).relativeDifferentialsHomEquiv _).injective
+  apply Scheme.Modules.derivation_ext_of_isAffine
+  intro a
+  obtain ⟨b, rfl⟩ := (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso S).inv).2 a
+  change (relativeDifferentialsSpecTildeHom φ).val.app (op ⊤)
+      ((relativeDifferentialsSpecToTilde φ).val.app (op ⊤)
+        ((Spec.map φ).relativeDifferentialsDerivation.d ((Scheme.ΓSpecIso S).inv b))) =
+    (Spec.map φ).relativeDifferentialsDerivation.d ((Scheme.ΓSpecIso S).inv b)
+  refine (congrArg _ ((Scheme.Hom.relativeDifferentialsHomEquiv_symm_app_d _ _ _).trans
+    (tildeDerivation_d_top _ b))).trans ?_
+  refine (ConcreteCategory.congr_hom (unit_app_comp_map_relativeDifferentialsSpecTildeHom φ)
+    (CommRingCat.KaehlerDifferential.d b)).trans ?_
+  exact relativeDifferentialsSpecΓHom_d φ b
+
 /-- The canonical morphism `Ω_{S/R}^~ ⟶ Ω¹_{Spec S / Spec R}` is an isomorphism. -/
+@[stacks 01UO]
 instance isIso_relativeDifferentialsSpecTildeHom :
-    IsIso (relativeDifferentialsSpecTildeHom φ) := by
-  sorry
+    IsIso (relativeDifferentialsSpecTildeHom φ) :=
+  ⟨relativeDifferentialsSpecToTilde φ, relativeDifferentialsSpecTildeHom_comp_toTilde φ,
+    relativeDifferentialsSpecToTilde_comp_tildeHom φ⟩
 
 /-- The map `Ω_{S/R} → Γ(Spec S, Ω¹_{Spec S / Spec R})` is an isomorphism. -/
 instance isIso_relativeDifferentialsSpecΓHom : IsIso (relativeDifferentialsSpecΓHom φ) := by
