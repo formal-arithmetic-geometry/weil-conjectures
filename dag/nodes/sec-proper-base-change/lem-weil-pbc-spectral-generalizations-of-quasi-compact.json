@@ -10,9 +10,65 @@
  "stmt_deps": [
   "def-weil-spectral-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "$E\\subseteq W$, and every open subset $U\\subseteq X$ with $E\\subseteq U$ contains $W$. For $e\\in E$ we have $e\\in\\overline{\\{e\\}}\\cap E$, so $e\\in W$. Let $U$ be open with $E\\subseteq U$ and let $w\\in W$; choose $e\\in\\overline{\\{w\\}}\\cap E$. Then $e\\in U$ and $U$ is an open neighbourhood of the point $e$ of the closure of $\\{w\\}$, so $U\\cap\\{w\\}\\neq\\emptyset$, i.e. $w\\in U$. (Source: 'every point of $W$ specializes to a point of $E$ we see that an open of $W$ which contains $E$ is equal to $W$'.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma 0A31 (lemma-make-spectral-space, line 5005), proof, third paragraph: implication (3) => (4)"
+   }
+  },
+  {
+   "text": "$W$ is quasi-compact. Let $(V_j)_{j\\in J}$ be open subsets of $X$ with $W\\subseteq\\bigcup_j V_j$. Since $E\\subseteq W$ (step 1) and $E$ is quasi-compact, there is a finite $J_0\\subseteq J$ with $E\\subseteq V:=\\bigcup_{j\\in J_0}V_j$. $V$ is open and contains $E$, so $W\\subseteq V$ by step 1. Hence finitely many $V_j$ cover $W$. (Source: 'Hence since $E$ is quasi-compact, so is $W$'.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma 0A31 (lemma-make-spectral-space, line 5005), proof, third paragraph: implication (3) => (4)"
+   }
+  },
+  {
+   "text": "If $x\\in X\\setminus W$ then $Z=\\overline{\\{x\\}}$ is disjoint from $W$. Suppose $w\\in Z\\cap W$ and choose $e\\in\\overline{\\{w\\}}\\cap E$. Since $w\\in\\overline{\\{x\\}}$, the closed set $\\overline{\\{x\\}}$ contains $\\overline{\\{w\\}}$, so $e\\in\\overline{\\{x\\}}\\cap E$ and $x\\in W$, a contradiction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma 0A31 (lemma-make-spectral-space, line 5005), proof, third paragraph: implication (3) => (4)"
+   }
+  },
+  {
+   "text": "For $x\\in X\\setminus W$ there is a quasi-compact open $U\\subseteq X$ with $E\\subseteq U$ and $x\\notin U$. With $Z=\\overline{\\{x\\}}$, the set $X\\setminus Z$ is open and contains $W$ (step 3). Since the quasi-compact open subsets of the spectral space $X$ form a basis of the topology [def-weil-spectral-space], each $w\\in W$ has a quasi-compact open $U_w$ with $w\\in U_w\\subseteq X\\setminus Z$. As $W$ is quasi-compact (step 2), finitely many $U_{w_1},\\dots,U_{w_n}$ cover $W$; their union $U$ is open, quasi-compact (a finite union of quasi-compact sets), contains $W\\supseteq E$ (step 1), and $U\\subseteq X\\setminus Z$, so $x\\notin U$ because $x\\in Z$. (Source: 'Since $W$ is quasi-compact we can find a quasi-compact open $U$ with $W\\subset U$ and $U\\cap Z=\\emptyset$'.)",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma 0A31 (lemma-make-spectral-space, line 5005), proof, third paragraph: implication (3) => (4)"
+   }
+  },
+  {
+   "text": "Conclusion. Let $W'$ be the intersection of all quasi-compact open $U\\subseteq X$ with $E\\subseteq U$ (this family is nonempty: $X$ itself is quasi-compact and open [def-weil-spectral-space]). By step 1 every such $U$ contains $W$, so $W\\subseteq W'$; by step 4 no $x\\notin W$ lies in $W'$, so $W'\\subseteq W$. Hence $W=W'$ is an intersection of quasi-compact open subsets of $X$, and $W$ is quasi-compact by step 2. (Source: 'We conclude that (4) holds'.)",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma 0A31 (lemma-make-spectral-space, line 5005), proof, third paragraph: implication (3) => (4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-spectral-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma 0A31 (lemma-make-spectral-space, line 5005), proof, third paragraph ((3) => (4) and quasi-compactness of W)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +97,24 @@
    "results": "none",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "if K is compact and every point of S generalizes (specializes to) a point of K then S is compact",
+   "results": "IsCompact.of_subset_of_specializes (Mathlib.Topology.Inseparable, line 226: s compact, t ⊆ s, every x ∈ s has y ∈ t with x ⤳ y ⇒ t compact), isCompact_iff_compactSpace, isGenericPoint_iff_specializes, stableUnderGeneralization_compl_iff",
+   "date": "2026-10-10",
+   "verdict": "no match: IsCompact.of_subset_of_specializes goes the other way (passes compactness from a set to a subset of its specializations); step 2 here passes it from E to the larger set W of its generalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompact, Specializes, IsOpen",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +134,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spectral-generalizations-of-quasi-compact",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 0A31 (3) => (4) and kept. Proof written in five steps following the third paragraph of the proof of 0A31: E ⊆ W and every open containing E contains W (opens are stable under generalization); W quasi-compact; closure of a point outside W misses W (transitivity of specialization); separation of such a point from W by a quasi-compact open, using that quasi-compact opens form a basis (definition of spectral space); conclusion. Every step is elementary from def-weil-spectral-space; no new node was needed, and the constructible topology (0A31 (1) => (2)) is not used for this direction. The earlier leanfinder record called IsCompact.of_subset_of_specializes an ingredient; it is the converse direction and does not apply (recorded). Two Mathlib searches added; no match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Five elementary steps following Stacks 0A31 proof ¶3 ((3)=>(4)); W = generalizations of E; the only input is the definition (qc opens form a basis, X qc). Correct. Worker notes the earlier LeanFinder record (IsCompact.of_subset_of_specializes) is the converse direction; PrespectralSpace.exists_isCompact_and_isOpen_between fits step 4."
+ }
 }
