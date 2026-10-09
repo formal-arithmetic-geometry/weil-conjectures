@@ -9,11 +9,46 @@
  },
  "stmt_deps": [
   "def-nagata-affine-proj",
-  "def-pc-projective-space-twist"
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-pc-projective-space-twist",
+  "def-weil-pbc-proj-twisting-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Matching the objects with clause (v) of [lem-weil-pbc-projective-space-twisting-sheaf-charts].* Since $n$ is finite and nonempty, choose a bijection $n\\cong\\{0,\\dots,N\\}$ ($N=|n|-1\\ge0$) and relabel the variables; nothing below depends on the labels. Then $S=\\mathbf Z[T_0,\\dots,T_N]$, $P=\\operatorname{Proj}(S)$ and $\\widetilde{S(1)}$ with its global sections $T_k$ ($T_k/1\\in(S_f)_1$ on every $D_+(f)$) are exactly the objects $\\mathbf P^N_{\\mathbf Z}$, $\\mathcal O(1)=\\widetilde{S(1)}$ [def-weil-pbc-proj-twisting-sheaf] and $T_0,\\dots,T_N$ of [lem-weil-pbc-projective-space-twisting-sheaf-charts]. The glued $\\mathcal O_P(1)$ of the present statement is the module of [def-pc-projective-space-twist] with $A=\\mathbf Z$, $x_k=T_k$, $d=1$, $e_i=e_i^{(1)}$, transition rule $e_i=(T_i/T_j)e_j$: this is the module $\\mathcal L$ of clause (v) with its bases $e_j$. The global section $T^{\\mathrm{gl}}_k$ satisfies $T^{\\mathrm{gl}}_k|_{U_j}=(T_k/T_j)e_j$ for every $j$, which is the defining property of the section $x_k$ of clause (v); as the $U_j$ cover $P$ (clause (i) of [lem-weil-pbc-projective-space-twisting-sheaf-charts]) a section of the sheaf $\\mathcal L$ is determined by its restrictions to the $U_j$, so $T^{\\mathrm{gl}}_k=x_k$. Finally the section $T_j|_{D_+(T_j)}$ of clause (v) is the element $T_j/1\\in(S_{T_j})_1=\\widetilde{S(1)}(U_j)$, by the description of the global sections $T_k$ (restriction to every $D_+(f)$ is $T_k/1$; [def-weil-pbc-proj-twisting-sheaf]).",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Lemma 01MS (label lemma-when-invertible, d = 1) and the glueing of morphisms of sheaves (Sheaves, Lemma 00AL), as carried out in step 7 (clause (v)) of lem-weil-pbc-projective-space-twisting-sheaf-charts"
+   }
+  },
+  {
+   "text": "*Conclusion.* By clause (v) of [lem-weil-pbc-projective-space-twisting-sheaf-charts] there is a unique isomorphism of $\\mathcal O_P$-modules $\\Phi:\\mathcal L\\to\\widetilde{S(1)}$ with $\\Phi(e_j)=T_j|_{U_j}$ for all $j$, and $\\Phi(x_k)=T_k$ for all $k$. Translating by step 1 ($\\mathcal L=\\mathcal O_P(1)$, $T_j|_{U_j}=T_j/1$, $x_k=T^{\\mathrm{gl}}_k$), $\\theta:=\\Phi$ is an isomorphism $\\mathcal O_P(1)\\to\\widetilde{S(1)}$ with $\\theta(e_i)=T_i/1$ for every $i$ and $\\theta(T^{\\mathrm{gl}}_k)=T_k$ for every $k$. Uniqueness: any isomorphism $\\theta'$ with $\\theta'(e_i)=T_i/1$ for all $i$ is a $\\Phi'$ with $\\Phi'(e_j)=T_j|_{U_j}$ for all $j$, hence $\\theta'=\\Phi=\\theta$ by the uniqueness in clause (v). (Clause (v) is proved in step 7 of [lem-weil-pbc-projective-space-twisting-sheaf-charts] exactly along Stacks 01MS and the glueing of morphisms: local isomorphisms $a\\,e_j\\mapsto a\\,T_j|$, compatible on $U_i\\cap U_j$ by $T_i|=(T_i/T_j)T_j|$, glued in the sheaf $\\mathcal Hom$ [lem-pur-sheaf-hom-is-sheaf].)",
+   "uses": [
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Lemma 01MS (label lemma-when-invertible, d = 1) and the glueing of morphisms of sheaves (Sheaves, Lemma 00AL), as carried out in step 7 (clause (v)) of lem-weil-pbc-projective-space-twisting-sheaf-charts"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-weil-pbc-projective-space-twisting-sheaf-charts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "specialization of clause (v) of lem-weil-pbc-projective-space-twisting-sheaf-charts (whose step 7 is agent-written along Constructions Lemma 01MS and Sheaves Lemma 00AL)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +70,31 @@
    "results": "no file: Mathlib has no twisting sheaf O(d) on Proj, neither glued nor as S(d)~. (The source repository has the S(d)~ form, WeilConjectures/AlgebraicGeometry/ProjectiveSpectrum/Twist.lean:378 Proj.twist, and the transition units ProjectiveSpace/TransitionUnits.lean, but no identification of the two descriptions.)",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre twisting sheaf O(1) on projective space Proj of polynomial ring as sheaf of modules",
+   "results": "AlgebraicGeometry.Scheme.Modules (Mathlib.AlgebraicGeometry.Modules.Sheaf), ModuleCat.tilde / tildeInModuleCat (Mathlib.AlgebraicGeometry.Modules.Tilde, on Spec only), ProjectiveSpectrum.Proj.structureSheaf, structureSheafInType, SheafOfModules.mk",
+   "date": "2026-10-09",
+   "verdict": "no match: no module sheaf on Proj other than the structure sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme.Modules",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: no declaration mentions both Proj and Scheme.Modules"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Modules' Mathlib/AlgebraicGeometry/ProjectiveSpectrum/; grep -rn 'twist\\|Twist' Mathlib/AlgebraicGeometry/; grep -rln 'Proj' Mathlib/AlgebraicGeometry/Modules/",
+   "results": "none in all three",
+   "date": "2026-10-09",
+   "verdict": "no match (confirmed: Mathlib has no twisting sheaf on Proj)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +114,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-projective-space-twist-glued-identification",
+  "worker": "stage1",
+  "summary": "Case (a): clause (v) of the reviewed lem-weil-pbc-projective-space-twisting-sheaf-charts states this identification over Z with d = 1, including uniqueness and the sections (x_l |-> T_l); its Phi: L -> O(1) is theta. Split into two steps: (1) elementary matching (relabel the finite nonempty index set as {0..N}; glued O_P(1) of def-pc-projective-space-twist with A = Z, d = 1 is L of (v) with the same e_j; T^gl_k = x_k by the sheaf property on the cover U_j; T_j|_{U_j} = T_j/1 in (S_{T_j})_1); (2) apply (v), uniqueness transported. No new nodes. stmt_deps: added def-weil-pbc-proj-twisting-sheaf (missing) and def-nagata-homogeneous-localization-degree-zero (S_(T_i) in the statement). The node duplicates clause (v): merge candidate for stage 3. No cycle: twisting-sheaf-charts does not depend on standard-charts or this node. Mathlib re-searched three ways: no twisting sheaf on Proj. Source repository: no glued O(1) and no identification (ProjectiveSpace.twist is the pullback of Proj.twist; TransitionUnits.lean has only the units (x_i/x_j)^d and ProjectiveLine.TwistData for P^1)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Two steps: the objects match those of clause (v) of lem-weil-pbc-projective-space-twisting-sheaf-charts (A = Z, d = 1), and clause (v) gives the unique isomorphism with the sections; no cycle (the charts node does not use this node). The node restates clause (v): merge candidate for stage 3, after which lem-weil-pbc-projective-space-standard-charts step 1 should cite clause (v) directly. stmt_deps completed (def-weil-pbc-proj-twisting-sheaf, def-nagata-homogeneous-localization-degree-zero)."
+ },
+ "lead_note": "2026-10-09 L: duplicate of clause (v) of lem-weil-pbc-projective-space-twisting-sheaf-charts; merge candidate for stage 3."
 }
