@@ -105,6 +105,7 @@ lemma injective_of_isIntegral {T : Type*} [CommRing T] [IsDomain T] [Algebra R T
   rwa [hker, Ideal.mem_bot] at this
 
 set_option maxHeartbeats 1000000 in
+set_option synthInstance.maxHeartbeats 400000 in
 /-- **Primes of a cover fixed by inertia are unramified.** Let `T` be a Dedekind domain finite
 over `R`, with an `R`-algebra map `ψ : T → Ω`, and `Q` a maximal ideal of the integral closure of
 `R` in `Ω` over a maximal ideal `m` of `R` with finite residue field. If the inertia group of `Q`
@@ -159,6 +160,7 @@ theorem ramificationIdx_comap_integralClosureMap_eq_one {T : Type*} [CommRing T]
       x.2.map (IsScalarTower.toAlgHom R LM M)).toRingHom
   let _ : Algebra S TM := iST.toAlgebra
   let _ : SMul S TM := Algebra.toSMul
+  let _ : Module S TM := Algebra.toModule
   have : IsScalarTower S TM M := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   have : IsScalarTower R S TM := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   have : Algebra.IsIntegral R TM := Algebra.IsIntegral.of_finite R TM
