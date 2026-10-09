@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-field-point-factors-through-closed-immersion",
+ "kind": "statement",
+ "title": "A field-valued point in the image of a closed immersion factors through it",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-weil-closed-immersion], let $K$ be a field, and let $s:\\operatorname{Spec}K\\to X$ be a morphism whose unique image point is $i(z)$ for some $z\\in Z$. Then there is exactly one morphism $s':\\operatorname{Spec}K\\to Z$ with $i\\circ s'=s$, and the unique point of $\\operatorname{Spec}K$ maps to $z$ under $s'.$",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma Tag 0356 (lemma-map-into-reduction: a morphism from a reduced scheme factors through a closed subscheme iff it does so set-theoretically), applied to Spec K; Definition Tag 01HK (closed immersion) and Lemma Tag 01L7 (immersions are monomorphisms) give uniqueness"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a morphism from Spec K for a field whose image point lies in a closed subscheme factors uniquely through the closed immersion",
+   "results": "IsClosedImmersion.lift (requires a kernel inclusion), IsClosedImmersion.lift_fac, Scheme.SpecToEquivOfField; no theorem converting the set-theoretic image condition for Spec K into the kernel inclusion",
+   "date": "2026-10-10",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "field-valued point factors through closed immersion when its image is in the closed image",
+   "results": "SpecToEquivOfField and IsClosedImmersion.lift; neither states the reduced-source/set-theoretic factorization",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion.lift, Spec K, exists unique factorization",
+   "results": "IsClosedImmersion.lift, lift_fac, isIso_lift; all require the scheme-theoretic kernel condition rather than only that the point lies in the image",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'existsUnique_fac_of_range\\|lift_of_range\\|le_ker_iff_range_subset' Mathlib/AlgebraicGeometry; grep -n 'def lift\\|lift_fac' Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+   "results": "ClosedImmersion.lean has lift only with a kernel inclusion; no reduced-source field-point factorization theorem in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-field-point-factors-through-immersion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

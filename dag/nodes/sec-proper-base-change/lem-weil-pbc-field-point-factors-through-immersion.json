@@ -14,9 +14,80 @@
   "def-weil-affine-spectrum",
   "def-weil-geometric-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Residue fields.* By the definition of an immersion, write $\\iota=o\\circ c$ with $c:Z\\to W$ a closed immersion and $o:W\\to X$ an open immersion. The map $\\kappa(x)\\to\\kappa(c(z))$ induced by $o$ is an isomorphism by [lem-weil-pbc-residue-field-point-naturality], and the map $\\kappa(c(z))\\to\\kappa(z)$ induced by $c$ is an isomorphism by [lem-weil-pbc-closed-immersion-residue-field-iso].",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-weil-residue-field",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-closed-immersion-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Definition Tag 01IO and Definition Tag 01HK, with the residue-field discussion before Lemma Tag 01J9"
+   }
+  },
+  {
+   "text": "The residue-field map induced by the composite $\\iota=o\\circ c$ is the composite of the two maps in Step 1, because the local homomorphisms on stalks and their residue maps compose. A composite of isomorphisms is an isomorphism, proving (1).",
+   "uses": [
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-closed-immersion-residue-field-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, the commutative residue-field diagram in the discussion before Lemma Tag 01J9"
+   }
+  },
+  {
+   "text": "*Existence of the lift.* Keep the factorization $\\iota=o\\circ c$ from Step 1. Since the unique point of $\\operatorname{Spec}K$ maps under $s$ to $x=o(c(z))\\in o(W)$, [lem-weil-pbc-morphism-factors-through-open-subscheme] gives a unique $t:\\operatorname{Spec}K\\to W$ with $o\\circ t=s$. The point of $\\operatorname{Spec}K$ maps under $t$ to $c(z)$. The new statement [lem-weil-pbc-field-point-factors-through-closed-immersion] therefore gives a unique $s':\\operatorname{Spec}K\\to Z$ with $c\\circ s'=t$, and its point is $z$. Thus $\\iota\\circ s'=s$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-field-point-factors-through-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01HI, Lemma Tag 0356, and Definition Tag 01IO"
+   }
+  },
+  {
+   "text": "*Uniqueness and geometric points.* If $u:\\operatorname{Spec}K\\to Z$ also satisfies $\\iota\\circ u=s$, the monomorphism $o$ gives $c\\circ u=t$; the uniqueness clause of [lem-weil-pbc-field-point-factors-through-closed-immersion] gives $u=s'$. For an algebraically closed $K$, this is exactly the stated factorization of a geometric point, with the same field.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "lem-weil-pbc-field-point-factors-through-closed-immersion",
+    "def-weil-geometric-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01L7 and the discussion before Lemma Tag 01J9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-residue-field",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-field-point-factors-through-closed-immersion",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "def-weil-geometric-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Definition Tag 01IO, Definition Tag 01HK, Lemma Tags 0356, 01HI, and 01L7, and the discussion before Lemma Tag 01J9; the composite residue-field argument is written out from the stalk maps"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -62,7 +133,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -83,10 +154,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-field-point-factors-through-immersion",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged after checking the immersion factorization and field-valued-point formulation against Schemes 01IO/01HK/01HI/0356/01J9/01L7. Split into four steps: factor the immersion and compare residue fields; restrict the field point to the intermediate open subscheme; factor through the closed immersion; and prove uniqueness by monomorphism and closed-factorization uniqueness. Created public statement-only unsplit nodes lem-weil-pbc-closed-immersion-residue-field-iso and lem-weil-pbc-field-point-factors-through-closed-immersion, each searched with LeanSearch, LeanFinder/Loogle, and Mathlib grep."
+ },
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement: residue fields along an immersion and the unique factorization of a morphism from Spec of a field through an immersion whose image contains the point (Schemes 01IO/01HK/01L7 area); self-contained; correct; unsplit."
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Four steps (residue fields along the closed-then-open factorization via the naturality node and a new unsplit node for closed immersions; existence of the lift through the open subscheme node and a new unsplit node for closed immersions; uniqueness by the monomorphism leaf) checked by L; new nodes cite their notions. Accepted by L."
  }
 }
