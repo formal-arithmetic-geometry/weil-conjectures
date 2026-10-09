@@ -243,7 +243,7 @@ complexes `i_* i^* K` and `j_* j^* L`, rewritten with
 `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion`. Over `B = Spec k` it
 is the Künneth formula for the compactly supported cohomology of `Z ×_k W`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion
-    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A] [UpperStarPreservesFlat A]
     (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f] [HasCompactification g]
     [QuasiCompact f] [QuasiCompact g] [HasCompactification (pullback.toBase f g)]
     {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
@@ -282,7 +282,7 @@ It is the relative product theorem
 over `B = Spec k` would also need `R(i ≫ f)_! ≅ Rf_! Ri_*`, the composition of compactly
 supported direct images. -/
 theorem nonempty_iso_compactlySupported_externalProduct_closedImmersion
-    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A] [UpperStarPreservesFlat A]
     {k : Type u} [Field k] (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k))
     [HasCompactification f] [HasCompactification g] [QuasiCompact f] [QuasiCompact g]
     {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]

@@ -134,6 +134,10 @@ def HasFiniteGeometricDet (deg : W →* Multiplicative ℤ) (ρ : Representation
 
 /-- The *determinant weight* of a representation with respect to a real character `χ` and
 a degree-one element `γ` is `dw_χ(ρ) = χ(δ(γ)) / dim V`.
+
+The blueprint only defines it for `V ≠ 0`. For `V = 0` the division by `dim V = 0` makes it the
+junk value `0`; the same happens when `V` is infinite-dimensional, as `Module.finrank` is then
+`0`. Statements about `detWeight` assume `V` nonzero and finite-dimensional where it matters.
 (blueprint: `sk-d-weights`) -/
 noncomputable def detWeight (χ : RealCharacter k) (γ : W) (ρ : Representation k W V) : ℝ :=
   Multiplicative.toAdd (χ (ρ.detCharacter γ)) / Module.finrank k V

@@ -34,8 +34,6 @@ The proof is chart-local, with the algebraic core the universal property of the
 
 On the scheme side we prove, for a quasi-coherent ideal `I` on `X`:
 
-- `Scheme.IdealSheafData.comap_pow`: inverse images commute with powers of ideal
-  sheaves (for arbitrary morphisms), from `Scheme.IdealSheafData.comap_mul`;
 - the invertible-ideal lemma kit: local presentations on a basis
   (`IsInvertible.exists_presentation_le`), stability under products, factors of
   products (`IsInvertible.of_mul_left/right`, the "factor of an invertible product
@@ -419,12 +417,11 @@ end NonZeroDivisorTransfer
 
 section ComapAffineLocality
 
-/-! ### Multiplicativity of the inverse image ideal sheaf
+/-! ### Affine opens adapted to a morphism
 
-For an arbitrary morphism `f : Y ⟶ X` and affine opens `W ≤ f ⁻¹ᵁ V`, the pullback
-ideal `(I.comap f)(W)` is the extension of `I(V)` along the section map `f.appLE V W`
-(`Scheme.IdealSheafData.ideal_comap_appLE`); this yields multiplicativity of
-`comap`. -/
+Multiplicativity of the inverse image ideal sheaf (`Scheme.IdealSheafData.comap_mul`,
+`Scheme.IdealSheafData.comap_pow`) lives in
+`WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial`. -/
 
 variable {Y X : Scheme.{u}}
 
@@ -438,14 +435,6 @@ lemma exists_affineOpens_le_preimage (f : Y ⟶ X) (y : Y) :
   obtain ⟨-, ⟨W₀, hW₀, rfl⟩, hyW₀, hsub⟩ := Y.isBasis_affineOpens.exists_subset_of_mem_open
     (show y ∈ ((f ⁻¹ᵁ V.1 : Y.Opens) : Set Y) from hV) (f ⁻¹ᵁ V.1).isOpen
   exact ⟨V, ⟨W₀, hW₀⟩, fun z hz ↦ hsub hz, hyW₀⟩
-
-/-- **Inverse images of ideal sheaves commute with powers** (for arbitrary
-morphisms), by induction from `Scheme.IdealSheafData.comap_mul`. -/
-theorem Scheme.IdealSheafData.comap_pow (f : Y ⟶ X) (I : X.IdealSheafData) (n : ℕ) :
-    (I ^ n).comap f = I.comap f ^ n := by
-  induction n with
-  | zero => simp [Scheme.IdealSheafData.comap_top]
-  | succ n ih => rw [pow_succ, pow_succ, Scheme.IdealSheafData.comap_mul, ih]
 
 end ComapAffineLocality
 

@@ -42,8 +42,11 @@ Coefficients are `ℚ̄_ℓ = PadicAlgCl l`, and the archimedean comparison is a
 ## Implementation notes
 
 The curve itself enters through the instance arguments `[Finite K]` and `[IsCurve p]` of
-`AlgebraicGeometry.WeilGroup`, so that every statement about a `W : WeilGroup p` carries them;
-smoothness and geometric connectedness are extra hypotheses where they are needed. Only closed
+`AlgebraicGeometry.WeilGroup`, so that every statement about a `W : WeilGroup p` carries them.
+Geometric connectedness of `C₀`, a standing hypothesis of `def-wf-weil-group`, is the field
+`AlgebraicGeometry.WeilGroup.geometricallyConnected`, since the presentation through
+`AlgebraicGeometry.Scheme.FiniteEtale.weilGroup` requires it; smoothness is an extra hypothesis
+where it is needed. Only closed
 points of `C₀` — those of `AlgebraicGeometry.Scheme.finitePoints` — index a local Frobenius,
 since `AlgebraicGeometry.Scheme.Hom.degreeOver` has the junk value `0` elsewhere.
 
@@ -150,6 +153,10 @@ structure WeilGroup [Finite K] (p : C ⟶ Spec (.of K)) [IsCurve p] where
     MulAction fundamentalGroup ((Scheme.FiniteEtale.fiber basePoint).obj P)]
   [isFundamentalGroup :
     PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber basePoint) fundamentalGroup]
+  /-- The curve `C₀` is geometrically connected over `𝔽_q`, the standing hypothesis of the Weil
+  group `def-wf-weil-group`: without it the degree map of
+  `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup` is not surjective. -/
+  [geometricallyConnected : GeometricallyConnected p]
   /-- The identification of `W(C₀)` with the Weil group of `π₁(C₀, s)`: the pairs `(g, n)` such
   that `g` acts on the geometric fibres of the constant covers as the `n`-th power of the
   geometric Frobenius. -/
@@ -182,6 +189,7 @@ protected abbrev geometric : Subgroup W.carrier := W.deg.ker
 
 /-- The inclusion `W(C₀) → π₁(C₀, s)` of the Weil group into the étale fundamental group. -/
 noncomputable def toFundamentalGroup : W.carrier →* W.fundamentalGroup :=
+  haveI := W.geometricallyConnected
   (MonoidHom.fst _ _).comp
     ((Scheme.FiniteEtale.weilGroup p W.basePoint W.fundamentalGroup).subtype.comp
       W.weilGroupEquiv.toMonoidHom)
