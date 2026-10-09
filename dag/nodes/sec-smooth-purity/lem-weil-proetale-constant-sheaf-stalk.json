@@ -1,0 +1,50 @@
+{
+ "id": "lem-weil-proetale-constant-sheaf-stalk",
+ "kind": "statement",
+ "title": "Stalks of a constant sheaf on the pro-etale site",
+ "statement": "Let $Y$ be a scheme with small pro-etale site $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], let $\\Lambda$ be a commutative ring, $M$ a $\\Lambda$-module, and $\\underline M_Y$ the constant sheaf of $\\Lambda_Y$-modules on $Y_{\\mathrm{proet}}$, the sheafification of the constant presheaf $U\\mapsto M$ [def-weil-proetale-locally-constant-sheaf]. Let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point and $(\\underline M_Y)_{\\bar y}$ the stalk of $\\underline M_Y$ at $\\bar y$, the colimit of sections over the pointed neighbourhoods of $\\bar y$ in $Y_{\\mathrm{proet}}$ [def-weil-proetale-geometric-stalk]. Then the canonical map $M\\to(\\underline M_Y)_{\\bar y}$ (sending $m$ to the germ at $(Y,\\bar y)$ of the image of the constant section $m$) is an isomorphism of $\\Lambda$-modules. In particular, if $M$ is finite, every stalk of $\\underline M_Y$ at a geometric point is finite.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "used without statement: p. 58, Lemma 6.8.2 and Definition 6.8.3, and p. 49, §6.5 (constant sheaves $\\underline L$ pulled back from $D(R)$); the two facts behind it are that sheafification does not change stalks (literature/stacks-project/sites.tex, Lemma 'point-pushforward-sheaf', Tag 00Y8, part (3): $\\mathcal F_p=\\mathcal F^\\#_p$ for a point $p$ of a site; that a geometric point of $Y$ gives such a point of $Y_{\\mathrm{proet}}$ is part of what this node asserts) and that the category of pointed neighbourhoods is nonempty and connected (it contains $(Y,\\bar y)$, and two pointed neighbourhoods $(U,\\bar u),(V,\\bar v)$ receive maps from $(U\\times_YV,(\\bar u,\\bar v))$, weakly etale maps being stable under base change and composition), so the colimit of the constant functor $M$ is $M$"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'constant\\|Sheafif\\|sheafify' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/*.lean; grep -rn 'isColimitConstCocone' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Connected.lean",
+   "results": "CategoryTheory/Sites/Point/Basic.lean:69 `GrothendieckTopology.Point` (a fiber functor with cofiltered category of elements), :96 `presheafFiber`, :277 `sheafFiber`; Point/Skyscraper.lean:273-284 `presheafToSheafCompSheafFiberIso` (the fiber of the sheafification is the fiber of the presheaf); Limits/Connected.lean:83 `isColimitConstCocone` (colimit of a constant functor over a connected category). No construction of a `Point` of the pro-etale site from a geometric point of a scheme, and no lemma on the fiber of a constant sheaf.",
+   "date": "2026-10-09",
+   "verdict": "no match (the two abstract ingredients exist: sheafification preserves fibers of points, colimit of a constant functor over a connected category; the pro-etale geometric point as a Mathlib Point does not)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ProEt\\|stalk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/*.lean",
+   "results": "Proetale.lean defines `Scheme.ProEt` and `ProEt.topology`; no stalks or points on it",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-constant-coefficient-objects-constructible",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
