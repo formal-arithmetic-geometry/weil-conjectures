@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-power-series-onto-completion",
+ "kind": "statement",
+ "title": "Power series in generators of I map onto the I-adic completion",
+ "statement": "Let $R$ be a commutative ring, $f_1,\\ldots,f_n\\in R$ ($n\\geq0$), $I=(f_1,\\ldots,f_n)$, and $R^\\wedge=\\varprojlim_mR/I^m$ the $I$-adic completion [def-weil-pbc-adic-completion]. For $F=\\sum_Ea_Ex^E\\in R[[x_1,\\ldots,x_n]]$ [def-weil-pbc-multivariate-power-series] and $m\\geq1$ put $F_{<m}(f)=\\sum_{|E|<m}a_Ef^E\\in R$ (with $f^E=f_1^{e_1}\\cdots f_n^{e_n}$, $|E|=e_1+\\cdots+e_n$). Then $\\Phi(F)=(F_{<m}(f)\\bmod I^m)_{m\\geq1}$ is an element of $R^\\wedge$, and $\\Phi:R[[x_1,\\ldots,x_n]]\\to R^\\wedge$ is a surjective ring homomorphism with $\\Phi(x_i)=(f_i\\bmod I^m)_m$ and $\\Phi(r)=(r\\bmod I^m)_m$ for $r\\in R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 0316 (lemma-completion-Noetherian-Noetherian, line 23065), proof, lines 23075-23084: 'Consider the map R[[x_1,...,x_n]] -> R^, x_i -> f_i. This is a well defined and surjective ring map (details omitted)'"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "map from power series ring to adic completion sending variables to generators of the ideal is surjective",
+   "results": "AdicCompletion.of_surjective, AdicCompletion.mk_surjective, AdicCompletion.map_surjective (Mathlib.RingTheory.AdicCompletion.Exactness: completion of a surjective linear map is surjective, Stacks 0315 (2)), AdicCompletion.of_surjective_iff, AdicCompletion.eval_surjective, ofTensorProduct_surjective_of_finite",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredient: map_surjective)"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, AdicCompletion, Function.Surjective",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "surjective ring homomorphism from multivariate power series onto the I-adic completion, variables mapped to generators of I",
+   "results": "AdicCompletion.evalOneₐ_surjective, AdicCompletion.surjective_evalₐ, AdicCompletion.of_surjective, AdicCompletion.mk_surjective, AdicCompletion.eval_surjective (Mathlib.RingTheory.AdicCompletion.*)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'AdicCompletion' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'MvPowerSeries\\|PowerSeries'; grep -n 'surjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/MvPowerSeries/Evaluation.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/MvPowerSeries/Substitution.lean",
+   "results": "RingTheory/MvPowerSeries/Equiv.lean: MvPowerSeries.toAdicCompletion / toAdicCompletionAlgEquiv (line ~344): MvPowerSeries σ R ≃ₐ AdicCompletion (MvPolynomial.idealOfVars σ R) (MvPolynomial σ R) for finite σ (the case R[x]-completion of R[x] at (x)); AdicCompletion/Completeness.lean: MvPowerSeries IsAdicComplete instance; no surjectivity of power series onto AdicCompletion I R and no evaluation at generators",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients: toAdicCompletionAlgEquiv identifies R[[x]] with the (x)-adic completion of R[x]; AdicCompletion.map_surjective)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-adic-completion-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement checked: well defined and surjective is the content of Stacks 0316 second proof; correct as stated. Unsplit; to be split."
+ }
+}

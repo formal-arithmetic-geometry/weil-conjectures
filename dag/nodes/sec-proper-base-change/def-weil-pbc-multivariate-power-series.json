@@ -1,0 +1,69 @@
+{
+ "id": "def-weil-pbc-multivariate-power-series",
+ "kind": "definition",
+ "title": "Formal power series ring in finitely many variables",
+ "statement": "Let $R$ be a commutative ring and $n\\geq0$. The ring $R[[x_1,\\ldots,x_n]]$ of formal power series in $x_1,\\ldots,x_n$ over $R$ is the set of families $(a_E)_{E\\in\\mathbf N^n}$ of elements of $R$, written $\\sum_Ea_Ex^E$ with $x^E=x_1^{e_1}\\cdots x_n^{e_n}$, with coefficientwise addition and the product $(\\sum_Ea_Ex^E)(\\sum_Fb_Fx^F)=\\sum_G(\\sum_{E+F=G}a_Eb_F)x^G$ (finite inner sums); it is a commutative $R$-algebra via $r\\mapsto rx^0$. For $n=0$ it is $R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 0306 (lemma-Noetherian-power-series, line 6028), where R[[x_1,...,x_n]] is used, and Lemma Tag 0316 (lemma-completion-Noetherian-Noetherian, line 23065)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ring of formal power series in finitely many variables over a commutative ring",
+   "results": "MvPowerSeries, MvPowerSeries.instCommRing (Mathlib.RingTheory.MvPowerSeries.Basic), PowerSeries",
+   "date": "2026-10-10",
+   "verdict": "match: MvPowerSeries σ R with σ finite (Fin n)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "multivariate power series ring over a Noetherian ring in finitely many variables is Noetherian",
+   "results": "MvPowerSeries (Mathlib.RingTheory.MvPowerSeries.Basic) among MvPolynomial/PowerSeries results",
+   "date": "2026-10-10",
+   "verdict": "match: MvPowerSeries"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^def MvPowerSeries' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/MvPowerSeries/Basic.lean",
+   "results": "line 86: def MvPowerSeries (σ R) := (σ →₀ ℕ) → R, with instCommRing and the Cauchy product",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MvPowerSeries",
+  "file": "Mathlib/RingTheory/MvPowerSeries/Basic.lean",
+  "how": "exact: MvPowerSeries (Fin n) R (line 86: functions (Fin n →₀ ℕ) → R, coefficientwise addition, Cauchy product; MvPowerSeries.instCommRing, R-algebra structure via MvPowerSeries.C)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-adic-completion-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf MvPowerSeries (Fin n) R; checked Basic.lean:86."
+ }
+}

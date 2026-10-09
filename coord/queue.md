@@ -17,7 +17,6 @@
 | `lem-weil-pbc-zariski-h0-proper-henselian-pair` | 1007 | none |
 | `lemma-weil-pbc-gabber-effacement` | 1007 | none |
 | `def-weil-pbc-site-cech-complex` | 1008 | none |
-| `def-weil-pbc-special-cocontinuous-functor` | 1008 | none |
 | `lem-weil-pbc-adic-completion-noetherian` | 1008 | none |
 | `lem-weil-pbc-affine-morphism-relative-spec` | 1008 | none |
 | `lem-weil-pbc-algebraize-finite-over-proper` | 1008 | none |
@@ -61,6 +60,7 @@
 | `lemma-weil-pbc-finite-cover-killing` | 1008 | none |
 | `lemma-weil-pbc-pushout-monicity` | 1008 | none |
 | `lem-weil-pbc-constructible-finite-pushforward-approximation` | 1009 | none |
+| `lem-weil-pbc-power-series-onto-completion` | 1009 | none |
 | `lemma-weil-pbc-finite-stage-killing` | 1009 | none |
 | `lem-weil-pbc-constructible-finite-pushforward-noetherian` | 1010 | none |
 | `def-weil-pbc-injective-acyclicity-property` | 2002 | none |
@@ -600,7 +600,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 572 nodes that wait for stage 1, 204 nodes that wait for a statement dependency.
+Not open yet: 572 nodes that wait for stage 1, 205 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

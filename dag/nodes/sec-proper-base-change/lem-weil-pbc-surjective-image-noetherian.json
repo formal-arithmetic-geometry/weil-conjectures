@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-surjective-image-noetherian",
+ "kind": "statement",
+ "title": "A ring receiving a surjection from a Noetherian ring is Noetherian",
+ "statement": "Let $\\varphi:R\\to S$ be a surjective homomorphism of commutative rings. If $R$ is Noetherian [def-weil-pbc-noetherian-ring], then $S$ is Noetherian.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00FN (lemma-Noetherian-permanence, line 5991), proof: 'Any quotient R/I of a Noetherian ring R is Noetherian because any ideal of R/I is of the form J/I' (S is isomorphic to R/ker(phi))"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "image of a Noetherian ring under a surjective ring homomorphism is Noetherian",
+   "results": "isNoetherianRing_of_surjective, isNoetherianRing_rangeS, isNoetherianRing_range (Mathlib.RingTheory.Noetherian.Basic), AlgHom.isNoetherianRing_range",
+   "date": "2026-10-10",
+   "verdict": "match: isNoetherianRing_of_surjective"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient of a Noetherian ring by surjective ring homomorphism is Noetherian",
+   "results": "isNoetherianRing_of_surjective (Mathlib.RingTheory.Noetherian.Basic), Ideal.Quotient.isNoetherianRing (Mathlib.RingTheory.Ideal.Quotient.Noetherian), isNoetherian_of_surjective",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem isNoetherianRing_of_surjective\\|instance Ideal.Quotient.isNoetherianRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Noetherian/Basic.lean:344 theorem isNoetherianRing_of_surjective (R) [Semiring R] (S) [Semiring S] (f : R →+* S) (hf : Function.Surjective f) [IsNoetherianRing R] : IsNoetherianRing S; Ideal/Quotient/Noetherian.lean:17 instance Ideal.Quotient.isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "isNoetherianRing_of_surjective",
+  "file": "Mathlib/RingTheory/Noetherian/Basic.lean",
+  "how": "exact (line 344): for a surjective ring hom f : R →+* S with IsNoetherianRing R, IsNoetherianRing S (stated for semirings; commutative rings are a special case)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-adic-completion-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf isNoetherianRing_of_surjective, Noetherian/Basic.lean:344; checked."
+ }
+}

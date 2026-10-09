@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-power-series-noetherian",
+ "kind": "statement",
+ "title": "Power series over a Noetherian ring are Noetherian",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $n\\geq0$. Then the formal power series ring $R[[x_1,\\ldots,x_n]]$ [def-weil-pbc-multivariate-power-series] is Noetherian.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 0306 (lemma-Noetherian-power-series, line 6028); proof by R[[x_1..x_{n+1}]] = R[[x_1..x_n]][[x_{n+1}]] and the one-variable case"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "multivariate power series ring over a Noetherian ring in finitely many variables is Noetherian",
+   "results": "PowerSeries.instIsNoetherianRing (Mathlib.RingTheory.PowerSeries.Ideal), MvPolynomial.isNoetherianRing, MvPolynomial.isNoetherianRing_fin, PowerSeries.isNoetherianRing (fields), MvPowerSeries",
+   "date": "2026-10-10",
+   "verdict": "one-variable case and polynomials; the multivariate case found by loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing (MvPowerSeries _ _)",
+   "results": "MvPowerSeries.isNoetherianRing {σ} (S) [CommRing S] [IsNoetherianRing S] [Finite σ] : IsNoetherianRing (MvPowerSeries σ S) (Mathlib.RingTheory.MvPowerSeries.Equiv)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsNoetherianRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/MvPowerSeries/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/",
+   "results": "MvPowerSeries/Equiv.lean:217 private isNoetherianRing_fin (induction on n via finSuccEquiv : MvPowerSeries (Fin (n+1)) R ≃ₐ[R] PowerSeries (MvPowerSeries (Fin n) R), line 170, exactly Stacks' iteration), :225 instance isNoetherianRing [Finite σ]; PowerSeries/Ideal.lean:196 instance IsNoetherianRing R⟦X⟧",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MvPowerSeries.isNoetherianRing",
+  "file": "Mathlib/RingTheory/MvPowerSeries/Equiv.lean",
+  "how": "exact: instance (line 225) IsNoetherianRing (MvPowerSeries σ S) for [CommRing S] [IsNoetherianRing S] [Finite σ]; take σ = Fin n. Proved as in Stacks 0306 by iterating the one-variable instance PowerSeries (RingTheory/PowerSeries/Ideal.lean:196) through finSuccEquiv"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-adic-completion-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf MvPowerSeries.isNoetherianRing, Equiv.lean:225 with [Finite σ]; checked."
+ }
+}

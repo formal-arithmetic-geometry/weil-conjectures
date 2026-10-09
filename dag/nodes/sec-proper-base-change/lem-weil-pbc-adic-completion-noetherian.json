@@ -2,17 +2,76 @@
  "id": "lem-weil-pbc-adic-completion-noetherian",
  "kind": "statement",
  "title": "The completion of a Noetherian ring is Noetherian",
- "statement": "Let $A$ be a Noetherian ring, $I\\subseteq A$ an ideal and $A^\\wedge$ the $I$-adic completion of $A$ [def-weil-pbc-adic-completion]. Then $A^\\wedge$ is a Noetherian ring.",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq A$ an ideal and $A^\\wedge$ the $I$-adic completion of $A$ [def-weil-pbc-adic-completion]. Then $A^\\wedge$ is a Noetherian ring.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Lemma Tag 0316 (lemma-completion-Noetherian-Noetherian, line 23065), proof: choosing generators f_1,...,f_n of I, R[[x_1,...,x_n]] -> R^, x_i -> f_i, is surjective and R[[x_1,...,x_n]] is Noetherian; cited in pione.tex, proof of Lemma 0GS2, line 1817"
  },
  "stmt_deps": [
-  "def-weil-pbc-adic-completion"
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-noetherian-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $A$ is Noetherian [def-weil-pbc-noetherian-ring], the ideal $I$ is finitely generated: choose $f_1,\\ldots,f_n\\in A$ ($n\\geq0$) with $I=(f_1,\\ldots,f_n)$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 0316 (lemma-completion-Noetherian-Noetherian, line 23065), second proof ('It can also be seen directly as follows', lines 23075-23087)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-power-series-onto-completion] applied to $A$ and $f_1,\\ldots,f_n$, there is a surjective ring homomorphism $\\Phi:A[[x_1,\\ldots,x_n]]\\to A^\\wedge$ [def-weil-pbc-multivariate-power-series] with $x_i\\mapsto f_i$.",
+   "uses": [
+    "lem-weil-pbc-power-series-onto-completion",
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 0316 (lemma-completion-Noetherian-Noetherian, line 23065), second proof ('It can also be seen directly as follows', lines 23075-23087)"
+   }
+  },
+  {
+   "text": "Since $A$ is Noetherian, $A[[x_1,\\ldots,x_n]]$ is Noetherian [lem-weil-pbc-power-series-noetherian] (Stacks Lemma 0306).",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 0316, proof, line 23085-23086 citing Lemma 0306 (lemma-Noetherian-power-series, line 6028)"
+   }
+  },
+  {
+   "text": "$A^\\wedge$ receives the surjective ring homomorphism $\\Phi$ (step 2) from the Noetherian ring $A[[x_1,\\ldots,x_n]]$ (step 3), hence is Noetherian [lem-weil-pbc-surjective-image-noetherian].",
+   "uses": [
+    "lem-weil-pbc-surjective-image-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 0316, proof, 'we win' (line 23086); quotients of Noetherian rings: Lemma 00FN (lemma-Noetherian-permanence, line 5991), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-power-series-onto-completion",
+  "lem-weil-pbc-surjective-image-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 0316 (lemma-completion-Noetherian-Noetherian, line 23065), second proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +93,38 @@
    "results": "only RingTheory/PowerSeries/Ideal.lean:196 instance [IsNoetherianRing R] : IsNoetherianRing R⟦X⟧ (one variable); no Noetherian instance for AdicCompletion or MvPowerSeries; RingTheory/AdicCompletion/Noetherian.lean is about Hausdorffness only",
    "verdict": "no match (ingredient PowerSeries one-variable Noetherian exists)",
    "date": "2026-10-10"
+  },
+  {
+   "tool": "leansearch",
+   "query": "I-adic completion of a Noetherian ring is a Noetherian ring",
+   "results": "AdicCompletion.flat_of_isNoetherian, AdicCompletion.instCommRing, AdicCompletion.instAlgebra, AdicCompletion.module, AdicCompletion, AdicCompletion.subring, AdicCompletion.map_exact",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the completion of a Noetherian ring with respect to an ideal is Noetherian",
+   "results": "AdicCompletion.flat_of_isNoetherian, IsHausdorff.of_isDomain (AdicCompletion/Noetherian.lean), IsAdic.isPrecomplete_iff, IsAdic.isAdicComplete_iff, IsAdicComplete.toIsPrecomplete",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing (AdicCompletion _ _)",
+   "results": "no results (repeated)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsNoetherian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/; grep -rn 'IsNoetherianRing.*AdicCompletion' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only hypotheses [IsNoetherianRing R] (Exactness, Noetherian, AsTensorProduct, LocalRing: IsLocalRing (AdicCompletion (maximalIdeal R) R) line 85); no IsNoetherianRing (AdicCompletion I R). Correction to the creating worker's grep: MvPowerSeries.isNoetherianRing does exist (RingTheory/MvPowerSeries/Equiv.lean:225)",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients MvPowerSeries.isNoetherianRing and isNoetherianRing_of_surjective exist)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +144,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-adic-completion-noetherian",
+  "worker": "stage1",
+  "summary": "Split along the second proof of Stacks 0316 (algebra.tex line 23075): generators f_1..f_n of I; the surjection A[[x_1..x_n]] -> A^, x_i -> f_i (new unsplit node lem-weil-pbc-power-series-onto-completion; Stacks writes 'details omitted'); A[[x]] Noetherian (new Mathlib leaf lem-weil-pbc-power-series-noetherian = MvPowerSeries.isNoetherianRing, Stacks 0306); surjective image of a Noetherian ring is Noetherian (new Mathlib leaf lem-weil-pbc-surjective-image-noetherian = isNoetherianRing_of_surjective, Stacks 00FN). New definition leaf def-weil-pbc-multivariate-power-series = MvPowerSeries. Statement: added the dependency def-weil-pbc-noetherian-ring (existing leaf). The whole lemma is not in Mathlib (LeanSearch, LeanFinder, Loogle, grep); the earlier record that MvPowerSeries has no Noetherian instance was wrong. No Lean in the source repository (grep of WeilConjectures for AdicCompletion/isNoetherianRing: nothing relevant)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Split along Stacks 0316 second proof (power series surjects onto the completion). Leaves verified in the pinned Mathlib: MvPowerSeries (Basic.lean:86), MvPowerSeries.isNoetherianRing (Equiv.lean:225, Finite σ), isNoetherianRing_of_surjective (Noetherian/Basic.lean:344). The one unsplit node (power series onto completion) states exactly what is needed, the truncation F_{<m}(f) is well defined mod I^m since |E|>=m terms lie in I^m."
+ }
 }
