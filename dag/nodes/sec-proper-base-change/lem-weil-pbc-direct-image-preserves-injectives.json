@@ -2,35 +2,138 @@
  "id": "lem-weil-pbc-direct-image-preserves-injectives",
  "kind": "statement",
  "title": "Direct image preserves injectives",
- "statement": "For every morphism $u:U\\to V$, the functor $u_*$ sends injective etale sheaves\nto injective etale sheaves. The relevant adjunction is $u^{-1}\\dashv u_*$, and\n$u^{-1}$ is exact.",
+ "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme] and $\\Lambda$ a commutative ring. For a scheme $T$ let $T_{\\Et}$ be its small etale site [def-weil-pbc-etale-site], $\\Lambda_T$ the constant sheaf of rings with value $\\Lambda$ on $T_{\\Et}$ [def-weil-pbc-constant-sheaf], and $\\Mod(T_{\\Et},\\Lambda)=\\Mod(\\Lambda_T)$ the abelian category of sheaves of $\\Lambda_T$-modules [def-weil-sheaf-of-modules-category]. Let $u_*:\\Mod(U_{\\Et},\\Lambda)\\to\\Mod(V_{\\Et},\\Lambda)$ be the direct image, $(u_*F)(W)=F(W\\times_VU)$ for $W\\to V$ etale, with the $\\Lambda$-module structure of the sections [def-weil-pbc-direct-image]. Then $u_*$ carries injective objects [def-sp-injective-resolutions] of $\\Mod(U_{\\Et},\\Lambda)$ to injective objects of $\\Mod(V_{\\Et},\\Lambda)$. In particular (the case $\\Lambda=\\mathbf Z$, where $\\Mod(T_{\\Et},\\mathbf Z)=\\Ab(T_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]) the direct image $u_*:\\Ab(U_{\\Et})\\to\\Ab(V_{\\Et})$ carries injective abelian sheaves to injective abelian sheaves.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-direct-image-preserves-injectives.md",
   "place": "node lem-weil-pbc-direct-image-preserves-injectives, order 1185"
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image"
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-abelian-etale-sheaves"
  ],
  "proof": [
   {
-   "text": "By the elementary criterion for injective objects ([lem-sp-right-adjoint-preserves-injectives]), a right adjoint to an exact\nfunctor preserves injectives; the exact functor is $u^{-1}$ and the right\nadjoint is $u_*$.",
+   "text": "*The adjunction and exactness.* By [prop-weil-pbc-inverse-image-modules-exact] (with $R=\\Lambda$), the inverse image $u^{-1}$ [def-weil-pbc-inverse-image] defines a functor $u^{-1}:\\Mod(V_{\\Et},\\Lambda)\\to\\Mod(U_{\\Et},\\Lambda)$ (the inverse image of the sheaf of rings $\\Lambda_V$ being canonically $\\Lambda_U$, so that $u^{-1}=u^*$ is the module pullback of the ringed-site morphism $(U_{\\Et},\\Lambda_U)\\to(V_{\\Et},\\Lambda_V)$, which is flat), which is additive and exact and is left adjoint to the direct image $u_*:\\Mod(U_{\\Et},\\Lambda)\\to\\Mod(V_{\\Et},\\Lambda)$ of [def-weil-pbc-direct-image]. Both categories are abelian [def-weil-sheaf-of-modules-category].",
    "uses": [
-    "lem-sp-right-adjoint-preserves-injectives"
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0730, proof, first sentence (\"In this case the functor f^* is exact, see Modules on Sites, Lemma 04JC\"); literature/stacks-project/sites-modules.tex Lemma 04JC (lemma-flat-pullback-exact)"
+   }
+  },
+  {
+   "text": "*Right adjoints of exact functors preserve injectives.* Apply [lem-sp-right-adjoint-preserves-injectives] to the exact functor $u^{-1}:\\Mod(V_{\\Et},\\Lambda)\\to\\Mod(U_{\\Et},\\Lambda)$ between abelian categories and its right adjoint $u_*$ (step 1): for every injective object $I$ of $\\Mod(U_{\\Et},\\Lambda)$ [def-sp-injective-resolutions], $u_*I$ is an injective object of $\\Mod(V_{\\Et},\\Lambda)$.",
+   "uses": [
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0730, proof, second sentence (\"Hence the result follows from Homology, Lemma 015Z\"); literature/stacks-project/homology.tex Lemma 015Z (lemma-adjoint-preserve-injectives)"
+   }
+  },
+  {
+   "text": "*The abelian case.* Take $\\Lambda=\\mathbf Z$. An abelian group carries exactly one $\\mathbf Z$-module structure and every additive map is $\\mathbf Z$-linear; since $\\mathbf Z_T(W)$ acts on $F(W)$ through locally constant integers, a sheaf of $\\mathbf Z_T$-modules is the same as an abelian sheaf and the forgetful functor $\\Mod(T_{\\Et},\\mathbf Z)\\to\\Ab(T_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] is an isomorphism of categories. It commutes with $u_*$, which is computed sectionwise by the same formula $(u_*F)(W)=F(W\\times_VU)$ on both sides [def-weil-pbc-direct-image]. An isomorphism of categories carries injective objects to injective objects, so step 2 for $\\Lambda=\\mathbf Z$ gives: $u_*I$ is an injective abelian sheaf for every injective abelian sheaf $I$ on $U_{\\Et}$.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-direct-image",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "sentence before Lemma 0730 (\"In particular the functor f_* : Ab(C) -> Ab(D) always transforms injective abelian sheaves into injective abelian sheaves\"), the case O = Z"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sp-right-adjoint-preserves-injectives"
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constant-sheaf"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-direct-image-preserves-injectives.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Cohomology on Sites, Lemma 0730 (lemma-pushforward-injective-flat), with the remark before it"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right adjoint of a functor preserving monomorphisms preserves injective objects",
+   "results": "CategoryTheory.Injective.injective_of_adjoint, CategoryTheory.Adjunction.map_injective (Mathlib.CategoryTheory.Preadditive.Injective.Basic); CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms (Mathlib.CategoryTheory.Preadditive.Injective.Preserves)",
+   "date": "2026-10-09",
+   "verdict": "match for the categorical criterion only (lem-sp-right-adjoint-preserves-injectives): L ⊣ R with [L.PreservesMonomorphisms] gives Injective (R.obj J); not the item, which needs the etale module adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pushforward of sheaves of modules preserves injective objects",
+   "results": "SheafOfModules.pushforward, SheafOfModules.pushforward_map_val (Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous); PresheafOfModules.pushforward₀; AlgebraicGeometry.Scheme.Modules.pushforward, Scheme.Modules.pullbackPushforwardAdjunction (Mathlib.AlgebraicGeometry.Modules.Sheaf, Zariski O_X-modules); TopCat.Sheaf.pushforward",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale direct image of injective etale sheaf along morphism of schemes is injective",
+   "results": "Scheme.Hom.toImage_app_injective, Scheme.Modules.instFaithfulPushforward, instIsGermInjectiveOfIsIntegral, Sheaf.isLocallyInjective_sheafToPresheaf_map_iff (unrelated)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "direct image of an injective sheaf of modules along a flat morphism of ringed sites is injective",
+   "results": "PresheafOfModules.instIsLocallyInjectiveToSheafify, Sheaf.isLocallyInjective_* (Mathlib.CategoryTheory.Sites.LocallyInjective), RingHom.FaithfullyFlat.* (unrelated)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective (CategoryTheory.Functor.obj ?G ?I)",
+   "results": "Adjunction.map_injective, Injective.injective_of_adjoint, Equivalence.map_injective_iff, Functor.injective_of_map_injective, Adjunction.injective_of_map_injective, Functor.injective_obj, Functor.injective_obj_of_injective (Mathlib.CategoryTheory.Preadditive.Injective.Basic/Preserves)",
+   "date": "2026-10-09",
+   "verdict": "generic criterion only; nothing for sheaves on an etale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, SheafOfModules.pushforward",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.PreservesMonomorphisms (SheafOfModules.pullback _)",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match (exactness of the module pullback is not in Mathlib)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn \"preservesInjectiveObjects_of_adjunction\\|injective_of_adjoint\\|map_injective\" Mathlib/CategoryTheory/Preadditive/Injective/; grep -rn \"IsContinuous\\|sheafPushforward\\|Etale.*⥤\" Mathlib/AlgebraicGeometry/Sites/ Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; grep -rln Injective Mathlib/Algebra/Category/ModuleCat/Sheaf/ Mathlib/AlgebraicGeometry/Sites Mathlib/AlgebraicGeometry/Modules; grep -rn \"pullbackPushforwardAdjunction\\|PreservesMonomorphisms\" Mathlib/Algebra/Category/ModuleCat/Sheaf/",
+   "results": "Preadditive/Injective/Basic.lean:195 Injective.injective_of_adjoint, Preserves.lean:49 preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms; Limits/Constructions/EpiMono.lean:40 preservesMonomorphisms_of_preservesLimitsOfShape; ModuleCat/Sheaf/PullbackContinuous.lean:60 SheafOfModules.pullbackPushforwardAdjunction (for a continuous functor of sites, assuming pushforward IsRightAdjoint), no PreservesMonomorphisms for SheafOfModules.pullback; AlgebraicGeometry/Sites/Etale.lean has Scheme.Etale and smallEtaleTopology but no base-change functor V.Etale ⥤ U.Etale along u : U ⟶ V, no IsContinuous instance and no etale direct image; no injectivity statement for any sheaf pushforward",
+   "date": "2026-10-09",
+   "verdict": "no match: the item is Adjunction.map_injective applied to the adjunction u^{-1} ⊣ u_* on Mod(-_et, Λ) once u^{-1} preserves monomorphisms; what Mathlib lacks is the etale direct image of Λ-module sheaves along a morphism of schemes as a right adjoint (the continuous base-change functor of small etale sites, its SheafOfModules.pushforward with Λ_V → u_*Λ_U) and the exactness of the left adjoint"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -58,5 +161,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-direct-image-preserves-injectives",
+  "worker": "stage1",
+  "summary": "Statement generalized from abelian etale sheaves to sheaves of Λ_T-modules for any commutative ring Λ, with the abelian case Λ = Z included, as Stacks 0730 states it and as the reviewed user prop-weil-pbc-composition-stability needs (F_r-module sheaves); 'morphism' now cites def-pc-scheme; the clause 'the relevant adjunction is u^{-1} ⊣ u_* and u^{-1} is exact' moved from the statement into step 1 (it is the content of prop-weil-pbc-inverse-image-modules-exact). Proof rewritten from Stacks Cohomology on Sites Lemma 0730 in three steps: adjunction and exactness on module sheaves [prop-weil-pbc-inverse-image-modules-exact]; the criterion [lem-sp-right-adjoint-preserves-injectives] (Stacks 015Z); the case Λ = Z (elementary: Mod(Z_T) = Ab(T)). No new nodes. Mathlib: the generic criterion is Adjunction.map_injective / Injective.injective_of_adjoint; the etale direct image of module sheaves as a right adjoint of a mono-preserving functor is missing."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "generalized to Lambda-module sheaves as Stacks 0730, as the reviewed users need"
+ }
 }

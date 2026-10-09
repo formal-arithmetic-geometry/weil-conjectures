@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-inverse-image-composition",
+ "kind": "statement",
+ "title": "Inverse images along a composite: the canonical isomorphism compatible with the units",
+ "statement": "Let $u:Y\\to X$ and $v:Z\\to Y$ be morphisms of schemes [def-pc-scheme], with small etale sites [def-weil-pbc-etale-site], categories of abelian sheaves $\\Ab(-_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves], direct images $u_*,v_*,(u\\circ v)_*$ given by $(u_*F)(W)=F(W\\times_XY)$ [def-weil-pbc-direct-image], and inverse images $u^{-1},v^{-1},(u\\circ v)^{-1}$ with the units $\\eta_u,\\eta_v,\\eta_{u\\circ v}$ of the adjunctions $u^{-1}\\dashv u_*$, $v^{-1}\\dashv v_*$, $(u\\circ v)^{-1}\\dashv(u\\circ v)_*$ [def-weil-pbc-inverse-image].\n\n1. For an abelian sheaf $F$ on $Z_{\\Et}$ and an object $W$ of $X_{\\Et}$, the canonical isomorphism of $Z$-schemes $(W\\times_XY)\\times_YZ\\xrightarrow{\\sim}W\\times_XZ$ [def-pc-fibre-product] induces isomorphisms $d_{u,v,F}(W):((u\\circ v)_*F)(W)=F(W\\times_XZ)\\to F((W\\times_XY)\\times_YZ)=(u_*v_*F)(W)$, compatible with the restriction maps in $W$ and natural in $F$; they form an isomorphism of functors $d_{u,v}:(u\\circ v)_*\\xrightarrow{\\sim}u_*\\circ v_*$.\n2. There is a unique isomorphism of functors $c_{u,v}:v^{-1}\\circ u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$ from $\\Ab(X_{\\Et})$ to $\\Ab(Z_{\\Et})$ such that for every abelian sheaf $G$ on $X_{\\Et}$\n$$\n u_*v_*(c_{u,v,G})\\circ u_*(\\eta_{v,u^{-1}G})\\circ\\eta_{u,G}=d_{u,v,(u\\circ v)^{-1}G}\\circ\\eta_{u\\circ v,G}:\\ G\\longrightarrow u_*v_*(u\\circ v)^{-1}G,\n$$\nthat is, $c_{u,v}$ carries the unit $u_*\\eta_vu^{-1}\\circ\\eta_u$ of the composite adjunction $v^{-1}u^{-1}\\dashv u_*v_*$ to the unit of $(u\\circ v)^{-1}\\dashv(u\\circ v)_*$, transported along $d_{u,v}$.\n3. For $u=\\mathrm{id}_X$, the isomorphisms $W\\times_XX\\xrightarrow{\\sim}W$ give an isomorphism $d_X:(\\mathrm{id}_X)_*\\xrightarrow{\\sim}\\mathrm{id}$ as in (1), and there is a unique isomorphism of functors $e_X:\\mathrm{id}_X^{-1}\\xrightarrow{\\sim}\\mathrm{id}_{\\Ab(X_{\\Et})}$ with $e_{X,G}\\circ d_{X,\\mathrm{id}_X^{-1}G}\\circ\\eta_{\\mathrm{id}_X,G}=\\mathrm{id}_G$ for every $G$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites) and its proof: $(u\\circ v)_s$ and $u_s\\circ v_s$ are both left adjoints of $(u\\circ v)^s$, hence isomorphic; for the small etale sites literature/stacks-project/topologies.tex Lemmas Tag 021I (lemma-morphism-big-small-etale, description of $f_{small,*}$) and Tag 021J (lemma-composition-etale, $g_{small}\\circ f_{small}=(g\\circ f)_{small}$); the uniqueness of the isomorphism of left adjoints compatible with the units is literature/stacks-project/categories.tex Lemma Tag 0B65 (lemma-transformation-between-functors-and-adjoints) and the Yoneda argument of its proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of pullbacks of sheaves is isomorphic to pullback along composite, compatible with unit of adjunction",
+   "results": "ChosenPullbacksAlong.unit_pullbackComp_hom, ChosenPullbacksAlong.comp (Mathlib.CategoryTheory.LocallyCartesianClosed.ChosenPullbacksAlong), MorphismProperty.Over.pullbackComp_hom_app_left, Scheme.Modules.pullbackComp (Mathlib.AlgebraicGeometry.Modules.Sheaf, O-modules on the Zariski site), SheafOfModules.conjugateEquiv_pullbackComp_inv, Over.pullbackComp, PresheafOfModules.pullback_comp_id; none for etale abelian sheaves along morphisms of schemes",
+   "date": "2026-10-09",
+   "verdict": "no match (the categorical part is generic: see the grep and loogle entries)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback along a composite of morphisms of sites is isomorphic to the composite of pullbacks, compatible with adjunction units",
+   "results": "GrothendieckTopology.pullbackComp (Sites.Grothendieck, sieves), GrothendieckTopology.overMapPullbackComp(_hom_app_val_app) (Mathlib.CategoryTheory.Sites.Over: restriction along Over.map, a pushforward-type functor between over sites), PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp (via conjugate equivalence of adjunctions); nothing for the small etale sites of schemes",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.comp",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'leftAdjointUniq\\|unit_leftAdjointUniq\\|conjugateIsoEquiv' Mathlib/CategoryTheory/Adjunction/Unique.lean Mathlib/CategoryTheory/Adjunction/Mates.lean; grep -n '^def \\|^abbrev \\|^lemma ' Mathlib/AlgebraicGeometry/Sites/Etale.lean",
+   "results": "Adjunction.leftAdjointUniq (Unique.lean:36), Adjunction.unit_leftAdjointUniq_hom_app (Unique.lean:53: adj1.unit.app x ≫ G.map ((leftAdjointUniq adj1 adj2).hom.app x) = adj2.unit.app x), conjugateIsoEquiv (Mates.lean:425): the categorical content of (2) and (3) for two left adjoints of one functor, or of isomorphic right adjoints via conjugateIsoEquiv; Sites/Etale.lean defines smallEtaleTopology on X.Etale but no direct or inverse image along a morphism of schemes and no isomorphism d_{u,v}",
+   "date": "2026-10-09",
+   "verdict": "no match for the node (the generic step (2)-(3) given (1) is Adjunction.leftAdjointUniq / conjugateIsoEquiv; (1) and the etale functors are absent)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cohomology-pullback-functorial",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

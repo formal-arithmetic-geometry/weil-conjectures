@@ -2,21 +2,147 @@
  "id": "lem-weil-pbc-cohomology-pullback-functorial",
  "kind": "statement",
  "title": "The pullback on etale cohomology is well defined and functorial",
- "statement": "For a morphism of schemes $u:Y\\to X$ and an abelian sheaf $G$ on $X_{\\Et}$, let $u^*:H^q(X_{\\Et},G)\\to H^q(Y_{\\Et},u^{-1}G)$ be the pullback map of [def-weil-pbc-cohomology-pullback]. Then:\n\n1. $u^*$ does not depend on the choice of the resolutions $G\\to I^\\bullet$ and $u^{-1}I^\\bullet\\to J^\\bullet$, once the cohomology groups are identified through [prop-weil-pbc-cohomology-resolution-independent]; the same holds for $u^*$ on $\\RGamma$ of a bounded below complex.\n2. (Any comparison complex.) If $G\\to I^\\bullet$ is an injective resolution, $u^{-1}G\\to M^\\bullet$ is any quasi-isomorphism to a bounded below complex, and $\\beta:u^{-1}I^\\bullet\\to M^\\bullet$ a morphism of complexes under $u^{-1}G$, then $u^*$ followed by the canonical map $H^q(Y,u^{-1}G)\\to\\mathcal H^q(\\Gamma(Y,M^\\bullet))\\to\\ldots$ is computed by $a\\mapsto\\beta(\\eta_u(a))$; in particular, if $M^\\bullet$ is itself a resolution of $u^{-1}G$ by injective (or $\\Gamma(Y,-)$-acyclic) sheaves, $u^*$ is $\\mathcal H^q$ of $\\Gamma(X,I^\\bullet)\\to\\Gamma(Y,M^\\bullet)$, $a\\mapsto\\beta(\\eta_u(a))$.\n3. (Naturality.) For a morphism $\\varphi:G\\to G'$, $u^*\\circ H^q(\\varphi)=H^q(u^{-1}\\varphi)\\circ u^*$.\n4. (Composition.) For $v:Z\\to Y$, let $c_{u,v}:v^{-1}u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$ be the canonical isomorphism (the left adjoints of $(u\\circ v)_*=u_*\\circ v_*$ [def-weil-pbc-direct-image] being unique up to unique isomorphism compatible with the units). Then $(u\\circ v)^*=H^q(c_{u,v,G})\\circ v^*\\circ u^*:H^q(X,G)\\to H^q(Z,(u\\circ v)^{-1}G)$, and $\\mathrm{id}_X^*=\\mathrm{id}$.\n5. (Etale maps.) If $u$ is etale, then $u^*$ is computed by restricting the sections of an injective resolution $I^\\bullet$ of $G$ to $Y$: $I^\\bullet|_Y$ is an injective resolution of $G|_Y$.",
+ "statement": "For a morphism of schemes $u:Y\\to X$ [def-pc-scheme] and an abelian sheaf $G$ on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], let $u^*:H^q(X_{\\Et},G)\\to H^q(Y_{\\Et},u^{-1}G)$ be the pullback map of [def-weil-pbc-cohomology-pullback], built from a K-injective resolution $s:G\\to I^\\bullet$ and a K-injective resolution $r:u^{-1}I^\\bullet\\to J^\\bullet$ [def-weil-pbc-kinjective-resolutions], as $\\mathcal H^q$ of $a\\mapsto r(\\eta_u(a))$, $\\eta_u$ the unit of $u^{-1}\\dashv u_*$ [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]. For a morphism $\\varphi:G\\to G'$ of abelian sheaves on a scheme $T$ and K-injective resolutions $G\\to I^\\bullet$, $G'\\to I'^\\bullet$, write $H^q(\\varphi):H^q(T_{\\Et},G)\\to H^q(T_{\\Et},G')$ [def-weil-pbc-etale-cohomology] for $\\mathcal H^q(\\Gamma(T,\\tilde\\varphi))$, where $\\tilde\\varphi:I^\\bullet\\to I'^\\bullet$ is any morphism of complexes with $\\tilde\\varphi\\circ(G\\to I^\\bullet)$ homotopic to $(G'\\to I'^\\bullet)\\circ\\varphi$; such $\\tilde\\varphi$ exist and $H^q(\\varphi)$ does not depend on $\\tilde\\varphi$ (step 1), and for $\\varphi=\\mathrm{id}_G$ these are the identifications of the groups computed from different resolutions [prop-weil-pbc-cohomology-resolution-independent]. Then:\n\n1. (Independence.) $u^*$ does not depend on the choice of $I^\\bullet$ and $J^\\bullet$: for a second choice $(I'^\\bullet,J'^\\bullet)$ the two maps $u^*$ agree after the identifications $H^q(\\mathrm{id}_G)$ and $H^q(\\mathrm{id}_{u^{-1}G})$. The same holds for $u^*:\\RGamma(X_{\\Et},K)\\to\\RGamma(Y_{\\Et},u^{-1}K)$, $K\\in\\Dplus(X_{\\Et})$ [def-weil-pbc-derived-categories], [def-weil-pbc-derived-inverse-image], as a morphism of $\\Dplus(\\Ab)$ [def-weil-abstract-derived-category] up to the canonical isomorphisms between the complexes computed from different resolutions.\n2. (Any comparison complex.) Let $t:u^{-1}G\\to M^\\bullet$ be a quasi-isomorphism to a bounded below complex of abelian sheaves on $Y_{\\Et}$ and $\\beta:u^{-1}I^\\bullet\\to M^\\bullet$ a morphism of complexes with $\\beta\\circ u^{-1}(s)=t$. Let $\\gamma:M^\\bullet\\to J^\\bullet$ be a morphism of complexes with $\\gamma\\circ t$ homotopic to $r\\circ u^{-1}(s)$ (it exists, unique up to homotopy). Then $u^*=\\mathcal H^q(\\Gamma(Y,\\gamma))\\circ\\mathcal H^q\\bigl(a\\mapsto\\beta(\\eta_u(a))\\bigr)$, the second map being $\\mathcal H^q$ of $\\Gamma(X,I^\\bullet)\\to\\Gamma(Y,M^\\bullet)$. If $M^\\bullet$ is K-injective, or a complex of $\\Gamma(Y,-)$-acyclic sheaves, then $\\mathcal H^q(\\Gamma(Y,\\gamma))$ is an isomorphism, so that $u^*$ is computed on $\\Gamma(Y,M^\\bullet)$ by $a\\mapsto\\beta(\\eta_u(a))$.\n3. (Naturality.) For a morphism $\\varphi:G\\to G'$ of abelian sheaves on $X_{\\Et}$, $u^*\\circ H^q(\\varphi)=H^q(u^{-1}\\varphi)\\circ u^*$.\n4. (Composition.) For a morphism $v:Z\\to Y$, let $c_{u,v}:v^{-1}u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$ be the isomorphism of [lem-weil-pbc-inverse-image-composition] (compatible with the units). Then $(u\\circ v)^*=H^q(c_{u,v,G})\\circ v^*\\circ u^*:H^q(X_{\\Et},G)\\to H^q(Z_{\\Et},(u\\circ v)^{-1}G)$, and, with $e_X:\\mathrm{id}_X^{-1}\\xrightarrow{\\sim}\\mathrm{id}$ of the same lemma, $H^q(e_{X,G})\\circ\\mathrm{id}_X^*=\\mathrm{id}$.\n5. (Etale maps.) If $u$ is etale [def-weil-etale-morphism], let $\\rho_G:u^{-1}G\\xrightarrow{\\sim}G|_Y$ be the identification of the inverse image with the restriction, $G|_Y(V)=G(V)$ for $V$ etale over $Y$, of [lem-weil-pbc-etale-inverse-image-restriction]. If $G\\to I^\\bullet$ is a resolution by a bounded below complex of injective abelian sheaves, then $u^{-1}G\\to u^{-1}I^\\bullet$ is a resolution of $u^{-1}G$ by a bounded below complex of injective abelian sheaves, one may take $J^\\bullet=u^{-1}I^\\bullet$, $r=\\mathrm{id}$, and then $u^*$ is $\\mathcal H^q$ of the restriction map $\\Gamma(X,I^\\bullet)=I^\\bullet(X)\\to I^\\bullet(Y)\\cong\\Gamma(Y,u^{-1}I^\\bullet)$ (through $\\rho_{I^\\bullet}(Y)$) along $u:Y\\to X$.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Section Tag 01F7 (section-functoriality): Lemma Tag 01F8 (functoriality in the triple), Remark Tag 01FB (remark-explain-arrow, independence of the choices); for (5) literature/stacks-project/sites-cohomology.tex Lemma Tag 03F3 (lemma-cohomology-of-open) and the restriction of injectives to a localization; written in Stacks for ringed spaces and ringed sites, the etale case being the same argument"
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-cohomology-pullback",
-  "prop-weil-pbc-cohomology-resolution-independent",
-  "def-weil-pbc-direct-image",
+  "def-weil-pbc-kinjective-resolutions",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-cohomology",
+  "prop-weil-pbc-cohomology-resolution-independent",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-inverse-image-restriction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Lifting principle (and its consequences).* Let $\\mathcal A=\\Ab(T_{\\Et})$ for a scheme $T$, let $\\sigma:A^\\bullet\\to B^\\bullet$ be a quasi-isomorphism of complexes of $\\mathcal A$ and $I^\\bullet$ a K-injective complex. Then $-\\circ\\sigma:\\operatorname{Hom}_{K(\\mathcal A)}(B^\\bullet,I^\\bullet)\\to\\operatorname{Hom}_{K(\\mathcal A)}(A^\\bullet,I^\\bullet)$ is bijective. Indeed, by [lem-weil-pbc-kinjective-hom-derived] the localization $Q$ [def-weil-abstract-derived-category] induces bijections $\\operatorname{Hom}_{K(\\mathcal A)}(N^\\bullet,I^\\bullet)\\to\\operatorname{Hom}_{D(\\mathcal A)}(QN^\\bullet,QI^\\bullet)$ for $N^\\bullet=A^\\bullet,B^\\bullet$; since $Q$ is a functor, $Q(g\\circ\\sigma)=Q(g)\\circ Q(\\sigma)$, so these bijections carry $-\\circ\\sigma$ to $-\\circ Q(\\sigma)$, which is bijective because $Q(\\sigma)$ is an isomorphism of $D(\\mathcal A)$ ($Q$ inverts quasi-isomorphisms). Consequences used below. (a) For K-injective resolutions $s:G\\to I^\\bullet$, $s':G'\\to I'^\\bullet$ [def-weil-pbc-kinjective-resolutions] and $\\varphi:G\\to G'$, applying this to $\\sigma=s$ and the class of $s'\\circ\\varphi$ gives $\\tilde\\varphi:I^\\bullet\\to I'^\\bullet$ with $\\tilde\\varphi s\\simeq s'\\varphi$, unique up to homotopy; the same holds for complexes $K^\\bullet$ in place of $G$. (b) An additive functor, here $\\Gamma(T,-)$, carries a homotopy $h$ between morphisms of complexes to the homotopy $\\Gamma(T,h)$, so homotopic morphisms induce the same maps $\\mathcal H^q(\\Gamma(T,-))$; hence $H^q(\\varphi)$ of the statement is well defined, and $H^q(\\varphi'\\circ\\varphi)=H^q(\\varphi')\\circ H^q(\\varphi)$, $H^q(\\mathrm{id})=\\mathrm{id}$ (a composite of lifts is a lift of the composite, the identity a lift of the identity); for $\\varphi=\\mathrm{id}_G$ the lifts are the mutually inverse homotopy equivalences of [prop-weil-pbc-cohomology-resolution-independent]. (c) (Two out of three.) If $\\gamma\\circ\\sigma\\simeq\\tau$ with $\\sigma,\\tau$ quasi-isomorphisms, then $\\mathcal H^q(\\gamma)\\mathcal H^q(\\sigma)=\\mathcal H^q(\\tau)$ (homotopic maps agree on cohomology), so $\\mathcal H^q(\\gamma)=\\mathcal H^q(\\tau)\\mathcal H^q(\\sigma)^{-1}$ is bijective and $\\gamma$ is a quasi-isomorphism. (d) $u^{-1}$ is exact [prop-weil-pbc-inverse-image-exact], hence commutes with the cohomology of complexes [lem-weil-pbc-exact-functor-complex-cohomology] and carries quasi-isomorphisms to quasi-isomorphisms; a composite of quasi-isomorphisms is one.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-kinjective-resolutions",
+    "prop-weil-pbc-cohomology-resolution-independent",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 070I (lemma-K-injective), (1) implies (2); for bounded below complexes of injectives Lemmas Tag 013P (lemma-morphisms-lift) and Tag 013S (lemma-morphisms-equal-up-to-homotopy)"
+   }
+  },
+  {
+   "text": "*Clause 3 (naturality).* Let $s:G\\to I^\\bullet$, $r:u^{-1}I^\\bullet\\to J^\\bullet$ and $s':G'\\to I'^\\bullet$, $r':u^{-1}I'^\\bullet\\to J'^\\bullet$ be the resolutions defining $u^*$ for $G$ and $G'$ [def-weil-pbc-cohomology-pullback]. By step 1(a) choose $\\tilde\\varphi:I^\\bullet\\to I'^\\bullet$ with $\\tilde\\varphi s\\simeq s'\\varphi$; it computes $H^q(\\varphi)$. The complex $J'^\\bullet$ is K-injective and $r\\circ u^{-1}(s):u^{-1}G\\to J^\\bullet$ is a quasi-isomorphism (step 1(d)), and $r:u^{-1}I^\\bullet\\to J^\\bullet$ is one, so step 1 gives $\\psi:J^\\bullet\\to J'^\\bullet$ with $\\psi r\\simeq r'\\circ u^{-1}(\\tilde\\varphi)$. Then $\\psi\\circ(r\\,u^{-1}(s))\\simeq r'u^{-1}(\\tilde\\varphi s)\\simeq r'u^{-1}(s')\\circ u^{-1}(\\varphi)$ ($u^{-1}$ is additive, so it preserves homotopies), so $\\psi$ is a lift of $u^{-1}\\varphi$ and computes $H^q(u^{-1}\\varphi)$. Naturality of the unit [def-weil-pbc-inverse-image] gives $\\eta_{u,I'^\\bullet}\\circ\\tilde\\varphi=u_*u^{-1}(\\tilde\\varphi)\\circ\\eta_{u,I^\\bullet}$ exactly; on global sections, with $\\Gamma(X,u_*-)=\\Gamma(Y,-)$ [def-weil-pbc-direct-image], this says $\\eta_u(\\tilde\\varphi(a))=u^{-1}(\\tilde\\varphi)(\\eta_u(a))$. Hence the two morphisms of complexes $\\Gamma(X,I^\\bullet)\\to\\Gamma(Y,J'^\\bullet)$, $a\\mapsto r'(\\eta_u(\\tilde\\varphi(a)))=r'u^{-1}(\\tilde\\varphi)(\\eta_u(a))$ and $a\\mapsto\\psi(r(\\eta_u(a)))$, are homotopic ($\\Gamma(Y,-)$ of the homotopy $\\psi r\\simeq r'u^{-1}(\\tilde\\varphi)$), so they agree on $\\mathcal H^q$ (step 1(b)): $u^*\\circ H^q(\\varphi)=H^q(u^{-1}\\varphi)\\circ u^*$.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma Tag 01F8 (lemma-functoriality: the construction is functorial in the triple) and Remark Tag 01FB (remark-explain-arrow: the map $\\beta$ chosen by Derived Categories, Lemma 013P); written there for ringed spaces, the etale case being the same argument with the etale $u^{-1}\\dashv u_*$"
+   }
+  },
+  {
+   "text": "*Clause 1 (independence).* Apply step 2 with $G'=G$, $\\varphi=\\mathrm{id}_G$, the first choice $(I^\\bullet,J^\\bullet)$ for $G$ and the second $(I'^\\bullet,J'^\\bullet)$ for $G'$: $u^*{}'\\circ H^q(\\mathrm{id}_G)=H^q(\\mathrm{id}_{u^{-1}G})\\circ u^*$, and $H^q(\\mathrm{id})$ are the identifications of [prop-weil-pbc-cohomology-resolution-independent] (step 1(b)). For $K\\in\\Dplus(X_{\\Et})$ represented by a bounded below complex $K^\\bullet$ the same argument applies verbatim with $K^\\bullet$ in place of $G$ and $u^{-1}K^\\bullet$ [def-weil-pbc-derived-inverse-image] in place of $u^{-1}G$ (step 1 is stated for complexes): the two morphisms of complexes $\\Gamma(X,I^\\bullet)\\to\\Gamma(Y,J'^\\bullet)$ obtained are homotopic, so they have the same class in $K(\\Ab)$ and hence in $\\Dplus(\\Ab)$ [def-weil-abstract-derived-category], where $\\Gamma(X,\\tilde\\varphi)$ and $\\Gamma(Y,\\psi)$ are the canonical isomorphisms between the complexes $\\RGamma$ computed from the two choices (homotopy equivalences, step 1(a)).",
+   "uses": [
+    "prop-weil-pbc-cohomology-resolution-independent",
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section Tag 01F7, the paragraph defining equation Tag 01F9 (equation-functorial-derived) and Remark Tag 01FB"
+   }
+  },
+  {
+   "text": "*Clause 2 (any comparison complex).* Since $J^\\bullet$ is K-injective and $t$ is a quasi-isomorphism, step 1 gives $\\gamma:M^\\bullet\\to J^\\bullet$ with $\\gamma t\\simeq r\\,u^{-1}(s)$, unique up to homotopy. The morphisms $\\gamma\\beta$ and $r$ from $u^{-1}I^\\bullet$ to the K-injective $J^\\bullet$ satisfy $\\gamma\\beta\\circ u^{-1}(s)=\\gamma t\\simeq r\\circ u^{-1}(s)$, and $u^{-1}(s)$ is a quasi-isomorphism (step 1(d)); by the injectivity in step 1, $\\gamma\\beta\\simeq r$. Applying $\\Gamma(Y,-)$ (step 1(b)), $a\\mapsto r(\\eta_u(a))$ and $a\\mapsto\\gamma(\\beta(\\eta_u(a)))$ agree on $\\mathcal H^q$, i.e. $u^*=\\mathcal H^q(\\Gamma(Y,\\gamma))\\circ\\mathcal H^q(a\\mapsto\\beta(\\eta_u(a)))$ [def-weil-pbc-cohomology-pullback]. By step 1(c), $\\gamma$ is a quasi-isomorphism ($t$ and $r\\,u^{-1}(s)$ are). If $M^\\bullet$ is K-injective, a quasi-isomorphism between K-injective complexes is a homotopy equivalence [lem-weil-pbc-kinjective-hom-derived] (last sentence), so $\\Gamma(Y,\\gamma)$ is a homotopy equivalence and $\\mathcal H^q(\\Gamma(Y,\\gamma))$ is bijective.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remark Tag 01FB (remark-explain-arrow): the map $\\beta$ into a resolution $(\\mathcal J')^\\bullet$ and the vertical quasi-isomorphism inverted in the derived category"
+   }
+  },
+  {
+   "text": "*Clause 2, acyclic case.* Let $M^\\bullet$ be bounded below with $\\Gamma(Y,-)$-acyclic terms. Choose a resolution $M^\\bullet\\to L^\\bullet$ by a bounded below complex of injectives; it is K-injective [prop-weil-pbc-kinjective-resolutions-exist], and $u^{-1}G\\to M^\\bullet\\to L^\\bullet$ is a K-injective resolution of $u^{-1}G$. By the acyclicity criterion for complexes [lemma-weil-pbc-leray-acyclicity] (3), applied to the left exact additive functor $v=\\Gamma(Y,-)$ on the Grothendieck abelian category $\\Ab(Y_{\\Et})$, $\\mathcal H^q(\\Gamma(Y,M^\\bullet))\\to\\mathcal H^q(\\Gamma(Y,L^\\bullet))$ is bijective. The lift $\\gamma':L^\\bullet\\to J^\\bullet$ of $\\mathrm{id}_{u^{-1}G}$ (step 1(a)) is a quasi-isomorphism between K-injective complexes (step 1(c)), hence a homotopy equivalence [lem-weil-pbc-kinjective-hom-derived], and by uniqueness in step 1 $\\gamma\\simeq\\gamma'\\circ(M^\\bullet\\to L^\\bullet)$ (both are lifts of $r\\,u^{-1}(s)$ along $t$). So $\\mathcal H^q(\\Gamma(Y,\\gamma))$ is a composite of two bijections.",
+   "uses": [
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Proposition Tag 05TA (proposition-enough-acyclics), (1): a bounded below complex whose terms are acyclic computes RF, and Lemma Tag 015E (lemma-leray-acyclicity); used in literature/stacks-project/cohomology.tex Remark Tag 01FB through Lemma Tag 01EZ (lemma-before-Leray)"
+   }
+  },
+  {
+   "text": "*Clause 4 (composition).* Choose $s:G\\to I^\\bullet$ and $r:u^{-1}I^\\bullet\\to J^\\bullet$ defining $u^*$, and $r':v^{-1}J^\\bullet\\to L^\\bullet$ a K-injective resolution on $Z_{\\Et}$, so that $v^*$ for $u^{-1}G$ is computed from $r\\,u^{-1}(s)$ and $r'$ by $b\\mapsto r'(\\eta_v(b))$. Hence $v^*u^*$ is $\\mathcal H^q$ of $a\\mapsto r'(\\eta_{v,J}(r(\\eta_{u,I}(a))))$. Naturality of $\\eta_v$ gives $\\eta_{v,J}\\circ r=v_*v^{-1}(r)\\circ\\eta_{v,u^{-1}I}$, so this is $a\\mapsto r''\\bigl(u_*(\\eta_{v,u^{-1}I})(\\eta_{u,I}(a))\\bigr)$ with $r''=r'\\circ v^{-1}(r):v^{-1}u^{-1}I^\\bullet\\to L^\\bullet$, a quasi-isomorphism (step 1(d)) to a K-injective complex. By [lem-weil-pbc-inverse-image-composition] (2), $u_*v_*(c_{u,v,I})\\circ u_*(\\eta_{v,u^{-1}I})\\circ\\eta_{u,I}=d_{u,v}\\circ\\eta_{u\\circ v,I}$; on global sections $d_{u,v}$ is the identification $\\Gamma(X,(u\\circ v)_*F)=F(Z)=\\Gamma(X,u_*v_*F)$, so $u_*(\\eta_{v,u^{-1}I})(\\eta_{u,I}(a))=c_{u,v,I}^{-1}(\\eta_{u\\circ v,I}(a))$. Therefore $v^*u^*$ is the map $(u\\circ v)^*$ computed (clause 1) with the K-injective resolution $r''\\circ c_{u,v,I}^{-1}:(u\\circ v)^{-1}I^\\bullet\\to L^\\bullet$ of $(u\\circ v)^{-1}G$, followed by the identification of the target $H^q(Z,v^{-1}u^{-1}G)$, computed from $r''\\circ v^{-1}u^{-1}(s)$, with $H^q(Z,(u\\circ v)^{-1}G)$, computed from $r''c_{u,v,I}^{-1}(u\\circ v)^{-1}(s)$. By naturality of $c_{u,v}$, $r''c_{u,v,I}^{-1}(u\\circ v)^{-1}(s)\\circ c_{u,v,G}=r''\\circ v^{-1}u^{-1}(s)$, so $\\mathrm{id}_{L^\\bullet}$ is a lift of $c_{u,v,G}$ and that identification is $H^q(c_{u,v,G})$ (step 1(b)): $(u\\circ v)^*=H^q(c_{u,v,G})\\circ v^*\\circ u^*$. For the identity: by [lem-weil-pbc-inverse-image-composition] (3), $e_{X,I}\\circ d_X\\circ\\eta_{\\mathrm{id},I}=\\mathrm{id}$, so with $J^\\bullet=I^\\bullet$ and $r=e_{X,I}:\\mathrm{id}_X^{-1}I^\\bullet\\to I^\\bullet$, $\\mathrm{id}_X^*$ is $\\mathcal H^q$ of $a\\mapsto e_{X,I}(\\eta_{\\mathrm{id},I}(a))=a$, from $H^q(X,G)$ computed by $s$ to $H^q(X,\\mathrm{id}_X^{-1}G)$ computed by $e_{X,I}\\circ\\mathrm{id}_X^{-1}(s)=s\\circ e_{X,G}$; so $\\mathrm{id}_{I^\\bullet}$ lifts $e_{X,G}$ and $H^q(e_{X,G})\\circ\\mathrm{id}_X^*=\\mathrm{id}$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma Tag 01F8 and equation Tag 01FA (equation-functorial): the maps of cohomology attached to $f$-maps; their compatibility with composition is the functoriality of Lemma 01F8 together with the composition of $f$-maps (literature/stacks-project/sites.tex Lemma Tag 03CB for the composite of inverse images)"
+   }
+  },
+  {
+   "text": "*Clause 5 (etale maps).* Let $u$ be etale and $s:G\\to I^\\bullet$ a resolution by a bounded below complex of injective abelian sheaves. By [lem-weil-pbc-etale-restriction-injectives] (applied with the constant ring $\\mathbf Z$, abelian sheaves being $\\mathbf Z$-module sheaves), $u^{-1}$ has the exact left adjoint $u_!$ and therefore carries injective sheaves to injective sheaves; and $u^{-1}$ is exact [prop-weil-pbc-inverse-image-exact], so $u^{-1}(s):u^{-1}G\\to u^{-1}I^\\bullet$ is a resolution by a bounded below complex of injectives, hence a K-injective resolution [prop-weil-pbc-kinjective-resolutions-exist]. So $J^\\bullet=u^{-1}I^\\bullet$, $r=\\mathrm{id}$ is an admissible choice in [def-weil-pbc-cohomology-pullback] (any other choice gives the same $u^*$ by clause 1), and $u^*$ is $\\mathcal H^q$ of $a\\mapsto\\eta_{u,I}(a)\\in\\Gamma(Y,u^{-1}I^\\bullet)$. By [lem-weil-pbc-etale-inverse-image-restriction] (2), $\\rho_{I}(Y)\\circ\\eta_{u,I}(X):I^\\bullet(X)\\to I^\\bullet(Y)$ is the restriction along $u$, and $\\rho_I(Y):\\Gamma(Y,u^{-1}I^\\bullet)\\to I^\\bullet(Y)$ is an isomorphism of complexes (naturality of $\\rho$ in the sheaf). Hence $u^*$ is $\\mathcal H^q$ of the restriction $\\Gamma(X,I^\\bullet)\\to I^\\bullet(Y)$, as claimed.",
+   "uses": [
+    "lem-weil-pbc-etale-restriction-injectives",
+    "prop-weil-pbc-inverse-image-exact",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F3 (lemma-cohomology-of-open) and its proof: $j_U^{-1}$ is right adjoint to the exact $j_{U!}$, so it preserves injectives (literature/stacks-project/homology.tex Lemma Tag 015Z, lemma-adjoint-preserve-injectives), $\\mathcal F|_U\\to\\mathcal I^\\bullet|_U$ is an injective resolution and $\\mathcal F(U)=\\mathcal F|_U(U)$; the etale $j^{-1}$ is the restriction, literature/stacks-project/etale-cohomology.tex Section Tag 03S2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-kinjective-resolutions",
+  "prop-weil-pbc-cohomology-resolution-independent",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-inverse-image",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section Tag 01F7 (Lemma 01F8, equations 01F9/01FA, Remark 01FB), with literature/stacks-project/derived.tex Lemma 070I and literature/stacks-project/sites-cohomology.tex Lemma 03F3; Stacks writes these for ringed spaces and ringed sites, the small etale site case is the same argument (written out here)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,10 +171,38 @@
    "results": "cohomologyPresheafFunctor, functorH only",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "map on sheaf cohomology induced by a morphism of sites, functorial for composition",
+   "results": "Functor.sheafPushforwardContinuous(_obj_val_map), sheafPushforwardContinuousComp(_hom_app_val_app) (Mathlib.CategoryTheory.Sites.Continuous), SheafOfModules.sectionsMap_comp, PresheafOfModules.sectionsMap_comp, TopCat.Sheaf.pushforward, sheafCompose_map_val; none on cohomology",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map",
+   "results": "Sheaf.H.map, functorH_map, H.map_id_apply, H.map_apply, H.map_comp_apply, H.map_add_apply, H.equiv₀_naturality, H.addEquiv₀_map (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic): functoriality in a morphism of sheaves on one site only (clause 3 for u = id); nothing along a morphism of sites or schemes",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of sheaf cohomology to an open (etale) object: H^n(X, F) → H^n(U, F|_U), functorial",
+   "results": "Sheaf.ΓRes_map, Sheaf.natTransΓRes(_app), Sheaf.ΓRes_naturality (Mathlib.CategoryTheory.Sites.GlobalSections), TopCat.Presheaf.restrictOpen; restriction of sections only, not of cohomology",
+   "date": "2026-10-09",
+   "verdict": "no match (clause 5)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'overPullback\\|Injective' Mathlib/CategoryTheory/Sites/Over.lean Mathlib/CategoryTheory/Sites/SheafCohomology/; grep -n '^def \\|^abbrev ' Mathlib/AlgebraicGeometry/Sites/Etale.lean",
+   "results": "Sites/Over.lean:288 overPullback (restriction to J.over X); no lemma that it preserves injectives or acts on Sheaf.H; Sites/Etale.lean has smallEtaleTopology but no pullback along a morphism of schemes",
+   "date": "2026-10-09",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +222,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-cohomology-pullback-functorial",
+  "worker": "stage1",
+  "summary": "Split into seven steps following Stacks cohomology.tex 01F7-01FB, derived.tex 070I and sites-cohomology.tex 03F3. Step 1 derives the lifting principle for K-injective targets (Stacks 070I (1)=>(2)) from the Mathlib leaf lem-weil-pbc-kinjective-hom-derived, with its consequences (comparison maps unique up to homotopy, homotopies survive Gamma, two-out-of-three, u^{-1} preserves quasi-isomorphisms). Naturality (3) is proved first from naturality of the unit; independence (1) is its case phi = id, also for RGamma. Clause (2) was corrected: the old text composed u^* with a 'canonical map H^q(Y,u^{-1}G) -> H^q(Gamma(Y,M))' that does not exist for an arbitrary comparison complex M; the map goes the other way, via gamma: M -> J, and is bijective when M is K-injective or Gamma-acyclic (lemma-weil-pbc-leray-acyclicity (3)). H^q(phi) is now defined in the statement. Composition (4) uses the new node lem-weil-pbc-inverse-image-composition (c_{u,v} compatible with the units, d_{u,v}: (uv)_* = u_*v_* up to the fibre-product isomorphism; e_X for the identity, whose identity clause was stated as id^* = id although the targets differ by e_X). Etale case (5) uses lem-weil-pbc-etale-restriction-injectives (exact left adjoint u_!) and the new node lem-weil-pbc-etale-inverse-image-restriction (u^{-1}G = G|_Y, unit = restriction). New nodes searched three ways; neither in Mathlib."
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "clause 2 corrected (direction of the comparison), identity clause made precise; prop-weil-pbc-inverse-image-exact (sk-thm-properbasechange) accepted as a tool use; 2 new nodes"
+ }
 }

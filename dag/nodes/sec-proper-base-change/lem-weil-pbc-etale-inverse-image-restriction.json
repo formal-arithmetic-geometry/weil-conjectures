@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-etale-inverse-image-restriction",
+ "kind": "statement",
+ "title": "Inverse image along an etale morphism is restriction",
+ "statement": "Let $j:Y\\to X$ be an etale morphism of schemes [def-weil-etale-morphism], with small etale sites [def-weil-pbc-etale-site]. An object $V\\to Y$ of $Y_{\\Et}$ gives the object $V\\to Y\\xrightarrow{j}X$ of $X_{\\Et}$ (a composite of etale morphisms is etale), and a morphism over $Y$ is a morphism over $X$; write $\\iota_j:Y_{\\Et}\\to X_{\\Et}$ for this functor. For an abelian sheaf $G$ on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] let $G|_Y=G\\circ\\iota_j$, i.e. $G|_Y(V\\to Y)=G(V\\to X)$ with the restriction maps of $G$. Let $j^{-1}$, $j_*$ and $\\eta_j:\\mathrm{id}\\to j_*j^{-1}$ be the inverse image, the direct image $(j_*F)(W)=F(W\\times_XY)$ and the unit of $j^{-1}\\dashv j_*$ [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]. Then:\n\n1. $G|_Y$ is an abelian sheaf on $Y_{\\Et}$, and there is an isomorphism $\\rho_G:j^{-1}G\\xrightarrow{\\sim}G|_Y$ of abelian sheaves on $Y_{\\Et}$, natural in $G$.\n2. Under $\\rho$, the unit is restriction: for every object $W$ of $X_{\\Et}$, $\\rho_G(W\\times_XY)\\circ\\eta_{j,G}(W):G(W)\\to G|_Y(W\\times_XY)=G(W\\times_XY)$ is the restriction map of $G$ along the projection $W\\times_XY\\to W$ (a morphism of $X_{\\Et}$). In particular, on global sections, $\\rho_G(Y)\\circ\\eta_{j,G}(X):\\Gamma(X,G)=G(X)\\to G(Y)$ is the restriction of $G$ along $j:Y\\to X$, and $\\rho_G(Y):\\Gamma(Y,j^{-1}G)\\xrightarrow{\\sim}G(Y)$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section Tag 03S2 (section-extension-by-zero), paragraph after Definition Tag 03S3: \"recall that $j^{-1}$ is just the restriction via the functor $U_\\etale\\to X_\\etale$. In other words, $j^{-1}\\mathcal G(U')=\\mathcal G(U')$ for $U'$ etale over $U$\"; literature/stacks-project/sites.tex Section Tag 00XZ (section-localize): $j_U^{-1}\\mathcal F(X/U)=\\mathcal F(X)$, with Lemma Tag 00XR (lemma-when-shriek) for the cocontinuous and continuous functor $\\iota_j$"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of a sheaf to the over category (localization at an object) evaluates as F(V)",
+   "results": "Sheaf.over, GrothendieckTopology.overPullback (Mathlib.CategoryTheory.Sites.Over: restriction to J.over X as sheafPushforwardContinuous along Over.forget), Sheaf.ΓRes (Sites.GlobalSections), sheafSectionsNatIsoEvaluation, Scheme.restrictFunctor; no etale-site inverse image along an etale morphism of schemes",
+   "date": "2026-10-09",
+   "verdict": "no match (overPullback is the restriction G|_Y on a generic over site, not its identification with the inverse image along j)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of a sheaf to the over site J.over X preserves injective objects; sections over V/X equal F(V)",
+   "results": "Sheaf.isLocallyInjective_forget, Presheaf.isLocallyInjective_of_injective, Sheaf.isLocallyInjective_iff_injective (Mathlib.CategoryTheory.Sites.LocallyInjective); unrelated",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of sheaf cohomology to an open (etale) object: H^n(X, F) → H^n(U, F|_U), functorial",
+   "results": "Sheaf.ΓRes_map, Sheaf.natTransΓRes(_app), Sheaf.ΓRes_naturality (Mathlib.CategoryTheory.Sites.GlobalSections: restriction from global sections to F(U)), TopCat.Presheaf.restrictOpen; no inverse image along an etale morphism",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.overPullback, CategoryTheory.Injective",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^def \\|^abbrev \\|^lemma ' Mathlib/AlgebraicGeometry/Sites/Etale.lean; grep -n 'overPullback' Mathlib/CategoryTheory/Sites/Over.lean",
+   "results": "Sites/Etale.lean: etalePrecoverage, etalePretopology, etaleTopology, smallEtaleTopology (X.Etale), smallEtalePretopology, geometricFiber; Sites/Over.lean:288 overPullback = (Over.forget X).sheafPushforwardContinuous; no functor X.Etale -> Y.Etale along a morphism of schemes and no inverse image on small etale sites",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cohomology-pullback-functorial",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

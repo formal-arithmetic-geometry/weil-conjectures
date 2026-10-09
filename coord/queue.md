@@ -1,15 +1,14 @@
 # Work queue
 
-562 items; claim with `tools/claim.py next <group> [--stage N]`.
+564 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (548)
+## Stage 1: nodes to split (550)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-cohomology-pullback-functorial` | 1003 | none |
 | `lem-weil-pbc-derived-adjunction-commshift` | 1003 | none |
 | `lem-weil-pbc-derived-exchange-termwise` | 1003 | none |
-| `lem-weil-pbc-derived-square-iso-commshift` | 1003 | none |
 | `lem-weil-pbc-direct-image-preserves-injectives` | 1003 | none |
 | `lem-weil-pbc-etale-cover-detects-iso` | 1003 | none |
 | `lem-weil-pbc-etale-localization-exchange` | 1003 | none |
@@ -34,6 +33,8 @@
 | `def-weil-pbc-symmetric-product-morphism` | 1004 | none |
 | `lem-weil-pbc-curve-constructible-reduction` | 1004 | none |
 | `lem-weil-pbc-curve-dense-open-localization` | 1004 | none |
+| `lem-weil-pbc-etale-inverse-image-restriction` | 1004 | none |
+| `lem-weil-pbc-inverse-image-composition` | 1004 | none |
 | `lem-weil-pbc-zero-dimensional-field-extension` | 1004 | none |
 | `lemma-weil-pbc-curve-filtered-cohomology` | 1004 | none |
 | `lemma-weil-pbc-curve-locally-constant-reduction` | 1004 | none |
@@ -42,6 +43,7 @@
 | `lemma-weil-pbc-finite-pushforward-extension-zero` | 1004 | none |
 | `lemma-weil-pbc-normalization-exact-sequence` | 1004 | none |
 | `lemma-weil-pbc-p1-injective-acyclic` | 1004 | none |
+| `prop-weil-pbc-inverse-image-modules-exact` | 1004 | none |
 | `prop-weil-pbc-p1-acyclicity` | 1004 | none |
 | `thm-sc-main` | 1004 | none |
 | `def-weil-pbc-extension-by-zero` | 1005 | none |
@@ -574,7 +576,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 562 nodes that wait for stage 1, 51 nodes that wait for a statement dependency.
+Not open yet: 563 nodes that wait for stage 1, 52 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
