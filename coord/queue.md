@@ -1,15 +1,13 @@
 # Work queue
 
-557 items; claim with `tools/claim.py next <group> [--stage N]`.
+562 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (542)
+## Stage 1: nodes to split (547)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-etale-cover-detects-iso` | 1003 | none |
-| `lem-weil-pbc-strict-henselization-functoriality` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-finite` | 1003 | none |
-| `lem-weil-pbc-symmetric-product-over-base` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-properties` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-surjective` | 1003 | none |
 | `lem-weil-pbc-vanishing-descends-retract` | 1003 | none |
@@ -17,6 +15,7 @@
 | `prop-weil-pbc-algebraically-closed-extension` | 1003 | sorry_here |
 | `prop-weil-pbc-p1-strict-henselian-comparison` | 1003 | none |
 | `def-weil-pbc-derived-direct-image-composition` | 1004 | none |
+| `def-weil-pbc-morphism-to-projective-space-by-sections` | 1004 | none |
 | `def-weil-pbc-symmetric-product-morphism` | 1004 | none |
 | `lem-weil-pbc-cech-vanishing-criterion` | 1004 | none |
 | `lem-weil-pbc-curve-constructible-reduction` | 1004 | none |
@@ -24,10 +23,13 @@
 | `lem-weil-pbc-derived-inverse-image-composition` | 1004 | none |
 | `lem-weil-pbc-derived-square-iso-pasting` | 1004 | none |
 | `lem-weil-pbc-etale-inverse-image-restriction` | 1004 | none |
+| `lem-weil-pbc-etale-local-ring-triples` | 1004 | none |
 | `lem-weil-pbc-etale-underived-exchange-restriction` | 1004 | none |
 | `lem-weil-pbc-free-cech-complex-exact` | 1004 | none |
 | `lem-weil-pbc-inverse-image-composition` | 1004 | none |
+| `lem-weil-pbc-map-into-henselian-colimit` | 1004 | none |
 | `lem-weil-pbc-module-sheaves-grothendieck-abelian` | 1004 | none |
+| `lem-weil-pbc-strict-henselization-triples` | 1004 | none |
 | `lem-weil-pbc-zero-dimensional-field-extension` | 1004 | none |
 | `lemma-weil-pbc-curve-filtered-cohomology` | 1004 | none |
 | `lemma-weil-pbc-curve-locally-constant-reduction` | 1004 | none |
@@ -49,6 +51,7 @@
 | `lem-sc-c6` | 1005 | none |
 | `lem-sc-c7` | 1005 | none |
 | `lem-sc-c8` | 1005 | none |
+| `lem-weil-pbc-projective-space-functor-of-points` | 1005 | none |
 | `lemma-weil-pbc-finite-open-comparison-inverse` | 1005 | none |
 | `lemma-weil-pbc-h1-constructible-representation` | 1005 | none |
 | `lemma-weil-pbc-h1-torsor-comparison` | 1005 | none |
@@ -459,7 +462,9 @@
 | `lem-pc-sepclosed-finite-sep-trivial` | - | none |
 | `thm-sc-affine-cohomology` | - | none |
 | `thm-sc-constant-invariance` | - | none |
+| `def-nagata-affine-proj` | - | none |
 | `def-nagata-relative-gluing-valid-stage` | - | none |
+| `def-pc-representable-functor` | - | none |
 | `def-weil-pbc-constructible-torsion` | - | none |
 | `def-weil-pbc-extension-pullback` | - | none |
 | `def-weil-pbc-primary-torsion` | - | none |
@@ -470,9 +475,11 @@
 | `lem-sc-genus-invariant` | - | none |
 | `lem-sc-pic-affine` | - | none |
 | `def-nagata-directed-finite-upper-bound` | - | none |
+| `def-nagata-homogeneous-localization-degree-zero` | - | none |
 | `def-nagata-morphism-equality-stage` | - | none |
 | `def-nagata-qc-open-equality-stage` | - | none |
 | `def-nagata-relative-gluing-datum-descent` | - | none |
+| `lem-pc-representable-unique` | - | none |
 | `lem-sc-affine-generic-second` | - | none |
 | `lem-sc-divisible-quotient-torsion` | - | none |
 | `lem-sc-global-functions` | - | none |
@@ -499,7 +506,6 @@
 | `def-pc-derived-category` | - | none |
 | `def-pc-derived-direct-image` | - | none |
 | `def-pc-hilb-functor` | - | rests_on_sorry |
-| `def-pc-representable-functor` | - | none |
 | `lem-fin-normalization-extension-finite` | - | none |
 | `lem-pc-finite-support-hi` | - | none |
 | `lem-pc-flat-rf-open` | - | none |
@@ -511,7 +517,6 @@
 | `lem-pc-curve-coherent-finiteness` | - | none |
 | `lem-pc-hilb-representable` | - | rests_on_sorry |
 | `lem-pc-perfect-locus` | - | rests_on_sorry |
-| `lem-pc-representable-unique` | - | none |
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
 | `lem-weil-pbc-lisse-generic-kernel` | - | none |
 | `def-sc-kahler-differentials` | - | none |
@@ -569,7 +574,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 555 nodes that wait for stage 1, 66 nodes that wait for a statement dependency.
+Not open yet: 558 nodes that wait for stage 1, 68 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

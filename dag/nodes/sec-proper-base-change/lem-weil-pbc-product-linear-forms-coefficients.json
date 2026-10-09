@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-product-linear-forms-coefficients",
+ "kind": "statement",
+ "title": "Coefficients of a product of linear forms in one variable",
+ "statement": "Let $R$ be a commutative ring, $n\\ge1$, and $a_1,\\dots,a_n,b_1,\\dots,b_n\\in R$. In the polynomial ring $R[t]$,\n\n$$\n\\prod_{i=1}^n(a_it+b_i)=\\sum_{j=0}^n\\Bigl(\\sum_{J\\subseteq\\{1,\\dots,n\\},\\ |J|=j}\\ \\prod_{i\\in J}a_i\\prod_{i\\notin J}b_i\\Bigr)t^j .\n$$\n\nIn particular (taking $R=\\mathbf Z[x_1,y_1,\\dots,x_n,y_n]$, $a_i=x_i$, $b_i=y_i$) the coefficient of $t^j$ in $\\prod_i(x_it+y_i)$ is $\\sum_{|J|=j}\\prod_{i\\in J}x_i\\prod_{i\\notin J}y_i$, and for every ring homomorphism $h:R\\to R'$ the coefficients of $\\prod_i(h(a_i)t+h(b_i))$ are the images under $h$ of those of $\\prod_i(a_it+b_i)$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, proof of Lemma 0A4F (lemma-reduce-to-P1): 'F_0,...,F_n in x_1,...,y_n are the polynomials with integer coefficients such that prod (x_i t + y_i) = F_0 t^n + ... + F_n'; the explicit expansion is the distributive law (Vieta's formula in homogeneous form)"
+ },
+ "stmt_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "product over finset of (f i + g i) equals sum over subsets of product of f times product of g on complement",
+   "results": "Finset.prod_add, Fintype.prod_add, Finset.prod_add_one, Finset.prod_one_add, Finset.prod_sub (Mathlib.Algebra.BigOperators.Ring.Finset), Finset.prod_compl_mul_prod",
+   "date": "2026-10-09",
+   "verdict": "generalization: Finset.prod_add"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coefficient of t^k in product of (a_i t + b_i) is sum over k-element subsets of product of a over subset times product of b over complement",
+   "results": "Finset.prod_X_add_C_coeff, Multiset.prod_X_add_C_coeff', Multiset.prod_X_add_C_coeff, MvPolynomial.prod_X_add_C_coeff (Mathlib.RingTheory.Polynomial.Vieta), Polynomial.prod_X_sub_C_coeff_card_pred",
+   "date": "2026-10-09",
+   "verdict": "the case a_i=1 only (Vieta, Finset.prod_X_add_C_coeff, Vieta.lean:67); not the bihomogeneous form"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.coeff (Finset.prod _ _) _ = _",
+   "results": "Polynomial.coeff_zero_prod, Polynomial.coeff_prod_of_natDegree_le, Polynomial.prod_X_sub_C_coeff_card_pred, Finset.prod_X_add_C_coeff, MvPolynomial.prod_X_add_C_coeff",
+   "date": "2026-10-09",
+   "verdict": "no bihomogeneous coefficient formula; Finset.prod_X_add_C_coeff is the case a_i=1"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem prod_add\\|prod_add_ordered\\|prod_X_add_C' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/BigOperators/Ring/Finset.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Vieta.lean",
+   "results": "Finset.prod_add (Algebra/BigOperators/Ring/Finset.lean:171): prod_{i in s}(f i + g i) = sum_{t in s.powerset} (prod_{i in t} f i) * prod_{i in s \\ t} g i; Fintype.prod_add (line 304); Finset.prod_add_ordered (line 205); Multiset.prod_X_add_C_eq_sum_esymm (Vieta.lean:40), Finset.prod_X_add_C_coeff (Vieta.lean:67)",
+   "date": "2026-10-09",
+   "verdict": "match by specialization: Finset.prod_add"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Finset.prod_add",
+  "file": "Mathlib/Algebra/BigOperators/Ring/Finset.lean",
+  "how": "specializes: in R[X] take s = Finset.range n (or univ of Fin n), f i = C a_i * X, g i = C b_i; then prod_{i in J} f i = C(prod_{i in J} a_i) * X^{#J} (Finset.prod_mul_distrib, Finset.prod_const, Polynomial.C prod via map_prod), and grouping the powerset by cardinality (Finset.powerset_card_disjiUnion / Finset.sum_powerset_apply_card style regrouping, or reading coefficients with Polynomial.finset_sum_coeff and Polynomial.coeff_C_mul_X_pow) gives the coefficient of X^j as the sum over #J = j. The case a_i = 1 is Finset.prod_X_add_C_coeff (Mathlib/RingTheory/Polynomial/Vieta.lean:67). The compatibility with ring homomorphisms is Polynomial.coeff_map with Polynomial.map_prod."
+ },
+ "status": "mathlib",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-symmetric-product-properties",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

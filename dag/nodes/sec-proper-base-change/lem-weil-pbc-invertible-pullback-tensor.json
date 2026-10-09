@@ -1,0 +1,57 @@
+{
+ "id": "lem-weil-pbc-invertible-pullback-tensor",
+ "kind": "statement",
+ "title": "Pullback and tensor product of invertible modules, and their fibres",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and $\\mathcal L,\\mathcal M$ invertible $\\mathcal O_Y$-modules [def-sc-invertible-module]. For $y\\in Y$ write $\\mathcal L(y)=\\mathcal L_y\\otimes_{\\mathcal O_{Y,y}}\\kappa(y)$ for the fibre (a one-dimensional $\\kappa(y)$-vector space) and $s(y)\\in\\mathcal L(y)$ for the value of a section $s$. Then:\n(1) $f^*\\mathcal L$ is an invertible $\\mathcal O_X$-module, and $\\mathcal L\\otimes_{\\mathcal O_Y}\\mathcal M$ is an invertible $\\mathcal O_Y$-module;\n(2) there is an isomorphism $f^*(\\mathcal L\\otimes\\mathcal M)\\cong f^*\\mathcal L\\otimes f^*\\mathcal M$, functorial in $\\mathcal L,\\mathcal M$, sending $f^*(s\\otimes t)$ to $f^*s\\otimes f^*t$; for $g:W\\to X$ there is a canonical isomorphism $g^*f^*\\mathcal L\\cong(f\\circ g)^*\\mathcal L$ sending $g^*f^*s$ to $(f\\circ g)^*s$; and the symmetry $\\mathcal L\\otimes\\mathcal M\\cong\\mathcal M\\otimes\\mathcal L$, $s\\otimes t\\mapsto t\\otimes s$, is an isomorphism (so a finite tensor product of invertible modules may be reordered by any permutation of its factors);\n(3) for $x\\in X$, $(f^*\\mathcal L)(x)=\\mathcal L(f(x))\\otimes_{\\kappa(f(x))}\\kappa(x)$ with $(f^*s)(x)=s(f(x))\\otimes1$, and for $y\\in Y$, $(\\mathcal L\\otimes\\mathcal M)(y)=\\mathcal L(y)\\otimes_{\\kappa(y)}\\mathcal M(y)$ with $(s\\otimes t)(y)=s(y)\\otimes t(y)$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01CD (lemma-tensor-product-pullback: f^*(F (x) G) = f^*F (x) f^*G), Lemma 0B8L (lemma-pullback-invertible), Lemma 0B8K (lemma-invertible: tensor products of invertible modules are invertible); for (3): Sheaves, Lemma 0098 (sheaves-lemma-stalk-pullback-modules: (f^*F)_x = F_{f(x)} (x)_{O_{Y,f(x)}} O_{X,x}) and Modules, Lemma 01CB (lemma-stalk-tensor-product: (F (x) G)_y = F_y (x) G_y)"
+ },
+ "stmt_deps": [
+  "def-sc-invertible-module"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of an invertible sheaf of modules is invertible; pullback commutes with tensor product of sheaves of modules on schemes",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback, Scheme.Modules.pullbackPushforwardAdjunction, Scheme.Modules.pullbackComp (Mathlib.AlgebraicGeometry.Modules.Sheaf), SheafOfModules.pullback, SheafOfModules.pullback_assoc (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous)",
+   "date": "2026-10-09",
+   "verdict": "no match: pullback of O_X-modules exists (and pullbackComp gives the composition part of (2)), but no tensor product of sheaves of modules on a scheme and no invertible modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "invertible module over a scheme (line bundle), tensor product of invertible modules is invertible",
+   "results": "CommRing.Pic.mk_tensor, CommRing.Pic.mul_eq_tensor, CommRing.Pic.mapAlgebra_apply, Module.Invertible.instTensorProduct (Mathlib.RingTheory.PicardGroup)",
+   "date": "2026-10-09",
+   "verdict": "no match: only the ring-level statement (invertible modules over a commutative ring, Module.Invertible), not sheaves on a scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'MonoidalCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf; grep -rn 'IsInvertible\\|isInvertible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules",
+   "results": "monoidal structure only on presheaves of modules (Algebra/Category/ModuleCat/Presheaf/Monoidal.lean); none on SheafOfModules or Scheme.Modules; no invertible sheaves of modules; AlgebraicGeometry/Modules has Presheaf.lean, Sheaf.lean, Tilde.lean only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-symmetric-product-properties",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

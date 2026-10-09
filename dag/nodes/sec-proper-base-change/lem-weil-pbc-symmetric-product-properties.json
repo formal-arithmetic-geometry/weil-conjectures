@@ -2,30 +2,155 @@
  "id": "lem-weil-pbc-symmetric-product-properties",
  "kind": "statement",
  "title": "No common zero and permutation invariance",
- "statement": "The polynomials $F_0,\\dots,F_n$ of [def-weil-pbc-symmetric-product-morphism]\nhave no common zero on $(\\mathbf P^1_S)^n$ and are invariant under the action\nof the symmetric group $S_n$. Hence\n[def-weil-pbc-symmetric-product-morphism] gives an $S_n$-invariant morphism\n\n$$\n \\sigma_n:(\\mathbf P^1_S)^n\\longrightarrow\\mathbf P^n_S.\n$$",
+ "statement": "Let $S$ be a scheme and $n\\ge1$. Write $\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^1_{\\mathbf Z}$ and $\\mathbf P^n_S=\\mathbf P(\\{0,\\dots,n\\};S)=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ [def-nagata-projective-space-base-change], with structure morphisms $q_1,q_n$ (the first projections). Let $(\\mathbf P^1_S)^n=\\mathbf P^1_S\\times_S\\cdots\\times_S\\mathbf P^1_S$ be the $n$-fold fibre product over $S$ [def-pc-fibre-product] (formed inductively, $(\\mathbf P^1_S)^1=\\mathbf P^1_S$, $(\\mathbf P^1_S)^m=(\\mathbf P^1_S)^{m-1}\\times_S\\mathbf P^1_S$), with its projections $\\mathrm{pr}_i:(\\mathbf P^1_S)^n\\to\\mathbf P^1_S$ ($1\\le i\\le n$) and $p_n=q_1\\circ\\mathrm{pr}_i:(\\mathbf P^1_S)^n\\to S$; a morphism $T\\to(\\mathbf P^1_S)^n$ is the same as an $n$-tuple of morphisms $a_i:T\\to\\mathbf P^1_S$ with $q_1\\circ a_1=\\dots=q_1\\circ a_n$.\n\n*The sections.* Let $\\mathcal O_{\\mathbf P^1_{\\mathbf Z}}(1)$ be the twisting sheaf of $\\mathbf P^1_{\\mathbf Z}=\\operatorname{Proj}\\mathbf Z[T_0,T_1]$ [def-pc-projective-space-twist] (with $A=\\mathbf Z$, $n=1$), with its global sections $T_0,T_1$ (on $D_+(T_k)$, $T_l=(T_l/T_k)\\,e_k^{(1)}$), let $\\mathcal O(1)$ on $\\mathbf P^1_S$ be its pullback along the second projection $\\mathbf P^1_S\\to\\mathbf P^1_{\\mathbf Z}$, with the pulled-back sections $T_0,T_1$, and put\n\n$$\n\\mathcal L_n=\\mathrm{pr}_1^*\\mathcal O(1)\\otimes\\cdots\\otimes\\mathrm{pr}_n^*\\mathcal O(1),\\qquad x_i=\\mathrm{pr}_i^*T_0,\\ \\ y_i=\\mathrm{pr}_i^*T_1\\in\\Gamma\\bigl((\\mathbf P^1_S)^n,\\mathrm{pr}_i^*\\mathcal O(1)\\bigr),\n$$\n\nan invertible $\\mathcal O_{(\\mathbf P^1_S)^n}$-module [def-sc-invertible-module] (the line bundle $\\mathcal O(1,\\dots,1)$). Let $F_0,\\dots,F_n\\in\\mathbf Z[x_1,y_1,\\dots,x_n,y_n]$ be the polynomials of [def-weil-pbc-symmetric-product-morphism], $\\prod_{i=1}^n(x_it+y_i)=\\sum_{j=0}^nF_jt^j$. Then:\n\n(a) $F_j=\\sum_{J\\subseteq\\{1,\\dots,n\\},\\,|J|=j}m_J$ with $m_J=\\prod_{i\\in J}x_i\\prod_{i\\notin J}y_i$; so $F_j$ is multihomogeneous of degree $(1,\\dots,1)$ in the pairs $(x_i,y_i)$, and we also write $F_j$ for the global section $\\sum_{|J|=j}u_{J,1}\\otimes\\cdots\\otimes u_{J,n}$ of $\\mathcal L_n$, where $u_{J,i}=x_i$ for $i\\in J$ and $u_{J,i}=y_i$ for $i\\notin J$.\n\n(b) (*no common zero*) For every point $z$ of $(\\mathbf P^1_S)^n$ some $F_j(z)\\ne0$ in the fibre $\\mathcal L_n(z)=\\mathcal L_{n,z}\\otimes\\kappa(z)$; that is, $F_0,\\dots,F_n$ generate $\\mathcal L_n$ in the sense of [lem-weil-pbc-projective-space-functor-of-points].\n\n(c) Hence the *symmetric-product morphism*\n\n$$\n\\sigma_n:=\\varphi_{p_n,(\\mathcal L_n,(F_0,\\dots,F_n))}:(\\mathbf P^1_S)^n\\longrightarrow\\mathbf P^n_S\n$$\n\nof [def-weil-pbc-morphism-to-projective-space-by-sections] is defined: $\\mathrm{pr}_1\\circ\\sigma_n=p_n$ and $\\mathrm{pr}_2\\circ\\sigma_n=\\psi_{(\\mathcal L_n,(F_j))}:(\\mathbf P^1_S)^n\\to\\mathbf P^n_{\\mathbf Z}$, the morphism with $\\psi^*\\mathcal O(1)\\cong\\mathcal L_n$, $\\psi^*T_j\\mapsto F_j$; on coordinates it is $((x_1:y_1),\\dots,(x_n:y_n))\\mapsto[F_0:\\cdots:F_n]$.\n\n(d) (*$S_n$-invariance*) For a permutation $\\pi$ of $\\{1,\\dots,n\\}$ let $\\tau_\\pi:(\\mathbf P^1_S)^n\\to(\\mathbf P^1_S)^n$ be the morphism with $\\mathrm{pr}_i\\circ\\tau_\\pi=\\mathrm{pr}_{\\pi(i)}$ for all $i$ (an automorphism over $S$, with inverse $\\tau_{\\pi^{-1}}$). Then there is an isomorphism $\\beta_\\pi:\\tau_\\pi^*\\mathcal L_n\\to\\mathcal L_n$ with $\\beta_\\pi(\\tau_\\pi^*F_j)=F_j$ for all $j$ (the $F_j$ are $S_n$-invariant), and $\\sigma_n\\circ\\tau_\\pi=\\sigma_n$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-symmetric-product-properties.md",
   "place": "node lem-weil-pbc-symmetric-product-properties, order 1200"
  },
  "stmt_deps": [
-  "def-weil-pbc-symmetric-product-morphism"
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product",
+  "def-pc-projective-space-twist",
+  "def-sc-invertible-module",
+  "def-weil-pbc-symmetric-product-morphism",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "def-weil-pbc-morphism-to-projective-space-by-sections"
  ],
  "proof": [
   {
-   "text": "A common zero of all $F_j$ would make the product $\\prod_{i=1}^n(x_it+y_i)$\nthe zero polynomial in $t$, forcing some pair $(x_i,y_i)$ to vanish, which is\nimpossible in $\\mathbf P^1$. Permuting the factors fixes every $F_j$, so\n$\\sigma_n$ is $S_n$-invariant.",
-   "uses": [],
-   "elementary": null
+   "text": "*The $F_j$ and their sections.* Apply [lem-weil-pbc-product-linear-forms-coefficients] with $R=\\mathbf Z[x_1,y_1,\\dots,x_n,y_n]$, $a_i=x_i$, $b_i=y_i$: the coefficient $F_j$ of $t^j$ in $\\prod_i(x_it+y_i)$ is $\\sum_{|J|=j}m_J$, $m_J=\\prod_{i\\in J}x_i\\prod_{i\\notin J}y_i$. Each $m_J$ contains, for every $i$, exactly one of $x_i,y_i$, to the first power; so $F_j$ is multihomogeneous of degree $(1,\\dots,1)$, and replacing the commutative product $m_J$ by the tensor product $u_{J,1}\\otimes\\cdots\\otimes u_{J,n}$ of the sections $u_{J,i}\\in\\{x_i,y_i\\}\\subset\\Gamma(\\mathrm{pr}_i^*\\mathcal O(1))$ (in the order $i=1,\\dots,n$ of the factors of $\\mathcal L_n$) gives a well-defined global section $F_j$ of $\\mathcal L_n$. $\\mathcal L_n$ is invertible as a tensor product of pullbacks of the invertible module $\\mathcal O(1)$ [lem-weil-pbc-invertible-pullback-tensor](1); $\\mathcal O_{\\mathbf P^1_{\\mathbf Z}}(1)$ is invertible by its construction [def-pc-projective-space-twist].",
+   "uses": [
+    "lem-weil-pbc-product-linear-forms-coefficients",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-pc-projective-space-twist",
+    "def-weil-pbc-symmetric-product-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, proof of Lemma 0A4F: the F_j are the integer polynomials with prod(x_i t + y_i) = sum F_j t^{n-j} (Stacks indexes in reverse order)"
+   }
+  },
+  {
+   "text": "*$T_0,T_1$ have no common zero on $\\mathbf P^1_S$.* A point $w$ of $\\mathbf P^1_{\\mathbf Z}=\\operatorname{Proj}\\mathbf Z[T_0,T_1]$ is a homogeneous prime not containing the irrelevant ideal $(T_0,T_1)$, so it lies in $D_+(T_0)$ or in $D_+(T_1)$ (Stacks 01NG). On $D_+(T_k)$ the section $T_k$ of $\\mathcal O_{\\mathbf P^1_{\\mathbf Z}}(1)$ is the basis $e_k^{(1)}$ [def-pc-projective-space-twist], so $T_k(w)\\ne0$ in the fibre $\\mathcal O(1)(w)$. For a point $v$ of $\\mathbf P^1_S$ with image $w$ in $\\mathbf P^1_{\\mathbf Z}$, the fibre of the pullback is $\\mathcal O(1)(v)=\\mathcal O_{\\mathbf P^1_{\\mathbf Z}}(1)(w)\\otimes_{\\kappa(w)}\\kappa(v)$ with $T_k(v)=T_k(w)\\otimes1$ [lem-weil-pbc-invertible-pullback-tensor](3), which is nonzero since a nonzero vector stays nonzero under a field extension. Hence for every $v$, $(T_0(v),T_1(v))\\ne(0,0)$.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01NG (lemma-standard-covering-projective-space): P^n_Z is covered by the D_+(T_i)"
+   }
+  },
+  {
+   "text": "*No common zero of the $F_j$ (part (b)).* Let $z\\in(\\mathbf P^1_S)^n$, $\\kappa=\\kappa(z)$. By [lem-weil-pbc-invertible-pullback-tensor](3), $(\\mathrm{pr}_i^*\\mathcal O(1))(z)=\\mathcal O(1)(\\mathrm{pr}_i z)\\otimes\\kappa$ is a one-dimensional $\\kappa$-vector space; choose a basis $b_i$ and write $x_i(z)=a_ib_i$, $y_i(z)=c_ib_i$ with $a_i,c_i\\in\\kappa$. By step 2 at $v=\\mathrm{pr}_i(z)$, $(a_i,c_i)\\ne(0,0)$. Again by (3), $\\mathcal L_n(z)=\\bigotimes_i(\\mathrm{pr}_i^*\\mathcal O(1))(z)$ has basis $b=b_1\\otimes\\cdots\\otimes b_n$ and $F_j(z)=\\bigl(\\sum_{|J|=j}\\prod_{i\\in J}a_i\\prod_{i\\notin J}c_i\\bigr)b$, which by [lem-weil-pbc-product-linear-forms-coefficients] (over $R=\\kappa$) is $\\gamma_j b$ where $\\gamma_j$ is the coefficient of $t^j$ in $P(t)=\\prod_{i=1}^n(a_it+c_i)\\in\\kappa[t]$. Each factor $a_it+c_i$ is a nonzero polynomial since $(a_i,c_i)\\ne(0,0)$, and $\\kappa[t]$ is an integral domain, so $P\\ne0$ and some $\\gamma_j\\ne0$, i.e. $F_j(z)\\ne0$. This is the generation condition of [lem-weil-pbc-projective-space-functor-of-points] (equivalently, by Nakayama, since $\\mathcal L_{n,z}$ is free of rank one over the local ring $\\mathcal O_z$, $F_{j,z}$ is a generator of $\\mathcal L_{n,z}$, so $\\mathcal O^{n+1}\\to\\mathcal L_n$, $e_j\\mapsto F_j$, is surjective on every stalk).",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-product-linear-forms-coefficients",
+    "lem-weil-pbc-projective-space-functor-of-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-symmetric-product-properties.md",
+    "place": "## Proof: 'A common zero of all F_j would make the product the zero polynomial in t, forcing some pair (x_i,y_i) to vanish, which is impossible in P^1'"
+   }
+  },
+  {
+   "text": "*The morphism $\\sigma_n$ (part (c)).* By steps 1 and 3, $(\\mathcal L_n,(F_0,\\dots,F_n))$ is an invertible module with generating global sections on $(\\mathbf P^1_S)^n$, and $p_n:(\\mathbf P^1_S)^n\\to S$ is a morphism. So [def-weil-pbc-morphism-to-projective-space-by-sections] gives $\\sigma_n=\\varphi_{p_n,(\\mathcal L_n,(F_j))}$, the unique morphism into $\\mathbf P^n_S=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ with $\\mathrm{pr}_1\\circ\\sigma_n=p_n$ and $\\mathrm{pr}_2\\circ\\sigma_n=\\psi_{(\\mathcal L_n,(F_j))}$, the morphism of [lem-weil-pbc-projective-space-functor-of-points] (Stacks 01NE) with $\\psi^*\\mathcal O(1)\\cong\\mathcal L_n$ carrying $\\psi^*T_j$ to $F_j$; this is the formula $((x_i:y_i))_i\\mapsto[F_0:\\cdots:F_n]$ of [def-weil-pbc-symmetric-product-morphism].",
+   "uses": [
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-weil-pbc-symmetric-product-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01NE (lemma-projective-space) and the paragraph after Definition 01NF: 'Given a scheme Y over S and a pair (L,(s_0,...,s_n)) ... the induced morphism to P^n_S is denoted phi_(L,(s_0,...,s_n))'"
+   }
+  },
+  {
+   "text": "*The permutation automorphisms and invariance of the $F_j$.* By the universal property of the fibre product [def-pc-fibre-product], applied inductively, a morphism into $(\\mathbf P^1_S)^n$ is an $n$-tuple of morphisms into $\\mathbf P^1_S$ with the same composite to $S$; so $\\tau_\\pi:=(\\mathrm{pr}_{\\pi(1)},\\dots,\\mathrm{pr}_{\\pi(n)})$ is the unique morphism with $\\mathrm{pr}_i\\circ\\tau_\\pi=\\mathrm{pr}_{\\pi(i)}$; $p_n\\circ\\tau_\\pi=q_1\\circ\\mathrm{pr}_{\\pi(1)}=p_n$, and $\\tau_\\pi\\circ\\tau_{\\pi^{-1}}$, $\\tau_{\\pi^{-1}}\\circ\\tau_\\pi$ have the same projections as the identity, so they are the identity. By [lem-weil-pbc-invertible-pullback-tensor](2), $\\tau_\\pi^*\\mathrm{pr}_i^*\\mathcal O(1)\\cong(\\mathrm{pr}_i\\circ\\tau_\\pi)^*\\mathcal O(1)=\\mathrm{pr}_{\\pi(i)}^*\\mathcal O(1)$ with $\\tau_\\pi^*x_i\\mapsto x_{\\pi(i)}$, $\\tau_\\pi^*y_i\\mapsto y_{\\pi(i)}$, and $\\tau_\\pi^*\\mathcal L_n\\cong\\bigotimes_i\\mathrm{pr}_{\\pi(i)}^*\\mathcal O(1)$; composing with the symmetry isomorphism that moves the $i$-th factor to position $\\pi(i)$ gives $\\beta_\\pi:\\tau_\\pi^*\\mathcal L_n\\to\\mathcal L_n$ with $\\beta_\\pi(\\tau_\\pi^*(u_{J,1}\\otimes\\cdots\\otimes u_{J,n}))=u_{\\pi(J),1}\\otimes\\cdots\\otimes u_{\\pi(J),n}$ (the factor $u_{J,i}$, which is $x_i$ or $y_i$ according as $i\\in J$, becomes $x_{\\pi(i)}$ or $y_{\\pi(i)}$, i.e. the factor $u_{\\pi(J),\\pi(i)}$). Since $J\\mapsto\\pi(J)$ is a bijection of the $j$-element subsets of $\\{1,\\dots,n\\}$, the formula of step 1 gives $\\beta_\\pi(\\tau_\\pi^*F_j)=F_j$. (On polynomials: permuting the pairs $(x_i,y_i)$ permutes the factors of $\\prod_i(x_it+y_i)$, so it fixes every coefficient $F_j$.)",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-product-linear-forms-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-symmetric-product-properties.md",
+    "place": "## Proof: 'Permuting the factors fixes every F_j'"
+   }
+  },
+  {
+   "text": "*$\\sigma_n\\circ\\tau_\\pi=\\sigma_n$ (part (d)).* Both are morphisms into the fibre product $\\mathbf P^n_S=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$, so by [def-pc-fibre-product] it suffices to compare the two projections. First, $\\mathrm{pr}_1\\circ\\sigma_n\\circ\\tau_\\pi=p_n\\circ\\tau_\\pi=p_n=\\mathrm{pr}_1\\circ\\sigma_n$ (step 5). Second, $\\mathrm{pr}_2\\circ\\sigma_n\\circ\\tau_\\pi=\\psi_{(\\mathcal L_n,(F_j))}\\circ\\tau_\\pi=\\psi_{(\\tau_\\pi^*\\mathcal L_n,(\\tau_\\pi^*F_j))}$ by the compatibility with pullback in [lem-weil-pbc-projective-space-functor-of-points], and the pair $(\\tau_\\pi^*\\mathcal L_n,(\\tau_\\pi^*F_j))$ is equivalent to $(\\mathcal L_n,(F_j))$ via $\\beta_\\pi$ (step 5), so by the same node this is $\\psi_{(\\mathcal L_n,(F_j))}=\\mathrm{pr}_2\\circ\\sigma_n$. Hence $\\sigma_n\\circ\\tau_\\pi=\\sigma_n$ [def-weil-pbc-morphism-to-projective-space-by-sections].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01NE (lemma-projective-space): the equivalence (L,(s_i)) ~ (N,(t_i)) iff there is beta: L -> N with beta(s_i) = t_i, and representability (compatibility with pullback)"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product",
+  "def-pc-projective-space-twist",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-weil-pbc-symmetric-product-morphism",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-product-linear-forms-coefficients",
+  "lem-weil-pbc-projective-space-functor-of-points"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-symmetric-product-properties.md",
-  "place": "## Proof"
+  "place": "## Proof (written out by the worker; Stacks Etale Cohomology 0A4F states the morphism without proof, Constructions 01NE/01NF give the construction from (L,(s_i)), 01NG the covering of P^1)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "symmetric product of projective line maps to projective space, product of linear forms coefficients",
+   "results": "AffineMap.pi, LinearMap.prodMap, LinearMap.coe_prodMap, AffineMap.pi_linear, LinearMap.prodMapLinear (linear algebra only)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism to projective space given by invertible sheaf and global sections generating it",
+   "results": "AlgebraicGeometry.Proj.fromOfGlobalSections, Proj.fromOfGlobalSections_toSpecZero, Proj.toBasicOpenOfGlobalSections (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic), AffineSpace.toSpecMvPolyIntEquiv, AffineSpace.homOfVector, AffineSpace.homOverEquiv (Mathlib.AlgebraicGeometry.AffineSpace), SheafOfModules.GeneratingSections.mk",
+   "date": "2026-10-09",
+   "verdict": "no match: fromOfGlobalSections is the case of the trivial line bundle O_X only, into Proj of a graded ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism from a scheme to projective space Proj defined by a line bundle and generating global sections",
+   "results": "Proj.fromOfGlobalSections, Proj.toSpecZero, ProjectiveSpectrum.Proj.toSpec, Proj.awayι, Proj.basicOpenToSpec, Proj.toBasicOpenOfGlobalSections",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "results": "fromOfGlobalSections, fromOfGlobalSections_toSpecZero(_assoc), fromOfGlobalSections_preimage_basicOpen, fromOfGlobalSections_resLE, fromOfGlobalSections_morphismRestrict (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic)",
+   "date": "2026-10-09",
+   "verdict": "no match: only global sections of O_X; nothing on products of P^1 or symmetric products"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'symmetric product\\|esymm\\|SymmetricPower' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln 'ProjectiveSpace\\|projectiveSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ProjectiveSpectrum",
+   "results": "none for symmetric product/esymm; no ProjectiveSpace in Mathlib (ProjectiveSpectrum/ has Basic, Functor, Proper, Scheme, StructureSheaf, Topology); esymm only in RingTheory/MvPolynomial/Symmetric and RingTheory/Polynomial/Vieta.lean",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -47,5 +172,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-symmetric-product-properties",
+  "worker": "stage1",
+  "summary": "Made the statement precise without changing sigma_n: it is now explicitly the morphism phi_{p_n,(L_n,(F_j))} of def-weil-pbc-morphism-to-projective-space-by-sections (created by the over-base worker; same name, same formula, same L_n = pr_1^*O(1) (x) ... (x) pr_n^*O(1), x_i = pr_i^*T_0, y_i = pr_i^*T_1 as in lem-weil-pbc-symmetric-product-over-base), with O(1) on P^1_S the pullback of the twisting sheaf of P^1_Z (def-pc-projective-space-twist). Stated (a) the coefficient formula F_j = sum_{|J|=j} prod_J x_i prod_{J^c} y_i and the meaning of F_j as a section of L_n; (b) no common zero as fibrewise non-vanishing (the generation condition of lem-weil-pbc-projective-space-functor-of-points); (c) the definition of sigma_n; (d) S_n-invariance as sigma_n o tau_pi = sigma_n for the permutation automorphisms tau_pi (pr_i o tau_pi = pr_{pi(i)}), together with the invariance beta_pi(tau_pi^*F_j) = F_j. The one imported step (elementary null, no uses) is split into six steps: coefficients and sections, T_0,T_1 without common zero on P^1 (Stacks 01NG), the fibre computation with kappa[t] a domain, the morphism (Stacks 01NE/01NF), the permutation isomorphism beta_pi, and the comparison of the two projections. New nodes: lem-weil-pbc-product-linear-forms-coefficients (Mathlib leaf, Finset.prod_add) and lem-weil-pbc-invertible-pullback-tensor (unsplit; pullback/tensor/fibres of invertible modules, Stacks 01CD, 0B8L, 0B8K, 0098, 01CB). stmt_deps: added the projective-space, fibre-product, twisting-sheaf, invertible-module, functor-of-points and phi nodes; def-weil-pbc-symmetric-product-morphism kept."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "sigma_n constructed through the morphism-by-sections node, consistent with the over-base split; 2 new nodes; the coefficient leaf (Finset.prod_add grouped by |J|) accepted as a few-lines specialization"
+ }
 }
