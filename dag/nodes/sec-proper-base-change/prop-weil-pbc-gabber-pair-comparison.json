@@ -15,9 +15,72 @@
   "def-weil-pbc-etale-cohomology",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For degree $q=0$, the pullback map is the restriction map on sections. Apply the affine degree-zero comparison [lemma-weil-pbc-etale-degree-zero] to the proper identity morphism $\\operatorname{Spec}A\\to\\operatorname{Spec}A$ and the closed immersion $z:Z\\to X$; it gives a bijection $H^0(X_{\\Et},F)=\\Gamma(X,F)\\xrightarrow{\\sim}\\Gamma(Z,z^{-1}F)=H^0(Z_{\\Et},z^{-1}F)$.",
+   "uses": [
+    "lemma-weil-pbc-etale-degree-zero",
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WANTED: literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 09ZI, proof opening sentence, using Lemma Tag 09ZH (59.82.6)"
+   }
+  },
+  {
+   "text": "Fix $q>0$ and assume the comparison is bijective in every smaller degree, for every torsion sheaf. Choose a monomorphism $\\iota:F\\hookrightarrow F'$ of torsion sheaves and write $Q=\\operatorname{coker}(\\iota)$. The resulting short exact sequence $0\\to F\\to F'\\to Q\\to0$ and its inverse image along $z$ give a commutative diagram of long exact cohomology sequences on $X$ and $Z$ [lem-weil-pbc-pullback-cohomology-long-exact-ladder]; the restriction map for $F'$ and $Q$ in degree $q-1$ is an isomorphism by the induction hypothesis.",
+   "uses": [
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-torsion-etale-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WANTED: literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 09ZI (59.82.7), proof: short exact sequence and comparison diagram"
+   }
+  },
+  {
+   "text": "For injectivity, let $\\xi\\in H^q(X_{\\Et},F)$ restrict to zero on $Z$. Apply affine Gabber effacement [lemma-weil-pbc-gabber-effacement] to the same class on the closed subscheme $X$ (the henselian pair $(A,0)$) to obtain a monomorphism $F\\hookrightarrow F'$ for which the image of $\\xi$ is zero. Exactness of the upper long exact sequence then writes $\\xi$ as the image of a class in $H^{q-1}(X_{\\Et},Q)$. The induction isomorphism for $Q$ identifies that class with a class on $Z$; commutativity of the ladder and exactness of the lower sequence show that the restriction of $\\xi$ is nonzero whenever the chosen class is nonzero, hence the kernel is zero.",
+   "uses": [
+    "lemma-weil-pbc-gabber-effacement",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WANTED: literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 09ZI, proof: Injectivity for $\\mathcal F$ (59.82.7)"
+   }
+  },
+  {
+   "text": "For surjectivity, let $\\eta\\in H^q(Z_{\\Et},z^{-1}F)$. Apply the same effacement lemma to the class on $Z$ to obtain a monomorphism $F\\hookrightarrow F'$ whose image of $\\eta$ is zero, with cokernel $Q$. Exactness of the lower long exact sequence writes $\\eta$ as the image of a class in $H^{q-1}(Z_{\\Et},z^{-1}Q)$. By the induction isomorphism for $Q$, lift this class to $H^{q-1}(X_{\\Et},Q)$; exactness of the upper sequence then produces a class in $H^q(X_{\\Et},F)$ mapping to $\\eta$. This proves surjectivity, and induction over all $q$ proves the comparison.",
+   "uses": [
+    "lemma-weil-pbc-gabber-effacement",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WANTED: literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 09ZI, proof: Surjectivity for $\\mathcal F$ (59.82.7)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-etale-degree-zero",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "lemma-weil-pbc-gabber-effacement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "WANTED: literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 09ZI (59.82.7), proof read from the public Stacks Project page; the induction is expanded into four steps"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,7 +105,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,5 +132,18 @@
    "AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing"
   ],
   "note": "attached by the lead at the review of lemma-weil-pbc-injective-restriction-acyclicity (2026-10-09): WeilConjectures/SixFunctors/Etale/Gabber.lean:227, @[stacks 09ZI], stated for torsion sheaves of Lambda-modules (Lambda = Z is the node); its docstring names prop-weil-pbc-gabber-affine-comparison (the superseded node) and explains why only the pair form holds; no own sorry, rests on sorry in bijective_cohomologyMap_zero_of_henselianRing (:131) and exists_mono_map_eq_zero_of_henselianRing (:204)"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "prop-weil-pbc-gabber-pair-comparison",
+  "worker": "stage1",
+  "summary": "Split the pair-form Gabber comparison by the proof of Stacks Tag 09ZI: degree zero via the existing affine degree-zero comparison, then induction on q using a torsion monomorphism with cokernel, the existing long-exact pullback ladder, and the existing affine effacement lemma for injectivity and surjectivity. The superseded relative finite-type statement remains excluded as documented in the statement."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C; spot-checked by L: L read the four steps against Stacks 09ZI (degree 0 via lemma-weil-pbc-etale-degree-zero; induction on q via effacement 09ZH = lemma-weil-pbc-gabber-effacement and the long-exact ladder): the diagram chases are Stacks' (injectivity: efface xi on X with the pair (A, 0), xi = delta(eta), z^* eta in the image of H^{q-1}(Z, F'), lift by surjectivity in degree q-1, conclude by injectivity in degree q-1 for Q; surjectivity: efface eta on Z, eta = delta(theta), lift theta by the induction); step 3's last sentence was garbled ('the restriction of xi is nonzero whenever the chosen class is nonzero') and is rewritten by L in the next commit; the C review names what it checked (statement, 09ZI proof, dependencies) and is accepted as the last of the old group's reviews"
  }
 }
