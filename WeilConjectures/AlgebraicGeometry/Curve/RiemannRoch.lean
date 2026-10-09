@@ -566,7 +566,8 @@ theorem isVeryAmple_of_degree [IsAlgClosed k] [GlobalSectionsBijective k X] (ℳ
 theorem isAmple_of_degree_pos_of_isAlgClosed [IsAlgClosed k] [GlobalSectionsBijective k X]
     (ℒ : X.Modules) [ℒ.IsInvertible] (hd : 0 < ℒ.degree k) :
     IsAmple (X ↘ Spec (.of k)) ℒ := by
-  refine ⟨2 * arithmeticGenus k X + 1, Nat.succ_pos _, isVeryAmple_of_degree _ ?_⟩
+  refine ⟨inferInstance, 2 * arithmeticGenus k X + 1, Nat.succ_pos _,
+    isVeryAmple_of_degree _ ?_⟩
   rw [Modules.degree_tensorPow]
   push_cast
   nlinarith
@@ -589,10 +590,10 @@ theorem isAmple_of_degree_pos [GlobalSectionsBijective k X] (ℒ : X.Modules) [�
       (IsPullback.of_hasPullback _ _) ‹_›
   have : IsProper (Limits.pullback (X ↘ Spec (.of k)) g ↘ Spec (.of K)) :=
     IsProper.isStableUnderBaseChange.of_isPullback (IsPullback.of_hasPullback _ _) ‹_›
-  obtain ⟨m, hm, hv⟩ := isAmple_of_degree_pos_of_isAlgClosed
+  obtain ⟨-, m, hm, hv⟩ := isAmple_of_degree_pos_of_isAlgClosed
     ((Modules.pullback (pullback.fst (X ↘ Spec (.of k)) g)).obj ℒ)
     ((Modules.degree_pullback k K ℒ).symm ▸ hd)
-  exact ⟨m, hm, IsVeryAmple.of_pullback _ K _
+  exact ⟨inferInstance, m, hm, IsVeryAmple.of_pullback _ K _
     (hv.of_iso (Modules.nonempty_pullback_tensorPow_iso _ ℒ m).some.symm)⟩
 
 /-- **Ample if and only if positive degree.** An invertible sheaf on a smooth proper curve over
