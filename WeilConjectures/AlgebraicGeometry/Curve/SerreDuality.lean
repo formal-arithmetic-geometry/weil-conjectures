@@ -16,7 +16,9 @@ public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.PushforwardHom
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Duality
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Birational.RationalMap
@@ -183,6 +185,26 @@ theorem exists_transcendental_functionField [X.Over (Spec (.of k))] [IsIntegral 
     (Algebra.IsIntegral.isField_iff_isField (algebraMap k _).injective).mp (Field.toIsField k)
   exact hx (ringKrullDim_eq_zero_of_isField hfield)
 
+/-- In an irreducible scheme of dimension at most one, a point which is not closed is the
+generic point. -/
+theorem eq_genericPoint_of_not_isClosed {Z : Scheme.{u}} [IrreducibleSpace Z]
+    (h : topologicalKrullDim Z ≤ 1) {z : Z} (hz : ¬ IsClosed {z}) : z = genericPoint Z := by
+  have : closure {z} = (Set.univ : Set Z) := by
+    by_contra hne
+    exact hz (IsOpen.isClosed_singleton_of_mem_compl h isClosed_closure.isOpen_compl
+      (Set.nonempty_compl.mpr hne) fun hmem ↦ hmem (subset_closure rfl))
+  exact (show IsGenericPoint z ⊤ from this).eq (genericPoint_spec Z)
+
+/-- The stalk maps of an integral scheme along specializations are injective. -/
+theorem injective_stalkSpecializes {Z : Scheme.{u}} [IsIntegral Z] {a b : Z} (h : a ⤳ b) :
+    Function.Injective (Z.presheaf.stalkSpecializes h) := by
+  have hinj := IsFractionRing.injective (Z.presheaf.stalk b) Z.functionField
+  have e := TopCat.Presheaf.stalkSpecializes_comp Z.presheaf
+    ((genericPoint_spec Z).specializes trivial) h
+  refine fun u v huv ↦ hinj ?_
+  change Z.presheaf.stalkSpecializes _ u = Z.presheaf.stalkSpecializes _ v
+  rw [← e, CommRingCat.comp_apply, CommRingCat.comp_apply, huv]
+
 section ProjectiveLine
 
 variable [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
@@ -233,7 +255,98 @@ theorem isFinite_flat_of_hom_projectiveLine_of_functionField [IsIntegral X]
       (X.fromSpecFunctionField ≫ X ↘ Spec (.of k)) (functionFieldCoordinates t) hs) :
     IsFinite π ∧ Surjective π ∧ Flat π ∧
       ∀ y, π.finrank y = Module.finrank
-        (Subfield.closure (Set.range (functionFieldRingHom k X) ∪ {t})) X.functionField :=
+        (Subfield.closure (Set.range (functionFieldRingHom k X) ∪ {t})) X.functionField := by
+  have := SmoothOfRelativeDimension.smooth 1 (X ↘ Spec (.of k))
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  let P := ProjectiveLine (Spec (.of k))
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := {}
+  have hdimX : topologicalKrullDim X ≤ 1 := by
+    exact_mod_cast topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1
+  have hdimP : topologicalKrullDim P ≤ 1 := topologicalKrullDim_projectiveLine_le_one k
+  have hover : π ≫ P ↘ Spec (.of k) = X ↘ Spec (.of k) :=
+    HomIsOver.comp_over (f := π) (S := Spec (.of k))
+  have : IsProper π := by
+    have : IsProper (π ≫ P ↘ Spec (.of k)) := by rw [hover]; infer_instance
+    exact IsProper.of_comp π (P ↘ Spec (.of k))
+  -- `π` maps the generic point of `X` to the generic point of `ℙ¹`.
+  have hg₀ : X.fromSpecFunctionField ≫ X ↘ Spec (.of k) =
+      Spec.map (CommRingCat.ofHom (functionFieldRingHom k X)) := by
+    refine ext_of_isAffine ?_
+    rw [← cancel_epi (Scheme.ΓSpecIso _).inv, ← Scheme.ΓSpecIso_inv_naturality]
+    ext a
+    simp only [Scheme.Hom.comp_appTop, Scheme.fromSpecStalk_appTop, functionFieldRingHom,
+      globalSectionsRingHom]
+    rfl
+  have hs : Ideal.span (Set.range (functionFieldCoordinates (X := X) t)) = ⊤ :=
+    Ideal.eq_top_of_isUnit_mem _ (Ideal.subset_span ⟨⟨0⟩, rfl⟩) (by simp)
+  have hpt : ProjectiveSpace.homOfSections (Spec.map (CommRingCat.ofHom (functionFieldRingHom k X)))
+      (fun i : ULift.{u} (Fin 2) ↦ (Scheme.ΓSpecIso (.of X.functionField)).inv (![1, t] i.down)) hs
+      (IsLocalRing.closedPoint X.functionField) = π (genericPoint X) := by
+    have e := hπ hs
+    rw [hg₀] at e
+    refine (congrArg (fun f ↦ f (IsLocalRing.closedPoint X.functionField)) e).symm.trans ?_
+    exact congrArg π Scheme.fromSpecStalk_closedPoint
+  have hηc : ¬ IsClosed {π (genericPoint X)} := by
+    rw [← hpt]
+    exact ProjectiveLine.not_isClosed_homOfSections (functionFieldRingHom k X) t ht hs _
+  have hηP : π (genericPoint X) = genericPoint P := eq_genericPoint_of_not_isClosed hdimP hηc
+  -- the points of `X` and `ℙ¹` are closed or generic
+  have hptX (x : X) (hx : ¬ IsClosed {x}) : x = genericPoint X :=
+    eq_genericPoint_of_not_isClosed hdimX hx
+  have hptP (y : P) (hy : ¬ IsClosed {y}) : y = genericPoint P :=
+    eq_genericPoint_of_not_isClosed hdimP hy
+  have hPgen : ¬ IsClosed ({genericPoint P} : Set P) := hηP ▸ hηc
+  have hsurj : Surjective π := by
+    refine ⟨fun y ↦ ?_⟩
+    have hclosed : IsClosed (Set.range π) := π.isClosedMap.isClosed_range
+    have : closure {genericPoint P} ⊆ Set.range π :=
+      closure_minimal (by rintro _ rfl; exact ⟨_, hηP⟩) hclosed
+    rw [show closure ({genericPoint P} : Set P) = Set.univ from genericPoint_spec P] at this
+    exact this trivial
+  have hfib (y : P) : (π ⁻¹' {y}).Finite := by
+    by_cases hy : IsClosed ({y} : Set P)
+    · have hc : IsClosed (π ⁻¹' {y}) := hy.preimage π.continuous
+      have hη : genericPoint X ∉ π ⁻¹' {y} := by
+        intro h
+        rw [Set.mem_preimage, Set.mem_singleton_iff, hηP] at h
+        exact hPgen (h ▸ hy)
+      have := IsOpen.finite_compl_of_topologicalKrullDim_le_one hdimX hc.isOpen_compl
+        ⟨_, hη⟩
+      simpa using this
+    · refine (Set.finite_singleton (genericPoint X)).subset fun x hx ↦ ?_
+      rw [Set.mem_preimage, Set.mem_singleton_iff] at hx
+      refine hptX x fun hxc ↦ hy ?_
+      rw [← hx, ← Set.image_singleton]
+      exact π.isClosedMap _ hxc
+  have : LocallyQuasiFinite π := (locallyQuasiFinite_iff_finite_preimage_singleton).mpr hfib
+  have hfin : IsFinite π := IsFinite.of_isProper_of_locallyQuasiFinite π
+  have hflat : Flat π := by
+    refine Flat.of_stalkMap π fun x ↦ ?_
+    have hval := valuationRing_stalk (P ↘ Spec (.of k)) (π x)
+    have hinj : Function.Injective (π.stalkMap x) := by
+      have h₁ := Scheme.Hom.stalkSpecializes_stalkMap π (genericPoint X) x
+        ((genericPoint_spec X).specializes (Set.mem_univ x))
+      have hF : IsField (P.presheaf.stalk (π (genericPoint X))) :=
+        hηP ▸ Field.toIsField P.functionField
+      have h₂ : Function.Injective (P.presheaf.stalkSpecializes
+          (π.base.hom.map_specializes ((genericPoint_spec X).specializes (Set.mem_univ x))) ≫
+            π.stalkMap (genericPoint X)) := by
+        let := hF.toField
+        exact (RingHom.injective (π.stalkMap (genericPoint X)).hom).comp
+          (injective_stalkSpecializes _)
+      rw [h₁] at h₂
+      exact fun a b hab ↦ h₂ (by rw [CommRingCat.comp_apply, CommRingCat.comp_apply, hab])
+    algebraize [(π.stalkMap x).hom]
+    change Module.Flat (P.presheaf.stalk (π x)) (X.presheaf.stalk x)
+    rw [Module.Flat.flat_iff_torsion_eq_bot_of_isBezout]
+    refine eq_bot_iff.mpr fun m ⟨⟨r, hr⟩, hrm⟩ ↦ ?_
+    have hr0 : r ≠ 0 := nonZeroDivisors.ne_zero hr
+    have : algebraMap (P.presheaf.stalk (π x)) (X.presheaf.stalk x) r ≠ 0 := by
+      exact fun h ↦ hr0 (hinj (h.trans (π.stalkMap x).hom.map_zero.symm))
+    rw [Submonoid.smul_def, Algebra.smul_def] at hrm
+    exact (mul_eq_zero.mp hrm).resolve_left this
+  refine ⟨hfin, hsurj, hflat, fun y ↦ ?_⟩
   sorry
 
 /-- **Finite flat morphisms to the projective line.** Every smooth proper curve `X` over `k` has
