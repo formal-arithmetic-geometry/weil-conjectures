@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-directed-colimit-base-change-elementwise",
+ "kind": "statement",
+ "title": "Base change along a directed colimit of rings: elements and zero elements come from a stage",
+ "statement": "Let $I$ be a directed set, $(A_i,\\alpha_{i'i}:A_i\\to A_{i'})_{i\\le i'}$ a directed system of commutative rings with colimit $A=\\varinjlim_iA_i$ in the category of commutative rings [def-weil-pbc-category-colimit] and coprojections $\\alpha_i:A_i\\to A$. Let $0\\in I$ and $M_0$ an $A_0$-module. For $i\\ge0$ regard $A_i$ as an $A_0$-algebra via $\\alpha_{i0}$ and $A$ via $\\alpha_0$, and put $M_i=A_i\\otimes_{A_0}M_0$, $M=A\\otimes_{A_0}M_0$, with the maps $\\mu_{i'i}=\\alpha_{i'i}\\otimes\\mathrm{id}:M_i\\to M_{i'}$ ($0\\le i\\le i'$) and $\\mu_i=\\alpha_i\\otimes\\mathrm{id}:M_i\\to M$. Then (1) every element of $M$ is $\\mu_i(t)$ for some $i\\ge0$ and some $t\\in M_i$; (2) if $t\\in M_i$ satisfies $\\mu_i(t)=0$, then $\\mu_{i'i}(t)=0$ for some $i'\\ge i$. (Equivalently, $M$ with the maps $\\mu_i$ is the colimit of the directed system $(M_i,\\mu_{i'i})_{i\\ge0}$ of $A_0$-modules.)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00DD (lemma-tensor-products-commute-with-limits, line 1934: $\\colim(M_i\\otimes N)\\cong(\\colim M_i)\\otimes N$) with the description of directed colimits, Lemmas Tag 00D6 (lemma-directed-colimit, line 778) and Tag 00D7 (lemma-zero-directed-limit, line 811); used implicitly in the proof of Lemma Tag 07RI (line 47654: 'Thus for sufficiently large $i$ we can find elements ...', 'on increasing $i$ if necessary ... since this is true in the limit')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of rings A_i, element of A ⊗_{A_0} M comes from A_i ⊗_{A_0} M and vanishing descends to some stage",
+   "results": "RingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.colimit, colimitCocone, colimitCoconeIsColimit (Mathlib.Algebra.Category.Ring.FilteredColimits); CategoryTheory.Limits.Concrete.colimit_rep_eq_zero (ConcreteCategory.WithAlgebraicStructures); ModuleCat.FilteredColimits.colimit",
+   "date": "2026-10-10",
+   "verdict": "no match (elementwise description of a filtered colimit of modules, not its base change)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensor product commutes with direct limit of modules",
+   "results": "TensorProduct.directLimitLeft, directLimitLeft_rTensor_of, directLimitLeft_tmul_of, toDirectLimit_tmul_of (Mathlib.LinearAlgebra.TensorProduct.DirectLimit); Submodule.FG.rTensor.directLimit, Submodule.FG.lTensor.directLimit (Mathlib.RingTheory.TensorProduct.DirectLimitFG)",
+   "date": "2026-10-10",
+   "verdict": "generalization in another form: directLimitLeft is Stacks 00DD for Module.DirectLimit over a fixed ring; the node's A is a categorical colimit in commutative rings, so the identification of its underlying A_0-module with Module.DirectLimit (forgetful functors preserve filtered colimits) and the elementwise description (Module.DirectLimit.exists_of, Module.DirectLimit.of.zero_exact) are further steps: not one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ⊗_R (colimit of filtered diagram of R-modules M_i) is the colimit of A ⊗ M_i; tensoring preserves filtered colimits in ModuleCat",
+   "results": "Submodule.FG.rTensor.directLimit(_apply, _apply'), Submodule.FG.lTensor.directLimit(_apply, _apply') (RingTheory.TensorProduct.DirectLimitFG); TensorProduct.directLimitRight, TensorProduct.toDirectLimit (LinearAlgebra.TensorProduct.DirectLimit)",
+   "date": "2026-10-10",
+   "verdict": "no match beyond the Module.DirectLimit form above"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, TensorProduct",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def directLimitLeft\\|stacks 00DD' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln IsColimit ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/TensorProduct ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct",
+   "results": "LinearAlgebra/TensorProduct/DirectLimit.lean:78 directLimitLeft : DirectLimit G f ⊗[R] M ≃ₗ[R] DirectLimit (fun i ↦ G i ⊗[R] M) _; no stacks 00DD attribute; no file of RingTheory/TensorProduct or LinearAlgebra/TensorProduct mentions IsColimit",
+   "date": "2026-10-10",
+   "verdict": "no match (candidate route: directLimitLeft with the Module.DirectLimit model of the ring colimit)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-colimit-etale-ring-map",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: base change of an A_0-module along a directed colimit of rings is the directed colimit of the base changes, elementwise (Algebra 00DD with 00D6/00D7); self-contained; correct; unsplit."
+ }
+}

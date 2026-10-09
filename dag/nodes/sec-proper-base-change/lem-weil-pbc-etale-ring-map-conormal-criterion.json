@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-etale-ring-map-conormal-criterion",
+ "kind": "statement",
+ "title": "Etale ring maps: the conormal map of a finite presentation is an isomorphism",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings, $n\\ge0$, $P=R[x_1,\\dots,x_n]$ the polynomial ring, and $\\alpha:P\\to S$ a surjective homomorphism of $R$-algebras whose kernel $J$ is a finitely generated ideal of $P$. The quotient $J/J^2$ is an $S=P/J$-module, and let $\\bigoplus_{k=1}^nS\\,\\mathrm dx_k$ be the free $S$-module on symbols $\\mathrm dx_1,\\dots,\\mathrm dx_n$. The map $\\mathrm d:J/J^2\\to\\bigoplus_{k=1}^nS\\,\\mathrm dx_k$, $\\mathrm d(g\\bmod J^2)=\\sum_{k=1}^n\\alpha(\\partial g/\\partial x_k)\\,\\mathrm dx_k$ ($\\partial/\\partial x_k$ the formal partial derivatives of $P$ over $R$), is well defined and $S$-linear. Then the morphism $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ induced by $R\\to S$ is etale [def-weil-etale-morphism] if and only if $\\mathrm d$ is bijective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Definition Tag 00U1 (definition-etale, line 39245: $R\\to S$ etale iff of finite presentation and $\\NL_{S/R}$ quasi-isomorphic to zero, i.e. $H_1(\\NL_{S/R})=0$ and $\\Omega_{S/R}=0$), with the complex $\\NL(\\alpha):I/I^2\\to\\bigoplus S\\,\\mathrm dx_i$ of a presentation (text before Lemma Tag 00S1, line ~35190) and Lemma Tag 00S1 (lemma-NL-homotopy, line 35274: $\\NL(\\alpha)\\to\\NL_{S/R}$ is a quasi-isomorphism); the cokernel of $\\mathrm d$ is $\\Omega_{S/R}$ by Lemma Tag 00RU (lemma-differential-seq); the comparison with etale morphisms of schemes by literature/stacks-project/morphisms.tex Lemma Tag 02GJ (lemma-etale-characterize) and the remark in def-weil-etale-morphism (Stacks 02GI, 02GV, 02GE). This is the form of etaleness used in the proof of Algebra Lemma Tag 07RI ('The assumption is that the map d ... is an isomorphism')."
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebra is etale iff the map I/I^2 → S ⊗ Ω of a presentation is an isomorphism",
+   "results": "Algebra.Etale, Algebra.FormallyEtale (Mathlib.RingTheory.Etale.Basic); RingHom.FormallyEtale; Algebra.Etale.formallyEtale; Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat (RingTheory.Smooth.StandardSmoothCotangent); AlgebraicGeometry.IsEtale; RingHom.Etale; Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth",
+   "date": "2026-10-10",
+   "verdict": "no match (definitions and the formally unramified + formally smooth decomposition only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "S = R[x_1..x_n]/I finitely presented; S is étale over R if and only if the conormal map I/I^2 → ⊕ S dx_i is bijective",
+   "results": "RingHom.Etale.of_bijective; StandardEtalePresentation.lift_bijective; Algebra.FormallyEtale.iff_comp_bijective; Algebra.FormallyEtale.comp_bijective; Algebra.Etale.finitePresentation; StandardEtalePair.instFormallyEtaleRing/instEtaleRing; RingHom.Etale.toAlgebra",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyEtale, Function.Bijective, KaehlerDifferential.kerCotangentToTensor",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'iff_split_injection\\|exact_kerCotangentToTensor_mapBaseChange\\|class FormallyUnramified\\|stacks 00U1\\|stacks 00S1\\|cotangentComplex_injective_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension; grep -rn -i etale RingTheory/Extension RingTheory/Kaehler RingTheory/Smooth/StandardSmooth*.lean",
+   "results": "Algebra.Etale (RingTheory/Etale/Basic.lean:204, @[stacks 00U1] with the note that Mathlib's definition is formally etale + finite presentation, a different definition shown equivalent by Stacks 00UR); Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth (Etale/Basic.lean:66); Algebra.FormallyUnramified := Subsingleton Ω[A⁄R] (Unramified/Basic.lean:58); Algebra.FormallySmooth.iff_split_injection (Smooth/Basic.lean:291, @[stacks 031I]: for a surjection P → A from a formally smooth P, A formally smooth iff kerCotangentToTensor : I/I² → A ⊗[P] Ω[P⁄R] has a left inverse); KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange (Kaehler/Basic.lean:839) and mapBaseChange_surjective (cokernel of I/I² → A⊗Ω[P⁄R] is Ω[A⁄R]); Algebra.Extension.cotangentComplex_injective_iff (Smooth/Basic.lean:262); Etale.iff_isStandardSmoothOfRelativeDimension_zero (Smooth/StandardSmoothOfFree.lean:90); no statement 'etale iff the conormal map of a presentation is bijective'",
+   "date": "2026-10-10",
+   "verdict": "no match: the node follows from these in several steps (Spec etale ↔ Algebra.Etale via HasRingHomProperty.Spec_iff and RingHom.etale_algebraMap as in lem-weil-pbc-etale-algebra-flat; Algebra.Etale = FinitePresentation ∧ FormallyUnramified ∧ FormallySmooth; FormallySmooth ↔ split injectivity of the conormal map (031I), FormallyUnramified ↔ Ω=0 = cokernel zero; a split injection with zero cokernel is bijective, and conversely; the free basis dx_k of S⊗Ω[P⁄R] via MvPolynomial.basisKaehler), not one line; candidate route for stage 3"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-colimit-etale-ring-map",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: etale iff the conormal map J/J^2 -> (+) S dx_k is bijective for a finitely generated presentation (Algebra 00U1 with 00S1/00RU); self-contained; correct; unsplit."
+ }
+}
