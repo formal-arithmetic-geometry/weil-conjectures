@@ -1,0 +1,54 @@
+{
+ "id": "def-pc-separable-polynomial",
+ "kind": "definition",
+ "title": "Separable polynomials",
+ "statement": "Let $K$ be a field [def-weil-field], $T$ an indeterminate and $K[T]$ the polynomial ring [def-weil-polynomial-ring]. The (formal) derivative of $f=\\sum_{n\\geq0}c_nT^n\\in K[T]$ is $f'=\\sum_{n\\geq1}n\\,c_nT^{n-1}\\in K[T]$. The polynomial $f$ is *separable* if $f$ and $f'$ are coprime in $K[T]$ [def-weil-coprime-polynomials], i.e. there are $U,V\\in K[T]$ with $Uf+Vf'=1$. (A nonzero constant is separable; the zero polynomial is not.)",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09H1 (fields-definition-separable), item (1), line 1165, which states it for irreducible $P$ ('relatively prime to its derivative'); the derivative is the one of fields.tex line 1133. The general form for all $f$ is the one used by def-pc-separably-closed (blueprint order 747) and by Mathlib, which tags `Polynomial.Separable` with Stacks 09H1."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-weil-coprime-polynomials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^def Separable\\|theorem separable_def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean",
+   "results": "Polynomial.Separable (f : R[X]) : Prop := IsCoprime f (derivative f) (Separable.lean:44, @[stacks 09H1]); separable_def (line 47), separable_def' : f.Separable ↔ ∃ a b, a * f + b * derivative f = 1 (line 50)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^def derivative' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Derivative.lean",
+   "results": "Polynomial.derivative : R[X] →ₗ[R] R[X] (Derivative.lean:46), the formal derivative Σ n c_n T^(n-1)",
+   "date": "2026-10-09",
+   "verdict": "match (the derivative used in the statement)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.Separable",
+  "file": "Mathlib/FieldTheory/Separable.lean",
+  "how": "exact: `Polynomial.Separable f := IsCoprime f (derivative f)` for `f : K[X]` (line 44), with `Polynomial.derivative` (Mathlib/Algebra/Polynomial/Derivative.lean:46) and `IsCoprime` as in def-weil-coprime-polynomials"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pc-separably-closed",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

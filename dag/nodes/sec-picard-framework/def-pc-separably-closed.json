@@ -7,13 +7,39 @@
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-dense-points/def-pc-separably-closed.md",
   "place": "node def-pc-separably-closed, order 747"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-pc-separable-polynomial",
+  "def-weil-polynomial-root",
+  "def-pc-field-extension",
+  "def-pc-field-tower"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'class IsSepClosed\\|theorem exists_root\\|theorem of_exists_root' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean",
+   "results": "class IsSepClosed (k) [Field k] : Prop where splits_of_separable : ∀ p : k[X], p.Separable → p.Splits (line 66); IsSepClosed.exists_root [IsSepClosed k] (p) (hp : p.degree ≠ 0) (hsep : p.Separable) : ∃ x, IsRoot p x (line 95); IsSepClosed.of_exists_root (H : ∀ p, p.Monic → Irreducible p → Separable p → ∃ x, p.eval x = 0) : IsSepClosed k (line 176)",
+   "date": "2026-10-09",
+   "verdict": "match: Mathlib's definition is the polynomial formulation, in the form 'every separable polynomial splits'; it is equivalent to the root form of the statement by exists_root (one direction) and of_exists_root (the other: a monic irreducible polynomial is nonconstant)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'algebraMap_surjective\\|eq_bot_of_isSepClosed_of_isSeparable\\|separableClosure_eq_bot_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean",
+   "results": "IsSepClosed.algebraMap_surjective [IsSepClosed k] [Algebra k K] [Algebra.IsSeparable k K] (line 198); IntermediateField.eq_bot_of_isSepClosed_of_isSeparable (line 219); IsSepClosed.separableClosure_eq_bot_iff (line 331)",
+   "date": "2026-10-09",
+   "verdict": "the second formulation (no nontrivial finite separable extension) is not Mathlib's definition; Mathlib proves the polynomial form implies it (algebraMap_surjective) — the content of lem-pc-sepclosed-finite-sep-trivial"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsSepClosed",
+  "file": "Mathlib/FieldTheory/IsSepClosed.lean",
+  "how": "the first (polynomial) formulation, specializing in one line each way: Mathlib's `IsSepClosed k` (line 66) says every separable `p : k[X]` splits; 'every nonconstant separable polynomial has a root' follows by `IsSepClosed.exists_root` (line 95) and implies it by `IsSepClosed.of_exists_root` (line 176). The parenthetical second formulation is not the definition; its equivalence is lem-pc-sepclosed-finite-sep-trivial (pointer)"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -50,5 +76,16 @@
    "reason": "forward pointer in the text, not a dependency: the lemma proves the two formulations equivalent",
    "date": "2026-10-09"
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-pc-separably-closed",
+  "worker": "stage1",
+  "summary": "Checked the statement against the blueprint (master order 747; no slopmaster2 Lean). Statement kept. Named its notions as stmt_deps: field (def-weil-field), polynomial ring and degree for 'nonconstant' (def-weil-polynomial-ring), separable polynomial (new Mathlib leaf def-pc-separable-polynomial = Polynomial.Separable, coprime with the formal derivative), root (def-weil-polynomial-root), and for the parenthetical second formulation field extension (def-pc-field-extension) and finite separable extension (def-pc-field-tower). Mathlib match IsSepClosed, which is the polynomial formulation in 'every separable polynomial splits' form, equivalent to the root form by IsSepClosed.exists_root / IsSepClosed.of_exists_root; status mathlib. pointers left as is. def-kun-separably-closed states the same notion in the second formulation: a merge candidate."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass; Mathlib leaf (IsSepClosed, first formulation)"
+ }
 }
