@@ -1,8 +1,8 @@
 # Work queue
 
-600 items; claim with `tools/claim.py next <group> [--stage N]`.
+602 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (553)
+## Stage 1: nodes to split (552)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -33,12 +33,6 @@
 | `lem-weil-pbc-site-continuous-pushforward-sheaf` | 1008 | none |
 | `lem-weil-pbc-constant-sheaf-sections-connected` | 1009 | none |
 | `lem-weil-pbc-eventually-proper` | 1009 | none |
-| `lem-weil-pbc-henselian-factorization-criterion` | 1009 | none |
-| `lem-weil-pbc-henselian-factorization-locally-nilpotent` | 1009 | none |
-| `lem-weil-pbc-quasi-coherent-algebra-affine-inclusion` | 1009 | none |
-| `lem-weil-pbc-spec-field-point-residue-field` | 1009 | none |
-| `lem-weil-pbc-thickening-integral` | 1009 | none |
-| `lem-weil-pbc-thickening-lft-cartesian` | 1009 | none |
 | `lem-weil-pbc-algebra-directed-colimit-finite-type` | 1010 | none |
 | `lem-weil-pbc-chow-finite-type` | 1010 | none |
 | `lem-weil-pbc-etale-over-normal-ring-normal` | 1010 | none |
@@ -46,8 +40,11 @@
 | `lem-weil-pbc-filtered-colimit-normal-ring` | 1010 | none |
 | `lem-weil-pbc-finite-presentation-hom-directed-colimit` | 1010 | none |
 | `lem-weil-pbc-gabber-absolutely-algebraically-closed` | 1010 | none |
+| `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1010 | none |
+| `lem-weil-pbc-idempotent-splitting-monic-factorization` | 1010 | none |
 | `lem-weil-pbc-lift-monic-coprime-factorization-etale` | 1010 | none |
 | `lem-weil-pbc-module-directed-colimit-finite-presentation` | 1010 | none |
+| `lem-weil-pbc-quasi-coherent-affine-section-base-change` | 1010 | none |
 | `lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal` | 1010 | none |
 | `lem-weil-pbc-quasi-coherent-finite-type-affine` | 1010 | none |
 | `lem-weil-pbc-quasi-coherent-module-colimit-affine-sections` | 1010 | none |
@@ -55,6 +52,8 @@
 | `lem-weil-pbc-site-covering-isomorphic-family` | 1010 | none |
 | `lem-weil-pbc-site-equivalence-is-morphism-of-sites` | 1010 | none |
 | `lem-weil-pbc-symmetric-algebra-finite-presentation` | 1010 | none |
+| `lem-weil-pbc-thickening-affine-scheme` | 1010 | none |
+| `lem-weil-pbc-nakayama-nilpotent` | 1011 | none |
 | `def-weil-pbc-injective-acyclicity-property` | 2002 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lemma-weil-pbc-chow-factorization` | 2002 | none |
@@ -560,7 +559,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (47)
+## Stage 2: nodes to state (50)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -585,6 +584,7 @@
 | `lem-weil-pbc-filtered-colimit-tensor-varying-rings` | 1 | state |
 | `lem-weil-pbc-finite-geometric-point-lift` | 1 | state |
 | `lem-weil-pbc-flat-coproduct` | 1 | state |
+| `lem-weil-pbc-henselian-factorization-locally-nilpotent` | 1 | state |
 | `lem-weil-pbc-idempotents-determined-modulo-radical` | 1 | state |
 | `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1 | state |
 | `lem-weil-pbc-lift-coprime-factorization-etale` | 1 | state |
@@ -604,15 +604,17 @@
 | `lem-weil-pbc-sheaf-of-modules-from-basis` | 1 | state |
 | `lem-weil-pbc-sheaf-on-basis-extends` | 1 | state |
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
+| `lem-weil-pbc-spec-field-point-residue-field` | 1 | state |
 | `lem-weil-pbc-termwise-adjunction-homotopy` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
 | `lem-weil-pbc-truncation-descends` | 1 | state |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
+| `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 564 nodes that wait for stage 1, 233 nodes that wait for a statement dependency.
+Not open yet: 563 nodes that wait for stage 1, 237 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

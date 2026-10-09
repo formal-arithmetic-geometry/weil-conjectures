@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-module-directed-colimit-underlying-sets",
+ "kind": "statement",
+ "title": "The underlying sheaf of sets of a directed colimit of sheaves of modules is the colimit of the underlying sheaves of sets",
+ "statement": "Let $X$ be a topological space, $\\mathcal O_X$ a sheaf of rings on $X$ and $\\Mod(\\mathcal O_X)$ the category of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. Let $I$ be a directed set and $(\\mathcal F_i,\\varphi_{i'i})_{i\\le i'}$ a system of $\\mathcal O_X$-modules over $I$ with a colimit $(\\mathcal F,(c_i)_i)$ in $\\Mod(\\mathcal O_X)$ [def-weil-pbc-category-colimit]. Then the underlying sheaf of sets of $\\mathcal F$, with the maps of sheaves of sets underlying the $c_i$, is a colimit of the system of underlying sheaves of sets of the $\\mathcal F_i$ in the category of sheaves of sets on $X$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01AH (lemma-limits-colimits, line 204), part (2): colimits in Mod(O_X) are the sheafification of the presheaf colimit; with Sheaves, Lemma 007O (lemma-properties-algebraic-structures, item (7): a filtered colimit of modules has as underlying set the colimit of the underlying sets), Sheaves, Lemma 0087 (lemma-sheafify-presheaf-structures (1): the underlying sheaf of sets of the sheafification of a presheaf of algebraic structures is the sheafification of the underlying presheaf of sets) and Section 009E (section-limits-sheaves, item (3)). Stacks uses this silently when applying Sheaves 009F (sheaves of sets) to O_X-modules in the proof of Modules 01BS."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "forgetful functor from sheaves of modules to sheaves of types preserves filtered colimits",
+   "results": "ModuleCat.FilteredColimits.forget_preservesFilteredColimits (modules over one ring), CategoryTheory.sheafForget (Sites.Adjunction; the functor only), PresheafOfModules.toPresheaf_preservesColimit (presheaves), SheafOfModules.instHasColimitsOfShape... (existence only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "forgetful functor from sheaves of abelian groups (or modules) to sheaves of sets preserves filtered colimits",
+   "results": "CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.ab5ofSize, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, ModuleCat.FilteredColimits.forget_preservesFilteredColimits: no preservation statement for sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Limits.PreservesFilteredColimits",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'instance.*[Pp]reserves.*sheafCompose|sheafCompose.*[Pp]reserves|sheafForget.*[Pp]reserves' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; rg -n 'toSheaf.*PreservesColimit|PreservesColimit.*toSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "none; Algebra/Category/ModuleCat/Sheaf/Limits.lean:115-118 has only PreservesFiniteLimits (SheafOfModules.toSheaf R); Sheaf/Colimits.lean has only HasColimitsOfShape instances",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-presentation-hom-directed-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is underlying sheaves of sets of a directed colimit of modules (01AH, 007O, 0087, 009E); self-contained; correct; unsplit."
+ }
+}

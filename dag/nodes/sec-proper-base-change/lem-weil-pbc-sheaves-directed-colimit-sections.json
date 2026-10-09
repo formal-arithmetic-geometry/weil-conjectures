@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-sheaves-directed-colimit-sections",
+ "kind": "statement",
+ "title": "Sections of a directed colimit of sheaves of sets over a quasi-compact open (Stacks 009F)",
+ "statement": "Let $X$ be a topological space, $I$ a directed set (nonempty, every two elements have a common upper bound), and $(\\mathcal F_i,\\varphi_{i'i}:\\mathcal F_i\\to\\mathcal F_{i'})_{i\\le i'}$ a system of sheaves of sets on $X$ over $I$ ($\\varphi_{ii}=\\mathrm{id}$, $\\varphi_{i''i'}\\varphi_{i'i}=\\varphi_{i''i}$), with a colimit $(\\mathcal F,(c_i:\\mathcal F_i\\to\\mathcal F)_i)$ in the category of sheaves of sets on $X$ [def-weil-pbc-category-colimit]. For an open $U\\subseteq X$ let $\\Psi_U:\\varinjlim_i\\mathcal F_i(U)\\to\\mathcal F(U)$ be the map from the directed colimit of the sets $\\mathcal F_i(U)$ (along the maps $\\varphi_{i'i,U}$) whose restriction to the $i$-th term is $c_{i,U}$. Then: (1) if $U$ is quasi-compact, $\\Psi_U$ is injective: if $s\\in\\mathcal F_i(U)$, $s'\\in\\mathcal F_{i'}(U)$ and $c_{i,U}(s)=c_{i',U}(s')$, then $\\varphi_{i''i,U}(s)=\\varphi_{i''i',U}(s')$ for some $i''\\ge i,i'$; (2) if $U$ has a cofinal system of open coverings $U=\\bigcup_{j\\in J}U_j$ with $J$ finite and $U_j\\cap U_{j'}$ quasi-compact for all $j,j'\\in J$ (cofinal: every open covering of $U$ is refined by a covering of the system, i.e. each member of the latter lies in some member of the former), then $\\Psi_U$ is bijective: moreover every $t\\in\\mathcal F(U)$ is $c_{i,U}(s)$ for some $i$ and $s\\in\\mathcal F_i(U)$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 009F (lemma-directed-colimits-sections, line 3444), parts (2) and (4) (clause (1) here is part (2), clause (2) is part (4)); the colimit is the sheafification of the presheaf colimit, Section 009E (section-limits-sheaves, item (3)). Site version: Sites, Lemma 0738 (sites.tex line 3423)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections over a compact open of a filtered colimit of sheaves on a topological space are the colimit of sections",
+   "results": "AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.descCApp, CategoryTheory.Sheaf.createsColimitOfIsSheaf (Sites.Limits), TopCat.Presheaf.section_ext (Topology.Sheaves.Stalks), CategoryTheory.Sheaf.hasFilteredColimitsOfSize (Abelian.GrothendieckAxioms.Sheaf), TopCat.isSheaf_of_isLimit: existence of colimits only, nothing on sections over compact opens",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of a filtered colimit of sheaves over a quasi-compact quasi-separated open set equal the colimit of the sections",
+   "results": "AlgebraicGeometry.exists_of_res_eq_of_qcqs, exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated (Morphisms.QuasiSeparated; structure sheaf only), AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone (AffineTransitionLimit; limits of schemes), LightCondensed.isColimitLocallyConstantPresheaf: none for colimits of sheaves on a space",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -ln 'IsCompact|CompactSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites; rg -n 'PreservesFilteredColimits' same dirs",
+   "results": "no file of Topology/Sheaves or CategoryTheory/Sites mentions IsCompact/CompactSpace; PreservesFilteredColimits occurs only as hypotheses on forget C (stalks, etale space, points of sites)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-presentation-hom-directed-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Sheaves 009F (2),(4) for sheaves of sets; self-contained; correct; unsplit."
+ }
+}

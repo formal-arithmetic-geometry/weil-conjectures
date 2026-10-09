@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+ "kind": "statement",
+ "title": "A qcqs scheme has a cofinal system of finite affine open coverings with quasi-compact pairwise intersections",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] which is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Then every open covering $X=\\bigcup_{a\\in A}V_a$ is refined by a finite open covering $X=\\bigcup_{j\\in J}U_j$ ($J$ finite, each $U_j$ an affine open contained in some $V_a$) such that $U_j\\cap U_{j'}$ is quasi-compact for all $j,j'\\in J$. In other words, the finite affine open coverings of $X$ form a cofinal system of open coverings with finite index set and quasi-compact pairwise intersections (hypothesis (3) of Stacks, Modules, Lemma 01BS, and of Sheaves, Lemma 009F (4), for $U=X$).",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01IT (lemma-basis-affine-opens: the affine opens form a basis of the topology), Algebra, Lemma 00E8 (algebra.tex lemma-quasi-compact: Spec R is quasi-compact), Schemes, Lemma 01KO (lemma-characterize-quasi-separated, line 4125: for X quasi-separated the intersection of two affine opens is a finite union of affine opens, hence quasi-compact); the application to hypothesis (3) of Modules 01BS is left implicit by Stacks."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi-separated space intersection of two compact opens is compact; finite affine open cover of quasi-compact scheme",
+   "results": "QuasiSeparatedSpace, QuasiSeparatedSpace.inter_isCompact, QuasiSeparatedSpace.of_isTopologicalBasis (Topology.QuasiSeparated), AlgebraicGeometry.quasiSeparatedSpace_iff_affine (named in the module doc of AlgebraicGeometry.Morphisms.QuasiSeparated; the declaration in this Mathlib is quasiSeparatedSpace_iff_forall_affineOpens, line 56), AlgebraicGeometry.QuasiCompactCover.of_finite",
+   "date": "2026-10-10",
+   "verdict": "no match: the ingredients exist (QuasiSeparatedSpace.inter_isCompact, quasiSeparatedSpace_iff_forall_affineOpens, Scheme.isBasis_affineOpens, IsAffineOpen.isCompact), the refinement statement does not"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every open cover of a quasi-compact quasi-separated scheme is refined by a finite affine open cover with quasi-compact pairwise intersections",
+   "results": "AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact, QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen, IsAffineOpen.isCompactOpenCovered, quasiCompactCover_iff (Cover.QuasiCompact: compact opens covered by finitely many affine pieces of a quasi-compact cover), Scheme.quasiSeparatedSpace_of_isOpenCover (Morphisms.QuasiSeparated: the converse direction), instIsAffineXSchemeFiniteSubcover (AffineScheme: finite subcover of an affine cover of a compact scheme is affine): ingredients, no statement of the refinement with quasi-compact pairwise intersections",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'quasiSeparatedSpace_iff_forall_affineOpens|theorem Scheme.isBasis_affineOpens' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "AlgebraicGeometry/Morphisms/QuasiSeparated.lean:56 quasiSeparatedSpace_iff_forall_affineOpens (QuasiSeparatedSpace X <-> all U V affine opens, IsCompact (U ∩ V)); AlgebraicGeometry/AffineScheme.lean:305 Scheme.isBasis_affineOpens; no lemma on refining coverings",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only; the proof is a few lines from these)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-presentation-hom-directed-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is finite affine coverings with quasi-compact intersections are cofinal on a qcqs scheme (01IT, 01KO, 00E8); self-contained; correct; unsplit."
+ }
+}
