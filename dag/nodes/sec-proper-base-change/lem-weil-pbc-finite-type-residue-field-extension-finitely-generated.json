@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+ "kind": "statement",
+ "title": "Residue field extensions of a finite type ring map are finitely generated",
+ "statement": "Let $f:R\\to R'$ be a homomorphism of commutative rings of finite type, i.e. $R'$ is generated as an $R$-algebra by finitely many elements $x_1,\\dots,x_n$. Let $\\mathfrak p'\\subset R'$ be a prime ideal and $\\mathfrak p=f^{-1}(\\mathfrak p')$, a prime ideal of $R$, and let $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$, $\\kappa(\\mathfrak p')=R'_{\\mathfrak p'}/\\mathfrak p'R'_{\\mathfrak p'}$ be the residue fields [def-weil-pbc-localization-at-prime], with the ring map $\\bar f:\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ induced by $f$ (the class of $a/s$, $a\\in R$, $s\\in R\\setminus\\mathfrak p$, goes to the class of $f(a)/f(s)$). Then $\\kappa(\\mathfrak p')$, a field extension of $\\kappa(\\mathfrak p)$ through $\\bar f$ [def-pc-field-extension], is finitely generated: there are finitely many $a_1,\\dots,a_m\\in\\kappa(\\mathfrak p')$ such that $\\kappa(\\mathfrak p')=\\kappa(\\mathfrak p)(a_1,\\dots,a_m)$, the smallest subfield of $\\kappa(\\mathfrak p')$ containing $\\bar f(\\kappa(\\mathfrak p))$ and $a_1,\\dots,a_m$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, proof of Lemma Tag 07C1 (lemma-regular-base-change, line 10413): 'The residue field extension kappa(p')/kappa(p) is finitely generated as R' is of finite type over R' (stated without proof, no tag of its own)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residue field extension of a prime lying over is finitely generated for a finite type algebra",
+   "results": "instIsAlgebraicResidueFieldOfIsIntegral (Mathlib.RingTheory.LocalRing.ResidueField.Instances), Algebra.QuasiFinite.instFiniteResidueField (Mathlib.RingTheory.QuasiFinite.Basic), RingHom.EssFiniteType.residueFieldMap (Mathlib.RingTheory.RingHom.EssFiniteType): related, for local rings / quasi-finite maps",
+   "date": "2026-10-10",
+   "verdict": "no direct match; RingHom.EssFiniteType.residueFieldMap is the local-ring analogue"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.EssFiniteType (Ideal.ResidueField _) (Ideal.ResidueField _)",
+   "results": "instEssFiniteTypeResidueField_1 (Mathlib.RingTheory.LocalRing.ResidueField.Ideal): [Algebra.EssFiniteType R A] (p : Ideal R) [p.IsPrime] (q : Ideal A) [q.IsPrime] [q.LiesOver p] [Algebra (Localization.AtPrime p) (Localization.AtPrime q)] [...] : Algebra.EssFiniteType p.ResidueField q.ResidueField (the Loogle server's Mathlib has an IsScalarTower hypothesis where the local Mathlib has IsLiesOverAlgebra)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if S is a finite type R-algebra and q a prime of S over p, then kappa(q) is a finitely generated field extension of kappa(p)",
+   "results": "Algebra.QuasiFinite.instFiniteResidueField, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.QuasiFinite.instResidueField (Mathlib.RingTheory.QuasiFinite.Basic), IsLocalRing.ResidueField.finite_of_finite: quasi-finite (finite extension) versions only",
+   "date": "2026-10-10",
+   "verdict": "no match (the finite type version came up by Loogle and grep)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'EssFiniteType.*ResidueField|ResidueField.*EssFiniteType' Mathlib; rg -n 'fg_top|def FG' Mathlib/FieldTheory/IntermediateField; sed -n 195,205p Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean",
+   "results": "RingTheory/LocalRing/ResidueField/Ideal.lean:198-204 (instance Algebra.EssFiniteType p.ResidueField q.ResidueField from [Algebra.EssFiniteType R A], q.LiesOver p, IsLiesOverAlgebra p q); RingTheory/EssentialFiniteness.lean:95 Algebra.EssFiniteType.of_finiteType; FieldTheory/IntermediateField/Adjoin/Algebra.lean:92 IntermediateField.fg_top_iff ((⊤ : IntermediateField F E).FG ↔ Algebra.EssFiniteType F E) and :115 IntermediateField.fg_top; IntermediateField.FG (Adjoin/Defs.lean:653: ∃ t : Finset E, adjoin F t = S; the docstring says Algebra.EssFiniteType F E is Mathlib's way to say E/F is finitely generated); RingTheory/Localization/AtPrime/Basic.lean:365 algebraOfLiesOver (R_p -> R'_p' as localRingHom of the map) and :374 IsLiesOverAlgebra",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "instEssFiniteTypeResidueField_1 (unnamed instance), Algebra.EssFiniteType.of_finiteType, IntermediateField.fg_top",
+  "file": "Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean",
+  "line": 198,
+  "how": "specializes in one line: with [Algebra.FiniteType R R'] the instance Algebra.EssFiniteType.of_finiteType (Mathlib/RingTheory/EssentialFiniteness.lean:95) gives Algebra.EssFiniteType R R'; for q = p' with p'.LiesOver p (i.e. p = f^{-1}(p')) and the algebra R_p -> R'_p' of Localization.AtPrime.algebraOfLiesOver (Localization/AtPrime/Basic.lean:365, the localRingHom a/s |-> f(a)/f(s), with its IsLiesOverAlgebra instance line 379), the instance at Ideal.lean:198 gives Algebra.EssFiniteType p.ResidueField p'.ResidueField, the algebra map being the induced map of residue fields (ResidueField/Basic.lean:187); IntermediateField.fg_top (Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean:115) turns it into (⊤ : IntermediateField κ(p) κ(p')).FG, i.e. κ(p') = κ(p)(t) for a finite set t (IntermediateField.FG, Adjoin/Defs.lean:653). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

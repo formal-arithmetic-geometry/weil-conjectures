@@ -10,9 +10,100 @@
  "stmt_deps": [
   "def-weil-pbc-g-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Flatness.) Write $\\Lambda'=\\Lambda\\otimes_RR'$, an $R'$-algebra through $r'\\mapsto1\\otimes r'$. Since $R\\to\\Lambda$ is regular, $\\Lambda$ is a flat $R$-module [def-weil-pbc-g-ring]. By flat base change [lem-weil-pbc-flat-module-base-change] (with the ring map $R\\to R'$ and $M=\\Lambda$) the $R'$-module $R'\\otimes_R\\Lambda$ is flat, and the symmetry $\\Lambda\\otimes_RR'\\cong R'\\otimes_R\\Lambda$, $\\lambda\\otimes r'\\mapsto r'\\otimes\\lambda$, is an isomorphism of $R'$-modules; so $R'\\to\\Lambda'$ is flat [def-weil-pbc-flat-ring-map].",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-flat-module-base-change",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07C1, first sentence (Algebra, Lemma Tag 00HI lemma-flat-base-change)"
+   }
+  },
+  {
+   "text": "(The residue fields.) Fix a prime $\\mathfrak p'\\subset R'$ and let $\\mathfrak p=f^{-1}(\\mathfrak p')\\subset R$, $f:R\\to R'$ the structure map; $\\mathfrak p$ is prime ($1\\notin\\mathfrak p$, and $ab\\in\\mathfrak p$ gives $f(a)f(b)\\in\\mathfrak p'$). Let $\\pi:R\\to\\kappa(\\mathfrak p)$, $\\pi':R'\\to\\kappa(\\mathfrak p')$ be the canonical maps [def-weil-pbc-localization-at-prime] and $\\bar f:\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ the induced map, $\\overline{a/s}\\mapsto\\overline{f(a)/f(s)}$; it satisfies $\\bar f\\circ\\pi=\\pi'\\circ f$ (both send $a$ to the class of $f(a)/1$), so the two $R$-algebra structures on $\\kappa(\\mathfrak p')$, through $\\pi'\\circ f$ and through $\\bar f\\circ\\pi$, are the same. Since $R'$ is a finitely generated $R$-algebra, $\\kappa(\\mathfrak p')$ is a finitely generated field extension of $\\kappa(\\mathfrak p)$ through $\\bar f$ [lem-weil-pbc-finite-type-residue-field-extension-finitely-generated]: $\\kappa(\\mathfrak p')=\\kappa(\\mathfrak p)(a_1,\\dots,a_m)$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07C1, second and third sentences"
+   }
+  },
+  {
+   "text": "(The fibre ring.) Put $A=\\kappa(\\mathfrak p)\\otimes_R\\Lambda$, a $\\kappa(\\mathfrak p)$-algebra through the first factor; by the symmetry of $\\otimes$ it is isomorphic as a $\\kappa(\\mathfrak p)$-algebra to the fibre ring $\\Lambda\\otimes_R\\kappa(\\mathfrak p)$ of $R\\to\\Lambda$ at $\\mathfrak p$. Let $F=\\Lambda'\\otimes_{R'}\\kappa(\\mathfrak p')$ be the fibre ring of $R'\\to\\Lambda'$ at $\\mathfrak p'$, a $\\kappa(\\mathfrak p')$-algebra through the second factor. We construct an isomorphism of $\\kappa(\\mathfrak p')$-algebras $F\\cong\\kappa(\\mathfrak p')\\otimes_{\\kappa(\\mathfrak p)}A$. First, by symmetry and $\\Lambda'\\cong R'\\otimes_R\\Lambda$ (as $R'$-algebras), $F\\cong\\kappa(\\mathfrak p')\\otimes_{R'}(R'\\otimes_R\\Lambda)$, and [lem-weil-pbc-tensor-cancel-base-change] (with $R\\to S:=R'$, $B:=\\Lambda$, the $R'$-algebra $\\kappa(\\mathfrak p')$ via $\\pi'$) gives an isomorphism of $\\kappa(\\mathfrak p')$-algebras $\\kappa(\\mathfrak p')\\otimes_{R'}(R'\\otimes_R\\Lambda)\\cong\\kappa(\\mathfrak p')\\otimes_R\\Lambda$, where $\\kappa(\\mathfrak p')$ is an $R$-algebra through $\\pi'\\circ f$. Second, [lem-weil-pbc-tensor-cancel-base-change] (with $R\\to S:=\\kappa(\\mathfrak p)$ via $\\pi$, $B:=\\Lambda$, the $\\kappa(\\mathfrak p)$-algebra $\\kappa(\\mathfrak p')$ via $\\bar f$) gives an isomorphism of $\\kappa(\\mathfrak p')$-algebras $\\kappa(\\mathfrak p')\\otimes_{\\kappa(\\mathfrak p)}(\\kappa(\\mathfrak p)\\otimes_R\\Lambda)\\cong\\kappa(\\mathfrak p')\\otimes_R\\Lambda$, where now $\\kappa(\\mathfrak p')$ is an $R$-algebra through $\\bar f\\circ\\pi$; by Step 2 this is the same $R$-algebra structure as before, so the two right-hand sides are the same ring. Composing, $F\\cong\\kappa(\\mathfrak p')\\otimes_{\\kappa(\\mathfrak p)}A$ as $\\kappa(\\mathfrak p')$-algebras. (This is the displayed identity of the Stacks proof.)",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07C1, the displayed identity"
+   }
+  },
+  {
+   "text": "($F$ is Noetherian.) As $R\\to\\Lambda$ is regular, the fibre ring $\\Lambda\\otimes_R\\kappa(\\mathfrak p)$, hence its isomorphic copy $A$, is a Noetherian $\\kappa(\\mathfrak p)$-algebra which is geometrically regular over $\\kappa(\\mathfrak p)$ [def-weil-pbc-g-ring] (both properties are defined through the ring structure and the tensor products $k'\\otimes_{\\kappa(\\mathfrak p)}-$, so they pass along a $\\kappa(\\mathfrak p)$-algebra isomorphism). Since $\\kappa(\\mathfrak p')/\\kappa(\\mathfrak p)$ is a finitely generated field extension (Step 2), [lem-weil-pbc-geometrically-regular-finitely-generated-extensions] (with $k=\\kappa(\\mathfrak p)$, $K=\\kappa(\\mathfrak p')$) shows that $\\kappa(\\mathfrak p')\\otimes_{\\kappa(\\mathfrak p)}A$ is Noetherian (and regular); so $F$ is Noetherian [def-weil-pbc-noetherian-ring] by Step 3. (Stacks cites Algebra Lemma Tag 045I lemma-Noetherian-field-extension here; its content is included in the cited node.)",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07C1, fourth sentence (Algebra, Lemma Tag 045I lemma-Noetherian-field-extension)"
+   }
+  },
+  {
+   "text": "($F$ is geometrically regular over $\\kappa(\\mathfrak p')$.) Let $k''/\\kappa(\\mathfrak p')$ be a finite purely inseparable field extension [def-weil-pbc-finite-purely-inseparable-extension]. By Step 3, $k''\\otimes_{\\kappa(\\mathfrak p')}F\\cong k''\\otimes_{\\kappa(\\mathfrak p')}(\\kappa(\\mathfrak p')\\otimes_{\\kappa(\\mathfrak p)}A)$, and [lem-weil-pbc-tensor-cancel-base-change] (with $R\\to S:=\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$, $B:=A$, the $\\kappa(\\mathfrak p')$-algebra $k''$) identifies this ring with $k''\\otimes_{\\kappa(\\mathfrak p)}A$. The field extension $k''/\\kappa(\\mathfrak p)$ is finitely generated: if $\\kappa(\\mathfrak p')=\\kappa(\\mathfrak p)(a_1,\\dots,a_m)$ (Step 2) and $e_1,\\dots,e_r$ is a $\\kappa(\\mathfrak p')$-basis of $k''$, the subfield $\\kappa(\\mathfrak p)(a_1,\\dots,a_m,e_1,\\dots,e_r)$ of $k''$ contains $\\kappa(\\mathfrak p')$ and all $e_j$, hence every $\\kappa(\\mathfrak p')$-linear combination of the $e_j$, i.e. all of $k''$. So [lem-weil-pbc-geometrically-regular-finitely-generated-extensions] (with $k=\\kappa(\\mathfrak p)$, $K=k''$ and the geometrically regular Noetherian $\\kappa(\\mathfrak p)$-algebra $A$ of Step 4) shows that $k''\\otimes_{\\kappa(\\mathfrak p)}A$ is a regular ring [def-weil-regular-scheme]; regularity (Noetherian, all localizations at primes regular local) passes along ring isomorphisms, so $k''\\otimes_{\\kappa(\\mathfrak p')}F$ is regular. As $k''$ was arbitrary and $F$ is Noetherian (Step 4), $F$ is geometrically regular over $\\kappa(\\mathfrak p')$ [def-weil-pbc-g-ring]. (Stacks: 'Geometric regularity of the fibres is preserved by Algebra, Lemma 0381', used as (2)=>(1) for $A$ over $\\kappa(\\mathfrak p)$.)",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07C1, last sentence (Algebra, Lemma Tag 0381 lemma-geometrically-regular)"
+   }
+  },
+  {
+   "text": "(Conclusion.) $R'\\to\\Lambda'$ is flat (Step 1), and for every prime $\\mathfrak p'\\subset R'$ its fibre ring $F=\\Lambda'\\otimes_{R'}\\kappa(\\mathfrak p')$ is Noetherian (Step 4) and geometrically regular over $\\kappa(\\mathfrak p')$ (Step 5); so $R'\\to\\Lambda\\otimes_RR'$ is a regular ring map by the definition [def-weil-pbc-g-ring].",
+   "uses": [
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07C1 (lemma-regular-base-change, line 10413), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-flat-module-base-change",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07C1 (lemma-regular-base-change, line 10413), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,7 +135,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +155,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-regular-base-change",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 07C1 (more-algebra.tex line 10413; tag verified in tags/tags as more-algebra-lemma-regular-base-change); kept. Proof written in six steps after the Stacks proof: flatness by flat base change (00HI, Mathlib leaf lem-weil-pbc-flat-module-base-change); the residue field extension kappa(p')/kappa(p) is finitely generated (stated without proof in Stacks; new node lem-weil-pbc-finite-type-residue-field-extension-finitely-generated, a Mathlib leaf: EssFiniteType instance on residue fields, Ideal.lean:198, with EssFiniteType.of_finiteType and IntermediateField.fg_top); the displayed fibre identity by two applications of the Mathlib leaf lem-weil-pbc-tensor-cancel-base-change, checking that the two R-algebra structures on kappa(p') agree; Noetherianity (Stacks: 045I) and geometric regularity (Stacks: 0381) both from the existing node lem-weil-pbc-geometrically-regular-finitely-generated-extensions (0381 (2)=>(1), whose statement includes Noetherianity of K (x)_k A), applied to K=kappa(p') and to K=k'' finite purely inseparable over kappa(p'), with k''/kappa(p) finitely generated written out. Tags 00HI, 045I, 0381, 07C1 verified. stmt_deps unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Six steps along Stacks 07C1: flatness by 00HI (leaf), residue fields and kappa(p')/kappa(p) finitely generated (new Mathlib leaf of three declarations: the EssFiniteType instance ResidueField/Ideal.lean:198, EssFiniteType.of_finiteType EssentialFiniteness.lean:95, IntermediateField.fg_top Adjoin/Algebra.lean:115; verified), the fibre identity by cancel base change, Noetherian and geometrically regular fibres by the 0381 node (which includes 045I), conclusion. Tags verified by the worker (07C1, 00HI, 045I, 0381)."
+ }
 }
