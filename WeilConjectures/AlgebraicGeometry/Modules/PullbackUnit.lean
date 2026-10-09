@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Sites.Descent.DescentData
 
 /-!
 # The unit of the pullback-pushforward adjunction on sections
@@ -20,7 +21,7 @@ composition of morphisms and under restriction along open immersions, and that m
 
 universe u
 
-open CategoryTheory Opposite
+open CategoryTheory Opposite CategoryTheory.Bicategory CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat
 
 namespace AlgebraicGeometry.Scheme.Modules
 
@@ -48,6 +49,13 @@ lemma pullbackUnit_comp_app_apply (g : Z ⟶ Y) (f : Y ⟶ X) (M : X.Modules) (U
     ((pullbackComp g f).inv.app M).app ((g ≫ f) ⁻¹ᵁ U) ((pullbackUnit (g ≫ f) M).app U m) =
       (pullbackUnit g ((pullback f).obj M)).app (f ⁻¹ᵁ U) ((pullbackUnit f M).app U m) :=
   congr($(pullbackUnit_comp_app g f M U) m)
+
+/-- Naturality of the unit on sections. -/
+lemma pullbackUnit_naturality_apply (f : Y ⟶ X) {M N : X.Modules} (φ : M ⟶ N) (U : X.Opens)
+    (m : Γ(M, U)) :
+    ((pullback f).map φ).app (f ⁻¹ᵁ U) ((pullbackUnit f M).app U m) =
+      (pullbackUnit f N).app U (φ.app U m) :=
+  congr($(((pullbackPushforwardAdjunction f).unit.naturality φ).symm).app U m)
 
 /-- Two morphisms out of `f^* M` agree if they agree on the image of the unit. -/
 lemma pullback_hom_ext (f : Y ⟶ X) {M : X.Modules} {P : Y.Modules}
@@ -90,3 +98,58 @@ lemma bijective_pullbackUnit_app_of_isOpenImmersion (M : X.Modules) {U : X.Opens
 end OpenImmersion
 
 end AlgebraicGeometry.Scheme.Modules
+
+namespace AlgebraicGeometry
+
+open Scheme.Modules
+
+/-- The pseudofunctor sending a scheme `X` to its category `X.Modules` of sheaves of
+modules and a morphism to the pullback functor. This is the pseudofunctor underlying
+`AlgebraicGeometry.Scheme.Modules.pseudofunctor`, which also records the pushforward
+functors and the adjunctions; here we only keep the contravariant part, which is the
+shape required by `CategoryTheory.Pseudofunctor.DescentData`. -/
+noncomputable abbrev modulesPseudofunctor :
+    Pseudofunctor (LocallyDiscrete Scheme.{u}ᵒᵖ) Cat :=
+  Scheme.Modules.pseudofunctor.comp Adj.forget₁
+
+variable {X Y Z : Scheme.{u}}
+
+lemma modulesPseudofunctor_mapComp_hom_app (f : Y ⟶ X) (g : Z ⟶ Y) (M : X.Modules) :
+    (modulesPseudofunctor.mapComp f.op.toLoc g.op.toLoc).hom.toNatTrans.app M =
+      (pullbackComp g f).inv.app M :=
+  rfl
+
+lemma modulesPseudofunctor_mapComp_inv_app (f : Y ⟶ X) (g : Z ⟶ Y) (M : X.Modules) :
+    (modulesPseudofunctor.mapComp f.op.toLoc g.op.toLoc).inv.toNatTrans.app M =
+      (pullbackComp g f).hom.app M :=
+  rfl
+
+/-- The comparison `mapComp'` of `modulesPseudofunctor` on the image of the unit. -/
+lemma modulesPseudofunctor_mapComp'_hom_app_pullbackUnit (f : Y ⟶ X) (g : Z ⟶ Y)
+    (M : X.Modules) (U : X.Opens) (m : Γ(M, U)) :
+    ((modulesPseudofunctor.mapComp' f.op.toLoc g.op.toLoc (g ≫ f).op.toLoc).hom.toNatTrans.app
+      M).app ((g ≫ f) ⁻¹ᵁ U) ((pullbackUnit (g ≫ f) M).app U m) =
+      (pullbackUnit g ((pullback f).obj M)).app (f ⁻¹ᵁ U) ((pullbackUnit f M).app U m) := by
+  have : modulesPseudofunctor.mapComp' f.op.toLoc g.op.toLoc (g ≫ f).op.toLoc =
+      modulesPseudofunctor.mapComp f.op.toLoc g.op.toLoc :=
+    Pseudofunctor.mapComp'_eq_mapComp _ _ _
+  rw [this, modulesPseudofunctor_mapComp_hom_app]
+  exact pullbackUnit_comp_app_apply g f M U m
+
+/-- `pullHom` of `modulesPseudofunctor` in terms of `pullbackComp`. -/
+lemma modulesPseudofunctor_pullHom_eq {X₁ X₂ Y Y' : Scheme.{u}} {M₁ : X₁.Modules}
+    {M₂ : X₂.Modules} {f₁ : Y ⟶ X₁} {f₂ : Y ⟶ X₂}
+    (φ : (pullback f₁).obj M₁ ⟶ (pullback f₂).obj M₂) (g : Y' ⟶ Y) :
+    pullHom (F := modulesPseudofunctor) φ g (g ≫ f₁) (g ≫ f₂) =
+      (pullbackComp g f₁).inv.app M₁ ≫ (pullback g).map φ ≫ (pullbackComp g f₂).hom.app M₂ := by
+  have h₁ : modulesPseudofunctor.mapComp' f₁.op.toLoc g.op.toLoc (g ≫ f₁).op.toLoc =
+      modulesPseudofunctor.mapComp f₁.op.toLoc g.op.toLoc :=
+    Pseudofunctor.mapComp'_eq_mapComp _ _ _
+  have h₂ : modulesPseudofunctor.mapComp' f₂.op.toLoc g.op.toLoc (g ≫ f₂).op.toLoc =
+      modulesPseudofunctor.mapComp f₂.op.toLoc g.op.toLoc :=
+    Pseudofunctor.mapComp'_eq_mapComp _ _ _
+  dsimp only [pullHom]
+  rw [h₁, h₂]
+  rfl
+
+end AlgebraicGeometry
