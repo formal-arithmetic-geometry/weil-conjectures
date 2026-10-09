@@ -1,14 +1,13 @@
 # Work queue
 
-558 items; claim with `tools/claim.py next <group> [--stage N]`.
+557 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (544)
+## Stage 1: nodes to split (543)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-etale-cover-detects-iso` | 1003 | none |
 | `lem-weil-pbc-exchange-identity-pasting` | 1003 | none |
-| `lem-weil-pbc-grothendieck-spectral-sequence` | 1003 | none |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1003 | none |
 | `lem-weil-pbc-injective-module-abelian-acyclic` | 1003 | none |
 | `lem-weil-pbc-inverse-image-torsion` | 1003 | none |
@@ -29,6 +28,7 @@
 | `lem-weil-pbc-etale-inverse-image-restriction` | 1004 | none |
 | `lem-weil-pbc-etale-underived-exchange-restriction` | 1004 | none |
 | `lem-weil-pbc-inverse-image-composition` | 1004 | none |
+| `lem-weil-pbc-module-sheaves-grothendieck-abelian` | 1004 | none |
 | `lem-weil-pbc-zero-dimensional-field-extension` | 1004 | none |
 | `lemma-weil-pbc-curve-filtered-cohomology` | 1004 | none |
 | `lemma-weil-pbc-curve-locally-constant-reduction` | 1004 | none |
@@ -91,7 +91,6 @@
 | `lemma-weil-pbc-prime-factor-induction` | 2004 | none |
 | `lemma-weil-pbc-proper-strict-henselian-h0` | 2004 | none |
 | `prop-weil-pbc-cohomology-resolution-independent` | 2004 | none |
-| `thm-sp-grothendieck-base-change` | 2004 | none |
 | `def-weil-pbc-finite-section-pullback` | 2005 | none |
 | `lem-weil-pbc-finite-pullback-identities` | 2005 | none |
 | `lemma-weil-pbc-finite-pullback-closed-fibre` | 2005 | none |
@@ -570,7 +569,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 557 nodes that wait for stage 1, 59 nodes that wait for a statement dependency.
+Not open yet: 556 nodes that wait for stage 1, 60 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
