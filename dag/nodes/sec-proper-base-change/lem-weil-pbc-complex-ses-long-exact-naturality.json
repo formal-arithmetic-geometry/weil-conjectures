@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-complex-ses-long-exact-naturality",
+ "kind": "statement",
+ "title": "Naturality of the long exact cohomology sequence of short exact sequences of complexes",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian], and let $0\\to K_1\\xrightarrow{f}K_2\\xrightarrow{g}K_3\\to0$ and $0\\to K'_1\\xrightarrow{f'}K'_2\\xrightarrow{g'}K'_3\\to0$ be two sequences of cochain complexes of $\\mathcal C$ (indexed by $\\mathbf N$ or $\\mathbf Z$), each short exact in each degree, with connecting morphisms $\\delta^n:H^n(K_3)\\to H^{n+1}(K_1)$ and $\\delta'^n:H^n(K'_3)\\to H^{n+1}(K'_1)$ of their long exact cohomology sequences [lem-weil-pbc-complex-ses-homology-long-exact]. Let $u_i:K_i\\to K'_i$ ($i=1,2,3$) be morphisms of complexes with $f'\\circ u_1=u_2\\circ f$ and $g'\\circ u_2=u_3\\circ g$. Then for every $n$, $H^{n+1}(u_1)\\circ\\delta^n=\\delta'^n\\circ H^n(u_3)$; together with $H^n(f')H^n(u_1)=H^n(u_2)H^n(f)$ and $H^n(g')H^n(u_2)=H^n(u_3)H^n(g)$ (functoriality of $H^n$), the maps $H^n(u_i)$ form a morphism from the long exact sequence of the first sequence to that of the second.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma Tag 0117 (lemma-long-exact-sequence-cochain): 'The construction produces long exact cohomology sequences which are functorial in the short exact sequence'"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naturality of the connecting homomorphism of the homology long exact sequence for a morphism of short exact sequences of complexes",
+   "results": "HomologicalComplex.HomologySequence.δ_naturality, δ_naturality_assoc (Mathlib.Algebra.Homology.HomologySequenceLemmas); ShortComplex.ShortExact.δ (Mathlib.Algebra.Homology.HomologySequence)",
+   "date": "2026-10-09",
+   "verdict": "match: HomologicalComplex.HomologySequence.δ_naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.HomologySequence.δ_naturality",
+   "results": "HomologicalComplex.HomologySequence.δ_naturality {C ι} [Abelian C] {c : ComplexShape ι} {S₁ S₂ : ShortComplex (HomologicalComplex C c)} (φ : S₁ ⟶ S₂) (hS₁ : S₁.ShortExact) (hS₂ : S₂.ShortExact) (i j : ι) (hij : c.Rel i j) : hS₁.δ i j hij ≫ homologyMap φ.τ₁ j = homologyMap φ.τ₃ i ≫ hS₂.δ i j hij (Mathlib.Algebra.Homology.HomologySequenceLemmas)",
+   "date": "2026-10-09",
+   "verdict": "match (type read)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'δ_naturality' Mathlib/Algebra/Homology/",
+   "results": "HomologySequenceLemmas.lean:58 lemma δ_naturality (proved by ShortComplex.SnakeInput.naturality_δ of mapSnakeInput); DerivedCategory/ShortExact.lean:55 triangleOfSESδ_naturality (derived-category version); SpectralObject/Differentials.lean (unrelated)",
+   "date": "2026-10-09",
+   "verdict": "match: HomologySequenceLemmas.lean:58, read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "HomologicalComplex.HomologySequence.δ_naturality",
+  "file": "Mathlib/Algebra/Homology/HomologySequenceLemmas.lean",
+  "how": "exact (line 58): the two sequences are S₁ S₂ : ShortComplex (HomologicalComplex C c) with hS₁ : S₁.ShortExact, hS₂ : S₂.ShortExact (degreewise short exactness gives ShortExact by HomologicalComplex.shortExact_iff_degreewise_shortExact, as in lem-weil-pbc-complex-ses-homology-long-exact), (u₁,u₂,u₃) is φ : S₁ ⟶ S₂ (a morphism of short complexes: φ.τ₁, φ.τ₂, φ.τ₃ with the two commutation relations), c = ComplexShape.up ℕ or up ℤ, j = i+1; the conclusion hS₁.δ i j hij ≫ homologyMap φ.τ₁ j = homologyMap φ.τ₃ i ≫ hS₂.δ i j hij is the δ-square; the other two squares are homologyMap_comp applied to φ.comm₁₂, φ.comm₂₃"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-mayer-vietoris",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: HomologicalComplex.HomologySequence.δ_naturality (Algebra/Homology/HomologySequenceLemmas.lean:58), exact."
+ }
+}
