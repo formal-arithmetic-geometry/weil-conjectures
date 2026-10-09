@@ -17,6 +17,7 @@ A group holds at most SHEAF_CLAIMS_PER_GROUP claims (default 10). A claim not re
 Every `done` and `release` is recorded in coord/deliveries.log.
 """
 from __future__ import annotations
+import subprocess
 import fcntl, json, os, pathlib, re, sys, time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -194,6 +195,24 @@ def main() -> int:
             log(f"{who} done {m} (sorry left: {left}) {note}")
             print("done" + (f"; {left} sorry left, so the module returns to the queue" if left else ""))
         else:
+            if who != "L":
+                opened = [e for e in open_returns(who) if e.startswith(f"{m} (")]
+                branch = subprocess.run(["git", "rev-parse", "--verify", "-q", f"refs/heads/deliver/{who}/{m}"],
+                                        cwd=li.ROOT, capture_output=True, text=True).returncode == 0
+                if (opened or branch) and not note.startswith("abandon:"):
+                    # the lock was removed above; put it back unchanged
+                    tmp = C / f".{m}.{os.getpid()}"; tmp.write_text(json.dumps(r)); os.replace(tmp, lock(m))
+                    print(f"refused: {m} has " + (f"an open return entry in coord/returns/{who}.md" if opened else "")
+                          + (" and " if opened and branch else "") + (f"a delivery branch deliver/{who}/{m}" if branch else "")
+                          + ". Repair the delivery (push it) or abandon the item: give a reason starting with 'abandon:'; "
+                          "an abandoned item is released, its delivery branch is deleted by the maintainer and the abandonment is counted for the group.")
+                    return 1
+                if note.startswith("abandon:"):
+                    log(f"{who} abandoned {m}: {note}")
+                    if drop_return_entries(who, m):
+                        log(f"return entries of {who} for {m} dropped (item abandoned)")
+                    print("abandoned; the maintainer deletes the delivery branch" if branch else "abandoned")
+                    return 0
             log(f"{who} released {m}: {note}")
             if drop_return_entries(who, m):
                 log(f"return entries of {who} for {m} dropped (item released)")

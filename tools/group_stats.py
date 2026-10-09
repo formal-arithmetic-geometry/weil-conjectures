@@ -15,11 +15,14 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 groups = {}
 
 def g(name):
-    return groups.setdefault(name, {"merged": [], "returned": [], "claims": []})
+    return groups.setdefault(name, {"merged": [], "returned": [], "abandoned": [], "claims": []})
 
 p = ROOT / "coord" / "deliveries.log"
 if p.exists():
     for line in p.read_text().splitlines():
+        m = re.match(r"\S+ (\S+) abandoned (\S+):", line)
+        if m:
+            g(m.group(1))["abandoned"].append(m.group(2))
         m = re.match(r"\S+ (\S+) done (\S+) .*merged by L", line)
         if m and m.group(1) != "L":
             g(m.group(1))["merged"].append(m.group(2))
@@ -43,9 +46,9 @@ for lock in sorted((ROOT / "coord" / "claims").glob("*.lock")):
 if "--json" in sys.argv:
     print(json.dumps(groups, indent=1))
 else:
-    print("| group | merged | returned | claims held (age, h) |")
-    print("|---|---|---|---|")
+    print("| group | merged | returned | abandoned | claims held (age, h) |")
+    print("|---|---|---|---|---|")
     for name in sorted(groups):
         d = groups[name]
         claims = ", ".join(f"{c} ({a})" for c, a in d["claims"]) or "none"
-        print(f"| {name} | {len(d['merged'])} | {len(d['returned'])} | {len(d['claims'])}: {claims} |")
+        print(f"| {name} | {len(d['merged'])} | {len(d['returned'])} | {len(d['abandoned'])} | {len(d['claims'])}: {claims} |")
