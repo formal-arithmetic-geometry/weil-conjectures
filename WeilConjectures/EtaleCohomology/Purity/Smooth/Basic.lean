@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
+public import WeilConjectures.Compactification.FinitePresentation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.VectorBundle
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
@@ -286,31 +288,47 @@ theorem nonempty_iso_sectionInvariant_diagonal :
 
 /-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
 
-*Step 3, the standard pair.* For the projection `π : 𝔸^c_B ⟶ B` of a trivial vector bundle of
-rank `c` with zero section `0`, over a separated scheme of finite type over a field, the
-section invariant is the Tate twist:
+*Step 3, the vector bundle.* For the normal bundle `π : N_{B/V} ⟶ B` of a regular closed
+immersion `i : B ⟶ V` of pure codimension `r`, a vector bundle of rank `r`, with its zero
+section `0`, over a separated scheme of finite type over a field, the section invariant is the
+Tate twist:
 
-`𝒞(π, 0) = L0^* ω_π ≅ L0^* Λ(c)[2c] ≅ Λ_B(c)[2c]`,
+`𝒞(π, 0) = L0^* ω_π ≅ L0^* Λ(r)[2r] ≅ Λ_B(r)[2r]`,
 
-by affine-space purity (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`)
+by vector-bundle purity (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_normalBundle`)
 and the compatibility of the twist with pullback. -/
-theorem nonempty_iso_sectionInvariant_affineSpace [HasTateTwist.IsNormalized Λ]
-    {k : Type u} [Field k] (c : ℕ)
-    (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
-    [HasInvertibleExponent Λ B] :
-    Nonempty (sectionInvariant Λ (𝔸(ULift.{u} (Fin c); B) ↘ B)
-        (AffineSpace.zeroSection (ULift.{u} (Fin c)) B) ≅
-      (twistShift Λ B c).obj (constantComplex Λ B)) := by
-  obtain ⟨e⟩ := nonempty_iso_dualizingComplex_affineSpace Λ c B aB
-  exact ⟨(L((AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^*[ModuleCat.{u + 1} Λ])).mapIso
+theorem nonempty_iso_sectionInvariant_normalBundle [HasTateTwist.IsNormalized Λ]
+    {k : Type u} [Field k] (r : ℕ) {B V : Scheme.{u}} (i : B ⟶ V) [IsRegularImmersion r i]
+    (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
+    [HasCompactification i.normalBundleProj] [HasInvertibleExponent Λ B] :
+    Nonempty (sectionInvariant Λ i.normalBundleProj i.normalBundleZeroSection ≅
+      (twistShift Λ B r).obj (constantComplex Λ B)) := by
+  obtain ⟨e⟩ := nonempty_iso_dualizingComplex_normalBundle Λ r i aB
+  exact ⟨(L((i.normalBundleZeroSection)^*[ModuleCat.{u + 1} Λ])).mapIso
       (e ≪≫ twistShiftConstantComplexIso Λ _ _) ≪≫
     leftDerivedUpperStarTateShiftIso Λ _ _ ≪≫ (twistShiftConstantComplexIso Λ B _).symm⟩
+
+omit [IsSeparated f] [SmoothOfRelativeDimension d f] [HasCompactification f]
+  [HasInvertibleExponent Λ X] in
+/-- The projection of the normal bundle of the diagonal of `f : X ⟶ Y` has a compactification
+when `X` is of finite type over a field: it is affine and of finite type, and Nagata's theorem
+applies (`AlgebraicGeometry.nagataCompactification_of_locallyOfFinitePresentation`). -/
+lemma hasCompactification_normalBundleProj_diagonal [LocallyOfFiniteType f] [QuasiCompact f]
+    {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
+    [QuasiCompact aY] :
+    HasCompactification (pullback.diagonal f).normalBundleProj := by
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian (f ≫ aY)
+  have : IsLocallyNoetherian (pullback f f) :=
+    LocallyOfFiniteType.isLocallyNoetherian (pullback.fst f f ≫ f ≫ aY)
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (f ≫ aY)
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated (f ≫ aY)
+  exact nagataCompactification_of_locallyOfFinitePresentation _
 
 /-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
 
 **Smooth purity, finite coefficients.** For `f : X ⟶ Y` smooth separated of pure relative
-dimension `d`, `Y` separated of finite type over a field, and a finite coefficient ring `Λ`
-whose exponent is invertible on `X`,
+dimension `d`, `X` and `Y` separated of finite type over a field, and a finite coefficient ring
+`Λ` whose exponent is invertible on `X`,
 
 `ω_f = Rf^! Λ_Y ≅ Λ_X(d)[2d]`,
 
@@ -324,39 +342,23 @@ smooth projection `p₁`.
    (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`).
 2. The deformation to the normal cone (`sk-thm-dnc`,
    `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`) identifies `𝒞(p₁, Δ)`
-   with the section invariant of a rank-`d` vector bundle with its zero section.
-3. That section invariant is `Λ_X(d)[2d]` by affine-space purity
-   (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`), which needs `X` of
-   finite type over the field.
-
-The normal bundle of `Δ` is the relative tangent bundle `T_{X/Y}`, which is étale-locally
-trivial of rank `d` (`sk-lem-diag-reg`). Mathlib has neither vector bundles nor `T_{X/Y}`, so
-the normal cone datum is recorded through `AlgebraicGeometry.Scheme.Hom.NormalConeData`, which
-only asks for a smooth rank-`d` projection with a closed zero section; the trivial bundle
-`𝔸^d_X` is used in step 2, for which step 3 is affine-space purity. -/
-theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ]
+   with the section invariant of the normal bundle `N_Δ` of `Δ` with its zero section. `Δ` is a
+   regular immersion of codimension `d` (`AlgebraicGeometry.isRegularImmersion_diagonal`), so
+   `N_Δ = Spec_X (Sym (I_Δ/I_Δ²))` is a vector bundle of rank `d`: the relative tangent bundle
+   `T_{X/Y}`, as `I_Δ/I_Δ² = Ω¹_{X/Y}`.
+3. That section invariant is `Λ_X(d)[2d]` by vector-bundle purity
+   (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalBundle`), which needs `X` of
+   finite type over the field. -/
+theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ] [QuasiCompact f]
     {k : Type u} [Field k]
-    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :
+    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
       (twistShift Λ X d).obj (constantComplex Λ X)) := by
-  -- TODO: the normal cone datum of `Δ` should be its normal bundle `T_{X/Y}`, as in blueprint
-  -- `thm-pur-dnc-invariance`, and step 3 vector-bundle purity for it. `NormalConeData` does not
-  -- tie the datum to the immersion, so the trivial bundle `𝔸^d_X` is accepted here; undo this
-  -- shortcut once the datum is pinned down.
-  let N : (pullback.diagonal f).NormalConeData d :=
-    { scheme := 𝔸(ULift.{u} (Fin d); X)
-      proj := 𝔸(ULift.{u} (Fin d); X) ↘ X
-      zeroSection := AffineSpace.zeroSection _ X
-      zeroSection_comp_proj := AffineSpace.zeroSection_over _ X
-      isClosedImmersion_zeroSection := inferInstance
-      smoothOfRelativeDimension_proj := by
-        have := AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin d)) X
-        rwa [show Nat.card (ULift.{u} (Fin d)) = d by simp] at this }
-  have : HasCompactification N.proj := HasCompactification.affineSpace_over _ X
+  have := hasCompactification_normalBundleProj_diagonal f aY
   obtain ⟨e₁⟩ := nonempty_iso_sectionInvariant_diagonal Λ (d := d) f
   obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_normalCone Λ d (pullback.fst f f)
-    (pullback.diagonal f) (pullback.diagonal_fst f) N
-  obtain ⟨e₃⟩ := nonempty_iso_sectionInvariant_affineSpace Λ d X (f ≫ aY)
+    (pullback.diagonal f) (pullback.diagonal_fst f)
+  obtain ⟨e₃⟩ := nonempty_iso_sectionInvariant_normalBundle Λ d (pullback.diagonal f) (f ≫ aY)
   exact ⟨e₁.symm ≪≫ e₂ ≪≫ e₃⟩
 
 /-! ### The smooth purity map -/
@@ -479,8 +481,8 @@ This is also blueprint `thm-pur-finite-coefficient-smooth-purity` and
 `cor-pur-dualizing-object-purity`: the isomorphism is the smooth purity map
 `AlgebraicGeometry.Etale.smoothPurityIso`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_twistShift [HasTateTwist.IsNormalized Λ]
-    {k : Type u} [Field k]
-    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
+    [QuasiCompact f] {k : Type u} [Field k]
+    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K ≅
@@ -503,10 +505,11 @@ relative dimension `e` and `f` relative dimension `d`, all three objects are Tat
 `ω_{g ≫ f} ≅ Λ_W(e + d)[2(e + d)]`, `ω_g ≅ Λ_W(e)[2e]` and `Lg^* ω_f ≅ Λ_W(d)[2d]`, and
 `Λ_W(e)[2e] ⊗ Λ_W(d)[2d] ≅ Λ_W(e + d)[2(e + d)]`
 (`AlgebraicGeometry.Etale.shiftTateObjectAddIso`). -/
-theorem nonempty_iso_dualizingComplex_comp [HasTateTwist.IsNormalized Λ]
+theorem nonempty_iso_dualizingComplex_comp [HasTateTwist.IsNormalized Λ] [QuasiCompact f]
     {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k))
-    [IsSeparated aY] [LocallyOfFiniteType aY] {W : Scheme.{u}} {e : ℕ} (g : W ⟶ X)
-    [IsSeparated g] [SmoothOfRelativeDimension e g] [HasCompactification g]
+    [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] {W : Scheme.{u}} {e : ℕ}
+    (g : W ⟶ X) [IsSeparated g] [SmoothOfRelativeDimension e g] [QuasiCompact g]
+    [HasCompactification g]
     [HasCompactification (g ≫ f)] [HasInvertibleExponent Λ W] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (g ≫ f) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) W).obj

@@ -48,7 +48,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {V B : 
 /-- Blueprint `sk-thm-dnc`: DNC invariance of the section dualizing line
 
 Let `g : V ⟶ B` be smooth of pure relative dimension `d` with a closed section `s`, and let
-`N_s ⟶ B` be its normal cone with zero section `0_N`. There is an isomorphism
+`π_N : N_s ⟶ B` be the normal bundle of `s` with zero section `0_N`
+(`AlgebraicGeometry.Scheme.Hom.normalBundle`, constructed from the ideal of `s`). There is an
+isomorphism
 
 `𝒞(g, s) ≅ 𝒞(π_N, 0_N)`
 
@@ -62,9 +64,9 @@ are the two section invariants by base change, it is trivialized over `𝔾_{m,B
 -- TODO(unify): sk-thm-dnc — add the uniqueness and base-change clauses.
 theorem nonempty_iso_sectionInvariant_normalCone (d : ℕ) (g : V ⟶ B)
     [SmoothOfRelativeDimension d g] [HasCompactification g] (s : B ⟶ V) [IsClosedImmersion s]
-    (hs : s ≫ g = 𝟙 B) (N : Scheme.Hom.NormalConeData d s)
-    [HasCompactification N.proj] [HasInvertibleExponent Λ B] :
-    Nonempty (sectionInvariant Λ g s ≅ sectionInvariant Λ N.proj N.zeroSection) :=
+    (hs : s ≫ g = 𝟙 B) [HasCompactification s.normalBundleProj] [HasInvertibleExponent Λ B] :
+    Nonempty (sectionInvariant Λ g s ≅
+      sectionInvariant Λ s.normalBundleProj s.normalBundleZeroSection) :=
   sorry
 
 end Etale
