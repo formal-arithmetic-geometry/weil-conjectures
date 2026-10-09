@@ -38,7 +38,16 @@ namespace Adjunction
 
 /-- Let `F ⊣ G`, and let `J` be a fully faithful functor with right adjoint `J'` such that
 `J ⋙ F` is fully faithful. Then for every `K`, composing with the unit `η_{J K}` is a bijection
-`(J T ⟶ J K) ≃ (J T ⟶ G (F (J K)))` for every `T`. -/
+`(J T ⟶ J K) ≃ (J T ⟶ G (F (J K)))` for every `T`. Under the adjunction bijection it is
+`f ↦ F f`, which is bijective as `J` and `J ⋙ F` are fully faithful:
+```
+  (J T ⟶ J K) --(- ≫ η_{J K})--> (J T ⟶ G (F (J K)))
+       |                                  |
+       F                                  ≅ adj
+       v                                  v
+  (F (J T) ⟶ F (J K)) ========== (F (J T) ⟶ F (J K))
+```
+-/
 lemma bijective_comp_unit_app_obj (adj : F ⊣ G) [J.Full] [J.Faithful] [(J ⋙ F).Full]
     [(J ⋙ F).Faithful] (T K : U) :
     Function.Bijective (fun f : J.obj T ⟶ J.obj K ↦ f ≫ adj.unit.app (J.obj K)) := by
@@ -59,7 +68,17 @@ lemma bijective_comp_unit_app_obj (adj : F ⊣ G) [J.Full] [J.Faithful] [(J ⋙ 
 
 /-- Let `F ⊣ G`, and let `J` be a fully faithful functor with right adjoint `J'` such that
 `J ⋙ F` is fully faithful. Then `J'` sends the unit `η_{J K} : J K ⟶ G (F (J K))` to an
-isomorphism. -/
+isomorphism. By Yoneda it suffices that composing with `J' η_{J K}` is a bijection on maps out
+of every `T`; through the bijections of `J ⊣ J'` this is composing with `η_{J K}`, which is
+`CategoryTheory.Adjunction.bijective_comp_unit_app_obj`:
+```
+  (T ⟶ J' (J K)) --(- ≫ J' η_{J K})--> (T ⟶ J' (G (F (J K))))
+        |                                       |
+        ≅ adjJ                                  ≅ adjJ
+        v                                       v
+  (J T ⟶ J K) -----(- ≫ η_{J K})-----> (J T ⟶ G (F (J K)))
+```
+-/
 lemma isIso_map_unit_app_obj (adj : F ⊣ G) (adjJ : J ⊣ J') [J.Full] [J.Faithful]
     [(J ⋙ F).Full] [(J ⋙ F).Faithful] (K : U) :
     IsIso (J'.map (adj.unit.app (J.obj K))) := by

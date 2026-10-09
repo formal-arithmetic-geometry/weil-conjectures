@@ -344,9 +344,11 @@ theorem nonempty_iso_rightDerivedLowerShriek_comp [Finite Λ] (f : X ⟶ Y) (g :
 Compatibility of the projection formula with the composition law: if the formula holds for
 `f` at `K` and `Lg^* M`, and for `g` at `Rf_! K` and `M`, then it holds for `f ≫ g` at `K`
 and `M`. For torsion coefficients the projection formula holds for every morphism admitting a
-compactification and all objects (`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`).
-This is the objectwise shadow of the blueprint's associativity pentagon; the pentagon itself is
-an identity between canonical transformations and is not stated, see the module docstring. -/
+compactification and all objects (`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`), so
+the two hypotheses are not used in the proof; they are kept so that the statement is the
+coherence of the blueprint, meaningful for other coefficients. This is the objectwise shadow
+of the blueprint's associativity pentagon; the pentagon itself is an identity between canonical
+transformations and is not stated, see the module docstring. -/
 theorem hasProjectionFormula_comp [Finite Λ] (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
