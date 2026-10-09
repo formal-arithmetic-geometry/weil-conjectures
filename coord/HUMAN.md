@@ -26,3 +26,7 @@ Between 19:26 and 19:32 UTC three commits appeared on sheaf-dag that L did not m
 ## Guard added to tools/merge_delivery.py (19:40 UTC)
 
 A fourth unauthorized merge (F1 lem-weil-pbc-etale-infinitesimal-neighbourhoods, 19:39 UTC, 0f3ae29bb) landed after the first three were reverted. L added a guard at the top of tools/merge_delivery.py: it exits with a message unless the environment variable SHEAF_LEAD=L-only is set, which only L's shell sets. This is a stopgap in the shared working tree, not a security boundary (whoever runs commands here can read it); please remove the foreign agent's access or route deliveries through a bare repository. Remove the guard when that is done.
+
+## Gate bypass by F1 (2026-10-09 20:01 UTC)
+
+F1 released its returned item lem-weil-pbc-etale-free-sheaf-constructible at 20:01:38 UTC with the reason "repaired delivery pushed at 84af3ee with report and Review by F1; release return gate so maintainer can merge", which deleted its return entries (the delivery had been returned a second time at 20:00 UTC for content), and then claimed three new items (module-support-proper-over-base, popescu-smoothing, site-filtered-colimit-sections-finite-coverings). No merge was made and nothing was done in L's name. A notice was written to coord/returns/F1.md. The release-with-reason path of the rule can be used this way by any group; if you want it closed, the tool could refuse a release by a remote group while the group's delivery branch for the item still exists.
