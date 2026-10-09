@@ -34,6 +34,9 @@ Theorem 24.3).
   is flat.
 - `Algebra.exists_notMem_forall_pow_smul_eq_zero`: the local criterion for regular elements of
   the fibre over a noetherian base, for all base changes.
+- `Module.Flat.localization_of_isPushout`: flatness at a point is stable under base change.
+- `Module.Flat.localization_of_forall_mem_isClosed`: localizing away from a closed set of
+  flat points gives a flat algebra.
 -/
 
 @[expose] public section
@@ -676,7 +679,7 @@ end Module
 /-- **Flatness at a point is stable under base change.** Let `S' = R' ⊗[R] S` and let `Q` be a
 prime of `S'` lying over the prime `Q ∩ S` of `S`. If `S` is flat over `R` at `Q ∩ S`, then `S'` is
 flat over `R'` at `Q`. -/
-theorem Module.Flat.localization_of_isPushout_aux {R R' S S' : Type*} [CommRing R] [CommRing R']
+theorem Module.Flat.localization_of_isPushout {R R' S S' : Type*} [CommRing R] [CommRing R']
     [CommRing S] [CommRing S'] [Algebra R R'] [Algebra R S] [Algebra R' S'] [Algebra S S']
     [Algebra R S'] [IsScalarTower R R' S'] [IsScalarTower R S S'] [Algebra.IsPushout R R' S S']
     (Q : Ideal S') [Q.IsPrime]
@@ -715,3 +718,31 @@ theorem Module.Flat.localization_of_isPushout_aux {R R' S S' : Type*} [CommRing 
     Module.Flat.isBaseChange R R' (Localization.AtPrime Q₁) (Localization M)
       (Algebra.IsPushout.symm this).out
   exact Module.Flat.trans R' (Localization M) (Localization.AtPrime Q)
+
+/-- Let `Z` be a closed subset of `Spec C` such that `C` is flat over `R` at every point of `Z`, and
+`T` a submonoid of `C` containing every element lying in no prime of `Z`. Then the localization
+`C_T` is flat over `R`. -/
+theorem Module.Flat.localization_of_forall_mem_isClosed {R C : Type*} [CommRing R] [CommRing C]
+    [Algebra R C] {Z : Set (PrimeSpectrum C)} (hZ : IsClosed Z)
+    (hflat : ∀ q ∈ Z, Module.Flat R (Localization.AtPrime q.asIdeal)) (T : Submonoid C)
+    (hT : ∀ c : C, (∀ q ∈ Z, c ∉ q.asIdeal) → c ∈ T) :
+    Module.Flat R (Localization T) := by
+  refine Module.Flat.iff_lTensor_injective'.2 fun J ↦ ?_
+  rw [Module.lTensor_injective_iff_of_isLocalizedModule T (Algebra.linearMap C (Localization T))]
+  intro y hy
+  have hI : LinearMap.ker (LinearMap.toSpanSingleton C _ y) ⊔
+      PrimeSpectrum.vanishingIdeal Z = ⊤ := by
+    by_contra h
+    obtain ⟨m, hm, hle⟩ := Ideal.exists_le_maximal _ h
+    have hmZ : (⟨m, hm.isPrime⟩ : PrimeSpectrum C) ∈ Z := by
+      rw [← hZ.closure_eq, ← PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure]
+      exact le_sup_right.trans hle
+    have := hflat _ hmZ
+    obtain ⟨t, ht, hty⟩ := (Module.lTensor_injective_iff_of_isLocalizedModule m.primeCompl
+      (Algebra.linearMap C (Localization.AtPrime m)) J.subtype).1
+      (Module.Flat.iff_lTensor_injective'.1 this J) y hy
+    exact ht (le_sup_left.trans hle (LinearMap.mem_ker.2 hty))
+  obtain ⟨t, ht, j, hj, htj⟩ := Submodule.mem_sup.1 (hI ▸ Submodule.mem_top (x := (1 : C)))
+  refine ⟨t, hT t fun q hq htq ↦ q.isPrime.ne_top ((Ideal.eq_top_iff_one _).2 ?_), ht⟩
+  rw [← htj]
+  exact add_mem htq ((PrimeSpectrum.mem_vanishingIdeal Z j).1 hj q hq)

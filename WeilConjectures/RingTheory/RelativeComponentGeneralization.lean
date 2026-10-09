@@ -9,6 +9,7 @@ public import WeilConjectures.RingTheory.RelativeComponentConstructible
 public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 public import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import WeilConjectures.RingTheory.RelativeComponentFlatApprox
 public import WeilConjectures.Mathlib.Topology.Connected.Basic
 
 /-!
@@ -46,46 +47,6 @@ flatness descending at the finitely many points needed to cover the relative com
 universe u
 
 open TensorProduct Topology IsLocalRing
-
-/-- **Flatness at a point is stable under base change.** Let `S' = R' ⊗[R] S` and let `Q` be a
-prime of `S'` lying over the prime `Q ∩ S` of `S`. If `S` is flat over `R` at `Q ∩ S`, then `S'` is
-flat over `R'` at `Q`: the localization `S'_Q` is a localization of the flat `R'`-algebra
-`R' ⊗[R] S_{Q ∩ S}`. -/
-theorem Module.Flat.localization_of_isPushout {R R' S S' : Type*} [CommRing R] [CommRing R']
-    [CommRing S] [CommRing S'] [Algebra R R'] [Algebra R S] [Algebra R' S'] [Algebra S S']
-    [Algebra R S'] [IsScalarTower R R' S'] [IsScalarTower R S S'] [Algebra.IsPushout R R' S S']
-    (Q : Ideal S') [Q.IsPrime]
-    (h : Module.Flat R (Localization.AtPrime (Q.comap (algebraMap S S')))) :
-    Module.Flat R' (Localization.AtPrime Q) := by
-  exact Module.Flat.localization_of_isPushout_aux Q h
-
-/-- Let `Z` be a closed subset of `Spec C` such that `C` is flat over `R` at every point of `Z`, and
-`T` a submonoid of `C` containing every element lying in no prime of `Z`. Then the localization
-`C_T` is flat over `R`. -/
-theorem Module.Flat.localization_of_forall_mem_isClosed {R C : Type*} [CommRing R] [CommRing C]
-    [Algebra R C] {Z : Set (PrimeSpectrum C)} (hZ : IsClosed Z)
-    (hflat : ∀ q ∈ Z, Module.Flat R (Localization.AtPrime q.asIdeal)) (T : Submonoid C)
-    (hT : ∀ c : C, (∀ q ∈ Z, c ∉ q.asIdeal) → c ∈ T) :
-    Module.Flat R (Localization T) := by
-  refine Module.Flat.iff_lTensor_injective'.2 fun J ↦ ?_
-  rw [Module.lTensor_injective_iff_of_isLocalizedModule T (Algebra.linearMap C (Localization T))]
-  intro y hy
-  have hI : LinearMap.ker (LinearMap.toSpanSingleton C _ y) ⊔
-      PrimeSpectrum.vanishingIdeal Z = ⊤ := by
-    by_contra h
-    obtain ⟨m, hm, hle⟩ := Ideal.exists_le_maximal _ h
-    have hmZ : (⟨m, hm.isPrime⟩ : PrimeSpectrum C) ∈ Z := by
-      rw [← hZ.closure_eq, ← PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure]
-      exact le_sup_right.trans hle
-    have := hflat _ hmZ
-    obtain ⟨t, ht, hty⟩ := (Module.lTensor_injective_iff_of_isLocalizedModule m.primeCompl
-      (Algebra.linearMap C (Localization.AtPrime m)) J.subtype).1
-      (Module.Flat.iff_lTensor_injective'.1 this J) y hy
-    exact ht (le_sup_left.trans hle (LinearMap.mem_ker.2 hty))
-  obtain ⟨t, ht, j, hj, htj⟩ := Submodule.mem_sup.1 (hI ▸ Submodule.mem_top (x := (1 : C)))
-  refine ⟨t, hT t fun q hq htq ↦ q.isPrime.ne_top ((Ideal.eq_top_iff_one _).2 ?_), ht⟩
-  rw [← htj]
-  exact add_mem htq ((PrimeSpectrum.mem_vanishingIdeal Z j).1 hj q hq)
 
 attribute [local instance] Algebra.TensorProduct.rightAlgebra
 
@@ -323,26 +284,6 @@ theorem mem_relativeComponent_of_le_of_isNoetherianRing {A B : Type u} [CommRing
     have := hflat _ hq₁ (by rw [hCB, hqc, hAR])
     exact Module.Flat.localization_of_isPushout (R := A) (S := B) q.asIdeal this
 
-/-- **Noetherian approximation along the relative component.** Let `B` be a flat, finitely
-presented `A`-algebra with a section `s`, and `y` a prime of `A`. Then `B` and `s` descend to a
-finite type algebra `B₁` with a section `s₁` over a noetherian subring `A₁` of `A`, such that `B₁`
-is flat over `A₁` at the points of the relative component of `s₁` lying under `y`.
-
-Each point of the relative component of `s` over `y` has a neighbourhood on which some
-noetherian model is flat (Stacks `00R6`, `Module.exists_fg_flat_localization_tensor`, and openness
-of the flat locus). This part of the fibre is quasi-compact, so finitely many models suffice. -/
-theorem exists_isPushout_forall_flat (A B : Type u) [CommRing A] [CommRing B] [Algebra A B]
-    [Module.Flat A B] [Algebra.FinitePresentation A B] (s : B →ₐ[A] A) (y : PrimeSpectrum A) :
-    ∃ (A₁ B₁ : Type u) (_ : CommRing A₁) (_ : CommRing B₁) (_ : Algebra A₁ A) (_ : Algebra A₁ B₁)
-      (_ : Algebra B₁ B) (_ : Algebra A₁ B) (_ : IsScalarTower A₁ A B)
-      (_ : IsScalarTower A₁ B₁ B),
-      IsNoetherianRing A₁ ∧ Algebra.FiniteType A₁ B₁ ∧ Algebra.IsPushout A₁ A B₁ B ∧
-      ∃ s₁ : B₁ →ₐ[A₁] A₁, (∀ b, algebraMap A₁ A (s₁ b) = s (algebraMap B₁ B b)) ∧
-        ∀ q ∈ relativeComponent s₁,
-          comap (algebraMap A₁ B₁) q = comap (algebraMap A₁ A) y →
-          Module.Flat A₁ (Localization.AtPrime q.asIdeal) := by
-  sorry
-
 /-- **Geometrically reduced fibres descend along base change.** Let `B = A ⊗[A₁] B₁` and let `y` be
 a prime of `A`. If `L ⊗[A] B` is reduced for every field `L` over `A`, then `L ⊗[A₁] B₁` is reduced
 for every field `L` over `A₁` whose kernel is `y ∩ A₁`: a field `Ω` containing both `L` and `κ(y)`
@@ -396,7 +337,7 @@ theorem stableUnderGeneralization_relativeComponent {A B : Type u} [CommRing A] 
     exact Ideal.comap_mono ((le_iff_specializes x' x).mpr hspec)
   have key := mem_relativeComponent_of_le_of_isNoetherianRing s₁ hle hx₁
     (fun L _ _ hL ↦ isReduced_tensorProduct_of_isPushout hred y L (hL.trans (by rw [hy])))
-    (fun q hq hqx ↦ hflat q hq (hqx.trans (hy x)))
+    (fun q _ hqx ↦ hflat q (hqx.trans (hy x)))
   rw [hrel]
   exact key
 
