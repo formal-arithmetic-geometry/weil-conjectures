@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-flat-unramified-formally-etale",
+ "kind": "statement",
+ "title": "A flat unramified morphism has unique infinitesimal lifts (is formally etale, hence formally smooth)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is flat [def-weil-flat-morphism] and unramified [def-weil-unramified-morphism] (locally of finite type with open immersion diagonal). Let $T\\subset T'$ be a first order thickening of affine schemes over $S$ [def-sbc-first-order-thickening], with closed immersion $i:T\\to T'$, structure morphism $T'\\to S$, and $T$ regarded as a scheme over $S$ through $T\\xrightarrow{i}T'\\to S$ [def-weil-scheme-over-base], and let $a:T\\to X$ be a morphism over $S$. Then there is exactly one morphism $a':T'\\to X$ over $S$ with $a'\\circ i=a$. In particular $f$ is formally smooth [def-sbc-formally-smooth] (the existence half), and $f$ is formally etale in the sense of Stacks, More on Morphisms, Definition 02HG.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 04FF (lemma-unramified-flat-formally-etale: 'An unramified flat morphism is formally etale'), with Definition 02HG (definition-formally-etale: exactly one dotted arrow) and Definition 02H0 (definition-formally-smooth: existence of a dotted arrow); [def-weil-unramified-morphism] is Stacks' unramified (Definition 02G4) by Morphisms, Lemma 02GE (lemma-diagonal-unramified-morphism) (1),(2)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-unramified-morphism",
+  "def-sbc-first-order-thickening",
+  "def-weil-scheme-over-base",
+  "def-sbc-formally-smooth"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat unramified morphism of schemes satisfies infinitesimal lifting property for first order thickenings (formally etale / formally smooth)",
+   "results": "AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale (Morphisms/Etale), Algebra.FormallyEtale, Algebra.FormallyEtale.iff_unramified_and_smooth, Algebra.FormallyEtale.instFormallySmooth, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth (RingTheory/Etale/Basic): ring-level only",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has formal etaleness/smoothness only for ring maps (Algebra.FormallyEtale, Algebra.FormallySmooth); no scheme-level lifting property along first order thickenings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a flat and unramified morphism of schemes has unique lifts along first order thickenings of affine schemes",
+   "results": "AlgebraicGeometry.FormallyUnramified, formallyUnramified_iff, FormallyUnramified.instHasRingHomPropertyFormallyUnramified, FormallyUnramified.formallyUnramified_appLE (Morphisms/FormallyUnramified): affine-local ring-map definitions, no lifting statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.FormallyUnramified",
+   "results": "AlgebraicGeometry.Etale.of_formallyUnramified_of_flat, AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified (Morphisms/Etale.lean), instDescendsAlong...FormallyUnramified (LocalFlatDescent)",
+   "date": "2026-10-10",
+   "verdict": "related, not a match: identifies flat + formally unramified + lfp with Mathlib's Etale (affine-locally RingHom.Etale), but says nothing about lifting along thickenings of schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'FormallySmooth\\|FormallyEtale\\|thickening\\|Thickening' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Morphisms/Smooth.lean:250-363 (stalk-level (f.stalkMap x).hom.FormallySmooth, smoothLocus), FormallyUnramified.lean mentions thickenings only in docs; no AlgebraicGeometry.FormallyEtale / FormallySmooth class for schemes and no lifting lemma",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "FormallyEtale (project ~/weil-conjectures-slopmaster2)",
+   "results": "Algebra.FormallyEtale, RingHom.FormallyEtale, RingHom.FormallyEtale.comp (RingTheory/Etale/Basic), RingHom.FormallyEtale.of_comp (RingTheory/RingHom/Unramified), Algebra.FormallyEtale.prod (proetale package); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "no scheme-level declaration found (not proof of absence: index unavailable)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

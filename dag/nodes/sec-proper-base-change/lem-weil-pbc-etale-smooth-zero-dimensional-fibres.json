@@ -14,9 +14,70 @@
   "def-pc-base-change",
   "def-kun-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$f$ is smooth.* By [def-weil-etale-morphism] the morphism $f$ is locally of finite presentation, flat and unramified. Since $f$ is flat and unramified, [lem-weil-pbc-flat-unramified-formally-etale] shows that for every first order thickening $T\\subset T'$ of affine schemes over $S$ and every $S$-morphism $T\\to X$ there is a (unique) $S$-morphism $T'\\to X$ extending it; in particular $f$ is formally smooth [def-sbc-formally-smooth]. Being locally of finite presentation and formally smooth, $f$ is smooth by the definition [def-sbc-smooth-morphisms].",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "def-sbc-formally-smooth",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02HM (lemma-etale-formally-etale), proof of (1)=>(2): 'An etale morphism is locally of finite presentation, flat and unramified ... Hence f is locally of finite presentation and formally etale, see Lemma 04FF'; a formally etale morphism is formally smooth by comparing Definitions 02HG and 02H0 (exactly one dotted arrow vs. at least one)"
+   }
+  },
+  {
+   "text": "*The point is isolated in its fibre.* Let $x\\in X$, $s=f(x)$, and let $x'\\in X_s$ be the point of the fibre $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-base-change] corresponding to $x$. Since $f$ is etale, [lem-weil-pbc-etale-fibre-discrete-separable-points] says that the underlying space of $X_s$ is discrete; in particular $\\{x'\\}$ is an open subset of $X_s$ (and the open subscheme on it is $\\operatorname{Spec}\\kappa(x')$, the spectrum of a field).",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02GL (lemma-etale-over-field), part (2): the fibre X_s is a disjoint union of spectra of finite separable field extensions of kappa(s)"
+   }
+  },
+  {
+   "text": "*The dimension at $x'$ is $0$.* By [def-kun-dimension], $\\dim_{x'}X_s=\\min\\{\\dim U: x'\\in U\\subseteq X_s\\text{ open}\\}$. Every open $U\\ni x'$ is nonempty, so the closure of $\\{x'\\}$ in $U$ is a nonempty irreducible closed subset and gives a chain of length $0$; hence $\\dim U\\ge0$. For $U=\\{x'\\}$, open by the previous step, the only nonempty irreducible closed subset of the one-point space $U$ is $U$ itself, so every strict chain has length $0$ and $\\dim U=0$. Therefore $\\dim_{x'}X_s=0$.",
+   "uses": [
+    "def-kun-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, remark after Definition 02GI (line 8079: 'A morphism is etale if and only if it is smooth of relative dimension 0'), the dimension computation written out from the definition of dim_x"
+   }
+  },
+  {
+   "text": "*Conclusion.* By the first step $f$ is smooth, and by the second and third steps $\\dim_x\\bigl(X_{f(x)}\\bigr)=0$ for every $x\\in X$; this is exactly the statement that $f$ is smooth of relative dimension $0$ in the sense of [def-sbc-smooth-morphisms].",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, remark after Definition 02GI (line 8079); Definition 02G2 (definition-smooth-relative-dimension)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "def-sbc-formally-smooth",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-pc-base-change",
+  "def-kun-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemmas 02HM and 04FF with Definitions 02HG, 02H0 (smoothness); Morphisms (literature/stacks-project/morphisms.tex), Lemma 02GL (2) and the remark after Definition 02GI (relative dimension 0)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +109,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,7 +133,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement: an etale morphism (def-weil-etale-morphism) is smooth of relative dimension 0 (remark after 02GI, 02GK, 02GL); self-contained; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Four steps, two new unsplit nodes: lem-weil-pbc-flat-unramified-formally-etale (04FF, lemma-unramified-flat-formally-etale, tag verified) gives formal smoothness of a flat unramified morphism, so an etale morphism (def-weil-etale-morphism: lfp + flat + unramified) is smooth in the sense of def-sbc-smooth-morphisms (lfp + formally smooth); lem-weil-pbc-etale-fibre-discrete-separable-points (02GL(2), tag verified) gives discrete fibres, hence dim_x X_s = 0 directly from def-kun-dimension. Route via 04FF instead of 02GK/02H6 accepted: it stays with the DAG's definitions. Together with lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension this reconciles the two definitions of etale in the DAG (noted for stage 3)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "worker": "stage1",
+  "summary": "Statement kept (correct against the remark after Stacks 02GI). Argued from def-weil-etale-morphism (locally of finite presentation + flat + unramified with open-immersion diagonal), not from the second notion of etale in def-sbc-smooth-morphisms ('smooth of relative dimension zero'), which is what the statement proves. Smoothness is taken in the DAG's sense (lfp + formally smooth), so the route is Stacks More on Morphisms 02HM/04FF (flat + unramified => formally etale => formally smooth) rather than 02GK + 02H6, which would need the affine-local Stacks notions of etale/smooth (01V5) and the 02H6 identification as extra nodes; the fibre part uses Morphisms 02GL(2) (fibres discrete, points are spectra of finite separable extensions) and an elementary computation of dim_x from def-kun-dimension. Tag check: 02GK = lemma-etale-smooth-unramified, 02GL = lemma-etale-over-field, 02GM = lemma-etale-flat-etale-fibres (the converse criterion, not 'etale implies smooth'), 02G8 = lemma-unramified-etale-fibres, 02GF = lemma-unramified-at-point, 02G1 = lemma-smooth-omega-finite-locally-free, 02G4 = definition-unramified, 02GE = lemma-diagonal-unramified-morphism, 04FF = more-morphisms-lemma-unramified-flat-formally-etale, 02HM = more-morphisms-lemma-etale-formally-etale. stmt_deps unchanged. New nodes: lem-weil-pbc-flat-unramified-formally-etale (04FF) and lem-weil-pbc-etale-fibre-discrete-separable-points (02GL(2)), both unsplit, no Mathlib match."
  }
 }

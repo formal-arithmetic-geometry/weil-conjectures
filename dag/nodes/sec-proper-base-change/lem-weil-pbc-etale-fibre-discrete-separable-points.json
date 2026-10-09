@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+ "kind": "statement",
+ "title": "The fibres of an etale morphism are disjoint unions of spectra of finite separable field extensions",
+ "statement": "Let $f:X\\to S$ be an etale morphism of schemes [def-weil-etale-morphism], let $s\\in S$ with residue field $\\kappa(s)$ [def-weil-residue-field], and let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the fibre [def-pc-base-change]. Then $X_s$ is a disjoint union of spectra of finite separable field extensions of $\\kappa(s)$: the underlying topological space of $X_s$ is discrete (every point of $X_s$ is open and closed in $X_s$), and for every point $y\\in X_s$ the open subscheme $\\{y\\}$ of $X_s$ is isomorphic over $\\kappa(s)$ to $\\operatorname{Spec}\\kappa(y)$ [def-weil-affine-spectrum], where the residue field $\\kappa(y)$ is a finite field extension of $\\kappa(s)$ every element of which is a root of a separable polynomial over $\\kappa(s)$ [def-pc-separable-polynomial].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 02GL (lemma-etale-over-field), part (2), line 8175; its proof: part (1) via Algebra, Lemma 00U3 (algebra-lemma-etale-over-field) and Morphisms, Lemma 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre); the fibre is etale over kappa(s) by Morphisms, Lemma 02GO (lemma-base-change-etale)"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-pc-base-change",
+  "def-weil-affine-spectrum",
+  "def-pc-separable-polynomial"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fibre of an etale morphism of schemes over a point is discrete, disjoint union of spectra of finite separable field extensions",
+   "results": "AlgebraicGeometry.Scheme.Hom.fiber, fiberOverSpecResidueField, fiberToSpecResidueField_apply, instIsPreimmersionFiberι, IsFinite.finite_preimage_singleton (Mathlib.AlgebraicGeometry.Fiber), AlgebraicGeometry.IsEtale",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every point of the fibre of an etale morphism of schemes is open in the fibre; the fibre is a discrete topological space",
+   "results": "Algebra.isOpen_etaleLocus, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Hom.discrete_fiber [IsFinite f] : DiscreteTopology (f.fiber y) (Mathlib.AlgebraicGeometry.Fiber), IsEtale.of_comp",
+   "date": "2026-10-10",
+   "verdict": "no match: discrete fibres only for finite morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.Scheme.Hom.fiber",
+   "results": "AlgebraicGeometry.Scheme.instEtaleFiberToSpecResidueField [Etale f] : Etale (f.fiberToSpecResidueField x) (Mathlib.AlgebraicGeometry.Sites.EtalePoint:108)",
+   "date": "2026-10-10",
+   "verdict": "piece only: the fibre is etale over Spec kappa(s); no discreteness or field decomposition"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.LocallyQuasiFinite",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no instance Etale -> LocallyQuasiFinite in this Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'LocallyQuasiFinite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | grep -i 'instance\\|etale'; grep -n 'discrete\\|Discrete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Fiber.lean; grep -n 'iff_exists_algEquiv_prod' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale/Field.lean",
+   "results": "QuasiFinite.lean:163 Scheme.Hom.isDiscrete_preimage_singleton [LocallyQuasiFinite f] (discrete fibres), :158 IsLocallyArtinian (f.fiber y); instances LocallyQuasiFinite only from IsFinite, IsImmersion (:90, :97); RingTheory/Unramified/LocalStructure.lean:332 ring-level instance [EssFiniteType R S] [FormallyUnramified R S] : QuasiFinite R S; RingTheory/Etale/Field.lean:271 Algebra.Etale.iff_exists_algEquiv_prod (etale algebra over a field = finite product of finite separable extensions)",
+   "date": "2026-10-10",
+   "verdict": "no match (pieces only): the statement needs Etale -> LocallyQuasiFinite (not in Mathlib) plus the field description on affine opens"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
