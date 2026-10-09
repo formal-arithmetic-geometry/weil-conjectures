@@ -21,46 +21,76 @@
  ],
  "proof": [
   {
-   "text": "*Step 1: the approximation.* A quasi-compact quasi-separated scheme is the\ninverse limit $U=\\varprojlim_\\lambda U_\\lambda$ of Noetherian quasi-compact\nquasi-separated schemes with affine transition maps (absolute Noetherian\napproximation, Stacks Project, Limits of Schemes, Tag\n[01ZA](https://stacks.math.columbia.edu/tag/01ZA), Proposition 32.5.4).",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 2: the sheaf descends.* Constructibility of $C$ means that $U$ carries a\nfinite partition into locally closed constructible subschemes on each of which\n$C$ is finite locally constant; a finite locally constant sheaf with finite\nstalks is specified by finitely many etale finite-presentation objects,\nfinitely many sections and finitely many equalities expressing the\ntrivializations and the compatibility on the overlaps. By descent of\nfinite-presentation data at an inverse limit all of this datum descends: there\nare an index $\\lambda$, a finite family of etale finite-presentation objects\nof $U_\\lambda$, finitely many sections and equalities over $U_\\lambda$, and a\ncovering condition, whose pullbacks to $U$ present $C$. This gives a\nconstructible torsion sheaf $C_\\lambda$ on $U_\\lambda$ with\n$\\nu_\\lambda^*C_\\lambda=C$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 3: the embedding descends.* Applying\n[lem-weil-pbc-constructible-finite-pushforward-noetherian] to $C_\\lambda$ on\nthe Noetherian $U_\\lambda$ produces finite morphisms\n$h_{\\lambda,i}:V_{\\lambda,i}\\to U_\\lambda$ and finite abelian groups $M_i$\nwith a monomorphism\n$C_\\lambda\\hookrightarrow\\bigoplus_i(h_{\\lambda,i})_*\\underline{M_i}$. A\nfinite morphism between finitely presented schemes is finitely presented, so\nthe source and target of this morphism are finite-presentation data; the same\ndescent lemma therefore applies a second time, and after increasing $\\lambda$\nthere are finite morphisms $h_i:V_i\\to U_\\lambda$ and a morphism of sheaves\n$C_\\lambda\\to\\bigoplus_i(h_i)_*\\underline{M_i}$ over $U_\\lambda$ whose\npullback to $U$ is the embedding; since pullback is exact and reflects\nmonomorphisms, and since a monomorphism over $U_\\lambda$ already holds there,\nthe descended map is a monomorphism.",
+   "text": "*Step 1: descend the coefficient sheaf.* Choose $n\\ge1$ killing $C$ by [lem-weil-pbc-constructible-abelian-bounded-exponent]. By [lem-weil-pbc-sheaves-killed-by-n-zmod-modules] and [lem-weil-pbc-constructible-abelian-zn-module-constructible], regard $C$ as a constructible sheaf $\\widetilde C$ of $\\mathbf Z/n$-modules. The Noetherian descent statement [lem-weil-pbc-constructible-module-noetherian-descent] supplies an affine inverse-system presentation $U\\simeq\\varprojlim U_\\lambda$ with Noetherian quasi-compact quasi-separated stages and affine transition maps, an index $\\lambda$, a constructible $\\mathbf Z/n$-module sheaf $\\widetilde C_\\lambda$ on $U_\\lambda$, and an isomorphism $\\nu_\\lambda^{-1}\\widetilde C_\\lambda\\cong\\widetilde C$. Forgetting the module structure gives the required constructible torsion abelian sheaf $C_\\lambda$ and $\\nu_\\lambda^{-1}C_\\lambda\\cong C$.",
    "uses": [
-    "lem-weil-pbc-constructible-finite-pushforward-noetherian"
+    "lem-weil-pbc-constructible-abelian-bounded-exponent",
+    "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
+    "lem-weil-pbc-constructible-abelian-zn-module-constructible",
+    "lem-weil-pbc-constructible-module-noetherian-descent"
    ],
    "elementary": false
   },
   {
-   "text": "*Step 4: the pullback is a monomorphism of $C$.* Pullback along $U\\to\nU_\\lambda$ is exact, and for a finite morphism the formation of direct image\ncommutes with the affine base change $U\\to U_\\lambda$:\n$\\nu_\\lambda^*(h_i)_*\\underline{M_i}=(\\nu_\\lambda^*h_i)_*\\underline{M_i}$,\nwhich is the finite-base-change compatibility of the direct image applied to\nthe finite $h_i$. Hence the pullback of the descended monomorphism is the\nrequired $C\\hookrightarrow\\bigoplus_i(h_i)_*\\underline{M_i}$ on $U$, where\neach $h_i$ is finite and finitely presented as the pullback of a finite\nmorphism between finitely presented schemes.",
-   "uses": [],
-   "elementary": null
+   "text": "*Step 2: the finite-pushforward embedding at the Noetherian stage.* Apply [lem-weil-pbc-constructible-module-finite-pushforward-noetherian] to $\\widetilde C_\\lambda$. It gives finite morphisms $h_{\\lambda,i}:V_{\\lambda,i}\\to U_\\lambda$, finite $\\mathbf Z/n$-modules $M_i$, and a monomorphism of module sheaves $\\widetilde C_\\lambda\\hookrightarrow\\bigoplus_i(h_{\\lambda,i})_*\\underline{M_i}$. The forgetful functor is exact and preserves finite biproducts, direct images, and constant sheaves by [lem-weil-pbc-module-sheaves-colimits-forgetful], [def-weil-additive-category], [def-weil-pbc-direct-image], and [def-weil-pbc-constant-sheaf]. Thus its underlying map is a monomorphism $C_\\lambda\\hookrightarrow\\bigoplus_i(h_{\\lambda,i})_*\\underline{M_i}$ of abelian sheaves; each $M_i$ is a finite abelian group.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-additive-category",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
   },
   {
-   "text": "*Remark on the limits input.* Step 2 uses only the descent of\nfinite-presentation data at an inverse limit, and the identification\n$h_*\\underline M=\\varinjlim_i(h_i)_*\\underline M$ used in the Noetherian case\nis the section formula $\\varinjlim_i\\underline M\\bigl(W\\times_UV_i\\bigr)\n=\\underline M\\bigl(W\\times_UV\\bigr)$ over the etale finite-presentation\nobjects $W\\to U$. No separate limits statement is assumed.",
-   "uses": [],
-   "elementary": null
+   "text": "*Step 3: pull back the embedding.* Apply [lem-weil-pbc-finite-pushforward-embedding-pullback] to $\\nu_\\lambda:U\\to U_\\lambda$ and the monomorphism of Step 2. The base changes $h_i:V_i=V_{\\lambda,i}\\times_{U_\\lambda}U\\to U$ remain finite and locally of finite presentation, finite direct image commutes with this base change, and inverse image is exact. We therefore obtain a monomorphism $C\\cong\\nu_\\lambda^{-1}C_\\lambda\\hookrightarrow\\bigoplus_i(h_i)_*\\underline{M_i}$, which is the asserted finite-pushforward embedding.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-embedding-pullback"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-constructible-finite-pushforward-noetherian",
-  "lem-weil-pbc-etale-finite-data-descent",
-  "lem-weil-pbc-etale-section-continuity"
+  "lem-weil-pbc-constructible-abelian-bounded-exponent",
+  "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
+  "lem-weil-pbc-constructible-abelian-zn-module-constructible",
+  "lem-weil-pbc-constructible-module-noetherian-descent",
+  "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-additive-category",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-finite-pushforward-embedding-pullback"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "document",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-constructible-finite-pushforward-approximation.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian approximation and finite pushforward embedding for a constructible torsion etale sheaf",
+   "results": "No exact theorem; only generic sheaf pullback and finite-morphism APIs.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "constructible etale sheaf finite direct sum pushforward constant monomorphism",
+   "results": "No matching etale constructibility or finite-pushforward embedding declaration.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'constructible.*pushforward|Noetherian.*constructible.*sheaf' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites",
+   "results": "No exact theorem; hits are constructible subsets and generic sheaf limits.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -86,6 +116,17 @@
   "lem-weil-pbc-etale-section-continuity"
  ],
  "proof_split_by": "labels",
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-constructible-finite-pushforward-approximation",
+  "worker": "stage1",
+  "summary": "Rebuilt on the current sheaf-dag tip using the reviewed module route: bounded exponent and the unique Z/n-module structure, Noetherian descent of the constructible module, the Noetherian module finite-pushforward embedding, exact forgetting of coefficients, and finite-pushforward base change. The stale references to deleted etale-finite-data-descent and etale-section-continuity nodes were removed; no child nodes are created.",
+  "unit_realization": "The item is a proof dependency in sk-thm-p1 and does not realize the unit statement or a unit proof step; sk-thm-p1 is unchanged.",
+  "mathlib": "Three searches recorded below found no exact theorem for constructible etale sheaf approximation or finite-pushforward embeddings."
+ },
  "lean_audit": {
   "master": {
    "state": "none",
@@ -99,5 +140,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C; spot-checked by L: L checked the seven cited nodes exist and state what the three steps use (bounded exponent, Z/n-module structure, Noetherian descent, Noetherian finite-pushforward embedding, exact forgetful functor, pullback of the embedding); the C review checks dependencies against 09Z6/09Z7. Node currently unreached from the target"
+ }
 }
