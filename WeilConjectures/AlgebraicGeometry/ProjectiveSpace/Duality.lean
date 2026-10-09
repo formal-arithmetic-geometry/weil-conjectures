@@ -176,6 +176,27 @@ lemma bijective_dualPairing_twist_of_surjective (t : Module.Dual k ((ω).H 1)) (
   exact ⟨(LinearMap.injective_iff_surjective_of_finrank_eq_finrank
     (finrank_H_zero_homObj_twist k a)).2 hs, hs⟩
 
+lemma finrank_dual_H_one_twist_neg_two :
+    Module.finrank k (Module.Dual k ((𝒪(-2)).H 1)) = 1 := by
+  obtain ⟨e⟩ := nonempty_H_one_twist_equiv_dual k (-2) le_rfl
+  have := finiteDimensional_homogeneousSubmodule k 0
+  have := finiteDimensional_H_one_twist k (-2)
+  rw [Subspace.dual_finrank_eq, e.finrank_eq, Subspace.dual_finrank_eq]
+  exact finrank_homogeneousSubmodule_zero k
+
+/-- `H¹(ℙ¹_k, Ω¹)` is nonzero, so it has a nonzero linear form. -/
+lemma exists_dual_H_one_relativeDifferentials_ne_zero :
+    ∃ t : Module.Dual k ((ω).H 1), t ≠ 0 := by
+  let ι := (nonempty_relativeDifferentials_iso_twist k).some
+  let e : (ω).H 1 ≃ₗ[k] (𝒪(-2)).H 1 := ((cohomologyFunctor k 1).mapIso ι).toLinearEquiv
+  have := finiteDimensional_H_one_twist k (-2)
+  have : FiniteDimensional k ((ω).H 1) := e.symm.finiteDimensional
+  have h : Module.finrank k (Module.Dual k ((ω).H 1)) = 1 := by
+    rw [Subspace.dual_finrank_eq, e.finrank_eq, ← Subspace.dual_finrank_eq]
+    exact finrank_dual_H_one_twist_neg_two k
+  have : Nontrivial (Module.Dual k ((ω).H 1)) := Module.nontrivial_of_finrank_eq_succ h
+  exact exists_ne 0
+
 /-- The base case `𝒪(-2) ≅ Ω¹` of the duality on the twists: the pairing is nonzero on the
 isomorphism `𝒪(-2) ≅ Ω¹`, and `H¹(ℙ¹_k, 𝒪(-2))^∨` is one-dimensional. -/
 lemma surjective_dualPairing_twist_neg_two (t : Module.Dual k ((ω).H 1)) (ht : t ≠ 0) :
@@ -190,12 +211,7 @@ lemma surjective_dualPairing_twist_neg_two (t : Module.Dual k ((ω).H 1)) (ht : 
     refine hc ?_
     have := LinearMap.congr_fun h0 (H.map ι.hom 1 c)
     rwa [dualPairing_apply, ← H.map_comp_apply, ι.hom_inv_id, H.map_id_apply] at this
-  have hd : Module.finrank k (Module.Dual k ((𝒪(-2)).H 1)) = 1 := by
-    obtain ⟨e⟩ := nonempty_H_one_twist_equiv_dual k (-2) le_rfl
-    have := finiteDimensional_homogeneousSubmodule k 0
-    have := finiteDimensional_H_one_twist k (-2)
-    rw [Subspace.dual_finrank_eq, e.finrank_eq, Subspace.dual_finrank_eq]
-    exact finrank_homogeneousSubmodule_zero k
+  have hd := finrank_dual_H_one_twist_neg_two k
   have := finiteDimensional_H_one_twist k (-2)
   have hr : LinearMap.range (dualPairingH t (𝒪(-2))) = ⊤ := by
     refine Submodule.eq_top_of_finrank_eq ?_
@@ -240,6 +256,27 @@ theorem bijective_dualPairing_twist (t : Module.Dual k ((ω).H 1)) (ht : t ≠ 0
         (H.injective_map_f_one (S := koszul (Spec (.of k)) m) (koszul_shortExact _ m))
         (bijective_dualPairing_biprod t _ _ hb hb).2
 
+/-- **Duality on the projective line for coherent modules.** For a coherent `𝒪_{ℙ¹_k}`-module
+`𝒢`, the duality pairing `Hom(𝒢, Ω¹) → H¹(ℙ¹_k, 𝒢)^∨` is bijective. Write `𝒢` as a cokernel of a
+map `ℰ₁ ⟶ ℰ₀` of finite sums of twists (`ProjectiveSpace.exists_epi_sigma_twist`, applied twice);
+both sides are left exact in `𝒢` (for `H¹(-)^∨` because `H²` vanishes on `ℙ¹_k`), and the
+pairing is bijective on `ℰ₀` and `ℰ₁` by `bijective_dualPairing_twist`. -/
+theorem bijective_dualPairing_of_isCoherent (t : Module.Dual k ((ω).H 1)) (ht : t ≠ 0)
+    (G : (ProjectiveLine (Spec (.of k))).Modules)
+    [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) G]
+    [SheafOfModules.IsFinitePresentation (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) G] :
+    Function.Bijective (dualPairing t G) := by
+  have hsig (ι : Type u) [Finite ι] (e : ι → ℕ) :=
+    bijective_dualPairing_sigma t _ fun j ↦ bijective_dualPairing_twist k t ht (-(e j : ℤ))
+  obtain ⟨ι₀, _, e₀, φ₀, hφ₀, hK₀, hK₀'⟩ := ProjectiveSpace.exists_epi_sigma_twist k G
+  obtain ⟨ι₁, _, e₁, φ₁, hφ₁, -, -⟩ := ProjectiveSpace.exists_epi_sigma_twist k (kernel φ₀)
+  have hS : (ShortComplex.mk (kernel.ι φ₀) φ₀ (kernel.condition φ₀)).ShortExact :=
+    ShortComplex.ShortExact.mk' (ShortComplex.exact_of_f_is_kernel _ (kernelIsKernel φ₀))
+      inferInstance hφ₀
+  have : Subsingleton ((kernel φ₀).H (1 + 1)) := subsingleton_H_of_two_le k (kernel φ₀) le_rfl
+  exact bijective_dualPairing_of_epi t φ₀ φ₁ (hsig ι₀ e₀) (hsig ι₁ e₁).1
+    (H.surjective_map_g (S := ShortComplex.mk (kernel.ι φ₀) φ₀ (kernel.condition φ₀)) hS 1)
+
 /-- **Duality on the projective line, `H¹`.** For coherent `𝒪_{ℙ¹_k}`-modules `𝒢`, there is an
 isomorphism `H¹(ℙ¹_k, 𝒢)^∨ ≅ Hom(𝒢, Ω¹_{ℙ¹_k/k})`, natural in `𝒢`. For `𝒢 = 𝒪(d)` both sides
 are computed by the Čech complex, `Ω¹_{ℙ¹_k/k} ≅ 𝒪(-2)` and the monomial pairing is perfect; for
@@ -253,8 +290,32 @@ theorem nonempty_dual_H_one_iso :
       (Scheme.Modules.isCoherent (ProjectiveLine (Spec (.of k)))).ι.op ⋙
         (SheafOfModules.homFunctor (ProjectiveLine (Spec (.of k))).sheaf).flip.obj
           (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials ⋙
-        Scheme.Modules.cohomologyFunctor k 0) :=
-  sorry
+        Scheme.Modules.cohomologyFunctor k 0) := by
+  obtain ⟨t, ht⟩ := exists_dual_H_one_relativeDifferentials_ne_zero k
+  let η : (Scheme.Modules.isCoherent (ProjectiveLine (Spec (.of k)))).ι.op ⋙
+        (SheafOfModules.homFunctor (ProjectiveLine (Spec (.of k))).sheaf).flip.obj ω ⋙
+        Scheme.Modules.cohomologyFunctor k 0 ⟶
+      (Scheme.Modules.isCoherent (ProjectiveLine (Spec (.of k)))).ι.op ⋙
+        (Scheme.Modules.cohomologyFunctor k 1).op ⋙ ModuleCat.dualFunctor k :=
+    { app G := ModuleCat.ofHom (dualPairingH t G.unop.obj)
+      naturality G G' f := by
+        ext x : 2
+        refine LinearMap.ext fun z ↦ ?_
+        change dualPairing t _ (homObjHZeroAddEquiv _ _ (H.map
+            (SheafOfModules.homObjMap (R := (ProjectiveLine (Spec (.of k))).sheaf) f.unop.hom
+              (𝟙 _)) 0 x)) z =
+          dualPairing t _ (homObjHZeroAddEquiv _ _ x) (H.map f.unop.hom 1 z)
+        rw [homObjHZeroAddEquiv_map, dualPairing_comp]
+        rfl }
+  have (G : (Scheme.Modules.isCoherent (ProjectiveLine (Spec (.of k)))).FullSubcategoryᵒᵖ) :
+      IsIso (η.app G) := by
+    have := G.unop.property.1
+    have := G.unop.property.2
+    have hb := (bijective_dualPairingH_iff t G.unop.obj).2
+      (bijective_dualPairing_of_isCoherent k t ht G.unop.obj)
+    exact (ConcreteCategory.isIso_iff_bijective _).2 hb
+  have := NatIso.isIso_of_isIso_app η
+  exact ⟨(asIso η).symm⟩
 
 /-- **Duality on the projective line, `H⁰`.** For a coherent `𝒪_{ℙ¹_k}`-module `𝒢`,
 `H⁰(ℙ¹_k, 𝒢)^∨ ≅ Ext¹(𝒢, Ω¹_{ℙ¹_k/k})`. The proof is the one of `nonempty_dual_H_one_iso`, using
