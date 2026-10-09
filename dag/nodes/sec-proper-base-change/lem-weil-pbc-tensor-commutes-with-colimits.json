@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-tensor-commutes-with-colimits",
+ "kind": "statement",
+ "title": "Tensor products commute with colimits of modules",
+ "statement": "Let $R$ be a commutative ring, $I$ a small category (for instance a preordered set) and $(M_i)_{i\\in I}$ a diagram of $R$-modules, with transition maps $M(a):M_i\\to M_j$ for $a:i\\to j$ (for a preordered set: $\\mu_{ij}:M_i\\to M_j$, $i\\le j$), having a colimit $(M,(\\mu_i:M_i\\to M)_i)$ in the category of $R$-modules [def-weil-pbc-category-colimit]. Let $N$ be an $R$-module. Then $M\\otimes_RN$ with the $R$-linear maps $\\mu_i\\otimes1:M_i\\otimes_RN\\to M\\otimes_RN$ is a colimit of the diagram $i\\mapsto M_i\\otimes_RN$ (transition maps $M(a)\\otimes1$) in the category of $R$-modules; that is, the canonical map $\\varinjlim_i(M_i\\otimes_RN)\\to(\\varinjlim_iM_i)\\otimes_RN$ induced by the $\\mu_i\\otimes1$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00DD (lemma-tensor-products-commute-with-limits, line 1934; stated for a system over a preordered set; first proof: $-\\otimes_RN$ is left adjoint to $\\operatorname{Hom}_R(N,-)$, Lemma Tag 00CV lemma-hom-from-tensor-product, hence commutes with all colimits; second, direct proof via Lemma Tag 00DA lemma-homomorphism-limit)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product with a fixed module preserves colimits of modules (tensorRight preserves colimits in ModuleCat)",
+   "results": "TensorProduct.directLimitLeft_rTensor_of (LinearAlgebra.TensorProduct.DirectLimit); IsMonoidalRightDistrib.preservesBinaryCoproducts_tensorRight (CategoryTheory.Distributive.Monoidal); ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; Module.Flat.iff_preservesFiniteLimits_tensorLeft; MonoidalCategory.Limits.preservesCoLimit_curriedTensor, preservesColimit_of_braided_and_preservesColimit_tensor_left (CategoryTheory.Monoidal.Limits.Preserves); CategoryTheory.instPreservesColimitsTensorLeft (CategoryTheory.Monoidal.Closed.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: in a monoidal closed category tensorLeft A preserves colimits (Closed/Basic.lean:137), transferred to tensorRight by the braiding; ModuleCat R is monoidal closed and braided"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "(colim M_i) ⊗_R N is the colimit of M_i ⊗_R N: tensor products commute with colimits of R-modules",
+   "results": "TensorProduct.directLimitRight, directLimitLeft, toDirectLimit, directLimitLeft_rTensor_of, directLimitLeft_tmul_of, directLimitRight_tmul_of (LinearAlgebra.TensorProduct.DirectLimit); Submodule.FG.rTensor.directLimit, Submodule.FG.lTensor.directLimit (RingTheory.TensorProduct.DirectLimitFG)",
+   "date": "2026-10-10",
+   "verdict": "match for directed systems in the Module.DirectLimit model (directLimitLeft, DirectLimit.lean:78); the arbitrary-colimit form is the categorical one recorded in mathlib_match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftAdjoint (CategoryTheory.MonoidalCategory.tensorRight _)",
+   "results": "CategoryTheory.ihom.instIsLeftAdjointTensorRightOfClosed : [BraidedCategory C] (A : C) [Closed A] : (tensorRight A).IsLeftAdjoint (Mathlib.CategoryTheory.Monoidal.Closed.Braided)",
+   "date": "2026-10-10",
+   "verdict": "match (with MonoidalClosed (ModuleCat R) and isColimitOfPreserves)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00DD\\|stacks 00CV' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'PreservesColimits (tensorLeft' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; sed -n 28,31p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/Closed/Braided.lean; sed -n 39,51p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean; sed -n 298,308p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean; sed -n 354,357p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Limits.lean; sed -n 124,126p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Preserves/Basic.lean",
+   "results": "no stacks 00DD/00CV attribute; Closed/Basic.lean:137 instance PreservesColimits (tensorLeft A) for [Closed A]; Closed/Braided.lean:29 instance (tensorRight A).IsLeftAdjoint in a braided category; ModuleCat/Monoidal/Closed.lean:39 instance MonoidalClosed (ModuleCat.{u} R); ModuleCat/Monoidal/Basic.lean:301-303 tensorObj M N = of R (M ⊗[R] N), whiskerRight f M = ofHom (f.hom.rTensor M); Adjunction/Limits.lean:357 instance [IsLeftAdjoint F] : PreservesColimitsOfSize F; Preserves/Basic.lean:124 isColimitOfPreserves",
+   "date": "2026-10-10",
+   "verdict": "match (categorical form, see mathlib_match)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ihom.instIsLeftAdjointTensorRightOfClosed, CategoryTheory.Limits.isColimitOfPreserves",
+  "file": "Mathlib/CategoryTheory/Monoidal/Closed/Braided.lean",
+  "line": 29,
+  "how": "exact, in the categorical form: for F : J ⥤ ModuleCat.{u} R (R : Type u commutative ring), a colimit cocone c with hc : IsColimit c and N : ModuleCat R, isColimitOfPreserves (tensorRight N) hc : IsColimit ((tensorRight N).mapCocone c) (Limits/Preserves/Basic.lean:124); its instance PreservesColimit F (tensorRight N) comes from (tensorRight N).IsLeftAdjoint (Closed/Braided.lean:29, braided + MonoidalClosed (ModuleCat R), ModuleCat/Monoidal/Closed.lean:39) via Adjunction/Limits.lean:357; in ModuleCat the object (tensorRight N).obj M is M ⊗[R] N and the leg μ_i ▷ N is LinearMap.rTensor N μ_i = μ_i ⊗ 1 (ModuleCat/Monoidal/Basic.lean:301-303). For directed systems the Module.DirectLimit form is TensorProduct.directLimitLeft (LinearAlgebra/TensorProduct/DirectLimit.lean:78) with directLimitLeft_tmul_of. Sources read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-directed-colimit-base-change-elementwise",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
