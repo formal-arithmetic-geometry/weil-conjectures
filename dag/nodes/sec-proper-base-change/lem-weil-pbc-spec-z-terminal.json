@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-spec-z-terminal",
+ "kind": "statement",
+ "title": "Spec Z is the final object of the category of schemes",
+ "statement": "$\\operatorname{Spec}\\mathbf Z$ is a terminal object of the category of schemes [def-pc-scheme]: for every scheme $X$ there is exactly one morphism of schemes $X\\to\\operatorname{Spec}\\mathbf Z$. In particular, for morphisms $a:Y\\to S$ and $b:Y\\to P$ of schemes the composites $Y\\to S\\to\\operatorname{Spec}\\mathbf Z$ and $Y\\to P\\to\\operatorname{Spec}\\mathbf Z$ agree, so $(a,b)$ always defines a morphism $Y\\to S\\times_{\\operatorname{Spec}\\mathbf Z}P$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Tag 01I4 (label lemma-fibre-product-affine-schemes), proof: 'by Lemma lemma-morphism-into-affine (Tag 01I1) the affine scheme Spec(Z) is the final object in the category of locally ringed spaces', hence of schemes"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec of the integers is a terminal object in the category of schemes",
+   "results": "AlgebraicGeometry.specZIsTerminal, AlgebraicGeometry.specULiftZIsTerminal, AlgebraicGeometry.instHasTerminalScheme (Mathlib.AlgebraicGeometry.Limits)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsTerminal (AlgebraicGeometry.Spec _)",
+   "results": "AlgebraicGeometry.specZIsTerminal : IsTerminal (Spec ↧ℤ); AlgebraicGeometry.specULiftZIsTerminal (Mathlib.AlgebraicGeometry.Limits)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'specZIsTerminal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Limits.lean",
+   "results": "line 50: noncomputable def specZIsTerminal : IsTerminal (Spec <| .of ℤ) (docstring: `Spec ℤ` is the terminal object in the category of schemes); line 55 specULiftZIsTerminal",
+   "date": "2026-10-09",
+   "verdict": "match: read the source, it states exactly the node"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.specZIsTerminal",
+  "file": "Mathlib/AlgebraicGeometry/Limits.lean",
+  "how": "exact: `specZIsTerminal : IsTerminal (Spec (.of ℤ))` (line 50); the 'in particular' is `IsTerminal.hom_ext`, so `pullback.lift a b (h.hom_ext _ _)` gives the morphism into the fibre product"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-symmetric-product-over-base",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

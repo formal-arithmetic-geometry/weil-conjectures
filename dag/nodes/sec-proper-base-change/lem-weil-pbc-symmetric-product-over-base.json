@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-symmetric-product-over-base",
  "kind": "statement",
  "title": "The symmetric-product morphism is a morphism over the base",
- "statement": "Let $S$ be a scheme and $n\\ge1$. Write $\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ and $\\mathbf P^n_S=\\mathbf P(\\{0,\\dots,n\\};S)$ [def-nagata-projective-space-base-change], with structure morphisms $q_1:\\mathbf P^1_S\\to S$ and $q_n:\\mathbf P^n_S\\to S$, and let $(\\mathbf P^1_S)^n=\\mathbf P^1_S\\times_S\\cdots\\times_S\\mathbf P^1_S$ be the $n$-fold fibre product over $S$ [def-pc-fibre-product], with its projection $p_n:(\\mathbf P^1_S)^n\\to S$. Then the symmetric-product morphism $\\sigma_n:(\\mathbf P^1_S)^n\\to\\mathbf P^n_S$ of [lem-weil-pbc-symmetric-product-properties], given by $((x_1:y_1),\\dots,(x_n:y_n))\\mapsto[F_0:\\cdots:F_n]$ with $\\prod_i(x_it+y_i)=\\sum_jF_jt^j$, is a morphism over $S$: $q_n\\circ\\sigma_n=p_n$.",
+ "statement": "Let $S$ be a scheme and $n\\ge1$. Write $\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ and $\\mathbf P^n_S=\\mathbf P(\\{0,\\dots,n\\};S)=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ [def-nagata-projective-space-base-change], with structure morphisms $q_1:\\mathbf P^1_S\\to S$ and $q_n=\\mathrm{pr}_1:\\mathbf P^n_S\\to S$, and let $(\\mathbf P^1_S)^n=\\mathbf P^1_S\\times_S\\cdots\\times_S\\mathbf P^1_S$ be the $n$-fold fibre product over $S$ [def-pc-fibre-product] (formed inductively, $(\\mathbf P^1_S)^1=\\mathbf P^1_S$, $p_1=q_1$, $(\\mathbf P^1_S)^{m}=(\\mathbf P^1_S)^{m-1}\\times_S\\mathbf P^1_S$, $p_m=p_{m-1}\\circ\\mathrm{pr}_1$), with its projection $p_n:(\\mathbf P^1_S)^n\\to S$. Let $\\sigma_n:(\\mathbf P^1_S)^n\\to\\mathbf P^n_S$ be the symmetric-product morphism of [lem-weil-pbc-symmetric-product-properties], given by $((x_1:y_1),\\dots,(x_n:y_n))\\mapsto[F_0:\\cdots:F_n]$ with $\\prod_i(x_it+y_i)=\\sum_jF_jt^j$, and constructed as the morphism $\\varphi_{p_n,(\\mathcal L_n,(F_0,\\dots,F_n))}$ of [def-weil-pbc-morphism-to-projective-space-by-sections] attached to the projection $p_n$, the invertible module $\\mathcal L_n=\\mathrm{pr}_1^*\\mathcal O(1)\\otimes\\cdots\\otimes\\mathrm{pr}_n^*\\mathcal O(1)$ and its generating global sections $F_0,\\dots,F_n$. Then $\\sigma_n$ is a morphism over $S$: $q_n\\circ\\sigma_n=p_n$.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Lemma 0A4F (label lemma-reduce-to-P1), proof, last paragraph (\"For every $n \\geq 1$ there is a finite surjective morphism ... Applying Lemmas 0A4C, 0A4E, 0A4D one more time\"): the $F_j$ are polynomials with integer coefficients, so the morphism is defined over $\\mathbf Z$ and base changed to $S$; the source uses $q_n\\circ\\sigma_n=p_n$ implicitly when it applies Lemma 0A4C"
@@ -10,11 +10,46 @@
  "stmt_deps": [
   "def-nagata-projective-space-base-change",
   "def-pc-fibre-product",
+  "lem-weil-pbc-symmetric-product-properties",
+  "def-weil-pbc-morphism-to-projective-space-by-sections"
+ ],
+ "proof": [
+  {
+   "text": "*The construction of $\\sigma_n$.* The node that constructs $\\sigma_n$ is [lem-weil-pbc-symmetric-product-properties]: [def-weil-pbc-symmetric-product-morphism] only gives the polynomials $F_j$ and the coordinate formula, and [lem-weil-pbc-symmetric-product-properties] shows that the $F_j$ have no common zero on $(\\mathbf P^1_S)^n$, i.e. that the sections $F_0,\\dots,F_n$ of $\\mathcal L_n$ (the $F_j$ are multihomogeneous of degree one in each pair $(x_i,y_i)$, so they are global sections of $\\mathcal L_n$, the $x_i,y_i$ being the sections $T_0,T_1$ of $\\mathcal O(1)$ pulled back by $\\mathrm{pr}_i$) generate $\\mathcal L_n$, and concludes that they give $\\sigma_n$. Following Stacks 0A4F, whose $F_j$ are 'polynomials with integer coefficients', the pair $(\\mathcal L_n,(F_j))$ defines a morphism $\\psi_n:(\\mathbf P^1_S)^n\\to\\mathbf P^n_{\\mathbf Z}$, and, as Stacks says after Definition 01NF, combined with the structure morphism $p_n$ into $S$ it gives the morphism into $\\mathbf P^n_S=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$: this is $\\sigma_n=\\varphi_{p_n,(\\mathcal L_n,(F_j))}$ [def-weil-pbc-morphism-to-projective-space-by-sections], the unique morphism with $\\mathrm{pr}_1\\circ\\sigma_n=p_n$ and $\\mathrm{pr}_2\\circ\\sigma_n=\\psi_n$.",
+   "uses": [
+    "lem-weil-pbc-symmetric-product-properties",
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4F (label lemma-reduce-to-P1), proof, last paragraph; with literature/stacks-project/constructions.tex, Section 27.13 (Tag 01ND), Lemma 27.13.1 (Tag 01NE) and the paragraph after Definition 27.13.2 (Tag 01NF)"
+   }
+  },
+  {
+   "text": "*$\\sigma_n$ is over $S$.* By [def-nagata-projective-space-base-change] the structure morphism $q_n$ of $\\mathbf P^n_S=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ is the first projection $\\mathrm{pr}_1$. Hence, by step 1 and the defining property of the morphism into a fibre product [def-pc-fibre-product], $q_n\\circ\\sigma_n=\\mathrm{pr}_1\\circ\\sigma_n=p_n$. (Equivalently, on functors of points: a $T$-point of $(\\mathbf P^1_S)^n$ lying over $t:T\\to S$ goes to the $T$-point $(t,\\psi_n\\circ-)$ of $S\\times\\mathbf P^n_{\\mathbf Z}$, which lies over the same $t$; no chart computation is needed, because the integrality of the coefficients of the $F_j$ is what lets the $\\mathbf P^n$-component be taken over $\\mathbf Z$ while the $S$-component is $p_n$ itself.)",
+   "uses": [
+    "def-nagata-projective-space-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "paragraph after Definition 27.13.2 (Tag 01NF): 'we can characterize phi_(L,(s_0,...,s_n)) as the unique S-morphism such that ...'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
   "lem-weil-pbc-symmetric-product-properties"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section 27.13 (Tag 01ND): Lemma 27.13.1 (Tag 01NE) and the paragraph after Definition 27.13.2 (Tag 01NF); applied to the morphism of literature/stacks-project/etale-cohomology.tex, Lemma 0A4F, proof, last paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +78,24 @@
    "results": "none (Mathlib has no projective space over a scheme and no symmetric-product morphism)",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism from a scheme to projective space given by a line bundle and generating global sections",
+   "results": "AffineSpace.homOverEquiv, AffineSpace.homOfVector, Proj.fromOfGlobalSections, Proj.toBasicOpenOfGlobalSections",
+   "date": "2026-10-09",
+   "verdict": "no match (no projective space over a scheme in Mathlib)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'symmetric\\|SymmetricProduct\\|elementarySymmetric\\|esymm' ~/weil-conjectures-slopmaster2/WeilConjectures/AlgebraicGeometry/ (source repository)",
+   "results": "no symmetric-product morphism: hits only in ProjectiveSpace.lean:65 (symmetric algebra), MonomialCech.lean:571, LinearProjection.lean:402, Modules/*, AbelianVariety/* (symmetric line bundles), Cohomology/Serre.lean:54 (symmetric power)",
+   "date": "2026-10-09",
+   "verdict": "no Lean for sigma_n in the source repository"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +115,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-symmetric-product-over-base",
+  "worker": "stage1",
+  "summary": "Read Stacks 0A4F (last paragraph) and Constructions 27.13 (01NE, 01NF), the nodes lem-weil-pbc-symmetric-product-properties, def-weil-pbc-symmetric-product-morphism and def-nagata-projective-space-base-change. The construction of sigma_n used is the one of lem-weil-pbc-symmetric-product-properties (the def node only gives the formula); since def-nagata-projective-space-base-change defines P^n_S = S x_{Spec Z} P^n_Z with no chart interface, sigma_n is made precise as the Stacks 01NF morphism phi_{p_n,(L_n,(F_j))}: the pairing of p_n with the morphism psi_n to P^n_Z given by the integer polynomials F_j. The statement now says so. Proof in two steps: the construction, then q_n o sigma_n = pr_1 o sigma_n = p_n by the fibre-product property. New nodes: def-weil-pbc-morphism-to-projective-space-by-sections (Stacks 01NF paragraph, unsplit), lem-weil-pbc-projective-space-functor-of-points (Stacks 01NE, unsplit), lem-weil-pbc-spec-z-terminal (Mathlib leaf specZIsTerminal)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "sigma_n fixed as the morphism by generating sections paired with p_n (Stacks 01NF); the properties node, being split in parallel, must construct sigma_n the same way (to be checked at its review); 3 new nodes, one Mathlib leaf"
+ }
 }

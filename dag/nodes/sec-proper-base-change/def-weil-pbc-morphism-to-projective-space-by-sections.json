@@ -1,0 +1,68 @@
+{
+ "id": "def-weil-pbc-morphism-to-projective-space-by-sections",
+ "kind": "definition",
+ "title": "The morphism into projective space over S given by an invertible module and generating sections",
+ "statement": "Let $S$ be a scheme, $n\\ge0$, and $\\mathbf P^n_S=\\mathbf P(\\{0,\\dots,n\\};S)=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ the projective space over $S$ of [def-nagata-projective-space-base-change], with structure morphism $q_n=\\mathrm{pr}_1:\\mathbf P^n_S\\to S$ and second projection $\\mathrm{pr}_2:\\mathbf P^n_S\\to\\mathbf P^n_{\\mathbf Z}$. Let $Y$ be a scheme with a morphism $g:Y\\to S$, $\\mathcal L$ an invertible $\\mathcal O_Y$-module [def-sc-invertible-module] and $s_0,\\dots,s_n\\in\\Gamma(Y,\\mathcal L)$ global sections generating $\\mathcal L$. Let $\\psi_{(\\mathcal L,(s_i))}:Y\\to\\mathbf P^n_{\\mathbf Z}$ be the morphism attached to $(\\mathcal L,(s_i))$ by [lem-weil-pbc-projective-space-functor-of-points]. Define\n\n$$\n\\varphi_{g,(\\mathcal L,(s_0,\\dots,s_n))}:Y\\longrightarrow\\mathbf P^n_S\n$$\n\nas the unique morphism with $\\mathrm{pr}_1\\circ\\varphi=g$ and $\\mathrm{pr}_2\\circ\\varphi=\\psi_{(\\mathcal L,(s_i))}$, given by the universal property of the fibre product [def-pc-fibre-product] (the two composites $Y\\to\\operatorname{Spec}\\mathbf Z$ agree because $\\operatorname{Spec}\\mathbf Z$ is terminal [lem-weil-pbc-spec-z-terminal]). Thus $\\varphi$ is a morphism over $S$ (with $Y$ viewed over $S$ by $g$), \"given on coordinates by $(s_0:\\dots:s_n)$\".",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Section 27.13 (Tag 01ND), the paragraph after Definition 27.13.2 (Tag 01NF): 'Given a scheme Y over S and a pair (L,(s_0,...,s_n)) as in Lemma 27.13.1 the induced morphism to P^n_S is denoted phi_(L,(s_0,...,s_n)) ... the pair defines a morphism into P^n_Z and we already have the structure morphism into S so combined we get a morphism into P^n_S = P^n_Z x S'"
+ },
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-weil-pbc-spec-z-terminal"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism from a scheme to projective space given by a line bundle and generating global sections",
+   "results": "AffineSpace.homOverEquiv, AffineSpace.homOfVector (Mathlib.AlgebraicGeometry.AffineSpace; affine space only), Proj.fromOfGlobalSections, Proj.toBasicOpenOfGlobalSections (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic)",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no projective space over a scheme; fromOfGlobalSections maps to Proj of a graded ring, from global sections of O_X only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism into a fibre product S ×_{Spec Z} Proj Z[T_0..T_n] over S given by a structure morphism and a morphism to Proj, composite with first projection",
+   "results": "Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left/right(_assoc), Proj.pullbackAwayιIso, Proj.fromOfGlobalSections (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ProjectiveSpace\\|projective space' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -n 'fromOfGlobalSections' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+   "results": "no ProjectiveSpace in Mathlib; Proj.fromOfGlobalSections (Basic.lean:443) only. The pairing itself is CategoryTheory.Limits.pullback.lift with pullback.lift_fst (Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean:128, 175)",
+   "date": "2026-10-09",
+   "verdict": "no match for the definition; the pairing step is pullback.lift"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'homOfSections' ~/weil-conjectures-slopmaster2/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/OfSections.lean (source repository, not Mathlib)",
+   "results": "AlgebraicGeometry.ProjectiveSpace.homOfSections (OfSections.lean:92) = pullback.lift g (Proj.fromOfGlobalSections _ (evalSections s) _) _, with homOfSections_over (line 99, by pullback.lift_fst) and homOfSections_toProjInt (line 105); sorry-free on slopmaster2. It is this definition for the trivial module L = O_Y only",
+   "date": "2026-10-09",
+   "verdict": "not a match for the node (trivial line bundle only); recorded for the lead as the special case L = O_Y"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-symmetric-product-over-base",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}
