@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-abelian-exact-epi-cokernel",
+ "kind": "statement",
+ "title": "Cokernels and epimorphisms read off from exactness in an abelian category",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]; exactness is that of [def-weil-pbc-exact-sequence]. (a) If $X\\xrightarrow{h}Y\\xrightarrow{e}Z$ is a complex exact at $Y$ and $e$ is an epimorphism, then $e$ is a cokernel of $h$: every $\\varphi:Y\\to W$ with $\\varphi\\circ h=0$ factors as $\\varphi=\\psi\\circ e$ for a unique $\\psi:Z\\to W$. (b) If $X\\xrightarrow{e}Y\\xrightarrow{k}Z$ is a complex exact at $Y$ and $k=0$, then $e$ is an epimorphism. (c) If $m:X\\to Y$ is a monomorphism and $\\pi:Y\\to Z$ is a cokernel of $m$, then $0\\to X\\xrightarrow{m}Y\\xrightarrow{\\pi}Z\\to0$ is a short exact sequence. (d) $\\mathcal A$ has pushouts: for morphisms $p:A\\to B$, $q:A\\to I$ there are an object $Q$ and $j:B\\to Q$, $k:I\\to Q$ with $j\\circ p=k\\circ q$, such that any $j':B\\to W$, $k':I\\to W$ with $j'\\circ p=k'\\circ q$ factor uniquely through $(j,k)$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Definition 0109 (definition-abelian-category), Lemma 010D (lemma-colimit-abelian-category: finite colimits, in particular pushouts, exist), Definition 010E (exact sequences), and the notation y/x = Coker(x -> y) after Lemma 010C; the facts used in the proof of Lemma 010T (lemma-efface-implies-universal), where C = B/u(A) gives a short exact sequence and F^{n+1}(A) = Coker(F^n(B) -> F^n(C)) is read off from the long exact sequence"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "in an abelian category, if X → Y → Z is exact and Y → Z is an epimorphism then Y → Z is a cokernel of X → Y",
+   "results": "CategoryTheory.ShortComplex.exact_and_epi_g_iff_g_is_cokernel, ShortComplex.Exact.gIsCokernel (Mathlib.Algebra.Homology.ShortComplex.Exact), ShortComplex.ShortExact.gIsCokernel (…ShortComplex.ShortExact), Limits.isCokernelEpiComp, Abelian.epiIsCokernelOfKernel (Mathlib.CategoryTheory.Abelian.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match for (a): ShortComplex.Exact.gIsCokernel (Balanced C, S.Exact, Epi S.g ⊢ IsColimit (CokernelCofork.ofπ S.g _)); an abelian category is balanced"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "short complex exact with second map zero implies first map is an epimorphism; cokernel of a monomorphism gives a short exact sequence",
+   "results": "ShortComplex.ShortExact.mk', ShortComplex.exact_iff_mono_cokernel_desc, ShortComplex.Exact.epi_f, ShortComplex.exact_iff_epi, Exact.epi_f_iff (Mathlib.Algebra.Homology.ShortComplex.Exact / ShortExact)",
+   "date": "2026-10-10",
+   "verdict": "match for (b): ShortComplex.Exact.epi_f (hS : S.Exact) (hg : S.g = 0) : Epi S.f; for (c) ShortExact.mk' (Exact, Mono f, Epi g ⊢ ShortExact)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.cokernelSequence_exact",
+   "results": "CategoryTheory.ShortComplex.cokernelSequence_exact {C} [Abelian C] (f : X ⟶ Y) : (cokernelSequence f).Exact (Mathlib.Algebra.Homology.ShortComplex.Exact)",
+   "date": "2026-10-10",
+   "verdict": "match for (c), with ShortExact.mk', Mono m and the instance Epi (cokernelSequence f).g"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def gIsCokernel\\|lemma Exact.epi_f\\|cokernelSequence_exact\\|def cokernelSequence' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/Exact.lean; grep -n 'ShortExact.mk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean; grep -n 'hasPushouts' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Basic.lean",
+   "results": "Exact.lean:764 noncomputable def gIsCokernel (hS : S.Exact) [Epi S.g]; Exact.lean:462 lemma Exact.epi_f (hS : S.Exact) (hg : S.g = 0) : Epi S.f; Exact.lean:866 def cokernelSequence, :872 instance Epi (cokernelSequence f).g, :882 cokernelSequence_exact; ShortExact.lean:42 ShortExact.mk'; Abelian/Basic.lean:568 instance hasPushouts : HasPushouts C",
+   "date": "2026-10-10",
+   "verdict": "match, one Mathlib declaration per clause (see mathlib_match)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ShortComplex.Exact.gIsCokernel",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+  "how": "one Mathlib declaration per clause, exactness of def-weil-pbc-exact-sequence being ShortComplex.Exact by ShortComplex.exact_iff_image_eq_kernel (Mathlib/CategoryTheory/Abelian/Exact.lean): (a) ShortComplex.Exact.gIsCokernel (Exact.lean:764; an abelian category is Balanced); (b) ShortComplex.Exact.epi_f (Exact.lean:462); (c) ShortComplex.cokernelSequence_exact (Exact.lean:882) with ShortComplex.ShortExact.mk' (ShortExact.lean:42), Mono m and the instance Epi (cokernelSequence m).g (Exact.lean:872), any other cokernel being isomorphic to Mathlib's chosen one; (d) CategoryTheory.Abelian.hasPushouts (Mathlib/CategoryTheory/Abelian/Basic.lean:568)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-effaceable-delta-functor-universal",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause: ShortComplex.Exact.gIsCokernel (Exact.lean:764), Exact.epi_f (:462), cokernelSequence_exact (:882) with ShortExact.mk′, Abelian.hasPushouts (Basic.lean:568); checked."
+ }
+}
