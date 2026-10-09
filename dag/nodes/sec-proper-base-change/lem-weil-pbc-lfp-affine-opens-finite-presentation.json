@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+ "kind": "statement",
+ "title": "A morphism locally of finite presentation is of finite presentation on every pair of affine opens",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] which is locally of finite presentation [def-sbc-locally-finite-presentation]. Then for all affine opens $U\\subseteq X$ and $V\\subseteq Y$ with $f(U)\\subseteq V$, the ring map $\\mathcal O_Y(V)\\to\\mathcal O_X(U)$ induced by $f$ is of finite presentation: $\\mathcal O_X(U)\\cong\\mathcal O_Y(V)[x_1,\\dots,x_n]/(g_1,\\dots,g_m)$ as $\\mathcal O_Y(V)$-algebras for some $n,m\\ge0$ (Stacks Morphisms, Lemma 01TQ, (1)$\\Rightarrow$(2)).",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma Tag 01TQ (lemma-locally-finite-presentation-characterize, line 4096), (1) implies (2)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "locally of finite presentation morphism of schemes, for affine opens U ⊆ f⁻¹ V the ring map Γ(Y,V) → Γ(X,U) is of finite presentation",
+   "results": "AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, LocallyOfFinitePresentation.finitePresentation_of_affine_subset (deprecated alias), LocallyOfFinitePresentation.mk, locallyOfFinitePresentation_iff, LocallyOfFinitePresentation.finitePresentation_appLE, instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation (Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "match: LocallyOfFinitePresentation.finitePresentation_appLE"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, RingHom.FinitePresentation, AlgebraicGeometry.IsAffineOpen",
+   "results": "LocallyOfFinitePresentation.finitePresentation_appLE, LocallyOfFinitePresentation.mk, Scheme.Hom.finitePresentation_appLE, locallyOfFinitePresentation_iff (Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally of finite presentation morphism: ring map between affine opens U ⊆ f⁻¹(V) is finitely presented",
+   "results": "LocallyOfFinitePresentation.finitePresentation_appLE, Scheme.Hom.finitePresentation_appLE, LocallyOfFinitePresentation.finitePresentation_of_affine_subset, locallyOfFinitePresentation_iff, instHasRingHomProperty... (Morphisms.FinitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 45,56p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; grep -n 'lemma iff_exists_appLE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean",
+   "results": "FinitePresentation.lean:45-48 `class LocallyOfFinitePresentation (f : X ⟶ Y) : Prop where finitePresentation_appLE (f) : ∀ {U : Y.Opens} (_ : IsAffineOpen U) {V : X.Opens} (_ : IsAffineOpen V) (e : V ≤ f ⁻¹ᵁ U), (f.appLE U V e).hom.FinitePresentation`; :53 deprecated alias finitePresentation_of_affine_subset; RingHomProperties.lean:651 `iff_exists_appLE`",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+  "how": "exact, given the match of def-sbc-locally-finite-presentation (its pointwise definition is `LocallyOfFinitePresentation f` via HasRingHomProperty.iff_exists_appLE, RingHomProperties.lean:651): the class field `finitePresentation_appLE` (FinitePresentation.lean:46-48) says that for affine opens V ⊆ Y, U ⊆ X with U ≤ f⁻¹ᵁ V the map f.appLE V U e : Γ(Y,V) → Γ(X,U) is of finite presentation. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-descend-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: LocallyOfFinitePresentation.finitePresentation_appLE (Morphisms/FinitePresentation.lean:46-48); Morphisms 01TQ."
+ }
+}

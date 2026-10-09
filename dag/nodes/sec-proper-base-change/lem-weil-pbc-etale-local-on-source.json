@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-etale-local-on-source",
+ "kind": "statement",
+ "title": "Etaleness is local on the source",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and let $(U_b)_{b\\in J}$ be a family of open subschemes of $X$ with $X=\\bigcup_{b\\in J}U_b$, with inclusions $j_b:U_b\\to X$. Then $f$ is etale [def-weil-etale-morphism] if and only if $f\\circ j_b:U_b\\to Y$ is etale for every $b\\in J$ (Stacks Morphisms, Lemma 02GJ, (1)$\\Leftrightarrow$(3) with the covering $Y=Y$ of the target).",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma Tag 02GJ (lemma-etale-characterize, line 8090), equivalence of (1) and (3) for the trivial covering of the target, and its 'Moreover' clause"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale morphism of schemes is local on the source: open cover with each restriction etale implies etale",
+   "results": "RingHom.Etale.propertyIsLocal, RingHom.Etale.ofLocalizationSpan (Mathlib.RingTheory.RingHom.Etale); AlgebraicGeometry.IsEtale, Scheme.Etale (Morphisms.Etale); AlgebraicGeometry.IsZariskiLocalAtSource.of_openCover, AlgebraicGeometry.IsLocalAtSource.iff_of_iSup_eq_top (Mathlib.AlgebraicGeometry.Morphisms.Basic); IsLocalIso",
+   "date": "2026-10-10",
+   "verdict": "match: IsZariskiLocalAtSource.iff_of_iSup_eq_top with P = Etale"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsZariskiLocalAtSource.of_iSup_eq_top",
+   "results": "AlgebraicGeometry.IsZariskiLocalAtSource.of_iSup_eq_top {P} [IsZariskiLocalAtSource P] {X Y} {f : X ⟶ Y} {ι} (U : ι → X.Opens) (hU : iSup U = ⊤) (H : ∀ i, P ((U i).ι ≫ f)) : P f (Mathlib.AlgebraicGeometry.Morphisms.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "étale morphism of schemes can be checked on an open cover of the source",
+   "results": "Scheme.smallEtalePretopology, Scheme.etaleTopology, Scheme.etalePretopology, Scheme.smallEtaleTopology (Sites.Etale); IsEtale.of_comp; Algebra.isOpen_etaleLocus",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; the leansearch/loogle match is the general locality lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'HasRingHomProperty @Etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; grep -n 'instance : IsZariskiLocalAtSource P' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean; grep -n 'theorem iff_of_iSup_eq_top\\|lemma of_iSup_eq_top\\|lemma comp ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+   "results": "Morphisms/Etale.lean:56 `instance : HasRingHomProperty @Etale RingHom.Etale`; RingHomProperties.lean:382 `instance : IsZariskiLocalAtSource P` (for any P with HasRingHomProperty); Basic.lean:256 `IsZariskiLocalAtSource.comp`, :265 `of_iSup_eq_top`, :272 `iff_of_iSup_eq_top (U : ι → X.Opens) (hU : iSup U = ⊤) : P f ↔ ∀ i, P ((U i).ι ≫ f)`",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_iSup_eq_top",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+  "how": "specializes in one line: with P = @AlgebraicGeometry.Etale (the match of def-weil-etale-morphism), which is IsZariskiLocalAtSource by the instance RingHomProperties.lean:382 from `HasRingHomProperty @Etale RingHom.Etale` (Morphisms/Etale.lean:56); `iff_of_iSup_eq_top` (Basic.lean:272) with U b = the open U_b (covering: iSup U = ⊤) gives Etale f ↔ ∀ b, Etale ((U b).ι ≫ f). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-descend-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: IsZariskiLocalAtSource.iff_of_iSup_eq_top (Morphisms/Basic.lean:272) with the instance for Etale (RingHomProperties.lean:382); Morphisms 02GJ."
+ }
+}
