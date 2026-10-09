@@ -142,7 +142,7 @@ noncomputable def properPoincarePairing [IsProper a] (γ : TateOrientation Λ a 
     (K : DerivedCategoryModule Λ X) :
     ((derivedTensor _ Y).obj ((R((a)_*[ModuleCat.{u + 1} Λ])).obj K)).obj
         (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (twistedDual Λ d K))⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
-  Etale.properPoincarePairing a γ.toOrientation (leftDerivedUpperStarConstantComplexIso Λ a) K
+  Etale.properPoincarePairing a γ.dualizingComplexIso K
 
 /-- Blueprint `thm-pod-proper-poincare-duality`: Proper Poincaré duality.
 
@@ -150,10 +150,10 @@ For `a` proper, the derived Poincaré pairing of a Tate orientation read through
 `Ra_! ≅ Ra_*`, `RΓ(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ` over `Y = Spec k`, is perfect for a finite
 coefficient ring `Λ` and `K` dualizable
 (`AlgebraicGeometry.Etale.isPerfectPairing_properPoincarePairing`). -/
-theorem isPerfectPairing_properPoincarePairing [Finite Λ] [IsProper a]
+theorem isPerfectPairing_properPoincarePairing [IsProper a]
     (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X} (hKd : IsDualizable K) :
     IsPerfectPairing (γ.properPoincarePairing K) :=
-  Etale.isPerfectPairing_properPoincarePairing a Λ _ _ hKd
+  Etale.isPerfectPairing_properPoincarePairing a Λ _ hKd
 
 end TateOrientation
 

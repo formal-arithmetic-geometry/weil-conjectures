@@ -148,6 +148,7 @@ Apply `Hom(K, -)` to the supported localization triangle in the bottom row: by a
 `Hom(K, Rj_* Lj^* L)` and `Hom(K[1], Rj_* Lj^* L)` vanish, which gives existence and
 uniqueness. -/
 theorem existsUnique_comp_counit_of_isZero (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i]
+    [(R(i)_![A]).IsLeftAdjoint]
     [IsOpenImmersion j] (hij : Set.range i = (Set.range j)ᶜ)
     {K L : DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hK : IsZero ((L((j)^*[A])).obj K)) (φ : K ⟶ L) :
@@ -211,7 +212,7 @@ lemma isZero_of_isZero_leftDerivedUpperStar_of_disjoint
 complement of `Z₁ ×_X U` in `U`. Then `L(a ≫ j)^* Ri₁_! M = 0`, the range of `a ≫ j` being
 disjoint from `Z₁`. -/
 lemma isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek
-    (i₁ : Z₁ ⟶ X) [IsClosedImmersion i₁] (j : U ⟶ X)
+    (i₁ : Z₁ ⟶ X) [IsClosedImmersion i₁] [(R(i₁)_![A]).IsLeftAdjoint] (j : U ⟶ X)
     (M : DerivedCategory (Sheaf Z₁.smallEtaleTopology A)) :
     IsZero ((L(((pullback.snd i₁ j).openComplement.ι ≫ j)^*[A])).obj
       ((R(i₁)_![A]).obj M)) := by
