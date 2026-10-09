@@ -1,0 +1,52 @@
+{
+ "id": "def-weil-additive-category",
+ "kind": "definition",
+ "title": "Additive category",
+ "statement": "An *additive category* is a preadditive category $\\mathcal A$ [def-weil-preadditive-category] that has a zero object and in which every two objects $A,B$ have a direct sum (biproduct) $A\\oplus B$, i.e. an object with morphisms $i_A:A\\to A\\oplus B$, $i_B:B\\to A\\oplus B$, $p_A:A\\oplus B\\to A$, $p_B:A\\oplus B\\to B$ satisfying $p_Ai_A=\\mathrm{id}_A$, $p_Bi_B=\\mathrm{id}_B$, $p_Ai_B=0$, $p_Bi_A=0$ and $i_Ap_A+i_Bp_B=\\mathrm{id}_{A\\oplus B}$; equivalently, $\\mathcal A$ has all finite biproducts.",
+ "source": {
+  "document": "literature/balmer-schlichting-idempotent-completion.pdf",
+  "place": "Definitions 1.1-1.2, pp. 1-2 (the notion 'additive category' is used there without definition; the definition is the standard one, Stacks Definition 12.3.8)"
+ },
+ "stmt_deps": [
+  "def-weil-preadditive-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn '^class HasFiniteBiproducts' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean; grep -rln 'additive category' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Preadditive/",
+   "results": "Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean:378 `class HasFiniteBiproducts`; Mathlib has no single class 'Additive category': it is written `[Preadditive C] [HasFiniteBiproducts C]` throughout (e.g. Preadditive/CommGrp_.lean:14, Idempotents/Biproducts.lean:14 'if C is an additive category')",
+   "date": "2026-10-09",
+   "verdict": "match: [Preadditive C] [HasFiniteBiproducts C]"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -il '\"title\": \"[^\"]*additive' dag/nodes/*/*.json",
+   "results": "only def-weil-preadditive-category and unrelated nodes (additive characters, left exact additive functors); no node defines 'additive category'",
+   "date": "2026-10-09",
+   "verdict": "no existing node"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.HasFiniteBiproducts",
+  "file": "Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+  "how": "specializes in one line: an additive category is `[Preadditive C] [HasFiniteBiproducts C]` (CategoryTheory.Preadditive in Mathlib/CategoryTheory/Preadditive/Basic.lean); the empty biproduct is the zero object"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-karoubi-envelope",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
