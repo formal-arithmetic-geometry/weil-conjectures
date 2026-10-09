@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
-public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
@@ -131,6 +130,95 @@ lemma isIso_of_isIso_app_affineProEt {X : Scheme.{u}} {G₁ G₂ : Sheaf (ProEt.
   rw [NatTrans.isIso_iff_isIso_app]
   exact fun W ↦ h W.unop
 
+section Presentation
+
+variable {J : Type u} [SmallCategory J] [IsCofiltered J] {W : V.AffineProEt}
+  (pres : RelativeLimitPresentation J (AffineEtale.toAffineProEt V) W)
+
+/-- The diagram of affine étale `V`-schemes of a presentation of an object `W` of the affine
+pro-étale site of `V`. -/
+noncomputable def presentationDiagram : J ⥤ V.Etale :=
+  pres.diag ⋙ AffineEtale.Spec V
+
+instance (j : J) : IsAffine ((presentationDiagram pres).obj j).left := by
+  dsimp only [presentationDiagram, Functor.comp_obj]
+  rw [AffineEtale.Spec_obj_left]
+  infer_instance
+
+/-- The limit cone with point `W` over `presentationDiagram pres`, in the pro-étale site. -/
+noncomputable def presentationCone : Cone (presentationDiagram pres ⋙ toProEt V) :=
+  (Cone.postcompose (Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft pres.diag (AffineEtale.toAffineProEtCompToProEtIso V) ≪≫
+      (Functor.associator _ _ _).symm).hom).obj ((AffineProEt.toProEt V).mapCone pres.cone)
+
+/-- The underlying cone of schemes of `presentationCone pres` is a limit. -/
+noncomputable def isLimitPresentationCone :
+    IsLimit ((ProEt.forget V ⋙ CategoryTheory.Over.forget V).mapCone (presentationCone pres)) :=
+  AffineProEt.isLimitMapConeToSchemeOfIsLimit pres.cone pres.isLimit
+
+/-- The base change along `f` of `presentationDiagram pres`: the étale `U`-schemes
+`U ×_V Wⱼ`. -/
+noncomputable def pullbackPresentationDiagram : J ⥤ U.Etale :=
+  presentationDiagram pres ⋙ MorphismProperty.Over.pullback @Etale ⊤ f
+
+/-- The cone with point `U ×_V W` over `pullbackPresentationDiagram f pres`. -/
+noncomputable def pullbackPresentationCone :
+    Cone (pullbackPresentationDiagram f pres ⋙ toProEt U) :=
+  (Cone.postcompose ((Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft (presentationDiagram pres) (toProEtCompOverPullbackIso f).hom ≫
+    (Functor.associator _ _ _).inv)).obj
+    ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).mapCone (presentationCone pres))
+
+/-- The underlying cone of schemes of `pullbackPresentationCone f pres` is a limit: base change
+along `f` preserves limits. -/
+noncomputable def isLimitPullbackPresentationCone :
+    IsLimit ((ProEt.forget U ⋙ CategoryTheory.Over.forget U).mapCone
+      (pullbackPresentationCone f pres)) := by
+  have h₀ : IsLimit ((ProEt.forget V).mapCone (presentationCone pres)) :=
+    isLimitOfReflects (CategoryTheory.Over.forget V) (isLimitPresentationCone pres)
+  have h₁ := isLimitOfPreserves (CategoryTheory.Over.forget U)
+    (isLimitOfPreserves (CategoryTheory.Over.pullback f) h₀)
+  refine IsLimit.ofIsoLimit h₁ (Cone.ext (Iso.refl _) fun j ↦ ?_)
+  apply pullback.hom_ext
+  · simp only [pullbackPresentationCone, toProEtCompOverPullbackIso]
+    simp only [Functor.mapCone_pt, Over.forget_obj, Over.pullback_obj_left,
+      Functor.const_obj_obj, Functor.comp_obj, Functor.mapCone_π_app, ProEt.forget_map,
+      Over.forget_map, Over.pullback_map_left, limit.lift_π, PullbackCone.mk_π_app,
+      Cone.postcompose_obj_pt, Iso.refl_hom, Cone.postcompose_obj_π, NatTrans.comp_app,
+      Functor.associator_hom_app, Functor.whiskerLeft_app, NatIso.ofComponents_hom_app,
+      Functor.associator_inv_app, Category.comp_id, Functor.comp_map,
+      MorphismProperty.Over.pullback_map_left, Category.id_comp]
+    exact (pullback.lift_fst _ _ _).symm
+  · simp only [pullbackPresentationCone, toProEtCompOverPullbackIso]
+    simp only [Functor.mapCone_pt, Over.forget_obj, Over.pullback_obj_left,
+      Functor.const_obj_obj, Functor.comp_obj, Functor.mapCone_π_app, ProEt.forget_map,
+      Over.forget_map, Over.pullback_map_left, limit.lift_π, PullbackCone.mk_π_app,
+      Cone.postcompose_obj_pt, Iso.refl_hom, Cone.postcompose_obj_π, NatTrans.comp_app,
+      Functor.associator_hom_app, Functor.whiskerLeft_app, NatIso.ofComponents_hom_app,
+      Functor.associator_inv_app, Category.comp_id, Functor.comp_map,
+      MorphismProperty.Over.pullback_map_left, Category.id_comp]
+    exact (pullback.lift_snd _ _ _).symm
+
+variable [QuasiCompact f] [QuasiSeparated f]
+
+instance (j : J) : CompactSpace ((pullbackPresentationDiagram f pres).obj j).left := by
+  have : CompactSpace ((𝟭 Scheme).obj ((presentationDiagram pres).obj j).left) :=
+    inferInstanceAs (CompactSpace ((presentationDiagram pres).obj j).left)
+  exact QuasiCompact.compactSpace_of_compactSpace
+    (pullback.fst ((presentationDiagram pres).obj j).hom f)
+
+instance (j : J) : QuasiSeparatedSpace ((pullbackPresentationDiagram f pres).obj j).left := by
+  have : QuasiSeparatedSpace ((𝟭 Scheme).obj ((presentationDiagram pres).obj j).left) :=
+    inferInstanceAs (QuasiSeparatedSpace ((presentationDiagram pres).obj j).left)
+  exact quasiSeparatedSpace_of_quasiSeparated
+    (pullback.fst ((presentationDiagram pres).obj j).hom f)
+
+instance {i j : J} (g : i ⟶ j) : IsAffineHom ((pullbackPresentationDiagram f pres).map g).left :=
+  MorphismProperty.pullbackLift_fst_snd (P := @IsAffineHom) f
+    (Over.w ((presentationDiagram pres).map g).hom).symm inferInstance
+
+end Presentation
+
 /-- The base change morphism `ν_V^* f_* ⟶ f_* ν_U^*` is an isomorphism for `f` quasi-compact
 and quasi-separated. -/
 theorem isIso_lowerStarComparisonUpperStarBaseChange [QuasiCompact f] [QuasiSeparated f] :
@@ -139,73 +227,18 @@ theorem isIso_lowerStarComparisonUpperStarBaseChange [QuasiCompact f] [QuasiSepa
   intro F
   refine isIso_of_isIso_app_affineProEt A _ fun W ↦ ?_
   obtain ⟨J, _, _, ⟨pres⟩⟩ := AffineProEt.exists_relativeLimitPresentation _ W
-  let K : J ⥤ V.Etale := pres.diag ⋙ AffineEtale.Spec V
-  have hKaff (j : J) : IsAffine (K.obj j).left := by
-    dsimp only [K, Functor.comp_obj]
-    rw [AffineEtale.Spec_obj_left]
-    infer_instance
-  have hKmap {i j : J} (g : i ⟶ j) : IsAffineHom (K.map g).left := inferInstance
-  let e : (pres.diag ⋙ AffineEtale.toAffineProEt V) ⋙ AffineProEt.toProEt V ≅
-      K ⋙ toProEt V :=
-    Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft pres.diag (AffineEtale.toAffineProEtCompToProEtIso V) ≪≫
-      (Functor.associator _ _ _).symm
-  let c₁ : Cone (K ⋙ toProEt V) :=
-    (Cone.postcompose e.hom).obj ((AffineProEt.toProEt V).mapCone pres.cone)
-  have hc₁ : IsLimit ((ProEt.forget V ⋙ CategoryTheory.Over.forget V).mapCone c₁) :=
-    AffineProEt.isLimitMapConeToSchemeOfIsLimit pres.cone pres.isLimit
-  let K₂ : J ⥤ U.Etale := K ⋙ MorphismProperty.Over.pullback @Etale ⊤ f
-  let c₂ : Cone (K₂ ⋙ toProEt U) :=
-    (Cone.postcompose ((Functor.associator _ _ _).hom ≫
-      Functor.whiskerLeft K (toProEtCompOverPullbackIso f).hom ≫
-      (Functor.associator _ _ _).inv)).obj
-      ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).mapCone c₁)
-  have hc₂ : IsLimit ((ProEt.forget U ⋙ CategoryTheory.Over.forget U).mapCone c₂) := by
-    have h₀ : IsLimit ((ProEt.forget V).mapCone c₁) :=
-      isLimitOfReflects (CategoryTheory.Over.forget V) hc₁
-    have h₁ := isLimitOfPreserves (CategoryTheory.Over.forget U)
-      (isLimitOfPreserves (CategoryTheory.Over.pullback f) h₀)
-    refine IsLimit.ofIsoLimit h₁ (Cone.ext (Iso.refl _) fun j ↦ ?_)
-    apply pullback.hom_ext
-    · simp only [c₂, toProEtCompOverPullbackIso]
-      simp only [Functor.mapCone_pt, Over.forget_obj, Over.pullback_obj_left,
-        Functor.const_obj_obj, Functor.comp_obj, Functor.mapCone_π_app, ProEt.forget_map,
-        Over.forget_map, Over.pullback_map_left, limit.lift_π, PullbackCone.mk_π_app,
-        Cone.postcompose_obj_pt, Iso.refl_hom, Cone.postcompose_obj_π, NatTrans.comp_app,
-        Functor.associator_hom_app, Functor.whiskerLeft_app, NatIso.ofComponents_hom_app,
-        Functor.associator_inv_app, Category.comp_id, Functor.comp_map,
-        MorphismProperty.Over.pullback_map_left, Category.id_comp]
-      exact (pullback.lift_fst _ _ _).symm
-    · simp only [c₂, toProEtCompOverPullbackIso]
-      simp only [Functor.mapCone_pt, Over.forget_obj, Over.pullback_obj_left,
-        Functor.const_obj_obj, Functor.comp_obj, Functor.mapCone_π_app, ProEt.forget_map,
-        Over.forget_map, Over.pullback_map_left, limit.lift_π, PullbackCone.mk_π_app,
-        Cone.postcompose_obj_pt, Iso.refl_hom, Cone.postcompose_obj_π, NatTrans.comp_app,
-        Functor.associator_hom_app, Functor.whiskerLeft_app, NatIso.ofComponents_hom_app,
-        Functor.associator_inv_app, Category.comp_id, Functor.comp_map,
-        MorphismProperty.Over.pullback_map_left, Category.id_comp]
-      exact (pullback.lift_snd _ _ _).symm
-  have (j : J) : CompactSpace (K₂.obj j).left := by
-    have : CompactSpace ((𝟭 Scheme).obj (K.obj j).left) :=
-      inferInstanceAs (CompactSpace (K.obj j).left)
-    exact QuasiCompact.compactSpace_of_compactSpace (pullback.fst (K.obj j).hom f)
-  have (j : J) : QuasiSeparatedSpace (K₂.obj j).left := by
-    have : QuasiSeparatedSpace ((𝟭 Scheme).obj (K.obj j).left) :=
-      inferInstanceAs (QuasiSeparatedSpace (K.obj j).left)
-    exact quasiSeparatedSpace_of_quasiSeparated (pullback.fst (K.obj j).hom f)
-  have {i j : J} (g : i ⟶ j) : IsAffineHom (K₂.map g).left :=
-    MorphismProperty.pullbackLift_fst_snd (P := @IsAffineHom) f (Over.w (K.map g).hom).symm
-      (hKmap g)
-  obtain ⟨h₁⟩ := isColimit_comparisonUpperStar_mapCocone A ((Etale.lowerStar A f).obj F) K c₁ hc₁
-  obtain ⟨h₂⟩ := isColimit_comparisonUpperStar_mapCocone A F K₂ c₂ hc₂
+  obtain ⟨h₁⟩ := isColimit_comparisonUpperStar_mapCocone A ((Etale.lowerStar A f).obj F)
+    (presentationDiagram pres) (presentationCone pres) (isLimitPresentationCone pres)
+  obtain ⟨h₂⟩ := isColimit_comparisonUpperStar_mapCocone A F (pullbackPresentationDiagram f pres)
+    (pullbackPresentationCone f pres) (isLimitPullbackPresentationCone f pres)
   refine NatTrans.isIso_app_of_isColimit A ((lowerStarComparisonUpperStarBaseChange f A).app F).hom
-    c₁ h₁ ?_ fun j ↦ ?_
+    (presentationCone pres) h₁ ?_ fun j ↦ ?_
   · exact h₂
   · have := isIso_comparisonLowerStar_map_lowerStarComparisonUpperStarBaseChange_app f A F
     have : IsIso ((comparisonLowerStar A V).map
         ((lowerStarComparisonUpperStarBaseChange f A).app F)).hom :=
       inferInstanceAs (IsIso ((sheafToPresheaf (V.smallEtaleTopology) A).map
         ((comparisonLowerStar A V).map ((lowerStarComparisonUpperStarBaseChange f A).app F))))
-    exact (NatTrans.isIso_iff_isIso_app _).1 this (op (K.obj j))
+    exact (NatTrans.isIso_iff_isIso_app _).1 this (op ((presentationDiagram pres).obj j))
 
 end AlgebraicGeometry.ProEtale
