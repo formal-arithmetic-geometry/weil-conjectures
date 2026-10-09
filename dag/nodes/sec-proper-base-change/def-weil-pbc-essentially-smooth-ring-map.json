@@ -2,17 +2,67 @@
  "id": "def-weil-pbc-essentially-smooth-ring-map",
  "kind": "definition",
  "title": "Essentially smooth ring maps",
- "statement": "A homomorphism of commutative rings $R\\to D$ is *essentially smooth* if there are a smooth $R$-algebra $P$ [def-weil-pbc-smooth-ring-map] and a multiplicative subset $S\\subset P$ such that $D\\cong S^{-1}P$ as $R$-algebras. (Every smooth, in particular every étale, ring map is essentially smooth, with $S=\\{1\\}$; if $D$ is local one may take $S=P\\setminus\\mathfrak P$ for a prime $\\mathfrak P$ of $P$.)",
+ "statement": "Let $R$ be a commutative ring. For a commutative $R$-algebra $P$ and a multiplicative subset $S\\subseteq P$ ($1\\in S$, $st\\in S$ for $s,t\\in S$) let $S^{-1}P$ be the ring of fractions $a/s$ ($a\\in P$, $s\\in S$; $a/s=a'/s'$ iff $u(as'-a's)=0$ for some $u\\in S$; $a/s+a'/s'=(as'+a's)/ss'$, $(a/s)(a'/s')=aa'/ss'$), an $R$-algebra through $R\\to P\\to S^{-1}P$, $a\\mapsto a/1$. A homomorphism of commutative rings $R\\to D$ (equivalently, the $R$-algebra $D$) is *essentially smooth* if there are a smooth $R$-algebra $P$ [def-weil-pbc-smooth-ring-map], a multiplicative subset $S\\subseteq P$ and an isomorphism of $R$-algebras $D\\cong S^{-1}P$. Remarks (proved in the steps below, not part of the definition): (a) every smooth ring map $R\\to D$ is essentially smooth, with $P=D$ and $S=\\{1\\}$; in particular every étale ring map is, i.e. every $R\\to D$ with $\\operatorname{Spec}D\\to\\operatorname{Spec}R$ [def-weil-affine-spectrum] étale [def-weil-etale-morphism] (equivalently, étale in the sense of Stacks 00U1: finitely presented with $H_1(L_{D/R})=0$ and $\\Omega_{D/R}=0$); (b) if $D$ is essentially smooth and local, with maximal ideal $\\mathfrak m$, and $D\\cong S^{-1}P$ as above, then $\\mathfrak P=\\iota^{-1}(\\mathfrak m)$, $\\iota:P\\to S^{-1}P\\cong D$, is a prime of $P$ with $S\\subseteq P\\setminus\\mathfrak P$, and $D\\cong P_{\\mathfrak P}$ [def-weil-pbc-localization-at-prime] as $R$-algebras; so one may take $S=P\\setminus\\mathfrak P$.",
  "source": {
   "document": "literature/stacks-project/smoothing.tex",
   "place": "Smoothing Ring Maps, Section 07FF (section-inseparable): the term 'essentially smooth' is used without definition in Lemmas 07FH (lemma-solution-modulo, line 2571: 'the first arrow is essentially smooth'), 07FI (lemma-enlarge-solution-modulo, line 2638) and the proof of Lemma 07FJ (lines 2727, 2752, 3064); the definition here (a localization of a smooth algebra, modelled on 'essentially of finite type' = localization of a finite type algebra, Algebra, Definition Tag 00QM, algebra-definition-essentially-finite-p-t) is written by an agent"
  },
  "stmt_deps": [
-  "def-weil-pbc-smooth-ring-map"
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The definition is well formed.* $S^{-1}P$ with the operations above is a commutative ring and $a\\mapsto a/1$ a ring homomorphism (Stacks Section 00CM); composed with the structure map $R\\to P$ it makes $S^{-1}P$ an $R$-algebra. 'Smooth $R$-algebra' is [def-weil-pbc-smooth-ring-map] for the structure map $R\\to P$. The condition is an existence statement over triples $(P,S,D\\cong S^{-1}P)$, no choice is made, and it depends only on the isomorphism class of $D$ as an $R$-algebra (compose the given isomorphism with an $R$-algebra isomorphism $D'\\cong D$). So 'essentially smooth' is a property of the ring map $R\\to D$.",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 00CM (section-localization, line 1039): the ring $S^{-1}A$; Definition 00QM (definition-essentially-finite-p-t, line 12836), 'essentially of finite type' = localization of a finite type algebra, the model of this definition"
+   }
+  },
+  {
+   "text": "*Remark (a): smooth and étale maps are essentially smooth.* If $R\\to D$ is smooth [def-weil-pbc-smooth-ring-map], take $P=D$ and $S=\\{1\\}$: the map $a\\mapsto a/1$ is an $R$-algebra isomorphism $P\\to\\{1\\}^{-1}P$ (it is onto since $a/1$ are all the fractions, and injective since $a/1=0$ means $1\\cdot a=0$), so $D\\cong\\{1\\}^{-1}D$. If $\\operatorname{Spec}D\\to\\operatorname{Spec}R$ is étale [def-weil-etale-morphism], then by [lem-weil-pbc-etale-ring-map-iff-etale-affine] $D$ is a finitely presented $R$-algebra with $H_1(L_{D/R})=0$ and $\\Omega_{D/R}=0$ [def-weil-pbc-kahler-differentials]; the zero module is a finite projective $D$-module (a direct summand of $D^0$), so the three conditions (i)-(iii) of [def-weil-pbc-smooth-ring-map] hold and $R\\to D$ is smooth (Stacks, remark after Definition 00U1: if $R\\to S$ is smooth it is étale iff $\\Omega_{S/R}=0$; conversely an étale map satisfies the definition of smooth with $\\Omega=0$), hence essentially smooth by the first case. This is the sentence 'Since an étale ring map is certainly essentially smooth we win' of the proof of Lemma 07FH.",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-etale-morphism",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition of smooth ring map (definition-smooth, line 37084) and Definition Tag 00U1 of étale ring map (definition-etale, line 39245) with the paragraph after it (lines 39256-39258); smoothing.tex, proof of Lemma 07FH, line 2620"
+   }
+  },
+  {
+   "text": "*Remark (b): for $D$ local one may take $S=P\\setminus\\mathfrak P$.* Let $D$ be local (a nonzero ring with a unique maximal ideal $\\mathfrak m$, so $D\\setminus\\mathfrak m$ is the set of units) and $D\\cong S^{-1}P$ with $P$ smooth over $R$; let $\\iota:P\\to D$ be the composite $R$-algebra map $a\\mapsto a/1$ followed by the isomorphism, and $\\mathfrak P=\\iota^{-1}(\\mathfrak m)$, a prime ideal of $P$ (the preimage of a prime ideal; proper since $1\\notin\\mathfrak m$), so $T=P\\setminus\\mathfrak P$ is multiplicative. (1) Every $t\\in T$ has $\\iota(t)\\notin\\mathfrak m$, so $\\iota(t)$ is a unit. (2) Every $s\\in S$ has $\\iota(s)$ a unit (it is $s/1$, with inverse $1/s$), so $\\iota(s)\\notin\\mathfrak m$, i.e. $S\\subseteq T$. (3) Every element of $D$ is $\\iota(a)\\iota(s)^{-1}$ with $a\\in P$, $s\\in S\\subseteq T$. (4) If $\\iota(a)=0$ then $ua=0$ for some $u\\in S\\subseteq T$, by the equality rule of $S^{-1}P$. Define $\\theta:P_{\\mathfrak P}=T^{-1}P\\to D$ [def-weil-pbc-localization-at-prime] by $a/t\\mapsto\\iota(a)\\iota(t)^{-1}$, which makes sense by (1). It is well defined: if $v(at'-a't)=0$ with $v\\in T$, then $\\iota(v)(\\iota(a)\\iota(t')-\\iota(a')\\iota(t))=0$ and $\\iota(v),\\iota(t),\\iota(t')$ are units, so $\\iota(a)\\iota(t)^{-1}=\\iota(a')\\iota(t')^{-1}$. It is additive and multiplicative by the formulas for fractions, sends $a/1$ to $\\iota(a)$, hence is a homomorphism of $R$-algebras. It is surjective by (3). It is injective: $\\theta(a/t)=0$ gives $\\iota(a)=0$, so $ua=0$ with $u\\in T$ by (4), so $a/t=0$ in $T^{-1}P$. Hence $D\\cong P_{\\mathfrak P}=(P\\setminus\\mathfrak P)^{-1}P$ as $R$-algebras, with the same smooth $P$; i.e. the presentation can be chosen with $S=P\\setminus\\mathfrak P$. (Conversely every $P_{\\mathfrak P}$ is local [def-weil-pbc-localization-at-prime].)",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma 07FI (lemma-enlarge-solution-modulo, line 2638) and its proof, where $D'=(D[\\bar\\lambda])_{\\mathfrak m}$ is a localization of a polynomial algebra at a prime; the argument (comparison of $S^{-1}P$ with $P_{\\mathfrak P}$ via the defining properties of localization, Algebra Section 00CM) written by an agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Section 07FF: 'essentially smooth' is used without definition in Lemmas 07FH, 07FI and the proof of 07FJ; definition modelled on Algebra Definition 00QM, and the well-formedness steps, written by an agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +84,38 @@
    "results": "none",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "algebra which is a localization of a smooth algebra (essentially smooth)",
+   "results": "Algebra.Smooth.of_isLocalization_Away, Algebra.FormallyEtale.instFormallySmooth, Algebra.Etale.of_isLocalization_Away, Algebra.FormallySmooth.of_isLocalization (Mathlib.RingTheory.Smooth.Basic, Mathlib.RingTheory.Etale.Basic), RingHom.FormallySmooth.holdsForLocalizationAway: no essentially smooth notion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "R-algebra D isomorphic to the localization S^{-1}P of a smooth R-algebra P at a submonoid S",
+   "results": "Algebra.Smooth.of_isLocalization_Away, RingHom.IsStandardSmoothOfRelativeDimension.algebraMap_isLocalizationAway, RingHom.Smooth.ofLocalizationSpanTarget, Algebra.IsStandardSmooth.localization_away, RingHom.Smooth.holdsForLocalizationAway",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EssentiallySmooth\" and Algebra.Smooth, IsLocalization",
+   "results": "none (both queries empty)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'EssentiallySmooth|essentiallySmooth|EssSmooth|essentially smooth|EssFinitePresentation|essentially of finite presentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only Mathlib/RingTheory/Smooth/Fiber.lean lines 22, 67, 143-152 (docstring of FormallySmooth.of_formallySmooth_residueField_tensor: 'Since we don't have an \"essentially of finite presentation\" type class yet, we explicitly require a P that is of finite presentation over R and that S is a localization of it', hypotheses (M : Submonoid P) [IsLocalization M S] [Algebra.FinitePresentation R P]) and a TODO in Extension/Cotangent/Basic.lean:534; Algebra.EssFiniteType (EssentialFiniteness.lean:40) exists, no essentially smooth or essentially finitely presented class",
+   "date": "2026-10-10",
+   "verdict": "no match (Lean candidate: the same pattern with Algebra.Smooth R P, M : Submonoid P, IsLocalization M D, IsScalarTower R P D)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +135,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-essentially-smooth-ring-map",
+  "worker": "stage1",
+  "summary": "Checked against smoothing.tex Section 07FF (uses at lines 2571, 2620, 2638, 2727, 2752, 3064; Stacks never defines the term) and Algebra 00QM (the model), 00CM, definition-smooth, 00U1. Statement made self-contained: the localization $S^{-1}P$ and its R-algebra structure are written out (no general ring-localization node exists in the DAG; Mathlib has Localization/IsLocalization), and the two parenthetical claims are labelled as remarks proved in the steps, with their notions added to stmt_deps (def-weil-affine-spectrum, def-weil-etale-morphism for 'étale ring map', which the DAG expresses as Spec D -> Spec R étale; def-weil-pbc-localization-at-prime for P_P). Remark (b) was imprecise ('one may take S = P minus a prime'): it now says which prime (the contraction of the maximal ideal) and that the same smooth P works. Three elementary steps: well-formedness; (a) smooth => S={1}, étale => smooth via the Mathlib leaf lem-weil-pbc-etale-ring-map-iff-etale-affine (Stacks 00U1: fp, H_1=0, Omega=0, and Omega=0 is finite projective); (b) the comparison of S^{-1}P with P_P by the defining properties of localization. The citers (popescu-solution-modulo, -enlarge-solution-modulo, -resolve-char-p, essentially-smooth-composition, -factors-through-smooth) use only the defining clause D = S^{-1}P with P smooth, plus remark (a) (07FH) and the shape of (b) (07FI). No new node. Mathlib has no essentially smooth class (searched with LeanSearch, LeanFinder, Loogle, grep); Lean candidate recorded in the grep search."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Definition node, three elementary steps: well-formedness (localization at a multiplicative subset written out in the statement, no node for it in the DAG), remark (a) smooth and etale maps are essentially smooth (etale via the leaf etale-ring-map-iff-etale-affine, Omega = 0 projective), remark (b) for D local the prime P = contraction of m works, D = P_P checked from the universal property. Statement made self-contained (remarks labelled, prime named); content unchanged. Correct. Stage-3 note (worker): lem-weil-pbc-etale-ring-map-iff-etale-affine (mathlib) has no reviewed field."
+ }
 }
