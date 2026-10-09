@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
@@ -179,7 +180,7 @@ instance mono_whiskerRight {N P : X.Modules} (f : N ⟶ P) [Mono f] (M : X.Modul
 `M ≅ 𝒪^r`, the dual is `Hom(𝒪^r, 𝒪) ≅ 𝒪^r`. -/
 theorem IsFiniteLocallyFree.dual (M : X.Modules) [M.IsFiniteLocallyFree] :
     Mᵛ.IsFiniteLocallyFree :=
-  sorry
+  SheafOfModules.IsFiniteLocallyFree.homObj_unit M
 
 /-- The tensor product of two finite locally free `𝒪_X`-modules is finite locally free: on an
 open where `M ≅ 𝒪^r` and `N ≅ 𝒪^s`, it is `𝒪^{rs}`. -/
